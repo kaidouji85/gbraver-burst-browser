@@ -1,9 +1,9 @@
-const THREE_LIB = require('three-js');
-const THREE = THREE_LIB();
+import ThreeLib from 'three-js';
+const THREE = ThreeLib();
 
 (function(){
-  var scene, camera, renderer;
-  var geometry, material, mesh;
+  let scene, camera, renderer;
+  let geometry, material, mesh;
 
   init();
   animate();

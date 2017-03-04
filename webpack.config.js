@@ -11,5 +11,17 @@ module.exports = {
     contentBase: SERVE_PATH,
     port: 8080
   },
-  devtool: 'inline-source-map'
+  devtool: 'inline-source-map',
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2017']
+        }
+      }
+    ]
+  }
 };
