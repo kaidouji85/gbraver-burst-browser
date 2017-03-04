@@ -1,0 +1,19 @@
+{
+  "name": "study-three",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "author": "y.takeuchi",
+  "license": "ISC",
+  "dependencies": {
+    "three-js": "^79.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  }
+}
