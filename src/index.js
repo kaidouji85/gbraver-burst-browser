@@ -1,22 +1,11 @@
 import ThreeLib from 'three-js';
+import ResourceManager from './resource-manager';
+import {School} from './models';
+
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
 let scene, camera, renderer;
 let controls;
-
-/**
- * 校舎モデルを読み込んで返す
- */
-function SchoolModel() {
-  let loader = new THREE.JSONLoader();
-  return new Promise(resolve =>loader.load('/model/school.json', function(geo, mat) {
-    let faceMat = new THREE.MeshFaceMaterial(mat);
-    let model = new THREE.Mesh(geo, faceMat);
-    model.position.set(0, -5, 0);
-    model.scale.set(0.1, 0.1, 0.1);
-    resolve(model);
-  }));
-}
 
 /**
  * コントローラを生成して返す
@@ -47,6 +36,11 @@ function Light() {
  * 初期化
  */
 function init() {
+  // リソース管理
+  const resourceManager = new ResourceManager();
+  resourceManager.loadModels().then(() => {
+    scene.add(School(resourceManager.resources));
+  });
 
   // シーン
   scene = new THREE.Scene();
@@ -54,9 +48,6 @@ function init() {
   // カメラ
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.z = 1000;
-
-  // 校舎物体
-  SchoolModel().then(model => scene.add(model));
 
   // レンダラー
   renderer = new THREE.WebGLRenderer();
