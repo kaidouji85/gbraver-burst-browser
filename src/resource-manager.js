@@ -4,8 +4,8 @@ const THREE = ThreeLib(['JSONLoader']);
 /**
  * JSONモデルを読み込む
  *
- * @param {string} path
- * @return {Promise<{path, mat, geo}>} 読み込み結果
+ * @param {string} path ファイルパス
+ * @return {Promise<object>} 読み込み結果
  */
 function loadModel(path) {
   let loader = new THREE.JSONLoader();
@@ -26,6 +26,8 @@ export default class ResourceManager {
 
   /**
    * 本ゲームで使用するモデルをすべて読み込む
+   *
+   * @return {Promise<ResourceManager>} 結果を返すPromise
    */
   loadModels() {
     return Promise.all(modelPaths.map(path => loadModel(path)))
