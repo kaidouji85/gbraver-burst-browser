@@ -1,4 +1,5 @@
 import ThreeLib from 'three-js';
+import {MODEL_PATHS} from '../resource-manager';
 import {createMeshFromJson} from './util';
 
 const THREE = ThreeLib();
@@ -10,11 +11,8 @@ const THREE = ThreeLib();
  * @returns {object[]} 学校フィールドに関連するオブジェクト群
  */
 export default function SchoolField(resources) {
-  return [
-    School(resources),
-    TreeSet(resources)]
-    .concat(Light())
-    .filter(item => !!item);
+  return [School(resources), TreeSet(resources)]
+    .concat(Light());
 }
 
 /**
@@ -24,7 +22,7 @@ export default function SchoolField(resources) {
  * @return {object} 校舎メッシュ
  */
 function School(resources) {
-  let mesh = createMeshFromJson('model/school.json', resources);
+  let mesh = createMeshFromJson(MODEL_PATHS.SCHOOL, resources);
 
   if (!mesh) {
     return null;
@@ -42,7 +40,7 @@ function School(resources) {
  * @return {object} 校舎メッシュ
  */
 function TreeSet(resources) {
-  let mesh = createMeshFromJson('model/tree-set.json', resources);
+  let mesh = createMeshFromJson(MODEL_PATHS.TREE_SET, resources);
 
   if (!mesh) {
     return null;

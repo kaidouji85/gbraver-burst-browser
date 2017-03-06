@@ -1,5 +1,5 @@
 import ThreeLib from 'three-js';
-import ResourceManager from './resource-manager';
+import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
