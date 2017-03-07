@@ -1,4 +1,5 @@
 import ThreeLib from 'three-js';
+import R from 'ramda';
 import {TEXURE_PATHS} from '../resource-manager';
 const THREE = ThreeLib();
 
@@ -10,12 +11,13 @@ const THREE = ThreeLib();
  */
 export default function Tree(resources) {
   let geometry = new THREE.PlaneGeometry( 100, 100, 32 );
-  let map = resources.textures.find(item => item.path === TEXURE_PATHS.TREE).texture;
-  let material = new THREE.MeshBasicMaterial( {
-    color: 0xffff00,
+
+  let texture = resources.textures.find(item => item.path === TEXURE_PATHS.TREE);
+  let material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
-    map,
-    transparent: true
-  } );
+    transparent: true,
+    map: texture ? texture.texture : new THREE.Texture()
+  });
+
   return new THREE.Mesh( geometry, material );
 }
