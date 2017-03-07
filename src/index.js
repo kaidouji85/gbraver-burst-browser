@@ -24,7 +24,10 @@ function Controllers() {
 function init() {
   // リソース管理
   const resourceManager = new ResourceManager();
-  resourceManager.loadModels().then(() => {
+  Promise.all([
+    resourceManager.loadModels(),
+    resourceManager.loadTextures()
+  ]).then(() => {
     SchoolField(resourceManager.resources).forEach(item => scene.add(item));
   });
 
