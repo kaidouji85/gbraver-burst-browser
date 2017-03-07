@@ -1,5 +1,5 @@
 /**
- * フィールド生成関連のユーティリティ
+ * メッシュ関連のユーティリティ
  */
 import ThreeLib from 'three-js';
 const THREE = ThreeLib();

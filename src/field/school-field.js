@@ -1,6 +1,6 @@
 import ThreeLib from 'three-js';
 import {MODEL_PATHS} from '../resource-manager';
-import {createMeshFromJson} from './util';
+import {createMeshFromJson} from '../meshes/util';
 import TreeMesh from '../meshes/tree';
 
 const THREE = ThreeLib();

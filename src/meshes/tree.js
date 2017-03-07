@@ -5,7 +5,7 @@ const THREE = ThreeLib();
 /**
  * 木メッシュを生成する
  *
- * @param {object[]} resources リソース管理オブジェクト
+ * @param {object} resources リソース管理オブジェクト
  * @returns {THREE.Mesh}  木メッシュ
  */
 export default function Tree(resources) {
@@ -14,7 +14,8 @@ export default function Tree(resources) {
   let material = new THREE.MeshBasicMaterial( {
     color: 0xffff00,
     side: THREE.DoubleSide,
-    map
+    map,
+    transparent: true
   } );
   return new THREE.Mesh( geometry, material );
 }
