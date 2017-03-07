@@ -8,7 +8,6 @@ const THREE = ThreeLib(['JSONLoader']);
  */
 export const MODEL_PATHS = {
   SCHOOL: 'model/school.json',
-  TREE_SET: 'model/tree-set.json'
 };
 
 /**
@@ -46,6 +45,11 @@ export class ResourceManager {
       });
   }
 
+  /**
+   * 本ゲームで使用するテクスチャをすべて読み込む
+   *
+   * @returns {Promise.<ResourceManager>} 結果を返すPromise
+   */
   loadTextures() {
     const func = R.pipe(
       R.values,

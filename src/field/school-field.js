@@ -1,6 +1,7 @@
 import ThreeLib from 'three-js';
 import {MODEL_PATHS} from '../resource-manager';
 import {createMeshFromJson} from './util';
+import TreeMesh from '../meshes/tree';
 
 const THREE = ThreeLib();
 
@@ -11,8 +12,22 @@ const THREE = ThreeLib();
  * @returns {object[]} 学校フィールドに関連するオブジェクト群
  */
 export default function SchoolField(resources) {
-  return [School(resources), TreeSet(resources)]
-    .concat(Light());
+  return [
+    Tree(resources),
+    School(resources),
+  ].concat(Light());
+}
+
+/**
+ * 木メッシュ
+ *
+ * @param {object[]} resources リソース管理オブジェクト
+ * @returns {THREE.Mesh} 木メッシュ
+ */
+function Tree(resources) {
+  let mesh = TreeMesh(resources);
+  mesh.position.set(0, 0, 200);
+  return mesh;
 }
 
 /**
@@ -23,30 +38,7 @@ export default function SchoolField(resources) {
  */
 function School(resources) {
   let mesh = createMeshFromJson(MODEL_PATHS.SCHOOL, resources);
-
-  if (!mesh) {
-    return null;
-  }
-
-  mesh.position.set(0, -5, 0);
-  mesh.scale.set(0.1, 0.1, 0.1);
-  return mesh;
-}
-
-/**
- * 木セットメッシュを生成する
- *
- * @param {object[]} resources リソース管理オブジェクト
- * @return {object} 校舎メッシュ
- */
-function TreeSet(resources) {
-  let mesh = createMeshFromJson(MODEL_PATHS.TREE_SET, resources);
-
-  if (!mesh) {
-    return null;
-  }
-
-  mesh.position.set(0, 0, 100);
+  mesh.position.set(0, 0, 0);
   mesh.scale.set(0.1, 0.1, 0.1);
   return mesh;
 }
