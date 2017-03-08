@@ -39,6 +39,15 @@ export default class SchoolField {
     );
     return func(this);
   }
+
+  /**
+   * ゲームループ
+   *
+   * @param camera カメラ
+   */
+  animate(camera: THREE.Camera): void {
+    this.tree.forEach(item => item.quaternion.copy(camera.quaternion))
+  }
 };
 
 /**

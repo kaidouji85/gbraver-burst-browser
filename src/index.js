@@ -1,5 +1,4 @@
 // @flow
-import type {SchoolFieldSet} from './field/school-field';
 import ThreeLib from 'three-js';
 import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
@@ -9,6 +8,7 @@ const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 let scene: THREE.Scene;
 let camera: THREE.Camera;
 let renderer: THREE.WebGLRenderer;
+let schoolField: SchoolField;
 
 /**
  * コントローラを生成して返す
@@ -32,9 +32,8 @@ function init(): void {
     resourceManager.loadModels(),
     resourceManager.loadTextures()
   ]).then(() => {
-    //const set = SchoolField(resourceManager.resources);
-    const field: SchoolField = new SchoolField(resourceManager.resources);
-    field.values().forEach(item => scene.add(item));
+    schoolField = new SchoolField(resourceManager.resources);
+    schoolField.values().forEach(item => scene.add(item));
   });
 
   // シーン
@@ -55,10 +54,13 @@ function init(): void {
 }
 
 /**
- * レンダリング
+ * ゲームループ
  */
 function animate(): void {
   requestAnimationFrame( animate );
+
+  schoolField.animate(camera);
+
   renderer.render( scene, camera );
 }
 
