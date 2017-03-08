@@ -1,3 +1,5 @@
+// @flow
+import type {Resources, Model, Texture} from './flow-types';
 import ThreeLib from 'three-js';
 import R from 'ramda';
 
@@ -21,6 +23,9 @@ export const TEXURE_PATHS = {
  * リソース管理クラス
  */
 export class ResourceManager {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+
   constructor() {
     this.resources = {
       models: [],
@@ -31,9 +36,9 @@ export class ResourceManager {
   /**
    * 本ゲームで使用するモデルをすべて読み込む
    *
-   * @return {Promise<ResourceManager>} 結果を返すPromise
+   * @return 結果を返すPromise
    */
-  loadModels() {
+  loadModels(): Promise<ResourceManager> {
     const func = R.pipe(
       R.values,
       R.map(path => loadModel(path))
@@ -48,9 +53,9 @@ export class ResourceManager {
   /**
    * 本ゲームで使用するテクスチャをすべて読み込む
    *
-   * @returns {Promise.<ResourceManager>} 結果を返すPromise
+   * @return 結果を返すPromise
    */
-  loadTextures() {
+  loadTextures(): Promise<ResourceManager> {
     const func = R.pipe(
       R.values,
       R.map(path => loadTexture(path))
@@ -66,24 +71,24 @@ export class ResourceManager {
 /**
  * JSONモデルを読み込むヘルパー関数
  *
- * @param {string} path ファイルパス
- * @return {Promise<object>} 読み込み結果
+ * @param path ファイルパス
+ * @return 読み込み結果
  */
-function loadModel(path) {
+function loadModel(path: string): Promise<Model> {
   let loader = new THREE.JSONLoader();
-  return new Promise(resolve => loader.load(path, (geo, mat) => resolve({path, geo, mat})));
+  return new Promise(resolve => loader.load(path, (geometry, material) => resolve({path, geometry, material})));
 }
 
 /**
  * テクスチャを読み込むヘルパー関数
  *
- * @aram {string} path ファイルパス
- * @return {Promise<object>} 読み込み結果
+ * @aram path ファイルパス
+ * @return  読み込み結果
  *
  * @param path
  * @returns {Promise}
  */
-function loadTexture(path) {
+function loadTexture(path: string): Promise<Texture> {
   let loader = new THREE.TextureLoader();
   return new Promise(resolve => loader.load(path, texture => resolve({path, texture})));
 }

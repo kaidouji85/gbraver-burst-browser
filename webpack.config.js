@@ -19,7 +19,8 @@ module.exports = {
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2017']
+          presets: ['es2017'],
+          plugins: ['transform-flow-strip-types']
         }
       }
     ]

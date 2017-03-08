@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "flow-init": "flow init"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -16,7 +17,9 @@
   "devDependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-es2017": "^6.22.0",
+    "flow-bin": "^0.41.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
   }

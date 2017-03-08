@@ -1,5 +1,4 @@
 import ThreeLib from 'three-js';
-import R from 'ramda';
 import {TEXURE_PATHS} from '../resource-manager';
 const THREE = ThreeLib();
 
