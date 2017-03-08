@@ -1,5 +1,4 @@
 // @flow
-import type {Resources, Model, Texture} from './flow-types';
 import ThreeLib from 'three-js';
 import R from 'ramda';
 
@@ -18,6 +17,42 @@ export const MODEL_PATHS = {
 export const TEXURE_PATHS = {
   TREE: 'model/wood2.png',
 }
+
+/**
+ * リソース管理オブジェクト
+ */
+export type Resources = {
+  /** モデル */
+    models: Model[],
+
+  /** テクスチャ */
+    textures: Texture[]
+};
+
+/**
+ * モデル管理オブジェクト
+ */
+export type Model = {
+  /** モデルのパス */
+    path: string,
+
+  /** 形状 */
+    geometry: THREE.Geometry,
+
+  /** 材質 */
+    material: THREE.Material
+};
+
+/**
+ * テクスチャ管理オブジェクト
+ */
+export type Texture = {
+  /** テクスチャのパス */
+    path: string,
+
+  /** テクスチャ */
+    texture: THREE.Texture
+};
 
 /**
  * リソース管理クラス

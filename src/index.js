@@ -1,17 +1,20 @@
+// @flow
 import ThreeLib from 'three-js';
 import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
-let scene, camera, renderer;
+let scene: THREE.Scene;
+let camera: THREE.Camera;
+let renderer: THREE.WebGLRenderer;
 
 /**
  * コントローラを生成して返す
  *
- * @return {object} コントローラ
+ * @return コントローラ
  */
-function Controllers() {
+function Controllers(): THREE.OrbitControls{
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.maxDistance = 1000;
   controls.maxPolarAngle = Math.PI * 0.48;
@@ -21,9 +24,9 @@ function Controllers() {
 /**
  * 初期化
  */
-function init() {
+function init(): void {
   // リソース管理
-  const resourceManager = new ResourceManager();
+  const resourceManager:  ResourceManager = new ResourceManager();
   Promise.all([
     resourceManager.loadModels(),
     resourceManager.loadTextures()
@@ -51,7 +54,7 @@ function init() {
 /**
  * レンダリング
  */
-function animate() {
+function animate(): void {
   requestAnimationFrame( animate );
   renderer.render( scene, camera );
 }

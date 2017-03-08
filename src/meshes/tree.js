@@ -1,3 +1,5 @@
+// @flow
+import type {Resources} from '../resource-manager';
 import ThreeLib from 'three-js';
 import {TEXURE_PATHS} from '../resource-manager';
 const THREE = ThreeLib();
@@ -8,7 +10,7 @@ const THREE = ThreeLib();
  * @param {object} resources リソース管理オブジェクト
  * @returns {THREE.Mesh}  木メッシュ
  */
-export default function Tree(resources) {
+export default function Tree(resources: Resources): THREE.Mesh{
   let geometry = new THREE.PlaneGeometry( 100, 100, 32 );
 
   let texture = resources.textures.find(item => item.path === TEXURE_PATHS.TREE);
