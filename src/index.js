@@ -1,4 +1,5 @@
 // @flow
+import type {SchoolFieldSet} from './field/school-field';
 import ThreeLib from 'three-js';
 import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
@@ -31,7 +32,9 @@ function init(): void {
     resourceManager.loadModels(),
     resourceManager.loadTextures()
   ]).then(() => {
-    SchoolField(resourceManager.resources).forEach(item => scene.add(item));
+    //const set = SchoolField(resourceManager.resources);
+    const field: SchoolField = new SchoolField(resourceManager.resources);
+    field.values().forEach(item => scene.add(item));
   });
 
   // シーン

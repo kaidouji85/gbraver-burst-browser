@@ -1,5 +1,6 @@
 // flow
 import type {Resources} from '../resource-manager';
+import R from 'ramda';
 import ThreeLib from 'three-js';
 import {MODEL_PATHS} from '../resource-manager';
 import {createMeshFromJson} from '../meshes/util';
@@ -8,17 +9,37 @@ import TreeMesh from '../meshes/tree';
 const THREE = ThreeLib();
 
 /**
- * 学校フィールドを生成する
- *
- * @param resources リソース管理オブジェクト
- * @returns {object[]} 学校フィールドに関連するオブジェクト群
+ * 学校フィールド
  */
-export default function SchoolField(resources: Resources): THREE.Mesh[] {
-  return [
-    Tree(resources),
-    School(resources),
-  ].concat(Light());
-}
+export default class SchoolField {
+  /** 木 */
+  tree: THREE.Mesh[];
+
+  /** 校舎 */
+  school: THREE.Mesh;
+
+  /** ライト */
+  lights: THREE.Light[];
+
+  constructor(resources: Resources) {
+    this.tree = [Tree(resources)];
+    this.school = School(resources);
+    this.light = Light();
+  }
+
+  /**
+   * 本クラスに関連するオブジェクトを配列にまとめる
+   *
+   * @return 配列にまとめた結果
+   */
+  values(): Object[] {
+    const func = R.pipe(
+      R.values,
+      R.flatten
+    );
+    return func(this);
+  }
+};
 
 /**
  * 木メッシュ
