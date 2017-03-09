@@ -1,7 +1,9 @@
 // @flow
 import ThreeLib from 'three-js';
+import * as CONST from './const';
 import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
+
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
@@ -40,12 +42,12 @@ function init(): void {
   scene = new THREE.Scene();
 
   // カメラ
-  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+  camera = new THREE.PerspectiveCamera( 75, CONST.SCREEN_WIDTH / CONST.SCREEN_HEIGHT, 1, 10000 );
   camera.position.z = 1000;
 
   // レンダラー
   renderer = new THREE.WebGLRenderer();
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize( CONST.SCREEN_WIDTH, CONST.SCREEN_HEIGHT );
 
   // コントローラー
   Controllers(camera, renderer);
