@@ -15,7 +15,7 @@ let schoolField: SchoolField;
  *
  * @return コントローラ
  */
-function Controllers(): THREE.OrbitControls{
+function Controllers(camera: THREE.Camera, renderer: THREE.WebGLRenderer): THREE.OrbitControls{
   let controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.maxDistance = 1000;
   controls.maxPolarAngle = Math.PI * 0.48;
@@ -48,7 +48,10 @@ function init(): void {
   renderer.setSize( window.innerWidth, window.innerHeight );
 
   // コントローラー
-  Controllers();
+  Controllers(camera, renderer);
+
+  // 軸
+  scene.add(new THREE.AxisHelper(1000));
 
   document.body.appendChild( renderer.domElement );
 }
