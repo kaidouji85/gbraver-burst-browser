@@ -5,7 +5,7 @@ import {TEXURE_PATHS} from '../resource-manager';
 
 const THREE = ThreeLib();
 const HEIGHT = 1000;
-const WIDTH = 1000;
+const WIDTH = 1200;
 
 /**
  * 地面メッシュ(砂地)を生成する

@@ -1,6 +1,7 @@
 // @flow
 import type {Resources} from '../resource-manager';
 import ThreeLib from 'three-js';
+import R from 'ramda';
 import {MODEL_PATHS} from '../resource-manager';
 import {createMeshFromJson} from '../meshes/util';
 import TreeBillBoard from '../actors/tree-bill-board';
@@ -25,8 +26,8 @@ export default class SchoolField {
   lights: THREE.Light[];
 
   constructor(resources: Resources) {
-    this.tree = [Tree(resources)];
-    this.ground = Ground(resources);
+    this.tree = Trees(resources);
+    this.ground = GroundMesh(resources);
     this.school = School(resources);
     this.lights = Light();
   }
@@ -53,20 +54,33 @@ export default class SchoolField {
 };
 
 /**
- * 木メッシュ
+ * 木セット
  *
  * @param resources リソース管理オブジェクト
- * @returns 木メッシュ
+ * @returns 木セット
  */
-function Tree(resources: Resources): THREE.Mesh {
-  let actor = new TreeBillBoard(resources);
-  actor.mesh.position.z = 200;
-  return actor;
-}
+function Trees(resources: Resources): TreeBillBoard[] {
+  const TREE_SIZE = 60;
+  const createTree = (x: number, z: number) => {
+    let actor = new TreeBillBoard(resources);
+    Object.assign(actor.mesh.position, {x, z});
+    return actor;
+  }
+  const createToXDirection = (x: number, z:number, count: number) => R.times(
+    num => createTree(x + num * TREE_SIZE , z), count);
+  const createToZDirection = (x: number, z:number, count: number) => R.times(
+    num => createTree(x , z + num * TREE_SIZE), count);
 
-function Ground(resources: Resources): THREE.Mesh {
-  let mesh = GroundMesh(resources);
-  return mesh;
+  // 前方向の木セット
+  return createToXDirection(-450, 600, 16)
+    .concat(createToXDirection(-450, 600 - TREE_SIZE, 16))
+    // 左方向の木セット
+    .concat(createToZDirection(-450, 0, 10))
+    .concat(createToZDirection(-450 - TREE_SIZE, 0, 10))
+    // 右方向の木セット
+    .concat(createToZDirection(450, 0, 10))
+    .concat(createToZDirection(450 - TREE_SIZE, 0, 10))
+    ;
 }
 
 /**

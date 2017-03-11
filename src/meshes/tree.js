@@ -4,8 +4,8 @@ import ThreeLib from 'three-js';
 import {TEXURE_PATHS} from '../resource-manager';
 
 const THREE = ThreeLib();
-const HEIGHT = 100;
-const WIDTH = 100;
+const HEIGHT = 60;
+const WIDTH = 60;
 
 /**
  * 木メッシュを生成する
