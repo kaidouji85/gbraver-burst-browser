@@ -1,10 +1,9 @@
-// flow
+// @flow
 import type {Resources} from '../resource-manager';
-import R from 'ramda';
 import ThreeLib from 'three-js';
 import {MODEL_PATHS} from '../resource-manager';
 import {createMeshFromJson} from '../meshes/util';
-import TreeMesh from '../meshes/tree';
+import TreeBillBoard from '../actors/tree-bill-board';
 import GroundMesh from '../meshes/ground-of-sand';
 
 const THREE = ThreeLib();
@@ -14,8 +13,7 @@ const THREE = ThreeLib();
  */
 export default class SchoolField {
   /** 木 */
-  tree: THREE.Mesh[];
-
+  tree: TreeBillBoard[];
 
   /** 地面 */
   ground: THREE.Mesh;
@@ -30,7 +28,7 @@ export default class SchoolField {
     this.tree = [Tree(resources)];
     this.ground = Ground(resources);
     this.school = School(resources);
-    this.light = Light();
+    this.lights = Light();
   }
 
   /**
@@ -38,12 +36,10 @@ export default class SchoolField {
    *
    * @return 配列にまとめた結果
    */
-  values(): Object[] {
-    const func = R.pipe(
-      R.values,
-      R.flatten
-    );
-    return func(this);
+  values(): THREE.Object3D {
+    return this.tree.map((item: TreeBillBoard) => item.mesh)
+      .concat([this.ground, this.school])
+      .concat(this.lights);
   }
 
   /**
@@ -52,7 +48,7 @@ export default class SchoolField {
    * @param camera カメラ
    */
   animate(camera: THREE.Camera): void {
-    this.tree.forEach(item => item.quaternion.copy(camera.quaternion))
+    this.tree.forEach(item => item.animate(camera));
   }
 };
 
@@ -63,9 +59,9 @@ export default class SchoolField {
  * @returns 木メッシュ
  */
 function Tree(resources: Resources): THREE.Mesh {
-  let mesh = TreeMesh(resources);
-  mesh.position.set(0, 0, 200);
-  return mesh;
+  let actor = new TreeBillBoard(resources);
+  actor.mesh.position.z = 200;
+  return actor;
 }
 
 function Ground(resources: Resources): THREE.Mesh {
@@ -91,7 +87,7 @@ function School(resources: Resources): THREE.Mesh {
  *
  * @return 生成したライト
  */
-function Light(): Three.Light[] {
+function Light(): THREE.Light[] {
   var directionalLight = new THREE.DirectionalLight(0xFFFFCD, 0.8);
   directionalLight.position.set(0, 60, 200);
   var ambientLight = new THREE.AmbientLight(0xFFFFCD);
