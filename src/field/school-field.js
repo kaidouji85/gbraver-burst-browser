@@ -5,6 +5,7 @@ import ThreeLib from 'three-js';
 import {MODEL_PATHS} from '../resource-manager';
 import {createMeshFromJson} from '../meshes/util';
 import TreeMesh from '../meshes/tree';
+import GroundMesh from '../meshes/ground-of-sand';
 
 const THREE = ThreeLib();
 
@@ -15,6 +16,10 @@ export default class SchoolField {
   /** 木 */
   tree: THREE.Mesh[];
 
+
+  /** 地面 */
+  ground: THREE.Mesh;
+
   /** 校舎 */
   school: THREE.Mesh;
 
@@ -23,6 +28,7 @@ export default class SchoolField {
 
   constructor(resources: Resources) {
     this.tree = [Tree(resources)];
+    this.ground = Ground(resources);
     this.school = School(resources);
     this.light = Light();
   }
@@ -59,6 +65,11 @@ export default class SchoolField {
 function Tree(resources: Resources): THREE.Mesh {
   let mesh = TreeMesh(resources);
   mesh.position.set(0, 0, 200);
+  return mesh;
+}
+
+function Ground(resources: Resources): THREE.Mesh {
+  let mesh = GroundMesh(resources);
   return mesh;
 }
 

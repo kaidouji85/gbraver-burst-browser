@@ -10,7 +10,7 @@ const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 let scene: THREE.Scene;
 let camera: THREE.Camera;
 let renderer: THREE.WebGLRenderer;
-let schoolField: SchoolField;
+let schoolField: SchoolField = null;
 
 /**
  * コントローラを生成して返す
@@ -64,7 +64,7 @@ function init(): void {
 function animate(): void {
   requestAnimationFrame( animate );
 
-  schoolField.animate(camera);
+  schoolField && schoolField.animate(camera);
 
   renderer.render( scene, camera );
 }

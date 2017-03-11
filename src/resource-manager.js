@@ -15,7 +15,8 @@ export const MODEL_PATHS = {
  * テクスチャのパス定数
  */
 export const TEXURE_PATHS = {
-  TREE: 'model/wood2.png',
+  TREE: 'pict/wood2.png',
+  SAND: 'pict/ground_sand_6361_9134_Small.jpg'
 }
 
 /**
