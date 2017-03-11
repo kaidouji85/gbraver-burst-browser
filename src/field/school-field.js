@@ -78,7 +78,7 @@ function Ground(resources: Resources): THREE.Mesh {
 function School(resources: Resources): THREE.Mesh {
   let mesh = createMeshFromJson(MODEL_PATHS.SCHOOL, resources);
   mesh.position.set(0, 0, 0);
-  mesh.scale.set(0.1, 0.1, 0.1);
+  mesh.scale.set(1.2, 1.2, 1.2);
   return mesh;
 }
 

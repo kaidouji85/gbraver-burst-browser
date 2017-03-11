@@ -4,7 +4,7 @@
 
 
 /** ゲーム画面横幅 */
-export const SCREEN_WIDTH = 640;
+export const SCREEN_WIDTH = 1024;
 
 /** ゲーム画面高さ */
-export const SCREEN_HEIGHT = 320;
+export const SCREEN_HEIGHT = 512;

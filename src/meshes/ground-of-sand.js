@@ -4,6 +4,8 @@ import ThreeLib from 'three-js';
 import {TEXURE_PATHS} from '../resource-manager';
 
 const THREE = ThreeLib();
+const HEIGHT = 1000;
+const WIDTH = 1000;
 
 /**
  * 地面メッシュ(砂地)を生成する
@@ -12,7 +14,7 @@ const THREE = ThreeLib();
  * @returns {THREE.Mesh}  地面メッシュ(砂地)
  */
 export default function GroundOfSand(resources: Resources): THREE.Mesh {
-  let geometry = new THREE.PlaneGeometry(500, 500, 32, 32);
+  let geometry = new THREE.PlaneGeometry(HEIGHT, WIDTH, 32, 32);
 
   let texture = resources.textures.find(item => item.path === TEXURE_PATHS.SAND);
   let material = new THREE.MeshBasicMaterial({
