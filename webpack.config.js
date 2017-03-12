@@ -1,5 +1,7 @@
 const path = require('path');
-const SERVE_PATH = path.resolve(__dirname, 'serve');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const SERVE_PATH = path.resolve(__dirname, 'build/production');
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/index.js'),
@@ -24,5 +26,14 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: `${SERVE_PATH}/index.html`
+    }),
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, "resources"),
+      to: SERVE_PATH
+    }]),
+  ]
 };
