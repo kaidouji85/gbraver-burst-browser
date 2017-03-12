@@ -7,18 +7,24 @@ const SITE_PATH = `${document.location.protocol}//${window.location.host}`;
 
 /**
  * モデルのパス定数
+ *
+ * resourcesフォルダ配下からの早退パスを記入する
+ * パスの先頭に/(スラッシュ)をつける必要はない
  */
-export const MODEL_PATHS = {
-  SCHOOL: `${SITE_PATH}/model/school.json`
-};
+export const MODEL_PATHS = R.mapObjIndexed((value, key) => `${SITE_PATH}/${value}`, {
+  SCHOOL: 'model/school.json'
+});
 
 /**
  * テクスチャのパス定数
+ *
+ * resourcesフォルダ配下からの早退パスを記入する
+ * パスの先頭に/(スラッシュ)をつける必要はない
  */
-export const TEXURE_PATHS = {
-  TREE: `${SITE_PATH}/pict/wood2.png`,
-  SAND: `${SITE_PATH}/pict/ground_sand_6361_9134_Small.jpg`
-}
+export const TEXURE_PATHS = R.mapObjIndexed((value, key) => `${SITE_PATH}/${value}`, {
+  TREE: 'pict/wood2.png',
+  SAND: 'pict/ground_sand_6361_9134_Small.jpg'
+});
 
 /**
  * リソース管理オブジェクト
