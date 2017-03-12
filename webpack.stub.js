@@ -1,16 +1,26 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var R = require('ramda');
-var BaseConfig = require('./webpack.config');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const R = require('ramda');
+const BaseConfig = require('./webpack.config');
 
-var STUB_ENTRY_FILES = {
-  'school': path.resolve(__dirname, 'stub/school-field')
+const STUB_PATH = path.resolve(__dirname, 'stub');
+const SERVE_PATH = path.resolve(__dirname, 'build/stub');
+
+/**
+ * スタブファイルのリスト
+ */
+const STUB_ENTRY_FILES = {
+  'school-field': `${STUB_PATH}/school-field.js`
 };
 
-var OUTPUT_HTMLS = R.pipe(
+/**
+ * スタブを動かすHTMLのリスト
+ */
+const OUTPUT_HTMLS = R.pipe(
   R.mapObjIndexed((value, key) => new HtmlWebpackPlugin({
     chunks: [key],
-    filename: path.resolve(__dirname, `serve/stub/${key}.html`)
+    filename: `${SERVE_PATH}/${key}.html`
   })),
   R.values
 )(STUB_ENTRY_FILES);
@@ -18,8 +28,16 @@ var OUTPUT_HTMLS = R.pipe(
 module.exports = R.merge(BaseConfig, {
   entry: STUB_ENTRY_FILES,
   output: {
-    path: path.resolve(__dirname, 'serve/stub'),
+    path: SERVE_PATH,
     filename: '[name].js'
   },
-  plugins: OUTPUT_HTMLS
+  devServer: {
+    contentBase: path.resolve(__dirname, 'build'),
+    port: 8080
+  },
+  plugins: OUTPUT_HTMLS.concat(
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, "resources"),
+      to: SERVE_PATH
+  }]))
 });
