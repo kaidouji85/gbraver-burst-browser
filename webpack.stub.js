@@ -9,9 +9,12 @@ const SERVE_PATH = path.resolve(__dirname, 'build/stub');
 
 /**
  * スタブファイルのリスト
+ *
+ * キー: htmlで表示するときのパス
+ * 値: スタブファイルのパス
  */
 const STUB_ENTRY_FILES = {
-  'school-field': `${STUB_PATH}/school-field.js`
+  'field/school': `${STUB_PATH}/field/school`
 };
 
 /**
