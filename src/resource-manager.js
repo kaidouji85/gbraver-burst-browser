@@ -3,20 +3,21 @@ import ThreeLib from 'three-js';
 import R from 'ramda';
 
 const THREE = ThreeLib(['JSONLoader']);
+const SITE_PATH = `${document.location.protocol}//${window.location.host}`;
 
 /**
  * モデルのパス定数
  */
 export const MODEL_PATHS = {
-  SCHOOL: 'model/school.json',
+  SCHOOL: `${SITE_PATH}/model/school.json`
 };
 
 /**
  * テクスチャのパス定数
  */
 export const TEXURE_PATHS = {
-  TREE: 'pict/wood2.png',
-  SAND: 'pict/ground_sand_6361_9134_Small.jpg'
+  TREE: `${SITE_PATH}/pict/wood2.png`,
+  SAND: `${SITE_PATH}/pict/ground_sand_6361_9134_Small.jpg`
 }
 
 /**

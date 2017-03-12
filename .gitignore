@@ -1,3 +1,4 @@
 node_modules/*
 serve/bundle.js
 .idea/
+serve/stub/*
