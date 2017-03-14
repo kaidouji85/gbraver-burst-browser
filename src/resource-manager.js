@@ -12,7 +12,8 @@ const SITE_PATH = `${document.location.protocol}//${window.location.host}`;
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const MODEL_PATHS = R.mapObjIndexed((value, key) => `${SITE_PATH}/${value}`, {
-  SCHOOL: 'model/school.json'
+  SCHOOL: 'model/school.js',
+  STADIUM_LIGHT: 'model/stadium-light.js',
 });
 
 /**
