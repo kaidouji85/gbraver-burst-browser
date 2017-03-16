@@ -10,11 +10,13 @@
     "build-stub": "webpack --config webpack.stub.js",
     "flow-init": "flow init",
     "wh": "webpack --help",
-    "wsh": "webpack-dev-server --help"
+    "wsh": "webpack-dev-server --help",
+    "deploy-s3": "node task/upload-s3"
   },
   "author": "y.takeuchi",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.28.0",
     "ramda": "^0.23.0",
     "three-js": "^79.0.0"
   },
