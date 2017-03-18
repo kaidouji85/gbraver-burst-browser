@@ -1,34 +1,9 @@
 // @flow
 import ThreeLib from 'three-js';
 import R from 'ramda';
+import {loadModel, loadTexture} from './util/resource-loader';
 
 const THREE = ThreeLib(['JSONLoader']);
-const SITE_PATH = `${document.location.protocol}//${window.location.host}`;
-
-/**
- * JSONモデルを読み込むヘルパー関数
- *
- * @param path ファイルパス
- * @return 読み込み結果
- */
-function loadModel(path: string): Promise<{geometry: THREE.Geometry, material: THREE.Material}> {
-  let loader = new THREE.JSONLoader();
-  return new Promise(resolve => loader.load(path, (geometry, material) => resolve({geometry, material})));
-}
-
-/**
- * テクスチャを読み込むヘルパー関数
- *
- * @aram path ファイルパス
- * @return  読み込み結果
- *
- * @param path
- * @returns {Promise}
- */
-function loadTexture(path: string): Promise<Texture> {
-  let loader = new THREE.TextureLoader();
-  return new Promise(resolve => loader.load(path, texture => resolve(texture)));
-}
 
 /**
  * モデルのパス定数

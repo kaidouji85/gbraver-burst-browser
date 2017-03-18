@@ -3,7 +3,7 @@ import type {Resources} from '../resource-manager';
 import ThreeLib from 'three-js';
 import R from 'ramda';
 import {MODEL_PATHS} from '../resource-manager';
-import {createMeshFromJson} from '../meshes/util';
+import {createMeshFromJson} from '../util/mesh-creator';
 import TreeBillBoard from '../actors/tree-bill-board';
 import GroundMesh from '../meshes/ground-of-sand';
 
