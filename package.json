@@ -10,7 +10,8 @@
     "build-stub": "webpack --config webpack.stub.js",
     "flow-init": "flow init",
     "wh": "webpack --help",
-    "wsh": "webpack-dev-server --help"
+    "wsh": "webpack-dev-server --help",
+    "upload-s3": "s3-upload"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -26,6 +27,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "flow-bin": "^0.41.0",
     "html-webpack-plugin": "^2.28.0",
+    "s3-upload": "^0.1.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
   }

@@ -10,7 +10,7 @@ const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 let scene: THREE.Scene;
 let camera: THREE.Camera;
 let renderer: THREE.WebGLRenderer;
-let schoolField: SchoolField = null;
+let schoolField: SchoolField;
 
 /**
  * コントローラを生成して返す
@@ -29,7 +29,7 @@ function Controllers(camera: THREE.Camera, renderer: THREE.WebGLRenderer): THREE
  */
 function init(): void {
   // リソース管理
-  const resourceManager:  ResourceManager = new ResourceManager();
+  const resourceManager:  ResourceManager = new ResourceManager('../../');
   Promise.all([
     resourceManager.loadModels(),
     resourceManager.loadTextures()
