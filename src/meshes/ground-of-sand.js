@@ -4,7 +4,7 @@ import ThreeLib from 'three-js';
 import {TEXURE_PATHS} from '../resource-manager';
 
 const THREE = ThreeLib();
-const HEIGHT = 1000;
+const HEIGHT = 1200;
 const WIDTH = 1200;
 
 /**

@@ -3,7 +3,7 @@ import type {Resources} from '../resource-manager';
 import ThreeLib from 'three-js';
 import R from 'ramda';
 import {MODEL_PATHS} from '../resource-manager';
-import {createMeshFromJson} from '../meshes/util';
+import {createMeshFromJson} from '../util/mesh-creator';
 import TreeBillBoard from '../actors/tree-bill-board';
 import GroundMesh from '../meshes/ground-of-sand';
 
@@ -22,13 +22,17 @@ export default class SchoolField {
   /** 校舎 */
   school: THREE.Mesh;
 
-  /** ライト */
+  /** スタジアムライト */
+  stadiumLights: THREE.Mesh[];
+
+  /** 光源 */
   lights: THREE.Light[];
 
   constructor(resources: Resources) {
     this.tree = Trees(resources);
     this.ground = GroundMesh(resources);
     this.school = School(resources);
+    this.stadiumLights = StadiumLights(resources);
     this.lights = Light();
   }
 
@@ -39,7 +43,9 @@ export default class SchoolField {
    */
   values(): THREE.Object3D {
     return this.tree.map((item: TreeBillBoard) => item.mesh)
-      .concat([this.ground, this.school])
+      .concat([this.ground])
+      .concat([this.school])
+      .concat(this.stadiumLights)
       .concat(this.lights);
   }
 
@@ -96,14 +102,40 @@ function School(resources: Resources): THREE.Mesh {
 }
 
 /**
+ * スタジアムライト
+ *
+ * @param resources リソース管理オブジェクト
+ * @return スタジアムライト
+ */
+function StadiumLights(resources: Resources): THREE.Mesh[] {
+  const light = (x, z) => {
+    let mesh = createMeshFromJson(MODEL_PATHS.STADIUM_LIGHT, resources);
+    mesh.rotation.y = 90 * Math.PI / 180;
+    Object.assign(mesh.position, {x, z});
+    return mesh;
+  }
+  const X_PADDING = 580;
+
+  return [
+    light(X_PADDING, 200),
+    light(X_PADDING, 400),
+    light(-X_PADDING, 200),
+    light(-X_PADDING, 400),
+  ];
+}
+
+/**
  * ライトを生成して返す
  *
  * @return 生成したライト
  */
 function Light(): THREE.Light[] {
-  var directionalLight = new THREE.DirectionalLight(0xFFFFCD, 0.8);
+  var directionalLight = new THREE.DirectionalLight(0xAAAAAA, 0.8);
   directionalLight.position.set(0, 60, 200);
-  var ambientLight = new THREE.AmbientLight(0xFFFFCD);
+  var ambientLight = new THREE.AmbientLight(0xAAAAAA);
 
-  return [directionalLight, ambientLight];
+  return [
+    directionalLight,
+    ambientLight
+  ];
 }
