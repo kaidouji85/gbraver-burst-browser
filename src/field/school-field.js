@@ -6,6 +6,7 @@ import {MODEL_PATHS} from '../resource-manager';
 import {createMeshFromJson} from '../util/mesh-creator';
 import TreeBillBoard from '../actors/tree-bill-board';
 import GroundMesh from '../meshes/ground-of-sand';
+import FenceMesh from '../meshes/fence';
 
 const THREE = ThreeLib();
 
@@ -22,6 +23,9 @@ export default class SchoolField {
   /** 校舎 */
   school: THREE.Mesh;
 
+  /** フェンス */
+  fences: THREE.Mesh[];
+
   /** スタジアムライト */
   stadiumLights: THREE.Mesh[];
 
@@ -33,6 +37,7 @@ export default class SchoolField {
     this.ground = GroundMesh(resources);
     this.school = School(resources);
     this.stadiumLights = StadiumLights(resources);
+    this.fences = Fences(resources);
     this.lights = Light();
   }
 
@@ -46,6 +51,7 @@ export default class SchoolField {
       .concat([this.ground])
       .concat([this.school])
       .concat(this.stadiumLights)
+      .concat(this.fences)
       .concat(this.lights);
   }
 
@@ -122,6 +128,18 @@ function StadiumLights(resources: Resources): THREE.Mesh[] {
     light(-X_PADDING, 200),
     light(-X_PADDING, 400),
   ];
+}
+
+/**
+ * フェンス
+ *
+ * @param resources リソース管理オブジェクト
+ * @return フェンス
+ */
+function Fences(resources: Resources): THREE.Mesh[] {
+  let mesh = FenceMesh(resources);
+  mesh.position.z = 500;
+  return [mesh];
 }
 
 /**
