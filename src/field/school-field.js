@@ -138,7 +138,7 @@ function StadiumLights(resources: Resources): THREE.Mesh[] {
  */
 function Fences(resources: Resources): THREE.Mesh[] {
   let mesh = FenceMesh(resources);
-  mesh.position.z = 500;
+  mesh.position.z = 620;
   return [mesh];
 }
 
