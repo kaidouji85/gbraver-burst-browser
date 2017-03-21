@@ -19,7 +19,7 @@ export default function Fence(resources: Resources): THREE.Mesh {
   let texture = resources.textures.find(item => item.path === TEXURE_PATHS.FENCE);
   let material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
-    //map: texture ? texture.texture : new THREE.Texture()
+    //map: texture ? texture.texture : new THREE.Texture(),
     transparent: true,
     alphaMap: texture ? texture.texture : new THREE.Texture()
   });
