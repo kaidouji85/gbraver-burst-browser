@@ -26,6 +26,7 @@ function Network(resources: Resources): THREE.Mesh {
   });
 
   let mesh = new THREE.Mesh(geometry, material);
+  mesh.position.x = WIDTH / 2;
   mesh.position.y = HEIGHT / 2;
   return mesh;
 }
@@ -41,7 +42,7 @@ function Cylinder() {
     new THREE.MeshPhongMaterial({
       color: COLOR
     }));
-  cylinder.position.x = WIDTH / 2;
+  cylinder.position.x = WIDTH;
   cylinder.position.y = HEIGHT / 2;
   return cylinder;
 }

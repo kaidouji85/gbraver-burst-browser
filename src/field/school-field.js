@@ -137,9 +137,13 @@ function StadiumLights(resources: Resources): THREE.Mesh[] {
  * @return フェンス
  */
 function Fences(resources: Resources): THREE.Mesh[] {
-  let mesh = FenceMesh(resources);
-  mesh.position.z = 620;
-  return [mesh];
+  const fence = (x, z) => {
+    let mesh = FenceMesh(resources);
+    Object.assign(mesh.position, {x, z});
+    return mesh;
+  };
+
+  return R.times(index => fence(- 600 + index * 100 , 620), 12);
 }
 
 /**
