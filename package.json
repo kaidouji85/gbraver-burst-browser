@@ -5,13 +5,14 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
+    "postinstall": "npm run build",
     "start-stub": "webpack-dev-server --config webpack.stub.js",
     "build": "webpack",
     "build-stub": "webpack --config webpack.stub.js",
     "flow-init": "flow init",
-    "wh": "webpack --help",
-    "wsh": "webpack-dev-server --help",
-    "upload-s3": "s3-upload"
+    "upload-s3": "s3-upload",
+    "clean": "node task/clean",
+    "deploy": "npm-run-all clean build build-stub upload-s3"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -25,8 +26,10 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-es2017": "^6.22.0",
     "copy-webpack-plugin": "^4.0.1",
+    "delete": "^0.3.2",
     "flow-bin": "^0.41.0",
     "html-webpack-plugin": "^2.28.0",
+    "npm-run-all": "^4.0.2",
     "s3-upload": "^0.1.0",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
