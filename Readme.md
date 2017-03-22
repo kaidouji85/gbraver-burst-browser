@@ -18,13 +18,18 @@ npm start
 | npm run start-stub | スタブの起動                   |
 | npm run build      | プログラムのビルド              |
 | npm run build-stub | スタブのビルド                  |
-| npm run upload-s3  | ビルド結果をs3にアップロードする   |
-
+| npm run upload-s3  | ビルド結果をs3にアップロードする  |
+| npm run clean      | ビルド結果を削除する             |
+| npm run deploy     | 現在の状態でS3にデプロイする      |
 
 ### AWS系コマンドを実行する際の注意点
 認証情報がないと動きません。
 Readme.mdがある階層にaws-credentials.jsonを置いて下さい。
-現状では`npm run upload-s3`がaws系コマンドです。
+以下がaws系コマンドです。
 
-aws-credentials.jsonについて
+* npm run upload-s3
+* npm run deploy
+
+
+aws-credentials.jsonについて  
 https://www.npmjs.com/package/s3-upload#credentials-file
