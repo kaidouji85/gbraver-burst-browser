@@ -10,6 +10,7 @@ function createMesh(resources: Resources): THREE.Mesh {
   const mesh = Robo(resources, TEXTURE_PATHS.NEO_RANDOZER_STAND);
   mesh.position.z = 400;
   mesh.position.y -= 30;
+  mesh.scale.set(-1.0, 1.0, 1.0);
   return mesh;
 }
 
@@ -17,6 +18,7 @@ function createMesh(resources: Resources): THREE.Mesh {
  * ネオランドーザ
  */
 export default class ShinBraver {
+  /** メッシュ */
   mesh: THREE.Mesh;
 
   constructor(resources: Resources) {

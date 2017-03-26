@@ -17,6 +17,7 @@ function createMesh(resources: Resources): THREE.Mesh {
  * シンブレイバー
  */
 export default class ShinBraver {
+  /** メッシュ */
   mesh: THREE.Mesh;
 
   constructor(resources: Resources) {
