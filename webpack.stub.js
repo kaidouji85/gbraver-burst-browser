@@ -23,7 +23,8 @@ const STUB_ENTRY_FILES = {
 const OUTPUT_HTMLS = R.pipe(
   R.mapObjIndexed((value, key) => new HtmlWebpackPlugin({
     chunks: [key],
-    filename: `${SERVE_PATH}/${key}.html`
+    filename: `${SERVE_PATH}/${key}.html`,
+    template: 'template/index.html'
   })),
   R.values
 )(STUB_ENTRY_FILES);
@@ -35,7 +36,7 @@ module.exports = R.merge(BaseConfig, {
     filename: '[name].js'
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
+    contentBase: SERVE_PATH,
     port: 8080
   },
   plugins: OUTPUT_HTMLS.concat(

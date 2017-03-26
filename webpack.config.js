@@ -29,7 +29,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: `${SERVE_PATH}/index.html`
+      title: 'study-three-js',
+      filename: `${SERVE_PATH}/index.html`,
+      template: 'template/index.html'
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, "resources"),
