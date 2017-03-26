@@ -3,7 +3,7 @@ import ThreeLib from 'three-js';
 import * as CONST from './const';
 import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
-
+import ShinBraver from './actors/shin-breaver';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
@@ -11,6 +11,7 @@ let scene: THREE.Scene;
 let camera: THREE.Camera;
 let renderer: THREE.WebGLRenderer;
 let schoolField: SchoolField = null;
+let playerSprite: ShinBraver = null;
 
 /**
  * コントローラを生成して返す
@@ -36,6 +37,9 @@ function init(): void {
   ]).then(() => {
     schoolField = new SchoolField(resourceManager.resources);
     schoolField.values().forEach(item => scene.add(item));
+
+    playerSprite = new ShinBraver(resourceManager.resources);
+    scene.add(playerSprite.mesh);
   });
 
   // シーン
@@ -64,7 +68,9 @@ function init(): void {
 function animate(): void {
   requestAnimationFrame( animate );
 
+  // TODO 読み込み完了の有無でanimete呼び出しを判定するようにする
   schoolField && schoolField.animate(camera);
+  playerSprite && playerSprite.animate(camera);
 
   renderer.render( scene, camera );
 }
