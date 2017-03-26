@@ -4,19 +4,20 @@ import ThreeLib from 'three-js';
 import {TEXTURE_PATHS} from '../resource-manager';
 
 const THREE = ThreeLib();
-const HEIGHT = 60;
-const WIDTH = 60;
+const WIDTH = 320;
+const HEIGHT = 320;
 
 /**
- * 木メッシュを生成する
+ * ロボ
  *
- * @param {object} resources リソース管理オブジェクト
- * @returns {THREE.Mesh}  木メッシュ
+ * @param resources リソース管理オブジェクト
+ * @param textureName テクスチャ名
+ * @return ロボ
  */
-export default function Tree(resources: Resources): THREE.Mesh{
+export default function Robo(resources: Resources, textureName: string): THREE.Mesh {
   let geometry = new THREE.PlaneGeometry(HEIGHT, WIDTH, 32, 32);
 
-  let texture = resources.textures.find(item => item.path === TEXTURE_PATHS.TREE);
+  let texture = resources.textures.find(item => item.path === textureName);
   let material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
     transparent: true,
@@ -24,6 +25,6 @@ export default function Tree(resources: Resources): THREE.Mesh{
   });
 
   let mesh = new THREE.Mesh( geometry, material );
-  mesh.position.set(0, HEIGHT/2 - 4, 0)
+  mesh.position.set(0, HEIGHT/2, 0)
   return mesh;
 }
