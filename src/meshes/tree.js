@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../resource-manager';
 import ThreeLib from 'three-js';
-import {TEXURE_PATHS} from '../resource-manager';
+import {TEXTURE_PATHS} from '../resource-manager';
 
 const THREE = ThreeLib();
 const HEIGHT = 60;
@@ -16,7 +16,7 @@ const WIDTH = 60;
 export default function Tree(resources: Resources): THREE.Mesh{
   let geometry = new THREE.PlaneGeometry(HEIGHT, WIDTH, 32, 32);
 
-  let texture = resources.textures.find(item => item.path === TEXURE_PATHS.TREE);
+  let texture = resources.textures.find(item => item.path === TEXTURE_PATHS.TREE);
   let material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
     transparent: true,

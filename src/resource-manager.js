@@ -22,10 +22,12 @@ export const MODEL_PATHS = {
  * resourcesフォルダ配下からの早退パスを記入する
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
-export const TEXURE_PATHS = {
+export const TEXTURE_PATHS = {
   TREE: 'pict/wood2.png',
   SAND: 'pict/ground_sand_6361_9134_Small.jpg',
   FENCE: 'pict/fence.png',
+  SHIN_BRAVER_STAND: 'pict/shin-braver-stand.png',
+  NEO_RANDOZER_STAND: 'pict/neo-randozer-stand.png',
 };
 
 /**
@@ -118,7 +120,7 @@ export class ResourceManager {
       R.map(path => loadTexture(`${this.basePath}${path}`)
         .then(texture => ({path, texture}))
       ));
-    return Promise.all(func(TEXURE_PATHS))
+    return Promise.all(func(TEXTURE_PATHS))
       .then(textures => {
         this.resources.textures = textures;
         return this;

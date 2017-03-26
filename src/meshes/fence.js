@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../resource-manager';
 import ThreeLib from 'three-js';
-import {TEXURE_PATHS} from '../resource-manager';
+import {TEXTURE_PATHS} from '../resource-manager';
 
 const THREE = ThreeLib();
 const HEIGHT = 100;
@@ -17,7 +17,7 @@ const COLOR = 0x006400;
 function Network(resources: Resources): THREE.Mesh {
   let geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, 32, 32);
 
-  let texture = resources.textures.find(item => item.path === TEXURE_PATHS.FENCE);
+  let texture = resources.textures.find(item => item.path === TEXTURE_PATHS.FENCE);
   let material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
     transparent: true,
