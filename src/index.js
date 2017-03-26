@@ -1,6 +1,5 @@
 // @flow
 import ThreeLib from 'three-js';
-import * as CONST from './const';
 import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
 import ShinBraver from './actors/shin-breaver';
