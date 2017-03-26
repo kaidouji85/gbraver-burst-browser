@@ -23,7 +23,9 @@ const STUB_ENTRY_FILES = {
 const OUTPUT_HTMLS = R.pipe(
   R.mapObjIndexed((value, key) => new HtmlWebpackPlugin({
     chunks: [key],
-    filename: `${SERVE_PATH}/${key}.html`
+    filename: `${SERVE_PATH}/${key}.html`,
+    title: 'study-three-js-stub',
+    template: 'template/index.html'
   })),
   R.values
 )(STUB_ENTRY_FILES);
