@@ -4,6 +4,7 @@ import * as CONST from './const';
 import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
 import ShinBraver from './actors/shin-breaver';
+import NeoLandozer from './actors/neo-landozer';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
@@ -12,6 +13,7 @@ let camera: THREE.Camera;
 let renderer: THREE.WebGLRenderer;
 let schoolField: SchoolField = null;
 let playerSprite: ShinBraver = null;
+let enemySprite: NeoLandozer = null;
 
 /**
  * コントローラを生成して返す
@@ -39,7 +41,12 @@ function init(): void {
     schoolField.values().forEach(item => scene.add(item));
 
     playerSprite = new ShinBraver(resourceManager.resources);
+    playerSprite.mesh.position.x = 150;
     scene.add(playerSprite.mesh);
+
+    enemySprite = new NeoLandozer(resourceManager.resources);
+    enemySprite.mesh.position.x = -150;
+    scene.add(enemySprite.mesh);
   });
 
   // シーン
@@ -71,6 +78,7 @@ function animate(): void {
   // TODO 読み込み完了の有無でanimete呼び出しを判定するようにする
   schoolField && schoolField.animate(camera);
   playerSprite && playerSprite.animate(camera);
+  enemySprite && enemySprite.animate(camera);
 
   renderer.render( scene, camera );
 }
