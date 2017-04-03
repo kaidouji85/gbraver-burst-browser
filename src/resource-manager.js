@@ -24,7 +24,7 @@ export const MODEL_PATHS = {
  */
 export const TEXTURE_PATHS = {
   TREE: 'pict/wood2.png',
-  SAND: 'pict/ground_sand_6361_9134_Small.jpg',
+  GROUND_SAND: 'pict/ground-sand.png',
   FENCE: 'pict/fence.png',
   SHIN_BRAVER_STAND: 'pict/shin-braver-stand.png',
   NEO_RANDOZER_STAND: 'pict/neo-randozer-stand.png',
