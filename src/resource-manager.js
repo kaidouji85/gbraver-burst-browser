@@ -26,8 +26,18 @@ export const TEXTURE_PATHS = {
   TREE: 'pict/wood2.png',
   GROUND_SAND: 'pict/ground-sand.png',
   FENCE: 'pict/fence.png',
+
+  // アームドーザ
   SHIN_BRAVER_STAND: 'pict/shin-braver-stand.png',
   NEO_RANDOZER_STAND: 'pict/neo-randozer-stand.png',
+
+  // 青空スカイボックス
+  BLUE_SKY_FRONT: 'pict/sky-box/blue-sky/front.png',
+  BLUE_SKY_RIGHT: 'pict/sky-box/blue-sky/right.png',
+  BLUE_SKY_BACK: 'pict/sky-box/blue-sky/back.png',
+  BLUE_SKY_LEFT: 'pict/sky-box/blue-sky/left.png',
+  BLUE_SKY_UP: 'pict/sky-box/blue-sky/up.png',
+  BLUE_SKY_DOWN: 'pict/sky-box/blue-sky/down.png',
 };
 
 /**
