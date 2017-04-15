@@ -56,9 +56,6 @@ export type Resources = {
  * モデル管理オブジェクト
  */
 export type Model = {
-  /** モデルID */
-  id: string;
-
   /** モデルのパス */
     path: string,
 
@@ -73,9 +70,6 @@ export type Model = {
  * テクスチャ管理オブジェクト
  */
 export type Texture = {
-  /** テクスチャID */
-  id: string;
-
   /** テクスチャのパス */
     path: string,
 

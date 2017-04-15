@@ -4,6 +4,7 @@ import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
 import ShinBraver from './sprite/shin-breaver';
 import NeoLandozer from './sprite/neo-landozer';
+import BlueSky from './sky-box/blue-sky';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
@@ -11,6 +12,7 @@ let scene: THREE.Scene;
 let camera: THREE.Camera;
 let renderer: THREE.WebGLRenderer;
 let schoolField: SchoolField = null;
+let blueSky: THREE.Mesh = null;
 let playerSprite: ShinBraver = null;
 let enemySprite: NeoLandozer = null;
 
@@ -35,6 +37,9 @@ function init(): void {
   ]).then(() => {
     schoolField = new SchoolField(resourceManager.resources);
     schoolField.values().forEach(item => scene.add(item));
+
+    blueSky = new BlueSky(resourceManager.resources);
+    scene.add(blueSky);
 
     playerSprite = new ShinBraver(resourceManager.resources);
     playerSprite.mesh.position.x = 150;
