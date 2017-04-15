@@ -1,7 +1,7 @@
 // @flow
 import ThreeLib from 'three-js';
 import {ResourceManager} from '../../src/resource-manager';
-import SchoolField from '../../src/field/school-field';
+import SchoolStage from '../../src/stage/school';
 
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
@@ -9,7 +9,7 @@ const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 let scene: THREE.Scene;
 let camera: THREE.Camera;
 let renderer: THREE.WebGLRenderer;
-let schoolField: SchoolField;
+let schoolStage: SchoolStage;
 
 /**
  * リサイズ時の処理
@@ -30,8 +30,8 @@ function init(): void {
     resourceManager.loadModels(),
     resourceManager.loadTextures()
   ]).then(() => {
-    schoolField = new SchoolField(resourceManager.resources);
-    schoolField.values().forEach(item => scene.add(item));
+    schoolStage = new SchoolStage(resourceManager.resources);
+    schoolStage.values().forEach(item => scene.add(item));
   });
 
   // シーン
@@ -65,7 +65,7 @@ function init(): void {
 function animate(): void {
   requestAnimationFrame( animate );
 
-  schoolField && schoolField.animate(camera);
+  schoolStage && schoolStage.animate(camera);
 
   renderer.render( scene, camera );
 }
