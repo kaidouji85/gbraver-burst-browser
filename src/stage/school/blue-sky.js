@@ -5,9 +5,9 @@ import ThreeLib from 'three-js';
 
 const THREE = ThreeLib();
 
-const WIDTH =  2000;
-const HEIGHT = 2000;
-const DEPTH = 2000;
+const WIDTH =  9000;
+const HEIGHT = 9000;
+const DEPTH = 9000;
 const SKY_BOX_TEXTURE_PATHS = [
   TEXTURE_PATHS.BLUE_SKY_RIGHT,
   TEXTURE_PATHS.BLUE_SKY_LEFT,
