@@ -1,12 +1,13 @@
 // @flow
-import type {Resources} from '../resource-manager';
+import type {Resources} from '../../resource-manager';
 import ThreeLib from 'three-js';
 import R from 'ramda';
-import {MODEL_PATHS} from '../resource-manager';
-import {createMeshFromJson} from '../util/mesh-creator';
-import TreeBillBoard from '../sprite/tree-bill-board';
-import GroundMesh from '../meshes/ground-sand';
-import FenceMesh from '../meshes/fence';
+import {MODEL_PATHS} from '../../resource-manager';
+import {createMeshFromJson} from '../../util/mesh-creator';
+import TreeBillBoard from './tree-bill-board';
+import GroundMesh from './ground-sand';
+import FenceMesh from './fence';
+import SkyBox from './blue-sky';
 
 const THREE = ThreeLib();
 
@@ -19,6 +20,9 @@ export default class SchoolField {
 
   /** 地面 */
   ground: THREE.Mesh;
+
+  /** スカイボックス（青空） */
+  skyBox: THREE.Mesh
 
   /** 校舎 */
   school: THREE.Mesh;
@@ -35,6 +39,7 @@ export default class SchoolField {
   constructor(resources: Resources) {
     this.tree = Trees(resources);
     this.ground = GroundMesh(resources);
+    this.skyBox = SkyBox(resources);
     this.school = School(resources);
     this.stadiumLights = StadiumLights(resources);
     this.fences = Fences(resources);
@@ -49,6 +54,7 @@ export default class SchoolField {
   values(): THREE.Object3D {
     return this.tree.map((item: TreeBillBoard) => item.mesh)
       .concat([this.ground])
+      .concat([this.skyBox])
       .concat([this.school])
       .concat(this.stadiumLights)
       .concat(this.fences)
