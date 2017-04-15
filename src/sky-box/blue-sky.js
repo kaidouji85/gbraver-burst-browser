@@ -9,14 +9,12 @@ const WIDTH =  2000;
 const HEIGHT = 2000;
 const DEPTH = 2000;
 const SKY_BOX_TEXTURE_PATHS = [
-  TEXTURE_PATHS.BLUE_SKY_LEFT,
   TEXTURE_PATHS.BLUE_SKY_RIGHT,
-
+  TEXTURE_PATHS.BLUE_SKY_LEFT,
   TEXTURE_PATHS.BLUE_SKY_UP,
   TEXTURE_PATHS.BLUE_SKY_DOWN,
-
-  TEXTURE_PATHS.BLUE_SKY_FRONT,
   TEXTURE_PATHS.BLUE_SKY_BACK,
+  TEXTURE_PATHS.BLUE_SKY_FRONT,
 ];
 
 /**
@@ -35,6 +33,6 @@ export default function BlueSky(resources: Resources): THREE.Mesh {
     .map(texture => new THREE.MeshBasicMaterial({map: texture, side: THREE.BackSide}));
 
   let geometry = new THREE.CubeGeometry(WIDTH, HEIGHT, DEPTH, 32, 32, 32);
-  let material = new THREE.MeshFaceMaterial(materials);
+  let material = new THREE.MultiMaterial(materials);
   return new THREE.Mesh(geometry, material);
 }
