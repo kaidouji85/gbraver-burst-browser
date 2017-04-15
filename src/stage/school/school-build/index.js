@@ -1,17 +1,17 @@
 // @flow
-import type {Resources} from '../resource-manager';
+import type {Resources} from '../../../resource-manager';
 import ThreeLib from 'three-js';
 import R from 'ramda';
-import {MODEL_PATHS} from '../resource-manager';
-import {createMeshFromJson} from '../util/mesh-creator';
-import TreeBillBoard from '../actors/tree-bill-board';
-import GroundMesh from '../meshes/ground-sand';
-import FenceMesh from '../meshes/fence';
+import {MODEL_PATHS} from '../../../resource-manager';
+import {createMeshFromJson} from '../../../util/mesh-creator';
+import TreeBillBoard from './tree-bill-board';
+import GroundMesh from './ground-sand';
+import FenceMesh from './fence';
 
 const THREE = ThreeLib();
 
 /**
- * 学校フィールド
+ * 校舎セット
  */
 export default class SchoolField {
   /** 木 */
@@ -29,8 +29,6 @@ export default class SchoolField {
   /** スタジアムライト */
   stadiumLights: THREE.Mesh[];
 
-  /** 光源 */
-  lights: THREE.Light[];
 
   constructor(resources: Resources) {
     this.tree = Trees(resources);
@@ -38,7 +36,6 @@ export default class SchoolField {
     this.school = School(resources);
     this.stadiumLights = StadiumLights(resources);
     this.fences = Fences(resources);
-    this.lights = Light();
   }
 
   /**
@@ -51,8 +48,7 @@ export default class SchoolField {
       .concat([this.ground])
       .concat([this.school])
       .concat(this.stadiumLights)
-      .concat(this.fences)
-      .concat(this.lights);
+      .concat(this.fences);
   }
 
   /**
@@ -151,20 +147,4 @@ function Fences(resources: Resources): THREE.Mesh[] {
   return front
     .concat(left)
     .concat(right);
-}
-
-/**
- * ライトを生成して返す
- *
- * @return 生成したライト
- */
-function Light(): THREE.Light[] {
-  var directionalLight = new THREE.DirectionalLight(0xAAAAAA, 0.8);
-  directionalLight.position.set(0, 60, 200);
-  var ambientLight = new THREE.AmbientLight(0xAAAAAA);
-
-  return [
-    directionalLight,
-    ambientLight
-  ];
 }

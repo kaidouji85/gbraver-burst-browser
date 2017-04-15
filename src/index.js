@@ -1,16 +1,16 @@
 // @flow
 import ThreeLib from 'three-js';
 import {ResourceManager} from './resource-manager';
-import SchoolField from './field/school-field';
-import ShinBraver from './actors/shin-breaver';
-import NeoLandozer from './actors/neo-landozer';
+import SchoolStage from './stage/school/index';
+import ShinBraver from './sprite/shin-breaver';
+import NeoLandozer from './sprite/neo-landozer';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
 let scene: THREE.Scene;
 let camera: THREE.Camera;
 let renderer: THREE.WebGLRenderer;
-let schoolField: SchoolField = null;
+let schoolField: SchoolStage = null;
 let playerSprite: ShinBraver = null;
 let enemySprite: NeoLandozer = null;
 
@@ -33,7 +33,7 @@ function init(): void {
     resourceManager.loadModels(),
     resourceManager.loadTextures()
   ]).then(() => {
-    schoolField = new SchoolField(resourceManager.resources);
+    schoolField = new SchoolStage(resourceManager.resources);
     schoolField.values().forEach(item => scene.add(item));
 
     playerSprite = new ShinBraver(resourceManager.resources);

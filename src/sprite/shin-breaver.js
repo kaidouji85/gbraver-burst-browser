@@ -2,7 +2,7 @@
 import type {Resources} from '../resource-manager';
 import ThreeLib from 'three-js';
 import {TEXTURE_PATHS} from '../resource-manager';
-import Robo from '../meshes/robo';
+import Robo from './robo';
 
 const THREE = ThreeLib();
 
