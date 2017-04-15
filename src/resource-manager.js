@@ -23,11 +23,22 @@ export const MODEL_PATHS = {
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const TEXTURE_PATHS = {
-  TREE: 'pict/wood2.png',
-  SAND: 'pict/ground_sand_6361_9134_Small.jpg',
-  FENCE: 'pict/fence.png',
+  // アームドーザ
   SHIN_BRAVER_STAND: 'pict/shin-braver-stand.png',
   NEO_RANDOZER_STAND: 'pict/neo-randozer-stand.png',
+
+  // 背景関連
+  TREE: 'pict/wood2.png',
+  FENCE: 'pict/fence.png',
+  GROUND_SAND: 'pict/ground-sand.png',
+
+  // 青空スカイボックス
+  BLUE_SKY_FRONT: 'pict/sky-box/blue-sky/front.png',
+  BLUE_SKY_RIGHT: 'pict/sky-box/blue-sky/right.png',
+  BLUE_SKY_BACK: 'pict/sky-box/blue-sky/back.png',
+  BLUE_SKY_LEFT: 'pict/sky-box/blue-sky/left.png',
+  BLUE_SKY_UP: 'pict/sky-box/blue-sky/up.png',
+  BLUE_SKY_DOWN: 'pict/sky-box/blue-sky/down.png',
 };
 
 /**
@@ -45,9 +56,6 @@ export type Resources = {
  * モデル管理オブジェクト
  */
 export type Model = {
-  /** モデルID */
-  id: string;
-
   /** モデルのパス */
     path: string,
 
@@ -62,9 +70,6 @@ export type Model = {
  * テクスチャ管理オブジェクト
  */
 export type Texture = {
-  /** テクスチャID */
-  id: string;
-
   /** テクスチャのパス */
     path: string,
 
