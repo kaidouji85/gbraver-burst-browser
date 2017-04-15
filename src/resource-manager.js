@@ -23,13 +23,14 @@ export const MODEL_PATHS = {
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const TEXTURE_PATHS = {
-  TREE: 'pict/wood2.png',
-  GROUND_SAND: 'pict/ground-sand.png',
-  FENCE: 'pict/fence.png',
-
   // アームドーザ
   SHIN_BRAVER_STAND: 'pict/shin-braver-stand.png',
   NEO_RANDOZER_STAND: 'pict/neo-randozer-stand.png',
+
+  // 背景関連
+  TREE: 'pict/wood2.png',
+  FENCE: 'pict/fence.png',
+  GROUND_SAND: 'pict/ground-sand.png',
 
   // 青空スカイボックス
   BLUE_SKY_FRONT: 'pict/sky-box/blue-sky/front.png',

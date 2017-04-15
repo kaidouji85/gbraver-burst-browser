@@ -2,8 +2,8 @@
 import ThreeLib from 'three-js';
 import {ResourceManager} from './resource-manager';
 import SchoolField from './field/school-field';
-import ShinBraver from './actors/shin-breaver';
-import NeoLandozer from './actors/neo-landozer';
+import ShinBraver from './sprite/shin-breaver';
+import NeoLandozer from './sprite/neo-landozer';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
