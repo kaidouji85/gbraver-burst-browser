@@ -31,6 +31,7 @@ export const TEXTURE_PATHS = {
   TREE: 'pict/wood2.png',
   FENCE: 'pict/fence.png',
   GROUND_SAND: 'pict/ground-sand.png',
+  CITY_LOAD: 'pict/city-road.png',
 
   // 青空スカイボックス
   BLUE_SKY_FRONT: 'pict/sky-box/blue-sky/front.png',
