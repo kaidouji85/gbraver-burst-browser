@@ -61,6 +61,7 @@ export default class SchoolField {
 function Road(resources: Resources): Three.Mesh {
   let mesh = CityRoad(resources);
   mesh.position.z = 800;
+  mesh.position.x = -600;
   return mesh;
 }
 
