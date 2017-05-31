@@ -51,7 +51,7 @@ function init(): void {
   // カメラ
   camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
   camera.position.z = 900;
-  camera.position.y = 100;
+  camera.position.y = 50;
   camera.lookAt(new THREE.Vector3(0, 0, 0));
 
   // レンダラー

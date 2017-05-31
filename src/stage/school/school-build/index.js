@@ -140,11 +140,8 @@ function Fences(resources: Resources): THREE.Mesh[] {
     return mesh;
   };
 
-  const front = R.times(index => fence(- 600 + index * 100 , 620, 0), 12);
   const left = R.times(index => fence(- 600, 520 - index * 100 , -90 * Math.PI / 180), 7);
   const right = R.times(index => fence(600, 620 - index * 100 , 90 * Math.PI / 180), 7);
 
-  return front
-    .concat(left)
-    .concat(right);
+  return left.concat(right);
 }
