@@ -99,7 +99,7 @@ function Trees(resources: Resources): TreeBillBoard[] {
 function School(resources: Resources): THREE.Mesh {
   let mesh = createMeshFromJson(MODEL_PATHS.SCHOOL, resources);
   mesh.position.set(0, 0, 0);
-  mesh.scale.set(1.2, 1.2, 1.2);
+  mesh.scale.set(0.9, 0.9, 0.9);
   return mesh;
 }
 
@@ -110,19 +110,24 @@ function School(resources: Resources): THREE.Mesh {
  * @return スタジアムライト
  */
 function StadiumLights(resources: Resources): THREE.Mesh[] {
-  const light = (x, z) => {
+  const light = (x, z, rot) => {
     let mesh = createMeshFromJson(MODEL_PATHS.STADIUM_LIGHT, resources);
-    mesh.rotation.y = 90 * Math.PI / 180;
+    mesh.rotation.y = rot * Math.PI / 180;
+    mesh.scale.set(0.4, 0.4, 0.4);
     Object.assign(mesh.position, {x, z});
     return mesh;
-  }
+  };
   const X_PADDING = 580;
 
   return [
-    light(X_PADDING, 200),
-    light(X_PADDING, 400),
-    light(-X_PADDING, 200),
-    light(-X_PADDING, 400),
+    light(X_PADDING, 200, -90),
+    light(X_PADDING, 300, -90),
+    light(X_PADDING, 400, -90),
+    light(X_PADDING, 500, -90),
+    light(-X_PADDING, 200, 90),
+    light(-X_PADDING, 300, 90),
+    light(-X_PADDING, 400, 90),
+    light(-X_PADDING, 500, 90),
   ];
 }
 
