@@ -138,15 +138,15 @@ function StadiumLights(resources: Resources): THREE.Mesh[] {
  * @return フェンス
  */
 function Fences(resources: Resources): THREE.Mesh[] {
-  const fence = (x, z, rotY) => {
+  const fence = (x, z) => {
     let mesh = FenceMesh(resources);
     Object.assign(mesh.position, {x, z});
-    mesh.rotation.y = rotY;
+    mesh.rotation.y =  -90 * Math.PI / 180;
     return mesh;
   };
 
-  const left = R.times(index => fence(- 600, 520 - index * 100 , -90 * Math.PI / 180), 7);
-  const right = R.times(index => fence(600, 620 - index * 100 , 90 * Math.PI / 180), 7);
+  const left = R.times(index => fence(- 600, 500 - index * 100), 12);
+  const right = R.times(index => fence(600, 500 - index * 100), 12);
 
   return left.concat(right);
 }
