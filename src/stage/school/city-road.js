@@ -1,5 +1,6 @@
 // @flow
 import ThreeLib from 'three-js';
+import R from 'ramda';
 import type {Resources} from '../../resource-manager';
 import {TEXTURE_PATHS} from '../../resource-manager';
 import {setUvMapping} from '../../util/uv-mapper';
@@ -21,7 +22,16 @@ const TILE_WIDTH = 32;
 /** タイルマップの単位高さ(ピクセル) */
 const TILE_HEIGHT = 208;
 
+/** タイルマップ　普通の道路 */
 const TILE_NUM_NORMAL_ROAD = 2;
+
+const TILE_NUM_UNDER_STOP_01 = 0;
+
+const TILE_NUM_UNDER_STOP_02 = 1;
+
+const TILE_NUM_UPPER_STOP_01 = 3;
+
+const TILE_NUM_UPPER_STOP_02 = 4;
 
 /**
  * タイルマップの平面を生成する
@@ -70,23 +80,38 @@ export default function CityRoad(resources: Resources): THREE.Mesh {
   let group = new THREE.Group();
 
   [
+    // TODO 横断歩道を作る
     // 真ん中
     tile(0, 0, TILE_NUM_NORMAL_ROAD),
 
+    // カメラから向かって右
+    tile(MESH_WIDTH * 1, 0, TILE_NUM_UNDER_STOP_01),
+    tile(MESH_WIDTH * 2, 0, TILE_NUM_UNDER_STOP_02),
+    tile(MESH_WIDTH * 3, 0, TILE_NUM_NORMAL_ROAD),
+    tile(MESH_WIDTH * 4, 0, TILE_NUM_NORMAL_ROAD),
+    tile(MESH_WIDTH * 5, 0, TILE_NUM_NORMAL_ROAD),
+    tile(MESH_WIDTH * 6, 0, TILE_NUM_NORMAL_ROAD),
+    tile(MESH_WIDTH * 7, 0, TILE_NUM_NORMAL_ROAD),
+    tile(MESH_WIDTH * 8, 0, TILE_NUM_NORMAL_ROAD),
+    tile(MESH_WIDTH * 9, 0, TILE_NUM_NORMAL_ROAD),
+    tile(MESH_WIDTH * 10, 0, TILE_NUM_NORMAL_ROAD),
+    tile(MESH_WIDTH * 11, 0, TILE_NUM_NORMAL_ROAD),
+
+    // カメラから向かって左
+    tile(-MESH_WIDTH * 1, 0, TILE_NUM_UPPER_STOP_02),
+    tile(-MESH_WIDTH * 2, 0, TILE_NUM_UPPER_STOP_01),
+    tile(-MESH_WIDTH * 3, 0, TILE_NUM_NORMAL_ROAD),
+    tile(-MESH_WIDTH * 4, 0, TILE_NUM_NORMAL_ROAD),
+    tile(-MESH_WIDTH * 5, 0, TILE_NUM_NORMAL_ROAD),
+    tile(-MESH_WIDTH * 6, 0, TILE_NUM_NORMAL_ROAD),
+    tile(-MESH_WIDTH * 7, 0, TILE_NUM_NORMAL_ROAD),
+    tile(-MESH_WIDTH * 8, 0, TILE_NUM_NORMAL_ROAD),
+    tile(-MESH_WIDTH * 9, 0, TILE_NUM_NORMAL_ROAD),
+    tile(-MESH_WIDTH * 10, 0, TILE_NUM_NORMAL_ROAD),
+    tile(-MESH_WIDTH * 11, 0, TILE_NUM_NORMAL_ROAD),
+
 
   ].forEach(item => group.add(item));
-
-  /*
-  [
-    tile(MESH_WIDTH * 0, MESH_HEIGHT * 0, 0, 0),
-    tile(MESH_WIDTH * 1, MESH_HEIGHT * 0, 1, 0),
-  ].concat(
-    R.range(2, 22).map(num => tile(MESH_WIDTH * num, MESH_HEIGHT * 0, 2, 0))
-  ).concat(
-    tile(MESH_WIDTH * 22, MESH_HEIGHT * 0, 3, 0),
-    tile(MESH_WIDTH * 23, MESH_HEIGHT * 0, 4, 0),
-  ).forEach(item => group.add(item));
-  */
 
   return group;
 }
