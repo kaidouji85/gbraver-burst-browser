@@ -79,15 +79,12 @@ function Trees(resources: Resources): TreeBillBoard[] {
   const createToZDirection = (x: number, z:number, count: number) => R.times(
     num => createTree(x , z + num * TREE_SIZE), count);
 
-  // 前方向の木セット
-  return createToXDirection(-540, 600, 19)
-    .concat(createToXDirection(-540, 600 - TREE_SIZE, 19))
-    // 左方向の木セット
-    .concat(createToZDirection(-540, 0, 9))
-    .concat(createToZDirection(-540 + TREE_SIZE, 0, 9))
+  // 左方向の木セット
+  return createToZDirection(-540, 0, 11)
+    .concat(createToZDirection(-540 + TREE_SIZE, 0, 10))
     // 右方向の木セット
-    .concat(createToZDirection(540, 0, 9))
-    .concat(createToZDirection(540 - TREE_SIZE, 0, 9));
+    .concat(createToZDirection(540, 0, 11))
+    .concat(createToZDirection(540 - TREE_SIZE, 0, 10));
 }
 
 /**
