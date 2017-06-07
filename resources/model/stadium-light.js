@@ -14,8 +14,8 @@
 			"colorEmissive": [2.000000e-001,2.000000e-001,2.000000e-001],
 			"colorSpecular": [7.000000e-001,7.000000e-001,7.000000e-001],
 			"specularCoef": "1.000000e+004",
-			"mapDiffuse": "YOGORE.png",
 			"doubleSided": "false",
+			"mapDiffuse": "asphalt.png",
 			"transparency": "1.000000e+000"
 		},
 		{
@@ -28,7 +28,6 @@
 			"colorEmissive": [2.000000e-001,2.000000e-001,2.000000e-001],
 			"colorSpecular": [7.000000e-001,7.000000e-001,7.000000e-001],
 			"specularCoef": "1.000000e+004",
-			"mapDiffuse": "YOGORE.png",
 			"doubleSided": "false",
 			"transparency": "1.000000e+000"
 		},
@@ -55,7 +54,6 @@
 			"colorEmissive": [2.000000e-001,2.000000e-001,2.000000e-001],
 			"colorSpecular": [7.000000e-001,7.000000e-001,7.000000e-001],
 			"specularCoef": "1.000000e+004",
-			"mapDiffuse": "YOGORE.png",
 			"doubleSided": "false",
 			"transparency": "1.000000e+000"
 		}

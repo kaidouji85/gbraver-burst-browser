@@ -99,7 +99,7 @@ function Trees(resources: Resources): TreeBillBoard[] {
 function School(resources: Resources): THREE.Mesh {
   let mesh = createMeshFromJson(MODEL_PATHS.SCHOOL, resources);
   mesh.position.set(0, 0, 0);
-  mesh.scale.set(0.9, 0.9, 0.9);
+  mesh.scale.set(0.3, 0.3, 0.3);
   return mesh;
 }
 
