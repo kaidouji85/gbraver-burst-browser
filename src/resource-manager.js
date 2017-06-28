@@ -14,6 +14,7 @@ const THREE = ThreeLib(['JSONLoader']);
 export const MODEL_PATHS = {
   SCHOOL: 'model/school.js',
   STADIUM_LIGHT: 'model/stadium-light.js',
+  MANSION01: 'model/mansion01.js',
 };
 
 /**
