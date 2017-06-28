@@ -26,15 +26,10 @@ export default class SchoolField {
   /** フェンス */
   fences: THREE.Mesh[];
 
-  /** スタジアムライト */
-  stadiumLights: THREE.Mesh[];
-
-
   constructor(resources: Resources) {
     this.tree = Trees(resources);
     this.ground = GroundMesh(resources);
     this.school = School(resources);
-    this.stadiumLights = StadiumLights(resources);
     this.fences = Fences(resources);
   }
 
@@ -47,7 +42,6 @@ export default class SchoolField {
     return this.tree.map((item: TreeBillBoard) => item.mesh)
       .concat([this.ground])
       .concat([this.school])
-      .concat(this.stadiumLights)
       .concat(this.fences);
   }
 
@@ -98,34 +92,6 @@ function School(resources: Resources): THREE.Mesh {
   mesh.position.set(0, 0, 0);
   mesh.scale.set(0.3, 0.3, 0.3);
   return mesh;
-}
-
-/**
- * スタジアムライト
- *
- * @param resources リソース管理オブジェクト
- * @return スタジアムライト
- */
-function StadiumLights(resources: Resources): THREE.Mesh[] {
-  const light = (x, z, rot) => {
-    let mesh = createMeshFromJson(MODEL_PATHS.STADIUM_LIGHT, resources);
-    mesh.rotation.y = rot * Math.PI / 180;
-    mesh.scale.set(0.4, 0.4, 0.4);
-    Object.assign(mesh.position, {x, z});
-    return mesh;
-  };
-  const X_PADDING = 580;
-
-  return [
-    light(X_PADDING, 200, -90),
-    light(X_PADDING, 300, -90),
-    light(X_PADDING, 400, -90),
-    light(X_PADDING, 500, -90),
-    light(-X_PADDING, 200, 90),
-    light(-X_PADDING, 300, 90),
-    light(-X_PADDING, 400, 90),
-    light(-X_PADDING, 500, 90),
-  ];
 }
 
 /**
