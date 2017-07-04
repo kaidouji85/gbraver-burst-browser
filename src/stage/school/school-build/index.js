@@ -7,6 +7,7 @@ import {createMeshFromJson} from '../../../util/mesh-creator';
 import TreeBillBoard from './tree-bill-board';
 import GroundMesh from './ground-sand';
 import FenceMesh from './fence';
+import StoneFence from './stone-fence'
 
 const THREE = ThreeLib();
 
@@ -26,11 +27,15 @@ export default class SchoolField {
   /** フェンス */
   fences: THREE.Mesh[];
 
+  /** 石垣 */
+  stoneFence: THREE.Mesh[];
+
   constructor(resources: Resources) {
     this.tree = Trees(resources);
     this.ground = GroundMesh(resources);
     this.school = School(resources);
     this.fences = Fences(resources);
+    this.stoneFence = StoneFence(resources);
   }
 
   /**
@@ -42,7 +47,9 @@ export default class SchoolField {
     return this.tree.map((item: TreeBillBoard) => item.mesh)
       .concat([this.ground])
       .concat([this.school])
-      .concat(this.fences);
+      .concat(this.fences)
+      .concat(this.stoneFence)
+      ;
   }
 
   /**

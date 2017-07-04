@@ -40,6 +40,9 @@ export const TEXTURE_PATHS = {
   BLUE_SKY_LEFT: 'pict/sky-box/blue-sky/left.png',
   BLUE_SKY_UP: 'pict/sky-box/blue-sky/up.png',
   BLUE_SKY_DOWN: 'pict/sky-box/blue-sky/down.png',
+
+  // 汎用テクスチャ
+  BUILD_BASIC: 'model/build-basic.png',
 };
 
 /**
