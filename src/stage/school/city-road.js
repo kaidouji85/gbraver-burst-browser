@@ -83,36 +83,24 @@ export default function CityRoad(resources: Resources): THREE.Mesh {
 
   let group = new THREE.Group();
 
+
+
   [
-    // TODO 横断歩道を作る
-    // 真ん中
     tile(-MESH_WIDTH/2, 0, TILE_NUM_CROSS_WALK_01),
     tile(MESH_WIDTH/2, 0, TILE_NUM_CROSS_WALK_02),
 
-    // カメラから向かって右
     tile(MESH_WIDTH/2 + MESH_WIDTH * 1, 0, TILE_NUM_UNDER_STOP_01),
     tile(MESH_WIDTH/2 + MESH_WIDTH * 2, 0, TILE_NUM_UNDER_STOP_02),
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 3, 0, TILE_NUM_NORMAL_ROAD),
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 4, 0, TILE_NUM_NORMAL_ROAD),
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 5, 0, TILE_NUM_NORMAL_ROAD),
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 6, 0, TILE_NUM_NORMAL_ROAD),
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 7, 0, TILE_NUM_NORMAL_ROAD),
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 8, 0, TILE_NUM_NORMAL_ROAD),
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 9, 0, TILE_NUM_NORMAL_ROAD),
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 10, 0, TILE_NUM_NORMAL_ROAD),
 
-    // カメラから向かって左
     tile(-MESH_WIDTH/2 - MESH_WIDTH * 1, 0, TILE_NUM_UPPER_STOP_02),
     tile(-MESH_WIDTH/2 - MESH_WIDTH * 2, 0, TILE_NUM_UPPER_STOP_01),
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 3, 0, TILE_NUM_NORMAL_ROAD),
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 4, 0, TILE_NUM_NORMAL_ROAD),
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 5, 0, TILE_NUM_NORMAL_ROAD),
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 6, 0, TILE_NUM_NORMAL_ROAD),
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 7, 0, TILE_NUM_NORMAL_ROAD),
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 8, 0, TILE_NUM_NORMAL_ROAD),
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 9, 0, TILE_NUM_NORMAL_ROAD),
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 10, 0, TILE_NUM_NORMAL_ROAD),
-  ].forEach(item => group.add(item));
+  ].concat(
+    // カメラから向かって右
+    R.times(n => tile(MESH_WIDTH/2 + MESH_WIDTH * (n+3), 0, TILE_NUM_NORMAL_ROAD), 40)
+  ).concat(
+    // カメラから向かって左
+    R.times(n => tile(-MESH_WIDTH/2 - MESH_WIDTH * (n+3), 0, TILE_NUM_NORMAL_ROAD), 40)
+  ).forEach(item => group.add(item));
 
   return group;
 }
