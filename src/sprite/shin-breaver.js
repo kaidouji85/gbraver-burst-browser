@@ -2,12 +2,12 @@
 import type {Resources} from '../resource-manager';
 import ThreeLib from 'three-js';
 import {TEXTURE_PATHS} from '../resource-manager';
-import Robo from './robo';
+import Robo from './robo-anime';
 
 const THREE = ThreeLib();
 
 function createMesh(resources: Resources): THREE.Mesh {
-  const mesh = Robo(resources, TEXTURE_PATHS.SHIN_BRAVER_STAND);
+  const mesh = Robo(resources, TEXTURE_PATHS.ANIME_TEST);
   mesh.position.z = 400;
   mesh.position.y -= 30;
   return mesh;

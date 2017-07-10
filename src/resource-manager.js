@@ -26,6 +26,7 @@ export const TEXTURE_PATHS = {
   // アームドーザ
   SHIN_BRAVER_STAND: 'pict/shin-braver-stand.png',
   NEO_RANDOZER_STAND: 'pict/neo-randozer-stand.png',
+  ANIME_TEST: 'pict/anime-test.png',
 
   // 背景関連
   TREE: 'pict/wood2.png',
