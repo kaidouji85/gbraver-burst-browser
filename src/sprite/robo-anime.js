@@ -13,6 +13,8 @@ function createTexture(resources: Resources, textureName: string): THREE.Texture
   texture.texture.wrapS = THREE.RepeatWrapping;
   texture.texture.wrapT = THREE.RepeatWrapping;
   texture.texture.repeat.set(0.5, 0.5);
+  texture.texture.offset.x = 0.5;
+  texture.texture.offset.y = 0;
   return texture.texture;
 }
 
