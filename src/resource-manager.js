@@ -23,27 +23,30 @@ export const MODEL_PATHS = {
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const TEXTURE_PATHS = {
-  // アームドーザ
+  // シンブレイバー関連
   SHIN_BRAVER_STAND: 'armdozer/shin-braver/stand.png',
+  SHIN_BRAVER_PUNCH: 'armdozer/shin-braver/punch.png',
+
+  // ネオランドーザ関連
   NEO_RANDOZER_STAND: 'armdozer/neo-landozer/stand.png',
+
+
   ANIME_TEST: 'armdozer/anime-test.png',
 
-  // 背景関連
+  // 蒲田ステージ関連
   TREE: 'stage/kamata/wood2.png',
   FENCE: 'stage/kamata/fence.png',
   GROUND_SAND: 'stage/kamata/ground-sand.png',
   CITY_LOAD: 'stage/kamata/city-road.png',
+  BUILD_BASIC: 'stage/kamata/build-basic.png',
 
-  // 青空スカイボックス
+  // 青空スカイボックス関連
   BLUE_SKY_FRONT: 'sky-box/blue-sky/front.png',
   BLUE_SKY_RIGHT: 'sky-box/blue-sky/right.png',
   BLUE_SKY_BACK: 'sky-box/blue-sky/back.png',
   BLUE_SKY_LEFT: 'sky-box/blue-sky/left.png',
   BLUE_SKY_UP: 'sky-box/blue-sky/up.png',
   BLUE_SKY_DOWN: 'sky-box/blue-sky/down.png',
-
-  // 汎用テクスチャ
-  BUILD_BASIC: 'stage/kamata/build-basic.png',
 };
 
 /**
