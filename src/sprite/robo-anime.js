@@ -2,21 +2,11 @@
 import type {Resources} from '../resource-manager';
 import ThreeLib from 'three-js';
 import {TEXTURE_PATHS} from '../resource-manager';
+import {createAnimatedTexture} from '../util/texture-animation'
 
 const THREE = ThreeLib();
 const WIDTH = 320;
 const HEIGHT = 320;
-
-function createTexture(resources: Resources, textureName: string): THREE.Texture {
-  // TODO テクスチャのクローンをつくる
-  let texture = resources.textures.find(item => item.path === textureName);
-  texture.texture.wrapS = THREE.RepeatWrapping;
-  texture.texture.wrapT = THREE.RepeatWrapping;
-  texture.texture.repeat.set(0.5, 0.5);
-  texture.texture.offset.x = 0.5;
-  texture.texture.offset.y = 0;
-  return texture.texture;
-}
 
 /**
  * ロボ
@@ -28,7 +18,8 @@ function createTexture(resources: Resources, textureName: string): THREE.Texture
 export default function Robo(resources: Resources, textureName: string): THREE.Mesh {
   let geometry = new THREE.PlaneGeometry(HEIGHT, WIDTH, 1, 1);
 
-  let texture = createTexture(resources, textureName);
+  let originData = resources.textures.find(item => item.path === textureName);
+  let texture = createAnimatedTexture(originData.texture, 2, 2);
   let material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
     transparent: true,
