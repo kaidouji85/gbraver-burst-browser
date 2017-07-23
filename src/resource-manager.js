@@ -12,8 +12,8 @@ const THREE = ThreeLib(['JSONLoader']);
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const MODEL_PATHS = {
-  SCHOOL: 'model/school.js',
-  MANSION01: 'model/mansion01.js',
+  SCHOOL: 'stage/kamata/school.js',
+  MANSION01: 'stage/kamata/mansion01.js',
 };
 
 /**
@@ -24,26 +24,26 @@ export const MODEL_PATHS = {
  */
 export const TEXTURE_PATHS = {
   // アームドーザ
-  SHIN_BRAVER_STAND: 'pict/shin-braver-stand.png',
-  NEO_RANDOZER_STAND: 'pict/neo-randozer-stand.png',
-  ANIME_TEST: 'pict/anime-test.png',
+  SHIN_BRAVER_STAND: 'armdozer/shin-braver/stand.png',
+  NEO_RANDOZER_STAND: 'armdozer/neo-landozer/stand.png',
+  ANIME_TEST: 'armdozer/anime-test.png',
 
   // 背景関連
-  TREE: 'pict/wood2.png',
-  FENCE: 'pict/fence.png',
-  GROUND_SAND: 'pict/ground-sand.png',
-  CITY_LOAD: 'pict/city-road.png',
+  TREE: 'stage/kamata/wood2.png',
+  FENCE: 'stage/kamata/fence.png',
+  GROUND_SAND: 'stage/kamata/ground-sand.png',
+  CITY_LOAD: 'stage/kamata/city-road.png',
 
   // 青空スカイボックス
-  BLUE_SKY_FRONT: 'pict/sky-box/blue-sky/front.png',
-  BLUE_SKY_RIGHT: 'pict/sky-box/blue-sky/right.png',
-  BLUE_SKY_BACK: 'pict/sky-box/blue-sky/back.png',
-  BLUE_SKY_LEFT: 'pict/sky-box/blue-sky/left.png',
-  BLUE_SKY_UP: 'pict/sky-box/blue-sky/up.png',
-  BLUE_SKY_DOWN: 'pict/sky-box/blue-sky/down.png',
+  BLUE_SKY_FRONT: 'sky-box/blue-sky/front.png',
+  BLUE_SKY_RIGHT: 'sky-box/blue-sky/right.png',
+  BLUE_SKY_BACK: 'sky-box/blue-sky/back.png',
+  BLUE_SKY_LEFT: 'sky-box/blue-sky/left.png',
+  BLUE_SKY_UP: 'sky-box/blue-sky/up.png',
+  BLUE_SKY_DOWN: 'sky-box/blue-sky/down.png',
 
   // 汎用テクスチャ
-  BUILD_BASIC: 'model/build-basic.png',
+  BUILD_BASIC: 'stage/kamata/build-basic.png',
 };
 
 /**

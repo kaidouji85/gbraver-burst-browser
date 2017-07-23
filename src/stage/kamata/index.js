@@ -2,7 +2,7 @@
 import type {Resources} from '../../resource-manager';
 
 import ThreeLib from 'three-js';
-import SchoolBuild from './school-build';
+import SchoolBuild from './school';
 import SkyBox from './blue-sky';
 import CityRoad from './city-road';
 import {createMeshFromJson} from '../../util/mesh-creator';
