@@ -86,6 +86,23 @@ export type Texture = {
 };
 
 /**
+ * リソース管理オブジェクトから目的のテクスチャを探す
+ * 見つからなかった場合は、空のテクスチャを返す
+ *
+ * @param path テクスチャのパス
+ * @param resources リソース管理クラス
+ * @returns テクスチャ
+ */
+export function getTexture(path: string, resources: Resources): THREE.Texture {
+  const target = resources.textures.find(item => item.path === path);
+  if (!!target && !!target.texture) {
+    return target.texture;
+  }
+
+  return new THREE.Texture();
+}
+
+/**
  * リソース管理クラス
  */
 export class ResourceManager {
