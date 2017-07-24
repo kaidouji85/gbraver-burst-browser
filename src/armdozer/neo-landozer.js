@@ -2,7 +2,6 @@
 import type {Resources} from '../common/resource-manager';
 import ThreeLib from 'three-js';
 import {TEXTURE_PATHS} from '../common/resource-manager';
-import {getTexture} from '../common/resource-manager';
 
 const THREE = ThreeLib();
 const WIDTH = 320;
@@ -22,13 +21,15 @@ function BasicMesh(): THREE.Mesh {
 /**
  * ネオランドーザ
  */
-export default class ShinBraver {
+export default class NeoLandozer {
   /** メッシュ */
   mesh: THREE.Mesh;
 
   constructor(resources: Resources) {
+    const texture = resources.textures.find(item => item.path === TEXTURE_PATHS.NEO_RANDOZER_STAND);
+
     this.mesh = BasicMesh();
-    this.mesh.material.map = getTexture(TEXTURE_PATHS.NEO_RANDOZER_STAND, resources);
+    this.mesh.material.map = texture ? texture.texture : new THREE.Texture();
     this.mesh.scale.set(-1.0, 1.0, 1.0);
   }
 

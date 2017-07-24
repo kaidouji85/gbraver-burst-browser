@@ -3,12 +3,10 @@ import type {Resources} from '../common/resource-manager';
 import ThreeLib from 'three-js';
 import {TEXTURE_PATHS} from '../common/resource-manager';
 import {createAnimatedTexture} from '../common/texture-animation';
-import {getTexture} from '../common/resource-manager';
 
 const THREE = ThreeLib();
 const WIDTH = 320;
 const HEIGHT = 320;
-
 
 /** シンブレイバーの基本となるメッシュ */
 function BasicMesh(): THREE.Mesh {
@@ -39,12 +37,12 @@ export default class ShinBraver {
   };
 
   constructor(resources: Resources) {
-    const stand = getTexture(TEXTURE_PATHS.SHIN_BRAVER_STAND, resources);
-    const punch = getTexture(TEXTURE_PATHS.SHIN_BRAVER_PUNCH, resources);
+    const stand = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_STAND);
+    const punchOrigin = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_PUNCH);
 
     this.texture = {
-      stand,
-      punch: createAnimatedTexture(punch, 10, 1),
+      stand: stand ? stand.texture : new THREE.Texture(),
+      punch: punchOrigin ? createAnimatedTexture(punchOrigin.texture, 10, 1) : new THREE.Texture(),
     };
 
     this.mesh = BasicMesh();
