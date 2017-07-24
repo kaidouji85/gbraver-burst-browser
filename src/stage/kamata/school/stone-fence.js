@@ -20,7 +20,7 @@ export default function stoneFence(resources: Resources): THREE.Mesh[] {
     let texture = resources.textures.find(item => item.path === TEXTURE_PATHS.BUILD_BASIC) || {};
     let material = new THREE.MeshBasicMaterial({
       color: 0x696969,
-      map: texture.texture
+      map: texture ? texture.texture : new THREE.Texture()
     });
     let mesh = new THREE.Mesh( geometry, material );
     mesh.position.set(x, BASIC_HEIGHT / 2, z);

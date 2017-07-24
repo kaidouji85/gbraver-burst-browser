@@ -15,7 +15,7 @@ const WIDTH = 1200;
  */
 function createTexture(resources: Resources): THREE.Texture {
   let origin = resources.textures.find(item => item.path === TEXTURE_PATHS.GROUND_SAND);
-  let texture = origin.texture.clone();
+  let texture = origin ? origin.texture.clone() : new THREE.Texture();
   texture.needsUpdate = true;
   texture.wrapS = THREE.MirroredRepeatWrapping;
   texture.wrapT = THREE.MirroredRepeatWrapping;
