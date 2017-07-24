@@ -1,7 +1,7 @@
 // @flow
 import ThreeLib from 'three-js';
 import R from 'ramda';
-import {loadModel, loadTexture} from './util/resource-loader';
+import {loadModel, loadTexture} from './resource-loader';
 
 const THREE = ThreeLib(['JSONLoader']);
 
@@ -91,7 +91,7 @@ export type Texture = {
  *
  * @param path テクスチャのパス
  * @param resources リソース管理クラス
- * @returns テクスチャ
+ * @return テクスチャ
  */
 export function getTexture(path: string, resources: Resources): THREE.Texture {
   const target = resources.textures.find(item => item.path === path);

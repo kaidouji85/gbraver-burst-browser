@@ -1,12 +1,12 @@
 // @flow
-import type {Resources} from '../../resource-manager';
+import type {Resources} from '../../common/resource-manager';
 
 import ThreeLib from 'three-js';
 import SchoolBuild from './school';
 import SkyBox from './blue-sky';
 import CityRoad from './city-road';
-import {createMeshFromJson} from '../../util/mesh-creator';
-import {MODEL_PATHS} from '../../resource-manager';
+import {createMeshFromJson} from '../../common/mesh-creator';
+import {MODEL_PATHS} from '../../common/resource-manager';
 
 const THREE = ThreeLib();
 

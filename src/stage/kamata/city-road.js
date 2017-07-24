@@ -1,9 +1,9 @@
 // @flow
 import ThreeLib from 'three-js';
 import R from 'ramda';
-import type {Resources} from '../../resource-manager';
-import {TEXTURE_PATHS} from '../../resource-manager';
-import {setUvMapping} from '../../util/uv-mapper';
+import type {Resources} from '../../common/resource-manager';
+import {TEXTURE_PATHS} from '../../common/resource-manager';
+import {setUvMapping} from '../../common/uv-mapper';
 
 const THREE = ThreeLib();
 

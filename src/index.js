@@ -1,6 +1,6 @@
 // @flow
 import ThreeLib from 'three-js';
-import {ResourceManager} from './resource-manager';
+import {ResourceManager} from './common/resource-manager';
 import SchoolStage from './stage/kamata/index';
 import ShinBraver from './arndozer/shin-breaver';
 import NeoLandozer from './arndozer/neo-landozer';

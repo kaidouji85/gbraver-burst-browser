@@ -3,7 +3,7 @@
 /**
  * メッシュ関連のユーティリティ
  */
-import type {Resources} from '../resource-manager'
+import type {Resources} from './resource-manager'
 import ThreeLib from 'three-js';
 const THREE = ThreeLib();
 
