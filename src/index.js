@@ -2,8 +2,8 @@
 import ThreeLib from 'three-js';
 import {ResourceManager} from './common/resource-manager';
 import SchoolStage from './stage/kamata/index';
-import ShinBraver from './arndozer/shin-breaver';
-import NeoLandozer from './arndozer/neo-landozer';
+import ShinBraver from './armdozer/shin-breaver';
+import NeoLandozer from './armdozer/neo-landozer';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
