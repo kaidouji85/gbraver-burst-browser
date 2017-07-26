@@ -1,12 +1,13 @@
 // @flow
-import type {Resources} from '../../../resource-manager';
+import type {Resources} from '../../../common/resource-manager';
 import ThreeLib from 'three-js';
 import R from 'ramda';
-import {MODEL_PATHS} from '../../../resource-manager';
-import {createMeshFromJson} from '../../../util/mesh-creator';
+import {MODEL_PATHS} from '../../../common/resource-manager';
+import {createMeshFromJson} from '../../../common/mesh-creator';
 import TreeBillBoard from './tree-bill-board';
 import GroundMesh from './ground-sand';
 import FenceMesh from './fence';
+import StoneFence from './stone-fence'
 
 const THREE = ThreeLib();
 
@@ -26,16 +27,15 @@ export default class SchoolField {
   /** フェンス */
   fences: THREE.Mesh[];
 
-  /** スタジアムライト */
-  stadiumLights: THREE.Mesh[];
-
+  /** 石垣 */
+  stoneFence: THREE.Mesh[];
 
   constructor(resources: Resources) {
     this.tree = Trees(resources);
     this.ground = GroundMesh(resources);
     this.school = School(resources);
-    this.stadiumLights = StadiumLights(resources);
     this.fences = Fences(resources);
+    this.stoneFence = StoneFence(resources);
   }
 
   /**
@@ -47,8 +47,9 @@ export default class SchoolField {
     return this.tree.map((item: TreeBillBoard) => item.mesh)
       .concat([this.ground])
       .concat([this.school])
-      .concat(this.stadiumLights)
-      .concat(this.fences);
+      .concat(this.fences)
+      .concat(this.stoneFence)
+      ;
   }
 
   /**
@@ -98,34 +99,6 @@ function School(resources: Resources): THREE.Mesh {
   mesh.position.set(0, 0, 0);
   mesh.scale.set(0.3, 0.3, 0.3);
   return mesh;
-}
-
-/**
- * スタジアムライト
- *
- * @param resources リソース管理オブジェクト
- * @return スタジアムライト
- */
-function StadiumLights(resources: Resources): THREE.Mesh[] {
-  const light = (x, z, rot) => {
-    let mesh = createMeshFromJson(MODEL_PATHS.STADIUM_LIGHT, resources);
-    mesh.rotation.y = rot * Math.PI / 180;
-    mesh.scale.set(0.4, 0.4, 0.4);
-    Object.assign(mesh.position, {x, z});
-    return mesh;
-  };
-  const X_PADDING = 580;
-
-  return [
-    light(X_PADDING, 200, -90),
-    light(X_PADDING, 300, -90),
-    light(X_PADDING, 400, -90),
-    light(X_PADDING, 500, -90),
-    light(-X_PADDING, 200, 90),
-    light(-X_PADDING, 300, 90),
-    light(-X_PADDING, 400, 90),
-    light(-X_PADDING, 500, 90),
-  ];
 }
 
 /**

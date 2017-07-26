@@ -1,18 +1,36 @@
 // @flow
 import ThreeLib from 'three-js';
-import {ResourceManager} from './resource-manager';
-import SchoolStage from './stage/school/index';
-import ShinBraver from './sprite/shin-breaver';
-import NeoLandozer from './sprite/neo-landozer';
+import Tween from 'tween.js';
+import {ResourceManager} from './common/resource-manager';
+import SchoolStage from './stage/kamata/index';
+import ShinBraver from './armdozer/shin-breaver';
+import NeoLandozer from './armdozer/neo-landozer';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
-let scene: THREE.Scene;
-let camera: THREE.Camera;
-let renderer: THREE.WebGLRenderer;
+const scene: THREE.Scene = new THREE.Scene();
+scene.add(new THREE.AxisHelper(1000));
+
+const camera: THREE.Camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+camera.position.z = 900;
+camera.position.y = 70;
+camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.maxDistance = 1000;
+controls.maxPolarAngle = Math.PI * 0.48;
+
+const resourceManager:  ResourceManager = new ResourceManager();
+
 let schoolField: SchoolStage = null;
 let playerSprite: ShinBraver = null;
 let enemySprite: NeoLandozer = null;
+
+window.addEventListener( 'resize', onWindowResize, false );
+document.body.appendChild( renderer.domElement );
 
 /**
  * リサイズ時の処理
@@ -24,69 +42,46 @@ function onWindowResize(): void {
 }
 
 /**
- * 初期化
- */
-function init(): void {
-  // リソース管理
-  const resourceManager:  ResourceManager = new ResourceManager();
-  Promise.all([
-    resourceManager.loadModels(),
-    resourceManager.loadTextures()
-  ]).then(() => {
-    schoolField = new SchoolStage(resourceManager.resources);
-    schoolField.values().forEach(item => scene.add(item));
-
-    playerSprite = new ShinBraver(resourceManager.resources);
-    playerSprite.mesh.position.x = 150;
-    scene.add(playerSprite.mesh);
-
-    enemySprite = new NeoLandozer(resourceManager.resources);
-    enemySprite.mesh.position.x = -150;
-    scene.add(enemySprite.mesh);
-  });
-
-  // シーン
-  scene = new THREE.Scene();
-
-  // カメラ
-  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-  camera.position.z = 900;
-  camera.position.y = 70;
-  camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-  // レンダラー
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-
-  // コントローラー
-  let controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.maxDistance = 1000;
-  controls.maxPolarAngle = Math.PI * 0.48;
-
-  // 軸
-  scene.add(new THREE.AxisHelper(1000));
-
-  // リサイズ時の処理
-  window.addEventListener( 'resize', onWindowResize, false );
-
-  document.body.appendChild( renderer.domElement );
-}
-
-/**
  * ゲームループ
  */
-function animate(): void {
+function animate(time: double): void {
   requestAnimationFrame( animate );
 
-  // TODO 読み込み完了の有無でanimete呼び出しを判定するようにする
-  schoolField && schoolField.animate(camera);
-  playerSprite && playerSprite.animate(camera);
-  enemySprite && enemySprite.animate(camera);
+  schoolField.animate(camera);
+  playerSprite.animate(camera);
+  enemySprite.animate(camera);
+
+  Tween.update(time);
 
   renderer.render( scene, camera );
 }
 
-(function(){
-  init();
+/**
+ * プレイヤーキャラがパンチする
+ */
+function punchPlayer() {
+  console.log('punch!!');
+  playerSprite.tween.stop();
+  playerSprite.tween.start();
+}
+
+(async function(){
+  await Promise.all([
+    resourceManager.loadModels(),
+    resourceManager.loadTextures()
+  ]);
+
+  schoolField = new SchoolStage(resourceManager.resources);
+  schoolField.values().forEach(item => scene.add(item));
+
+  playerSprite = new ShinBraver(resourceManager.resources);
+  playerSprite.mesh.position.x = 150;
+  scene.add(playerSprite.mesh);
+
+  enemySprite = new NeoLandozer(resourceManager.resources);
+  enemySprite.mesh.position.x = -150;
+  scene.add(enemySprite.mesh);
+
+  window.onclick = punchPlayer;
   animate();
 })();

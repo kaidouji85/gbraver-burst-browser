@@ -1,7 +1,7 @@
 // @flow
-import type {Resources} from '../../../resource-manager';
+import type {Resources} from '../../../common/resource-manager';
 import ThreeLib from 'three-js';
-import {TEXTURE_PATHS} from '../../../resource-manager';
+import {TEXTURE_PATHS} from '../../../common/resource-manager';
 
 const THREE = ThreeLib();
 const HEIGHT = 1200;
@@ -15,7 +15,7 @@ const WIDTH = 1200;
  */
 function createTexture(resources: Resources): THREE.Texture {
   let origin = resources.textures.find(item => item.path === TEXTURE_PATHS.GROUND_SAND);
-  let texture = origin.texture.clone();
+  let texture = origin ? origin.texture.clone() : new THREE.Texture();
   texture.needsUpdate = true;
   texture.wrapS = THREE.MirroredRepeatWrapping;
   texture.wrapT = THREE.MirroredRepeatWrapping;

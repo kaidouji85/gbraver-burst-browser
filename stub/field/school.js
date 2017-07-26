@@ -1,7 +1,7 @@
 // @flow
 import ThreeLib from 'three-js';
-import {ResourceManager} from '../../src/resource-manager';
-import SchoolStage from '../../src/stage/school';
+import {ResourceManager} from '../../src/common/resource-manager';
+import SchoolStage from '../../src/stage/kamata';
 
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);

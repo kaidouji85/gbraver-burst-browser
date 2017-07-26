@@ -1,9 +1,12 @@
 // @flow
-import type {Resources} from '../../resource-manager';
+import type {Resources} from '../../common/resource-manager';
+
 import ThreeLib from 'three-js';
-import SchoolBuild from './school-build';
+import SchoolBuild from './school';
 import SkyBox from './blue-sky';
 import CityRoad from './city-road';
+import {createMeshFromJson} from '../../common/mesh-creator';
+import {MODEL_PATHS} from '../../common/resource-manager';
 
 const THREE = ThreeLib();
 
@@ -23,11 +26,15 @@ export default class SchoolField {
   /** 光源 */
   lights: THREE.Light[];
 
+  /** マンション群 */
+  mansions: THREE.Mesh;
+
   constructor(resources: Resources) {
     this.schoolBuild = new SchoolBuild(resources);
     this.skyBox = SkyBox(resources);
     this.road = Road(resources);
     this.lights = Light();
+    this.mansions = Mansions(resources);
   }
 
   /**
@@ -39,7 +46,8 @@ export default class SchoolField {
     return this.schoolBuild.values()
       .concat(this.skyBox)
       .concat(this.road)
-      .concat(this.lights);
+      .concat(this.lights)
+      .concat(this.mansions);
   }
 
   /**
@@ -77,5 +85,30 @@ function Light(): THREE.Light[] {
   return [
     directionalLight,
     ambientLight
+  ];
+}
+
+/**
+ * マンションを生成して返す
+ *
+ * @param resources リソース管理クラス
+ * @return マンション
+ */
+function Mansions(resources: Resources): THREE.Mesh[] {
+  const mansion = (x: number, y:number, z: number): THREE.Mesh => {
+    let mesh = createMeshFromJson(MODEL_PATHS.MANSION01, resources);
+    mesh.position.set(x, y, z);
+    mesh.scale.set(0.5, 0.5, 0.5);
+    return mesh;
+  };
+
+  return [
+    mansion(950, 0, 450),
+    mansion(950, 0, 0),
+    mansion(950, 0, -450),
+
+    mansion(-950, 0, 450),
+    mansion(-950, 0, 0),
+    mansion(-950, 0, -450),
   ];
 }
