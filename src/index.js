@@ -42,27 +42,6 @@ function onWindowResize(): void {
 }
 
 /**
- * リソース読み込み
- */
-function loadResource(): Promise<> {
-  return Promise.all([
-    resourceManager.loadModels(),
-    resourceManager.loadTextures()
-  ]).then(() => {
-    schoolField = new SchoolStage(resourceManager.resources);
-    schoolField.values().forEach(item => scene.add(item));
-
-    playerSprite = new ShinBraver(resourceManager.resources);
-    playerSprite.mesh.position.x = 150;
-    scene.add(playerSprite.mesh);
-
-    enemySprite = new NeoLandozer(resourceManager.resources);
-    enemySprite.mesh.position.x = -150;
-    scene.add(enemySprite.mesh);
-  });
-}
-
-/**
  * ゲームループ
  */
 function animate(time: double): void {
@@ -80,14 +59,29 @@ function animate(time: double): void {
 /**
  * プレイヤーキャラがパンチする
  */
-function punchShinBraver() {
+function punchPlayer() {
   console.log('punch!!');
   playerSprite.tween.stop();
   playerSprite.tween.start();
 }
 
 (async function(){
-  await loadResource();
-  window.onclick = punchShinBraver;
+  await Promise.all([
+    resourceManager.loadModels(),
+    resourceManager.loadTextures()
+  ]);
+
+  schoolField = new SchoolStage(resourceManager.resources);
+  schoolField.values().forEach(item => scene.add(item));
+
+  playerSprite = new ShinBraver(resourceManager.resources);
+  playerSprite.mesh.position.x = 150;
+  scene.add(playerSprite.mesh);
+
+  enemySprite = new NeoLandozer(resourceManager.resources);
+  enemySprite.mesh.position.x = -150;
+  scene.add(enemySprite.mesh);
+
+  window.onclick = punchPlayer;
   animate();
 })();
