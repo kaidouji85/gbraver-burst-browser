@@ -1,5 +1,6 @@
 // @flow
 import ThreeLib from 'three-js';
+import Tween from 'tween.js';
 import {ResourceManager} from './common/resource-manager';
 import SchoolStage from './stage/kamata/index';
 import ShinBraver from './armdozer/shin-breaver';
@@ -7,12 +8,29 @@ import NeoLandozer from './armdozer/neo-landozer';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
-let scene: THREE.Scene;
-let camera: THREE.Camera;
-let renderer: THREE.WebGLRenderer;
+const scene: THREE.Scene = new THREE.Scene();
+scene.add(new THREE.AxisHelper(1000));
+
+const camera: THREE.Camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+camera.position.z = 900;
+camera.position.y = 70;
+camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer();
+renderer.setSize( window.innerWidth, window.innerHeight );
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.maxDistance = 1000;
+controls.maxPolarAngle = Math.PI * 0.48;
+
+const resourceManager:  ResourceManager = new ResourceManager();
+
 let schoolField: SchoolStage = null;
 let playerSprite: ShinBraver = null;
 let enemySprite: NeoLandozer = null;
+
+window.addEventListener( 'resize', onWindowResize, false );
+document.body.appendChild( renderer.domElement );
 
 /**
  * リサイズ時の処理
@@ -24,12 +42,10 @@ function onWindowResize(): void {
 }
 
 /**
- * 初期化
+ * リソース読み込み
  */
-function init(): void {
-  // リソース管理
-  const resourceManager:  ResourceManager = new ResourceManager();
-  Promise.all([
+function loadResource(): Promise<> {
+  return Promise.all([
     resourceManager.loadModels(),
     resourceManager.loadTextures()
   ]).then(() => {
@@ -44,49 +60,22 @@ function init(): void {
     enemySprite.mesh.position.x = -150;
     scene.add(enemySprite.mesh);
   });
-
-  // シーン
-  scene = new THREE.Scene();
-
-  // カメラ
-  camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-  camera.position.z = 900;
-  camera.position.y = 70;
-  camera.lookAt(new THREE.Vector3(0, 0, 0));
-
-  // レンダラー
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-
-  // コントローラー
-  let controls = new THREE.OrbitControls(camera, renderer.domElement);
-  controls.maxDistance = 1000;
-  controls.maxPolarAngle = Math.PI * 0.48;
-
-  // 軸
-  scene.add(new THREE.AxisHelper(1000));
-
-  // リサイズ時の処理
-  window.addEventListener( 'resize', onWindowResize, false );
-
-  document.body.appendChild( renderer.domElement );
 }
 
 /**
  * ゲームループ
  */
-function animate(): void {
+function animate(time: double): void {
   requestAnimationFrame( animate );
 
-  // TODO 読み込み完了の有無でanimete呼び出しを判定するようにする
-  schoolField && schoolField.animate(camera);
-  playerSprite && playerSprite.animate(camera);
-  enemySprite && enemySprite.animate(camera);
+  schoolField.animate(camera);
+  playerSprite.animate(camera);
+  enemySprite.animate(camera);
 
   renderer.render( scene, camera );
 }
 
-(function(){
-  init();
+(async function(){
+  await loadResource();
   animate();
 })();

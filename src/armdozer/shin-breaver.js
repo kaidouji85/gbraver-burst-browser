@@ -28,25 +28,14 @@ export default class ShinBraver {
   mesh: THREE.Mesh;
 
   /** テクスチャ */
-  texture: {
-    /** 立ち */
-    stand: THREE.Texture,
-
-    /** パンチ */
-    punch: THREE.Texture,
-  };
+  texture: THREE.Texture;
 
   constructor(resources: Resources) {
-    const stand = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_STAND);
-    const punchOrigin = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_PUNCH);
-
-    this.texture = {
-      stand: stand ? stand.texture : new THREE.Texture(),
-      punch: punchOrigin ? createAnimatedTexture(punchOrigin.texture, 10, 1) : new THREE.Texture(),
-    };
+    const origin = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_PUNCH);
+    this.texture = origin ? createAnimatedTexture(origin.texture, 10, 1) : new THREE.Texture();
 
     this.mesh = BasicMesh();
-    this.mesh.material.map = this.texture.punch;
+    this.mesh.material.map = this.texture;
   }
 
   /**
