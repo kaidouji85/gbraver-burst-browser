@@ -77,7 +77,17 @@ function animate(time: double): void {
   renderer.render( scene, camera );
 }
 
+/**
+ * プレイヤーキャラがパンチする
+ */
+function punchShinBraver() {
+  console.log('punch!!');
+  playerSprite.tween.stop();
+  playerSprite.tween.start();
+}
+
 (async function(){
   await loadResource();
+  window.onclick = punchShinBraver;
   animate();
 })();

@@ -36,8 +36,7 @@ export default class ShinBraver {
   /** アニメーション制御用Tweenオブジェクト */
   tween: Tween;
 
-  /** アニメのフレーム管理オブジェクト */
-  frame: {num: number};
+  frame: {num :number}
 
   constructor(resources: Resources) {
     const origin = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_PUNCH);
@@ -46,14 +45,21 @@ export default class ShinBraver {
     this.mesh = BasicMesh();
     this.mesh.material.map = this.texture;
 
-    this.frame = {num: 0};
+    this.frame = {num : 0};
 
-    this.tween = new Tween(this.frame)
-      .to({num: 9}, 300)
-      .delay(1000)
-      .repeat(Infinity)
+    const basicTween = (): Tween => new Tween(this.frame)
       .onUpdate(() => this.onUpdate())
-      .start();
+      .onStop(() => this.frame.num = 0);
+    const tween1 = basicTween()
+      .to({num: 9}, 300);
+    const tween2 = basicTween()
+      .delay(1000)
+      .onComplete(() => {
+        this.frame.num = 0;
+        this.onUpdate();
+      })
+    tween1.chain(tween2);
+    this.tween = tween1;
   }
 
   /**
