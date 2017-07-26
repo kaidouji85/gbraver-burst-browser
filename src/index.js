@@ -72,6 +72,8 @@ function animate(time: double): void {
   playerSprite.animate(camera);
   enemySprite.animate(camera);
 
+  Tween.update(time);
+
   renderer.render( scene, camera );
 }
 
