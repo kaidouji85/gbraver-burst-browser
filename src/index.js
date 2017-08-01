@@ -8,6 +8,7 @@ import NeoLandozer from './armdozer/neo-landozer';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
+/** 3Dシーン関連 */
 const scene: THREE.Scene = new THREE.Scene();
 scene.add(new THREE.AxisHelper(1000));
 
@@ -17,16 +18,54 @@ camera.position.y = 70;
 camera.lookAt(new THREE.Vector3(0, 0, 0));
 
 const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer();
+renderer.autoClear = false;
 renderer.setSize( window.innerWidth, window.innerHeight );
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.maxDistance = 1000;
 controls.maxPolarAngle = Math.PI * 0.48;
 
+/** HUDシーン関連 */
+const width = window.innerWidth;
+const height = window.innerHeight;
+const hudCanvas = document.createElement('canvas');
+hudCanvas.width = width;
+hudCanvas.height = height;
+
+const hudBitmap = hudCanvas.getContext('2d');
+hudBitmap.font = "Normal 40px Arial";
+hudBitmap.textAlign = 'center';
+hudBitmap.fillStyle = "rgba(245,245,245,0.75)";
+hudBitmap.fillText('Initializing...', width / 2, height / 2);
+
+const cameraHUD = new THREE.OrthographicCamera(
+  -width/2, width/2,
+  height/2, -height/2,
+  0, 30
+);
+
+const sceneHUD = new THREE.Scene();
+
+const hudTexture = new THREE.Texture(hudCanvas)
+hudTexture.needsUpdate = true;
+
+const material = new THREE.MeshBasicMaterial( {map: hudTexture } );
+material.transparent = true;
+
+var planeGeometry = new THREE.PlaneGeometry( width, height );
+var plane = new THREE.Mesh( planeGeometry, material );
+sceneHUD.add( plane );
+
+/** リソースマネージャ */
 const resourceManager:  ResourceManager = new ResourceManager();
 
+/** 学校フィールド */
 let schoolField: SchoolStage = null;
+
+/** プレイヤースプライト */
 let playerSprite: ShinBraver = null;
+
+/** 敵スプライト */
 let enemySprite: NeoLandozer = null;
 
 window.addEventListener( 'resize', onWindowResize, false );
@@ -54,6 +93,10 @@ function animate(time: double): void {
   Tween.update(time);
 
   renderer.render( scene, camera );
+
+  hudBitmap.clearRect(0, 0, width, height);
+  hudBitmap.fillText('Initializing...', width / 2, height / 2);
+  renderer.render( sceneHUD, cameraHUD );
 }
 
 /**
