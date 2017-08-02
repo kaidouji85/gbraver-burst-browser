@@ -80,6 +80,8 @@ function animate(time: double): void {
  */
 function punchPlayer() {
   console.log('punch!!');
+  battleField.playerSprite.tween.stop();
+  battleField.playerSprite.tween.start();
 }
 
 (async function(){
