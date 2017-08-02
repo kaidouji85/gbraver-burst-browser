@@ -70,10 +70,11 @@ export default class Hud {
 
   /** リサイズ時の処理 */
   resize() {
-    this.camera.right = -window.innerWidth/2;
-    this.camera.left = window.innerWidth/2;
+    this.camera.left = -window.innerWidth/2;
+    this.camera.right = window.innerWidth/2;
     this.camera.top = window.innerHeight/2;
     this.camera.bottom = -window.innerHeight/2;
+    this.camera.updateProjectionMatrix();
   }
 
 }

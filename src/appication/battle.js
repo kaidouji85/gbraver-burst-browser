@@ -1,6 +1,6 @@
 // @flow
+import type {Resources} from '../common/resource-manager';
 import ThreeLib from 'three-js';
-import {Resources} from '../common/resource-manager';
 import BattleFieldLayer from '../layer/battle-field';
 import HudLayer from '../layer/hud';
 
