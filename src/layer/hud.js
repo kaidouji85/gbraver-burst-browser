@@ -3,9 +3,6 @@ import ThreeLib from 'three-js';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
-const width = window.innerWidth;
-const height = window.innerHeight;
-
 /**
  * キャンバスからMeshを生成する
  *
@@ -53,8 +50,8 @@ export default class Hud {
     );
 
     this.canvas = document.createElement('canvas');
-    this.canvas.width = width;
-    this.canvas.height = height;
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
 
     this.contextOf2D = this.canvas.getContext('2d');
     this.contextOf2D.font = "Normal 40px Arial";
@@ -67,8 +64,8 @@ export default class Hud {
 
   /** ゲームループでの処理 */
   animate() {
-    this.contextOf2D.clearRect(0, 0, width, height);
-    this.contextOf2D.fillText('Initializing...', width / 2, height / 2);
+    this.contextOf2D.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    this.contextOf2D.fillText('HUD Display', window.innerWidth / 2, window.innerHeight / 2);
   }
 
   /** リサイズ時の処理 */
