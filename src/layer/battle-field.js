@@ -52,4 +52,10 @@ export default class Battle {
     this.playerSprite.animate(this.camera);
     this.enemySprite.animate(this.camera);
   }
+
+  /** ウインドウリサイズ時の処理 */
+  resize() {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+  }
 }
