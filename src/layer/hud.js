@@ -19,7 +19,7 @@ function CanvasMesh(canvas: HTMLCanvasElement): THREE.Mesh {
   const material = new THREE.MeshBasicMaterial( {map: texture } );
   material.transparent = true;
 
-  var planeGeometry = new THREE.PlaneGeometry( width, height );
+  var planeGeometry = new THREE.PlaneGeometry( window.innerWidth, window.innerHeight );
   return new THREE.Mesh( planeGeometry, material );
 }
 
@@ -29,7 +29,7 @@ export default class Hud {
   scene: THREE.Scene;
 
   /** 本レイヤーのカメラ */
-  camera: THREE.Camera;
+  camera: THREE.OrthographicCamera;
 
   /** ベースとなるキャンバス */
   canvas: HTMLCanvasElement;
@@ -44,9 +44,12 @@ export default class Hud {
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.OrthographicCamera(
-      -width/2, width/2,
-      height/2, -height/2,
-      0, 30
+      -window.innerWidth/2,
+      window.innerWidth/2,
+      window.innerHeight/2,
+      -window.innerHeight/2,
+      0,
+      30
     );
 
     this.canvas = document.createElement('canvas');
@@ -57,7 +60,6 @@ export default class Hud {
     this.contextOf2D.font = "Normal 40px Arial";
     this.contextOf2D.textAlign = 'center';
     this.contextOf2D.fillStyle = "rgba(245,245,245,0.75)";
-    this.contextOf2D.fillText('Initializing...', width / 2, height / 2);
 
     this.canvasMesh = CanvasMesh(this.canvas);
     this.scene.add(this.canvasMesh);
@@ -67,6 +69,14 @@ export default class Hud {
   animate() {
     this.contextOf2D.clearRect(0, 0, width, height);
     this.contextOf2D.fillText('Initializing...', width / 2, height / 2);
+  }
+
+  /** リサイズ時の処理 */
+  resize() {
+    this.camera.right = -window.innerWidth/2;
+    this.camera.left = window.innerWidth/2;
+    this.camera.top = window.innerHeight/2;
+    this.camera.bottom = -window.innerHeight/2;
   }
 
 }

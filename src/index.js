@@ -29,6 +29,7 @@ document.body.appendChild( renderer.domElement );
 function onWindowResize(): void {
   renderer.setSize( window.innerWidth, window.innerHeight );
   battleField.resize();
+  hudLayer.resize();
 }
 
 /**
