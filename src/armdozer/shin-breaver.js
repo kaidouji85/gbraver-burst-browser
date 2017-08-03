@@ -48,26 +48,16 @@ export default class ShinBraver {
     this.frame = {num : 0};
 
     const basicTween = (): Tween => new Tween(this.frame)
-      .onUpdate(() => this.onUpdate())
       .onStop(() => this.frame.num = 0);
     const tween1 = basicTween()
-      .to({num: 9}, 300);
+      .to({num: MAX_ANIME_FRAME - 1}, 300);
     const tween2 = basicTween()
       .delay(1000)
       .onComplete(() => {
         this.frame.num = 0;
-        this.onUpdate();
       })
     tween1.chain(tween2);
     this.tween = tween1;
-  }
-
-  /**
-   * アニメーションフレームの更新時の処理
-   */
-  onUpdate() {
-    const frame = Math.floor(this.frame.num);
-    this.texture.offset.x = frame/MAX_ANIME_FRAME;
   }
 
   /**
@@ -76,6 +66,9 @@ export default class ShinBraver {
    * @param camera カメラ
    */
   animate(camera: THREE.Camera): void {
-    this.mesh.quaternion.copy(camera.quaternion)
+    const frame = Math.floor(this.frame.num);
+
+    this.texture.offset.x = frame/MAX_ANIME_FRAME;
+    this.mesh.quaternion.copy(camera.quaternion);
   }
 }
