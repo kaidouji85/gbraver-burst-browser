@@ -1,9 +1,9 @@
 // @flow
-import type {Resources} from '../common/resource-manager';
+import type {Resources} from '../../../common/resource-manager';
 import ThreeLib from 'three-js';
-import SchoolStage from '../stage/kamata/index';
-import ShinBraver from '../armdozer/shin-breaver';
-import NeoLandozer from '../armdozer/neo-landozer';
+import SchoolStage from '../../../stage/kamata/index';
+import ShinBraver from '../../../armdozer/shin-breaver';
+import NeoLandozer from '../../../armdozer/neo-landozer';
 
 const THREE = ThreeLib([]);
 

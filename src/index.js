@@ -1,7 +1,7 @@
 // @flow
 import Tween from 'tween.js';
 import {ResourceManager} from './common/resource-manager';
-import BattleApplication from './appication/battle';
+import BattleApplication from './appication/battle/index.js';
 
 (async function(){
   const resourceManager:  ResourceManager = new ResourceManager();

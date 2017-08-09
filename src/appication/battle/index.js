@@ -1,8 +1,8 @@
 // @flow
-import type {Resources} from '../common/resource-manager';
+import type {Resources} from '../../common/resource-manager';
 import ThreeLib from 'three-js';
-import BattleFieldLayer from '../layer/battle-field';
-import HudLayer from '../layer/hud';
+import ThreeDimensionLayer from './three-dimension';
+import HudLayer from './hud';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
@@ -13,8 +13,8 @@ export default class Battle {
   /** レンダラ */
   renderer: THREE.WebGLRenderer;
 
-  /** バトルフィールドレイヤー */
-  battleFieldLayer: BattleFieldLayer;
+  /** 3D空間レイヤー */
+  threeDimensionLayer: ThreeDimensionLayer;
 
   /** Head Up Display(HUD)レイヤー */
   hudLayer: HudLayer;
@@ -24,10 +24,10 @@ export default class Battle {
     this.renderer.autoClear = false;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-    this.battleFieldLayer = new BattleFieldLayer({resources: props.resources});
-    this.battleFieldLayer.scene.add(new THREE.AxisHelper(1000));
+    this.threeDimensionLayer = new ThreeDimensionLayer({resources: props.resources});
+    this.threeDimensionLayer.scene.add(new THREE.AxisHelper(1000));
 
-    const controls = new THREE.OrbitControls(this.battleFieldLayer.camera, this.renderer.domElement);
+    const controls = new THREE.OrbitControls(this.threeDimensionLayer.camera, this.renderer.domElement);
     controls.maxDistance = 1000;
     controls.maxPolarAngle = Math.PI * 0.48;
 
@@ -36,8 +36,8 @@ export default class Battle {
 
   /** ゲームループでの処理 */
   animate() {
-    this.battleFieldLayer.animate();
-    this.renderer.render( this.battleFieldLayer.scene, this.battleFieldLayer.camera );
+    this.threeDimensionLayer.animate();
+    this.renderer.render( this.threeDimensionLayer.scene, this.threeDimensionLayer.camera );
 
     this.hudLayer.animate();
     this.renderer.render(this.hudLayer.scene, this.hudLayer.camera);
@@ -46,7 +46,7 @@ export default class Battle {
   /** リサイズ時の処理 */
   resize() {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.battleFieldLayer.resize();
+    this.threeDimensionLayer.resize();
     this.hudLayer.resize();
   }
 
@@ -54,7 +54,7 @@ export default class Battle {
    * プレイヤーキャラがパンチする
    */
   punchPlayer() {
-    this.battleFieldLayer.playerSprite.tween.stop();
-    this.battleFieldLayer.playerSprite.tween.start();
+    this.threeDimensionLayer.playerSprite.tween.stop();
+    this.threeDimensionLayer.playerSprite.tween.start();
   }
 }
