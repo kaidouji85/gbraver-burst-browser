@@ -24,20 +24,16 @@ export default class Battle {
     this.renderer.autoClear = false;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-    this.threeDimensionLayer = new ThreeDimensionLayer({resources: props.resources});
-    this.threeDimensionLayer.scene.add(new THREE.AxisHelper(1000));
-
-    const controls = new THREE.OrbitControls(this.threeDimensionLayer.camera, this.renderer.domElement);
-    controls.maxDistance = 1000;
-    controls.maxPolarAngle = Math.PI * 0.48;
-
+    this.threeDimensionLayer = new ThreeDimensionLayer({
+      resources: props.resources,
+      renderer: this.renderer
+    });
     this.hudLayer = new HudLayer();
   }
 
   /** ゲームループでの処理 */
   animate() {
     this.threeDimensionLayer.animate();
-    this.renderer.render( this.threeDimensionLayer.scene, this.threeDimensionLayer.camera );
 
     this.hudLayer.animate();
     this.renderer.render(this.hudLayer.scene, this.hudLayer.camera);
@@ -51,10 +47,23 @@ export default class Battle {
   }
 
   /**
+   * デバッグモードの設定を行う
+   */
+  debugMode() {
+    this.threeDimensionLayer.actors.scene.add(new THREE.AxisHelper(1000));
+
+    const controls = new THREE.OrbitControls(this.threeDimensionLayer.actors.camera, this.renderer.domElement);
+    controls.maxDistance = 1000;
+    controls.maxPolarAngle = Math.PI * 0.48;
+  }
+
+  /**
    * プレイヤーキャラがパンチする
    */
   punchPlayer() {
+    /*
     this.threeDimensionLayer.playerSprite.tween.stop();
     this.threeDimensionLayer.playerSprite.tween.start();
+    */
   }
 }

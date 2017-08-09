@@ -11,11 +11,12 @@ import BattleApplication from './appication/battle/index.js';
   ]);
 
   const app = new BattleApplication({resources: resourceManager.resources});
+  app.debugMode();
+  
   document.body.appendChild(app.renderer.domElement);
-  window.onclick = () => app.punchPlayer();
 
-  const onResize = () => app.resize();
-  window.addEventListener('resize', onResize, false);
+  window.onclick = () => app.punchPlayer();
+  window.addEventListener('resize', () => app.resize(), false);
 
   const animate = (time: number) => {
     requestAnimationFrame( animate );
