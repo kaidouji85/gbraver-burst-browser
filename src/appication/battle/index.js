@@ -1,5 +1,6 @@
 // @flow
 import type {Resources} from '../../common/resource-manager';
+import type {State} from './state';
 import ThreeLib from 'three-js';
 import ThreeDimensionLayer from './three-dimension';
 import HudLayer from './hud';
@@ -28,15 +29,16 @@ export default class Battle {
       resources: props.resources,
       renderer: this.renderer
     });
-    this.hudLayer = new HudLayer();
+
+    this.hudLayer = new HudLayer({
+      renderer: this.renderer
+    });
   }
 
   /** ゲームループでの処理 */
   animate() {
     this.threeDimensionLayer.animate();
-
     this.hudLayer.animate();
-    this.renderer.render(this.hudLayer.scene, this.hudLayer.camera);
   }
 
   /** リサイズ時の処理 */
@@ -46,9 +48,7 @@ export default class Battle {
     this.hudLayer.resize();
   }
 
-  /**
-   * デバッグモードの設定を行う
-   */
+  /** デバッグモードの設定を行う */
   debugMode() {
     this.threeDimensionLayer.actors.scene.add(new THREE.AxisHelper(1000));
 
@@ -58,12 +58,11 @@ export default class Battle {
   }
 
   /**
-   * プレイヤーキャラがパンチする
+   * 状態変更時の処理
+   *
+   * @param state 画面の状態
    */
-  punchPlayer() {
-    /*
-    this.threeDimensionLayer.playerSprite.tween.stop();
-    this.threeDimensionLayer.playerSprite.tween.start();
-    */
+  async updateState(state: State): Promise {
+
   }
 }

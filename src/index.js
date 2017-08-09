@@ -12,7 +12,7 @@ import BattleApplication from './appication/battle/index.js';
 
   const app = new BattleApplication({resources: resourceManager.resources});
   app.debugMode();
-  
+
   document.body.appendChild(app.renderer.domElement);
 
   window.onclick = () => app.punchPlayer();
