@@ -15,7 +15,7 @@ import BattleApplication from './appication/battle/index.js';
 
   document.body.appendChild(app.renderer.domElement);
 
-  window.onclick = () => app.punchPlayer();
+  window.onclick = () => app.update({});
   window.addEventListener('resize', () => app.resize(), false);
 
   const animate = (time: number) => {

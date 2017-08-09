@@ -60,9 +60,14 @@ export default class Battle {
   /**
    * 状態変更時の処理
    *
-   * @param state 画面の状態
+   * @param state 画面状態
+   * @return 結果を返すPromise
    */
-  async updateState(state: State): Promise {
+  async update(state: State): Promise<void> {
+    return Promise.all([
+      this.threeDimensionLayer.update(state),
+      this.hudLayer.update(state)
+    ]);
 
   }
 }

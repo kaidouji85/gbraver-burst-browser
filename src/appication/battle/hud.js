@@ -1,4 +1,5 @@
 // @flow
+import type {State} from './state';
 import ThreeLib from 'three-js';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
@@ -82,6 +83,17 @@ export default class Hud {
     this.camera.top = window.innerHeight/2;
     this.camera.bottom = -window.innerHeight/2;
     this.camera.updateProjectionMatrix();
+  }
+
+  /**
+   * 画面状態が更新された場合の処理
+   *
+   * @param state 画面除隊
+   * @return 結果を返すPromise
+   */
+  update(state: State): Promise<void> {
+    // NOP
+    return Promise.resolve();
   }
 
 }

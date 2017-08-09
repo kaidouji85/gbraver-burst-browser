@@ -1,5 +1,6 @@
 // @flow
 import type {Resources} from '../../../common/resource-manager';
+import type {State} from '../state';
 import ThreeLib from 'three-js';
 import Actors from './actors';
 
@@ -33,5 +34,19 @@ export default class Battle {
   resize() {
     this.actors.camera.aspect = window.innerWidth / window.innerHeight;
     this.actors.camera.updateProjectionMatrix();
+  }
+
+  /**
+   * 状態変更時の処理
+   *
+   * @param state 画面状態
+   * @return 結果を返すPromise
+   */
+  update(state: State): Promise<void> {
+    // 本来ならstateに応じて処理分岐をするところだが、
+    // 現状ではパンチアクションしかないため、ベタ書きしている
+    this.actors.playerSprite.tween.stop();
+    this.actors.playerSprite.tween.start();
+    return Promise.resolve();
   }
 }
