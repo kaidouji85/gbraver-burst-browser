@@ -1,4 +1,5 @@
 // @flow
+import type {State} from './state';
 import ThreeLib from 'three-js';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
@@ -22,6 +23,9 @@ function CanvasMesh(canvas: HTMLCanvasElement): THREE.Mesh {
 
 /** Head Up Display(HUD)のレイヤー */
 export default class Hud {
+  /** レンダラー */
+  rendeer: THREE.WebGLRenderer;
+
   /** 本レイヤーのベースとなるシーン */
   scene: THREE.Scene;
 
@@ -37,7 +41,9 @@ export default class Hud {
   /** キャンバスから生成したメッシュ */
   canvasMesh: THREE.Mesh;
 
-  constructor() {
+  constructor(props: {renderer: THREE.WebGLRenderer}) {
+    this.rendeer = props.renderer;
+
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.OrthographicCamera(
@@ -66,6 +72,8 @@ export default class Hud {
   animate() {
     this.contextOf2D.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.contextOf2D.fillText('HUD Display', window.innerWidth / 2, window.innerHeight / 2);
+
+    this.rendeer.render(this.scene, this.camera);
   }
 
   /** リサイズ時の処理 */
@@ -75,6 +83,17 @@ export default class Hud {
     this.camera.top = window.innerHeight/2;
     this.camera.bottom = -window.innerHeight/2;
     this.camera.updateProjectionMatrix();
+  }
+
+  /**
+   * 画面状態が更新された場合の処理
+   *
+   * @param state 画面除隊
+   * @return 結果を返すPromise
+   */
+  update(state: State): Promise<void> {
+    // NOP
+    return Promise.resolve();
   }
 
 }

@@ -1,16 +1,16 @@
 // @flow
-import type {Resources} from '../common/resource-manager';
+import type {Resources} from '../../../common/resource-manager';
 import ThreeLib from 'three-js';
-import SchoolStage from '../stage/kamata/index';
-import ShinBraver from '../armdozer/shin-breaver';
-import NeoLandozer from '../armdozer/neo-landozer';
+import SchoolStage from '../../../stage/kamata/index';
+import ShinBraver from '../../../armdozer/shin-breaver';
+import NeoLandozer from '../../../armdozer/neo-landozer';
 
 const THREE = ThreeLib([]);
 
 /**
- * バトルフィールドのレイヤー
+ *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
  */
-export default class Battle {
+export default class Actors {
   /** シーン */
   scene: THREE.Scene;
 
@@ -44,18 +44,5 @@ export default class Battle {
     this.enemySprite = new NeoLandozer(props.resources);
     this.enemySprite.mesh.position.x = -150;
     this.scene.add(this.enemySprite.mesh);
-  }
-
-  /** ゲームループでの処理 */
-  animate() {
-    this.battleField.animate(this.camera);
-    this.playerSprite.animate(this.camera);
-    this.enemySprite.animate(this.camera);
-  }
-
-  /** ウインドウリサイズ時の処理 */
-  resize() {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
   }
 }
