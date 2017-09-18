@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../../../common/resource-manager';
+import type {Resources} from '/../../common/resource-manager';
 import type {State} from '../state';
 import ThreeLib from 'three-js';
 import Actors from './actors';
