@@ -2,8 +2,8 @@
 import type {Resources} from '../common/resource-manager';
 import type {State} from './state';
 import ThreeLib from 'three-js';
-import ThreeDimensionLayer from './three-dimension';
-import HudLayer from './hud';
+import ThreeDimensionLayer from './three-dimension-layer';
+import HudLayer from './hud-layer';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 

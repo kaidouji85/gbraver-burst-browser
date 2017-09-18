@@ -22,7 +22,7 @@ function CanvasMesh(canvas: HTMLCanvasElement): THREE.Mesh {
 }
 
 /** Head Up Display(HUD)のレイヤー */
-export default class Hud {
+export default class HudLayer {
   /** レンダラー */
   rendeer: THREE.WebGLRenderer;
 
