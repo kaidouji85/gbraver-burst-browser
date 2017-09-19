@@ -19,11 +19,20 @@ export function loadModel(path: string): Promise<{geometry: THREE.Geometry, mate
  *
  * @aram path ファイルパス
  * @return  読み込み結果
- *
- * @param path
- * @returns {Promise}
  */
 export function loadTexture(path: string): Promise<THREE.Texture> {
   let loader = new THREE.TextureLoader();
   return new Promise(resolve => loader.load(path, texture => resolve(texture)));
+}
+
+/**
+ * CANVAS用画像ファイルを読み込む
+ *
+ * @param path ファイルパス
+ * @return 読み込み結果
+ */
+export function loadCanvasImage(path: string): Promise<Image> {
+  const img = new Image();
+  img.src = path;
+  return new Promise(resolve => img.onload = () => resolve(img))
 }

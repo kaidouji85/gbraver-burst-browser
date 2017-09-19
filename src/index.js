@@ -7,7 +7,8 @@ import BattleApplication from './battle/index.js';
   const resourceManager:  ResourceManager = new ResourceManager();
   await Promise.all([
     resourceManager.loadModels(),
-    resourceManager.loadTextures()
+    resourceManager.loadTextures(),
+    resourceManager.loadCanvasImages(),
   ]);
 
   const app = new BattleApplication({resources: resourceManager.resources});

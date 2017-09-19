@@ -1,6 +1,8 @@
 // @flow
 import type {State} from './state';
+import type {Resources} from '../common/resource-manager';
 import ThreeLib from 'three-js';
+import PlayerGauge from '../gauge/player-gauge';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
@@ -41,8 +43,13 @@ export default class HudLayer {
   /** キャンバスから生成したメッシュ */
   canvasMesh: THREE.Mesh;
 
-  constructor(props: {renderer: THREE.WebGLRenderer}) {
+  /** リソース管理オブジェクト */
+  resources: Resources;
+
+  constructor(props: {renderer: THREE.WebGLRenderer, resources: Resources}) {
     this.rendeer = props.renderer;
+
+    this.resources = props.resources;
 
     this.scene = new THREE.Scene();
 
@@ -72,6 +79,12 @@ export default class HudLayer {
   animate() {
     this.contextOf2D.clearRect(0, 0, window.innerWidth, window.innerHeight);
     this.contextOf2D.fillText('HUD Display', window.innerWidth / 2, window.innerHeight / 2);
+    PlayerGauge({
+      context: this.contextOf2D,
+      resources: this.resources,
+      x: 0,
+      y: 0,
+    });
 
     this.rendeer.render(this.scene, this.camera);
   }

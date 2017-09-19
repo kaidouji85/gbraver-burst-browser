@@ -31,7 +31,8 @@ export default class Battle {
     });
 
     this.hudLayer = new HudLayer({
-      renderer: this.renderer
+      renderer: this.renderer,
+      resources: props.resources
     });
   }
 
