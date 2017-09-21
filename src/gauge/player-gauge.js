@@ -1,33 +1,36 @@
 //@flow
 
 import type {Resources,} from '../common/resource-manager';
+import ThreeLib from 'three-js';
 import {CANVAS_PICTURE_PATH} from '../common/resource-manager';
+import {createCanvasMesh} from '../common/mesh-creator';
 
-/** プロパティ */
-type Props = {
-  /** リソース管理オブジェクト */
-  resources: Resources;
-
-  /** 描画先のキャンバス */
-  context: CanvasRenderingContext2D;
-
-  /** 描画先X座標 */
-  x: number;
-
-  /** 描画先Y座標 */
-  y: number;
-}
+const THREE = ThreeLib([]);
 
 /**
- * プレイヤーのゲージ
- *
- * @param props プロパティ
+ * プレイヤーゲージのクラス
  */
-export default function PlayerGauge(props: Props): void {
-  const image = props.resources.canvasImages.find(item => item.path === CANVAS_PICTURE_PATH.PLAYER_GAUGE);
-  if (!image) {
-      return;
+export default class PlayerGauge {
+  /** リソース管理クラス */
+  resources: Resources;
+
+  /** メッシュ */
+  mesh: THREE.Mesh;
+
+  /** 描画を行うキャンバス */
+  canvas: HTMLCanvasElement;
+
+  constructor(resources: Resources) {
+    this.resources = resources;
+    this.canvas = document.createElement('canvas');
+    this.mesh = createCanvasMesh(this.canvas, 240, 148);
+
+    this.refresh();
   }
 
-  props.context.drawImage(image.image, props.x, props.y);
+  refresh() {
+    const image = this.resources.canvasImages.find(item => item.path === CANVAS_PICTURE_PATH.PLAYER_GAUGE);
+    const context = this.canvas.getContext('2d');
+    context.drawImage(image.image, 0, 0);
+  }
 }

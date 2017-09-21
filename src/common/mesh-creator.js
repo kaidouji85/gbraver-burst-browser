@@ -24,3 +24,22 @@ export function createMeshFromJson(modelPath: string, resources: Resources): THR
   let faceMat = new THREE.MeshFaceMaterial(model.material);
   return new THREE.Mesh(model.geometry, faceMat);
 }
+
+/**
+ * キャンバスから平面メッシュを生成する
+ *
+ * @param canvas キャンバス
+ * @param width 幅
+ * @param height 高
+ * @return キャンバスから生成したメッシュ
+ */
+export function createCanvasMesh(canvas: HTMLCanvasElement, width: number, height: number) {
+  const texture = new THREE.Texture(canvas);
+  texture.needsUpdate = true;
+
+  const material = new THREE.MeshBasicMaterial( {map: texture } );
+  material.transparent = true;
+
+  var planeGeometry = new THREE.PlaneGeometry( width, height );
+  return new THREE.Mesh(planeGeometry, material);
+}
