@@ -2,7 +2,7 @@
 import type {State} from '../state';
 import type {Resources} from '../../common/resource-manager';
 import ThreeLib from 'three-js';
-import PlayerGauge from '../../gauge/player-gauge';
+import {PlayerGauge} from '../../gauge/player-gauge';
 
 const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
