@@ -1,9 +1,7 @@
 // @flow
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
 import R from 'ramda';
-import {loadModel, loadTexture} from './resource-loader';
-
-const THREE = ThreeLib(['JSONLoader']);
+import {loadModel, loadTexture, loadCanvasImage} from './resource-loader';
 
 /**
  * モデルのパス定数
@@ -49,15 +47,30 @@ export const TEXTURE_PATHS = {
   BLUE_SKY_DOWN: 'sky-box/blue-sky/down.png',
 };
 
+
+/**
+ * キャンバス用画像ファイルのパス定数
+ *
+ * resourcesフォルダ配下からの早退パスを記入する
+ * パスの先頭に/(スラッシュ)をつける必要はない
+ */
+export const CANVAS_PICTURE_PATH = {
+  PLAYER_GAUGE: 'gauge/player-gauge.png',
+  ENEMY_GAUGE: 'gauge/enemy-gauge.png',
+};
+
 /**
  * リソース管理オブジェクト
  */
 export type Resources = {
   /** モデル */
-    models: Model[],
+  models: Model[];
 
   /** テクスチャ */
-    textures: Texture[]
+  textures: Texture[];
+
+  /** キャンパス用画像 */
+  canvasImages: CanvasPicture[];
 };
 
 /**
@@ -65,13 +78,13 @@ export type Resources = {
  */
 export type Model = {
   /** モデルのパス */
-    path: string,
+  path: string;
 
   /** 形状 */
-    geometry: THREE.Geometry,
+  geometry: THREE.Geometry;
 
   /** 材質 */
-    material: THREE.Material
+  material: THREE.Material;
 };
 
 /**
@@ -79,10 +92,21 @@ export type Model = {
  */
 export type Texture = {
   /** テクスチャのパス */
-    path: string,
+  path: string;
 
   /** テクスチャ */
-    texture: THREE.Texture
+  texture: THREE.Texture;
+};
+
+/**
+ * キャンバス用画像管理オブジェクト
+ */
+export type CanvasPicture = {
+  /** キャンバス用画像のパス */
+  path: string;
+
+  /** キャンバス用画像 */
+  image: Image;
 };
 
 /**
@@ -138,5 +162,25 @@ export class ResourceManager {
         this.resources.textures = textures;
         return this;
       });
+  }
+
+  /**
+   * 本ゲームで使用するキャンバス用画像をすべて読み込む
+   *
+   * @return 結果を返すPromise
+   */
+  async loadCanvasImages(): Promise<ResourceManager> {
+    const load: Promise<CanvasPicture> = async (path) => {
+      const image = await loadCanvasImage(`${this.basePath}${path}`);
+      return {path, image};
+    }
+
+    const canvasImages = await Promise.all(
+      R.values(CANVAS_PICTURE_PATH)
+        .map(load)
+    );
+
+    this.resources.canvasImages = canvasImages;
+    return this;
   }
 }

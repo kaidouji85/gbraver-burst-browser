@@ -1,21 +1,23 @@
 // @flow
 import Tween from 'tween.js';
 import {ResourceManager} from './common/resource-manager';
-import BattleApplication from './appication/battle';
+import BattleApplication from './battle/index.js';
 
 (async function(){
   const resourceManager:  ResourceManager = new ResourceManager();
   await Promise.all([
     resourceManager.loadModels(),
-    resourceManager.loadTextures()
+    resourceManager.loadTextures(),
+    resourceManager.loadCanvasImages(),
   ]);
 
   const app = new BattleApplication({resources: resourceManager.resources});
-  document.body.appendChild(app.renderer.domElement);
-  window.onclick = () => app.punchPlayer();
+  app.debugMode();
 
-  const onResize = () => app.resize();
-  window.addEventListener('resize', onResize, false);
+  document.body.appendChild(app.renderer.domElement);
+
+  window.onclick = () => app.update({});
+  window.addEventListener('resize', () => app.resize(), false);
 
   const animate = (time: number) => {
     requestAnimationFrame( animate );

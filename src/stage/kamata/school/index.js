@@ -1,6 +1,6 @@
 // @flow
 import type {Resources} from '../../../common/resource-manager';
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
 import R from 'ramda';
 import {MODEL_PATHS} from '../../../common/resource-manager';
 import {createMeshFromJson} from '../../../common/mesh-creator';
@@ -8,8 +8,6 @@ import TreeBillBoard from './tree-bill-board';
 import GroundMesh from './ground-sand';
 import FenceMesh from './fence';
 import StoneFence from './stone-fence'
-
-const THREE = ThreeLib();
 
 /**
  * 校舎セット
