@@ -1,6 +1,5 @@
 // @flow
-import ThreeLib from 'three-js';
-const THREE = ThreeLib();
+import * as THREE from 'three';
 
 /**
  * 平面オブジェクトにＵＶマッピングの設定をする

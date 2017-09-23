@@ -1,7 +1,5 @@
 // @flow
-import ThreeLib from 'three-js';
-
-const THREE = ThreeLib(['JSONLoader']);
+import * as THREE from 'three';
 
 /**
  * JSONモデルを読み込むヘルパー関数

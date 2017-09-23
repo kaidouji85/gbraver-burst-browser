@@ -1,11 +1,9 @@
 // @flow
 import type {Resources} from '../../common/resource-manager';
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
 import SchoolStage from '../../stage/kamata/index';
 import ShinBraver from '../../armdozer/shin-breaver';
 import NeoLandozer from '../../armdozer/neo-landozer';
-
-const THREE = ThreeLib([]);
 
 /**
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス

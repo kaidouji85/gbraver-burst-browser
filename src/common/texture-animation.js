@@ -1,6 +1,5 @@
 // @flow
-import ThreeLib from 'three-js';
-const THREE = ThreeLib();
+import * as THREE from 'three';
 
 //TODO 使い方を詳細に書く
 /**
