@@ -1,10 +1,9 @@
 // @flow
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
+import OrbitControls from 'three-orbitcontrols';
 import {ResourceManager} from '../../src/common/resource-manager';
 import SchoolStage from '../../src/stage/kamata';
 
-
-const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
 let scene: THREE.Scene;
 let camera: THREE.Camera;
@@ -46,7 +45,7 @@ function init(): void {
   renderer.setSize( window.innerWidth, window.innerHeight );
 
   // コントローラー
-  let controls = new THREE.OrbitControls(camera, renderer.domElement);
+  let controls = new OrbitControls(camera, renderer.domElement);
   controls.maxDistance = 1000;
   controls.maxPolarAngle = Math.PI * 0.48;
 
