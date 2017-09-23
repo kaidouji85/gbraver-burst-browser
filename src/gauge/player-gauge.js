@@ -1,11 +1,9 @@
 //@flow
 
 import type {Resources,} from '../common/resource-manager';
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
 import {CANVAS_PICTURE_PATH} from '../common/resource-manager';
 import {createCanvasMesh} from '../common/mesh-creator';
-
-const THREE = ThreeLib([]);
 
 /** 画像幅 */
 export const PICT_WIDTH = 240;

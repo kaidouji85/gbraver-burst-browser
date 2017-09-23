@@ -1,9 +1,7 @@
 // @flow
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
 import R from 'ramda';
 import {loadModel, loadTexture, loadCanvasImage} from './resource-loader';
-
-const THREE = ThreeLib(['JSONLoader']);
 
 /**
  * モデルのパス定数

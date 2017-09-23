@@ -1,9 +1,7 @@
 // @flow
 import type {Resources} from '../../common/resource-manager';
 import {TEXTURE_PATHS} from '../../common/resource-manager';
-import ThreeLib from 'three-js';
-
-const THREE = ThreeLib();
+import * as THREE from 'three';
 
 const WIDTH =  9000;
 const HEIGHT = 9000;

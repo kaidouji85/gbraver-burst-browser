@@ -4,8 +4,7 @@
  * メッシュ関連のユーティリティ
  */
 import type {Resources} from './resource-manager'
-import ThreeLib from 'three-js';
-const THREE = ThreeLib();
+import * as THREE from 'three';
 
 /**
  * JSONから読み込んだデータからメッシュを生成するヘルパー関数

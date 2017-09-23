@@ -1,10 +1,8 @@
 // @flow
 import type {State} from '../state';
 import type {Resources} from '../../common/resource-manager';
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
 import {PlayerGauge} from '../../gauge/player-gauge';
-
-const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
 /** Head Up Display(HUD)のレイヤー */
 export default class HudLayer {

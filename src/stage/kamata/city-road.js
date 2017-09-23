@@ -1,11 +1,9 @@
 // @flow
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
 import R from 'ramda';
 import type {Resources} from '../../common/resource-manager';
 import {TEXTURE_PATHS} from '../../common/resource-manager';
 import {setUvMapping} from '../../common/uv-mapper';
-
-const THREE = ThreeLib();
 
 /** メッシュ幅 */
 const MESH_WIDTH = 50;

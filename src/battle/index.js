@@ -1,11 +1,10 @@
 // @flow
 import type {Resources} from '../common/resource-manager';
 import type {State} from './state';
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
+import OrbitControls from 'three-orbitcontrols';
 import ThreeDimensionLayer from './three-dimension-layer';
 import HudLayer from './hud-layer';
-
-const THREE = ThreeLib(['JSONLoader', 'OrbitControls']);
 
 /**
  * 戦闘画面
@@ -53,7 +52,11 @@ export default class Battle {
   debugMode() {
     this.threeDimensionLayer.actors.scene.add(new THREE.AxisHelper(1000));
 
-    const controls = new THREE.OrbitControls(this.threeDimensionLayer.actors.camera, this.renderer.domElement);
+    //const controls = new THREE.OrbitControls(this.threeDimensionLayer.actors.camera, this.renderer.domElement);
+    //controls.maxDistance = 1000;
+    //controls.maxPolarAngle = Math.PI * 0.48;
+
+    const controls = new OrbitControls(this.threeDimensionLayer.actors.camera, this.renderer.domElement);
     controls.maxDistance = 1000;
     controls.maxPolarAngle = Math.PI * 0.48;
   }

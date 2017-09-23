@@ -1,10 +1,8 @@
 // @flow
 import type {Resources} from '/../../common/resource-manager';
 import type {State} from '../state';
-import ThreeLib from 'three-js';
+import * as THREE from 'three';
 import Actors from './actors';
-
-const THREE = ThreeLib([]);
 
 /**
  * 3D空間のレイヤー
