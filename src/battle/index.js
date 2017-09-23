@@ -2,6 +2,7 @@
 import type {Resources} from '../common/resource-manager';
 import type {State} from './state';
 import * as THREE from 'three';
+import OrbitControls from 'three-orbitcontrols';
 import ThreeDimensionLayer from './three-dimension-layer';
 import HudLayer from './hud-layer';
 
@@ -54,6 +55,10 @@ export default class Battle {
     //const controls = new THREE.OrbitControls(this.threeDimensionLayer.actors.camera, this.renderer.domElement);
     //controls.maxDistance = 1000;
     //controls.maxPolarAngle = Math.PI * 0.48;
+
+    const controls = new OrbitControls(this.threeDimensionLayer.actors.camera, this.renderer.domElement);
+    controls.maxDistance = 1000;
+    controls.maxPolarAngle = Math.PI * 0.48;
   }
 
   /**

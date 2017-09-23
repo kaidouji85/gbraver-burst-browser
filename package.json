@@ -19,6 +19,7 @@
   "dependencies": {
     "ramda": "^0.23.0",
     "three": "^0.87.1",
+    "three-orbitcontrols": "^1.2.1",
     "tween.js": "^16.6.0"
   },
   "devDependencies": {
