@@ -2,7 +2,7 @@
 import type {State} from '../state';
 import type {Resources} from '../../common/resource-manager';
 import * as THREE from 'three';
-import {PlayerGauge} from '../../gauge/player-gauge';
+import {PlayerGauge, MESH_WIDTH, MESH_HEIGHT} from '../../gauge/player-gauge';
 
 /** Head Up Display(HUD)のレイヤー */
 export default class HudLayer {
@@ -40,8 +40,10 @@ export default class HudLayer {
 
   /** ゲームループでの処理 */
   animate() {
-    this.playerGauge.mesh.position.x = 0;
-    this.playerGauge.mesh.position.y = 0;
+    this.playerGauge.mesh.position.x = (window.innerWidth - MESH_WIDTH) / 2;
+    this.playerGauge.mesh.position.y = (window.innerHeight - MESH_HEIGHT) / 2;
+    //this.playerGauge.mesh.position.x = window.innerWidth/2;
+    //this.playerGauge.mesh.position.y = 0;
 
     this.rendeer.render(this.scene, this.camera);
   }
