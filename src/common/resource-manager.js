@@ -57,6 +57,7 @@ export const TEXTURE_PATHS = {
 export const CANVAS_PICTURE_PATH = {
   PLAYER_GAUGE: 'gauge/player-gauge.png',
   ENEMY_GAUGE: 'gauge/enemy-gauge.png',
+  PLAYER_HP_GAUGE_BASE: 'gauge/player-hp-gauge/base.png',
 };
 
 /**
@@ -116,7 +117,10 @@ export class ResourceManager {
   /** リソース管理オブジェクト */
   resources: Resources;
 
-  /** リソースのベースとなるパス */
+  /**
+   * リソースのベースとなるパス
+   * 本クラスを呼び出したファイルからresourcesフォルダの相対パスを指定する
+   */
   basePath: string;
 
   constructor(basePath: string) {
