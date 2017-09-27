@@ -1,9 +1,6 @@
 // @flow
 import * as THREE from 'three';
 
-const BASE_MESH_WIDTH = 100;
-const BASE_MESH_HEIGHT = 100;
-
 /**
  * キャンバスから平面メッシュを生成する
  *
@@ -12,14 +9,14 @@ const BASE_MESH_HEIGHT = 100;
  * @param height 高
  * @return キャンバスから生成したメッシュ
  */
-export function createCanvasMesh(canvas: HTMLCanvasElement) {
+function createCanvasMesh(canvas: HTMLCanvasElement) {
   const texture = new THREE.Texture(canvas);
   texture.needsUpdate = true;
 
   const material = new THREE.MeshBasicMaterial( {map: texture } );
   material.transparent = true;
 
-  var planeGeometry = new THREE.PlaneGeometry( BASE_MESH_WIDTH, BASE_MESH_HEIGHT );
+  var planeGeometry = new THREE.PlaneGeometry( window.innerWidth, window.innerHeight );
   return new THREE.Mesh(planeGeometry, material);
 }
 
@@ -71,22 +68,4 @@ export class CanvasScene {
   render() {
     this.renderer.render(this.scene, this.camera);
   }
-
-  /** リザイズ時の処理 */
-  resize() {
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-    this.camera.left = -window.innerWidth/2;
-    this.camera.right = window.innerWidth/2;
-    this.camera.top = window.innerHeight/2;
-    this.camera.bottom = -window.innerHeight/2;
-    this.camera.updateProjectionMatrix();
-
-    this.mesh.scale.set(window.innerWidth/BASE_MESH_WIDTH, window.innerHeight/BASE_MESH_HEIGHT, 1);
-
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
-  }
-
-
 }
