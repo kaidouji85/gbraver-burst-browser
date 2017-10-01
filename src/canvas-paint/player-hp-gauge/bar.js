@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../common/resource-manager';
 import {CANVAS_PICTURE_PATH} from '../../common/resource-manager';
-import {drawImage} from '../../common/canvas-image-util';
+import {drawImage} from '../../common/canvas-image-drawer';
 
 /**
  * 台形にクリッピングする
@@ -43,18 +43,6 @@ function clip(context: CanvasRenderingContext2D, resources: Resources, dx: numbe
   context.clip();
 }
 
-function getValidPercent(percent: number): number {
-  if (percent > 1) {
-    return 1;
-  }
-
-  if (percent < 0) {
-    return 0;
-  }
-
-  return percent;
-}
-
 /**
  * HPバーを描画する
  * ローカル座標の原点は中心
@@ -66,11 +54,21 @@ function getValidPercent(percent: number): number {
  * @param percent バーが何%の状態かを0から1で指定する
  */
 export function PlayerHpBar(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, percent: number) {
-  const validPercent = getValidPercent(percent);
+  const validPercent = (() => {
+    if (percent > 1) {
+      return 1;
+    }
 
-  drawImage(context, CANVAS_PICTURE_PATH.PLAYER_HP_BAR_DOWN, resources, dx, dy);
+    if (percent < 0) {
+      return 0;
+    }
+
+    return percent;
+  })();
+
+  drawImage(context, resources, CANVAS_PICTURE_PATH.PLAYER_HP_BAR_DOWN, dx, dy);
   context.save();
   clip(context, resources, dx, dy, validPercent);
-  drawImage(context, CANVAS_PICTURE_PATH.PLAYER_HP_BAR_UP, resources, dx, dy);
+  drawImage(context, resources, CANVAS_PICTURE_PATH.PLAYER_HP_BAR_UP, dx, dy);
   context.restore();
 }

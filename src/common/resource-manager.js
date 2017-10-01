@@ -58,6 +58,10 @@ export const CANVAS_PICTURE_PATH = {
   PLAYER_GAUGE: 'gauge/player-gauge.png',
   ENEMY_GAUGE: 'gauge/enemy-gauge.png',
 
+  // 数字系画像
+  HP_NUMBER: 'gauge/number/hp-number.png',
+
+  // プレイヤーHPゲージ系
   PLAYER_HP_GAUGE_BASE: 'gauge/player-hp-gauge/base.png',
   PLAYER_HP_BAR_DOWN: 'gauge/player-hp-gauge/hp-bar-down.png',
   PLAYER_HP_BAR_UP: 'gauge/player-hp-gauge/hp-bar-up.png',

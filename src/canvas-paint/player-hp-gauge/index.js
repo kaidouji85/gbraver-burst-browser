@@ -1,8 +1,9 @@
 // @flow
 import type {Resources} from '../../common/resource-manager';
 import {CANVAS_PICTURE_PATH} from '../../common/resource-manager';
-import {drawImage} from '../../common/canvas-image-util';
+import {drawImage} from '../../common/canvas-image-drawer';
 import {PlayerHpBar} from './bar';
+import {drawNumber} from '../../common/canvas-number-drawe';
 
 /**
  * HPゲージを描画する
@@ -16,7 +17,8 @@ import {PlayerHpBar} from './bar';
  * @param maxHP 最大HP
  */
 export function PlayerHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
-  drawImage(context, CANVAS_PICTURE_PATH.PLAYER_HP_GAUGE_BASE, resources, dx, dy);
+  drawImage(context, resources, CANVAS_PICTURE_PATH.PLAYER_HP_GAUGE_BASE, dx, dy);
   const value = hp / maxHp;
   PlayerHpBar(context, resources, dx-8, dy+8, value);
+  drawNumber(context, resources, CANVAS_PICTURE_PATH.HP_NUMBER, dx-36, dy-4, hp);
 }

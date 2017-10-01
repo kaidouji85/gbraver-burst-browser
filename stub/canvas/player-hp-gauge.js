@@ -4,5 +4,13 @@ import {CanvasStubBase} from '../util/canvas-stub-base';
 import {PlayerHpGauge} from '../../src/canvas-paint/player-hp-gauge';
 
 CanvasStubBase((context: CanvasRenderingContext2D, reources: Resources) => {
-  PlayerHpGauge(context, reources, window.innerWidth / 2, window.innerHeight / 2, 1000, 3000);
+  const basicX = window.innerWidth / 2;
+  const basicY = window.innerHeight / 2;
+  const heightMargin = 80;
+
+  PlayerHpGauge(context, reources, basicX, basicY - heightMargin * 2, 3200, 3200);
+  PlayerHpGauge(context, reources, basicX, basicY - heightMargin * 1, 1948, 3200);
+  PlayerHpGauge(context, reources, basicX, basicY, 156, 3000);
+  PlayerHpGauge(context, reources, basicX, basicY + heightMargin * 1, 56, 3000);
+  PlayerHpGauge(context, reources, basicX, basicY + heightMargin * 2, 4, 3000);
 });
