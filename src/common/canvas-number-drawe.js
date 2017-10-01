@@ -1,11 +1,16 @@
 // @flow
 
-import type {Resources} from './resource-manager';
-import {CANVAS_PICTURE_PATH} from './resource-manager';
+import type {Resources} from './resource-manager'
+
+function createNumberArray(value: number): number[] {
+  return String(value)
+    .split('')
+    .map(v => Number(v));
+}
 
 /**
  * 1桁の数字を描画する
- * ローカル座標原点は右下である
+ * ローカル座標原点は左上である。
  *
  * @param context 描画対象のキャンバスコンテキスト
  * @param image 数字画像
@@ -29,12 +34,31 @@ function drawSingleNumber(context: CanvasRenderingContext2D, image: Image, dx: n
   const sy = 0;
   const sw = basicWidth;
   const sh = image.height;
-  const x = dx - basicWidth;
-  const y = dy - image.height;
   const dw = basicWidth;
   const dh = image.height;
 
-  context.drawImage(image, sx, sy, sw, sh, x, y, dw, dh);
+  context.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
+}
+
+/**
+ * キャンバスに画像数字を描画する
+ * ローカル座標原点は数字の左上となる
+ *
+ * @param context 描画対象のキャンバスコンテキスト
+ * @param resources リソース管理オブジェクト
+ * @param imagePath 数字画像のパス
+ * @param dx 描画X
+ * @param dy 描画Y
+ * @param value 描画する数字の値
+ */
+export function drawNumberLeft(context: CanvasRenderingContext2D, resources: Resources, imagePath: string, dx: number, dy: number, value: number): void {
+  const image = resources.canvasImages.find(v => v.path === imagePath) || {};
+  const basicWidth = image.image.width / 10;
+
+  createNumberArray(value).forEach((num, index) => {
+    const x = dx + basicWidth * index;
+    drawSingleNumber(context, image.image, x, dy, num);
+  });
 }
 
 /**
@@ -47,20 +71,38 @@ function drawSingleNumber(context: CanvasRenderingContext2D, image: Image, dx: n
  * @param dx 描画X
  * @param dy 描画Y
  * @param value 描画する数字の値
+ */
+export function drawNumberRight(context: CanvasRenderingContext2D, resources: Resources, imagePath: string, dx: number, dy: number, value: number): void {
+  const image = resources.canvasImages.find(v => v.path === imagePath) || {};
+  const basicWidth = image.image.width / 10;
+
+  const numberArray = createNumberArray(value);
+  const numberDigit = numberArray.length;
+
+  const x = dx - basicWidth * numberDigit;
+  drawNumberLeft(context, resources, imagePath, x, dy, value);
+}
+
+/**
+ * キャンバスに画像数字を描画する
+ * ローカル座標原点は数字の中央となる
  *
- * @author y.takeuchi
+ * @param context 描画対象のキャンバスコンテキスト
+ * @param resources リソース管理オブジェクト
+ * @param imagePath 数字画像のパス
+ * @param dx 描画X
+ * @param dy 描画Y
+ * @param value 描画する数字の値
  */
 export function drawNumber(context: CanvasRenderingContext2D, resources: Resources, imagePath: string, dx: number, dy: number, value: number): void {
   const image = resources.canvasImages.find(v => v.path === imagePath) || {};
   const basicWidth = image.image.width / 10;
 
-  // 配列の順番を1の位 -> 10の位 -> ... としたいので、reverseで配列を反転している
-  const numberArray = String(value).split('')
-    .map(v => Number(v))
-    .reverse();
+  const numberArray = createNumberArray(value);
+  const numberDigit = numberArray.length;
 
-  numberArray.forEach((num, index) => {
-    const x = dx - basicWidth * index;
-    drawSingleNumber(context, image.image, x, dy, num);
-  });
+  const x = dx - (basicWidth * numberDigit) / 2;
+  const y = dy - image.image.height / 2;
+
+  drawNumberLeft(context, resources, imagePath, x, y, value);
 }
