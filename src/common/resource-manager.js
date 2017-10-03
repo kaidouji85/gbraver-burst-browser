@@ -61,10 +61,11 @@ export const CANVAS_PICTURE_PATH = {
   // 数字系画像
   HP_NUMBER: 'gauge/number/hp-number.png',
 
-  // プレイヤーHPゲージ系
-  PLAYER_HP_GAUGE_BASE: 'gauge/player-hp-gauge/base.png',
-  PLAYER_HP_BAR_DOWN: 'gauge/player-hp-gauge/hp-bar-down.png',
-  PLAYER_HP_BAR_UP: 'gauge/player-hp-gauge/hp-bar-up.png',
+  // HPゲージ系
+  HP_GAUGE_BASE: 'gauge/hp-gauge/hp-gauge-base.png',
+  HP_BAR_DOWN: 'gauge/hp-gauge/hp-bar-down.png',
+  HP_BAR_UP: 'gauge/hp-gauge/hp-bar-up.png',
+  HP_GAUGE_LABEL: 'gauge/hp-gauge/hp-gauge-label.png',
 };
 
 /**

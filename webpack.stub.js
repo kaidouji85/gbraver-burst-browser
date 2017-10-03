@@ -14,7 +14,8 @@ const SERVE_PATH = path.resolve(__dirname, 'build/stub');
  * 値: スタブファイルのパス
  */
 const STUB_ENTRY_FILES = {
-  'canvas/player-hp-gauge': `${STUB_PATH}/canvas/player-hp-gauge`
+  'canvas/player-hp-gauge': `${STUB_PATH}/canvas/player-hp-gauge`,
+  'canvas/enemy-hp-gauge': `${STUB_PATH}/canvas/enemy-hp-gauge`
 };
 
 /**

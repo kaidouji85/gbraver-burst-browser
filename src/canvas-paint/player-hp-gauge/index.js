@@ -3,7 +3,7 @@ import type {Resources} from '../../common/resource-manager';
 import {CANVAS_PICTURE_PATH} from '../../common/resource-manager';
 import {drawImage} from '../../common/canvas-image-drawer';
 import {PlayerHpBar} from './bar';
-import {drawNumberLeft} from '../../common/canvas-number-drawe';
+import {drawNumberLeft, drawNumberRight} from '../../common/canvas-number-drawe';
 
 /**
  * HPゲージを描画する
@@ -17,8 +17,26 @@ import {drawNumberLeft} from '../../common/canvas-number-drawe';
  * @param maxHP 最大HP
  */
 export function PlayerHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
-  drawImage(context, resources, CANVAS_PICTURE_PATH.PLAYER_HP_GAUGE_BASE, dx, dy);
   const value = hp / maxHp;
+
+  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_BASE, dx, dy);
   PlayerHpBar(context, resources, dx-8, dy+8, value);
+
+  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_LABEL, dx + 70, dy - 6);
   drawNumberLeft(context, resources, CANVAS_PICTURE_PATH.HP_NUMBER, dx - 100, dy - 24, hp);
+}
+
+export function EnemyHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
+  const value = hp / maxHp;
+
+  context.save();
+  context.setTransform(-1, 0, 0, 1, 0, 0);
+
+  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_BASE, -dx, dy);
+  PlayerHpBar(context, resources, -dx-8, dy+8, value);
+
+  context.restore();
+
+  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_LABEL, dx - 64, dy - 6);
+  drawNumberRight(context, resources, CANVAS_PICTURE_PATH.HP_NUMBER, dx + 100, dy - 24, hp);
 }

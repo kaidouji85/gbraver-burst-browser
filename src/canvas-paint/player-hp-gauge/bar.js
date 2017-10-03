@@ -13,7 +13,7 @@ import {drawImage} from '../../common/canvas-image-drawer';
  * @param percent バーが何%の状態かを0から1で指定する
  */
 function clip(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, percent: number) {
-  const image = resources.canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.PLAYER_HP_BAR_UP) || {};
+  const image = resources.canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.HP_BAR_UP) || {};
   const width = image.image.width;
   const height = image.image.height;
 
@@ -66,9 +66,9 @@ export function PlayerHpBar(context: CanvasRenderingContext2D, resources: Resour
     return percent;
   })();
 
-  drawImage(context, resources, CANVAS_PICTURE_PATH.PLAYER_HP_BAR_DOWN, dx, dy);
+  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_BAR_DOWN, dx, dy);
   context.save();
   clip(context, resources, dx, dy, validPercent);
-  drawImage(context, resources, CANVAS_PICTURE_PATH.PLAYER_HP_BAR_UP, dx, dy);
+  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_BAR_UP, dx, dy);
   context.restore();
 }
