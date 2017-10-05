@@ -2,13 +2,9 @@
 
 import type {Resources,} from '../common/resource-manager';
 import * as THREE from 'three';
-import {CANVAS_PICTURE_PATH} from '../common/resource-manager';
 import {createCanvasMesh} from '../common/mesh-creator';
+import {PlayerHpGauge} from '../canvas-paint/hp-gauge';
 
-/** 画像幅 */
-export const PICT_WIDTH = 240;
-/** 画像高 */
-export const PICT_HEIGHT = 148;
 /** キャンバス幅 */
 export const CANVAS_WIDTH = 256;
 /** キャンバス高 */
@@ -43,10 +39,9 @@ export class PlayerGauge {
 
   /** ゲージをリフレッシュする */
   refresh() {
-    const image = this.resources.canvasImages.find(item => item.path === CANVAS_PICTURE_PATH.PLAYER_GAUGE);
     const context = this.canvas.getContext('2d');
 
     context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    context.drawImage(image.image, (CANVAS_WIDTH - PICT_WIDTH)/2, (CANVAS_HEIGHT - PICT_HEIGHT)/2);
+    PlayerHpGauge(context, this.resources, CANVAS_WIDTH/2, CANVAS_HEIGHT/2, 3000, 3000);
   }
 }

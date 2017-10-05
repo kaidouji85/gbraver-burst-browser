@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../src/common/resource-manager';
 import {CanvasStubBase} from '../util/canvas-stub-base';
-import {EnemyHpGauge} from '../../src/canvas-paint/player-hp-gauge';
+import {EnemyHpGauge} from '../../src/canvas-paint/hp-gauge';
 
 CanvasStubBase((context: CanvasRenderingContext2D, reources: Resources) => {
   const basicX = window.innerWidth / 2;
