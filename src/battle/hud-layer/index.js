@@ -2,7 +2,7 @@
 import type {State} from '../state';
 import type {Resources} from '../../common/resource-manager';
 import * as THREE from 'three';
-import {PlayerGauge, MESH_WIDTH, MESH_HEIGHT} from '../../gauge/player-gauge';
+import {PlayerGauge, EnemyGauge, MESH_WIDTH, MESH_HEIGHT} from '../../hud/gauge-gauge';
 
 /** Head Up Display(HUD)のレイヤー */
 export default class HudLayer {
@@ -21,6 +21,9 @@ export default class HudLayer {
   /** プレイヤーゲージ */
   playerGauge: PlayerGauge;
 
+  /** 敵ゲージ */
+  enemyGauge: EnemyGauge;
+
   constructor(props: {renderer: THREE.WebGLRenderer, resources: Resources}) {
     this.resources = props.resources;
     this.rendeer = props.renderer;
@@ -35,15 +38,23 @@ export default class HudLayer {
     );
 
     this.playerGauge = new PlayerGauge(this.resources);
+    this.playerGauge.refresh();
     this.scene.add(this.playerGauge.mesh);
+
+    this.enemyGauge = new EnemyGauge(this.resources);
+    this.enemyGauge.refresh();
+    this.scene.add(this.enemyGauge.mesh);
   }
 
   /** ゲームループでの処理 */
   animate() {
     this.playerGauge.mesh.position.x = (window.innerWidth - MESH_WIDTH) / 2;
     this.playerGauge.mesh.position.y = (window.innerHeight - MESH_HEIGHT) / 2;
-    //this.playerGauge.mesh.position.x = window.innerWidth/2;
-    //this.playerGauge.mesh.position.y = 0;
+
+    this.enemyGauge.mesh.position.x = (-window.innerWidth + MESH_WIDTH) / 2;
+    this.enemyGauge.mesh.position.y = (window.innerHeight - MESH_HEIGHT) / 2;
+    //this.enemyGauge.mesh.position.x = 0
+    //this.enemyGauge.mesh.position.y = 0;
 
     this.rendeer.render(this.scene, this.camera);
   }
