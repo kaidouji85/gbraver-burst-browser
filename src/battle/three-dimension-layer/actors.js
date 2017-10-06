@@ -2,8 +2,8 @@
 import type {Resources} from '../../common/resource-manager';
 import * as THREE from 'three';
 import SchoolStage from '../../stage/kamata/index';
-import ShinBraver from '../../armdozer/shin-breaver';
-import NeoLandozer from '../../armdozer/neo-landozer';
+import {PlayerShinBraver} from '../../armdozer/shin-breaver';
+import {EnemyNeoLandozer} from '../../armdozer/neo-landozer';
 
 /**
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
@@ -19,10 +19,10 @@ export default class Actors {
   battleField: SchoolStage;
 
   /** プレイヤースプライト */
-  playerSprite: ShinBraver;
+  playerSprite: PlayerShinBraver;
 
   /** 敵スプライト */
-  enemySprite: NeoLandozer;
+  enemySprite: EnemyNeoLandozer;
 
   constructor(props: {resources: Resources}) {
     this.scene = new THREE.Scene();
@@ -35,12 +35,10 @@ export default class Actors {
     this.battleField = new SchoolStage(props.resources);
     this.battleField.values().forEach(item => this.scene.add(item));
 
-    this.playerSprite = new ShinBraver(props.resources);
-    this.playerSprite.mesh.position.x = 150;
+    this.playerSprite = new PlayerShinBraver(props.resources);
     this.scene.add(this.playerSprite.mesh);
 
-    this.enemySprite = new NeoLandozer(props.resources);
-    this.enemySprite.mesh.position.x = -150;
+    this.enemySprite = new EnemyNeoLandozer(props.resources);
     this.scene.add(this.enemySprite.mesh);
   }
 }
