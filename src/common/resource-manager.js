@@ -55,17 +55,20 @@ export const TEXTURE_PATHS = {
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const CANVAS_PICTURE_PATH = {
-  PLAYER_GAUGE: 'gauge/player-gauge.png',
-  ENEMY_GAUGE: 'gauge/enemy-gauge.png',
-
   // 数字系画像
   HP_NUMBER: 'gauge/number/hp-number.png',
+  BATTEY_NUMBER: 'gauge/number/battery-number.png',
+
+  // ゲージ共通
+  GAUGE_BASE: 'gauge/gauge-base.png',
 
   // HPゲージ系
-  HP_GAUGE_BASE: 'gauge/hp-gauge/hp-gauge-base.png',
   HP_BAR_DOWN: 'gauge/hp-gauge/hp-bar-down.png',
   HP_BAR_UP: 'gauge/hp-gauge/hp-bar-up.png',
   HP_GAUGE_LABEL: 'gauge/hp-gauge/hp-gauge-label.png',
+
+  // バッテリーゲージ系
+  BATTERY_GAUGE_LABEL: 'gauge/battery-gauge/battery-gauge-label.png',
 };
 
 /**

@@ -19,7 +19,7 @@ import {drawNumberLeft, drawNumberRight} from '../../common/canvas-number-drawe'
 export function PlayerHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
   const value = hp / maxHp;
 
-  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_BASE, dx, dy);
+  drawImage(context, resources, CANVAS_PICTURE_PATH.GAUGE_BASE, dx, dy);
   PlayerHpBar(context, resources, dx-8, dy+8, value);
 
   drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_LABEL, dx + 70, dy - 6);
@@ -43,7 +43,7 @@ export function EnemyHpGauge(context: CanvasRenderingContext2D, resources: Resou
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
 
-  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_BASE, -dx, dy);
+  drawImage(context, resources, CANVAS_PICTURE_PATH.GAUGE_BASE, -dx, dy);
   PlayerHpBar(context, resources, -dx-8, dy+8, value);
 
   context.restore();
