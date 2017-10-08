@@ -7,5 +7,5 @@ CanvasStubBase((context: CanvasRenderingContext2D, reources: Resources) => {
   const basicX = window.innerWidth / 2;
   const basicY = window.innerHeight / 2;
 
-  PlayerBatteryGauge(context, reources, basicX, basicY, 5);
+  PlayerBatteryGauge(context, reources, basicX, basicY, 3);
 });

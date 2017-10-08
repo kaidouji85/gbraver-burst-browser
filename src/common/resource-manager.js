@@ -57,7 +57,7 @@ export const TEXTURE_PATHS = {
 export const CANVAS_PICTURE_PATH = {
   // 数字系画像
   HP_NUMBER: 'gauge/number/hp-number.png',
-  BATTEY_NUMBER: 'gauge/number/battery-number.png',
+  BATTERY_NUMBER: 'gauge/number/battery-number.png',
 
   // ゲージ共通
   GAUGE_BASE: 'gauge/gauge-base.png',
@@ -69,6 +69,9 @@ export const CANVAS_PICTURE_PATH = {
 
   // バッテリーゲージ系
   BATTERY_GAUGE_LABEL: 'gauge/battery-gauge/battery-gauge-label.png',
+  BATTERY_BAR_UP: 'gauge/battery-gauge/battery-bar-up.png',
+  BATTERY_BAR_DOWN: 'gauge/battery-gauge/battery-bar-down.png',
+
 };
 
 /**
