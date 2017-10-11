@@ -2,12 +2,12 @@
 import type {Resources} from '../../common/resource-manager';
 import {CANVAS_PICTURE_PATH} from '../../common/resource-manager';
 import {drawImage} from '../../common/canvas-image-drawer';
-import {clipTraoezoid} from '../util/clip-trapezoid';
+import {clipTrapezoid} from '../util/clip-trapezoid';
 
 /** キャンバスを台形にクリッピングする */
 const clip = (context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, percent: number) => {
   const image = resources.canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.HP_BAR_UP) || {};
-  clipTraoezoid(context, image.image, dx, dy, percent);
+  clipTrapezoid(context, image.image.width, image.image.height, dx, dy, percent);
 };
 
 /**
