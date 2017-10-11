@@ -17,14 +17,15 @@ const MAX_BATTERY = 5;
  * @param height バッテリーバー高
  * @param dx 描画位置X
  * @param dy 描画位置Y
+ * @param value 現在の値
  * @param maxValue 目盛り数
  */
-function barScale(context: CanvasRenderingContext2D, width: number, height: number, dx: number, dy: number, maxValue: number) {
+function barScale(context: CanvasRenderingContext2D, width: number, height: number, dx: number, dy: number, value:number, maxValue: number) {
   context.save();
   context.strokeStyle = '#8b4513';
 
   const scaleSize = width / maxValue;
-  R.range(1, maxValue).forEach(v => {
+  R.range(1, value).forEach(v => {
     context.beginPath();
     context.moveTo(dx - width / 2 + scaleSize * v, dy + height / 2);
     context.lineTo(dx - width / 2 + scaleSize * v + 10, dy - height / 2);
@@ -54,5 +55,5 @@ export function BatteryBar(context: CanvasRenderingContext2D, resources: Resourc
   drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_BAR_UP, dx, dy);
   context.restore();
 
-  barScale(context, barUpImage.image.width, barUpImage.image.height, dx, dy, MAX_BATTERY);
+  barScale(context, barUpImage.image.width, barUpImage.image.height, dx, dy, value, MAX_BATTERY);
 }
