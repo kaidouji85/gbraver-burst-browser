@@ -2,8 +2,8 @@
 import type {Resources} from '../../resource/resource-manager';
 import * as R from 'ramda';
 import {CANVAS_PICTURE_PATH} from '../../resource/resource-manager';
-import {drawImage} from '../../canvas/image-drawer';
-import {clipTrapezoid} from '../../canvas/clip-trapezoid';
+import {drawImage} from '../../canvas/draw/image-drawer';
+import {trapezoid} from '../../canvas/clip/trapezoid';
 
 /** バッテリー最大値 */
 const MAX_BATTERY = 5;
@@ -51,7 +51,7 @@ export function BatteryBar(context: CanvasRenderingContext2D, resources: Resourc
 
   const barUpImage = resources.canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.BATTERY_BAR_UP) || {};
   context.save();
-  clipTrapezoid(context, barUpImage.image.width, barUpImage.image.height, dx, dy, value / MAX_BATTERY);
+  trapezoid(context, barUpImage.image.width, barUpImage.image.height, dx, dy, value / MAX_BATTERY);
   drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_BAR_UP, dx, dy);
   context.restore();
 

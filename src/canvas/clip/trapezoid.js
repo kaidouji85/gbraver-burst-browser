@@ -11,7 +11,7 @@
  * @param dy 描画位置Y
  * @param percent ゲージの値をパーセント(0から1形式の)で指定
  */
-export function clipTrapezoid(context: CanvasRenderingContext2D, width: number, height: number, dx: number, dy: number, percent: number) {
+export function trapezoid(context: CanvasRenderingContext2D, width: number, height: number, dx: number, dy: number, percent: number) {
   const gaugeWidth = width * percent;
 
   context.beginPath();

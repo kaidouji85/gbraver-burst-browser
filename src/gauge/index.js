@@ -4,6 +4,7 @@ import type {Resources,} from '../resource/resource-manager';
 import * as THREE from 'three';
 import {createCanvasMesh} from '../mesh/mesh-creator';
 import {PlayerHpGauge, EnemyHpGauge} from './hp-gauge';
+import {PlayerBatteryGauge, EnemyBatteryGauge} from './battery-gauge';
 
 /** キャンバス幅 */
 export const CANVAS_WIDTH = 256;
@@ -49,7 +50,8 @@ export class PlayerGauge extends BasicGauge {
   refresh() {
     const context = this.canvas.getContext('2d');
     context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    PlayerHpGauge(context, this.resources, CANVAS_WIDTH/2, CANVAS_HEIGHT/2, 1500, 3000);
+    PlayerHpGauge(context, this.resources, CANVAS_WIDTH/2, 32, 1500, 3000);
+    PlayerBatteryGauge(context, this.resources, CANVAS_WIDTH/2, 80, 3, 5);
   }
 }
 
@@ -65,6 +67,7 @@ export class EnemyGauge extends BasicGauge {
   refresh() {
     const context = this.canvas.getContext('2d');
     context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    EnemyHpGauge(context, this.resources, CANVAS_WIDTH/2, CANVAS_HEIGHT/2, 800, 3400);
+    EnemyHpGauge(context, this.resources, CANVAS_WIDTH/2, 32, 800, 3400);
+    EnemyBatteryGauge(context, this.resources, CANVAS_WIDTH/2, 80, 2, 5);
   }
 }
