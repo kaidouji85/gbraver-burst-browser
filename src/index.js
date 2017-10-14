@@ -22,6 +22,7 @@ import BattleApplication from './battle/index.js';
   const animate = (time: number) => {
     requestAnimationFrame( animate );
     app.animate();
+    app.render();
     Tween.update(time);
   };
   animate();

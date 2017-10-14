@@ -1,37 +1,29 @@
 // @flow
 import type {Resources} from '/../../common/resource-manager';
 import type {State} from '../state';
-import * as THREE from 'three';
-import Actors from './actors';
+import GameObjects from './game-objects';
+import {animate} from './animate';
+import {resize} from './resize';
 
 /**
  * 3D空間のレイヤー
  */
 export default class Battle {
   /** 関連する全オブジェクト */
-  actors: Actors;
+  gameObjects: GameObjects;
 
-  /** レンダラー */
-  renderer: THREE.WebGLRenderer;
-
-  constructor(props: {resources: Resources, renderer: THREE.WebGLRenderer}) {
-    this.actors = new Actors(props);
-    this.renderer = props.renderer;
+  constructor(props: {resources: Resources}) {
+    this.gameObjects = new GameObjects(props);
   }
 
   /** ゲームループでの処理 */
   animate() {
-    this.actors.battleField.animate(this.actors.camera);
-    this.actors.playerSprite.animate(this.actors.camera);
-    this.actors.enemySprite.animate(this.actors.camera);
-
-    this.renderer.render(this.actors.scene, this.actors.camera);
+    animate(this.gameObjects);
   }
 
   /** ウインドウリサイズ時の処理 */
   resize() {
-    this.actors.camera.aspect = window.innerWidth / window.innerHeight;
-    this.actors.camera.updateProjectionMatrix();
+    resize(this.gameObjects);
   }
 
   /**
@@ -43,8 +35,8 @@ export default class Battle {
   update(state: State): Promise<void> {
     // 本来ならstateに応じて処理分岐をするところだが、
     // 現状ではパンチアクションしかないため、ベタ書きしている
-    this.actors.playerSprite.tween.stop();
-    this.actors.playerSprite.tween.start();
+    this.gameObjects.playerSprite.tween.stop();
+    this.gameObjects.playerSprite.tween.start();
     return Promise.resolve();
   }
 }

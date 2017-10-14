@@ -8,7 +8,7 @@ import {EnemyNeoLandozer} from '../../armdozer/neo-landozer';
 /**
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
  */
-export default class Actors {
+export default class GameObjects {
   /** シーン */
   scene: THREE.Scene;
 
