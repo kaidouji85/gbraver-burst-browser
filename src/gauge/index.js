@@ -1,9 +1,9 @@
 //@flow
 
-import type {Resources,} from '../common/resource-manager';
+import type {Resources,} from '../resource/resource-manager';
 import * as THREE from 'three';
-import {createCanvasMesh} from '../common/mesh-creator';
-import {PlayerHpGauge, EnemyHpGauge} from '../canvas-paint/hp-gauge';
+import {createCanvasMesh} from '../mesh/mesh-creator';
+import {PlayerHpGauge, EnemyHpGauge} from './hp-gauge';
 
 /** キャンバス幅 */
 export const CANVAS_WIDTH = 256;

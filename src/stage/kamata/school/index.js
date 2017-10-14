@@ -1,9 +1,9 @@
 // @flow
-import type {Resources} from '../../../common/resource-manager';
+import type {Resources} from '../../../resource/resource-manager';
 import * as THREE from 'three';
 import R from 'ramda';
-import {MODEL_PATHS} from '../../../common/resource-manager';
-import {createMeshFromJson} from '../../../common/mesh-creator';
+import {MODEL_PATHS} from '../../../resource/resource-manager';
+import {createMeshFromJson} from '../../../mesh/mesh-creator';
 import TreeBillBoard from './tree-bill-board';
 import GroundMesh from './ground-sand';
 import FenceMesh from './fence';

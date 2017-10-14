@@ -1,9 +1,9 @@
 // @flow
-import type {Resources} from '../../common/resource-manager';
-import {CANVAS_PICTURE_PATH} from '../../common/resource-manager';
-import {drawImage} from '../../common/canvas-image-drawer';
+import type {Resources} from '../../resource/resource-manager';
+import {CANVAS_PICTURE_PATH} from '../../resource/resource-manager';
+import {drawImage} from '../../canvas/image-drawer';
 import {PlayerHpBar} from './bar';
-import {drawNumberLeft, drawNumberRight} from '../../common/canvas-number-drawe';
+import {drawNumberLeft, drawNumberRight} from '../../canvas/number-drawe';
 
 /**
  * プレイヤーのHPゲージを描画する

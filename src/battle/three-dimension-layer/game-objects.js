@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../../common/resource-manager';
+import type {Resources} from '../../resource/resource-manager';
 import * as THREE from 'three';
 import SchoolStage from '../../stage/kamata/index';
 import {PlayerShinBraver} from '../../armdozer/shin-breaver';

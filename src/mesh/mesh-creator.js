@@ -3,7 +3,7 @@
 /**
  * メッシュ関連のユーティリティ
  */
-import type {Resources} from './resource-manager'
+import type {Resources} from '../resource/resource-manager'
 import * as THREE from 'three';
 
 /**

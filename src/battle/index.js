@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../common/resource-manager';
+import type {Resources} from '../resource/resource-manager';
 import type {State} from './state';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';

@@ -1,8 +1,8 @@
 // @flow
-import type {Resources} from '../../common/resource-manager';
-import {CANVAS_PICTURE_PATH} from '../../common/resource-manager';
-import {drawImage} from '../../common/canvas-image-drawer';
-import {clipTrapezoid} from '../util/clip-trapezoid';
+import type {Resources} from '../../resource/resource-manager';
+import {CANVAS_PICTURE_PATH} from '../../resource/resource-manager';
+import {drawImage} from '../../canvas/image-drawer';
+import {clipTrapezoid} from '../../canvas/clip-trapezoid';
 
 /** キャンバスを台形にクリッピングする */
 const clip = (context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, percent: number) => {

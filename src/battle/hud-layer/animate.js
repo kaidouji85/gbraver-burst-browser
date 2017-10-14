@@ -1,6 +1,6 @@
 // @flow
 import {GameObjects} from './game-objects';
-import {MESH_WIDTH, MESH_HEIGHT} from '../../hud/gauge-gauge';
+import {MESH_WIDTH, MESH_HEIGHT} from '../../gauge/index';
 
 /**
  * アニメーション処理を実施する

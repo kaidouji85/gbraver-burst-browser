@@ -1,6 +1,6 @@
 // @flow
-import type {Resources} from '../../src/common/resource-manager';
-import {ResourceManager} from '../../src/common/resource-manager';
+import type {Resources} from '../../src/resource/resource-manager';
+import {ResourceManager} from '../../src/resource/resource-manager';
 import {CanvasScene} from '../util/canvas-scene'
 
 /**

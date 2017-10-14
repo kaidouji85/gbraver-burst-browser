@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 
 /**
- * 平面オブジェクトにＵＶマッピングの設定をする
+ * 平面オブジェクトに矩型ＵＶマッピングの設定をする
  * 本関数にはparam.geoの平面オブジェクトのUVマッピング情報を直接変更する副作用がある
  * なお、各種UV座標の単位は、画像全体の縦、横に対するパーセント指定で行う。
  * 数字的には0～1の間をとるようにする。
@@ -11,7 +11,7 @@ import * as THREE from 'three';
  * @param param 各種パラメータ
  * @return UVマッピングを設定した平面オブジェクト
  */
-export function setUvMapping(param: {
+export function rectangle(param: {
   // 平面オブジェクト
   geo: THREE.PlaneGeometry,
   // UV座標　左下

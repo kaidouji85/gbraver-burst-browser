@@ -1,10 +1,10 @@
 // @flow
-import type {Resources} from '../common/resource-manager';
+import type {Resources} from '../resource/resource-manager';
 import * as THREE from 'three';
 import {Tween} from 'tween.js';
-import {TEXTURE_PATHS} from '../common/resource-manager';
-import {createAnimatedTexture} from '../common/texture-animation';
-import {flip} from '../common/flip-horizon';
+import {TEXTURE_PATHS} from '../resource/resource-manager';
+import {createAnimatedTexture} from '../texture/texture-animation';
+import {flip} from '../mesh/flip-horizon';
 
 const MESH_WIDTH = 320;
 const MESH_HEIGHT = 320;
