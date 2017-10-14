@@ -1,6 +1,6 @@
 // @flow
 import Tween from 'tween.js';
-import {ResourceManager} from './common/resource-manager';
+import {ResourceManager} from './resource/resource-manager';
 import BattleApplication from './battle/index.js';
 
 (async function(){
@@ -22,6 +22,7 @@ import BattleApplication from './battle/index.js';
   const animate = (time: number) => {
     requestAnimationFrame( animate );
     app.animate();
+    app.render();
     Tween.update(time);
   };
   animate();

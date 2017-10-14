@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../common/resource-manager';
+import type {Resources} from '../resource/resource-manager';
 import type {State} from './state';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
@@ -25,12 +25,10 @@ export default class Battle {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
     this.threeDimensionLayer = new ThreeDimensionLayer({
-      resources: props.resources,
-      renderer: this.renderer
+      resources: props.resources
     });
 
     this.hudLayer = new HudLayer({
-      renderer: this.renderer,
       resources: props.resources
     });
   }
@@ -39,6 +37,12 @@ export default class Battle {
   animate() {
     this.threeDimensionLayer.animate();
     this.hudLayer.animate();
+  }
+
+  /** レンダリング処理 */
+  render() {
+    this.renderer.render(this.threeDimensionLayer.gameObjects.scene, this.threeDimensionLayer.gameObjects.camera);
+    this.renderer.render(this.hudLayer.gameObjects.scene, this.hudLayer.gameObjects.camera);
   }
 
   /** リサイズ時の処理 */
@@ -50,13 +54,9 @@ export default class Battle {
 
   /** デバッグモードの設定を行う */
   debugMode() {
-    this.threeDimensionLayer.actors.scene.add(new THREE.AxisHelper(1000));
+    this.threeDimensionLayer.gameObjects.scene.add(new THREE.AxisHelper(1000));
 
-    //const controls = new THREE.OrbitControls(this.threeDimensionLayer.actors.camera, this.renderer.domElement);
-    //controls.maxDistance = 1000;
-    //controls.maxPolarAngle = Math.PI * 0.48;
-
-    const controls = new OrbitControls(this.threeDimensionLayer.actors.camera, this.renderer.domElement);
+    const controls = new OrbitControls(this.threeDimensionLayer.gameObjects.camera, this.renderer.domElement);
     controls.maxDistance = 1000;
     controls.maxPolarAngle = Math.PI * 0.48;
   }
@@ -68,10 +68,6 @@ export default class Battle {
    * @return 結果を返すPromise
    */
   async update(state: State): Promise<void> {
-    return Promise.all([
-      this.threeDimensionLayer.update(state),
-      this.hudLayer.update(state)
-    ]);
-
+    return this.threeDimensionLayer.update(state);
   }
 }

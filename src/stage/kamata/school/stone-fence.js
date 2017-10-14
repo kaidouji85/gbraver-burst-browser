@@ -1,8 +1,8 @@
 // @flow
-import type {Resources} from '../../../common/resource-manager';
+import type {Resources} from '../../../resource/resource-manager';
 import * as THREE from 'three';
-import {TEXTURE_PATHS} from '../../../common/resource-manager';
-import R from 'ramda';
+import {TEXTURE_PATHS} from '../../../resource/resource-manager';
+import * as R from 'ramda';
 
 const BASIC_WIDTH = 275;
 const BASIC_HEIGHT = 30;

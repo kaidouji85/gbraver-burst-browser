@@ -1,9 +1,9 @@
 // @flow
 import * as THREE from 'three';
-import R from 'ramda';
-import type {Resources} from '../../common/resource-manager';
-import {TEXTURE_PATHS} from '../../common/resource-manager';
-import {setUvMapping} from '../../common/uv-mapper';
+import * as R from 'ramda';
+import type {Resources} from '../../resource/resource-manager';
+import {TEXTURE_PATHS} from '../../resource/resource-manager';
+import {rectangle} from '../../uv-mapping/rectangle';
 
 /** メッシュ幅 */
 const MESH_WIDTH = 50;
@@ -45,7 +45,7 @@ const TILE_NUM_CROSS_WALK_02 = 6;
  */
 function createTileMesh(tileNum: number, resources: Resources): THREE.Mesh {
   let geometry = new THREE.PlaneGeometry(MESH_HEIGHT, MESH_WIDTH, 1, 1);
-  setUvMapping({
+  rectangle({
     geo: geometry,
     p1: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * tileNum, 0),
     p2: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * (tileNum + 1), 0),

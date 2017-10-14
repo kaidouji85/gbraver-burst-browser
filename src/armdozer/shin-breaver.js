@@ -1,30 +1,31 @@
 // @flow
-import type {Resources} from '../common/resource-manager';
+import type {Resources} from '../resource/resource-manager';
 import * as THREE from 'three';
 import {Tween} from 'tween.js';
-import {TEXTURE_PATHS} from '../common/resource-manager';
-import {createAnimatedTexture} from '../common/texture-animation';
+import {TEXTURE_PATHS} from '../resource/resource-manager';
+import {createAnimatedTexture} from '../texture/texture-animation';
+import {flip} from '../mesh/flip-horizon';
 
-const WIDTH = 320;
-const HEIGHT = 320;
+const MESH_WIDTH = 320;
+const MESH_HEIGHT = 320;
 const MAX_ANIME_FRAME = 10;
 
 /** シンブレイバーの基本となるメッシュ */
 function BasicMesh(): THREE.Mesh {
-  const geometry = new THREE.PlaneGeometry(HEIGHT, WIDTH, 1, 1);
+  const geometry = new THREE.PlaneGeometry(MESH_HEIGHT, MESH_WIDTH, 1, 1);
   const material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
     transparent: true
   });
   const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(0, HEIGHT/2 - 30, 400);
+  mesh.position.set(150, MESH_HEIGHT/2 - 30, 400);
   return mesh;
 }
 
 /**
- * シンブレイバー
+ * プレイヤーのシンブレイバー
  */
-export default class ShinBraver {
+export class PlayerShinBraver {
   /** メッシュ */
   mesh: THREE.Mesh;
 
@@ -68,5 +69,16 @@ export default class ShinBraver {
 
     this.texture.offset.x = frame/MAX_ANIME_FRAME;
     this.mesh.quaternion.copy(camera.quaternion);
+  }
+}
+
+/**
+ * 敵のシンブレイバー
+ * プレイヤー側のそれを左右反転したもの
+ */
+export class EnemyShinBraver extends PlayerShinBraver {
+  constructor(resources: Resources) {
+    super(resources);
+    flip(this.mesh);
   }
 }

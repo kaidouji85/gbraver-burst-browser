@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from 'three';
-import R from 'ramda';
+import * as R from 'ramda';
 import {loadModel, loadTexture, loadCanvasImage} from './resource-loader';
 
 /**
@@ -55,8 +55,23 @@ export const TEXTURE_PATHS = {
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const CANVAS_PICTURE_PATH = {
-  PLAYER_GAUGE: 'gauge/player-gauge.png',
-  ENEMY_GAUGE: 'gauge/enemy-gauge.png',
+  // 数字系画像
+  HP_NUMBER: 'gauge/number/hp-number.png',
+  BATTERY_NUMBER: 'gauge/number/battery-number.png',
+
+  // ゲージ共通
+  GAUGE_BASE: 'gauge/gauge-base.png',
+
+  // HPゲージ系
+  HP_BAR_DOWN: 'gauge/hp-gauge/hp-bar-down.png',
+  HP_BAR_UP: 'gauge/hp-gauge/hp-bar-up.png',
+  HP_GAUGE_LABEL: 'gauge/hp-gauge/hp-gauge-label.png',
+
+  // バッテリーゲージ系
+  BATTERY_GAUGE_LABEL: 'gauge/battery-gauge/battery-gauge-label.png',
+  BATTERY_BAR_UP: 'gauge/battery-gauge/battery-bar-up.png',
+  BATTERY_BAR_DOWN: 'gauge/battery-gauge/battery-bar-down.png',
+
 };
 
 /**
@@ -116,7 +131,10 @@ export class ResourceManager {
   /** リソース管理オブジェクト */
   resources: Resources;
 
-  /** リソースのベースとなるパス */
+  /**
+   * リソースのベースとなるパス
+   * 本クラスを呼び出したファイルからresourcesフォルダの相対パスを指定する
+   */
   basePath: string;
 
   constructor(basePath: string) {

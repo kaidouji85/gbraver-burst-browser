@@ -1,26 +1,28 @@
 // @flow
-import type {Resources} from '../common/resource-manager';
+import type {Resources} from '../resource/resource-manager';
 import * as THREE from 'three';
-import {TEXTURE_PATHS} from '../common/resource-manager';
+import {TEXTURE_PATHS} from '../resource/resource-manager';
+import {flip} from '../mesh/flip-horizon';
 
-const WIDTH = 320;
-const HEIGHT = 320;
+const MESH_WIDTH = 320;
+const MESH_HEIGHT = 320;
 
 /** ネオランドーザの基本となるメッシュ */
 function BasicMesh(): THREE.Mesh {
-  const geometry = new THREE.PlaneGeometry(HEIGHT, WIDTH, 1, 1);
+  const geometry = new THREE.PlaneGeometry(MESH_HEIGHT, MESH_WIDTH, 1, 1);
   const material = new THREE.MeshBasicMaterial({
     side: THREE.DoubleSide,
     transparent: true
   });
   const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.set(0, HEIGHT/2 - 30, 400);
+  mesh.position.set(150, MESH_HEIGHT/2 - 30, 400);
   return mesh;
 }
+
 /**
- * ネオランドーザ
+ * プレイヤーのネオランドーザ
  */
-export default class NeoLandozer {
+export class PlayerNeoLandozer {
   /** メッシュ */
   mesh: THREE.Mesh;
 
@@ -29,7 +31,6 @@ export default class NeoLandozer {
 
     this.mesh = BasicMesh();
     this.mesh.material.map = texture ? texture.texture : new THREE.Texture();
-    this.mesh.scale.set(-1.0, 1.0, 1.0);
   }
 
   /**
@@ -39,5 +40,16 @@ export default class NeoLandozer {
    */
   animate(camera: THREE.Camera): void {
     this.mesh.quaternion.copy(camera.quaternion)
+  }
+}
+
+/**
+ * 敵のネオランドーザ
+ * プレイヤー側のそれを左右反転したもの
+ */
+export class EnemyNeoLandozer extends PlayerNeoLandozer {
+  constructor(resources: Resources) {
+    super(resources);
+    flip(this.mesh);
   }
 }
