@@ -1,9 +1,9 @@
 // @flow
-import type {Resources} from '../../resource/resource-manager';
+import type {Resources} from '../../../resource/resource-manager';
 import * as R from 'ramda';
-import {CANVAS_PICTURE_PATH} from '../../resource/resource-manager';
-import {drawImage} from '../../canvas/draw/image-drawer';
-import {trapezoid} from '../../canvas/clip/trapezoid';
+import {CANVAS_PICTURE_PATH} from '../../../resource/resource-manager';
+import {drawImage} from '../image-drawer';
+import {trapezoid} from '../../clip/trapezoid';
 
 /** バッテリー最大値 */
 const MAX_BATTERY = 5;
