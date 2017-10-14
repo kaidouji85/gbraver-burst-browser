@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from 'three';
-import R from 'ramda';
+import * as R from 'ramda';
 import type {Resources} from '../../resource/resource-manager';
 import {TEXTURE_PATHS} from '../../resource/resource-manager';
 import {rectangle} from '../../uv-mapping/rectangle';

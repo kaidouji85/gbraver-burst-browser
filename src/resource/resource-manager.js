@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from 'three';
-import R from 'ramda';
+import * as R from 'ramda';
 import {loadModel, loadTexture, loadCanvasImage} from './resource-loader';
 
 /**
