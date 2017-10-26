@@ -19,11 +19,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2017'],
-          plugins: ['transform-flow-strip-types']
-        }
+        loader: 'babel-loader'
       }
     ]
   },
