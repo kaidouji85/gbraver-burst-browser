@@ -11,7 +11,7 @@
     "build-stub": "webpack --config webpack.stub.js",
     "flow-init": "flow init",
     "upload-s3": "s3-upload",
-    "clean": "node task/clean",
+    "clean": "rimraf build",
     "deploy": "npm-run-all clean build build-stub upload-s3"
   },
   "author": "y.takeuchi",
@@ -29,10 +29,10 @@
     "babel-preset-es2017": "^6.22.0",
     "babel-preset-flow": "^6.23.0",
     "copy-webpack-plugin": "^4.0.1",
-    "delete": "^1.1.0",
     "flow-bin": "^0.57.2",
     "html-webpack-plugin": "^2.28.0",
     "npm-run-all": "^4.0.2",
+    "rimraf": "^2.6.2",
     "s3-upload": "^0.1.0",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.4.1"
