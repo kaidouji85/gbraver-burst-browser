@@ -15,11 +15,9 @@ import BattleApplication from './battle/index.js';
   app.debugMode();
 
   document.body.appendChild(app.renderer.domElement);
-
-  window.onclick = () => app.update({});
   window.addEventListener('resize', () => app.resize(), false);
 
-  const animate = (time: number) => {
+  const animate = (time: ?number) => {
     requestAnimationFrame( animate );
     app.animate();
     app.render();

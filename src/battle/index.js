@@ -1,6 +1,5 @@
 // @flow
 import type {Resources} from '../resource/resource-manager';
-import type {State} from './state';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 import ThreeDimensionLayer from './three-dimension-layer';
@@ -59,15 +58,5 @@ export default class Battle {
     const controls = new OrbitControls(this.threeDimensionLayer.gameObjects.camera, this.renderer.domElement);
     controls.maxDistance = 1000;
     controls.maxPolarAngle = Math.PI * 0.48;
-  }
-
-  /**
-   * 状態変更時の処理
-   *
-   * @param state 画面状態
-   * @return 結果を返すPromise
-   */
-  async update(state: State): Promise<void> {
-    return this.threeDimensionLayer.update(state);
   }
 }
