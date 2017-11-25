@@ -1,5 +1,4 @@
 // @flow
-
 import type {ArmDozerSprite} from "../../../../../armdozer/armdozer-sprite";
 import type {Resources} from "../../../../../resource/resource-manager";
 import {ArmDozerIdList} from 'gbraver-burst-core';

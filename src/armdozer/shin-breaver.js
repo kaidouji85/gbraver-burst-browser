@@ -72,7 +72,7 @@ export class PlayerShinBraver implements ArmDozerSprite {
     this.mesh.quaternion.copy(camera.quaternion);
   }
 
-  getTheeJsObjects(): THREE.Object3D {
+  getThreeJsObjects(): THREE.Object3D {
     return [this.mesh];
   }
 }
