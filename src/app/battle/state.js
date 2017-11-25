@@ -1,5 +1,10 @@
 // @flow
+import type {BattleState, PlayerId} from "gbraver-burst-core/lib/flow-type";
 
-// TODO 中身は後でちゃんと書く
 /** 戦闘シーン全体の状態 */
-export type State = {}
+export type BattleAppState = {
+  /** 戦闘状態 */
+  battleState: BattleState,
+  /** 画面を開いているプレイヤーID */
+  playerId: PlayerId,
+}

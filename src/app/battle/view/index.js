@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 import ThreeDimensionLayer from './three-dimension/index';
 import HudLayer from './hud/index';
-import type {BattleState} from 'gbraver-burst-core/lib/flow-type';
+import type {BattleAppState} from "../state";
 
 /**
  * 戦闘画面
@@ -17,19 +17,19 @@ export class BattleView {
   /** Head Up Display(HUD)レイヤー */
   hudLayer: HudLayer;
 
-  constructor(props: {resources: Resources, initialState: ?BattleState}) {
+  constructor(props: {resources: Resources, state: BattleAppState}) {
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.autoClear = false;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
     this.threeDimensionLayer = new ThreeDimensionLayer({
       resources: props.resources,
-      initialState: props.initialState
+      initialState: props.state
     });
 
     this.hudLayer = new HudLayer({
       resources: props.resources,
-      initialState: props.initialState
+      initialState: props.state
     });
   }
 

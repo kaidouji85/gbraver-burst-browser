@@ -11,7 +11,9 @@ import {BattleApplication} from './app/battle/index.js';
     resourceManager.loadCanvasImages(),
   ]);
 
-  const app = new BattleApplication({resources: resourceManager.resources});
+  const app = new BattleApplication({
+    resources: resourceManager.resources,
+  });
 
   const animate = (time: ?number) => {
     requestAnimationFrame( animate );
