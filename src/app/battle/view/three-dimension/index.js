@@ -1,27 +1,29 @@
 // @flow
-import GameObjects from './game-objects';
-import {animate} from './animate';
-import {resize} from './resize';
+import {ThreeDimensionObjects} from './game-objects/index';
 import type {Resources} from "../../../../resource/resource-manager";
+import type {BattleAppState} from "../../state";
 
 /**
  * 3D空間のレイヤー
  */
-export default class Battle {
+export class ThreeDimensionLayer {
   /** 関連する全オブジェクト */
-  gameObjects: GameObjects;
+  gameObjects: ThreeDimensionObjects;
 
-  constructor(props: {resources: Resources}) {
-    this.gameObjects = new GameObjects(props);
+  constructor(props: {resources: Resources, state: BattleAppState}) {
+    this.gameObjects = new ThreeDimensionObjects(props);
   }
 
   /** ゲームループでの処理 */
   animate() {
-    animate(this.gameObjects);
+    this.gameObjects.battleField.animate(this.gameObjects.camera);
+    this.gameObjects.playerSprite.animate(this.gameObjects.camera);
+    this.gameObjects.enemySprite.animate(this.gameObjects.camera);
   }
 
   /** ウインドウリサイズ時の処理 */
   resize() {
-    resize(this.gameObjects);
+    this.gameObjects.camera.aspect = window.innerWidth / window.innerHeight;
+    this.gameObjects.camera.updateProjectionMatrix();
   }
 }

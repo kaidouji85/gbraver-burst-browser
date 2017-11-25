@@ -2,7 +2,7 @@
 import type {Resources} from '../../../resource/resource-manager';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
-import ThreeDimensionLayer from './three-dimension/index';
+import {ThreeDimensionLayer} from './three-dimension/index';
 import HudLayer from './hud/index';
 import type {BattleAppState} from "../state";
 
@@ -24,12 +24,12 @@ export class BattleView {
 
     this.threeDimensionLayer = new ThreeDimensionLayer({
       resources: props.resources,
-      initialState: props.state
+      state: props.state
     });
 
     this.hudLayer = new HudLayer({
       resources: props.resources,
-      initialState: props.state
+      state: props.state
     });
   }
 

@@ -5,6 +5,7 @@ import {Tween} from 'tween.js';
 import {TEXTURE_PATHS} from '../resource/resource-manager';
 import {createAnimatedTexture} from '../texture/texture-animation';
 import {flip} from '../mesh/flip-horizon';
+import type {ArmDozerSprite} from "./armdozer-sprite";
 
 const MESH_WIDTH = 320;
 const MESH_HEIGHT = 320;
@@ -25,7 +26,7 @@ function BasicMesh(): THREE.Mesh {
 /**
  * プレイヤーのシンブレイバー
  */
-export class PlayerShinBraver {
+export class PlayerShinBraver implements ArmDozerSprite {
   /** メッシュ */
   mesh: THREE.Mesh;
 
@@ -54,7 +55,7 @@ export class PlayerShinBraver {
       .delay(1000)
       .onComplete(() => {
         this.frame.num = 0;
-      })
+      });
     tween1.chain(tween2);
     this.tween = tween1;
   }
@@ -69,6 +70,10 @@ export class PlayerShinBraver {
 
     this.texture.offset.x = frame/MAX_ANIME_FRAME;
     this.mesh.quaternion.copy(camera.quaternion);
+  }
+
+  getTheeJsObjects(): THREE.Object3D {
+    return [this.mesh];
   }
 }
 
