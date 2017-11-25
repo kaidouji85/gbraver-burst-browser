@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../../resource/resource-manager';
+import type {Resources} from '../../../../resource/resource-manager';
 import {GameObjects} from './game-objects';
 import {animate} from './animate';
 import {resize} from './resize';

@@ -1,34 +1,35 @@
 // @flow
-import type {Resources} from '../resource/resource-manager';
+import type {Resources} from '../../../resource/resource-manager';
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
-import ThreeDimensionLayer from './three-dimension-layer';
-import HudLayer from './hud-layer';
+import ThreeDimensionLayer from './three-dimension/index';
+import HudLayer from './hud/index';
+import type {BattleState} from 'gbraver-burst-core/lib/flow-type';
 
 /**
  * 戦闘画面
  */
-export default class Battle {
+export class BattleView {
   /** レンダラ */
   renderer: THREE.WebGLRenderer;
-
   /** 3D空間レイヤー */
   threeDimensionLayer: ThreeDimensionLayer;
-
   /** Head Up Display(HUD)レイヤー */
   hudLayer: HudLayer;
 
-  constructor(props: {resources: Resources}) {
+  constructor(props: {resources: Resources, initialState: ?BattleState}) {
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.autoClear = false;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
     this.threeDimensionLayer = new ThreeDimensionLayer({
-      resources: props.resources
+      resources: props.resources,
+      initialState: props.initialState
     });
 
     this.hudLayer = new HudLayer({
-      resources: props.resources
+      resources: props.resources,
+      initialState: props.initialState
     });
   }
 

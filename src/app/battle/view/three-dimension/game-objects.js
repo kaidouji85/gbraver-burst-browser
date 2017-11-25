@@ -1,9 +1,9 @@
 // @flow
-import type {Resources} from '../../resource/resource-manager';
+import type {Resources} from '../../../../resource/resource-manager';
 import * as THREE from 'three';
-import SchoolStage from '../../stage/kamata/index';
-import {PlayerShinBraver} from '../../armdozer/shin-breaver';
-import {EnemyNeoLandozer} from '../../armdozer/neo-landozer';
+import SchoolStage from '../../../../stage/kamata/index';
+import {PlayerShinBraver} from '../../../../armdozer/shin-breaver';
+import {EnemyNeoLandozer} from '../../../../armdozer/neo-landozer';
 
 /**
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
@@ -11,16 +11,12 @@ import {EnemyNeoLandozer} from '../../armdozer/neo-landozer';
 export default class GameObjects {
   /** シーン */
   scene: THREE.Scene;
-
   /** カメラ */
   camera: THREE.Camera;
-
   /** 学校フィールド */
   battleField: SchoolStage;
-
   /** プレイヤースプライト */
   playerSprite: PlayerShinBraver;
-
   /** 敵スプライト */
   enemySprite: EnemyNeoLandozer;
 

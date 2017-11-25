@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
-import type {Resources} from '../../resource/resource-manager';
-import {PlayerGauge, EnemyGauge} from '../../gauge/index';
+import type {Resources} from '../../../../resource/resource-manager';
+import {PlayerGauge, EnemyGauge} from '../../../../gauge/index';
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
