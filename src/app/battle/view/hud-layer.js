@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import type {Resources} from '../../../resource/resource-manager';
 import {PlayerGauge, EnemyGauge} from '../../../gauge/index';
 import type {BattleAppState} from "../state";
+import {setHudComponentPos} from "../helper/set-hud-component-pos";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -38,5 +39,7 @@ export class HudLayer {
     this.enemyGauge = new EnemyGauge(props.resources);
     this.enemyGauge.refresh();
     this.scene.add(this.enemyGauge.mesh);
+
+    setHudComponentPos(this);
   }
 }
