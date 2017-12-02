@@ -41,7 +41,7 @@ export default class SchoolField {
    *
    * @return 配列にまとめた結果
    */
-  values(): THREE.Object3D {
+  getThreeJsObjects(): THREE.Object3D[] {
     return this.tree.map((item: TreeBillBoard) => item.mesh)
       .concat([this.ground])
       .concat([this.school])
@@ -72,7 +72,7 @@ function Trees(resources: Resources): TreeBillBoard[] {
     let actor = new TreeBillBoard(resources);
     Object.assign(actor.mesh.position, {x, z});
     return actor;
-  }
+  };
   const createToXDirection = (x: number, z:number, count: number) => R.times(
     num => createTree(x + num * TREE_SIZE , z), count);
   const createToZDirection = (x: number, z:number, count: number) => R.times(

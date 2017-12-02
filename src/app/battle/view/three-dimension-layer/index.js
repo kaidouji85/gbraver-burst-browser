@@ -31,7 +31,7 @@ export class ThreeDimensionLayer {
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     this.battleField = new SchoolStage(props.resources);
-    this.battleField.values().forEach(item => this.scene.add(item));
+    this.battleField.getThreeJsObjects().forEach(item => this.scene.add(item));
 
     this.playerSprite = new PlayerSprite(props);
     this.playerSprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
