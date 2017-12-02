@@ -137,12 +137,13 @@ export class ResourceManager {
    */
   basePath: string;
 
-  constructor(basePath: string) {
+  constructor(basePath: string = '') {
     this.resources = {
       models: [],
       textures: [],
+      canvasImages: []
     };
-    this.basePath = basePath || '';
+    this.basePath = basePath;
   }
 
   /**
@@ -188,7 +189,7 @@ export class ResourceManager {
    * @return 結果を返すPromise
    */
   async loadCanvasImages(): Promise<ResourceManager> {
-    const load: Promise<CanvasPicture> = async (path) => {
+    const load = async (path): Promise<CanvasPicture> => {
       const image = await loadCanvasImage(`${this.basePath}${path}`);
       return {path, image};
     }

@@ -22,14 +22,47 @@ npm start
 | npm run clean      | ビルド結果を削除する             |
 | npm run deploy     | 現在の状態でS3にデプロイする      |
 
-### AWS系コマンドを実行する際の注意点
-認証情報がないと動きません。
-Readme.mdがある階層にaws-credentials.jsonを置いて下さい。
-以下がaws系コマンドです。
+
+## 必要となる認証ファイル
+
+### aws-credentials.json
+
+以下コマンドはaws-credentioalsファイルが無いと動きません。
 
 * npm run upload-s3
 * npm run deploy
 
+Readme.mdの配下に、以下内容でaws-credentials.jsonを作成してください。
+
+```json
+{ 
+    "accessKeyId": "PUBLIC_KEY", 
+    "secretAccessKey": "SECRET_KEY", 
+    "region": "us-west-2" 
+}
+```
 
 aws-credentials.jsonについて  
 https://www.npmjs.com/package/s3-upload#credentials-file
+
+### aws-upload.conf.js
+
+以下コマンドはaws-credentioalsファイルが無いと動きません。
+
+* npm run upload-s3
+* npm run deploy
+
+```javascript
+module.exports = {
+  credentials:"aws-credentials.json",
+  bucketName: "アップロード先のS3バケット名",
+  patterns:[
+    "build/production/**",
+    "build/stub/**",
+  ]
+}
+```
+
+aws-upload.conf.jsについて
+https://www.npmjs.com/package/s3-upload#deploy-static-sites-to-amazon-s3-using-node
+

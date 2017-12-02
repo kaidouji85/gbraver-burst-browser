@@ -3,6 +3,7 @@ import type {Resources} from '../resource/resource-manager';
 import * as THREE from 'three';
 import {TEXTURE_PATHS} from '../resource/resource-manager';
 import {flip} from '../mesh/flip-horizon';
+import type {ArmDozerSprite} from "./armdozer-sprite";
 
 const MESH_WIDTH = 320;
 const MESH_HEIGHT = 320;
@@ -22,7 +23,7 @@ function BasicMesh(): THREE.Mesh {
 /**
  * プレイヤーのネオランドーザ
  */
-export class PlayerNeoLandozer {
+export class PlayerNeoLandozer implements ArmDozerSprite {
   /** メッシュ */
   mesh: THREE.Mesh;
 
@@ -38,8 +39,12 @@ export class PlayerNeoLandozer {
    *
    * @param camera カメラ
    */
-  animate(camera: THREE.Camera): void {
+  gameLoop(camera: THREE.Camera): void {
     this.mesh.quaternion.copy(camera.quaternion)
+  }
+
+  getThreeJsObjects(): THREE.Object3D[] {
+    return [this.mesh];
   }
 }
 

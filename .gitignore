@@ -2,3 +2,5 @@ node_modules/*
 .idea/
 build/*
 aws-credentials.json
+aws-upload.conf.js
+/package-lock.json

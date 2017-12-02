@@ -40,8 +40,8 @@ export default class SchoolField {
    *
    * @return 配列にまとめた結果
    */
-  values(): THREE.Object3D {
-    return this.schoolBuild.values()
+  getThreeJsObjects(): THREE.Object3D[] {
+    return this.schoolBuild.getThreeJsObjects()
       .concat(this.skyBox)
       .concat(this.road)
       .concat(this.lights)
@@ -53,8 +53,8 @@ export default class SchoolField {
    *
    * @param camera カメラ
    */
-  animate(camera: THREE.Camera): void {
-    this.schoolBuild.animate(camera);
+  gameLoop(camera: THREE.Camera): void {
+    this.schoolBuild.gameLoop(camera);
   }
 };
 
@@ -64,7 +64,7 @@ export default class SchoolField {
  * @param resources リソース管理クラス
  * @returns 道路
  */
-function Road(resources: Resources): Three.Mesh {
+function Road(resources: Resources): THREE.Mesh[] {
   let mesh = CityRoad(resources);
   mesh.position.z = 760;
   return mesh;
