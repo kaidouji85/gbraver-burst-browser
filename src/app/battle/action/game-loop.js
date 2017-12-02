@@ -11,7 +11,7 @@ export function gameLoop(state: BattleAppState, view: BattleView) {
 
 /** 3Dレイヤーのゲームループ時の処理 */
 function threeDimension(view: ThreeDimensionLayer) {
-  view.playerSprite.animate(view.camera);
-  view.enemySprite.animate(view.camera);
-  view.battleField.animate(view.camera);
+  view.playerSprite.gameLoop(view.camera);
+  view.enemySprite.gameLoop(view.camera);
+  view.battleField.gameLoop(view.camera);
 }

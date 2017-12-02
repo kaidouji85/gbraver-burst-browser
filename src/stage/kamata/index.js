@@ -53,8 +53,8 @@ export default class SchoolField {
    *
    * @param camera カメラ
    */
-  animate(camera: THREE.Camera): void {
-    this.schoolBuild.animate(camera);
+  gameLoop(camera: THREE.Camera): void {
+    this.schoolBuild.gameLoop(camera);
   }
 };
 

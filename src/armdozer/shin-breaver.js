@@ -65,7 +65,7 @@ export class PlayerShinBraver implements ArmDozerSprite {
    *
    * @param camera カメラ
    */
-  animate(camera: THREE.Camera): void {
+  gameLoop(camera: THREE.Camera): void {
     const frame = Math.floor(this.frame.num);
 
     this.texture.offset.x = frame/MAX_ANIME_FRAME;
