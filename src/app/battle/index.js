@@ -5,6 +5,7 @@ import {BattleView} from "./view/index";
 import type {BattleAppState} from "./state";
 import type {BattleState, PlayerId} from "gbraver-burst-core/lib/flow-type";
 import {BattleObserver} from "./observer";
+import {debugMode} from './helper/debug-mode';
 
 /** コンストラクタのパラメータ */
 type Props = {
@@ -40,14 +41,19 @@ export class BattleApplication implements Application {
       state: this.state,
     });
 
+    const dom = this.view.renderer.domElement || new HTMLElement();
+    document.body.appendChild(dom);
 
-    document.body.appendChild(this.view.renderer.domElement);
     window.addEventListener('resize', () => {
       this.observer.notify({type: 'resize'})
     }, false);
+
+    // TODO 開発用にデバッグモードを有効にする
+    debugMode(this.view);
   };
 
   gameLoop() {
+    this.observer.notify({type: 'gameLoop'});
     this.view.render();
   }
 }

@@ -1,8 +1,9 @@
 // @flow
 import type {Notification} from '../notification';
 import type {Action} from "../action";
-import {resize} from './action/resize'
 import {BattleApplication} from "./index";
+import {resize} from './action/resize'
+import {gameLoop} from './action/game-loop';
 
 /** イベント */
 export class BattleObserver implements Notification {
@@ -18,6 +19,9 @@ export class BattleObserver implements Notification {
     switch (action.type) {
       case 'resize':
         resize(this.app.state, this.app.view);
+        break;
+      case 'gameLoop':
+        gameLoop(this.app.state, this.app.view);
         break;
       default:
         break;
