@@ -43,7 +43,7 @@ export default class TreeBillBoard {
    *
    * @param camera カメラ
    */
-  animate(camera: THREE.Camera): void {
+  gameLoop(camera: THREE.Camera): void {
     this.mesh.quaternion.copy(camera.quaternion)
   }
 }

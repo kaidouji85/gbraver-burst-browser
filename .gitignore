@@ -3,3 +3,4 @@ node_modules/*
 build/*
 aws-credentials.json
 aws-upload.conf.js
+/package-lock.json
