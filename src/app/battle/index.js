@@ -3,13 +3,17 @@ import type {Resources} from '../../resource/resource-manager';
 import type {Application} from '../application';
 import {BattleView} from "./view/index";
 import type {BattleAppState} from "./state";
-import {ArmDozers, ArmDozerIdList, start} from 'gbraver-burst-core';
-import type {BattleState} from "gbraver-burst-core/lib/flow-type";
+import type {BattleState, PlayerId} from "gbraver-burst-core/lib/flow-type";
+import {BattleObserver} from "./observer";
 
 /** コンストラクタのパラメータ */
 type Props = {
   /** リソース管理オブジェクト */
   resources: Resources,
+  /** 戦闘状態 */
+  battleState: BattleState,
+  /** 画面を開いているプレイヤーID */
+  playerId: PlayerId,
 };
 
 /**
@@ -18,32 +22,32 @@ type Props = {
 export class BattleApplication implements Application {
   /** ビュー */
   view: BattleView;
+  /** 戦闘画面全体の状態 */
+  state: BattleAppState;
+  /** 画面全体のオブザーバ */
+  observer: BattleObserver;
 
   constructor(props: Props) {
+    this.state = {
+      battleState: props.battleState,
+      playerId: props.playerId
+    };
+    this.observer = new BattleObserver({
+      app: this,
+    });
     this.view = new BattleView({
       resources: props.resources,
-      state: this.createInitialState(),
+      state: this.state,
     });
 
+
     document.body.appendChild(this.view.renderer.domElement);
-    window.addEventListener('resize', () => this.view.resize(), false);
+    window.addEventListener('resize', () => {
+      this.observer.notify({type: 'resize'})
+    }, false);
   };
 
-  render() {
+  gameLoop() {
     this.view.render();
-  }
-
-  // TODO 開発用にダミーデータを作成している
-  createInitialState(): BattleAppState {
-    const battleState: BattleState = start(
-      {
-        playerId: 'test01',
-        armDozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
-      }, {
-        playerId: 'test02',
-        armDozer: ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) || ArmDozers[0]
-      }
-    );
-    return {battleState, playerId: 'test01'};
   }
 }

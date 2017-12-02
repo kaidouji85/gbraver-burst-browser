@@ -12,13 +12,10 @@ import type {BattleAppState} from "../state";
 export class HudLayer {
   /** 本レイヤーのベースとなるシーン */
   scene: THREE.Scene;
-
   /** 本レイヤーのカメラ */
   camera: THREE.OrthographicCamera;
-
   /** プレイヤーゲージ */
   playerGauge: PlayerGauge;
-
   /** 敵ゲージ */
   enemyGauge: EnemyGauge;
 
