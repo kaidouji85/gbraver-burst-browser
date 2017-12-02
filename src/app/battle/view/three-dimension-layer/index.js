@@ -1,16 +1,16 @@
 // @flow
-import type {Resources} from '../../../../../resource/resource-manager';
+import type {Resources} from '../../../../resource/resource-manager';
 import * as THREE from 'three';
-import SchoolStage from '../../../../../stage/kamata/index';
-import type {ArmDozerSprite} from "../../../../../armdozer/armdozer-sprite";
-import type {BattleAppState} from "../../../state";
+import SchoolStage from '../../../../stage/kamata/index';
+import type {ArmDozerSprite} from "../../../../armdozer/armdozer-sprite";
+import type {BattleAppState} from "../../state";
 import {PlayerSprite} from "./player-sprite";
 import {EnemySprite} from "./enemy-sprite";
 
 /**
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
  */
-export class ThreeDimensionObjects {
+export class ThreeDimensionLayer {
   /** シーン */
   scene: THREE.Scene;
   /** カメラ */

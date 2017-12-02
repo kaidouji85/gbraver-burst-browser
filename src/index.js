@@ -2,6 +2,7 @@
 import Tween from 'tween.js';
 import {ResourceManager} from './resource/resource-manager';
 import {BattleApplication} from './app/battle/index.js';
+import type {Application} from './app/application';
 
 (async function(){
   const resourceManager:  ResourceManager = new ResourceManager();
@@ -11,13 +12,13 @@ import {BattleApplication} from './app/battle/index.js';
     resourceManager.loadCanvasImages(),
   ]);
 
-  const app = new BattleApplication({
+  const app: Application = new BattleApplication({
     resources: resourceManager.resources,
   });
 
   const animate = (time: ?number) => {
     requestAnimationFrame( animate );
-    app.gameLoop();
+    app.render();
     Tween.update(time);
   };
   animate();

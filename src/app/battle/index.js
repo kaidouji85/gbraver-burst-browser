@@ -29,8 +29,7 @@ export class BattleApplication implements Application {
     window.addEventListener('resize', () => this.view.resize(), false);
   };
 
-  gameLoop() {
-    this.view.animate();
+  render() {
     this.view.render();
   }
 

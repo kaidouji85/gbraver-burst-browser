@@ -1,14 +1,15 @@
 // @flow
 import * as THREE from 'three';
-import type {Resources} from '../../../../resource/resource-manager';
-import {PlayerGauge, EnemyGauge} from '../../../../gauge/index';
+import type {Resources} from '../../../resource/resource-manager';
+import {PlayerGauge, EnemyGauge} from '../../../gauge/index';
+import type {BattleAppState} from "../state";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
  *
  * @author y.takeuchi
  */
-export class GameObjects {
+export class HudLayer {
   /** 本レイヤーのベースとなるシーン */
   scene: THREE.Scene;
 
@@ -21,7 +22,7 @@ export class GameObjects {
   /** 敵ゲージ */
   enemyGauge: EnemyGauge;
 
-  constructor(props: {resources: Resources}) {
+  constructor(props: {resources: Resources, state: BattleAppState}) {
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.OrthographicCamera(
