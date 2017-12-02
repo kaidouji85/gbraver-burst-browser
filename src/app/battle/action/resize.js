@@ -4,14 +4,12 @@ import type {BattleAppState} from "../state";
 import {BattleView} from "../view/index";
 import {ThreeDimensionLayer} from "../view/three-dimension-layer";
 import {HudLayer} from "../view/hud-layer";
-import {setHudComponentPos} from '../helper/set-hud-component-pos';
 
 /** リサイズ時の処理 */
 export function resize(state: BattleAppState, view: BattleView) {
   view.renderer.setSize(window.innerWidth, window.innerHeight);
   resizeThreeDimensionLayer(view.threeDimensionLayer);
   resizeHudLayer(view.hudLayer);
-  setHudComponentPos(view.hudLayer);
 }
 
 /** 3Dレイヤーのリサイズ */
