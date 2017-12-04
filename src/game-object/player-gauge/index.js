@@ -6,20 +6,24 @@ import {Battle} from "./state/battle";
 /** プレイヤーゲージのゲームオブジェクト */
 export class PlayerGauge {
   /** 操作対象 */
-  target: PlayerGaugeTarget;
+  _target: PlayerGaugeTarget;
   /** 状態オブジェクト */
-  state: PlayerGaugeState;
+  _state: PlayerGaugeState;
   /** 状態リスト */
-  stateList: {
+  _stateList: {
     battle: Battle,
   };
 
   constructor(resources: Resources) {
-    this.target = new PlayerGaugeTarget(resources);
-    this.stateList = {
+    this._target = new PlayerGaugeTarget(resources);
+    this._stateList = {
       battle: new Battle()
     };
-    this.state = this.stateList.battle;
+    this._state = this._stateList.battle;
+  }
+
+  gameLoop() {
+    this._state.gameLoop(this._target);
   }
 }
 

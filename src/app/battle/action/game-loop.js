@@ -21,7 +21,7 @@ function threeDimension(view: ThreeDimensionLayer) {
 
 /** hudレイヤーのゲームループ時の処理 */
 function hud(view: HudLayer) {
-  view.playerGauge.state.gameLoop(view.playerGauge.target);
+  view.playerGauge.gameLoop();
 
   view.enemyGauge.mesh.position.x = (-window.innerWidth + MESH_WIDTH) / 2;
   view.enemyGauge.mesh.position.y = (window.innerHeight - MESH_HEIGHT) / 2;

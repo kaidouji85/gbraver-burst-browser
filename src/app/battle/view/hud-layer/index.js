@@ -33,7 +33,7 @@ export class HudLayer {
       30
     );
     this.playerGauge = createPlayerGauge(props.resources, props.state);
-    this.playerGauge.target.getThreeJsObjectList().forEach(v => this.scene.add(v));
+    this.playerGauge._target.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.enemyGauge = new EnemyGauge(props.resources);
     this.enemyGauge.refresh();
