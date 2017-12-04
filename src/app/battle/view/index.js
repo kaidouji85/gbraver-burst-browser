@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {BattleAppState} from "../state";
+import type {Observer} from '../../observer';
 
 /**
  * 戦闘画面
@@ -16,7 +17,7 @@ export class BattleView {
   /** Head Up Display(HUD)レイヤー */
   hudLayer: HudLayer;
 
-  constructor(props: {resources: Resources, state: BattleAppState}) {
+  constructor(props: {resources: Resources, state: BattleAppState, observer: Observer}) {
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.autoClear = false;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -30,6 +31,13 @@ export class BattleView {
       resources: props.resources,
       state: props.state
     });
+
+    const dom = this.renderer.domElement || new HTMLElement();
+    document.body.appendChild(dom);
+
+    window.addEventListener('resize', () => {
+      props.observer.notify({type: 'resize'})
+    }, false);
   }
 
   /** レンダリング処理 */

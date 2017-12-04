@@ -1,12 +1,12 @@
 // @flow
-import type {Notification} from '../notification';
+import type {Observer} from '../observer';
 import type {Action} from "../action";
 import {BattleApplication} from "./index";
 import {resize} from './action/resize'
 import {gameLoop} from './action/game-loop';
 
 /** イベント */
-export class BattleObserver implements Notification {
+export class BattleObserver implements Observer {
   /** 戦闘画面全体のオブジェクト */
   app: BattleApplication;
 

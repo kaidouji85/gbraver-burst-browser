@@ -1,7 +1,9 @@
 // @flow
+import type {Observer} from './observer';
+
 
 /** アプリケーションの雛形 */
 export interface Application {
-  /** ゲームループの処理 */
-  gameLoop(): void;
+  /** イベント通知 */
+  observer: Observer;
 }

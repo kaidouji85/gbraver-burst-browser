@@ -10,6 +10,8 @@ import {MESH_HEIGHT, MESH_WIDTH} from "../../../gauge";
 export function gameLoop(state: BattleAppState, view: BattleView) {
   threeDimension(view.threeDimensionLayer);
   hud(view.hudLayer);
+
+  view.render();
 }
 
 /** 3Dレイヤーのゲームループ時の処理 */

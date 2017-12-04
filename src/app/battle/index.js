@@ -39,21 +39,10 @@ export class BattleApplication implements Application {
     this.view = new BattleView({
       resources: props.resources,
       state: this.state,
+      observer: this.observer
     });
-
-    const dom = this.view.renderer.domElement || new HTMLElement();
-    document.body.appendChild(dom);
-
-    window.addEventListener('resize', () => {
-      this.observer.notify({type: 'resize'})
-    }, false);
 
     // TODO 開発用にデバッグモードを有効にする
     debugMode(this.view);
   };
-
-  gameLoop() {
-    this.observer.notify({type: 'gameLoop'});
-    this.view.render();
-  }
 }

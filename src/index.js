@@ -32,8 +32,8 @@ import type {BattleState} from "gbraver-burst-core/lib/flow-type";
 
   const gameLoop = (time: ?number) => {
     requestAnimationFrame(gameLoop);
-    app.gameLoop();
     Tween.update(time);
+    app.observer.notify({type: 'gameLoop'});
   };
   gameLoop();
 })();
