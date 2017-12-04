@@ -3,9 +3,6 @@
 import type {Resources,} from '../resource/resource-manager';
 import * as THREE from 'three';
 import {createCanvasMesh} from '../mesh/mesh-creator';
-import {PlayerHpGauge, EnemyHpGauge} from '../canvas/draw/hp-gauge';
-import {PlayerBatteryGauge, EnemyBatteryGauge} from '../canvas/draw/battery-gauge';
-import {drawPlayerGuge} from './player-gauge';
 import {drawEnemyGuge} from './enemy-gauge';
 
 /** キャンバス幅 */
@@ -36,29 +33,6 @@ class BasicGauge {
     this.canvas.width = CANVAS_WIDTH;
     this.canvas.height = CANVAS_HEIGHT;
     this.mesh = createCanvasMesh(this.canvas, MESH_WIDTH, MESH_HEIGHT);
-  }
-}
-
-/**
- * プレイヤーのゲージ
- */
-export class PlayerGauge extends BasicGauge {
-
-  constructor(resources: Resources) {
-    super(resources);
-  }
-
-  /** ゲージをリフレッシュする */
-  refresh() {
-    const context = this.canvas.getContext('2d');
-    context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    drawPlayerGuge({
-      context,
-      resources: this.resources,
-      hp: 2500,
-      maxHp: 3000,
-      battery: 4
-    });
   }
 }
 
