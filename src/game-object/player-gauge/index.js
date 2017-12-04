@@ -1,15 +1,14 @@
 // @flow
 import {PlayerGaugeTarget} from "./target";
 import type {Resources} from "../../resource/resource-manager";
-import type {GameObject, GameObjectState} from "../game-object";
 import {Battle} from "./state/battle";
 
 /** プレイヤーゲージのゲームオブジェクト */
-export class PlayerGauge implements GameObject<PlayerGaugeTarget> {
+export class PlayerGauge {
   /** 操作対象 */
   target: PlayerGaugeTarget;
   /** 状態オブジェクト */
-  state: GameObjectState<PlayerGaugeTarget>;
+  state: PlayerGaugeState;
   /** 状態リスト */
   stateList: {
     battle: Battle,
@@ -22,4 +21,9 @@ export class PlayerGauge implements GameObject<PlayerGaugeTarget> {
     };
     this.state = this.stateList.battle;
   }
+}
+
+/** 状態オブジェクト */
+export interface PlayerGaugeState {
+  gameLoop(target: PlayerGaugeTarget): void;
 }

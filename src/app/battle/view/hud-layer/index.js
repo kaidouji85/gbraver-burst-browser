@@ -1,8 +1,10 @@
 // @flow
 import * as THREE from 'three';
-import type {Resources} from '../../../resource/resource-manager';
-import {PlayerGauge, EnemyGauge} from '../../../gauge/index';
-import type {BattleAppState} from "../state";
+import type {Resources} from '../../../../resource/resource-manager';
+import {EnemyGauge} from '../../../../gauge/index';
+import type {BattleAppState} from "../../state";
+import {PlayerGauge} from "../../../../game-object/player-gauge/index";
+import {createPlayerGauge} from "./player-gauge-creator";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -30,10 +32,8 @@ export class HudLayer {
       0,
       30
     );
-
-    this.playerGauge = new PlayerGauge(props.resources);
-    this.playerGauge.refresh();
-    this.scene.add(this.playerGauge.mesh);
+    this.playerGauge = createPlayerGauge(props.resources, props.state);
+    this.playerGauge.target.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.enemyGauge = new EnemyGauge(props.resources);
     this.enemyGauge.refresh();

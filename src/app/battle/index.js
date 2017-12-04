@@ -5,7 +5,7 @@ import {BattleView} from "./view/index";
 import type {BattleAppState} from "./state";
 import type {BattleState, PlayerId} from "gbraver-burst-core/lib/flow-type";
 import {BattleObserver} from "./observer";
-import {debugMode} from './helper/debug-mode';
+import {debugMode} from './debug-mode';
 
 /** コンストラクタのパラメータ */
 type Props = {

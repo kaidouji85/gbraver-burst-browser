@@ -2,7 +2,7 @@
 import type {Resources} from '../../../resource/resource-manager';
 import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
-import {HudLayer} from './hud-layer';
+import {HudLayer} from './hud-layer/index';
 import type {BattleAppState} from "../state";
 
 /**

@@ -3,7 +3,7 @@
 import type {BattleAppState} from "../state";
 import {BattleView} from "../view/index";
 import {ThreeDimensionLayer} from "../view/three-dimension-layer";
-import {HudLayer} from "../view/hud-layer";
+import {HudLayer} from "../view/hud-layer/index";
 
 /** リサイズ時の処理 */
 export function resize(state: BattleAppState, view: BattleView) {

@@ -1,10 +1,11 @@
 // @flow
+import {PlayerGaugeTarget, MESH_HEIGHT, MESH_WIDTH} from "../target";
+import {PlayerGaugeState} from '../index';
 
-import {PlayerGaugeTarget} from "../target";
-import type {GameObjectState} from "../../game-object";
-
-export class Battle implements GameObjectState<PlayerGaugeTarget> {
-  gameLoop(gauge: PlayerGaugeTarget): void {
-
+/** 戦闘状態 */
+export class Battle implements PlayerGaugeState {
+  gameLoop(target: PlayerGaugeTarget): void {
+    target.mesh.position.x = (window.innerWidth - MESH_WIDTH) / 2;
+    target.mesh.position.y = (window.innerHeight - MESH_HEIGHT) / 2;
   }
 }

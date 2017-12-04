@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from 'three';
-import {BattleView} from "../view";
+import {BattleView} from "./view/index";
 import OrbitControls from 'three-orbitcontrols';
 
 /** デバッグモードに設定する */

@@ -3,7 +3,7 @@
 import type {BattleAppState} from "../state";
 import {BattleView} from "../view";
 import {ThreeDimensionLayer} from "../view/three-dimension-layer";
-import {HudLayer} from "../view/hud-layer";
+import {HudLayer} from "../view/hud-layer/index";
 import {MESH_HEIGHT, MESH_WIDTH} from "../../../gauge";
 
 /** ゲームループ時の処理 */
@@ -21,8 +21,7 @@ function threeDimension(view: ThreeDimensionLayer) {
 
 /** hudレイヤーのゲームループ時の処理 */
 function hud(view: HudLayer) {
-  view.playerGauge.mesh.position.x = (window.innerWidth - MESH_WIDTH) / 2;
-  view.playerGauge.mesh.position.y = (window.innerHeight - MESH_HEIGHT) / 2;
+  view.playerGauge.state.gameLoop(view.playerGauge.target);
 
   view.enemyGauge.mesh.position.x = (-window.innerWidth + MESH_WIDTH) / 2;
   view.enemyGauge.mesh.position.y = (window.innerHeight - MESH_HEIGHT) / 2;
