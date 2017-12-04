@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../resource/resource-manager';
-import * as THREE from 'three';
 import {TEXTURE_PATHS} from '../resource/resource-manager';
+import * as THREE from 'three';
 import {flip} from '../mesh/flip-horizon';
 import type {ArmDozerSprite} from "./armdozer-sprite";
 

@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../../resource/resource-manager';
-import * as THREE from 'three';
 import {TEXTURE_PATHS} from '../../../resource/resource-manager';
+import * as THREE from 'three';
 
 const HEIGHT = 1200;
 const WIDTH = 1200;

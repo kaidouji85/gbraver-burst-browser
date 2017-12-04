@@ -1,5 +1,5 @@
 // @flow
-import {PlayerGaugeTarget, MESH_HEIGHT, MESH_WIDTH} from "../target";
+import {MESH_HEIGHT, MESH_WIDTH, PlayerGaugeTarget} from "../target";
 import {PlayerGaugeState} from '../index';
 
 /** 戦闘状態 */

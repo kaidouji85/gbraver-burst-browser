@@ -1,8 +1,8 @@
 // @flow
 import type {Resources} from '../resource/resource-manager';
+import {TEXTURE_PATHS} from '../resource/resource-manager';
 import * as THREE from 'three';
 import {Tween} from 'tween.js';
-import {TEXTURE_PATHS} from '../resource/resource-manager';
 import {createAnimatedTexture} from '../texture/texture-animation';
 import {flip} from '../mesh/flip-horizon';
 import type {ArmDozerSprite} from "./armdozer-sprite";

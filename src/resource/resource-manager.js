@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import * as R from 'ramda';
-import {loadModel, loadTexture, loadCanvasImage} from './resource-loader';
+import {loadCanvasImage, loadModel, loadTexture} from './resource-loader';
 
 /**
  * モデルのパス定数

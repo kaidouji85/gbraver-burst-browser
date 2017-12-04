@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../../resource/resource-manager';
-import * as R from 'ramda';
 import {CANVAS_PICTURE_PATH} from '../../../resource/resource-manager';
+import * as R from 'ramda';
 import {drawImage} from '../image-drawer';
 import {trapezoid} from '../../clip/trapezoid';
 

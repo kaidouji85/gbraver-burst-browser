@@ -1,9 +1,12 @@
 // @flow
+import type {BattleAction} from './battle/action';
+
 
 /** アクション */
 export type Action =
   | ResizeAction
-  | GameLoopAction;
+  | GameLoopAction
+  | BattleAction;
 
 /** リサイズ */
 export type ResizeAction = {

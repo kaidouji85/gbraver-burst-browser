@@ -1,11 +1,12 @@
 // @flow
 import type {Resources} from '../../resource/resource-manager';
-import type {Application} from '../application';
-import {BattleView} from "./view/index";
-import type {BattleAppState} from "./state";
 import type {BattleState, PlayerId} from "gbraver-burst-core/lib/flow-type";
-import {BattleObserver} from "./observer";
-import {debugMode} from './debug-mode';
+import {gameLoop} from "./action-handler/game-loop";
+import {resize} from "./action-handler/resize";
+import type {Action} from "../action";
+import type {Observer} from '../observer';
+import {BattleAppCore} from "./core";
+import {debugMode} from "./action-handler/debug-mode";
 
 /** コンストラクタのパラメータ */
 type Props = {
@@ -20,29 +21,33 @@ type Props = {
 /**
  * 戦闘画面アプリケーション
  */
-export class BattleApplication implements Application {
-  /** ビュー */
-  view: BattleView;
-  /** 戦闘画面全体の状態 */
-  state: BattleAppState;
-  /** 画面全体のオブザーバ */
-  observer: BattleObserver;
+export class BattleApplication implements Observer {
+  /** コア */
+  _core: BattleAppCore;
 
   constructor(props: Props) {
-    this.state = {
-      battleState: props.battleState,
-      playerId: props.playerId
-    };
-    this.observer = new BattleObserver({
-      app: this,
-    });
-    this.view = new BattleView({
+    this._core = new BattleAppCore({
       resources: props.resources,
-      state: this.state,
-      observer: this.observer
+      battleState: props.battleState,
+      playerId: props.playerId,
+      observer: this
     });
-
-    // TODO 開発用にデバッグモードを有効にする
-    debugMode(this.view);
   };
+
+  /** 通知されたイベントに応じて、実際のアクションを呼び出す */
+  notify(action: Action) {
+    switch (action.type) {
+      case 'resize':
+        resize(this._core);
+        break;
+      case 'gameLoop':
+        gameLoop(this._core);
+        break;
+      case 'debugMode':
+        debugMode(this._core);
+        break;
+      default:
+        break;
+    }
+  }
 }
