@@ -1,9 +1,9 @@
 // @flow
 import * as THREE from 'three';
 import * as R from 'ramda';
-import type {Resources} from '../../resource/resource-manager';
-import {TEXTURE_PATHS} from '../../resource/resource-manager';
-import {rectangle} from '../../uv-mapping/rectangle';
+import type {Resources} from '../../../resource/resource-manager';
+import {TEXTURE_PATHS} from '../../../resource/resource-manager';
+import {rectangle} from '../../../util/uv-mapping/rectangle';
 
 /** メッシュ幅 */
 const MESH_WIDTH = 50;

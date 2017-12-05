@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/resource-manager';
-import {EnemyGauge} from '../../../../gauge/index';
+import {EnemyGauge} from '../../../../game-object/gauge/index';
 import type {BattleSceneState} from "../../state";
 import {PlayerGauge} from "../../../../game-object/player-gauge/index";
 import {createPlayerGauge} from "./player-gauge-creator";

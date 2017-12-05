@@ -1,12 +1,12 @@
 // @flow
-import type {Resources} from '../../resource/resource-manager';
-import {MODEL_PATHS} from '../../resource/resource-manager';
+import type {Resources} from '../../../resource/resource-manager';
+import {MODEL_PATHS} from '../../../resource/resource-manager';
 
 import * as THREE from 'three';
-import SchoolBuild from './school';
+import SchoolBuild from './school/index';
 import SkyBox from './blue-sky';
 import CityRoad from './city-road';
-import {createMeshFromJson} from '../../mesh/mesh-creator';
+import {createMeshFromJson} from '../../../util/mesh/mesh-creator';
 
 /**
  * 学校ステージ

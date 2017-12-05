@@ -1,8 +1,8 @@
 //@flow
 
-import type {Resources,} from '../resource/resource-manager';
+import type {Resources,} from '../../resource/resource-manager';
 import * as THREE from 'three';
-import {createCanvasMesh} from '../mesh/mesh-creator';
+import {createCanvasMesh} from '../../util/mesh/mesh-creator';
 import {drawEnemyGuge} from './enemy-gauge';
 
 /** キャンバス幅 */

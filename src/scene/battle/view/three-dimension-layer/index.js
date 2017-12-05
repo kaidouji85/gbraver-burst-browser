@@ -1,8 +1,8 @@
 // @flow
 import type {Resources} from '../../../../resource/resource-manager';
 import * as THREE from 'three';
-import SchoolStage from '../../../../stage/kamata/index';
-import type {ArmDozerSprite} from "../../../../armdozer/armdozer-sprite";
+import SchoolStage from '../../../../game-object/stage/kamata/index';
+import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import type {BattleSceneState} from "../../state";
 import {PlayerSprite} from "./player-sprite";
 import {EnemySprite} from "./enemy-sprite";

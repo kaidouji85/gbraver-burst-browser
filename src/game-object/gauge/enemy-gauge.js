@@ -1,7 +1,7 @@
 // @flow
-import type {Resources,} from '../resource/resource-manager';
-import {EnemyHpGauge} from '../canvas/draw/hp-gauge';
-import {EnemyBatteryGauge} from '../canvas/draw/battery-gauge';
+import type {Resources,} from '../../resource/resource-manager';
+import {EnemyHpGauge} from '../../util/canvas/draw/hp-gauge/index';
+import {EnemyBatteryGauge} from '../../util/canvas/draw/battery-gauge/index';
 
 type Props = {
   /** 描画対象のキャンバス */

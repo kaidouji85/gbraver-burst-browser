@@ -1,6 +1,6 @@
 // @flow
 
-import type {Resources} from '../../resource/resource-manager'
+import type {Resources} from '../../../resource/resource-manager'
 
 function createNumberArray(value: number): number[] {
   return String(value)

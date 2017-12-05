@@ -1,10 +1,10 @@
 // @flow
 
-import type {ArmDozerSprite} from "../../../../armdozer/armdozer-sprite";
+import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import type {Resources} from "../../../../resource/resource-manager";
 import {ArmDozerIdList} from 'gbraver-burst-core';
-import {EnemyShinBraver} from "../../../../armdozer/shin-breaver";
-import {EnemyNeoLandozer} from "../../../../armdozer/neo-landozer";
+import {EnemyShinBraver} from "../../../../game-object/armdozer/shin-breaver";
+import {EnemyNeoLandozer} from "../../../../game-object/armdozer/neo-landozer";
 import type {BattleSceneState} from "../../state";
 import type {ArmDozerId, PlayerBattleState} from "gbraver-burst-core/lib/flow-type";
 
