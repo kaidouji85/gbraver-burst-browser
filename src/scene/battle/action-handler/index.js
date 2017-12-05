@@ -2,30 +2,20 @@
 
 import type {Action} from "../../action";
 import {BattleScene} from "../index";
-import {BattleSceneView} from "../view";
 import {gameLoop} from "./game-loop";
 import {debugMode} from "./debug-mode";
 import {resize} from "./resize";
-import type {BattleSceneState} from "../state";
 
-type Handler = (view: BattleSceneView, state: BattleSceneState) => void;
-const emptyHandler = (view: BattleSceneView, state: BattleSceneState) => {};
-
+/** アクションハンドラ */
 export function actionHandler(action: Action, scene: BattleScene) {
-  const handler: Handler = getHandler(action);
-  handler(scene.view, scene.state);
-}
-
-function getHandler(action: Action): Handler {
   switch (action.type) {
     case 'gameLoop':
-      return gameLoop;
+      return gameLoop(scene.view, scene.state, action);
     case 'resize':
-      return resize;
+      return resize(scene.view, scene.state, action);
     case 'debugMode':
-      return debugMode;
+      return debugMode(scene.view, scene.state, action);
     default:
-      return emptyHandler;
-
+      return;
   }
 }

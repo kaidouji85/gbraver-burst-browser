@@ -4,7 +4,7 @@
 export type Action =
   | ResizeAction
   | GameLoopAction
-  | DebugMode;
+  | DebugModeAction;
 
 /** リサイズ */
 export type ResizeAction = {
@@ -17,6 +17,6 @@ export type GameLoopAction = {
 };
 
 /** デバッグモード */
-export type DebugMode = {
+export type DebugModeAction = {
   type: 'debugMode'
 };

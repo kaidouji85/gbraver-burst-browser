@@ -23,7 +23,6 @@ type Props = {
 export class BattleScene implements Observer {
   /** ビュー */
   view: BattleSceneView;
-
   /** 戦闘画面全体の状態 */
   state: BattleSceneState;
 

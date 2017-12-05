@@ -5,9 +5,10 @@ import {HudLayer} from "../view/hud-layer/index";
 import {MESH_HEIGHT, MESH_WIDTH} from "../../../gauge";
 import {BattleSceneView} from "../view";
 import type {BattleSceneState} from "../state";
+import type {GameLoopAction} from "../../action";
 
 /** ゲームループ時の処理 */
-export function gameLoop(view: BattleSceneView, state: BattleSceneState): void {
+export function gameLoop(view: BattleSceneView, state: BattleSceneState, action: GameLoopAction): void {
   threeDimension(view.threeDimensionLayer);
   hud(view.hudLayer);
 
