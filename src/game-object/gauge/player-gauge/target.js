@@ -1,9 +1,9 @@
 // @flow
 import * as THREE from "three";
-import type {Resources} from "../../resource/resource-manager";
-import {createCanvasMesh} from "../../util/mesh/mesh-creator";
-import {PlayerHpGauge} from "../../util/canvas/draw/hp-gauge/index";
-import {PlayerBatteryGauge} from "../../util/canvas/draw/battery-gauge/index";
+import type {Resources} from "../../../resource/resource-manager";
+import {createCanvasMesh} from "../../../util/mesh/mesh-creator";
+import {PlayerHpGauge} from "../../../util/canvas/draw/hp-gauge/index";
+import {PlayerBatteryGauge} from "../../../util/canvas/draw/battery-gauge/index";
 
 /** キャンバス幅 */
 export const CANVAS_WIDTH = 256;
@@ -15,7 +15,7 @@ export const MESH_WIDTH = 300;
 export const MESH_HEIGHT = 300;
 
 /** プレイヤーゲージ */
-export class PlayerGaugeTarget {
+export class PlayerGauge {
   /** リソース管理クラス */
   resources: Resources;
   /** メッシュ */

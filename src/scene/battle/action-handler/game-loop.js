@@ -2,7 +2,6 @@
 
 import {ThreeDimensionLayer} from "../view/three-dimension-layer";
 import {HudLayer} from "../view/hud-layer/index";
-import {MESH_HEIGHT, MESH_WIDTH} from "../../../game-object/gauge";
 import {BattleSceneView} from "../view";
 import type {BattleSceneState} from "../state";
 import type {GameLoopAction} from "../../action";
@@ -24,8 +23,8 @@ function threeDimension(view: ThreeDimensionLayer) {
 
 /** hudレイヤーのゲームループ時の処理 */
 function hud(view: HudLayer) {
-  view.playerGauge.gameLoop();
+  const {playerGauge, enemyGauge} = view;
 
-  view.enemyGauge.mesh.position.x = (-window.innerWidth + MESH_WIDTH) / 2;
-  view.enemyGauge.mesh.position.y = (window.innerHeight - MESH_HEIGHT) / 2;
+  playerGauge.state.gameLoop(playerGauge.target);
+  enemyGauge.state.gameLoop(enemyGauge.target);
 }

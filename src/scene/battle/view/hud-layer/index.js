@@ -1,10 +1,11 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/resource-manager';
-import {EnemyGauge} from '../../../../game-object/gauge/index';
+import {EnemyGaugeContext} from '../../../../game-object/gauge/enemy-gauge';
 import type {BattleSceneState} from "../../state";
-import {PlayerGauge} from "../../../../game-object/player-gauge/index";
-import {createPlayerGauge} from "./player-gauge-creator";
+import {PlayerGaugeContext} from "../../../../game-object/gauge/player-gauge";
+import {createPlayerGauge} from "./player-gauge";
+import {createEnemyGauge} from "./enemy-gauge";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -17,9 +18,9 @@ export class HudLayer {
   /** 本レイヤーのカメラ */
   camera: THREE.OrthographicCamera;
   /** プレイヤーゲージ */
-  playerGauge: PlayerGauge;
+  playerGauge: PlayerGaugeContext;
   /** 敵ゲージ */
-  enemyGauge: EnemyGauge;
+  enemyGauge: EnemyGaugeContext;
 
   constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();
@@ -33,10 +34,9 @@ export class HudLayer {
       30
     );
     this.playerGauge = createPlayerGauge(props.resources, props.state);
-    this.playerGauge._target.getThreeJsObjectList().forEach(v => this.scene.add(v));
+    this.playerGauge.target.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.enemyGauge = new EnemyGauge(props.resources);
-    this.enemyGauge.refresh();
-    this.scene.add(this.enemyGauge.mesh);
+    this.enemyGauge = createEnemyGauge(props.resources, props.state);
+    this.enemyGauge.target.getThreeJsObjectList().forEach(v => this.scene.add(v));
   }
 }
