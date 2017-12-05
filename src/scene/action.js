@@ -1,12 +1,10 @@
 // @flow
-import type {BattleAction} from './battle/action';
-
 
 /** アクション */
 export type Action =
   | ResizeAction
   | GameLoopAction
-  | BattleAction;
+  | DebugMode;
 
 /** リサイズ */
 export type ResizeAction = {
@@ -16,4 +14,9 @@ export type ResizeAction = {
 /** ゲームループ */
 export type GameLoopAction = {
   type: 'gameLoop'
+};
+
+/** デバッグモード */
+export type DebugMode = {
+  type: 'debugMode'
 };

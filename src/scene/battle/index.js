@@ -1,12 +1,11 @@
 // @flow
 import type {Resources} from '../../resource/resource-manager';
 import type {BattleState, PlayerId} from "gbraver-burst-core/lib/flow-type";
-import {gameLoop} from "./action-handler/game-loop";
-import {resize} from "./action-handler/resize";
 import type {Action} from "../action";
 import type {Observer} from '../observer';
-import {BattleAppCore} from "./core";
-import {debugMode} from "./action-handler/debug-mode";
+import {BattleSceneView} from "./view";
+import type {BattleSceneState} from "./state";
+import {actionHandler} from "./action-handler";
 
 /** コンストラクタのパラメータ */
 type Props = {
@@ -21,33 +20,27 @@ type Props = {
 /**
  * 戦闘画面アプリケーション
  */
-export class BattleApplication implements Observer {
-  /** コア */
-  _core: BattleAppCore;
+export class BattleScene implements Observer {
+  /** ビュー */
+  view: BattleSceneView;
+
+  /** 戦闘画面全体の状態 */
+  state: BattleSceneState;
 
   constructor(props: Props) {
-    this._core = new BattleAppCore({
-      resources: props.resources,
+    this.state = {
       battleState: props.battleState,
-      playerId: props.playerId,
+      playerId: props.playerId
+    };
+    this.view = new BattleSceneView({
+      resources: props.resources,
+      state: this.state,
       observer: this
     });
   };
 
   /** 通知されたイベントに応じて、実際のアクションを呼び出す */
   notify(action: Action) {
-    switch (action.type) {
-      case 'resize':
-        resize(this._core);
-        break;
-      case 'gameLoop':
-        gameLoop(this._core);
-        break;
-      case 'debugMode':
-        debugMode(this._core);
-        break;
-      default:
-        break;
-    }
+    actionHandler(action, this);
   }
 }

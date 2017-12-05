@@ -3,7 +3,7 @@ import type {Resources} from '../../../../resource/resource-manager';
 import * as THREE from 'three';
 import SchoolStage from '../../../../stage/kamata/index';
 import type {ArmDozerSprite} from "../../../../armdozer/armdozer-sprite";
-import type {BattleAppState} from "../../state";
+import type {BattleSceneState} from "../../state";
 import {PlayerSprite} from "./player-sprite";
 import {EnemySprite} from "./enemy-sprite";
 
@@ -22,7 +22,7 @@ export class ThreeDimensionLayer {
   /** 敵スプライト */
   enemySprite: ArmDozerSprite;
 
-  constructor(props: {resources: Resources, state: BattleAppState}) {
+  constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );

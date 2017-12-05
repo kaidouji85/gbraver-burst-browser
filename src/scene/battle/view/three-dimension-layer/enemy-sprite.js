@@ -5,11 +5,11 @@ import type {Resources} from "../../../../resource/resource-manager";
 import {ArmDozerIdList} from 'gbraver-burst-core';
 import {EnemyShinBraver} from "../../../../armdozer/shin-breaver";
 import {EnemyNeoLandozer} from "../../../../armdozer/neo-landozer";
-import type {BattleAppState} from "../../state";
+import type {BattleSceneState} from "../../state";
 import type {ArmDozerId, PlayerBattleState} from "gbraver-burst-core/lib/flow-type";
 
 /** 与えられたパラメータから敵スプライを生成する */
-export function EnemySprite(props: {resources: Resources, state: BattleAppState}): ArmDozerSprite {
+export function EnemySprite(props: {resources: Resources, state: BattleSceneState}): ArmDozerSprite {
   const enemyInfo: ?PlayerBattleState = props.state.battleState.players.find(v => v.playerId !== props.state.playerId);
   if (!enemyInfo) {
     return new EnemyShinBraver(props.resources);

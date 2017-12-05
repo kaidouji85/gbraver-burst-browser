@@ -2,13 +2,14 @@
 
 import {ThreeDimensionLayer} from "../view/three-dimension-layer";
 import {HudLayer} from "../view/hud-layer/index";
-import {BattleAppCore} from "../core";
+import type {BattleSceneState} from "../state";
+import {BattleSceneView} from "../view";
 
 /** リサイズ時の処理 */
-export function resize(core: BattleAppCore) {
-  core.view.renderer.setSize(window.innerWidth, window.innerHeight);
-  resizeThreeDimensionLayer(core.view.threeDimensionLayer);
-  resizeHudLayer(core.view.hudLayer);
+export function resize(view: BattleSceneView, state: BattleSceneState): void {
+  view.renderer.setSize(window.innerWidth, window.innerHeight);
+  resizeThreeDimensionLayer(view.threeDimensionLayer);
+  resizeHudLayer(view.hudLayer);
 }
 
 /** 3Dレイヤーのリサイズ */

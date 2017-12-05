@@ -3,14 +3,15 @@
 import {ThreeDimensionLayer} from "../view/three-dimension-layer";
 import {HudLayer} from "../view/hud-layer/index";
 import {MESH_HEIGHT, MESH_WIDTH} from "../../../gauge";
-import {BattleAppCore} from "../core";
+import {BattleSceneView} from "../view";
+import type {BattleSceneState} from "../state";
 
 /** ゲームループ時の処理 */
-export function gameLoop(core: BattleAppCore) {
-  threeDimension(core.view.threeDimensionLayer);
-  hud(core.view.hudLayer);
+export function gameLoop(view: BattleSceneView, state: BattleSceneState): void {
+  threeDimension(view.threeDimensionLayer);
+  hud(view.hudLayer);
 
-  core.view.render();
+  view.render();
 }
 
 /** 3Dレイヤーのゲームループ時の処理 */

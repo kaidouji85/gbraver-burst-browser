@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/resource-manager';
 import {EnemyGauge} from '../../../../gauge/index';
-import type {BattleAppState} from "../../state";
+import type {BattleSceneState} from "../../state";
 import {PlayerGauge} from "../../../../game-object/player-gauge/index";
 import {createPlayerGauge} from "./player-gauge-creator";
 
@@ -21,7 +21,7 @@ export class HudLayer {
   /** 敵ゲージ */
   enemyGauge: EnemyGauge;
 
-  constructor(props: {resources: Resources, state: BattleAppState}) {
+  constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.OrthographicCamera(
