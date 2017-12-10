@@ -6,7 +6,9 @@ import {PlayerHpGauge as drawPlayerHpGauge} from "../../../util/canvas/draw/hp-g
 
 /** プレイヤーHPゲージ */
 export class PlayerHpGauge extends CanvasMesh {
+  /** 最後にレンダリングした最大HPの値 */
   maxHp: number;
+  /** 最後にレンダリングしたHPの値 */
   hp: number;
 
   constructor(resources: Resources) {
@@ -22,13 +24,24 @@ export class PlayerHpGauge extends CanvasMesh {
     this.hp = 0;
   }
 
+  /**
+   * ゲージを更新する
+   * 更新する必要がない場合は何もしない
+   *
+   * @param hp 現在のHP
+   * @param maxHp 最大HP
+   */
   refresh(hp: number, maxHp: number) {
-    const context = this.canvas.getContext('2d');
-    context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-    drawPlayerHpGauge(context, this.resources, context.canvas.width/2, 32, hp, maxHp);
-
+    if (this.hp === hp && this.maxHp === maxHp) {
+      return;
+    }
     this.hp = hp;
     this.maxHp = maxHp;
+
+    const context = this.canvas.getContext('2d');
+    context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    drawPlayerHpGauge(context, this.resources, context.canvas.width/2, 32, hp, maxHp);
+
+    this.mesh.material.map.needsUpdate = true;
   }
 }

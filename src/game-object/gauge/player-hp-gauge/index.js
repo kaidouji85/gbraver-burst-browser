@@ -19,30 +19,21 @@ export class PlayerHpGaugeContext {
   /**  状態リスト */
   _stateList: {
     battle: Battle;
-  }
+  };
 
   constructor(props: Props) {
     this._target = new PlayerHpGauge(props.resources);
     this._stateList = {
       battle: new Battle()
     };
-    this.battle(props.hp, props.maxHp);
+
+    this._stateList.battle.start(props.hp, props.maxHp);
+    this._state = this._stateList.battle;
   }
 
   /** ゲームループ */
   gameLoop() {
     this._state.gameLoop(this._target);
-  }
-
-  /**
-   * 戦闘画面
-   *
-   * @param 現在のHP
-   * @param 最大HP
-   */
-  battle(hp: number, maxHp: number) {
-    this._stateList.battle.start(hp, maxHp);
-    this._state = this._stateList.battle;
   }
 }
 

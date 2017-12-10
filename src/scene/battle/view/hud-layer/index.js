@@ -1,10 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/resource-manager';
-import {EnemyGaugeContext} from '../../../../game-object/gauge/enemy-gauge';
 import type {BattleSceneState} from "../../state";
-import {PlayerGaugeContext} from "../../../../game-object/gauge/player-gauge";
-import {createEnemyGauge} from "./enemy-gauge";
 import {PlayerHpGaugeContext} from "../../../../game-object/gauge/player-hp-gauge";
 import {createPlayerHpGauge} from './player-hp-gauge';
 
@@ -20,8 +17,6 @@ export class HudLayer {
   camera: THREE.OrthographicCamera;
   /** プレイヤーHPゲージ */
   playerHpGauge: PlayerHpGaugeContext;
-  /** 敵ゲージ */
-  enemyGauge: EnemyGaugeContext;
 
   constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();
@@ -37,8 +32,5 @@ export class HudLayer {
 
     this.playerHpGauge = createPlayerHpGauge(props.resources, props.state);
     this.playerHpGauge._target.getThreeJsObjectList().forEach(v => this.scene.add(v));
-
-    this.enemyGauge = createEnemyGauge(props.resources, props.state);
-    this.enemyGauge.target.getThreeJsObjectList().forEach(v => this.scene.add(v));
   }
 }

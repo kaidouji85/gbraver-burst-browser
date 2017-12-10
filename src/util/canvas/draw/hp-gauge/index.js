@@ -23,7 +23,7 @@ export function PlayerHpGauge(context: CanvasRenderingContext2D, resources: Reso
   PlayerHpBar(context, resources, dx-8, dy+8, value);
 
   drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_LABEL, dx + 70, dy - 6);
-  drawNumberLeft(context, resources, CANVAS_PICTURE_PATH.HP_NUMBER, dx - 100, dy - 24, hp);
+  drawNumberLeft(context, resources, CANVAS_PICTURE_PATH.HP_NUMBER, dx - 100, dy - 24, Math.floor(hp));
 }
 
 /**
@@ -49,5 +49,5 @@ export function EnemyHpGauge(context: CanvasRenderingContext2D, resources: Resou
   context.restore();
 
   drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_LABEL, dx - 64, dy - 6);
-  drawNumberRight(context, resources, CANVAS_PICTURE_PATH.HP_NUMBER, dx + 100, dy - 24, hp);
+  drawNumberRight(context, resources, CANVAS_PICTURE_PATH.HP_NUMBER, dx + 100, dy - 24, Math.floor(hp));
 }
