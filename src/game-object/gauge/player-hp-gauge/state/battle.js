@@ -6,6 +6,7 @@ import {Tween} from 'tween.js';
 /** HPゲージ変化のスピード(HP量/秒) */
 const SPEED = 1500;
 
+/** 戦闘状態 */
 export class Battle implements PlayerHpGaugeState {
   /** 現在のHP */
   _hp: number;
@@ -20,18 +21,18 @@ export class Battle implements PlayerHpGaugeState {
     this._tween = new Tween(this);
   }
 
-  start(hp: number, maxHp: number) {
-    const time = (hp - this._hp) / SPEED * 1000;
+  start(fromHp: number, toHp: number, maxHp: number) {
+    const duration = (toHp - fromHp) / SPEED * 1000;
+    this._hp = fromHp;
     this._maxHp = maxHp;
     this._tween
-      .to({_hp: hp}, time)
+      .to({_hp: toHp}, duration)
       .delay(1000)
       .start();
   }
 
   gameLoop(target: PlayerHpGauge): void {
-    target.refresh(this._hp, this._maxHp);
-    target.mesh.position.x = (window.innerWidth - target.meshWidth) / 2;
-    target.mesh.position.y = (window.innerHeight - target.meshHeight) / 2;
+    target.refreshGauge(this._hp, this._maxHp);
+    target.refreshPos();
   }
 }

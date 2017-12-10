@@ -31,7 +31,7 @@ export class PlayerHpGauge extends CanvasMesh {
    * @param hp 現在のHP
    * @param maxHp 最大HP
    */
-  refresh(hp: number, maxHp: number) {
+  refreshGauge(hp: number, maxHp: number) {
     if (this.hp === hp && this.maxHp === maxHp) {
       return;
     }
@@ -41,7 +41,12 @@ export class PlayerHpGauge extends CanvasMesh {
     const context = this.canvas.getContext('2d');
     context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     drawPlayerHpGauge(context, this.resources, context.canvas.width/2, 32, hp, maxHp);
-
     this.mesh.material.map.needsUpdate = true;
+  }
+
+  /** 表示位置を更新する */
+  refreshPos() {
+    this.mesh.position.x = (window.innerWidth - this.meshWidth) / 2;
+    this.mesh.position.y = (window.innerHeight - this.meshHeight) / 2;
   }
 }

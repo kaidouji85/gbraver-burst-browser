@@ -27,7 +27,7 @@ export class PlayerHpGaugeContext {
       battle: new Battle()
     };
 
-    this._stateList.battle.start(props.hp, props.maxHp);
+    this._stateList.battle.start(0, props.hp, props.maxHp);
     this._state = this._stateList.battle;
   }
 
