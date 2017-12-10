@@ -4,6 +4,7 @@ import {PlayerHpGauge} from "./target";
 import {Battle} from "./state/battle";
 import type {Resources} from "../../../resource/resource-manager";
 
+/** プレイヤーHPゲージのステータス */
 type Props = {
   resources: Resources,
   hp: number,
@@ -37,6 +38,7 @@ export class PlayerHpGaugeContext {
   }
 }
 
+/** プレイヤーHPゲージの状態 */
 export interface PlayerHpGaugeState {
   gameLoop(target: PlayerHpGauge): void;
 }

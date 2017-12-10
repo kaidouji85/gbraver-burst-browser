@@ -38,10 +38,10 @@ export class PlayerHpGauge extends CanvasMesh {
     this.hp = hp;
     this.maxHp = maxHp;
 
-    const context = this.canvas.getContext('2d');
-    context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    drawPlayerHpGauge(context, this.resources, context.canvas.width/2, 32, hp, maxHp);
-    this.mesh.material.map.needsUpdate = true;
+    this.draw((context: CanvasRenderingContext2D) => {
+      context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      drawPlayerHpGauge(context, this.resources, context.canvas.width/2, 32, hp, maxHp);
+    });
   }
 
   /** 表示位置を更新する */
