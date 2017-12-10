@@ -23,8 +23,8 @@ function threeDimension(view: ThreeDimensionLayer) {
 
 /** hudレイヤーのゲームループ時の処理 */
 function hud(view: HudLayer) {
-  const {playerGauge, enemyGauge} = view;
-
-  playerGauge.state.gameLoop(playerGauge.target);
+  const {enemyGauge} = view;
   enemyGauge.state.gameLoop(enemyGauge.target);
+
+  view.playerHpGauge.gameLoop();
 }
