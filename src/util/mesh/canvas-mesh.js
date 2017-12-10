@@ -1,18 +1,28 @@
-// @flow
-
 import * as THREE from "three";
 import type {Resources} from "../../resource/resource-manager";
-import {createCanvasMesh} from "../../util/mesh/mesh-creator";
 
-type Props = {
-  resources: Resources,
-  canvasWidth: number,
-  canvasHeight: number,
-  meshWidth: number,
-  meshHeight: number,
-};
+/**
+ * キャンバスから平面メッシュを生成する
+ *
+ * @param canvas キャンバス
+ * @param width 幅
+ * @param height 高
+ * @return キャンバスから生成したメッシュ
+ */
+export function createCanvasMesh(canvas: HTMLCanvasElement, width: number, height: number) {
+  const texture = new THREE.Texture(canvas);
+  texture.needsUpdate = true;
 
-/** キャンバステクスチャをもつMesh */
+  const material = new THREE.MeshBasicMaterial({map: texture});
+  material.transparent = true;
+
+  const planeGeometry = new THREE.PlaneGeometry(width, height);
+  return new THREE.Mesh(planeGeometry, material);
+}
+
+/**
+ * キャンバスメッシュおよび関連オブジェクトを集めたクラス
+ */
 export class CanvasMesh {
   /** リソース管理クラス */
   resources: Resources;
@@ -25,7 +35,13 @@ export class CanvasMesh {
   /** 描画を行うキャンバス */
   canvas: HTMLCanvasElement;
 
-  constructor(props: Props) {
+  constructor(props: {
+    resources: Resources,
+    canvasWidth: number,
+    canvasHeight: number,
+    meshWidth: number,
+    meshHeight: number,
+  }) {
     this.resources = props.resources;
 
     this.canvas = document.createElement('canvas');

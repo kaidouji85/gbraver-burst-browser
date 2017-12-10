@@ -1,6 +1,6 @@
 // @flow
 
-import {CanvasMesh} from "../canvas-mesh";
+import {CanvasMesh} from "../../../util/mesh/canvas-mesh";
 import type {Resources} from "../../../resource/resource-manager";
 import {PlayerHpGauge as drawPlayerHpGauge} from "../../../util/canvas/draw/hp-gauge";
 

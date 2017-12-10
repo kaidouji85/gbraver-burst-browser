@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import SchoolBuild from './school/index';
 import SkyBox from './blue-sky';
 import CityRoad from './city-road';
-import {createMeshFromJson} from '../../../util/mesh/mesh-creator';
+import {createMeshFromJson} from '../../../util/mesh/three-json-mesh';
 
 /**
  * 学校ステージ
