@@ -1,7 +1,7 @@
 // @flow
 import {PlayerHpGaugeState} from '../index';
 import {PlayerHpGauge} from '../target';
-import {Tween} from 'tween.js';
+import {Tween, Easing} from 'tween.js';
 
 /** HPゲージ変化のスピード(HP量/秒) */
 const SPEED = 1500;
@@ -28,6 +28,7 @@ export class Battle implements PlayerHpGaugeState {
     this._tween
       .to({_hp: toHp}, duration)
       .delay(1000)
+      .easing(Easing.Cubic.Out)
       .start();
   }
 
