@@ -1,6 +1,6 @@
 // @flow
 
-import type {BattleSceneState} from "../../state";
+import type {BattleSceneState} from "../../index";
 import type {Resources} from "../../../../resource/resource-manager";
 import {HpGauge} from "../../../../game-object/gauge/hp-gauge/base";
 import {createPlayerHpGauge as create} from '../../../../game-object/gauge/hp-gauge';

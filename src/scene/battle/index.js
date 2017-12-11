@@ -4,11 +4,10 @@ import type {BattleState, PlayerId} from "gbraver-burst-core/lib/flow-type";
 import type {Action} from "../action";
 import type {Observer} from '../observer';
 import {BattleSceneView} from "./view";
-import type {BattleSceneState} from "./state";
 import {actionHandler} from "./action-handler";
 
 /** コンストラクタのパラメータ */
-type Props = {
+type Params = {
   /** リソース管理オブジェクト */
   resources: Resources,
   /** 戦闘状態 */
@@ -26,20 +25,28 @@ export class BattleScene implements Observer {
   /** 戦闘画面全体の状態 */
   state: BattleSceneState;
 
-  constructor(props: Props) {
+  constructor(params: Params) {
     this.state = {
-      battleState: props.battleState,
-      playerId: props.playerId
+      battleState: params.battleState,
+      playerId: params.playerId
     };
     this.view = new BattleSceneView({
-      resources: props.resources,
+      resources: params.resources,
       state: this.state,
       observer: this
     });
   };
 
   /** 通知されたイベントに応じて、実際のアクションを呼び出す */
-  notify(action: Action) {
+  notify(action: Action): void {
     actionHandler(action, this);
   }
+}
+
+/** 戦闘シーン全体の状態 */
+export type BattleSceneState = {
+  /** 戦闘状態 */
+  battleState: BattleState,
+  /** 画面を開いているプレイヤーID */
+  playerId: PlayerId,
 }

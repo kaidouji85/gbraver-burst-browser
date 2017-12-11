@@ -4,7 +4,7 @@ import type {Resources} from "../../../../resource/resource-manager";
 import {ArmDozerIdList} from 'gbraver-burst-core';
 import {PlayerShinBraver} from "../../../../game-object/armdozer/shin-breaver";
 import {PlayerNeoLandozer} from "../../../../game-object/armdozer/neo-landozer";
-import type {BattleSceneState} from "../../state";
+import type {BattleSceneState} from "../../index";
 import type {ArmDozerId, PlayerBattleState} from "gbraver-burst-core/lib/flow-type";
 
 /** 与えられたパラメータからプレイヤースプライを生成する */

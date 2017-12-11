@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/resource-manager';
-import type {BattleSceneState} from "../../state";
+import type {BattleSceneState} from "../../index";
 import {createPlayerHpGauge} from './player-hp-gauge';
 import {HpGauge} from "../../../../game-object/gauge/hp-gauge/base";
 

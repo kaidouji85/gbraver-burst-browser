@@ -39,8 +39,6 @@ export class BattleState implements HpGaugeState {
 
   /** モデルを更新する */
   gameLoop(model: HpGaugeModel): HpGaugeModel {
-    // TODO スプレッド演算子に書き直す
-    //return {...model, hp: this._hp};
     return Object.assign({}, model, {hp: this._hp});
   }
 }
