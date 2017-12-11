@@ -2,8 +2,8 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/resource-manager';
 import type {BattleSceneState} from "../../state";
-import {PlayerHpGaugeContext} from "../../../../game-object/gauge/player-hp-gauge";
 import {createPlayerHpGauge} from './player-hp-gauge';
+import {HpGauge} from "../../../../game-object/gauge/hp-gauge/base";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -16,7 +16,7 @@ export class HudLayer {
   /** 本レイヤーのカメラ */
   camera: THREE.OrthographicCamera;
   /** プレイヤーHPゲージ */
-  playerHpGauge: PlayerHpGaugeContext;
+  playerHpGauge: HpGauge;
 
   constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();
@@ -31,6 +31,6 @@ export class HudLayer {
     );
 
     this.playerHpGauge = createPlayerHpGauge(props.resources, props.state);
-    this.playerHpGauge._target.getThreeJsObjectList().forEach(v => this.scene.add(v));
+    this.playerHpGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
   }
 }

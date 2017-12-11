@@ -2,14 +2,10 @@
 
 import type {BattleSceneState} from "../../state";
 import type {Resources} from "../../../../resource/resource-manager";
-import {PlayerHpGaugeContext} from "../../../../game-object/gauge/player-hp-gauge";
+import {HpGauge} from "../../../../game-object/gauge/hp-gauge/base";
+import {createPlayerHpGauge as create} from '../../../../game-object/gauge/hp-gauge';
 
-export function createPlayerHpGauge(resources: Resources, state: BattleSceneState): PlayerHpGaugeContext {
+export function createPlayerHpGauge(resources: Resources, state: BattleSceneState): HpGauge {
   const playerInfo = state.battleState.players.find(v => v.playerId === state.playerId) || state.battleState.players[0];
-  const gauge = new PlayerHpGaugeContext({
-    resources: resources,
-    hp: playerInfo.armDozer.hp,
-    maxHp: playerInfo.armDozer.maxHp
-  });
-  return gauge;
+  return create(resources, playerInfo.armDozer.hp, playerInfo.armDozer.maxHp);
 }
