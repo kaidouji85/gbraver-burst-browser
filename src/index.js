@@ -1,11 +1,9 @@
 // @flow
 import Tween from 'tween.js';
 import {ResourceManager} from './resource/resource-manager';
-import {BattleApplication} from './app/battle/index.js';
-import type {Application} from './app/application';
+import {BattleScene} from './scene/battle/index.js';
 import {ArmDozerIdList, ArmDozers, start} from "gbraver-burst-core";
-import type {BattleAppState} from "./app/battle/state";
-import type {BattleState} from "gbraver-burst-core/lib/flow-type";
+import type {Observer} from "./scene/observer";
 
 (async function(){
   const resourceManager:  ResourceManager = new ResourceManager();
@@ -16,7 +14,7 @@ import type {BattleState} from "gbraver-burst-core/lib/flow-type";
   ]);
 
   // TODO 開発用にダミーデータを作成している
-  const app: Application = new BattleApplication({
+  const scene: Observer = new BattleScene({
     resources: resourceManager.resources,
     playerId: 'test01',
     battleState: start(
@@ -29,11 +27,12 @@ import type {BattleState} from "gbraver-burst-core/lib/flow-type";
       }
     )
   });
+  scene.notify({type: 'debugMode'});
 
   const gameLoop = (time: ?number) => {
     requestAnimationFrame(gameLoop);
-    app.gameLoop();
     Tween.update(time);
+    scene.notify({type: 'gameLoop'});
   };
   gameLoop();
 })();

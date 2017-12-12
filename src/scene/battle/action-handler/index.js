@@ -1,0 +1,21 @@
+// @flow
+
+import type {Action} from "../../action";
+import {BattleScene} from "../index";
+import {gameLoop} from "./game-loop";
+import {debugMode} from "./debug-mode";
+import {resize} from "./resize";
+
+/** アクションハンドラ */
+export function actionHandler(action: Action, scene: BattleScene) {
+  switch (action.type) {
+    case 'gameLoop':
+      return gameLoop(scene.view, scene.state, action);
+    case 'resize':
+      return resize(scene.view, scene.state, action);
+    case 'debugMode':
+      return debugMode(scene.view, scene.state, action);
+    default:
+      return;
+  }
+}
