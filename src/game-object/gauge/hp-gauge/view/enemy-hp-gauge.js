@@ -4,10 +4,11 @@ import {CanvasMesh} from "../../../../util/mesh/canvas-mesh";
 import type {Resources} from "../../../../resource/resource-manager";
 import {HpGaugeView} from '../base';
 import type {HpGaugeModel} from "../base";
-import {drawPlayerHpGauge} from "../../../../util/canvas/draw/hp-gauge";
+import {drawEnemyHpGauge} from "../../../../util/canvas/draw/hp-gauge";
 
-/** プレイヤーHPゲージ */
-export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
+
+/** 敵HPゲージ */
+export class EnemyHpGaugeView extends CanvasMesh implements HpGaugeView {
   _modelCache: HpGaugeModel;
 
   constructor(resources: Resources) {
@@ -52,13 +53,14 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
   _refreshGauge(model: HpGaugeModel): void {
     this.draw((context: CanvasRenderingContext2D) => {
       context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      drawPlayerHpGauge(context, this.resources, context.canvas.width/2, 32, model.hp, model.maxHp);
+      drawEnemyHpGauge(context, this.resources, context.canvas.width/2, 32, model.hp, model.maxHp);
     });
   }
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    this.mesh.position.x = (window.innerWidth - this.meshWidth) / 2;
+    //this.mesh.position.x = this.meshWidth / 2;
+    this.mesh.position.x = (-window.innerWidth + this.meshWidth) / 2;
     this.mesh.position.y = (window.innerHeight - this.meshHeight) / 2;
   }
 }

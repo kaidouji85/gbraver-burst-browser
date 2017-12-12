@@ -16,7 +16,7 @@ import {drawNumberLeft, drawNumberRight} from '../number';
  * @param hp 現在のHP
  * @param maxHP 最大HP
  */
-export function PlayerHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
+export function drawPlayerHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
   const value = hp / maxHp;
 
   drawImage(context, resources, CANVAS_PICTURE_PATH.GAUGE_BASE, dx, dy);
@@ -37,7 +37,7 @@ export function PlayerHpGauge(context: CanvasRenderingContext2D, resources: Reso
  * @param hp 現在のHP
  * @param maxHP 最大HP
  */
-export function EnemyHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
+export function drawEnemyHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
   const value = hp / maxHp;
 
   context.save();
