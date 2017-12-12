@@ -13,10 +13,13 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
   _modelCache: HpGaugeModel;
 
   constructor(resources: Resources) {
+    const meshWidth = 300;
+    const meshHeight = 80;
+
     super({
       resources,
-      meshWidth: 300,
-      meshHeight: 300,
+      meshWidth,
+      meshHeight,
       canvasWidth: 256,
       canvasHeight: 256,
     });
@@ -24,11 +27,13 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
       hp: 0,
       maxHp: 0
     };
+
+    // HPゲージに必要な大きさだけテクスチャから抜き取る
     rectangle({
       geo: this.mesh.geometry,
       pos: new THREE.Vector2(0, 0),
       width: 1,
-      height: 1
+      height: meshHeight / meshWidth
     });
   }
 
@@ -60,7 +65,9 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
   _refreshGauge(model: HpGaugeModel): void {
     this.draw((context: CanvasRenderingContext2D) => {
       context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-      drawPlayerHpGauge(context, this.resources, context.canvas.width/2, 32, model.hp, model.maxHp);
+
+      // UVマッピングの原点は左下なので、HPゲージがテクスチャの一番下に描画されるようにする
+      drawPlayerHpGauge(context, this.resources, context.canvas.width/2, context.canvas.height - 32, model.hp, model.maxHp);
     });
   }
 
