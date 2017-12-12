@@ -44,14 +44,16 @@ const TILE_NUM_CROSS_WALK_02 = 6;
  * @returns タイルマップ
  */
 function createTileMesh(tileNum: number, resources: Resources): THREE.Mesh {
-  let geometry = new THREE.PlaneGeometry(MESH_HEIGHT, MESH_WIDTH, 1, 1);
+  let geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT, 1, 1);
   rectangle({
     geo: geometry,
-    p1: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * tileNum, 0),
-    p2: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * (tileNum + 1), 0),
-    p3: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * (tileNum + 1), TILE_HEIGHT/PICT_HEIGHT),
-    p4: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * tileNum, TILE_HEIGHT/PICT_HEIGHT),
+    pos: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * tileNum, 0),
+    width: TILE_WIDTH/PICT_WIDTH,
+    height: TILE_HEIGHT/PICT_HEIGHT
   });
+
+  //p1: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * tileNum, 0),
+
 
   let texture = resources.textures.find(item => item.path === TEXTURE_PATHS.CITY_LOAD);
   let material = new THREE.MeshBasicMaterial({
@@ -60,8 +62,7 @@ function createTileMesh(tileNum: number, resources: Resources): THREE.Mesh {
   });
 
   let mesh = new THREE.Mesh(geometry, material);
-  mesh.rotation.x = -90 * Math.PI / 180;
-  mesh.rotation.z = 90 * Math.PI / 180;
+  mesh.rotation.x = 90 * Math.PI / 180;
   return mesh;
 }
 
@@ -81,8 +82,6 @@ export default function CityRoad(resources: Resources): THREE.Mesh {
 
   let group = new THREE.Group();
 
-
-
   [
     tile(-MESH_WIDTH/2, 0, TILE_NUM_CROSS_WALK_01),
     tile(MESH_WIDTH/2, 0, TILE_NUM_CROSS_WALK_02),
@@ -99,6 +98,8 @@ export default function CityRoad(resources: Resources): THREE.Mesh {
     // カメラから向かって左
     R.times(n => tile(-MESH_WIDTH/2 - MESH_WIDTH * (n+3), 0, TILE_NUM_NORMAL_ROAD), 40)
   ).forEach(item => group.add(item));
+
+  //group.add(tile(MESH_WIDTH/2 + MESH_WIDTH * 2, 0, TILE_NUM_UNDER_STOP_02))
 
   return group;
 }

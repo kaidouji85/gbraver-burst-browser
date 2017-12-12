@@ -14,18 +14,23 @@ import * as THREE from 'three';
 export function rectangle(param: {
   // 平面オブジェクト
   geo: THREE.PlaneGeometry,
-  // UV座標　左下
-  p1: THREE.Vector2,
-  // UV座標 右下
-  p2: THREE.Vector2,
-  // UV座標 右上
-  p3: THREE.Vector2,
-  // UV座標 左上
-  p4: THREE.Vector2
-}): THREE.PlaneGeometry
-{
-  param.geo.faceVertexUvs[0][0] = [param.p1, param.p2, param.p4];
-  param.geo.faceVertexUvs[0][1] = [param.p2, param.p3, param.p4];
+  // 基準点
+  pos: THREE.Vector2,
+  // 幅
+  width: number,
+  // 高さ
+  height: number,
+}) {
+  param.geo.faceVertexUvs[0][0] = [
+    new THREE.Vector2(param.pos.x, param.pos.y + param.height),
+    param.pos,
+    new THREE.Vector2(param.pos.x + param.width, param.pos.y + param.height)
+  ];
+  param.geo.faceVertexUvs[0][1] = [
+    param.pos,
+    new THREE.Vector2(param.pos.x + param.width, param.pos.y),
+    new THREE.Vector2(param.pos.x + param.width, param.pos.y + param.height)
+  ];
 
   return param.geo;
 }

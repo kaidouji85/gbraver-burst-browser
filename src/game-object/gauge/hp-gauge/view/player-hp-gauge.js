@@ -1,10 +1,12 @@
 // @flow
 
+import * as THREE from 'three';
 import {CanvasMesh} from "../../../../util/mesh/canvas-mesh";
 import type {Resources} from "../../../../resource/resource-manager";
 import {HpGaugeView} from '../base';
 import type {HpGaugeModel} from "../base";
 import {drawPlayerHpGauge} from "../../../../util/canvas/draw/hp-gauge";
+import {rectangle} from "../../../../util/uv-mapping/rectangle";
 
 /** プレイヤーHPゲージ */
 export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
@@ -22,6 +24,12 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
       hp: 0,
       maxHp: 0
     };
+    rectangle({
+      geo: this.mesh.geometry,
+      pos: new THREE.Vector2(0, 0),
+      width: 1,
+      height: 1
+    });
   }
 
   /** ビューにモデルを反映させる */
