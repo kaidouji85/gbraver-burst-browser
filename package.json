@@ -6,13 +6,12 @@
   "scripts": {
     "start": "webpack-dev-server",
     "postinstall": "npm run build",
-    "start-stub": "webpack-dev-server --config webpack.stub.js",
+    "start:stub": "webpack-dev-server --config webpack.stub.js",
     "build": "webpack",
-    "build-stub": "webpack --config webpack.stub.js",
-    "flow-init": "flow init",
+    "build:stub": "webpack --config webpack.stub.js",
     "upload-s3": "s3-upload",
     "clean": "rimraf build",
-    "deploy": "npm-run-all clean build build-stub upload-s3"
+    "deploy": "npm-run-all clean build build:stub upload-s3"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -26,7 +25,6 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
     "copy-webpack-plugin": "^4.2.0",
