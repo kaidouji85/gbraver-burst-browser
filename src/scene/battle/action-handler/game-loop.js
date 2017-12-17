@@ -26,4 +26,5 @@ function hud(view: HudLayer) {
   view.playerHpGauge.gameLoop();
   view.playerBatteryGauge.gameLoop();
   view.enemyHpGauge.gameLoop();
+  view.enemyBatteryGauge.gameLoop();
 }
