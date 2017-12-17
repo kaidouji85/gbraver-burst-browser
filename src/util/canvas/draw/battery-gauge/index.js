@@ -15,7 +15,7 @@ import {BatteryBar} from './bar';
  * @param dy 描画Y
  * @param value バッテリーの値
  */
-export function PlayerBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number) {
+export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number) {
   drawImage(context, resources, CANVAS_PICTURE_PATH.GAUGE_BASE, dx, dy);
   BatteryBar(context, resources, dx - 8, dy + 8, value);
 
@@ -33,7 +33,7 @@ export function PlayerBatteryGauge(context: CanvasRenderingContext2D, resources:
  * @param dy 描画Y
  * @param value バッテリーの値
  */
-export function EnemyBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number) {
+export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number) {
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
 

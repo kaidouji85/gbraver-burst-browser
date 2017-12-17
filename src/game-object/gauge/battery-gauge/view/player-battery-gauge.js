@@ -1,17 +1,16 @@
 // @flow
 
 import {CanvasMesh} from "../../../../util/mesh/canvas-mesh";
+import {BatteryGaugeView} from '../base';
+import type {BatteryGaugeModel} from "../base";
 import type {Resources} from "../../../../resource/resource-manager";
-import {HpGaugeView} from '../base';
-import type {HpGaugeModel} from "../base";
-import {drawEnemyHpGauge} from "../../../../util/canvas/draw/hp-gauge";
-import {rectangle} from "../../../../util/uv-mapping/rectangle";
 import * as THREE from "three";
+import {rectangle} from "../../../../util/uv-mapping/rectangle";
+import {drawPlayerBatteryGauge} from "../../../../util/canvas/draw/battery-gauge";
 
-
-/** 敵HPゲージ */
-export class EnemyHpGaugeView extends CanvasMesh implements HpGaugeView {
-  _modelCache: HpGaugeModel;
+/** プレイヤーバッテリーゲージ */
+export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeView {
+  _modelCache: BatteryGaugeModel;
 
   constructor(resources: Resources) {
     const meshWidth = 300;
@@ -25,11 +24,11 @@ export class EnemyHpGaugeView extends CanvasMesh implements HpGaugeView {
       canvasHeight: 256,
     });
     this._modelCache = {
-      hp: 0,
-      maxHp: 0
+      battery: 0,
+      maxBattery: 0
     };
 
-    // HPゲージに必要な大きさだけテクスチャから抜き取る
+    // バッテリーゲージに必要な大きさだけテクスチャから抜き取る
     rectangle({
       geo: this.mesh.geometry,
       pos: new THREE.Vector2(0, 0),
@@ -39,7 +38,7 @@ export class EnemyHpGaugeView extends CanvasMesh implements HpGaugeView {
   }
 
   /** ビューにモデルを反映させる */
-  gameLoop(model: HpGaugeModel): void {
+  gameLoop(model: BatteryGaugeModel): void {
     if(this._isChanged(this._modelCache, model)) {
       this._refreshGauge(model);
     }
@@ -54,8 +53,8 @@ export class EnemyHpGaugeView extends CanvasMesh implements HpGaugeView {
    * @param newModel 更新されたモデル
    * @return 判定結果、trueで変更された
    */
-  _isChanged(model: HpGaugeModel, newModel: HpGaugeModel): boolean {
-    return model.hp !== newModel.hp || model.maxHp !== newModel.maxHp;
+  _isChanged(model: BatteryGaugeModel, newModel: BatteryGaugeModel): boolean {
+    return model.battery !== newModel.battery || model.maxBattery !== newModel.maxBattery;
   }
 
   /**
@@ -63,18 +62,18 @@ export class EnemyHpGaugeView extends CanvasMesh implements HpGaugeView {
    *
    * @param model HPゲージモデル
    */
-  _refreshGauge(model: HpGaugeModel): void {
+  _refreshGauge(model: BatteryGaugeModel): void {
     this.draw((context: CanvasRenderingContext2D) => {
       context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       // UVマッピングの原点は左下なので、HPゲージがテクスチャの一番下に描画されるようにする
-      drawEnemyHpGauge(context, this.resources, context.canvas.width/2, context.canvas.height - 32, model.hp, model.maxHp);
+      drawPlayerBatteryGauge(context, this.resources, context.canvas.width/2, context.canvas.height - 32, model.battery);
     });
   }
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    this.mesh.position.x = (-window.innerWidth + this.meshWidth) / 2;
-    this.mesh.position.y = window.innerHeight / 2  - 40;
+    this.mesh.position.x = (window.innerWidth - this.meshWidth) / 2;
+    this.mesh.position.y = window.innerHeight / 2 - 96;
   }
 }

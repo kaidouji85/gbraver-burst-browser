@@ -24,5 +24,6 @@ function threeDimension(view: ThreeDimensionLayer) {
 /** hudレイヤーのゲームループ時の処理 */
 function hud(view: HudLayer) {
   view.playerHpGauge.gameLoop();
+  view.playerBatteryGauge.gameLoop();
   view.enemyHpGauge.gameLoop();
 }

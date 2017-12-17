@@ -74,6 +74,6 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
   /** 表示位置を更新する */
   _refreshPos(): void {
     this.mesh.position.x = (window.innerWidth - this.meshWidth) / 2;
-    this.mesh.position.y = (window.innerHeight - this.meshHeight) / 2;
+    this.mesh.position.y = window.innerHeight / 2 - 40;
   }
 }
