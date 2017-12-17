@@ -1,13 +1,13 @@
 // @flow
 
-import {BattleState} from "./battle";
+import {ChangeImmediately} from "./change-immediately";
 
 /** 状態オブジェクトをまとめたもの */
 export class BatteryGaugeStateContainer {
   /** 戦闘状態 */
-  battle: BattleState;
+  changeImmediately: ChangeImmediately;
 
   constructor() {
-    this.battle = new BattleState();
+    this.changeImmediately = new ChangeImmediately();
   }
 }

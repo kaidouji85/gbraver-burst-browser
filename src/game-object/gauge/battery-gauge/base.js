@@ -17,7 +17,7 @@ export class BatteryGauge {
       maxBattery: params.maxBattery
     };
     this._stateContainer = new BatteryGaugeStateContainer();
-    this._state = this._stateContainer.battle;
+    this._state = this._stateContainer.changeImmediately;
   }
 
   /** シーンに追加するthree.jsオブジェクトを返す */

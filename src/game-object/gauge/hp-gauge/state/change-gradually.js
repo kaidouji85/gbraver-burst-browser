@@ -1,16 +1,16 @@
 // @flow
 import {HpGaugeState} from '../base'
 import type {HpGaugeModel} from "../base";
-import {Tween, Easing} from 'tween.js';
+import {Tween} from 'tween.js';
 
-/** HPゲージ変化のスピード(HP量/秒) */
-const SPEED = 1500;
+/** 最小値から最大値までにかかる時間(ミリ秒) */
+const BASE_TIME = 1000;
 
 /**
  * 戦闘画面での状態
  * 本状態ではHPが増減した場合、徐々に目的の値に近づいていく
  */
-export class BattleState implements HpGaugeState {
+export class ChangeGradually implements HpGaugeState {
   /** 現在のHP */
   _hp: number;
   /** tweenオブジェクト */
@@ -28,12 +28,11 @@ export class BattleState implements HpGaugeState {
    * @param toHp 完了するHP
    */
   start(model: HpGaugeModel, toHp: number) {
-    const duration = (toHp - model.hp) / SPEED * 1000;
+    const duration = Math.abs(toHp - model.hp) / model.maxHp * BASE_TIME;
     this._hp = model.hp;
     this._tween
       .to({_hp: toHp}, duration)
       .delay(1000)
-      .easing(Easing.Cubic.Out)
       .start();
   }
 

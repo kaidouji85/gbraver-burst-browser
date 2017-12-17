@@ -12,12 +12,12 @@ export class HpGauge {
 
   constructor(params: {view: HpGaugeView, hp: number, maxHp: number}) {
     this._model = {
-      hp: 0,
+      hp: params.hp,
       maxHp: params.maxHp
     };
     this._stateContainer = new HpGaugeStateContainer();
-    this._stateContainer.battle.start(this._model, params.hp);
-    this._state = this._stateContainer.battle;
+    this._stateContainer.changeGradually.start(this._model, params.hp);
+    this._state = this._stateContainer.changeGradually;
     this._view = params.view;
   };
 

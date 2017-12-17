@@ -1,13 +1,13 @@
 // @flow
 
-import {BattleState} from "./battle";
+import {ChangeGradually} from "./change-gradually";
 
 /** 状態オブジェクトをまとめたもの */
 export class HpGaugeStateContainer {
   /** 戦闘状態 */
-  battle: BattleState;
+  changeGradually: ChangeGradually;
 
   constructor() {
-    this.battle = new BattleState();
+    this.changeGradually = new ChangeGradually();
   }
 }
