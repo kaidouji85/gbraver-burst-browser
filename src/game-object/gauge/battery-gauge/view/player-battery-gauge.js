@@ -67,7 +67,7 @@ export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeVi
       context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       // UVマッピングの原点は左下なので、HPゲージがテクスチャの一番下に描画されるようにする
-      drawPlayerBatteryGauge(context, this.resources, context.canvas.width/2, context.canvas.height - 32, model.battery);
+      drawPlayerBatteryGauge(context, this.resources, context.canvas.width/2, context.canvas.height - 32, model.battery, model.maxBattery);
     });
   }
 

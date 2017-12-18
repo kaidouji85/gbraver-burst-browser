@@ -14,10 +14,11 @@ import {BatteryBar} from './bar';
  * @param dx 描画X
  * @param dy 描画Y
  * @param value バッテリーの値
+ * @param maxValue バッテリー最大値
  */
-export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number) {
+export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
   drawImage(context, resources, CANVAS_PICTURE_PATH.GAUGE_BASE, dx, dy);
-  BatteryBar(context, resources, dx - 8, dy + 8, Math.floor(value));
+  BatteryBar(context, resources, dx - 8, dy + 8, Math.floor(value), Math.floor(maxValue));
 
   drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_GAUGE_LABEL , dx + 72, dy - 6);
   drawNumberLeft(context, resources, CANVAS_PICTURE_PATH.BATTERY_NUMBER, dx - 100, dy - 24 , Math.floor(value));
@@ -32,13 +33,14 @@ export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resour
  * @param dx 描画X
  * @param dy 描画Y
  * @param value バッテリーの値
+ * @param maxValue バッテリー最大値
  */
-export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number) {
+export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
 
   drawImage(context, resources, CANVAS_PICTURE_PATH.GAUGE_BASE, - dx, dy);
-  BatteryBar(context, resources, - dx - 8, dy + 8, Math.floor(value));
+  BatteryBar(context, resources, - dx - 8, dy + 8, Math.floor(value), Math.floor(maxValue));
 
   context.restore();
 
