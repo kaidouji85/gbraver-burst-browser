@@ -21,8 +21,8 @@ export class EnemyShinBraverView extends PlayerShinBraverView {
       model.position.z
     );
     this._mesh.scale.x = -1;
-    // TODO アニメフレームを設定する
-    this._texture.offset.x = 0;
+    this._mesh.material.map = this._textureContainer._getTexture(model.animation.type);
+    this._mesh.material.map.offset.x = model.animation.frame;
     this._mesh.quaternion.copy(camera.quaternion);
   }
 }
