@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import type {Resources} from "../../../../resource/resource-manager";
+import type {Resources, Texture} from "../../../../resource/resource-manager";
 import {createAnimatedTexture} from "../../../../util/texture/texture-animation";
 import {TEXTURE_PATHS} from "../../../../resource/resource-manager";
 import type {AnimationType} from "../base";
@@ -28,12 +28,14 @@ export class ShinBraverTextureContainer {
 
 /** 立ち */
 function createStand(resources: Resources): THREE.Texture {
-  const origin = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_STAND);
-  return createAnimatedTexture(origin.texture || new THREE.Texture(), 1, 1);
+  const origin: ?Texture = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_STAND);
+  const texture = origin ? origin.texture : new THREE.Texture();
+  return createAnimatedTexture(texture, 1, 1);
 }
 
 /** パンチ */
 function createPunch(resources: Resources): THREE.Texture {
-  const origin = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_PUNCH);
-  return createAnimatedTexture(origin.texture || new THREE.Texture(), 10, 1);
+  const origin: ?Texture = resources.textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_PUNCH);
+  const texture = origin ? origin.texture : new THREE.Texture();
+  return createAnimatedTexture(texture, 10, 1);
 }
