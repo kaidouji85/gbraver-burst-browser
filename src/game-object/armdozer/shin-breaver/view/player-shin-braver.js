@@ -7,8 +7,8 @@ import {createAnimatedTexture} from "../../../../util/texture/texture-animation"
 import {TEXTURE_PATHS} from "../../../../resource/resource-manager";
 import type {ShinBraverModel} from "../base";
 
-const MESH_WIDTH = 320;
-const MESH_HEIGHT = 320;
+export const MESH_WIDTH = 320;
+export const MESH_HEIGHT = 320;
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {

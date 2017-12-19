@@ -2,7 +2,6 @@
 import type {Resources} from '../../../../resource/resource-manager';
 import * as THREE from 'three';
 import SchoolStage from '../../../../game-object/stage/kamata/index';
-import type {DepricatedArmDozerSprite} from "../../../../game-object/armdozer/depuricated-armdozer-sprite";
 import type {BattleSceneState} from "../../index";
 import {PlayerSprite} from "./player-sprite";
 import {EnemySprite} from "./enemy-sprite";
@@ -21,7 +20,7 @@ export class ThreeDimensionLayer {
   /** プレイヤースプライト */
   playerSprite: ArmDozer;
   /** 敵スプライト */
-  enemySprite: DepricatedArmDozerSprite;
+  enemySprite: ArmDozer;
 
   constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();
