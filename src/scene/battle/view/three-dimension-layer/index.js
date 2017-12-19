@@ -5,7 +5,7 @@ import SchoolStage from '../../../../game-object/stage/kamata/index';
 import type {BattleSceneState} from "../../index";
 import {PlayerSprite} from "./player-sprite";
 import {EnemySprite} from "./enemy-sprite";
-import type {ArmDozer} from '../../../../game-object/armdozer/base';
+import type {ArmDozerSprite} from '../../../../game-object/armdozer/base';
 
 /**
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
@@ -18,9 +18,9 @@ export class ThreeDimensionLayer {
   /** 学校フィールド */
   battleField: SchoolStage;
   /** プレイヤースプライト */
-  playerSprite: ArmDozer;
+  playerSprite: ArmDozerSprite;
   /** 敵スプライト */
-  enemySprite: ArmDozer;
+  enemySprite: ArmDozerSprite;
 
   constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();

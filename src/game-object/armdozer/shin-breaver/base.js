@@ -1,11 +1,11 @@
 // @flow
 
-import {ArmDozer} from '../base';
+import {ArmDozerSprite} from '../base';
 import {ShinBraverStateContainer} from "./state";
 import * as THREE from "three";
 
 /** シンブレイバーのゲームオブジェクト */
-export class ShinBraver implements ArmDozer {
+export class ShinBraver implements ArmDozerSprite {
   _model: ShinBraverModel;
   _state: ShinBraverState;
   _stateContainer: ShinBraverStateContainer;

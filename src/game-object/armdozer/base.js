@@ -3,7 +3,7 @@
 import * as THREE from "three";
 
 /** アームドーザスプライト */
-export interface ArmDozer {
+export interface ArmDozerSprite {
   /** ゲームループでの処理 */
   gameLoop(camera: THREE.Camera): void;
 
