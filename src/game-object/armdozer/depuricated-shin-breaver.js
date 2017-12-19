@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import {Tween} from 'tween.js';
 import {createAnimatedTexture} from '../../util/texture/texture-animation';
 import {flip} from '../../util/mesh/flip-horizon';
-import type {ArmDozerSprite} from "./armdozer-sprite";
+import type {DepricatedArmDozerSprite} from "./depuricated-armdozer-sprite";
 
 const MESH_WIDTH = 320;
 const MESH_HEIGHT = 320;
@@ -26,7 +26,7 @@ function BasicMesh(): THREE.Mesh {
 /**
  * プレイヤーのシンブレイバー
  */
-export class PlayerShinBraver implements ArmDozerSprite {
+export class PlayerShinBraver implements DepricatedArmDozerSprite {
   /** メッシュ */
   mesh: THREE.Mesh;
 

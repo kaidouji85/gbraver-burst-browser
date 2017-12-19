@@ -3,7 +3,7 @@ import type {Resources} from '../../resource/resource-manager';
 import {TEXTURE_PATHS} from '../../resource/resource-manager';
 import * as THREE from 'three';
 import {flip} from '../../util/mesh/flip-horizon';
-import type {ArmDozerSprite} from "./armdozer-sprite";
+import type {DepricatedArmDozerSprite} from "./depuricated-armdozer-sprite";
 
 const MESH_WIDTH = 320;
 const MESH_HEIGHT = 320;
@@ -23,7 +23,7 @@ function BasicMesh(): THREE.Mesh {
 /**
  * プレイヤーのネオランドーザ
  */
-export class PlayerNeoLandozer implements ArmDozerSprite {
+export class PlayerNeoLandozer implements DepricatedArmDozerSprite {
   /** メッシュ */
   mesh: THREE.Mesh;
 
