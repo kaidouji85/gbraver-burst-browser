@@ -1,7 +1,7 @@
 // @flow
 import {HpGaugeState} from '../base'
 import type {HpGaugeModel} from "../base";
-import {Tween} from 'tween.js';
+import {Tween} from '@tweenjs/tween.js';
 
 /** 最小値から最大値までにかかる時間(ミリ秒) */
 const BASE_TIME = 1000;

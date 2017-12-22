@@ -1,5 +1,5 @@
 // @flow
-import Tween from 'tween.js';
+import Tween from '@tweenjs/tween.js';
 import {ResourceManager} from './resource/resource-manager';
 import {BattleScene} from './scene/battle/index.js';
 import {ArmDozerIdList, ArmDozers, start} from "gbraver-burst-core";

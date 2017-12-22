@@ -16,11 +16,11 @@
   "author": "y.takeuchi",
   "license": "ISC",
   "dependencies": {
+    "@tweenjs/tween.js": "^17.1.1",
     "gbraver-burst-core": "^0.1.6",
     "ramda": "^0.25.0",
     "three": "^0.88.0",
-    "three-orbitcontrols": "^1.2.1",
-    "tween.js": "^16.6.0"
+    "three-orbitcontrols": "^1.2.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
