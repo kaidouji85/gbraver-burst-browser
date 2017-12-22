@@ -16,20 +16,19 @@ export class HpGauge {
       maxHp: params.maxHp
     };
     this._stateContainer = new HpGaugeStateContainer();
-    this._stateContainer.changeGradually.start(this._model, params.hp);
-    this._state = this._stateContainer.changeGradually;
+    this._state = this._stateContainer.changeGradually(this._model, params.hp);
     this._view = params.view;
   };
-
-  /** シーンに追加するthree.jsオブジェクトを返す */
-  getThreeJsObjectList(): THREE.Mesh[] {
-    return this._view.getThreeJsObjectList();
-  }
 
   /** ゲームループ毎の処理 */
   gameLoop() {
     this._model = this._state.gameLoop(this._model);
     this._view.gameLoop(this._model);
+  }
+
+  /** シーンに追加するthree.jsオブジェクトを返す */
+  getThreeJsObjectList(): THREE.Mesh[] {
+    return this._view.getThreeJsObjectList();
   }
 }
 

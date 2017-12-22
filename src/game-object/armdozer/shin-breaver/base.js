@@ -24,15 +24,17 @@ export class ShinBraver implements ArmDozerSprite {
       }
     };
     this._stateContainer = new ShinBraverStateContainer();
-    this._state = this._stateContainer.stand;
+    this._state = this._stateContainer.stand();
     this._view = params.view;
   }
 
+  /** ゲームループ毎の処理*/
   gameLoop(camera: THREE.Camera): void {
     this._model = this._state.gameLoop(this._model);
     this._view.gameLoop(this._model, camera);
   }
 
+  /** 本スプライトに関連するthree.jsオブジェクトを返す */
   getThreeJsObjects(): THREE.Object3D[] {
     return this._view.getThreeJsObjects();
   }

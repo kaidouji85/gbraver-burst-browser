@@ -17,18 +17,18 @@ export class BatteryGauge {
       maxBattery: params.maxBattery
     };
     this._stateContainer = new BatteryGaugeStateContainer();
-    this._state = this._stateContainer.changeImmediately;
-  }
-
-  /** シーンに追加するthree.jsオブジェクトを返す */
-  getThreeJsObjectList(): THREE.Mesh[] {
-    return this._view.getThreeJsObjectList();
+    this._state = this._stateContainer.changeImmediately(this._model.battery);
   }
 
   /** ゲームループ毎の処理 */
   gameLoop() {
     this._model = this._state.gameLoop(this._model);
     this._view.gameLoop(this._model);
+  }
+
+  /** シーンに追加するthree.jsオブジェクトを返す */
+  getThreeJsObjectList(): THREE.Mesh[] {
+    return this._view.getThreeJsObjectList();
   }
 }
 

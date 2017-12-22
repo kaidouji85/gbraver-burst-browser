@@ -8,8 +8,15 @@ import type {BatteryGaugeModel} from '../base';
  *
  */
 export class ChangeImmediately implements BatteryGaugeState {
+  _battery: number;
+
+  /** 状態開始 */
+  start(toBattery: number) {
+    this._battery = toBattery;
+  }
+
+  /** ゲームループの処理 */
   gameLoop(model: BatteryGaugeModel): BatteryGaugeModel {
-    // NOP
-    return model;
+    return Object.assign({}, model, {battery: this._battery});
   }
 }

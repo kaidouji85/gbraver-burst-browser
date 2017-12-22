@@ -4,9 +4,14 @@ import {StandState} from "./stand";
 
 /** 状態を集めたもの */
 export class ShinBraverStateContainer {
-  stand: StandState;
+  _stand: StandState;
 
   constructor() {
-    this.stand = new StandState();
+    this._stand = new StandState();
+  }
+
+  /** 立ち状態 */
+  stand(): StandState {
+    return this._stand;
   }
 }

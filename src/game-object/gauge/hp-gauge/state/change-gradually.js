@@ -21,12 +21,7 @@ export class ChangeGradually implements HpGaugeState {
     this._tween = new Tween(this);
   }
 
-  /**
-   * 本状態を開始する際に呼び出す関数
-   *
-   * @param model HPゲージモデル
-   * @param toHp 完了するHP
-   */
+  /** 状態開始 */
   start(model: HpGaugeModel, toHp: number) {
     const duration = Math.abs(toHp - model.hp) / model.maxHp * BASE_TIME;
     this._hp = model.hp;
@@ -34,6 +29,11 @@ export class ChangeGradually implements HpGaugeState {
       .to({_hp: toHp}, duration)
       .delay(1000)
       .start();
+  }
+
+  /** 状態終了 */
+  stop() {
+    this._tween.stop();
   }
 
   /** モデルを更新する */
