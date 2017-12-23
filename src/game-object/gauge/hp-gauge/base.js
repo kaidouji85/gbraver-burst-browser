@@ -1,13 +1,15 @@
 // @flow
 
-import {HpGaugeStateContainer} from "./state";
 import * as THREE from "three";
+import {ChangeGradually} from "./state/change-gradually";
 
 /** HPゲージゲームオブジェクト */
 export class HpGauge {
   _model: HpGaugeModel;
   _state: HpGaugeState;
-  _stateContainer: HpGaugeStateContainer;
+  _stateContainer: {
+    changeGradually: ChangeGradually
+  };
   _view: HpGaugeView;
 
   constructor(params: {view: HpGaugeView, hp: number, maxHp: number}) {
@@ -15,8 +17,10 @@ export class HpGauge {
       hp: params.hp,
       maxHp: params.maxHp
     };
-    this._stateContainer = new HpGaugeStateContainer();
-    this._state = this._stateContainer.changeGradually(this._model, params.hp);
+    this._stateContainer = {
+      changeGradually: new ChangeGradually()
+    };
+    this.changeGradually(params.hp);
     this._view = params.view;
   };
 
@@ -29,6 +33,18 @@ export class HpGauge {
   /** シーンに追加するthree.jsオブジェクトを返す */
   getThreeJsObjectList(): THREE.Mesh[] {
     return this._view.getThreeJsObjectList();
+  }
+
+  /** 指定したHPに徐々に近づいていく */
+  changeGradually(toHp: number) {
+    this._stopAllTween();
+    this._stateContainer.changeGradually.start(this._model, toHp);
+    this._state = this._stateContainer.changeGradually;
+  }
+
+  /** 全てのTweenを停止する */
+  _stopAllTween() {
+    this._stateContainer.changeGradually.stop();
   }
 }
 

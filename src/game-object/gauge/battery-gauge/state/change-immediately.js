@@ -5,7 +5,7 @@ import type {BatteryGaugeModel} from '../base';
 
 
 /**
- *
+ * 指定したバッテリー値に即座に変更する
  */
 export class ChangeImmediately implements BatteryGaugeState {
   _battery: number;

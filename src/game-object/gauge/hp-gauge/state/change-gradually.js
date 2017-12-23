@@ -7,8 +7,7 @@ import {Tween} from '@tweenjs/tween.js';
 const BASE_TIME = 1000;
 
 /**
- * 戦闘画面での状態
- * 本状態ではHPが増減した場合、徐々に目的の値に近づいていく
+ * 指定したHPに徐々に近づいていく
  */
 export class ChangeGradually implements HpGaugeState {
   /** 現在のHP */

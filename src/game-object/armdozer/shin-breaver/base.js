@@ -1,14 +1,16 @@
 // @flow
 
 import {ArmDozerSprite} from '../base';
-import {ShinBraverStateContainer} from "./state";
 import * as THREE from "three";
+import {StandState} from "./state/stand";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
   _model: ShinBraverModel;
   _state: ShinBraverState;
-  _stateContainer: ShinBraverStateContainer;
+  _stateContainer: {
+    stand: StandState,
+  };
   _view: ShinBraverView;
 
   constructor(params: {view: ShinBraverView}) {
@@ -23,8 +25,10 @@ export class ShinBraver implements ArmDozerSprite {
         frame: 0
       }
     };
-    this._stateContainer = new ShinBraverStateContainer();
-    this._state = this._stateContainer.stand();
+    this._stateContainer = {
+      stand: new StandState()
+    };
+    this.stand();
     this._view = params.view;
   }
 
@@ -37,6 +41,11 @@ export class ShinBraver implements ArmDozerSprite {
   /** 本スプライトに関連するthree.jsオブジェクトを返す */
   getThreeJsObjects(): THREE.Object3D[] {
     return this._view.getThreeJsObjects();
+  }
+
+  /** 立ち状態にする */
+  stand() {
+    this._state = this._stateContainer.stand;
   }
 }
 
