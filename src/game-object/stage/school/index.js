@@ -7,11 +7,10 @@ import SchoolBuild from './school/index';
 import SkyBox from './blue-sky';
 import CityRoad from './city-road';
 import {createMeshFromJson} from '../../../util/mesh/three-json-mesh';
+import {Stage} from '../base';
 
-/**
- * 学校ステージ
- */
-export default class SchoolField {
+/** 学校ステージ */
+export default class SchoolStage implements Stage {
   /** スカイボックス（青空） */
   skyBox: THREE.Mesh;
 

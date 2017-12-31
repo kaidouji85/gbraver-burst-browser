@@ -1,11 +1,11 @@
 // @flow
 import type {Resources} from '../../../../resource/resource-manager';
 import * as THREE from 'three';
-import SchoolStage from '../../../../game-object/stage/kamata/index';
 import type {BattleSceneState} from "../../index";
-import {PlayerSprite} from "./player-sprite";
-import {EnemySprite} from "./enemy-sprite";
+import {createPlayerSprite} from "./player-sprite";
+import {createEnemySprite} from "./enemy-sprite";
 import type {ArmDozerSprite} from '../../../../game-object/armdozer/base';
+import {createStage} from './stage';
 
 /**
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
@@ -15,8 +15,8 @@ export class ThreeDimensionLayer {
   scene: THREE.Scene;
   /** カメラ */
   camera: THREE.Camera;
-  /** 学校フィールド */
-  battleField: SchoolStage;
+  /** 背景 */
+  stage: Stage;
   /** プレイヤースプライト */
   playerSprite: ArmDozerSprite;
   /** 敵スプライト */
@@ -30,13 +30,13 @@ export class ThreeDimensionLayer {
     this.camera.position.y = 70;
     this.camera.lookAt(new THREE.Vector3(0, 0, 0));
 
-    this.battleField = new SchoolStage(props.resources);
-    this.battleField.getThreeJsObjects().forEach(item => this.scene.add(item));
+    this.stage = createStage(props);
+    this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
 
-    this.playerSprite = new PlayerSprite(props);
+    this.playerSprite = new createPlayerSprite(props);
     this.playerSprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
 
-    this.enemySprite = new EnemySprite(props);
+    this.enemySprite = new createEnemySprite(props);
     this.enemySprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
   }
 }

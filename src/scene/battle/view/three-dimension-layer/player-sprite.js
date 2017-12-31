@@ -7,7 +7,7 @@ import type {ArmDozerSprite} from "../../../../game-object/armdozer/base";
 import {PlayerShinBraver} from "../../../../game-object/armdozer/shin-breaver";
 
 /** 与えられたパラメータからプレイヤースプライを生成する */
-export function PlayerSprite(props: {resources: Resources, state: BattleSceneState}): ArmDozerSprite {
+export function createPlayerSprite(props: {resources: Resources, state: BattleSceneState}): ArmDozerSprite {
   const playerInfo: ?PlayerBattleState = props.state.battleState.players.find(v => v.playerId === props.state.playerId);
   if (!playerInfo) {
     return PlayerShinBraver(props.resources);
