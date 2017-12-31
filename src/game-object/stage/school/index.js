@@ -24,7 +24,9 @@ export default class SchoolStage implements Stage {
   constructor(resources: Resources) {
     this.schoolBuild = new SchoolBuild(resources);
     this.skyBox = SkyBox(resources);
-    this.road = Road(resources);
+    this.road = CityRoad(resources);
+    this.road.position.z = 760;
+
     this.lights = Light();
     this.mansions = Mansions(resources);
   }
@@ -51,18 +53,6 @@ export default class SchoolStage implements Stage {
     this.schoolBuild.gameLoop(camera);
   }
 };
-
-/**
- * 道路セットを生成して返す
- *
- * @param resources リソース管理クラス
- * @returns 道路
- */
-function Road(resources: Resources): THREE.Mesh[] {
-  let mesh = CityRoad(resources);
-  mesh.position.z = 760;
-  return mesh;
-}
 
 /**
  * ライトを生成して返す

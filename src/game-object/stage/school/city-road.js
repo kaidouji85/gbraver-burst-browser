@@ -36,37 +36,6 @@ const TILE_NUM_CROSS_WALK_01 = 5;
 const TILE_NUM_CROSS_WALK_02 = 6;
 
 /**
- * タイルマップの平面を生成する
- * タイルマップの番号は左下から0でスタートし、右に進むごとに+1されていく
- *
- * @param tileNum タイルマップの番号
- * @param resources　リソース管理クラス
- * @returns タイルマップ
- */
-function createTileMesh(tileNum: number, resources: Resources): THREE.Mesh {
-  let geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT, 1, 1);
-  rectangle({
-    geo: geometry,
-    pos: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * tileNum, 0),
-    width: TILE_WIDTH/PICT_WIDTH,
-    height: TILE_HEIGHT/PICT_HEIGHT
-  });
-
-  //p1: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * tileNum, 0),
-
-
-  let texture = resources.textures.find(item => item.path === TEXTURE_PATHS.CITY_LOAD);
-  let material = new THREE.MeshBasicMaterial({
-    side: THREE.DoubleSide,
-    map: texture ? texture.texture : new THREE.Texture(),
-  });
-
-  let mesh = new THREE.Mesh(geometry, material);
-  mesh.rotation.x = 90 * Math.PI / 180;
-  return mesh;
-}
-
-/**
  * 都会の道路
  *
  * @param resources リソース管理クラス
@@ -80,26 +49,36 @@ export default function CityRoad(resources: Resources): THREE.Mesh {
     return mesh;
   };
 
-  let group = new THREE.Group();
-
-  [
-    tile(-MESH_WIDTH/2, 0, TILE_NUM_CROSS_WALK_01),
-    tile(MESH_WIDTH/2, 0, TILE_NUM_CROSS_WALK_02),
-
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 1, 0, TILE_NUM_UNDER_STOP_01),
-    tile(MESH_WIDTH/2 + MESH_WIDTH * 2, 0, TILE_NUM_UNDER_STOP_02),
-
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 1, 0, TILE_NUM_UPPER_STOP_02),
-    tile(-MESH_WIDTH/2 - MESH_WIDTH * 2, 0, TILE_NUM_UPPER_STOP_01),
-  ].concat(
-    // カメラから向かって右
-    R.times(n => tile(MESH_WIDTH/2 + MESH_WIDTH * (n+3), 0, TILE_NUM_NORMAL_ROAD), 40)
-  ).concat(
-    // カメラから向かって左
-    R.times(n => tile(-MESH_WIDTH/2 - MESH_WIDTH * (n+3), 0, TILE_NUM_NORMAL_ROAD), 40)
-  ).forEach(item => group.add(item));
-
-  //group.add(tile(MESH_WIDTH/2 + MESH_WIDTH * 2, 0, TILE_NUM_UNDER_STOP_02))
-
+  const group = new THREE.Group();
+  const meshes = R.times(n => tile(MESH_WIDTH/2 + MESH_WIDTH * (n-40), 0, TILE_NUM_NORMAL_ROAD), 80);
+  meshes.forEach(item => group.add(item));
   return group;
+}
+
+/**
+ * タイルマップの平面を生成する
+ * タイルマップの番号は左下から0でスタートし、右に進むごとに+1されていく
+ *
+ * @param tileNum タイルマップの番号
+ * @param resources　リソース管理クラス
+ * @return タイルマップ
+ */
+function createTileMesh(tileNum: number, resources: Resources): THREE.Mesh {
+  let geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT, 1, 1);
+  rectangle({
+    geo: geometry,
+    pos: new THREE.Vector2(TILE_WIDTH/PICT_WIDTH * tileNum, 0),
+    width: TILE_WIDTH/PICT_WIDTH,
+    height: TILE_HEIGHT/PICT_HEIGHT
+  });
+
+  let texture = resources.textures.find(item => item.path === TEXTURE_PATHS.CITY_LOAD);
+  let material = new THREE.MeshBasicMaterial({
+    side: THREE.DoubleSide,
+    map: texture ? texture.texture : new THREE.Texture(),
+  });
+
+  let mesh = new THREE.Mesh(geometry, material);
+  mesh.rotation.x = 90 * Math.PI / 180;
+  return mesh;
 }
