@@ -1,7 +1,9 @@
 // @flow
 import * as THREE from 'three';
 import * as R from 'ramda';
-import {loadCanvasImage, loadModel, loadTexture} from './resource-loader';
+import {loadCanvasImage} from './loader/canvas-image-loader';
+import {loadJsonModel} from "./loader/json-loader";
+import {loadTexture} from "./loader/texture-loader";
 
 /**
  * モデルのパス定数
@@ -144,7 +146,7 @@ export class ResourceManager {
   loadModels(): Promise<ResourceManager> {
     const func = R.pipe(
       R.values,
-      R.map(path => loadModel(`${this.basePath}${path}`)
+      R.map(path => loadJsonModel(`${this.basePath}${path}`)
           .then(result => ({path, geometry: result.geometry, material: result.material}))
       ));
     return Promise.all(func(MODEL_PATHS))
