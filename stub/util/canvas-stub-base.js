@@ -11,11 +11,7 @@ import {CanvasScene} from '../util/canvas-scene'
  */
 export async function CanvasStubBase(renderFunc: (context: CanvasRenderingContext2D, reources: Resources) => void) {
   const resourceManager:  ResourceManager = new ResourceManager('../../');
-  await Promise.all([
-    resourceManager.loadModels(),
-    resourceManager.loadTextures(),
-    resourceManager.loadCanvasImages(),
-  ]);
+  await resourceManager.load();
 
   const scene = new CanvasScene();
   document.body.appendChild(scene.renderer.domElement);

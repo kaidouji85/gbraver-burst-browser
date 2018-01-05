@@ -7,11 +7,7 @@ import type {Observer} from "./scene/observer";
 
 (async function(){
   const resourceManager:  ResourceManager = new ResourceManager();
-  await Promise.all([
-    resourceManager.loadModels(),
-    resourceManager.loadTextures(),
-    resourceManager.loadCanvasImages(),
-  ]);
+  await resourceManager.load();
 
   // TODO 開発用にダミーデータを作成している
   const scene: Observer = new BattleScene({
