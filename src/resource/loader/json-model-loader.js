@@ -1,3 +1,5 @@
+// @flow
+
 import * as THREE from "three";
 import * as R from 'ramda';
 
@@ -14,15 +16,12 @@ export const MODEL_PATHS = {
 /** モデル管理オブジェクト */
 export type Model = {
   /** モデルのパス */
-  path: string;
-
+  path: string,
   /** 形状 */
-  geometry: THREE.Geometry;
-
+  geometry: THREE.Geometry,
   /** 材質 */
-  material: THREE.Material;
+  material: THREE.Material,
 };
-
 
 /**
  * JSONモデルを読み込むヘルパー関数

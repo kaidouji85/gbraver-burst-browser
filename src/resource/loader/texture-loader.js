@@ -1,3 +1,4 @@
+// @flow
 import * as THREE from "three";
 import * as R from 'ramda';
 
@@ -27,10 +28,9 @@ export const TEXTURE_PATHS = {
 /** テクスチャ管理オブジェクト */
 export type Texture = {
   /** テクスチャのパス */
-  path: string;
-
+  path: string,
   /** テクスチャ */
-  texture: THREE.Texture;
+  texture: THREE.Texture,
 };
 
 /**
