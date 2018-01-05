@@ -10,8 +10,7 @@ import {loadCanvasImage, loadModel, loadTexture} from './resource-loader';
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const MODEL_PATHS = {
-  SCHOOL: 'stage/kamata/school.js',
-  MANSION01: 'stage/kamata/mansion01.js',
+  SCHOOL: 'model/school/school.js',
 };
 
 /**
@@ -27,16 +26,6 @@ export const TEXTURE_PATHS = {
 
   // ネオランドーザ関連
   NEO_RANDOZER_STAND: 'armdozer/neo-landozer/stand.png',
-
-
-  ANIME_TEST: 'armdozer/anime-test.png',
-
-  // 蒲田ステージ関連
-  TREE: 'stage/kamata/wood2.png',
-  FENCE: 'stage/kamata/fence.png',
-  GROUND_SAND: 'stage/kamata/ground-sand.png',
-  CITY_LOAD: 'stage/kamata/city-road.png',
-  BUILD_BASIC: 'stage/kamata/build-basic.png',
 
   // 青空スカイボックス関連
   BLUE_SKY_FRONT: 'sky-box/blue-sky/front.png',
