@@ -42,6 +42,6 @@ export function loadJsonModel(path: string): Promise<Model> {
  * @return 読み込み結果
  */
 export async function loadAllJsonModel(basePath: string): Model[] {
-  const paths: string = R.values(MODEL_PATHS);
+  const paths: string[] = R.values(MODEL_PATHS);
   return await Promise.all(paths.map(v => loadJsonModel(`${basePath}${v}`)));
 }

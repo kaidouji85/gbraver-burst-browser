@@ -1,10 +1,11 @@
 // @flow
 
 import * as THREE from "three";
-import type {Resources, Texture} from "../../../../resource/resource-manager";
+import type {Resources} from "../../../../resource/resource-manager";
 import {createAnimatedTexture} from "../../../../util/texture/texture-animation";
-import {TEXTURE_PATHS} from "../../../../resource/resource-manager";
+import {TEXTURE_PATHS} from "../../../../resource/loader/texture-loader";
 import type {AnimationType} from "../base";
+import type {Texture} from "../../../../resource/loader/texture-loader";
 
 /** シンブレイバーのテクスチャコンテナ */
 export class ShinBraverTextureContainer {

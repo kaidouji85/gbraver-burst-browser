@@ -1,34 +1,10 @@
 // @flow
-import * as THREE from 'three';
 import * as R from 'ramda';
 import {loadCanvasImage} from './loader/canvas-image-loader';
 import type {Model} from "./loader/json-model-loader";
-import {loadAllJsonModel, loadJsonModel, MODEL_PATHS} from "./loader/json-model-loader";
-import {loadTexture} from "./loader/texture-loader";
-
-/**
- * テクスチャのパス定数
- *
- * resourcesフォルダ配下からの早退パスを記入する
- * パスの先頭に/(スラッシュ)をつける必要はない
- */
-export const TEXTURE_PATHS = {
-  // シンブレイバー関連
-  SHIN_BRAVER_STAND: 'armdozer/shin-braver/stand.png',
-  SHIN_BRAVER_PUNCH: 'armdozer/shin-braver/punch.png',
-
-  // ネオランドーザ関連
-  NEO_RANDOZER_STAND: 'armdozer/neo-landozer/stand.png',
-
-  // 青空スカイボックス関連
-  BLUE_SKY_FRONT: 'sky-box/blue-sky/front.png',
-  BLUE_SKY_RIGHT: 'sky-box/blue-sky/right.png',
-  BLUE_SKY_BACK: 'sky-box/blue-sky/back.png',
-  BLUE_SKY_LEFT: 'sky-box/blue-sky/left.png',
-  BLUE_SKY_UP: 'sky-box/blue-sky/up.png',
-  BLUE_SKY_DOWN: 'sky-box/blue-sky/down.png',
-};
-
+import {loadAllJsonModel} from "./loader/json-model-loader";
+import type {Texture} from "./loader/texture-loader";
+import {loadAllTexture, loadTexture, TEXTURE_PATHS} from "./loader/texture-loader";
 
 /**
  * キャンバス用画像ファイルのパス定数
@@ -70,16 +46,7 @@ export type Resources = {
   canvasImages: CanvasPicture[];
 };
 
-/**
- * テクスチャ管理オブジェクト
- */
-export type Texture = {
-  /** テクスチャのパス */
-  path: string;
 
-  /** テクスチャ */
-  texture: THREE.Texture;
-};
 
 /**
  * キャンバス用画像管理オブジェクト
@@ -120,7 +87,7 @@ export class ResourceManager {
    * @param basePath ベースとなるパス
    * @return 結果を返すPromise
    */
-  async loadModels(): Promise<ResourceManager> {
+  async loadModels(): ResourceManager {
     this.resources.models = await loadAllJsonModel(this.basePath);
     return this;
   }
@@ -130,17 +97,9 @@ export class ResourceManager {
    *
    * @return 結果を返すPromise
    */
-  loadTextures(): Promise<ResourceManager> {
-    const func = R.pipe(
-      R.values,
-      R.map(path => loadTexture(`${this.basePath}${path}`)
-        .then(texture => ({path, texture}))
-      ));
-    return Promise.all(func(TEXTURE_PATHS))
-      .then(textures => {
-        this.resources.textures = textures;
-        return this;
-      });
+  async loadTextures(): ResourceManager {
+    this.resources.textures = await loadAllTexture(this.basePath);
+    return this;
   }
 
   /**
