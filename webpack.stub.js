@@ -40,7 +40,7 @@ const OUTPUT_HTML_LIST = R.pipe(
  */
 const COPY_RESOURCES = new CopyWebpackPlugin([{
   from: path.resolve(__dirname, "resources"),
-  to: SERVE_PATH
+  to: `${SERVE_PATH}/resources`
 }]);
 
 module.exports = {
@@ -63,5 +63,7 @@ module.exports = {
       }
     ]
   },
-  plugins: OUTPUT_HTML_LIST.concat(COPY_RESOURCES)
+  plugins: []
+    .concat(OUTPUT_HTML_LIST)
+    .concat(COPY_RESOURCES)
 };

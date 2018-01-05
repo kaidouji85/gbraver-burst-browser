@@ -10,7 +10,7 @@ import {CanvasScene} from '../util/canvas-scene'
  * @param renderFunc キャンバスレンダリングをする関数
  */
 export async function CanvasStubBase(renderFunc: (context: CanvasRenderingContext2D, reources: Resources) => void) {
-  const resourceManager:  ResourceManager = new ResourceManager('../../');
+  const resourceManager:  ResourceManager = new ResourceManager('../resources/');
   await resourceManager.load();
 
   const scene = new CanvasScene();

@@ -36,12 +36,13 @@ export type CanvasPicture = {
 /**
  * CANVAS用画像ファイルを読み込む
  *
- * @param path ファイルパス
+ * @param basePath ベースとなるパス
+ * @param path  読み込むファイルのパス
  * @return 読み込み結果
  */
-export function loadCanvasImage(path: string): CanvasPicture {
+export function loadCanvasImage(basePath: string, path: string): CanvasPicture {
   const image = new Image();
-  image.src = path;
+  image.src = `${basePath}${path}`;
   return new Promise(resolve => image.onload = () => resolve({path, image}));
 }
 
@@ -53,5 +54,5 @@ export function loadCanvasImage(path: string): CanvasPicture {
  */
 export async function loadAllCanvasImage(basePath: string): CanvasPicture[] {
   const paths: string[] = R.values(CANVAS_PICTURE_PATH);
-  return await Promise.all(paths.map(v => loadCanvasImage(`${basePath}${v}`)));
+  return await Promise.all(paths.map(path => loadCanvasImage(basePath, path)));
 }

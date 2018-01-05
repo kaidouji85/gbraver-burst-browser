@@ -26,12 +26,13 @@ export type Model = {
 /**
  * JSONモデルを読み込むヘルパー関数
  *
- * @param path ファイルパス
+ * @param basePath ベースとなるパス
+ * @param path 読み込むファイルのパス
  * @return 読み込み結果
  */
-export function loadJsonModel(path: string): Promise<Model> {
+export function loadJsonModel(basePath: string, path: string): Promise<Model> {
   let loader = new THREE.JSONLoader();
-  return new Promise(resolve => loader.load(path, (geometry, material) => resolve({path, geometry, material})));
+  return new Promise(resolve => loader.load(`${basePath}${path}`, (geometry, material) => resolve({path, geometry, material})));
 }
 
 /**
@@ -42,5 +43,5 @@ export function loadJsonModel(path: string): Promise<Model> {
  */
 export async function loadAllJsonModel(basePath: string): Model[] {
   const paths: string[] = R.values(MODEL_PATHS);
-  return await Promise.all(paths.map(v => loadJsonModel(`${basePath}${v}`)));
+  return await Promise.all(paths.map(path => loadJsonModel(basePath, path)));
 }

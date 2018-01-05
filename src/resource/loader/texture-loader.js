@@ -36,12 +36,13 @@ export type Texture = {
 /**
  * テクスチャを読み込むヘルパー関数
  *
- * @aram path ファイルパス
+ * @param basePath ベースとなるパス
+ * @aram path 読み込むファイルのパス
  * @return  読み込み結果
  */
-export function loadTexture(path: string): Promise<Texture> {
+export function loadTexture(basePath: string, path: string): Promise<Texture> {
   let loader = new THREE.TextureLoader();
-  return new Promise(resolve => loader.load(path, texture => resolve({path, texture})));
+  return new Promise(resolve => loader.load(`${basePath}${path}`, texture => resolve({path, texture})));
 }
 
 /**
@@ -52,5 +53,5 @@ export function loadTexture(path: string): Promise<Texture> {
  */
 export async function loadAllTexture(basePath: string): Texture[] {
   const paths: string[] = R.values(TEXTURE_PATHS);
-  return await Promise.all(paths.map(v => loadTexture(`${basePath}${v}`)));
+  return await Promise.all(paths.map(path => loadTexture(basePath, path)));
 }
