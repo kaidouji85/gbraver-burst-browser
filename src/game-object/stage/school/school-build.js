@@ -2,7 +2,7 @@
 
 import type {Resources} from "../../../resource/resource-manager";
 import {createMeshFromJson} from "../../../util/mesh/three-json-mesh";
-import {MODEL_PATHS} from "../../../resource/resource-manager";
+import {MODEL_PATHS} from "../../../resource/loader/json-model-loader";
 
 /** 学校メッシュを生成する */
 export function createSchoolBuild(resources: Resources): THREE.Mesh {

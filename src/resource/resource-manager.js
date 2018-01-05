@@ -2,18 +2,9 @@
 import * as THREE from 'three';
 import * as R from 'ramda';
 import {loadCanvasImage} from './loader/canvas-image-loader';
-import {loadJsonModel} from "./loader/json-loader";
+import type {Model} from "./loader/json-model-loader";
+import {loadAllJsonModel, loadJsonModel, MODEL_PATHS} from "./loader/json-model-loader";
 import {loadTexture} from "./loader/texture-loader";
-
-/**
- * モデルのパス定数
- *
- * resourcesフォルダ配下からの早退パスを記入する
- * パスの先頭に/(スラッシュ)をつける必要はない
- */
-export const MODEL_PATHS = {
-  SCHOOL: 'model/school/school.js',
-};
 
 /**
  * テクスチャのパス定数
@@ -80,20 +71,6 @@ export type Resources = {
 };
 
 /**
- * モデル管理オブジェクト
- */
-export type Model = {
-  /** モデルのパス */
-  path: string;
-
-  /** 形状 */
-  geometry: THREE.Geometry;
-
-  /** 材質 */
-  material: THREE.Material;
-};
-
-/**
  * テクスチャ管理オブジェクト
  */
 export type Texture = {
@@ -143,17 +120,9 @@ export class ResourceManager {
    * @param basePath ベースとなるパス
    * @return 結果を返すPromise
    */
-  loadModels(): Promise<ResourceManager> {
-    const func = R.pipe(
-      R.values,
-      R.map(path => loadJsonModel(`${this.basePath}${path}`)
-          .then(result => ({path, geometry: result.geometry, material: result.material}))
-      ));
-    return Promise.all(func(MODEL_PATHS))
-      .then(models => {
-        this.resources.models = models;
-        return this;
-      });
+  async loadModels(): Promise<ResourceManager> {
+    this.resources.models = await loadAllJsonModel(this.basePath);
+    return this;
   }
 
   /**
