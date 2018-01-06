@@ -5,6 +5,8 @@ import type {Model} from "./loader/json-model-loader";
 import {loadAllJsonModel} from "./loader/json-model-loader";
 import type {Texture} from "./loader/texture-loader";
 import {loadAllTexture} from "./loader/texture-loader";
+import type {TileMap} from "./loader/tile-map-loader";
+import {loadAllTileMap} from "./loader/tile-map-loader";
 
 /**
  * リソース管理オブジェクト
@@ -15,7 +17,9 @@ export type Resources = {
   /** テクスチャ */
   textures: Texture[],
   /** キャンパス用画像 */
-  canvasImages: CanvasPicture[]
+  canvasImages: CanvasPicture[],
+  /** タイルマップ */
+  tileMap: TileMap[]
 };
 
 /**
@@ -34,18 +38,20 @@ export class ResourceManager {
     this.resources = {
       models: [],
       textures: [],
-      canvasImages: []
+      canvasImages: [],
+      tileMap: [],
     };
     this.basePath = basePath;
   }
 
   /** ゲームのリソースを全て読み込む */
-  async load(): void {
+  async load() {
+    const tileMap = loadAllTileMap();
     const [models, textures, canvasImages] = await Promise.all([
       loadAllJsonModel(this.basePath),
       loadAllTexture(this.basePath),
       loadAllCanvasImage(this.basePath)
     ]);
-    this.resources = {models, textures, canvasImages};
+    this.resources = {models, textures, canvasImages, tileMap};
   }
 }

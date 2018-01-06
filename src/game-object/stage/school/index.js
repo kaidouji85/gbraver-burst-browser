@@ -4,11 +4,12 @@ import type {Resources} from '../../../resource/resource-manager';
 import * as THREE from 'three';
 import SkyBox from './blue-sky';
 import {createSchoolBuild} from './school-build';
+import {Stage} from "../base";
 
 /** 学校ステージ */
 export default class SchoolStage implements Stage {
   _skyBox: THREE.Mesh;
-  _schoolBuild: SchoolBuild;
+  _schoolBuild: THREE.Mesh;
   _directionalLight: THREE.DirectionalLight;
   _ambientLight: THREE.AmbientLight;
 
