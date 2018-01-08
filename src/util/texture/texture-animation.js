@@ -7,16 +7,16 @@ import * as THREE from 'three';
  * アニメフレームを変更する際には、offset.xおよびoffset.yを調整する
  *
  * @param origin テクスチャのオリジナルデータ
- * @param horizonNum 横の分割数
- * @param verticalNum 縦の分割数
+ * @param horizonDividedNum 横の分割数
+ * @param verticalDividedNum 縦の分割数
  * @returns 生成したテクスチャ
  */
-export function createAnimatedTexture(origin: THREE.Texture, horizonNum: number, verticalNum: number): THREE.Texture {
+export function createAnimatedTexture(origin: THREE.Texture, horizonDividedNum: number, verticalDividedNum: number): THREE.Texture {
   const texture = origin.clone();
   texture.needsUpdate = true;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(1/horizonNum, 1/verticalNum);
+  texture.repeat.set(1/horizonDividedNum, 1/verticalDividedNum);
   texture.offset.x = 0;
   texture.offset.y = 0;
   return texture;

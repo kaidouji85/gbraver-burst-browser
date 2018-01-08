@@ -1,22 +1,25 @@
 // @flow
 
+import type {TileMapData, TileSet} from "../../flow-typed/tiled";
 import SCHOOL_GROUND_TILE_MAP from '../../../resources/tile-map/school-ground/tile-data.json';
-import type {MapData} from "../../flow-typed/tiled";
+import SCHOOL_GROUND_TILE_SET from '../../../resources/tile-map/school-ground/map.json';
 
-/**
- * タイルマップのパス
- * resourcesフォルダからの相対パスで指定する
- */
-export const TILE_MAP_PATH = {
-  SCHOOL_GROUND: 'tile-map/school-ground/tile-data.json',
+/** タイルマップID */
+export type TileMapId = string;
+
+/** タイルマップデータ */
+export type TileMap = {
+  /** タイルマップID */
+  id: TileMapId,
+  /** マップ */
+  tileMap: TileMapData,
+  /** タイルセット */
+  tileSet: TileSet,
 };
 
-/** タイルマップ管理オブジェクト */
-export type TileMap = {
-  /** データパス */
-  path: string,
-  /** タイルマップ */
-  map: MapData,
+/** タイルマップIDを集めたもの */
+export const TILE_MAP_IDS: {[string]: TileMapId} = {
+  SCHOOL_GROUND: 'SCHOOL_GROUND'
 };
 
 /**
@@ -28,7 +31,8 @@ export type TileMap = {
  */
 export function loadAllTileMap(): TileMap[] {
   return [{
-    path: TILE_MAP_PATH.SCHOOL_GROUND,
-    map: SCHOOL_GROUND_TILE_MAP
+    id: TILE_MAP_IDS.SCHOOL_GROUND,
+    tileMap: SCHOOL_GROUND_TILE_MAP,
+    tileSet: SCHOOL_GROUND_TILE_SET
   }];
 }

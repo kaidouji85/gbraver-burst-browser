@@ -5,17 +5,20 @@ import * as THREE from 'three';
 import SkyBox from './blue-sky';
 import {createSchoolBuild} from './school-build';
 import {Stage} from "../base";
+import {createGround} from "./ground";
 
 /** 学校ステージ */
 export default class SchoolStage implements Stage {
   _skyBox: THREE.Mesh;
   _schoolBuild: THREE.Mesh;
+  _ground: THREE.Mesh;
   _directionalLight: THREE.DirectionalLight;
   _ambientLight: THREE.AmbientLight;
 
   constructor(resources: Resources) {
     this._schoolBuild = createSchoolBuild(resources);
     this._skyBox = SkyBox(resources);
+    this._ground = createGround(resources);
 
     this._directionalLight = new THREE.DirectionalLight(0xAAAAAA, 0.8);
     this._directionalLight.position.set(0, 60, 200);
@@ -31,6 +34,7 @@ export default class SchoolStage implements Stage {
   getThreeJsObjects(): THREE.Object3D[] {
     return [this._schoolBuild]
       .concat(this._skyBox)
+      .concat(this._ground)
       .concat(this._directionalLight)
       .concat(this._ambientLight)
   }

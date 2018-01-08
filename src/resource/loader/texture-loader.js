@@ -23,6 +23,9 @@ export const TEXTURE_PATHS = {
   BLUE_SKY_LEFT: 'sky-box/blue-sky/left.png',
   BLUE_SKY_UP: 'sky-box/blue-sky/up.png',
   BLUE_SKY_DOWN: 'sky-box/blue-sky/down.png',
+
+  // タイルマップ関連
+  TILE_MAP_SCHOOL_GROUND: 'tile-map/school-ground/map.png',
 };
 
 /** テクスチャ管理オブジェクト */
@@ -51,7 +54,7 @@ export function loadTexture(basePath: string, path: string): Promise<Texture> {
  * @param basePath ベースとなるパス
  * @return 読み込み結果
  */
-export async function loadAllTexture(basePath: string): Texture[] {
+export async function loadAllTexture(basePath: string): Promise<Texture[]> {
   const paths: string[] = R.values(TEXTURE_PATHS);
   return await Promise.all(paths.map(path => loadTexture(basePath, path)));
 }
