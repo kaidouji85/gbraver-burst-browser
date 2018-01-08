@@ -19,6 +19,7 @@ export default class SchoolStage implements Stage {
     this._schoolBuild = createSchoolBuild(resources);
     this._skyBox = SkyBox(resources);
     this._ground = createGround(resources);
+    //this._ground.position.z = 300;
 
     this._directionalLight = new THREE.DirectionalLight(0xAAAAAA, 0.8);
     this._directionalLight.position.set(0, 60, 200);
@@ -32,7 +33,8 @@ export default class SchoolStage implements Stage {
    * @return 配列にまとめた結果
    */
   getThreeJsObjects(): THREE.Object3D[] {
-    return [this._schoolBuild]
+    //return [this._schoolBuild]
+    return []
       .concat(this._skyBox)
       .concat(this._ground)
       .concat(this._directionalLight)
