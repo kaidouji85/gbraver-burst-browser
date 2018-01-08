@@ -11,6 +11,7 @@ import type {TileMapData, TileSet} from "../../../flow-typed/tiled";
 import {EMPTY_TILE_SET} from "../../../util/tiled-map/empty-tile-set";
 import {EMPTY_TILE_MAP} from "../../../util/tiled-map/empty-map-data";
 import {getHorizonDividedNum, getVerticalDividedNum} from "../../../util/tiled-map/tile-set-divided-num";
+import {getMapPosition} from "../../../util/tiled-map/map-position";
 
 /** グラウンドを生成する */
 export function createGround(resources: Resources): THREE.Mesh {
@@ -21,17 +22,21 @@ export function createGround(resources: Resources): THREE.Mesh {
   const tileSet: TileSet = originTileMap ? originTileMap.tileSet : EMPTY_TILE_SET;
   const horizonDividedNum = getHorizonDividedNum(tileSet);
   const verticalDividedNum = getVerticalDividedNum(tileSet);
+  const meshWith = 100;
+  const meshHeight = 100;
 
   const meshes: THREE.Mesh[] = tileMapData.layers[0].data.map((v, index) => {
     const tileTexture: THREE.Texture = createAnimatedTexture(texture, horizonDividedNum, verticalDividedNum);
-    const geometry: THREE.Geometry = new THREE.PlaneGeometry(100, 100, 1, 1);
+    const geometry: THREE.Geometry = new THREE.PlaneGeometry(meshWith, meshHeight, 1, 1);
     const material: THREE.Material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       transparent: true,
       map: tileTexture
     });
     const mesh: THREE.Mesh = new THREE.Mesh(geometry, material);
-
+    mesh.rotation.x = - Math.PI / 2;
+    const {x, y, z} = getMapPosition(index, tileMapData.layers[0], meshWith, meshHeight);
+    mesh.position.set(x, y, z);
     return mesh;
   });
 
