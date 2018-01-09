@@ -33,7 +33,7 @@ export type TileMapData = {
   properties: Object,
   renderorder: string,
   tileheight: number,
-  tilesets: any[],
+  tilesets: TileSet[],
   tilewidth: number,
   version: number,
   tiledversion: string,

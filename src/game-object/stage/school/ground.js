@@ -42,7 +42,7 @@ export function createGround(resources: Resources): THREE.Mesh {
     const {x, y, z} = getMapPosition(index, tileMapData.layers[0], meshWith, meshHeight);
     mesh.position.set(x + basePosX, y, z + basePosZ);
 
-    const offset = getTextureOffsetPos(v, tileSet);
+    const offset = getTextureOffsetPos(v, tileSet, tileMapData);
     mesh.material.map.offset.x = offset.x;
     mesh.material.map.offset.y = offset.y;
 
