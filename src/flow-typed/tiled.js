@@ -6,6 +6,23 @@
  * http://www.mapeditor.org/
  */
 
+/** タイルセット */
+export type TileSet = {
+  columns: number,
+  firstgid: number,
+  image: string,
+  imageheight: number,
+  imagewidth: number,
+  margin: number,
+  name: string,
+  properties: Object,
+  propertytypes: Object,
+  spacing: number,
+  tilecount: number,
+  tileheight: number,
+  tilewidth: number,
+};
+
 /** タイルマップ */
 export type TileMapData = {
   backgroundcolor: string,
@@ -35,21 +52,4 @@ export type TiledLayer = {
   width: number,
   x: number,
   y: number,
-};
-
-/** タイルセット */
-export type TileSet = {
-  columns: number,
-  firstgid: number,
-  image: string,
-  imageheight: number,
-  imagewidth: number,
-  margin: number,
-  name: string,
-  properties: Object,
-  propertytypes: Object,
-  spacing: number,
-  tilecount: number,
-  tileheight: number,
-  tilewidth: number,
 };

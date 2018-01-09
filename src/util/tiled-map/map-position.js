@@ -1,6 +1,6 @@
 // @flow
 
-import type {TiledLayer, TileSet} from "../../flow-typed/tiled";
+import type {TiledLayer} from "../../flow-typed/tiled";
 
 /**
  * タイルマップのthree.js上での描画位置を計算して返す

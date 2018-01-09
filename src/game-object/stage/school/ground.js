@@ -10,8 +10,9 @@ import {TILE_MAP_IDS} from "../../../resource/loader/tile-map-loader";
 import type {TileMapData, TileSet} from "../../../flow-typed/tiled";
 import {EMPTY_TILE_SET} from "../../../util/tiled-map/empty-tile-set";
 import {EMPTY_TILE_MAP} from "../../../util/tiled-map/empty-map-data";
-import {getHorizonDividedNum, getVerticalDividedNum} from "../../../util/tiled-map/tile-set-divided-num";
+import {getVerticalDividedNum} from "../../../util/tiled-map/texture-off-set-pos";
 import {getMapPosition} from "../../../util/tiled-map/map-position";
+import {getHorizonDividedNum, getTextureOffsetPos} from "../../../util/tiled-map/texture-off-set-pos";
 
 /** グラウンドを生成する */
 export function createGround(resources: Resources): THREE.Mesh {
@@ -35,8 +36,14 @@ export function createGround(resources: Resources): THREE.Mesh {
     });
     const mesh: THREE.Mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = - Math.PI / 2;
+
     const {x, y, z} = getMapPosition(index, tileMapData.layers[0], meshWith, meshHeight);
     mesh.position.set(x, y, z);
+
+    const offset = getTextureOffsetPos(v, tileSet);
+    mesh.material.map.offset.x = offset.x;
+    mesh.material.map.offset.y = offset.y;
+
     return mesh;
   });
 
