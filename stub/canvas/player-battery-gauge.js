@@ -3,7 +3,7 @@ import type {Resources} from '../../src/resource/resource-manager';
 import {CanvasStubBase} from '../util/canvas-stub-base';
 import {drawPlayerBatteryGauge} from '../../src/util/canvas/draw/battery-gauge';
 
-CanvasStubBase((context: CanvasRenderingContext2D, reources: Resources) => {
+CanvasStubBase('../resources/', (context: CanvasRenderingContext2D, reources: Resources) => {
   const basicX = window.innerWidth / 2;
   const basicY = window.innerHeight / 2;
 

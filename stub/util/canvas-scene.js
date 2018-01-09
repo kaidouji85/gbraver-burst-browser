@@ -27,16 +27,12 @@ function createCanvasMesh(canvas: HTMLCanvasElement) {
 export class CanvasScene {
   /** レンダラー */
   renderer: THREE.WebGLRenderer;
-
   /** 本レイヤーのベースとなるシーン */
   scene: THREE.Scene;
-
   /** 本レイヤーのカメラ */
   camera: THREE.OrthographicCamera;
-
   /** メッシュ */
   mesh: THREE.Mesh;
-
   /** 描画対象となるキャンバス */
   canvas: HTMLCanvasElement;
 

@@ -8,7 +8,7 @@ import type {ArmDozerId, PlayerBattleState} from "gbraver-burst-core/lib/flow-ty
 import {EnemyShinBraver} from '../../../../game-object/armdozer/shin-breaver';
 
 /** 与えられたパラメータから敵スプライを生成する */
-export function EnemySprite(props: {resources: Resources, state: BattleSceneState}): ArmDozerSprite {
+export function createEnemySprite(props: {resources: Resources, state: BattleSceneState}): ArmDozerSprite {
   const enemyInfo: ?PlayerBattleState = props.state.battleState.players.find(v => v.playerId !== props.state.playerId);
   if (!enemyInfo) {
     return new EnemyShinBraver(props.resources);
