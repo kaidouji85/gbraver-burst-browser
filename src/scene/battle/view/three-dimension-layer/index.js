@@ -6,6 +6,8 @@ import {createPlayerSprite} from "./player-sprite";
 import {createEnemySprite} from "./enemy-sprite";
 import type {ArmDozerSprite} from '../../../../game-object/armdozer/base';
 import {createStage} from './stage';
+import type {Stage} from "../../../../game-object/stage/base";
+import {createCamera} from "./camera";
 
 /**
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
@@ -24,11 +26,7 @@ export class ThreeDimensionLayer {
 
   constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();
-
-    this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-    this.camera.position.z = 900;
-    this.camera.position.y = 70;
-    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+    this.camera = createCamera();
 
     this.stage = createStage(props);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
