@@ -46,28 +46,18 @@ export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeVi
     this._refreshPos();
   }
 
-  /**
-   * モデルが変更されたか否かを判定する
-   *
-   * @param model 更新前のモデル
-   * @param newModel 更新されたモデル
-   * @return 判定結果、trueで変更された
-   */
+  /** モデルが変更されたか否かを判定する、trueで変更された */
   _isChanged(model: BatteryGaugeModel, newModel: BatteryGaugeModel): boolean {
     return model.battery !== newModel.battery || model.maxBattery !== newModel.maxBattery;
   }
 
-  /**
-   * ゲージを更新する
-   *
-   * @param model HPゲージモデル
-   */
+  /** ゲージを更新する */
   _refreshGauge(model: BatteryGaugeModel): void {
     this.draw((context: CanvasRenderingContext2D) => {
       context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       // UVマッピングの原点は左下なので、HPゲージがテクスチャの一番下に描画されるようにする
-      drawPlayerBatteryGauge(context, this.resources, context.canvas.width/2, context.canvas.height - 32, model.battery);
+      drawPlayerBatteryGauge(context, this.resources, context.canvas.width/2, context.canvas.height - 32, model.battery, model.maxBattery);
     });
   }
 

@@ -6,7 +6,8 @@ import {createPlayerHpGauge} from './player-hp-gauge';
 import {HpGauge} from "../../../../game-object/gauge/hp-gauge/base";
 import {createEnemyHpGauge} from "./enemy-hp-gauge";
 import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/base";
-import {createPlayerBatteryGaugeFromState} from "./player-battery-gauge";
+import {createPlayerBatteryGauge} from "./player-battery-gauge";
+import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -24,6 +25,8 @@ export class HudLayer {
   playerBatteryGauge: BatteryGauge;
   /** 敵HPゲージ */
   enemyHpGauge: HpGauge;
+  /** 敵バッテリーゲージ */
+  enemyBatteryGauge: BatteryGauge;
 
   constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();
@@ -40,10 +43,13 @@ export class HudLayer {
     this.playerHpGauge = createPlayerHpGauge(props.resources, props.state);
     this.playerHpGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.playerBatteryGauge = createPlayerBatteryGaugeFromState(props.resources, props.state);
+    this.playerBatteryGauge = createPlayerBatteryGauge(props.resources, props.state);
     this.playerBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.enemyHpGauge = createEnemyHpGauge(props.resources, props.state);
     this.enemyHpGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
+
+    this.enemyBatteryGauge = createEnemyBatteryGauge(props.resources, props.state);
+    this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
   }
 }

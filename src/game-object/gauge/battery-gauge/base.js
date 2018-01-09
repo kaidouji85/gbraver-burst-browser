@@ -1,13 +1,15 @@
 // @flow
 
 import * as THREE from "three";
-import {BatteryGaugeStateContainer} from "./state";
+import {ChangeImmediately} from "./state/change-immediately";
 
 /** バッテリーゲージのゲームオブジェクト */
 export class BatteryGauge {
   _model: BatteryGaugeModel;
   _state: BatteryGaugeState;
-  _stateContainer: BatteryGaugeStateContainer;
+  _stateContainer: {
+    changeImmediately: ChangeImmediately,
+  };
   _view: BatteryGaugeView;
 
   constructor(params: {view: BatteryGaugeView, battery: number, maxBattery: number}) {
@@ -16,8 +18,16 @@ export class BatteryGauge {
       battery: params.battery,
       maxBattery: params.maxBattery
     };
-    this._stateContainer = new BatteryGaugeStateContainer();
-    this._state = this._stateContainer.battle;
+    this._stateContainer = {
+      changeImmediately: new ChangeImmediately()
+    };
+    this.changeImmediately(this._model.battery);
+  }
+
+  /** ゲームループ毎の処理 */
+  gameLoop() {
+    this._model = this._state.gameLoop(this._model);
+    this._view.gameLoop(this._model);
   }
 
   /** シーンに追加するthree.jsオブジェクトを返す */
@@ -25,10 +35,10 @@ export class BatteryGauge {
     return this._view.getThreeJsObjectList();
   }
 
-  /** ゲームループ毎の処理 */
-  gameLoop() {
-    this._model = this._state.gameLoop(this._model);
-    this._view.gameLoop(this._model);
+  /** 指定したバッテリー値に即座に変更する */
+  changeImmediately(toBattery: number) {
+    this._stateContainer.changeImmediately.start(toBattery);
+    this._state = this._stateContainer.changeImmediately;
   }
 }
 

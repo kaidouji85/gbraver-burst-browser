@@ -18,7 +18,7 @@ export function gameLoop(view: BattleSceneView, state: BattleSceneState, action:
 function threeDimension(view: ThreeDimensionLayer) {
   view.playerSprite.gameLoop(view.camera);
   view.enemySprite.gameLoop(view.camera);
-  view.battleField.gameLoop(view.camera);
+  view.stage.gameLoop(view.camera);
 }
 
 /** hudレイヤーのゲームループ時の処理 */
@@ -26,4 +26,5 @@ function hud(view: HudLayer) {
   view.playerHpGauge.gameLoop();
   view.playerBatteryGauge.gameLoop();
   view.enemyHpGauge.gameLoop();
+  view.enemyBatteryGauge.gameLoop();
 }

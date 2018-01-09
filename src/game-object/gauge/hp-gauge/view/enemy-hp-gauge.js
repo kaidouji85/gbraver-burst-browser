@@ -8,7 +8,6 @@ import {drawEnemyHpGauge} from "../../../../util/canvas/draw/hp-gauge";
 import {rectangle} from "../../../../util/uv-mapping/rectangle";
 import * as THREE from "three";
 
-
 /** 敵HPゲージ */
 export class EnemyHpGaugeView extends CanvasMesh implements HpGaugeView {
   _modelCache: HpGaugeModel;
@@ -47,22 +46,12 @@ export class EnemyHpGaugeView extends CanvasMesh implements HpGaugeView {
     this._refreshPos();
   }
 
-  /**
-   * モデルが変更されたか否かを判定する
-   *
-   * @param model 更新前のモデル
-   * @param newModel 更新されたモデル
-   * @return 判定結果、trueで変更された
-   */
+  /** モデルが変更されたか否かを判定する、trueで変更された */
   _isChanged(model: HpGaugeModel, newModel: HpGaugeModel): boolean {
     return model.hp !== newModel.hp || model.maxHp !== newModel.maxHp;
   }
 
-  /**
-   * ゲージを更新する
-   *
-   * @param model HPゲージモデル
-   */
+  /** ゲージを更新する */
   _refreshGauge(model: HpGaugeModel): void {
     this.draw((context: CanvasRenderingContext2D) => {
       context.clearRect(0, 0, this.canvas.width, this.canvas.height);

@@ -3,7 +3,7 @@ import type {Resources} from '../../src/resource/resource-manager';
 import {CanvasStubBase} from '../util/canvas-stub-base';
 import {drawEnemyHpGauge} from '../../src/util/canvas/draw/hp-gauge';
 
-CanvasStubBase((context: CanvasRenderingContext2D, reources: Resources) => {
+CanvasStubBase('../resources/', (context: CanvasRenderingContext2D, reources: Resources) => {
   const basicX = window.innerWidth / 2;
   const basicY = window.innerHeight / 2;
   const heightMargin = 80;
