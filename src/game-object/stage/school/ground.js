@@ -25,6 +25,8 @@ export function createGround(resources: Resources): THREE.Mesh {
   const verticalDividedNum = getVerticalDividedNum(tileSet);
   const meshWith = 100;
   const meshHeight = 100;
+  const basePosX = (-tileMapData.width + 1) * meshWith / 2;
+  const basePosZ = (-tileMapData.height + 1) * meshHeight / 2;
 
   const meshes: THREE.Mesh[] = tileMapData.layers[0].data.map((v, index) => {
     const tileTexture: THREE.Texture = createAnimatedTexture(texture, horizonDividedNum, verticalDividedNum);
@@ -38,7 +40,7 @@ export function createGround(resources: Resources): THREE.Mesh {
     mesh.rotation.x = - Math.PI / 2;
 
     const {x, y, z} = getMapPosition(index, tileMapData.layers[0], meshWith, meshHeight);
-    mesh.position.set(x, y, z);
+    mesh.position.set(x + basePosX, y, z + basePosZ);
 
     const offset = getTextureOffsetPos(v, tileSet);
     mesh.material.map.offset.x = offset.x;

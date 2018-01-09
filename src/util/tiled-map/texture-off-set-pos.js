@@ -10,6 +10,7 @@ import type {TileSet} from "../../flow-typed/tiled";
  * @return テクスチャオフセット座標
  */
 export function getTextureOffsetPos(gid: number, tileSet: TileSet): {x: number, y: number} {
+  // firstgidをしかるべき場所から取得する
   const tileIndex = gid - 1;
   const horizonDividedNum = getHorizonDividedNum(tileSet);
   const verticalDividedNum = getVerticalDividedNum(tileSet);
