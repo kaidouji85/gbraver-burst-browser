@@ -10,7 +10,6 @@ import * as R from 'ramda';
  */
 export const TEXTURE_PATHS = {
   // シンブレイバー関連
-  SHIN_BRAVER_STAND: 'armdozer/shin-braver/stand.png',
   SHIN_BRAVER_PUNCH: 'armdozer/shin-braver/punch.png',
 
   // ネオランドーザ関連

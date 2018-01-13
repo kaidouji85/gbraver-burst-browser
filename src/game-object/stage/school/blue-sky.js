@@ -1,6 +1,6 @@
 // @flow
 import type {Resources} from '../../../resource/resource-manager';
-import {TEXTURE_PATHS} from '../../../resource/loader/texture-loader';
+import {TEXTURE_PATHS} from '../../../resource/loader/depricated-texture-loader';
 import * as THREE from 'three';
 
 const WIDTH =  9000;
@@ -23,7 +23,7 @@ const SKY_BOX_TEXTURE_PATHS = [
  */
 export default function BlueSky(resources: Resources): THREE.Mesh {
   const getTexture = path => {
-    const texture = resources.textures.find(v => v.path === path);
+    const texture = resources.depricated_textures.find(v => v.path === path);
     return texture ? texture.texture : new THREE.Texture();
   }
   const materials = SKY_BOX_TEXTURE_PATHS

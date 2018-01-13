@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {Resources} from "../../../resource/resource-manager";
-import {TEXTURE_PATHS} from "../../../resource/loader/texture-loader";
+import {TEXTURE_PATHS} from "../../../resource/loader/depricated-texture-loader";
 import {TILE_MAP_IDS} from "../../../resource/loader/tile-map-loader";
 import {createTileMap} from "../tile-map";
 

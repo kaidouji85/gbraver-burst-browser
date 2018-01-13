@@ -12,7 +12,7 @@ import {getMapPosition} from "../../util/tiled-map/map-position";
 import {createAnimatedTexture} from "../../util/texture/texture-animation";
 import {EMPTY_TILE_MAP} from "../../util/tiled-map/empty-map-data";
 import type {TileMap, TileMapId} from "../../resource/loader/tile-map-loader";
-import type {Texture} from "../../resource/loader/texture-loader";
+import type {Texture} from "../../resource/loader/depricated-texture-loader";
 
 /** タイルマップ生成のパラメータ */
 type Params = {
@@ -30,7 +30,7 @@ type Params = {
 
 /** タイルマップを生成する */
 export function createTileMap(params: Params): THREE.Group {
-  const originTexture: ?Texture = params.resources.textures.find(v => v.path === params.texturePath);
+  const originTexture: ?Texture = params.resources.depricated_textures.find(v => v.path === params.texturePath);
   const originTileMap: ?TileMap = params.resources.tileMap.find(v => v.id === params.tileMapId);
   const texture: THREE.Texture = originTexture ? originTexture.texture : new THREE.Texture();
   const tileMapData: TileMapData = originTileMap ? originTileMap.tileMap : EMPTY_TILE_MAP;
