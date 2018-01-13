@@ -1,12 +1,12 @@
 // @flow
-import type {CanvasPicture} from "./loader/canvas-image-loader";
-import {loadAllCanvasImage} from './loader/canvas-image-loader';
-import type {TileMapManager} from "./loader/tile-map-loader";
-import {loadAllTileMap} from "./loader/tile-map-loader";
-import type {TextureManager} from "./loader/texture-loader";
-import {loadAllTexture} from "./loader/texture-loader";
-import type {JsonModelManager} from "./loader/json-model-loader";
-import {loadAllJsonModel} from "./loader/json-model-loader";
+import type {CanvasPicture} from "./loader/depricated-canvas-image-loader";
+import {loadAllCanvasImage} from './loader/depricated-canvas-image-loader';
+import type {TileMapManager} from "./tile-map";
+import {loadAllTileMap} from "./tile-map";
+import type {TextureManager} from "./texture";
+import {loadAllTexture} from "./texture";
+import type {JsonModelManager} from "./json-model";
+import {loadAllJsonModel} from "./json-model";
 
 /**
  * リソース管理オブジェクト
@@ -16,10 +16,12 @@ export type Resources = {
   models: JsonModelManager[],
   /** テクスチャ */
   textures: TextureManager[],
-  /** キャンパス用画像 */
-  canvasImages: CanvasPicture[],
   /** タイルマップ */
   tileMap: TileMapManager[],
+
+  // TODO 削除する
+  /** キャンパス用画像 */
+  depuricated_canvasImages: CanvasPicture[],
 
 };
 
@@ -39,8 +41,10 @@ export class ResourceManager {
     this.resources = {
       models: [],
       textures: [],
-      canvasImages: [],
       tileMap: [],
+
+      // TODO 削除する
+      depuricated_canvasImages: [],
     };
     this.basePath = basePath;
   }
@@ -48,11 +52,13 @@ export class ResourceManager {
   /** ゲームのリソースを全て読み込む */
   async load() {
     const tileMap = loadAllTileMap();
-    const [models, textures, canvasImages] = await Promise.all([
+    const [models, textures, depuricated_canvasImages] = await Promise.all([
       loadAllJsonModel(this.basePath),
       loadAllTexture(this.basePath),
+
+      // TODO 削除する
       loadAllCanvasImage(this.basePath),
     ]);
-    this.resources = {models, textures, canvasImages, tileMap};
+    this.resources = {models, textures, tileMap, depuricated_canvasImages};
   }
 }

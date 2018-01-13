@@ -12,7 +12,7 @@ import type {Resources} from '../../../resource/resource-manager';
  * @param dy 描画Y
  */
 export function drawImage(context: CanvasRenderingContext2D, resources: Resources, imagePath: string, dx: number, dy: number): void {
-  const image = resources.canvasImages.find(v => v.path === imagePath) || {};
+  const image = resources.depuricated_canvasImages.find(v => v.path === imagePath) || {};
   const x = dx - image.image.width / 2;
   const y = dy - image.image.height / 2;
   context.drawImage(image.image, x, y);

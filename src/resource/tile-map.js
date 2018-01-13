@@ -1,8 +1,8 @@
 // @flow
 
-import type {TileMap, TileSet} from "../../flow-typed/tiled";
-import SCHOOL_GROUND_TILE_MAP from '../../../resources/tile-map/school-ground/tile-data.json';
-import SCHOOL_GROUND_TILE_SET from '../../../resources/tile-map/school-ground/map.json';
+import type {TileMap, TileSet} from "../flow-typed/tiled";
+import SCHOOL_GROUND_TILE_MAP from '../../resources/tile-map/school-ground/tile-data.json';
+import SCHOOL_GROUND_TILE_SET from '../../resources/tile-map/school-ground/map.json';
 
 /** タイルマップID */
 export type TileMapId = string;

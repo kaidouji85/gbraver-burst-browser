@@ -2,8 +2,8 @@
 import type {Resources} from "../../../resource/resource-manager";
 import {createMeshFromJson} from "../../../util/mesh/three-json-mesh";
 import * as THREE from 'three';
-import type {JsonModelManager} from "../../../resource/loader/json-model-loader";
-import {JSON_MODEL_IDS} from "../../../resource/loader/json-model-loader";
+import type {JsonModelManager} from "../../../resource/json-model";
+import {JSON_MODEL_IDS} from "../../../resource/json-model";
 
 /** 学校メッシュを生成する */
 export function createSchoolBuild(resources: Resources): THREE.Mesh {

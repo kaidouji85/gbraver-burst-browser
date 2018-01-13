@@ -1,8 +1,8 @@
 // @flow
 import type {Resources} from '../../../resource/resource-manager';
 import * as THREE from 'three';
-import {TEXTURE_IDS} from "../../../resource/loader/texture-loader";
-import type {TextureManager} from "../../../resource/loader/texture-loader";
+import {TEXTURE_IDS} from "../../../resource/texture";
+import type {TextureManager} from "../../../resource/texture";
 
 const WIDTH =  9000;
 const HEIGHT = 9000;

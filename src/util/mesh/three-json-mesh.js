@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from "three";
-import type {JsonModelManager} from "../../resource/loader/json-model-loader";
+import type {JsonModelManager} from "../../resource/json-model";
 
 /**
  * JSONモデルからメッシュを生成する

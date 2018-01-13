@@ -11,8 +11,8 @@ import type {TileMap, TileSet} from "../../flow-typed/tiled";
 import {getMapPosition} from "../../util/tiled-map/map-position";
 import {createAnimatedTexture} from "../../util/texture/texture-animation";
 import {EMPTY_TILE_MAP} from "../../util/tiled-map/empty-map-data";
-import type {TileMapManager, TileMapId} from "../../resource/loader/tile-map-loader";
-import type {TextureId, TextureManager} from "../../resource/loader/texture-loader";
+import type {TileMapManager, TileMapId} from "../../resource/tile-map";
+import type {TextureId, TextureManager} from "../../resource/texture";
 
 /** タイルマップ生成のパラメータ */
 type Params = {

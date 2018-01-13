@@ -1,12 +1,12 @@
 // @flow
 import type {Resources} from '../../../../resource/resource-manager';
-import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/canvas-image-loader';
+import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
 import {drawImage} from '../image-drawer';
 import {trapezoid} from '../../clip/trapezoid';
 
 /** キャンバスを台形にクリッピングする */
 const clip = (context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, percent: number) => {
-  const image = resources.canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.HP_BAR_UP) || {};
+  const image = resources.depuricated_canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.HP_BAR_UP) || {};
   trapezoid(context, image.image.width, image.image.height, dx, dy, percent);
 };
 

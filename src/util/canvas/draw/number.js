@@ -52,7 +52,7 @@ function drawSingleNumber(context: CanvasRenderingContext2D, image: Image, dx: n
  * @param value 描画する数字の値
  */
 export function drawNumberLeft(context: CanvasRenderingContext2D, resources: Resources, imagePath: string, dx: number, dy: number, value: number): void {
-  const image = resources.canvasImages.find(v => v.path === imagePath) || {};
+  const image = resources.depuricated_canvasImages.find(v => v.path === imagePath) || {};
   const basicWidth = image.image.width / 10;
 
   createNumberArray(value).forEach((num, index) => {
@@ -73,7 +73,7 @@ export function drawNumberLeft(context: CanvasRenderingContext2D, resources: Res
  * @param value 描画する数字の値
  */
 export function drawNumberRight(context: CanvasRenderingContext2D, resources: Resources, imagePath: string, dx: number, dy: number, value: number): void {
-  const image = resources.canvasImages.find(v => v.path === imagePath) || {};
+  const image = resources.depuricated_canvasImages.find(v => v.path === imagePath) || {};
   const basicWidth = image.image.width / 10;
 
   const numberArray = createNumberArray(value);
@@ -95,7 +95,7 @@ export function drawNumberRight(context: CanvasRenderingContext2D, resources: Re
  * @param value 描画する数字の値
  */
 export function drawNumber(context: CanvasRenderingContext2D, resources: Resources, imagePath: string, dx: number, dy: number, value: number): void {
-  const image = resources.canvasImages.find(v => v.path === imagePath) || {};
+  const image = resources.depuricated_canvasImages.find(v => v.path === imagePath) || {};
   const basicWidth = image.image.width / 10;
 
   const numberArray = createNumberArray(value);

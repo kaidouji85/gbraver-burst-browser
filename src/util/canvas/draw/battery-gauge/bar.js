@@ -1,6 +1,6 @@
 // @flow
 import type {Resources} from '../../../../resource/resource-manager';
-import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/canvas-image-loader';
+import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
 import * as R from 'ramda';
 import {drawImage} from '../image-drawer';
 import {trapezoid} from '../../clip/trapezoid';
@@ -48,7 +48,7 @@ function barScale(context: CanvasRenderingContext2D, width: number, height: numb
 export function BatteryBar(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
   drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_BAR_DOWN, dx, dy);
 
-  const barUpImage = resources.canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.BATTERY_BAR_UP) || {};
+  const barUpImage = resources.depuricated_canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.BATTERY_BAR_UP) || {};
   context.save();
   trapezoid(context, barUpImage.image.width, barUpImage.image.height, dx, dy, value / maxValue);
   drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_BAR_UP, dx, dy);

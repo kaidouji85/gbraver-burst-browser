@@ -1,6 +1,6 @@
 // @flow
 import type {Resources} from '../../../../resource/resource-manager';
-import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/canvas-image-loader';
+import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
 import {drawImage} from '../image-drawer';
 import {drawNumberLeft, drawNumberRight} from '../number';
 import {BatteryBar} from './bar';
