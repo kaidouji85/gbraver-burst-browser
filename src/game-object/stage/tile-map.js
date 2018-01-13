@@ -13,13 +13,14 @@ import {createAnimatedTexture} from "../../util/texture/texture-animation";
 import {EMPTY_TILE_MAP} from "../../util/tiled-map/empty-map-data";
 import type {TileMap, TileMapId} from "../../resource/loader/tile-map-loader";
 import type {Texture} from "../../resource/loader/depricated-texture-loader";
+import type {TextureId, TextureManager} from "../../resource/texture-manager";
 
 /** タイルマップ生成のパラメータ */
 type Params = {
   /** リソース管理オブジェクト */
   resources: Resources,
-  /** タイルマップ画像のパス */
-  texturePath: string,
+  /** タイルマップテクスチャのID */
+  textureId: TextureId,
   /** タイルマップID */
   tileMapId: TileMapId,
   /** タイルマップ単位メッシュの幅 */
@@ -30,9 +31,9 @@ type Params = {
 
 /** タイルマップを生成する */
 export function createTileMap(params: Params): THREE.Group {
-  const originTexture: ?Texture = params.resources.depricated_textures.find(v => v.path === params.texturePath);
+  const textureManager: ?TextureManager = params.resources.textures.find(v => v.id === params.textureId);
+  const texture = textureManager ? textureManager.texture : new THREE.Texture();
   const originTileMap: ?TileMap = params.resources.tileMap.find(v => v.id === params.tileMapId);
-  const texture: THREE.Texture = originTexture ? originTexture.texture : new THREE.Texture();
   const tileMapData: TileMapData = originTileMap ? originTileMap.tileMap : EMPTY_TILE_MAP;
   const tileSet: TileSet = originTileMap ? originTileMap.tileSet : EMPTY_TILE_SET;
   const horizonDividedNum = getHorizonDividedNum(tileSet);

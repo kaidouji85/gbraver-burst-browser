@@ -28,6 +28,7 @@ export const TEXTURE_IDS = {
   BLUE_SKY_LEFT: 'BLUE_SKY_LEFT',
   BLUE_SKY_UP: 'BLUE_SKY_UP',
   BLUE_SKY_DOWN: 'BLUE_SKY_DOWN',
+  TILE_MAP_SCHOOL_GROUND: 'TILE_MAP_SCHOOL_GROUND',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -72,7 +73,13 @@ export const TEXTURE_CONFIGS: {[string]: TextureConfig} = {
   BLUE_SKY_DOWN: {
     id: TEXTURE_IDS.BLUE_SKY_DOWN,
     path: 'sky-box/blue-sky/down.png'
-  }
+  },
+
+  // 学校 タイルマップ
+  TILE_MAP_SCHOOL_GROUND: {
+    id: TEXTURE_IDS.TILE_MAP_SCHOOL_GROUND,
+    path: 'tile-map/school-ground/map.png'
+  },
 };
 
 /**

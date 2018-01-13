@@ -9,8 +9,6 @@ import * as R from 'ramda';
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const TEXTURE_PATHS = {
-  // タイルマップ関連
-  TILE_MAP_SCHOOL_GROUND: 'tile-map/school-ground/map.png',
 };
 
 /** テクスチャ管理オブジェクト */
