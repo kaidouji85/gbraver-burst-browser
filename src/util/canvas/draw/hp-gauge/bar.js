@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../../../resource/resource-manager';
 import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
-import {drawImage} from '../image-drawer';
+import {depuricated_drawImage} from '../image-drawer';
 import {trapezoid} from '../../clip/trapezoid';
 
 /** キャンバスを台形にクリッピングする */
@@ -21,9 +21,9 @@ const clip = (context: CanvasRenderingContext2D, resources: Resources, dx: numbe
  * @param percent バーが何%の状態かを0から1で指定する
  */
 export function PlayerHpBar(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, percent: number) {
-  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_BAR_DOWN, dx, dy);
+  depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.HP_BAR_DOWN, dx, dy);
   context.save();
   clip(context, resources, dx, dy, percent);
-  drawImage(context, resources, CANVAS_PICTURE_PATH.HP_BAR_UP, dx, dy);
+  depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.HP_BAR_UP, dx, dy);
   context.restore();
 }

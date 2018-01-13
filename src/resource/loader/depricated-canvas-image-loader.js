@@ -11,9 +11,6 @@ export const CANVAS_PICTURE_PATH = {
   HP_NUMBER: 'gauge/number/hp-number.png',
   BATTERY_NUMBER: 'gauge/number/battery-number.png',
 
-  // ゲージ共通
-  GAUGE_BASE: 'gauge/gauge-base.png',
-
   // HPゲージ系
   HP_BAR_DOWN: 'gauge/hp-gauge/hp-bar-down.png',
   HP_BAR_UP: 'gauge/hp-gauge/hp-bar-up.png',
