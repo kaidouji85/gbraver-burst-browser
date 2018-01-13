@@ -22,6 +22,12 @@ export const TEXTURE_IDS = {
   SHIN_BRAVER_STAND: 'SHIN_BRAVER_STAND',
   SHIN_BRAVER_PUNCH: 'SHIN_BRAVER_PUNCH',
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
+  BLUE_SKY_FRONT: 'BLUE_SKY_FRONT',
+  BLUE_SKY_RIGHT: 'BLUE_SKY_RIGHT',
+  BLUE_SKY_BACK: 'BLUE_SKY_BACK',
+  BLUE_SKY_LEFT: 'BLUE_SKY_LEFT',
+  BLUE_SKY_UP: 'BLUE_SKY_UP',
+  BLUE_SKY_DOWN: 'BLUE_SKY_DOWN',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -40,6 +46,32 @@ export const TEXTURE_CONFIGS: {[string]: TextureConfig} = {
   NEO_LANDOZER_STAND: {
     id: TEXTURE_IDS.NEO_LANDOZER_STAND,
     path: 'armdozer/neo-landozer/stand.png'
+  },
+
+  // 青空スカイボックス関連
+  BLUE_SKY_FRONT: {
+    id: TEXTURE_IDS.BLUE_SKY_FRONT,
+    path: 'sky-box/blue-sky/front.png',
+  },
+  BLUE_SKY_RIGHT: {
+    id: TEXTURE_IDS.BLUE_SKY_RIGHT,
+    path: 'sky-box/blue-sky/right.png',
+  },
+  BLUE_SKY_BACK: {
+    id: TEXTURE_IDS.BLUE_SKY_BACK,
+    path: 'sky-box/blue-sky/back.png'
+  },
+  BLUE_SKY_LEFT: {
+    id: TEXTURE_IDS.BLUE_SKY_LEFT,
+    path: 'sky-box/blue-sky/left.png'
+  },
+  BLUE_SKY_UP: {
+    id: TEXTURE_IDS.BLUE_SKY_UP,
+    path: 'sky-box/blue-sky/up.png'
+  },
+  BLUE_SKY_DOWN: {
+    id: TEXTURE_IDS.BLUE_SKY_DOWN,
+    path: 'sky-box/blue-sky/down.png'
   }
 };
 

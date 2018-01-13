@@ -9,17 +9,6 @@ import * as R from 'ramda';
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const TEXTURE_PATHS = {
-  // ネオランドーザ関連
-  NEO_RANDOZER_STAND: 'armdozer/neo-landozer/stand.png',
-
-  // 青空スカイボックス関連
-  BLUE_SKY_FRONT: 'sky-box/blue-sky/front.png',
-  BLUE_SKY_RIGHT: 'sky-box/blue-sky/right.png',
-  BLUE_SKY_BACK: 'sky-box/blue-sky/back.png',
-  BLUE_SKY_LEFT: 'sky-box/blue-sky/left.png',
-  BLUE_SKY_UP: 'sky-box/blue-sky/up.png',
-  BLUE_SKY_DOWN: 'sky-box/blue-sky/down.png',
-
   // タイルマップ関連
   TILE_MAP_SCHOOL_GROUND: 'tile-map/school-ground/map.png',
 };
