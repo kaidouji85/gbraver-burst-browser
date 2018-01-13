@@ -3,8 +3,6 @@
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/resource-manager";
 import {createAnimatedTexture} from "../../../../util/texture/texture-animation";
-import type {Texture} from "../../../../resource/loader/depricated-texture-loader";
-import {TEXTURE_PATHS} from "../../../../resource/loader/depricated-texture-loader";
 import type {AnimationType} from "../base";
 import type {TextureManager} from "../../../../resource/texture-manager";
 import {TEXTURE_IDS} from "../../../../resource/texture-manager";
