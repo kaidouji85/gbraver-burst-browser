@@ -1,6 +1,6 @@
 // @flow
 
-import type {TileMapData, TileSet} from "../../flow-typed/tiled";
+import type {TileMap, TileSet} from "../../flow-typed/tiled";
 import SCHOOL_GROUND_TILE_MAP from '../../../resources/tile-map/school-ground/tile-data.json';
 import SCHOOL_GROUND_TILE_SET from '../../../resources/tile-map/school-ground/map.json';
 
@@ -8,11 +8,11 @@ import SCHOOL_GROUND_TILE_SET from '../../../resources/tile-map/school-ground/ma
 export type TileMapId = string;
 
 /** タイルマップデータ */
-export type TileMap = {
+export type TileMapManager = {
   /** タイルマップID */
   id: TileMapId,
   /** マップ */
-  tileMap: TileMapData,
+  tileMap: TileMap,
   /** タイルセット */
   tileSet: TileSet,
 };
@@ -29,7 +29,7 @@ export const TILE_MAP_IDS: {[string]: TileMapId} = {
  *
  * @return 読み込み結果
  */
-export function loadAllTileMap(): TileMap[] {
+export function loadAllTileMap(): TileMapManager[] {
   return [{
     id: TILE_MAP_IDS.SCHOOL_GROUND,
     tileMap: SCHOOL_GROUND_TILE_MAP,

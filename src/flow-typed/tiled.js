@@ -24,7 +24,7 @@ export type TileSet = {
 };
 
 /** タイルマップ */
-export type TileMapData = {
+export type TileMap = {
   backgroundcolor: string,
   height: number,
   layers: TiledLayer[],

@@ -3,10 +3,10 @@ import type {CanvasPicture} from "./loader/canvas-image-loader";
 import {loadAllCanvasImage} from './loader/canvas-image-loader';
 import type {Model} from "./loader/json-model-loader";
 import {loadAllJsonModel} from "./loader/json-model-loader";
-import type {TileMap} from "./loader/tile-map-loader";
+import type {TileMapManager} from "./loader/tile-map-loader";
 import {loadAllTileMap} from "./loader/tile-map-loader";
-import type {TextureManager} from "./texture-manager";
-import {loadAllTexture} from "./texture-manager";
+import type {TextureManager} from "./loader/texture-loader";
+import {loadAllTexture} from "./loader/texture-loader";
 
 /**
  * リソース管理オブジェクト
@@ -19,7 +19,7 @@ export type Resources = {
   /** キャンパス用画像 */
   canvasImages: CanvasPicture[],
   /** タイルマップ */
-  tileMap: TileMap[],
+  tileMap: TileMapManager[],
 };
 
 /**

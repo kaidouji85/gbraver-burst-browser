@@ -1,6 +1,6 @@
 // @flow
 
-import type {TileMapData, TileSet} from "../../flow-typed/tiled";
+import type {TileMap, TileSet} from "../../flow-typed/tiled";
 
 /**
  *  タイルチップIDからテクスチャオフセット座標を計算する
@@ -9,7 +9,7 @@ import type {TileMapData, TileSet} from "../../flow-typed/tiled";
  * @param tileSet タイルセットのデータ
  * @return テクスチャオフセット座標
  */
-export function getTextureOffsetPos(gid: number, tileSet: TileSet, tileMap: TileMapData): {x: number, y: number} {
+export function getTextureOffsetPos(gid: number, tileSet: TileSet, tileMap: TileMap): {x: number, y: number} {
   // firstgidはtileSet、tileMapに存在するが、
   // tiled 1.1.0ではtileMap.tilesetsにあるfirstgidが正しい値である
   const tileIndex = gid - tileMap.tilesets[0].firstgid;

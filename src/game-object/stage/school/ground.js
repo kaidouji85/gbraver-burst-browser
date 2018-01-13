@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import type {Resources} from "../../../resource/resource-manager";
 import {TILE_MAP_IDS} from "../../../resource/loader/tile-map-loader";
 import {createTileMap} from "../tile-map";
-import {TEXTURE_IDS} from "../../../resource/texture-manager";
+import {TEXTURE_IDS} from "../../../resource/loader/texture-loader";
 
 /** グラウンドを生成する */
 export function createGround(resources: Resources): THREE.Group {

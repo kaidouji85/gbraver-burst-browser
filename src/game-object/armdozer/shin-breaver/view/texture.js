@@ -4,8 +4,8 @@ import * as THREE from "three";
 import type {Resources} from "../../../../resource/resource-manager";
 import {createAnimatedTexture} from "../../../../util/texture/texture-animation";
 import type {AnimationType} from "../base";
-import type {TextureManager} from "../../../../resource/texture-manager";
-import {TEXTURE_IDS} from "../../../../resource/texture-manager";
+import type {TextureManager} from "../../../../resource/loader/texture-loader";
+import {TEXTURE_IDS} from "../../../../resource/loader/texture-loader";
 
 /** シンブレイバーのテクスチャコンテナ */
 export class ShinBraverTextureContainer {

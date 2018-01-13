@@ -1,9 +1,9 @@
 // @flow
 
-import type {TileMapData} from "../../flow-typed/tiled";
+import type {TileMap} from "../../flow-typed/tiled";
 
 /** 空のタイルマップ */
-export const EMPTY_TILE_MAP: TileMapData = {
+export const EMPTY_TILE_MAP: TileMap = {
   backgroundcolor: '',
   height: 0,
   layers: [],
