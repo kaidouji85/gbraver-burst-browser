@@ -5,6 +5,7 @@ import * as THREE from "three";
 import type {Resources} from "../../../../resource/resource-manager";
 import type {ShinBraverModel} from "../base";
 import {ShinBraverTextureContainer} from "./texture";
+import {SPRITE_RENDER_ORDER} from "../../../../util/mesh/render-order";
 
 export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;
@@ -43,5 +44,7 @@ function createBasicMesh() {
     side: THREE.DoubleSide,
     transparent: true
   });
-  return new THREE.Mesh(geometry, material);
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.renderOrder = SPRITE_RENDER_ORDER;
+  return mesh;
 }
