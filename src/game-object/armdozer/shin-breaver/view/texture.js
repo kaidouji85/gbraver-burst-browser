@@ -38,7 +38,7 @@ function createStand(resources: Resources): THREE.Texture {
 
 /** パンチ */
 function createPunch(resources: Resources): THREE.Texture {
-  const origin: ?Texture = resources.depricated_textures.find(item => item.path === TEXTURE_PATHS.SHIN_BRAVER_PUNCH);
-  const texture = origin ? origin.texture : new THREE.Texture();
+  const textureManager: ?TextureManager = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_PUNCH);
+  const texture = textureManager ? textureManager.texture : new THREE.Texture();
   return createAnimatedTexture(texture, 10, 1);
 }

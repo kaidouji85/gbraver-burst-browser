@@ -20,6 +20,7 @@ export type TextureConfig = {
 /** テクスチャIDをまとめたもの */
 export const TEXTURE_IDS = {
   SHIN_BRAVER_STAND: 'SHIN_BRAVER_STAND',
+  SHIN_BRAVER_PUNCH: 'SHIN_BRAVER_PUNCH',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -28,6 +29,10 @@ export const TEXTURE_CONFIGS: {[string]: TextureConfig} = {
     id: TEXTURE_IDS.SHIN_BRAVER_STAND,
     path: 'armdozer/shin-braver/stand.png'
   },
+  SHIN_BRAVER_PUNCH: {
+    id: TEXTURE_IDS.SHIN_BRAVER_PUNCH,
+    path: 'armdozer/shin-braver/punch.png'
+  }
 };
 
 /**

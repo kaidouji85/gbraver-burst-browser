@@ -9,9 +9,6 @@ import * as R from 'ramda';
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const TEXTURE_PATHS = {
-  // シンブレイバー関連
-  SHIN_BRAVER_PUNCH: 'armdozer/shin-braver/punch.png',
-
   // ネオランドーザ関連
   NEO_RANDOZER_STAND: 'armdozer/neo-landozer/stand.png',
 
