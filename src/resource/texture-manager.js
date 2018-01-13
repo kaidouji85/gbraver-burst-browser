@@ -21,10 +21,12 @@ export type TextureConfig = {
 export const TEXTURE_IDS = {
   SHIN_BRAVER_STAND: 'SHIN_BRAVER_STAND',
   SHIN_BRAVER_PUNCH: 'SHIN_BRAVER_PUNCH',
+  NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
 };
 
 /** テクスチャ設定をまとめたもの */
 export const TEXTURE_CONFIGS: {[string]: TextureConfig} = {
+  // シンブレイバー関連
   SHIN_BRAVER_STAND: {
     id: TEXTURE_IDS.SHIN_BRAVER_STAND,
     path: 'armdozer/shin-braver/stand.png'
@@ -32,6 +34,12 @@ export const TEXTURE_CONFIGS: {[string]: TextureConfig} = {
   SHIN_BRAVER_PUNCH: {
     id: TEXTURE_IDS.SHIN_BRAVER_PUNCH,
     path: 'armdozer/shin-braver/punch.png'
+  },
+
+  // ネオランドーザ関連
+  NEO_LANDOZER_STAND: {
+    id: TEXTURE_IDS.NEO_LANDOZER_STAND,
+    path: 'armdozer/neo-landozer/stand.png'
   }
 };
 
