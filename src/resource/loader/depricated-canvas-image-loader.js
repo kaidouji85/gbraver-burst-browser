@@ -8,7 +8,6 @@ import * as R from 'ramda';
  */
 export const CANVAS_PICTURE_PATH = {
   // 数字系画像
-  HP_NUMBER: 'gauge/number/hp-number.png',
   BATTERY_NUMBER: 'gauge/number/battery-number.png',
 
   // HPゲージ系

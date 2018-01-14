@@ -3,8 +3,9 @@ import type {Resources} from '../../../../resource/resource-manager';
 import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
 import {depuricated_drawImage, drawImage} from '../image-drawer';
 import {PlayerHpBar} from './bar';
-import {drawNumberLeft, drawNumberRight} from '../number';
+import {depuricated_drawNumberLeft, depuricated_drawNumberRight, drawNumberLeft, drawNumberRight} from '../number';
 import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
+import type {CanvasImageManager} from "../../../../resource/canvas-image";
 
 /**
  * プレイヤーのHPゲージを描画する
@@ -19,12 +20,15 @@ import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
  */
 export function drawPlayerHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
   const value = hp / maxHp;
+  const hpNumberManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
+  const hpNumber: Image = hpNumberManager ? hpNumberManager.image : new Image();
 
   drawImage(context, resources, CANVAS_IMAGE_IDS.GAUGE_BASE, dx, dy);
   PlayerHpBar(context, resources, dx-8, dy+8, value);
 
   depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_LABEL, dx + 70, dy - 6);
-  drawNumberRight(context, resources, CANVAS_PICTURE_PATH.HP_NUMBER, dx - 32, dy - 24, Math.floor(hp));
+  drawNumberRight(context, hpNumber, dx - 32, dy - 24, Math.floor(hp));
+
 }
 
 /**
@@ -40,6 +44,8 @@ export function drawPlayerHpGauge(context: CanvasRenderingContext2D, resources: 
  */
 export function drawEnemyHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
   const value = hp / maxHp;
+  const hpNumberManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
+  const hpNumber: Image = hpNumberManager ? hpNumberManager.image : new Image();
 
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
@@ -50,5 +56,5 @@ export function drawEnemyHpGauge(context: CanvasRenderingContext2D, resources: R
   context.restore();
 
   depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_LABEL, dx - 64, dy - 6);
-  drawNumberRight(context, resources, CANVAS_PICTURE_PATH.HP_NUMBER, dx + 100, dy - 24, Math.floor(hp));
+  drawNumberRight(context, hpNumber, dx + 100, dy - 24, Math.floor(hp));
 }
