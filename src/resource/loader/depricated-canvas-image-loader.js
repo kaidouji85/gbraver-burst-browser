@@ -8,7 +8,6 @@ import * as R from 'ramda';
  */
 export const CANVAS_PICTURE_PATH = {
   // バッテリーゲージ系
-  BATTERY_GAUGE_LABEL: 'gauge/battery-gauge/battery-gauge-label.png',
   BATTERY_BAR_UP: 'gauge/battery-gauge/battery-bar-up.png',
   BATTERY_BAR_DOWN: 'gauge/battery-gauge/battery-bar-down.png',
 };

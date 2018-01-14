@@ -23,6 +23,7 @@ export const CANVAS_IMAGE_IDS = {
   HP_BAR_DOWN: 'HP_BAR_DOWN',
   HP_BAR_UP: 'HP_BAR_UP',
   HP_GAUGE_LABEL: 'HP_GAUGE_LABEL',
+  BATTERY_GAUGE_LABEL: 'BATTERY_GAUGE_LABEL',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -50,6 +51,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.HP_GAUGE_LABEL,
     path: 'gauge/hp-gauge/hp-gauge-label.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL,
+    path: 'gauge/battery-gauge/battery-gauge-label.png',
   }
 ];
 
