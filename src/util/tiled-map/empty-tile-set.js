@@ -1,9 +1,9 @@
 // @fow
 
-import type {TileSet} from "../../flow-typed/tiled";
+import type {TileSetJson} from "../../flow-typed/tiled";
 
 /** 空のタイルセット */
-export const EMPTY_TILE_SET: TileSet = {
+export const EMPTY_TILE_SET: TileSetJson = {
   columns: 0,
   firstgid: 0,
   image: '',

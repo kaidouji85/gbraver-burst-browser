@@ -1,25 +1,25 @@
 // @flow
-import type {CanvasPicture} from "./loader/canvas-image-loader";
-import {loadAllCanvasImage} from './loader/canvas-image-loader';
-import type {Model} from "./loader/json-model-loader";
-import {loadAllJsonModel} from "./loader/json-model-loader";
-import type {Texture} from "./loader/texture-loader";
-import {loadAllTexture} from "./loader/texture-loader";
-import type {TileMap} from "./loader/tile-map-loader";
-import {loadAllTileMap} from "./loader/tile-map-loader";
+import type {TileMapResource} from "./tile-map";
+import {loadAllTileMap} from "./tile-map";
+import type {TextureResource} from "./texture";
+import {loadAllTexture} from "./texture";
+import type {JsonModelResource} from "./json-model";
+import {loadAllJsonModel} from "./json-model";
+import type {CanvasImageResource} from "./canvas-image";
+import {loadAllCanvasImage} from "./canvas-image";
 
 /**
- * リソース管理オブジェクト
+ * ゲームで使うリソースを集めたもの
  */
 export type Resources = {
   /** モデル */
-  models: Model[],
+  models: JsonModelResource[],
   /** テクスチャ */
-  textures: Texture[],
-  /** キャンパス用画像 */
-  canvasImages: CanvasPicture[],
+  textures: TextureResource[],
+  /** キャンバス用画像 */
+  canvasImages: CanvasImageResource[],
   /** タイルマップ */
-  tileMap: TileMap[]
+  tileMap: TileMapResource[],
 };
 
 /**
@@ -50,8 +50,8 @@ export class ResourceManager {
     const [models, textures, canvasImages] = await Promise.all([
       loadAllJsonModel(this.basePath),
       loadAllTexture(this.basePath),
-      loadAllCanvasImage(this.basePath)
+      loadAllCanvasImage(this.basePath),
     ]);
-    this.resources = {models, textures, canvasImages, tileMap};
+    this.resources = {models, textures, tileMap, canvasImages};
   }
 }

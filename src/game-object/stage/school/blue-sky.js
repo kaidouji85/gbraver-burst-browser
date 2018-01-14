@@ -1,18 +1,19 @@
 // @flow
 import type {Resources} from '../../../resource/resource-manager';
-import {TEXTURE_PATHS} from '../../../resource/loader/texture-loader';
 import * as THREE from 'three';
+import {TEXTURE_IDS} from "../../../resource/texture";
+import type {TextureResource} from "../../../resource/texture";
 
 const WIDTH =  9000;
 const HEIGHT = 9000;
 const DEPTH = 9000;
-const SKY_BOX_TEXTURE_PATHS = [
-  TEXTURE_PATHS.BLUE_SKY_RIGHT,
-  TEXTURE_PATHS.BLUE_SKY_LEFT,
-  TEXTURE_PATHS.BLUE_SKY_UP,
-  TEXTURE_PATHS.BLUE_SKY_DOWN,
-  TEXTURE_PATHS.BLUE_SKY_BACK,
-  TEXTURE_PATHS.BLUE_SKY_FRONT,
+const SKY_BOX_TEXTURE_IDS = [
+  TEXTURE_IDS.BLUE_SKY_RIGHT,
+  TEXTURE_IDS.BLUE_SKY_LEFT,
+  TEXTURE_IDS.BLUE_SKY_UP,
+  TEXTURE_IDS.BLUE_SKY_DOWN,
+  TEXTURE_IDS.BLUE_SKY_BACK,
+  TEXTURE_IDS.BLUE_SKY_FRONT,
 ];
 
 /**
@@ -22,14 +23,10 @@ const SKY_BOX_TEXTURE_PATHS = [
  * @return 青空スカイボックス
  */
 export default function BlueSky(resources: Resources): THREE.Mesh {
-  const getTexture = path => {
-    const texture = resources.textures.find(v => v.path === path);
-    return texture ? texture.texture : new THREE.Texture();
-  }
-  const materials = SKY_BOX_TEXTURE_PATHS
-    .map(path => getTexture(path))
+  const materials = SKY_BOX_TEXTURE_IDS
+    .map(id => resources.textures.find(v => v.id === id))
+    .map((textureResource: ?TextureResource) => textureResource ? textureResource.texture : new THREE.Texture())
     .map(texture => new THREE.MeshBasicMaterial({map: texture, side: THREE.BackSide}));
-
   let geometry = new THREE.CubeGeometry(WIDTH, HEIGHT, DEPTH, 32, 32, 32);
   let material = new THREE.MultiMaterial(materials);
   return new THREE.Mesh(geometry, material);

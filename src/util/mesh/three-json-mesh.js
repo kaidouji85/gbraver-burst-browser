@@ -1,20 +1,14 @@
-import type {Resources} from "../../resource/resource-manager";
+// @flow
 import * as THREE from "three";
+import type {JsonModelResource} from "../../resource/json-model";
 
 /**
- * JSONから読み込んだデータからメッシュを生成するヘルパー関数
+ * JSONモデルからメッシュを生成する
  *
- * @param modelPath モデルのパス
- * @param resources リソース管理オブジェクト
+ * @param jsonModelManager JSONモデル管理オブジェクト
  * @return 生成したメッシュ
  */
-export function createMeshFromJson(modelPath: string, resources: Resources): THREE.MeshFaceMaterial {
-  const model = resources.models.find(item => item.path === modelPath);
-
-  if (!model) {
-    return null;
-  }
-
-  let faceMat = new THREE.MeshFaceMaterial(model.material);
-  return new THREE.Mesh(model.geometry, faceMat);
+export function createMeshFromJson(jsonModelManager: JsonModelResource): THREE.Mesh {
+  const material = new THREE.MeshFaceMaterial(jsonModelManager.material);
+  return new THREE.Mesh(jsonModelManager.geometry, material);
 }
