@@ -1,6 +1,6 @@
 // @flow
 
-import type {TileMap, TileSet} from "../flow-typed/tiled";
+import type {TileMapJson, TileSetJson} from "../flow-typed/tiled";
 import SCHOOL_GROUND_TILE_MAP from '../../resources/tile-map/school-ground/tile-data.json';
 import SCHOOL_GROUND_TILE_SET from '../../resources/tile-map/school-ground/map.json';
 
@@ -12,9 +12,9 @@ export type TileMapResource = {
   /** タイルマップID */
   id: TileMapId,
   /** マップ */
-  tileMap: TileMap,
+  tileMap: TileMapJson,
   /** タイルセット */
-  tileSet: TileSet,
+  tileSet: TileSetJson,
 };
 
 /** タイルマップIDを集めたもの */

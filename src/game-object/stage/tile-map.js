@@ -7,7 +7,7 @@ import {
   getVerticalDividedNum
 } from "../../util/tiled-map/texture-off-set-pos";
 import {EMPTY_TILE_SET} from "../../util/tiled-map/empty-tile-set";
-import type {TileMap, TileSet} from "../../flow-typed/tiled";
+import type {TileMapJson, TileSetJson} from "../../flow-typed/tiled";
 import {getMapPosition} from "../../util/tiled-map/map-position";
 import {createAnimatedTexture} from "../../util/texture/texture-animation";
 import {EMPTY_TILE_MAP} from "../../util/tiled-map/empty-map-data";
@@ -33,8 +33,8 @@ export function createTileMap(params: Params): THREE.Group {
   const textureResource: ?TextureResource = params.resources.textures.find(v => v.id === params.textureId);
   const texture = textureResource ? textureResource.texture : new THREE.Texture();
   const tileMapResource: ?TileMapResource = params.resources.tileMap.find(v => v.id === params.tileMapId);
-  const tileMapData: TileMap = tileMapResource ? tileMapResource.tileMap : EMPTY_TILE_MAP;
-  const tileSet: TileSet = tileMapResource ? tileMapResource.tileSet : EMPTY_TILE_SET;
+  const tileMapData: TileMapJson = tileMapResource ? tileMapResource.tileMap : EMPTY_TILE_MAP;
+  const tileSet: TileSetJson = tileMapResource ? tileMapResource.tileSet : EMPTY_TILE_SET;
   const horizonDividedNum = getHorizonDividedNum(tileSet);
   const verticalDividedNum = getVerticalDividedNum(tileSet);
   const basePosX = (-tileMapData.width + 1) * params.meshWith / 2;

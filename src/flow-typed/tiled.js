@@ -4,12 +4,19 @@
  * Tiled用のデータ型
  * Tiledについては、以下URLを参照
  * http://www.mapeditor.org/
+ *
+ * 以下URLにJSONフォーマットが掲載されている
+ * http://doc.mapeditor.org/en/latest/reference/json-map-format/
+ *
+ * しかし、実際のファイルはこれとは異なっている
+ * 本ファイルの型定義は、実際のファイルに合わせたものである
  */
 
-/** タイルセット */
-export type TileSet = {
+/**
+ * タイルセットファイルのJSONフォーマット
+ */
+export type TileSetJson = {
   columns: number,
-  firstgid: number,
   image: string,
   imageheight: number,
   imagewidth: number,
@@ -23,8 +30,10 @@ export type TileSet = {
   tilewidth: number,
 };
 
-/** タイルマップ */
-export type TileMap = {
+/**
+ * タイルマップファイルのJSONフォーマット
+ */
+export type TileMapJson = {
   backgroundcolor: string,
   height: number,
   layers: TiledLayer[],
@@ -33,11 +42,17 @@ export type TileMap = {
   properties: Object,
   renderorder: string,
   tileheight: number,
-  tilesets: TileSet[],
+  tilesets: TileSetForTileMap[],
   tilewidth: number,
   version: number,
   tiledversion: string,
   width: number,
+};
+
+/** タイルマップに付属するタイルセット情報 */
+export type TileSetForTileMap = {
+  firstgid: number,
+  source: string
 };
 
 /** レイヤーデータ */
