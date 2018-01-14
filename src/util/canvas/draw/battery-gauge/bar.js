@@ -1,12 +1,10 @@
 // @flow
 import type {Resources} from '../../../../resource/resource-manager';
-import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
 import * as R from 'ramda';
-import {depuricated_drawImage, drawImage} from '../image-drawer';
+import {drawImage} from '../image-drawer';
 import {trapezoid} from '../../clip/trapezoid';
 import type {CanvasImageResource} from "../../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
-
 
 /**
  * バッテリーバーの目盛りを描画する

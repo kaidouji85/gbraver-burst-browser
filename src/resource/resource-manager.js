@@ -1,6 +1,4 @@
 // @flow
-import type {CanvasPicture} from "./loader/depricated-canvas-image-loader";
-import {loadAllCanvasImage as depricated_loadAllCanvasImage} from './loader/depricated-canvas-image-loader';
 import type {TileMapResource} from "./tile-map";
 import {loadAllTileMap} from "./tile-map";
 import type {TextureResource} from "./texture";
@@ -22,10 +20,6 @@ export type Resources = {
   canvasImages: CanvasImageResource[],
   /** タイルマップ */
   tileMap: TileMapResource[],
-
-  // TODO 削除する
-  /** キャンパス用画像 */
-  depuricated_canvasImages: CanvasPicture[],
 };
 
 /**
@@ -46,9 +40,6 @@ export class ResourceManager {
       textures: [],
       canvasImages: [],
       tileMap: [],
-
-      // TODO 削除する
-      depuricated_canvasImages: [],
     };
     this.basePath = basePath;
   }
@@ -56,14 +47,11 @@ export class ResourceManager {
   /** ゲームのリソースを全て読み込む */
   async load() {
     const tileMap = loadAllTileMap();
-    const [models, textures, canvasImages, depuricated_canvasImages] = await Promise.all([
+    const [models, textures, canvasImages] = await Promise.all([
       loadAllJsonModel(this.basePath),
       loadAllTexture(this.basePath),
       loadAllCanvasImage(this.basePath),
-
-      // TODO 削除する
-      depricated_loadAllCanvasImage(this.basePath),
     ]);
-    this.resources = {models, textures, tileMap, canvasImages, depuricated_canvasImages};
+    this.resources = {models, textures, tileMap, canvasImages};
   }
 }
