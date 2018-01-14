@@ -2,8 +2,10 @@
 import type {Resources} from '../../../../resource/resource-manager';
 import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
 import * as R from 'ramda';
-import {depuricated_drawImage} from '../image-drawer';
+import {depuricated_drawImage, drawImage} from '../image-drawer';
 import {trapezoid} from '../../clip/trapezoid';
+import type {CanvasImageResource} from "../../../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
 
 
 /**
@@ -46,13 +48,17 @@ function barScale(context: CanvasRenderingContext2D, width: number, height: numb
  * @param maxValue バッテリーの最大値
  */
 export function BatteryBar(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
+  const batteryBarUpResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BAR_UP);
+  const batteryBarUp: Image = batteryBarUpResource ? batteryBarUpResource.image : new Image();
+
   depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_BAR_DOWN, dx, dy);
 
-  const barUpImage = resources.depuricated_canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.BATTERY_BAR_UP) || {};
   context.save();
-  trapezoid(context, barUpImage.image.width, barUpImage.image.height, dx, dy, value / maxValue);
-  depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_BAR_UP, dx, dy);
+
+  trapezoid(context, batteryBarUp.width, batteryBarUp.height, dx, dy, value / maxValue);
+  drawImage(context, batteryBarUp, dx, dy);
+
   context.restore();
 
-  barScale(context, barUpImage.image.width, barUpImage.image.height, dx, dy, value, maxValue);
+  barScale(context, batteryBarUp.width, batteryBarUp.height, dx, dy, value, maxValue);
 }
