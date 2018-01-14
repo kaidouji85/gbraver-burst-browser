@@ -21,6 +21,7 @@ export const CANVAS_IMAGE_IDS = {
   HP_NUMBER: 'HP_NUMBER',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   HP_BAR_DOWN: 'HP_BAR_DOWN',
+  HP_BAR_UP: 'HP_BAR_UP',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -40,6 +41,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.HP_BAR_DOWN,
     path: 'gauge/hp-gauge/hp-bar-down.png'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.HP_BAR_UP,
+    path: 'gauge/hp-gauge/hp-bar-up.png'
   }
 ];
 

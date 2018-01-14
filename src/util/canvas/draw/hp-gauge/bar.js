@@ -1,15 +1,13 @@
 // @flow
 import type {Resources} from '../../../../resource/resource-manager';
-import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
-import {depuricated_drawImage, drawImage} from '../image-drawer';
+import {drawImage} from '../image-drawer';
 import {trapezoid} from '../../clip/trapezoid';
 import type {CanvasImageResource} from "../../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
 
 /** キャンバスを台形にクリッピングする */
-const clip = (context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, percent: number) => {
-  const image = resources.depuricated_canvasImages.find(v => v.path === CANVAS_PICTURE_PATH.HP_BAR_UP) || {};
-  trapezoid(context, image.image.width, image.image.height, dx, dy, percent);
+const clip = (context: CanvasRenderingContext2D, image: Image, dx: number, dy: number, percent: number) => {
+  trapezoid(context, image.width, image.height, dx, dy, percent);
 };
 
 /**
@@ -25,13 +23,15 @@ const clip = (context: CanvasRenderingContext2D, resources: Resources, dx: numbe
 export function PlayerHpBar(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, percent: number) {
   const hpBarDownResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR_DOWN);
   const hpBar: Image = hpBarDownResource ? hpBarDownResource.image : new Image();
+  const hpBarUpResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR_UP);
+  const hpBarUp: Image = hpBarUpResource ? hpBarUpResource.image : new Image();
 
   drawImage(context, hpBar, dx, dy);
 
   context.save();
 
-  clip(context, resources, dx, dy, percent);
-  depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.HP_BAR_UP, dx, dy);
+  clip(context, hpBarUp, dx, dy, percent);
+  drawImage(context, hpBarUp, dx, dy);
 
   context.restore();
 }
