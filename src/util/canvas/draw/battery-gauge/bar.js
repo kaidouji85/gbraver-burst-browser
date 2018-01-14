@@ -50,8 +50,10 @@ function barScale(context: CanvasRenderingContext2D, width: number, height: numb
 export function BatteryBar(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
   const batteryBarUpResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BAR_UP);
   const batteryBarUp: Image = batteryBarUpResource ? batteryBarUpResource.image : new Image();
+  const batteryBarDownResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BAR_DOWN);
+  const batteryBarDown: Image = batteryBarDownResource ? batteryBarDownResource.image : new Image();
 
-  depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_BAR_DOWN, dx, dy);
+  drawImage(context, batteryBarDown, dx, dy);
 
   context.save();
 

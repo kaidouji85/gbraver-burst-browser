@@ -7,8 +7,6 @@ import * as R from 'ramda';
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const CANVAS_PICTURE_PATH = {
-  // バッテリーゲージ系
-  BATTERY_BAR_DOWN: 'gauge/battery-gauge/battery-bar-down.png',
 };
 
 /** キャンバス用画像管理オブジェクト */
