@@ -18,7 +18,7 @@ export type TileMapResource = {
 };
 
 /** タイルマップIDを集めたもの */
-export const TILE_MAP_IDS: {[string]: TileMapId} = {
+export const TILE_MAP_IDS = {
   SCHOOL_GROUND: 'SCHOOL_GROUND'
 };
 

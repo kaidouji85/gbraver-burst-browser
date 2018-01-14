@@ -1,6 +1,5 @@
 // @flow
 import * as THREE from "three";
-import * as R from 'ramda';
 
 /** JSONモデルID */
 export type JsonModelId = string;
@@ -29,12 +28,12 @@ export const JSON_MODEL_IDS = {
 };
 
 /** JSONモデル設定をあつめたもの */
-export const JSON_MODEL_CONFIGS: {[string]: JsonModelConfig} = {
-  SCHOOL: {
+export const JSON_MODEL_CONFIGS: JsonModelConfig[] = [
+  {
     id: JSON_MODEL_IDS.SCHOOL,
     path: 'model/school/school.js'
   }
-};
+];
 
 /**
  * JSONモデルを読み込むヘルパー関数
@@ -59,6 +58,5 @@ export function loadJsonModel(basePath: string, config: JsonModelConfig): Promis
  * @return 読み込み結果
  */
 export function loadAllJsonModel(basePath: string): Promise<JsonModelResource[]> {
-  const configs: JsonModelConfig[] = R.values(JSON_MODEL_CONFIGS);
-  return Promise.all(configs.map(config => loadJsonModel(basePath, config)));
+  return Promise.all(JSON_MODEL_CONFIGS.map(config => loadJsonModel(basePath, config)));
 }
