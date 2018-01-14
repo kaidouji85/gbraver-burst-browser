@@ -11,8 +11,8 @@ import type {TileMap, TileSet} from "../../flow-typed/tiled";
 import {getMapPosition} from "../../util/tiled-map/map-position";
 import {createAnimatedTexture} from "../../util/texture/texture-animation";
 import {EMPTY_TILE_MAP} from "../../util/tiled-map/empty-map-data";
-import type {TileMapManager, TileMapId} from "../../resource/tile-map";
-import type {TextureId, TextureManager} from "../../resource/texture";
+import type {TileMapResource, TileMapId} from "../../resource/tile-map";
+import type {TextureId, TextureResource} from "../../resource/texture";
 
 /** タイルマップ生成のパラメータ */
 type Params = {
@@ -30,11 +30,11 @@ type Params = {
 
 /** タイルマップを生成する */
 export function createTileMap(params: Params): THREE.Group {
-  const textureManager: ?TextureManager = params.resources.textures.find(v => v.id === params.textureId);
-  const texture = textureManager ? textureManager.texture : new THREE.Texture();
-  const tileMapManager: ?TileMapManager = params.resources.tileMap.find(v => v.id === params.tileMapId);
-  const tileMapData: TileMap = tileMapManager ? tileMapManager.tileMap : EMPTY_TILE_MAP;
-  const tileSet: TileSet = tileMapManager ? tileMapManager.tileSet : EMPTY_TILE_SET;
+  const textureResource: ?TextureResource = params.resources.textures.find(v => v.id === params.textureId);
+  const texture = textureResource ? textureResource.texture : new THREE.Texture();
+  const tileMapResource: ?TileMapResource = params.resources.tileMap.find(v => v.id === params.tileMapId);
+  const tileMapData: TileMap = tileMapResource ? tileMapResource.tileMap : EMPTY_TILE_MAP;
+  const tileSet: TileSet = tileMapResource ? tileMapResource.tileSet : EMPTY_TILE_SET;
   const horizonDividedNum = getHorizonDividedNum(tileSet);
   const verticalDividedNum = getVerticalDividedNum(tileSet);
   const basePosX = (-tileMapData.width + 1) * params.meshWith / 2;

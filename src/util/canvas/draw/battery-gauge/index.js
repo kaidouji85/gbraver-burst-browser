@@ -5,7 +5,7 @@ import {depuricated_drawImage, drawImage} from '../image-drawer';
 import {depuricated_drawNumberLeft, depuricated_drawNumberRight} from '../number';
 import {BatteryBar} from './bar';
 import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
-import type {CanvasImageManager} from "../../../../resource/canvas-image";
+import type {CanvasImageResource} from "../../../../resource/canvas-image";
 
 /**
  * プレイヤーのバッテリーゲージを描画する
@@ -19,8 +19,8 @@ import type {CanvasImageManager} from "../../../../resource/canvas-image";
  * @param maxValue バッテリー最大値
  */
 export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
-  const gaugeBaseManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
-  const gaugeBase: Image = gaugeBaseManager ? gaugeBaseManager.image : new Image();
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
 
   drawImage(context, gaugeBase, dx, dy);
   BatteryBar(context, resources, dx - 8, dy + 8, Math.floor(value), Math.floor(maxValue));
@@ -41,8 +41,8 @@ export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resour
  * @param maxValue バッテリー最大値
  */
 export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
-  const gaugeBaseManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
-  const gaugeBase: Image = gaugeBaseManager ? gaugeBaseManager.image : new Image();
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
 
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);

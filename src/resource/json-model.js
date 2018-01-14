@@ -13,8 +13,8 @@ export type JsonModelConfig = {
   path: string,
 };
 
-/** JSONモデル管理 */
-export type JsonModelManager = {
+/** JSONモデルリソース */
+export type JsonModelResource = {
   /** JSONモデルID */
   id: JsonModelId,
   /** 形状 */
@@ -43,7 +43,7 @@ export const JSON_MODEL_CONFIGS: {[string]: JsonModelConfig} = {
  * @param config 読み込み設定
  * @return 読み込み結果
  */
-export function loadJsonModel(basePath: string, config: JsonModelConfig): Promise<JsonModelManager> {
+export function loadJsonModel(basePath: string, config: JsonModelConfig): Promise<JsonModelResource> {
   const loader = new THREE.JSONLoader();
   return new Promise(resolve => loader.load(`${basePath}${config.path}`, (geometry, material) => resolve({
     id: config.id,
@@ -58,7 +58,7 @@ export function loadJsonModel(basePath: string, config: JsonModelConfig): Promis
  * @param basePath
  * @return 読み込み結果
  */
-export function loadAllJsonModel(basePath: string): Promise<JsonModelManager[]> {
+export function loadAllJsonModel(basePath: string): Promise<JsonModelResource[]> {
   const configs: JsonModelConfig[] = R.values(JSON_MODEL_CONFIGS);
   return Promise.all(configs.map(config => loadJsonModel(basePath, config)));
 }

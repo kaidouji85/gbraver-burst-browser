@@ -1,5 +1,4 @@
 // @flow
-import * as R from 'ramda';
 
 /** キャンバス用画像ID */
 export type CanvasImageId = string;
@@ -10,8 +9,8 @@ export type CanvasImageConfig = {
   path: string
 };
 
-/** キャンバス用画像管理 */
-export type CanvasImageManager = {
+/** キャンバス用画像リソース */
+export type CanvasImageResource = {
   id: CanvasImageId,
   image: Image
 };
@@ -41,7 +40,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
  * @param config 読み込み設定
  * @return 読み込み結果
  */
-export function loadCanvasImage(basePath: string, config: CanvasImageConfig): Promise<CanvasImageManager> {
+export function loadCanvasImage(basePath: string, config: CanvasImageConfig): Promise<CanvasImageResource> {
   const image = new Image();
   image.src = `${basePath}${config.path}`;
   return new Promise(resolve => image.onload = () => resolve({
@@ -56,6 +55,6 @@ export function loadCanvasImage(basePath: string, config: CanvasImageConfig): Pr
  * @param basePath ベースとなるパス
  * @return 読み込み結果
  */
-export function loadAllCanvasImage(basePath: string): Promise<CanvasImageManager[]> {
+export function loadAllCanvasImage(basePath: string): Promise<CanvasImageResource[]> {
   return Promise.all(CANVAS_IMAGE_CONFIGS.map(config => loadCanvasImage(basePath, config)));
 }

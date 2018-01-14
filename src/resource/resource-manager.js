@@ -1,13 +1,13 @@
 // @flow
 import type {CanvasPicture} from "./loader/depricated-canvas-image-loader";
 import {loadAllCanvasImage as depricated_loadAllCanvasImage} from './loader/depricated-canvas-image-loader';
-import type {TileMapManager} from "./tile-map";
+import type {TileMapResource} from "./tile-map";
 import {loadAllTileMap} from "./tile-map";
-import type {TextureManager} from "./texture";
+import type {TextureResource} from "./texture";
 import {loadAllTexture} from "./texture";
-import type {JsonModelManager} from "./json-model";
+import type {JsonModelResource} from "./json-model";
 import {loadAllJsonModel} from "./json-model";
-import type {CanvasImageManager} from "./canvas-image";
+import type {CanvasImageResource} from "./canvas-image";
 import {loadAllCanvasImage} from "./canvas-image";
 
 /**
@@ -15,13 +15,13 @@ import {loadAllCanvasImage} from "./canvas-image";
  */
 export type Resources = {
   /** モデル */
-  models: JsonModelManager[],
+  models: JsonModelResource[],
   /** テクスチャ */
-  textures: TextureManager[],
+  textures: TextureResource[],
   /** キャンバス用画像 */
-  canvasImages: CanvasImageManager[],
+  canvasImages: CanvasImageResource[],
   /** タイルマップ */
-  tileMap: TileMapManager[],
+  tileMap: TileMapResource[],
 
   // TODO 削除する
   /** キャンパス用画像 */

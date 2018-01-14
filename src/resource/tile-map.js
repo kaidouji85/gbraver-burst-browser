@@ -7,8 +7,8 @@ import SCHOOL_GROUND_TILE_SET from '../../resources/tile-map/school-ground/map.j
 /** タイルマップID */
 export type TileMapId = string;
 
-/** タイルマップデータ */
-export type TileMapManager = {
+/** タイルマップリソース */
+export type TileMapResource = {
   /** タイルマップID */
   id: TileMapId,
   /** マップ */
@@ -29,7 +29,7 @@ export const TILE_MAP_IDS: {[string]: TileMapId} = {
  *
  * @return 読み込み結果
  */
-export function loadAllTileMap(): TileMapManager[] {
+export function loadAllTileMap(): TileMapResource[] {
   return [{
     id: TILE_MAP_IDS.SCHOOL_GROUND,
     tileMap: SCHOOL_GROUND_TILE_MAP,

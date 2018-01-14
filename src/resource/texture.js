@@ -5,16 +5,16 @@ import * as R from "ramda";
 /** テクスチャID */
 export type TextureId = string;
 
-/** テクスチャ管理 */
-export type TextureManager = {
-  id: TextureId,
-  texture: THREE.Texture
-};
-
 /** テクスチャ設定 */
 export type TextureConfig = {
   id: TextureId,
   path: string
+};
+
+/** テクスチャリソース */
+export type TextureResource = {
+  id: TextureId,
+  texture: THREE.Texture
 };
 
 /** テクスチャIDをまとめたもの */
@@ -89,7 +89,7 @@ export const TEXTURE_CONFIGS: {[string]: TextureConfig} = {
  * @param config テクスチャ設定
  * @return 読み込み結果
  */
-export function loadTexture(basePath: string, config: TextureConfig): Promise<TextureManager> {
+export function loadTexture(basePath: string, config: TextureConfig): Promise<TextureResource> {
   let loader = new THREE.TextureLoader();
   return new Promise(resolve => loader.load(`${basePath}${config.path}`, texture => resolve({
     id: config.id,
@@ -103,7 +103,7 @@ export function loadTexture(basePath: string, config: TextureConfig): Promise<Te
  * @param basePath ベースとなるパス
  * @returns 読み込み結果
  */
-export async function loadAllTexture(basePath: string): Promise<TextureManager[]> {
+export async function loadAllTexture(basePath: string): Promise<TextureResource[]> {
   const configs: TextureConfig[] = R.values(TEXTURE_CONFIGS);
   return await Promise.all(configs.map(v => loadTexture(basePath, v)));
 }

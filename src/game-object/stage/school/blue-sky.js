@@ -2,7 +2,7 @@
 import type {Resources} from '../../../resource/resource-manager';
 import * as THREE from 'three';
 import {TEXTURE_IDS} from "../../../resource/texture";
-import type {TextureManager} from "../../../resource/texture";
+import type {TextureResource} from "../../../resource/texture";
 
 const WIDTH =  9000;
 const HEIGHT = 9000;
@@ -25,7 +25,7 @@ const SKY_BOX_TEXTURE_IDS = [
 export default function BlueSky(resources: Resources): THREE.Mesh {
   const materials = SKY_BOX_TEXTURE_IDS
     .map(id => resources.textures.find(v => v.id === id))
-    .map((textureManager: ?TextureManager) => textureManager ? textureManager.texture : new THREE.Texture())
+    .map((textureResource: ?TextureResource) => textureResource ? textureResource.texture : new THREE.Texture())
     .map(texture => new THREE.MeshBasicMaterial({map: texture, side: THREE.BackSide}));
   let geometry = new THREE.CubeGeometry(WIDTH, HEIGHT, DEPTH, 32, 32, 32);
   let material = new THREE.MultiMaterial(materials);

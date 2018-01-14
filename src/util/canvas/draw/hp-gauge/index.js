@@ -5,7 +5,7 @@ import {depuricated_drawImage, drawImage} from '../image-drawer';
 import {PlayerHpBar} from './bar';
 import {depuricated_drawNumberLeft, depuricated_drawNumberRight, drawNumberLeft, drawNumberRight} from '../number';
 import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
-import type {CanvasImageManager} from "../../../../resource/canvas-image";
+import type {CanvasImageResource} from "../../../../resource/canvas-image";
 
 /**
  * プレイヤーのHPゲージを描画する
@@ -20,10 +20,10 @@ import type {CanvasImageManager} from "../../../../resource/canvas-image";
  */
 export function drawPlayerHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
   const value = hp / maxHp;
-  const hpNumberManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
-  const hpNumber: Image = hpNumberManager ? hpNumberManager.image : new Image();
-  const gaugeBaseManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
-  const gaugeBase: Image = gaugeBaseManager ? gaugeBaseManager.image : new Image();
+  const hpNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
+  const hpNumber: Image = hpNumberResource ? hpNumberResource.image : new Image();
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
 
   drawImage(context, gaugeBase, dx, dy);
   PlayerHpBar(context, resources, dx-8, dy+8, value);
@@ -46,10 +46,10 @@ export function drawPlayerHpGauge(context: CanvasRenderingContext2D, resources: 
  */
 export function drawEnemyHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
   const value = hp / maxHp;
-  const hpNumberManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
-  const hpNumber: Image = hpNumberManager ? hpNumberManager.image : new Image();
-  const gaugeBaseManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
-  const gaugeBase: Image = gaugeBaseManager ? gaugeBaseManager.image : new Image();
+  const hpNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
+  const hpNumber: Image = hpNumberResource ? hpNumberResource.image : new Image();
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
 
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
