@@ -1,6 +1,6 @@
 // @flow
 
-import type {TileMapData, TileSet} from "../../flow-typed/tiled";
+import type {TileMapJson, TileSetJson} from "../../flow-typed/tiled";
 
 /**
  *  タイルチップIDからテクスチャオフセット座標を計算する
@@ -9,9 +9,7 @@ import type {TileMapData, TileSet} from "../../flow-typed/tiled";
  * @param tileSet タイルセットのデータ
  * @return テクスチャオフセット座標
  */
-export function getTextureOffsetPos(gid: number, tileSet: TileSet, tileMap: TileMapData): {x: number, y: number} {
-  // firstgidはtileSet、tileMapに存在するが、
-  // tiled 1.1.0ではtileMap.tilesetsにあるfirstgidが正しい値である
+export function getTextureOffsetPos(gid: number, tileSet: TileSetJson, tileMap: TileMapJson): {x: number, y: number} {
   const tileIndex = gid - tileMap.tilesets[0].firstgid;
   const horizonDividedNum = getHorizonDividedNum(tileSet);
   const verticalDividedNum = getVerticalDividedNum(tileSet);
@@ -22,11 +20,11 @@ export function getTextureOffsetPos(gid: number, tileSet: TileSet, tileMap: Tile
 }
 
 /** タイルセットの横分割数を計算する */
-export function getHorizonDividedNum(tileSet: TileSet): number {
+export function getHorizonDividedNum(tileSet: TileSetJson): number {
   return Math.floor(tileSet.imagewidth / tileSet.tilewidth);
 }
 
 /** タイルセットの縦分割数を計算する */
-export function getVerticalDividedNum(tileSet: TileSet): number {
+export function getVerticalDividedNum(tileSet: TileSetJson): number {
   return Math.floor(tileSet.imageheight / tileSet.tileheight);
 }

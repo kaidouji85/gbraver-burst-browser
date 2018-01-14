@@ -1,9 +1,10 @@
 // @flow
 import type {Resources} from '../../../../resource/resource-manager';
-import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/canvas-image-loader';
 import {drawImage} from '../image-drawer';
 import {drawNumberLeft, drawNumberRight} from '../number';
 import {BatteryBar} from './bar';
+import type {CanvasImageResource} from "../../../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
 
 /**
  * プレイヤーのバッテリーゲージを描画する
@@ -17,11 +18,18 @@ import {BatteryBar} from './bar';
  * @param maxValue バッテリー最大値
  */
 export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
-  drawImage(context, resources, CANVAS_PICTURE_PATH.GAUGE_BASE, dx, dy);
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
+  const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
+  const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
+  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL);
+  const batteryGaugeLabel: Image = batteryGaugeLabelResource ? batteryGaugeLabelResource.image : new Image();
+
+  drawImage(context, gaugeBase, dx, dy);
   BatteryBar(context, resources, dx - 8, dy + 8, Math.floor(value), Math.floor(maxValue));
 
-  drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_GAUGE_LABEL , dx + 72, dy - 6);
-  drawNumberLeft(context, resources, CANVAS_PICTURE_PATH.BATTERY_NUMBER, dx - 100, dy - 24 , Math.floor(value));
+  drawImage(context, batteryGaugeLabel , dx + 72, dy - 6);
+  drawNumberLeft(context, batteryNumber, dx - 100, dy - 24 , Math.floor(value))
 }
 
 /**
@@ -36,14 +44,21 @@ export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resour
  * @param maxValue バッテリー最大値
  */
 export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
+  const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
+  const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
+  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL);
+  const batteryGaugeLabel: Image = batteryGaugeLabelResource ? batteryGaugeLabelResource.image : new Image();
+
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
 
-  drawImage(context, resources, CANVAS_PICTURE_PATH.GAUGE_BASE, - dx, dy);
+  drawImage(context, gaugeBase, -dx, dy);
   BatteryBar(context, resources, - dx - 8, dy + 8, Math.floor(value), Math.floor(maxValue));
 
   context.restore();
 
-  drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_GAUGE_LABEL , dx - 64, dy - 6);
-  drawNumberRight(context, resources, CANVAS_PICTURE_PATH.BATTERY_NUMBER, dx + 100, dy - 24 , Math.floor(value));
+  drawImage(context, batteryGaugeLabel , dx - 64, dy - 6);
+  drawNumberRight(context, batteryNumber, dx + 100, dy - 24 , Math.floor(value));
 }

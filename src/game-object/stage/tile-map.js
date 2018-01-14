@@ -7,19 +7,19 @@ import {
   getVerticalDividedNum
 } from "../../util/tiled-map/texture-off-set-pos";
 import {EMPTY_TILE_SET} from "../../util/tiled-map/empty-tile-set";
-import type {TileMapData, TileSet} from "../../flow-typed/tiled";
+import type {TileMapJson, TileSetJson} from "../../flow-typed/tiled";
 import {getMapPosition} from "../../util/tiled-map/map-position";
 import {createAnimatedTexture} from "../../util/texture/texture-animation";
 import {EMPTY_TILE_MAP} from "../../util/tiled-map/empty-map-data";
-import type {TileMap, TileMapId} from "../../resource/loader/tile-map-loader";
-import type {Texture} from "../../resource/loader/texture-loader";
+import type {TileMapResource, TileMapId} from "../../resource/tile-map";
+import type {TextureId, TextureResource} from "../../resource/texture";
 
 /** タイルマップ生成のパラメータ */
 type Params = {
   /** リソース管理オブジェクト */
   resources: Resources,
-  /** タイルマップ画像のパス */
-  texturePath: string,
+  /** タイルマップテクスチャのID */
+  textureId: TextureId,
   /** タイルマップID */
   tileMapId: TileMapId,
   /** タイルマップ単位メッシュの幅 */
@@ -30,11 +30,11 @@ type Params = {
 
 /** タイルマップを生成する */
 export function createTileMap(params: Params): THREE.Group {
-  const originTexture: ?Texture = params.resources.textures.find(v => v.path === params.texturePath);
-  const originTileMap: ?TileMap = params.resources.tileMap.find(v => v.id === params.tileMapId);
-  const texture: THREE.Texture = originTexture ? originTexture.texture : new THREE.Texture();
-  const tileMapData: TileMapData = originTileMap ? originTileMap.tileMap : EMPTY_TILE_MAP;
-  const tileSet: TileSet = originTileMap ? originTileMap.tileSet : EMPTY_TILE_SET;
+  const textureResource: ?TextureResource = params.resources.textures.find(v => v.id === params.textureId);
+  const texture = textureResource ? textureResource.texture : new THREE.Texture();
+  const tileMapResource: ?TileMapResource = params.resources.tileMap.find(v => v.id === params.tileMapId);
+  const tileMapData: TileMapJson = tileMapResource ? tileMapResource.tileMap : EMPTY_TILE_MAP;
+  const tileSet: TileSetJson = tileMapResource ? tileMapResource.tileSet : EMPTY_TILE_SET;
   const horizonDividedNum = getHorizonDividedNum(tileSet);
   const verticalDividedNum = getVerticalDividedNum(tileSet);
   const basePosX = (-tileMapData.width + 1) * params.meshWith / 2;
