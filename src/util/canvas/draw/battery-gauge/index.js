@@ -2,10 +2,10 @@
 import type {Resources} from '../../../../resource/resource-manager';
 import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
 import {depuricated_drawImage, drawImage} from '../image-drawer';
-import {depuricated_drawNumberLeft, depuricated_drawNumberRight, drawNumberLeft, drawNumberRight} from '../number';
+import {drawNumberLeft, drawNumberRight} from '../number';
 import {BatteryBar} from './bar';
-import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
 import type {CanvasImageResource} from "../../../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
 
 /**
  * プレイヤーのバッテリーゲージを描画する
