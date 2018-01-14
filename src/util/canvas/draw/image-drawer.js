@@ -1,6 +1,5 @@
 // @flow
 import type {Resources} from '../../../resource/resource-manager';
-import type {CanvasImageId, CanvasImageManager} from "../../../resource/canvas-image";
 
 /**
  * 指定した画像をキャンバスに描画する
@@ -24,14 +23,11 @@ export function depuricated_drawImage(context: CanvasRenderingContext2D, resourc
  * 画像のローカル座標原点は画像中心
  *
  * @param context 描画対象のキャンバスコンテキスト
- * @param resources リソース管理オブジェクト
- * @param canvasImageId キャンバス用画像ID
+ * @param image canvas用画像
  * @param dx 描画X
  * @param dy 描画Y
  */
-export function drawImage(context: CanvasRenderingContext2D, resources: Resources, canvasImageId: CanvasImageId, dx: number, dy: number) {
-  const canvasImageManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === canvasImageId);
-  const image = canvasImageManager ? canvasImageManager.image : new Image();
+export function drawImage(context: CanvasRenderingContext2D, image: Image, dx: number, dy: number) {
   const x = dx - image.width / 2;
   const y = dy - image.height / 2;
   context.drawImage(image, x, y);

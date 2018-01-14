@@ -22,8 +22,10 @@ export function drawPlayerHpGauge(context: CanvasRenderingContext2D, resources: 
   const value = hp / maxHp;
   const hpNumberManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
   const hpNumber: Image = hpNumberManager ? hpNumberManager.image : new Image();
+  const gaugeBaseManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBase: Image = gaugeBaseManager ? gaugeBaseManager.image : new Image();
 
-  drawImage(context, resources, CANVAS_IMAGE_IDS.GAUGE_BASE, dx, dy);
+  drawImage(context, gaugeBase, dx, dy);
   PlayerHpBar(context, resources, dx-8, dy+8, value);
 
   depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.HP_GAUGE_LABEL, dx + 70, dy - 6);
@@ -46,11 +48,13 @@ export function drawEnemyHpGauge(context: CanvasRenderingContext2D, resources: R
   const value = hp / maxHp;
   const hpNumberManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
   const hpNumber: Image = hpNumberManager ? hpNumberManager.image : new Image();
+  const gaugeBaseManager: ?CanvasImageManager = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBase: Image = gaugeBaseManager ? gaugeBaseManager.image : new Image();
 
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
 
-  drawImage(context, resources, CANVAS_IMAGE_IDS.GAUGE_BASE, -dx, dy);
+  drawImage(context, gaugeBase, -dx, dy);
   PlayerHpBar(context, resources, -dx-8, dy+8, value);
 
   context.restore();

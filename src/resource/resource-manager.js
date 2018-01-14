@@ -11,7 +11,7 @@ import type {CanvasImageManager} from "./canvas-image";
 import {loadAllCanvasImage} from "./canvas-image";
 
 /**
- * リソース管理オブジェクト
+ * ゲームで使うリソースを集めたもの
  */
 export type Resources = {
   /** モデル */
@@ -26,7 +26,6 @@ export type Resources = {
   // TODO 削除する
   /** キャンパス用画像 */
   depuricated_canvasImages: CanvasPicture[],
-
 };
 
 /**
