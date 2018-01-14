@@ -2,7 +2,7 @@
 import type {Resources} from '../../../../resource/resource-manager';
 import {CANVAS_PICTURE_PATH} from '../../../../resource/loader/depricated-canvas-image-loader';
 import {depuricated_drawImage, drawImage} from '../image-drawer';
-import {depuricated_drawNumberLeft, depuricated_drawNumberRight} from '../number';
+import {depuricated_drawNumberLeft, depuricated_drawNumberRight, drawNumberLeft, drawNumberRight} from '../number';
 import {BatteryBar} from './bar';
 import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
 import type {CanvasImageResource} from "../../../../resource/canvas-image";
@@ -21,12 +21,14 @@ import type {CanvasImageResource} from "../../../../resource/canvas-image";
 export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
   const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
   const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
+  const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
+  const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
 
   drawImage(context, gaugeBase, dx, dy);
   BatteryBar(context, resources, dx - 8, dy + 8, Math.floor(value), Math.floor(maxValue));
 
   depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_GAUGE_LABEL , dx + 72, dy - 6);
-  depuricated_drawNumberLeft(context, resources, CANVAS_PICTURE_PATH.BATTERY_NUMBER, dx - 100, dy - 24 , Math.floor(value));
+  drawNumberLeft(context, batteryNumber, dx - 100, dy - 24 , Math.floor(value))
 }
 
 /**
@@ -43,6 +45,8 @@ export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resour
 export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
   const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
   const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
+  const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
+  const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
 
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
@@ -53,5 +57,5 @@ export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resourc
   context.restore();
 
   depuricated_drawImage(context, resources, CANVAS_PICTURE_PATH.BATTERY_GAUGE_LABEL , dx - 64, dy - 6);
-  depuricated_drawNumberRight(context, resources, CANVAS_PICTURE_PATH.BATTERY_NUMBER, dx + 100, dy - 24 , Math.floor(value));
+  drawNumberRight(context, batteryNumber, dx + 100, dy - 24 , Math.floor(value));
 }

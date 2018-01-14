@@ -19,6 +19,7 @@ export type CanvasImageResource = {
 export const CANVAS_IMAGE_IDS = {
   GAUGE_BASE: 'GAUGE_BASE',
   HP_NUMBER: 'HP_NUMBER',
+  BATTERY_NUMBER: 'BATTERY_NUMBER',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -30,6 +31,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.HP_NUMBER,
     path: 'gauge/number/hp-number.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_NUMBER,
+    path: 'gauge/number/battery-number.png',
   }
 ];
 

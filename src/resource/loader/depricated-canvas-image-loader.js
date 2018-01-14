@@ -7,9 +7,6 @@ import * as R from 'ramda';
  * パスの先頭に/(スラッシュ)をつける必要はない
  */
 export const CANVAS_PICTURE_PATH = {
-  // 数字系画像
-  BATTERY_NUMBER: 'gauge/number/battery-number.png',
-
   // HPゲージ系
   HP_BAR_DOWN: 'gauge/hp-gauge/hp-bar-down.png',
   HP_BAR_UP: 'gauge/hp-gauge/hp-bar-up.png',
