@@ -8,7 +8,6 @@ import * as R from 'ramda';
  */
 export const CANVAS_PICTURE_PATH = {
   // HPゲージ系
-  HP_BAR_DOWN: 'gauge/hp-gauge/hp-bar-down.png',
   HP_BAR_UP: 'gauge/hp-gauge/hp-bar-up.png',
   HP_GAUGE_LABEL: 'gauge/hp-gauge/hp-gauge-label.png',
 
