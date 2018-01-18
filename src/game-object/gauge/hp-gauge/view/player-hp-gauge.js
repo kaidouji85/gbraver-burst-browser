@@ -3,15 +3,13 @@
 import * as THREE from 'three';
 import {CanvasMesh} from "../../../../util/mesh/canvas-mesh";
 import type {Resources} from "../../../../resource/resource-manager";
-import {HpGaugeView} from '../base';
-import type {HpGaugeModel} from "../base";
+import {HpGaugeView} from './hp-gauge-view';
+import type {HpGaugeModel} from "../model/hp-gauge-model";
 import {drawPlayerHpGauge} from "../../../../util/canvas/draw/hp-gauge";
 import {rectangle} from "../../../../util/uv-mapping/rectangle";
 
 /** プレイヤーHPゲージ */
 export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
-  _modelCache: HpGaugeModel;
-
   constructor(resources: Resources) {
     const meshWidth = 300;
     const meshHeight = 80;
@@ -23,10 +21,6 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
       canvasWidth: 256,
       canvasHeight: 256,
     });
-    this._modelCache = {
-      hp: 0,
-      maxHp: 0
-    };
 
     // HPゲージに必要な大きさだけテクスチャから抜き取る
     rectangle({
@@ -39,16 +33,8 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
 
   /** ビューにモデルを反映させる */
   gameLoop(model: HpGaugeModel): void {
-    if(this._isChanged(this._modelCache, model)) {
-      this._refreshGauge(model);
-    }
-    this._modelCache = model;
+    this._refreshGauge(model);
     this._refreshPos();
-  }
-
-  /** モデルが変更されたか否かを判定する、trueで変更された */
-  _isChanged(model: HpGaugeModel, newModel: HpGaugeModel): boolean {
-    return model.hp !== newModel.hp || model.maxHp !== newModel.maxHp;
   }
 
   /** ゲージを更新する */

@@ -2,8 +2,8 @@
 
 import {CanvasMesh} from "../../../../util/mesh/canvas-mesh";
 import type {Resources} from "../../../../resource/resource-manager";
-import {HpGaugeView} from '../base';
-import type {HpGaugeModel} from "../base";
+import {HpGaugeView} from './hp-gauge-view';
+import type {HpGaugeModel} from "../model/hp-gauge-model";
 import {drawEnemyHpGauge} from "../../../../util/canvas/draw/hp-gauge";
 import {rectangle} from "../../../../util/uv-mapping/rectangle";
 import * as THREE from "three";

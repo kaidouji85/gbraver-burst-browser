@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import type {Resources} from '../../../../resource/resource-manager';
 import type {BattleSceneState} from "../../index";
 import {createPlayerHpGauge} from './player-hp-gauge';
-import {HpGauge} from "../../../../game-object/gauge/hp-gauge/base";
+import {HpGauge} from "../../../../game-object/gauge/hp-gauge/hp-gauge";
 import {createEnemyHpGauge} from "./enemy-hp-gauge";
 import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/base";
 import {createPlayerBatteryGauge} from "./player-battery-gauge";

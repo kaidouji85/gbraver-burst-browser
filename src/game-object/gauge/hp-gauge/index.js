@@ -1,7 +1,7 @@
 // @flow
 
 import type {Resources} from "../../../resource/resource-manager";
-import {HpGauge} from "./base";
+import {HpGauge} from "./hp-gauge";
 import {PlayerHpGaugeView} from "./view/player-hp-gauge";
 import {EnemyHpGaugeView} from "./view/enemy-hp-gauge";
 
