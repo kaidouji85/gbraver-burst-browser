@@ -5,24 +5,34 @@ import TWEEN from '@tweenjs/tween.js';
 import type {Resources} from "../../src/resource/resource-manager";
 import {ResourceManager} from "../../src/resource/resource-manager";
 
-export interface HudGameObject  {
-  gameLoop(): void;
-  getThreeJsObjectList(): THREE.Object[]
-};
-
-export type Params = {
+/**
+ * HudLayerStubBaseコンストラクタのパラメータ
+ *
+ * @param T 生成するゲームオブジェクトの型
+ */
+export type Params<T> = {
+  /** リソースパスのベース */
   resourceBashPath: string,
-  init: (resources: Resources) => HudGameObject,
+  /** ゲームオブジェクトを生成する */
+  init: (resources: Resources) => T,
+  /** 生成したゲームオブジェクトをシーンに追加する */
+  addScene: (scene: THREE.Scene, gameObject: T) => void,
+  /** ゲームオブジェクトのゲームループごとの処理を行う */
+  gameLoop: (gameObject: T) => void,
 };
 
-/** HUDレイヤーゲームオブジェクトのスタブ */
-export class HudLayerSutb {
+/**
+ * HUDレイヤーゲームオブジェクトの基本スタブ
+ *
+ * @param T 生成するゲームオブジェクトの型
+ */
+export class HudLayerStubBase<T> {
 
-  constructor(params: Params) {
+  constructor(params: Params<T>) {
     this.main(params);
   }
 
-  async main(params: Params) {
+  async main(params: Params<T>) {
     const resourceManager = new ResourceManager(params.resourceBashPath);
     await resourceManager.load();
 
@@ -39,13 +49,14 @@ export class HudLayerSutb {
     rendered.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(rendered.domElement);
 
-    const gameObject = params.init(resourceManager.resources);
-    gameObject.getThreeJsObjectList().forEach(v => scene.add(v));
+    const gameObject: T = params.init(resourceManager.resources);
+    params.addScene(scene, gameObject);
 
     function gameLoop(time) {
       requestAnimationFrame(gameLoop);
       TWEEN.update(time);
-      gameObject.gameLoop();
+      //gameObject.gameLoop();
+      params.gameLoop(gameObject);
       rendered.render(scene, camera);
     }
     requestAnimationFrame(gameLoop);
