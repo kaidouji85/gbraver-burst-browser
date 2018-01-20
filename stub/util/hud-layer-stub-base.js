@@ -55,7 +55,6 @@ export class HudLayerStubBase<T> {
     function gameLoop(time) {
       requestAnimationFrame(gameLoop);
       TWEEN.update(time);
-      //gameObject.gameLoop();
       params.gameLoop(gameObject);
       rendered.render(scene, camera);
     }

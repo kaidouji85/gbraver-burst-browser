@@ -39,16 +39,8 @@ export class EnemyHpGaugeView extends CanvasMesh implements HpGaugeView {
 
   /** ビューにモデルを反映させる */
   gameLoop(model: HpGaugeModel): void {
-    if(this._isChanged(this._modelCache, model)) {
-      this._refreshGauge(model);
-    }
-    this._modelCache = model;
+    this._refreshGauge(model);
     this._refreshPos();
-  }
-
-  /** モデルが変更されたか否かを判定する、trueで変更された */
-  _isChanged(model: HpGaugeModel, newModel: HpGaugeModel): boolean {
-    return model.hp !== newModel.hp || model.maxHp !== newModel.maxHp;
   }
 
   /** ゲージを更新する */
