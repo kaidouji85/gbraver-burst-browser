@@ -36,4 +36,9 @@ export class HpGauge {
   change(toHp: number): Tween {
     return change(this._model, this._tweenGroup, toHp);
   }
+
+  /** 本オブジェクトに関連するTweenを全削除する */
+  removeTween() {
+    this._tweenGroup.removeAll();
+  }
 }
