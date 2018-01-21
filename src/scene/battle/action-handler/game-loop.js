@@ -8,23 +8,23 @@ import type {GameLoopAction} from "../../action";
 
 /** ゲームループ時の処理 */
 export function gameLoop(view: BattleSceneView, state: BattleSceneState, action: GameLoopAction): void {
-  threeDimension(view.threeDimensionLayer);
-  hud(view.hudLayer);
+  threeDimension(view.threeDimensionLayer, action.time);
+  hud(view.hudLayer, action.time);
 
   view.render();
 }
 
 /** 3Dレイヤーのゲームループ時の処理 */
-function threeDimension(view: ThreeDimensionLayer) {
+function threeDimension(view: ThreeDimensionLayer, time: DOMHighResTimeStamp) {
   view.playerSprite.gameLoop(view.camera);
   view.enemySprite.gameLoop(view.camera);
   view.stage.gameLoop(view.camera);
 }
 
 /** hudレイヤーのゲームループ時の処理 */
-function hud(view: HudLayer) {
-  view.playerHpGauge.gameLoop();
+function hud(view: HudLayer, time: DOMHighResTimeStamp) {
+  view.playerHpGauge.gameLoop(time);
   view.playerBatteryGauge.gameLoop();
-  view.enemyHpGauge.gameLoop();
+  view.enemyHpGauge.gameLoop(time);
   view.enemyBatteryGauge.gameLoop();
 }
