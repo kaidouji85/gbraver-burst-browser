@@ -18,7 +18,7 @@ export type Params<T> = {
   /** 生成したゲームオブジェクトをシーンに追加する */
   addScene: (scene: THREE.Scene, gameObject: T) => void,
   /** ゲームオブジェクトのゲームループごとの処理を行う */
-  gameLoop: (gameObject: T) => void,
+  gameLoop: (time: DOMHighResTimeStamp, gameObject: T) => void,
 };
 
 /**
@@ -52,10 +52,9 @@ export class HudLayerStubBase<T> {
     const gameObject: T = params.init(resourceManager.resources);
     params.addScene(scene, gameObject);
 
-    function gameLoop(time) {
+    function gameLoop(time: DOMHighResTimeStamp) {
       requestAnimationFrame(gameLoop);
-      TWEEN.update(time);
-      params.gameLoop(gameObject);
+      params.gameLoop(time, gameObject);
       rendered.render(scene, camera);
     }
     requestAnimationFrame(gameLoop);

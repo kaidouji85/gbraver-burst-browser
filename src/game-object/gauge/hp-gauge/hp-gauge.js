@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import {Tween} from '@tweenjs/tween.js'
+import {Tween, Group} from '@tweenjs/tween.js'
 import type {HpGaugeView} from "./view/hp-gauge-view";
 import type {HpGaugeModel} from "./model/hp-gauge-model";
 import {change} from "./model/change";
@@ -10,6 +10,7 @@ import {change} from "./model/change";
 export class HpGauge {
   _model: HpGaugeModel;
   _view: HpGaugeView;
+  _tweenGroup: Group;
 
   constructor(params: {view: HpGaugeView, hp: number, maxHp: number}) {
     this._model = {
@@ -17,10 +18,12 @@ export class HpGauge {
       maxHp: params.maxHp
     };
     this._view = params.view;
+    this._tweenGroup = new Group();
   };
 
   /** ゲームループ毎の処理 */
-  gameLoop() {
+  gameLoop(time: DOMHighResTimeStamp) {
+    this._tweenGroup.update(time);
     this._view.gameLoop(this._model);
   }
 
@@ -31,6 +34,6 @@ export class HpGauge {
 
   /** 指定したHPに徐々に近づいていく */
   change(toHp: number): Tween {
-    return change(this._model, toHp);
+    return change(this._model, this._tweenGroup, toHp);
   }
 }

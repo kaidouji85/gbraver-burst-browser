@@ -27,7 +27,7 @@ new HudLayerStubBase({
   addScene(scene: THREE.Scene, gameObject: HpGauge): void {
     gameObject.getThreeJsObjectList().forEach(v => scene.add(v));
   },
-  gameLoop(gameObject: HpGauge): void {
-    gameObject.gameLoop();
+  gameLoop(time: DOMHighResTimeStamp, gameObject: HpGauge): void {
+    gameObject.gameLoop(time);
   }
 });
