@@ -1,9 +1,9 @@
 // @flow
 
 import type {Resources} from "../../../resource/resource-manager";
-import {PlayerBatteryGaugeView} from "./view/player-battery-gauge";
-import {BatteryGauge} from "./base";
-import {EnemyBatteryGaugeView} from "./view/enemy-battery-gauge";
+import {PlayerBatteryGaugeView} from "./view/player-battery-gauge-view";
+import {BatteryGauge} from "./battery-gauge";
+import {EnemyBatteryGaugeView} from "./view/enemy-battery-gauge-view";
 
 /** プレイヤーバッテリーゲージを生成する */
 export function PlayerBatteryGauge(resources: Resources, battery: number, maxBattery: number): BatteryGauge {

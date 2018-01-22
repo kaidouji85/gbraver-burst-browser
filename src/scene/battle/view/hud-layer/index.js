@@ -5,7 +5,7 @@ import type {BattleSceneState} from "../../index";
 import {createPlayerHpGauge} from './player-hp-gauge';
 import {HpGauge} from "../../../../game-object/gauge/hp-gauge/hp-gauge";
 import {createEnemyHpGauge} from "./enemy-hp-gauge";
-import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/base";
+import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-gauge";
 import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 
