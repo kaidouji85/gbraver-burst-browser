@@ -1,9 +1,9 @@
 // @flow
 
 import type {Resources} from "../../../resource/resource-manager";
-import {HpGauge} from "./base";
-import {PlayerHpGaugeView} from "./view/player-hp-gauge";
-import {EnemyHpGaugeView} from "./view/enemy-hp-gauge";
+import {HpGauge} from "./hp-gauge";
+import {PlayerHpGaugeView} from "./view/player-hp-gauge-view";
+import {EnemyHpGaugeView} from "./view/enemy-hp-gauge-view";
 
 /** プレイヤーHPゲージを生成する */
 export function PlayerHpGauge(resources: Resources, hp: number, maxHp: number): HpGauge {

@@ -25,10 +25,10 @@ import type {Observer} from "./scene/observer";
   });
   scene.notify({type: 'debugMode'});
 
-  const gameLoop = (time: ?number) => {
+  const gameLoop = (time: DOMHighResTimeStamp) => {
     requestAnimationFrame(gameLoop);
     Tween.update(time);
-    scene.notify({type: 'gameLoop'});
+    scene.notify({type: 'gameLoop', time});
   };
   gameLoop();
 })();

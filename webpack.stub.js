@@ -20,6 +20,13 @@ const STUB_ENTRY_FILES = {
   'canvas/enemy-hp-gauge': `${STUB_PATH}/canvas/enemy-hp-gauge`,
   'canvas/player-battery-gauge': `${STUB_PATH}/canvas/player-battery-gauge`,
   'canvas/enemy-battery-gauge': `${STUB_PATH}/canvas/enemy-battery-gauge`,
+  'game-object/gauge/player-hp-gauge': `${STUB_PATH}/game-object/gauge/player-hp-gauge`,
+  'game-object/gauge/enemy-hp-gauge': `${STUB_PATH}/game-object/gauge/enemy-hp-gauge`,
+  'game-object/gauge/tween-group': `${STUB_PATH}/game-object/gauge/tween-group`,
+  'game-object/gauge/player-battery-gauge': `${STUB_PATH}/game-object/gauge/player-battery-gauge`,
+  'game-object/gauge/enemy-battery-gauge': `${STUB_PATH}/game-object/gauge/enemy-battery-gauge`,
+  'game-object/armdozer/player-shin-braver': `${STUB_PATH}/game-object/armdozer/player-shin-braver`,
+  'game-object/armdozer/enemy-shin-braver': `${STUB_PATH}/game-object/armdozer/enemy-shin-braver`,
 };
 
 /**
