@@ -4,8 +4,6 @@ export const ANIMATION_STAND = 'STAND';
 /** アニメーションタイプ */
 export type AnimationType = ANIMATION_STAND;
 
-
-
 /** シンブレイバーのモデル */
 export interface ShinBraverModel {
   position: {
