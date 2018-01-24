@@ -20,12 +20,12 @@ const STUB_ENTRY_FILES = {
   'canvas/enemy-hp-gauge': `${STUB_PATH}/canvas/enemy-hp-gauge`,
   'canvas/player-battery-gauge': `${STUB_PATH}/canvas/player-battery-gauge`,
   'canvas/enemy-battery-gauge': `${STUB_PATH}/canvas/enemy-battery-gauge`,
-  'game-object/player-hp-gauge': `${STUB_PATH}/game-object/player-hp-gauge`,
-  'game-object/enemy-hp-gauge': `${STUB_PATH}/game-object/enemy-hp-gauge`,
-  'game-object/tween-group': `${STUB_PATH}/game-object/tween-group`,
-  'game-object/player-battery-gauge': `${STUB_PATH}/game-object/player-battery-gauge`,
-  'game-object/enemy-battery-gauge': `${STUB_PATH}/game-object/enemy-battery-gauge`,
-  'game-object/shin-braver': `${STUB_PATH}/game-object/shin-braver`,
+  'game-object/gauge/player-hp-gauge': `${STUB_PATH}/game-object/gauge/player-hp-gauge`,
+  'game-object/gauge/enemy-hp-gauge': `${STUB_PATH}/game-object/gauge/enemy-hp-gauge`,
+  'game-object/gauge/tween-group': `${STUB_PATH}/game-object/gauge/tween-group`,
+  'game-object/gauge/player-battery-gauge': `${STUB_PATH}/game-object/gauge/player-battery-gauge`,
+  'game-object/gauge/enemy-battery-gauge': `${STUB_PATH}/game-object/gauge/enemy-battery-gauge`,
+  'game-object/armdozer/player-shin-braver': `${STUB_PATH}/game-object/armdozer/player-shin-braver`,
 };
 
 /**

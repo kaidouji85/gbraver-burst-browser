@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from 'three';
-import {HudLayerStubBase} from "../util/hud-layer-stub-base";
-import type {Resources} from "../../src/resource/resource-manager";
-import {BatteryGauge} from "../../src/game-object/gauge/battery-gauge/battery-gauge";
-import {PlayerBatteryGauge} from "../../src/game-object/gauge/battery-gauge";
+import {HudLayerStubBase} from "../../util/hud-layer-stub-base";
+import type {Resources} from "../../../src/resource/resource-manager";
+import {BatteryGauge} from "../../../src/game-object/gauge/battery-gauge/battery-gauge";
+import {PlayerBatteryGauge} from "../../../src/game-object/gauge/battery-gauge/index";
 
 new HudLayerStubBase({
-  resourceBashPath: '../resources/',
+  resourceBashPath: '../../resources/',
   init: function (resources: Resources): BatteryGauge {
     const playerBatteryGauge = createPlayerBatteryGauge(resources);
     document.body.onclick = () => {

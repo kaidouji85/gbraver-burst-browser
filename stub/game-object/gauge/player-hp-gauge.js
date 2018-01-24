@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from 'three';
-import {HudLayerStubBase} from "../util/hud-layer-stub-base";
-import type {Resources} from "../../src/resource/resource-manager";
-import {PlayerHpGauge} from "../../src/game-object/gauge/hp-gauge";
-import {HpGauge} from "../../src/game-object/gauge/hp-gauge/hp-gauge";
+import {HudLayerStubBase} from "../../util/hud-layer-stub-base";
+import type {Resources} from "../../../src/resource/resource-manager";
+import {PlayerHpGauge} from "../../../src/game-object/gauge/hp-gauge/index";
+import {HpGauge} from "../../../src/game-object/gauge/hp-gauge/hp-gauge";
 
 new HudLayerStubBase({
-  resourceBashPath: '../resources/',
+  resourceBashPath: '../../resources/',
   init: function (resources: Resources): HpGauge {
     const playerHpGauge = PlayerHpGauge(resources, 3000, 3000);
 
