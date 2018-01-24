@@ -3,7 +3,7 @@ import type {Resources} from "../../../../resource/resource-manager";
 import {ArmDozerIdList} from 'gbraver-burst-core';
 import type {BattleSceneState} from "../../index";
 import type {ArmDozerId, PlayerBattleState} from "gbraver-burst-core/lib/flow-type";
-import type {ArmDozerSprite} from "../../../../game-object/armdozer/base";
+import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import {PlayerShinBraver} from "../../../../game-object/armdozer/shin-breaver";
 
 /** 与えられたパラメータからプレイヤースプライを生成する */

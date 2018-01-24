@@ -3,7 +3,8 @@
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/resource-manager";
 import {createAnimatedTexture} from "../../../../util/texture/texture-animation";
-import type {AnimationType} from "../base";
+import type {AnimationType} from "../model/shin-braver-model";
+import {ANIMATION_STAND} from "../model/shin-braver-model";
 import type {TextureResource} from "../../../../resource/texture";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 
@@ -20,7 +21,7 @@ export class ShinBraverTextureContainer {
   /** アニメ種別に対応するテクスチャを返す */
   _getTexture(type: AnimationType): THREE.Texture {
     switch (type) {
-      case 'STAND':
+      case ANIMATION_STAND:
       default:
         return this._stand;
     }
