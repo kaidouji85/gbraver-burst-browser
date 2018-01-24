@@ -45,6 +45,11 @@ export class ShinBraver implements ArmDozerSprite {
   stand(): Tween {
     return stand(this._model, this._tweenGroup);
   }
+
+  /** 本オブジェクトに関連するTweenを全削除する */
+  removeTween() {
+    this._tweenGroup.removeAll();
+  }
 }
 
 
