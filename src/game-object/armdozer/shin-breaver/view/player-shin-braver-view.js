@@ -1,9 +1,9 @@
 // @flow
 
-import {ShinBraverView} from '../base';
+import {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/resource-manager";
-import type {ShinBraverModel} from "../base";
+import type {ShinBraverModel} from "../model/shin-braver-model";
 import {ShinBraverTextureContainer} from "./texture";
 import {SPRITE_RENDER_ORDER} from "../../../../util/mesh/render-order";
 

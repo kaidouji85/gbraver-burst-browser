@@ -2,7 +2,7 @@
 
 import type {Resources} from "../../../../resource/resource-manager";
 import type {BattleSceneState} from "../../index";
-import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/base";
+import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-gauge";
 import {EnemyBatteryGauge} from "../../../../game-object/gauge/battery-gauge";
 
 /**

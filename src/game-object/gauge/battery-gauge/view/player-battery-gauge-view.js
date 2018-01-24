@@ -1,8 +1,8 @@
 // @flow
 
 import {CanvasMesh} from "../../../../util/mesh/canvas-mesh";
-import {BatteryGaugeView} from '../base';
-import type {BatteryGaugeModel} from "../base";
+import {BatteryGaugeView} from './battery-gauge-view';
+import type {BatteryGaugeModel} from "../model/battery-gauge-model";
 import type {Resources} from "../../../../resource/resource-manager";
 import * as THREE from "three";
 import {rectangle} from "../../../../util/uv-mapping/rectangle";
@@ -10,7 +10,6 @@ import {drawPlayerBatteryGauge} from "../../../../util/canvas/draw/battery-gauge
 
 /** プレイヤーバッテリーゲージ */
 export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeView {
-  _modelCache: BatteryGaugeModel;
 
   constructor(resources: Resources) {
     const meshWidth = 300;
@@ -23,10 +22,6 @@ export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeVi
       canvasWidth: 256,
       canvasHeight: 256,
     });
-    this._modelCache = {
-      battery: 0,
-      maxBattery: 0
-    };
 
     // バッテリーゲージに必要な大きさだけテクスチャから抜き取る
     rectangle({
@@ -39,16 +34,8 @@ export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeVi
 
   /** ビューにモデルを反映させる */
   gameLoop(model: BatteryGaugeModel): void {
-    if(this._isChanged(this._modelCache, model)) {
-      this._refreshGauge(model);
-    }
-    this._modelCache = model;
+    this._refreshGauge(model);
     this._refreshPos();
-  }
-
-  /** モデルが変更されたか否かを判定する、trueで変更された */
-  _isChanged(model: BatteryGaugeModel, newModel: BatteryGaugeModel): boolean {
-    return model.battery !== newModel.battery || model.maxBattery !== newModel.maxBattery;
   }
 
   /** ゲージを更新する */

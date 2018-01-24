@@ -13,7 +13,8 @@ export type ResizeAction = {
 
 /** ゲームループ */
 export type GameLoopAction = {
-  type: 'gameLoop'
+  type: 'gameLoop',
+  time: DOMHighResTimeStamp,
 };
 
 /** デバッグモード */

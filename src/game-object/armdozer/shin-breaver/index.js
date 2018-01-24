@@ -1,9 +1,9 @@
 // @flow
 
 import type {Resources} from "../../../resource/resource-manager";
-import {ShinBraver} from './base';
-import {PlayerShinBraverView} from "./view/player-shin-braver";
-import {EnemyShinBraverView} from "./view/enemy-shin-braver";
+import {ShinBraver} from './shin-breaver';
+import {PlayerShinBraverView} from "./view/player-shin-braver-view";
+import {EnemyShinBraverView} from "./view/enemy-shin-braver-view";
 
 /** プレイヤー側シンブレイバー */
 export function PlayerShinBraver(resources: Resources): ShinBraver {
