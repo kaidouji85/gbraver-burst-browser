@@ -17,6 +17,6 @@ new ThreeDimensionLayerStubBase({
     gameObject.getThreeJsObjects().forEach(v => scene.add(v));
   },
   gameLoop(time: DOMHighResTimeStamp, camera: THREE.Camera, gameObject: ShinBraver): void {
-    gameObject.gameLoop(camera, time);
+    gameObject.gameLoop(time, camera);
   }
 });

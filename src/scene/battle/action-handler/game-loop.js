@@ -16,8 +16,8 @@ export function gameLoop(view: BattleSceneView, state: BattleSceneState, action:
 
 /** 3Dレイヤーのゲームループ時の処理 */
 function threeDimension(view: ThreeDimensionLayer, time: DOMHighResTimeStamp) {
-  view.playerSprite.gameLoop(view.camera, time);
-  view.enemySprite.gameLoop(view.camera, time);
+  view.playerSprite.gameLoop(time, view.camera);
+  view.enemySprite.gameLoop(time, view.camera);
   view.stage.gameLoop(view.camera);
 }
 

@@ -31,7 +31,7 @@ export class ShinBraver implements ArmDozerSprite {
   }
 
   /** ゲームループ毎の処理*/
-  gameLoop(camera: THREE.Camera, time: DOMHighResTimeStamp): void {
+  gameLoop(time: DOMHighResTimeStamp, camera: THREE.Camera): void {
     this._tweenGroup.update(time);
     this._view.gameLoop(this._model, camera);
   }
