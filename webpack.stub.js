@@ -25,6 +25,7 @@ const STUB_ENTRY_FILES = {
   'game-object/tween-group': `${STUB_PATH}/game-object/tween-group`,
   'game-object/player-battery-gauge': `${STUB_PATH}/game-object/player-battery-gauge`,
   'game-object/enemy-battery-gauge': `${STUB_PATH}/game-object/enemy-battery-gauge`,
+  'game-object/shin-braver': `${STUB_PATH}/game-object/shin-braver`,
 };
 
 /**
