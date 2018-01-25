@@ -1,6 +1,6 @@
 // @flow
 
-import type {Resources} from '../../resource/resource-manager'
+import type {Resources} from '../../resource/index'
 
 /**
  * キャンバスに画像数字を描画する

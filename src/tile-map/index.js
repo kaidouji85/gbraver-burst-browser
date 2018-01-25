@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
-import type {Resources} from "../resource/resource-manager";
+import type {Resources} from "../resource/index";
 import {
   getHorizonDividedNum, getTextureOffsetPos,
   getVerticalDividedNum

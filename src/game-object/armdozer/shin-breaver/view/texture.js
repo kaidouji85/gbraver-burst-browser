@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import type {Resources} from "../../../../resource/resource-manager";
+import type {Resources} from "../../../../resource/index";
 import {createAnimatedTexture} from "../../../../texture/texture-animation";
 import type {AnimationType} from "../model/shin-braver-model";
 import {ANIMATION_STAND} from "../model/shin-braver-model";

@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../../../resource/resource-manager';
+import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';

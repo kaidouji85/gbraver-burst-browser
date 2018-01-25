@@ -1,6 +1,6 @@
 // @flow
 
-import type {Resources} from '../../../resource/resource-manager';
+import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import SkyBox from './blue-sky';
 import {createSchoolBuild} from './school-build';

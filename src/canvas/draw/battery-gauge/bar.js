@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../../../resource/resource-manager';
+import type {Resources} from '../../../resource/index';
 import * as R from 'ramda';
 import {drawImage} from '../image-drawer';
 import {trapezoid} from '../../clip/trapezoid';

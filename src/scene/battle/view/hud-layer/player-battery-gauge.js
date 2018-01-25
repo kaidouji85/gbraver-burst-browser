@@ -1,6 +1,6 @@
 // @flow
 
-import type {Resources} from "../../../../resource/resource-manager";
+import type {Resources} from "../../../../resource/index";
 import type {BattleSceneState} from "../../index";
 import {PlayerBatteryGauge} from "../../../../game-object/gauge/battery-gauge";
 import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-gauge";

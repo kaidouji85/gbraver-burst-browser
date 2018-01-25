@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../../../../resource/resource-manager';
+import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
 import type {BattleSceneState} from "../../index";
 import {createPlayerSprite} from "./player-sprite";

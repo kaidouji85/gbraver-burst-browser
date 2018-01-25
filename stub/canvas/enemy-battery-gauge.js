@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../../src/resource/resource-manager';
+import type {Resources} from '../../src/resource/index';
 import {CanvasStubBase} from '../util/canvas-stub-base';
 import {drawEnemyBatteryGauge} from '../../src/canvas/draw/battery-gauge';
 

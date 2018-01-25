@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../../../resource/resource-manager';
+import type {Resources} from '../../../resource/index';
 import {drawImage} from '../image-drawer';
 import {PlayerHpBar} from './bar';
 import {drawNumberRight} from '../number';

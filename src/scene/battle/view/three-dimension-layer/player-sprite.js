@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from "../../../../resource/resource-manager";
+import type {Resources} from "../../../../resource/index";
 import {ArmDozerIdList} from 'gbraver-burst-core';
 import type {BattleSceneState} from "../../index";
 import type {ArmDozerId, PlayerBattleState} from "gbraver-burst-core/lib/flow-type";
