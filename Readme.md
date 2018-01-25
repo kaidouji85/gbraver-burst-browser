@@ -20,6 +20,7 @@ npm start
 | npm run build-stub | スタブのビルド                  |
 | npm run upload-s3  | ビルド結果をs3にアップロードする  |
 | npm run clean      | ビルド結果を削除する             |
+| npm run flow       | flowによる静的型チェックをする    |
 | npm run deploy     | 現在の状態でS3にデプロイする      |
 
 

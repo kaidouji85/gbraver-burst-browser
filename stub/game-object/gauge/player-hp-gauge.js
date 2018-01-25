@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import {HudLayerStubBase} from "../../util/hud-layer-stub-base";
-import type {Resources} from "../../../src/resource/resource-manager";
+import type {Resources} from "../../../src/resource/index";
 import {PlayerHpGauge} from "../../../src/game-object/gauge/hp-gauge/index";
 import {HpGauge} from "../../../src/game-object/gauge/hp-gauge/hp-gauge";
 

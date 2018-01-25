@@ -2,10 +2,10 @@
 
 import {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
-import type {Resources} from "../../../../resource/resource-manager";
+import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import {ShinBraverTextureContainer} from "./texture";
-import {SPRITE_RENDER_ORDER} from "../../../../util/mesh/render-order";
+import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
 
 export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;

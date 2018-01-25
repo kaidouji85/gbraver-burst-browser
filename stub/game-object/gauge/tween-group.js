@@ -11,7 +11,7 @@
 import * as R from 'ramda';
 import * as THREE from 'three';
 import {HudLayerStubBase} from "../../util/hud-layer-stub-base";
-import type {Resources} from "../../../src/resource/resource-manager";
+import type {Resources} from "../../../src/resource/index";
 import {EnemyHpGauge, PlayerHpGauge} from "../../../src/game-object/gauge/hp-gauge/index";
 import {HpGauge} from "../../../src/game-object/gauge/hp-gauge/hp-gauge";
 
@@ -21,7 +21,8 @@ new HudLayerStubBase({
     const playerGauge = createPlayerHpGauge(resources);
     const enemyGauge = createEnemyHpGauge(resources);
 
-    document.body.onclick = function() {
+    const body = document.body || document.createElement('body');
+    body.onclick = function() {
       console.log('click');
       enemyGauge.removeTween();
     };

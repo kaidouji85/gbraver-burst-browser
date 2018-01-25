@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from '../../../resource/resource-manager';
+import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
@@ -33,7 +33,8 @@ export class BattleSceneView {
     });
 
     const dom = this.renderer.domElement || new HTMLElement();
-    document.body.appendChild(dom);
+    const body = document.body || document.createElement('body');
+    body.appendChild(dom);
 
     window.addEventListener('resize', () => {
       props.observer.notify({type: 'resize'})

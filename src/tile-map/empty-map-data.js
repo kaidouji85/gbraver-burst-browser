@@ -1,6 +1,6 @@
 // @flow
 
-import type {TileMapJson} from "../../flow-typed/tiled";
+import type {TileMapJson} from "../flow-typed/tiled";
 
 /** 空のタイルマップ */
 export const EMPTY_TILE_MAP: TileMapJson = {

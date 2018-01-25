@@ -1,6 +1,6 @@
 // @flow
-import type {Resources} from '../../src/resource/resource-manager';
-import {ResourceManager} from '../../src/resource/resource-manager';
+import type {Resources} from '../../src/resource/index';
+import {loadAllResource} from '../../src/resource/index';
 import {CanvasScene} from '../util/canvas-scene'
 
 /**
@@ -11,14 +11,14 @@ import {CanvasScene} from '../util/canvas-scene'
  * @param renderFunc キャンバスレンダリングをする関数
  */
 export async function CanvasStubBase(basePath: string, renderFunc: (context: CanvasRenderingContext2D, reources: Resources) => void) {
-  const resourceManager:  ResourceManager = new ResourceManager(basePath);
-  await resourceManager.load();
+  const resources = await loadAllResource(basePath);
 
   const scene = new CanvasScene();
-  document.body.appendChild(scene.renderer.domElement);
+  const body = document.body || document.createElement('body');
+  body.appendChild(scene.renderer.domElement);
 
   const context = scene.canvas.getContext('2d');
   context.clearRect(0, 0, window.innerWidth, window.innerHeight);
-  renderFunc(context, resourceManager.resources);
+  renderFunc(context, resources);
   scene.render();
 };

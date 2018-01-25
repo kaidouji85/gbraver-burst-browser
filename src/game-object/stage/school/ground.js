@@ -1,9 +1,9 @@
 // @flow
 
 import * as THREE from 'three';
-import type {Resources} from "../../../resource/resource-manager";
+import type {Resources} from "../../../resource/index";
 import {TILE_MAP_IDS} from "../../../resource/tile-map";
-import {createTileMap} from "../tile-map";
+import {createTileMap} from "../../../tile-map";
 import {TEXTURE_IDS} from "../../../resource/texture";
 
 /** グラウンドを生成する */

@@ -1,10 +1,10 @@
 // @flow
-import type {Resources} from '../../../../resource/resource-manager';
+import type {Resources} from '../../../resource/index';
 import {drawImage} from '../image-drawer';
 import {PlayerHpBar} from './bar';
 import {drawNumberRight} from '../number';
-import type {CanvasImageResource} from "../../../../resource/canvas-image";
-import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
+import type {CanvasImageResource} from "../../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
 /**
  * プレイヤーのHPゲージを描画する

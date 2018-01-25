@@ -1,6 +1,6 @@
 // @flow
 
-import type {Resources} from "../../../resource/resource-manager";
+import type {Resources} from "../../../resource/index";
 import {ShinBraver} from './shin-breaver';
 import {PlayerShinBraverView} from "./view/player-shin-braver-view";
 import {EnemyShinBraverView} from "./view/enemy-shin-braver-view";

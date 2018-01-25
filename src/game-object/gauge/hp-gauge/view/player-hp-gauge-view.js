@@ -1,12 +1,12 @@
 // @flow
 
 import * as THREE from 'three';
-import {CanvasMesh} from "../../../../util/mesh/canvas-mesh";
-import type {Resources} from "../../../../resource/resource-manager";
+import {CanvasMesh} from "../../../../mesh/canvas-mesh";
+import type {Resources} from "../../../../resource/index";
 import {HpGaugeView} from './hp-gauge-view';
 import type {HpGaugeModel} from "../model/hp-gauge-model";
-import {drawPlayerHpGauge} from "../../../../util/canvas/draw/hp-gauge";
-import {rectangle} from "../../../../util/uv-mapping/rectangle";
+import {drawPlayerHpGauge} from "../../../../canvas/draw/hp-gauge";
+import {rectangle} from "../../../../uv-mapping/rectangle";
 
 /** プレイヤーHPゲージ */
 export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {

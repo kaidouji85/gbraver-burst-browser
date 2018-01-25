@@ -1,9 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import TWEEN from '@tweenjs/tween.js';
-import type {Resources} from "../../src/resource/resource-manager";
-import {ResourceManager} from "../../src/resource/resource-manager";
+import type {Resources} from "../../src/resource/index";
+import {loadAllResource} from "../../src/resource";
 
 /**
  * HudLayerStubBaseコンストラクタのパラメータ
@@ -33,9 +32,7 @@ export class HudLayerStubBase<T> {
   }
 
   async main(params: Params<T>) {
-    const resourceManager = new ResourceManager(params.resourceBashPath);
-    await resourceManager.load();
-
+    const resources = await loadAllResource(params.resourceBashPath);
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(
       -window.innerWidth / 2,
@@ -47,9 +44,10 @@ export class HudLayerStubBase<T> {
     );
     const rendered = new THREE.WebGLRenderer();
     rendered.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(rendered.domElement);
+    const body = document.body || document.createElement('body');
+    body.appendChild(rendered.domElement);
 
-    const gameObject: T = params.init(resourceManager.resources);
+    const gameObject: T = params.init(resources);
     params.addScene(scene, gameObject);
 
     function gameLoop(time: DOMHighResTimeStamp) {

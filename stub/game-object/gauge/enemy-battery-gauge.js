@@ -2,15 +2,16 @@
 
 import * as THREE from 'three';
 import {HudLayerStubBase} from "../../util/hud-layer-stub-base";
-import type {Resources} from "../../../src/resource/resource-manager";
+import type {Resources} from "../../../src/resource/index";
 import {BatteryGauge} from "../../../src/game-object/gauge/battery-gauge/battery-gauge";
-import {EnemyBatteryGauge, PlayerBatteryGauge} from "../../../src/game-object/gauge/battery-gauge/index";
+import {EnemyBatteryGauge} from "../../../src/game-object/gauge/battery-gauge/index";
 
 new HudLayerStubBase({
   resourceBashPath: '../../resources/',
   init: function (resources: Resources): BatteryGauge {
     const enemyBatteryGauge = createEnemyBatteryGauge(resources);
-    document.body.onclick = () => {
+    const body = document.body || document.createElement('body');
+    body.onclick = () => {
       console.log('on click!!');
       enemyBatteryGauge.removeTween();
     };
@@ -23,7 +24,6 @@ new HudLayerStubBase({
     gameObject.gameLoop(time);
   }
 });
-
 
 function createEnemyBatteryGauge(resources: Resources): BatteryGauge {
   const enemyBatteryGauge = EnemyBatteryGauge(resources, 5, 5);

@@ -2,7 +2,7 @@
 
 import {ThreeDimensionLayerStubBase} from "../../util/three-dimension-layer-stub";
 import {ShinBraver} from "../../../src/game-object/armdozer/shin-breaver/shin-breaver";
-import type {Resources} from "../../../src/resource/resource-manager";
+import type {Resources} from "../../../src/resource/index";
 import * as THREE from "three";
 import {EnemyShinBraver} from "../../../src/game-object/armdozer/shin-breaver";
 
