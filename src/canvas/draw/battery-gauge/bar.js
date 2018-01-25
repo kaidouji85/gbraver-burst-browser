@@ -1,10 +1,10 @@
 // @flow
-import type {Resources} from '../../../../resource/resource-manager';
+import type {Resources} from '../../../resource/resource-manager';
 import * as R from 'ramda';
 import {drawImage} from '../image-drawer';
 import {trapezoid} from '../../clip/trapezoid';
-import type {CanvasImageResource} from "../../../../resource/canvas-image";
-import {CANVAS_IMAGE_IDS} from "../../../../resource/canvas-image";
+import type {CanvasImageResource} from "../../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
 /**
  * バッテリーバーの目盛りを描画する

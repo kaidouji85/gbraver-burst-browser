@@ -1,6 +1,6 @@
 // @flow
 import type {Resources} from "../../../resource/resource-manager";
-import {createMeshFromJson} from "../../../util/mesh/three-json-mesh";
+import {createMeshFromJson} from "../../../mesh/three-json-mesh";
 import * as THREE from 'three';
 import type {JsonModelResource} from "../../../resource/json-model";
 import {JSON_MODEL_IDS} from "../../../resource/json-model";

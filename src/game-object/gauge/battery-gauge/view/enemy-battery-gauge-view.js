@@ -1,12 +1,12 @@
 // @flow
 
-import {CanvasMesh} from "../../../../util/mesh/canvas-mesh";
+import {CanvasMesh} from "../../../../mesh/canvas-mesh";
 import {BatteryGaugeView} from './battery-gauge-view';
 import type {BatteryGaugeModel} from "../model/battery-gauge-model";
 import type {Resources} from "../../../../resource/resource-manager";
 import * as THREE from "three";
-import {rectangle} from "../../../../util/uv-mapping/rectangle";
-import {drawEnemyBatteryGauge, drawPlayerBatteryGauge} from "../../../../util/canvas/draw/battery-gauge";
+import {rectangle} from "../../../../uv-mapping/rectangle";
+import {drawEnemyBatteryGauge, drawPlayerBatteryGauge} from "../../../../canvas/draw/battery-gauge";
 
 /** 敵バッテリーゲージ */
 export class EnemyBatteryGaugeView extends CanvasMesh implements BatteryGaugeView {

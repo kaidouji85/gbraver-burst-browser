@@ -5,12 +5,12 @@ import type {Resources} from "../../resource/resource-manager";
 import {
   getHorizonDividedNum, getTextureOffsetPos,
   getVerticalDividedNum
-} from "../../util/tiled-map/texture-off-set-pos";
-import {EMPTY_TILE_SET} from "../../util/tiled-map/empty-tile-set";
+} from "../../tiled-map/texture-off-set-pos";
+import {EMPTY_TILE_SET} from "../../tiled-map/empty-tile-set";
 import type {TileMapJson, TileSetJson} from "../../flow-typed/tiled";
-import {getMapPosition} from "../../util/tiled-map/map-position";
-import {createAnimatedTexture} from "../../util/texture/texture-animation";
-import {EMPTY_TILE_MAP} from "../../util/tiled-map/empty-map-data";
+import {getMapPosition} from "../../tiled-map/map-position";
+import {createAnimatedTexture} from "../../texture/texture-animation";
+import {EMPTY_TILE_MAP} from "../../tiled-map/empty-map-data";
 import type {TileMapResource, TileMapId} from "../../resource/tile-map";
 import type {TextureId, TextureResource} from "../../resource/texture";
 
