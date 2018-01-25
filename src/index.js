@@ -29,5 +29,5 @@ import type {Observer} from "./scene/observer";
     Tween.update(time);
     scene.notify({type: 'gameLoop', time});
   };
-  gameLoop();
+  requestAnimationFrame(gameLoop);
 })();

@@ -14,7 +14,8 @@ export async function CanvasStubBase(basePath: string, renderFunc: (context: Can
   const resources = await loadAllResource(basePath);
 
   const scene = new CanvasScene();
-  document.body.appendChild(scene.renderer.domElement);
+  const body = document.body || document.createElement('body');
+  body.appendChild(scene.renderer.domElement);
 
   const context = scene.canvas.getContext('2d');
   context.clearRect(0, 0, window.innerWidth, window.innerHeight);

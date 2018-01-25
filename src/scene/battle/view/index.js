@@ -33,7 +33,8 @@ export class BattleSceneView {
     });
 
     const dom = this.renderer.domElement || new HTMLElement();
-    document.body.appendChild(dom);
+    const body = document.body || document.createElement('body');
+    body.appendChild(dom);
 
     window.addEventListener('resize', () => {
       props.observer.notify({type: 'resize'})

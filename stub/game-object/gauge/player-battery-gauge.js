@@ -10,7 +10,8 @@ new HudLayerStubBase({
   resourceBashPath: '../../resources/',
   init: function (resources: Resources): BatteryGauge {
     const playerBatteryGauge = createPlayerBatteryGauge(resources);
-    document.body.onclick = () => {
+    const body = document.body || new document.createElement('body');
+    body.onclick = () => {
       console.log('on click!!');
       playerBatteryGauge.removeTween();
     };

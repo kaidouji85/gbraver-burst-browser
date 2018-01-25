@@ -44,7 +44,8 @@ export class HudLayerStubBase<T> {
     );
     const rendered = new THREE.WebGLRenderer();
     rendered.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(rendered.domElement);
+    const body = document.body || document.createElement('body');
+    body.appendChild(rendered.domElement);
 
     const gameObject: T = params.init(resources);
     params.addScene(scene, gameObject);

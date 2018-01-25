@@ -21,7 +21,8 @@ new HudLayerStubBase({
     const playerGauge = createPlayerHpGauge(resources);
     const enemyGauge = createEnemyHpGauge(resources);
 
-    document.body.onclick = function() {
+    const body = document.body || document.createElement('body');
+    body.onclick = function() {
       console.log('click');
       enemyGauge.removeTween();
     };

@@ -11,7 +11,8 @@
     "build:stub": "webpack --config webpack.stub.js",
     "upload-s3": "s3-upload",
     "clean": "rimraf build",
-    "deploy": "npm-run-all clean build build:stub upload-s3"
+    "flow": "flow",
+    "deploy": "npm-run-all clean flow build build:stub upload-s3"
   },
   "author": "y.takeuchi",
   "license": "ISC",
