@@ -4,7 +4,7 @@ import type {Resources} from '../../../resource/resource-manager';
 import * as THREE from 'three';
 import SkyBox from './blue-sky';
 import {createSchoolBuild} from './school-build';
-import {Stage} from "../base";
+import {Stage} from "../stage";
 import {createGround} from "./ground";
 
 /** 学校ステージ */

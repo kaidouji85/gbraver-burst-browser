@@ -6,7 +6,7 @@ import {createPlayerSprite} from "./player-sprite";
 import {createEnemySprite} from "./enemy-sprite";
 import type {ArmDozerSprite} from '../../../../game-object/armdozer/armdozer-sprite';
 import {createStage} from './stage';
-import type {Stage} from "../../../../game-object/stage/base";
+import type {Stage} from "../../../../game-object/stage/stage";
 import {createCamera} from "./camera";
 
 /**
