@@ -5,6 +5,7 @@ import {BattleScene} from "../index";
 import {gameLoop} from "./game-loop";
 import {debugMode} from "./debug-mode";
 import {resize} from "./resize";
+import {mouseDown} from "./mouse-down";
 
 /** アクションハンドラ */
 export function actionHandler(action: Action, scene: BattleScene) {
@@ -15,6 +16,8 @@ export function actionHandler(action: Action, scene: BattleScene) {
       return resize(scene.view, scene.state, action);
     case 'debugMode':
       return debugMode(scene.view, scene.state, action);
+    case 'mouseDown':
+      return mouseDown(scene.view, scene.state, action)
     default:
       return;
   }

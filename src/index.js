@@ -30,4 +30,8 @@ import type {Observer} from "./scene/observer";
     scene.notify({type: 'gameLoop', time});
   };
   requestAnimationFrame(gameLoop);
+
+  document.addEventListener('mousedown', (event: Event) => {
+    scene.notify({type: 'mouseDown', event})
+  })
 })();

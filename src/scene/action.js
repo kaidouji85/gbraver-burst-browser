@@ -4,7 +4,8 @@
 export type Action =
   | ResizeAction
   | GameLoopAction
-  | DebugModeAction;
+  | DebugModeAction
+  | MouseDown;
 
 /** リサイズ */
 export type ResizeAction = {
@@ -20,4 +21,10 @@ export type GameLoopAction = {
 /** デバッグモード */
 export type DebugModeAction = {
   type: 'debugMode'
+};
+
+/** マウスダウン */
+export type MouseDown = {
+  type: 'mouseDown',
+  event: Event
 };
