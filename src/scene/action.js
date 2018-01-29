@@ -26,5 +26,5 @@ export type DebugModeAction = {
 /** マウスダウン */
 export type MouseDown = {
   type: 'mouseDown',
-  event: Event
+  event: MouseEvent
 };

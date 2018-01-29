@@ -36,6 +36,10 @@ export class PlayerShinBraverView implements ShinBraverView {
   getThreeJsObjects(): THREE.Object3D[] {
     return [this._mesh];
   }
+
+  getClickTarget(): THREE.Mesh[] {
+    return [this._mesh];
+  }
 }
 
 function createBasicMesh() {

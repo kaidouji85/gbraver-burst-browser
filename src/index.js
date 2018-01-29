@@ -22,7 +22,7 @@ import type {Observer} from "./scene/observer";
       }
     )
   });
-  scene.notify({type: 'debugMode'});
+  //scene.notify({type: 'debugMode'});
 
   const gameLoop = (time: DOMHighResTimeStamp) => {
     requestAnimationFrame(gameLoop);
@@ -31,7 +31,7 @@ import type {Observer} from "./scene/observer";
   };
   requestAnimationFrame(gameLoop);
 
-  document.addEventListener('mousedown', (event: Event) => {
+  document.addEventListener('mousedown', (event: MouseEvent) => {
     scene.notify({type: 'mouseDown', event})
   })
 })();
