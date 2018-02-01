@@ -21,7 +21,8 @@
     "gbraver-burst-core": "^0.1.7",
     "ramda": "^0.25.0",
     "three": "^0.89.0",
-    "three-orbitcontrols": "^2.0.0"
+    "three-orbitcontrols": "^2.0.0",
+    "workbox-webpack-plugin": "^2.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

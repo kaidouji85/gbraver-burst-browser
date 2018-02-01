@@ -6,6 +6,8 @@ import {ArmDozerIdList, ArmDozers, start} from "gbraver-burst-core";
 import type {Observer} from "./scene/observer";
 
 (async function(){
+  loadServiceWorker();
+
   const resources = await loadAllResource('');
 
   // TODO 開発用にダミーデータを作成している
@@ -31,3 +33,20 @@ import type {Observer} from "./scene/observer";
   };
   requestAnimationFrame(gameLoop);
 })();
+
+function loadServiceWorker() {
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register('/sw.js');
+  }
+  /*
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').then(registration => {
+        console.log('SW registered: ', registration);
+      }).catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
+    });
+  }
+  */
+}
