@@ -1,19 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const SERVE_PATH = path.resolve(__dirname, 'build/production');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const BUILD_PATH = 'build/production';
 
 module.exports = {
-  entry: {
-    index: path.resolve(__dirname, 'src/index.js')
-  },
+  entry: path.resolve(__dirname, 'src/index.js'),
   output: {
-    path: SERVE_PATH,
-    filename: '[name].js'
+    path: path.resolve(__dirname, BUILD_PATH),
+    filename: 'index.js'
   },
   devServer: {
-    contentBase: SERVE_PATH,
+    contentBase: path.resolve(__dirname, BUILD_PATH),
     port: 8080
   },
   devtool: 'source-map',
@@ -29,19 +26,12 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'study-three-js',
-      filename: `${SERVE_PATH}/index.html`,
+      filename: path.resolve(__dirname, `${BUILD_PATH}/index.html`),
       template: 'template/index.html'
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, "resources"),
-      to: SERVE_PATH
-    }]),
-    new WorkboxPlugin({
-      globDirectory: 'build/production',
-      globPatterns: ['**/*.{html,js,json,png}'],
-      swDest: path.join('build/production', 'sw.js'),
-      clientsClaim: true,
-      skipWaiting: true,
-    })
+      to: path.resolve(__dirname, BUILD_PATH)
+    }])
   ]
 };
