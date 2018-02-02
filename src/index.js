@@ -6,6 +6,8 @@ import {ArmDozerIdList, ArmDozers, start} from "gbraver-burst-core";
 import type {Observer} from "./scene/observer";
 
 (async function(){
+  loadServiceWorker();
+
   const resources = await loadAllResource('');
 
   // TODO 開発用にダミーデータを作成している
@@ -31,3 +33,17 @@ import type {Observer} from "./scene/observer";
   };
   requestAnimationFrame(gameLoop);
 })();
+
+async function loadServiceWorker() {
+  if (!navigator.serviceWorker) {
+    return;
+  }
+
+  try {
+    await navigator.serviceWorker.register('./sw.js');
+    console.log('service worker register success!');
+  } catch (e) {
+    console.log('service worker register failed');
+    console.log(e);
+  }
+}

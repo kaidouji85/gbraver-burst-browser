@@ -4,15 +4,19 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server",
     "postinstall": "npm run build",
-    "start:stub": "webpack-dev-server --config webpack.stub.js",
-    "build": "webpack",
-    "build:stub": "webpack --config webpack.stub.js",
+    "start": "webpack-dev-server",
+    "start:stub": "webpack-dev-server --config webpack.stub.js -d",
+    "webpack": "webpack",
+    "webpack:production": "webpack --config webpack.production.js",
+    "webpack:stub": "webpack --config webpack.stub.js",
+    "build": "npm-run-all clean webpack",
+    "build:production": "npm-run-all clean webpack:production",
+    "build:stub": "npm-run-all clean webpack:stub",
     "upload-s3": "s3-upload",
     "clean": "rimraf build",
     "flow": "flow",
-    "deploy": "npm-run-all clean flow build build:stub upload-s3"
+    "deploy": "npm-run-all clean flow webpack:production webpack:stub upload-s3"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -21,7 +25,8 @@
     "gbraver-burst-core": "^0.1.7",
     "ramda": "^0.25.0",
     "three": "^0.89.0",
-    "three-orbitcontrols": "^2.0.0"
+    "three-orbitcontrols": "^2.0.0",
+    "workbox-webpack-plugin": "^2.1.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

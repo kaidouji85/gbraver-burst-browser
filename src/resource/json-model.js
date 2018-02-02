@@ -31,7 +31,7 @@ export const JSON_MODEL_IDS = {
 export const JSON_MODEL_CONFIGS: JsonModelConfig[] = [
   {
     id: JSON_MODEL_IDS.SCHOOL,
-    path: 'model/school/school.js'
+    path: 'model/school/school.json'
   }
 ];
 
