@@ -1,8 +1,7 @@
 // @flow
 
 /** ボタンのモデル */
-export type TextureButtonModel = {
-  isPushed: boolean;
+export type ButtonModel = {
   scale: number;
   opacity: number;
 }

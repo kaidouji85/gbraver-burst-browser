@@ -1,7 +1,8 @@
 // @flow
 import * as THREE from "three";
 import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
-import type {TextureButtonModel} from "../model/texture-button-model";
+import type {ButtonModel} from "../model/button-model";
+import type {ButtonView} from "./button-view";
 
 type Param = {
   texture: THREE.Texture,
@@ -9,8 +10,8 @@ type Param = {
   height: number
 };
 
-/** ボタンのビュー */
-export class TextureButtonView {
+/** テクスチャをそのままボタンとして表示する */
+export class TextureButtonView implements ButtonView {
   _mesh: THREE.Mesh;
 
   constructor(param: Param) {
@@ -25,7 +26,7 @@ export class TextureButtonView {
   }
 
   /** モデルをビューに反映させる */
-  gameLoop(model: TextureButtonModel) {
+  gameLoop(model: ButtonModel) {
     // 透過率を設定する
     this._mesh.scale.x = model.scale;
     this._mesh.scale.y = model.scale;
@@ -33,7 +34,7 @@ export class TextureButtonView {
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */
-  getThreeJsObjects(): THREE.Mesh[] {
+  getThreeJsObjectList(): THREE.Mesh[] {
     return [this._mesh];
   }
 

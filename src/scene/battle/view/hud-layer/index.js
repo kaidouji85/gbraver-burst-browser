@@ -8,8 +8,8 @@ import {createEnemyHpGauge} from "./enemy-hp-gauge";
 import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-gauge";
 import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
-import {Button} from "../../../../game-object/button/button";
 import {createAttackButton} from "./attack-button";
+import {Button} from "../../../../game-object/controller/button/button";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -57,6 +57,6 @@ export class HudLayer {
     this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.attackButton = createAttackButton(props.resources);
-    this.attackButton.getThreeJsObjects().forEach(v => this.scene.add(v));
+    this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
   }
 }
