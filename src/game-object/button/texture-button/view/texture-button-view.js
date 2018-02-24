@@ -34,4 +34,10 @@ export class TextureButtonView {
   getThreeJsObjects(): THREE.Mesh[] {
     return [this._mesh];
   }
+
+  /** マウス、指とボタンが重なっているかを判定する */
+  isOverlap(raycaster: THREE.Raycaster): boolean {
+    const intersects = raycaster.intersectObjects([this._mesh]);
+    return intersects.length > 0;
+  }
 }

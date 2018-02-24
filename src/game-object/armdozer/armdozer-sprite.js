@@ -7,8 +7,6 @@ import {Tween} from '@tweenjs/tween.js';
 export interface ArmDozerSprite {
   /** ゲームループでの処理 */
   gameLoop(time: DOMHighResTimeStamp, camera: THREE.Camera): void;
-  /** マウスダウン */
-  mouseDown(raycaster: THREE.Raycaster): void;
   /** シーンに追加するオブジェクトを取得する */
   getThreeJsObjects(): THREE.Object3D[];
   /** 立ちポーズのアニメを開始する */

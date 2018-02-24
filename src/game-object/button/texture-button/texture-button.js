@@ -39,4 +39,12 @@ export class TextureButton implements Button {
   getThreeJsObjects(): THREE.Mesh[] {
     return this._view.getThreeJsObjects();
   }
+
+  /** mousedownイベント発行時に呼び出される関数 */
+  mouseDown(raycaster: THREE.Raycater): void {
+    const isOverlap = this._view.isOverlap(raycaster);
+    if (isOverlap) {
+      console.log('attack button push on!!');
+    }
+  }
 }

@@ -36,14 +36,6 @@ export class ShinBraver implements ArmDozerSprite {
     this._view.gameLoop(this._model, camera);
   }
 
-  /** マウスダウン */
-  mouseDown(raycaster: THREE.Raycaster): void {
-    const intersects = raycaster.intersectObjects(this._view.getClickTarget());
-    if (intersects.length > 0) {
-      console.log('click shin braver!!');
-    }
-  }
-
   /** 本スプライトに関連するthree.jsオブジェクトを返す */
   getThreeJsObjects(): THREE.Object3D[] {
     return this._view.getThreeJsObjects();
