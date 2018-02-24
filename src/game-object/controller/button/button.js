@@ -11,9 +11,9 @@ export class Button {
 
   constructor(view: TextureButtonView) {
     this._model = {
-      isPushed: false,
-      scale: 1,
-      opacity: 1
+      depth: 1,
+      opacity: 1,
+      isTouchDown: false,
     };
     this._view = view;
   }
@@ -28,11 +28,18 @@ export class Button {
     return this._view.getThreeJsObjectList();
   }
 
-  /** mousedownイベント発行時に呼び出される関数 */
-  mouseDown(raycaster: THREE.Raycater): void {
+  /** マウス、指がスクリーンにタッチダウンした際の処理 */
+  touchDownScreen(raycaster: THREE.Raycater): void {
     const isOverlap = this._view.isOverlap(raycaster);
-    if (isOverlap) {
-      console.log('attack button push on!!');
+    this._model.isTouchDown = isOverlap;
+  }
+
+  /** マウス、指がスクリーンにタッチアップした際の処理 */
+  touchUpScreen(raycaster: THREE.Raycater): void {
+    const isOverlap = this._view.isOverlap(raycaster);
+    if (isOverlap && this._model.isTouchDown) {
+      console.log('on push!!');
     }
+    this._model.isTouchDown = false;
   }
 }

@@ -32,10 +32,7 @@ import type {Observer} from "./scene/observer";
     scene.notify({type: 'gameLoop', time});
   };
   requestAnimationFrame(gameLoop);
-
-  document.addEventListener('mousedown', (event: MouseEvent) => {
-    scene.notify({type: 'mouseDown', event})
-  })
+  bindDomEventToScene(scene);
 })();
 
 async function loadServiceWorker() {
@@ -50,4 +47,16 @@ async function loadServiceWorker() {
     console.log('service worker register failed');
     console.log(e);
   }
+}
+
+function bindDomEventToScene(scene: Observer) {
+  window.addEventListener('resize', () => {
+    scene.notify({type: 'resize'})
+  }, false);
+  document.addEventListener('mousedown', (event: MouseEvent) => {
+    scene.notify({type: 'mouseDown', event})
+  });
+  document.addEventListener('mouseup', (event: MouseEvent) => {
+    scene.notify({type: 'mouseUp', event});
+  });
 }

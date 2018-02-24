@@ -2,15 +2,15 @@
 
 import * as THREE from 'three';
 import {BattleSceneView} from "../view";
-import type {MouseDown} from "../../action";
+import type {MouseUp} from "../../action";
 import type {BattleSceneState} from "../index";
 import {getMouseVector, getRaycaster} from "../../../touch/raycast";
 
-/** ゲーム画面内をマウスダウンした際のイベント */
-export function mouseDown(view: BattleSceneView, state: BattleSceneState, action: MouseDown) {
+/** ゲーム画面をマウスオーバーした際のイベント */
+export function mouseUp(view: BattleSceneView, state: BattleSceneState, action: MouseUp) {
   action.event.preventDefault();
 
   const mouse: THREE.Vectoe2 = getMouseVector(action.event.clientX, action.event.clientY, view.renderer.domElement.clientWidth, view.renderer.domElement.clientHeight);
   const hudLayerRaycaster: THREE.Raycaster = getRaycaster(mouse, view.hudLayer.camera);
-  view.hudLayer.attackButton.touchDownScreen(hudLayerRaycaster);
+  view.hudLayer.attackButton.touchUpScreen(hudLayerRaycaster);
 }
