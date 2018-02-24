@@ -4,34 +4,22 @@ import type {TextureButtonModel} from "./model/texture-button-model";
 import {TextureButtonView} from "./view/texture-button-view";
 import {Button} from "../button";
 
-type Param = {
-  texture: THREE.Texture,
-  width: number,
-  height: number,
-  posX: number,
-  posY: number
-};
-
 /** ボタンのクラス */
 export class TextureButton implements Button {
   _model: TextureButtonModel;
   _view: TextureButtonView;
 
-  constructor(param: Param) {
+  constructor(view: TextureButtonView) {
     this._model = {
       isPushed: false,
       scale: 1,
-      opacity: 1,
-      pos: {
-        x: param.posX,
-        y: param.posY
-      }
+      opacity: 1
     };
-    this._view = new TextureButtonView(param);
+    this._view = view;
   }
 
   /** ゲームループ */
-  gameLoop() {
+  gameLoop(time: DOMHighResTimeStamp) {
     this._view.gameLoop(this._model);
   }
 

@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 /** ボタンのゲームオブジェクト */
 export interface Button {
-  gameLoop(): void;
+  gameLoop(time: DOMHighResTimeStamp): void;
   getThreeJsObjects(): THREE.Mesh[];
   mouseDown(raycaster: THREE.Raycater): void;
 }
