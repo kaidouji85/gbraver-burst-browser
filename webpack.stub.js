@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const R = require('ramda');
 
 /** スタブソースコードのベースとなるパス */
 const STUB_PATH = path.resolve(__dirname, 'stub');
@@ -41,7 +40,7 @@ module.exports = {
     port: 8080
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
