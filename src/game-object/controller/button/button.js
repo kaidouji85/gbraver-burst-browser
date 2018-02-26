@@ -35,12 +35,12 @@ export class Button {
   /** マウス、指がスクリーンにタッチダウンした際の処理 */
   touchDownScreen(raycaster: THREE.Raycater): void {
     const isOverlap = this._view.isOverlap(raycaster);
-    this._clickChecker.onTouchDown(isOverlap);
+    this._clickChecker.touchDownScreen(isOverlap);
   }
 
   /** マウス、指がスクリーンにタッチアップした際の処理 */
   touchUpScreen(raycaster: THREE.Raycater): void {
     const isOverlap = this._view.isOverlap(raycaster);
-    this._clickChecker.onTouchUp(isOverlap);
+    this._clickChecker.touchUpScreen(isOverlap);
   }
 }
