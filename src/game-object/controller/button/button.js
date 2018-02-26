@@ -17,8 +17,11 @@ export class Button {
       opacity: 1
     };
     this._view = view;
-    this._clickChecker = new ClickChecker(() => {
-      console.log('onClick');
+    this._clickChecker = new ClickChecker({
+      onClick: () => {
+        // TODO テスト用なので削除する
+        alert('クリックしたよ');
+      }
     });
   }
 

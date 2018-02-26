@@ -25,7 +25,7 @@ export class ClickChecker {
    */
   _touchEventList: Rx.Subject;
 
-  constructor(onClick: () => void) {
+  constructor(param: {onClick: () => void}) {
     const CLICK_EVENT_LIST: Event[] = [
       {type: 'touchDown', isOverlap: true},
       {type: 'touchUp', isOverlap: true}
@@ -37,7 +37,7 @@ export class ClickChecker {
       .subscribe((eventList: Event[]) => {
         const isClick = R.equals(eventList, CLICK_EVENT_LIST);
         if (isClick) {
-          onClick();
+          param.onClick();
         }
       });
   }

@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "npm run build",
     "start": "webpack-dev-server",
-    "start:stub": "webpack-dev-server --config webpack.stub.js -d",
+    "start:stub": "webpack-dev-server --config webpack.stub.js",
     "webpack": "webpack",
     "webpack:production": "webpack --config webpack.production.js",
     "webpack:stub": "webpack --config webpack.stub.js",
