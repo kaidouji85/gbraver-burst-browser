@@ -13,5 +13,5 @@ export function mouseUp(view: BattleSceneView, state: BattleSceneState, action: 
 
   const mouse: THREE.Vectoe2 = getMouseVector(action.event.clientX, action.event.clientY, view.renderer.domElement.clientWidth, view.renderer.domElement.clientHeight);
   const hudLayerRaycaster: THREE.Raycaster = getRaycaster(mouse, view.hudLayer.camera);
-  view.hudLayer.attackButton.touchUpScreen(hudLayerRaycaster);
+  view.hudLayer.attackButton.onMouseUp(hudLayerRaycaster);
 }

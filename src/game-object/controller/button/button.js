@@ -3,13 +3,13 @@ import * as THREE from "three";
 import type {ButtonModel} from "./model/button-model";
 import {TextureButtonView} from "./view/texture-button-view";
 import {ButtonView} from "./view/button-view";
-import {ClickChecker} from "../../../touch/click-checker";
+import {MouseClickChecker} from "../../../touch/mouse-click-checker";
 
 /** ボタンのクラス */
 export class Button {
   _model: ButtonModel;
   _view: ButtonView;
-  _clickChecker: ClickChecker;
+  _mouseClickChecker: MouseClickChecker;
 
   constructor(view: TextureButtonView) {
     this._model = {
@@ -17,7 +17,7 @@ export class Button {
       opacity: 1
     };
     this._view = view;
-    this._clickChecker = new ClickChecker({
+    this._mouseClickChecker = new MouseClickChecker({
       onClick: () => {
         // TODO テスト用なので削除する
         alert('クリックしたよ');
@@ -36,14 +36,14 @@ export class Button {
   }
 
   /** マウス、指がスクリーンにタッチダウンした際の処理 */
-  touchDownScreen(raycaster: THREE.Raycater): void {
+  onMouseDown(raycaster: THREE.Raycater): void {
     const isOverlap = this._view.isOverlap(raycaster);
-    this._clickChecker.touchDownScreen(isOverlap);
+    this._mouseClickChecker.onMouseDown(isOverlap);
   }
 
   /** マウス、指がスクリーンにタッチアップした際の処理 */
-  touchUpScreen(raycaster: THREE.Raycater): void {
+  onMouseUp(raycaster: THREE.Raycater): void {
     const isOverlap = this._view.isOverlap(raycaster);
-    this._clickChecker.touchUpScreen(isOverlap);
+    this._mouseClickChecker.onMouseUp(isOverlap);
   }
 }
