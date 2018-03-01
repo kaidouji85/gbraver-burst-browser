@@ -4,12 +4,12 @@ import * as THREE from 'three';
 /**
  * three.js画面上でのマウス、指のレイキャストを取得する
  *
- * @param pointer マウス、指の座標
+ * @param pointerPos マウス、指の座標
  * @param camera レイキャストを取得するシーンのカメラ
  * @return three.js画面上でのマウス、指のレイキャスト
  */
-export function getRaycaster(pointer: THREE.Vector2, camera: THREE.Camera): THREE.Raycaster {
+export function getRaycaster(pointerPos: THREE.Vector2, camera: THREE.Camera): THREE.Raycaster {
   const raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera( pointer, camera );
+  raycaster.setFromCamera( pointerPos, camera );
   return raycaster;
 }

@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import {BattleSceneView} from "../view";
 import type {MouseDown} from "../../action";
 import type {BattleSceneState} from "../index";
-import {getRaycaster} from "../../../touch/raycast";
+import {getRaycaster} from "../../../touch/raycaster";
 import {HudLayer} from "../view/hud-layer";
 import {getMousePosition, getPointerPosition} from "../../../touch/pointer-position";
 

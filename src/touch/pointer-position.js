@@ -18,11 +18,21 @@ export function getPointerPosition(clientX: number, clientY: number, canvasWidth
 }
 
 /**
- * マウス座標を取得する
+ * ゲーム画面上でのマウス座標を取得する
  *
  * @param event マウスイベント
  * @param renderer three.jsのレンダラー
  */
-export function getMousePosition(event: MouseEvent, renderer: THREE.WebGLRenderer) {
+export function getMousePosition(event: MouseEvent, renderer: THREE.WebGLRenderer): THREE.Vector2 {
   return getPointerPosition(event.clientX, event.clientY, renderer.domElement.clientWidth, renderer.domElement.clientHeight);
+}
+
+/**
+ * ゲーム画面上でのタッチ座標を取得する
+ *
+ * @param touch タッチ情報
+ * @param renderer three.jsのレンダラー
+ */
+export function getTouchPosition(touch: Touch, renderer: THREE.WebGLRenderer): THREE.Vector2 {
+  return getPointerPosition(touch.clientX, touch.clientY, renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 }
