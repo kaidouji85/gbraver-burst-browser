@@ -4,7 +4,8 @@ import * as THREE from 'three';
 import {BattleSceneView} from "../view";
 import type {TouchEnd} from "../../action";
 import type {BattleSceneState} from "../index";
-import {getMouseVector, getRaycaster} from "../../../touch/raycast";
+import {getRaycaster} from "../../../touch/raycast";
+import {getPointerPosition} from "../../../touch/pointer-position";
 
 /** ゲーム画面内をタッチエンドした際のイベント */
 export function touchEnd(view: BattleSceneView, state: BattleSceneState, action: TouchEnd) {
