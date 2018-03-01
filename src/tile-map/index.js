@@ -2,16 +2,13 @@
 
 import * as THREE from 'three';
 import type {Resources} from "../resource/index";
-import {
-  getHorizonDividedNum, getTextureOffsetPos,
-  getVerticalDividedNum
-} from "./texture-off-set-pos";
+import {getHorizonDividedNum, getTextureOffsetPos, getVerticalDividedNum} from "./texture-off-set-pos";
 import {EMPTY_TILE_SET} from "./empty-tile-set";
 import type {TileMapJson, TileSetJson} from "../flow-typed/tiled";
 import {getMapPosition} from "./map-position";
 import {createAnimatedTexture} from "../texture/texture-animation";
 import {EMPTY_TILE_MAP} from "./empty-map-data";
-import type {TileMapResource, TileMapId} from "../resource/tile-map";
+import type {TileMapId, TileMapResource} from "../resource/tile-map";
 import type {TextureId, TextureResource} from "../resource/texture";
 
 /** タイルマップ生成のパラメータ */
