@@ -3,9 +3,9 @@ import Rx from "rxjs/Rx";
 import * as R from 'ramda';
 
 /**
- * マウスクリックイベント
+ *クリック判定に必要なイベントを集めたもの
  */
-type MouseClickEvent = MouseTouchDown | MouseTouchStart;
+type ClickEvent = MouseTouchDown | MouseTouchStart;
 
 /** マウスダウン*/
 type MouseTouchDown = {
@@ -21,7 +21,7 @@ type MouseTouchStart = {
 
 
 /** マウスのクリック判定をする*/
-export class MouseClickChecker {
+export class ClickChecker {
   /**
    * イベント実行履歴
    * touchDown、touchUpイベントを履歴を保存する
@@ -30,7 +30,7 @@ export class MouseClickChecker {
   _touchEventList: Rx.Subject;
 
   constructor(param: {onClick: () => void}) {
-    const CLICK_EVENT_LIST: MouseClickEvent[] = [
+    const CLICK_EVENT_LIST: ClickEvent[] = [
       {type: 'mouseTouchDown', isOverlap: true},
       {type: 'mouseTouchUp', isOverlap: true}
     ];

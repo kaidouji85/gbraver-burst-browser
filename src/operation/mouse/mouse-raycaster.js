@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import {getMousePosition} from "./mouse-position";
-import {getRaycaster} from "./pointer-raycaster";
+import {getRaycaster} from "../raycaster";
 
 /**
  * マウスイベントからレイキャストを取得

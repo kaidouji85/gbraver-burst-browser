@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import {getPointerPosition} from "./pointer-position";
+import {getScreenPosition} from "../screen-position";
 
 /**
  * ゲーム画面上でのマウス座標を取得する
@@ -10,5 +10,5 @@ import {getPointerPosition} from "./pointer-position";
  * @param renderer three.jsのレンダラー
  */
 export function getMousePosition(event: MouseEvent, renderer: THREE.WebGLRenderer): THREE.Vector2 {
-  return getPointerPosition(event.clientX, event.clientY, renderer.domElement.clientWidth, renderer.domElement.clientHeight);
+  return getScreenPosition(event.clientX, event.clientY, renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 }

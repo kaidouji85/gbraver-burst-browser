@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import {getPointerPosition} from "./pointer-position";
+import {getScreenPosition} from "../screen-position";
 
 /**
  * ゲーム画面上でのタッチ座標を取得する
@@ -10,5 +10,5 @@ import {getPointerPosition} from "./pointer-position";
  * @param renderer three.jsのレンダラー
  */
 export function getTouchPosition(touch: Touch, renderer: THREE.WebGLRenderer): THREE.Vector2 {
-  return getPointerPosition(touch.clientX, touch.clientY, renderer.domElement.clientWidth, renderer.domElement.clientHeight);
+  return getScreenPosition(touch.clientX, touch.clientY, renderer.domElement.clientWidth, renderer.domElement.clientHeight);
 }

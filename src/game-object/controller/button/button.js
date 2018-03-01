@@ -3,13 +3,13 @@ import * as THREE from "three";
 import type {ButtonModel} from "./model/button-model";
 import {TextureButtonView} from "./view/texture-button-view";
 import {ButtonView} from "./view/button-view";
-import {MouseClickChecker} from "../../../touch/mouse-click-checker";
+import {ClickChecker} from "../../../operation/mouse/click-checker";
 
 /** ボタンのクラス */
 export class Button {
   _model: ButtonModel;
   _view: ButtonView;
-  _mouseClickChecker: MouseClickChecker;
+  _mouseClickChecker: ClickChecker;
 
   constructor(view: TextureButtonView) {
     this._model = {
@@ -17,7 +17,7 @@ export class Button {
       opacity: 1
     };
     this._view = view;
-    this._mouseClickChecker = new MouseClickChecker({
+    this._mouseClickChecker = new ClickChecker({
       onClick: () => {
         // TODO テスト用なので削除する
         alert('クリックしたよ');

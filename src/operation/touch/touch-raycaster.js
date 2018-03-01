@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from 'three';
-import {getRaycaster} from "./pointer-raycaster";
+import {getRaycaster} from "../raycaster";
 import {getTouchPosition} from "./touch-position";
 
 /** タッチイベントから作成したレイキャスト */
@@ -10,7 +10,7 @@ export type TouchEventRaycaster = {
   touches: TouchRaycaster[],
 };
 
-/** タッチ単位でのレイキャスト */
+/** 単位タッチのレイキャスト */
 export type TouchRaycaster = {
   identifier: number,
   raycaster: THREE.Raycaster

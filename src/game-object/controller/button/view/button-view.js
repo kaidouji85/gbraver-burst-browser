@@ -2,7 +2,7 @@
 
 import type {ButtonModel} from "../model/button-model";
 import * as THREE from "three";
-import {TouchTarget} from "../../../../touch/touch-target";
+import {TouchTarget} from "../../../../operation/touch/touch-target";
 
 /** ボタンのビュー */
 export interface ButtonView extends TouchTarget {

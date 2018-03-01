@@ -5,7 +5,7 @@ import {BattleSceneView} from "../view";
 import type {MouseUp} from "../../action";
 import type {BattleSceneState} from "../index";
 import {HudLayer} from "../view/hud-layer";
-import {getMouseRaycaster} from "../../../touch/mouse-raycaster";
+import {getMouseRaycaster} from "../../../operation/mouse/mouse-raycaster";
 
 /** ゲーム画面をマウスアップした際のイベント */
 export function mouseUp(view: BattleSceneView, state: BattleSceneState, action: MouseUp) {
