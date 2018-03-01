@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
-import {getRaycaster} from "./raycaster";
-import {getTouchPosition} from "./pointer-position";
+import {getRaycaster} from "./pointer-raycaster";
+import {getTouchPosition} from "./touch-position";
 
 /** タッチイベントから作成したレイキャスト */
 export type TouchEventRaycaster = {

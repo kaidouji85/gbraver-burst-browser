@@ -4,8 +4,8 @@ import * as THREE from 'three';
 import {BattleSceneView} from "../view";
 import type {TouchStart} from "../../action";
 import type {BattleSceneState} from "../index";
-import {createTouchEventRaycaster} from "../../../touch/touch-event-raycaster";
-import type {TouchEventRaycaster} from "../../../touch/touch-event-raycaster";
+import {createTouchEventRaycaster} from "../../../touch/touch-raycaster";
+import type {TouchEventRaycaster} from "../../../touch/touch-raycaster";
 
 /** ゲーム画面内をタッチスタートした際のイベント */
 export function touchStart(view: BattleSceneView, state: BattleSceneState, action: TouchStart) {

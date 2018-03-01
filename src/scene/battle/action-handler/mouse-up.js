@@ -4,9 +4,9 @@ import * as THREE from 'three';
 import {BattleSceneView} from "../view";
 import type {MouseUp} from "../../action";
 import type {BattleSceneState} from "../index";
-import {getRaycaster} from "../../../touch/raycaster";
+import {getRaycaster} from "../../../touch/pointer-raycaster";
 import {HudLayer} from "../view/hud-layer";
-import {getMousePosition} from "../../../touch/pointer-position";
+import {getMousePosition} from "../../../touch/mouse-position";
 
 /** ゲーム画面をマウスオーバーした際のイベント */
 export function mouseUp(view: BattleSceneView, state: BattleSceneState, action: MouseUp) {

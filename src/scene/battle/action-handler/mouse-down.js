@@ -4,9 +4,10 @@ import * as THREE from 'three';
 import {BattleSceneView} from "../view";
 import type {MouseDown} from "../../action";
 import type {BattleSceneState} from "../index";
-import {getRaycaster} from "../../../touch/raycaster";
+import {getRaycaster} from "../../../touch/pointer-raycaster";
 import {HudLayer} from "../view/hud-layer";
-import {getMousePosition, getPointerPosition} from "../../../touch/pointer-position";
+import {getPointerPosition} from "../../../touch/pointer-position";
+import {getMousePosition} from "../../../touch/mouse-position";
 
 /** ゲーム画面内をマウスダウンした際のイベント */
 export function mouseDown(view: BattleSceneView, state: BattleSceneState, action: MouseDown) {
