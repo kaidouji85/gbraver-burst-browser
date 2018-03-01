@@ -3,14 +3,17 @@
 import type {TouchEventRaycaster, TouchRaycaster} from "./touch-raycaster";
 import type {TouchTarget} from "./touch-target";
 
-/** タッチイベントレイキャストから生成した、オブジェクトとの当たり判定 */
+/**
+ * 指とオブジェクトの当たり判定結果
+ * 本オブジェクトはTouchEventのレイアウトを参考にしている
+ */
 export type TouchEventOverlap = {
   changedTouches: TouchOverlap[],
   targetTouches: TouchOverlap[],
   touches: TouchOverlap[],
 };
 
-/** 単位タッチの当たり判定 */
+/** 単位タッチとオブジェクトの当たり判定結果 */
 export type TouchOverlap = {
   identifier: number,
   isOverlap: boolean,

@@ -13,4 +13,6 @@ export function touchEnd(view: BattleSceneView, state: BattleSceneState, action:
 
   const hudRaycaster: TouchEventRaycaster = createTouchEventRaycaster(action.event, view.renderer, view.hudLayer.camera);
   console.log(hudRaycaster);
+
+  view.hudLayer.attackButton.onTouchEnd(hudRaycaster);
 }

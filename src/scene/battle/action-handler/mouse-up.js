@@ -12,11 +12,6 @@ export function mouseUp(view: BattleSceneView, state: BattleSceneState, action: 
   console.log('mouseUp');
   console.log(action.event);
 
-  hudLayer(view.hudLayer, view.renderer, action.event);
-}
-
-/** HUDレイヤーの処理 */
-function hudLayer(hudLayer: HudLayer, renderer: THREE.Render,event: MouseEvent): void {
-  const raycaster: THREE.Raycaster = getMouseRaycaster(event, renderer, hudLayer.camera);
-  hudLayer.attackButton.onMouseUp(raycaster);
+  const hudRaycaster: THREE.Raycaster = getMouseRaycaster(action.event, view.renderer, view.hudLayer.camera);
+  view.hudLayer.attackButton.onMouseUp(hudRaycaster);
 }

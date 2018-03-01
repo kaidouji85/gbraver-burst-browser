@@ -27,7 +27,7 @@ export class ClickChecker {
    * touchDown、touchUpイベントを履歴を保存する
    * 判定に必要な、直近2件のみを残す
    */
-  _touchEventList: Rx.Subject;
+  _clickEventStream: Rx.Subject;
 
   constructor(param: {onClick: () => void}) {
     const CLICK_EVENT_LIST: ClickEvent[] = [
@@ -35,8 +35,8 @@ export class ClickChecker {
       {type: 'mouseTouchUp', isOverlap: true}
     ];
 
-    this._touchEventList = new Rx.Subject();
-    this._touchEventList
+    this._clickEventStream = new Rx.Subject();
+    this._clickEventStream
       .bufferCount(2)
       .subscribe((eventList: Event[]) => {
         const isClick = R.equals(eventList, CLICK_EVENT_LIST);
@@ -52,7 +52,7 @@ export class ClickChecker {
    * @param isOverlap クリック判定対象とマウスが重なっているか否かのフラグ、trueで重なっている
    */
   onMouseDown(isOverlap: boolean) {
-    this._touchEventList.next({type: 'mouseTouchDown', isOverlap});
+    this._clickEventStream.next({type: 'mouseTouchDown', isOverlap});
   }
 
   /**
@@ -61,6 +61,6 @@ export class ClickChecker {
    * @param isOverlap クリック判定対象とマウスが重なっているか否かのフラグ、trueで重なっている
    */
   onMouseUp(isOverlap: boolean) {
-    this._touchEventList.next({type: 'mouseTouchUp', isOverlap});
+    this._clickEventStream.next({type: 'mouseTouchUp', isOverlap});
   };
 }
