@@ -35,7 +35,8 @@ export class TapChecker {
 
     };
     const noOverlap = (touchOverlap: TouchEventOverlap): boolean => {
-      return touchOverlap.touches.filter(v => v.isOverlap).length === 0;
+      return touchOverlap.touches.filter(v => v.isOverlap).length === 0
+        && touchOverlap.changedTouches.filter(v => v.isOverlap).length > 0;
     };
 
     this._tapEventStream
