@@ -26,6 +26,12 @@ export class Button {
       onClick: () => {
         // TODO テスト用なので削除する
         alert('クリックしたよ');
+      },
+      onClickStart: () => {
+        console.log('click start');
+      },
+      onClickCancel: () => {
+        console.log('click cancel');
       }
     });
     this._tapChecker = new TapChecker({

@@ -7,30 +7,51 @@ type ClickEvent = MouseTouchDown | MouseTouchStart;
 
 /** マウスダウン*/
 type MouseTouchDown = {
-  type: 'mouseTouchDown',
+  type: 'mouseDown',
   isOverlap: boolean
 }
 
 /** マウスアップ */
 type MouseTouchStart = {
-  type: 'mouseTouchUp',
+  type: 'mouseUp',
   isOverlap: boolean
 }
+
+type Param = {
+  /** クリックした際のコールバック関数 */
+  onClick: () => void,
+  /** クリック開始された際のコールバック関数 */
+  onClickStart: () => void,
+  /** クリックキャンセルされた際のコールバック関数 */
+  onClickCancel: () => void
+};
 
 /** マウスのクリック判定をする*/
 export class ClickChecker {
   _clickEventStream: Rx.Subject;
 
-  constructor(param: {onClick: () => void}) {
+  constructor(param: Param) {
     this._clickEventStream = new Rx.Subject();
 
     this._clickEventStream
       .bufferCount(2)
       .filter((eventList: ClickEvent[]) => R.equals(eventList, [
-        {type: 'mouseTouchDown', isOverlap: true},
-        {type: 'mouseTouchUp', isOverlap: true}
+        {type: 'mouseDown', isOverlap: true},
+        {type: 'mouseUp', isOverlap: true}
       ]))
       .subscribe(() => param.onClick());
+
+    this._clickEventStream
+      .filter((event: ClickEvent) => R.equals(event, {type: 'mouseDown', isOverlap: true}))
+      .subscribe(() => param.onClickStart());
+
+    this._clickEventStream
+      .bufferCount(2)
+      .filter((eventList: ClickEvent[]) => R.equals(eventList, [
+        {type: 'mouseDown', isOverlap: true},
+        {type: 'mouseUp', isOverlap: false}
+      ]))
+      .subscribe(() => param.onClickCancel());
   }
 
   /**
@@ -39,7 +60,7 @@ export class ClickChecker {
    * @param isOverlap クリック判定対象とマウスが重なっているか否かのフラグ、trueで重なっている
    */
   onMouseDown(isOverlap: boolean) {
-    this._clickEventStream.next({type: 'mouseTouchDown', isOverlap});
+    this._clickEventStream.next({type: 'mouseDown', isOverlap});
   }
 
   /**
@@ -48,6 +69,6 @@ export class ClickChecker {
    * @param isOverlap クリック判定対象とマウスが重なっているか否かのフラグ、trueで重なっている
    */
   onMouseUp(isOverlap: boolean) {
-    this._clickEventStream.next({type: 'mouseTouchUp', isOverlap});
+    this._clickEventStream.next({type: 'mouseUp', isOverlap});
   };
 }
