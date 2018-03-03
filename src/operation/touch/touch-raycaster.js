@@ -3,16 +3,21 @@ import * as THREE from 'three';
 import {getRaycaster} from "../raycaster";
 import {getTouchPosition} from "./touch-position";
 
-/** タッチイベントから作成したレイキャスト */
-export type TouchEventRaycaster = {
+/** タッチのレイキャストを集めたもの */
+export type TouchRaycasterState = {
+  /** 前回のタッチと今回のタッチで接触状況が変化したもの */
   changedTouches: TouchRaycaster[],
+  /** 現在ゲーム画面に接触している全てのタッチ */
   targetTouches: TouchRaycaster[],
+  /** 現在のウインドウに接触している全てのタッチ */
   touches: TouchRaycaster[],
 };
 
-/** 単位タッチのレイキャスト */
+/** タッチのレイキャスト */
 export type TouchRaycaster = {
+  /** タッチごとに割り当てられるユニークID */
   identifier: number,
+  /** タッチのレイキャスト */
   raycaster: THREE.Raycaster
 };
 
@@ -24,7 +29,7 @@ export type TouchRaycaster = {
  * @param camera カメラ
  * @return タッチイベントから作成したレイキャスト
  */
-export function createTouchEventRaycaster(event: TouchEvent, renderer: THREE.WebGLRenderer, camera: THREE.Camera): TouchEventRaycaster {
+export function createTouchEventRaycaster(event: TouchEvent, renderer: THREE.WebGLRenderer, camera: THREE.Camera): TouchRaycasterState {
   const createRaycaster = (touchList: TouchList): TouchRaycaster[] =>
     Object.values(touchList)
       .map(v => {

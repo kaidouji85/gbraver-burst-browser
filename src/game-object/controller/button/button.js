@@ -5,8 +5,8 @@ import {TextureButtonView} from "./view/texture-button-view";
 import {ButtonView} from "./view/button-view";
 import {ClickChecker} from "../../../operation/mouse/click-checker";
 import {TapChecker} from "../../../operation/touch/tap-checker";
-import type {TouchEventOverlap} from "../../../operation/touch/touch-overlap";
-import type {TouchEventRaycaster} from "../../../operation/touch/touch-raycaster";
+import type {TouchOverlapState} from "../../../operation/touch/touch-overlap";
+import type {TouchRaycasterState} from "../../../operation/touch/touch-raycaster";
 import {createTouchEventOverlap} from "../../../operation/touch/touch-overlap";
 
 /** ボタンのクラス */
@@ -46,25 +46,27 @@ export class Button {
     return this._view.getThreeJsObjectList();
   }
 
-  /** マウス、指がスクリーンにタッチダウンした際の処理 */
+  /** マウスダウンした際の処理 */
   onMouseDown(raycaster: THREE.Raycater): void {
     const isOverlap = this._view.isOverlap(raycaster);
     this._clickChecker.onMouseDown(isOverlap);
   }
 
-  /** マウス、指がスクリーンにタッチアップした際の処理 */
+  /** マウスアップした際の処理 */
   onMouseUp(raycaster: THREE.Raycater): void {
     const isOverlap = this._view.isOverlap(raycaster);
     this._clickChecker.onMouseUp(isOverlap);
   }
 
-  onTouchStart(touchRaycaster: TouchEventRaycaster): void {
-    const touchOverlap: TouchEventOverlap = createTouchEventOverlap(touchRaycaster, this._view);
+  /** ゲーム画面でタッチスタートした際の処理 */
+  onTouchStart(touchRaycaster: TouchRaycasterState): void {
+    const touchOverlap: TouchOverlapState = createTouchEventOverlap(touchRaycaster, this._view);
     this._tapChecker.onTouchStart(touchOverlap);
   }
 
-  onTouchEnd(touchRaycaster: TouchEventRaycaster): void {
-    const touchOverlap: TouchEventOverlap = createTouchEventOverlap(touchRaycaster, this._view);
+  /** ゲーム画面でタッチスエンドした際の処理 */
+  onTouchEnd(touchRaycaster: TouchRaycasterState): void {
+    const touchOverlap: TouchOverlapState = createTouchEventOverlap(touchRaycaster, this._view);
     this._tapChecker.onTouchEnd(touchOverlap);
   }
 }
