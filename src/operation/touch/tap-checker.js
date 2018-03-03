@@ -30,22 +30,15 @@ export class TapChecker {
   constructor(param: Param) {
     this._tapEventStream = new Rx.Subject();
 
-    const isOverlap = (touchOverlap: TouchOverlapState): boolean => {
-      return touchOverlap.touches.filter(v => v.isOverlap).length > 0;
-
-    };
-    const noOverlap = (touchOverlap: TouchOverlapState): boolean => {
-      return touchOverlap.touches.filter(v => v.isOverlap).length === 0
-        && touchOverlap.changedTouches.filter(v => v.isOverlap).length > 0;
-    };
-
     this._tapEventStream
       .bufferCount(2)
-      .filter((v: TapEvent[]) => v[0].type === 'touchStart')
-      .filter((v: TapEvent[]) => isOverlap(v[0].touchOverlap))
-      .filter((v: TapEvent[]) => v[1].type === 'touchEnd')
-      .filter((v: TapEvent[]) => noOverlap(v[1].touchOverlap))
-      .subscribe(() => param.onTap());
+      .filter((eventList: TapEvent[]) =>
+        eventList[0].type === 'touchStart'
+        && eventList[0].touchOverlap.touches.filter(v => v.isOverlap).length > 0
+        && eventList[1].type === 'touchEnd'
+        && eventList[1].touchOverlap.touches.filter(v => v.isOverlap).length === 0
+        && eventList[1].touchOverlap.changedTouches.filter(v => v.isOverlap).length > 0
+      ).subscribe(() => param.onTap());
   }
 
   /**
