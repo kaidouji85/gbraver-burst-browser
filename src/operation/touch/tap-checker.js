@@ -1,6 +1,6 @@
 // @flow
 import Rx from "rxjs/Rx";
-import type {TouchOverlapState} from "./touch-overlap";
+import type {TouchOverlapContainer} from "./touch-overlap";
 
 /** タップ判定に関するイベントを集めたもの */
 type TapEvent = TouchStart | TouchEnd;
@@ -8,15 +8,14 @@ type TapEvent = TouchStart | TouchEnd;
 /** タッチスタート */
 type TouchStart = {
   type: 'touchStart',
-  touchOverlap: TouchOverlapState
+  touchOverlap: TouchOverlapContainer
 };
 
 /** タッチエンド */
 type TouchEnd = {
   type: 'touchEnd',
-  touchOverlap: TouchOverlapState
+  touchOverlap: TouchOverlapContainer
 };
-
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -46,7 +45,7 @@ export class TapChecker {
    *
    * @param touchOverlap 指とオブジェクトの当たり判定
    */
-  onTouchStart(touchOverlap: TouchOverlapState) {
+  onTouchStart(touchOverlap: TouchOverlapContainer) {
     this._tapEventStream.next({type: 'touchStart', touchOverlap});
   }
 
@@ -55,7 +54,7 @@ export class TapChecker {
    *
    * @param touchOverlap 指とオブジェクトの当たり判定
    */
-  onTouchEnd(touchOverlap: TouchOverlapState) {
+  onTouchEnd(touchOverlap: TouchOverlapContainer) {
     this._tapEventStream.next({type: 'touchEnd', touchOverlap});
   }
 }

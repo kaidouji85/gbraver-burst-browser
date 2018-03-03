@@ -1,12 +1,12 @@
 // @flow
 
-import type {TouchRaycasterState, TouchRaycaster} from "./touch-raycaster";
+import type {TouchRaycastContainer, TouchRaycaster} from "./touch-raycaster";
 import type {TouchTarget} from "./touch-target";
 
 /**
  * タッチとオブジェクトの当たり判定結果を集めたもの
  */
-export type TouchOverlapState = {
+export type TouchOverlapContainer = {
   /** 前回のタッチと今回のタッチで接触状況が変化したもの */
   changedTouches: TouchOverlap[],
   /** 現在ゲーム画面に接触している全てのタッチ */
@@ -30,7 +30,7 @@ export type TouchOverlap = {
  * @param target タッチ対象のターゲット
  * @return タッチイベントレイキャストからターゲットとの当たり判定
  */
-export function createTouchEventOverlap(touchRaycaster: TouchRaycasterState, target: TouchTarget): TouchOverlapState {
+export function createTouchEventOverlap(touchRaycaster: TouchRaycastContainer, target: TouchTarget): TouchOverlapContainer {
   const createTouchOverlap = (touchRaycaster: TouchRaycaster): TouchOverlap => ({
     identifier: touchRaycaster.identifier,
     isOverlap: target.isOverlap(touchRaycaster.raycaster)
