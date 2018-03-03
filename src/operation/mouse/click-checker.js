@@ -2,9 +2,7 @@
 import Rx from "rxjs/Rx";
 import * as R from 'ramda';
 
-/**
- *クリック判定に必要なイベントを集めたもの
- */
+/** クリック判定に必要なイベントを集めたもの */
 type ClickEvent = MouseTouchDown | MouseTouchStart;
 
 /** マウスダウン*/
@@ -19,31 +17,20 @@ type MouseTouchStart = {
   isOverlap: boolean
 }
 
-
 /** マウスのクリック判定をする*/
 export class ClickChecker {
-  /**
-   * イベント実行履歴
-   * touchDown、touchUpイベントを履歴を保存する
-   * 判定に必要な、直近2件のみを残す
-   */
   _clickEventStream: Rx.Subject;
 
   constructor(param: {onClick: () => void}) {
-    const CLICK_EVENT_LIST: ClickEvent[] = [
-      {type: 'mouseTouchDown', isOverlap: true},
-      {type: 'mouseTouchUp', isOverlap: true}
-    ];
-
     this._clickEventStream = new Rx.Subject();
+
     this._clickEventStream
       .bufferCount(2)
-      .subscribe((eventList: Event[]) => {
-        const isClick = R.equals(eventList, CLICK_EVENT_LIST);
-        if (isClick) {
-          param.onClick();
-        }
-      });
+      .filter((eventList: ClickEvent[]) => R.equals(eventList, [
+        {type: 'mouseTouchDown', isOverlap: true},
+        {type: 'mouseTouchUp', isOverlap: true}
+      ]))
+      .subscribe(() => param.onClick());
   }
 
   /**
