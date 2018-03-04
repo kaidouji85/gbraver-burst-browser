@@ -8,8 +8,8 @@ import {createTouchEventRaycaster} from "../../../operation/touch/touch-raycaste
 
 /** ゲーム画面内をタッチスタートした際のイベント */
 export function touchStart(view: BattleSceneView, state: BattleSceneState, action: TouchStart) {
-  console.log('touchStart');
-  console.log(action.event);
+  //console.log('touchStart');
+  //console.log(action.event);
 
   const hudRaycaster: TouchRaycastContainer = createTouchEventRaycaster(action.event, view.renderer, view.hudLayer.camera);
   console.log(hudRaycaster);

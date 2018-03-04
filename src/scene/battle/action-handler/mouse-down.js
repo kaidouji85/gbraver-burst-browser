@@ -9,8 +9,8 @@ import {getMouseRaycaster} from "../../../operation/mouse/mouse-raycaster";
 
 /** ゲーム画面内をマウスダウンした際のイベント */
 export function mouseDown(view: BattleSceneView, state: BattleSceneState, action: MouseDown) {
-  console.log('mouseDown');
-  console.log(action.event);
+  //console.log('mouseDown');
+  //console.log(action.event);
 
   const hudRaycaster: THREE.Raycaster = getMouseRaycaster(action.event, view.renderer, view.hudLayer.camera);
   view.hudLayer.attackButton.onMouseDown(hudRaycaster);

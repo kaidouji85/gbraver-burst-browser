@@ -12,6 +12,11 @@ import {createTouchEventOverlap} from "../../../operation/touch/touch-overlap";
 import {pushStart} from "./model/push-start";
 import {pushEnd} from "./model/push-end";
 
+type Param = {
+  view: TextureButtonView,
+  onPush: () => void
+};
+
 /** ボタンのクラス */
 export class Button {
   _model: ButtonModel;
@@ -20,17 +25,17 @@ export class Button {
   _clickChecker: ClickChecker;
   _tapChecker: TapChecker;
 
-  constructor(view: TextureButtonView) {
+  constructor(param: Param) {
     this._model = {
       depth: 0,
       opacity: 1
     };
-    this._view = view;
+    this._view = param.view;
     this._depthGroup = new Group();
     this._clickChecker = new ClickChecker({
       onClick: () => {
         this._pushEnd();
-        console.log('on click');  // TODO テスト用なので削除する
+        param.onPush();
       },
       onClickStart: () => this._pushStart(),
       onClickCancel: () => this._pushEnd()
