@@ -19,7 +19,12 @@ type TouchEnd = {
 
 /** コンストラクタのパラメータ */
 type Param = {
-  onTap: () => void
+  /** 対象がタップされた際のコールバック関数 */
+  onTap: () => void,
+  /** 対象がタップ開始された際のコールバック関数 */
+  onTapStart: () => void,
+  /** 対象がタップキャンセルされた際のコールバック関数 */
+  onTapCancel: () => void
 };
 
 /** 画面上のオブジェクトをタップしたかを判定する */
@@ -33,11 +38,27 @@ export class TapChecker {
       .bufferCount(2)
       .filter((eventList: TapEvent[]) =>
         eventList[0].type === 'touchStart'
-        && eventList[0].touchOverlap.touches.filter(v => v.isOverlap).length > 0
+        && eventList[0].touchOverlap.targetTouches.filter(v => v.isOverlap).length > 0
         && eventList[1].type === 'touchEnd'
-        && eventList[1].touchOverlap.touches.filter(v => v.isOverlap).length === 0
+        && eventList[1].touchOverlap.targetTouches.filter(v => v.isOverlap).length === 0
         && eventList[1].touchOverlap.changedTouches.filter(v => v.isOverlap).length > 0
       ).subscribe(() => param.onTap());
+
+    this._tapEventStream
+      .filter((event: TapEvent) =>
+        event.type === 'touchStart'
+        && event.touchOverlap.targetTouches.filter(v => v.isOverlap).length > 0
+      ).subscribe(() => param.onTapStart());
+
+    this._tapEventStream
+      .bufferCount(2)
+      .filter((eventList: TapEvent[]) =>
+        eventList[0].type === 'touchStart'
+        && eventList[0].touchOverlap.targetTouches.filter(v => v.isOverlap).length > 0
+        && eventList[1].type === 'touchEnd'
+        && eventList[1].touchOverlap.targetTouches.filter(v => v.isOverlap).length === 0
+        && eventList[1].touchOverlap.changedTouches.filter(v => v.isOverlap).length === 0
+      ).subscribe(() => param.onTapCancel());
   }
 
   /**

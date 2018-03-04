@@ -12,8 +12,11 @@ import {createTouchEventOverlap} from "../../../operation/touch/touch-overlap";
 import {pushStart} from "./model/push-start";
 import {pushEnd} from "./model/push-end";
 
+/** コンストラクタのパラメータ */
 type Param = {
+  /** ボタンで使うビュー */
   view: TextureButtonView,
+  /** ボタンがクリックされた際のコールバック関数 */
   onPush: () => void
 };
 
@@ -42,8 +45,12 @@ export class Button {
 
     });
     this._tapChecker = new TapChecker({
-      // TODO テスト用なので削除する
-      onTap: () => alert('タップしたよ')
+      onTap: () => {
+        this._pushEnd();
+        param.onPush();
+      },
+      onTapStart: () => this._pushStart(),
+      onTapCancel: () => this._pushEnd()
     })
   }
 
