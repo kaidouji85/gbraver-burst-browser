@@ -5,6 +5,7 @@ import type {Action} from "../action";
 import type {Observer} from '../observer';
 import {BattleSceneView} from "./view";
 import {actionHandler} from "./action-handler";
+import {bindHtmlEventToScene} from "./html-event-binder";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -35,6 +36,7 @@ export class BattleScene implements Observer {
       state: this.state,
       observer: this
     });
+    bindHtmlEventToScene(this, this.view.renderer.domElement);
   };
 
   /** 通知されたイベントに応じて、実際のアクションを呼び出す */

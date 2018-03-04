@@ -6,7 +6,7 @@ import type {BatteryGaugeModel} from "../model/battery-gauge-model";
 import type {Resources} from "../../../../resource/index";
 import * as THREE from "three";
 import {rectangle} from "../../../../uv-mapping/rectangle";
-import {drawEnemyBatteryGauge, drawPlayerBatteryGauge} from "../../../../canvas/draw/battery-gauge";
+import {drawEnemyBatteryGauge} from "../../../../canvas/draw/battery-gauge";
 
 /** 敵バッテリーゲージ */
 export class EnemyBatteryGaugeView extends CanvasMesh implements BatteryGaugeView {

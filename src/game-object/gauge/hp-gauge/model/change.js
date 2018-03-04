@@ -1,6 +1,6 @@
 // @flow
 import type {HpGaugeModel} from "./hp-gauge-model";
-import {Tween, Group} from '@tweenjs/tween.js';
+import {Group, Tween} from '@tweenjs/tween.js';
 
 const SPEED = 3000;
 

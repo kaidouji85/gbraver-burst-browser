@@ -4,7 +4,11 @@
 export type Action =
   | ResizeAction
   | GameLoopAction
-  | DebugModeAction;
+  | DebugModeAction
+  | MouseDown
+  | MouseUp
+  | TouchStart
+  | TouchEnd;
 
 /** リサイズ */
 export type ResizeAction = {
@@ -20,4 +24,28 @@ export type GameLoopAction = {
 /** デバッグモード */
 export type DebugModeAction = {
   type: 'debugMode'
+};
+
+/** マウスダウン */
+export type MouseDown = {
+  type: 'mouseDown',
+  event: MouseEvent
+};
+
+/** マウスオーバー */
+export type MouseUp = {
+  type: 'mouseUp',
+  event: MouseEvent
+};
+
+/** タッチスタートイベント */
+export type TouchStart = {
+  type: 'touchStart',
+  event: TouchEvent
+};
+
+/** タッチエンドイベント */
+export type TouchEnd = {
+  type: 'touchEnd',
+  event: TouchEvent
 };

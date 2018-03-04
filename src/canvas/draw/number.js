@@ -1,7 +1,5 @@
 // @flow
 
-import type {Resources} from '../../resource/index'
-
 /**
  * キャンバスに画像数字を描画する
  * ローカル座標原点は数字の左上となる

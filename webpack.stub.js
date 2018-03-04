@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const R = require('ramda');
 
 /** スタブソースコードのベースとなるパス */
 const STUB_PATH = path.resolve(__dirname, 'stub');
@@ -29,40 +28,19 @@ const STUB_ENTRY_FILES = {
   'game-object/armdozer/enemy-shin-braver': `${STUB_PATH}/game-object/armdozer/enemy-shin-braver`,
 };
 
-/**
- * スタブを動かすHTMLを生成するWebpackPlugin
- * 生成するファイルが多岐にわたるため、HtmlWebpackPluginも配列になる
- */
-const OUTPUT_HTML_LIST = R.pipe(
-  R.mapObjIndexed((value, key) => new HtmlWebpackPlugin({
-    chunks: [key],
-    filename: `${SERVE_PATH}/${key}.html`,
-    template: 'template/index.html'
-  })),
-  R.values
-)(STUB_ENTRY_FILES);
-
-/**
- * リソースファイルをコピーするWebpackPlugin
- */
-const COPY_RESOURCES = new CopyWebpackPlugin([{
-  from: path.resolve(__dirname, "resources"),
-  to: `${SERVE_PATH}/resources`
-}]);
-
 module.exports = {
   entry: STUB_ENTRY_FILES,
   output: {
     path: SERVE_PATH,
     filename: '[name].js'
   },
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   devServer: {
     contentBase: SERVE_PATH,
     port: 8080
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
@@ -70,7 +48,16 @@ module.exports = {
       }
     ]
   },
-  plugins: []
-    .concat(OUTPUT_HTML_LIST)
-    .concat(COPY_RESOURCES)
+  plugins: [
+    ...Object.keys(STUB_ENTRY_FILES).map(key =>
+      new HtmlWebpackPlugin({
+        chunks: [key],
+        filename: `${SERVE_PATH}/${key}.html`,
+        template: 'template/index.html'
+      })),
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, "resources"),
+      to: `${SERVE_PATH}/resources`
+    }])
+  ]
 };
