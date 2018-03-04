@@ -1,5 +1,6 @@
 // @flow
 import * as THREE from "three";
+import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
 import {TextureButtonView} from "./view/texture-button-view";
 import {ButtonView} from "./view/button-view";
@@ -8,42 +9,42 @@ import {TapChecker} from "../../../operation/touch/tap-checker";
 import type {TouchOverlapContainer} from "../../../operation/touch/touch-overlap";
 import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";
 import {createTouchEventOverlap} from "../../../operation/touch/touch-overlap";
+import {pushStart} from "./model/push-start";
+import {pushEnd} from "./model/push-end";
 
 /** ボタンのクラス */
 export class Button {
   _model: ButtonModel;
   _view: ButtonView;
+  _depthGroup: Group;
   _clickChecker: ClickChecker;
   _tapChecker: TapChecker;
 
   constructor(view: TextureButtonView) {
     this._model = {
-      depth: 1,
+      depth: 0,
       opacity: 1
     };
     this._view = view;
+    this._depthGroup = new Group();
     this._clickChecker = new ClickChecker({
       onClick: () => {
-        // TODO テスト用なので削除する
-        alert('クリックしたよ');
+        this._pushEnd();
+        console.log('on click');  // TODO テスト用なので削除する
       },
-      onClickStart: () => {
-        console.log('click start');
-      },
-      onClickCancel: () => {
-        console.log('click cancel');
-      }
+      onClickStart: () => this._pushStart(),
+      onClickCancel: () => this._pushEnd()
+
     });
     this._tapChecker = new TapChecker({
-      onTap: () => {
-        // TODO テスト用なので削除する
-        alert('タップしたよ');
-      }
+      // TODO テスト用なので削除する
+      onTap: () => alert('タップしたよ')
     })
   }
 
   /** ゲームループ */
   gameLoop(time: DOMHighResTimeStamp) {
+    this._depthGroup.update(time);
     this._view.gameLoop(this._model);
   }
 
@@ -74,5 +75,17 @@ export class Button {
   onTouchEnd(touchRaycaster: TouchRaycastContainer): void {
     const touchOverlap: TouchOverlapContainer = createTouchEventOverlap(touchRaycaster, this._view);
     this._tapChecker.onTouchEnd(touchOverlap);
+  }
+
+  /** ボタン押し込み開始アニメーションを再生する */
+  _pushStart() {
+    this._depthGroup.removeAll();
+    pushStart(this._model, this._depthGroup).start();
+  }
+
+  /** ボタン押し込み終了アニメーションを再生する */
+  _pushEnd() {
+    this._depthGroup.removeAll();
+    pushEnd(this._model, this._depthGroup).start();
   }
 }

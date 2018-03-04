@@ -27,7 +27,8 @@ export class TextureButtonView implements ButtonView {
 
   /** モデルをビューに反映させる */
   gameLoop(model: ButtonModel) {
-    // モデルを反映させる
+    const scale = 1 - 0.15 * model.depth;
+    this._mesh.scale.set(scale, scale, scale);
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */
