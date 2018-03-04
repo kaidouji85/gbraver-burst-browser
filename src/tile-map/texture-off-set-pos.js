@@ -1,6 +1,6 @@
 // @flow
 
-import type {TileMapJson, TileSetJson} from "../flow-typed/tiled";
+import type {TileMapJson, TileSetJson} from "./tiled";
 
 /**
  *  タイルチップIDからテクスチャオフセット座標を計算する

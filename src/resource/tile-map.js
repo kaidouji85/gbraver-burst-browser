@@ -1,6 +1,6 @@
 // @flow
 
-import type {TileMapJson, TileSetJson} from "../flow-typed/tiled";
+import type {TileMapJson, TileSetJson} from "../tile-map/tiled";
 import SCHOOL_GROUND_TILE_MAP from '../../resources/tile-map/school-ground/tile-data.json';
 import SCHOOL_GROUND_TILE_SET from '../../resources/tile-map/school-ground/map.json';
 
