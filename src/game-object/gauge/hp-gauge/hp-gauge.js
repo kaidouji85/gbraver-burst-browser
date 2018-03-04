@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import {Tween, Group} from '@tweenjs/tween.js'
+import {Group, Tween} from '@tweenjs/tween.js'
 import type {HpGaugeView} from "./view/hp-gauge-view";
 import type {HpGaugeModel} from "./model/hp-gauge-model";
 import {change} from "./model/change";

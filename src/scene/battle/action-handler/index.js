@@ -5,6 +5,10 @@ import {BattleScene} from "../index";
 import {gameLoop} from "./game-loop";
 import {debugMode} from "./debug-mode";
 import {resize} from "./resize";
+import {mouseDown} from "./mouse-down";
+import {mouseUp} from "./mouse-up";
+import {touchStart} from "./touch-start";
+import {touchEnd} from "./touch-end";
 
 /** アクションハンドラ */
 export function actionHandler(action: Action, scene: BattleScene) {
@@ -15,6 +19,14 @@ export function actionHandler(action: Action, scene: BattleScene) {
       return resize(scene.view, scene.state, action);
     case 'debugMode':
       return debugMode(scene.view, scene.state, action);
+    case 'mouseDown':
+      return mouseDown(scene.view, scene.state, action);
+    case 'mouseUp':
+      return mouseUp(scene.view, scene.state, action);
+    case 'touchStart':
+      return touchStart(scene.view, scene.state, action);
+    case 'touchEnd':
+      return touchEnd(scene.view, scene.state, action);
     default:
       return;
   }

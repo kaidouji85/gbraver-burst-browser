@@ -1,5 +1,4 @@
 // @flow
-import type {Resources} from '../../resource/index';
 
 /**
  * 指定した画像をキャンバスに描画する

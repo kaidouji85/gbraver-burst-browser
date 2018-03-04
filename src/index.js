@@ -24,7 +24,7 @@ import type {Observer} from "./scene/observer";
       }
     )
   });
-  scene.notify({type: 'debugMode'});
+  //scene.notify({type: 'debugMode'});
 
   const gameLoop = (time: DOMHighResTimeStamp) => {
     requestAnimationFrame(gameLoop);
