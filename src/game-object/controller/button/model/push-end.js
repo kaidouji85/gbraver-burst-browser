@@ -1,8 +1,7 @@
 // @flow
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./button-model";
-
-const SPEED = 32;
+import {SPEED} from "./button-model";
 
 /** ボタン押し込み終了アニメーション */
 export function pushEnd(model: ButtonModel, tweenGroup: Group): Tween {
