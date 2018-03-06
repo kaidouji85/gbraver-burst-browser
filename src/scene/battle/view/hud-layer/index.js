@@ -48,13 +48,13 @@ export class HudLayer {
     this.playerHpGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.playerBatteryGauge = createPlayerBatteryGauge(props.resources, props.state);
-    this.playerBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
+    //this.playerBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.enemyHpGauge = createEnemyHpGauge(props.resources, props.state);
     this.enemyHpGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.enemyBatteryGauge = createEnemyBatteryGauge(props.resources, props.state);
-    this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
+    //this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.attackButton = createAttackButton(props.resources);
     this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
