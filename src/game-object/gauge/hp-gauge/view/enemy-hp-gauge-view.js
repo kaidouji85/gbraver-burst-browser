@@ -12,14 +12,6 @@ export class EnemyHpGaugeView extends PlayerHpGaugeView {
     super(resources);
   }
 
-  /** ビューにモデルを反映させる */
-  /*
-  gameLoop(model: HpGaugeModel): void {
-    this._refreshGauge(model);
-    this._refreshPos();
-  }
-  */
-
   /** ゲージを更新する */
   _refreshGauge(model: HpGaugeModel): void {
     this.draw((context: CanvasRenderingContext2D) => {

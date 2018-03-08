@@ -54,7 +54,7 @@ export class HudLayer {
     this.enemyHpGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.enemyBatteryGauge = createEnemyBatteryGauge(props.resources, props.state);
-    //this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
+    this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.attackButton = createAttackButton(props.resources);
     this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
