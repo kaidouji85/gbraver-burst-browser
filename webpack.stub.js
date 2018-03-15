@@ -29,6 +29,7 @@ const STUB_ENTRY_FILES = {
 };
 
 module.exports = {
+  mode: 'development',
   entry: STUB_ENTRY_FILES,
   output: {
     path: SERVE_PATH,

@@ -4,6 +4,7 @@ const WorkBoxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   ...config,
+  mode: 'production',
   plugins: [
     ...config.plugins,
     new WorkBoxPlugin({
