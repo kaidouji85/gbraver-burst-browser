@@ -17,6 +17,10 @@ type MouseTouchStart = {
   isOverlap: boolean
 }
 
+/** 各種判定のスロットルインターバル */
+const THROTTLE_INTERVAL = 300;
+
+/** コンストラクタのパラメータ */
 type Param = {
   /** クリックした際のコールバック関数 */
   onClick: () => void,
@@ -39,10 +43,12 @@ export class ClickChecker {
         {type: 'mouseDown', isOverlap: true},
         {type: 'mouseUp', isOverlap: true}
       ]))
+      .throttle(() => Rx.Observable.interval(THROTTLE_INTERVAL))
       .subscribe(() => param.onClick());
 
     this._clickEventStream
       .filter((event: ClickEvent) => R.equals(event, {type: 'mouseDown', isOverlap: true}))
+      .throttle(() => Rx.Observable.interval(THROTTLE_INTERVAL))
       .subscribe(() => param.onClickStart());
 
     this._clickEventStream
@@ -51,6 +57,7 @@ export class ClickChecker {
         {type: 'mouseDown', isOverlap: true},
         {type: 'mouseUp', isOverlap: false}
       ]))
+      .throttle(() => Rx.Observable.interval(THROTTLE_INTERVAL))
       .subscribe(() => param.onClickCancel());
   }
 

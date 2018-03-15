@@ -8,16 +8,20 @@ import type {HpGaugeModel} from "../model/hp-gauge-model";
 import {drawPlayerHpGauge} from "../../../../canvas/draw/hp-gauge";
 import {rectangle} from "../../../../uv-mapping/rectangle";
 
+/** メッシュ幅 */
+export const GAUGE_WIDTH = 300;
+/** ゲージ高 */
+export const GAUGE_HEIGHT = 80;
+/** 上パディング */
+export const PADDING_TOP = 40;
+
 /** プレイヤーHPゲージ */
 export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
   constructor(resources: Resources) {
-    const meshWidth = 300;
-    const meshHeight = 80;
-
     super({
       resources,
-      meshWidth,
-      meshHeight,
+      meshWidth: GAUGE_WIDTH,
+      meshHeight: GAUGE_HEIGHT,
       canvasWidth: 256,
       canvasHeight: 256,
     });
@@ -27,12 +31,14 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
       geo: this.mesh.geometry,
       pos: new THREE.Vector2(0, 0),
       width: 1,
-      height: meshHeight / meshWidth
+      height: GAUGE_HEIGHT / GAUGE_WIDTH
     });
   }
 
   /** ビューにモデルを反映させる */
   gameLoop(model: HpGaugeModel): void {
+    const scale = this._getScale();
+    this.mesh.scale.set(scale, scale, scale);
     this._refreshGauge(model);
     this._refreshPos();
   }
@@ -49,7 +55,14 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    this.mesh.position.x = (window.innerWidth - this.meshWidth) / 2;
-    this.mesh.position.y = window.innerHeight / 2 - 40;
+    const scale = this._getScale();
+    this.mesh.position.x = (window.innerWidth - GAUGE_WIDTH * scale) / 2;
+    this.mesh.position.y = window.innerHeight / 2 - PADDING_TOP * scale;
+  }
+
+  /** 本ゲームオブジェクトのスケールを返す */
+  _getScale(): number {
+    // TODO デバイスに応じて適切な値にする
+    return 0.6;
   }
 }

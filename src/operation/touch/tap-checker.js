@@ -17,6 +17,9 @@ type TouchEnd = {
   touchOverlap: TouchOverlapContainer
 };
 
+/** 各種判定のスロットルインターバル */
+const THROTTLE_INTERVAL = 300;
+
 /** コンストラクタのパラメータ */
 type Param = {
   /** 対象がタップされた際のコールバック関数 */
@@ -42,13 +45,17 @@ export class TapChecker {
         && eventList[1].type === 'touchEnd'
         && eventList[1].touchOverlap.targetTouches.filter(v => v.isOverlap).length === 0
         && eventList[1].touchOverlap.changedTouches.filter(v => v.isOverlap).length > 0
-      ).subscribe(() => param.onTap());
+      )
+      .throttle(() => Rx.Observable.interval(THROTTLE_INTERVAL))
+      .subscribe(() => param.onTap());
 
     this._tapEventStream
       .filter((event: TapEvent) =>
         event.type === 'touchStart'
         && event.touchOverlap.targetTouches.filter(v => v.isOverlap).length > 0
-      ).subscribe(() => param.onTapStart());
+      )
+      .throttle(() => Rx.Observable.interval(THROTTLE_INTERVAL))
+      .subscribe(() => param.onTapStart());
 
     this._tapEventStream
       .bufferCount(2)
@@ -58,7 +65,9 @@ export class TapChecker {
         && eventList[1].type === 'touchEnd'
         && eventList[1].touchOverlap.targetTouches.filter(v => v.isOverlap).length === 0
         && eventList[1].touchOverlap.changedTouches.filter(v => v.isOverlap).length === 0
-      ).subscribe(() => param.onTapCancel());
+      )
+      .throttle(() => Rx.Observable.interval(THROTTLE_INTERVAL))
+      .subscribe(() => param.onTapCancel());
   }
 
   /**
@@ -67,7 +76,8 @@ export class TapChecker {
    * @param touchOverlap 指とオブジェクトの当たり判定
    */
   onTouchStart(touchOverlap: TouchOverlapContainer) {
-    this._tapEventStream.next({type: 'touchStart', touchOverlap});
+    this._tapEventStream
+      .next({type: 'touchStart', touchOverlap});
   }
 
   /**
