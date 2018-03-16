@@ -7,7 +7,7 @@ module.exports = {
   mode: 'production',
   plugins: [
     ...config.plugins,
-    new WorkBoxPlugin({
+    new WorkBoxPlugin.GenerateSW({
       globDirectory: config.output.path,
       globPatterns: ['**/*.{html,js,json,png}'],
       swDest: path.join(config.output.path, 'sw.js'),
