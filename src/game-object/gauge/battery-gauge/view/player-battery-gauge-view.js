@@ -14,8 +14,10 @@ export const PADDING_TOP = 96;
 
 /** プレイヤーバッテリーゲージ */
 export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeView {
+  /** デバイスに応じたバッテリーゲージの倍率 */
+  _scale: number;
 
-  constructor(resources: Resources) {
+  constructor(resources: Resources, scale: number) {
     super({
       resources,
       meshWidth: MESH_WIDTH,
@@ -23,6 +25,7 @@ export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeVi
       canvasWidth: 256,
       canvasHeight: 256,
     });
+    this._scale = scale;
 
     // バッテリーゲージに必要な大きさだけテクスチャから抜き取る
     rectangle({
@@ -35,8 +38,7 @@ export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeVi
 
   /** ビューにモデルを反映させる */
   gameLoop(model: BatteryGaugeModel): void {
-    const scale = this._getScale();
-    this.mesh.scale.set(scale, scale, scale);
+    this.mesh.scale.set(this._scale, this._scale, this._scale);
     this._refreshGauge(model);
     this._refreshPos();
   }
@@ -53,14 +55,7 @@ export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeVi
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    const scale = this._getScale();
-    this.mesh.position.x = (window.innerWidth - MESH_WIDTH * scale) / 2;
-    this.mesh.position.y = window.innerHeight / 2 - PADDING_TOP * scale;
-  }
-
-  /** 本ゲームオブジェクトの倍率を返す */
-  _getScale(): number {
-    // TODO デバイスに応じた拡大率を返す
-    return 0.6;
+    this.mesh.position.x = (window.innerWidth - MESH_WIDTH * this._scale) / 2;
+    this.mesh.position.y = window.innerHeight / 2 - PADDING_TOP * this._scale;
   }
 }

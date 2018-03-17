@@ -17,7 +17,10 @@ export const PADDING_TOP = 40;
 
 /** プレイヤーHPゲージ */
 export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
-  constructor(resources: Resources) {
+  /** デバイスに応じたHPゲージの倍率 */
+  _scale: number;
+
+  constructor(resources: Resources, scale: number) {
     super({
       resources,
       meshWidth: GAUGE_WIDTH,
@@ -25,6 +28,7 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
       canvasWidth: 256,
       canvasHeight: 256,
     });
+    this._scale = scale;
 
     // HPゲージに必要な大きさだけテクスチャから抜き取る
     rectangle({
@@ -37,8 +41,7 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
 
   /** ビューにモデルを反映させる */
   gameLoop(model: HpGaugeModel): void {
-    const scale = this._getScale();
-    this.mesh.scale.set(scale, scale, scale);
+    this.mesh.scale.set(this._scale, this._scale, this._scale);
     this._refreshGauge(model);
     this._refreshPos();
   }
@@ -55,14 +58,7 @@ export class PlayerHpGaugeView extends CanvasMesh implements HpGaugeView {
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    const scale = this._getScale();
-    this.mesh.position.x = (window.innerWidth - GAUGE_WIDTH * scale) / 2;
-    this.mesh.position.y = window.innerHeight / 2 - PADDING_TOP * scale;
-  }
-
-  /** 本ゲームオブジェクトのスケールを返す */
-  _getScale(): number {
-    // TODO デバイスに応じて適切な値にする
-    return 0.6;
+    this.mesh.position.x = (window.innerWidth - GAUGE_WIDTH * this._scale) / 2;
+    this.mesh.position.y = window.innerHeight / 2 - PADDING_TOP * this._scale;
   }
 }

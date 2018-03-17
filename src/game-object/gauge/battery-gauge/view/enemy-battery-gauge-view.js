@@ -8,8 +8,8 @@ import {MESH_WIDTH, PADDING_TOP, PlayerBatteryGaugeView} from "./player-battery-
 /** 敵バッテリーゲージ */
 export class EnemyBatteryGaugeView extends PlayerBatteryGaugeView {
 
-  constructor(resources: Resources) {
-    super(resources);
+  constructor(resources: Resources, scale: number) {
+    super(resources, scale);
   }
 
   /** ゲージを更新する */
@@ -24,8 +24,7 @@ export class EnemyBatteryGaugeView extends PlayerBatteryGaugeView {
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    const scale = this._getScale();
-    this.mesh.position.x = (-window.innerWidth + MESH_WIDTH * scale) / 2;
-    this.mesh.position.y = window.innerHeight / 2 - PADDING_TOP * scale;
+    this.mesh.position.x = (-window.innerWidth + MESH_WIDTH * this._scale) / 2;
+    this.mesh.position.y = window.innerHeight / 2 - PADDING_TOP * this._scale;
   }
 }
