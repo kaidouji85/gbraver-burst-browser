@@ -1,5 +1,5 @@
 // @flow
-import type {Resources} from "../../../resource";
+import type {Resources} from "../../resource/index";
 import {Button} from "./button";
 import {AttackButtonView} from "./view/attack-button-view";
 

@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from "three";
-import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
+import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
 import type {ButtonModel} from "../model/button-model";
 import type {ButtonView} from "./button-view";
 
