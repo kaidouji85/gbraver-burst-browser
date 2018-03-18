@@ -1,14 +1,15 @@
 // @flow
 
 import {TextureButtonView} from "./texture-button-view";
-import type {Resources} from "../../../../resource";
-import type {TextureResource} from "../../../../resource/texture";
-import {TEXTURE_IDS} from "../../../../resource/texture";
+import type {Resources} from "../../../resource/index";
+import type {TextureResource} from "../../../resource/texture";
+import {TEXTURE_IDS} from "../../../resource/texture";
 import * as THREE from "three";
 import type {ButtonModel} from "../model/button-model";
 
 export const WIDTH = 100;
 export const HEIGHT = 100;
+export const PADDING_BOTTOM = 64;
 
 /** コウゲキボタンのビュー */
 export class AttackButtonView extends TextureButtonView {
@@ -24,6 +25,6 @@ export class AttackButtonView extends TextureButtonView {
 
   gameLoop(model: ButtonModel): void {
     super.gameLoop(model);
-    this._mesh.position.y = -window.innerHeight / 2 + 64;
+    this._mesh.position.y = -window.innerHeight / 2 + PADDING_BOTTOM * this._getScale();
   }
 }

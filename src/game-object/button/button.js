@@ -4,11 +4,11 @@ import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
 import {TextureButtonView} from "./view/texture-button-view";
 import {ButtonView} from "./view/button-view";
-import {ClickChecker} from "../../../operation/mouse/click-checker";
-import {TapChecker} from "../../../operation/touch/tap-checker";
-import type {TouchOverlapContainer} from "../../../operation/touch/touch-overlap";
-import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";
-import {createTouchEventOverlap} from "../../../operation/touch/touch-overlap";
+import {ClickChecker} from "../../operation/mouse/click-checker";
+import {TapChecker} from "../../operation/touch/tap-checker";
+import type {TouchOverlapContainer} from "../../operation/touch/touch-overlap";
+import type {TouchRaycastContainer} from "../../operation/touch/touch-raycaster";
+import {createTouchEventOverlap} from "../../operation/touch/touch-overlap";
 import {pushStart} from "./model/push-start";
 import {pushEnd} from "./model/push-end";
 

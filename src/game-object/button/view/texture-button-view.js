@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from "three";
-import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
+import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
 import type {ButtonModel} from "../model/button-model";
 import type {ButtonView} from "./button-view";
 
@@ -27,7 +27,7 @@ export class TextureButtonView implements ButtonView {
 
   /** モデルをビューに反映させる */
   gameLoop(model: ButtonModel) {
-    const scale = 1 - 0.1 * model.depth;
+    const scale = (1 - 0.1 * model.depth) * this._getScale();
     this._mesh.scale.set(scale, scale, scale);
   }
 
@@ -40,5 +40,11 @@ export class TextureButtonView implements ButtonView {
   isOverlap(raycaster: THREE.Raycaster): boolean {
     const intersects = raycaster.intersectObjects([this._mesh]);
     return intersects.length > 0;
+  }
+
+  /** ボタン倍率を返す */
+  _getScale(): number {
+    // TODO デバイスに応じた値を返す
+    return 1.3;
   }
 }
