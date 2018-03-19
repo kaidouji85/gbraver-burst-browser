@@ -2,7 +2,6 @@
 import * as THREE from "three";
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
-import {TextureButtonView} from "./view/texture-button-view";
 import {ClickChecker} from "../../../operation/mouse/click-checker";
 import {TapChecker} from "../../../operation/touch/tap-checker";
 import type {TouchOverlapContainer} from "../../../operation/touch/touch-overlap";
@@ -10,8 +9,8 @@ import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycast
 import {createTouchEventOverlap} from "../../../operation/touch/touch-overlap";
 import {pushStart} from "./model/push-start";
 import {pushEnd} from "./model/push-end";
-import {AttackButtonView} from "./view/attack-button-view";
 import type {Resources} from "../../../resource";
+import {AttackButtonView} from "./attack-button-view";
 
 /** コンストラクタのパラメータ */
 type Param = {
