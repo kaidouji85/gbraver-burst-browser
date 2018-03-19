@@ -1,4 +1,5 @@
 // @flow
+import {Subject} from 'rxjs';
 import * as THREE from "three";
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
@@ -21,7 +22,7 @@ export class AttackButton {
   _model: ButtonModel;
   _view: AttackButtonView;
   _tweenGroup: Group;
-  _onPush: () => void;
+  _pushSubject: Subject;
 
   constructor(param: Param) {
     this._model = {
@@ -30,7 +31,11 @@ export class AttackButton {
     };
     this._view = new AttackButtonView(param.resources);
     this._tweenGroup = new Group();
-    this._onPush = param.onPush;
+
+    this._pushSubject = new Subject();
+    this._pushSubject
+      .filter(() => this._canPush())
+      .subscribe(() => param.onPush());
   }
 
   /** ゲームループ */
@@ -47,17 +52,13 @@ export class AttackButton {
   /** マウスダウンした際の処理 */
   onMouseDown(raycaster: THREE.Raycater): void {
     const isMouseOverLap = this._view.isOverlap(raycaster);
-    if (isMouseOverLap && this._canPush()) {
-      this._onPush();
-    }
+    isMouseOverLap && this._pushSubject.next();
   }
 
   /** ゲーム画面でタッチスタートした際の処理 */
   onTouchStart(touchRaycaster: TouchRaycastContainer): void {
     const isFingerTouch = isTouch(touchRaycaster, this._view);
-    if (isFingerTouch && this._canPush()) {
-      this._onPush();
-    }
+    isFingerTouch && this._pushSubject.next();
   }
 
   /** ボタン押下アニメーション */
