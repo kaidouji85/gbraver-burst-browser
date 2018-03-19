@@ -31,7 +31,7 @@ export class AttackButtonView implements TouchTarget {
   }
   /** モデルをビューに反映させる */
   gameLoop(model: ButtonModel) {
-    const scale = (1 - 0.1 * model.depth);
+    const scale = model.scale;
     this._mesh.scale.set(scale, scale, scale);
     this._mesh.position.y = -window.innerHeight / 2 + PADDING_BOTTOM;
   }

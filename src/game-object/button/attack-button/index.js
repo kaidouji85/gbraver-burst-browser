@@ -26,7 +26,7 @@ export class AttackButton {
 
   constructor(param: Param) {
     this._model = {
-      depth: 0,
+      scale: 1,
       opacity: 1
     };
     this._view = new AttackButtonView(param.resources);
