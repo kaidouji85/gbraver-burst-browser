@@ -2,7 +2,6 @@
 import * as THREE from "three";
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
-import {ClickChecker} from "../../../operation/mouse/click-checker";
 import {TapChecker} from "../../../operation/touch/tap-checker";
 import type {TouchOverlapContainer} from "../../../operation/touch/touch-overlap";
 import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";
@@ -11,6 +10,8 @@ import {pushStart} from "./model/push-start";
 import {pushEnd} from "./model/push-end";
 import type {Resources} from "../../../resource";
 import {AttackButtonView} from "./attack-button-view";
+import {push} from "./model/push";
+import {isGroupPlaying} from "../../../tween/is-group-playing";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -24,8 +25,9 @@ type Param = {
 export class AttackButton {
   _model: ButtonModel;
   _view: AttackButtonView;
-  _depthGroup: Group;
-  _clickChecker: ClickChecker;
+  _tweenGroup: Group;
+  _onPush: () => void;
+  // TODO 廃止予定
   _tapChecker: TapChecker;
 
   constructor(param: Param) {
@@ -34,16 +36,10 @@ export class AttackButton {
       opacity: 1
     };
     this._view = new AttackButtonView(param.resources);
-    this._depthGroup = new Group();
-    this._clickChecker = new ClickChecker({
-      onClick: () => {
-        this._pushEnd();
-        param.onPush();
-      },
-      onClickStart: () => this._pushStart(),
-      onClickCancel: () => this._pushEnd()
+    this._tweenGroup = new Group();
+    this._onPush = param.onPush;
 
-    });
+    // TODO 廃止予定
     this._tapChecker = new TapChecker({
       onTap: () => {
         this._pushEnd();
@@ -51,12 +47,12 @@ export class AttackButton {
       },
       onTapStart: () => this._pushStart(),
       onTapCancel: () => this._pushEnd()
-    })
+    });
   }
 
   /** ゲームループ */
   gameLoop(time: DOMHighResTimeStamp) {
-    this._depthGroup.update(time);
+    this._tweenGroup.update(time);
     this._view.gameLoop(this._model);
   }
 
@@ -67,14 +63,10 @@ export class AttackButton {
 
   /** マウスダウンした際の処理 */
   onMouseDown(raycaster: THREE.Raycater): void {
-    const isOverlap = this._view.isOverlap(raycaster);
-    this._clickChecker.onMouseDown(isOverlap);
-  }
-
-  /** マウスアップした際の処理 */
-  onMouseUp(raycaster: THREE.Raycater): void {
-    const isOverlap = this._view.isOverlap(raycaster);
-    this._clickChecker.onMouseUp(isOverlap);
+    const isMouseOverLap = this._view.isOverlap(raycaster);
+    if (isMouseOverLap && this._canPush()) {
+      this._onPush();
+    }
   }
 
   /** ゲーム画面でタッチスタートした際の処理 */
@@ -91,13 +83,23 @@ export class AttackButton {
 
   /** ボタン押し込み開始アニメーションを再生する */
   _pushStart() {
-    this._depthGroup.removeAll();
-    pushStart(this._model, this._depthGroup).start();
+    this._tweenGroup.removeAll();
+    pushStart(this._model, this._tweenGroup).start();
   }
 
   /** ボタン押し込み終了アニメーションを再生する */
   _pushEnd() {
-    this._depthGroup.removeAll();
-    pushEnd(this._model, this._depthGroup).start();
+    this._tweenGroup.removeAll();
+    pushEnd(this._model, this._tweenGroup).start();
+  }
+
+  /** ボタン押下アニメーション */
+  push(): Tween.TWEEN {
+    return push(this._model, this._tweenGroup);
+  }
+
+  /** ボタン押下可能か否かを判定する */
+  _canPush(): boolean {
+    return !isGroupPlaying(this._tweenGroup);
   }
 }
