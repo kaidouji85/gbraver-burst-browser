@@ -22,7 +22,7 @@ export class AttackButton {
   _model: ButtonModel;
   _view: AttackButtonView;
   _tweenGroup: Group;
-  _pushSubject: Subject;
+  _pushSubject: Subject<void>;
 
   constructor(param: Param) {
     this._model = {
