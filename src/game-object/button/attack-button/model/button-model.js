@@ -1,8 +1,5 @@
 // @flow
 
-/** ボタン押し込み速度 */
-export const SPEED = 32;
-
 /** ボタンのモデル */
 export type ButtonModel = {
   /**

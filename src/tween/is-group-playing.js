@@ -10,7 +10,7 @@ import {Group, Tween} from '@tweenjs/tween.js';
  */
 export function isGroupPlaying(group: Group): boolean {
   return group.getAll()
-    .map(v => v.isPlaying)
+    .map(v => v.isPlaying())
     .filter(v => v === true)
     .length > 0;
 }

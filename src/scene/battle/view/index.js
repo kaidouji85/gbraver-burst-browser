@@ -26,7 +26,8 @@ export class BattleSceneView {
     });
     this.hudLayer = new HudLayer({
       resources: props.resources,
-      state: props.state
+      state: props.state,
+      observer: props.observer
     });
 
     const dom = this.renderer.domElement || new HTMLElement();

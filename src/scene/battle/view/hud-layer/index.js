@@ -10,6 +10,7 @@ import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 import {createAttackButton} from "./attack-button";
 import {AttackButton} from "../../../../game-object/button/attack-button/index";
+import type {Observer} from "../../../observer";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -32,7 +33,7 @@ export class HudLayer {
   /** コウゲキボタン */
   attackButton: AttackButton;
 
-  constructor(props: {resources: Resources, state: BattleSceneState}) {
+  constructor(props: {resources: Resources, state: BattleSceneState, observer: Observer}) {
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.OrthographicCamera(
@@ -56,7 +57,7 @@ export class HudLayer {
     this.enemyBatteryGauge = createEnemyBatteryGauge(props.resources, props.state);
     this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.attackButton = createAttackButton(props.resources);
+    this.attackButton = createAttackButton(props.resources, props.observer);
     this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
   }
 }
