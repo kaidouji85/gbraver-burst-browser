@@ -2,16 +2,11 @@
 import * as THREE from "three";
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
-import {TapChecker} from "../../../operation/touch/tap-checker";
-import type {TouchOverlapContainer} from "../../../operation/touch/touch-overlap";
-import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";
-import {createTouchEventOverlap} from "../../../operation/touch/touch-overlap";
-import {pushStart} from "./model/push-start";
-import {pushEnd} from "./model/push-end";
-import type {Resources} from "../../../resource";
+import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";import type {Resources} from "../../../resource";
 import {AttackButtonView} from "./attack-button-view";
 import {push} from "./model/push";
 import {isGroupPlaying} from "../../../tween/is-group-playing";
+import {isTouch} from "../../../operation/touch/touch-checker";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -27,8 +22,6 @@ export class AttackButton {
   _view: AttackButtonView;
   _tweenGroup: Group;
   _onPush: () => void;
-  // TODO 廃止予定
-  _tapChecker: TapChecker;
 
   constructor(param: Param) {
     this._model = {
@@ -38,16 +31,6 @@ export class AttackButton {
     this._view = new AttackButtonView(param.resources);
     this._tweenGroup = new Group();
     this._onPush = param.onPush;
-
-    // TODO 廃止予定
-    this._tapChecker = new TapChecker({
-      onTap: () => {
-        this._pushEnd();
-        param.onPush();
-      },
-      onTapStart: () => this._pushStart(),
-      onTapCancel: () => this._pushEnd()
-    });
   }
 
   /** ゲームループ */
@@ -71,31 +54,20 @@ export class AttackButton {
 
   /** ゲーム画面でタッチスタートした際の処理 */
   onTouchStart(touchRaycaster: TouchRaycastContainer): void {
-    const touchOverlap: TouchOverlapContainer = createTouchEventOverlap(touchRaycaster, this._view);
-    this._tapChecker.onTouchStart(touchOverlap);
-  }
-
-  /** ゲーム画面でタッチスエンドした際の処理 */
-  onTouchEnd(touchRaycaster: TouchRaycastContainer): void {
-    const touchOverlap: TouchOverlapContainer = createTouchEventOverlap(touchRaycaster, this._view);
-    this._tapChecker.onTouchEnd(touchOverlap);
-  }
-
-  /** ボタン押し込み開始アニメーションを再生する */
-  _pushStart() {
-    this._tweenGroup.removeAll();
-    pushStart(this._model, this._tweenGroup).start();
-  }
-
-  /** ボタン押し込み終了アニメーションを再生する */
-  _pushEnd() {
-    this._tweenGroup.removeAll();
-    pushEnd(this._model, this._tweenGroup).start();
+    const isFingerTouch = isTouch(touchRaycaster, this._view);
+    if (isFingerTouch && this._canPush()) {
+      this._onPush();
+    }
   }
 
   /** ボタン押下アニメーション */
   push(): Tween.TWEEN {
     return push(this._model, this._tweenGroup);
+  }
+
+  /** 本オブジェクトで再生中のTweenを全て破棄する */
+  removeAllTween(): void {
+    this._tweenGroup.removeAll();
   }
 
   /** ボタン押下可能か否かを判定する */

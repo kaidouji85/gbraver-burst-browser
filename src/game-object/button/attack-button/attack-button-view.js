@@ -6,12 +6,14 @@ import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import type {TextureResource} from "../../../resource/texture";
 import type {ButtonModel} from "./model/button-model";
+import {TouchTarget} from "../../../operation/touch/touch-target";
 
 export const BUTTON_WIDTH = 100;
 export const BUTTON_HEIGHT = 100;
 export const PADDING_BOTTOM = 64;
 
-export class AttackButtonView {
+/** コウゲキボタンのビュー */
+export class AttackButtonView implements TouchTarget {
   _mesh: THREE.Mesh;
 
   constructor(resources: Resources) {
