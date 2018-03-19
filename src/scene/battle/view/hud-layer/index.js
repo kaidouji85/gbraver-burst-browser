@@ -9,7 +9,7 @@ import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-
 import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 import {createAttackButton} from "./attack-button";
-import {Button} from "../../../../game-object/button/button";
+import {AttackButton} from "../../../../game-object/button/attack-button/index";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -30,7 +30,7 @@ export class HudLayer {
   /** 敵バッテリーゲージ */
   enemyBatteryGauge: BatteryGauge;
   /** コウゲキボタン */
-  attackButton: Button;
+  attackButton: AttackButton;
 
   constructor(props: {resources: Resources, state: BattleSceneState}) {
     this.scene = new THREE.Scene();

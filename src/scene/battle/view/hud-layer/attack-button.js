@@ -1,11 +1,10 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import {Button} from "../../../../game-object/button/button";
-import {AttackButton} from "../../../../game-object/button";
+import {AttackButton} from "../../../../game-object/button/attack-button/index";
 
 /** コウゲキボタンを生成する */
-export function createAttackButton(resources: Resources): Button {
+export function createAttackButton(resources: Resources): AttackButton {
   return new AttackButton({
     resources,
     // TODO オブザーバになんからのイベントを通知する

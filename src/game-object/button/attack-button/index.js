@@ -3,27 +3,28 @@ import * as THREE from "three";
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
 import {TextureButtonView} from "./view/texture-button-view";
-import {ButtonView} from "./view/button-view";
-import {ClickChecker} from "../../operation/mouse/click-checker";
-import {TapChecker} from "../../operation/touch/tap-checker";
-import type {TouchOverlapContainer} from "../../operation/touch/touch-overlap";
-import type {TouchRaycastContainer} from "../../operation/touch/touch-raycaster";
-import {createTouchEventOverlap} from "../../operation/touch/touch-overlap";
+import {ClickChecker} from "../../../operation/mouse/click-checker";
+import {TapChecker} from "../../../operation/touch/tap-checker";
+import type {TouchOverlapContainer} from "../../../operation/touch/touch-overlap";
+import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";
+import {createTouchEventOverlap} from "../../../operation/touch/touch-overlap";
 import {pushStart} from "./model/push-start";
 import {pushEnd} from "./model/push-end";
+import {AttackButtonView} from "./view/attack-button-view";
+import type {Resources} from "../../../resource";
 
 /** コンストラクタのパラメータ */
 type Param = {
   /** ボタンで使うビュー */
-  view: TextureButtonView,
+  resources: Resources,
   /** ボタンがクリックされた際のコールバック関数 */
   onPush: () => void
 };
 
-/** ボタンのクラス */
-export class Button {
+/** コウゲキボタン */
+export class AttackButton {
   _model: ButtonModel;
-  _view: ButtonView;
+  _view: AttackButtonView;
   _depthGroup: Group;
   _clickChecker: ClickChecker;
   _tapChecker: TapChecker;
@@ -33,7 +34,7 @@ export class Button {
       depth: 0,
       opacity: 1
     };
-    this._view = param.view;
+    this._view = new AttackButtonView(param.resources);
     this._depthGroup = new Group();
     this._clickChecker = new ClickChecker({
       onClick: () => {

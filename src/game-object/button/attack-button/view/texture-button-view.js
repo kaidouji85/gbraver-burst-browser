@@ -1,8 +1,7 @@
 // @flow
 import * as THREE from "three";
-import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
+import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
 import type {ButtonModel} from "../model/button-model";
-import type {ButtonView} from "./button-view";
 
 type Param = {
   texture: THREE.Texture,
@@ -11,7 +10,7 @@ type Param = {
 };
 
 /** テクスチャをそのままボタンとして表示する */
-export class TextureButtonView implements ButtonView {
+export class TextureButtonView {
   _mesh: THREE.Mesh;
 
   constructor(param: Param) {

@@ -1,9 +1,9 @@
 // @flow
 
 import {TextureButtonView} from "./texture-button-view";
-import type {Resources} from "../../../resource/index";
-import type {TextureResource} from "../../../resource/texture";
-import {TEXTURE_IDS} from "../../../resource/texture";
+import type {Resources} from "../../../../resource/index";
+import type {TextureResource} from "../../../../resource/texture";
+import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
 import type {ButtonModel} from "../model/button-model";
 
