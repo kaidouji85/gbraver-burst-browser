@@ -5,6 +5,7 @@ import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {BattleSceneState} from "../index";
 import type {Observer} from '../../observer';
+import {createRender} from "./renderer";
 
 /**
  * 戦闘画面
@@ -18,18 +19,15 @@ export class BattleSceneView {
   hudLayer: HudLayer;
 
   constructor(props: {resources: Resources, state: BattleSceneState, observer: Observer}) {
-    this.renderer = new THREE.WebGLRenderer();
-    this.renderer.autoClear = false;
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-
+    this.renderer = createRender();
     this.threeDimensionLayer = new ThreeDimensionLayer({
       resources: props.resources,
       state: props.state
     });
-
     this.hudLayer = new HudLayer({
       resources: props.resources,
-      state: props.state
+      state: props.state,
+      observer: props.observer
     });
 
     const dom = this.renderer.domElement || new HTMLElement();

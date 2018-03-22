@@ -1,14 +1,13 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import {Button} from "../../../../game-object/controller/button/button";
-import {AttackButton} from "../../../../game-object/controller/button";
+import {AttackButton} from "../../../../game-object/button/attack-button/index";
+import {Observer} from "../../../observer";
 
 /** コウゲキボタンを生成する */
-export function createAttackButton(resources: Resources): Button {
+export function createAttackButton(resources: Resources, observer: Observer): AttackButton {
   return new AttackButton({
     resources,
-    // TODO オブザーバになんからのイベントを通知する
-    onPush: () => console.log('on attack button push!')
+    onPush: () => observer.notify({type: 'pushAttackButton'})
   })
 }

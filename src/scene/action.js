@@ -8,7 +8,8 @@ export type Action =
   | MouseDown
   | MouseUp
   | TouchStart
-  | TouchEnd;
+  | TouchEnd
+  | PushAttackButton;
 
 /** リサイズ */
 export type ResizeAction = {
@@ -48,4 +49,9 @@ export type TouchStart = {
 export type TouchEnd = {
   type: 'touchEnd',
   event: TouchEvent
+};
+
+/** コウゲキボタンを押した */
+export type PushAttackButton = {
+  type: 'pushAttackButton'
 };

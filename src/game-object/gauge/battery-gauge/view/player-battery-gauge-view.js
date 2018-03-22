@@ -8,32 +8,37 @@ import * as THREE from "three";
 import {rectangle} from "../../../../uv-mapping/rectangle";
 import {drawPlayerBatteryGauge} from "../../../../canvas/draw/battery-gauge";
 
+export const MESH_WIDTH = 300;
+export const MESH_HEIGHT = 80;
+export const PADDING_TOP = 96;
+
 /** プレイヤーバッテリーゲージ */
 export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeView {
+  /** デバイスに応じたバッテリーゲージの倍率 */
+  _scale: number;
 
-  constructor(resources: Resources) {
-    const meshWidth = 300;
-    const meshHeight = 80;
-
+  constructor(resources: Resources, scale: number) {
     super({
       resources,
-      meshWidth,
-      meshHeight,
+      meshWidth: MESH_WIDTH,
+      meshHeight: MESH_HEIGHT,
       canvasWidth: 256,
       canvasHeight: 256,
     });
+    this._scale = scale;
 
     // バッテリーゲージに必要な大きさだけテクスチャから抜き取る
     rectangle({
       geo: this.mesh.geometry,
       pos: new THREE.Vector2(0, 0),
       width: 1,
-      height: meshHeight / meshWidth
+      height: MESH_HEIGHT / MESH_WIDTH
     });
   }
 
   /** ビューにモデルを反映させる */
   gameLoop(model: BatteryGaugeModel): void {
+    this.mesh.scale.set(this._scale, this._scale, this._scale);
     this._refreshGauge(model);
     this._refreshPos();
   }
@@ -50,7 +55,7 @@ export class PlayerBatteryGaugeView extends CanvasMesh implements BatteryGaugeVi
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    this.mesh.position.x = (window.innerWidth - this.meshWidth) / 2;
-    this.mesh.position.y = window.innerHeight / 2 - 96;
+    this.mesh.position.x = (window.innerWidth - MESH_WIDTH * this._scale) / 2;
+    this.mesh.position.y = window.innerHeight / 2 - PADDING_TOP * this._scale;
   }
 }
