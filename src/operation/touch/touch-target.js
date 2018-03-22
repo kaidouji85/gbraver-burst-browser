@@ -5,4 +5,4 @@ import * as THREE from "three";
 export interface TouchTarget {
   /** マウス、指がタッチ対象と重なっているか、trueで重なっている */
   isOverlap(raycaster: THREE.Raycaster): boolean
-};
+}
