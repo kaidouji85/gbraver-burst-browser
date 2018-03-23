@@ -2,7 +2,7 @@
 
 import {ThreeDimensionLayer} from "../view/three-dimension-layer";
 import {HudLayer} from "../view/hud-layer/index";
-import type {BattleSceneState} from "../index";
+import type {BattleSceneState} from "../state";
 import {BattleSceneView} from "../view";
 import type {ResizeAction} from "../../action";
 

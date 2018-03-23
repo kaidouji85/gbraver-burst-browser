@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
-import type {BattleSceneState} from "../index";
+import type {BattleSceneState} from "../state";
 import {BattleSceneView} from "../view";
 import type {DebugModeAction} from "../../action";
 

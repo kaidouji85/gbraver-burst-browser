@@ -6,6 +6,7 @@ import type {Observer} from '../observer';
 import {BattleSceneView} from "./view";
 import {actionHandler} from "./action-handler";
 import {bindHtmlEventToScene} from "./html-event-binder";
+import type {BattleSceneState} from "./state";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -43,12 +44,4 @@ export class BattleScene implements Observer {
   notify(action: Action): void {
     actionHandler(action, this);
   }
-}
-
-/** 戦闘シーン全体の状態 */
-export type BattleSceneState = {
-  /** 戦闘状態 */
-  battleState: BattleState,
-  /** 画面を開いているプレイヤーID */
-  playerId: PlayerId,
 }

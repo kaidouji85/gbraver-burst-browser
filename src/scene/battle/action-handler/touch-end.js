@@ -2,7 +2,7 @@
 
 import {BattleSceneView} from "../view";
 import type {TouchEnd} from "../../action";
-import type {BattleSceneState} from "../index";
+import type {BattleSceneState} from "../state";
 import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";
 import {createTouchEventRaycaster} from "../../../operation/touch/touch-raycaster";
 

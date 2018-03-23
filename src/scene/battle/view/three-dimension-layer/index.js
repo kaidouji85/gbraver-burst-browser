@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
-import type {BattleSceneState} from "../../index";
+import type {BattleSceneState} from "../../state";
 import {createPlayerSprite} from "./player-sprite";
 import {createEnemySprite} from "./enemy-sprite";
 import type {ArmDozerSprite} from '../../../../game-object/armdozer/armdozer-sprite';

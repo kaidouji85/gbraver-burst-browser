@@ -1,6 +1,6 @@
 // @flow
 
-import type {BattleSceneState} from "../../index";
+import type {BattleSceneState} from "../../state";
 import type {Resources} from "../../../../resource/index";
 import type {Stage} from '../../../../game-object/stage/stage';
 import SchoolField from "../../../../game-object/stage/school";
