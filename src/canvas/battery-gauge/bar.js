@@ -1,10 +1,10 @@
 // @flow
-import type {Resources} from '../../../resource/index';
+import type {Resources} from '../../resource/index';
 import * as R from 'ramda';
-import {drawImage} from '../image-drawer';
-import {trapezoid} from '../../clip/trapezoid';
-import type {CanvasImageResource} from "../../../resource/canvas-image";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
+import {drawImageInCenter} from '../draw/image-drawer';
+import {trapezoid} from '../clip/trapezoid';
+import type {CanvasImageResource} from "../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 
 /**
  * バッテリーバーの目盛りを描画する
@@ -51,12 +51,12 @@ export function BatteryBar(context: CanvasRenderingContext2D, resources: Resourc
   const batteryBarDownResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BAR_DOWN);
   const batteryBarDown: Image = batteryBarDownResource ? batteryBarDownResource.image : new Image();
 
-  drawImage(context, batteryBarDown, dx, dy);
+  drawImageInCenter(context, batteryBarDown, dx, dy);
 
   context.save();
 
   trapezoid(context, batteryBarUp.width, batteryBarUp.height, dx, dy, value / maxValue);
-  drawImage(context, batteryBarUp, dx, dy);
+  drawImageInCenter(context, batteryBarUp, dx, dy);
 
   context.restore();
 

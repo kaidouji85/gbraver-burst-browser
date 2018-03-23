@@ -6,7 +6,7 @@ import type {BatteryGaugeModel} from "../model/battery-gauge-model";
 import type {Resources} from "../../../../resource/index";
 import * as THREE from "three";
 import {rectangle} from "../../../../uv-mapping/rectangle";
-import {drawPlayerBatteryGauge} from "../../../../canvas/draw/battery-gauge";
+import {drawPlayerBatteryGauge} from "../../../../canvas/battery-gauge";
 
 export const MESH_WIDTH = 300;
 export const MESH_HEIGHT = 80;

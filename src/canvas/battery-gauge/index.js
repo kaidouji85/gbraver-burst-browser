@@ -1,10 +1,10 @@
 // @flow
-import type {Resources} from '../../../resource/index';
-import {drawImage} from '../image-drawer';
-import {drawNumberLeft, drawNumberRight} from '../number';
+import type {Resources} from '../../resource/index';
+import {drawImageInCenter} from '../draw/image-drawer';
+import {drawNumberLeft, drawNumberRight} from '../number/number';
 import {BatteryBar} from './bar';
-import type {CanvasImageResource} from "../../../resource/canvas-image";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
+import type {CanvasImageResource} from "../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 
 /**
  * プレイヤーのバッテリーゲージを描画する
@@ -25,10 +25,10 @@ export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resour
   const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL);
   const batteryGaugeLabel: Image = batteryGaugeLabelResource ? batteryGaugeLabelResource.image : new Image();
 
-  drawImage(context, gaugeBase, dx, dy);
+  drawImageInCenter(context, gaugeBase, dx, dy);
   BatteryBar(context, resources, dx - 8, dy + 8, Math.floor(value), Math.floor(maxValue));
 
-  drawImage(context, batteryGaugeLabel , dx + 72, dy - 6);
+  drawImageInCenter(context, batteryGaugeLabel , dx + 72, dy - 6);
   drawNumberLeft(context, batteryNumber, dx - 100, dy - 24 , Math.floor(value))
 }
 
@@ -54,11 +54,11 @@ export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resourc
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
 
-  drawImage(context, gaugeBase, -dx, dy);
+  drawImageInCenter(context, gaugeBase, -dx, dy);
   BatteryBar(context, resources, - dx - 8, dy + 8, Math.floor(value), Math.floor(maxValue));
 
   context.restore();
 
-  drawImage(context, batteryGaugeLabel , dx - 64, dy - 6);
+  drawImageInCenter(context, batteryGaugeLabel , dx - 64, dy - 6);
   drawNumberRight(context, batteryNumber, dx + 100, dy - 24 , Math.floor(value));
 }

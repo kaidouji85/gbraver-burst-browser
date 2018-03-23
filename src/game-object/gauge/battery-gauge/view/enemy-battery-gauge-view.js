@@ -2,7 +2,7 @@
 
 import type {BatteryGaugeModel} from "../model/battery-gauge-model";
 import type {Resources} from "../../../../resource/index";
-import {drawEnemyBatteryGauge} from "../../../../canvas/draw/battery-gauge";
+import {drawEnemyBatteryGauge} from "../../../../canvas/battery-gauge";
 import {MESH_WIDTH, PADDING_TOP, PlayerBatteryGaugeView} from "./player-battery-gauge-view";
 
 /** 敵バッテリーゲージ */

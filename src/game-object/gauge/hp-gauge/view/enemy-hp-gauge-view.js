@@ -2,7 +2,7 @@
 
 import type {Resources} from "../../../../resource/index";
 import type {HpGaugeModel} from "../model/hp-gauge-model";
-import {drawEnemyHpGauge} from "../../../../canvas/draw/hp-gauge";
+import {drawEnemyHpGauge} from "../../../../canvas/hp-gauge";
 import {PADDING_TOP, PlayerHpGaugeView} from "./player-hp-gauge-view";
 import {MESH_WIDTH} from "../../../armdozer/shin-breaver/view/player-shin-braver-view";
 
