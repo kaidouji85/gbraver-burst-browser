@@ -16,7 +16,7 @@ export class ThreeDimensionLayer {
   /** シーン */
   scene: THREE.Scene;
   /** カメラ */
-  camera: THREE.Camera;
+  camera: THREE.PerspectiveCamera;
   /** 背景 */
   stage: Stage;
   /** プレイヤースプライト */
