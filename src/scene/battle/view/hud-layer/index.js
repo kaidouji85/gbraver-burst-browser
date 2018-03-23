@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/index';
-import type {BattleSceneState} from "../../index";
+import type {BattleSceneState} from "../../state";
 import {createPlayerHpGauge} from './player-hp-gauge';
 import {HpGauge} from "../../../../game-object/gauge/hp-gauge/hp-gauge";
 import {createEnemyHpGauge} from "./enemy-hp-gauge";
@@ -11,6 +11,7 @@ import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 import {createAttackButton} from "./attack-button";
 import {AttackButton} from "../../../../game-object/button/attack-button/index";
 import type {Observer} from "../../../observer";
+import {createCamera} from "./camera";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -35,15 +36,7 @@ export class HudLayer {
 
   constructor(props: {resources: Resources, state: BattleSceneState, observer: Observer}) {
     this.scene = new THREE.Scene();
-
-    this.camera = new THREE.OrthographicCamera(
-      -window.innerWidth/2,
-      window.innerWidth/2,
-      window.innerHeight/2,
-      -window.innerHeight/2,
-      0,
-      30
-    );
+    this.camera = createCamera();
 
     this.playerHpGauge = createPlayerHpGauge(props.resources, props.state);
     this.playerHpGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));

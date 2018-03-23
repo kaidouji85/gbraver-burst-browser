@@ -16,6 +16,7 @@ type Param = {
   onPush: () => void
 };
 
+//TODO 表示・非表示、コントロール可能・不可の設定を追加する
 /** コウゲキボタン */
 export class AttackButton {
   _model: ButtonModel;
@@ -39,27 +40,6 @@ export class AttackButton {
     this._view.gameLoop(this._model);
   }
 
-  /** シーンに追加するthree.jsオブジェクトを取得する */
-  getThreeJsObjectList(): THREE.Mesh[] {
-    return this._view.getThreeJsObjectList();
-  }
-
-  /** マウスダウンした際の処理 */
-  onMouseDown(raycaster: THREE.Raycater): void {
-    const isMouseOverLap = this._view.isOverlap(raycaster);
-    if (isMouseOverLap && this._canPush()) {
-      this._onPush();
-    }
-  }
-
-  /** ゲーム画面でタッチスタートした際の処理 */
-  onTouchStart(touchRaycaster: TouchRaycastContainer): void {
-    const isFingerTouch = isTouch(touchRaycaster, this._view);
-    if (isFingerTouch && this._canPush()) {
-      this._onPush();
-    }
-  }
-
   /** ボタン押下アニメーション */
   push(): Tween.TWEEN {
     return push(this._model, this._tweenGroup);
@@ -70,9 +50,34 @@ export class AttackButton {
     this._tweenGroup.removeAll();
   }
 
-  /** ボタン押下可能か否かを判定する */
-  _canPush(): boolean {
-    return !isGroupPlaying(this._tweenGroup);
+  /** マウスダウンした際の処理 */
+  onMouseDown(raycaster: THREE.Raycater): void {
+    const isMouseOverlay = this._view.isOverlap(raycaster);
+    if (isMouseOverlay) {
+      this._onOverlay();
+    }
   }
 
+  /** ゲーム画面でタッチスタートした際の処理 */
+  onTouchStart(touchRaycaster: TouchRaycastContainer): void {
+    const isFingerOverlay = isTouch(touchRaycaster, this._view);
+    if (isFingerOverlay) {
+      this._onOverlay();
+    }
+  }
+
+  /** マウス、指がボタンと重なった際の処理 */
+  _onOverlay(): void {
+    if (isGroupPlaying(this._tweenGroup)) {
+      return;
+    }
+
+    this.push().start();
+    this._onPush();
+  }
+
+  /** シーンに追加するthree.jsオブジェクトを取得する */
+  getThreeJsObjectList(): THREE.Mesh[] {
+    return this._view.getThreeJsObjectList();
+  }
 }

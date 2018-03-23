@@ -3,7 +3,7 @@
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import type {Resources} from "../../../../resource/index";
 import {ArmDozerIdList} from 'gbraver-burst-core';
-import type {BattleSceneState} from "../../index";
+import type {BattleSceneState} from "../../state";
 import type {ArmDozerId, PlayerBattleState} from "gbraver-burst-core/lib/flow-type";
 import {EnemyShinBraver} from '../../../../game-object/armdozer/shin-breaver';
 

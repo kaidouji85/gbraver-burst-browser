@@ -3,7 +3,7 @@
 import {ThreeDimensionLayer} from "../view/three-dimension-layer";
 import {HudLayer} from "../view/hud-layer/index";
 import {BattleSceneView} from "../view";
-import type {BattleSceneState} from "../index";
+import type {BattleSceneState} from "../state";
 import type {GameLoopAction} from "../../action";
 
 /** ゲームループ時の処理 */
