@@ -19,6 +19,7 @@ const STUB_ENTRY_FILES = {
   'canvas/enemy-hp-gauge': `${STUB_PATH}/canvas/enemy-hp-gauge`,
   'canvas/player-battery-gauge': `${STUB_PATH}/canvas/player-battery-gauge`,
   'canvas/enemy-battery-gauge': `${STUB_PATH}/canvas/enemy-battery-gauge`,
+  'canvas/battery-slider': `${STUB_PATH}/canvas/battery-slider`,
   'game-object/gauge/player-hp-gauge': `${STUB_PATH}/game-object/gauge/player-hp-gauge`,
   'game-object/gauge/enemy-hp-gauge': `${STUB_PATH}/game-object/gauge/enemy-hp-gauge`,
   'game-object/gauge/tween-group': `${STUB_PATH}/game-object/gauge/tween-group`,
