@@ -18,7 +18,7 @@ import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
  * @param value 現在の値
  * @param maxValue 目盛り数
  */
-function barScale(context: CanvasRenderingContext2D, width: number, height: number, dx: number, dy: number, value:number, maxValue: number) {
+function BarScale(context: CanvasRenderingContext2D, width: number, height: number, dx: number, dy: number, value:number, maxValue: number) {
   context.save();
   context.strokeStyle = '#8b4513';
 
@@ -60,5 +60,5 @@ export function BatteryBar(context: CanvasRenderingContext2D, resources: Resourc
 
   context.restore();
 
-  barScale(context, batteryBarUp.width, batteryBarUp.height, dx, dy, value, maxValue);
+  BarScale(context, batteryBarUp.width, batteryBarUp.height, dx, dy, value, maxValue);
 }
