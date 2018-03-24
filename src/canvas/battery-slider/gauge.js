@@ -24,7 +24,7 @@ export function BatterySliderGauge(context: CanvasRenderingContext2D, resources:
   const drawY = dy - sliderGauge.height / 2;
 
   context.drawImage(sliderGauge, 0, 0, gaugeWidth, gaugeHeight, drawX, drawY, gaugeWidth, gaugeHeight);
-  SliderScale(context, sliderGauge, maxBattery, dx, dy);
+  SliderScale(context, sliderGauge, battery, maxBattery, dx, dy);
 }
 
 /**
@@ -36,13 +36,13 @@ export function BatterySliderGauge(context: CanvasRenderingContext2D, resources:
  * @param dx 描画位置X
  * @param dy 描画位置Y
  */
-function SliderScale(context: CanvasRenderingContext2D, image: Image, maxBattery: number, dx: number, dy: number): void {
+function SliderScale(context: CanvasRenderingContext2D, image: Image, battery: number, maxBattery: number, dx: number, dy: number): void {
   context.save();
-  context.strokeStyle = '#8b4513';
-  context.lineWidth = 4;
+  context.lineWidth = 2;
 
   const scaleSize = image.width / maxBattery;
   R.range(1, maxBattery).forEach(v => {
+    context.strokeStyle = v <= battery ? '#8b4513' : '#dcdcdc';
     context.beginPath();
     context.moveTo(dx - image.width / 2 + scaleSize * v, dy + image.height / 2);
     context.lineTo(dx - image.width / 2 + scaleSize * v, dy - image.height / 2);
