@@ -15,7 +15,7 @@ import * as R from "ramda";
  * @param dx 描画位置X
  * @param dy 描画位置Y
  */
-export function BatterySliderGauge(context: CanvasRenderingContext2D, resources: Resources, battery: number, maxBattery: number, dx: number, dy: number): void {
+export function drawBatterySliderGauge(context: CanvasRenderingContext2D, resources: Resources, battery: number, maxBattery: number, dx: number, dy: number): void {
   const sliderGaugeResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_GAUGE);
   const sliderGauge: Image = sliderGaugeResource ? sliderGaugeResource.image : new Image();
   const gaugeWidth = sliderGauge.width * battery / maxBattery;
@@ -24,7 +24,7 @@ export function BatterySliderGauge(context: CanvasRenderingContext2D, resources:
   const drawY = dy - sliderGauge.height / 2;
 
   context.drawImage(sliderGauge, 0, 0, gaugeWidth, gaugeHeight, drawX, drawY, gaugeWidth, gaugeHeight);
-  SliderScale(context, sliderGauge, battery, maxBattery, dx, dy);
+  drawSliderScale(context, sliderGauge, battery, maxBattery, dx, dy);
 }
 
 /**
@@ -36,7 +36,7 @@ export function BatterySliderGauge(context: CanvasRenderingContext2D, resources:
  * @param dx 描画位置X
  * @param dy 描画位置Y
  */
-function SliderScale(context: CanvasRenderingContext2D, image: Image, battery: number, maxBattery: number, dx: number, dy: number): void {
+function drawSliderScale(context: CanvasRenderingContext2D, image: Image, battery: number, maxBattery: number, dx: number, dy: number): void {
   context.save();
   context.lineWidth = 2;
 
