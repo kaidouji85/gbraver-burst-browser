@@ -3,6 +3,7 @@ import type {Resources} from "../../resource";
 import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import type {CanvasImageResource} from "../../resource/canvas-image";
 import {drawImageInCenter} from "../draw/image-drawer";
+import {drawBatterySliderGauge} from "./gauge";
 
 /**
  * バッテリースライダーを描画する
@@ -19,4 +20,5 @@ export function drawBatterySlider(context: CanvasRenderingContext2D, resources: 
   const sliderBase: Image = sliderBaseResource ? sliderBaseResource.image : new Image();
 
   drawImageInCenter(context, sliderBase, dx, dy);
+  drawBatterySliderGauge(context, resources, battery, maxBattery, dx, dy);
 }
