@@ -16,7 +16,6 @@ export class BatterySliderView {
 
   constructor(resources: Resources) {
     this._canvasMesh = new CanvasMesh({
-      resources,
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
       canvasWidth: 512,

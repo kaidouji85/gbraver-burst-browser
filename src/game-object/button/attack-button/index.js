@@ -2,7 +2,8 @@
 import * as THREE from "three";
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
-import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";import type {Resources} from "../../../resource";
+import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";
+import type {Resources} from "../../../resource";
 import {AttackButtonView} from "./attack-button-view";
 import {push} from "./model/push";
 import {isGroupPlaying} from "../../../tween/is-group-playing";

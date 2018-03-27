@@ -24,7 +24,6 @@ export class PlayerBatteryGaugeView implements BatteryGaugeView {
 
   constructor(resources: Resources, scale: number) {
     this._canvasMesh = new CanvasMesh({
-      resources,
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
       canvasWidth: 256,

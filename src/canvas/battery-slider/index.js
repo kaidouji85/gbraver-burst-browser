@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from "../../resource";
-import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import type {CanvasImageResource} from "../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import {drawImageInCenter} from "../draw/image-drawer";
 import {drawBatterySliderGauge} from "./gauge";
 

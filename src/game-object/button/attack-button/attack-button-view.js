@@ -3,8 +3,8 @@
 import * as THREE from "three";
 import type {Resources} from "../../../resource";
 import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
-import {TEXTURE_IDS} from "../../../resource/texture";
 import type {TextureResource} from "../../../resource/texture";
+import {TEXTURE_IDS} from "../../../resource/texture";
 import type {ButtonModel} from "./model/button-model";
 import {TouchTarget} from "../../../operation/touch/touch-target";
 

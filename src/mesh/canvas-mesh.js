@@ -1,22 +1,15 @@
 import * as THREE from "three";
-import type {Resources} from "../../resource/resource-manager";
 
-/** プロパティ */
-type Props = {
-  resources: Resources,
+/** パラメータ */
+type Params = {
   canvasWidth: number,
   canvasHeight: number,
   meshWidth: number,
   meshHeight: number,
 };
 
-/**
- * キャンバスメッシュおよび関連オブジェクトを集めたクラス
- */
+/** キャンバスメッシュおよび関連オブジェクトを集めたクラス */
 export class CanvasMesh {
-  // TODO 削除する
-  /** リソース管理クラス */
-  resources: Resources;
   /** メッシュ */
   mesh: THREE.Mesh;
   /** メッシュ幅 */
@@ -26,15 +19,13 @@ export class CanvasMesh {
   /** 描画を行うキャンバス */
   canvas: HTMLCanvasElement;
 
-  constructor(props: Props) {
-    this.resources = props.resources;
-
+  constructor(params: Params) {
     this.canvas = document.createElement('canvas');
-    this.canvas.width = props.canvasWidth;
-    this.canvas.height = props.canvasHeight;
+    this.canvas.width = params.canvasWidth;
+    this.canvas.height = params.canvasHeight;
 
-    this.meshWidth = props.meshWidth;
-    this.meshHeight = props.meshHeight;
+    this.meshWidth = params.meshWidth;
+    this.meshHeight = params.meshHeight;
     const texture = new THREE.Texture(this.canvas);
     const material = new THREE.MeshBasicMaterial({map: texture});
     material.transparent = true;
