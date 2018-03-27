@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../src/resource/index';
 import {CanvasStubBase} from '../util/canvas-stub-base';
-import {drawPlayerBatteryGauge} from '../../src/canvas/draw/battery-gauge';
+import {drawPlayerBatteryGauge} from '../../src/canvas/battery-gauge';
 
 CanvasStubBase('../resources/', (context: CanvasRenderingContext2D, reources: Resources) => {
   const basicX = window.innerWidth / 2;

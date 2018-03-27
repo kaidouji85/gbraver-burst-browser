@@ -12,6 +12,8 @@ import {createAttackButton} from "./attack-button";
 import {AttackButton} from "../../../../game-object/button/attack-button/index";
 import type {Observer} from "../../../observer";
 import {createCamera} from "./camera";
+import {BatterySlider} from "../../../../game-object/slider/battery-slider";
+import {createBatterySlider} from "./battery-slider";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -33,6 +35,8 @@ export class HudLayer {
   enemyBatteryGauge: BatteryGauge;
   /** コウゲキボタン */
   attackButton: AttackButton;
+  /** バッテリースライダー */
+  batterySlider: BatterySlider;
 
   constructor(props: {resources: Resources, state: BattleSceneState, observer: Observer}) {
     this.scene = new THREE.Scene();
@@ -52,5 +56,8 @@ export class HudLayer {
 
     this.attackButton = createAttackButton(props.resources, props.observer);
     this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
+
+    this.batterySlider = createBatterySlider(props.resources, props.state, props.observer);
+    this.batterySlider.getThreeJsObjectList().forEach(v => this.scene.add(v));
   }
 }

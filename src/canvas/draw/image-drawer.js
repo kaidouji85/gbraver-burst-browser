@@ -9,7 +9,7 @@
  * @param dx 描画X
  * @param dy 描画Y
  */
-export function drawImage(context: CanvasRenderingContext2D, image: Image, dx: number, dy: number) {
+export function drawImageInCenter(context: CanvasRenderingContext2D, image: Image, dx: number, dy: number) {
   const x = dx - image.width / 2;
   const y = dy - image.height / 2;
   context.drawImage(image, x, y);
