@@ -4,20 +4,25 @@ import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {Resources} from "../../../resource";
 import type {BatterySliderModel} from "./battery-slider-model";
 import {drawBatterySlider} from "../../../canvas/battery-slider";
+import * as THREE from "three";
 
 export const MESH_WIDTH = 512;
 export const MESH_HEIGHT = 512;
 
 /** バッテリースライダーのビュー */
-export class BatterySliderView extends CanvasMesh {
+export class BatterySliderView {
+  _canvasMesh: CanvasMesh;
+  _resources: Resources;
+
   constructor(resources: Resources) {
-    super({
+    this._canvasMesh = new CanvasMesh({
       resources,
       meshWidth: MESH_WIDTH,
       meshHeight: MESH_HEIGHT,
       canvasWidth: 512,
       canvasHeight: 512,
     });
+    this._resources = resources;
   }
 
   /** ビューにモデルを反映させる */
@@ -28,8 +33,8 @@ export class BatterySliderView extends CanvasMesh {
 
   /** バッテリースライダーを更新する */
   _refreshGauge(model: BatterySliderModel): void {
-    this.draw((context: CanvasRenderingContext2D) => {
-      context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
+      context.clearRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
 
       // TODO 開発が終わったら削除する
       /*
@@ -40,15 +45,20 @@ export class BatterySliderView extends CanvasMesh {
       */
 
       // バッテリースライダーが中央に描画されるようにする
-      const dx = this.canvas.width / 2;
-      const dy = this.canvas.height / 2;
-      drawBatterySlider(context, this.resources, model.battery, model.maxBattery, dx, dy);
+      const dx = this._canvasMesh.canvas.width / 2;
+      const dy = this._canvasMesh.canvas.height / 2;
+      drawBatterySlider(context, this._resources, model.battery, model.maxBattery, dx, dy);
     });
   }
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    this.mesh.position.x = 0;
-    this.mesh.position.y = 0;
+    this._canvasMesh.mesh.position.x = 0;
+    this._canvasMesh.mesh.position.y = 0;
+  }
+
+  /** シーンに追加するthree.jsのオブジェクトを返す */
+  getThreeJsObjectList(): THREE.Mesh[] {
+    return this._canvasMesh.getThreeJsObjectList();
   }
 }

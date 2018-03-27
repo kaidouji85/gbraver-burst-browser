@@ -14,6 +14,7 @@ type Props = {
  * キャンバスメッシュおよび関連オブジェクトを集めたクラス
  */
 export class CanvasMesh {
+  // TODO 削除する
   /** リソース管理クラス */
   resources: Resources;
   /** メッシュ */
