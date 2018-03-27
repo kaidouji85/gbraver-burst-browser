@@ -6,8 +6,8 @@ import type {BatterySliderModel} from "./battery-slider-model";
 import {drawBatterySlider} from "../../../canvas/battery-slider";
 import * as THREE from "three";
 
-export const MESH_WIDTH = 512;
-export const MESH_HEIGHT = 512;
+/** メッシュの大きさ */
+export const MESH_SIZE = 360;
 
 /** バッテリースライダーのビュー */
 export class BatterySliderView {
@@ -17,8 +17,8 @@ export class BatterySliderView {
   constructor(resources: Resources) {
     this._canvasMesh = new CanvasMesh({
       resources,
-      meshWidth: MESH_WIDTH,
-      meshHeight: MESH_HEIGHT,
+      meshWidth: MESH_SIZE,
+      meshHeight: MESH_SIZE,
       canvasWidth: 512,
       canvasHeight: 512,
     });
