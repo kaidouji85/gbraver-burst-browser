@@ -14,17 +14,17 @@ export class EnemyHpGaugeView extends PlayerHpGaugeView {
 
   /** ゲージを更新する */
   _refreshGauge(model: HpGaugeModel): void {
-    this.draw((context: CanvasRenderingContext2D) => {
-      context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
+      context.clearRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
 
       // UVマッピングの原点は左下なので、HPゲージがテクスチャの一番下に描画されるようにする
-      drawEnemyHpGauge(context, this.resources, context.canvas.width/2, context.canvas.height - 32, model.hp, model.maxHp);
+      drawEnemyHpGauge(context, this._resources, context.canvas.width/2, context.canvas.height - 32, model.hp, model.maxHp);
     });
   }
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    this.mesh.position.x = (-window.innerWidth + MESH_WIDTH * this._scale) / 2;
-    this.mesh.position.y = window.innerHeight / 2  - PADDING_TOP * this._scale;
+    this._canvasMesh.mesh.position.x = (-window.innerWidth + MESH_WIDTH * this._scale) / 2;
+    this._canvasMesh.mesh.position.y = window.innerHeight / 2  - PADDING_TOP * this._scale;
   }
 }
