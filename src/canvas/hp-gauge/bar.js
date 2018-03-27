@@ -1,9 +1,9 @@
 // @flow
-import type {Resources} from '../../../resource/index';
-import {drawImage} from '../image-drawer';
-import {trapezoid} from '../../clip/trapezoid';
-import type {CanvasImageResource} from "../../../resource/canvas-image";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
+import type {Resources} from '../../resource/index';
+import {drawImageInCenter} from '../draw/image-drawer';
+import {trapezoid} from '../clip/trapezoid';
+import type {CanvasImageResource} from "../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 
 /** キャンバスを台形にクリッピングする */
 const clip = (context: CanvasRenderingContext2D, image: Image, dx: number, dy: number, percent: number) => {
@@ -26,12 +26,12 @@ export function PlayerHpBar(context: CanvasRenderingContext2D, resources: Resour
   const hpBarUpResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR_UP);
   const hpBarUp: Image = hpBarUpResource ? hpBarUpResource.image : new Image();
 
-  drawImage(context, hpBar, dx, dy);
+  drawImageInCenter(context, hpBar, dx, dy);
 
   context.save();
 
   clip(context, hpBarUp, dx, dy, percent);
-  drawImage(context, hpBarUp, dx, dy);
+  drawImageInCenter(context, hpBarUp, dx, dy);
 
   context.restore();
 }

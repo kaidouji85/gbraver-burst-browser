@@ -1,10 +1,10 @@
 // @flow
-import type {Resources} from '../../../resource/index';
-import {drawImage} from '../image-drawer';
+import type {Resources} from '../../resource/index';
+import {drawImageInCenter} from '../draw/image-drawer';
 import {PlayerHpBar} from './bar';
-import {drawNumberRight} from '../number';
-import type {CanvasImageResource} from "../../../resource/canvas-image";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
+import {drawNumberRight} from '../number/number';
+import type {CanvasImageResource} from "../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 
 /**
  * プレイヤーのHPゲージを描画する
@@ -26,12 +26,11 @@ export function drawPlayerHpGauge(context: CanvasRenderingContext2D, resources: 
   const hpGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_GAUGE_LABEL);
   const hpGaugeLabel: Image = hpGaugeLabelResource ? hpGaugeLabelResource.image : new Image();
 
-  drawImage(context, gaugeBase, dx, dy);
+  drawImageInCenter(context, gaugeBase, dx, dy);
   PlayerHpBar(context, resources, dx-8, dy+8, value);
 
-  drawImage(context, hpGaugeLabel, dx + 70, dy - 6);
+  drawImageInCenter(context, hpGaugeLabel, dx + 70, dy - 6);
   drawNumberRight(context, hpNumber, dx - 32, dy - 24, Math.floor(hp));
-
 }
 
 /**
@@ -57,11 +56,11 @@ export function drawEnemyHpGauge(context: CanvasRenderingContext2D, resources: R
   context.save();
   context.setTransform(-1, 0, 0, 1, 0, 0);
 
-  drawImage(context, gaugeBase, -dx, dy);
+  drawImageInCenter(context, gaugeBase, -dx, dy);
   PlayerHpBar(context, resources, -dx-8, dy+8, value);
 
   context.restore();
 
-  drawImage(context, hpGaugeLabel, dx - 64, dy - 6);
+  drawImageInCenter(context, hpGaugeLabel, dx - 64, dy - 6);
   drawNumberRight(context, hpNumber, dx + 100, dy - 24, Math.floor(hp));
 }
