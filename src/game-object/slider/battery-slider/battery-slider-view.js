@@ -40,7 +40,7 @@ export class BatterySliderView {
       /*
       context.save();
       context.fillStyle = 'red';
-      context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      context.fillRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
       context.restore();
       */
 
