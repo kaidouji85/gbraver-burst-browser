@@ -9,6 +9,10 @@ import {TouchLocation} from "./touch-location";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 360;
+/** スライダーのスタート値 */
+export const START_VALUE = 0;
+/** スライダーのエンド値 */
+export const END_VALUE = 5;
 
 /** バッテリースライダーのビュー */
 export class BatterySliderView {
@@ -26,7 +30,12 @@ export class BatterySliderView {
       canvasWidth: 512,
       canvasHeight: 512,
     });
-    this._touchLocation = new TouchLocation();
+    this._touchLocation = new TouchLocation({
+      width: 100,
+      height: 100,
+      start: START_VALUE,
+      end: END_VALUE,
+    });
     this._resources = resources;
   }
 
@@ -40,14 +49,6 @@ export class BatterySliderView {
   _refreshGauge(model: BatterySliderModel): void {
     this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
       context.clearRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
-
-      // TODO 開発が終わったら削除する
-      /*
-      context.save();
-      context.fillStyle = 'red';
-      context.fillRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
-      context.restore();
-      */
 
       // バッテリースライダーが中央に描画されるようにする
       const dx = this._canvasMesh.canvas.width / 2;
