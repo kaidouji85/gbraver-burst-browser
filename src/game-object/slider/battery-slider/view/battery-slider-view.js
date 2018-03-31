@@ -13,6 +13,12 @@ export const MESH_SIZE = 360;
 export const START_VALUE = 0;
 /** スライダーのエンド値 */
 export const END_VALUE = 5;
+/** スライダー1目盛り分の幅 */
+export const SLIDER_UNIT_WIDTH = 53;
+/** スライダー1目盛り分の高 */
+export const SLIDER_UNIT_HEIGHT = 48;
+/** スライダー当たり判定オブジェクトの左パディング */
+export const TOUCH_LOCATION_PADDING_LEFT = 132;
 
 /** バッテリースライダーのビュー */
 export class BatterySliderView {
@@ -31,8 +37,8 @@ export class BatterySliderView {
       canvasHeight: 512,
     });
     this._touchLocation = new TouchLocation({
-      width: 340,
-      height: 100,
+      width: SLIDER_UNIT_WIDTH,
+      height: SLIDER_UNIT_HEIGHT,
       start: START_VALUE,
       end: END_VALUE,
     });
@@ -59,8 +65,11 @@ export class BatterySliderView {
 
   /** 表示位置を更新する */
   _refreshPos(): void {
-    this._canvasMesh.mesh.position.x = 0;
-    this._canvasMesh.mesh.position.y = 0;
+    const dx = 0;
+    const dy = 0;
+    this._canvasMesh.mesh.position.x = dx;
+    this._canvasMesh.mesh.position.y = dy;
+    this._touchLocation.setPos(dx - SLIDER_UNIT_WIDTH - TOUCH_LOCATION_PADDING_LEFT, dy);
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */

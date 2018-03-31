@@ -15,9 +15,9 @@ type Meter = {
 
 /** コンストラクタのパラメータ */
 type Param = {
-  /** 当たり判定全体の幅 */
+  /** メータ1目盛り分の幅 */
   width: number,
-  /** 当たり判定全体の高さ */
+  /** メータ1目盛り分の高 */
   height: number,
   /** スライダー開始値 */
   start: number,
@@ -39,14 +39,13 @@ export class TouchLocation {
     const start = Math.floor(param.start);
     const end = Math.floor(param.end);
     const division = Math.abs(end - start);
-    const meshWidth = param.width / division;
 
-    this._meterList = R.range(start, end)
+    this._meterList = R.range(start, end + 1)
       .map((value, index) => {
-        const dx = -param.width / 2 + index * meshWidth;
+        const dx = param.width * (index + 0.5);
         const color = new THREE.Color(`rgb(0, ${255 * index/division}, 0)`);
         return {
-          mesh: createMeterMesh(meshWidth, param.height, dx, 0, color),
+          mesh: createMeterMesh(param.width, param.height, dx, 0, color),
           value
         }
       });
@@ -60,6 +59,12 @@ export class TouchLocation {
     return [this._meshGroup];
   }
 
+  /**
+   * 表示位置を変更する
+   *
+   * @param x x座標
+   * @param y y座標
+   */
   setPos(x: number, y: number) {
     this._meshGroup.position.x = x;
     this._meshGroup.position.y = y;
