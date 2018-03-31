@@ -32,6 +32,8 @@ type Param = {
 export class TouchLocation {
   /** メータ当たり判定を集めたもの */
   _meterList: Meter[];
+  /** 位置移動を簡単にするために、メータ当たり判定メッシュをグループにまとめる */
+  _meshGroup: THREE.Group;
 
   constructor(param: Param) {
     const start = Math.floor(param.start);
@@ -40,15 +42,27 @@ export class TouchLocation {
     const meshWidth = param.width / division;
 
     this._meterList = R.range(start, end)
-      .map((value, index) => ({
-        mesh: createMeterMesh(meshWidth, param.height, index * meshWidth, 0, new THREE.Color(`rgb(0, ${255 * index/division}, 0)`)),
-        value
-      }));
+      .map((value, index) => {
+        const dx = -param.width / 2 + index * meshWidth;
+        const color = new THREE.Color(`rgb(0, ${255 * index/division}, 0)`);
+        return {
+          mesh: createMeterMesh(meshWidth, param.height, dx, 0, color),
+          value
+        }
+      });
+
+    this._meshGroup = new THREE.Group();
+    this._meterList.forEach((meter: Meter) => this._meshGroup.add(meter.mesh));
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */
   getThreeJsObjectList(): THREE.Mesh[] {
-    return this._meterList.map((meter: Meter) => meter.mesh);
+    return [this._meshGroup];
+  }
+
+  setPos(x: number, y: number) {
+    this._meshGroup.position.x = x;
+    this._meshGroup.position.y = y;
   }
 }
 

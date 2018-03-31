@@ -31,7 +31,7 @@ export class BatterySliderView {
       canvasHeight: 512,
     });
     this._touchLocation = new TouchLocation({
-      width: 100,
+      width: 340,
       height: 100,
       start: START_VALUE,
       end: END_VALUE,
