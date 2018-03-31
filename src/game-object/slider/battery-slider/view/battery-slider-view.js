@@ -1,17 +1,22 @@
 // @flow
 
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
-import type {Resources} from "../../../resource";
-import type {BatterySliderModel} from "./battery-slider-model";
-import {drawBatterySlider} from "../../../canvas/battery-slider";
+import {CanvasMesh} from "../../../../mesh/canvas-mesh";
+import type {Resources} from "../../../../resource/index";
+import type {BatterySliderModel} from "../battery-slider-model";
+import {drawBatterySlider} from "../../../../canvas/battery-slider/index";
 import * as THREE from "three";
+import {TouchLocation} from "./touch-location";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 360;
 
 /** バッテリースライダーのビュー */
 export class BatterySliderView {
+  /** バッテリースライダーを描画するキャンバス */
   _canvasMesh: CanvasMesh;
+  /** バッテリースライダーメーターの当たり判定 */
+  _touchLocation: TouchLocation;
+  /** ゲームループで使うためにリソース管理オブジェクトをキャッシュする */
   _resources: Resources;
 
   constructor(resources: Resources) {
@@ -21,6 +26,7 @@ export class BatterySliderView {
       canvasWidth: 512,
       canvasHeight: 512,
     });
+    this._touchLocation = new TouchLocation();
     this._resources = resources;
   }
 
@@ -58,6 +64,9 @@ export class BatterySliderView {
 
   /** シーンに追加するthree.jsのオブジェクトを返す */
   getThreeJsObjectList(): THREE.Mesh[] {
-    return this._canvasMesh.getThreeJsObjectList();
+    return [
+      ...(this._canvasMesh.getThreeJsObjectList()),
+      ...(this._touchLocation.getThreeJsObjectList())
+    ];
   }
 }

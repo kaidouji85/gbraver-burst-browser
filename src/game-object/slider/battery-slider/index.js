@@ -1,7 +1,7 @@
 // @flow
 
 import type {BatterySliderModel} from "./battery-slider-model";
-import {BatterySliderView} from "./battery-slider-view";
+import {BatterySliderView} from "./view/battery-slider-view";
 import type {Resources} from "../../../resource";
 import * as THREE from "three";
 
