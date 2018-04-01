@@ -65,6 +65,8 @@ export class TouchLocation {
       .filter(v => v.value !== 0)
       .filter(v => isMeshOverlap(raycaster, v.mesh));
     this._isActive = touchList.length > 0;
+
+    this.onMouseMove(raycaster);
   }
 
   /**
