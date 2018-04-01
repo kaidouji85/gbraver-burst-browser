@@ -7,7 +7,7 @@ import type {Resources} from "../../../resource";
 import {AttackButtonView} from "./attack-button-view";
 import {push} from "./model/push";
 import {isGroupPlaying} from "../../../tween/is-group-playing";
-import {isTouch} from "../../../operation/touch/touch-checker";
+import {isTouchOverlap} from "../../../operation/touch/touch-overlap";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -61,7 +61,7 @@ export class AttackButton {
 
   /** ゲーム画面でタッチスタートした際の処理 */
   onTouchStart(touchRaycaster: TouchRaycastContainer): void {
-    const isFingerOverlay = isTouch(touchRaycaster, this._view);
+    const isFingerOverlay = isTouchOverlap(touchRaycaster, this._view);
     if (isFingerOverlay) {
       this._onOverlay();
     }

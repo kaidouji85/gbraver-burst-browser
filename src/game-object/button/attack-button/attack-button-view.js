@@ -6,14 +6,15 @@ import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
 import type {TextureResource} from "../../../resource/texture";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import type {ButtonModel} from "./model/button-model";
-import {TouchTarget} from "../../../operation/touch/touch-target";
+import {OverlapTarget} from "../../../operation/overlap-target";
+import {isMeshOverlap} from "../../../operation/overlap";
 
 export const BUTTON_WIDTH = 100;
 export const BUTTON_HEIGHT = 100;
 export const PADDING_BOTTOM = 64;
 
 /** コウゲキボタンのビュー */
-export class AttackButtonView implements TouchTarget {
+export class AttackButtonView implements OverlapTarget {
   _mesh: THREE.Mesh;
 
   constructor(resources: Resources) {
@@ -43,8 +44,6 @@ export class AttackButtonView implements TouchTarget {
 
   /** マウス、指とボタンが重なっているかを判定する */
   isOverlap(raycaster: THREE.Raycaster): boolean {
-    const intersects = raycaster.intersectObjects([this._mesh]);
-    return intersects.length > 0;
+    return isMeshOverlap(raycaster, this._mesh);
   }
-
 }
