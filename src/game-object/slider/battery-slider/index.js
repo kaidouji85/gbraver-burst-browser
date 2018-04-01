@@ -57,6 +57,11 @@ export class BatterySlider {
     this._view.onMouseMove(raycaster);
   }
 
+  /** マウスアップした際の処理 */
+  onMouseUp(raycaster: THREE.Raycater): void {
+    this._view.onMouseUp(raycaster);
+  }
+
   /** シーンに追加するthree.jsオブジェクトを返す */
   getThreeJsObjectList(): THREE.Mesh[] {
     return this._view.getThreeJsObjectList();

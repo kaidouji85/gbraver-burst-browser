@@ -10,13 +10,14 @@ export const SLIDER_WIDTH = 375;
 //export const SLIDER_HEIGHT = 52;
 export const SLIDER_HEIGHT = 84;  //TODO 開発が終わったら、上のものに戻す
 
-
 /** スライダーのどの部分に触れたかを判定する */
 export class TouchLocation {
   /** 目盛りの当たり判定をあつめたもの */
   _divisionList: Division[];
   /** 表示位置再計算のために、目盛りの最大値をキャッシュする */
   _maxValue: number;
+  /** スライダーがマウスムーブした時に反応するか否かのフラグ、trueで反応する */
+  _isActive: boolean;
   /** 当たり判定があった場合に発火されるコールバック関数 */
   _onOverlap: (value: number) => void;
 
@@ -34,6 +35,7 @@ export class TouchLocation {
       });
     this._maxValue = maxValue;
     this._onOverlap = onOverlap;
+    this._isActive = false;
     this.setPos(0, 0);
   }
 
@@ -57,14 +59,12 @@ export class TouchLocation {
    * @param raycaster マウスのレイキャスト
    */
   onMouseDown(raycaster: THREE.Raycater): void {
+    // 値=0の当たり判定は、バッテリースライダーの外側に存在している
+    // なので、アクティブ判定からは除外する
     const touchList = this._divisionList
-      .filter(v => isMeshOverlap(raycaster, v.mesh))
-      .map(v => v.value);
-
-    if (touchList.length > 0) {
-      const value = Math.max(...touchList);
-      this._onOverlap(value);
-    }
+      .filter(v => v.value !== 0)
+      .filter(v => isMeshOverlap(raycaster, v.mesh));
+    this._isActive = touchList.length > 0;
   }
 
   /**
@@ -73,7 +73,26 @@ export class TouchLocation {
    * @param raycaster マウスのレイキャスト
    */
   onMouseMove(raycaster: THREE.Raycater): void {
-    this.onMouseDown(raycaster);
+    if (!this._isActive) {
+      return;
+    }
+
+    const touchList = this._divisionList
+      .filter(v => isMeshOverlap(raycaster, v.mesh))
+      .map(v => v.value);
+    if (touchList.length > 0) {
+      const value = Math.max(...touchList);
+      this._onOverlap(value);
+    }
+  }
+
+  /**
+   * マウスアップした際の処理
+   *
+   * @param raycaster マウスのレイキャスト
+   */
+  onMouseUp(raycaster: THREE.Raycater): void {
+    this._isActive = false;
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */
