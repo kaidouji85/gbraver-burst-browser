@@ -1,91 +1,54 @@
 // @flow
 import * as THREE from "three";
 import * as R from 'ramda';
-
-/**
- * メータの当たり判定
- * 本クラスは当たり判定用なので、画面上に表示されることはない
- */
-type Meter = {
-  /** 当たり判定用のメッシュ */
-  mesh: THREE.Mesh,
-  /** 当たり判定オブジェクトにタッチした際のスライダー値 */
-  value: number
-};
+import {Division} from "./division";
 
 /** コンストラクタのパラメータ */
 type Param = {
-  /** メータ1目盛り分の幅 */
+  /** バッテリースライダーの幅 */
   width: number,
-  /** メータ1目盛り分の高 */
+  /** バッテリースライダーの高 */
   height: number,
-  /** スライダー開始値 */
-  start: number,
-  /** スライダー終了値 */
-  end: number,
+  /** バッテリーの最大値 */
+  maxValue: number
 };
 
-/**
- * バッテリースライダーの当たり判定用オブジェクト
- * 本クラスは当たり判定用なので、画面上に表示されることはない
- */
+/** スライダーのどの部分に触れたかを判定する */
 export class TouchLocation {
-  /** メータ当たり判定を集めたもの */
-  _meterList: Meter[];
-  /** 位置移動を簡単にするために、メータ当たり判定メッシュをグループにまとめる */
-  _meshGroup: THREE.Group;
+  /** 目盛りの当たり判定をあつめたもの */
+  _divisionList: Division[];
+  /** 表示位置再計算のために、バッテリースライダー幅をキャッシュする */
+  _width: number;
+  /** 表示位置再計算のために、目盛りの最大値をキャッシュする */
+  _maxValue: number;
 
   constructor(param: Param) {
-    const start = Math.floor(param.start);
-    const end = Math.floor(param.end);
-    const division = Math.abs(end - start);
-
-    this._meterList = R.range(start, end + 1)
-      .map((value, index) => {
-        const dx = param.width * (index + 0.5);
-        const color = new THREE.Color(`rgb(0, ${255 * index/division}, 0)`);
-        return {
-          mesh: createMeterMesh(param.width, param.height, dx, 0, color),
-          value
-        }
+    this._divisionList = R.range(1, param.maxValue + 1)
+      .map(v => {
+        const color = new THREE.Color(`rgb(0, ${255 * v / param.maxValue}, 0)`);
+        return new Division(param.width / param.maxValue, param.height, v, color);
       });
+    this._maxValue = param.maxValue;
+    this._width = param.width;
+    this.setPos(0, 0);
+  }
 
-    this._meshGroup = new THREE.Group();
-    this._meterList.forEach((meter: Meter) => this._meshGroup.add(meter.mesh));
+  /**
+   * 描画位置を設定する
+   *
+   * @param dx x座標
+   * @param dy y座標
+   */
+  setPos(dx: number, dy: number): void {
+    this._divisionList.forEach(division => {
+      const meshSize = this._width / this._maxValue;
+      division.mesh.position.x = dx - this._width / 2 + meshSize * division.value - meshSize / 2;
+      division.mesh.position.y = dy;
+    });
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */
   getThreeJsObjectList(): THREE.Mesh[] {
-    return [this._meshGroup];
+    return this._divisionList.map(v => v.mesh);
   }
-
-  /**
-   * 表示位置を変更する
-   *
-   * @param x x座標
-   * @param y y座標
-   */
-  setPos(x: number, y: number) {
-    this._meshGroup.position.x = x;
-    this._meshGroup.position.y = y;
-  }
-}
-
-/**
- * メータ当たり判定用のメッシュを生成する
- *
- * @param width メッシュ幅
- * @param height メッシュ高
- * @param dx 描画位置X
- * @param dy 描画位置Y
- * @param color メッシュ色（デバッグ用に使う）
- * @return メータ当たり判定用メッシュ
- */
-function createMeterMesh(width: number, height: number, dx: number, dy: number, color: number): THREE.Mesh {
-  const geometry = new THREE.PlaneGeometry(width, height, 1, 1);
-  const material = new THREE.MeshBasicMaterial({color});
-  const mesh = new THREE.Mesh(geometry, material);
-  mesh.position.x = dx;
-  mesh.position.y = dy;
-  return mesh;
 }
