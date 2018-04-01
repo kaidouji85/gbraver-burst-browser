@@ -10,10 +10,6 @@ import {TouchLocation} from "./touch-location";
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
 
-export const SLIDER_WIDTH = 375;
-
-export const SLIDER_HEIGHT = 52;
-
 /** バッテリースライダーのビュー */
 export class BatterySliderView {
   /** バッテリースライダーを描画するキャンバス */
@@ -30,11 +26,7 @@ export class BatterySliderView {
       canvasWidth: MESH_SIZE,
       canvasHeight: MESH_SIZE,
     });
-    this._touchLocation = new TouchLocation({
-      width: SLIDER_WIDTH,
-      height: SLIDER_HEIGHT,
-      maxValue: 5
-    });
+    this._touchLocation = new TouchLocation({maxValue: 5});
     this._resources = resources;
   }
 
@@ -69,6 +61,6 @@ export class BatterySliderView {
   getThreeJsObjectList(): THREE.Mesh[] {
     const canvas = this._canvasMesh.getThreeJsObjectList();
     const touchLocation = this._touchLocation.getThreeJsObjectList();
-    return [...touchLocation];
+    return [...canvas, ...touchLocation];
   }
 }
