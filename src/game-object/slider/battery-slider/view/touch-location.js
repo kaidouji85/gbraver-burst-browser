@@ -51,7 +51,11 @@ export class TouchLocation {
     });
   }
 
-  /** マウスダウンした際の処理 */
+  /**
+   * マウスダウンした際の処理
+   *
+   * @param raycaster マウスのレイキャスト
+   */
   onMouseDown(raycaster: THREE.Raycater): void {
     const touchList = this._divisionList
       .filter(v => isMeshOverlap(raycaster, v.mesh))
@@ -59,9 +63,17 @@ export class TouchLocation {
 
     if (touchList.length > 0) {
       const value = Math.max(...touchList);
-      console.log(`click ${value}`);
       this._onOverlap(value);
     }
+  }
+
+  /**
+   * マウスムーブした際の処理
+   *
+   * @param raycaster マウスのレイキャスト
+   */
+  onMouseMove(raycaster: THREE.Raycater): void {
+    this.onMouseDown(raycaster);
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */

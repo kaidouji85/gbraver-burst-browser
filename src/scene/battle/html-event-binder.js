@@ -25,7 +25,12 @@ export function bindHtmlEventToScene(scene: Observer, renderDom: HTMLElement) {
 
   renderDom.addEventListener('mousedown', (event: MouseEvent) => {
     event.preventDefault();
-    scene.notify({type: 'mouseDown', event})
+    scene.notify({type: 'mouseDown', event});
+  });
+
+  renderDom.addEventListener('mousemove', (event: MouseEvent) => {
+    event.preventDefault();
+    scene.notify({type: 'mouseMove', event});
   });
 
   renderDom.addEventListener('mouseup', (event: MouseEvent) => {

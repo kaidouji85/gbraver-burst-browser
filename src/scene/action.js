@@ -6,6 +6,7 @@ export type Action =
   | GameLoopAction
   | DebugModeAction
   | MouseDown
+  | MouseMove
   | MouseUp
   | TouchStart
   | TouchEnd
@@ -30,6 +31,13 @@ export type DebugModeAction = {
 /** マウスダウン */
 export type MouseDown = {
   type: 'mouseDown',
+  event: MouseEvent
+};
+
+
+/** マウスムーブ */
+export type MouseMove = {
+  type: 'mouseMove',
   event: MouseEvent
 };
 
