@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import {getMousePosition} from "./mouse-position";
-import {getRaycaster} from "../raycaster";
+import {createRaycaster} from "../raycaster-creator";
 
 /**
  * マウスイベントからレイキャストを取得
@@ -14,5 +14,5 @@ import {getRaycaster} from "../raycaster";
  */
 export function getMouseRaycaster(event: MouseEvent, renderer: THREE.WebGLRenderer, camera: THREE.Camera): THREE.Raycaster {
   const mousePos: THREE.Vectoe2 = getMousePosition(event, renderer);
-  return getRaycaster(mousePos, camera);
+  return createRaycaster(mousePos, camera);
 }

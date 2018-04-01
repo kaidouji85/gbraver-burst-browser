@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from 'three';
-import {getRaycaster} from "../raycaster";
+import {createRaycaster} from "../raycaster-creator";
 import {getTouchPosition} from "./touch-position";
 
 /** タッチのレイキャストを集めたもの */
@@ -37,7 +37,7 @@ export function createTouchEventRaycaster(event: TouchEvent, renderer: THREE.Web
         const position = getTouchPosition(touch, renderer);
         return {
           identifier: touch.identifier,
-          raycaster: getRaycaster(position, camera)
+          raycaster: createRaycaster(position, camera)
         };
       });
 
