@@ -23,6 +23,11 @@ export class BatterySlider {
     this._view.gameLoop(this._model);
   }
 
+  /** マウスダウンした際の処理 */
+  onMouseDown(raycaster: THREE.Raycater): void {
+    this._view.onMouseDown(raycaster);
+  }
+
   /** シーンに追加するthree.jsオブジェクトを返す */
   getThreeJsObjectList(): THREE.Mesh[] {
     return this._view.getThreeJsObjectList();

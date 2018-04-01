@@ -13,4 +13,5 @@ export function mouseDown(view: BattleSceneView, state: BattleSceneState, action
 
   const hudRaycaster: THREE.Raycaster = getMouseRaycaster(action.event, view.renderer, view.hudLayer.camera);
   view.hudLayer.attackButton.onMouseDown(hudRaycaster);
+  view.hudLayer.batterySlider.onMouseDown(hudRaycaster);
 }

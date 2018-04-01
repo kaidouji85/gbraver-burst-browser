@@ -2,6 +2,7 @@
 import * as THREE from "three";
 import * as R from 'ramda';
 import {Division} from "./division";
+import {isMouseOverlap} from "../../../../operation/mouse/overlap";
 
 /** スライダー部分の幅 */
 export const SLIDER_WIDTH = 375;
@@ -43,6 +44,18 @@ export class TouchLocation {
       division.mesh.position.x = dx - SLIDER_WIDTH / 2 + meshSize * division.value - meshSize / 2;
       division.mesh.position.y = dy;
     });
+  }
+
+  /** マウスダウンした際の処理 */
+  onMouseDown(raycaster: THREE.Raycater): void {
+    const touchList = this._divisionList
+      .filter(v => isMouseOverlap(raycaster, v.mesh))
+      .map(v => v.value);
+
+    if (touchList.length > 0) {
+      const value = Math.max(...touchList);
+      console.log(`click ${value}`);
+    }
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */
