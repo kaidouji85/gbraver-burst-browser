@@ -10,10 +10,6 @@ export const SLIDER_WIDTH = 375;
 //export const SLIDER_HEIGHT = 52;
 export const SLIDER_HEIGHT = 84;  //TODO 開発が終わったら、上のものに戻す
 
-/** コンストラクタのパラメータ */
-type Param = {
-  maxValue: number
-};
 
 /** スライダーのどの部分に触れたかを判定する */
 export class TouchLocation {
@@ -21,14 +17,23 @@ export class TouchLocation {
   _divisionList: Division[];
   /** 表示位置再計算のために、目盛りの最大値をキャッシュする */
   _maxValue: number;
+  /** 当たり判定があった場合に発火されるコールバック関数 */
+  _onOverlap: (value: number) => void;
 
-  constructor(param: Param) {
-    this._divisionList = R.range(0, param.maxValue + 1)
+  /**
+   * コンストラクタ
+   *
+   * @param maxValue バッテリー最大値
+   * @param onOverlap 当たり判定があった場合に発火されるコールバック関数
+   */
+  constructor(maxValue: number, onOverlap: (value: number) => void) {
+    this._divisionList = R.range(0, maxValue + 1)
       .map(v => {
-        const color = new THREE.Color(`rgb(0, ${255 * v / param.maxValue}, 0)`);
-        return new Division(SLIDER_WIDTH / param.maxValue, SLIDER_HEIGHT, v, color);
+        const color = new THREE.Color(`rgb(0, ${255 * v / maxValue}, 0)`);
+        return new Division(SLIDER_WIDTH / maxValue, SLIDER_HEIGHT, v, color);
       });
-    this._maxValue = param.maxValue;
+    this._maxValue = maxValue;
+    this._onOverlap = onOverlap;
     this.setPos(0, 0);
   }
 
@@ -55,6 +60,7 @@ export class TouchLocation {
     if (touchList.length > 0) {
       const value = Math.max(...touchList);
       console.log(`click ${value}`);
+      this._onOverlap(value);
     }
   }
 

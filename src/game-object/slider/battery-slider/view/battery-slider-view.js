@@ -2,13 +2,20 @@
 
 import {CanvasMesh} from "../../../../mesh/canvas-mesh";
 import type {Resources} from "../../../../resource/index";
-import type {BatterySliderModel} from "../battery-slider-model";
+import type {BatterySliderModel} from "../model/battery-slider-model";
 import {drawBatterySlider} from "../../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {TouchLocation} from "./touch-location";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
+
+/** コンストラクタのパラメータ */
+type Param = {
+  resources: Resources,
+  maxValue: number,
+  onValueChange: (value: number) => void
+};
 
 /** バッテリースライダーのビュー */
 export class BatterySliderView {
@@ -19,15 +26,15 @@ export class BatterySliderView {
   /** ゲームループで使うためにリソース管理オブジェクトをキャッシュする */
   _resources: Resources;
 
-  constructor(resources: Resources) {
+  constructor(param: Param) {
     this._canvasMesh = new CanvasMesh({
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
       canvasWidth: MESH_SIZE,
       canvasHeight: MESH_SIZE,
     });
-    this._touchLocation = new TouchLocation({maxValue: 5});
-    this._resources = resources;
+    this._touchLocation = new TouchLocation(param.maxValue, (value: number) => param.onValueChange(value));
+    this._resources = param.resources;
   }
 
   /** ビューにモデルを反映させる */
