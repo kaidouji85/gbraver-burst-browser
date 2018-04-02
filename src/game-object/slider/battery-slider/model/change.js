@@ -4,7 +4,7 @@ import {Group, Tween} from '@tweenjs/tween.js';
 import type {BatterySliderModel} from "./battery-slider-model";
 
 /**
- * バッテリーを変更する
+ * バッテリー変更アニメ
  *
  * @param model バッテリースライダーモデル
  * @param tweenGroup Tweenグループ
@@ -13,5 +13,5 @@ import type {BatterySliderModel} from "./battery-slider-model";
  */
 export function change(model: BatterySliderModel, tweenGroup: Group, toBattery: number): Tween {
   return new Tween(model, tweenGroup)
-    .to({battery: toBattery}, 32);
+    .to({animateBattery: toBattery}, 32);
 }

@@ -12,9 +12,12 @@ export const MESH_SIZE = 512;
 
 /** コンストラクタのパラメータ */
 type Param = {
+  /** リソース管理オブジェクト */
   resources: Resources,
+  /** ゲージ最大値 */
   maxValue: number,
-  onValueChange: (value: number) => void
+  /** ゲージ部分にタッチした場合のコールバック関数 */
+  onSliderTouch: (value: number) => void
 };
 
 /** バッテリースライダーのビュー */
@@ -33,7 +36,7 @@ export class BatterySliderView {
       canvasWidth: MESH_SIZE,
       canvasHeight: MESH_SIZE,
     });
-    this._touchLocation = new TouchLocation(param.maxValue, (value: number) => param.onValueChange(value));
+    this._touchLocation = new TouchLocation(param.maxValue, (value: number) => param.onSliderTouch(value));
     this._resources = param.resources;
   }
 
@@ -71,7 +74,7 @@ export class BatterySliderView {
       // バッテリースライダーが中央に描画されるようにする
       const dx = this._canvasMesh.canvas.width / 2;
       const dy = this._canvasMesh.canvas.height / 2;
-      drawBatterySlider(context, this._resources, model.battery, model.maxBattery, dx, dy);
+      drawBatterySlider(context, this._resources, model.animateBattery, model.maxBattery, dx, dy);
     });
   }
 

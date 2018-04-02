@@ -19,14 +19,13 @@ export class BatterySlider {
   constructor(resources: Resources) {
     this._model = {
       battery: 3,
+      animateBattery: 3,
       maxBattery: 5
     };
     this._view = new BatterySliderView({
       resources,
       maxValue: this._model.maxBattery,
-      onValueChange: (value: number) => {
-        this.change(value).start();
-      }
+      onSliderTouch: (value: number) => this._onSliderTouch(value)
     });
     this._tweenGroup = new Group();
   }
@@ -75,5 +74,15 @@ export class BatterySlider {
   /** シーンに追加するthree.jsオブジェクトを返す */
   getThreeJsObjectList(): THREE.Mesh[] {
     return this._view.getThreeJsObjectList();
+  }
+
+  _onSliderTouch(value: number): void {
+    if (this._model.battery === value) {
+      return;
+    }
+
+    this._model.battery = value;
+    this.removeAllTween();
+    this.change(value).start();
   }
 }
