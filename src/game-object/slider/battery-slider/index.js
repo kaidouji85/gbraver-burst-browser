@@ -5,7 +5,7 @@ import {BatterySliderView} from "./view/battery-slider-view";
 import type {Resources} from "../../../resource";
 import * as THREE from "three";
 import {change} from './model/change';
-import {Group, Tween} from "@tweenjs/tween.js/src/Tween";
+import {Group, Tween} from "@tweenjs/tween.js";
 
 /** バッテリースライダー */
 export class BatterySlider {
@@ -47,6 +47,11 @@ export class BatterySlider {
     return change(this._model, this._tweenGroup, toBattery);
   }
 
+  /** 本クラスのTweenを全て削除する */
+  removeAllTween(): void {
+    this._tweenGroup.removeAll();
+  }
+
   /** マウスダウンした際の処理 */
   onMouseDown(raycaster: THREE.Raycater): void {
     this._view.onMouseDown(raycaster);
@@ -60,6 +65,11 @@ export class BatterySlider {
   /** マウスアップした際の処理 */
   onMouseUp(raycaster: THREE.Raycater): void {
     this._view.onMouseUp(raycaster);
+  }
+
+  /** マウスリーブした際の処理 */
+  onMouseLeave(raycaster: THREE.Raycater): void {
+    this._view.onMouseLeave(raycaster);
   }
 
   /** シーンに追加するthree.jsオブジェクトを返す */

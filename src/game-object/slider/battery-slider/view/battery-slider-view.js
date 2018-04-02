@@ -58,6 +58,11 @@ export class BatterySliderView {
     this._touchLocation.onMouseUp(raycaster);
   }
 
+  /** マウスリーブした際の処理 */
+  onMouseLeave(raycaster: THREE.Raycater): void {
+    this._touchLocation.onMouseLeave(raycaster);
+  }
+
   /** バッテリースライダーを更新する */
   _refreshGauge(model: BatterySliderModel): void {
     this._canvasMesh.draw((context: CanvasRenderingContext2D) => {

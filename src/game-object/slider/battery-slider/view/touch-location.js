@@ -97,6 +97,15 @@ export class TouchLocation {
     this._isActive = false;
   }
 
+  /**
+   * マウスリーブした際の処理
+   *
+   * @param raycaster マウスのレイキャスト
+   */
+  onMouseLeave(raycaster: THREE.Raycater): void {
+    this._isActive = false;
+  }
+
   /** シーンに追加するthree.jsのオブジェクトを返す */
   getThreeJsObjectList(): THREE.Mesh[] {
     return this._divisionList.map(v => v.mesh);
