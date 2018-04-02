@@ -30,7 +30,7 @@ export type TouchRaycaster = {
  * @return タッチイベントから作成したレイキャスト
  */
 export function createTouchEventRaycaster(event: TouchEvent, renderer: THREE.WebGLRenderer, camera: THREE.Camera): TouchRaycastContainer {
-  const createRaycaster = (touchList: TouchList): TouchRaycaster[] =>
+  const touchToRaycaster = (touchList: TouchList): TouchRaycaster[] =>
     Object.values(touchList)
       .map(v => {
         const touch: Touch = v instanceof Touch ? v : new Touch();
@@ -42,8 +42,8 @@ export function createTouchEventRaycaster(event: TouchEvent, renderer: THREE.Web
       });
 
   return {
-    changedTouches: createRaycaster(event.changedTouches),
-    targetTouches: createRaycaster(event.targetTouches),
-    touches: createRaycaster(event.touches),
+    changedTouches: touchToRaycaster(event.changedTouches),
+    targetTouches: touchToRaycaster(event.targetTouches),
+    touches: touchToRaycaster(event.touches),
   };
 }

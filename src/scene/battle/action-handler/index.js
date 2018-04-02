@@ -12,6 +12,7 @@ import {touchEnd} from "./touch-end";
 import {pushAttackButton} from "./push-attack-button";
 import {mouseMove} from "./mouse-move";
 import {mouseLeave} from "./mouse-leave";
+import {touchMove} from "./touch-move";
 
 /** アクションハンドラ */
 export function actionHandler(action: Action, scene: BattleScene) {
@@ -32,6 +33,8 @@ export function actionHandler(action: Action, scene: BattleScene) {
       return mouseLeave(scene.view, scene.state, action);
     case 'touchStart':
       return touchStart(scene.view, scene.state, action);
+    case 'touchMove':
+      return touchMove(scene.view, scene.state, action);
     case 'touchEnd':
       return touchEnd(scene.view, scene.state, action);
     case 'pushAttackButton':

@@ -10,6 +10,7 @@ export type Action =
   | MouseUp
   | MouseLeave
   | TouchStart
+  | TouchMove
   | TouchEnd
   | PushAttackButton;
 
@@ -54,9 +55,15 @@ export type MouseLeave = {
   event: MouseEvent
 };
 
-/** タッチスタートイベント */
+/** タッチスタート */
 export type TouchStart = {
   type: 'touchStart',
+  event: TouchEvent
+};
+
+/** タッチムーブ */
+export type TouchMove = {
+  type: 'touchMove',
   event: TouchEvent
 };
 
