@@ -90,14 +90,32 @@ export class BatterySlider {
     this._uiState.isActive = false;
   }
 
-  /** タッチムーブした際の処理 */
-  onTouchMove(touch: TouchRaycastContainer): void {
-    // TODO 非アクティブの時は何もしないようにする
+  /** タッチスタートした際の処理 */
+  onTouchStart(touch: TouchRaycastContainer): void {
     const value: ?number = this._view.getTouchOverlap(touch);
-    if (value !== null && value !== undefined && this._uiState.selectBattery !== value) {
+    if (value !== null && value !== undefined && value > 0) {
+      this._uiState.isActive = true;
       this._uiState.selectBattery = value;
       this.removeAllTween();
       this.change(value).start();
+    }
+  }
+
+  /** タッチムーブした際の処理 */
+  onTouchMove(touch: TouchRaycastContainer): void {
+    const value: ?number = this._view.getTouchOverlap(touch);
+    if (this._uiState.isActive && value !== null && value !== undefined && this._uiState.selectBattery !== value) {
+      this._uiState.selectBattery = value;
+      this.removeAllTween();
+      this.change(value).start();
+    }
+  }
+
+  /** タッチエンドした際の処理 */
+  onTouchEnd(touch: TouchRaycastContainer): void {
+    const value: ?number = this._view.getTouchOverlap(touch);
+    if (value === null || value === undefined) {
+      this._uiState.isActive = false;
     }
   }
 
