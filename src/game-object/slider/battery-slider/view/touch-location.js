@@ -2,7 +2,8 @@
 import * as THREE from "three";
 import * as R from 'ramda';
 import {Division} from "./division";
-import {isMeshOverlap} from "../../../../operation/overlap";
+import type {TouchRaycastContainer} from "../../../../operation/touch/touch-raycaster";
+import {isTouchOverlap} from "../../../../operation/touch/touch-overlap";
 
 /** スライダー部分の幅 */
 export const SLIDER_WIDTH = 375;
@@ -63,7 +64,7 @@ export class TouchLocation {
     // なので、アクティブ判定からは除外する
     const touchList = this._divisionList
       .filter(v => v.value !== 0)
-      .filter(v => isMeshOverlap(raycaster, v.mesh));
+      .filter(v => v.isOverlap(raycaster));
     this._isActive = touchList.length > 0;
 
     this.onMouseMove(raycaster);
@@ -80,7 +81,7 @@ export class TouchLocation {
     }
 
     const touchList = this._divisionList
-      .filter(v => isMeshOverlap(raycaster, v.mesh))
+      .filter(v => v.isOverlap(raycaster))
       .map(v => v.value);
     if (touchList.length > 0) {
       const value = Math.max(...touchList);
@@ -104,6 +105,23 @@ export class TouchLocation {
    */
   onMouseLeave(raycaster: THREE.Raycater): void {
     this._isActive = false;
+  }
+
+  /**
+   * タッチムーブした際の処理
+   *
+   * @param touchRaycaster タッチイベントのレイキャスト
+   */
+  onTouchMove(touchRaycaster: TouchRaycastContainer): void {
+    // TODO 非アクティブなら何もしないようにする
+    
+    const touchList = this._divisionList
+      .filter(v => isTouchOverlap(touchRaycaster, v))
+      .map(v => v.value);
+    if (touchList.length > 0) {
+      const value = Math.max(...touchList);
+      this._onOverlap(value);
+    }
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */

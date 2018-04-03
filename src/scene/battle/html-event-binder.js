@@ -23,6 +23,11 @@ export function bindHtmlEventToScene(scene: Observer, renderDom: HTMLElement) {
     scene.notify({type: 'touchEnd', event});
   });
 
+  renderDom.addEventListener('touchmove', (event: TouchEvent) => {
+    event.preventDefault();
+    scene.notify({type: 'touchMove', event});
+  });
+
   renderDom.addEventListener('mousedown', (event: MouseEvent) => {
     event.preventDefault();
     scene.notify({type: 'mouseDown', event});

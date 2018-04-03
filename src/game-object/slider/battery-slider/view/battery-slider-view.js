@@ -6,6 +6,7 @@ import type {BatterySliderModel} from "../model/battery-slider-model";
 import {drawBatterySlider} from "../../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {TouchLocation} from "./touch-location";
+import type {TouchRaycastContainer} from "../../../../operation/touch/touch-raycaster";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
@@ -64,6 +65,11 @@ export class BatterySliderView {
   /** マウスリーブした際の処理 */
   onMouseLeave(raycaster: THREE.Raycater): void {
     this._touchLocation.onMouseLeave(raycaster);
+  }
+
+  /** タッチムーブした際の処理 */
+  onTouchMove(touchRaycaster: TouchRaycastContainer): void {
+    this._touchLocation.onTouchMove(touchRaycaster);
   }
 
   /** バッテリースライダーを更新する */

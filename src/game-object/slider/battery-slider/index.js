@@ -6,6 +6,7 @@ import type {Resources} from "../../../resource";
 import * as THREE from "three";
 import {change} from './model/change';
 import {Group, Tween} from "@tweenjs/tween.js";
+import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";
 
 /** バッテリースライダー */
 export class BatterySlider {
@@ -69,6 +70,11 @@ export class BatterySlider {
   /** マウスリーブした際の処理 */
   onMouseLeave(raycaster: THREE.Raycater): void {
     this._view.onMouseLeave(raycaster);
+  }
+
+  /** タッチムーブした際の処理 */
+  onTouchMove(touchRaycaster: TouchRaycastContainer): void {
+    this._view.onTouchMove(touchRaycaster);
   }
 
   /** シーンに追加するthree.jsオブジェクトを返す */
