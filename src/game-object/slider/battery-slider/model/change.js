@@ -13,5 +13,5 @@ import type {BatterySliderModel} from "./battery-slider-model";
  */
 export function change(model: BatterySliderModel, tweenGroup: Group, toBattery: number): Tween {
   return new Tween(model, tweenGroup)
-    .to({animateBattery: toBattery}, 32);
+    .to({battery: toBattery}, 32);
 }

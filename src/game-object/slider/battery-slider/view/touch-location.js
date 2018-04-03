@@ -4,6 +4,8 @@ import * as R from 'ramda';
 import {Division} from "./division";
 import type {TouchRaycastContainer} from "../../../../screen-touch/touch/touch-raycaster";
 import {isTouchOverlap} from "../../../../screen-touch/touch/touch-overlap";
+import type {MouseRaycaster} from "../../../../screen-touch/mouse/mouse-raycaster";
+import {isMouseOverlap} from "../../../../screen-touch/mouse/mouse-overlap";
 
 /** スライダー部分の幅 */
 export const SLIDER_WIDTH = 375;
@@ -17,10 +19,6 @@ export class TouchLocation {
   _divisionList: Division[];
   /** 表示位置再計算のために、目盛りの最大値をキャッシュする */
   _maxValue: number;
-  /** スライダーがマウスムーブした時に反応するか否かのフラグ、trueで反応する */
-  _isActive: boolean;
-  /** 当たり判定があった場合に発火されるコールバック関数 */
-  _onOverlap: (value: number) => void;
 
   /**
    * コンストラクタ
@@ -28,20 +26,56 @@ export class TouchLocation {
    * @param maxValue バッテリー最大値
    * @param onOverlap 当たり判定があった場合に発火されるコールバック関数
    */
-  constructor(maxValue: number, onOverlap: (value: number) => void) {
+  constructor(maxValue: number) {
     this._divisionList = R.range(0, maxValue + 1)
       .map(v => {
         const color = new THREE.Color(`rgb(0, ${255 * v / maxValue}, 0)`);
         return new Division(SLIDER_WIDTH / maxValue, SLIDER_HEIGHT, v, color);
       });
     this._maxValue = maxValue;
-    this._onOverlap = onOverlap;
-    this._isActive = false;
     this.setPos(0, 0);
   }
 
   /**
-   * 描画位置を設定する
+   * マウスが重なっているスライダーの目盛りを返す
+   * 目盛りに重なっていない場合はnullを返す
+   *
+   * @param mouse マウスレイキャスト
+   * @return マウスが重なっている目盛り
+   */
+  getMouseOverlap(mouse: MouseRaycaster): ?number {
+    const overlapList = this._divisionList.filter(v => isMouseOverlap(mouse, v));
+    return this._getMaxNumber(overlapList);
+  }
+
+  /**
+   * 指が重なっているスライダーの目盛りを返す
+   * 目盛りに重なっていない場合はnullを返す
+   *
+   * @param mouse 指レイキャスト
+   * @return 指が重なっている目盛り
+   */
+  getTouchOverlap(touch: TouchRaycastContainer): ?number {
+    const overlapList = this._divisionList.filter(v => isTouchOverlap(touch, v));
+    return this._getMaxNumber(overlapList);
+  }
+
+  /**
+   * 指、マウスが重なっている目盛りから最大値のものを返す
+   * 重なっている目盛りがない場合には、nullを返す
+   *
+   * @param overlapList 指、マウスが重なっている目盛り
+   * @return 指、マウスが重なっている目盛りで最大のもの
+   */
+  _getMaxNumber(overlapList: Division[]): ?number {
+    if (overlapList.length > 0) {
+      return Math.max(...overlapList.map(v => v.value));
+    }
+    return null;
+  }
+
+  /**
+   * 位置を設定する
    *
    * @param dx x座標
    * @param dy y座標
@@ -52,76 +86,6 @@ export class TouchLocation {
       division.mesh.position.x = dx - SLIDER_WIDTH / 2 + meshSize * division.value - meshSize / 2;
       division.mesh.position.y = dy;
     });
-  }
-
-  /**
-   * マウスダウンした際の処理
-   *
-   * @param raycaster マウスのレイキャスト
-   */
-  onMouseDown(raycaster: THREE.Raycater): void {
-    // 値=0の当たり判定は、バッテリースライダーの外側に存在している
-    // なので、アクティブ判定からは除外する
-    const touchList = this._divisionList
-      .filter(v => v.value !== 0)
-      .filter(v => v.isOverlap(raycaster));
-    this._isActive = touchList.length > 0;
-
-    this.onMouseMove(raycaster);
-  }
-
-  /**
-   * マウスムーブした際の処理
-   *
-   * @param raycaster マウスのレイキャスト
-   */
-  onMouseMove(raycaster: THREE.Raycater): void {
-    if (!this._isActive) {
-      return;
-    }
-
-    const touchList = this._divisionList
-      .filter(v => v.isOverlap(raycaster))
-      .map(v => v.value);
-    if (touchList.length > 0) {
-      const value = Math.max(...touchList);
-      this._onOverlap(value);
-    }
-  }
-
-  /**
-   * マウスアップした際の処理
-   *
-   * @param raycaster マウスのレイキャスト
-   */
-  onMouseUp(raycaster: THREE.Raycater): void {
-    this._isActive = false;
-  }
-
-  /**
-   * マウスリーブした際の処理
-   *
-   * @param raycaster マウスのレイキャスト
-   */
-  onMouseLeave(raycaster: THREE.Raycater): void {
-    this._isActive = false;
-  }
-
-  /**
-   * タッチムーブした際の処理
-   *
-   * @param touchRaycaster タッチイベントのレイキャスト
-   */
-  onTouchMove(touchRaycaster: TouchRaycastContainer): void {
-    // TODO 非アクティブなら何もしないようにする
-    
-    const touchList = this._divisionList
-      .filter(v => isTouchOverlap(touchRaycaster, v))
-      .map(v => v.value);
-    if (touchList.length > 0) {
-      const value = Math.max(...touchList);
-      this._onOverlap(value);
-    }
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */

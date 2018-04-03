@@ -8,28 +8,34 @@ import {change} from './model/change';
 import {Group, Tween} from "@tweenjs/tween.js";
 import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
+import type {UIState} from "./ui-state";
 
 /** バッテリースライダー */
 export class BatterySlider {
   /** バッテリースライダーのモデル */
   _model: BatterySliderModel;
+  /** UIの状態変数をまとめたもの */
+  _uiState: UIState;
   /** バッテリースライダーのビュー */
   _view: BatterySliderView;
   /** 本オブジェクトに関するTweenのグループ */
   _tweenGroup: Group;
 
   constructor(resources: Resources) {
+    const initialBattery = 3;
     this._model = {
-      battery: 3,
-      animateBattery: 3,
+      battery: initialBattery,
       maxBattery: 5
     };
     this._view = new BatterySliderView({
       resources,
-      maxValue: this._model.maxBattery,
-      onSliderTouch: (value: number) => this._onSliderTouch(value)
+      maxValue: this._model.maxBattery
     });
     this._tweenGroup = new Group();
+    this._uiState = {
+      isActive: false,
+      selectBattery: initialBattery
+    };
   }
 
   /** ゲームループの処理 */
@@ -55,27 +61,44 @@ export class BatterySlider {
 
   /** マウスダウンした際の処理 */
   onMouseDown(mouse: MouseRaycaster): void {
-    this._view.onMouseDown(mouse.raycaster);
+    const value: ?number = this._view.getMouseOverlap(mouse);
+    if (value !== null && value !== undefined && value > 0) {
+      this._uiState.isActive = true;
+      this._uiState.selectBattery = value;
+      this.removeAllTween();
+      this.change(value).start();
+    }
   }
 
   /** マウスムーブした際の処理 */
   onMouseMove(mouse: MouseRaycaster): void {
-    this._view.onMouseMove(mouse.raycaster);
+    const value: ?number = this._view.getMouseOverlap(mouse);
+    if (this._uiState.isActive && value !== null && value !== undefined && value !== this._uiState.selectBattery) {
+      this._uiState.selectBattery = value;
+      this.removeAllTween();
+      this.change(value).start();
+    }
   }
 
   /** マウスアップした際の処理 */
   onMouseUp(mouse: MouseRaycaster): void {
-    this._view.onMouseUp(mouse.raycaster);
+    this._uiState.isActive = false;
   }
 
   /** マウスリーブした際の処理 */
   onMouseLeave(mouse: MouseRaycaster): void {
-    this._view.onMouseLeave(mouse.raycaster);
+    this._uiState.isActive = false;
   }
 
   /** タッチムーブした際の処理 */
-  onTouchMove(touchRaycaster: TouchRaycastContainer): void {
-    this._view.onTouchMove(touchRaycaster);
+  onTouchMove(touch: TouchRaycastContainer): void {
+    // TODO 非アクティブの時は何もしないようにする
+    const value: ?number = this._view.getTouchOverlap(touch);
+    if (value !== null && value !== undefined && this._uiState.selectBattery !== value) {
+      this._uiState.selectBattery = value;
+      this.removeAllTween();
+      this.change(value).start();
+    }
   }
 
   /** シーンに追加するthree.jsオブジェクトを返す */
