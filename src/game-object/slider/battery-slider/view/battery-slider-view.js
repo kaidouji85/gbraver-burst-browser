@@ -7,9 +7,7 @@ import {drawBatterySlider} from "../../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {TouchLocation} from "./touch-location";
 import type {TouchRaycastContainer} from "../../../../screen-touch/touch/touch-raycaster";
-import {isMouseOverlap} from "../../../../screen-touch/mouse/mouse-overlap";
 import type {MouseRaycaster} from "../../../../screen-touch/mouse/mouse-raycaster";
-import {isTouchOverlap} from "../../../../screen-touch/touch/touch-overlap";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;

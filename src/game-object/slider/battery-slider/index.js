@@ -105,14 +105,4 @@ export class BatterySlider {
   getThreeJsObjectList(): THREE.Mesh[] {
     return this._view.getThreeJsObjectList();
   }
-
-  _onSliderTouch(value: number): void {
-    if (this._model.battery === value) {
-      return;
-    }
-
-    this._model.battery = value;
-    this.removeAllTween();
-    this.change(value).start();
-  }
 }
