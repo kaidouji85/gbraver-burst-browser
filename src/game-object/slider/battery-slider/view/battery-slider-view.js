@@ -6,7 +6,7 @@ import type {BatterySliderModel} from "../model/battery-slider-model";
 import {drawBatterySlider} from "../../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {TouchLocation} from "./touch-location";
-import type {TouchRaycastContainer} from "../../../../operation/touch/touch-raycaster";
+import type {TouchRaycastContainer} from "../../../../screen-touch/touch/touch-raycaster";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;

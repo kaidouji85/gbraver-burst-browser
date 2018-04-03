@@ -2,8 +2,8 @@
 import * as THREE from "three";
 import * as R from 'ramda';
 import {Division} from "./division";
-import type {TouchRaycastContainer} from "../../../../operation/touch/touch-raycaster";
-import {isTouchOverlap} from "../../../../operation/touch/touch-overlap";
+import type {TouchRaycastContainer} from "../../../../screen-touch/touch/touch-raycaster";
+import {isTouchOverlap} from "../../../../screen-touch/touch/touch-overlap";
 
 /** スライダー部分の幅 */
 export const SLIDER_WIDTH = 375;

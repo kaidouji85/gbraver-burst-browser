@@ -6,7 +6,8 @@ import type {Resources} from "../../../resource";
 import * as THREE from "three";
 import {change} from './model/change';
 import {Group, Tween} from "@tweenjs/tween.js";
-import type {TouchRaycastContainer} from "../../../operation/touch/touch-raycaster";
+import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
+import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 
 /** バッテリースライダー */
 export class BatterySlider {
@@ -53,23 +54,23 @@ export class BatterySlider {
   }
 
   /** マウスダウンした際の処理 */
-  onMouseDown(raycaster: THREE.Raycater): void {
-    this._view.onMouseDown(raycaster);
+  onMouseDown(mouse: MouseRaycaster): void {
+    this._view.onMouseDown(mouse.raycaster);
   }
 
   /** マウスムーブした際の処理 */
-  onMouseMove(raycaster: THREE.Raycater): void {
-    this._view.onMouseMove(raycaster);
+  onMouseMove(mouse: MouseRaycaster): void {
+    this._view.onMouseMove(mouse.raycaster);
   }
 
   /** マウスアップした際の処理 */
-  onMouseUp(raycaster: THREE.Raycater): void {
-    this._view.onMouseUp(raycaster);
+  onMouseUp(mouse: MouseRaycaster): void {
+    this._view.onMouseUp(mouse.raycaster);
   }
 
   /** マウスリーブした際の処理 */
-  onMouseLeave(raycaster: THREE.Raycater): void {
-    this._view.onMouseLeave(raycaster);
+  onMouseLeave(mouse: MouseRaycaster): void {
+    this._view.onMouseLeave(mouse.raycaster);
   }
 
   /** タッチムーブした際の処理 */

@@ -6,8 +6,8 @@ import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
 import type {TextureResource} from "../../../resource/texture";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import type {ButtonModel} from "./model/button-model";
-import {OverlapTarget} from "../../../operation/overlap-target";
-import {isMeshOverlap} from "../../../operation/overlap";
+import {OverlapTarget} from "../../../screen-touch/raycaster/overlap-target";
+import {isMeshOverlap} from "../../../screen-touch/raycaster/overlap";
 
 export const BUTTON_WIDTH = 100;
 export const BUTTON_HEIGHT = 100;
