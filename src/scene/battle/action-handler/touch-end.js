@@ -9,6 +9,4 @@ import {createTouchEventRaycaster} from "../../../screen-touch/touch/touch-rayca
 /** ゲーム画面内をタッチエンドした際のイベント */
 export function touchEnd(view: BattleSceneView, state: BattleSceneState, action: TouchEnd) {
   const hudRaycaster: TouchRaycastContainer = createTouchEventRaycaster(action.event, view.renderer, view.hudLayer.camera);
-
-  view.hudLayer.batterySlider.onTouchEnd(hudRaycaster);
 }

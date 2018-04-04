@@ -10,5 +10,5 @@ import {createMouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster"
 export function mouseMove(view: BattleSceneView, state: BattleSceneState, action: MouseMove) {
   const mouseRaycaster: MouseRaycaster = createMouseRaycaster(action.event, view.renderer, view.hudLayer.camera);
 
-  view.hudLayer.batterySlider.onMouseMove(mouseRaycaster);
+  view.hudLayer.batterySlider.onMouseMove(mouseRaycaster, action.event);
 }
