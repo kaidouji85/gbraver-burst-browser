@@ -68,12 +68,12 @@ export class BatterySliderView {
   }
 
   /** マウスが重なっているスライダーの目盛りを返す */
-  getMouseOverlap(mouse: MouseRaycaster): ?number {
+  getMouseOverlap(mouse: MouseRaycaster): number[] {
     return this._touchLocation.getMouseOverlap(mouse);
   }
 
   /** 指が重なっているスライダーの目盛りを返す */
-  getTouchOverlap(touch: TouchRaycastContainer): ?number {
+  getTouchOverlap(touch: TouchRaycastContainer): number[] {
     return this._touchLocation.getTouchOverlap(touch);
   }
 

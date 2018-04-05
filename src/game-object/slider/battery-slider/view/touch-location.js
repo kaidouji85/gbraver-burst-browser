@@ -38,40 +38,39 @@ export class TouchLocation {
 
   /**
    * マウスが重なっているスライダーの目盛りを返す
-   * 目盛りに重なっていない場合はnullを返す
+   * マウスがどの目盛りとも重なっていなかった場合は、長さ0の配列を返す
+   *
+   * 戻り値の例)
+   * [3]
+   * => マウスが3の目盛りと重なっている
+   *
+   * []
+   * => マウスはどの目盛りとの重なっていない
+   *
+   * [2,3]
+   * => マウスは2、3の2つの目盛りと重なっている
    *
    * @param mouse マウスレイキャスト
    * @return マウスが重なっている目盛り
    */
-  getMouseOverlap(mouse: MouseRaycaster): ?number {
-    const overlapList = this._divisionList.filter(v => isMouseOverlap(mouse, v));
-    return this._getMaxNumber(overlapList);
+  getMouseOverlap(mouse: MouseRaycaster): number[] {
+    return this._divisionList
+      .filter(v => isMouseOverlap(mouse, v))
+      .map(v => v.value);
   }
 
   /**
    * 指が重なっているスライダーの目盛りを返す
-   * 目盛りに重なっていない場合はnullを返す
+   * 指がどの目盛りとも重なっていなかった場合は、長さ0の配列を返す
+   * 戻り値の例はgetMouseOverlapを参照
    *
    * @param mouse 指レイキャスト
    * @return 指が重なっている目盛り
    */
-  getTouchOverlap(touch: TouchRaycastContainer): ?number {
-    const overlapList = this._divisionList.filter(v => isTouchOverlap(touch, v));
-    return this._getMaxNumber(overlapList);
-  }
-
-  /**
-   * 指、マウスが重なっている目盛りから最大値のものを返す
-   * 重なっている目盛りがない場合には、nullを返す
-   *
-   * @param overlapList 指、マウスが重なっている目盛り
-   * @return 指、マウスが重なっている目盛りで最大のもの
-   */
-  _getMaxNumber(overlapList: Division[]): ?number {
-    if (overlapList.length > 0) {
-      return Math.max(...overlapList.map(v => v.value));
-    }
-    return null;
+  getTouchOverlap(touch: TouchRaycastContainer): number[] {
+    return this._divisionList
+      .filter(v => isTouchOverlap(touch, v))
+      .map(v => v.value);
   }
 
   /**
