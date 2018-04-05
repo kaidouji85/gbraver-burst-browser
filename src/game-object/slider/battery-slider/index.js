@@ -10,6 +10,12 @@ import {Group, Tween} from "@tweenjs/tween.js";
 import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 
+/** コンストラクタのパラメータ */
+type Param = {
+  resources: Resources,
+  onBatteryChange: (battery: number) => void
+};
+
 /** バッテリースライダー */
 export class BatterySlider {
   /** バッテリースライダーのモデル */
@@ -24,14 +30,14 @@ export class BatterySlider {
    */
   _overlap: Subject<number[]>;
 
-  constructor(resources: Resources) {
+  constructor(param: Param) {
     const initialBattery = 3;
     this._model = {
       battery: initialBattery,
       maxBattery: 5
     };
     this._view = new BatterySliderView({
-      resources,
+      resources: param.resources,
       maxValue: this._model.maxBattery
     });
     this._tweenGroup = new Group();
@@ -44,6 +50,7 @@ export class BatterySlider {
       .subscribe((battery: number) => {
         this.removeAllTween();
         this.change(battery).start();
+        param.onBatteryChange(battery);
       });
   }
 
