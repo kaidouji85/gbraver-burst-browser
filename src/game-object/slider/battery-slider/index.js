@@ -9,7 +9,7 @@ import {change} from './model/change';
 import {Group, Tween} from "@tweenjs/tween.js";
 import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
-import {isLeftButtonPush} from "../../../mouse/left-button-down";
+import {isMouseLeftButtonPushed} from "../../../mouse/mouse-left-button";
 
 /** バッテリースライダー */
 export class BatterySlider {
@@ -73,9 +73,9 @@ export class BatterySlider {
   }
 
   /** マウスムーブした際の処理 */
-  onMouseMove(mouseRaycaster: MouseRaycaster, mouseEvent: MouseEvent): void {
+  onMouseMove(mouseRaycaster: MouseRaycaster, isLeftButtonPushed: boolean): void {
     const value: ?number = this._view.getMouseOverlap(mouseRaycaster);
-    if (value !== null && value !== undefined && isLeftButtonPush(mouseEvent)) {
+    if (value !== null && value !== undefined && isLeftButtonPushed) {
       this._changeBattery.next(value);
     }
   }
