@@ -82,7 +82,7 @@ export class TouchLocation {
   setPos(dx: number, dy: number): void {
     this._divisionList.forEach(division => {
       const meshSize = SLIDER_WIDTH / this._maxValue;
-      division.mesh.position.x = dx - SLIDER_WIDTH / 2 + meshSize * division.value - meshSize / 2;
+      division.mesh.position.x = dx - SLIDER_WIDTH / 2 + meshSize * division.value;
       division.mesh.position.y = dy;
     });
   }

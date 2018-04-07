@@ -23,6 +23,5 @@ export function drawBatterySlider(context: CanvasRenderingContext2D, resources: 
 
   drawImageInCenter(context, sliderBack, dx, dy);
   drawBatterySliderGauge(context, resources, battery, maxBattery, dx, dy);
-  // TODO スライダー当たり判定が作り終わったら、コメントアウトを解除する
-  //drawImageInCenter(context, sliderBase, dx, dy);
+  drawImageInCenter(context, sliderBase, dx, dy);
 }

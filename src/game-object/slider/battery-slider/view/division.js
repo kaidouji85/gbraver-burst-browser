@@ -16,7 +16,10 @@ export class Division implements OverlapTarget {
 
   constructor(width: number, height: number, value: number, color: number) {
     const geometry = new THREE.PlaneGeometry(width, height, 1, 1);
-    const material = new THREE.MeshBasicMaterial({color});
+    const material = new THREE.MeshBasicMaterial({
+      color,
+      visible: false
+    });
     this.mesh = new THREE.Mesh(geometry, material);
     this.value = value;
   }
