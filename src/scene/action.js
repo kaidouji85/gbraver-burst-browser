@@ -6,8 +6,11 @@ export type Action =
   | GameLoopAction
   | DebugModeAction
   | MouseDown
+  | MouseMove
   | MouseUp
+  | MouseLeave
   | TouchStart
+  | TouchMove
   | TouchEnd
   | PushAttackButton;
 
@@ -33,15 +36,34 @@ export type MouseDown = {
   event: MouseEvent
 };
 
-/** マウスオーバー */
+
+/** マウスムーブ */
+export type MouseMove = {
+  type: 'mouseMove',
+  event: MouseEvent
+};
+
+/** マウスアップ */
 export type MouseUp = {
   type: 'mouseUp',
   event: MouseEvent
 };
 
-/** タッチスタートイベント */
+/** マウスリーブ */
+export type MouseLeave = {
+  type: 'mouseLeave',
+  event: MouseEvent
+};
+
+/** タッチスタート */
 export type TouchStart = {
   type: 'touchStart',
+  event: TouchEvent
+};
+
+/** タッチムーブ */
+export type TouchMove = {
+  type: 'touchMove',
   event: TouchEvent
 };
 
