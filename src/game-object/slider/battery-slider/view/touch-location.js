@@ -10,8 +10,7 @@ import {isMouseOverlap} from "../../../../screen-touch/mouse/mouse-overlap";
 /** スライダー部分の幅 */
 export const SLIDER_WIDTH = 375;
 /** スライダー部分の高 */
-//export const SLIDER_HEIGHT = 52;
-export const SLIDER_HEIGHT = 84;  //TODO 開発が終わったら、上のものに戻す
+export const SLIDER_HEIGHT = 84;
 
 /** スライダーのどの部分に触れたかを判定する */
 export class TouchLocation {

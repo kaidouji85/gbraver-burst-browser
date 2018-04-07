@@ -12,6 +12,8 @@ import type {MouseRaycaster} from "../../../../screen-touch/mouse/mouse-raycaste
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
 
+export const PADDING_BOTTOM = 172;
+
 /** コンストラクタのパラメータ */
 type Param = {
   /** リソース管理オブジェクト */
@@ -61,7 +63,7 @@ export class BatterySliderView {
   /** 表示位置を更新する */
   _refreshPos(): void {
     const dx = 0;
-    const dy = 0;
+    const dy = - window.innerHeight / 2 + PADDING_BOTTOM;
     this._canvasMesh.mesh.position.x = dx;
     this._canvasMesh.mesh.position.y = dy;
     this._touchLocation.setPos(dx, dy);
