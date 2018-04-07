@@ -5,8 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "postinstall": "npm run build",
-    "start": "webpack-dev-server",
-    "start:stub": "webpack-dev-server --config webpack.stub.js",
+    "start": "npm-run-all clean dev-server",
+    "start:stub": "npm-run-all clean dev-server:stub",
+    "dev-server": "webpack-dev-server",
+    "dev-server:stub": "webpack-dev-server --config webpack.stub.js",
     "webpack": "webpack",
     "webpack:production": "webpack --config webpack.production.js",
     "webpack:stub": "webpack --config webpack.stub.js",
@@ -24,6 +26,7 @@
     "@tweenjs/tween.js": "^17.2.0",
     "gbraver-burst-core": "^0.1.7",
     "ramda": "^0.25.0",
+    "rxjs": "^5.5.8",
     "three": "^0.91.0",
     "three-orbitcontrols": "^2.0.0",
     "workbox-webpack-plugin": "^3.0.1"
