@@ -20,6 +20,8 @@ type Param = {
   resources: Resources,
   /** ゲージ最大値 */
   maxValue: number,
+  /** デバイスに応じた表示倍率 */
+  scale: number,
 };
 
 /** バッテリースライダーのビュー */
@@ -30,20 +32,24 @@ export class BatterySliderView {
   _touchLocation: TouchLocation;
   /** ゲームループで使うためにリソース管理オブジェクトをキャッシュする */
   _resources: Resources;
+  /** デバイスに応じた表示倍率 */
+  _scale: number;
 
   constructor(param: Param) {
+    this._scale = param.scale;
     this._canvasMesh = new CanvasMesh({
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
       canvasWidth: MESH_SIZE,
       canvasHeight: MESH_SIZE,
     });
-    this._touchLocation = new TouchLocation(param.maxValue);
+    this._touchLocation = new TouchLocation(param.maxValue, param.scale);
     this._resources = param.resources;
   }
 
   /** ビューにモデルを反映させる */
   gameLoop(model: BatterySliderModel): void {
+    this._canvasMesh.mesh.scale.set(this._scale, this._scale, this._scale);
     this._refreshGauge(model);
     this._refreshPos();
   }
@@ -63,7 +69,7 @@ export class BatterySliderView {
   /** 表示位置を更新する */
   _refreshPos(): void {
     const dx = 0;
-    const dy = - window.innerHeight / 2 + PADDING_BOTTOM;
+    const dy = - window.innerHeight / 2 + PADDING_BOTTOM * this._scale;
     this._canvasMesh.mesh.position.x = dx;
     this._canvasMesh.mesh.position.y = dy;
     this._touchLocation.setPos(dx, dy);
