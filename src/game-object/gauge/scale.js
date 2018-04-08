@@ -1,11 +1,15 @@
 // @flow
 
-import {isIPhone, isIPhonePlus, isIPhoneX} from "../../media-query/iphone";
+/** 通常表示するゲージの幅 */
+const BASE_GAUGE_WIDTH = 256;
 
 /** デバイスに応じたゲージ系ゲームオブジェクトの倍率を返す */
 export function getGaugeScale(): number {
-  if (isIPhone() || isIPhonePlus() || isIPhoneX()) {
-    return 0.6;
+  const screenMinSize = Math.min(screen.width, screen.height);
+  const gaugeMinSize = screenMinSize * 0.45;
+
+  if (gaugeMinSize <= BASE_GAUGE_WIDTH) {
+    return gaugeMinSize / BASE_GAUGE_WIDTH;
   }
 
   return 1;
