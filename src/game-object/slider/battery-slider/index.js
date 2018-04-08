@@ -9,7 +9,7 @@ import {change} from './model/change';
 import {Group, Tween} from "@tweenjs/tween.js";
 import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
-import {getBatterySliderScale} from "./scale";
+import {getControllerScale} from "../../../device-scale/controller-scale";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -40,7 +40,7 @@ export class BatterySlider {
     this._view = new BatterySliderView({
       resources: param.resources,
       maxValue: this._model.maxBattery,
-      scale: getBatterySliderScale()
+      scale: getControllerScale()
     });
     this._tweenGroup = new Group();
 
