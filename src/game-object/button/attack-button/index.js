@@ -10,6 +10,7 @@ import {isGroupPlaying} from "../../../tween/is-group-playing";
 import {isTouchOverlap} from "../../../screen-touch/touch/touch-overlap";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 import {isMouseOverlap} from "../../../screen-touch/mouse/mouse-overlap";
+import {getControllerScale} from "../../../device-scale/controller-scale";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -32,7 +33,7 @@ export class AttackButton {
       scale: 1,
       opacity: 1
     };
-    this._view = new AttackButtonView(param.resources);
+    this._view = new AttackButtonView(param.resources, getControllerScale());
     this._tweenGroup = new Group();
     this._onPush = param.onPush;
   }

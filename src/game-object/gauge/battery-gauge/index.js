@@ -4,7 +4,7 @@ import type {Resources} from "../../../resource/index";
 import {PlayerBatteryGaugeView} from "./view/player-battery-gauge-view";
 import {BatteryGauge} from "./battery-gauge";
 import {EnemyBatteryGaugeView} from "./view/enemy-battery-gauge-view";
-import {getGaugeScale} from "../scale";
+import {getGaugeScale} from "../../../device-scale/gauge-scale";
 
 /** プレイヤーバッテリーゲージを生成する */
 export function PlayerBatteryGauge(resources: Resources, battery: number, maxBattery: number): BatteryGauge {

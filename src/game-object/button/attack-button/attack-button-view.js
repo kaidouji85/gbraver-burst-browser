@@ -15,9 +15,12 @@ export const PADDING_BOTTOM = 64;
 
 /** コウゲキボタンのビュー */
 export class AttackButtonView implements OverlapTarget {
+  /** ボタンを描画するメッシュ */
   _mesh: THREE.Mesh;
+  /** デバイスに応じたスケール */
+  _deviceScale: number;
 
-  constructor(resources: Resources) {
+  constructor(resources: Resources, deviceScale: number) {
     const geometry = new THREE.PlaneGeometry(BUTTON_WIDTH, BUTTON_HEIGHT, 1, 1);
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
@@ -29,12 +32,14 @@ export class AttackButtonView implements OverlapTarget {
     const textureResource: ?TextureResource = resources.textures.find(v => v.id === TEXTURE_IDS.ATTACK_BUTTON);
     const texture: THREE.Texture = textureResource ? textureResource.texture : new THREE.Texture();
     this._mesh.material.map = texture;
+
+    this._deviceScale = deviceScale;
   }
   /** モデルをビューに反映させる */
   gameLoop(model: ButtonModel) {
-    const scale = model.scale;
+    const scale = model.scale * this._deviceScale;
     this._mesh.scale.set(scale, scale, scale);
-    this._mesh.position.y = -window.innerHeight / 2 + PADDING_BOTTOM;
+    this._mesh.position.y = -window.innerHeight / 2 + PADDING_BOTTOM * this._deviceScale;
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */

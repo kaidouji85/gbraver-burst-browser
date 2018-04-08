@@ -8,8 +8,7 @@ import type {HpGaugeModel} from "../model/hp-gauge-model";
 import {drawPlayerHpGauge} from "../../../../canvas/hp-gauge";
 
 /** メッシュの大きさ */
-export const MESH_SIZE = 300;
-
+export const MESH_SIZE = 256;
 /** 上パディング */
 export const PADDING_TOP = 40;
 
@@ -26,8 +25,8 @@ export class PlayerHpGaugeView implements HpGaugeView {
     this._canvasMesh = new CanvasMesh({
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
-      canvasWidth: 256,
-      canvasHeight: 256,
+      canvasWidth: MESH_SIZE,
+      canvasHeight: MESH_SIZE,
     });
     this._scale = scale;
     this._resources = resources;

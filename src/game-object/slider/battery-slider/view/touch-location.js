@@ -18,21 +18,25 @@ export class TouchLocation {
   _divisionList: Division[];
   /** 表示位置再計算のために、目盛りの最大値をキャッシュする */
   _maxValue: number;
+  /** デバイスに応じたスケール */
+  _scale: number;
 
   /**
    * コンストラクタ
    *
    * @param maxValue バッテリー最大値
-   * @param onOverlap 当たり判定があった場合に発火されるコールバック関数
+   * @param scale デバイスに応じた拡大・縮小率
    */
-  constructor(maxValue: number) {
+  constructor(maxValue: number, scale: number) {
     this._divisionList = R.range(0, maxValue + 1)
       .map(v => {
         const color = new THREE.Color(`rgb(0, ${255 * v / maxValue}, 0)`);
         return new Division(SLIDER_WIDTH / maxValue, SLIDER_HEIGHT, v, color);
       });
+    this._divisionList.forEach(v => v.mesh.scale.set(scale, scale, scale));
     this._maxValue = maxValue;
     this.setPos(0, 0);
+    this._scale = scale;
   }
 
   /**
@@ -80,8 +84,8 @@ export class TouchLocation {
    */
   setPos(dx: number, dy: number): void {
     this._divisionList.forEach(division => {
-      const meshSize = SLIDER_WIDTH / this._maxValue;
-      division.mesh.position.x = dx - SLIDER_WIDTH / 2 + meshSize * division.value;
+      const meshSize = SLIDER_WIDTH * this._scale / this._maxValue;
+      division.mesh.position.x = dx - SLIDER_WIDTH * this._scale / 2 + meshSize * division.value;
       division.mesh.position.y = dy;
     });
   }
