@@ -28,7 +28,7 @@ export class TouchLocation {
    * @param scale デバイスに応じた拡大・縮小率
    */
   constructor(maxValue: number, scale: number) {
-    const division0 = new Division(SLIDER_WIDTH / maxValue / 2, SLIDER_HEIGHT, 0, new THREE.Color('rgb(0,0,0 )'));
+    const division0 = new Division(SLIDER_WIDTH / 10, SLIDER_HEIGHT, 0, new THREE.Color('rgb(0,0,0 )'));
     const division1toMax = R.range(1, maxValue + 1)
       .map(v => {
         const color = new THREE.Color(`rgb(0, ${255 * v / maxValue}, 0)`);
