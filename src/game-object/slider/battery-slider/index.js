@@ -47,7 +47,7 @@ export class BatterySlider {
     this._overlap = new Subject();
     this._overlap
       .filter(v => v.length > 0)
-      .map(v => v.reduce((a, b) => Math.max(a, b)))
+      .map(v => v.reduce((a, b) => Math.min(a, b)))
       .distinctUntilChanged()
       .subscribe((battery: number) => {
         this.removeAllTween();
