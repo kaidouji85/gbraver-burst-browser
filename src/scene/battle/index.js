@@ -1,19 +1,20 @@
 // @flow
 import type {Resources} from '../../resource/index';
-import type {BattleState, PlayerId} from "gbraver-burst-core/lib/flow-type";
 import type {Action} from "../action";
 import type {Observer} from '../observer';
 import {BattleSceneView} from "./view";
 import {actionHandler} from "./action-handler";
 import {bindHtmlEventToScene} from "./html-event-binder";
 import type {BattleSceneState} from "./state";
+import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
+import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 
 /** コンストラクタのパラメータ */
 type Params = {
   /** リソース管理オブジェクト */
   resources: Resources,
   /** 戦闘状態 */
-  battleState: BattleState,
+  battleState: GameState[],
   /** 画面を開いているプレイヤーID */
   playerId: PlayerId,
 };

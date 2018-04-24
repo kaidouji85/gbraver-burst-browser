@@ -2,8 +2,9 @@
 import Tween from '@tweenjs/tween.js';
 import {loadAllResource} from './resource/index';
 import {BattleScene} from './scene/battle/index.js';
-import {ArmDozerIdList, ArmDozers, start} from "gbraver-burst-core";
 import type {Observer} from "./scene/observer";
+import {start} from "gbraver-burst-core";
+import {ArmDozers, ArmDozerIdList} from 'gbraver-burst-core/lib/master/armdozers';
 
 (async function(){
   loadServiceWorker();
@@ -17,10 +18,10 @@ import type {Observer} from "./scene/observer";
     battleState: start(
       {
         playerId: 'test01',
-        armDozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
+        armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
       }, {
         playerId: 'test02',
-        armDozer: ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) || ArmDozers[0]
+        armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) || ArmDozers[0]
       }
     )
   });
