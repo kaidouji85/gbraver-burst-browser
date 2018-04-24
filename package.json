@@ -26,10 +26,10 @@
     "@tweenjs/tween.js": "^17.2.0",
     "gbraver-burst-core": "0.2.0",
     "ramda": "^0.25.0",
-    "rxjs": "^5.5.8",
-    "three": "^0.91.0",
+    "rxjs": "5.5.10",
+    "three": "^0.92.0",
     "three-orbitcontrols": "^2.0.0",
-    "workbox-webpack-plugin": "^3.0.1"
+    "workbox-webpack-plugin": "3.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -37,13 +37,13 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "copy-webpack-plugin": "^4.4.2",
-    "flow-bin": "^0.69.0",
+    "flow-bin": "^0.70.0",
     "html-webpack-plugin": "^3.2.0",
     "npm-run-all": "^4.1.2",
     "rimraf": "^2.6.2",
     "s3-upload": "^0.1.0",
-    "webpack": "4.5.0",
-    "webpack-cli": "^2.0.14",
+    "webpack": "4.6.0",
+    "webpack-cli": "2.0.15",
     "webpack-dev-server": "^3.1.3"
   }
 }
