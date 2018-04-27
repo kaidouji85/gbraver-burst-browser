@@ -4,9 +4,10 @@ import {loadAllResource} from './resource/index';
 import {BattleScene} from './scene/battle/index.js';
 import type {Observer} from "./scene/observer";
 import {start} from "gbraver-burst-core";
-import {ArmDozers, ArmDozerIdList} from 'gbraver-burst-core/lib/master/armdozers';
+import {ArmDozerIdList, ArmDozers} from 'gbraver-burst-core/lib/master/armdozers';
 import {createRender} from "./render/renderer";
 import {bindDom} from "./render/bind-dom";
+import {loadServiceWorker} from "./service-worker/load-service-worker";
 
 (async function(){
   loadServiceWorker();
@@ -40,16 +41,3 @@ import {bindDom} from "./render/bind-dom";
   requestAnimationFrame(gameLoop);
 })();
 
-async function loadServiceWorker() {
-  if (!navigator.serviceWorker) {
-    return;
-  }
-
-  try {
-    await navigator.serviceWorker.register('./sw.js');
-    console.log('service worker register success!');
-  } catch (e) {
-    console.log('service worker register failed');
-    console.log(e);
-  }
-}
