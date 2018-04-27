@@ -5,7 +5,7 @@ import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {BattleSceneState} from "../state";
 import type {Observer} from '../../observer';
-import {createRender} from "./renderer";
+import {createRender} from "../../../render/renderer";
 
 /**
  * 戦闘画面
