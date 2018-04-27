@@ -5,7 +5,15 @@ import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {BattleSceneState} from "../state";
 import type {Observer} from '../../observer';
-import {createRender} from "./renderer";
+import {createRender} from "../../../render/renderer";
+
+/** コンストラクタのパラメータ */
+type Param = {
+  resources: Resources,
+  state: BattleSceneState,
+  observer: Observer,
+  renderer: THREE.WebGLRenderer
+};
 
 /**
  * 戦闘画面
@@ -18,21 +26,17 @@ export class BattleSceneView {
   /** Head Up Display(HUD)レイヤー */
   hudLayer: HudLayer;
 
-  constructor(props: {resources: Resources, state: BattleSceneState, observer: Observer}) {
-    this.renderer = createRender();
+  constructor(param: Param) {
+    this.renderer = param.renderer;
     this.threeDimensionLayer = new ThreeDimensionLayer({
-      resources: props.resources,
-      state: props.state
+      resources: param.resources,
+      state: param.state
     });
     this.hudLayer = new HudLayer({
-      resources: props.resources,
-      state: props.state,
-      observer: props.observer
+      resources: param.resources,
+      state: param.state,
+      observer: param.observer
     });
-
-    const dom = this.renderer.domElement || new HTMLElement();
-    const body = document.body || document.createElement('body');
-    body.appendChild(dom);
   }
 
   /** レンダリング処理 */
