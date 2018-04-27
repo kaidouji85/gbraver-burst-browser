@@ -1,4 +1,5 @@
-// flow
+// @flow
+import * as THREE from 'three';
 
 /**
  * レンダラサイズをウインドウサイズに合わせる
@@ -6,6 +7,6 @@
  *
  * @param render レンダラ
  */
-export function fitToWindowSize(render: THREE.WebGLDeferredRenderer) {
+export function fitToWindowSize(render: THREE.WebGLRenderer) {
   render.setSize(window.innerWidth, window.innerHeight);
 }

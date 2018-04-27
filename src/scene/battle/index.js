@@ -8,6 +8,7 @@ import {bindHtmlEventToScene} from "./html-event-binder";
 import type {BattleSceneState} from "./state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import * as THREE from "three";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -17,6 +18,8 @@ type Params = {
   battleState: GameState[],
   /** 画面を開いているプレイヤーID */
   playerId: PlayerId,
+  /** レンダラ */
+  renderer: THREE.WebGLRenderer
 };
 
 /**
@@ -36,7 +39,8 @@ export class BattleScene implements Observer {
     this.view = new BattleSceneView({
       resources: params.resources,
       state: this.state,
-      observer: this
+      observer: this,
+      renderer: params.renderer
     });
     bindHtmlEventToScene(this, this.view.renderer.domElement);
   };
