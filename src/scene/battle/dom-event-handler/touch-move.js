@@ -1,6 +1,6 @@
 // @flow
 
-import {BattleSceneView} from "../view";
+import {BattleSceneView} from "../view/index";
 import type {TouchMove} from "../../action";
 import type {BattleSceneState} from "../state";
 import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";

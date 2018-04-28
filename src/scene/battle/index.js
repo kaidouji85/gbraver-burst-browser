@@ -3,14 +3,13 @@ import type {Resources} from '../../resource/index';
 import type {Action} from "../action";
 import type {DepricatedObserver} from '../depricated-observer';
 import {BattleSceneView} from "./view";
-import {actionHandler} from "./action-handler";
-import {bindHtmlEventToScene} from "./html-event-binder";
 import type {BattleSceneState} from "./state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
 import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
 import {htmlActionHandler} from "./dom-event-handler";
+import {gameLoop} from './game-loop';
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -34,7 +33,10 @@ export class BattleScene implements DepricatedObserver {
   view: BattleSceneView;
   /** 戦闘画面全体の状態 */
   state: BattleSceneState;
-  /** HTMLイベントリスナー*/
+  /**
+   * HTMLイベントリスナー
+   * シーン終了時にハンドラ削除をするためにキャッシュしている
+   */
   domEventListener: DOMEventListener;
 
   constructor(params: Params) {
@@ -50,13 +52,14 @@ export class BattleScene implements DepricatedObserver {
     });
     this.domEventListener = params.domEventListener;
     this.domEventListener.add(event => htmlActionHandler(event, this));
-
-
-    bindHtmlEventToScene(this, this.view.renderer.domElement);
   };
 
   /** 通知されたイベントに応じて、実際のアクションを呼び出す */
   notify(action: Action): void {
-    actionHandler(action, this);
+  }
+
+  /** ゲームループ */
+  gameLoop(time: DOMHighResTimeStamp) {
+    gameLoop(this.view, this.state, time);
   }
 }

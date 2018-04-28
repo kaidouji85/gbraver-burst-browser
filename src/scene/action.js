@@ -1,6 +1,8 @@
 // @flow
 
 /** アクション */
+import type {MouseDown} from "../action/dom-event/mouse-down";
+
 export type Action =
   | ResizeAction
   | GameLoopAction
@@ -29,13 +31,6 @@ export type GameLoopAction = {
 export type DebugModeAction = {
   type: 'debugMode'
 };
-
-/** マウスダウン */
-export type MouseDown = {
-  type: 'mouseDown',
-  event: MouseEvent
-};
-
 
 /** マウスムーブ */
 export type MouseMove = {

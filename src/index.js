@@ -2,7 +2,6 @@
 import Tween from '@tweenjs/tween.js';
 import {loadAllResource} from './resource/index';
 import {BattleScene} from './scene/battle/index.js';
-import type {DepricatedObserver} from "./scene/depricated-observer";
 import {start} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers} from 'gbraver-burst-core/lib/master/armdozers';
 import {createRender} from "./render/renderer";
@@ -19,7 +18,7 @@ import {DOMEventObserver} from "./observer/dom-event/dom-event-observer";
   const domEventObserver = new DOMEventObserver();
 
   // TODO 開発用にダミーデータを作成している
-  const scene: DepricatedObserver = new BattleScene({
+  const scene: BattleScene = new BattleScene({
     resources: resources,
     renderer: renderer,
     domEventListener: domEventObserver,
@@ -34,12 +33,11 @@ import {DOMEventObserver} from "./observer/dom-event/dom-event-observer";
       }
     )
   });
-  //scene.notify({type: 'debugMode'});
 
   const gameLoop = (time: DOMHighResTimeStamp) => {
     requestAnimationFrame(gameLoop);
     Tween.update(time);
-    scene.notify({type: 'gameLoop', time});
+    scene.gameLoop(time);
   };
   requestAnimationFrame(gameLoop);
 })();
