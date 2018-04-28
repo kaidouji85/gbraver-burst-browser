@@ -4,13 +4,13 @@ import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {BattleSceneState} from "../state";
-import {BattleSceneObserver} from "../../../observer/battle-scene/battle-scene-observer";
+import type {BattleSceneNotifier} from "../../../observer/battle-scene/battle-scene-notifier";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   state: BattleSceneState,
-  observer: BattleSceneObserver,
+  notifier: BattleSceneNotifier,
   renderer: THREE.WebGLRenderer
 };
 
@@ -34,7 +34,7 @@ export class BattleSceneView {
     this.hudLayer = new HudLayer({
       resources: param.resources,
       state: param.state,
-      observer: param.observer
+      notifier: param.notifier
     });
   }
 

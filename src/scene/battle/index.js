@@ -1,7 +1,5 @@
 // @flow
 import type {Resources} from '../../resource/index';
-import type {Action} from "../action";
-import type {DepricatedObserver} from '../depricated-observer';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
@@ -33,7 +31,7 @@ type Params = {
 /**
  * 戦闘画面アプリケーション
  */
-export class BattleScene implements DepricatedObserver {
+export class BattleScene {
   /** ビュー */
   _view: BattleSceneView;
   /** 戦闘画面全体の状態 */
@@ -61,14 +59,10 @@ export class BattleScene implements DepricatedObserver {
     this._view = new BattleSceneView({
       resources: params.resources,
       state: this._state,
-      observer: this._battleSceneObserver,
+      notifier: this._battleSceneObserver,
       renderer: params.renderer
     });
   };
-
-  /** 通知されたイベントに応じて、実際のアクションを呼び出す */
-  notify(action: Action): void {
-  }
 
   /** ゲームループ */
   gameLoop(time: DOMHighResTimeStamp) {
@@ -81,7 +75,7 @@ export class BattleScene implements DepricatedObserver {
   }
 
   _domEventHandler(event: DOMEvent): void {
-    domEventHandler(event, this);
+    domEventHandler(event, this._view, this._state);
   }
 
   _battleSceneActionHandler(action: BattleSceneAction): void {
