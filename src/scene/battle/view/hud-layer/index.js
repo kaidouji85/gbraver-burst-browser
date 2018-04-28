@@ -10,10 +10,10 @@ import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 import {createAttackButton} from "./attack-button";
 import {AttackButton} from "../../../../game-object/button/attack-button/index";
-import type {Observer} from "../../../observer";
 import {createCamera} from "./camera";
 import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 import {createBatterySlider} from "./battery-slider";
+import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -38,7 +38,7 @@ export class HudLayer {
   /** バッテリースライダー */
   batterySlider: BatterySlider;
 
-  constructor(props: {resources: Resources, state: BattleSceneState, observer: Observer}) {
+  constructor(props: {resources: Resources, state: BattleSceneState, notifier: BattleSceneNotifier}) {
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
@@ -54,10 +54,10 @@ export class HudLayer {
     this.enemyBatteryGauge = createEnemyBatteryGauge(props.resources, props.state);
     this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.attackButton = createAttackButton(props.resources, props.observer);
+    this.attackButton = createAttackButton(props.resources, props.notifier);
     this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.batterySlider = createBatterySlider(props.resources, props.state, props.observer);
+    this.batterySlider = createBatterySlider(props.resources, props.state, props.notifier);
     this.batterySlider.getThreeJsObjectList().forEach(v => this.scene.add(v));
   }
 }

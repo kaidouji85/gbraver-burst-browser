@@ -1,15 +1,14 @@
 // @flow
 
-import {ThreeDimensionLayer} from "../view/three-dimension-layer";
-import {HudLayer} from "../view/hud-layer/index";
-import {BattleSceneView} from "../view";
-import type {BattleSceneState} from "../state";
-import type {GameLoopAction} from "../../action";
+import {ThreeDimensionLayer} from "./view/three-dimension-layer/index";
+import {HudLayer} from "./view/hud-layer/index";
+import {BattleSceneView} from "./view/index";
+import type {BattleSceneState} from "./state";
 
 /** ゲームループ時の処理 */
-export function gameLoop(view: BattleSceneView, state: BattleSceneState, action: GameLoopAction): void {
-  threeDimension(view.threeDimensionLayer, action.time);
-  hud(view.hudLayer, action.time);
+export function gameLoop(view: BattleSceneView, state: BattleSceneState, time: DOMHighResTimeStamp): void {
+  threeDimension(view.threeDimensionLayer, time);
+  hud(view.hudLayer, time);
 
   view.render();
 }
