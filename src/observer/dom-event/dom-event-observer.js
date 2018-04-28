@@ -5,8 +5,8 @@ import {bindDOMEvent} from "./dom-event-binder";
 
 /** HTMLイベントのオブザーバ */
 export class DOMEventObserver extends Observer<DOMEvent> {
-  constructor() {
+  constructor(renderDom: HTMLElement) {
     super();
-    bindDOMEvent(this);
+    bindDOMEvent(this, renderDom);
   }
 }

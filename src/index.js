@@ -15,7 +15,7 @@ import {DOMEventObserver} from "./observer/dom-event/dom-event-observer";
   const resources = await loadAllResource('');
   const renderer = createRender();
   bindDom(renderer);
-  const domEventObserver = new DOMEventObserver();
+  const domEventObserver = new DOMEventObserver(renderer.domElement);
 
   // TODO 開発用にダミーデータを作成している
   const scene: BattleScene = new BattleScene({
