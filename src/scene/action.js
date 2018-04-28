@@ -2,10 +2,7 @@
 
 /** アクション */
 
+import type {PushAttackButton} from "../action/battle-scene/push-attack-button";
+
 export type Action =
   | PushAttackButton;
-
-/** コウゲキボタンを押した */
-export type PushAttackButton = {
-  type: 'pushAttackButton'
-};

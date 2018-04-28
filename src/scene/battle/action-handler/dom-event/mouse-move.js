@@ -1,11 +1,11 @@
 // @flow
 
-import {BattleSceneView} from "../view/index";
-import type {MouseMove} from "../../../action/dom-event/mouse-move";
-import type {BattleSceneState} from "../state";
-import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
-import {createMouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
-import {isMouseLeftButtonPushed} from "../../../mouse/mouse-left-button";
+import {BattleSceneView} from "../../view/index";
+import type {MouseMove} from "../../../../action/dom-event/mouse-move";
+import type {BattleSceneState} from "../../state";
+import type {MouseRaycaster} from "../../../../screen-touch/mouse/mouse-raycaster";
+import {createMouseRaycaster} from "../../../../screen-touch/mouse/mouse-raycaster";
+import {isMouseLeftButtonPushed} from "../../../../mouse/mouse-left-button";
 
 /** ゲーム画面をマウスムーブした際のイベント */
 export function mouseMove(view: BattleSceneView, state: BattleSceneState, action: MouseMove) {

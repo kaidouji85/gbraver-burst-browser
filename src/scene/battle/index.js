@@ -8,8 +8,13 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
 import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
-import {htmlActionHandler} from "./dom-event-handler";
+import {domEventHandler} from "./action-handler/dom-event";
 import {gameLoop} from './game-loop';
+import {debugMode} from "./debug-mode";
+import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-observer";
+import type {DOMEvent} from "../../action/dom-event";
+import type {BattleSceneAction} from "../../action/battle-scene";
+import {battleSceneActionHandler} from "./action-handler/battle-scene/inde";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -30,28 +35,35 @@ type Params = {
  */
 export class BattleScene implements DepricatedObserver {
   /** ビュー */
-  view: BattleSceneView;
+  _view: BattleSceneView;
   /** 戦闘画面全体の状態 */
-  state: BattleSceneState;
+  _state: BattleSceneState;
   /**
    * HTMLイベントリスナー
    * シーン終了時にハンドラ削除をするためにキャッシュしている
    */
-  domEventListener: DOMEventListener;
+  _domEventListener: DOMEventListener;
+  /** 戦闘画面のオブザーバ */
+  _battleSceneObserver: BattleSceneObserver;
 
   constructor(params: Params) {
-    this.state = {
+    this._state = {
       battleState: params.battleState,
       playerId: params.playerId
     };
-    this.view = new BattleSceneView({
+
+    this._domEventListener = params.domEventListener;
+    this._domEventListener.add(this._domEventHandler.bind(this));
+
+    this._battleSceneObserver = new BattleSceneObserver();
+    this._battleSceneObserver.add(this._battleSceneActionHandler.bind(this));
+
+    this._view = new BattleSceneView({
       resources: params.resources,
-      state: this.state,
-      observer: this,
+      state: this._state,
+      observer: this._battleSceneObserver,
       renderer: params.renderer
     });
-    this.domEventListener = params.domEventListener;
-    this.domEventListener.add(event => htmlActionHandler(event, this));
   };
 
   /** 通知されたイベントに応じて、実際のアクションを呼び出す */
@@ -60,6 +72,19 @@ export class BattleScene implements DepricatedObserver {
 
   /** ゲームループ */
   gameLoop(time: DOMHighResTimeStamp) {
-    gameLoop(this.view, this.state, time);
+    gameLoop(this._view, this._state, time);
+  }
+
+  /** デバッグモードに設定する */
+  debugMode() {
+    debugMode(this._view, this._state);
+  }
+
+  _domEventHandler(event: DOMEvent): void {
+    domEventHandler(event, this);
+  }
+
+  _battleSceneActionHandler(action: BattleSceneAction): void {
+    battleSceneActionHandler(action, this._view, this._state);
   }
 }

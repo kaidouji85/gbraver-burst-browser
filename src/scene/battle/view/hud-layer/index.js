@@ -14,6 +14,7 @@ import type {DepricatedObserver} from "../../../depricated-observer";
 import {createCamera} from "./camera";
 import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 import {createBatterySlider} from "./battery-slider";
+import {BattleSceneObserver} from "../../../../observer/battle-scene/battle-scene-observer";
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
@@ -38,7 +39,7 @@ export class HudLayer {
   /** バッテリースライダー */
   batterySlider: BatterySlider;
 
-  constructor(props: {resources: Resources, state: BattleSceneState, observer: DepricatedObserver}) {
+  constructor(props: {resources: Resources, state: BattleSceneState, observer: BattleSceneObserver}) {
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
