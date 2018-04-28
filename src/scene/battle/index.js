@@ -13,6 +13,7 @@ import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-obse
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/inde";
+import {Scene} from "three";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -31,7 +32,7 @@ type Params = {
 /**
  * 戦闘画面アプリケーション
  */
-export class BattleScene {
+export class BattleScene implements Scene{
   /** ビュー */
   _view: BattleSceneView;
   /** 戦闘画面全体の状態 */
@@ -65,12 +66,12 @@ export class BattleScene {
   };
 
   /** ゲームループ */
-  gameLoop(time: DOMHighResTimeStamp) {
+  gameLoop(time: DOMHighResTimeStamp): void {
     gameLoop(this._view, this._state, time);
   }
 
   /** デバッグモードに設定する */
-  debugMode() {
+  debugMode(): void {
     debugMode(this._view, this._state);
   }
 
