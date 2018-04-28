@@ -5,7 +5,6 @@ import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {BattleSceneState} from "../state";
 import type {DepricatedObserver} from '../../depricated-observer';
-import {createRender} from "../../../render/renderer";
 
 /** コンストラクタのパラメータ */
 type Param = {

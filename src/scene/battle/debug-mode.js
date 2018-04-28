@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import OrbitControls from 'three-orbitcontrols';
 import type {BattleSceneState} from "./state";
 import {BattleSceneView} from "./view/index";
-import type {DebugModeAction} from "../action";
 
 /** デバッグモードに設定する */
 export function debugMode(view: BattleSceneView, state: BattleSceneState): void {

@@ -9,6 +9,7 @@ import type {DepricatedObserver} from "../depricated-observer";
  * @param renderDom レンダーのHTML要素
  */
 export function bindHtmlEventToScene(scene: DepricatedObserver, renderDom: HTMLElement) {
+  /*
   window.addEventListener('resize', () => {
     scene.notify({type: 'resize'})
   }, false);
@@ -47,4 +48,5 @@ export function bindHtmlEventToScene(scene: DepricatedObserver, renderDom: HTMLE
     event.preventDefault();
     scene.notify({type: 'mouseLeave', event});
   });
+  */
 }
