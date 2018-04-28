@@ -1,6 +1,6 @@
 // @flow
 
-import type {Observer} from "../observer";
+import type {DepricatedObserver} from "../depricated-observer";
 
 /**
  * HTMLイベントとシーンのアクションをつなげる
@@ -8,7 +8,7 @@ import type {Observer} from "../observer";
  * @param scene シーン
  * @param renderDom レンダーのHTML要素
  */
-export function bindHtmlEventToScene(scene: Observer, renderDom: HTMLElement) {
+export function bindHtmlEventToScene(scene: DepricatedObserver, renderDom: HTMLElement) {
   window.addEventListener('resize', () => {
     scene.notify({type: 'resize'})
   }, false);

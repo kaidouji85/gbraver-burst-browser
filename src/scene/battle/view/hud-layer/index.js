@@ -10,7 +10,7 @@ import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 import {createAttackButton} from "./attack-button";
 import {AttackButton} from "../../../../game-object/button/attack-button/index";
-import type {Observer} from "../../../observer";
+import type {DepricatedObserver} from "../../../depricated-observer";
 import {createCamera} from "./camera";
 import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 import {createBatterySlider} from "./battery-slider";
@@ -38,7 +38,7 @@ export class HudLayer {
   /** バッテリースライダー */
   batterySlider: BatterySlider;
 
-  constructor(props: {resources: Resources, state: BattleSceneState, observer: Observer}) {
+  constructor(props: {resources: Resources, state: BattleSceneState, observer: DepricatedObserver}) {
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 

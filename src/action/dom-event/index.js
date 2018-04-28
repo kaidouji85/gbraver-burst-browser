@@ -2,4 +2,4 @@
 
 import type {Resize} from "./resize";
 
-export type HtmlAction = Resize;
+export type DOMEvent = Resize;

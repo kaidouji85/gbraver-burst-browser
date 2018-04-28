@@ -9,7 +9,7 @@ module.exports = {
     ...config.plugins,
     new WorkBoxPlugin.GenerateSW({
       globDirectory: config.output.path,
-      globPatterns: ['**/*.{html,js,json,png}'],
+      globPatterns: ['**/*.{dom-event-event,js,json,png}'],
       swDest: path.join(config.output.path, 'sw.js'),
       clientsClaim: true,
       skipWaiting: true,

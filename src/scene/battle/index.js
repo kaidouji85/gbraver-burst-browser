@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../resource/index';
 import type {Action} from "../action";
-import type {Observer} from '../observer';
+import type {DepricatedObserver} from '../depricated-observer';
 import {BattleSceneView} from "./view";
 import {actionHandler} from "./action-handler";
 import {bindHtmlEventToScene} from "./html-event-binder";
@@ -9,6 +9,8 @@ import type {BattleSceneState} from "./state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
+import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
+import {htmlActionHandler} from "./dom-event-handler";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -19,17 +21,21 @@ type Params = {
   /** 画面を開いているプレイヤーID */
   playerId: PlayerId,
   /** レンダラ */
-  renderer: THREE.WebGLRenderer
+  renderer: THREE.WebGLRenderer,
+  /** HTMLイベントリスナー */
+  domEventListener: DOMEventListener;
 };
 
 /**
  * 戦闘画面アプリケーション
  */
-export class BattleScene implements Observer {
+export class BattleScene implements DepricatedObserver {
   /** ビュー */
   view: BattleSceneView;
   /** 戦闘画面全体の状態 */
   state: BattleSceneState;
+  /** HTMLイベントリスナー*/
+  domEventListener: DOMEventListener;
 
   constructor(params: Params) {
     this.state = {
@@ -42,6 +48,10 @@ export class BattleScene implements Observer {
       observer: this,
       renderer: params.renderer
     });
+    this.domEventListener = params.domEventListener;
+    this.domEventListener.add(event => htmlActionHandler(event, this));
+
+
     bindHtmlEventToScene(this, this.view.renderer.domElement);
   };
 

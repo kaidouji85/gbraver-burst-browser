@@ -4,14 +4,14 @@ import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {BattleSceneState} from "../state";
-import type {Observer} from '../../observer';
+import type {DepricatedObserver} from '../../depricated-observer';
 import {createRender} from "../../../render/renderer";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   state: BattleSceneState,
-  observer: Observer,
+  observer: DepricatedObserver,
   renderer: THREE.WebGLRenderer
 };
 

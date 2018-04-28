@@ -2,11 +2,11 @@
 
 import type {Resources} from "../../../../resource";
 import type {BattleSceneState} from "../../state";
-import {Observer} from "../../../observer";
+import {DepricatedObserver} from "../../../depricated-observer";
 import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 
 /** バッテリースライダーを生成する */
-export function createBatterySlider(resources: Resources, state: BattleSceneState, observer: Observer): BatterySlider {
+export function createBatterySlider(resources: Resources, state: BattleSceneState, observer: DepricatedObserver): BatterySlider {
   return new BatterySlider({
     resources,
     onBatteryChange: (battery: number) => {

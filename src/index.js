@@ -2,13 +2,13 @@
 import Tween from '@tweenjs/tween.js';
 import {loadAllResource} from './resource/index';
 import {BattleScene} from './scene/battle/index.js';
-import type {Observer} from "./scene/observer";
+import type {DepricatedObserver} from "./scene/depricated-observer";
 import {start} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers} from 'gbraver-burst-core/lib/master/armdozers';
 import {createRender} from "./render/renderer";
 import {bindDom} from "./render/bind-dom";
 import {loadServiceWorker} from "./service-worker/load-service-worker";
-import {HtmlObserver} from "./observer/html/html-observer";
+import {DOMEventObserver} from "./observer/dom-event/dom-event-observer";
 
 (async function(){
   loadServiceWorker();
@@ -16,12 +16,13 @@ import {HtmlObserver} from "./observer/html/html-observer";
   const resources = await loadAllResource('');
   const renderer = createRender();
   bindDom(renderer);
-  const htmlObserver = new HtmlObserver();
+  const domEventObserver = new DOMEventObserver();
 
   // TODO 開発用にダミーデータを作成している
-  const scene: Observer = new BattleScene({
+  const scene: DepricatedObserver = new BattleScene({
     resources: resources,
     renderer: renderer,
+    domEventListener: domEventObserver,
     playerId: 'test01',
     battleState: start(
       {
