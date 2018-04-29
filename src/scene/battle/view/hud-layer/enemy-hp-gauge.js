@@ -1,10 +1,8 @@
 // @flow
 
 import type {Resources} from "../../../../resource/index";
-import type {BattleSceneState} from "../../state";
 import {HpGauge} from "../../../../game-object/gauge/hp-gauge/hp-gauge";
 import {EnemyHpGauge} from "../../../../game-object/gauge/hp-gauge";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 
 /**

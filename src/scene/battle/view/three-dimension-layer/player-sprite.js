@@ -1,10 +1,7 @@
 // @flow
 import type {Resources} from "../../../../resource/index";
-import type {BattleSceneState} from "../../state";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import {PlayerShinBraver} from "../../../../game-object/armdozer/shin-breaver";
-import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 
 /** 与えられたパラメータからプレイヤースプライを生成する */

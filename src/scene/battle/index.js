@@ -4,6 +4,7 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
+import {Scene} from "three";
 import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
 import {domEventHandler} from "./action-handler/dom-event";
 import {gameLoop} from './game-loop';
@@ -12,7 +13,6 @@ import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-obse
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/inde";
-import {Scene} from "three";
 
 /** コンストラクタのパラメータ */
 type Params = {

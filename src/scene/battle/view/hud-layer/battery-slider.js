@@ -1,7 +1,6 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import type {BattleSceneState} from "../../state";
 import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 

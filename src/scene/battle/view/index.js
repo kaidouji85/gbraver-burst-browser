@@ -3,7 +3,6 @@ import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
-import type {BattleSceneState} from "../state";
 import type {BattleSceneNotifier} from "../../../observer/battle-scene/battle-scene-notifier";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 
