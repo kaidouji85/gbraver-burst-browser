@@ -2,7 +2,6 @@
 import type {Resources} from '../../resource/index';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
 import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
@@ -19,9 +18,6 @@ import {Scene} from "three";
 type Params = {
   /** リソース管理オブジェクト */
   resources: Resources,
-  // TODO 削除する
-  /** 戦闘状態 */
-  DepricatedBattleState: GameState[],
   /** 画面を開いているプレイヤーID */
   playerId: PlayerId,
   /** プレイヤー情報 */
@@ -50,7 +46,6 @@ export class BattleScene implements Scene{
 
   constructor(params: Params) {
     this._state = {
-      battleState: params.DepricatedBattleState,
       playerId: params.playerId
     };
 
@@ -62,7 +57,6 @@ export class BattleScene implements Scene{
 
     this._view = new BattleSceneView({
       resources: params.resources,
-      state: this._state,
       playerId: params.playerId,
       players: params.players,
       notifier: this._battleSceneObserver,

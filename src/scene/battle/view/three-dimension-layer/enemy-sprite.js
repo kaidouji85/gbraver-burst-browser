@@ -10,7 +10,6 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 
 /** 与えられたパラメータから敵スプライを生成する */
 export function createEnemySprite(params: {resources: Resources, playerId: PlayerId, players: Player[]}): ArmDozerSprite {
-  // TODO 配列の要素数チェックをする
   const enemyInfo: ?Player = params.players.find(v => v.playerId !== params.playerId);
   if (!enemyInfo) {
     return new EnemyShinBraver(params.resources);

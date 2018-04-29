@@ -3,7 +3,6 @@ import type {Resources} from "../resource";
 import {DOMEventObserver} from "../observer/dom-event/dom-event-observer";
 import * as THREE from "three";
 import {BattleScene} from "../scene/battle";
-import {start} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core/lib/master/armdozers";
 
 /** 戦闘シーン生成のヘルパー関数 */
@@ -24,7 +23,6 @@ export function createBattleScene(resources: Resources, domEventObserver: DOMEve
     renderer: renderer,
     domEventListener: domEventObserver,
     playerId: 'test01',
-    players: players,
-    DepricatedBattleState: start(players[0], players[1])  // TODO 削除する
+    players: players
   });
 }

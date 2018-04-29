@@ -6,7 +6,7 @@ import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 
 /** バッテリースライダーを生成する */
-export function createBatterySlider(resources: Resources, state: BattleSceneState, notifier: BattleSceneNotifier): BatterySlider {
+export function createBatterySlider(resources: Resources, notifier: BattleSceneNotifier): BatterySlider {
   return new BatterySlider({
     resources,
     onBatteryChange: (battery: number) => {

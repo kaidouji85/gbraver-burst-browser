@@ -10,7 +10,6 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  state: BattleSceneState,  // TODO 廃止する
   notifier: BattleSceneNotifier,
   renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
@@ -37,7 +36,8 @@ export class BattleSceneView {
     });
     this.hudLayer = new HudLayer({
       resources: param.resources,
-      state: param.state,
+      playerId: param.playerId,
+      players: param.players,
       notifier: param.notifier
     });
   }
