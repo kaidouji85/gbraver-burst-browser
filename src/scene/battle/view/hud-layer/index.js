@@ -47,19 +47,22 @@ export class HudLayer {
   batterySlider: BatterySlider;
 
   constructor(param: Param) {
+    const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
+    const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
+
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
-    this.playerHpGauge = createPlayerHpGauge(param.resources, param.playerId, param.players);
+    this.playerHpGauge = createPlayerHpGauge(param.resources, playerInfo);
     this.playerHpGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.playerBatteryGauge = createPlayerBatteryGauge(param.resources, param.playerId, param.players);
+    this.playerBatteryGauge = createPlayerBatteryGauge(param.resources, playerInfo);
     this.playerBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.enemyHpGauge = createEnemyHpGauge(param.resources, param.playerId, param.players);
+    this.enemyHpGauge = createEnemyHpGauge(param.resources, enemyInfo);
     this.enemyHpGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.enemyBatteryGauge = createEnemyBatteryGauge(param.resources, param.playerId, param.players);
+    this.enemyBatteryGauge = createEnemyBatteryGauge(param.resources, enemyInfo);
     this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.attackButton = createAttackButton(param.resources, param.notifier);

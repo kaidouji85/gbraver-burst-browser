@@ -31,17 +31,20 @@ export class ThreeDimensionLayer {
   enemySprite: ArmDozerSprite;
 
   constructor(param: Param) {
+    const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
+    const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
+
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
 
-    this.playerSprite = new createPlayerSprite(param);
+    this.playerSprite = new createPlayerSprite(param.resources, playerInfo);
     this.playerSprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
     this.playerSprite.stand().start();
 
-    this.enemySprite = new createEnemySprite(param);
+    this.enemySprite = new createEnemySprite(param.resources, enemyInfo);
     this.enemySprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
     this.enemySprite.stand().start();
   }
