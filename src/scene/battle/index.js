@@ -2,9 +2,9 @@
 import type {Resources} from '../../resource/index';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
+import {Scene} from "three";
 import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
 import {domEventHandler} from "./action-handler/dom-event";
 import {gameLoop} from './game-loop';
@@ -13,16 +13,15 @@ import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-obse
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/inde";
-import {Scene} from "three";
 
 /** コンストラクタのパラメータ */
 type Params = {
   /** リソース管理オブジェクト */
   resources: Resources,
-  /** 戦闘状態 */
-  battleState: GameState[],
   /** 画面を開いているプレイヤーID */
   playerId: PlayerId,
+  /** プレイヤー情報 */
+  players: Player[],
   /** レンダラ */
   renderer: THREE.WebGLRenderer,
   /** HTMLイベントリスナー */
@@ -47,7 +46,6 @@ export class BattleScene implements Scene{
 
   constructor(params: Params) {
     this._state = {
-      battleState: params.battleState,
       playerId: params.playerId
     };
 
@@ -59,7 +57,8 @@ export class BattleScene implements Scene{
 
     this._view = new BattleSceneView({
       resources: params.resources,
-      state: this._state,
+      playerId: params.playerId,
+      players: params.players,
       notifier: this._battleSceneObserver,
       renderer: params.renderer
     });

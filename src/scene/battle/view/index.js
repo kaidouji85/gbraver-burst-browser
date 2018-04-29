@@ -3,15 +3,16 @@ import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
-import type {BattleSceneState} from "../state";
 import type {BattleSceneNotifier} from "../../../observer/battle-scene/battle-scene-notifier";
+import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  state: BattleSceneState,
   notifier: BattleSceneNotifier,
-  renderer: THREE.WebGLRenderer
+  renderer: THREE.WebGLRenderer,
+  playerId: PlayerId,
+  players: Player[]
 };
 
 /**
@@ -29,11 +30,13 @@ export class BattleSceneView {
     this.renderer = param.renderer;
     this.threeDimensionLayer = new ThreeDimensionLayer({
       resources: param.resources,
-      state: param.state
+      playerId: param.playerId,
+      players: param.players
     });
     this.hudLayer = new HudLayer({
       resources: param.resources,
-      state: param.state,
+      playerId: param.playerId,
+      players: param.players,
       notifier: param.notifier
     });
   }
