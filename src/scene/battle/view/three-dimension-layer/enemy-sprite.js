@@ -6,16 +6,16 @@ import type {BattleSceneState} from "../../state";
 import {EnemyShinBraver} from '../../../../game-object/armdozer/shin-breaver';
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
+import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 
 /** 与えられたパラメータから敵スプライを生成する */
-export function createEnemySprite(props: {resources: Resources, state: BattleSceneState}): ArmDozerSprite {
+export function createEnemySprite(params: {resources: Resources, playerId: PlayerId, players: Player[]}): ArmDozerSprite {
   // TODO 配列の要素数チェックをする
-  const lastState: GameState = props.state.battleState[props.state.battleState.length - 1];
-  const enemyInfo: ?PlayerState = lastState.players.find(v => v.playerId !== props.state.playerId);
+  const enemyInfo: ?Player = params.players.find(v => v.playerId !== params.playerId);
   if (!enemyInfo) {
-    return new EnemyShinBraver(props.resources);
+    return new EnemyShinBraver(params.resources);
   }
-  return createSprite(enemyInfo.armdozer.appearance, props.resources);
+  return createSprite(enemyInfo.armdozer.appearance, params.resources);
 }
 
 /** アームドーザの外見パラメータからスプライトを生成する */
