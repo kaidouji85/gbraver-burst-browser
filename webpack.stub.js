@@ -28,6 +28,7 @@ const STUB_ENTRY_FILES = {
   'game-object/gauge/enemy-battery-gauge': `${STUB_PATH}/game-object/gauge/enemy-battery-gauge`,
   'game-object/armdozer/player-shin-braver': `${STUB_PATH}/game-object/armdozer/player-shin-braver`,
   'game-object/armdozer/enemy-shin-braver': `${STUB_PATH}/game-object/armdozer/enemy-shin-braver`,
+  'game-object/gauge/player-burst-gauge': `${STUB_PATH}/game-object/gauge/player-burst-gauge`,
 };
 
 module.exports = {
