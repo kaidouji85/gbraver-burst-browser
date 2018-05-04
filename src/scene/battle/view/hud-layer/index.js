@@ -14,6 +14,9 @@ import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 import {createBatterySlider} from "./battery-slider";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import {BurstGauge} from "../../../../game-object/gauge/burst-gauge/burst-gauge";
+import {createPlayerBurstGauge} from "./player-burst-gauge";
+import {createEnemyBurstGauge} from "./enemy-burst-gauge";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -29,7 +32,7 @@ export type Param = {
  * @author y.takeuchi
  */
 export class HudLayer {
-  /** 本レイヤーのベースとなるシーン */
+  /** 本レイヤーのベースとなるthree.jsのシーン */
   scene: THREE.Scene;
   /** 本レイヤーのカメラ */
   camera: THREE.OrthographicCamera;
@@ -45,6 +48,10 @@ export class HudLayer {
   attackButton: AttackButton;
   /** バッテリースライダー */
   batterySlider: BatterySlider;
+  /** プレイヤーバーストゲージ */
+  playerBurstGauge: BurstGauge;
+  /** 敵バーストゲージ */
+  enemyBurstGauge: BurstGauge;
 
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -70,5 +77,11 @@ export class HudLayer {
 
     this.batterySlider = createBatterySlider(param.resources, param.notifier);
     this.batterySlider.getThreeJsObjectList().forEach(v => this.scene.add(v));
+
+    this.playerBurstGauge = createPlayerBurstGauge(param.resources);
+    this.playerBurstGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
+
+    this.enemyBurstGauge = createEnemyBurstGauge(param.resources);
+    this.enemyBurstGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
   }
 }
