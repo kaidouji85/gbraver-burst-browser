@@ -24,6 +24,10 @@ export class BurstGauge {
     this._view.gameLoop(this._model);
   }
 
+  setActive(isActive: boolean) {
+    this._model.isActive = isActive;
+  }
+
   getThreeJsObjectList(): THREE.Mesh[] {
     return this._view.getThreeJsObjectList();
   }
