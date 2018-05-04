@@ -1,9 +1,9 @@
 // @flow
 
 import type {Resources} from "../../../../resource/index";
-import type {BattleSceneState} from "../../state";
 import {HpGauge} from "../../../../game-object/gauge/hp-gauge/hp-gauge";
 import {EnemyHpGauge} from "../../../../game-object/gauge/hp-gauge";
+import type {Player} from "gbraver-burst-core/lib/player/player";
 
 /**
  * ゲームの状態から敵HPゲージを生成する
@@ -12,7 +12,6 @@ import {EnemyHpGauge} from "../../../../game-object/gauge/hp-gauge";
  * @param state ゲームの状態
  * @return 敵HPゲージ
  */
-export function createEnemyHpGauge(resources: Resources, state: BattleSceneState): HpGauge {
-  const enemyInfo = state.battleState.players.find(v => v.playerId !== state.playerId) || state.battleState.players[0];
-  return EnemyHpGauge(resources, enemyInfo.armDozer.hp, enemyInfo.armDozer.maxHp);
+export function createEnemyHpGauge(resources: Resources, enemyInfo: Player): HpGauge {
+  return EnemyHpGauge(resources, enemyInfo.armdozer.maxHp, enemyInfo.armdozer.maxHp);
 }

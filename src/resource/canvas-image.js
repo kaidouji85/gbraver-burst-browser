@@ -29,6 +29,8 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_SLIDER_BASE: 'BATTERY_SLIDER_BASE',
   BATTERY_SLIDER_GAUGE: 'BATTERY_SLIDER_GAUGE',
   BATTERY_SLIDER_BACK: 'BATTERY_SLIDER_BACK',
+  BURST_GAUGE_ACTIVE: 'BURST_GAUGE_ACTIVE',
+  BURST_GAUGE_DISACTIVE: 'BURST_GAUGE_DISACTIVE',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -80,6 +82,14 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_BACK,
     path: 'slider/battery-slider/battery-slider-back.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BURST_GAUGE_ACTIVE,
+    path: 'gauge/burst-gauge/burst-active.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BURST_GAUGE_DISACTIVE,
+    path: 'gauge/burst-gauge/burst-disactive.png',
   }
 ];
 

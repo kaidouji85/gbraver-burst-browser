@@ -10,6 +10,7 @@ import {Group, Tween} from "@tweenjs/tween.js";
 import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 import {getControllerScale} from "../../../device-scale/controller-scale";
+import { map, filter, distinctUntilChanged } from 'rxjs/operators';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -45,15 +46,15 @@ export class BatterySlider {
     this._tweenGroup = new Group();
 
     this._overlap = new Subject();
-    this._overlap
-      .filter(v => v.length > 0)
-      .map(v => v.reduce((a, b) => Math.max(a, b)))
-      .distinctUntilChanged()
-      .subscribe((battery: number) => {
-        this.removeAllTween();
-        this.change(battery).start();
-        param.onBatteryChange(battery);
-      });
+    this._overlap.pipe(
+      filter(v => v.length > 0),
+      map(v => v.reduce((a, b) => Math.min(a, b))),
+      distinctUntilChanged()
+    ).subscribe((battery: number) => {
+      this.removeAllTween();
+      this.change(battery).start();
+      param.onBatteryChange(battery);
+    });
   }
 
   /** ゲームループの処理 */

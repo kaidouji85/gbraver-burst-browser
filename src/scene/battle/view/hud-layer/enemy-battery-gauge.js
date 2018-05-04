@@ -1,9 +1,9 @@
 // @flow
 
 import type {Resources} from "../../../../resource/index";
-import type {BattleSceneState} from "../../state";
 import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-gauge";
 import {EnemyBatteryGauge} from "../../../../game-object/gauge/battery-gauge";
+import type {Player} from "gbraver-burst-core/lib/player/player";
 
 /**
  * ゲームの状態から敵バッテリーゲージを生成する
@@ -12,7 +12,6 @@ import {EnemyBatteryGauge} from "../../../../game-object/gauge/battery-gauge";
  * @param state ゲームの状態
  * @returns 敵バッテリーゲージ
  */
-export function createEnemyBatteryGauge(resources: Resources, state: BattleSceneState): BatteryGauge {
-  const enemyInfo = state.battleState.players.find(v => v.playerId !== state.playerId) || state.battleState.players[0];
-  return EnemyBatteryGauge(resources, enemyInfo.armDozer.battery, enemyInfo.armDozer.maxBattery);
+export function createEnemyBatteryGauge(resources: Resources, enemyInfo: Player): BatteryGauge {
+  return EnemyBatteryGauge(resources, enemyInfo.armdozer.maxBattery, enemyInfo.armdozer.maxBattery);
 }

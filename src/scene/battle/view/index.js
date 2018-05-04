@@ -3,9 +3,17 @@ import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
-import type {BattleSceneState} from "../state";
-import type {Observer} from '../../observer';
-import {createRender} from "./renderer";
+import type {BattleSceneNotifier} from "../../../observer/battle-scene/battle-scene-notifier";
+import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+
+/** コンストラクタのパラメータ */
+type Param = {
+  resources: Resources,
+  notifier: BattleSceneNotifier,
+  renderer: THREE.WebGLRenderer,
+  playerId: PlayerId,
+  players: Player[]
+};
 
 /**
  * 戦闘画面
@@ -18,21 +26,19 @@ export class BattleSceneView {
   /** Head Up Display(HUD)レイヤー */
   hudLayer: HudLayer;
 
-  constructor(props: {resources: Resources, state: BattleSceneState, observer: Observer}) {
-    this.renderer = createRender();
+  constructor(param: Param) {
+    this.renderer = param.renderer;
     this.threeDimensionLayer = new ThreeDimensionLayer({
-      resources: props.resources,
-      state: props.state
+      resources: param.resources,
+      playerId: param.playerId,
+      players: param.players
     });
     this.hudLayer = new HudLayer({
-      resources: props.resources,
-      state: props.state,
-      observer: props.observer
+      resources: param.resources,
+      playerId: param.playerId,
+      players: param.players,
+      notifier: param.notifier
     });
-
-    const dom = this.renderer.domElement || new HTMLElement();
-    const body = document.body || document.createElement('body');
-    body.appendChild(dom);
   }
 
   /** レンダリング処理 */
