@@ -26,5 +26,5 @@ export function drawBurstGauge(context: CanvasRenderingContext2D, resources: Res
   const x = dx - width / 2;
   const y = dy - height / 2;
 
-  context.drawImage(burstGaugeImage, dx, dy, width, height);
+  context.drawImage(burstGaugeImage, x, y, width, height);
 }

@@ -29,4 +29,5 @@ function hud(view: HudLayer, time: DOMHighResTimeStamp) {
   view.attackButton.gameLoop(time);
   view.batterySlider.gameLoop(time);
   view.playerBurstGauge.gameLoop();
+  view.enemyBurstGauge.gameLoop();
 }

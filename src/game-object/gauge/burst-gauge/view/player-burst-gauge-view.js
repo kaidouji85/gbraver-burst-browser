@@ -10,9 +10,9 @@ import * as THREE from "three";
 /** メッシュの大きさ */
 export const MESH_SIZE = 128;
 /** パディングトップ */
-export const PADDING_TOP = 136;
+export const PADDING_TOP = 160;
 /** パディングレフト */
-export const PADDING_LEFT = 96;
+export const PADDING_LEFT = 64;
 
 /** プレイヤーのバーストゲージ */
 export class PlayerBurstGaugeView implements BurstGaugeView {
