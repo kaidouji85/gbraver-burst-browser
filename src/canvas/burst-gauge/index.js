@@ -1,3 +1,4 @@
+// @flow
 import type {Resources} from "../../resource";
 import type {CanvasImageResource} from "../../resource/canvas-image";
 import {drawImageInCenter} from "../draw/image-drawer";
