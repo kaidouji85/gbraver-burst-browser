@@ -20,8 +20,10 @@ export class PlayerBurstGaugeView implements BurstGaugeView {
   _canvasMesh: CanvasMesh;
   /** ゲームループで使うために、リソース管理オブジェクトをキャッシュする */
   _resources: Resources;
+  /** デバイスに応じた倍率 */
+  _scale: number;
 
-  constructor(resources: Resources) {
+  constructor(resources: Resources, scale: number) {
     this._resources = resources;
     this._canvasMesh = new CanvasMesh({
       meshWidth: MESH_SIZE,
@@ -29,12 +31,12 @@ export class PlayerBurstGaugeView implements BurstGaugeView {
       canvasWidth: MESH_SIZE,
       canvasHeight: MESH_SIZE,
     });
+    this._scale = scale;
   }
 
   /** モデルをビューに反映させる */
   gameLoop(model: BurstGaugeModel): void {
-    const scale = 1;
-    this._canvasMesh.mesh.scale.set(scale, scale, scale);
+    this._canvasMesh.mesh.scale.set(this._scale, this._scale, this._scale);
     this._refreshGauge(model);
     this._refreshPos();
   }
@@ -49,8 +51,8 @@ export class PlayerBurstGaugeView implements BurstGaugeView {
 
   /** ゲージ位置を調整する */
   _refreshPos(): void {
-    this._canvasMesh.mesh.position.x = window.innerWidth / 2 - PADDING_LEFT;
-    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - PADDING_TOP;
+    this._canvasMesh.mesh.position.x = window.innerWidth / 2 - PADDING_LEFT * this._scale;
+    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - PADDING_TOP * this._scale;
   }
 
   getThreeJsObjectList(): THREE.Mesh[] {
