@@ -18,5 +18,13 @@ export function drawBurstGauge(context: CanvasRenderingContext2D, resources: Res
   const burstGaugeResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === imageId);
   const burstGaugeImage: Image = burstGaugeResource ? burstGaugeResource.image : new Image();
 
-  drawImageInCenter(context, burstGaugeImage, dx, dy);
+  // バーストゲージ画像は、他ゲージに比べて解像度が高い
+  // 大きさの見た目をゲージ間でそれえるため、あえて縮小表示している
+  const scale = 0.5;
+  const width = burstGaugeImage.width * scale;
+  const height = burstGaugeImage.height * scale;
+  const x = dx - width / 2;
+  const y = dy - height / 2;
+
+  context.drawImage(burstGaugeImage, dx, dy, width, height);
 }
