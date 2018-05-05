@@ -9,6 +9,7 @@ import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
 
 export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;
+export const PADDING_BOTTOM = -16;
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
@@ -23,7 +24,7 @@ export class PlayerShinBraverView implements ShinBraverView {
   gameLoop(model: ShinBraverModel, camera: THREE.Camera): void {
     this._mesh.position.set(
       model.position.x,
-      model.position.y + MESH_HEIGHT / 2 -30,
+      model.position.y + MESH_HEIGHT / 2 + PADDING_BOTTOM,
       model.position.z
     );
 
