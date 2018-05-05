@@ -9,7 +9,7 @@ import * as THREE from "three";
 new ThreeDimensionLayerStubBase({
   resourceBashPath: '../../resources/',
   init(resources: Resources): ShinBraver {
-    const shinBraver = new PlayerShinBraver(resources);
+    const shinBraver = PlayerShinBraver(resources);
     shinBraver.stand().start();
     return shinBraver;
   },

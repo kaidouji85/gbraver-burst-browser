@@ -30,6 +30,7 @@ const STUB_ENTRY_FILES = {
   'game-object/armdozer/enemy-shin-braver': `${STUB_PATH}/game-object/armdozer/enemy-shin-braver`,
   'game-object/gauge/player-burst-gauge': `${STUB_PATH}/game-object/gauge/player-burst-gauge`,
   'game-object/gauge/enemy-burst-gauge': `${STUB_PATH}/game-object/gauge/enemy-burst-gauge`,
+  'game-object/armdozer/player-neo-landozer': `${STUB_PATH}/game-object/armdozer/player-neo-landozer`,
 };
 
 module.exports = {

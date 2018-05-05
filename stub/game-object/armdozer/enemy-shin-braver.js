@@ -9,7 +9,7 @@ import {EnemyShinBraver} from "../../../src/game-object/armdozer/shin-breaver";
 new ThreeDimensionLayerStubBase({
   resourceBashPath: '../../resources/',
   init(resources: Resources): ShinBraver {
-    const shinBraver = new EnemyShinBraver(resources);
+    const shinBraver = EnemyShinBraver(resources);
     shinBraver.stand().start();
     return shinBraver;
   },
