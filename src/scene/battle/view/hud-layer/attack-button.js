@@ -1,7 +1,7 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import {AttackButton} from "../../../../game-object/button/attack-button/index";
+import {AttackButton} from "../../../../game-object/button/index";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 
 /** コウゲキボタンを生成する */

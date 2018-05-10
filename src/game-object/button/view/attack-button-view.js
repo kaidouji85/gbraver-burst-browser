@@ -5,16 +5,17 @@ import type {Resources} from "../../../resource";
 import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
 import type {TextureResource} from "../../../resource/texture";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import type {ButtonModel} from "./model/button-model";
+import type {ButtonModel} from "../model/button-model";
 import {OverlapTarget} from "../../../screen-touch/raycaster/overlap-target";
 import {isMeshOverlap} from "../../../screen-touch/raycaster/overlap";
+import {ButtonView} from "./button-view";
 
 export const BUTTON_WIDTH = 100;
 export const BUTTON_HEIGHT = 100;
 export const PADDING_BOTTOM = 64;
 
 /** コウゲキボタンのビュー */
-export class AttackButtonView implements OverlapTarget {
+export class AttackButtonView implements ButtonView {
   /** ボタンを描画するメッシュ */
   _mesh: THREE.Mesh;
   /** デバイスに応じたスケール */

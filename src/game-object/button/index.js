@@ -2,15 +2,16 @@
 import * as THREE from "three";
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
-import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
-import type {Resources} from "../../../resource";
-import {AttackButtonView} from "./attack-button-view";
+import type {TouchRaycastContainer} from "../../screen-touch/touch/touch-raycaster";
+import type {Resources} from "../../resource/index";
+import {ButtonView} from "./view/button-view";
 import {push} from "./model/push";
-import {isGroupPlaying} from "../../../tween/is-group-playing";
-import {isTouchOverlap} from "../../../screen-touch/touch/touch-overlap";
-import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
-import {isMouseOverlap} from "../../../screen-touch/mouse/mouse-overlap";
-import {getControllerScale} from "../../../device-scale/controller-scale";
+import {isGroupPlaying} from "../../tween/is-group-playing";
+import {isTouchOverlap} from "../../screen-touch/touch/touch-overlap";
+import type {MouseRaycaster} from "../../screen-touch/mouse/mouse-raycaster";
+import {isMouseOverlap} from "../../screen-touch/mouse/mouse-overlap";
+import {getControllerScale} from "../../device-scale/controller-scale";
+import {AttackButtonView} from "./view/attack-button-view";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -24,7 +25,7 @@ type Param = {
 /** コウゲキボタン */
 export class AttackButton {
   _model: ButtonModel;
-  _view: AttackButtonView;
+  _view: ButtonView;
   _tweenGroup: Group;
   _onPush: () => void;
 
@@ -33,6 +34,7 @@ export class AttackButton {
       scale: 1,
       opacity: 1
     };
+    // TODO コンストラクタから渡されたものを使う
     this._view = new AttackButtonView(param.resources, getControllerScale());
     this._tweenGroup = new Group();
     this._onPush = param.onPush;

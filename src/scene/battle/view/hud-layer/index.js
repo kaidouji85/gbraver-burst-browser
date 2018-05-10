@@ -8,7 +8,7 @@ import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-
 import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 import {createAttackButton} from "./attack-button";
-import {AttackButton} from "../../../../game-object/button/attack-button/index";
+import {AttackButton} from "../../../../game-object/button/index";
 import {createCamera} from "./camera";
 import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 import {createBatterySlider} from "./battery-slider";
