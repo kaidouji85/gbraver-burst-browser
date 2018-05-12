@@ -1,27 +1,27 @@
 // @flow
 
-import {ShinBraverView} from './shin-braver-view';
+import {NeoLandozerView} from './neo-landozer-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
-import type {ShinBraverModel} from "../model/shin-braver-model";
-import {ShinBraverTextureContainer} from "./texture";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
+import {NeoLandozerTextureContainer} from "./texture";
 import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
 
 export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;
 export const PADDING_BOTTOM = -16;
 
-/** プレイヤー側シンブレイバーのビュー */
-export class PlayerShinBraverView implements ShinBraverView {
+/** プレイヤー側ネオランドーザのビュー */
+export class PlayerNeoLandozerView implements NeoLandozerView {
   _mesh: THREE.Mesh;
-  _textureContainer: ShinBraverTextureContainer;
+  _textureContainer: NeoLandozerTextureContainer;
 
   constructor(resources: Resources) {
-    this._textureContainer = new ShinBraverTextureContainer(resources);
+    this._textureContainer = new NeoLandozerTextureContainer(resources);
     this._mesh = createBasicMesh();
   }
 
-  gameLoop(model: ShinBraverModel, camera: THREE.Camera): void {
+  gameLoop(model: NeoLandozerModel, camera: THREE.Camera): void {
     this._mesh.position.set(
       model.position.x,
       model.position.y + MESH_HEIGHT / 2 + PADDING_BOTTOM,

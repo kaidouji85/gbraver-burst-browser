@@ -11,9 +11,9 @@ const MIN_SCREEN_WIDTH = 524;
  * @return 倍率
  */
 export function getGaugeScale(): number {
-  const landScapeScreenWidth = Math.min(screen.width, screen.height);
-  if (landScapeScreenWidth <= MIN_SCREEN_WIDTH) {
-    return landScapeScreenWidth / MIN_SCREEN_WIDTH;
+  const portraitScreenWidth = Math.min(screen.width, screen.height);
+  if (portraitScreenWidth <= MIN_SCREEN_WIDTH) {
+    return portraitScreenWidth / MIN_SCREEN_WIDTH;
   }
 
   return 1;

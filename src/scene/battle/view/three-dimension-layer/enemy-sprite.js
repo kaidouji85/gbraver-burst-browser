@@ -4,12 +4,15 @@ import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-spr
 import type {Resources} from "../../../../resource/index";
 import {EnemyShinBraver} from '../../../../game-object/armdozer/shin-breaver';
 import type {Player} from "gbraver-burst-core/lib/player/player";
+import {EnemyNeoLandozer} from "../../../../game-object/armdozer/neo-landozer";
 
 /** 与えられたパラメータから敵スプライを生成する */
 export function createEnemySprite(resources: Resources, enemyInfo: Player): ArmDozerSprite {
   switch(enemyInfo.armdozer.appearance) {
+    case 'neo-landozer':
+      return EnemyNeoLandozer(resources);
     case 'shin-breaver':
     default:
-      return new EnemyShinBraver(resources);
+      return EnemyShinBraver(resources);
   }
 }
