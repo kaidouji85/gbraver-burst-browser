@@ -8,7 +8,7 @@ import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-
 import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 import {createAttackButton} from "./attack-button";
-import {AttackButton} from "../../../../game-object/button/index";
+import {Button} from "../../../../game-object/button/button";
 import {createCamera} from "./camera";
 import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 import {createBatterySlider} from "./battery-slider";
@@ -45,7 +45,7 @@ export class HudLayer {
   /** 敵バッテリーゲージ */
   enemyBatteryGauge: BatteryGauge;
   /** コウゲキボタン */
-  attackButton: AttackButton;
+  attackButton: Button;
   /** バッテリースライダー */
   batterySlider: BatterySlider;
   /** プレイヤーバーストゲージ */
