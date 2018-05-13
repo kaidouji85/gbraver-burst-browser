@@ -38,7 +38,7 @@ export class AttackButtonView implements ButtonView {
   }
   /** モデルをビューに反映させる */
   gameLoop(model: ButtonModel) {
-    const scale = model.scale * this._deviceScale;
+    const scale = (1 + 0.1 * model.depth) * this._deviceScale;
     this._mesh.scale.set(scale, scale, scale);
     this._mesh.position.y = -window.innerHeight / 2 + PADDING_BOTTOM * this._deviceScale;
   }

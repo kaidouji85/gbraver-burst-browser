@@ -31,7 +31,7 @@ export class AttackButton {
 
   constructor(param: Param) {
     this._model = {
-      scale: 1,
+      depth: 0,
       opacity: 1
     };
     // TODO コンストラクタから渡されたものを使う
