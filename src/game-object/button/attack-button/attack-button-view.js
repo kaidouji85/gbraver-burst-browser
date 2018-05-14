@@ -1,14 +1,14 @@
 // @flow
 
 import * as THREE from "three";
-import type {Resources} from "../../../resource";
+import type {Resources} from "../../../resource/index";
 import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
 import type {TextureResource} from "../../../resource/texture";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import type {ButtonModel} from "../model/button-model";
+import type {ButtonModel} from "../button/model/button-model";
 import {OverlapTarget} from "../../../screen-touch/raycaster/overlap-target";
 import {isMeshOverlap} from "../../../screen-touch/raycaster/overlap";
-import {ButtonView} from "./button-view";
+import {ButtonView} from "../button/button-view";
 
 export const BUTTON_WIDTH = 100;
 export const BUTTON_HEIGHT = 100;
