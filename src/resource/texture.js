@@ -29,9 +29,6 @@ export const TEXTURE_IDS = {
   BLUE_SKY_DOWN: 'BLUE_SKY_DOWN',
   TILE_MAP_SCHOOL_GROUND: 'TILE_MAP_SCHOOL_GROUND',
   ATTACK_BUTTON: 'ATTACK_BUTTON',
-  DEFENSE_BUTTON: 'DEFENSE_BUTTON',
-  BURST_BUTTON: 'BURST_BUTTON',
-  OK_BUTTON: 'OK_BUTTON',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -88,24 +85,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.ATTACK_BUTTON,
     path: 'button/attack-button.png'
-  },
-
-  // ボウギョボタン
-  {
-    id: TEXTURE_IDS.DEFENSE_BUTTON,
-    path: 'button/defense-button.png'
-  },
-
-  // バーストボタン
-  {
-    id: TEXTURE_IDS.BURST_BUTTON,
-    path: 'button/burst-button.png'
-  },
-
-  // ケッテイボタン
-  {
-    id: TEXTURE_IDS.OK_BUTTON,
-    path: 'button/ok-button.png'
   }
 ];
 

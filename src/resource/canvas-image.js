@@ -31,6 +31,10 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_SLIDER_BACK: 'BATTERY_SLIDER_BACK',
   BURST_GAUGE_ACTIVE: 'BURST_GAUGE_ACTIVE',
   BURST_GAUGE_DISACTIVE: 'BURST_GAUGE_DISACTIVE',
+  ATTACK_BUTTON: 'ATTACK_BUTTON',
+  DEFENSE_BUTTON: 'DEFENSE_BUTTON',
+  BURST_BUTTON: 'BURST_BUTTON',
+  OK_BUTTON: 'OK_BUTTON',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -90,6 +94,22 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BURST_GAUGE_DISACTIVE,
     path: 'gauge/burst-gauge/burst-disactive.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.ATTACK_BUTTON,
+    path: 'button/attack-button.png'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.DEFENSE_BUTTON,
+    path: 'button/defense-button.png'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BURST_BUTTON,
+    path: 'button/burst-button.png'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.OK_BUTTON,
+    path: 'button/ok-button.png'
   }
 ];
 
