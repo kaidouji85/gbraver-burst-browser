@@ -6,14 +6,13 @@ import type {ButtonModel} from "../button/model/button-model";
 import {isMeshOverlap} from "../../../screen-touch/raycaster/overlap";
 import {ButtonView} from "../button/button-view";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type {CanvasImageResource} from "../../../resource/canvas-image";
-import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
+import {drawAttackButton} from "../../../canvas/attack-button";
 
-export const BUTTON_SIZE = 100;
-export const CANVAS_SIZE = 1024;
+export const BUTTON_SIZE = 200;
+export const CANVAS_SIZE = 2048;
 export const PADDING_BOTTOM = 64;
 
+// TODO 当たり判定用のメッシュを追加する
 /** コウゲキボタンのビュー */
 export class AttackButtonView implements ButtonView {
   /** ボタンを描画するメッシュ */
@@ -35,15 +34,14 @@ export class AttackButtonView implements ButtonView {
   }
   /** モデルをビューに反映させる */
   gameLoop(model: ButtonModel) {
-    const scale = (1 + 0.1 * model.depth) * this._deviceScale;
-    this._canvasMesh.mesh.scale.set(scale, scale, scale);
+    this._canvasMesh.mesh.scale.set(this._deviceScale, this._deviceScale, this._deviceScale);
+    this._canvasMesh.mesh.position.x = 0;
     this._canvasMesh.mesh.position.y = -window.innerHeight / 2 + PADDING_BOTTOM * this._deviceScale;
 
-    const attackButtonResource: ?CanvasImageResource = this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.ATTACK_BUTTON);
-    const attackButtonImage: Image = attackButtonResource ? attackButtonResource.image : new Image();
     this._canvasMesh.draw(context => {
       context.clearRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
-      drawImageInCenter(context, attackButtonImage, this._canvasMesh.canvas.width / 2, this._canvasMesh.canvas.height / 2);
+      //context.fillRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
+      drawAttackButton(context, this._resources, model.depth, this._canvasMesh.canvas.width / 2, this._canvasMesh.canvas.height / 2);
     });
   }
 
