@@ -9,6 +9,7 @@ import {AttackButton} from "../../../../game-object/button";
 export function createAttackButton(resources: Resources, notifier: BattleSceneNotifier): Button {
   return AttackButton({
     resources,
-    onPush: () => notifier.notify({type: 'pushAttackButton'})
+    onPush: () => notifier.notify({type: 'pushAttackButton'}),
+    visible: true
   })
 }

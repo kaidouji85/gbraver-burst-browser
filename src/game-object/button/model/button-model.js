@@ -7,9 +7,13 @@ export type ButtonModel = {
    * 0〜1の範囲で、1が押込み最大である
    */
   depth: number,
+
   /**
    * ボタン透明度
    * 0〜1で指定して、0で完全透明
    */
   opacity: number,
+
+  /** 操作不可能フラグ、trueで操作不可能 */
+  disabled: boolean
 }

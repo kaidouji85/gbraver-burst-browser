@@ -19,6 +19,8 @@ type Param = {
   onPush: () => void,
   /** ビュー */
   view: ButtonView,
+  /** 表示フラグ、trueで表示する */
+  visible: boolean,
 };
 
 //TODO 表示・非表示、コントロール可能・不可の設定を追加する
@@ -32,7 +34,8 @@ export class Button {
   constructor(param: Param) {
     this._model = {
       depth: 0,
-      opacity: 1
+      opacity: param.visible ? 1 : 0,
+      disabled: false
     };
     this._view = param.view;
     this._tweenGroup = new Group();
@@ -43,6 +46,15 @@ export class Button {
   gameLoop(time: DOMHighResTimeStamp) {
     this._tweenGroup.update(time);
     this._view.gameLoop(this._model);
+  }
+
+  /**
+   * 操作可能・不可能を設定する
+   *
+   * @param isDisabled trueで操作不可能
+   */
+  disabled(isDisabled: boolean): void {
+    this._model.disabled = isDisabled;
   }
 
   /** ボタン押下アニメーション */
@@ -72,7 +84,7 @@ export class Button {
 
   /** マウス、指がボタンと重なった際の処理 */
   _onOverlay(): void {
-    if (isGroupPlaying(this._tweenGroup)) {
+    if (isGroupPlaying(this._tweenGroup) || this._model.disabled) {
       return;
     }
 
