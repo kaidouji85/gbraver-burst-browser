@@ -5,6 +5,8 @@ import {drawImageInCenter} from "../draw/image-drawer";
 import type {CanvasImageResource} from "../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 
+const SHADOW_PADDING_BOTTOM = 470;
+
 /**
  * コウゲキボタンを描画する
  *
@@ -15,10 +17,9 @@ export function drawAttackButton(context: CanvasRenderingContext2D, resources: R
   const scale = (1 + 0.1 * depth);
   const attackButtonResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.ATTACK_BUTTON);
   const attackButtonImage: Image = attackButtonResource ? attackButtonResource.image : new Image();
+  const buttonShadowResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BUTTON_SHADOW);
+  const buttonShadowImage: Image = buttonShadowResource ? buttonShadowResource.image : new Image();
 
-  const buttonWidth = attackButtonImage.width * scale;
-  const buttonHeight = attackButtonImage.height * scale;
-  const buttonX = dx - buttonWidth / 2;
-  const buttonY = dy - buttonHeight / 2;
-  context.drawImage(attackButtonImage, buttonX, buttonY, buttonWidth, buttonHeight);
+  drawImageInCenter(context, buttonShadowImage, dx, dy + SHADOW_PADDING_BOTTOM);
+  drawImageInCenter(context, attackButtonImage, dx, dy, scale);
 }

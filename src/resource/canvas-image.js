@@ -35,6 +35,7 @@ export const CANVAS_IMAGE_IDS = {
   DEFENSE_BUTTON: 'DEFENSE_BUTTON',
   BURST_BUTTON: 'BURST_BUTTON',
   OK_BUTTON: 'OK_BUTTON',
+  BUTTON_SHADOW: 'BUTTON_SHADOW',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -110,6 +111,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.OK_BUTTON,
     path: 'button/ok-button.png'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BUTTON_SHADOW,
+    path: 'button/button-shadow.png'
   }
 ];
 
