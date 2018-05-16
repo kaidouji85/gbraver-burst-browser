@@ -6,7 +6,7 @@ import type {ButtonModel} from "../button/model/button-model";
 import {isMeshOverlap} from "../../../screen-touch/raycaster/overlap";
 import {ButtonView} from "../button/button-view";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
-import {drawAttackButton} from "../../../canvas/attack-button";
+import {drawAttackButton} from "../../../canvas/button/attack-button";
 import {createOverlapMesh} from "../overlap-mesh";
 
 export const BUTTON_SIZE = 200;

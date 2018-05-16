@@ -20,6 +20,6 @@ export function drawAttackButton(context: CanvasRenderingContext2D, resources: R
   const buttonShadowResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BUTTON_SHADOW);
   const buttonShadowImage: Image = buttonShadowResource ? buttonShadowResource.image : new Image();
 
-  drawImageInCenter(context, buttonShadowImage, dx, dy + SHADOW_PADDING_BOTTOM);
+  drawImageInCenter(context, buttonShadowImage, dx, dy + SHADOW_PADDING_BOTTOM, scale);
   drawImageInCenter(context, attackButtonImage, dx, dy, scale);
 }
