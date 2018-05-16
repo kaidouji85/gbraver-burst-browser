@@ -28,7 +28,6 @@ export const TEXTURE_IDS = {
   BLUE_SKY_UP: 'BLUE_SKY_UP',
   BLUE_SKY_DOWN: 'BLUE_SKY_DOWN',
   TILE_MAP_SCHOOL_GROUND: 'TILE_MAP_SCHOOL_GROUND',
-  ATTACK_BUTTON: 'ATTACK_BUTTON',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -80,12 +79,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.TILE_MAP_SCHOOL_GROUND,
     path: 'tile-map/school-ground/map.png'
   },
-
-  // コウゲキボタン
-  {
-    id: TEXTURE_IDS.ATTACK_BUTTON,
-    path: 'button/attack-button.png'
-  }
 ];
 
 /**

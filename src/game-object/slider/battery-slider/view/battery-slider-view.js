@@ -12,7 +12,7 @@ import type {MouseRaycaster} from "../../../../screen-touch/mouse/mouse-raycaste
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
 /** バッテリースライダーのパディングボトム */
-export const PADDING_BOTTOM = 172;
+export const PADDING_BOTTOM = 172 + 8;
 
 /** コンストラクタのパラメータ */
 type Param = {

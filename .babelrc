@@ -1,6 +1,7 @@
 {
   "presets": [
-    ["env", {
+    [
+      "env", {
       "targets": {
         "browsers": [
           "last 2 Chrome versions",
@@ -11,7 +12,8 @@
           "last 2 ChromeAndroid versions"
         ]
       }
-    }]
+    }],
+    "stage-2"
   ],
   "plugins": ["transform-flow-strip-types"]
 }
