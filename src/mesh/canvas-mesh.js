@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import {SPRITE_RENDER_ORDER} from "./render-order";
 
 /** パラメータ */
 type Params = {
@@ -30,7 +31,9 @@ export class CanvasMesh {
     const material = new THREE.MeshBasicMaterial({map: texture});
     material.transparent = true;
     const planeGeometry = new THREE.PlaneGeometry(this.meshWidth, this.meshHeight);
+
     this.mesh = new THREE.Mesh(planeGeometry, material);
+    this.mesh.renderOrder = SPRITE_RENDER_ORDER;
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */

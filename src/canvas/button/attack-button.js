@@ -5,7 +5,7 @@ import {drawImageInCenter} from "../draw/image-drawer";
 import type {CanvasImageResource} from "../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 
-const SHADOW_PADDING_BOTTOM = 100;
+const SHADOW_PADDING_BOTTOM = 80;
 
 /**
  * コウゲキボタンを描画する

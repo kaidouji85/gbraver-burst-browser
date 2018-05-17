@@ -5,7 +5,7 @@ import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import {drawImageInCenter} from "../draw/image-drawer";
 import {drawBatterySliderGauge} from "./gauge";
 
-export const SHADOW_PADDING_BOTTOM = 16;
+export const SHADOW_PADDING_BOTTOM = 8;
 
 /**
  * バッテリースライダーを描画する
