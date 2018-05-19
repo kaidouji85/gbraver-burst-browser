@@ -47,7 +47,7 @@ export class AttackButtonView implements ButtonView {
     this._overlapMesh.position.y = meshY;
     this._canvasMesh.draw(context => {
       context.clearRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
-      drawAttackButton(context, this._resources, model.depth, this._canvasMesh.canvas.width / 2, this._canvasMesh.canvas.height / 2);
+      drawAttackButton(context, this._resources, model.depth, model.opacity, this._canvasMesh.canvas.width / 2, this._canvasMesh.canvas.height / 2);
     });
   }
 

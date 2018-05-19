@@ -13,7 +13,4 @@ export type ButtonModel = {
    * 0〜1で指定して、0で完全透明
    */
   opacity: number,
-
-  /** 操作不可能フラグ、trueで操作不可能 */
-  disabled: boolean
 }
