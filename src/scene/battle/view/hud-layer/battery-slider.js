@@ -11,6 +11,7 @@ export function createBatterySlider(resources: Resources, notifier: BattleSceneN
     onBatteryChange: (battery: number) => {
       // TODO オブザーバに通知する
       console.log(`change battery ${battery}`);
-    }
+    },
+    isVisible: true
   });
 }

@@ -11,11 +11,13 @@ import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-rayc
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 import {getControllerScale} from "../../../device-scale/controller-scale";
 import { map, filter, distinctUntilChanged } from 'rxjs/operators';
+import {visible} from './model/visible';
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  onBatteryChange: (battery: number) => void
+  onBatteryChange: (battery: number) => void,
+  isVisible: boolean
 };
 
 /** バッテリースライダー */
@@ -24,8 +26,10 @@ export class BatterySlider {
   _model: BatterySliderModel;
   /** バッテリースライダーのビュー */
   _view: BatterySliderView;
-  /** 本オブジェクトに関するTweenのグループ */
-  _tweenGroup: Group;
+  /** バッテリーメモリのTweenグループ */
+  _batteryTween: Group;
+  /** 透明度のTweenグループ */
+  _opacityTween: Group;
   /**
    * マウス、指と目盛りの重なり判定の結果を受け取り、
    * 条件が整い次第、目盛りの値を変更する
@@ -37,14 +41,15 @@ export class BatterySlider {
     this._model = {
       battery: initialBattery,
       maxBattery: 5,
-      opacity: 0.5
+      opacity: param.isVisible ? 1 : 0
     };
     this._view = new BatterySliderView({
       resources: param.resources,
       maxValue: this._model.maxBattery,
       scale: getControllerScale()
     });
-    this._tweenGroup = new Group();
+    this._batteryTween = new Group();
+    this._opacityTween = new Group();
 
     this._overlap = new Subject();
     this._overlap.pipe(
@@ -53,30 +58,41 @@ export class BatterySlider {
       distinctUntilChanged()
     ).subscribe((battery: number) => {
       this.removeAllTween();
-      this.change(battery).start();
+      this.changeBatteryAnimation(battery).start();
       param.onBatteryChange(battery);
     });
   }
 
   /** ゲームループの処理 */
   gameLoop(time: DOMHighResTimeStamp): void {
-    this._tweenGroup.update(time);
+    this._batteryTween.update(time);
     this._view.gameLoop(this._model);
   }
 
   /**
-   * バッテリー値を変更する
+   * バッテリーゲージ目盛りを変更するアニメーション
    *
    * @param toBattery 変更する値
-   * @return バッテリー変更アニメTween
+   * @return アニメーションTween
    */
-  change(toBattery: number): Tween {
-    return change(this._model, this._tweenGroup, toBattery);
+  changeBatteryAnimation(toBattery: number): Tween {
+    return change(this._model, this._batteryTween, toBattery);
   }
+
+  /**
+   * スライダーの表示・非表示アニメーション
+   *
+   * @param isVisible スライダー表示フラグ、trueで表示する
+   * @return アニメーションTween
+   */
+  visibleAnimation(isVisible: boolean): Tween {
+    return visible(this._model, this._opacityTween, isVisible);
+  }
+
 
   /** 本クラスのTweenを全て削除する */
   removeAllTween(): void {
-    this._tweenGroup.removeAll();
+    this._batteryTween.removeAll();
   }
 
   /** マウスダウンした際の処理 */
