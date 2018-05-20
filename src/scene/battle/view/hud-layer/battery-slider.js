@@ -6,7 +6,7 @@ import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle
 
 /** バッテリースライダーを生成する */
 export function createBatterySlider(resources: Resources, notifier: BattleSceneNotifier): BatterySlider {
-  return new BatterySlider({
+  const slider = new BatterySlider({
     resources,
     onBatteryChange: (battery: number) => {
       // TODO オブザーバに通知する
@@ -14,4 +14,5 @@ export function createBatterySlider(resources: Resources, notifier: BattleSceneN
     },
     isVisible: true
   });
+  return slider;
 }

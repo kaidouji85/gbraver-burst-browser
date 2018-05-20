@@ -12,6 +12,7 @@ import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 import {getControllerScale} from "../../../device-scale/controller-scale";
 import { map, filter, distinctUntilChanged } from 'rxjs/operators';
 import {visible} from './model/visible';
+import {isGroupPlaying} from "../../../tween/is-group-playing";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -53,6 +54,8 @@ export class BatterySlider {
 
     this._overlap = new Subject();
     this._overlap.pipe(
+      filter(() => !isGroupPlaying(this._opacityTween)),
+      filter(() => this._model.opacity === 1),
       filter(v => v.length > 0),
       map(v => v.reduce((a, b) => Math.min(a, b))),
       distinctUntilChanged()
@@ -66,6 +69,7 @@ export class BatterySlider {
   /** ゲームループの処理 */
   gameLoop(time: DOMHighResTimeStamp): void {
     this._batteryTween.update(time);
+    this._opacityTween.update(time);
     this._view.gameLoop(this._model);
   }
 
