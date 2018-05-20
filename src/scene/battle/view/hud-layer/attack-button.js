@@ -12,7 +12,6 @@ export function createAttackButton(resources: Resources, notifier: BattleSceneNo
     onPush: () => notifier.notify({type: 'pushAttackButton'}),
     visible: true
   });
-  //button.setVisible(true).start();
 
   return button;
 }

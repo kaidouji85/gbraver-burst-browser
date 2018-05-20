@@ -51,7 +51,7 @@ export class Button {
       filter(() => this._model.opacity === 1)
     ).subscribe(() => {
       param.onPush();
-      this._pushAnimation().start();
+      this.pushAnimation().start();
     });
   }
 
@@ -62,29 +62,14 @@ export class Button {
     this._view.gameLoop(this._model);
   }
 
-  /**
-   * ボタンの表示・非表示をセットする
-   *
-   * @param isVisible ボタン表示フラグ、trueで表示する
-   * @return ボタン表示・非表示アニメーションTween
-   */
-  setVisible(isVisible: boolean): Tween {
-    return this._visibleAnimation(isVisible);
-  }
-
   /**ボタン表示・非表示アニメーション */
-  _visibleAnimation(isVisible: boolean): Tween {
+  visibleAnimation(isVisible: boolean): Tween {
     return visible(this._model, this._opacityTween, isVisible);
   }
 
   /** ボタン押下アニメーション */
-  _pushAnimation(): Tween.TWEEN {
+  pushAnimation(): Tween.TWEEN {
     return push(this._model, this._depthTween);
-  }
-
-  /** 本オブジェクトで再生中のTweenを全て破棄する */
-  removeAllTween(): void {
-    this._depthTween.removeAll();
   }
 
   /** マウスダウンした際の処理 */
