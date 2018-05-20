@@ -10,6 +10,9 @@ import {isGroupPlaying} from "../../../tween/is-group-playing";
 import {isTouchOverlap} from "../../../screen-touch/touch/touch-overlap";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 import {isMouseOverlap} from "../../../screen-touch/mouse/mouse-overlap";
+import {visible} from './model/visible';
+import {Subject} from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -28,49 +31,51 @@ type Param = {
 export class Button {
   _model: ButtonModel;
   _view: ButtonView;
-  _tweenGroup: Group;
-  _onPush: () => void;
+  _depthTween: Group;
+  _opacityTween: Group;
+  _onOverlap: Subject<void>;
 
   constructor(param: Param) {
     this._model = {
       depth: 0,
-      opacity: param.visible ? 1 : 0,
-      disabled: false
+      opacity: param.visible ? 1 : 0
     };
     this._view = param.view;
-    this._tweenGroup = new Group();
-    this._onPush = param.onPush;
+    this._depthTween = new Group();
+    this._opacityTween = new Group();
+
+    this._onOverlap = new Subject();
+    this._onOverlap.pipe(
+      filter(() => !isGroupPlaying(this._depthTween)),
+      filter(() => !isGroupPlaying(this._opacityTween)),
+      filter(() => this._model.opacity === 1)
+    ).subscribe(() => {
+      param.onPush();
+      this.pushAnimation().start();
+    });
   }
 
   /** ゲームループ */
   gameLoop(time: DOMHighResTimeStamp) {
-    this._tweenGroup.update(time);
+    this._depthTween.update(time);
+    this._opacityTween.update(time);
     this._view.gameLoop(this._model);
   }
 
-  /**
-   * 操作可能・不可能を設定する
-   *
-   * @param isDisabled trueで操作不可能
-   */
-  disabled(isDisabled: boolean): void {
-    this._model.disabled = isDisabled;
+  /**ボタン表示・非表示アニメーション */
+  visibleAnimation(isVisible: boolean): Tween {
+    return visible(this._model, this._opacityTween, isVisible);
   }
 
   /** ボタン押下アニメーション */
-  push(): Tween.TWEEN {
-    return push(this._model, this._tweenGroup);
-  }
-
-  /** 本オブジェクトで再生中のTweenを全て破棄する */
-  removeAllTween(): void {
-    this._tweenGroup.removeAll();
+  pushAnimation(): Tween.TWEEN {
+    return push(this._model, this._depthTween);
   }
 
   /** マウスダウンした際の処理 */
   onMouseDown(mouse: MouseRaycaster): void {
     if(isMouseOverlap(mouse, this._view)) {
-      this._onOverlay();
+      this._onOverlap.next();
     }
   }
 
@@ -78,18 +83,8 @@ export class Button {
   onTouchStart(touchRaycaster: TouchRaycastContainer): void {
     const isFingerOverlay = isTouchOverlap(touchRaycaster, this._view);
     if (isFingerOverlay) {
-      this._onOverlay();
+      this._onOverlap.next();
     }
-  }
-
-  /** マウス、指がボタンと重なった際の処理 */
-  _onOverlay(): void {
-    if (isGroupPlaying(this._tweenGroup) || this._model.disabled) {
-      return;
-    }
-
-    this.push().start();
-    this._onPush();
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */

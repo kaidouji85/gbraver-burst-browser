@@ -7,9 +7,11 @@ import {AttackButton} from "../../../../game-object/button/attack-button/index";
 
 /** コウゲキボタンを生成する */
 export function createAttackButton(resources: Resources, notifier: BattleSceneNotifier): Button {
-  return AttackButton({
+  const button = AttackButton({
     resources,
     onPush: () => notifier.notify({type: 'pushAttackButton'}),
     visible: true
-  })
+  });
+
+  return button;
 }

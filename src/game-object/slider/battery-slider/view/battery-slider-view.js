@@ -58,11 +58,15 @@ export class BatterySliderView {
   _refreshGauge(model: BatterySliderModel): void {
     this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
       context.clearRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
+      context.save();
+      context.globalAlpha = model.opacity;
 
       // バッテリースライダーが中央に描画されるようにする
       const dx = this._canvasMesh.canvas.width / 2;
       const dy = this._canvasMesh.canvas.height / 2;
       drawBatterySlider(context, this._resources, model.battery, model.maxBattery, dx, dy);
+
+      context.restore();
     });
   }
 
