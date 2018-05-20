@@ -13,11 +13,10 @@ const SHADOW_PADDING_BOTTOM = 80;
  * @param context キャンバスコンテクスト
  * @param resources リソース管理クラス
  * @param depth ボタン押込み深さ
- * @param alpha ボタン透明度
  * @param dx 描画位置X
  * @param dy 描画位置Y
  */
-export function drawAttackButton(context: CanvasRenderingContext2D, resources: Resources, depth: number, alpha: number, dx: number, dy: number): void {
+export function drawAttackButton(context: CanvasRenderingContext2D, resources: Resources, depth: number, dx: number, dy: number): void {
   const buttonScale = (1 + 0.1 * depth);
   const shadowScale = (1 + 0.15 * depth);
   const attackButtonResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.ATTACK_BUTTON);
@@ -25,11 +24,6 @@ export function drawAttackButton(context: CanvasRenderingContext2D, resources: R
   const buttonShadowResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BUTTON_SHADOW);
   const buttonShadowImage: Image = buttonShadowResource ? buttonShadowResource.image : new Image();
 
-  context.save();
-
-  context.globalAlpha = alpha;
   drawImageInCenter(context, buttonShadowImage, dx, dy + SHADOW_PADDING_BOTTOM, shadowScale);
   drawImageInCenter(context, attackButtonImage, dx, dy, buttonScale);
-
-  context.restore();
 }
