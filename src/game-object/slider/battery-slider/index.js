@@ -36,7 +36,8 @@ export class BatterySlider {
     const initialBattery = 3;
     this._model = {
       battery: initialBattery,
-      maxBattery: 5
+      maxBattery: 5,
+      opacity: 0.5
     };
     this._view = new BatterySliderView({
       resources: param.resources,
