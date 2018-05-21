@@ -12,7 +12,7 @@ export function createBatterySlider(resources: Resources, notifier: BattleSceneN
       // TODO オブザーバに通知する
       console.log(`change battery ${battery}`);
     },
-    isVisible: true
+    isVisible: false
   });
   return slider;
 }
