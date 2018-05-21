@@ -13,6 +13,7 @@ import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-obse
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/inde";
+import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -25,7 +26,9 @@ type Params = {
   /** レンダラ */
   renderer: THREE.WebGLRenderer,
   /** HTMLイベントリスナー */
-  domEventListener: DOMEventListener;
+  domEventListener: DOMEventListener,
+  /** ゲーム初期状態 */
+  initialState: GameState[]
 };
 
 /**
