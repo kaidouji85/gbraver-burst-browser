@@ -65,6 +65,11 @@ export class BattleScene implements Scene{
       notifier: this._battleSceneObserver,
       renderer: params.renderer
     });
+
+    this._battleSceneObserver.notify({
+      type: 'startBattleScene',
+      initialState: params.initialState
+    });
   };
 
   /** ゲームループ */
