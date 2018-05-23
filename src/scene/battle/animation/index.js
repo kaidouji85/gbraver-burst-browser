@@ -18,7 +18,7 @@ export function animation(view: BattleSceneView, sceneState: BattleSceneState, g
   const multiTween = gameStateList
     .map(v => getAnimation(view, sceneState, v))
     .reduce((a: MultiTween, b: MultiTween) => {
-      b.end.chain(a.end);
+      b.end.chain(a.start);
       return {
         start: b.start,
         end: a.end
