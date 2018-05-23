@@ -12,5 +12,5 @@ import {animation} from '../../animation';
  * @param state 状態
  */
 export function startBattleScene(view: BattleSceneView, state: BattleSceneState, action: StartBattleScene): void {
-  animation(action.initialState);
+  animation(view, state, action.initialState);
 }
