@@ -10,7 +10,7 @@ export function createAttackButton(resources: Resources, notifier: BattleSceneNo
   const button = AttackButton({
     resources,
     onPush: () => notifier.notify({type: 'pushAttackButton'}),
-    visible: true
+    visible: false
   });
 
   return button;
