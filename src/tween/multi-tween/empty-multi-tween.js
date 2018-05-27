@@ -7,8 +7,9 @@ import {Tween} from '@tweenjs/tween.js';
  * @return 空のMultiTween
  */
 export function createEmptyMultiTween(): MultiTween {
-  return {
-    start: new Tween({}).to({}, 0),
-    end: new Tween({}).to({}, 0),
-  };
+  const start = new Tween({}).to({}, 0);
+  const end = new Tween({}).to({}, 0);
+  start.chain(end);
+
+  return {start, end};
 }
