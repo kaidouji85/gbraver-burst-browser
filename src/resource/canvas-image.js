@@ -29,8 +29,14 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_SLIDER_BASE: 'BATTERY_SLIDER_BASE',
   BATTERY_SLIDER_GAUGE: 'BATTERY_SLIDER_GAUGE',
   BATTERY_SLIDER_BACK: 'BATTERY_SLIDER_BACK',
+  BATTERY_SLIDER_SHADOW: 'BATTERY_SLIDER_SHADOW',
   BURST_GAUGE_ACTIVE: 'BURST_GAUGE_ACTIVE',
   BURST_GAUGE_DISACTIVE: 'BURST_GAUGE_DISACTIVE',
+  ATTACK_BUTTON: 'ATTACK_BUTTON',
+  DEFENSE_BUTTON: 'DEFENSE_BUTTON',
+  BURST_BUTTON: 'BURST_BUTTON',
+  OK_BUTTON: 'OK_BUTTON',
+  BUTTON_SHADOW: 'BUTTON_SHADOW',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -84,12 +90,36 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'slider/battery-slider/battery-slider-back.png',
   },
   {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_SHADOW,
+    path: 'slider/battery-slider/battery-slider-shadow.png',
+  },
+  {
     id: CANVAS_IMAGE_IDS.BURST_GAUGE_ACTIVE,
     path: 'gauge/burst-gauge/burst-active.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BURST_GAUGE_DISACTIVE,
     path: 'gauge/burst-gauge/burst-disactive.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.ATTACK_BUTTON,
+    path: 'button/attack-button.png'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.DEFENSE_BUTTON,
+    path: 'button/defense-button.png'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BURST_BUTTON,
+    path: 'button/burst-button.png'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.OK_BUTTON,
+    path: 'button/ok-button.png'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BUTTON_SHADOW,
+    path: 'button/button-shadow.png'
   }
 ];
 

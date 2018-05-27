@@ -4,6 +4,7 @@ import {DOMEventObserver} from "../observer/dom-event/dom-event-observer";
 import * as THREE from "three";
 import {BattleScene} from "../scene/battle";
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core/lib/master/armdozers";
+import {start} from 'gbraver-burst-core';
 
 /** 戦闘シーン生成のヘルパー関数 */
 export function createBattleScene(resources: Resources, domEventObserver: DOMEventObserver, renderer: THREE.WebGLRenderer): BattleScene {
@@ -18,11 +19,14 @@ export function createBattleScene(resources: Resources, domEventObserver: DOMEve
     }
   ];
 
+  const initialState = start(players[0], players[1]);
+
   return new BattleScene({
     resources: resources,
     renderer: renderer,
     domEventListener: domEventObserver,
     playerId: 'test01',
-    players: players
+    players: players,
+    initialState: initialState
   });
 }

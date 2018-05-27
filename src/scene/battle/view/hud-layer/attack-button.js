@@ -1,13 +1,17 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import {AttackButton} from "../../../../game-object/button/attack-button/index";
+import {Button} from "../../../../game-object/button/button/index";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
+import {AttackButton} from "../../../../game-object/button/attack-button/index";
 
 /** コウゲキボタンを生成する */
-export function createAttackButton(resources: Resources, notifier: BattleSceneNotifier): AttackButton {
-  return new AttackButton({
+export function createAttackButton(resources: Resources, notifier: BattleSceneNotifier): Button {
+  const button = AttackButton({
     resources,
-    onPush: () => notifier.notify({type: 'pushAttackButton'})
-  })
+    onPush: () => notifier.notify({type: 'pushAttackButton'}),
+    visible: false
+  });
+
+  return button;
 }

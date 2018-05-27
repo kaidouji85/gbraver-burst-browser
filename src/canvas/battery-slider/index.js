@@ -5,6 +5,8 @@ import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import {drawImageInCenter} from "../draw/image-drawer";
 import {drawBatterySliderGauge} from "./gauge";
 
+export const SHADOW_PADDING_BOTTOM = 8;
+
 /**
  * バッテリースライダーを描画する
  *
@@ -20,7 +22,10 @@ export function drawBatterySlider(context: CanvasRenderingContext2D, resources: 
   const sliderBase: Image = sliderBaseResource ? sliderBaseResource.image : new Image();
   const sliderBackResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_BACK);
   const sliderBack: Image = sliderBackResource ? sliderBackResource.image : new Image();
+  const sliderShadowResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_SHADOW);
+  const sliderShadowImage: Image = sliderShadowResource ? sliderShadowResource.image : new Image();
 
+  drawImageInCenter(context, sliderShadowImage, dx, dy + SHADOW_PADDING_BOTTOM);
   drawImageInCenter(context, sliderBack, dx, dy);
   drawBatterySliderGauge(context, resources, battery, maxBattery, dx, dy);
   drawImageInCenter(context, sliderBase, dx, dy);
