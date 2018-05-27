@@ -31,11 +31,10 @@ export class BatterySlider {
   _batteryTween: Group;
   /** 透明度のTweenグループ */
   _opacityTween: Group;
-  /**
-   * マウス、指と目盛りの重なり判定の結果を受け取り、
-   * 条件が整い次第、目盛りの値を変更する
-   */
-  _overlap: Subject<number[]>;
+  /** 目盛り当たり判定をキャッシュする */
+  _lastOverlap: number[];
+  /** 目盛り当たり判定を受け取り、目盛り値変更処理を行う */
+  _overlapSubject: Subject<number[]>;
 
   constructor(param: Param) {
     const initialBattery = 3;
@@ -52,15 +51,17 @@ export class BatterySlider {
     this._batteryTween = new Group();
     this._opacityTween = new Group();
 
-    this._overlap = new Subject();
-    this._overlap.pipe(
+    this._lastOverlap = [];
+
+    this._overlapSubject = new Subject();
+    this._overlapSubject.pipe(
       filter(() => !isGroupPlaying(this._opacityTween)),
       filter(() => this._model.opacity === 1),
-      filter(v => v.length > 0),
+      filter(v => 0 < v.length),
       map(v => v.reduce((a, b) => Math.min(a, b))),
       distinctUntilChanged()
     ).subscribe((battery: number) => {
-      this.removeAllTween();
+      this._removeBatteryTween();
       this.changeBatteryAnimation(battery).start();
       param.onBatteryChange(battery);
     });
@@ -70,6 +71,7 @@ export class BatterySlider {
   gameLoop(time: DOMHighResTimeStamp): void {
     this._batteryTween.update(time);
     this._opacityTween.update(time);
+    this._overlapSubject.next(this._lastOverlap);
     this._view.gameLoop(this._model);
   }
 
@@ -94,15 +96,15 @@ export class BatterySlider {
   }
 
 
-  /** 本クラスのTweenを全て削除する */
-  removeAllTween(): void {
+  /** 本クラスのスライダーTweenを全て削除する */
+  _removeBatteryTween(): void {
     this._batteryTween.removeAll();
   }
 
   /** マウスダウンした際の処理 */
   onMouseDown(mouse: MouseRaycaster): void {
     const overlap = this._view.getMouseOverlap(mouse);
-    this._overlap.next(overlap);
+    this._lastOverlap = overlap;
   }
 
   /** マウスムーブした際の処理 */
@@ -115,7 +117,7 @@ export class BatterySlider {
   /** タッチスタートした際の処理 */
   onTouchStart(touch: TouchRaycastContainer): void {
     const overlap = this._view.getTouchOverlap(touch);
-    this._overlap.next(overlap);
+    this._lastOverlap = overlap;
   }
 
   /** タッチムーブした際の処理 */
