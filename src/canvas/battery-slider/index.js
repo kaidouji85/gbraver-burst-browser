@@ -25,7 +25,7 @@ export function drawBatterySlider(context: CanvasRenderingContext2D, resources: 
   const sliderShadowResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_SHADOW);
   const sliderShadowImage: Image = sliderShadowResource ? sliderShadowResource.image : new Image();
 
-  drawImageInCenter(context, sliderShadowImage, dx, dy + SHADOW_PADDING_BOTTOM);
+  //drawImageInCenter(context, sliderShadowImage, dx, dy + SHADOW_PADDING_BOTTOM);
   drawImageInCenter(context, sliderBack, dx, dy);
   drawBatterySliderGauge(context, resources, battery, maxBattery, dx, dy);
   drawImageInCenter(context, sliderBase, dx, dy);

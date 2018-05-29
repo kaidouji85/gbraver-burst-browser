@@ -17,6 +17,7 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {BurstGauge} from "../../../../game-object/gauge/burst-gauge/burst-gauge";
 import {createPlayerBurstGauge} from "./player-burst-gauge";
 import {createEnemyBurstGauge} from "./enemy-burst-gauge";
+import {createOkButton} from "./ok-button";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -46,6 +47,8 @@ export class HudLayer {
   enemyBatteryGauge: BatteryGauge;
   /** コウゲキボタン */
   attackButton: Button;
+  /** ケッテイボタン */
+  okButton: Button;
   /** バッテリースライダー */
   batterySlider: BatterySlider;
   /** プレイヤーバーストゲージ */
@@ -74,6 +77,9 @@ export class HudLayer {
 
     this.attackButton = createAttackButton(param.resources, param.notifier);
     this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
+
+    this.okButton = createOkButton(param.resources, param.notifier);
+    this.okButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.batterySlider = createBatterySlider(param.resources, param.notifier);
     this.batterySlider.getThreeJsObjectList().forEach(v => this.scene.add(v));

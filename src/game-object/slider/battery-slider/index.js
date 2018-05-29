@@ -55,11 +55,11 @@ export class BatterySlider {
 
     this._overlapSubject = new Subject();
     this._overlapSubject.pipe(
-      distinctUntilChanged(),
       filter(v => 0 < v.length),
       filter(() => !isGroupPlaying(this._opacityTween)),
       filter(() => this._model.opacity === 1),
       map(v => v.reduce((a, b) => Math.min(a, b))),
+      distinctUntilChanged(),
     ).subscribe((battery: number) => {
       this._removeBatteryTween();
       this.changeBatteryAnimation(battery).start();

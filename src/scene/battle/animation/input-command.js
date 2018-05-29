@@ -12,14 +12,14 @@ import {Tween} from '@tweenjs/tween.js';
  */
 export function inputCommand(view: BattleSceneView, sceneState: BattleSceneState): MultiTween {
   const start = new Tween({}).to({}, 0);
-  const visibleAttackButton = view.hudLayer.attackButton.visibleAnimation(true);
   const visibleBatterySlider = view.hudLayer.batterySlider.visibleAnimation(true);
+  const visibleOkButton = view.hudLayer.okButton.visibleAnimation(true);
   const end = new Tween({}).to({}, 0);
 
   start.chain(
-    visibleAttackButton,
-    visibleBatterySlider
+    visibleBatterySlider,
+    visibleOkButton
   );
-  visibleAttackButton.chain(end);
+  visibleBatterySlider.chain(end);
   return {start, end};
 }

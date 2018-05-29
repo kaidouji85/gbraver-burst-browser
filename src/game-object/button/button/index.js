@@ -26,8 +26,7 @@ type Param = {
   visible: boolean,
 };
 
-//TODO 表示・非表示、コントロール可能・不可の設定を追加する
-/** コウゲキボタン */
+/** ボタン */
 export class Button {
   _model: ButtonModel;
   _view: ButtonView;
