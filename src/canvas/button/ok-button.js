@@ -24,6 +24,6 @@ export function drawOkButton(context: CanvasRenderingContext2D, resources: Resou
   const buttonShadowResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BUTTON_SHADOW);
   const buttonShadowImage: Image = buttonShadowResource ? buttonShadowResource.image : new Image();
 
-  drawImageInCenter(context, buttonShadowImage, dx, dy + SHADOW_PADDING_BOTTOM, shadowScale);
+  //drawImageInCenter(context, buttonShadowImage, dx, dy + SHADOW_PADDING_BOTTOM, shadowScale);
   drawImageInCenter(context, okButtonImage, dx, dy, buttonScale);
 }
