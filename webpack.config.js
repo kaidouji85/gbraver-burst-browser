@@ -33,6 +33,9 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, "resources"),
       to: path.resolve(__dirname, BUILD_PATH)
+    }, {
+      from: path.resolve(__dirname, "manifest.json"),
+      to: path.resolve(__dirname, BUILD_PATH)
     }])
   ]
 };
