@@ -1,12 +1,15 @@
 // @flow
 
 import type {DOMEventNotifier} from "./dom-event-notifier";
+import {WindowResize} from "./resize";
 
 /** HTMLイベント通知者と実際のHTMLイベントを関連づける */
 export function bindDOMEvent(notifier: DOMEventNotifier, renderDom: HTMLElement): void {
-  window.addEventListener('resize', () => {
-    notifier.notify({type: 'resize'})
-  }, false);
+  new WindowResize({
+    onResize: () => {
+      notifier.notify({type: 'resize'});
+    }
+  });
 
   renderDom.addEventListener('touchstart', (event: TouchEvent) => {
     event.preventDefault();
