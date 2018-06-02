@@ -5,11 +5,10 @@ import {WindowResize} from "./resize";
 
 /** HTMLイベント通知者と実際のHTMLイベントを関連づける */
 export function bindDOMEvent(notifier: DOMEventNotifier, renderDom: HTMLElement): void {
-  new WindowResize({
-    onResize: () => {
-      notifier.notify({type: 'resize'});
-    }
-  });
+  window.addEventListener('resize', () => {
+    notifier.notify({type: 'resize'});
+  }, false);
+
 
   renderDom.addEventListener('touchstart', (event: TouchEvent) => {
     event.preventDefault();
