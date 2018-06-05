@@ -27,7 +27,7 @@ type Params = {
   /** ゲーム初期状態 */
   initialState: GameState[],
   /** ゲーム進行関数 */
-  progressGame: ProgressBattle,
+  progressBattle: ProgressBattle,
   /** レンダラ */
   renderer: THREE.WebGLRenderer,
   /** HTMLイベントリスナー */
@@ -49,6 +49,8 @@ export class BattleScene implements Scene{
   _domEventListener: DOMEventListener;
   /** 戦闘画面のオブザーバ */
   _battleSceneObserver: BattleSceneObserver;
+  /** 戦闘進行関数 */
+  _progressBattle: ProgressBattle;
 
   constructor(params: Params) {
     this._state = {
@@ -60,6 +62,8 @@ export class BattleScene implements Scene{
 
     this._battleSceneObserver = new BattleSceneObserver();
     this._battleSceneObserver.add(this._battleSceneActionHandler.bind(this));
+
+    this._progressBattle = params.progressBattle;
 
     this._view = new BattleSceneView({
       resources: params.resources,
@@ -85,6 +89,6 @@ export class BattleScene implements Scene{
   }
 
   _battleSceneActionHandler(action: BattleSceneAction): void {
-    battleSceneActionHandler(action, this._view, this._state);
+    battleSceneActionHandler(action, this._view, this._state, this._progressBattle);
   }
 }

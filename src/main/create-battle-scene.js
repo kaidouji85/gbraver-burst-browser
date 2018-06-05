@@ -32,7 +32,7 @@ export function createBattleScene(resources: Resources, domEventObserver: DOMEve
     playerId: player.playerId,
     players: [player, enemy],
     initialState: initialState,
-    progressGame: async (command: Command) => {
+    progressBattle: async (command: Command) => {
       return battleRoom.progress(command);
     }
   });
