@@ -75,6 +75,11 @@ export class BatterySlider {
     this._view.gameLoop(this._model);
   }
 
+  /** 現在のバッテリー値を返す */
+  getBattery(): number {
+    return Math.floor(this._model.battery);
+  }
+
   /**
    * バッテリーゲージ目盛りを変更するアニメーション
    *

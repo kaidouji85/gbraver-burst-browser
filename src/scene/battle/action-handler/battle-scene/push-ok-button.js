@@ -3,14 +3,14 @@
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state";
 import type {ProgressBattle} from "../../progress-battle";
-import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
 import {Tween} from '@tweenjs/tween.js';
 import {animation} from "../../animation";
 
 /** OMボタンを押した時のイベント */
 export async function pushOkButton(view: BattleSceneView, state: BattleSceneState, progressBattle: ProgressBattle): Promise<void> {
   await invisibleUI(view);
-  const update = await progressBattle({type: 'BatteryComamnd', battery: 0}); // TODO バッテリースライダーから値を取得する
+  const battery = view.hudLayer.batterySlider.getBattery();
+  const update = await progressBattle({type: 'BatteryComamnd', battery: battery});
   animation(view, state, update);
 }
 
