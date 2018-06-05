@@ -14,6 +14,7 @@ import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/inde";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
+import {ProgressBattle} from "./progress-battle";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -23,12 +24,14 @@ type Params = {
   playerId: PlayerId,
   /** プレイヤー情報 */
   players: Player[],
+  /** ゲーム初期状態 */
+  initialState: GameState[],
+  /** ゲーム進行関数 */
+  progressGame: ProgressBattle,
   /** レンダラ */
   renderer: THREE.WebGLRenderer,
   /** HTMLイベントリスナー */
   domEventListener: DOMEventListener,
-  /** ゲーム初期状態 */
-  initialState: GameState[]
 };
 
 /**
@@ -75,11 +78,6 @@ export class BattleScene implements Scene{
   /** ゲームループ */
   gameLoop(time: DOMHighResTimeStamp): void {
     gameLoop(this._view, this._state, time);
-  }
-
-  /** デバッグモードに設定する */
-  debugMode(): void {
-    debugMode(this._view, this._state);
   }
 
   _domEventHandler(event: DOMEvent): void {
