@@ -8,29 +8,26 @@ import {Tween} from '@tweenjs/tween.js';
 import {animation} from "../../animation";
 
 /** OMボタンを押した時のイベント */
-export function pushOkButton(view: BattleSceneView, state: BattleSceneState, progressBattle: ProgressBattle): void {
-  const ret = invisibleUi(view);
-  ret.start.start();
-  ret.end.onComplete(() =>
-    progressBattle({type: 'BatteryComamnd', battery: 0})
-      .then(update => animation(view, state, update))
-  );
+export async function pushOkButton(view: BattleSceneView, state: BattleSceneState, progressBattle: ProgressBattle): Promise<void> {
+  await invisibleUI(view);
+  const update = await progressBattle({type: 'BatteryComamnd', battery: 0}); // TODO バッテリースライダーから値を取得する
+  animation(view, state, update);
 }
 
 /** UI非表示アニメ */
-function invisibleUi(view: BattleSceneView): MultiTween {
-  const start = new Tween({});
-  start.to({}, 0);
-  const okButtonInvisible = view.hudLayer.okButton.visibleAnimation(false);
-  const batterySliderInvisible = view.hudLayer.batterySlider.visibleAnimation(false);
+function invisibleUI(view: BattleSceneView): Promise<void> {
+  return new Promise(resolve => {
+    const start = new Tween({});
+    const okButtonInvisible = view.hudLayer.okButton.visibleAnimation(false);
+    const batterySliderInvisible = view.hudLayer.batterySlider.visibleAnimation(false);
 
-  start.chain(
-    okButtonInvisible,
-    batterySliderInvisible
-  );
+    start.to({}, 0);
+    start.chain(
+      okButtonInvisible,
+      batterySliderInvisible
+    );
+    start.start();
 
-  return {
-    start: start,
-    end: okButtonInvisible
-  };
+    okButtonInvisible.onComplete(() => resolve());
+  });
 }
