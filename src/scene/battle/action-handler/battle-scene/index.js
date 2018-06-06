@@ -16,14 +16,15 @@ import {pushOkButton} from "./push-ok-button";
  * @param state 戦闘シーンの状態
  */
 export function battleSceneActionHandler(action: BattleSceneAction, view: BattleSceneView, state: BattleSceneState, progressBattle: ProgressBattle): void {
-  switch(action.type) {
-    case 'pushAttackButton':
-      return pushAttackButton(view, state, action);
-    case 'startBattleScene':
-      return startBattleScene(view, state, action);
-    case 'pushOkButton':
-      return pushOkButton(view, state, progressBattle);
-    default:
-      return;
+  if (action.type === 'pushAttackButton') {
+    pushAttackButton(view, state, action);
+  }
+
+  if (action.type === 'startBattleScene') {
+    startBattleScene(view, state, action);
+  }
+
+  if (action.type === 'pushOkButton') {
+    pushOkButton(view, state, progressBattle);
   }
 }

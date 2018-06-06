@@ -12,7 +12,7 @@ import {debugMode} from "./debug-mode";
 import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-observer";
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
-import {battleSceneActionHandler} from "./action-handler/battle-scene/inde";
+import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";
 
