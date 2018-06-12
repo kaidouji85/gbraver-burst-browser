@@ -31,9 +31,17 @@ export class BatterySlider {
   _batteryTween: Group;
   /** 透明度のTweenグループ */
   _opacityTween: Group;
-  /** 目盛り当たり判定をキャッシュする */
+  /**
+   * 最後に実行された目盛り当たり判定結果をキャッシュする
+   * 本プロパティは再代入は可能だが、代入された値を変更することはできない(イミュータブル)である
+   *
+   * 例)
+   * this._lastOverlap = [1,2,3,4]; // OK
+   * this._lastOverlap[2] = 10;     // NG
+   * this._lastOverlap.push(4);     // NG
+   */
   _lastOverlap: number[];
-  /** 目盛り当たり判定を受け取り、目盛り値変更処理を行う */
+  /** _lastOverlapを受け取り、スライダー目盛りの変更を行う */
   _overlapSubject: Subject<number[]>;
 
   constructor(param: Param) {
@@ -55,13 +63,20 @@ export class BatterySlider {
 
     this._overlapSubject = new Subject();
     this._overlapSubject.pipe(
+      // this._lastOverlapが変更された時だけ、以下の処理を実行する
+      // なお、this._lastOverlapが再代入可能 and イミュータブルなので、上記挙動が可能である
       distinctUntilChanged(),
+
       filter(v => 0 < v.length),
       filter(() => !isGroupPlaying(this._opacityTween)),
       filter(() => this._model.opacity === 1),
+
+      // 指、マウスが接触している目盛りの値を取得する
+      // 論理的には、指、マウスが複数の目盛りと接触することがある
+      // その場合には、一番値が小さい目盛りと接触したと見なす
       map(v => v.reduce((a, b) => Math.min(a, b)))
     ).subscribe((battery: number) => {
-      this._removeBatteryTween();
+      this._batteryTween.removeAll();
       this.changeBatteryAnimation(battery).start();
       param.onBatteryChange(battery);
     });
@@ -98,12 +113,6 @@ export class BatterySlider {
    */
   visibleAnimation(isVisible: boolean): Tween {
     return visible(this._model, this._opacityTween, isVisible);
-  }
-
-
-  /** 本クラスのスライダーTweenを全て削除する */
-  _removeBatteryTween(): void {
-    this._batteryTween.removeAll();
   }
 
   /** マウスダウンした際の処理 */
