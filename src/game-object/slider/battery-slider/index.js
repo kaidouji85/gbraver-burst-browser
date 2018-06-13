@@ -10,7 +10,7 @@ import {Group, Tween} from "@tweenjs/tween.js";
 import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 import {getControllerScale} from "../../../device-scale/controller-scale";
-import { map, filter, distinctUntilChanged } from 'rxjs/operators';
+import { map, filter, distinctUntilChanged, withLatestFrom } from 'rxjs/operators';
 import {visible} from './model/visible';
 import {isGroupPlaying} from "../../../tween/is-group-playing";
 
@@ -27,22 +27,14 @@ export class BatterySlider {
   _model: BatterySliderModel;
   /** バッテリースライダーのビュー */
   _view: BatterySliderView;
-  /** バッテリーメモリのTweenグループ */
+  /** バッテリー目盛りのTweenグループ */
   _batteryTween: Group;
   /** 透明度のTweenグループ */
   _opacityTween: Group;
-  /**
-   * 最後に実行された目盛り当たり判定結果をキャッシュする
-   * 本プロパティは再代入は可能だが、代入された値を変更することはできない(イミュータブル)である
-   *
-   * 例)
-   * this._lastOverlap = [1,2,3,4]; // OK
-   * this._lastOverlap[2] = 10;     // NG
-   * this._lastOverlap.push(4);     // NG
-   */
-  _lastOverlap: number[];
-  /** _lastOverlapを受け取り、スライダー目盛りの変更を行う */
-  _overlapSubject: Subject<number[]>;
+  /** バッテリースライダー目盛りと指、マウスの当たり判定結果 */
+  _overlapSource: Subject<number[]>;
+  /** バッテリースライダー目盛りTweenが更新された後に実行される処理 */
+  _onBatteryTweenUpdated: Subject<void>;
 
   constructor(param: Param) {
     const initialBattery = 3;
@@ -59,34 +51,28 @@ export class BatterySlider {
     this._batteryTween = new Group();
     this._opacityTween = new Group();
 
-    this._lastOverlap = [];
-
-    this._overlapSubject = new Subject();
-    this._overlapSubject.pipe(
-      // this._lastOverlapが変更された時だけ、以下の処理を実行する
-      // なお、this._lastOverlapが再代入可能 and イミュータブルなので、上記挙動が可能である
-      distinctUntilChanged(),
-
-      filter(v => 0 < v.length),
-      filter(() => !isGroupPlaying(this._opacityTween)),
-      filter(() => this._model.opacity === 1),
-
-      // 指、マウスが接触している目盛りの値を取得する
-      // 論理的には、指、マウスが複数の目盛りと接触することがある
-      // その場合には、一番値が小さい目盛りと接触したと見なす
-      map(v => v.reduce((a, b) => Math.min(a, b)))
-    ).subscribe((battery: number) => {
-      this._batteryTween.removeAll();
-      this.changeBatteryAnimation(battery).start();
-      param.onBatteryChange(battery);
-    });
+    this._overlapSource = new Subject();
+    this._onBatteryTweenUpdated = new Subject();
+    this._onBatteryTweenUpdated
+      .pipe(
+        withLatestFrom(this._overlapSource)
+      ).pipe(
+        map(([_, overlap]) => overlap),
+        distinctUntilChanged(),
+        filter(overlap => 0 < overlap.length),
+        map(overlap => overlap.reduce((a, b) => Math.min(a, b))),
+        distinctUntilChanged()
+      ).subscribe((battery: number) => {
+        this._batteryTween.removeAll();
+        this.changeBatteryAnimation(battery).start();
+    })
   }
 
   /** ゲームループの処理 */
   gameLoop(time: DOMHighResTimeStamp): void {
     this._batteryTween.update(time);
+    this._onBatteryTweenUpdated.next();
     this._opacityTween.update(time);
-    this._overlapSubject.next(this._lastOverlap);
     this._view.gameLoop(this._model);
   }
 
@@ -118,25 +104,35 @@ export class BatterySlider {
   /** マウスダウンした際の処理 */
   onMouseDown(mouse: MouseRaycaster): void {
     const overlap = this._view.getMouseOverlap(mouse);
-    this._lastOverlap = overlap;
+    this.onOverlap(overlap);
   }
 
   /** マウスムーブした際の処理 */
   onMouseMove(mouseRaycaster: MouseRaycaster, isLeftButtonPushed: boolean): void {
     if (isLeftButtonPushed) {
-      this.onMouseDown(mouseRaycaster);
+      const overlap = this._view.getMouseOverlap(mouseRaycaster);
+      this.onOverlap(overlap);
     }
   }
 
   /** タッチスタートした際の処理 */
   onTouchStart(touch: TouchRaycastContainer): void {
     const overlap = this._view.getTouchOverlap(touch);
-    this._lastOverlap = overlap;
+    this.onOverlap(overlap);
   }
 
   /** タッチムーブした際の処理 */
   onTouchMove(touch: TouchRaycastContainer): void {
-    this.onTouchStart(touch);
+    const overlap = this._view.getTouchOverlap(touch);
+    this.onOverlap(overlap);
+  }
+
+  /** 指、マウスがバッテリースライダー目盛りに接触した際の処理 */
+  onOverlap(overlap: number[]): void {
+    if (overlap.length <= 0 || isGroupPlaying(this._opacityTween) || this._model.opacity !== 1) {
+      return;
+    }
+    this._overlapSource.next(overlap);
   }
 
   /** シーンに追加するthree.jsオブジェクトを返す */
