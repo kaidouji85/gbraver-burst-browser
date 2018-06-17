@@ -31,10 +31,8 @@ export class BatterySlider {
   _batteryTween: Group;
   /** 透明度のTweenグループ */
   _opacityTween: Group;
-  /** バッテリースライダー目盛りと指、マウスの当たり判定結果 */
-  _overlapSource: Subject<number[]>;
-  /** バッテリースライダー目盛りTweenが更新された後に実行される処理 */
-  _onBatteryTweenUpdated: Subject<void>;
+  /** バッテリー目盛りの値が変化した場合の処理 */
+  _onChangeBattery: Subject<number>;
 
   constructor(param: Param) {
     const initialBattery = 3;
@@ -51,27 +49,20 @@ export class BatterySlider {
     this._batteryTween = new Group();
     this._opacityTween = new Group();
 
-    this._overlapSource = new Subject();
-    this._onBatteryTweenUpdated = new Subject();
-    this._onBatteryTweenUpdated
-      .pipe(
-        withLatestFrom(this._overlapSource)
-      ).pipe(
-        map(([_, overlap]) => overlap),
-        distinctUntilChanged(),
-        filter(overlap => 0 < overlap.length),
-        map(overlap => overlap.reduce((a, b) => Math.min(a, b))),
-        distinctUntilChanged()
-      ).subscribe((battery: number) => {
+    this._onChangeBattery = new Subject();
+    this._onChangeBattery
+      .pipe(distinctUntilChanged())
+      .subscribe(battery => {
+        this._batteryTween.update();
         this._batteryTween.removeAll();
         this.changeBatteryAnimation(battery).start();
-    })
+        param.onBatteryChange(battery);
+      })
   }
 
   /** ゲームループの処理 */
   gameLoop(time: DOMHighResTimeStamp): void {
     this._batteryTween.update(time);
-    this._onBatteryTweenUpdated.next();
     this._opacityTween.update(time);
     this._view.gameLoop(this._model);
   }
@@ -132,7 +123,9 @@ export class BatterySlider {
     if (overlap.length <= 0 || isGroupPlaying(this._opacityTween) || this._model.opacity !== 1) {
       return;
     }
-    this._overlapSource.next(overlap);
+
+    const battery = overlap.reduce((a, b) => Math.min(a, b));
+    this._onChangeBattery.next(battery);
   }
 
   /** シーンに追加するthree.jsオブジェクトを返す */
