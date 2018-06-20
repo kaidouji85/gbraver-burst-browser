@@ -1,4 +1,4 @@
-import {BattleSceneView} from "../view";
+import {BattleSceneView} from "../view/index";
 import type {BattleSceneState} from "../state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
@@ -13,7 +13,7 @@ import {inputCommand} from "./input-command";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function createAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): MultiTween {
+export function gameStateDemo(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): MultiTween {
   switch (gameState.effect.name) {
     case 'InputCommand':
       return inputCommand(view, sceneState);

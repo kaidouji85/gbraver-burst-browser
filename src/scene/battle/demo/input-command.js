@@ -1,4 +1,4 @@
-import {BattleSceneView} from "../view";
+import {BattleSceneView} from "../view/index";
 import type {BattleSceneState} from "../state";
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 import {Tween} from '@tweenjs/tween.js';
