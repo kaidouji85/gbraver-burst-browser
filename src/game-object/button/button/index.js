@@ -11,8 +11,6 @@ import {isTouchOverlap} from "../../../screen-touch/touch/touch-overlap";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 import {isMouseOverlap} from "../../../screen-touch/mouse/mouse-overlap";
 import {visible} from './model/visible';
-import {Subject} from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -32,7 +30,7 @@ export class Button {
   _view: ButtonView;
   _depthTween: Group;
   _opacityTween: Group;
-  _onOverlap: Subject<void>;
+  _onPush: () => void;
 
   constructor(param: Param) {
     this._model = {
@@ -42,16 +40,7 @@ export class Button {
     this._view = param.view;
     this._depthTween = new Group();
     this._opacityTween = new Group();
-
-    this._onOverlap = new Subject();
-    this._onOverlap.pipe(
-      filter(() => !isGroupPlaying(this._depthTween)),
-      filter(() => !isGroupPlaying(this._opacityTween)),
-      filter(() => this._model.opacity === 1)
-    ).subscribe(() => {
-      param.onPush();
-      this.pushAnimation().start();
-    });
+    this._onPush = param.onPush;
   }
 
   /** ゲームループ */
@@ -74,7 +63,7 @@ export class Button {
   /** マウスダウンした際の処理 */
   onMouseDown(mouse: MouseRaycaster): void {
     if(isMouseOverlap(mouse, this._view)) {
-      this._onOverlap.next();
+      this.onOverlap();
     }
   }
 
@@ -82,8 +71,20 @@ export class Button {
   onTouchStart(touchRaycaster: TouchRaycastContainer): void {
     const isFingerOverlay = isTouchOverlap(touchRaycaster, this._view);
     if (isFingerOverlay) {
-      this._onOverlap.next();
+      this.onOverlap();
     }
+  }
+
+  /** 指、マウスがボタンと重なった際の処理 */
+  onOverlap(): void {
+    if (isGroupPlaying(this._depthTween) || isGroupPlaying(this._opacityTween) || this._model.opacity !== 1) {
+      return;
+    }
+
+    this._depthTween.update();
+    this._depthTween.removeAll();
+    this.pushAnimation().start();
+    this._onPush();
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */

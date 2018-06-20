@@ -6,9 +6,10 @@ import type {ProgressBattle} from "../../progress-battle";
 import {Tween} from '@tweenjs/tween.js';
 import {animation} from "../../animation";
 
-/** OMボタンを押した時のイベント */
+/** OKボタンを押した時のイベント */
 export async function pushOkButton(view: BattleSceneView, state: BattleSceneState, progressBattle: ProgressBattle): Promise<void> {
   await invisibleUI(view);
+
   const battery = view.hudLayer.batterySlider.getBattery();
   const update = await progressBattle({type: 'BatteryComamnd', battery: battery});
   animation(view, state, update);
