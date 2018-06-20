@@ -5,7 +5,7 @@ import type {BattleSceneState} from "../../state";
 import type {ProgressBattle} from "../../progress-battle";
 import {Tween} from '@tweenjs/tween.js';
 import {battleDemo} from "../../demo/index";
-import {invisibleUI as invisibleUiTween } from "../../animation/invisible-ui";
+import {changeUIVisible as invisibleUiTween } from "../../animation/change-ui-visible";
 
 /** OKボタンを押した時のイベント */
 export async function pushOkButton(view: BattleSceneView, state: BattleSceneState, progressBattle: ProgressBattle): Promise<void> {
@@ -18,7 +18,7 @@ export async function pushOkButton(view: BattleSceneView, state: BattleSceneStat
 /** UI非表示アニメをPromise化したもの */
 function invisibleUI(view: BattleSceneView): Promise<void> {
   return new Promise(resolve => {
-    const ret = invisibleUiTween(view);
+    const ret = invisibleUiTween(view, false);
     ret.start.start();
     ret.end.onComplete(resolve)
   });
