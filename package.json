@@ -7,8 +7,8 @@
     "postinstall": "npm run build",
     "start": "npm-run-all clean dev-server",
     "start:stub": "npm-run-all clean dev-server:stub",
-    "dev-server": "webpack-dev-server",
-    "dev-server:stub": "webpack-dev-server --config webpack.stub.js",
+    "dev-server": "webpack-serve",
+    "dev-server:stub": "webpack-serve --config webpack.stub.js",
     "webpack": "webpack",
     "webpack:production": "webpack --config webpack.production.js",
     "webpack:stub": "webpack --config webpack.stub.js",
@@ -44,6 +44,6 @@
     "s3-upload": "^0.1.0",
     "webpack": "^4.16.1",
     "webpack-cli": "3.1.0",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-serve": "^2.0.2"
   }
 }
