@@ -18,11 +18,11 @@ export const SHADOW_PADDING_BOTTOM = 8;
  * @param dy 描画位置Y
  */
 export function drawBatterySlider(context: CanvasRenderingContext2D, resources: Resources, battery: number, maxBattery: number, dx: number, dy: number): void {
-  const sliderBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_BASE);
+  const sliderBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_SLIDER_BASE);
   const sliderBase: Image = sliderBaseResource ? sliderBaseResource.image : new Image();
-  const sliderBackResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_BACK);
+  const sliderBackResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_SLIDER_BACK);
   const sliderBack: Image = sliderBackResource ? sliderBackResource.image : new Image();
-  const sliderShadowResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_SHADOW);
+  const sliderShadowResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_SLIDER_SHADOW);
   const sliderShadowImage: Image = sliderShadowResource ? sliderShadowResource.image : new Image();
 
   //drawImageInCenter(context, sliderShadowImage, dx, dy + SHADOW_PADDING_BOTTOM);

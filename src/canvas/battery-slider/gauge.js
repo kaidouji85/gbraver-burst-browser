@@ -16,7 +16,7 @@ import * as R from "ramda";
  * @param dy 描画位置Y
  */
 export function drawBatterySliderGauge(context: CanvasRenderingContext2D, resources: Resources, battery: number, maxBattery: number, dx: number, dy: number): void {
-  const sliderGaugeResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_GAUGE);
+  const sliderGaugeResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_SLIDER_GAUGE);
   const sliderGauge: Image = sliderGaugeResource ? sliderGaugeResource.image : new Image();
   const gaugeWidth = sliderGauge.width * battery / maxBattery;
   const gaugeHeight = sliderGauge.height;

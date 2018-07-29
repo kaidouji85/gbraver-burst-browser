@@ -46,9 +46,9 @@ function BarScale(context: CanvasRenderingContext2D, width: number, height: numb
  * @param maxValue バッテリーの最大値
  */
 export function BatteryBar(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
-  const batteryBarUpResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BAR_UP);
+  const batteryBarUpResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_BAR_UP);
   const batteryBarUp: Image = batteryBarUpResource ? batteryBarUpResource.image : new Image();
-  const batteryBarDownResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BAR_DOWN);
+  const batteryBarDownResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_BAR_DOWN);
   const batteryBarDown: Image = batteryBarDownResource ? batteryBarDownResource.image : new Image();
 
   drawImageInCenter(context, batteryBarDown, dx, dy);
