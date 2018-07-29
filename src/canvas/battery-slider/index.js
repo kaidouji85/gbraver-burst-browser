@@ -31,8 +31,12 @@ export function drawBatterySlider(context: CanvasRenderingContext2D, resources: 
   const sliderBase: Image = sliderBaseResource ? sliderBaseResource.image : new Image();
   const activeBarResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_ACTIVE_BAR);
   const activeBar: Image = activeBarResource ? activeBarResource.image : new Image();
+  const disActiveBarResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_DIS_ACTIVE_BAR);
+  const disActiveBar: Image = disActiveBarResource ? disActiveBarResource.image : new Image();
+
 
   drawImageInCenter(context, sliderBase, param.dx, param.dy);
+  drawDisActiveBar(context, sliderBase, disActiveBar, param);
   drawActiveBar(context, sliderBase, activeBar, param);
 }
 
@@ -42,6 +46,7 @@ export function drawBatterySlider(context: CanvasRenderingContext2D, resources: 
  * @param context 描画対象のキャンバス
  * @param sliderBase バッテリースライダーのベース画像
  * @param activeBar バッテリースライダーのアクティブバー画像
+ * @param param バッテリースライダー描画パラメータ
  */
 export function drawActiveBar(context: CanvasRenderingContext2D, sliderBase: Image, activeBar: Image, param: Param): void {
   const PADDING_LEFT = 8;
@@ -55,4 +60,26 @@ export function drawActiveBar(context: CanvasRenderingContext2D, sliderBase: Ima
   const dw = sw;
   const dh = sh;
   context.drawImage(activeBar, sx, sy, sw, sh, dx, dy, dw, dh);
+}
+
+/**
+ * ディスアクティブバーを描画する
+ *
+ * @param context 描画対象のキャンバス
+ * @param sliderBase バッテリースライダーのベース画像
+ * @param activeBar バッテリースライダーのアクティブバー画像
+ * @param param バッテリースライダー描画パラメータ
+ */
+export function drawDisActiveBar(context: CanvasRenderingContext2D, sliderBase: Image, disActiveBar: Image, param: Param): void {
+  const PADDING_LEFT = 8;
+
+  const sx = 0;
+  const sy = 0;
+  const sw = disActiveBar.width * param.maxBattery / param.maxBattery;
+  const sh = disActiveBar.height;
+  const dx = param.dx - sliderBase.width / 2 + PADDING_LEFT;
+  const dy = param.dy - sh / 2;
+  const dw = sw;
+  const dh = sh;
+  context.drawImage(disActiveBar, sx, sy, sw, sh, dx, dy, dw, dh);
 }
