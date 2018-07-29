@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../src/resource/index';
 import {CanvasStubBase} from '../util/canvas-stub-base';
-import {drawBatterySlider} from "../../src/canvas/battery-slider";
+import {drawBatterySlider} from "../../src/canvas/deprocated-battery-slider";
 
 CanvasStubBase('../resources/', (context: CanvasRenderingContext2D, reources: Resources) => {
   const baseX = window.innerWidth / 2;

@@ -3,7 +3,7 @@
 import {CanvasMesh} from "../../../../mesh/canvas-mesh";
 import type {Resources} from "../../../../resource/index";
 import type {BatterySliderModel} from "../model/battery-slider-model";
-import {drawBatterySlider} from "../../../../canvas/battery-slider/index";
+import {drawBatterySlider} from "../../../../canvas/deprocated-battery-slider/index";
 import * as THREE from "three";
 import {TouchLocation} from "./touch-location";
 import type {TouchRaycastContainer} from "../../../../screen-touch/touch/touch-raycaster";
