@@ -9,6 +9,7 @@ CanvasStubBase('../resources/', (context: CanvasRenderingContext2D, reources: Re
 
   drawBatterySlider(context, reources, {
     battery: 3,
+    maxEnableBattery: 5,
     maxBattery: 5,
     dx: baseX,
     dy: baseY
