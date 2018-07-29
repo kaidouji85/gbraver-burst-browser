@@ -79,19 +79,19 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_BASE,
-    path: 'slider/battery-slider/battery-slider-base.png',
+    path: 'slider/depricated-battery-slider/battery-slider-base.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_GAUGE,
-    path: 'slider/battery-slider/battery-slider-gauge.png',
+    path: 'slider/depricated-battery-slider/battery-slider-gauge.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_BACK,
-    path: 'slider/battery-slider/battery-slider-back.png',
+    path: 'slider/depricated-battery-slider/battery-slider-back.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_SHADOW,
-    path: 'slider/battery-slider/battery-slider-shadow.png',
+    path: 'slider/depricated-battery-slider/battery-slider-shadow.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BURST_GAUGE_ACTIVE,
