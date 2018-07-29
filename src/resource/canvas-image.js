@@ -24,6 +24,12 @@ export const CANVAS_IMAGE_IDS = {
   HP_BAR_UP: 'HP_BAR_UP',
   HP_GAUGE_LABEL: 'HP_GAUGE_LABEL',
 
+  BATTERY_SLIDER_ACTIVE_BAR: 'BATTERY_SLIDER_ACTIVE_BAR',
+  BATTERY_SLIDER_DIS_ACTIVE_BAR: 'BATTERY_SLIDER_DIS_ACTIVE_BAR',
+  BATTERY_SLIDER_BASE: 'BATTERY_SLIDER_BASE',
+  BATTERY_SLIDER_POINTER: 'BATTERY_SLIDER_POINTER',
+
+  // 廃止予定
   DEPRICATED_BATTERY_GAUGE_LABEL: 'DEPRICATED_BATTERY_GAUGE_LABEL',
   DEPRICATED_BATTERY_BAR_UP: 'DEPRICATED_BATTERY_BAR_UP',
   DEPRICATED_BATTERY_BAR_DOWN: 'DEPRICATED_BATTERY_BAR_DOWN',
@@ -67,6 +73,25 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     id: CANVAS_IMAGE_IDS.HP_GAUGE_LABEL,
     path: 'gauge/hp-gauge/hp-gauge-label.png',
   },
+
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_ACTIVE_BAR,
+    path: 'battery-slider/active-bar.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_DIS_ACTIVE_BAR,
+    path: 'battery-slider/dis-active-bar.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_BASE,
+    path: 'battery-slider/base.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_POINTER,
+    path: 'battery-slider/pointer.png',
+  },
+
+  // 廃止予定
   {
     id: CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_GAUGE_LABEL,
     path: 'gauge/battery-gauge/battery-gauge-label.png',
@@ -95,6 +120,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     id: CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_SLIDER_SHADOW,
     path: 'slider/depricated-battery-slider/battery-slider-shadow.png',
   },
+
   {
     id: CANVAS_IMAGE_IDS.BURST_GAUGE_ACTIVE,
     path: 'gauge/burst-gauge/burst-active.png',
