@@ -8,7 +8,7 @@ CanvasStubBase('../resources/', (context: CanvasRenderingContext2D, reources: Re
   const baseY = window.innerHeight / 2;
 
   drawBatterySlider(context, reources, {
-    battery: 3,
+    battery: 1,
     maxEnableBattery: 5,
     maxBattery: 5,
     dx: baseX,
