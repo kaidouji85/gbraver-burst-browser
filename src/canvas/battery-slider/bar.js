@@ -2,9 +2,6 @@
 
 import type {Param} from "./param";
 
-/** アクティブバーのパデイング */
-export const PADDING_LEFT = 8;
-
 /** スライダーバー系描画パラメータ */
 type DrawBarParam = {
   value: number,
@@ -18,32 +15,30 @@ type DrawBarParam = {
  * アクティブバー、ディスアクティブバーで共通となる部分が多いのでまとめた
  *
  * @param context 描画対象のキャンバス
- * @param sliderBase バッテリースライダーのベース画像
- * @param bar バーの画像
+ * @param sliderBar バーの画像
  * @param param スライダーバー系描画パラメータ
  */
-function drawBar(context: CanvasRenderingContext2D, sliderBase: Image, bar: Image, param: DrawBarParam): void {
+function drawBar(context: CanvasRenderingContext2D, sliderBar: Image, param: DrawBarParam): void {
   const sx = 0;
   const sy = 0;
-  const sw = bar.width * param.value / param.maxValue;
-  const sh = bar.height;
-  const dx = param.dx - sliderBase.width / 2 + PADDING_LEFT;
+  const sw = sliderBar.width * param.value / param.maxValue;
+  const sh = sliderBar.height;
+  const dx = param.dx - sliderBar.width / 2;
   const dy = param.dy - sh / 2;
   const dw = sw;
   const dh = sh;
-  context.drawImage(bar, sx, sy, sw, sh, dx, dy, dw, dh);
+  context.drawImage(sliderBar, sx, sy, sw, sh, dx, dy, dw, dh);
 }
 
 /**
  * アクティブバーを描画する
  *
  * @param context 描画対象のキャンバス
- * @param sliderBase バッテリースライダーのベース画像
  * @param activeBar バッテリースライダーのアクティブバー画像
  * @param param バッテリースライダー描画パラメータ
  */
-export function drawActiveBar(context: CanvasRenderingContext2D, sliderBase: Image, activeBar: Image, param: Param): void {
-  drawBar(context, sliderBase, activeBar, {
+export function drawActiveBar(context: CanvasRenderingContext2D, activeBar: Image, param: Param): void {
+  drawBar(context, activeBar, {
     value: param.battery,
     maxValue: param.maxBattery,
     dx: param.dx,
@@ -55,12 +50,11 @@ export function drawActiveBar(context: CanvasRenderingContext2D, sliderBase: Ima
  * ディスアクティブバーを描画する
  *
  * @param context 描画対象のキャンバス
- * @param sliderBase バッテリースライダーのベース画像
  * @param activeBar バッテリースライダーのアクティブバー画像
  * @param param バッテリースライダー描画パラメータ
  */
-export function drawDisActiveBar(context: CanvasRenderingContext2D, sliderBase: Image, disActiveBar: Image, param: Param): void {
-  drawBar(context, sliderBase, disActiveBar, {
+export function drawDisActiveBar(context: CanvasRenderingContext2D, disActiveBar: Image, param: Param): void {
+  drawBar(context, disActiveBar, {
     value: param.maxEnableBattery,
     maxValue: param.maxBattery,
     dx: param.dx,

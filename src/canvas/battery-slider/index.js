@@ -26,7 +26,7 @@ export function drawBatterySlider(context: CanvasRenderingContext2D, resources: 
   const pointer = pointerResource ? pointerResource.image : new Image();
 
   drawImageInCenter(context, sliderBase, param.dx, param.dy);
-  drawDisActiveBar(context, sliderBase, disActiveBar, param);
-  drawActiveBar(context, sliderBase, activeBar, param);
+  drawDisActiveBar(context, disActiveBar, param);
+  drawActiveBar(context, activeBar, param);
   drawPointer(context, pointer, activeBar.width, param);
 }
