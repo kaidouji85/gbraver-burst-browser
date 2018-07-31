@@ -1,5 +1,5 @@
 /** バッテリースライダーの描画パラメータ */
-export type Param = {
+export type BatterySliderParam = {
   /** 現在のバッテリー値 */
   battery: number,
   /** 選択可能なバッテリーの最大値 */

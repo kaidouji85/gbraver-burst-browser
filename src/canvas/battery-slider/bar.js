@@ -1,6 +1,6 @@
 // @flow
 
-import type {Param} from "./param";
+import type {BatterySliderParam} from "./param";
 
 /** スライダーバー系描画パラメータ */
 type DrawBarParam = {
@@ -37,7 +37,7 @@ function drawBar(context: CanvasRenderingContext2D, sliderBar: Image, param: Dra
  * @param activeBar バッテリースライダーのアクティブバー画像
  * @param param バッテリースライダー描画パラメータ
  */
-export function drawActiveBar(context: CanvasRenderingContext2D, activeBar: Image, param: Param): void {
+export function drawActiveBar(context: CanvasRenderingContext2D, activeBar: Image, param: BatterySliderParam): void {
   drawBar(context, activeBar, {
     value: param.battery,
     maxValue: param.maxBattery,
@@ -53,7 +53,7 @@ export function drawActiveBar(context: CanvasRenderingContext2D, activeBar: Imag
  * @param activeBar バッテリースライダーのアクティブバー画像
  * @param param バッテリースライダー描画パラメータ
  */
-export function drawDisActiveBar(context: CanvasRenderingContext2D, disActiveBar: Image, param: Param): void {
+export function drawDisActiveBar(context: CanvasRenderingContext2D, disActiveBar: Image, param: BatterySliderParam): void {
   drawBar(context, disActiveBar, {
     value: param.maxEnableBattery,
     maxValue: param.maxBattery,

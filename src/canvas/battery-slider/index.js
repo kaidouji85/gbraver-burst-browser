@@ -5,8 +5,9 @@ import type {CanvasImageResource} from "../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import {drawImageInCenter} from "../draw/image-drawer";
 import {drawActiveBar, drawDisActiveBar} from "./bar";
-import type {Param} from "./param";
+import type {BatterySliderParam} from "./param";
 import {drawPointer} from "./pointer";
+import {drawMeterScale} from "./meter-scale";
 
 /**
  * バッテリースライダーを描画する
@@ -15,7 +16,7 @@ import {drawPointer} from "./pointer";
  * @param resources リソース管理オブジェクト
  * @param param バッテリースライダー描画パラメータ
  */
-export function drawBatterySlider(context: CanvasRenderingContext2D, resources: Resources, param: Param): void {
+export function drawBatterySlider(context: CanvasRenderingContext2D, resources: Resources, param: BatterySliderParam): void {
   const sliderBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_BASE);
   const sliderBase: Image = sliderBaseResource ? sliderBaseResource.image : new Image();
   const activeBarResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_ACTIVE_BAR);
@@ -28,5 +29,8 @@ export function drawBatterySlider(context: CanvasRenderingContext2D, resources: 
   drawImageInCenter(context, sliderBase, param.dx, param.dy);
   drawDisActiveBar(context, disActiveBar, param);
   drawActiveBar(context, activeBar, param);
+  drawMeterScale(context, param);
   drawPointer(context, pointer, activeBar.width, param);
+
 }
+

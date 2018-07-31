@@ -1,5 +1,5 @@
 // @flow
-import type {Param} from "./param";
+import type {BatterySliderParam} from "./param";
 import {drawImageInCenter} from "../draw/image-drawer";
 
 /**
@@ -10,7 +10,7 @@ import {drawImageInCenter} from "../draw/image-drawer";
  * @param sliderWidth スライダーバーの横幅
  * @param param バッテリースライダー描画パラメータ
  */
-export function drawPointer(context: CanvasRenderingContext2D, pointer: Image, sliderWidth: number, param: Param): void {
+export function drawPointer(context: CanvasRenderingContext2D, pointer: Image, sliderWidth: number, param: BatterySliderParam): void {
   const dx = param.dx - sliderWidth / 2 + param.battery / param.maxBattery * sliderWidth;
   const dy = param.dy;
   drawImageInCenter(context, pointer, dx, dy);
