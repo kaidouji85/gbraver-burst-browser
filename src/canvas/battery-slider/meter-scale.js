@@ -6,6 +6,8 @@ import * as R from 'ramda';
 export const PADDING_TOP = 24;
 export const LINE_HEIGHT = 64;
 export const METER_WIDTH = 721;
+export const LINE_COLOR = '#FDFDFD';
+export const NUMBER_COLOR = '#FDFDFD';
 
 /**
  * バッテリースライダーの目盛りを描画する
@@ -20,7 +22,9 @@ export function drawMeterScale(context: CanvasRenderingContext2D, param: Battery
     const lineY = param.dy + PADDING_TOP;
     drawLine(context, lineX, lineY);
 
-    //context.fillText(v, lineX, lineY + 100);
+    const numberX = lineX;
+    const numberY = lineY + 96;
+    drawNumber(context, v, numberX, numberY);
   });
 }
 
@@ -35,12 +39,32 @@ function drawLine(context: CanvasRenderingContext2D, dx: number, dy: number): vo
   context.save();
 
   context.lineWidth = 1;
-  context.strokeStyle = '#FDFDFD';
+  context.strokeStyle = LINE_COLOR;
   context.beginPath();
   context.moveTo(dx, dy);
   context.lineTo(dx, dy + LINE_HEIGHT);
   context.closePath();
   context.stroke();
+
+  context.restore();
+}
+
+/**
+ * 数字を描画する
+ *
+ * @param context 描画対象のキャンバス
+ * @param value 描画する数字の値
+ * @param dx 描画位置X
+ * @param dy 描画位置Y
+ */
+function drawNumber(context: CanvasRenderingContext2D, value: number, dx: number, dy: number): void {
+  context.save();
+
+  context.font = "32px 'sans-serif'";
+  context.fillStyle = NUMBER_COLOR;
+  context.textAlign = 'center';
+  context.textBaseline = 'middle';
+  context.fillText(`${value}`, dx, dy);
 
   context.restore();
 }
