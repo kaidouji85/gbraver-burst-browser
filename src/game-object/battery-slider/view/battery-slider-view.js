@@ -1,16 +1,18 @@
 // @flow
 
-import {CanvasMesh} from "../../../../mesh/canvas-mesh";
-import type {Resources} from "../../../../resource/index";
+import {CanvasMesh} from "../../../mesh/canvas-mesh";
+import type {Resources} from "../../../resource/index";
 import type {BatterySliderModel} from "../model/battery-slider-model";
-import {drawBatterySlider} from "../../../../canvas/deprocated-battery-slider/index";
+import {drawBatterySlider} from "../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {TouchLocation} from "./touch-location";
-import type {TouchRaycastContainer} from "../../../../screen-touch/touch/touch-raycaster";
-import type {MouseRaycaster} from "../../../../screen-touch/mouse/mouse-raycaster";
+import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
+import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
+/** テクスチャの大きさ */
+export const TEXTURE_SIZE = 1024;
 /** バッテリースライダーのパディングボトム */
 export const PADDING_BOTTOM = 180;
 
@@ -40,8 +42,8 @@ export class BatterySliderView {
     this._canvasMesh = new CanvasMesh({
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
-      canvasWidth: MESH_SIZE,
-      canvasHeight: MESH_SIZE,
+      canvasWidth: TEXTURE_SIZE,
+      canvasHeight: TEXTURE_SIZE,
     });
     this._touchLocation = new TouchLocation(param.maxValue, param.scale);
     this._resources = param.resources;
@@ -64,7 +66,14 @@ export class BatterySliderView {
       // バッテリースライダーが中央に描画されるようにする
       const dx = this._canvasMesh.canvas.width / 2;
       const dy = this._canvasMesh.canvas.height / 2;
-      drawBatterySlider(context, this._resources, model.battery, model.maxBattery, dx, dy);
+
+      drawBatterySlider(context, this._resources, {
+        battery: model.battery,
+        maxEnableBattery: model.maxBattery,
+        maxBattery: model.maxBattery,
+        dx: dx,
+        dy: dy
+      });
 
       context.restore();
     });

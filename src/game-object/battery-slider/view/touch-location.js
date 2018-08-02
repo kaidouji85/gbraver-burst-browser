@@ -2,10 +2,10 @@
 import * as THREE from "three";
 import * as R from 'ramda';
 import {Division} from "./division";
-import type {TouchRaycastContainer} from "../../../../screen-touch/touch/touch-raycaster";
-import {isTouchOverlap} from "../../../../screen-touch/touch/touch-overlap";
-import type {MouseRaycaster} from "../../../../screen-touch/mouse/mouse-raycaster";
-import {isMouseOverlap} from "../../../../screen-touch/mouse/mouse-overlap";
+import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
+import {isTouchOverlap} from "../../../screen-touch/touch/touch-overlap";
+import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
+import {isMouseOverlap} from "../../../screen-touch/mouse/mouse-overlap";
 
 /** スライダー部分の幅 */
 export const SLIDER_WIDTH = 375;

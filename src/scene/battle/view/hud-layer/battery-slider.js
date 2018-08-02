@@ -1,7 +1,7 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import {BatterySlider} from "../../../../game-object/slider/battery-slider";
+import {BatterySlider} from "../../../../game-object/battery-slider";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 
 /** バッテリースライダーを生成する */

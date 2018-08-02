@@ -10,7 +10,7 @@ import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
 import {createAttackButton} from "./attack-button";
 import {Button} from "../../../../game-object/button/button/index";
 import {createCamera} from "./camera";
-import {BatterySlider} from "../../../../game-object/slider/battery-slider";
+import {BatterySlider} from "../../../../game-object/battery-slider";
 import {createBatterySlider} from "./battery-slider";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";

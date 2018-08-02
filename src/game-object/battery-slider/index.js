@@ -3,16 +3,16 @@
 import {Subject} from 'rxjs';
 import type {BatterySliderModel} from "./model/battery-slider-model";
 import {BatterySliderView} from "./view/battery-slider-view";
-import type {Resources} from "../../../resource";
+import type {Resources} from "../../resource/index";
 import * as THREE from "three";
 import {change} from './model/change';
 import {Group, Tween} from "@tweenjs/tween.js";
-import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
-import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
-import {getControllerScale} from "../../../device-scale/controller-scale";
+import type {TouchRaycastContainer} from "../../screen-touch/touch/touch-raycaster";
+import type {MouseRaycaster} from "../../screen-touch/mouse/mouse-raycaster";
+import {getControllerScale} from "../../device-scale/controller-scale";
 import { map, filter, distinctUntilChanged, withLatestFrom } from 'rxjs/operators';
 import {visible} from './model/visible';
-import {isGroupPlaying} from "../../../tween/is-group-playing";
+import {isGroupPlaying} from "../../tween/is-group-playing";
 
 /** コンストラクタのパラメータ */
 type Param = {
