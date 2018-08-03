@@ -28,13 +28,11 @@ export class TouchLocation {
    * @param scale デバイスに応じた拡大・縮小率
    */
   constructor(maxValue: number, scale: number) {
-    const division0 = new Division(SLIDER_WIDTH / 10, SLIDER_HEIGHT, 0, new THREE.Color('rgb(0,0,0 )'));
-    const division1toMax = R.range(1, maxValue + 1)
+    this._divisionList = R.range(0, maxValue + 1)
       .map(v => {
         const color = new THREE.Color(`rgb(0, ${255 * v / maxValue}, 0)`);
         return new Division(SLIDER_WIDTH / maxValue, SLIDER_HEIGHT, v, color);
       });
-    this._divisionList = [division0, ...division1toMax];
     this._divisionList.forEach(v => v.mesh.scale.set(scale, scale, scale));
 
     this._maxValue = maxValue;
@@ -87,16 +85,9 @@ export class TouchLocation {
    */
   setPos(dx: number, dy: number): void {
     this._divisionList
-      .filter(v => v.value === 0)
-      .forEach(division => {
-        division.mesh.position.x = dx - SLIDER_WIDTH / 2;
-        division.mesh.position.y = dy;
-      });
-    this._divisionList
-      .filter(v => 1 <= v.value && v.value <= this._maxValue)
       .forEach(division => {
         const meshSize = SLIDER_WIDTH * this._scale / this._maxValue;
-        division.mesh.position.x = dx - SLIDER_WIDTH * this._scale / 2 - meshSize / 2 + meshSize * division.value;
+        division.mesh.position.x = dx - SLIDER_WIDTH * this._scale / 2 + meshSize * division.value;
         division.mesh.position.y = dy;
       });
   }
