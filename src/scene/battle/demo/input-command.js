@@ -11,8 +11,11 @@ import {Tween} from '@tweenjs/tween.js';
  * @return アニメーション
  */
 export function inputCommand(view: BattleSceneView, sceneState: BattleSceneState): MultiTween {
+  const visibleSlider = view.hudLayer.batterySlider.visibleAnimation(true);
+  const empty = new Tween({}).to({}, 0);
+
   return {
-    start: new Tween({}).to({}, 0),
-    end: new Tween({}).to({}, 0)
+    start: visibleSlider,
+    end: empty
   }
 }
