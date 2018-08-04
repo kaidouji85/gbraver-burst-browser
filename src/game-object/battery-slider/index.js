@@ -116,12 +116,10 @@ export class BatterySlider {
 
   /** マウスムーブした際の処理 */
   onMouseMove(mouse: MouseRaycaster, isLeftButtonPushed: boolean): void {
-    if (!isLeftButtonPushed) {
-      return;
+    if (isLeftButtonPushed) {
+      const overlap = this._view.getMouseOverlap(mouse);
+      this._onOverlap.next(overlap);
     }
-
-    const overlap = this._view.getMouseOverlap(mouse);
-    this._onOverlap.next(overlap);
   }
 
   /** タッチスタートした際の処理 */
@@ -137,7 +135,7 @@ export class BatterySlider {
   }
 
   /** シーンに追加するthree.jsオブジェクトを返す */
-  getThreeJsObjectList(): THREE.Mesh[] {
-    return this._view.getThreeJsObjectList();
+  getObject3D(): THREE.Object3D {
+    return this._view.getObject3D();
   }
 }

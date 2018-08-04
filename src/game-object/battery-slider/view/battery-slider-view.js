@@ -53,7 +53,7 @@ export class BatterySliderView {
     this._touchLocation = new TouchLocation(param.maxValue);
     this._canvasMesh.getThreeJsObjectList()
       .forEach(v => this._group.add(v));
-    this._group.add(this._touchLocation.getThreeJsObject());
+    this._group.add(this._touchLocation.getObject3D());
   }
 
   /** ビューにモデルを反映させる */
@@ -110,7 +110,7 @@ export class BatterySliderView {
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */
-  getThreeJsObjectList(): THREE.Mesh[] {
-    return [this._group];
+  getObject3D(): THREE.Object3D {
+    return this._group;
   }
 }

@@ -76,7 +76,7 @@ export class HudLayer {
     this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.batterySlider = createBatterySlider(param.resources, param.notifier);
-    this.batterySlider.getThreeJsObjectList().forEach(v => this.scene.add(v));
+    this.scene.add(this.batterySlider.getObject3D());
 
     this.playerBurstGauge = createPlayerBurstGauge(param.resources);
     this.playerBurstGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));

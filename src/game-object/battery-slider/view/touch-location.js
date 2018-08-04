@@ -6,6 +6,7 @@ import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-rayc
 import {isTouchOverlap} from "../../../screen-touch/touch/touch-overlap";
 import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
 import {isMouseOverlap} from "../../../screen-touch/mouse/mouse-overlap";
+import {Object3D} from "three";
 
 /** スライダー部分の幅 */
 export const SLIDER_WIDTH = 375;
@@ -79,7 +80,7 @@ export class TouchLocation {
   }
 
   /** シーンに追加するthree.jsのオブジェクトを返す */
-  getThreeJsObject(): THREE.Group {
+  getObject3D(): THREE.Object3D {
     return this._group;
   }
 }
