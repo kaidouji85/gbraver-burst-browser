@@ -18,26 +18,27 @@ export class TouchLocation {
   _divisionList: Division[];
   /** 表示位置再計算のために、目盛りの最大値をキャッシュする */
   _maxValue: number;
-  /** デバイスに応じたスケール */
-  _scale: number;
+  /** 本オブジェクトで使用するthree.jsオブジェクトをまとめたもの */
+  _group: THREE.Group;
 
   /**
    * コンストラクタ
    *
    * @param maxValue バッテリー最大値
-   * @param scale デバイスに応じた拡大・縮小率
    */
-  constructor(maxValue: number, scale: number) {
+  constructor(maxValue: number) {
     this._maxValue = maxValue;
-    this._scale = scale;
-
     this._divisionList = R.range(0, maxValue + 1)
       .map(v => {
         const color = new THREE.Color(`rgb(0, ${255 * v / maxValue}, 0)`);
-        return new Division(SLIDER_WIDTH / maxValue, SLIDER_HEIGHT, v, color);
+        const division = new Division(SLIDER_WIDTH / maxValue, SLIDER_HEIGHT, v, color);
+        const meshSize = SLIDER_WIDTH / this._maxValue;
+        division.mesh.position.x = - SLIDER_WIDTH / 2 + meshSize * division.value;
+        division.mesh.position.y = 0;
+        return division;
       });
-    this._divisionList.forEach(v => v.mesh.scale.set(scale, scale, scale));
-    this.setPos(0, 0);
+    this._group = new THREE.Group();
+    this._divisionList.forEach(v => this._group.add(v.mesh));
   }
 
   /**
@@ -77,23 +78,8 @@ export class TouchLocation {
       .map(v => v.value);
   }
 
-  /**
-   * 位置を設定する
-   *
-   * @param dx x座標
-   * @param dy y座標
-   */
-  setPos(dx: number, dy: number): void {
-    this._divisionList
-      .forEach(division => {
-        const meshSize = SLIDER_WIDTH * this._scale / this._maxValue;
-        division.mesh.position.x = dx - SLIDER_WIDTH * this._scale / 2 + meshSize * division.value;
-        division.mesh.position.y = dy;
-      });
-  }
-
   /** シーンに追加するthree.jsのオブジェクトを返す */
-  getThreeJsObjectList(): THREE.Mesh[] {
-    return this._divisionList.map(v => v.mesh);
+  getThreeJsObject(): THREE.Group {
+    return this._group;
   }
 }

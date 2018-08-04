@@ -28,38 +28,37 @@ type Param = {
 
 /** バッテリースライダーのビュー */
 export class BatterySliderView {
+  /** 本ビューで使用するthree.jsオブジェクトをまとめたもの */
+  _group: THREE.Group;
   /** バッテリースライダーを描画するキャンバス */
   _canvasMesh: CanvasMesh;
   /** バッテリースライダーメーターの当たり判定 */
   _touchLocation: TouchLocation;
   /** ゲームループで使うためにリソース管理オブジェクトをキャッシュする */
   _resources: Resources;
+  // TODO 外だしする
   /** デバイスに応じた表示倍率 */
   _scale: number;
-  /** 本ビューで使用するthree.jsオブジェクトをまとめたもの */
-  _group: THREE.Group;
 
   constructor(param: Param) {
     this._resources = param.resources;
     this._scale = param.scale;
+    this._group = new THREE.Group();
     this._canvasMesh = new CanvasMesh({
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
       canvasWidth: TEXTURE_SIZE,
       canvasHeight: TEXTURE_SIZE,
     });
-    this._touchLocation = new TouchLocation(param.maxValue, param.scale);
-
-    this._group = new THREE.Group();
+    this._touchLocation = new TouchLocation(param.maxValue);
     this._canvasMesh.getThreeJsObjectList()
       .forEach(v => this._group.add(v));
-    this._touchLocation.getThreeJsObjectList()
-      .forEach(v => this._group.add(v));
+    this._group.add(this._touchLocation.getThreeJsObject());
   }
 
   /** ビューにモデルを反映させる */
   gameLoop(model: BatterySliderModel): void {
-    this._canvasMesh.mesh.scale.set(this._scale, this._scale, this._scale);
+    this._refreshScale();
     this._refreshGauge(model);
     this._refreshPos();
   }
@@ -87,16 +86,13 @@ export class BatterySliderView {
     });
   }
 
+  /** オブジェクトのスケールを調整する */
+  _refreshScale(): void {
+    this._group.scale.set(this._scale, this._scale, this._scale);
+  }
+
   /** 表示位置を更新する */
   _refreshPos(): void {
-    /*
-    const dx = 0;
-    const dy = - window.innerHeight / 2 + PADDING_BOTTOM * this._scale;
-    this._canvasMesh.mesh.position.x = dx;
-    this._canvasMesh.mesh.position.y = dy;
-    this._touchLocation.setPos(dx, dy);
-    */
-
     const dx = 0;
     const dy = - window.innerHeight / 2 + PADDING_BOTTOM * this._scale;
     this._group.position.x = dx;
