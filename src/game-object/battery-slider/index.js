@@ -53,9 +53,8 @@ export class BatterySlider {
     this._onChangeBattery
       .pipe(distinctUntilChanged())
       .subscribe(battery => {
-        this._batteryTween.update();
-        this._batteryTween.removeAll();
-        this.changeBatteryAnimation(battery).start();
+        this.stopBatteryAnimation();
+        this.changeBattery(battery).start();
         param.onBatteryChange(battery);
       })
   }
@@ -67,19 +66,20 @@ export class BatterySlider {
     this._view.gameLoop(this._model);
   }
 
-  /** 現在のバッテリー値を返す */
-  getBattery(): number {
-    return Math.floor(this._model.battery);
-  }
-
   /**
    * バッテリーゲージ目盛りを変更するアニメーション
    *
    * @param toBattery 変更する値
    * @return アニメーションTween
    */
-  changeBatteryAnimation(toBattery: number): Tween {
+  changeBattery(toBattery: number): Tween {
     return change(this._model, this._batteryTween, toBattery);
+  }
+
+  /** バッテリーアニメーションを停止させる */
+  stopBatteryAnimation(): void {
+    this._batteryTween.update();
+    this._batteryTween.removeAll();
   }
 
   /**
@@ -88,7 +88,7 @@ export class BatterySlider {
    * @param isVisible スライダー表示フラグ、trueで表示する
    * @return アニメーションTween
    */
-  visibleAnimation(isVisible: boolean): Tween {
+  visible(isVisible: boolean): Tween {
     return visible(this._model, this._opacityTween, isVisible);
   }
 
