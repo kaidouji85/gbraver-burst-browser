@@ -28,16 +28,16 @@ export class TouchLocation {
    * @param scale デバイスに応じた拡大・縮小率
    */
   constructor(maxValue: number, scale: number) {
+    this._maxValue = maxValue;
+    this._scale = scale;
+
     this._divisionList = R.range(0, maxValue + 1)
       .map(v => {
         const color = new THREE.Color(`rgb(0, ${255 * v / maxValue}, 0)`);
         return new Division(SLIDER_WIDTH / maxValue, SLIDER_HEIGHT, v, color);
       });
     this._divisionList.forEach(v => v.mesh.scale.set(scale, scale, scale));
-
-    this._maxValue = maxValue;
     this.setPos(0, 0);
-    this._scale = scale;
   }
 
   /**

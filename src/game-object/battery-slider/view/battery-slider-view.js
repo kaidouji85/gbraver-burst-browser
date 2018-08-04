@@ -36,8 +36,11 @@ export class BatterySliderView {
   _resources: Resources;
   /** デバイスに応じた表示倍率 */
   _scale: number;
+  /** 本ビューで使用するthree.jsオブジェクトをまとめたもの */
+  _group: THREE.Group;
 
   constructor(param: Param) {
+    this._resources = param.resources;
     this._scale = param.scale;
     this._canvasMesh = new CanvasMesh({
       meshWidth: MESH_SIZE,
@@ -46,7 +49,12 @@ export class BatterySliderView {
       canvasHeight: TEXTURE_SIZE,
     });
     this._touchLocation = new TouchLocation(param.maxValue, param.scale);
-    this._resources = param.resources;
+
+    this._group = new THREE.Group();
+    this._canvasMesh.getThreeJsObjectList()
+      .forEach(v => this._group.add(v));
+    this._touchLocation.getThreeJsObjectList()
+      .forEach(v => this._group.add(v));
   }
 
   /** ビューにモデルを反映させる */
@@ -81,11 +89,18 @@ export class BatterySliderView {
 
   /** 表示位置を更新する */
   _refreshPos(): void {
+    /*
     const dx = 0;
     const dy = - window.innerHeight / 2 + PADDING_BOTTOM * this._scale;
     this._canvasMesh.mesh.position.x = dx;
     this._canvasMesh.mesh.position.y = dy;
     this._touchLocation.setPos(dx, dy);
+    */
+
+    const dx = 0;
+    const dy = - window.innerHeight / 2 + PADDING_BOTTOM * this._scale;
+    this._group.position.x = dx;
+    this._group.position.y = dy;
   }
 
   /** マウスが重なっているスライダーの目盛りを返す */
@@ -100,8 +115,6 @@ export class BatterySliderView {
 
   /** シーンに追加するthree.jsのオブジェクトを返す */
   getThreeJsObjectList(): THREE.Mesh[] {
-    const canvas = this._canvasMesh.getThreeJsObjectList();
-    const touchLocation = this._touchLocation.getThreeJsObjectList();
-    return [...canvas, ...touchLocation];
+    return [this._group];
   }
 }

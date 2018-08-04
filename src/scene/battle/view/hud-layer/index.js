@@ -17,7 +17,6 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {BurstGauge} from "../../../../game-object/gauge/burst-gauge/burst-gauge";
 import {createPlayerBurstGauge} from "./player-burst-gauge";
 import {createEnemyBurstGauge} from "./enemy-burst-gauge";
-import {createOkButton} from "./ok-button";
 
 /** コンストラクタのパラメータ */
 export type Param = {
