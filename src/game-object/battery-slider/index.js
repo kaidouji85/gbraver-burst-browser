@@ -7,7 +7,7 @@ import type {Resources} from "../../resource/index";
 import * as THREE from "three";
 import {change} from './model/change';
 import {Group, Tween} from "@tweenjs/tween.js";
-import type {TouchRaycastContainer, TouchRaycaster} from "../../screen-touch/touch/touch-raycaster";
+import type {TouchRaycastContainer} from "../../screen-touch/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../screen-touch/mouse/mouse-raycaster";
 import {getControllerScale} from "../../device-scale/controller-scale";
 import {map, filter, distinctUntilChanged} from 'rxjs/operators';

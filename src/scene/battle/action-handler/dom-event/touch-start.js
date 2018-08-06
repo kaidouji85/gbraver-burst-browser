@@ -11,5 +11,5 @@ export function touchStart(view: BattleSceneView, state: BattleSceneState, actio
   const hudRaycaster: TouchRaycastContainer = createTouchEventRaycaster(action.event, view.renderer, view.hudLayer.camera);
 
   view.hudLayer.attackButton.onTouchStart(hudRaycaster);
-  view.hudLayer.batterySlider.onTouchStart(hudRaycaster);
+  view.hudLayer.batterySelector.onTouchStart(hudRaycaster);
 }

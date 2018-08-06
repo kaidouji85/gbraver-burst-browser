@@ -10,5 +10,5 @@ import {createTouchEventRaycaster} from "../../../../screen-touch/touch/touch-ra
 export function touchMove(view: BattleSceneView, state: BattleSceneState, action: TouchMove) {
   const hudRaycaster: TouchRaycastContainer = createTouchEventRaycaster(action.event, view.renderer, view.hudLayer.camera);
 
-  view.hudLayer.batterySlider.onTouchMove(hudRaycaster);
+  view.hudLayer.batterySelector.onTouchMove(hudRaycaster);
 }
