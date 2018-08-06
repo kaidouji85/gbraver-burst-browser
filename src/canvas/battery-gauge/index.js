@@ -22,7 +22,7 @@ export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resour
   const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
   const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
   const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
-  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_GAUGE_LABEL);
+  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL);
   const batteryGaugeLabel: Image = batteryGaugeLabelResource ? batteryGaugeLabelResource.image : new Image();
 
   drawImageInCenter(context, gaugeBase, dx, dy);
@@ -48,7 +48,7 @@ export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resourc
   const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
   const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
   const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
-  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRICATED_BATTERY_GAUGE_LABEL);
+  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL);
   const batteryGaugeLabel: Image = batteryGaugeLabelResource ? batteryGaugeLabelResource.image : new Image();
 
   context.save();
