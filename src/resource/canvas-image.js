@@ -26,12 +26,11 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_GAUGE_LABEL: 'BATTERY_GAUGE_LABEL',
   BATTERY_BAR_UP: 'BATTERY_BAR_UP',
   BATTERY_BAR_DOWN: 'BATTERY_BAR_DOWN',
-
-
   BATTERY_SLIDER_ACTIVE_BAR: 'BATTERY_SLIDER_ACTIVE_BAR',
   BATTERY_SLIDER_DIS_ACTIVE_BAR: 'BATTERY_SLIDER_DIS_ACTIVE_BAR',
   BATTERY_SLIDER_BASE: 'BATTERY_SLIDER_BASE',
   BATTERY_SLIDER_POINTER: 'BATTERY_SLIDER_POINTER',
+  BATTERY_SLIDER_WINDOW: 'BATTERY_SLIDER_WINDOW',
   BURST_GAUGE_ACTIVE: 'BURST_GAUGE_ACTIVE',
   BURST_GAUGE_DISACTIVE: 'BURST_GAUGE_DISACTIVE',
   ATTACK_BUTTON: 'ATTACK_BUTTON',
@@ -67,7 +66,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     id: CANVAS_IMAGE_IDS.HP_GAUGE_LABEL,
     path: 'gauge/hp-gauge/hp-gauge-label.png',
   },
-
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_ACTIVE_BAR,
     path: 'battery-slider/active-bar.png',
@@ -84,8 +82,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_POINTER,
     path: 'battery-slider/pointer.png',
   },
-
-  // 廃止予定
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_WINDOW,
+    path: 'battery-slider/window.png',
+  },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL,
     path: 'gauge/battery-gauge/battery-gauge-label.png',

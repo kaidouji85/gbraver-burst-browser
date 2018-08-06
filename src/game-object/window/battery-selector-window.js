@@ -4,6 +4,7 @@ import type {Resources} from "../../resource";
 import {CanvasMesh} from "../../mesh/canvas-mesh";
 import {drawImageInCenter} from "../../canvas/draw/image-drawer";
 import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
+import type {CanvasImageResource} from "../../resource/canvas-image";
 
 export const CANVAS_SIZE = 1024;
 export const MESH_SIZE = 512;
@@ -13,6 +14,7 @@ type Param = {
   resources: Resources
 };
 
+/** バッテリースライダーのウインドウ */
 export class BatterySelectorWindow {
   _resources: Resources;
   _canvasMesh: CanvasMesh;
@@ -24,15 +26,19 @@ export class BatterySelectorWindow {
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
     });
+    this._drawWindow();
   }
 
+  /** ウインドウを描画する */
   _drawWindow() {
     this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
-      this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER)
-      //drawImageInCenter()
+      const windowResource: ?CanvasImageResource = this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_WINDOW);
+      const window: Image = windowResource ? windowResource.image : new Image();
+      drawImageInCenter(context, window, 0, 0);
     });
   }
 
+  /** 本クラスのthree.jsオブジェクトを取得する */
   getObject3D(): void {
     return this._canvasMesh.mesh;
   }
