@@ -60,7 +60,7 @@ export class BatterySliderView {
   gameLoop(model: BatterySliderModel): void {
     this._refreshScale();
     this._refreshGauge(model);
-    this._refreshPos();
+    //this._refreshPos();
   }
 
   /** バッテリースライダーを更新する */

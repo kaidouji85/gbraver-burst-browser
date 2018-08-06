@@ -5,6 +5,8 @@ import type {Resources} from "../../resource";
 import type {MouseRaycaster} from "../../screen-touch/mouse/mouse-raycaster";
 import type {TouchRaycastContainer} from "../../screen-touch/touch/touch-raycaster";
 import * as THREE from "three";
+import {Group} from "./group";
+import {BatterySelectorWindow} from "../window/battery-selector-window";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -17,6 +19,10 @@ type Param = {
 export class BatterySelector {
   /** バッテリースライダー */
   _batterySlider: BatterySlider;
+  /** ウインドウ */
+  _window: BatterySelectorWindow;
+  /** バッテリースライダーで使うthree.jsオブジェクトをまとめたもの */
+  _group: Group;
 
   constructor(param: Param) {
     this._batterySlider = new BatterySlider({
@@ -24,11 +30,21 @@ export class BatterySelector {
       isVisible: true,
       onBatteryChange: param.onBatteryChange,
     });
+
+    this._window = new BatterySelectorWindow({
+      resources: param.resources
+    });
+
+    this._group = new Group({
+      slider: this._batterySlider.getObject3D(),
+      window: this._window.getObject3D()
+    });
   }
 
   /** ゲームループの処理 */
   gameLoop(time: DOMHighResTimeStamp): void {
     this._batterySlider.gameLoop(time);
+    this._group.refreshPosition();
   }
 
   /** マウスダウンした際の処理 */
@@ -53,6 +69,6 @@ export class BatterySelector {
 
   /** シーンに追加するthree.jsオブジェクトを返す */
   getObject3D(): THREE.Object3D {
-    return this._batterySlider.getObject3D();
+    return this._group.getObject3D();
   }
 }
