@@ -16,7 +16,7 @@ import {inputCommand} from "./input-command";
 export function gameStateDemo(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): MultiTween {
   switch (gameState.effect.name) {
     case 'InputCommand':
-      return inputCommand(view, sceneState);
+      return inputCommand(view, sceneState, gameState);
     default:
       return createEmptyMultiTween();
   }
