@@ -5,6 +5,7 @@ import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
 import type {TouchRaycastContainer} from "../../overlap/check/touch/touch-raycaster";
 import {Subject} from "rxjs";
 import {distinctUntilChanged, filter, map} from "rxjs/operators";
+import * as THREE from 'three';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -58,5 +59,9 @@ export class SliderOperation {
   onTouchMove(touch: TouchRaycastContainer): void {
     const overlap = this._touchLocation.getTouchOverlap(touch);
     this._onOverlap.next(overlap);
+  }
+
+  getObject3D(): THREE.Object3D {
+    return this._touchLocation.getObject3D();
   }
 }

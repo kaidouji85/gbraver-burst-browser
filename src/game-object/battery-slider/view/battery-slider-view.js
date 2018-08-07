@@ -8,6 +8,7 @@ import * as THREE from "three";
 import {TouchLocation} from "../../../operation/slider/touch-location";
 import type {TouchRaycastContainer} from "../../../overlap/check/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../../overlap/check/mouse/mouse-raycaster";
+import {SliderOperation} from "../../../operation/slider";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
@@ -15,6 +16,10 @@ export const MESH_SIZE = 512;
 export const TEXTURE_SIZE = 1024;
 /** バッテリースライダーのパディングボトム */
 export const PADDING_BOTTOM = 180;
+
+export const SLIDER_WIDTH = 375;
+
+export const SLIDER_HEIGHT = 84;
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -24,6 +29,8 @@ type Param = {
   maxValue: number,
   /** デバイスに応じた表示倍率 */
   scale: number,
+  /** バッテリーが変更された場合のコールバック関数 */
+  onBatteryChange: (battery: number) => void
 };
 
 /** バッテリースライダーのビュー */
@@ -32,11 +39,10 @@ export class BatterySliderView {
   _group: THREE.Group;
   /** バッテリースライダーを描画するキャンバス */
   _canvasMesh: CanvasMesh;
-  /** バッテリースライダーメーターの当たり判定 */
-  _touchLocation: TouchLocation;
+  /** バッテリースライダーの当たり判定を行う */
+  _sliderOperation: SliderOperation;
   /** ゲームループで使うためにリソース管理オブジェクトをキャッシュする */
   _resources: Resources;
-  // TODO 外だしする
   /** デバイスに応じた表示倍率 */
   _scale: number;
 
@@ -50,22 +56,23 @@ export class BatterySliderView {
       canvasWidth: TEXTURE_SIZE,
       canvasHeight: TEXTURE_SIZE,
     });
-    this._touchLocation = new TouchLocation({
-      start: 0,
-      end: param.maxValue,
-      width: 375,
-      height: 84
-    });
     this._canvasMesh.getThreeJsObjectList()
       .forEach(v => this._group.add(v));
-    this._group.add(this._touchLocation.getObject3D());
+
+    this._sliderOperation = new SliderOperation({
+      start: 0,
+      end: param.maxValue,
+      width: SLIDER_WIDTH,
+      height: SLIDER_HEIGHT,
+      onValueChange: v => param.onBatteryChange(v)
+    });
+    this._group.add(this._sliderOperation.getObject3D());
   }
 
   /** ビューにモデルを反映させる */
-  gameLoop(model: BatterySliderModel): void {
+  engage(model: BatterySliderModel): void {
     this._refreshScale();
     this._refreshGauge(model);
-    //this._refreshPos();
   }
 
   /** バッテリースライダーを更新する */
@@ -96,26 +103,25 @@ export class BatterySliderView {
     this._group.scale.set(this._scale, this._scale, this._scale);
   }
 
-  /** 表示位置を更新する */
-  _refreshPos(): void {
-    const dx = 0;
-    const dy = - window.innerHeight / 2 + PADDING_BOTTOM * this._scale;
-    this._group.position.x = dx;
-    this._group.position.y = dy;
+  onMouseDown(mouse: MouseRaycaster): void {
+    this._sliderOperation.onMouseDown(mouse);
   }
 
-  /** マウスが重なっているスライダーの目盛りを返す */
-  getMouseOverlap(mouse: MouseRaycaster): number[] {
-    return this._touchLocation.getMouseOverlap(mouse);
+  onMouseMove(mouse: MouseRaycaster, isLeftButtonPushed: boolean): void {
+    this._sliderOperation.onMouseMove(mouse, isLeftButtonPushed);
   }
 
-  /** 指が重なっているスライダーの目盛りを返す */
-  getTouchOverlap(touch: TouchRaycastContainer): number[] {
-    return this._touchLocation.getTouchOverlap(touch);
+  onTouchStart(touch: TouchRaycastContainer): void {
+    this._sliderOperation.onTouchStart(touch);
   }
 
-  /** シーンに追加するthree.jsのオブジェクトを返す */
+  onTouchMove(touch: TouchRaycastContainer): void {
+    this._sliderOperation.onTouchMove(touch);
+  }
+
   getObject3D(): THREE.Object3D {
     return this._group;
   }
+
+
 }

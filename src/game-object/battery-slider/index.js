@@ -31,9 +31,6 @@ export class BatterySlider {
   _batteryTween: Group;
   /** 透明度のTweenグループ */
   _opacityTween: Group;
-  /** マウス、指の当たり判定サブジェクト */
-  _onOverlap: Subject<number[]>;
-
 
   constructor(param: Param) {
     const initialBattery = 3;
@@ -45,29 +42,26 @@ export class BatterySlider {
     this._view = new BatterySliderView({
       resources: param.resources,
       maxValue: this._model.maxBattery,
-      scale: getControllerScale()
+      scale: getControllerScale(),
+      onBatteryChange: battery => {
+        if (!this.canOperate()) {
+          return;
+        }
+
+        this.stopBatteryAnimation();
+        this.changeBattery(battery).start();
+        param.onBatteryChange(battery);
+      }
     });
     this._batteryTween = new Group();
     this._opacityTween = new Group();
-
-    this._onOverlap = new Subject();
-    this._onOverlap.pipe(
-      filter(v => 0 < v.length),
-      filter(() => this.canOperate()),
-      map(v => v.reduce((a, b) => Math.max(a, b))),
-      distinctUntilChanged()
-    ).subscribe(v => {
-      this.stopBatteryAnimation();
-      this.changeBattery(v).start();
-      param.onBatteryChange(v);
-    });
   }
 
   /** ゲームループの処理 */
   gameLoop(time: DOMHighResTimeStamp): void {
     this._batteryTween.update(time);
     this._opacityTween.update(time);
-    this._view.gameLoop(this._model);
+    this._view.engage(this._model);
   }
 
   /**
@@ -108,33 +102,22 @@ export class BatterySlider {
     return ret;
   }
 
-  /** マウスダウンした際の処理 */
   onMouseDown(mouse: MouseRaycaster): void {
-    const overlap = this._view.getMouseOverlap(mouse);
-    this._onOverlap.next(overlap);
+    this._view.onMouseDown(mouse);
   }
 
-  /** マウスムーブした際の処理 */
   onMouseMove(mouse: MouseRaycaster, isLeftButtonPushed: boolean): void {
-    if (isLeftButtonPushed) {
-      const overlap = this._view.getMouseOverlap(mouse);
-      this._onOverlap.next(overlap);
-    }
+    this._view.onMouseMove(mouse, isLeftButtonPushed);
   }
 
-  /** タッチスタートした際の処理 */
   onTouchStart(touch: TouchRaycastContainer): void {
-    const overlap = this._view.getTouchOverlap(touch);
-    this._onOverlap.next(overlap);
+    this._view.onTouchStart(touch);
   }
 
-  /** タッチムーブした際の処理 */
   onTouchMove(touch: TouchRaycastContainer): void {
-    const overlap = this._view.getTouchOverlap(touch);
-    this._onOverlap.next(overlap);
+    this._view.onTouchMove(touch);
   }
 
-  /** シーンに追加するthree.jsオブジェクトを返す */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
   }
