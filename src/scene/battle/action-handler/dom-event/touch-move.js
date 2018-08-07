@@ -10,5 +10,5 @@ import {createTouchEventRaycaster} from "../../../../overlap/check/touch/touch-r
 export function touchMove(view: BattleSceneView, state: BattleSceneState, action: TouchMove) {
   const hudRaycaster: TouchRaycastContainer = createTouchEventRaycaster(action.event, view.renderer, view.hudLayer.camera);
 
-  view.hudLayer.batterySelector.onTouchMove(hudRaycaster);
+  view.hudLayer.batterySlider.onTouchMove(hudRaycaster);
 }
