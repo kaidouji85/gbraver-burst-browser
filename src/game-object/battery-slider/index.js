@@ -5,13 +5,13 @@ import type {BatterySliderModel} from "./model/battery-slider-model";
 import {BatterySliderView} from "./view/battery-slider-view";
 import type {Resources} from "../../resource/index";
 import * as THREE from "three";
-import {change} from './model/change';
+import {change} from './animation/change';
 import {Group, Tween} from "@tweenjs/tween.js";
 import type {TouchRaycastContainer} from "../../overlap/check/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
 import {getControllerScale} from "../../device-scale/controller-scale";
 import {map, filter, distinctUntilChanged} from 'rxjs/operators';
-import {visible} from './model/visible';
+import {visible} from './animation/visible';
 import {isGroupPlaying} from "../../tween/is-group-playing";
 
 /** コンストラクタのパラメータ */

@@ -1,6 +1,6 @@
 // @flow
 
-import type {BatterySliderModel} from "./battery-slider-model";
+import type {BatterySliderModel} from "../model/battery-slider-model";
 import {Group, Tween} from '@tweenjs/tween.js';
 
 /**
