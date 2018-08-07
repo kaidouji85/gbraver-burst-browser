@@ -1,7 +1,7 @@
 // @flow
 
 import {Group, Tween} from '@tweenjs/tween.js';
-import type {BatterySliderModel} from "../model/battery-slider-model";
+import type {BatterySelectorModel} from "../model/battery-selector";
 
 const BASE_DURATION = 32;
 
@@ -13,7 +13,7 @@ const BASE_DURATION = 32;
  * @param toBattery 変更するバッテリー値
  * @return tween
  */
-export function changeBattery(model: BatterySliderModel, tweenGroup: Group, toBattery: number): Tween {
+export function changeBattery(model: BatterySelectorModel, tweenGroup: Group, toBattery: number): Tween {
   const duration = BASE_DURATION * Math.abs(model.slider.battery - toBattery) / model.slider.max;
   return new Tween(model.slider, tweenGroup)
     .to({battery: toBattery}, duration);

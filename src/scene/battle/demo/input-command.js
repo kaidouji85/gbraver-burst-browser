@@ -11,11 +11,6 @@ import {Tween} from '@tweenjs/tween.js';
  * @return アニメーション
  */
 export function inputCommand(view: BattleSceneView, sceneState: BattleSceneState): MultiTween {
-  const visibleSlider = view.hudLayer.batterySlider.visible(true);
-  const empty = new Tween({}).to({}, 0);
-
-  return {
-    start: visibleSlider,
-    end: empty
-  }
+  // TODO 状態から入力可能値を取得する
+  return view.hudLayer.batterySlider.open(5);
 }

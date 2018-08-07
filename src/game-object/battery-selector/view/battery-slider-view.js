@@ -2,7 +2,7 @@
 
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {Resources} from "../../../resource/index";
-import type {BatterySliderModel} from "../model/battery-slider-model";
+import type {BatterySelectorModel} from "../model/battery-selector";
 import {drawBatterySlider} from "../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {TouchLocation} from "../../../operation/slider/touch-location";
@@ -70,13 +70,13 @@ export class BatterySliderView {
   }
 
   /** ビューにモデルを反映させる */
-  engage(model: BatterySliderModel): void {
+  engage(model: BatterySelectorModel): void {
     this._refreshScale();
     this._refreshGauge(model);
   }
 
   /** バッテリースライダーを更新する */
-  _refreshGauge(model: BatterySliderModel): void {
+  _refreshGauge(model: BatterySelectorModel): void {
     this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
       context.clearRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
       context.save();

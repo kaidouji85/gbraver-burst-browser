@@ -1,7 +1,7 @@
 // @flow
 
 import {Observable, Subject} from 'rxjs';
-import type {BatterySliderModel} from "./model/battery-slider-model";
+import type {BatterySelectorModel} from "./model/battery-selector";
 import {BatterySliderView} from "./view/battery-slider-view";
 import type {Resources} from "../../resource/index";
 import * as THREE from "three";
@@ -11,7 +11,8 @@ import type {TouchRaycastContainer} from "../../overlap/check/touch/touch-raycas
 import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
 import {getControllerScale} from "../../device-scale/controller-scale";
 import {map, filter, distinctUntilChanged} from 'rxjs/operators';
-import {visible} from './animation/visible';
+import type {MultiTween} from "../../tween/multi-tween/multi-tween";
+import {open} from './animation/open';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -23,7 +24,7 @@ type Param = {
 /** バッテリーセレクタ */
 export class BatterySelector {
   /** バッテリースライダーのモデル */
-  _model: BatterySliderModel;
+  _model: BatterySelectorModel;
   /** バッテリースライダーのビュー */
   _view: BatterySliderView;
   /** 本クラスのTweenグループ */
@@ -65,13 +66,13 @@ export class BatterySelector {
   }
 
   /**
-   * スライダーの表示・非表示アニメーション
+   * バッテリーセレクターを開く
    *
-   * @param isVisible スライダー表示フラグ、trueで表示する
-   * @return アニメーションTween
+   * @param maxEnable 選択可能な最大値
+   * @return アニメーション
    */
-  visible(isVisible: boolean): Tween {
-    return visible(this._model, this._tween, isVisible);
+  open(maxEnable: number): MultiTween {
+    return open(this._model, this._tween, maxEnable);
   }
 
   onMouseDown(mouse: MouseRaycaster): void {
