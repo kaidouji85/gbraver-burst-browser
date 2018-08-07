@@ -2,13 +2,14 @@
 
 import type {Resources} from "../../../../resource";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
-import {BatterySlider} from "../../../../game-object/battery-slider";
+import {BatterySelector} from "../../../../game-object/battery-selector";
 
 /** バッテリースライダーを生成する */
-export function createBatterySlider(resources: Resources, notifier: BattleSceneNotifier): BatterySlider {
-  return new BatterySlider({
+export function createBatterySlider(resources: Resources, notifier: BattleSceneNotifier): BatterySelector {
+  return new BatterySelector({
+    // TODO プレイヤーステータスから取得する
+    maxBattery: 5,
     resources: resources,
-    isVisible: true,
     onBatteryChange: (battery: number) => console.log(battery),
   });
 }

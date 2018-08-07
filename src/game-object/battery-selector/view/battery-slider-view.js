@@ -87,9 +87,9 @@ export class BatterySliderView {
       const dy = this._canvasMesh.canvas.height / 2;
 
       drawBatterySlider(context, this._resources, {
-        battery: model.battery,
-        maxEnableBattery: model.maxBattery,
-        maxBattery: model.maxBattery,
+        battery: model.slider.battery,
+        maxEnableBattery: model.slider.enableMax,
+        maxBattery: model.slider.max,
         dx: dx,
         dy: dy
       });

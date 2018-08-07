@@ -5,79 +5,63 @@ import type {BatterySliderModel} from "./model/battery-slider-model";
 import {BatterySliderView} from "./view/battery-slider-view";
 import type {Resources} from "../../resource/index";
 import * as THREE from "three";
-import {change} from './animation/change';
+import {changeBattery} from './animation/change-battery';
 import {Group, Tween} from "@tweenjs/tween.js";
 import type {TouchRaycastContainer} from "../../overlap/check/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
 import {getControllerScale} from "../../device-scale/controller-scale";
 import {map, filter, distinctUntilChanged} from 'rxjs/operators';
 import {visible} from './animation/visible';
-import {isGroupPlaying} from "../../tween/is-group-playing";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  onBatteryChange: (battery: number) => void,
-  isVisible: boolean
+  maxBattery: number,
+  onBatteryChange: (battery: number) => void
 };
 
-/** バッテリースライダー */
-export class BatterySlider {
+/** バッテリーセレクタ */
+export class BatterySelector {
   /** バッテリースライダーのモデル */
   _model: BatterySliderModel;
   /** バッテリースライダーのビュー */
   _view: BatterySliderView;
-  /** バッテリー目盛りのTweenグループ */
-  _batteryTween: Group;
-  /** 透明度のTweenグループ */
-  _opacityTween: Group;
+  /** 本クラスのTweenグループ */
+  _tween: Group;
 
   constructor(param: Param) {
     const initialBattery = 3;
     this._model = {
-      battery: initialBattery,
-      maxBattery: 5,
-      opacity: param.isVisible ? 1 : 0
+      slider: {
+        battery: 0,
+        max: param.maxBattery,
+        enableMax: param.maxBattery
+      },
+      disabled: false,
+      opacity: 0
     };
     this._view = new BatterySliderView({
       resources: param.resources,
-      maxValue: this._model.maxBattery,
+      maxValue: param.maxBattery,
       scale: getControllerScale(),
       onBatteryChange: battery => {
-        if (!this.canOperate()) {
+        if (this._model.disabled) {
           return;
         }
 
-        this.stopBatteryAnimation();
-        this.changeBattery(battery).start();
+        this._tween.update();
+        this._tween.removeAll();
+        changeBattery(this._model, this._tween, battery).start();
         param.onBatteryChange(battery);
       }
     });
-    this._batteryTween = new Group();
-    this._opacityTween = new Group();
+    this._tween = new Group();
   }
 
   /** ゲームループの処理 */
   gameLoop(time: DOMHighResTimeStamp): void {
-    this._batteryTween.update(time);
-    this._opacityTween.update(time);
+    this._tween.update();
     this._view.engage(this._model);
-  }
-
-  /**
-   * バッテリーゲージ目盛りを変更するアニメーション
-   *
-   * @param toBattery 変更する値
-   * @return アニメーションTween
-   */
-  changeBattery(toBattery: number): Tween {
-    return change(this._model, this._batteryTween, toBattery);
-  }
-
-  /** バッテリーアニメーションを停止させる */
-  stopBatteryAnimation(): void {
-    this._batteryTween.update();
-    this._batteryTween.removeAll();
   }
 
   /**
@@ -87,19 +71,7 @@ export class BatterySlider {
    * @return アニメーションTween
    */
   visible(isVisible: boolean): Tween {
-    return visible(this._model, this._opacityTween, isVisible);
-  }
-
-  /**
-   * 操作可能か否かを返す
-   *
-   * @return 判定結果、trueで操作可能
-   */
-  canOperate(): boolean {
-    const ret = !isGroupPlaying(this._opacityTween)
-      && !isGroupPlaying(this._batteryTween)
-      && this._model.opacity === 1;
-    return ret;
+    return visible(this._model, this._tween, isVisible);
   }
 
   onMouseDown(mouse: MouseRaycaster): void {

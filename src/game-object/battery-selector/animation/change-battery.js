@@ -13,8 +13,8 @@ const BASE_DURATION = 32;
  * @param toBattery 変更するバッテリー値
  * @return tween
  */
-export function change(model: BatterySliderModel, tweenGroup: Group, toBattery: number): Tween {
-  const duration = BASE_DURATION * Math.abs(model.battery - toBattery) / model.maxBattery;
-  return new Tween(model, tweenGroup)
+export function changeBattery(model: BatterySliderModel, tweenGroup: Group, toBattery: number): Tween {
+  const duration = BASE_DURATION * Math.abs(model.slider.battery - toBattery) / model.slider.max;
+  return new Tween(model.slider, tweenGroup)
     .to({battery: toBattery}, duration);
 }
