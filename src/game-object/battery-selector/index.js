@@ -46,7 +46,7 @@ export class BatterySelector {
       maxValue: param.maxBattery,
       scale: getControllerScale(),
       onBatteryChange: battery => {
-        if (this._model.disabled) {
+        if (this._model.disabled || this._model.slider.enableMax < battery) {
           return;
         }
 

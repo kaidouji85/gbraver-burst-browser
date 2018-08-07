@@ -16,7 +16,7 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {BurstGauge} from "../../../../game-object/gauge/burst-gauge/burst-gauge";
 import {createPlayerBurstGauge} from "./player-burst-gauge";
 import {createEnemyBurstGauge} from "./enemy-burst-gauge";
-import {createBatterySlider} from "./battery-slider";
+import {createBatterySelector} from "./battery-slider";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -47,7 +47,7 @@ export class HudLayer {
   /** コウゲキボタン */
   attackButton: Button;
   /** バッテリーセレクタ */
-  batterySlider: BatterySelector;
+  batterySelector: BatterySelector;
   /** プレイヤーバーストゲージ */
   playerBurstGauge: BurstGauge;
   /** 敵バーストゲージ */
@@ -75,8 +75,8 @@ export class HudLayer {
     this.attackButton = createAttackButton(param.resources, param.notifier);
     this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.batterySlider = createBatterySlider(param.resources, param.notifier);
-    this.scene.add(this.batterySlider.getObject3D());
+    this.batterySelector = createBatterySelector(param.resources, param.notifier, playerInfo);
+    this.scene.add(this.batterySelector.getObject3D());
 
     this.playerBurstGauge = createPlayerBurstGauge(param.resources);
     this.playerBurstGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));

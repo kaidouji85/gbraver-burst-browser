@@ -18,6 +18,7 @@ export function open(model: BatterySelectorModel, group: Group, maxEnable: numbe
     .onStart(() => {
       model.disabled = true;
       model.opacity = 0;
+      model.slider.enableMax = maxEnable;
     })
     .to({opacity: 1}, 500)
     .onComplete(() => {

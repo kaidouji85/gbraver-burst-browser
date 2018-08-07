@@ -12,5 +12,5 @@ import {Tween} from '@tweenjs/tween.js';
  */
 export function inputCommand(view: BattleSceneView, sceneState: BattleSceneState): MultiTween {
   // TODO 状態から入力可能値を取得する
-  return view.hudLayer.batterySlider.open(5);
+  return view.hudLayer.batterySelector.open(3);
 }

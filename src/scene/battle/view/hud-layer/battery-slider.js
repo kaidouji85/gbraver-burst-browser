@@ -3,12 +3,12 @@
 import type {Resources} from "../../../../resource";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 import {BatterySelector} from "../../../../game-object/battery-selector";
+import type {Player} from "gbraver-burst-core/lib/player/player";
 
-/** バッテリースライダーを生成する */
-export function createBatterySlider(resources: Resources, notifier: BattleSceneNotifier): BatterySelector {
+/** バッテリーセレクタを生成する */
+export function createBatterySelector(resources: Resources, notifier: BattleSceneNotifier, playerInfo: Player): BatterySelector {
   return new BatterySelector({
-    // TODO プレイヤーステータスから取得する
-    maxBattery: 5,
+    maxBattery: playerInfo.armdozer.maxBattery,
     resources: resources,
     onBatteryChange: (battery: number) => console.log(battery),
   });
