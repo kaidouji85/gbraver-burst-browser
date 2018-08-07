@@ -1,7 +1,7 @@
 // @flow
 
 import type {TouchRaycastContainer} from "./touch-raycaster";
-import type {OverlapTarget} from "../raycaster/overlap-target";
+import type {OverlapTarget} from "../../target/overlap-target";
 
 /**
  * 対象オブジェクトに指が重なっているか否かを判定する

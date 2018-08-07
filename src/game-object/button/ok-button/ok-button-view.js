@@ -3,7 +3,7 @@
 import * as THREE from "three";
 import type {Resources} from "../../../resource/index";
 import type {ButtonModel} from "../button/model/button-model";
-import {isMeshOverlap} from "../../../screen-touch/raycaster/overlap";
+import {isMeshOverlap} from "../../../overlap/check/raycaster/raycaster-overlap";
 import {ButtonView} from "../button/button-view";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import {createOverlapMesh} from "../overlap-mesh";

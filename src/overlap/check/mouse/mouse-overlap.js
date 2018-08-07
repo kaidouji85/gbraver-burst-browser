@@ -1,7 +1,7 @@
 // @flow
 
 import type {MouseRaycaster} from "./mouse-raycaster";
-import {OverlapTarget} from "../raycaster/overlap-target";
+import {OverlapTarget} from "../../target/overlap-target";
 
 /**
  * マウスと対象物が重なっているかを判定する

@@ -2,14 +2,14 @@
 import * as THREE from "three";
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {ButtonModel} from "./model/button-model";
-import type {TouchRaycastContainer} from "../../../screen-touch/touch/touch-raycaster";
+import type {TouchRaycastContainer} from "../../../overlap/check/touch/touch-raycaster";
 import type {Resources} from "../../../resource/index";
 import {ButtonView} from "./button-view";
 import {push} from "./model/push";
 import {isGroupPlaying} from "../../../tween/is-group-playing";
-import {isTouchOverlap} from "../../../screen-touch/touch/touch-overlap";
-import type {MouseRaycaster} from "../../../screen-touch/mouse/mouse-raycaster";
-import {isMouseOverlap} from "../../../screen-touch/mouse/mouse-overlap";
+import {isTouchOverlap} from "../../../overlap/check/touch/touch-overlap";
+import type {MouseRaycaster} from "../../../overlap/check/mouse/mouse-raycaster";
+import {isMouseOverlap} from "../../../overlap/check/mouse/mouse-overlap";
 import {visible} from './model/visible';
 
 /** コンストラクタのパラメータ */

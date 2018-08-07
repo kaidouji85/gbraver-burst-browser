@@ -2,8 +2,8 @@
 
 import {BatterySlider} from "../battery-slider";
 import type {Resources} from "../../resource";
-import type {MouseRaycaster} from "../../screen-touch/mouse/mouse-raycaster";
-import type {TouchRaycastContainer} from "../../screen-touch/touch/touch-raycaster";
+import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
+import type {TouchRaycastContainer} from "../../overlap/check/touch/touch-raycaster";
 import * as THREE from "three";
 import {Group} from "./group";
 import {BatterySelectorWindow} from "../window/battery-selector-window";

@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import type {ButtonModel} from "./model/button-model";
-import {OverlapTarget} from "../../../screen-touch/raycaster/overlap-target";
+import {OverlapTarget} from "../../../overlap/target/overlap-target";
 
 /** ボタンのビュー */
 export interface ButtonView extends OverlapTarget {
