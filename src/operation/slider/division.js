@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from "three";
-import type {OverlapTarget} from "../../../overlap/target/overlap-target";
-import {isMeshOverlap} from "../../../overlap/check/raycaster/raycaster-overlap";
+import type {OverlapTarget} from "../../overlap/target/overlap-target";
+import {isMeshOverlap} from "../../overlap/check/raycaster/raycaster-overlap";
 
 /**
  * 目盛りの当たり判定
@@ -18,7 +18,7 @@ export class Division implements OverlapTarget {
     const geometry = new THREE.PlaneGeometry(width, height, 1, 1);
     const material = new THREE.MeshBasicMaterial({
       color,
-      visible: false
+      visible: true
     });
     this.mesh = new THREE.Mesh(geometry, material);
     this.value = value;

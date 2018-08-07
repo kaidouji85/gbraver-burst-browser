@@ -2,39 +2,42 @@
 import * as THREE from "three";
 import * as R from 'ramda';
 import {Division} from "./division";
-import type {TouchRaycastContainer} from "../../../overlap/check/touch/touch-raycaster";
-import {isTouchOverlap} from "../../../overlap/check/touch/touch-overlap";
-import type {MouseRaycaster} from "../../../overlap/check/mouse/mouse-raycaster";
-import {isMouseOverlap} from "../../../overlap/check/mouse/mouse-overlap";
-import {Object3D} from "three";
+import type {TouchRaycastContainer} from "../../overlap/check/touch/touch-raycaster";
+import {isTouchOverlap} from "../../overlap/check/touch/touch-overlap";
+import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
+import {isMouseOverlap} from "../../overlap/check/mouse/mouse-overlap";
 
-/** スライダー部分の幅 */
-export const SLIDER_WIDTH = 375;
-/** スライダー部分の高 */
-export const SLIDER_HEIGHT = 84;
+/** コンストラクタのパラメータ */
+export type Param = {
+  start: number,
+  end: number,
+  width: number,
+  height: number
+};
 
 /** スライダーのどの部分に触れたかを判定する */
 export class TouchLocation {
   /** 目盛りの当たり判定をあつめたもの */
   _divisionList: Division[];
-  /** 表示位置再計算のために、目盛りの最大値をキャッシュする */
-  _maxValue: number;
   /** 本オブジェクトで使用するthree.jsオブジェクトをまとめたもの */
   _group: THREE.Group;
 
   /**
    * コンストラクタ
    *
-   * @param maxValue バッテリー最大値
+   * @param param パラメータ
    */
-  constructor(maxValue: number) {
-    this._maxValue = maxValue;
-    this._divisionList = R.range(0, maxValue + 1)
+  constructor(param: Param) {
+    const max = Math.max(param.start, param.end);
+    const min = Math.min(param.start, param.end);
+    const sub = max - min;
+
+    this._divisionList = R.range(min, max + 1)
       .map(v => {
-        const color = new THREE.Color(`rgb(0, ${255 * v / maxValue}, 0)`);
-        const division = new Division(SLIDER_WIDTH / maxValue, SLIDER_HEIGHT, v, color);
-        const meshSize = SLIDER_WIDTH / this._maxValue;
-        division.mesh.position.x = - SLIDER_WIDTH / 2 + meshSize * division.value;
+        const color = new THREE.Color(`rgb(0, ${255 * v / sub}, 0)`);
+        const division = new Division(param.width / sub, param.height, v, color);
+        const meshSize = param.width / sub;
+        division.mesh.position.x = - param.width / 2 + meshSize * division.value;
         division.mesh.position.y = 0;
         return division;
       });

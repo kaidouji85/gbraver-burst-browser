@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource/index";
 import type {BatterySliderModel} from "../model/battery-slider-model";
 import {drawBatterySlider} from "../../../canvas/battery-slider/index";
 import * as THREE from "three";
-import {TouchLocation} from "./touch-location";
+import {TouchLocation} from "../../../operation/slider/touch-location";
 import type {TouchRaycastContainer} from "../../../overlap/check/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../../overlap/check/mouse/mouse-raycaster";
 
@@ -50,7 +50,12 @@ export class BatterySliderView {
       canvasWidth: TEXTURE_SIZE,
       canvasHeight: TEXTURE_SIZE,
     });
-    this._touchLocation = new TouchLocation(param.maxValue);
+    this._touchLocation = new TouchLocation({
+      start: 0,
+      end: param.maxValue,
+      width: 375,
+      height: 84
+    });
     this._canvasMesh.getThreeJsObjectList()
       .forEach(v => this._group.add(v));
     this._group.add(this._touchLocation.getObject3D());
