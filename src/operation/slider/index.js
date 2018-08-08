@@ -9,8 +9,7 @@ import * as THREE from 'three';
 
 /** コンストラクタのパラメータ */
 type Param = {
-  start: number,
-  end: number,
+  values: number[],
   width: number,
   height: number,
   onValueChange: (value: number) => void
@@ -22,7 +21,11 @@ export class SliderOperation {
   _onOverlap: Subject<number[]>;
 
   constructor(param: Param) {
-    this._touchLocation = new TouchLocation(param);
+    this._touchLocation = new TouchLocation({
+      values: param.values,
+      width: param.width,
+      height: param.height
+    });
     this._onOverlap = new Subject();
     this._onOverlap.pipe(
       filter(v => 0 < v.length),

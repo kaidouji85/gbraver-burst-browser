@@ -9,8 +9,7 @@ import {isMouseOverlap} from "../../overlap/check/mouse/mouse-overlap";
 
 /** コンストラクタのパラメータ */
 export type Param = {
-  start: number,
-  end: number,
+  values: number[],
   width: number,
   height: number
 };
@@ -28,15 +27,12 @@ export class TouchLocation {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    const max = Math.max(param.start, param.end);
-    const min = Math.min(param.start, param.end);
-    const sub = max - min;
-
-    this._divisionList = R.range(min, max + 1)
+    const squareCount = param.values.length - 1;
+    this._divisionList = param.values
       .map((v, index) => {
-        const color = new THREE.Color(`rgb(0, ${255 * index / sub}, 0)`);
-        const division = new Division(param.width / sub, param.height, v, color);
-        const meshSize = param.width / sub;
+        const color = new THREE.Color(`rgb(0, ${255 * index / squareCount}, 0)`);
+        const division = new Division(param.width / squareCount, param.height, v, color);
+        const meshSize = param.width / squareCount;
         division.mesh.position.x = - param.width / 2 + meshSize * index;
         division.mesh.position.y = 0;
         return division;

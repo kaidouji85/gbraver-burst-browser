@@ -5,10 +5,10 @@ import type {Resources} from "../../../resource/index";
 import type {BatterySelectorModel} from "../model/battery-selector";
 import {drawBatterySlider} from "../../../canvas/battery-slider/index";
 import * as THREE from "three";
-import {TouchLocation} from "../../../operation/slider/touch-location";
 import type {TouchRaycastContainer} from "../../../overlap/check/touch/touch-raycaster";
 import type {MouseRaycaster} from "../../../overlap/check/mouse/mouse-raycaster";
 import {SliderOperation} from "../../../operation/slider";
+import * as R from 'ramda';
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
@@ -60,8 +60,7 @@ export class BatterySliderView {
       .forEach(v => this._group.add(v));
 
     this._sliderOperation = new SliderOperation({
-      start: 0,
-      end: param.maxValue,
+      values: R.range(0, param.maxValue + 1),
       width: SLIDER_WIDTH,
       height: SLIDER_HEIGHT,
       onValueChange: v => param.onBatteryChange(v)
