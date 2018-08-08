@@ -16,14 +16,14 @@ import {gameStateDemo} from "./game-state-demo";
  * @param gameStateList 再生するゲームの状態
  * @return アニメーション
  */
-export function battleDemo(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): void {
+export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): void {
   const multiTween = gameStateList
     .map(v => gameStateDemo(view, sceneState, v))
-    .reduce((a: MultiTween, b: MultiTween) => {
-      b.end.chain(a.start);
+    .reduce((accumlator: MultiTween, current: MultiTween) => {
+      accumlator.end.chain(current.start);
       return {
-        start: b.start,
-        end: a.end
+        start: accumlator.start,
+        end: current.end
       };
     }, createEmptyMultiTween());
   multiTween.start.start();
