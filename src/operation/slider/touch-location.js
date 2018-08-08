@@ -33,11 +33,11 @@ export class TouchLocation {
     const sub = max - min;
 
     this._divisionList = R.range(min, max + 1)
-      .map(v => {
-        const color = new THREE.Color(`rgb(0, ${255 * v / sub}, 0)`);
+      .map((v, index) => {
+        const color = new THREE.Color(`rgb(0, ${255 * index / sub}, 0)`);
         const division = new Division(param.width / sub, param.height, v, color);
         const meshSize = param.width / sub;
-        division.mesh.position.x = - param.width / 2 + meshSize * division.value;
+        division.mesh.position.x = - param.width / 2 + meshSize * index;
         division.mesh.position.y = 0;
         return division;
       });
