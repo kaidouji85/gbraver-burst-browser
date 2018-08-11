@@ -74,7 +74,7 @@ export class SliderOperation {
   }
 
   _mouseMoveRaycaster(action: MouseMoveRaycaster): void {
-    if (!action.isLeftButtonClidked) {
+    if (!action.isLeftButtonClicked) {
       return;
     }
 
