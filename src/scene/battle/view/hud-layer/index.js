@@ -46,8 +46,6 @@ export class HudLayer {
   enemyHpGauge: HpGauge;
   /** 敵バッテリーゲージ */
   enemyBatteryGauge: BatteryGauge;
-  /** コウゲキボタン */
-  attackButton: Button;
   /** バッテリーセレクタ */
   batterySelector: BatterySelector;
   /** プレイヤーバーストゲージ */
@@ -73,9 +71,6 @@ export class HudLayer {
 
     this.enemyBatteryGauge = createEnemyBatteryGauge(param.resources, enemyInfo);
     this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
-
-    this.attackButton = createAttackButton(param.resources, param.notifier);
-    this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
     this.batterySelector = createBatterySelector(param.resources, param.listener, param.notifier, playerInfo);
     this.scene.add(this.batterySelector.getObject3D());

@@ -10,5 +10,4 @@ import {createMouseRaycaster} from "../../../../overlap/check/mouse/mouse-raycas
 export function mouseDown(view: BattleSceneView, state: BattleSceneState, action: MouseDown) {
   const mouseRaycaster: MouseRaycaster = createMouseRaycaster(action.event, view.renderer, view.hudLayer.camera);
 
-  view.hudLayer.attackButton.onMouseDown(mouseRaycaster);
 }
