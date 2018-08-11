@@ -2,7 +2,7 @@
 
 import type {BattleSceneState} from "../../state";
 import {BattleSceneView} from "../../view";
-import type {StartBattleScene} from "../../../../action/battle-scene/start-battle-scene";
+import type {StartBattleScene} from "../../../../observer/battle-scene/action/start-battle-scene";
 import {battleAnimation} from '../../animation/index';
 
 /**

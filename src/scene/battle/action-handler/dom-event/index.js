@@ -1,6 +1,6 @@
 // @flow
 
-import type {DOMEvent} from "../../../../action/dom-event/index";
+import type {DOMEvent} from "../../../../observer/dom-event/action/index";
 import {resize} from "./resize";
 import {mouseDown} from "./mouse-down";
 import {mouseMove} from "./mouse-move";

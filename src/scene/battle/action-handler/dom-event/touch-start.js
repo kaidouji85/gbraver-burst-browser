@@ -1,7 +1,7 @@
 // @flow
 
 import {BattleSceneView} from "../../view/index";
-import type {TouchStart} from "../../../../action/dom-event/touch-start";
+import type {TouchStart} from "../../../../observer/dom-event/action/touch-start";
 import type {BattleSceneState} from "../../state";
 import type {TouchRaycastContainer} from "../../../../overlap/check/touch/touch-raycaster";
 import {createTouchEventRaycaster} from "../../../../overlap/check/touch/touch-raycaster";

@@ -1,7 +1,7 @@
 // @flow
 
 import {BattleSceneView} from "../../view/index";
-import type {MouseUp} from "../../../../action/dom-event/mouse-up";
+import type {MouseUp} from "../../../../observer/dom-event/action/mouse-up";
 import type {BattleSceneState} from "../../state";
 import type {MouseRaycaster} from "../../../../overlap/check/mouse/mouse-raycaster";
 import {createMouseRaycaster} from "../../../../overlap/check/mouse/mouse-raycaster";

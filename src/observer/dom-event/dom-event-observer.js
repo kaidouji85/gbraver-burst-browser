@@ -1,6 +1,6 @@
 // @flow
 import {Observer} from "../base/observer";
-import type {DOMEvent} from "../../action/dom-event";
+import type {DOMEvent} from "./action/index";
 import {bindDOMEvent} from "./dom-event-binder";
 
 /** HTMLイベントのオブザーバ */
