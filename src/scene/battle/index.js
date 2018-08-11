@@ -8,13 +8,14 @@ import {Scene} from "three";
 import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
 import {domEventHandler} from "./action-handler/dom-event";
 import {gameLoop} from './game-loop';
-import {debugMode} from "./debug-mode";
 import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-observer";
 import type {DOMEvent} from "../../observer/dom-event/action/index";
 import type {BattleSceneAction} from "../../observer/battle-scene/action/index";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";
+import {RaycasterObserver} from "../../observer/raycaster/raycaster-observer";
+import {domEventToRaycasterAction} from "./domevent-toraycaster-action";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -49,6 +50,9 @@ export class BattleScene implements Scene{
   _domEventListener: DOMEventListener;
   /** 戦闘画面のオブザーバ */
   _battleSceneObserver: BattleSceneObserver;
+  /** レイキャスターオブザーバ */
+  _raycasterObserver: RaycasterObserver;
+
   /** 戦闘進行関数 */
   _progressBattle: ProgressBattle;
 
@@ -57,11 +61,23 @@ export class BattleScene implements Scene{
       playerId: params.playerId
     };
 
+    this._raycasterObserver = new RaycasterObserver();
+
     this._domEventListener = params.domEventListener;
-    this._domEventListener.add(this._domEventHandler.bind(this));
+    this._domEventListener.add(event => {
+      domEventHandler(event, this._view, this._state);
+    });
+    this._domEventListener.add(event => {
+      const raycasterAction = domEventToRaycasterAction(event, this._view);
+      if (raycasterAction) {
+        this._raycasterObserver.notify(raycasterAction);
+      }
+    });
 
     this._battleSceneObserver = new BattleSceneObserver();
-    this._battleSceneObserver.add(this._battleSceneActionHandler.bind(this));
+    this._battleSceneObserver.add(action => {
+      battleSceneActionHandler(action, this._view, this._state, this._progressBattle);
+    });
 
     this._progressBattle = params.progressBattle;
 
@@ -82,13 +98,5 @@ export class BattleScene implements Scene{
   /** ゲームループ */
   gameLoop(time: DOMHighResTimeStamp): void {
     gameLoop(this._view, this._state, time);
-  }
-
-  _domEventHandler(event: DOMEvent): void {
-    domEventHandler(event, this._view, this._state);
-  }
-
-  _battleSceneActionHandler(action: BattleSceneAction): void {
-    battleSceneActionHandler(action, this._view, this._state, this._progressBattle);
   }
 }
