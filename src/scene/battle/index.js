@@ -9,8 +9,6 @@ import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener
 import {domEventHandler} from "./action-handler/dom-event";
 import {gameLoop} from './game-loop';
 import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-observer";
-import type {DOMEvent} from "../../observer/dom-event/action/index";
-import type {BattleSceneAction} from "../../observer/battle-scene/action/index";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";

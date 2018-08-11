@@ -7,8 +7,6 @@ import {createEnemyHpGauge} from "./enemy-hp-gauge";
 import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-gauge";
 import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
-import {createAttackButton} from "./attack-button";
-import {Button} from "../../../../game-object/button/button/index";
 import {createCamera} from "./camera";
 import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
