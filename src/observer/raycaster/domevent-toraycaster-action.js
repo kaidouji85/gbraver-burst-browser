@@ -1,20 +1,20 @@
 // @flow
 
-import type {RaycasterAction} from "../../observer/raycaster/action";
-import type {DOMEvent} from "../../observer/dom-event/action";
-import {BattleSceneView} from "./view";
-import type {MouseDown} from "../../observer/dom-event/action/mouse-down";
+import type {RaycasterAction} from "./action/index";
+import type {DOMEvent} from "../dom-event/action/index";
+import {BattleSceneView} from "../../scene/battle/view/index";
+import type {MouseDown} from "../dom-event/action/mouse-down";
 import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
 import {createMouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
-import type {MouseDownRaycaster} from "../../observer/raycaster/action/mouse-down-raycaster";
-import type {MouseMoveRaycaster} from "../../observer/raycaster/action/mouse-move-raycaster";
-import type {MouseMove} from "../../observer/dom-event/action/mouse-move";
+import type {MouseDownRaycaster} from "./action/mouse-down-raycaster";
+import type {MouseMoveRaycaster} from "./action/mouse-move-raycaster";
+import type {MouseMove} from "../dom-event/action/mouse-move";
 import {isMouseLeftButtonPushed} from "../../mouse/mouse-left-button";
-import type {TouchStartRaycaster} from "../../observer/raycaster/action/touch-start-raycaster";
+import type {TouchStartRaycaster} from "./action/touch-start-raycaster";
 import {createTouchEventRaycaster} from "../../overlap/check/touch/touch-raycaster";
-import type {TouchMoveRaycaster} from "../../observer/raycaster/action/touch-move-raycaster";
-import type {TouchStart} from "../../observer/dom-event/action/touch-start";
-import type {TouchMove} from "../../observer/dom-event/action/touch-move";
+import type {TouchMoveRaycaster} from "./action/touch-move-raycaster";
+import type {TouchStart} from "../dom-event/action/touch-start";
+import type {TouchMove} from "../dom-event/action/touch-move";
 
 /**
  * DOMイベントをRaycasterアクションに変換する

@@ -13,7 +13,7 @@ import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";
 import {RaycasterObserver} from "../../observer/raycaster/raycaster-observer";
-import {domEventToRaycasterAction} from "./domevent-toraycaster-action";
+import {domEventToRaycasterAction} from "../../observer/raycaster/domevent-toraycaster-action";
 
 /** コンストラクタのパラメータ */
 type Params = {
