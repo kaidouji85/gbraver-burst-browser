@@ -5,11 +5,13 @@ import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {BattleSceneNotifier} from "../../../observer/battle-scene/battle-scene-notifier";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {RaycasterListener} from "../../../observer/raycaster/raycaster-listener";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   notifier: BattleSceneNotifier,
+  listener: RaycasterListener,
   renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
   players: Player[]
@@ -37,7 +39,8 @@ export class BattleSceneView {
       resources: param.resources,
       playerId: param.playerId,
       players: param.players,
-      notifier: param.notifier
+      notifier: param.notifier,
+      listener: param.listener
     });
   }
 

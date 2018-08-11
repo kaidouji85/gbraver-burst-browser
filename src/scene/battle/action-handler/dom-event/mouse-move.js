@@ -11,6 +11,4 @@ import {isMouseLeftButtonPushed} from "../../../../mouse/mouse-left-button";
 export function mouseMove(view: BattleSceneView, state: BattleSceneState, action: MouseMove) {
   const mouseRaycaster: MouseRaycaster = createMouseRaycaster(action.event, view.renderer, view.hudLayer.camera);
   const isLeftButtonPushed = isMouseLeftButtonPushed(action.event);
-
-  view.hudLayer.batterySelector.onMouseMove(mouseRaycaster, isLeftButtonPushed);
 }

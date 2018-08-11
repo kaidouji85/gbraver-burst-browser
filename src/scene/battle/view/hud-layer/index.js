@@ -17,12 +17,14 @@ import {BurstGauge} from "../../../../game-object/gauge/burst-gauge/burst-gauge"
 import {createPlayerBurstGauge} from "./player-burst-gauge";
 import {createEnemyBurstGauge} from "./enemy-burst-gauge";
 import {createBatterySelector} from "./battery-slider";
+import type {RaycasterListener} from "../../../../observer/raycaster/raycaster-listener";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
   playerId: PlayerId,
   players: Player[],
+  listener: RaycasterListener,
   notifier: BattleSceneNotifier
 };
 
@@ -75,7 +77,7 @@ export class HudLayer {
     this.attackButton = createAttackButton(param.resources, param.notifier);
     this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.batterySelector = createBatterySelector(param.resources, param.notifier, playerInfo);
+    this.batterySelector = createBatterySelector(param.resources, param.listener, param.notifier, playerInfo);
     this.scene.add(this.batterySelector.getObject3D());
 
     this.playerBurstGauge = createPlayerBurstGauge(param.resources);

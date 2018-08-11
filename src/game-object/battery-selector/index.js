@@ -13,10 +13,12 @@ import {getControllerScale} from "../../device-scale/controller-scale";
 import {map, filter, distinctUntilChanged} from 'rxjs/operators';
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {open} from './animation/open';
+import type {RaycasterListener} from "../../observer/raycaster/raycaster-listener";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
+  raycasterListener: RaycasterListener,
   maxBattery: number,
   onBatteryChange: (battery: number) => void
 };
@@ -43,6 +45,7 @@ export class BatterySelector {
     };
     this._view = new BatterySliderView({
       resources: param.resources,
+      raycasterListener: param.raycasterListener,
       maxValue: param.maxBattery,
       scale: getControllerScale(),
       onBatteryChange: battery => {
@@ -73,22 +76,6 @@ export class BatterySelector {
    */
   open(maxEnable: number): MultiTween {
     return open(this._model, this._tween, maxEnable);
-  }
-
-  onMouseDown(mouse: MouseRaycaster): void {
-    this._view.onMouseDown(mouse);
-  }
-
-  onMouseMove(mouse: MouseRaycaster, isLeftButtonPushed: boolean): void {
-    this._view.onMouseMove(mouse, isLeftButtonPushed);
-  }
-
-  onTouchStart(touch: TouchRaycastContainer): void {
-    this._view.onTouchStart(touch);
-  }
-
-  onTouchMove(touch: TouchRaycastContainer): void {
-    this._view.onTouchMove(touch);
   }
 
   getObject3D(): THREE.Object3D {

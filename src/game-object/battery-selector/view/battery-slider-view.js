@@ -5,20 +5,17 @@ import type {Resources} from "../../../resource/index";
 import type {BatterySelectorModel} from "../model/battery-selector";
 import {drawBatterySlider} from "../../../canvas/battery-slider/index";
 import * as THREE from "three";
-import type {TouchRaycastContainer} from "../../../overlap/check/touch/touch-raycaster";
-import type {MouseRaycaster} from "../../../overlap/check/mouse/mouse-raycaster";
 import {SliderOperation} from "../../../operation/slider";
 import * as R from 'ramda';
+import type {RaycasterListener} from "../../../observer/raycaster/raycaster-listener";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
 /** テクスチャの大きさ */
 export const TEXTURE_SIZE = 1024;
-/** バッテリースライダーのパディングボトム */
-export const PADDING_BOTTOM = 180;
-
+/** スライダー当たり判定の横幅 */
 export const SLIDER_WIDTH = 375;
-
+/** スライダー当たり判定の高さ */
 export const SLIDER_HEIGHT = 84;
 
 /** コンストラクタのパラメータ */
@@ -30,7 +27,9 @@ type Param = {
   /** デバイスに応じた表示倍率 */
   scale: number,
   /** バッテリーが変更された場合のコールバック関数 */
-  onBatteryChange: (battery: number) => void
+  onBatteryChange: (battery: number) => void,
+  /** レイキャスターアクションのリスナー */
+  raycasterListener: RaycasterListener
 };
 
 /** バッテリースライダーのビュー */
@@ -63,6 +62,7 @@ export class BatterySliderView {
       values: R.range(0, param.maxValue + 1),
       width: SLIDER_WIDTH,
       height: SLIDER_HEIGHT,
+      raycasterListener: param.raycasterListener,
       onValueChange: v => param.onBatteryChange(v)
     });
     this._group.add(this._sliderOperation.getObject3D());
@@ -100,22 +100,6 @@ export class BatterySliderView {
   /** オブジェクトのスケールを調整する */
   _refreshScale(): void {
     this._group.scale.set(this._scale, this._scale, this._scale);
-  }
-
-  onMouseDown(mouse: MouseRaycaster): void {
-    this._sliderOperation.onMouseDown(mouse);
-  }
-
-  onMouseMove(mouse: MouseRaycaster, isLeftButtonPushed: boolean): void {
-    this._sliderOperation.onMouseMove(mouse, isLeftButtonPushed);
-  }
-
-  onTouchStart(touch: TouchRaycastContainer): void {
-    this._sliderOperation.onTouchStart(touch);
-  }
-
-  onTouchMove(touch: TouchRaycastContainer): void {
-    this._sliderOperation.onTouchMove(touch);
   }
 
   getObject3D(): THREE.Object3D {

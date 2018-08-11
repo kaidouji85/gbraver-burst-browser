@@ -86,6 +86,7 @@ export class BattleScene implements Scene{
       playerId: params.playerId,
       players: params.players,
       notifier: this._battleSceneObserver,
+      listener: this._raycasterObserver,
       renderer: params.renderer
     });
 

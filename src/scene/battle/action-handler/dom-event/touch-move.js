@@ -9,6 +9,4 @@ import {createTouchEventRaycaster} from "../../../../overlap/check/touch/touch-r
 /** ゲーム画面内をタッチムーブした際のイベント */
 export function touchMove(view: BattleSceneView, state: BattleSceneState, action: TouchMove) {
   const hudRaycaster: TouchRaycastContainer = createTouchEventRaycaster(action.event, view.renderer, view.hudLayer.camera);
-
-  view.hudLayer.batterySelector.onTouchMove(hudRaycaster);
 }
