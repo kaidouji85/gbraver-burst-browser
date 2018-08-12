@@ -8,6 +8,7 @@ import * as THREE from "three";
 import {SliderOperation} from "../../../operation/slider";
 import * as R from 'ramda';
 import type {OverlapListener} from "../../../observer/overlap/overlap-listener";
+import {ButtonOperation} from "../../../operation/button";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
@@ -40,6 +41,8 @@ export class BatterySliderView {
   _canvasMesh: CanvasMesh;
   /** バッテリースライダーの当たり判定を行う */
   _sliderOperation: SliderOperation;
+  /** OKボタンの当たり判定を行う */
+  _okButtonOperation: ButtonOperation;
   /** ゲームループで使うためにリソース管理オブジェクトをキャッシュする */
   _resources: Resources;
   /** デバイスに応じた表示倍率 */
@@ -66,6 +69,13 @@ export class BatterySliderView {
       onValueChange: v => param.onBatteryChange(v)
     });
     this._group.add(this._sliderOperation.getObject3D());
+
+    this._okButtonOperation = new ButtonOperation({
+      width: 100,
+      height: 80
+    });
+    this._okButtonOperation.getObject3D().position.y = -200;
+    this._group.add(this._okButtonOperation.getObject3D());
   }
 
   /** ビューにモデルを反映させる */
