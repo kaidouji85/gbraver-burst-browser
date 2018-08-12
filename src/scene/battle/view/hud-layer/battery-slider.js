@@ -9,7 +9,7 @@ import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle
 /** バッテリーセレクタを生成する */
 export function createBatterySelector(resources: Resources, listener: OverlapListener, notifier: BattleSceneNotifier, playerInfo: Player): BatterySelector {
   return new BatterySelector({
-    raycasterListener: listener,
+    overlapListener: listener,
     maxBattery: playerInfo.armdozer.maxBattery,
     resources: resources,
     onBatteryChange: (battery: number) => console.log(battery),

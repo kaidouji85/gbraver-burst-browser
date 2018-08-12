@@ -17,7 +17,7 @@ type Param = {
   width: number,
   height: number,
   onValueChange: (value: number) => void,
-  raycasterListener: OverlapListener
+  overlapListener: OverlapListener
 };
 
 /** スライダーの当たり判定 */
@@ -33,7 +33,7 @@ export class SliderOperation {
       height: param.height
     });
 
-    this._raycasterListener = param.raycasterListener;
+    this._raycasterListener = param.overlapListener;
     this._raycasterListener.add(action => {
       this._raycasterActionHandler(action);
     });

@@ -18,7 +18,7 @@ import type {OverlapListener} from "../../observer/overlap/overlap-listener";
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  raycasterListener: OverlapListener,
+  overlapListener: OverlapListener,
   maxBattery: number,
   onBatteryChange: (battery: number) => void
 };
@@ -45,7 +45,7 @@ export class BatterySelector {
     };
     this._view = new BatterySliderView({
       resources: param.resources,
-      raycasterListener: param.raycasterListener,
+      overlapListener: param.overlapListener,
       maxValue: param.maxBattery,
       scale: getControllerScale(),
       onBatteryChange: battery => {

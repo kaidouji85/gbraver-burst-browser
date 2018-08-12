@@ -29,8 +29,8 @@ type Param = {
   scale: number,
   /** バッテリーが変更された場合のコールバック関数 */
   onBatteryChange: (battery: number) => void,
-  /** レイキャスターアクションのリスナー */
-  raycasterListener: OverlapListener
+  /** 当たり判定関連のリスナー */
+  overlapListener: OverlapListener
 };
 
 /** バッテリースライダーのビュー */
@@ -65,14 +65,15 @@ export class BatterySliderView {
       values: R.range(0, param.maxValue + 1),
       width: SLIDER_WIDTH,
       height: SLIDER_HEIGHT,
-      raycasterListener: param.raycasterListener,
+      overlapListener: param.overlapListener,
       onValueChange: v => param.onBatteryChange(v)
     });
     this._group.add(this._sliderOperation.getObject3D());
 
     this._okButtonOperation = new ButtonOperation({
       width: 100,
-      height: 80
+      height: 80,
+      listener: param.overlapListener
     });
     this._okButtonOperation.getObject3D().position.y = -200;
     this._group.add(this._okButtonOperation.getObject3D());
