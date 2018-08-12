@@ -1,13 +1,13 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player} from "gbraver-burst-core/lib/player/player";
-import type {RaycasterListener} from "../../../../observer/raycaster/raycaster-listener";
+import type {OverlapListener} from "../../../../observer/overlap/overlap-listener";
+import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 
 /** バッテリーセレクタを生成する */
-export function createBatterySelector(resources: Resources, listener: RaycasterListener, notifier: BattleSceneNotifier, playerInfo: Player): BatterySelector {
+export function createBatterySelector(resources: Resources, listener: OverlapListener, notifier: BattleSceneNotifier, playerInfo: Player): BatterySelector {
   return new BatterySelector({
     raycasterListener: listener,
     maxBattery: playerInfo.armdozer.maxBattery,

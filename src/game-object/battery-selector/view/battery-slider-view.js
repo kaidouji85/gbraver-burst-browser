@@ -7,7 +7,7 @@ import {drawBatterySlider} from "../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {SliderOperation} from "../../../operation/slider";
 import * as R from 'ramda';
-import type {RaycasterListener} from "../../../observer/raycaster/raycaster-listener";
+import type {OverlapListener} from "../../../observer/overlap/overlap-listener";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
@@ -29,7 +29,7 @@ type Param = {
   /** バッテリーが変更された場合のコールバック関数 */
   onBatteryChange: (battery: number) => void,
   /** レイキャスターアクションのリスナー */
-  raycasterListener: RaycasterListener
+  raycasterListener: OverlapListener
 };
 
 /** バッテリースライダーのビュー */

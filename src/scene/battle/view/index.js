@@ -3,15 +3,15 @@ import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
-import type {BattleSceneNotifier} from "../../../observer/battle-scene/battle-scene-notifier";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import type {RaycasterListener} from "../../../observer/raycaster/raycaster-listener";
+import type {OverlapListener} from "../../../observer/overlap/overlap-listener";
+import type {BattleSceneNotifier} from "../../../observer/battle-scene/battle-scene-notifier";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   notifier: BattleSceneNotifier,
-  listener: RaycasterListener,
+  listener: OverlapListener,
   renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
   players: Player[]

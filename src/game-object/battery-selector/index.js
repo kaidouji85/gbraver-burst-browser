@@ -13,12 +13,12 @@ import {getControllerScale} from "../../device-scale/controller-scale";
 import {map, filter, distinctUntilChanged} from 'rxjs/operators';
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {open} from './animation/open';
-import type {RaycasterListener} from "../../observer/raycaster/raycaster-listener";
+import type {OverlapListener} from "../../observer/overlap/overlap-listener";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  raycasterListener: RaycasterListener,
+  raycasterListener: OverlapListener,
   maxBattery: number,
   onBatteryChange: (battery: number) => void
 };

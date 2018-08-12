@@ -15,14 +15,14 @@ import {BurstGauge} from "../../../../game-object/gauge/burst-gauge/burst-gauge"
 import {createPlayerBurstGauge} from "./player-burst-gauge";
 import {createEnemyBurstGauge} from "./enemy-burst-gauge";
 import {createBatterySelector} from "./battery-slider";
-import type {RaycasterListener} from "../../../../observer/raycaster/raycaster-listener";
+import type {OverlapListener} from "../../../../observer/overlap/overlap-listener";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
   playerId: PlayerId,
   players: Player[],
-  listener: RaycasterListener,
+  listener: OverlapListener,
   notifier: BattleSceneNotifier
 };
 

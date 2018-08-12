@@ -5,5 +5,5 @@ import type {MouseMoveRaycaster} from "./mouse-move-raycaster";
 import type {TouchStartRaycaster} from "./touch-start-raycaster";
 import type {TouchMoveRaycaster} from "./touch-move-raycaster";
 
-export type RaycasterAction = MouseDownRaycaster | MouseMoveRaycaster | TouchStartRaycaster | TouchMoveRaycaster;
+export type OverlapAction = MouseDownRaycaster | MouseMoveRaycaster | TouchStartRaycaster | TouchMoveRaycaster;
 

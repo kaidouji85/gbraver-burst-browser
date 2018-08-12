@@ -12,8 +12,8 @@ import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-obse
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";
-import {RaycasterObserver} from "../../observer/raycaster/raycaster-observer";
-import {domEventToRaycasterAction} from "../../observer/raycaster/domevent-toraycaster-action";
+import {OverlapObserver} from "../../observer/overlap/overlap-observer";
+import {domEventToOverlapEvent} from "../../action/overlap/dom-event-to-overlap-event";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -49,7 +49,7 @@ export class BattleScene implements Scene{
   /** 戦闘画面のオブザーバ */
   _battleSceneObserver: BattleSceneObserver;
   /** レイキャスターオブザーバ */
-  _raycasterObserver: RaycasterObserver;
+  _raycasterObserver: OverlapObserver;
 
   /** 戦闘進行関数 */
   _progressBattle: ProgressBattle;
@@ -59,14 +59,14 @@ export class BattleScene implements Scene{
       playerId: params.playerId
     };
 
-    this._raycasterObserver = new RaycasterObserver();
+    this._raycasterObserver = new OverlapObserver();
 
     this._domEventListener = params.domEventListener;
     this._domEventListener.add(event => {
       domEventHandler(event, this._view, this._state);
     });
     this._domEventListener.add(event => {
-      const raycasterAction = domEventToRaycasterAction(event, this._view);
+      const raycasterAction = domEventToOverlapEvent(event, this._view);
       if (raycasterAction) {
         this._raycasterObserver.notify(raycasterAction);
       }

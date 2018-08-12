@@ -1,6 +1,6 @@
 // @flow
 
-import type {BattleSceneAction} from "./action/index";
+import type {BattleSceneAction} from "../../action/battle-scene/index";
 import type {Notifier} from "../base/notifier";
 
 /** 戦闘シーンアクション通知者 */

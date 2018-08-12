@@ -1,6 +1,6 @@
 // @flow
 
-import type {DOMEventNotifier} from "./dom-event-notifier";
+import type {DOMEventNotifier} from "../../observer/dom-event/dom-event-notifier";
 
 /** HTMLイベント通知者と実際のHTMLイベントを関連づける */
 export function bindDOMEvent(notifier: DOMEventNotifier, renderDom: HTMLElement): void {

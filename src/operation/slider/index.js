@@ -4,12 +4,12 @@ import {TouchLocation} from "./touch-location";
 import {Subject} from "rxjs";
 import {distinctUntilChanged, filter, map} from "rxjs/operators";
 import * as THREE from 'three';
-import type {RaycasterListener} from "../../observer/raycaster/raycaster-listener";
-import type {RaycasterAction} from "../../observer/raycaster/action";
-import type {MouseDownRaycaster} from "../../observer/raycaster/action/mouse-down-raycaster";
-import type {MouseMoveRaycaster} from "../../observer/raycaster/action/mouse-move-raycaster";
-import type {TouchStartRaycaster} from "../../observer/raycaster/action/touch-start-raycaster";
-import type {TouchMoveRaycaster} from "../../observer/raycaster/action/touch-move-raycaster";
+import type {OverlapListener} from "../../observer/overlap/overlap-listener";
+import type {OverlapAction} from "../../action/overlap/index";
+import type {MouseDownRaycaster} from "../../action/overlap/mouse-down-raycaster";
+import type {MouseMoveRaycaster} from "../../action/overlap/mouse-move-raycaster";
+import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";
+import type {TouchMoveRaycaster} from "../../action/overlap/touch-move-raycaster";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -17,14 +17,14 @@ type Param = {
   width: number,
   height: number,
   onValueChange: (value: number) => void,
-  raycasterListener: RaycasterListener
+  raycasterListener: OverlapListener
 };
 
 /** スライダーの当たり判定 */
 export class SliderOperation {
   _touchLocation: TouchLocation;
   _onOverlap: Subject<number[]>;
-  _raycasterListener: RaycasterListener;
+  _raycasterListener: OverlapListener;
 
   constructor(param: Param) {
     this._touchLocation = new TouchLocation({
@@ -49,7 +49,7 @@ export class SliderOperation {
   }
 
   /** レイキャスターアクションのハンドラ */
-  _raycasterActionHandler(action: RaycasterAction): void {
+  _raycasterActionHandler(action: OverlapAction): void {
     switch (action.type) {
       case 'mouseDownRaycaster':
         this._mouseDownRaycaster(action);

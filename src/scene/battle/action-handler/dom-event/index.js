@@ -1,6 +1,6 @@
 // @flow
 
-import type {DOMEvent} from "../../../../observer/dom-event/action/index";
+import type {DOMEvent} from "../../../../action/dom-event/index";
 import {resize} from "./resize";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state";

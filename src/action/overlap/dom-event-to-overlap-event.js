@@ -1,20 +1,20 @@
 // @flow
 
-import type {RaycasterAction} from "./action/index";
-import type {DOMEvent} from "../dom-event/action/index";
+import type {OverlapAction} from "./index";
+import type {DOMEvent} from "../dom-event/index";
 import {BattleSceneView} from "../../scene/battle/view/index";
-import type {MouseDown} from "../dom-event/action/mouse-down";
+import type {MouseDown} from "../dom-event/mouse-down";
 import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
 import {createMouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
-import type {MouseDownRaycaster} from "./action/mouse-down-raycaster";
-import type {MouseMoveRaycaster} from "./action/mouse-move-raycaster";
-import type {MouseMove} from "../dom-event/action/mouse-move";
+import type {MouseDownRaycaster} from "./mouse-down-raycaster";
+import type {MouseMoveRaycaster} from "./mouse-move-raycaster";
+import type {MouseMove} from "../dom-event/mouse-move";
 import {isMouseLeftButtonPushed} from "../../mouse/mouse-left-button";
-import type {TouchStartRaycaster} from "./action/touch-start-raycaster";
+import type {TouchStartRaycaster} from "./touch-start-raycaster";
 import {createTouchEventRaycaster} from "../../overlap/check/touch/touch-raycaster";
-import type {TouchMoveRaycaster} from "./action/touch-move-raycaster";
-import type {TouchStart} from "../dom-event/action/touch-start";
-import type {TouchMove} from "../dom-event/action/touch-move";
+import type {TouchMoveRaycaster} from "./touch-move-raycaster";
+import type {TouchStart} from "../dom-event/touch-start";
+import type {TouchMove} from "../dom-event/touch-move";
 
 /**
  * DOMイベントをRaycasterアクションに変換する
@@ -23,7 +23,7 @@ import type {TouchMove} from "../dom-event/action/touch-move";
  * @param view 戦闘画面ビュー
  * @return Raycasterアクション、対応するものがない場合はnullを返す
  */
-export function domEventToRaycasterAction(domEvent: DOMEvent, view: BattleSceneView): ?RaycasterAction {
+export function domEventToOverlapEvent(domEvent: DOMEvent, view: BattleSceneView): ?OverlapAction {
   switch(domEvent.type) {
     case 'mouseDown':
       return mouseDown(domEvent, view);
