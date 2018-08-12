@@ -73,7 +73,10 @@ export class BatterySliderView {
     this._okButtonOperation = new ButtonOperation({
       width: 100,
       height: 80,
-      listener: param.overlapListener
+      listener: param.overlapListener,
+      onButtonPush: () => {
+        console.log('button pushed!!');
+      }
     });
     this._okButtonOperation.getObject3D().position.y = -200;
     this._group.add(this._okButtonOperation.getObject3D());
