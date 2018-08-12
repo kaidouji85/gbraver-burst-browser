@@ -1,18 +1,17 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import {BatterySlider} from "../../../../game-object/slider/battery-slider";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
+import {BatterySelector} from "../../../../game-object/battery-selector";
+import type {Player} from "gbraver-burst-core/lib/player/player";
+import type {RaycasterListener} from "../../../../observer/raycaster/raycaster-listener";
 
-/** バッテリースライダーを生成する */
-export function createBatterySlider(resources: Resources, notifier: BattleSceneNotifier): BatterySlider {
-  const slider = new BatterySlider({
-    resources,
-    onBatteryChange: (battery: number) => {
-      // TODO オブザーバに通知する
-      console.log(`change battery ${battery}`);
-    },
-    isVisible: false
+/** バッテリーセレクタを生成する */
+export function createBatterySelector(resources: Resources, listener: RaycasterListener, notifier: BattleSceneNotifier, playerInfo: Player): BatterySelector {
+  return new BatterySelector({
+    raycasterListener: listener,
+    maxBattery: playerInfo.armdozer.maxBattery,
+    resources: resources,
+    onBatteryChange: (battery: number) => console.log(battery),
   });
-  return slider;
 }

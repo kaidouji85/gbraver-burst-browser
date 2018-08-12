@@ -40,6 +40,8 @@ export class CanvasScene {
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.autoClear = false;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setClearColor(0xffffff, 1.0);
+    this.renderer.clear();
 
     this.scene = new THREE.Scene();
 

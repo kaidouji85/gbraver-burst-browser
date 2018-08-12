@@ -7,23 +7,22 @@ import {createEnemyHpGauge} from "./enemy-hp-gauge";
 import {BatteryGauge} from "../../../../game-object/gauge/battery-gauge/battery-gauge";
 import {createPlayerBatteryGauge} from "./player-battery-gauge";
 import {createEnemyBatteryGauge} from "./enemy-battery-gauge";
-import {createAttackButton} from "./attack-button";
-import {Button} from "../../../../game-object/button/button/index";
 import {createCamera} from "./camera";
-import {BatterySlider} from "../../../../game-object/slider/battery-slider";
-import {createBatterySlider} from "./battery-slider";
+import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {BurstGauge} from "../../../../game-object/gauge/burst-gauge/burst-gauge";
 import {createPlayerBurstGauge} from "./player-burst-gauge";
 import {createEnemyBurstGauge} from "./enemy-burst-gauge";
-import {createOkButton} from "./ok-button";
+import {createBatterySelector} from "./battery-slider";
+import type {RaycasterListener} from "../../../../observer/raycaster/raycaster-listener";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
   playerId: PlayerId,
   players: Player[],
+  listener: RaycasterListener,
   notifier: BattleSceneNotifier
 };
 
@@ -45,12 +44,8 @@ export class HudLayer {
   enemyHpGauge: HpGauge;
   /** 敵バッテリーゲージ */
   enemyBatteryGauge: BatteryGauge;
-  /** コウゲキボタン */
-  attackButton: Button;
-  /** ケッテイボタン */
-  okButton: Button;
-  /** バッテリースライダー */
-  batterySlider: BatterySlider;
+  /** バッテリーセレクタ */
+  batterySelector: BatterySelector;
   /** プレイヤーバーストゲージ */
   playerBurstGauge: BurstGauge;
   /** 敵バーストゲージ */
@@ -75,14 +70,8 @@ export class HudLayer {
     this.enemyBatteryGauge = createEnemyBatteryGauge(param.resources, enemyInfo);
     this.enemyBatteryGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));
 
-    this.attackButton = createAttackButton(param.resources, param.notifier);
-    this.attackButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
-
-    this.okButton = createOkButton(param.resources, param.notifier);
-    this.okButton.getThreeJsObjectList().forEach(v => this.scene.add(v));
-
-    this.batterySlider = createBatterySlider(param.resources, param.notifier);
-    this.batterySlider.getThreeJsObjectList().forEach(v => this.scene.add(v));
+    this.batterySelector = createBatterySelector(param.resources, param.listener, param.notifier, playerInfo);
+    this.scene.add(this.batterySelector.getObject3D());
 
     this.playerBurstGauge = createPlayerBurstGauge(param.resources);
     this.playerBurstGauge.getThreeJsObjectList().forEach(v => this.scene.add(v));

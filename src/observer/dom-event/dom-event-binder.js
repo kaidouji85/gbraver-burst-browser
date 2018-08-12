@@ -1,7 +1,6 @@
 // @flow
 
 import type {DOMEventNotifier} from "./dom-event-notifier";
-import {WindowResize} from "./resize";
 
 /** HTMLイベント通知者と実際のHTMLイベントを関連づける */
 export function bindDOMEvent(notifier: DOMEventNotifier, renderDom: HTMLElement): void {

@@ -26,10 +26,11 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_GAUGE_LABEL: 'BATTERY_GAUGE_LABEL',
   BATTERY_BAR_UP: 'BATTERY_BAR_UP',
   BATTERY_BAR_DOWN: 'BATTERY_BAR_DOWN',
+  BATTERY_SLIDER_ACTIVE_BAR: 'BATTERY_SLIDER_ACTIVE_BAR',
+  BATTERY_SLIDER_DIS_ACTIVE_BAR: 'BATTERY_SLIDER_DIS_ACTIVE_BAR',
   BATTERY_SLIDER_BASE: 'BATTERY_SLIDER_BASE',
-  BATTERY_SLIDER_GAUGE: 'BATTERY_SLIDER_GAUGE',
-  BATTERY_SLIDER_BACK: 'BATTERY_SLIDER_BACK',
-  BATTERY_SLIDER_SHADOW: 'BATTERY_SLIDER_SHADOW',
+  BATTERY_SLIDER_POINTER: 'BATTERY_SLIDER_POINTER',
+  BATTERY_SLIDER_WINDOW: 'BATTERY_SLIDER_WINDOW',
   BURST_GAUGE_ACTIVE: 'BURST_GAUGE_ACTIVE',
   BURST_GAUGE_DISACTIVE: 'BURST_GAUGE_DISACTIVE',
   ATTACK_BUTTON: 'ATTACK_BUTTON',
@@ -66,6 +67,26 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'gauge/hp-gauge/hp-gauge-label.png',
   },
   {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_ACTIVE_BAR,
+    path: 'battery-slider/active-bar.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_DIS_ACTIVE_BAR,
+    path: 'battery-slider/dis-active-bar.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_BASE,
+    path: 'battery-slider/base.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_POINTER,
+    path: 'battery-slider/pointer.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_WINDOW,
+    path: 'battery-slider/window.png',
+  },
+  {
     id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL,
     path: 'gauge/battery-gauge/battery-gauge-label.png',
   },
@@ -76,22 +97,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BATTERY_BAR_DOWN,
     path: 'gauge/battery-gauge/battery-bar-down.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_BASE,
-    path: 'slider/battery-slider/battery-slider-base.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_GAUGE,
-    path: 'slider/battery-slider/battery-slider-gauge.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_BACK,
-    path: 'slider/battery-slider/battery-slider-back.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_SLIDER_SHADOW,
-    path: 'slider/battery-slider/battery-slider-shadow.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BURST_GAUGE_ACTIVE,
