@@ -56,6 +56,7 @@ function okButton(context: CanvasRenderingContext2D, resources: Resources, model
   const attackButton: Image = attackButtonResource ? attackButtonResource.image : new Image();
   const dx = context.canvas.width / 2;
   const dy = context.canvas.height / 2 + 96;
+  const scale = model.okButton.depth * 0.1 + 1;
 
-  drawImageInCenter(context, attackButton, dx, dy);
+  drawImageInCenter(context, attackButton, dx, dy, scale);
 }

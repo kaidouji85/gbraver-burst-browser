@@ -30,12 +30,14 @@ type Param = {
   resources: Resources,
   /** ゲージ最大値 */
   maxValue: number,
+  /** 当たり判定関連のリスナー */
+  overlapListener: OverlapListener,
   /** デバイスに応じた表示倍率 */
   scale: number,
   /** バッテリーが変更された場合のコールバック関数 */
   onBatteryChange: (battery: number) => void,
-  /** 当たり判定関連のリスナー */
-  overlapListener: OverlapListener
+  /** OKボタンが押された時のコールバック関数 */
+  onOkButtonPush: () => void,
 };
 
 /** バッテリースライダーのビュー */
@@ -81,7 +83,7 @@ export class BatterySliderView {
       height: BUTTON_HEIGHT,
       listener: param.overlapListener,
       onButtonPush: () => {
-        console.log('button pushed!!');
+        param.onOkButtonPush();
       }
     });
     this._okButtonOperation.getObject3D().position.y = -48;

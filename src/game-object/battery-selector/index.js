@@ -14,13 +14,15 @@ import {map, filter, distinctUntilChanged} from 'rxjs/operators';
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {open} from './animation/open';
 import type {OverlapListener} from "../../observer/overlap/overlap-listener";
+import {pushOkButton} from "./animation/push-ok-button";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   overlapListener: OverlapListener,
   maxBattery: number,
-  onBatteryChange: (battery: number) => void
+  onBatteryChange: (battery: number) => void,
+  onOkButtonPush: () => void,
 };
 
 /** バッテリーセレクタ */
@@ -40,6 +42,9 @@ export class BatterySelector {
         max: param.maxBattery,
         enableMax: param.maxBattery
       },
+      okButton: {
+        depth: 0
+      },
       disabled: false,
       opacity: 0
     };
@@ -57,6 +62,15 @@ export class BatterySelector {
         this._tween.removeAll();
         changeBattery(this._model, this._tween, battery).start();
         param.onBatteryChange(battery);
+      },
+      onOkButtonPush: () => {
+        if (this._model.disabled) {
+          return;
+        }
+
+        const animation = pushOkButton(this._model, this._tween);
+        animation.start.start();
+        animation.end.onComplete(() => param.onOkButtonPush());
       }
     });
     this._tween = new Group();
