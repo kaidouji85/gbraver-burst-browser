@@ -24,8 +24,8 @@ export class ButtonOperation {
 
   constructor(param: Param) {
     this._overlap = new ButtonOverlap({
-      width: 100,
-      height: 100
+      width: param.width,
+      height: param.height
     });
 
     this._listener = param.listener;

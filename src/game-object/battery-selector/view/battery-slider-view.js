@@ -15,10 +15,14 @@ import {refreshGauge} from "./refresh-gauge";
 export const MESH_SIZE = 512;
 /** テクスチャの大きさ */
 export const TEXTURE_SIZE = 1024;
-/** スライダー当たり判定の横幅 */
-export const SLIDER_WIDTH = 615 / 2;
-/** スライダー当たり判定の高さ */
+/** スライダー当たり判定横幅 */
+export const SLIDER_WIDTH = 307.5;
+/** スライダー当たり判定高 */
 export const SLIDER_HEIGHT = 84;
+/** OKボタンの当たり判定横幅 */
+export const BUTTON_WIDTH = 182.5;
+/** OKボタンの当たり判定横高 */
+export const BUTTON_HEIGHT = 58.5;
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -73,14 +77,14 @@ export class BatterySliderView {
     this._group.add(this._sliderOperation.getObject3D());
 
     this._okButtonOperation = new ButtonOperation({
-      width: 100,
-      height: 80,
+      width: BUTTON_WIDTH,
+      height: BUTTON_HEIGHT,
       listener: param.overlapListener,
       onButtonPush: () => {
         console.log('button pushed!!');
       }
     });
-    this._okButtonOperation.getObject3D().position.y = -200;
+    this._okButtonOperation.getObject3D().position.y = -48;
     this._group.add(this._okButtonOperation.getObject3D());
   }
 
