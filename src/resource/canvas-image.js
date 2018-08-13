@@ -31,13 +31,9 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_SELECTOR_BASE: 'BATTERY_SELECTOR_BASE',
   BATTERY_SELECTOR_POINTER: 'BATTERY_SELECTOR_POINTER',
   BATTERY_SELECTOR_WINDOW: 'BATTERY_SELECTOR_WINDOW',
+  BATTERY_SELECTOR_ATTACK_BUTTON: 'BATTERY_SELECTOR_ATTACK_BUTTON',
   BURST_GAUGE_ACTIVE: 'BURST_GAUGE_ACTIVE',
   BURST_GAUGE_DISACTIVE: 'BURST_GAUGE_DISACTIVE',
-  ATTACK_BUTTON: 'ATTACK_BUTTON',
-  DEFENSE_BUTTON: 'DEFENSE_BUTTON',
-  BURST_BUTTON: 'BURST_BUTTON',
-  OK_BUTTON: 'OK_BUTTON',
-  BUTTON_SHADOW: 'BUTTON_SHADOW',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -68,23 +64,27 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SELECTOR_ACTIVE_BAR,
-    path: 'battery-slider/active-bar.png',
+    path: 'battery-selector/active-bar.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SELECTOR_DIS_ACTIVE_BAR,
-    path: 'battery-slider/dis-active-bar.png',
+    path: 'battery-selector/dis-active-bar.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SELECTOR_BASE,
-    path: 'battery-slider/base.png',
+    path: 'battery-selector/base.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SELECTOR_POINTER,
-    path: 'battery-slider/pointer.png',
+    path: 'battery-selector/pointer.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SELECTOR_WINDOW,
-    path: 'battery-slider/window.png',
+    path: 'battery-selector/window.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_SELECTOR_ATTACK_BUTTON,
+    path: 'battery-selector/attack-button.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL,
@@ -105,26 +105,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BURST_GAUGE_DISACTIVE,
     path: 'gauge/burst-gauge/burst-disactive.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.ATTACK_BUTTON,
-    path: 'button/attack-button.png'
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DEFENSE_BUTTON,
-    path: 'button/defense-button.png'
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BURST_BUTTON,
-    path: 'button/burst-button.png'
-  },
-  {
-    id: CANVAS_IMAGE_IDS.OK_BUTTON,
-    path: 'button/ok-button.png'
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BUTTON_SHADOW,
-    path: 'button/button-shadow.png'
   }
 ];
 
