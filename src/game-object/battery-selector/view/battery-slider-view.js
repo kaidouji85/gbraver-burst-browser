@@ -9,6 +9,7 @@ import {SliderOperation} from "../../../operation/slider";
 import * as R from 'ramda';
 import type {OverlapListener} from "../../../observer/overlap/overlap-listener";
 import {ButtonOperation} from "../../../operation/button";
+import {refreshGauge} from "./refresh-gauge";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 512;
@@ -68,6 +69,7 @@ export class BatterySliderView {
       overlapListener: param.overlapListener,
       onValueChange: v => param.onBatteryChange(v)
     });
+    this._sliderOperation.getObject3D().position.y += 48;
     this._group.add(this._sliderOperation.getObject3D());
 
     this._okButtonOperation = new ButtonOperation({
@@ -88,32 +90,17 @@ export class BatterySliderView {
     this._refreshGauge(model);
   }
 
-  /** バッテリースライダーを更新する */
-  _refreshGauge(model: BatterySelectorModel): void {
-    this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
-      context.clearRect(0, 0, this._canvasMesh.canvas.width, this._canvasMesh.canvas.height);
-      context.save();
-      context.globalAlpha = model.opacity;
-
-      // バッテリースライダーが中央に描画されるようにする
-      const dx = this._canvasMesh.canvas.width / 2;
-      const dy = this._canvasMesh.canvas.height / 2;
-
-      drawBatterySlider(context, this._resources, {
-        battery: model.slider.battery,
-        maxEnableBattery: model.slider.enableMax,
-        maxBattery: model.slider.max,
-        dx: dx,
-        dy: dy
-      });
-
-      context.restore();
-    });
-  }
 
   /** オブジェクトのスケールを調整する */
   _refreshScale(): void {
     this._group.scale.set(this._scale, this._scale, this._scale);
+  }
+
+  /** バッテリースライダーを更新する */
+  _refreshGauge(model: BatterySelectorModel): void {
+    this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
+      refreshGauge(context, this._resources, model);
+    });
   }
 
   getObject3D(): THREE.Object3D {
