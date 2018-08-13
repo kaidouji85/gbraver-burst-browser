@@ -15,7 +15,7 @@ export const MESH_SIZE = 512;
 /** テクスチャの大きさ */
 export const TEXTURE_SIZE = 1024;
 /** スライダー当たり判定の横幅 */
-export const SLIDER_WIDTH = 375;
+export const SLIDER_WIDTH = 615 / 2;
 /** スライダー当たり判定の高さ */
 export const SLIDER_HEIGHT = 84;
 
@@ -119,6 +119,4 @@ export class BatterySliderView {
   getObject3D(): THREE.Object3D {
     return this._group;
   }
-
-
 }

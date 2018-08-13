@@ -3,9 +3,8 @@
 import type {BatterySliderParam} from "./param";
 import * as R from 'ramda';
 
-export const PADDING_TOP = 24;
-export const LINE_HEIGHT = 64;
-export const METER_WIDTH = 721;
+export const LINE_HEIGHT = 32;
+export const METER_WIDTH = 615;
 export const LINE_COLOR = '#FDFDFD';
 export const NUMBER_COLOR = '#FDFDFD';
 
@@ -19,11 +18,11 @@ export const NUMBER_COLOR = '#FDFDFD';
 export function drawMeterScale(context: CanvasRenderingContext2D, param: BatterySliderParam) {
   R.range(0, param.maxBattery + 1).forEach(v => {
     const lineX = param.dx - METER_WIDTH / 2 + METER_WIDTH / param.maxBattery * v;
-    const lineY = param.dy + PADDING_TOP;
+    const lineY = param.dy;
     drawLine(context, lineX, lineY);
 
     const numberX = lineX;
-    const numberY = lineY + 96;
+    const numberY = lineY + LINE_HEIGHT + 32;
     drawNumber(context, v, numberX, numberY);
   });
 }

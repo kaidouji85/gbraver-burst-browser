@@ -64,7 +64,7 @@ export class BatterySelector {
 
   /** ゲームループの処理 */
   gameLoop(time: DOMHighResTimeStamp): void {
-    this._tween.update();
+    this._tween.update(time);
     this._view.engage(this._model);
   }
 

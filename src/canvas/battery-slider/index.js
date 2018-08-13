@@ -26,10 +26,10 @@ export function drawBatterySlider(context: CanvasRenderingContext2D, resources: 
   const pointerResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_POINTER);
   const pointer = pointerResource ? pointerResource.image : new Image();
 
+  drawMeterScale(context, param);
   drawImageInCenter(context, sliderBase, param.dx, param.dy);
   drawDisActiveBar(context, disActiveBar, param);
   drawActiveBar(context, activeBar, param);
-  drawMeterScale(context, param);
   drawPointer(context, pointer, activeBar.width, param);
 
 }
