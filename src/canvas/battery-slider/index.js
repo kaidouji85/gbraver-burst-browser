@@ -17,13 +17,13 @@ import {drawMeterScale} from "./meter-scale";
  * @param param バッテリースライダー描画パラメータ
  */
 export function drawBatterySlider(context: CanvasRenderingContext2D, resources: Resources, param: BatterySliderParam): void {
-  const sliderBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_BASE);
+  const sliderBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_BASE);
   const sliderBase: Image = sliderBaseResource ? sliderBaseResource.image : new Image();
-  const activeBarResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_ACTIVE_BAR);
+  const activeBarResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_ACTIVE_BAR);
   const activeBar: Image = activeBarResource ? activeBarResource.image : new Image();
-  const disActiveBarResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_DIS_ACTIVE_BAR);
+  const disActiveBarResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_DIS_ACTIVE_BAR);
   const disActiveBar: Image = disActiveBarResource ? disActiveBarResource.image : new Image();
-  const pointerResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_POINTER);
+  const pointerResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_POINTER);
   const pointer = pointerResource ? pointerResource.image : new Image();
 
   drawMeterScale(context, param);

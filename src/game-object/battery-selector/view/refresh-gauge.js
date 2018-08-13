@@ -26,7 +26,7 @@ export function refreshGauge(context: CanvasRenderingContext2D, resources: Resou
 }
 
 function selectorWindow(context: CanvasRenderingContext2D, resources: Resources): void {
-  const windowResouece: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_WINDOW);
+  const windowResouece: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_WINDOW);
   const windowImage = windowResouece ? windowResouece.image : new Image();
   const dx = context.canvas.width / 2;
   const dy = context.canvas.height / 2;
