@@ -10,16 +10,17 @@ import {createEmptyTween} from "../../../tween/empty-tween";
  *
  * @param model モデル
  * @param group Tweenグループ
+ * @param initialValue 初期値
  * @param maxEnable 選択可能な最大値
  * @return MultiTween
  */
-export function open(model: BatterySelectorModel, group: Group, maxEnable: number): MultiTween {
+export function open(model: BatterySelectorModel, group: Group,initialValue: number, maxEnable: number): MultiTween {
   const start = new Tween(model, group)
     .onStart(() => {
       model.disabled = true;
       model.opacity = 0;
       model.slider.enableMax = maxEnable;
-      model.slider.battery = 0;
+      model.slider.battery = initialValue;
     })
     .to({opacity: 1}, 300)
     .onComplete(() => {

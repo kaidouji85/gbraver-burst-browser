@@ -85,11 +85,12 @@ export class BatterySelector {
   /**
    * バッテリーセレクターを開く
    *
+   * @param initialValue 初期値
    * @param maxEnable 選択可能な最大値
    * @return アニメーション
    */
-  open(maxEnable: number): MultiTween {
-    return open(this._model, this._tween, maxEnable);
+  open(initialValue: number, maxEnable: number): MultiTween {
+    return open(this._model, this._tween, initialValue, maxEnable);
   }
 
   getObject3D(): THREE.Object3D {
