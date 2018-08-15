@@ -15,6 +15,8 @@ export function createBatterySelector(resources: Resources, listener: OverlapLis
     onBatteryChange: (battery: number) => notifier.notify({
       type: 'changeBattery',
       battery: battery}),
-    onOkButtonPush: () => console.log('ok button push')
+    onOkButtonPush: () => notifier.notify({
+      type: 'decideBattery'
+    })
   });
 }
