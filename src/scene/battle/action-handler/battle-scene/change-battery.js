@@ -12,5 +12,5 @@ import type {ChangeBattery} from "../../../../action/battle-scene/change-battery
  * @param action アクション
  */
 export function changeBattery(view: BattleSceneView, state: BattleSceneState, action: ChangeBattery): void {
-  console.log('changeBattery');
+  state.lastBatteryValue = action.battery;
 }
