@@ -56,7 +56,8 @@ export class BattleScene implements Scene{
 
   constructor(params: Params) {
     this._state = {
-      playerId: params.playerId
+      playerId: params.playerId,
+      lastBatteryValue: 0
     };
 
     this._raycasterObserver = new OverlapObserver();

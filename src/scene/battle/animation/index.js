@@ -6,7 +6,7 @@ import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-twee
 import {Tween} from '@tweenjs/tween.js';
 import type {BattleSceneState} from "../state";
 import {BattleSceneView} from "../view/index";
-import {gameStateDemo} from "./game-state-demo";
+import {inputCommand} from "./input-command";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -18,7 +18,7 @@ import {gameStateDemo} from "./game-state-demo";
  */
 export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): void {
   const multiTween = gameStateList
-    .map(v => gameStateDemo(view, sceneState, v))
+    .map(v => gameStateAnimation(view, sceneState, v))
     .reduce((accumlator: MultiTween, current: MultiTween) => {
       accumlator.end.chain(current.start);
       return {
@@ -27,4 +27,21 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
       };
     }, createEmptyMultiTween());
   multiTween.start.start();
+}
+
+/**
+ * ゲーム状態に応じたアニメーションを生成する
+ *
+ * @param view 戦闘シーンビュー
+ * @param sceneState 戦闘シーン状態
+ * @param gameState ゲーム状態
+ * @return アニメーション
+ */
+function gameStateAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): MultiTween {
+  switch (gameState.effect.name) {
+    case 'InputCommand':
+      return inputCommand(view, sceneState, gameState);
+    default:
+      return createEmptyMultiTween();
+  }
 }

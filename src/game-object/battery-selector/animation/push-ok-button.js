@@ -21,12 +21,17 @@ export function pushOkButton(model: BatterySelectorModel, group: Group): MultiTw
     .yoyo(true);
   start.chain(push);
 
+  const close = new Tween(model, group)
+    .to({opacity: 0}, 300)
+    .delay(300);
+  push.chain(close);
+
   const end = new Tween({}, group)
     .to({}, 0)
     .onComplete(() => {
       model.disabled = false;
     });
-  push.chain(end);
+  close.chain(end);
 
   const endBuffer = createEmptyTween();
   end.chain(endBuffer);

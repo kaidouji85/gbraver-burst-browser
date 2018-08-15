@@ -32,7 +32,7 @@ export class ButtonOverlap implements OverlapTarget {
     const geometry = new THREE.PlaneGeometry(param.width, param.height, 1, 1);
     const material = new THREE.MeshBasicMaterial({
       color: new THREE.Color('rgb(0, 255, 0)'),
-      visible: true
+      visible: false
     });
     this._mesh = new THREE.Mesh(geometry, material);
   }
