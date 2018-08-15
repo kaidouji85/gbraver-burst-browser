@@ -5,6 +5,7 @@ import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state";
 import {startBattleScene} from "./start-battle-scene";
 import type {ProgressBattle} from "../../progress-battle";
+import {changeBattery} from "./change-battery";
 
 /**
  * 戦闘シーンアクションハンドラ
@@ -17,6 +18,9 @@ export function battleSceneActionHandler(action: BattleSceneAction, view: Battle
   switch (action.type) {
     case 'startBattleScene':
       startBattleScene(view, state, action);
+      return;
+    case 'changeBattery':
+      changeBattery(view, state, action);
       return;
     default:
       return;

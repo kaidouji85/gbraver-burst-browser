@@ -12,7 +12,9 @@ export function createBatterySelector(resources: Resources, listener: OverlapLis
     overlapListener: listener,
     maxBattery: playerInfo.armdozer.maxBattery,
     resources: resources,
-    onBatteryChange: (battery: number) => console.log(battery),
+    onBatteryChange: (battery: number) => notifier.notify({
+      type: 'changeBattery',
+      battery: battery}),
     onOkButtonPush: () => console.log('ok button push')
   });
 }

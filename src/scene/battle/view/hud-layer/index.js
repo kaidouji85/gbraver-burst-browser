@@ -14,7 +14,7 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {BurstGauge} from "../../../../game-object/gauge/burst-gauge/burst-gauge";
 import {createPlayerBurstGauge} from "./player-burst-gauge";
 import {createEnemyBurstGauge} from "./enemy-burst-gauge";
-import {createBatterySelector} from "./battery-slider";
+import {createBatterySelector} from "./battery-selector";
 import type {OverlapListener} from "../../../../observer/overlap/overlap-listener";
 
 /** コンストラクタのパラメータ */
