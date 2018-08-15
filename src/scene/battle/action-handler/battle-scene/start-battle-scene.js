@@ -12,6 +12,5 @@ import {battleAnimation} from '../../animation/index';
  * @param state 状態
  */
 export function startBattleScene(view: BattleSceneView, state: BattleSceneState, action: StartBattleScene): void {
-  state.lastBatteryValue = 0;
   battleAnimation(view, state, action.initialState);
 }
