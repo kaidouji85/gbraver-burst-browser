@@ -21,7 +21,7 @@ export function open(model: BatterySelectorModel, group: Group, maxEnable: numbe
       model.slider.enableMax = maxEnable;
       model.slider.battery = 0;
     })
-    .to({opacity: 1}, 500)
+    .to({opacity: 1}, 300)
     .onComplete(() => {
       model.disabled = false;
     });
