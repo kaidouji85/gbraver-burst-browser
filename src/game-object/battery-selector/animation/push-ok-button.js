@@ -23,7 +23,6 @@ export function pushOkButton(model: BatterySelectorModel, group: Group): MultiTw
 
   const close = new Tween(model, group)
     .to({opacity: 0}, 300)
-    .delay(300);
   push.chain(close);
 
   const end = new Tween({}, group)

@@ -111,6 +111,7 @@ export class BatterySliderView {
     });
   }
 
+  /** バッテリースライダーの座標を更新する */
   _setPos(): void {
     this._group.position.y =  - window.innerHeight / 2 + 96;
   }
