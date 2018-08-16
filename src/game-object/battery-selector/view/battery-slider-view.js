@@ -23,6 +23,8 @@ const SLIDER_HEIGHT = 168;
 const BUTTON_WIDTH = 365;
 /** OKボタンの当たり判定横高 */
 const BUTTON_HEIGHT = 117;
+/** スライダー全体の拡大率 */
+const SCALE = 0.4;
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -94,11 +96,12 @@ export class BatterySliderView {
   engage(model: BatterySelectorModel): void {
     this._setScale();
     this._refreshGauge(model);
+    this._setPos();
   }
 
   /** 全体のスケールを調整する */
   _setScale(): void {
-    this._group.scale.set(0.4, 0.4, 0.4);
+    this._group.scale.set(SCALE, SCALE, SCALE);
   }
 
   /** バッテリースライダーを更新する */
@@ -106,6 +109,10 @@ export class BatterySliderView {
     this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
       refreshGauge(context, this._resources, model);
     });
+  }
+
+  _setPos(): void {
+    this._group.position.y =  - window.innerHeight / 2 + 96;
   }
 
   getObject3D(): THREE.Object3D {
