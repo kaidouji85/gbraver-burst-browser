@@ -5,20 +5,29 @@ import type {Resources} from "../../resource";
 import {PlayerGaugeView} from "./view/player-gauge-view";
 import {EnemyGaugeView} from "./view/enemy-gauge-view";
 
+type Param  = {
+  resources: Resources,
+  hp: number
+};
+
 /** プレイヤーゲージを生成する */
-export function PlayerGauge(resources: Resources): Gauge {
-  const view = new PlayerGaugeView(resources);
+export function PlayerGauge(param: Param): Gauge {
+  const view = new PlayerGaugeView(param.resources);
   return new Gauge({
     view: view,
-    resources: resources
+    resources: param.resources,
+    hp: param.hp,
+    maxHp: param.hp
   });
 }
 
 /** 敵ゲージを生成する */
-export function EnemyGauge(resources: Resources): Gauge {
-  const view = new EnemyGaugeView(resources);
+export function EnemyGauge(param: Param): Gauge {
+  const view = new EnemyGaugeView(param.resources);
   return new Gauge({
     view: view,
-    resources: resources
+    resources: param.resources,
+    hp: param.hp,
+    maxHp: param.hp
   });
 }

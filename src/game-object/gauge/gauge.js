@@ -5,7 +5,8 @@ import type {GaugeView} from "./view/gauge-view";
 import type {GaugeModel} from "./model/gauge-model";
 
 type Param = {
-  view: GaugeView
+  view: GaugeView,
+  hp: number
 };
 
 /** ゲージ */
@@ -15,7 +16,10 @@ export class Gauge {
 
   constructor(param: Param) {
     this._view = param.view;
-    this._model = {};
+    this._model = {
+      hp: param.hp,
+      maxHp: param.hp
+    };
   }
 
   gameLoop(time: DOMHighResTimeStamp): void {

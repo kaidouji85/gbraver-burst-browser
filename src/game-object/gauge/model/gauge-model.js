@@ -1,4 +1,7 @@
 // @flow
 
 /** ゲージのモデル */
-export type GaugeModel = {};
+export type GaugeModel = {
+  hp: number,
+  maxHp: number
+};

@@ -47,10 +47,10 @@ export class HudLayer {
     this.batterySelector = createBatterySelector(param.resources, param.listener, param.notifier, playerInfo);
     this.scene.add(this.batterySelector.getObject3D());
 
-    this.playerGauge = createPlayerGauge(param.resources);
+    this.playerGauge = createPlayerGauge(param.resources, param.players, param.playerId);
     this.scene.add(this.playerGauge.getObject3D());
 
-    this.enemyGauge = createEnemyGauge(param.resources);
+    this.enemyGauge = createEnemyGauge(param.resources, param.players, param.playerId);
     this.scene.add(this.enemyGauge.getObject3D());
   }
 }

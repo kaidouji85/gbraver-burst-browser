@@ -44,8 +44,8 @@ export class PlayerGaugeView implements GaugeView {
         resources: this._resources,
         dx: CANVAS_SIZE / 2,
         dy: CANVAS_SIZE / 2,
-        hp: 2000,
-        maxHp: 3000,
+        hp: model.hp,
+        maxHp: model.maxHp,
         battery: 4,
         maxBattery: 5
       });
