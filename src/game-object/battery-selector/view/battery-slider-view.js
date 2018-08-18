@@ -34,8 +34,6 @@ type Param = {
   maxValue: number,
   /** 当たり判定関連のリスナー */
   overlapListener: OverlapListener,
-  /** デバイスに応じた表示倍率 */
-  scale: number,
   /** バッテリーが変更された場合のコールバック関数 */
   onBatteryChange: (battery: number) => void,
   /** OKボタンが押された時のコールバック関数 */
@@ -54,12 +52,9 @@ export class BatterySliderView {
   _okButtonOperation: ButtonOperation;
   /** ゲームループで使うためにリソース管理オブジェクトをキャッシュする */
   _resources: Resources;
-  /** デバイスに応じた表示倍率 */
-  _scale: number;
 
   constructor(param: Param) {
     this._resources = param.resources;
-    this._scale = param.scale;
     this._group = new THREE.Group();
     this._canvasMesh = new CanvasMesh({
       meshWidth: MESH_SIZE,
