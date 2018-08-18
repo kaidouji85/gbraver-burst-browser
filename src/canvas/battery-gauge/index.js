@@ -18,11 +18,11 @@ import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
  * @param maxValue バッテリー最大値
  */
 export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
-  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_GAUGE_BASE);
   const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
-  const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
+  const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_BATTERY_NUMBER);
   const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
-  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL);
+  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_BATTERY_GAUGE_LABEL);
   const batteryGaugeLabel: Image = batteryGaugeLabelResource ? batteryGaugeLabelResource.image : new Image();
 
   drawImageInCenter(context, gaugeBase, dx, dy);
@@ -44,11 +44,11 @@ export function drawPlayerBatteryGauge(context: CanvasRenderingContext2D, resour
  * @param maxValue バッテリー最大値
  */
 export function drawEnemyBatteryGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, value: number, maxValue: number): void {
-  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_GAUGE_BASE);
   const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
-  const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
+  const batteryNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_BATTERY_NUMBER);
   const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
-  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL);
+  const batteryGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_BATTERY_GAUGE_LABEL);
   const batteryGaugeLabel: Image = batteryGaugeLabelResource ? batteryGaugeLabelResource.image : new Image();
 
   context.save();

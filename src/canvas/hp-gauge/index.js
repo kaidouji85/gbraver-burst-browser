@@ -19,11 +19,11 @@ import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
  */
 export function drawPlayerHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
   const value = hp / maxHp;
-  const hpNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
+  const hpNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_HP_NUMBER);
   const hpNumber: Image = hpNumberResource ? hpNumberResource.image : new Image();
-  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_GAUGE_BASE);
   const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
-  const hpGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_GAUGE_LABEL);
+  const hpGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_HP_GAUGE_LABEL);
   const hpGaugeLabel: Image = hpGaugeLabelResource ? hpGaugeLabelResource.image : new Image();
 
   drawImageInCenter(context, gaugeBase, dx, dy);
@@ -46,11 +46,11 @@ export function drawPlayerHpGauge(context: CanvasRenderingContext2D, resources: 
  */
 export function drawEnemyHpGauge(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, hp: number, maxHp: number) {
   const value = hp / maxHp;
-  const hpNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_NUMBER);
+  const hpNumberResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_HP_NUMBER);
   const hpNumber: Image = hpNumberResource ? hpNumberResource.image : new Image();
-  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BASE);
+  const gaugeBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_GAUGE_BASE);
   const gaugeBase: Image = gaugeBaseResource ? gaugeBaseResource.image : new Image();
-  const hpGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_GAUGE_LABEL);
+  const hpGaugeLabelResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_HP_GAUGE_LABEL);
   const hpGaugeLabel: Image = hpGaugeLabelResource ? hpGaugeLabelResource.image : new Image();
 
   context.save();

@@ -14,7 +14,7 @@ import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
  * @param dy 描画位置Y
  */
 export function drawBurstGauge(context: CanvasRenderingContext2D, resources: Resources, isActive: boolean, dx: number, dy: number): void {
-  const imageId = isActive ? CANVAS_IMAGE_IDS.BURST_GAUGE_ACTIVE : CANVAS_IMAGE_IDS.BURST_GAUGE_DISACTIVE;
+  const imageId = isActive ? CANVAS_IMAGE_IDS.DEPRECATED_BURST_GAUGE_ACTIVE : CANVAS_IMAGE_IDS.DEPRECATED_BURST_GAUGE_DISACTIVE;
   const burstGaugeResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === imageId);
   const burstGaugeImage: Image = burstGaugeResource ? burstGaugeResource.image : new Image();
 

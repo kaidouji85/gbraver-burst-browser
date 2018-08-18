@@ -17,13 +17,17 @@ export type CanvasImageResource = {
 
 /** キャンバス用画像IDリストをあつめたもの */
 export const CANVAS_IMAGE_IDS = {
-  GAUGE_BASE: 'GAUGE_BASE',
-  HP_NUMBER: 'HP_NUMBER',
-  BATTERY_NUMBER: 'BATTERY_NUMBER',
-  HP_BAR_DOWN: 'HP_BAR_DOWN',
-  HP_BAR_UP: 'HP_BAR_UP',
-  HP_GAUGE_LABEL: 'HP_GAUGE_LABEL',
-  BATTERY_GAUGE_LABEL: 'BATTERY_GAUGE_LABEL',
+  // TODO 旧ゲージ系は削除する
+  DEPRECATED_GAUGE_BASE: 'DEPRECATED_GAUGE_BASE',
+  DEPRECATED_HP_NUMBER: 'DEPRECATED_HP_NUMBER',
+  DEPRECATED_BATTERY_NUMBER: 'DEPRECATED_BATTERY_NUMBER',
+  DEPRECATED_HP_BAR_DOWN: 'DEPRECATED_HP_BAR_DOWN',
+  DEPRECATED_HP_BAR_UP: 'DEPRECATED_HP_BAR_UP',
+  DEPRECATED_HP_GAUGE_LABEL: 'DEPRECATED_HP_GAUGE_LABEL',
+  DEPRECATED_BATTERY_GAUGE_LABEL: 'DEPRECATED_BATTERY_GAUGE_LABEL',
+  DEPRECATED_BURST_GAUGE_ACTIVE: 'DEPRECATED_BURST_GAUGE_ACTIVE',
+  DEPRECATED_BURST_GAUGE_DISACTIVE: 'DEPRECATED_BURST_GAUGE_DISACTIVE',
+
   BATTERY_BAR_UP: 'BATTERY_BAR_UP',
   BATTERY_BAR_DOWN: 'BATTERY_BAR_DOWN',
   BATTERY_SELECTOR_ACTIVE_BAR: 'BATTERY_SELECTOR_ACTIVE_BAR',
@@ -31,37 +35,58 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_SELECTOR_BASE: 'BATTERY_SELECTOR_BASE',
   BATTERY_SELECTOR_POINTER: 'BATTERY_SELECTOR_POINTER',
   BATTERY_SELECTOR_WINDOW: 'BATTERY_SELECTOR_WINDOW',
-  BATTERY_SELECTOR_ATTACK_BUTTON: 'BATTERY_SELECTOR_ATTACK_BUTTON',
-  BURST_GAUGE_ACTIVE: 'BURST_GAUGE_ACTIVE',
-  BURST_GAUGE_DISACTIVE: 'BURST_GAUGE_DISACTIVE',
+  BATTERY_SELECTOR_ATTACK_BUTTON: 'BATTERY_SELECTOR_ATTACK_BUTTON'
 };
 
 /** キャンバス用画像設定をあつめたもの */
 export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
+  // TODO 旧ゲージ系は削除する
   {
-    id: CANVAS_IMAGE_IDS.GAUGE_BASE,
+    id: CANVAS_IMAGE_IDS.DEPRECATED_GAUGE_BASE,
     path: 'deprecated-gauge/gauge-base.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.HP_NUMBER,
+    id: CANVAS_IMAGE_IDS.DEPRECATED_HP_NUMBER,
     path: 'deprecated-gauge/number/hp-number.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.BATTERY_NUMBER,
+    id: CANVAS_IMAGE_IDS.DEPRECATED_BATTERY_NUMBER,
     path: 'deprecated-gauge/number/battery-number.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.HP_BAR_DOWN,
+    id: CANVAS_IMAGE_IDS.DEPRECATED_HP_BAR_DOWN,
     path: 'deprecated-gauge/hp-gauge/hp-bar-down.png'
   },
   {
-    id: CANVAS_IMAGE_IDS.HP_BAR_UP,
+    id: CANVAS_IMAGE_IDS.DEPRECATED_HP_BAR_UP,
     path: 'deprecated-gauge/hp-gauge/hp-bar-up.png'
   },
   {
-    id: CANVAS_IMAGE_IDS.HP_GAUGE_LABEL,
+    id: CANVAS_IMAGE_IDS.DEPRECATED_HP_GAUGE_LABEL,
     path: 'deprecated-gauge/hp-gauge/hp-gauge-label.png',
   },
+  {
+    id: CANVAS_IMAGE_IDS.DEPRECATED_BATTERY_GAUGE_LABEL,
+    path: 'deprecated-gauge/battery-gauge/battery-gauge-label.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_BAR_UP,
+    path: 'deprecated-gauge/battery-gauge/battery-bar-up.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_BAR_DOWN,
+    path: 'deprecated-gauge/battery-gauge/battery-bar-down.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.DEPRECATED_BURST_GAUGE_ACTIVE,
+    path: 'deprecated-gauge/burst-gauge/burst-active.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.DEPRECATED_BURST_GAUGE_DISACTIVE,
+    path: 'deprecated-gauge/burst-gauge/burst-disactive.png',
+  },
+
+
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SELECTOR_ACTIVE_BAR,
     path: 'battery-selector/active-bar.png',
@@ -85,26 +110,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BATTERY_SELECTOR_ATTACK_BUTTON,
     path: 'battery-selector/attack-button.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_LABEL,
-    path: 'deprecated-gauge/battery-gauge/battery-gauge-label.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_BAR_UP,
-    path: 'deprecated-gauge/battery-gauge/battery-bar-up.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_BAR_DOWN,
-    path: 'deprecated-gauge/battery-gauge/battery-bar-down.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BURST_GAUGE_ACTIVE,
-    path: 'deprecated-gauge/burst-gauge/burst-active.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BURST_GAUGE_DISACTIVE,
-    path: 'deprecated-gauge/burst-gauge/burst-disactive.png',
   }
 ];
 

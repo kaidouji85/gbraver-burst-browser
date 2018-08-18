@@ -21,9 +21,9 @@ const clip = (context: CanvasRenderingContext2D, image: Image, dx: number, dy: n
  * @param percent バーが何%の状態かを0から1で指定する
  */
 export function PlayerHpBar(context: CanvasRenderingContext2D, resources: Resources, dx: number, dy: number, percent: number) {
-  const hpBarDownResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR_DOWN);
+  const hpBarDownResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_HP_BAR_DOWN);
   const hpBar: Image = hpBarDownResource ? hpBarDownResource.image : new Image();
-  const hpBarUpResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR_UP);
+  const hpBarUpResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DEPRECATED_HP_BAR_UP);
   const hpBarUp: Image = hpBarUpResource ? hpBarUpResource.image : new Image();
 
   drawImageInCenter(context, hpBar, dx, dy);
