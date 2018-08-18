@@ -5,8 +5,8 @@ import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import type {Param} from "./index";
 import {drawImageInCenter} from "../draw/image-drawer";
 
-const PADDING_TOP = 16;
-export const NUMBER_COLOR = '#FDFDFD';
+const PADDING_TOP = -16;
+const NUMBER_COLOR = '#FDFDFD';
 
 /** HPゲージを描画する */
 export function drawHpGauge(param: Param): void {
@@ -15,7 +15,7 @@ export function drawHpGauge(param: Param): void {
   const baseResource: ?CanvasImageResource = param.resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.GAUGE_BAR_BASE);
   const base: Image = baseResource ? baseResource.image : new Image();
   const dx = param.dx;
-  const dy = param.dy - PADDING_TOP;
+  const dy = param.dy + PADDING_TOP;
 
   drawImageInCenter(param.context, base, dx, dy);
   drawImageInCenter(param.context, disActiveBar, dx, dy);
@@ -32,7 +32,7 @@ function drawActiveBar(param: Param) {
   const sw = activeBar.width * param.hp / param.maxHp;
   const sh = activeBar.height;
   const dx = param.dx - activeBar.width / 2;
-  const dy = param.dy - activeBar.height / 2 - PADDING_TOP;
+  const dy = param.dy - activeBar.height / 2 + PADDING_TOP;
   const dw =sw;
   const dh = sh;
   param.context.drawImage(activeBar, sx, sy, sw, sh, dx, dy, dw, dh);
