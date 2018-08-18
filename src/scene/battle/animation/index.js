@@ -7,6 +7,7 @@ import {Tween} from '@tweenjs/tween.js';
 import type {BattleSceneState} from "../state";
 import {BattleSceneView} from "../view/index";
 import {inputCommand} from "./input-command";
+import {battle} from "./battle";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -41,6 +42,8 @@ function gameStateAnimation(view: BattleSceneView, sceneState: BattleSceneState,
   switch (gameState.effect.name) {
     case 'InputCommand':
       return inputCommand(view, sceneState, gameState);
+    case 'Battle':
+      return battle(view, sceneState, gameState, gameState.effect);
     default:
       return createEmptyMultiTween();
   }

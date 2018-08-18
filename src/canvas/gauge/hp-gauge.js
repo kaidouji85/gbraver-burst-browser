@@ -46,7 +46,7 @@ function drawNumber(context: CanvasRenderingContext2D, dx: number, dy: number, v
   context.fillStyle = NUMBER_COLOR;
   context.textAlign = 'right';
   context.textBaseline = 'middle';
-  context.fillText(`${value}`, dx, dy);
+  context.fillText(`${Math.floor(value)}`, dx, dy);
 
   context.restore();
 }
