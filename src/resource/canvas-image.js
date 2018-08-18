@@ -31,6 +31,8 @@ export const CANVAS_IMAGE_IDS = {
   GAUGE_WINDOW: 'GAUGE_WINDOW',
   ACTIVE_HP_BAR: 'ACTIVE_HP_BAR',
   DIS_ACTIVE_HP_BAR: 'DIS_ACTIVE_HP_BAR',
+  ACTIVE_BATTERY_BAR: 'ACTIVE_BATTERY_BAR',
+  DIS_ACTIVE_BATTERY_BAR: 'DIS_ACTIVE_BATTERY_BAR',
   GAUGE_BAR_BASE: 'GAUGE_BAR_BASE',
   BATTERY_BAR_UP: 'BATTERY_BAR_UP',
   BATTERY_BAR_DOWN: 'BATTERY_BAR_DOWN',
@@ -90,7 +92,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'deprecated-gauge/burst-gauge/burst-disactive.png',
   },
 
-  
+
   {
     id: CANVAS_IMAGE_IDS.GAUGE_WINDOW,
     path: 'gauge/window.png',
@@ -102,6 +104,14 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.DIS_ACTIVE_HP_BAR,
     path: 'gauge/disactive-hp-bar.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.ACTIVE_BATTERY_BAR,
+    path: 'gauge/active-battery-bar.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_BAR,
+    path: 'gauge/disactive-battery-bar.png',
   },
   {
     id: CANVAS_IMAGE_IDS.GAUGE_BAR_BASE,
