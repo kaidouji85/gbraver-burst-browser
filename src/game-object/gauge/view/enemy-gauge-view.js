@@ -2,6 +2,7 @@
 
 import {PlayerGaugeView} from "./player-gauge-view";
 import type {Resources} from "../../../resource";
+import type {GaugeModel} from "../model/gauge-model";
 
 /** 敵のゲージ */
 export class EnemyGaugeView extends PlayerGaugeView {
@@ -9,9 +10,8 @@ export class EnemyGaugeView extends PlayerGaugeView {
     super(resources);
   }
 
-  /** 座標を設定する */
-  _setPos(): void {
-    this._canvasMesh.mesh.position.x = -96;
-    this._canvasMesh.mesh.position.y = 0;
+  engage(model: GaugeModel): void {
+    super.engage(model);
+    this._canvasMesh.mesh.position.x *= -1;
   }
 }

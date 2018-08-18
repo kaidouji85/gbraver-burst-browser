@@ -26,6 +26,7 @@ export class PlayerGaugeView implements GaugeView {
     });
   }
 
+  /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
     this._refreshGauge(model);
     this._setScale();
@@ -61,7 +62,7 @@ export class PlayerGaugeView implements GaugeView {
   /** 座標を設定する */
   _setPos(): void {
     this._canvasMesh.mesh.position.x = 96;
-    this._canvasMesh.mesh.position.y = 0;
+    this._canvasMesh.mesh.position.y = 32;
   }
 
   getObject3D(): THREE.Object3D {
