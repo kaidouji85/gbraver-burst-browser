@@ -12,17 +12,19 @@ import {ButtonOperation} from "../../../operation/button";
 import {refreshGauge} from "./refresh-gauge";
 
 /** メッシュの大きさ */
-export const MESH_SIZE = 512;
+const MESH_SIZE = 1024;
 /** テクスチャの大きさ */
-export const TEXTURE_SIZE = 1024;
+const TEXTURE_SIZE = 1024;
 /** スライダー当たり判定横幅 */
-export const SLIDER_WIDTH = 307.5;
+const SLIDER_WIDTH = 615;
 /** スライダー当たり判定高 */
-export const SLIDER_HEIGHT = 84;
+const SLIDER_HEIGHT = 168;
 /** OKボタンの当たり判定横幅 */
-export const BUTTON_WIDTH = 182.5;
+const BUTTON_WIDTH = 365;
 /** OKボタンの当たり判定横高 */
-export const BUTTON_HEIGHT = 58.5;
+const BUTTON_HEIGHT = 117;
+/** スライダー全体の拡大率 */
+const SCALE = 0.4;
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -75,7 +77,7 @@ export class BatterySliderView {
       overlapListener: param.overlapListener,
       onValueChange: v => param.onBatteryChange(v)
     });
-    this._sliderOperation.getObject3D().position.y += 48;
+    this._sliderOperation.getObject3D().position.y += 96;
     this._group.add(this._sliderOperation.getObject3D());
 
     this._okButtonOperation = new ButtonOperation({
@@ -86,20 +88,20 @@ export class BatterySliderView {
         param.onOkButtonPush();
       }
     });
-    this._okButtonOperation.getObject3D().position.y = -48;
+    this._okButtonOperation.getObject3D().position.y = -96;
     this._group.add(this._okButtonOperation.getObject3D());
   }
 
   /** ビューにモデルを反映させる */
   engage(model: BatterySelectorModel): void {
-    this._refreshScale();
+    this._setScale();
     this._refreshGauge(model);
+    this._setPos();
   }
 
-
-  /** オブジェクトのスケールを調整する */
-  _refreshScale(): void {
-    this._group.scale.set(this._scale, this._scale, this._scale);
+  /** 全体のスケールを調整する */
+  _setScale(): void {
+    this._group.scale.set(SCALE, SCALE, SCALE);
   }
 
   /** バッテリースライダーを更新する */
@@ -107,6 +109,11 @@ export class BatterySliderView {
     this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
       refreshGauge(context, this._resources, model);
     });
+  }
+
+  /** バッテリースライダーの座標を更新する */
+  _setPos(): void {
+    this._group.position.y =  - window.innerHeight / 2 + 96;
   }
 
   getObject3D(): THREE.Object3D {
