@@ -17,17 +17,6 @@ export type CanvasImageResource = {
 
 /** キャンバス用画像IDリストをあつめたもの */
 export const CANVAS_IMAGE_IDS = {
-  // TODO 旧ゲージ系は削除する
-  DEPRECATED_GAUGE_BASE: 'DEPRECATED_GAUGE_BASE',
-  DEPRECATED_HP_NUMBER: 'DEPRECATED_HP_NUMBER',
-  DEPRECATED_BATTERY_NUMBER: 'DEPRECATED_BATTERY_NUMBER',
-  DEPRECATED_HP_BAR_DOWN: 'DEPRECATED_HP_BAR_DOWN',
-  DEPRECATED_HP_BAR_UP: 'DEPRECATED_HP_BAR_UP',
-  DEPRECATED_HP_GAUGE_LABEL: 'DEPRECATED_HP_GAUGE_LABEL',
-  DEPRECATED_BATTERY_GAUGE_LABEL: 'DEPRECATED_BATTERY_GAUGE_LABEL',
-  DEPRECATED_BURST_GAUGE_ACTIVE: 'DEPRECATED_BURST_GAUGE_ACTIVE',
-  DEPRECATED_BURST_GAUGE_DISACTIVE: 'DEPRECATED_BURST_GAUGE_DISACTIVE',
-
   GAUGE_WINDOW: 'GAUGE_WINDOW',
   ACTIVE_HP_BAR: 'ACTIVE_HP_BAR',
   DIS_ACTIVE_HP_BAR: 'DIS_ACTIVE_HP_BAR',
@@ -46,53 +35,6 @@ export const CANVAS_IMAGE_IDS = {
 
 /** キャンバス用画像設定をあつめたもの */
 export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
-  // TODO 旧ゲージ系は削除する
-  {
-    id: CANVAS_IMAGE_IDS.DEPRECATED_GAUGE_BASE,
-    path: 'deprecated-gauge/gauge-base.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DEPRECATED_HP_NUMBER,
-    path: 'deprecated-gauge/number/hp-number.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DEPRECATED_BATTERY_NUMBER,
-    path: 'deprecated-gauge/number/battery-number.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DEPRECATED_HP_BAR_DOWN,
-    path: 'deprecated-gauge/hp-gauge/hp-bar-down.png'
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DEPRECATED_HP_BAR_UP,
-    path: 'deprecated-gauge/hp-gauge/hp-bar-up.png'
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DEPRECATED_HP_GAUGE_LABEL,
-    path: 'deprecated-gauge/hp-gauge/hp-gauge-label.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DEPRECATED_BATTERY_GAUGE_LABEL,
-    path: 'deprecated-gauge/battery-gauge/battery-gauge-label.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_BAR_UP,
-    path: 'deprecated-gauge/battery-gauge/battery-bar-up.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_BAR_DOWN,
-    path: 'deprecated-gauge/battery-gauge/battery-bar-down.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DEPRECATED_BURST_GAUGE_ACTIVE,
-    path: 'deprecated-gauge/burst-gauge/burst-active.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DEPRECATED_BURST_GAUGE_DISACTIVE,
-    path: 'deprecated-gauge/burst-gauge/burst-disactive.png',
-  },
-
-
   {
     id: CANVAS_IMAGE_IDS.GAUGE_WINDOW,
     path: 'gauge/window.png',
