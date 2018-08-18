@@ -11,6 +11,8 @@ CanvasStubBase('../resources/', (context: CanvasRenderingContext2D, resources: R
     context: context,
     resources: resources,
     dx: baseX,
-    dy: baseY
+    dy: baseY,
+    hp: 2000,
+    maxHp: 3000
   });
 });

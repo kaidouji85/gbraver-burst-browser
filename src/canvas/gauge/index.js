@@ -12,7 +12,11 @@ export type Param = {
   /** 描画位置X */
   dx: number,
   /** 描画位置Y */
-  dy: number
+  dy: number,
+  /** HP */
+  hp: number,
+  /** 最大HP */
+  maxHp: number
 };
 
 /**
