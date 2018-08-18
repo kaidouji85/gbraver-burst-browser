@@ -14,7 +14,7 @@ CanvasStubBase('../resources/', (context: CanvasRenderingContext2D, resources: R
     dy: baseY,
     hp: 3000,
     maxHp: 3000,
-    battery: 1,
+    battery: 4,
     maxBattery: 5
   });
 });
