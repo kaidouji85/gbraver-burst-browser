@@ -52,7 +52,6 @@ export class BatterySelector {
       resources: param.resources,
       overlapListener: param.overlapListener,
       maxValue: param.maxBattery,
-      scale: getControllerScale(),
       onBatteryChange: battery => {
         if (this._model.disabled || this._model.slider.enableMax < battery) {
           return;

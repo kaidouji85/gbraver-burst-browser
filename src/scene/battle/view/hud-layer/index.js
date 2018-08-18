@@ -7,6 +7,8 @@ import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {createBatterySelector} from "./battery-selector";
 import type {OverlapListener} from "../../../../observer/overlap/overlap-listener";
+import {Gauge} from "../../../../game-object/gauge/gauge";
+import {createPlayerGauge} from "./player-gauge";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -29,6 +31,8 @@ export class HudLayer {
   camera: THREE.OrthographicCamera;
   /** バッテリーセレクタ */
   batterySelector: BatterySelector;
+  /** プレイヤーのゲージ */
+  playerGauge: Gauge;
 
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -39,5 +43,8 @@ export class HudLayer {
 
     this.batterySelector = createBatterySelector(param.resources, param.listener, param.notifier, playerInfo);
     this.scene.add(this.batterySelector.getObject3D());
+
+    this.playerGauge = createPlayerGauge(param.resources);
+    this.scene.add(this.playerGauge.getObject3D());
   }
 }
