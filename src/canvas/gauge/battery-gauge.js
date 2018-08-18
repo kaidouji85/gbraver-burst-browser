@@ -4,9 +4,12 @@ import type {Param} from "./index";
 import type {CanvasImageResource} from "../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import {drawImageInCenter} from "../draw/image-drawer";
+import * as R from 'ramda';
 
 const PADDING_TOP = 32;
 const NUMBER_COLOR = '#FDFDFD';
+const LINE_COLOR = '#000000';
+const LINE_HEIGHT = 24;
 
 /** バッテリーゲージを描画する */
 export function drawBatteryGauge(param: Param): void {
@@ -21,6 +24,7 @@ export function drawBatteryGauge(param: Param): void {
   drawImageInCenter(param.context, disActiveBar, dx, dy);
   drawActiveBar(param);
   drawNumber(param.context, dx + 128, dy - 16, param.battery);
+  drawScale(param.context, dx, dy, param.maxBattery, disActiveBar.width);
 }
 
 /** アクティブバーを描画する */
@@ -47,6 +51,36 @@ function drawNumber(context: CanvasRenderingContext2D, dx: number, dy: number, v
   context.textAlign = 'right';
   context.textBaseline = 'middle';
   context.fillText(`${value}`, dx, dy);
+
+  context.restore();
+}
+
+/** バッテリーの目盛を描画する */
+function drawScale(context: CanvasRenderingContext2D, dx: number, dy: number, count: number, barWidth: number): void {
+  const interval = barWidth / count;
+
+  R.range(1, count).forEach(v => {
+    drawLine(context, dx + interval * v - barWidth / 2 , dy);
+  });
+}
+
+/**
+ * 縦にラインを引く
+ *
+ * @param context 描画対象のキャンバス
+ * @param dx 描画位置X
+ * @param dy 描画位置Y
+ */
+function drawLine(context: CanvasRenderingContext2D, dx: number, dy: number): void {
+  context.save();
+
+  context.lineWidth = 1;
+  context.strokeStyle = LINE_COLOR;
+  context.beginPath();
+  context.moveTo(dx, dy - LINE_HEIGHT / 2);
+  context.lineTo(dx, dy + LINE_HEIGHT / 2);
+  context.closePath();
+  context.stroke();
 
   context.restore();
 }
