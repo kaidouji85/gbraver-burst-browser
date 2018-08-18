@@ -3,7 +3,6 @@
 import type {BatterySelectorModel} from "../model/battery-selector";
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 import {Tween, Group} from '@tweenjs/tween.js';
-import {createEmptyTween} from "../../../tween/empty-tween";
 
 /**
  * バッテリーセレクタを開く
@@ -14,8 +13,8 @@ import {createEmptyTween} from "../../../tween/empty-tween";
  * @param maxEnable 選択可能な最大値
  * @return MultiTween
  */
-export function open(model: BatterySelectorModel, group: Group,initialValue: number, maxEnable: number): MultiTween {
-  const start = new Tween(model, group)
+export function open(model: BatterySelectorModel, group: Group,initialValue: number, maxEnable: number): Tween {
+  return new Tween(model, group)
     .onStart(() => {
       model.disabled = true;
       model.opacity = 0;
@@ -26,9 +25,4 @@ export function open(model: BatterySelectorModel, group: Group,initialValue: num
     .onComplete(() => {
       model.disabled = false;
     });
-
-  return {
-    start: start,
-    end: createEmptyTween()
-  }
 }

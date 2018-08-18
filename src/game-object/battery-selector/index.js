@@ -8,7 +8,6 @@ import * as THREE from "three";
 import {changeBattery} from './animation/change-battery';
 import {Group, Tween} from "@tweenjs/tween.js";
 import {map, filter, distinctUntilChanged} from 'rxjs/operators';
-import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {open} from './animation/open';
 import type {OverlapListener} from "../../observer/overlap/overlap-listener";
 import {pushOkButton} from "./animation/push-ok-button";
@@ -85,7 +84,7 @@ export class BatterySelector {
    * @param maxEnable 選択可能な最大値
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number): MultiTween {
+  open(initialValue: number, maxEnable: number): Tween {
     return open(this._model, this._tween, initialValue, maxEnable);
   }
 
