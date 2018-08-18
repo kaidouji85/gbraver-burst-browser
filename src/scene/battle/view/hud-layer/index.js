@@ -9,6 +9,7 @@ import {createBatterySelector} from "./battery-selector";
 import type {OverlapListener} from "../../../../observer/overlap/overlap-listener";
 import {Gauge} from "../../../../game-object/gauge/gauge";
 import {createPlayerGauge} from "./player-gauge";
+import {createEnemyGauge} from "./enemy-gauge";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -33,6 +34,8 @@ export class HudLayer {
   batterySelector: BatterySelector;
   /** プレイヤーのゲージ */
   playerGauge: Gauge;
+  /** 敵のゲージ */
+  enemyGauge: Gauge;
 
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -46,5 +49,8 @@ export class HudLayer {
 
     this.playerGauge = createPlayerGauge(param.resources);
     this.scene.add(this.playerGauge.getObject3D());
+
+    this.enemyGauge = createEnemyGauge(param.resources);
+    this.scene.add(this.enemyGauge.getObject3D());
   }
 }

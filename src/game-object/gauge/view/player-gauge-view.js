@@ -11,6 +11,7 @@ export const CANVAS_SIZE = 1024;
 export const MESH_SIZE = 1024;
 export const SCALE = 0.4;
 
+/** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
   _canvasMesh: CanvasMesh;
   _resources: Resources;
@@ -28,6 +29,7 @@ export class PlayerGaugeView implements GaugeView {
   engage(model: GaugeModel): void {
     this._refreshGauge(model);
     this._setScale();
+    this._setPos();
   }
 
   /** ゲージを更新する */
@@ -54,6 +56,12 @@ export class PlayerGaugeView implements GaugeView {
   /** 全体の拡大率を設定する */
   _setScale(): void {
     this._canvasMesh.mesh.scale.set(SCALE, SCALE, SCALE);
+  }
+
+  /** 座標を設定する */
+  _setPos(): void {
+    this._canvasMesh.mesh.position.x = 96;
+    this._canvasMesh.mesh.position.y = 0;
   }
 
   getObject3D(): THREE.Object3D {
