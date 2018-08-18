@@ -3,5 +3,7 @@
 /** ゲージのモデル */
 export type GaugeModel = {
   hp: number,
-  maxHp: number
+  maxHp: number,
+  battery: number,
+  maxBattery: number
 };

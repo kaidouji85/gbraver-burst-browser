@@ -46,8 +46,8 @@ export class PlayerGaugeView implements GaugeView {
         dy: CANVAS_SIZE / 2,
         hp: model.hp,
         maxHp: model.maxHp,
-        battery: 4,
-        maxBattery: 5
+        battery: model.battery,
+        maxBattery: model.maxBattery
       });
 
       context.restore();

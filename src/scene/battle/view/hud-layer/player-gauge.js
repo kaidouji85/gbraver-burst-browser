@@ -9,8 +9,11 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 export function createPlayerGauge(resources: Resources, players: Player[], playerId: PlayerId): Gauge {
   const player: ?Player = players.find(v => v.playerId === playerId);
   const hp = player ? player.armdozer.maxHp : 0;
+  const battery = player ? player.armdozer.maxBattery : 0;
+
   return PlayerGauge({
     resources: resources,
-    hp: hp
+    hp: hp,
+    battery: battery
   });
 }

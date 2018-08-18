@@ -7,7 +7,8 @@ import {EnemyGaugeView} from "./view/enemy-gauge-view";
 
 type Param  = {
   resources: Resources,
-  hp: number
+  hp: number,
+  battery: number
 };
 
 /** プレイヤーゲージを生成する */
@@ -17,7 +18,7 @@ export function PlayerGauge(param: Param): Gauge {
     view: view,
     resources: param.resources,
     hp: param.hp,
-    maxHp: param.hp
+    battery: param.battery
   });
 }
 
@@ -28,6 +29,6 @@ export function EnemyGauge(param: Param): Gauge {
     view: view,
     resources: param.resources,
     hp: param.hp,
-    maxHp: param.hp
+    battery: param.battery
   });
 }

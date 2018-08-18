@@ -6,7 +6,8 @@ import type {GaugeModel} from "./model/gauge-model";
 
 type Param = {
   view: GaugeView,
-  hp: number
+  hp: number,
+  battery: number
 };
 
 /** ゲージ */
@@ -18,7 +19,9 @@ export class Gauge {
     this._view = param.view;
     this._model = {
       hp: param.hp,
-      maxHp: param.hp
+      maxHp: param.hp,
+      battery: param.battery,
+      maxBattery: param.battery
     };
   }
 
