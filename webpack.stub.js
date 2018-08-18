@@ -15,12 +15,8 @@ const SERVE_PATH = path.resolve(__dirname, 'build/stub');
  * 値: スタブファイルのパス
  */
 const STUB_ENTRY_FILES = {
-  'canvas/player-hp-gauge': `${STUB_PATH}/canvas/player-hp-gauge`,
-  'canvas/enemy-hp-gauge': `${STUB_PATH}/canvas/enemy-hp-gauge`,
-  'canvas/player-battery-gauge': `${STUB_PATH}/canvas/player-battery-gauge`,
-  'canvas/enemy-battery-gauge': `${STUB_PATH}/canvas/enemy-battery-gauge`,
   'canvas/battery-slider': `${STUB_PATH}/canvas/battery-slider`,
-  'canvas/burst-gauge': `${STUB_PATH}/canvas/burst-gauge`,
+  'canvas/gauge': `${STUB_PATH}/canvas/gauge`,
   'game-object/armdozer/player-shin-braver': `${STUB_PATH}/game-object/armdozer/player-shin-braver`,
   'game-object/armdozer/enemy-shin-braver': `${STUB_PATH}/game-object/armdozer/enemy-shin-braver`,
   'game-object/armdozer/player-neo-landozer': `${STUB_PATH}/game-object/armdozer/player-neo-landozer`,

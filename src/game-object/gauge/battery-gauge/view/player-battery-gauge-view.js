@@ -5,7 +5,7 @@ import {BatteryGaugeView} from './battery-gauge-view';
 import type {BatteryGaugeModel} from "../model/battery-gauge-model";
 import type {Resources} from "../../../../resource/index";
 import * as THREE from "three";
-import {drawPlayerBatteryGauge} from "../../../../canvas/battery-gauge";
+import {drawPlayerBatteryGauge} from "../../../../canvas/deprecated-battery-gauge";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 256;

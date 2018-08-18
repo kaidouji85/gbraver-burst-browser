@@ -5,7 +5,7 @@ import {CanvasMesh} from "../../../../mesh/canvas-mesh";
 import type {Resources} from "../../../../resource/index";
 import {HpGaugeView} from './hp-gauge-view';
 import type {HpGaugeModel} from "../model/hp-gauge-model";
-import {drawPlayerHpGauge} from "../../../../canvas/hp-gauge";
+import {drawPlayerHpGauge} from "../../../../canvas/deprecated-hp-gauge";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 256;

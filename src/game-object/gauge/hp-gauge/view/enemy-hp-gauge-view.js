@@ -2,7 +2,7 @@
 
 import type {Resources} from "../../../../resource/index";
 import type {HpGaugeModel} from "../model/hp-gauge-model";
-import {drawEnemyHpGauge} from "../../../../canvas/hp-gauge";
+import {drawEnemyHpGauge} from "../../../../canvas/deprecated-hp-gauge";
 import {MESH_SIZE, PADDING_TOP, PlayerHpGaugeView} from "./player-hp-gauge-view";
 
 /** 敵HPゲージ */

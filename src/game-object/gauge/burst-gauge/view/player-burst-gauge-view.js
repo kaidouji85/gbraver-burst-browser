@@ -4,7 +4,7 @@ import type {BurstGaugeView} from "./burst-gauge-view";
 import type {Resources} from "../../../../resource";
 import type {BurstGaugeModel} from "../model/burst-gauge-model";
 import {CanvasMesh} from "../../../../mesh/canvas-mesh";
-import {drawBurstGauge} from "../../../../canvas/burst-gauge";
+import {drawBurstGauge} from "../../../../canvas/deprecated-burst-gauge";
 import * as THREE from "three";
 
 /** メッシュの大きさ */
