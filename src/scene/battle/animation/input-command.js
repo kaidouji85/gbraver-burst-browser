@@ -26,9 +26,13 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
 
   const enableMax = getEnableMax(effect, sceneState.playerId);
   const initialValue = 0;
-  sceneState.lastBatteryValue = initialValue;
+  const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
 
-  const start = createEmptyTween();
+  const start = createEmptyTween()
+    .onStart(() => {
+      sceneState.lastBatteryValue = initialValue;
+      view.hudLayer.turnIndicator.turnChange(isPlayerTurn);
+    });
   const open = view.hudLayer.batterySelector.open(initialValue, enableMax);
   const refreshPlayer = view.hudLayer.playerGauge.refresh(player.armdozer.hp, player.armdozer.battery);
   const refreshEnemy = view.hudLayer.enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery);

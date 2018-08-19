@@ -10,6 +10,8 @@ import type {OverlapListener} from "../../../../observer/overlap/overlap-listene
 import {Gauge} from "../../../../game-object/gauge/gauge";
 import {createPlayerGauge} from "./player-gauge";
 import {createEnemyGauge} from "./enemy-gauge";
+import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
+import {createTurnIndicator} from "./turn-indicator";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -36,6 +38,8 @@ export class HudLayer {
   playerGauge: Gauge;
   /** 敵のゲージ */
   enemyGauge: Gauge;
+  /** ターンインジケーター */
+  turnIndicator: TurnIndicator;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -52,5 +56,8 @@ export class HudLayer {
 
     this.enemyGauge = createEnemyGauge(param.resources, enemy);
     this.scene.add(this.enemyGauge.getObject3D());
+
+    this.turnIndicator = createTurnIndicator(param.resources);
+    this.scene.add(this.turnIndicator.getObject3D());
   }
 }
