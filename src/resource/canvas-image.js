@@ -31,7 +31,7 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_SELECTOR_POINTER: 'BATTERY_SELECTOR_POINTER',
   BATTERY_SELECTOR_WINDOW: 'BATTERY_SELECTOR_WINDOW',
   BATTERY_SELECTOR_ATTACK_BUTTON: 'BATTERY_SELECTOR_ATTACK_BUTTON',
-  TURN: 'TURN'
+  TURN_INDICATOR: 'TURN_INDICATOR'
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -85,8 +85,8 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'battery-selector/attack-button.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.TURN,
-    path: 'turn/turn.png',
+    id: CANVAS_IMAGE_IDS.TURN_INDICATOR,
+    path: 'turn/turn-indicator.png',
   },
 ];
 

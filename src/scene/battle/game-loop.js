@@ -25,4 +25,5 @@ function hud(view: HudLayer, time: DOMHighResTimeStamp) {
   view.batterySelector.gameLoop(time);
   view.playerGauge.gameLoop(time);
   view.enemyGauge.gameLoop(time);
+  view.turnIndicator.gameLoop(time);
 }
