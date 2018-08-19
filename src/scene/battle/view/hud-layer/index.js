@@ -38,19 +38,19 @@ export class HudLayer {
   enemyGauge: Gauge;
 
   constructor(param: Param) {
-    const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
-    const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
+    const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
+    const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
-    this.batterySelector = createBatterySelector(param.resources, param.listener, param.notifier, playerInfo);
+    this.batterySelector = createBatterySelector(param.resources, param.listener, param.notifier, player);
     this.scene.add(this.batterySelector.getObject3D());
 
-    this.playerGauge = createPlayerGauge(param.resources, param.players, param.playerId);
+    this.playerGauge = createPlayerGauge(param.resources, player);
     this.scene.add(this.playerGauge.getObject3D());
 
-    this.enemyGauge = createEnemyGauge(param.resources, param.players, param.playerId);
+    this.enemyGauge = createEnemyGauge(param.resources, enemy);
     this.scene.add(this.enemyGauge.getObject3D());
   }
 }
