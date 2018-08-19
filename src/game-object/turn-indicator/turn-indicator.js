@@ -30,4 +30,13 @@ export class TurnIndicator {
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
   }
+
+  /**
+   * ターン変更
+   *
+   * @param isPlayerTurn プレイヤーターンか否かのフラグ、trueでプレイヤーターン
+   */
+  turnChange(isPlayerTurn: boolean): void {
+    this._model.isPlayerTurn = isPlayerTurn;
+  }
 }

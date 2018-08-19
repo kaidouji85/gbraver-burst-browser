@@ -10,7 +10,7 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
 export const MESH_SIZE = 1024;
 export const CANVAS_SIZE = 1024;
-export const SCALE = 0.4;
+export const BASE_SCALE = 0.4;
 
 /** ターンインジケータービュー */
 export class TurnIndicatorView {
@@ -29,13 +29,13 @@ export class TurnIndicatorView {
 
   /** モデルをビューに反映させる */
   engage(model: TurnIndicatorModel): void {
-    this._refreshCanvas(model);
-    this._setScale();
+    this._refreshCanvas();
+    this._setScale(model);
     this._setPos();
   }
 
   /** キャンバスを更新する */
-  _refreshCanvas(model: TurnIndicatorModel) {
+  _refreshCanvas() {
     this._canvasMesh.draw(context => {
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);
       context.save();
@@ -51,10 +51,12 @@ export class TurnIndicatorView {
   }
 
   /** 全体の拡大率を変更 */
-  _setScale(): void {
-    this._canvasMesh.mesh.scale.set(SCALE, SCALE, SCALE);
+  _setScale(model: TurnIndicatorModel): void {
+    const scaleX = model.isPlayerTurn ? BASE_SCALE : -BASE_SCALE;
+    this._canvasMesh.mesh.scale.set(scaleX, BASE_SCALE, BASE_SCALE);
   }
 
+  /** 位置調整 */
   _setPos(): void {
     this._canvasMesh.mesh.position.y = 32;
   }
