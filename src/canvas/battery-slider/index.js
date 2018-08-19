@@ -1,32 +1,36 @@
 // @flow
+
 import type {Resources} from "../../resource";
 import type {CanvasImageResource} from "../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import {drawImageInCenter} from "../draw/image-drawer";
-import {drawBatterySliderGauge} from "./gauge";
-
-export const SHADOW_PADDING_BOTTOM = 8;
+import {drawActiveBar, drawDisActiveBar} from "./bar";
+import type {BatterySliderParam} from "./param";
+import {drawPointer} from "./pointer";
+import {drawMeterScale} from "./meter-scale";
 
 /**
  * バッテリースライダーを描画する
  *
- * @param context Canvasコンテキスト
+ * @param context 描画対象のキャンバス
  * @param resources リソース管理オブジェクト
- * @param battery 現在のバッテリー値
- * @param maxBattery 最大バッテリー値
- * @param dx 描画位置X
- * @param dy 描画位置Y
+ * @param param バッテリースライダー描画パラメータ
  */
-export function drawBatterySlider(context: CanvasRenderingContext2D, resources: Resources, battery: number, maxBattery: number, dx: number, dy: number): void {
-  const sliderBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_BASE);
+export function drawBatterySlider(context: CanvasRenderingContext2D, resources: Resources, param: BatterySliderParam): void {
+  const sliderBaseResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_BASE);
   const sliderBase: Image = sliderBaseResource ? sliderBaseResource.image : new Image();
-  const sliderBackResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_BACK);
-  const sliderBack: Image = sliderBackResource ? sliderBackResource.image : new Image();
-  const sliderShadowResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SLIDER_SHADOW);
-  const sliderShadowImage: Image = sliderShadowResource ? sliderShadowResource.image : new Image();
+  const activeBarResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_ACTIVE_BAR);
+  const activeBar: Image = activeBarResource ? activeBarResource.image : new Image();
+  const disActiveBarResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_DIS_ACTIVE_BAR);
+  const disActiveBar: Image = disActiveBarResource ? disActiveBarResource.image : new Image();
+  const pointerResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_POINTER);
+  const pointer = pointerResource ? pointerResource.image : new Image();
 
-  drawImageInCenter(context, sliderShadowImage, dx, dy + SHADOW_PADDING_BOTTOM);
-  drawImageInCenter(context, sliderBack, dx, dy);
-  drawBatterySliderGauge(context, resources, battery, maxBattery, dx, dy);
-  drawImageInCenter(context, sliderBase, dx, dy);
+  drawMeterScale(context, param);
+  drawImageInCenter(context, sliderBase, param.dx, param.dy);
+  drawDisActiveBar(context, disActiveBar, param);
+  drawActiveBar(context, activeBar, param);
+  drawPointer(context, pointer, activeBar.width, param);
+
 }
+

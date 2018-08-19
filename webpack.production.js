@@ -9,10 +9,15 @@ module.exports = {
     ...config.plugins,
     new WorkBoxPlugin.GenerateSW({
       globDirectory: config.output.path,
-      globPatterns: ['**/*.{dom-event-event,js,json,png}'],
+      globPatterns: ['**/*.js', '**/index.html'],
       swDest: path.join(config.output.path, 'sw.js'),
       clientsClaim: true,
       skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: /\.(png|json)/,
+          handler: 'networkFirst'
+        }]
     })
   ]
 };

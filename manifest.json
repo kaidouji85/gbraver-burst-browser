@@ -1,0 +1,12 @@
+{
+  "lang": "ja",
+  "name": "gbraver burst",
+  "short_name": "gbraver",
+  "icons": [{
+    "src": "./app-icon.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }],
+  "start_url": "./index.html",
+  "display": "browser"
+}

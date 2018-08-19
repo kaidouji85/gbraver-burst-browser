@@ -9,8 +9,8 @@ import * as THREE from "three";
  *
  * @param camera 更新対象のカメラ
  */
-export function onResizePerspectiveCamera(camera: THREE.PerspectiveCamera): void {
-  camera.aspect = window.innerWidth / window.innerHeight;
+export function onResizePerspectiveCamera(camera: THREE.PerspectiveCamera, width: number, height: number): void {
+  camera.aspect = width / height;
   camera.updateProjectionMatrix();
 }
 
@@ -20,10 +20,10 @@ export function onResizePerspectiveCamera(camera: THREE.PerspectiveCamera): void
  *
  * @param camera 更新対象のカメラ
  */
-export function onResizeOrthographicCamera(camera: THREE.OrthographicCamera): void {
-  camera.left = -window.innerWidth/2;
-  camera.right = window.innerWidth/2;
-  camera.top = window.innerHeight/2;
-  camera.bottom = -window.innerHeight/2;
+export function onResizeOrthographicCamera(camera: THREE.OrthographicCamera, width: number, height: number): void {
+  camera.left = -width/2;
+  camera.right = width/2;
+  camera.top = height/2;
+  camera.bottom = -height/2;
   camera.updateProjectionMatrix();
 }
