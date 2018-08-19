@@ -10,6 +10,7 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
 export const MESH_SIZE = 1024;
 export const CANVAS_SIZE = 1024;
+export const SCALE = 0.4;
 
 /** ターンインジケータービュー */
 export class TurnIndicatorView {
@@ -28,11 +29,13 @@ export class TurnIndicatorView {
 
   /** モデルをビューに反映させる */
   engage(model: TurnIndicatorModel): void {
-    this._refresh(model);
+    this._refreshCanvas(model);
+    this._setScale();
+    this._setPos();
   }
 
   /** キャンバスを更新する */
-  _refresh(model: TurnIndicatorModel) {
+  _refreshCanvas(model: TurnIndicatorModel) {
     this._canvasMesh.draw(context => {
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);
       context.save();
@@ -46,6 +49,16 @@ export class TurnIndicatorView {
       context.restore();
     });
   }
+
+  /** 全体の拡大率を変更 */
+  _setScale(): void {
+    this._canvasMesh.mesh.scale.set(SCALE, SCALE, SCALE);
+  }
+
+  _setPos(): void {
+    this._canvasMesh.mesh.position.y = 32;
+  }
+
 
   /** ビューで使うthree.jsを返す */
   getObject3D(): THREE.Object3D {
