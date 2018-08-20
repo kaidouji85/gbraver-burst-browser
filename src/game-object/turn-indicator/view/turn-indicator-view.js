@@ -58,7 +58,8 @@ export class TurnIndicatorView {
 
   /** 位置調整 */
   _setPos(): void {
-    this._canvasMesh.mesh.position.y = 32;
+    this._canvasMesh.mesh.position.x = 0;
+    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - 48;
   }
 
 
