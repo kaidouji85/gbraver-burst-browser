@@ -62,7 +62,7 @@ export class PlayerGaugeView implements GaugeView {
   /** 座標を設定する */
   _setPos(): void {
     this._canvasMesh.mesh.position.x = 96;
-    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - 48;
+    this._canvasMesh.mesh.position.y = - window.innerHeight / 2 + 224;
   }
 
   getObject3D(): THREE.Object3D {

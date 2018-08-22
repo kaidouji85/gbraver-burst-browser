@@ -57,8 +57,8 @@ export class BurstButtonView {
 
   /** 表示位置を更新する */
   _setPos(): void {
-    this._canvasMesh.mesh.position.x = - window.innerWidth / 2 + 48;
-    this._canvasMesh.mesh.position.y = - window.innerHeight / 2 + 48;
+    this._canvasMesh.mesh.position.x = - window.innerWidth / 2 + 64;
+    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - 64;
   }
 
   /** 本ビューで使うthree.jsオブジェクトを取得する */
