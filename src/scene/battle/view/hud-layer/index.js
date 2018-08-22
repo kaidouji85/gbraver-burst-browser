@@ -12,6 +12,8 @@ import {createPlayerGauge} from "./player-gauge";
 import {createEnemyGauge} from "./enemy-gauge";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
 import {createTurnIndicator} from "./turn-indicator";
+import {BurstButton} from "../../../../game-object/burst-button/burst-button";
+import {createBurstButton} from "./burst-button";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -40,6 +42,8 @@ export class HudLayer {
   enemyGauge: Gauge;
   /** ターンインジケーター */
   turnIndicator: TurnIndicator;
+  /** バーストボタン */
+  burstButton: BurstButton;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -59,5 +63,8 @@ export class HudLayer {
 
     this.turnIndicator = createTurnIndicator(param.resources);
     this.scene.add(this.turnIndicator.getObject3D());
+
+    this.burstButton = createBurstButton(param.resources);
+    this.scene.add(this.burstButton.getObject3D());
   }
 }
