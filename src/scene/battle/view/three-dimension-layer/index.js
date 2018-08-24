@@ -8,9 +8,12 @@ import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import {createCamera} from "./camera";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import {Observable} from "rxjs";
+import type {GameLoop} from "../../../../action/game-loop/game-loop";
 
 type Param = {
   resources: Resources,
+  listener: Observable<GameLoop>,
   playerId: PlayerId,
   players: Player[]
 };
@@ -42,10 +45,8 @@ export class ThreeDimensionLayer {
 
     this.playerSprite = new createPlayerSprite(param.resources, playerInfo);
     this.playerSprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
-    this.playerSprite.stand().start();
 
     this.enemySprite = new createEnemySprite(param.resources, enemyInfo);
     this.enemySprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
-    this.enemySprite.stand().start();
   }
 }
