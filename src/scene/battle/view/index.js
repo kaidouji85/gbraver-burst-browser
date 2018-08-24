@@ -6,12 +6,15 @@ import {HudLayer} from './hud-layer/index';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {OverlapListener} from "../../../observer/overlap/overlap-listener";
 import type {BattleSceneNotifier} from "../../../observer/battle-scene/battle-scene-notifier";
+import type {GameLoop} from "../../../action/game-loop/game-loop";
+import {Observable} from "rxjs";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   notifier: BattleSceneNotifier,
-  listener: OverlapListener,
+  depricatedListener: OverlapListener,
+  listener: Observable<GameLoop>,
   renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
   players: Player[]
@@ -40,7 +43,8 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       notifier: param.notifier,
-      listener: param.listener
+      listener: param.listener,
+      deprecatedListener: param.depricatedListener
     });
   }
 

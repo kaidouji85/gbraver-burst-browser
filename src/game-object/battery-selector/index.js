@@ -11,10 +11,13 @@ import {map, filter, distinctUntilChanged} from 'rxjs/operators';
 import {open} from './animation/open';
 import type {OverlapListener} from "../../observer/overlap/overlap-listener";
 import {pushOkButton} from "./animation/push-ok-button";
+import type {GameLoop} from "../../action/game-loop/game-loop";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
+  listener: Observable<GameLoop>,
+  // TODO 削除する
   overlapListener: OverlapListener,
   maxBattery: number,
   onBatteryChange: (battery: number) => void,
@@ -44,6 +47,18 @@ export class BatterySelector {
       disabled: false,
       opacity: 0
     };
+    this._tween = new Group();
+
+    param.listener.subscribe(action => {
+      switch (action.type) {
+        case 'GameLoop':
+          this._gameLoop(action);
+          return;
+        default:
+          return;
+      }
+    });
+
     this._view = new BatterySliderView({
       resources: param.resources,
       overlapListener: param.overlapListener,
@@ -68,12 +83,11 @@ export class BatterySelector {
         animation.end.onComplete(() => param.onOkButtonPush());
       }
     });
-    this._tween = new Group();
   }
 
   /** ゲームループの処理 */
-  gameLoop(time: DOMHighResTimeStamp): void {
-    this._tween.update(time);
+  _gameLoop(action: GameLoop): void {
+    this._tween.update(action.time);
     this._view.engage(this._model);
   }
 

@@ -5,11 +5,14 @@ import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import type {OverlapListener} from "../../../../observer/overlap/overlap-listener";
 import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
+import type {GameLoop} from "../../../../action/game-loop/game-loop";
+import {Observable} from "rxjs";
 
 /** バッテリーセレクタを生成する */
-export function createBatterySelector(resources: Resources, listener: OverlapListener, notifier: BattleSceneNotifier, playerInfo: Player): BatterySelector {
+export function createBatterySelector(resources: Resources, Listener: Observable<GameLoop>, deprecatedListener: OverlapListener, notifier: BattleSceneNotifier, playerInfo: Player): BatterySelector {
   return new BatterySelector({
-    overlapListener: listener,
+    listener: Listener,
+    overlapListener: deprecatedListener,
     maxBattery: playerInfo.armdozer.maxBattery,
     resources: resources,
     onBatteryChange: (battery: number) => notifier.notify({

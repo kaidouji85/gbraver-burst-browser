@@ -14,13 +14,16 @@ import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicat
 import {createTurnIndicator} from "./turn-indicator";
 import {BurstButton} from "../../../../game-object/burst-button/burst-button";
 import {createBurstButton} from "./burst-button";
+import {Observable} from "rxjs";
+import type {GameLoop} from "../../../../action/game-loop/game-loop";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
   playerId: PlayerId,
   players: Player[],
-  listener: OverlapListener,
+  listener: Observable<GameLoop>,
+  deprecatedListener: OverlapListener,
   notifier: BattleSceneNotifier
 };
 
@@ -52,7 +55,7 @@ export class HudLayer {
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
-    this.batterySelector = createBatterySelector(param.resources, param.listener, param.notifier, player);
+    this.batterySelector = createBatterySelector(param.resources, param.listener, param.deprecatedListener, param.notifier, player);
     this.scene.add(this.batterySelector.getObject3D());
 
     this.playerGauge = createPlayerGauge(param.resources, player);

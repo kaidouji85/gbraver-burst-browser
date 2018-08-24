@@ -88,7 +88,8 @@ export class BattleScene {
       playerId: params.playerId,
       players: params.players,
       notifier: this._battleSceneObserver,
-      listener: this._raycasterObserver,
+      listener: params.listener,
+      depricatedListener: this._raycasterObserver,
       renderer: params.renderer
     });
 
