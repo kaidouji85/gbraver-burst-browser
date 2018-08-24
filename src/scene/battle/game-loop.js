@@ -8,12 +8,5 @@ import type {BattleSceneState} from "./state";
 // TODO 削除する
 /** ゲームループ時の処理 */
 export function gameLoop(view: BattleSceneView, state: BattleSceneState, time: DOMHighResTimeStamp): void {
-  threeDimension(view.threeDimensionLayer, time);
   view.render();
-}
-
-/** 3Dレイヤーのゲームループ時の処理 */
-function threeDimension(view: ThreeDimensionLayer, time: DOMHighResTimeStamp) {
-  view.playerSprite.gameLoop(time, view.camera);
-  view.enemySprite.gameLoop(time, view.camera);
 }

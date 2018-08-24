@@ -7,6 +7,8 @@ import type {ShinBraverModel} from "./model/shin-braver-model";
 import {ANIMATION_STAND} from "./model/shin-braver-model";
 import type {ShinBraverView} from "./view/shin-braver-view";
 import {stand} from "./model/stand";
+import {Observable} from "rxjs";
+import type {SpriteGameLoop} from "../../../action/sprite/armdozer-game-loop";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -14,7 +16,7 @@ export class ShinBraver implements ArmDozerSprite {
   _view: ShinBraverView;
   _tweenGroup: Group;
 
-  constructor(params: {view: ShinBraverView}) {
+  constructor(params: {view: ShinBraverView, listener: Observable<SpriteGameLoop>}) {
     this._model = {
       position: {
         x: 150,
@@ -28,12 +30,22 @@ export class ShinBraver implements ArmDozerSprite {
     };
     this._view = params.view;
     this._tweenGroup = new Group();
+
+    params.listener.subscribe(action => {
+      switch (action.type) {
+        case 'SpriteGameLoop':
+          this._gameLoop(action);
+          return;
+        default:
+          return;
+      }
+    });
   }
 
-  /** ゲームループ毎の処理*/
-  gameLoop(time: DOMHighResTimeStamp, camera: THREE.Camera): void {
-    this._tweenGroup.update(time);
-    this._view.gameLoop(this._model, camera);
+  /** ゲームループ */
+  _gameLoop(action: SpriteGameLoop): void {
+    this._tweenGroup.update(action.time);
+    this._view.gameLoop(this._model, action.camera);
   }
 
   /** 本スプライトに関連するthree.jsオブジェクトを返す */

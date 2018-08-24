@@ -6,6 +6,8 @@ import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import {ShinBraverTextureContainer} from "./texture";
 import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
+import {Observable} from "rxjs";
+import type {SpriteGameLoop} from "../../../../action/sprite/armdozer-game-loop";
 
 export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;

@@ -7,6 +7,9 @@ import type {NeoLandozerModel} from "./model/neo-landozer-model";
 import {ANIMATION_STAND} from "./model/neo-landozer-model";
 import type {NeoLandozerView} from "./view/neo-landozer-view";
 import {stand} from "./model/stand";
+import {Observable} from "rxjs";
+import {filter} from 'rxjs/operators';
+import type {SpriteGameLoop} from "../../../action/sprite/armdozer-game-loop";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -14,7 +17,7 @@ export class NeoLandozer implements ArmDozerSprite {
   _view: NeoLandozerView;
   _tweenGroup: Group;
 
-  constructor(params: {view: NeoLandozerView}) {
+  constructor(params: {view: NeoLandozerView, listener: Observable<SpriteGameLoop>}) {
     this._model = {
       position: {
         x: 150,
@@ -28,12 +31,23 @@ export class NeoLandozer implements ArmDozerSprite {
     };
     this._view = params.view;
     this._tweenGroup = new Group();
+
+    params.listener
+      .subscribe(action => {
+        switch (action.type) {
+          case 'SpriteGameLoop':
+            this._gameLoop(action);
+            return;
+          default:
+            return;
+        }
+      });
   }
 
-  /** ゲームループ毎の処理*/
-  gameLoop(time: DOMHighResTimeStamp, camera: THREE.Camera): void {
-    this._tweenGroup.update(time);
-    this._view.gameLoop(this._model, camera);
+  /** ゲームループ */
+  _gameLoop(action: SpriteGameLoop): void {
+    this._tweenGroup.update(action.time);
+    this._view.gameLoop(this._model, action.camera);
   }
 
   /** 本スプライトに関連するthree.jsオブジェクトを返す */
