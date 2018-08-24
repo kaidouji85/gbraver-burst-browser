@@ -9,9 +9,11 @@ import type {NPC} from "../npc/npc";
 import {NeoLandozer} from "../npc/neo-landozer";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import type {Command} from "gbraver-burst-core/lib/command/command";
+import {Observable} from "rxjs";
+import type {GameLoop} from "../action/game-loop/game-loop";
 
 /** 戦闘シーン生成のヘルパー関数 */
-export function createBattleScene(resources: Resources, domEventObserver: DOMEventObserver, renderer: THREE.WebGLRenderer): BattleScene {
+export function createBattleScene(resources: Resources, listener: Observable<GameLoop>, domEventObserver: DOMEventObserver, renderer: THREE.WebGLRenderer): BattleScene {
   // TODO 開発用にダミーデータを作成している
   const player: Player = {
     playerId: 'test01',
@@ -34,6 +36,7 @@ export function createBattleScene(resources: Resources, domEventObserver: DOMEve
     initialState: initialState,
     progressBattle: async (command: Command) => {
       return battleRoom.progress(command);
-    }
+    },
+    listener: listener
   });
 }

@@ -4,7 +4,6 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
-import {Scene} from "three";
 import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
 import {domEventHandler} from "./action-handler/dom-event";
 import {gameLoop} from './game-loop';
@@ -14,6 +13,8 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";
 import {OverlapObserver} from "../../observer/overlap/overlap-observer";
 import {domEventToOverlapEvent} from "../../action/overlap/dom-event-to-overlap-event";
+import type {GameLoop} from "../../action/game-loop/game-loop";
+import {Observable} from "rxjs";
 
 /** コンストラクタのパラメータ */
 type Params = {
@@ -31,12 +32,14 @@ type Params = {
   renderer: THREE.WebGLRenderer,
   /** HTMLイベントリスナー */
   domEventListener: DOMEventListener,
+  /** イベントリスナー */
+  listener: Observable<GameLoop>,
 };
 
 /**
  * 戦闘画面アプリケーション
  */
-export class BattleScene implements Scene{
+export class BattleScene {
   /** ビュー */
   _view: BattleSceneView;
   /** 戦闘画面全体の状態 */
@@ -89,14 +92,13 @@ export class BattleScene implements Scene{
       renderer: params.renderer
     });
 
+    params.listener.subscribe(action => {
+      gameLoop(this._view, this._state, action.time);
+    });
+
     this._battleSceneObserver.notify({
       type: 'startBattleScene',
       initialState: params.initialState
     });
   };
-
-  /** ゲームループ */
-  gameLoop(time: DOMHighResTimeStamp): void {
-    gameLoop(this._view, this._state, time);
-  }
 }
