@@ -64,7 +64,7 @@ export class HudLayer {
     this.enemyGauge = createEnemyGauge(param.resources, param.listener, enemy);
     this.scene.add(this.enemyGauge.getObject3D());
 
-    this.turnIndicator = createTurnIndicator(param.resources);
+    this.turnIndicator = createTurnIndicator(param.resources, param.listener);
     this.scene.add(this.turnIndicator.getObject3D());
 
     this.burstButton = createBurstButton(param.resources);

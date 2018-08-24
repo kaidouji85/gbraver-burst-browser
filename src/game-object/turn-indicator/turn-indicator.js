@@ -4,9 +4,12 @@ import * as THREE from 'three';
 import type {Resources} from "../../resource";
 import type {TurnIndicatorModel} from "./model/turn-indicator-model";
 import {TurnIndicatorView} from "./view/turn-indicator-view";
+import type {GameLoop} from "../../action/game-loop/game-loop";
+import {Observable} from "rxjs";
 
 type Param = {
-  resources: Resources
+  resources: Resources,
+  listener: Observable<GameLoop>
 };
 
 /** ターンインジケーター */
@@ -19,10 +22,20 @@ export class TurnIndicator {
       isPlayerTurn: true
     };
     this._view = new TurnIndicatorView(param.resources);
+
+    param.listener.subscribe(action => {
+      switch (action.type) {
+        case 'GameLoop':
+          this._gameLoop(action);
+          return;
+        default:
+          return;
+      }
+    });
   }
 
   /** ゲームループの処理 */
-  gameLoop(time: DOMHighResTimeStamp): void {
+  _gameLoop(action: GameLoop): void {
     this._view.engage(this._model);
   }
 

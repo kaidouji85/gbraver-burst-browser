@@ -23,6 +23,5 @@ function threeDimension(view: ThreeDimensionLayer, time: DOMHighResTimeStamp) {
 
 /** hudレイヤーのゲームループ時の処理 */
 function hud(view: HudLayer, time: DOMHighResTimeStamp) {
-  view.turnIndicator.gameLoop(time);
   view.burstButton.gameLoop(time);
 }
