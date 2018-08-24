@@ -47,10 +47,20 @@ export class BattleSceneView {
       listener: param.listener,
       deprecatedListener: param.depricatedListener
     });
+
+    param.listener.subscribe(action => {
+      switch (action.type) {
+        case 'GameLoop':
+          this._render();
+          return;
+        default:
+          return;
+      }
+    });
   }
 
-  /** レンダリング処理 */
-  render() {
+  /** レンダリング */
+  _render(): void {
     this.renderer.render(this.threeDimensionLayer.scene, this.threeDimensionLayer.camera);
     this.renderer.render(this.hudLayer.scene, this.hudLayer.camera);
   }

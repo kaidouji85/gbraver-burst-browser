@@ -6,7 +6,6 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
 import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
 import {domEventHandler} from "./action-handler/dom-event";
-import {gameLoop} from './game-loop';
 import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-observer";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
@@ -91,10 +90,6 @@ export class BattleScene {
       listener: params.listener,
       depricatedListener: this._raycasterObserver,
       renderer: params.renderer
-    });
-
-    params.listener.subscribe(action => {
-      gameLoop(this._view, this._state, action.time);
     });
 
     this._battleSceneObserver.notify({
