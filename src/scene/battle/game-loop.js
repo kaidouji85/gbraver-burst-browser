@@ -5,6 +5,7 @@ import {HudLayer} from "./view/hud-layer/index";
 import {BattleSceneView} from "./view/index";
 import type {BattleSceneState} from "./state";
 
+// TODO 削除する
 /** ゲームループ時の処理 */
 export function gameLoop(view: BattleSceneView, state: BattleSceneState, time: DOMHighResTimeStamp): void {
   threeDimension(view.threeDimensionLayer, time);
@@ -22,8 +23,6 @@ function threeDimension(view: ThreeDimensionLayer, time: DOMHighResTimeStamp) {
 
 /** hudレイヤーのゲームループ時の処理 */
 function hud(view: HudLayer, time: DOMHighResTimeStamp) {
-  view.playerGauge.gameLoop(time);
-  view.enemyGauge.gameLoop(time);
   view.turnIndicator.gameLoop(time);
   view.burstButton.gameLoop(time);
 }
