@@ -4,9 +4,12 @@ import * as THREE from 'three';
 import type {BurstButtonModel} from "./model/burst-button-model";
 import {BurstButtonView} from "./view/burst-button-view";
 import type {Resources} from "../../resource";
+import type {GameLoop} from "../../action/game-loop/game-loop";
+import {Observable} from "rxjs";
 
 type Param = {
-  resources: Resources
+  resources: Resources,
+  listener: Observable<GameLoop>
 };
 
 /** バーストボタン */
@@ -17,10 +20,19 @@ export class BurstButton {
   constructor(param: Param) {
     this._model = {};
     this._view = new BurstButtonView(param.resources);
+    param.listener.subscribe(action => {
+      switch (action.type) {
+        case 'GameLoop':
+          this._gameLoop(action);
+          return;
+        default:
+          return;
+      }
+    });
   }
 
   /** ゲームループの処理 */
-  gameLoop(time: DOMHighResTimeStamp): void {
+  _gameLoop(action: GameLoop): void {
     this._view.engage(this._model);
   }
 

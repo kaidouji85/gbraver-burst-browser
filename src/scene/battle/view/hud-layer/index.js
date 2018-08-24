@@ -67,7 +67,7 @@ export class HudLayer {
     this.turnIndicator = createTurnIndicator(param.resources, param.listener);
     this.scene.add(this.turnIndicator.getObject3D());
 
-    this.burstButton = createBurstButton(param.resources);
+    this.burstButton = createBurstButton(param.resources, param.listener);
     this.scene.add(this.burstButton.getObject3D());
   }
 }

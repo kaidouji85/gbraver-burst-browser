@@ -9,8 +9,6 @@ import type {BattleSceneState} from "./state";
 /** ゲームループ時の処理 */
 export function gameLoop(view: BattleSceneView, state: BattleSceneState, time: DOMHighResTimeStamp): void {
   threeDimension(view.threeDimensionLayer, time);
-  hud(view.hudLayer, time);
-
   view.render();
 }
 
@@ -19,9 +17,4 @@ function threeDimension(view: ThreeDimensionLayer, time: DOMHighResTimeStamp) {
   view.playerSprite.gameLoop(time, view.camera);
   view.enemySprite.gameLoop(time, view.camera);
   view.stage.gameLoop(view.camera);
-}
-
-/** hudレイヤーのゲームループ時の処理 */
-function hud(view: HudLayer, time: DOMHighResTimeStamp) {
-  view.burstButton.gameLoop(time);
 }
