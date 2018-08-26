@@ -6,7 +6,6 @@ import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {BattleSceneNotifier} from "../../../../deperecated-observer/battle-scene/battle-scene-notifier";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {createBatterySelector} from "./battery-selector";
-import type {OverlapListener} from "../../../../deperecated-observer/overlap/overlap-listener";
 import {Gauge} from "../../../../game-object/gauge/gauge";
 import {createPlayerGauge} from "./player-gauge";
 import {createEnemyGauge} from "./enemy-gauge";

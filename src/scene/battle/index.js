@@ -9,7 +9,6 @@ import {BattleSceneObserver} from "../../deperecated-observer/battle-scene/battl
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";
-import {OverlapObserver} from "../../deperecated-observer/overlap/overlap-observer";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
@@ -36,9 +35,6 @@ export class BattleScene {
   _state: BattleSceneState;
   /** 戦闘画面のオブザーバ */
   _battleSceneObserver: BattleSceneObserver;
-  /** レイキャスターオブザーバ */
-  _raycasterObserver: OverlapObserver;
-
   /** 戦闘進行関数 */
   _progressBattle: ProgressBattle;
 
@@ -47,8 +43,6 @@ export class BattleScene {
       playerId: param.playerId,
       lastBatteryValue: 0
     };
-
-    this._raycasterObserver = new OverlapObserver();
 
     param.domEventListener.subscribe(action => {
       domEventHandler(action, this._view, this._state);

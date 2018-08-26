@@ -9,7 +9,6 @@ import {changeBattery} from './animation/change-battery';
 import {Group, Tween} from "@tweenjs/tween.js";
 import {map, filter, distinctUntilChanged} from 'rxjs/operators';
 import {open} from './animation/open';
-import type {OverlapListener} from "../../deperecated-observer/overlap/overlap-listener";
 import {pushOkButton} from "./animation/push-ok-button";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import type {OverlapAction} from "../../action/overlap";

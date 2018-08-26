@@ -3,11 +3,9 @@
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {Resources} from "../../../resource/index";
 import type {BatterySelectorModel} from "../model/battery-selector";
-import {drawBatterySlider} from "../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {SliderOperation} from "../../../operation/slider";
 import * as R from 'ramda';
-import type {OverlapListener} from "../../../deperecated-observer/overlap/overlap-listener";
 import {ButtonOperation} from "../../../operation/button";
 import {refreshGauge} from "./refresh-gauge";
 import type {OverlapAction} from "../../../action/overlap";
