@@ -2,7 +2,6 @@
 
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {createRender} from "../render/renderer";
-import {DOMEventObserver} from "../deperecated-observer/dom-event/dom-event-observer";
 import {bindDom} from "../render/bind-dom";
 import {loadAllResource} from "../resource";
 import {createBattleScene} from "./create-battle-scene";
@@ -21,14 +20,10 @@ export async function main() {
   const gameLoopListener = createGameLoopListener();
   const domEventListener = createDOMEventListener(renderer.domElement);
 
-  // TODO 削除する
-  const domEventObserver = new DOMEventObserver(renderer.domElement);
-
   const scene = createBattleScene({
     resources,
     gameLoopListener,
     domEventListener,
-    depretartedDomEventObserver: domEventObserver,
     renderer
   });
 

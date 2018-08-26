@@ -14,7 +14,6 @@ import type {DOMEvent} from "../../../action/dom-event";
 type Param = {
   resources: Resources,
   notifier: BattleSceneNotifier,
-  depricatedListener: OverlapListener,
   gameLoopListener: Observable<GameLoop>,
   domEventListener: Observable<DOMEvent>,
   renderer: THREE.WebGLRenderer,
@@ -49,7 +48,6 @@ export class BattleSceneView {
       notifier: param.notifier,
       gameLoopListener: param.gameLoopListener,
       domEventListener: param.domEventListener,
-      deprecatedListener: param.depricatedListener
     });
 
     param.gameLoopListener.subscribe(action => {

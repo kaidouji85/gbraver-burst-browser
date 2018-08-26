@@ -1,6 +1,5 @@
 // @flow
 import type {Resources} from "../resource";
-import {DOMEventObserver} from "../deperecated-observer/dom-event/dom-event-observer";
 import * as THREE from "three";
 import {BattleScene} from "../scene/battle";
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core/lib/master/armdozers";
@@ -18,7 +17,6 @@ type Param = {
   resources: Resources,
   gameLoopListener: Observable<GameLoop>,
   domEventListener: Observable<DOMEvent>,
-  depretartedDomEventObserver: DOMEventObserver, // TODO 削除する
   renderer: THREE.WebGLRenderer
 };
 
@@ -46,7 +44,6 @@ export function createBattleScene(param: Param): BattleScene {
     progressBattle: async (command: Command) => {
       return battleRoom.progress(command);
     },
-    depricatedDomListener: param.depretartedDomEventObserver,
     domEventListener: param.domEventListener,
     gameLoopListener: param.gameLoopListener,
   });

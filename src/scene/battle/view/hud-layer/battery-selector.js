@@ -13,7 +13,6 @@ type Param = {
   resources: Resources,
   gameLoopListener: Observable<GameLoop>,
   overlapListener: Observable<OverlapAction>,
-  deprecatedListener: OverlapListener,
   notifier: BattleSceneNotifier,
   playerInfo: Player
 }
@@ -23,7 +22,6 @@ export function createBatterySelector(param: Param): BatterySelector {
   return new BatterySelector({
     gameLoopListener: param.gameLoopListener,
     overlapListener: param.overlapListener,
-    deprecatedOverlapListener: param.deprecatedListener,
     maxBattery: param.playerInfo.armdozer.maxBattery,
     resources: param.resources,
     onBatteryChange: (battery: number) => param.notifier.notify({

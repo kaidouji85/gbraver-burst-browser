@@ -19,8 +19,6 @@ type Param = {
   resources: Resources,
   gameLoopListener: Observable<GameLoop>,
   overlapListener: Observable<OverlapAction>,
-  // TODO 削除する
-  deprecatedOverlapListener: OverlapListener,
   maxBattery: number,
   onBatteryChange: (battery: number) => void,
   onOkButtonPush: () => void,
@@ -64,7 +62,6 @@ export class BatterySelector {
     this._view = new BatterySliderView({
       resources: param.resources,
       overlapListener: param.overlapListener,
-      deprecatedOverlapListener: param.deprecatedOverlapListener,
       maxValue: param.maxBattery,
       onBatteryChange: battery => {
         if (this._model.disabled || this._model.slider.enableMax < battery) {

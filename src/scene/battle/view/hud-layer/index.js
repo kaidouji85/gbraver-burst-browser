@@ -27,7 +27,6 @@ export type Param = {
   players: Player[],
   gameLoopListener: Observable<GameLoop>,
   domEventListener: Observable<DOMEvent>,
-  deprecatedListener: OverlapListener,
   notifier: BattleSceneNotifier
 };
 
@@ -64,7 +63,6 @@ export class HudLayer {
       resources: param.resources,
       gameLoopListener: param.gameLoopListener,
       overlapListener: overlapListener,
-      deprecatedListener: param.deprecatedListener,
       notifier: param.notifier,
       playerInfo: player
     });

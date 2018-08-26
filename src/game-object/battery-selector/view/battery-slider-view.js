@@ -36,8 +36,6 @@ type Param = {
   maxValue: number,
   /**当たり判定関連のリスナー */
   overlapListener: Observable<OverlapAction>,
-  /** 当たり判定関連のリスナー */
-  deprecatedOverlapListener: OverlapListener,
   /** バッテリーが変更された場合のコールバック関数 */
   onBatteryChange: (battery: number) => void,
   /** OKボタンが押された時のコールバック関数 */
