@@ -2,6 +2,7 @@
 
 import type {DOMEventNotifier} from "../../observer/dom-event/dom-event-notifier";
 
+// TODO 廃止する
 /** HTMLイベント通知者と実際のHTMLイベントを関連づける */
 export function bindDOMEvent(notifier: DOMEventNotifier, renderDom: HTMLElement): void {
   window.addEventListener('resize', () => {

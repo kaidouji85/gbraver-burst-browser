@@ -4,10 +4,11 @@ import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {createRender} from "../render/renderer";
 import {DOMEventObserver} from "../observer/dom-event/dom-event-observer";
 import {bindDom} from "../render/bind-dom";
-import Tween from "@tweenjs/tween.js/src/Tween";
 import {loadAllResource} from "../resource";
 import {createBattleScene} from "./create-battle-scene";
 import {createGameLoopListener} from "../action/game-loop/create-listener";
+import {createDOMEventListener} from "../action/dom-event/create-listener";
+import Tween from '@tweenjs/tween.js';
 
 export async function main() {
   loadServiceWorker();
@@ -18,10 +19,14 @@ export async function main() {
   bindDom(renderer);
 
   const gameLoopListener = createGameLoopListener();
-  gameLoopListener.subscribe(action => {
-    Tween.update(action.time);
-  });
+  const domEventListener = createDOMEventListener(renderer.domElement);
+
+  // TODO 削除する
   const domEventObserver = new DOMEventObserver(renderer.domElement);
 
   const scene = createBattleScene(resources, gameLoopListener, domEventObserver, renderer);
+
+  gameLoopListener.subscribe(time => {
+    Tween.update();
+  });
 }

@@ -2,6 +2,7 @@
 
 import type {GameLoop} from "./game-loop";
 import {Observable, Subject} from "rxjs";
+import {publish} from 'rxjs/operators';
 
 /**
  * ゲームループのリスナーを生成する
