@@ -3,11 +3,11 @@
 import * as THREE from "three";
 import {Observable, merge} from "rxjs";
 import {filter, map} from 'rxjs/operators';
-import type {DOMEvent} from "../action/dom-event";
-import {toMouseDownRaycaster, toTouchStartRaycaster} from "../action/overlap/dom-event-to-overlap";
-import type {MouseDownRaycaster} from "../action/overlap/mouse-down-raycaster";
-import type {OverlapAction} from "../action/overlap";
-import type {TouchStartRaycaster} from "../action/overlap/touch-start-raycaster";
+import type {DOMEvent} from "../dom-event/index";
+import {toMouseDownRaycaster, toTouchStartRaycaster} from "./dom-event-to-overlap";
+import type {MouseDownRaycaster} from "./mouse-down-raycaster";
+import type {OverlapAction} from "./index";
+import type {TouchStartRaycaster} from "./touch-start-raycaster";
 
 const EMPTY_MOUSE_RAYCASTER = {
   raycaster: new THREE.Raycaster()
