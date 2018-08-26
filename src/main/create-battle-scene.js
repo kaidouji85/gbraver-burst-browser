@@ -18,7 +18,7 @@ type Param = {
   resources: Resources,
   gameLoopListener: Observable<GameLoop>,
   domEventListener: Observable<DOMEvent>,
-  domEventObserver: DOMEventObserver, // TODO 削除する
+  depretartedDomEventObserver: DOMEventObserver, // TODO 削除する
   renderer: THREE.WebGLRenderer
 };
 
@@ -46,7 +46,7 @@ export function createBattleScene(param: Param): BattleScene {
     progressBattle: async (command: Command) => {
       return battleRoom.progress(command);
     },
-    oldDomListener: param.domEventObserver,
+    depricatedDomListener: param.depretartedDomEventObserver,
     domEventListener: param.domEventListener,
     gameLoopListener: param.gameLoopListener,
   });

@@ -28,7 +28,7 @@ export async function main() {
     resources,
     gameLoopListener,
     domEventListener,
-    domEventObserver,
+    depretartedDomEventObserver: domEventObserver,
     renderer
   });
 

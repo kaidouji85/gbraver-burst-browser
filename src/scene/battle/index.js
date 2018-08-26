@@ -25,7 +25,7 @@ type Param = {
   initialState: GameState[],
   progressBattle: ProgressBattle,
   renderer: THREE.WebGLRenderer,
-  oldDomListener: Observer<DOMEvent>,
+  depricatedDomListener: Observer<DOMEvent>,
   domEventListener: Observable<DOMEvent>,
   gameLoopListener: Observable<GameLoop>,
 };
@@ -42,7 +42,7 @@ export class BattleScene {
    * HTMLイベントリスナー
    * シーン終了時にハンドラ削除をするためにキャッシュしている
    */
-  _domEventListener: DOMEventListener;
+  _deperecatedDomEventListener: DOMEventListener;
   /** 戦闘画面のオブザーバ */
   _battleSceneObserver: BattleSceneObserver;
   /** レイキャスターオブザーバ */
@@ -59,11 +59,12 @@ export class BattleScene {
 
     this._raycasterObserver = new OverlapObserver();
 
-    this._domEventListener = param.oldDomListener;
-    this._domEventListener.add(event => {
+    // TODO 削除する
+    this._deperecatedDomEventListener = param.depricatedDomListener;
+    this._deperecatedDomEventListener.add(event => {
       domEventHandler(event, this._view, this._state);
     });
-    this._domEventListener.add(event => {
+    this._deperecatedDomEventListener.add(event => {
       const raycasterAction = domEventToOverlapEvent(event, this._view);
       if (raycasterAction) {
         this._raycasterObserver.notify(raycasterAction);
