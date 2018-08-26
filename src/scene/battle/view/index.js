@@ -43,6 +43,7 @@ export class BattleSceneView {
     });
     this.hudLayer = new HudLayer({
       resources: param.resources,
+      renderer: param.renderer,
       playerId: param.playerId,
       players: param.players,
       notifier: param.notifier,

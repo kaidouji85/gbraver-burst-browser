@@ -7,18 +7,28 @@ import type {OverlapListener} from "../../../../deperecated-observer/overlap/ove
 import type {BattleSceneNotifier} from "../../../../deperecated-observer/battle-scene/battle-scene-notifier";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
+import type {OverlapAction} from "../../../../action/overlap";
+
+type Param = {
+  resources: Resources,
+  gameLoopListener: Observable<GameLoop>,
+  overlapListener: Observable<OverlapAction>,
+  deprecatedListener: OverlapListener,
+  notifier: BattleSceneNotifier,
+  playerInfo: Player
+}
 
 /** バッテリーセレクタを生成する */
-export function createBatterySelector(resources: Resources, Listener: Observable<GameLoop>, deprecatedListener: OverlapListener, notifier: BattleSceneNotifier, playerInfo: Player): BatterySelector {
+export function createBatterySelector(param: Param): BatterySelector {
   return new BatterySelector({
-    listener: Listener,
-    overlapListener: deprecatedListener,
-    maxBattery: playerInfo.armdozer.maxBattery,
-    resources: resources,
-    onBatteryChange: (battery: number) => notifier.notify({
+    listener: param.gameLoopListener,
+    overlapListener: param.deprecatedListener,
+    maxBattery: param.playerInfo.armdozer.maxBattery,
+    resources: param.resources,
+    onBatteryChange: (battery: number) => param.notifier.notify({
       type: 'changeBattery',
       battery: battery}),
-    onOkButtonPush: () => notifier.notify({
+    onOkButtonPush: () => param.notifier.notify({
       type: 'decideBattery'
     })
   });

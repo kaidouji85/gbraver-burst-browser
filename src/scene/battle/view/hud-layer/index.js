@@ -17,10 +17,12 @@ import {createBurstButton} from "./burst-button";
 import {Observable} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {DOMEvent} from "../../../../action/dom-event";
+import {toOverlapObservable} from "../../../../observer/to-overlap";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
+  renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
   players: Player[],
   gameLoopListener: Observable<GameLoop>,
@@ -56,8 +58,16 @@ export class HudLayer {
 
     this.scene = new THREE.Scene();
     this.camera = createCamera();
+    const overlapListener = toOverlapObservable(param.domEventListener, param.renderer, this.camera);
 
-    this.batterySelector = createBatterySelector(param.resources, param.gameLoopListener, param.deprecatedListener, param.notifier, player);
+    this.batterySelector = createBatterySelector({
+      resources: param.resources,
+      gameLoopListener: param.gameLoopListener,
+      overlapListener: overlapListener,
+      deprecatedListener: param.deprecatedListener,
+      notifier: param.notifier,
+      playerInfo: player
+    });
     this.scene.add(this.batterySelector.getObject3D());
 
     this.playerGauge = createPlayerGauge(param.resources, param.gameLoopListener, player);

@@ -10,7 +10,7 @@ import {createTouchEventRaycaster} from "../../overlap/check/touch/touch-raycast
 import type {MouseDownRaycaster} from "./mouse-down-raycaster";
 
 /** MouseDownからMouseDownRaycasterに変換 */
-export function toMouseDownOverlap(origin: MouseDown, renderer: THREE.WebGLRenderer, camera: THREE.Camera): MouseDownRaycaster {
+export function toMouseDownRaycaster(origin: MouseDown, renderer: THREE.WebGLRenderer, camera: THREE.Camera): MouseDownRaycaster {
   const mouseRaycaster: MouseRaycaster = createMouseRaycaster(origin.event, renderer, camera);
   return {
     type: 'mouseDownRaycaster',
@@ -19,7 +19,7 @@ export function toMouseDownOverlap(origin: MouseDown, renderer: THREE.WebGLRende
 }
 
 /** TouchStartからTouchStartRaycasterに変換する */
-function toTouchStartRaycaster(origin: TouchStart, renderer: THREE.WebGLRenderer, camera: THREE.Camera): TouchStartRaycaster {
+export function toTouchStartRaycaster(origin: TouchStart, renderer: THREE.WebGLRenderer, camera: THREE.Camera): TouchStartRaycaster {
   const touch = createTouchEventRaycaster(origin.event, renderer, camera);
   return {
     type: 'touchStartRaycaster',
