@@ -59,11 +59,12 @@ export class BattleScene {
 
     this._raycasterObserver = new OverlapObserver();
 
+    param.domEventListener.subscribe(action => {
+      domEventHandler(action, this._view, this._state);
+    });
+
     // TODO 削除する
     this._deperecatedDomEventListener = param.depricatedDomListener;
-    this._deperecatedDomEventListener.add(event => {
-      domEventHandler(event, this._view, this._state);
-    });
     this._deperecatedDomEventListener.add(event => {
       const raycasterAction = depricatedDomEventToOverlapEvent(event, this._view);
       if (raycasterAction) {
@@ -71,6 +72,7 @@ export class BattleScene {
       }
     });
 
+    // TODO 削除する
     this._battleSceneObserver = new BattleSceneObserver();
     this._battleSceneObserver.add(action => {
       battleSceneActionHandler(action, this._view, this._state, this._progressBattle);
