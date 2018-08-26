@@ -1,6 +1,6 @@
 // @flow
 import type {Resources} from "../resource";
-import {DOMEventObserver} from "../observer/dom-event/dom-event-observer";
+import {DOMEventObserver} from "../deperecated-observer/dom-event/dom-event-observer";
 import * as THREE from "three";
 import {BattleScene} from "../scene/battle";
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core/lib/master/armdozers";

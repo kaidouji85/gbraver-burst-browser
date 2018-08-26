@@ -2,7 +2,7 @@
 
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {createRender} from "../render/renderer";
-import {DOMEventObserver} from "../observer/dom-event/dom-event-observer";
+import {DOMEventObserver} from "../deperecated-observer/dom-event/dom-event-observer";
 import {bindDom} from "../render/bind-dom";
 import {loadAllResource} from "../resource";
 import {createBattleScene} from "./create-battle-scene";

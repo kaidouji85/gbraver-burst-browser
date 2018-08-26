@@ -7,7 +7,7 @@ import {drawBatterySlider} from "../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {SliderOperation} from "../../../operation/slider";
 import * as R from 'ramda';
-import type {OverlapListener} from "../../../observer/overlap/overlap-listener";
+import type {OverlapListener} from "../../../deperecated-observer/overlap/overlap-listener";
 import {ButtonOperation} from "../../../operation/button";
 import {refreshGauge} from "./refresh-gauge";
 

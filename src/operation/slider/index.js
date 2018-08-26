@@ -4,7 +4,7 @@ import {TouchLocation} from "./touch-location";
 import {Subject} from "rxjs";
 import {distinctUntilChanged, filter, map} from "rxjs/operators";
 import * as THREE from 'three';
-import type {OverlapListener} from "../../observer/overlap/overlap-listener";
+import type {OverlapListener} from "../../deperecated-observer/overlap/overlap-listener";
 import type {OverlapAction} from "../../action/overlap/index";
 import type {MouseDownRaycaster} from "../../action/overlap/mouse-down-raycaster";
 import type {MouseMoveRaycaster} from "../../action/overlap/mouse-move-raycaster";

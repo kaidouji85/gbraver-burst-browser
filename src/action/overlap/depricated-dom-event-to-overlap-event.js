@@ -23,7 +23,7 @@ import type {TouchMove} from "../dom-event/touch-move";
  * @param view 戦闘画面ビュー
  * @return Raycasterアクション、対応するものがない場合はnullを返す
  */
-export function domEventToOverlapEvent(domEvent: DOMEvent, view: BattleSceneView): ?OverlapAction {
+export function depricatedDomEventToOverlapEvent(domEvent: DOMEvent, view: BattleSceneView): ?OverlapAction {
   switch(domEvent.type) {
     case 'mouseDown':
       return mouseDown(domEvent, view);

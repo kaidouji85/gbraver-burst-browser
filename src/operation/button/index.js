@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import {ButtonOverlap, createOverlapMesh} from "./button-overlap";
 import type {OverlapAction} from "../../action/overlap";
-import type {OverlapListener} from "../../observer/overlap/overlap-listener";
+import type {OverlapListener} from "../../deperecated-observer/overlap/overlap-listener";
 import type {MouseDownRaycaster} from "../../action/overlap/mouse-down-raycaster";
 import {isMouseOverlap} from "../../overlap/check/mouse/mouse-overlap";
 import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";

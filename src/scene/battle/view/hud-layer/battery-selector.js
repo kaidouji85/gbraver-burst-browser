@@ -3,8 +3,8 @@
 import type {Resources} from "../../../../resource";
 import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player} from "gbraver-burst-core/lib/player/player";
-import type {OverlapListener} from "../../../../observer/overlap/overlap-listener";
-import type {BattleSceneNotifier} from "../../../../observer/battle-scene/battle-scene-notifier";
+import type {OverlapListener} from "../../../../deperecated-observer/overlap/overlap-listener";
+import type {BattleSceneNotifier} from "../../../../deperecated-observer/battle-scene/battle-scene-notifier";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
 

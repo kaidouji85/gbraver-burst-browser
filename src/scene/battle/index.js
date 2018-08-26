@@ -4,18 +4,18 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
-import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
+import type {DOMEventListener} from "../../deperecated-observer/dom-event/dom-event-listener";
 import {domEventHandler} from "./action-handler/dom-event";
-import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-observer";
+import {BattleSceneObserver} from "../../deperecated-observer/battle-scene/battle-scene-observer";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";
-import {OverlapObserver} from "../../observer/overlap/overlap-observer";
-import {domEventToOverlapEvent} from "../../action/overlap/dom-event-to-overlap-event";
+import {OverlapObserver} from "../../deperecated-observer/overlap/overlap-observer";
+import {depricatedDomEventToOverlapEvent} from "../../action/overlap/depricated-dom-event-to-overlap-event";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
-import {Observer} from "../../observer/base/observer";
+import {Observer} from "../../deperecated-observer/base/observer";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -65,7 +65,7 @@ export class BattleScene {
       domEventHandler(event, this._view, this._state);
     });
     this._deperecatedDomEventListener.add(event => {
-      const raycasterAction = domEventToOverlapEvent(event, this._view);
+      const raycasterAction = depricatedDomEventToOverlapEvent(event, this._view);
       if (raycasterAction) {
         this._raycasterObserver.notify(raycasterAction);
       }
