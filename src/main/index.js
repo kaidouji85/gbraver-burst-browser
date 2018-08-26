@@ -24,7 +24,13 @@ export async function main() {
   // TODO 削除する
   const domEventObserver = new DOMEventObserver(renderer.domElement);
 
-  const scene = createBattleScene(resources, gameLoopListener, domEventObserver, renderer);
+  const scene = createBattleScene({
+    resources,
+    gameLoopListener,
+    domEventListener,
+    domEventObserver,
+    renderer
+  });
 
   gameLoopListener.subscribe(time => {
     Tween.update();

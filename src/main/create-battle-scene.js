@@ -11,9 +11,19 @@ import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import type {Command} from "gbraver-burst-core/lib/command/command";
 import {Observable} from "rxjs";
 import type {GameLoop} from "../action/game-loop/game-loop";
+import type {DOMEvent} from "../action/dom-event";
+
+/** パラメータ */
+type Param = {
+  resources: Resources,
+  gameLoopListener: Observable<GameLoop>,
+  domEventListener: Observable<DOMEvent>,
+  domEventObserver: DOMEventObserver, // TODO 削除する
+  renderer: THREE.WebGLRenderer
+};
 
 /** 戦闘シーン生成のヘルパー関数 */
-export function createBattleScene(resources: Resources, listener: Observable<GameLoop>, domEventObserver: DOMEventObserver, renderer: THREE.WebGLRenderer): BattleScene {
+export function createBattleScene(param: Param): BattleScene {
   // TODO 開発用にダミーデータを作成している
   const player: Player = {
     playerId: 'test01',
@@ -28,15 +38,15 @@ export function createBattleScene(resources: Resources, listener: Observable<Gam
   const initialState = battleRoom.start();
 
   return new BattleScene({
-    resources: resources,
-    renderer: renderer,
-    domEventListener: domEventObserver,
+    resources: param.resources,
+    renderer: param.renderer,
+    domEventListener: param.domEventObserver,
     playerId: player.playerId,
     players: [player, enemy],
     initialState: initialState,
     progressBattle: async (command: Command) => {
       return battleRoom.progress(command);
     },
-    listener: listener
+    listener: param.gameLoopListener
   });
 }
