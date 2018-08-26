@@ -73,7 +73,7 @@ export class BatterySliderView {
       values: R.range(0, param.maxValue + 1),
       width: SLIDER_WIDTH,
       height: SLIDER_HEIGHT,
-      overlapListener: param.deprecatedOverlapListener,
+      overlapListener: param.overlapListener,
       onValueChange: v => param.onBatteryChange(v)
     });
     this._sliderOperation.getObject3D().position.y += 96;
