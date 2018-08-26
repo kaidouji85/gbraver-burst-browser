@@ -36,7 +36,7 @@ export class BattleSceneView {
   constructor(param: Param) {
     this.renderer = param.renderer;
     this.threeDimensionLayer = new ThreeDimensionLayer({
-      listener: param.gameLoopListener,
+      gameLoopListener: param.gameLoopListener,
       resources: param.resources,
       playerId: param.playerId,
       players: param.players
@@ -46,14 +46,15 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       notifier: param.notifier,
-      listener: param.gameLoopListener,
+      gameLoopListener: param.gameLoopListener,
+      domEventListener: param.domEventListener,
       deprecatedListener: param.depricatedListener
     });
 
     param.gameLoopListener.subscribe(action => {
       switch (action.type) {
         case 'GameLoop':
-          this._render();
+          this._gameLoop(action);
           return;
         default:
           return;
@@ -61,8 +62,8 @@ export class BattleSceneView {
     });
   }
 
-  /** レンダリング */
-  _render(): void {
+  /** ゲームループの処理 */
+  _gameLoop(action: GameLoop): void {
     this.renderer.render(this.threeDimensionLayer.scene, this.threeDimensionLayer.camera);
     this.renderer.render(this.hudLayer.scene, this.hudLayer.camera);
   }

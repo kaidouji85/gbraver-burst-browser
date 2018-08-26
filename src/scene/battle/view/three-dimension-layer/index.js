@@ -15,7 +15,7 @@ import type {SpriteGameLoop} from "../../../../action/sprite/armdozer-game-loop"
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameLoop>,
+  gameLoopListener: Observable<GameLoop>,
   playerId: PlayerId,
   players: Player[]
 };
@@ -38,7 +38,7 @@ export class ThreeDimensionLayer {
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-    const spriteGameLoopListener = param.listener
+    const spriteGameLoopListener = param.gameLoopListener
       .pipe(
         filter(v => v.type === 'GameLoop'),
         map(v => ({

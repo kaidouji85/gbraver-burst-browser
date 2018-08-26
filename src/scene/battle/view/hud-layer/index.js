@@ -16,13 +16,15 @@ import {BurstButton} from "../../../../game-object/burst-button/burst-button";
 import {createBurstButton} from "./burst-button";
 import {Observable} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
+import type {DOMEvent} from "../../../../action/dom-event";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
   playerId: PlayerId,
   players: Player[],
-  listener: Observable<GameLoop>,
+  gameLoopListener: Observable<GameLoop>,
+  domEventListener: Observable<DOMEvent>,
   deprecatedListener: OverlapListener,
   notifier: BattleSceneNotifier
 };
@@ -55,19 +57,19 @@ export class HudLayer {
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
-    this.batterySelector = createBatterySelector(param.resources, param.listener, param.deprecatedListener, param.notifier, player);
+    this.batterySelector = createBatterySelector(param.resources, param.gameLoopListener, param.deprecatedListener, param.notifier, player);
     this.scene.add(this.batterySelector.getObject3D());
 
-    this.playerGauge = createPlayerGauge(param.resources, param.listener, player);
+    this.playerGauge = createPlayerGauge(param.resources, param.gameLoopListener, player);
     this.scene.add(this.playerGauge.getObject3D());
 
-    this.enemyGauge = createEnemyGauge(param.resources, param.listener, enemy);
+    this.enemyGauge = createEnemyGauge(param.resources, param.gameLoopListener, enemy);
     this.scene.add(this.enemyGauge.getObject3D());
 
-    this.turnIndicator = createTurnIndicator(param.resources, param.listener);
+    this.turnIndicator = createTurnIndicator(param.resources, param.gameLoopListener);
     this.scene.add(this.turnIndicator.getObject3D());
 
-    this.burstButton = createBurstButton(param.resources, param.listener);
+    this.burstButton = createBurstButton(param.resources, param.gameLoopListener);
     this.scene.add(this.burstButton.getObject3D());
   }
 }
