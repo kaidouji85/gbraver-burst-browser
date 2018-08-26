@@ -15,7 +15,12 @@ export function createDOMEventListener(renderDom: HTMLElement): Observable<DOMEv
     map(v => ({type: 'mouseDown', event: v}))
   );
 
-  return merge(mouseDown).pipe(
-    publish()
+  const touchStart = fromEvent(renderDom, 'touchstart').pipe(
+    map(v => ({type: 'touchStart', event: v}))
+  );
+
+  return merge(
+    mouseDown,
+    touchStart
   );
 }

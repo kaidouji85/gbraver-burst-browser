@@ -21,8 +21,9 @@ type Param = {
 /** バッテリーセレクタを生成する */
 export function createBatterySelector(param: Param): BatterySelector {
   return new BatterySelector({
-    listener: param.gameLoopListener,
-    overlapListener: param.deprecatedListener,
+    gameLoopListener: param.gameLoopListener,
+    overlapListener: param.overlapListener,
+    deprecatedOverlapListener: param.deprecatedListener,
     maxBattery: param.playerInfo.armdozer.maxBattery,
     resources: param.resources,
     onBatteryChange: (battery: number) => param.notifier.notify({
