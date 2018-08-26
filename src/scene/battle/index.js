@@ -14,25 +14,20 @@ import {OverlapObserver} from "../../observer/overlap/overlap-observer";
 import {domEventToOverlapEvent} from "../../action/overlap/dom-event-to-overlap-event";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
+import type {DOMEvent} from "../../action/dom-event";
+import {Observer} from "../../observer/base/observer";
 
 /** コンストラクタのパラメータ */
-type Params = {
-  /** リソース管理オブジェクト */
+type Param = {
   resources: Resources,
-  /** 画面を開いているプレイヤーID */
   playerId: PlayerId,
-  /** プレイヤー情報 */
   players: Player[],
-  /** ゲーム初期状態 */
   initialState: GameState[],
-  /** ゲーム進行関数 */
   progressBattle: ProgressBattle,
-  /** レンダラ */
   renderer: THREE.WebGLRenderer,
-  /** HTMLイベントリスナー */
-  domEventListener: DOMEventListener,
-  /** イベントリスナー */
-  listener: Observable<GameLoop>,
+  oldDomListener: Observer<DOMEvent>,
+  domEventListener: Observable<DOMEvent>,
+  gameLoopListener: Observable<GameLoop>,
 };
 
 /**
@@ -56,15 +51,15 @@ export class BattleScene {
   /** 戦闘進行関数 */
   _progressBattle: ProgressBattle;
 
-  constructor(params: Params) {
+  constructor(param: Param) {
     this._state = {
-      playerId: params.playerId,
+      playerId: param.playerId,
       lastBatteryValue: 0
     };
 
     this._raycasterObserver = new OverlapObserver();
 
-    this._domEventListener = params.domEventListener;
+    this._domEventListener = param.oldDomListener;
     this._domEventListener.add(event => {
       domEventHandler(event, this._view, this._state);
     });
@@ -80,21 +75,22 @@ export class BattleScene {
       battleSceneActionHandler(action, this._view, this._state, this._progressBattle);
     });
 
-    this._progressBattle = params.progressBattle;
+    this._progressBattle = param.progressBattle;
 
     this._view = new BattleSceneView({
-      resources: params.resources,
-      playerId: params.playerId,
-      players: params.players,
+      resources: param.resources,
+      playerId: param.playerId,
+      players: param.players,
       notifier: this._battleSceneObserver,
-      listener: params.listener,
+      gameLoopListener: param.gameLoopListener,
+      domEventListener: param.domEventListener,
       depricatedListener: this._raycasterObserver,
-      renderer: params.renderer
+      renderer: param.renderer
     });
 
     this._battleSceneObserver.notify({
       type: 'startBattleScene',
-      initialState: params.initialState
+      initialState: param.initialState
     });
   };
 }

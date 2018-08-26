@@ -8,13 +8,15 @@ import type {OverlapListener} from "../../../observer/overlap/overlap-listener";
 import type {BattleSceneNotifier} from "../../../observer/battle-scene/battle-scene-notifier";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
+import type {DOMEvent} from "../../../action/dom-event";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   notifier: BattleSceneNotifier,
   depricatedListener: OverlapListener,
-  listener: Observable<GameLoop>,
+  gameLoopListener: Observable<GameLoop>,
+  domEventListener: Observable<DOMEvent>,
   renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
   players: Player[]
@@ -34,7 +36,7 @@ export class BattleSceneView {
   constructor(param: Param) {
     this.renderer = param.renderer;
     this.threeDimensionLayer = new ThreeDimensionLayer({
-      listener: param.listener,
+      listener: param.gameLoopListener,
       resources: param.resources,
       playerId: param.playerId,
       players: param.players
@@ -44,11 +46,11 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       notifier: param.notifier,
-      listener: param.listener,
+      listener: param.gameLoopListener,
       deprecatedListener: param.depricatedListener
     });
 
-    param.listener.subscribe(action => {
+    param.gameLoopListener.subscribe(action => {
       switch (action.type) {
         case 'GameLoop':
           this._render();

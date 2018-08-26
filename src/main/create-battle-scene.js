@@ -40,13 +40,14 @@ export function createBattleScene(param: Param): BattleScene {
   return new BattleScene({
     resources: param.resources,
     renderer: param.renderer,
-    domEventListener: param.domEventObserver,
     playerId: player.playerId,
     players: [player, enemy],
     initialState: initialState,
     progressBattle: async (command: Command) => {
       return battleRoom.progress(command);
     },
-    listener: param.gameLoopListener
+    oldDomListener: param.domEventObserver,
+    domEventListener: param.domEventListener,
+    gameLoopListener: param.gameLoopListener,
   });
 }
