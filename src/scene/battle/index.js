@@ -10,8 +10,9 @@ import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";
 import type {GameLoop} from "../../action/game-loop/game-loop";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
+import type {BattleSceneAction} from "../../action/battle-scene";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -33,10 +34,8 @@ export class BattleScene {
   _view: BattleSceneView;
   /** 戦闘画面全体の状態 */
   _state: BattleSceneState;
-  /** 戦闘画面のオブザーバ */
-  _battleSceneObserver: BattleSceneObserver;
-  /** 戦闘進行関数 */
-  _progressBattle: ProgressBattle;
+  /** 戦闘画面アクションのサブジェクト */
+  _battleActionSubject: Subject<BattleSceneAction>;
 
   constructor(param: Param) {
     this._state = {
@@ -48,25 +47,22 @@ export class BattleScene {
       domEventHandler(action, this._view, this._state);
     });
 
-    // TODO 削除する
-    this._battleSceneObserver = new BattleSceneObserver();
-    this._battleSceneObserver.add(action => {
-      battleSceneActionHandler(action, this._view, this._state, this._progressBattle);
+    this._battleActionSubject = new Subject();
+    this._battleActionSubject.subscribe(action => {
+      battleSceneActionHandler(action, this._view, this._state, param.progressBattle);
     });
-
-    this._progressBattle = param.progressBattle;
 
     this._view = new BattleSceneView({
       resources: param.resources,
       playerId: param.playerId,
       players: param.players,
-      notifier: this._battleSceneObserver,
+      battleActionNotifier: this._battleActionSubject,
       gameLoopListener: param.gameLoopListener,
       domEventListener: param.domEventListener,
       renderer: param.renderer
     });
 
-    this._battleSceneObserver.notify({
+    this._battleActionSubject.next({
       type: 'startBattleScene',
       initialState: param.initialState
     });

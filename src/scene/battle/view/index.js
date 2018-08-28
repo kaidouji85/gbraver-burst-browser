@@ -6,13 +6,14 @@ import {HudLayer} from './hud-layer/index';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {BattleSceneNotifier} from "../../../deperecated-observer/battle-scene/battle-scene-notifier";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
-import {Observable} from "rxjs";
+import {Observable, Observer} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
+import type {BattleSceneAction} from "../../../action/battle-scene";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  notifier: BattleSceneNotifier,
+  battleActionNotifier: Observer<BattleSceneAction>,
   gameLoopListener: Observable<GameLoop>,
   domEventListener: Observable<DOMEvent>,
   renderer: THREE.WebGLRenderer,
@@ -44,7 +45,7 @@ export class BattleSceneView {
       renderer: param.renderer,
       playerId: param.playerId,
       players: param.players,
-      notifier: param.notifier,
+      battleActionNotifier: param.battleActionNotifier,
       gameLoopListener: param.gameLoopListener,
       domEventListener: param.domEventListener,
     });
