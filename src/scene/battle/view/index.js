@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import type {BattleSceneNotifier} from "../../../deperecated-observer/battle-scene/battle-scene-notifier";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable, Observer} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";

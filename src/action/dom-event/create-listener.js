@@ -1,7 +1,7 @@
 // @flow
 
 import type {DOMEvent} from "./index";
-import {Observable, fromEvent, merge} from "rxjs";
+import {fromEvent, merge, Observable} from "rxjs";
 import {map, publish} from 'rxjs/operators';
 
 /**

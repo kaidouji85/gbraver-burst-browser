@@ -3,7 +3,7 @@
 import type {Resources} from "../../../../resource";
 import {Gauge} from "../../../../game-object/gauge/gauge";
 import {EnemyGauge} from "../../../../game-object/gauge";
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player} from "gbraver-burst-core/lib/player/player";
 import {Observable} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 

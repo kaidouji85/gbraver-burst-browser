@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import type {GaugeView} from "./view/gauge-view";
 import type {GaugeModel} from "./model/gauge-model";
-import {Tween, Group} from '@tweenjs/tween.js';
+import {Group, Tween} from '@tweenjs/tween.js';
 import {refresh} from "./animation/regresh";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";

@@ -1,6 +1,5 @@
 // @flow
 import * as THREE from "three";
-import * as R from 'ramda';
 import {Division} from "./division";
 import type {TouchRaycastContainer} from "../../overlap/check/touch/touch-raycaster";
 import {isTouchOverlap} from "../../overlap/check/touch/touch-overlap";

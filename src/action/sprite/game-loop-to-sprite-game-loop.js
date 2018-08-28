@@ -4,7 +4,7 @@ import type {SpriteGameLoop} from "./sprite-game-loop";
 import * as THREE from 'three';
 import type {GameLoop} from "../game-loop/game-loop";
 import {Observable} from "rxjs";
-import {map, filter} from 'rxjs/operators';
+import {filter, map} from 'rxjs/operators';
 
 /** ゲームループをスプライトゲームループに変換する */
 export function toSpriteGameLoop(origin: GameLoop, camera: THREE.Camera): SpriteGameLoop {

@@ -6,7 +6,6 @@ import SkyBox from './blue-sky';
 import {createSchoolBuild} from './school-build';
 import {Stage} from "../stage";
 import {createGround} from "./ground";
-import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
 
 /** 学校ステージ */

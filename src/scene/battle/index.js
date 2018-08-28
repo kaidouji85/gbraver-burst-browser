@@ -5,7 +5,6 @@ import type {BattleSceneState} from "./state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
 import {domEventHandler} from "./action-handler/dom-event";
-import {BattleSceneObserver} from "../../deperecated-observer/battle-scene/battle-scene-observer";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";

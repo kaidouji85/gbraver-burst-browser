@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import type {Resources} from '../../../../resource/index';
 import {createCamera} from "./camera";
 import {BatterySelector} from "../../../../game-object/battery-selector";
-import type {BattleSceneNotifier} from "../../../../deperecated-observer/battle-scene/battle-scene-notifier";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {createBatterySelector} from "./battery-selector";
 import {Gauge} from "../../../../game-object/gauge/gauge";
