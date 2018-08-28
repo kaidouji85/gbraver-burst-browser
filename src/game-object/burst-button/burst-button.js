@@ -1,9 +1,9 @@
 // @flow
 
 import * as THREE from 'three';
+import type {BurstButtonModel} from "./model/burst-button-model";
+import {BurstButtonView} from "./view/burst-button-view";
 import type {Resources} from "../../resource";
-import type {TurnIndicatorModel} from "./model/turn-indicator-model";
-import {TurnIndicatorView} from "./view/turn-indicator-view";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
 
@@ -12,17 +12,14 @@ type Param = {
   listener: Observable<GameLoop>
 };
 
-/** ターンインジケーター */
-export class TurnIndicator {
-  _model: TurnIndicatorModel;
-  _view: TurnIndicatorView;
+/** バーストボタン */
+export class BurstButton {
+  _model: BurstButtonModel;
+  _view: BurstButtonView;
 
   constructor(param: Param) {
-    this._model = {
-      isPlayerTurn: true
-    };
-    this._view = new TurnIndicatorView(param.resources);
-
+    this._model = {};
+    this._view = new BurstButtonView(param.resources);
     param.listener.subscribe(action => {
       switch (action.type) {
         case 'GameLoop':
@@ -39,17 +36,8 @@ export class TurnIndicator {
     this._view.engage(this._model);
   }
 
-  /** ターンインジケーターで使うthree.jsオブジェクトを返す */
+  /** three.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
-  }
-
-  /**
-   * ターン変更
-   *
-   * @param isPlayerTurn プレイヤーターンか否かのフラグ、trueでプレイヤーターン
-   */
-  turnChange(isPlayerTurn: boolean): void {
-    this._model.isPlayerTurn = isPlayerTurn;
   }
 }

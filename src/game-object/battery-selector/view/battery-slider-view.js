@@ -3,13 +3,13 @@
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {Resources} from "../../../resource/index";
 import type {BatterySelectorModel} from "../model/battery-selector";
-import {drawBatterySlider} from "../../../canvas/battery-slider/index";
 import * as THREE from "three";
 import {SliderOperation} from "../../../operation/slider";
 import * as R from 'ramda';
-import type {OverlapListener} from "../../../observer/overlap/overlap-listener";
 import {ButtonOperation} from "../../../operation/button";
 import {refreshGauge} from "./refresh-gauge";
+import type {OverlapAction} from "../../../action/overlap";
+import {Observable} from "rxjs";
 
 /** メッシュの大きさ */
 const MESH_SIZE = 1024;
@@ -32,8 +32,8 @@ type Param = {
   resources: Resources,
   /** ゲージ最大値 */
   maxValue: number,
-  /** 当たり判定関連のリスナー */
-  overlapListener: OverlapListener,
+  /**当たり判定関連のリスナー */
+  overlapListener: Observable<OverlapAction>,
   /** バッテリーが変更された場合のコールバック関数 */
   onBatteryChange: (battery: number) => void,
   /** OKボタンが押された時のコールバック関数 */

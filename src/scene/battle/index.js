@@ -4,99 +4,66 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
-import {Scene} from "three";
-import type {DOMEventListener} from "../../observer/dom-event/dom-event-listener";
 import {domEventHandler} from "./action-handler/dom-event";
-import {gameLoop} from './game-loop';
-import {BattleSceneObserver} from "../../observer/battle-scene/battle-scene-observer";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle";
-import {OverlapObserver} from "../../observer/overlap/overlap-observer";
-import {domEventToOverlapEvent} from "../../action/overlap/dom-event-to-overlap-event";
+import type {GameLoop} from "../../action/game-loop/game-loop";
+import {Observable, Subject} from "rxjs";
+import type {DOMEvent} from "../../action/dom-event";
+import type {BattleSceneAction} from "../../action/battle-scene";
 
 /** コンストラクタのパラメータ */
-type Params = {
-  /** リソース管理オブジェクト */
+type Param = {
   resources: Resources,
-  /** 画面を開いているプレイヤーID */
   playerId: PlayerId,
-  /** プレイヤー情報 */
   players: Player[],
-  /** ゲーム初期状態 */
   initialState: GameState[],
-  /** ゲーム進行関数 */
   progressBattle: ProgressBattle,
-  /** レンダラ */
   renderer: THREE.WebGLRenderer,
-  /** HTMLイベントリスナー */
-  domEventListener: DOMEventListener,
+  domEventListener: Observable<DOMEvent>,
+  gameLoopListener: Observable<GameLoop>,
 };
 
 /**
  * 戦闘画面アプリケーション
  */
-export class BattleScene implements Scene{
+export class BattleScene {
   /** ビュー */
   _view: BattleSceneView;
   /** 戦闘画面全体の状態 */
   _state: BattleSceneState;
-  /**
-   * HTMLイベントリスナー
-   * シーン終了時にハンドラ削除をするためにキャッシュしている
-   */
-  _domEventListener: DOMEventListener;
-  /** 戦闘画面のオブザーバ */
-  _battleSceneObserver: BattleSceneObserver;
-  /** レイキャスターオブザーバ */
-  _raycasterObserver: OverlapObserver;
+  /** 戦闘画面アクションのサブジェクト */
+  _battleActionSubject: Subject<BattleSceneAction>;
 
-  /** 戦闘進行関数 */
-  _progressBattle: ProgressBattle;
-
-  constructor(params: Params) {
+  constructor(param: Param) {
     this._state = {
-      playerId: params.playerId,
+      playerId: param.playerId,
       lastBatteryValue: 0
     };
 
-    this._raycasterObserver = new OverlapObserver();
-
-    this._domEventListener = params.domEventListener;
-    this._domEventListener.add(event => {
-      domEventHandler(event, this._view, this._state);
-    });
-    this._domEventListener.add(event => {
-      const raycasterAction = domEventToOverlapEvent(event, this._view);
-      if (raycasterAction) {
-        this._raycasterObserver.notify(raycasterAction);
-      }
+    param.domEventListener.subscribe(action => {
+      domEventHandler(action, this._view, this._state);
     });
 
-    this._battleSceneObserver = new BattleSceneObserver();
-    this._battleSceneObserver.add(action => {
-      battleSceneActionHandler(action, this._view, this._state, this._progressBattle);
+    this._battleActionSubject = new Subject();
+    this._battleActionSubject.subscribe(action => {
+      battleSceneActionHandler(action, this._view, this._state, param.progressBattle);
     });
-
-    this._progressBattle = params.progressBattle;
 
     this._view = new BattleSceneView({
-      resources: params.resources,
-      playerId: params.playerId,
-      players: params.players,
-      notifier: this._battleSceneObserver,
-      listener: this._raycasterObserver,
-      renderer: params.renderer
+      resources: param.resources,
+      playerId: param.playerId,
+      players: param.players,
+      battleActionNotifier: this._battleActionSubject,
+      gameLoopListener: param.gameLoopListener,
+      domEventListener: param.domEventListener,
+      renderer: param.renderer
     });
 
-    this._battleSceneObserver.notify({
+    this._battleActionSubject.next({
       type: 'startBattleScene',
-      initialState: params.initialState
+      initialState: param.initialState
     });
   };
-
-  /** ゲームループ */
-  gameLoop(time: DOMHighResTimeStamp): void {
-    gameLoop(this._view, this._state, time);
-  }
 }

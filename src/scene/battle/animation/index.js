@@ -7,6 +7,7 @@ import {Tween} from '@tweenjs/tween.js';
 import type {BattleSceneState} from "../state";
 import {BattleSceneView} from "../view/index";
 import {inputCommandAnimation} from "./input-command";
+
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
  *

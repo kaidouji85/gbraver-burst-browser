@@ -1,7 +1,7 @@
 // @flow
 
 import type {GaugeModel} from "../model/gauge-model";
-import {Tween, Group} from '@tweenjs/tween.js';
+import {Group, Tween} from '@tweenjs/tween.js';
 
 /**
  * ゲージ内容を更新する
