@@ -11,7 +11,8 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {Observable} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {map, filter} from 'rxjs/operators';
-import type {SpriteGameLoop} from "../../../../action/sprite/armdozer-game-loop";
+import type {SpriteGameLoop} from "../../../../action/sprite/sprite-game-loop";
+import {toSpriteGameLoopObservable} from "../../../../action/sprite/game-loop-to-sprite-game-loop";
 
 type Param = {
   resources: Resources,
@@ -38,18 +39,10 @@ export class ThreeDimensionLayer {
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-    const spriteGameLoopListener = param.gameLoopListener
-      .pipe(
-        filter(v => v.type === 'GameLoop'),
-        map(v => ({
-          type: 'SpriteGameLoop',
-          time: v.time,
-          camera: this.camera
-        }))
-      );
 
     this.scene = new THREE.Scene();
     this.camera = createCamera();
+    const spriteGameLoopListener = toSpriteGameLoopObservable(param.gameLoopListener, this.camera);
 
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));

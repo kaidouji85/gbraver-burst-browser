@@ -16,11 +16,7 @@ const SERVE_PATH = path.resolve(__dirname, 'build/stub');
  */
 const STUB_ENTRY_FILES = {
   'canvas/battery-slider': `${STUB_PATH}/canvas/battery-slider`,
-  'canvas/gauge': `${STUB_PATH}/canvas/gauge`,
-  'game-object/armdozer/player-shin-braver': `${STUB_PATH}/game-object/armdozer/player-shin-braver`,
-  'game-object/armdozer/enemy-shin-braver': `${STUB_PATH}/game-object/armdozer/enemy-shin-braver`,
-  'game-object/armdozer/player-neo-landozer': `${STUB_PATH}/game-object/armdozer/player-neo-landozer`,
-  'game-object/armdozer/enemy-neo-landozer': `${STUB_PATH}/game-object/armdozer/enemy-neo-landozer`
+  'canvas/gauge': `${STUB_PATH}/canvas/gauge`
 };
 
 module.exports = {

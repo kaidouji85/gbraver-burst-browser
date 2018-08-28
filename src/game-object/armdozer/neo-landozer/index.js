@@ -5,7 +5,7 @@ import {NeoLandozer} from './neo-landozer';
 import {PlayerNeoLandozerView} from "./view/player-neo-landozer-view";
 import {EnemyNeoLandozerView} from "./view/enemy-neo-landozer-view";
 import {Observable} from "rxjs";
-import type {SpriteGameLoop} from "../../../action/sprite/armdozer-game-loop";
+import type {SpriteGameLoop} from "../../../action/sprite/sprite-game-loop";
 
 /** プレイヤー側ネオランドーザ */
 export function PlayerNeoLandozer(resources: Resources, listener: Observable<SpriteGameLoop>): NeoLandozer {

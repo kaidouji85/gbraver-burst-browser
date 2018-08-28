@@ -13,6 +13,10 @@ import type {MouseMoveRaycaster} from "./mouse-move-raycaster";
 import {isMouseLeftButtonPushed} from "../../mouse/mouse-left-button";
 import type {TouchMoveRaycaster} from "./touch-move-raycaster";
 import type {TouchMove} from "../dom-event/touch-move";
+import {Observable} from "rxjs";
+import type {DOMEvent} from "../dom-event";
+import type {OverlapAction} from "./index";
+import {filter, map} from "rxjs/operators";
 
 /** MouseDownからMouseDownRaycasterに変換 */
 export function toMouseDownRaycaster(origin: MouseDown, renderer: THREE.WebGLRenderer, camera: THREE.Camera): MouseDownRaycaster {
@@ -51,4 +55,40 @@ export function toTouchMoveRaycaster(origin: TouchMove, renderer: THREE.WebGLRen
     type: 'touchMoveRaycaster',
     touch: touch
   };
+}
+
+const DUMMY_ACTION = {
+  type: 'mouseDownRaycaster',
+  mouse: {
+    raycaster: new THREE.Raycaster()
+  }
+};
+
+/**
+ * DOMイベントストリームを当たり判定ストリームに変換する
+ *
+ * @param origin 変換元
+ * @param renderer レンダラ
+ * @param camera カメラ
+ * @return 当たり判定ストリーム
+ */
+export function toOverlapObservable(origin: Observable<DOMEvent>, renderer: THREE.WebGLRenderer, camera: THREE.Camera): Observable<OverlapAction> {
+  return origin.pipe(
+    map(v => {
+      switch (v.type) {
+        case 'mouseDown':
+          return {isValid: true, action: toMouseDownRaycaster(v, renderer, camera)};
+        case 'mouseMove':
+          return {isValid: true, action: toMouseMoveRaycaster(v, renderer, camera)};
+        case 'touchStart':
+          return {isValid: true, action: toTouchStartRaycaster(v, renderer, camera)};
+        case 'touchMove':
+          return {isValid: true, action: toTouchMoveRaycaster(v, renderer, camera)};
+        default:
+          return {isValid: false, action: DUMMY_ACTION}
+      }
+    }),
+    filter(v => v.isValid),
+    map(v => v.action)
+  );
 }

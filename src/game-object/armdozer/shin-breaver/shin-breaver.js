@@ -8,7 +8,7 @@ import {ANIMATION_STAND} from "./model/shin-braver-model";
 import type {ShinBraverView} from "./view/shin-braver-view";
 import {stand} from "./model/stand";
 import {Observable} from "rxjs";
-import type {SpriteGameLoop} from "../../../action/sprite/armdozer-game-loop";
+import type {SpriteGameLoop} from "../../../action/sprite/sprite-game-loop";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {

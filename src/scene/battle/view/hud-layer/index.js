@@ -16,7 +16,7 @@ import {createBurstButton} from "./burst-button";
 import {Observable} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {DOMEvent} from "../../../../action/dom-event";
-import {toOverlapObservable} from "../../../../action/overlap/to-overlap";
+import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 
 /** コンストラクタのパラメータ */
 export type Param = {

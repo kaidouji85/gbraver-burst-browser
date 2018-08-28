@@ -5,7 +5,7 @@ import {ShinBraver} from './shin-breaver';
 import {PlayerShinBraverView} from "./view/player-shin-braver-view";
 import {EnemyShinBraverView} from "./view/enemy-shin-braver-view";
 import {Observable} from "rxjs";
-import type {SpriteGameLoop} from "../../../action/sprite/armdozer-game-loop";
+import type {SpriteGameLoop} from "../../../action/sprite/sprite-game-loop";
 
 /** プレイヤー側シンブレイバー */
 export function PlayerShinBraver(resources: Resources, listener: Observable<SpriteGameLoop>): ShinBraver {
