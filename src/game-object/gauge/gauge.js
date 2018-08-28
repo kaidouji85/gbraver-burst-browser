@@ -3,10 +3,13 @@
 import * as THREE from 'three';
 import type {GaugeView} from "./view/gauge-view";
 import type {GaugeModel} from "./model/gauge-model";
-import {Tween, Group} from '@tweenjs/tween.js';
+import {Group, Tween} from '@tweenjs/tween.js';
 import {refresh} from "./animation/regresh";
+import type {GameLoop} from "../../action/game-loop/game-loop";
+import {Observable} from "rxjs";
 
 type Param = {
+  listener: Observable<GameLoop>,
   view: GaugeView,
   hp: number,
   battery: number
@@ -27,11 +30,21 @@ export class Gauge {
       maxBattery: param.battery
     };
     this._tween = new Group();
+
+    param.listener.subscribe(action => {
+      switch (action.type) {
+        case 'GameLoop':
+          this._gameLoop(action);
+          return;
+        default:
+          return;
+      }
+    });
   }
 
   /** ゲームループ */
-  gameLoop(time: DOMHighResTimeStamp): void {
-    this._tween.update(time);
+  _gameLoop(action: GameLoop): void {
+    this._tween.update(action.time);
     this._view.engage(this._model);
   }
 

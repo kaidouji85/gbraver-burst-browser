@@ -7,15 +7,17 @@ import type {Resources} from "../../resource/index";
 import * as THREE from "three";
 import {changeBattery} from './animation/change-battery';
 import {Group, Tween} from "@tweenjs/tween.js";
-import {map, filter, distinctUntilChanged} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 import {open} from './animation/open';
-import type {OverlapListener} from "../../observer/overlap/overlap-listener";
 import {pushOkButton} from "./animation/push-ok-button";
+import type {GameLoop} from "../../action/game-loop/game-loop";
+import type {OverlapAction} from "../../action/overlap";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  overlapListener: OverlapListener,
+  gameLoopListener: Observable<GameLoop>,
+  overlapListener: Observable<OverlapAction>,
   maxBattery: number,
   onBatteryChange: (battery: number) => void,
   onOkButtonPush: () => void,
@@ -44,6 +46,18 @@ export class BatterySelector {
       disabled: false,
       opacity: 0
     };
+    this._tween = new Group();
+
+    param.gameLoopListener.subscribe(action => {
+      switch (action.type) {
+        case 'GameLoop':
+          this._gameLoop(action);
+          return;
+        default:
+          return;
+      }
+    });
+
     this._view = new BatterySliderView({
       resources: param.resources,
       overlapListener: param.overlapListener,
@@ -68,12 +82,11 @@ export class BatterySelector {
         animation.end.onComplete(() => param.onOkButtonPush());
       }
     });
-    this._tween = new Group();
   }
 
   /** ゲームループの処理 */
-  gameLoop(time: DOMHighResTimeStamp): void {
-    this._tween.update(time);
+  _gameLoop(action: GameLoop): void {
+    this._tween.update(action.time);
     this._view.engage(this._model);
   }
 

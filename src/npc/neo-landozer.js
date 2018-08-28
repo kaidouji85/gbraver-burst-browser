@@ -1,7 +1,7 @@
 // @flow
 
 import type {NPC} from "./npc";
-import {ArmDozers, ArmDozerIdList} from "gbraver-burst-core";
+import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Command} from "gbraver-burst-core/lib/command/command";
