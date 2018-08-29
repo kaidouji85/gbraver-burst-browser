@@ -11,6 +11,7 @@ import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import type {OverlapAction} from "../../action/overlap";
+import type {OkButtonLabel} from "./model/ok-button";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -60,10 +61,11 @@ export class BatterySelector {
    *
    * @param initialValue 初期値
    * @param maxEnable 選択可能な最大値
+   * @param okButtonLabel OKボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number): Tween {
-    return open(this._model, this._tween, initialValue, maxEnable);
+  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): Tween {
+    return open(this._model, this._tween, initialValue, maxEnable, okButtonLabel);
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */
@@ -80,7 +82,8 @@ export class BatterySelector {
           enableMax: param.maxBattery
       },
       okButton: {
-        depth: 0
+        depth: 0,
+        label: 'Attack'
       },
       disabled: false,
         opacity: 0
