@@ -7,7 +7,6 @@ import type {Resources} from "../../resource/index";
 import * as THREE from "three";
 import {changeBattery} from './animation/change-battery';
 import {Group, Tween} from "@tweenjs/tween.js";
-import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
 import type {GameLoop} from "../../action/game-loop/game-loop";
@@ -51,12 +50,8 @@ export class BatterySelector {
       resources: param.resources,
       overlapListener: param.overlapListener,
       maxValue: param.maxBattery,
-      onBatteryChange: battery => {
-        this._changeBattery(battery)
-      },
-      onOkButtonPush: () => {
-        this._pushOkButton()
-      }
+      onBatteryChange: battery => this._changeBattery(battery),
+      onOkButtonPush: () => this._pushOkButton()
     });
   }
 
