@@ -25,27 +25,16 @@ type Param = {
 
 /** バッテリーセレクタ */
 export class BatterySelector {
-  /** バッテリースライダーのモデル */
   _model: BatterySelectorModel;
-  /** バッテリースライダーのビュー */
   _view: BatterySliderView;
-  /** 本クラスのTweenグループ */
   _tween: Group;
+  _onBatteryChange: (battery: number) => void;
+  _onOkButtonPush: () => void;
 
   constructor(param: Param) {
-    const initialBattery = 3;
-    this._model = {
-      slider: {
-        battery: 0,
-        max: param.maxBattery,
-        enableMax: param.maxBattery
-      },
-      okButton: {
-        depth: 0
-      },
-      disabled: false,
-      opacity: 0
-    };
+    this._onBatteryChange = param.onBatteryChange;
+    this._onOkButtonPush = param.onOkButtonPush;
+    this._model = this._initialModel(param);
     this._tween = new Group();
 
     param.gameLoopListener.subscribe(action => {
@@ -63,31 +52,12 @@ export class BatterySelector {
       overlapListener: param.overlapListener,
       maxValue: param.maxBattery,
       onBatteryChange: battery => {
-        if (this._model.disabled || this._model.slider.enableMax < battery) {
-          return;
-        }
-
-        this._tween.update();
-        this._tween.removeAll();
-        changeBattery(this._model, this._tween, battery).start();
-        param.onBatteryChange(battery);
+        this._changeBattery(battery)
       },
       onOkButtonPush: () => {
-        if (this._model.disabled) {
-          return;
-        }
-
-        const animation = pushOkButton(this._model, this._tween);
-        animation.start.start();
-        animation.end.onComplete(() => param.onOkButtonPush());
+        this._pushOkButton()
       }
     });
-  }
-
-  /** ゲームループの処理 */
-  _gameLoop(action: GameLoop): void {
-    this._tween.update(action.time);
-    this._view.engage(this._model);
   }
 
   /**
@@ -101,7 +71,53 @@ export class BatterySelector {
     return open(this._model, this._tween, initialValue, maxEnable);
   }
 
+  /** シーンに追加するthree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /** モデルの初期値 */
+  _initialModel(param: Param): BatterySelectorModel {
+    return {
+      slider: {
+        battery: 0,
+          max: param.maxBattery,
+          enableMax: param.maxBattery
+      },
+      okButton: {
+        depth: 0
+      },
+      disabled: false,
+        opacity: 0
+    };
+  }
+
+  /** ゲームループの処理 */
+  _gameLoop(action: GameLoop): void {
+    this._tween.update(action.time);
+    this._view.engage(this._model);
+  }
+
+  /** バッテリーが変更された際のイベント */
+  _changeBattery(battery: number): void {
+    if (this._model.disabled || this._model.slider.enableMax < battery) {
+      return;
+    }
+
+    this._tween.update();
+    this._tween.removeAll();
+    changeBattery(this._model, this._tween, battery).start();
+    this._onBatteryChange(battery);
+  }
+
+  /** OKボタンが押された際のイベント */
+  _pushOkButton(): void {
+    if (this._model.disabled) {
+      return;
+    }
+
+    const animation = pushOkButton(this._model, this._tween);
+    animation.start.start();
+    animation.end.onComplete(() => this._onOkButtonPush());
   }
 }
