@@ -12,12 +12,13 @@ import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicat
 import {createTurnIndicator} from "./turn-indicator";
 import {BurstButton} from "../../../../game-object/burst-button/burst-button";
 import {createBurstButton} from "./burst-button";
-import {Observable, Observer, merge} from "rxjs";
+import {merge, Observable, Observer, Subject} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {GameObjectAction} from "../../../../action/game-object-action";
+import {partitionGameLoop} from "../../../../action/game-loop/partition-game-loop";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -55,12 +56,13 @@ export class HudLayer {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
+    const {update, render} = partitionGameLoop(param.gameLoopListener);
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
     const gameObjectAction: Observable<GameObjectAction> = merge(
       toOverlapObservable(param.domEventListener, param.renderer, this.camera),
-      param.gameLoopListener
+      update
     );
 
     this.batterySelector = createBatterySelector({
@@ -82,5 +84,9 @@ export class HudLayer {
 
     this.burstButton = createBurstButton(param.resources, gameObjectAction);
     this.scene.add(this.burstButton.getObject3D());
+
+    render.subscribe(action => {
+      param.renderer.render(this.scene, this.camera);
+    });
   }
 }

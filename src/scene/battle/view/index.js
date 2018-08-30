@@ -5,7 +5,7 @@ import {ThreeDimensionLayer} from './three-dimension-layer';
 import {HudLayer} from './hud-layer/index';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
-import {Observable, Observer} from "rxjs";
+import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
 
@@ -32,9 +32,11 @@ export class BattleSceneView {
   hudLayer: HudLayer;
 
   constructor(param: Param) {
+    const {hud, threeDimension} = createLayerGameLoop(param.gameLoopListener);
     this.renderer = param.renderer;
     this.threeDimensionLayer = new ThreeDimensionLayer({
-      gameLoopListener: param.gameLoopListener,
+      renderer: param.renderer,
+      gameLoopListener: threeDimension,
       resources: param.resources,
       playerId: param.playerId,
       players: param.players
@@ -45,24 +47,20 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       battleActionNotifier: param.battleActionNotifier,
-      gameLoopListener: param.gameLoopListener,
+      gameLoopListener: hud,
       domEventListener: param.domEventListener,
     });
-
-    param.gameLoopListener.subscribe(action => {
-      switch (action.type) {
-        case 'GameLoop':
-          this._gameLoop(action);
-          return;
-        default:
-          return;
-      }
-    });
   }
+}
 
-  /** ゲームループの処理 */
-  _gameLoop(action: GameLoop): void {
-    this.renderer.render(this.threeDimensionLayer.scene, this.threeDimensionLayer.camera);
-    this.renderer.render(this.hudLayer.scene, this.hudLayer.camera);
-  }
+function createLayerGameLoop(origin: Observable<GameLoop>): {hud: Observable<GameLoop>, threeDimension: Observable<GameLoop>} {
+  const hud: Subject<GameLoop> = new Subject();
+  const threeDimension: Subject<GameLoop> = new Subject();
+
+  origin.subscribe(action => {
+    threeDimension.next(action);
+    hud.next(action);
+  });
+
+  return {hud, threeDimension};
 }
