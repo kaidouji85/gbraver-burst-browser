@@ -13,7 +13,7 @@ import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {filter, map} from 'rxjs/operators';
 import {toSpriteGameLoopObservable} from "../../../../action/sprite-game-loop/game-loop-to-sprite-game-loop";
 import type {GameObjectAction} from "../../../../action/game-object-action";
-import {partitionGameLoop} from "../../../../action/game-loop/partition-game-loop";
+import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
 
 type Param = {
   resources: Resources,
@@ -36,7 +36,7 @@ export class ThreeDimensionLayer {
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-    const {update, render} = partitionGameLoop(param.gameLoopListener);
+    const {update, render} = divideIntoUpdateAndRender(param.gameLoopListener);
 
     this.scene = new THREE.Scene();
     this.camera = createCamera();

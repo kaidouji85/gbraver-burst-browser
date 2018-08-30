@@ -18,7 +18,7 @@ import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {GameObjectAction} from "../../../../action/game-object-action";
-import {partitionGameLoop} from "../../../../action/game-loop/partition-game-loop";
+import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -56,7 +56,7 @@ export class HudLayer {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
-    const {update, render} = partitionGameLoop(param.gameLoopListener);
+    const {update, render} = divideIntoUpdateAndRender(param.gameLoopListener);
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 

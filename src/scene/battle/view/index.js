@@ -8,6 +8,7 @@ import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
+import {createLayerGameLoop} from "./layer-game-loop";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -21,7 +22,7 @@ type Param = {
 };
 
 /**
- * 戦闘画面
+ * 戦闘画面のビュー
  */
 export class BattleSceneView {
   /** レンダラ */
@@ -34,6 +35,7 @@ export class BattleSceneView {
   constructor(param: Param) {
     const {hud, threeDimension} = createLayerGameLoop(param.gameLoopListener);
     this.renderer = param.renderer;
+
     this.threeDimensionLayer = new ThreeDimensionLayer({
       renderer: param.renderer,
       gameLoopListener: threeDimension,
@@ -42,6 +44,7 @@ export class BattleSceneView {
       players: param.players
     });
     this.hudLayer = new HudLayer({
+
       resources: param.resources,
       renderer: param.renderer,
       playerId: param.playerId,
@@ -51,16 +54,4 @@ export class BattleSceneView {
       domEventListener: param.domEventListener,
     });
   }
-}
-
-function createLayerGameLoop(origin: Observable<GameLoop>): {hud: Observable<GameLoop>, threeDimension: Observable<GameLoop>} {
-  const hud: Subject<GameLoop> = new Subject();
-  const threeDimension: Subject<GameLoop> = new Subject();
-
-  origin.subscribe(action => {
-    threeDimension.next(action);
-    hud.next(action);
-  });
-
-  return {hud, threeDimension};
 }
