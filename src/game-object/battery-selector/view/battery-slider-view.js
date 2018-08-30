@@ -10,6 +10,7 @@ import {ButtonOperation} from "../../../operation/button";
 import {refreshGauge} from "./refresh-gauge";
 import type {OverlapAction} from "../../../action/overlap";
 import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../../action/game-object-action";
 
 /** メッシュの大きさ */
 const MESH_SIZE = 1024;
@@ -32,8 +33,8 @@ type Param = {
   resources: Resources,
   /** ゲージ最大値 */
   maxValue: number,
-  /**当たり判定関連のリスナー */
-  overlapListener: Observable<OverlapAction>,
+  /** アクションリスナー */
+  listener: Observable<GameObjectAction>,
   /** バッテリーが変更された場合のコールバック関数 */
   onBatteryChange: (battery: number) => void,
   /** OKボタンが押された時のコールバック関数 */
@@ -69,7 +70,7 @@ export class BatterySliderView {
       values: R.range(0, param.maxValue + 1),
       width: SLIDER_WIDTH,
       height: SLIDER_HEIGHT,
-      overlapListener: param.overlapListener,
+      listener: param.listener,
       onValueChange: v => param.onBatteryChange(v)
     });
     this._sliderOperation.getObject3D().position.y += 96;
@@ -78,7 +79,7 @@ export class BatterySliderView {
     this._okButtonOperation = new ButtonOperation({
       width: BUTTON_WIDTH,
       height: BUTTON_HEIGHT,
-      listener: param.overlapListener,
+      listener: param.listener,
       onButtonPush: () => {
         param.onOkButtonPush();
       }

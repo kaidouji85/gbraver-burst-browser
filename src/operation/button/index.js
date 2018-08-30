@@ -2,17 +2,17 @@
 
 import * as THREE from 'three';
 import {ButtonOverlap} from "./button-overlap";
-import type {OverlapAction} from "../../action/overlap";
 import type {MouseDownRaycaster} from "../../action/overlap/mouse-down-raycaster";
 import {isMouseOverlap} from "../../overlap/check/mouse/mouse-overlap";
 import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";
 import {isTouchOverlap} from "../../overlap/check/touch/touch-overlap";
 import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 type Param = {
   width: number,
   height: number,
-  listener: Observable<OverlapAction>,
+  listener: Observable<GameObjectAction>,
   onButtonPush: () => void
 };
 
