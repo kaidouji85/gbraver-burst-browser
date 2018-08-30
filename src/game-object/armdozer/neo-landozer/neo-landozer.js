@@ -10,6 +10,7 @@ import {stand} from "./model/stand";
 import {Observable} from "rxjs";
 import {filter} from 'rxjs/operators';
 import type {SpriteGameLoop} from "../../../action/sprite-game-loop/sprite-game-loop";
+import type {GameObjectAction} from "../../../action/game-object-action";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -17,7 +18,7 @@ export class NeoLandozer implements ArmDozerSprite {
   _view: NeoLandozerView;
   _tweenGroup: Group;
 
-  constructor(params: {view: NeoLandozerView, listener: Observable<SpriteGameLoop>}) {
+  constructor(params: {view: NeoLandozerView, listener: Observable<GameObjectAction>}) {
     this._model = {
       position: {
         x: 150,

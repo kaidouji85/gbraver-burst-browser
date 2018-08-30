@@ -8,10 +8,11 @@ import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import {createCamera} from "./camera";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {Observable} from "rxjs";
+import {Observable, merge} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {filter, map} from 'rxjs/operators';
 import {toSpriteGameLoopObservable} from "../../../../action/sprite-game-loop/game-loop-to-sprite-game-loop";
+import type {GameObjectAction} from "../../../../action/game-object-action";
 
 type Param = {
   resources: Resources,
@@ -24,15 +25,10 @@ type Param = {
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
  */
 export class ThreeDimensionLayer {
-  /** シーン */
   scene: THREE.Scene;
-  /** カメラ */
   camera: THREE.PerspectiveCamera;
-  /** 背景 */
   stage: Stage;
-  /** プレイヤースプライト */
   playerSprite: ArmDozerSprite;
-  /** 敵スプライト */
   enemySprite: ArmDozerSprite;
 
   constructor(param: Param) {
@@ -41,15 +37,19 @@ export class ThreeDimensionLayer {
 
     this.scene = new THREE.Scene();
     this.camera = createCamera();
-    const spriteGameLoopListener = toSpriteGameLoopObservable(param.gameLoopListener, this.camera);
+
+    const gameObjectAction: Observable<GameObjectAction> = merge(
+      toSpriteGameLoopObservable(param.gameLoopListener, this.camera),
+      param.gameLoopListener,
+    );
 
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
 
-    this.playerSprite = new createPlayerSprite(param.resources, spriteGameLoopListener, playerInfo);
+    this.playerSprite = new createPlayerSprite(param.resources, gameObjectAction, playerInfo);
     this.playerSprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
 
-    this.enemySprite = new createEnemySprite(param.resources, spriteGameLoopListener, enemyInfo);
+    this.enemySprite = new createEnemySprite(param.resources, gameObjectAction, enemyInfo);
     this.enemySprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
   }
 }
