@@ -8,7 +8,8 @@ import {ANIMATION_STAND} from "./model/shin-braver-model";
 import type {ShinBraverView} from "./view/shin-braver-view";
 import {stand} from "./model/stand";
 import {Observable} from "rxjs";
-import type {SpriteGameLoop} from "../../../action/sprite/sprite-game-loop";
+import type {SpriteGameLoop} from "../../../action/sprite-game-loop/sprite-game-loop";
+import type {GameObjectAction} from "../../../action/game-object-action";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -16,7 +17,7 @@ export class ShinBraver implements ArmDozerSprite {
   _view: ShinBraverView;
   _tweenGroup: Group;
 
-  constructor(params: {view: ShinBraverView, listener: Observable<SpriteGameLoop>}) {
+  constructor(params: {view: ShinBraverView, listener: Observable<GameObjectAction>}) {
     this._model = {
       position: {
         x: 150,

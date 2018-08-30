@@ -12,12 +12,12 @@ import {pushOkButton} from "./animation/push-ok-button";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import type {OverlapAction} from "../../action/overlap";
 import type {OkButtonLabel} from "./model/ok-button";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  gameLoopListener: Observable<GameLoop>,
-  overlapListener: Observable<OverlapAction>,
+  listener: Observable<GameObjectAction>,
   maxBattery: number,
   onBatteryChange: (battery: number) => void,
   onOkButtonPush: () => void,
@@ -37,7 +37,7 @@ export class BatterySelector {
     this._model = this._initialModel(param);
     this._tween = new Group();
 
-    param.gameLoopListener.subscribe(action => {
+    param.listener.subscribe(action => {
       switch (action.type) {
         case 'GameLoop':
           this._gameLoop(action);
@@ -49,7 +49,7 @@ export class BatterySelector {
 
     this._view = new BatterySliderView({
       resources: param.resources,
-      overlapListener: param.overlapListener,
+      listener: param.listener,
       maxValue: param.maxBattery,
       onBatteryChange: battery => this._changeBattery(battery),
       onOkButtonPush: () => this._pushOkButton()

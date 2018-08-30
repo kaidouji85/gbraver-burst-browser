@@ -6,10 +6,11 @@ import type {TurnIndicatorModel} from "./model/turn-indicator-model";
 import {TurnIndicatorView} from "./view/turn-indicator-view";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameLoop>
+  listener: Observable<GameObjectAction>
 };
 
 /** ターンインジケーター */

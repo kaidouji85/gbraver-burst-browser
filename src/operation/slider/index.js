@@ -4,11 +4,11 @@ import {TouchLocation} from "./touch-location";
 import {Observable, Subject} from "rxjs";
 import {distinctUntilChanged, filter, map} from "rxjs/operators";
 import * as THREE from 'three';
-import type {OverlapAction} from "../../action/overlap/index";
 import type {MouseDownRaycaster} from "../../action/overlap/mouse-down-raycaster";
 import type {MouseMoveRaycaster} from "../../action/overlap/mouse-move-raycaster";
 import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";
 import type {TouchMoveRaycaster} from "../../action/overlap/touch-move-raycaster";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -16,7 +16,7 @@ type Param = {
   width: number,
   height: number,
   onValueChange: (value: number) => void,
-  overlapListener: Observable<OverlapAction>
+  listener: Observable<GameObjectAction>
 };
 
 /** スライダーの当たり判定 */
@@ -31,7 +31,7 @@ export class SliderOperation {
       height: param.height
     });
 
-    param.overlapListener.subscribe(action => {
+    param.listener.subscribe(action => {
       switch (action.type) {
         case 'mouseDownRaycaster':
           this._mouseDownRaycaster(action);

@@ -6,10 +6,11 @@ import {BurstButtonView} from "./view/burst-button-view";
 import type {Resources} from "../../resource";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameLoop>
+  listener: Observable<GameObjectAction>
 };
 
 /** バーストボタン */

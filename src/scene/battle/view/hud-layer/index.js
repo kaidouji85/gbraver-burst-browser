@@ -12,11 +12,13 @@ import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicat
 import {createTurnIndicator} from "./turn-indicator";
 import {BurstButton} from "../../../../game-object/burst-button/burst-button";
 import {createBurstButton} from "./burst-button";
-import {Observable, Observer} from "rxjs";
+import {merge, Observable, Observer, Subject} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
+import type {GameObjectAction} from "../../../../action/game-object-action";
+import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -54,29 +56,37 @@ export class HudLayer {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
+    const {update, render} = divideIntoUpdateAndRender(param.gameLoopListener);
     this.scene = new THREE.Scene();
     this.camera = createCamera();
-    const overlapListener = toOverlapObservable(param.domEventListener, param.renderer, this.camera);
+
+    const gameObjectAction: Observable<GameObjectAction> = merge(
+      toOverlapObservable(param.domEventListener, param.renderer, this.camera),
+      update
+    );
 
     this.batterySelector = createBatterySelector({
       resources: param.resources,
-      gameLoopListener: param.gameLoopListener,
-      overlapListener: overlapListener,
+      listener: gameObjectAction,
       notifier: param.battleActionNotifier,
       playerInfo: player
     });
     this.scene.add(this.batterySelector.getObject3D());
 
-    this.playerGauge = createPlayerGauge(param.resources, param.gameLoopListener, player);
+    this.playerGauge = createPlayerGauge(param.resources, gameObjectAction, player);
     this.scene.add(this.playerGauge.getObject3D());
 
-    this.enemyGauge = createEnemyGauge(param.resources, param.gameLoopListener, enemy);
+    this.enemyGauge = createEnemyGauge(param.resources, gameObjectAction, enemy);
     this.scene.add(this.enemyGauge.getObject3D());
 
-    this.turnIndicator = createTurnIndicator(param.resources, param.gameLoopListener);
+    this.turnIndicator = createTurnIndicator(param.resources, gameObjectAction);
     this.scene.add(this.turnIndicator.getObject3D());
 
-    this.burstButton = createBurstButton(param.resources, param.gameLoopListener);
+    this.burstButton = createBurstButton(param.resources, gameObjectAction);
     this.scene.add(this.burstButton.getObject3D());
+
+    render.subscribe(action => {
+      param.renderer.render(this.scene, this.camera);
+    });
   }
 }
