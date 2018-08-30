@@ -11,7 +11,7 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {Observable} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {filter, map} from 'rxjs/operators';
-import {toSpriteGameLoopObservable} from "../../../../action/sprite/game-loop-to-sprite-game-loop";
+import {toSpriteGameLoopObservable} from "../../../../action/sprite-game-loop/game-loop-to-sprite-game-loop";
 
 type Param = {
   resources: Resources,

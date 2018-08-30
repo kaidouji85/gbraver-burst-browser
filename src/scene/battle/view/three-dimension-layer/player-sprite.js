@@ -5,7 +5,7 @@ import {PlayerShinBraver} from "../../../../game-object/armdozer/shin-breaver";
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import {PlayerNeoLandozer} from "../../../../game-object/armdozer/neo-landozer";
 import {Observable} from "rxjs";
-import type {SpriteGameLoop} from "../../../../action/sprite/sprite-game-loop";
+import type {SpriteGameLoop} from "../../../../action/sprite-game-loop/sprite-game-loop";
 
 /** 与えられたパラメータからプレイヤースプライを生成する */
 export function createPlayerSprite(resources: Resources, listener: Observable<SpriteGameLoop>, playerInfo: Player): ArmDozerSprite {
