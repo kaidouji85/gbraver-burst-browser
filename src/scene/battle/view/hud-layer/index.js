@@ -58,29 +58,29 @@ export class HudLayer {
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
-    const gameObjectActionListener: Observable<GameObjectAction> = merge(
+    const gameObjectAction: Observable<GameObjectAction> = merge(
       toOverlapObservable(param.domEventListener, param.renderer, this.camera),
       param.gameLoopListener
     );
 
     this.batterySelector = createBatterySelector({
       resources: param.resources,
-      listener: gameObjectActionListener,
+      listener: gameObjectAction,
       notifier: param.battleActionNotifier,
       playerInfo: player
     });
     this.scene.add(this.batterySelector.getObject3D());
 
-    this.playerGauge = createPlayerGauge(param.resources, param.gameLoopListener, player);
+    this.playerGauge = createPlayerGauge(param.resources, gameObjectAction, player);
     this.scene.add(this.playerGauge.getObject3D());
 
-    this.enemyGauge = createEnemyGauge(param.resources, param.gameLoopListener, enemy);
+    this.enemyGauge = createEnemyGauge(param.resources, gameObjectAction, enemy);
     this.scene.add(this.enemyGauge.getObject3D());
 
-    this.turnIndicator = createTurnIndicator(param.resources, param.gameLoopListener);
+    this.turnIndicator = createTurnIndicator(param.resources, gameObjectAction);
     this.scene.add(this.turnIndicator.getObject3D());
 
-    this.burstButton = createBurstButton(param.resources, param.gameLoopListener);
+    this.burstButton = createBurstButton(param.resources, gameObjectAction);
     this.scene.add(this.burstButton.getObject3D());
   }
 }

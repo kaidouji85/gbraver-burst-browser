@@ -7,9 +7,10 @@ import {Group, Tween} from '@tweenjs/tween.js';
 import {refresh} from "./animation/regresh";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 type Param = {
-  listener: Observable<GameLoop>,
+  listener: Observable<GameObjectAction>,
   view: GaugeView,
   hp: number,
   battery: number
