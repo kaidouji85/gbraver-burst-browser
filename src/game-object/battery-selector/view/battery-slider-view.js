@@ -88,6 +88,16 @@ export class BatterySliderView {
     this._group.add(this._okButtonOperation.getObject3D());
   }
 
+  /** シーンに追加するthree.jsのオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this._group;
+  }
+
+  /** タッチ履歴をクリアする */
+  clearTouchHistory(): void {
+    this._sliderOperation.clear();
+  }
+
   /** ビューにモデルを反映させる */
   engage(model: BatterySelectorModel): void {
     this._setScale();
@@ -110,9 +120,5 @@ export class BatterySliderView {
   /** バッテリースライダーの座標を更新する */
   _setPos(): void {
     this._group.position.y =  - window.innerHeight / 2 + 96;
-  }
-
-  getObject3D(): THREE.Object3D {
-    return this._group;
   }
 }

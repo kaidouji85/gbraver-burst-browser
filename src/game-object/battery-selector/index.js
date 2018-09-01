@@ -64,7 +64,11 @@ export class BatterySelector {
    * @return アニメーション
    */
   open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): Tween {
-    return open(this._model, this._tween, initialValue, maxEnable, okButtonLabel);
+    const tween = open(this._model, this._tween, initialValue, maxEnable, okButtonLabel);
+    /*tween.onStart(() => {
+      this._view.clearTouchHistory();
+    });*/
+    return tween;
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */

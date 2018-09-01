@@ -24,10 +24,6 @@ type NotChangeValue = {
  * @return 判定結果
  */
 export function onOverlap(origin: SliderOperationModel, overlap: number[]): ChangeValue | NotChangeValue {
-  if (origin.isDisabled) {
-    return createNoChangeValue(origin);
-  }
-
   if (overlap.length <= 0) {
     return createNoChangeValue(origin);
   }

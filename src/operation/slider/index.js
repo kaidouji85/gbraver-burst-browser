@@ -12,6 +12,7 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {SliderOperationModel} from "./model/slider-operation-model";
 import {INITIAL_VALUE} from "./model/initial-value";
 import {onOverlap} from "./model/on-overlap";
+import {clear} from "./model/clear";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -58,8 +59,25 @@ export class SliderOperation {
 
   }
 
+  /** シーンに追加するthree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._touchLocation.getObject3D();
+  }
+
+  /**
+   * タッチ履歴をクリアする
+   * この命令がないと、以下のような不具合が発生する
+   *
+   * 1) スライダーが表示されている時に、2にタッチする
+   * 2) OKボタン、スライダーが非表示になった
+   * 3) スライダーが再び表示される
+   * 4) スライダーの初期値は0である
+   * 5) 2にタッチする
+   * 6) 1)の入力履歴が残っているので、値が変更されたとは見なされない
+   * 7) 結果、スライダーは反応しない
+   */
+   clear(): void {
+    this._model = clear(this._model);
   }
 
   _mouseDownRaycaster(action: MouseDownRaycaster): void {
