@@ -12,6 +12,7 @@ import {pushOkButton} from "./animation/push-ok-button";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -63,12 +64,17 @@ export class BatterySelector {
    * @param okButtonLabel OKボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): Tween {
-    const tween = open(this._model, this._tween, initialValue, maxEnable, okButtonLabel);
-    /*tween.onStart(() => {
-      this._view.clearTouchHistory();
-    });*/
-    return tween;
+  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): MultiTween {
+    return open({
+      model: this._model,
+      group: this._tween,
+      initialValue: initialValue,
+      maxEnable: maxEnable,
+      okButtonLabel: okButtonLabel,
+      onStart: () => {
+        this._view.clearTouchHistory();
+      },
+    });
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */

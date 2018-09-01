@@ -39,7 +39,11 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const refreshEnemy = view.hudLayer.enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery);
   const end = createEmptyTween();
 
-  start.chain(open, refreshPlayer, refreshEnemy);
+  start.chain(
+    open.start,
+    refreshPlayer,
+    refreshEnemy
+  );
   refreshEnemy.chain(end);
 
   return {start, end};
