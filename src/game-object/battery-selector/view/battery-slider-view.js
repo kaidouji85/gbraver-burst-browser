@@ -93,16 +93,21 @@ export class BatterySliderView {
     return this._group;
   }
 
-  /** タッチ履歴をクリアする */
-  clearTouchHistory(): void {
-    this._sliderOperation.clear();
-  }
-
   /** ビューにモデルを反映させる */
   engage(model: BatterySelectorModel): void {
     this._setScale();
     this._refreshGauge(model);
     this._setPos();
+  }
+
+  /** 最終入力値を強制的に設定する */
+  setLastBattery(battery: number): void {
+    this._sliderOperation.lastValue = battery;
+  }
+
+  /** 最終入力値を取得する */
+  getLastBattery(): ?number {
+    return this._sliderOperation.lastValue;
   }
 
   /** 全体のスケールを調整する */

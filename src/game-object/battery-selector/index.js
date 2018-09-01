@@ -72,7 +72,7 @@ export class BatterySelector {
       maxEnable: maxEnable,
       okButtonLabel: okButtonLabel,
       onStart: () => {
-        this._view.clearTouchHistory();
+        this._view.setLastBattery(initialValue)
       },
     });
   }

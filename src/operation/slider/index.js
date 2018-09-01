@@ -9,10 +9,7 @@ import type {MouseMoveRaycaster} from "../../action/overlap/mouse-move-raycaster
 import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";
 import type {TouchMoveRaycaster} from "../../action/overlap/touch-move-raycaster";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {SliderOperationModel} from "./model/slider-operation-model";
-import {INITIAL_VALUE} from "./model/initial-value";
-import {onOverlap} from "./model/on-overlap";
-import {clear} from "./model/clear";
+import {overlapToValue} from "./overlap-to-value";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -25,12 +22,12 @@ type Param = {
 
 /** スライダーの当たり判定 */
 export class SliderOperation {
-  _model: SliderOperationModel;
+  lastValue: ?number;
   _touchLocation: TouchLocation;
   _onValueChange: (value: number) => void;
 
   constructor(param: Param) {
-    this._model = INITIAL_VALUE;
+    this.lastValue = null;
     this._onValueChange = param.onValueChange;
     this._touchLocation = new TouchLocation({
       values: param.values,
@@ -64,59 +61,46 @@ export class SliderOperation {
     return this._touchLocation.getObject3D();
   }
 
-  /**
-   * タッチ履歴をクリアする
-   * この命令がないと、以下のような不具合が発生する
-   *
-   * 1) スライダーが表示されている時に、2にタッチする
-   * 2) OKボタン、スライダーが非表示になった
-   * 3) スライダーが再び表示される
-   * 4) スライダーの初期値は0である
-   * 5) 2にタッチする
-   * 6) 1)の入力履歴が残っているので、値が変更されたとは見なされない
-   * 7) 結果、スライダーは反応しない
-   */
-   clear(): void {
-    this._model = clear(this._model);
-  }
-
+  /** マウスダウンの処理 */
   _mouseDownRaycaster(action: MouseDownRaycaster): void {
     const overlap = this._touchLocation.getMouseOverlap(action.mouse);
-    const result = onOverlap(this._model, overlap);
-    this._model = result.update;
-    if (result.isValueChanged) {
-      this._onValueChange(result.value);
-    }
+    this._onOverlap(overlap);
   }
 
+  /** マウスムーブの処理 */
   _mouseMoveRaycaster(action: MouseMoveRaycaster): void {
     if (!action.isLeftButtonClicked) {
       return;
     }
 
     const overlap = this._touchLocation.getMouseOverlap(action.mouse);
-    const result = onOverlap(this._model, overlap);
-    this._model = result.update;
-    if (result.isValueChanged) {
-      this._onValueChange(result.value);
-    }
+    this._onOverlap(overlap);
   }
 
+  /** タッチスタートの処理 */
   _touchStartRaycaster(action: TouchStartRaycaster): void {
     const overlap = this._touchLocation.getTouchOverlap(action.touch);
-    const result = onOverlap(this._model, overlap);
-    this._model = result.update;
-    if (result.isValueChanged) {
-      this._onValueChange(result.value);
-    }
+    this._onOverlap(overlap);
   }
 
+  /** タッチムーブの処理 */
   _touchMoveRaycaster(action: TouchMoveRaycaster): void {
     const overlap = this._touchLocation.getTouchOverlap(action.touch);
-    const result = onOverlap(this._model, overlap);
-    this._model = result.update;
-    if (result.isValueChanged) {
-      this._onValueChange(result.value);
+    this._onOverlap(overlap);
+  }
+
+  /** 当たり判定 */
+  _onOverlap(overlap: number[]): void {
+    const value = overlapToValue(overlap);
+    if (value === null || value === undefined) {
+      return;
     }
+
+    if (this.lastValue === value) {
+      return;
+    }
+
+    this.lastValue = value;
+    this._onValueChange(value);
   }
 }
