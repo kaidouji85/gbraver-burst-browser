@@ -7,6 +7,7 @@ import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/inp
 import {createEmptyTween} from "../../../tween/empty-tween";
 import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
 import {getEnableMax} from "../state/get-enable-max";
+import {getInitialBattery} from "../state/get-initial-battery";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -25,7 +26,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   }
 
   const enableMax = getEnableMax(effect, sceneState.playerId);
-  const initialValue = 0;
+  const initialValue = getInitialBattery(enableMax);
   const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
 
