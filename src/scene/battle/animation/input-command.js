@@ -31,7 +31,6 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
 
   const start = createEmptyTween()
     .onStart(() => {
-      sceneState.lastBatteryValue = initialValue;
       view.hudLayer.turnIndicator.turnChange(isPlayerTurn);
     });
   const open = view.hudLayer.batterySelector.open(initialValue, enableMax, okButtonLabel);
@@ -49,6 +48,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   return {start, end};
 }
 
+/**  */
 function getEnableMax(effect: InputCommand, playerId: PlayerId): Tween {
   const playerCommand = effect.players.find(v => v.playerId === playerId);
   if (!playerCommand) {
