@@ -2,10 +2,9 @@
 
 import type {BattleSceneAction} from "../../../../action/battle-scene/index";
 import {BattleSceneView} from "../../view";
-import type {BattleSceneState} from "../../state";
+import type {BattleSceneState} from "../../state/battle-scene-state";
 import {startBattleScene} from "./start-battle-scene";
-import type {ProgressBattle} from "../../progress-battle";
-import {changeBattery} from "./change-battery";
+import type {ProgressBattle} from "../../progress-battle/progress-battle";
 import {decideBattery} from "./decide-battery";
 
 /**
@@ -19,9 +18,6 @@ export function battleSceneActionHandler(action: BattleSceneAction, view: Battle
   switch (action.type) {
     case 'startBattleScene':
       startBattleScene(view, state, action);
-      return;
-    case 'changeBattery':
-      changeBattery(view, state, action);
       return;
     case 'decideBattery':
       decideBattery(view, state, action, progressBattle);

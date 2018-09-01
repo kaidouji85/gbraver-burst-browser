@@ -66,8 +66,9 @@ export class BatterySliderView {
     this._canvasMesh.getThreeJsObjectList()
       .forEach(v => this._group.add(v));
 
+    const minValue = 0;
     this._sliderOperation = new SliderOperation({
-      values: R.range(0, param.maxValue + 1),
+      values: R.range(minValue, param.maxValue + 1),
       width: SLIDER_WIDTH,
       height: SLIDER_HEIGHT,
       listener: param.listener,
@@ -88,11 +89,26 @@ export class BatterySliderView {
     this._group.add(this._okButtonOperation.getObject3D());
   }
 
+  /** シーンに追加するthree.jsのオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this._group;
+  }
+
   /** ビューにモデルを反映させる */
   engage(model: BatterySelectorModel): void {
     this._setScale();
     this._refreshGauge(model);
     this._setPos();
+  }
+
+  /** 最終入力値を強制的に設定する */
+  setLastBattery(battery: number): void {
+    this._sliderOperation.lastValue = battery;
+  }
+
+  /** 最終入力値を取得する */
+  getLastBattery(): ?number {
+    return this._sliderOperation.lastValue;
   }
 
   /** 全体のスケールを調整する */
@@ -110,9 +126,5 @@ export class BatterySliderView {
   /** バッテリースライダーの座標を更新する */
   _setPos(): void {
     this._group.position.y =  - window.innerHeight / 2 + 96;
-  }
-
-  getObject3D(): THREE.Object3D {
-    return this._group;
   }
 }

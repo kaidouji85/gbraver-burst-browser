@@ -1,5 +1,5 @@
 // @flow
-import type {BattleRoom} from "../scene/battle/progress-battle";
+import type {BattleRoom} from "../scene/battle/progress-battle/progress-battle";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Command} from "gbraver-burst-core/lib/command/command";
 import type {NPCRoutine} from "../npc/npc";

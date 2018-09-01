@@ -10,9 +10,9 @@ import {Group, Tween} from "@tweenjs/tween.js";
 import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
 import type {GameLoop} from "../../action/game-loop/game-loop";
-import type {OverlapAction} from "../../action/overlap";
 import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -64,8 +64,27 @@ export class BatterySelector {
    * @param okButtonLabel OKボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): Tween {
-    return open(this._model, this._tween, initialValue, maxEnable, okButtonLabel);
+  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): MultiTween {
+    return open({
+      model: this._model,
+      group: this._tween,
+      initialValue: initialValue,
+      maxEnable: maxEnable,
+      okButtonLabel: okButtonLabel,
+      onStart: () => {
+        this._view.setLastBattery(initialValue)
+      },
+    });
+  }
+
+  /** 現在のバッテリー値を取得する */
+  getBattery(): number {
+    const lastBattery = this._view.getLastBattery();
+    if (lastBattery === null || lastBattery === undefined) {
+      return 0;
+    }
+
+    return lastBattery;
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */

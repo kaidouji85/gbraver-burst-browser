@@ -1,6 +1,6 @@
 // @flow
 
-import {TouchLocation} from "./touch-location";
+import {TouchLocation} from "./touch-location/touch-location";
 import {Observable, Subject} from "rxjs";
 import {distinctUntilChanged, filter, map} from "rxjs/operators";
 import * as THREE from 'three';
@@ -9,6 +9,7 @@ import type {MouseMoveRaycaster} from "../../action/overlap/mouse-move-raycaster
 import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";
 import type {TouchMoveRaycaster} from "../../action/overlap/touch-move-raycaster";
 import type {GameObjectAction} from "../../action/game-object-action";
+import {overlapToValue} from "./overlap-to-value";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -16,15 +17,18 @@ type Param = {
   width: number,
   height: number,
   onValueChange: (value: number) => void,
-  listener: Observable<GameObjectAction>
+  listener: Observable<GameObjectAction>,
 };
 
 /** スライダーの当たり判定 */
 export class SliderOperation {
+  lastValue: ?number;
   _touchLocation: TouchLocation;
-  _onOverlap: Subject<number[]>;
+  _onValueChange: (value: number) => void;
 
   constructor(param: Param) {
+    this.lastValue = null;
+    this._onValueChange = param.onValueChange;
     this._touchLocation = new TouchLocation({
       values: param.values,
       width: param.width,
@@ -50,41 +54,53 @@ export class SliderOperation {
       }
     });
 
-    this._onOverlap = new Subject();
-    this._onOverlap.pipe(
-      filter(v => 0 < v.length),
-      map(v => v.reduce((a, b) => Math.max(a, b))),
-      distinctUntilChanged()
-    ).subscribe(v => {
-      param.onValueChange(v);
-    });
   }
 
+  /** シーンに追加するthree.jsオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this._touchLocation.getObject3D();
+  }
+
+  /** マウスダウンの処理 */
   _mouseDownRaycaster(action: MouseDownRaycaster): void {
     const overlap = this._touchLocation.getMouseOverlap(action.mouse);
-    this._onOverlap.next(overlap);
+    this._onOverlap(overlap);
   }
 
+  /** マウスムーブの処理 */
   _mouseMoveRaycaster(action: MouseMoveRaycaster): void {
     if (!action.isLeftButtonClicked) {
       return;
     }
 
     const overlap = this._touchLocation.getMouseOverlap(action.mouse);
-    this._onOverlap.next(overlap);
+    this._onOverlap(overlap);
   }
 
+  /** タッチスタートの処理 */
   _touchStartRaycaster(action: TouchStartRaycaster): void {
     const overlap = this._touchLocation.getTouchOverlap(action.touch);
-    this._onOverlap.next(overlap);
+    this._onOverlap(overlap);
   }
 
+  /** タッチムーブの処理 */
   _touchMoveRaycaster(action: TouchMoveRaycaster): void {
     const overlap = this._touchLocation.getTouchOverlap(action.touch);
-    this._onOverlap.next(overlap);
+    this._onOverlap(overlap);
   }
 
-  getObject3D(): THREE.Object3D {
-    return this._touchLocation.getObject3D();
+  /** 当たり判定 */
+  _onOverlap(overlap: number[]): void {
+    const value = overlapToValue(overlap);
+    if (value === null || value === undefined) {
+      return;
+    }
+
+    if (this.lastValue === value) {
+      return;
+    }
+
+    this.lastValue = value;
+    this._onValueChange(value);
   }
 }
