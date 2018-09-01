@@ -1,6 +1,6 @@
 // @flow
 
-import {TouchLocation} from "./touch-location";
+import {TouchLocation} from "./touch-location/touch-location";
 import {Observable, Subject} from "rxjs";
 import {distinctUntilChanged, filter, map} from "rxjs/operators";
 import * as THREE from 'three';
@@ -9,6 +9,9 @@ import type {MouseMoveRaycaster} from "../../action/overlap/mouse-move-raycaster
 import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";
 import type {TouchMoveRaycaster} from "../../action/overlap/touch-move-raycaster";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {SliderOperationModel} from "./model/slider-operation-model";
+import {INITIAL_VALUE} from "./model/initial-value";
+import {onOverlap} from "./model/on-overlap";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -21,10 +24,13 @@ type Param = {
 
 /** スライダーの当たり判定 */
 export class SliderOperation {
+  _model: SliderOperationModel;
   _touchLocation: TouchLocation;
-  _onOverlap: Subject<number[]>;
+  _onValueChange: (value: number) => void;
 
   constructor(param: Param) {
+    this._model = INITIAL_VALUE;
+    this._onValueChange = param.onValueChange;
     this._touchLocation = new TouchLocation({
       values: param.values,
       width: param.width,
@@ -50,19 +56,19 @@ export class SliderOperation {
       }
     });
 
-    this._onOverlap = new Subject();
-    this._onOverlap.pipe(
-      filter(v => 0 < v.length),
-      map(v => v.reduce((a, b) => Math.max(a, b))),
-      distinctUntilChanged()
-    ).subscribe(v => {
-      param.onValueChange(v);
-    });
+  }
+
+  getObject3D(): THREE.Object3D {
+    return this._touchLocation.getObject3D();
   }
 
   _mouseDownRaycaster(action: MouseDownRaycaster): void {
     const overlap = this._touchLocation.getMouseOverlap(action.mouse);
-    this._onOverlap.next(overlap);
+    const result = onOverlap(this._model, overlap);
+    this._model = result.update;
+    if (result.isValueChanged) {
+      this._onValueChange(result.value);
+    }
   }
 
   _mouseMoveRaycaster(action: MouseMoveRaycaster): void {
@@ -71,20 +77,28 @@ export class SliderOperation {
     }
 
     const overlap = this._touchLocation.getMouseOverlap(action.mouse);
-    this._onOverlap.next(overlap);
+    const result = onOverlap(this._model, overlap);
+    this._model = result.update;
+    if (result.isValueChanged) {
+      this._onValueChange(result.value);
+    }
   }
 
   _touchStartRaycaster(action: TouchStartRaycaster): void {
     const overlap = this._touchLocation.getTouchOverlap(action.touch);
-    this._onOverlap.next(overlap);
+    const result = onOverlap(this._model, overlap);
+    this._model = result.update;
+    if (result.isValueChanged) {
+      this._onValueChange(result.value);
+    }
   }
 
   _touchMoveRaycaster(action: TouchMoveRaycaster): void {
     const overlap = this._touchLocation.getTouchOverlap(action.touch);
-    this._onOverlap.next(overlap);
-  }
-
-  getObject3D(): THREE.Object3D {
-    return this._touchLocation.getObject3D();
+    const result = onOverlap(this._model, overlap);
+    this._model = result.update;
+    if (result.isValueChanged) {
+      this._onValueChange(result.value);
+    }
   }
 }

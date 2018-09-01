@@ -1,10 +1,10 @@
 // @flow
 import * as THREE from "three";
 import {Division} from "./division";
-import type {TouchRaycastContainer} from "../../overlap/check/touch/touch-raycaster";
-import {isTouchOverlap} from "../../overlap/check/touch/touch-overlap";
-import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
-import {isMouseOverlap} from "../../overlap/check/mouse/mouse-overlap";
+import type {TouchRaycastContainer} from "../../../overlap/check/touch/touch-raycaster";
+import {isTouchOverlap} from "../../../overlap/check/touch/touch-overlap";
+import type {MouseRaycaster} from "../../../overlap/check/mouse/mouse-raycaster";
+import {isMouseOverlap} from "../../../overlap/check/mouse/mouse-overlap";
 
 /** コンストラクタのパラメータ */
 export type Param = {

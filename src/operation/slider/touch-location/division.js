@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from "three";
-import type {OverlapTarget} from "../../overlap/target/overlap-target";
-import {isMeshOverlap} from "../../overlap/check/raycaster/raycaster-overlap";
+import type {OverlapTarget} from "../../../overlap/target/overlap-target";
+import {isMeshOverlap} from "../../../overlap/check/raycaster/raycaster-overlap";
 
 /**
  * 目盛りの当たり判定

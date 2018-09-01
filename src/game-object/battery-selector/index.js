@@ -10,7 +10,6 @@ import {Group, Tween} from "@tweenjs/tween.js";
 import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
 import type {GameLoop} from "../../action/game-loop/game-loop";
-import type {OverlapAction} from "../../action/overlap";
 import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
 
