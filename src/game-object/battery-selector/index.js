@@ -77,6 +77,16 @@ export class BatterySelector {
     });
   }
 
+  /** 現在のバッテリー値を取得する */
+  getBattery(): number {
+    const lastBattery = this._view.getLastBattery();
+    if (lastBattery === null || lastBattery === undefined) {
+      return 0;
+    }
+
+    return lastBattery;
+  }
+
   /** シーンに追加するthree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();

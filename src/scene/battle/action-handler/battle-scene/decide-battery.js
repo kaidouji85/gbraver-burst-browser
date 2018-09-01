@@ -9,9 +9,11 @@ import {battleAnimation} from "../../animation";
 export async function decideBattery(view: BattleSceneView, state: BattleSceneState, action: DecideBattery, progressBattle: ProgressBattle): Promise<void> {
   const command = {
     type: 'BATTERY_COMMAND',
-    battery: state.lastBatteryValue
+    battery: view.hudLayer.batterySelector.getBattery()
   };
   const gameState = await progressBattle(command);
+  console.log(command);// TODO テストが終わったら消す
   console.log(gameState); // TODO テストが終わったら消す
+
   battleAnimation(view, state, gameState);
 }

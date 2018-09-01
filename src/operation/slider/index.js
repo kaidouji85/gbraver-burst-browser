@@ -17,7 +17,7 @@ type Param = {
   width: number,
   height: number,
   onValueChange: (value: number) => void,
-  listener: Observable<GameObjectAction>
+  listener: Observable<GameObjectAction>,
 };
 
 /** スライダーの当たり判定 */

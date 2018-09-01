@@ -66,8 +66,9 @@ export class BatterySliderView {
     this._canvasMesh.getThreeJsObjectList()
       .forEach(v => this._group.add(v));
 
+    const minValue = 0;
     this._sliderOperation = new SliderOperation({
-      values: R.range(0, param.maxValue + 1),
+      values: R.range(minValue, param.maxValue + 1),
       width: SLIDER_WIDTH,
       height: SLIDER_HEIGHT,
       listener: param.listener,
