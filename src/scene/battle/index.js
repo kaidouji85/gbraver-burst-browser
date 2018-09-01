@@ -1,13 +1,13 @@
 // @flow
 import type {Resources} from '../../resource/index';
 import {BattleSceneView} from "./view";
-import type {BattleSceneState} from "./state";
+import type {BattleSceneState} from "./state/battle-scene-state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
 import {domEventHandler} from "./action-handler/dom-event";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import {ProgressBattle} from "./progress-battle";
+import {ProgressBattle} from "./progress-battle/progress-battle";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";

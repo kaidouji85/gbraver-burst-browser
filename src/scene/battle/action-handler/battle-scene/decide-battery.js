@@ -1,9 +1,9 @@
 // @flow
 
 import {BattleSceneView} from "../../view";
-import type {BattleSceneState} from "../../state";
+import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {DecideBattery} from "../../../../action/battle-scene/decide-battery";
-import type {ProgressBattle} from "../../progress-battle";
+import type {ProgressBattle} from "../../progress-battle/progress-battle";
 import {battleAnimation} from "../../animation";
 
 export async function decideBattery(view: BattleSceneView, state: BattleSceneState, action: DecideBattery, progressBattle: ProgressBattle): Promise<void> {

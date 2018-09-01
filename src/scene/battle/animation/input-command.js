@@ -1,12 +1,12 @@
 import {BattleSceneView} from "../view/index";
-import type {BattleSceneState} from "../state";
+import type {BattleSceneState} from "../state/battle-scene-state";
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 import {Tween} from '@tweenjs/tween.js';
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
 import {createEmptyTween} from "../../../tween/empty-tween";
 import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import {getEnableMax} from "../state/get-enable-max";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -46,17 +46,4 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   refreshEnemy.chain(end);
 
   return {start, end};
-}
-
-/**  */
-function getEnableMax(effect: InputCommand, playerId: PlayerId): Tween {
-  const playerCommand = effect.players.find(v => v.playerId === playerId);
-  if (!playerCommand) {
-    return 0;
-  }
-
-  return playerCommand.command
-    .filter(v => v.type === 'BATTERY_COMMAND')
-    .map(v => v.battery)
-    .reduce((a, b) => Math.max(a, b), 0);
 }

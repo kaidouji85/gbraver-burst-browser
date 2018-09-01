@@ -2,9 +2,9 @@
 
 import type {BattleSceneAction} from "../../../../action/battle-scene/index";
 import {BattleSceneView} from "../../view";
-import type {BattleSceneState} from "../../state";
+import type {BattleSceneState} from "../../state/battle-scene-state";
 import {startBattleScene} from "./start-battle-scene";
-import type {ProgressBattle} from "../../progress-battle";
+import type {ProgressBattle} from "../../progress-battle/progress-battle";
 import {decideBattery} from "./decide-battery";
 
 /**

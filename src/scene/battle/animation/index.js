@@ -4,7 +4,7 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
 import {Tween} from '@tweenjs/tween.js';
-import type {BattleSceneState} from "../state";
+import type {BattleSceneState} from "../state/battle-scene-state";
 import {BattleSceneView} from "../view/index";
 import {inputCommandAnimation} from "./input-command";
 

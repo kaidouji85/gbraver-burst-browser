@@ -1,6 +1,6 @@
 // @flow
 
-import type {BattleSceneState} from "../../state";
+import type {BattleSceneState} from "../../state/battle-scene-state";
 import {BattleSceneView} from "../../view";
 import type {StartBattleScene} from "../../../../action/battle-scene/start-battle-scene";
 import {battleAnimation} from '../../animation/index';
