@@ -28,7 +28,10 @@ export class CanvasMesh {
     this.meshWidth = params.meshWidth;
     this.meshHeight = params.meshHeight;
     const texture = new THREE.Texture(this.canvas);
-    const material = new THREE.MeshBasicMaterial({map: texture});
+    const material = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true
+    });
     material.transparent = true;
     const planeGeometry = new THREE.PlaneGeometry(this.meshWidth, this.meshHeight);
 

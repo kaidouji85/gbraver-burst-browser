@@ -14,6 +14,8 @@ import {filter, map} from 'rxjs/operators';
 import {toSpriteGameLoopObservable} from "../../../../action/sprite-game-loop/game-loop-to-sprite-game-loop";
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
+import {BatteryNumber} from "../../../../game-object/battery-number/battery-number";
+import {createPlayerBatteryNumber} from "./player-battery-number";
 
 type Param = {
   resources: Resources,
@@ -31,6 +33,7 @@ export class ThreeDimensionLayer {
   camera: THREE.PerspectiveCamera;
   stage: Stage;
   playerSprite: ArmDozerSprite;
+  playerBatteryNumber: BatteryNumber;
   enemySprite: ArmDozerSprite;
 
   constructor(param: Param) {
@@ -49,11 +52,14 @@ export class ThreeDimensionLayer {
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
 
-    this.playerSprite = new createPlayerSprite(param.resources, gameObjectAction, playerInfo);
+    this.playerSprite = createPlayerSprite(param.resources, gameObjectAction, playerInfo);
     this.playerSprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
 
-    this.enemySprite = new createEnemySprite(param.resources, gameObjectAction, enemyInfo);
+    this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemyInfo);
     this.enemySprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
+
+    this.playerBatteryNumber = createPlayerBatteryNumber(param.resources, gameObjectAction);
+    this.scene.add(this.playerBatteryNumber.getObject3D());
 
     render.subscribe(action => {
       param.renderer.render(this.scene, this.camera);
