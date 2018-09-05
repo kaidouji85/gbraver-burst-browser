@@ -34,6 +34,7 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_SELECTOR_DEFENSE_BUTTON: 'BATTERY_SELECTOR_DEFENSE_BUTTON',
   TURN_INDICATOR: 'TURN_INDICATOR',
   BURST_BUTTON: 'BURST_BUTTON',
+  BATTERY_NUMBER: 'BATTERY_NUMBER',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -98,6 +99,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     id: CANVAS_IMAGE_IDS.BURST_BUTTON,
     path: 'button/burst-button.png',
   },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_NUMBER,
+    path: 'number/battery-number.png',
+  }
 ];
 
 /**
