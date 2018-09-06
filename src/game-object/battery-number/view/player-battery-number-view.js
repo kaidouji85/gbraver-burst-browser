@@ -29,10 +29,9 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
   }
 
   /** モデルをビューに反映させる */
-  engage(model: BatteryNumberModel, camera: THREE.Camera): void {
+  engage(model: BatteryNumberModel): void {
     this._refreshCanvas(model);
     this._refreshPos();
-    this._refreshQuaternion(camera);
     this._refreshScale();
   }
 
@@ -51,7 +50,6 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
 
       context.save();
 
-      //context.fillRect(0, 0, context.canvas.height, context.canvas.height);
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);
       drawNumberCenter(context, batteryNumber, x, y, 5);
 
@@ -61,14 +59,8 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
 
   /** 座標を更新する */
   _refreshPos(): void {
-    this._canvasMesh.mesh.position.x = 150;
-    this._canvasMesh.mesh.position.y = 200;
-    this._canvasMesh.mesh.position.z = 400;
-  }
-
-  /** メッシュのクォータニオンを更新する */
-  _refreshQuaternion(camera: THREE.Camera): void {
-    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
+    this._canvasMesh.mesh.position.x = 96;
+    this._canvasMesh.mesh.position.y = 0;
   }
 
   /** スケールを更新する */

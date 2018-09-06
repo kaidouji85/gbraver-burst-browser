@@ -56,7 +56,8 @@ export function drawNumberCenter(context: CanvasRenderingContext2D, image: Image
   const numberDigit = numberArray.length;
 
   const x = dx - basicWidth * numberDigit / 2;
-  drawNumberLeft(context, image, x, dy, value);
+  const y = dy - image.height;
+  drawNumberLeft(context, image, x, y, value);
 }
 
 /**

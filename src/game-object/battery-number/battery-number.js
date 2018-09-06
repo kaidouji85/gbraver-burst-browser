@@ -7,7 +7,6 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import * as THREE from 'three';
-import type {SpriteGameLoop} from "../../action/sprite-game-loop/sprite-game-loop";
 
 type Param = {
   resources: Resources,
@@ -25,7 +24,7 @@ export class BatteryNumber {
     this._view = param.view;
     param.listener.subscribe(action => {
       switch (action.type) {
-        case 'SpriteGameLoop':
+        case 'GameLoop':
           this._gameLoop(action);
           return;
         default:
@@ -40,7 +39,7 @@ export class BatteryNumber {
   }
 
   /** ゲームループの処理 */
-  _gameLoop(action: SpriteGameLoop) {
-    this._view.engage(this._model, action.camera);
+  _gameLoop(action: GameLoop) {
+    this._view.engage(this._model);
   }
 }
