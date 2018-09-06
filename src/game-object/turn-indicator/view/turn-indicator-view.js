@@ -10,7 +10,7 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
 export const MESH_SIZE = 1024;
 export const CANVAS_SIZE = 1024;
-export const BASE_SCALE = 0.4;
+export const BASE_SCALE = 0.6;
 
 /** ターンインジケータービュー */
 export class TurnIndicatorView {
@@ -59,7 +59,7 @@ export class TurnIndicatorView {
   /** 位置調整 */
   _setPos(): void {
     this._canvasMesh.mesh.position.x = 0;
-    this._canvasMesh.mesh.position.y = - window.innerHeight / 2 + 224;
+    this._canvasMesh.mesh.position.y = 48;
   }
 
 

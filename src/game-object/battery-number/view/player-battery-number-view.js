@@ -60,7 +60,7 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
   /** 座標を更新する */
   _refreshPos(): void {
     this._canvasMesh.mesh.position.x = 96;
-    this._canvasMesh.mesh.position.y = 0;
+    this._canvasMesh.mesh.position.y = 48;
   }
 
   /** スケールを更新する */
