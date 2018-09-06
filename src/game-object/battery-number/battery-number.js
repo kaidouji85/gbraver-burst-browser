@@ -8,6 +8,9 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import * as THREE from 'three';
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
+import {INITIAL_VALUE} from "./model/initial-value";
+import {show} from "./animation/show";
+import {Group} from '@tweenjs/tween.js';
 
 type Param = {
   resources: Resources,
@@ -19,13 +22,12 @@ type Param = {
 export class BatteryNumber {
   _model: BatteryNumberModel;
   _view: BatteryNumberView;
+  _tween: Group;
 
   constructor(param: Param) {
-    this._model = {
-      alpha: 0,
-      battery: 1
-    };
+    this._model = INITIAL_VALUE;
     this._view = param.view;
+    this._tween = Group();
     param.listener.subscribe(action => {
       switch (action.type) {
         case 'GameLoop':
@@ -38,11 +40,9 @@ export class BatteryNumber {
   }
 
   /** バッテリーを表示する */
-  /*
   show(battery: number): MultiTween {
-
+    return show(this._model, this._tween, battery);
   }
-  */
 
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
