@@ -21,6 +21,7 @@ import type {GameObjectAction} from "../../../../action/game-object-action";
 import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
 import {createPlayerBatteryNumber} from "./player-battery-number";
 import {BatteryNumber} from "../../../../game-object/battery-number/battery-number";
+import {createEnemyBatteryNumber} from "./enemy-battery-number";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -47,6 +48,7 @@ export class HudLayer {
   turnIndicator: TurnIndicator;
   burstButton: BurstButton;
   playerBatteryNumber: BatteryNumber;
+  enemyBatteryNumber: BatteryNumber;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -83,6 +85,9 @@ export class HudLayer {
 
     this.playerBatteryNumber = createPlayerBatteryNumber(param.resources, gameObjectAction);
     this.scene.add(this.playerBatteryNumber.getObject3D());
+
+    this.enemyBatteryNumber = createEnemyBatteryNumber(param.resources, gameObjectAction);
+    this.scene.add(this.enemyBatteryNumber.getObject3D());
 
     render.subscribe(action => {
       param.renderer.render(this.scene, this.camera);
