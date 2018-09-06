@@ -8,7 +8,7 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import * as THREE from 'three';
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
-import {INITIAL_VALUE} from "./model/initial-value";
+import {createInitialValue} from "./model/initial-value";
 import {show} from "./animation/show";
 import {Group} from '@tweenjs/tween.js';
 
@@ -25,7 +25,7 @@ export class BatteryNumber {
   _tween: Group;
 
   constructor(param: Param) {
-    this._model = INITIAL_VALUE;
+    this._model = createInitialValue();
     this._view = param.view;
     this._tween = Group();
     param.listener.subscribe(action => {

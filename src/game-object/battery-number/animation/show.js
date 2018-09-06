@@ -14,25 +14,21 @@ import {createEmptyTween} from "../../../tween/empty-tween";
  * @return アニメーション
  */
 export function show(model: BatteryNumberModel, group: Gourp, battery: number): MultiTween {
-  const startBuffer = createEmptyTween();
-  const visible = Tween(model, group)
-    .onStart(() => {
-      model.alpha = 0;
-      model.battery = battery;
-    })
-    .to({
-      alpha: 1
-    });
+  const start = new Tween(model, group)
+    .to({alpha: 0, battery: battery}, 0);
+  const visible = new Tween(model, group)
+    .to({alpha: 1}, 300);
   const wait = createEmptyTween()
-    .delay(3000);
-  const endBuffer = createEmptyTween();
+    .delay(1000);
+  const invisible = new Tween(model, group)
+    .to({alpha: 0}, 300);
 
-  startBuffer.chain(visible);
+  start.chain(visible);
   visible.chain(wait);
-  wait.chain(endBuffer);
+  wait.chain(invisible);
 
   return {
-    start: startBuffer,
-    end: endBuffer
+    start: start,
+    end: invisible
   };
 }
