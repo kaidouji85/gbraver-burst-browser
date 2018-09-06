@@ -50,8 +50,9 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
 
       context.save();
 
+      context.globalAlpha = model.alpha;
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-      drawNumberCenter(context, batteryNumber, x, y, 5);
+      drawNumberCenter(context, batteryNumber, x, y, model.battery);
 
       context.restore();
     });

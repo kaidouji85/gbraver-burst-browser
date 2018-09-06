@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import * as THREE from 'three';
+import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 
 type Param = {
   resources: Resources,
@@ -20,7 +21,10 @@ export class BatteryNumber {
   _view: BatteryNumberView;
 
   constructor(param: Param) {
-    this._model = {};
+    this._model = {
+      alpha: 0,
+      battery: 1
+    };
     this._view = param.view;
     param.listener.subscribe(action => {
       switch (action.type) {
@@ -32,6 +36,13 @@ export class BatteryNumber {
       }
     });
   }
+
+  /** バッテリーを表示する */
+  /*
+  show(battery: number): MultiTween {
+
+  }
+  */
 
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
