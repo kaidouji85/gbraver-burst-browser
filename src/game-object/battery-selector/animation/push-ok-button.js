@@ -2,7 +2,7 @@
 
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {BatterySelectorModel} from "../model/battery-selector";
-import {createEmptyTween} from "../../../tween/empty-tween";
+import {createEmptyTweenByGroup} from "../../../tween/empty-tween";
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 
 /** OKボタンを押す */
@@ -32,7 +32,7 @@ export function pushOkButton(model: BatterySelectorModel, group: Group): MultiTw
     });
   close.chain(end);
 
-  const endBuffer = createEmptyTween();
+  const endBuffer = createEmptyTweenByGroup(group);
   end.chain(endBuffer);
 
   return {
