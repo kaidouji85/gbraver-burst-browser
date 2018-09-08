@@ -12,7 +12,7 @@ import {Tween, Gourp} from '@tweenjs/tween.js';
  * @param battery バッテリーの値
  * @return アニメーション
  */
-export function show(model: BatteryNumberModel, group: Gourp, battery: number): MultiTween {
+export function popUp(model: BatteryNumberModel, group: Gourp, battery: number): MultiTween {
   const start = new Tween(model, group)
     .to({alpha: 0, battery: battery}, 0);
   const visible = new Tween(model, group)

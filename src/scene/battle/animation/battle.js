@@ -13,8 +13,8 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   const enemyBattery = isAttacker ? effect.defenderBattery : effect.attackerBattery;
 
   const start = createEmptyTween();
-  const showPlayerBattery = view.hudLayer.playerBatteryNumber.show(playerBattery);
-  const showEnemyBattery = view.hudLayer.enemyBatteryNumber.show(enemyBattery);
+  const showPlayerBattery = view.hudLayer.playerBatteryNumber.popUp(playerBattery);
+  const showEnemyBattery = view.hudLayer.enemyBatteryNumber.popUp(enemyBattery);
   const end = createEmptyTween();
 
   start.chain(

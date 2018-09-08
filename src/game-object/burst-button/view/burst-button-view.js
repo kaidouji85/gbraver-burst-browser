@@ -25,7 +25,6 @@ export class BurstButtonView {
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
     });
-
   }
   /** モデルをビューに反映させる */
   engage(model: BurstButtonModel): void {
