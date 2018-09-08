@@ -2,7 +2,6 @@
 
 import type {BatteryNumberModel} from "./model/battery-number-model";
 import type {BatteryNumberView} from "./view/battery-number-view";
-import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {GameLoop} from "../../action/game-loop/game-loop";
@@ -13,7 +12,6 @@ import {popUp} from "./animation/popUp";
 import {Group} from '@tweenjs/tween.js';
 
 type Param = {
-  resources: Resources,
   listener: Observable<GameObjectAction>,
   view: BatteryNumberView
 };
