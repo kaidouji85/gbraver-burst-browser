@@ -19,9 +19,10 @@ import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overl
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
-import {createPlayerBatteryNumber} from "./player-battery-number";
 import {BatteryNumber} from "../../../../game-object/battery-number/battery-number";
-import {createEnemyBatteryNumber} from "./enemy-battery-number";
+import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
+import {playerDamageIndicator} from "../../../../game-object/damage-indicator";
+import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -48,6 +49,7 @@ export class HudLayer {
   turnIndicator: TurnIndicator;
   burstButton: BurstButton;
   playerBatteryNumber: BatteryNumber;
+  playerDamageIndicator: DamageIndicator;
   enemyBatteryNumber: BatteryNumber;
 
   constructor(param: Param) {
@@ -83,10 +85,22 @@ export class HudLayer {
     this.burstButton = createBurstButton(param.resources, gameObjectAction);
     this.scene.add(this.burstButton.getObject3D());
 
-    this.playerBatteryNumber = createPlayerBatteryNumber(param.resources, gameObjectAction);
+    this.playerBatteryNumber = playerBatteryNumber({
+      resources: param.resources,
+      listener: gameObjectAction
+    });
     this.scene.add(this.playerBatteryNumber.getObject3D());
 
-    this.enemyBatteryNumber = createEnemyBatteryNumber(param.resources, gameObjectAction);
+    this.playerDamageIndicator = playerDamageIndicator({
+      resources: param.resources,
+      listener: gameObjectAction
+    });
+    this.scene.add(this.playerDamageIndicator.getObject3D());
+
+    this.enemyBatteryNumber = enemyBatteryNumber({
+      resources: param.resources,
+      listener: gameObjectAction
+    });
     this.scene.add(this.enemyBatteryNumber.getObject3D());
 
     render.subscribe(action => {
