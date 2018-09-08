@@ -10,7 +10,7 @@ import type {BurstButtonModel} from "../model/burst-button-model";
 
 export const MESH_SIZE = 1024;
 export const CANVAS_SIZE = 1024;
-export const SCALE = 0.4;
+export const SCALE = 0.3;
 
 /** バーストボタンのビュー */
 export class BurstButtonView {
