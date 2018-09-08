@@ -4,7 +4,7 @@ import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {DecideBattery} from "../../../../action/battle-scene/decide-battery";
 import type {ProgressBattle} from "../../progress-battle/progress-battle";
-import {battleAnimation} from "../../animation";
+import {battleSceneAnimation} from "../../animation";
 
 export async function decideBattery(view: BattleSceneView, state: BattleSceneState, action: DecideBattery, progressBattle: ProgressBattle): Promise<void> {
   const command = {
@@ -15,5 +15,5 @@ export async function decideBattery(view: BattleSceneView, state: BattleSceneSta
   console.log(command);// TODO テストが終わったら消す
   console.log(gameState); // TODO テストが終わったら消す
 
-  battleAnimation(view, state, gameState);
+  battleSceneAnimation(view, state, gameState);
 }

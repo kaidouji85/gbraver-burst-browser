@@ -10,7 +10,7 @@ import type {BurstButtonModel} from "../model/burst-button-model";
 
 export const MESH_SIZE = 1024;
 export const CANVAS_SIZE = 1024;
-export const SCALE = 0.4;
+export const SCALE = 0.3;
 
 /** バーストボタンのビュー */
 export class BurstButtonView {
@@ -57,8 +57,8 @@ export class BurstButtonView {
 
   /** 表示位置を更新する */
   _setPos(): void {
-    this._canvasMesh.mesh.position.x = - window.innerWidth / 2 + 64;
-    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - 64;
+    this._canvasMesh.mesh.position.x = 0;
+    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - 48;
   }
 
   /** 本ビューで使うthree.jsオブジェクトを取得する */

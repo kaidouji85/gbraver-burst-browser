@@ -3,7 +3,7 @@
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import {BattleSceneView} from "../../view";
 import type {StartBattleScene} from "../../../../action/battle-scene/start-battle-scene";
-import {battleAnimation} from '../../animation/index';
+import {battleSceneAnimation} from '../../animation/index';
 
 /**
  * 戦闘シーン開始
@@ -12,5 +12,5 @@ import {battleAnimation} from '../../animation/index';
  * @param state 状態
  */
 export function startBattleScene(view: BattleSceneView, state: BattleSceneState, action: StartBattleScene): void {
-  battleAnimation(view, state, action.initialState);
+  battleSceneAnimation(view, state, action.initialState);
 }

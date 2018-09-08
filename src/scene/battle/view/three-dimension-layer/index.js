@@ -49,10 +49,10 @@ export class ThreeDimensionLayer {
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
 
-    this.playerSprite = new createPlayerSprite(param.resources, gameObjectAction, playerInfo);
+    this.playerSprite = createPlayerSprite(param.resources, gameObjectAction, playerInfo);
     this.playerSprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
 
-    this.enemySprite = new createEnemySprite(param.resources, gameObjectAction, enemyInfo);
+    this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemyInfo);
     this.enemySprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
 
     render.subscribe(action => {

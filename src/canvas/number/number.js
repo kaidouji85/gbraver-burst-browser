@@ -40,6 +40,27 @@ export function drawNumberRight(context: CanvasRenderingContext2D, image: Image,
 }
 
 /**
+ * キャンバスに画像数字を描画する
+ * ローカル座標原点は数字の中央となる
+ *
+ * @param context 描画対象のキャンバスコンテキスト
+ * @param image 数字画像
+ * @param dx 描画X
+ * @param dy 描画Y
+ * @param value 描画する数字の値
+ */
+export function drawNumberCenter(context: CanvasRenderingContext2D, image: Image, dx: number, dy: number, value: number): void {
+  const basicWidth = image.width / 10;
+
+  const numberArray = createNumberArray(value);
+  const numberDigit = numberArray.length;
+
+  const x = dx - basicWidth * numberDigit / 2;
+  const y = dy - image.height / 2;
+  drawNumberLeft(context, image, x, y, value);
+}
+
+/**
  * 数字を数字配列に変換する
  *
  * 例)
