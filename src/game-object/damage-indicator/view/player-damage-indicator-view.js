@@ -31,7 +31,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
   /** モデルをビューに反映させる */
   engage(model: DamageIndicatorModel): void {
-    this._refreshCanvas();
+    this._refreshCanvas(model);
     this._refreshPos();
     this._refreshScale();
   }
@@ -42,21 +42,26 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
   }
 
   /** キャンバスを更新する */
-  _refreshCanvas(): void {
+  _refreshCanvas(model: DamageIndicatorModel): void {
     this._canvasMesh.draw(context => {
-      // TODO モデルの内容に応じた内容にする
       const numberResource: ?CanvasImageResource = this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DAMAGE_NUMBER);
       const numberImage: Image = numberResource ? numberResource.image : new Image();
 
       const x = context.canvas.width / 2;
       const y = context.canvas.height / 2;
 
-      drawNumberCenter(context, numberImage, x, y, 2000);
+      context.save();
+
+      context.globalAlpha = model.opacity;
+      drawNumberCenter(context, numberImage, x, y, model.damage);
+
+      context.restore();
     });
   }
 
   _refreshPos(): void {
     this._canvasMesh.mesh.position.y = 48;
+    this._canvasMesh.mesh.position.x = 128;
   }
 
   /** 拡大率を更新する */

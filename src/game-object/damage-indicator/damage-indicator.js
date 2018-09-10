@@ -7,6 +7,9 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import type {GameLoop} from "../../action/game-loop/game-loop";
+import type {MultiTween} from "../../tween/multi-tween/multi-tween";
+import {popUp} from "./animation/pop-up";
+import {Group} from '@tweenjs/tween.js';
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -17,10 +20,12 @@ type Param = {
 export class DamageIndicator {
   _model: DamageIndicatorModel;
   _view: DamageIndicatorView;
+  _tween: Group;
 
   constructor(param: Param) {
     this._view = param.view;
     this._model = createInitialValue();
+    this._tween = new Group();
     param.listener.subscribe(action => {
       switch (action.type) {
         case 'GameLoop':
@@ -30,6 +35,11 @@ export class DamageIndicator {
           return;
       }
     });
+  }
+
+  /** ダメージ数字を表示する */
+  popUp(damage: number): MultiTween {
+    return popUp(this._model, this._tween, damage);
   }
 
   /** シーンに追加するオブジェクトを取得する */

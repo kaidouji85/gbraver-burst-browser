@@ -8,7 +8,7 @@ import type {GameLoop} from "../../action/game-loop/game-loop";
 import * as THREE from 'three';
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {createInitialValue} from "./model/initial-value";
-import {popUp} from "./animation/popUp";
+import {popUp} from "./animation/pop-up";
 import {Group} from '@tweenjs/tween.js';
 
 type Param = {

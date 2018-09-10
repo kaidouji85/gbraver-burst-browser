@@ -1,4 +1,7 @@
 // @flow
 
 /** ダメージインジケータのモデル */
-export type DamageIndicatorModel = {}
+export type DamageIndicatorModel = {
+  damage: number,
+  opacity: number
+}
