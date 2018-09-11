@@ -11,7 +11,7 @@ import {drawNumberCenter} from "../../../canvas/number/number";
 
 export const CANVAS_SIZE = 2048;
 export const MESH_SIZE = 2048;
-export const SCALE = 0.4;
+export const SCALE = 0.3;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
@@ -52,6 +52,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
       context.save();
 
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height);
       context.globalAlpha = model.opacity;
       drawNumberCenter(context, numberImage, x, y, model.damage);
 
@@ -61,7 +62,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
   _refreshPos(): void {
     this._canvasMesh.mesh.position.y = 48;
-    this._canvasMesh.mesh.position.x = 128;
+    this._canvasMesh.mesh.position.x = 120;
   }
 
   /** 拡大率を更新する */
