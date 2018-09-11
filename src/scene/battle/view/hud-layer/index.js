@@ -21,7 +21,7 @@ import type {GameObjectAction} from "../../../../action/game-object-action";
 import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
 import {BatteryNumber} from "../../../../game-object/battery-number/battery-number";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
-import {playerDamageIndicator} from "../../../../game-object/damage-indicator";
+import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
 
 /** コンストラクタのパラメータ */
@@ -51,6 +51,7 @@ export class HudLayer {
   playerBatteryNumber: BatteryNumber;
   playerDamageIndicator: DamageIndicator;
   enemyBatteryNumber: BatteryNumber;
+  enemyDamageIndicator: DamageIndicator;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -102,6 +103,12 @@ export class HudLayer {
       listener: gameObjectAction
     });
     this.scene.add(this.enemyBatteryNumber.getObject3D());
+
+    this.enemyDamageIndicator = enemyDamageIndicator({
+      resources: param.resources,
+      listener: gameObjectAction
+    });
+    this.scene.add(this.enemyDamageIndicator.getObject3D());
 
     render.subscribe(action => {
       param.renderer.render(this.scene, this.camera);

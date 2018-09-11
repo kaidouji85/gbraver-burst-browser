@@ -14,8 +14,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   const isAttacker = effect.attacker === sceneState.playerId;
   const playerBattery = isAttacker ? effect.attackerBattery : effect.defenderBattery;
   const enemyBattery = isAttacker ? effect.defenderBattery : effect.attackerBattery;
-  // 状況に応じてプレイヤー、敵のインジケータを入れ替える
-  const damageIndicator = view.hudLayer.playerDamageIndicator;
+  const damageIndicator = isAttacker ? view.hudLayer.enemyDamageIndicator : view.hudLayer.playerDamageIndicator;
 
   const start = createEmptyTween();
   const showPlayerBattery = view.hudLayer.playerBatteryNumber.popUp(playerBattery);

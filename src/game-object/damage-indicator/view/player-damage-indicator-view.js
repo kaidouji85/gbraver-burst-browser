@@ -16,7 +16,6 @@ export const SCALE = 0.3;
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
   _resources: Resources;
-
   _canvasMesh: CanvasMesh;
 
   constructor(resources: Resources) {
