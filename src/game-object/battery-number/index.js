@@ -16,7 +16,6 @@ type Param = {
 export function playerBatteryNumber(param: Param): BatteryNumber {
   const view = new PlayerBatteryNumberView(param.resources);
   return new BatteryNumber({
-    resources: param.resources,
     listener: param.listener,
     view: view
   });
@@ -26,7 +25,6 @@ export function playerBatteryNumber(param: Param): BatteryNumber {
 export function enemyBatteryNumber(param: Param):  BatteryNumber {
   const view = new EnemyBatteryNumberView(param.resources);
   return new BatteryNumber({
-    resources: param.resources,
     listener: param.listener,
     view: view
   });
