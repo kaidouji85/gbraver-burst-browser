@@ -8,9 +8,11 @@ import {createBattleScene} from "./create-battle-scene";
 import {createGameLoopListener} from "../action/game-loop/create-listener";
 import {createDOMEventListener} from "../action/dom-event/create-listener";
 import Tween from '@tweenjs/tween.js';
+import {viewPerformanceStatics} from "../stats/view-performance-statics";
 
 export async function main() {
   loadServiceWorker();
+  viewPerformanceStatics(document.body);
 
   const resources = await loadAllResource('');
 

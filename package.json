@@ -27,6 +27,7 @@
     "gbraver-burst-core": "0.2.6",
     "ramda": "^0.25.0",
     "rxjs": "^6.3.2",
+    "stats.js": "^0.17.0",
     "three": "^0.96.0",
     "workbox-webpack-plugin": "3.4.1"
   },
