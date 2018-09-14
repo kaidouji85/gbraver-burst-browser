@@ -13,19 +13,19 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 
 /** メッシュの大きさ */
-const MESH_SIZE = 1024;
+const MESH_SIZE = 512;
 /** テクスチャの大きさ */
-const TEXTURE_SIZE = 1024;
+const TEXTURE_SIZE = 512;
 /** スライダー当たり判定横幅 */
-const SLIDER_WIDTH = 615;
+const SLIDER_WIDTH = 384;
 /** スライダー当たり判定高 */
-const SLIDER_HEIGHT = 168;
+const SLIDER_HEIGHT = 80;
 /** OKボタンの当たり判定横幅 */
-const BUTTON_WIDTH = 365;
+const BUTTON_WIDTH = 248;
 /** OKボタンの当たり判定横高 */
-const BUTTON_HEIGHT = 117;
+const BUTTON_HEIGHT = 80;
 /** スライダー全体の拡大率 */
-const SCALE = 0.4;
+const SCALE = 0.6;
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -74,7 +74,7 @@ export class BatterySliderView {
       listener: param.listener,
       onValueChange: v => param.onBatteryChange(v)
     });
-    this._sliderOperation.getObject3D().position.y += 96;
+    this._sliderOperation.getObject3D().position.y += 64;
     this._group.add(this._sliderOperation.getObject3D());
 
     this._okButtonOperation = new ButtonOperation({
@@ -85,7 +85,7 @@ export class BatterySliderView {
         param.onOkButtonPush();
       }
     });
-    this._okButtonOperation.getObject3D().position.y = -96;
+    this._okButtonOperation.getObject3D().position.y = -56;
     this._group.add(this._okButtonOperation.getObject3D());
   }
 
