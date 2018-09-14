@@ -50,6 +50,6 @@ export class BatteryNumber {
   /** ゲームループの処理 */
   _gameLoop(action: GameLoop) {
     this._tween.update(action.time);
-    this._view.engage(this._model);
+    //this._view.engage(this._model);
   }
 }

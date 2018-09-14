@@ -37,7 +37,7 @@ export class TurnIndicator {
 
   /** ゲームループの処理 */
   _gameLoop(action: GameLoop): void {
-    this._view.engage(this._model);
+    //this._view.engage(this._model);
   }
 
   /** ターンインジケーターで使うthree.jsオブジェクトを返す */

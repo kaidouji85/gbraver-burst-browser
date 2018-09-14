@@ -34,7 +34,7 @@ export class BurstButton {
 
   /** ゲームループの処理 */
   _gameLoop(action: GameLoop): void {
-    this._view.engage(this._model);
+    //this._view.engage(this._model);
   }
 
   /** three.jsオブジェクトを取得する */

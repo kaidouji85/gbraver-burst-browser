@@ -112,7 +112,7 @@ export class BatterySelector {
   /** ゲームループの処理 */
   _gameLoop(action: GameLoop): void {
     this._tween.update(action.time);
-    this._view.engage(this._model);
+    //this._view.engage(this._model);
   }
 
   /** バッテリーが変更された際のイベント */
