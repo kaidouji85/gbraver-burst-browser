@@ -8,7 +8,6 @@ import {SliderOperation} from "../../../operation/slider";
 import * as R from 'ramda';
 import {ButtonOperation} from "../../../operation/button";
 import {refreshGauge} from "./refresh-gauge";
-import type {OverlapAction} from "../../../action/overlap";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 
@@ -54,6 +53,8 @@ export class BatterySelectorView {
   /** ゲームループで使うためにリソース管理オブジェクトをキャッシュする */
   _resources: Resources;
 
+  _lastModel: ?BatterySelectorModel;
+
   constructor(param: Param) {
     this._resources = param.resources;
     this._group = new THREE.Group();
@@ -96,9 +97,12 @@ export class BatterySelectorView {
 
   /** ビューにモデルを反映させる */
   engage(model: BatterySelectorModel): void {
+    if (this._isModelChanged(model)) {
+      this._refreshGauge(model);
+    }
     this._setScale();
-    this._refreshGauge(model);
     this._setPos();
+    this._updateLastModel(model);
   }
 
   /** 最終入力値を強制的に設定する */
@@ -126,5 +130,13 @@ export class BatterySelectorView {
   /** バッテリースライダーの座標を更新する */
   _setPos(): void {
     this._group.position.y =  - window.innerHeight / 2 + 96;
+  }
+
+  _isModelChanged(model: BatterySelectorModel): boolean {
+    return !R.equals(this._lastModel, model);
+  }
+
+  _updateLastModel(model: BatterySelectorModel): void {
+    this._lastModel = R.clone(model);
   }
 }

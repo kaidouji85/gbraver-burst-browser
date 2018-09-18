@@ -6,6 +6,7 @@ import type {GaugeModel} from "../model/gauge-model";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import {drawGauge} from "../../../canvas/gauge";
 import type {Resources} from "../../../resource";
+import * as R from 'ramda';
 
 export const CANVAS_SIZE = 256;
 export const MESH_SIZE = 150;
@@ -14,6 +15,7 @@ export const MESH_SIZE = 150;
 export class PlayerGaugeView implements GaugeView {
   _canvasMesh: CanvasMesh;
   _resources: Resources;
+  _lastModel: ?GaugeModel;
 
   constructor(resources: Resources) {
     this._resources = resources;
@@ -23,12 +25,26 @@ export class PlayerGaugeView implements GaugeView {
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
     });
+    this._lastModel = null;
   }
 
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
-    this._refreshGauge(model);
+    if (this._isModelChanged(model)) {
+      this._refreshGauge(model);
+    }
     this._setPos();
+    this._updateLastModel(model);
+  }
+
+  /** モデルが変更されたか否かを判定する、trueで変更された */
+  _isModelChanged(model: GaugeModel): boolean {
+    return !R.equals(this._lastModel, model);
+  }
+
+  /** モデルの最終値を更新する */
+  _updateLastModel(model: GaugeModel): void {
+    this._lastModel = R.clone(model);
   }
 
   /** ゲージを更新する */
