@@ -41,8 +41,8 @@ type Param = {
   onOkButtonPush: () => void,
 };
 
-/** バッテリースライダーのビュー */
-export class BatterySliderView {
+/** バッテリーセレクターのビュー */
+export class BatterySelectorView {
   /** 本ビューで使用するthree.jsオブジェクトをまとめたもの */
   _group: THREE.Group;
   /** バッテリースライダーを描画するキャンバス */

@@ -8,8 +8,7 @@ import {drawGauge} from "../../../canvas/gauge";
 import type {Resources} from "../../../resource";
 
 export const CANVAS_SIZE = 256;
-export const MESH_SIZE = 256;
-export const SCALE = 0.6;
+export const MESH_SIZE = 150;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
@@ -29,7 +28,6 @@ export class PlayerGaugeView implements GaugeView {
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
     this._refreshGauge(model);
-    this._setScale();
     this._setPos();
   }
 
@@ -54,14 +52,9 @@ export class PlayerGaugeView implements GaugeView {
     });
   }
 
-  /** 全体の拡大率を設定する */
-  _setScale(): void {
-    this._canvasMesh.mesh.scale.set(SCALE, SCALE, SCALE);
-  }
-
   /** 座標を設定する */
   _setPos(): void {
-    this._canvasMesh.mesh.position.x = 104;
+    this._canvasMesh.mesh.position.x = 92;
     this._canvasMesh.mesh.position.y = + window.innerHeight / 2 - 48;
   }
 

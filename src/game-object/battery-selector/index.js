@@ -2,7 +2,7 @@
 
 import {Observable, Subject} from 'rxjs';
 import type {BatterySelectorModel} from "./model/battery-selector";
-import {BatterySliderView} from "./view/battery-slider-view";
+import {BatterySelectorView} from "./view/battery-selector-view";
 import type {Resources} from "../../resource/index";
 import * as THREE from "three";
 import {changeBattery} from './animation/change-battery';
@@ -26,7 +26,7 @@ type Param = {
 /** バッテリーセレクタ */
 export class BatterySelector {
   _model: BatterySelectorModel;
-  _view: BatterySliderView;
+  _view: BatterySelectorView;
   _tween: Group;
   _onBatteryChange: (battery: number) => void;
   _onOkButtonPush: () => void;
@@ -47,7 +47,7 @@ export class BatterySelector {
       }
     });
 
-    this._view = new BatterySliderView({
+    this._view = new BatterySelectorView({
       resources: param.resources,
       listener: param.listener,
       maxValue: param.maxBattery,
