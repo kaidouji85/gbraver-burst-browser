@@ -46,7 +46,7 @@ export class Gauge {
   /** ゲームループ */
   _gameLoop(action: GameLoop): void {
     this._tween.update(action.time);
-    //this._view.engage(this._model);
+    this._view.engage(this._model);
   }
 
   /** ゲージ内容更新 */

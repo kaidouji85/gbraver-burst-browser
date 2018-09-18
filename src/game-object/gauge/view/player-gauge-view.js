@@ -7,9 +7,9 @@ import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import {drawGauge} from "../../../canvas/gauge";
 import type {Resources} from "../../../resource";
 
-export const CANVAS_SIZE = 1024;
-export const MESH_SIZE = 1024;
-export const SCALE = 0.4;
+export const CANVAS_SIZE = 256;
+export const MESH_SIZE = 256;
+export const SCALE = 0.6;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
