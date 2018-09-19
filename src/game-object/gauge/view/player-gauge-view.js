@@ -56,8 +56,6 @@ export class PlayerGaugeView implements GaugeView {
   _refreshCanvas(model: GaugeModel): void {
     this._canvasMesh.draw(context => {
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-      context.save();
-
       drawGauge({
         context: context,
         resources: this._resources,
@@ -68,8 +66,6 @@ export class PlayerGaugeView implements GaugeView {
         battery: model.battery,
         maxBattery: model.maxBattery
       });
-
-      context.restore();
     });
   }
 

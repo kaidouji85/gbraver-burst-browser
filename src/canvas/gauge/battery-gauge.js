@@ -23,7 +23,6 @@ export function drawBatteryGauge(param: Param): void {
   drawImageInCenter(param.context, base, dx, dy);
   drawImageInCenter(param.context, disActiveBar, dx, dy);
   drawActiveBar(param);
-  drawNumber(param.context, dx + 80, dy - 10, param.battery);
   drawScale(param.context, dx, dy, param.maxBattery, disActiveBar.width);
 }
 
@@ -40,19 +39,6 @@ function drawActiveBar(param: Param): void {
   const dw =sw;
   const dh = sh;
   param.context.drawImage(activeBar, sx, sy, sw, sh, dx, dy, dw, dh);
-}
-
-/** バッテリーの数字を描画する */
-function drawNumber(context: CanvasRenderingContext2D, dx: number, dy: number, value: number): void {
-  context.save();
-
-  context.font = "20px 'sans-serif'";
-  context.fillStyle = NUMBER_COLOR;
-  context.textAlign = 'right';
-  context.textBaseline = 'middle';
-  context.fillText(`${Math.floor(value)}`, dx, dy);
-
-  context.restore();
 }
 
 /** バッテリーの目盛を描画する */
