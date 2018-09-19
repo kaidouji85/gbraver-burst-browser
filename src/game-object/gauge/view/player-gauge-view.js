@@ -15,7 +15,7 @@ export const MESH_SIZE = 150;
 export class PlayerGaugeView implements GaugeView {
   _canvasMesh: CanvasMesh;
   _resources: Resources;
-  _lastModel: ?GaugeModel;
+  _lastEngagedModel: ?GaugeModel;
 
   constructor(resources: Resources) {
     this._resources = resources;
@@ -25,30 +25,35 @@ export class PlayerGaugeView implements GaugeView {
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
     });
-    this._lastModel = null;
+    this._lastEngagedModel = null;
   }
 
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
-    if (this._isModelChanged(model)) {
-      this._refreshGauge(model);
+    if (this._shouldCanvasRefresh(model)) {
+      this._refreshCanvas(model);
     }
     this._setPos();
-    this._updateLastModel(model);
+    this._updateLastEngagedModel(model);
   }
 
-  /** モデルが変更されたか否かを判定する、trueで変更された */
-  _isModelChanged(model: GaugeModel): boolean {
-    return !R.equals(this._lastModel, model);
+  /** シーンに追加するオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this._canvasMesh.getObject3D();
   }
 
-  /** モデルの最終値を更新する */
-  _updateLastModel(model: GaugeModel): void {
-    this._lastModel = R.clone(model);
+  /** 最後にビューに反映されたモデルを、引数の内容で上書きする */
+  _updateLastEngagedModel(model: GaugeModel): void {
+    this._lastEngagedModel = R.clone(model);
   }
 
-  /** ゲージを更新する */
-  _refreshGauge(model: GaugeModel): void {
+  /** キャンバスを更新するか否かを判定する、trueで更新する */
+  _shouldCanvasRefresh(model: GaugeModel): boolean {
+    return !R.equals(this._lastEngagedModel, model);
+  }
+
+  /** キャンバスを更新する */
+  _refreshCanvas(model: GaugeModel): void {
     this._canvasMesh.draw(context => {
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);
       context.save();
@@ -72,9 +77,5 @@ export class PlayerGaugeView implements GaugeView {
   _setPos(): void {
     this._canvasMesh.mesh.position.x = 92;
     this._canvasMesh.mesh.position.y = + window.innerHeight / 2 - 48;
-  }
-
-  getObject3D(): THREE.Object3D {
-    return this._canvasMesh.mesh;
   }
 }
