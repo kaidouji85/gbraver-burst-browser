@@ -52,8 +52,8 @@ export class BatterySelectorView {
   _okButtonOperation: ButtonOperation;
   /** ゲームループで使うためにリソース管理オブジェクトをキャッシュする */
   _resources: Resources;
-
-  _lastModel: ?BatterySelectorModel;
+  /** 最後にビューに反映されたモデル */
+  _lastEngagedModel: ?BatterySelectorModel;
 
   constructor(param: Param) {
     this._resources = param.resources;
@@ -64,8 +64,7 @@ export class BatterySelectorView {
       canvasWidth: TEXTURE_SIZE,
       canvasHeight: TEXTURE_SIZE,
     });
-    this._canvasMesh.getThreeJsObjectList()
-      .forEach(v => this._group.add(v));
+    this._group.add(this._canvasMesh.getObject3D());
 
     const minValue = 0;
     this._sliderOperation = new SliderOperation({
@@ -97,11 +96,12 @@ export class BatterySelectorView {
 
   /** ビューにモデルを反映させる */
   engage(model: BatterySelectorModel): void {
-    if (this._isModelChanged(model)) {
-      this._refreshGauge(model);
+    if (this._shouldCanvasRefresh(model)) {
+      this._refreshCanvas(model);
     }
     this._setScale();
     this._setPos();
+    this._setOpacity(model);
     this._updateLastModel(model);
   }
 
@@ -120,8 +120,21 @@ export class BatterySelectorView {
     this._group.scale.set(SCALE, SCALE, SCALE);
   }
 
-  /** バッテリースライダーを更新する */
-  _refreshGauge(model: BatterySelectorModel): void {
+  /** キャンバスを更新するか否かを返す、trueで更新する */
+  _shouldCanvasRefresh(model: BatterySelectorModel): boolean {
+    if (!this._lastEngagedModel) {
+      return true;
+    }
+
+    return this._lastEngagedModel.slider.battery !== model.slider.battery
+      || this._lastEngagedModel.slider.max !== model.slider.max
+      || this._lastEngagedModel.slider.enableMax !== model.slider.enableMax
+      || this._lastEngagedModel.okButton.depth !== model.okButton.depth
+      || this._lastEngagedModel.okButton.label !== model.okButton.label
+  }
+
+  /** キャンバスを更新する */
+  _refreshCanvas(model: BatterySelectorModel): void {
     this._canvasMesh.draw((context: CanvasRenderingContext2D) => {
       refreshGauge(context, this._resources, model);
     });
@@ -132,11 +145,12 @@ export class BatterySelectorView {
     this._group.position.y =  - window.innerHeight / 2 + 96;
   }
 
-  _isModelChanged(model: BatterySelectorModel): boolean {
-    return !R.equals(this._lastModel, model);
+  _setOpacity(model: BatterySelectorModel): void {
+    this._canvasMesh.setOpacity(model.opacity);
   }
 
+  /** 最後にビューに反映されたモデルを引数で与えれた内容で更新する */
   _updateLastModel(model: BatterySelectorModel): void {
-    this._lastModel = R.clone(model);
+    this._lastEngagedModel = R.clone(model);
   }
 }

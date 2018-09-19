@@ -18,7 +18,6 @@ export function refreshGauge(context: CanvasRenderingContext2D, resources: Resou
   context.clearRect(0, 0, context.canvas.height, context.canvas.height);
   context.save();
 
-  context.globalAlpha = model.opacity;
   selectorWindow(context, resources);
   batterySlider(context, resources, model);
   okButton(context, resources, model);
