@@ -18,9 +18,16 @@ export class BurstButtonView {
   constructor(resources: Resources) {
     this._canvasMesh = createCanvasMesh(resources);
   }
+
   /** モデルをビューに反映させる */
   engage(model: BurstButtonModel): void {
     this._setPos();
+    this._setOpacity(model);
+  }
+
+  /** 本ビューで使うthree.jsオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this._canvasMesh.mesh;
   }
 
   /** 表示位置を更新する */
@@ -29,9 +36,9 @@ export class BurstButtonView {
     this._canvasMesh.mesh.position.y = 48;
   }
 
-  /** 本ビューで使うthree.jsオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
-    return this._canvasMesh.mesh;
+  /** 透明度を更新する */
+  _setOpacity(model: BurstButtonModel): void {
+    this._canvasMesh.setOpacity(model.opacity);
   }
 }
 
