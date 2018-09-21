@@ -11,24 +11,6 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 export const MESH_SIZE = 100;
 export const CANVAS_SIZE = 128;
 
-/** キャンバスメッシュを生成するヘルパー関数 */
-function createCanvasMesh(resources: Resources): CanvasMesh {
-  const mesh = new CanvasMesh({
-    canvasWidth: CANVAS_SIZE,
-    canvasHeight: CANVAS_SIZE,
-    meshWidth: MESH_SIZE,
-    meshHeight: MESH_SIZE,
-  });
-  mesh.draw(context => {
-    const turnIndicatorResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TURN_INDICATOR);
-    const turnIndicatorImage: Image = turnIndicatorResource ? turnIndicatorResource.image : new Image();
-    const dx = context.canvas.width / 2;
-    const dy = context.canvas.height / 2;
-    drawImageInCenter(context, turnIndicatorImage, dx, dy);
-  });
-  return mesh;
-}
-
 /** ターンインジケータービュー */
 export class TurnIndicatorView {
   _canvasMesh: CanvasMesh;
@@ -58,4 +40,22 @@ export class TurnIndicatorView {
     this._canvasMesh.mesh.position.x = 0;
     this._canvasMesh.mesh.position.y = 48;
   }
+}
+
+/** キャンバスメッシュを生成するヘルパー関数 */
+function createCanvasMesh(resources: Resources): CanvasMesh {
+  const mesh = new CanvasMesh({
+    canvasWidth: CANVAS_SIZE,
+    canvasHeight: CANVAS_SIZE,
+    meshWidth: MESH_SIZE,
+    meshHeight: MESH_SIZE,
+  });
+  mesh.draw(context => {
+    const turnIndicatorResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TURN_INDICATOR);
+    const turnIndicatorImage: Image = turnIndicatorResource ? turnIndicatorResource.image : new Image();
+    const dx = context.canvas.width / 2;
+    const dy = context.canvas.height / 2;
+    drawImageInCenter(context, turnIndicatorImage, dx, dy);
+  });
+  return mesh;
 }

@@ -145,6 +145,7 @@ export class BatterySelectorView {
     this._group.position.y =  - window.innerHeight / 2 + 96;
   }
 
+  /** 透明度を更新する */
   _setOpacity(model: BatterySelectorModel): void {
     this._canvasMesh.setOpacity(model.opacity);
   }
