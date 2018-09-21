@@ -1,11 +1,11 @@
 // @flow
 
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
-import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
+import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
+import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
 import {Tween} from '@tweenjs/tween.js';
-import type {BattleSceneState} from "../state/battle-scene-state";
-import {BattleSceneView} from "../view/index";
+import type {BattleSceneState} from "../../state/battle-scene-state";
+import {BattleSceneView} from "../../view/index";
 import {inputCommandAnimation} from "./input-command";
 import {battleAnimation} from "./battle";
 
@@ -17,8 +17,8 @@ import {battleAnimation} from "./battle";
  * @param gameStateList 再生するゲームの状態
  * @return アニメーション
  */
-export function battleSceneAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): void {
-  const multiTween = gameStateList
+export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): MultiTween {
+  return gameStateList
     .map(v => gameStateAnimation(view, sceneState, v))
     .reduce((accumlator: MultiTween, current: MultiTween) => {
       accumlator.end.chain(current.start);
@@ -27,7 +27,6 @@ export function battleSceneAnimation(view: BattleSceneView, sceneState: BattleSc
         end: current.end
       };
     }, createEmptyMultiTween());
-  multiTween.start.start();
 }
 
 /**

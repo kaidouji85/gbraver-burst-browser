@@ -1,13 +1,13 @@
-import {BattleSceneView} from "../view/index";
-import type {BattleSceneState} from "../state/battle-scene-state";
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
+import {BattleSceneView} from "../../view/index";
+import type {BattleSceneState} from "../../state/battle-scene-state";
+import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
 import {Tween} from '@tweenjs/tween.js';
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
-import {createEmptyTween} from "../../../tween/empty-tween";
-import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
-import {getEnableMax} from "../state/get-enable-max";
-import {getInitialBattery} from "../state/get-initial-battery";
+import {createEmptyTween} from "../../../../tween/empty-tween";
+import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
+import {getEnableMax} from "../../state/get-enable-max";
+import {getInitialBattery} from "../../state/get-initial-battery";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -34,13 +34,15 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     .onStart(() => {
       view.hudLayer.turnIndicator.turnChange(isPlayerTurn);
     });
-  const open = view.hudLayer.batterySelector.open(initialValue, enableMax, okButtonLabel);
+  const openBatterySelector = view.hudLayer.batterySelector.open(initialValue, enableMax, okButtonLabel);
+  const visibleBurstButton = view.hudLayer.burstButton.visible();
   const refreshPlayer = view.hudLayer.playerGauge.refresh(player.armdozer.hp, player.armdozer.battery);
   const refreshEnemy = view.hudLayer.enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery);
   const end = createEmptyTween();
 
   start.chain(
-    open.start,
+    openBatterySelector.start,
+    visibleBurstButton.start,
     refreshPlayer,
     refreshEnemy
   );

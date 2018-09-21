@@ -6,15 +6,16 @@ import type {GaugeModel} from "../model/gauge-model";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import {drawGauge} from "../../../canvas/gauge";
 import type {Resources} from "../../../resource";
+import * as R from 'ramda';
 
-export const CANVAS_SIZE = 1024;
-export const MESH_SIZE = 1024;
-export const SCALE = 0.4;
+export const CANVAS_SIZE = 256;
+export const MESH_SIZE = 150;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
   _canvasMesh: CanvasMesh;
   _resources: Resources;
+  _lastEngagedModel: ?GaugeModel;
 
   constructor(resources: Resources) {
     this._resources = resources;
@@ -24,21 +25,37 @@ export class PlayerGaugeView implements GaugeView {
       meshWidth: MESH_SIZE,
       meshHeight: MESH_SIZE,
     });
+    this._lastEngagedModel = null;
   }
 
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
-    this._refreshGauge(model);
-    this._setScale();
+    if (this._shouldCanvasRefresh(model)) {
+      this._refreshCanvas(model);
+    }
     this._setPos();
+    this._updateLastEngagedModel(model);
   }
 
-  /** ゲージを更新する */
-  _refreshGauge(model: GaugeModel): void {
+  /** シーンに追加するオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this._canvasMesh.getObject3D();
+  }
+
+  /** 最後にビューに反映されたモデルを、引数の内容で上書きする */
+  _updateLastEngagedModel(model: GaugeModel): void {
+    this._lastEngagedModel = R.clone(model);
+  }
+
+  /** キャンバスを更新するか否かを判定する、trueで更新する */
+  _shouldCanvasRefresh(model: GaugeModel): boolean {
+    return !R.equals(this._lastEngagedModel, model);
+  }
+
+  /** キャンバスを更新する */
+  _refreshCanvas(model: GaugeModel): void {
     this._canvasMesh.draw(context => {
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-      context.save();
-
       drawGauge({
         context: context,
         resources: this._resources,
@@ -49,23 +66,12 @@ export class PlayerGaugeView implements GaugeView {
         battery: model.battery,
         maxBattery: model.maxBattery
       });
-
-      context.restore();
     });
-  }
-
-  /** 全体の拡大率を設定する */
-  _setScale(): void {
-    this._canvasMesh.mesh.scale.set(SCALE, SCALE, SCALE);
   }
 
   /** 座標を設定する */
   _setPos(): void {
-    this._canvasMesh.mesh.position.x = 104;
+    this._canvasMesh.mesh.position.x = 92;
     this._canvasMesh.mesh.position.y = + window.innerHeight / 2 - 48;
-  }
-
-  getObject3D(): THREE.Object3D {
-    return this._canvasMesh.mesh;
   }
 }

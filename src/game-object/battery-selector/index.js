@@ -2,7 +2,7 @@
 
 import {Observable, Subject} from 'rxjs';
 import type {BatterySelectorModel} from "./model/battery-selector";
-import {BatterySliderView} from "./view/battery-slider-view";
+import {BatterySelectorView} from "./view/battery-selector-view";
 import type {Resources} from "../../resource/index";
 import * as THREE from "three";
 import {changeBattery} from './animation/change-battery';
@@ -26,14 +26,12 @@ type Param = {
 /** バッテリーセレクタ */
 export class BatterySelector {
   _model: BatterySelectorModel;
-  _view: BatterySliderView;
+  _view: BatterySelectorView;
   _tween: Group;
   _onBatteryChange: (battery: number) => void;
-  _onOkButtonPush: () => void;
 
   constructor(param: Param) {
     this._onBatteryChange = param.onBatteryChange;
-    this._onOkButtonPush = param.onOkButtonPush;
     this._model = this._initialModel(param);
     this._tween = new Group();
 
@@ -47,12 +45,16 @@ export class BatterySelector {
       }
     });
 
-    this._view = new BatterySliderView({
+    this._view = new BatterySelectorView({
       resources: param.resources,
       listener: param.listener,
       maxValue: param.maxBattery,
       onBatteryChange: battery => this._changeBattery(battery),
-      onOkButtonPush: () => this._pushOkButton()
+      onOkButtonPush: () => {
+        if (!this._model.disabled) {
+          param.onOkButtonPush();
+        }
+      }
     });
   }
 
@@ -75,6 +77,11 @@ export class BatterySelector {
         this._view.setLastBattery(initialValue)
       },
     });
+  }
+
+  /** OKボタンを押す */
+  pushOkButton(): MultiTween {
+    return pushOkButton(this._model, this._tween);
   }
 
   /** 現在のバッテリー値を取得する */
@@ -125,16 +132,5 @@ export class BatterySelector {
     this._tween.removeAll();
     changeBattery(this._model, this._tween, battery).start();
     this._onBatteryChange(battery);
-  }
-
-  /** OKボタンが押された際のイベント */
-  _pushOkButton(): void {
-    if (this._model.disabled) {
-      return;
-    }
-
-    const animation = pushOkButton(this._model, this._tween);
-    animation.start.start();
-    animation.end.onComplete(() => this._onOkButtonPush());
   }
 }

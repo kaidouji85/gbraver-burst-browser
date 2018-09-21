@@ -33,4 +33,4 @@ export class Division implements OverlapTarget {
   isOverlap(raycaster: THREE.Raycaster): boolean {
     return isMeshOverlap(raycaster, this.mesh);
   }
-};
+}

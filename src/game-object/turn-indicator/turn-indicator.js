@@ -35,16 +35,6 @@ export class TurnIndicator {
     });
   }
 
-  /** ゲームループの処理 */
-  _gameLoop(action: GameLoop): void {
-    this._view.engage(this._model);
-  }
-
-  /** ターンインジケーターで使うthree.jsオブジェクトを返す */
-  getObject3D(): THREE.Object3D {
-    return this._view.getObject3D();
-  }
-
   /**
    * ターン変更
    *
@@ -52,5 +42,15 @@ export class TurnIndicator {
    */
   turnChange(isPlayerTurn: boolean): void {
     this._model.isPlayerTurn = isPlayerTurn;
+  }
+
+  /** ターンインジケーターで使うthree.jsオブジェクトを返す */
+  getObject3D(): THREE.Object3D {
+    return this._view.getObject3D();
+  }
+
+  /** ゲームループの処理 */
+  _gameLoop(action: GameLoop): void {
+    this._view.engage(this._model);
   }
 }
