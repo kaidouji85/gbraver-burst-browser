@@ -4,12 +4,13 @@ import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {DecideBattery} from "../../../../action/battle-scene/decide-battery";
 import type {ProgressBattle} from "../../progress-battle/progress-battle";
-import {battleSceneAnimation} from "../../animation";
-import {createEmptyTween} from "../../../../tween/empty-tween";
+import {stateHistoryAnimation} from "../../animation/state-history/index";
+import {closeUI} from "../../animation/close-ui/close-ui";
+import {play} from "../../../../tween/multi-tween/play";
 
 /** 攻撃バッテリーを決定した際のイベント */
 export async function decideBattery(view: BattleSceneView, state: BattleSceneState, action: DecideBattery, progressBattle: ProgressBattle): Promise<void> {
-  await closeUI(view);
+  await play(closeUI(view));
 
   const command = {
     type: 'BATTERY_COMMAND',
@@ -19,21 +20,6 @@ export async function decideBattery(view: BattleSceneView, state: BattleSceneSta
   console.log(command);// TODO テストが終わったら消す
   console.log(gameState); // TODO テストが終わったら消す
 
-  battleSceneAnimation(view, state, gameState);
+  await play(stateHistoryAnimation(view, state, gameState));
 }
 
-/** UIを閉じるアニメーション */
-function closeUI(view: BattleSceneView): Promise<void> {
-  return new Promise(resolve => {
-    const start = createEmptyTween();
-    const pushOkButton = view.hudLayer.batterySelector.pushOkButton();
-    const invisibleBurstButton = view.hudLayer.burstButton.invisible();
-    const end = createEmptyTween();
-
-    start.chain(pushOkButton.start, invisibleBurstButton.start);
-    pushOkButton.end.chain(end);
-    end.onComplete(() => resolve());
-
-    start.start();
-  });
-}

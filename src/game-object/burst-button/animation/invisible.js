@@ -4,6 +4,7 @@ import {Tween, Group} from '@tweenjs/tween.js';
 import type {BurstButtonModel} from "../model/burst-button-model";
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 
+/** バーストボタンを非表示にする */
 export function invisible(model: BurstButtonModel, group: Group): MultiTween {
   const start = new Tween(model, group)
     .to({opacity: 1}, 0);

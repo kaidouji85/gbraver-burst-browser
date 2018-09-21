@@ -1,13 +1,13 @@
-import {BattleSceneView} from "../view/index";
-import type {BattleSceneState} from "../state/battle-scene-state";
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
+import {BattleSceneView} from "../../view/index";
+import type {BattleSceneState} from "../../state/battle-scene-state";
+import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
 import {Tween} from '@tweenjs/tween.js';
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
-import {createEmptyTween} from "../../../tween/empty-tween";
-import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
-import {getEnableMax} from "../state/get-enable-max";
-import {getInitialBattery} from "../state/get-initial-battery";
+import {createEmptyTween} from "../../../../tween/empty-tween";
+import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
+import {getEnableMax} from "../../state/get-enable-max";
+import {getInitialBattery} from "../../state/get-initial-battery";
 
 /**
  * コマンド入力フェイズのアニメーション

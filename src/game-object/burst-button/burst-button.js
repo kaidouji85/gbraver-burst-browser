@@ -59,5 +59,4 @@ export class BurstButton {
     this._tween.update(action.time);
     this._view.engage(this._model);
   }
-
 }
