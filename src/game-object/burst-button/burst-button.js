@@ -6,20 +6,28 @@ import {BurstButtonView} from "./view/burst-button-view";
 import type {Resources} from "../../resource";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {createInitialValue} from "./model/initial-value";
+import {Group} from '@tweenjs/tween.js';
+import type {MultiTween} from "../../tween/multi-tween/multi-tween";
+import {visible} from './animation/visible';
+import {invisible} from './animation/invisible';
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameLoop>
+  listener: Observable<GameObjectAction>
 };
 
 /** バーストボタン */
 export class BurstButton {
   _model: BurstButtonModel;
   _view: BurstButtonView;
+  _tween: Group;
 
   constructor(param: Param) {
-    this._model = {};
+    this._model = createInitialValue();
     this._view = new BurstButtonView(param.resources);
+    this._tween = new Group();
     param.listener.subscribe(action => {
       switch (action.type) {
         case 'GameLoop':
@@ -31,13 +39,29 @@ export class BurstButton {
     });
   }
 
-  /** ゲームループの処理 */
-  _gameLoop(action: GameLoop): void {
-    this._view.engage(this._model);
+  /** ボタンを表示する */
+  visible(): MultiTween {
+    return visible(this._model, this._tween);
+  }
+
+  /**
+   * ボタンを非表示にする
+   * 本アニメはディライの値に関わらず、再生された時点でdisabled=trueになる
+   *
+   * @param delay 非表示アニメが再生されるまでディライ
+   */
+  invisible(delay: number): MultiTween {
+    return invisible(this._model, this._tween, delay);
   }
 
   /** three.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /** ゲームループの処理 */
+  _gameLoop(action: GameLoop): void {
+    this._tween.update(action.time);
+    this._view.engage(this._model);
   }
 }

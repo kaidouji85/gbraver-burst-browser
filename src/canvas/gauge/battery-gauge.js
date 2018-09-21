@@ -6,10 +6,10 @@ import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
 import {drawImageInCenter} from "../draw/image-drawer";
 import * as R from 'ramda';
 
-const PADDING_TOP = 32;
+const PADDING_TOP = 22;
 const NUMBER_COLOR = '#FDFDFD';
 const LINE_COLOR = '#000000';
-const LINE_HEIGHT = 24;
+const LINE_HEIGHT = 16;
 
 /** バッテリーゲージを描画する */
 export function drawBatteryGauge(param: Param): void {
@@ -23,7 +23,6 @@ export function drawBatteryGauge(param: Param): void {
   drawImageInCenter(param.context, base, dx, dy);
   drawImageInCenter(param.context, disActiveBar, dx, dy);
   drawActiveBar(param);
-  drawNumber(param.context, dx + 128, dy - 16, param.battery);
   drawScale(param.context, dx, dy, param.maxBattery, disActiveBar.width);
 }
 
@@ -40,19 +39,6 @@ function drawActiveBar(param: Param): void {
   const dw =sw;
   const dh = sh;
   param.context.drawImage(activeBar, sx, sy, sw, sh, dx, dy, dw, dh);
-}
-
-/** バッテリーの数字を描画する */
-function drawNumber(context: CanvasRenderingContext2D, dx: number, dy: number, value: number): void {
-  context.save();
-
-  context.font = "32px 'sans-serif'";
-  context.fillStyle = NUMBER_COLOR;
-  context.textAlign = 'right';
-  context.textBaseline = 'middle';
-  context.fillText(`${Math.floor(value)}`, dx, dy);
-
-  context.restore();
 }
 
 /** バッテリーの目盛を描画する */

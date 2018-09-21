@@ -7,11 +7,11 @@ import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {Observable, Observer} from "rxjs";
 import type {OverlapAction} from "../../../../action/overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
+import type {GameObjectAction} from "../../../../action/game-object-action";
 
 type Param = {
   resources: Resources,
-  gameLoopListener: Observable<GameLoop>,
-  overlapListener: Observable<OverlapAction>,
+  listener: Observable<GameObjectAction>,
   notifier: Observer<BattleSceneAction>,
   playerInfo: Player
 }
@@ -19,8 +19,7 @@ type Param = {
 /** バッテリーセレクタを生成する */
 export function createBatterySelector(param: Param): BatterySelector {
   return new BatterySelector({
-    gameLoopListener: param.gameLoopListener,
-    overlapListener: param.overlapListener,
+    listener: param.listener,
     maxBattery: param.playerInfo.armdozer.maxBattery,
     resources: param.resources,
     onBatteryChange: (battery: number) => {

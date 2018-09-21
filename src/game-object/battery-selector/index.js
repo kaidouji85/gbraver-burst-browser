@@ -2,22 +2,22 @@
 
 import {Observable, Subject} from 'rxjs';
 import type {BatterySelectorModel} from "./model/battery-selector";
-import {BatterySliderView} from "./view/battery-slider-view";
+import {BatterySelectorView} from "./view/battery-selector-view";
 import type {Resources} from "../../resource/index";
 import * as THREE from "three";
 import {changeBattery} from './animation/change-battery';
 import {Group, Tween} from "@tweenjs/tween.js";
-import {distinctUntilChanged, filter, map} from 'rxjs/operators';
 import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
 import type {GameLoop} from "../../action/game-loop/game-loop";
-import type {OverlapAction} from "../../action/overlap";
+import type {OkButtonLabel} from "./model/ok-button";
+import type {GameObjectAction} from "../../action/game-object-action";
+import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  gameLoopListener: Observable<GameLoop>,
-  overlapListener: Observable<OverlapAction>,
+  listener: Observable<GameObjectAction>,
   maxBattery: number,
   onBatteryChange: (battery: number) => void,
   onOkButtonPush: () => void,
@@ -25,30 +25,17 @@ type Param = {
 
 /** バッテリーセレクタ */
 export class BatterySelector {
-  /** バッテリースライダーのモデル */
   _model: BatterySelectorModel;
-  /** バッテリースライダーのビュー */
-  _view: BatterySliderView;
-  /** 本クラスのTweenグループ */
+  _view: BatterySelectorView;
   _tween: Group;
+  _onBatteryChange: (battery: number) => void;
 
   constructor(param: Param) {
-    const initialBattery = 3;
-    this._model = {
-      slider: {
-        battery: 0,
-        max: param.maxBattery,
-        enableMax: param.maxBattery
-      },
-      okButton: {
-        depth: 0
-      },
-      disabled: false,
-      opacity: 0
-    };
+    this._onBatteryChange = param.onBatteryChange;
+    this._model = this._initialModel(param);
     this._tween = new Group();
 
-    param.gameLoopListener.subscribe(action => {
+    param.listener.subscribe(action => {
       switch (action.type) {
         case 'GameLoop':
           this._gameLoop(action);
@@ -58,30 +45,75 @@ export class BatterySelector {
       }
     });
 
-    this._view = new BatterySliderView({
+    this._view = new BatterySelectorView({
       resources: param.resources,
-      overlapListener: param.overlapListener,
+      listener: param.listener,
       maxValue: param.maxBattery,
-      onBatteryChange: battery => {
-        if (this._model.disabled || this._model.slider.enableMax < battery) {
-          return;
-        }
-
-        this._tween.update();
-        this._tween.removeAll();
-        changeBattery(this._model, this._tween, battery).start();
-        param.onBatteryChange(battery);
-      },
+      onBatteryChange: battery => this._changeBattery(battery),
       onOkButtonPush: () => {
-        if (this._model.disabled) {
-          return;
+        if (!this._model.disabled) {
+          param.onOkButtonPush();
         }
-
-        const animation = pushOkButton(this._model, this._tween);
-        animation.start.start();
-        animation.end.onComplete(() => param.onOkButtonPush());
       }
     });
+  }
+
+  /**
+   * バッテリーセレクターを開く
+   *
+   * @param initialValue 初期値
+   * @param maxEnable 選択可能な最大値
+   * @param okButtonLabel OKボタンのラベル
+   * @return アニメーション
+   */
+  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): MultiTween {
+    return open({
+      model: this._model,
+      group: this._tween,
+      initialValue: initialValue,
+      maxEnable: maxEnable,
+      okButtonLabel: okButtonLabel,
+      onStart: () => {
+        this._view.setLastBattery(initialValue)
+      },
+    });
+  }
+
+  /** OKボタンを押す */
+  pushOkButton(): MultiTween {
+    return pushOkButton(this._model, this._tween);
+  }
+
+  /** 現在のバッテリー値を取得する */
+  getBattery(): number {
+    const lastBattery = this._view.getLastBattery();
+    if (lastBattery === null || lastBattery === undefined) {
+      return 0;
+    }
+
+    return lastBattery;
+  }
+
+  /** シーンに追加するthree.jsオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this._view.getObject3D();
+  }
+
+  /** モデルの初期値 */
+  _initialModel(param: Param): BatterySelectorModel {
+    return {
+      slider: {
+        battery: 0,
+          max: param.maxBattery,
+          enableMax: param.maxBattery
+      },
+      okButton: {
+        depth: 0,
+        label: 'Attack'
+      },
+      disabled: false,
+        opacity: 0
+    };
   }
 
   /** ゲームループの処理 */
@@ -90,18 +122,15 @@ export class BatterySelector {
     this._view.engage(this._model);
   }
 
-  /**
-   * バッテリーセレクターを開く
-   *
-   * @param initialValue 初期値
-   * @param maxEnable 選択可能な最大値
-   * @return アニメーション
-   */
-  open(initialValue: number, maxEnable: number): Tween {
-    return open(this._model, this._tween, initialValue, maxEnable);
-  }
+  /** バッテリーが変更された際のイベント */
+  _changeBattery(battery: number): void {
+    if (this._model.disabled || this._model.slider.enableMax < battery) {
+      return;
+    }
 
-  getObject3D(): THREE.Object3D {
-    return this._view.getObject3D();
+    this._tween.update();
+    this._tween.removeAll();
+    changeBattery(this._model, this._tween, battery).start();
+    this._onBatteryChange(battery);
   }
 }

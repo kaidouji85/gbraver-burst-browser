@@ -13,10 +13,6 @@ type Params = {
 export class CanvasMesh {
   /** メッシュ */
   mesh: THREE.Mesh;
-  /** メッシュ幅 */
-  meshWidth: number;
-  /** メッシュ高 */
-  meshHeight: number;
   /** 描画を行うキャンバス */
   canvas: HTMLCanvasElement;
 
@@ -25,20 +21,16 @@ export class CanvasMesh {
     this.canvas.width = params.canvasWidth;
     this.canvas.height = params.canvasHeight;
 
-    this.meshWidth = params.meshWidth;
-    this.meshHeight = params.meshHeight;
     const texture = new THREE.Texture(this.canvas);
-    const material = new THREE.MeshBasicMaterial({map: texture});
+    const material = new THREE.MeshBasicMaterial({
+      map: texture,
+      transparent: true
+    });
     material.transparent = true;
-    const planeGeometry = new THREE.PlaneGeometry(this.meshWidth, this.meshHeight);
+    const planeGeometry = new THREE.PlaneGeometry(params.meshWidth, params.meshHeight);
 
     this.mesh = new THREE.Mesh(planeGeometry, material);
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
-  }
-
-  /** シーンに追加するthree.jsのオブジェクトを返す */
-  getThreeJsObjectList(): THREE.Mesh[] {
-    return [this.mesh];
   }
 
   /**
@@ -56,5 +48,15 @@ export class CanvasMesh {
 
     const context = this.canvas.getContext('2d');
     drawFunc(context);
+  }
+
+  /** 透明度を設定する */
+  setOpacity(opacity: number): void {
+    this.mesh.material.opacity = opacity;
+  }
+
+  /** シーンに追加するオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this.mesh;
   }
 }

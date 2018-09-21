@@ -17,7 +17,6 @@ import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 export function refreshGauge(context: CanvasRenderingContext2D, resources: Resources, model: BatterySelectorModel): void {
   context.clearRect(0, 0, context.canvas.height, context.canvas.height);
   context.save();
-  context.globalAlpha = model.opacity;
 
   selectorWindow(context, resources);
   batterySlider(context, resources, model);
@@ -39,7 +38,7 @@ function selectorWindow(context: CanvasRenderingContext2D, resources: Resources)
 /** スライダー */
 function batterySlider(context: CanvasRenderingContext2D, resources: Resources, model: BatterySelectorModel): void {
   const dx = context.canvas.width / 2;
-  const dy = context.canvas.height / 2 - 96;
+  const dy = context.canvas.height / 2 - 64;
 
   drawBatterySlider(context, resources, {
     battery: model.slider.battery,
@@ -52,11 +51,12 @@ function batterySlider(context: CanvasRenderingContext2D, resources: Resources, 
 
 /** OKボタン */
 function okButton(context: CanvasRenderingContext2D, resources: Resources, model: BatterySelectorModel): void {
-  const attackButtonResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_ATTACK_BUTTON);
-  const attackButton: Image = attackButtonResource ? attackButtonResource.image : new Image();
+  const buttonImageId = model.okButton.label === 'Attack' ? CANVAS_IMAGE_IDS.BATTERY_SELECTOR_ATTACK_BUTTON : CANVAS_IMAGE_IDS.BATTERY_SELECTOR_DEFENSE_BUTTON;
+  const okButtonResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === buttonImageId);
+  const okButton: Image = okButtonResource ? okButtonResource.image : new Image();
   const dx = context.canvas.width / 2;
-  const dy = context.canvas.height / 2 + 96;
+  const dy = context.canvas.height / 2 + 56;
   const scale = model.okButton.depth * 0.1 + 1;
 
-  drawImageInCenter(context, attackButton, dx, dy, scale);
+  drawImageInCenter(context, okButton, dx, dy, scale);
 }

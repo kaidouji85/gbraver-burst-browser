@@ -4,12 +4,12 @@ import {Gauge} from "./gauge";
 import type {Resources} from "../../resource";
 import {PlayerGaugeView} from "./view/player-gauge-view";
 import {EnemyGaugeView} from "./view/enemy-gauge-view";
-import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 type Param  = {
   resources: Resources,
-  listener: Observable<GameLoop>,
+  listener: Observable<GameObjectAction>,
   hp: number,
   battery: number
 };

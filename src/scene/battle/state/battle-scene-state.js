@@ -4,6 +4,4 @@ import type {BattleState, PlayerId} from "gbraver-burst-core/lib/flow-type";
 export type BattleSceneState = {
   /** 画面を開いているプレイヤーID */
   playerId: PlayerId,
-  /** 最後に設定したバッテリースライダーの値 */
-  lastBatteryValue: number,
 }

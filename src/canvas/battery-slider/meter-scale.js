@@ -3,8 +3,8 @@
 import type {BatterySliderParam} from "./param";
 import * as R from 'ramda';
 
-export const LINE_HEIGHT = 32;
-export const METER_WIDTH = 615;
+export const LINE_HEIGHT = 20;
+export const METER_WIDTH = 384;
 export const LINE_COLOR = '#FDFDFD';
 export const NUMBER_COLOR = '#FDFDFD';
 
@@ -22,7 +22,7 @@ export function drawMeterScale(context: CanvasRenderingContext2D, param: Battery
     drawLine(context, lineX, lineY);
 
     const numberX = lineX;
-    const numberY = lineY + LINE_HEIGHT + 32;
+    const numberY = lineY + LINE_HEIGHT + 16;
     drawNumber(context, v, numberX, numberY);
   });
 }
@@ -59,7 +59,7 @@ function drawLine(context: CanvasRenderingContext2D, dx: number, dy: number): vo
 function drawNumber(context: CanvasRenderingContext2D, value: number, dx: number, dy: number): void {
   context.save();
 
-  context.font = "32px 'sans-serif'";
+  context.font = "16px 'sans-serif'";
   context.fillStyle = NUMBER_COLOR;
   context.textAlign = 'center';
   context.textBaseline = 'middle';

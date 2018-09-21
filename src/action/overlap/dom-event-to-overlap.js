@@ -77,18 +77,20 @@ export function toOverlapObservable(origin: Observable<DOMEvent>, renderer: THRE
     map(v => {
       switch (v.type) {
         case 'mouseDown':
-          return {isValid: true, action: toMouseDownRaycaster(v, renderer, camera)};
+          return toMouseDownRaycaster(v, renderer, camera);
         case 'mouseMove':
-          return {isValid: true, action: toMouseMoveRaycaster(v, renderer, camera)};
+          return toMouseMoveRaycaster(v, renderer, camera);
         case 'touchStart':
-          return {isValid: true, action: toTouchStartRaycaster(v, renderer, camera)};
+          return toTouchStartRaycaster(v, renderer, camera);
         case 'touchMove':
-          return {isValid: true, action: toTouchMoveRaycaster(v, renderer, camera)};
+          return toTouchMoveRaycaster(v, renderer, camera);
         default:
-          return {isValid: false, action: DUMMY_ACTION}
+          return null;
       }
     }),
-    filter(v => v.isValid),
-    map(v => v.action)
+    filter(v => !!v),
+    // ストリームのデータ型をObservable<OverlapAction>にするために、この処理を行う
+    // 前の処理でnullはフィルタしているので、DUMMY_ACTIONが使われることはない
+    map(v => v ? v : DUMMY_ACTION)
   );
 }

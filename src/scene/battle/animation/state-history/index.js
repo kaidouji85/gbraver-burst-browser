@@ -1,12 +1,13 @@
 // @flow
 
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
-import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
+import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
+import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
 import {Tween} from '@tweenjs/tween.js';
-import type {BattleSceneState} from "../state";
-import {BattleSceneView} from "../view/index";
+import type {BattleSceneState} from "../../state/battle-scene-state";
+import {BattleSceneView} from "../../view/index";
 import {inputCommandAnimation} from "./input-command";
+import {battleAnimation} from "./battle";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -16,8 +17,8 @@ import {inputCommandAnimation} from "./input-command";
  * @param gameStateList 再生するゲームの状態
  * @return アニメーション
  */
-export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): void {
-  const multiTween = gameStateList
+export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): MultiTween {
+  return gameStateList
     .map(v => gameStateAnimation(view, sceneState, v))
     .reduce((accumlator: MultiTween, current: MultiTween) => {
       accumlator.end.chain(current.start);
@@ -26,7 +27,6 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
         end: current.end
       };
     }, createEmptyMultiTween());
-  multiTween.start.start();
 }
 
 /**
@@ -41,6 +41,8 @@ function gameStateAnimation(view: BattleSceneView, sceneState: BattleSceneState,
   switch (gameState.effect.name) {
     case 'InputCommand':
       return inputCommandAnimation(view, sceneState, gameState, gameState.effect);
+    case 'Battle':
+      return battleAnimation(view, sceneState, gameState, gameState.effect);
     default:
       return createEmptyMultiTween();
   }

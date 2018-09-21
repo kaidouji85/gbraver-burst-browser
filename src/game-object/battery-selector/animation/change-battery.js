@@ -3,7 +3,7 @@
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {BatterySelectorModel} from "../model/battery-selector";
 
-const BASE_DURATION = 32;
+const BASE_DURATION = 300;
 
 /**
  * バッテリー変更アニメ

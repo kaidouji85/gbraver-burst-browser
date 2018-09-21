@@ -3,7 +3,7 @@
 import type {DOMEvent} from "../../../../action/dom-event/index";
 import {resize} from "./resize";
 import {BattleSceneView} from "../../view";
-import type {BattleSceneState} from "../../state";
+import type {BattleSceneState} from "../../state/battle-scene-state";
 
 /**
  * HTMLイベントハンドラ
