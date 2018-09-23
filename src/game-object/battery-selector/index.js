@@ -13,6 +13,7 @@ import type {GameLoop} from "../../action/game-loop/game-loop";
 import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
+import {play} from "../../tween/multi-tween/play";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -52,6 +53,7 @@ export class BatterySelector {
       onBatteryChange: battery => this._changeBattery(battery),
       onOkButtonPush: () => {
         if (!this._model.disabled) {
+          play(this.pushOkButton());
           param.onOkButtonPush();
         }
       }

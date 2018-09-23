@@ -6,8 +6,8 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
 import {createEmptyTween} from "../../../../tween/empty-tween";
 import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
-import {getEnableMax} from "../../state/get-enable-max";
-import {getInitialBattery} from "../../state/get-initial-battery";
+import {getEnableMax} from "../../ui-logic/get-enable-max";
+import {getInitialBattery} from "../../ui-logic/get-initial-battery";
 
 /**
  * コマンド入力フェイズのアニメーション

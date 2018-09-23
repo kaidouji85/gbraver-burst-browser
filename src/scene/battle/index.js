@@ -39,7 +39,7 @@ export class BattleScene {
   constructor(param: Param) {
     this._state = {
       playerId: param.playerId,
-      lastBatteryValue: 0
+      canOperation: true
     };
 
     param.domEventListener.subscribe(action => {
