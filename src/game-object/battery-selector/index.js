@@ -14,6 +14,7 @@ import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {play} from "../../tween/multi-tween/play";
+import {close} from './animation/close';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -30,9 +31,11 @@ export class BatterySelector {
   _view: BatterySelectorView;
   _tween: Group;
   _onBatteryChange: (battery: number) => void;
+  _onOkButtonPush: () => void;
 
   constructor(param: Param) {
     this._onBatteryChange = param.onBatteryChange;
+    this._onOkButtonPush = param.onOkButtonPush;
     this._model = this._initialModel(param);
     this._tween = new Group();
 
@@ -50,12 +53,11 @@ export class BatterySelector {
       resources: param.resources,
       listener: param.listener,
       maxValue: param.maxBattery,
-      onBatteryChange: battery => this._changeBattery(battery),
+      onBatteryChange: battery => {
+        this._changeBattery(battery);
+      },
       onOkButtonPush: () => {
-        if (!this._model.disabled) {
-          play(this.pushOkButton());
-          param.onOkButtonPush();
-        }
+        this._pushOkButton();
       }
     });
   }
@@ -81,9 +83,9 @@ export class BatterySelector {
     });
   }
 
-  /** OKボタンを押す */
-  pushOkButton(): MultiTween {
-    return pushOkButton(this._model, this._tween);
+  /** バッテリーセレクタを閉じる */
+  close(): MultiTween {
+    return close(this._model, this._tween);
   }
 
   /** 現在のバッテリー値を取得する */
@@ -134,5 +136,16 @@ export class BatterySelector {
     this._tween.removeAll();
     changeBattery(this._model, this._tween, battery).start();
     this._onBatteryChange(battery);
+  }
+
+  /** OKボタンが押された際のイベント */
+  async _pushOkButton(): Promise<void> {
+    if (this._model.disabled) {
+      return;
+    }
+
+    const pushButton = pushOkButton(this._model, this._tween);
+    await play(pushButton);
+    this._onOkButtonPush();
   }
 }
