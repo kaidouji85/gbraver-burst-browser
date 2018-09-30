@@ -46,7 +46,7 @@ export class ShinBraver implements ArmDozerSprite {
   /** ゲームループ */
   _gameLoop(action: SpriteGameLoop): void {
     this._tweenGroup.update(action.time);
-    this._view.gameLoop(this._model, action.camera);
+    this._view.engage(this._model, action.camera);
   }
 
   /** シーンに追加するオブジェクトを返す */
@@ -57,11 +57,6 @@ export class ShinBraver implements ArmDozerSprite {
   /** 立ち状態にする */
   stand(): Tween {
     return stand(this._model, this._tweenGroup);
-  }
-
-  /** 本オブジェクトに関連するTweenを全削除する */
-  removeTween() {
-    this._tweenGroup.removeAll();
   }
 }
 

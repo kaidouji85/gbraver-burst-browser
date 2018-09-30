@@ -4,7 +4,7 @@ import * as THREE from "three";
 /** シンブレイバーのビュー */
 export interface ShinBraverView {
   /** モデルをビューに反映させる */
-  gameLoop(model: ShinBraverModel, camera: THREE.Camera): void;
+  engage(model: ShinBraverModel, camera: THREE.Camera): void;
   /** Sceneに追加するThree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
 }

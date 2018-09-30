@@ -4,9 +4,10 @@ import {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
-import {ShinBraverTextureContainer} from "./texture";
-import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
 import {Observable} from "rxjs";
+import {createBasicMesh} from "./mesh/basic-mesh";
+import type {ArmdozerAnimation} from "../../common/armdozer-animation";
+import {StandAnimationTexture} from "./texture/stand";
 
 export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;
@@ -15,38 +16,31 @@ export const PADDING_BOTTOM = -16;
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   _mesh: THREE.Mesh;
-  _textureContainer: ShinBraverTextureContainer;
+  _stand: ArmdozerAnimation;
 
   constructor(resources: Resources) {
-    this._textureContainer = new ShinBraverTextureContainer(resources);
     this._mesh = createBasicMesh();
+    this._stand = new StandAnimationTexture(resources);
   }
 
-  gameLoop(model: ShinBraverModel, camera: THREE.Camera): void {
+  /** モデルをビューに反映させる */
+  engage(model: ShinBraverModel, camera: THREE.Camera): void {
     this._mesh.position.set(
       model.position.x,
       model.position.y + MESH_HEIGHT / 2 + PADDING_BOTTOM,
       model.position.z
     );
 
-    this._mesh.material.map = this._textureContainer._getTexture(model.animation.type);
-    this._mesh.material.map.offset.x = model.animation.frame;
+    //this._mesh.material.map = this._textureContainer._getTexture(model.animation.type);
+    //this._mesh.material.map.offset.x = model.animation.frame;
+    this._mesh.material.map = this._stand.set(0);
+    //this._mesh.material.map.offset.x = 0;
 
     this._mesh.quaternion.copy(camera.quaternion);
   }
 
+  /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
     return this._mesh;
   }
-}
-
-function createBasicMesh() {
-  const geometry = new THREE.PlaneGeometry(MESH_HEIGHT, MESH_WIDTH, 1, 1);
-  const material = new THREE.MeshBasicMaterial({
-    side: THREE.DoubleSide,
-    transparent: true
-  });
-  const mesh = new THREE.Mesh(geometry, material);
-  mesh.renderOrder = SPRITE_RENDER_ORDER;
-  return mesh;
 }

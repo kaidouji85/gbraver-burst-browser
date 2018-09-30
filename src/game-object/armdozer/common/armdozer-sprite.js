@@ -9,6 +9,4 @@ export interface ArmDozerSprite {
   getObject3D(): THREE.Object3D;
   /** 立ちポーズのアニメを開始する */
   stand(): Tween;
-  /** 本オブジェクトに関連するTweenを全削除する */
-  removeTween(): void;
 }
