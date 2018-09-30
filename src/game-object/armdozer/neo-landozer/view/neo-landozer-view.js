@@ -5,6 +5,6 @@ import * as THREE from "three";
 export interface NeoLandozerView {
   /** モデルをビューに反映させる */
   gameLoop(model: NeoLandozerModel, camera: THREE.Camera): void;
-  /** Sceneに追加するThree.jsオブジェクトを取得する */
-  getThreeJsObjects(): THREE.Object3D[];
+  /** シーンに追加するオブジェクトを取得する */
+  getObject3D(): THREE.Object3D;
 }

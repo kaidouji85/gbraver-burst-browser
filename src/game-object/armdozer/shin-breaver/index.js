@@ -1,7 +1,7 @@
 // @flow
 
 import type {Resources} from "../../../resource/index";
-import {ShinBraver} from './shin-breaver';
+import {ShinBraver} from './shin-braver';
 import {PlayerShinBraverView} from "./view/player-shin-braver-view";
 import {EnemyShinBraverView} from "./view/enemy-shin-braver-view";
 import {Observable} from "rxjs";
