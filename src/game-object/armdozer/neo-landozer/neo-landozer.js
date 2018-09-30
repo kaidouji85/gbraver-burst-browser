@@ -57,8 +57,8 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** 立ち状態にする */
-  stand(): Tween {
-    return stand(this._model, this._tweenGroup);
+  stand(): void {
+    stand(this._model, this._tweenGroup);
   }
 }
 

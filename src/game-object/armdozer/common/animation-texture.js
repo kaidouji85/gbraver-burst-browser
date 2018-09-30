@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 
 /** アームドーザのテクスチャアニメーション */
-export interface ArmdozerAnimation {
+export interface ArmdozerAnimationTexture {
   /**
    * アニメーション進捗に応じたテクスチャを返す
    *

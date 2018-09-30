@@ -1,6 +1,6 @@
 // @flow
 
-import type {ArmdozerAnimation} from "../../../common/armdozer-animation";
+import type {ArmdozerAnimationTexture} from "../../../common/animation-texture";
 import * as THREE from 'three';
 import type {Resources} from "../../../../../resource/index";
 import {TEXTURE_IDS} from "../../../../../resource/texture";
@@ -10,7 +10,7 @@ import {createAnimatedTexture} from "../../../../../texture/texture-animation";
 export const MAX_ANIMATION = 10;
 
 /** 立ちアニメーション */
-export class StandAnimationTexture implements ArmdozerAnimation {
+export class StandAnimationTexture implements ArmdozerAnimationTexture {
   _texture: THREE.Texture;
 
   constructor(resources: Resources) {
@@ -20,7 +20,9 @@ export class StandAnimationTexture implements ArmdozerAnimation {
   }
 
   animate(animation: number): THREE.Texture {
-    this._texture.offset.x = Math.round(MAX_ANIMATION * animation) / MAX_ANIMATION;
+    const frameNo = Math.min(MAX_ANIMATION - 1, Math.floor(MAX_ANIMATION * animation));
+    const offsetX = frameNo / MAX_ANIMATION;
+    this._texture.offset.x = offsetX;
     this._texture.offset.y = 0;
     return this._texture;
   }

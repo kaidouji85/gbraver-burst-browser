@@ -2,7 +2,9 @@
 
 import * as THREE from "three";
 import {SPRITE_RENDER_ORDER} from "../../../../../mesh/render-order";
-import {MESH_HEIGHT, MESH_WIDTH} from "../player-shin-braver-view";
+
+export const MESH_WIDTH = 320;
+export const MESH_HEIGHT = 320;
 
 /** シンブレイバースプライトのメッシュを生成する */
 export function createBasicMesh() {

@@ -4,19 +4,17 @@ import {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
-import {Observable} from "rxjs";
-import {createBasicMesh} from "./mesh/basic-mesh";
-import type {ArmdozerAnimation} from "../../common/armdozer-animation";
+import {createBasicMesh, MESH_HEIGHT} from "./mesh/basic-mesh";
+import type {ArmdozerAnimationTexture} from "../../common/animation-texture";
 import {StandAnimationTexture} from "./texture/stand";
+import type {AnimationType} from "../model/animation-type";
 
-export const MESH_WIDTH = 320;
-export const MESH_HEIGHT = 320;
 export const PADDING_BOTTOM = -16;
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   _mesh: THREE.Mesh;
-  _stand: ArmdozerAnimation;
+  _stand: ArmdozerAnimationTexture;
 
   constructor(resources: Resources) {
     this._mesh = createBasicMesh();
@@ -30,12 +28,24 @@ export class PlayerShinBraverView implements ShinBraverView {
       model.position.y + MESH_HEIGHT / 2 + PADDING_BOTTOM,
       model.position.z
     );
-    this._mesh.material.map = this._stand.animate(1 / 10);
+
+    const texture = this._getTexture(model.animation.type);
+    this._mesh.material.map = texture.animate(model.animation.frame);
+
     this._mesh.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
     return this._mesh;
+  }
+
+  /** アニメーションタイプに応じたテクスチャを返す */
+  _getTexture(type: AnimationType): ArmdozerAnimationTexture {
+    switch (type) {
+      case 'STAND':
+      default:
+        return this._stand;
+    }
   }
 }

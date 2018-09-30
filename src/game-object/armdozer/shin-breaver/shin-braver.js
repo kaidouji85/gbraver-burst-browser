@@ -3,13 +3,13 @@
 import {Group, Tween} from '@tweenjs/tween.js';
 import {ArmDozerSprite} from '../common/armdozer-sprite';
 import * as THREE from "three";
-import type {ShinBraverModel} from "./model/shin-braver-model";
-import {ANIMATION_STAND} from "./model/shin-braver-model";
 import type {ShinBraverView} from "./view/shin-braver-view";
-import {stand} from "./model/stand";
+import {stand} from "./animation/stand";
 import {Observable} from "rxjs";
 import type {SpriteGameLoop} from "../../../action/sprite-game-loop/sprite-game-loop";
 import type {GameObjectAction} from "../../../action/game-object-action";
+import type {ShinBraverModel} from "./model/shin-braver-model";
+import {createInitialValue} from "./model/initial-value";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -18,17 +18,7 @@ export class ShinBraver implements ArmDozerSprite {
   _tweenGroup: Group;
 
   constructor(params: {view: ShinBraverView, listener: Observable<GameObjectAction>}) {
-    this._model = {
-      position: {
-        x: 150,
-        y: 0,
-        z: 400
-      },
-      animation: {
-        type: ANIMATION_STAND,
-        frame: 0
-      }
-    };
+    this._model = createInitialValue();
     this._view = params.view;
     this._tweenGroup = new Group();
 
@@ -41,6 +31,9 @@ export class ShinBraver implements ArmDozerSprite {
           return;
       }
     });
+
+    // TODO シーンから呼ぶようにする
+    this.stand();
   }
 
   /** ゲームループ */
@@ -55,9 +48,7 @@ export class ShinBraver implements ArmDozerSprite {
   }
 
   /** 立ち状態にする */
-  stand(): Tween {
-    return stand(this._model, this._tweenGroup);
+  stand(): void {
+    stand(this._model, this._tweenGroup).start();
   }
 }
-
-

@@ -1,18 +1,18 @@
-/** アニメーションタイプ　立ち */
-export const ANIMATION_STAND = 'STAND';
-
-/** アニメーションタイプ */
-export type AnimationType = ANIMATION_STAND;
+import type {AnimationType} from "./animation-type";
 
 /** シンブレイバーのモデル */
 export interface ShinBraverModel {
+  /** 座標 */
   position: {
     x: number,
     y: number,
     z: number
   },
+  /** アニメーション */
   animation: {
+    /** アニメーションの種類 */
     type: AnimationType,
+    /** 0〜1で指定するアニメーションフレーム */
     frame: number,
   }
 }
