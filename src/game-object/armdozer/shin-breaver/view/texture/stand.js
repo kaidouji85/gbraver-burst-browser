@@ -16,12 +16,12 @@ export class StandAnimationTexture implements ArmdozerAnimation {
   constructor(resources: Resources) {
     const textureResource: ?TextureResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND);
     const originTexture: THREE.Texture = textureResource ? textureResource.texture : new THREE.Texture();
-    this._texture = createAnimatedTexture(originTexture, 1, 1);
+    this._texture = createAnimatedTexture(originTexture, MAX_ANIMATION, 1);
   }
 
-  set(animation: number): THREE.Texture {
-    //this._texture.offset.x = Math.round(MAX_ANIMATION * animation) / MAX_ANIMATION;
-    //this._texture.offset.y = 0;
+  animate(animation: number): THREE.Texture {
+    this._texture.offset.x = Math.round(MAX_ANIMATION * animation) / MAX_ANIMATION;
+    this._texture.offset.y = 0;
     return this._texture;
   }
 }

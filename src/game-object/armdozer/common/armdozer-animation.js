@@ -10,5 +10,5 @@ export interface ArmdozerAnimation {
    * @param animation 0〜1で指定するアニメーション進捗度
    * @return テクスチャ
    */
-  set(animation: number): THREE.Texture;
+  animate(animation: number): THREE.Texture;
 }

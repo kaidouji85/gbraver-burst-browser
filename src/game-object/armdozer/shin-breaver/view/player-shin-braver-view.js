@@ -30,12 +30,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       model.position.y + MESH_HEIGHT / 2 + PADDING_BOTTOM,
       model.position.z
     );
-
-    //this._mesh.material.map = this._textureContainer._getTexture(model.animation.type);
-    //this._mesh.material.map.offset.x = model.animation.frame;
-    this._mesh.material.map = this._stand.set(0);
-    //this._mesh.material.map.offset.x = 0;
-
+    this._mesh.material.map = this._stand.animate(1 / 10);
     this._mesh.quaternion.copy(camera.quaternion);
   }
 
