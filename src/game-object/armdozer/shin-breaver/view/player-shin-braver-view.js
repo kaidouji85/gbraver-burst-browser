@@ -35,8 +35,8 @@ export class PlayerShinBraverView implements ShinBraverView {
     this._mesh.quaternion.copy(camera.quaternion);
   }
 
-  getThreeJsObjects(): THREE.Object3D[] {
-    return [this._mesh];
+  getObject3D(): THREE.Object3D {
+    return this._mesh;
   }
 }
 

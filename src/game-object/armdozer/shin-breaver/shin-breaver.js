@@ -1,7 +1,7 @@
 // @flow
 
 import {Group, Tween} from '@tweenjs/tween.js';
-import {ArmDozerSprite} from '../armdozer-sprite';
+import {ArmDozerSprite} from '../common/armdozer-sprite';
 import * as THREE from "three";
 import type {ShinBraverModel} from "./model/shin-braver-model";
 import {ANIMATION_STAND} from "./model/shin-braver-model";
@@ -49,9 +49,9 @@ export class ShinBraver implements ArmDozerSprite {
     this._view.gameLoop(this._model, action.camera);
   }
 
-  /** 本スプライトに関連するthree.jsオブジェクトを返す */
-  getThreeJsObjects(): THREE.Object3D[] {
-    return this._view.getThreeJsObjects();
+  /** シーンに追加するオブジェクトを返す */
+  getObject3D(): THREE.Object3D {
+    return this._view.getObject3D();
   }
 
   /** 立ち状態にする */

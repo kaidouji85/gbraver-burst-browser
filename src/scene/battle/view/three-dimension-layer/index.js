@@ -3,7 +3,7 @@ import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
 import {createPlayerSprite} from "./player-sprite";
 import {createEnemySprite} from "./enemy-sprite";
-import type {ArmDozerSprite} from '../../../../game-object/armdozer/armdozer-sprite';
+import type {ArmDozerSprite} from '../../../../game-object/armdozer/common/armdozer-sprite';
 import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import {createCamera} from "./camera";
@@ -50,10 +50,10 @@ export class ThreeDimensionLayer {
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
 
     this.playerSprite = createPlayerSprite(param.resources, gameObjectAction, playerInfo);
-    this.playerSprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
+    this.scene.add(this.playerSprite.getObject3D());
 
     this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemyInfo);
-    this.enemySprite.getThreeJsObjects().forEach(obj => this.scene.add(obj));
+    this.scene.add(this.enemySprite.getObject3D());
 
     render.subscribe(action => {
       param.renderer.render(this.scene, this.camera);
