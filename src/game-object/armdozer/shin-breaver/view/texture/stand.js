@@ -19,12 +19,14 @@ export class StandAnimationTexture implements ArmdozerAnimationTexture {
     this._texture = createAnimatedTexture(originTexture, MAX_ANIMATION, 1);
   }
 
+  /** アアニメーション進捗に応じたテクスチャを返す */
   animate(animation: number): THREE.Texture {
     this._texture.offset.x = this._getTextureOffsetX(animation);
     this._texture.offset.y = 0;
     return this._texture;
   }
 
+  /** テクスチャのオフセットXを計算する */
   _getTextureOffsetX(animation: number): number {
     const min = 0;
     const max = (MAX_ANIMATION - 1) / MAX_ANIMATION;
