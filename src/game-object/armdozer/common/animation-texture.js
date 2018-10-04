@@ -1,0 +1,14 @@
+// @flow
+
+import * as THREE from 'three';
+
+/** アームドーザのテクスチャアニメーション */
+export interface ArmdozerAnimationTexture {
+  /**
+   * アニメーション進捗に応じたテクスチャを返す
+   *
+   * @param animation 0〜1で指定するアニメーション進捗度
+   * @return テクスチャ
+   */
+  animate(animation: number): THREE.Texture;
+}

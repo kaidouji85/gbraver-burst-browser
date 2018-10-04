@@ -14,8 +14,9 @@ export class EnemyShinBraverView extends PlayerShinBraverView {
     super(resources);
   }
 
-  gameLoop(model: ShinBraverModel, camera: THREE.Camera): void {
-    super.gameLoop(model, camera);
+  /** モデルをビューに反映させる */
+  engage(model: ShinBraverModel, camera: THREE.Camera): void {
+    super.engage(model, camera);
     this._mesh.position.x *= -1;
     this._mesh.scale.x = -1;
   }

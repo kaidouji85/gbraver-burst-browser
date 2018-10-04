@@ -5,19 +5,18 @@ import {createEmptyTween} from "../../../../tween/empty-tween";
 import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
 
 /** バッテリー決定に伴い、UIを非表示にする */
-export function invisibleUIByBatteryDesicion(view: BattleSceneView): MultiTween {
+export function invisibleUI(view: BattleSceneView): MultiTween {
   const start = createEmptyTween();
-
-  const pushOkButton = view.hudLayer.batterySelector.pushOkButton();
-  const invisibleBurstButton = view.hudLayer.burstButton.invisible(200);
-
+  const closeBatterySelector = view.hudLayer.batterySelector.close();
+  const invisibleBurstButton = view.hudLayer.burstButton.invisible();
   const end = createEmptyTween();
 
-  start.chain(pushOkButton.start, invisibleBurstButton.start);
-  pushOkButton.end.chain(end);
+  start.chain(closeBatterySelector.start, invisibleBurstButton.start);
+  invisibleBurstButton.end.chain(end);
 
   return {
     start: start,
     end: end
   };
+
 }

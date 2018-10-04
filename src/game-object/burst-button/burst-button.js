@@ -50,8 +50,8 @@ export class BurstButton {
    *
    * @param delay 非表示アニメが再生されるまでディライ
    */
-  invisible(delay: number): MultiTween {
-    return invisible(this._model, this._tween, delay);
+  invisible(): MultiTween {
+    return invisible(this._model, this._tween);
   }
 
   /** three.jsオブジェクトを取得する */

@@ -4,49 +4,48 @@ import {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
-import {ShinBraverTextureContainer} from "./texture";
-import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
-import {Observable} from "rxjs";
+import {createBasicMesh, MESH_HEIGHT} from "./mesh/basic-mesh";
+import type {ArmdozerAnimationTexture} from "../../common/animation-texture";
+import {StandAnimationTexture} from "./texture/stand";
+import type {AnimationType} from "../model/animation-type";
 
-export const MESH_WIDTH = 320;
-export const MESH_HEIGHT = 320;
 export const PADDING_BOTTOM = -16;
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   _mesh: THREE.Mesh;
-  _textureContainer: ShinBraverTextureContainer;
+  _stand: ArmdozerAnimationTexture;
 
   constructor(resources: Resources) {
-    this._textureContainer = new ShinBraverTextureContainer(resources);
     this._mesh = createBasicMesh();
+    this._stand = new StandAnimationTexture(resources);
   }
 
-  gameLoop(model: ShinBraverModel, camera: THREE.Camera): void {
+  /** モデルをビューに反映させる */
+  engage(model: ShinBraverModel, camera: THREE.Camera): void {
     this._mesh.position.set(
       model.position.x,
       model.position.y + MESH_HEIGHT / 2 + PADDING_BOTTOM,
       model.position.z
     );
 
-    this._mesh.material.map = this._textureContainer._getTexture(model.animation.type);
-    this._mesh.material.map.offset.x = model.animation.frame;
+    const texture = this._getTexture(model.animation.type);
+    this._mesh.material.map = texture.animate(model.animation.frame);
 
     this._mesh.quaternion.copy(camera.quaternion);
   }
 
-  getThreeJsObjects(): THREE.Object3D[] {
-    return [this._mesh];
+  /** シーンに追加するオブジェクトを返す */
+  getObject3D(): THREE.Object3D {
+    return this._mesh;
   }
-}
 
-function createBasicMesh() {
-  const geometry = new THREE.PlaneGeometry(MESH_HEIGHT, MESH_WIDTH, 1, 1);
-  const material = new THREE.MeshBasicMaterial({
-    side: THREE.DoubleSide,
-    transparent: true
-  });
-  const mesh = new THREE.Mesh(geometry, material);
-  mesh.renderOrder = SPRITE_RENDER_ORDER;
-  return mesh;
+  /** アニメーションタイプに応じたテクスチャを返す */
+  _getTexture(type: AnimationType): ArmdozerAnimationTexture {
+    switch (type) {
+      case 'STAND':
+      default:
+        return this._stand;
+    }
+  }
 }
