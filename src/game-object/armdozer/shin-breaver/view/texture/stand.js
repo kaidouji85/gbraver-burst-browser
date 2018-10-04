@@ -7,7 +7,7 @@ import {TEXTURE_IDS} from "../../../../../resource/texture";
 import type {TextureResource} from "../../../../../resource/texture";
 import {createAnimatedTexture} from "../../../../../texture/texture-animation";
 
-export const MAX_ANIMATION = 10;
+export const MAX_ANIMATION = 8;
 
 /** 立ちアニメーション */
 export class StandAnimationTexture implements ArmdozerAnimationTexture {

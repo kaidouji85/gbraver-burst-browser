@@ -35,6 +35,11 @@ export async function loadAllResource(basePath: string): Promise<Resources> {
     loadAllTexture(basePath),
     loadAllCanvasImage(basePath),
   ]);
+
   return {
-    models, textures, tileMap, canvasImages};
+    models: models,
+    textures: textures,
+    tileMap: tileMap,
+    canvasImages: canvasImages
+  };
 }

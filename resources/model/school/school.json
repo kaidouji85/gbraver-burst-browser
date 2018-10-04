@@ -5,12 +5,12 @@
 	},
 	"materials": [
 		{
-			"DbgColor": [5.607843e-01,5.490196e-01,5.490196e-01],
+			"DbgColor": [5.610000e-01,5.490000e-01,5.490000e-01],
 			"DbgIndex": 0,
 			"DbgName": "mat1",
 			"shading": "Phong",
 			"colorAmbient": [2.000000e-01,2.000000e-01,2.000000e-01],
-			"colorDiffuse": [4.065686e-01,3.980393e-01,3.980393e-01],
+			"colorDiffuse": [4.067250e-01,3.980250e-01,3.980250e-01],
 			"colorEmissive": [0.000000e+00,0.000000e+00,0.000000e+00],
 			"colorSpecular": [5.000000e-02,5.000000e-02,5.000000e-02],
 			"specularCoef": "0.000000e+00",
@@ -19,12 +19,12 @@
 			"transparency": "1.000000e+00"
 		},
 		{
-			"DbgColor": [2.078431e-01,9.490196e-01,1.000000e+00],
+			"DbgColor": [2.080000e-01,9.490000e-01,1.000000e+00],
 			"DbgIndex": 1,
 			"DbgName": "mat2",
 			"shading": "Phong",
 			"colorAmbient": [6.000000e-01,6.000000e-01,6.000000e-01],
-			"colorDiffuse": [1.662745e-01,7.592157e-01,8.000000e-01],
+			"colorDiffuse": [1.664000e-01,7.592000e-01,8.000000e-01],
 			"colorEmissive": [0.000000e+00,0.000000e+00,0.000000e+00],
 			"colorSpecular": [0.000000e+00,0.000000e+00,0.000000e+00],
 			"specularCoef": "5.000000e+02",
