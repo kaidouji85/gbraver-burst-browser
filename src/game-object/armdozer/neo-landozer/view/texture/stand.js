@@ -15,7 +15,7 @@ export class StandAnimationTexture implements ArmdozerAnimationTexture {
   _texture: THREE.Texture;
 
   constructor(resources: Resources) {
-    const textureResource: ?TextureResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND);
+    const textureResource: ?TextureResource = resources.textures.find(v => v.id === TEXTURE_IDS.NEO_LANDOZER_STAND);
     const originTexture: THREE.Texture = textureResource ? textureResource.texture : new THREE.Texture();
     this._texture = createAnimatedTexture(originTexture, MAX_ANIMATION, 1);
   }

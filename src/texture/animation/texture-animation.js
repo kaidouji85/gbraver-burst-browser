@@ -1,10 +1,15 @@
 // @flow
 import * as THREE from 'three';
 
-//TODO 使い方を詳細に書く
 /**
  * テクスチャアニメーションで使うテクスチャを生成する
  * アニメフレームを変更する際には、offset.xおよびoffset.yを調整する
+ *
+ * 例) 横8コマのアニメーション
+ * const texture = new createAnimatedTexture(origin, 8, 1);
+ * texture.offset.x = 0 / 8;  // 1コマ目を表示
+ * texture.offset.x = 2 / 8;  // 3コマ目を表示
+ * texture.offset.x = 7 / 8;  // 8コマ目を表示
  *
  * @param origin テクスチャのオリジナルデータ
  * @param horizonDividedNum 横の分割数

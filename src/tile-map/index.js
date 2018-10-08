@@ -6,7 +6,7 @@ import {getHorizonDividedNum, getTextureOffsetPos, getVerticalDividedNum} from "
 import {EMPTY_TILE_SET} from "./empty-tile-set";
 import type {TileMapJson, TileSetJson} from "./tiled";
 import {getMapPosition} from "./map-position";
-import {createAnimatedTexture} from "../texture/texture-animation";
+import {createAnimatedTexture} from "../texture/animation/texture-animation";
 import {EMPTY_TILE_MAP} from "./empty-map-data";
 import type {TileMapId, TileMapResource} from "../resource/tile-map";
 import type {TextureId, TextureResource} from "../resource/texture";
