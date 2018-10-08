@@ -1,8 +1,6 @@
-/** アニメーションタイプ　立ち */
-export const ANIMATION_STAND = 'STAND';
+// @flow
 
-/** アニメーションタイプ */
-export type AnimationType = ANIMATION_STAND;
+import type {AnimationType} from "./animation-type";
 
 /** ネオランドーザのモデル */
 export interface NeoLandozerModel {
