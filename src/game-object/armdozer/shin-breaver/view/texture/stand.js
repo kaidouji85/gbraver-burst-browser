@@ -5,7 +5,8 @@ import * as THREE from 'three';
 import type {Resources} from "../../../../../resource/index";
 import {TEXTURE_IDS} from "../../../../../resource/texture";
 import type {TextureResource} from "../../../../../resource/texture";
-import {createAnimatedTexture} from "../../../../../texture/texture-animation";
+import {createAnimatedTexture} from "../../../../../texture/animation/texture-animation";
+import {normalizeTextureOffset} from "../../../../../texture/animation/texture-offset";
 
 export const MAX_ANIMATION = 8;
 
@@ -21,25 +22,8 @@ export class StandAnimationTexture implements ArmdozerAnimationTexture {
 
   /** アアニメーション進捗に応じたテクスチャを返す */
   animate(animation: number): THREE.Texture {
-    this._texture.offset.x = this._getTextureOffsetX(animation);
+    this._texture.offset.x = normalizeTextureOffset(animation, MAX_ANIMATION);
     this._texture.offset.y = 0;
     return this._texture;
-  }
-
-  /** テクスチャのオフセットXを計算する */
-  _getTextureOffsetX(animation: number): number {
-    const min = 0;
-    const max = (MAX_ANIMATION - 1) / MAX_ANIMATION;
-    const textureOffsetX = Math.floor(animation * MAX_ANIMATION) / MAX_ANIMATION;
-
-    if (textureOffsetX < min) {
-      return min;
-    }
-
-    if (max < textureOffsetX) {
-      return max;
-    }
-
-    return textureOffsetX;
   }
 }

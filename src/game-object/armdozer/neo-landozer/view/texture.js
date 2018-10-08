@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
-import {createAnimatedTexture} from "../../../../texture/texture-animation";
+import {createAnimatedTexture} from "../../../../texture/animation/texture-animation";
 import type {AnimationType} from "../model/neo-landozer-model";
 import {ANIMATION_STAND} from "../model/neo-landozer-model";
 import type {TextureResource} from "../../../../resource/texture";
