@@ -18,7 +18,7 @@ export class NeoLandozer implements ArmDozerSprite {
   _view: NeoLandozerView;
   _tweenGroup: Group;
 
-  constructor(params: {view: NeoLandozerView, listener: Observable<GameObjectAction>}) {
+  constructor(params: { view: NeoLandozerView, listener: Observable<GameObjectAction> }) {
     this._model = {
       position: {
         x: 150,
@@ -33,22 +33,15 @@ export class NeoLandozer implements ArmDozerSprite {
     this._view = params.view;
     this._tweenGroup = new Group();
 
-    params.listener
-      .subscribe(action => {
-        switch (action.type) {
-          case 'SpriteGameLoop':
-            this._gameLoop(action);
-            return;
-          default:
-            return;
-        }
-      });
-  }
-
-  /** ゲームループ */
-  _gameLoop(action: SpriteGameLoop): void {
-    this._tweenGroup.update(action.time);
-    this._view.gameLoop(this._model, action.camera);
+    params.listener.subscribe(action => {
+      switch (action.type) {
+        case 'SpriteGameLoop':
+          this._gameLoop(action);
+          return;
+        default:
+          return;
+      }
+    });
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -59,6 +52,12 @@ export class NeoLandozer implements ArmDozerSprite {
   /** 立ち状態にする */
   stand(): void {
     stand(this._model, this._tweenGroup);
+  }
+
+  /** ゲームループ */
+  _gameLoop(action: SpriteGameLoop): void {
+    this._tweenGroup.update(action.time);
+    this._view.engage(this._model, action.camera);
   }
 }
 
