@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import type {TextureResource} from "../../../resource/texture";
 import {TEXTURE_IDS} from "../../../resource/texture";
 
-const WIDTH =  9000;
+const WIDTH = 9000;
 const HEIGHT = 9000;
 const DEPTH = 9000;
 const SKY_BOX_TEXTURE_IDS = [

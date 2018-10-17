@@ -108,15 +108,15 @@ export class BatterySelector {
     return {
       slider: {
         battery: 0,
-          max: param.maxBattery,
-          enableMax: param.maxBattery
+        max: param.maxBattery,
+        enableMax: param.maxBattery
       },
       okButton: {
         depth: 0,
         label: 'Attack'
       },
       disabled: false,
-        opacity: 0
+      opacity: 0
     };
   }
 

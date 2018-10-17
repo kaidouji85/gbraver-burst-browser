@@ -17,7 +17,7 @@ type Param = {
 
 /**バッテリーセレクタを開く */
 export function open(param: Param): MultiTween {
-  const startBuffer =  createEmptyTweenByGroup(param.group);
+  const startBuffer = createEmptyTweenByGroup(param.group);
   const openTween = new Tween(param.model, param.group)
     .onStart(() => {
       param.model.disabled = true;

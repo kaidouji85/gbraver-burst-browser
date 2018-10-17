@@ -18,7 +18,7 @@ export class ShinBraver implements ArmDozerSprite {
   _view: ShinBraverView;
   _tweenGroup: Group;
 
-  constructor(params: {view: ShinBraverView, listener: Observable<GameObjectAction>}) {
+  constructor(params: { view: ShinBraverView, listener: Observable<GameObjectAction> }) {
     this._model = createInitialValue();
     this._view = params.view;
     this._tweenGroup = new Group();

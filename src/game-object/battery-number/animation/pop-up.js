@@ -2,7 +2,7 @@
 
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 import type {BatteryNumberModel} from "../model/battery-number-model";
-import {Tween, Gourp} from '@tweenjs/tween.js';
+import {Gourp, Tween} from '@tweenjs/tween.js';
 
 /**
  * バッテリー数字を表示する

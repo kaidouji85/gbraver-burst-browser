@@ -1,6 +1,6 @@
 // @flow
 import {main} from "./main";
 
-(function(){
+(function () {
   main();
 })();

@@ -8,7 +8,6 @@ import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
 import {createEmptyTween} from "../../../../tween/empty-tween";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
-import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
 
 export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): MultiTween {
   const isAttacker = effect.attacker === sceneState.playerId;

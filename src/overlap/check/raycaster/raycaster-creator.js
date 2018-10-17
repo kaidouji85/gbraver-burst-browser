@@ -10,6 +10,6 @@ import * as THREE from 'three';
  */
 export function createRaycaster(pointerPos: THREE.Vector2, camera: THREE.Camera): THREE.Raycaster {
   const raycaster = new THREE.Raycaster();
-  raycaster.setFromCamera( pointerPos, camera );
+  raycaster.setFromCamera(pointerPos, camera);
   return raycaster;
 }

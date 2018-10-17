@@ -22,7 +22,7 @@ export function playerBatteryNumber(param: Param): BatteryNumber {
 }
 
 /** 敵のバッテリービュー */
-export function enemyBatteryNumber(param: Param):  BatteryNumber {
+export function enemyBatteryNumber(param: Param): BatteryNumber {
   const view = new EnemyBatteryNumberView(param.resources);
   return new BatteryNumber({
     listener: param.listener,

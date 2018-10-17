@@ -3,9 +3,7 @@
 import type {Resources} from "../../../../resource";
 import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player} from "gbraver-burst-core/lib/player/player";
-import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {Observable, Observer} from "rxjs";
-import type {OverlapAction} from "../../../../action/overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {GameObjectAction} from "../../../../action/game-object-action";
 
@@ -25,7 +23,8 @@ export function createBatterySelector(param: Param): BatterySelector {
     onBatteryChange: (battery: number) => {
       param.notifier.next({
         type: 'changeBattery',
-        battery: battery});
+        battery: battery
+      });
     },
     onOkButtonPush: () => {
       param.notifier.next({

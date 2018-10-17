@@ -3,7 +3,6 @@
 import {PlayerNeoLandozerView} from "./player-neo-landozer-view";
 import type {Resources} from "../../../../resource/index";
 import type {NeoLandozerModel} from "../model/neo-landozer-model";
-import * as THREE from "three";
 
 /**
  *  敵側ネオランドーザ

@@ -5,8 +5,8 @@ import type {BatteryNumberModel} from "../model/battery-number-model";
 import type {Resources} from "../../../resource";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import {drawNumberCenter} from "../../../canvas/number/number";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {CanvasImageResource} from "../../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import * as THREE from 'three';
 import * as R from 'ramda';
 

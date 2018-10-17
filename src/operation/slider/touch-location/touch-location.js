@@ -32,7 +32,7 @@ export class TouchLocation {
         const color = new THREE.Color(`rgb(0, ${255 * index / squareCount}, 0)`);
         const division = new Division(param.width / squareCount, param.height, v, color);
         const meshSize = param.width / squareCount;
-        division.mesh.position.x = - param.width / 2 + meshSize * index;
+        division.mesh.position.x = -param.width / 2 + meshSize * index;
         division.mesh.position.y = 0;
         return division;
       });

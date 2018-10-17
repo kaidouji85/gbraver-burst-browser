@@ -3,7 +3,6 @@
 import {PlayerShinBraverView} from "./player-shin-braver-view";
 import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
-import * as THREE from "three";
 
 /**
  *  敵側シンブレイバー

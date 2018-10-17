@@ -8,7 +8,7 @@ import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import {createCamera} from "./camera";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {Observable, merge, Subject} from "rxjs";
+import {merge, Observable, Subject} from "rxjs";
 import {filter, map} from 'rxjs/operators';
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {Update} from "../../../../action/game-loop/update";

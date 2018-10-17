@@ -11,6 +11,6 @@ import type {MultiTween} from "./multi-tween";
 export function play(multiTween: MultiTween): Promise<void> {
   return new Promise(resolve => {
     multiTween.end.onComplete(() => resolve());
-     multiTween.start.start();
+    multiTween.start.start();
   });
 }

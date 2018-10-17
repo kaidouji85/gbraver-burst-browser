@@ -50,7 +50,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
 
   /** アニメーションタイプに応じたテクスチャを返す */
   _getTexture(type: AnimationType): ArmdozerAnimationTexture {
-    switch(type) {
+    switch (type) {
       case 'STAND':
       default:
         return this._stand;
