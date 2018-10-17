@@ -1,6 +1,6 @@
 // @flow
 
-import {Tween, Group} from '@tweenjs/tween.js';
+import {Group, Tween} from '@tweenjs/tween.js';
 
 /** 0秒で終了するtweenを生成する */
 export function createEmptyTween(): Tween {

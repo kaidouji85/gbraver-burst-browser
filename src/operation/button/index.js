@@ -48,13 +48,13 @@ export class ButtonOperation {
   }
 
   _mouseDown(action: MouseDownRaycaster): void {
-    if(isMouseOverlap(action.mouse, this._overlap)) {
+    if (isMouseOverlap(action.mouse, this._overlap)) {
       this._onButtonPush();
     }
   }
 
   _touchStartRaycaster(action: TouchStartRaycaster): void {
-    if(isTouchOverlap(action.touch, this._overlap)) {
+    if (isTouchOverlap(action.touch, this._overlap)) {
       this._onButtonPush();
     }
   }

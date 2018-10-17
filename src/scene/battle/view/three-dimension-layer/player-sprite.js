@@ -9,7 +9,7 @@ import type {GameObjectAction} from "../../../../action/game-object-action";
 
 /** 与えられたパラメータからプレイヤースプライを生成する */
 export function createPlayerSprite(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player): ArmDozerSprite {
-  switch(playerInfo.armdozer.appearance) {
+  switch (playerInfo.armdozer.appearance) {
     case 'neo-landozer':
       return PlayerNeoLandozer(resources, listener);
     case 'shin-braver':

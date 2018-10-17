@@ -5,8 +5,8 @@ import type {Resources} from "../../../resource";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 import * as THREE from 'three';
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {CanvasImageResource} from "../../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {drawNumberCenter} from "../../../canvas/number/number";
 import * as R from 'ramda';
 

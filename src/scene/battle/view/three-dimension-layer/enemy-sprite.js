@@ -10,7 +10,7 @@ import type {GameObjectAction} from "../../../../action/game-object-action";
 
 /** 与えられたパラメータから敵スプライを生成する */
 export function createEnemySprite(resources: Resources, listener: Observable<GameObjectAction>, enemyInfo: Player): ArmDozerSprite {
-  switch(enemyInfo.armdozer.appearance) {
+  switch (enemyInfo.armdozer.appearance) {
     case 'neo-landozer':
       return EnemyNeoLandozer(resources, listener);
     case 'shin-breaver':

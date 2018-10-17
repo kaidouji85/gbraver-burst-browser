@@ -33,7 +33,7 @@ function drawActiveBar(param: Param) {
   const sh = activeBar.height;
   const dx = param.dx - activeBar.width / 2;
   const dy = param.dy - activeBar.height / 2 + PADDING_TOP;
-  const dw =sw;
+  const dw = sw;
   const dh = sh;
   param.context.drawImage(activeBar, sx, sy, sw, sh, dx, dy, dw, dh);
 }

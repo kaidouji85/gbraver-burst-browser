@@ -19,6 +19,6 @@ export function createGameLoopListener(): Observable<GameLoop> {
     });
   };
   requestAnimationFrame(gameLoop);
-  
+
   return listener;
 }

@@ -21,7 +21,7 @@ export function createAnimatedTexture(origin: THREE.Texture, horizonDividedNum: 
   texture.needsUpdate = true;
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(1/horizonDividedNum, 1/verticalDividedNum);
+  texture.repeat.set(1 / horizonDividedNum, 1 / verticalDividedNum);
   texture.offset.x = 0;
   texture.offset.y = 0;
   return texture;

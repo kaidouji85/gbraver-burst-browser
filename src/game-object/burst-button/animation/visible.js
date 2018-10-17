@@ -1,6 +1,6 @@
 // @flow
 
-import {Tween, Group} from '@tweenjs/tween.js';
+import {Group, Tween} from '@tweenjs/tween.js';
 import type {BurstButtonModel} from "../model/burst-button-model";
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 

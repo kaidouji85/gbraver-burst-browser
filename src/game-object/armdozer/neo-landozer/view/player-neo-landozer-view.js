@@ -22,12 +22,15 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   }
 
   /** モデルをビューに反映させる */
-  engage(model: NeoLandozerModel, camera: THREE.Camera): void {
+  engage(model: NeoLandozerModel): void {
     this._refreshPos(model);
 
     const texture = this._getTexture(model.animation.type);
     this._mesh.material.map = texture.animate(model.animation.frame);
+  }
 
+  /** カメラの真正面を向く */
+  lookAt(camera: THREE.Camera): void {
     this._mesh.quaternion.copy(camera.quaternion);
   }
 
@@ -47,7 +50,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
 
   /** アニメーションタイプに応じたテクスチャを返す */
   _getTexture(type: AnimationType): ArmdozerAnimationTexture {
-    switch(type) {
+    switch (type) {
       case 'STAND':
       default:
         return this._stand;

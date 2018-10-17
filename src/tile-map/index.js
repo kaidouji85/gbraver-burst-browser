@@ -46,7 +46,7 @@ export function createTileMap(params: Params): THREE.Group {
       map: tileTexture
     });
     const mesh: THREE.Mesh = new THREE.Mesh(geometry, material);
-    mesh.rotation.x = - Math.PI / 2;
+    mesh.rotation.x = -Math.PI / 2;
 
     const {x, y, z} = getMapPosition(index, tileMapData.layers[0], params.meshWith, params.meshHeight);
     mesh.position.set(x + basePosX, y, z + basePosZ);

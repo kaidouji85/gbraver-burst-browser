@@ -36,7 +36,7 @@ function drawActiveBar(param: Param): void {
   const sh = activeBar.height;
   const dx = param.dx - activeBar.width / 2;
   const dy = param.dy - activeBar.height / 2 + PADDING_TOP;
-  const dw =sw;
+  const dw = sw;
   const dh = sh;
   param.context.drawImage(activeBar, sx, sy, sw, sh, dx, dy, dw, dh);
 }
@@ -46,7 +46,7 @@ function drawScale(context: CanvasRenderingContext2D, dx: number, dy: number, co
   const interval = barWidth / count;
 
   R.range(1, count).forEach(v => {
-    drawLine(context, dx + interval * v - barWidth / 2 , dy);
+    drawLine(context, dx + interval * v - barWidth / 2, dy);
   });
 }
 

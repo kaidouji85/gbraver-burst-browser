@@ -3,8 +3,8 @@
 import type {ArmdozerAnimationTexture} from "../../../common/animation-texture";
 import * as THREE from 'three';
 import type {Resources} from "../../../../../resource/index";
-import {TEXTURE_IDS} from "../../../../../resource/texture";
 import type {TextureResource} from "../../../../../resource/texture";
+import {TEXTURE_IDS} from "../../../../../resource/texture";
 import {createAnimatedTexture} from "../../../../../texture/animation/texture-animation";
 import {normalizeTextureOffset} from "../../../../../texture/animation/texture-offset";
 
