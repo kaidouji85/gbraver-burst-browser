@@ -44,7 +44,9 @@ export function createBattleScene(param: Param): BattleScene {
     progressBattle: async (command: Command) => {
       return battleRoom.progress(command);
     },
-    domEventListener: param.domEventListener,
-    gameLoopListener: param.gameLoopListener,
+    listener: {
+      domEvent: param.domEventListener,
+      gameLoop: param.gameLoopListener,
+    }
   });
 }

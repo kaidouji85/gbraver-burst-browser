@@ -16,13 +16,15 @@ import type {BattleSceneAction} from "../../action/battle-scene";
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
+  renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
   players: Player[],
   initialState: GameState[],
   progressBattle: ProgressBattle,
-  renderer: THREE.WebGLRenderer,
-  domEventListener: Observable<DOMEvent>,
-  gameLoopListener: Observable<GameLoop>,
+  listener: {
+    domEvent: Observable<DOMEvent>,
+    gameLoop: Observable<GameLoop>,
+  }
 };
 
 /**
@@ -42,7 +44,7 @@ export class BattleScene {
       canOperation: true
     };
 
-    param.domEventListener.subscribe(action => {
+    param.listener.domEvent.subscribe(action => {
       domEventHandler(action, this._view, this._state);
     });
 
@@ -53,12 +55,16 @@ export class BattleScene {
 
     this._view = new BattleSceneView({
       resources: param.resources,
+      renderer: param.renderer,
       playerId: param.playerId,
       players: param.players,
-      battleActionNotifier: this._battleActionSubject,
-      gameLoopListener: param.gameLoopListener,
-      domEventListener: param.domEventListener,
-      renderer: param.renderer
+      listener: {
+        gameLoop: param.listener.gameLoop,
+        domEvent: param.listener.domEvent,
+      },
+      notifier: {
+        battleAction: this._battleActionSubject,
+      }
     });
 
     this._battleActionSubject.next({

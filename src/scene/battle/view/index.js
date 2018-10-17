@@ -8,17 +8,20 @@ import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
-import {createLayerGameLoop} from "./layer-game-loop";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  battleActionNotifier: Observer<BattleSceneAction>,
-  gameLoopListener: Observable<GameLoop>,
-  domEventListener: Observable<DOMEvent>,
   renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
-  players: Player[]
+  players: Player[],
+  listener: {
+    gameLoop: Observable<GameLoop>,
+    domEvent: Observable<DOMEvent>,
+  },
+  notifier: {
+    battleAction: Observer<BattleSceneAction>,
+  },
 };
 
 /**
@@ -33,14 +36,16 @@ export class BattleSceneView {
   hudLayer: HudLayer;
 
   constructor(param: Param) {
-    const stream = createStream(param.gameLoopListener);
+    const stream = createStream(param.listener.gameLoop);
     this.renderer = param.renderer;
 
     this.threeDimensionLayer = new ThreeDimensionLayer({
       renderer: param.renderer,
-      gameLoopListener: stream.update3D,
-      renderListener: stream.render3D,
       resources: param.resources,
+      listener: {
+        gameLoop: stream.update3D,
+        render: stream.render3D,
+      },
       playerId: param.playerId,
       players: param.players
     });
@@ -50,10 +55,14 @@ export class BattleSceneView {
       renderer: param.renderer,
       playerId: param.playerId,
       players: param.players,
-      battleActionNotifier: param.battleActionNotifier,
-      gameLoopListener: stream.updateHUD,
-      renderListener: stream.renderHUD,
-      domEventListener: param.domEventListener,
+      listener: {
+        gameLoop: stream.updateHUD,
+        render: stream.renderHUD,
+        domEvent: param.listener.domEvent,
+      },
+      notifier: {
+        battleAction: param.notifier.battleAction,
+      }
     });
   }
 }

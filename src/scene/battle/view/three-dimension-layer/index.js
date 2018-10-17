@@ -17,10 +17,12 @@ import type {GameObjectAction} from "../../../../action/game-object-action";
 type Param = {
   resources: Resources,
   renderer: THREE.WebGLRenderer,
-  gameLoopListener: Observable<GameLoop>,
-  renderListener: Observable<void>,
   playerId: PlayerId,
-  players: Player[]
+  players: Player[],
+  listener: {
+    gameLoop: Observable<GameLoop>,
+    render: Observable<void>
+  },
 };
 
 /**
@@ -35,14 +37,15 @@ export class ThreeDimensionLayer {
 
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
-    const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
+    const enemyInfo =
+      param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      toSpriteGameLoopObservable(param.gameLoopListener, this.camera),
-      param.gameLoopListener,
+      toSpriteGameLoopObservable(param.listener.gameLoop, this.camera),
+      param.listener.gameLoop,
     );
 
     this.stage = createStage(param.resources);
@@ -54,7 +57,7 @@ export class ThreeDimensionLayer {
     this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemyInfo);
     this.scene.add(this.enemySprite.getObject3D());
 
-    param.renderListener.subscribe(action => {
+    param.listener.render.subscribe(action => {
       param.renderer.render(this.scene, this.camera);
     });
   }
