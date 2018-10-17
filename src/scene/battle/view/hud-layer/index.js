@@ -18,7 +18,6 @@ import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {GameObjectAction} from "../../../../action/game-object-action";
-import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
 import {BatteryNumber} from "../../../../game-object/battery-number/battery-number";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
