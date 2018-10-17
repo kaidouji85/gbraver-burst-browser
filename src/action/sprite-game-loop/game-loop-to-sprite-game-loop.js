@@ -6,6 +6,7 @@ import type {GameLoop} from "../game-loop/game-loop";
 import {Observable} from "rxjs";
 import {filter, map} from 'rxjs/operators';
 
+// TODO 削除する
 /** ゲームループをスプライトゲームループに変換する */
 export function toSpriteGameLoop(origin: GameLoop, camera: THREE.Camera): SpriteGameLoop {
   return {
@@ -21,6 +22,7 @@ const DUMMY_ACTION = {
   camera: new THREE.PerspectiveCamera()
 };
 
+// TODO 削除する
 /** ゲームループストリームをスプライトゲームループストリームに変換する */
 export function toSpriteGameLoopObservable(origin: Observable<GameLoop>, camera: THREE.Camera): Observable<SpriteGameLoop> {
   return origin.pipe(

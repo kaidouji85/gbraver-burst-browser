@@ -13,7 +13,6 @@ import {createTurnIndicator} from "./turn-indicator";
 import {BurstButton} from "../../../../game-object/burst-button/burst-button";
 import {createBurstButton} from "./burst-button";
 import {merge, Observable, Observer, Subject} from "rxjs";
-import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
@@ -22,6 +21,8 @@ import {BatteryNumber} from "../../../../game-object/battery-number/battery-numb
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
+import type {Update} from "../../../../action/game-loop/update";
+import type {Render} from "../../../../action/game-loop/render";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -30,8 +31,8 @@ export type Param = {
   playerId: PlayerId,
   players: Player[],
   listener: {
-    gameLoop: Observable<GameLoop>,
-    render: Observable<void>,
+    update: Observable<Update>,
+    render: Observable<Render>,
     domEvent: Observable<DOMEvent>,
   },
   notifier: {
@@ -66,7 +67,7 @@ export class HudLayer {
 
     const gameObjectAction: Observable<GameObjectAction> = merge(
       toOverlapObservable(param.listener.domEvent, param.renderer, this.camera),
-      param.listener.gameLoop
+      param.listener.update
     );
 
     this.batterySelector = createBatterySelector({

@@ -8,6 +8,8 @@ import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
+import type {Update} from "../../../action/game-loop/update";
+import type {Render} from "../../../action/game-loop/render";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -28,11 +30,8 @@ type Param = {
  * 戦闘画面のビュー
  */
 export class BattleSceneView {
-  /** レンダラ */
   renderer: THREE.WebGLRenderer;
-  /** 3D空間レイヤー */
   threeDimensionLayer: ThreeDimensionLayer;
-  /** Head Up Display(HUD)レイヤー */
   hudLayer: HudLayer;
 
   constructor(param: Param) {
@@ -43,7 +42,7 @@ export class BattleSceneView {
       renderer: param.renderer,
       resources: param.resources,
       listener: {
-        gameLoop: stream.update3D,
+        update: stream.update3D,
         render: stream.render3D,
       },
       playerId: param.playerId,
@@ -56,7 +55,7 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       listener: {
-        gameLoop: stream.updateHUD,
+        update: stream.updateHUD,
         render: stream.renderHUD,
         domEvent: param.listener.domEvent,
       },
@@ -78,17 +77,19 @@ export class BattleSceneView {
  * @return シーン全体のゲームループストリーム
  */
 function createStream(gameLoop: Observable<GameLoop>) {
-  const update3D: Subject<GameLoop> = new Subject();
-  const render3D: Subject<void> = new Subject();
-  const updateHUD: Subject<GameLoop> = new Subject();
-  const renderHUD: Subject<void> = new Subject();
+  const update3D: Subject<Update> = new Subject();
+  const render3D: Subject<Render> = new Subject();
+  const updateHUD: Subject<Update> = new Subject();
+  const renderHUD: Subject<Render> = new Subject();
 
   gameLoop.subscribe(action => {
-    update3D.next(action);
-    updateHUD.next(action);
+    const update = {type: 'Update', time: action.time};
+    update3D.next(update);
+    updateHUD.next(update);
 
-    render3D.next();
-    renderHUD.next();
+    const render = {type: 'Render'};
+    render3D.next(render);
+    renderHUD.next(render);
   });
 
   return {

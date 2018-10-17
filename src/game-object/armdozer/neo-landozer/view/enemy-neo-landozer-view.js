@@ -14,8 +14,8 @@ export class EnemyNeoLandozerView extends PlayerNeoLandozerView {
     super(resources);
   }
 
-  engage(model: NeoLandozerModel, camera: THREE.Camera): void {
-    super.engage(model, camera);
+  engage(model: NeoLandozerModel): void {
+    super.engage(model);
     this._mesh.position.x *= -1;
     this._mesh.scale.x = -1;
   }

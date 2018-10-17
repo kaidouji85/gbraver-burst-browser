@@ -15,8 +15,8 @@ export class EnemyShinBraverView extends PlayerShinBraverView {
   }
 
   /** モデルをビューに反映させる */
-  engage(model: ShinBraverModel, camera: THREE.Camera): void {
-    super.engage(model, camera);
+  engage(model: ShinBraverModel): void {
+    super.engage(model);
     this._mesh.position.x *= -1;
     this._mesh.scale.x = -1;
   }

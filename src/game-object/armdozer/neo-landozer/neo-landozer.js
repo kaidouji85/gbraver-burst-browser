@@ -7,9 +7,10 @@ import type {NeoLandozerModel} from "./model/neo-landozer-model";
 import type {NeoLandozerView} from "./view/neo-landozer-view";
 import {stand} from "./animation/stand";
 import {Observable} from "rxjs";
-import type {SpriteGameLoop} from "../../../action/sprite-game-loop/sprite-game-loop";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
+import type {Update} from "../../../action/game-loop/update";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -24,8 +25,11 @@ export class NeoLandozer implements ArmDozerSprite {
 
     params.listener.subscribe(action => {
       switch (action.type) {
-        case 'SpriteGameLoop':
-          this._gameLoop(action);
+        case 'Update':
+          this._update(action);
+          return;
+        case 'PreRender':
+          this._preRender(action);
           return;
         default:
           return;
@@ -47,9 +51,14 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** ゲームループ */
-  _gameLoop(action: SpriteGameLoop): void {
+  _update(action: Update): void {
     this._tweenGroup.update(action.time);
-    this._view.engage(this._model, action.camera);
+    this._view.engage(this._model);
+  }
+
+  /** レンダリング直前の処理 */
+  _preRender(action: PreRender): void {
+    this._view.lookAt(action.camera);
   }
 }
 

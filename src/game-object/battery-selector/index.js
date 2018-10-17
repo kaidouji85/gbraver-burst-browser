@@ -9,12 +9,12 @@ import {changeBattery} from './animation/change-battery';
 import {Group, Tween} from "@tweenjs/tween.js";
 import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
-import type {GameLoop} from "../../action/game-loop/game-loop";
 import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {play} from "../../tween/multi-tween/play";
 import {close} from './animation/close';
+import type {Update} from "../../action/game-loop/update";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -41,8 +41,8 @@ export class BatterySelector {
 
     param.listener.subscribe(action => {
       switch (action.type) {
-        case 'GameLoop':
-          this._gameLoop(action);
+        case 'Update':
+          this._update(action);
           return;
         default:
           return;
@@ -121,7 +121,7 @@ export class BatterySelector {
   }
 
   /** ゲームループの処理 */
-  _gameLoop(action: GameLoop): void {
+  _update(action: Update): void {
     this._tween.update(action.time);
     this._view.engage(this._model);
   }

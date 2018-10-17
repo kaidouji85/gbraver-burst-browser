@@ -8,20 +8,22 @@ import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import {createCamera} from "./camera";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {Observable, merge} from "rxjs";
-import type {GameLoop} from "../../../../action/game-loop/game-loop";
+import {Observable, merge, Subject} from "rxjs";
 import {filter, map} from 'rxjs/operators';
-import {toSpriteGameLoopObservable} from "../../../../action/sprite-game-loop/game-loop-to-sprite-game-loop";
 import type {GameObjectAction} from "../../../../action/game-object-action";
+import type {Update} from "../../../../action/game-loop/update";
+import type {Render} from "../../../../action/game-loop/render";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
 
+/** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
   players: Player[],
   listener: {
-    gameLoop: Observable<GameLoop>,
-    render: Observable<void>
+    update: Observable<Update>,
+    render: Observable<Render>
   },
 };
 
@@ -37,16 +39,22 @@ export class ThreeDimensionLayer {
 
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
-    const enemyInfo =
-      param.players.find(v => v.playerId !== param.playerId) || param.players[0];
+    const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
+    const preRender: Subject<PreRender> = new Subject();
+    const gameObjectAction: Observable<GameObjectAction> = merge(
+      param.listener.update,
+      preRender
+    );
+    param.listener.render.subscribe(() => {
+      preRender.next({
+        type: 'PreRender',
+        camera: this.camera
+      });
+      param.renderer.render(this.scene, this.camera);
+    });
 
     this.scene = new THREE.Scene();
     this.camera = createCamera();
-
-    const gameObjectAction: Observable<GameObjectAction> = merge(
-      toSpriteGameLoopObservable(param.listener.gameLoop, this.camera),
-      param.listener.gameLoop,
-    );
 
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
@@ -56,9 +64,5 @@ export class ThreeDimensionLayer {
 
     this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemyInfo);
     this.scene.add(this.enemySprite.getObject3D());
-
-    param.listener.render.subscribe(action => {
-      param.renderer.render(this.scene, this.camera);
-    });
   }
 }

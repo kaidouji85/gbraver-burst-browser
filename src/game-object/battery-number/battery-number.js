@@ -4,12 +4,12 @@ import type {BatteryNumberModel} from "./model/battery-number-model";
 import type {BatteryNumberView} from "./view/battery-number-view";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {GameLoop} from "../../action/game-loop/game-loop";
 import * as THREE from 'three';
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {createInitialValue} from "./model/initial-value";
 import {popUp} from "./animation/pop-up";
 import {Group} from '@tweenjs/tween.js';
+import type {Update} from "../../action/game-loop/update";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -28,8 +28,8 @@ export class BatteryNumber {
     this._tween = new Group();
     param.listener.subscribe(action => {
       switch (action.type) {
-        case 'GameLoop':
-          this._gameLoop(action);
+        case 'Update':
+          this._update(action);
           return;
         default:
           return;
@@ -48,7 +48,7 @@ export class BatteryNumber {
   }
 
   /** ゲームループの処理 */
-  _gameLoop(action: GameLoop) {
+  _update(action: Update) {
     this._tween.update(action.time);
     this._view.engage(this._model);
   }

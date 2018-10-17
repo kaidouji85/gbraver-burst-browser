@@ -4,9 +4,9 @@ import * as THREE from 'three';
 import type {Resources} from "../../resource";
 import type {TurnIndicatorModel} from "./model/turn-indicator-model";
 import {TurnIndicatorView} from "./view/turn-indicator-view";
-import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Update} from "../../action/game-loop/update";
 
 type Param = {
   resources: Resources,
@@ -26,8 +26,8 @@ export class TurnIndicator {
 
     param.listener.subscribe(action => {
       switch (action.type) {
-        case 'GameLoop':
-          this._gameLoop(action);
+        case 'Update':
+          this._update(action);
           return;
         default:
           return;
@@ -50,7 +50,7 @@ export class TurnIndicator {
   }
 
   /** ゲームループの処理 */
-  _gameLoop(action: GameLoop): void {
+  _update(action: Update): void {
     this._view.engage(this._model);
   }
 }

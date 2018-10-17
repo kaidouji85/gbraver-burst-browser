@@ -6,10 +6,11 @@ import * as THREE from "three";
 import type {ShinBraverView} from "./view/shin-braver-view";
 import {stand} from "./animation/stand";
 import {Observable} from "rxjs";
-import type {SpriteGameLoop} from "../../../action/sprite-game-loop/sprite-game-loop";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {ShinBraverModel} from "./model/shin-braver-model";
 import {createInitialValue} from "./model/initial-value";
+import type {Update} from "../../../action/game-loop/update";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -24,8 +25,11 @@ export class ShinBraver implements ArmDozerSprite {
 
     params.listener.subscribe(action => {
       switch (action.type) {
-        case 'SpriteGameLoop':
-          this._gameLoop(action);
+        case 'Update':
+          this._update(action);
+          return;
+        case 'PreRender':
+          this._preRender(action);
           return;
         default:
           return;
@@ -36,12 +40,6 @@ export class ShinBraver implements ArmDozerSprite {
     this.stand();
   }
 
-  /** ゲームループ */
-  _gameLoop(action: SpriteGameLoop): void {
-    this._tweenGroup.update(action.time);
-    this._view.engage(this._model, action.camera);
-  }
-
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
@@ -50,5 +48,16 @@ export class ShinBraver implements ArmDozerSprite {
   /** 立ち状態にする */
   stand(): void {
     stand(this._model, this._tweenGroup).start();
+  }
+
+  /** ゲームループの処理 */
+  _update(action: Update): void {
+    this._tweenGroup.update(action.time);
+    this._view.engage(this._model);
+  }
+
+  /** レンダリング直前の処理 */
+  _preRender(action: PreRender): void {
+    this._view.lookAt(action.camera);
   }
 }
