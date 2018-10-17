@@ -24,15 +24,10 @@ export class NeoLandozer implements ArmDozerSprite {
     this._tweenGroup = new Group();
 
     params.listener.subscribe(action => {
-      switch (action.type) {
-        case 'Update':
-          this._update(action);
-          return;
-        case 'PreRender':
-          this._preRender(action);
-          return;
-        default:
-          return;
+      if (action.type === 'Update') {
+        this._update(action);
+      } else if (action.type === 'PreRender') {
+        this._preRender(action);
       }
     });
 
@@ -50,7 +45,7 @@ export class NeoLandozer implements ArmDozerSprite {
     stand(this._model, this._tweenGroup).start();
   }
 
-  /** ゲームループ */
+  /** 状態更新 */
   _update(action: Update): void {
     this._tweenGroup.update(action.time);
     this._view.engage(this._model);

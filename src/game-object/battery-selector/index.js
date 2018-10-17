@@ -40,12 +40,8 @@ export class BatterySelector {
     this._tween = new Group();
 
     param.listener.subscribe(action => {
-      switch (action.type) {
-        case 'Update':
-          this._update(action);
-          return;
-        default:
-          return;
+      if (action.type === 'Update') {
+        this._update(action);
       }
     });
 
@@ -120,7 +116,7 @@ export class BatterySelector {
     };
   }
 
-  /** ゲームループの処理 */
+  /** 状態更新 */
   _update(action: Update): void {
     this._tween.update(action.time);
     this._view.engage(this._model);

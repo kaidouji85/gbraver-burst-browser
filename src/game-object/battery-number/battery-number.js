@@ -27,12 +27,8 @@ export class BatteryNumber {
     this._view = param.view;
     this._tween = new Group();
     param.listener.subscribe(action => {
-      switch (action.type) {
-        case 'Update':
-          this._update(action);
-          return;
-        default:
-          return;
+      if (action.type === 'Update') {
+        this._update(action);
       }
     });
   }
@@ -47,7 +43,7 @@ export class BatteryNumber {
     return this._view.getObject3D();
   }
 
-  /** ゲームループの処理 */
+  /** 状態更新 */
   _update(action: Update) {
     this._tween.update(action.time);
     this._view.engage(this._model);
