@@ -69,21 +69,21 @@ const DUMMY_ACTION = {
  *
  * @param origin 変換元
  * @param renderer レンダラ
- * @param camera カメラ
+ * @param activeCamera 現在有効なカメラを取得するためのコールバック関数
  * @return 当たり判定ストリーム
  */
-export function toOverlapObservable(origin: Observable<DOMEvent>, renderer: THREE.WebGLRenderer, camera: THREE.Camera): Observable<OverlapAction> {
+export function toOverlapObservable(origin: Observable<DOMEvent>, renderer: THREE.WebGLRenderer, activeCamera: () => THREE.Camera): Observable<OverlapAction> {
   return origin.pipe(
     map(v => {
       switch (v.type) {
         case 'mouseDown':
-          return toMouseDownRaycaster(v, renderer, camera);
+          return toMouseDownRaycaster(v, renderer, activeCamera());
         case 'mouseMove':
-          return toMouseMoveRaycaster(v, renderer, camera);
+          return toMouseMoveRaycaster(v, renderer, activeCamera());
         case 'touchStart':
-          return toTouchStartRaycaster(v, renderer, camera);
+          return toTouchStartRaycaster(v, renderer, activeCamera());
         case 'touchMove':
-          return toTouchMoveRaycaster(v, renderer, camera);
+          return toTouchMoveRaycaster(v, renderer, activeCamera());
         default:
           return null;
       }

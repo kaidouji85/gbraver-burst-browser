@@ -8,8 +8,6 @@ import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
-import type {Update} from "../../../action/game-loop/update";
-import type {Render} from "../../../action/game-loop/render";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -35,7 +33,7 @@ export class BattleSceneView {
   hudLayer: HudLayer;
 
   constructor(param: Param) {
-    const sceneGameLoop = new BattleSceneGameLoop(param.listener.gameLoop);
+    const ownGameLoop = new OwnGameLoop(param.listener.gameLoop);
 
     this.renderer = param.renderer;
 
@@ -43,8 +41,7 @@ export class BattleSceneView {
       renderer: param.renderer,
       resources: param.resources,
       listener: {
-        update: sceneGameLoop.update3D,
-        render: sceneGameLoop.render3D,
+        gameLoop: ownGameLoop.threeDimensionLayer
       },
       playerId: param.playerId,
       players: param.players
@@ -56,8 +53,7 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       listener: {
-        update: sceneGameLoop.updateHUD,
-        render: sceneGameLoop.renderHUD,
+        gameLoop: ownGameLoop.hudLayer,
         domEvent: param.listener.domEvent,
       },
       notifier: {
@@ -68,36 +64,23 @@ export class BattleSceneView {
 }
 
 /**
- * 戦闘シーンのゲームループストリーム
- * 各ストリームは以下の順番に実行される
+ * 戦闘シーン全体のゲームループ制御
+ * HUDレイヤーが上に表示されるように、以下の順番でゲームループが実行される
  *
- * 1) update3D
- * 2) updateHUD
- * 3) render3D
- * 4) renderHUD
- *
- * @return シーン全体のゲームループストリーム
+ * (1)3Dレイヤーのゲームループ
+ * (2)HUDレイヤーのゲームループ
  */
-class BattleSceneGameLoop {
-  update3D: Subject<Update>;
-  render3D: Subject<Render>;
-  updateHUD: Subject<Update>;
-  renderHUD: Subject<Render>;
+class OwnGameLoop {
+  threeDimensionLayer: Subject<GameLoop>;
+  hudLayer: Subject<GameLoop>;
 
   constructor(gameLoop: Observable<GameLoop>) {
-    this.update3D = new Subject();
-    this.render3D = new Subject();
-    this.updateHUD = new Subject();
-    this.renderHUD = new Subject();
+    this.threeDimensionLayer = new Subject();
+    this.hudLayer = new Subject();
 
     gameLoop.subscribe(action => {
-      const update = {type: 'Update', time: action.time};
-      this.update3D.next(update);
-      this.updateHUD.next(update);
-
-      const render = {type: 'Render'};
-      this.render3D.next(render);
-      this.renderHUD.next(render);
+      this.threeDimensionLayer.next(action);
+      this.hudLayer.next(action);
     });
   }
 }

@@ -14,6 +14,7 @@ import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {Update} from "../../../../action/game-loop/update";
 import type {Render} from "../../../../action/game-loop/render";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {GameLoop} from "../../../../action/game-loop/game-loop";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -22,8 +23,7 @@ type Param = {
   playerId: PlayerId,
   players: Player[],
   listener: {
-    update: Observable<Update>,
-    render: Observable<Render>
+    gameLoop: Observable<GameLoop>,
   },
 };
 
@@ -40,16 +40,12 @@ export class ThreeDimensionLayer {
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-    const preRender: Subject<PreRender> = new Subject();
+    const ownGameLoop = new OwnGameLoop(param.listener.gameLoop, () => this.camera);
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      param.listener.update,
-      preRender
+      ownGameLoop.update,
+      ownGameLoop.preRender
     );
-    param.listener.render.subscribe(() => {
-      preRender.next({
-        type: 'PreRender',
-        camera: this.camera
-      });
+    ownGameLoop.render.subscribe(() => {
       param.renderer.render(this.scene, this.camera);
     });
 
@@ -64,5 +60,47 @@ export class ThreeDimensionLayer {
 
     this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemyInfo);
     this.scene.add(this.enemySprite.getObject3D());
+  }
+}
+
+/**
+ * 3Dレイヤーのゲームループ制御
+ * 以下の順番でイベントが呼ばれる
+ *
+ * (1)update
+ * (2)preRender
+ * (3)render
+ */
+class OwnGameLoop {
+  update: Subject<Update>;
+  preRender: Subject<PreRender>;
+  render: Subject<Render>;
+
+  /**
+   * コンストラクタ
+   *
+   * @param gameLoop 起点となるゲームループ
+   * @param activeCamera 現在有効なカメラを取得するためのコールバック関数
+   */
+  constructor(gameLoop: Observable<GameLoop>, activeCamera: () => THREE.Camera) {
+    this.update = new Subject();
+    this.preRender = new Subject();
+    this.render = new Subject();
+
+    gameLoop.subscribe(action => {
+      this.update.next({
+        type: 'Update',
+        time: action.time
+      });
+
+      this.preRender.next({
+        type: 'PreRender',
+        camera: activeCamera()
+      });
+
+      this.render.next({
+        type: 'Render'
+      })
+    })
   }
 }
