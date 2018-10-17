@@ -33,25 +33,59 @@ export class BattleSceneView {
   hudLayer: HudLayer;
 
   constructor(param: Param) {
-    const {hud, threeDimension} = createLayerGameLoop(param.gameLoopListener);
+    const stream = createStream(param.gameLoopListener);
     this.renderer = param.renderer;
 
     this.threeDimensionLayer = new ThreeDimensionLayer({
       renderer: param.renderer,
-      gameLoopListener: threeDimension,
+      gameLoopListener: stream.update3D,
+      renderListener: stream.render3D,
       resources: param.resources,
       playerId: param.playerId,
       players: param.players
     });
-    this.hudLayer = new HudLayer({
 
+    this.hudLayer = new HudLayer({
       resources: param.resources,
       renderer: param.renderer,
       playerId: param.playerId,
       players: param.players,
       battleActionNotifier: param.battleActionNotifier,
-      gameLoopListener: hud,
+      gameLoopListener: stream.updateHUD,
+      renderListener: stream.renderHUD,
       domEventListener: param.domEventListener,
     });
   }
+}
+
+/**
+ * ゲームループで、以下の順番に処理が実行されるストリームの集合を返す
+ *
+ * 1) 3Dレイヤーのアップデート
+ * 2) HUDレイヤーのアップデート
+ * 3) 3Dレイヤーの描画
+ * 4) HUDレイヤーの描画
+ *
+ * @return シーン全体のゲームループストリーム
+ */
+function createStream(gameLoop: Observable<GameLoop>) {
+  const update3D: Subject<GameLoop> = new Subject();
+  const render3D: Subject<void> = new Subject();
+  const updateHUD: Subject<GameLoop> = new Subject();
+  const renderHUD: Subject<void> = new Subject();
+
+  gameLoop.subscribe(action => {
+    update3D.next(action);
+    updateHUD.next(action);
+
+    render3D.next();
+    renderHUD.next();
+  });
+
+  return {
+    update3D: update3D,
+    render3D: render3D,
+    updateHUD: updateHUD,
+    renderHUD: renderHUD
+  };
 }

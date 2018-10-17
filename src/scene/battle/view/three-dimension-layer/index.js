@@ -13,12 +13,12 @@ import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {filter, map} from 'rxjs/operators';
 import {toSpriteGameLoopObservable} from "../../../../action/sprite-game-loop/game-loop-to-sprite-game-loop";
 import type {GameObjectAction} from "../../../../action/game-object-action";
-import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
 
 type Param = {
   resources: Resources,
   renderer: THREE.WebGLRenderer,
   gameLoopListener: Observable<GameLoop>,
+  renderListener: Observable<void>,
   playerId: PlayerId,
   players: Player[]
 };
@@ -36,14 +36,13 @@ export class ThreeDimensionLayer {
   constructor(param: Param) {
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-    const {update, render} = divideIntoUpdateAndRender(param.gameLoopListener);
 
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      toSpriteGameLoopObservable(update, this.camera),
-      update,
+      toSpriteGameLoopObservable(param.gameLoopListener, this.camera),
+      param.gameLoopListener,
     );
 
     this.stage = createStage(param.resources);
@@ -55,7 +54,7 @@ export class ThreeDimensionLayer {
     this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemyInfo);
     this.scene.add(this.enemySprite.getObject3D());
 
-    render.subscribe(action => {
+    param.renderListener.subscribe(action => {
       param.renderer.render(this.scene, this.camera);
     });
   }

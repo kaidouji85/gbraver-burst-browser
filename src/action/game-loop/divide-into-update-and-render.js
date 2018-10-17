@@ -12,7 +12,7 @@ type Result = {
  * 分割したストリームは、
  *
  * 1)update
- * 2)render
+ * 2)renderListener
  *
  * の順番に呼び出される
  *

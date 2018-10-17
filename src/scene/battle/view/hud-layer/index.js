@@ -31,6 +31,7 @@ export type Param = {
   playerId: PlayerId,
   players: Player[],
   gameLoopListener: Observable<GameLoop>,
+  renderListener: Observable<void>,
   domEventListener: Observable<DOMEvent>,
   battleActionNotifier: Observer<BattleSceneAction>
 };
@@ -57,13 +58,12 @@ export class HudLayer {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
-    const {update, render} = divideIntoUpdateAndRender(param.gameLoopListener);
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
     const gameObjectAction: Observable<GameObjectAction> = merge(
       toOverlapObservable(param.domEventListener, param.renderer, this.camera),
-      update
+      param.gameLoopListener
     );
 
     this.batterySelector = createBatterySelector({
@@ -110,7 +110,7 @@ export class HudLayer {
     });
     this.scene.add(this.enemyDamageIndicator.getObject3D());
 
-    render.subscribe(action => {
+    param.renderListener.subscribe(() => {
       param.renderer.render(this.scene, this.camera);
     });
   }
