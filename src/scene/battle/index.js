@@ -4,7 +4,6 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
-import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle/progress-battle";
 import type {GameLoop} from "../../action/game-loop/game-loop";
@@ -13,6 +12,10 @@ import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
 import type {Resize} from "../../action/dom-event/resize";
 import {resize} from "./resize";
+import {stateHistoryAnimation} from "./animation/state-history";
+import {play} from "../../tween/multi-tween/play";
+import type {DecideBattery} from "../../action/battle-scene/decide-battery";
+import {invisibleUI} from "./animation/invisible-ui/invisible-u-i";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -35,15 +38,15 @@ export class BattleScene {
   _view: BattleSceneView;
   _state: BattleSceneState;
   _battleAction: Subject<BattleSceneAction>;
+  _progressBattle: ProgressBattle;
 
   constructor(param: Param) {
     this._state = {
       playerId: param.playerId,
       canOperation: true
     };
-
     this._battleAction = new Subject();
-
+    this._progressBattle = param.progressBattle;
     this._view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
@@ -58,7 +61,6 @@ export class BattleScene {
       }
     });
 
-
     param.listener.domEvent.subscribe(action => {
       if (action.type === 'resize') {
         this._resize(action);
@@ -66,18 +68,35 @@ export class BattleScene {
     });
 
     this._battleAction.subscribe(action => {
-      battleSceneActionHandler(action, this._view, this._state, param.progressBattle);
+      if (action.type === 'decideBattery') {
+        this._decideBattery(action);
+      }
     });
 
-
-    this._battleAction.next({
-      type: 'startBattleScene',
-      initialState: param.initialState
-    });
+    const startAnimation = stateHistoryAnimation(this._view, this._state, param.initialState);
+    play(startAnimation);
   };
 
   /** リサイズ */
   _resize(action: Resize): void {
     resize(this._view);
+  }
+
+  /** バッテリー決定 */
+  async _decideBattery(action: DecideBattery): Promise<void> {
+    if (!this._state.canOperation) {
+      return;
+    }
+
+    this._state.canOperation = false;
+
+    await play(invisibleUI(this._view));
+    const updateState = await this._progressBattle({
+      type: 'BATTERY_COMMAND',
+      battery: this._view.hudLayer.batterySelector.getBattery()
+    });
+    await play(stateHistoryAnimation(this._view, this._state, updateState));
+
+    this._state.canOperation = true;
   }
 }

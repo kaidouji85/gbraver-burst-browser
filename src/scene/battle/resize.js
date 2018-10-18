@@ -1,6 +1,5 @@
 // @flow
 
-import type {BattleSceneState} from "./state/battle-scene-state";
 import {BattleSceneView} from "./view/index";
 import {onResizeOrthographicCamera, onResizePerspectiveCamera} from "../../camera/resize";
 
