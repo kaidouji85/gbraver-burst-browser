@@ -4,7 +4,6 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
-import {domEventHandler} from "./action-handler/dom-event";
 import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle/progress-battle";
@@ -12,6 +11,8 @@ import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
+import type {Resize} from "../../action/dom-event/resize";
+import {resize} from "./resize";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -31,12 +32,9 @@ type Param = {
  * 戦闘画面アプリケーション
  */
 export class BattleScene {
-  /** ビュー */
   _view: BattleSceneView;
-  /** 戦闘画面全体の状態 */
   _state: BattleSceneState;
-  /** 戦闘画面アクションのサブジェクト */
-  _battleActionSubject: Subject<BattleSceneAction>;
+  _battleAction: Subject<BattleSceneAction>;
 
   constructor(param: Param) {
     this._state = {
@@ -44,14 +42,7 @@ export class BattleScene {
       canOperation: true
     };
 
-    param.listener.domEvent.subscribe(action => {
-      domEventHandler(action, this._view, this._state);
-    });
-
-    this._battleActionSubject = new Subject();
-    this._battleActionSubject.subscribe(action => {
-      battleSceneActionHandler(action, this._view, this._state, param.progressBattle);
-    });
+    this._battleAction = new Subject();
 
     this._view = new BattleSceneView({
       resources: param.resources,
@@ -63,13 +54,30 @@ export class BattleScene {
         domEvent: param.listener.domEvent,
       },
       notifier: {
-        battleAction: this._battleActionSubject,
+        battleAction: this._battleAction,
       }
     });
 
-    this._battleActionSubject.next({
+
+    param.listener.domEvent.subscribe(action => {
+      if (action.type === 'resize') {
+        this._resize(action);
+      }
+    });
+
+    this._battleAction.subscribe(action => {
+      battleSceneActionHandler(action, this._view, this._state, param.progressBattle);
+    });
+
+
+    this._battleAction.next({
       type: 'startBattleScene',
       initialState: param.initialState
     });
   };
+
+  /** リサイズ */
+  _resize(action: Resize): void {
+    resize(this._view);
+  }
 }
