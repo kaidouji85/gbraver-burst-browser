@@ -12,7 +12,6 @@ import {merge, Observable, Subject} from "rxjs";
 import {filter, map} from 'rxjs/operators';
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {Update} from "../../../../action/game-loop/update";
-import type {Render} from "../../../../action/game-loop/render";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 
@@ -37,20 +36,25 @@ export class ThreeDimensionLayer {
   playerSprite: ArmDozerSprite;
   enemySprite: ArmDozerSprite;
 
+  _update: Subject<Update>;
+  _preRender: Subject<PreRender>;
+  _renderer: THREE.WebGLRenderer;
+
   constructor(param: Param) {
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
+    this._update = new Subject();
+    this._preRender = new Subject();
+    this._renderer = param.renderer;
+
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-    const ownGameLoop = new OwnGameLoop(param.listener.gameLoop, this.camera);
+
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      ownGameLoop.update,
-      ownGameLoop.preRender
+      this._update,
+      this._preRender
     );
-    ownGameLoop.render.subscribe(() => {
-      param.renderer.render(this.scene, this.camera);
-    });
 
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
@@ -60,47 +64,25 @@ export class ThreeDimensionLayer {
 
     this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemyInfo);
     this.scene.add(this.enemySprite.getObject3D());
+
+
+    param.listener.gameLoop.subscribe(action => {
+      this._gameLoop(action);
+    });
   }
-}
 
-/**
- * 3Dレイヤーのゲームループ制御
- * 以下の順番でイベントが呼ばれる
- *
- * (1)update
- * (2)preRender
- * (3)render
- */
-class OwnGameLoop {
-  update: Subject<Update>;
-  preRender: Subject<PreRender>;
-  render: Subject<Render>;
+  /** ゲームループの処理 */
+  _gameLoop(action: GameLoop): void {
+    this._update.next({
+      type: 'Update',
+      time: action.time
+    });
 
-  /**
-   * コンストラクタ
-   *
-   * @param gameLoop 起点となるゲームループ
-   * @param camera カメラ
-   */
-  constructor(gameLoop: Observable<GameLoop>, camera: THREE.Camera) {
-    this.update = new Subject();
-    this.preRender = new Subject();
-    this.render = new Subject();
+    this._preRender.next({
+      type: 'PreRender',
+      camera: this.camera
+    });
 
-    gameLoop.subscribe(action => {
-      this.update.next({
-        type: 'Update',
-        time: action.time
-      });
-
-      this.preRender.next({
-        type: 'PreRender',
-        camera: camera
-      });
-
-      this.render.next({
-        type: 'Render'
-      })
-    })
+    this._renderer.render(this.scene, this.camera);
   }
 }

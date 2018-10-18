@@ -32,8 +32,12 @@ export class BattleSceneView {
   threeDimensionLayer: ThreeDimensionLayer;
   hudLayer: HudLayer;
 
+  _gameLoop3D: Subject<GameLoop>;
+  _gameLoopHUD: Subject<GameLoop>;
+
   constructor(param: Param) {
-    const ownGameLoop = new OwnGameLoop(param.listener.gameLoop);
+    this._gameLoop3D = new Subject();
+    this._gameLoopHUD = new Subject();
 
     this.renderer = param.renderer;
 
@@ -41,7 +45,7 @@ export class BattleSceneView {
       renderer: param.renderer,
       resources: param.resources,
       listener: {
-        gameLoop: ownGameLoop.threeDimensionLayer
+        gameLoop: this._gameLoop3D
       },
       playerId: param.playerId,
       players: param.players
@@ -53,34 +57,22 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       listener: {
-        gameLoop: ownGameLoop.hudLayer,
+        gameLoop: this._gameLoopHUD,
         domEvent: param.listener.domEvent,
       },
       notifier: {
         battleAction: param.notifier.battleAction,
       }
     });
-  }
-}
 
-/**
- * 戦闘シーン全体のゲームループ制御
- * HUDレイヤーが上に表示されるように、以下の順番でゲームループが実行される
- *
- * (1)3Dレイヤーのゲームループ
- * (2)HUDレイヤーのゲームループ
- */
-class OwnGameLoop {
-  threeDimensionLayer: Subject<GameLoop>;
-  hudLayer: Subject<GameLoop>;
-
-  constructor(gameLoop: Observable<GameLoop>) {
-    this.threeDimensionLayer = new Subject();
-    this.hudLayer = new Subject();
-
-    gameLoop.subscribe(action => {
-      this.threeDimensionLayer.next(action);
-      this.hudLayer.next(action);
+    param.listener.gameLoop.subscribe(action => {
+      this._gameLoop(action);
     });
+  }
+
+  /** ゲームループ */
+  _gameLoop(action: GameLoop): void {
+    this._gameLoop3D.next(action);
+    this._gameLoopHUD.next(action);
   }
 }

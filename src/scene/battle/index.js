@@ -4,14 +4,19 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
-import {domEventHandler} from "./action-handler/dom-event";
-import {battleSceneActionHandler} from "./action-handler/battle-scene/index";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ProgressBattle} from "./progress-battle/progress-battle";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
+import type {Resize} from "../../action/dom-event/resize";
+import {resize} from "./resize";
+import {stateHistoryAnimation} from "./animation/state-history";
+import {play} from "../../tween/multi-tween/play";
+import type {DecideBattery} from "../../action/battle-scene/decide-battery";
+import {invisibleUI} from "./animation/invisible-ui/invisible-u-i";
+import {createInitialState} from "./state/initial-state";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -31,28 +36,15 @@ type Param = {
  * 戦闘画面アプリケーション
  */
 export class BattleScene {
-  /** ビュー */
   _view: BattleSceneView;
-  /** 戦闘画面全体の状態 */
   _state: BattleSceneState;
-  /** 戦闘画面アクションのサブジェクト */
-  _battleActionSubject: Subject<BattleSceneAction>;
+  _battleAction: Subject<BattleSceneAction>;
+  _progressBattle: ProgressBattle;
 
   constructor(param: Param) {
-    this._state = {
-      playerId: param.playerId,
-      canOperation: true
-    };
-
-    param.listener.domEvent.subscribe(action => {
-      domEventHandler(action, this._view, this._state);
-    });
-
-    this._battleActionSubject = new Subject();
-    this._battleActionSubject.subscribe(action => {
-      battleSceneActionHandler(action, this._view, this._state, param.progressBattle);
-    });
-
+    this._state = createInitialState(param.playerId);
+    this._battleAction = new Subject();
+    this._progressBattle = param.progressBattle;
     this._view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
@@ -63,13 +55,46 @@ export class BattleScene {
         domEvent: param.listener.domEvent,
       },
       notifier: {
-        battleAction: this._battleActionSubject,
+        battleAction: this._battleAction,
       }
     });
 
-    this._battleActionSubject.next({
-      type: 'startBattleScene',
-      initialState: param.initialState
+    param.listener.domEvent.subscribe(action => {
+      if (action.type === 'resize') {
+        this._resize(action);
+      }
     });
+
+    this._battleAction.subscribe(action => {
+      if (action.type === 'decideBattery') {
+        this._decideBattery(action);
+      }
+    });
+
+    const startAnimation = stateHistoryAnimation(this._view, this._state, param.initialState);
+    play(startAnimation);
   };
+
+  /** リサイズ */
+  _resize(action: Resize): void {
+    resize(this._view);
+  }
+
+  /** バッテリー決定 */
+  async _decideBattery(action: DecideBattery): Promise<void> {
+    if (!this._state.canOperation) {
+      return;
+    }
+
+    this._state.canOperation = false;
+
+    await play(invisibleUI(this._view));
+    const updateState = await this._progressBattle({
+      type: 'BATTERY_COMMAND',
+      battery: action.battery
+    });
+    await play(stateHistoryAnimation(this._view, this._state, updateState));
+
+    this._state.canOperation = true;
+  }
 }
