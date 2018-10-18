@@ -38,9 +38,12 @@ export class ThreeDimensionLayer {
   enemySprite: ArmDozerSprite;
 
   constructor(param: Param) {
+    this.scene = new THREE.Scene();
+    this.camera = createCamera();
+
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-    const ownGameLoop = new OwnGameLoop(param.listener.gameLoop, () => this.camera);
+    const ownGameLoop = new OwnGameLoop(param.listener.gameLoop, this.camera);
     const gameObjectAction: Observable<GameObjectAction> = merge(
       ownGameLoop.update,
       ownGameLoop.preRender
@@ -48,9 +51,6 @@ export class ThreeDimensionLayer {
     ownGameLoop.render.subscribe(() => {
       param.renderer.render(this.scene, this.camera);
     });
-
-    this.scene = new THREE.Scene();
-    this.camera = createCamera();
 
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
@@ -80,9 +80,9 @@ class OwnGameLoop {
    * コンストラクタ
    *
    * @param gameLoop 起点となるゲームループ
-   * @param activeCamera 現在有効なカメラを取得するためのコールバック関数
+   * @param camera カメラ
    */
-  constructor(gameLoop: Observable<GameLoop>, activeCamera: () => THREE.Camera) {
+  constructor(gameLoop: Observable<GameLoop>, camera: THREE.Camera) {
     this.update = new Subject();
     this.preRender = new Subject();
     this.render = new Subject();
@@ -95,7 +95,7 @@ class OwnGameLoop {
 
       this.preRender.next({
         type: 'PreRender',
-        camera: activeCamera()
+        camera: camera
       });
 
       this.render.next({

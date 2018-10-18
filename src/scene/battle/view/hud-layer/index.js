@@ -59,19 +59,19 @@ export class HudLayer {
   enemyDamageIndicator: DamageIndicator;
 
   constructor(param: Param) {
+    this.scene = new THREE.Scene();
+    this.camera = createCamera();
+
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
     const ownGameLoop = new OwnGameLoop(param.listener.gameLoop);
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      toOverlapObservable(param.listener.domEvent, param.renderer, () => this.camera),
+      toOverlapObservable(param.listener.domEvent, param.renderer, this.camera),
       ownGameLoop.update
     );
     ownGameLoop.render.subscribe(() => {
       param.renderer.render(this.scene, this.camera);
     });
-
-    this.scene = new THREE.Scene();
-    this.camera = createCamera();
 
     this.batterySelector = createBatterySelector({
       resources: param.resources,
