@@ -16,6 +16,7 @@ import {stateHistoryAnimation} from "./animation/state-history";
 import {play} from "../../tween/multi-tween/play";
 import type {DecideBattery} from "../../action/battle-scene/decide-battery";
 import {invisibleUI} from "./animation/invisible-ui/invisible-u-i";
+import {createInitialState} from "./state/initial-state";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -41,10 +42,7 @@ export class BattleScene {
   _progressBattle: ProgressBattle;
 
   constructor(param: Param) {
-    this._state = {
-      playerId: param.playerId,
-      canOperation: true
-    };
+    this._state = createInitialState(param.playerId);
     this._battleAction = new Subject();
     this._progressBattle = param.progressBattle;
     this._view = new BattleSceneView({
