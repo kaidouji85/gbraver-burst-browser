@@ -24,6 +24,7 @@ import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/b
 import type {Update} from "../../../../action/game-loop/update";
 import type {Render} from "../../../../action/game-loop/render";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -58,20 +59,25 @@ export class HudLayer {
   enemyBatteryNumber: BatteryNumber;
   enemyDamageIndicator: DamageIndicator;
 
+  _update: Subject<Update>;
+  _preRender: Subject<PreRender>;
+  _renderer: THREE.WebGLRenderer;
+
   constructor(param: Param) {
     this.scene = new THREE.Scene();
     this.camera = createCamera();
 
+    this._update = new Subject();
+    this._preRender = new Subject();
+    this._renderer = param.renderer;
+
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-    const ownGameLoop = new OwnGameLoop(param.listener.gameLoop);
     const gameObjectAction: Observable<GameObjectAction> = merge(
       toOverlapObservable(param.listener.domEvent, param.renderer, this.camera),
-      ownGameLoop.update
+      this._update,
+      this._preRender
     );
-    ownGameLoop.render.subscribe(() => {
-      param.renderer.render(this.scene, this.camera);
-    });
 
     this.batterySelector = createBatterySelector({
       resources: param.resources,
@@ -116,38 +122,25 @@ export class HudLayer {
       listener: gameObjectAction
     });
     this.scene.add(this.enemyDamageIndicator.getObject3D());
-  }
-}
 
-/**
- * HUDレイヤーのゲームループ制御
- * 本レイヤーでは以下の順番でストリームが呼ばれる
- *
- * (1)update
- * (2)render
- */
-class OwnGameLoop {
-  update: Subject<Update>;
-  render: Subject<Render>;
 
-  /**
-   * コンストラクタ
-   *
-   * @param gameLoop 起点となるゲームループ
-   */
-  constructor(gameLoop: Observable<GameLoop>) {
-    this.update = new Subject();
-    this.render = new Subject();
-
-    gameLoop.subscribe(action => {
-      this.update.next({
-        type: 'Update',
-        time: action.time
-      });
-
-      this.render.next({
-        type: 'Render'
-      });
+    param.listener.gameLoop.subscribe(action => {
+      this._gameLoop(action);
     });
+  }
+
+  /** ゲームループ */
+  _gameLoop(action: GameLoop): void {
+    this._update.next({
+      type: 'Update',
+      time: action.time
+    });
+
+    this._preRender.next({
+      type: 'PreRender',
+      camera: this.camera
+    });
+
+    this._renderer.render(this.scene, this.camera);
   }
 }
