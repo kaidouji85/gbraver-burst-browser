@@ -22,7 +22,6 @@ import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-i
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
 import type {Update} from "../../../../action/game-loop/update";
-import type {Render} from "../../../../action/game-loop/render";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 
