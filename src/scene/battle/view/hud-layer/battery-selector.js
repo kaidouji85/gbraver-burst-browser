@@ -16,7 +16,7 @@ type Param = {
 
 /** バッテリーセレクタを生成する */
 export function createBatterySelector(param: Param): BatterySelector {
-  return new BatterySelector({
+  const selector = new BatterySelector({
     listener: param.listener,
     maxBattery: param.playerInfo.armdozer.maxBattery,
     resources: param.resources,
@@ -28,8 +28,11 @@ export function createBatterySelector(param: Param): BatterySelector {
     },
     onOkButtonPush: () => {
       param.notifier.next({
-        type: 'decideBattery'
+        type: 'decideBattery',
+        battery: selector.getBattery()
       });
     }
   });
+
+  return selector;
 }

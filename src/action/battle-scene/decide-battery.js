@@ -2,5 +2,6 @@
 
 /** バッテリー決定 */
 export type DecideBattery = {
-  type: 'decideBattery'
+  type: 'decideBattery',
+  battery: number
 };

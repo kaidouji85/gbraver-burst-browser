@@ -91,7 +91,7 @@ export class BattleScene {
     await play(invisibleUI(this._view));
     const updateState = await this._progressBattle({
       type: 'BATTERY_COMMAND',
-      battery: this._view.hudLayer.batterySelector.getBattery()
+      battery: action.battery
     });
     await play(stateHistoryAnimation(this._view, this._state, updateState));
 
