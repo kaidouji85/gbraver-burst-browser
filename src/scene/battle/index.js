@@ -77,7 +77,7 @@ export class BattleScene {
 
   /** リサイズ */
   _resize(action: Resize): void {
-    resize(this._view);
+    resize(this._view, action);
   }
 
   /** バッテリー決定 */

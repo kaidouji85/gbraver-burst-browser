@@ -25,16 +25,16 @@ export type TouchRaycaster = {
  * タッチイベントからレイキャストを生成する
  *
  * @param event タッチベント
- * @param renderer three.jsのレンダー
+ * @param rendererDOM レンダラがバインドされているHTML要素
  * @param camera カメラ
  * @return タッチイベントから作成したレイキャスト
  */
-export function createTouchEventRaycaster(event: TouchEvent, renderer: THREE.WebGLRenderer, camera: THREE.Camera): TouchRaycastContainer {
+export function createTouchEventRaycaster(event: TouchEvent, rendererDOM: HTMLElement, camera: THREE.Camera): TouchRaycastContainer {
   const touchToRaycaster = (touchList: TouchList): TouchRaycaster[] =>
     Object.values(touchList)
       .map(v => {
         const touch: Touch = v instanceof Touch ? v : new Touch();
-        const position = getTouchPosition(touch, renderer);
+        const position = getTouchPosition(touch, rendererDOM);
         return {
           identifier: touch.identifier,
           raycaster: createRaycaster(position, camera)

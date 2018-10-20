@@ -8,6 +8,8 @@ import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
+import type {Render} from "../../../action/game-loop/render";
+import {Renderer} from "../../../game-object/renderer";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -28,7 +30,7 @@ type Param = {
  * 戦闘画面のビュー
  */
 export class BattleSceneView {
-  renderer: THREE.WebGLRenderer;
+  renderer: Renderer;
   threeDimensionLayer: ThreeDimensionLayer;
   hudLayer: HudLayer;
 
@@ -36,24 +38,33 @@ export class BattleSceneView {
   _gameLoopHUD: Subject<GameLoop>;
 
   constructor(param: Param) {
+    const render: Subject<Render> = new Subject();
     this._gameLoop3D = new Subject();
     this._gameLoopHUD = new Subject();
 
-    this.renderer = param.renderer;
+    this.renderer = new Renderer({
+      renderer: param.renderer,
+      listener: {
+        domEvent: param.listener.domEvent,
+        render: render
+      }
+    });
 
     this.threeDimensionLayer = new ThreeDimensionLayer({
-      renderer: param.renderer,
       resources: param.resources,
+      playerId: param.playerId,
+      players: param.players,
       listener: {
         gameLoop: this._gameLoop3D
       },
-      playerId: param.playerId,
-      players: param.players
+      notifier: {
+        render: render
+      }
     });
 
     this.hudLayer = new HudLayer({
       resources: param.resources,
-      renderer: param.renderer,
+      rendererDOM: param.renderer.domElement,
       playerId: param.playerId,
       players: param.players,
       listener: {
@@ -62,6 +73,7 @@ export class BattleSceneView {
       },
       notifier: {
         battleAction: param.notifier.battleAction,
+        render: render
       }
     });
 
