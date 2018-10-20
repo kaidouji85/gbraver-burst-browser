@@ -2,7 +2,6 @@
 
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {createRender} from "../render/renderer";
-import {bindDom} from "../render/bind-dom";
 import {loadAllResource} from "../resource";
 import {createBattleScene} from "./create-battle-scene";
 import {createGameLoopListener} from "../action/game-loop/create-listener";
@@ -17,7 +16,9 @@ export async function main() {
   const resources = await loadAllResource('');
 
   const renderer = createRender();
-  bindDom(renderer);
+  if (renderer.domElement && document.body) {
+    document.body.appendChild(renderer.domElement);
+  }
 
   const gameLoopListener = createGameLoopListener();
   const domEventListener = createDOMEventListener(renderer.domElement);
