@@ -73,7 +73,7 @@ export class HudLayer {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      toOverlapObservable(param.listener.domEvent, param.renderer, this.camera),
+      toOverlapObservable(param.listener.domEvent, param.renderer.domElement, this.camera),
       this._update,
       this._preRender
     );
