@@ -1,5 +1,34 @@
 // @flow
 
 export type Resize = {
-  type: 'resize'
+  type: 'resize',
+  width: number,
+  height: number
 };
+
+/** リサイズ時の画面横幅 */
+export function getWidth(): number {
+  if (document.documentElement) {
+    // iPhoneではリサイズイベント発火後に、window.innerWidthに正しい値が反映されないが、
+    // document.documentElement.clientWidthは正しく値が取得できる
+    return document.documentElement.clientWidth;
+  }
+
+  // document.documentElementが存在しないことが理論上あるので、
+  // その時にはwindow.innerWidthを使う
+  return window.innerWidth;
+}
+
+/** リサイズ時の画面高 */
+export function getHeight(): number {
+  if (document.documentElement) {
+    // iPhoneではリサイズイベント発火後に、window.innerHeightに正しい値が反映されないが、
+    // document.documentElement.clientHeightは正しく値が取得できる
+
+    return document.documentElement.clientHeight;
+  }
+
+  // document.documentElementが存在しないことが理論上あるので、
+  // その時にはwindow.iinnerHeightを使う
+  return window.innerHeight;
+}

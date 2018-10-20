@@ -2,42 +2,12 @@
 
 import {BattleSceneView} from "./view/index";
 import {onResizeOrthographicCamera, onResizePerspectiveCamera} from "../../camera/resize";
+import type {Resize} from "../../action/dom-event/resize";
 
 
 /** リサイズ時の処理 */
-export function resize(view: BattleSceneView): void {
-  const width = getWidth();
-  const height = getHeight();
-
-  view.renderer.setSize(width, height);
-  onResizePerspectiveCamera(view.threeDimensionLayer.camera, width, height);
-  onResizeOrthographicCamera(view.hudLayer.camera, width, height);
-}
-
-
-/** リサイズ時の画面横幅 */
-function getWidth(): number {
-  if (document.documentElement) {
-    // iPhoneではリサイズイベント発火後に、window.innerWidthに正しい値が反映されないが、
-    // document.documentElement.clientWidthは正しく値が取得できる
-    return document.documentElement.clientWidth;
-  }
-
-  // document.documentElementが存在しないことが理論上あるので、
-  // その時にはwindow.innerWidthを使う
-  return window.innerWidth;
-}
-
-/** リサイズ時の画面高 */
-function getHeight(): number {
-  if (document.documentElement) {
-    // iPhoneではリサイズイベント発火後に、window.innerHeightに正しい値が反映されないが、
-    // document.documentElement.clientHeightは正しく値が取得できる
-
-    return document.documentElement.clientHeight;
-  }
-
-  // document.documentElementが存在しないことが理論上あるので、
-  // その時にはwindow.iinnerHeightを使う
-  return window.innerHeight;
+export function resize(view: BattleSceneView, action: Resize): void {
+  view.renderer.setSize(action.width, action.height);
+  onResizePerspectiveCamera(view.threeDimensionLayer.camera, action.width, action.height);
+  onResizeOrthographicCamera(view.hudLayer.camera, action.width, action.height);
 }

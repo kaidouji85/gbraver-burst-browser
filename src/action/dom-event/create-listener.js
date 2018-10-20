@@ -3,6 +3,7 @@
 import type {DOMEvent} from "./index";
 import {fromEvent, merge, Observable} from "rxjs";
 import {map, publish} from 'rxjs/operators';
+import {getHeight, getWidth} from "./resize";
 
 /**
  * DOMイベントリスナを生成する
@@ -48,7 +49,11 @@ export function createDOMEventListener(renderDom: HTMLElement): Observable<DOMEv
     }));
 
   const resize = fromEvent(window, 'resize').pipe(
-    map(v => ({type: 'resize'}))
+    map(v => ({
+      type: 'resize',
+      width: getWidth(),
+      height: getHeight()
+    }))
   );
 
   return merge(
