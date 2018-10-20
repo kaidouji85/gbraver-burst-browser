@@ -8,22 +8,25 @@ import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import {createCamera} from "./camera";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Subject} from "rxjs";
+import {merge, Observable, Observer, Subject} from "rxjs";
 import {filter, map} from 'rxjs/operators';
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
+import type {Render} from "../../../../action/game-loop/render";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
   players: Player[],
   listener: {
     gameLoop: Observable<GameLoop>,
   },
+  notifier: {
+    render: Observer<Render>
+  }
 };
 
 /**
@@ -38,7 +41,7 @@ export class ThreeDimensionLayer {
 
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
-  _renderer: THREE.WebGLRenderer;
+  _render: Observer<Render>;
 
   constructor(param: Param) {
     this.scene = new THREE.Scene();
@@ -46,7 +49,7 @@ export class ThreeDimensionLayer {
 
     this._update = new Subject();
     this._preRender = new Subject();
-    this._renderer = param.renderer;
+    this._render = param.notifier.render;
 
     const playerInfo = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemyInfo = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
@@ -83,6 +86,10 @@ export class ThreeDimensionLayer {
       camera: this.camera
     });
 
-    this._renderer.render(this.scene, this.camera);
+    this._render.next({
+      type: 'Render',
+      scene: this.scene,
+      camera: this.camera
+    });
   }
 }

@@ -24,11 +24,12 @@ import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/b
 import type {Update} from "../../../../action/game-loop/update";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {Render} from "../../../../action/game-loop/render";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
-  renderer: THREE.WebGLRenderer,
+  rendererDOM: HTMLElement,
   playerId: PlayerId,
   players: Player[],
   listener: {
@@ -36,7 +37,8 @@ export type Param = {
     domEvent: Observable<DOMEvent>,
   },
   notifier: {
-    battleAction: Observer<BattleSceneAction>
+    battleAction: Observer<BattleSceneAction>,
+    render: Observer<Render>
   }
 };
 
@@ -60,7 +62,7 @@ export class HudLayer {
 
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
-  _renderer: THREE.WebGLRenderer;
+  _render: Observer<Render>;
 
   constructor(param: Param) {
     this.scene = new THREE.Scene();
@@ -68,12 +70,12 @@ export class HudLayer {
 
     this._update = new Subject();
     this._preRender = new Subject();
-    this._renderer = param.renderer;
+    this._render = param.notifier.render;
 
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      toOverlapObservable(param.listener.domEvent, param.renderer.domElement, this.camera),
+      toOverlapObservable(param.listener.domEvent, param.rendererDOM, this.camera),
       this._update,
       this._preRender
     );
@@ -140,6 +142,10 @@ export class HudLayer {
       camera: this.camera
     });
 
-    this._renderer.render(this.scene, this.camera);
+    this._render.next({
+      type: 'Render',
+      scene: this.scene,
+      camera: this.camera
+    });
   }
 }
