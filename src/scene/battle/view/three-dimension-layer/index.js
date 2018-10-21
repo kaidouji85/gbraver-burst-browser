@@ -6,7 +6,7 @@ import {createEnemySprite} from "./enemy-sprite";
 import type {ArmDozerSprite} from '../../../../game-object/armdozer/common/armdozer-sprite';
 import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
-import {createCamera} from "./camera";
+import {createCamera} from "../../../../game-object/camera/battle-3d/create-camera";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {merge, Observable, Observer, Subject} from "rxjs";
 import {filter, map} from 'rxjs/operators';
@@ -15,6 +15,8 @@ import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../action/game-loop/render";
+import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
+import type {DOMEvent} from "../../../../action/dom-event";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -22,6 +24,7 @@ type Param = {
   playerId: PlayerId,
   players: Player[],
   listener: {
+    domEvent: Observable<DOMEvent>,
     gameLoop: Observable<GameLoop>,
   },
   notifier: {
@@ -34,7 +37,7 @@ type Param = {
  */
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
-  camera: THREE.PerspectiveCamera;
+  camera: Battle3DCamera;
   stage: Stage;
   playerSprite: ArmDozerSprite;
   enemySprite: ArmDozerSprite;
@@ -45,7 +48,11 @@ export class ThreeDimensionLayer {
 
   constructor(param: Param) {
     this.scene = new THREE.Scene();
-    this.camera = createCamera();
+    this.camera = new Battle3DCamera({
+      listener: {
+        domEvent: param.listener.domEvent
+      }
+    });
 
     this._update = new Subject();
     this._preRender = new Subject();
@@ -83,13 +90,13 @@ export class ThreeDimensionLayer {
 
     this._preRender.next({
       type: 'PreRender',
-      camera: this.camera
+      camera: this.camera.getCamera()
     });
 
     this._render.next({
       type: 'Render',
       scene: this.scene,
-      camera: this.camera
+      camera: this.camera.getCamera()
     });
   }
 }
