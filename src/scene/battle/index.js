@@ -10,8 +10,6 @@ import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
-import type {Resize} from "../../action/dom-event/resize";
-import {resize} from "./resize";
 import {stateHistoryAnimation} from "./animation/state-history";
 import {play} from "../../tween/multi-tween/play";
 import type {DecideBattery} from "../../action/battle-scene/decide-battery";
@@ -59,12 +57,6 @@ export class BattleScene {
       }
     });
 
-    param.listener.domEvent.subscribe(action => {
-      if (action.type === 'resize') {
-        this._resize(action);
-      }
-    });
-
     this._battleAction.subscribe(action => {
       if (action.type === 'decideBattery') {
         this._decideBattery(action);
@@ -74,11 +66,6 @@ export class BattleScene {
     const startAnimation = stateHistoryAnimation(this._view, this._state, param.initialState);
     play(startAnimation);
   };
-
-  /** リサイズ */
-  _resize(action: Resize): void {
-    resize(this._view, action);
-  }
 
   /** バッテリー決定 */
   async _decideBattery(action: DecideBattery): Promise<void> {

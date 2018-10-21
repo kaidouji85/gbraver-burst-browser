@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/index';
-import {createCamera} from "./camera";
+import {createCamera} from "../../../../game-object/camera/battle-hud/camera";
 import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {createBatterySelector} from "./battery-selector";
@@ -25,6 +25,7 @@ import type {Update} from "../../../../action/game-loop/update";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../action/game-loop/render";
+import {BattleHUDCamera} from "../../../../game-object/camera/battle-hud";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -49,7 +50,7 @@ export type Param = {
  */
 export class HudLayer {
   scene: THREE.Scene;
-  camera: THREE.OrthographicCamera;
+  camera: BattleHUDCamera;
   batterySelector: BatterySelector;
   playerGauge: Gauge;
   enemyGauge: Gauge;
@@ -66,7 +67,11 @@ export class HudLayer {
 
   constructor(param: Param) {
     this.scene = new THREE.Scene();
-    this.camera = createCamera();
+    this.camera = new BattleHUDCamera({
+      listener: {
+        domEvent: param.listener.domEvent
+      }
+    });
 
     this._update = new Subject();
     this._preRender = new Subject();
@@ -75,7 +80,7 @@ export class HudLayer {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      toOverlapObservable(param.listener.domEvent, param.rendererDOM, this.camera),
+      toOverlapObservable(param.listener.domEvent, param.rendererDOM, this.camera.getCamera()),
       this._update,
       this._preRender
     );
@@ -139,13 +144,13 @@ export class HudLayer {
 
     this._preRender.next({
       type: 'PreRender',
-      camera: this.camera
+      camera: this.camera.getCamera()
     });
 
     this._render.next({
       type: 'Render',
       scene: this.scene,
-      camera: this.camera
+      camera: this.camera.getCamera()
     });
   }
 }
