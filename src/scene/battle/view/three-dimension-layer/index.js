@@ -6,7 +6,6 @@ import {createEnemySprite} from "./enemy-sprite";
 import type {ArmDozerSprite} from '../../../../game-object/armdozer/common/armdozer-sprite';
 import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
-import {createCamera} from "../../../../game-object/camera/battle-3d/create-camera";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {merge, Observable, Observer, Subject} from "rxjs";
 import {filter, map} from 'rxjs/operators';
