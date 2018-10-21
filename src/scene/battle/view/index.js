@@ -55,6 +55,7 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       listener: {
+        domEvent: param.listener.domEvent,
         gameLoop: this._gameLoop3D
       },
       notifier: {
@@ -68,8 +69,8 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       listener: {
-        gameLoop: this._gameLoopHUD,
         domEvent: param.listener.domEvent,
+        gameLoop: this._gameLoopHUD,
       },
       notifier: {
         battleAction: param.notifier.battleAction,
