@@ -1,7 +1,6 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/index';
-import {createCamera} from "../../../../game-object/camera/battle-hud/camera";
 import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {createBatterySelector} from "./battery-selector";
