@@ -1,7 +1,7 @@
 // @flow
 
 import {loadServiceWorker} from "../service-worker/load-service-worker";
-import {createRender} from "../render/renderer";
+import {createRender} from "../render/create-render";
 import {loadAllResource} from "../resource";
 import {createBattleScene} from "./create-battle-scene";
 import {createGameLoopListener} from "../action/game-loop/create-listener";
