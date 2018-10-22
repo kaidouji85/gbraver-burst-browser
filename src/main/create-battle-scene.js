@@ -28,19 +28,14 @@ export function createBattleScene(param: Param): BattleScene {
     armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
   };
   const npc: NPC = NeoLandozer;
-  const enemy: Player = {
-    playerId: 'test02',
-    armdozer: npc.armdozer
-  };
-  const battleRoom = new OfflineBattleRoom(player, enemy, npc.routine);
-  const initialState = battleRoom.start();
+  const battleRoom = new OfflineBattleRoom(player, npc);
 
   return new BattleScene({
     resources: param.resources,
     renderer: param.renderer,
-    playerId: player.playerId,
-    players: [player, enemy],
-    initialState: initialState,
+    playerId: battleRoom.player.playerId,
+    players: [battleRoom.player, battleRoom.enemy],
+    initialState: battleRoom.stateHistory,
     progressBattle: async (command: Command) => {
       return battleRoom.progress(command);
     },
