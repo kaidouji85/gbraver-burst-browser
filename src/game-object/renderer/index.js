@@ -5,6 +5,7 @@ import type {DOMEvent} from "../../action/dom-event";
 import type {Resize} from "../../action/dom-event/resize";
 import type {Render} from "../../action/game-loop/render";
 import {Observable} from "rxjs";
+import {onWebGLRendererResize} from "../../render/resize";
 
 type Param = {
   renderer: THREE.WebGLRenderer,
@@ -33,7 +34,7 @@ export class Renderer {
 
   /** リサイズ */
   _resize(action: Resize): void {
-    this._renderer.setSize(action.width, action.height);
+    onWebGLRendererResize(this._renderer, action.width, action.height, window.devicePixelRatio);
   }
 
   /** レンダリング */
