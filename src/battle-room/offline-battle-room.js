@@ -2,32 +2,40 @@
 import type {BattleRoom} from "../scene/battle/progress-battle/progress-battle";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Command} from "gbraver-burst-core/lib/command/command";
-import type {NPCRoutine} from "../npc/npc";
+import type {NPC, NPCRoutine} from "../npc/npc";
 import {progress, start} from 'gbraver-burst-core';
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import type {PlayerCommand} from "gbraver-burst-core/lib/command/player-command";
+import type {InitialState} from "./battle-room";
 
-export class OfflineBattleRoom {
+export class OfflineBattleRoom implements BattleRoom{
   _player: Player;
   _enemy: Player;
   _routine: NPCRoutine;
   _stateHistory: GameState[];
 
-  constructor(player: Player, enemy: Player, routine: NPCRoutine) {
+  constructor(player: Player, npc: NPC) {
     this._player = player;
-    this._enemy = enemy;
-    this._routine = routine;
+    this._enemy = {
+      playerId: `enemy-of-${player.playerId}`,
+      armdozer: npc.armdozer
+    };
+    this._routine = npc.routine;
     this._stateHistory = [];
   }
 
-  start(): GameState[] {
-    const initialState = start(this._player, this._enemy);
-    this._stateHistory = initialState;
-    return initialState;
+  /** 戦闘開始 */
+  async start(): Promise<InitialState> {
+    this._stateHistory = start(this._player, this._enemy);
+    return {
+      playerId: this._player.playerId,
+      players: [this._player, this._enemy],
+      stateHistory: this._stateHistory
+    };
   }
 
-
-  progress(command: Command): GameState[] {
+  /** 戦闘を進める */
+  async progress(command: Command): Promise<GameState[]> {
     if (this._stateHistory.length <= 0) {
       return [];
     }
