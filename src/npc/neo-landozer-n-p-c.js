@@ -13,7 +13,7 @@ const ZERO_BATTERY = {
 };
 
 /** ネオランドーザ NPC */
-export const NeoLandozer: NPC = {
+export const NeoLandozerNPC: NPC = {
   armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) || ArmDozers[0],
 
   routine(enemyId: PlayerId, gameStateHistory: GameState[]): Command {

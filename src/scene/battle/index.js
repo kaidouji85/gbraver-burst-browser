@@ -2,10 +2,7 @@
 import type {Resources} from '../../resource/index';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import {ProgressBattle} from "./progress-battle/progress-battle";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
@@ -15,15 +12,14 @@ import {play} from "../../tween/multi-tween/play";
 import type {DecideBattery} from "../../action/battle-scene/decide-battery";
 import {invisibleUI} from "./animation/invisible-ui/invisible-u-i";
 import {createInitialState} from "./state/initial-state";
+import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   renderer: THREE.WebGLRenderer,
-  playerId: PlayerId,
-  players: Player[],
-  initialState: GameState[],
-  progressBattle: ProgressBattle,
+  battleRoom: BattleRoom,
+  initialState: InitialState,
   listener: {
     domEvent: Observable<DOMEvent>,
     gameLoop: Observable<GameLoop>,
@@ -37,17 +33,17 @@ export class BattleScene {
   _view: BattleSceneView;
   _state: BattleSceneState;
   _battleAction: Subject<BattleSceneAction>;
-  _progressBattle: ProgressBattle;
+  _battleRoom: BattleRoom;
 
   constructor(param: Param) {
-    this._state = createInitialState(param.playerId);
+    this._state = createInitialState(param.initialState.playerId);
     this._battleAction = new Subject();
-    this._progressBattle = param.progressBattle;
+    this._battleRoom = param.battleRoom;
     this._view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
-      playerId: param.playerId,
-      players: param.players,
+      playerId: param.initialState.playerId,
+      players: param.initialState.players,
       listener: {
         gameLoop: param.listener.gameLoop,
         domEvent: param.listener.domEvent,
@@ -63,7 +59,7 @@ export class BattleScene {
       }
     });
 
-    const startAnimation = stateHistoryAnimation(this._view, this._state, param.initialState);
+    const startAnimation = stateHistoryAnimation(this._view, this._state, param.initialState.stateHistory);
     play(startAnimation);
   };
 
@@ -76,7 +72,7 @@ export class BattleScene {
     this._state.canOperation = false;
 
     await play(invisibleUI(this._view));
-    const updateState = await this._progressBattle({
+    const updateState = await this._battleRoom.progress({
       type: 'BATTERY_COMMAND',
       battery: action.battery
     });
