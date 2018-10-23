@@ -24,12 +24,12 @@
   "license": "ISC",
   "dependencies": {
     "@tweenjs/tween.js": "^17.2.0",
-    "gbraver-burst-core": "0.2.8",
+    "gbraver-burst-core": "0.2.9",
     "ramda": "^0.25.0",
     "rxjs": "^6.3.3",
     "stats.js": "^0.17.0",
     "three": "^0.97.0",
-    "workbox-webpack-plugin": "3.6.2"
+    "workbox-webpack-plugin": "3.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
