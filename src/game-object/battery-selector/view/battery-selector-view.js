@@ -143,7 +143,7 @@ export class BatterySelectorView {
   /** バッテリースライダーの座標を更新する */
   _setPos(): void {
     this._group.position.x = 0;
-    this._group.position.y = -window.innerHeight / 2 + 104;
+    this._group.position.y = -window.innerHeight / 2 + 80;
   }
 
   /** 透明度を更新する */
