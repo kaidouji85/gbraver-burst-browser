@@ -9,7 +9,7 @@ import type {Resources} from "../../../resource";
 import * as R from 'ramda';
 
 export const CANVAS_SIZE = 256;
-export const MESH_SIZE = 150;
+export const MESH_SIZE = 400;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
@@ -35,6 +35,11 @@ export class PlayerGaugeView implements GaugeView {
     }
     this._setPos();
     this._updateLastEngagedModel(model);
+  }
+
+  /** カメラの真正面を向く */
+  lookAt(camera: THREE.Camera): void {
+    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -70,7 +75,8 @@ export class PlayerGaugeView implements GaugeView {
   }
 
   _setPos(): void {
-    this._canvasMesh.mesh.position.x = 92;
-    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - 40;
+    this._canvasMesh.mesh.position.x = 200;
+    this._canvasMesh.mesh.position.y = 320;
+    this._canvasMesh.mesh.position.y = 400;
   }
 }

@@ -8,6 +8,7 @@ import {refresh} from "./animation/regresh";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
+import type {PreRender} from "../../action/game-loop/pre-render";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -35,6 +36,8 @@ export class Gauge {
     param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
+      } else if (action.type === 'PreRender') {
+        this._preRender(action);
       }
     });
   }
@@ -53,5 +56,10 @@ export class Gauge {
   _update(action: Update): void {
     this._tween.update(action.time);
     this._view.engage(this._model);
+  }
+
+  /** プリレンダー */
+  _preRender(action: PreRender): void {
+    this._view.lookAt(action.camera);
   }
 }
