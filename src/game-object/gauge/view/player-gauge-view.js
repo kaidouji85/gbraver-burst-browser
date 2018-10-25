@@ -9,7 +9,7 @@ import type {Resources} from "../../../resource";
 import * as R from 'ramda';
 
 export const CANVAS_SIZE = 256;
-export const MESH_SIZE = 450;
+export const MESH_SIZE = 400;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
@@ -76,7 +76,7 @@ export class PlayerGaugeView implements GaugeView {
 
   _setPos(): void {
     this._canvasMesh.mesh.position.x = 200;
-    this._canvasMesh.mesh.position.y = 360;
+    this._canvasMesh.mesh.position.y = 300;
     this._canvasMesh.mesh.position.y = 400;
   }
 }
