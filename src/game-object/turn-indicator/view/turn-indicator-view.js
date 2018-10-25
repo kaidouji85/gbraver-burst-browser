@@ -8,7 +8,7 @@ import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {CanvasImageResource} from "../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
-export const MESH_SIZE = 200;
+export const MESH_SIZE = 160;
 export const CANVAS_SIZE = 128;
 
 /** ターンインジケータービュー */
