@@ -5,10 +5,10 @@ import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {createBatterySelector} from "./battery-selector";
 import {Gauge} from "../../../../game-object/gauge/gauge";
-import {createPlayerGauge} from "./player-gauge";
-import {createEnemyGauge} from "./enemy-gauge";
+import {createPlayerGauge} from "../three-dimension-layer/player-gauge";
+import {createEnemyGauge} from "../three-dimension-layer/enemy-gauge";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import {createTurnIndicator} from "./turn-indicator";
+import {createTurnIndicator} from "../three-dimension-layer/turn-indicator";
 import {BurstButton} from "../../../../game-object/burst-button/burst-button";
 import {createBurstButton} from "./burst-button";
 import {merge, Observable, Observer, Subject} from "rxjs";
@@ -92,42 +92,8 @@ export class HudLayer {
     });
     this.scene.add(this.batterySelector.getObject3D());
 
-    this.playerGauge = createPlayerGauge(param.resources, gameObjectAction, player);
-    this.scene.add(this.playerGauge.getObject3D());
-
-    this.enemyGauge = createEnemyGauge(param.resources, gameObjectAction, enemy);
-    this.scene.add(this.enemyGauge.getObject3D());
-
-    this.turnIndicator = createTurnIndicator(param.resources, gameObjectAction);
-    this.scene.add(this.turnIndicator.getObject3D());
-
     this.burstButton = createBurstButton(param.resources, gameObjectAction);
     this.scene.add(this.burstButton.getObject3D());
-
-    this.playerBatteryNumber = playerBatteryNumber({
-      resources: param.resources,
-      listener: gameObjectAction
-    });
-    this.scene.add(this.playerBatteryNumber.getObject3D());
-
-    this.playerDamageIndicator = playerDamageIndicator({
-      resources: param.resources,
-      listener: gameObjectAction
-    });
-    this.scene.add(this.playerDamageIndicator.getObject3D());
-
-    this.enemyBatteryNumber = enemyBatteryNumber({
-      resources: param.resources,
-      listener: gameObjectAction
-    });
-    this.scene.add(this.enemyBatteryNumber.getObject3D());
-
-    this.enemyDamageIndicator = enemyDamageIndicator({
-      resources: param.resources,
-      listener: gameObjectAction
-    });
-    this.scene.add(this.enemyDamageIndicator.getObject3D());
-
 
     param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);

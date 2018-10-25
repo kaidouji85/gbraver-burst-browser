@@ -11,7 +11,7 @@ import * as THREE from 'three';
 import * as R from 'ramda';
 
 export const CANVAS_SIZE = 128;
-export const MESH_SIZE = 100;
+export const MESH_SIZE = 180;
 
 /** プレイヤーのバッテリー数字ビュー */
 export class PlayerBatteryNumberView implements BatteryNumberView {
@@ -38,6 +38,11 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
     this._refreshPos();
     this._refreshOpacity(model);
     this._updateLastEngagedModel(model);
+  }
+
+  /** カメラの方向を向く */
+  lookAt(camera: THREE.Camera): void {
+    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを返す */
@@ -69,8 +74,9 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
 
   /** 座標を更新する */
   _refreshPos(): void {
-    this._canvasMesh.mesh.position.x = 96;
-    this._canvasMesh.mesh.position.y = 48;
+    this._canvasMesh.mesh.position.x = 150;
+    this._canvasMesh.mesh.position.y = 150;
+    this._canvasMesh.mesh.position.z = 420;
   }
 
   /** 透明度を更新する */

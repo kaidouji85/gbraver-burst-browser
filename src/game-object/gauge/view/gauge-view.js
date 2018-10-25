@@ -8,6 +8,9 @@ export interface GaugeView {
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void;
 
+  /** カメラの方向を向く */
+  lookAt(camera: THREE.Camera): void;
+
   /** ビューで使われているthree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
 }

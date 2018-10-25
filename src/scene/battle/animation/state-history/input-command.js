@@ -31,12 +31,12 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
 
   const start = createEmptyTween()
     .onStart(() => {
-      view.hudLayer.turnIndicator.turnChange(isPlayerTurn);
+      view.threeDimensionLayer.turnIndicator.turnChange(isPlayerTurn);
     });
   const openBatterySelector = view.hudLayer.batterySelector.open(initialValue, enableMax, okButtonLabel);
   const visibleBurstButton = view.hudLayer.burstButton.visible();
-  const refreshPlayer = view.hudLayer.playerGauge.refresh(player.armdozer.hp, player.armdozer.battery);
-  const refreshEnemy = view.hudLayer.enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery);
+  const refreshPlayer = view.threeDimensionLayer.playerGauge.refresh(player.armdozer.hp, player.armdozer.battery);
+  const refreshEnemy = view.threeDimensionLayer.enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery);
   const end = createEmptyTween();
 
   start.chain(
