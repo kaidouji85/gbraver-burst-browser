@@ -8,7 +8,7 @@ import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {CanvasImageResource} from "../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
-export const MESH_SIZE = 100;
+export const MESH_SIZE = 200;
 export const CANVAS_SIZE = 128;
 
 /** ターンインジケータービュー */
@@ -25,6 +25,11 @@ export class TurnIndicatorView {
     this._setPos();
   }
 
+  /** カメラの方向を向く */
+  lookAt(camera: THREE.Camera): void {
+    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
+  }
+
   /** ビューで使うthree.jsを返す */
   getObject3D(): THREE.Object3D {
     return this._canvasMesh.mesh;
@@ -38,7 +43,8 @@ export class TurnIndicatorView {
   /** 位置調整 */
   _setPos(): void {
     this._canvasMesh.mesh.position.x = 0;
-    this._canvasMesh.mesh.position.y = 48;
+    this._canvasMesh.mesh.position.y = 150;
+    this._canvasMesh.mesh.position.z = 420;
   }
 }
 
