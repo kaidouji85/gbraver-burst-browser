@@ -5,13 +5,13 @@ import type {Resources} from "../../../resource";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 import * as THREE from 'three';
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {CanvasImageResource} from "../../../resource/canvas-image";
+import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {drawNumberCenter} from "../../../canvas/number/number";
 import * as R from 'ramda';
 
 export const CANVAS_SIZE = 256;
-export const MESH_SIZE = 240;
+export const MESH_SIZE = 400;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
@@ -38,6 +38,11 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     this._refreshPos();
     this._refreshOpacity(model);
     this._updateLastEngagedModel(model);
+  }
+
+  /** カメラの方向を向く */
+  lookAt(camera: THREE.Camera): void {
+    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -70,8 +75,9 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
   /** 座標を更新する */
   _refreshPos(): void {
-    this._canvasMesh.mesh.position.y = 48;
-    this._canvasMesh.mesh.position.x = 120;
+    this._canvasMesh.mesh.position.x = 150;
+    this._canvasMesh.mesh.position.y = 150;
+    this._canvasMesh.mesh.position.z = 420;
   }
 
   /** 透明度を更新する */

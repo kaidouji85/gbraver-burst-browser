@@ -8,17 +8,16 @@ import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
 import {createEmptyTween} from "../../../../tween/empty-tween";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
-import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
 
 export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): MultiTween {
   const isAttacker = effect.attacker === sceneState.playerId;
   const playerBattery = isAttacker ? effect.attackerBattery : effect.defenderBattery;
   const enemyBattery = isAttacker ? effect.defenderBattery : effect.attackerBattery;
-  const damageIndicator = isAttacker ? view.hudLayer.enemyDamageIndicator : view.hudLayer.playerDamageIndicator;
+  const damageIndicator = isAttacker ? view.threeDimensionLayer.enemyDamageIndicator : view.threeDimensionLayer.playerDamageIndicator;
 
   const start = createEmptyTween();
-  const showPlayerBattery = view.hudLayer.playerBatteryNumber.popUp(playerBattery);
-  const showEnemyBattery = view.hudLayer.enemyBatteryNumber.popUp(enemyBattery);
+  const showPlayerBattery = view.threeDimensionLayer.playerBatteryNumber.popUp(playerBattery);
+  const showEnemyBattery = view.threeDimensionLayer.enemyBatteryNumber.popUp(enemyBattery);
   const showDamage = damageIndicatorAnimation(damageIndicator, isAttacker, effect.result);
   const end = createEmptyTween();
 

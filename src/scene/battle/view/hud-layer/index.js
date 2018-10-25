@@ -1,38 +1,45 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/index';
-import {createCamera} from "./camera";
 import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {createBatterySelector} from "./battery-selector";
 import {Gauge} from "../../../../game-object/gauge/gauge";
-import {createPlayerGauge} from "./player-gauge";
-import {createEnemyGauge} from "./enemy-gauge";
+import {createPlayerGauge} from "../three-dimension-layer/player-gauge";
+import {createEnemyGauge} from "../three-dimension-layer/enemy-gauge";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import {createTurnIndicator} from "./turn-indicator";
+import {createTurnIndicator} from "../three-dimension-layer/turn-indicator";
 import {BurstButton} from "../../../../game-object/burst-button/burst-button";
 import {createBurstButton} from "./burst-button";
 import {merge, Observable, Observer, Subject} from "rxjs";
-import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {GameObjectAction} from "../../../../action/game-object-action";
-import {divideIntoUpdateAndRender} from "../../../../action/game-loop/divide-into-update-and-render";
 import {BatteryNumber} from "../../../../game-object/battery-number/battery-number";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
+import type {Update} from "../../../../action/game-loop/update";
+import type {GameLoop} from "../../../../action/game-loop/game-loop";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {Render} from "../../../../action/game-loop/render";
+import {BattleHUDCamera} from "../../../../game-object/camera/battle-hud";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
-  renderer: THREE.WebGLRenderer,
+  rendererDOM: HTMLElement,
   playerId: PlayerId,
   players: Player[],
-  gameLoopListener: Observable<GameLoop>,
-  domEventListener: Observable<DOMEvent>,
-  battleActionNotifier: Observer<BattleSceneAction>
+  listener: {
+    gameLoop: Observable<GameLoop>,
+    domEvent: Observable<DOMEvent>,
+  },
+  notifier: {
+    battleAction: Observer<BattleSceneAction>,
+    render: Observer<Render>
+  }
 };
 
 /**
@@ -42,7 +49,7 @@ export type Param = {
  */
 export class HudLayer {
   scene: THREE.Scene;
-  camera: THREE.OrthographicCamera;
+  camera: BattleHUDCamera;
   batterySelector: BatterySelector;
   playerGauge: Gauge;
   enemyGauge: Gauge;
@@ -53,65 +60,62 @@ export class HudLayer {
   enemyBatteryNumber: BatteryNumber;
   enemyDamageIndicator: DamageIndicator;
 
+  _update: Subject<Update>;
+  _preRender: Subject<PreRender>;
+  _render: Observer<Render>;
+
   constructor(param: Param) {
+    this.scene = new THREE.Scene();
+    this.camera = new BattleHUDCamera({
+      listener: {
+        domEvent: param.listener.domEvent
+      }
+    });
+
+    this._update = new Subject();
+    this._preRender = new Subject();
+    this._render = param.notifier.render;
+
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-
-    const {update, render} = divideIntoUpdateAndRender(param.gameLoopListener);
-    this.scene = new THREE.Scene();
-    this.camera = createCamera();
-
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      toOverlapObservable(param.domEventListener, param.renderer, this.camera),
-      update
+      toOverlapObservable(param.listener.domEvent, param.rendererDOM, this.camera.getCamera()),
+      this._update,
+      this._preRender
     );
 
     this.batterySelector = createBatterySelector({
       resources: param.resources,
       listener: gameObjectAction,
-      notifier: param.battleActionNotifier,
+      notifier: param.notifier.battleAction,
       playerInfo: player
     });
     this.scene.add(this.batterySelector.getObject3D());
 
-    this.playerGauge = createPlayerGauge(param.resources, gameObjectAction, player);
-    this.scene.add(this.playerGauge.getObject3D());
-
-    this.enemyGauge = createEnemyGauge(param.resources, gameObjectAction, enemy);
-    this.scene.add(this.enemyGauge.getObject3D());
-
-    this.turnIndicator = createTurnIndicator(param.resources, gameObjectAction);
-    this.scene.add(this.turnIndicator.getObject3D());
-
     this.burstButton = createBurstButton(param.resources, gameObjectAction);
     this.scene.add(this.burstButton.getObject3D());
 
-    this.playerBatteryNumber = playerBatteryNumber({
-      resources: param.resources,
-      listener: gameObjectAction
+    param.listener.gameLoop.subscribe(action => {
+      this._gameLoop(action);
     });
-    this.scene.add(this.playerBatteryNumber.getObject3D());
+  }
 
-    this.playerDamageIndicator = playerDamageIndicator({
-      resources: param.resources,
-      listener: gameObjectAction
+  /** ゲームループ */
+  _gameLoop(action: GameLoop): void {
+    this._update.next({
+      type: 'Update',
+      time: action.time
     });
-    this.scene.add(this.playerDamageIndicator.getObject3D());
 
-    this.enemyBatteryNumber = enemyBatteryNumber({
-      resources: param.resources,
-      listener: gameObjectAction
+    this._preRender.next({
+      type: 'PreRender',
+      camera: this.camera.getCamera()
     });
-    this.scene.add(this.enemyBatteryNumber.getObject3D());
 
-    this.enemyDamageIndicator = enemyDamageIndicator({
-      resources: param.resources,
-      listener: gameObjectAction
-    });
-    this.scene.add(this.enemyDamageIndicator.getObject3D());
-
-    render.subscribe(action => {
-      param.renderer.render(this.scene, this.camera);
+    this._render.next({
+      type: 'Render',
+      scene: this.scene,
+      camera: this.camera.getCamera()
     });
   }
 }

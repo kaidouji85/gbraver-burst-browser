@@ -7,7 +7,7 @@ import {EnemyGaugeView} from "./view/enemy-gauge-view";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 
-type Param  = {
+type Param = {
   resources: Resources,
   listener: Observable<GameObjectAction>,
   hp: number,

@@ -22,22 +22,30 @@ export class PlayerShinBraverView implements ShinBraverView {
   }
 
   /** モデルをビューに反映させる */
-  engage(model: ShinBraverModel, camera: THREE.Camera): void {
-    this._mesh.position.set(
-      model.position.x,
-      model.position.y + MESH_HEIGHT / 2 + PADDING_BOTTOM,
-      model.position.z
-    );
+  engage(model: ShinBraverModel): void {
+    this._refreshPos(model);
 
     const texture = this._getTexture(model.animation.type);
     this._mesh.material.map = texture.animate(model.animation.frame);
+  }
 
+  /** カメラの真正面を向く */
+  lookAt(camera: THREE.Camera): void {
     this._mesh.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
     return this._mesh;
+  }
+
+  /** 座標を更新する */
+  _refreshPos(model: ShinBraverModel): void {
+    this._mesh.position.set(
+      model.position.x,
+      model.position.y + MESH_HEIGHT / 2 + PADDING_BOTTOM,
+      model.position.z
+    );
   }
 
   /** アニメーションタイプに応じたテクスチャを返す */

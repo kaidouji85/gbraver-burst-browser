@@ -8,50 +8,84 @@ import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
-import {createLayerGameLoop} from "./layer-game-loop";
+import type {Render} from "../../../action/game-loop/render";
+import {Renderer} from "../../../game-object/renderer";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  battleActionNotifier: Observer<BattleSceneAction>,
-  gameLoopListener: Observable<GameLoop>,
-  domEventListener: Observable<DOMEvent>,
   renderer: THREE.WebGLRenderer,
   playerId: PlayerId,
-  players: Player[]
+  players: Player[],
+  listener: {
+    gameLoop: Observable<GameLoop>,
+    domEvent: Observable<DOMEvent>,
+  },
+  notifier: {
+    battleAction: Observer<BattleSceneAction>,
+  },
 };
 
 /**
  * 戦闘画面のビュー
  */
 export class BattleSceneView {
-  /** レンダラ */
-  renderer: THREE.WebGLRenderer;
-  /** 3D空間レイヤー */
+  renderer: Renderer;
   threeDimensionLayer: ThreeDimensionLayer;
-  /** Head Up Display(HUD)レイヤー */
   hudLayer: HudLayer;
 
+  _gameLoop3D: Subject<GameLoop>;
+  _gameLoopHUD: Subject<GameLoop>;
+
   constructor(param: Param) {
-    const {hud, threeDimension} = createLayerGameLoop(param.gameLoopListener);
-    this.renderer = param.renderer;
+    const render: Subject<Render> = new Subject();
+    this._gameLoop3D = new Subject();
+    this._gameLoopHUD = new Subject();
+
+    this.renderer = new Renderer({
+      renderer: param.renderer,
+      listener: {
+        domEvent: param.listener.domEvent,
+        render: render
+      }
+    });
 
     this.threeDimensionLayer = new ThreeDimensionLayer({
-      renderer: param.renderer,
-      gameLoopListener: threeDimension,
       resources: param.resources,
-      playerId: param.playerId,
-      players: param.players
-    });
-    this.hudLayer = new HudLayer({
-
-      resources: param.resources,
-      renderer: param.renderer,
       playerId: param.playerId,
       players: param.players,
-      battleActionNotifier: param.battleActionNotifier,
-      gameLoopListener: hud,
-      domEventListener: param.domEventListener,
+      listener: {
+        domEvent: param.listener.domEvent,
+        gameLoop: this._gameLoop3D
+      },
+      notifier: {
+        render: render
+      }
     });
+
+    this.hudLayer = new HudLayer({
+      resources: param.resources,
+      rendererDOM: param.renderer.domElement,
+      playerId: param.playerId,
+      players: param.players,
+      listener: {
+        domEvent: param.listener.domEvent,
+        gameLoop: this._gameLoopHUD,
+      },
+      notifier: {
+        battleAction: param.notifier.battleAction,
+        render: render
+      }
+    });
+
+    param.listener.gameLoop.subscribe(action => {
+      this._gameLoop(action);
+    });
+  }
+
+  /** ゲームループ */
+  _gameLoop(action: GameLoop): void {
+    this._gameLoop3D.next(action);
+    this._gameLoopHUD.next(action);
   }
 }

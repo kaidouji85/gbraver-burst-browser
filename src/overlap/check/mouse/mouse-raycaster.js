@@ -13,12 +13,12 @@ export type MouseRaycaster = {
  * マウスイベントからレイキャストを生成する
  *
  * @param event マウスイベント
- * @param renderer three.jsレンダ
+ * @param rendererDOM レンダラがバインドされているHTML要素
  * @param camera カメラ
  * @return マウスのレイキャスト
  */
-export function createMouseRaycaster(event: MouseEvent, renderer: THREE.WebGLRenderer, camera: THREE.Camera): MouseRaycaster {
-  const mousePos: THREE.Vectoe2 = getMousePosition(event, renderer);
+export function createMouseRaycaster(event: MouseEvent, rendererDOM: HTMLElement, camera: THREE.Camera): MouseRaycaster {
+  const mousePos: THREE.Vectoe2 = getMousePosition(event, rendererDOM);
   return {
     raycaster: createRaycaster(mousePos, camera)
   };

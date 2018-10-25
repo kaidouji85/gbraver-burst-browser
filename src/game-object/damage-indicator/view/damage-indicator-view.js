@@ -7,6 +7,10 @@ import * as THREE from 'three';
 export interface DamageIndicatorView {
   /** モデルをビューに反映させる */
   engage(model: DamageIndicatorModel): void;
+
+  /** カメラの方向を向く */
+  lookAt(camera: THREE.Camera): void;
+
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
 }

@@ -68,22 +68,22 @@ const DUMMY_ACTION = {
  * DOMイベントストリームを当たり判定ストリームに変換する
  *
  * @param origin 変換元
- * @param renderer レンダラ
+ * @param rendererDOM レンダラがバインドされているHTML要素
  * @param camera カメラ
  * @return 当たり判定ストリーム
  */
-export function toOverlapObservable(origin: Observable<DOMEvent>, renderer: THREE.WebGLRenderer, camera: THREE.Camera): Observable<OverlapAction> {
+export function toOverlapObservable(origin: Observable<DOMEvent>, rendererDOM: HTMLElement, camera: THREE.Camera): Observable<OverlapAction> {
   return origin.pipe(
     map(v => {
       switch (v.type) {
         case 'mouseDown':
-          return toMouseDownRaycaster(v, renderer, camera);
+          return toMouseDownRaycaster(v, rendererDOM, camera);
         case 'mouseMove':
-          return toMouseMoveRaycaster(v, renderer, camera);
+          return toMouseMoveRaycaster(v, rendererDOM, camera);
         case 'touchStart':
-          return toTouchStartRaycaster(v, renderer, camera);
+          return toTouchStartRaycaster(v, rendererDOM, camera);
         case 'touchMove':
-          return toTouchMoveRaycaster(v, renderer, camera);
+          return toTouchMoveRaycaster(v, rendererDOM, camera);
         default:
           return null;
       }

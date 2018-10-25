@@ -5,9 +5,10 @@ import type {GaugeView} from "./view/gauge-view";
 import type {GaugeModel} from "./model/gauge-model";
 import {Group, Tween} from '@tweenjs/tween.js';
 import {refresh} from "./animation/regresh";
-import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Update} from "../../action/game-loop/update";
+import type {PreRender} from "../../action/game-loop/pre-render";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -33,20 +34,12 @@ export class Gauge {
     this._tween = new Group();
 
     param.listener.subscribe(action => {
-      switch (action.type) {
-        case 'GameLoop':
-          this._gameLoop(action);
-          return;
-        default:
-          return;
+      if (action.type === 'Update') {
+        this._update(action);
+      } else if (action.type === 'PreRender') {
+        this._preRender(action);
       }
     });
-  }
-
-  /** ゲームループ */
-  _gameLoop(action: GameLoop): void {
-    this._tween.update(action.time);
-    this._view.engage(this._model);
   }
 
   /** ゲージ内容更新 */
@@ -57,5 +50,16 @@ export class Gauge {
   /** ゲージで使われているthree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /** 状態更新 */
+  _update(action: Update): void {
+    this._tween.update(action.time);
+    this._view.engage(this._model);
+  }
+
+  /** プリレンダー */
+  _preRender(action: PreRender): void {
+    this._view.lookAt(action.camera);
   }
 }

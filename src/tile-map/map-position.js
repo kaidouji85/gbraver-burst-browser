@@ -11,7 +11,7 @@ import type {TiledLayer} from "./tiled";
  * @param meshHeight 単位タイルマップメッシュの高さ
  * @return 描画位置
  */
-export function getMapPosition(index: number, layer: TiledLayer, meshWith: number, meshHeight: number): {x: number, y:number, z: number} {
+export function getMapPosition(index: number, layer: TiledLayer, meshWith: number, meshHeight: number): { x: number, y: number, z: number } {
   return {
     x: (index % layer.width) * meshWith,
     y: 0,
