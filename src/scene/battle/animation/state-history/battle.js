@@ -15,17 +15,21 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   const enemyBattery = isAttacker ? effect.defenderBattery : effect.attackerBattery;
   const damageIndicator = isAttacker ? view.threeDimensionLayer.enemyDamageIndicator : view.threeDimensionLayer.playerDamageIndicator;
 
+  const attackerSprite = isAttacker ? view.threeDimensionLayer.playerSprite : view.threeDimensionLayer.enemySprite;
+
   const start = createEmptyTween();
   const showPlayerBattery = view.threeDimensionLayer.playerBatteryNumber.popUp(playerBattery);
   const showEnemyBattery = view.threeDimensionLayer.enemyBatteryNumber.popUp(enemyBattery);
-  const showDamage = damageIndicatorAnimation(damageIndicator, isAttacker, effect.result);
+  const attackAnimation = attackerSprite.punch();
+  const showDamage = damageIndicatorAnimation(damageIndicator, effect.result);
   const end = createEmptyTween();
 
   start.chain(
     showPlayerBattery.start,
     showEnemyBattery.start
   );
-  showPlayerBattery.end.chain(showDamage.start);
+  showPlayerBattery.end.chain(attackAnimation.start);
+  attackAnimation.end.chain(showDamage.start);
   showDamage.end.chain(end);
 
   return {
@@ -34,7 +38,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   };
 }
 
-function damageIndicatorAnimation(damageIndicator: DamageIndicator, isAttacker: boolean, result: BattleResult): MultiTween {
+function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: BattleResult): MultiTween {
   switch (result.name) {
     case 'NormalHit':
     case 'Guard':

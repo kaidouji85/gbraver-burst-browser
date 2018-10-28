@@ -44,6 +44,8 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** パンチアニメーションを再生する */
   punch(): MultiTween {
+    this._tweenGroup.update();
+    this._tweenGroup.removeAll();
     return punch(this._model, this._tweenGroup);
   }
 

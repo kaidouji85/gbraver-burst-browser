@@ -7,24 +7,17 @@ import {createEmptyTweenByGroup} from "../../../../tween/empty-tween";
 
 /** パンチアニメーション */
 export function punch(model: ShinBraverModel, group: Group): MultiTween {
-  const start = createEmptyTweenByGroup(group);
-  const charge = new Tween(model, group)
+  const start = createEmptyTweenByGroup(group)
     .onStart(() => {
       model.animation.type = 'PUNCH';
       model.animation.frame = 0;
-    })
-    .to({
-      animation: {
-        frame: 0.5
-      }
-    }, 1000);
-  const attack = new Tween(model, group)
-    .to(model, {
-      animation: {
-        frame: 1
-      }
-    }, 300);
+    });
+  const attack = new Tween(model.animation, group)
+    .to({frame: 1}, 500);
   const end = createEmptyTweenByGroup(group);
+
+  start.chain(attack);
+  attack.chain(end);
 
   return {
     start: start,
