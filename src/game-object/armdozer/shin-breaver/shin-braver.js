@@ -11,6 +11,8 @@ import type {ShinBraverModel} from "./model/shin-braver-model";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
+import {punch} from "./animation/punch";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -35,14 +37,19 @@ export class ShinBraver implements ArmDozerSprite {
     this.stand();
   }
 
-  /** シーンに追加するオブジェクトを返す */
-  getObject3D(): THREE.Object3D {
-    return this._view.getObject3D();
-  }
-
   /** 立ち状態にする */
   stand(): void {
     stand(this._model, this._tweenGroup).start();
+  }
+
+  /** パンチアニメーションを再生する */
+  punch(): MultiTween {
+    return punch(this._model, this._tweenGroup);
+  }
+
+  /** シーンに追加するオブジェクトを返す */
+  getObject3D(): THREE.Object3D {
+    return this._view.getObject3D();
   }
 
   /** 状態更新 */

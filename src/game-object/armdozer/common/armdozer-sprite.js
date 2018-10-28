@@ -2,6 +2,7 @@
 
 import * as THREE from "three";
 import {Tween} from '@tweenjs/tween.js';
+import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 
 /** アームドーザスプライト */
 export interface ArmDozerSprite {
@@ -10,4 +11,7 @@ export interface ArmDozerSprite {
 
   /** 立ちポーズのアニメを開始する */
   stand(): void;
+
+  /** パンチのアニメーションを再生する */
+  punch(): MultiTween;
 }
