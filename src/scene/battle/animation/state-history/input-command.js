@@ -29,10 +29,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
 
-  const start = createEmptyTween()
-    .onStart(() => {
-      view.threeDimensionLayer.turnIndicator.turnChange(isPlayerTurn);
-    });
+  const start = createEmptyTween();
   const openBatterySelector = view.hudLayer.batterySelector.open(initialValue, enableMax, okButtonLabel);
   const visibleBurstButton = view.hudLayer.burstButton.visible();
   const refreshPlayer = view.threeDimensionLayer.playerGauge.refresh(player.armdozer.hp, player.armdozer.battery);
@@ -40,6 +37,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const end = createEmptyTween();
 
   start.chain(
+    view.threeDimensionLayer.turnIndicator.turnChange(isPlayerTurn),
     openBatterySelector.start,
     visibleBurstButton.start,
     refreshPlayer,

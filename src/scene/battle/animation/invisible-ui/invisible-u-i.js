@@ -9,9 +9,10 @@ export function invisibleUI(view: BattleSceneView): MultiTween {
   const start = createEmptyTween();
   const closeBatterySelector = view.hudLayer.batterySelector.close();
   const invisibleBurstButton = view.hudLayer.burstButton.invisible();
+  const invisibleTurnIndicator = view.threeDimensionLayer.turnIndicator.invisible();
   const end = createEmptyTween();
 
-  start.chain(closeBatterySelector.start, invisibleBurstButton.start);
+  start.chain(closeBatterySelector.start, invisibleBurstButton.start, invisibleTurnIndicator);
   invisibleBurstButton.end.chain(end);
 
   return {
