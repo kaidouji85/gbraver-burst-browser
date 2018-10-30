@@ -39,7 +39,8 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** 立ち状態にする */
   stand(): void {
-    stand(this._model, this._tweenGroup).start();
+    this._model.animation.type = 'STAND';
+    this._model.animation.frame = 0;
   }
 
   /** パンチアニメーションを再生する */

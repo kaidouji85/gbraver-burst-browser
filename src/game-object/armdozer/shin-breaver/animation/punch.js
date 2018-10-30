@@ -13,7 +13,7 @@ export function punch(model: ShinBraverModel, group: Group): MultiTween {
       model.animation.frame = 0;
     });
   const attack = new Tween(model.animation, group)
-    .to({frame: 1}, 500);
+    .to({frame: 1}, 1500);
   const end = createEmptyTweenByGroup(group);
 
   start.chain(attack);
