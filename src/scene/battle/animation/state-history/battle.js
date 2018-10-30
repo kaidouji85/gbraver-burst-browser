@@ -16,15 +16,15 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   const enemyBattery = isAttacker ? effect.defenderBattery : effect.attackerBattery;
   const damageIndicator = isAttacker ? view.threeDimensionLayer.enemyDamageIndicator : view.threeDimensionLayer.playerDamageIndicator;
 
-  const attackerSprite = isAttacker ? view.threeDimensionLayer.playerSprite : view.threeDimensionLayer.enemySprite;
-  const defenderSprite = !isAttacker ? view.threeDimensionLayer.playerSprite : view.threeDimensionLayer.enemySprite;
+  const attacker = isAttacker ? view.threeDimensionLayer.playerSprite : view.threeDimensionLayer.enemySprite;
+  const defender = isAttacker ? view.threeDimensionLayer.enemySprite : view.threeDimensionLayer.playerSprite;
 
   const start = createEmptyTween();
   const showPlayerBattery = view.threeDimensionLayer.playerBatteryNumber.popUp(playerBattery);
   const showEnemyBattery = view.threeDimensionLayer.enemyBatteryNumber.popUp(enemyBattery);
-  const attack = attackerSprite.punch();
-  const attackerStand = attackerSprite.stand();
-  const defenderStand = defenderSprite.stand();
+  const punch = attacker.punch();
+  const attackerStand = attacker.stand();
+  const defenderStand = defender.stand();
 
   const showDamage = damageIndicatorAnimation(damageIndicator, effect.result);
   const end = createEmptyTween();
@@ -33,11 +33,11 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
     showPlayerBattery.start,
     showEnemyBattery.start
   );
-  showPlayerBattery.end.chain(attack.start);
-  attack.end.chain(
+  showPlayerBattery.end.chain(punch.start);
+  punch.end.chain(
     showDamage.start,
     attackerStand,
-    //defenderStand
+    defenderStand
   );
   showDamage.end.chain(end);
 

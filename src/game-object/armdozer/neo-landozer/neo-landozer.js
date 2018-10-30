@@ -32,9 +32,6 @@ export class NeoLandozer implements ArmDozerSprite {
         this._preRender(action);
       }
     });
-
-    // TODO シーンから呼ぶようにする
-    this.stand().start();
   }
 
   /** 立ち状態にする */
