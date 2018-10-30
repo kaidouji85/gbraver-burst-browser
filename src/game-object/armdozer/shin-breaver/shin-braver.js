@@ -19,6 +19,7 @@ export class ShinBraver implements ArmDozerSprite {
   _model: ShinBraverModel;
   _view: ShinBraverView;
   _tweenGroup: Group;
+  _standTween: Tween;
 
   constructor(params: { view: ShinBraverView, listener: Observable<GameObjectAction> }) {
     this._model = createInitialValue();
@@ -33,21 +34,23 @@ export class ShinBraver implements ArmDozerSprite {
       }
     });
 
-    // TODO シーンから呼ぶようにする
-    this.stand();
+    this._standTween = this.stand();
+    this._standTween.start();
   }
 
-  /** 立ち状態にする */
-  stand(): void {
-    this._model.animation.type = 'STAND';
-    this._model.animation.frame = 0;
+  /** 立ちアニメーションを再生する */
+  stand(): Tween {
+    this._standTween = stand(this._model, this._tweenGroup);
+    return this._standTween;
   }
 
   /** パンチアニメーションを再生する */
   punch(): MultiTween {
-    this._tweenGroup.update();
-    this._tweenGroup.removeAll();
-    return punch(this._model, this._tweenGroup);
+    const animation = punch(this._model, this._tweenGroup);
+    animation.start.onStart(() => {
+      this._standTween.stop();
+    });
+    return animation;
   }
 
   /** シーンに追加するオブジェクトを返す */

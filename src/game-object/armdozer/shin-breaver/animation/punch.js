@@ -7,7 +7,8 @@ import {createEmptyTweenByGroup} from "../../../../tween/empty-tween";
 
 /** パンチアニメーション */
 export function punch(model: ShinBraverModel, group: Group): MultiTween {
-  const start = createEmptyTweenByGroup(group)
+  const start = createEmptyTweenByGroup(group);
+  const resetMotion = createEmptyTweenByGroup(group)
     .onStart(() => {
       model.animation.type = 'PUNCH';
       model.animation.frame = 0;
@@ -16,7 +17,8 @@ export function punch(model: ShinBraverModel, group: Group): MultiTween {
     .to({frame: 1}, 1500);
   const end = createEmptyTweenByGroup(group);
 
-  start.chain(attack);
+  start.chain(resetMotion);
+  resetMotion.chain(attack);
   attack.chain(end);
 
   return {

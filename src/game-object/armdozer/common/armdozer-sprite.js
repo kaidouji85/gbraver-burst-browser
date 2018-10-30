@@ -10,7 +10,7 @@ export interface ArmDozerSprite {
   getObject3D(): THREE.Object3D;
 
   /** 立ちポーズのアニメを開始する */
-  stand(): void;
+  stand(): Tween;
 
   /** パンチのアニメーションを再生する */
   punch(): MultiTween;
