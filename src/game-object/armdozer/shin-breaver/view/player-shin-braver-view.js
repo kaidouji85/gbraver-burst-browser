@@ -8,6 +8,7 @@ import {createBasicMesh, MESH_HEIGHT} from "./mesh/basic-mesh";
 import type {ArmdozerAnimationTexture} from "../../common/animation-texture";
 import {StandAnimationTexture} from "./texture/stand";
 import type {AnimationType} from "../model/animation-type";
+import {PunchAnimationTexture} from "./texture/punch";
 
 export const PADDING_BOTTOM = -16;
 
@@ -15,10 +16,12 @@ export const PADDING_BOTTOM = -16;
 export class PlayerShinBraverView implements ShinBraverView {
   _mesh: THREE.Mesh;
   _stand: ArmdozerAnimationTexture;
+  _punch: ArmdozerAnimationTexture;
 
   constructor(resources: Resources) {
     this._mesh = createBasicMesh();
     this._stand = new StandAnimationTexture(resources);
+    this._punch = new PunchAnimationTexture(resources);
   }
 
   /** モデルをビューに反映させる */
@@ -51,6 +54,8 @@ export class PlayerShinBraverView implements ShinBraverView {
   /** アニメーションタイプに応じたテクスチャを返す */
   _getTexture(type: AnimationType): ArmdozerAnimationTexture {
     switch (type) {
+      case 'PUNCH':
+        return this._punch;
       case 'STAND':
       default:
         return this._stand;

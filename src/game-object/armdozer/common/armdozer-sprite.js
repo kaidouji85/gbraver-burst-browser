@@ -2,6 +2,7 @@
 
 import * as THREE from "three";
 import {Tween} from '@tweenjs/tween.js';
+import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 
 /** アームドーザスプライト */
 export interface ArmDozerSprite {
@@ -9,5 +10,8 @@ export interface ArmDozerSprite {
   getObject3D(): THREE.Object3D;
 
   /** 立ちポーズのアニメを開始する */
-  stand(): void;
+  stand(): Tween;
+
+  /** パンチのアニメーションを再生する */
+  punch(): MultiTween;
 }
