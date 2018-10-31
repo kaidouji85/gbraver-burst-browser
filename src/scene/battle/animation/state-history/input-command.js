@@ -30,6 +30,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   const attacker = isPlayerTurn ? view.threeDimensionLayer.playerSprite : view.threeDimensionLayer.enemySprite;
+  const defender = isPlayerTurn ? view.threeDimensionLayer.enemySprite : view.threeDimensionLayer.playerSprite;
 
   const start = createEmptyTween();
   const openBatterySelector = view.hudLayer.batterySelector.open(initialValue, enableMax, okButtonLabel);
@@ -37,6 +38,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const refreshPlayer = view.threeDimensionLayer.playerGauge.refresh(player.armdozer.hp, player.armdozer.battery);
   const refreshEnemy = view.threeDimensionLayer.enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery);
   const myTurn = attacker.myTurn();
+  const stand = defender.stand();
   const end = createEmptyTween();
 
   start.chain(
@@ -46,7 +48,10 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     refreshPlayer,
     refreshEnemy
   );
-  refreshEnemy.chain(myTurn.start);
+  refreshEnemy.chain(
+    myTurn.start,
+    stand
+  );
   myTurn.end.chain(end);
 
   return {start, end};
