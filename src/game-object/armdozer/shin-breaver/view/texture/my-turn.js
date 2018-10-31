@@ -10,12 +10,12 @@ import {normalizeTextureOffset} from "../../../../../texture/animation/texture-o
 
 export const MAX_ANIMATION = 16;
 
-/** パンチアニメーション */
-export class PunchAnimationTexture implements ArmdozerAnimationTexture {
+/** マイターンあニメーション */
+export class MyTurnAnimationTexture implements ArmdozerAnimationTexture {
   _texture: THREE.Texture;
 
   constructor(resources: Resources) {
-    const textureResource: ?TextureResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_PUNCH);
+    const textureResource: ?TextureResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_MY_TURN);
     const originTexture: THREE.Texture = textureResource ? textureResource.texture : new THREE.Texture();
     this._texture = createAnimatedTexture(originTexture, MAX_ANIMATION, 1);
   }

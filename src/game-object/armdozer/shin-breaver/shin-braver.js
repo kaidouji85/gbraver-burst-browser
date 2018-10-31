@@ -14,6 +14,7 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
 import {punch} from "./animation/punch";
 import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
+import {myTurn} from "./animation/my-turn";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -42,8 +43,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** マイターンのアニメ */
   myTurn(): MultiTween {
-    // TODO アニメーションを作る
-    return createEmptyMultiTween();
+    return myTurn(this._model, this._tweenGroup);
   }
 
   /** パンチアニメーションを再生する */

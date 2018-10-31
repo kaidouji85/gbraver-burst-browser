@@ -7,6 +7,7 @@ import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/inp
 import {createEmptyTween} from "../../../../tween/empty-tween";
 import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import {myTurn} from "../../../../game-object/armdozer/shin-breaver/animation/my-turn";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -28,12 +29,14 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const initialValue = getInitialBattery(enableMax);
   const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
+  const attacker = isPlayerTurn ? view.threeDimensionLayer.playerSprite : view.threeDimensionLayer.enemySprite;
 
   const start = createEmptyTween();
   const openBatterySelector = view.hudLayer.batterySelector.open(initialValue, enableMax, okButtonLabel);
   const visibleBurstButton = view.hudLayer.burstButton.visible();
   const refreshPlayer = view.threeDimensionLayer.playerGauge.refresh(player.armdozer.hp, player.armdozer.battery);
   const refreshEnemy = view.threeDimensionLayer.enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery);
+  const myTurn = attacker.myTurn();
   const end = createEmptyTween();
 
   start.chain(
@@ -43,7 +46,8 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     refreshPlayer,
     refreshEnemy
   );
-  refreshEnemy.chain(end);
+  refreshEnemy.chain(myTurn.start);
+  myTurn.end.chain(end);
 
   return {start, end};
 }
