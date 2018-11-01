@@ -45,6 +45,12 @@ export class NeoLandozer implements ArmDozerSprite {
     return createEmptyMultiTween();
   }
 
+  /** マイターンのアニメ */
+  myTurn(): MultiTween {
+    // TODO アニメーションを作る
+    return createEmptyMultiTween();
+  }
+
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();

@@ -23,9 +23,6 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   const showPlayerBattery = view.threeDimensionLayer.playerBatteryNumber.popUp(playerBattery);
   const showEnemyBattery = view.threeDimensionLayer.enemyBatteryNumber.popUp(enemyBattery);
   const punch = attacker.punch();
-  const attackerStand = attacker.stand();
-  const defenderStand = defender.stand();
-
   const showDamage = damageIndicatorAnimation(damageIndicator, effect.result);
   const end = createEmptyTween();
 
@@ -36,8 +33,6 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   showPlayerBattery.end.chain(punch.start);
   punch.end.chain(
     showDamage.start,
-    attackerStand,
-    defenderStand
   );
   showDamage.end.chain(end);
 

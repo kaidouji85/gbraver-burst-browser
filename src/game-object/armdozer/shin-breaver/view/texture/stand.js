@@ -15,7 +15,7 @@ export class StandAnimationTexture implements ArmdozerAnimationTexture {
     this._texture = textureResource ? textureResource.texture : new THREE.Texture();
   }
 
-  /** アアニメーション進捗に応じたテクスチャを返す */
+  /** アニメーション進捗に応じたテクスチャを返す */
   animate(animation: number): THREE.Texture {
     return this._texture;
   }

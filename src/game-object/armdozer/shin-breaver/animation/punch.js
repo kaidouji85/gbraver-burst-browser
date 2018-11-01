@@ -14,7 +14,9 @@ export function punch(model: ShinBraverModel, group: Group): MultiTween {
       model.animation.frame = 0;
     });
   const attack = new Tween(model.animation, group)
-    .to({frame: 1}, 1500);
+    .to({frame: 1}, 500)
+    .repeat(1)
+    .yoyo(true);
   const end = createEmptyTweenByGroup(group);
 
   start.chain(resetMotion);
