@@ -7,10 +7,7 @@ import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
-import {stateHistoryAnimation} from "./animation/state-history";
-import {play} from "../../tween/multi-tween/play";
 import type {DecideBattery} from "../../action/battle-scene/decide-battery";
-import {invisibleUI} from "./animation/invisible-ui/invisible-u-i";
 import {createInitialState} from "./state/initial-state";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 
@@ -59,25 +56,27 @@ export class BattleScene {
       }
     });
 
-    const startAnimation = stateHistoryAnimation(this._view, this._state, param.initialState.stateHistory);
-    play(startAnimation);
+    //const startAnimation = stateHistoryAnimation(this._view, this._state, param.initialState.stateHistory);
+    //play(startAnimation);
   };
 
   /** バッテリー決定 */
   async _decideBattery(action: DecideBattery): Promise<void> {
+    /*
     if (!this._state.canOperation) {
       return;
     }
 
     this._state.canOperation = false;
 
-    await play(invisibleUI(this._view));
+    //await play(invisibleUI(this._view));
     const updateState = await this._battleRoom.progress({
       type: 'BATTERY_COMMAND',
       battery: action.battery
     });
-    await play(stateHistoryAnimation(this._view, this._state, updateState));
+    //await play(stateHistoryAnimation(this._view, this._state, updateState));
 
     this._state.canOperation = true;
+    */
   }
 }

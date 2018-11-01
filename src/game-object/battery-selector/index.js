@@ -12,7 +12,6 @@ import {pushOkButton} from "./animation/push-ok-button";
 import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {MultiTween} from "../../tween/multi-tween/multi-tween";
-import {play} from "../../tween/multi-tween/play";
 import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
 
@@ -141,7 +140,7 @@ export class BatterySelector {
     }
 
     const pushButton = pushOkButton(this._model, this._tween);
-    await play(pushButton);
+    //await play(pushButton);
     this._onOkButtonPush();
   }
 }
