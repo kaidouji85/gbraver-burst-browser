@@ -1,10 +1,10 @@
 // @flow
 
 import type {BatterySelectorModel} from "../model/battery-selector";
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../../depricated-tween/multi-tween/multi-tween";
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {OkButtonLabel} from "../model/ok-button";
-import {createEmptyTweenByGroup} from "../../../tween/empty-tween";
+import {createEmptyTweenByGroup} from "../../../depricated-tween/empty-tween";
 
 type Param = {
   model: BatterySelectorModel,

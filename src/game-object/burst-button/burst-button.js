@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import {Group} from '@tweenjs/tween.js';
-import type {MultiTween} from "../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../depricated-tween/multi-tween/multi-tween";
 import {visible} from './animation/visible';
 import {invisible} from './animation/invisible';
 import type {Update} from "../../action/game-loop/update";

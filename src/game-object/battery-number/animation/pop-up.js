@@ -1,6 +1,6 @@
 // @flow
 
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../../depricated-tween/multi-tween/multi-tween";
 import type {BatteryNumberModel} from "../model/battery-number-model";
 import {Gourp, Tween} from '@tweenjs/tween.js';
 

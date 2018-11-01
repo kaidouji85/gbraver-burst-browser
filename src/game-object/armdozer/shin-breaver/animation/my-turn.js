@@ -1,9 +1,9 @@
 // @flow
 
-import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../../../depricated-tween/multi-tween/multi-tween";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import {Tween, Group} from '@tweenjs/tween.js';
-import {createEmptyTweenByGroup} from "../../../../tween/empty-tween";
+import {createEmptyTweenByGroup} from "../../../../depricated-tween/empty-tween";
 
 export function myTurn(model: ShinBraverModel, group: Group): MultiTween {
   const start = createEmptyTweenByGroup(group)

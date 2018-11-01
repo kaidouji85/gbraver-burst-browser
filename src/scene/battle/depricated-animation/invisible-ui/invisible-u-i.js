@@ -1,12 +1,15 @@
 // @flow
 
 import {BattleSceneView} from "../../view";
-import {createEmptyTween} from "../../../../tween/empty-tween";
-import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
+import {createEmptyTween} from "../../../../depricated-tween/empty-tween";
+import type {MultiTween} from "../../../../depricated-tween/multi-tween/multi-tween";
+import {createEmptyMultiTween} from "../../../../depricated-tween/multi-tween/empty-multi-tween";
 
 /** バッテリー決定に伴い、UIを非表示にする */
 export function invisibleUI(view: BattleSceneView): MultiTween {
-  const start = createEmptyTween();
+  return createEmptyMultiTween();
+
+  /*const start = createEmptyTween();
   const closeBatterySelector = view.hudLayer.batterySelector.close();
   const invisibleBurstButton = view.hudLayer.burstButton.invisible();
   const invisibleTurnIndicator = view.threeDimensionLayer.turnIndicator.invisible();
@@ -18,6 +21,5 @@ export function invisibleUI(view: BattleSceneView): MultiTween {
   return {
     start: start,
     end: end
-  };
-
+  };*/
 }

@@ -1,11 +1,11 @@
 import {BattleSceneView} from "../../view/index";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../../../depricated-tween/multi-tween/multi-tween";
 import {Tween} from '@tweenjs/tween.js';
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
-import {createEmptyTween} from "../../../../tween/empty-tween";
-import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
+import {createEmptyTween} from "../../../../depricated-tween/empty-tween";
+import {createEmptyMultiTween} from "../../../../depricated-tween/multi-tween/empty-multi-tween";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import {myTurn} from "../../../../game-object/armdozer/shin-breaver/animation/my-turn";
 
@@ -19,7 +19,8 @@ import {myTurn} from "../../../../game-object/armdozer/shin-breaver/animation/my
  * @return アニメーション
  */
 export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: InputCommand): MultiTween {
-  const player = gameState.players.find(v => v.playerId === sceneState.playerId);
+  return createEmptyMultiTween();
+/*  const player = gameState.players.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
   if (!player || !enemy) {
     return createEmptyMultiTween();
@@ -54,7 +55,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   );
   myTurn.end.chain(end);
 
-  return {start, end};
+  return {start, end};*/
 }
 
 /**

@@ -11,8 +11,8 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
-import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
+import type {MultiTween} from "../../../depricated-tween/multi-tween/multi-tween";
+import {createEmptyMultiTween} from "../../../depricated-tween/multi-tween/empty-multi-tween";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {

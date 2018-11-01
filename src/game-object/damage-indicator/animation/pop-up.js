@@ -1,6 +1,6 @@
 // @flow
 
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../../depricated-tween/multi-tween/multi-tween";
 import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 import {Group, Tween} from '@tweenjs/tween.js';
 

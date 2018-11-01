@@ -1,9 +1,9 @@
 // @flow
 
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../../depricated-tween/multi-tween/multi-tween";
 import type {BatterySelectorModel} from "../model/battery-selector";
 import {Group, Tween} from '@tweenjs/tween.js';
-import {createEmptyTweenByGroup} from "../../../tween/empty-tween";
+import {createEmptyTweenByGroup} from "../../../depricated-tween/empty-tween";
 
 /** 閉じるアニメーション */
 export function close(model: BatterySelectorModel, group: Group): MultiTween {

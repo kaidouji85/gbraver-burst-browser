@@ -2,7 +2,7 @@
 
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {BurstButtonModel} from "../model/burst-button-model";
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../../depricated-tween/multi-tween/multi-tween";
 
 /** バーストボタンを表示する */
 export function visible(model: BurstButtonModel, group: Group): MultiTween {

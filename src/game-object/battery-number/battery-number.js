@@ -5,7 +5,7 @@ import type {BatteryNumberView} from "./view/battery-number-view";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
-import type {MultiTween} from "../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../depricated-tween/multi-tween/multi-tween";
 import {createInitialValue} from "./model/initial-value";
 import {popUp} from "./animation/pop-up";
 import {Group} from '@tweenjs/tween.js';

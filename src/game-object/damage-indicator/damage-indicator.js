@@ -6,7 +6,7 @@ import type {DamageIndicatorModel} from "./model/damage-indicator-model";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
-import type {MultiTween} from "../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../depricated-tween/multi-tween/multi-tween";
 import {popUp} from "./animation/pop-up";
 import {Group} from '@tweenjs/tween.js';
 import type {Update} from "../../action/game-loop/update";

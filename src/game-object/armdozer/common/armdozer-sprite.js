@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import {Tween} from '@tweenjs/tween.js';
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
+import type {MultiTween} from "../../../depricated-tween/multi-tween/multi-tween";
 
 /** アームドーザスプライト */
 export interface ArmDozerSprite {
