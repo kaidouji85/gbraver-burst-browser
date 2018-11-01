@@ -15,6 +15,8 @@ import type {MultiTween} from "../../depricated-tween/multi-tween/multi-tween";
 import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
 import {createInitialValue} from "./model/initial-value";
+import {TweenAnimation} from "../../animation/tween-animation";
+import {process} from "../../animation/process";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -56,6 +58,9 @@ export class BatterySelector {
         this._pushOkButton();
       }
     });
+
+    // TODO 動作確認が終わったら消す
+    this.open(1, 5, 'Attack').play();
   }
 
   /**
@@ -66,17 +71,18 @@ export class BatterySelector {
    * @param okButtonLabel OKボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): MultiTween {
-    return open({
-      model: this._model,
-      group: this._tween,
-      initialValue: initialValue,
-      maxEnable: maxEnable,
-      okButtonLabel: okButtonLabel,
-      onStart: () => {
-        this._view.setLastBattery(initialValue)
-      },
-    });
+  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): TweenAnimation {
+    return process(() => {
+      this._view.setLastBattery(initialValue);
+    }).chain(
+      open({
+        model: this._model,
+        group: this._tween,
+        initialValue: initialValue,
+        maxEnable: maxEnable,
+        okButtonLabel: okButtonLabel
+      })
+    );
   }
 
   /** バッテリーセレクタを閉じる */

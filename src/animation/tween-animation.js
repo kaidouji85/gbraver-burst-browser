@@ -3,7 +3,7 @@
 import {Tween} from '@tweenjs/tween.js';
 
 /** アニメーション */
-export class Animation {
+export class TweenAnimation {
   _start: Tween;
   _end: Tween;
 
@@ -21,7 +21,7 @@ export class Animation {
     });
   }
 
-  chain(next: Animation, ...pararells: Animation[]): Animation {
+  chain(next: TweenAnimation, ...pararells: TweenAnimation[]): TweenAnimation {
     const pararellTweens = pararells.map(v => v._start);
     this._end.chain(next._start, ...pararellTweens);
     this._end = next._end;

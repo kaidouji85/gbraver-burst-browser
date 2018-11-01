@@ -13,7 +13,7 @@ export function createInitialValue(maxBattery: number): BatterySelectorModel {
       depth: 0,
       label: 'Attack'
     },
-    disabled: false,
-    opacity: 1
+    disabled: true,
+    opacity: 0
   };
 }
