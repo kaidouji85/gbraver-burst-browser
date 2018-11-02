@@ -11,12 +11,12 @@ import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
 import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {MultiTween} from "../../depricated-tween/multi-tween/multi-tween";
 import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
 import {createInitialValue} from "./model/initial-value";
 import {TweenAnimation} from "../../animation/tween-animation";
 import {process} from "../../animation/process";
+import {delay} from "../../animation/delay";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -60,7 +60,10 @@ export class BatterySelector {
     });
 
     // TODO 動作確認が終わったら消す
-    this.open(1, 5, 'Attack').play();
+    this.open(1, 5, 'Attack')
+      .chain(delay(10000, this._tween))
+      .chain(this.close())
+      .play();
   }
 
   /**
