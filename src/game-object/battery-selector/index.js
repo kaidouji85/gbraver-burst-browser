@@ -86,7 +86,7 @@ export class BatterySelector {
   }
 
   /** バッテリーセレクタを閉じる */
-  close(): MultiTween {
+  close(): TweenAnimation {
     return close(this._model, this._tween);
   }
 
@@ -129,8 +129,7 @@ export class BatterySelector {
       return;
     }
 
-    const pushButton = pushOkButton(this._model, this._tween);
-    //await play(pushButton);
-    this._onOkButtonPush();
+    await pushOkButton(this._model, this._tween).play();
+    //this._onOkButtonPush();
   }
 }
