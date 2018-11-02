@@ -7,9 +7,9 @@ export class TweenAnimation {
   _start: Tween;
   _end: Tween;
 
-  constructor(tween: Tween) {
-    this._start = tween;
-    this._end = tween;
+  constructor(start: Tween, end: Tween) {
+    this._start = start;
+    this._end = end;
   }
 
   play(): Promise<void> {
