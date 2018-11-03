@@ -22,7 +22,7 @@ export function popUp(model: BatteryNumberModel, group: Gourp, battery: number):
       .to({alpha: 1}, 300)
     )
   ).chain(
-    delay(1000)
+    delay(1000, group)
   ).chain(
     tween(new Tween(model, group)
       .to({alpha: 0}, 300)

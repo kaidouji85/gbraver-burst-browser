@@ -13,8 +13,8 @@ import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import type {MultiTween} from "../../../depricated-tween/multi-tween/multi-tween";
 import {punch} from "./animation/punch";
-import {createEmptyMultiTween} from "../../../depricated-tween/multi-tween/empty-multi-tween";
 import {myTurn} from "./animation/my-turn";
+import {TweenAnimation} from "../../../animation/tween-animation";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -37,7 +37,7 @@ export class ShinBraver implements ArmDozerSprite {
   }
 
   /** 立ちポーズにする */
-  stand(): Tween {
+  stand(): TweenAnimation {
     return stand(this._model, this._tweenGroup);
   }
 

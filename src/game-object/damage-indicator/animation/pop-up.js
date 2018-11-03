@@ -14,7 +14,7 @@ export function popUp(model: DamageIndicatorModel, group: Group, damage: number)
       .to({opacity: 1}, 300)
     )
   ).chain(
-    delay(1000)
+    delay(1000, group)
   ).chain(
     tween(new Tween(model, group)
       .to({opacity: 0}, 300)

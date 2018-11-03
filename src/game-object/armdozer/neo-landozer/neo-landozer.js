@@ -13,6 +13,7 @@ import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import type {MultiTween} from "../../../depricated-tween/multi-tween/multi-tween";
 import {createEmptyMultiTween} from "../../../depricated-tween/multi-tween/empty-multi-tween";
+import {TweenAnimation} from "../../../animation/tween-animation";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -35,7 +36,7 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** 立ち状態にする */
-  stand(): Tween {
+  stand(): TweenAnimation {
     return stand(this._model, this._tweenGroup);
   }
 
