@@ -48,6 +48,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
 }
 
 function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: BattleResult): MultiTween {
+  /*
   switch (result.name) {
     case 'NormalHit':
     case 'Guard':
@@ -56,4 +57,7 @@ function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: Batt
     default:
       return damageIndicator.popUp(0);
   }
+  */
+
+  return createEmptyMultiTween();
 }
