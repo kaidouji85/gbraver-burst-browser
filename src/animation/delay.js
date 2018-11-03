@@ -9,3 +9,7 @@ export function delay(time: number, group: ?Group): TweenAnimation {
     .to({}, time)
   );
 }
+
+export function empty(): TweenAnimation {
+  return delay(0);
+}
