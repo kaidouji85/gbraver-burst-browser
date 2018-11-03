@@ -24,9 +24,14 @@ export function open(param: Param): TweenAnimation {
       param.model.slider.battery = param.initialValue;
       param.model.okButton.label = param.okButtonLabel;
     }, param.group
-  ).chain(tween(new Tween(param.model, param.group)
-    .to({opacity: 1}, 300)
-  )).chain(process(() => {
-    param.model.disabled = false;
-  }));
+  ).chain(
+    tween(new Tween(param.model, param.group)
+      .to({opacity: 1}, 300)
+    )
+  ).chain(
+    process(() => {
+        param.model.disabled = false;
+      }, param.group
+    )
+  );
 }

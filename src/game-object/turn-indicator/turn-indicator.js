@@ -11,6 +11,7 @@ import type {PreRender} from "../../action/game-loop/pre-render";
 import {invisible} from "./animation/invisible";
 import {Group, Tween} from '@tweenjs/tween.js';
 import {turnChange} from "./animation/turn-change";
+import {TweenAnimation} from "../../animation/tween-animation";
 
 type Param = {
   resources: Resources,
@@ -46,11 +47,11 @@ export class TurnIndicator {
    * @param isPlayerTurn プレイヤーターンか否かのフラグ、trueでプレイヤーターン
    * @return アニメーション
    */
-  turnChange(isPlayerTurn: boolean): Tween {
+  turnChange(isPlayerTurn: boolean): TweenAnimation {
     return turnChange(isPlayerTurn, this._model, this._tween);
   }
 
-  invisible(): Tween {
+  invisible(): TweenAnimation {
     return invisible(this._model, this._tween);
   }　
 

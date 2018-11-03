@@ -47,7 +47,7 @@ async function main() {
   });
 
   gameLoopListener.subscribe(time => {
-    Tween.update();
+    Tween.update(time);
   });
 }
 
