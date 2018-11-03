@@ -9,8 +9,10 @@ import {createEmptyTween} from "../../../../depricated-tween/empty-tween";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/common/armdozer-sprite";
+import {createEmptyMultiTween} from "../../../../depricated-tween/multi-tween/empty-multi-tween";
 
 export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): MultiTween {
+  /*
   const isAttacker = effect.attacker === sceneState.playerId;
   const playerBattery = isAttacker ? effect.attackerBattery : effect.defenderBattery;
   const enemyBattery = isAttacker ? effect.defenderBattery : effect.attackerBattery;
@@ -40,6 +42,9 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
     start: start,
     end: end
   };
+  */
+
+  return createEmptyMultiTween();
 }
 
 function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: BattleResult): MultiTween {
