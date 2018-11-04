@@ -11,6 +11,7 @@ import type {DecideBattery} from "../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
+import {delay} from "../../animation/delay";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -57,7 +58,10 @@ export class BattleScene {
       }
     });
 
-    stateHistoryAnimation(this._view, this._state, param.initialState.stateHistory).play();
+    delay(1000)
+      .chain(
+        stateHistoryAnimation(this._view, this._state, param.initialState.stateHistory)
+      ).play();
   };
 
   /** バッテリー決定 */
