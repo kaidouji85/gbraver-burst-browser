@@ -30,15 +30,16 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
 
   const {playerGauge, enemyGauge, turnIndicator, playerSprite, enemySprite} = view.threeDimensionLayer;
-  const {batterySelector} = view.hudLayer;
+  const {batterySelector, burstButton} = view.hudLayer;
 
   return empty()
     .chain(
-      //delay(1000),
+      delay(500),
       playerGauge.refresh(player.armdozer.hp, player.armdozer.battery),
       enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery),
       turnIndicator.turnChange(isPlayerTurn),
-      batterySelector.open(initialValue, enableMax, okButtonLabel)
+      batterySelector.open(initialValue, enableMax, okButtonLabel),
+      burstButton.visible()
     ).chain(
       isPlayerTurn ? playerSprite.myTurn() : playerSprite.stand(),
       isPlayerTurn ? enemySprite.stand() : enemySprite.myTurn(),

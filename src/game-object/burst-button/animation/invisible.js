@@ -8,10 +8,6 @@ import {TweenAnimation} from "../../../animation/tween-animation";
 /** バーストボタンを非表示にする */
 export function invisible(model: BurstButtonModel, group: Group): TweenAnimation {
   return tween(new Tween(model, group)
-    .to({opacity: 0}, 0)
-  ).chain(
-    tween(new Tween(model, group)
-      .to({opacity: 1}, 300)
-    )
+    .to({opacity: 0}, 300)
   );
 }
