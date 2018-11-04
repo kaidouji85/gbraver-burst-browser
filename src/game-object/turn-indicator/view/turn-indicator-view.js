@@ -23,6 +23,7 @@ export class TurnIndicatorView {
   engage(model: TurnIndicatorModel): void {
     this._setScale(model);
     this._setPos();
+    this._setOpacity(model);
   }
 
   /** カメラの方向を向く */
@@ -45,6 +46,11 @@ export class TurnIndicatorView {
     this._canvasMesh.mesh.position.x = 0;
     this._canvasMesh.mesh.position.y = 150;
     this._canvasMesh.mesh.position.z = 420;
+  }
+
+  /** 透明度を設定 */
+  _setOpacity(model: TurnIndicatorModel): void {
+    this._canvasMesh.setOpacity(model.opacity);
   }
 }
 

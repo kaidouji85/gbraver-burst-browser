@@ -1,6 +1,6 @@
 // @flow
 
-import {Group} from '@tweenjs/tween.js';
+import {Group, Tween} from '@tweenjs/tween.js';
 import {ArmDozerSprite} from '../common/armdozer-sprite';
 import * as THREE from "three";
 import type {NeoLandozerModel} from "./model/neo-landozer-model";
@@ -11,6 +11,8 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {TweenAnimation} from "../../../animation/tween-animation";
+import {empty} from "../../../animation/delay";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -30,19 +32,28 @@ export class NeoLandozer implements ArmDozerSprite {
         this._preRender(action);
       }
     });
+  }
 
-    // TODO シーンから呼ぶようにする
-    this.stand();
+  /** 立ち状態にする */
+  stand(): TweenAnimation {
+    return stand(this._model, this._tweenGroup);
+  }
+
+  /** パンチアニメーションを再生する */
+  punch(): TweenAnimation {
+    // TODO ネオランドーザのアニメーションを作成する
+    return empty();
+  }
+
+  /** マイターンのアニメ */
+  myTurn(): TweenAnimation {
+    // TODO アニメーションを作る
+    return empty();
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
-  }
-
-  /** 立ち状態にする */
-  stand(): void {
-    stand(this._model, this._tweenGroup).start();
   }
 
   /** 状態更新 */
@@ -56,5 +67,3 @@ export class NeoLandozer implements ArmDozerSprite {
     this._view.lookAt(action.camera);
   }
 }
-
-

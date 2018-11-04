@@ -11,10 +11,11 @@ import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
 import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {MultiTween} from "../../tween/multi-tween/multi-tween";
-import {play} from "../../tween/multi-tween/play";
 import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
+import {createInitialValue} from "./model/initial-value";
+import {TweenAnimation} from "../../animation/tween-animation";
+import {process} from "../../animation/process";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -36,7 +37,7 @@ export class BatterySelector {
   constructor(param: Param) {
     this._onBatteryChange = param.onBatteryChange;
     this._onOkButtonPush = param.onOkButtonPush;
-    this._model = this._initialModel(param);
+    this._model = createInitialValue(param.maxBattery);
     this._tween = new Group();
 
     param.listener.subscribe(action => {
@@ -66,21 +67,22 @@ export class BatterySelector {
    * @param okButtonLabel OKボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): MultiTween {
-    return open({
-      model: this._model,
-      group: this._tween,
-      initialValue: initialValue,
-      maxEnable: maxEnable,
-      okButtonLabel: okButtonLabel,
-      onStart: () => {
-        this._view.setLastBattery(initialValue)
-      },
-    });
+  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): TweenAnimation {
+    return process(() => {
+      this._view.setLastBattery(initialValue);
+    }).chain(
+      open({
+        model: this._model,
+        group: this._tween,
+        initialValue: initialValue,
+        maxEnable: maxEnable,
+        okButtonLabel: okButtonLabel
+      })
+    );
   }
 
   /** バッテリーセレクタを閉じる */
-  close(): MultiTween {
+  close(): TweenAnimation {
     return close(this._model, this._tween);
   }
 
@@ -99,23 +101,6 @@ export class BatterySelector {
     return this._view.getObject3D();
   }
 
-  /** モデルの初期値 */
-  _initialModel(param: Param): BatterySelectorModel {
-    return {
-      slider: {
-        battery: 0,
-        max: param.maxBattery,
-        enableMax: param.maxBattery
-      },
-      okButton: {
-        depth: 0,
-        label: 'Attack'
-      },
-      disabled: false,
-      opacity: 0
-    };
-  }
-
   /** 状態更新 */
   _update(action: Update): void {
     this._tween.update(action.time);
@@ -130,7 +115,7 @@ export class BatterySelector {
 
     this._tween.update();
     this._tween.removeAll();
-    changeBattery(this._model, this._tween, battery).start();
+    changeBattery(this._model, this._tween, battery).play();
     this._onBatteryChange(battery);
   }
 
@@ -140,8 +125,7 @@ export class BatterySelector {
       return;
     }
 
-    const pushButton = pushOkButton(this._model, this._tween);
-    await play(pushButton);
+    await pushOkButton(this._model, this._tween).play();
     this._onOkButtonPush();
   }
 }

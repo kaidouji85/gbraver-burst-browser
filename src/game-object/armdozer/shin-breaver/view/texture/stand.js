@@ -5,10 +5,6 @@ import * as THREE from 'three';
 import type {Resources} from "../../../../../resource/index";
 import type {TextureResource} from "../../../../../resource/texture";
 import {TEXTURE_IDS} from "../../../../../resource/texture";
-import {createAnimatedTexture} from "../../../../../texture/animation/texture-animation";
-import {normalizeTextureOffset} from "../../../../../texture/animation/texture-offset";
-
-export const MAX_ANIMATION = 8;
 
 /** 立ちアニメーション */
 export class StandAnimationTexture implements ArmdozerAnimationTexture {
@@ -16,14 +12,11 @@ export class StandAnimationTexture implements ArmdozerAnimationTexture {
 
   constructor(resources: Resources) {
     const textureResource: ?TextureResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_STAND);
-    const originTexture: THREE.Texture = textureResource ? textureResource.texture : new THREE.Texture();
-    this._texture = createAnimatedTexture(originTexture, MAX_ANIMATION, 1);
+    this._texture = textureResource ? textureResource.texture : new THREE.Texture();
   }
 
-  /** アアニメーション進捗に応じたテクスチャを返す */
+  /** アニメーション進捗に応じたテクスチャを返す */
   animate(animation: number): THREE.Texture {
-    this._texture.offset.x = normalizeTextureOffset(animation, MAX_ANIMATION);
-    this._texture.offset.y = 0;
     return this._texture;
   }
 }

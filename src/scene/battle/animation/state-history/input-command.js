@@ -1,12 +1,12 @@
-import {BattleSceneView} from "../../view/index";
+// @flow
+
+import {TweenAnimation} from "../../../../animation/tween-animation";
+import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
-import {Tween} from '@tweenjs/tween.js';
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
-import {createEmptyTween} from "../../../../tween/empty-tween";
-import {createEmptyMultiTween} from "../../../../tween/multi-tween/empty-multi-tween";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
+import {delay, empty} from "../../../../animation/delay";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -17,11 +17,11 @@ import type {PlayerId} from "gbraver-burst-core/lib/player/player";
  * @param effect コマンド入力フェイズの効果
  * @return アニメーション
  */
-export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: InputCommand): MultiTween {
+export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: InputCommand): TweenAnimation {
   const player = gameState.players.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
   if (!player || !enemy) {
-    return createEmptyMultiTween();
+    return empty();
   }
 
   const enableMax = getEnableMax(effect, sceneState.playerId);
@@ -29,63 +29,19 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
 
-  const start = createEmptyTween()
-    .onStart(() => {
-      view.threeDimensionLayer.turnIndicator.turnChange(isPlayerTurn);
-    });
-  const openBatterySelector = view.hudLayer.batterySelector.open(initialValue, enableMax, okButtonLabel);
-  const visibleBurstButton = view.hudLayer.burstButton.visible();
-  const refreshPlayer = view.threeDimensionLayer.playerGauge.refresh(player.armdozer.hp, player.armdozer.battery);
-  const refreshEnemy = view.threeDimensionLayer.enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery);
-  const end = createEmptyTween();
+  const {playerGauge, enemyGauge, turnIndicator, playerSprite, enemySprite} = view.threeDimensionLayer;
+  const {batterySelector, burstButton} = view.hudLayer;
 
-  start.chain(
-    openBatterySelector.start,
-    visibleBurstButton.start,
-    refreshPlayer,
-    refreshEnemy
-  );
-  refreshEnemy.chain(end);
-
-  return {start, end};
-}
-
-/**
- * バッテリーセレクタの初期値を計算する
- *
- * @param enableMaxBattery 設定可能バッテリーの上限値
- * @return バッテリーセレクタの初期値
- */
-export function getInitialBattery(enableMaxBattery: number): number {
-  if (0 < enableMaxBattery) {
-    return 1;
-  } else {
-    return 0;
-  }
-}
-
-/**
- * 設定可能バッテリーの上限値を計算する
- *
- * @param effect コマンド入力フェイズの結果
- * @param playerId 画面を開いているプレイヤーのID
- * @return 設定可能バッテリーの上限値
- */
-export function getEnableMax(effect: InputCommand, playerId: PlayerId): number {
-  const playerCommand = effect.players.find(v => v.playerId === playerId);
-  if (!playerCommand) {
-    return 0;
-  }
-
-  return playerCommand.command
-    .map(v => {
-      switch (v.type) {
-        case 'BATTERY_COMMAND':
-          return v.battery;
-        default:
-          return null;
-      }
-    })
-    .filter(Boolean)
-    .reduce((a, b) => Math.max(a, b), 0);
+  return empty()
+    .chain(
+      delay(500),
+      playerGauge.refresh(player.armdozer.hp, player.armdozer.battery),
+      enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery),
+      turnIndicator.turnChange(isPlayerTurn),
+      batterySelector.open(initialValue, enableMax, okButtonLabel),
+      burstButton.visible()
+    ).chain(
+      isPlayerTurn ? playerSprite.myTurn() : playerSprite.stand(),
+      isPlayerTurn ? enemySprite.stand() : enemySprite.myTurn(),
+    );
 }

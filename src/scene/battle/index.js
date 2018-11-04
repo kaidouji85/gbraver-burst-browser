@@ -7,12 +7,11 @@ import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
-import {stateHistoryAnimation} from "./animation/state-history";
-import {play} from "../../tween/multi-tween/play";
 import type {DecideBattery} from "../../action/battle-scene/decide-battery";
-import {invisibleUI} from "./animation/invisible-ui/invisible-u-i";
 import {createInitialState} from "./state/initial-state";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
+import {stateHistoryAnimation} from "./animation/state-history";
+import {delay, empty} from "../../animation/delay";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -59,8 +58,10 @@ export class BattleScene {
       }
     });
 
-    const startAnimation = stateHistoryAnimation(this._view, this._state, param.initialState.stateHistory);
-    play(startAnimation);
+    delay(1000)
+      .chain(
+        stateHistoryAnimation(this._view, this._state, param.initialState.stateHistory)
+      ).play();
   };
 
   /** バッテリー決定 */
@@ -70,14 +71,17 @@ export class BattleScene {
     }
 
     this._state.canOperation = false;
-
-    await play(invisibleUI(this._view));
+    await empty()
+      .chain(
+        this._view.hudLayer.batterySelector.close(),
+        this._view.hudLayer.burstButton.invisible(),
+        this._view.threeDimensionLayer.turnIndicator.invisible()
+      ).play();
     const updateState = await this._battleRoom.progress({
       type: 'BATTERY_COMMAND',
       battery: action.battery
     });
-    await play(stateHistoryAnimation(this._view, this._state, updateState));
-
+    await stateHistoryAnimation(this._view, this._state, updateState).play();
     this._state.canOperation = true;
   }
 }
