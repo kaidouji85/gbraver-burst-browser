@@ -1,30 +1,21 @@
 // @flow
 
-import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import {Tween, Group} from '@tweenjs/tween.js';
-import {createEmptyTweenByGroup} from "../../../../tween/empty-tween";
+import {TweenAnimation} from "../../../../animation/tween-animation";
+import {tween} from "../../../../animation/tween";
+import {process} from "../../../../animation/process";
 
 /** パンチアニメーション */
-export function punch(model: ShinBraverModel, group: Group): MultiTween {
-  const start = createEmptyTweenByGroup(group);
-  const resetMotion = createEmptyTweenByGroup(group)
-    .onStart(() => {
-      model.animation.type = 'PUNCH';
-      model.animation.frame = 0;
-    });
-  const attack = new Tween(model.animation, group)
-    .to({frame: 1}, 500)
-    .repeat(1)
-    .yoyo(true);
-  const end = createEmptyTweenByGroup(group);
-
-  start.chain(resetMotion);
-  resetMotion.chain(attack);
-  attack.chain(end);
-
-  return {
-    start: start,
-    end: end
-  };
+export function punch(model: ShinBraverModel, group: Group): TweenAnimation {
+  return process(() => {
+    model.animation.type = 'PUNCH';
+    model.animation.frame = 0;
+  }).chain(
+    tween(new Tween(model.animation, group)
+      .to({frame: 1}, 300)
+      .repeat(1)
+      .yoyo(true)
+    )
+  );
 }

@@ -5,12 +5,12 @@ import type {BatteryNumberView} from "./view/battery-number-view";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
-import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {createInitialValue} from "./model/initial-value";
 import {popUp} from "./animation/pop-up";
 import {Group} from '@tweenjs/tween.js';
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
+import {TweenAnimation} from "../../animation/tween-animation";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -37,7 +37,7 @@ export class BatteryNumber {
   }
 
   /** バッテリーを表示する */
-  popUp(battery: number): MultiTween {
+  popUp(battery: number): TweenAnimation {
     return popUp(this._model, this._tween, battery);
   }
 

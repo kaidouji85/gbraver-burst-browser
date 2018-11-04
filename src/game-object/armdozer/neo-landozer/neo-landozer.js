@@ -11,8 +11,8 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
-import {createEmptyMultiTween} from "../../../tween/multi-tween/empty-multi-tween";
+import {TweenAnimation} from "../../../animation/tween-animation";
+import {empty} from "../../../animation/delay";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -35,20 +35,20 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** 立ち状態にする */
-  stand(): Tween {
+  stand(): TweenAnimation {
     return stand(this._model, this._tweenGroup);
   }
 
   /** パンチアニメーションを再生する */
-  punch(): MultiTween {
+  punch(): TweenAnimation {
     // TODO ネオランドーザのアニメーションを作成する
-    return createEmptyMultiTween();
+    return empty();
   }
 
   /** マイターンのアニメ */
-  myTurn(): MultiTween {
+  myTurn(): TweenAnimation {
     // TODO アニメーションを作る
-    return createEmptyMultiTween();
+    return empty();
   }
 
   /** シーンに追加するオブジェクトを取得する */

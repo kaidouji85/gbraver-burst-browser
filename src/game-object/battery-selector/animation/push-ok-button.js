@@ -2,29 +2,17 @@
 
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {BatterySelectorModel} from "../model/battery-selector";
-import type {MultiTween} from "../../../tween/multi-tween/multi-tween";
-import {createEmptyTweenByGroup} from "../../../tween/empty-tween";
+import {TweenAnimation} from "../../../animation/tween-animation";
+import {process} from "../../../animation/process";
+import {tween} from "../../../animation/tween";
 
 /** OKボタンを押す */
-export function pushOkButton(model: BatterySelectorModel, group: Group): MultiTween {
-  const start = createEmptyTweenByGroup(group);
-  const initDepth = new Tween(model.okButton, group)
-    .to({depth: 0}, 0)
-    .onStart(() => {
-      model.disabled = true;
-    });
-  const push = new Tween(model.okButton, group)
+export function pushOkButton(model: BatterySelectorModel, group: Group): TweenAnimation {
+  return process(() => {
+    model.disabled = true;
+  }, group).chain(tween(new Tween(model.okButton, group)
     .to({depth: 1}, 100)
     .repeat(1)
-    .yoyo(true);
-  const end = createEmptyTweenByGroup(group);
-
-  start.chain(initDepth);
-  initDepth.chain(push);
-  push.chain(end);
-
-  return {
-    start: start,
-    end: end
-  };
+    .yoyo(true)
+  ));
 }

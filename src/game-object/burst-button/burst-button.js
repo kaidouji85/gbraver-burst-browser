@@ -8,10 +8,10 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import {Group} from '@tweenjs/tween.js';
-import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {visible} from './animation/visible';
 import {invisible} from './animation/invisible';
 import type {Update} from "../../action/game-loop/update";
+import {TweenAnimation} from "../../animation/tween-animation";
 
 type Param = {
   resources: Resources,
@@ -36,7 +36,7 @@ export class BurstButton {
   }
 
   /** ボタンを表示する */
-  visible(): MultiTween {
+  visible(): TweenAnimation {
     return visible(this._model, this._tween);
   }
 
@@ -46,7 +46,7 @@ export class BurstButton {
    *
    * @param delay 非表示アニメが再生されるまでディライ
    */
-  invisible(): MultiTween {
+  invisible(): TweenAnimation {
     return invisible(this._model, this._tween);
   }
 

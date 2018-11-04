@@ -6,11 +6,11 @@ import type {DamageIndicatorModel} from "./model/damage-indicator-model";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
-import type {MultiTween} from "../../tween/multi-tween/multi-tween";
 import {popUp} from "./animation/pop-up";
 import {Group} from '@tweenjs/tween.js';
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
+import {TweenAnimation} from "../../animation/tween-animation";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -37,7 +37,7 @@ export class DamageIndicator {
   }
 
   /** ダメージ数字を表示する */
-  popUp(damage: number): MultiTween {
+  popUp(damage: number): TweenAnimation {
     return popUp(this._model, this._tween, damage);
   }
 

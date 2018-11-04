@@ -1,48 +1,53 @@
 // @flow
 
-import {BattleSceneView} from "../../view/index";
+import {TweenAnimation} from "../../../../animation/tween-animation";
+import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
-import type {MultiTween} from "../../../../tween/multi-tween/multi-tween";
-import {createEmptyTween} from "../../../../tween/empty-tween";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import {delay, empty} from "../../../../animation/delay";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
-import type {ArmDozerSprite} from "../../../../game-object/armdozer/common/armdozer-sprite";
+import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 
-export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): MultiTween {
+/**
+ * 戦闘アニメーション
+ *
+ * @param view ビュー
+ * @param sceneState シーンステート
+ * @param gameState ゲームステート
+ * @param effect 戦闘結果
+ * @return アニメーション
+ */
+export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): TweenAnimation {
   const isAttacker = effect.attacker === sceneState.playerId;
-  const playerBattery = isAttacker ? effect.attackerBattery : effect.defenderBattery;
-  const enemyBattery = isAttacker ? effect.defenderBattery : effect.attackerBattery;
-  const damageIndicator = isAttacker ? view.threeDimensionLayer.enemyDamageIndicator : view.threeDimensionLayer.playerDamageIndicator;
+  const {
+    playerBatteryNumber,
+    enemyBatteryNumber,
+    enemyDamageIndicator,
+    playerDamageIndicator,
+    playerSprite,
+    enemySprite
+  } = view.threeDimensionLayer;
 
-  const attacker = isAttacker ? view.threeDimensionLayer.playerSprite : view.threeDimensionLayer.enemySprite;
-  const defender = isAttacker ? view.threeDimensionLayer.enemySprite : view.threeDimensionLayer.playerSprite;
+  const attackerBattery = isAttacker ? playerBatteryNumber: enemyBatteryNumber;
+  const defenderBattery = isAttacker ? enemyBatteryNumber : playerBatteryNumber;
+  const damageIndicator = isAttacker ? enemyDamageIndicator : playerDamageIndicator;
+  const attacker = isAttacker ? playerSprite : enemySprite;
+  const defender = isAttacker ? enemySprite : playerSprite;
 
-  const start = createEmptyTween();
-  const showPlayerBattery = view.threeDimensionLayer.playerBatteryNumber.popUp(playerBattery);
-  const showEnemyBattery = view.threeDimensionLayer.enemyBatteryNumber.popUp(enemyBattery);
-  const punch = attacker.punch();
-  const showDamage = damageIndicatorAnimation(damageIndicator, effect.result);
-  const end = createEmptyTween();
-
-  start.chain(
-    showPlayerBattery.start,
-    showEnemyBattery.start
-  );
-  showPlayerBattery.end.chain(punch.start);
-  punch.end.chain(
-    showDamage.start,
-  );
-  showDamage.end.chain(end);
-
-  return {
-    start: start,
-    end: end
-  };
+  return empty()
+    .chain(
+      attackerBattery.popUp(effect.attackerBattery),
+      defenderBattery.popUp(effect.defenderBattery)
+    ).chain(
+      attacker.punch()
+    ).chain(
+      damageAnimation(damageIndicator, effect.result),
+    );
 }
 
-function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: BattleResult): MultiTween {
+/** 戦闘結果に応じたダメージ表示を行う */
+function damageAnimation(damageIndicator: DamageIndicator, result: BattleResult): TweenAnimation {
   switch (result.name) {
     case 'NormalHit':
     case 'Guard':

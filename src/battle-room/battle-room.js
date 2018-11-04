@@ -14,7 +14,7 @@ export type InitialState = {
 /** バトルルーム */
 export interface BattleRoom {
   /** 戦闘開始 */
-  start(): InitialState;
+  start(): Promise<InitialState>;
 
   /** 戦闘を進める */
   progress(command: Command): Promise<GameState[]>
