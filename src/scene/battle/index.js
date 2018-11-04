@@ -11,7 +11,7 @@ import type {DecideBattery} from "../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
-import {delay} from "../../animation/delay";
+import {delay, empty} from "../../animation/delay";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -66,21 +66,22 @@ export class BattleScene {
 
   /** バッテリー決定 */
   async _decideBattery(action: DecideBattery): Promise<void> {
-    /*
     if (!this._state.canOperation) {
       return;
     }
 
     this._state.canOperation = false;
-
-    //await play(invisibleUI(this._view));
+    await empty()
+      .chain(
+        this._view.hudLayer.batterySelector.close(),
+        this._view.hudLayer.burstButton.invisible(),
+        this._view.threeDimensionLayer.turnIndicator.invisible()
+      ).play();
     const updateState = await this._battleRoom.progress({
       type: 'BATTERY_COMMAND',
       battery: action.battery
     });
-    //await play(stateHistoryAnimation(this._view, this._state, updateState));
-
+    await stateHistoryAnimation(this._view, this._state, updateState).play();
     this._state.canOperation = true;
-    */
   }
 }

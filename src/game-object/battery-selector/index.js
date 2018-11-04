@@ -126,6 +126,6 @@ export class BatterySelector {
     }
 
     await pushOkButton(this._model, this._tween).play();
-    //this._onOkButtonPush();
+    this._onOkButtonPush();
   }
 }
