@@ -19,12 +19,10 @@ import {TweenAnimation} from "../../../animation/tween-animation";
 export class ShinBraver implements ArmDozerSprite {
   _model: ShinBraverModel;
   _view: ShinBraverView;
-  _tweenGroup: Group;
 
   constructor(params: { view: ShinBraverView, listener: Observable<GameObjectAction> }) {
     this._model = createInitialValue();
     this._view = params.view;
-    this._tweenGroup = new Group();
 
     params.listener.subscribe(action => {
       if (action.type === 'Update') {
@@ -37,17 +35,17 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** 立ちポーズにする */
   stand(): TweenAnimation {
-    return stand(this._model, this._tweenGroup);
+    return stand(this._model);
   }
 
   /** マイターンのアニメ */
   myTurn(): TweenAnimation {
-    return myTurn(this._model, this._tweenGroup);
+    return myTurn(this._model);
   }
 
   /** パンチアニメーションを再生する */
   punch(): TweenAnimation {
-    return punch(this._model, this._tweenGroup);
+    return punch(this._model);
   }
 
   /** シーンに追加するオブジェクトを返す */
@@ -57,7 +55,6 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** 状態更新 */
   _update(action: Update): void {
-    this._tweenGroup.update(action.time);
     this._view.engage(this._model);
   }
 
