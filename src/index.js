@@ -11,7 +11,6 @@ import type {NPC} from "./npc/npc";
 import {NeoLandozerNPC} from "./npc/neo-landozer-n-p-c";
 import {OfflineBattleRoom} from "./battle-room/offline-battle-room";
 import {BattleScene} from "./scene/battle";
-import TWEEN from "@tweenjs/tween.js";
 
 async function main() {
   loadServiceWorker();
@@ -44,10 +43,6 @@ async function main() {
       domEvent: domEventListener,
       gameLoop: gameLoopListener,
     }
-  });
-
-  gameLoopListener.subscribe(action => {
-    TWEEN.update(action.time);
   });
 }
 
