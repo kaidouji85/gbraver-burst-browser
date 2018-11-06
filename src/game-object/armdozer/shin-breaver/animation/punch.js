@@ -1,7 +1,7 @@
 // @flow
 
 import type {ShinBraverModel} from "../model/shin-braver-model";
-import {Group, Tween} from '@tweenjs/tween.js';
+import {Tween} from '@tweenjs/tween.js';
 import {TweenAnimation} from "../../../../animation/tween-animation";
 import {tween} from "../../../../animation/tween";
 import {process} from "../../../../animation/process";
