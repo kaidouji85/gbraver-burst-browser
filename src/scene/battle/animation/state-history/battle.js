@@ -5,7 +5,7 @@ import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
-import {delay, empty} from "../../../../animation/delay";
+import {empty} from "../../../../animation/delay";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 

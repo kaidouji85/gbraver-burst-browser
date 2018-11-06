@@ -9,7 +9,6 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {invisible} from "./animation/invisible";
-import {Group, Tween} from '@tweenjs/tween.js';
 import {turnChange} from "./animation/turn-change";
 import {TweenAnimation} from "../../animation/tween-animation";
 
@@ -22,7 +21,6 @@ type Param = {
 export class TurnIndicator {
   _model: TurnIndicatorModel;
   _view: TurnIndicatorView;
-  _tween: Group;
 
   constructor(param: Param) {
     this._model = {
@@ -30,7 +28,6 @@ export class TurnIndicator {
       opacity: 1
     };
     this._view = new TurnIndicatorView(param.resources);
-    this._tween = new Group();
 
     param.listener.subscribe(action => {
       if (action.type === 'Update') {
@@ -48,11 +45,11 @@ export class TurnIndicator {
    * @return アニメーション
    */
   turnChange(isPlayerTurn: boolean): TweenAnimation {
-    return turnChange(isPlayerTurn, this._model, this._tween);
+    return turnChange(isPlayerTurn, this._model);
   }
 
   invisible(): TweenAnimation {
-    return invisible(this._model, this._tween);
+    return invisible(this._model);
   }　
 
   /** ターンインジケーターで使うthree.jsオブジェクトを返す */
@@ -62,7 +59,6 @@ export class TurnIndicator {
 
   /** 状態更新 */
   _update(action: Update): void {
-    this._tween.update(action.time);
     this._view.engage(this._model);
   }
 

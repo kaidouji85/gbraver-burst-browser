@@ -1,6 +1,5 @@
 // @flow
 
-import {Group, Tween} from '@tweenjs/tween.js';
 import {ArmDozerSprite} from '../common/armdozer-sprite';
 import * as THREE from "three";
 import type {NeoLandozerModel} from "./model/neo-landozer-model";
@@ -18,12 +17,10 @@ import {empty} from "../../../animation/delay";
 export class NeoLandozer implements ArmDozerSprite {
   _model: NeoLandozerModel;
   _view: NeoLandozerView;
-  _tweenGroup: Group;
 
   constructor(params: { view: NeoLandozerView, listener: Observable<GameObjectAction> }) {
     this._model = createInitialValue();
     this._view = params.view;
-    this._tweenGroup = new Group();
 
     params.listener.subscribe(action => {
       if (action.type === 'Update') {
@@ -36,7 +33,7 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** 立ち状態にする */
   stand(): TweenAnimation {
-    return stand(this._model, this._tweenGroup);
+    return stand(this._model);
   }
 
   /** パンチアニメーションを再生する */
@@ -58,7 +55,6 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** 状態更新 */
   _update(action: Update): void {
-    this._tweenGroup.update(action.time);
     this._view.engage(this._model);
   }
 
