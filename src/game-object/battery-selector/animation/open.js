@@ -9,7 +9,6 @@ import {tween} from "../../../animation/tween";
 
 type Param = {
   model: BatterySelectorModel,
-  group: Group,
   initialValue: number,
   maxEnable: number,
   okButtonLabel: OkButtonLabel,
@@ -18,20 +17,18 @@ type Param = {
 /**バッテリーセレクタを開く */
 export function open(param: Param): TweenAnimation {
   return process(() => {
-      param.model.disabled = true;
-      param.model.opacity = 0;
-      param.model.slider.enableMax = param.maxEnable;
-      param.model.slider.battery = param.initialValue;
-      param.model.okButton.label = param.okButtonLabel;
-    }, param.group
-  ).chain(
-    tween(new Tween(param.model, param.group)
+    param.model.disabled = true;
+    param.model.opacity = 0;
+    param.model.slider.enableMax = param.maxEnable;
+    param.model.slider.battery = param.initialValue;
+    param.model.okButton.label = param.okButtonLabel;
+  }).chain(
+    tween(new Tween(param.model)
       .to({opacity: 1}, 300)
     )
   ).chain(
     process(() => {
-        param.model.disabled = false;
-      }, param.group
-    )
+      param.model.disabled = false;
+    })
   );
 }

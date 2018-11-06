@@ -1,7 +1,7 @@
 // @flow
 
 import {TweenAnimation} from "./tween-animation";
-import {Tween, Group} from '@tweenjs/tween.js';
+import {Group, Tween} from '@tweenjs/tween.js';
 import {tween} from "./tween";
 
 /**
