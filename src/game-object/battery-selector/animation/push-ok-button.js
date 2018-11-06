@@ -1,6 +1,6 @@
 // @flow
 
-import {Group, Tween} from '@tweenjs/tween.js';
+import {Tween} from '@tweenjs/tween.js';
 import type {BatterySelectorModel} from "../model/battery-selector";
 import {TweenAnimation} from "../../../animation/tween-animation";
 import {process} from "../../../animation/process";

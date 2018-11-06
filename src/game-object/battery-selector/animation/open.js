@@ -1,7 +1,7 @@
 // @flow
 
 import type {BatterySelectorModel} from "../model/battery-selector";
-import {Group, Tween} from '@tweenjs/tween.js';
+import {Tween} from '@tweenjs/tween.js';
 import type {OkButtonLabel} from "../model/ok-button";
 import {TweenAnimation} from "../../../animation/tween-animation";
 import {process} from "../../../animation/process";

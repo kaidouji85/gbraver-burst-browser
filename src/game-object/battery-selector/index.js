@@ -6,7 +6,7 @@ import {BatterySelectorView} from "./view/battery-selector-view";
 import type {Resources} from "../../resource/index";
 import * as THREE from "three";
 import {changeBattery} from './animation/change-battery';
-import {Group, Tween} from "@tweenjs/tween.js";
+import {Group} from "@tweenjs/tween.js";
 import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
 import type {OkButtonLabel} from "./model/ok-button";

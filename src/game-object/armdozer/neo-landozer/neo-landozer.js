@@ -1,6 +1,5 @@
 // @flow
 
-import {Tween} from '@tweenjs/tween.js';
 import {ArmDozerSprite} from '../common/armdozer-sprite';
 import * as THREE from "three";
 import type {NeoLandozerModel} from "./model/neo-landozer-model";
