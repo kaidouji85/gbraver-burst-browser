@@ -5,7 +5,7 @@ import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import type {ArmdozerMesh} from "../../common/armdozer-mesh";
-import {ShinBraverStand} from "./mesh/stand";
+import {ShinBraverStand} from "../mesh/stand";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
@@ -38,7 +38,7 @@ export class PlayerShinBraverView implements ShinBraverView {
   _refreshPos(model: ShinBraverModel): void {
     this._group.position.set(
       model.position.x,
-      model.position.y + 150,
+      model.position.y,
       model.position.z
     );
   }
