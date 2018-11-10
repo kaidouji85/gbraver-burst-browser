@@ -8,22 +8,26 @@ import type {ArmdozerMesh} from "../../common/armdozer-mesh";
 import {ShinBraverStand} from "../mesh/stand";
 import {ShinBraverMyTurn} from "../mesh/my-turn";
 import type {AnimationType} from "../model/animation-type";
+import {ShinBraverPunch} from "../mesh/punch";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   _group: THREE.Group;
   _stand: ArmdozerMesh;
   _myTurn: ArmdozerMesh;
+  _punch: ArmdozerMesh;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
-
     this._stand = new ShinBraverStand(resources);
-    this._group.add(this._stand.getObject3D());
-
     this._myTurn = new ShinBraverMyTurn(resources);
-    this._group.add(this._myTurn.getObject3D());
+    this._punch = new ShinBraverPunch(resources);
+
+    this._getAllMeshes().forEach(v => {
+      this._group.add(v.getObject3D());
+    });
   }
+
 
   /** モデルをビューに反映させる */
   engage(model: ShinBraverModel): void {
@@ -50,6 +54,11 @@ export class PlayerShinBraverView implements ShinBraverView {
     return this._group;
   }
 
+  /** 本クラスが持つ全メッシュを返す */
+  _getAllMeshes(): ArmdozerMesh[] {
+    return [this._stand, this._myTurn, this._punch];
+  }
+
   /** 座標を更新する */
   _refreshPos(model: ShinBraverModel): void {
     this._group.position.set(
@@ -59,10 +68,6 @@ export class PlayerShinBraverView implements ShinBraverView {
     );
   }
 
-  _getAllMeshes(): ArmdozerMesh[] {
-    return [this._stand, this._myTurn];
-  }
-
   /** アクティブなメッシュを取得 */
   _getActiveMesh(animationType: AnimationType): ArmdozerMesh {
     switch(animationType) {
@@ -70,6 +75,8 @@ export class PlayerShinBraverView implements ShinBraverView {
         return this._stand;
       case 'MY_TURN':
         return this._myTurn;
+      case 'PUNCH':
+        return this._punch;
       default:
         return this._stand;
     }

@@ -13,13 +13,13 @@ export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;
 export const MAX_ANIMATION = 16;
 
-/** シンブレイバーのマイターンポーズ */
-export class ShinBraverMyTurn {
+/** シンブレイバーのパンチポーズ */
+export class ShinBraverPunch {
   _texture: THREE.Texture;
   _mesh: THREE.Mesh;
 
   constructor(resources: Resources) {
-    const textureResource: ?TextureResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_MY_TURN);
+    const textureResource: ?TextureResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_PUNCH);
     const originTexture: THREE.Texture = textureResource ? textureResource.texture : new THREE.Texture();
     this._texture = createAnimatedTexture(originTexture, MAX_ANIMATION, 1);
 
