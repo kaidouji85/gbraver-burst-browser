@@ -38,12 +38,18 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** パンチアニメーションを再生する */
   punch(): TweenAnimation {
-    // TODO ネオランドーザのアニメーションを作成する
+    // TODO アニメーションを作る
     return empty();
   }
 
   /** マイターンのアニメ */
   myTurn(): TweenAnimation {
+    // TODO アニメーションを作る
+    return empty();
+  }
+
+  /** ターン交代アニメーション */
+  turnChange(): TweenAnimation {
     // TODO アニメーションを作る
     return empty();
   }

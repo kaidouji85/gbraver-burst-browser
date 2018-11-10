@@ -13,6 +13,8 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {punch} from "./animation/punch";
 import {myTurn} from "./animation/my-turn";
 import {TweenAnimation} from "../../../animation/tween-animation";
+import {empty} from "../../../animation/delay";
+import {turnChange} from "./animation/turn-change";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -40,6 +42,11 @@ export class ShinBraver implements ArmDozerSprite {
   /** マイターンのアニメ */
   myTurn(): TweenAnimation {
     return myTurn(this._model);
+  }
+
+  /** ターン交代アニメーション */
+  turnChange(): TweenAnimation {
+    return turnChange(this._model);
   }
 
   /** パンチアニメーションを再生する */

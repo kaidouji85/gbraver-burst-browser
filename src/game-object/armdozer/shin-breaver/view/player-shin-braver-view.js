@@ -4,64 +4,79 @@ import {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
-import {createBasicMesh, MESH_HEIGHT} from "./mesh/basic-mesh";
-import type {ArmdozerAnimationTexture} from "../../common/animation-texture";
-import {StandAnimationTexture} from "./texture/stand";
+import type {ArmdozerMesh} from "../../common/armdozer-mesh";
+import {ShinBraverStand} from "../mesh/stand";
+import {ShinBraverMyTurn} from "../mesh/my-turn";
 import type {AnimationType} from "../model/animation-type";
-import {PunchAnimationTexture} from "./texture/punch";
-import {MyTurnAnimationTexture} from "./texture/my-turn";
-
-export const PADDING_BOTTOM = -16;
+import {ShinBraverPunch} from "../mesh/punch";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
-  _mesh: THREE.Mesh;
-  _stand: ArmdozerAnimationTexture;
-  _myTurn: ArmdozerAnimationTexture;
-  _punch: ArmdozerAnimationTexture;
+  _group: THREE.Group;
+  _stand: ArmdozerMesh;
+  _myTurn: ArmdozerMesh;
+  _punch: ArmdozerMesh;
 
   constructor(resources: Resources) {
-    this._mesh = createBasicMesh();
-    this._stand = new StandAnimationTexture(resources);
-    this._myTurn = new MyTurnAnimationTexture(resources);
-    this._punch = new PunchAnimationTexture(resources);
+    this._group = new THREE.Group();
+    this._stand = new ShinBraverStand(resources);
+    this._myTurn = new ShinBraverMyTurn(resources);
+    this._punch = new ShinBraverPunch(resources);
+
+    this._getAllMeshes().forEach(v => {
+      this._group.add(v.getObject3D());
+    });
   }
+
 
   /** モデルをビューに反映させる */
   engage(model: ShinBraverModel): void {
     this._refreshPos(model);
 
-    const texture = this._getTexture(model.animation.type);
-    this._mesh.material.map = texture.animate(model.animation.frame);
+    const activeMesh = this._getActiveMesh(model.animation.type);
+    this._getAllMeshes()
+      .filter(v => v !== activeMesh)
+      .forEach(v => {
+        v.getObject3D().visible = false;
+      });
+
+    activeMesh.getObject3D().visible = true;
+    activeMesh.animate(model.animation.frame);
   }
 
   /** カメラの真正面を向く */
   lookAt(camera: THREE.Camera): void {
-    this._mesh.quaternion.copy(camera.quaternion);
+    this._group.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
-    return this._mesh;
+    return this._group;
+  }
+
+  /** 本クラスが持つ全メッシュを返す */
+  _getAllMeshes(): ArmdozerMesh[] {
+    return [this._stand, this._myTurn, this._punch];
   }
 
   /** 座標を更新する */
   _refreshPos(model: ShinBraverModel): void {
-    this._mesh.position.set(
+    this._group.position.set(
       model.position.x,
-      model.position.y + MESH_HEIGHT / 2 + PADDING_BOTTOM,
+      model.position.y,
       model.position.z
     );
   }
 
-  /** アニメーションタイプに応じたテクスチャを返す */
-  _getTexture(type: AnimationType): ArmdozerAnimationTexture {
-    switch (type) {
-      case 'PUNCH':
-        return this._punch;
+  /** アクティブなメッシュを取得 */
+  _getActiveMesh(animationType: AnimationType): ArmdozerMesh {
+    switch(animationType) {
+      case 'STAND':
+        return this._stand;
       case 'MY_TURN':
         return this._myTurn;
-      case 'STAND':
+      case 'PUNCH':
+        return this._punch;
       default:
         return this._stand;
     }
