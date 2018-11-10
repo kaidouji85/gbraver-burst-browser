@@ -24,9 +24,9 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     return empty();
   }
 
+  const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
   const enableMax = getEnableMax(effect, sceneState.playerId);
   const initialValue = getInitialBattery(enableMax);
-  const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
 
   const {playerGauge, enemyGauge, turnIndicator, playerSprite, enemySprite} = view.threeDimensionLayer;
@@ -41,7 +41,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
       batterySelector.open(initialValue, enableMax, okButtonLabel),
       burstButton.visible()
     ).chain(
-      isPlayerTurn ? playerSprite.myTurn() : playerSprite.stand(),
-      isPlayerTurn ? enemySprite.stand() : enemySprite.myTurn(),
+      isPlayerTurn ? playerSprite.myTurn() : playerSprite.turnChange(),
+      isPlayerTurn ? enemySprite.turnChange() : enemySprite.myTurn(),
     );
 }

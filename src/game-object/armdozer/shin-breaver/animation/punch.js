@@ -30,7 +30,7 @@ export function punch(model: ShinBraverModel): TweenAnimation {
 
   return empty()
     .chain(
-      delay(1200),
+      delay(1400),
       animation
     )
 }
