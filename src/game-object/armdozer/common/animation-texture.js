@@ -2,6 +2,7 @@
 
 import * as THREE from 'three';
 
+// TODO 削除する
 /** アームドーザのテクスチャアニメーション */
 export interface ArmdozerAnimationTexture {
   /**
