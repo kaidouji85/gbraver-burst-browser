@@ -7,8 +7,8 @@ import type {JsonModelResource} from "./json-model";
 import {loadAllJsonModel} from "./json-model";
 import type {CanvasImageResource} from "./canvas-image";
 import {loadAllCanvasImage} from "./canvas-image";
-import {loadAllAnimatedTexture} from "./animated-texture";
 import type {AnimatedTextureResource} from "./animated-texture";
+import {loadAllAnimatedTexture} from "./animated-texture";
 
 /**
  * ゲームで使うリソースを集めたもの
