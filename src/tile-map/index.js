@@ -6,7 +6,7 @@ import {getHorizonDividedNum, getTextureOffsetPos, getVerticalDividedNum} from "
 import {EMPTY_TILE_SET} from "./empty-tile-set";
 import type {TileMapJson, TileSetJson} from "./tiled";
 import {getMapPosition} from "./map-position";
-import {createAnimatedTexture} from "../texture/animation/texture-animation";
+import {animatedTexture} from "../texture/animation/texture-animation";
 import {EMPTY_TILE_MAP} from "./empty-map-data";
 import type {TileMapId, TileMapResource} from "../resource/tile-map";
 import type {TextureId, TextureResource} from "../resource/texture";
@@ -38,7 +38,10 @@ export function createTileMap(params: Params): THREE.Group {
   const basePosZ = (-tileMapData.height + 1) * params.meshHeight / 2;
 
   const meshes: THREE.Mesh[] = tileMapData.layers[0].data.map((v, index) => {
-    const tileTexture: THREE.Texture = createAnimatedTexture(texture, horizonDividedNum, verticalDividedNum);
+    const tileTexture = texture.clone();
+    tileTexture.needsUpdate = true;
+    animatedTexture(tileTexture, horizonDividedNum, verticalDividedNum);
+
     const geometry: THREE.Geometry = new THREE.PlaneGeometry(params.meshWith, params.meshHeight, 1, 1);
     const material: THREE.Material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
