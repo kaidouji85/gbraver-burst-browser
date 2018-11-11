@@ -28,9 +28,9 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this._getAllMeshes()
       .filter(v => v !== activeMesh)
       .forEach(v => {
-        v.getObject3D().visible = false;
+        v.visible(false);
       });
-    activeMesh.getObject3D().visible = true;
+    activeMesh.visible(true);
     activeMesh.animate(model.animation.frame);
     this._refreshPos(model);
   }

@@ -11,6 +11,9 @@ export interface ArmdozerMesh {
    */
   animate(animation: number): void;
 
+  /** 表示、非表示を設定する */
+  visible(isVisible: boolean): void;
+
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
 }

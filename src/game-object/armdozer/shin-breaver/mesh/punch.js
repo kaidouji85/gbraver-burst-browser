@@ -33,6 +33,10 @@ export class ShinBraverPunch {
     this._texture.offset.y = 0;
   }
 
+  visible(isVisible: boolean): void {
+    this._mesh.material.opacity = isVisible ? 1 : 0;
+  }
+
   getObject3D(): THREE.Object3D {
     return this._mesh;
   }

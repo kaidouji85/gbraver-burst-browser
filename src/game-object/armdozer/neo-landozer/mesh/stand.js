@@ -31,6 +31,10 @@ export class NeoLandozerStand implements ArmdozerMesh {
     // NOP
   }
 
+  visible(isVisible: boolean): void {
+    this._mesh.material.opacity = isVisible ? 1 : 0;
+  }
+
   getObject3D(): THREE.Object3D {
     return this._mesh;
   }
