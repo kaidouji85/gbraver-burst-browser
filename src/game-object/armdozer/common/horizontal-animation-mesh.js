@@ -26,7 +26,7 @@ export class HorizontalAnimationMesh implements ArmdozerMesh {
 
   constructor(param: Param) {
     const textureResource = param.resources.animatedTextures.find(v => v.id === param.id);
-    this.texture = textureResource ? textureResource.texture : new THREE.Texture();
+    this.texture = textureResource ? textureResource.texture.clone() : new THREE.Texture();
     this.texture.needsUpdate = true;
     this.maxAnimation = textureResource ? textureResource.horizon : 1;
 

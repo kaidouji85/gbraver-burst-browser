@@ -8,7 +8,7 @@ import type {ArmdozerMesh} from "../../common/armdozer-mesh";
 import {ShinBraverStand} from "../mesh/stand";
 import {shinBraverMyTurn} from "../mesh/my-turn";
 import type {AnimationType} from "../model/animation-type";
-import {ShinBraverPunch} from "../mesh/punch";
+import {shinBraverPunch} from "../mesh/punch";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
@@ -21,7 +21,7 @@ export class PlayerShinBraverView implements ShinBraverView {
     this._group = new THREE.Group();
     this._stand = new ShinBraverStand(resources);
     this._myTurn = shinBraverMyTurn(resources);
-    this._punch = new ShinBraverPunch(resources);
+    this._punch = shinBraverPunch(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
