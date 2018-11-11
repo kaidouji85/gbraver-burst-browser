@@ -7,6 +7,8 @@ import type {JsonModelResource} from "./json-model";
 import {loadAllJsonModel} from "./json-model";
 import type {CanvasImageResource} from "./canvas-image";
 import {loadAllCanvasImage} from "./canvas-image";
+import {loadAllAnimatedTexture} from "./animated-texture";
+import type {AnimatedTextureResource} from "./animated-texture";
 
 /**
  * ゲームで使うリソースを集めたもの
@@ -16,6 +18,8 @@ export type Resources = {
   models: JsonModelResource[],
   /** テクスチャ */
   textures: TextureResource[],
+  /** アニメーションテクスチャ */
+  animatedTextures: AnimatedTextureResource[],
   /** キャンバス用画像 */
   canvasImages: CanvasImageResource[],
   /** タイルマップ */
@@ -30,15 +34,17 @@ export type Resources = {
  */
 export async function loadAllResource(basePath: string): Promise<Resources> {
   const tileMap = loadAllTileMap();
-  const [models, textures, canvasImages] = await Promise.all([
+  const [models, textures, animatedTextures, canvasImages] = await Promise.all([
     loadAllJsonModel(basePath),
     loadAllTexture(basePath),
+    loadAllAnimatedTexture(basePath),
     loadAllCanvasImage(basePath),
   ]);
 
   return {
     models: models,
     textures: textures,
+    animatedTextures: animatedTextures,
     tileMap: tileMap,
     canvasImages: canvasImages
   };
