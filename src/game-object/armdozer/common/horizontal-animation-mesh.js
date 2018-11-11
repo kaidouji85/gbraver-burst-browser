@@ -6,12 +6,14 @@ import {shinBraverMaterial} from "../shin-breaver/mesh/material";
 import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
 import {MESH_HEIGHT, MESH_WIDTH} from "../shin-breaver/mesh/my-turn";
 import type {Resources} from "../../../resource";
-import type {AnimatedTextureID} from "../../../resource/animated-texture";
 import {normalizeTextureOffset} from "../../../texture/animation/texture-offset";
+import type {TextureId} from "../../../resource/texture";
+import {animatedTexture} from "../../../texture/animation/texture-animation";
 
 type Param = {
-  id: AnimatedTextureID,
+  id: TextureId,
   resources: Resources,
+  maxAnimation: number,
   width: number,
   height: number,
 };
@@ -25,10 +27,11 @@ export class HorizontalAnimationMesh implements ArmdozerMesh {
   maxAnimation: number;
 
   constructor(param: Param) {
-    const textureResource = param.resources.animatedTextures.find(v => v.id === param.id);
+    const textureResource = param.resources.textures.find(v => v.id === param.id);
     this.texture = textureResource ? textureResource.texture.clone() : new THREE.Texture();
+    animatedTexture(this.texture, param.maxAnimation, 1);
     this.texture.needsUpdate = true;
-    this.maxAnimation = textureResource ? textureResource.horizon : 1;
+    this.maxAnimation = param.maxAnimation;
 
     const geometry = new THREE.PlaneGeometry(MESH_HEIGHT, MESH_WIDTH, 1, 1);
     const material = shinBraverMaterial(this.texture);
