@@ -6,7 +6,7 @@ import type {Resources} from "../../../../resource/index";
 import type {NeoLandozerModel} from "../model/neo-landozer-model";
 import type {AnimationType} from "../model/animation-type";
 import type {ArmdozerMesh} from "../../common/armdozer-mesh";
-import {NeoLandozerStand} from "../mesh/stand";
+import {neoLandozerStand} from "../mesh/stand";
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
@@ -15,7 +15,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
-    this._stand = new NeoLandozerStand(resources);
+    this._stand = neoLandozerStand(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());

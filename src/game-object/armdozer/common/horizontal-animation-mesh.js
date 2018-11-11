@@ -40,15 +40,18 @@ export class HorizontalAnimationMesh implements ArmdozerMesh {
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
   }
 
+  /** アニメーションを設定する */
   animate(frame: number): void {
     this.texture.offset.x = normalizeTextureOffset(frame, this.maxAnimation);
     this.texture.offset.y = 0;
   }
 
+  /** 表示、非表示を設定する */
   visible(isVisible: boolean): void {
     this.mesh.material.opacity = isVisible ? 1 : 0;
   }
 
+  /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this.mesh;
   }
