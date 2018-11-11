@@ -2,11 +2,7 @@
 
 import type {ArmdozerMesh} from "../../common/armdozer-mesh";
 import type {Resources} from "../../../../resource/index";
-import * as THREE from "three";
-import type {TextureResource} from "../../../../resource/texture";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import {SPRITE_RENDER_ORDER} from "../../../../mesh/render-order";
-import {neoLandozerMaterial} from "./material";
 import {HorizontalAnimationMesh} from "../../common/horizontal-animation-mesh";
 
 export const MAX_ANIMATION = 1;
