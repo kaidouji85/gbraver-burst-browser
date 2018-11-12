@@ -5,10 +5,10 @@ import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import type {ArmdozerMesh} from "../../common/armdozer-mesh";
-import {ShinBraverStand} from "../mesh/stand";
-import {ShinBraverMyTurn} from "../mesh/my-turn";
+import {shinBraverStand} from "../mesh/stand";
+import {shinBraverMyTurn} from "../mesh/my-turn";
 import type {AnimationType} from "../model/animation-type";
-import {ShinBraverPunch} from "../mesh/punch";
+import {shinBraverPunch} from "../mesh/punch";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
@@ -19,9 +19,9 @@ export class PlayerShinBraverView implements ShinBraverView {
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
-    this._stand = new ShinBraverStand(resources);
-    this._myTurn = new ShinBraverMyTurn(resources);
-    this._punch = new ShinBraverPunch(resources);
+    this._stand = shinBraverStand(resources);
+    this._myTurn = shinBraverMyTurn(resources);
+    this._punch = shinBraverPunch(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -37,10 +37,10 @@ export class PlayerShinBraverView implements ShinBraverView {
     this._getAllMeshes()
       .filter(v => v !== activeMesh)
       .forEach(v => {
-        v.getObject3D().visible = false;
+        v.visible(false);
       });
 
-    activeMesh.getObject3D().visible = true;
+    activeMesh.visible(true);
     activeMesh.animate(model.animation.frame);
   }
 
