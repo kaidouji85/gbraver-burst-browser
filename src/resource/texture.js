@@ -39,10 +39,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     path: 'armdozer/shin-braver/stand.png'
   },
   {
-    id: TEXTURE_IDS.SHIN_BRAVER_MY_TURN,
-    path: 'armdozer/shin-braver/my-turn.png'
-  },
-  {
     id: TEXTURE_IDS.SHIN_BRAVER_PUNCH,
     path: 'armdozer/shin-braver/punch.png'
   },

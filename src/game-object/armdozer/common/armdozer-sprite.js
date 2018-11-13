@@ -12,12 +12,15 @@ export interface ArmDozerSprite {
   /** 立ちポーズにする */
   stand(): TweenAnimation;
 
-  /** 自分ターンの時のポーズ */
-  myTurn(): TweenAnimation;
+  /** 敵との距離を詰める */
+  frontStep(): TweenAnimation;
 
-  /** ターンチェンジ時のポーズ */
-  turnChange(): TweenAnimation;
+  /** 敵との距離を離す */
+  backStep(): TweenAnimation;
 
   /** パンチのアニメーションを再生する */
   punch(): TweenAnimation;
+
+  /** パンチをしてから攻撃がヒットするまでの時間 */
+  punchHitDuration(): number;
 }

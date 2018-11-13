@@ -40,8 +40,5 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
       turnIndicator.turnChange(isPlayerTurn),
       batterySelector.open(initialValue, enableMax, okButtonLabel),
       burstButton.visible()
-    ).chain(
-      isPlayerTurn ? playerSprite.myTurn() : playerSprite.turnChange(),
-      isPlayerTurn ? enemySprite.turnChange() : enemySprite.myTurn(),
     );
 }
