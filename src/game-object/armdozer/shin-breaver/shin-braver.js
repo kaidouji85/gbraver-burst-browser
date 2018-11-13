@@ -11,9 +11,9 @@ import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {punch} from "./animation/punch";
-import {myTurn} from "./animation/my-turn";
 import {TweenAnimation} from "../../../animation/tween-animation";
-import {turnChange} from "./animation/turn-change";
+import {frontStep} from "./animation/front-step";
+import {backStep} from "./animation/back-step";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -38,9 +38,24 @@ export class ShinBraver implements ArmDozerSprite {
     return stand(this._model);
   }
 
+  /** 敵との距離を詰める */
+  frontStep(): TweenAnimation {
+    return frontStep(this._model);
+  }
+
+  /** 敵との距離を離す */
+  backStep(): TweenAnimation {
+    return backStep(this._model);
+  }
+
   /** パンチアニメーションを再生する */
   punch(): TweenAnimation {
     return punch(this._model);
+  }
+
+  /** パンチをしてから攻撃がヒットするまでの時間 */
+  punchHitDuration(): number {
+    return 1000;
   }
 
   /** シーンに追加するオブジェクトを返す */

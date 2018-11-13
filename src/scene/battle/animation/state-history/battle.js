@@ -5,7 +5,7 @@ import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
-import {empty} from "../../../../animation/delay";
+import {delay, empty} from "../../../../animation/delay";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 
@@ -40,9 +40,16 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
       attackerBattery.popUp(effect.attackerBattery),
       defenderBattery.popUp(effect.defenderBattery)
     ).chain(
+      attacker.frontStep()
+        .chain(delay(1000))
+    ).chain(
+      delay(attacker.punchHitDuration())
+        .chain(damageAnimation(damageIndicator, effect.result))
+        .chain(delay(500)),
       attacker.punch()
     ).chain(
-      damageAnimation(damageIndicator, effect.result),
+      attacker.backStep()
+        .chain(delay(1000))
     );
 }
 

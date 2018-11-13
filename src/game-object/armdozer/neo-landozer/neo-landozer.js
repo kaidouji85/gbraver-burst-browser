@@ -36,10 +36,25 @@ export class NeoLandozer implements ArmDozerSprite {
     return stand(this._model);
   }
 
+  /** 敵との距離を詰める */
+  frontStep(): TweenAnimation {
+    return empty();
+  }
+
+  /** 敵との距離を離す */
+  backStep(): TweenAnimation {
+    return empty();
+  }
+
   /** パンチアニメーションを再生する */
   punch(): TweenAnimation {
     // TODO アニメーションを作る
     return empty();
+  }
+
+  /** パンチをしてから攻撃がヒットするまでの時間 */
+  punchHitDuration(): number {
+    return 1000;
   }
 
   /** シーンに追加するオブジェクトを取得する */
