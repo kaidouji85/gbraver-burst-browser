@@ -43,10 +43,9 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
       attacker.frontStep()
         .chain(delay(1000))
     ).chain(
+      attacker.punch(),
       delay(attacker.punchHitDuration())
         .chain(damageAnimation(damageIndicator, effect.result))
-        .chain(delay(500)),
-      attacker.punch()
     ).chain(
       attacker.backStep()
         .chain(delay(1000))

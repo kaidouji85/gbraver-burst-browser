@@ -55,7 +55,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** パンチをしてから攻撃がヒットするまでの時間 */
   punchHitDuration(): number {
-    return 1000;
+    return 1600;
   }
 
   /** シーンに追加するオブジェクトを返す */
