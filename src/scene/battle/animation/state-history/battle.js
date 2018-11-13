@@ -41,14 +41,12 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
       defenderBattery.popUp(effect.defenderBattery)
     ).chain(
       attacker.frontStep()
-        .chain(delay(1000))
     ).chain(
       attacker.punch(),
       delay(attacker.punchHitDuration())
         .chain(damageAnimation(damageIndicator, effect.result))
     ).chain(
       attacker.backStep()
-        .chain(delay(1000))
     );
 }
 
