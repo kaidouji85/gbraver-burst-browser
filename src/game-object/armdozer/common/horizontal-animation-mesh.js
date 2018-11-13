@@ -4,7 +4,6 @@ import type {ArmdozerMesh} from "./armdozer-mesh";
 import * as THREE from "three";
 import {shinBraverMaterial} from "../shin-breaver/mesh/material";
 import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
-import {MESH_HEIGHT, MESH_WIDTH} from "../shin-breaver/mesh/my-turn";
 import type {Resources} from "../../../resource";
 import {normalizeTextureOffset} from "../../../texture/animation/texture-offset";
 import type {TextureId} from "../../../resource/texture";
@@ -33,7 +32,7 @@ export class HorizontalAnimationMesh implements ArmdozerMesh {
     this.texture.needsUpdate = true;
     this.maxAnimation = param.maxAnimation;
 
-    const geometry = new THREE.PlaneGeometry(MESH_HEIGHT, MESH_WIDTH, 1, 1);
+    const geometry = new THREE.PlaneGeometry(param.height, param.width, 1, 1);
     const material = shinBraverMaterial(this.texture);
     this.mesh = new THREE.Mesh(geometry, material);
     this.mesh.position.y = 150;

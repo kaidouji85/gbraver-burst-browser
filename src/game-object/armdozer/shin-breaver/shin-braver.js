@@ -38,16 +38,6 @@ export class ShinBraver implements ArmDozerSprite {
     return stand(this._model);
   }
 
-  /** マイターンのアニメ */
-  myTurn(): TweenAnimation {
-    return myTurn(this._model);
-  }
-
-  /** ターン交代アニメーション */
-  turnChange(): TweenAnimation {
-    return turnChange(this._model);
-  }
-
   /** パンチアニメーションを再生する */
   punch(): TweenAnimation {
     return punch(this._model);

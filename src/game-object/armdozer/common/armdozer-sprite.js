@@ -12,12 +12,6 @@ export interface ArmDozerSprite {
   /** 立ちポーズにする */
   stand(): TweenAnimation;
 
-  /** 自分ターンの時のポーズ */
-  myTurn(): TweenAnimation;
-
-  /** ターンチェンジ時のポーズ */
-  turnChange(): TweenAnimation;
-
   /** パンチのアニメーションを再生する */
   punch(): TweenAnimation;
 }

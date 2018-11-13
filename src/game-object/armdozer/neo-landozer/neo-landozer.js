@@ -42,18 +42,6 @@ export class NeoLandozer implements ArmDozerSprite {
     return empty();
   }
 
-  /** マイターンのアニメ */
-  myTurn(): TweenAnimation {
-    // TODO アニメーションを作る
-    return empty();
-  }
-
-  /** ターン交代アニメーション */
-  turnChange(): TweenAnimation {
-    // TODO アニメーションを作る
-    return empty();
-  }
-
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
