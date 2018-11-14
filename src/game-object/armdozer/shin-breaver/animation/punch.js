@@ -14,7 +14,7 @@ export function punch(model: ShinBraverModel): TweenAnimation {
     model.animation.frame = 0;
   }).chain(
     tween(new Tween(model.animation)
-      .to({frame: 7/16}, 500)
+      .to({frame: 11/16}, 500)
     )
   ).chain(
    delay(1000)
