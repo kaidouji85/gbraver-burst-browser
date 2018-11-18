@@ -1,4 +1,4 @@
 // @flow
 
 /** アニメーションタイプ */
-export type AnimationType = 'STAND';
+export type AnimationType = 'STAND' | 'DAMAGE';
