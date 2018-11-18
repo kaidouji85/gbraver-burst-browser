@@ -21,8 +21,11 @@ export interface ArmDozerSprite {
   /** パンチのアニメーションを再生する */
   punch(): TweenAnimation;
 
-  /** ダメージアニメーションを再生する */
-  damage(): TweenAnimation;
+  /** ノックバックアニメーションを再生する */
+  knockBack(): TweenAnimation;
+
+  /** ノックバックから立ちに戻る */
+  recoverKnockBack(): TweenAnimation;
 
   /** パンチをしてから攻撃がヒットするまでの時間 */
   punchHitDuration(): number;

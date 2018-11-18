@@ -60,7 +60,12 @@ export class ShinBraver implements ArmDozerSprite {
   }
 
   /** ダメージアニメーションを再生する */
-  damage(): TweenAnimation {
+  knockBack(): TweenAnimation {
+    return empty();
+  }
+
+  /** ノックバックから立ちに戻る */
+  recoverKnockBack(): TweenAnimation {
     return empty();
   }
 

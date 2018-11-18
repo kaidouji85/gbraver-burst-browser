@@ -10,9 +10,9 @@ export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;
 
 /** ネオラインドーザダメージポーズ */
-export function neoLandozerDamge(resources: Resources): ArmdozerMesh {
+export function neoLandozerKnockBack(resources: Resources): ArmdozerMesh {
   const ret = new HorizontalAnimationMesh({
-    id: TEXTURE_IDS.NEO_LANDOZER_DAMAGE,
+    id: TEXTURE_IDS.NEO_LANDOZER_KNOCK_BACK,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,

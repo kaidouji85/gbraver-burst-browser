@@ -6,16 +6,14 @@ import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {Tween} from '@tweenjs/tween.js';
 
-/** 立ちポーズにする */
-export function damage(model: NeoLandozerModel): TweenAnimation {
+/** ノックバック */
+export function knockBack(model: NeoLandozerModel): TweenAnimation {
   return process(() => {
     model.animation.frame = 0;
-    model.animation.type = 'DAMAGE';
+    model.animation.type = 'KNOCK_BACK';
   }).chain(
     tween(new Tween(model.animation)
-      .to({frame: 1}, 300)
-      .repeat(1)
-      .yoyo(true)
+      .to({frame: 1}, 50)
     )
   );
 }

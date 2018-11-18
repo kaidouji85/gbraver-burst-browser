@@ -47,10 +47,12 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
       delay(attacker.punchHitDuration())
         .chain(
           damageIndicatorAnimation(damageIndicator, effect.result),
-          defender.damage()
+          defender.knockBack()
         )
     ).chain(
-      attacker.backStep()
+      attacker.backStep(),
+    ).chain(
+      defender.recoverKnockBack()
     );
 }
 
