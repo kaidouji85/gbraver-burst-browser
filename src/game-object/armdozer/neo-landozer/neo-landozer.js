@@ -12,6 +12,8 @@ import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {TweenAnimation} from "../../../animation/tween-animation";
 import {empty} from "../../../animation/delay";
+import {knockBack} from "./animation/knock-back";
+import {recoverKnockBack} from "./animation/recover-knock-back";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -58,6 +60,16 @@ export class NeoLandozer implements ArmDozerSprite {
   /** パンチをしてから攻撃がヒットするまでの時間 */
   punchHitDuration(): number {
     return 0;
+  }
+
+  /** ダメージアニメーションを再生する */
+  knockBack(): TweenAnimation {
+    return knockBack(this._model);
+  }
+
+  /** ノックバックから立ちに戻る */
+  recoverKnockBack(): TweenAnimation {
+    return recoverKnockBack(this._model);
   }
 
   /** シーンに追加するオブジェクトを取得する */

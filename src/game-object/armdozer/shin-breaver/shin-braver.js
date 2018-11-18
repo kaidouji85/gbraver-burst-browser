@@ -14,6 +14,7 @@ import {punch} from "./animation/punch";
 import {TweenAnimation} from "../../../animation/tween-animation";
 import {frontStep} from "./animation/front-step";
 import {backStep} from "./animation/back-step";
+import {empty} from "../../../animation/delay";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -56,6 +57,16 @@ export class ShinBraver implements ArmDozerSprite {
   /** パンチをしてから攻撃がヒットするまでの時間 */
   punchHitDuration(): number {
     return 1600;
+  }
+
+  /** ダメージアニメーションを再生する */
+  knockBack(): TweenAnimation {
+    return empty();
+  }
+
+  /** ノックバックから立ちに戻る */
+  recoverKnockBack(): TweenAnimation {
+    return empty();
   }
 
   /** シーンに追加するオブジェクトを返す */

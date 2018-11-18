@@ -12,7 +12,7 @@ export function frontStep(model: ShinBraverModel): TweenAnimation {
     model.animation.type = 'STAND';
   }).chain(
     tween(new Tween(model.position)
-      .to({x: '-120', z: '+10'}, 300)
+      .to({x: '-120', z: '+1'}, 300)
     )
   ).chain(delay(1000));
 }

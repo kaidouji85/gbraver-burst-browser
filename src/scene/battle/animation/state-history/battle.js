@@ -8,6 +8,7 @@ import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
 import {delay, empty} from "../../../../animation/delay";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import type {ArmDozerSprite} from "../../../../game-object/armdozer/common/armdozer-sprite";
 
 /**
  * 戦闘アニメーション
@@ -44,14 +45,19 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
     ).chain(
       attacker.punch(),
       delay(attacker.punchHitDuration())
-        .chain(damageAnimation(damageIndicator, effect.result))
+        .chain(
+          damageIndicatorAnimation(damageIndicator, effect.result),
+          defender.knockBack()
+        )
     ).chain(
-      attacker.backStep()
+      attacker.backStep(),
+    ).chain(
+      defender.recoverKnockBack()
     );
 }
 
 /** 戦闘結果に応じたダメージ表示を行う */
-function damageAnimation(damageIndicator: DamageIndicator, result: BattleResult): TweenAnimation {
+function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: BattleResult): TweenAnimation {
   switch (result.name) {
     case 'NormalHit':
     case 'Guard':
