@@ -18,6 +18,6 @@ export function neoLandozerKnockBack(resources: Resources): ArmdozerMesh {
     width: MESH_WIDTH,
     height: MESH_HEIGHT
   });
-  ret.mesh.position.y = 130;
+  ret.mesh.position.y = 135;
   return ret;
 }
