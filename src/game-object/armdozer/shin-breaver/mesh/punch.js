@@ -18,6 +18,6 @@ export function shinBraverPunch(resources: Resources): ArmdozerMesh {
     width: MESH_WIDTH,
     height: MESH_HEIGHT
   });
-  ret.mesh.position.y = 150;
+  ret.mesh.position.y = 140;
   return ret;
 }
