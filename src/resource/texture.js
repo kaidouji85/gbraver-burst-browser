@@ -48,6 +48,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.NEO_LANDOZER_STAND,
     path: 'armdozer/neo-landozer/stand.png'
   },
+  {
+    id: TEXTURE_IDS.NEO_LANDOZER_DAMAGE,
+    path: 'armdozer/neo-landozer/damage.png'
+  },
 
   // 青空スカイボックス関連
   {
