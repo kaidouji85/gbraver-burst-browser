@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import type {GaugeView} from "./view/gauge-view";
 import type {GaugeModel} from "./model/gauge-model";
-import {refresh} from "./animation/regresh";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
@@ -40,11 +39,6 @@ export class Gauge {
         this._preRender(action);
       }
     });
-  }
-
-  /** ゲージ内容更新 */
-  refresh(hp: number, battery: number): TweenAnimation {
-    return refresh(this._model, hp, battery);
   }
 
   /** HP変更 */
