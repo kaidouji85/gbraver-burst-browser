@@ -35,8 +35,8 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   return empty()
     .chain(
       delay(500),
-      playerGauge.refresh(player.armdozer.hp, player.armdozer.battery),
-      enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery),
+      //playerGauge.refresh(player.armdozer.hp, player.armdozer.battery),
+      //enemyGauge.refresh(enemy.armdozer.hp, enemy.armdozer.battery),
       turnIndicator.turnChange(isPlayerTurn),
       batterySelector.open(initialValue, enableMax, okButtonLabel),
       burstButton.visible()

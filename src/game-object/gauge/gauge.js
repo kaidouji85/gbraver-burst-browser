@@ -47,10 +47,12 @@ export class Gauge {
     return refresh(this._model, hp, battery);
   }
 
+  /** HP変更 */
   hp(value: number): TweenAnimation {
     return hp(this._model, value);
   }
 
+  /** バッテリー変更 */
   battery(value: number): TweenAnimation {
     return battery(this._model, value);
   }
