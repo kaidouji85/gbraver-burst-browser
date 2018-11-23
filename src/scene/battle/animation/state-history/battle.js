@@ -1,14 +1,14 @@
 // @flow
 
-import {TweenAnimation} from "../../../../animation/tween-animation";
+import {Animate} from "../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
 import {delay, empty} from "../../../../animation/delay";
+import {all} from "../../../../animation/all";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
-import type {ArmDozerSprite} from "../../../../game-object/armdozer/common/armdozer-sprite";
 
 /**
  * 戦闘アニメーション
@@ -19,7 +19,7 @@ import type {ArmDozerSprite} from "../../../../game-object/armdozer/common/armdo
  * @param effect 戦闘結果
  * @return アニメーション
  */
-export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): TweenAnimation {
+export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): Animate {
   const isAttacker = effect.attacker === sceneState.playerId;
   const {
     playerBatteryNumber,
@@ -49,20 +49,23 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
 
   return empty()
     .chain(
-      attacker.batteryNumber.popUp(effect.attackerBattery),
-      attacker.gauge.battery(attacker.state.armdozer.battery),
-      defender.batteryNumber.popUp(effect.defenderBattery),
-      defender.gauge.battery(defender.state.armdozer.battery),
+      all(
+        attacker.batteryNumber.popUp(effect.attackerBattery),
+        attacker.gauge.battery(attacker.state.armdozer.battery),
+        defender.batteryNumber.popUp(effect.defenderBattery),
+        defender.gauge.battery(defender.state.armdozer.battery)
+      )
     ).chain(
       attacker.sprite.frontStep()
     ).chain(
-      attacker.sprite.punch(),
-      delay(attacker.sprite.punchHitDuration())
-        .chain(
-          damageIndicatorAnimation(defender.damageIndicator, effect.result),
-          defender.sprite.knockBack(),
-          defender.gauge.hp(defender.state.armdozer.hp)
-        )
+      all(
+        attacker.sprite.punch(),
+        delay(attacker.sprite.punchHitDuration())
+          .chain(
+            damageIndicatorAnimation(defender.damageIndicator, effect.result),
+            defender.sprite.knockBack(),
+            defender.gauge.hp(defender.state.armdozer.hp)
+          ))
     ).chain(
       attacker.sprite.backStep()
     ).chain(
@@ -71,7 +74,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
 }
 
 /** 戦闘結果に応じたダメージ表示を行う */
-function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: BattleResult): TweenAnimation {
+function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: BattleResult): Animate {
   switch (result.name) {
     case 'NormalHit':
     case 'Guard':

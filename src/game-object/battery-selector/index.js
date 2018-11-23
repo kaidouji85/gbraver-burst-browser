@@ -14,7 +14,7 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
 import {createInitialValue} from "./model/initial-value";
-import {TweenAnimation} from "../../animation/tween-animation";
+import {Animate} from "../../animation/animate";
 import {process} from "../../animation/process";
 
 /** コンストラクタのパラメータ */
@@ -67,7 +67,7 @@ export class BatterySelector {
    * @param okButtonLabel OKボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): TweenAnimation {
+  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): Animate {
     return process(() => {
       this._view.setLastBattery(initialValue);
     }).chain(
@@ -81,7 +81,7 @@ export class BatterySelector {
   }
 
   /** バッテリーセレクタを閉じる */
-  close(): TweenAnimation {
+  close(): Animate {
     return close(this._model);
   }
 

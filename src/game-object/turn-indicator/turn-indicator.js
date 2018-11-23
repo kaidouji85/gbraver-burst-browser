@@ -10,7 +10,7 @@ import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {invisible} from "./animation/invisible";
 import {turnChange} from "./animation/turn-change";
-import {TweenAnimation} from "../../animation/tween-animation";
+import {Animate} from "../../animation/animate";
 
 type Param = {
   resources: Resources,
@@ -44,11 +44,11 @@ export class TurnIndicator {
    * @param isPlayerTurn プレイヤーターンか否かのフラグ、trueでプレイヤーターン
    * @return アニメーション
    */
-  turnChange(isPlayerTurn: boolean): TweenAnimation {
+  turnChange(isPlayerTurn: boolean): Animate {
     return turnChange(isPlayerTurn, this._model);
   }
 
-  invisible(): TweenAnimation {
+  invisible(): Animate {
     return invisible(this._model);
   }　
 

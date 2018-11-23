@@ -10,7 +10,7 @@ import {createInitialValue} from "./model/initial-value";
 import {visible} from './animation/visible';
 import {invisible} from './animation/invisible';
 import type {Update} from "../../action/game-loop/update";
-import {TweenAnimation} from "../../animation/tween-animation";
+import {Animate} from "../../animation/animate";
 
 type Param = {
   resources: Resources,
@@ -33,7 +33,7 @@ export class BurstButton {
   }
 
   /** ボタンを表示する */
-  visible(): TweenAnimation {
+  visible(): Animate {
     return visible(this._model);
   }
 
@@ -43,7 +43,7 @@ export class BurstButton {
    *
    * @param delay 非表示アニメが再生されるまでディライ
    */
-  invisible(): TweenAnimation {
+  invisible(): Animate {
     return invisible(this._model);
   }
 

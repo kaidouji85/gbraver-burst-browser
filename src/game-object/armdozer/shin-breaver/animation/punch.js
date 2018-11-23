@@ -1,25 +1,24 @@
 // @flow
 
 import type {ShinBraverModel} from "../model/shin-braver-model";
-import {Tween} from '@tweenjs/tween.js';
-import {TweenAnimation} from "../../../../animation/tween-animation";
+import {Animate} from "../../../../animation/animate";
 import {tween} from "../../../../animation/tween";
 import {process} from "../../../../animation/process";
 import {delay} from "../../../../animation/delay";
 
 /** パンチアニメーション */
-export function punch(model: ShinBraverModel): TweenAnimation {
+export function punch(model: ShinBraverModel): Animate {
   return process(() => {
     model.animation.type = 'PUNCH';
     model.animation.frame = 0;
   }).chain(
-    tween(new Tween(model.animation)
+    tween(model.animation, t => t
       .to({frame: 11/16}, 500)
     )
   ).chain(
    delay(1000)
   ).chain(
-    tween(new Tween(model.animation)
+    tween(model.animation, t => t
       .to({frame: 1}, 150)
       .repeat(1)
       .yoyo(true)
@@ -27,7 +26,7 @@ export function punch(model: ShinBraverModel): TweenAnimation {
   ).chain(
     delay(1000)
   ).chain(
-    tween(new Tween(model.animation)
+    tween(model.animation, t => t
       .to({frame: 0}, 500)
     )
   ).chain(

@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
-import {TweenAnimation} from "../../animation/tween-animation";
+import {Animate} from "../../animation/animate";
 import {hp} from "./animation/hp";
 import {battery} from './animation/battery';
 
@@ -42,12 +42,12 @@ export class Gauge {
   }
 
   /** HP変更 */
-  hp(value: number): TweenAnimation {
+  hp(value: number): Animate {
     return hp(this._model, value);
   }
 
   /** バッテリー変更 */
-  battery(value: number): TweenAnimation {
+  battery(value: number): Animate {
     return battery(this._model, value);
   }
 

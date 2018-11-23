@@ -1,9 +1,8 @@
 // @flow
 
 import type {BatterySelectorModel} from "../model/battery-selector";
-import {Tween} from '@tweenjs/tween.js';
 import type {OkButtonLabel} from "../model/ok-button";
-import {TweenAnimation} from "../../../animation/tween-animation";
+import {Animate} from "../../../animation/animate";
 import {process} from "../../../animation/process";
 import {tween} from "../../../animation/tween";
 
@@ -15,7 +14,7 @@ type Param = {
 };
 
 /**バッテリーセレクタを開く */
-export function open(param: Param): TweenAnimation {
+export function open(param: Param): Animate {
   return process(() => {
     param.model.disabled = true;
     param.model.opacity = 0;
@@ -23,7 +22,7 @@ export function open(param: Param): TweenAnimation {
     param.model.slider.battery = param.initialValue;
     param.model.okButton.label = param.okButtonLabel;
   }).chain(
-    tween(new Tween(param.model)
+    tween(param.model, t => t
       .to({opacity: 1}, 300)
     )
   ).chain(
