@@ -9,7 +9,7 @@ import {createInitialValue} from "./model/initial-value";
 import {popUp} from "./animation/pop-up";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
-import {TweenAnimation} from "../../animation/tween-animation";
+import {Animate} from "../../animation/animate";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -34,7 +34,7 @@ export class BatteryNumber {
   }
 
   /** バッテリーを表示する */
-  popUp(battery: number): TweenAnimation {
+  popUp(battery: number): Animate {
     return popUp(this._model, battery);
   }
 

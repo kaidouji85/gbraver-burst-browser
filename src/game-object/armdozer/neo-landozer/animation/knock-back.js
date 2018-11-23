@@ -1,14 +1,14 @@
 // @flow
 
 import {NeoLandozerModel} from "../model/neo-landozer-model";
-import {TweenAnimation} from "../../../../animation/tween-animation";
+import {Animate} from "../../../../animation/animate";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {Tween} from '@tweenjs/tween.js';
 import {empty} from "../../../../animation/delay";
 
 /** ノックバック */
-export function knockBack(model: NeoLandozerModel): TweenAnimation {
+export function knockBack(model: NeoLandozerModel): Animate {
   const motion = process(() => {
     model.animation.frame = 0;
     model.animation.type = 'KNOCK_BACK';

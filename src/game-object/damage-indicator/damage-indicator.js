@@ -9,7 +9,7 @@ import * as THREE from 'three';
 import {popUp} from "./animation/pop-up";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
-import {TweenAnimation} from "../../animation/tween-animation";
+import {Animate} from "../../animation/animate";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -34,7 +34,7 @@ export class DamageIndicator {
   }
 
   /** ダメージ数字を表示する */
-  popUp(damage: number): TweenAnimation {
+  popUp(damage: number): Animate {
     return popUp(this._model, damage);
   }
 

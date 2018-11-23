@@ -2,12 +2,12 @@
 
 import {Tween} from '@tweenjs/tween.js';
 import type {BatterySelectorModel} from "../model/battery-selector";
-import {TweenAnimation} from "../../../animation/tween-animation";
+import {Animate} from "../../../animation/animate";
 import {process} from "../../../animation/process";
 import {tween} from "../../../animation/tween";
 
 /** OKボタンを押す */
-export function pushOkButton(model: BatterySelectorModel): TweenAnimation {
+export function pushOkButton(model: BatterySelectorModel): Animate {
   return process(() => {
     model.disabled = true;
   }).chain(

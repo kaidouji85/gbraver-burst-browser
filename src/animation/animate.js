@@ -8,13 +8,13 @@ import {Tween} from '@tweenjs/tween.js';
  *
  * 例) アニメーションを合成する
  *
- * // punch: () => TweenAnimation
- * // damageNumber: () => TweenAnimation
- * // knockBack: () => TweenAnimation
- * // dead: () => TweenAnimation
- * // refreshGauge: () => TweenAnimation
- * // visibleButtonA: () => TweenAnimation
- * // visibleButtonB: () => TweenAnimation
+ * // punch: () => Animate
+ * // damageNumber: () => Animate
+ * // knockBack: () => Animate
+ * // dead: () => Animate
+ * // refreshGauge: () => Animate
+ * // visibleButtonA: () => Animate
+ * // visibleButtonB: () => Animate
  *
  * const battleAnimation = punch()
  *   .chain(delay(100))
@@ -46,10 +46,10 @@ import {Tween} from '@tweenjs/tween.js';
  * const t2 = new Tween(model)
  *   .to({x: 0, y: 0}, 500)
  *   .chain(t1);
- * const animation = new TweenAnimation(t1, t2);
+ * const animation = new Animate(t1, t2);
  * animation.play();
  */
-export class TweenAnimation {
+export class Animate {
   _start: Tween;
   _end: Tween;
 
@@ -83,7 +83,7 @@ export class TweenAnimation {
    * @param pararells 後続アニメーション
    * @return 結合後アニメーション
    */
-  chain(next: TweenAnimation, ...pararells: TweenAnimation[]): TweenAnimation {
+  chain(next: Animate, ...pararells: Animate[]): Animate {
     const pararellTweens = pararells.map(v => v._start);
     this._end.chain(next._start, ...pararellTweens);
     this._end = next._end;

@@ -1,6 +1,6 @@
 // @flow
 
-import {TweenAnimation} from "./tween-animation";
+import {Animate} from "./animate";
 import {Tween} from '@tweenjs/tween.js';
 
 /**
@@ -9,6 +9,6 @@ import {Tween} from '@tweenjs/tween.js';
  * @param origin オリジナルのTween
  * @return アニメーション
  */
-export function tween(origin: Tween): TweenAnimation {
-  return new TweenAnimation(origin, origin);
+export function tween(origin: Tween): Animate {
+  return new Animate(origin, origin);
 }

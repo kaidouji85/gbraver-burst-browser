@@ -2,7 +2,7 @@
 
 import {Group, Tween} from '@tweenjs/tween.js';
 import type {BatterySelectorModel} from "../model/battery-selector";
-import {TweenAnimation} from "../../../animation/tween-animation";
+import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
 
 const BASE_DURATION = 300;
@@ -15,7 +15,7 @@ const BASE_DURATION = 300;
  * @param toBattery 変更するバッテリー値
  * @return アニメーション
  */
-export function changeBattery(model: BatterySelectorModel, tweenGroup: Group, toBattery: number): TweenAnimation {
+export function changeBattery(model: BatterySelectorModel, tweenGroup: Group, toBattery: number): Animate {
   const duration = BASE_DURATION * Math.abs(model.slider.battery - toBattery) / model.slider.max;
   return tween(new Tween(model.slider, tweenGroup)
     .to({battery: toBattery}, duration)

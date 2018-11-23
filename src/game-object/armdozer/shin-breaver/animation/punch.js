@@ -2,13 +2,13 @@
 
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import {Tween} from '@tweenjs/tween.js';
-import {TweenAnimation} from "../../../../animation/tween-animation";
+import {Animate} from "../../../../animation/animate";
 import {tween} from "../../../../animation/tween";
 import {process} from "../../../../animation/process";
 import {delay} from "../../../../animation/delay";
 
 /** パンチアニメーション */
-export function punch(model: ShinBraverModel): TweenAnimation {
+export function punch(model: ShinBraverModel): Animate {
   return process(() => {
     model.animation.type = 'PUNCH';
     model.animation.frame = 0;

@@ -10,7 +10,7 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import {TweenAnimation} from "../../../animation/tween-animation";
+import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
 import {knockBack} from "./animation/knock-back";
 import {recoverKnockBack} from "./animation/recover-knock-back";
@@ -34,25 +34,25 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** 立ち状態にする */
-  stand(): TweenAnimation {
+  stand(): Animate {
     // TODO アニメーションを作る
     return stand(this._model);
   }
 
   /** 敵との距離を詰める */
-  frontStep(): TweenAnimation {
+  frontStep(): Animate {
     // TODO アニメーションを作る
     return empty();
   }
 
   /** 敵との距離を離す */
-  backStep(): TweenAnimation {
+  backStep(): Animate {
     // TODO アニメーションを作る
     return empty();
   }
 
   /** パンチアニメーションを再生する */
-  punch(): TweenAnimation {
+  punch(): Animate {
     // TODO アニメーションを作る
     return empty();
   }
@@ -63,12 +63,12 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** ダメージアニメーションを再生する */
-  knockBack(): TweenAnimation {
+  knockBack(): Animate {
     return knockBack(this._model);
   }
 
   /** ノックバックから立ちに戻る */
-  recoverKnockBack(): TweenAnimation {
+  recoverKnockBack(): Animate {
     return recoverKnockBack(this._model);
   }
 

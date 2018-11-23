@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import {Tween} from '@tweenjs/tween.js';
-import {TweenAnimation} from "../../../animation/tween-animation";
+import {Animate} from "../../../animation/animate";
 
 /** アームドーザスプライト */
 export interface ArmDozerSprite {
@@ -10,22 +10,22 @@ export interface ArmDozerSprite {
   getObject3D(): THREE.Object3D;
 
   /** 立ちポーズにする */
-  stand(): TweenAnimation;
+  stand(): Animate;
 
   /** 敵との距離を詰める */
-  frontStep(): TweenAnimation;
+  frontStep(): Animate;
 
   /** 敵との距離を離す */
-  backStep(): TweenAnimation;
+  backStep(): Animate;
 
   /** パンチのアニメーションを再生する */
-  punch(): TweenAnimation;
+  punch(): Animate;
 
   /** ノックバックアニメーションを再生する */
-  knockBack(): TweenAnimation;
+  knockBack(): Animate;
 
   /** ノックバックから立ちに戻る */
-  recoverKnockBack(): TweenAnimation;
+  recoverKnockBack(): Animate;
 
   /** パンチをしてから攻撃がヒットするまでの時間 */
   punchHitDuration(): number;

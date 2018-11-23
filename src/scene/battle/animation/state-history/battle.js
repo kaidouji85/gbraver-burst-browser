@@ -1,6 +1,6 @@
 // @flow
 
-import {TweenAnimation} from "../../../../animation/tween-animation";
+import {Animate} from "../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
@@ -19,7 +19,7 @@ import type {ArmDozerSprite} from "../../../../game-object/armdozer/common/armdo
  * @param effect 戦闘結果
  * @return アニメーション
  */
-export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): TweenAnimation {
+export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): Animate {
   const isAttacker = effect.attacker === sceneState.playerId;
   const {
     playerBatteryNumber,
@@ -71,7 +71,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
 }
 
 /** 戦闘結果に応じたダメージ表示を行う */
-function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: BattleResult): TweenAnimation {
+function damageIndicatorAnimation(damageIndicator: DamageIndicator, result: BattleResult): Animate {
   switch (result.name) {
     case 'NormalHit':
     case 'Guard':
