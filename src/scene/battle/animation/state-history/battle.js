@@ -6,9 +6,9 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
 import {delay, empty} from "../../../../animation/delay";
+import {all} from "../../../../animation/all";
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
-import type {ArmDozerSprite} from "../../../../game-object/armdozer/common/armdozer-sprite";
 
 /**
  * 戦闘アニメーション
@@ -49,20 +49,23 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
 
   return empty()
     .chain(
-      attacker.batteryNumber.popUp(effect.attackerBattery),
-      attacker.gauge.battery(attacker.state.armdozer.battery),
-      defender.batteryNumber.popUp(effect.defenderBattery),
-      defender.gauge.battery(defender.state.armdozer.battery),
+      all(
+        attacker.batteryNumber.popUp(effect.attackerBattery),
+        attacker.gauge.battery(attacker.state.armdozer.battery),
+        defender.batteryNumber.popUp(effect.defenderBattery),
+        defender.gauge.battery(defender.state.armdozer.battery)
+      )
     ).chain(
       attacker.sprite.frontStep()
     ).chain(
-      attacker.sprite.punch(),
-      delay(attacker.sprite.punchHitDuration())
-        .chain(
-          damageIndicatorAnimation(defender.damageIndicator, effect.result),
-          defender.sprite.knockBack(),
-          defender.gauge.hp(defender.state.armdozer.hp)
-        )
+      all(
+        attacker.sprite.punch(),
+        delay(attacker.sprite.punchHitDuration())
+          .chain(
+            damageIndicatorAnimation(defender.damageIndicator, effect.result),
+            defender.sprite.knockBack(),
+            defender.gauge.hp(defender.state.armdozer.hp)
+          ))
     ).chain(
       attacker.sprite.backStep()
     ).chain(
