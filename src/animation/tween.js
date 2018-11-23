@@ -2,6 +2,7 @@
 
 import {Animate} from "./animate";
 import {Tween, Group} from '@tweenjs/tween.js';
+import {tweenTime} from "./tween-time";
 
 /**
  * Tween単体からTweenAnimationを生成する
@@ -20,5 +21,5 @@ import {Tween, Group} from '@tweenjs/tween.js';
 export function tween<T>(model: T, create: (t: Tween) => Tween, group: ?Group): Animate {
   const origin = new Tween(model, group);
   const t = create(origin);
-  return new Animate(origin, origin);
+  return new Animate(t, t, tweenTime(origin));
 }

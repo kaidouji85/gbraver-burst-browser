@@ -5,7 +5,8 @@ import {Tween} from '@tweenjs/tween.js';
 import {tweenTime} from "../../src/animation/tween-time";
 
 test('シンプルなTweenの再生時間計算が正しい', t => {
-  const tween = new Tween({}).to({}, 500);
+  const tween = new Tween({})
+    .to({}, 500);
   const time = tweenTime(tween);
   t.is(tweenTime(tween), 500);
 });

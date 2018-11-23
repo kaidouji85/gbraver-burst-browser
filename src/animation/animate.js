@@ -52,16 +52,19 @@ import {Tween} from '@tweenjs/tween.js';
 export class Animate {
   _start: Tween;
   _end: Tween;
+  _time: number;
 
   /**
    * 連続したTweenの最初、最後からTweenAnimatonを生成する
    *
    * @param start 連続したTweenの最初
    * @param end 連続したTweenの最後
+   * @param time 全体の再生時間
    */
-  constructor(start: Tween, end: Tween) {
+  constructor(start: Tween, end: Tween, time: number) {
     this._start = start;
     this._end = end;
+    this._time = time;
   }
 
   /** アニメーションを再生する */
@@ -87,6 +90,7 @@ export class Animate {
     const pararellTweens = pararells.map(v => v._start);
     this._end.chain(next._start, ...pararellTweens);
     this._end = next._end;
+    this._time += next._time;
     return this;
   }
 }
