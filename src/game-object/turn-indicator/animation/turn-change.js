@@ -1,6 +1,5 @@
 // @flow
 
-import {Tween} from '@tweenjs/tween.js';
 import type {TurnIndicatorModel} from "../model/turn-indicator-model";
 import {Animate} from "../../../animation/animate";
 import {process} from "../../../animation/process";
@@ -11,7 +10,7 @@ export function turnChange(isPlayerTurn: boolean, model: TurnIndicatorModel): An
   return process(() => {
     model.isPlayerTurn = isPlayerTurn;
   }).chain(
-    tween(new Tween(model)
+    tween(model, t => t
       .to({opacity: 1}, 500)
     )
   );
