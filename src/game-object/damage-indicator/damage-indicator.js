@@ -7,10 +7,9 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import {popUp} from "./animation/pop-up";
-import {Group} from '@tweenjs/tween.js';
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
-import {TweenAnimation} from "../../animation/tween-animation";
+import {Animate} from "../../animation/animate";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -21,12 +20,10 @@ type Param = {
 export class DamageIndicator {
   _model: DamageIndicatorModel;
   _view: DamageIndicatorView;
-  _tween: Group;
 
   constructor(param: Param) {
     this._view = param.view;
     this._model = createInitialValue();
-    this._tween = new Group();
     param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
@@ -37,8 +34,8 @@ export class DamageIndicator {
   }
 
   /** ダメージ数字を表示する */
-  popUp(damage: number): TweenAnimation {
-    return popUp(this._model, this._tween, damage);
+  popUp(damage: number): Animate {
+    return popUp(this._model, damage);
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -48,7 +45,6 @@ export class DamageIndicator {
 
   /** 状態更新 */
   _update(action: Update) {
-    this._tween.update(action.time);
     this._view.engage(this._model);
   }
 

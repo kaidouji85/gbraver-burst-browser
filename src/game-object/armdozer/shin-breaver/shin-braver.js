@@ -1,7 +1,6 @@
 // @flow
 
-import {Group, Tween} from '@tweenjs/tween.js';
-import {ArmDozerSprite} from '../common/armdozer-sprite';
+import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {ShinBraverView} from "./view/shin-braver-view";
 import {stand} from "./animation/stand";
@@ -12,19 +11,19 @@ import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {punch} from "./animation/punch";
-import {myTurn} from "./animation/my-turn";
-import {TweenAnimation} from "../../../animation/tween-animation";
+import {Animate} from "../../../animation/animate";
+import {frontStep} from "./animation/front-step";
+import {backStep} from "./animation/back-step";
+import {empty} from "../../../animation/delay";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
   _model: ShinBraverModel;
   _view: ShinBraverView;
-  _tweenGroup: Group;
 
   constructor(params: { view: ShinBraverView, listener: Observable<GameObjectAction> }) {
     this._model = createInitialValue();
     this._view = params.view;
-    this._tweenGroup = new Group();
 
     params.listener.subscribe(action => {
       if (action.type === 'Update') {
@@ -36,18 +35,38 @@ export class ShinBraver implements ArmDozerSprite {
   }
 
   /** 立ちポーズにする */
-  stand(): TweenAnimation {
-    return stand(this._model, this._tweenGroup);
+  stand(): Animate {
+    return stand(this._model);
   }
 
-  /** マイターンのアニメ */
-  myTurn(): TweenAnimation {
-    return myTurn(this._model, this._tweenGroup);
+  /** 敵との距離を詰める */
+  frontStep(): Animate {
+    return frontStep(this._model);
+  }
+
+  /** 敵との距離を離す */
+  backStep(): Animate {
+    return backStep(this._model);
   }
 
   /** パンチアニメーションを再生する */
-  punch(): TweenAnimation {
-    return punch(this._model, this._tweenGroup);
+  punch(): Animate {
+    return punch(this._model);
+  }
+
+  /** パンチをしてから攻撃がヒットするまでの時間 */
+  punchHitDuration(): number {
+    return 1600;
+  }
+
+  /** ダメージアニメーションを再生する */
+  knockBack(): Animate {
+    return empty();
+  }
+
+  /** ノックバックから立ちに戻る */
+  recoverKnockBack(): Animate {
+    return empty();
   }
 
   /** シーンに追加するオブジェクトを返す */
@@ -57,7 +76,6 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** 状態更新 */
   _update(action: Update): void {
-    this._tweenGroup.update(action.time);
     this._view.engage(this._model);
   }
 

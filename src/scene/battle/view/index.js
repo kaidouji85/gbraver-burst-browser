@@ -10,6 +10,7 @@ import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
 import type {Render} from "../../../action/game-loop/render";
 import {Renderer} from "../../../game-object/renderer";
+import TWEEN from "@tweenjs/tween.js";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -85,6 +86,7 @@ export class BattleSceneView {
 
   /** ゲームループ */
   _gameLoop(action: GameLoop): void {
+    TWEEN.update(action.time);
     this._gameLoop3D.next(action);
     this._gameLoopHUD.next(action);
   }

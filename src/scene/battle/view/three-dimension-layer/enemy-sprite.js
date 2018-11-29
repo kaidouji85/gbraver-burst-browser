@@ -1,6 +1,6 @@
 // @flow
 
-import type {ArmDozerSprite} from "../../../../game-object/armdozer/common/armdozer-sprite";
+import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import type {Resources} from "../../../../resource/index";
 import {EnemyShinBraver} from '../../../../game-object/armdozer/shin-breaver';
 import type {Player} from "gbraver-burst-core/lib/player/player";

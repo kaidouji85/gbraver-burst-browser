@@ -1,16 +1,15 @@
 // @flow
 
 import type {BatterySelectorModel} from "../model/battery-selector";
-import {Group, Tween} from '@tweenjs/tween.js';
-import {TweenAnimation} from "../../../animation/tween-animation";
+import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
 import {process} from "../../../animation/process";
 
 /** 閉じるアニメーション */
-export function close(model: BatterySelectorModel, group: Group): TweenAnimation {
+export function close(model: BatterySelectorModel): Animate {
   return process(() => {
     model.disabled = true;
-  }, group).chain(tween(new Tween(model, group)
+  }).chain(tween(model, t => t
       .to({opacity: 0}, 300)
   ));
 }

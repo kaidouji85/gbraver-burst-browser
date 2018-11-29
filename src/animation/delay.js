@@ -1,8 +1,8 @@
 // @flow
 
-import {TweenAnimation} from "./tween-animation";
-import {Tween, Group} from '@tweenjs/tween.js';
+import {Animate} from "./animate";
 import {tween} from "./tween";
+import {Group} from '@tweenjs/tween.js';
 
 /**
  * 指定した時間、何もしないアニメーション
@@ -11,10 +11,8 @@ import {tween} from "./tween";
  * @param group TweenGroup
  * @return アニメーション
  */
-export function delay(time: number, group: ?Group): TweenAnimation {
-  return tween(new Tween({}, group)
-    .to({}, time)
-  );
+export function delay(time: number, group: ?Group): Animate {
+  return tween({}, t => t.to({}, time), group)
 }
 
 /**
@@ -22,6 +20,6 @@ export function delay(time: number, group: ?Group): TweenAnimation {
  *
  * @return アニメーション
  */
-export function empty(): TweenAnimation {
+export function empty(): Animate {
   return delay(0);
 }

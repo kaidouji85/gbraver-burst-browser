@@ -1,7 +1,6 @@
 // @flow
 
-import {Group, Tween} from '@tweenjs/tween.js';
-import {ArmDozerSprite} from '../common/armdozer-sprite';
+import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {NeoLandozerModel} from "./model/neo-landozer-model";
 import type {NeoLandozerView} from "./view/neo-landozer-view";
@@ -11,19 +10,19 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import {TweenAnimation} from "../../../animation/tween-animation";
+import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
+import {knockBack} from "./animation/knock-back";
+import {recoverKnockBack} from "./animation/recover-knock-back";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
   _model: NeoLandozerModel;
   _view: NeoLandozerView;
-  _tweenGroup: Group;
 
   constructor(params: { view: NeoLandozerView, listener: Observable<GameObjectAction> }) {
     this._model = createInitialValue();
     this._view = params.view;
-    this._tweenGroup = new Group();
 
     params.listener.subscribe(action => {
       if (action.type === 'Update') {
@@ -35,20 +34,42 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** 立ち状態にする */
-  stand(): TweenAnimation {
-    return stand(this._model, this._tweenGroup);
+  stand(): Animate {
+    // TODO アニメーションを作る
+    return stand(this._model);
+  }
+
+  /** 敵との距離を詰める */
+  frontStep(): Animate {
+    // TODO アニメーションを作る
+    return empty();
+  }
+
+  /** 敵との距離を離す */
+  backStep(): Animate {
+    // TODO アニメーションを作る
+    return empty();
   }
 
   /** パンチアニメーションを再生する */
-  punch(): TweenAnimation {
-    // TODO ネオランドーザのアニメーションを作成する
+  punch(): Animate {
+    // TODO アニメーションを作る
     return empty();
   }
 
-  /** マイターンのアニメ */
-  myTurn(): TweenAnimation {
-    // TODO アニメーションを作る
-    return empty();
+  /** パンチをしてから攻撃がヒットするまでの時間 */
+  punchHitDuration(): number {
+    return 0;
+  }
+
+  /** ダメージアニメーションを再生する */
+  knockBack(): Animate {
+    return knockBack(this._model);
+  }
+
+  /** ノックバックから立ちに戻る */
+  recoverKnockBack(): Animate {
+    return recoverKnockBack(this._model);
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -58,7 +79,6 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** 状態更新 */
   _update(action: Update): void {
-    this._tweenGroup.update(action.time);
     this._view.engage(this._model);
   }
 

@@ -22,6 +22,7 @@ export const TEXTURE_IDS = {
   SHIN_BRAVER_MY_TURN: 'SHIN_BRAVER_MY_TURN',
   SHIN_BRAVER_PUNCH: 'SHIN_BRAVER_PUNCH',
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
+  NEO_LANDOZER_KNOCK_BACK: 'NEO_LANDOZER_KNOCK_BACK',
   BLUE_SKY_FRONT: 'BLUE_SKY_FRONT',
   BLUE_SKY_RIGHT: 'BLUE_SKY_RIGHT',
   BLUE_SKY_BACK: 'BLUE_SKY_BACK',
@@ -42,15 +43,14 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.SHIN_BRAVER_PUNCH,
     path: 'armdozer/shin-braver/punch.png'
   },
-  {
-    id: TEXTURE_IDS.SHIN_BRAVER_MY_TURN,
-    path: 'armdozer/shin-braver/my-turn.png'
-  },
-
   // ネオランドーザ関連
   {
     id: TEXTURE_IDS.NEO_LANDOZER_STAND,
     path: 'armdozer/neo-landozer/stand.png'
+  },
+  {
+    id: TEXTURE_IDS.NEO_LANDOZER_KNOCK_BACK,
+    path: 'armdozer/neo-landozer/knock-back.png'
   },
 
   // 青空スカイボックス関連

@@ -7,10 +7,9 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import {createInitialValue} from "./model/initial-value";
 import {popUp} from "./animation/pop-up";
-import {Group} from '@tweenjs/tween.js';
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
-import {TweenAnimation} from "../../animation/tween-animation";
+import {Animate} from "../../animation/animate";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -21,12 +20,10 @@ type Param = {
 export class BatteryNumber {
   _model: BatteryNumberModel;
   _view: BatteryNumberView;
-  _tween: Group;
 
   constructor(param: Param) {
     this._model = createInitialValue();
     this._view = param.view;
-    this._tween = new Group();
     param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
@@ -37,8 +34,8 @@ export class BatteryNumber {
   }
 
   /** バッテリーを表示する */
-  popUp(battery: number): TweenAnimation {
-    return popUp(this._model, this._tween, battery);
+  popUp(battery: number): Animate {
+    return popUp(this._model, battery);
   }
 
   /** シーンに追加するオブジェクトを返す */
@@ -48,7 +45,6 @@ export class BatteryNumber {
 
   /** 状態更新 */
   _update(action: Update): void {
-    this._tween.update(action.time);
     this._view.engage(this._model);
   }
 

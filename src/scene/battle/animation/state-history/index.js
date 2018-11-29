@@ -1,6 +1,6 @@
 // @flow
 
-import {TweenAnimation} from "../../../../animation/tween-animation";
+import {Animate} from "../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
@@ -16,7 +16,7 @@ import {battleAnimation} from "./battle";
  * @param gameStateList 再生するゲームの状態
  * @return アニメーション
  */
-export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): TweenAnimation {
+export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): Animate {
   return gameStateList
     .map(v => {
       switch (v.effect.name) {
