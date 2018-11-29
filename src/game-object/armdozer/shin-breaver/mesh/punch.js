@@ -1,8 +1,8 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import type {ArmdozerMesh} from "../../common/armdozer-mesh";
-import {HorizontalAnimationMesh} from "../../common/horizontal-animation-mesh";
+import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
+import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation-mesh";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 
 export const MAX_ANIMATION = 16;

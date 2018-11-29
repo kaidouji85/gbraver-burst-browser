@@ -1,6 +1,6 @@
 // @flow
 
-import {ArmDozerSprite} from '../common/armdozer-sprite';
+import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {ShinBraverView} from "./view/shin-braver-view";
 import {stand} from "./animation/stand";

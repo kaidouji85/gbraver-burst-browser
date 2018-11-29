@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import {Tween} from '@tweenjs/tween.js';
-import {Animate} from "../../../animation/animate";
+import {Animate} from "../../animation/animate";
 
 /** アームドーザスプライト */
 export interface ArmDozerSprite {

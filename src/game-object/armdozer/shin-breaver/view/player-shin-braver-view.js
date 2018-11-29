@@ -4,7 +4,7 @@ import {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
-import type {ArmdozerMesh} from "../../common/armdozer-mesh";
+import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
 import {shinBraverStand} from "../mesh/stand";
 import type {AnimationType} from "../model/animation-type";
 import {shinBraverPunch} from "../mesh/punch";

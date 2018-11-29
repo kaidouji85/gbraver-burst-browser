@@ -1,6 +1,6 @@
 // @flow
 
-import {ArmDozerSprite} from '../common/armdozer-sprite';
+import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {NeoLandozerModel} from "./model/neo-landozer-model";
 import type {NeoLandozerView} from "./view/neo-landozer-view";

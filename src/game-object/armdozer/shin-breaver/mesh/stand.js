@@ -1,9 +1,9 @@
 // @flow
 
-import type {ArmdozerMesh} from "../../common/armdozer-mesh";
+import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
 import type {Resources} from "../../../../resource/index";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import {HorizontalAnimationMesh} from "../../common/horizontal-animation-mesh";
+import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation-mesh";
 
 export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;

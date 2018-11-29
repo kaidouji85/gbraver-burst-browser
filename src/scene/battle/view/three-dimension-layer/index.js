@@ -3,7 +3,7 @@ import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
 import {createPlayerSprite} from "./player-sprite";
 import {createEnemySprite} from "./enemy-sprite";
-import type {ArmDozerSprite} from '../../../../game-object/armdozer/common/armdozer-sprite';
+import type {ArmDozerSprite} from '../../../../game-object/armdozer/armdozer-sprite';
 import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";

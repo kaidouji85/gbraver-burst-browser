@@ -5,7 +5,7 @@ import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
 import type {NeoLandozerModel} from "../model/neo-landozer-model";
 import type {AnimationType} from "../model/animation-type";
-import type {ArmdozerMesh} from "../../common/armdozer-mesh";
+import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
 import {neoLandozerStand} from "../mesh/stand";
 import {neoLandozerKnockBack} from "../mesh/knock-back";
 
