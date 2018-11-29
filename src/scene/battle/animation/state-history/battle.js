@@ -29,7 +29,8 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
     playerGauge,
     enemyGauge,
     playerSprite,
-    enemySprite
+    enemySprite,
+    turnIndicator
   } = view.threeDimensionLayer;
 
   const attacker = {
@@ -56,7 +57,8 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
         defender.gauge.battery(defender.state.armdozer.battery)
       )
     ).chain(
-      attacker.sprite.frontStep()
+      attacker.sprite.frontStep(),
+      turnIndicator.invisible()
     ).chain(
       all(
         attacker.sprite.punch(),
