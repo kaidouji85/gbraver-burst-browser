@@ -63,64 +63,64 @@ export class ThreeDimensionLayer {
   _render: Observer<Render>;
 
   constructor(param: Param) {
-    this.scene = new THREE.Scene();
-    this.camera = new Battle3DCamera({
-      listener: {
-        domEvent: param.listener.domEvent
-      }
-    });
-
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = param.notifier.render;
-
-    const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
-    const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-
-    const gameObjectAction: Observable<GameObjectAction> = merge(
+    const gameObjectListener: Observable<GameObjectAction> = merge(
       this._update,
       this._preRender
     );
 
+    this.scene = new THREE.Scene();
+    this.camera = new Battle3DCamera({
+      listener: {
+        domEvent: param.listener.domEvent,
+        gameObject: gameObjectListener
+      }
+    });
+
+    const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
+    const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
+
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
 
-    this.playerSprite = createPlayerSprite(param.resources, gameObjectAction, player);
+    this.playerSprite = createPlayerSprite(param.resources, gameObjectListener, player);
     this.scene.add(this.playerSprite.getObject3D());
 
-    this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemy);
+    this.enemySprite = createEnemySprite(param.resources, gameObjectListener, enemy);
     this.scene.add(this.enemySprite.getObject3D());
 
-    this.playerGauge = createPlayerGauge(param.resources, gameObjectAction, player);
+    this.playerGauge = createPlayerGauge(param.resources, gameObjectListener, player);
     this.scene.add(this.playerGauge.getObject3D());
 
-    this.enemyGauge = createEnemyGauge(param.resources, gameObjectAction, enemy);
+    this.enemyGauge = createEnemyGauge(param.resources, gameObjectListener, enemy);
     this.scene.add(this.enemyGauge.getObject3D());
 
-    this.turnIndicator = createTurnIndicator(param.resources, gameObjectAction);
+    this.turnIndicator = createTurnIndicator(param.resources, gameObjectListener);
     this.scene.add(this.turnIndicator.getObject3D());
 
     this.playerBatteryNumber = playerBatteryNumber({
       resources: param.resources,
-      listener: gameObjectAction
+      listener: gameObjectListener
     });
     this.scene.add(this.playerBatteryNumber.getObject3D());
 
     this.playerDamageIndicator = playerDamageIndicator({
       resources: param.resources,
-      listener: gameObjectAction
+      listener: gameObjectListener
     });
     this.scene.add(this.playerDamageIndicator.getObject3D());
 
     this.enemyBatteryNumber = enemyBatteryNumber({
       resources: param.resources,
-      listener: gameObjectAction
+      listener: gameObjectListener
     });
     this.scene.add(this.enemyBatteryNumber.getObject3D());
 
     this.enemyDamageIndicator = enemyDamageIndicator({
       resources: param.resources,
-      listener: gameObjectAction
+      listener: gameObjectListener
     });
     this.scene.add(this.enemyDamageIndicator.getObject3D());
 
