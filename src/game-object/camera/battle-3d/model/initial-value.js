@@ -9,6 +9,11 @@ export function createInitialValue(): Battle3DCameraModel {
       x: 0,
       y: 200,
       z: 1200
+    },
+    rotation: {
+      x: -0.16,
+      y: 0,
+      z: 0
     }
   };
 }
