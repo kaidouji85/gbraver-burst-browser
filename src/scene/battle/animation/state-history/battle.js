@@ -54,11 +54,13 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
         attacker.batteryNumber.popUp(effect.attackerBattery),
         attacker.gauge.battery(attacker.state.armdozer.battery),
         defender.batteryNumber.popUp(effect.defenderBattery),
-        defender.gauge.battery(defender.state.armdozer.battery)
+        defender.gauge.battery(defender.state.armdozer.battery),
+        delay(1200).chain(
+          turnIndicator.invisible()
+        )
       )
     ).chain(
       attacker.sprite.frontStep(),
-      turnIndicator.invisible()
     ).chain(
       all(
         attacker.sprite.punch(),
