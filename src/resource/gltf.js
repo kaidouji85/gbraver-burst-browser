@@ -32,7 +32,7 @@ export function loadGlTF(basePath: string, config: GlTFConfig): Promise<GlTFReso
     const fullPath = `${basePath}${config.path}`;
     const onLoad = (object) => resolve({
       id: config.id,
-      object: object
+      object: object.scene
     });
     const onProgress = () => {}; //NOP
     const onFail = err => reject(err);

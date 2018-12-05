@@ -1,16 +1,15 @@
 // @flow
 import type {Resources} from "../../../resource/index";
-import {createMeshFromJson} from "../../../mesh/three-json-mesh";
 import * as THREE from 'three';
-import type {JsonModelResource} from "../../../resource/json-model";
-import {JSON_MODEL_IDS} from "../../../resource/json-model";
+import {GLTF_IDS} from "../../../resource/gltf";
+import type {GlTFResource} from "../../../resource/gltf";
 
 /** 学校メッシュを生成する */
 export function createSchoolBuild(resources: Resources): THREE.Mesh {
-  const jsonModelResource: ?JsonModelResource = resources.models.find(v => v.id === JSON_MODEL_IDS.SCHOOL);
-  const mesh = jsonModelResource ? createMeshFromJson(jsonModelResource) : new THREE.Mesh();
+  const resource: ?GlTFResource = resources.gltfs.find(v => v.id === GLTF_IDS.SCHOOL);
+  const object = resource ? resource.object : new THREE.Mesh();
 
-  mesh.position.z = -200;
-  mesh.scale.set(0.3, 0.3, 0.3);
-  return mesh;
+  object.scale.set(300, 300, 300);
+  object.position.z = -200;
+  return object;
 }
