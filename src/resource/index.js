@@ -3,8 +3,6 @@ import type {TileMapResource} from "./tile-map";
 import {loadAllTileMap} from "./tile-map";
 import type {TextureResource} from "./texture";
 import {loadAllTexture} from "./texture";
-import type {JsonModelResource} from "./json-model";
-import {loadAllJsonModel} from "./json-model";
 import type {CanvasImageResource} from "./canvas-image";
 import {loadAllCanvasImage} from "./canvas-image";
 import type {GlTFResource} from "./gltf";
@@ -14,8 +12,6 @@ import {loadAllGlTFModel} from "./gltf";
  * ゲームで使うリソースを集めたもの
  */
 export type Resources = {
-  /** モデル */
-  models: JsonModelResource[],
   /** GlTFモデル */
   gltfs: GlTFResource[],
   /** テクスチャ */
@@ -34,15 +30,13 @@ export type Resources = {
  */
 export async function loadAllResource(basePath: string): Promise<Resources> {
   const tileMap = loadAllTileMap();
-  const [models, gltfs, textures, canvasImages] = await Promise.all([
-    loadAllJsonModel(basePath),
+  const [gltfs, textures, canvasImages] = await Promise.all([
     loadAllGlTFModel(basePath),
     loadAllTexture(basePath),
     loadAllCanvasImage(basePath),
   ]);
 
   return {
-    models: models,
     gltfs: gltfs,
     textures: textures,
     tileMap: tileMap,
