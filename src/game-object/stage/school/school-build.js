@@ -1,8 +1,8 @@
 // @flow
 import type {Resources} from "../../../resource/index";
 import * as THREE from 'three';
-import {GLTF_IDS} from "../../../resource/gltf";
 import type {GlTFResource} from "../../../resource/gltf";
+import {GLTF_IDS} from "../../../resource/gltf";
 
 /** 学校メッシュを生成する */
 export function createSchoolBuild(resources: Resources): THREE.Mesh {
