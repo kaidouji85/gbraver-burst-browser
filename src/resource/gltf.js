@@ -3,22 +3,31 @@
 import * as THREE from 'three';
 import GLTFLoader from 'three-gltf-loader';
 
+/** glTFリソースID */
 export type GlTFId = string;
 
+/** glTFリソース設定 */
 export type GlTFConfig = {
+  /** ID */
   id: GlTFId,
+  /** glTFファイルのパス */
   path: string,
 };
 
+/** glTFリソース */
 export type GlTFResource = {
+  /** ID */
   id: GlTFId,
+  /** glTFモデル */
   object: THREE.Object3D
 };
 
+/** IDリスト */
 export const GLTF_IDS = {
   SCHOOL: 'SCHOOL',
 };
 
+/** 設定集 */
 export const GLTF_CONFIGS: GlTFConfig[] = [
   {
     id: GLTF_IDS.SCHOOL,
@@ -26,6 +35,13 @@ export const GLTF_CONFIGS: GlTFConfig[] = [
   }
 ];
 
+/**
+ * glTFファイルを読み込む
+ *
+ * @param basePath ベースとなるパス
+ * @param config 設定
+ * @return glTFリソース
+ */
 export function loadGlTF(basePath: string, config: GlTFConfig): Promise<GlTFResource> {
   return new Promise((resolve, reject) => {
     const loader = new GLTFLoader();
@@ -40,6 +56,12 @@ export function loadGlTF(basePath: string, config: GlTFConfig): Promise<GlTFReso
   });
 }
 
+/**
+ * 全てのglTFリソースを読み込む
+ *
+ * @param basePath ベースとなるパス
+ * @return glTFリソース
+ */
 export function loadAllGlTFModel(basePath: string): Promise<GlTFResource[]> {
   return Promise.all(
     GLTF_CONFIGS.map(v => loadGlTF(basePath, v))
