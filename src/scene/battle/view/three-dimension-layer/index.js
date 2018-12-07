@@ -25,6 +25,8 @@ import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-obje
 import {createPlayerGauge} from "./player-gauge";
 import {createEnemyGauge} from "./enemy-gauge";
 import {createTurnIndicator} from "./turn-indicator";
+import {RecoverBattery} from "../../../../game-object/recover-battery/recover-battery";
+import {playerRecoverBattery} from "../../../../game-object/recover-battery";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -47,13 +49,14 @@ export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
   stage: Stage;
-  playerSprite: ArmDozerSprite;
-  enemySprite: ArmDozerSprite;
   turnIndicator: TurnIndicator;
+  playerSprite: ArmDozerSprite;
   playerGauge: Gauge;
-  enemyGauge: Gauge;
   playerBatteryNumber: BatteryNumber;
+  playerRecoverBattery: RecoverBattery;
   playerDamageIndicator: DamageIndicator;
+  enemySprite: ArmDozerSprite;
+  enemyGauge: Gauge;
   enemyBatteryNumber: BatteryNumber;
   enemyDamageIndicator: DamageIndicator;
 
@@ -85,20 +88,14 @@ export class ThreeDimensionLayer {
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
 
+    this.turnIndicator = createTurnIndicator(param.resources, gameObjectListener);
+    this.scene.add(this.turnIndicator.getObject3D());
+
     this.playerSprite = createPlayerSprite(param.resources, gameObjectListener, player);
     this.scene.add(this.playerSprite.getObject3D());
 
-    this.enemySprite = createEnemySprite(param.resources, gameObjectListener, enemy);
-    this.scene.add(this.enemySprite.getObject3D());
-
     this.playerGauge = createPlayerGauge(param.resources, gameObjectListener, player);
     this.scene.add(this.playerGauge.getObject3D());
-
-    this.enemyGauge = createEnemyGauge(param.resources, gameObjectListener, enemy);
-    this.scene.add(this.enemyGauge.getObject3D());
-
-    this.turnIndicator = createTurnIndicator(param.resources, gameObjectListener);
-    this.scene.add(this.turnIndicator.getObject3D());
 
     this.playerBatteryNumber = playerBatteryNumber({
       resources: param.resources,
@@ -111,6 +108,15 @@ export class ThreeDimensionLayer {
       listener: gameObjectListener
     });
     this.scene.add(this.playerDamageIndicator.getObject3D());
+
+    this.playerRecoverBattery = playerRecoverBattery(param.resources, gameObjectListener);
+    this.scene.add(this.playerRecoverBattery.getObject3D());
+
+    this.enemySprite = createEnemySprite(param.resources, gameObjectListener, enemy);
+    this.scene.add(this.enemySprite.getObject3D());
+
+    this.enemyGauge = createEnemyGauge(param.resources, gameObjectListener, enemy);
+    this.scene.add(this.enemyGauge.getObject3D());
 
     this.enemyBatteryNumber = enemyBatteryNumber({
       resources: param.resources,
