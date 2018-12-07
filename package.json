@@ -18,7 +18,7 @@
     "upload-s3": "s3-upload",
     "clean": "rimraf build",
     "flow": "flow check",
-    "deploy": "npm-run-all clean flow test webpack:production webpack:stub upload-s3",
+    "deploy": "npm-run-all clean flow webpack:production webpack:stub upload-s3",
     "test": "ava test/"
   },
   "author": "y.takeuchi",
