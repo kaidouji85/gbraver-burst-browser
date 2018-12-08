@@ -26,7 +26,7 @@ import {createPlayerGauge} from "./player-gauge";
 import {createEnemyGauge} from "./enemy-gauge";
 import {createTurnIndicator} from "./turn-indicator";
 import {RecoverBattery} from "../../../../game-object/recover-battery/recover-battery";
-import {playerRecoverBattery} from "../../../../game-object/recover-battery";
+import {enemyRecoverBattery, playerRecoverBattery} from "../../../../game-object/recover-battery";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -58,6 +58,7 @@ export class ThreeDimensionLayer {
   enemySprite: ArmDozerSprite;
   enemyGauge: Gauge;
   enemyBatteryNumber: BatteryNumber;
+  enemyRecoverBattery: RecoverBattery;
   enemyDamageIndicator: DamageIndicator;
 
 
@@ -123,6 +124,9 @@ export class ThreeDimensionLayer {
       listener: gameObjectListener
     });
     this.scene.add(this.enemyBatteryNumber.getObject3D());
+
+    this.enemyRecoverBattery = enemyRecoverBattery(param.resources, gameObjectListener);
+    this.scene.add(this.enemyRecoverBattery.getObject3D());
 
     this.enemyDamageIndicator = enemyDamageIndicator({
       resources: param.resources,
