@@ -3,5 +3,8 @@
 import type {RecoverBatteryModel} from "./recover-battery-model";
 
 export function createInitialValue(): RecoverBatteryModel {
-  return {};
+  return {
+    value: 3,
+    alpha: 1
+  };
 }

@@ -15,6 +15,7 @@ export const MESH_SIZE = 180;
 export class PlayerRecoverBatteryView implements RecoverBatteryView {
   _canvasMesh: CanvasMesh;
   _resources: Resources;
+  _lastEngagedModel: ?RecoverBatteryModel;
 
   constructor(resources: Resources) {
     this._canvasMesh = new CanvasMesh({
@@ -24,13 +25,15 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
       meshHeight: MESH_SIZE,
     });
     this._resources = resources;
-
-    // TODO engageから呼ぶようにする
-    this._refreshCanvas({});
+    this._lastEngagedModel = null;
   }
 
   engage(model: RecoverBatteryModel): void {
+    if (this._shouldRefreshCanvas(model)) {
+      this._refreshCanvas(model);
+    }
     this._refreshPos();
+    this._lastEngagedModel = model;
   }
 
   /** カメラの方向を向く */
@@ -40,6 +43,14 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
 
   getObject3D(): THREE.Object3D {
     return this._canvasMesh.mesh;
+  }
+
+  _shouldRefreshCanvas(model: RecoverBatteryModel): boolean {
+    if (!this._lastEngagedModel) {
+      return true;
+    }
+
+    return model.value !== this._lastEngagedModel.value;
   }
 
   _refreshCanvas(model: RecoverBatteryModel): void {

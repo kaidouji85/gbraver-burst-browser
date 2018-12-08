@@ -1,3 +1,6 @@
 // @flow
 
-export type RecoverBatteryModel = {};
+export type RecoverBatteryModel = {
+  value: number,
+  alpha: number
+};
