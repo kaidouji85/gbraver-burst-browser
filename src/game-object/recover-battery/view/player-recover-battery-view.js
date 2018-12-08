@@ -6,12 +6,11 @@ import type {RecoverBatteryModel} from "../model/recover-battery-model";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {CanvasImageResource} from "../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {drawNumberCenter} from "../../../canvas/number/number";
+import {drawNumberCenter, drawPlusNumberCenter, drawPlusNumberLeft} from "../../../canvas/number/number";
 import type {Resources} from "../../../resource";
-import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 
-export const CANVAS_SIZE = 128;
-export const MESH_SIZE = 180;
+export const CANVAS_SIZE = 256;
+export const MESH_SIZE = 320;
 
 export class PlayerRecoverBatteryView implements RecoverBatteryView {
   _canvasMesh: CanvasMesh;
@@ -56,17 +55,15 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
 
   _refreshCanvas(model: RecoverBatteryModel): void {
     this._canvasMesh.draw(context => {
-      // const batteryNumberResource: ?CanvasImageResource = this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
-      // const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
-      // const numberSignResource: ?CanvasImageResource = this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER_SIGN);
-      // const numberSign: Image = numberSignResource ? numberSignResource.image : new Image();
-      //
-      // const x = context.canvas.width / 2;
-      // const y = context.canvas.height / 2;
+      const batteryNumberResource: ?CanvasImageResource = this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
+      const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
+      const x = context.canvas.width / 2;
+      const y = context.canvas.height / 2;
 
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-      // drawNumberCenter(context, batteryNumber, x+32, y, 3);
-      // drawImageInCenter(context, numberSign, x, y);
+      drawPlusNumberCenter(context, batteryNumber, x, y, model.value)
+      //drawPlusNumberLeft(context, batteryNumber, 0, 0, model.value);
+      //drawNumberCenter(context, batteryNumber, x, y, 3);
     });
   }
 
