@@ -35,7 +35,6 @@ export const CANVAS_IMAGE_IDS = {
   TURN_INDICATOR: 'TURN_INDICATOR',
   BURST_BUTTON: 'BURST_BUTTON',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
-  BATTERY_NUMBER_SIGN: 'BATTERY_NUMBER_SIGN',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
 };
 
@@ -104,10 +103,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BATTERY_NUMBER,
     path: 'battery-number/battery-number.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.BATTERY_NUMBER_SIGN,
-    path: 'battery-number/battery-number-sign.png',
   },
   {
     id: CANVAS_IMAGE_IDS.DAMAGE_NUMBER,
