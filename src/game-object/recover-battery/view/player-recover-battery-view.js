@@ -6,7 +6,7 @@ import type {RecoverBatteryModel} from "../model/recover-battery-model";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {CanvasImageResource} from "../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {drawNumberCenter, drawPlusNumberCenter, drawPlusNumberLeft} from "../../../canvas/number/number";
+import {drawPlusNumberCenter} from "../../../canvas/number/number";
 import type {Resources} from "../../../resource";
 
 export const CANVAS_SIZE = 256;
@@ -61,9 +61,7 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
       const y = context.canvas.height / 2;
 
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-      drawPlusNumberCenter(context, batteryNumber, x, y, model.value)
-      //drawPlusNumberLeft(context, batteryNumber, 0, 0, model.value);
-      //drawNumberCenter(context, batteryNumber, x, y, 3);
+      drawPlusNumberCenter(context, batteryNumber, x, y, model.value);
     });
   }
 
