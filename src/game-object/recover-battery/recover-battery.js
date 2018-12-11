@@ -32,8 +32,8 @@ export class RecoverBattery {
     })
   }
 
-  popUp(): Animate {
-    return popUp(this._model);
+  popUp(value: number): Animate {
+    return popUp(this._model, value);
   }
 
   getObject3D(): THREE.OBject3D {
