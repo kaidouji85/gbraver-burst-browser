@@ -32,6 +32,7 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
     if (this._shouldRefreshCanvas(model)) {
       this._refreshCanvas(model);
     }
+    this._refreshOpacity(model);
     this._refreshPos();
     this._lastEngagedModel = model;
   }
@@ -69,5 +70,9 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
     this._canvasMesh.mesh.position.x = 150;
     this._canvasMesh.mesh.position.y = 150;
     this._canvasMesh.mesh.position.z = 420;
+  }
+
+  _refreshOpacity(model: RecoverBatteryModel): void {
+    this._canvasMesh.setOpacity(model.opacity);
   }
 }
