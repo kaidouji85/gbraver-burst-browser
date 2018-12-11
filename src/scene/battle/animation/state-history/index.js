@@ -7,6 +7,7 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {empty} from "../../../../animation/delay";
 import {inputCommandAnimation} from "./input-command";
 import {battleAnimation} from "./battle";
+import {turnChangeAnimation} from "./turn-change";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -24,6 +25,8 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
           return inputCommandAnimation(view, sceneState, v, v.effect);
         case 'Battle':
           return battleAnimation(view, sceneState, v, v.effect);
+        case 'TurnChange':
+          return turnChangeAnimation(view, sceneState, v, v.effect);
         default:
           return empty();
       }

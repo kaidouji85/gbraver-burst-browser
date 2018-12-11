@@ -8,6 +8,8 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable} from "rxjs";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
+import {Animate} from "../../animation/animate";
+import {popUp} from "./animation/pop-up";
 
 type Param = {
   view: RecoverBatteryView,
@@ -28,6 +30,10 @@ export class RecoverBattery {
         this._preRender(action);
       }
     })
+  }
+
+  popUp(): Animate {
+    return popUp(this._model);
   }
 
   getObject3D(): THREE.OBject3D {
