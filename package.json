@@ -7,7 +7,7 @@
     "postinstall": "npm run build",
     "start": "npm-run-all clean dev-server",
     "start:stub": "npm-run-all clean dev-server:stub",
-    "test": "npm-run-all clean babel:src babel:test ava:builded-test",
+    "test": "ava test",
     "build": "npm-run-all clean webpack",
     "build:production": "npm-run-all clean webpack:production",
     "build:stub": "npm-run-all clean webpack:stub",
@@ -19,10 +19,7 @@
     "webpack:production": "webpack --config webpack.production.js",
     "webpack:stub": "webpack --config webpack.stub.js",
     "upload-s3": "s3-upload",
-    "flow": "flow check",
-    "babel:src": "babel src -d build/test/src",
-    "babel:test": "babel test -d build/test/test",
-    "ava:builded-test": "ava build/test/test"
+    "flow": "flow check"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -41,6 +38,7 @@
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-flow": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "ava": "1.0.0-rc.2",
     "babel-loader": "^8.0.4",
     "copy-webpack-plugin": "^4.6.0",
@@ -55,6 +53,9 @@
   },
   "ava": {
     "babel": false,
-    "compileEnhancements": false
+    "compileEnhancements": false,
+    "require": [
+      "@babel/register"
+    ]
   }
 }
