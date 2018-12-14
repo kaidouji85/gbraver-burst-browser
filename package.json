@@ -7,19 +7,22 @@
     "postinstall": "npm run build",
     "start": "npm-run-all clean dev-server",
     "start:stub": "npm-run-all clean dev-server:stub",
+    "test": "npm-run-all clean babel:src babel:test ava:builded-test",
+    "build": "npm-run-all clean webpack",
+    "build:production": "npm-run-all clean webpack:production",
+    "build:stub": "npm-run-all clean webpack:stub",
+    "clean": "rimraf build",
+    "deploy": "npm-run-all clean flow webpack:production webpack:stub upload-s3",
     "dev-server": "webpack-serve",
     "dev-server:stub": "webpack-serve --config webpack.stub.js",
     "webpack": "webpack",
     "webpack:production": "webpack --config webpack.production.js",
     "webpack:stub": "webpack --config webpack.stub.js",
-    "build": "npm-run-all clean webpack",
-    "build:production": "npm-run-all clean webpack:production",
-    "build:stub": "npm-run-all clean webpack:stub",
     "upload-s3": "s3-upload",
-    "clean": "rimraf build",
     "flow": "flow check",
-    "deploy": "npm-run-all clean flow webpack:production webpack:stub upload-s3",
-    "test": "ava test/"
+    "babel:src": "babel src -d build/test/src",
+    "babel:test": "babel test -d build/test/test",
+    "ava:builded-test": "ava build/test/test"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -34,10 +37,10 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-flow": "^7.0.0",
-    "@babel/register": "^7.0.0",
     "ava": "1.0.0-rc.2",
     "babel-loader": "^8.0.4",
     "copy-webpack-plugin": "^4.6.0",
@@ -51,8 +54,7 @@
     "webpack-serve": "^2.0.3"
   },
   "ava": {
-    "require": [
-      "@babel/register"
-    ]
+    "babel": false,
+    "compileEnhancements": false
   }
 }
