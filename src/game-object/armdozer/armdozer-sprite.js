@@ -11,12 +11,6 @@ export interface ArmDozerSprite {
   /** 立ちポーズにする */
   stand(): Animate;
 
-  /** 敵との距離を詰める */
-  frontStep(): Animate;
-
-  /** 敵との距離を離す */
-  backStep(): Animate;
-
   /** パンチのアニメーションを再生する */
   punch(): Animate;
 

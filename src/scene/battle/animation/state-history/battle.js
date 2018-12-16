@@ -60,8 +60,6 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
         )
       )
     ).chain(
-      attacker.sprite.frontStep(),
-    ).chain(
       all(
         attacker.sprite.punch(),
         delay(attacker.sprite.punchHitDuration())
@@ -70,8 +68,6 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
             defender.sprite.knockBack(),
             defender.gauge.hp(defender.state.armdozer.hp)
           ))
-    ).chain(
-      attacker.sprite.backStep()
     ).chain(
       defender.sprite.recoverKnockBack()
     );
