@@ -14,6 +14,10 @@ export interface ArmDozerSprite {
   /** パンチのアニメーションを再生する */
   punch(): Animate;
 
+  charge(): Animate;
+
+  attack(): Animate;
+
   /** ノックバックアニメーションを再生する */
   knockBack(): Animate;
 

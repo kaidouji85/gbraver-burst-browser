@@ -8,17 +8,24 @@ import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
 import {shinBraverStand} from "../mesh/stand";
 import type {AnimationType} from "../model/animation-type";
 import {shinBraverPunch} from "../mesh/punch";
+import {shinBraverCharge} from "../mesh/charge";
+import {shinBraverAttack} from "../mesh/attack";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   _group: THREE.Group;
   _stand: ArmdozerMesh;
+  // TODO 削除
   _punch: ArmdozerMesh;
+  _charge: ArmdozerMesh;
+  _attack: ArmdozerMesh;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
     this._stand = shinBraverStand(resources);
     this._punch = shinBraverPunch(resources);
+    this._charge = shinBraverCharge(resources);
+    this._attack = shinBraverAttack(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -53,7 +60,7 @@ export class PlayerShinBraverView implements ShinBraverView {
 
   /** 本クラスが持つ全メッシュを返す */
   _getAllMeshes(): ArmdozerMesh[] {
-    return [this._stand, this._punch];
+    return [this._stand, this._punch, this._charge, this._attack];
   }
 
   /** 座標を更新する */
@@ -72,6 +79,10 @@ export class PlayerShinBraverView implements ShinBraverView {
         return this._stand;
       case 'PUNCH':
         return this._punch;
+      case 'CHARGE':
+        return this._charge;
+      case 'ATTACK':
+        return this._attack;
       default:
         return this._stand;
     }
