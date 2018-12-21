@@ -17,9 +17,6 @@ export interface ArmDozerSprite {
   /** ノックバックアニメーションを再生する */
   knockBack(): Animate;
 
-  /** ノックバックから立ちに戻る */
-  recoverKnockBack(): Animate;
-
   /** パンチをしてから攻撃がヒットするまでの時間 */
   punchHitDuration(): number;
 }

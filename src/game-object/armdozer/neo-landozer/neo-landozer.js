@@ -35,7 +35,6 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** 立ち状態にする */
   stand(): Animate {
-    // TODO アニメーションを作る
     return stand(this._model);
   }
 
@@ -52,11 +51,6 @@ export class NeoLandozer implements ArmDozerSprite {
   /** ダメージアニメーションを再生する */
   knockBack(): Animate {
     return knockBack(this._model);
-  }
-
-  /** ノックバックから立ちに戻る */
-  recoverKnockBack(): Animate {
-    return recoverKnockBack(this._model);
   }
 
   /** シーンに追加するオブジェクトを取得する */

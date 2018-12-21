@@ -69,7 +69,8 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
             defender.gauge.hp(defender.state.armdozer.hp)
           ))
     ).chain(
-      defender.sprite.recoverKnockBack()
+      attacker.sprite.stand(),
+      defender.sprite.stand()
     );
 }
 
