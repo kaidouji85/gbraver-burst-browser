@@ -12,7 +12,7 @@ import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
-import {straightPunch} from "./animation/straightPunch";
+import {straightPunch} from "./animation/straight-punch";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -44,7 +44,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** パンチをしてから攻撃がヒットするまでの時間 */
   punchHitDuration(): number {
-    return 600;
+    return 500;
   }
 
   /** ダメージアニメーションを再生する */

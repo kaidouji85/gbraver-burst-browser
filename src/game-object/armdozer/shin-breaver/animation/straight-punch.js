@@ -12,11 +12,7 @@ export function straightPunch(model: ShinBraverModel): Animate {
     model.animation.frame = 0;
   }).chain(
     tween(model.animation, t => t
-      .to({frame: 1}, 700)
-    )
-  ).chain(
-    tween(model.animation, t => t
-      .to({frame: 11/16}, 200)
+      .to({frame: 1}, 500)
     )
   )
 }

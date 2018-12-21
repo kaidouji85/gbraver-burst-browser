@@ -8,7 +8,7 @@ import {tween} from "../../../../animation/tween";
 /** 立ちポーズになる */
 export function stand(model: ShinBraverModel): Animate {
   return tween(model.animation, t => t
-    .to({frame: 0}, 500)
+    .to({frame: 0}, 1000)
   ).chain(
     process(() => {
       model.animation.type = 'STAND';
