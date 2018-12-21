@@ -60,10 +60,6 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
         )
       )
     ).chain(
-      attacker.sprite.charge()
-    ).chain(
-      delay(1000)
-    ).chain(
       all(
         attacker.sprite.attack(),
         delay(attacker.sprite.punchHitDuration())

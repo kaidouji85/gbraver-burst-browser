@@ -10,11 +10,9 @@ import type {ShinBraverModel} from "./model/shin-braver-model";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import {punch} from "./animation/punch";
 import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
-import {charge} from "./animation/charge";
-import {attack} from "./animation/attack";
+import {straightPunch} from "./animation/straightPunch";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -39,23 +37,14 @@ export class ShinBraver implements ArmDozerSprite {
     return stand(this._model);
   }
 
-  // TODO 削除する
-  /** パンチアニメーションを再生する */
-  punch(): Animate {
-    return punch(this._model);
-  }
-
-  charge(): Animate {
-    return charge(this._model);
-  }
-
+  /** 攻撃する */
   attack(): Animate {
-    return attack(this._model);
+    return straightPunch(this._model);
   }
 
   /** パンチをしてから攻撃がヒットするまでの時間 */
   punchHitDuration(): number {
-    return 1600;
+    return 600;
   }
 
   /** ダメージアニメーションを再生する */

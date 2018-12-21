@@ -39,17 +39,7 @@ export class NeoLandozer implements ArmDozerSprite {
     return stand(this._model);
   }
 
-  // TODO 削除する
-  /** パンチアニメーションを再生する */
-  punch(): Animate {
-    // TODO アニメーションを作る
-    return empty();
-  }
-
-  charge(): Animate {
-    return empty();
-  }
-
+  /** 攻撃する */
   attack(): Animate {
     return empty();
   }
