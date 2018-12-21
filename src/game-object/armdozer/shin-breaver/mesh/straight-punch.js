@@ -9,10 +9,10 @@ export const MAX_ANIMATION = 16;
 export const MESH_WIDTH = 320;
 export const MESH_HEIGHT = 320;
 
-/** シンブレイバーパンチ */
-export function shinBraverPunch(resources: Resources): ArmdozerMesh {
+/** シンブレイバーストレートパンチ */
+export function shinBraverStraightPunch(resources: Resources): ArmdozerMesh {
   const ret = new HorizontalAnimationMesh({
-    id: TEXTURE_IDS.SHIN_BRAVER_PUNCH,
+    id: TEXTURE_IDS.SHIN_BRAVER_STRAIGHT_PUNCH,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,

@@ -60,10 +60,8 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
         )
       )
     ).chain(
-      attacker.sprite.frontStep(),
-    ).chain(
       all(
-        attacker.sprite.punch(),
+        attacker.sprite.attack(),
         delay(attacker.sprite.punchHitDuration())
           .chain(
             damageIndicatorAnimation(defender.damageIndicator, effect.result),
@@ -71,9 +69,8 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
             defender.gauge.hp(defender.state.armdozer.hp)
           ))
     ).chain(
-      attacker.sprite.backStep()
-    ).chain(
-      defender.sprite.recoverKnockBack()
+      attacker.sprite.stand(),
+      defender.sprite.stand()
     );
 }
 
