@@ -46,14 +46,7 @@ export class HudLayer {
   scene: THREE.Scene;
   camera: BattleHUDCamera;
   batterySelector: BatterySelector;
-  playerGauge: Gauge;
-  enemyGauge: Gauge;
-  turnIndicator: TurnIndicator;
   burstButton: BurstButton;
-  playerBatteryNumber: BatteryNumber;
-  playerDamageIndicator: DamageIndicator;
-  enemyBatteryNumber: BatteryNumber;
-  enemyDamageIndicator: DamageIndicator;
 
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
