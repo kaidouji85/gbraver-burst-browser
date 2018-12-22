@@ -44,7 +44,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** パンチをしてから攻撃がヒットするまでの時間 */
   punchHitDuration(): number {
-    return 500;
+    return 400;
   }
 
   /** ダメージアニメーションを再生する */
