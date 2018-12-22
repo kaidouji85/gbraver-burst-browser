@@ -1,8 +1,8 @@
 // @flow
 import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
-import {ThreeDimensionLayer} from './three-dimension-layer';
-import {HudLayer} from './hud-layer/index';
+import {ThreeDimensionLayer} from './td';
+import {HudLayer} from './hud/index';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable, Observer, Subject} from "rxjs";
