@@ -25,27 +25,21 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     return empty();
   }
 
-  return empty();
-
-  // const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
-  // const enableMax = getEnableMax(effect, sceneState.playerId);
-  // const initialValue = getInitialBattery(enableMax);
-  // const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
-  //
-  // const {playerGauge, enemyGauge, turnIndicator, playerSprite, enemySprite} = view.tdLayer;
-  // const {batterySelector, burstButton} = view.hudLayer;
-  //
-  // return empty()
-  //   .chain(
-  //     all(
-  //       delay(500),
-  //       playerGauge.hp(player.armdozer.hp),
-  //       playerGauge.battery(player.armdozer.battery),
-  //       enemyGauge.hp(enemy.armdozer.hp),
-  //       enemyGauge.battery(enemy.armdozer.battery),
-  //       turnIndicator.turnChange(isPlayerTurn),
-  //       batterySelector.open(initialValue, enableMax, okButtonLabel),
-  //       burstButton.visible()
-  //     )
-  //   );
+  const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
+  const enableMax = getEnableMax(effect, sceneState.playerId);
+  const initialValue = getInitialBattery(enableMax);
+  const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
+  return empty()
+    .chain(
+      all(
+        delay(500),
+        view.tdLayer.player.gauge.hp(player.armdozer.hp),
+        view.tdLayer.player.gauge.battery(player.armdozer.battery),
+        view.tdLayer.enemy.gauge.hp(enemy.armdozer.hp),
+        view.tdLayer.enemy.gauge.battery(enemy.armdozer.battery),
+        view.tdLayer.turnIndicator.turnChange(isPlayerTurn),
+        view.hudLayer.batterySelector.open(initialValue, enableMax, okButtonLabel),
+        view.hudLayer.burstButton.visible()
+      )
+    );
 }
