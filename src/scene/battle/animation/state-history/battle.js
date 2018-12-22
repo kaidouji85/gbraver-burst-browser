@@ -32,7 +32,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   //   playerSprite,
   //   enemySprite,
   //   turnIndicator
-  // } = view.tdLayer;
+  // } = view.td;
   //
   // const attacker = {
   //   state: gameState.players.find(v => v.playerId === effect.attacker) || gameState.players[0],

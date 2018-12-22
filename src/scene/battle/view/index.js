@@ -32,8 +32,8 @@ type Param = {
  */
 export class BattleSceneView {
   renderer: Renderer;
-  tdLayer: ThreeDimensionLayer;
-  hudLayer: HudLayer;
+  td: ThreeDimensionLayer;
+  hud: HudLayer;
 
   _gameLoop3D: Subject<GameLoop>;
   _gameLoopHUD: Subject<GameLoop>;
@@ -51,7 +51,7 @@ export class BattleSceneView {
       }
     });
 
-    this.tdLayer = new ThreeDimensionLayer({
+    this.td = new ThreeDimensionLayer({
       resources: param.resources,
       playerId: param.playerId,
       players: param.players,
@@ -64,7 +64,7 @@ export class BattleSceneView {
       }
     });
 
-    this.hudLayer = new HudLayer({
+    this.hud = new HudLayer({
       resources: param.resources,
       rendererDOM: param.renderer.domElement,
       playerId: param.playerId,
