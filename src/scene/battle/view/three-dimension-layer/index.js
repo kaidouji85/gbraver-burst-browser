@@ -3,7 +3,6 @@ import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
 import {createPlayerSprite} from "./player-sprite";
 import {createEnemySprite} from "./enemy-sprite";
-import type {ArmDozerSprite} from '../../../../game-object/armdozer/armdozer-sprite';
 import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
@@ -17,16 +16,14 @@ import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import {Gauge} from "../../../../game-object/gauge/gauge";
-import {BatteryNumber} from "../../../../game-object/battery-number/battery-number";
-import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
 import {createPlayerGauge} from "./player-gauge";
 import {createEnemyGauge} from "./enemy-gauge";
 import {createTurnIndicator} from "./turn-indicator";
-import {RecoverBattery} from "../../../../game-object/recover-battery/recover-battery";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../game-object/recover-battery";
+import type {PlayerGameObjects} from "./player-game-objects";
+import {appendPlayerGameObject} from "./player-game-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -41,24 +38,6 @@ type Param = {
     render: Observer<Render>
   }
 };
-
-// TODO 外だしする
-/** プレイヤー固有のゲームオブジェクトをあつめたもの */
-export type PlayerGameObjects = {
-  sprite: ArmDozerSprite;
-  gauge: Gauge;
-  batteryNumber: BatteryNumber;
-  recoverBattery: RecoverBattery;
-  damageIndicator: DamageIndicator;
-};
-
-export function appendPlayerGameObject(scene: THREE.Scene, objects: PlayerGameObjects): void {
-  scene.add(objects.sprite.getObject3D());
-  scene.add(objects.gauge.getObject3D());
-  scene.add(objects.batteryNumber.getObject3D());
-  scene.add(objects.recoverBattery.getObject3D());
-  scene.add(objects.damageIndicator.getObject3D());
-}
 
 /**
  *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
