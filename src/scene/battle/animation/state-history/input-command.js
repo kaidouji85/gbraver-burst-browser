@@ -29,21 +29,17 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const enableMax = getEnableMax(effect, sceneState.playerId);
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
-
-  const {playerGauge, enemyGauge, turnIndicator, playerSprite, enemySprite} = view.threeDimensionLayer;
-  const {batterySelector, burstButton} = view.hudLayer;
-
   return empty()
     .chain(
       all(
         delay(500),
-        playerGauge.hp(player.armdozer.hp),
-        playerGauge.battery(player.armdozer.battery),
-        enemyGauge.hp(enemy.armdozer.hp),
-        enemyGauge.battery(enemy.armdozer.battery),
-        turnIndicator.turnChange(isPlayerTurn),
-        batterySelector.open(initialValue, enableMax, okButtonLabel),
-        burstButton.visible()
+        view.td.player.gauge.hp(player.armdozer.hp),
+        view.td.player.gauge.battery(player.armdozer.battery),
+        view.td.enemy.gauge.hp(enemy.armdozer.hp),
+        view.td.enemy.gauge.battery(enemy.armdozer.battery),
+        view.td.turnIndicator.turnChange(isPlayerTurn),
+        view.hud.batterySelector.open(initialValue, enableMax, okButtonLabel),
+        view.hud.burstButton.visible()
       )
     );
 }

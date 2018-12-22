@@ -21,42 +21,20 @@ import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/bat
  */
 export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): Animate {
   const isAttacker = effect.attacker === sceneState.playerId;
-  const {
-    playerBatteryNumber,
-    enemyBatteryNumber,
-    playerDamageIndicator,
-    enemyDamageIndicator,
-    playerGauge,
-    enemyGauge,
-    playerSprite,
-    enemySprite,
-    turnIndicator
-  } = view.threeDimensionLayer;
-
-  const attacker = {
-    state: gameState.players.find(v => v.playerId === effect.attacker) || gameState.players[0],
-    gauge: isAttacker ? playerGauge : enemyGauge,
-    batteryNumber: isAttacker ? playerBatteryNumber: enemyBatteryNumber,
-    sprite: isAttacker ? playerSprite : enemySprite
-  };
-
-  const defender = {
-    state: gameState.players.find(v => v.playerId !== effect.attacker) || gameState.players[0],
-    gauge: isAttacker ? enemyGauge : playerGauge,
-    batteryNumber: isAttacker ? enemyBatteryNumber : playerBatteryNumber,
-    sprite: isAttacker ? enemySprite : playerSprite,
-    damageIndicator: isAttacker ? enemyDamageIndicator : playerDamageIndicator
-  };
+  const attackerState = gameState.players.find(v => v.playerId === effect.attacker) || gameState.players[0];
+  const defenderState = gameState.players.find(v => v.playerId !== effect.attacker) || gameState.players[0];
+  const attacker = isAttacker ? view.td.player : view.td.enemy;
+  const defender = isAttacker ? view.td.enemy : view.td.player;
 
   return empty()
     .chain(
       all(
         attacker.batteryNumber.popUp(effect.attackerBattery),
-        attacker.gauge.battery(attacker.state.armdozer.battery),
+        attacker.gauge.battery(attackerState.armdozer.battery),
         defender.batteryNumber.popUp(effect.defenderBattery),
-        defender.gauge.battery(defender.state.armdozer.battery),
+        defender.gauge.battery(defenderState.armdozer.battery),
         delay(1200).chain(
-          turnIndicator.invisible()
+          view.td.turnIndicator.invisible()
         )
       )
     ).chain(
@@ -66,7 +44,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
           .chain(
             damageIndicatorAnimation(defender.damageIndicator, effect.result),
             defender.sprite.knockBack(),
-            defender.gauge.hp(defender.state.armdozer.hp)
+            defender.gauge.hp(defenderState.armdozer.hp)
           ))
     ).chain(
       attacker.sprite.stand(),
