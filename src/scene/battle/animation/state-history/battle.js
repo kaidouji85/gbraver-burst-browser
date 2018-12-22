@@ -31,7 +31,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
     playerSprite,
     enemySprite,
     turnIndicator
-  } = view.threeDimensionLayer;
+  } = view.tdLayer;
 
   const attacker = {
     state: gameState.players.find(v => v.playerId === effect.attacker) || gameState.players[0],

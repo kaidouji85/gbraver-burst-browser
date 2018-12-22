@@ -32,7 +32,7 @@ type Param = {
  */
 export class BattleSceneView {
   renderer: Renderer;
-  threeDimensionLayer: ThreeDimensionLayer;
+  tdLayer: ThreeDimensionLayer;
   hudLayer: HudLayer;
 
   _gameLoop3D: Subject<GameLoop>;
@@ -51,7 +51,7 @@ export class BattleSceneView {
       }
     });
 
-    this.threeDimensionLayer = new ThreeDimensionLayer({
+    this.tdLayer = new ThreeDimensionLayer({
       resources: param.resources,
       playerId: param.playerId,
       players: param.players,

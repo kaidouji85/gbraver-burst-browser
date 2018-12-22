@@ -30,7 +30,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
 
-  const {playerGauge, enemyGauge, turnIndicator, playerSprite, enemySprite} = view.threeDimensionLayer;
+  const {playerGauge, enemyGauge, turnIndicator, playerSprite, enemySprite} = view.tdLayer;
   const {batterySelector, burstButton} = view.hudLayer;
 
   return empty()

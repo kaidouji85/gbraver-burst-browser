@@ -17,7 +17,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     playerRecoverBattery,
     enemyGauge,
     enemyRecoverBattery
-  } = view.threeDimensionLayer;
+  } = view.tdLayer;
   const activeRecoverBattery = isActivePlayer ? playerRecoverBattery : enemyRecoverBattery;
   const activeGauge = isActivePlayer ? playerGauge : enemyGauge;
 
