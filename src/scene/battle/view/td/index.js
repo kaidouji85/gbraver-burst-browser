@@ -3,7 +3,6 @@ import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
 import {createPlayerSprite} from "./player-sprite";
 import {createEnemySprite} from "./enemy-sprite";
-import type {ArmDozerSprite} from '../../../../game-object/armdozer/armdozer-sprite';
 import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
@@ -17,14 +16,14 @@ import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import {Gauge} from "../../../../game-object/gauge/gauge";
-import {BatteryNumber} from "../../../../game-object/battery-number/battery-number";
-import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
 import {createPlayerGauge} from "./player-gauge";
 import {createEnemyGauge} from "./enemy-gauge";
 import {createTurnIndicator} from "./turn-indicator";
+import {enemyRecoverBattery, playerRecoverBattery} from "../../../../game-object/recover-battery";
+import type {ArmdozerGameObjects} from "./armdozer-game-objects";
+import {appendArmDozerGameObject} from "./armdozer-game-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -46,83 +45,70 @@ type Param = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
+  player: ArmdozerGameObjects;
+  enemy: ArmdozerGameObjects;
   stage: Stage;
-  playerSprite: ArmDozerSprite;
-  enemySprite: ArmDozerSprite;
   turnIndicator: TurnIndicator;
-  playerGauge: Gauge;
-  enemyGauge: Gauge;
-  playerBatteryNumber: BatteryNumber;
-  playerDamageIndicator: DamageIndicator;
-  enemyBatteryNumber: BatteryNumber;
-  enemyDamageIndicator: DamageIndicator;
-
-
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
 
   constructor(param: Param) {
-    this.scene = new THREE.Scene();
-    this.camera = new Battle3DCamera({
-      listener: {
-        domEvent: param.listener.domEvent
-      }
-    });
+    const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
+    const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = param.notifier.render;
-
-    const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
-    const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
-
-    const gameObjectAction: Observable<GameObjectAction> = merge(
+    const gameObjectListener: Observable<GameObjectAction> = merge(
       this._update,
       this._preRender
     );
 
+    this.scene = new THREE.Scene();
+    this.camera = new Battle3DCamera({
+      listener: {
+        domEvent: param.listener.domEvent,
+        gameObject: gameObjectListener
+      }
+    });
+
+    this.player = {
+      sprite: createPlayerSprite(param.resources, gameObjectListener, player),
+      gauge: createPlayerGauge(param.resources, gameObjectListener, player),
+      batteryNumber: playerBatteryNumber({
+        resources: param.resources,
+        listener: gameObjectListener
+      }),
+      recoverBattery: playerRecoverBattery(param.resources, gameObjectListener),
+      damageIndicator: playerDamageIndicator({
+        resources: param.resources,
+        listener: gameObjectListener
+      })
+    };
+    appendArmDozerGameObject(this.scene, this.player);
+
+    this.enemy = {
+      sprite: createEnemySprite(param.resources, gameObjectListener, enemy),
+      gauge: createEnemyGauge(param.resources, gameObjectListener, enemy),
+      batteryNumber: enemyBatteryNumber({
+        resources: param.resources,
+        listener: gameObjectListener
+      }),
+      recoverBattery: enemyRecoverBattery(param.resources, gameObjectListener),
+      damageIndicator: enemyDamageIndicator({
+        resources: param.resources,
+        listener: gameObjectListener
+      })
+    };
+    appendArmDozerGameObject(this.scene, this.enemy);
+
     this.stage = createStage(param.resources);
-    this.stage.getThreeJsObjects().forEach(item => this.scene.add(item));
+    this.stage.getThreeJsObjects()
+      .forEach(item => this.scene.add(item));
 
-    this.playerSprite = createPlayerSprite(param.resources, gameObjectAction, player);
-    this.scene.add(this.playerSprite.getObject3D());
-
-    this.enemySprite = createEnemySprite(param.resources, gameObjectAction, enemy);
-    this.scene.add(this.enemySprite.getObject3D());
-
-    this.playerGauge = createPlayerGauge(param.resources, gameObjectAction, player);
-    this.scene.add(this.playerGauge.getObject3D());
-
-    this.enemyGauge = createEnemyGauge(param.resources, gameObjectAction, enemy);
-    this.scene.add(this.enemyGauge.getObject3D());
-
-    this.turnIndicator = createTurnIndicator(param.resources, gameObjectAction);
+    this.turnIndicator = createTurnIndicator(param.resources, gameObjectListener);
     this.scene.add(this.turnIndicator.getObject3D());
-
-    this.playerBatteryNumber = playerBatteryNumber({
-      resources: param.resources,
-      listener: gameObjectAction
-    });
-    this.scene.add(this.playerBatteryNumber.getObject3D());
-
-    this.playerDamageIndicator = playerDamageIndicator({
-      resources: param.resources,
-      listener: gameObjectAction
-    });
-    this.scene.add(this.playerDamageIndicator.getObject3D());
-
-    this.enemyBatteryNumber = enemyBatteryNumber({
-      resources: param.resources,
-      listener: gameObjectAction
-    });
-    this.scene.add(this.enemyBatteryNumber.getObject3D());
-
-    this.enemyDamageIndicator = enemyDamageIndicator({
-      resources: param.resources,
-      listener: gameObjectAction
-    });
-    this.scene.add(this.enemyDamageIndicator.getObject3D());
 
     param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);

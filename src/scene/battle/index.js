@@ -73,8 +73,8 @@ export class BattleScene {
     this._state.canOperation = false;
     await empty()
       .chain(
-        this._view.hudLayer.batterySelector.close(),
-        this._view.hudLayer.burstButton.invisible()
+        this._view.hud.batterySelector.close(),
+        this._view.hud.burstButton.invisible()
       ).play();
     const updateState = await this._battleRoom.progress({
       type: 'BATTERY_COMMAND',

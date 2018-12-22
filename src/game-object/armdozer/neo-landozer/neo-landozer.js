@@ -13,7 +13,6 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
 import {knockBack} from "./animation/knock-back";
-import {recoverKnockBack} from "./animation/recover-knock-back";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -35,25 +34,11 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** 立ち状態にする */
   stand(): Animate {
-    // TODO アニメーションを作る
     return stand(this._model);
   }
 
-  /** 敵との距離を詰める */
-  frontStep(): Animate {
-    // TODO アニメーションを作る
-    return empty();
-  }
-
-  /** 敵との距離を離す */
-  backStep(): Animate {
-    // TODO アニメーションを作る
-    return empty();
-  }
-
-  /** パンチアニメーションを再生する */
-  punch(): Animate {
-    // TODO アニメーションを作る
+  /** 攻撃する */
+  attack(): Animate {
     return empty();
   }
 
@@ -65,11 +50,6 @@ export class NeoLandozer implements ArmDozerSprite {
   /** ダメージアニメーションを再生する */
   knockBack(): Animate {
     return knockBack(this._model);
-  }
-
-  /** ノックバックから立ちに戻る */
-  recoverKnockBack(): Animate {
-    return recoverKnockBack(this._model);
   }
 
   /** シーンに追加するオブジェクトを取得する */
