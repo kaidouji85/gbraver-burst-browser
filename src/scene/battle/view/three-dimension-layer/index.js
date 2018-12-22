@@ -22,8 +22,8 @@ import {createPlayerGauge} from "./player-gauge";
 import {createEnemyGauge} from "./enemy-gauge";
 import {createTurnIndicator} from "./turn-indicator";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../game-object/recover-battery";
-import type {PlayerGameObjects} from "./player-game-objects";
-import {appendPlayerGameObject} from "./player-game-objects";
+import type {ArmdozerGameObjects} from "./armdozer-game-objects";
+import {appendArmDozerGameObject} from "./armdozer-game-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -45,8 +45,8 @@ type Param = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
-  player: PlayerGameObjects;
-  enemy: PlayerGameObjects;
+  player: ArmdozerGameObjects;
+  enemy: ArmdozerGameObjects;
   stage: Stage;
   turnIndicator: TurnIndicator;
   _update: Subject<Update>;
@@ -86,7 +86,7 @@ export class ThreeDimensionLayer {
         listener: gameObjectListener
       })
     };
-    appendPlayerGameObject(this.scene, this.player);
+    appendArmDozerGameObject(this.scene, this.player);
 
     this.enemy = {
       sprite: createEnemySprite(param.resources, gameObjectListener, enemy),
@@ -101,7 +101,7 @@ export class ThreeDimensionLayer {
         listener: gameObjectListener
       })
     };
-    appendPlayerGameObject(this.scene, this.enemy);
+    appendArmDozerGameObject(this.scene, this.enemy);
 
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects()
