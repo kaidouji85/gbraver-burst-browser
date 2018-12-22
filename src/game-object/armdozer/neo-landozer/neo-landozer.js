@@ -13,7 +13,6 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
 import {knockBack} from "./animation/knock-back";
-import {recoverKnockBack} from "./animation/recover-knock-back";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
