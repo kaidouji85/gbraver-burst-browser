@@ -9,7 +9,7 @@ import {delay, empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
 import {DamageIndicator} from "../../../../../game-object/damage-indicator/damage-indicator";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
-import type {BattleObjects} from "./battle-objects";
+import type {AttackObjects} from "./attack-objects";
 import type {ArmdozerGameObjects} from "../../../view/td/armdozer-game-objects";
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import {visibleBattery} from "./visible-battery";
@@ -25,7 +25,7 @@ import {visibleBattery} from "./visible-battery";
  */
 export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): Animate {
   const isAttacker = effect.attacker === sceneState.playerId;
-  const objects: BattleObjects = {
+  const objects: AttackObjects = {
     attacker: isAttacker ? view.td.player : view.td.enemy,
     attackerState: gameState.players.find(v => v.playerId === effect.attacker) || gameState.players[0],
     defender: isAttacker ? view.td.enemy : view.td.player,
