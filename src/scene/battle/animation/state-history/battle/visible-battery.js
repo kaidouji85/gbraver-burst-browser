@@ -2,11 +2,11 @@
 
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
-import type {AttackObjects} from "./attack-objects";
+import type {BattleObjects} from "./battle-objects";
 import {all} from "../../../../../animation/all";
 
 /** 攻撃、防御側のバッテリーを表示する */
-export function visibleBattery(objects: AttackObjects): Animate {
+export function visibleBattery(objects: BattleObjects): Animate {
   return empty()
     .chain(
       all(

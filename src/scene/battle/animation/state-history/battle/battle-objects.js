@@ -4,8 +4,10 @@ import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import {BattleSceneView} from "../../../view";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
 
-/** ゲームオブジェクト、ステータスを攻撃側、防御側に振り分けたもの */
-export type AttackObjects = {
+/**
+ * 戦闘アニメーションオブジェクト
+ */
+export type BattleObjects = {
   attacker: ArmdozerGameObjects,
   attackerState: PlayerState,
   defender: ArmdozerGameObjects,
