@@ -11,7 +11,6 @@ import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
-import {empty} from "../../../animation/delay";
 import {knockBack} from "./animation/knock-back";
 
 /** ネオランドーザのゲームオブジェクト */
@@ -37,15 +36,6 @@ export class NeoLandozer implements ArmDozerSprite {
     return stand(this._model);
   }
 
-  /** 攻撃する */
-  attack(): Animate {
-    return empty();
-  }
-
-  /** パンチをしてから攻撃がヒットするまでの時間 */
-  punchHitDuration(): number {
-    return 0;
-  }
 
   /** ダメージアニメーションを再生する */
   knockBack(): Animate {

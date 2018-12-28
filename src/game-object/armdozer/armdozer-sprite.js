@@ -11,12 +11,6 @@ export interface ArmDozerSprite {
   /** 立ちポーズにする */
   stand(): Animate;
 
-  /** 攻撃をする */
-  attack(): Animate;
-
   /** ノックバックアニメーションを再生する */
   knockBack(): Animate;
-
-  /** パンチをしてから攻撃がヒットするまでの時間 */
-  punchHitDuration(): number;
 }

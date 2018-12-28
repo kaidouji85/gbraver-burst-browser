@@ -11,7 +11,8 @@ import type {DecideBattery} from "../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
-import {delay, empty} from "../../animation/delay";
+import {delay} from "../../animation/delay";
+import {invisibleUI} from "./animation/invisible-ui";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -71,11 +72,7 @@ export class BattleScene {
     }
 
     this._state.canOperation = false;
-    await empty()
-      .chain(
-        this._view.hud.batterySelector.close(),
-        this._view.hud.burstButton.invisible()
-      ).play();
+    await invisibleUI(this._view).play();
     const updateState = await this._battleRoom.progress({
       type: 'BATTERY_COMMAND',
       battery: action.battery
