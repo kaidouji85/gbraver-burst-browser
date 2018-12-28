@@ -10,6 +10,7 @@ import {ShinBraver} from "../../../../../game-object/armdozer/shin-breaver/shin-
 import {shinBraverAttack} from "./shin-braver";
 import {emptyBattleAnimation} from "./empty-battle-animation";
 import {visibleBattery} from "./visible-battery";
+import {delay} from "../../../../../animation/delay";
 
 /**
  * 戦闘アニメーション
@@ -32,6 +33,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   };
 
   return visibleBattery(objects)
+    .chain(delay(500))
     .chain(attackAnimation(objects));
 }
 
