@@ -7,13 +7,8 @@ import {tween} from "../../../../animation/tween";
 
 /** スチレートパンチから立ちポーズに移行 */
 export function spToStand(model: ShinBraverModel): Animate {
-  return process(() => {
-    model.animation.type = 'SP_TO_STAND';
-    model.animation.frame = 0;
-  }).chain(
-    tween(model.animation, t => t
-      .to({frame: 1}, 500)
-    )
+  return tween(model.animation, t => t
+    .to({frame: 0}, 500)
   ).chain(
     process(() => {
       model.animation.type = 'STAND';

@@ -9,16 +9,13 @@ import {shinBraverStand} from "../mesh/stand";
 import type {AnimationType} from "../model/animation-type";
 import {
   shinBraverSPAttack,
-  shinBraverSPCharge,
-  shinBraverSPToStand,
-  shinBraverStraightPunch
+  shinBraverSPCharge, shinBraverSPToStand,
 } from "../mesh/straight-punch";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   _group: THREE.Group;
   _stand: ArmdozerMesh;
-  _straightPunch: ArmdozerMesh;
   _spCharge: ArmdozerMesh;
   _spAttack: ArmdozerMesh;
   _spToStand: ArmdozerMesh;
@@ -26,7 +23,6 @@ export class PlayerShinBraverView implements ShinBraverView {
   constructor(resources: Resources) {
     this._group = new THREE.Group();
     this._stand = shinBraverStand(resources);
-    this._straightPunch = shinBraverStraightPunch(resources);
     this._spCharge = shinBraverSPCharge(resources);
     this._spAttack = shinBraverSPAttack(resources);
     this._spToStand = shinBraverSPToStand(resources);
@@ -66,7 +62,6 @@ export class PlayerShinBraverView implements ShinBraverView {
   _getAllMeshes(): ArmdozerMesh[] {
     return [
       this._stand,
-      this._straightPunch,
       this._spCharge,
       this._spAttack,
       this._spToStand,
@@ -87,8 +82,6 @@ export class PlayerShinBraverView implements ShinBraverView {
     switch(animationType) {
       case 'STAND':
         return this._stand;
-      case 'STRAIGHT_PUNCH':
-        return this._straightPunch;
       case 'SP_CHARGE':
         return this._spCharge;
       case 'SP_ATTACK':
