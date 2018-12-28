@@ -5,9 +5,9 @@ import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
 import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation-mesh";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 
-export const MESH_WIDTH = 320;
-export const MESH_HEIGHT = 320;
-export const MAX_ANIMATION = 8;
+export const MESH_WIDTH = 512;
+export const MESH_HEIGHT = 512;
+export const MAX_ANIMATION = 16;
 
 /** ストレートパンチ攻撃 */
 export function shinBraverSPAttack(resources: Resources): ArmdozerMesh {

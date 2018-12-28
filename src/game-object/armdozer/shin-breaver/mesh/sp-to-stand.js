@@ -9,10 +9,10 @@ export const MESH_WIDTH = 512;
 export const MESH_HEIGHT = 512;
 export const MAX_ANIMATION = 8;
 
-/** ストレートパンチため */
-export function shinBraverSPCharge(resources: Resources): ArmdozerMesh {
+/** ストレートパンチ -> 立ち */
+export function shinBraverSPToStand(resources: Resources): ArmdozerMesh {
   const ret = new HorizontalAnimationMesh({
-    id: TEXTURE_IDS.SHIN_BRAVER_SP_CHARGE,
+    id: TEXTURE_IDS.SHIN_BRAVER_SP_TO_STAND,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,
