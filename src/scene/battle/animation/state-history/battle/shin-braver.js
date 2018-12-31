@@ -11,7 +11,7 @@ import {damageIndicatorAnimation} from "./damage-indicator";
 export function shinBraverAttack(attacker: ShinBraver, objects: BattleObjects): Animate {
   return all(
     attacker.straightPunch(),
-    delay(1000)
+    delay(600)
       .chain(
         damageIndicatorAnimation(objects.defender.damageIndicator, objects.effect.result),
         objects.defender.sprite.knockBack(),
