@@ -18,7 +18,7 @@ export function shinBraverAttack(attacker: ShinBraver, objects: BattleObjects): 
         objects.defender.gauge.hp(objects.defenderState.armdozer.hp)
       )
   ).chain(
-    attacker.spToStand(),
+    attacker.stand(),
     objects.defender.sprite.stand()
   );
 }

@@ -26,5 +26,14 @@ export function straightPunch(model: ShinBraverModel): Animate {
     tween(model.animation, t => t
       .to({frame: 1}, 250)
     )
+  ).chain(
+    process(() => {
+      model.animation.type = 'SP_TO_STAND';
+      model.animation.frame = 0;
+    })
+  ).chain(
+    tween(model.animation, t => t
+      .to({frame: 1}, 500)
+    )
   )
 }

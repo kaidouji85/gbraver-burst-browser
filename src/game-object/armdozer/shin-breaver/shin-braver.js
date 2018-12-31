@@ -13,7 +13,6 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
 import {straightPunch} from "./animation/straight-punch";
-import {spToStand} from "./animation/sp-to-stand";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -41,11 +40,6 @@ export class ShinBraver implements ArmDozerSprite {
   /** ストレートパンチ */
   straightPunch(): Animate {
     return straightPunch(this._model);
-  }
-
-  /** ストレートパンチから立ちに移行 */
-  spToStand(): Animate {
-   return spToStand(this._model);
   }
 
   /** ダメージアニメーションを再生する */
