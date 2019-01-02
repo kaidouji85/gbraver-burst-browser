@@ -11,14 +11,18 @@ import {damageIndicatorAnimation} from "./damage-indicator";
 export function shinBraverAttack(attacker: ShinBraver, objects: BattleObjects): Animate {
   return all(
     attacker.straightPunch(),
-    delay(1000)
+    delay(700)
       .chain(
         damageIndicatorAnimation(objects.defender.damageIndicator, objects.effect.result),
         objects.defender.sprite.knockBack(),
         objects.defender.gauge.hp(objects.defenderState.armdozer.hp)
       )
   ).chain(
-    attacker.spToStand(),
-    objects.defender.sprite.stand()
+    all(
+      attacker.stand(),
+      objects.defender.sprite.stand()
+    )
+  ).chain(
+    delay(500)
   );
 }

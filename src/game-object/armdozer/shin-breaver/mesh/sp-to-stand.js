@@ -1,18 +1,18 @@
 // @flow
 
+import type {Resources} from "../../../../resource";
 import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
-import type {Resources} from "../../../../resource/index";
-import {TEXTURE_IDS} from "../../../../resource/texture";
 import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation-mesh";
+import {TEXTURE_IDS} from "../../../../resource/texture";
 
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
-export const MAX_ANIMATION = 1;
+export const MAX_ANIMATION = 8;
 
-/** シンブレイバー立ちポーズ */
-export function shinBraverStand(resources: Resources): ArmdozerMesh {
+/** ストレートパンチ -> 立ち */
+export function shinBraverSPToStand(resources: Resources): ArmdozerMesh {
   const ret = new HorizontalAnimationMesh({
-    id: TEXTURE_IDS.SHIN_BRAVER_STAND,
+    id: TEXTURE_IDS.SHIN_BRAVER_SP_TO_STAND,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,

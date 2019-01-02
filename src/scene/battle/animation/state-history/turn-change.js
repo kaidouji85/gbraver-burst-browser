@@ -13,12 +13,9 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
   const isActivePlayer = gameState.activePlayerId === sceneState.playerId;
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId) || gameState.players[0];
   const activeArmdozer = isActivePlayer ? view.td.player : view.td.enemy;
-  return delay(500)
-    .chain(
-      all(
-        // TODO バッテリー回復値をeffectに持たせる
-        activeArmdozer.recoverBattery.popUp(3),
-        activeArmdozer.gauge.battery(activeStatus.armdozer.battery),
-      )
-    );
+  return all(
+    // TODO バッテリー回復値をeffectに持たせる
+    activeArmdozer.recoverBattery.popUp(3),
+    activeArmdozer.gauge.battery(activeStatus.armdozer.battery),
+  );
 }

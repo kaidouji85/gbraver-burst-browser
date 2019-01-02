@@ -13,7 +13,7 @@ export function straightPunch(model: ShinBraverModel): Animate {
     model.animation.frame = 0;
   }).chain(
     tween(model.animation, t => t
-      .to({frame: 1}, 500)
+      .to({frame: 1}, 250)
     )
   ).chain(
     delay(300)
@@ -25,13 +25,17 @@ export function straightPunch(model: ShinBraverModel): Animate {
   ).chain(
     tween(model.animation, t => t
       .to({frame: 1}, 250)
-      .repeat(1)
-      .yoyo(true)
     )
   ).chain(
+    delay(100)
+  ).chain(
     process(() => {
-      model.animation.type = 'SP_CHARGE';
-      model.animation.frame = 1;
+      model.animation.type = 'SP_TO_STAND';
+      model.animation.frame = 0;
     })
+  ).chain(
+    tween(model.animation, t => t
+      .to({frame: 1}, 500)
+    )
   )
 }
