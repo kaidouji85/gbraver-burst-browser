@@ -16,7 +16,7 @@ export function straightPunch(model: ShinBraverModel): Animate {
       .to({frame: 1}, 250)
     )
   ).chain(
-    delay(200)
+    delay(300)
   ).chain(
     process(() => {
       model.animation.type = 'SP_ATTACK';
@@ -26,6 +26,8 @@ export function straightPunch(model: ShinBraverModel): Animate {
     tween(model.animation, t => t
       .to({frame: 1}, 250)
     )
+  ).chain(
+    delay(100)
   ).chain(
     process(() => {
       model.animation.type = 'SP_TO_STAND';
