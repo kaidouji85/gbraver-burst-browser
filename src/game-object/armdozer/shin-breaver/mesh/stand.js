@@ -5,8 +5,8 @@ import type {Resources} from "../../../../resource/index";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation-mesh";
 
-export const MESH_WIDTH = 512;
-export const MESH_HEIGHT = 512;
+export const MESH_WIDTH = 600;
+export const MESH_HEIGHT = 600;
 export const MAX_ANIMATION = 1;
 
 /** シンブレイバー立ちポーズ */
