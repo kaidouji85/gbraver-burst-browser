@@ -29,8 +29,8 @@
     "ramda": "^0.26.1",
     "rxjs": "^6.3.3",
     "stats.js": "^0.17.0",
-    "three": "^0.99.0",
-    "three-gltf-loader": "^1.99.1",
+    "three": "^0.100.0",
+    "three-gltf-loader": "^1.100.0",
     "workbox-webpack-plugin": "3.6.3"
   },
   "devDependencies": {
@@ -46,7 +46,7 @@
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.2",
     "s3-upload": "^0.1.0",
-    "webpack": "^4.28.2",
+    "webpack": "^4.28.3",
     "webpack-cli": "^3.1.2",
     "webpack-serve": "^2.0.3"
   },
