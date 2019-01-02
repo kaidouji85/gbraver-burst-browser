@@ -7,7 +7,7 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
-export const MAX_ANIMATION = 8;
+export const MAX_ANIMATION = 4;
 
 /** ストレートパンチ攻撃 */
 export function shinBraverSPAttack(resources: Resources): ArmdozerMesh {
