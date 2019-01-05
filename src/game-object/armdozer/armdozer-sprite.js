@@ -8,9 +8,15 @@ export interface ArmDozerSprite {
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
 
-  /** ノックバックアニメーションを再生する */
+  /** ノックバック */
   knockBack(): Animate;
 
   /** ノックバック -> 立ちポーズ */
   knockBackToStand(): Animate;
+
+  /** ガード */
+  guard(): Animate;
+
+  /** ガード -> 立ちポーズ */
+  guardToStand(): Animate;
 }

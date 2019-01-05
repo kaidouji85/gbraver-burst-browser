@@ -12,6 +12,9 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {knockBack} from "./animation/knock-back";
 import {knockBackToStand} from "./animation/knock-back-to-stand";
+import {empty} from "../../../animation/delay";
+import {guard} from './animation/guard';
+import {guardToStand} from './animation/guard-to-stand';
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -39,6 +42,16 @@ export class NeoLandozer implements ArmDozerSprite {
   /** ノックバック -> 立ち*/
   knockBackToStand(): Animate {
     return knockBackToStand(this._model);
+  }
+
+  /** ガード */
+  guard(): Animate {
+    return guard(this._model);
+  }
+
+  /** ガード -> 立ちポーズ */
+  guardToStand(): Animate {
+    return guardToStand(this._model);
   }
 
   /** シーンに追加するオブジェクトを取得する */

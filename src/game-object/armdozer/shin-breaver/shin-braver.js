@@ -48,6 +48,18 @@ export class ShinBraver implements ArmDozerSprite {
     return empty();
   }
 
+  /** ガード */
+  guard(): Animate {
+    // TODO アニメーションを実装する
+    return empty();
+  }
+
+  /** ガード -> 立ちポーズ */
+  guardToStand(): Animate {
+    // TODO アニメーションを実装する
+    return empty();
+  }
+
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
