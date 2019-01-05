@@ -19,5 +19,6 @@ export function shinBraverSPCharge(resources: Resources): ArmdozerMesh {
     height: MESH_HEIGHT
   });
   ret.mesh.position.y = 140;
+  ret.mesh.position.z = 1;
   return ret;
 }
