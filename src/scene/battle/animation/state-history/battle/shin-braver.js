@@ -19,8 +19,7 @@ export function shinBraverAttack(attacker: ShinBraver, objects: BattleObjects): 
       )
   ).chain(
     all(
-      attacker.stand(),
-      objects.defender.sprite.stand()
+      objects.defender.sprite.knockBackToStand()
     )
   ).chain(
     delay(500)

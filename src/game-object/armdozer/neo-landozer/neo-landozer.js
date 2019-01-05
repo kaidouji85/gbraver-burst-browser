@@ -4,7 +4,6 @@ import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {NeoLandozerModel} from "./model/neo-landozer-model";
 import type {NeoLandozerView} from "./view/neo-landozer-view";
-import {stand} from "./animation/stand";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
@@ -12,6 +11,7 @@ import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {knockBack} from "./animation/knock-back";
+import {knockBackToStand} from "./animation/knock-back-to-stand";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -31,15 +31,14 @@ export class NeoLandozer implements ArmDozerSprite {
     });
   }
 
-  /** 立ち状態にする */
-  stand(): Animate {
-    return stand(this._model);
-  }
-
-
-  /** ダメージアニメーションを再生する */
+  /** ノックバック */
   knockBack(): Animate {
     return knockBack(this._model);
+  }
+
+  /** ノックバック -> 立ち*/
+  knockBackToStand(): Animate {
+    return knockBackToStand(this._model);
   }
 
   /** シーンに追加するオブジェクトを取得する */

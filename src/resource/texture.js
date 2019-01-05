@@ -61,7 +61,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.NEO_LANDOZER_KNOCK_BACK,
     path: 'armdozer/neo-landozer/knock-back.png'
   },
-
   // 青空スカイボックス関連
   {
     id: TEXTURE_IDS.BLUE_SKY_FRONT,
