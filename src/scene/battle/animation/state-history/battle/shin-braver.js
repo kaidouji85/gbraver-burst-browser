@@ -43,8 +43,6 @@ export function normalHit(attacker: ShinBraver, objects: BattleObjects, result: 
       )
   ).chain(
     objects.defender.sprite.knockBackToStand()
-  ).chain(
-    delay(500)
   );
 }
 
@@ -60,8 +58,6 @@ export function guard(attacker: ShinBraver, objects: BattleObjects, result: Guar
       )
   ).chain(
     objects.defender.sprite.guardToStand()
-  ).chain(
-    delay(500)
   );
 }
 
@@ -77,8 +73,6 @@ export function criticalHit(attacker: ShinBraver, objects: BattleObjects, result
       )
   ).chain(
     objects.defender.sprite.knockBackToStand()
-  ).chain(
-    delay(500)
   );
 }
 
@@ -88,14 +82,9 @@ export function miss(attacker: ShinBraver, objects: BattleObjects, result: Miss)
     attacker.straightPunch(),
     delay(700)
       .chain(
-        objects.defender.sprite.knockBack(),
-        objects.defender.gauge.hp(objects.defenderState.armdozer.hp)
+        objects.defender.sprite.avoid()
       )
-  ).chain(
-    objects.defender.sprite.knockBackToStand()
-  ).chain(
-    delay(500)
-  );
+  )
 }
 
 /** フェイント */
@@ -109,7 +98,5 @@ export function feint(attacker: ShinBraver, objects: BattleObjects, result: Fein
       )
   ).chain(
     objects.defender.sprite.knockBackToStand()
-  ).chain(
-    delay(500)
   );
 }

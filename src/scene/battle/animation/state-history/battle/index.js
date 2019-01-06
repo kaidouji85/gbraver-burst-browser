@@ -34,7 +34,8 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
 
   return visibleBattery(objects)
     .chain(delay(500))
-    .chain(attackAnimation(objects));
+    .chain(attackAnimation(objects))
+    .chain(delay(500));
 }
 
 /** 攻撃側スプライトに応じて、戦闘アニメーションを切り替える */
