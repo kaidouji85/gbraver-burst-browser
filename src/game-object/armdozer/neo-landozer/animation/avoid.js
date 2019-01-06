@@ -12,9 +12,9 @@ export function avoid(model: NeoLandozerModel): Animate {
     model.animation.type = 'STAND';
   }).chain(
     tween(model.position, t =>
-      t.to({x: '+50', z: '-50'}, 150))
+      t.to({x: '+100', z: '-100'}, 150))
   ).chain(
     tween(model.position, t =>
-      t.to({x: '-50', z: '+50'}, 150))
+      t.to({x: '-100', z: '+100'}, 300))
   );
 }
