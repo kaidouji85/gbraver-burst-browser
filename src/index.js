@@ -8,7 +8,7 @@ import {createDOMEventListener} from "./action/dom-event/create-listener";
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core/lib/master/armdozers";
 import type {NPC} from "./npc/npc";
-import {NeoLandozerNPC} from "./npc/neo-landozer-n-p-c";
+import {NeoLandozerNpc} from "./npc/neo-landozer-npc";
 import {OfflineBattleRoom} from "./battle-room/offline-battle-room";
 import {BattleScene} from "./scene/battle";
 
@@ -31,7 +31,7 @@ async function main() {
     playerId: 'test01',
     armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
   };
-  const npc: NPC = NeoLandozerNPC;
+  const npc: NPC = NeoLandozerNpc;
   const battleRoom = new OfflineBattleRoom(player, npc);
   const initialState = await battleRoom.start();
   const scene = new BattleScene({

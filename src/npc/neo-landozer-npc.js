@@ -13,7 +13,7 @@ const ZERO_BATTERY = {
 };
 
 /** ネオランドーザ NPC */
-export const NeoLandozerNPC: NPC = {
+export const NeoLandozerNpc: NPC = {
   armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) || ArmDozers[0],
 
   routine(enemyId: PlayerId, gameStateHistory: GameState[]): Command {
@@ -36,6 +36,7 @@ export const NeoLandozerNPC: NPC = {
   }
 };
 
+/** 攻撃ルーチン */
 function attackRoutine(enemy: PlayerState, command: Command[]): Command {
   const battery4 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 4);
 
@@ -46,8 +47,14 @@ function attackRoutine(enemy: PlayerState, command: Command[]): Command {
   return ZERO_BATTERY;
 }
 
+/** 防御ルーチン */
 function defenseRoutine(enemy: PlayerState, command: Command[]): Command {
   const battery1 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+  const battery2 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
+  if (battery2) {
+    return battery2;
+  }
+
   if (battery1) {
     return battery1;
   }
