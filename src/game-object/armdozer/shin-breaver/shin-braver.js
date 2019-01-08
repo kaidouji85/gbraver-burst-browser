@@ -12,6 +12,7 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
 import {straightPunch} from "./animation/straight-punch";
+import {straightPunchFeint} from "./animation/straight-punch-feint";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -34,6 +35,11 @@ export class ShinBraver implements ArmDozerSprite {
   /** ストレートパンチ */
   straightPunch(): Animate {
     return straightPunch(this._model);
+  }
+
+  /** ストレートパンチフェイント */
+  straightPunchFeint(): Animate {
+    return straightPunchFeint(this._model);
   }
 
   /** ダメージアニメーションを再生する */

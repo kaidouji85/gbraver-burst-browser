@@ -77,7 +77,7 @@ export function criticalHit(attacker: ShinBraver, objects: BattleObjects, result
 }
 
 /** ミス */
-export function miss(attacker: ShinBraver, objects: BattleObjects, result: Miss): Animate {
+export function miss(attacker: ShinBraver, objects: BattleObjects, effect: Miss): Animate {
   return all(
     attacker.straightPunch(),
     delay(700)
@@ -89,14 +89,18 @@ export function miss(attacker: ShinBraver, objects: BattleObjects, result: Miss)
 
 /** フェイント */
 export function feint(attacker: ShinBraver, objects: BattleObjects, result: Feint): Animate {
-  return all(
-    attacker.straightPunch(),
+  const successFeint = all(
+    attacker.straightPunchFeint(),
     delay(700)
       .chain(
-        objects.defender.sprite.knockBack(),
-        objects.defender.gauge.hp(objects.defenderState.armdozer.hp)
+        objects.defender.sprite.avoid(),
       )
-  ).chain(
-    objects.defender.sprite.knockBackToStand()
   );
+  const failedFeint = attacker.straightPunchFeint();
+
+  if (result.isDefenderMoved) {
+    return successFeint;
+  } else {
+    return failedFeint;
+  }
 }
