@@ -1,10 +1,10 @@
 // @flow
 
-import type {BattleObjects} from "./battle-objects";
-import {ShinBraver} from "../../../../../game-object/armdozer/shin-breaver/shin-braver";
-import {Animate} from "../../../../../animation/animate";
-import {delay, empty} from "../../../../../animation/delay";
-import {all} from "../../../../../animation/all";
+import type {BattleAnimationObjects} from "../animation-objects";
+import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";
+import {Animate} from "../../../../../../animation/animate";
+import {delay, empty} from "../../../../../../animation/delay";
+import {all} from "../../../../../../animation/all";
 import type {
   CriticalHit,
   Feint,
@@ -14,27 +14,27 @@ import type {
 } from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 
 /** シンブレイバーの攻撃アニメーション */
-export function shinBraverAttack(attacker: ShinBraver, objects: BattleObjects): Animate {
+export function shinBraverAttack(objects: BattleAnimationObjects<ShinBraver>): Animate {
   switch(objects.effect.result.name) {
     case 'NormalHit':
-      return normalHit(attacker, objects, objects.effect.result);
+      return normalHit(objects, objects.effect.result);
     case 'Guard':
-      return guard(attacker, objects, objects.effect.result);
+      return guard(objects, objects.effect.result);
     case 'CriticalHit':
-      return criticalHit(attacker, objects, objects.effect.result);
+      return criticalHit(objects, objects.effect.result);
     case 'Miss':
-      return miss(attacker, objects, objects.effect.result);
+      return miss(objects, objects.effect.result);
     case 'Feint':
-      return feint(attacker, objects, objects.effect.result);
+      return feint(objects, objects.effect.result);
     default:
       return empty();
   }
 }
 
 /** ノーマルヒット */
-export function normalHit(attacker: ShinBraver, objects: BattleObjects, result: NormalHit): Animate {
+export function normalHit(objects: BattleAnimationObjects<ShinBraver>, result: NormalHit): Animate {
   return all(
-    attacker.straightPunch(),
+    objects.attacker.sprite.straightPunch(),
     delay(700)
       .chain(
         objects.defender.damageIndicator.popUp(result.damage),
@@ -47,9 +47,9 @@ export function normalHit(attacker: ShinBraver, objects: BattleObjects, result: 
 }
 
 /** ガード */
-export function guard(attacker: ShinBraver, objects: BattleObjects, result: Guard): Animate {
+export function guard(objects: BattleAnimationObjects<ShinBraver>, result: Guard): Animate {
   return all(
-    attacker.straightPunch(),
+    objects.attacker.sprite.straightPunch(),
     delay(700)
       .chain(
         objects.defender.damageIndicator.popUp(result.damage),
@@ -62,9 +62,9 @@ export function guard(attacker: ShinBraver, objects: BattleObjects, result: Guar
 }
 
 /** クリティカルヒット */
-export function criticalHit(attacker: ShinBraver, objects: BattleObjects, result: CriticalHit): Animate {
+export function criticalHit(objects: BattleAnimationObjects<ShinBraver>, result: CriticalHit): Animate {
   return all(
-    attacker.straightPunch(),
+    objects.attacker.sprite.straightPunch(),
     delay(700)
       .chain(
         objects.defender.damageIndicator.popUp(result.damage),
@@ -77,9 +77,9 @@ export function criticalHit(attacker: ShinBraver, objects: BattleObjects, result
 }
 
 /** ミス */
-export function miss(attacker: ShinBraver, objects: BattleObjects, effect: Miss): Animate {
+export function miss(objects: BattleAnimationObjects<ShinBraver>, effect: Miss): Animate {
   return all(
-    attacker.straightPunch(),
+    objects.attacker.sprite.straightPunch(),
     delay(700)
       .chain(
         objects.defender.sprite.avoid()
@@ -88,8 +88,8 @@ export function miss(attacker: ShinBraver, objects: BattleObjects, effect: Miss)
 }
 
 /** フェイント */
-export function feint(attacker: ShinBraver, objects: BattleObjects, result: Feint): Animate {
-  if (!result.isDefenderMoved) {
+export function feint(objects: BattleAnimationObjects<ShinBraver>, effect: Feint): Animate {
+  if (!effect.isDefenderMoved) {
     return empty();
   }
 
