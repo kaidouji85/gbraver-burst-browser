@@ -1,10 +1,10 @@
 // @flow
 
-import type {BattleObjects} from "./battle-objects";
-import {ShinBraver} from "../../../../../game-object/armdozer/shin-breaver/shin-braver";
-import {Animate} from "../../../../../animation/animate";
-import {delay, empty} from "../../../../../animation/delay";
-import {all} from "../../../../../animation/all";
+import type {BattleObjects} from "../battle-objects";
+import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";
+import {Animate} from "../../../../../../animation/animate";
+import {delay, empty} from "../../../../../../animation/delay";
+import {all} from "../../../../../../animation/all";
 import type {
   CriticalHit,
   Feint,
@@ -12,9 +12,10 @@ import type {
   Miss,
   NormalHit
 } from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 
 /** シンブレイバーの攻撃アニメーション */
-export function shinBraverAttack(attacker: ShinBraver, objects: BattleObjects): Animate {
+export function shinBraverAttack(attacker: ShinBraver, objects: BattleObjects<ArmDozerSprite>): Animate {
   switch(objects.effect.result.name) {
     case 'NormalHit':
       return normalHit(attacker, objects, objects.effect.result);
@@ -32,7 +33,7 @@ export function shinBraverAttack(attacker: ShinBraver, objects: BattleObjects): 
 }
 
 /** ノーマルヒット */
-export function normalHit(attacker: ShinBraver, objects: BattleObjects, result: NormalHit): Animate {
+export function normalHit(attacker: ShinBraver, objects: BattleObjects<ArmDozerSprite>, result: NormalHit): Animate {
   return all(
     attacker.straightPunch(),
     delay(700)
@@ -47,7 +48,7 @@ export function normalHit(attacker: ShinBraver, objects: BattleObjects, result: 
 }
 
 /** ガード */
-export function guard(attacker: ShinBraver, objects: BattleObjects, result: Guard): Animate {
+export function guard(attacker: ShinBraver, objects: BattleObjects<ArmDozerSprite>, result: Guard): Animate {
   return all(
     attacker.straightPunch(),
     delay(700)
@@ -62,7 +63,7 @@ export function guard(attacker: ShinBraver, objects: BattleObjects, result: Guar
 }
 
 /** クリティカルヒット */
-export function criticalHit(attacker: ShinBraver, objects: BattleObjects, result: CriticalHit): Animate {
+export function criticalHit(attacker: ShinBraver, objects: BattleObjects<ArmDozerSprite>, result: CriticalHit): Animate {
   return all(
     attacker.straightPunch(),
     delay(700)
@@ -77,7 +78,7 @@ export function criticalHit(attacker: ShinBraver, objects: BattleObjects, result
 }
 
 /** ミス */
-export function miss(attacker: ShinBraver, objects: BattleObjects, effect: Miss): Animate {
+export function miss(attacker: ShinBraver, objects: BattleObjects<ArmDozerSprite>, effect: Miss): Animate {
   return all(
     attacker.straightPunch(),
     delay(700)
@@ -88,7 +89,7 @@ export function miss(attacker: ShinBraver, objects: BattleObjects, effect: Miss)
 }
 
 /** フェイント */
-export function feint(attacker: ShinBraver, objects: BattleObjects, result: Feint): Animate {
+export function feint(attacker: ShinBraver, objects: BattleObjects<ArmDozerSprite>, result: Feint): Animate {
   if (!result.isDefenderMoved) {
     return empty();
   }

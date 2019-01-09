@@ -8,8 +8,8 @@ import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-
 /**
  * 戦闘アニメーションオブジェクト
  */
-export type BattleObjects = {
-  attacker: ArmdozerGameObjects<ArmDozerSprite>,
+export type BattleObjects<T> = {
+  attacker: ArmdozerGameObjects<T>,
   attackerState: PlayerState,
   defender: ArmdozerGameObjects<ArmDozerSprite>,
   defenderState: PlayerState,
