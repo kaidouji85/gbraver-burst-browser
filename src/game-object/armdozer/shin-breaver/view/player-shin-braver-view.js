@@ -7,9 +7,7 @@ import type {ShinBraverModel} from "../model/shin-braver-model";
 import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
 import {shinBraverStand} from "../mesh/stand";
 import type {AnimationType} from "../model/animation-type";
-import {
-  shinBraverSPAttack,
-  } from "../mesh/sp-attack";
+import {shinBraverSPAttack,} from "../mesh/sp-attack";
 import {shinBraverSPCharge} from "../mesh/sp-charge";
 import {shinBraverSPToStand} from "../mesh/sp-to-stand";
 

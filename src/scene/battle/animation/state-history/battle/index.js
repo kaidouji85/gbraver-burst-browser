@@ -5,7 +5,7 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
-import type {BattleAnimationObjects} from "./battle-animation-objects";
+import type {BattleAnimationObjects} from "./animation-objects";
 import {visibleBattery} from "./visible-battery";
 import {delay} from "../../../../../animation/delay";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";

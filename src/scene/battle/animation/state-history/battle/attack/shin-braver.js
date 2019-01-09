@@ -1,6 +1,6 @@
 // @flow
 
-import type {BattleAnimationObjects} from "../battle-animation-objects";
+import type {BattleAnimationObjects} from "../animation-objects";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";

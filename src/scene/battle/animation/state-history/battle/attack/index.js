@@ -1,4 +1,4 @@
-import type {BattleAnimationObjects} from "../battle-animation-objects";
+import type {BattleAnimationObjects} from "../animation-objects";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import {Animate} from "../../../../../../animation/animate";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";

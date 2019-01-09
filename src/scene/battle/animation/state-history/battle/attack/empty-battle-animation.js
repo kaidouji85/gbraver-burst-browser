@@ -2,7 +2,7 @@
 
 
 import {Animate} from "../../../../../../animation/animate";
-import type {BattleAnimationObjects} from "../battle-animation-objects";
+import type {BattleAnimationObjects} from "../animation-objects";
 import {all} from "../../../../../../animation/all";
 import {DamageIndicator} from "../../../../../../game-object/damage-indicator/damage-indicator";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
