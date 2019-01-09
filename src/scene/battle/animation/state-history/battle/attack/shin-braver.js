@@ -1,6 +1,6 @@
 // @flow
 
-import type {BattleObjects} from "../battle-objects";
+import type {BattleAnimationObjects} from "../battle-animation-objects";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
@@ -14,7 +14,7 @@ import type {
 } from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 
 /** シンブレイバーの攻撃アニメーション */
-export function shinBraverAttack(objects: BattleObjects<ShinBraver>): Animate {
+export function shinBraverAttack(objects: BattleAnimationObjects<ShinBraver>): Animate {
   switch(objects.effect.result.name) {
     case 'NormalHit':
       return normalHit(objects, objects.effect.result);
@@ -32,7 +32,7 @@ export function shinBraverAttack(objects: BattleObjects<ShinBraver>): Animate {
 }
 
 /** ノーマルヒット */
-export function normalHit(objects: BattleObjects<ShinBraver>, result: NormalHit): Animate {
+export function normalHit(objects: BattleAnimationObjects<ShinBraver>, result: NormalHit): Animate {
   return all(
     objects.attacker.sprite.straightPunch(),
     delay(700)
@@ -47,7 +47,7 @@ export function normalHit(objects: BattleObjects<ShinBraver>, result: NormalHit)
 }
 
 /** ガード */
-export function guard(objects: BattleObjects<ShinBraver>, result: Guard): Animate {
+export function guard(objects: BattleAnimationObjects<ShinBraver>, result: Guard): Animate {
   return all(
     objects.attacker.sprite.straightPunch(),
     delay(700)
@@ -62,7 +62,7 @@ export function guard(objects: BattleObjects<ShinBraver>, result: Guard): Animat
 }
 
 /** クリティカルヒット */
-export function criticalHit(objects: BattleObjects<ShinBraver>, result: CriticalHit): Animate {
+export function criticalHit(objects: BattleAnimationObjects<ShinBraver>, result: CriticalHit): Animate {
   return all(
     objects.attacker.sprite.straightPunch(),
     delay(700)
@@ -77,7 +77,7 @@ export function criticalHit(objects: BattleObjects<ShinBraver>, result: Critical
 }
 
 /** ミス */
-export function miss(objects: BattleObjects<ShinBraver>, effect: Miss): Animate {
+export function miss(objects: BattleAnimationObjects<ShinBraver>, effect: Miss): Animate {
   return all(
     objects.attacker.sprite.straightPunch(),
     delay(700)
@@ -88,7 +88,7 @@ export function miss(objects: BattleObjects<ShinBraver>, effect: Miss): Animate 
 }
 
 /** フェイント */
-export function feint(objects: BattleObjects<ShinBraver>, effect: Feint): Animate {
+export function feint(objects: BattleAnimationObjects<ShinBraver>, effect: Feint): Animate {
   if (!effect.isDefenderMoved) {
     return empty();
   }

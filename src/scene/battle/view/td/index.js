@@ -22,8 +22,8 @@ import {createPlayerGauge} from "./player-gauge";
 import {createEnemyGauge} from "./enemy-gauge";
 import {createTurnIndicator} from "./turn-indicator";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../game-object/recover-battery";
-import type {ArmdozerGameObjects} from "./armdozer-game-objects";
-import {appendArmDozerGameObject} from "./armdozer-game-objects";
+import type {ArmdozerObjects} from "./armdozer-objects";
+import {appendArmDozerGameObject} from "./armdozer-objects";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 
 /** コンストラクタのパラメータ */
@@ -46,8 +46,8 @@ type Param = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
-  player: ArmdozerGameObjects<ArmDozerSprite>;
-  enemy: ArmdozerGameObjects<ArmDozerSprite>;
+  player: ArmdozerObjects<ArmDozerSprite>;
+  enemy: ArmdozerObjects<ArmDozerSprite>;
   stage: Stage;
   turnIndicator: TurnIndicator;
   _update: Subject<Update>;

@@ -1,17 +1,20 @@
 // @flow
-import type {ArmdozerGameObjects} from "../../../view/td/armdozer-game-objects";
+import type {ArmdozerObjects} from "../../../view/td/armdozer-objects";
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import {BattleSceneView} from "../../../view";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 
 /**
- * 戦闘アニメーションオブジェクト
+ * 戦闘アニメーションに関連するオブジェクトをまとめたもの
+ * 全ての戦闘アニメーションは本パラメータのみを受け取る
+ *
+ * @type T 攻撃側スプライト
  */
-export type BattleObjects<T> = {
-  attacker: ArmdozerGameObjects<T>,
+export type BattleAnimationObjects<T> = {
+  attacker: ArmdozerObjects<T>,
   attackerState: PlayerState,
-  defender: ArmdozerGameObjects<ArmDozerSprite>,
+  defender: ArmdozerObjects<ArmDozerSprite>,
   defenderState: PlayerState,
   view: BattleSceneView,
   effect: Battle
