@@ -89,18 +89,9 @@ export function miss(attacker: ShinBraver, objects: BattleObjects, effect: Miss)
 
 /** フェイント */
 export function feint(attacker: ShinBraver, objects: BattleObjects, result: Feint): Animate {
-  const successFeint = all(
-    attacker.straightPunchFeint(),
-    delay(700)
-      .chain(
-        objects.defender.sprite.avoid(),
-      )
-  );
-  const failedFeint = attacker.straightPunchFeint();
-
-  if (result.isDefenderMoved) {
-    return successFeint;
-  } else {
-    return failedFeint;
+  if (!result.isDefenderMoved) {
+    return empty();
   }
+
+  return objects.defender.sprite.avoid();
 }
