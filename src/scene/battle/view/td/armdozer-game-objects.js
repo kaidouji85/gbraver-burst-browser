@@ -6,9 +6,18 @@ import {RecoverBattery} from "../../../../game-object/recover-battery/recover-ba
 import {DamageIndicator} from "../../../../game-object/damage-indicator/damage-indicator";
 import * as THREE from "three";
 
-/** アームドーザに関連するオブジェクトをあつめたもの */
-export type ArmdozerGameObjects = {
+export type AbstractArmdozerObjects<T> = {
   sprite: ArmDozerSprite;
+  gauge: Gauge;
+  batteryNumber: BatteryNumber;
+  recoverBattery: RecoverBattery;
+  damageIndicator: DamageIndicator;
+};
+
+
+/** アームドーザに関連するオブジェクトをあつめたもの */
+export type ArmdozerGameObjects<T> = {
+  sprite: T;
   gauge: Gauge;
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -21,7 +30,7 @@ export type ArmdozerGameObjects = {
  * @param scene シーン
  * @param objects シーンに追加するオブジェクト群
  */
-export function appendArmDozerGameObject(scene: THREE.Scene, objects: ArmdozerGameObjects): void {
+export function appendArmDozerGameObject(scene: THREE.Scene, objects: ArmdozerGameObjects<ArmDozerSprite>): void {
   scene.add(objects.sprite.getObject3D());
   scene.add(objects.gauge.getObject3D());
   scene.add(objects.batteryNumber.getObject3D());

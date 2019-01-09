@@ -24,6 +24,7 @@ import {createTurnIndicator} from "./turn-indicator";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../game-object/recover-battery";
 import type {ArmdozerGameObjects} from "./armdozer-game-objects";
 import {appendArmDozerGameObject} from "./armdozer-game-objects";
+import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -45,8 +46,8 @@ type Param = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
-  player: ArmdozerGameObjects;
-  enemy: ArmdozerGameObjects;
+  player: ArmdozerGameObjects<ArmDozerSprite>;
+  enemy: ArmdozerGameObjects<ArmDozerSprite>;
   stage: Stage;
   turnIndicator: TurnIndicator;
   _update: Subject<Update>;
