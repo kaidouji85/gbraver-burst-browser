@@ -1,5 +1,5 @@
 // @flow
-import type {ArmdozerObjects} from "../../../view/td/armdozer-objects";
+import type {ArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import {BattleSceneView} from "../../../view";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
