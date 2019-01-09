@@ -21,7 +21,7 @@ import {Observable} from "rxjs";
  *
  * @type T アームドーザスプライト
  */
-export interface ArmdozerObjects<T> {
+export type ArmdozerObjects<T> = {
   sprite: T;
   gauge: Gauge;
   batteryNumber: BatteryNumber;
@@ -43,30 +43,20 @@ export function appendScene(scene: THREE.Scene, objects: ArmdozerObjects<ArmDoze
   scene.add(objects.damageIndicator.getObject3D());
 }
 
-/** プレイヤーのアームドーザオブジェクト */
-export class PlayerArmdozerObjects implements ArmdozerObjects<ArmDozerSprite> {
-  sprite: ArmDozerSprite;
-  gauge: Gauge;
-  batteryNumber: BatteryNumber;
-  recoverBattery: RecoverBattery;
-  damageIndicator: DamageIndicator;
-
-  constructor(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>) {
-    this.sprite = createPlayerSprite(resources, listener, state);
-    this.gauge = createPlayerGauge(resources, listener, state);
-    this.batteryNumber = playerBatteryNumber({
+/** プレイヤーのアームドーザオブジェクトを生成する */
+export function playerArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): ArmdozerObjects<ArmDozerSprite> {
+  return {
+    sprite: createPlayerSprite(resources, listener, state),
+    gauge: createPlayerGauge(resources, listener, state),
+    batteryNumber: playerBatteryNumber({
       resources: resources,
       listener: listener
-    });
-    this.recoverBattery = playerRecoverBattery(resources, listener);
-    this.damageIndicator = playerDamageIndicator({
+    }),
+    recoverBattery: playerRecoverBattery(resources, listener),
+    damageIndicator: playerDamageIndicator({
       resources: resources,
       listener: listener
-    });
-  }
-
-  /** ゲームオブジェクトをシーンに追加する */
-  appendScene(scene: THREE.Scene): void {
-    appendScene(scene, this);
+    })
   }
 }
+
