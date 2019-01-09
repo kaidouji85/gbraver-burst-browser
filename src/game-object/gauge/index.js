@@ -15,7 +15,7 @@ type Param = {
 };
 
 /** プレイヤーゲージを生成する */
-export function PlayerGauge(param: Param): Gauge {
+export function playerGauge(param: Param): Gauge {
   const view = new PlayerGaugeView(param.resources);
   return new Gauge({
     view: view,
@@ -27,7 +27,7 @@ export function PlayerGauge(param: Param): Gauge {
 }
 
 /** 敵ゲージを生成する */
-export function EnemyGauge(param: Param): Gauge {
+export function enemyGauge(param: Param): Gauge {
   const view = new EnemyGaugeView(param.resources);
   return new Gauge({
     view: view,

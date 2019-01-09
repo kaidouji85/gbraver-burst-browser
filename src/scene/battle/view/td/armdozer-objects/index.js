@@ -9,13 +9,12 @@ import type {Resources} from "../../../../../resource";
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {createPlayerSprite} from "./player-sprite";
-import {createPlayerGauge} from "./player-gauge";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
 import {Observable} from "rxjs";
 import {createEnemySprite} from "./enemy-sprite";
-import {createEnemyGauge} from "./enemy-gauge";
+import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
 
 
 /**
@@ -49,7 +48,12 @@ export function appendScene(scene: THREE.Scene, objects: ArmdozerObjects<ArmDoze
 export function playerArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): ArmdozerObjects<ArmDozerSprite> {
   return {
     sprite: createPlayerSprite(resources, listener, state),
-    gauge: createPlayerGauge(resources, listener, state),
+    gauge: playerGauge({
+      resources: resources,
+      listener: listener,
+      hp: state.armdozer.maxHp,
+      battery: state.armdozer.maxBattery
+    }),
     batteryNumber: playerBatteryNumber({
       resources: resources,
       listener: listener
@@ -66,7 +70,12 @@ export function playerArmdozerObjects(resources: Resources, state: PlayerState, 
 export function enemyArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): ArmdozerObjects<ArmDozerSprite> {
   return {
     sprite: createEnemySprite(resources, listener, state),
-    gauge: createEnemyGauge(resources, listener, state),
+    gauge: enemyGauge({
+      listener: listener,
+      resources: resources,
+      hp: state.armdozer.maxHp,
+      battery: state.armdozer.maxBattery
+    }),
     batteryNumber: enemyBatteryNumber({
       resources: resources,
       listener: listener
