@@ -18,4 +18,3 @@ export type ArmdozerObjects<T> = {
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
 };
-
