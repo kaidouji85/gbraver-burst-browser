@@ -1,7 +1,6 @@
 // @flow
 import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
-import {createEnemySprite} from "./armdozer-objects/enemy-sprite";
 import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
@@ -15,13 +14,9 @@ import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import {enemyBatteryNumber} from "../../../../game-object/battery-number";
-import {enemyDamageIndicator} from "../../../../game-object/damage-indicator";
-import {createEnemyGauge} from "./armdozer-objects/enemy-gauge";
 import {createTurnIndicator} from "./turn-indicator";
-import {enemyRecoverBattery} from "../../../../game-object/recover-battery";
 import type {ArmdozerObjects} from "./armdozer-objects";
-import {appendScene, playerArmdozerObjects} from "./armdozer-objects";
+import {appendScene, enemyArmdozerObjects, playerArmdozerObjects} from "./armdozer-objects";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 
 /** コンストラクタのパラメータ */
@@ -75,19 +70,7 @@ export class ThreeDimensionLayer {
     this.player = playerArmdozerObjects(param.resources, player, gameObjectListener);
     appendScene(this.scene, this.player);
 
-    this.enemy = {
-      sprite: createEnemySprite(param.resources, gameObjectListener, enemy),
-      gauge: createEnemyGauge(param.resources, gameObjectListener, enemy),
-      batteryNumber: enemyBatteryNumber({
-        resources: param.resources,
-        listener: gameObjectListener
-      }),
-      recoverBattery: enemyRecoverBattery(param.resources, gameObjectListener),
-      damageIndicator: enemyDamageIndicator({
-        resources: param.resources,
-        listener: gameObjectListener
-      })
-    };
+    this.enemy = enemyArmdozerObjects(param.resources, enemy, gameObjectListener);
     appendScene(this.scene, this.enemy);
 
     this.stage = createStage(param.resources);

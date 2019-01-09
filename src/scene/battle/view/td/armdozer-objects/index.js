@@ -10,10 +10,12 @@ import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {createPlayerSprite} from "./player-sprite";
 import {createPlayerGauge} from "./player-gauge";
-import {playerBatteryNumber} from "../../../../../game-object/battery-number";
-import {playerRecoverBattery} from "../../../../../game-object/recover-battery";
-import {playerDamageIndicator} from "../../../../../game-object/damage-indicator";
+import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-object/battery-number";
+import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-object/recover-battery";
+import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
 import {Observable} from "rxjs";
+import {createEnemySprite} from "./enemy-sprite";
+import {createEnemyGauge} from "./enemy-gauge";
 
 
 /**
@@ -60,3 +62,19 @@ export function playerArmdozerObjects(resources: Resources, state: PlayerState, 
   }
 }
 
+/** 敵のアームドーザオブジェクトを生成する */
+export function enemyArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): ArmdozerObjects<ArmDozerSprite> {
+  return {
+    sprite: createEnemySprite(resources, listener, state),
+    gauge: createEnemyGauge(resources, listener, state),
+    batteryNumber: enemyBatteryNumber({
+      resources: resources,
+      listener: listener
+    }),
+    recoverBattery: enemyRecoverBattery(resources, listener),
+    damageIndicator: enemyDamageIndicator({
+      resources: resources,
+      listener: listener
+    })
+  }
+}
