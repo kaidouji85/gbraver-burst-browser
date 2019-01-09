@@ -8,7 +8,7 @@ import {emptyBattleAnimation} from "../empty-battle-animation";
 /** 攻撃側スプライトに応じて、戦闘アニメーションを切り替える */
 export function attackAnimation(objects: BattleObjects<ArmDozerSprite>): Animate {
   if (objects.attacker.sprite instanceof ShinBraver) {
-    return shinBraverAttack(objects.attacker.sprite, objects);
+    return shinBraverAttack(objects);
   } else {
     return emptyBattleAnimation(objects);
   }
