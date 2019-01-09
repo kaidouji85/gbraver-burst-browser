@@ -1,8 +1,8 @@
 // @flow
 import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
-import {createPlayerSprite} from "./player-sprite";
-import {createEnemySprite} from "./enemy-sprite";
+import {createPlayerSprite} from "./armdozer-objects/player-sprite";
+import {createEnemySprite} from "./armdozer-objects/enemy-sprite";
 import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
@@ -18,12 +18,12 @@ import type {DOMEvent} from "../../../../action/dom-event";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
-import {createPlayerGauge} from "./player-gauge";
-import {createEnemyGauge} from "./enemy-gauge";
+import {createPlayerGauge} from "./armdozer-objects/player-gauge";
+import {createEnemyGauge} from "./armdozer-objects/enemy-gauge";
 import {createTurnIndicator} from "./turn-indicator";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../game-object/recover-battery";
 import type {ArmdozerObjects} from "./armdozer-objects";
-import {appendArmDozerGameObject} from "./armdozer-objects";
+import {appendScene, PlayerArmdozerObjects} from "./armdozer-objects";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 
 /** コンストラクタのパラメータ */
@@ -74,20 +74,8 @@ export class ThreeDimensionLayer {
       }
     });
 
-    this.player = {
-      sprite: createPlayerSprite(param.resources, gameObjectListener, player),
-      gauge: createPlayerGauge(param.resources, gameObjectListener, player),
-      batteryNumber: playerBatteryNumber({
-        resources: param.resources,
-        listener: gameObjectListener
-      }),
-      recoverBattery: playerRecoverBattery(param.resources, gameObjectListener),
-      damageIndicator: playerDamageIndicator({
-        resources: param.resources,
-        listener: gameObjectListener
-      })
-    };
-    appendArmDozerGameObject(this.scene, this.player);
+    this.player = new PlayerArmdozerObjects(param.resources, player, gameObjectListener);
+    this.player.appendScene(this.scene);
 
     this.enemy = {
       sprite: createEnemySprite(param.resources, gameObjectListener, enemy),
@@ -102,7 +90,7 @@ export class ThreeDimensionLayer {
         listener: gameObjectListener
       })
     };
-    appendArmDozerGameObject(this.scene, this.enemy);
+    appendScene(this.scene, this.enemy);
 
     this.stage = createStage(param.resources);
     this.stage.getThreeJsObjects()

@@ -1,12 +1,12 @@
 // @flow
 
-import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
-import type {Resources} from "../../../../resource/index";
-import {EnemyShinBraver} from '../../../../game-object/armdozer/shin-breaver';
+import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
+import type {Resources} from "../../../../../resource";
+import {EnemyShinBraver} from '../../../../../game-object/armdozer/shin-breaver';
 import type {Player} from "gbraver-burst-core/lib/player/player";
-import {EnemyNeoLandozer} from "../../../../game-object/armdozer/neo-landozer";
+import {EnemyNeoLandozer} from "../../../../../game-object/armdozer/neo-landozer";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../action/game-object-action";
+import type {GameObjectAction} from "../../../../../action/game-object-action";
 
 /** 与えられたパラメータから敵スプライを生成する */
 export function createEnemySprite(resources: Resources, listener: Observable<GameObjectAction>, enemyInfo: Player): ArmDozerSprite {
