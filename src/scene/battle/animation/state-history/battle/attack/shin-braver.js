@@ -12,9 +12,18 @@ import type {
   Miss,
   NormalHit
 } from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import {BattleSceneView} from "../../../../view";
+import type {BattleSceneState} from "../../../../state/battle-scene-state";
+import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 
 /** シンブレイバーの攻撃アニメーション */
-export function shinBraverAttack(objects: BattleAnimationObjects<ShinBraver>): Animate {
+export function shinBraverAttack(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+  console.log('shinbraver attack')
+  return empty();
+
+
+
+  /*
   switch(objects.effect.result.name) {
     case 'NormalHit':
       return normalHit(objects, objects.effect.result);
@@ -29,6 +38,7 @@ export function shinBraverAttack(objects: BattleAnimationObjects<ShinBraver>): A
     default:
       return empty();
   }
+  */
 }
 
 /** ノーマルヒット */
