@@ -14,7 +14,7 @@ import {playerDamageIndicator} from "../../../../../game-object/damage-indicator
 import type {ArmdozerObjects} from "./armdozer-objects";
 
 /** プレイヤーのアームドーザオブジェクトを生成する */
-export function playerArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): ArmdozerObjects<ArmDozerSprite> {
+export function playerArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): ArmdozerObjects {
   return {
     playerId: state.playerId,
     sprite: createPlayerSprite(resources, listener, state),
