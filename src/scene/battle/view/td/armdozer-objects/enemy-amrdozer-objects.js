@@ -17,6 +17,7 @@ import type {ArmdozerObjects} from "./armdozer-objects";
 /** 敵のアームドーザオブジェクトを生成する */
 export function enemyArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): ArmdozerObjects<ArmDozerSprite> {
   return {
+    playerId: state.playerId,
     sprite: createEnemySprite(resources, listener, state),
     gauge: enemyGauge({
       listener: listener,

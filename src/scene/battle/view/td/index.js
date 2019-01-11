@@ -14,11 +14,11 @@ import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
 import type {ArmdozerObjects} from "./armdozer-objects/armdozer-objects";
-import {appendScene} from "./armdozer-objects/append-scene";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import {playerArmdozerObjects} from "./armdozer-objects/player-armdozer-objects";
 import {enemyArmdozerObjects} from "./armdozer-objects/enemy-amrdozer-objects";
 import SchoolField from "../../../../game-object/stage/school";
+import {appendScene} from "./armdozer-objects/append-scene";
 
 /** コンストラクタのパラメータ */
 type Param = {
