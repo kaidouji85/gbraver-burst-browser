@@ -15,93 +15,77 @@ import type {
 import {BattleSceneView} from "../../../../view";
 import type {BattleSceneState} from "../../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
+import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
 
 /** シンブレイバーの攻撃アニメーション */
 export function shinBraverAttack(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
-  console.log('shinbraver attack')
-  return empty();
-
-
-
-  /*
-  switch(objects.effect.result.name) {
-    case 'NormalHit':
-      return normalHit(objects, objects.effect.result);
-    case 'Guard':
-      return guard(objects, objects.effect.result);
-    case 'CriticalHit':
-      return criticalHit(objects, objects.effect.result);
-    case 'Miss':
-      return miss(objects, objects.effect.result);
-    case 'Feint':
-      return feint(objects, objects.effect.result);
-    default:
-      return empty();
-  }
-  */
-}
-
-/** ノーマルヒット */
-export function normalHit(objects: BattleAnimationObjects<ShinBraver>, result: NormalHit): Animate {
-  return all(
-    objects.attacker.sprite.straightPunch(),
-    delay(700)
-      .chain(
-        objects.defender.damageIndicator.popUp(result.damage),
-        objects.defender.sprite.knockBack(),
-        objects.defender.gauge.hp(objects.defenderState.armdozer.hp)
-      )
-  ).chain(
-    objects.defender.sprite.knockBackToStand()
-  );
-}
-
-/** ガード */
-export function guard(objects: BattleAnimationObjects<ShinBraver>, result: Guard): Animate {
-  return all(
-    objects.attacker.sprite.straightPunch(),
-    delay(700)
-      .chain(
-        objects.defender.damageIndicator.popUp(result.damage),
-        objects.defender.sprite.guard(),
-        objects.defender.gauge.hp(objects.defenderState.armdozer.hp)
-      )
-  ).chain(
-    objects.defender.sprite.guardToStand()
-  );
-}
-
-/** クリティカルヒット */
-export function criticalHit(objects: BattleAnimationObjects<ShinBraver>, result: CriticalHit): Animate {
-  return all(
-    objects.attacker.sprite.straightPunch(),
-    delay(700)
-      .chain(
-        objects.defender.damageIndicator.popUp(result.damage),
-        objects.defender.sprite.knockBack(),
-        objects.defender.gauge.hp(objects.defenderState.armdozer.hp)
-      )
-  ).chain(
-    objects.defender.sprite.knockBackToStand()
-  );
-}
-
-/** ミス */
-export function miss(objects: BattleAnimationObjects<ShinBraver>, effect: Miss): Animate {
-  return all(
-    objects.attacker.sprite.straightPunch(),
-    delay(700)
-      .chain(
-        objects.defender.sprite.avoid()
-      )
-  )
-}
-
-/** フェイント */
-export function feint(objects: BattleAnimationObjects<ShinBraver>, effect: Feint): Animate {
-  if (!effect.isDefenderMoved) {
+  if (gameState.effect.name !== 'Battle') {
     return empty();
   }
 
-  return objects.defender.sprite.avoid();
+  const effect: Battle = gameState.effect;
+  const armdozers = [view.td.player, view.td.enemy];
+  const attackerArmdozer = armdozers.find(v => v.playerId === effect.attacker);
+  const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
+  const defenderArmdozer = armdozers.find(v => v.playerId !== effect.attacker);
+  const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
+
+  if (!attackerArmdozer || !attackerState || !defenderArmdozer || !defenderState) {
+    return empty();
+  }
+
+  if (!(attackerArmdozer.sprite instanceof ShinBraver)) {
+    return empty();
+  }
+
+  const shinBraver: ShinBraver = attackerArmdozer.sprite;
+
+  const attack = (damage: number): Animate =>
+    all(
+      shinBraver.straightPunch(),
+      delay(700).chain(
+        defenderArmdozer.damageIndicator.popUp(damage),
+        defenderArmdozer.sprite.knockBack(),
+        defenderArmdozer.gauge.hp(defenderState.armdozer.hp)
+      )
+    ).chain(
+      defenderArmdozer.sprite.knockBackToStand()
+    );
+
+  const guard = (damage: number): Animate =>
+    all(
+      shinBraver.straightPunch(),
+      delay(700).chain(
+        defenderArmdozer.damageIndicator.popUp(damage),
+        defenderArmdozer.sprite.guard(),
+        defenderArmdozer.gauge.hp(defenderState.armdozer.hp)
+      )
+    ).chain(
+      defenderArmdozer.sprite.guardToStand()
+    );
+
+  const miss = (): Animate =>
+    all(
+      shinBraver.straightPunch(),
+      delay(700).chain(
+        defenderArmdozer.sprite.avoid()
+      )
+    );
+
+  const feint = (): Animate =>
+    defenderArmdozer.sprite.avoid();
+
+  if (effect.result.name === 'NormalHit') {
+    return attack(effect.result.damage);
+  } else if (effect.result.name === 'Guard') {
+    return guard(effect.result.damage);
+  } else if (effect.result.name === 'CriticalHit') {
+    return attack(effect.result.damage);
+  } else if (effect.result.name === 'Miss') {
+    return miss();
+  } else if (effect.result.name === 'Feint' && effect.result.isDefenderMoved) {
+    return feint();
+  }
+
+  return empty();
 }
