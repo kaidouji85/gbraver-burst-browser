@@ -22,11 +22,11 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
     .map(v => {
       switch (v.effect.name) {
         case 'InputCommand':
-          return inputCommandAnimation(view, sceneState, v, v.effect);
+          return inputCommandAnimation(view, sceneState, v);
         case 'Battle':
           return battleAnimation(view, sceneState, v);
         case 'TurnChange':
-          return turnChangeAnimation(view, sceneState, v, v.effect);
+          return turnChangeAnimation(view, sceneState, v);
         default:
           return empty();
       }
