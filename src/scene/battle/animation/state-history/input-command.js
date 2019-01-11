@@ -15,10 +15,14 @@ import {all} from "../../../../animation/all";
  * @param view 戦闘画面ビュー
  * @param sceneState 戦闘画面状態
  * @param gameState ゲーム状態
- * @param effect コマンド入力フェイズの効果
  * @return アニメーション
  */
-export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: InputCommand): Animate {
+export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+  if (gameState.effect.name !== 'InputCommand') {
+    return empty();
+  }
+
+  const effect: InputCommand = gameState.effect;
   const player = gameState.players.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
   if (!player || !enemy) {

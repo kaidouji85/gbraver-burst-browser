@@ -4,6 +4,8 @@ import {BatteryNumber} from "../../../../../game-object/battery-number/battery-n
 import {RecoverBattery} from "../../../../../game-object/recover-battery/recover-battery";
 import {DamageIndicator} from "../../../../../game-object/damage-indicator/damage-indicator";
 import {Observable} from "rxjs";
+import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 
 
 /**
@@ -11,8 +13,9 @@ import {Observable} from "rxjs";
  *
  * @type T アームドーザスプライト
  */
-export type ArmdozerObjects<T> = {
-  sprite: T;
+export type ArmdozerObjects = {
+  playerId: PlayerId,
+  sprite: ArmDozerSprite;
   gauge: Gauge;
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;

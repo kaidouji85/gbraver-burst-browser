@@ -1,7 +1,6 @@
 // @flow
 
 import * as THREE from "three";
-import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import type {ArmdozerObjects} from "./armdozer-objects";
 
 /**
@@ -10,7 +9,7 @@ import type {ArmdozerObjects} from "./armdozer-objects";
  * @param scene シーン
  * @param objects シーンに追加するオブジェクト群
  */
-export function appendScene(scene: THREE.Scene, objects: ArmdozerObjects<ArmDozerSprite>): void {
+export function appendScene(scene: THREE.Scene, objects: ArmdozerObjects): void {
   scene.add(objects.sprite.getObject3D());
   scene.add(objects.gauge.getObject3D());
   scene.add(objects.batteryNumber.getObject3D());
