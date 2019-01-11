@@ -31,7 +31,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
     effect: effect
   };
 
-  return visibleBattery(objects)
+  return visibleBattery(view, sceneState, gameState)
     .chain(delay(500))
     .chain(attackAnimation(objects))
     .chain(delay(500));
