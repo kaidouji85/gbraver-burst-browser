@@ -24,7 +24,7 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
         case 'InputCommand':
           return inputCommandAnimation(view, sceneState, v, v.effect);
         case 'Battle':
-          return battleAnimation(view, sceneState, v, v.effect);
+          return battleAnimation(view, sceneState, v);
         case 'TurnChange':
           return turnChangeAnimation(view, sceneState, v, v.effect);
         default:

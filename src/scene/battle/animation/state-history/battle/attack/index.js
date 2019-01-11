@@ -11,8 +11,8 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
 
 /** 攻撃側スプライトに応じて、戦闘アニメーションを切り替える */
-export function attackAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState, effect: Battle): Animate {
-  return empty();
+export function attackAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+  return emptyBattleAnimation(view, sceneState, gameState);
 
   /*
   if (objects.attacker.sprite instanceof ShinBraver) {
