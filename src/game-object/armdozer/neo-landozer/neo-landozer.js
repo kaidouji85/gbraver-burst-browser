@@ -15,6 +15,7 @@ import {knockBackToStand} from "./animation/knock-back-to-stand";
 import {guard} from './animation/guard';
 import {guardToStand} from './animation/guard-to-stand';
 import {avoid} from "./animation/avoid";
+import {straightPunch} from "./animation/straight-punch";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -32,6 +33,11 @@ export class NeoLandozer implements ArmDozerSprite {
         this._preRender(action);
       }
     });
+  }
+
+  /** ストレートパンチ */
+  straightPunch(): Animate {
+    return straightPunch(this._model);
   }
 
   /** ノックバック */
