@@ -71,7 +71,7 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   },
   {
     id: TEXTURE_IDS.NEO_LANDOZER_SP_CHARGE,
-    path: 'armdozer/neo-landozer/sp-attack.png'
+    path: 'armdozer/neo-landozer/sp-charge.png'
   },
   {
     id: TEXTURE_IDS.NEO_LANDOZER_SP_ATTACK,
