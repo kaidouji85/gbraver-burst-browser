@@ -6,8 +6,8 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation-mesh";
 
 export const MAX_ANIMATION = 1;
-export const MESH_WIDTH = 360;
-export const MESH_HEIGHT = 360;
+export const MESH_WIDTH = 600;
+export const MESH_HEIGHT = 600;
 
 /** ネオラインドーザ立ちポーズ */
 export function neoLandozerStand(resources: Resources): ArmdozerMesh {

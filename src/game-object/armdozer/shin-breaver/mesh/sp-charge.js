@@ -7,7 +7,7 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
-export const MAX_ANIMATION = 8;
+export const MAX_ANIMATION = 4;
 
 /** ストレートパンチため */
 export function shinBraverSPCharge(resources: Resources): ArmdozerMesh {
@@ -19,5 +19,6 @@ export function shinBraverSPCharge(resources: Resources): ArmdozerMesh {
     height: MESH_HEIGHT
   });
   ret.mesh.position.y = 140;
+  ret.mesh.position.z = 1;
   return ret;
 }

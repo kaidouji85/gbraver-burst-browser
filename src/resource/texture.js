@@ -24,6 +24,10 @@ export const TEXTURE_IDS = {
   SHIN_BRAVER_SP_TO_STAND: 'SHIN_BRAVER_SP_TO_STAND',
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
   NEO_LANDOZER_KNOCK_BACK: 'NEO_LANDOZER_KNOCK_BACK',
+  NEO_LANDOZER_GUARD: 'NEO_LANDOZER_GUARD',
+  NEO_LANDOZER_HM_CHARGE: 'NEO_LANDOZER_HM_CHARGE',
+  NEO_LANDOZER_HM_ATTACK: 'NEO_LANDOZER_HM_ATTACK',
+  NEO_LANDOZER_HM_TO_STAND: 'NEO_LANDOZER_HM_TO_STAND',
   BLUE_SKY_FRONT: 'BLUE_SKY_FRONT',
   BLUE_SKY_RIGHT: 'BLUE_SKY_RIGHT',
   BLUE_SKY_BACK: 'BLUE_SKY_BACK',
@@ -61,7 +65,22 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.NEO_LANDOZER_KNOCK_BACK,
     path: 'armdozer/neo-landozer/knock-back.png'
   },
-
+  {
+    id: TEXTURE_IDS.NEO_LANDOZER_GUARD,
+    path: 'armdozer/neo-landozer/guard.png'
+  },
+  {
+    id: TEXTURE_IDS.NEO_LANDOZER_HM_CHARGE,
+    path: 'armdozer/neo-landozer/hm-charge.png'
+  },
+  {
+    id: TEXTURE_IDS.NEO_LANDOZER_HM_ATTACK,
+    path: 'armdozer/neo-landozer/hm-attack.png'
+  },
+  {
+    id: TEXTURE_IDS.NEO_LANDOZER_HM_TO_STAND,
+    path: 'armdozer/neo-landozer/hm-to-stand.png'
+  },
   // 青空スカイボックス関連
   {
     id: TEXTURE_IDS.BLUE_SKY_FRONT,

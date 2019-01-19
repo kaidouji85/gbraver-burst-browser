@@ -1,9 +1,6 @@
 // @flow
 import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
-import {createPlayerSprite} from "./player-sprite";
-import {createEnemySprite} from "./enemy-sprite";
-import {createStage} from './stage';
 import type {Stage} from "../../../../game-object/stage/stage";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {merge, Observable, Observer, Subject} from "rxjs";
@@ -16,14 +13,11 @@ import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import {enemyBatteryNumber, playerBatteryNumber} from "../../../../game-object/battery-number";
-import {enemyDamageIndicator, playerDamageIndicator} from "../../../../game-object/damage-indicator";
-import {createPlayerGauge} from "./player-gauge";
-import {createEnemyGauge} from "./enemy-gauge";
-import {createTurnIndicator} from "./turn-indicator";
-import {enemyRecoverBattery, playerRecoverBattery} from "../../../../game-object/recover-battery";
-import type {ArmdozerGameObjects} from "./armdozer-game-objects";
-import {appendArmDozerGameObject} from "./armdozer-game-objects";
+import type {ArmdozerObjects} from "./armdozer-objects/armdozer-objects";
+import {playerArmdozerObjects} from "./armdozer-objects/player-armdozer-objects";
+import {enemyArmdozerObjects} from "./armdozer-objects/enemy-amrdozer-objects";
+import SchoolField from "../../../../game-object/stage/school";
+import {appendScene} from "./armdozer-objects/append-scene";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -45,8 +39,8 @@ type Param = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
-  player: ArmdozerGameObjects;
-  enemy: ArmdozerGameObjects;
+  player: ArmdozerObjects;
+  enemy: ArmdozerObjects;
   stage: Stage;
   turnIndicator: TurnIndicator;
   _update: Subject<Update>;
@@ -73,41 +67,20 @@ export class ThreeDimensionLayer {
       }
     });
 
-    this.player = {
-      sprite: createPlayerSprite(param.resources, gameObjectListener, player),
-      gauge: createPlayerGauge(param.resources, gameObjectListener, player),
-      batteryNumber: playerBatteryNumber({
-        resources: param.resources,
-        listener: gameObjectListener
-      }),
-      recoverBattery: playerRecoverBattery(param.resources, gameObjectListener),
-      damageIndicator: playerDamageIndicator({
-        resources: param.resources,
-        listener: gameObjectListener
-      })
-    };
-    appendArmDozerGameObject(this.scene, this.player);
+    this.player = playerArmdozerObjects(param.resources, player, gameObjectListener);
+    appendScene(this.scene, this.player);
 
-    this.enemy = {
-      sprite: createEnemySprite(param.resources, gameObjectListener, enemy),
-      gauge: createEnemyGauge(param.resources, gameObjectListener, enemy),
-      batteryNumber: enemyBatteryNumber({
-        resources: param.resources,
-        listener: gameObjectListener
-      }),
-      recoverBattery: enemyRecoverBattery(param.resources, gameObjectListener),
-      damageIndicator: enemyDamageIndicator({
-        resources: param.resources,
-        listener: gameObjectListener
-      })
-    };
-    appendArmDozerGameObject(this.scene, this.enemy);
+    this.enemy = enemyArmdozerObjects(param.resources, enemy, gameObjectListener);
+    appendScene(this.scene, this.enemy);
 
-    this.stage = createStage(param.resources);
+    this.stage = new SchoolField(param.resources);
     this.stage.getThreeJsObjects()
       .forEach(item => this.scene.add(item));
 
-    this.turnIndicator = createTurnIndicator(param.resources, gameObjectListener);
+    this.turnIndicator = new TurnIndicator({
+      listener: gameObjectListener,
+      resources: param.resources
+    });
     this.scene.add(this.turnIndicator.getObject3D());
 
     param.listener.gameLoop.subscribe(action => {

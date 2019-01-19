@@ -1,42 +1,48 @@
 // @flow
 
-import type {ShinBraverModel} from "../model/shin-braver-model";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {Animate} from "../../../../animation/animate";
 import {delay} from "../../../../animation/delay";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
 
-/** ストレートパンチ */
-export function straightPunch(model: ShinBraverModel): Animate {
+/** アームハンマー */
+export function armHammer(model: NeoLandozerModel): Animate {
   return process(() => {
-    model.animation.type = 'SP_CHARGE';
+    model.animation.type = 'HM_CHARGE';
     model.animation.frame = 0;
   }).chain(
     tween(model.animation, t => t
-      .to({frame: 1}, 250)
+      .to({frame: 1}, 300)
     )
   ).chain(
-    delay(300)
+    delay(400)
   ).chain(
     process(() => {
-      model.animation.type = 'SP_ATTACK';
+      model.animation.type = 'HM_ATTACK';
       model.animation.frame = 0;
     })
   ).chain(
     tween(model.animation, t => t
-      .to({frame: 1}, 250)
+      .to({frame: 1}, 150)
+    ),
+    tween(model.position, t => t
+      .to({x: '-70'}, 150)
     )
   ).chain(
-    delay(100)
+    delay(500)
   ).chain(
     process(() => {
-      model.animation.type = 'SP_TO_STAND';
+      model.animation.type = 'HM_TO_STAND';
       model.animation.frame = 0;
     })
   ).chain(
     tween(model.animation, t => t
-      .to({frame: 1}, 500)
-    )
+      .to({frame: 1}, 300)
+    ),
+    tween(model.position, t => t
+      .to({x: '+70'}, 300)
+    ),
   ).chain(
     process(() => {
       model.animation.type = 'STAND';

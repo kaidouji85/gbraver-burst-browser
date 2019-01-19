@@ -7,11 +7,11 @@ import {tween} from "../../../../animation/tween";
 import {empty} from "../../../../animation/delay";
 import {all} from "../../../../animation/all";
 
-/** ノックバック */
-export function knockBack(model: NeoLandozerModel): Animate {
+/** ガード */
+export function guard(model: NeoLandozerModel): Animate {
   const motion = process(() => {
     model.animation.frame = 1;
-    model.animation.type = 'KNOCK_BACK';
+    model.animation.type = 'GUARD';
   });
   const position = tween(model.position, t => t
     .to({x: '+20'}, 100)

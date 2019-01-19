@@ -3,7 +3,6 @@
 import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {ShinBraverView} from "./view/shin-braver-view";
-import {stand} from "./animation/stand";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {ShinBraverModel} from "./model/shin-braver-model";
@@ -32,11 +31,6 @@ export class ShinBraver implements ArmDozerSprite {
     });
   }
 
-  /** 立ちポーズにする */
-  stand(): Animate {
-    return stand(this._model);
-  }
-
   /** ストレートパンチ */
   straightPunch(): Animate {
     return straightPunch(this._model);
@@ -44,6 +38,31 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** ダメージアニメーションを再生する */
   knockBack(): Animate {
+    // TODO アニメーションを実装する
+    return empty();
+  }
+
+  /** ノックバック -> 立ち */
+  knockBackToStand(): Animate {
+    // TODO アニメーションを実装する
+    return empty();
+  }
+
+  /** ガード */
+  guard(): Animate {
+    // TODO アニメーションを実装する
+    return empty();
+  }
+
+  /** ガード -> 立ちポーズ */
+  guardToStand(): Animate {
+    // TODO アニメーションを実装する
+    return empty();
+  }
+
+  /** 避ける */
+  avoid(): Animate {
+    // TODO アニメーションを実装する
     return empty();
   }
 

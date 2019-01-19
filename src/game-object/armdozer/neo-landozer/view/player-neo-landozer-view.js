@@ -8,17 +8,29 @@ import type {AnimationType} from "../model/animation-type";
 import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
 import {neoLandozerStand} from "../mesh/stand";
 import {neoLandozerKnockBack} from "../mesh/knock-back";
+import {neoLandozerGuard} from "../mesh/guard";
+import {neoLandozerHMCharge} from "../mesh/hm-charge";
+import {neoLandozerHMAttack} from "../mesh/hm-attack";
+import {neoLandozerHMToStand} from "../mesh/hm-to-stand";
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
   _group: THREE.Group;
   _stand: ArmdozerMesh;
   _knockBack: ArmdozerMesh;
+  _guard: ArmdozerMesh;
+  _hmCharge: ArmdozerMesh;
+  _hmAttack: ArmdozerMesh;
+  _hmToStand: ArmdozerMesh;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
     this._stand = neoLandozerStand(resources);
     this._knockBack = neoLandozerKnockBack(resources);
+    this._guard = neoLandozerGuard(resources);
+    this._hmCharge = neoLandozerHMCharge(resources);
+    this._hmAttack = neoLandozerHMAttack(resources);
+    this._hmToStand = neoLandozerHMToStand(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -50,7 +62,14 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
 
   /** 本クラスが保持する全メッシュを返す */
   _getAllMeshes(): ArmdozerMesh[] {
-    return [this._stand, this._knockBack];
+    return [
+      this._stand,
+      this._knockBack,
+      this._guard,
+      this._hmCharge,
+      this._hmAttack,
+      this._hmToStand
+    ];
   }
 
   /** 座標を更新する */
@@ -69,6 +88,14 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
         return this._stand;
       case 'KNOCK_BACK':
         return this._knockBack;
+      case 'GUARD':
+        return this._guard;
+      case 'HM_CHARGE':
+        return this._hmCharge;
+      case 'HM_ATTACK':
+        return this._hmAttack;
+      case 'HM_TO_STAND':
+        return this._hmToStand;
       default:
         return this._stand;
     }
