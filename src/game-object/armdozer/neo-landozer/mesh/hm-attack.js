@@ -9,10 +9,10 @@ export const MAX_ANIMATION = 4;
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
 
-/** ネオラインドーザ ストレートパンチアタック */
-export function neoLandozerSPAttack(resources: Resources): ArmdozerMesh {
+/** ネオラインドーザ アームハンマー攻撃 */
+export function neoLandozerHMAttack(resources: Resources): ArmdozerMesh {
   const ret = new HorizontalAnimationMesh({
-    id: TEXTURE_IDS.NEO_LANDOZER_SP_ATTACK,
+    id: TEXTURE_IDS.NEO_LANDOZER_HM_ATTACK,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,

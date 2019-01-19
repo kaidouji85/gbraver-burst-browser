@@ -25,9 +25,9 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
   NEO_LANDOZER_KNOCK_BACK: 'NEO_LANDOZER_KNOCK_BACK',
   NEO_LANDOZER_GUARD: 'NEO_LANDOZER_GUARD',
-  NEO_LANDOZER_SP_CHARGE: 'NEO_LANDOZER_SP_CHARGE',
-  NEO_LANDOZER_SP_ATTACK: 'NEO_LANDOZER_SP_ATTACK',
-  NEO_LANDOZER_SP_TO_STAND: 'NEO_LANDOZER_SP_TO_STAND',
+  NEO_LANDOZER_HM_CHARGE: 'NEO_LANDOZER_HM_CHARGE',
+  NEO_LANDOZER_HM_ATTACK: 'NEO_LANDOZER_HM_ATTACK',
+  NEO_LANDOZER_HM_TO_STAND: 'NEO_LANDOZER_HM_TO_STAND',
   BLUE_SKY_FRONT: 'BLUE_SKY_FRONT',
   BLUE_SKY_RIGHT: 'BLUE_SKY_RIGHT',
   BLUE_SKY_BACK: 'BLUE_SKY_BACK',
@@ -70,16 +70,16 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     path: 'armdozer/neo-landozer/guard.png'
   },
   {
-    id: TEXTURE_IDS.NEO_LANDOZER_SP_CHARGE,
-    path: 'armdozer/neo-landozer/sp-charge.png'
+    id: TEXTURE_IDS.NEO_LANDOZER_HM_CHARGE,
+    path: 'armdozer/neo-landozer/hm-charge.png'
   },
   {
-    id: TEXTURE_IDS.NEO_LANDOZER_SP_ATTACK,
-    path: 'armdozer/neo-landozer/sp-attack.png'
+    id: TEXTURE_IDS.NEO_LANDOZER_HM_ATTACK,
+    path: 'armdozer/neo-landozer/hm-attack.png'
   },
   {
-    id: TEXTURE_IDS.NEO_LANDOZER_SP_TO_STAND,
-    path: 'armdozer/neo-landozer/sp-to-stand.png'
+    id: TEXTURE_IDS.NEO_LANDOZER_HM_TO_STAND,
+    path: 'armdozer/neo-landozer/hm-to-stand.png'
   },
   // 青空スカイボックス関連
   {
