@@ -12,6 +12,9 @@ import {neoLandozerGuard} from "../mesh/guard";
 import {neoLandozerSPCharge} from "../mesh/sp-charge";
 import {neoLandozerSPAttack} from "../mesh/sp-attack";
 import {neoLandozerSPToStand} from "../mesh/sp-to-stand";
+import {neoLandozerHMCharge} from "../mesh/hm-charge";
+import {neoLandozerHMAttack} from "../mesh/hm-attack";
+import {neoLandozerHMToStand} from "../mesh/hm-to-stand";
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
@@ -22,6 +25,9 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   _spCharge: ArmdozerMesh;
   _spAttack: ArmdozerMesh;
   _spToStand: ArmdozerMesh;
+  _hmCharge: ArmdozerMesh;
+  _hmAttack: ArmdozerMesh;
+  _hmToStand: ArmdozerMesh;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -31,6 +37,9 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this._spCharge = neoLandozerSPCharge(resources);
     this._spAttack = neoLandozerSPAttack(resources);
     this._spToStand = neoLandozerSPToStand(resources);
+    this._hmCharge = neoLandozerHMCharge(resources);
+    this._hmAttack = neoLandozerHMAttack(resources);
+    this._hmToStand = neoLandozerHMToStand(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -68,7 +77,10 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
       this._guard,
       this._spCharge,
       this._spAttack,
-      this._spToStand
+      this._spToStand,
+      this._hmCharge,
+      this._hmAttack,
+      this._hmToStand
     ];
   }
 
@@ -96,6 +108,12 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
         return this._spAttack;
       case 'SP_TO_STAND':
         return this._spToStand;
+      case 'HM_CHARGE':
+        return this._hmCharge;
+      case 'HM_ATTACK':
+        return this._hmAttack;
+      case 'HM_TO_STAND':
+        return this._hmToStand;
       default:
         return this._stand;
     }
