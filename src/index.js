@@ -31,7 +31,6 @@ async function main() {
     playerId: 'test01',
     armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
   };
-  player.armdozer.speed = 500;// TODO アニメ開発が終わったら戻す
   const npc: NPC = NeoLandozerNpc;
   const battleRoom = new OfflineBattleRoom(player, npc);
   const initialState = await battleRoom.start();

@@ -9,9 +9,6 @@ import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
 import {neoLandozerStand} from "../mesh/stand";
 import {neoLandozerKnockBack} from "../mesh/knock-back";
 import {neoLandozerGuard} from "../mesh/guard";
-import {neoLandozerSPCharge} from "../mesh/sp-charge";
-import {neoLandozerSPAttack} from "../mesh/sp-attack";
-import {neoLandozerSPToStand} from "../mesh/sp-to-stand";
 import {neoLandozerHMCharge} from "../mesh/hm-charge";
 import {neoLandozerHMAttack} from "../mesh/hm-attack";
 import {neoLandozerHMToStand} from "../mesh/hm-to-stand";
@@ -22,9 +19,6 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   _stand: ArmdozerMesh;
   _knockBack: ArmdozerMesh;
   _guard: ArmdozerMesh;
-  _spCharge: ArmdozerMesh;
-  _spAttack: ArmdozerMesh;
-  _spToStand: ArmdozerMesh;
   _hmCharge: ArmdozerMesh;
   _hmAttack: ArmdozerMesh;
   _hmToStand: ArmdozerMesh;
@@ -34,9 +28,6 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this._stand = neoLandozerStand(resources);
     this._knockBack = neoLandozerKnockBack(resources);
     this._guard = neoLandozerGuard(resources);
-    this._spCharge = neoLandozerSPCharge(resources);
-    this._spAttack = neoLandozerSPAttack(resources);
-    this._spToStand = neoLandozerSPToStand(resources);
     this._hmCharge = neoLandozerHMCharge(resources);
     this._hmAttack = neoLandozerHMAttack(resources);
     this._hmToStand = neoLandozerHMToStand(resources);
@@ -75,9 +66,6 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
       this._stand,
       this._knockBack,
       this._guard,
-      this._spCharge,
-      this._spAttack,
-      this._spToStand,
       this._hmCharge,
       this._hmAttack,
       this._hmToStand
@@ -102,12 +90,6 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
         return this._knockBack;
       case 'GUARD':
         return this._guard;
-      case 'SP_CHARGE':
-        return this._spCharge;
-      case 'SP_ATTACK':
-        return this._spAttack;
-      case 'SP_TO_STAND':
-        return this._spToStand;
       case 'HM_CHARGE':
         return this._hmCharge;
       case 'HM_ATTACK':
