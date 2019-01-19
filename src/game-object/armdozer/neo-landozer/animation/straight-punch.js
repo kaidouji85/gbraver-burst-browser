@@ -13,10 +13,10 @@ export function straightPunch(model: NeoLandozerModel): Animate {
     model.animation.frame = 0;
   }).chain(
     tween(model.animation, t => t
-      .to({frame: 1}, 250)
+      .to({frame: 1}, 300)
     )
   ).chain(
-    delay(300)
+    delay(500)
   ).chain(
     process(() => {
       model.animation.type = 'SP_ATTACK';
@@ -24,10 +24,10 @@ export function straightPunch(model: NeoLandozerModel): Animate {
     })
   ).chain(
     tween(model.animation, t => t
-      .to({frame: 1}, 250)
+      .to({frame: 1}, 150)
     )
   ).chain(
-    delay(100)
+    delay(200)
   ).chain(
     process(() => {
       model.animation.type = 'SP_TO_STAND';
