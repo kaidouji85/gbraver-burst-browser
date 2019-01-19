@@ -27,7 +27,7 @@ export function armHammer(model: NeoLandozerModel): Animate {
       .to({frame: 1}, 150)
     ),
     tween(model.position, t => t
-      .to({x: '-70'}, 150)
+      .to({x: '-100'}, 150)
     )
   ).chain(
     delay(500)
@@ -41,7 +41,7 @@ export function armHammer(model: NeoLandozerModel): Animate {
       .to({frame: 1}, 300)
     ),
     tween(model.position, t => t
-      .to({x: '+70'}, 300)
+      .to({x: '+100'}, 300)
     ),
   ).chain(
     process(() => {
