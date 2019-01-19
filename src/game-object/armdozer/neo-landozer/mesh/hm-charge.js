@@ -19,5 +19,6 @@ export function neoLandozerHMCharge(resources: Resources): ArmdozerMesh {
     height: MESH_HEIGHT
   });
   ret.mesh.position.y = 135;
+  ret.mesh.position.z = 1;
   return ret;
 }
