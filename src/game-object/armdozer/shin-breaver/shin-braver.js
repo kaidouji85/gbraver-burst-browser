@@ -14,6 +14,7 @@ import {empty} from "../../../animation/delay";
 import {straightPunch} from "./animation/straight-punch";
 import {knockBack} from "./animation/knock-back";
 import {knockBackToStand} from "./animation/knock-back-to-stand";
+import {avoid} from "./animation/avoid";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -62,8 +63,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** 避ける */
   avoid(): Animate {
-    // TODO アニメーションを実装する
-    return empty();
+    return avoid(this._model);
   }
 
   /** シーンに追加するオブジェクトを返す */
