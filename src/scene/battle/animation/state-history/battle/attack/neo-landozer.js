@@ -35,7 +35,7 @@ export function neoLandozerAttack(view: BattleSceneView, sceneState: BattleScene
   const attack = (damage: number): Animate =>
     all(
       neoLandozer.armHammer(),
-      delay(600).chain(
+      delay(800).chain(
         defenderArmdozer.damageIndicator.popUp(damage),
         defenderArmdozer.sprite.knockBack(),
         defenderArmdozer.gauge.hp(defenderState.armdozer.hp)

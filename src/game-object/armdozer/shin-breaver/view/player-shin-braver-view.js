@@ -67,6 +67,7 @@ export class PlayerShinBraverView implements ShinBraverView {
       this._spCharge,
       this._spAttack,
       this._spToStand,
+      this._knockBack,
     ];
   }
 
