@@ -23,6 +23,7 @@ export const TEXTURE_IDS = {
   SHIN_BRAVER_SP_ATTACK: 'SHIN_BRAVER_SP_ATTACK',
   SHIN_BRAVER_SP_TO_STAND: 'SHIN_BRAVER_SP_TO_STAND',
   SHIN_BRAVER_KNOCK_BACK: 'SHIN_BRAVER_KNOCK_BACK',
+  SHIN_BRAVER_GUARD: 'SHIN_BRAVER_GUARD',
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
   NEO_LANDOZER_KNOCK_BACK: 'NEO_LANDOZER_KNOCK_BACK',
   NEO_LANDOZER_GUARD: 'NEO_LANDOZER_GUARD',
@@ -60,6 +61,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.SHIN_BRAVER_KNOCK_BACK,
     path: 'armdozer/shin-braver/knock-back.png'
+  },
+  {
+    id: TEXTURE_IDS.SHIN_BRAVER_GUARD,
+    path: 'armdozer/shin-braver/guard.png'
   },
   // ネオランドーザ関連
   {
