@@ -10,11 +10,12 @@ import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
-import {empty} from "../../../animation/delay";
 import {straightPunch} from "./animation/straight-punch";
 import {knockBack} from "./animation/knock-back";
 import {knockBackToStand} from "./animation/knock-back-to-stand";
 import {avoid} from "./animation/avoid";
+import {guard} from "./animation/guard";
+import {guardToStand} from "./animation/guard-to-stand";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -51,14 +52,12 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** ガード */
   guard(): Animate {
-    // TODO アニメーションを実装する
-    return empty();
+    return guard(this._model);
   }
 
   /** ガード -> 立ちポーズ */
   guardToStand(): Animate {
-    // TODO アニメーションを実装する
-    return empty();
+    return guardToStand(this._model);
   }
 
   /** 避ける */
