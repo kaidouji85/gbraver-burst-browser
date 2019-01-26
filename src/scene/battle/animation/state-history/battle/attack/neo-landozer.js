@@ -44,6 +44,17 @@ export function neoLandozerAttack(view: BattleSceneView, sceneState: BattleScene
       defenderArmdozer.sprite.knockBackToStand()
     );
 
+  const guard = (damage: number): Animate => all(
+    neoLandozer.armHammer(),
+    delay(800).chain(
+      defenderArmdozer.damageIndicator.popUp(damage),
+      defenderArmdozer.sprite.guard(),
+      defenderArmdozer.gauge.hp(defenderState.armdozer.hp)
+    )
+  ).chain(
+    defenderArmdozer.sprite.guardToStand()
+  );
+
   const miss = (): Animate =>
     all(
       neoLandozer.armHammer(),
@@ -58,7 +69,7 @@ export function neoLandozerAttack(view: BattleSceneView, sceneState: BattleScene
   if (effect.result.name === 'NormalHit') {
     return attack(effect.result.damage);
   } else if (effect.result.name === 'Guard') {
-    return attack(effect.result.damage);
+    return guard(effect.result.damage);
   } else if (effect.result.name === 'CriticalHit') {
     return attack(effect.result.damage);
   } else if (effect.result.name === 'Miss') {
