@@ -1,14 +1,13 @@
 // @flow
 
-import {NeoLandozerModel} from "../model/neo-landozer-model";
 import {Animate} from "../../../../animation/animate";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {empty} from "../../../../animation/delay";
 import {all} from "../../../../animation/all";
+import type {ShinBraverModel} from "../model/shin-braver-model";
 
 /** ガード */
-export function guard(model: NeoLandozerModel): Animate {
+export function guard(model: ShinBraverModel): Animate {
   const motion = process(() => {
     model.animation.frame = 1;
     model.animation.type = 'GUARD';
