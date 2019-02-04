@@ -9,13 +9,13 @@ import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-
 
 
 /**
- * アームドーザに関連するオブジェクトを集めたもの
+ * 3Dレイヤーでアームドーザ関連オブジェクトを集めたもの
  *
  * @type T アームドーザスプライト
  */
-export type ArmdozerObjects = {
+export type TDArmdozer<T> = {
   playerId: PlayerId,
-  sprite: ArmDozerSprite;
+  sprite: T;
   gauge: Gauge;
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
