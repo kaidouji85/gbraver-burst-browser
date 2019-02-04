@@ -40,8 +40,7 @@ type Param = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
-  player: TDArmdozer<ArmDozerSprite>;
-  enemy: TDArmdozer<ArmDozerSprite>;
+  armdozers: TDArmdozer<ArmDozerSprite>[];
   stage: Stage;
   turnIndicator: TurnIndicator;
   _update: Subject<Update>;
@@ -68,11 +67,13 @@ export class ThreeDimensionLayer {
       }
     });
 
-    this.player = playerArmdozerObjects(param.resources, player, gameObjectListener);
-    appendScene(this.scene, this.player);
-
-    this.enemy = enemyArmdozerObjects(param.resources, enemy, gameObjectListener);
-    appendScene(this.scene, this.enemy);
+    this.armdozers = [
+      playerArmdozerObjects(param.resources, player, gameObjectListener),
+      enemyArmdozerObjects(param.resources, enemy, gameObjectListener)
+    ];
+    this.armdozers.forEach(v => {
+      appendScene(this.scene, v);
+    });
 
     this.stage = new SchoolField(param.resources);
     this.stage.getThreeJsObjects()
