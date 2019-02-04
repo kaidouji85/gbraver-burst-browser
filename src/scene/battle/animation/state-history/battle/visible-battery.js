@@ -15,10 +15,9 @@ export function visibleBattery(view: BattleSceneView, sceneState: BattleSceneSta
   }
 
   const effect: Battle = gameState.effect;
-  const armdozers = [view.td.player, view.td.enemy];
-  const attackerArmdozer = armdozers.find(v => v.playerId === effect.attacker);
+  const attackerArmdozer = view.td.armdozers.find(v => v.playerId === effect.attacker);
   const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
-  const defenderArmdozer = armdozers.find(v => v.playerId !== effect.attacker);
+  const defenderArmdozer = view.td.armdozers.find(v => v.playerId !== effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
 
   if (!attackerArmdozer || !attackerState || !defenderArmdozer || !defenderState) {

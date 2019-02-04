@@ -11,10 +11,10 @@ import {playerGauge} from "../../../../../game-object/gauge";
 import {playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {playerDamageIndicator} from "../../../../../game-object/damage-indicator";
-import type {ArmdozerObjects} from "./armdozer-objects";
+import type {TDArmdozer} from "./t-d-armdozer";
 
 /** プレイヤーのアームドーザオブジェクトを生成する */
-export function playerArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): ArmdozerObjects {
+export function playerArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDArmdozer<ArmDozerSprite> {
   return {
     playerId: state.playerId,
     sprite: createPlayerSprite(resources, listener, state),
