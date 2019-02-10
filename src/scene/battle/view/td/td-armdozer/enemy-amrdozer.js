@@ -21,7 +21,7 @@ export function enemyArmdozerObjects(resources: Resources, state: PlayerState, l
     playerId: state.playerId,
     sprite: createEnemySprite(resources, listener, state),
     hitMark: {
-      spark: enemySpark(resources),
+      spark: enemySpark(resources, listener),
     },
     gauge: enemyGauge({
       listener: listener,

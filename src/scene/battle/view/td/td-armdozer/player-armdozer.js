@@ -20,7 +20,7 @@ export function playerArmdozerObjects(resources: Resources, state: PlayerState, 
     playerId: state.playerId,
     sprite: createPlayerSprite(resources, listener, state),
     hitMark: {
-      spark: playerSpark(resources),
+      spark: playerSpark(resources, listener),
     },
     gauge: playerGauge({
       resources: resources,
