@@ -1,3 +1,4 @@
+// @flow
 import {PlayerSparkView} from "./player-spark-view";
 import type {Resources} from "../../../../resource";
 import type {SparkModel} from "../model/spark-model";

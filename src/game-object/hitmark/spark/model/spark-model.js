@@ -1,3 +1,2 @@
-export type SparkModel = {
-
-};
+// @flow
+export type SparkModel = {};

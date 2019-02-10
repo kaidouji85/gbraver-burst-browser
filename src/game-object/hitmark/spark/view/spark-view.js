@@ -1,3 +1,4 @@
+// @flow
 import * as THREE from 'three';
 import type {SparkModel} from "../model/spark-model";
 
