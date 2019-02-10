@@ -16,8 +16,8 @@ export class PlayerSparkView implements SparkView {
     this._animation = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: 16,
-      width: 500,
-      height: 500,
+      width: 800,
+      height: 800,
     });
   }
 

@@ -127,7 +127,7 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SPARK,
-    path: 'resources/hitmark/spark.png'
+    path: 'hitmark/spark.png'
   },
 ];
 
