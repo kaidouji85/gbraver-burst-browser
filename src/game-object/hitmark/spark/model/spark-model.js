@@ -1,4 +1,6 @@
 // @flow
+
+/** 火花ヒットマークモデル */
 export type SparkModel = {
   position: {
     x: number,

@@ -23,7 +23,7 @@ export class HorizontalAnimationMesh {
   maxAnimation: number;
 
   constructor(param: Param) {
-    this.texture = param.texture;
+    this.texture = param.texture.clone();
     animatedTexture(this.texture, param.maxAnimation, 1);
     this.texture.needsUpdate = true;
     this.maxAnimation = param.maxAnimation;

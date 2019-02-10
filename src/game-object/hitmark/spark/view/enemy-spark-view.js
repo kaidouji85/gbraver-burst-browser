@@ -3,6 +3,7 @@ import {PlayerSparkView} from "./player-spark-view";
 import type {Resources} from "../../../../resource";
 import type {SparkModel} from "../model/spark-model";
 
+/** 敵火花ヒットマークビュー */
 export class EnemySparkView extends PlayerSparkView {
   constructor(resources: Resources) {
     super(resources);
@@ -10,9 +11,7 @@ export class EnemySparkView extends PlayerSparkView {
 
   engage(model: SparkModel): void {
     super.engage(model);
-
-    const group = super.getObject3D();
-    group.position.x *= -1;
-    group.scale.x = -1;
+    this._animation.mesh.position.x *= -1;
+    this._animation.mesh.scale.x = -1;
   }
 }
