@@ -12,13 +12,17 @@ import {enemyGauge} from "../../../../../game-object/gauge";
 import {enemyBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator} from "../../../../../game-object/damage-indicator";
-import type {TDArmdozer} from "./t-d-armdozer";
+import type {TDArmdozer} from "./td-armdozer";
+import {playerSpark} from "../../../../../game-object/hitmark/spark";
 
 /** 敵のアームドーザオブジェクトを生成する */
 export function enemyArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDArmdozer<ArmDozerSprite> {
   return {
     playerId: state.playerId,
     sprite: createEnemySprite(resources, listener, state),
+    hitMark: {
+      spark: playerSpark(resources),  // 敵のヒットマークに差し替える
+    },
     gauge: enemyGauge({
       listener: listener,
       resources: resources,

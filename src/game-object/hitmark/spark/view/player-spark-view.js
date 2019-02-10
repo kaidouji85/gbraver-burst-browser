@@ -9,7 +9,7 @@ export class PlayerSparkView implements SparkView {
   _mesh: SpriteAnimation;
 
   constructor(resources: Resources) {
-    this._mesh = HorizontalAnimationMesh({
+    this._mesh = new HorizontalAnimationMesh({
       id: TEXTURE_IDS.HITMARK_SPARK,
       resources: resources,
       maxAnimation: 16,
