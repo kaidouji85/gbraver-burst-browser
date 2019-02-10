@@ -3,7 +3,7 @@
 import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
 import type {Resources} from "../../../../resource/index";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import {HorizontalArmdozerAnimation} from "../../mesh/horizontal-texture";
+import {HorizontalArmdozerAnimation} from "../../mesh/horizontal-animation";
 
 export const MAX_ANIMATION = 1;
 export const MESH_WIDTH = 600;

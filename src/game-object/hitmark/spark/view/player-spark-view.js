@@ -3,7 +3,7 @@ import type {ArmdozerAnimation} from "../../../armdozer/mesh/armdozer-animation"
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import type {Resources} from "../../../../resource";
 import type {SparkModel} from "../model/spark-model";
-import {HorizontalArmdozerAnimation} from "../../../armdozer/mesh/horizontal-texture";
+import {HorizontalArmdozerAnimation} from "../../../armdozer/mesh/horizontal-animation";
 
 export class PlayerSparkView implements SparkView {
   _mesh: ArmdozerAnimation;

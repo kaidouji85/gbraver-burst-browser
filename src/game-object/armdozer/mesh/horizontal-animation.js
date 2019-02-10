@@ -2,7 +2,7 @@ import type {ArmdozerAnimation} from "./armdozer-animation";
 import type {TextureId} from "../../../resource/texture";
 import type {Resources} from "../../../resource";
 import * as THREE from "three";
-import {HorizontalAnimationMesh} from "../../../mesh/animation/horizontal-animation-mesh";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 
 type Param = {
   id: TextureId,
@@ -17,7 +17,14 @@ export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   _animation: HorizontalAnimationMesh;
 
   constructor(param: Param) {
-    this._animation = new HorizontalAnimationMesh(param);
+    const textureResource = param.resources.textures.find(v => v.id === param.id);
+    const texture = textureResource ? textureResource.texture : new THREE.Texture();
+    this._animation = new HorizontalAnimationMesh({
+      texture: texture,
+      maxAnimation: param.maxAnimation,
+      width: param.width,
+      height: param.height,
+    });
   }
 
   /** アニメーション進捗を変更する */
