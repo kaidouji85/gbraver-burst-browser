@@ -1,15 +1,15 @@
 import type {SparkView} from "./spark-view";
-import type {SpriteAnimation} from "../../../../mesh/animation/sprite-animation";
-import {HorizontalAnimationMesh} from "../../../../mesh/animation/horizontal-animation";
+import type {ArmdozerAnimation} from "../../../armdozer/mesh/armdozer-animation";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import type {Resources} from "../../../../resource";
 import type {SparkModel} from "../model/spark-model";
+import {HorizontalArmdozerAnimation} from "../../../armdozer/mesh/horizontal-texture";
 
 export class PlayerSparkView implements SparkView {
-  _mesh: SpriteAnimation;
+  _mesh: ArmdozerAnimation;
 
   constructor(resources: Resources) {
-    this._mesh = new HorizontalAnimationMesh({
+    this._mesh = new HorizontalArmdozerAnimation({
       id: TEXTURE_IDS.HITMARK_SPARK,
       resources: resources,
       maxAnimation: 16,

@@ -1,6 +1,6 @@
 // @flow
 
-import type {SpriteAnimation} from "./sprite-animation";
+import type {ArmdozerAnimation} from "../../game-object/armdozer/mesh/armdozer-animation";
 import * as THREE from "three";
 import {SPRITE_RENDER_ORDER} from "../render-order";
 import type {Resources} from "../../resource";
@@ -16,8 +16,8 @@ type Param = {
   height: number,
 };
 
-/** 水平方向アニメーションメッシュ */
-export class HorizontalAnimationMesh implements SpriteAnimation {
+/** アニメーションメッシュ */
+export class HorizontalAnimationMesh implements ArmdozerAnimation {
   texture: THREE.Texture;
   mesh: THREE.Mesh;
   width: number;

@@ -4,7 +4,7 @@ import {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource/index";
 import type {ShinBraverModel} from "../model/shin-braver-model";
-import type {SpriteAnimation} from "../../../../mesh/animation/sprite-animation";
+import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
 import {shinBraverStand} from "../mesh/stand";
 import type {AnimationType} from "../model/animation-type";
 import {shinBraverSPAttack,} from "../mesh/sp-attack";
@@ -16,12 +16,12 @@ import {shinBraverGuard} from "../mesh/guard";
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
   _group: THREE.Group;
-  _stand: SpriteAnimation;
-  _spCharge: SpriteAnimation;
-  _spAttack: SpriteAnimation;
-  _spToStand: SpriteAnimation;
-  _knockBack: SpriteAnimation;
-  _guard: SpriteAnimation;
+  _stand: ArmdozerAnimation;
+  _spCharge: ArmdozerAnimation;
+  _spAttack: ArmdozerAnimation;
+  _spToStand: ArmdozerAnimation;
+  _knockBack: ArmdozerAnimation;
+  _guard: ArmdozerAnimation;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -64,7 +64,7 @@ export class PlayerShinBraverView implements ShinBraverView {
   }
 
   /** 本クラスが持つ全メッシュを返す */
-  _getAllMeshes(): SpriteAnimation[] {
+  _getAllMeshes(): ArmdozerAnimation[] {
     return [
       this._stand,
       this._spCharge,
@@ -85,7 +85,7 @@ export class PlayerShinBraverView implements ShinBraverView {
   }
 
   /** アクティブなメッシュを取得 */
-  _getActiveMesh(animationType: AnimationType): SpriteAnimation {
+  _getActiveMesh(animationType: AnimationType): ArmdozerAnimation {
     switch(animationType) {
       case 'STAND':
         return this._stand;
