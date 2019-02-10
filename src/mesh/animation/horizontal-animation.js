@@ -2,7 +2,6 @@
 
 import type {SpriteAnimation} from "./sprite-animation";
 import * as THREE from "three";
-import {shinBraverMaterial} from "../../game-object/armdozer/shin-breaver/mesh/material";
 import {SPRITE_RENDER_ORDER} from "../render-order";
 import type {Resources} from "../../resource";
 import {normalizeTextureOffset} from "../../texture/animation/texture-offset";
@@ -33,9 +32,12 @@ export class HorizontalAnimationMesh implements SpriteAnimation {
     this.maxAnimation = param.maxAnimation;
 
     const geometry = new THREE.PlaneGeometry(param.height, param.width, 1, 1);
-    const material = shinBraverMaterial(this.texture);
+    const material = new THREE.MeshBasicMaterial({
+      side: THREE.DoubleSide,
+      transparent: true,
+      map: this.texture
+    });
     this.mesh = new THREE.Mesh(geometry, material);
-    this.mesh.position.y = 150;
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
   }
 
