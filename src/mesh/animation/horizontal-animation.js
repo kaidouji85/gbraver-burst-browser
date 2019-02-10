@@ -1,13 +1,13 @@
 // @flow
 
-import type {ArmdozerMesh} from "./armdozer-mesh";
+import type {SpriteAnimation} from "./sprite-animation";
 import * as THREE from "three";
-import {shinBraverMaterial} from "../shin-breaver/mesh/material";
-import {SPRITE_RENDER_ORDER} from "../../../mesh/render-order";
-import type {Resources} from "../../../resource";
-import {normalizeTextureOffset} from "../../../texture/animation/texture-offset";
-import type {TextureId} from "../../../resource/texture";
-import {animatedTexture} from "../../../texture/animation/texture-animation";
+import {shinBraverMaterial} from "../../game-object/armdozer/shin-breaver/mesh/material";
+import {SPRITE_RENDER_ORDER} from "../render-order";
+import type {Resources} from "../../resource";
+import {normalizeTextureOffset} from "../../texture/animation/texture-offset";
+import type {TextureId} from "../../resource/texture";
+import {animatedTexture} from "../../texture/animation/texture-animation";
 
 type Param = {
   id: TextureId,
@@ -18,7 +18,7 @@ type Param = {
 };
 
 /** 水平方向アニメーションメッシュ */
-export class HorizontalAnimationMesh implements ArmdozerMesh {
+export class HorizontalAnimationMesh implements SpriteAnimation {
   texture: THREE.Texture;
   mesh: THREE.Mesh;
   width: number;

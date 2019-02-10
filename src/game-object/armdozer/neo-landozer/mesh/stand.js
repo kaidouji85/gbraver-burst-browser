@@ -1,16 +1,16 @@
 // @flow
 
-import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
+import type {SpriteAnimation} from "../../../../mesh/animation/sprite-animation";
 import type {Resources} from "../../../../resource/index";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation-mesh";
+import {HorizontalAnimationMesh} from "../../../../mesh/animation/horizontal-animation";
 
 export const MAX_ANIMATION = 1;
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
 
 /** ネオラインドーザ立ちポーズ */
-export function neoLandozerStand(resources: Resources): ArmdozerMesh {
+export function neoLandozerStand(resources: Resources): SpriteAnimation {
   const ret = new HorizontalAnimationMesh({
     id: TEXTURE_IDS.NEO_LANDOZER_STAND,
     maxAnimation: MAX_ANIMATION,

@@ -1,8 +1,8 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import type {ArmdozerMesh} from "../../mesh/armdozer-mesh";
-import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation-mesh";
+import type {SpriteAnimation} from "../../../../mesh/animation/sprite-animation";
+import {HorizontalAnimationMesh} from "../../../../mesh/animation/horizontal-animation";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 
 export const MESH_WIDTH = 600;
@@ -10,7 +10,7 @@ export const MESH_HEIGHT = 600;
 export const MAX_ANIMATION = 4;
 
 /** ガード */
-export function shinBraverGuard(resources: Resources): ArmdozerMesh {
+export function shinBraverGuard(resources: Resources): SpriteAnimation {
   const ret = new HorizontalAnimationMesh({
     id: TEXTURE_IDS.SHIN_BRAVER_GUARD,
     maxAnimation: MAX_ANIMATION,

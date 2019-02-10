@@ -2,8 +2,8 @@
 
 import * as THREE from 'three';
 
-/** アームドーザメッシュ */
-export interface ArmdozerMesh {
+/** スプライトアニメーション */
+export interface SpriteAnimation {
   /**
    * アニメーション進捗を変更する
    *
