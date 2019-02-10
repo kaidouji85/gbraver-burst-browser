@@ -43,7 +43,8 @@ export function shinBraverAttack(view: BattleSceneView, sceneState: BattleSceneS
       delay(700).chain(
         defenderArmdozer.damageIndicator.popUp(damage),
         defenderArmdozer.sprite.knockBack(),
-        defenderArmdozer.gauge.hp(defenderState.armdozer.hp)
+        defenderArmdozer.gauge.hp(defenderState.armdozer.hp),
+        defenderArmdozer.hitMark.spark.popUp()
       )
     ).chain(
       defenderArmdozer.sprite.knockBackToStand()
@@ -55,7 +56,8 @@ export function shinBraverAttack(view: BattleSceneView, sceneState: BattleSceneS
       delay(700).chain(
         defenderArmdozer.damageIndicator.popUp(damage),
         defenderArmdozer.sprite.guard(),
-        defenderArmdozer.gauge.hp(defenderState.armdozer.hp)
+        defenderArmdozer.gauge.hp(defenderState.armdozer.hp),
+        defenderArmdozer.hitMark.spark.popUp()
       )
     ).chain(
       defenderArmdozer.sprite.guardToStand()
