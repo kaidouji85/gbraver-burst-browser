@@ -27,6 +27,7 @@ export class PlayerSparkView implements SparkView {
     this._animation.mesh.position.y = model.position.y;
     this._animation.mesh.position.z = model.position.z;
     this._animation.mesh.material.opacity = model.opacity;
+    this._animation.mesh.material.blending = THREE.AdditiveBlending;
     this._animation.animate(model.animation.frame);
   }
 

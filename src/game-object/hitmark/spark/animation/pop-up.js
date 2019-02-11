@@ -10,11 +10,9 @@ export function popUp(model: SparkModel): Animate {
   return process(() => {
     model.animation.frame = 0;
     model.opacity = 1;
-  }).chain(
-    tween(model.animation, t => t
-      .to({frame: 1}, 1200)
-    )
-  ).chain(process(() => {
+  }).chain(tween(model.animation, t =>
+    t.to({frame: 1}, 800)
+  )).chain(process(() => {
     model.opacity = 0;
   }));
 }
