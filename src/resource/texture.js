@@ -37,6 +37,7 @@ export const TEXTURE_IDS = {
   BLUE_SKY_UP: 'BLUE_SKY_UP',
   BLUE_SKY_DOWN: 'BLUE_SKY_DOWN',
   TILE_MAP_SCHOOL_GROUND: 'TILE_MAP_SCHOOL_GROUND',
+  HITMARK_SPARK: 'HITMARK_SPARK',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -121,6 +122,12 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.TILE_MAP_SCHOOL_GROUND,
     path: 'tile-map/school-ground/map.png'
+  },
+
+  // ヒットマーク関連
+  {
+    id: TEXTURE_IDS.HITMARK_SPARK,
+    path: 'hitmark/spark.png'
   },
 ];
 

@@ -6,18 +6,22 @@ import {DamageIndicator} from "../../../../../game-object/damage-indicator/damag
 import {Observable} from "rxjs";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
+import {Spark} from "../../../../../game-object/hitmark/spark/spark";
 
 
 /**
- * アームドーザに関連するオブジェクトを集めたもの
+ * 3Dレイヤーでアームドーザ関連オブジェクトを集めたもの
  *
  * @type T アームドーザスプライト
  */
-export type ArmdozerObjects = {
+export type TDArmdozer<T> = {
   playerId: PlayerId,
-  sprite: ArmDozerSprite;
-  gauge: Gauge;
-  batteryNumber: BatteryNumber;
-  recoverBattery: RecoverBattery;
-  damageIndicator: DamageIndicator;
+  sprite: T,
+  hitMark: {
+    spark: Spark
+  },
+  gauge: Gauge,
+  batteryNumber: BatteryNumber,
+  recoverBattery: RecoverBattery,
+  damageIndicator: DamageIndicator,
 };
