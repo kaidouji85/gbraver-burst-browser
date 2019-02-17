@@ -20,15 +20,10 @@ npm start
 # aws cliをインストールする
 aws configure
 # S3へのフル権限を持つアカウントでログインする
-
-cp env-template.sh env.sh
-vi env.sh
-# 環境変数を設定する
 ```
 
 ### デプロイ
 
 ```
-source env.sh
-./scripts/deploy.sh
+./scripts/deploy.sh <アップロードするS3バケット名>
 ```
