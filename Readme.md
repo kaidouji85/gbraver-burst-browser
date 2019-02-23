@@ -1,54 +1,29 @@
-# three.js習作
+# Gブレイバーバースト
  
-three.jsの練習用に作りました。
+ロボットで対戦するゲームです。
 
-## 動かし方
+## ローカル環境で動かす
 ```
 npm install
 npm start
 # ブラウザを起動してlocalhost:8080を開く
 ```
 
-## 必要となる認証ファイル
+## デプロイする
+本プログラムは静的ファイルのみで構成されています。
+ビルドしたものを、S3などでパブリック公開するけでデプロイ完了です。
+ここでは、S3にアップロードする手順を記載します。
 
-### aws-credentials.json
+### 事前準備
 
-以下コマンドはaws-credentioalsファイルが無いと動きません。
-
-* npm run upload-s3
-* npm run deploy
-
-Readme.mdの配下に、以下内容でaws-credentials.jsonを作成してください。
-
-```json
-{ 
-    "accessKeyId": "PUBLIC_KEY", 
-    "secretAccessKey": "SECRET_KEY", 
-    "region": "us-west-2" 
-}
+```
+# aws cliをインストールする
+aws configure
+# S3へのフル権限を持つアカウントでログインする
 ```
 
-aws-credentials.jsonについて  
-https://www.npmjs.com/package/s3-upload#credentials-file
+### デプロイ
 
-### aws-upload.conf.js
-
-以下コマンドはaws-credentioalsファイルが無いと動きません。
-
-* npm run upload-s3
-* npm run deploy
-
-```javascript
-module.exports = {
-  credentials:"aws-credentials.json",
-  bucketName: "アップロード先のS3バケット名",
-  patterns:[
-    "build/production/**",
-    "build/stub/**",
-  ]
-}
 ```
-
-aws-upload.conf.jsについて
-https://www.npmjs.com/package/s3-upload#deploy-static-sites-to-amazon-s3-using-node
-
+./scripts/deploy.sh <アップロードするS3バケット名>
+```
