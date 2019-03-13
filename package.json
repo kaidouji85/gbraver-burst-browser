@@ -12,8 +12,8 @@
     "build:production": "npm-run-all clean type-check webpack:production",
     "build:stub": "npm-run-all clean webpack:stub",
     "clean": "rimraf build",
-    "dev-server": "webpack-serve",
-    "dev-server:stub": "webpack-serve --config webpack.stub.js",
+    "dev-server": "webpack-dev-server",
+    "dev-server:stub": "webpack-dev-server --config webpack.stub.js",
     "webpack": "webpack",
     "webpack:production": "webpack --config webpack.production.js",
     "webpack:stub": "webpack --config webpack.stub.js",
@@ -45,7 +45,7 @@
     "rimraf": "^2.6.3",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
-    "webpack-serve": "^2.0.3"
+    "webpack-dev-server": "^3.2.1"
   },
   "ava": {
     "babel": false,
