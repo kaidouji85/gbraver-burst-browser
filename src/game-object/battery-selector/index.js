@@ -2,12 +2,10 @@
 
 import {Observable, Subject} from 'rxjs';
 import type {BatterySelectorModel} from "./model/battery-selector";
-import {BatterySelectorView} from "./view/battery-selector-view";
 import type {Resources} from "../../resource/index";
 import * as THREE from "three";
 import {changeBattery} from './animation/change-battery';
 import {Group} from "@tweenjs/tween.js";
-import {open} from './animation/open';
 import {pushOkButton} from "./animation/push-ok-button";
 import type {OkButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
@@ -15,7 +13,8 @@ import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
 import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
-import {process} from "../../animation/process";
+import {BatterySelectorView} from "./view/battery-selector-view";
+import {empty} from '../../animation/delay';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -46,17 +45,7 @@ export class BatterySelector {
       }
     });
 
-    this._view = new BatterySelectorView({
-      resources: param.resources,
-      listener: param.listener,
-      maxValue: param.maxBattery,
-      onBatteryChange: battery => {
-        this._changeBattery(battery);
-      },
-      onOkButtonPush: () => {
-        this._pushOkButton();
-      }
-    });
+    this._view = new BatterySelectorView(param.resources);
   }
 
   /**
@@ -68,6 +57,7 @@ export class BatterySelector {
    * @return アニメーション
    */
   open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): Animate {
+    /*
     return process(() => {
       this._view.setLastBattery(initialValue);
     }).chain(
@@ -78,6 +68,8 @@ export class BatterySelector {
         okButtonLabel: okButtonLabel
       })
     );
+    */
+    return empty();
   }
 
   /** バッテリーセレクタを閉じる */
@@ -87,12 +79,13 @@ export class BatterySelector {
 
   /** 現在のバッテリー値を取得する */
   getBattery(): number {
-    const lastBattery = this._view.getLastBattery();
-    if (lastBattery === null || lastBattery === undefined) {
-      return 0;
-    }
-
-    return lastBattery;
+    return 0;
+    // const lastBattery = this._view.getLastBattery();
+    // if (lastBattery === null || lastBattery === undefined) {
+    //   return 0;
+    // }
+    //
+    // return lastBattery;
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */
