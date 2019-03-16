@@ -33,7 +33,7 @@ export class BatteryDial {
     return this._mesh.getObject3D();
   }
 
-  /** ボタンを描画する */
+  /** ダイヤルを描画する */
   _draw(): void {
     this._mesh.draw(context => {
       context.clearRect(0, 0, context.canvas.height, context.canvas.height);

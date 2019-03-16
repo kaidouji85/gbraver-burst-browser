@@ -8,8 +8,14 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {BurstButtonModel} from "../model/burst-button-model";
 
+/** メッシュサイズ */
 export const MESH_SIZE = 150;
+
+/** キャンバスサイズ */
 export const CANVAS_SIZE = 512;
+
+/** 左パディング */
+export const PADDING_LEFT = 20;
 
 /** バーストボタンのビュー */
 export class BurstButtonView {
@@ -40,7 +46,7 @@ export class BurstButtonView {
 
   /** 表示位置を更新する */
   _setPos(): void {
-    this._canvasMesh.mesh.position.x = (- window.innerWidth + MESH_SIZE) / 2;
+    this._canvasMesh.mesh.position.x = (- window.innerWidth + MESH_SIZE) / 2 + PADDING_LEFT;
     this._canvasMesh.mesh.position.y = (-window.innerHeight + MESH_SIZE) / 2;
   }
 
