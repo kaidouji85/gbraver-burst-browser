@@ -27,7 +27,7 @@
     "ramda": "^0.26.1",
     "rxjs": "^6.4.0",
     "stats.js": "^0.17.0",
-    "three": "^0.102.1",
+    "three": "^0.101.1",
     "three-gltf-loader": "^1.102.0",
     "workbox-webpack-plugin": "4.1.1"
   },
