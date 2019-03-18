@@ -15,7 +15,7 @@ export const MESH_SIZE = 150;
 export const CANVAS_SIZE = 512;
 
 /** 左パディング */
-export const PADDING_LEFT = 20;
+export const PADDING_LEFT = 0;
 
 /** バーストボタンのビュー */
 export class BurstButtonView {

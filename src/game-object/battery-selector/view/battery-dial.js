@@ -7,10 +7,10 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 
 /** メッシュサイズ */
-export const MESH_SIZE = 150;
+export const MESH_SIZE = 320;
 
 /** キャンバスサイズ */
-export const CANVAS_SIZE = 512;
+export const CANVAS_SIZE = 1024;
 
 /** バッテリーダイヤル */
 export class BatteryDial {
