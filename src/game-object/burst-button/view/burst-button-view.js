@@ -8,11 +8,11 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {BurstButtonModel} from "../model/burst-button-model";
 
-/** メッシュサイズ */
-export const MESH_SIZE = 150;
-
 /** キャンバスサイズ */
 export const CANVAS_SIZE = 512;
+
+/** メッシュサイズ */
+export const MESH_SIZE = CANVAS_SIZE * 0.3;
 
 /** 左パディング */
 export const PADDING_LEFT = 0;

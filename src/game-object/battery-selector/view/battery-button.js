@@ -6,11 +6,13 @@ import type {CanvasImageResource} from "../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 
-/** メッシュサイズ */
-export const MESH_SIZE = 150;
 
 /** キャンバスサイズ */
-export const CANVAS_SIZE = 512;
+export const CANVAS_SIZE = 1024;
+
+/** メッシュサイズ */
+export const MESH_SIZE = CANVAS_SIZE * 0.3;
+
 
 /** バッテリーボタン */
 export class BatteryButton {
