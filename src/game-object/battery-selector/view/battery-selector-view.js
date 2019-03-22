@@ -30,7 +30,7 @@ export class BatterySelectorView {
 
   /** 座標を調整する */
   _setPos(): void {
-    this._group.position.x = window.innerWidth / 2 - BUTTON_SIZE / 2 + 48;
+    this._group.position.x = window.innerWidth / 2 - BUTTON_SIZE / 2 + 32;
     this._group.position.y = -window.innerHeight / 2 + 130;
   }
 }
