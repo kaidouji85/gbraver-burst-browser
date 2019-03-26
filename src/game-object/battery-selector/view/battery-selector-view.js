@@ -12,7 +12,7 @@ import {BatteryMinus} from "./battery-minus";
 const SCALE = 0.3;
 
 /** 右パディング */
-const PADDING_RIGHT = 128;
+const PADDING_RIGHT = 112;
 
 /** 下パディング */
 const PADDING_BOTTOM = 80;
