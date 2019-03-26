@@ -23,7 +23,10 @@ export const CANVAS_IMAGE_IDS = {
   ACTIVE_BATTERY_BAR: 'ACTIVE_BATTERY_BAR',
   DIS_ACTIVE_BATTERY_BAR: 'DIS_ACTIVE_BATTERY_BAR',
   GAUGE_BAR_BASE: 'GAUGE_BAR_BASE',
-  BATTERY_SELECTOR_BUTTON: 'BATTERY_SELECTOR_BUTTON',
+  BATTERY_BUTTON: 'BATTERY_BUTTON',
+  BATTERY_PLUS: 'BATTERY_PLUS',
+  BATTERY_MINUS: 'BATTERY_MINUS',
+  BATTERY_METER: 'BATTERY_METER',
   TURN_INDICATOR: 'TURN_INDICATOR',
   BURST_BUTTON: 'BURST_BUTTON',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
@@ -57,8 +60,20 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'gauge/bar-base.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.BATTERY_SELECTOR_BUTTON,
-    path: 'battery-selector/button.png',
+    id: CANVAS_IMAGE_IDS.BATTERY_BUTTON,
+    path: 'battery-selector/battery-button.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_PLUS,
+    path: 'battery-selector/plus-button.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_MINUS,
+    path: 'battery-selector/minus-button.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_METER,
+    path: 'battery-selector/meter.png',
   },
   {
     id: CANVAS_IMAGE_IDS.TURN_INDICATOR,

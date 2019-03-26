@@ -1,9 +1,18 @@
 // @flow
 
 import * as THREE from "three";
-import {BatteryButton, MESH_SIZE as BUTTON_SIZE} from "./battery-button";
 import type {Resources} from "../../../resource";
 import type {BatterySelectorModel} from "../model/battery-selector";
+import {BatteryButton} from "./battery-button";
+
+/** 全体のスケール */
+const SCALE = 0.3;
+
+/** 右パディング */
+const PADDING_RIGHT = 96;
+
+/** 下パディング */
+const PADDING_BOTTOM = 80;
 
 /** バッテリーセレクタのビュー */
 export class BatterySelectorView {
@@ -15,6 +24,8 @@ export class BatterySelectorView {
 
     this._button = new BatteryButton(resources);
     this._group.add(this._button.getObject3D());
+
+    this._group.scale.set(SCALE, SCALE, SCALE);
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -30,7 +41,7 @@ export class BatterySelectorView {
 
   /** 座標を調整する */
   _setPos(): void {
-    this._group.position.x = window.innerWidth / 2 - BUTTON_SIZE / 2 + 32;
-    this._group.position.y = -window.innerHeight / 2 + 130;
+    this._group.position.x = window.innerWidth / 2 - PADDING_RIGHT;
+    this._group.position.y = -window.innerHeight / 2 + PADDING_BOTTOM;
   }
 }
