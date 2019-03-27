@@ -7,6 +7,8 @@ import {BatteryButton} from "./battery-button";
 import {BatteryMeter} from "./battery-merter";
 import {BatteryPlus} from "./battery-plus";
 import {BatteryMinus} from "./battery-minus";
+import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../../action/game-object-action";
 
 /** 全体のスケール */
 const SCALE = 0.3;
@@ -25,14 +27,14 @@ export class BatterySelectorView {
   _minus: BatteryMinus;
   _group: THREE.Group;
 
-  constructor(resources: Resources) {
+  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     this._group = new THREE.Group();
 
     this._meter = new BatteryMeter(resources);
     this._meter.getObject3D().position.set(0, 288, -2);
     this._group.add(this._meter.getObject3D());
 
-    this._button = new BatteryButton(resources);
+    this._button = new BatteryButton(resources, listener);
     this._button.getObject3D().position.set(0, 0, -1);
     this._group.add(this._button.getObject3D());
 

@@ -13,7 +13,7 @@ import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
 import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
-import {BatterySelectorView} from "./view/battery-selector-view";
+import {BatterySelectorView} from "./view";
 import {empty} from '../../animation/delay';
 
 /** コンストラクタのパラメータ */
@@ -45,7 +45,7 @@ export class BatterySelector {
       }
     });
 
-    this._view = new BatterySelectorView(param.resources);
+    this._view = new BatterySelectorView(param.resources, param.listener);
   }
 
   /**
