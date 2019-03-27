@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from 'three';
-import {createRaycaster} from "../raycaster/raycaster-creator";
+import {createRaycaster} from "../raycaster-creator";
 import {getTouchPosition} from "./touch-position";
 
 /** タッチのレイキャストを集めたもの */

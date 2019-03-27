@@ -5,8 +5,9 @@ import type {MouseDownRaycaster} from "../../action/overlap/mouse-down-raycaster
 import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {isMeshOverlap} from "../../overlap/check/raycaster/raycaster-overlap";
+import {isMeshOverlap} from "../../raycaster/raycaster-overlap";
 
+/** パラメータ */
 type Param = {
   geometry: THREE.Geometry,
   listener: Observable<GameObjectAction>,

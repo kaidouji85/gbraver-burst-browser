@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import {getScreenPosition} from "../raycaster/screen-position";
+import {getScreenPosition} from "../screen-position";
 
 /**
  * ゲーム画面上でのタッチ座標を取得する

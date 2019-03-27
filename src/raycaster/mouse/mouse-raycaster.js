@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import {getMousePosition} from "./mouse-position";
-import {createRaycaster} from "../raycaster/raycaster-creator";
+import {createRaycaster} from "../raycaster-creator";
 
 /** マウスのレイキャスト */
 export type MouseRaycaster = {

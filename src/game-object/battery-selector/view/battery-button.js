@@ -4,10 +4,10 @@ import * as THREE from 'three';
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {ButtonOverlap} from "../../../operation/button/button-overlap";
+import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import {circleButtonOverlap} from "../../../operation/button/circle-button-overlap";
+import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 
 export const MESH_SIZE = 512;
 
