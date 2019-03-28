@@ -38,11 +38,11 @@ export class BatterySelectorView {
     this._button.getObject3D().position.set(0, 0, -1);
     this._group.add(this._button.getObject3D());
 
-    this._plus = new BatteryPlus(resources);
+    this._plus = new BatteryPlus(resources, listener);
     this._plus.getObject3D().position.set(256, 176, 0);
     this._group.add(this._plus.getObject3D());
 
-    this._minus = new BatteryMinus(resources);
+    this._minus = new BatteryMinus(resources, listener);
     this._minus.getObject3D().position.set(-256, 176, 0);
     this._group.add(this._minus.getObject3D());
 
