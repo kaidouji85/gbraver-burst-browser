@@ -12,16 +12,23 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 /** メッシュサイズ */
 const MESH_SIZE = 256;
 
+/** コンストラクタのパラメータ */
+type Param = {
+  resources: Resources,
+  listener: Observable<GameObjectAction>,
+  onPush: () => void
+};
+
 /** マイナスバッテリー */
 export class BatteryMinus {
   _group: THREE.Group;
   _mesh: SimpleImageMesh;
   _overlap: ButtonOverlap;
 
-  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(param: Param) {
     this._group = new THREE.Group();
 
-    const imageResource = resources.canvasImages
+    const imageResource = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_MINUS);
     const image = imageResource
       ? imageResource.image
@@ -35,9 +42,9 @@ export class BatteryMinus {
     this._overlap = circleButtonOverlap({
       radius: 80,
       segments: 32,
-      listener: listener,
+      listener: param.listener,
       onButtonPush: () => {
-        console.log('click minus button.');
+        param.onPush();
       }
     });
     this._group.add(this._overlap.getObject3D());

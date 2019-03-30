@@ -4,14 +4,16 @@ import {Observable, Subject} from 'rxjs';
 import type {Resources} from "../../resource";
 import * as THREE from "three";
 import {Group} from "@tweenjs/tween.js";
-import type {ButtonLabel} from "./model/ok-button";
+import type {ButtonLabel} from "./model/button-label";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
 import {Animate} from "../../animation/animate";
 import {BatterySelectorView} from "./view";
 import {empty} from '../../animation/delay';
 import type {BatterySelectorModel} from "./model/battery-selector-model";
+import {MAX_BATTERY, MIN_BATTERY} from "./model/battery-selector-model";
 import {initialValue} from "./model/initial-value";
+import {changeNeedle} from "./animation/change-needle";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -42,7 +44,18 @@ export class BatterySelector {
       }
     });
 
-    this._view = new BatterySelectorView(param.resources, param.listener);
+    this._view = new BatterySelectorView({
+      resources: param.resources,
+      listener: param.listener,
+      onPlusPush: () => {
+        const battery = Math.min(this._model.battery + 1, this._model.enableMaxBattery);
+        this._batteryChange(battery);
+      },
+      onMinusPush: () => {
+        const battery = Math.max(this._model.battery - 1, MIN_BATTERY);
+        this._batteryChange(battery);
+      }
+    });
   }
 
   /**
@@ -50,10 +63,13 @@ export class BatterySelector {
    *
    * @param initialValue 初期値
    * @param maxEnable 選択可能な最大値
-   * @param okButtonLabel OKボタンのラベル
+   * @param label ボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, okButtonLabel: ButtonLabel): Animate {
+  open(initialValue: number, maxEnable: number, label: ButtonLabel): Animate {
+    this._model.battery = initialValue;
+    this._model.enableMaxBattery = Math.min(maxEnable, MAX_BATTERY);
+    this._model.label = label;
     return empty();
   }
 
@@ -78,13 +94,17 @@ export class BatterySelector {
     this._view.engage(this._model);
   }
 
-  /** バッテリーが変更された際のイベント */
-  _changeBattery(battery: number): void {
-    // TODO 処理を実装する
-  }
+  /**
+   * バッテリー値を変更する
+   *
+   * @param battery 変更するバッテリー値
+   */
+  _batteryChange(battery: number): void {
+    this._batteryChangeTween.update();
+    this._batteryChangeTween.removeAll();
 
-  /** OKボタンが押された際のイベント */
-  async _pushOkButton(): Promise<void> {
-    // TODO 処理を実装する
+    this._model.battery = battery;
+    const needle = this._model.battery / MAX_BATTERY;
+    changeNeedle(this._model, this._batteryChangeTween, needle).play();
   }
 }
