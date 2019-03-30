@@ -4,10 +4,9 @@ import {Observable, Subject} from 'rxjs';
 import type {Resources} from "../../resource";
 import * as THREE from "three";
 import {Group} from "@tweenjs/tween.js";
-import type {OkButtonLabel} from "./depricated-model/ok-button";
+import type {ButtonLabel} from "./model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
-import {createInitialValue} from "./depricated-model/initial-value";
 import {Animate} from "../../animation/animate";
 import {BatterySelectorView} from "./view";
 import {empty} from '../../animation/delay';
@@ -54,7 +53,7 @@ export class BatterySelector {
    * @param okButtonLabel OKボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): Animate {
+  open(initialValue: number, maxEnable: number, okButtonLabel: ButtonLabel): Animate {
     return empty();
   }
 

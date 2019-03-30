@@ -2,7 +2,6 @@
 
 import * as THREE from "three";
 import type {Resources} from "../../../resource";
-import type {DepricatedBatterySelectorModel} from "../depricated-model/battery-selector";
 import {BatteryButton} from "./battery-button";
 import {BatteryMeter} from "./battery-merter";
 import {BatteryPlus} from "./battery-plus";
