@@ -57,6 +57,7 @@ export class BatterySelectorView {
   // TODO モデルを参照するようにする
   /** モデルをビューに反映させる */
   engage(model: BatterySelectorModel): void {
+    this._meter.setValue(2/5);
     this._setPos();
   }
 
