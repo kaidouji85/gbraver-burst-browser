@@ -12,7 +12,6 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 /** メッシュサイズ */
 const MESH_SIZE = 256;
 
-// TODO 当たり判定を追加する
 /** プラスボタン */
 export class BatteryPlus {
   _group: THREE.Group;

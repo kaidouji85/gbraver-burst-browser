@@ -1,20 +1,18 @@
 // @flow
 
 import {Observable, Subject} from 'rxjs';
-import type {BatterySelectorModel} from "./model/battery-selector";
-import type {Resources} from "../../resource/index";
+import type {Resources} from "../../resource";
 import * as THREE from "three";
-import {changeBattery} from './animation/change-battery';
 import {Group} from "@tweenjs/tween.js";
-import {pushOkButton} from "./animation/push-ok-button";
-import type {OkButtonLabel} from "./model/ok-button";
+import type {OkButtonLabel} from "./depricated-model/ok-button";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
-import {createInitialValue} from "./model/initial-value";
+import {createInitialValue} from "./depricated-model/initial-value";
 import {Animate} from "../../animation/animate";
 import {BatterySelectorView} from "./view";
 import {empty} from '../../animation/delay';
+import type {BatterySelectorModel} from "./model/battery-selector-model";
+import {initialValue} from "./model/initial-value";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -36,7 +34,7 @@ export class BatterySelector {
   constructor(param: Param) {
     this._onBatteryChange = param.onBatteryChange;
     this._onOkButtonPush = param.onOkButtonPush;
-    this._model = createInitialValue(param.maxBattery);
+    this._model = initialValue();
     this._batteryChangeTween = new Group();
 
     param.listener.subscribe(action => {
@@ -57,35 +55,17 @@ export class BatterySelector {
    * @return アニメーション
    */
   open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): Animate {
-    /*
-    return process(() => {
-      this._view.setLastBattery(initialValue);
-    }).chain(
-      open({
-        model: this._model,
-        initialValue: initialValue,
-        maxEnable: maxEnable,
-        okButtonLabel: okButtonLabel
-      })
-    );
-    */
     return empty();
   }
 
   /** バッテリーセレクタを閉じる */
   close(): Animate {
-    return close(this._model);
+    return empty();
   }
 
   /** 現在のバッテリー値を取得する */
   getBattery(): number {
-    return 0;
-    // const lastBattery = this._view.getLastBattery();
-    // if (lastBattery === null || lastBattery === undefined) {
-    //   return 0;
-    // }
-    //
-    // return lastBattery;
+    return this._model.battery;
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */
@@ -101,23 +81,11 @@ export class BatterySelector {
 
   /** バッテリーが変更された際のイベント */
   _changeBattery(battery: number): void {
-    if (this._model.disabled || this._model.slider.enableMax < battery) {
-      return;
-    }
-
-    this._batteryChangeTween.update();
-    this._batteryChangeTween.removeAll();
-    changeBattery(this._model, this._batteryChangeTween, battery).play();
-    this._onBatteryChange(battery);
+    // TODO 処理を実装する
   }
 
   /** OKボタンが押された際のイベント */
   async _pushOkButton(): Promise<void> {
-    if (this._model.disabled) {
-      return;
-    }
-
-    await pushOkButton(this._model).play();
-    this._onOkButtonPush();
+    // TODO 処理を実装する
   }
 }

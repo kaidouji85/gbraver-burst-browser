@@ -2,13 +2,14 @@
 
 import * as THREE from "three";
 import type {Resources} from "../../../resource";
-import type {BatterySelectorModel} from "../model/battery-selector";
+import type {DepricatedBatterySelectorModel} from "../depricated-model/battery-selector";
 import {BatteryButton} from "./battery-button";
 import {BatteryMeter} from "./battery-merter";
 import {BatteryPlus} from "./battery-plus";
 import {BatteryMinus} from "./battery-minus";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
+import type {BatterySelectorModel} from "../model/battery-selector-model";
 
 /** 全体のスケール */
 const SCALE = 0.3;
@@ -57,7 +58,8 @@ export class BatterySelectorView {
   // TODO モデルを参照するようにする
   /** モデルをビューに反映させる */
   engage(model: BatterySelectorModel): void {
-    this._meter.setValue(2/5);
+    this._meter.setValue(model.needle);
+    this._group.opacity;
     this._setPos();
   }
 

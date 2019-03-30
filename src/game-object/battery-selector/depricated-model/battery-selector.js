@@ -4,7 +4,7 @@ import type {SliderModel} from "./slider";
 import type {OkButtonModel} from "./ok-button";
 
 /** バッテリーセレクタのモデル */
-export type BatterySelectorModel = {
+export type DepricatedBatterySelectorModel = {
   /** スライダー */
   slider: SliderModel,
   /** OKボタン */

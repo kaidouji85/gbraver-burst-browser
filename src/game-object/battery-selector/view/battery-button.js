@@ -9,9 +9,9 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 
+/** メッシュサイズ */
 export const MESH_SIZE = 512;
 
-// TODO 当たり判定を追加する
 /** バッテリーボタン */
 export class BatteryButton {
   _group: THREE.Group;

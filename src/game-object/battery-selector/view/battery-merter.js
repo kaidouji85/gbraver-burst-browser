@@ -54,7 +54,7 @@ export class BatteryMeter {
   /**
    * メーターの値を設定する
    *
-   * @param value メーターの値、0〜1で指定する
+   * @param value メーターの値、0〜1のパーセント
    */
   setValue(value: number): void {
     this._needle.getObject3D().rotation.z = Math.PI * (1- value);
