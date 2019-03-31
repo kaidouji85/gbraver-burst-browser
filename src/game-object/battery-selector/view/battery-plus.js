@@ -20,7 +20,7 @@ type Param = {
   onPush: () => void
 };
 
-/** プラスボタン */
+/** バッテリープラスボタン */
 export class BatteryPlus {
   _group: THREE.Group;
   _mesh: SimpleImageMesh;

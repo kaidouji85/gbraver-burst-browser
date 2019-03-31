@@ -20,7 +20,7 @@ type Param = {
   onPush: () => void
 };
 
-/** マイナスバッテリー */
+/** バッテリーマイナスボタン */
 export class BatteryMinus {
   _group: THREE.Group;
   _mesh: SimpleImageMesh;
