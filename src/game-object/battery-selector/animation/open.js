@@ -1,33 +1,18 @@
 // @flow
 
-import type {BatterySelectorModel} from "../model/battery-selector";
-import type {OkButtonLabel} from "../model/ok-button";
 import {Animate} from "../../../animation/animate";
-import {process} from "../../../animation/process";
+import type {BatterySelectorModel} from "../model";
 import {tween} from "../../../animation/tween";
+import {process} from "../../../animation/process";
 
-type Param = {
-  model: BatterySelectorModel,
-  initialValue: number,
-  maxEnable: number,
-  okButtonLabel: OkButtonLabel,
-};
-
-/**バッテリーセレクタを開く */
-export function open(param: Param): Animate {
+/** ボタン表示アニメーション */
+export function open(model: BatterySelectorModel): Animate {
   return process(() => {
-    param.model.disabled = true;
-    param.model.opacity = 0;
-    param.model.slider.enableMax = param.maxEnable;
-    param.model.slider.battery = param.initialValue;
-    param.model.okButton.label = param.okButtonLabel;
-  }).chain(
-    tween(param.model, t => t
-      .to({opacity: 1}, 300)
-    )
-  ).chain(
-    process(() => {
-      param.model.disabled = false;
-    })
-  );
+    model.disabled = true;
+    model.opacity = 0;
+  }).chain(tween(model, t => t
+    .to({opacity: 1}, 300)
+  )).chain(process(() => {
+    model.disabled = false;
+  }));
 }

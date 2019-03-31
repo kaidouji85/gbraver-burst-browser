@@ -1,21 +1,22 @@
 // @flow
 
 import {Observable, Subject} from 'rxjs';
-import type {BatterySelectorModel} from "./model/battery-selector";
-import {BatterySelectorView} from "./view/battery-selector-view";
-import type {Resources} from "../../resource/index";
+import type {Resources} from "../../resource";
 import * as THREE from "three";
-import {changeBattery} from './animation/change-battery';
 import {Group} from "@tweenjs/tween.js";
-import {open} from './animation/open';
-import {pushOkButton} from "./animation/push-ok-button";
-import type {OkButtonLabel} from "./model/ok-button";
+import type {ButtonLabel} from "./model/button-label";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
-import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
-import {process} from "../../animation/process";
+import {BatterySelectorView} from "./view";
+import type {BatterySelectorModel} from "./model";
+import {MAX_BATTERY, MIN_BATTERY} from "./model";
+import {initialValue} from "./model/initial-value";
+import {changeNeedle} from "./animation/change-needle";
+import {getNeedleValue} from "./model/needle-value";
+import {open} from './animation/open';
+import {close} from './animation/close';
+import {minusBattery, plusBattery} from "./model/battery-change";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -31,13 +32,9 @@ export class BatterySelector {
   _model: BatterySelectorModel;
   _view: BatterySelectorView;
   _batteryChangeTween: Group;
-  _onBatteryChange: (battery: number) => void;
-  _onOkButtonPush: () => void;
 
   constructor(param: Param) {
-    this._onBatteryChange = param.onBatteryChange;
-    this._onOkButtonPush = param.onOkButtonPush;
-    this._model = createInitialValue(param.maxBattery);
+    this._model = initialValue();
     this._batteryChangeTween = new Group();
 
     param.listener.subscribe(action => {
@@ -49,12 +46,30 @@ export class BatterySelector {
     this._view = new BatterySelectorView({
       resources: param.resources,
       listener: param.listener,
-      maxValue: param.maxBattery,
-      onBatteryChange: battery => {
-        this._changeBattery(battery);
+      onOkPush: () => {
+        if (this._model.disabled) {
+          return;
+        }
+
+        param.onOkButtonPush();
       },
-      onOkButtonPush: () => {
-        this._pushOkButton();
+      onPlusPush: () => {
+        if (this._model.disabled) {
+          return;
+        }
+
+        const battery = plusBattery(this._model);
+        this._batteryChange(battery);
+        param.onBatteryChange(this._model.battery);
+      },
+      onMinusPush: () => {
+        if (this._model.disabled) {
+          return;
+        }
+
+        const battery = minusBattery(this._model);
+        this._batteryChange(battery);
+        param.onBatteryChange(this._model.battery);
       }
     });
   }
@@ -64,20 +79,15 @@ export class BatterySelector {
    *
    * @param initialValue 初期値
    * @param maxEnable 選択可能な最大値
-   * @param okButtonLabel OKボタンのラベル
+   * @param label ボタンのラベル
    * @return アニメーション
    */
-  open(initialValue: number, maxEnable: number, okButtonLabel: OkButtonLabel): Animate {
-    return process(() => {
-      this._view.setLastBattery(initialValue);
-    }).chain(
-      open({
-        model: this._model,
-        initialValue: initialValue,
-        maxEnable: maxEnable,
-        okButtonLabel: okButtonLabel
-      })
-    );
+  open(initialValue: number, maxEnable: number, label: ButtonLabel): Animate {
+    this._model.battery = initialValue;
+    this._model.needle = getNeedleValue(initialValue);
+    this._model.enableMaxBattery = Math.min(maxEnable, MAX_BATTERY);
+    this._model.label = label;
+    return open(this._model);
   }
 
   /** バッテリーセレクタを閉じる */
@@ -87,12 +97,7 @@ export class BatterySelector {
 
   /** 現在のバッテリー値を取得する */
   getBattery(): number {
-    const lastBattery = this._view.getLastBattery();
-    if (lastBattery === null || lastBattery === undefined) {
-      return 0;
-    }
-
-    return lastBattery;
+    return this._model.battery;
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */
@@ -106,25 +111,17 @@ export class BatterySelector {
     this._view.engage(this._model);
   }
 
-  /** バッテリーが変更された際のイベント */
-  _changeBattery(battery: number): void {
-    if (this._model.disabled || this._model.slider.enableMax < battery) {
-      return;
-    }
-
+  /**
+   * バッテリー値を変更するヘルパー関数
+   *
+   * @param battery 変更するバッテリー値
+   */
+  _batteryChange(battery: number): void {
     this._batteryChangeTween.update();
     this._batteryChangeTween.removeAll();
-    changeBattery(this._model, this._batteryChangeTween, battery).play();
-    this._onBatteryChange(battery);
-  }
 
-  /** OKボタンが押された際のイベント */
-  async _pushOkButton(): Promise<void> {
-    if (this._model.disabled) {
-      return;
-    }
-
-    await pushOkButton(this._model).play();
-    this._onOkButtonPush();
+    this._model.battery = battery;
+    const needle = getNeedleValue(battery);
+    changeNeedle(this._model, this._batteryChangeTween, needle).play();
   }
 }
