@@ -1,7 +1,7 @@
 // @flow
 
-import type {BatterySelectorModel} from "./battery-selector-model";
-import {MIN_BATTERY} from "./battery-selector-model";
+import type {BatterySelectorModel} from ".";
+import {MIN_BATTERY} from ".";
 
 /** モデルの初期値を生成する */
 export function initialValue(): BatterySelectorModel {
@@ -10,5 +10,7 @@ export function initialValue(): BatterySelectorModel {
     enableMaxBattery: MIN_BATTERY,
     needle: 0,
     label: 'Attack',
+    opacity: 0,
+    disabled: true
   };
 }

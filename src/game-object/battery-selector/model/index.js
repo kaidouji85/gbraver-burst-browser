@@ -18,4 +18,8 @@ export type BatterySelectorModel = {
   needle: number,
   /** バッテリーボタンラベル */
   label: ButtonLabel,
+  /** 透明度 1〜0で指定して1で完全不透明 */
+  opacity: number,
+  /** 操作不可能フラグ、trueで操作不可能 */
+  disabled: boolean,
 };

@@ -10,10 +10,12 @@ import type {Update} from "../../action/game-loop/update";
 import {Animate} from "../../animation/animate";
 import {BatterySelectorView} from "./view";
 import {empty} from '../../animation/delay';
-import type {BatterySelectorModel} from "./model/battery-selector-model";
-import {MAX_BATTERY, MIN_BATTERY} from "./model/battery-selector-model";
+import type {BatterySelectorModel} from "./model";
+import {MAX_BATTERY, MIN_BATTERY} from "./model";
 import {initialValue} from "./model/initial-value";
 import {changeNeedle} from "./animation/change-needle";
+import {getNeedleValue} from "./model/needle-value";
+import {open} from './animation/open';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -48,12 +50,10 @@ export class BatterySelector {
       resources: param.resources,
       listener: param.listener,
       onPlusPush: () => {
-        const battery = Math.min(this._model.battery + 1, this._model.enableMaxBattery);
-        this._batteryChange(battery);
+        this._onPlusPush();
       },
       onMinusPush: () => {
-        const battery = Math.max(this._model.battery - 1, MIN_BATTERY);
-        this._batteryChange(battery);
+        this._onMinusPush();
       }
     });
   }
@@ -68,9 +68,10 @@ export class BatterySelector {
    */
   open(initialValue: number, maxEnable: number, label: ButtonLabel): Animate {
     this._model.battery = initialValue;
+    this._model.needle = getNeedleValue(initialValue);
     this._model.enableMaxBattery = Math.min(maxEnable, MAX_BATTERY);
     this._model.label = label;
-    return empty();
+    return open(this._model);
   }
 
   /** バッテリーセレクタを閉じる */
@@ -94,8 +95,28 @@ export class BatterySelector {
     this._view.engage(this._model);
   }
 
+  /** プラスボタンを押した際の処理 */
+  _onPlusPush(): void {
+    if (this._model.disabled) {
+      return;
+    }
+
+    const battery = Math.min(this._model.battery + 1, this._model.enableMaxBattery);
+    this._batteryChange(battery);
+  }
+
+  /** マイナスボタンを押した際の処理 */
+  _onMinusPush(): void {
+    if (this._model.disabled) {
+      return;
+    }
+
+    const battery = Math.max(this._model.battery - 1, MIN_BATTERY);
+    this._batteryChange(battery);
+  }
+
   /**
-   * バッテリー値を変更する
+   * バッテリー値を変更するヘルパー関数
    *
    * @param battery 変更するバッテリー値
    */
@@ -104,7 +125,7 @@ export class BatterySelector {
     this._batteryChangeTween.removeAll();
 
     this._model.battery = battery;
-    const needle = this._model.battery / MAX_BATTERY;
+    const needle = getNeedleValue(battery);
     changeNeedle(this._model, this._batteryChangeTween, needle).play();
   }
 }

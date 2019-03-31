@@ -8,7 +8,7 @@ import {BatteryPlus} from "./battery-plus";
 import {BatteryMinus} from "./battery-minus";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import type {BatterySelectorModel} from "../model/battery-selector-model";
+import type {BatterySelectorModel} from "../model";
 
 /** 全体のスケール */
 const SCALE = 0.3;

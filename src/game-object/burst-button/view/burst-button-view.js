@@ -38,6 +38,7 @@ export class BurstButtonView {
 
   /** モデルをビューに反映させる */
   engage(model: BurstButtonModel): void {
+    this._mesh.setOpacity(model.opacity);
     this._setPos();
   }
 

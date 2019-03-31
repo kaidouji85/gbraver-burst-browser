@@ -60,6 +60,12 @@ export class BatteryMeter {
     this._needle.getObject3D().rotation.z = Math.PI * (1- value);
   }
 
+  /** 透明度を設定する */
+  setOpacity(opacity: number): void {
+    this._disk.setOpacity(opacity);
+    this._needle.setOpacity(opacity);
+  }
+
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._group;
