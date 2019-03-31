@@ -77,6 +77,7 @@ export class BatterySelectorView {
   /** モデルをビューに反映させる */
   engage(model: BatterySelectorModel): void {
     this._meter.setValue(model.needle);
+    this._button.setLabel(model.label);
     this._setPos();
   }
 

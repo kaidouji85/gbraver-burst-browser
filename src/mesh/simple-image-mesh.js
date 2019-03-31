@@ -27,6 +27,11 @@ export class SimpleImageMesh {
     });
   }
 
+  /** 透明度を設定する */
+  setOpacity(opacity: number): void {
+    this._mesh.setOpacity(opacity);
+  }
+
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._mesh.mesh;

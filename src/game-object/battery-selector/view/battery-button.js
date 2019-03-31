@@ -8,6 +8,7 @@ import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
+import type {ButtonLabel} from "../model/button-label";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 512;
@@ -15,23 +16,25 @@ export const MESH_SIZE = 512;
 /** バッテリーボタン */
 export class BatteryButton {
   _group: THREE.Group;
-  _mesh: SimpleImageMesh;
+  _button: SimpleImageMesh;
   _overlap: ButtonOverlap;
-
+  _attackLabel: SimpleImageMesh;
+  _defenseLabel: SimpleImageMesh;
 
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     this._group = new THREE.Group();
 
-    const imageResource = resources.canvasImages
+    const buttonResource = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BUTTON);
-    const image = imageResource
-      ? imageResource.image
+    const button = buttonResource
+      ? buttonResource.image
       : new Image();
-    this._mesh = new SimpleImageMesh({
+    this._button = new SimpleImageMesh({
       canvasSize: MESH_SIZE,
-      image: image
+      image: button
     });
-    this._group.add(this._mesh.getObject3D());
+    this._button.getObject3D().position.set(0, 0, -1);
+    this._group.add(this._button.getObject3D());
 
     this._overlap = circleButtonOverlap({
       radius: 200,
@@ -42,6 +45,38 @@ export class BatteryButton {
       }
     });
     this._group.add(this._overlap.getObject3D());
+
+    const attackLabelResource = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK);
+    const attackLabel = attackLabelResource
+      ? attackLabelResource.image
+      : new Image();
+    this._attackLabel = new SimpleImageMesh({
+      canvasSize: MESH_SIZE,
+      image: attackLabel
+    });
+    this._attackLabel.getObject3D().position.set(0, -96, 0);
+    this._group.add(this._attackLabel.getObject3D());
+
+    const defenseLabelResource = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK);
+    const defenseLabel = defenseLabelResource
+      ? defenseLabelResource.image
+      : new Image();
+    this._defenseLabel = new SimpleImageMesh({
+      canvasSize: MESH_SIZE,
+      image: defenseLabel
+    });
+    this._defenseLabel.getObject3D().position.set(0, -96, 0);
+    this._group.add(this._defenseLabel.getObject3D());
+  }
+
+  /** バッテリーボタンラベルを変更 */
+  setLabel(label: ButtonLabel): void {
+    const attackOpacity = label === 'Attack' ? 1 : 0;
+    const defenseOpacity = label === 'Defense' ? 1 : 0;
+    this._attackLabel.setOpacity(attackOpacity);
+    this._defenseLabel.setOpacity(defenseOpacity);
   }
 
   /** シーンに追加するオブジェクトを取得する */

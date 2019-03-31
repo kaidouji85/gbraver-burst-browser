@@ -28,6 +28,8 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_MINUS: 'BATTERY_MINUS',
   BATTERY_METER: 'BATTERY_METER',
   BATTERY_NEEDLE: 'BATTERY_NEEDLE',
+  BATTERY_LABEL_ATTACK: 'BATTERY_LABEL_ATTACK',
+  BATTERY_LABEL_DEFENSE: 'BATTERY_LABEL_DEFENSE',
   TURN_INDICATOR: 'TURN_INDICATOR',
   BURST_BUTTON: 'BURST_BUTTON',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
@@ -79,6 +81,14 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BATTERY_NEEDLE,
     path: 'battery-selector/needle.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK,
+    path: 'battery-selector/attack-label.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_LABEL_DEFENSE,
+    path: 'battery-selector/defense-label.png',
   },
   {
     id: CANVAS_IMAGE_IDS.TURN_INDICATOR,
