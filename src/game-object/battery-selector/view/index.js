@@ -23,6 +23,7 @@ const PADDING_BOTTOM = 80;
 type Param = {
   resources: Resources,
   listener: Observable<GameObjectAction>,
+  onOkPush: () => void,
   onPlusPush: () => void,
   onMinusPush: () => void,
 };
@@ -42,7 +43,13 @@ export class BatterySelectorView {
     this._meter.getObject3D().position.set(0, 288, -2);
     this._group.add(this._meter.getObject3D());
 
-    this._button = new BatteryButton(param.resources, param.listener);
+    this._button = new BatteryButton({
+      resources: param.resources,
+      listener: param.listener,
+      onPush: () => {
+        param.onOkPush();
+      }
+    });
     this._button.getObject3D().position.set(0, 0, -1);
     this._group.add(this._button.getObject3D());
 

@@ -9,13 +9,13 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
 import {Animate} from "../../animation/animate";
 import {BatterySelectorView} from "./view";
-import {empty} from '../../animation/delay';
 import type {BatterySelectorModel} from "./model";
 import {MAX_BATTERY, MIN_BATTERY} from "./model";
 import {initialValue} from "./model/initial-value";
 import {changeNeedle} from "./animation/change-needle";
 import {getNeedleValue} from "./model/needle-value";
 import {open} from './animation/open';
+import {close} from './animation/close';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -49,6 +49,9 @@ export class BatterySelector {
     this._view = new BatterySelectorView({
       resources: param.resources,
       listener: param.listener,
+      onOkPush: () => {
+        param.onOkButtonPush();
+      },
       onPlusPush: () => {
         this._onPlusPush();
       },
@@ -76,7 +79,7 @@ export class BatterySelector {
 
   /** バッテリーセレクタを閉じる */
   close(): Animate {
-    return empty();
+    return close(this._model);
   }
 
   /** 現在のバッテリー値を取得する */

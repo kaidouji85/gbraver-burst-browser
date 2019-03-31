@@ -8,11 +8,17 @@ import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
-import type {ButtonLabel} from "../model/button-label";
 import type {BatterySelectorModel} from "../model";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 512;
+
+/** コンストラクタのパラメータ */
+type Param = {
+  resources: Resources,
+  listener: Observable<GameObjectAction>,
+  onPush: () => void
+};
 
 /** バッテリーボタン */
 export class BatteryButton {
@@ -22,10 +28,10 @@ export class BatteryButton {
   _attackLabel: SimpleImageMesh;
   _defenseLabel: SimpleImageMesh;
 
-  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(param: Param) {
     this._group = new THREE.Group();
 
-    const buttonResource = resources.canvasImages
+    const buttonResource = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BUTTON);
     const button = buttonResource
       ? buttonResource.image
@@ -40,14 +46,14 @@ export class BatteryButton {
     this._overlap = circleButtonOverlap({
       radius: 200,
       segments: 32,
-      listener: listener,
+      listener: param.listener,
       onButtonPush: ()=> {
-        console.log('clicked!!');
+        param.onPush();
       }
     });
     this._group.add(this._overlap.getObject3D());
 
-    const attackLabelResource = resources.canvasImages
+    const attackLabelResource = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK);
     const attackLabel = attackLabelResource
       ? attackLabelResource.image
@@ -59,8 +65,8 @@ export class BatteryButton {
     this._attackLabel.getObject3D().position.set(0, -96, 0);
     this._group.add(this._attackLabel.getObject3D());
 
-    const defenseLabelResource = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK);
+    const defenseLabelResource = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_DEFENSE);
     const defenseLabel = defenseLabelResource
       ? defenseLabelResource.image
       : new Image();
