@@ -31,12 +31,8 @@ export class BatterySelector {
   _model: BatterySelectorModel;
   _view: BatterySelectorView;
   _batteryChangeTween: Group;
-  _onBatteryChange: (battery: number) => void;
-  _onOkButtonPush: () => void;
 
   constructor(param: Param) {
-    this._onBatteryChange = param.onBatteryChange;
-    this._onOkButtonPush = param.onOkButtonPush;
     this._model = initialValue();
     this._batteryChangeTween = new Group();
 
@@ -50,13 +46,29 @@ export class BatterySelector {
       resources: param.resources,
       listener: param.listener,
       onOkPush: () => {
+        if (this._model.disabled) {
+          return;
+        }
+
         param.onOkButtonPush();
       },
       onPlusPush: () => {
-        this._onPlusPush();
+        if (this._model.disabled) {
+          return;
+        }
+
+        const battery = Math.min(this._model.battery + 1, this._model.enableMaxBattery);
+        this._batteryChange(battery);
+        param.onBatteryChange(this._model.battery);
       },
       onMinusPush: () => {
-        this._onMinusPush();
+        if (this._model.disabled) {
+          return;
+        }
+
+        const battery = Math.max(this._model.battery - 1, MIN_BATTERY);
+        this._batteryChange(battery);
+        param.onBatteryChange(this._model.battery);
       }
     });
   }
@@ -96,26 +108,6 @@ export class BatterySelector {
   _update(action: Update): void {
     this._batteryChangeTween.update(action.time);
     this._view.engage(this._model);
-  }
-
-  /** プラスボタンを押した際の処理 */
-  _onPlusPush(): void {
-    if (this._model.disabled) {
-      return;
-    }
-
-    const battery = Math.min(this._model.battery + 1, this._model.enableMaxBattery);
-    this._batteryChange(battery);
-  }
-
-  /** マイナスボタンを押した際の処理 */
-  _onMinusPush(): void {
-    if (this._model.disabled) {
-      return;
-    }
-
-    const battery = Math.max(this._model.battery - 1, MIN_BATTERY);
-    this._batteryChange(battery);
   }
 
   /**

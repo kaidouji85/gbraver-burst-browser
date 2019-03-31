@@ -21,12 +21,14 @@ export function createBatterySelector(param: Param): BatterySelector {
     maxBattery: param.playerInfo.armdozer.maxBattery,
     resources: param.resources,
     onBatteryChange: (battery: number) => {
+      console.log('onBatteryChange: ' + battery);
       param.notifier.next({
         type: 'changeBattery',
         battery: battery
       });
     },
     onOkButtonPush: () => {
+      console.log('onOkButtonPush');
       param.notifier.next({
         type: 'decideBattery',
         battery: selector.getBattery()
