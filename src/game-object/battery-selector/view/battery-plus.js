@@ -8,6 +8,7 @@ import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
+import type {BatterySelectorModel} from "../model";
 
 /** メッシュサイズ */
 const MESH_SIZE = 256;
@@ -50,9 +51,9 @@ export class BatteryPlus {
     this._group.add(this._overlap.getObject3D());
   }
 
-  /** 透明度を設定する */
-  setOpacity(opacity: number): void {
-    this._mesh.setOpacity(opacity);
+  /** モデルをビューに反映させる */
+  update(model: BatterySelectorModel): void {
+    this._mesh.setOpacity(model.opacity);
   }
 
   /** シーンに追加するオブジェクトを取得する */

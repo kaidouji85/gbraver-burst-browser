@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import type {ButtonLabel} from "../model/button-label";
+import type {BatterySelectorModel} from "../model";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 512;
@@ -71,13 +72,14 @@ export class BatteryButton {
     this._group.add(this._defenseLabel.getObject3D());
   }
 
-  /** バッテリーボタンラベルを変更 */
-  setLabel(label: ButtonLabel): void {
-    const attackOpacity = label === 'Attack' ? 1 : 0;
-    const defenseOpacity = label === 'Defense' ? 1 : 0;
+  /** モデルをビューに反映させる */
+  update(model: BatterySelectorModel): void {
+    const attackOpacity = model.label === 'Attack' ? model.opacity : 0;
+    const defenseOpacity = model.label === 'Defense' ? model.opacity : 0;
     this._attackLabel.setOpacity(attackOpacity);
     this._defenseLabel.setOpacity(defenseOpacity);
-  }
+    this._button.setOpacity(model.opacity);
+  };
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
