@@ -3,7 +3,7 @@
 import {MAX_BATTERY} from "./index";
 
 /**
- * メーター針の値を計算する
+ * バッテリー値からメーター針の値を計算する
  *
  * @param battery 現在のバッテリー
  * @return メーター針の値

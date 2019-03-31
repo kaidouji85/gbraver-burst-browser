@@ -16,6 +16,7 @@ import {changeNeedle} from "./animation/change-needle";
 import {getNeedleValue} from "./model/needle-value";
 import {open} from './animation/open';
 import {close} from './animation/close';
+import {minusBattery, plusBattery} from "./model/battery-change";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -57,7 +58,7 @@ export class BatterySelector {
           return;
         }
 
-        const battery = Math.min(this._model.battery + 1, this._model.enableMaxBattery);
+        const battery = plusBattery(this._model);
         this._batteryChange(battery);
         param.onBatteryChange(this._model.battery);
       },
@@ -66,7 +67,7 @@ export class BatterySelector {
           return;
         }
 
-        const battery = Math.max(this._model.battery - 1, MIN_BATTERY);
+        const battery = minusBattery(this._model);
         this._batteryChange(battery);
         param.onBatteryChange(this._model.battery);
       }
