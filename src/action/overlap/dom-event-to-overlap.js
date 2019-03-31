@@ -2,11 +2,11 @@
 
 import * as THREE from "three";
 import type {MouseDown} from "../dom-event/mouse-down";
-import type {MouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
-import {createMouseRaycaster} from "../../overlap/check/mouse/mouse-raycaster";
+import type {MouseRaycaster} from "../../raycaster/mouse/mouse-raycaster";
+import {createMouseRaycaster} from "../../raycaster/mouse/mouse-raycaster";
 import type {TouchStart} from "../dom-event/touch-start";
 import type {TouchStartRaycaster} from "./touch-start-raycaster";
-import {createTouchEventRaycaster} from "../../overlap/check/touch/touch-raycaster";
+import {createTouchEventRaycaster} from "../../raycaster/touch/touch-raycaster";
 import type {MouseDownRaycaster} from "./mouse-down-raycaster";
 import type {MouseMove} from "../dom-event/mouse-move";
 import type {MouseMoveRaycaster} from "./mouse-move-raycaster";

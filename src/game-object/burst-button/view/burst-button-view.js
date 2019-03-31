@@ -1,66 +1,55 @@
 // @flow
 
 import * as THREE from 'three';
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {Resources} from "../../../resource";
-import type {CanvasImageResource} from "../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {BurstButtonModel} from "../model/burst-button-model";
+import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 
-export const MESH_SIZE = 150;
-export const CANVAS_SIZE = 256;
+/** キャンバスサイズ */
+const CANVAS_SIZE = 512;
 
+/** 全体のスケール */
+const SCALE = 0.3;
+
+/** 左パディング */
+const PADDING_LEFT = 80;
+
+/** 下パディング */
+const PADDING_BOTTOM = 80;
+
+// TODO 当たり判定を追加する
 /** バーストボタンのビュー */
 export class BurstButtonView {
-  _canvasMesh: CanvasMesh;
+  _mesh: SimpleImageMesh;
 
   constructor(resources: Resources) {
-    this._canvasMesh = createCanvasMesh(resources);
+    const imageResource = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON);
+    const image = imageResource
+      ? imageResource.image
+      : new Image();
+    this._mesh = new SimpleImageMesh({
+      canvasSize: CANVAS_SIZE,
+      image: image
+    });
+    this._mesh.getObject3D().scale.set(SCALE, SCALE, SCALE);
   }
 
   /** モデルをビューに反映させる */
   engage(model: BurstButtonModel): void {
+    this._mesh.setOpacity(model.opacity);
     this._setPos();
-    this._setOpacity(model);
   }
 
   /** 本ビューで使うthree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
-    return this._canvasMesh.mesh;
+    return this._mesh.getObject3D();
   }
 
   /** 表示位置を更新する */
   _setPos(): void {
-    this._canvasMesh.mesh.position.x = window.innerWidth / 2 - 44;
-    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - 44;
+    this._mesh.getObject3D().position.x = -window.innerWidth / 2 + PADDING_LEFT;
+    this._mesh.getObject3D().position.y = -window.innerHeight / 2 + PADDING_BOTTOM;
   }
-
-  /** 透明度を更新する */
-  _setOpacity(model: BurstButtonModel): void {
-    this._canvasMesh.setOpacity(model.opacity);
-  }
-}
-
-/** キャンバスメッシュを生成するヘルパー関数 */
-function createCanvasMesh(resources: Resources): CanvasMesh {
-  const mesh = new CanvasMesh({
-    canvasWidth: CANVAS_SIZE,
-    canvasHeight: CANVAS_SIZE,
-    meshWidth: MESH_SIZE,
-    meshHeight: MESH_SIZE,
-  });
-  mesh.draw(context => {
-    context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-    context.save();
-
-    const burstButtonResource: ?CanvasImageResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON);
-    const burstButtonImage: Image = burstButtonResource ? burstButtonResource.image : new Image();
-    const dx = context.canvas.width / 2;
-    const dy = context.canvas.height / 2;
-    drawImageInCenter(context, burstButtonImage, dx, dy);
-
-    context.restore();
-  });
-  return mesh;
 }

@@ -1,19 +1,16 @@
 // @flow
 
-import type {BatterySelectorModel} from "./battery-selector";
+import type {BatterySelectorModel} from ".";
+import {MIN_BATTERY} from ".";
 
-export function createInitialValue(maxBattery: number): BatterySelectorModel {
+/** モデルの初期値を生成する */
+export function initialValue(): BatterySelectorModel {
   return {
-    slider: {
-      battery: 0,
-      max: maxBattery,
-      enableMax: maxBattery
-    },
-    okButton: {
-      depth: 0,
-      label: 'Attack'
-    },
-    disabled: true,
-    opacity: 0
+    battery: MIN_BATTERY,
+    enableMaxBattery: MIN_BATTERY,
+    needle: 0,
+    label: 'Attack',
+    opacity: 0,
+    disabled: true
   };
 }
