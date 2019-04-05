@@ -9,6 +9,7 @@ import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
+import {isBatteryMinusDisabled} from "../model/is-battery-minus-disabled";
 
 /** メッシュサイズ */
 const MESH_SIZE = 256;
@@ -65,9 +66,9 @@ export class BatteryMinus {
 
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
-    const isActive = false;
-    const activeOpacity = isActive ? model.opacity : 0;
-    const disActiveOpacity = isActive ? 0 : model.opacity;
+    const isDisabled = isBatteryMinusDisabled(model);
+    const activeOpacity = isDisabled ? 0 : model.opacity;
+    const disActiveOpacity = isDisabled ? model.opacity : 0;
     this._activeButton.setOpacity(activeOpacity);
     this._disActiveButton.setOpacity(disActiveOpacity);
   }
