@@ -9,6 +9,7 @@ import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
+import {isBatteryMinusDisabled} from "../model/is-battery-minus-disabled";
 
 /** メッシュサイズ */
 const MESH_SIZE = 256;
@@ -23,22 +24,34 @@ type Param = {
 /** バッテリーマイナスボタン */
 export class BatteryMinus {
   _group: THREE.Group;
-  _mesh: SimpleImageMesh;
+  _activeButton: SimpleImageMesh;
+  _disActiveButton: SimpleImageMesh;
   _overlap: ButtonOverlap;
 
   constructor(param: Param) {
     this._group = new THREE.Group();
 
-    const imageResource = param.resources.canvasImages
+    const activeResource = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_MINUS);
-    const image = imageResource
-      ? imageResource.image
+    const active = activeResource
+      ? activeResource.image
       : new Image();
-    this._mesh = new SimpleImageMesh({
+    this._activeButton = new SimpleImageMesh({
       canvasSize: MESH_SIZE,
-      image: image
+      image: active
     });
-    this._group.add(this._mesh.getObject3D());
+    this._group.add(this._activeButton.getObject3D());
+
+    const disActiveResource = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_MINUS);
+    const disActive = disActiveResource
+      ? disActiveResource.image
+      : new Image();
+    this._disActiveButton = new SimpleImageMesh({
+      canvasSize: MESH_SIZE,
+      image: disActive
+    });
+    this._group.add(this._disActiveButton.getObject3D());
 
     this._overlap = circleButtonOverlap({
       radius: 80,
@@ -53,7 +66,11 @@ export class BatteryMinus {
 
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
-    this._mesh.setOpacity(model.opacity);
+    const isDisabled = isBatteryMinusDisabled(model);
+    const activeOpacity = isDisabled ? 0 : model.opacity;
+    const disActiveOpacity = isDisabled ? model.opacity : 0;
+    this._activeButton.setOpacity(activeOpacity);
+    this._disActiveButton.setOpacity(disActiveOpacity);
   }
 
   /** シーンに追加するオブジェクトを取得する */
