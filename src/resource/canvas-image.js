@@ -106,7 +106,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   },
   {
     id: CANVAS_IMAGE_IDS.BURST_BUTTON,
-    path: 'button/burst-button.png',
+    path: 'burst-button/burst-button.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_NUMBER,

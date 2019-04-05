@@ -1,6 +1,6 @@
 // @flow
 
-import {Observable, Subject} from 'rxjs';
+import {Observable} from 'rxjs';
 import type {Resources} from "../../resource";
 import * as THREE from "three";
 import {Group} from "@tweenjs/tween.js";
