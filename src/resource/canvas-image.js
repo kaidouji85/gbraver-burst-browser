@@ -73,7 +73,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'battery-selector/plus-button.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_BAR,
+    id: CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_PLUS,
     path: 'battery-selector/dis-active-plus-button.png',
   },
   {

@@ -16,8 +16,8 @@ import {changeNeedle} from "./animation/change-needle";
 import {getNeedleValue} from "./model/needle-value";
 import {open} from './animation/open';
 import {close} from './animation/close';
-import {plusBattery} from "./model/battery-change";
 import {isBatteryMinusDisabled} from "./model/is-battery-minus-disabled";
+import {isBatteryPlusDisabled} from "./model/is-battery-plus-disabled";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -55,12 +55,11 @@ export class BatterySelector {
         param.onOkButtonPush();
       },
       onPlusPush: () => {
-        if (this._model.disabled) {
+        if (this._model.disabled || isBatteryPlusDisabled(this._model)) {
           return;
         }
 
-        const battery = plusBattery(this._model);
-        this._batteryChange(battery);
+        this._batteryChange(this._model.battery + 1);
         param.onBatteryChange(this._model.battery);
       },
       onMinusPush: () => {
