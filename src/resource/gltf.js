@@ -25,6 +25,7 @@ export type GlTFResource = {
 /** IDリスト */
 export const GLTF_IDS = {
   SCHOOL: 'SCHOOL',
+  CITY: 'CITY',
 };
 
 /** 設定集 */
@@ -32,6 +33,10 @@ export const GLTF_CONFIGS: GlTFConfig[] = [
   {
     id: GLTF_IDS.SCHOOL,
     path: 'model/school/school.glb'
+  },
+  {
+    id: GLTF_IDS.CITY,
+    path: 'model/city.glb'
   }
 ];
 

@@ -4,12 +4,12 @@ import * as THREE from 'three';
 import type {GlTFResource} from "../../../resource/gltf";
 import {GLTF_IDS} from "../../../resource/gltf";
 
-/** 学校メッシュを生成する */
-export function createSchoolBuild(resources: Resources): THREE.Mesh {
-  const resource: ?GlTFResource = resources.gltfs.find(v => v.id === GLTF_IDS.SCHOOL);
+/** 都市メッシュを生成する */
+export function cityMesh(resources: Resources): THREE.Mesh {
+  const resource: ?GlTFResource = resources.gltfs.find(v => v.id === GLTF_IDS.CITY);
   const object = resource ? resource.object : new THREE.Mesh();
 
-  object.scale.set(300, 300, 300);
-  object.position.z = -200;
+  object.scale.set(1500, 1500, 1500);
+  object.position.z = 200;
   return object;
 }
