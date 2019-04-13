@@ -13,7 +13,6 @@ import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-
 export function appendScene(scene: THREE.Scene, armdozer: TDArmdozer<ArmDozerSprite>): void {
   scene.add(armdozer.sprite.getObject3D());
   scene.add(armdozer.hitMark.spark.getObject3D());
-  scene.add(armdozer.gauge.getObject3D());
   scene.add(armdozer.batteryNumber.getObject3D());
   scene.add(armdozer.recoverBattery.getObject3D());
   scene.add(armdozer.damageIndicator.getObject3D());

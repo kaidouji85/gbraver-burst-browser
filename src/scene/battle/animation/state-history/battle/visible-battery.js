@@ -16,19 +16,21 @@ export function visibleBattery(view: BattleSceneView, sceneState: BattleSceneSta
 
   const effect: Battle = gameState.effect;
   const attackerArmdozer = view.td.armdozers.find(v => v.playerId === effect.attacker);
+  const attackerHUD = view.hud.indicators.find(v => v.playerId === effect.attacker);
   const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
   const defenderArmdozer = view.td.armdozers.find(v => v.playerId !== effect.attacker);
+  const defenderHUD = view.hud.indicators.find(v => v.playerId !== effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
 
-  if (!attackerArmdozer || !attackerState || !defenderArmdozer || !defenderState) {
+  if (!attackerArmdozer || !attackerHUD || !attackerState || !defenderArmdozer || !defenderHUD || !defenderState) {
     return empty();
   }
 
   return all(
     attackerArmdozer.batteryNumber.popUp(effect.attackerBattery),
-    attackerArmdozer.gauge.battery(attackerState.armdozer.battery),
+    attackerHUD.gauge.battery(attackerState.armdozer.battery),
     defenderArmdozer.batteryNumber.popUp(effect.defenderBattery),
-    defenderArmdozer.gauge.battery(defenderState.armdozer.battery),
+    defenderHUD.gauge.battery(defenderState.armdozer.battery),
     delay(1200).chain(
       view.td.turnIndicator.invisible()
     )

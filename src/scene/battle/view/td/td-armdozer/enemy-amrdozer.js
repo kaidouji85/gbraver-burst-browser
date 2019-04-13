@@ -8,12 +8,11 @@ import {EnemyNeoLandozer} from "../../../../../game-object/armdozer/neo-landozer
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
-import {enemyGauge} from "../../../../../game-object/gauge";
 import {enemyBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator} from "../../../../../game-object/damage-indicator";
 import type {TDArmdozer} from "./td-armdozer";
-import {enemySpark, playerSpark} from "../../../../../game-object/hitmark/spark";
+import {enemySpark} from "../../../../../game-object/hitmark/spark";
 
 /** 敵のアームドーザオブジェクトを生成する */
 export function enemyArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDArmdozer<ArmDozerSprite> {
@@ -23,12 +22,6 @@ export function enemyArmdozerObjects(resources: Resources, state: PlayerState, l
     hitMark: {
       spark: enemySpark(resources, listener),
     },
-    gauge: enemyGauge({
-      listener: listener,
-      resources: resources,
-      hp: state.armdozer.maxHp,
-      battery: state.armdozer.maxBattery
-    }),
     batteryNumber: enemyBatteryNumber({
       resources: resources,
       listener: listener

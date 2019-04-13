@@ -20,7 +20,6 @@ export type TDArmdozer<T> = {
   hitMark: {
     spark: Spark
   },
-  gauge: Gauge,
   batteryNumber: BatteryNumber,
   recoverBattery: RecoverBattery,
   damageIndicator: DamageIndicator,
