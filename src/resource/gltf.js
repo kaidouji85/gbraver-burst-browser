@@ -24,14 +24,14 @@ export type GlTFResource = {
 
 /** IDリスト */
 export const GLTF_IDS = {
-  CITY: 'CITY',
+  SHOPPING_STREET: 'SHOPPING_STREET',
 };
 
 /** 設定集 */
 export const GLTF_CONFIGS: GlTFConfig[] = [
   {
-    id: GLTF_IDS.CITY,
-    path: 'model/city.glb'
+    id: GLTF_IDS.SHOPPING_STREET,
+    path: 'model/shopping-street.glb'
   }
 ];
 
