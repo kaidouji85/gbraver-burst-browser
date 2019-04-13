@@ -16,8 +16,10 @@ import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../action/game-loop/render";
 import {BattleHUDCamera} from "../../../../game-object/camera/battle-hud";
-import type {HUDIndicator} from "./hud-indicator";
-import {addHUDIndicator, enemyHUD, playerHUD} from "./hud-indicator";
+import type {HUDObjects} from "./player/hud-objects";
+import {enemyHUDObjects} from "./player/enemy";
+import {appendHUDPlayerObjects} from "./player/append-scene";
+import {playerHUDObjects} from "./player/player";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -45,7 +47,7 @@ export class HudLayer {
   camera: BattleHUDCamera;
   batterySelector: BatterySelector;
   burstButton: BurstButton;
-  indicators: HUDIndicator[];
+  indicators: HUDObjects[];
 
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
@@ -85,11 +87,11 @@ export class HudLayer {
     this.scene.add(this.burstButton.getObject3D());
 
     this.indicators = [
-      playerHUD(param.resources, gameObjectAction, player),
-      enemyHUD(param.resources, gameObjectAction, enemy),
+      playerHUDObjects(param.resources, gameObjectAction, player),
+      enemyHUDObjects(param.resources, gameObjectAction, enemy),
     ];
     this.indicators.forEach(v => {
-      addHUDIndicator(this.scene, v);
+      appendHUDPlayerObjects(this.scene, v);
     });
 
     param.listener.gameLoop.subscribe(action => {

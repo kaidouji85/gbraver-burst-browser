@@ -11,11 +11,18 @@ import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import {enemyBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator} from "../../../../../game-object/damage-indicator";
-import type {TDArmdozer} from "./td-armdozer";
+import type {TDObjects} from "./td-objects";
 import {enemySpark} from "../../../../../game-object/hitmark/spark";
 
-/** 敵のアームドーザオブジェクトを生成する */
-export function enemyArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDArmdozer<ArmDozerSprite> {
+/**
+ * 敵側の3Dプレイヤーオブジェクト
+ *
+ * @param resources リソース管理オブジェクト
+ * @param state プレイヤーステータス
+ * @param listener リスナー
+ * @return 3Dプレイヤーオブジェクト
+ */
+export function enemyTDObject(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDObjects<ArmDozerSprite> {
   return {
     playerId: state.playerId,
     sprite: createEnemySprite(resources, listener, state),

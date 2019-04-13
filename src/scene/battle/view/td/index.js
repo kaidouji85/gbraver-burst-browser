@@ -13,11 +13,11 @@ import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import type {TDArmdozer} from "./td-armdozer/td-armdozer";
-import {playerArmdozerObjects} from "./td-armdozer/player-armdozer";
-import {enemyArmdozerObjects} from "./td-armdozer/enemy-amrdozer";
+import type {TDObjects} from "./player/td-objects";
+import {playerTDObjects} from "./player/player";
+import {enemyTDObject} from "./player/enemy";
 import SchoolField from "../../../../game-object/stage/shopping-street";
-import {appendScene} from "./td-armdozer/append-scene";
+import {appendTDObjects} from "./player/append-scene";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 
 /** コンストラクタのパラメータ */
@@ -40,7 +40,7 @@ type Param = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
-  armdozers: TDArmdozer<ArmDozerSprite>[];
+  armdozers: TDObjects<ArmDozerSprite>[];
   stage: Stage;
   turnIndicator: TurnIndicator;
   _update: Subject<Update>;
@@ -68,11 +68,11 @@ export class ThreeDimensionLayer {
     });
 
     this.armdozers = [
-      playerArmdozerObjects(param.resources, player, gameObjectListener),
-      enemyArmdozerObjects(param.resources, enemy, gameObjectListener)
+      playerTDObjects(param.resources, player, gameObjectListener),
+      enemyTDObject(param.resources, enemy, gameObjectListener)
     ];
     this.armdozers.forEach(v => {
-      appendScene(this.scene, v);
+      appendTDObjects(this.scene, v);
     });
 
     this.stage = new SchoolField(param.resources);
