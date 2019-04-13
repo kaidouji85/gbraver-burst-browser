@@ -77,7 +77,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
   _refreshPos(): void {
     this._canvasMesh.mesh.position.x = 150;
     this._canvasMesh.mesh.position.y = 150;
-    this._canvasMesh.mesh.position.z = 420;
+    this._canvasMesh.mesh.position.z = 20;
   }
 
   /** 透明度を更新する */

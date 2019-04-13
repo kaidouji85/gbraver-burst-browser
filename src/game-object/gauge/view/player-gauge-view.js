@@ -9,7 +9,7 @@ import type {Resources} from "../../../resource";
 import * as R from 'ramda';
 
 export const CANVAS_SIZE = 256;
-export const MESH_SIZE = 400;
+export const MESH_SIZE = 200;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
@@ -74,9 +74,10 @@ export class PlayerGaugeView implements GaugeView {
     });
   }
 
+  /** 座標をセットする */
   _setPos(): void {
-    this._canvasMesh.mesh.position.x = 200;
-    this._canvasMesh.mesh.position.y = 300;
-    this._canvasMesh.mesh.position.y = 400;
+    this._canvasMesh.mesh.position.x = 100;
+    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - 50;
+    this._canvasMesh.mesh.position.z = 0;
   }
 }

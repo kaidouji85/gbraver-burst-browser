@@ -7,27 +7,27 @@ import {PlayerNeoLandozer} from "../../../../../game-object/armdozer/neo-landoze
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
-import {playerGauge} from "../../../../../game-object/gauge";
 import {playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {playerDamageIndicator} from "../../../../../game-object/damage-indicator";
-import type {TDArmdozer} from "./td-armdozer";
+import type {TDObjects} from "./td-objects";
 import {playerSpark} from "../../../../../game-object/hitmark/spark";
 
-/** プレイヤーのアームドーザオブジェクトを生成する */
-export function playerArmdozerObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDArmdozer<ArmDozerSprite> {
+/**
+ * プレイヤー側の3Dプレイヤーオブジェクト
+ *
+ * @param resources リソース管理オブジェクト
+ * @param state プレイヤーステータス
+ * @param listener リスナー
+ * @return 3Dプレイヤーオブジェクト
+ */
+export function playerTDObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDObjects<ArmDozerSprite> {
   return {
     playerId: state.playerId,
     sprite: createPlayerSprite(resources, listener, state),
     hitMark: {
       spark: playerSpark(resources, listener),
     },
-    gauge: playerGauge({
-      resources: resources,
-      listener: listener,
-      hp: state.armdozer.maxHp,
-      battery: state.armdozer.maxBattery
-    }),
     batteryNumber: playerBatteryNumber({
       resources: resources,
       listener: listener

@@ -7,12 +7,12 @@ export function createInitialValue(): Battle3DCameraModel {
   return {
     position: {
       x: 0,
-      y: 200,
-      z: 1200
+      y: 230,
+      z: 400
     },
     target: {
       x: 0,
-      y: 0,
+      y: 200,
       z: 0
     }
   };

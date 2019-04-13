@@ -25,9 +25,10 @@ export function shinBraverAttack(view: BattleSceneView, sceneState: BattleSceneS
   const attackerArmdozer = view.td.armdozers.find(v => v.playerId === effect.attacker);
   const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
   const defenderArmdozer = view.td.armdozers.find(v => v.playerId !== effect.attacker);
+  const defenderHUD = view.hud.indicators.find(v => v.playerId !== effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
 
-  if (!attackerArmdozer || !attackerState || !defenderArmdozer || !defenderState) {
+  if (!attackerArmdozer || !attackerState || !defenderArmdozer || !defenderHUD || !defenderState) {
     return empty();
   }
 
@@ -43,7 +44,7 @@ export function shinBraverAttack(view: BattleSceneView, sceneState: BattleSceneS
       delay(700).chain(
         defenderArmdozer.damageIndicator.popUp(damage),
         defenderArmdozer.sprite.knockBack(),
-        defenderArmdozer.gauge.hp(defenderState.armdozer.hp),
+        defenderHUD.gauge.hp(defenderState.armdozer.hp),
         defenderArmdozer.hitMark.spark.popUp()
       )
     ).chain(
@@ -56,7 +57,7 @@ export function shinBraverAttack(view: BattleSceneView, sceneState: BattleSceneS
       delay(700).chain(
         defenderArmdozer.damageIndicator.popUp(damage),
         defenderArmdozer.sprite.guard(),
-        defenderArmdozer.gauge.hp(defenderState.armdozer.hp),
+        defenderHUD.gauge.hp(defenderState.armdozer.hp),
         defenderArmdozer.hitMark.spark.popUp()
       )
     ).chain(

@@ -7,7 +7,7 @@ export function createInitialValue(): SparkModel {
     position: {
       x: 150,
       y: 150,
-      z: 410,
+      z: 10,
     },
     animation: {
       frame: 0,
