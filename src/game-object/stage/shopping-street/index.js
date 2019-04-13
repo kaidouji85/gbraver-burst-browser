@@ -3,18 +3,18 @@
 import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import SkyBox from './blue-sky';
-import {cityMesh} from './school-build';
+import {shoppingStreetMesh} from './shopping-street';
 import {Stage} from "../stage";
 
-/** 学校ステージ */
-export default class SchoolStage implements Stage {
+/** 商店街 */
+export default class ShoppingStreet implements Stage {
   _skyBox: THREE.Mesh;
   _cityMesh: THREE.Mesh;
   _directionalLight: THREE.DirectionalLight;
   _ambientLight: THREE.AmbientLight;
 
   constructor(resources: Resources) {
-    this._cityMesh = cityMesh(resources);
+    this._cityMesh = shoppingStreetMesh(resources);
     this._skyBox = SkyBox(resources);
 
     this._directionalLight = new THREE.DirectionalLight(0xAAAAAA, 0.8);

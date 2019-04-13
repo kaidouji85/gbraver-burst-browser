@@ -118,12 +118,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     path: 'sky-box/blue-sky/down.png'
   },
 
-  // 学校 タイルマップ
-  {
-    id: TEXTURE_IDS.TILE_MAP_SCHOOL_GROUND,
-    path: 'tile-map/school-ground/map.png'
-  },
-
   // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SPARK,

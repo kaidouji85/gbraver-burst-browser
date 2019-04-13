@@ -16,7 +16,7 @@ import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicat
 import type {TDArmdozer} from "./td-armdozer/td-armdozer";
 import {playerArmdozerObjects} from "./td-armdozer/player-armdozer";
 import {enemyArmdozerObjects} from "./td-armdozer/enemy-amrdozer";
-import SchoolField from "../../../../game-object/stage/school";
+import SchoolField from "../../../../game-object/stage/shopping-street";
 import {appendScene} from "./td-armdozer/append-scene";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 
