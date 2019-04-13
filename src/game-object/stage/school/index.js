@@ -5,7 +5,6 @@ import * as THREE from 'three';
 import SkyBox from './blue-sky';
 import {cityMesh} from './school-build';
 import {Stage} from "../stage";
-import {createGround} from "./ground";
 
 /** 学校ステージ */
 export default class SchoolStage implements Stage {

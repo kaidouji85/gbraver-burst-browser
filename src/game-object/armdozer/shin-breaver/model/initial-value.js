@@ -7,7 +7,7 @@ export function createInitialValue(): ShinBraverModel {
     position: {
       x: 150,
       y: 0,
-      z: 400
+      z: 0
     },
     animation: {
       type: 'STAND',

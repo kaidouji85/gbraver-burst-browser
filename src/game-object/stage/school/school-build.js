@@ -8,8 +8,6 @@ import {GLTF_IDS} from "../../../resource/gltf";
 export function cityMesh(resources: Resources): THREE.Mesh {
   const resource: ?GlTFResource = resources.gltfs.find(v => v.id === GLTF_IDS.CITY);
   const object = resource ? resource.object : new THREE.Mesh();
-
-  object.scale.set(1500, 1500, 1500);
-  object.position.z = 200;
+  object.scale.set(400, 400, 400);
   return object;
 }

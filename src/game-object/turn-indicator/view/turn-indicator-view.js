@@ -45,7 +45,7 @@ export class TurnIndicatorView {
   _setPos(): void {
     this._canvasMesh.mesh.position.x = 0;
     this._canvasMesh.mesh.position.y = 150;
-    this._canvasMesh.mesh.position.z = 420;
+    this._canvasMesh.mesh.position.z = 20;
   }
 
   /** 透明度を設定 */
