@@ -10,7 +10,7 @@ import {drawPlusNumberCenter} from "../../../canvas/number/number";
 import type {Resources} from "../../../resource";
 
 export const CANVAS_SIZE = 256;
-export const MESH_SIZE = 320;
+export const MESH_SIZE = 220;
 
 export class PlayerRecoverBatteryView implements RecoverBatteryView {
   _canvasMesh: CanvasMesh;
