@@ -10,14 +10,15 @@ import {empty} from "../../../../animation/delay";
 /** ターン変更のアニメーション */
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const activeArmdozer = view.td.armdozers.find(v => v.playerId === gameState.activePlayerId);
+  const activeHUD = view.hud.indicators.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeArmdozer || !activeStatus) {
+  if (!activeArmdozer || !activeHUD || !activeStatus) {
     return empty();
   }
 
   return all(
     // TODO バッテリー回復値をeffectに持たせる
     activeArmdozer.recoverBattery.popUp(3),
-    activeArmdozer.gauge.battery(activeStatus.armdozer.battery),
+    activeHUD.gauge.battery(activeStatus.armdozer.battery),
   );
 }

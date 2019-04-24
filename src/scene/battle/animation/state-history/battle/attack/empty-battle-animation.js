@@ -31,14 +31,15 @@ export function emptyBattleAnimation(view: BattleSceneView, sceneState: BattleSc
   const effect: Battle = gameState.effect;
   const attackerArmdozer = view.td.armdozers.find(v => v.playerId === effect.attacker);
   const defenderArmdozer = view.td.armdozers.find(v => v.playerId !== effect.attacker);
+  const defenderHUD = view.hud.indicators.find(v => v.playerId !== effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
 
-  if (!attackerArmdozer || !defenderArmdozer || !defenderState) {
+  if (!attackerArmdozer || !defenderArmdozer || !defenderHUD || !defenderState) {
     return empty();
   }
 
   return all(
     damageIndicatorAnimation(defenderArmdozer.damageIndicator, effect.result),
-    defenderArmdozer.gauge.hp(defenderState.armdozer.hp)
+    defenderHUD.gauge.hp(defenderState.armdozer.hp)
   );
 }

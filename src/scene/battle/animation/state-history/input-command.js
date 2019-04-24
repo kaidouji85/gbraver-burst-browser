@@ -25,9 +25,11 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const effect: InputCommand = gameState.effect;
   const player = gameState.players.find(v => v.playerId === sceneState.playerId);
   const playerArmdozer = view.td.armdozers.find(v => v.playerId === sceneState.playerId);
+  const playerHUD = view.hud.indicators.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
   const enemyArmdozer = view.td.armdozers.find(v => v.playerId !== sceneState.playerId);
-  if (!player || !playerArmdozer || !enemy || !enemyArmdozer) {
+  const enemyHUD = view.hud.indicators.find(v => v.playerId !== sceneState.playerId);
+  if (!player || !playerArmdozer || !playerHUD || !enemy || !enemyHUD || !enemyArmdozer) {
     return empty();
   }
 
@@ -37,10 +39,10 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   return all(
     delay(500),
-    playerArmdozer.gauge.hp(player.armdozer.hp),
-    playerArmdozer.gauge.battery(player.armdozer.battery),
-    enemyArmdozer.gauge.hp(enemy.armdozer.hp),
-    enemyArmdozer.gauge.battery(enemy.armdozer.battery),
+    playerHUD.gauge.hp(player.armdozer.hp),
+    playerHUD.gauge.battery(player.armdozer.battery),
+    enemyHUD.gauge.hp(enemy.armdozer.hp),
+    enemyHUD.gauge.battery(enemy.armdozer.battery),
     view.td.turnIndicator.turnChange(isPlayerTurn),
     view.hud.batterySelector.open(initialValue, enableMax, okButtonLabel),
     view.hud.burstButton.visible()

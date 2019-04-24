@@ -16,6 +16,10 @@ import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../action/game-loop/render";
 import {BattleHUDCamera} from "../../../../game-object/camera/battle-hud";
+import type {HUDObjects} from "./player/hud-objects";
+import {enemyHUDObjects} from "./player/enemy";
+import {appendHUDPlayerObjects} from "./player/append-scene";
+import {playerHUDObjects} from "./player/player";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -43,6 +47,7 @@ export class HudLayer {
   camera: BattleHUDCamera;
   batterySelector: BatterySelector;
   burstButton: BurstButton;
+  indicators: HUDObjects[];
 
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
@@ -60,8 +65,10 @@ export class HudLayer {
     this._preRender = new Subject();
     this._render = param.notifier.render;
 
-    const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
-    const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
+    const player = param.players.find(v => v.playerId === param.playerId)
+      || param.players[0];
+    const enemy = param.players.find(v => v.playerId !== param.playerId)
+      || param.players[0];
     const gameObjectAction: Observable<GameObjectAction> = merge(
       toOverlapObservable(param.listener.domEvent, param.rendererDOM, this.camera.getCamera()),
       this._update,
@@ -78,6 +85,14 @@ export class HudLayer {
 
     this.burstButton = createBurstButton(param.resources, gameObjectAction);
     this.scene.add(this.burstButton.getObject3D());
+
+    this.indicators = [
+      playerHUDObjects(param.resources, gameObjectAction, player),
+      enemyHUDObjects(param.resources, gameObjectAction, enemy),
+    ];
+    this.indicators.forEach(v => {
+      appendHUDPlayerObjects(this.scene, v);
+    });
 
     param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);
