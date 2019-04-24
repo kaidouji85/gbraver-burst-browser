@@ -11,7 +11,7 @@ import * as THREE from 'three';
 import * as R from 'ramda';
 
 export const CANVAS_SIZE = 128;
-export const MESH_SIZE = 180;
+export const MESH_SIZE = 140;
 
 /** プレイヤーのバッテリー数字ビュー */
 export class PlayerBatteryNumberView implements BatteryNumberView {
