@@ -1,7 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
+const Puid = require('puid');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BUILD_PATH = 'build/production';
+
+const resourceHash = new Puid().generate();
 
 module.exports = {
   mode: 'development',
@@ -32,10 +36,13 @@ module.exports = {
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, "resources"),
-      to: path.resolve(__dirname, BUILD_PATH)
+      to: path.resolve(__dirname, BUILD_PATH, resourceHash)
     }, {
       from: path.resolve(__dirname, "manifest.json"),
       to: path.resolve(__dirname, BUILD_PATH)
-    }])
+    }]),
+    new webpack.DefinePlugin({
+      GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(resourceHash),
+    }),
   ]
 };
