@@ -7,7 +7,7 @@ import {HorizontalArmdozerAnimation} from "../../mesh/horizontal-animation";
 
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
-export const MAX_ANIMATION = 8;
+export const MAX_ANIMATION = 4;
 
 /** ストレートパンチ -> 立ち */
 export function shinBraverSPToStand(resources: Resources): ArmdozerAnimation {

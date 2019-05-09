@@ -5,10 +5,11 @@ import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {Animate} from "../../../../animation/animate";
 import {delay} from "../../../../animation/delay";
+import {all} from '../../../../animation/all';
 
 /** ストレートパンチ */
 export function straightPunch(model: ShinBraverModel): Animate {
-  return process(() => {
+  const animation = process(() => {
     model.animation.type = 'SP_CHARGE';
     model.animation.frame = 0;
   }).chain(
@@ -35,12 +36,25 @@ export function straightPunch(model: ShinBraverModel): Animate {
     })
   ).chain(
     tween(model.animation, t => t
-      .to({frame: 1}, 500)
+      .to({frame: 1}, 250)
     )
   ).chain(
     process(() => {
       model.animation.type = 'STAND';
       model.animation.frame = 0;
     })
-  )
+  );
+  const move = delay(550)
+    .chain(tween(model.position, t => t
+      .to({x: '-80'}, 250)
+    )).chain(
+      delay(100)
+    ).chain(tween(model.position, t => t
+      .to({x: '+80'}, 250)
+    ));
+
+  return all(
+    animation,
+    move
+  );
 }
