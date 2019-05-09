@@ -16,7 +16,7 @@ async function main() {
   loadServiceWorker();
   viewPerformanceStatics(document.body);
 
-  const resources = await loadAllResource('');
+  const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
 
   const renderer = createRender();
   if (renderer.domElement && document.body) {

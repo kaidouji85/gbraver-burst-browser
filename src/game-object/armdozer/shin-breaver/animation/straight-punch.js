@@ -5,6 +5,7 @@ import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {Animate} from "../../../../animation/animate";
 import {delay} from "../../../../animation/delay";
+import {all} from '../../../../animation/all';
 
 /** ストレートパンチ */
 export function straightPunch(model: ShinBraverModel): Animate {
@@ -25,9 +26,12 @@ export function straightPunch(model: ShinBraverModel): Animate {
   ).chain(
     tween(model.animation, t => t
       .to({frame: 1}, 250)
-    )
+    ),
+    tween(model.position, t => t
+      .to({x: '-80'}, 250)
+    ),
   ).chain(
-    delay(100)
+    delay(500)
   ).chain(
     process(() => {
       model.animation.type = 'SP_TO_STAND';
@@ -36,11 +40,14 @@ export function straightPunch(model: ShinBraverModel): Animate {
   ).chain(
     tween(model.animation, t => t
       .to({frame: 1}, 500)
-    )
+    ),
+    tween(model.position, t => t
+      .to({x: '+80'}, 500)
+    ),
   ).chain(
     process(() => {
       model.animation.type = 'STAND';
       model.animation.frame = 0;
     })
-  )
+  );
 }

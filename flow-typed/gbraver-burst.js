@@ -1,0 +1,1 @@
+declare var GBRAVER_BURST_RESOURCE_HASH: string;
