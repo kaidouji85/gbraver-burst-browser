@@ -40,9 +40,6 @@ export class ThreeDimensionLayer {
   camera: Battle3DCamera;
   players: TDPlayer<ArmDozerSprite>[];
   gameObjects: TDGameObjects;
-  stage: Stage; // TODO 削除する
-  turnIndicator: TurnIndicator; // TODO 削除する
-
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
