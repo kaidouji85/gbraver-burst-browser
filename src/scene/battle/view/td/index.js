@@ -1,7 +1,6 @@
 // @flow
 import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
-import type {Stage} from "../../../../game-object/stage/stage";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {merge, Observable, Observer, Subject} from "rxjs";
 import type {GameObjectAction} from "../../../../action/game-object-action";
@@ -11,7 +10,6 @@ import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
-import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
 import type {TDPlayer} from "./player";
 import {appendTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";

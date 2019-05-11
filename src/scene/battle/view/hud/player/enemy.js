@@ -5,7 +5,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import {enemyGauge} from "../../../../../game-object/gauge";
-import type {HUDObjects} from "./hud-objects";
+import type {HUDPlayer} from "./index";
 
 /**
  * 敵HUDオブジェクト
@@ -15,7 +15,7 @@ import type {HUDObjects} from "./hud-objects";
  * @param player プレイヤーステータス
  * @return HUDオブジェクト
  */
-export function enemyHUDObjects(resources: Resources, listener: Observable<GameObjectAction>, player: Player): HUDObjects {
+export function enemyHUDObjects(resources: Resources, listener: Observable<GameObjectAction>, player: Player): HUDPlayer {
   return {
     playerId: player.playerId,
     gauge: enemyGauge({

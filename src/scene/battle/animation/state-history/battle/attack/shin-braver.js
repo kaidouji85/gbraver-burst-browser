@@ -25,7 +25,7 @@ export function shinBraverAttack(view: BattleSceneView, sceneState: BattleSceneS
   const attackerArmdozer = view.td.players.find(v => v.playerId === effect.attacker);
   const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
   const defenderArmdozer = view.td.players.find(v => v.playerId !== effect.attacker);
-  const defenderHUD = view.hud.indicators.find(v => v.playerId !== effect.attacker);
+  const defenderHUD = view.hud.players.find(v => v.playerId !== effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
 
   if (!attackerArmdozer || !attackerState || !defenderArmdozer || !defenderHUD || !defenderState) {

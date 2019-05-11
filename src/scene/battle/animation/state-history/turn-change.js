@@ -10,7 +10,7 @@ import {empty} from "../../../../animation/delay";
 /** ターン変更のアニメーション */
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const activeArmdozer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
-  const activeHUD = view.hud.indicators.find(v => v.playerId === gameState.activePlayerId);
+  const activeHUD = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
   if (!activeArmdozer || !activeHUD || !activeStatus) {
     return empty();
