@@ -37,3 +37,30 @@ export function appendTDPlayer(scene: THREE.Scene, player: TDPlayer<ArmDozerSpri
   scene.add(player.recoverBattery.getObject3D());
   scene.add(player.damageIndicator.getObject3D());
 }
+
+/**
+ * 3Dプレイヤーオブジェクトのスプライトを、引数で上書きする
+ * その際にスプライトのデータ型も変更する
+ * 本関数はスプライトの型キャストに使用する想定である
+ *
+ * 例)
+ * const target: TDPlayer<ArmdozerSprite> = {...}
+ * const sprite = target.sprite;
+ * if (sprite instanceof ShinBraver) {
+ *   const cast: TDPlayer<ShinBraver> = overWriteTDSprite(target, sprite);
+ * }
+ *
+ * @param target 上書き対象の3Dプレイヤー
+ * @param sprite 上書きするスプライト
+ * @return 上書き結果
+ */
+export function overWriteTDSprite<T>(target: TDPlayer<ArmDozerSprite>, sprite: T): TDPlayer<T> {
+  return {
+    sprite: sprite,
+    playerId: target.playerId,
+    hitMark: target.hitMark,
+    batteryNumber: target.batteryNumber,
+    recoverBattery: target.recoverBattery,
+    damageIndicator: target.damageIndicator,
+  };
+}
