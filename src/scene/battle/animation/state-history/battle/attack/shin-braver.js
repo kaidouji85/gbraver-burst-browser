@@ -5,6 +5,7 @@ import {empty} from "../../../../../../animation/delay";
 import type {AttackAnimationParam} from "./animation-param";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";
 import type {BattleResult, CriticalHit, NormalHit} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import {overWriteAttaclAnimResult} from "./animation-param";
 
 /**
  * 新ブレイバーの攻撃アニメーション
@@ -14,11 +15,10 @@ import type {BattleResult, CriticalHit, NormalHit} from "gbraver-burst-core/lib/
  */
 export function shinBraverAttack(param: AttackAnimationParam<ShinBraver, BattleResult>): Animate {
 
-  /*
-  if (param.result.name === 'NormalHit') {
-    return attack(param);
+  const result = param.result;
+  if (result.name === 'NormalHit') {
+    return attack(overWriteAttaclAnimResult(param, result));
   }
-  */
 
   return empty();
 }

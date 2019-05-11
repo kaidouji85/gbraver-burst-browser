@@ -24,3 +24,25 @@ export type AttackAnimationParam<SPRITE, RESULT> = {
   hudObjects: HUDGameObjects,
   result: RESULT
 };
+
+/**
+ * 攻撃アニメーションパラメータの戦闘結果を引数の内容で上書きする
+ * さらに、resultのデータ型を引数の内容に変更する
+ *
+ * @param param 上書き対象
+ * @param result 上書きする戦闘結果
+ * @return 上書き結果
+ */
+export function overWriteAttaclAnimResult<S, OLD_RESULT, NEW_RESULT>(param: AttackAnimationParam<S, OLD_RESULT>, result: NEW_RESULT): AttackAnimationParam<S, NEW_RESULT> {
+  return {
+    attackerState: param.attackerState,
+    attackerTD: param.attackerTD,
+    attackerHUD: param.attackerHUD,
+    defenderState: param.defenderState,
+    defenderTD: param.defenderTD,
+    defenderHUD: param.defenderHUD,
+    tdObjects: param.tdObjects,
+    hudObjects: param.hudObjects,
+    result: result
+  };
+}
