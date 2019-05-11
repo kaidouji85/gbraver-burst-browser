@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import type {Stage} from "../../../../game-object/stage/stage";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {merge, Observable, Observer, Subject} from "rxjs";
-import {filter, map} from 'rxjs/operators';
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
@@ -13,11 +12,11 @@ import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import type {TDObjects} from "./player/td-objects";
+import type {TdPlayer} from "./player";
+import {appendTDObjects} from "./player";
 import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
 import SchoolField from "../../../../game-object/stage/shopping-street";
-import {appendTDObjects} from "./player/append-scene";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 
 /** コンストラクタのパラメータ */
@@ -34,13 +33,11 @@ type Param = {
   }
 };
 
-/**
- *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
- */
+/** 3Dレイヤー */
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
-  armdozers: TDObjects<ArmDozerSprite>[];
+  players: TdPlayer<ArmDozerSprite>[];
   stage: Stage;
   turnIndicator: TurnIndicator;
   _update: Subject<Update>;
@@ -67,11 +64,11 @@ export class ThreeDimensionLayer {
       }
     });
 
-    this.armdozers = [
+    this.players = [
       playerTDObjects(param.resources, player, gameObjectListener),
       enemyTDObject(param.resources, enemy, gameObjectListener)
     ];
-    this.armdozers.forEach(v => {
+    this.players.forEach(v => {
       appendTDObjects(this.scene, v);
     });
 

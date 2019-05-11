@@ -29,8 +29,8 @@ export function emptyBattleAnimation(view: BattleSceneView, sceneState: BattleSc
   }
 
   const effect: Battle = gameState.effect;
-  const attackerArmdozer = view.td.armdozers.find(v => v.playerId === effect.attacker);
-  const defenderArmdozer = view.td.armdozers.find(v => v.playerId !== effect.attacker);
+  const attackerArmdozer = view.td.players.find(v => v.playerId === effect.attacker);
+  const defenderArmdozer = view.td.players.find(v => v.playerId !== effect.attacker);
   const defenderHUD = view.hud.indicators.find(v => v.playerId !== effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
 

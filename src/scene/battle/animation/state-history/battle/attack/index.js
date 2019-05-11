@@ -15,7 +15,7 @@ export function attackAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   }
 
   const effect: Battle = gameState.effect;
-  const attackerArmdozer = view.td.armdozers.find(v => v.playerId === effect.attacker);
+  const attackerArmdozer = view.td.players.find(v => v.playerId === effect.attacker);
 
   if (!attackerArmdozer) {
     return empty();
