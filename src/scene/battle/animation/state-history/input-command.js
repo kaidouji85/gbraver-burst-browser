@@ -43,7 +43,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     playerHUD.gauge.battery(player.armdozer.battery),
     enemyHUD.gauge.hp(enemy.armdozer.hp),
     enemyHUD.gauge.battery(enemy.armdozer.battery),
-    view.td.turnIndicator.turnChange(isPlayerTurn),
+    view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
     view.hud.batterySelector.open(initialValue, enableMax, okButtonLabel),
     view.hud.burstButton.visible()
   )

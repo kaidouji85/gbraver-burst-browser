@@ -40,6 +40,6 @@ export function createTDGameObjects(resources: Resources, listener: Observable<G
 export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): void {
   target.stage.getThreeJsObjects()
     .forEach(item => scene.add(item));
-  scene.add(this.turnIndicator.getObject3D());
+  scene.add(target.turnIndicator.getObject3D());
 
 }

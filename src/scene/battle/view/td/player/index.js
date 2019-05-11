@@ -13,7 +13,7 @@ import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-
  *
  * @type T アームドーザスプライト
  */
-export type TdPlayer<T> = {
+export type TDPlayer<T> = {
   playerId: PlayerId,
   sprite: T,
   hitMark: {
@@ -28,12 +28,12 @@ export type TdPlayer<T> = {
  * 3Dプレイヤーゲームオブジェクトをシーンに追加するヘルパー関数
  *
  * @param scene シーン
- * @param armdozer シーンに追加するオブジェクト群
+ * @param player シーンに追加するオブジェクト群
  */
-export function appendTDObjects(scene: THREE.Scene, armdozer: TdPlayer<ArmDozerSprite>): void {
-  scene.add(armdozer.sprite.getObject3D());
-  scene.add(armdozer.hitMark.spark.getObject3D());
-  scene.add(armdozer.batteryNumber.getObject3D());
-  scene.add(armdozer.recoverBattery.getObject3D());
-  scene.add(armdozer.damageIndicator.getObject3D());
+export function appendTDPlayer(scene: THREE.Scene, player: TDPlayer<ArmDozerSprite>): void {
+  scene.add(player.sprite.getObject3D());
+  scene.add(player.hitMark.spark.getObject3D());
+  scene.add(player.batteryNumber.getObject3D());
+  scene.add(player.recoverBattery.getObject3D());
+  scene.add(player.damageIndicator.getObject3D());
 }

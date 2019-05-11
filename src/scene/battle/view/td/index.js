@@ -12,14 +12,13 @@ import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import type {TdPlayer} from "./player";
-import {appendTDObjects} from "./player";
+import type {TDPlayer} from "./player";
+import {appendTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
-import SchoolField from "../../../../game-object/stage/shopping-street";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "./game-objects";
-import {createTDGameObjects} from "./game-objects";
+import {appendTDGameObjects, createTDGameObjects} from "./game-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -39,7 +38,7 @@ type Param = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
-  players: TdPlayer<ArmDozerSprite>[];
+  players: TDPlayer<ArmDozerSprite>[];
   gameObjects: TDGameObjects;
   stage: Stage; // TODO 削除する
   turnIndicator: TurnIndicator; // TODO 削除する
@@ -73,20 +72,11 @@ export class ThreeDimensionLayer {
       enemyTDObject(param.resources, enemy, gameObjectListener)
     ];
     this.players.forEach(v => {
-      appendTDObjects(this.scene, v);
+      appendTDPlayer(this.scene, v);
     });
 
     this.gameObjects = createTDGameObjects(param.resources, gameObjectListener);
-
-    this.stage = new SchoolField(param.resources);
-    this.stage.getThreeJsObjects()
-      .forEach(item => this.scene.add(item));
-
-    this.turnIndicator = new TurnIndicator({
-      listener: gameObjectListener,
-      resources: param.resources
-    });
-    this.scene.add(this.turnIndicator.getObject3D());
+    appendTDGameObjects(this.scene, this.gameObjects);
 
     param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);

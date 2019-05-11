@@ -32,7 +32,7 @@ export function visibleBattery(view: BattleSceneView, sceneState: BattleSceneSta
     defenderArmdozer.batteryNumber.popUp(effect.defenderBattery),
     defenderHUD.gauge.battery(defenderState.armdozer.battery),
     delay(1200).chain(
-      view.td.turnIndicator.invisible()
+      view.td.gameObjects.turnIndicator.invisible()
     )
   );
 

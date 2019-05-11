@@ -10,7 +10,7 @@ import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import {playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {playerDamageIndicator} from "../../../../../game-object/damage-indicator";
-import type {TdPlayer} from "./index";
+import type {TDPlayer} from "./index";
 import {playerSpark} from "../../../../../game-object/hitmark/spark";
 
 /**
@@ -21,7 +21,7 @@ import {playerSpark} from "../../../../../game-object/hitmark/spark";
  * @param listener リスナー
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TdPlayer<ArmDozerSprite> {
+export function playerTDObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDPlayer<ArmDozerSprite> {
   return {
     playerId: state.playerId,
     sprite: createPlayerSprite(resources, listener, state),
