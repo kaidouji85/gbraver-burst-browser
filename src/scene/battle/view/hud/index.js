@@ -1,11 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/index';
-import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {createBatterySelector} from "./battery-selector";
-import {BurstButton} from "../../../../game-object/burst-button/burst-button";
-import {createBurstButton} from "./burst-button";
 import {merge, Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
@@ -21,7 +17,7 @@ import {appendHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
 import type {HUDGameObjects} from "./game-objects";
-import {createHUDGameObjects} from "./game-objects";
+import {appendHUDGameObjects, createHUDGameObjects} from "./game-objects";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -49,10 +45,6 @@ export class HudLayer {
   camera: BattleHUDCamera;
   players: HUDPlayer[];
   gameObjects: HUDGameObjects;
-
-  batterySelector: BatterySelector; // TODO 削除する
-  burstButton: BurstButton; // TODO 削除する
-
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
@@ -88,17 +80,7 @@ export class HudLayer {
     });
 
     this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, param.notifier.battleAction, player);
-
-    this.batterySelector = createBatterySelector({
-      resources: param.resources,
-      listener: gameObjectAction,
-      notifier: param.notifier.battleAction,
-      playerInfo: player
-    });
-    this.scene.add(this.batterySelector.getObject3D());
-
-    this.burstButton = createBurstButton(param.resources, gameObjectAction);
-    this.scene.add(this.burstButton.getObject3D());
+    appendHUDGameObjects(this.scene, this.gameObjects);
 
     param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);

@@ -15,6 +15,15 @@ export type HUDGameObjects = {
   burstButton: BurstButton;
 };
 
+/**
+ * HUDレイヤーゲームオブジェクトを生成する
+ *
+ * @param resources リソース管理オブジェクト
+ * @param listener イベントリスナ
+ * @param notifier イベント通知
+ * @param playerInfo プレイヤーの情報
+ * @return HUDゲームオブジェクト
+ */
 export function createHUDGameObjects(resources: Resources, listener: Observable<GameObjectAction>, notifier: Observer<BattleSceneAction>, playerInfo: Player) {
   const batterySelector = new BatterySelector({
     listener: listener,
@@ -44,6 +53,12 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
   };
 }
 
+/**
+ * HUDレイヤーゲームオブジェクトをシーンに追加する
+ *
+ * @param scene 追加するシーン
+ * @param target HUDレイヤーゲームオブジェクト
+ */
 export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects): void {
   scene.add(target.batterySelector.getObject3D());
   scene.add(target.burstButton.getObject3D());
