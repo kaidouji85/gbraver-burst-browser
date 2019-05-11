@@ -33,7 +33,7 @@ export type AttackAnimationParam<SPRITE, RESULT> = {
  * @param result 上書きする戦闘結果
  * @return 上書き結果
  */
-export function overWriteAttaclAnimResult<S, OLD_RESULT, NEW_RESULT>(param: AttackAnimationParam<S, OLD_RESULT>, result: NEW_RESULT): AttackAnimationParam<S, NEW_RESULT> {
+export function overWriteAttackAnimResult<S, OLD_RESULT, NEW_RESULT>(param: AttackAnimationParam<S, OLD_RESULT>, result: NEW_RESULT): AttackAnimationParam<S, NEW_RESULT> {
   return {
     attackerState: param.attackerState,
     attackerTD: param.attackerTD,
