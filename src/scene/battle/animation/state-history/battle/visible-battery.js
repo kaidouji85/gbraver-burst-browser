@@ -15,21 +15,21 @@ export function visibleBattery(view: BattleSceneView, sceneState: BattleSceneSta
   }
 
   const effect: Battle = gameState.effect;
-  const attackerArmdozer = view.td.players.find(v => v.playerId === effect.attacker);
+  const attackerTD = view.td.players.find(v => v.playerId === effect.attacker);
   const attackerHUD = view.hud.players.find(v => v.playerId === effect.attacker);
   const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
-  const defenderArmdozer = view.td.players.find(v => v.playerId !== effect.attacker);
+  const defenderTD = view.td.players.find(v => v.playerId !== effect.attacker);
   const defenderHUD = view.hud.players.find(v => v.playerId !== effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
 
-  if (!attackerArmdozer || !attackerHUD || !attackerState || !defenderArmdozer || !defenderHUD || !defenderState) {
+  if (!attackerTD || !attackerHUD || !attackerState || !defenderTD || !defenderHUD || !defenderState) {
     return empty();
   }
 
   return all(
-    attackerArmdozer.batteryNumber.popUp(effect.attackerBattery),
+    attackerTD.batteryNumber.popUp(effect.attackerBattery),
     attackerHUD.gauge.battery(attackerState.armdozer.battery),
-    defenderArmdozer.batteryNumber.popUp(effect.defenderBattery),
+    defenderTD.batteryNumber.popUp(effect.defenderBattery),
     defenderHUD.gauge.battery(defenderState.armdozer.battery),
     delay(1200).chain(
       view.td.gameObjects.turnIndicator.invisible()

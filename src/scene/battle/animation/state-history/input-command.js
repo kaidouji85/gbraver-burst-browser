@@ -24,12 +24,12 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
 
   const effect: InputCommand = gameState.effect;
   const player = gameState.players.find(v => v.playerId === sceneState.playerId);
-  const playerArmdozer = view.td.players.find(v => v.playerId === sceneState.playerId);
+  const playerTD = view.td.players.find(v => v.playerId === sceneState.playerId);
   const playerHUD = view.hud.players.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
-  const enemyArmdozer = view.td.players.find(v => v.playerId !== sceneState.playerId);
+  const enemyTD = view.td.players.find(v => v.playerId !== sceneState.playerId);
   const enemyHUD = view.hud.players.find(v => v.playerId !== sceneState.playerId);
-  if (!player || !playerArmdozer || !playerHUD || !enemy || !enemyHUD || !enemyArmdozer) {
+  if (!player || !playerTD || !playerHUD || !enemy || !enemyHUD || !enemyTD) {
     return empty();
   }
 
