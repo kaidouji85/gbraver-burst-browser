@@ -18,6 +18,8 @@ import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
 import SchoolField from "../../../../game-object/stage/shopping-street";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
+import type {TDGameObjects} from "./game-objects";
+import {createTDGameObjects} from "./game-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -38,8 +40,10 @@ export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
   players: TdPlayer<ArmDozerSprite>[];
-  stage: Stage;
-  turnIndicator: TurnIndicator;
+  gameObjects: TDGameObjects;
+  stage: Stage; // TODO 削除する
+  turnIndicator: TurnIndicator; // TODO 削除する
+
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
@@ -71,6 +75,8 @@ export class ThreeDimensionLayer {
     this.players.forEach(v => {
       appendTDObjects(this.scene, v);
     });
+
+    this.gameObjects = createTDGameObjects(param.resources, gameObjectListener);
 
     this.stage = new SchoolField(param.resources);
     this.stage.getThreeJsObjects()
