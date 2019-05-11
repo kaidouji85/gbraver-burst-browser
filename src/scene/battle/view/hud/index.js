@@ -20,6 +20,8 @@ import type {HUDPlayer} from "./player";
 import {appendHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
+import type {HUDGameObjects} from "./game-objects";
+import {createHUDGameObjects} from "./game-objects";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -46,8 +48,11 @@ export class HudLayer {
   scene: THREE.Scene;
   camera: BattleHUDCamera;
   players: HUDPlayer[];
-  batterySelector: BatterySelector;
-  burstButton: BurstButton;
+  gameObjects: HUDGameObjects;
+
+  batterySelector: BatterySelector; // TODO 削除する
+  burstButton: BurstButton; // TODO 削除する
+
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
@@ -81,6 +86,8 @@ export class HudLayer {
     this.players.forEach(v => {
       appendHUDPlayer(this.scene, v);
     });
+
+    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, param.notifier.battleAction, player);
 
     this.batterySelector = createBatterySelector({
       resources: param.resources,

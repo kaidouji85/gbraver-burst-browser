@@ -3,7 +3,7 @@
 import type {Resources} from "../../../../resource";
 import {BatterySelector} from "../../../../game-object/battery-selector";
 import type {Player} from "gbraver-burst-core/lib/player/player";
-import {Observable, Observer} from "rxjs";
+import {Observable, Observer} from "rxjs/index";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {GameObjectAction} from "../../../../action/game-object-action";
 
