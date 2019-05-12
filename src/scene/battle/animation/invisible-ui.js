@@ -8,7 +8,7 @@ import {Animate} from "../../../animation/animate";
 export function invisibleUI(view: BattleSceneView): Animate {
   return empty()
     .chain(
-      view.hud.batterySelector.close(),
-      view.hud.burstButton.invisible()
+      view.hud.gameObjects.batterySelector.close(),
+      view.hud.gameObjects.burstButton.invisible()
     )
 }

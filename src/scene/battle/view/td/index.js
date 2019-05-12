@@ -1,10 +1,8 @@
 // @flow
 import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
-import type {Stage} from "../../../../game-object/stage/stage";
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {merge, Observable, Observer, Subject} from "rxjs";
-import {filter, map} from 'rxjs/operators';
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
@@ -12,13 +10,13 @@ import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
-import {TurnIndicator} from "../../../../game-object/turn-indicator/turn-indicator";
-import type {TDObjects} from "./player/td-objects";
+import type {TDPlayer} from "./player";
+import {appendTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
-import SchoolField from "../../../../game-object/stage/shopping-street";
-import {appendTDObjects} from "./player/append-scene";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
+import type {TDGameObjects} from "./game-objects";
+import {appendTDGameObjects, createTDGameObjects} from "./game-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -34,15 +32,12 @@ type Param = {
   }
 };
 
-/**
- *  3D空間に関連するオブジェクト、つまりは関連する全役者をまとめたクラス
- */
+/** 3Dレイヤー */
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: Battle3DCamera;
-  armdozers: TDObjects<ArmDozerSprite>[];
-  stage: Stage;
-  turnIndicator: TurnIndicator;
+  players: TDPlayer<ArmDozerSprite>[];
+  gameObjects: TDGameObjects;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
@@ -67,23 +62,16 @@ export class ThreeDimensionLayer {
       }
     });
 
-    this.armdozers = [
+    this.players = [
       playerTDObjects(param.resources, player, gameObjectListener),
       enemyTDObject(param.resources, enemy, gameObjectListener)
     ];
-    this.armdozers.forEach(v => {
-      appendTDObjects(this.scene, v);
+    this.players.forEach(v => {
+      appendTDPlayer(this.scene, v);
     });
 
-    this.stage = new SchoolField(param.resources);
-    this.stage.getThreeJsObjects()
-      .forEach(item => this.scene.add(item));
-
-    this.turnIndicator = new TurnIndicator({
-      listener: gameObjectListener,
-      resources: param.resources
-    });
-    this.scene.add(this.turnIndicator.getObject3D());
+    this.gameObjects = createTDGameObjects(param.resources, gameObjectListener);
+    appendTDGameObjects(this.scene, this.gameObjects);
 
     param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);

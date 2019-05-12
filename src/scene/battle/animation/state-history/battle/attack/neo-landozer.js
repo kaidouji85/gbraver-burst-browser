@@ -1,84 +1,87 @@
 // @flow
 
-import {BattleSceneView} from "../../../../view";
-import type {BattleSceneState} from "../../../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import {delay, empty} from "../../../../../../animation/delay";
-import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
-import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {Animate} from "../../../../../../animation/animate";
+import type {AttackAnimationParam} from "./animation-param";
+import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
+import type {
+  BattleResult,
+  CriticalHit, Feint,
+  Guard, Miss,
+  NormalHit
+} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
+import {overWriteAttackAnimResult} from "./animation-param";
 
-/** ネオランドーザ攻撃 */
-export function neoLandozerAttack(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
-  if (gameState.effect.name !== 'Battle') {
-    return empty();
+/**
+ * ネオランドーザの攻撃アニメーション
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+export function neoLandozerAttack(param: AttackAnimationParam<NeoLandozer, BattleResult>): Animate {
+  const result = param.result;
+  switch (result.name) {
+    case 'NormalHit':
+    case 'CriticalHit':
+      return attack(overWriteAttackAnimResult(param, result));
+    case 'Guard':
+      return guard(overWriteAttackAnimResult(param, result));
+    case 'Miss':
+      return miss(overWriteAttackAnimResult(param, result));
+    case 'Feint':
+      return feint(overWriteAttackAnimResult(param, result));
+    default:
+      return empty();
   }
+}
 
-  const effect: Battle = gameState.effect;
-  const attackerArmdozer = view.td.armdozers.find(v => v.playerId === effect.attacker);
-  const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
-  const defenderArmdozer = view.td.armdozers.find(v => v.playerId !== effect.attacker);
-  const defenderHUD = view.hud.indicators.find(v => v.playerId !== effect.attacker);
-  const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
-
-  if (!attackerArmdozer || !attackerState || !defenderArmdozer || !defenderHUD || !defenderState) {
-    return empty();
-  }
-
-  if (!(attackerArmdozer.sprite instanceof NeoLandozer)) {
-    return empty();
-  }
-
-  const neoLandozer: NeoLandozer = attackerArmdozer.sprite;
-
-  const attack = (damage: number): Animate =>
-    all(
-      neoLandozer.armHammer(),
-      delay(800).chain(
-        defenderArmdozer.damageIndicator.popUp(damage),
-        defenderArmdozer.sprite.knockBack(),
-        defenderHUD.gauge.hp(defenderState.armdozer.hp),
-        defenderArmdozer.hitMark.spark.popUp(),
-      )
-    ).chain(
-      defenderArmdozer.sprite.knockBackToStand()
-    );
-
-  const guard = (damage: number): Animate => all(
-    neoLandozer.armHammer(),
+/** 通常ヒット、クリティカルヒット */
+function attack(param: AttackAnimationParam<NeoLandozer, NormalHit | CriticalHit>): Animate {
+  return all(
+    param.attackerTD.sprite.armHammer(),
     delay(800).chain(
-      defenderArmdozer.damageIndicator.popUp(damage),
-      defenderArmdozer.sprite.guard(),
-      defenderHUD.gauge.hp(defenderState.armdozer.hp),
-      defenderArmdozer.hitMark.spark.popUp(),
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderTD.sprite.knockBack(),
+      param.defenderTD.hitMark.spark.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
     )
   ).chain(
-    defenderArmdozer.sprite.guardToStand()
+    param.defenderTD.sprite.knockBackToStand()
   );
+}
 
-  const miss = (): Animate =>
-    all(
-      neoLandozer.armHammer(),
-      delay(800).chain(
-        defenderArmdozer.sprite.avoid()
-      )
-    );
+/** ガード */
+function guard(param: AttackAnimationParam<NeoLandozer, Guard>): Animate {
+  return all(
+    param.attackerTD.sprite.armHammer(),
+    delay(800).chain(
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderTD.sprite.guard(),
+      param.defenderTD.hitMark.spark.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
 
-  const feint = (): Animate =>
-    defenderArmdozer.sprite.avoid();
+    )
+  ).chain(
+    param.defenderTD.sprite.guardToStand()
+  );
+}
 
-  if (effect.result.name === 'NormalHit') {
-    return attack(effect.result.damage);
-  } else if (effect.result.name === 'Guard') {
-    return guard(effect.result.damage);
-  } else if (effect.result.name === 'CriticalHit') {
-    return attack(effect.result.damage);
-  } else if (effect.result.name === 'Miss') {
-    return miss();
-  } else if (effect.result.name === 'Feint' && effect.result.isDefenderMoved) {
-    return feint();
+/** ミス */
+function miss(param: AttackAnimationParam<NeoLandozer, Miss>): Animate {
+  return all(
+    param.attackerTD.sprite.armHammer(),
+    delay(800).chain(
+      param.defenderTD.sprite.avoid()
+    )
+  );
+}
+
+/** フェイント */
+function feint(param: AttackAnimationParam<NeoLandozer, Feint>): Animate {
+  if (!param.result.isDefenderMoved) {
+    return empty();
   }
 
-  return empty();
+  return param.defenderTD.sprite.avoid();
 }
