@@ -7,7 +7,12 @@ import type {AttackAnimationParam} from "./attack/animation-param";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 
-/** 攻撃、防御側のバッテリーを表示する */
+/**
+ * 攻撃、防御側のバッテリーを表示する
+ *
+ * @param param 戦闘アニメパラメータ
+ * @return アニメーション
+ */
 export function visibleBattery(param: AttackAnimationParam<ArmDozerSprite, BattleResult>): Animate {
   return all(
     param.attackerTD.batteryNumber.popUp(param.attackerBattery),

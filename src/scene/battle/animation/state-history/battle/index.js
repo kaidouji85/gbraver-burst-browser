@@ -52,7 +52,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
 
   return visibleBattery(param)
     .chain(delay(500))
-    .chain(attackAnimation(view, sceneState, gameState))
+    .chain(attackAnimation(param))
     .chain(delay(500));
 }
 
