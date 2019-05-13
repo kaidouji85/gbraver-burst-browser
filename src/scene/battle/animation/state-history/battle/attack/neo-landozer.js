@@ -1,7 +1,7 @@
 // @flow
 
 import {Animate} from "../../../../../../animation/animate";
-import type {AttackAnimationParam} from "./animation-param";
+import type {BattleAnimationParam} from "../animation-param";
 import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import type {
   BattleResult,
@@ -11,7 +11,7 @@ import type {
 } from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
-import {overWriteAttackAnimResult} from "./animation-param";
+import {overWriteResult} from "../animation-param";
 
 /**
  * ネオランドーザの攻撃アニメーション
@@ -19,25 +19,25 @@ import {overWriteAttackAnimResult} from "./animation-param";
  * @param param パラメータ
  * @return アニメーション
  */
-export function neoLandozerAttack(param: AttackAnimationParam<NeoLandozer, BattleResult>): Animate {
+export function neoLandozerAttack(param: BattleAnimationParam<NeoLandozer, BattleResult>): Animate {
   const result = param.result;
   switch (result.name) {
     case 'NormalHit':
     case 'CriticalHit':
-      return attack(overWriteAttackAnimResult(param, result));
+      return attack(overWriteResult(param, result));
     case 'Guard':
-      return guard(overWriteAttackAnimResult(param, result));
+      return guard(overWriteResult(param, result));
     case 'Miss':
-      return miss(overWriteAttackAnimResult(param, result));
+      return miss(overWriteResult(param, result));
     case 'Feint':
-      return feint(overWriteAttackAnimResult(param, result));
+      return feint(overWriteResult(param, result));
     default:
       return empty();
   }
 }
 
 /** 通常ヒット、クリティカルヒット */
-function attack(param: AttackAnimationParam<NeoLandozer, NormalHit | CriticalHit>): Animate {
+function attack(param: BattleAnimationParam<NeoLandozer, NormalHit | CriticalHit>): Animate {
   return all(
     param.attackerTD.sprite.armHammer(),
     delay(800).chain(
@@ -52,7 +52,7 @@ function attack(param: AttackAnimationParam<NeoLandozer, NormalHit | CriticalHit
 }
 
 /** ガード */
-function guard(param: AttackAnimationParam<NeoLandozer, Guard>): Animate {
+function guard(param: BattleAnimationParam<NeoLandozer, Guard>): Animate {
   return all(
     param.attackerTD.sprite.armHammer(),
     delay(800).chain(
@@ -68,7 +68,7 @@ function guard(param: AttackAnimationParam<NeoLandozer, Guard>): Animate {
 }
 
 /** ミス */
-function miss(param: AttackAnimationParam<NeoLandozer, Miss>): Animate {
+function miss(param: BattleAnimationParam<NeoLandozer, Miss>): Animate {
   return all(
     param.attackerTD.sprite.armHammer(),
     delay(800).chain(
@@ -78,7 +78,7 @@ function miss(param: AttackAnimationParam<NeoLandozer, Miss>): Animate {
 }
 
 /** フェイント */
-function feint(param: AttackAnimationParam<NeoLandozer, Feint>): Animate {
+function feint(param: BattleAnimationParam<NeoLandozer, Feint>): Animate {
   if (!param.result.isDefenderMoved) {
     return empty();
   }
