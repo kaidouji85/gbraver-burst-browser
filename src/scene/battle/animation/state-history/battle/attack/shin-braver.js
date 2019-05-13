@@ -2,7 +2,7 @@
 
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import type {AttackAnimationParam} from "./animation-param";
+import type {BattleAnimationParam} from "../animation-param";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";
 import type {
   BattleResult,
@@ -10,7 +10,7 @@ import type {
   Guard, Miss,
   NormalHit
 } from "gbraver-burst-core/lib/effect/battle/result/battle-result";
-import {overWriteAttackAnimResult} from "./animation-param";
+import {overWriteResult} from "../animation-param";
 import {all} from "../../../../../../animation/all";
 
 /**
@@ -19,25 +19,25 @@ import {all} from "../../../../../../animation/all";
  * @param param パラメータ
  * @return アニメーション
  */
-export function shinBraverAttack(param: AttackAnimationParam<ShinBraver, BattleResult>): Animate {
+export function shinBraverAttack(param: BattleAnimationParam<ShinBraver, BattleResult>): Animate {
   const result = param.result;
   switch (result.name) {
     case 'NormalHit':
     case 'Critical':
-      return attack(overWriteAttackAnimResult(param, result));
+      return attack(overWriteResult(param, result));
     case 'Guard':
-      return guard(overWriteAttackAnimResult(param, result));
+      return guard(overWriteResult(param, result));
     case 'Miss':
-      return miss(overWriteAttackAnimResult(param, result));
+      return miss(overWriteResult(param, result));
     case 'Feint':
-      return feint(overWriteAttackAnimResult(param, result));
+      return feint(overWriteResult(param, result));
     default:
       return empty();
   }
 }
 
 /** 通常ヒット、クリティカル */
-function attack(param: AttackAnimationParam<ShinBraver, NormalHit | CriticalHit>): Animate {
+function attack(param: BattleAnimationParam<ShinBraver, NormalHit | CriticalHit>): Animate {
   return all(
     param.attackerTD.sprite.straightPunch(),
     delay(700).chain(
@@ -52,7 +52,7 @@ function attack(param: AttackAnimationParam<ShinBraver, NormalHit | CriticalHit>
 }
 
 /** ガード */
-function guard(param: AttackAnimationParam<ShinBraver, Guard>): Animate {
+function guard(param: BattleAnimationParam<ShinBraver, Guard>): Animate {
   return all(
     param.attackerTD.sprite.straightPunch(),
     delay(700).chain(
@@ -67,7 +67,7 @@ function guard(param: AttackAnimationParam<ShinBraver, Guard>): Animate {
 }
 
 /** ミス */
-function miss(param: AttackAnimationParam<ShinBraver, Miss>): Animate {
+function miss(param: BattleAnimationParam<ShinBraver, Miss>): Animate {
   return all(
     param.attackerTD.sprite.straightPunch(),
     delay(700).chain(
@@ -77,7 +77,7 @@ function miss(param: AttackAnimationParam<ShinBraver, Miss>): Animate {
 }
 
 /** フェイント */
-function feint(param: AttackAnimationParam<ShinBraver, Feint>): Animate {
+function feint(param: BattleAnimationParam<ShinBraver, Feint>): Animate {
   if (!param.result.isDefenderMoved) {
     return empty();
   }

@@ -55,12 +55,9 @@ export function appendTDPlayer(scene: THREE.Scene, player: TDPlayer<ArmDozerSpri
  * @return 上書き結果
  */
 export function overWriteTDSprite<OLD, NEW>(target: TDPlayer<OLD>, sprite: NEW): TDPlayer<NEW> {
+  const ignoreSprite: $Diff<TDPlayer<OLD>, {sprite: OLD}> = target;
   return {
-    sprite: sprite,
-    playerId: target.playerId,
-    hitMark: target.hitMark,
-    batteryNumber: target.batteryNumber,
-    recoverBattery: target.recoverBattery,
-    damageIndicator: target.damageIndicator,
+    ...ignoreSprite,
+    sprite: sprite
   };
 }

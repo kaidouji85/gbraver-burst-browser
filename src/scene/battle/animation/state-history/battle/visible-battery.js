@@ -3,7 +3,7 @@
 import {Animate} from "../../../../../animation/animate";
 import {delay} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
-import type {AttackAnimationParam} from "./attack/animation-param";
+import type {BattleAnimationParam} from "./animation-param";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 
@@ -13,7 +13,7 @@ import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/bat
  * @param param 戦闘アニメパラメータ
  * @return アニメーション
  */
-export function visibleBattery(param: AttackAnimationParam<ArmDozerSprite, BattleResult>): Animate {
+export function visibleBattery(param: BattleAnimationParam<ArmDozerSprite, BattleResult>): Animate {
   return all(
     param.attackerTD.batteryNumber.popUp(param.attackerBattery),
     param.attackerHUD.gauge.battery(param.attackerState.armdozer.battery),

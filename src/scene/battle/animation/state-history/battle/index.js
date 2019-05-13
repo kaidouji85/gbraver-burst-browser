@@ -8,7 +8,7 @@ import {visibleBattery} from "./visible-battery";
 import {delay, empty} from "../../../../../animation/delay";
 import {attackAnimation} from "./attack";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
-import type {AttackAnimationParam} from "./attack/animation-param";
+import type {BattleAnimationParam} from "./animation-param";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 
@@ -36,7 +36,7 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
     return empty();
   }
 
-  const param: AttackAnimationParam<ArmDozerSprite, BattleResult> = {
+  const param: BattleAnimationParam<ArmDozerSprite, BattleResult> = {
     attackerBattery: effect.attackerBattery,
     attackerState: attackerState,
     attackerTD: attackerTD,
