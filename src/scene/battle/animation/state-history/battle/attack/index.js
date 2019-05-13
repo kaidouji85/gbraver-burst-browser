@@ -37,8 +37,10 @@ export function attackAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   }
 
   const commonAnimParam = {
+    attackerBattery: effect.attackerBattery,
     attackerState: attackerState,
     attackerHUD: attackerHUD,
+    defenderBattery: effect.defenderBattery,
     defenderState: defenderState,
     defenderTD: defenderTD,
     defenderHUD: defenderHUD,

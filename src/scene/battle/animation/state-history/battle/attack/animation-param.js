@@ -14,9 +14,11 @@ import type {HUDGameObjects} from "../../../../view/hud/game-objects";
  * @type RESULT 戦闘結果
  */
 export type AttackAnimationParam<SPRITE, RESULT> = {
+  attackerBattery: number,
   attackerState: PlayerState,
   attackerTD: TDPlayer<SPRITE>,
   attackerHUD: HUDPlayer,
+  defenderBattery: number,
   defenderState: PlayerState,
   defenderTD: TDPlayer<ArmDozerSprite>,
   defenderHUD: HUDPlayer,
@@ -35,9 +37,11 @@ export type AttackAnimationParam<SPRITE, RESULT> = {
  */
 export function overWriteAttackAnimResult<S, OLD_RESULT, NEW_RESULT>(param: AttackAnimationParam<S, OLD_RESULT>, result: NEW_RESULT): AttackAnimationParam<S, NEW_RESULT> {
   return {
+    attackerBattery: param.attackerBattery,
     attackerState: param.attackerState,
     attackerTD: param.attackerTD,
     attackerHUD: param.attackerHUD,
+    defenderBattery: param.defenderBattery,
     defenderState: param.defenderState,
     defenderTD: param.defenderTD,
     defenderHUD: param.defenderHUD,
