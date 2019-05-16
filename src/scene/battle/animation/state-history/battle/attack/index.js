@@ -1,32 +1,28 @@
+// @flow
 import {Animate} from "../../../../../../animation/animate";
-import {emptyBattleAnimation} from "./empty-battle-animation";
-import {BattleSceneView} from "../../../../view";
-import type {BattleSceneState} from "../../../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";
-import {shinBraverAttack} from "./shin-braver";
 import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
+import {shinBraverAttack} from "./shin-braver";
 import {neoLandozerAttack} from "./neo-landozer";
+import {emptyAttackAnimation} from "./empty-animation";
+import type {BattleAnimationParam} from "../animation-param";
+import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import {overWriteAttackerTD} from "../animation-param";
 
-/** 攻撃側スプライトに応じて、戦闘アニメーションを切り替える */
-export function attackAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
-  if (gameState.effect.name !== 'Battle') {
-    return empty();
-  }
-
-  const effect: Battle = gameState.effect;
-  const attackerArmdozer = view.td.armdozers.find(v => v.playerId === effect.attacker);
-
-  if (!attackerArmdozer) {
-    return empty();
-  }
-
-  const sprite = attackerArmdozer.sprite;
+/**
+ * 攻撃側スプライトに応じて、戦闘アニメーションを切り替える
+ *
+ * @param param 戦闘アニメパラメータ
+ * @return アニメーション
+ */
+export function attackAnimation(param: BattleAnimationParam<ArmDozerSprite, BattleResult>): Animate {
+  const sprite = param.attackerTD.sprite;
   if (sprite instanceof ShinBraver) {
-    return shinBraverAttack(view, sceneState, gameState);
+    return shinBraverAttack(overWriteAttackerTD(param, sprite));
   } else if (sprite instanceof NeoLandozer) {
-    return neoLandozerAttack(view, sceneState, gameState);
+    return neoLandozerAttack(overWriteAttackerTD(param, sprite))
   }
 
-  return emptyBattleAnimation(view, sceneState, gameState);
+  return emptyAttackAnimation(param);
 }

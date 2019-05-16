@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
-import GLTFLoader from 'three-gltf-loader';
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 
 /** glTFリソースID */
 export type GlTFId = string;

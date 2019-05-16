@@ -5,8 +5,9 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {visibleBattery} from "./visible-battery";
-import {delay} from "../../../../../animation/delay";
+import {delay, empty} from "../../../../../animation/delay";
 import {attackAnimation} from "./attack";
+import {toBattleAnimationParam} from "./animation-param";
 
 /**
  * 戦闘アニメーション
@@ -17,9 +18,14 @@ import {attackAnimation} from "./attack";
  * @return アニメーション
  */
 export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
-  return visibleBattery(view, sceneState, gameState)
+  const param = toBattleAnimationParam(view, sceneState, gameState);
+  if (!param) {
+    return empty();
+  }
+
+  return visibleBattery(param)
     .chain(delay(500))
-    .chain(attackAnimation(view, sceneState, gameState))
+    .chain(attackAnimation(param))
     .chain(delay(500));
 }
 
