@@ -29,7 +29,6 @@
     "rxjs": "^6.5.2",
     "stats.js": "^0.17.0",
     "three": "^0.104.0",
-    "three-gltf-loader": "^1.104.0",
     "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
