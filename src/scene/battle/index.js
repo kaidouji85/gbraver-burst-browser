@@ -4,7 +4,7 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import * as THREE from "three";
 import type {GameLoop} from "../../action/game-loop/game-loop";
-import {Observable, Subject} from "rxjs";
+import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
 import type {DecideBattery} from "../../action/battle-scene/decide-battery";
@@ -13,16 +13,20 @@ import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
 import {delay} from "../../animation/delay";
 import {invisibleUI} from "./animation/invisible-ui";
+import type {Render} from "../../action/game-loop/render";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  renderer: THREE.WebGLRenderer,
+  rendererDOM: HTMLElement,
   battleRoom: BattleRoom,
   initialState: InitialState,
   listener: {
     domEvent: Observable<DOMEvent>,
     gameLoop: Observable<GameLoop>,
+  },
+  notifier: {
+    render: Observer<Render>
   }
 };
 
@@ -41,7 +45,7 @@ export class BattleScene {
     this._battleRoom = param.battleRoom;
     this._view = new BattleSceneView({
       resources: param.resources,
-      renderer: param.renderer,
+      rendererDOM: param.rendererDOM,
       playerId: param.initialState.playerId,
       players: param.initialState.players,
       listener: {
@@ -49,6 +53,7 @@ export class BattleScene {
         domEvent: param.listener.domEvent,
       },
       notifier: {
+        render: param.notifier.render,
         battleAction: this._battleAction,
       }
     });

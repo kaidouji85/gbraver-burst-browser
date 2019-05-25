@@ -15,7 +15,7 @@ import TWEEN from "@tweenjs/tween.js";
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  renderer: THREE.WebGLRenderer,
+  rendererDOM: HTMLElement,
   playerId: PlayerId,
   players: Player[],
   listener: {
@@ -23,6 +23,7 @@ type Param = {
     domEvent: Observable<DOMEvent>,
   },
   notifier: {
+    render: Observer<Render>,
     battleAction: Observer<BattleSceneAction>,
   },
 };
@@ -31,7 +32,6 @@ type Param = {
  * 戦闘画面のビュー
  */
 export class BattleSceneView {
-  renderer: Renderer;
   td: ThreeDimensionLayer;
   hud: HudLayer;
 
@@ -39,21 +39,11 @@ export class BattleSceneView {
   _gameLoopHUD: Subject<GameLoop>;
 
   constructor(param: Param) {
-    const render: Subject<Render> = new Subject();
     this._gameLoop3D = new Subject();
     this._gameLoopHUD = new Subject();
-
-    this.renderer = new Renderer({
-      renderer: param.renderer,
-      listener: {
-        domEvent: param.listener.domEvent,
-        render: render
-      }
-    });
-
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
-      rendererDOM: param.renderer.domElement,
+      rendererDOM: param.rendererDOM,
       playerId: param.playerId,
       players: param.players,
       listener: {
@@ -61,13 +51,13 @@ export class BattleSceneView {
         gameLoop: this._gameLoop3D
       },
       notifier: {
-        render: render
+        render: param.notifier.render
       }
     });
 
     this.hud = new HudLayer({
       resources: param.resources,
-      rendererDOM: param.renderer.domElement,
+      rendererDOM: param.rendererDOM,
       playerId: param.playerId,
       players: param.players,
       listener: {
@@ -76,7 +66,7 @@ export class BattleSceneView {
       },
       notifier: {
         battleAction: param.notifier.battleAction,
-        render: render
+        render: param.notifier.render
       }
     });
 

@@ -11,6 +11,7 @@ import type {NPC} from "./npc/npc";
 import {NeoLandozerNpc} from "./npc/neo-landozer-npc";
 import {OfflineBattleRoom} from "./battle-room/offline-battle-room";
 import {BattleScene} from "./scene/battle";
+import {Renderer} from "./game-object/renderer";
 
 async function main() {
   loadServiceWorker();
@@ -18,13 +19,18 @@ async function main() {
 
   const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
 
-  const renderer = createRender();
-  if (renderer.domElement && document.body) {
-    document.body.appendChild(renderer.domElement);
+  const threeJsRender = createRender();
+  if (threeJsRender.domElement && document.body) {
+    document.body.appendChild(threeJsRender.domElement);
   }
-
   const gameLoopListener = createGameLoopListener();
-  const domEventListener = createDOMEventListener(renderer.domElement);
+  const domEventListener = createDOMEventListener(threeJsRender.domElement);
+  const renderer = new Renderer({
+    renderer: threeJsRender,
+    listener: {
+      domEvent: domEventListener
+    }
+  });
 
   // TODO 開発用にダミーデータを作成している
   const player: Player = {
@@ -36,12 +42,15 @@ async function main() {
   const initialState = await battleRoom.start();
   const scene = new BattleScene({
     resources: resources,
-    renderer: renderer,
+    rendererDOM: threeJsRender.domElement,
     battleRoom: battleRoom,
     initialState: initialState,
     listener: {
       domEvent: domEventListener,
       gameLoop: gameLoopListener,
+    },
+    notifier: {
+      render: renderer.getRenderNotifier()
     }
   });
 }
