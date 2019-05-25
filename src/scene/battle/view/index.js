@@ -53,6 +53,7 @@ export class BattleSceneView {
 
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
+      rendererDOM: param.renderer.domElement,
       playerId: param.playerId,
       players: param.players,
       listener: {

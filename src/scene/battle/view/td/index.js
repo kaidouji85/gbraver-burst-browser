@@ -23,6 +23,7 @@ type Param = {
   resources: Resources,
   playerId: PlayerId,
   players: Player[],
+  rendererDOM: HTMLElement,
   listener: {
     domEvent: Observable<DOMEvent>,
     gameLoop: Observable<GameLoop>,
@@ -38,6 +39,7 @@ export class ThreeDimensionLayer {
   camera: Battle3DCamera;
   players: TDPlayer<ArmDozerSprite>[];
   gameObjects: TDGameObjects;
+  _rendererDOM: HTMLElement;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
@@ -46,6 +48,7 @@ export class ThreeDimensionLayer {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
+    this._rendererDOM = param.rendererDOM;
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = param.notifier.render;
@@ -87,7 +90,8 @@ export class ThreeDimensionLayer {
 
     this._preRender.next({
       type: 'PreRender',
-      camera: this.camera.getCamera()
+      camera: this.camera.getCamera(),
+      rendererDOM: this._rendererDOM,
     });
 
     this._render.next({

@@ -63,6 +63,6 @@ export class Gauge {
 
   /** プリレンダー */
   _preRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+    this._view.preRender(action);
   }
 }

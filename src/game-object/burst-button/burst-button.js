@@ -11,6 +11,7 @@ import {visible} from './animation/visible';
 import {invisible} from './animation/invisible';
 import type {Update} from "../../action/game-loop/update";
 import {Animate} from "../../animation/animate";
+import type {PreRender} from "../../action/game-loop/pre-render";
 
 type Param = {
   resources: Resources,
@@ -28,6 +29,8 @@ export class BurstButton {
     param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
+      } else if (action.type === 'PreRender') {
+        this._preRender(action);
       }
     });
   }
@@ -55,5 +58,10 @@ export class BurstButton {
   /** 状態更新 */
   _update(action: Update): void {
     this._view.engage(this._model);
+  }
+
+  /** プリレンダー */
+  _preRender(action: PreRender): void {
+    this._view.preRender(action);
   }
 }

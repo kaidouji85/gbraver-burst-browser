@@ -9,6 +9,7 @@ import {BatteryMinus} from "./battery-minus";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /** 全体のスケール */
 const SCALE = 0.3;
@@ -87,12 +88,22 @@ export class BatterySelectorView {
     this._button.update(model);
     this._plus.update(model);
     this._minus.update(model);
-    this._setPos();
+  }
+
+  /** プリレンダー */
+  preRender(action: PreRender): void {
+    this._setPos(action.rendererDOM);
+    this._lookAt(action.camera);
   }
 
   /** 座標を調整する */
-  _setPos(): void {
-    this._group.position.x = window.innerWidth / 2 - PADDING_RIGHT;
-    this._group.position.y = -window.innerHeight / 2 + PADDING_BOTTOM;
+  _setPos(rendererDOM: HTMLElement): void {
+    this._group.position.x = rendererDOM.clientWidth / 2 - PADDING_RIGHT;
+    this._group.position.y = -rendererDOM.clientHeight / 2 + PADDING_BOTTOM;
+  }
+
+  /** カメラの真正面を向く */
+  _lookAt(camera: THREE.Camera): void {
+    this._group.quaternion.copy(camera.quaternion);
   }
 }
