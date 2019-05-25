@@ -7,6 +7,7 @@ import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import {drawGauge} from "../../../canvas/gauge";
 import type {Resources} from "../../../resource";
 import * as R from 'ramda';
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 export const CANVAS_SIZE = 256;
 export const MESH_SIZE = 200;
@@ -33,13 +34,13 @@ export class PlayerGaugeView implements GaugeView {
     if (this._shouldCanvasRefresh(model)) {
       this._refreshCanvas(model);
     }
-    this._setPos();
     this._updateLastEngagedModel(model);
   }
 
-  /** カメラの真正面を向く */
-  lookAt(camera: THREE.Camera): void {
-    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
+  /** プリレンダー */
+  preRender(action: PreRender): void {
+    this._setPos(action.rendererDOM);
+    this._lookAt(action.camera);
   }
 
   /** シーンに追加するオブジェクトを取得する */
@@ -75,9 +76,14 @@ export class PlayerGaugeView implements GaugeView {
   }
 
   /** 座標をセットする */
-  _setPos(): void {
+  _setPos(rendererDOM: HTMLElement): void {
     this._canvasMesh.mesh.position.x = 100;
-    this._canvasMesh.mesh.position.y = window.innerHeight / 2 - 50;
+    this._canvasMesh.mesh.position.y = rendererDOM.clientHeight / 2 - 50;
     this._canvasMesh.mesh.position.z = 0;
+  }
+
+  /** カメラの真正面を向く */
+  _lookAt(camera: THREE.Camera): void {
+    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
   }
 }
