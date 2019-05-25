@@ -45,11 +45,13 @@ export class HudLayer {
   camera: BattleHUDCamera;
   players: HUDPlayer[];
   gameObjects: HUDGameObjects;
+  _rendererDOM: HTMLElement;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
 
   constructor(param: Param) {
+    this._rendererDOM = param.rendererDOM;
     this.scene = new THREE.Scene();
     this.camera = new BattleHUDCamera({
       listener: {
@@ -66,7 +68,7 @@ export class HudLayer {
     const enemy = param.players.find(v => v.playerId !== param.playerId)
       || param.players[0];
     const gameObjectAction: Observable<GameObjectAction> = merge(
-      toOverlapObservable(param.listener.domEvent, param.rendererDOM, this.camera.getCamera()),
+      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera()),
       this._update,
       this._preRender
     );
@@ -96,7 +98,8 @@ export class HudLayer {
 
     this._preRender.next({
       type: 'PreRender',
-      camera: this.camera.getCamera()
+      camera: this.camera.getCamera(),
+      rendererDOM: this._rendererDOM,
     });
 
     this._render.next({

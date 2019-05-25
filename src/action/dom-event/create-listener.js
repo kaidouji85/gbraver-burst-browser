@@ -2,7 +2,7 @@
 
 import type {DOMEvent} from "./index";
 import {fromEvent, merge, Observable} from "rxjs";
-import {map, publish} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {getHeight, getWidth} from "./resize";
 
 /**
@@ -52,7 +52,7 @@ export function createDOMEventListener(renderDom: HTMLElement): Observable<DOMEv
     map(v => ({
       type: 'resize',
       width: getWidth(),
-      height: getHeight()
+      height: getHeight(),
     }))
   );
 

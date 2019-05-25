@@ -2,14 +2,15 @@
 
 import type {GaugeModel} from "../model/gauge-model";
 import * as THREE from "three";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /** ゲージのビュー */
 export interface GaugeView {
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void;
 
-  /** カメラの方向を向く */
-  lookAt(camera: THREE.Camera): void;
+  /** プリレンダー */
+  preRender(action: PreRender): void;
 
   /** ビューで使われているthree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
