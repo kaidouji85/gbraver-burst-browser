@@ -18,6 +18,7 @@ import {open} from './animation/open';
 import {close} from './animation/close';
 import {isBatteryMinusDisabled} from "./model/is-battery-minus-disabled";
 import {isBatteryPlusDisabled} from "./model/is-battery-plus-disabled";
+import type {PreRender} from "../../action/game-loop/pre-render";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -41,6 +42,8 @@ export class BatterySelector {
     param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
+      } else if (action.type === 'PreRender') {
+        this._preRender(action);
       }
     });
 
@@ -108,6 +111,11 @@ export class BatterySelector {
   _update(action: Update): void {
     this._batteryChangeTween.update(action.time);
     this._view.engage(this._model);
+  }
+
+  /** プリレンダー */
+  _preRender(action: PreRender): void {
+    this._view.preRender(action);
   }
 
   /**
