@@ -8,5 +8,6 @@
     "type": "image/png"
   }],
   "start_url": "./index.html",
-  "display": "browser"
+  "display": "standalone",
+  "orientation": "landscape-primary"
 }
