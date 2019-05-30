@@ -86,5 +86,8 @@ function feint(param: BattleAnimationParam<ShinBraver, Feint>): Animate {
     return empty();
   }
 
-  return param.defenderTD.sprite.avoid();
+  return param.defenderTD.sprite
+    .avoid()
+    .chain(delay(500))
+    .chain(param.defenderTD.sprite.avoidToStand())
 }
