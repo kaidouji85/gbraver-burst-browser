@@ -20,6 +20,9 @@ export interface ArmDozerSprite {
   /** ガード -> 立ちポーズ */
   guardToStand(): Animate;
 
-  /** 避ける */
+  /** 避け */
   avoid(): Animate;
+
+  /** 避け -> 立ち */
+  avoidToStand(): Animate;
 }

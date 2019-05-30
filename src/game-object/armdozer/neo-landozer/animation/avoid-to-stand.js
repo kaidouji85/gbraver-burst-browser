@@ -1,18 +1,18 @@
 // @flow
 
 import {Animate} from "../../../../animation/animate";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import type {ShinBraverModel} from "../model/shin-braver-model";
 
-/** 避ける */
-export function avoid(model: ShinBraverModel): Animate {
+/** 避け -> 立ち */
+export function avoidToStand(model: NeoLandozerModel): Animate {
   return process(() => {
     model.animation.frame = 0;
     model.animation.type = 'STAND';
   }).chain(
     tween(model.position, t => t
-      .to({x: '+100'}, 150)
+      .to({x: '-100'}, 500)
     )
-  );
+  )
 }
