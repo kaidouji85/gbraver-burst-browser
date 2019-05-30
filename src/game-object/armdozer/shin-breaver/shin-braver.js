@@ -16,6 +16,7 @@ import {knockBackToStand} from "./animation/knock-back-to-stand";
 import {avoid} from "./animation/avoid";
 import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
+import {avoidToStand} from "./animation/avoid-to-stand";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -60,9 +61,14 @@ export class ShinBraver implements ArmDozerSprite {
     return guardToStand(this._model);
   }
 
-  /** 避ける */
+  /** 避け */
   avoid(): Animate {
     return avoid(this._model);
+  }
+
+  /** 避け -> 立ち */
+  avoidToStand(): Animate {
+    return avoidToStand(this._model);
   }
 
   /** シーンに追加するオブジェクトを返す */

@@ -40,6 +40,9 @@ module.exports = {
     }, {
       from: path.resolve(__dirname, "manifest.json"),
       to: path.resolve(__dirname, BUILD_PATH)
+    }, {
+      from: path.resolve(__dirname, "app-icon.png"),
+      to: path.resolve(__dirname, BUILD_PATH)
     }]),
     new webpack.DefinePlugin({
       GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(resourceHash),
