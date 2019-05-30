@@ -73,6 +73,10 @@ function miss(param: BattleAnimationParam<ShinBraver, Miss>): Animate {
     delay(700).chain(
       param.defenderTD.sprite.avoid()
     )
+  ).chain(
+   delay(500)
+  ).chain(
+    param.defenderTD.sprite.avoidToStand()
   );
 }
 
