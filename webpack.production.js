@@ -9,8 +9,8 @@ module.exports = {
     ...config.plugins,
     new WorkBoxPlugin.GenerateSW({
       swDest: path.join(config.output.path, 'sw.js'),
-      clientsClaim: true,
-      skipWaiting: true,
+      clientsClaim: false,
+      skipWaiting: false,
     })
   ]
 };

@@ -7,7 +7,7 @@
     "postinstall": "npm run build",
     "start": "npm-run-all clean dev-server",
     "start:stub": "npm-run-all clean dev-server:stub",
-    "test": "ava test/src",
+    "test": "ava test/src/**/*.js",
     "build": "npm-run-all clean type-check webpack",
     "build:production": "npm-run-all clean type-check webpack:production",
     "build:stub": "npm-run-all clean webpack:stub",
@@ -28,7 +28,7 @@
     "ramda": "^0.26.1",
     "rxjs": "^6.5.2",
     "stats.js": "^0.17.0",
-    "three": "^0.104.0",
+    "three": "^0.105.2",
     "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
@@ -36,16 +36,16 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-flow": "^7.0.0",
     "@babel/register": "^7.4.4",
-    "ava": "1.4.1",
+    "ava": "2.0.0",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.3",
-    "flow-bin": "^0.99.0",
+    "flow-bin": "^0.100.0",
     "html-webpack-plugin": "^3.2.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.3",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.4.1"
+    "webpack-dev-server": "^3.5.1"
   },
   "ava": {
     "babel": false,
