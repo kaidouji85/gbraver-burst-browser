@@ -12,15 +12,15 @@ import {NeoLandozerNpc} from "./npc/neo-landozer-npc";
 import {OfflineBattleRoom} from "./battle-room/offline-battle-room";
 import {BattleScene} from "./scene/battle";
 import {Renderer} from "./game-object/renderer";
-import {hiddenLoading} from "./loading/loading";
+import {addEventToLoadingManager} from "./loading/loading-dom";
 
 async function main() {
   try {
+    addEventToLoadingManager();
     loadServiceWorker();
     viewPerformanceStatics(document.body);
 
     const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
-    hiddenLoading();
 
     const threeJsRender = createRender();
     if (threeJsRender.domElement && document.body) {
