@@ -12,47 +12,53 @@ import {NeoLandozerNpc} from "./npc/neo-landozer-npc";
 import {OfflineBattleRoom} from "./battle-room/offline-battle-room";
 import {BattleScene} from "./scene/battle";
 import {Renderer} from "./game-object/renderer";
+import {addEventToLoadingManager} from "./loading/loading-dom";
 
 async function main() {
-  loadServiceWorker();
-  viewPerformanceStatics(document.body);
+  try {
+    addEventToLoadingManager();
+    loadServiceWorker();
+    viewPerformanceStatics(document.body);
 
-  const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
+    const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
 
-  const threeJsRender = createRender();
-  if (threeJsRender.domElement && document.body) {
-    document.body.appendChild(threeJsRender.domElement);
+    const threeJsRender = createRender();
+    if (threeJsRender.domElement && document.body) {
+      document.body.appendChild(threeJsRender.domElement);
+    }
+    const gameLoopListener = createGameLoopListener();
+    const domEventListener = createDOMEventListener(threeJsRender.domElement);
+    const renderer = new Renderer({
+      renderer: threeJsRender,
+      listener: {
+        domEvent: domEventListener
+      }
+    });
+
+    // TODO 開発用にダミーデータを作成している
+    const player: Player = {
+      playerId: 'test01',
+      armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
+    };
+    const npc: NPC = NeoLandozerNpc;
+    const battleRoom = new OfflineBattleRoom(player, npc);
+    const initialState = await battleRoom.start();
+    const scene = new BattleScene({
+      resources: resources,
+      rendererDOM: threeJsRender.domElement,
+      battleRoom: battleRoom,
+      initialState: initialState,
+      listener: {
+        domEvent: domEventListener,
+        gameLoop: gameLoopListener,
+      },
+      notifier: {
+        render: renderer.getRenderNotifier()
+      }
+    });
+  } catch (e) {
+    console.error(e.stack);
   }
-  const gameLoopListener = createGameLoopListener();
-  const domEventListener = createDOMEventListener(threeJsRender.domElement);
-  const renderer = new Renderer({
-    renderer: threeJsRender,
-    listener: {
-      domEvent: domEventListener
-    }
-  });
-
-  // TODO 開発用にダミーデータを作成している
-  const player: Player = {
-    playerId: 'test01',
-    armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
-  };
-  const npc: NPC = NeoLandozerNpc;
-  const battleRoom = new OfflineBattleRoom(player, npc);
-  const initialState = await battleRoom.start();
-  const scene = new BattleScene({
-    resources: resources,
-    rendererDOM: threeJsRender.domElement,
-    battleRoom: battleRoom,
-    initialState: initialState,
-    listener: {
-      domEvent: domEventListener,
-      gameLoop: gameLoopListener,
-    },
-    notifier: {
-      render: renderer.getRenderNotifier()
-    }
-  });
 }
 
 window.onload = main;

@@ -1,4 +1,5 @@
 // @flow
+import * as THREE from 'three';
 
 /** キャンバス用画像ID */
 export type CanvasImageId = string;
@@ -126,12 +127,22 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
  * @return 読み込み結果
  */
 export function loadCanvasImage(basePath: string, config: CanvasImageConfig): Promise<CanvasImageResource> {
-  const image = new Image();
-  image.src = `${basePath}${config.path}`;
-  return new Promise(resolve => image.onload = () => resolve({
-    id: config.id,
-    image
-  }));
+  return new Promise((resolve, reject) => {
+    const loader = new THREE.ImageLoader();
+    loader.load(
+      `${basePath}${config.path}`,
+      (image: Image) => {
+        resolve({
+          id: config.id,
+          image: image
+        });
+      },
+      undefined,
+      (error) => {
+        reject(error);
+      }
+    )
+  });
 }
 
 /**

@@ -19,7 +19,38 @@
               padding: 0;
               -webkit-user-select: none;
           }
+          .loading {
+              width: 100%;
+              height: 100%;
+              background-color: rgb(23, 23, 23);
+              color: rgb(240, 240, 240);
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+          }
+
+          .loading__bar {
+              width: 200px;
+              height: 20px;
+              background: #000;
+              border: 2px solid #000;
+          }
+
+          .loading__bar_completed {
+              width: 0;
+              height: 20px;
+              background: red;
+              border: none;
+          }
       </style>
   </head>
-  <body></body>
+  <body>
+    <div class="loading">
+        <div class="loading__caption"></div>
+        <div class="loading__bar">
+            <div class="loading__bar_completed"></div>
+        </div>
+    </div>
+  </body>
 </html>
