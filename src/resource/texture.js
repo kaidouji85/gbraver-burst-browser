@@ -134,10 +134,19 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
  */
 export function loadTexture(basePath: string, config: TextureConfig): Promise<TextureResource> {
   let loader = new THREE.TextureLoader();
-  return new Promise(resolve => loader.load(`${basePath}${config.path}`, texture => resolve({
-    id: config.id,
-    texture
-  })));
+  return new Promise((resolve, reject) => {
+    loader.load(
+      `${basePath}${config.path}`,
+      texture => resolve({
+        id: config.id,
+        texture
+      }),
+      undefined,
+      (error) => {
+        reject(error);
+      }
+    );
+  });
 }
 
 /**
