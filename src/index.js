@@ -16,10 +16,10 @@ import {addEventToLoadingManager} from "./loading/loading-dom";
 
 async function main() {
   try {
+    addEventToLoadingManager();
     loadServiceWorker();
     viewPerformanceStatics(document.body);
 
-    addEventToLoadingManager();
     const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
 
     const threeJsRender = createRender();
