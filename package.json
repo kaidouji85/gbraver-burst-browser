@@ -17,7 +17,8 @@
     "webpack": "webpack",
     "webpack:production": "webpack --config webpack.production.js",
     "webpack:stub": "webpack --config webpack.stub.js",
-    "type-check": "flow check"
+    "type-check": "flow check",
+    "lint": "eslint src"
   },
   "author": "y.takeuchi",
   "license": "ISC",

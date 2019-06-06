@@ -50,7 +50,7 @@ export class TurnIndicator {
 
   invisible(): Animate {
     return invisible(this._model);
-  }　
+  }
 
   /** ターンインジケーターで使うthree.jsオブジェクトを返す */
   getObject3D(): THREE.Object3D {

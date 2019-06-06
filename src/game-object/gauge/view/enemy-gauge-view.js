@@ -2,7 +2,6 @@
 
 import {PlayerGaugeView} from "./player-gauge-view";
 import type {Resources} from "../../../resource";
-import type {GaugeModel} from "../model/gauge-model";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /** 敵のゲージ */

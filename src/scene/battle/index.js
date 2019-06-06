@@ -2,7 +2,6 @@
 import type {Resources} from '../../resource/index';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
-import * as THREE from "three";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
@@ -68,7 +67,7 @@ export class BattleScene {
       .chain(
         stateHistoryAnimation(this._view, this._state, param.initialState.stateHistory)
       ).play();
-  };
+  }
 
   /** バッテリー決定 */
   async _decideBattery(action: DecideBattery): Promise<void> {

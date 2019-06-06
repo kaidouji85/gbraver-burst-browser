@@ -8,7 +8,7 @@ import {getHeight, getWidth} from "./resize";
 /**
  * DOMイベントリスナを生成する
  *
- * @param renderDom 　three.jsを描画するHTML要素
+ * @param renderDom three.jsを描画するHTML要素
  * @return DOMイベントリスナ
  */
 export function createDOMEventListener(renderDom: HTMLElement): Observable<DOMEvent> {
@@ -49,7 +49,7 @@ export function createDOMEventListener(renderDom: HTMLElement): Observable<DOMEv
     }));
 
   const resize = fromEvent(window, 'resize').pipe(
-    map(v => ({
+    map(() => ({
       type: 'resize',
       width: getWidth(),
       height: getHeight(),
