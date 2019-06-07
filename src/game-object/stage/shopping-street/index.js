@@ -36,4 +36,4 @@ export default class ShoppingStreet implements Stage {
       this._ambientLight
     ];
   }
-};
+}

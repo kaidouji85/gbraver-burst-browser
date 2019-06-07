@@ -1,6 +1,5 @@
 // @flow
 import type {Resources} from '../../../resource/index';
-import * as THREE from 'three';
 import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud/index';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
@@ -9,7 +8,6 @@ import {Observable, Observer, Subject} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
 import type {Render} from "../../../action/game-loop/render";
-import {Renderer} from "../../../game-object/renderer";
 import TWEEN from "@tweenjs/tween.js";
 
 /** コンストラクタのパラメータ */

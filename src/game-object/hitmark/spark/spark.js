@@ -33,7 +33,7 @@ export class Spark {
     return popUp(this._model);
   }
 
-  /** シーンに追加するObject3Dを追加する　*/
+  /** シーンに追加するObject3Dを追加する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
   }
