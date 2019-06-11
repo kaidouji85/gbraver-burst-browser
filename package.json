@@ -7,7 +7,7 @@
     "postinstall": "npm run build",
     "start": "npm-run-all clean dev-server",
     "start:stub": "npm-run-all clean dev-server:stub",
-    "test": "ava test/src/**/*.js",
+    "test": "ava",
     "build": "npm-run-all clean type-check webpack",
     "build:production": "npm-run-all clean type-check webpack:production",
     "build:stub": "npm-run-all clean webpack:stub",
@@ -38,22 +38,25 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-flow": "^7.0.0",
     "@babel/register": "^7.4.4",
-    "ava": "2.0.0",
+    "ava": "2.1.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.3",
     "eslint": "^5.16.0",
-    "eslint-plugin-flowtype": "^3.9.1",
+    "eslint-plugin-flowtype": "^3.10.1",
     "flow-bin": "^0.100.0",
     "html-webpack-plugin": "^3.2.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.3",
     "webpack": "^4.33.0",
-    "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.6.0"
+    "webpack-cli": "^3.3.4",
+    "webpack-dev-server": "^3.7.1"
   },
   "ava": {
     "babel": false,
+    "files": [
+      "test/src/**/*.js"
+    ],
     "compileEnhancements": false,
     "require": [
       "@babel/register"
