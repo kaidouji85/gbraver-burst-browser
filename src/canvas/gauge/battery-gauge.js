@@ -7,7 +7,6 @@ import {drawImageInCenter} from "../draw/image-drawer";
 import * as R from 'ramda';
 
 const PADDING_TOP = 22;
-const NUMBER_COLOR = '#FDFDFD';
 const LINE_COLOR = '#000000';
 const LINE_HEIGHT = 16;
 

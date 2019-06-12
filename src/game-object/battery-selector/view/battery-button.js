@@ -85,7 +85,7 @@ export class BatteryButton {
     this._attackLabel.setOpacity(attackOpacity);
     this._defenseLabel.setOpacity(defenseOpacity);
     this._button.setOpacity(model.opacity);
-  };
+  }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {

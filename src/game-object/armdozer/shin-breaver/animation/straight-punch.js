@@ -5,7 +5,6 @@ import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {Animate} from "../../../../animation/animate";
 import {delay} from "../../../../animation/delay";
-import {all} from '../../../../animation/all';
 
 /** ストレートパンチ */
 export function straightPunch(model: ShinBraverModel): Animate {
