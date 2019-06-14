@@ -38,10 +38,10 @@ export const NeoLandozerNpc: NPC = {
 
 /** 攻撃ルーチン */
 function attackRoutine(enemy: PlayerState, command: Command[]): Command {
-  const battery4 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 4);
+  const battery3 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
 
-  if (battery4 && 5 <= enemy.armdozer.battery) {
-    return battery4;
+  if (battery3) {
+    return battery3;
   }
 
   return ZERO_BATTERY;
