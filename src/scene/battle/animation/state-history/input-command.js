@@ -36,7 +36,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   }
 
   const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
-  const enableMax = getEnableMax(effect, sceneState.playerId);
+  const enableMax = getEnableMax(playerCommand.command);
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   const burstDisabled = isBurstButtonDisabled(playerCommand.command);
