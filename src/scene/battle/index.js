@@ -90,17 +90,14 @@ export class BattleScene {
 
   /** バースト */
   async _doBurst(action: DoBurst): Promise<void> {
-    console.log('burst');
-    /*
     if (!this._state.canOperation) {
       return;
     }
 
     this._state.canOperation = false;
-    await this._progressGame({type: 'BURST_COMMAND'});
     await invisibleUI(this._view).play();
+    await this._progressGame({type: 'BURST_COMMAND'});
     this._state.canOperation = true;
-     */
   }
 
   /** ゲームを進める */
