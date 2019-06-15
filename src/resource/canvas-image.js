@@ -26,7 +26,6 @@ export const CANVAS_IMAGE_IDS = {
   GAUGE_BAR_BASE: 'GAUGE_BAR_BASE',
   BATTERY_BUTTON: 'BATTERY_BUTTON',
   BATTERY_PLUS: 'BATTERY_PLUS',
-  DIS_ACTIVE_BATTERY_PLUS: 'DIS_ACTIVE_BATTERY_PLUS',
   BATTERY_MINUS: 'BATTERY_MINUS',
   BATTERY_METER: 'BATTERY_METER',
   BATTERY_NEEDLE: 'BATTERY_NEEDLE',
@@ -73,10 +72,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BATTERY_PLUS,
     path: 'battery-selector/plus-button.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_PLUS,
-    path: 'battery-selector/dis-active-plus-button.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_MINUS,
