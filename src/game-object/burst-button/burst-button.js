@@ -15,7 +15,8 @@ import type {PreRender} from "../../action/game-loop/pre-render";
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>
+  listener: Observable<GameObjectAction>,
+  onPush: () => void,
 };
 
 /** バーストボタン */
@@ -25,7 +26,13 @@ export class BurstButton {
 
   constructor(param: Param) {
     this._model = createInitialValue();
-    this._view = new BurstButtonView(param.resources);
+    this._view = new BurstButtonView({
+      resources: param.resources,
+      listener: param.listener,
+      onPush: () => {
+        param.onPush();
+      }
+    });
     param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
