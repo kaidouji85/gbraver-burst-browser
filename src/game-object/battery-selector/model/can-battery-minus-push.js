@@ -9,6 +9,6 @@ import {MIN_BATTERY} from "./index";
  * @param model 判定対象のモデル
  * @return 判定結果、trueで操作可能
  */
-export function isBatteryMinusDisabled(model: BatterySelectorModel): boolean {
+export function canBatteryMinusPush(model: BatterySelectorModel): boolean {
   return model.battery <= MIN_BATTERY;
 }

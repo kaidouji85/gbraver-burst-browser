@@ -9,6 +9,6 @@ import {MAX_BATTERY} from "./index";
  * @param model 判定対象モデル
  * @return 半手結果、trueで操作可能
  */
-export function isBatteryPlusDisabled(model: BatterySelectorModel): boolean {
+export function canBatteryPlusPush(model: BatterySelectorModel): boolean {
   return Math.min(MAX_BATTERY, model.enableMaxBattery) <= model.battery;
 }

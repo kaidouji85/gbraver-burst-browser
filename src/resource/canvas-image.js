@@ -27,7 +27,6 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_BUTTON: 'BATTERY_BUTTON',
   BATTERY_PLUS: 'BATTERY_PLUS',
   DIS_ACTIVE_BATTERY_PLUS: 'DIS_ACTIVE_BATTERY_PLUS',
-  DIS_ACTIVE_BATTERY_MINUS: 'DIS_ACTIVE_BATTERY_MINUS',
   BATTERY_MINUS: 'BATTERY_MINUS',
   BATTERY_METER: 'BATTERY_METER',
   BATTERY_NEEDLE: 'BATTERY_NEEDLE',
@@ -36,6 +35,7 @@ export const CANVAS_IMAGE_IDS = {
   TURN_INDICATOR: 'TURN_INDICATOR',
   BURST_BUTTON: 'BURST_BUTTON',
   BIG_BUTTON_DISABLED: 'BIG_BUTTON_DISABLED',
+  SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
 };
@@ -83,10 +83,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'battery-selector/minus-button.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_MINUS,
-    path: 'battery-selector/dis-active-minus-button.png',
-  },
-  {
     id: CANVAS_IMAGE_IDS.BATTERY_METER,
     path: 'battery-selector/meter.png',
   },
@@ -113,6 +109,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED,
     path: 'button/big-button-disabled.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED,
+    path: 'button/small-button-disabled.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_NUMBER,
