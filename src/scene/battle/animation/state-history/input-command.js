@@ -46,5 +46,5 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
     view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
     view.hud.gameObjects.burstButton.visible()
-  )
+  );
 }
