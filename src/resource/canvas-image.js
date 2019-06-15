@@ -35,6 +35,7 @@ export const CANVAS_IMAGE_IDS = {
   BATTERY_LABEL_DEFENSE: 'BATTERY_LABEL_DEFENSE',
   TURN_INDICATOR: 'TURN_INDICATOR',
   BURST_BUTTON: 'BURST_BUTTON',
+  BIG_BUTTON_DISABLED: 'BIG_BUTTON_DISABLED',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
 };
@@ -108,6 +109,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BURST_BUTTON,
     path: 'burst-button/burst-button.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED,
+    path: 'button/big-button-disabled.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_NUMBER,

@@ -31,21 +31,32 @@ type Param = {
 
 /** バーストボタンのビュー */
 export class BurstButtonView {
-  _mesh: SimpleImageMesh;
+  _burstButton: SimpleImageMesh;
+  _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
   _group: THREE.Group;
 
   constructor(param: Param) {
-    const imageResource = param.resources.canvasImages
+    const burstButtonResource = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON);
-    const image = imageResource
-      ? imageResource.image
+    const burstButton = burstButtonResource
+      ? burstButtonResource.image
       : new Image();
-    this._mesh = new SimpleImageMesh({
+    this._burstButton = new SimpleImageMesh({
       canvasSize: CANVAS_SIZE,
-      image: image
+      image: burstButton
     });
-    
+
+    const buttonDisabledResource = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED);
+    const buttonDisabled = buttonDisabledResource
+      ? buttonDisabledResource.image
+      : new Image();
+    this._buttonDisabled = new SimpleImageMesh({
+      canvasSize: CANVAS_SIZE,
+      image: buttonDisabled
+    });
+
     this._overlap = circleButtonOverlap({
       radius: 200,
       segments: 32,
@@ -56,14 +67,18 @@ export class BurstButtonView {
     });
 
     this._group = new THREE.Group();
-    this._group.add(this._mesh.getObject3D());
+    this._group.add(this._burstButton.getObject3D());
+    this._group.add(this._buttonDisabled.getObject3D());
     this._group.add(this._overlap.getObject3D());
     this._group.scale.set(SCALE, SCALE, SCALE);
   }
 
   /** モデルをビューに反映させる */
   engage(model: BurstButtonModel): void {
-    this._mesh.setOpacity(model.opacity);
+    this._burstButton.setOpacity(model.opacity);
+
+    const disabledOpacity = model.disabled ? model.opacity : 0;
+    this._buttonDisabled.setOpacity(disabledOpacity);
   }
 
   /** プリレンダー */
