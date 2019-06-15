@@ -48,7 +48,7 @@ export class ButtonOverlap {
    * @param visible trueで当たり判定を表示する
    */
   setVisible(visible: boolean): void {
-    this._mesh.material.visible = true;
+    this._mesh.material.visible = visible;
   }
 
   /** シーンに追加するオブジェクトを取得する */
