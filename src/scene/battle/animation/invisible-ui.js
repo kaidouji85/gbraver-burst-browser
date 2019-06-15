@@ -9,6 +9,6 @@ export function invisibleUI(view: BattleSceneView): Animate {
   return empty()
     .chain(
       view.hud.gameObjects.batterySelector.close(),
-      view.hud.gameObjects.burstButton.invisible()
+      view.hud.gameObjects.burstButton.close()
     )
 }

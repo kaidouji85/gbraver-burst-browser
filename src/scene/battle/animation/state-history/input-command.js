@@ -6,8 +6,9 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
 import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
-import {delay, empty} from "../../../../animation/delay";
+import {empty} from "../../../../animation/delay";
 import {all} from "../../../../animation/all";
+import {isBurstButtonDisabled} from "../../ui-logic/burst-button";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -24,12 +25,13 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
 
   const effect: InputCommand = gameState.effect;
   const player = gameState.players.find(v => v.playerId === sceneState.playerId);
+  const playerCommand = effect.players.find(v => v.playerId === sceneState.playerId);
   const playerTD = view.td.players.find(v => v.playerId === sceneState.playerId);
   const playerHUD = view.hud.players.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
   const enemyTD = view.td.players.find(v => v.playerId !== sceneState.playerId);
   const enemyHUD = view.hud.players.find(v => v.playerId !== sceneState.playerId);
-  if (!player || !playerTD || !playerHUD || !enemy || !enemyHUD || !enemyTD) {
+  if (!player || !playerCommand || !playerTD || !playerHUD || !enemy || !enemyHUD || !enemyTD) {
     return empty();
   }
 
@@ -37,14 +39,14 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const enableMax = getEnableMax(effect, sceneState.playerId);
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
+  const burstDisabled = isBurstButtonDisabled(playerCommand.command);
   return all(
-    delay(500),
     playerHUD.gauge.hp(player.armdozer.hp),
     playerHUD.gauge.battery(player.armdozer.battery),
     enemyHUD.gauge.hp(enemy.armdozer.hp),
     enemyHUD.gauge.battery(enemy.armdozer.battery),
     view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
     view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
-    view.hud.gameObjects.burstButton.visible()
-  );
+    view.hud.gameObjects.burstButton.open(burstDisabled)
+  )
 }

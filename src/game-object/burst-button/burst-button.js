@@ -7,8 +7,8 @@ import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
-import {visible} from './animation/visible';
-import {invisible} from './animation/invisible';
+import {open} from './animation/open';
+import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
 import {Animate} from "../../animation/animate";
 import type {PreRender} from "../../action/game-loop/pre-render";
@@ -30,6 +30,9 @@ export class BurstButton {
       resources: param.resources,
       listener: param.listener,
       onPush: () => {
+        if (this._model.disabled) {
+          return;
+        }
         param.onPush();
       }
     });
@@ -42,19 +45,22 @@ export class BurstButton {
     });
   }
 
-  /** ボタンを表示する */
-  visible(): Animate {
-    return visible(this._model);
+  /**
+   * ボタンを表示する
+   *
+   * @param isDisabled trueで操作不可能
+   */
+  open(isDisabled: boolean): Animate {
+    return open(this._model, isDisabled);
   }
 
   /**
    * ボタンを非表示にする
-   * 本アニメはディライの値に関わらず、再生された時点でdisabled=trueになる
    *
    * @param delay 非表示アニメが再生されるまでディライ
    */
-  invisible(): Animate {
-    return invisible(this._model);
+  close(): Animate {
+    return close(this._model);
   }
 
   /** three.jsオブジェクトを取得する */

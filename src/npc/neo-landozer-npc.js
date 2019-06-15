@@ -28,11 +28,7 @@ export const NeoLandozerNpc: NPC = {
 
     const enableCommand = lastState.effect.players.find(v => v.playerId === enemyId);
     const enemy = lastState.players.find(v => v.playerId === enemyId);
-    if (!enableCommand || !enemy) {
-      return ZERO_BATTERY;
-    }
-
-    if (enableCommand.command.length === 0) {
+    if (!enableCommand || enableCommand.command.length === 0 || !enemy) {
       return ZERO_BATTERY;
     }
 
