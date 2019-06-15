@@ -1,6 +1,6 @@
 // @flow
 import {Animate} from "../../../../../../animation/animate";
-import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";
+import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {shinBraverAttack} from "./shin-braver";
 import {neoLandozerAttack} from "./neo-landozer";
