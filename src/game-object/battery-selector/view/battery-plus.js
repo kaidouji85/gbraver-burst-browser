@@ -9,7 +9,7 @@ import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
-import {isBatteryPlusDisabled} from "../model/is-battery-plus-disabled";
+import {canBatteryPlusPush} from "../model/can-battery-plus-push";
 
 /** メッシュサイズ */
 const MESH_SIZE = 256;
@@ -25,12 +25,10 @@ type Param = {
 export class BatteryPlus {
   _group: THREE.Group;
   _activeButton: SimpleImageMesh;
-  _disActiveButton: SimpleImageMesh;
+  _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
 
   constructor(param: Param) {
-    this._group = new THREE.Group();
-
     const activeResource = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_PLUS);
     const active = activeResource
@@ -40,18 +38,16 @@ export class BatteryPlus {
       canvasSize: MESH_SIZE,
       image: active
     });
-    this._group.add(this._activeButton.getObject3D());
 
-    const disActiveResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_PLUS);
-    const disActive = disActiveResource
-      ? disActiveResource.image
+    const buttonDisabledResource = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED);
+    const buttonDisabled = buttonDisabledResource
+      ? buttonDisabledResource.image
       : new Image();
-    this._disActiveButton = new SimpleImageMesh({
+    this._buttonDisabled = new SimpleImageMesh({
       canvasSize: MESH_SIZE,
-      image: disActive
+      image: buttonDisabled
     });
-    this._group.add(this._disActiveButton.getObject3D());
 
     this._overlap = circleButtonOverlap({
       radius: 80,
@@ -61,16 +57,20 @@ export class BatteryPlus {
         param.onPush();
       }
     });
+
+    this._group = new THREE.Group();
+    this._group.add(this._activeButton.getObject3D());
+    this._group.add(this._buttonDisabled.getObject3D());
     this._group.add(this._overlap.getObject3D());
   }
 
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
-    const isDisabled = isBatteryPlusDisabled(model);
-    const activeOpacity = isDisabled ? 0 : model.opacity;
-    const disActiveOpacity = isDisabled ? model.opacity : 0;
-    this._activeButton.setOpacity(activeOpacity);
-    this._disActiveButton.setOpacity(disActiveOpacity);
+    this._activeButton.setOpacity(model.opacity);
+
+    const isDisabledVisible = canBatteryPlusPush(model);
+    const disabledOpacity = isDisabledVisible ? model.opacity : 0;
+    this._buttonDisabled.setOpacity(disabledOpacity);
   }
 
   /** シーンに追加するオブジェクトを取得する */

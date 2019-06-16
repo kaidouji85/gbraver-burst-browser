@@ -13,6 +13,8 @@ import {stateHistoryAnimation} from "./animation/state-history";
 import {delay} from "../../animation/delay";
 import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../action/game-loop/render";
+import type {DoBurst} from "../../action/battle-scene/do-burst";
+import type {Command} from "gbraver-burst-core/lib/command/command";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -60,6 +62,8 @@ export class BattleScene {
     this._battleAction.subscribe(action => {
       if (action.type === 'decideBattery') {
         this._decideBattery(action);
+      } else if (action.type === 'doBurst') {
+        this,this._doBurst(action);
       }
     });
 
@@ -77,11 +81,28 @@ export class BattleScene {
 
     this._state.canOperation = false;
     await invisibleUI(this._view).play();
-    const updateState = await this._battleRoom.progress({
+    await this._progressGame({
       type: 'BATTERY_COMMAND',
       battery: action.battery
     });
-    await stateHistoryAnimation(this._view, this._state, updateState).play();
     this._state.canOperation = true;
+  }
+
+  /** バースト */
+  async _doBurst(action: DoBurst): Promise<void> {
+    if (!this._state.canOperation) {
+      return;
+    }
+
+    this._state.canOperation = false;
+    await invisibleUI(this._view).play();
+    await this._progressGame({type: 'BURST_COMMAND'});
+    this._state.canOperation = true;
+  }
+
+  /** ゲームを進める */
+  async _progressGame(command: Command): Promise<void> {
+    const updateState = await this._battleRoom.progress(command);
+    await stateHistoryAnimation(this._view, this._state, updateState).play();
   }
 }

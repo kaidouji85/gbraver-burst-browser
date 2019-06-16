@@ -2,7 +2,7 @@
 
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import type {Resources} from "../../../../../resource";
-import {EnemyShinBraver} from '../../../../../game-object/armdozer/shin-breaver';
+import {EnemyShinBraver} from '../../../../../game-object/armdozer/shin-braver';
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import {EnemyNeoLandozer} from "../../../../../game-object/armdozer/neo-landozer";
 import {Observable} from "rxjs";
@@ -46,7 +46,7 @@ export function createEnemySprite(resources: Resources, listener: Observable<Gam
   switch (enemyInfo.armdozer.appearance) {
     case 'neo-landozer':
       return EnemyNeoLandozer(resources, listener);
-    case 'shin-breaver':
+    case 'shin-braver':
     default:
       return EnemyShinBraver(resources, listener);
   }

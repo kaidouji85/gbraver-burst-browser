@@ -2,5 +2,8 @@
 
 /** バーストボタンのモデル */
 export type BurstButtonModel = {
-  opacity: number
+  /** 透明度 */
+  opacity: number,
+  /** trueでボタンを操作できないフラグ */
+  disabled: boolean,
 };

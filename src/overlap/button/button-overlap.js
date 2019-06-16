@@ -42,6 +42,15 @@ export class ButtonOverlap {
     this._onButtonPush = param.onButtonPush;
   }
 
+  /**
+   * デバッグ用に当たり判定を表示する
+   *
+   * @param visible trueで当たり判定を表示する
+   */
+  setVisible(visible: boolean): void {
+    this._mesh.material.visible = visible;
+  }
+
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._mesh;
