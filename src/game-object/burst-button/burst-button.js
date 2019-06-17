@@ -30,7 +30,7 @@ export class BurstButton {
       resources: param.resources,
       listener: param.listener,
       onPush: () => {
-        if (this._model.disabled) {
+        if (this._model.disabled || !this._model.canBurst) {
           return;
         }
         param.onPush();
@@ -48,10 +48,10 @@ export class BurstButton {
   /**
    * ボタンを表示する
    *
-   * @param isDisabled trueで操作不可能
+   * @param canBurst バースト可能フラグ、trueでバースト可能
    */
-  open(isDisabled: boolean): Animate {
-    return open(this._model, isDisabled);
+  open(canBurst: boolean): Animate {
+    return open(this._model, canBurst);
   }
 
   /**

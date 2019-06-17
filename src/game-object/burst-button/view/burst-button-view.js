@@ -77,7 +77,7 @@ export class BurstButtonView {
   engage(model: BurstButtonModel): void {
     this._burstButton.setOpacity(model.opacity);
 
-    const disabledOpacity = model.disabled ? model.opacity : 0;
+    const disabledOpacity = model.canBurst ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
   }
 

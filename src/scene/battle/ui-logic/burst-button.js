@@ -6,10 +6,10 @@ import type {Command} from "gbraver-burst-core/lib/command/command";
  * バーストが操作可能か否かを判定する
  *
  * @param commands プレイヤーコマンド
- * @return 判定結果、trueで操作不可能
+ * @return 判定結果、trueで操作可能
  */
-export function isBurstButtonDisabled(commands: Command[]): boolean {
+export function canBurstButtonPush(commands: Command[]): boolean {
   const burstCommands = commands.filter(v => v.type === 'BURST_COMMAND');
-  return burstCommands.length < 1;
+  return 1 <= burstCommands.length;
 
 }
