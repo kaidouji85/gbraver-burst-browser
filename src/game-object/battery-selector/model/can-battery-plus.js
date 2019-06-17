@@ -4,11 +4,11 @@ import type {BatterySelectorModel} from "./index";
 import {MAX_BATTERY} from "./index";
 
 /**
- * バッテリープラスボタンが操作可能か否かを判定する
+ * バッテリーメーター+1できるか否かを判定する
  *
  * @param model 判定対象モデル
- * @return 半手結果、trueで操作可能
+ * @return 半手結果、trueで+1できる
  */
-export function canBatteryPlusPush(model: BatterySelectorModel): boolean {
+export function canBatteryPlus(model: BatterySelectorModel): boolean {
   return Math.min(MAX_BATTERY, model.enableMaxBattery) <= model.battery;
 }
