@@ -8,7 +8,7 @@ import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/inp
 import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
 import {empty} from "../../../../animation/delay";
 import {all} from "../../../../animation/all";
-import {isBurstButtonDisabled} from "../../ui-logic/burst-button";
+import {canBurstButtonPush} from "../../ui-logic/burst-button";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -39,7 +39,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const enableMax = getEnableMax(playerCommand.command);
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
-  const burstDisabled = isBurstButtonDisabled(playerCommand.command);
+  const canBurst = canBurstButtonPush(playerCommand.command);
   return all(
     playerHUD.gauge.hp(player.armdozer.hp),
     playerHUD.gauge.battery(player.armdozer.battery),
@@ -47,6 +47,6 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     enemyHUD.gauge.battery(enemy.armdozer.battery),
     view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
     view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
-    view.hud.gameObjects.burstButton.open(burstDisabled)
+    view.hud.gameObjects.burstButton.open(canBurst)
   )
 }
