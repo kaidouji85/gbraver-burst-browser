@@ -23,7 +23,7 @@ export function shinBraverAttack(param: BattleAnimationParam<ShinBraver, BattleR
   const result = param.result;
   switch (result.name) {
     case 'NormalHit':
-    case 'Critical':
+    case 'CriticalHit':
       return attack(overWriteResult(param, result));
     case 'Guard':
       return guard(overWriteResult(param, result));
