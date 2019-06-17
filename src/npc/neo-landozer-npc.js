@@ -28,27 +28,29 @@ export const NeoLandozerNpc: NPC = {
 
     const enableCommand = lastState.effect.players.find(v => v.playerId === enemyId);
     const enemy = lastState.players.find(v => v.playerId === enemyId);
-    if (!enableCommand || !enemy) {
+    if (!enableCommand || enableCommand.command.length === 0 || !enemy) {
       return ZERO_BATTERY;
     }
+
     const isAttacker = lastState.activePlayerId === enemyId;
-    return isAttacker ? attackRoutine(enemy, enableCommand.command) : defenseRoutine(enemy, enableCommand.command);
+    const command = isAttacker ? attackRoutine(enemy, enableCommand.command) : defenseRoutine(enemy, enableCommand.command);
+    return command ? command : enableCommand.command[0];
   }
 };
 
 /** 攻撃ルーチン */
-function attackRoutine(enemy: PlayerState, command: Command[]): Command {
-  const battery4 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 4);
+function attackRoutine(enemy: PlayerState, command: Command[]): ?Command {
+  const battery3 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
 
-  if (battery4 && 5 <= enemy.armdozer.battery) {
-    return battery4;
+  if (battery3) {
+    return battery3;
   }
 
-  return ZERO_BATTERY;
+  return null;
 }
 
 /** 防御ルーチン */
-function defenseRoutine(enemy: PlayerState, command: Command[]): Command {
+function defenseRoutine(enemy: PlayerState, command: Command[]): ?Command {
   const battery1 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
   const battery2 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
   if (battery2) {
@@ -59,5 +61,5 @@ function defenseRoutine(enemy: PlayerState, command: Command[]): Command {
     return battery1;
   }
 
-  return ZERO_BATTERY;
+  return null;
 }

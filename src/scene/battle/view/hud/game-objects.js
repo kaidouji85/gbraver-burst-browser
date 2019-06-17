@@ -42,9 +42,15 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
       });
     }
   });
+
   const burstButton = new BurstButton({
     resources: resources,
-    listener: listener
+    listener: listener,
+    onPush: () => {
+      notifier.next({
+        type: 'doBurst'
+      });
+    }
   });
 
   return {

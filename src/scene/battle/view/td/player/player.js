@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from "../../../../../resource";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
-import {PlayerShinBraver} from "../../../../../game-object/armdozer/shin-breaver";
+import {PlayerShinBraver} from "../../../../../game-object/armdozer/shin-braver";
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import {PlayerNeoLandozer} from "../../../../../game-object/armdozer/neo-landozer";
 import {Observable} from "rxjs";

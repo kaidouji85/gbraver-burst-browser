@@ -16,8 +16,8 @@ import {changeNeedle} from "./animation/change-needle";
 import {getNeedleValue} from "./model/needle-value";
 import {open} from './animation/open';
 import {close} from './animation/close';
-import {isBatteryMinusDisabled} from "./model/is-battery-minus-disabled";
-import {isBatteryPlusDisabled} from "./model/is-battery-plus-disabled";
+import {canBatteryMinus} from "./model/can-battery-minus";
+import {canBatteryPlus} from "./model/can-battery-plus";
 import type {PreRender} from "../../action/game-loop/pre-render";
 
 /** コンストラクタのパラメータ */
@@ -58,7 +58,7 @@ export class BatterySelector {
         param.onOkButtonPush();
       },
       onPlusPush: () => {
-        if (this._model.disabled || isBatteryPlusDisabled(this._model)) {
+        if (this._model.disabled || canBatteryPlus(this._model)) {
           return;
         }
 
@@ -66,7 +66,7 @@ export class BatterySelector {
         param.onBatteryChange(this._model.battery);
       },
       onMinusPush: () => {
-        if (this._model.disabled || isBatteryMinusDisabled(this._model)) {
+        if (this._model.disabled || canBatteryMinus(this._model)) {
           return;
         }
 

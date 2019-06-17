@@ -3,7 +3,7 @@
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import type {BattleAnimationParam} from "../animation-param";
-import {ShinBraver} from "../../../../../../game-object/armdozer/shin-breaver/shin-braver";
+import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import type {
   BattleResult,
   CriticalHit, Feint,
@@ -23,7 +23,7 @@ export function shinBraverAttack(param: BattleAnimationParam<ShinBraver, BattleR
   const result = param.result;
   switch (result.name) {
     case 'NormalHit':
-    case 'Critical':
+    case 'CriticalHit':
       return attack(overWriteResult(param, result));
     case 'Guard':
       return guard(overWriteResult(param, result));
