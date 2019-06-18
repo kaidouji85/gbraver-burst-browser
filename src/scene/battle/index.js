@@ -15,6 +15,7 @@ import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../action/game-loop/render";
 import type {DoBurst} from "../../action/battle-scene/do-burst";
 import type {Command} from "gbraver-burst-core/lib/command/command";
+import {getAutoProgressCommand, shouldSkipInputCommand} from "./ui-logic/command";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -102,7 +103,36 @@ export class BattleScene {
 
   /** ゲームを進める */
   async _progressGame(command: Command): Promise<void> {
-    const updateState = await this._battleRoom.progress(command);
-    await stateHistoryAnimation(this._view, this._state, updateState).play();
+    let lastCommand: Command = command;
+    for (let i=0; i<100; i++) {
+      const updateState = await this._battleRoom.progress(lastCommand);
+      await stateHistoryAnimation(this._view, this._state, updateState).play();
+
+      if (updateState.length <= 0) {
+        return;
+      }
+
+      const lastState = updateState[updateState.length - 1];
+      if (lastState.effect.name !== 'InputCommand') {
+        return;
+      }
+
+      const playerCommand = lastState.effect.players
+        .find(v => v.playerId === this._state.playerId);
+      if (!playerCommand) {
+        return;
+      }
+
+      if (!shouldSkipInputCommand(playerCommand.command)) {
+        return;
+      }
+
+      const autoProgressCommand = getAutoProgressCommand(playerCommand.command);
+      if (!autoProgressCommand) {
+        return;
+      }
+
+      lastCommand = autoProgressCommand;
+    }
   }
 }

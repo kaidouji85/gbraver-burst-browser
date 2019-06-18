@@ -9,6 +9,7 @@ import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
 import {empty} from "../../../../animation/delay";
 import {all} from "../../../../animation/all";
 import {canBurstButtonPush} from "../../ui-logic/burst-button";
+import {shouldSkipInputCommand} from "../../ui-logic/command";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -32,6 +33,10 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const enemyTD = view.td.players.find(v => v.playerId !== sceneState.playerId);
   const enemyHUD = view.hud.players.find(v => v.playerId !== sceneState.playerId);
   if (!player || !playerCommand || !playerTD || !playerHUD || !enemy || !enemyHUD || !enemyTD) {
+    return empty();
+  }
+
+  if (shouldSkipInputCommand(playerCommand.command)) {
     return empty();
   }
 
