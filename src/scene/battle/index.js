@@ -15,7 +15,6 @@ import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../action/game-loop/render";
 import type {DoBurst} from "../../action/battle-scene/do-burst";
 import type {Command} from "gbraver-burst-core/lib/command/command";
-import {getAutoProgressCommand, shouldSkipInputCommand} from "./ui-logic/command";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -64,7 +63,7 @@ export class BattleScene {
       if (action.type === 'decideBattery') {
         this._decideBattery(action);
       } else if (action.type === 'doBurst') {
-        this,this._doBurst(action);
+        this._doBurst(action);
       }
     });
 
@@ -117,22 +116,16 @@ export class BattleScene {
         return;
       }
 
-      const playerCommand = lastState.effect.players
-        .find(v => v.playerId === this._state.playerId);
+      const playerCommand = lastState.effect.players.find(v => v.playerId === this._state.playerId);
       if (!playerCommand) {
         return;
       }
 
-      if (!shouldSkipInputCommand(playerCommand.command)) {
+      if (playerCommand.selectable === true) {
         return;
       }
 
-      const autoProgressCommand = getAutoProgressCommand(playerCommand.command);
-      if (!autoProgressCommand) {
-        return;
-      }
-
-      lastCommand = autoProgressCommand;
+      lastCommand = playerCommand.nextTurnCommand;
     }
   }
 }
