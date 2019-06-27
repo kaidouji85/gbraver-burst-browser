@@ -4,14 +4,14 @@ import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import type {BattleAnimationParam} from "../animation-param";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
-import type {
-  BattleResult,
-  CriticalHit, Feint,
-  Guard, Miss,
-  NormalHit
-} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import {overWriteResult} from "../animation-param";
 import {all} from "../../../../../../animation/all";
+import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/effect/battle-result";
+import type {NormalHit} from "gbraver-burst-core/lib/effect/battle/effect/normal-hit";
+import type {CriticalHit} from "gbraver-burst-core/lib/effect/battle/effect/critical-hit";
+import type {Guard} from "gbraver-burst-core/lib/effect/battle/effect/guard";
+import type {Miss} from "gbraver-burst-core/lib/effect/battle/effect/miss";
+import type {Feint} from "gbraver-burst-core/lib/effect/battle/effect/feint";
 
 /**
  * 新ブレイバーの攻撃アニメーション

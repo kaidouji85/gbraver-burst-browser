@@ -1,5 +1,5 @@
 {
-  "name": "gbraver-burst-client",
+  "name": "gbraver-burst-browser",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
@@ -25,12 +25,12 @@
   "license": "ISC",
   "dependencies": {
     "@tweenjs/tween.js": "^17.4.0",
-    "gbraver-burst-core": "0.4.0",
+    "gbraver-burst-core": "0.4.1",
     "puid": "^1.0.7",
     "ramda": "^0.26.1",
     "rxjs": "^6.5.2",
     "stats.js": "^0.17.0",
-    "three": "^0.105.2",
+    "three": "^0.106.0",
     "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
@@ -42,14 +42,14 @@
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.0.3",
-    "eslint": "^5.16.0",
-    "eslint-plugin-flowtype": "^3.10.3",
-    "flow-bin": "^0.101.0",
+    "eslint": "^6.0.1",
+    "eslint-plugin-flowtype": "^3.11.1",
+    "flow-bin": "^0.102.0",
     "html-webpack-plugin": "^3.2.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^2.6.3",
-    "webpack": "^4.34.0",
-    "webpack-cli": "^3.3.4",
+    "webpack": "^4.35.0",
+    "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2"
   },
   "ava": {

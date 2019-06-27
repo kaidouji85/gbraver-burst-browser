@@ -7,11 +7,11 @@ import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import type {HUDGameObjects} from "../../../view/hud/game-objects";
 import {overWriteTDSprite} from "../../../view/td/player";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/index";
+import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/battle-effect";
+import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/effect/battle-result";
 
 /**
  * 戦闘アニメーション共通で使うパラメータ
