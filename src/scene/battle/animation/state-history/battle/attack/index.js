@@ -8,7 +8,7 @@ import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam} from "../animation-param";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import {overWriteAttackerTD} from "../animation-param";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/effect/battle-result";
+import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 
 /**
  * 攻撃側スプライトに応じて、戦闘アニメーションを切り替える

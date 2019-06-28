@@ -10,8 +10,8 @@ import {overWriteTDSprite} from "../../../view/td/player";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {Battle} from "gbraver-burst-core/lib/effect/battle/effect/battle-effect";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/effect/battle-result";
+import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import type {Battle} from "gbraver-burst-core/lib/effect/battle/battle";
 
 /**
  * 戦闘アニメーション共通で使うパラメータ

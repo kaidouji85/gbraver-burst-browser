@@ -6,10 +6,10 @@ import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdoz
 import {empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
 import {overWriteResult} from "../animation-param";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/effect/battle-result";
-import type {NormalHit} from "gbraver-burst-core/lib/effect/battle/effect/normal-hit";
-import type {CriticalHit} from "gbraver-burst-core/lib/effect/battle/effect/critical-hit";
-import type {Guard} from "gbraver-burst-core/lib/effect/battle/effect/guard";
+import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import type {NormalHit} from "gbraver-burst-core/lib/effect/battle/result/normal-hit";
+import type {CriticalHit} from "gbraver-burst-core/lib/effect/battle/result/critical-hit";
+import type {Guard} from "gbraver-burst-core/lib/effect/battle/result/guard";
 
 /**
  * 数字表示だけをする戦闘アニメーション
