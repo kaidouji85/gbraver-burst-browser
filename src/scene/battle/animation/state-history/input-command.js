@@ -35,6 +35,10 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     return empty();
   }
 
+  if (playerCommand.selectable === false) {
+    return empty();
+  }
+
   const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
   const enableMax = getEnableMax(playerCommand.command);
   const initialValue = getInitialBattery(enableMax);
