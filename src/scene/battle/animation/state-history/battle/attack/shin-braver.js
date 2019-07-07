@@ -59,7 +59,7 @@ function attack(param: BattleAnimationParam<ShinBraver, NormalHit | CriticalHit>
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       )
     ).chain(
-      delay(1000)
+      delay(2000)
     ).chain(
       param.defenderTD.sprite.knockBackToStand()
     ),
@@ -105,14 +105,27 @@ function guard(param: BattleAnimationParam<ShinBraver, Guard>): Animate {
 /** ミス */
 function miss(param: BattleAnimationParam<ShinBraver, Miss>): Animate {
   return all(
-    param.attackerTD.sprite.straightPunch(),
-    delay(700).chain(
-      param.defenderTD.sprite.avoid()
+    all(
+      param.attackerTD.sprite.charge().chain(
+        delay(600)
+      ).chain(
+        param.attackerTD.sprite.straightPunch()
+      ).chain(
+        delay(500)
+      ).chain(
+        param.attackerTD.sprite.punchToStand()
+      )
+    ),
+
+    delay(1000).chain(
+      all(
+        param.defenderTD.sprite.avoid(),
+      )
+    ).chain(
+      delay(1000)
+    ).chain(
+      param.defenderTD.sprite.avoidToStand()
     )
-  ).chain(
-    delay(500)
-  ).chain(
-    param.defenderTD.sprite.avoidToStand()
   );
 }
 
