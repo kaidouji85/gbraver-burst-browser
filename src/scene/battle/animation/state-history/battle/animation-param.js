@@ -12,6 +12,8 @@ import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/battle";
+import {Battle3DCamera} from "../../../../../game-object/camera/battle-3d";
+import {BattleHUDCamera} from "../../../../../game-object/camera/battle-hud";
 
 /**
  * 戦闘アニメーション共通で使うパラメータ
@@ -30,7 +32,9 @@ export type BattleAnimationParam<SPRITE, RESULT> = {
   defenderTD: TDPlayer<ArmDozerSprite>,
   defenderHUD: HUDPlayer,
   tdObjects: TDGameObjects,
+  tdCamera: Battle3DCamera,
   hudObjects: HUDGameObjects,
+  hudCamera: BattleHUDCamera,
   result: RESULT
 };
 
@@ -68,7 +72,9 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
     defenderTD: defenderTD,
     defenderHUD: defenderHUD,
     tdObjects: view.td.gameObjects,
+    tdCamera: view.td.camera,
     hudObjects: view.hud.gameObjects,
+    hudCamera: view.hud.camera,
     result: effect.result,
   };
 }

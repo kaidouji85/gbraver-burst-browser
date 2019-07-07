@@ -17,6 +17,8 @@ import {guardToStand} from './animation/guard-to-stand';
 import {avoid} from "./animation/avoid";
 import {armHammer} from "./animation/arm-hammer";
 import {avoidToStand} from "./animation/avoid-to-stand";
+import {charge} from "./animation/charge";
+import {hmToStand} from "./animation/hm-to-stand";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -36,9 +38,19 @@ export class NeoLandozer implements ArmDozerSprite {
     });
   }
 
+  /** チャージ */
+  charge(): Animate {
+    return charge(this._model);
+  }
+
   /** アームハンマー */
   armHammer(): Animate {
     return armHammer(this._model);
+  }
+
+  /** アームハンマー -> 立ち */
+  hmToStand(): Animate {
+    return hmToStand(this._model);
   }
 
   /** ノックバック */
