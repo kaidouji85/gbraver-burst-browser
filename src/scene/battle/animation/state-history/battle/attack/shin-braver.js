@@ -52,7 +52,7 @@ function attack(param: BattleAnimationParam<ShinBraver, NormalHit | CriticalHit>
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
       ))
-      .chain(delay(2000))
+      .chain(delay(1300))
       .chain(param.defenderTD.sprite.knockBackToStand()),
 
     param.tdCamera.zoomIn(300).chain(
@@ -79,7 +79,7 @@ function guard(param: BattleAnimationParam<ShinBraver, Guard>): Animate {
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ))
-      .chain(delay(1000))
+      .chain(delay(1300))
       .chain(param.defenderTD.sprite.guardToStand())
   );
 }
@@ -106,8 +106,7 @@ function feint(param: BattleAnimationParam<ShinBraver, Feint>): Animate {
     return empty();
   }
 
-  return param.defenderTD.sprite
-    .avoid()
+  return param.defenderTD.sprite.avoid()
     .chain(delay(500))
     .chain(param.defenderTD.sprite.avoidToStand());
 }
