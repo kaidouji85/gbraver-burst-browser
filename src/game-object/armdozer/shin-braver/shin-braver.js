@@ -17,6 +17,8 @@ import {avoid} from "./animation/avoid";
 import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
 import {avoidToStand} from "./animation/avoid-to-stand";
+import {punchToStand} from "./animation/punch-to-stand";
+import {charge} from "./animation/charge";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -36,9 +38,19 @@ export class ShinBraver implements ArmDozerSprite {
     });
   }
 
+  /** チャージ */
+  charge(): Animate {
+    return charge(this._model);
+  }
+
   /** ストレートパンチ */
   straightPunch(): Animate {
     return straightPunch(this._model);
+  }
+
+  /** パンチ -> 立ち */
+  punchToStand(): Animate {
+    return punchToStand(this._model);
   }
 
   /** ダメージアニメーションを再生する */

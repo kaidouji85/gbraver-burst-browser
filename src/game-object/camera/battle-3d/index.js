@@ -41,13 +41,13 @@ export class Battle3DCamera {
   }
 
   /** ズームイン */
-  zoomIn(): Animate {
-    return zoomIn(this._model);
+  zoomIn(duration: number): Animate {
+    return zoomIn(this._model, duration);
   }
 
   /** ズームアウト */
-  zoomOut(): Animate {
-    return zoomOut(this._model);
+  zoomOut(duration: number): Animate {
+    return zoomOut(this._model, duration);
   }
 
   /** カメラを取得する */

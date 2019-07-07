@@ -39,17 +39,36 @@ export function shinBraverAttack(param: BattleAnimationParam<ShinBraver, BattleR
 /** 通常ヒット、クリティカル */
 function attack(param: BattleAnimationParam<ShinBraver, NormalHit | CriticalHit>): Animate {
   return all(
-    param.attackerTD.sprite.straightPunch(),
-    delay(700).chain(
-      param.defenderTD.damageIndicator.popUp(param.result.damage),
-      param.defenderTD.sprite.knockBack(),
-      param.defenderTD.hitMark.spark.popUp(),
-      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
-      param.tdCamera.zoomIn(),
+    all(
+      param.attackerTD.sprite.charge().chain(
+        delay(600)
+      ).chain(
+        param.attackerTD.sprite.straightPunch()
+      ).chain(
+        delay(1300)
+      ).chain(
+        param.attackerTD.sprite.punchToStand()
+      )
+    ),
+
+    delay(1000).chain(
+      all(
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderTD.sprite.knockBack(),
+        param.defenderTD.hitMark.spark.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      )
+    ).chain(
+      delay(1000)
+    ).chain(
+      param.defenderTD.sprite.knockBackToStand()
+    ),
+
+    param.tdCamera.zoomIn(300).chain(
+      delay(3000)
+    ).chain(
+      param.tdCamera.zoomOut(1000)
     )
-  ).chain(
-    param.tdCamera.zoomOut(),
-    param.defenderTD.sprite.knockBackToStand()
   );
 }
 
@@ -76,7 +95,7 @@ function miss(param: BattleAnimationParam<ShinBraver, Miss>): Animate {
       param.defenderTD.sprite.avoid()
     )
   ).chain(
-   delay(500)
+    delay(500)
   ).chain(
     param.defenderTD.sprite.avoidToStand()
   );
