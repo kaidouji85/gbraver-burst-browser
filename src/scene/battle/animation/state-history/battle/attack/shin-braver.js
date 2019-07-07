@@ -45,8 +45,10 @@ function attack(param: BattleAnimationParam<ShinBraver, NormalHit | CriticalHit>
       param.defenderTD.sprite.knockBack(),
       param.defenderTD.hitMark.spark.popUp(),
       param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      param.tdCamera.zoomIn(),
     )
   ).chain(
+    param.tdCamera.zoomOut(),
     param.defenderTD.sprite.knockBackToStand()
   );
 }
