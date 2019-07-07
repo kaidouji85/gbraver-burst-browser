@@ -75,15 +75,30 @@ function attack(param: BattleAnimationParam<ShinBraver, NormalHit | CriticalHit>
 /** ガード */
 function guard(param: BattleAnimationParam<ShinBraver, Guard>): Animate {
   return all(
-    param.attackerTD.sprite.straightPunch(),
-    delay(700).chain(
-      param.defenderTD.damageIndicator.popUp(param.result.damage),
-      param.defenderTD.sprite.guard(),
-      param.defenderTD.hitMark.spark.popUp(),
-      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+    all(
+      param.attackerTD.sprite.charge().chain(
+        delay(600)
+      ).chain(
+        param.attackerTD.sprite.straightPunch()
+      ).chain(
+        delay(1300)
+      ).chain(
+        param.attackerTD.sprite.punchToStand()
+      )
+    ),
+
+    delay(1000).chain(
+      all(
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderTD.sprite.guard(),
+        param.defenderTD.hitMark.spark.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
+      )
+    ).chain(
+      delay(1000)
+    ).chain(
+      param.defenderTD.sprite.guardToStand()
     )
-  ).chain(
-    param.defenderTD.sprite.guardToStand()
   );
 }
 
@@ -111,4 +126,5 @@ function feint(param: BattleAnimationParam<ShinBraver, Feint>): Animate {
     .avoid()
     .chain(delay(500))
     .chain(param.defenderTD.sprite.avoidToStand())
+    ;
 }
