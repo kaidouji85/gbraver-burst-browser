@@ -3,18 +3,11 @@ import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import type {TextureResource} from "../../../resource/texture";
 import {TEXTURE_IDS} from "../../../resource/texture";
+import {CUBE_TEXTURE_IDS} from "../../../resource/cube-texture";
 
 const WIDTH = 9000;
 const HEIGHT = 9000;
 const DEPTH = 9000;
-const SKY_BOX_TEXTURE_IDS = [
-  TEXTURE_IDS.BLUE_SKY_RIGHT,
-  TEXTURE_IDS.BLUE_SKY_LEFT,
-  TEXTURE_IDS.BLUE_SKY_UP,
-  TEXTURE_IDS.BLUE_SKY_DOWN,
-  TEXTURE_IDS.BLUE_SKY_BACK,
-  TEXTURE_IDS.BLUE_SKY_FRONT,
-];
 
 /**
  * 青空スカイボックス
@@ -23,11 +16,17 @@ const SKY_BOX_TEXTURE_IDS = [
  * @return 青空スカイボックス
  */
 export default function BlueSky(resources: Resources): THREE.Mesh {
-  const materials = SKY_BOX_TEXTURE_IDS
-    .map(id => resources.textures.find(v => v.id === id))
-    .map((textureResource: ?TextureResource) => textureResource ? textureResource.texture : new THREE.Texture())
-    .map(texture => new THREE.MeshBasicMaterial({map: texture, side: THREE.BackSide}));
-  let geometry = new THREE.CubeGeometry(WIDTH, HEIGHT, DEPTH, 32, 32, 32);
-  let material = new THREE.MultiMaterial(materials);
-  return new THREE.Mesh(geometry, material);
+  const textureResource = resources.cubeTextures.find(v => v.id === CUBE_TEXTURE_IDS.BlueSky);
+  const texture: THREE.CubeTexture = textureResource ? textureResource.texture : new THREE.CubeTexture();
+  const cubeShader = THREE.ShaderLib["cube"];
+  const cubeMaterial = new THREE.ShaderMaterial({
+    fragmentShader: cubeShader.fragmentShader,
+    vertexShader: cubeShader.vertexShader,
+    uniforms: cubeShader.uniforms,
+    depthWrite: false,
+    side: THREE.BackSide,
+  });
+  cubeMaterial.uniforms["tCube"].value = texture;
+  const geometry = new THREE.CubeGeometry(WIDTH, HEIGHT, DEPTH, 32, 32, 32);
+  return new THREE.Mesh(geometry, cubeMaterial);
 }
