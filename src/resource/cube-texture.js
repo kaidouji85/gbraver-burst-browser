@@ -52,12 +52,12 @@ export function loadCubeTexture(basePath: string, config: CubeTextureConfig): Pr
     const loader = new THREE.CubeTextureLoader();
     loader.load(
       [
-        `${basePath}/${config.px}`,
-        `${basePath}/${config.nx}`,
-        `${basePath}/${config.py}`,
-        `${basePath}/${config.ny}`,
-        `${basePath}/${config.pz}`,
-        `${basePath}/${config.nz}`,
+        `${basePath}${config.px}`,
+        `${basePath}${config.nx}`,
+        `${basePath}${config.py}`,
+        `${basePath}${config.ny}`,
+        `${basePath}${config.pz}`,
+        `${basePath}${config.nz}`,
       ],
       (texture: THREE.CubeTexture) => {
         resolve({
