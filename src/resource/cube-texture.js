@@ -31,8 +31,8 @@ export const CUBE_TEXTURE_IDS = {
 export const CUBE_TEXTURE_CONFIGS: CubeTextureConfig[] = [
   {
     id: CUBE_TEXTURE_IDS.BlueSky,
-    px: 'sky-box/blue-sky/right.png',
-    nx: 'sky-box/blue-sky/left.png',
+    px: 'sky-box/blue-sky/left.png',
+    nx: 'sky-box/blue-sky/right.png',
     py: 'sky-box/blue-sky/up.png',
     ny: 'sky-box/blue-sky/down.png',
     pz: 'sky-box/blue-sky/front.png',
