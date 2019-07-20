@@ -30,12 +30,6 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_HM_CHARGE: 'NEO_LANDOZER_HM_CHARGE',
   NEO_LANDOZER_HM_ATTACK: 'NEO_LANDOZER_HM_ATTACK',
   NEO_LANDOZER_HM_TO_STAND: 'NEO_LANDOZER_HM_TO_STAND',
-  BLUE_SKY_FRONT: 'BLUE_SKY_FRONT',
-  BLUE_SKY_RIGHT: 'BLUE_SKY_RIGHT',
-  BLUE_SKY_BACK: 'BLUE_SKY_BACK',
-  BLUE_SKY_LEFT: 'BLUE_SKY_LEFT',
-  BLUE_SKY_UP: 'BLUE_SKY_UP',
-  BLUE_SKY_DOWN: 'BLUE_SKY_DOWN',
   TILE_MAP_SCHOOL_GROUND: 'TILE_MAP_SCHOOL_GROUND',
   HITMARK_SPARK: 'HITMARK_SPARK',
 };
@@ -92,32 +86,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.NEO_LANDOZER_HM_TO_STAND,
     path: 'armdozer/neo-landozer/hm-to-stand.png'
   },
-  // 青空スカイボックス関連
-  {
-    id: TEXTURE_IDS.BLUE_SKY_FRONT,
-    path: 'sky-box/blue-sky/front.png',
-  },
-  {
-    id: TEXTURE_IDS.BLUE_SKY_RIGHT,
-    path: 'sky-box/blue-sky/right.png',
-  },
-  {
-    id: TEXTURE_IDS.BLUE_SKY_BACK,
-    path: 'sky-box/blue-sky/back.png'
-  },
-  {
-    id: TEXTURE_IDS.BLUE_SKY_LEFT,
-    path: 'sky-box/blue-sky/left.png'
-  },
-  {
-    id: TEXTURE_IDS.BLUE_SKY_UP,
-    path: 'sky-box/blue-sky/up.png'
-  },
-  {
-    id: TEXTURE_IDS.BLUE_SKY_DOWN,
-    path: 'sky-box/blue-sky/down.png'
-  },
-
   // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SPARK,

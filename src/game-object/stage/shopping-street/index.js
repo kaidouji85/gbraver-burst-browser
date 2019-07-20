@@ -26,11 +26,11 @@ export default class ShoppingStreet implements Stage {
     this._directionalLight2 = new THREE.DirectionalLight(0xAAAAAA, 0.8);
     this._directionalLight2.position.set(-1, 1, 1);
 
-    this._directionalLight3 = new THREE.DirectionalLight(0xAAAAAA, 0.5);
-    this._directionalLight3.position.set(1, 0, 1);
+    this._directionalLight3 = new THREE.DirectionalLight(0xAAAAAA, 0.6);
+    this._directionalLight3.position.set(1, -1, 1);
 
-    this._directionalLight4 = new THREE.DirectionalLight(0xAAAAAA, 0.5);
-    this._directionalLight4.position.set(-1, 0, 1);
+    this._directionalLight4 = new THREE.DirectionalLight(0xAAAAAA, 0.6);
+    this._directionalLight4.position.set(-1, -1, 1);
 
     this._ambientLight = new THREE.AmbientLight(0xAAAAAA);
   }
