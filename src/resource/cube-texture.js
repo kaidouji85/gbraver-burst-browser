@@ -31,12 +31,12 @@ export const CUBE_TEXTURE_IDS = {
 export const CUBE_TEXTURE_CONFIGS: CubeTextureConfig[] = [
   {
     id: CUBE_TEXTURE_IDS.BlueSky,
-    px: 'sky-box/blue-sky/left.png',
-    nx: 'sky-box/blue-sky/right.png',
-    py: 'sky-box/blue-sky/up.png',
-    ny: 'sky-box/blue-sky/down.png',
-    pz: 'sky-box/blue-sky/front.png',
-    nz: 'sky-box/blue-sky/back.png',
+    px: 'sky-box/blue-sky/px.png',
+    nx: 'sky-box/blue-sky/nx.png',
+    py: 'sky-box/blue-sky/py.png',
+    ny: 'sky-box/blue-sky/ny.png',
+    pz: 'sky-box/blue-sky/pz.png',
+    nz: 'sky-box/blue-sky/nz.png',
   }
 ];
 
