@@ -47,7 +47,7 @@ export default class ShoppingStreet implements Stage {
       this._directionalLight1,
       this._directionalLight2,
       this._directionalLight3,
-      //this._directionalLight4,
+      this._directionalLight4,
       this._ambientLight,
     ];
   }
