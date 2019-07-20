@@ -17,7 +17,9 @@ const DEPTH = 9000;
  */
 export default function BlueSky(resources: Resources): THREE.Mesh {
   const textureResource = resources.cubeTextures.find(v => v.id === CUBE_TEXTURE_IDS.BlueSky);
-  const texture: THREE.CubeTexture = textureResource ? textureResource.texture : new THREE.CubeTexture();
+  const texture: THREE.CubeTexture = textureResource
+    ? textureResource.texture
+    : new THREE.CubeTexture();
   const cubeShader = THREE.ShaderLib["cube"];
   const cubeMaterial = new THREE.ShaderMaterial({
     fragmentShader: cubeShader.fragmentShader,
