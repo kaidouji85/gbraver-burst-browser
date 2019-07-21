@@ -93,6 +93,11 @@ export class BatteryMeter {
     this._needle.getObject3D().rotation.z = Math.PI * (1- model.needle);
     this._disk.setOpacity(model.opacity);
     this._needle.setOpacity(model.opacity);
+    this._numbers.forEach((numberMesh: CanvasMesh, value: number) =>
+      value <= model.enableMaxBattery
+        ? numberMesh.setOpacity(model.opacity)
+        : numberMesh.setOpacity(0)
+    );
   }
 
   /** シーンに追加するオブジェクトを取得する */
