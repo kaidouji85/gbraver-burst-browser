@@ -28,6 +28,7 @@ export class BatteryMeter {
   _disk: SimpleImageMesh;
   _needle: CanvasMesh;
   _numbers: CanvasMesh[];
+  _disActiveNumbers: CanvasMesh[];
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -54,12 +55,15 @@ export class BatteryMeter {
       meshWidth: NEEDLE_SIZE,
       meshHeight: NEEDLE_SIZE,
     });
-    this._needle.draw(context => {
-      const x = context.canvas.width / 2 - 18;
-      const y = context.canvas.height / 2 - 19;
-      context.drawImage(needle, x, y);
-    });
-    this._group.add(this._needle.getObject3D());
+
+    const disActiveNumberResource = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER);
+    const disActiveNumber = disActiveNumberResource
+      ? disActiveNumberResource.image
+      : new Image();
+    this._disActiveNumbers = R.times(R.identity, MAX_VALUE + 1)
+      .map((value: number) => batteryNumber(value, disActiveNumber));
+    this._disActiveNumbers.forEach(v => this._group.add(v.getObject3D()));
 
     const activeNumberResource = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_NUMBER);
@@ -67,25 +71,16 @@ export class BatteryMeter {
       ? activeNumberResource.image
       : new Image();
     this._numbers = R.times(R.identity, MAX_VALUE + 1)
-      .map((value: number) => {
-        const numberMesh =new CanvasMesh({
-          canvasWidth: NUMBER_SIZE,
-          canvasHeight: NUMBER_SIZE,
-          meshWidth: NUMBER_SIZE,
-          meshHeight: NUMBER_SIZE,
-        });
-        numberMesh.draw(context => {
-          const x = context.canvas.width / 2;
-          const y = context.canvas.height / 2;
-          drawNumberCenter(context, activeNumber, x, y, value);
-        });
-        const angle = Math.PI - Math.PI / MAX_VALUE * value;
-        const radius = 160;
-        numberMesh.getObject3D().position.x = radius * Math.cos(angle);
-        numberMesh.getObject3D().position.y = radius * Math.sin(angle);
-        return numberMesh;
-      });
+      .map((value: number) => batteryNumber(value, activeNumber));
     this._numbers.forEach(v => this._group.add(v.getObject3D()));
+
+    this._needle.draw(context => {
+      const x = context.canvas.width / 2 - 18;
+      const y = context.canvas.height / 2 - 19;
+      context.drawImage(needle, x, y);
+    });
+    this._group.add(this._needle.getObject3D());
+
   }
 
   /** モデルをビューに反映させる */
@@ -98,10 +93,41 @@ export class BatteryMeter {
         ? numberMesh.setOpacity(model.opacity)
         : numberMesh.setOpacity(0)
     );
+    this._disActiveNumbers.forEach((numberMesh: CanvasMesh, value: number) => {
+      model.enableMaxBattery < value
+        ? numberMesh.setOpacity(model.opacity)
+        : numberMesh.setOpacity(0)
+    })
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._group;
   }
+}
+
+/**
+ * バッテリーセレクタ数字のCanvasMeshを生成するヘルパー関数
+ *
+ * @param value 数字の値
+ * @param image 数字画像
+ * @return バッテリーセレクタ数字
+ */
+function batteryNumber(value: number, image: Image): CanvasMesh {
+  const numberMesh =new CanvasMesh({
+    canvasWidth: NUMBER_SIZE,
+    canvasHeight: NUMBER_SIZE,
+    meshWidth: NUMBER_SIZE,
+    meshHeight: NUMBER_SIZE,
+  });
+  numberMesh.draw(context => {
+    const x = context.canvas.width / 2;
+    const y = context.canvas.height / 2;
+    drawNumberCenter(context, image, x, y, value);
+  });
+  const angle = Math.PI - Math.PI / MAX_VALUE * value;
+  const radius = 160;
+  numberMesh.getObject3D().position.x = radius * Math.cos(angle);
+  numberMesh.getObject3D().position.y = radius * Math.sin(angle);
+  return numberMesh;
 }
