@@ -44,18 +44,6 @@ export class BatteryMeter {
     });
     this._group.add(this._disk.getObject3D());
 
-    const needleResource = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NEEDLE);
-    const needle = needleResource
-      ? needleResource.image
-      : new Image();
-    this._needle = new CanvasMesh({
-      canvasWidth: NEEDLE_SIZE,
-      canvasHeight: NEEDLE_SIZE,
-      meshWidth: NEEDLE_SIZE,
-      meshHeight: NEEDLE_SIZE,
-    });
-
     const disActiveNumberResource = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER);
     const disActiveNumber = disActiveNumberResource
@@ -74,11 +62,23 @@ export class BatteryMeter {
       .map((value: number) => batteryNumber(value, activeNumber));
     this._numbers.forEach(v => this._group.add(v.getObject3D()));
 
+    const needleResource = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NEEDLE);
+    const needle = needleResource
+      ? needleResource.image
+      : new Image();
+    this._needle = new CanvasMesh({
+      canvasWidth: NEEDLE_SIZE,
+      canvasHeight: NEEDLE_SIZE,
+      meshWidth: NEEDLE_SIZE,
+      meshHeight: NEEDLE_SIZE,
+    });
     this._needle.draw(context => {
       const x = context.canvas.width / 2 - 18;
       const y = context.canvas.height / 2 - 19;
       context.drawImage(needle, x, y);
     });
+    this._needle.getObject3D().position.y = 1;
     this._group.add(this._needle.getObject3D());
 
   }
@@ -126,7 +126,7 @@ function batteryNumber(value: number, image: Image): CanvasMesh {
     drawNumberCenter(context, image, x, y, value);
   });
   const angle = Math.PI - Math.PI / MAX_VALUE * value;
-  const radius = 160;
+  const radius = 155;
   numberMesh.getObject3D().position.x = radius * Math.cos(angle);
   numberMesh.getObject3D().position.y = radius * Math.sin(angle);
   return numberMesh;
