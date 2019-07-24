@@ -11,7 +11,7 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import type {BatterySelectorModel} from "../model";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
-import {drawNumberCenter} from "../../../canvas/number/number";
+import {drawNumberRight} from "../../../canvas/number/number";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 512;
@@ -75,7 +75,7 @@ export class BatteryButton {
       canvasSize: MESH_SIZE,
       image: attackLabel
     });
-    this._attackLabel.getObject3D().position.set(0, -96, 0);
+    this._attackLabel.getObject3D().position.set(24, -96, 0);
     this._group.add(this._attackLabel.getObject3D());
 
     const defenseLabelResource = param.resources.canvasImages
@@ -87,7 +87,7 @@ export class BatteryButton {
       canvasSize: MESH_SIZE,
       image: defenseLabel
     });
-    this._defenseLabel.getObject3D().position.set(0, -96, 0);
+    this._defenseLabel.getObject3D().position.set(24, -96, 0);
     this._group.add(this._defenseLabel.getObject3D());
 
     const currentBatteryResource = param.resources.canvasImages
@@ -100,15 +100,15 @@ export class BatteryButton {
         const mesh = new CanvasMesh({
           canvasWidth: MESH_SIZE,
           canvasHeight: MESH_SIZE,
-          meshWidth: 1024,
-          meshHeight: 1024,
+          meshWidth: MESH_SIZE,
+          meshHeight: MESH_SIZE,
         });
         mesh.draw(context => {
           const dx = context.canvas.width / 2;
           const dy = context.canvas.height / 2;
-          drawNumberCenter(context, currentBattery, dx, dy, value);
+          drawNumberRight(context, currentBattery, dx, dy, value);
         });
-        mesh.getObject3D().position.set(0, 32, 0);
+        mesh.getObject3D().position.set(0, -42, 0);
         return {
           value: value,
           mesh: mesh
@@ -130,7 +130,9 @@ export class BatteryButton {
       const opacity = batteryValue.value === model.battery
         ? model.opacity
         : 0;
+      const x = model.label === 'Attack' ? -90 : -96;
       batteryValue.mesh.setOpacity(opacity);
+      batteryValue.mesh.getObject3D().position.x = x;
     });
   }
 
