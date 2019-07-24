@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
+import * as R from 'ramda';
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
@@ -9,9 +10,20 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import type {BatterySelectorModel} from "../model";
+import {CanvasMesh} from "../../../mesh/canvas-mesh";
+import {drawNumberCenter} from "../../../canvas/number/number";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 512;
+
+/** バッテリー現在値の最大値 */
+export const MAX_BATTERY = 5;
+
+/** バッテリー現在値メッシュ */
+type BatteryValue = {
+  value: number,
+  mesh: CanvasMesh
+};
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -27,6 +39,7 @@ export class BatteryButton {
   _overlap: ButtonOverlap;
   _attackLabel: SimpleImageMesh;
   _defenseLabel: SimpleImageMesh;
+  _batteryValues: BatteryValue[];
 
   constructor(param: Param) {
     this._group = new THREE.Group();
@@ -76,6 +89,34 @@ export class BatteryButton {
     });
     this._defenseLabel.getObject3D().position.set(0, -96, 0);
     this._group.add(this._defenseLabel.getObject3D());
+
+    const currentBatteryResource = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_CUREENT_VALUE);
+    const currentBattery = currentBatteryResource
+      ? currentBatteryResource.image
+      : new Image();
+    this._batteryValues = R.times(R.identity, MAX_BATTERY + 1)
+      .map(value => {
+        const mesh = new CanvasMesh({
+          canvasWidth: MESH_SIZE,
+          canvasHeight: MESH_SIZE,
+          meshWidth: 1024,
+          meshHeight: 1024,
+        });
+        mesh.draw(context => {
+          const dx = context.canvas.width / 2;
+          const dy = context.canvas.height / 2;
+          drawNumberCenter(context, currentBattery, dx, dy, value);
+        });
+        mesh.getObject3D().position.set(0, 32, 0);
+        return {
+          value: value,
+          mesh: mesh
+        };
+      });
+    this._batteryValues.forEach(v => {
+      this._group.add(v.mesh.getObject3D());
+    })
   }
 
   /** モデルをビューに反映させる */
@@ -85,6 +126,12 @@ export class BatteryButton {
     this._attackLabel.setOpacity(attackOpacity);
     this._defenseLabel.setOpacity(defenseOpacity);
     this._button.setOpacity(model.opacity);
+    this._batteryValues.forEach(batteryValue => {
+      const opacity = batteryValue.value === model.battery
+        ? model.opacity
+        : 0;
+      batteryValue.mesh.setOpacity(opacity);
+    });
   }
 
   /** シーンに追加するオブジェクトを取得する */
