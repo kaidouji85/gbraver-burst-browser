@@ -12,6 +12,8 @@ import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {ArmdozerState} from "gbraver-burst-core/lib/game-state/armdozer/armdozer-state";
 import type {BurstEffect} from "gbraver-burst-core/lib/effect/burst/burst-effect";
+import type {BattleAnimationParam} from "../battle/animation-param";
+import {overWriteTDSprite} from "../../../view/td/player";
 
 /**
  * バーストアニメーションのパラメータ
@@ -60,5 +62,17 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
     hudObjects: view.hud.gameObjects,
     hudCamera: view.hud.camera,
     burst: effect
+  };
+}
+
+export function overWriteSprite<OLD_SPRITE, NEW_SPRITE, BURST>(
+  param: BurstAnimationParam<OLD_SPRITE, BURST>,
+  sprite: NEW_SPRITE): BurstAnimationParam<NEW_SPRITE, BURST>
+{
+  const ignoreAttackerTD: $Diff<BurstAnimationParam<OLD_SPRITE, BURST>, { burstPlayerTD: TDPlayer<OLD_SPRITE> }> = param;
+  const burstPlayerTD = overWriteTDSprite(param.burstPlayerTD, sprite);
+  return {
+    ...ignoreAttackerTD,
+    burstPlayerTD: burstPlayerTD
   };
 }

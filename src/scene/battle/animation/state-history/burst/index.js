@@ -5,7 +5,13 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {updateGauge} from "../update-gauge";
-import {toBurstAnimationParam} from "./animation-param";
+import {overWriteSprite, toBurstAnimationParam} from "./animation-param";
+import type {BurstAnimationParam} from "./animation-param";
+import {ShinBraver} from "../../../../../game-object/armdozer/shin-braver/shin-braver";
+import {shinBraverBurst} from "./shin-braver";
+import type {ArmdozerState} from "gbraver-burst-core/lib/game-state/armdozer/armdozer-state";
+import type {BurstEffect} from "gbraver-burst-core/lib/effect/burst/burst-effect";
+import {delay, empty} from "../../../../../animation/delay";
 
 /**
  * バーストアニメーション
@@ -16,7 +22,26 @@ import {toBurstAnimationParam} from "./animation-param";
  * @return バーストアニメーション
  */
 export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
-  // TODO 素敵なバーストアニメーションを作る
   const param = toBurstAnimationParam(view, sceneState, gameState);
-  return updateGauge(view, sceneState, gameState);
+  if (!param) {
+    return updateGauge(view, sceneState, gameState);
+  }
+  return delay(500)
+    .chain(armdozerAnimation(param))
+    .chain(delay(500))
+}
+
+/**
+ * アームドーザごとのバーストアニメーション
+ *
+ * @param param バーストアニメパラメータ
+ * @return バーストアニメーション
+ */
+function armdozerAnimation(param: BurstAnimationParam<ArmdozerState, BurstEffect>): Animate {
+  const sprite = param.burstPlayerTD.sprite;
+  if (sprite instanceof ShinBraver) {
+    return shinBraverBurst(overWriteSprite(param, sprite));
+  }
+
+  return empty();
 }
