@@ -8,7 +8,7 @@ import {empty} from "../../../../animation/delay";
 import {inputCommandAnimation} from "./input-command";
 import {battleAnimation} from "./battle";
 import {turnChangeAnimation} from "./turn-change";
-import {updateGauge} from "./update-gauge";
+import {burstAnimation} from "./burst";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -28,9 +28,8 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
           return battleAnimation(view, sceneState, v);
         case 'TurnChange':
           return turnChangeAnimation(view, sceneState, v);
-        // TODO 素敵なバーストアニメーションを作る
         case 'BurstEffect':
-          return updateGauge(view, sceneState, v);
+          return burstAnimation(view, sceneState, v);
         default:
           return empty();
       }
