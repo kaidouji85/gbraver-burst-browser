@@ -3,9 +3,10 @@
 import type {BurstAnimationParam} from "./animation-param";
 import {Animate} from "../../../../../animation/animate";
 import {ShinBraver} from "../../../../../game-object/armdozer/shin-braver/shin-braver";
-import {empty} from "../../../../../animation/delay";
+import {delay, empty} from "../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core/lib/armdozer/burst";
 import {overWriteBurst} from "./animation-param";
+import {all} from "../../../../../animation/all";
 
 /**
  * シンブレイバーのバーストアニメーション
@@ -28,5 +29,12 @@ export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, Burst>): 
  * @return アニメーション
  */
 function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>): Animate {
-  return empty();
+  return all(
+    param.tdCamera.zoomIn(300)
+      .chain(delay(2000))
+      .chain(param.tdCamera.zoomOut(1000)),
+
+    delay(800)
+      .chain(param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery))
+  );
 }

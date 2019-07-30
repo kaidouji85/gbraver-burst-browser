@@ -40,12 +40,22 @@ export class Battle3DCamera {
     })
   }
 
-  /** ズームイン */
+  /**
+   * ズームイン
+　　*
+   * @param duration ミリ秒単位のアニメーション時間
+   * @return アニメーション
+   */
   zoomIn(duration: number): Animate {
     return zoomIn(this._model, duration);
   }
 
-  /** ズームアウト */
+  /**
+   * ズームアウト
+   *
+   * @param duration ミリ秒単位のアニメーション時間
+   * @return アニメーション
+   */
   zoomOut(duration: number): Animate {
     return zoomOut(this._model, duration);
   }
