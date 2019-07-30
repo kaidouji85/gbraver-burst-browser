@@ -12,8 +12,8 @@ import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {ArmdozerState} from "gbraver-burst-core/lib/game-state/armdozer/armdozer-state";
 import type {BurstEffect} from "gbraver-burst-core/lib/effect/burst/burst-effect";
-import type {BattleAnimationParam} from "../battle/animation-param";
 import {overWriteTDSprite} from "../../../view/td/player";
+import type {Burst} from "gbraver-burst-core/lib/armdozer/burst";
 
 /**
  * バーストアニメーションのパラメータ
@@ -40,7 +40,7 @@ export type BurstAnimationParam<SPRITE, BURST> = {
  * @param gameState ゲームステート
  * @return バーストアニメーションパラメータ
  */
-export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BurstAnimationParam<ArmdozerState, BurstEffect> {
+export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BurstAnimationParam<ArmdozerState, Burst> {
   if (gameState.effect.name !== 'BurstEffect') {
     return null;
   }
@@ -61,10 +61,17 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
     tdCamera: view.td.camera,
     hudObjects: view.hud.gameObjects,
     hudCamera: view.hud.camera,
-    burst: effect
+    burst: effect.burst
   };
 }
 
+/**
+ * スプライトを引数の内容で上書きする
+ *
+ * @param param バーストアニメーションパラメータ
+ * @param sprite 上書きするスプライト
+ * @return 更新結果
+ */
 export function overWriteSprite<OLD_SPRITE, NEW_SPRITE, BURST>(
   param: BurstAnimationParam<OLD_SPRITE, BURST>,
   sprite: NEW_SPRITE): BurstAnimationParam<NEW_SPRITE, BURST>
@@ -74,5 +81,24 @@ export function overWriteSprite<OLD_SPRITE, NEW_SPRITE, BURST>(
   return {
     ...ignoreAttackerTD,
     burstPlayerTD: burstPlayerTD
+  };
+}
+
+/**
+ * バーストを引数の内容で上書きする
+ *
+ * @param param バーストアニメーションパラメータ
+ * @param burst 上書きするバースト
+ * @return 更新結果
+ */
+export function overWriteBurst<SPRITE, OLD_BURST, NEW_BURST>(
+  param: BurstAnimationParam<SPRITE, OLD_BURST>,
+  burst: NEW_BURST
+): BurstAnimationParam<SPRITE, NEW_BURST>
+{
+  const ignoreBurst: $Diff<BurstAnimationParam<SPRITE, OLD_BURST>, { burst: OLD_BURST }> = param;
+  return {
+    ...ignoreBurst,
+    burst: burst
   };
 }
