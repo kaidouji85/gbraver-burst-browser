@@ -1,8 +1,6 @@
 // @flow
 import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
-import type {TextureResource} from "../../../resource/texture";
-import {TEXTURE_IDS} from "../../../resource/texture";
 import {CUBE_TEXTURE_IDS} from "../../../resource/cube-texture";
 
 const WIDTH = 9000;
