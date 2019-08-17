@@ -3,89 +3,61 @@
 import type {BatteryNumberView} from "./battery-number-view";
 import type {BatteryNumberModel} from "../model/battery-number-model";
 import type {Resources} from "../../../resource";
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
-import {drawNumberCenter} from "../../../canvas/number/number";
-import type {CanvasImageResource} from "../../../resource/canvas-image";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import * as THREE from 'three';
-import * as R from 'ramda';
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import {TEXTURE_IDS} from "../../../resource/texture";
 
-export const CANVAS_SIZE = 128;
-export const MESH_SIZE = 140;
+export const MESH_SIZE = 100;
+export const MAX_BATTERY_ANIMATION = 16;
+export const MAX_BATTERY_VALUE = 9;
 
 /** プレイヤーのバッテリー数字ビュー */
 export class PlayerBatteryNumberView implements BatteryNumberView {
-  _resources: Resources;
-  _canvasMesh: CanvasMesh;
-  _lastEngagedModel: ?BatteryNumberModel;
+  _numberMesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    this._resources = resources;
-    this._canvasMesh = new CanvasMesh({
-      canvasWidth: CANVAS_SIZE,
-      canvasHeight: CANVAS_SIZE,
-      meshWidth: MESH_SIZE,
-      meshHeight: MESH_SIZE,
+    const batteryNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER);
+    const batteryNumber: THREE.Texture = batteryNumberResource ? batteryNumberResource.texture : new THREE.Texture();
+    this._numberMesh = new HorizontalAnimationMesh({
+      texture: batteryNumber,
+      maxAnimation: MAX_BATTERY_ANIMATION,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
     });
-    this._lastEngagedModel = null;
   }
 
   /** モデルをビューに反映させる */
   engage(model: BatteryNumberModel): void {
-    if (this._shouldCanvasRefresh(model)) {
-      this._refreshCanvas(model);
-    }
+    this._refreshBatteryNumber(model);
     this._refreshPos();
     this._refreshOpacity(model);
-    this._updateLastEngagedModel(model);
   }
 
   /** カメラの方向を向く */
   lookAt(camera: THREE.Camera): void {
-    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
+    this._numberMesh.getObject3D().quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
-    return this._canvasMesh.getObject3D();
+    return this._numberMesh.getObject3D();
   }
 
-  /** キャンバスを更新するか否かを判定する、trueで更新する */
-  _shouldCanvasRefresh(model: BatteryNumberModel): boolean {
-    if (!this._lastEngagedModel) {
-      return true;
-    }
-
-    return this._lastEngagedModel.battery !== model.battery;
-  }
-
-  /** キャンバス内容を更新する */
-  _refreshCanvas(model: BatteryNumberModel): void {
-    this._canvasMesh.draw(context => {
-      const batteryNumberResource: ?CanvasImageResource = this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
-      const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
-      const x = context.canvas.width / 2;
-      const y = context.canvas.height / 2;
-
-      context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-      drawNumberCenter(context, batteryNumber, x, y, model.battery);
-    });
+  /** バッテリー値を更新する */
+  _refreshBatteryNumber(model: BatteryNumberModel): void {
+    const battery = Math.min(model.battery, MAX_BATTERY_VALUE) / MAX_BATTERY_ANIMATION;
+    this._numberMesh.animate(battery);
   }
 
   /** 座標を更新する */
   _refreshPos(): void {
-    this._canvasMesh.mesh.position.x = 150;
-    this._canvasMesh.mesh.position.y = 150;
-    this._canvasMesh.mesh.position.z = 20;
+    this._numberMesh.getObject3D().position.x = 150;
+    this._numberMesh.getObject3D().position.y = 150;
+    this._numberMesh.getObject3D().position.z = 20;
   }
 
   /** 透明度を更新する */
   _refreshOpacity(model: BatteryNumberModel): void {
-    this._canvasMesh.setOpacity(model.alpha);
-  }
-
-  /** 最後にビューに反映されたモデルを、引数の内容で上書きする */
-  _updateLastEngagedModel(model: BatteryNumberModel): void {
-    this._lastEngagedModel = R.clone(model);
+    this._numberMesh.setOpacity(model.alpha);
   }
 }

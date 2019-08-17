@@ -13,6 +13,6 @@ export class EnemyDamageIndicatorView extends PlayerDamageIndicatorView {
   /** モデルをビューに反映させる */
   engage(model: DamageIndicatorModel): void {
     super.engage(model);
-    this._canvasMesh.mesh.position.x *= -1;
+    this.getObject3D().position.x *= -1;
   }
 }
