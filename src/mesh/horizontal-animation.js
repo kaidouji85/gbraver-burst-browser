@@ -38,9 +38,23 @@ export class HorizontalAnimationMesh {
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
   }
 
-  /** アニメーションを設定する */
+  /**
+   * アニメーションを設定する
+   *
+   * @param frame 0〜1で指定するアニメーション進捗度
+   */
   animate(frame: number): void {
     this.texture.offset.x = normalizeTextureOffset(frame, this.maxAnimation);
     this.texture.offset.y = 0;
+  }
+
+  /** 透明度を設定する */
+  setOpacity(opacity: number): void {
+    this.mesh.material.opacity = opacity;
+  }
+
+  /** シーンに追加するオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this.mesh;
   }
 }

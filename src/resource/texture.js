@@ -32,6 +32,7 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_HM_TO_STAND: 'NEO_LANDOZER_HM_TO_STAND',
   TILE_MAP_SCHOOL_GROUND: 'TILE_MAP_SCHOOL_GROUND',
   HITMARK_SPARK: 'HITMARK_SPARK',
+  BATTERY_NUMBER: 'BATTERY_NUMBER',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -91,6 +92,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.HITMARK_SPARK,
     path: 'hitmark/spark.png'
   },
+  // バッテリー数字
+  {
+    id: TEXTURE_IDS.BATTERY_NUMBER,
+    path: 'battery-number/battery-number.png'
+  }
 ];
 
 /**
