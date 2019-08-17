@@ -10,7 +10,7 @@ import {TEXTURE_IDS} from "../../../resource/texture";
 
 export const MESH_SIZE = 40;
 export const MAX_NUMBER_SIZE = 4;
-export const MAX_ANIMATION = 12;
+export const MAX_ANIMATION = 16;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {

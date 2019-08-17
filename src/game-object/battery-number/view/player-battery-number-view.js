@@ -8,7 +8,7 @@ import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
 
 export const MESH_SIZE = 100;
-export const MAX_BATTERY_ANIMATION = 12;
+export const MAX_BATTERY_ANIMATION = 16;
 export const MAX_BATTERY_VALUE = 9;
 
 /** プレイヤーのバッテリー数字ビュー */

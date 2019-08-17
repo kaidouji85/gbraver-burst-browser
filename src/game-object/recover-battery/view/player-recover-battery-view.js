@@ -8,7 +8,7 @@ import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
 
 export const MESH_SIZE = 100;
-export const MAX_ANIMATION = 12;
+export const MAX_ANIMATION = 16;
 export const MAX_BATTERY = 9;
 
 /** プレイヤーのバッテリー回復*/
@@ -75,7 +75,7 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
    * @param model モデル
    */
   _refreshValue(model: RecoverBatteryModel): void {
-    const sign = (MAX_ANIMATION - 2) / MAX_ANIMATION;
+    const sign = 10 / MAX_ANIMATION;
     this._signMesh.animate(sign);
 
     const battery = Math.min(model.value, MAX_BATTERY) / MAX_ANIMATION;
