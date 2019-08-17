@@ -3,76 +3,95 @@
 import * as THREE from 'three';
 import type {RecoverBatteryView} from "./recover-battery-view";
 import type {RecoverBatteryModel} from "../model/recover-battery-model";
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
-import type {CanvasImageResource} from "../../../resource/canvas-image";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {drawPlusNumberCenter} from "../../../canvas/number/number";
 import type {Resources} from "../../../resource";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import {TEXTURE_IDS} from "../../../resource/texture";
 
-export const CANVAS_SIZE = 256;
-export const MESH_SIZE = 220;
+export const MESH_SIZE = 100;
+export const MAX_ANIMATION = 16;
+export const MAX_BATTERY = 9;
 
+/** プレイヤーのバッテリー回復*/
 export class PlayerRecoverBatteryView implements RecoverBatteryView {
-  _canvasMesh: CanvasMesh;
-  _resources: Resources;
-  _lastEngagedModel: ?RecoverBatteryModel;
+  _group: THREE.Group;
+  _signMesh: HorizontalAnimationMesh;
+  _numberMesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    this._canvasMesh = new CanvasMesh({
-      canvasWidth: CANVAS_SIZE,
-      canvasHeight: CANVAS_SIZE,
-      meshWidth: MESH_SIZE,
-      meshHeight: MESH_SIZE,
+    this._group = new THREE.Group();
+
+    const batteryNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER);
+    const batteryNumber: THREE.Texture = batteryNumberResource ? batteryNumberResource.texture : new THREE.Texture();
+
+    this._signMesh = new HorizontalAnimationMesh({
+      texture: batteryNumber,
+      mesh: THREE.Mesh,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
+      maxAnimation: MAX_ANIMATION,
     });
-    this._resources = resources;
-    this._lastEngagedModel = null;
+    this._signMesh.getObject3D().position.x = -MESH_SIZE / 2;
+    this._group.add(this._signMesh.getObject3D());
+
+    this._numberMesh = new HorizontalAnimationMesh({
+      texture: batteryNumber,
+      mesh: THREE.Mesh,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
+      maxAnimation: MAX_ANIMATION,
+    });
+    this._numberMesh.getObject3D().position.x = MESH_SIZE /2;
+    this._group.add(this._numberMesh.getObject3D());
   }
 
+  /**
+   * モデルのビューに反映させる
+   *
+   * @param model モデル
+   */
   engage(model: RecoverBatteryModel): void {
-    if (this._shouldRefreshCanvas(model)) {
-      this._refreshCanvas(model);
-    }
+    this._refreshValue(model);
     this._refreshOpacity(model);
     this._refreshPos();
-    this._lastEngagedModel = model;
   }
 
-  /** カメラの方向を向く */
+  /**
+   * カメラの方向を向く
+   *
+   * @param camera カメラ
+   */
   lookAt(camera: THREE.Camera): void {
-    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
+    this._group.quaternion.copy(camera.quaternion);
   }
 
+  /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
-    return this._canvasMesh.mesh;
+    return this._group;
   }
 
-  _shouldRefreshCanvas(model: RecoverBatteryModel): boolean {
-    if (!this._lastEngagedModel) {
-      return true;
-    }
+  /**
+   * バッテリー値を更新する
+   *
+   * @param model モデル
+   */
+  _refreshValue(model: RecoverBatteryModel): void {
+    const sign = 10 / MAX_ANIMATION;
+    this._signMesh.animate(sign);
 
-    return model.value !== this._lastEngagedModel.value;
+    const battery = Math.min(model.value, MAX_BATTERY) / MAX_ANIMATION;
+    this._numberMesh.animate(battery);
   }
 
-  _refreshCanvas(model: RecoverBatteryModel): void {
-    this._canvasMesh.draw(context => {
-      const batteryNumberResource: ?CanvasImageResource = this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NUMBER);
-      const batteryNumber: Image = batteryNumberResource ? batteryNumberResource.image : new Image();
-      const x = context.canvas.width / 2;
-      const y = context.canvas.height / 2;
-
-      context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-      drawPlusNumberCenter(context, batteryNumber, x, y, model.value);
-    });
-  }
-
+  /** 座標を更新 */
   _refreshPos(): void {
-    this._canvasMesh.mesh.position.x = 150;
-    this._canvasMesh.mesh.position.y = 150;
-    this._canvasMesh.mesh.position.z = 20;
+    this._group.position.x = 150;
+    this._group.position.y = 150;
+    this._group.position.z = 20;
   }
 
+  /** 透明度を更新 */
   _refreshOpacity(model: RecoverBatteryModel): void {
-    this._canvasMesh.setOpacity(model.opacity);
+    this._signMesh.setOpacity(model.opacity);
+    this._numberMesh.setOpacity(model.opacity);
   }
 }
