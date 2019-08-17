@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
 
-export const MESH_SIZE = 64;
+export const MESH_SIZE = 40;
 export const MAX_NUMBER_SIZE = 4;
 export const MAX_ANIMATION = 12;
 
@@ -58,7 +58,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
       .map(v => Number(v));
     R.zip(this._numbers, values).forEach(([mesh, v], index) => {
       mesh.animate(v / MAX_ANIMATION);
-      mesh.getObject3D().position.x = index * MESH_SIZE -values.length * MESH_SIZE / 2
+      mesh.getObject3D().position.x = index * MESH_SIZE -(values.length - 1) * MESH_SIZE / 2
     });
   }
 
