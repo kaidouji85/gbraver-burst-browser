@@ -1,92 +1,78 @@
 // @flow
 
+import * as R from 'ramda';
 import type {DamageIndicatorView} from "./damage-indicator-view";
 import type {Resources} from "../../../resource";
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 import * as THREE from 'three';
-import type {CanvasImageResource} from "../../../resource/canvas-image";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {drawNumberCenter} from "../../../canvas/number/number";
-import * as R from 'ramda';
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import {TEXTURE_IDS} from "../../../resource/texture";
 
-export const CANVAS_SIZE = 256;
-export const MESH_SIZE = 400;
+export const MESH_SIZE = 64;
+export const MAX_NUMBER_SIZE = 4;
+export const MAX_ANIMATION = 12;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
-  _resources: Resources;
-  _canvasMesh: CanvasMesh;
-  _lastEngagedModel: ?DamageIndicatorModel;
+  _group: THREE.Group;
+  _numbers: HorizontalAnimationMesh[];
 
   constructor(resources: Resources) {
-    this._resources = resources;
-    this._canvasMesh = new CanvasMesh({
-      canvasWidth: CANVAS_SIZE,
-      canvasHeight: CANVAS_SIZE,
-      meshWidth: MESH_SIZE,
-      meshHeight: MESH_SIZE,
-    });
-    this._lastEngagedModel = null;
+    this._group = new THREE.Group();
+
+    const damageNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_NUMBER);
+    const damageNumber: THREE.Texture = damageNumberResource ? damageNumberResource.texture : new THREE.Texture();
+    this._numbers = R.times(v => {
+      const mesh = new HorizontalAnimationMesh({
+        texture: damageNumber,
+        maxAnimation: MAX_ANIMATION,
+        width: MESH_SIZE,
+        height: MESH_SIZE,
+      });
+      this._group.add(mesh.getObject3D());
+      return mesh;
+    }, MAX_NUMBER_SIZE);
   }
 
   /** モデルをビューに反映させる */
   engage(model: DamageIndicatorModel): void {
-    if (this._shouldCanvasRefresh(model)) {
-      this._refreshCanvas(model);
-    }
+    this._refreshValue(model);
     this._refreshPos();
     this._refreshOpacity(model);
-    this._updateLastEngagedModel(model);
   }
 
   /** カメラの方向を向く */
   lookAt(camera: THREE.Camera): void {
-    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
+    this._group.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
-    return this._canvasMesh.mesh;
+    return this._group;
   }
 
-  /** キャンバスを更新するか否かを判定する、trueで更新する */
-  _shouldCanvasRefresh(model: DamageIndicatorModel): boolean {
-    if (!this._lastEngagedModel) {
-      return true;
-    }
-
-    return this._lastEngagedModel.damage !== model.damage;
-  }
-
-  /** キャンバスを更新する */
-  _refreshCanvas(model: DamageIndicatorModel): void {
-    this._canvasMesh.draw(context => {
-      const numberResource: ?CanvasImageResource = this._resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.DAMAGE_NUMBER);
-      const numberImage: Image = numberResource ? numberResource.image : new Image();
-
-      const x = context.canvas.width / 2;
-      const y = context.canvas.height / 2;
-
-      context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-      drawNumberCenter(context, numberImage, x, y, model.damage);
+  /** ダメージ数字を更新する */
+  _refreshValue(model: DamageIndicatorModel): void {
+    const values = String(model.damage)
+      .split('')
+      .map(v => Number(v));
+    R.zip(this._numbers, values).forEach(([mesh, v], index) => {
+      mesh.animate(v / MAX_ANIMATION);
+      mesh.getObject3D().position.x = index * MESH_SIZE -values.length * MESH_SIZE / 2
     });
   }
 
   /** 座標を更新する */
   _refreshPos(): void {
-    this._canvasMesh.mesh.position.x = 150;
-    this._canvasMesh.mesh.position.y = 150;
-    this._canvasMesh.mesh.position.z = 20;
+    this._group.position.x = 150;
+    this._group.position.y = 150;
+    this._group.position.z = 20;
   }
 
   /** 透明度を更新する */
   _refreshOpacity(model: DamageIndicatorModel): void {
-    this._canvasMesh.setOpacity(model.opacity);
-  }
-
-  /** 最後にビューに反映されたモデルを、引数の内容で上書きする */
-  _updateLastEngagedModel(model: DamageIndicatorModel): void {
-    this._lastEngagedModel = R.clone(model);
+    this._numbers.forEach(v => {
+      v.setOpacity(model.opacity);
+    });
   }
 }

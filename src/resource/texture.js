@@ -33,6 +33,7 @@ export const TEXTURE_IDS = {
   TILE_MAP_SCHOOL_GROUND: 'TILE_MAP_SCHOOL_GROUND',
   HITMARK_SPARK: 'HITMARK_SPARK',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
+  DAMAGE_NUMBER: 'DAMAGE_NUMBER',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -96,6 +97,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.BATTERY_NUMBER,
     path: 'battery-number/battery-number.png'
+  },
+  // ダメージ数字
+  {
+    id: TEXTURE_IDS.DAMAGE_NUMBER,
+    path: 'damage-indicator/damage-number.png'
   }
 ];
 
