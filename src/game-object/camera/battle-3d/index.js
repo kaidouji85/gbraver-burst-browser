@@ -13,6 +13,8 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {Animate} from "../../../animation/animate";
 import {zoomIn} from "./animation/zoom-in";
 import {zoomOut} from "./animation/zoom-out";
+import type {Position} from './animation/position';
+import {moveViewPoint} from "./animation/move-view-point";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -58,6 +60,17 @@ export class Battle3DCamera {
    */
   zoomOut(duration: number): Animate {
     return zoomOut(this._model, duration);
+  }
+
+  /**
+   * カメラ視点を移動する
+   *
+   * @param position 移動先座標
+   * @param duration 移動時間
+   * @return アニメーション
+   */
+  moveViewPoint(position: Position, duration: number): Animate {
+    return moveViewPoint(this._model, position, duration);
   }
 
   /** カメラを取得する */
