@@ -66,10 +66,11 @@ export class Battle3DCamera {
    * カメラ視点を移動する
    *
    * @param position 移動先座標
+   * @param duration 移動時間
    * @return アニメーション
    */
-  moveViewPoint(position: Position): Animate {
-    return moveViewPoint(this._model, position);
+  moveViewPoint(position: Position, duration: number): Animate {
+    return moveViewPoint(this._model, position, duration);
   }
 
   /** カメラを取得する */

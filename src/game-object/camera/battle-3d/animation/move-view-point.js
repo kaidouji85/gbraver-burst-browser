@@ -9,9 +9,10 @@ import type {Position} from "./position";
  * カメラ視点を移動させる
  *
  * @param model モデル
+ * @param duration 移動時間
  * @param position 移動先座標
  * @return アニメーション
  */
-export function moveViewPoint(model: Battle3DCameraModel, position: Position): Animate {
-  return tween(model.target, t => t.to(position));
+export function moveViewPoint(model: Battle3DCameraModel, position: Position, duration: number): Animate {
+  return tween(model.target, t => t.to(position, duration));
 }
