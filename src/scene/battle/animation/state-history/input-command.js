@@ -6,7 +6,7 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
 import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
-import {empty} from "../../../../animation/delay";
+import {delay, empty} from "../../../../animation/delay";
 import {all} from "../../../../animation/all";
 import {canBurstButtonPush} from "../../ui-logic/burst-button";
 
@@ -50,7 +50,12 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     enemyHUD.gauge.hp(enemy.armdozer.hp),
     enemyHUD.gauge.battery(enemy.armdozer.battery),
     view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
+    view.td.camera.moveCamera({x: 150}, 500),
+    view.td.camera.moveViewPoint({x: 150}, 500),
+  ).chain(
+    delay(300)
+  ).chain(all(
     view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
     view.hud.gameObjects.burstButton.open(canBurst)
-  )
+  ))
 }
