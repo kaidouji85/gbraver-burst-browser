@@ -54,12 +54,6 @@ function attack(param: BattleAnimationParam<ShinBraver, NormalHit | CriticalHit>
       ))
       .chain(delay(1300))
       .chain(param.defenderTD.sprite.knockBackToStand()),
-
-    param.tdCamera.zoomIn(300).chain(
-      delay(3000)
-    ).chain(
-      param.tdCamera.zoomOut(1000)
-    )
   );
 }
 

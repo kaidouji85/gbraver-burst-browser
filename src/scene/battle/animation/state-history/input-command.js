@@ -45,17 +45,19 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   const canBurst = canBurstButtonPush(playerCommand.command);
   return all(
-    playerHUD.gauge.hp(player.armdozer.hp),
-    playerHUD.gauge.battery(player.armdozer.battery),
-    enemyHUD.gauge.hp(enemy.armdozer.hp),
-    enemyHUD.gauge.battery(enemy.armdozer.battery),
-    view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
-    view.td.camera.moveCamera({x: 150}, 500),
-    view.td.camera.moveViewPoint({x: 150}, 500),
-  ).chain(
-    delay(300)
-  ).chain(all(
-    view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
-    view.hud.gameObjects.burstButton.open(canBurst)
-  ))
+    all(
+      view.td.camera.moveCamera({x: 150, z: 250}, 300),
+      view.td.camera.moveViewPoint({x: 150}, 300),
+    ),
+
+    delay(600).chain(all(
+      playerHUD.gauge.hp(player.armdozer.hp),
+      playerHUD.gauge.battery(player.armdozer.battery),
+      enemyHUD.gauge.hp(enemy.armdozer.hp),
+      enemyHUD.gauge.battery(enemy.armdozer.battery),
+      view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
+      view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
+      view.hud.gameObjects.burstButton.open(canBurst),
+    ))
+  );
 }
