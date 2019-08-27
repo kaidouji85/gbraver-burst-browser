@@ -15,11 +15,20 @@ import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/bat
  */
 export function visibleBattery(param: BattleAnimationParam<ArmDozerSprite, BattleResult>): Animate {
   return all(
-    param.attackerTD.batteryNumber.popUp(param.attackerBattery),
-    param.attackerHUD.gauge.battery(param.attackerState.armdozer.battery),
-    param.defenderTD.batteryNumber.popUp(param.defenderBattery),
-    param.defenderHUD.gauge.battery(param.defenderState.armdozer.battery),
-    delay(1200).chain(
+    all(
+      param.tdCamera.moveViewPoint({x: 0}, 300),
+      param.tdCamera.moveCamera({x: 0, z: 300}, 300),
+    ),
+
+    delay(600).chain(all(
+      param.attackerTD.batteryNumber.popUp(param.attackerBattery),
+      param.attackerHUD.gauge.battery(param.attackerState.armdozer.battery),
+      param.defenderTD.batteryNumber.popUp(param.defenderBattery),
+      param.defenderHUD.gauge.battery(param.defenderState.armdozer.battery),
+
+    )),
+
+    delay(1500).chain(
       param.tdObjects.turnIndicator.invisible()
     )
   );
