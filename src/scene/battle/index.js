@@ -10,11 +10,13 @@ import type {DecideBattery} from "../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
-import {delay} from "../../animation/delay";
 import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../action/game-loop/render";
 import type {DoBurst} from "../../action/battle-scene/do-burst";
 import type {Command} from "gbraver-burst-core/lib/command/command";
+import {take} from "rxjs/operators";
+import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
+import {delay} from "../../animation/delay";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -67,10 +69,22 @@ export class BattleScene {
       }
     });
 
-    delay(1000)
-      .chain(
-        stateHistoryAnimation(this._view, this._state, param.initialState.stateHistory)
-      ).play();
+    param.listener.gameLoop.pipe(
+      take(1)
+    ).subscribe(action => {
+      this._start(param.initialState.stateHistory);
+    });
+  }
+
+  /**
+   * 戦闘シーン開始時の処理
+   * 
+   * @param stateHistory 初期ステータス
+   */
+  async _start(stateHistory: GameState[]): Promise<void> {
+    const animation = delay(500)
+      .chain(stateHistoryAnimation(this._view, this._state, stateHistory));
+    await animation.play();
   }
 
   /** バッテリー決定 */
