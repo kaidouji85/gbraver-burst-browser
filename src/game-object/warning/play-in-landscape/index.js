@@ -52,6 +52,10 @@ export class PlayInLandscape {
   _preRender(action: PreRender): void {
     const scale = this._getScale(action.rendererDOM.clientWidth);
     this._mesh.getObject3D().scale.set(scale, scale, scale);
+
+    const isPortrait = this._isPortrait(action.rendererDOM.clientWidth, action.rendererDOM.clientHeight);
+    const opacity = isPortrait ? 1 : 0;
+    this._mesh.setOpacity(opacity);
   }
 
   /**
@@ -64,5 +68,16 @@ export class PlayInLandscape {
     return (CANVAS_SIZE < screenWidth)
       ? 1
       : 0.9 * screenWidth / CANVAS_SIZE;
+  }
+
+  /**
+   * ポートレートか否かを判定する
+   *
+   * @param screenWidth 画面幅
+   * @param screenHeight 画面高
+   * @return 判定結果、trueでポートレートである
+   */
+  _isPortrait(screenWidth: number, screenHeight: number): boolean {
+    return screenWidth < screenHeight;
   }
 }
