@@ -8,7 +8,7 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
 /** キャンバスサイズ */
-export const CANVAS_SIZE = 400;
+export const CANVAS_SIZE = 512;
 
 /**
  * ランドスケープでプレイするように促す警告
