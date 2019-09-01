@@ -37,7 +37,8 @@ export const CANVAS_IMAGE_IDS = {
   TURN_INDICATOR: 'TURN_INDICATOR',
   BURST_BUTTON: 'BURST_BUTTON',
   BIG_BUTTON_DISABLED: 'BIG_BUTTON_DISABLED',
-  SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED'
+  SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED',
+  PLAY_IN_LANDSCAPE: 'PLAY_IN_LANDSCAPE',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -121,7 +122,11 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED,
     path: 'button/small-button-disabled.png',
-  }
+  },
+  {
+    id: CANVAS_IMAGE_IDS.PLAY_IN_LANDSCAPE,
+    path: 'waring/play-in-landscape.png',
+  },
 ];
 
 /**
