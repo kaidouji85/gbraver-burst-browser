@@ -8,11 +8,13 @@ import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
+import {PlayInLandscape} from "../../../../game-object/warning/play-in-landscape";
 
 /** HUDレイヤーのゲームオブジェクト */
 export type HUDGameObjects = {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
+  playInLandscape: PlayInLandscape;
 };
 
 /**
@@ -24,7 +26,7 @@ export type HUDGameObjects = {
  * @param playerInfo プレイヤーの情報
  * @return HUDゲームオブジェクト
  */
-export function createHUDGameObjects(resources: Resources, listener: Observable<GameObjectAction>, notifier: Observer<BattleSceneAction>, playerInfo: Player) {
+export function createHUDGameObjects(resources: Resources, listener: Observable<GameObjectAction>, notifier: Observer<BattleSceneAction>, playerInfo: Player): HUDGameObjects {
   const batterySelector = new BatterySelector({
     listener: listener,
     maxBattery: playerInfo.armdozer.maxBattery,
@@ -53,9 +55,12 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
     }
   });
 
+  const playInLandscape = new PlayInLandscape(resources, listener);
+
   return {
     batterySelector: batterySelector,
     burstButton: burstButton,
+    playInLandscape: playInLandscape,
   };
 }
 
@@ -68,5 +73,5 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
 export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects): void {
   scene.add(target.batterySelector.getObject3D());
   scene.add(target.burstButton.getObject3D());
+  scene.add(target.playInLandscape.getObject3D());
 }
-
