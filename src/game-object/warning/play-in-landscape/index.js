@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {isPortrait} from "../../../orientation/portrait";
 
 /** キャンバスサイズ */
 export const CANVAS_SIZE = 512;
@@ -53,8 +54,9 @@ export class PlayInLandscape {
     const scale = this._getScale(action.rendererDOM.clientWidth);
     this._mesh.getObject3D().scale.set(scale, scale, scale);
 
-    const isPortrait = this._isPortrait(action.rendererDOM.clientWidth, action.rendererDOM.clientHeight);
-    const opacity = isPortrait ? 1 : 0;
+    const opacity = isPortrait(action.rendererDOM.clientWidth, action.rendererDOM.clientHeight)
+      ? 1
+      : 0;
     this._mesh.setOpacity(opacity);
   }
 
@@ -68,16 +70,5 @@ export class PlayInLandscape {
     return (CANVAS_SIZE < screenWidth)
       ? 1
       : 0.9 * screenWidth / CANVAS_SIZE;
-  }
-
-  /**
-   * ポートレートか否かを判定する
-   *
-   * @param screenWidth 画面幅
-   * @param screenHeight 画面高
-   * @return 判定結果、trueでポートレートである
-   */
-  _isPortrait(screenWidth: number, screenHeight: number): boolean {
-    return screenWidth < screenHeight;
   }
 }
