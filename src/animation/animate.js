@@ -1,6 +1,6 @@
 // @flow
 
-import {Tween} from '@tweenjs/tween.js';
+import TWEEN from '@tweenjs/tween.js';
 
 /**
  * アニメーション
@@ -50,8 +50,8 @@ import {Tween} from '@tweenjs/tween.js';
  * animation.play();
  */
 export class Animate {
-  _start: Tween;
-  _end: Tween;
+  _start: TWEEN.Tween;
+  _end: TWEEN.Tween;
   _time: number;
 
   /**
@@ -61,7 +61,7 @@ export class Animate {
    * @param end 連続したTweenの最後
    * @param time 全体の再生時間
    */
-  constructor(start: Tween, end: Tween, time: number) {
+  constructor(start: TWEEN.Tween, end: TWEEN.Tween, time: number) {
     this._start = start;
     this._end = end;
     this._time = time;

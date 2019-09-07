@@ -1,7 +1,7 @@
 // @flow
 
+import TWEEN from '@tweenjs/tween.js';
 import {Animate} from "./animate";
-import {Group, Tween} from '@tweenjs/tween.js';
 import {tweenTime} from "./tween-time";
 
 /**
@@ -18,8 +18,8 @@ import {tweenTime} from "./tween-time";
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function tween<T>(model: T, create: (t: Tween) => Tween, group: ?Group): Animate {
-  const origin = new Tween(model, group);
+export function tween<T>(model: T, create: (t: TWEEN.Tween) => TWEEN.Tween, group: ?TWEEN.Group): Animate {
+  const origin = new TWEEN.Tween(model, group);
   const t = create(origin);
   return new Animate(t, t, tweenTime(origin));
 }

@@ -1,6 +1,6 @@
 // @flow
 
-import {Group} from "@tweenjs/tween.js";
+import TWEEN from "@tweenjs/tween.js";
 import type {BatterySelectorModel} from "../model";
 import {tween} from "../../../animation/tween";
 import {Animate} from "../../../animation/animate";
@@ -15,7 +15,7 @@ const MAX_DURATION = 500;
  * @param needle メーター針の値
  * @return アニメーション
  */
-export function changeNeedle(model: BatterySelectorModel, group: Group, needle: number): Animate {
+export function changeNeedle(model: BatterySelectorModel, group: TWEEN.Group, needle: number): Animate {
   const duration = Math.abs(model.needle - needle) * MAX_DURATION;
   return tween(model, t => t
     .to({needle: needle}, duration)
