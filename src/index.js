@@ -14,7 +14,10 @@ import {BattleScene} from "./scene/battle";
 import {Renderer} from "./game-object/renderer";
 import {addEventToLoadingManager} from "./loading/loading-dom";
 
-async function main() {
+/**
+ * Gブレイバーバーストのエントリポイント
+ */
+async function main(): Promise<void> {
   try {
     addEventToLoadingManager();
     loadServiceWorker();
