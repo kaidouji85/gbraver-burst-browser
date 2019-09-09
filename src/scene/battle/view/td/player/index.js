@@ -70,4 +70,5 @@ export function overWriteTDSprite<OLD, NEW>(target: TDPlayer<OLD>, sprite: NEW):
  */
 export function destructorTDPlayer(target: TDPlayer<ArmDozerSprite>): void {
   target.sprite.destructor();
+  target.batteryNumber.destructor();
 }
