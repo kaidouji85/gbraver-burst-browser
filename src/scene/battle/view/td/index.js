@@ -2,7 +2,7 @@
 import type {Resources} from '../../../../resource/index';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Observer, Subject} from "rxjs";
+import {merge, Observable, Observer, Subject, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
@@ -11,12 +11,12 @@ import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import type {TDPlayer} from "./player";
-import {appendTDPlayer} from "./player";
+import {appendTDPlayer, destructorTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "./game-objects";
-import {appendTDGameObjects, createTDGameObjects} from "./game-objects";
+import {appendTDGameObjects, createTDGameObjects, destructorTDGameObjects} from "./game-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -43,6 +43,7 @@ export class ThreeDimensionLayer {
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
+  _subscribe: Subscription;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -76,9 +77,19 @@ export class ThreeDimensionLayer {
     this.gameObjects = createTDGameObjects(param.resources, gameObjectListener);
     appendTDGameObjects(this.scene, this.gameObjects);
 
-    param.listener.gameLoop.subscribe(action => {
+    this._subscribe = param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this.players.forEach(v => {
+      destructorTDPlayer(v);
+    });
+    destructorTDGameObjects(this.gameObjects);
+    this.camera.destructor();
+    this._subscribe.unsubscribe();
   }
 
   /** ゲームループの処理 */

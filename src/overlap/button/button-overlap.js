@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import type {MouseDownRaycaster} from "../../action/overlap/mouse-down-raycaster";
 import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {isMeshOverlap} from "../mesh";
 
@@ -18,6 +18,7 @@ type Param = {
 export class ButtonOverlap {
   _mesh: THREE.Mesh;
   _onButtonPush: () => void;
+  _subscription: Subscription;
 
   constructor(param: Param) {
     const material = new THREE.MeshBasicMaterial({
@@ -26,7 +27,7 @@ export class ButtonOverlap {
     });
     this._mesh = new THREE.Mesh(param.geometry, material);
 
-    param.listener.subscribe(action => {
+    this._subscription = param.listener.subscribe(action => {
       switch (action.type) {
         case 'mouseDownRaycaster':
           this._mouseDownRaycaster(action);
@@ -40,6 +41,11 @@ export class ButtonOverlap {
     });
 
     this._onButtonPush = param.onButtonPush;
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /**

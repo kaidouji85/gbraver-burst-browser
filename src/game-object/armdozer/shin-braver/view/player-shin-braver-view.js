@@ -37,7 +37,6 @@ export class PlayerShinBraverView implements ShinBraverView {
     });
   }
 
-
   /** モデルをビューに反映させる */
   engage(model: ShinBraverModel): void {
     this._refreshPos(model);

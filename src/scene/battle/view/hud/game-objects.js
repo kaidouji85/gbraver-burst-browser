@@ -75,3 +75,14 @@ export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects)
   scene.add(target.burstButton.getObject3D());
   scene.add(target.playInLandscape.getObject3D());
 }
+
+/**
+ * HUDゲームオブジェクトのデストラクタ相当処理
+ *
+ * @param target デストラクト対象
+ */
+export function destructorHUDGameObjects(target: HUDGameObjects): void {
+  target.batterySelector.destructor();
+  target.burstButton.destructor();
+  target.playInLandscape.destructor();
+}

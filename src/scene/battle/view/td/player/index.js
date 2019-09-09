@@ -61,3 +61,17 @@ export function overWriteTDSprite<OLD, NEW>(target: TDPlayer<OLD>, sprite: NEW):
     sprite: sprite
   };
 }
+
+/**
+ * 3Dレイヤーのプレイヤー関係オブジェクトのデストラクタ相当処理
+ * リソース解放等を行う
+ *
+ * @param target リソース解放を行う対象
+ */
+export function destructorTDPlayer(target: TDPlayer<ArmDozerSprite>): void {
+  target.sprite.destructor();
+  target.batteryNumber.destructor();
+  target.damageIndicator.destructor();
+  target.hitMark.spark.destructor();
+  target.recoverBattery.destructor();
+}

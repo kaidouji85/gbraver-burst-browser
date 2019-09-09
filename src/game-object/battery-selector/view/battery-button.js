@@ -119,6 +119,11 @@ export class BatteryButton {
     })
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._overlap.destructor();
+  }
+
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
     const attackOpacity = model.label === 'Attack' ? model.opacity : 0;

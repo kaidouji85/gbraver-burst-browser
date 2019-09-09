@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {PreRender} from "../../../action/game-loop/pre-render";
@@ -18,6 +18,8 @@ export const CANVAS_SIZE = 512;
 export class PlayInLandscape {
   /** メッシュ */
   _mesh: SimpleImageMesh;
+  /** 本クラスの全サブスクリプション */
+  _subscription: Subscription;
 
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     const playInLandscapeResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PLAY_IN_LANDSCAPE);
@@ -29,11 +31,16 @@ export class PlayInLandscape {
       image: playInLandscape,
     });
 
-    listener.subscribe(action => {
+    this._subscription = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._preRender(action);
       }
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /**

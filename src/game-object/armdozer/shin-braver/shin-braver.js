@@ -3,7 +3,7 @@
 import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {ShinBraverView} from "./view/shin-braver-view";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {ShinBraverModel} from "./model/shin-braver-model";
 import {createInitialValue} from "./model/initial-value";
@@ -24,18 +24,24 @@ import {charge} from "./animation/charge";
 export class ShinBraver implements ArmDozerSprite {
   _model: ShinBraverModel;
   _view: ShinBraverView;
+  _subscription: Subscription;
 
   constructor(params: { view: ShinBraverView, listener: Observable<GameObjectAction> }) {
     this._model = createInitialValue();
     this._view = params.view;
 
-    params.listener.subscribe(action => {
+    this._subscription = params.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /** チャージ */

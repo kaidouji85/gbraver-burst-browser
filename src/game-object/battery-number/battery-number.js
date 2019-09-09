@@ -2,7 +2,7 @@
 
 import type {BatteryNumberModel} from "./model/battery-number-model";
 import type {BatteryNumberView} from "./view/battery-number-view";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import {createInitialValue} from "./model/initial-value";
@@ -20,17 +20,23 @@ type Param = {
 export class BatteryNumber {
   _model: BatteryNumberModel;
   _view: BatteryNumberView;
+  _subscription: Subscription;
 
   constructor(param: Param) {
     this._model = createInitialValue();
     this._view = param.view;
-    param.listener.subscribe(action => {
+    this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /** バッテリーを表示する */

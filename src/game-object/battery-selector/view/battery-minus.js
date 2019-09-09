@@ -64,6 +64,11 @@ export class BatteryMinus {
     this._group.add(this._overlap.getObject3D());
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._overlap.destructor();
+  }
+
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
     this._activeButton.setOpacity(model.opacity);

@@ -4,7 +4,7 @@ import * as THREE from "three";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {Resize} from "../../../action/dom-event/resize";
 import {onResizePerspectiveCamera} from "../../../camera/resize";
-import {merge, Observable} from "rxjs";
+import {merge, Observable, Subscription} from "rxjs";
 import type {Battle3DCameraModel} from "./model/model";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
@@ -29,18 +29,24 @@ type Param = {
 export class Battle3DCamera {
   _model: Battle3DCameraModel;
   _camera: THREE.PerspectiveCamera;
+  _subscription: Subscription;
 
   constructor(param: Param) {
     this._model = createInitialValue();
     this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
 
-    merge(param.listener.domEvent, param.listener.gameObject).subscribe(action => {
+    this._subscription = merge(param.listener.domEvent, param.listener.gameObject).subscribe(action => {
       if (action.type === 'resize') {
         this._resize(action);
       } else if (action.type === 'Update') {
         this._update(action);
       }
-    })
+    });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /**

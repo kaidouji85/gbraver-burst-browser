@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource/index';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Observer, Subject} from "rxjs";
+import {merge, Observable, Observer, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
@@ -13,11 +13,11 @@ import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../action/game-loop/render";
 import {BattleHUDCamera} from "../../../../game-object/camera/battle-hud";
 import type {HUDPlayer} from "./player";
-import {appendHUDPlayer} from "./player";
+import {appendHUDPlayer, destructorHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
 import type {HUDGameObjects} from "./game-objects";
-import {appendHUDGameObjects, createHUDGameObjects} from "./game-objects";
+import {appendHUDGameObjects, createHUDGameObjects, destructorHUDGameObjects} from "./game-objects";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -49,6 +49,7 @@ export class HudLayer {
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Observer<Render>;
+  _subscribe: Subscription;
 
   constructor(param: Param) {
     this._rendererDOM = param.rendererDOM;
@@ -84,9 +85,19 @@ export class HudLayer {
     this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, param.notifier.battleAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
-    param.listener.gameLoop.subscribe(action => {
+    this._subscribe = param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this.players.forEach(v => {
+      destructorHUDPlayer(v);
+    });
+    destructorHUDGameObjects(this.gameObjects);
+    this.camera.destructor();
+    this._subscribe.unsubscribe();
   }
 
   /** ゲームループ */

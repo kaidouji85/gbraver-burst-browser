@@ -4,7 +4,7 @@ import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {NeoLandozerModel} from "./model/neo-landozer-model";
 import type {NeoLandozerView} from "./view/neo-landozer-view";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
@@ -24,18 +24,24 @@ import {hmToStand} from "./animation/hm-to-stand";
 export class NeoLandozer implements ArmDozerSprite {
   _model: NeoLandozerModel;
   _view: NeoLandozerView;
+  _subscription: Subscription;
 
   constructor(params: { view: NeoLandozerView, listener: Observable<GameObjectAction> }) {
     this._model = createInitialValue();
     this._view = params.view;
 
-    params.listener.subscribe(action => {
+    this._subscription = params.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /** チャージ */
