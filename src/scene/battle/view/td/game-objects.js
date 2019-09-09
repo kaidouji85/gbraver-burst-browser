@@ -41,5 +41,13 @@ export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): 
   target.stage.getThreeJsObjects()
     .forEach(item => scene.add(item));
   scene.add(target.turnIndicator.getObject3D());
+}
 
+/**
+ * 3Dレイヤーゲームオブジェクトのデストラクタ相当処理
+ *
+ * @param target デストラクト対象
+ */
+export function destructorTDGameObjects(target: TDGameObjects): void {
+  target.turnIndicator.destructor();
 }

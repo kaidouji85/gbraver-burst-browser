@@ -5,6 +5,9 @@ import {Animate} from "../../animation/animate";
 
 /** アームドーザスプライト */
 export interface ArmDozerSprite {
+  /** デストラクタ */
+  destructor(): void;
+
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
 

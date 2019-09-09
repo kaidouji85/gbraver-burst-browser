@@ -77,6 +77,13 @@ export class BatterySelectorView {
     this._group.scale.set(SCALE, SCALE, SCALE);
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._button.destructor();
+    this._plus.destructor();
+    this._minus.destructor();
+  }
+
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._group;

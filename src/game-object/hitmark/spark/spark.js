@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import type {SparkModel} from "./model/spark-model";
 import type {SparkView} from "./view/spark-view";
 import {createInitialValue} from "./model/initial-value";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
 import {Animate} from "../../../animation/animate";
@@ -14,18 +14,24 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 export class Spark {
   _model: SparkModel;
   _view: SparkView;
+  _subscription: Subscription;
 
   constructor(view: SparkView, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
 
-    listener.subscribe(action => {
+    this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
     })
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /** ヒットマークを表示する */

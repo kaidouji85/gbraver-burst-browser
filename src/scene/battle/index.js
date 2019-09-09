@@ -3,7 +3,7 @@ import type {Resources} from '../../resource/index';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../action/game-loop/game-loop";
-import {Observable, Observer, Subject} from "rxjs";
+import {Observable, Observer, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
 import type {DecideBattery} from "../../action/battle-scene/decide-battery";
@@ -17,6 +17,7 @@ import type {Command} from "gbraver-burst-core/lib/command/command";
 import {take} from "rxjs/operators";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {delay} from "../../animation/delay";
+import type {EndBattle} from "../../action/game/end-battle";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -29,7 +30,8 @@ type Param = {
     gameLoop: Observable<GameLoop>,
   },
   notifier: {
-    render: Observer<Render>
+    render: Observer<Render>,
+    endBattle: Observer<EndBattle>,
   }
 };
 
@@ -41,11 +43,14 @@ export class BattleScene {
   _state: BattleSceneState;
   _battleAction: Subject<BattleSceneAction>;
   _battleRoom: BattleRoom;
+  _endBattle: Observer<EndBattle>;
+  _subscription: Subscription;
 
   constructor(param: Param) {
     this._state = createInitialState(param.initialState.playerId);
     this._battleAction = new Subject();
     this._battleRoom = param.battleRoom;
+    this._endBattle = param.notifier.endBattle;
     this._view = new BattleSceneView({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
@@ -61,7 +66,7 @@ export class BattleScene {
       }
     });
 
-    this._battleAction.subscribe(action => {
+    this._subscription = this._battleAction.subscribe(action => {
       if (action.type === 'decideBattery') {
         this._decideBattery(action);
       } else if (action.type === 'doBurst') {
@@ -74,6 +79,12 @@ export class BattleScene {
     ).subscribe(action => {
       this._start(param.initialState.stateHistory);
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._view.destructor();
+    this._subscription.unsubscribe();
   }
 
   /**
@@ -95,10 +106,14 @@ export class BattleScene {
 
     this._state.canOperation = false;
     await invisibleUI(this._view).play();
-    await this._progressGame({
+    const lastState = await this._progressGame({
       type: 'BATTERY_COMMAND',
       battery: action.battery
     });
+    if (lastState && lastState.effect.name === 'GameEnd') {
+      this._endBattle.next({type: 'endBattle'});
+    }
+
     this._state.canOperation = true;
   }
 
@@ -110,36 +125,48 @@ export class BattleScene {
 
     this._state.canOperation = false;
     await invisibleUI(this._view).play();
-    await this._progressGame({type: 'BURST_COMMAND'});
+    const lastState = await this._progressGame({type: 'BURST_COMMAND'});
+    if (lastState && lastState.effect.name === 'GameEnd') {
+      this._endBattle.next({type: 'endBattle'});
+    }
+
     this._state.canOperation = true;
   }
 
-  /** ゲームを進める */
-  async _progressGame(command: Command): Promise<void> {
+  /**
+   * ゲームを進める
+   *
+   * @param command プレイヤーが入力したコマンド
+   * @return ゲームの最新状態、何も更新されなかった場合はnullを返す
+   */
+  async _progressGame(command: Command): Promise<?GameState> {
     let lastCommand: Command = command;
+    let lastState: ?GameState = null;
     for (let i=0; i<100; i++) {
       const updateState = await this._battleRoom.progress(lastCommand);
       await stateHistoryAnimation(this._view, this._state, updateState).play();
 
       if (updateState.length <= 0) {
-        return;
+        return null;
       }
 
-      const lastState = updateState[updateState.length - 1];
+      lastState = updateState[updateState.length - 1];
       if (lastState.effect.name !== 'InputCommand') {
-        return;
+        return lastState;
       }
 
       const playerCommand = lastState.effect.players.find(v => v.playerId === this._state.playerId);
       if (!playerCommand) {
-        return;
+        return lastState;
       }
 
       if (playerCommand.selectable === true) {
-        return;
+        return lastState;
       }
 
       lastCommand = playerCommand.nextTurnCommand;
     }
+
+    return lastState
   }
 }

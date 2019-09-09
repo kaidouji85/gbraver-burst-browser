@@ -73,6 +73,11 @@ export class BurstButtonView {
     this._group.scale.set(SCALE, SCALE, SCALE);
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._overlap.destructor();
+  }
+
   /** モデルをビューに反映させる */
   engage(model: BurstButtonModel): void {
     this._burstButton.setOpacity(model.opacity);

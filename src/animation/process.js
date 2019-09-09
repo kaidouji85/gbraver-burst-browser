@@ -1,7 +1,7 @@
 // @flow
 
+import TWEEN from '@tweenjs/tween.js';
 import {Animate} from './animate';
-import {Group} from '@tweenjs/tween.js';
 import {tween} from "./tween";
 
 /**
@@ -11,7 +11,7 @@ import {tween} from "./tween";
  * @param group TWeenGroup
  * @return アニメーション
  */
-export function process(fn: () => void, group: ?Group): Animate {
+export function process(fn: () => void, group: ?TWEEN.Group): Animate {
   return tween({}, t => t
       .to({}, 0)
       .onStart(() => {

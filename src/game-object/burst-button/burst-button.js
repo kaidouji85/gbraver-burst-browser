@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import type {BurstButtonModel} from "./model/burst-button-model";
 import {BurstButtonView} from "./view/burst-button-view";
 import type {Resources} from "../../resource";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import {open} from './animation/open';
@@ -23,6 +23,7 @@ type Param = {
 export class BurstButton {
   _model: BurstButtonModel;
   _view: BurstButtonView;
+  _subscription: Subscription;
 
   constructor(param: Param) {
     this._model = createInitialValue();
@@ -36,13 +37,19 @@ export class BurstButton {
         param.onPush();
       }
     });
-    param.listener.subscribe(action => {
+    this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._view.destructor();
+    this._subscription.unsubscribe();
   }
 
   /**
