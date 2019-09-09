@@ -19,3 +19,12 @@ export type HUDPlayer = {
 export function appendHUDPlayer(scene: THREE.Scene, hud: HUDPlayer) {
   scene.add(hud.gauge.getObject3D());
 }
+
+/**
+ * HUDプレイヤーのデストラクタ相当処理を行う
+ *
+ * @param target デストラクト対象
+ */
+export function destructorHUDPlayer(target: HUDPlayer): void {
+  target.gauge.destructor();
+}

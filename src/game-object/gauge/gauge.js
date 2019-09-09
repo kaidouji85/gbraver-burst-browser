@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import type {GaugeView} from "./view/gauge-view";
 import type {GaugeModel} from "./model/gauge-model";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
@@ -22,6 +22,7 @@ type Param = {
 export class Gauge {
   _model: GaugeModel;
   _view: GaugeView;
+  _subscription: Subscription;
 
   constructor(param: Param) {
     this._view = param.view;
@@ -32,13 +33,18 @@ export class Gauge {
       maxBattery: param.battery
     };
 
-    param.listener.subscribe(action => {
+    this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /** HP変更 */

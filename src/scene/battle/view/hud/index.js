@@ -13,7 +13,7 @@ import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../action/game-loop/render";
 import {BattleHUDCamera} from "../../../../game-object/camera/battle-hud";
 import type {HUDPlayer} from "./player";
-import {appendHUDPlayer} from "./player";
+import {appendHUDPlayer, destructorHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
 import type {HUDGameObjects} from "./game-objects";
@@ -92,6 +92,9 @@ export class HudLayer {
 
   /** デストラクタ */
   destructor(): void {
+    this.players.forEach(v => {
+      destructorHUDPlayer(v);
+    });
     destructorHUDGameObjects(this.gameObjects);
     this.camera.destructor();
     this._subscribe.unsubscribe();
