@@ -73,4 +73,5 @@ export function destructorTDPlayer(target: TDPlayer<ArmDozerSprite>): void {
   target.batteryNumber.destructor();
   target.damageIndicator.destructor();
   target.hitMark.spark.destructor();
+  target.recoverBattery.destructor();
 }
