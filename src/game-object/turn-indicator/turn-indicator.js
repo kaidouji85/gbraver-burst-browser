@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import type {Resources} from "../../resource";
 import type {TurnIndicatorModel} from "./model/turn-indicator-model";
 import {TurnIndicatorView} from "./view/turn-indicator-view";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
@@ -21,6 +21,7 @@ type Param = {
 export class TurnIndicator {
   _model: TurnIndicatorModel;
   _view: TurnIndicatorView;
+  _subscription: Subscription;
 
   constructor(param: Param) {
     this._model = {
@@ -29,13 +30,18 @@ export class TurnIndicator {
     };
     this._view = new TurnIndicatorView(param.resources);
 
-    param.listener.subscribe(action => {
+    this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /**

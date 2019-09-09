@@ -16,7 +16,7 @@ import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "./game-objects";
-import {appendTDGameObjects, createTDGameObjects} from "./game-objects";
+import {appendTDGameObjects, createTDGameObjects, destructorTDGameObjects} from "./game-objects";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -87,6 +87,7 @@ export class ThreeDimensionLayer {
     this.players.forEach(v => {
       destructorTDPlayer(v);
     });
+    destructorTDGameObjects(this.gameObjects);
     this.camera.destructor();
     this._subscribe.unsubscribe();
   }
