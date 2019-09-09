@@ -25,13 +25,8 @@ async function main(): Promise<void> {
     addEventToLoadingManager();
     loadServiceWorker();
     viewPerformanceStatics(document.body);
-
     const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
-    const threeJsRender = createRender();
-    if (threeJsRender.domElement && document.body) {
-      document.body.appendChild(threeJsRender.domElement);
-    }
-    new Game(resources, threeJsRender);
+    new Game(resources);
   } catch (e) {
     console.error(e.stack);
   }

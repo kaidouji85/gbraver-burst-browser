@@ -15,6 +15,7 @@ import {NeoLandozerNpc} from "../npc/neo-landozer-npc";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import type {GameLoop} from "../action/game-loop/game-loop";
 import type {DOMEvent} from "../action/dom-event";
+import {createRender} from "../render/create-render";
 
 /** ゲーム全体の制御を行う */
 export class Game {
@@ -27,13 +28,17 @@ export class Game {
   _endBattle: Subject<EndBattle>;
   _subscription: Subscription;
 
-  constructor(resources: Resources, threeJsRender: THREE.WebGLRenderer) {
+  constructor(resources: Resources) {
+    this._threeJsRender = createRender();
+    if (this._threeJsRender.domElement && document.body) {
+      document.body.appendChild(this._threeJsRender.domElement);
+    }
+
     this._resources = resources;
-    this._threeJsRender = threeJsRender;
     this._gameLoop = createGameLoopListener();
-    this._domEvent = createDOMEventListener(threeJsRender.domElement);
+    this._domEvent = createDOMEventListener(this._threeJsRender.domElement);
     this._renderer = new Renderer({
-      renderer: threeJsRender,
+      renderer: this._threeJsRender,
       listener: {
         domEvent: this._domEvent
       }
