@@ -3,7 +3,7 @@
 import type {DamageIndicatorView} from "./view/damage-indicator-view";
 import {createInitialValue} from "./model/initial-value";
 import type {DamageIndicatorModel} from "./model/damage-indicator-model";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import {popUp} from "./animation/pop-up";
@@ -20,17 +20,23 @@ type Param = {
 export class DamageIndicator {
   _model: DamageIndicatorModel;
   _view: DamageIndicatorView;
+  _subscription: Subscription;
 
   constructor(param: Param) {
     this._view = param.view;
     this._model = createInitialValue();
-    param.listener.subscribe(action => {
+    this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /** ダメージ数字を表示する */
