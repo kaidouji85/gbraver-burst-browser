@@ -15,6 +15,7 @@ import {Renderer} from "./game-object/renderer";
 import {addEventToLoadingManager} from "./loading/loading-dom";
 import {Subject} from "rxjs";
 import type {EndBattle} from "./action/game/end-battle";
+import {Game} from "./game";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -30,42 +31,7 @@ async function main(): Promise<void> {
     if (threeJsRender.domElement && document.body) {
       document.body.appendChild(threeJsRender.domElement);
     }
-    const gameLoopListener = createGameLoopListener();
-    const domEventListener = createDOMEventListener(threeJsRender.domElement);
-    const renderer = new Renderer({
-      renderer: threeJsRender,
-      listener: {
-        domEvent: domEventListener
-      }
-    });
-    const endBattle: Subject<EndBattle> = new Subject();
-    endBattle.subscribe(action => {
-      scene.destructor();
-      location.reload();
-    });
-
-    // TODO 開発用にダミーデータを作成している
-    const player: Player = {
-      playerId: 'test01',
-      armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
-    };
-    const npc: NPC = NeoLandozerNpc;
-    const battleRoom = new OfflineBattleRoom(player, npc);
-    const initialState = await battleRoom.start();
-    const scene = new BattleScene({
-      resources: resources,
-      rendererDOM: threeJsRender.domElement,
-      battleRoom: battleRoom,
-      initialState: initialState,
-      listener: {
-        domEvent: domEventListener,
-        gameLoop: gameLoopListener,
-      },
-      notifier: {
-        render: renderer.getRenderNotifier(),
-        endBattle: endBattle
-      }
-    });
+    new Game(resources, threeJsRender);
   } catch (e) {
     console.error(e.stack);
   }
