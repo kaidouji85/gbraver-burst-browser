@@ -87,6 +87,7 @@ export class ThreeDimensionLayer {
     this.players.forEach(v => {
       destructorTDPlayer(v);
     });
+    this.camera.destructor();
     this._subscribe.unsubscribe();
   }
 
