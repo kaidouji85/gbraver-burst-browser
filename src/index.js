@@ -13,6 +13,8 @@ import {OfflineBattleRoom} from "./battle-room/offline-battle-room";
 import {BattleScene} from "./scene/battle";
 import {Renderer} from "./game-object/renderer";
 import {addEventToLoadingManager} from "./loading/loading-dom";
+import {Subject} from "rxjs";
+import type {EndBattle} from "./action/game/end-battle";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -24,7 +26,6 @@ async function main(): Promise<void> {
     viewPerformanceStatics(document.body);
 
     const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
-
     const threeJsRender = createRender();
     if (threeJsRender.domElement && document.body) {
       document.body.appendChild(threeJsRender.domElement);
@@ -36,6 +37,11 @@ async function main(): Promise<void> {
       listener: {
         domEvent: domEventListener
       }
+    });
+    const endBattle: Subject<EndBattle> = new Subject();
+    endBattle.subscribe(action => {
+      scene.destructor();
+      location.reload();
     });
 
     // TODO 開発用にダミーデータを作成している
@@ -56,7 +62,8 @@ async function main(): Promise<void> {
         gameLoop: gameLoopListener,
       },
       notifier: {
-        render: renderer.getRenderNotifier()
+        render: renderer.getRenderNotifier(),
+        endBattle: endBattle
       }
     });
   } catch (e) {
