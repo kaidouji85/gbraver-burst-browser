@@ -83,4 +83,5 @@ export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects)
  */
 export function destructorHUDGameObjects(target: HUDGameObjects): void {
   target.batterySelector.destructor();
+  target.burstButton.destructor();
 }
