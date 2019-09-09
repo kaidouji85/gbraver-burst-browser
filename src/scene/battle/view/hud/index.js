@@ -93,6 +93,7 @@ export class HudLayer {
   /** デストラクタ */
   destructor(): void {
     destructorHUDGameObjects(this.gameObjects);
+    this.camera.destructor();
     this._subscribe.unsubscribe();
   }
 
