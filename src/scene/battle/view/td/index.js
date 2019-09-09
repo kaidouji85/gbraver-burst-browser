@@ -11,7 +11,7 @@ import type {Render} from "../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../action/dom-event";
 import type {TDPlayer} from "./player";
-import {appendTDPlayer} from "./player";
+import {appendTDPlayer, destructorTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
@@ -84,6 +84,9 @@ export class ThreeDimensionLayer {
 
   /** デストラクタ */
   destructor(): void {
+    this.players.forEach(v => {
+      destructorTDPlayer(v);
+    });
     this._subscribe.unsubscribe();
   }
 
