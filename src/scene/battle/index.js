@@ -100,9 +100,8 @@ export class BattleScene {
       battery: action.battery
     });
     if (lastState && lastState.effect.name === 'GameEnd') {
-      console.log('game-end');
+      this._sceneEnd();
     }
-
     this._state.canOperation = true;
   }
 
@@ -116,7 +115,7 @@ export class BattleScene {
     await invisibleUI(this._view).play();
     const lastState = await this._progressGame({type: 'BURST_COMMAND'});
     if (lastState && lastState.effect.name === 'GameEnd') {
-      console.log('game-end');
+      this._sceneEnd();
     }
     this._state.canOperation = true;
   }
@@ -155,5 +154,10 @@ export class BattleScene {
     }
 
     return lastState
+  }
+
+  /** 戦闘シーン終了時の処理 */
+  _sceneEnd(): void {
+    this._view.destructor();
   }
 }

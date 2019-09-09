@@ -32,7 +32,6 @@ type Param = {
 export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
-
   _gameLoop3D: Subject<GameLoop>;
   _gameLoopHUD: Subject<GameLoop>;
 
@@ -71,6 +70,12 @@ export class BattleSceneView {
     param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this.hud.destructor();
+    this.td.destructor();
   }
 
   /** ゲームループ */
