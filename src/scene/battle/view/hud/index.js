@@ -17,7 +17,7 @@ import {appendHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
 import type {HUDGameObjects} from "./game-objects";
-import {appendHUDGameObjects, createHUDGameObjects} from "./game-objects";
+import {appendHUDGameObjects, createHUDGameObjects, destructorHUDGameObjects} from "./game-objects";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -92,6 +92,7 @@ export class HudLayer {
 
   /** デストラクタ */
   destructor(): void {
+    destructorHUDGameObjects(this.gameObjects);
     this._subscribe.unsubscribe();
   }
 

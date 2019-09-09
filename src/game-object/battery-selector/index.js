@@ -1,7 +1,7 @@
 // @flow
 
 import TWEEN from '@tweenjs/tween.js';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import type {Resources} from "../../resource";
 import * as THREE from "three";
 import type {ButtonLabel} from "./model/button-label";
@@ -34,12 +34,13 @@ export class BatterySelector {
   _model: BatterySelectorModel;
   _view: BatterySelectorView;
   _batteryChangeTween: TWEEN.Group;
+  _subscription: Subscription;
 
   constructor(param: Param) {
     this._model = initialValue();
     this._batteryChangeTween = new TWEEN.Group();
 
-    param.listener.subscribe(action => {
+    this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
@@ -74,6 +75,12 @@ export class BatterySelector {
         param.onBatteryChange(this._model.battery);
       }
     });
+  }
+
+  /** デストラクタ */
+  destructor(): void {
+    this._view.destructor();
+    this._subscription.unsubscribe();
   }
 
   /**

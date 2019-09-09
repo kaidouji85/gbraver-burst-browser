@@ -63,6 +63,10 @@ export class BatteryPlus {
     this._group.add(this._buttonDisabled.getObject3D());
     this._group.add(this._overlap.getObject3D());
   }
+  
+  destructor(): void {
+    this._overlap.destructor();
+  }
 
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
