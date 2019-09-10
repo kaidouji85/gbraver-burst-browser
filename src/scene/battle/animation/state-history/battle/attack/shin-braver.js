@@ -3,8 +3,8 @@
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import type {BattleAnimationParam} from "../animation-param";
-import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {overWriteResult} from "../animation-param";
+import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {all} from "../../../../../../animation/all";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import type {NormalHit} from "gbraver-burst-core/lib/effect/battle/result/normal-hit";

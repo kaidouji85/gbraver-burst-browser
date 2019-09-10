@@ -2,11 +2,11 @@
 
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import type {TDPlayer} from "../../../view/td/player";
+import {overWriteTDSprite} from "../../../view/td/player";
 import type {HUDPlayer} from "../../../view/hud/player";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import type {HUDGameObjects} from "../../../view/hud/game-objects";
-import {overWriteTDSprite} from "../../../view/td/player";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";

@@ -1,11 +1,11 @@
 // @flow
 
 import type {BurstAnimationParam} from "./animation-param";
+import {overWriteBurst} from "./animation-param";
 import {Animate} from "../../../../../animation/animate";
 import {ShinBraver} from "../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {delay, empty} from "../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core/lib/armdozer/burst";
-import {overWriteBurst} from "./animation-param";
 import {all} from "../../../../../animation/all";
 
 /**
