@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
-import {CubeTexture} from "three";
+import {CubeTexture} from 'three';
 
 /**
  * three.jsのオブジェクトにCubeTextureで環境マッピングを適用する
