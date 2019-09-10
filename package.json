@@ -33,6 +33,7 @@
     "rxjs": "^6.5.3",
     "stats.js": "^0.17.0",
     "three": "^0.108.0",
+    "workbox-expiration": "^4.3.1",
     "workbox-precaching": "^4.3.1",
     "workbox-routing": "^4.3.1",
     "workbox-strategies": "^4.3.1"
