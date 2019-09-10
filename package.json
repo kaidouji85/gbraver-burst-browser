@@ -6,16 +6,19 @@
   "scripts": {
     "start": "npm-run-all clean dev-server",
     "start:stub": "npm-run-all clean dev-server:stub",
+    "start:production": "npm-run-all clean build:production serve",
     "test": "ava",
     "build": "npm-run-all clean type-check webpack",
-    "build:production": "npm-run-all clean type-check webpack:production",
+    "build:production": "npm-run-all clean type-check webpack:production webpack:sw",
     "build:stub": "npm-run-all clean webpack:stub",
     "clean": "rimraf build",
     "dev-server": "webpack-dev-server",
     "dev-server:stub": "webpack-dev-server --config webpack.stub.js",
+    "serve": "http-server build/production -p 3000",
     "webpack": "webpack",
     "webpack:production": "webpack --config webpack.production.js",
     "webpack:stub": "webpack --config webpack.stub.js",
+    "webpack:sw": "webpack --config webpack.sw.js",
     "type-check": "flow check",
     "lint": "eslint src",
     "lint:test": "eslint test"
@@ -30,6 +33,7 @@
     "rxjs": "^6.5.3",
     "stats.js": "^0.17.0",
     "three": "^0.108.0",
+    "workbox-precaching": "^4.3.1",
     "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
@@ -45,6 +49,7 @@
     "eslint-plugin-flowtype": "^4.3.0",
     "flow-bin": "^0.107.0",
     "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.0",
     "webpack": "^4.39.3",
