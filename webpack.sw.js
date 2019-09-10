@@ -1,11 +1,13 @@
+const webpack = require('webpack');
+const config = require('./webpack.config');
 const path = require('path');
-const BUILD_PATH = 'build/production';
+const Puid = require('puid');
 
 module.exports = {
   mode: 'production',
   entry: path.resolve(__dirname, 'service-worker/sw.js'),
   output: {
-    path: path.resolve(__dirname, BUILD_PATH),
+    path: config.output.path,
     filename: 'sw.js'
   },
   module: {
@@ -17,4 +19,10 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      REVISION_INDEX_HTML: JSON.stringify(new Puid().generate()),
+      REVISION_INDEX_JS: JSON.stringify(new Puid().generate()),
+    }),
+  ]
 };

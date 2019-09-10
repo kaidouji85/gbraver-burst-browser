@@ -3,8 +3,8 @@ import * as Routing from 'workbox-routing';
 import * as Strategies from 'workbox-strategies';
 
 PreCaching.precacheAndRoute([
-  {url: "index.html"},
-  {url: "index.js"}
+  {url: "index.html", revision: REVISION_INDEX_HTML},
+  {url: "index.js", revision: REVISION_INDEX_JS}
 ]);
 
 Routing.registerRoute(
