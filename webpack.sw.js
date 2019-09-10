@@ -8,7 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, BUILD_PATH),
     filename: 'sw.js'
   },
-  devtool: 'source-map',
   module: {
     rules: [
       {
