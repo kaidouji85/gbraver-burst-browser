@@ -89,6 +89,7 @@ export class Game {
         endBattle: this._endBattle
       }
     });
-    console.log(this._renderer._renderer.info);
+    // デバッグ用にレンダラ情報をコンソールに出力
+    // console.log(this._renderer._renderer.info);
   }
 }
