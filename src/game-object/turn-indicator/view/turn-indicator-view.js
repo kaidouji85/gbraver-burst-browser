@@ -19,6 +19,11 @@ export class TurnIndicatorView {
     this._canvasMesh = createCanvasMesh(resources);
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._canvasMesh.destructor();
+  }
+
   /** モデルをビューに反映させる */
   engage(model: TurnIndicatorModel): void {
     this._setScale(model);
