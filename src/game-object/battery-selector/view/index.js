@@ -80,6 +80,7 @@ export class BatterySelectorView {
   /** デストラクタ */
   destructor(): void {
     this._button.destructor();
+    this._meter.destructor();
     this._plus.destructor();
     this._minus.destructor();
   }

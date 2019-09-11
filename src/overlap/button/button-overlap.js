@@ -45,6 +45,8 @@ export class ButtonOverlap {
 
   /** デストラクタ */
   destructor(): void {
+    this._mesh.geometry.dispose();
+    this._mesh.material.dispose();
     this._subscription.unsubscribe();
   }
 

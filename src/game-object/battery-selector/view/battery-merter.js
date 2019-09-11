@@ -83,6 +83,18 @@ export class BatteryMeter {
 
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._disk.destructor();
+    this._needle.destructor();
+    this._numbers.forEach(v => {
+      v.destructor();
+    });
+    this._disActiveNumbers.forEach(v => {
+      v.destructor();
+    });
+  }
+
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
     this._needle.getObject3D().rotation.z = Math.PI * (1- model.needle);
