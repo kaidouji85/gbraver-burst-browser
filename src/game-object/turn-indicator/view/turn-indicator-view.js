@@ -38,7 +38,7 @@ export class TurnIndicatorView {
 
   /** ビューで使うthree.jsを返す */
   getObject3D(): THREE.Object3D {
-    return this._canvasMesh.mesh;
+    return this._canvasMesh.getObject3D();
   }
 
   /** 全体の拡大率を変更 */

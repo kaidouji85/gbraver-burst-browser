@@ -37,6 +37,7 @@ export class CanvasMesh {
   destructor(): void {
     this.mesh.geometry.dispose();
     this.mesh.material.dispose();
+    this.mesh.material.map.dispose();
   }
 
   /**
