@@ -29,6 +29,11 @@ export class PlayerGaugeView implements GaugeView {
     this._lastEngagedModel = null;
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._canvasMesh.destructor();
+  }
+
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
     if (this._shouldCanvasRefresh(model)) {

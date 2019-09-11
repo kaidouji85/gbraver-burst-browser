@@ -2,6 +2,15 @@
 
 import * as THREE from "three";
 
+/** ステージ */
 export interface Stage {
-  getThreeJsObjects(): THREE.Object;
+  /** デストラクタ */
+  destructor(): void;
+
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
+  getThreeJsObjects(): THREE.Object[];
 }

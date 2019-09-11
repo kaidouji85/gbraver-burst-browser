@@ -27,6 +27,11 @@ export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
     });
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._animation.destructor();
+  }
+
   /** アニメーション進捗を変更する */
   animate(animation: number): void {
     this._animation.animate(animation);
@@ -39,6 +44,6 @@ export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
-    return this._animation.mesh;
+    return this._animation.getObject3D();
   }
 }

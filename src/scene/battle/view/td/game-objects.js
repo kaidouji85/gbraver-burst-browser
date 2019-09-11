@@ -49,5 +49,6 @@ export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): 
  * @param target デストラクト対象
  */
 export function destructorTDGameObjects(target: TDGameObjects): void {
+  target.stage.destructor();
   target.turnIndicator.destructor();
 }

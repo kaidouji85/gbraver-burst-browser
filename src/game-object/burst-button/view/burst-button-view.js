@@ -75,6 +75,8 @@ export class BurstButtonView {
 
   /** デストラクタ */
   destructor(): void {
+    this._burstButton.destructor();
+    this._buttonDisabled.destructor();
     this._overlap.destructor();
   }
 

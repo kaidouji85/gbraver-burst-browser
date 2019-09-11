@@ -121,7 +121,13 @@ export class BatteryButton {
 
   /** デストラクタ */
   destructor(): void {
+    this._button.destructor();
     this._overlap.destructor();
+    this._attackLabel.destructor();
+    this._defenseLabel.destructor();
+    this._batteryValues.forEach(v => {
+      v.mesh.destructor();
+    });
   }
 
   /** モデルをビューに反映させる */

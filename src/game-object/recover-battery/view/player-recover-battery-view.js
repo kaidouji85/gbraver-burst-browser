@@ -44,6 +44,12 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
     this._group.add(this._numberMesh.getObject3D());
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._signMesh.destructor();
+    this._numberMesh.destructor();
+  }
+
   /**
    * モデルのビューに反映させる
    *
