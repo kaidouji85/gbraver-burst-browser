@@ -34,6 +34,13 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     }, MAX_NUMBER_SIZE);
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._numbers.forEach(v => {
+      v.destructor();
+    });
+  }
+
   /** モデルをビューに反映させる */
   engage(model: DamageIndicatorModel): void {
     this._refreshValue(model);

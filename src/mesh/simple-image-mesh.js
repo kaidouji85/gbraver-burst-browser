@@ -27,6 +27,11 @@ export class SimpleImageMesh {
     });
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._mesh.destructor();
+  }
+
   /** 透明度を設定する */
   setOpacity(opacity: number): void {
     this._mesh.setOpacity(opacity);

@@ -98,6 +98,7 @@ export class HudLayer {
     destructorHUDGameObjects(this.gameObjects);
     this.camera.destructor();
     this._subscribe.unsubscribe();
+    this.scene.dispose();
   }
 
   /** ゲームループ */

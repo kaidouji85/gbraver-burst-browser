@@ -3,6 +3,9 @@ import * as THREE from "three";
 
 /** シンブレイバーのビュー */
 export interface ShinBraverView {
+  /** デストラクタ */
+  destructor(): void;
+
   /** モデルをビューに反映させる */
   engage(model: ShinBraverModel): void;
 

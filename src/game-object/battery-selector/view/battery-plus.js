@@ -66,6 +66,8 @@ export class BatteryPlus {
 
   /** デストラクタ */
   destructor(): void {
+    this._activeButton.destructor();
+    this._buttonDisabled.destructor();
     this._overlap.destructor();
   }
 

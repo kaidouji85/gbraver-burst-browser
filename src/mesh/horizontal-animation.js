@@ -38,6 +38,13 @@ export class HorizontalAnimationMesh {
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this.mesh.geometry.dispose();
+    this.mesh.material.dispose();
+    this.texture.dispose();
+  }
+
   /**
    * アニメーションを設定する
    *

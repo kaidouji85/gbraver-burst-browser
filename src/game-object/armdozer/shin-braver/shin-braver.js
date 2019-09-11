@@ -41,6 +41,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** デストラクタ */
   destructor(): void {
+    this._view.destructor();
     this._subscription.unsubscribe();
   }
 

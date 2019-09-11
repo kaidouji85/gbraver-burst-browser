@@ -19,6 +19,11 @@ export class TurnIndicatorView {
     this._canvasMesh = createCanvasMesh(resources);
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._canvasMesh.destructor();
+  }
+
   /** モデルをビューに反映させる */
   engage(model: TurnIndicatorModel): void {
     this._setScale(model);
@@ -33,7 +38,7 @@ export class TurnIndicatorView {
 
   /** ビューで使うthree.jsを返す */
   getObject3D(): THREE.Object3D {
-    return this._canvasMesh.mesh;
+    return this._canvasMesh.getObject3D();
   }
 
   /** 全体の拡大率を変更 */

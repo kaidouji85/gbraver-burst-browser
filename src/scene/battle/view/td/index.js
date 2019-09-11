@@ -90,6 +90,7 @@ export class ThreeDimensionLayer {
     destructorTDGameObjects(this.gameObjects);
     this.camera.destructor();
     this._subscribe.unsubscribe();
+    this.scene.dispose();
   }
 
   /** ゲームループの処理 */

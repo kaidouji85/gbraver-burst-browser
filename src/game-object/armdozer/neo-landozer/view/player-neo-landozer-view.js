@@ -37,6 +37,13 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     });
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._getAllMeshes().forEach(v => {
+      v.destructor();
+    });
+  }
+
   /** モデルをビューに反映させる */
   engage(model: NeoLandozerModel): void {
     const activeMesh = this._getActiveMesh(model.animation.type);

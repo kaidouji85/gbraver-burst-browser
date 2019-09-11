@@ -41,6 +41,7 @@ export class TurnIndicator {
 
   /** デストラクタ */
   destructor(): void {
+    this._view.destructor();
     this._subscription.unsubscribe();
   }
 

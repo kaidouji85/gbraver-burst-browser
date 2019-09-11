@@ -5,6 +5,9 @@ import * as THREE from 'three';
 
 /** バッテリー数字のビュー */
 export interface BatteryNumberView {
+  /** デストラクタ */
+  destructor(): void;
+
   /** モデルをビューに反映させる */
   engage(model: BatteryNumberModel): void;
 

@@ -3,6 +3,9 @@ import * as THREE from "three";
 
 /** ネオランドーザのビュー */
 export interface NeoLandozerView {
+  /** デストラクタ */
+  destructor(): void;
+
   /** モデルをビューに反映させる */
   engage(model: NeoLandozerModel): void;
 

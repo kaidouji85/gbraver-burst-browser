@@ -33,6 +33,13 @@ export class CanvasMesh {
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this.mesh.geometry.dispose();
+    this.mesh.material.dispose();
+    this.mesh.material.map.dispose();
+  }
+
   /**
    * キャンバステクスチャに描画するヘルパー関数
    *

@@ -37,6 +37,13 @@ export class PlayerShinBraverView implements ShinBraverView {
     });
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._getAllMeshes().forEach(v => {
+      v.destructor();
+    });
+  }
+
   /** モデルをビューに反映させる */
   engage(model: ShinBraverModel): void {
     this._refreshPos(model);
