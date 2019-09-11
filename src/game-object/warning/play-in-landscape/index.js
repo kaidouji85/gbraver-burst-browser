@@ -40,6 +40,7 @@ export class PlayInLandscape {
 
   /** デストラクタ */
   destructor(): void {
+    this._mesh.destructor();
     this._subscription.unsubscribe();
   }
 
