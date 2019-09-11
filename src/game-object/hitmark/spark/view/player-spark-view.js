@@ -21,6 +21,11 @@ export class PlayerSparkView implements SparkView {
     });
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._animation.destructor();
+  }
+
   /** モデルをビューに反映させる */
   engage(model: SparkModel): void {
     this._animation.mesh.position.x = model.position.x;
