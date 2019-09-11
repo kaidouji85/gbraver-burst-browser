@@ -3,13 +3,13 @@
 import type {Resources} from '../../../resource/index';
 import * as THREE from 'three';
 import SkyBox from './blue-sky';
-import {shoppingStreetMesh} from './shopping-street';
+import {City} from './city';
 import {Stage} from "../stage";
 
 /** 商店街 */
 export default class ShoppingStreet implements Stage {
   _skyBox: THREE.Mesh;
-  _cityMesh: THREE.Mesh;
+  _city: City;
   _directionalLight1: THREE.DirectionalLight;
   _directionalLight2: THREE.DirectionalLight;
   _directionalLight3: THREE.DirectionalLight;
@@ -17,7 +17,7 @@ export default class ShoppingStreet implements Stage {
   _ambientLight: THREE.AmbientLight;
 
   constructor(resources: Resources) {
-    this._cityMesh = shoppingStreetMesh(resources);
+    this._city = new City(resources);
     this._skyBox = SkyBox(resources);
 
     this._directionalLight1 = new THREE.DirectionalLight(0xAAAAAA, 0.8);
@@ -35,6 +35,13 @@ export default class ShoppingStreet implements Stage {
     this._ambientLight = new THREE.AmbientLight(0xAAAAAA);
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._city.destructor();
+    this._skyBox.geometry.dispose();
+    this._skyBox.material.dispose();
+  }
+
   /**
    * 本クラスに関連するオブジェクトを配列にまとめる
    *
@@ -42,7 +49,7 @@ export default class ShoppingStreet implements Stage {
    */
   getThreeJsObjects(): THREE.Object3D[] {
     return [
-      this._cityMesh,
+      this._city.getObject3D(),
       this._skyBox,
       this._directionalLight1,
       this._directionalLight2,
