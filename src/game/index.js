@@ -89,5 +89,6 @@ export class Game {
         endBattle: this._endBattle
       }
     });
+    console.log(this._renderer._renderer.info);
   }
 }
