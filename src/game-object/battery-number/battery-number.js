@@ -36,6 +36,7 @@ export class BatteryNumber {
 
   /** デストラクタ */
   destructor(): void {
+    this._view.destructor();
     this._subscription.unsubscribe();
   }
 

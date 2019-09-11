@@ -26,6 +26,11 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
     });
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._numberMesh.destructor();
+  }
+
   /** モデルをビューに反映させる */
   engage(model: BatteryNumberModel): void {
     this._refreshBatteryNumber(model);
