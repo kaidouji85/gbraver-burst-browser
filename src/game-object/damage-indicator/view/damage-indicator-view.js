@@ -5,6 +5,9 @@ import * as THREE from 'three';
 
 /** ダメージインジケータのビュー*/
 export interface DamageIndicatorView {
+  /** デストラクタ */
+  destructor(): void;
+
   /** モデルをビューに反映させる */
   engage(model: DamageIndicatorModel): void;
 
