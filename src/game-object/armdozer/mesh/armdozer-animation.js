@@ -4,6 +4,9 @@ import * as THREE from 'three';
 
 /** アームドーザアニメーション */
 export interface ArmdozerAnimation {
+  /** デストラクタ */
+  destructor(): void;
+
   /**
    * アニメーション進捗を変更する
    *
