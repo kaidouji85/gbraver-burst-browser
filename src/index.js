@@ -1,6 +1,6 @@
 // @flow
 import {loadServiceWorker} from "./service-worker/load-service-worker";
-import {viewPerformanceStatics} from "./stats/view-performance-statics";
+import {viewPerformanceStats} from "./stats/view-performance-stats";
 import {loadAllResource} from "./resource";
 import {addEventToLoadingManager} from "./loading/loading-dom";
 import {Game} from "./game";
@@ -12,7 +12,7 @@ async function main(): Promise<void> {
   try {
     addEventToLoadingManager();
     loadServiceWorker();
-    viewPerformanceStatics(document.body);
+    viewPerformanceStats(document.body);
     const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
     new Game(resources);
   } catch (e) {

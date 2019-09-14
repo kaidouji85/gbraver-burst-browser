@@ -5,8 +5,11 @@ import Stats from 'stats.js';
  *
  * @param dom パフォーマンス情報をアペンドするHTML要素
  */
-export function viewPerformanceStatics(dom: HTMLElement): void {
+export function viewPerformanceStats(dom: HTMLElement): void {
   const stats = new Stats();
+  stats.dom.style.position = "absolute";
+  stats.dom.style.top = "1em";
+  stats.dom.style.left = "1em";
   dom.appendChild(stats.dom);
 
   const update = time => {
