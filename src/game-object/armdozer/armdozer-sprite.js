@@ -28,4 +28,7 @@ export interface ArmDozerSprite {
 
   /** 避け -> 立ち */
   avoidToStand(): Animate;
+
+  /** ダウン */
+  down(): Animate;
 }

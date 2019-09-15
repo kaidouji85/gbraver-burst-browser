@@ -71,6 +71,7 @@ export class Game {
       playerId: 'test01',
       armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
     };
+    player.armdozer.power = 6000; // TODO 開発用
     const npc: NPC = NeoLandozerNpc;
     const battleRoom = new OfflineBattleRoom(player, npc);
     const initialState = await battleRoom.start();

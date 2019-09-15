@@ -19,6 +19,7 @@ import {armHammer} from "./animation/arm-hammer";
 import {avoidToStand} from "./animation/avoid-to-stand";
 import {charge} from "./animation/charge";
 import {hmToStand} from "./animation/hm-to-stand";
+import {down} from "./animation/down";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -88,6 +89,11 @@ export class NeoLandozer implements ArmDozerSprite {
   /** 避け -> 立ち */
   avoidToStand(): Animate {
     return avoidToStand(this._model);
+  }
+
+  /** ダウン */
+  down(): Animate {
+    return down(this._model);
   }
 
   /** シーンに追加するオブジェクトを取得する */
