@@ -7,4 +7,5 @@ export type AnimationType =
   | 'GUARD'
   | 'HM_CHARGE'
   | 'HM_ATTACK'
-  | 'HM_TO_STAND';
+  | 'HM_TO_STAND'
+  | 'DOWN';

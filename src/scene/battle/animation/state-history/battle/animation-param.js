@@ -35,6 +35,7 @@ export type BattleAnimationParam<SPRITE, RESULT> = {
   tdCamera: Battle3DCamera,
   hudObjects: HUDGameObjects,
   hudCamera: BattleHUDCamera,
+  isDeath: boolean,
   result: RESULT
 };
 
@@ -75,6 +76,7 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
     tdCamera: view.td.camera,
     hudObjects: view.hud.gameObjects,
     hudCamera: view.hud.camera,
+    isDeath: effect.isDeath,
     result: effect.result,
   };
 }

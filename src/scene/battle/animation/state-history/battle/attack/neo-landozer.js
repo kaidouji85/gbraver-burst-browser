@@ -20,19 +20,18 @@ import type {Feint} from "gbraver-burst-core/lib/effect/battle/result/feint";
  * @return アニメーション
  */
 export function neoLandozerAttack(param: BattleAnimationParam<NeoLandozer, BattleResult>): Animate {
-  const result = param.result;
-  switch (result.name) {
-    case 'NormalHit':
-    case 'CriticalHit':
-      return attack(overWriteResult(param, result));
-    case 'Guard':
-      return guard(overWriteResult(param, result));
-    case 'Miss':
-      return miss(overWriteResult(param, result));
-    case 'Feint':
-      return feint(overWriteResult(param, result));
-    default:
-      return empty();
+  if ((param.result.name === 'NormalHit') || (param.result.name === 'CriticalHit') || (param.result.name === 'Guard') && param.isDeath) {
+    return down(overWriteResult(param, param.result));
+  } else if ((param.result.name === 'NormalHit') || (param.result.name === 'CriticalHit')) {
+    return attack(overWriteResult(param, param.result));
+  } else if (param.result.name === 'Guard') {
+    return guard(overWriteResult(param, param.result));
+  } else if (param.result.name === 'Miss') {
+    return miss(overWriteResult(param, param.result));
+  } else if (param.result.name === 'Feint') {
+    return feint(overWriteResult(param, param.result));
+  } else {
+    return empty();
   }
 }
 
@@ -103,4 +102,23 @@ function feint(param: BattleAnimationParam<NeoLandozer, Feint>): Animate {
   return param.defenderTD.sprite.avoid()
     .chain(delay(500))
     .chain(param.defenderTD.sprite.avoidToStand())
+}
+
+/** とどめ */
+function down(param: BattleAnimationParam<NeoLandozer, NormalHit | Guard | CriticalHit>): Animate {
+  return all(
+    param.attackerTD.sprite.charge()
+      .chain(delay(600))
+      .chain(param.attackerTD.sprite.armHammer())
+      .chain(delay(1300))
+      .chain(param.attackerTD.sprite.hmToStand()),
+
+    delay(1000)
+      .chain(
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderTD.sprite.down(),
+        param.defenderTD.hitMark.spark.popUp(),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+      )
+  );
 }

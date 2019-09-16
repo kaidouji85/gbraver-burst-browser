@@ -7,4 +7,5 @@ export type AnimationType =
   | 'SP_ATTACK'
   | 'SP_TO_STAND'
   | 'KNOCK_BACK'
-  | 'GUARD';
+  | 'GUARD'
+  | 'DOWN';
