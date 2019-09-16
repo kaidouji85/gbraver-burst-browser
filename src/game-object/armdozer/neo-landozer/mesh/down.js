@@ -9,10 +9,10 @@ export const MAX_ANIMATION = 4;
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
 
-/** ネオラインドーザ ダメージ -> ダウン */
-export function neoLandozerKbToDown(resources: Resources): ArmdozerAnimation {
+/** ネオラインドーザ 立ち -> ダウン */
+export function neoLandozerDown(resources: Resources): ArmdozerAnimation {
   const ret = new HorizontalArmdozerAnimation({
-    id: TEXTURE_IDS.NEO_LANDOZER_KB_TO_DOWN,
+    id: TEXTURE_IDS.NEO_LANDOZER_DOWN,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,

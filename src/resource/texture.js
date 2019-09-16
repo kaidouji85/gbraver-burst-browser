@@ -30,7 +30,7 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_HM_CHARGE: 'NEO_LANDOZER_HM_CHARGE',
   NEO_LANDOZER_HM_ATTACK: 'NEO_LANDOZER_HM_ATTACK',
   NEO_LANDOZER_HM_TO_STAND: 'NEO_LANDOZER_HM_TO_STAND',
-  NEO_LANDOZER_KB_TO_DOWN: 'NEO_LANDOZER_KB_TO_DOWN',
+  NEO_LANDOZER_DOWN: 'NEO_LANDOZER_DOWN',
   HITMARK_SPARK: 'HITMARK_SPARK',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
@@ -89,8 +89,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     path: 'armdozer/neo-landozer/hm-to-stand.png'
   },
   {
-    id: TEXTURE_IDS.NEO_LANDOZER_KB_TO_DOWN,
-    path: 'armdozer/neo-landozer/kb-to-down.png',
+    id: TEXTURE_IDS.NEO_LANDOZER_DOWN,
+    path: 'armdozer/neo-landozer/down.png',
   },
   // ヒットマーク関連
   {
