@@ -18,10 +18,10 @@ export function down(model: NeoLandozerModel): Animate {
     model.animation.type = 'KNOCK_BACK';
     model.animation.frame = 1;
   }).chain(tween(model.position, t => t
-    .to({x: '+60'}, 500)
+    .to({x: '+70'}, 500)
     .easing(TWEEN.Easing.Quadratic.Out)
   )).chain(
-    delay(0)
+    delay(100)
   ).chain(process(() => {
     model.animation.type = 'DOWN';
     model.animation.frame = 0;
