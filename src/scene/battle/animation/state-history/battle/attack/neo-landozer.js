@@ -20,7 +20,7 @@ import type {Feint} from "gbraver-burst-core/lib/effect/battle/result/feint";
  * @return アニメーション
  */
 export function neoLandozerAttack(param: BattleAnimationParam<NeoLandozer, BattleResult>): Animate {
-  if ((param.result.name === 'NormalHit') || (param.result.name === 'CriticalHit') || (param.result.name === 'Guard') && param.isDeath) {
+  if (param.isDeath && ((param.result.name === 'NormalHit') || (param.result.name === 'CriticalHit') || (param.result.name === 'Guard'))) {
     return down(overWriteResult(param, param.result));
   } else if ((param.result.name === 'NormalHit') || (param.result.name === 'CriticalHit')) {
     return attack(overWriteResult(param, param.result));
