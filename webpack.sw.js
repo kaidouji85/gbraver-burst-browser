@@ -22,7 +22,6 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       REVISION_INDEX_HTML: JSON.stringify(new Puid().generate()),
-      REVISION_INDEX_JS: JSON.stringify(new Puid().generate()),
     }),
   ]
 };
