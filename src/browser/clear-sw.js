@@ -1,10 +1,16 @@
 // @flow
 
+import {unregisterServiceWorker} from "./service-worker/unregister-service-worker";
+import {clearCache} from "./service-worker/clear-chache";
+
 /**
  * ServiceWorkerクリアページスクリプトのエントリポイント
  */
-async function main(): Promise<void> {
-  console.log('hello');
+function main() {
+  Promise.all([
+    unregisterServiceWorker(),
+    clearCache()
+  ]);
 }
 
 window.onload = main;
