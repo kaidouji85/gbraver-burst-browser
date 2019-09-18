@@ -30,7 +30,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'study-three-js',
+      title: 'gbraver-burst',
       filename: path.resolve(__dirname, `${BUILD_PATH}/index.html`),
       template: 'html/index.html'
     }),
