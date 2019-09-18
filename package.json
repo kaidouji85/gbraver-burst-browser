@@ -2,7 +2,7 @@
   "name": "gbraver-burst-browser",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/browser/index.js",
   "scripts": {
     "start": "npm-run-all clean dev-server",
     "start:stub": "npm-run-all clean dev-server:stub",
@@ -20,7 +20,7 @@
     "webpack:stub": "webpack --config webpack.stub.js",
     "webpack:sw": "webpack --config webpack.sw.js",
     "type-check": "flow check",
-    "lint": "eslint src",
+    "lint": "eslint src/browser",
     "lint:test": "eslint test"
   },
   "author": "y.takeuchi",

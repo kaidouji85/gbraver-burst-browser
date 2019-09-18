@@ -5,7 +5,7 @@ const Puid = require('puid');
 
 module.exports = {
   mode: 'production',
-  entry: path.resolve(__dirname, 'service-worker/sw.js'),
+  entry: path.resolve(__dirname, 'src/service-worker/sw.js'),
   output: {
     path: config.output.path,
     filename: 'sw.js'
