@@ -1,9 +1,9 @@
 // @flow
 
 import test from 'ava';
-import type {BatterySelectorModel} from "../../../../../src/game-object/battery-selector/model";
+import type {BatterySelectorModel} from "../../../../../src/browser/game-object/battery-selector/model";
 import {EMPTY_BATTERY_SELECTOR} from "../../../../data/battery-selector-model";
-import {canBatteryPlus} from "../../../../../src/game-object/battery-selector/model/can-battery-plus";
+import {canBatteryPlus} from "../../../../../src/browser/game-object/battery-selector/model/can-battery-plus";
 
 test('バッテリーが最大値以上ならtrueを返す', t => {
   const data: BatterySelectorModel = {
