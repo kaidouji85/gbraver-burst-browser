@@ -9,7 +9,7 @@ const resourceHash = new Puid().generate();
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, 'src/index.js'),
+  entry: path.resolve(__dirname, 'src/browser/index.js'),
   output: {
     path: path.resolve(__dirname, BUILD_PATH),
     filename: 'index.js'
@@ -30,9 +30,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'study-three-js',
+      title: 'gbraver-burst',
       filename: path.resolve(__dirname, `${BUILD_PATH}/index.html`),
-      template: 'template/index.html'
+      template: 'html/index.html'
     }),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, "resources"),

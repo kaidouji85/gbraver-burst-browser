@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 /** スタブソースコードのベースとなるパス */
-const STUB_PATH = path.resolve(__dirname, 'stub');
+const STUB_PATH = path.resolve(__dirname, 'src/stub');
 
 /** スタブをビルドしたものを配置するルートパス */
 const SERVE_PATH = path.resolve(__dirname, 'build/stub');
@@ -45,7 +45,7 @@ module.exports = {
       new HtmlWebpackPlugin({
         chunks: [key],
         filename: `${SERVE_PATH}/${key}.html`,
-        template: 'template/index.html'
+        template: 'html/index.html'
       })),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, "resources"),
