@@ -8,7 +8,7 @@
     "start:production": "npm-run-all build:production serve",
     "test": "ava",
     "build": "npm-run-all clean type-check postcss webpack",
-    "build:production": "npm-run-all clean type-check webpack:production webpack:sw webpack:clear-sw",
+    "build:production": "npm-run-all clean type-check postcss webpack:production webpack:sw webpack:clear-sw",
     "clean": "rimraf build",
     "dev-server": "webpack-dev-server",
     "serve": "http-server build/production -p 3000",

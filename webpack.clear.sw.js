@@ -23,7 +23,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'clear-sw',
       filename: path.resolve(__dirname, `${BUILD_PATH}/clear-sw.html`),
-      template: 'html/clear-sw.html'
+      template: 'src/clear-sw.html'
     })
   ]
 };
