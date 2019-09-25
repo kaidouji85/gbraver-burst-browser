@@ -8,7 +8,7 @@ html, body {
     left: 0;
     margin: 0;
     padding: 0;
-    -webkit-user-select: none;
+    user-select: none;
 }
 
 .loading {
@@ -20,6 +20,10 @@ html, body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.loading__logo {
+    margin-bottom: 2em;
 }
 
 .loading__bar {
