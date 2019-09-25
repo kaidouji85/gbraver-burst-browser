@@ -43,6 +43,9 @@ module.exports = {
     }, {
       from: path.resolve(__dirname, "app-icon.png"),
       to: path.resolve(__dirname, BUILD_PATH)
+    }, {
+      from: path.resolve(__dirname, "css/index.css"),
+      to: path.resolve(__dirname, BUILD_PATH, 'index.css')
     }]),
     new webpack.DefinePlugin({
       GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(resourceHash),
