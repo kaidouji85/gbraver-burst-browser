@@ -1,7 +1,7 @@
 // @flow
 
 import test from 'ava';
-import {tween} from "../../../src/browser/animation/tween";
+import {tween} from "../../../src/js/animation/tween";
 
 test('シンプルなTweenの再生時間が正しくセットされている', t => {
   const v = tween({}, t => t
