@@ -2,33 +2,32 @@
   "name": "gbraver-burst-browser",
   "version": "1.0.0",
   "description": "",
-  "main": "src/browser/index.js",
+  "main": "src/js/index.js",
   "scripts": {
-    "start": "npm-run-all clean dev-server",
-    "start:stub": "npm-run-all clean dev-server:stub",
+    "start": "npm-run-all clean postcss dev-server",
     "start:production": "npm-run-all build:production serve",
     "test": "ava",
-    "build": "npm-run-all clean type-check webpack",
-    "build:production": "npm-run-all clean type-check webpack:production webpack:sw webpack:clear-sw",
-    "build:stub": "npm-run-all clean webpack:stub",
+    "build": "npm-run-all clean type-check postcss webpack",
+    "build:production": "npm-run-all clean type-check postcss webpack:production webpack:sw webpack:clear-sw",
     "clean": "rimraf build",
     "dev-server": "webpack-dev-server",
-    "dev-server:stub": "webpack-dev-server --config webpack.stub.js",
     "serve": "http-server build/production -p 3000",
     "webpack": "webpack",
     "webpack:production": "webpack --config webpack.production.js",
-    "webpack:stub": "webpack --config webpack.stub.js",
     "webpack:sw": "webpack --config webpack.sw.js",
     "webpack:clear-sw": "webpack --config webpack.clear.sw.js",
     "type-check": "flow check",
-    "lint": "eslint src/browser",
-    "lint:test": "eslint test"
+    "lint": "eslint src/js",
+    "lint:test": "eslint test",
+    "postcss": "postcss src/css/*.css --use autoprefixer -d build/postcss/"
   },
   "author": "y.takeuchi",
   "license": "ISC",
   "dependencies": {
     "@tweenjs/tween.js": "^18.3.1",
+    "autoprefixer": "^9.6.1",
     "gbraver-burst-core": "0.5.2",
+    "postcss-cli": "^6.1.3",
     "puid": "^1.0.7",
     "ramda": "^0.26.1",
     "rxjs": "^6.5.3",
@@ -62,7 +61,7 @@
   "ava": {
     "babel": false,
     "files": [
-      "test/src/**/*.js"
+      "test/js/**/*.js"
     ],
     "compileEnhancements": false,
     "require": [

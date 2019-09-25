@@ -1,6 +1,6 @@
 // @flow
 
-import type {BatterySelectorModel} from "../../src/browser/game-object/battery-selector/model";
+import type {BatterySelectorModel} from "../../src/js/game-object/battery-selector/model";
 
 export const EMPTY_BATTERY_SELECTOR: BatterySelectorModel = {
   battery: 0,
