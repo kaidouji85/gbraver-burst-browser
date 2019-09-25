@@ -4,7 +4,7 @@ const BUILD_PATH = 'build/production';
 
 module.exports = {
   mode: 'production',
-  entry: path.resolve(__dirname, 'src/browser/clear-sw.js'),
+  entry: path.resolve(__dirname, 'src/js/clear-sw.js'),
   output: {
     path: path.resolve(__dirname, BUILD_PATH),
     filename: 'clear-sw.js'

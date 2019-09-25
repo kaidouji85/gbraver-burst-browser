@@ -1,9 +1,9 @@
 // @flow
 
 import test from 'ava';
-import type {BatterySelectorModel} from "../../../../../src/browser/game-object/battery-selector/model";
+import type {BatterySelectorModel} from "../../../../../src/js/game-object/battery-selector/model";
 import {EMPTY_BATTERY_SELECTOR} from "../../../../data/battery-selector-model";
-import {canBatteryMinus} from "../../../../../src/browser/game-object/battery-selector/model/can-battery-minus";
+import {canBatteryMinus} from "../../../../../src/js/game-object/battery-selector/model/can-battery-minus";
 
 test('バッテリーが0以下ならtrueを返す', t => {
   const data: BatterySelectorModel = {

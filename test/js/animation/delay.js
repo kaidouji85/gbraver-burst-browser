@@ -1,7 +1,7 @@
 // @flow
 
 import test from 'ava';
-import {delay} from "../../../src/browser/animation/delay";
+import {delay} from "../../../src/js/animation/delay";
 
 test('待ち時間が再生時間としてセットされている', t => {
   const v = delay(400);
