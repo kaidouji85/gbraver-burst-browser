@@ -1,63 +1,55 @@
 // @flow
 
 import * as THREE from 'three';
-import type {LoadingModel} from "./loading-model";
-import {LoadingView} from "./loading-view";
+import type {LoadingModel} from "./model/loading-model";
+import {LoadingView} from "./view/loading-view";
+import {createInitialValue} from "./model/initial-value";
+import {progress} from "./model/progress";
+import {complete} from "./model/complete";
+import {start} from "./model/start";
 
+/** ローディング画面管理クラス */
 export class Loading {
   _model: LoadingModel;
   _view: LoadingView;
 
   constructor() {
-    this._model = {
-      isVisible: true,
-      caption: {
-        isVisible: false,
-        value: ''
-      },
-      completedRate: {
-        isVisible: false,
-        value: 0
-      }
-    };
+    this._model = createInitialValue();
     this._view = new LoadingView();
   }
 
+  /**
+   * ローディングを開始する
+   *
+   * @param loadingManager ローディングマネジャ
+   */
   start(loadingManager: THREE.LoadingManager): void {
-    loadingManager.onProgress = (url: string, itemsLoaded: number, itemsTotal: number) => {
-      this._onProgress(itemsLoaded, itemsTotal);
-    };
-    loadingManager.onLoad = (url: string) => {
-      this._onComplete();
-    };
+    loadingManager.onProgress = this._onProgress.bind(this);
+    loadingManager.onLoad = this._onComplete.bind(this);
 
-    this._model = {
-      ...this._model,
-      completedRate: {
-        isVisible: true,
-        value: 0
-      }
-    };
+    this._model = start(this._model);
     this._view.engage(this._model);
   }
 
-  _onProgress(itemsLoaded: number, itemsTotal: number): void {
-    this._model = {
-      ... this._model,
-      completedRate: {
-        ...this._model.completedRate,
-        isVisible: true,
-        value: itemsLoaded / itemsTotal
-      }
-    };
+  /**
+   * リソースのローディング進捗に変化があった際のイベント
+   *
+   * @param url 読み込んだリソースのURL
+   * @param itemsLoaded これまでに読み込んだリソース数
+   * @param itemsTotal トータルのリソース数
+   */
+  _onProgress(url: string, itemsLoaded: number, itemsTotal: number): void {
+    this._model = progress(this._model, itemsLoaded, itemsTotal);
     this._view.engage(this._model);
   }
 
-  _onComplete(): void {
-    this._model = {
-      ...this._model,
-      isVisible: false
-    };
+  /**
+   * リソースのローディングが完了した際のイベント
+   *
+   * @param url 最後に読み込んだリソースのURL
+   */
+  _onComplete(url: string): void {
+    this._model = complete(this._model);
     this._view.engage(this._model);
   }
 }

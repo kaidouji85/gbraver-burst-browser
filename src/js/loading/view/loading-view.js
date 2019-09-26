@@ -1,11 +1,15 @@
 // @flow
 
-import type {LoadingModel} from "./loading-model";
+import type {LoadingModel} from "../model/loading-model";
 
 export const LoadingDOM = '.loading';
 export const LoadingCaptionDOM = '.loading__caption';
 export const LoadingBarCompletedDOM = '.loading__bar_completed';
 
+/**
+ * ローディング画面のビュー
+ * 本画面のHTML要素はindex.htmlで定義されている
+ */
 export class LoadingView {
   _root: HTMLElement;
   _caption: HTMLElement;
@@ -16,7 +20,12 @@ export class LoadingView {
     this._caption = document.querySelector(LoadingCaptionDOM) || new HTMLElement();
     this._bar = document.querySelector(LoadingBarCompletedDOM) || new HTMLElement();
   }
-  
+
+  /**
+   * モデルをビューに反映する
+   *
+   * @param model モデル
+   */
   engage(model: LoadingModel): void {
     this._root.style.display = model.isVisible
       ? 'flex'
