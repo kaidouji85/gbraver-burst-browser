@@ -17,6 +17,6 @@ export async function loadServiceWorker(): Promise<ServiceWorkerRegistration|nul
   } catch (e) {
     console.log('service worker register failed');
     console.log(e);
-    throw e;
+    return null;
   }
 }
