@@ -8,8 +8,8 @@ PreCaching.precacheAndRoute([
 ]);
 
 Routing.registerRoute(
-  /\/index\.js$/,
-  new Strategies.NetworkFirst({
+  /\/.+-index\.js$/,
+  new Strategies.CacheFirst({
     cacheName: 'js-cache',
     plugins: [
       new Expiration.Plugin({
