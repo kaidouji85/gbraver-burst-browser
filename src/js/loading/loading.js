@@ -6,7 +6,7 @@ import {LoadingView} from "./view/loading-view";
 import {createInitialValue} from "./model/initial-value";
 import {progress} from "./model/progress";
 import {complete} from "./model/complete";
-import type {LoadingAction, LoadingComplete} from "../action/loading/loading";
+import type {LoadingAction, LoadingComplete, LoadingProgress} from "../action/loading/loading";
 import {Observer, Subject, Subscription} from "rxjs";
 
 /** ローディング画面管理クラス */
@@ -14,14 +14,14 @@ export class Loading {
   _model: LoadingModel;
   _view: LoadingView;
   _loadingAction: Subject<LoadingAction>;
-  _subscription: Subscription<LoadingAction>;
+  _subscription: Subscription;
 
   constructor() {
     this._model = createInitialValue();
     this._view = new LoadingView();
     this._loadingAction = new Subject();
-    this._loadingAction._subscribe(action => {
-      if (action.type === 'LoadingProcess') {
+    this._subscription = this._loadingAction.subscribe(action => {
+      if (action.type === 'LoadingProgress') {
         this._onProgress(action);
       } else if (action.type === 'LoadingComplete') {
         this._onComplete(action);
@@ -62,9 +62,9 @@ export class Loading {
 
 export class LoadingActionCreator {
   _manager: THREE.LoadingManager;
-  _notifier: Subject<LoadingAction>;
+  _notifier: Observer<LoadingAction>;
 
-  constructor(manager: THREE.LoadingManager, notifier: Subject<LoadingAction>) {
+  constructor(manager: THREE.LoadingManager, notifier: Observer<LoadingAction>) {
     this._manager = manager;
     this._manager.onProgress = this._onProgress.bind(this);
     this._manager.onLoad = this._onComplete.bind(this);
