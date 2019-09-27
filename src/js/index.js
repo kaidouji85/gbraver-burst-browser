@@ -4,7 +4,7 @@ import {loadServiceWorker} from "./service-worker/load-service-worker";
 import {viewPerformanceStats} from "./stats/view-performance-stats";
 import {loadAllResource} from "./resource";
 import {Game} from "./game";
-import {Loading} from "./loading/loading";
+import {Loading, LoadingActionCreator} from "./loading/loading";
 import {willServiceWorkerUpdate} from "./service-worker/will-service-worker-update";
 
 /**
@@ -21,7 +21,7 @@ async function main(): Promise<void> {
       return;
     }
 
-    loading.start(THREE.DefaultLoadingManager);
+    new LoadingActionCreator(THREE.DefaultLoadingManager, loading.getNotifier());
     const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
     new Game(resources);
   } catch (e) {
