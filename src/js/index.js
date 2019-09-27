@@ -9,6 +9,7 @@ import {willServiceWorkerUpdate} from "./service-worker/will-service-worker-upda
 import {Subject} from "rxjs";
 import type {LoadingAction} from "./action/loading/loading";
 import {LoadingActionCreator} from "./action/loading/loading-action-creator";
+import type {ServiceWorkerAction} from "./action/service-worker/service-worker";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -17,11 +18,17 @@ async function main(): Promise<void> {
   try {
     viewPerformanceStats(document.body);
     const loadingSubject: Subject<LoadingAction> = new Subject();
-    const loading = new Loading(loadingSubject);
+    const serviceWorkerSubject: Subject<ServiceWorkerAction> = new Subject();
+    const loading = new Loading({
+      listener: {
+        loading: loadingSubject,
+        serviceWorker: serviceWorkerSubject
+      }
+    });
 
     const sw = await loadServiceWorker();
     if (sw && willServiceWorkerUpdate(sw)) {
-      console.log("service worker will update!!");
+      serviceWorkerSubject.next({type: 'ServiceWorkerWillUpdate'});
       return;
     }
 
