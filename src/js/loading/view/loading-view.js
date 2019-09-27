@@ -2,9 +2,11 @@
 
 import type {LoadingModel} from "../model/loading-model";
 
-export const LoadingDOM = '.loading';
-export const LoadingCaptionDOM = '.loading__caption';
-export const LoadingBarCompletedDOM = '.loading__bar_completed';
+export const Root = '.loading';
+export const CAPTION = '.loading__caption';
+export const COMPLETED_RATE = '.loading__completed-rate';
+export const COMPLETED_RATE_TEXT = '.loading__completed-rate__text';
+export const COMPLETED_RATE_BAR = '.loading__completed-rate__bar__completed';
 
 /**
  * ローディング画面のビュー
@@ -13,12 +15,16 @@ export const LoadingBarCompletedDOM = '.loading__bar_completed';
 export class LoadingView {
   _root: HTMLElement;
   _caption: HTMLElement;
-  _bar: HTMLElement;
+  _completedRate: HTMLElement;
+  _completedRateText: HTMLElement;
+  _completedRateBar: HTMLElement;
 
   constructor() {
-    this._root = document.querySelector(LoadingDOM) || new HTMLElement();
-    this._caption = document.querySelector(LoadingCaptionDOM) || new HTMLElement();
-    this._bar = document.querySelector(LoadingBarCompletedDOM) || new HTMLElement();
+    this._root = document.querySelector(Root) || document.createElement('div');
+    this._caption = document.querySelector(CAPTION) || document.createElement('div');
+    this._completedRate = document.querySelector(COMPLETED_RATE) || document.createElement('div');
+    this._completedRateText = document.querySelector(COMPLETED_RATE_TEXT) || document.createElement('div');
+    this._completedRateBar = document.querySelector(COMPLETED_RATE_BAR) || document.createElement('div');
   }
 
   /**
@@ -28,15 +34,16 @@ export class LoadingView {
    */
   engage(model: LoadingModel): void {
     this._root.style.display = model.isVisible
+      ? 'grid'
+      : 'none';
+    this._caption.style.display = model.caption.isVisible
       ? 'flex'
       : 'none';
-    this._caption.style.display = model.completedRate.isVisible
-      ? 'block'
+    this._caption.innerText = model.caption.value;
+    this._completedRate.style.display = model.completedRate.isVisible
+      ? 'flex'
       : 'none';
-    this._caption.innerHTML = `LOADING... ${Math.floor(model.completedRate.value * 100)}%`;
-    this._bar.style.display = model.completedRate.isVisible
-      ? 'block'
-      : 'none';
-    this._bar.style.width = `${model.completedRate.value * 100}%`;
+    this._completedRateText.innerText = `LOADING... ${Math.floor(model.completedRate.value * 100)}%`;
+    this._completedRateBar.style.width = `${model.completedRate.value * 100}%`;
   }
 }
