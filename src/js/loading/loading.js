@@ -6,14 +6,11 @@ import {createInitialValue} from "./model/initial-value";
 import {progress} from "./model/progress";
 import {complete} from "./model/complete";
 import type {LoadingAction, LoadingComplete, LoadingProgress} from "../action/loading/loading";
-import {merge, Observable, Subscription} from "rxjs";
-import type {ServiceWorkerAction, ServiceWorkerWillUpdate} from "../action/service-worker/service-worker";
-import {serviceWorkerWillUpdate} from "./model/service-worker-wil-update";
+import {Observable, Subscription} from "rxjs";
 
 type Param = {
   listener: {
     loading: Observable<LoadingAction>,
-    serviceWorker: Observable<ServiceWorkerAction>,
   }
 };
 
@@ -26,16 +23,11 @@ export class Loading {
   constructor(param: Param) {
     this._model = createInitialValue();
     this._view = new LoadingView();
-    this._subscription = merge(
-      param.listener.loading,
-      param.listener.serviceWorker
-    ).subscribe(action => {
+    this._subscription = param.listener.loading.subscribe(action => {
       if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);
       } else if (action.type === 'LoadingComplete') {
         this._onLoadingComplete(action);
-      } else if (action.type === 'ServiceWorkerWillUpdate') {
-        this._onServiceWorkerWillUpdate(action);
       }
     });
 
@@ -64,16 +56,6 @@ export class Loading {
    */
   _onLoadingComplete(action: LoadingComplete): void {
     this._model = complete(this._model);
-    this._view.engage(this._model);
-  }
-
-  /**
-   * サービスワーカーが更新される際のイベント
-   *
-   * @param action アクション
-   */
-  _onServiceWorkerWillUpdate(action: ServiceWorkerWillUpdate): void {
-    this._model = serviceWorkerWillUpdate(this._model);
     this._view.engage(this._model);
   }
 }

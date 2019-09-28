@@ -10,10 +10,6 @@ import type {LoadingModel} from "./loading-model";
 export function createInitialValue(): LoadingModel {
   return {
     isVisible: true,
-    caption: {
-      isVisible: false,
-      value: ''
-    },
     completedRate: {
       isVisible: false,
       value: 0
