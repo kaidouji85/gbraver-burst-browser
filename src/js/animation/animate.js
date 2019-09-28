@@ -41,9 +41,9 @@ import TWEEN from '@tweenjs/tween.js';
  *
  * 例) 直接TweenAnimatonを初期化する
  *
- * const t1 = new Tween(state)
+ * const t1 = new Tween(model)
  *   .to({x: 100, y: 200}, 500);
- * const t2 = new Tween(state)
+ * const t2 = new Tween(model)
  *   .to({x: 0, y: 0}, 500)
  *   .chain(t1);
  * const animation = new Animate(t1, t2);
