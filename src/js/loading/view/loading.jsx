@@ -1,30 +1,35 @@
 // @flow
 
 import React from 'react';
-import {resourceBasePath} from "../js/resource/resource-base-path";
-import type {LoadingModel} from "../js/loading/model/loading-model";
+import {resourceBasePath} from "../../resource/resource-base-path";
+
+/** プロパティ */
+export type LoadingSceneProps = {
+  isVisible: boolean,
+  completedRate: number
+};
 
 /**
- * 読み込みシーン
+ * ローディングシーンのReact Component
  *
- * @param model モデル
- * @return 読み込みシーン
+ * @param props プロパティ
+ * @return 生成結果
  */
-export function LoadingScene(model: LoadingModel) {
+export function Loading(props: LoadingSceneProps) {
   return (
     <div className="loading" style={{
-      display: model.isVisible
+      display: props.isVisible
         ? 'grid'
         : 'none'
     }}>
       <img className="loading__logo" src={`${resourceBasePath()}/logo.png`}/>
       <div className="loading__completed-rate">
         <div className="loading__completed-rate__text">
-          {`LOADING... ${Math.floor(model.completedRate.value * 100)}%`}
+          {`LOADING... ${Math.floor(props.completedRate * 100)}%`}
         </div>
         <div className="loading__completed-rate__bar">
           <div className="loading__completed-rate__bar__completed" style={{
-            width: `${model.completedRate.value * 100}%`
+            width: `${props.completedRate * 100}%`
           }}></div>
         </div>
       </div>

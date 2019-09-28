@@ -2,11 +2,11 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import type {LoadingModel} from "../model/loading-model";
-import {LoadingScene} from "../../../components/loading-scene";
+import type {LoadingState} from "../state/loading-state";
+import {Loading} from "./loading";
 
 /**
- * ローディング画面のビュー
+ * ローディングシーンのビュー
  * 本画面のHTML要素はindex.htmlで定義されている
  */
 export class LoadingView {
@@ -17,11 +17,14 @@ export class LoadingView {
   }
 
   /**
-   * モデルをビューに反映する
+   * 状態をビューに反映する
    *
-   * @param model モデル
+   * @param state 状態
    */
-  engage(model: LoadingModel): void {
-    render(LoadingScene(model), this._dom);
+  engage(state: LoadingState): void {
+    render(Loading({
+      isVisible: state.isVisible,
+      completedRate: state.completedRate
+    }), this._dom);
   }
 }

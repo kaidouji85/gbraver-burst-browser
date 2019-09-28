@@ -8,8 +8,8 @@ import {tweenTime} from "./tween-time";
  * Tween単体からTweenAnimationを生成する
  *
  * (使用例)
- * const model = {x: 100, y: 100};
- * tween(model, t => t
+ * const state = {x: 100, y: 100};
+ * tween(state, t => t
  *   .to({x: 200}, 100)
  * )
  *

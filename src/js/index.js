@@ -24,8 +24,7 @@ async function main(): Promise<void> {
     const serviceWorkerSubject: Subject<ServiceWorkerAction> = new Subject();
     const loading = new Loading({
       listener: {
-        loading: loadingSubject,
-        serviceWorker: serviceWorkerSubject
+        loading: loadingSubject
       }
     });
 
