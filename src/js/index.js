@@ -1,4 +1,5 @@
 // @flow
+
 import * as THREE from 'three';
 import {loadServiceWorker} from "./service-worker/load-service-worker";
 import {viewPerformanceStats} from "./stats/view-performance-stats";
@@ -10,6 +11,8 @@ import {Subject} from "rxjs";
 import type {LoadingAction} from "./action/loading/loading";
 import {LoadingActionCreator} from "./action/loading/loading-action-creator";
 import type {ServiceWorkerAction} from "./action/service-worker/service-worker";
+import {render} from 'react-dom';
+import {resourceBasePath} from "./resource/resource-base-path";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -21,8 +24,7 @@ async function main(): Promise<void> {
     const serviceWorkerSubject: Subject<ServiceWorkerAction> = new Subject();
     const loading = new Loading({
       listener: {
-        loading: loadingSubject,
-        serviceWorker: serviceWorkerSubject
+        loading: loadingSubject
       }
     });
 
@@ -33,7 +35,7 @@ async function main(): Promise<void> {
     }
 
     new LoadingActionCreator(THREE.DefaultLoadingManager, loadingSubject);
-    const resources = await loadAllResource(`${GBRAVER_BURST_RESOURCE_HASH}/`);
+    const resources = await loadAllResource(`${resourceBasePath()}/`);
     new Game(resources);
   } catch (e) {
     console.error(e.stack);
