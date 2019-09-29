@@ -42,4 +42,6 @@ async function main(): Promise<void> {
   }
 }
 
-window.onload = main;
+window.onload = () => {
+  main();
+};
