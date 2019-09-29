@@ -6,7 +6,7 @@ import type {LoadingState} from "../state/loading-state";
 import {Loading} from "./loading";
 
 /**
- * ローディングシーンのビュー
+ * ローディングのビュー
  * 本画面のHTML要素はindex.htmlで定義されている
  */
 export class LoadingView {

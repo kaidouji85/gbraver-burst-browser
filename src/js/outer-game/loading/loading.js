@@ -5,7 +5,7 @@ import {LoadingView} from "./view/loading-view";
 import {createInitialState} from "./state/initial-value";
 import {progress} from "./state/progress";
 import {complete} from "./state/complete";
-import type {LoadingAction, LoadingComplete, LoadingProgress} from "../action/loading/loading";
+import type {LoadingAction, LoadingComplete, LoadingProgress} from "../../action/loading/loading";
 import {Observable, Subscription} from "rxjs";
 
 type Param = {
@@ -14,7 +14,7 @@ type Param = {
   }
 };
 
-/** ローディングシーン */
+/** ローディング */
 export class Loading {
   _state: LoadingState;
   _view: LoadingView;

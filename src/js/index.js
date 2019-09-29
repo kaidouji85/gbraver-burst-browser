@@ -5,7 +5,7 @@ import {loadServiceWorker} from "./service-worker/load-service-worker";
 import {viewPerformanceStats} from "./stats/view-performance-stats";
 import {loadAllResource} from "./resource";
 import {Game} from "./game";
-import {Loading} from "./loading/loading";
+import {Loading} from "./outer-game/loading/loading";
 import {willServiceWorkerUpdate} from "./service-worker/will-service-worker-update";
 import {Subject} from "rxjs";
 import type {LoadingAction} from "./action/loading/loading";
