@@ -1,6 +1,6 @@
 // @flow
 
-import {BattleScene} from "../scene/battle";
+import {BattleScene} from "./battle";
 import type {Resources} from "../resource";
 import * as THREE from "three";
 import {createGameLoopListener} from "../action/game-loop/create-listener";

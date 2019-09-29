@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import {resourceBasePath} from "../../resource/resource-base-path";
+import {resourceBasePath} from "../../../resource/resource-base-path";
 
 /** プロパティ */
 export type LoadingSceneProps = {
@@ -10,7 +10,7 @@ export type LoadingSceneProps = {
 };
 
 /**
- * ローディングシーンのReact Component
+ * ローディングのReact Component
  *
  * @param props プロパティ
  * @return 生成結果
@@ -19,7 +19,7 @@ export function Loading(props: LoadingSceneProps) {
   return (
     <div className="loading" style={{
       display: props.isVisible
-        ? 'grid'
+        ? 'flex'
         : 'none'
     }}>
       <img className="loading__logo" src={`${resourceBasePath()}/logo.png`}/>

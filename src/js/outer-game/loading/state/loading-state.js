@@ -1,6 +1,6 @@
 // @flow
 
-/** ローディングシーンの状態 */
+/** ローディングの状態 */
 export type LoadingState = {
   /** 表示、非表示フラグ、trueで表示*/
   isVisible: boolean,
