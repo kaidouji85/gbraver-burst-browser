@@ -2,6 +2,7 @@
 
 import {Observer} from "rxjs";
 import type {ServiceWorkerAction} from "./service-worker";
+import {hasWaitingServiceWorker} from "../../service-worker/will-service-worker-update";
 
 /** サービスワーカーからアクションを生成する */
 export class ServiceWorkerActionCreator {
@@ -12,10 +13,19 @@ export class ServiceWorkerActionCreator {
     this._notifier = notifier;
     this._serviceWorker = serviceWorker;
     this._serviceWorker.onupdatefound = this._onUpdateFound.bind(this);
+
+    if (hasWaitingServiceWorker(this._serviceWorker)) {
+      this._hasWaitingServiceWorker();
+    }
   }
 
   /** サービスワーカーの更新を発見した際のイベント */
   _onUpdateFound(): void {
+    this._notifier.next({type: 'ServiceWorkerWillUpdate'});
+  }
+
+  /** アクティベート待ちのサービスワーカーが存在する際のイベント */
+  _hasWaitingServiceWorker(): void {
     this._notifier.next({type: 'ServiceWorkerWillUpdate'});
   }
 }
