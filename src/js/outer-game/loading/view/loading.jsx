@@ -19,7 +19,7 @@ export function Loading(props: LoadingSceneProps) {
   return (
     <div className="loading" style={{
       display: props.isVisible
-        ? 'grid'
+        ? 'flex'
         : 'none'
     }}>
       <img className="loading__logo" src={`${resourceBasePath()}/logo.png`}/>

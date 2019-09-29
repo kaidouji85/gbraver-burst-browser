@@ -16,9 +16,14 @@ html, body {
     height: 100vh;
     background-color: rgb(23, 23, 23);
     color: rgb(240, 240, 240);
-    display: grid;
-    grid-template-rows: 200px 3em;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+
+.loading__logo {
+    padding-bottom: 1em;
 }
 
 .loading__completed-rate {
