@@ -11,6 +11,22 @@ html, body {
     user-select: none;
 }
 
+.service-worker-update {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(23, 23, 23);
+    color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-worker-update__title {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
 .loading {
     width: 100vw;
     height: 100vh;
