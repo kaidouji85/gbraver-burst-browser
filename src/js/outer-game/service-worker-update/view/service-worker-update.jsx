@@ -2,9 +2,23 @@
 
 import React from 'react';
 
-export function ServiceWorkerUpdate() {
+/** プロパティ */
+type ServiceWorkerUpdateProps = {
+  isVisible: boolean
+};
+
+/**
+ * サービスワーカー更新のReact Component
+ *
+ * @return サービスワーカー更新
+ */
+export function ServiceWorkerUpdate(props: ServiceWorkerUpdateProps) {
   return (
-    <div class="service-worker-update">
+    <div className="service-worker-update" style={{
+      display: props.isVisible
+        ? 'flex'
+        : 'none'
+    }}>
       サービワーカーが更新されました。
     </div>
   );
