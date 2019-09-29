@@ -8,22 +8,16 @@ import {complete} from "./state/complete";
 import type {LoadingAction, LoadingComplete, LoadingProgress} from "../../action/loading/loading";
 import {Observable, Subscription} from "rxjs";
 
-type Param = {
-  listener: {
-    loading: Observable<LoadingAction>,
-  }
-};
-
 /** ローディング */
 export class Loading {
   _state: LoadingState;
   _view: LoadingView;
   _subscription: Subscription;
 
-  constructor(param: Param) {
+  constructor(loading: Observable<LoadingAction>) {
     this._state = createInitialState();
     this._view = new LoadingView();
-    this._subscription = param.listener.loading.subscribe(action => {
+    this._subscription = loading.subscribe(action => {
       if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);
       } else if (action.type === 'LoadingComplete') {
