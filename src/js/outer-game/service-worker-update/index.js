@@ -24,6 +24,16 @@ export class ServiceWorkerUpdate {
     });
   }
 
+  /** デストラクタ相当の処理 */
+  destructor(): void {
+    this._subscription.unsubscribe();
+  }
+
+  /**
+   * サービスワーカーが更新された際の処理
+   *
+   * @param action アクション
+   */
   _onServiceWorkerWillUpdate(action: ServiceWorkerWillUpdate): void {
     this._state = serviceWorkerWillUpdate(this._state);
     this._view.engage(this._state);

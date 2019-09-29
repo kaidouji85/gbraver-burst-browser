@@ -1,15 +1,11 @@
 // @flow
 
 /**
- * サービスワーカーが更新されるか否かを判定する
- * 
- * @param sw 判定対象のサービスワーカー
- * @return 判定結果、trueで更新する
+ * アクティベート待ちのサービワーカーが存在するか否かを判定する
+ *
+ * @param sw 判定対象
+ * @return 判定結果、trueでアクティベート待ちのサービワーカーが存在する
  */
-export function willServiceWorkerUpdate(sw: ServiceWorkerRegistration): boolean {
-  const hasActiveSW = sw.active !== null;
-  const hasInstallingSW = sw.installing !== null;
-  const hasWaitingSW = sw.waiting !== null;
-
-  return hasActiveSW && (hasInstallingSW || hasWaitingSW);
+export function hasWaitingServiceWorker(sw: ServiceWorkerRegistration): boolean {
+  return sw.waiting !== null;
 }

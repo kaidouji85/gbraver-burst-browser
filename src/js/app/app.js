@@ -8,11 +8,13 @@ import {LoadingActionCreator} from "../action/loading/loading-action-creator";
 import * as THREE from "three";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
-import {willServiceWorkerUpdate} from "../service-worker/will-service-worker-update";
+import {hasWaitingServiceWorker} from "../service-worker/will-service-worker-update";
 import {loadAllResource} from "../resource";
 import {resourceBasePath} from "../resource/resource-base-path";
 import {OuterGame} from "../outer-game";
+import {ServiceWorkerActionCreator} from "../action/service-worker/service-worker-action-creator";
 
+// TODO 削除する
 /** Gブレイバーバーストのアプリ全体を制御する */
 export class GbraverBurstBrowser {
   /** rxjs subjectをあつめたもの */
@@ -67,9 +69,13 @@ export class GbraverBurstBrowser {
       viewPerformanceStats(document.body);
 
       this._serviceWorker = await loadServiceWorker();
-      if (this._serviceWorker && willServiceWorkerUpdate(this._serviceWorker)) {
+      if (this._serviceWorker && hasWaitingServiceWorker(this._serviceWorker)) {
         this._subjects.serviceWorker.next({type: 'ServiceWorkerWillUpdate'});
         return;
+      }
+
+      if (this._serviceWorker) {
+        new ServiceWorkerActionCreator(this._subjects.serviceWorker, this._serviceWorker);
       }
 
       const resources = await loadAllResource(`${resourceBasePath()}/`);
