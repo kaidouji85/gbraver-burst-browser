@@ -22,6 +22,11 @@ html, body {
     align-items: center;
 }
 
+.service-worker-update__title {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
 .loading {
     width: 100vw;
     height: 100vh;
