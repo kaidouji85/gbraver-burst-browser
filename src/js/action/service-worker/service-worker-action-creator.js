@@ -2,7 +2,7 @@
 
 import {Observer} from "rxjs";
 import type {ServiceWorkerAction} from "./service-worker";
-import {hasWaitingServiceWorker} from "../../service-worker/will-service-worker-update";
+import {hasWaitingServiceWorker} from "../../service-worker/has-waiting-service-worker";
 
 /** サービスワーカーからアクションを生成する */
 export class ServiceWorkerActionCreator {
