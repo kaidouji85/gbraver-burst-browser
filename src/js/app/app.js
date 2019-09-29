@@ -49,7 +49,8 @@ export class GbraverBurstBrowser {
     };
     this._outerGame = new OuterGame({
       listener: {
-        loading: this._subjects.loading
+        loading: this._subjects.loading,
+        serviceWorker: this._subjects.serviceWorker
       }
     });
     new LoadingActionCreator(THREE.DefaultLoadingManager, this._subjects.loading);

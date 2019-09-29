@@ -1,13 +1,13 @@
 // @flow
 
-import type {ServiceWorkerUpdateModel} from "./service-worker-update-model";
+import type {ServiceWorkerUpdateState} from "./service-worker-update-state";
 
 /**
  * 初期値を生成する
  *
  * @return 初期値
  */
-export function createInitialValue(): ServiceWorkerUpdateModel {
+export function createInitialValue(): ServiceWorkerUpdateState {
   return {
     isVisible: false
   };
