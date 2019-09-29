@@ -1,7 +1,7 @@
 // @flow
 
 import test from 'ava';
-import {getInitialBattery} from "../../../../../src/js/scene/battle/ui-logic/battery-selector";
+import {getInitialBattery} from "../../../../../src/js/game/battle/ui-logic/battery-selector";
 
 test('選択可能なバッテリー上限が1以上の場合、バッテリーセレクタの初期値は1になる', t => {
   const result = getInitialBattery(4);
