@@ -7,13 +7,14 @@ const BUILD_PATH = 'build/production';
 
 const resourceHash = new Puid().generate();
 const cssHash = new Puid().generate();
+const jsHash = new Puid().generate();
 
 module.exports = {
   mode: 'development',
   entry: path.resolve(__dirname, 'src/js/index.js'),
   output: {
     path: path.resolve(__dirname, BUILD_PATH),
-    filename: 'index.js'
+    filename: `${jsHash}-index.js`
   },
   devServer: {
     contentBase: path.resolve(__dirname, BUILD_PATH),
@@ -23,11 +24,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(?:js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   },
   plugins: [
     new HtmlWebpackPlugin({

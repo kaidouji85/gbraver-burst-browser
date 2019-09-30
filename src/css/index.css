@@ -11,29 +11,52 @@ html, body {
     user-select: none;
 }
 
-.loading {
-    width: 100%;
-    height: 100%;
+.service-worker-update {
+    width: 100vw;
+    height: 100vh;
     background-color: rgb(23, 23, 23);
     color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-worker-update__title {
+    font-size: 2em;
+    margin-bottom: 1em;
+}
+
+.loading {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(23, 23, 23);
+    color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading__logo {
+    padding-bottom: 3em;
+}
+
+.loading__completed-rate {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.loading__logo {
-    margin-bottom: 2em;
-}
-
-.loading__bar {
+.loading__completed-rate__bar {
     width: 200px;
     height: 20px;
     background: #000;
     border: 2px solid #000;
 }
 
-.loading__bar_completed {
+.loading__completed-rate__bar__completed {
     width: 0;
     height: 20px;
     background: red;
