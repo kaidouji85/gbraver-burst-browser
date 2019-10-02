@@ -4,7 +4,7 @@ import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
-import {Observable, Observer, Subject} from "rxjs";
+import {Observable, Subject, merge} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
 import type {Render} from "../../../action/game-loop/render";
@@ -52,9 +52,6 @@ export class BattleSceneView {
       listener: {
         domEvent: param.listener.domEvent,
         gameLoop: this._gameLoop3D
-      },
-      notifier: {
-        render: this._render
       }
     });
 
@@ -91,7 +88,7 @@ export class BattleSceneView {
    */
   notifier(): Notifier {
     return {
-      render: this._render,
+      render: merge(this._render, this.td.notifier().render),
       battleAction: this._battleAction,
     };
   }
