@@ -8,17 +8,14 @@ import {createDOMEventListener} from "../action/dom-event/create-listener";
 import {Renderer} from "../game-object/renderer";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {EndBattle} from "../action/game/end-battle";
-import type {Player} from "gbraver-burst-core/lib/player/player";
-import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core/lib/master/armdozers";
-import type {NPC} from "../npc/npc";
-import {NeoLandozerNpc} from "../npc/neo-landozer-npc";
 import type {GameLoop} from "../action/game-loop/game-loop";
 import type {DOMEvent} from "../action/dom-event";
 import {createRender} from "../render/create-render";
-import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import type {Render} from "../action/game-loop/render";
 import type {Scene} from "./scene";
 import {emptyScene} from "./scene";
+import type {BattleRoom, InitialState} from "../battle-room/battle-room";
+import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 
 /** ゲーム全体の制御を行う */
 export class Game {
@@ -76,10 +73,21 @@ export class Game {
 
   /** ゲーム開始時のイベント */
   async _onStart(): Promise<void> {
-    const battleScene = await this._createBattleScene();
-    this._changeBattleScene(battleScene);
-    // デバッグ用にレンダラ情報をコンソールに出力
-    //console.log(this._renderer._renderer.info);
+    try {
+      const room = createDummyBattleRoom();
+      const initialState = await room.start();
+
+      this._disposeSceneSubscription();
+      this._scene.destructor();
+
+      const {scene, subscriptions} = this._createBattle(room, initialState);
+      this._scene = scene;
+      this._sceneSubscription = subscriptions;
+      // デバッグ用にレンダラ情報をコンソールに出力
+      //console.log(this._renderer._renderer.info);
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**
@@ -88,28 +96,32 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    const battleScene = await this._createBattleScene();
-    this._changeBattleScene(battleScene);
-    // デバッグ用にレンダラ情報をコンソールに出力
-    //console.log(this._renderer._renderer.info);
+    try {
+      const room = createDummyBattleRoom();
+      const initialState = await room.start();
+
+      this._disposeSceneSubscription();
+      this._scene.destructor();
+
+      const {scene, subscriptions} = this._createBattle(room, initialState);
+      this._scene = scene;
+      this._sceneSubscription = subscriptions;
+      // デバッグ用にレンダラ情報をコンソールに出力
+      //console.log(this._renderer._renderer.info);
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**
-   * 戦闘シーンを生成する
+   * 戦闘シーンとそのサブスクリプションを生成する
    *
-   * @returns 戦闘シーン
+   * @param battleRoom 戦闘シーン
+   * @param initialState 戦闘シーンサブスクリプション
+   * @return 生成結果
    */
-  async _createBattleScene(): Promise<BattleScene> {
-    // TODO テスト用にダミーデータを用いている
-    const player: Player = {
-      playerId: 'test01',
-      armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
-    };
-    const npc: NPC = NeoLandozerNpc;
-    const battleRoom = new OfflineBattleRoom(player, npc);
-    const initialState = await battleRoom.start();
-
-    return new BattleScene({
+  _createBattle(battleRoom: BattleRoom, initialState: InitialState): ({scene: BattleScene, subscriptions: Subscription[]}) {
+    const scene = new BattleScene({
       resources: this._resources,
       rendererDOM: this._threeJsRender.domElement,
       battleRoom: battleRoom,
@@ -119,22 +131,11 @@ export class Game {
         gameLoop: this._gameLoop,
       }
     });
-  }
-
-  /**
-   * 現在のシーンを戦闘シーンに変更する
-   *
-   * @param battleScene 戦闘シーン
-   */
-  _changeBattleScene(battleScene: BattleScene): void {
-    this._disposeSceneSubscription();
-    this._scene.destructor();
-
-    this._scene = battleScene;
-    this._sceneSubscription = [
-      battleScene.notifier().render.subscribe(this._renderAction),
-      battleScene.notifier().endBattle.subscribe(this._endBattle)
+    const subscriptions = [
+      scene.notifier().render.subscribe(this._renderAction),
+      scene.notifier().endBattle.subscribe(this._endBattle)
     ];
+    return {scene, subscriptions};
   }
 
   /** シーン固有のサブスクリプションを破棄する */
