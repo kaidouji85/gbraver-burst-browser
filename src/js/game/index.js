@@ -17,6 +17,14 @@ import {emptyScene} from "./scene";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 
+/** アクティブシーンに関連するものをまとめた*/
+type ActiveScene = {
+  /** アクティブシーン */
+  scene: Scene,
+  /** アクティブシーンのサブスクリプション */
+  subscription: Subscription[]
+};
+
 /** ゲーム全体の制御を行う */
 export class Game {
   _resources: Resources;
@@ -26,12 +34,11 @@ export class Game {
   _renderAction: Subject<Render>;
   _renderer: Renderer;
 
-  _scene: Scene;
-  _sceneSubscription: Subscription[];
-
   _gameLoop: Observable<GameLoop>;
   _endBattle: Subject<EndBattle>;
   _gameSubscription: Subscription[];
+
+  _activeScene: ActiveScene;
 
   constructor(resources: Resources) {
     this._resources = resources;
@@ -50,9 +57,6 @@ export class Game {
       }
     });
 
-    this._scene = emptyScene();
-    this._sceneSubscription = [];
-
     this._gameLoop = createGameLoopListener();
     this._endBattle = new Subject();
     this._gameSubscription = [
@@ -61,14 +65,23 @@ export class Game {
       })
     ];
 
+    this._activeScene = {
+      scene: emptyScene(),
+      subscription: []
+    };
+
     this._onStart();
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._scene.destructor();
-    this._disposeSceneSubscription();
-    this._disposeGameSubscription();
+    this._activeScene.scene.destructor();
+    this._activeScene.subscription.forEach(v => {
+      v.unsubscribe();
+    });
+    this._gameSubscription.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /** ゲーム開始時のイベント */
@@ -76,13 +89,8 @@ export class Game {
     try {
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-
-      this._disposeSceneSubscription();
-      this._scene.destructor();
-
-      const {scene, subscriptions} = this._createBattle(room, initialState);
-      this._scene = scene;
-      this._sceneSubscription = subscriptions;
+      const activeScene = this._activeBattleScene(room, initialState);
+      this._changeActiveScene(activeScene);
       // デバッグ用にレンダラ情報をコンソールに出力
       //console.log(this._renderer._renderer.info);
     } catch(e) {
@@ -99,13 +107,8 @@ export class Game {
     try {
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-
-      this._disposeSceneSubscription();
-      this._scene.destructor();
-
-      const {scene, subscriptions} = this._createBattle(room, initialState);
-      this._scene = scene;
-      this._sceneSubscription = subscriptions;
+      const activeScene = this._activeBattleScene(room, initialState);
+      this._changeActiveScene(activeScene);
       // デバッグ用にレンダラ情報をコンソールに出力
       //console.log(this._renderer._renderer.info);
     } catch(e) {
@@ -114,13 +117,13 @@ export class Game {
   }
 
   /**
-   * 戦闘シーンとそのサブスクリプションを生成する
+   * 戦闘アクティブシーンを生成する
    *
    * @param battleRoom 戦闘シーン
-   * @param initialState 戦闘シーンサブスクリプション
+   * @param initialState 初期状態
    * @return 生成結果
    */
-  _createBattle(battleRoom: BattleRoom, initialState: InitialState): ({scene: BattleScene, subscriptions: Subscription[]}) {
+  _activeBattleScene(battleRoom: BattleRoom, initialState: InitialState): ActiveScene {
     const scene = new BattleScene({
       resources: this._resources,
       rendererDOM: this._threeJsRender.domElement,
@@ -131,24 +134,25 @@ export class Game {
         gameLoop: this._gameLoop,
       }
     });
-    const subscriptions = [
+    const subscription = [
       scene.notifier().render.subscribe(this._renderAction),
       scene.notifier().endBattle.subscribe(this._endBattle)
     ];
-    return {scene, subscriptions};
+    return {
+      scene: scene,
+      subscription: subscription
+    };
   }
 
-  /** シーン固有のサブスクリプションを破棄する */
-  _disposeSceneSubscription(): void {
-    this._sceneSubscription.forEach(v => {
+  /**
+   * アクティブシーンを変更する
+   *
+   * @param activeScene 変更先のアクティブシーン
+   */
+  _changeActiveScene(activeScene: ActiveScene): void {
+    this._activeScene.subscription.forEach(v => {
       v.unsubscribe();
     });
-  }
-
-  /** ゲーム固有のサブスクリプションを破棄する */
-  _disposeGameSubscription(): void {
-    this._gameSubscription.forEach(v => {
-      v.unsubscribe();
-    });
+    this._activeScene.scene.destructor();
   }
 }
