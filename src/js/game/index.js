@@ -16,6 +16,7 @@ import type {GameLoop} from "../action/game-loop/game-loop";
 import type {DOMEvent} from "../action/dom-event";
 import {createRender} from "../render/create-render";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
+import type {Render} from "../action/game-loop/render";
 
 /** シーン */
 export type Scene = {
@@ -37,6 +38,7 @@ export class Game {
 
   _threeJsRender: THREE.WebGLRenderer;
   _domEvent: Observable<DOMEvent>;
+  _renderAction: Subject<Render>;
   _renderer: Renderer;
 
   _scene: Scene;
@@ -54,10 +56,12 @@ export class Game {
       document.body.appendChild(this._threeJsRender.domElement);
     }
     this._domEvent = createDOMEventListener(this._threeJsRender.domElement);
+    this._renderAction = new Subject();
     this._renderer = new Renderer({
       renderer: this._threeJsRender,
       listener: {
-        domEvent: this._domEvent
+        domEvent: this._domEvent,
+        render: this._renderAction
       }
     });
 
@@ -86,6 +90,8 @@ export class Game {
   async _onStart(): Promise<void> {
     const battleScene = await this._createBattleScene();
     this._changeBattleScene(battleScene);
+    // デバッグ用にレンダラ情報をコンソールに出力
+    //console.log(this._renderer._renderer.info);
   }
 
   /**
@@ -96,6 +102,8 @@ export class Game {
   async _onEndBattle(action: EndBattle): Promise<void> {
     const battleScene = await this._createBattleScene();
     this._changeBattleScene(battleScene);
+    // デバッグ用にレンダラ情報をコンソールに出力
+    //console.log(this._renderer._renderer.info);
   }
 
   /**
@@ -136,9 +144,7 @@ export class Game {
 
     this._scene = battleScene;
     this._sceneSubscription = [
-      battleScene.notifier().render.subscribe(action => {
-        this._renderer.getRenderNotifier().next(action);// TODO GameにRenderのSubjectを追加する
-      }),
+      battleScene.notifier().render.subscribe(this._renderAction),
       battleScene.notifier().endBattle.subscribe(this._endBattle)
     ];
   }

@@ -4,13 +4,14 @@ import * as THREE from 'three';
 import type {DOMEvent} from "../../action/dom-event";
 import type {Resize} from "../../action/dom-event/resize";
 import type {Render} from "../../action/game-loop/render";
-import {merge, Observable, Observer, Subject} from "rxjs";
+import {merge, Observable, Subject} from "rxjs";
 import {onWebGLRendererResize} from "../../render/resize";
 
 type Param = {
   renderer: THREE.WebGLRenderer,
   listener: {
-    domEvent: Observable<DOMEvent>
+    domEvent: Observable<DOMEvent>,
+    render: Observable<Render>
   }
 };
 
@@ -25,7 +26,7 @@ export class Renderer {
 
     merge(
       param.listener.domEvent,
-      this._renderSubject
+      param.listener.render
     ).subscribe(action => {
       if (action.type === 'resize') {
         this._resize(action);
@@ -33,11 +34,6 @@ export class Renderer {
         this._render(action);
       }
     });
-  }
-
-  /** レンダリング通知オブジェクトを取得する */
-  getRenderNotifier(): Observer<Render> {
-    return this._renderSubject;
   }
 
   /** リサイズ */
