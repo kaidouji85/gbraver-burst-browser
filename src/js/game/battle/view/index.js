@@ -19,11 +19,13 @@ type Param = {
   listener: {
     gameLoop: Observable<GameLoop>,
     domEvent: Observable<DOMEvent>,
-  },
-  notifier: {
-    render: Observer<Render>,
-    battleAction: Observer<BattleSceneAction>,
-  },
+  }
+};
+
+/** 戦闘シーンビューのイベント通知 */
+type Notifier = {
+  render: Observable<Render>,
+  battleAction: Observable<BattleSceneAction>,
 };
 
 /**
@@ -34,10 +36,14 @@ export class BattleSceneView {
   hud: HudLayer;
   _gameLoop3D: Subject<GameLoop>;
   _gameLoopHUD: Subject<GameLoop>;
+  _render: Subject<Render>; // TODO 削除する
+  _battleAction: Subject<BattleSceneAction>; // TODO 削除する
 
   constructor(param: Param) {
     this._gameLoop3D = new Subject();
     this._gameLoopHUD = new Subject();
+    this._render = new Subject();
+    this._battleAction = new Subject();
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
@@ -48,7 +54,7 @@ export class BattleSceneView {
         gameLoop: this._gameLoop3D
       },
       notifier: {
-        render: param.notifier.render
+        render: this._render
       }
     });
 
@@ -62,8 +68,8 @@ export class BattleSceneView {
         gameLoop: this._gameLoopHUD,
       },
       notifier: {
-        battleAction: param.notifier.battleAction,
-        render: param.notifier.render
+        battleAction: this._battleAction,
+        render: this._render
       }
     });
 
@@ -76,6 +82,18 @@ export class BattleSceneView {
   destructor(): void {
     this.hud.destructor();
     this.td.destructor();
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      render: this._render,
+      battleAction: this._battleAction,
+    };
   }
 
   /** ゲームループ */

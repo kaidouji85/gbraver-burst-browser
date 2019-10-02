@@ -32,32 +32,25 @@ type Param = {
   }
 };
 
+/** 戦闘シーンのイベント通知 */
 type Notifier = {
   render: Observable<Render>,
   endBattle: Observable<EndBattle>
 };
 
 /**
- * 戦闘画面アプリケーション
+ * 戦闘シーン
  */
 export class BattleScene implements Scene {
-  _view: BattleSceneView;
   _state: BattleSceneState;
-
-  _battleAction: Subject<BattleSceneAction>;
   _endBattle: Subject<EndBattle>;
-  _render: Subject<Render>;
-
   _battleRoom: BattleRoom;
+  _view: BattleSceneView;
   _subscription: Subscription[];
 
   constructor(param: Param) {
     this._state = createInitialState(param.initialState.playerId);
-
-    this._battleAction = new Subject();
     this._endBattle = new Subject();
-    this._render = new Subject();
-
     this._battleRoom = param.battleRoom;
     this._view = new BattleSceneView({
       resources: param.resources,
@@ -67,15 +60,11 @@ export class BattleScene implements Scene {
       listener: {
         gameLoop: param.listener.gameLoop,
         domEvent: param.listener.domEvent,
-      },
-      notifier: {
-        render: this._render,
-        battleAction: this._battleAction,
       }
     });
 
     this._subscription = [
-      this._battleAction.subscribe(action => {
+      this._view.notifier().battleAction.subscribe(action => {
         if (action.type === 'decideBattery') {
           this._decideBattery(action);
         } else if (action.type === 'doBurst') {
@@ -94,7 +83,9 @@ export class BattleScene implements Scene {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._disposeSubscription();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -104,7 +95,7 @@ export class BattleScene implements Scene {
    */
   notifier(): Notifier {
     return {
-      render: this._render,
+      render: this._view.notifier().render,
       endBattle: this._endBattle
     };
   }
@@ -190,12 +181,5 @@ export class BattleScene implements Scene {
     }
 
     return lastState
-  }
-
-  /** サブスクリプションを破棄する */
-  _disposeSubscription(): void {
-    this._subscription.forEach(v => {
-      v.unsubscribe();
-    });
   }
 }
