@@ -17,20 +17,8 @@ import type {DOMEvent} from "../action/dom-event";
 import {createRender} from "../render/create-render";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import type {Render} from "../action/game-loop/render";
-
-/** シーン */
-export type Scene = {
-  destructor(): void;
-};
-
-/** 空のシーン */
-export function emptyScene(): Scene {
-  return {
-    destructor: () => {
-      // NOP
-    }
-  };
-}
+import type {Scene} from "./scene";
+import {emptyScene} from "./scene";
 
 /** ゲーム全体の制御を行う */
 export class Game {

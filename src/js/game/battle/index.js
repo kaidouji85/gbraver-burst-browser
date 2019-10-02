@@ -18,6 +18,7 @@ import {take} from "rxjs/operators";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {delay} from "../../animation/delay";
 import type {EndBattle} from "../../action/game/end-battle";
+import type {Scene} from "../scene";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -31,10 +32,15 @@ type Param = {
   }
 };
 
+type Notifier = {
+  render: Observable<Render>,
+  endBattle: Observable<EndBattle>
+};
+
 /**
  * 戦闘画面アプリケーション
  */
-export class BattleScene {
+export class BattleScene implements Scene {
   _view: BattleSceneView;
   _state: BattleSceneState;
 
@@ -96,7 +102,7 @@ export class BattleScene {
    *
    * @return イベント通知ストリーム
    */
-  notifier() {
+  notifier(): Notifier {
     return {
       render: this._render,
       endBattle: this._endBattle
