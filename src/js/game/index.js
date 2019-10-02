@@ -121,10 +121,6 @@ export class Game {
       listener: {
         domEvent: this._domEvent,
         gameLoop: this._gameLoop,
-      },
-      notifier: {
-        render: this._renderer.getRenderNotifier(),
-        endBattle: this._endBattle
       }
     });
   }
@@ -139,7 +135,12 @@ export class Game {
     this._scene.destructor();
 
     this._scene = battleScene;
-    this._sceneSubscription = [];
+    this._sceneSubscription = [
+      battleScene.notifier().render.subscribe(action => {
+        this._renderer.getRenderNotifier().next(action);// TODO GameにRenderのSubjectを追加する
+      }),
+      battleScene.notifier().endBattle.subscribe(this._endBattle)
+    ];
   }
 
   /** シーン固有のサブスクリプションを破棄する */
