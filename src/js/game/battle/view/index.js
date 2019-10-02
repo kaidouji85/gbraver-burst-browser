@@ -36,14 +36,10 @@ export class BattleSceneView {
   hud: HudLayer;
   _gameLoop3D: Subject<GameLoop>;
   _gameLoopHUD: Subject<GameLoop>;
-  _render: Subject<Render>; // TODO 削除する
-  _battleAction: Subject<BattleSceneAction>; // TODO 削除する
 
   constructor(param: Param) {
     this._gameLoop3D = new Subject();
     this._gameLoopHUD = new Subject();
-    this._render = new Subject();
-    this._battleAction = new Subject();
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
@@ -63,10 +59,6 @@ export class BattleSceneView {
       listener: {
         domEvent: param.listener.domEvent,
         gameLoop: this._gameLoopHUD,
-      },
-      notifier: {
-        battleAction: this._battleAction,
-        render: this._render
       }
     });
 
@@ -88,8 +80,11 @@ export class BattleSceneView {
    */
   notifier(): Notifier {
     return {
-      render: merge(this._render, this.td.notifier().render),
-      battleAction: this._battleAction,
+      render: merge(
+        this.hud.notifier().render,
+        this.td.notifier().render
+      ),
+      battleAction: this.hud.notifier().battleAction,
     };
   }
 

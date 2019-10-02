@@ -28,11 +28,13 @@ export type Param = {
   listener: {
     gameLoop: Observable<GameLoop>,
     domEvent: Observable<DOMEvent>,
-  },
-  notifier: {
-    battleAction: Observer<BattleSceneAction>,
-    render: Observer<Render>
   }
+};
+
+/** イベント通知 */
+type Notifier = {
+  battleAction: Observable<BattleSceneAction>,
+  render: Observable<Render>
 };
 
 /**
@@ -48,7 +50,8 @@ export class HudLayer {
   _rendererDOM: HTMLElement;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
-  _render: Observer<Render>;
+  _render: Subject<Render>;
+  _battleAction: Subject<BattleSceneAction>;  // TODO 削除する
   _subscribe: Subscription;
 
   constructor(param: Param) {
@@ -62,7 +65,8 @@ export class HudLayer {
 
     this._update = new Subject();
     this._preRender = new Subject();
-    this._render = param.notifier.render;
+    this._render = new Subject();
+    this._battleAction = new Subject();
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
@@ -82,7 +86,7 @@ export class HudLayer {
       appendHUDPlayer(this.scene, v);
     });
 
-    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, param.notifier.battleAction, player);
+    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, this._battleAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
     this._subscribe = param.listener.gameLoop.subscribe(action => {
@@ -99,6 +103,18 @@ export class HudLayer {
     this.camera.destructor();
     this._subscribe.unsubscribe();
     this.scene.dispose();
+  }
+
+  /**
+   * イベント通知ストリームを取得
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      render: this._render,
+      battleAction: this._battleAction
+    };
   }
 
   /** ゲームループ */
