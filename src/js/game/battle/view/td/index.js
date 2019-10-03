@@ -2,7 +2,7 @@
 import type {Resources} from '../../../../resource';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Observer, Subject, Subscription} from "rxjs";
+import {merge, Observable, Subject, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
@@ -27,10 +27,12 @@ type Param = {
   listener: {
     domEvent: Observable<DOMEvent>,
     gameLoop: Observable<GameLoop>,
-  },
-  notifier: {
-    render: Observer<Render>
   }
+};
+
+/** イベント通知 */
+type Notifier = {
+  render: Observable<Render>
 };
 
 /** 3Dレイヤー */
@@ -39,10 +41,11 @@ export class ThreeDimensionLayer {
   camera: Battle3DCamera;
   players: TDPlayer<ArmDozerSprite>[];
   gameObjects: TDGameObjects;
+
   _rendererDOM: HTMLElement;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
-  _render: Observer<Render>;
+  _render: Subject<Render>;
   _subscribe: Subscription;
 
   constructor(param: Param) {
@@ -52,7 +55,7 @@ export class ThreeDimensionLayer {
     this._rendererDOM = param.rendererDOM;
     this._update = new Subject();
     this._preRender = new Subject();
-    this._render = param.notifier.render;
+    this._render = new Subject();
     const gameObjectListener: Observable<GameObjectAction> = merge(
       this._update,
       this._preRender
@@ -91,6 +94,17 @@ export class ThreeDimensionLayer {
     this.camera.destructor();
     this._subscribe.unsubscribe();
     this.scene.dispose();
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      render: this._render
+    };
   }
 
   /** ゲームループの処理 */

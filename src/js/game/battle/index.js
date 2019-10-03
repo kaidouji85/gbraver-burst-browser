@@ -3,7 +3,7 @@ import type {Resources} from '../../resource';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../action/game-loop/game-loop";
-import {Observable, Observer, Subject, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
 import type {BattleSceneAction} from "../../action/battle-scene";
 import type {DecideBattery} from "../../action/battle-scene/decide-battery";
@@ -18,6 +18,7 @@ import {take} from "rxjs/operators";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {delay} from "../../animation/delay";
 import type {EndBattle} from "../../action/game/end-battle";
+import type {Scene} from "../scene";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -28,29 +29,29 @@ type Param = {
   listener: {
     domEvent: Observable<DOMEvent>,
     gameLoop: Observable<GameLoop>,
-  },
-  notifier: {
-    render: Observer<Render>,
-    endBattle: Observer<EndBattle>,
   }
 };
 
+/** 戦闘シーンのイベント通知 */
+type Notifier = {
+  render: Observable<Render>,
+  endBattle: Observable<EndBattle>
+};
+
 /**
- * 戦闘画面アプリケーション
+ * 戦闘シーン
  */
-export class BattleScene {
-  _view: BattleSceneView;
+export class BattleScene implements Scene {
   _state: BattleSceneState;
-  _battleAction: Subject<BattleSceneAction>;
+  _endBattle: Subject<EndBattle>;
   _battleRoom: BattleRoom;
-  _endBattle: Observer<EndBattle>;
-  _subscription: Subscription;
+  _view: BattleSceneView;
+  _subscription: Subscription[];
 
   constructor(param: Param) {
     this._state = createInitialState(param.initialState.playerId);
-    this._battleAction = new Subject();
+    this._endBattle = new Subject();
     this._battleRoom = param.battleRoom;
-    this._endBattle = param.notifier.endBattle;
     this._view = new BattleSceneView({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
@@ -59,32 +60,44 @@ export class BattleScene {
       listener: {
         gameLoop: param.listener.gameLoop,
         domEvent: param.listener.domEvent,
-      },
-      notifier: {
-        render: param.notifier.render,
-        battleAction: this._battleAction,
       }
     });
 
-    this._subscription = this._battleAction.subscribe(action => {
-      if (action.type === 'decideBattery') {
-        this._decideBattery(action);
-      } else if (action.type === 'doBurst') {
-        this._doBurst(action);
-      }
-    });
+    this._subscription = [
+      this._view.notifier().battleAction.subscribe(action => {
+        if (action.type === 'decideBattery') {
+          this._decideBattery(action);
+        } else if (action.type === 'doBurst') {
+          this._doBurst(action);
+        }
+      }),
 
-    param.listener.gameLoop.pipe(
-      take(1)
-    ).subscribe(action => {
-      this._start(param.initialState.stateHistory);
-    });
+      param.listener.gameLoop.pipe(
+        take(1)
+      ).subscribe(action => {
+        this._start(param.initialState.stateHistory);
+      })
+    ];
   }
 
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      render: this._view.notifier().render,
+      endBattle: this._endBattle
+    };
   }
 
   /**
