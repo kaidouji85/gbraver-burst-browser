@@ -17,11 +17,16 @@ import {emptyScene} from "./scene";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 
-/** アクティブシーンに関連するものをまとめた*/
+/** アクティブシーン */
 type ActiveScene = {
   /** アクティブシーン */
   scene: Scene,
-  /** アクティブシーンのサブスクリプション */
+
+  /**
+   * アクティブシーンイベント通知 -> ゲームサブジェクト をチェインした結果生成されたサブスクリプション
+   * アクティブシーン変更時にサブスクリプションを破棄する必要があるため、
+   * 本プロパティにキャッシュをする
+   */
   subscription: Subscription[]
 };
 
@@ -30,12 +35,12 @@ export class Game {
   _resources: Resources;
 
   _threeJsRender: THREE.WebGLRenderer;
-  _domEvent: Observable<DOMEvent>;
-  _renderAction: Subject<Render>;
+  _domEventListener: Observable<DOMEvent>;
+  _renderSubject: Subject<Render>;
   _renderer: Renderer;
 
-  _gameLoop: Observable<GameLoop>;
-  _endBattle: Subject<EndBattle>;
+  _gameLoopListener: Observable<GameLoop>;
+  _endBattleSubject: Subject<EndBattle>;
   _gameSubscription: Subscription[];
 
   _activeScene: ActiveScene;
@@ -47,20 +52,20 @@ export class Game {
     if (this._threeJsRender.domElement && document.body) {
       document.body.appendChild(this._threeJsRender.domElement);
     }
-    this._domEvent = createDOMEventListener(this._threeJsRender.domElement);
-    this._renderAction = new Subject();
+    this._domEventListener = createDOMEventListener(this._threeJsRender.domElement);
+    this._renderSubject = new Subject();
     this._renderer = new Renderer({
       renderer: this._threeJsRender,
       listener: {
-        domEvent: this._domEvent,
-        render: this._renderAction
+        domEvent: this._domEventListener,
+        render: this._renderSubject
       }
     });
 
-    this._gameLoop = createGameLoopListener();
-    this._endBattle = new Subject();
+    this._gameLoopListener = createGameLoopListener();
+    this._endBattleSubject = new Subject();
     this._gameSubscription = [
-      this._endBattle.subscribe(action => {
+      this._endBattleSubject.subscribe(action => {
         this._onEndBattle(action);
       })
     ];
@@ -130,29 +135,27 @@ export class Game {
       battleRoom: battleRoom,
       initialState: initialState,
       listener: {
-        domEvent: this._domEvent,
-        gameLoop: this._gameLoop,
+        domEvent: this._domEventListener,
+        gameLoop: this._gameLoopListener,
       }
     });
     const subscription = [
-      scene.notifier().render.subscribe(this._renderAction),
-      scene.notifier().endBattle.subscribe(this._endBattle)
+      scene.notifier().render.subscribe(this._renderSubject),
+      scene.notifier().endBattle.subscribe(this._endBattleSubject)
     ];
+
     return {
       scene: scene,
       subscription: subscription
     };
   }
 
-  /**
-   * アクティブシーンを変更する
-   *
-   * @param activeScene 変更先のアクティブシーン
-   */
   _changeActiveScene(activeScene: ActiveScene): void {
+    this._activeScene.scene.destructor();
     this._activeScene.subscription.forEach(v => {
       v.unsubscribe();
     });
-    this._activeScene.scene.destructor();
+
+    this._activeScene = activeScene;
   }
 }
