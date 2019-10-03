@@ -7,6 +7,7 @@ import {merge, Observable} from "rxjs";
 import {onWebGLRendererResize} from "../../render/resize";
 import {createDOMEventListener} from "../../action/dom-event/create-listener";
 import type {DOMEvent} from "../../action/dom-event";
+import {WebGLInfo} from "three";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -51,6 +52,15 @@ export class Renderer {
     return {
       domEvent: this._domEvent
     };
+  }
+
+  /**
+   * デバッグ用情報を返す
+   *
+   * @return デバッグ用情報
+   */
+  info(): WebGLInfo {
+    return this._threeJsRender.info;
   }
 
   /** リサイズ */
