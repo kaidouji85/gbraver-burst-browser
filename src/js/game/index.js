@@ -4,12 +4,10 @@ import {BattleScene} from "./battle";
 import type {Resources} from "../resource";
 import * as THREE from "three";
 import {createGameLoopListener} from "../action/game-loop/create-listener";
-import {createDOMEventListener} from "../action/dom-event/create-listener";
 import {Renderer} from "../game-object/renderer";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {EndBattle} from "../action/game/end-battle";
 import type {GameLoop} from "../action/game-loop/game-loop";
-import type {DOMEvent} from "../action/dom-event";
 import {createRender} from "../render/create-render";
 import type {Render} from "../action/game-loop/render";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
@@ -22,7 +20,6 @@ export class Game {
   _resources: Resources;
 
   _threeJsRender: THREE.WebGLRenderer;
-  _domEventListener: Observable<DOMEvent>;
   _renderSubject: Subject<Render>;
   _renderer: Renderer;
 
@@ -39,12 +36,10 @@ export class Game {
     if (this._threeJsRender.domElement && document.body) {
       document.body.appendChild(this._threeJsRender.domElement);
     }
-    this._domEventListener = createDOMEventListener(this._threeJsRender.domElement);
     this._renderSubject = new Subject();
     this._renderer = new Renderer({
-      renderer: this._threeJsRender,
+      threeJsRender: this._threeJsRender,
       listener: {
-        domEvent: this._domEventListener,
         render: this._renderSubject
       }
     });
@@ -115,7 +110,7 @@ export class Game {
       battleRoom: battleRoom,
       initialState: initialState,
       listener: {
-        domEvent: this._domEventListener,
+        domEvent: this._renderer.notifier().domEvent,
         gameLoop: this._gameLoopListener,
       }
     });
