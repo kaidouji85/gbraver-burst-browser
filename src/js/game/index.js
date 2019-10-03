@@ -65,7 +65,7 @@ export class Game {
       const initialState = await room.start();
       this._changeBattleScene(room, initialState);
       // デバッグ用にレンダラ情報をコンソールに出力
-      console.log(this._renderer.info());
+      //console.log(this._renderer.info());
     } catch(e) {
       throw e;
     }
@@ -82,7 +82,7 @@ export class Game {
       const initialState = await room.start();
       this._changeBattleScene(room, initialState);
       // デバッグ用にレンダラ情報をコンソールに出力
-      console.log(this._renderer.info());
+      //console.log(this._renderer.info());
     } catch(e) {
       throw e;
     }

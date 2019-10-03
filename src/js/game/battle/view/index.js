@@ -34,12 +34,14 @@ type Notifier = {
 export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
+
   _gameLoop3D: Subject<GameLoop>;
   _gameLoopHUD: Subject<GameLoop>;
 
   constructor(param: Param) {
     this._gameLoop3D = new Subject();
     this._gameLoopHUD = new Subject();
+
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,

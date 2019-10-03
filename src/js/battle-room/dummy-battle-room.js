@@ -8,7 +8,7 @@ import {NeoLandozerNpc} from "../npc/neo-landozer-npc";
 import {OfflineBattleRoom} from "./offline-battle-room";
 
 /**
- * ダミーの戦闘ルームsenntouru-muを生成する
+ * ダミーの戦闘ルームを生成する
  *
  * @return ダミーの戦闘ルーム
  */
