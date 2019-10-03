@@ -12,23 +12,10 @@ import type {GameLoop} from "../action/game-loop/game-loop";
 import type {DOMEvent} from "../action/dom-event";
 import {createRender} from "../render/create-render";
 import type {Render} from "../action/game-loop/render";
-import type {Scene} from "./scene";
-import {emptyScene} from "./scene";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-
-/** アクティブシーン */
-type ActiveScene = {
-  /** アクティブシーン */
-  scene: Scene,
-
-  /**
-   * アクティブシーンイベント通知 -> ゲームサブジェクト をチェインした結果生成されたサブスクリプション
-   * アクティブシーン変更時にサブスクリプションを破棄する必要があるため、
-   * 本プロパティにキャッシュをする
-   */
-  subscription: Subscription[]
-};
+import type {BoundScene} from "./bound-scene";
+import {disposeBoundScene, emptyBoundScene} from "./bound-scene";
 
 /** ゲーム全体の制御を行う */
 export class Game {
@@ -41,9 +28,9 @@ export class Game {
 
   _gameLoopListener: Observable<GameLoop>;
   _endBattleSubject: Subject<EndBattle>;
-  _gameSubscription: Subscription[];
+  _subscription: Subscription[];
 
-  _activeScene: ActiveScene;
+  _boundScene: BoundScene;
 
   constructor(resources: Resources) {
     this._resources = resources;
@@ -64,27 +51,23 @@ export class Game {
 
     this._gameLoopListener = createGameLoopListener();
     this._endBattleSubject = new Subject();
-    this._gameSubscription = [
+    this._subscription = [
       this._endBattleSubject.subscribe(action => {
         this._onEndBattle(action);
       })
     ];
-
-    this._activeScene = {
-      scene: emptyScene(),
-      subscription: []
-    };
+    this._boundScene = emptyBoundScene();
 
     this._onStart();
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._activeScene.scene.destructor();
-    this._activeScene.subscription.forEach(v => {
+    this._boundScene.scene.destructor();
+    this._boundScene.subscription.forEach(v => {
       v.unsubscribe();
     });
-    this._gameSubscription.forEach(v => {
+    this._subscription.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -94,8 +77,7 @@ export class Game {
     try {
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      const activeScene = this._activeBattleScene(room, initialState);
-      this._changeActiveScene(activeScene);
+      this._changeBattleScene(room, initialState);
       // デバッグ用にレンダラ情報をコンソールに出力
       //console.log(this._renderer._renderer.info);
     } catch(e) {
@@ -112,8 +94,7 @@ export class Game {
     try {
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      const activeScene = this._activeBattleScene(room, initialState);
-      this._changeActiveScene(activeScene);
+      this._changeBattleScene(room, initialState);
       // デバッグ用にレンダラ情報をコンソールに出力
       //console.log(this._renderer._renderer.info);
     } catch(e) {
@@ -122,13 +103,12 @@ export class Game {
   }
 
   /**
-   * 戦闘アクティブシーンを生成する
+   * 戦闘シーンに切り替える
    *
    * @param battleRoom 戦闘シーン
    * @param initialState 初期状態
-   * @return 生成結果
    */
-  _activeBattleScene(battleRoom: BattleRoom, initialState: InitialState): ActiveScene {
+  _changeBattleScene(battleRoom: BattleRoom, initialState: InitialState): void {
     const scene = new BattleScene({
       resources: this._resources,
       rendererDOM: this._threeJsRender.domElement,
@@ -143,19 +123,12 @@ export class Game {
       scene.notifier().render.subscribe(this._renderSubject),
       scene.notifier().endBattle.subscribe(this._endBattleSubject)
     ];
-
-    return {
+    const newBoundedScene = {
       scene: scene,
       subscription: subscription
     };
-  }
 
-  _changeActiveScene(activeScene: ActiveScene): void {
-    this._activeScene.scene.destructor();
-    this._activeScene.subscription.forEach(v => {
-      v.unsubscribe();
-    });
-
-    this._activeScene = activeScene;
+    disposeBoundScene(this._boundScene);
+    this._boundScene = newBoundedScene;
   }
 }
