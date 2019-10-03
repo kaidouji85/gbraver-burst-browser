@@ -3,18 +3,22 @@
 import {BatterySelector} from "../../../../game-object/battery-selector";
 import {BurstButton} from "../../../../game-object/burst-button/burst-button";
 import type {Resources} from "../../../../resource";
-import {Observable, Observer} from "rxjs/index";
+import {Observable} from "rxjs/index";
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
 import {PlayInLandscape} from "../../../../game-object/warning/play-in-landscape";
+import {Subject} from "rxjs";
 
 /** HUDレイヤーのゲームオブジェクト */
 export type HUDGameObjects = {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
   playInLandscape: PlayInLandscape;
+  notifier: {
+    battleSceneAction: Observable<BattleSceneAction>
+  }
 };
 
 /**
@@ -22,23 +26,24 @@ export type HUDGameObjects = {
  *
  * @param resources リソース管理オブジェクト
  * @param listener イベントリスナ
- * @param notifier イベント通知
  * @param playerInfo プレイヤーの情報
  * @return HUDゲームオブジェクト
  */
-export function createHUDGameObjects(resources: Resources, listener: Observable<GameObjectAction>, notifier: Observer<BattleSceneAction>, playerInfo: Player): HUDGameObjects {
+export function createHUDGameObjects(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player): HUDGameObjects {
+  const battleSceneAction = new Subject();
+
   const batterySelector = new BatterySelector({
     listener: listener,
     maxBattery: playerInfo.armdozer.maxBattery,
     resources: resources,
     onBatteryChange: (battery: number) => {
-      notifier.next({
+      battleSceneAction.next({
         type: 'changeBattery',
         battery: battery
       });
     },
     onOkButtonPush: () => {
-      notifier.next({
+      battleSceneAction.next({
         type: 'decideBattery',
         battery: batterySelector.getBattery()
       });
@@ -49,7 +54,7 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
     resources: resources,
     listener: listener,
     onPush: () => {
-      notifier.next({
+      battleSceneAction.next({
         type: 'doBurst'
       });
     }
@@ -61,6 +66,9 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
     batterySelector: batterySelector,
     burstButton: burstButton,
     playInLandscape: playInLandscape,
+    notifier: {
+      battleSceneAction: battleSceneAction
+    }
   };
 }
 

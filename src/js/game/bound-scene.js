@@ -29,6 +29,11 @@ export function emptyBoundScene(): BoundScene {
   };
 }
 
+/**
+ * Gameに関連づけされたシーンのリソース解放を行う
+ *
+ * @param boundScene リソース解放対象
+ */
 export function disposeBoundScene(boundScene: BoundScene): void {
   boundScene.scene.destructor();
   boundScene.subscription.forEach(v => {

@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Observer, Subject, Subscription} from "rxjs";
+import {merge, Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
@@ -47,26 +47,25 @@ export class HudLayer {
   camera: BattleHUDCamera;
   players: HUDPlayer[];
   gameObjects: HUDGameObjects;
+
   _rendererDOM: HTMLElement;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
-  _battleAction: Subject<BattleSceneAction>;  // TODO 削除する
   _subscribe: Subscription;
 
   constructor(param: Param) {
     this._rendererDOM = param.rendererDOM;
+    this._update = new Subject();
+    this._preRender = new Subject();
+    this._render = new Subject();
+
     this.scene = new THREE.Scene();
     this.camera = new BattleHUDCamera({
       listener: {
         domEvent: param.listener.domEvent
       }
     });
-
-    this._update = new Subject();
-    this._preRender = new Subject();
-    this._render = new Subject();
-    this._battleAction = new Subject();
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
@@ -86,7 +85,7 @@ export class HudLayer {
       appendHUDPlayer(this.scene, v);
     });
 
-    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, this._battleAction, player);
+    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
     this._subscribe = param.listener.gameLoop.subscribe(action => {
@@ -113,7 +112,7 @@ export class HudLayer {
   notifier(): Notifier {
     return {
       render: this._render,
-      battleAction: this._battleAction
+      battleAction: this.gameObjects.notifier.battleSceneAction
     };
   }
 
