@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
@@ -52,7 +52,7 @@ export class HudLayer {
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
-  _subscribe: Subscription;
+  _subscription: Subscription[];
 
   constructor(param: Param) {
     this._rendererDOM = param.rendererDOM;
@@ -71,12 +71,7 @@ export class HudLayer {
       || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId)
       || param.players[0];
-    const gameObjectAction: Observable<GameObjectAction> = merge(
-      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera()),
-      this._update,
-      this._preRender
-    );
-
+    const gameObjectAction: Observable<GameObjectAction> = new Subject();
     this.players = [
       playerHUDObjects(param.resources, gameObjectAction, player),
       enemyHUDObjects(param.resources, gameObjectAction, enemy),
@@ -88,9 +83,15 @@ export class HudLayer {
     this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
-    this._subscribe = param.listener.gameLoop.subscribe(action => {
-      this._gameLoop(action);
-    });
+    this._subscription = [
+      param.listener.gameLoop.subscribe(action => {
+        this._gameLoop(action);
+      }),
+      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera())
+        .subscribe(gameObjectAction),
+      this._update.subscribe(gameObjectAction),
+      this._preRender.subscribe(gameObjectAction),
+    ];
   }
 
   /** デストラクタ */
@@ -100,8 +101,10 @@ export class HudLayer {
     });
     destructorHUDGameObjects(this.gameObjects);
     this.camera.destructor();
-    this._subscribe.unsubscribe();
     this.scene.dispose();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
