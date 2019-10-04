@@ -2,17 +2,19 @@
 
 import '../css/index.css';
 
-import {Subject} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import {OuterGame} from "./outer-game";
 import {viewPerformanceStats} from "./stats/view-performance-stats";
 import {loadServiceWorker} from "./service-worker/load-service-worker";
-import {ServiceWorkerActionCreator} from "./action/service-worker/service-worker-action-creator";
 import {loadAllResource} from "./resource";
 import {resourceBasePath} from "./resource/resource-base-path";
-import {LoadingActionCreator} from "./action/loading/loading-action-creator";
 import * as THREE from "three";
 import {Game} from "./game";
 import {isDevelopment} from "./webpack/mode";
+import type {ServiceWorkerAction} from "./action/service-worker/service-worker";
+import {createLoadingActionListener} from "./action/loading/create-listener";
+import type {LoadingAction} from "./action/loading/loading";
+import {createServiceWorkerActionListener} from "./action/service-worker/create-listener";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -23,25 +25,25 @@ async function main(): Promise<void> {
       viewPerformanceStats(document.body);
     }
 
-    const subjects = {
-      loading: new Subject(),
-      serviceWorker: new Subject()
-    };
+    const serviceWorkerAction: Subject<ServiceWorkerAction> = new Subject();
+    const loadingAction: Observable<LoadingAction> = createLoadingActionListener(THREE.DefaultLoadingManager);
+
     const outerGame = new OuterGame({
       listener: {
-        loading: subjects.loading,
-        serviceWorker: subjects.serviceWorker
+        loading: loadingAction,
+        serviceWorker: serviceWorkerAction
       }
     });
 
     const serviceWorker = await loadServiceWorker();
     if (serviceWorker) {
-      new ServiceWorkerActionCreator(subjects.serviceWorker, serviceWorker);
+      // TODO アプリ終了時にSubscriptionを破棄する
+      createServiceWorkerActionListener(serviceWorker)
+        .subscribe(serviceWorkerAction);
     }
 
-    new LoadingActionCreator(THREE.DefaultLoadingManager, subjects.loading);
     const resources = await loadAllResource(`${resourceBasePath()}/`);
-    new Game(resources);
+    const game = new Game(resources);
   } catch(e) {
     throw e;
   }
