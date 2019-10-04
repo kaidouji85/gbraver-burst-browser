@@ -1,7 +1,7 @@
 // @flow
 
 import {render} from 'react-dom';
-import {ServiceWorkerUpdate} from './service-worker-update';
+import {ServiceWorkerUpdateComponent} from './service-worker-update-component';
 import type {ServiceWorkerUpdateState} from "../state/service-worker-update-state";
 
 /** サービスワーカー更新ビュー */
@@ -18,7 +18,7 @@ export class ServiceWorkerUpdateView {
    * @param state 状態
    */
   engage(state: ServiceWorkerUpdateState): void {
-    render(ServiceWorkerUpdate({
+    render(ServiceWorkerUpdateComponent({
       isVisible: state.isVisible
     }), this._dom);
   }
