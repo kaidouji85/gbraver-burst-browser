@@ -18,8 +18,7 @@
     "webpack:clear-sw": "webpack --config webpack.clear.sw.js",
     "type-check": "flow check",
     "lint": "eslint src/js",
-    "lint:test": "eslint test",
-    "postcss": "postcss src/css/*.css --use autoprefixer -d build/postcss/"
+    "lint:test": "eslint test"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -27,7 +26,6 @@
     "@tweenjs/tween.js": "^18.3.1",
     "autoprefixer": "^9.6.1",
     "gbraver-burst-core": "0.5.2",
-    "postcss-cli": "^6.1.3",
     "puid": "^1.0.7",
     "ramda": "^0.26.1",
     "react": "^16.10.1",
