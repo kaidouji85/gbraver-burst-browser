@@ -12,13 +12,16 @@ import {resourceBasePath} from "./resource/resource-base-path";
 import {LoadingActionCreator} from "./action/loading/loading-action-creator";
 import * as THREE from "three";
 import {Game} from "./game";
+import {isDevelopment} from "./webpack/mode";
 
 /**
  * Gブレイバーバーストのエントリポイント
  */
 async function main(): Promise<void> {
   try {
-    viewPerformanceStats(document.body);
+    if (isDevelopment()) {
+      viewPerformanceStats(document.body);
+    }
 
     const subjects = {
       loading: new Subject(),
