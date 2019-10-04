@@ -1,5 +1,7 @@
 // @flow
 
+import '../css/index.css';
+
 import {Subject} from "rxjs";
 import {OuterGame} from "./outer-game";
 import {viewPerformanceStats} from "./stats/view-performance-stats";

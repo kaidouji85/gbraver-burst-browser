@@ -27,11 +27,19 @@ module.exports = {
         test: /\.(?:js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+        ],
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.css']
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -47,10 +55,6 @@ module.exports = {
       {
         from: path.resolve(__dirname, "src/resources"),
         to: path.resolve(__dirname, BUILD_PATH, resourceHash)
-      },
-      {
-        from: path.resolve(__dirname, "build/postcss"),
-        to: path.resolve(__dirname, BUILD_PATH, cssHash)
       }
       ]),
     new webpack.DefinePlugin({
