@@ -4,7 +4,7 @@ import React from 'react';
 import {resourceBasePath} from "../../../resource/resource-base-path";
 
 /** プロパティ */
-export type LoadingSceneProps = {
+export type Props = {
   isVisible: boolean,
   completedRate: number
 };
@@ -15,7 +15,7 @@ export type LoadingSceneProps = {
  * @param props プロパティ
  * @return 生成結果
  */
-export function Loading(props: LoadingSceneProps) {
+export function LoadingComponent(props: Props) {
   return (
     <div className="loading" style={{
       display: props.isVisible
