@@ -8,17 +8,30 @@ import {emptyScene} from "./scene/scene";
  * Gameに関連付けされたシーン
  * 本クラスはGame内部でのみ使用されることを想定している
  */
-export type BoundScene = {
+export class BoundScene {
   /** シーン */
-  scene: Scene,
+  scene: Scene;
 
   /**
    * シーンイベント通知 -> ゲームサブジェクト をチェインした結果生成されたサブスクリプション
    * アクティブシーン変更時にサブスクリプションを破棄する必要があるため、
    * 本プロパティにキャッシュをする
    */
-  subscription: Subscription[]
-};
+  subscription: Subscription[];
+  
+  constructor(scene: Scene, subscription: Subscription[]) {
+    this.scene = scene;
+    this.subscription = subscription;
+  }
+
+  /** デストラクタ相当処理 */
+  destructor(): void {
+    this.scene.destructor();
+    this.subscription.forEach(v => {
+      v.unsubscribe();
+    });
+  }
+}
 
 /**
  * 空のBoundSceneを生成する
@@ -26,20 +39,6 @@ export type BoundScene = {
  * @return 生成結果
  */
 export function emptyBoundScene(): BoundScene {
-  return {
-    scene: new emptyScene(),
-    subscription: []
-  };
+  return new BoundScene(new emptyScene(), []);
 }
 
-/**
- * Gameに関連づけされたシーンのリソース解放を行う
- *
- * @param boundScene リソース解放対象
- */
-export function disposeBoundScene(boundScene: BoundScene): void {
-  boundScene.scene.destructor();
-  boundScene.subscription.forEach(v => {
-    v.unsubscribe();
-  });
-}

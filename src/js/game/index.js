@@ -12,8 +12,7 @@ import {createRender} from "../render/create-render";
 import type {Render} from "../action/game-loop/render";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-import type {BoundScene} from "./bound-scene";
-import {disposeBoundScene, emptyBoundScene} from "./bound-scene";
+import {BoundScene, emptyBoundScene} from "./bound-scene";
 import type {GameAction} from "../action/game/game-action";
 import {isDevelopment} from "../webpack/mode";
 
@@ -58,7 +57,7 @@ export class Game {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    disposeBoundScene(this._boundScene);
+    this._boundScene.destructor();
     this._subscription.unsubscribe();
   }
 
@@ -103,9 +102,9 @@ export class Game {
    * @param initialState 初期状態
    */
   _changeBattleScene(battleRoom: BattleRoom, initialState: InitialState): void {
-    disposeBoundScene(this._boundScene);
+    this._boundScene.destructor();
 
-    const scene = new BattleScene({
+   const scene = new BattleScene({
       resources: this._resources,
       rendererDOM: this._threeJsRender.domElement,
       battleRoom: battleRoom,
@@ -119,9 +118,6 @@ export class Game {
       scene.notifier().render.subscribe(this._renderAction),
       scene.notifier().endBattle.subscribe(this._gameAction)
     ];
-    this._boundScene = {
-      scene: scene,
-      subscription: subscription
-    }
+    this._boundScene = new BoundScene(scene, subscription);
   }
 }
