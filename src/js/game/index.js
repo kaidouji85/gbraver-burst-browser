@@ -14,12 +14,14 @@ import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 import type {BoundScene} from "./bound-scene";
 import {disposeBoundScene, emptyBoundScene} from "./bound-scene";
+import type {GameAction} from "../action/game/game-action";
+import {isDevelopment} from "../webpack/mode";
 
 /** ゲーム全体の制御を行う */
 export class Game {
   _resources: Resources;
   _renderAction: Subject<Render>;
-  _endBattle: Subject<EndBattle>;
+  _gameAction: Subject<GameAction>;
   _gameLoop: Observable<GameLoop>;
   _threeJsRender: THREE.WebGLRenderer;
   _renderer: Renderer;
@@ -31,7 +33,7 @@ export class Game {
 
     this._renderAction = new Subject();
     this._gameLoop = createGameLoopListener();
-    this._endBattle = new Subject();
+    this._gameAction = new Subject();
 
     this._threeJsRender = createRender();
     if (this._threeJsRender.domElement && document.body) {
@@ -45,8 +47,10 @@ export class Game {
     });
     this._boundScene = emptyBoundScene();
 
-    this._subscription = this._endBattle.subscribe(action => {
-      this._onEndBattle(action);
+    this._subscription = this._gameAction.subscribe(action => {
+      if (action.type === 'endBattle') {
+        this._onEndBattle(action);
+      }
     });
 
     this._onStart();
@@ -65,7 +69,9 @@ export class Game {
       const initialState = await room.start();
       this._changeBattleScene(room, initialState);
       // デバッグ用にレンダラ情報をコンソールに出力
-      //console.log(this._renderer.info());
+      if (isDevelopment()) {
+        console.log(this._renderer.info());
+      }
     } catch(e) {
       throw e;
     }
@@ -82,7 +88,9 @@ export class Game {
       const initialState = await room.start();
       this._changeBattleScene(room, initialState);
       // デバッグ用にレンダラ情報をコンソールに出力
-      //console.log(this._renderer.info());
+      if (isDevelopment()) {
+        console.log(this._renderer.info());
+      }
     } catch(e) {
       throw e;
     }
@@ -109,7 +117,7 @@ export class Game {
     });
     const subscription = [
       scene.notifier().render.subscribe(this._renderAction),
-      scene.notifier().endBattle.subscribe(this._endBattle)
+      scene.notifier().endBattle.subscribe(this._gameAction)
     ];
     this._boundScene = {
       scene: scene,

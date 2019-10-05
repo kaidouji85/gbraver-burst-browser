@@ -4,7 +4,10 @@ import type {Scene} from "./scene";
 import {Subscription} from "rxjs";
 import {emptyScene} from "./scene";
 
-/** Gameに関連付けされたシーン */
+/**
+ * Gameに関連付けされたシーン
+ * 本クラスはGame内部でのみ使用されることを想定している
+ */
 export type BoundScene = {
   /** シーン */
   scene: Scene,
