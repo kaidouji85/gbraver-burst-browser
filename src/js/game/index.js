@@ -1,6 +1,6 @@
 // @flow
 
-import {BattleScene} from "./scene/battle";
+import {BattleScene} from "./battle";
 import type {Resources} from "../resource";
 import * as THREE from "three";
 import {createGameLoopListener} from "../action/game-loop/create-listener";
@@ -12,9 +12,9 @@ import {createRender} from "../render/create-render";
 import type {Render} from "../action/game-loop/render";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-import {SceneCache} from "./scene-cache";
 import type {GameAction} from "../action/game/game-action";
 import {isDevelopment} from "../webpack/mode";
+import {SceneCache} from "./scene";
 
 /** ゲーム全体の制御を行う */
 export class Game {
