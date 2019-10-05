@@ -7,7 +7,7 @@
     "start": "npm-run-all clean dev-server",
     "start:production": "npm-run-all build:production serve",
     "test": "ava",
-    "build": "npm-run-all clean type-check webpack",
+    "build": "npm-run-all clean type-check webpack webpack:sw webpack:clear-sw",
     "build:production": "npm-run-all clean type-check webpack:production webpack:sw webpack:clear-sw",
     "clean": "rimraf build",
     "dev-server": "webpack-dev-server",
