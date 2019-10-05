@@ -2,7 +2,7 @@
 import type {Resources} from '../../../../resource';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Observer, Subject, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../../action/game-object-action";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
@@ -27,10 +27,12 @@ type Param = {
   listener: {
     domEvent: Observable<DOMEvent>,
     gameLoop: Observable<GameLoop>,
-  },
-  notifier: {
-    render: Observer<Render>
   }
+};
+
+/** イベント通知 */
+type Notifier = {
+  render: Observable<Render>
 };
 
 /** 3Dレイヤー */
@@ -39,11 +41,13 @@ export class ThreeDimensionLayer {
   camera: Battle3DCamera;
   players: TDPlayer<ArmDozerSprite>[];
   gameObjects: TDGameObjects;
+
   _rendererDOM: HTMLElement;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
-  _render: Observer<Render>;
-  _subscribe: Subscription;
+  _render: Subject<Render>;
+  _gameObjectAction: Subject<GameObjectAction>;
+  _subscription: Subscription[];
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -52,34 +56,35 @@ export class ThreeDimensionLayer {
     this._rendererDOM = param.rendererDOM;
     this._update = new Subject();
     this._preRender = new Subject();
-    this._render = param.notifier.render;
-    const gameObjectListener: Observable<GameObjectAction> = merge(
-      this._update,
-      this._preRender
-    );
+    this._render = new Subject();
+    this._gameObjectAction = new Subject();
 
     this.scene = new THREE.Scene();
     this.camera = new Battle3DCamera({
       listener: {
         domEvent: param.listener.domEvent,
-        gameObject: gameObjectListener
+        gameObject: this._gameObjectAction
       }
     });
 
     this.players = [
-      playerTDObjects(param.resources, player, gameObjectListener),
-      enemyTDObject(param.resources, enemy, gameObjectListener)
+      playerTDObjects(param.resources, player, this._gameObjectAction),
+      enemyTDObject(param.resources, enemy, this._gameObjectAction)
     ];
     this.players.forEach(v => {
       appendTDPlayer(this.scene, v);
     });
 
-    this.gameObjects = createTDGameObjects(param.resources, gameObjectListener);
+    this.gameObjects = createTDGameObjects(param.resources, this._gameObjectAction);
     appendTDGameObjects(this.scene, this.gameObjects);
 
-    this._subscribe = param.listener.gameLoop.subscribe(action => {
-      this._gameLoop(action);
-    });
+    this._subscription = [
+      param.listener.gameLoop.subscribe(action => {
+        this._gameLoop(action);
+      }),
+      this._update.subscribe(this._gameObjectAction),
+      this._preRender.subscribe(this._gameObjectAction)
+    ];
   }
 
   /** デストラクタ */
@@ -89,8 +94,21 @@ export class ThreeDimensionLayer {
     });
     destructorTDGameObjects(this.gameObjects);
     this.camera.destructor();
-    this._subscribe.unsubscribe();
     this.scene.dispose();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      render: this._render
+    };
   }
 
   /** ゲームループの処理 */

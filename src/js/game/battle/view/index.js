@@ -4,7 +4,7 @@ import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
-import {Observable, Observer, Subject} from "rxjs";
+import {Observable, Subject, merge} from "rxjs";
 import type {DOMEvent} from "../../../action/dom-event";
 import type {BattleSceneAction} from "../../../action/battle-scene";
 import type {Render} from "../../../action/game-loop/render";
@@ -19,11 +19,13 @@ type Param = {
   listener: {
     gameLoop: Observable<GameLoop>,
     domEvent: Observable<DOMEvent>,
-  },
-  notifier: {
-    render: Observer<Render>,
-    battleAction: Observer<BattleSceneAction>,
-  },
+  }
+};
+
+/** 戦闘シーンビューのイベント通知 */
+type Notifier = {
+  render: Observable<Render>,
+  battleAction: Observable<BattleSceneAction>,
 };
 
 /**
@@ -32,12 +34,14 @@ type Param = {
 export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
+
   _gameLoop3D: Subject<GameLoop>;
   _gameLoopHUD: Subject<GameLoop>;
 
   constructor(param: Param) {
     this._gameLoop3D = new Subject();
     this._gameLoopHUD = new Subject();
+
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
@@ -46,9 +50,6 @@ export class BattleSceneView {
       listener: {
         domEvent: param.listener.domEvent,
         gameLoop: this._gameLoop3D
-      },
-      notifier: {
-        render: param.notifier.render
       }
     });
 
@@ -60,10 +61,6 @@ export class BattleSceneView {
       listener: {
         domEvent: param.listener.domEvent,
         gameLoop: this._gameLoopHUD,
-      },
-      notifier: {
-        battleAction: param.notifier.battleAction,
-        render: param.notifier.render
       }
     });
 
@@ -76,6 +73,21 @@ export class BattleSceneView {
   destructor(): void {
     this.hud.destructor();
     this.td.destructor();
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      render: merge(
+        this.hud.notifier().render,
+        this.td.notifier().render
+      ),
+      battleAction: this.hud.notifier().battleAction,
+    };
   }
 
   /** ゲームループ */

@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Observer, Subject, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
@@ -28,11 +28,13 @@ export type Param = {
   listener: {
     gameLoop: Observable<GameLoop>,
     domEvent: Observable<DOMEvent>,
-  },
-  notifier: {
-    battleAction: Observer<BattleSceneAction>,
-    render: Observer<Render>
   }
+};
+
+/** イベント通知 */
+type Notifier = {
+  battleAction: Observable<BattleSceneAction>,
+  render: Observable<Render>
 };
 
 /**
@@ -45,14 +47,21 @@ export class HudLayer {
   camera: BattleHUDCamera;
   players: HUDPlayer[];
   gameObjects: HUDGameObjects;
+
   _rendererDOM: HTMLElement;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
-  _render: Observer<Render>;
-  _subscribe: Subscription;
+  _render: Subject<Render>;
+  _gameObjectAction: Subject<GameObjectAction>;
+  _subscription: Subscription[];
 
   constructor(param: Param) {
     this._rendererDOM = param.rendererDOM;
+    this._update = new Subject();
+    this._preRender = new Subject();
+    this._render = new Subject();
+    this._gameObjectAction = new Subject();
+
     this.scene = new THREE.Scene();
     this.camera = new BattleHUDCamera({
       listener: {
@@ -60,34 +69,30 @@ export class HudLayer {
       }
     });
 
-    this._update = new Subject();
-    this._preRender = new Subject();
-    this._render = param.notifier.render;
-
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId)
       || param.players[0];
-    const gameObjectAction: Observable<GameObjectAction> = merge(
-      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera()),
-      this._update,
-      this._preRender
-    );
-
     this.players = [
-      playerHUDObjects(param.resources, gameObjectAction, player),
-      enemyHUDObjects(param.resources, gameObjectAction, enemy),
+      playerHUDObjects(param.resources, this._gameObjectAction, player),
+      enemyHUDObjects(param.resources, this._gameObjectAction, enemy),
     ];
     this.players.forEach(v => {
       appendHUDPlayer(this.scene, v);
     });
 
-    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, param.notifier.battleAction, player);
+    this.gameObjects = createHUDGameObjects(param.resources, this._gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
-    this._subscribe = param.listener.gameLoop.subscribe(action => {
-      this._gameLoop(action);
-    });
+    this._subscription = [
+      param.listener.gameLoop.subscribe(action => {
+        this._gameLoop(action);
+      }),
+      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera())
+        .subscribe(this._gameObjectAction),
+      this._update.subscribe(this._gameObjectAction),
+      this._preRender.subscribe(this._gameObjectAction),
+    ];
   }
 
   /** デストラクタ */
@@ -97,8 +102,22 @@ export class HudLayer {
     });
     destructorHUDGameObjects(this.gameObjects);
     this.camera.destructor();
-    this._subscribe.unsubscribe();
     this.scene.dispose();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
+  }
+
+  /**
+   * イベント通知ストリームを取得
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      render: this._render,
+      battleAction: this.gameObjects.notifier.battleSceneAction
+    };
   }
 
   /** ゲームループ */

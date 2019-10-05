@@ -3,7 +3,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import type {LoadingState} from "../state/loading-state";
-import {Loading} from "./loading";
+import {LoadingComponent} from "./loading-component";
 
 /**
  * ローディングのビュー
@@ -22,7 +22,7 @@ export class LoadingView {
    * @param state 状態
    */
   engage(state: LoadingState): void {
-    render(Loading({
+    render(LoadingComponent({
       isVisible: state.isVisible,
       completedRate: state.completedRate
     }), this._dom);

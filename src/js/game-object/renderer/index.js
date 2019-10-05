@@ -1,31 +1,39 @@
 // @flow
 
 import * as THREE from 'three';
-import type {DOMEvent} from "../../action/dom-event";
 import type {Resize} from "../../action/dom-event/resize";
 import type {Render} from "../../action/game-loop/render";
-import {merge, Observable, Observer, Subject} from "rxjs";
+import {merge, Observable} from "rxjs";
 import {onWebGLRendererResize} from "../../render/resize";
+import {createDOMEventListener} from "../../action/dom-event/create-listener";
+import type {DOMEvent} from "../../action/dom-event";
+import {WebGLInfo} from "three";
 
+/** コンストラクタのパラメータ */
 type Param = {
-  renderer: THREE.WebGLRenderer,
+  threeJsRender: THREE.WebGLRenderer,
   listener: {
-    domEvent: Observable<DOMEvent>
+    render: Observable<Render>
   }
+};
+
+/** イベント通知ストリーム */
+type Notifier = {
+  domEvent: Observable<DOMEvent>
 };
 
 /** レンダラの挙動をまとめたもの */
 export class Renderer {
-  _renderer: THREE.WebGLRenderer;
-  _renderSubject: Subject<Render>;
+  _threeJsRender: THREE.WebGLRenderer;
+  _domEvent: Observable<DOMEvent>;
 
   constructor(param: Param) {
-    this._renderer = param.renderer;
-    this._renderSubject = new Subject<Render>();
+    this._threeJsRender = param.threeJsRender;
+    this._domEvent = createDOMEventListener(this._threeJsRender.domElement);
 
     merge(
-      param.listener.domEvent,
-      this._renderSubject
+      this._domEvent,
+      param.listener.render
     ).subscribe(action => {
       if (action.type === 'resize') {
         this._resize(action);
@@ -35,18 +43,33 @@ export class Renderer {
     });
   }
 
-  /** レンダリング通知オブジェクトを取得する */
-  getRenderNotifier(): Observer<Render> {
-    return this._renderSubject;
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      domEvent: this._domEvent
+    };
+  }
+
+  /**
+   * デバッグ用情報を返す
+   *
+   * @return デバッグ用情報
+   */
+  info(): WebGLInfo {
+    return this._threeJsRender.info;
   }
 
   /** リサイズ */
   _resize(action: Resize): void {
-    onWebGLRendererResize(this._renderer, action.width, action.height, window.devicePixelRatio);
+    onWebGLRendererResize(this._threeJsRender, action.width, action.height, window.devicePixelRatio);
   }
 
   /** レンダリング */
   _render(action: Render): void {
-    this._renderer.render(action.scene, action.camera);
+    this._threeJsRender.render(action.scene, action.camera);
   }
 }

@@ -4,54 +4,71 @@ import {BattleScene} from "./battle";
 import type {Resources} from "../resource";
 import * as THREE from "three";
 import {createGameLoopListener} from "../action/game-loop/create-listener";
-import {createDOMEventListener} from "../action/dom-event/create-listener";
 import {Renderer} from "../game-object/renderer";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {EndBattle} from "../action/game/end-battle";
-import type {Player} from "gbraver-burst-core/lib/player/player";
-import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core/lib/master/armdozers";
-import type {NPC} from "../npc/npc";
-import {NeoLandozerNpc} from "../npc/neo-landozer-npc";
 import type {GameLoop} from "../action/game-loop/game-loop";
-import type {DOMEvent} from "../action/dom-event";
 import {createRender} from "../render/create-render";
-import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
+import type {Render} from "../action/game-loop/render";
+import type {BattleRoom, InitialState} from "../battle-room/battle-room";
+import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
+import type {BoundScene} from "./bound-scene";
+import {disposeBoundScene, emptyBoundScene} from "./bound-scene";
 
 /** ゲーム全体の制御を行う */
 export class Game {
   _resources: Resources;
-  _scene: BattleScene;
+  _renderAction: Subject<Render>;
+  _endBattle: Subject<EndBattle>;
+  _gameLoop: Observable<GameLoop>;
   _threeJsRender: THREE.WebGLRenderer;
   _renderer: Renderer;
-  _gameLoop: Observable<GameLoop>;
-  _domEvent: Observable<DOMEvent>;
-  _endBattle: Subject<EndBattle>;
+  _boundScene: BoundScene;
   _subscription: Subscription;
 
   constructor(resources: Resources) {
+    this._resources = resources;
+
+    this._renderAction = new Subject();
+    this._gameLoop = createGameLoopListener();
+    this._endBattle = new Subject();
+
     this._threeJsRender = createRender();
     if (this._threeJsRender.domElement && document.body) {
       document.body.appendChild(this._threeJsRender.domElement);
     }
-
-    this._resources = resources;
-    this._gameLoop = createGameLoopListener();
-    this._domEvent = createDOMEventListener(this._threeJsRender.domElement);
     this._renderer = new Renderer({
-      renderer: this._threeJsRender,
+      threeJsRender: this._threeJsRender,
       listener: {
-        domEvent: this._domEvent
+        render: this._renderAction
       }
     });
-    this._endBattle = new Subject();
+    this._boundScene = emptyBoundScene();
 
     this._subscription = this._endBattle.subscribe(action => {
-      if (action.type === 'endBattle') {
-        this._onEndBattle(action);
-      }
+      this._onEndBattle(action);
     });
 
-    this._startBattle();
+    this._onStart();
+  }
+
+  /** デストラクタ相当の処理 */
+  destructor(): void {
+    disposeBoundScene(this._boundScene);
+    this._subscription.unsubscribe();
+  }
+
+  /** ゲーム開始時のイベント */
+  async _onStart(): Promise<void> {
+    try {
+      const room = createDummyBattleRoom();
+      const initialState = await room.start();
+      this._changeBattleScene(room, initialState);
+      // デバッグ用にレンダラ情報をコンソールに出力
+      //console.log(this._renderer.info());
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**
@@ -59,37 +76,44 @@ export class Game {
    *
    * @param action アクション
    */
-  _onEndBattle(action: EndBattle): void {
-    this._scene.destructor();
-    this._startBattle();
+  async _onEndBattle(action: EndBattle): Promise<void> {
+    try {
+      const room = createDummyBattleRoom();
+      const initialState = await room.start();
+      this._changeBattleScene(room, initialState);
+      // デバッグ用にレンダラ情報をコンソールに出力
+      //console.log(this._renderer.info());
+    } catch(e) {
+      throw e;
+    }
   }
 
-  /** 戦闘を開始するヘルパーメソッド */
-  async _startBattle() {
-    // TODO テスト用にダミーデータを用いている
-    const player: Player = {
-      playerId: 'test01',
-      armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
-    };
-    const npc: NPC = NeoLandozerNpc;
-    const battleRoom = new OfflineBattleRoom(player, npc);
-    const initialState = await battleRoom.start();
+  /**
+   * 戦闘シーンに切り替える
+   *
+   * @param battleRoom 戦闘シーン
+   * @param initialState 初期状態
+   */
+  _changeBattleScene(battleRoom: BattleRoom, initialState: InitialState): void {
+    disposeBoundScene(this._boundScene);
 
-    this._scene = new BattleScene({
+    const scene = new BattleScene({
       resources: this._resources,
       rendererDOM: this._threeJsRender.domElement,
       battleRoom: battleRoom,
       initialState: initialState,
       listener: {
-        domEvent: this._domEvent,
+        domEvent: this._renderer.notifier().domEvent,
         gameLoop: this._gameLoop,
-      },
-      notifier: {
-        render: this._renderer.getRenderNotifier(),
-        endBattle: this._endBattle
       }
     });
-    // デバッグ用にレンダラ情報をコンソールに出力
-    // console.log(this._renderer._renderer.info);
+    const subscription = [
+      scene.notifier().render.subscribe(this._renderAction),
+      scene.notifier().endBattle.subscribe(this._endBattle)
+    ];
+    this._boundScene = {
+      scene: scene,
+      subscription: subscription
+    }
   }
 }
