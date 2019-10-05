@@ -12,18 +12,19 @@ import {createRender} from "../render/create-render";
 import type {Render} from "../action/game-loop/render";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-import type {BoundScene} from "./bound-scene";
-import {disposeBoundScene, emptyBoundScene} from "./bound-scene";
+import type {GameAction} from "../action/game/game-action";
+import {isDevelopment} from "../webpack/mode";
+import {SceneCache} from "./scene";
 
 /** ゲーム全体の制御を行う */
 export class Game {
   _resources: Resources;
   _renderAction: Subject<Render>;
-  _endBattle: Subject<EndBattle>;
+  _gameAction: Subject<GameAction>;
   _gameLoop: Observable<GameLoop>;
   _threeJsRender: THREE.WebGLRenderer;
   _renderer: Renderer;
-  _boundScene: BoundScene;
+  _sceneCache: ?SceneCache;
   _subscription: Subscription;
 
   constructor(resources: Resources) {
@@ -31,7 +32,7 @@ export class Game {
 
     this._renderAction = new Subject();
     this._gameLoop = createGameLoopListener();
-    this._endBattle = new Subject();
+    this._gameAction = new Subject();
 
     this._threeJsRender = createRender();
     if (this._threeJsRender.domElement && document.body) {
@@ -43,10 +44,12 @@ export class Game {
         render: this._renderAction
       }
     });
-    this._boundScene = emptyBoundScene();
+    this._sceneCache = null;
 
-    this._subscription = this._endBattle.subscribe(action => {
-      this._onEndBattle(action);
+    this._subscription = this._gameAction.subscribe(action => {
+      if (action.type === 'endBattle') {
+        this._onEndBattle(action);
+      }
     });
 
     this._onStart();
@@ -54,7 +57,7 @@ export class Game {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    disposeBoundScene(this._boundScene);
+    this._sceneCache && this._sceneCache.destructor();
     this._subscription.unsubscribe();
   }
 
@@ -65,8 +68,10 @@ export class Game {
       const initialState = await room.start();
       this._changeBattleScene(room, initialState);
       // デバッグ用にレンダラ情報をコンソールに出力
-      //console.log(this._renderer.info());
-    } catch(e) {
+      if (isDevelopment()) {
+        console.log(this._renderer.info());
+      }
+    } catch (e) {
       throw e;
     }
   }
@@ -82,8 +87,10 @@ export class Game {
       const initialState = await room.start();
       this._changeBattleScene(room, initialState);
       // デバッグ用にレンダラ情報をコンソールに出力
-      //console.log(this._renderer.info());
-    } catch(e) {
+      if (isDevelopment()) {
+        console.log(this._renderer.info());
+      }
+    } catch (e) {
       throw e;
     }
   }
@@ -95,7 +102,7 @@ export class Game {
    * @param initialState 初期状態
    */
   _changeBattleScene(battleRoom: BattleRoom, initialState: InitialState): void {
-    disposeBoundScene(this._boundScene);
+    this._sceneCache && this._sceneCache.destructor();
 
     const scene = new BattleScene({
       resources: this._resources,
@@ -109,11 +116,8 @@ export class Game {
     });
     const subscription = [
       scene.notifier().render.subscribe(this._renderAction),
-      scene.notifier().endBattle.subscribe(this._endBattle)
+      scene.notifier().endBattle.subscribe(this._gameAction)
     ];
-    this._boundScene = {
-      scene: scene,
-      subscription: subscription
-    }
+    this._sceneCache = new SceneCache(scene, subscription);
   }
 }

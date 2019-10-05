@@ -5,7 +5,6 @@ import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../action/dom-event";
-import type {BattleSceneAction} from "../../action/battle-scene";
 import type {DecideBattery} from "../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
