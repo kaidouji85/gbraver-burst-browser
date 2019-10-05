@@ -1,8 +1,8 @@
 // @flow
 
-import type {Scene} from "./scene";
+import type {Scene} from "./scene/scene";
 import {Subscription} from "rxjs";
-import {emptyScene} from "./scene";
+import {emptyScene} from "./scene/scene";
 
 /**
  * Gameに関連付けされたシーン
