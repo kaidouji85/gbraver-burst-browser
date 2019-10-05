@@ -12,7 +12,7 @@ import {createRender} from "../render/create-render";
 import type {Render} from "../action/game-loop/render";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-import {BoundScene, emptyBoundScene} from "./bound-scene";
+import {SceneCache} from "./scene-cache";
 import type {GameAction} from "../action/game/game-action";
 import {isDevelopment} from "../webpack/mode";
 
@@ -24,7 +24,7 @@ export class Game {
   _gameLoop: Observable<GameLoop>;
   _threeJsRender: THREE.WebGLRenderer;
   _renderer: Renderer;
-  _boundScene: BoundScene;
+  _sceneCache: ?SceneCache;
   _subscription: Subscription;
 
   constructor(resources: Resources) {
@@ -44,7 +44,7 @@ export class Game {
         render: this._renderAction
       }
     });
-    this._boundScene = emptyBoundScene();
+    this._sceneCache = null;
 
     this._subscription = this._gameAction.subscribe(action => {
       if (action.type === 'endBattle') {
@@ -57,7 +57,7 @@ export class Game {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._boundScene.destructor();
+    this._sceneCache && this._sceneCache.destructor();
     this._subscription.unsubscribe();
   }
 
@@ -71,7 +71,7 @@ export class Game {
       if (isDevelopment()) {
         console.log(this._renderer.info());
       }
-    } catch(e) {
+    } catch (e) {
       throw e;
     }
   }
@@ -90,7 +90,7 @@ export class Game {
       if (isDevelopment()) {
         console.log(this._renderer.info());
       }
-    } catch(e) {
+    } catch (e) {
       throw e;
     }
   }
@@ -102,9 +102,9 @@ export class Game {
    * @param initialState 初期状態
    */
   _changeBattleScene(battleRoom: BattleRoom, initialState: InitialState): void {
-    this._boundScene.destructor();
+    this._sceneCache && this._sceneCache.destructor();
 
-   const scene = new BattleScene({
+    const scene = new BattleScene({
       resources: this._resources,
       rendererDOM: this._threeJsRender.domElement,
       battleRoom: battleRoom,
@@ -118,6 +118,6 @@ export class Game {
       scene.notifier().render.subscribe(this._renderAction),
       scene.notifier().endBattle.subscribe(this._gameAction)
     ];
-    this._boundScene = new BoundScene(scene, subscription);
+    this._sceneCache = new SceneCache(scene, subscription);
   }
 }
