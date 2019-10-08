@@ -11,7 +11,7 @@ import type {Update} from "../../../../action/game-loop/update";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../action/game-loop/render";
-import {BattleHUDCamera} from "../../../../game-object/camera/battle-hud";
+import {PlainHUDCamera} from "../../../../game-object/camera/plain-hud";
 import type {HUDPlayer} from "./player";
 import {appendHUDPlayer, destructorHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
@@ -44,7 +44,7 @@ type Notifier = {
  */
 export class HudLayer {
   scene: THREE.Scene;
-  camera: BattleHUDCamera;
+  camera: PlainHUDCamera;
   players: HUDPlayer[];
   gameObjects: HUDGameObjects;
 
@@ -63,7 +63,7 @@ export class HudLayer {
     this._gameObjectAction = new Subject();
 
     this.scene = new THREE.Scene();
-    this.camera = new BattleHUDCamera({
+    this.camera = new PlainHUDCamera({
       listener: {
         domEvent: param.listener.domEvent
       }

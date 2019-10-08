@@ -13,7 +13,7 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/battle";
 import {Battle3DCamera} from "../../../../../game-object/camera/battle-3d";
-import {BattleHUDCamera} from "../../../../../game-object/camera/battle-hud";
+import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 
 /**
  * 戦闘アニメーション共通で使うパラメータ
@@ -34,7 +34,7 @@ export type BattleAnimationParam<SPRITE, RESULT> = {
   tdObjects: TDGameObjects,
   tdCamera: Battle3DCamera,
   hudObjects: HUDGameObjects,
-  hudCamera: BattleHUDCamera,
+  hudCamera: PlainHUDCamera,
   isDeath: boolean,
   result: RESULT
 };

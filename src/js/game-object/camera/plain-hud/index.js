@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import {createCamera} from "./camera";
+import {createHUDCamera} from "../../../camera/create-hud-camera";
 import type {DOMEvent} from "../../../action/dom-event";
 import {Observable, Subscription} from "rxjs";
 import type {Resize} from "../../../action/dom-event/resize";
@@ -10,17 +10,20 @@ import {onResizeOrthographicCamera} from "../../../camera/resize";
 /** コンストラクタのパラメータ */
 type Param = {
   listener: {
-    domEvent: Observable<DOMEvent>,
+    domEvent: Observable<DOMEvent>
   }
 };
 
-/** 戦闘シーンHUDレイヤー用カメラ */
-export class BattleHUDCamera {
+/**
+ * 汎用HUDレイヤー用カメラ
+ * 本カメラは一切視点変更を行わないカメラである
+ */
+export class PlainHUDCamera {
   _camera: THREE.OrthographicCamera;
   _subscription: Subscription;
 
   constructor(param: Param) {
-    this._camera = createCamera();
+    this._camera = createHUDCamera();
 
     this._subscription = param.listener.domEvent.subscribe(action => {
       if (action.type === 'resize') {

@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 
 /** HUDレイヤーのカメラを生成して返す */
-export function createCamera(): THREE {
+export function createHUDCamera(): THREE {
   return new THREE.OrthographicCamera(
     -window.innerWidth / 2,
     window.innerWidth / 2,

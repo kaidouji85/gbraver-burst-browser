@@ -5,7 +5,9 @@ import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import type {DOMEvent} from "../../action/dom-event";
+import {TitleView} from "./view";
 
+/** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   listener: {
@@ -16,12 +18,18 @@ type Param = {
 
 /** タイトルシーン */
 export class Title implements Scene {
-  constructor(param: Param) {
+  _view: TitleView;
 
+  constructor(param: Param) {
+    this._view = new TitleView({
+      listener: {
+        domEvent: param.listener.domEvent
+      }
+    });
   }
 
   /** デストラクタ相当の処理 */
   destructor() {
-    // NOP
+    this._view.destructor();
   }
 }

@@ -7,7 +7,7 @@ import type {HUDPlayer} from "../../../view/hud/player";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import {Battle3DCamera} from "../../../../../game-object/camera/battle-3d";
 import type {HUDGameObjects} from "../../../view/hud/game-objects";
-import {BattleHUDCamera} from "../../../../../game-object/camera/battle-hud";
+import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
@@ -28,7 +28,7 @@ export type BurstAnimationParam<SPRITE, BURST> = {
   tdObjects: TDGameObjects,
   tdCamera: Battle3DCamera,
   hudObjects: HUDGameObjects,
-  hudCamera: BattleHUDCamera,
+  hudCamera: PlainHUDCamera,
   burst: BURST
 };
 
