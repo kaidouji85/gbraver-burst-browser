@@ -1,73 +1,22 @@
 // @flow
 
-import {BattleScene} from "./battle";
 import type {Resources} from "../resource";
-import {createGameLoopListener} from "../action/game-loop/create-listener";
 import {Renderer} from "../game-object/renderer";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import type {EndBattle} from "../action/game/end-battle";
-import type {GameLoop} from "../action/game-loop/game-loop";
 import {createRender} from "../render/create-render";
-import type {Render} from "../action/game-loop/render";
-import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-import type {GameAction} from "../action/game/game-action";
 import {isDevelopment} from "../webpack/mode";
-import {SceneCache} from "./scene";
-import {TitleScene} from "./title";
-
-/** ゲーム全体で利用するイベントストリーム */
-export class GameStream {
-  render: Subject<Render>;
-  gameAction: Subject<GameAction>;
-  gameLoop: Observable<GameLoop>;
-
-  constructor() {
-    this.render = new Subject();
-    this.gameAction = new Subject();
-    this.gameLoop = createGameLoopListener();
-  }
-}
-
-export function bindTitleScene(resources: Resources, renderer: Renderer, stream: GameStream): SceneCache {
-  const scene = new TitleScene({
-    resources: resources,
-    rendererDOM: renderer.getRendererDOM(),
-    listener: {
-      domEvent: renderer.notifier().domEvent,
-      gameLoop: stream.gameLoop,
-    }
-  });
-  const subscription = [
-    scene.notifier().render.subscribe(stream.render)
-  ];
-  return new SceneCache(scene, subscription);
-}
-
-export function bindBattleScene(resources: Resources, renderer: Renderer, stream: GameStream, battleRoom: BattleRoom, initialState: InitialState): SceneCache {
-  const scene = new BattleScene({
-    resources: resources,
-    rendererDOM: renderer.getRendererDOM(),
-    battleRoom: battleRoom,
-    initialState: initialState,
-    listener: {
-      domEvent: renderer.notifier().domEvent,
-      gameLoop: stream.gameLoop,
-    }
-  });
-  const subscription = [
-    scene.notifier().render.subscribe(stream.render),
-    scene.notifier().endBattle.subscribe(stream.gameAction)
-  ];
-  return new SceneCache(scene, subscription);
-}
+import {BoundSceneCache} from "./bind/bound-scene-cache";
+import {bindBattleScene} from "./bind/bind-battle-scene";
+import {GameStream} from "./stream";
 
 /** ゲーム全体の制御を行う */
 export class Game {
   _resources: Resources;
   _stream: GameStream;
   _renderer: Renderer;
-  _sceneCache: ?SceneCache;
+  _sceneCache: ?BoundSceneCache;
   _subscription: Subscription;
 
   constructor(resources: Resources) {
