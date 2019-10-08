@@ -21,7 +21,7 @@ import {moveCamera} from "./animation/move-camera";
 type Param = {
   listener: {
     domEvent: Observable<DOMEvent>,
-    gameObject: Observable<GameObjectAction>
+    update: Observable<Update>
   }
 };
 
@@ -35,7 +35,10 @@ export class Battle3DCamera {
     this._model = createInitialValue();
     this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
 
-    this._subscription = merge(param.listener.domEvent, param.listener.gameObject).subscribe(action => {
+    this._subscription = merge(
+      param.listener.domEvent,
+      param.listener.update
+    ).subscribe(action => {
       if (action.type === 'resize') {
         this._resize(action);
       } else if (action.type === 'Update') {

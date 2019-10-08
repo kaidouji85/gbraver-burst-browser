@@ -18,6 +18,7 @@ import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-
 import type {TDGameObjects} from "./game-objects";
 import {appendTDGameObjects, createTDGameObjects, destructorTDGameObjects} from "./game-objects";
 import {map} from "rxjs/operators";
+import {toOverlapObservable} from "../../../../../action/overlap/dom-event-to-overlap";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -58,23 +59,24 @@ export class ThreeDimensionLayer {
     this._preRender = new Subject();
     this._render = new Subject();
 
-    const gameObjectAction: Observable<GameObjectAction> = merge(
-      this._update,
-      this._preRender
-    ).pipe(
-      map(v => {
-        const ret: GameObjectAction = v;
-        return v;
-      })
-    );
-
     this.scene = new THREE.Scene();
     this.camera = new Battle3DCamera({
       listener: {
         domEvent: param.listener.domEvent,
-        gameObject: gameObjectAction
+        update: this._update
       }
     });
+
+    const gameObjectAction: Observable<GameObjectAction> = merge(
+      this._update,
+      this._preRender,
+      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera())
+    ).pipe(
+      map(v => {
+        const ret: GameObjectAction = v;
+        return ret;
+      })
+    );
 
     this.players = [
       playerTDObjects(param.resources, player, gameObjectAction),
