@@ -65,9 +65,10 @@ export class Game {
   /** ゲーム開始時のイベント */
   async _onStart(): Promise<void> {
     try {
-      const room = createDummyBattleRoom();
-      const initialState = await room.start();
-      this._changeBattleScene(room, initialState);
+      // const room = createDummyBattleRoom();
+      // const initialState = await room.start();
+      // this._changeBattleScene(room, initialState);
+      this._changeTitleScene();
       // デバッグ用にレンダラ情報をコンソールに出力
       if (isDevelopment()) {
         console.log(this._renderer.info());
@@ -111,7 +112,7 @@ export class Game {
       }
     });
     const subscription = [
-      scene.notifier.render.subscribe(this._renderAction)
+      scene.notifier().render.subscribe(this._renderAction)
     ];
     this._sceneCache = new SceneCache(scene, subscription);
   }
