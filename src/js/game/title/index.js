@@ -24,7 +24,7 @@ type Notifier = {
 };
 
 /** タイトルシーン */
-export class Title implements Scene {
+export class TitleScene implements Scene {
   _view: TitleView;
 
   constructor(param: Param) {

@@ -15,6 +15,7 @@ import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 import type {GameAction} from "../action/game/game-action";
 import {isDevelopment} from "../webpack/mode";
 import {SceneCache} from "./scene";
+import {TitleScene} from "./title";
 
 /** ゲーム全体の制御を行う */
 export class Game {
@@ -93,6 +94,26 @@ export class Game {
     } catch (e) {
       throw e;
     }
+  }
+
+  /**
+   * タイトルシーンに切り替える
+   */
+  _changeTitleScene(): void {
+    this._sceneCache && this._sceneCache.destructor();
+
+    const scene = new TitleScene({
+      resources: this._resources,
+      rendererDOM: this._threeJsRender.domElement,
+      listener: {
+        domEvent: this._renderer.notifier().domEvent,
+        gameLoop: this._gameLoop,
+      }
+    });
+    const subscription = [
+      scene.notifier.render.subscribe(this._renderAction)
+    ];
+    this._sceneCache = new SceneCache(scene, subscription);
   }
 
   /**
