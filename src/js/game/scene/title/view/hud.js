@@ -67,6 +67,8 @@ export class TitleHudLayer {
     );
 
     this.titleLogo = new TitleLogo(param.resources, gameObjectAction);
+    this.scene.add(this.titleLogo.getObject3D());
+
     this._subscription = param.listener.gameLoop.subscribe(action => {
       this._onGameLoop(action);
     });
