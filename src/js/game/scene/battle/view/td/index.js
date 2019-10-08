@@ -2,7 +2,7 @@
 import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {Observable, Subject, Subscription} from "rxjs";
+import {merge, Observable, Subject, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
@@ -17,6 +17,7 @@ import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "./game-objects";
 import {appendTDGameObjects, createTDGameObjects, destructorTDGameObjects} from "./game-objects";
+import {map} from "rxjs/operators";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -46,8 +47,7 @@ export class ThreeDimensionLayer {
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
-  _gameObjectAction: Subject<GameObjectAction>;
-  _subscription: Subscription[];
+  _subscription: Subscription;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -57,34 +57,39 @@ export class ThreeDimensionLayer {
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = new Subject();
-    this._gameObjectAction = new Subject();
+
+    const gameObjectAction: Observable<GameObjectAction> = merge(
+      this._update,
+      this._preRender
+    ).pipe(
+      map(v => {
+        const ret: GameObjectAction = v;
+        return v;
+      })
+    );
 
     this.scene = new THREE.Scene();
     this.camera = new Battle3DCamera({
       listener: {
         domEvent: param.listener.domEvent,
-        gameObject: this._gameObjectAction
+        gameObject: gameObjectAction
       }
     });
 
     this.players = [
-      playerTDObjects(param.resources, player, this._gameObjectAction),
-      enemyTDObject(param.resources, enemy, this._gameObjectAction)
+      playerTDObjects(param.resources, player, gameObjectAction),
+      enemyTDObject(param.resources, enemy, gameObjectAction)
     ];
     this.players.forEach(v => {
       appendTDPlayer(this.scene, v);
     });
 
-    this.gameObjects = createTDGameObjects(param.resources, this._gameObjectAction);
+    this.gameObjects = createTDGameObjects(param.resources, gameObjectAction);
     appendTDGameObjects(this.scene, this.gameObjects);
 
-    this._subscription = [
-      param.listener.gameLoop.subscribe(action => {
-        this._gameLoop(action);
-      }),
-      this._update.subscribe(this._gameObjectAction),
-      this._preRender.subscribe(this._gameObjectAction)
-    ];
+    this._subscription = param.listener.gameLoop.subscribe(action => {
+      this._gameLoop(action);
+    });
   }
 
   /** デストラクタ */
@@ -95,9 +100,7 @@ export class ThreeDimensionLayer {
     destructorTDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();
-    this._subscription.forEach(v => {
-      v.unsubscribe();
-    });
+    this._subscription.unsubscribe();
   }
 
   /**
