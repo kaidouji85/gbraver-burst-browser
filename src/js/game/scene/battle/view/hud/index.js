@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {Observable, Subject, Subscription} from "rxjs";
+import {merge, Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../../action/battle-scene";
@@ -18,6 +18,7 @@ import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
 import type {HUDGameObjects} from "./game-objects";
 import {appendHUDGameObjects, createHUDGameObjects, destructorHUDGameObjects} from "./game-objects";
+import {map} from "rxjs/operators";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -52,15 +53,13 @@ export class HudLayer {
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
-  _gameObjectAction: Subject<GameObjectAction>;
-  _subscription: Subscription[];
+  _subscription: Subscription;
 
   constructor(param: Param) {
     this._rendererDOM = param.rendererDOM;
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = new Subject();
-    this._gameObjectAction = new Subject();
 
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera({
@@ -69,30 +68,35 @@ export class HudLayer {
       }
     });
 
+    const gameObjectAction: Observable<GameObjectAction> = merge(
+      this._update,
+      this._preRender,
+      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera())
+    ).pipe(
+      map(v => {
+        const ret: GameObjectAction = v;
+        return v;
+      })
+    );
+
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId)
       || param.players[0];
     this.players = [
-      playerHUDObjects(param.resources, this._gameObjectAction, player),
-      enemyHUDObjects(param.resources, this._gameObjectAction, enemy),
+      playerHUDObjects(param.resources, gameObjectAction, player),
+      enemyHUDObjects(param.resources, gameObjectAction, enemy),
     ];
     this.players.forEach(v => {
       appendHUDPlayer(this.scene, v);
     });
 
-    this.gameObjects = createHUDGameObjects(param.resources, this._gameObjectAction, player);
+    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
-    this._subscription = [
-      param.listener.gameLoop.subscribe(action => {
-        this._gameLoop(action);
-      }),
-      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera())
-        .subscribe(this._gameObjectAction),
-      this._update.subscribe(this._gameObjectAction),
-      this._preRender.subscribe(this._gameObjectAction),
-    ];
+    this._subscription = param.listener.gameLoop.subscribe(action => {
+      this._gameLoop(action);
+    });
   }
 
   /** デストラクタ */
@@ -103,9 +107,7 @@ export class HudLayer {
     destructorHUDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();
-    this._subscription.forEach(v => {
-      v.unsubscribe();
-    });
+    this._subscription.unsubscribe();
   }
 
   /**
