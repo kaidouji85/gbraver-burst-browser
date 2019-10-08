@@ -63,6 +63,15 @@ export class Renderer {
     return this._threeJsRender.info;
   }
 
+  /**
+   * three.jsレンダラのHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRendererDOM(): HTMLElement {
+    return this._threeJsRender.domElement;
+  }
+
   /** リサイズ */
   _resize(action: Resize): void {
     onWebGLRendererResize(this._threeJsRender, action.width, action.height, window.devicePixelRatio);
