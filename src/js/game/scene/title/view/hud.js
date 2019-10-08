@@ -3,14 +3,21 @@
 import * as THREE from 'three';
 import type {DOMEvent} from "../../../../action/dom-event";
 import {PlainHUDCamera} from "../../../../game-object/camera/plain-hud";
-import {Observable, Subject, Subscription} from "rxjs";
+import {merge, Observable, Subject, Subscription} from "rxjs";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../action/game-loop/render";
+import {TitleLogo} from "../../../../game-object/title-logo";
+import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overlap";
+import type {GameObjectAction} from "../../../../action/game-object-action";
+import type {Resources} from "../../../../resource";
+import type {OverlapAction} from "../../../../action/overlap";
+import {map} from "rxjs/operators";
 
 /** コンストラクタのパラメータ */
 type Param = {
+  resources: Resources,
   rendererDOM: HTMLElement,
   listener: {
     gameLoop: Observable<GameLoop>,
@@ -27,6 +34,7 @@ type Notifier = {
 export class TitleHudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
+  titleLogo: TitleLogo;
 
   _rendererDOM: HTMLElement;
   _update: Subject<Update>;
@@ -47,6 +55,18 @@ export class TitleHudLayer {
       }
     });
 
+    const gameObjectAction: Observable<GameObjectAction> = merge(
+      this._update,
+      this._preRender,
+      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera())
+    ).pipe(
+      map(v => {
+        const ret: GameObjectAction = v;
+        return ret;
+      })
+    );
+
+    this.titleLogo = new TitleLogo(param.resources, gameObjectAction);
     this._subscription = param.listener.gameLoop.subscribe(action => {
       this._onGameLoop(action);
     });

@@ -29,6 +29,7 @@ export class TitleScene implements Scene {
 
   constructor(param: Param) {
     this._view = new TitleView({
+      resources: param.resources,
       rendererDOM: param.rendererDOM,
       listener: {
         gameLoop: param.listener.gameLoop,

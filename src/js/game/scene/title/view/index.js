@@ -5,9 +5,11 @@ import type {DOMEvent} from "../../../../action/dom-event";
 import {TitleHudLayer} from "./hud";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../action/game-loop/render";
+import type {Resources} from "../../../../resource";
 
 /** コンストラクタのパラメータ */
 type Param = {
+  resources: Resources,
   rendererDOM: HTMLElement,
   listener: {
     gameLoop: Observable<GameLoop>,
@@ -31,6 +33,7 @@ export class TitleView {
     this._hudGameLoop = new Subject();
 
     this.hud = new TitleHudLayer({
+      resources: param.resources,
       rendererDOM: param.rendererDOM,
       listener: {
         gameLoop: this._hudGameLoop,
