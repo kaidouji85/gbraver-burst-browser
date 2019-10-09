@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from 'three';
+import {WebGLInfo} from 'three';
 import type {Resize} from "../../action/dom-event/resize";
 import type {Render} from "../../action/game-loop/render";
 import {merge, Observable} from "rxjs";
 import {onWebGLRendererResize} from "../../render/resize";
 import {createDOMEventListener} from "../../action/dom-event/create-listener";
 import type {DOMEvent} from "../../action/dom-event";
-import {WebGLInfo} from "three";
 
 /** コンストラクタのパラメータ */
 type Param = {

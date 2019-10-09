@@ -16,7 +16,6 @@ import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "./game-objects";
 import {appendTDGameObjects, createTDGameObjects, destructorTDGameObjects} from "./game-objects";
-import {map} from "rxjs/operators";
 import {toOverlapObservable} from "../../../../../action/overlap/dom-event-to-overlap";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../action/game-object-action/create-listener";

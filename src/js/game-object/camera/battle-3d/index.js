@@ -9,7 +9,6 @@ import type {Battle3DCameraModel} from "./model/model";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import {engage} from "./engauge";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {Animate} from "../../../animation/animate";
 import {zoomIn} from "./animation/zoom-in";
 import {zoomOut} from "./animation/zoom-out";
