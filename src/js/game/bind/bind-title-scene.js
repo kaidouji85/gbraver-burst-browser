@@ -24,7 +24,8 @@ export function bindTitleScene(resources: Resources, renderer: Renderer, stream:
     }
   });
   const subscription = [
-    scene.notifier().render.subscribe(stream.render)
+    scene.notifier().render.subscribe(stream.render),
+    scene.notifier().endTitle.subscribe(stream.gameAction),
   ];
   return new BoundSceneCache(scene, subscription);
 }

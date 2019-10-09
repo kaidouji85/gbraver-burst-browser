@@ -10,13 +10,15 @@ import {isDevelopment} from "../webpack/mode";
 import {BoundSceneCache} from "./bind/bound-scene-cache";
 import {bindBattleScene} from "./bind/bind-battle-scene";
 import {GameStream} from "./stream";
+import {bindTitleScene} from "./bind/bind-title-scene";
+import type {EndTitle} from "../action/game/end-title";
 
 /** ゲーム全体の制御を行う */
 export class Game {
   _resources: Resources;
   _stream: GameStream;
   _renderer: Renderer;
-  _sceneCache: ?BoundSceneCache;
+  _sceneCache: BoundSceneCache;
   _subscription: Subscription;
 
   constructor(resources: Resources) {
@@ -33,15 +35,15 @@ export class Game {
         render: this._stream.render
       }
     });
-    this._sceneCache = null;
+    this._sceneCache = bindTitleScene(this._resources, this._renderer, this._stream);
 
     this._subscription = this._stream.gameAction.subscribe(action => {
-      if (action.type === 'endBattle') {
+      if (action.type === 'EndTitle') {
+        this._onEndTitle(action);
+      } else if (action.type === 'endBattle') {
         this._onEndBattle(action);
       }
     });
-
-    this._onStart();
   }
 
   /** デストラクタ相当の処理 */
@@ -50,12 +52,16 @@ export class Game {
     this._subscription.unsubscribe();
   }
 
-  /** ゲーム開始時のイベント */
-  async _onStart(): Promise<void> {
+  /**
+   * タイトル終了時のイベント
+   *
+   * @param action アクション
+   */
+  async _onEndTitle(action: EndTitle): Promise<void> {
     try {
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._sceneCache && this._sceneCache.destructor();
+      this._sceneCache.destructor();
       this._sceneCache = bindBattleScene(this._resources, this._renderer, this._stream, room, initialState);
       // // デバッグ用にレンダラ情報をコンソールに出力
       if (isDevelopment()) {
@@ -75,7 +81,7 @@ export class Game {
     try {
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._sceneCache && this._sceneCache.destructor();
+      this._sceneCache.destructor();
       this._sceneCache = bindBattleScene(this._resources, this._renderer, this._stream, room, initialState);
       // // デバッグ用にレンダラ情報をコンソールに出力
       if (isDevelopment()) {

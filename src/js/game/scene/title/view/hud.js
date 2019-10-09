@@ -13,6 +13,9 @@ import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overl
 import type {Resources} from "../../../../resource";
 import type {OverlapAction} from "../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../action/game-object-action/create-listener";
+import type {EndTitle} from "../../../../action/game/end-title";
+import type {MouseDown} from "../../../../action/dom-event/mouse-down";
+import type {TouchStart} from "../../../../action/dom-event/touch-start";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -26,7 +29,8 @@ type Param = {
 
 /** イベント通知 */
 type Notifier = {
-  render: Observable<Render>
+  render: Observable<Render>,
+  endTitle: Observable<EndTitle>
 };
 
 /** タイトルシーン HUDレイヤー */
@@ -40,12 +44,14 @@ export class TitleHudLayer {
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
   _overlap: Observable<OverlapAction>;
-  _subscription: Subscription;
+  _endTitle: Subject<EndTitle>;
+  _subscription: Subscription[];
 
   constructor(param: Param) {
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = new Subject();
+    this._endTitle = new Subject();
     this._rendererDOM = param.rendererDOM;
 
     this.scene = new THREE.Scene();
@@ -61,15 +67,27 @@ export class TitleHudLayer {
     this.titleLogo = new TitleLogo(param.resources, gameObjectAction);
     this.scene.add(this.titleLogo.getObject3D());
 
-    this._subscription = param.listener.gameLoop.subscribe(action => {
-      this._onGameLoop(action);
-    });
+    this._subscription = [
+      param.listener.gameLoop.subscribe(action => {
+        this._onGameLoop(action);
+      }),
+
+      param.listener.domEvent.subscribe(action => {
+        if (action.type === 'mouseDown') {
+          this._onMouseDown(action);
+        } else if (action.type === 'touchStart') {
+          this._onTouchStart(action);
+        }
+      })
+    ];
   }
 
   /** デストラクタ相当処理 */
   destructor(): void {
     this.camera.destructor();
-    this._subscription.unsubscribe();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -79,7 +97,8 @@ export class TitleHudLayer {
    */
   notifier(): Notifier {
     return {
-      render: this._render
+      render: this._render,
+      endTitle: this._endTitle,
     };
   }
 
@@ -105,5 +124,23 @@ export class TitleHudLayer {
       scene: this.scene,
       camera: this.camera.getCamera()
     });
+  }
+
+  /**
+   * マウスダウン時の処理
+   *
+   * @param action アクション
+   */
+  _onMouseDown(action: MouseDown): void {
+    this._endTitle.next({type: 'EndTitle'});
+  }
+
+  /**
+   * タッチスタート時の処理
+   *
+   * @param action アクション
+   */
+  _onTouchStart(action: TouchStart): void {
+    this._endTitle.next({type: 'EndTitle'});
   }
 }

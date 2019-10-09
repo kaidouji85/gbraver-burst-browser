@@ -7,6 +7,7 @@ import type {GameLoop} from "../../../action/game-loop/game-loop";
 import type {DOMEvent} from "../../../action/dom-event";
 import {TitleView} from "./view";
 import type {Render} from "../../../action/game-loop/render";
+import type {EndTitle} from "../../../action/game/end-title";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -20,7 +21,8 @@ type Param = {
 
 /** イベント通知 */
 type Notifier = {
-  render: Observable<Render>
+  render: Observable<Render>,
+  endTitle: Observable<EndTitle>,
 };
 
 /** タイトルシーン */
@@ -50,7 +52,8 @@ export class TitleScene implements Scene {
    */
   notifier(): Notifier {
     return {
-      render: this._view.notifier().render
+      render: this._view.notifier().render,
+      endTitle: this._view.notifier().endTitle,
     }
   }
 }

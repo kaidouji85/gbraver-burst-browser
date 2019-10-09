@@ -6,6 +6,7 @@ import {TitleHudLayer} from "./hud";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../action/game-loop/render";
 import type {Resources} from "../../../../resource";
+import type {EndTitle} from "../../../../action/game/end-title";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -19,7 +20,8 @@ type Param = {
 
 /** イベント通知 */
 type Notifier = {
-  render: Observable<Render>
+  render: Observable<Render>,
+  endTitle: Observable<EndTitle>
 };
 
 /** タイトルシーンビュー */
@@ -59,7 +61,8 @@ export class TitleView {
    */
   notifier(): Notifier {
     return {
-      render: this.hud.notifier().render
+      render: this.hud.notifier().render,
+      endTitle: this.hud.notifier().endTitle,
     }
   }
 
