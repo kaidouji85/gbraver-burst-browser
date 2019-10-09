@@ -1,58 +1,49 @@
 // @flow
 
-import {BattleScene} from "./battle";
 import type {Resources} from "../resource";
-import * as THREE from "three";
-import {createGameLoopListener} from "../action/game-loop/create-listener";
 import {Renderer} from "../game-object/renderer";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import type {EndBattle} from "../action/game/end-battle";
-import type {GameLoop} from "../action/game-loop/game-loop";
 import {createRender} from "../render/create-render";
-import type {Render} from "../action/game-loop/render";
-import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-import type {GameAction} from "../action/game/game-action";
 import {isDevelopment} from "../webpack/mode";
-import {SceneCache} from "./scene";
+import {BoundSceneCache} from "./bind/bound-scene-cache";
+import {bindBattleScene} from "./bind/bind-battle-scene";
+import {GameStream} from "./stream";
+import {bindTitleScene} from "./bind/bind-title-scene";
+import type {EndTitle} from "../action/game/end-title";
 
 /** ゲーム全体の制御を行う */
 export class Game {
   _resources: Resources;
-  _renderAction: Subject<Render>;
-  _gameAction: Subject<GameAction>;
-  _gameLoop: Observable<GameLoop>;
-  _threeJsRender: THREE.WebGLRenderer;
+  _stream: GameStream;
   _renderer: Renderer;
-  _sceneCache: ?SceneCache;
+  _sceneCache: BoundSceneCache;
   _subscription: Subscription;
 
   constructor(resources: Resources) {
     this._resources = resources;
+    this._stream = new GameStream();
 
-    this._renderAction = new Subject();
-    this._gameLoop = createGameLoopListener();
-    this._gameAction = new Subject();
-
-    this._threeJsRender = createRender();
-    if (this._threeJsRender.domElement && document.body) {
-      document.body.appendChild(this._threeJsRender.domElement);
+    const threeJsRender = createRender();
+    if (threeJsRender.domElement && document.body) {
+      document.body.appendChild(threeJsRender.domElement);
     }
     this._renderer = new Renderer({
-      threeJsRender: this._threeJsRender,
+      threeJsRender: threeJsRender,
       listener: {
-        render: this._renderAction
+        render: this._stream.render
       }
     });
-    this._sceneCache = null;
+    this._sceneCache = bindTitleScene(this._resources, this._renderer, this._stream);
 
-    this._subscription = this._gameAction.subscribe(action => {
-      if (action.type === 'endBattle') {
+    this._subscription = this._stream.gameAction.subscribe(action => {
+      if (action.type === 'EndTitle') {
+        this._onEndTitle(action);
+      } else if (action.type === 'endBattle') {
         this._onEndBattle(action);
       }
     });
-
-    this._onStart();
   }
 
   /** デストラクタ相当の処理 */
@@ -61,13 +52,18 @@ export class Game {
     this._subscription.unsubscribe();
   }
 
-  /** ゲーム開始時のイベント */
-  async _onStart(): Promise<void> {
+  /**
+   * タイトル終了時のイベント
+   *
+   * @param action アクション
+   */
+  async _onEndTitle(action: EndTitle): Promise<void> {
     try {
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._changeBattleScene(room, initialState);
-      // デバッグ用にレンダラ情報をコンソールに出力
+      this._sceneCache.destructor();
+      this._sceneCache = bindBattleScene(this._resources, this._renderer, this._stream, room, initialState);
+      // // デバッグ用にレンダラ情報をコンソールに出力
       if (isDevelopment()) {
         console.log(this._renderer.info());
       }
@@ -85,39 +81,14 @@ export class Game {
     try {
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._changeBattleScene(room, initialState);
-      // デバッグ用にレンダラ情報をコンソールに出力
+      this._sceneCache.destructor();
+      this._sceneCache = bindBattleScene(this._resources, this._renderer, this._stream, room, initialState);
+      // // デバッグ用にレンダラ情報をコンソールに出力
       if (isDevelopment()) {
         console.log(this._renderer.info());
       }
     } catch (e) {
       throw e;
     }
-  }
-
-  /**
-   * 戦闘シーンに切り替える
-   *
-   * @param battleRoom 戦闘シーン
-   * @param initialState 初期状態
-   */
-  _changeBattleScene(battleRoom: BattleRoom, initialState: InitialState): void {
-    this._sceneCache && this._sceneCache.destructor();
-
-    const scene = new BattleScene({
-      resources: this._resources,
-      rendererDOM: this._threeJsRender.domElement,
-      battleRoom: battleRoom,
-      initialState: initialState,
-      listener: {
-        domEvent: this._renderer.notifier().domEvent,
-        gameLoop: this._gameLoop,
-      }
-    });
-    const subscription = [
-      scene.notifier().render.subscribe(this._renderAction),
-      scene.notifier().endBattle.subscribe(this._gameAction)
-    ];
-    this._sceneCache = new SceneCache(scene, subscription);
   }
 }

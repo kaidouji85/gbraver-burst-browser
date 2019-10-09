@@ -39,6 +39,7 @@ export const CANVAS_IMAGE_IDS = {
   BIG_BUTTON_DISABLED: 'BIG_BUTTON_DISABLED',
   SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED',
   PLAY_IN_LANDSCAPE: 'PLAY_IN_LANDSCAPE',
+  TITLE_LOGO: 'TITLE_LOGO',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -127,6 +128,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     id: CANVAS_IMAGE_IDS.PLAY_IN_LANDSCAPE,
     path: 'waring/play-in-landscape.png',
   },
+  {
+    id: CANVAS_IMAGE_IDS.TITLE_LOGO,
+    path: 'logo.png',
+  }
 ];
 
 /**

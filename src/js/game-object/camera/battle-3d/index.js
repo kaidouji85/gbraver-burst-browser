@@ -9,7 +9,6 @@ import type {Battle3DCameraModel} from "./model/model";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import {engage} from "./engauge";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {Animate} from "../../../animation/animate";
 import {zoomIn} from "./animation/zoom-in";
 import {zoomOut} from "./animation/zoom-out";
@@ -21,7 +20,7 @@ import {moveCamera} from "./animation/move-camera";
 type Param = {
   listener: {
     domEvent: Observable<DOMEvent>,
-    gameObject: Observable<GameObjectAction>
+    update: Observable<Update>
   }
 };
 
@@ -35,7 +34,10 @@ export class Battle3DCamera {
     this._model = createInitialValue();
     this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
 
-    this._subscription = merge(param.listener.domEvent, param.listener.gameObject).subscribe(action => {
+    this._subscription = merge(
+      param.listener.domEvent,
+      param.listener.update
+    ).subscribe(action => {
       if (action.type === 'resize') {
         this._resize(action);
       } else if (action.type === 'Update') {
