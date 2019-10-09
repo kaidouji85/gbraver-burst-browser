@@ -2,8 +2,7 @@
 import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Subject, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import type {GameLoop} from "../../../../../action/game-loop/game-loop";
@@ -19,6 +18,8 @@ import type {TDGameObjects} from "./game-objects";
 import {appendTDGameObjects, createTDGameObjects, destructorTDGameObjects} from "./game-objects";
 import {map} from "rxjs/operators";
 import {toOverlapObservable} from "../../../../../action/overlap/dom-event-to-overlap";
+import type {OverlapAction} from "../../../../../action/overlap";
+import {toGameObjectActionObservable} from "../../../../../action/game-object-action/create-listener";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -48,6 +49,7 @@ export class ThreeDimensionLayer {
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
+  _overlap: Observable<OverlapAction>;
   _subscription: Subscription;
 
   constructor(param: Param) {
@@ -67,16 +69,8 @@ export class ThreeDimensionLayer {
       }
     });
 
-    const gameObjectAction: Observable<GameObjectAction> = merge(
-      this._update,
-      this._preRender,
-      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera())
-    ).pipe(
-      map(v => {
-        const ret: GameObjectAction = v;
-        return ret;
-      })
-    );
+    this._overlap = toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
+    const gameObjectAction = toGameObjectActionObservable(this._update, this._preRender, this._overlap);
 
     this.players = [
       playerTDObjects(param.resources, player, gameObjectAction),

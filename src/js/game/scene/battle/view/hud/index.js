@@ -2,11 +2,10 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
-import {merge, Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../../../../action/dom-event";
 import {toOverlapObservable} from "../../../../../action/overlap/dom-event-to-overlap";
 import type {BattleSceneAction} from "../../../../../action/battle-scene";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {GameLoop} from "../../../../../action/game-loop/game-loop";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
@@ -18,7 +17,8 @@ import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
 import type {HUDGameObjects} from "./game-objects";
 import {appendHUDGameObjects, createHUDGameObjects, destructorHUDGameObjects} from "./game-objects";
-import {map} from "rxjs/operators";
+import type {OverlapAction} from "../../../../../action/overlap";
+import {toGameObjectActionObservable} from "../../../../../action/game-object-action/create-listener";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -53,6 +53,7 @@ export class HudLayer {
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
+  _overlap: Observable<OverlapAction>;
   _subscription: Subscription;
 
   constructor(param: Param) {
@@ -68,16 +69,8 @@ export class HudLayer {
       }
     });
 
-    const gameObjectAction: Observable<GameObjectAction> = merge(
-      this._update,
-      this._preRender,
-      toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera())
-    ).pipe(
-      map(v => {
-        const ret: GameObjectAction = v;
-        return v;
-      })
-    );
+    this._overlap = toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
+    const gameObjectAction = toGameObjectActionObservable(this._update, this._preRender, this._overlap);
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
