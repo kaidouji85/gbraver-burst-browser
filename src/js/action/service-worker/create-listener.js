@@ -2,7 +2,7 @@
 
 import {Observable} from "rxjs";
 import type {ServiceWorkerAction} from "./service-worker";
-import {hasWaitingServiceWorker} from "../../service-worker/has-waiting-service-worker";
+import {hasActiveServiceWorker, hasWaitingServiceWorker} from "../../service-worker/has-waiting-service-worker";
 
 /**
  * サービスワーカーアクションのストリームを生成する
@@ -13,7 +13,9 @@ import {hasWaitingServiceWorker} from "../../service-worker/has-waiting-service-
 export function createServiceWorkerActionListener(serviceWorker: ServiceWorkerRegistration): Observable<ServiceWorkerAction> {
   return new Observable(subscriber => {
     serviceWorker.onupdatefound = () => {
-      subscriber.next({type: 'ServiceWorkerWillUpdate'});
+      if (hasActiveServiceWorker(serviceWorker)) {
+        subscriber.next({type: 'ServiceWorkerWillUpdate'});
+      }
     };
 
     if (hasWaitingServiceWorker(serviceWorker)) {
