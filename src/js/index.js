@@ -2,7 +2,7 @@
 
 import '../css/index.css';
 
-import {Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {OuterGame} from "./outer-game";
 import {viewPerformanceStats} from "./stats/view-performance-stats";
 import {loadServiceWorker} from "./service-worker/load-service-worker";
