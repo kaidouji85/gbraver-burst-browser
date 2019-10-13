@@ -9,6 +9,7 @@ import type {FaderModel} from "./model/fader-model";
 import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
 import {fadeIn} from "./animation/fade-in";
+import {fadeOut} from "./animation/fade-out";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -45,6 +46,15 @@ export class Fader {
    */
   fadeIn(): Animate {
     return fadeIn(this._model);
+  }
+
+  /**
+   * フェードアウト
+   *
+   * @return アニメーション
+   */
+  fadeOut(): Animate {
+    return fadeOut(this._model);
   }
 
   /**
