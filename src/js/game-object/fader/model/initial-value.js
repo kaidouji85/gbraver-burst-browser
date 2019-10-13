@@ -9,6 +9,8 @@ import type {FaderModel} from "./fader-model";
  */
 export function createInitialValue(): FaderModel {
   return {
-    opacity: 0
+    opacity: 0,
+    width: 1,
+    height: 1,
   };
 }

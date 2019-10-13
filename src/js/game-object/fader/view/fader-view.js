@@ -4,10 +4,9 @@ import * as THREE from 'three';
 import {HUD_FADER_ZINDEX} from "../../../zindex/hud-zindex";
 import {FADE_RENDER_ORDER} from "../../../render-order/hud-render-order";
 import type {FaderModel} from "../model/fader-model";
-import {mode} from "../../../webpack/mode";
 
-export const MESH_WIDTH = 100;
-export const MESH_HEIGHT = 100;
+export const MESH_WIDTH = 1;
+export const MESH_HEIGHT = 1;
 
 /** 画面フェーダービュー */
 export class FaderView {
@@ -16,7 +15,7 @@ export class FaderView {
   constructor() {
     const geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT);
     const material = new THREE.MeshBasicMaterial({
-      color: 'rgb(0, 255, 0)',
+      color: 'rgb(30, 30, 30)',
       transparent: true
     });
     this._mesh = new THREE.Mesh(geometry, material);
@@ -46,16 +45,13 @@ export class FaderView {
    */
   engage(model: FaderModel): void {
     this._mesh.material.opacity = model.opacity;
-  }
 
-  /**
-   * 画面サイズを変更する
-   *
-   * @param width 横
-   * @param height 縦
-   */
-  changeScreenSize(width: number, height: number): void {
-    this._mesh.scale.x = width / MESH_WIDTH;
-    this._mesh.scale.y = height / MESH_HEIGHT;
+    const isTransparent = 0 < model.opacity;
+    this._mesh.scale.x = isTransparent
+      ? model.width / MESH_WIDTH
+      : 1;
+    this._mesh.scale.y = isTransparent
+      ? model.height / MESH_HEIGHT
+      : 1;
   }
 }

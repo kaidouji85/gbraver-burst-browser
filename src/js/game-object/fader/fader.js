@@ -8,6 +8,7 @@ import type {PreRender} from "../../action/game-loop/pre-render";
 import type {Update} from "../../action/game-loop/update";
 import type {FaderModel} from "./model/fader-model";
 import {createInitialValue} from "./model/initial-value";
+import {preRender} from "./model/pre-render";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -53,7 +54,7 @@ export class Fader {
    * @param action アクション
    */
   _onUpdate(action: Update): void {
-    this._view.engage(this._model);
+    // TODO アニメーションの更新を追加する
   }
 
   /**
@@ -62,6 +63,7 @@ export class Fader {
    * @param action アクション
    */
   _onPreRender(action: PreRender): void {
-    this._view.changeScreenSize(action.rendererDOM.clientWidth, action.rendererDOM.clientHeight);
+    this._model = preRender(this._model, action);
+    this._view.engage(this._model);
   }
 }
