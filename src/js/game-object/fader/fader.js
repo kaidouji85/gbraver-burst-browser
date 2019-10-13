@@ -6,17 +6,22 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import type {Update} from "../../action/game-loop/update";
+import type {FaderModel} from "./model/fader-model";
+import {createInitialValue} from "./model/initial-value";
 
+/** コンストラクタのパラメータ */
 type Param = {
   listener: Observable<GameObjectAction>
 };
 
 /** 画面フェーダー */
 export class Fader {
+  _model: FaderModel;
   _view: FaderView;
   _subscription: Subscription;
 
   constructor(param: Param) {
+    this._model = createInitialValue();
     this._view = new FaderView();
     this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
@@ -48,7 +53,7 @@ export class Fader {
    * @param action アクション
    */
   _onUpdate(action: Update): void {
-    this._view.engage();
+    this._view.engage(this._model);
   }
 
   /**

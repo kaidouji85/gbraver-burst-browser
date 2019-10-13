@@ -3,6 +3,8 @@
 import * as THREE from 'three';
 import {HUD_FADER_ZINDEX} from "../../../zindex/hud-zindex";
 import {FADE_RENDER_ORDER} from "../../../render-order/hud-render-order";
+import type {FaderModel} from "../model/fader-model";
+import {mode} from "../../../webpack/mode";
 
 export const MESH_WIDTH = 100;
 export const MESH_HEIGHT = 100;
@@ -37,10 +39,13 @@ export class FaderView {
     return this._mesh;
   }
 
-  // TODO パラメータにモデルを追加する
-  /** モデルをビューに反映させる */
-  engage(): void {
-    this._mesh.material.opacity = 0;
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   */
+  engage(model: FaderModel): void {
+    this._mesh.material.opacity = model.opacity;
   }
 
   /**
