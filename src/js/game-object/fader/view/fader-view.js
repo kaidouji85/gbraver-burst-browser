@@ -2,6 +2,7 @@
 
 import * as THREE from 'three';
 import {HUD_FADER_ZINDEX} from "../../../zindex/hud-zindex";
+import {FADE_RENDER_ORDER} from "../../../render-order/hud-render-order";
 
 export const MESH_WIDTH = 100;
 export const MESH_HEIGHT = 100;
@@ -18,7 +19,7 @@ export class FaderView {
     });
     this._mesh = new THREE.Mesh(geometry, material);
     this._mesh.position.z = HUD_FADER_ZINDEX;
-    this._mesh.renderOrder = 100;
+    this._mesh.renderOrder = FADE_RENDER_ORDER;
   }
 
   /** デストラクタ相当の処理 */
