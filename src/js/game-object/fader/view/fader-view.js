@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
+import {HUD_FADER_ZINDEX} from "../../../zindex/hud-zindex";
 
 export const MESH_WIDTH = 100;
 export const MESH_HEIGHT = 100;
@@ -12,9 +13,12 @@ export class FaderView {
   constructor() {
     const geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT);
     const material = new THREE.MeshBasicMaterial({
-      color: 'rgb(0, 255, 0)'
+      color: 'rgb(0, 255, 0)',
+      transparent: true
     });
     this._mesh = new THREE.Mesh(geometry, material);
+    this._mesh.position.z = HUD_FADER_ZINDEX;
+    this._mesh.renderOrder = 100;
   }
 
   /** デストラクタ相当の処理 */
@@ -30,5 +34,22 @@ export class FaderView {
    */
   getObject3D(): THREE.Object3D {
     return this._mesh;
+  }
+
+  // TODO パラメータにモデルを追加する
+  /** モデルをビューに反映させる */
+  engage(): void {
+    this._mesh.material.opacity = 0;
+  }
+
+  /**
+   * 画面サイズを変更する
+   *
+   * @param width 横
+   * @param height 縦
+   */
+  changeScreenSize(width: number, height: number): void {
+    this._mesh.scale.x = width / MESH_WIDTH;
+    this._mesh.scale.y = height / MESH_HEIGHT;
   }
 }

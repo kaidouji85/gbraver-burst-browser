@@ -1,9 +1,11 @@
-/// @flow
+// @flow
 
 import * as THREE from 'three';
 import {FaderView} from "./view/fader-view";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {PreRender} from "../../action/game-loop/pre-render";
+import type {Update} from "../../action/game-loop/update";
 
 type Param = {
   listener: Observable<GameObjectAction>
@@ -17,7 +19,11 @@ export class Fader {
   constructor(param: Param) {
     this._view = new FaderView();
     this._subscription = param.listener.subscribe(action => {
-
+      if (action.type === 'Update') {
+        this._onUpdate(action);
+      }else if (action.type === 'PreRender') {
+        this._onPreRender(action);
+      }
     });
   }
 
@@ -34,5 +40,23 @@ export class Fader {
    */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * アップデートの際の処理
+   * 
+   * @param action アクション
+   */
+  _onUpdate(action: Update): void {
+    this._view.engage();
+  }
+
+  /**
+   * プリレンダーの際の処理
+   *
+   * @param action アクション
+   */
+  _onPreRender(action: PreRender): void {
+    this._view.changeScreenSize(action.rendererDOM.clientWidth, action.rendererDOM.clientHeight);
   }
 }

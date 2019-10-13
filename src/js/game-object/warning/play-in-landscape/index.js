@@ -8,6 +8,7 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {isPortrait} from "../../../orientation/portrait";
+import {HUD_WARNING_ZINDEX} from "../../../zindex/hud-zindex";
 
 /** キャンバスサイズ */
 export const CANVAS_SIZE = 512;
@@ -61,6 +62,7 @@ export class PlayInLandscape {
   _preRender(action: PreRender): void {
     const scale = this._getScale(action.rendererDOM.clientWidth);
     this._mesh.getObject3D().scale.set(scale, scale, scale);
+    this._mesh.getObject3D().position.z = HUD_WARNING_ZINDEX;
 
     const opacity = isPortrait(action.rendererDOM.clientWidth, action.rendererDOM.clientHeight)
       ? 1
