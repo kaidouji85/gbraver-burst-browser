@@ -12,6 +12,7 @@ import {PlayInLandscape} from "../../../../../game-object/warning/play-in-landsc
 import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 
+// TODO クラスにする
 /** HUDレイヤーのゲームオブジェクト */
 export type HUDGameObjects = {
   batterySelector: BatterySelector;
@@ -64,7 +65,9 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
 
   const playInLandscape = new PlayInLandscape(resources, listener);
 
-  const fader = new Fader();
+  const fader = new Fader({
+    listener: listener
+  });
 
   return {
     batterySelector: batterySelector,
