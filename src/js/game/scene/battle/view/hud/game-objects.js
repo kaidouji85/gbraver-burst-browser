@@ -66,6 +66,7 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
   const playInLandscape = new PlayInLandscape(resources, listener);
 
   const fader = new Fader({
+    isVisible: true,
     listener: listener
   });
 

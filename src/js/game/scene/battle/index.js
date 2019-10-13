@@ -106,6 +106,7 @@ export class BattleScene implements Scene {
    */
   async _start(stateHistory: GameState[]): Promise<void> {
     const animation = delay(500)
+      .chain(this._view.hud.gameObjects.fader.fadeIn())
       .chain(stateHistoryAnimation(this._view, this._state, stateHistory));
     await animation.play();
   }
