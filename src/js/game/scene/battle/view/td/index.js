@@ -10,7 +10,6 @@ import type {Render} from "../../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../../action/dom-event";
 import {TDPlayer} from "./player";
-import {appendTDPlayer, destructorTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
@@ -75,7 +74,7 @@ export class ThreeDimensionLayer {
       enemyTDObject(param.resources, enemy, gameObjectAction)
     ];
     this.players.forEach(v => {
-      appendTDPlayer(this.scene, v);
+      v.appendScene(this.scene);
     });
 
     this.gameObjects = new TDGameObjects(param.resources, gameObjectAction);
@@ -89,7 +88,7 @@ export class ThreeDimensionLayer {
   /** デストラクタ */
   destructor(): void {
     this.players.forEach(v => {
-      destructorTDPlayer(v);
+      v.destructor();
     });
     this.gameObjects.destructor();
     this.camera.destructor();

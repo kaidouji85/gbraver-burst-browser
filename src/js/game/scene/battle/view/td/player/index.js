@@ -72,32 +72,17 @@ export class TDPlayer<T: ArmDozerSprite> {
 
     return null;
   }
-}
 
-/**
- * 3Dプレイヤーゲームオブジェクトをシーンに追加するヘルパー関数
- *
- * @param scene シーン
- * @param player シーンに追加するオブジェクト群
- */
-export function appendTDPlayer(scene: THREE.Scene, player: TDPlayer<ArmDozerSprite>): void {
-  scene.add(player.sprite.getObject3D());
-  scene.add(player.hitMark.spark.getObject3D());
-  scene.add(player.batteryNumber.getObject3D());
-  scene.add(player.recoverBattery.getObject3D());
-  scene.add(player.damageIndicator.getObject3D());
-}
-
-/**
- * 3Dレイヤーのプレイヤー関係オブジェクトのデストラクタ相当処理
- * リソース解放等を行う
- *
- * @param target リソース解放を行う対象
- */
-export function destructorTDPlayer(target: TDPlayer<ArmDozerSprite>): void {
-  target.sprite.destructor();
-  target.batteryNumber.destructor();
-  target.damageIndicator.destructor();
-  target.hitMark.spark.destructor();
-  target.recoverBattery.destructor();
+  /**
+   * 3Dレイヤープレイヤーをシーンに追加する
+   *
+   * @param scene 追加対象のシーン
+   */
+  appendScene(scene: THREE.Scene): void {
+    scene.add(this.sprite.getObject3D());
+    scene.add(this.hitMark.spark.getObject3D());
+    scene.add(this.batteryNumber.getObject3D());
+    scene.add(this.recoverBattery.getObject3D());
+    scene.add(this.damageIndicator.getObject3D());
+  }
 }
