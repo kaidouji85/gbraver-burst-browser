@@ -8,21 +8,43 @@ import {Spark} from "../../../../../../game-object/hitmark/spark/spark";
 import * as THREE from "three";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 
+/** ヒットマークをまとめたもの */
+type HitMark = {
+  spark: Spark
+};
+
+/** コンストラクタのパラメータ */
+type Param<T> = {
+  playerId: PlayerId,
+  sprite: T,
+  hitMark: HitMark,
+  batteryNumber: BatteryNumber,
+  recoverBattery: RecoverBattery,
+  damageIndicator: DamageIndicator,
+};
+
 /**
  * 3Dレイヤーのプレイヤー関係オブジェクト
  *
  * @type T アームドーザスプライト
  */
-export type TDPlayer<T> = {
-  playerId: PlayerId,
-  sprite: T,
-  hitMark: {
-    spark: Spark
-  },
-  batteryNumber: BatteryNumber,
-  recoverBattery: RecoverBattery,
-  damageIndicator: DamageIndicator,
-};
+export class TDPlayer<T> {
+  playerId: PlayerId;
+  sprite: T;
+  hitMark: HitMark;
+  batteryNumber: BatteryNumber;
+  recoverBattery: RecoverBattery;
+  damageIndicator: DamageIndicator;
+
+  constructor(param: Param<T>) {
+    this.playerId = param.playerId;
+    this.sprite = param.sprite;
+    this.hitMark = param.hitMark;
+    this.batteryNumber = param.batteryNumber;
+    this.recoverBattery = param.recoverBattery;
+    this.damageIndicator = param.damageIndicator;
+  }
+}
 
 /**
  * 3Dプレイヤーゲームオブジェクトをシーンに追加するヘルパー関数
@@ -56,10 +78,10 @@ export function appendTDPlayer(scene: THREE.Scene, player: TDPlayer<ArmDozerSpri
  */
 export function overWriteTDSprite<OLD, NEW>(target: TDPlayer<OLD>, sprite: NEW): TDPlayer<NEW> {
   const ignoreSprite: $Diff<TDPlayer<OLD>, {sprite: OLD}> = target;
-  return {
+  return new TDPlayer<NEW>({
     ...ignoreSprite,
     sprite: sprite
-  };
+  });
 }
 
 /**

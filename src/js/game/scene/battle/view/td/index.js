@@ -9,7 +9,7 @@ import type {GameLoop} from "../../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../../action/dom-event";
-import type {TDPlayer} from "./player";
+import {TDPlayer} from "./player";
 import {appendTDPlayer, destructorTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
