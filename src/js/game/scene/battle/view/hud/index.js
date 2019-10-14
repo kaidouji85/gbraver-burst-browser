@@ -12,7 +12,6 @@ import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../../action/game-loop/render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import type {HUDPlayer} from "./player";
-import {appendHUDPlayer, destructorHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
 import type {HUDGameObjects} from "./game-objects";
@@ -81,7 +80,7 @@ export class HudLayer {
       enemyHUDObjects(param.resources, gameObjectAction, enemy),
     ];
     this.players.forEach(v => {
-      appendHUDPlayer(this.scene, v);
+      v.appendScene(this.scene);
     });
 
     this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
@@ -95,7 +94,7 @@ export class HudLayer {
   /** デストラクタ */
   destructor(): void {
     this.players.forEach(v => {
-      destructorHUDPlayer(v);
+      v.destructor();
     });
     destructorHUDGameObjects(this.gameObjects);
     this.camera.destructor();
