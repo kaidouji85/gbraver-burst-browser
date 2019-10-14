@@ -38,7 +38,7 @@ export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneSta
  * @return バーストアニメーション
  */
 function armdozerAnimation(param: BurstAnimationParam<ArmdozerState, Burst>): Animate {
-  const sprite = param.burstPlayerTD.sprite instanceof ShinBraver;
+  const sprite = param.burstPlayerTD.sprite;
   if (sprite instanceof ShinBraver) {
     const shinBraver = overWriteSprite(param, sprite);
     return shinBraverBurst(shinBraver);
