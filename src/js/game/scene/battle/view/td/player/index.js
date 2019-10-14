@@ -55,6 +55,21 @@ export class TDPlayer<T: ArmDozerSprite> {
   }
 
   /**
+   * スプライトを上書きする
+   *
+   * @param sprite 上書き内容
+   * @return 上書き結果
+   */
+  overWriteSprite<NEW: ArmDozerSprite>(sprite: NEW): TDPlayer<NEW> {
+    const ignoreSprite: $Diff<TDPlayer<T>, {sprite: T}> = this;
+    return new TDPlayer<NEW>({
+      ...ignoreSprite,
+      sprite: sprite
+    });
+  }
+  
+  // TODO 削除する
+  /**
    * スプライトを指定したクラスでキャストする
    * 本メソッドで生成したクラスは、呼び出し元クラスと同じリソースである
    *
