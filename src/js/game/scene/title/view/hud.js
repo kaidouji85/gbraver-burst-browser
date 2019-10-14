@@ -13,7 +13,6 @@ import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overl
 import type {Resources} from "../../../../resource";
 import type {OverlapAction} from "../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../action/game-object-action/create-listener";
-import type {EndTitle} from "../../../../action/game/end-title";
 import type {MouseDown} from "../../../../action/dom-event/mouse-down";
 import type {TouchStart} from "../../../../action/dom-event/touch-start";
 import type {TitleSceneAction} from "../../../../action/title-scene/title-scene-action";

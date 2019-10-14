@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import {resourceBasePath} from "../../../resource/resource-base-path";
 
 /** プロパティ */
 export type Props = {
