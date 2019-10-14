@@ -17,11 +17,17 @@ import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/bat
  * @return アニメーション
  */
 export function attackAnimation(param: BattleAnimationParam<ArmDozerSprite, BattleResult>): Animate {
+
   const sprite = param.attackerTD.sprite;
+
   if (sprite instanceof ShinBraver) {
-    return shinBraverAttack(overWriteAttackerTD(param, sprite));
-  } else if (sprite instanceof NeoLandozer) {
-    return neoLandozerAttack(overWriteAttackerTD(param, sprite))
+    const shinBraver = overWriteAttackerTD(param, sprite);
+    return shinBraverAttack(shinBraver);
+  }
+
+  if (sprite instanceof NeoLandozer) {
+    const neoLandozer = overWriteAttackerTD(param, sprite);
+    return neoLandozerAttack(neoLandozer);
   }
 
   return emptyAttackAnimation(param);

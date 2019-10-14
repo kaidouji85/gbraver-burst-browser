@@ -37,10 +37,6 @@ html, body {
     align-items: center;
 }
 
-.loading__logo {
-    padding-bottom: 3em;
-}
-
 .loading__completed-rate {
     display: flex;
     flex-direction: column;

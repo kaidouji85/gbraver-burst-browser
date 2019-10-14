@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from "three";
-import {SPRITE_RENDER_ORDER} from "./render-order";
+import {SPRITE_RENDER_ORDER} from "../render-order/td-render-order";
 import {normalizeTextureOffset} from "../texture/animation/texture-offset";
 import {animatedTexture} from "../texture/animation/texture-animation";
 

@@ -1,12 +1,13 @@
 // @flow
 
+import TWEEN from "@tweenjs/tween.js";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TitleHudLayer} from "./hud";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../action/game-loop/render";
 import type {Resources} from "../../../../resource";
-import type {EndTitle} from "../../../../action/game/end-title";
+import type {TitleSceneAction} from "../../../../action/title-scene/title-scene-action";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -21,7 +22,7 @@ type Param = {
 /** イベント通知 */
 type Notifier = {
   render: Observable<Render>,
-  endTitle: Observable<EndTitle>
+  titleAction: Observable<TitleSceneAction>
 };
 
 /** タイトルシーンビュー */
@@ -62,7 +63,7 @@ export class TitleView {
   notifier(): Notifier {
     return {
       render: this.hud.notifier().render,
-      endTitle: this.hud.notifier().endTitle,
+      titleAction: this.hud.notifier().titleAction,
     }
   }
 
@@ -72,6 +73,7 @@ export class TitleView {
    * @param action アクション
    */
   _onGameLoop(action: GameLoop): void {
+    TWEEN.update(action.time);
     this._hudGameLoop.next(action);
   }
 }

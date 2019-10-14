@@ -13,9 +13,10 @@ import {toOverlapObservable} from "../../../../action/overlap/dom-event-to-overl
 import type {Resources} from "../../../../resource";
 import type {OverlapAction} from "../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../action/game-object-action/create-listener";
-import type {EndTitle} from "../../../../action/game/end-title";
 import type {MouseDown} from "../../../../action/dom-event/mouse-down";
 import type {TouchStart} from "../../../../action/dom-event/touch-start";
+import type {TitleSceneAction} from "../../../../action/title-scene/title-scene-action";
+import {Fader} from "../../../../game-object/fader/fader";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -30,7 +31,7 @@ type Param = {
 /** イベント通知 */
 type Notifier = {
   render: Observable<Render>,
-  endTitle: Observable<EndTitle>
+  titleAction: Observable<TitleSceneAction>,
 };
 
 /** タイトルシーン HUDレイヤー */
@@ -38,20 +39,21 @@ export class TitleHudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
   titleLogo: TitleLogo;
+  fader: Fader;
 
   _rendererDOM: HTMLElement;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
   _overlap: Observable<OverlapAction>;
-  _endTitle: Subject<EndTitle>;
+  _titleAction: Subject<TitleSceneAction>;
   _subscription: Subscription[];
 
   constructor(param: Param) {
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = new Subject();
-    this._endTitle = new Subject();
+    this._titleAction = new Subject();
     this._rendererDOM = param.rendererDOM;
 
     this.scene = new THREE.Scene();
@@ -66,6 +68,12 @@ export class TitleHudLayer {
 
     this.titleLogo = new TitleLogo(param.resources, gameObjectAction);
     this.scene.add(this.titleLogo.getObject3D());
+
+    this.fader = new Fader({
+      isVisible: true,
+      listener: gameObjectAction
+    });
+    this.scene.add(this.fader.getObject3D());
 
     this._subscription = [
       param.listener.gameLoop.subscribe(action => {
@@ -98,7 +106,7 @@ export class TitleHudLayer {
   notifier(): Notifier {
     return {
       render: this._render,
-      endTitle: this._endTitle,
+      titleAction: this._titleAction,
     };
   }
 
@@ -132,7 +140,7 @@ export class TitleHudLayer {
    * @param action アクション
    */
   _onMouseDown(action: MouseDown): void {
-    this._endTitle.next({type: 'EndTitle'});
+    this._titleAction.next({type: 'ScreenTouch'});
   }
 
   /**
@@ -141,6 +149,6 @@ export class TitleHudLayer {
    * @param action アクション
    */
   _onTouchStart(action: TouchStart): void {
-    this._endTitle.next({type: 'EndTitle'});
+    this._titleAction.next({type: 'ScreenTouch'});
   }
 }
