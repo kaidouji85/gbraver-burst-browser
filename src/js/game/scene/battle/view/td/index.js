@@ -14,8 +14,7 @@ import {appendTDPlayer, destructorTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
-import type {TDGameObjects} from "./game-objects";
-import {appendTDGameObjects, createTDGameObjects, destructorTDGameObjects} from "./game-objects";
+import {TDGameObjects} from "./game-objects";
 import {toOverlapObservable} from "../../../../../action/overlap/dom-event-to-overlap";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../action/game-object-action/create-listener";
@@ -79,8 +78,8 @@ export class ThreeDimensionLayer {
       appendTDPlayer(this.scene, v);
     });
 
-    this.gameObjects = createTDGameObjects(param.resources, gameObjectAction);
-    appendTDGameObjects(this.scene, this.gameObjects);
+    this.gameObjects = new TDGameObjects(param.resources, gameObjectAction);
+    this.gameObjects.appendScene(this.scene);
 
     this._subscription = param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);
@@ -92,7 +91,7 @@ export class ThreeDimensionLayer {
     this.players.forEach(v => {
       destructorTDPlayer(v);
     });
-    destructorTDGameObjects(this.gameObjects);
+    this.gameObjects.destructor();
     this.camera.destructor();
     this.scene.dispose();
     this._subscription.unsubscribe();

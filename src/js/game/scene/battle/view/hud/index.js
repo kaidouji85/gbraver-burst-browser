@@ -12,11 +12,9 @@ import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../../action/game-loop/render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import type {HUDPlayer} from "./player";
-import {appendHUDPlayer, destructorHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
-import type {HUDGameObjects} from "./game-objects";
-import {appendHUDGameObjects, createHUDGameObjects, destructorHUDGameObjects} from "./game-objects";
+import {HUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../action/game-object-action/create-listener";
 
@@ -81,11 +79,11 @@ export class HudLayer {
       enemyHUDObjects(param.resources, gameObjectAction, enemy),
     ];
     this.players.forEach(v => {
-      appendHUDPlayer(this.scene, v);
+      v.appendScene(this.scene);
     });
 
-    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
-    appendHUDGameObjects(this.scene, this.gameObjects);
+    this.gameObjects = new HUDGameObjects(param.resources, gameObjectAction, player);
+    this.gameObjects.appendScene(this.scene);
 
     this._subscription = param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);
@@ -95,9 +93,9 @@ export class HudLayer {
   /** デストラクタ */
   destructor(): void {
     this.players.forEach(v => {
-      destructorHUDPlayer(v);
+      v.destructor();
     });
-    destructorHUDGameObjects(this.gameObjects);
+    this.gameObjects.destructor();
     this.camera.destructor();
     this.scene.dispose();
     this._subscription.unsubscribe();
@@ -111,7 +109,7 @@ export class HudLayer {
   notifier(): Notifier {
     return {
       render: this._render,
-      battleAction: this.gameObjects.notifier.battleSceneAction
+      battleAction: this.gameObjects.notifier().battleAction
     };
   }
 

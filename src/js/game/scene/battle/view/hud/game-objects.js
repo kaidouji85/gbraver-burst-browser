@@ -12,95 +12,87 @@ import {PlayInLandscape} from "../../../../../game-object/warning/play-in-landsc
 import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 
-// TODO クラスにする
+/** イベント通知 */
+type Notifier = {
+  battleAction: Observable<BattleSceneAction>
+}
+
 /** HUDレイヤーのゲームオブジェクト */
-export type HUDGameObjects = {
+export class HUDGameObjects {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
   playInLandscape: PlayInLandscape;
   fader: Fader;
-  notifier: {
-    battleSceneAction: Observable<BattleSceneAction>
+
+  _battleAction: Subject<BattleSceneAction>;
+
+  constructor(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player) {
+    this._battleAction = new Subject();
+
+    this.batterySelector = new BatterySelector({
+      listener: listener,
+      maxBattery: playerInfo.armdozer.maxBattery,
+      resources: resources,
+      onBatteryChange: (battery: number) => {
+        this._battleAction.next({
+          type: 'changeBattery',
+          battery: battery
+        });
+      },
+      onOkButtonPush: () => {
+        this._battleAction.next({
+          type: 'decideBattery',
+          battery: this.batterySelector.getBattery()
+        });
+      }
+    });
+
+    this.burstButton = new BurstButton({
+      resources: resources,
+      listener: listener,
+      onPush: () => {
+        this._battleAction.next({
+          type: 'doBurst'
+        });
+      }
+    });
+
+    this.playInLandscape = new PlayInLandscape(resources, listener);
+
+    this.fader = new Fader({
+      isVisible: true,
+      listener: listener
+    });
   }
-};
 
-/**
- * HUDレイヤーゲームオブジェクトを生成する
- *
- * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
- * @param playerInfo プレイヤーの情報
- * @return HUDゲームオブジェクト
- */
-export function createHUDGameObjects(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player): HUDGameObjects {
-  const battleSceneAction = new Subject();
+  /** デストラクタ相当の処理 */
+  destructor(): void {
+    this.batterySelector.destructor();
+    this.burstButton.destructor();
+    this.playInLandscape.destructor();
+    this.fader.destructor();
+  }
 
-  const batterySelector = new BatterySelector({
-    listener: listener,
-    maxBattery: playerInfo.armdozer.maxBattery,
-    resources: resources,
-    onBatteryChange: (battery: number) => {
-      battleSceneAction.next({
-        type: 'changeBattery',
-        battery: battery
-      });
-    },
-    onOkButtonPush: () => {
-      battleSceneAction.next({
-        type: 'decideBattery',
-        battery: batterySelector.getBattery()
-      });
-    }
-  });
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      battleAction: this._battleAction
+    };
+  }
 
-  const burstButton = new BurstButton({
-    resources: resources,
-    listener: listener,
-    onPush: () => {
-      battleSceneAction.next({
-        type: 'doBurst'
-      });
-    }
-  });
-
-  const playInLandscape = new PlayInLandscape(resources, listener);
-
-  const fader = new Fader({
-    isVisible: true,
-    listener: listener
-  });
-
-  return {
-    batterySelector: batterySelector,
-    burstButton: burstButton,
-    playInLandscape: playInLandscape,
-    fader: fader,
-    notifier: {
-      battleSceneAction: battleSceneAction
-    }
-  };
-}
-
-/**
- * HUDレイヤーゲームオブジェクトをシーンに追加する
- *
- * @param scene 追加するシーン
- * @param target HUDレイヤーゲームオブジェクト
- */
-export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects): void {
-  scene.add(target.batterySelector.getObject3D());
-  scene.add(target.burstButton.getObject3D());
-  scene.add(target.playInLandscape.getObject3D());
-  scene.add(target.fader.getObject3D());
-}
-
-/**
- * HUDゲームオブジェクトのデストラクタ相当処理
- *
- * @param target デストラクト対象
- */
-export function destructorHUDGameObjects(target: HUDGameObjects): void {
-  target.batterySelector.destructor();
-  target.burstButton.destructor();
-  target.playInLandscape.destructor();
+  /**
+   * HUDゲームオブジェクトをシーンに追加する
+   *
+   * @param scene 追加対象シーン
+   */
+  appendScene(scene: THREE.Scene): void {
+    scene.add(this.batterySelector.getObject3D());
+    scene.add(this.burstButton.getObject3D());
+    scene.add(this.playInLandscape.getObject3D());
+    scene.add(this.fader.getObject3D());
+  }
 }
