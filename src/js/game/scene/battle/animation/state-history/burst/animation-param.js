@@ -21,7 +21,7 @@ import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdoz
  * @type SPRITE スプライト
  * @type BURST バースト
  */
-export type BurstAnimationParam<SPRITE: ArmDozerSprite, BURST> = {
+export type BurstAnimationParam<SPRITE: ArmDozerSprite, BURST: Burst> = {
   burstPlayerState: PlayerState,
   burstPlayerTD: TDPlayer<SPRITE>,
   burstPlayerHUD: HUDPlayer,
@@ -72,7 +72,7 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
  * @param sprite 上書き内容
  * @return 上書き結果
  */
-export function overWriteSprite<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, BURST>(
+export function overWriteSprite<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, BURST: Burst>(
   param: BurstAnimationParam<OLD_SPRITE, BURST>,
   sprite: NEW_SPRITE
 ): BurstAnimationParam<NEW_SPRITE, BURST> {
@@ -91,7 +91,7 @@ export function overWriteSprite<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozer
  * @param burst 上書きするバースト
  * @return 更新結果
  */
-export function overWriteBurst<SPRITE: ArmDozerSprite, OLD_BURST, NEW_BURST>(
+export function overWriteBurst<SPRITE: ArmDozerSprite, OLD_BURST: Burst, NEW_BURST: Burst>(
   param: BurstAnimationParam<SPRITE, OLD_BURST>,
   burst: NEW_BURST
 ): BurstAnimationParam<SPRITE, NEW_BURST>

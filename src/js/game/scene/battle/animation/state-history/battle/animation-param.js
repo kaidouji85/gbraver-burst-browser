@@ -21,7 +21,7 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
  * @type SPRITE 攻撃側スプライト
  * @type RESULT 戦闘結果
  */
-export type BattleAnimationParam<SPRITE: ArmDozerSprite, RESULT> = {
+export type BattleAnimationParam<SPRITE: ArmDozerSprite, RESULT: BattleResult> = {
   attackerBattery: number,
   attackerState: PlayerState,
   attackerTD: TDPlayer<SPRITE>,
@@ -46,7 +46,11 @@ export type BattleAnimationParam<SPRITE: ArmDozerSprite, RESULT> = {
  * @param gameState ゲームステート
  * @return 戦闘アニメパラメータ
  */
-export function toBattleAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BattleAnimationParam<ArmDozerSprite, BattleResult> {
+export function toBattleAnimationParam(
+  view: BattleSceneView,
+  sceneState: BattleSceneState,
+  gameState: GameState
+): ?BattleAnimationParam<ArmDozerSprite, BattleResult> {
   if (gameState.effect.name !== 'Battle') {
     return null;
   }
@@ -81,14 +85,20 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
 }
 
 /**
- * 戦闘アニメーションパラメータの戦闘結果を引数の内容で上書きする
- * さらに、resultのデータ型を引数の内容に変更する
+ * 戦闘アニメーションパラメータの戦闘結果を、引数の内容で上書きする
+ * 本関数は、戦闘結果をキャストした結果を上書きする想定である
+ * 例)
+ * const param: BattleAnimationParam<ArmdozerSprite, BattleResult> = ...;
+ * const result = param.result;
+ * if (result.name === 'NormalHit') {
+ *   const normalHit: BattleAnimationParam<ArmdozerSprite, NormalHit> = overWriteResult(param, result);
+ * }
  *
  * @param param 上書き対象
  * @param result 上書きする戦闘結果
  * @return 上書き結果
  */
-export function overWriteResult<SPRITE: ArmDozerSprite, OLD_RESULT, NEW_RESULT>(
+export function overWriteResult<SPRITE: ArmDozerSprite, OLD_RESULT: BattleResult, NEW_RESULT: BattleResult>(
   param: BattleAnimationParam<SPRITE, OLD_RESULT>,
   result: NEW_RESULT
 ): BattleAnimationParam<SPRITE, NEW_RESULT> {
@@ -106,7 +116,7 @@ export function overWriteResult<SPRITE: ArmDozerSprite, OLD_RESULT, NEW_RESULT>(
  * @param sprite　上書き内容
  * @return 上書き結果
  */
-export function overWriteAttackerTD<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, RESULT>(
+export function overWriteAttackerTD<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, RESULT: BattleResult>(
   param: BattleAnimationParam<OLD_SPRITE, RESULT>,
   sprite: NEW_SPRITE
 ): BattleAnimationParam<NEW_SPRITE, RESULT> {
