@@ -6,7 +6,7 @@ import {shinBraverAttack} from "./shin-braver";
 import {neoLandozerAttack} from "./neo-landozer";
 import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam} from "../animation-param";
-import {castAttackerTD} from "../animation-param";
+import {overWriteAttackerTD} from "../animation-param";
 import type {ArmDozerSprite} from "../../../../../../../game-object/armdozer/armdozer-sprite";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 
@@ -17,13 +17,16 @@ import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/bat
  * @return アニメーション
  */
 export function attackAnimation(param: BattleAnimationParam<ArmDozerSprite, BattleResult>): Animate {
-  const shinBraver = castAttackerTD(param, ShinBraver);
-  if (shinBraver) {
+
+  const sprite = param.attackerTD.sprite;
+
+  if (sprite instanceof ShinBraver) {
+    const shinBraver = overWriteAttackerTD(param, sprite);
     return shinBraverAttack(shinBraver);
   }
 
-  const neoLandozer = castAttackerTD(param, NeoLandozer);
-  if (neoLandozer) {
+  if (sprite instanceof NeoLandozer) {
+    const neoLandozer = overWriteAttackerTD(param, sprite);
     return neoLandozerAttack(neoLandozer);
   }
 

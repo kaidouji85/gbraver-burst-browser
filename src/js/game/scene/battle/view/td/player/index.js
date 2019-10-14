@@ -56,6 +56,14 @@ export class TDPlayer<T: ArmDozerSprite> {
 
   /**
    * スプライトを上書きする
+   * 本メソッドはスプライトをキャストした結果を上書きすることを想定している
+   * 例)
+   *
+   * const player: TDPlayer<ArmdozerSprite> = ...;
+   * const sprite = player.sprite;
+   * if (sprite instanceof ShinBraver) {
+   *   const shinBraver: TDPlayer<ShinBraver> = player.overWriteSprite(sprite);
+   * }
    *
    * @param sprite 上書き内容
    * @return 上書き結果
@@ -66,26 +74,6 @@ export class TDPlayer<T: ArmDozerSprite> {
       ...ignoreSprite,
       sprite: sprite
     });
-  }
-  
-  // TODO 削除する
-  /**
-   * スプライトを指定したクラスでキャストする
-   * 本メソッドで生成したクラスは、呼び出し元クラスと同じリソースである
-   *
-   * @param castClass キャストするクラス
-   * @return キャスト結果、キャストできない場合はnullを返す
-   */
-  cast<NEW: ArmDozerSprite>(castClass: Class<NEW>): ?TDPlayer<NEW> {
-    if (this.sprite instanceof  castClass) {
-      const ignoreSprite: $Diff<TDPlayer<T>, {sprite: T}> = this;
-      return new TDPlayer<NEW>({
-        ...ignoreSprite,
-        sprite: this.sprite
-      });
-    }
-
-    return null;
   }
 
   /**
