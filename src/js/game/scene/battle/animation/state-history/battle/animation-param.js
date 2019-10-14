@@ -101,20 +101,24 @@ export function overWriteResult<SPRITE, OLD_RESULT, NEW_RESULT>(
 }
 
 /**
- * 戦闘アニメーションパラメータのスプライトを引数の内容で上書きする
+ * 戦闘アニメーションパラメータのスプライトを引数の内容でキャストする
  *
  * @param param 上書き対象
- * @param sprite 上書きするスプライト
- * @return 上書き結果
+ * @param castClass キャスト対象のクラス
+ * @return キャスト結果、キャストできない場合はnullを返す
  */
-export function overWriteAttackerTD<OLD_SPRITE, NEW_SPRITE, RESULT>(
+export function castAttackerTD<OLD_SPRITE, NEW_SPRITE, RESULT>(
   param: BattleAnimationParam<OLD_SPRITE, RESULT>,
-  sprite: NEW_SPRITE
-): BattleAnimationParam<NEW_SPRITE, RESULT> {
+  castClass: Class<NEW_SPRITE>
+): ?BattleAnimationParam<NEW_SPRITE, RESULT> {
   const ignoreAttackerTD: $Diff<BattleAnimationParam<OLD_SPRITE, RESULT>, { attackerTD: TDPlayer<OLD_SPRITE> }> = param;
-  const attackerTD = overWriteTDSprite(param.attackerTD, sprite);
-  return {
-    ...ignoreAttackerTD,
-    attackerTD: attackerTD
-  };
+  const attackerTD = param.attackerTD.cast(castClass);
+  if (attackerTD) {
+    return {
+      ...ignoreAttackerTD,
+      attackerTD: attackerTD
+    };
+  }
+
+  return null
 }

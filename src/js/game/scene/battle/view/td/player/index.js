@@ -44,6 +44,24 @@ export class TDPlayer<T> {
     this.recoverBattery = param.recoverBattery;
     this.damageIndicator = param.damageIndicator;
   }
+
+  /**
+   * スプライトを指定したクラスでキャストする
+   *
+   * @param castClass キャストするクラス
+   * @return キャスト結果、キャストできない場合はnullを返す
+   */
+  cast<NEW>(castClass: Class<NEW>): ?TDPlayer<NEW> {
+    if (this.sprite instanceof  castClass) {
+      const ignoreSprite: $Diff<TDPlayer<T>, {sprite: T}> = this;
+      return new TDPlayer<NEW>({
+        ...ignoreSprite,
+        sprite: this.sprite
+      });
+    }
+
+    return null;
+  }
 }
 
 /**
