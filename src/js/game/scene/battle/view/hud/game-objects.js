@@ -70,6 +70,7 @@ export class HUDGameObjects {
     this.batterySelector.destructor();
     this.burstButton.destructor();
     this.playInLandscape.destructor();
+    this.fader.destructor();
   }
 
   /**
