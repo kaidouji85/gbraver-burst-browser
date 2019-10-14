@@ -2,12 +2,13 @@
 
 import type {Scene} from "../scene";
 import type {Resources} from "../../../resource";
-import {Observable} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
 import type {DOMEvent} from "../../../action/dom-event";
 import {TitleView} from "./view";
 import type {Render} from "../../../action/game-loop/render";
 import type {EndTitle} from "../../../action/game/end-title";
+import type {ScreenTouch} from "../../../action/title-scene/title-scene-action";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -28,8 +29,11 @@ type Notifier = {
 /** タイトルシーン */
 export class TitleScene implements Scene {
   _view: TitleView;
+  _endTitle: Subject<EndTitle>;
+  _subscription: Subscription[];
 
   constructor(param: Param) {
+    this._endTitle = new Subject();
     this._view = new TitleView({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
@@ -38,11 +42,21 @@ export class TitleScene implements Scene {
         domEvent: param.listener.domEvent
       }
     });
+    this._subscription = [
+      this._view.notifier().titleAction.subscribe(action => {
+        if (action.type === 'ScreenTouch') {
+          this._onScreenTouch(action);
+        }
+      })
+    ];
   }
 
   /** デストラクタ相当の処理 */
   destructor() {
     this._view.destructor();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -53,7 +67,17 @@ export class TitleScene implements Scene {
   notifier(): Notifier {
     return {
       render: this._view.notifier().render,
-      endTitle: this._view.notifier().endTitle,
+      endTitle: this._endTitle,
     }
+  }
+
+  /**
+   * 画面タッチの際のイベント
+   *
+   * @param action アクション
+   */
+  _onScreenTouch(action: ScreenTouch): void {
+    // TODO フェードアウトアニメを追加する
+    this._endTitle.next({type: 'EndTitle'});
   }
 }
