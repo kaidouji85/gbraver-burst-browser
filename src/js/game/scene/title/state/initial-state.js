@@ -9,6 +9,6 @@ import type {TitleSceneState} from "./title-scene-state";
  */
 export function createInitialState(): TitleSceneState {
   return {
-    canOperation: true
+    canOperation: false
   };
 }

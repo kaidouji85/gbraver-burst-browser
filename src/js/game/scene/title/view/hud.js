@@ -71,7 +71,7 @@ export class TitleHudLayer {
     this.scene.add(this.titleLogo.getObject3D());
 
     this.fader = new Fader({
-      isVisible: false,
+      isVisible: true,
       listener: gameObjectAction
     });
     this.scene.add(this.fader.getObject3D());

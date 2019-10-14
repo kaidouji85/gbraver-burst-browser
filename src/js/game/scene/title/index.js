@@ -9,9 +9,9 @@ import {TitleView} from "./view";
 import type {Render} from "../../../action/game-loop/render";
 import type {EndTitle} from "../../../action/game/end-title";
 import type {ScreenTouch} from "../../../action/title-scene/title-scene-action";
-import {process} from '../../../animation/process';
 import type {TitleSceneState} from "./state/title-scene-state";
 import {createInitialState} from "./state/initial-state";
+import {take} from "rxjs/operators";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -52,6 +52,12 @@ export class TitleScene implements Scene {
         if (action.type === 'ScreenTouch') {
           this._onScreenTouch(action);
         }
+      }),
+
+      param.listener.gameLoop.pipe(
+        take(1)
+      ).subscribe(action => {
+        this._onStart();
       })
     ];
   }
@@ -76,6 +82,17 @@ export class TitleScene implements Scene {
     }
   }
 
+  /** シーン開始 */
+  async _onStart(): Promise<void> {
+    try {
+      const animation = this._view.hud.fader.fadeIn();
+      await animation.play();
+      this._state.canOperation = true;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   /**
    * 画面タッチの際のイベント
    *
@@ -88,11 +105,9 @@ export class TitleScene implements Scene {
       }
 
       this._state.canOperation = false;
-      const animation = this._view.hud.fader.fadeOut().chain(process(() => {
-        this._endTitle.next({type: 'EndTitle'});
-      }));
+      const animation = this._view.hud.fader.fadeOut();
       await animation.play();
-
+      this._endTitle.next({type: 'EndTitle'});
       this._state.canOperation = true;
     } catch (e) {
       throw e;
