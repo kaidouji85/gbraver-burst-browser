@@ -65,9 +65,9 @@ export class BattleScene implements Scene {
     this._subscription = [
       this._view.notifier().battleAction.subscribe(action => {
         if (action.type === 'decideBattery') {
-          this._decideBattery(action);
+          this._onDecideBattery(action);
         } else if (action.type === 'doBurst') {
-          this._doBurst(action);
+          this._onBurst(action);
         }
       }),
 
@@ -105,44 +105,68 @@ export class BattleScene implements Scene {
    * @param stateHistory 初期ステータス
    */
   async _start(stateHistory: GameState[]): Promise<void> {
-    const animation = delay(500)
-      .chain(stateHistoryAnimation(this._view, this._state, stateHistory));
-    await animation.play();
+    try {
+      const animation = delay(500)
+        .chain(this._view.hud.gameObjects.fader.fadeIn())
+        .chain(stateHistoryAnimation(this._view, this._state, stateHistory));
+      await animation.play();
+      this._state.canOperation = true;
+    } catch(e) {
+      throw e;
+    }
   }
 
-  /** バッテリー決定 */
-  async _decideBattery(action: DecideBattery): Promise<void> {
-    if (!this._state.canOperation) {
-      return;
-    }
+  /**
+   * バッテリー決定時の処理
+   *
+   * @param action アクション
+   */
+  async _onDecideBattery(action: DecideBattery): Promise<void> {
+    try {
+      if (!this._state.canOperation) {
+        return;
+      }
 
-    this._state.canOperation = false;
-    await invisibleUI(this._view).play();
-    const lastState = await this._progressGame({
-      type: 'BATTERY_COMMAND',
-      battery: action.battery
-    });
-    if (lastState && lastState.effect.name === 'GameEnd') {
-      this._endBattle.next({type: 'endBattle'});
-    }
+      this._state.canOperation = false;
+      await invisibleUI(this._view).play();
+      const lastState = await this._progressGame({
+        type: 'BATTERY_COMMAND',
+        battery: action.battery
+      });
+      if (lastState && lastState.effect.name === 'GameEnd') {
+        this._onEndGame();
+        return;
+      }
 
-    this._state.canOperation = true;
+      this._state.canOperation = true;
+    } catch (e) {
+      throw e;
+    }
   }
 
-  /** バースト */
-  async _doBurst(action: DoBurst): Promise<void> {
-    if (!this._state.canOperation) {
-      return;
-    }
+  /**
+   * バースト時の処理
+   *
+   * @param action アクション
+   */
+  async _onBurst(action: DoBurst): Promise<void> {
+    try {
+      if (!this._state.canOperation) {
+        return;
+      }
 
-    this._state.canOperation = false;
-    await invisibleUI(this._view).play();
-    const lastState = await this._progressGame({type: 'BURST_COMMAND'});
-    if (lastState && lastState.effect.name === 'GameEnd') {
-      this._endBattle.next({type: 'endBattle'});
-    }
+      this._state.canOperation = false;
+      await invisibleUI(this._view).play();
+      const lastState = await this._progressGame({type: 'BURST_COMMAND'});
+      if (lastState && lastState.effect.name === 'GameEnd') {
+        this._onEndGame();
+        return;
+      }
 
-    this._state.canOperation = true;
+      this._state.canOperation = true;
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**
@@ -152,33 +176,48 @@ export class BattleScene implements Scene {
    * @return ゲームの最新状態、何も更新されなかった場合はnullを返す
    */
   async _progressGame(command: Command): Promise<?GameState> {
-    let lastCommand: Command = command;
-    let lastState: ?GameState = null;
-    for (let i=0; i<100; i++) {
-      const updateState = await this._battleRoom.progress(lastCommand);
-      await stateHistoryAnimation(this._view, this._state, updateState).play();
+    try {
+      let lastCommand: Command = command;
+      let lastState: ?GameState = null;
+      for (let i=0; i<100; i++) {
+        const updateState = await this._battleRoom.progress(lastCommand);
+        await stateHistoryAnimation(this._view, this._state, updateState).play();
 
-      if (updateState.length <= 0) {
-        return null;
+        if (updateState.length <= 0) {
+          return null;
+        }
+
+        lastState = updateState[updateState.length - 1];
+        if (lastState.effect.name !== 'InputCommand') {
+          return lastState;
+        }
+
+        const playerCommand = lastState.effect.players.find(v => v.playerId === this._state.playerId);
+        if (!playerCommand) {
+          return lastState;
+        }
+
+        if (playerCommand.selectable === true) {
+          return lastState;
+        }
+
+        lastCommand = playerCommand.nextTurnCommand;
       }
 
-      lastState = updateState[updateState.length - 1];
-      if (lastState.effect.name !== 'InputCommand') {
-        return lastState;
-      }
-
-      const playerCommand = lastState.effect.players.find(v => v.playerId === this._state.playerId);
-      if (!playerCommand) {
-        return lastState;
-      }
-
-      if (playerCommand.selectable === true) {
-        return lastState;
-      }
-
-      lastCommand = playerCommand.nextTurnCommand;
+      return lastState
+    } catch (e) {
+      throw e;
     }
+  }
 
-    return lastState
+  /** ゲーム終了時の処理 */
+  async _onEndGame(): Promise<void> {
+    try {
+      const animation = this._view.hud.gameObjects.fader.fadeOut();
+      await animation.play();
+      this._endBattle.next({type: 'endBattle'});
+    } catch(e) {
+      throw e;
+    }
   }
 }

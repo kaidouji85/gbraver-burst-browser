@@ -7,6 +7,6 @@ import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 export function createInitialState(playerId: PlayerId): BattleSceneState {
   return {
     playerId: playerId,
-    canOperation: true
+    canOperation: false
   };
 }

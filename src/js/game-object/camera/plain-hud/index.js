@@ -6,6 +6,7 @@ import type {DOMEvent} from "../../../action/dom-event";
 import {Observable, Subscription} from "rxjs";
 import type {Resize} from "../../../action/dom-event/resize";
 import {onResizeOrthographicCamera} from "../../../camera/resize";
+import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -24,6 +25,7 @@ export class PlainHUDCamera {
 
   constructor(param: Param) {
     this._camera = createHUDCamera();
+    this._camera.position.z = HUD_CAMERA_ZINDEX;
 
     this._subscription = param.listener.domEvent.subscribe(action => {
       if (action.type === 'resize') {

@@ -10,12 +10,15 @@ import type {Player} from "gbraver-burst-core/lib/player/player";
 import * as THREE from "three";
 import {PlayInLandscape} from "../../../../../game-object/warning/play-in-landscape";
 import {Subject} from "rxjs";
+import {Fader} from "../../../../../game-object/fader/fader";
 
+// TODO クラスにする
 /** HUDレイヤーのゲームオブジェクト */
 export type HUDGameObjects = {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
   playInLandscape: PlayInLandscape;
+  fader: Fader;
   notifier: {
     battleSceneAction: Observable<BattleSceneAction>
   }
@@ -62,10 +65,16 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
 
   const playInLandscape = new PlayInLandscape(resources, listener);
 
+  const fader = new Fader({
+    isVisible: true,
+    listener: listener
+  });
+
   return {
     batterySelector: batterySelector,
     burstButton: burstButton,
     playInLandscape: playInLandscape,
+    fader: fader,
     notifier: {
       battleSceneAction: battleSceneAction
     }
@@ -82,6 +91,7 @@ export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects)
   scene.add(target.batterySelector.getObject3D());
   scene.add(target.burstButton.getObject3D());
   scene.add(target.playInLandscape.getObject3D());
+  scene.add(target.fader.getObject3D());
 }
 
 /**
