@@ -10,6 +10,8 @@ import type {Render} from "../../../action/game-loop/render";
 import type {EndTitle} from "../../../action/game/end-title";
 import type {ScreenTouch} from "../../../action/title-scene/title-scene-action";
 import {process} from '../../../animation/process';
+import type {TitleSceneState} from "./state/title-scene-state";
+import {createInitialState} from "./state/initial-state";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -29,11 +31,13 @@ type Notifier = {
 
 /** タイトルシーン */
 export class TitleScene implements Scene {
+  _state: TitleSceneState;
   _view: TitleView;
   _endTitle: Subject<EndTitle>;
   _subscription: Subscription[];
 
   constructor(param: Param) {
+    this._state = createInitialState();
     this._endTitle = new Subject();
     this._view = new TitleView({
       resources: param.resources,
@@ -77,10 +81,22 @@ export class TitleScene implements Scene {
    *
    * @param action アクション
    */
-  _onScreenTouch(action: ScreenTouch): void {
-    const animation = this._view.hud.fader.fadeOut().chain(process(() => {
-      this._endTitle.next({type: 'EndTitle'});
-    }));
-    animation.play();
+  async _onScreenTouch(action: ScreenTouch): Promise<void> {
+    try {
+      if (!this._state.canOperation) {
+        return;
+      }
+
+      this._state.canOperation = false;
+      const animation = this._view.hud.fader.fadeOut().chain(process(() => {
+        this._endTitle.next({type: 'EndTitle'});
+      }));
+      await animation.play();
+
+      this._state.canOperation = true;
+    } catch (e) {
+      throw e;
+    }
+
   }
 }

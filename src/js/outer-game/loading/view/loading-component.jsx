@@ -22,7 +22,6 @@ export function LoadingComponent(props: Props) {
         ? 'flex'
         : 'none'
     }}>
-      <img className="loading__logo" src={`${resourceBasePath()}/logo.png`}/>
       <div className="loading__completed-rate">
         <div className="loading__completed-rate__text">
           {`LOADING... ${Math.floor(props.completedRate * 100)}%`}
