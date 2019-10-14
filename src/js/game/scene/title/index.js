@@ -9,6 +9,7 @@ import {TitleView} from "./view";
 import type {Render} from "../../../action/game-loop/render";
 import type {EndTitle} from "../../../action/game/end-title";
 import type {ScreenTouch} from "../../../action/title-scene/title-scene-action";
+import {process} from '../../../animation/process';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -77,7 +78,9 @@ export class TitleScene implements Scene {
    * @param action アクション
    */
   _onScreenTouch(action: ScreenTouch): void {
-    // TODO フェードアウトアニメを追加する
-    this._endTitle.next({type: 'EndTitle'});
+    const animation = this._view.hud.fader.fadeOut().chain(process(() => {
+      this._endTitle.next({type: 'EndTitle'});
+    }));
+    animation.play();
   }
 }

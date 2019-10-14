@@ -17,6 +17,7 @@ import type {EndTitle} from "../../../../action/game/end-title";
 import type {MouseDown} from "../../../../action/dom-event/mouse-down";
 import type {TouchStart} from "../../../../action/dom-event/touch-start";
 import type {TitleSceneAction} from "../../../../action/title-scene/title-scene-action";
+import {Fader} from "../../../../game-object/fader/fader";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -39,6 +40,7 @@ export class TitleHudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
   titleLogo: TitleLogo;
+  fader: Fader;
 
   _rendererDOM: HTMLElement;
   _update: Subject<Update>;
@@ -67,6 +69,12 @@ export class TitleHudLayer {
 
     this.titleLogo = new TitleLogo(param.resources, gameObjectAction);
     this.scene.add(this.titleLogo.getObject3D());
+
+    this.fader = new Fader({
+      isVisible: false,
+      listener: gameObjectAction
+    });
+    this.scene.add(this.fader.getObject3D());
 
     this._subscription = [
       param.listener.gameLoop.subscribe(action => {

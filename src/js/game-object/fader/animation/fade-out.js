@@ -13,8 +13,8 @@ import type {FaderModel} from "../model/fader-model";
  */
 export function fadeOut(model: FaderModel): Animate {
   return process(() => {
-    model.opacity = 1;
+    model.opacity = 0;
   }).chain(tween(model, t => t
-    .to({opacity: 0}, 500)
+    .to({opacity: 1}, 500)
   ));
 }
