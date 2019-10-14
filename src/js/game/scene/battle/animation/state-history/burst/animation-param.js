@@ -2,7 +2,6 @@
 
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import type {TDPlayer} from "../../../view/td/player";
-import {overWriteTDSprite} from "../../../view/td/player";
 import type {HUDPlayer} from "../../../view/hud/player";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import {Battle3DCamera} from "../../../../../../game-object/camera/battle-3d";
@@ -14,6 +13,7 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {ArmdozerState} from "gbraver-burst-core/lib/game-state/armdozer/armdozer-state";
 import type {BurstEffect} from "gbraver-burst-core/lib/effect/burst/burst-effect";
 import type {Burst} from "gbraver-burst-core/lib/armdozer/burst";
+import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 
 /**
  * バーストアニメーションのパラメータ
@@ -21,7 +21,7 @@ import type {Burst} from "gbraver-burst-core/lib/armdozer/burst";
  * @type SPRITE スプライト
  * @type BURST バースト
  */
-export type BurstAnimationParam<SPRITE, BURST> = {
+export type BurstAnimationParam<SPRITE: ArmDozerSprite, BURST> = {
   burstPlayerState: PlayerState,
   burstPlayerTD: TDPlayer<SPRITE>,
   burstPlayerHUD: HUDPlayer,
@@ -66,22 +66,26 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
 }
 
 /**
- * スプライトを引数の内容で上書きする
+ * スプライトを引数の内容でキャストする
  *
  * @param param バーストアニメーションパラメータ
- * @param sprite 上書きするスプライト
- * @return 更新結果
+ * @param sprite キャストするクラス
+ * @return キャスト結果、キャストできない場合はnullを返す
  */
-export function overWriteSprite<OLD_SPRITE, NEW_SPRITE, BURST>(
+export function castSprite<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, BURST>(
   param: BurstAnimationParam<OLD_SPRITE, BURST>,
-  sprite: NEW_SPRITE): BurstAnimationParam<NEW_SPRITE, BURST>
-{
+  castClass: Class<NEW_SPRITE>
+): ?BurstAnimationParam<NEW_SPRITE, BURST> {
   const ignoreAttackerTD: $Diff<BurstAnimationParam<OLD_SPRITE, BURST>, { burstPlayerTD: TDPlayer<OLD_SPRITE> }> = param;
-  const burstPlayerTD = overWriteTDSprite(param.burstPlayerTD, sprite);
-  return {
-    ...ignoreAttackerTD,
-    burstPlayerTD: burstPlayerTD
-  };
+  const burstPlayerTD = param.burstPlayerTD.cast(castClass);
+  if (burstPlayerTD) {
+    return {
+      ...ignoreAttackerTD,
+      burstPlayerTD: burstPlayerTD
+    };
+  }
+
+  return null;
 }
 
 /**
@@ -91,7 +95,7 @@ export function overWriteSprite<OLD_SPRITE, NEW_SPRITE, BURST>(
  * @param burst 上書きするバースト
  * @return 更新結果
  */
-export function overWriteBurst<SPRITE, OLD_BURST, NEW_BURST>(
+export function overWriteBurst<SPRITE: ArmDozerSprite, OLD_BURST, NEW_BURST>(
   param: BurstAnimationParam<SPRITE, OLD_BURST>,
   burst: NEW_BURST
 ): BurstAnimationParam<SPRITE, NEW_BURST>

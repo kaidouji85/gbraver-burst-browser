@@ -2,7 +2,6 @@
 
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import type {TDPlayer} from "../../../view/td/player";
-import {overWriteTDSprite} from "../../../view/td/player";
 import type {HUDPlayer} from "../../../view/hud/player";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "../../../view/td/game-objects";
@@ -22,7 +21,7 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
  * @type SPRITE 攻撃側スプライト
  * @type RESULT 戦闘結果
  */
-export type BattleAnimationParam<SPRITE, RESULT> = {
+export type BattleAnimationParam<SPRITE: ArmDozerSprite, RESULT> = {
   attackerBattery: number,
   attackerState: PlayerState,
   attackerTD: TDPlayer<SPRITE>,
@@ -89,7 +88,7 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
  * @param result 上書きする戦闘結果
  * @return 上書き結果
  */
-export function overWriteResult<SPRITE, OLD_RESULT, NEW_RESULT>(
+export function overWriteResult<SPRITE: ArmDozerSprite, OLD_RESULT, NEW_RESULT>(
   param: BattleAnimationParam<SPRITE, OLD_RESULT>,
   result: NEW_RESULT
 ): BattleAnimationParam<SPRITE, NEW_RESULT> {
@@ -101,20 +100,24 @@ export function overWriteResult<SPRITE, OLD_RESULT, NEW_RESULT>(
 }
 
 /**
- * 戦闘アニメーションパラメータのスプライトを引数の内容で上書きする
+ * 戦闘アニメーションパラメータのスプライトを引数の内容でキャストする
  *
  * @param param 上書き対象
- * @param sprite 上書きするスプライト
- * @return 上書き結果
+ * @param castClass キャスト対象のクラス
+ * @return キャスト結果、キャストできない場合はnullを返す
  */
-export function overWriteAttackerTD<OLD_SPRITE, NEW_SPRITE, RESULT>(
+export function castAttackerTD<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, RESULT>(
   param: BattleAnimationParam<OLD_SPRITE, RESULT>,
-  sprite: NEW_SPRITE
-): BattleAnimationParam<NEW_SPRITE, RESULT> {
+  castClass: Class<NEW_SPRITE>
+): ?BattleAnimationParam<NEW_SPRITE, RESULT> {
   const ignoreAttackerTD: $Diff<BattleAnimationParam<OLD_SPRITE, RESULT>, { attackerTD: TDPlayer<OLD_SPRITE> }> = param;
-  const attackerTD = overWriteTDSprite(param.attackerTD, sprite);
-  return {
-    ...ignoreAttackerTD,
-    attackerTD: attackerTD
-  };
+  const attackerTD = param.attackerTD.cast(castClass);
+  if (attackerTD) {
+    return {
+      ...ignoreAttackerTD,
+      attackerTD: attackerTD
+    };
+  }
+
+  return null
 }
