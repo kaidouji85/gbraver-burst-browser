@@ -13,6 +13,7 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {ArmdozerState} from "gbraver-burst-core/lib/game-state/armdozer/armdozer-state";
 import type {BurstEffect} from "gbraver-burst-core/lib/effect/burst/burst-effect";
 import type {Burst} from "gbraver-burst-core/lib/armdozer/burst";
+import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 
 /**
  * バーストアニメーションのパラメータ
@@ -20,7 +21,7 @@ import type {Burst} from "gbraver-burst-core/lib/armdozer/burst";
  * @type SPRITE スプライト
  * @type BURST バースト
  */
-export type BurstAnimationParam<SPRITE, BURST> = {
+export type BurstAnimationParam<SPRITE: ArmDozerSprite, BURST> = {
   burstPlayerState: PlayerState,
   burstPlayerTD: TDPlayer<SPRITE>,
   burstPlayerHUD: HUDPlayer,
@@ -71,7 +72,7 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
  * @param sprite キャストするクラス
  * @return キャスト結果、キャストできない場合はnullを返す
  */
-export function castSprite<OLD_SPRITE, NEW_SPRITE, BURST>(
+export function castSprite<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, BURST>(
   param: BurstAnimationParam<OLD_SPRITE, BURST>,
   castClass: Class<NEW_SPRITE>
 ): ?BurstAnimationParam<NEW_SPRITE, BURST> {
@@ -94,7 +95,7 @@ export function castSprite<OLD_SPRITE, NEW_SPRITE, BURST>(
  * @param burst 上書きするバースト
  * @return 更新結果
  */
-export function overWriteBurst<SPRITE, OLD_BURST, NEW_BURST>(
+export function overWriteBurst<SPRITE: ArmDozerSprite, OLD_BURST, NEW_BURST>(
   param: BurstAnimationParam<SPRITE, OLD_BURST>,
   burst: NEW_BURST
 ): BurstAnimationParam<SPRITE, NEW_BURST>

@@ -14,7 +14,7 @@ type HitMark = {
 };
 
 /** コンストラクタのパラメータ */
-type Param<T> = {
+type Param<T: ArmDozerSprite> = {
   playerId: PlayerId,
   sprite: T,
   hitMark: HitMark,
@@ -28,7 +28,7 @@ type Param<T> = {
  *
  * @type T アームドーザスプライト
  */
-export class TDPlayer<T> {
+export class TDPlayer<T: ArmDozerSprite> {
   playerId: PlayerId;
   sprite: T;
   hitMark: HitMark;
@@ -45,6 +45,15 @@ export class TDPlayer<T> {
     this.damageIndicator = param.damageIndicator;
   }
 
+  /** デストラクタ相当の処理 */
+  destructor(): void {
+    this.sprite.destructor();
+    this.batteryNumber.destructor();
+    this.damageIndicator.destructor();
+    this.hitMark.spark.destructor();
+    this.recoverBattery.destructor();
+  }
+
   /**
    * スプライトを指定したクラスでキャストする
    * 本メソッドで生成したクラスは、呼び出し元クラスと同じリソースである
@@ -52,7 +61,7 @@ export class TDPlayer<T> {
    * @param castClass キャストするクラス
    * @return キャスト結果、キャストできない場合はnullを返す
    */
-  cast<NEW>(castClass: Class<NEW>): ?TDPlayer<NEW> {
+  cast<NEW: ArmDozerSprite>(castClass: Class<NEW>): ?TDPlayer<NEW> {
     if (this.sprite instanceof  castClass) {
       const ignoreSprite: $Diff<TDPlayer<T>, {sprite: T}> = this;
       return new TDPlayer<NEW>({

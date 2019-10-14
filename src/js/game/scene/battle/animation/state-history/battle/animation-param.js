@@ -21,7 +21,7 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
  * @type SPRITE 攻撃側スプライト
  * @type RESULT 戦闘結果
  */
-export type BattleAnimationParam<SPRITE, RESULT> = {
+export type BattleAnimationParam<SPRITE: ArmDozerSprite, RESULT> = {
   attackerBattery: number,
   attackerState: PlayerState,
   attackerTD: TDPlayer<SPRITE>,
@@ -88,7 +88,7 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
  * @param result 上書きする戦闘結果
  * @return 上書き結果
  */
-export function overWriteResult<SPRITE, OLD_RESULT, NEW_RESULT>(
+export function overWriteResult<SPRITE: ArmDozerSprite, OLD_RESULT, NEW_RESULT>(
   param: BattleAnimationParam<SPRITE, OLD_RESULT>,
   result: NEW_RESULT
 ): BattleAnimationParam<SPRITE, NEW_RESULT> {
@@ -106,7 +106,7 @@ export function overWriteResult<SPRITE, OLD_RESULT, NEW_RESULT>(
  * @param castClass キャスト対象のクラス
  * @return キャスト結果、キャストできない場合はnullを返す
  */
-export function castAttackerTD<OLD_SPRITE, NEW_SPRITE, RESULT>(
+export function castAttackerTD<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, RESULT>(
   param: BattleAnimationParam<OLD_SPRITE, RESULT>,
   castClass: Class<NEW_SPRITE>
 ): ?BattleAnimationParam<NEW_SPRITE, RESULT> {
