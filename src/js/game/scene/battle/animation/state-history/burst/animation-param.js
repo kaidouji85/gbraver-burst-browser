@@ -66,26 +66,22 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
 }
 
 /**
- * スプライトを引数の内容でキャストする
+ * スプライトを引数の内容で上書きする
  *
  * @param param バーストアニメーションパラメータ
- * @param sprite キャストするクラス
- * @return キャスト結果、キャストできない場合はnullを返す
+ * @param sprite 上書き内容
+ * @return 上書き結果
  */
-export function castSprite<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, BURST>(
+export function overWriteSprite<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, BURST>(
   param: BurstAnimationParam<OLD_SPRITE, BURST>,
-  castClass: Class<NEW_SPRITE>
-): ?BurstAnimationParam<NEW_SPRITE, BURST> {
+  sprite: NEW_SPRITE
+): BurstAnimationParam<NEW_SPRITE, BURST> {
   const ignoreAttackerTD: $Diff<BurstAnimationParam<OLD_SPRITE, BURST>, { burstPlayerTD: TDPlayer<OLD_SPRITE> }> = param;
-  const burstPlayerTD = param.burstPlayerTD.cast(castClass);
-  if (burstPlayerTD) {
-    return {
-      ...ignoreAttackerTD,
-      burstPlayerTD: burstPlayerTD
-    };
-  }
-
-  return null;
+  const burstPlayerTD = param.burstPlayerTD.overWriteSprite(sprite);
+  return {
+    ...ignoreAttackerTD,
+    burstPlayerTD: burstPlayerTD
+  };
 }
 
 /**
