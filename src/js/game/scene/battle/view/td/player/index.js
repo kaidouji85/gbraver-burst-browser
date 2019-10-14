@@ -47,6 +47,7 @@ export class TDPlayer<T> {
 
   /**
    * スプライトを指定したクラスでキャストする
+   * 本メソッドで生成したクラスは、呼び出し元クラスと同じリソースである
    *
    * @param castClass キャストするクラス
    * @return キャスト結果、キャストできない場合はnullを返す
@@ -76,30 +77,6 @@ export function appendTDPlayer(scene: THREE.Scene, player: TDPlayer<ArmDozerSpri
   scene.add(player.batteryNumber.getObject3D());
   scene.add(player.recoverBattery.getObject3D());
   scene.add(player.damageIndicator.getObject3D());
-}
-
-/**
- * 3Dプレイヤーオブジェクトのスプライトを、引数で上書きする
- * その際にスプライトのデータ型も変更する
- * 本関数はスプライトの型キャストに使用する想定である
- *
- * 例)
- * const target: TDPlayer<ArmdozerSprite> = {...}
- * const sprite = target.sprite;
- * if (sprite instanceof ShinBraver) {
- *   const cast: TDPlayer<ShinBraver> = overWriteTDSprite(target, sprite);
- * }
- *
- * @param target 上書き対象の3Dプレイヤー
- * @param sprite 上書きするスプライト
- * @return 上書き結果
- */
-export function overWriteTDSprite<OLD, NEW>(target: TDPlayer<OLD>, sprite: NEW): TDPlayer<NEW> {
-  const ignoreSprite: $Diff<TDPlayer<OLD>, {sprite: OLD}> = target;
-  return new TDPlayer<NEW>({
-    ...ignoreSprite,
-    sprite: sprite
-  });
 }
 
 /**

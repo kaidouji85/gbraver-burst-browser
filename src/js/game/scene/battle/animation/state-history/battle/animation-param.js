@@ -2,7 +2,6 @@
 
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import type {TDPlayer} from "../../../view/td/player";
-import {overWriteTDSprite} from "../../../view/td/player";
 import type {HUDPlayer} from "../../../view/hud/player";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "../../../view/td/game-objects";
