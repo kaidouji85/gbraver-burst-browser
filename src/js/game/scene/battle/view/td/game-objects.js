@@ -9,33 +9,46 @@ import SchoolField from "../../../../../game-object/stage/shopping-street";
 import * as THREE from "three";
 
 /** 3Dレイヤーのゲームオブジェクト */
-export class TDGameObjects {
+export type TDGameObjects = {
   stage: Stage;
   turnIndicator: TurnIndicator;
+};
 
-  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
-    this.stage = new SchoolField(resources);
-
-    this.turnIndicator = new TurnIndicator({
+/**
+ * 3Dレイヤーゲームオブジェクトを生成する
+ *
+ * @param resources リソース管理オブジェクト
+ * @param listener イベントリスナ
+ * @return 3Dレイヤーゲームオブジェクト
+ */
+export function createTDGameObjects(resources: Resources, listener: Observable<GameObjectAction>): TDGameObjects {
+  return {
+    stage: new SchoolField(resources),
+    turnIndicator: new TurnIndicator({
       listener: listener,
       resources: resources
-    });
-  }
+    })
+  };
+}
 
-  /** デストラクタ相当の処理 */
-  destructor(): void {
-    this.stage.destructor();
-    this.turnIndicator.destructor();
-  }
+/**
+ * 3Dレイヤーゲームオブジェクトをシーンに追加する
+ *
+ * @param scene 追加するシーン
+ * @param target 3Dレイヤーゲームオブジェクト
+ */
+export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): void {
+  target.stage.getThreeJsObjects()
+    .forEach(item => scene.add(item));
+  scene.add(target.turnIndicator.getObject3D());
+}
 
-  /**
-   * 3Dレイヤーゲームオブジェクトをシーンに追加する
-   *
-   * @param scene 追加対象シーン
-   */
-  appendScene(scene: THREE.Scene): void {
-    this.stage.getThreeJsObjects()
-      .forEach(item => scene.add(item));
-    scene.add(this.turnIndicator.getObject3D());
-  }
+/**
+ * 3Dレイヤーゲームオブジェクトのリソースを破棄する
+ *
+ * @param target リソース破棄対象
+ */
+export function disposeTDGameObjects(target: TDGameObjects): void {
+  target.stage.destructor();
+  target.turnIndicator.destructor();
 }

@@ -9,11 +9,13 @@ import type {GameLoop} from "../../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../../action/game-loop/render";
 import {Battle3DCamera} from "../../../../../game-object/camera/battle-3d";
 import type {DOMEvent} from "../../../../../action/dom-event";
-import {TDPlayer} from "./player";
+import type {TDPlayer} from "./player";
+import {appendTDPlayer, disposeTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";
 import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
-import {TDGameObjects} from "./game-objects";
+import type {TDGameObjects} from "./game-objects";
+import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./game-objects";
 import {toOverlapObservable} from "../../../../../action/overlap/dom-event-to-overlap";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../action/game-object-action/create-listener";
@@ -74,11 +76,11 @@ export class ThreeDimensionLayer {
       enemyTDObject(param.resources, enemy, gameObjectAction)
     ];
     this.players.forEach(v => {
-      v.appendScene(this.scene);
+      appendTDPlayer(this.scene, v);
     });
 
-    this.gameObjects = new TDGameObjects(param.resources, gameObjectAction);
-    this.gameObjects.appendScene(this.scene);
+    this.gameObjects = createTDGameObjects(param.resources, gameObjectAction);
+    appendTDGameObjects(this.scene, this.gameObjects);
 
     this._subscription = param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);
@@ -88,9 +90,9 @@ export class ThreeDimensionLayer {
   /** デストラクタ */
   destructor(): void {
     this.players.forEach(v => {
-      v.destructor();
+      disposeTDPlayer(v);
     });
-    this.gameObjects.destructor();
+    disposeTDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();
     this._subscription.unsubscribe();

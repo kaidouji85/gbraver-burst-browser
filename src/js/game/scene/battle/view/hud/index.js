@@ -12,9 +12,11 @@ import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../../action/game-loop/render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import type {HUDPlayer} from "./player";
+import {appendHUDPlayer, disposeHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
-import {HUDGameObjects} from "./game-objects";
+import type {HUDGameObjects} from "./game-objects";
+import {appendHUDGameObjects, createHUDGameObjects, disposeHUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../action/game-object-action/create-listener";
 
@@ -79,11 +81,11 @@ export class HudLayer {
       enemyHUDObjects(param.resources, gameObjectAction, enemy),
     ];
     this.players.forEach(v => {
-      v.appendScene(this.scene);
+      appendHUDPlayer(this.scene, v);
     });
 
-    this.gameObjects = new HUDGameObjects(param.resources, gameObjectAction, player);
-    this.gameObjects.appendScene(this.scene);
+    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
+    appendHUDGameObjects(this.scene, this.gameObjects);
 
     this._subscription = param.listener.gameLoop.subscribe(action => {
       this._gameLoop(action);
@@ -93,9 +95,9 @@ export class HudLayer {
   /** デストラクタ */
   destructor(): void {
     this.players.forEach(v => {
-      v.destructor();
+      disposeHUDPlayer(v);
     });
-    this.gameObjects.destructor();
+    disposeHUDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();
     this._subscription.unsubscribe();
@@ -109,7 +111,7 @@ export class HudLayer {
   notifier(): Notifier {
     return {
       render: this._render,
-      battleAction: this.gameObjects.notifier().battleAction
+      battleAction: this.gameObjects.notifier.battleSceneAction
     };
   }
 
