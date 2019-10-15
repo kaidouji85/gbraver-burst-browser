@@ -12,7 +12,6 @@ import {PlayInLandscape} from "../../../../../game-object/warning/play-in-landsc
 import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 
-// TODO クラスにする
 /** HUDレイヤーのゲームオブジェクト */
 export type HUDGameObjects = {
   batterySelector: BatterySelector;
