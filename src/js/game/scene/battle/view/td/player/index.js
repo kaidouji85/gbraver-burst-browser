@@ -63,12 +63,12 @@ export function overWriteTDSprite<OLD: ArmDozerSprite, NEW: ArmDozerSprite>(targ
 }
 
 /**
- * 3Dレイヤーのプレイヤー関係オブジェクトのデストラクタ相当処理
+ * 3Dレイヤーのプレイヤー関係オブジェクトのリソースを破棄する
  * リソース解放等を行う
  *
- * @param target リソース解放を行う対象
+ * @param target リソース破棄対象
  */
-export function destructorTDPlayer<T: ArmDozerSprite>(target: TDPlayer<T>): void {
+export function disposeTDPlayer<T: ArmDozerSprite>(target: TDPlayer<T>): void {
   target.sprite.destructor();
   target.batteryNumber.destructor();
   target.damageIndicator.destructor();

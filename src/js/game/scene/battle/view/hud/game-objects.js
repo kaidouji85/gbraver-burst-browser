@@ -95,11 +95,11 @@ export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects)
 }
 
 /**
- * HUDゲームオブジェクトのデストラクタ相当処理
+ * HUDゲームオブジェクトのリソースを破棄する
  *
- * @param target デストラクト対象
+ * @param target リソース破棄対象
  */
-export function destructorHUDGameObjects(target: HUDGameObjects): void {
+export function disposeHUDGameObjects(target: HUDGameObjects): void {
   target.batterySelector.destructor();
   target.burstButton.destructor();
   target.playInLandscape.destructor();

@@ -21,10 +21,10 @@ export function appendHUDPlayer(scene: THREE.Scene, hud: HUDPlayer) {
 }
 
 /**
- * HUDプレイヤーのデストラクタ相当処理を行う
+ * HUDプレイヤーのリソースを破棄する
  *
- * @param target デストラクト対象
+ * @param target リソース破棄対象
  */
-export function destructorHUDPlayer(target: HUDPlayer): void {
+export function disposeHUDPlayer(target: HUDPlayer): void {
   target.gauge.destructor();
 }

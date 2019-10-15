@@ -44,11 +44,11 @@ export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): 
 }
 
 /**
- * 3Dレイヤーゲームオブジェクトのデストラクタ相当処理
+ * 3Dレイヤーゲームオブジェクトのリソースを破棄する
  *
- * @param target デストラクト対象
+ * @param target リソース破棄対象
  */
-export function destructorTDGameObjects(target: TDGameObjects): void {
+export function disposeTDGameObjects(target: TDGameObjects): void {
   target.stage.destructor();
   target.turnIndicator.destructor();
 }

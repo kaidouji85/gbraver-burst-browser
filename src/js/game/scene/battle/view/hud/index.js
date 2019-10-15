@@ -12,11 +12,11 @@ import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../../action/game-loop/render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import type {HUDPlayer} from "./player";
-import {appendHUDPlayer, destructorHUDPlayer} from "./player";
+import {appendHUDPlayer, disposeHUDPlayer} from "./player";
 import {enemyHUDObjects} from "./player/enemy";
 import {playerHUDObjects} from "./player/player";
 import type {HUDGameObjects} from "./game-objects";
-import {appendHUDGameObjects, createHUDGameObjects, destructorHUDGameObjects} from "./game-objects";
+import {appendHUDGameObjects, createHUDGameObjects, disposeHUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../action/game-object-action/create-listener";
 
@@ -95,9 +95,9 @@ export class HudLayer {
   /** デストラクタ */
   destructor(): void {
     this.players.forEach(v => {
-      destructorHUDPlayer(v);
+      disposeHUDPlayer(v);
     });
-    destructorHUDGameObjects(this.gameObjects);
+    disposeHUDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();
     this._subscription.unsubscribe();
