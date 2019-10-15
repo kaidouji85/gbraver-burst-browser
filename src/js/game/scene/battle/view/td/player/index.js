@@ -13,7 +13,7 @@ import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdoz
  *
  * @type T アームドーザスプライト
  */
-export type TDPlayer<T> = {
+export type TDPlayer<T: ArmDozerSprite> = {
   playerId: PlayerId,
   sprite: T,
   hitMark: {
@@ -30,7 +30,7 @@ export type TDPlayer<T> = {
  * @param scene シーン
  * @param player シーンに追加するオブジェクト群
  */
-export function appendTDPlayer(scene: THREE.Scene, player: TDPlayer<ArmDozerSprite>): void {
+export function appendTDPlayer<T: ArmDozerSprite>(scene: THREE.Scene, player: TDPlayer<T>): void {
   scene.add(player.sprite.getObject3D());
   scene.add(player.hitMark.spark.getObject3D());
   scene.add(player.batteryNumber.getObject3D());
@@ -54,7 +54,7 @@ export function appendTDPlayer(scene: THREE.Scene, player: TDPlayer<ArmDozerSpri
  * @param sprite 上書きするスプライト
  * @return 上書き結果
  */
-export function overWriteTDSprite<OLD, NEW>(target: TDPlayer<OLD>, sprite: NEW): TDPlayer<NEW> {
+export function overWriteTDSprite<OLD: ArmDozerSprite, NEW: ArmDozerSprite>(target: TDPlayer<OLD>, sprite: NEW): TDPlayer<NEW> {
   const ignoreSprite: $Diff<TDPlayer<OLD>, {sprite: OLD}> = target;
   return {
     ...ignoreSprite,
@@ -68,7 +68,7 @@ export function overWriteTDSprite<OLD, NEW>(target: TDPlayer<OLD>, sprite: NEW):
  *
  * @param target リソース解放を行う対象
  */
-export function destructorTDPlayer(target: TDPlayer<ArmDozerSprite>): void {
+export function destructorTDPlayer<T: ArmDozerSprite>(target: TDPlayer<T>): void {
   target.sprite.destructor();
   target.batteryNumber.destructor();
   target.damageIndicator.destructor();
