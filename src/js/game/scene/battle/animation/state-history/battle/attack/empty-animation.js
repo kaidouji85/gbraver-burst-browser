@@ -2,7 +2,6 @@
 
 import {Animate} from "../../../../../../../animation/animate";
 import type {BattleAnimationParam} from "../animation-param";
-import {overWriteResult} from "../animation-param";
 import type {ArmDozerSprite} from "../../../../../../../game-object/armdozer/armdozer-sprite";
 import {empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
@@ -19,14 +18,12 @@ import type {Guard} from "gbraver-burst-core/lib/effect/battle/result/guard";
  */
 export function emptyAttackAnimation(param: BattleAnimationParam<ArmDozerSprite, BattleResult>): Animate {
   const result = param.result;
-  switch (result.name) {
-    case 'NormalHit':
-    case 'CriticalHit':
-    case 'Guard':
-      return viewDamage(overWriteResult(param, result));
-    default:
-      return empty();
+  if ((result.name === 'NormalHit') || (result.name === 'CriticalHit') || (result.name === 'Guard')) {
+    const hit = ((param: any): BattleAnimationParam<ArmDozerSprite, NormalHit | CriticalHit | Guard>);
+    return viewDamage(hit);
   }
+
+  return empty();
 }
 
 /** 通常ヒット、クリティカルヒット、ガード */
