@@ -99,22 +99,3 @@ export function overWriteResult<SPRITE: ArmDozerSprite, OLD_RESULT: BattleResult
     result: result
   };
 }
-
-/**
- * 戦闘アニメーションパラメータのスプライトを引数の内容で上書きする
- *
- * @param param 上書き対象
- * @param sprite 上書きするスプライト
- * @return 上書き結果
- */
-export function overWriteAttackerTD<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, RESULT: BattleResult>(
-  param: BattleAnimationParam<OLD_SPRITE, RESULT>,
-  sprite: NEW_SPRITE
-): BattleAnimationParam<NEW_SPRITE, RESULT> {
-  const ignoreAttackerTD: $Diff<BattleAnimationParam<OLD_SPRITE, RESULT>, { attackerTD: TDPlayer<OLD_SPRITE> }> = param;
-  const attackerTD = overWriteTDSprite(param.attackerTD, sprite);
-  return {
-    ...ignoreAttackerTD,
-    attackerTD: attackerTD
-  };
-}
