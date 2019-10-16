@@ -17,17 +17,37 @@ import type {Guard} from "gbraver-burst-core/lib/effect/battle/result/guard";
  * @return アニメーション
  */
 export function emptyAttackAnimation(param: BattleAnimationParam<ArmDozerSprite, BattleResult>): Animate {
-  const result = param.result;
-  if ((result.name === 'NormalHit') || (result.name === 'CriticalHit') || (result.name === 'Guard')) {
-    const hit = ((param: any): BattleAnimationParam<ArmDozerSprite, NormalHit | CriticalHit | Guard>);
-    return viewDamage(hit);
+  if (param.result.name === 'NormalHit') {
+    const castResult = (param.result: NormalHit);
+    const castParam = ((param: any): BattleAnimationParam<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
+    return viewDamage(castParam);
+  }
+
+  if (param.result.name === 'CriticalHit') {
+    const castResult = (param.result: CriticalHit);
+    const castParam = ((param: any): BattleAnimationParam<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
+    return viewDamage(castParam);
+  }
+
+  if (param.result.name === 'Guard') {
+    const castResult = (param.result: Guard);
+    const castParam = ((param: any): BattleAnimationParam<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
+    return viewDamage(castParam);
   }
 
   return empty();
 }
 
-/** 通常ヒット、クリティカルヒット、ガード */
-function viewDamage(param: BattleAnimationParam<ArmDozerSprite, NormalHit | CriticalHit | Guard>): Animate {
+/** viewDamageが受け取ることができる戦闘結果 */
+type ViewDamageResult = NormalHit | CriticalHit | Guard;
+
+/**
+ * ダメージ数字だけを表示する
+ *
+ * @param param アニメーションパラメータ
+ * @return アニメーション
+ */
+function viewDamage(param: BattleAnimationParam<ArmDozerSprite, ViewDamageResult>): Animate {
   return all(
     param.defenderTD.damageIndicator.popUp(param.result.damage),
     param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
