@@ -2,7 +2,6 @@
 
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import type {TDPlayer} from "../../../view/td/player";
-import {overWriteTDSprite} from "../../../view/td/player";
 import type {HUDPlayer} from "../../../view/hud/player";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import {Battle3DCamera} from "../../../../../../game-object/camera/battle-3d";
@@ -63,25 +62,6 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
     hudObjects: view.hud.gameObjects,
     hudCamera: view.hud.camera,
     burst: effect.burst
-  };
-}
-
-/**
- * スプライトを引数の内容で上書きする
- *
- * @param param バーストアニメーションパラメータ
- * @param sprite 上書きするスプライト
- * @return 更新結果
- */
-export function overWriteSprite<OLD_SPRITE: ArmDozerSprite, NEW_SPRITE: ArmDozerSprite, BURST: Burst>(
-  param: BurstAnimationParam<OLD_SPRITE, BURST>,
-  sprite: NEW_SPRITE): BurstAnimationParam<NEW_SPRITE, BURST>
-{
-  const ignoreAttackerTD: $Diff<BurstAnimationParam<OLD_SPRITE, BURST>, { burstPlayerTD: TDPlayer<OLD_SPRITE> }> = param;
-  const burstPlayerTD = overWriteTDSprite(param.burstPlayerTD, sprite);
-  return {
-    ...ignoreAttackerTD,
-    burstPlayerTD: burstPlayerTD
   };
 }
 
