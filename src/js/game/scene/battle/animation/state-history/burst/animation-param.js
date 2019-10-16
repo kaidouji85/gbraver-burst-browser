@@ -64,22 +64,3 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
     burst: effect.burst
   };
 }
-
-/**
- * バーストを引数の内容で上書きする
- *
- * @param param バーストアニメーションパラメータ
- * @param burst 上書きするバースト
- * @return 更新結果
- */
-export function overWriteBurst<SPRITE: ArmDozerSprite, OLD_BURST: Burst, NEW_BURST: Burst>(
-  param: BurstAnimationParam<SPRITE, OLD_BURST>,
-  burst: NEW_BURST
-): BurstAnimationParam<SPRITE, NEW_BURST>
-{
-  const ignoreBurst: $Diff<BurstAnimationParam<SPRITE, OLD_BURST>, { burst: OLD_BURST }> = param;
-  return {
-    ...ignoreBurst,
-    burst: burst
-  };
-}

@@ -1,7 +1,6 @@
 // @flow
 
 import type {BurstAnimationParam} from "./animation-param";
-import {overWriteBurst} from "./animation-param";
 import {Animate} from "../../../../../../animation/animate";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {delay, empty} from "../../../../../../animation/delay";
@@ -15,10 +14,12 @@ import {all} from "../../../../../../animation/all";
  * @return バーストアニメーション
  */
 export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, Burst>): Animate {
-  const burst = param.burst;
-  if (burst.type === 'RecoverBattery') {
-    return recoverBattery(overWriteBurst(param, burst));
+  if (param.burst.type === 'RecoverBattery') {
+    const castBurst = (param.burst: RecoverBattery);
+    const castParam = ((param: any): BurstAnimationParam<ShinBraver, typeof castBurst>);
+    return recoverBattery(castParam);
   }
+
   return empty();
 }
 
