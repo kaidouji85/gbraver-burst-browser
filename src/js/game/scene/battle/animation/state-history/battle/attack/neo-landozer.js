@@ -2,7 +2,6 @@
 
 import {Animate} from "../../../../../../../animation/animate";
 import type {BattleAnimationParam} from "../animation-param";
-import {overWriteResult} from "../animation-param";
 import {NeoLandozer} from "../../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {delay, empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
@@ -20,23 +19,67 @@ import type {Feint} from "gbraver-burst-core/lib/effect/battle/result/feint";
  * @return アニメーション
  */
 export function neoLandozerAttack(param: BattleAnimationParam<NeoLandozer, BattleResult>): Animate {
-  if (param.isDeath && ((param.result.name === 'NormalHit') || (param.result.name === 'CriticalHit') || (param.result.name === 'Guard'))) {
-    return down(overWriteResult(param, param.result));
-  } else if ((param.result.name === 'NormalHit') || (param.result.name === 'CriticalHit')) {
-    return attack(overWriteResult(param, param.result));
-  } else if (param.result.name === 'Guard') {
-    return guard(overWriteResult(param, param.result));
-  } else if (param.result.name === 'Miss') {
-    return miss(overWriteResult(param, param.result));
-  } else if (param.result.name === 'Feint') {
-    return feint(overWriteResult(param, param.result));
-  } else {
-    return empty();
+  if (param.isDeath && param.result.name === 'NormalHit') {
+    const castResult = (param.result: NormalHit);
+    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, DownResult | typeof castResult>);
+    return down(castParam);
   }
+
+  if (param.result.name === 'NormalHit') {
+    const castResult = (param.result: NormalHit);
+    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, AttackResult | typeof castResult>);
+    return attack(castParam);
+  }
+
+  if (param.isDeath && param.result.name === 'CriticalHit') {
+    const castResult = (param.result: CriticalHit);
+    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, DownResult | typeof castResult>);
+    return down(castParam);
+  }
+
+  if (param.result.name === 'CriticalHit') {
+    const castResult = (param.result: CriticalHit);
+    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, AttackResult | typeof castResult>);
+    return attack(castParam);
+  }
+
+  if (param.isDeath && param.result.name === 'Guard') {
+    const castResult = (param.result: Guard);
+    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, DownResult | typeof castResult>);
+    return down(castParam);
+  }
+
+  if (param.result.name === 'Guard') {
+    const castResult = (param.result: Guard);
+    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, typeof castResult>);
+    return guard(castParam);
+  }
+
+  if (param.result.name === 'Miss') {
+    const castResult = (param.result: Miss);
+    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, typeof castResult>);
+    return miss(castParam);
+  }
+
+  if (param.result.name === 'Feint') {
+    const castResult = (param.result: Feint);
+    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, typeof castResult>);
+    return feint(castParam);
+  }
+
+  return empty();
 }
 
-/** 通常ヒット、クリティカルヒット */
-function attack(param: BattleAnimationParam<NeoLandozer, NormalHit | CriticalHit>): Animate {
+/** attackが受け取ることができる戦闘結果 */
+type AttackResult = NormalHit | CriticalHit;
+
+/**
+ * 攻撃ヒット
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function attack(param: BattleAnimationParam<NeoLandozer, AttackResult>): Animate {
   return all(
     param.attackerTD.sprite.charge()
       .chain(delay(600))
@@ -56,7 +99,12 @@ function attack(param: BattleAnimationParam<NeoLandozer, NormalHit | CriticalHit
   );
 }
 
-/** ガード */
+/**
+ * ガード
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
 function guard(param: BattleAnimationParam<NeoLandozer, Guard>): Animate {
   return all(
     param.attackerTD.sprite.charge()
@@ -77,7 +125,12 @@ function guard(param: BattleAnimationParam<NeoLandozer, Guard>): Animate {
   );
 }
 
-/** ミス */
+/**
+ * ミス
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
 function miss(param: BattleAnimationParam<NeoLandozer, Miss>): Animate {
   return all(
     param.attackerTD.sprite.charge()
@@ -93,7 +146,12 @@ function miss(param: BattleAnimationParam<NeoLandozer, Miss>): Animate {
   );
 }
 
-/** フェイント */
+/**
+ * フェイント
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
 function feint(param: BattleAnimationParam<NeoLandozer, Feint>): Animate {
   if (!param.result.isDefenderMoved) {
     return empty();
@@ -104,8 +162,16 @@ function feint(param: BattleAnimationParam<NeoLandozer, Feint>): Animate {
     .chain(param.defenderTD.sprite.avoidToStand())
 }
 
-/** とどめ */
-function down(param: BattleAnimationParam<NeoLandozer, NormalHit | Guard | CriticalHit>): Animate {
+/** downが受け取ることができる戦闘結果 */
+type DownResult = NormalHit | Guard | CriticalHit;
+
+/**
+ * とどめ
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function down(param: BattleAnimationParam<NeoLandozer, DownResult>): Animate {
   return all(
     param.attackerTD.sprite.charge()
       .chain(delay(600))
