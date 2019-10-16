@@ -39,30 +39,6 @@ export function appendTDPlayer<T: ArmDozerSprite>(scene: THREE.Scene, player: TD
 }
 
 /**
- * 3Dプレイヤーオブジェクトのスプライトを、引数で上書きする
- * その際にスプライトのデータ型も変更する
- * 本関数はスプライトの型キャストに使用する想定である
- *
- * 例)
- * const target: TDPlayer<ArmdozerSprite> = {...}
- * const sprite = target.sprite;
- * if (sprite instanceof ShinBraver) {
- *   const cast: TDPlayer<ShinBraver> = overWriteTDSprite(target, sprite);
- * }
- *
- * @param target 上書き対象の3Dプレイヤー
- * @param sprite 上書きするスプライト
- * @return 上書き結果
- */
-export function overWriteTDSprite<OLD: ArmDozerSprite, NEW: ArmDozerSprite>(target: TDPlayer<OLD>, sprite: NEW): TDPlayer<NEW> {
-  const ignoreSprite: $Diff<TDPlayer<OLD>, {sprite: OLD}> = target;
-  return {
-    ...ignoreSprite,
-    sprite: sprite
-  };
-}
-
-/**
  * 3Dレイヤーのプレイヤー関係オブジェクトのリソースを破棄する
  * リソース解放等を行う
  *
