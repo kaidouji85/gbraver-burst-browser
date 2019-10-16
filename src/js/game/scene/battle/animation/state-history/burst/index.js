@@ -6,7 +6,7 @@ import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {updateGauge} from "../update-gauge";
 import type {BurstAnimationParam} from "./animation-param";
-import {overWriteSprite, toBurstAnimationParam} from "./animation-param";
+import {toBurstAnimationParam} from "./animation-param";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {shinBraverBurst} from "./shin-braver";
 import type {ArmdozerState} from "gbraver-burst-core/lib/game-state/armdozer/armdozer-state";
@@ -40,7 +40,8 @@ export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneSta
 function armdozerAnimation(param: BurstAnimationParam<ArmdozerState, Burst>): Animate {
   const sprite = param.burstPlayerTD.sprite;
   if (sprite instanceof ShinBraver) {
-    return shinBraverBurst(overWriteSprite(param, sprite));
+    const castParam = ((param: any):  BurstAnimationParam<typeof sprite, Burst>);
+    return shinBraverBurst(castParam);
   }
 
   return empty();

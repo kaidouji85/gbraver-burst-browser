@@ -2,7 +2,6 @@
 
 import {Animate} from "../../../../../../../animation/animate";
 import type {BattleAnimationParam} from "../animation-param";
-import {overWriteResult} from "../animation-param";
 import type {ArmDozerSprite} from "../../../../../../../game-object/armdozer/armdozer-sprite";
 import {empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
@@ -18,19 +17,37 @@ import type {Guard} from "gbraver-burst-core/lib/effect/battle/result/guard";
  * @return アニメーション
  */
 export function emptyAttackAnimation(param: BattleAnimationParam<ArmDozerSprite, BattleResult>): Animate {
-  const result = param.result;
-  switch (result.name) {
-    case 'NormalHit':
-    case 'CriticalHit':
-    case 'Guard':
-      return viewDamage(overWriteResult(param, result));
-    default:
-      return empty();
+  if (param.result.name === 'NormalHit') {
+    const castResult = (param.result: NormalHit);
+    const castParam = ((param: any): BattleAnimationParam<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
+    return viewDamage(castParam);
   }
+
+  if (param.result.name === 'CriticalHit') {
+    const castResult = (param.result: CriticalHit);
+    const castParam = ((param: any): BattleAnimationParam<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
+    return viewDamage(castParam);
+  }
+
+  if (param.result.name === 'Guard') {
+    const castResult = (param.result: Guard);
+    const castParam = ((param: any): BattleAnimationParam<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
+    return viewDamage(castParam);
+  }
+
+  return empty();
 }
 
-/** 通常ヒット、クリティカルヒット、ガード */
-function viewDamage(param: BattleAnimationParam<ArmDozerSprite, NormalHit | CriticalHit | Guard>): Animate {
+/** viewDamageが受け取ることができる戦闘結果 */
+type ViewDamageResult = NormalHit | CriticalHit | Guard;
+
+/**
+ * ダメージ数字だけを表示する
+ *
+ * @param param アニメーションパラメータ
+ * @return アニメーション
+ */
+function viewDamage(param: BattleAnimationParam<ArmDozerSprite, ViewDamageResult>): Animate {
   return all(
     param.defenderTD.damageIndicator.popUp(param.result.damage),
     param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
