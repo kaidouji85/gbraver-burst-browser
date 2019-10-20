@@ -19,6 +19,7 @@ html, body {
     display: flex;
     flex-direction: column;
     padding: 1em;
+    box-sizing: border-box;
 }
 
 .service-worker-update__title {
