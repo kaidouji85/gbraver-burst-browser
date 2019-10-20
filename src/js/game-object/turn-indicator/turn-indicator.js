@@ -11,6 +11,7 @@ import type {PreRender} from "../../action/game-loop/pre-render";
 import {invisible} from "./animation/invisible";
 import {turnChange} from "./animation/turn-change";
 import {Animate} from "../../animation/animate";
+import {createInitialValue} from "./model/initial-value";
 
 type Param = {
   resources: Resources,
@@ -24,10 +25,7 @@ export class TurnIndicator {
   _subscription: Subscription;
 
   constructor(param: Param) {
-    this._model = {
-      isPlayerTurn: true,
-      opacity: 1
-    };
+    this._model = createInitialValue();
     this._view = new TurnIndicatorView(param.resources);
 
     this._subscription = param.listener.subscribe(action => {
