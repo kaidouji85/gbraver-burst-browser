@@ -1,13 +1,14 @@
 // @flow
 
 import TWEEN from "@tweenjs/tween.js";
-import {Observable, Subject, Subscription} from "rxjs";
+import {merge, Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../../../action/dom-event";
 import {TitleHudLayer} from "./hud";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../action/game-loop/render";
 import type {Resources} from "../../../../resource";
 import type {TitleSceneAction} from "../../../../action/title-scene/title-scene-action";
+import {TitleTDLayer} from "./td";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -28,18 +29,30 @@ type Notifier = {
 /** タイトルシーンビュー */
 export class TitleView {
   hud: TitleHudLayer;
+  td: TitleTDLayer;
 
   _hudGameLoop: Subject<GameLoop>;
+  _tdGameLoop: Subject<GameLoop>;
   _subscription: Subscription;
 
   constructor(param: Param) {
     this._hudGameLoop = new Subject();
+    this._tdGameLoop = new Subject();
 
     this.hud = new TitleHudLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
       listener: {
         gameLoop: this._hudGameLoop,
+        domEvent: param.listener.domEvent
+      }
+    });
+
+    this.td = new TitleTDLayer({
+      resources: param.resources,
+      rendererDOM: param.rendererDOM,
+      listener: {
+        gameLoop: this._tdGameLoop,
         domEvent: param.listener.domEvent
       }
     });
@@ -52,6 +65,7 @@ export class TitleView {
   /** デストラクタ相当処理 */
   destructor(): void {
     this.hud.destructor();
+    this.td.destructor();
     this._subscription.unsubscribe();
   }
 
@@ -62,7 +76,10 @@ export class TitleView {
    */
   notifier(): Notifier {
     return {
-      render: this.hud.notifier().render,
+      render: merge(
+        this.hud.notifier().render,
+        this.td.notifier().render,
+      ),
       titleAction: this.hud.notifier().titleAction,
     }
   }
@@ -74,6 +91,7 @@ export class TitleView {
    */
   _onGameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
+    this._tdGameLoop.next(action);
     this._hudGameLoop.next(action);
   }
 }

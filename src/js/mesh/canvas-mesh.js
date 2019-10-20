@@ -26,7 +26,6 @@ export class CanvasMesh {
       map: texture,
       transparent: true
     });
-    material.transparent = true;
     const planeGeometry = new THREE.PlaneGeometry(params.meshWidth, params.meshHeight);
 
     this.mesh = new THREE.Mesh(planeGeometry, material);
