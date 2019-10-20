@@ -27,8 +27,6 @@ export class TitleLogoView {
       ? titleResource.image
       : new Image();
     this._canvasMesh.draw(context => {
-      context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-
       const dx = context.canvas.width / 2;
       const dy = context.canvas.height / 2;
       drawImageInCenter(context, title, dx, dy);

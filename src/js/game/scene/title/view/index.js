@@ -32,10 +32,12 @@ export class TitleView {
   td: TitleTDLayer;
 
   _hudGameLoop: Subject<GameLoop>;
+  _tdGameLoop: Subject<GameLoop>;
   _subscription: Subscription;
 
   constructor(param: Param) {
     this._hudGameLoop = new Subject();
+    this._tdGameLoop = new Subject();
 
     this.hud = new TitleHudLayer({
       resources: param.resources,
@@ -50,7 +52,7 @@ export class TitleView {
       resources: param.resources,
       rendererDOM: param.rendererDOM,
       listener: {
-        gameLoop: this._hudGameLoop,
+        gameLoop: this._tdGameLoop,
         domEvent: param.listener.domEvent
       }
     });
@@ -89,6 +91,7 @@ export class TitleView {
    */
   _onGameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
+    this._tdGameLoop.next(action);
     this._hudGameLoop.next(action);
   }
 }
