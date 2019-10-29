@@ -17,13 +17,13 @@ type Param = {
 /** HTML要素を集めたもの */
 export class Components {
   /** ローディング */
-  _loading: Loading;
+  loading: Loading;
 
   /** サービスワーカー更新 */
-  _serviceWorkerUpdate: ServiceWorkerUpdate;
+  serviceWorkerUpdate: ServiceWorkerUpdate;
 
   constructor(param: Param) {
-    this._loading = new Loading(param.listener.loading);
-    this._serviceWorkerUpdate = new ServiceWorkerUpdate(param.listener.serviceWorker);
+    this.loading = new Loading(param.listener.loading);
+    this.serviceWorkerUpdate = new ServiceWorkerUpdate(param.listener.serviceWorker);
   }
 }
