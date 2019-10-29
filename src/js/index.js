@@ -3,7 +3,7 @@
 import '../css/index.css';
 
 import {Observable, Subject} from "rxjs";
-import {OuterGame} from "./outer-game";
+import {Components} from "./components";
 import {viewPerformanceStats} from "./stats/view-performance-stats";
 import {loadServiceWorker} from "./service-worker/load-service-worker";
 import {loadAllResource} from "./resource";
@@ -28,7 +28,7 @@ async function main(): Promise<void> {
     const serviceWorkerAction: Subject<ServiceWorkerAction> = new Subject();
     const loadingAction: Observable<LoadingAction> = createLoadingActionListener(THREE.DefaultLoadingManager);
 
-    const outerGame = new OuterGame({
+    const components = new Components({
       listener: {
         loading: loadingAction,
         serviceWorker: serviceWorkerAction

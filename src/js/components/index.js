@@ -14,8 +14,8 @@ type Param = {
   }
 };
 
-/** Three.JSシーン以外をまとめたもの */
-export class OuterGame {
+/** HTML要素を集めたもの */
+export class Components {
   /** ローディング */
   _loading: Loading;
 
