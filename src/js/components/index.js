@@ -23,7 +23,10 @@ export class Components {
   serviceWorkerUpdate: ServiceWorkerUpdate;
 
   constructor(param: Param) {
-    this.loading = new Loading(param.listener.loading);
-    this.serviceWorkerUpdate = new ServiceWorkerUpdate(param.listener.serviceWorker);
+    const loadingDOM: HTMLElement = document.querySelector('#loading-scene') || document.createElement('div');
+    this.loading = new Loading(loadingDOM, param.listener.loading);
+
+    const serviceWorkerDOM: HTMLElement = document.querySelector("#service-worker-update-scene") || document.createElement('div');
+    this.serviceWorkerUpdate = new ServiceWorkerUpdate(serviceWorkerDOM, param.listener.serviceWorker);
   }
 }

@@ -14,9 +14,9 @@ export class Loading {
   _view: LoadingView;
   _subscription: Subscription;
 
-  constructor(loading: Observable<LoadingAction>) {
+  constructor(dom: HTMLElement, loading: Observable<LoadingAction>) {
     this._state = createInitialState();
-    this._view = new LoadingView();
+    this._view = new LoadingView(dom);
     this._subscription = loading.subscribe(action => {
       if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);

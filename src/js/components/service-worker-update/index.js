@@ -13,8 +13,8 @@ export class ServiceWorkerUpdate {
   _state: ServiceWorkerUpdateState;
   _subscription: Subscription;
 
-  constructor(serviceWorker: Observable<ServiceWorkerAction>) {
-    this._view = new ServiceWorkerUpdateView();
+  constructor(dom: HTMLElement, serviceWorker: Observable<ServiceWorkerAction>) {
+    this._view = new ServiceWorkerUpdateView(dom);
     this._state = createInitialValue();
     this._view.engage(this._state);
     this._subscription = serviceWorker.subscribe(action => {

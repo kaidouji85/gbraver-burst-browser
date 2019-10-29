@@ -12,7 +12,7 @@ import {LoadingComponent} from "./loading-component";
 export class LoadingView {
   _dom: HTMLElement;
 
-  constructor() {
+  constructor(dom: HTMLElement) {
     this._dom = document.querySelector('#loading-scene') || document.createElement('div');
   }
 

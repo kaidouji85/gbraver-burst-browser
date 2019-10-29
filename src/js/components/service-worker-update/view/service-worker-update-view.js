@@ -8,8 +8,8 @@ import type {ServiceWorkerUpdateState} from "../state/service-worker-update-stat
 export class ServiceWorkerUpdateView {
   _dom: HTMLElement;
 
-  constructor() {
-    this._dom = document.querySelector("#service-worker-update-scene") || document.createElement('div');
+  constructor(dom: HTMLElement) {
+    this._dom = dom;
   }
 
   /**
