@@ -16,7 +16,11 @@ import {createLoadingActionListener} from "./action/loading/create-listener";
 import type {LoadingAction} from "./action/loading/loading";
 import {createServiceWorkerActionListener} from "./action/service-worker/create-listener";
 import type {Resources} from "./resource";
+import type {EndTitle} from "./action/game/end-title";
+import type {EndBattle} from "./action/game/end-battle";
+import {createDummyBattleRoom} from "./battle-room/dummy-battle-room";
 
+/** Gameで使用するストリーム */
 export class GameStream {
   serviceWorker: Subject<ServiceWorkerAction>;
   loading: Observable<LoadingAction>;
@@ -27,6 +31,7 @@ export class GameStream {
   }
 }
 
+/** ゲーム全体の管理を行う */
 export class Game {
   _stream: GameStream;
   _components: Components;
@@ -44,7 +49,15 @@ export class Game {
     });
     this._threeJSCanvas = new ThreeJSCanvas();
     this._resources = null;
-    this._subscription = [];
+    this._subscription = [
+      this._threeJSCanvas.notifier().gameAction.subscribe(action => {
+        if(action.type === 'endBattle') {
+          this._onEndBattle(action);
+        } else if (action.type === 'EndTitle') {
+          this._onEndTitle(action);
+        }
+      })
+    ];
   }
 
   async start(): Promise<void> {
@@ -54,12 +67,44 @@ export class Game {
       }
       const serviceWorker = await loadServiceWorker();
       if (serviceWorker) {
-        // TODO アプリ終了時にSubscriptionを破棄する
-        createServiceWorkerActionListener(serviceWorker)
-          .subscribe(this._stream.serviceWorker);
+        this._subscription = [
+          ...this._subscription,
+          createServiceWorkerActionListener(serviceWorker)
+            .subscribe(this._stream.serviceWorker)
+        ];
       }
 
       const resources = await loadAllResource(`${resourceBasePath()}/`);
+      this._threeJSCanvas.bindTitle(resources);
+      this._resources = resources;
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  async _onEndTitle(action: EndTitle) {
+    try {
+      if (!this._resources) {
+        return;
+      }
+      const resources: Resources = this._resources;
+      const room = createDummyBattleRoom();
+      const initialState = await room.start();
+      this._threeJSCanvas.bindBattleScene(resources, room, initialState);
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  async _onEndBattle(action: EndBattle) {
+    try {
+      if (!this._resources) {
+        return;
+      }
+      const resources: Resources = this._resources;
+      const room = createDummyBattleRoom();
+      const initialState = await room.start();
+      this._threeJSCanvas.bindBattleScene(resources, room, initialState);
     } catch(e) {
       throw e;
     }
@@ -71,29 +116,8 @@ export class Game {
  */
 async function main(): Promise<void> {
   try {
-    if (isDevelopment()) {
-      viewPerformanceStats(document.body);
-    }
-
-    const serviceWorkerAction: Subject<ServiceWorkerAction> = new Subject();
-    const loadingAction: Observable<LoadingAction> = createLoadingActionListener(THREE.DefaultLoadingManager);
-
-    const components = new Components({
-      listener: {
-        loading: loadingAction,
-        serviceWorker: serviceWorkerAction
-      }
-    });
-
-    const serviceWorker = await loadServiceWorker();
-    if (serviceWorker) {
-      // TODO アプリ終了時にSubscriptionを破棄する
-      createServiceWorkerActionListener(serviceWorker)
-        .subscribe(serviceWorkerAction);
-    }
-
-    const resources = await loadAllResource(`${resourceBasePath()}/`);
-    const threeJSCanvas = new ThreeJSCanvas();
+    const game = new Game();
+    await game.start();
   } catch(e) {
     throw e;
   }
