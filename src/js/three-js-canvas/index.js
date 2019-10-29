@@ -6,7 +6,7 @@ import {createRender} from "../render/create-render";
 import {isDevelopment} from "../webpack/mode";
 import {BoundSceneCache} from "./bind/bound-scene-cache";
 import {bindBattleScene} from "./bind/bind-battle-scene";
-import {GameStream} from "./stream";
+import {ThreeJSCanvasStream} from "./stream";
 import {bindTitleScene} from "./bind/bind-title-scene";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {Observable} from "rxjs";
@@ -19,12 +19,12 @@ type Notifier = {
 
 /** three.jsキャンバス全体を管理する */
 export class ThreeJSCanvas {
-  _stream: GameStream;
+  _stream: ThreeJSCanvasStream;
   _renderer: Renderer;
   _sceneCache: ?BoundSceneCache;
 
   constructor() {
-    this._stream = new GameStream();
+    this._stream = new ThreeJSCanvasStream();
 
     const threeJsRender = createRender();
     if (threeJsRender.domElement && document.body) {

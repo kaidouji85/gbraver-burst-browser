@@ -6,14 +6,14 @@ import type {GameAction} from "../action/game/game-action";
 import type {GameLoop} from "../action/game-loop/game-loop";
 import {createGameLoopListener} from "../action/game-loop/create-listener";
 
-/** ゲーム全体で利用するイベントストリーム */
-export class GameStream {
+/** three.jsキャンバスで使用するイベントストリーム */
+export class ThreeJSCanvasStream {
   /**
    * レンダリングのストリーム
    * シーンからレンダラにレンダリングイベントを伝搬するために利用する
    * 状況によりシーンは動的に切り替わるので、本プロパティが以下のように緩衝材となる
    *
-   * Scene -> GameStream::render -> Renderer
+   * Scene -> ThreeJSCanvasStream::render -> Renderer
    */
   render: Subject<Render>;
 
@@ -22,7 +22,7 @@ export class GameStream {
    * シーンからゲームにアクションを伝えるために利用する
    * シーンは動的に入れ替わるので、本プロパティが以下のように緩衝材となる
    *
-   * Scene -> GameStream::gameAction -> Game
+   * Scene -> ThreeJSCanvasStream::gameAction -> Game
    */
   gameAction: Subject<GameAction>;
 
