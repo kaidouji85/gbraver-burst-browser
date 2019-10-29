@@ -9,7 +9,7 @@ import {loadServiceWorker} from "./service-worker/load-service-worker";
 import {loadAllResource} from "./resource";
 import {resourceBasePath} from "./resource/resource-base-path";
 import * as THREE from "three";
-import {Game} from "./game";
+import {ThreeJSCanvas} from "./three-js-canvas";
 import {isDevelopment} from "./webpack/mode";
 import type {ServiceWorkerAction} from "./action/service-worker/service-worker";
 import {createLoadingActionListener} from "./action/loading/create-listener";
@@ -43,7 +43,7 @@ async function main(): Promise<void> {
     }
 
     const resources = await loadAllResource(`${resourceBasePath()}/`);
-    const game = new Game(resources);
+    const threeJSCanvas = new ThreeJSCanvas();
   } catch(e) {
     throw e;
   }
