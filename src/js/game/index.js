@@ -37,9 +37,11 @@ export class Game {
       this._threeJSCanvas.notifier().gameAction.subscribe(action => {
         if (action.type === 'endBattle') {
           this._onEndBattle(action);
-        } else if (action.type === 'EndTitle') {
-          this._onEndTitle(action);
         }
+      }),
+
+      this._components.notifier().endTitle.subscribe(action => {
+        this._onEndTitle(action);
       })
     ];
   }
@@ -58,10 +60,6 @@ export class Game {
             .subscribe(this._stream.serviceWorker)
         ];
       }
-
-      // const resources = await loadAllResource(`${resourceBasePath()}/`);
-      // this._threeJSCanvas.bindTitle(resources);
-      // this._resources = resources;
     } catch (e) {
       throw e;
     }
@@ -74,13 +72,11 @@ export class Game {
    */
   async _onEndTitle(action: EndTitle) {
     try {
-      if (!this._resources) {
-        return;
-      }
-      const resources: Resources = this._resources;
+      const resources = await loadAllResource(`${resourceBasePath()}/`);
       const room = createDummyBattleRoom();
       const initialState = await room.start();
       this._threeJSCanvas.bindBattleScene(resources, room, initialState);
+      this._resources = resources;
     } catch (e) {
       throw e;
     }

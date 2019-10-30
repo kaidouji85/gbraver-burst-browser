@@ -6,6 +6,12 @@ import type {LoadingAction} from "../action/loading/loading";
 import {ServiceWorkerUpdate} from "./service-worker-update";
 import type {ServiceWorkerAction} from "../action/service-worker/service-worker";
 import {Title} from "./title";
+import type {EndTitle} from "../action/game/end-title";
+
+/** イベント通知 */
+type Notifier = {
+  endTitle: Observable<EndTitle>
+};
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -36,5 +42,12 @@ export class Components {
   destructor() {
     this.loading.destructor();
     this.serviceWorkerUpdate.destructor();
+  }
+
+  /** イベント通知ストリーム */
+  notifier(): Notifier {
+    return {
+      endTitle: this.title.notifier().endTitle
+    };
   }
 }
