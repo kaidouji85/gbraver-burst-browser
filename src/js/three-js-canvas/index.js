@@ -7,7 +7,6 @@ import {isDevelopment} from "../webpack/mode";
 import {BoundSceneCache} from "./bind/bound-scene-cache";
 import {bindBattleScene} from "./bind/bind-battle-scene";
 import {ThreeJSCanvasStream} from "./stream";
-import {bindTitleScene} from "./bind/bind-title-scene";
 import type {BattleRoom, InitialState} from "../battle-room/battle-room";
 import {Observable} from "rxjs";
 import type {GameAction} from "../action/game/game-action";
@@ -54,20 +53,6 @@ export class ThreeJSCanvas {
     return {
       gameAction: this._stream.gameAction
     };
-  }
-
-  /**
-   * three.jsキャンバスタイトルシーンを関連付ける
-   *
-   * @param resources リソース管理オブジェクト
-   */
-  bindTitle(resources: Resources): void {
-    this._sceneCache && this._sceneCache.destructor();
-    this._sceneCache = bindTitleScene(resources, this._renderer, this._stream);
-    // デバッグ用にレンダラ情報をコンソールに出力
-    if (isDevelopment()) {
-      console.log(this._renderer.info());
-    }
   }
 
   /**
