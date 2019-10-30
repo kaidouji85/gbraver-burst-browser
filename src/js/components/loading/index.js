@@ -5,7 +5,7 @@ import {LoadingView} from "./view";
 import {createInitialState} from "./state/initial-value";
 import {progress} from "./state/progress";
 import {complete} from "./state/complete";
-import type {LoadingAction, LoadingComplete, LoadingProgress} from "../../action/loading/loading";
+import type {LoadingAction, LoadingComplete, LoadingProgress, LoadingStart} from "../../action/loading/loading";
 import {Observable, Subscription} from "rxjs";
 
 /** ローディング */
@@ -18,7 +18,9 @@ export class Loading {
     this._state = createInitialState();
     this._view = new LoadingView(dom);
     this._subscription = loading.subscribe(action => {
-      if (action.type === 'LoadingProgress') {
+      if (action.type === 'LoadingStart') {
+        this._onLoadingStart(action);
+      } else if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);
       } else if (action.type === 'LoadingComplete') {
         this._onLoadingComplete(action);
@@ -33,8 +35,12 @@ export class Loading {
     this._subscription.unsubscribe();
   }
 
-  /** リソースロードが開始された */
-  start(): void {
+  /**
+   * リソースロードが開始された
+   *
+   * @param action アクション
+   */
+  _onLoadingStart(action: LoadingStart): void {
     this._state = {...this._state, isVisible: true};
     this._view.engage(this._state);
   }
