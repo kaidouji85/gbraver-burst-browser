@@ -1,6 +1,6 @@
 // @flow
 
-import {ServiceWorkerUpdateView} from "./view/service-worker-update-view";
+import {ServiceWorkerUpdateView} from "./view";
 import type {ServiceWorkerUpdateState} from "./state/service-worker-update-state";
 import {createInitialValue} from "./state/initial-value";
 import {Observable, Subscription} from "rxjs";
@@ -13,8 +13,8 @@ export class ServiceWorkerUpdate {
   _state: ServiceWorkerUpdateState;
   _subscription: Subscription;
 
-  constructor(serviceWorker: Observable<ServiceWorkerAction>) {
-    this._view = new ServiceWorkerUpdateView();
+  constructor(dom: HTMLElement, serviceWorker: Observable<ServiceWorkerAction>) {
+    this._view = new ServiceWorkerUpdateView(dom);
     this._state = createInitialValue();
     this._view.engage(this._state);
     this._subscription = serviceWorker.subscribe(action => {

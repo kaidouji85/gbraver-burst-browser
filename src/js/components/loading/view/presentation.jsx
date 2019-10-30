@@ -14,7 +14,7 @@ export type Props = {
  * @param props プロパティ
  * @return 生成結果
  */
-export function LoadingComponent(props: Props) {
+export function LoadingPresentation(props: Props) {
   return (
     <div className="loading" style={{
       display: props.isVisible

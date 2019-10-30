@@ -3,7 +3,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 import type {LoadingState} from "../state/loading-state";
-import {LoadingComponent} from "./loading-component";
+import {LoadingPresentation} from "./presentation";
 
 /**
  * ローディングのビュー
@@ -12,8 +12,8 @@ import {LoadingComponent} from "./loading-component";
 export class LoadingView {
   _dom: HTMLElement;
 
-  constructor() {
-    this._dom = document.querySelector('#loading-scene') || document.createElement('div');
+  constructor(dom: HTMLElement) {
+    this._dom = dom;
   }
 
   /**
@@ -22,7 +22,7 @@ export class LoadingView {
    * @param state 状態
    */
   engage(state: LoadingState): void {
-    render(LoadingComponent({
+    render(LoadingPresentation({
       isVisible: state.isVisible,
       completedRate: state.completedRate
     }), this._dom);

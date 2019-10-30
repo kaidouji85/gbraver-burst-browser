@@ -5,7 +5,7 @@ import {Renderer} from "../../game-object/renderer";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {BoundSceneCache} from "./bound-scene-cache";
 import {BattleScene} from "../scene/battle";
-import {GameStream} from "../stream";
+import {ThreeJSCanvasStream} from "../stream";
 
 /**
  * 戦闘シーンをゲームに関連付ける
@@ -17,7 +17,7 @@ import {GameStream} from "../stream";
  * @param initialState 初期状態
  * @return シーン関連付けキャッシュ
  */
-export function bindBattleScene(resources: Resources, renderer: Renderer, stream: GameStream, battleRoom: BattleRoom, initialState: InitialState): BoundSceneCache {
+export function bindBattleScene(resources: Resources, renderer: Renderer, stream: ThreeJSCanvasStream, battleRoom: BattleRoom, initialState: InitialState): BoundSceneCache {
   const scene = new BattleScene({
     resources: resources,
     rendererDOM: renderer.getRendererDOM(),

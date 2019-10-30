@@ -1,7 +1,7 @@
 // @flow
 
 import type {LoadingState} from "./state/loading-state";
-import {LoadingView} from "./view/loading-view";
+import {LoadingView} from "./view";
 import {createInitialState} from "./state/initial-value";
 import {progress} from "./state/progress";
 import {complete} from "./state/complete";
@@ -14,9 +14,9 @@ export class Loading {
   _view: LoadingView;
   _subscription: Subscription;
 
-  constructor(loading: Observable<LoadingAction>) {
+  constructor(dom: HTMLElement, loading: Observable<LoadingAction>) {
     this._state = createInitialState();
-    this._view = new LoadingView();
+    this._view = new LoadingView(dom);
     this._subscription = loading.subscribe(action => {
       if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);
@@ -29,7 +29,7 @@ export class Loading {
   }
 
   /** デストラクタ相当の処理 */
-  destrucotr(): void {
+  destructor(): void {
     this._subscription.unsubscribe();
   }
 

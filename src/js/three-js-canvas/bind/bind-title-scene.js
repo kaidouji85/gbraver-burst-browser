@@ -4,7 +4,7 @@ import type {Resources} from "../../resource";
 import {Renderer} from "../../game-object/renderer";
 import {BoundSceneCache} from "./bound-scene-cache";
 import {TitleScene} from "../scene/title";
-import {GameStream} from "../stream";
+import {ThreeJSCanvasStream} from "../stream";
 
 /**
  * タイトルシーンをゲームに関連付けする
@@ -14,7 +14,7 @@ import {GameStream} from "../stream";
  * @param stream Game全体のストリーム
  * @return シーン関連付けキャッシュ
  */
-export function bindTitleScene(resources: Resources, renderer: Renderer, stream: GameStream): BoundSceneCache {
+export function bindTitleScene(resources: Resources, renderer: Renderer, stream: ThreeJSCanvasStream): BoundSceneCache {
   const scene = new TitleScene({
     resources: resources,
     rendererDOM: renderer.getRendererDOM(),
