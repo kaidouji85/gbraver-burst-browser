@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react';
+import {resourceBasePath} from "../../../resource/resource-base-path";
 
 /** プロパティ */
 type Props = {
@@ -16,7 +17,7 @@ export function TitlePresentation(props: Props) {
     <div className="title" onClick={props.onTouch} onTouchStart={props.onTouch} style={{
       display: props.isVisible ? 'flex' : 'none'
     }}>
-      タイトル
+      <img src={`${resourceBasePath()}/logo.png`} />
     </div>
   );
 }
