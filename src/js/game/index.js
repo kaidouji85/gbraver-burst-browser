@@ -59,9 +59,9 @@ export class Game {
         ];
       }
 
-      const resources = await loadAllResource(`${resourceBasePath()}/`);
-      this._threeJSCanvas.bindTitle(resources);
-      this._resources = resources;
+      // const resources = await loadAllResource(`${resourceBasePath()}/`);
+      // this._threeJSCanvas.bindTitle(resources);
+      // this._resources = resources;
     } catch (e) {
       throw e;
     }
