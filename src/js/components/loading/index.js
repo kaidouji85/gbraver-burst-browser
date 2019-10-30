@@ -33,6 +33,12 @@ export class Loading {
     this._subscription.unsubscribe();
   }
 
+  /** リソースロードが開始された */
+  start(): void {
+    this._state = {...this._state, isVisible: true};
+    this._view.engage(this._state);
+  }
+
   /**
    * リソースのローディング進捗に変化があった際のイベント
    *

@@ -72,6 +72,7 @@ export class Game {
    */
   async _onEndTitle(action: EndTitle) {
     try {
+      this._components.loading.start();
       const resources = await loadAllResource(`${resourceBasePath()}/`);
       const room = createDummyBattleRoom();
       const initialState = await room.start();
