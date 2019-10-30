@@ -1,6 +1,6 @@
 // @flow
 
-import {ServiceWorkerUpdateView} from "./view/service-worker-update-view";
+import {ServiceWorkerUpdateView} from "./view";
 import type {ServiceWorkerUpdateState} from "./state/service-worker-update-state";
 import {createInitialValue} from "./state/initial-value";
 import {Observable, Subscription} from "rxjs";

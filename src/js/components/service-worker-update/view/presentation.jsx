@@ -12,7 +12,7 @@ type ServiceWorkerUpdateProps = {
  *
  * @return サービスワーカー更新
  */
-export function ServiceWorkerUpdateComponent(props: ServiceWorkerUpdateProps) {
+export function ServiceWorkerUpdatePresentation(props: ServiceWorkerUpdateProps) {
   return (
     <div className="service-worker-update" style={{
       display: props.isVisible

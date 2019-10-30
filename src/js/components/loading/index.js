@@ -1,7 +1,7 @@
 // @flow
 
 import type {LoadingState} from "./state/loading-state";
-import {LoadingView} from "./view/loading-view";
+import {LoadingView} from "./view";
 import {createInitialState} from "./state/initial-value";
 import {progress} from "./state/progress";
 import {complete} from "./state/complete";
@@ -29,7 +29,7 @@ export class Loading {
   }
 
   /** デストラクタ相当の処理 */
-  destrucotr(): void {
+  destructor(): void {
     this._subscription.unsubscribe();
   }
 

@@ -29,4 +29,10 @@ export class Components {
     const serviceWorkerDOM: HTMLElement = document.querySelector("#service-worker-update-scene") || document.createElement('div');
     this.serviceWorkerUpdate = new ServiceWorkerUpdate(serviceWorkerDOM, param.listener.serviceWorker);
   }
+
+  /** デストラクタ相当の処理 */
+  destructor() {
+    this.loading.destructor();
+    this.serviceWorkerUpdate.destructor();
+  }
 }
