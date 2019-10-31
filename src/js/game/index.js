@@ -1,71 +1,64 @@
 // @flow
 
-import type {Resources} from "../resource";
-import {Renderer} from "../game-object/renderer";
-import {Subscription} from "rxjs";
-import type {EndBattle} from "../action/game/end-battle";
-import {createRender} from "../render/create-render";
-import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-import {isDevelopment} from "../webpack/mode";
-import {BoundSceneCache} from "./bind/bound-scene-cache";
-import {bindBattleScene} from "./bind/bind-battle-scene";
 import {GameStream} from "./stream";
-import {bindTitleScene} from "./bind/bind-title-scene";
+import {Components} from "../components";
+import {ThreeJSCanvas} from "../three-js-canvas";
+import type {Resources} from "../resource";
+import {loadAllResource} from "../resource";
+import {Subscription} from "rxjs";
+import {isDevelopment} from "../webpack/mode";
+import {viewPerformanceStats} from "../stats/view-performance-stats";
+import {loadServiceWorker} from "../service-worker/load-service-worker";
+import {createServiceWorkerActionListener} from "../action/service-worker/create-listener";
+import {resourceBasePath} from "../resource/resource-base-path";
 import type {EndTitle} from "../action/game/end-title";
+import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
+import type {EndBattle} from "../action/game/end-battle";
 
-/** ゲーム全体の制御を行う */
+/** ゲーム全体の管理を行う */
 export class Game {
-  _resources: Resources;
   _stream: GameStream;
-  _renderer: Renderer;
-  _sceneCache: BoundSceneCache;
-  _subscription: Subscription;
+  _components: Components;
+  _threeJSCanvas: ThreeJSCanvas;
+  _resources: ?Resources;
+  _subscription: Subscription[];
 
-  constructor(resources: Resources) {
-    this._resources = resources;
+  constructor() {
     this._stream = new GameStream();
-
-    const threeJsRender = createRender();
-    if (threeJsRender.domElement && document.body) {
-      document.body.appendChild(threeJsRender.domElement);
-    }
-    this._renderer = new Renderer({
-      threeJsRender: threeJsRender,
+    this._components = new Components({
       listener: {
-        render: this._stream.render
+        loading: this._stream.loading,
+        serviceWorker: this._stream.serviceWorker
       }
     });
-    this._sceneCache = bindTitleScene(this._resources, this._renderer, this._stream);
+    this._threeJSCanvas = new ThreeJSCanvas();
+    this._resources = null;
+    this._subscription = [
+      this._threeJSCanvas.notifier().gameAction.subscribe(action => {
+        if (action.type === 'endBattle') {
+          this._onEndBattle(action);
+        }
+      }),
 
-    this._subscription = this._stream.gameAction.subscribe(action => {
-      if (action.type === 'EndTitle') {
+      this._components.notifier().endTitle.subscribe(action => {
         this._onEndTitle(action);
-      } else if (action.type === 'endBattle') {
-        this._onEndBattle(action);
-      }
-    });
+      })
+    ];
   }
 
-  /** デストラクタ相当の処理 */
-  destructor(): void {
-    this._sceneCache && this._sceneCache.destructor();
-    this._subscription.unsubscribe();
-  }
-
-  /**
-   * タイトル終了時のイベント
-   *
-   * @param action アクション
-   */
-  async _onEndTitle(action: EndTitle): Promise<void> {
+  /** ゲームを開始する */
+  async start(): Promise<void> {
     try {
-      const room = createDummyBattleRoom();
-      const initialState = await room.start();
-      this._sceneCache.destructor();
-      this._sceneCache = bindBattleScene(this._resources, this._renderer, this._stream, room, initialState);
-      // // デバッグ用にレンダラ情報をコンソールに出力
       if (isDevelopment()) {
-        console.log(this._renderer.info());
+        viewPerformanceStats(document.body);
+      }
+      const serviceWorker = await loadServiceWorker();
+      if (serviceWorker) {
+        this._subscription = [
+          ...this._subscription,
+          createServiceWorkerActionListener(serviceWorker)
+            .subscribe(this._stream.serviceWorker)
+        ];
       }
     } catch (e) {
       throw e;
@@ -73,20 +66,36 @@ export class Game {
   }
 
   /**
-   * 戦闘シーン終了時の処理
+   * タイトル終了時の処理
    *
    * @param action アクション
    */
-  async _onEndBattle(action: EndBattle): Promise<void> {
+  async _onEndTitle(action: EndTitle) {
     try {
+      const resources = await loadAllResource(`${resourceBasePath()}/`);
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._sceneCache.destructor();
-      this._sceneCache = bindBattleScene(this._resources, this._renderer, this._stream, room, initialState);
-      // // デバッグ用にレンダラ情報をコンソールに出力
-      if (isDevelopment()) {
-        console.log(this._renderer.info());
+      this._threeJSCanvas.bindBattleScene(resources, room, initialState);
+      this._resources = resources;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 先頭終了時の処理
+   *
+   * @param action アクション
+   */
+  async _onEndBattle(action: EndBattle) {
+    try {
+      if (!this._resources) {
+        return;
       }
+      const resources: Resources = this._resources;
+      const room = createDummyBattleRoom();
+      const initialState = await room.start();
+      this._threeJSCanvas.bindBattleScene(resources, room, initialState);
     } catch (e) {
       throw e;
     }

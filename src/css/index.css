@@ -19,6 +19,7 @@ html, body {
     display: flex;
     flex-direction: column;
     padding: 1em;
+    box-sizing: border-box;
 }
 
 .service-worker-update__title {
@@ -56,4 +57,17 @@ html, body {
     height: 20px;
     background: red;
     border: none;
+}
+
+.title {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(23, 23, 23);
+    color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    box-sizing: border-box;
 }

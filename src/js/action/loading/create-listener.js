@@ -12,6 +12,12 @@ import * as THREE from "three";
  */
 export function createLoadingActionListener(manager: THREE.LoadingManager): Observable<LoadingAction> {
   return new Observable(subscriber => {
+    manager.onStart = () => {
+      subscriber.next({
+        type: 'LoadingStart'
+      });
+    };
+
     manager.onProgress = (url: string, itemsLoaded: number, itemsTotal: number) => {
       subscriber.next({
         type: 'LoadingProgress',
