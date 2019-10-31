@@ -33,7 +33,10 @@ export class Components {
     const titleDOM: HTMLElement = document.querySelector("#title-scene") || document.createElement('div');
     this.title = new Title(titleDOM);
 
-    this.threeJSCanvas = new ThreeJSCanvas();
+    const body: HTMLElement = document.body
+      ? document.body
+      : document.createElement('body');
+    this.threeJSCanvas = new ThreeJSCanvas(body);
   }
 
   /** デストラクタ相当の処理 */

@@ -22,13 +22,11 @@ export class ThreeJSCanvas {
   _renderer: Renderer;
   _sceneCache: ?BoundSceneCache;
 
-  constructor() {
+  constructor(parentDOM: HTMLElement) {
     this._stream = new ThreeJSCanvasStream();
 
     const threeJsRender = createRender();
-    if (threeJsRender.domElement && document.body) {
-      document.body.appendChild(threeJsRender.domElement);
-    }
+    parentDOM.appendChild(threeJsRender.domElement);
     this._renderer = new Renderer({
       threeJsRender: threeJsRender,
       listener: {
