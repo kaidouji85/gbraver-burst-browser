@@ -1,8 +1,7 @@
 // @flow
 
 import {GameStream} from "./stream";
-import {Components} from "../components";
-import {ThreeJSCanvas} from "../three-js-canvas";
+import {Components} from "./components";
 import type {Resources} from "../resource";
 import {loadAllResource} from "../resource";
 import {Subscription} from "rxjs";
@@ -19,7 +18,6 @@ import type {EndBattle} from "../action/game/end-battle";
 export class Game {
   _stream: GameStream;
   _components: Components;
-  _threeJSCanvas: ThreeJSCanvas;
   _resources: ?Resources;
   _subscription: Subscription[];
 
@@ -31,16 +29,15 @@ export class Game {
         serviceWorker: this._stream.serviceWorker
       }
     });
-    this._threeJSCanvas = new ThreeJSCanvas();
     this._resources = null;
     this._subscription = [
-      this._threeJSCanvas.notifier().gameAction.subscribe(action => {
+      this._components.threeJSCanvas.notifier().gameAction.subscribe(action => {
         if (action.type === 'endBattle') {
           this._onEndBattle(action);
         }
       }),
 
-      this._components.notifier().endTitle.subscribe(action => {
+      this._components.title.notifier().endTitle.subscribe(action => {
         this._onEndTitle(action);
       })
     ];
@@ -75,7 +72,7 @@ export class Game {
       const resources = await loadAllResource(`${resourceBasePath()}/`);
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._threeJSCanvas.bindBattleScene(resources, room, initialState);
+      this._components.threeJSCanvas.bindBattleScene(resources, room, initialState);
       this._resources = resources;
     } catch (e) {
       throw e;
@@ -83,7 +80,7 @@ export class Game {
   }
 
   /**
-   * 先頭終了時の処理
+   * 尖塔終了時の処理
    *
    * @param action アクション
    */
@@ -92,10 +89,11 @@ export class Game {
       if (!this._resources) {
         return;
       }
+
       const resources: Resources = this._resources;
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._threeJSCanvas.bindBattleScene(resources, room, initialState);
+      this._components.threeJSCanvas.bindBattleScene(resources, room, initialState);
     } catch (e) {
       throw e;
     }
