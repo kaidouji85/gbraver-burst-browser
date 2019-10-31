@@ -34,6 +34,11 @@ export class TitleView {
     }), this._dom);
   }
 
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
   notifier(): Notifier {
     return {
       touch: this._touch
