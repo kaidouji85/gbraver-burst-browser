@@ -26,7 +26,8 @@ export class Game {
     this._components = new Components({
       listener: {
         loading: this._stream.loading,
-        serviceWorker: this._stream.serviceWorker
+        serviceWorker: this._stream.serviceWorker,
+        startBattle:this._stream.startBattle,
       }
     });
     this._resources = null;
@@ -68,17 +69,22 @@ export class Game {
   async _onEndTitle(action: EndTitle) {
     try {
       const resources = await loadAllResource(`${resourceBasePath()}/`);
+      this._resources = resources;
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._components._threeJSCanvas.bindBattleScene(resources, room, initialState);
-      this._resources = resources;
+      this._stream.startBattle.next({
+        type: 'StartBattle',
+        resources: resources,
+        room: room,
+        initialState: initialState
+      });
     } catch (e) {
       throw e;
     }
   }
 
   /**
-   * 尖塔終了時の処理
+   * 戦闘終了時の処理
    *
    * @param action アクション
    */
@@ -91,7 +97,12 @@ export class Game {
       const resources: Resources = this._resources;
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._components._threeJSCanvas.bindBattleScene(resources, room, initialState);
+      this._stream.startBattle.next({
+        type: 'StartBattle',
+        resources: resources,
+        room: room,
+        initialState: initialState
+      });
     } catch (e) {
       throw e;
     }

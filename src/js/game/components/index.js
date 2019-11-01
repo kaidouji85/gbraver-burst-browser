@@ -9,6 +9,7 @@ import {Title} from "./title";
 import {ThreeJSCanvas} from "./three-js-canvas";
 import type {EndBattle} from "../../action/game/end-battle";
 import type {EndTitle} from "../../action/game/end-title";
+import type {StartBattle} from "../../action/game/start-battle";
 
 /** イベント通知 */
 type Notifier = {
@@ -20,7 +21,8 @@ type Notifier = {
 type Param = {
   listener: {
     loading: Observable<LoadingAction>,
-    serviceWorker: Observable<ServiceWorkerAction>
+    serviceWorker: Observable<ServiceWorkerAction>,
+    startBattle: Observable<StartBattle>,
   }
 };
 
@@ -44,7 +46,7 @@ export class Components {
     const body: HTMLElement = document.body
       ? document.body
       : document.createElement('body');
-    this._threeJSCanvas = new ThreeJSCanvas(body);
+    this._threeJSCanvas = new ThreeJSCanvas(body, param.listener.startBattle);
   }
 
   /** デストラクタ相当の処理 */
@@ -55,6 +57,11 @@ export class Components {
     this._threeJSCanvas.destructor();
   }
 
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
   notifier(): Notifier {
     return {
       endBattle: this._threeJSCanvas.notifier().endBattle,

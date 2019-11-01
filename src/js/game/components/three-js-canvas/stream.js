@@ -2,7 +2,6 @@
 
 import {Observable, Subject} from "rxjs";
 import type {Render} from "../../../action/game-loop/render";
-import type {GameAction} from "../../../action/game/game-action";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {createGameLoopListener} from "../../../action/game-loop/create-listener";
 import type {EndBattle} from "../../../action/game/end-battle";

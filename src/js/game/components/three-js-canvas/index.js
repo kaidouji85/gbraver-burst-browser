@@ -1,15 +1,14 @@
 // @flow
 
-import type {Resources} from "../../../resource";
 import {Renderer} from "../../../game-object/renderer";
 import {createRender} from "../../../render/create-render";
 import {isDevelopment} from "../../../webpack/mode";
 import {BoundSceneCache} from "./bind/bound-scene-cache";
 import {bindBattleScene} from "./bind/bind-battle-scene";
 import {ThreeJSCanvasStream} from "./stream";
-import type {BattleRoom, InitialState} from "../../../battle-room/battle-room";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {EndBattle} from "../../../action/game/end-battle";
+import type {StartBattle} from "../../../action/game/start-battle";
 
 /** イベント通知 */
 type Notifier = {
@@ -21,8 +20,9 @@ export class ThreeJSCanvas {
   _stream: ThreeJSCanvasStream;
   _renderer: Renderer;
   _sceneCache: ?BoundSceneCache;
+  _subscription: Subscription;
 
-  constructor(parentDOM: HTMLElement) {
+  constructor(parentDOM: HTMLElement, startBattle: Observable<StartBattle>) {
     this._stream = new ThreeJSCanvasStream();
 
     const threeJsRender = createRender();
@@ -35,11 +35,16 @@ export class ThreeJSCanvas {
     });
 
     this._sceneCache = null;
+
+    this._subscription = startBattle.subscribe(action => {
+      this._onStartBattle(action);
+    });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._sceneCache && this._sceneCache.destructor();
+    this._subscription.unsubscribe();
   }
 
   /**
@@ -54,15 +59,13 @@ export class ThreeJSCanvas {
   }
 
   /**
-   * three.jsキャンバスに戦闘シーンを関連付ける
+   * 戦闘開始時の処理
    *
-   * @param resources リソース管理オブジェクト
-   * @param room 戦闘ルーム
-   * @param initialState 初期状態
+   * @param action アクション
    */
-  bindBattleScene(resources: Resources, room: BattleRoom, initialState: InitialState): void {
+  _onStartBattle(action: StartBattle): void {
     this._sceneCache && this._sceneCache.destructor();
-    this._sceneCache = bindBattleScene(resources, this._renderer, this._stream, room, initialState);
+    this._sceneCache = bindBattleScene(action.resources, this._renderer, this._stream, action.room, action.initialState);
     // デバッグ用にレンダラ情報をコンソールに出力
     if (isDevelopment()) {
       console.log(this._renderer.info());
