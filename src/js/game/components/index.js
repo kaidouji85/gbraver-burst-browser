@@ -26,39 +26,39 @@ type Param = {
 
 /** HTML要素を集めたもの */
 export class Components {
-  loading: Loading;
-  serviceWorkerUpdate: ServiceWorkerUpdate;
-  title: Title;
-  threeJSCanvas: ThreeJSCanvas;
+  _loading: Loading;
+  _serviceWorkerUpdate: ServiceWorkerUpdate;
+  _title: Title;
+  _threeJSCanvas: ThreeJSCanvas;
 
   constructor(param: Param) {
     const loadingDOM: HTMLElement = document.querySelector('#loading-scene') || document.createElement('div');
-    this.loading = new Loading(loadingDOM, param.listener.loading);
+    this._loading = new Loading(loadingDOM, param.listener.loading);
 
     const serviceWorkerDOM: HTMLElement = document.querySelector("#service-worker-update-scene") || document.createElement('div');
-    this.serviceWorkerUpdate = new ServiceWorkerUpdate(serviceWorkerDOM, param.listener.serviceWorker);
+    this._serviceWorkerUpdate = new ServiceWorkerUpdate(serviceWorkerDOM, param.listener.serviceWorker);
 
     const titleDOM: HTMLElement = document.querySelector("#title-scene") || document.createElement('div');
-    this.title = new Title(titleDOM);
+    this._title = new Title(titleDOM);
 
     const body: HTMLElement = document.body
       ? document.body
       : document.createElement('body');
-    this.threeJSCanvas = new ThreeJSCanvas(body);
+    this._threeJSCanvas = new ThreeJSCanvas(body);
   }
 
   /** デストラクタ相当の処理 */
   destructor() {
-    this.loading.destructor();
-    this.serviceWorkerUpdate.destructor();
-    this.title.destructor();
-    this.serviceWorkerUpdate.destructor();
+    this._loading.destructor();
+    this._serviceWorkerUpdate.destructor();
+    this._title.destructor();
+    this._threeJSCanvas.destructor();
   }
 
   notifier(): Notifier {
     return {
-      endBattle: this.threeJSCanvas.notifier().endBattle,
-      endTitle: this.title.notifier().endTitle,
+      endBattle: this._threeJSCanvas.notifier().endBattle,
+      endTitle: this._title.notifier().endTitle,
     };
   }
 }

@@ -70,7 +70,7 @@ export class Game {
       const resources = await loadAllResource(`${resourceBasePath()}/`);
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._components.threeJSCanvas.bindBattleScene(resources, room, initialState);
+      this._components._threeJSCanvas.bindBattleScene(resources, room, initialState);
       this._resources = resources;
     } catch (e) {
       throw e;
@@ -91,7 +91,7 @@ export class Game {
       const resources: Resources = this._resources;
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._components.threeJSCanvas.bindBattleScene(resources, room, initialState);
+      this._components._threeJSCanvas.bindBattleScene(resources, room, initialState);
     } catch (e) {
       throw e;
     }
