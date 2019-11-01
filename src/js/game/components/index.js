@@ -7,6 +7,14 @@ import {ServiceWorkerUpdate} from "./service-worker-update";
 import type {ServiceWorkerAction} from "../../action/service-worker/service-worker";
 import {Title} from "./title";
 import {ThreeJSCanvas} from "./three-js-canvas";
+import type {EndBattle} from "../../action/game/end-battle";
+import type {EndTitle} from "../../action/game/end-title";
+
+/** イベント通知 */
+type Notifier = {
+  endBattle: Observable<EndBattle>,
+  endTitle: Observable<EndTitle>
+};
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -45,5 +53,12 @@ export class Components {
     this.serviceWorkerUpdate.destructor();
     this.title.destructor();
     this.serviceWorkerUpdate.destructor();
+  }
+
+  notifier(): Notifier {
+    return {
+      endBattle: this.threeJSCanvas.notifier().endBattle,
+      endTitle: this.title.notifier().endTitle,
+    };
   }
 }

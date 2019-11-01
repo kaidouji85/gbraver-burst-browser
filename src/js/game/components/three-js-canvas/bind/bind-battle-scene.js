@@ -30,7 +30,7 @@ export function bindBattleScene(resources: Resources, renderer: Renderer, stream
   });
   const subscription = [
     scene.notifier().render.subscribe(stream.render),
-    scene.notifier().endBattle.subscribe(stream.gameAction)
+    scene.notifier().endBattle.subscribe(stream.endBattle)
   ];
   return new BoundSceneCache(scene, subscription);
 }

@@ -31,14 +31,12 @@ export class Game {
     });
     this._resources = null;
     this._subscription = [
-      this._components.threeJSCanvas.notifier().gameAction.subscribe(action => {
-        if (action.type === 'endBattle') {
-          this._onEndBattle(action);
-        }
+      this._components.notifier().endTitle.subscribe(action => {
+        this._onEndTitle(action);
       }),
 
-      this._components.title.notifier().endTitle.subscribe(action => {
-        this._onEndTitle(action);
+      this._components.notifier().endBattle.subscribe(action => {
+        this._onEndBattle(action);
       })
     ];
   }

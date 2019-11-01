@@ -9,11 +9,11 @@ import {bindBattleScene} from "./bind/bind-battle-scene";
 import {ThreeJSCanvasStream} from "./stream";
 import type {BattleRoom, InitialState} from "../../../battle-room/battle-room";
 import {Observable} from "rxjs";
-import type {GameAction} from "../../../action/game/game-action";
+import type {EndBattle} from "../../../action/game/end-battle";
 
 /** イベント通知 */
 type Notifier = {
-  gameAction: Observable<GameAction>
+  endBattle: Observable<EndBattle>
 };
 
 /** three.jsキャンバス全体を管理する */
@@ -49,7 +49,7 @@ export class ThreeJSCanvas {
    */
   notifier(): Notifier {
     return {
-      gameAction: this._stream.gameAction
+      endBattle: this._stream.endBattle
     };
   }
 
