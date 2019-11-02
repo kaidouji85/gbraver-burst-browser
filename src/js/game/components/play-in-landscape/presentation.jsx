@@ -11,7 +11,8 @@ import {resourceBasePath} from "../../../resource/resource-base-path";
 export function PlayInLandscapePresentation() {
   return (
     <div className="play-in-landscape">
-      <img src={`${resourceBasePath()}/waring/play-in-landscape.png`} />
+      <span className="play-in-landscape__caption">横向きでプレイしてください</span>
+      <img className="play-in-landscape__image" src={`${resourceBasePath()}/waring/play-in-landscape.png`} />
     </div>
   );
 }
