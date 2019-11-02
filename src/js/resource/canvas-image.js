@@ -38,7 +38,6 @@ export const CANVAS_IMAGE_IDS = {
   BURST_BUTTON: 'BURST_BUTTON',
   BIG_BUTTON_DISABLED: 'BIG_BUTTON_DISABLED',
   SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED',
-  PLAY_IN_LANDSCAPE: 'PLAY_IN_LANDSCAPE',
   TITLE_LOGO: 'TITLE_LOGO',
 };
 
@@ -123,10 +122,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED,
     path: 'button/small-button-disabled.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.PLAY_IN_LANDSCAPE,
-    path: 'waring/play-in-landscape.png',
   },
   {
     id: CANVAS_IMAGE_IDS.TITLE_LOGO,
