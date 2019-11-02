@@ -27,6 +27,32 @@ html, body {
     margin-bottom: 1em;
 }
 
+@media (orientation: landscape) {
+    .play-in-landscape {
+        display: none;
+    }
+}
+
+@media (orientation: portrait) {
+    .play-in-landscape {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(23, 23, 23);
+        color: rgb(240, 240, 240);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1em;
+        box-sizing: border-box;
+    }
+
+    .play-in-landscape__caption {
+        font-size: 1.5em;
+        margin-bottom: 1em;
+    }
+}
+
 .loading {
     width: 100vw;
     height: 100vh;

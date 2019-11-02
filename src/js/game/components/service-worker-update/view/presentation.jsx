@@ -19,7 +19,7 @@ export function ServiceWorkerUpdatePresentation(props: ServiceWorkerUpdateProps)
         ? 'flex'
         : 'none'
     }}>
-      <div className="service-worker-update__title">サービワーカーが更新されました。</div>
+      <div className="service-worker-update__title">新バージョンがリリースされました</div>
       <div className='service-worker-update__body'>お手数ですが、ゲームを開いているタブを全て閉じた後に、再度ゲームを開いてください。</div>
     </div>
   );
