@@ -10,6 +10,7 @@ import {ThreeJSCanvas} from "./three-js-canvas";
 import type {EndBattle} from "../../action/game/end-battle";
 import type {EndTitle} from "../../action/game/end-title";
 import type {StartBattle} from "../../action/game/start-battle";
+import {PlayInLandscape} from "./play-in-landscape";
 
 /** イベント通知 */
 type Notifier = {
@@ -30,6 +31,7 @@ type Param = {
 export class Components {
   _loading: Loading;
   _serviceWorkerUpdate: ServiceWorkerUpdate;
+  _playInLandscape: PlayInLandscape;
   _title: Title;
   _threeJSCanvas: ThreeJSCanvas;
 
@@ -42,6 +44,9 @@ export class Components {
 
     const titleDOM: HTMLElement = document.querySelector("#title-scene") || document.createElement('div');
     this._title = new Title(titleDOM);
+
+    const playInLandscapeDOM: HTMLElement = document.querySelector("#play-in-landscape") || document.createElement('div');
+    this._playInLandscape = new PlayInLandscape(playInLandscapeDOM);
 
     const body: HTMLElement = document.body
       ? document.body
