@@ -1,6 +1,6 @@
 // @flow
 
-import '../css/index.css';
+import '../css/style.css';
 import {Game} from "./game";
 
 /**
