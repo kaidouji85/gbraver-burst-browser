@@ -2,9 +2,9 @@
 
 import {Observable, Subject} from "rxjs";
 import type {Render} from "../../../action/game-loop/render";
-import type {GameAction} from "../../../action/game/game-action";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {createGameLoopListener} from "../../../action/game-loop/create-listener";
+import type {EndBattle} from "../../../action/game/end-battle";
 
 /** three.jsキャンバスで使用するイベントストリーム */
 export class ThreeJSCanvasStream {
@@ -18,13 +18,12 @@ export class ThreeJSCanvasStream {
   render: Subject<Render>;
 
   /**
-   * ゲームアクションのストリーム
-   * シーンからゲームにアクションを伝えるために利用する
+   * 戦闘終了アクションのストリーム
    * シーンは動的に入れ替わるので、本プロパティが以下のように緩衝材となる
    *
-   * Scene -> ThreeJSCanvasStream::gameAction -> Game
+   * Battle -> ThreeJSCanvasStream::endBattle -> Game
    */
-  gameAction: Subject<GameAction>;
+  endBattle: Subject<EndBattle>;
 
   /**
    * ゲームループのストリーム
@@ -33,7 +32,7 @@ export class ThreeJSCanvasStream {
 
   constructor() {
     this.render = new Subject();
-    this.gameAction = new Subject();
+    this.endBattle = new Subject();
     this.gameLoop = createGameLoopListener();
   }
 }
