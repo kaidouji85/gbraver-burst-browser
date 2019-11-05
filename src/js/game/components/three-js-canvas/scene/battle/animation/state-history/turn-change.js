@@ -16,9 +16,24 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     return empty();
   }
 
+  const cameraX = activeTDPlayer.sprite.getObject3D().position.x;
   return all(
-    // TODO バッテリー回復値をeffectに持たせる
-    activeTDPlayer.recoverBattery.popUp(3),
-    activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery),
-  ).chain(delay(300));
+    all(
+      view.td.camera.moveViewPoint({x: cameraX}, 300),
+      view.td.camera.moveCamera({x: cameraX, z: '-50'}, 300)
+    ).chain(
+      delay(1300)
+    ).chain(
+      view.td.camera.moveViewPoint({x: 0}, 300),
+      view.td.camera.moveCamera({x: 0, z: '+50'}, 300)
+    ),
+
+    delay(700).chain(all(
+      // TODO バッテリー回復値をeffectに持たせる
+      activeTDPlayer.recoverBattery.popUp(3),
+      activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery),
+    ))
+  ).chain(
+    delay(300)
+  );
 }

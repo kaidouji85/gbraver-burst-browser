@@ -46,7 +46,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const canBurst = canBurstButtonPush(playerCommand.command);
   return all(
     all(
-      view.td.camera.moveCamera({x: 150, z: 250}, 300),
+      view.td.camera.moveCamera({x: 150}, 300),
       view.td.camera.moveViewPoint({x: 150}, 300),
     ),
 
