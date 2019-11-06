@@ -38,7 +38,7 @@ export const CANVAS_IMAGE_IDS = {
   BURST_BUTTON: 'BURST_BUTTON',
   BIG_BUTTON_DISABLED: 'BIG_BUTTON_DISABLED',
   SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED',
-  TITLE_LOGO: 'TITLE_LOGO',
+  ATTACKER_INDICATOR: 'ATTACKER_INDICATOR',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -124,8 +124,8 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'button/small-button-disabled.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.TITLE_LOGO,
-    path: 'logo.png',
+    id: CANVAS_IMAGE_IDS.ATTACKER_INDICATOR,
+    path: 'attacker/attacker-indicator.png',
   }
 ];
 
