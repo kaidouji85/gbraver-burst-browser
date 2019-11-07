@@ -13,6 +13,7 @@ import {enemyRecoverBattery} from "../../../../../../../../game-object/recover-b
 import {enemyDamageIndicator} from "../../../../../../../../game-object/damage-indicator";
 import type {TDPlayer} from "./index";
 import {enemySpark} from "../../../../../../../../game-object/hitmark/spark";
+import {enemyAttackerIndicator} from "../../../../../../../../game-object/attacker-indicator";
 
 /**
  * 敵側の3Dプレイヤーオブジェクト
@@ -37,7 +38,8 @@ export function enemyTDObject(resources: Resources, state: PlayerState, listener
     damageIndicator: enemyDamageIndicator({
       resources: resources,
       listener: listener
-    })
+    }),
+    attackerIndicator: enemyAttackerIndicator(resources, listener),
   }
 }
 
