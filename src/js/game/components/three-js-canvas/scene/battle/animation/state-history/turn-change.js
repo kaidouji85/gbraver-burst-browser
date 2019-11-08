@@ -6,7 +6,7 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {all} from "../../../../../../../animation/all";
 import {delay, empty} from "../../../../../../../animation/delay";
-import {lookAtPlayer, zoomIn} from "../td-camera";
+import {zoomIn} from "../td-camera";
 
 /** ターン変更のアニメーション */
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
