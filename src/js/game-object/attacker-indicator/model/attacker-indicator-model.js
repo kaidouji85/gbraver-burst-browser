@@ -1,4 +1,6 @@
 // @flow
 
 /** アタッカーインジケータモデル */
-export type AttackerIndicatorModel = {};
+export type AttackerIndicatorModel = {
+  opacity: number
+};

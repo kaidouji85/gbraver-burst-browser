@@ -8,5 +8,7 @@ import type {AttackerIndicatorModel} from "./attacker-indicator-model";
  * @return 初期値
  */
 export function createInitialValue(): AttackerIndicatorModel {
-  return {};
+  return {
+    opacity: 0.5
+  };
 }

@@ -43,12 +43,18 @@ export class PlayerAttackerIndicatorView implements AttackerIndicatorView {
 
   /** モデルをビューに反映させる */
   engage(model: AttackerIndicatorModel): void {
+    this._refreshOpacity(model);
     this._refreshPos();
   }
 
   /** カメラの真正面を向く */
   lookAt(camera: THREE.Camera): void {
     this._canvas.getObject3D().quaternion.copy(camera.quaternion);
+  }
+
+  /** 透明度を更新する */
+  _refreshOpacity(model: AttackerIndicatorModel): void {
+    this._canvas.setOpacity(model.opacity);
   }
 
   /** 座標を更新する */
