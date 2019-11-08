@@ -1,7 +1,7 @@
 // @flow
 
 import {Animate} from "../../../../../../animation/animate";
-import {Battle3DCamera} from "../../../../../../game-object/camera/battle-3d";
+import {TDCamera} from "../../../../../../game-object/camera/td";
 import {all} from "../../../../../../animation/all";
 
 /** カメラ初期位置 */
@@ -25,7 +25,7 @@ export const INITIAL_CAMERA_POSITION = {
  * @param duration アニメーション時間
  * @return アニメーション
  */
-export function toInitial(camera: Battle3DCamera, duration: number): Animate {
+export function toInitial(camera: TDCamera, duration: number): Animate {
   return all(
     camera.moveCamera(INITIAL_CAMERA_POSITION, duration),
     camera.moveViewPoint(INITIAL_VIEW_POINT, duration)
@@ -40,7 +40,7 @@ export function toInitial(camera: Battle3DCamera, duration: number): Animate {
  * @param duration アニメーション時間
  * @return アニメーション
  */
-export function zoomIn(camera: Battle3DCamera, x: number, duration: number): Animate {
+export function zoomIn(camera: TDCamera, x: number, duration: number): Animate {
   return all(
     camera.moveCamera({
       x: x,
@@ -58,7 +58,7 @@ export function zoomIn(camera: Battle3DCamera, x: number, duration: number): Ani
  * @param duration アニメーション時間
  * @return アニメーション
  */
-export function lookAtPlayer(camera: Battle3DCamera, x: number, duration: number): Animate {
+export function lookAtPlayer(camera: TDCamera, x: number, duration: number): Animate {
   return all(
     camera.moveCamera({
       x: x,

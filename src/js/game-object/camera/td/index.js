@@ -25,7 +25,7 @@ type Param = {
 // TODO カメラ位置、カメラ視点をコンストラクタから渡す
 // TODO TDCaemraに改名する
 /** 戦闘シーン3Dレイヤー用カメラ */
-export class Battle3DCamera {
+export class TDCamera {
   _model: Battle3DCameraModel;
   _camera: THREE.PerspectiveCamera;
   _subscription: Subscription;

@@ -11,7 +11,7 @@ import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import type {Battle} from "gbraver-burst-core/lib/effect/battle/battle";
-import {Battle3DCamera} from "../../../../../../../../game-object/camera/battle-3d";
+import {TDCamera} from "../../../../../../../../game-object/camera/td";
 import {PlainHUDCamera} from "../../../../../../../../game-object/camera/plain-hud";
 
 /**
@@ -31,7 +31,7 @@ export type BattleAnimationParam<SPRITE: ArmDozerSprite, RESULT: BattleResult> =
   defenderTD: TDPlayer<ArmDozerSprite>,
   defenderHUD: HUDPlayer,
   tdObjects: TDGameObjects,
-  tdCamera: Battle3DCamera,
+  tdCamera: TDCamera,
   hudObjects: HUDGameObjects,
   hudCamera: PlainHUDCamera,
   isDeath: boolean,

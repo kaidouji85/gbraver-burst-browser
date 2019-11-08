@@ -7,7 +7,7 @@ import type {Update} from "../../../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../../../action/game-loop/pre-render";
 import type {GameLoop} from "../../../../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../../../../action/game-loop/render";
-import {Battle3DCamera} from "../../../../../../../game-object/camera/battle-3d";
+import {TDCamera} from "../../../../../../../game-object/camera/td";
 import type {DOMEvent} from "../../../../../../../action/dom-event";
 import type {TDPlayer} from "./player";
 import {appendTDPlayer, disposeTDPlayer} from "./player";
@@ -40,7 +40,7 @@ type Notifier = {
 /** 3Dレイヤー */
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
-  camera: Battle3DCamera;
+  camera: TDCamera;
   players: TDPlayer<ArmDozerSprite>[];
   gameObjects: TDGameObjects;
 
@@ -61,7 +61,7 @@ export class ThreeDimensionLayer {
     this._render = new Subject();
 
     this.scene = new THREE.Scene();
-    this.camera = new Battle3DCamera({
+    this.camera = new TDCamera({
       listener: {
         domEvent: param.listener.domEvent,
         update: this._update
