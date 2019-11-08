@@ -24,6 +24,8 @@ type Param = {
   }
 };
 
+// TODO カメラ位置、カメラ視点をコンストラクタから渡す
+// TODO TDCaemraに改名する
 /** 戦闘シーン3Dレイヤー用カメラ */
 export class Battle3DCamera {
   _model: Battle3DCameraModel;
@@ -51,6 +53,7 @@ export class Battle3DCamera {
     this._subscription.unsubscribe();
   }
 
+  // TODO 削除する
   /**
    * ズームイン
 　　*
@@ -61,6 +64,7 @@ export class Battle3DCamera {
     return zoomIn(this._model, duration);
   }
 
+  // TODO 削除する
   /**
    * ズームアウト
    *

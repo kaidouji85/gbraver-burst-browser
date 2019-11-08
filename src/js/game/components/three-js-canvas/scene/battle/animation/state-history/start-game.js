@@ -6,6 +6,7 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {delay, empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
+import {lookAtPlayer, zoomIn} from "../td-camera";
 
 /**
  * ゲーム開始時のアニメーション
@@ -18,23 +19,19 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
   const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeTDPlayer || !activeHUDPlayer || !activeStatus) {
+  const player = view.td.players.find(v => v.playerId === sceneState.playerId);
+  if (!activeTDPlayer || !activeHUDPlayer || !activeStatus || !player) {
     return empty();
   }
 
-  const cameraX = activeTDPlayer.sprite.getObject3D().position.x;
+  const attackerX = activeTDPlayer.sprite.getObject3D().position.x;
+  const playerX = player.sprite.getObject3D().position.x;
   return all(
-    all(
-      view.td.camera.moveViewPoint({x: cameraX}, 300),
-      view.td.camera.moveCamera({x: cameraX, z: '-50'}, 300)
-    ).chain(
-      delay(1300)
-    ).chain(
-      view.td.camera.moveViewPoint({x: 0}, 300),
-      view.td.camera.moveCamera({x: 0, z: '+50'}, 300)
-    ),
+    zoomIn(view.td.camera, attackerX, 500)
+      .chain(delay(2000))
+      .chain(lookAtPlayer(view.td.camera, playerX, 500)),
 
-    delay(400)
+    delay(700)
       .chain(activeTDPlayer.attackerIndicator.show())
       .chain(delay(1000))
       .chain(activeTDPlayer.attackerIndicator.hidden())
