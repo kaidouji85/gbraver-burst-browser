@@ -6,6 +6,7 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {all} from "../../../../../../../animation/all";
 import {delay, empty} from "../../../../../../../animation/delay";
+import {lookAtPlayer, zoomIn} from "../td-camera";
 
 /** ターン変更のアニメーション */
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
@@ -16,23 +17,22 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     return empty();
   }
 
-  const cameraX = activeTDPlayer.sprite.getObject3D().position.x;
+  const activePlayerX = activeTDPlayer.sprite.getObject3D().position.x;
   return all(
-    all(
-      view.td.camera.moveViewPoint({x: cameraX}, 500),
-      view.td.camera.moveCamera({x: cameraX, z: '-50'}, 500)
-    ).chain(
-      delay(1300)
-    ).chain(
-      view.td.camera.moveViewPoint({x: 0}, 500),
-      view.td.camera.moveCamera({x: 0, z: '+50'}, 500)
-    ),
+    zoomIn(view.td.camera,activePlayerX, 500)
+      .chain(delay(3000)),
 
     delay(700).chain(all(
       // TODO バッテリー回復値をeffectに持たせる
       activeTDPlayer.recoverBattery.popUp(3),
       activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery),
-    ))
+    )).chain(
+      delay(300)
+    ).chain(
+      activeTDPlayer.attackerIndicator.show()
+        .chain(delay(1000))
+        .chain(activeTDPlayer.attackerIndicator.hidden())
+    ),
   ).chain(
     delay(800)
   );

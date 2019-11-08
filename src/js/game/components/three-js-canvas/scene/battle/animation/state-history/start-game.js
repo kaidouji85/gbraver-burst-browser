@@ -27,9 +27,7 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
   const attackerX = activeTDPlayer.sprite.getObject3D().position.x;
   const playerX = player.sprite.getObject3D().position.x;
   return all(
-    zoomIn(view.td.camera, attackerX, 500)
-      .chain(delay(2000))
-      .chain(lookAtPlayer(view.td.camera, playerX, 500)),
+    zoomIn(view.td.camera, attackerX, 500),
 
     delay(700)
       .chain(activeTDPlayer.attackerIndicator.show())
