@@ -10,8 +10,6 @@ import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import {engage} from "./engauge";
 import {Animate} from "../../../animation/animate";
-import {zoomIn} from "./animation/zoom-in";
-import {zoomOut} from "./animation/zoom-out";
 import type {Position} from './animation/position';
 import {moveViewPoint} from "./animation/move-view-point";
 import {moveCamera} from "./animation/move-camera";
@@ -51,28 +49,6 @@ export class Battle3DCamera {
   /** デストラクタ */
   destructor(): void {
     this._subscription.unsubscribe();
-  }
-
-  // TODO 削除する
-  /**
-   * ズームイン
-　　*
-   * @param duration ミリ秒単位のアニメーション時間
-   * @return アニメーション
-   */
-  zoomIn(duration: number): Animate {
-    return zoomIn(this._model, duration);
-  }
-
-  // TODO 削除する
-  /**
-   * ズームアウト
-   *
-   * @param duration ミリ秒単位のアニメーション時間
-   * @return アニメーション
-   */
-  zoomOut(duration: number): Animate {
-    return zoomOut(this._model, duration);
   }
 
   /**
