@@ -32,7 +32,12 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
     ).chain(
       view.td.camera.moveViewPoint({x: 0}, 300),
       view.td.camera.moveCamera({x: 0, z: '+50'}, 300)
-    )
+    ),
+
+    delay(400)
+      .chain(activeTDPlayer.attackerIndicator.show())
+      .chain(delay(1000))
+      .chain(activeTDPlayer.attackerIndicator.hidden())
   ).chain(
     delay(800)
   );

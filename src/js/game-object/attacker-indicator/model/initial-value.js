@@ -9,6 +9,6 @@ import type {AttackerIndicatorModel} from "./attacker-indicator-model";
  */
 export function createInitialValue(): AttackerIndicatorModel {
   return {
-    opacity: 0.5
+    opacity: 0
   };
 }
