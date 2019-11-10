@@ -1,17 +1,17 @@
 // @flow
 
-import type {AttackerIndicatorModel} from "../model/attacker-indicator-model";
+import type {TurnStartModel} from "../model/turn-start-model";
 import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
 
 /**
- * 表示する
+ * 消す
  *
  * @param model モデル
  * @return アニメーション
  */
-export function hidden(model: AttackerIndicatorModel): Animate {
+export function show(model: TurnStartModel): Animate {
   return tween(model, t=>t
-    .to({opacity: 0}, 300)
+    .to({opacity: 1}, 300)
   );
 }

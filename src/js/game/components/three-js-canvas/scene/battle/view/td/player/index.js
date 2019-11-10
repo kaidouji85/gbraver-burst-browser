@@ -7,7 +7,7 @@ import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import {Spark} from "../../../../../../../../game-object/hitmark/spark/spark";
 import * as THREE from "three";
 import type {ArmDozerSprite} from "../../../../../../../../game-object/armdozer/armdozer-sprite";
-import {AttackerIndicator} from "../../../../../../../../game-object/attacker-indicator/attacker-indicator";
+import {TurnStart} from "../../../../../../../../game-object/turn-start/turn-start";
 
 /**
  * 3Dレイヤーのプレイヤー関係オブジェクト
@@ -23,7 +23,7 @@ export type TDPlayer<T: ArmDozerSprite> = {
   batteryNumber: BatteryNumber,
   recoverBattery: RecoverBattery,
   damageIndicator: DamageIndicator,
-  attackerIndicator: AttackerIndicator,
+  attackerIndicator: TurnStart,
 };
 
 /**

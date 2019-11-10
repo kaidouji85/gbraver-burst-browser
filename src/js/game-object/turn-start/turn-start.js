@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import type {AttackerIndicatorView} from "./view/attacker-indicator-view";
-import type {AttackerIndicatorModel} from "./model/attacker-indicator-model";
+import type {TurnStartView} from "./view/turn-start-view";
+import type {TurnStartModel} from "./model/turn-start-model";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
@@ -12,13 +12,13 @@ import {Animate} from "../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 
-/** アタッカーインジケータ */
-export class AttackerIndicator {
-  _model: AttackerIndicatorModel;
-  _view: AttackerIndicatorView;
+/** ターンスタート */
+export class TurnStart {
+  _model: TurnStartModel;
+  _view: TurnStartView;
   _subscription: Subscription;
 
-  constructor(view: AttackerIndicatorView, listener: Observable<GameObjectAction>) {
+  constructor(view: TurnStartView, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._subscription = listener.subscribe(action => {

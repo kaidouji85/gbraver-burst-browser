@@ -1,19 +1,19 @@
 // @flow
 
 import * as THREE from "three";
-import type {AttackerIndicatorView} from "./attacker-indicator-view";
+import type {TurnStartView} from "./turn-start-view";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
-import type {AttackerIndicatorModel} from "../model/attacker-indicator-model";
+import type {TurnStartModel} from "../model/turn-start-model";
 import {SPRITE_RENDER_ORDER} from "../../../render-order/td-render-order";
 
 export const MESH_SIZE = 400;
 export const CANVAS_SIZE = 512;
 
-/** プレイヤー側アタッカーインジケータのビュー */
-export class PlayerAttackerIndicatorView implements AttackerIndicatorView {
+/** プレイヤーターンスタートビュー */
+export class PlayerTurnStartView implements TurnStartView {
   _canvas: CanvasMesh;
 
   constructor(resources: Resources) {
@@ -42,7 +42,7 @@ export class PlayerAttackerIndicatorView implements AttackerIndicatorView {
   }
 
   /** モデルをビューに反映させる */
-  engage(model: AttackerIndicatorModel): void {
+  engage(model: TurnStartModel): void {
     this._refreshOpacity(model);
     this._refreshPos();
   }
@@ -53,7 +53,7 @@ export class PlayerAttackerIndicatorView implements AttackerIndicatorView {
   }
 
   /** 透明度を更新する */
-  _refreshOpacity(model: AttackerIndicatorModel): void {
+  _refreshOpacity(model: TurnStartModel): void {
     this._canvas.setOpacity(model.opacity);
   }
 

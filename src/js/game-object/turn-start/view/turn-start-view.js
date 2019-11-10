@@ -1,15 +1,15 @@
 // @flow
 
 import * as THREE from 'three';
-import type {AttackerIndicatorModel} from "../model/attacker-indicator-model";
+import type {TurnStartModel} from "../model/turn-start-model";
 
-/** アタッカーインジケータービュー */
-export interface AttackerIndicatorView {
+/** ターンスタートビュー */
+export interface TurnStartView {
   /** デストラクタ相当の処理 */
   destructor(): void;
 
   /** モデルをビューに反映させる */
-  engage(model: AttackerIndicatorModel): void;
+  engage(model: TurnStartModel): void;
 
   /** カメラの真正面を向く */
   lookAt(camera: THREE.Camera): void;
