@@ -9,8 +9,7 @@ import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {show} from "./animation/show";
-import {hidden} from "./animation/hidden";
+import {popUp} from "./animation/pop-up";
 
 /** ターンスタート */
 export class TurnStart {
@@ -37,21 +36,12 @@ export class TurnStart {
   }
 
   /**
-   * 表示する
+   * ポップアップ
    * 
    * @return アニメーション
    */
-  show(): Animate {
-    return show(this._model);
-  }
-
-  /**
-   * 消す
-   *
-   * @return アニメーション
-   */
-  hidden(): Animate {
-    return hidden(this._model);
+  popUp(): Animate {
+    return popUp(this._model);
   }
 
   /**

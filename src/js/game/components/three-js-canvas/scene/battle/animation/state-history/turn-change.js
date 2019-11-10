@@ -22,17 +22,15 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     zoomIn(view.td.camera,activePlayerX, 500)
       .chain(delay(3000)),
 
-    delay(700).chain(all(
-      activeTDPlayer.turnStart.show()
-        .chain(delay(1000))
-        .chain(activeTDPlayer.turnStart.hidden())
-    )).chain(
-      delay(300)
-    ).chain(
-      // TODO バッテリー回復値をeffectに持たせる
-      activeTDPlayer.recoverBattery.popUp(3),
-      activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery),
-    ),
+    delay(700)
+      .chain(activeTDPlayer.turnStart.popUp())
+      .chain(delay(300))
+      .chain(all(
+        // TODO バッテリー回復値をeffectに持たせる
+        activeTDPlayer.recoverBattery.popUp(3),
+        activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery),
+      )),
+
   ).chain(
     delay(800)
   );
