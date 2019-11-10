@@ -9,7 +9,7 @@ import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {TurnStartModel} from "../model/turn-start-model";
 import {SPRITE_RENDER_ORDER} from "../../../render-order/td-render-order";
 
-export const MESH_SIZE = 400;
+export const MESH_SIZE = 500;
 export const CANVAS_SIZE = 512;
 
 /** プレイヤーターンスタートビュー */
@@ -25,13 +25,13 @@ export class PlayerTurnStartView implements TurnStartView {
     });
     this._canvas.mesh.renderOrder = SPRITE_RENDER_ORDER;
 
-    const indicatorResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.ATTACKER_INDICATOR);
+    const indicatorResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_TURN);
     const indicator: Image = indicatorResource
       ? indicatorResource.image
       : new Image();
     this._canvas.draw(context => {
       const dx = context.canvas.width / 2;
-      const dy = context.canvas.height / 2;
+      const dy = context.canvas.height / 2 + 16;
       drawImageInCenter(context, indicator, dx, dy);
     });
   }
