@@ -23,9 +23,9 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
       .chain(delay(3000)),
 
     delay(700).chain(all(
-      activeHUDPlayer.turnStart.show()
+      activeTDPlayer.turnStart.show()
         .chain(delay(1000))
-        .chain(activeHUDPlayer.turnStart.hidden())
+        .chain(activeTDPlayer.turnStart.hidden())
     )).chain(
       delay(300)
     ).chain(

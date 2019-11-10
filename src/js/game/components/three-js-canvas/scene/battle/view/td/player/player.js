@@ -37,7 +37,8 @@ export function playerTDObjects(resources: Resources, state: PlayerState, listen
     damageIndicator: playerDamageIndicator({
       resources: resources,
       listener: listener
-    })
+    }),
+    turnStart: playerTurnStart(resources, listener)
   }
 }
 

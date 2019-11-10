@@ -23,6 +23,7 @@ export type TDPlayer<T: ArmDozerSprite> = {
   batteryNumber: BatteryNumber,
   recoverBattery: RecoverBattery,
   damageIndicator: DamageIndicator,
+  turnStart: TurnStart,
 };
 
 /**
@@ -37,6 +38,7 @@ export function appendTDPlayer<T: ArmDozerSprite>(scene: THREE.Scene, player: TD
   scene.add(player.batteryNumber.getObject3D());
   scene.add(player.recoverBattery.getObject3D());
   scene.add(player.damageIndicator.getObject3D());
+  scene.add(player.turnStart.getObject3D());
 }
 
 /**
@@ -51,4 +53,5 @@ export function disposeTDPlayer<T: ArmDozerSprite>(target: TDPlayer<T>): void {
   target.damageIndicator.destructor();
   target.hitMark.spark.destructor();
   target.recoverBattery.destructor();
+  target.turnStart.destructor();
 }

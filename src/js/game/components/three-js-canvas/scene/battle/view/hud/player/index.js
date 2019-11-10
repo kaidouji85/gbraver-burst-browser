@@ -9,7 +9,6 @@ import {TurnStart} from "../../../../../../../../game-object/turn-start/turn-sta
 export type HUDPlayer = {
   playerId: PlayerId,
   gauge: Gauge,
-  turnStart: TurnStart,
 };
 
 /**
@@ -20,7 +19,6 @@ export type HUDPlayer = {
  */
 export function appendHUDPlayer(scene: THREE.Scene, hud: HUDPlayer) {
   scene.add(hud.gauge.getObject3D());
-  scene.add(hud.turnStart.getObject3D());
 }
 
 /**
@@ -30,5 +28,4 @@ export function appendHUDPlayer(scene: THREE.Scene, hud: HUDPlayer) {
  */
 export function disposeHUDPlayer(target: HUDPlayer): void {
   target.gauge.destructor();
-  target.turnStart.destructor();
 }

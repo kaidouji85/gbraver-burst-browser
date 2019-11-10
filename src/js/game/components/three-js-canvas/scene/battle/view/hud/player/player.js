@@ -25,6 +25,5 @@ export function playerHUDObjects(resources: Resources, listener: Observable<Game
       hp: player.armdozer.maxHp,
       battery: player.armdozer.maxBattery,
     }),
-    turnStart: playerTurnStart(resources, listener),
   };
 }
