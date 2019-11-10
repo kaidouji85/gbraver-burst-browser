@@ -28,9 +28,9 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
     zoomIn(view.td.camera, attackerX, 500),
 
     delay(700)
-      .chain(activeTDPlayer.attackerIndicator.show())
+      .chain(activeHUDPlayer.turnStart.show())
       .chain(delay(1000))
-      .chain(activeTDPlayer.attackerIndicator.hidden())
+      .chain(activeHUDPlayer.turnStart.hidden())
   ).chain(
     delay(800)
   );

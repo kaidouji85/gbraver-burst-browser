@@ -60,9 +60,9 @@ export class PlayerTurnStartView implements TurnStartView {
   /** 座標を更新する */
   _refreshPos(): void {
     const target = this._canvas.getObject3D();
-    target.position.x = 150;
-    target.position.y = 150;
-    target.position.z = 40;
+    target.position.x = 0;
+    target.position.y = 0;
+    target.position.z = 0;
   }
 
   /**

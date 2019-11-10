@@ -38,8 +38,7 @@ export function enemyTDObject(resources: Resources, state: PlayerState, listener
     damageIndicator: enemyDamageIndicator({
       resources: resources,
       listener: listener
-    }),
-    attackerIndicator: enemyTurnStart(resources, listener),
+    })
   }
 }
 
