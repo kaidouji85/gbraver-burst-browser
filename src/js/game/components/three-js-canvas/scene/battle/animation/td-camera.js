@@ -49,23 +49,3 @@ export function zoomIn(camera: TDCamera, x: number, duration: number): Animate {
     camera.moveViewPoint({x: x}, duration)
   );
 }
-
-/**
- * 操作しているプレイヤーにカメラを合わせる
- *
- * @param camera カメラ
- * @param x プレイヤーのX座標
- * @param duration アニメーション時間
- * @return アニメーション
- */
-export function lookAtPlayer(camera: TDCamera, x: number, duration: number): Animate {
-  return all(
-    camera.moveCamera({
-      x: x,
-      z: INITIAL_CAMERA_POSITION.z
-    }, duration),
-    camera.moveViewPoint({
-      x: x,
-    }, duration)
-  );
-}

@@ -6,7 +6,7 @@ import {ShinBraver} from "../../../../../../../../game-object/armdozer/shin-brav
 import {delay, empty} from "../../../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core/lib/armdozer/burst";
 import {all} from "../../../../../../../../animation/all";
-import {lookAtPlayer, zoomIn} from "../../td-camera";
+import {zoomIn} from "../../td-camera";
 
 /**
  * シンブレイバーのバーストアニメーション
