@@ -12,6 +12,7 @@ import {playerRecoverBattery} from "../../../../../../../../game-object/recover-
 import {playerDamageIndicator} from "../../../../../../../../game-object/damage-indicator";
 import type {TDPlayer} from "./index";
 import {playerSpark} from "../../../../../../../../game-object/hitmark/spark";
+import {playerTurnStart} from "../../../../../../../../game-object/turn-start";
 
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
@@ -36,7 +37,8 @@ export function playerTDObjects(resources: Resources, state: PlayerState, listen
     damageIndicator: playerDamageIndicator({
       resources: resources,
       listener: listener
-    })
+    }),
+    turnStart: playerTurnStart(resources, listener)
   }
 }
 

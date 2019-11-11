@@ -6,6 +6,7 @@ import type {GameObjectAction} from "../../../../../../../../action/game-object-
 import type {Player} from "gbraver-burst-core/lib/player/player";
 import {enemyGauge} from "../../../../../../../../game-object/gauge";
 import type {HUDPlayer} from "./index";
+import {enemyTurnStart} from "../../../../../../../../game-object/turn-start";
 
 /**
  * 敵HUDオブジェクト
@@ -23,6 +24,6 @@ export function enemyHUDObjects(resources: Resources, listener: Observable<GameO
       listener: listener,
       hp: player.armdozer.maxHp,
       battery: player.armdozer.maxBattery,
-    })
+    }),
   };
 }

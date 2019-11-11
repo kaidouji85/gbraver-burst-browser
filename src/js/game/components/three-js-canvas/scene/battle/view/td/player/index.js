@@ -7,6 +7,7 @@ import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import {Spark} from "../../../../../../../../game-object/hitmark/spark/spark";
 import * as THREE from "three";
 import type {ArmDozerSprite} from "../../../../../../../../game-object/armdozer/armdozer-sprite";
+import {TurnStart} from "../../../../../../../../game-object/turn-start/turn-start";
 
 /**
  * 3Dレイヤーのプレイヤー関係オブジェクト
@@ -22,6 +23,7 @@ export type TDPlayer<T: ArmDozerSprite> = {
   batteryNumber: BatteryNumber,
   recoverBattery: RecoverBattery,
   damageIndicator: DamageIndicator,
+  turnStart: TurnStart,
 };
 
 /**
@@ -36,6 +38,7 @@ export function appendTDPlayer<T: ArmDozerSprite>(scene: THREE.Scene, player: TD
   scene.add(player.batteryNumber.getObject3D());
   scene.add(player.recoverBattery.getObject3D());
   scene.add(player.damageIndicator.getObject3D());
+  scene.add(player.turnStart.getObject3D());
 }
 
 /**
@@ -50,4 +53,5 @@ export function disposeTDPlayer<T: ArmDozerSprite>(target: TDPlayer<T>): void {
   target.damageIndicator.destructor();
   target.hitMark.spark.destructor();
   target.recoverBattery.destructor();
+  target.turnStart.destructor();
 }

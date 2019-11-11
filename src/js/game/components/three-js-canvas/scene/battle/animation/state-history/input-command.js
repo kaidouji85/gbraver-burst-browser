@@ -9,6 +9,7 @@ import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
 import {delay, empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
 import {canBurstButtonPush} from "../../ui-logic/burst-button";
+import {lookAtPlayer} from "../td-camera";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -44,13 +45,11 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   const canBurst = canBurstButtonPush(playerCommand.command);
+  const playerX = playerTD.sprite.getObject3D().position.x;
   return all(
-    all(
-      view.td.camera.moveCamera({x: 150, z: 250}, 300),
-      view.td.camera.moveViewPoint({x: 150}, 300),
-    ),
+    lookAtPlayer(view.td.camera, playerX, 500),
 
-    delay(600).chain(all(
+    delay(800).chain(all(
       playerHUD.gauge.hp(player.armdozer.hp),
       playerHUD.gauge.battery(player.armdozer.battery),
       enemyHUD.gauge.hp(enemy.armdozer.hp),

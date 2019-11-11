@@ -3,6 +3,7 @@
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import {Gauge} from "../../../../../../../../game-object/gauge/gauge";
 import * as THREE from "three";
+import {TurnStart} from "../../../../../../../../game-object/turn-start/turn-start";
 
 /** HUDレイヤーのプレイヤー関連オブジェクト */
 export type HUDPlayer = {

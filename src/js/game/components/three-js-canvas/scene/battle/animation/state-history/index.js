@@ -9,6 +9,7 @@ import {inputCommandAnimation} from "./input-command";
 import {battleAnimation} from "./battle";
 import {turnChangeAnimation} from "./turn-change";
 import {burstAnimation} from "./burst";
+import {startGameAnimation} from "./start-game";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -22,6 +23,8 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
   return gameStateList
     .map(v => {
       switch (v.effect.name) {
+        case 'StartGame':
+          return startGameAnimation(view, sceneState, v);
         case 'InputCommand':
           return inputCommandAnimation(view, sceneState, v);
         case 'Battle':
