@@ -9,7 +9,7 @@ import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {TurnStartModel} from "../model/turn-start-model";
 import {SPRITE_RENDER_ORDER} from "../../../render-order/td-render-order";
 
-export const MESH_SIZE = 300;
+export const MESH_SIZE = 400;
 export const CANVAS_SIZE = 512;
 
 /** プレイヤーターンスタートビュー */
@@ -61,7 +61,7 @@ export class PlayerTurnStartView implements TurnStartView {
   _refreshPos(): void {
     const target = this._canvas.getObject3D();
     target.position.x = 150;
-    target.position.y = 150;
+    target.position.y = 160;
     target.position.z = 40;
   }
 
