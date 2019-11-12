@@ -35,7 +35,9 @@ function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>):
   return all(
     zoomIn(param.tdCamera, playerX, 300),
 
-    delay(800)
-      .chain(param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery))
+    delay(800).chain(all(
+      param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
+      param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+    ))
   );
 }
