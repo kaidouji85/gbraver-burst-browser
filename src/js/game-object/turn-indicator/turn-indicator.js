@@ -18,6 +18,7 @@ type Param = {
   listener: Observable<GameObjectAction>
 };
 
+//TODO AttackDirectionに名前を変更する
 /** ターンインジケーター */
 export class TurnIndicator {
   _model: TurnIndicatorModel;

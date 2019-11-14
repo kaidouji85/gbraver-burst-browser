@@ -1,8 +1,7 @@
 // @flow
 
 import {GameStream} from "./stream";
-import {Components} from "../components";
-import {ThreeJSCanvas} from "../three-js-canvas";
+import {Components} from "./components";
 import type {Resources} from "../resource";
 import {loadAllResource} from "../resource";
 import {Subscription} from "rxjs";
@@ -19,7 +18,6 @@ import type {EndBattle} from "../action/game/end-battle";
 export class Game {
   _stream: GameStream;
   _components: Components;
-  _threeJSCanvas: ThreeJSCanvas;
   _resources: ?Resources;
   _subscription: Subscription[];
 
@@ -28,20 +26,18 @@ export class Game {
     this._components = new Components({
       listener: {
         loading: this._stream.loading,
-        serviceWorker: this._stream.serviceWorker
+        serviceWorker: this._stream.serviceWorker,
+        startBattle:this._stream.startBattle,
       }
     });
-    this._threeJSCanvas = new ThreeJSCanvas();
     this._resources = null;
     this._subscription = [
-      this._threeJSCanvas.notifier().gameAction.subscribe(action => {
-        if (action.type === 'endBattle') {
-          this._onEndBattle(action);
-        }
-      }),
-
       this._components.notifier().endTitle.subscribe(action => {
         this._onEndTitle(action);
+      }),
+
+      this._components.notifier().endBattle.subscribe(action => {
+        this._onEndBattle(action);
       })
     ];
   }
@@ -73,17 +69,22 @@ export class Game {
   async _onEndTitle(action: EndTitle) {
     try {
       const resources = await loadAllResource(`${resourceBasePath()}/`);
+      this._resources = resources;
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._threeJSCanvas.bindBattleScene(resources, room, initialState);
-      this._resources = resources;
+      this._stream.startBattle.next({
+        type: 'StartBattle',
+        resources: resources,
+        room: room,
+        initialState: initialState
+      });
     } catch (e) {
       throw e;
     }
   }
 
   /**
-   * 先頭終了時の処理
+   * 戦闘終了時の処理
    *
    * @param action アクション
    */
@@ -92,10 +93,16 @@ export class Game {
       if (!this._resources) {
         return;
       }
+
       const resources: Resources = this._resources;
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._threeJSCanvas.bindBattleScene(resources, room, initialState);
+      this._stream.startBattle.next({
+        type: 'StartBattle',
+        resources: resources,
+        room: room,
+        initialState: initialState
+      });
     } catch (e) {
       throw e;
     }

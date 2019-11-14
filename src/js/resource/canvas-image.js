@@ -38,8 +38,8 @@ export const CANVAS_IMAGE_IDS = {
   BURST_BUTTON: 'BURST_BUTTON',
   BIG_BUTTON_DISABLED: 'BIG_BUTTON_DISABLED',
   SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED',
-  PLAY_IN_LANDSCAPE: 'PLAY_IN_LANDSCAPE',
-  TITLE_LOGO: 'TITLE_LOGO',
+  PLAYER_TURN: 'PLAYER_TURN',
+  ENEMY_TURN: 'ENEMY_TURN',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -125,13 +125,13 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'button/small-button-disabled.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.PLAY_IN_LANDSCAPE,
-    path: 'waring/play-in-landscape.png',
+    id: CANVAS_IMAGE_IDS.PLAYER_TURN,
+    path: 'turn/player-turn.png',
   },
   {
-    id: CANVAS_IMAGE_IDS.TITLE_LOGO,
-    path: 'logo.png',
-  }
+    id: CANVAS_IMAGE_IDS.ENEMY_TURN,
+    path: 'turn/enemy-turn.png',
+  },
 ];
 
 /**
