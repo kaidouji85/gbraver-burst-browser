@@ -1,5 +1,6 @@
 // @flow
 
+import TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
 import type {Resources} from "../../resource";
 import type {TurnIndicatorModel} from "./model/turn-indicator-model";
@@ -23,11 +24,13 @@ type Param = {
 //TODO AttackDirectionに名前を変更する
 /** ターンインジケーター */
 export class TurnIndicator {
+  _tween: TWEEN.Group;
   _model: TurnIndicatorModel;
   _view: TurnIndicatorView;
   _subscription: Subscription[];
 
   constructor(param: Param) {
+    this._tween = new TWEEN.Group();
     this._model = createInitialValue();
     this._view = new TurnIndicatorView(param.resources);
 
@@ -58,6 +61,7 @@ export class TurnIndicator {
     this._subscription.forEach(v => {
       v.unsubscribe();
     });
+    this._tween.removeAll();
   }
 
   /**
@@ -86,6 +90,7 @@ export class TurnIndicator {
 
   /** 状態更新 */
   _update(action: Update): void {
+    this._tween.update(action.time);
     this._view.engage(this._model);
   }
 
