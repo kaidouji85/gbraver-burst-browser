@@ -10,6 +10,7 @@ import type {TurnIndicatorModel} from "./turn-indicator-model";
 export function createInitialValue(): TurnIndicatorModel {
   return {
     isPlayerTurn: true,
-    opacity: 0
+    opacity: 0,
+    x: 30
   };
 }

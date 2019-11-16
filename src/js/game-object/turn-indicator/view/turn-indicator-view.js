@@ -27,7 +27,7 @@ export class TurnIndicatorView {
   /** モデルをビューに反映させる */
   engage(model: TurnIndicatorModel): void {
     this._setScale(model);
-    this._setPos();
+    this._setPos(model);
     this._setOpacity(model);
   }
 
@@ -47,8 +47,10 @@ export class TurnIndicatorView {
   }
 
   /** 位置調整 */
-  _setPos(): void {
-    this._canvasMesh.mesh.position.x = 0;
+  _setPos(model: TurnIndicatorModel): void {
+    this._canvasMesh.mesh.position.x = model.isPlayerTurn
+      ? model.x
+      : -model.x;
     this._canvasMesh.mesh.position.y = 150;
     this._canvasMesh.mesh.position.z = 20;
   }

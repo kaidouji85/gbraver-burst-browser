@@ -3,5 +3,6 @@
 /** ターンインジケーターモデル */
 export type TurnIndicatorModel = {
   isPlayerTurn: boolean,
-  opacity: number
+  opacity: number,
+  x: number,
 };
