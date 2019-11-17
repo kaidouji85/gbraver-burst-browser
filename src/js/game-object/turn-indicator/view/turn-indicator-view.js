@@ -8,7 +8,7 @@ import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {CanvasImageResource} from "../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
-export const MESH_SIZE = 160;
+export const MESH_SIZE = 200;
 export const CANVAS_SIZE = 512;
 
 /** ターンインジケータービュー */
@@ -43,14 +43,19 @@ export class TurnIndicatorView {
 
   /** 全体の拡大率を変更 */
   _setScale(model: TurnIndicatorModel): void {
-    this._canvasMesh.mesh.scale.x = model.isPlayerTurn ? 1 : -1;
+    const scale = (model.animation * 0.3 + 0.7);
+    this._canvasMesh.mesh.scale.x = model.isPlayerTurn
+      ? scale
+      : -scale;
+    this._canvasMesh.mesh.scale.y = scale;
   }
 
   /** 位置調整 */
   _setPos(model: TurnIndicatorModel): void {
+    const x = 70 - 120 * model.animation;
     this._canvasMesh.mesh.position.x = model.isPlayerTurn
-      ? model.x
-      : -model.x;
+      ? x
+      : -x;
     this._canvasMesh.mesh.position.y = 150;
     this._canvasMesh.mesh.position.z = 20;
   }

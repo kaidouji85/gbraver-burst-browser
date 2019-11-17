@@ -13,7 +13,7 @@ import {delay} from "../../../animation/delay";
  * @return アニメーション
  */
 export function waiting(model: TurnIndicatorModel, group: TWEEN.Group): Animate {
-  return tween(model, t => t.to({x: '-50'}, 500), group)
+  return tween(model, t => t.to({animation: 1}, 500), group)
     .chain(delay(150, group))
-    .chain(tween(model, t => t.to({x: '+50'}, 0), group));
+    .chain(tween(model, t => t.to({animation: 1}, 0), group));
 }
