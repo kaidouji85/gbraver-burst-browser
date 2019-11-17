@@ -6,7 +6,7 @@ import {process} from "../../../animation/process";
 import {tween} from "../../../animation/tween";
 
 /** ターン変更する */
-export function turnChange(isPlayerTurn: boolean, model: TurnIndicatorModel): Animate {
+export function show(isPlayerTurn: boolean, model: TurnIndicatorModel): Animate {
   return process(() => {
     model.isPlayerTurn = isPlayerTurn;
   }).chain(

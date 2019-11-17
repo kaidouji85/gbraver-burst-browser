@@ -1,5 +1,6 @@
 // @flow
 
+import TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
 import type {Resources} from "../../resource";
 import type {TurnIndicatorModel} from "./model/turn-indicator-model";
@@ -9,9 +10,11 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {invisible} from "./animation/invisible";
-import {turnChange} from "./animation/turn-change";
+import {show} from "./animation/show";
 import {Animate} from "../../animation/animate";
 import {createInitialValue} from "./model/initial-value";
+import {waiting} from "./animation/waiting";
+import {filter, take} from "rxjs/operators";
 
 type Param = {
   resources: Resources,
@@ -21,27 +24,44 @@ type Param = {
 //TODO AttackDirectionに名前を変更する
 /** ターンインジケーター */
 export class TurnIndicator {
+  _tween: TWEEN.Group;
   _model: TurnIndicatorModel;
   _view: TurnIndicatorView;
-  _subscription: Subscription;
+  _subscription: Subscription[];
 
   constructor(param: Param) {
+    this._tween = new TWEEN.Group();
     this._model = createInitialValue();
     this._view = new TurnIndicatorView(param.resources);
 
-    this._subscription = param.listener.subscribe(action => {
-      if (action.type === 'Update') {
-        this._update(action);
-      } else if (action.type === 'PreRender') {
-        this._preRender(action);
-      }
-    });
+    this._subscription = [
+      param.listener.subscribe(action => {
+        if (action.type === 'Update') {
+          this._update(action);
+        } else if (action.type === 'PreRender') {
+          this._preRender(action);
+        }
+      }),
+
+      param.listener.pipe(
+        filter(v => v.type === 'Update'),
+        take(1)
+      ).subscribe(action => {
+        if (action.type === 'Update') {
+          // TODO アニメーションストップを実装する
+          waiting(this._model).loop();
+        }
+      })
+    ];
   }
 
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
+    this._tween.removeAll();
   }
 
   /**
@@ -51,9 +71,14 @@ export class TurnIndicator {
    * @return アニメーション
    */
   turnChange(isPlayerTurn: boolean): Animate {
-    return turnChange(isPlayerTurn, this._model);
+    return show(isPlayerTurn, this._model);
   }
 
+  /**
+   * 非表示にする
+   *
+   * @return アニメーション
+   */
   invisible(): Animate {
     return invisible(this._model);
   }
@@ -65,6 +90,7 @@ export class TurnIndicator {
 
   /** 状態更新 */
   _update(action: Update): void {
+    this._tween.update(action.time);
     this._view.engage(this._model);
   }
 
