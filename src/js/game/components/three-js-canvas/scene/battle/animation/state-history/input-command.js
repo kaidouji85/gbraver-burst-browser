@@ -45,7 +45,6 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   const canBurst = canBurstButtonPush(playerCommand.command);
-  const playerX = playerTD.sprite.getObject3D().position.x;
   return all(
     toInitial(view.td.camera, 500),
 
