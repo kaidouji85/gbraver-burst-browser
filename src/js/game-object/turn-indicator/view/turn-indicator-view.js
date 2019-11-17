@@ -10,6 +10,7 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
 export const MESH_SIZE = 200;
 export const CANVAS_SIZE = 512;
+export const CANVAS_NUM = 3;
 
 /** ターンインジケータービュー */
 export class TurnIndicatorView {
@@ -26,9 +27,7 @@ export class TurnIndicatorView {
 
   /** モデルをビューに反映させる */
   engage(model: TurnIndicatorModel): void {
-    this._setScale(model);
-    this._setPos(model);
-    this._setOpacity(model);
+    engageMesh(this._canvasMesh, model);
   }
 
   /** カメラの方向を向く */
@@ -39,30 +38,6 @@ export class TurnIndicatorView {
   /** ビューで使うthree.jsを返す */
   getObject3D(): THREE.Object3D {
     return this._canvasMesh.getObject3D();
-  }
-
-  /** 全体の拡大率を変更 */
-  _setScale(model: TurnIndicatorModel): void {
-    const scale = (model.animation * 0.3 + 0.7);
-    this._canvasMesh.mesh.scale.x = model.isPlayerTurn
-      ? scale
-      : -scale;
-    this._canvasMesh.mesh.scale.y = scale;
-  }
-
-  /** 位置調整 */
-  _setPos(model: TurnIndicatorModel): void {
-    const x = 70 - 120 * model.animation;
-    this._canvasMesh.mesh.position.x = model.isPlayerTurn
-      ? x
-      : -x;
-    this._canvasMesh.mesh.position.y = 150;
-    this._canvasMesh.mesh.position.z = 20;
-  }
-
-  /** 透明度を設定 */
-  _setOpacity(model: TurnIndicatorModel): void {
-    this._canvasMesh.setOpacity(model.opacity);
   }
 }
 
@@ -82,4 +57,27 @@ function createCanvasMesh(resources: Resources): CanvasMesh {
     drawImageInCenter(context, turnIndicatorImage, dx, dy);
   });
   return mesh;
+}
+
+/**
+ * キャンバスメッシュにモデルを反省させる
+ *
+ * @param canvasMesh
+ * @param model
+ */
+function engageMesh(canvasMesh: CanvasMesh, model: TurnIndicatorModel): void {
+  const scale = (model.animation * 0.3 + 0.7);
+  canvasMesh.mesh.scale.x = model.isPlayerTurn
+    ? scale
+    : -scale;
+  canvasMesh.mesh.scale.y = scale;
+
+  const x = 70 - 120 * model.animation;
+  canvasMesh.mesh.position.x = model.isPlayerTurn
+    ? x
+    : -x;
+  canvasMesh.mesh.position.y = 150;
+  canvasMesh.mesh.position.z = 20;
+
+  canvasMesh.setOpacity(model.opacity);
 }
