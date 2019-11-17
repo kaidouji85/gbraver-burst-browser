@@ -33,7 +33,7 @@ export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, Burst>): 
 function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>): Animate {
   const playerX = param.burstPlayerTD.sprite.getObject3D().position.x;
   return all(
-    zoomIn(param.tdCamera, playerX, 300),
+    zoomIn(param.tdCamera, playerX, 500),
     param.tdObjects.turnIndicator.invisible(),
 
     delay(1300).chain(all(
