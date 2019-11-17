@@ -44,7 +44,7 @@ export class TurnIndicatorView {
       : -scale;
     this._canvasMesh.mesh.scale.y = scale;
 
-    const x = 70 - 120 * model.animation;
+    const x = 40 - 60 * model.animation;
     this._canvasMesh.mesh.position.x = model.isPlayerTurn
       ? x
       : -x;
