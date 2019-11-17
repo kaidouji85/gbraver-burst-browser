@@ -5,6 +5,7 @@ import {Animate} from "../../../animation/animate";
 import type {TurnIndicatorModel} from "../model/turn-indicator-model";
 import {tween} from "../../../animation/tween";
 import {delay} from "../../../animation/delay";
+
 /**
  * 待ちアニメ
  *

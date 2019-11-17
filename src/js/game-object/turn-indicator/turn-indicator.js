@@ -14,14 +14,14 @@ import {show} from "./animation/show";
 import {Animate} from "../../animation/animate";
 import {createInitialValue} from "./model/initial-value";
 import {waiting} from "./animation/waiting";
-import {filter, take} from "rxjs/operators";
+import {process} from '../../animation/process';
 
+/** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   listener: Observable<GameObjectAction>
 };
 
-//TODO AttackDirectionに名前を変更する
 /** ターンインジケーター */
 export class TurnIndicator {
   _tween: TWEEN.Group;
@@ -40,16 +40,6 @@ export class TurnIndicator {
           this._update(action);
         } else if (action.type === 'PreRender') {
           this._preRender(action);
-        }
-      }),
-
-      param.listener.pipe(
-        filter(v => v.type === 'Update'),
-        take(1)
-      ).subscribe(action => {
-        if (action.type === 'Update') {
-          // TODO アニメーションストップを実装する
-          waiting(this._model).loop();
         }
       })
     ];
@@ -71,7 +61,12 @@ export class TurnIndicator {
    * @return アニメーション
    */
   turnChange(isPlayerTurn: boolean): Animate {
-    return show(isPlayerTurn, this._model);
+    return process(() => {
+      this._model.animation = 0;
+      waiting(this._model, this._tween).loop();
+    }).chain(
+      show(isPlayerTurn, this._model)
+    );
   }
 
   /**
@@ -80,7 +75,9 @@ export class TurnIndicator {
    * @return アニメーション
    */
   invisible(): Animate {
-    return invisible(this._model);
+    return invisible(this._model).chain(process(() => {
+      this._tween.removeAll();
+    }));
   }
 
   /** ターンインジケーターで使うthree.jsオブジェクトを返す */
