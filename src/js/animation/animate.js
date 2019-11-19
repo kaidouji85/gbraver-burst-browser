@@ -78,6 +78,14 @@ export class Animate {
   }
 
   /**
+   * アニメーションを無限ループ再生する
+   */
+  loop(): void {
+    this._end.chain(this._start);
+    this._start.start();
+  }
+
+  /**
    * アニメーションを結合する
    * 本アニメーション終了後に再生されるアニメーションを指定する
    * 後続アニメーションは複数可能だが、nextが最終要素として扱われる
