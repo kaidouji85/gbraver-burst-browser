@@ -3,10 +3,19 @@
 ロボットで対戦するゲームです。
 
 ## ローカル環境で動かす
+
 ```
 npm install
 npm start
-# ブラウザを起動してlocalhost:8080を開く
+# ブラウザを起動して<localhost:8080>を開く
+```
+
+## dockerで動かす
+
+```
+docker build -t gbraver-burst
+docker run --name my-gbraver-burst -p 3000:3000 gbraver-burst
+# ブラウザを起動して、<dockerホスト:3000>を開く
 ```
 
 ## デプロイする
