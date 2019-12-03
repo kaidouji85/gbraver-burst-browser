@@ -11,10 +11,6 @@ import type {GameLoop} from "../../../../../../../action/game-loop/game-loop";
 import type {PreRender} from "../../../../../../../action/game-loop/pre-render";
 import type {Render} from "../../../../../../../action/game-loop/render";
 import {PlainHUDCamera} from "../../../../../../../game-object/camera/plain-hud";
-import type {HUDPlayer} from "./player";
-import {appendHUDPlayer, disposeHUDPlayer} from "./player";
-import {enemyHUDObjects} from "./player/enemy";
-import {playerHUDObjects} from "./player/player";
 import type {HUDGameObjects} from "./game-objects";
 import {appendHUDGameObjects, createHUDGameObjects, disposeHUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../../../action/overlap";
@@ -46,7 +42,6 @@ type Notifier = {
 export class HudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
-  players: HUDPlayer[];
   gameObjects: HUDGameObjects;
 
   _rendererDOM: HTMLElement;
@@ -74,16 +69,6 @@ export class HudLayer {
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
-    const enemy = param.players.find(v => v.playerId !== param.playerId)
-      || param.players[0];
-    this.players = [
-      playerHUDObjects(param.resources, gameObjectAction, player),
-      enemyHUDObjects(param.resources, gameObjectAction, enemy),
-    ];
-    this.players.forEach(v => {
-      appendHUDPlayer(this.scene, v);
-    });
-
     this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
@@ -94,9 +79,6 @@ export class HudLayer {
 
   /** デストラクタ */
   destructor(): void {
-    this.players.forEach(v => {
-      disposeHUDPlayer(v);
-    });
     disposeHUDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();

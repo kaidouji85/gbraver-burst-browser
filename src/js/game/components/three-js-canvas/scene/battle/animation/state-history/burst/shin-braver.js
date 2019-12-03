@@ -37,7 +37,7 @@ function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>):
     param.tdObjects.turnIndicator.invisible(),
 
     delay(1300).chain(all(
-      param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
+      param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
       param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
     ))
   )

@@ -44,7 +44,7 @@ export class EnemyGaugeView implements GaugeView {
 
   /** プリレンダー */
   preRender(action: PreRender): void {
-    this._setPos(action.rendererDOM);
+    this._setPos();
     this._lookAt(action.camera);
   }
 
@@ -54,9 +54,9 @@ export class EnemyGaugeView implements GaugeView {
   }
 
   /** 座標をセットする */
-  _setPos(rendererDOM: HTMLElement): void {
-    this._group.position.x = -100;
-    this._group.position.y = rendererDOM.clientHeight / 2 - 50;
+  _setPos(): void {
+    this._group.position.x = -150;
+    this._group.position.y = 350;
     this._group.position.z = 0;
   }
 

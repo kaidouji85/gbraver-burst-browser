@@ -11,9 +11,8 @@ import {zoomIn} from "../td-camera";
 /** ターン変更のアニメーション */
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
-  const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeTDPlayer || !activeHUDPlayer || !activeStatus) {
+  if (!activeTDPlayer || !activeStatus) {
     return empty();
   }
 
@@ -28,7 +27,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
       .chain(all(
         // TODO バッテリー回復値をeffectに持たせる
         activeTDPlayer.recoverBattery.popUp(3),
-        activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery),
+        activeTDPlayer.gauge.battery(activeStatus.armdozer.battery),
       )),
 
   ).chain(

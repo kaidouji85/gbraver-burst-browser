@@ -17,9 +17,8 @@ import {zoomIn} from "../td-camera";
  */
 export function startGameAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
-  const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeTDPlayer || !activeHUDPlayer || !activeStatus) {
+  if (!activeTDPlayer || !activeStatus) {
     return empty();
   }
 

@@ -21,7 +21,8 @@ export class PlayerGaugeView implements GaugeView {
     this._group = new Group();
     this._group.scale.set(SCALE, SCALE, SCALE);
 
-    const gaugeBaseResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE);
+    const gaugeBaseResource = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE);
     const gaugeBase = gaugeBaseResource
       ? gaugeBaseResource.image
       : new Image();
@@ -44,7 +45,7 @@ export class PlayerGaugeView implements GaugeView {
 
   /** プリレンダー */
   preRender(action: PreRender): void {
-    this._setPos(action.rendererDOM);
+    this._setPos();
     this._lookAt(action.camera);
   }
 
@@ -54,9 +55,9 @@ export class PlayerGaugeView implements GaugeView {
   }
 
   /** 座標をセットする */
-  _setPos(rendererDOM: HTMLElement): void {
-    this._group.position.x = 100;
-    this._group.position.y = rendererDOM.clientHeight / 2 - 50;
+  _setPos(): void {
+    this._group.position.x = 150;
+    this._group.position.y = 350;
     this._group.position.z = 0;
   }
 

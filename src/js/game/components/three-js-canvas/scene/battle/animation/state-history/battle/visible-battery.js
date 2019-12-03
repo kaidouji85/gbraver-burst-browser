@@ -17,9 +17,9 @@ export function visibleBattery(param: BattleAnimationParam<ArmDozerSprite, Battl
   return all(
     all(
       param.attackerTD.batteryNumber.popUp(param.attackerBattery),
-      param.attackerHUD.gauge.battery(param.attackerState.armdozer.battery),
+      param.attackerTD.gauge.battery(param.attackerState.armdozer.battery),
       param.defenderTD.batteryNumber.popUp(param.defenderBattery),
-      param.defenderHUD.gauge.battery(param.defenderState.armdozer.battery),
+      param.defenderTD.gauge.battery(param.defenderState.armdozer.battery),
     ),
 
     delay(1200).chain(
