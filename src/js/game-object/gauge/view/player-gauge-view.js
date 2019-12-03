@@ -3,8 +3,6 @@
 import * as THREE from 'three';
 import type {GaugeView} from "./gauge-view";
 import type {GaugeModel} from "../model/gauge-model";
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
-import {drawGauge} from "../../../canvas/gauge";
 import type {Resources} from "../../../resource";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
@@ -12,7 +10,7 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {Group} from "three";
 
 export const BASE_CANVAS_SIZE = 1024;
-export const SCALE = 0.4;
+export const SCALE = 0.3;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
@@ -41,7 +39,7 @@ export class PlayerGaugeView implements GaugeView {
 
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
-
+    // TODO ゲージ反映を実装する
   }
 
   /** プリレンダー */

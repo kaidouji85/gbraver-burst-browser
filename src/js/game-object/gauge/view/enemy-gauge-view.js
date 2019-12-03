@@ -1,17 +1,67 @@
 // @flow
 
-import {PlayerGaugeView} from "./player-gauge-view";
+import * as THREE from 'three';
+import type {GaugeView} from "./gauge-view";
+import type {GaugeModel} from "../model/gauge-model";
 import type {Resources} from "../../../resource";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
+import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
+import {Group} from "three";
 
-/** 敵のゲージ */
-export class EnemyGaugeView extends PlayerGaugeView {
+export const BASE_CANVAS_SIZE = 1024;
+export const SCALE = 0.3;
+
+/** 敵のビュー */
+export class EnemyGaugeView implements GaugeView {
+  _group: THREE.Group;
+  _base: SimpleImageMesh;
+
   constructor(resources: Resources) {
-    super(resources);
+    this._group = new Group();
+    this._group.scale.set(SCALE, SCALE, SCALE);
+
+    const gaugeBaseResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE);
+    const gaugeBase = gaugeBaseResource
+      ? gaugeBaseResource.image
+      : new Image();
+    this._base = new SimpleImageMesh({
+      canvasSize: BASE_CANVAS_SIZE,
+      image: gaugeBase
+    });
+    this._group.add(this._base.getObject3D());
   }
 
+  /** デストラクタ */
+  destructor(): void {
+    this._base.destructor();
+  }
+
+  /** モデルをビューに反映させる */
+  engage(model: GaugeModel): void {
+    // TODO ゲージ反映を実装する
+  }
+
+  /** プリレンダー */
   preRender(action: PreRender): void {
-    super.preRender(action);
-    this._canvasMesh.mesh.position.x *= -1;
+    this._setPos(action.rendererDOM);
+    this._lookAt(action.camera);
+  }
+
+  /** シーンに追加するオブジェクトを取得する */
+  getObject3D(): THREE.Object3D {
+    return this._group;
+  }
+
+  /** 座標をセットする */
+  _setPos(rendererDOM: HTMLElement): void {
+    this._group.position.x = -100;
+    this._group.position.y = rendererDOM.clientHeight / 2 - 50;
+    this._group.position.z = 0;
+  }
+
+  /** カメラの真正面を向く */
+  _lookAt(camera: THREE.Camera): void {
+    this._group.quaternion.copy(camera.quaternion);
   }
 }

@@ -41,6 +41,7 @@ export const CANVAS_IMAGE_IDS = {
   PLAYER_TURN: 'PLAYER_TURN',
   ENEMY_TURN: 'ENEMY_TURN',
   PLAYER_GAUGE_BASE: 'PLAYER_GAUGE_BASE',
+  ENEMY_GAUGE_BASE: 'ENEMY_GAUGE_BASE',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -136,7 +137,11 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE,
     path: 'gauge/player-gauge-base.png',
-  }
+  },
+  {
+    id: CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE,
+    path: 'gauge/enemy-gauge-base.png',
+  },
 ];
 
 /**
