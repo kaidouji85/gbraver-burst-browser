@@ -37,18 +37,18 @@ export class PlayerGaugeView implements GaugeView {
     this._hpBar = new HpBar(resources);
     this._hpBar.getObject3D().position.set(-210 ,30, 1);
     this._group.add(this._hpBar.getObject3D());
-
-
   }
 
   /** デストラクタ */
   destructor(): void {
     this._base.destructor();
+    this._hpBar.destructor();
   }
 
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
     // TODO ゲージ反映を実装する
+    this._hpBar.setValue(model.hp / model.maxHp);
   }
 
   /** プリレンダー */
