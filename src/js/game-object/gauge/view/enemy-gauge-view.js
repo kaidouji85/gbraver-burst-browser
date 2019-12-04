@@ -7,7 +7,7 @@ import type {Resources} from "../../../resource";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {Group} from "three";
+import {EnemyHpBar} from "./enemy-player-bar";
 
 export const BASE_CANVAS_SIZE = 1024;
 export const SCALE = 0.3;
@@ -16,9 +16,10 @@ export const SCALE = 0.3;
 export class EnemyGaugeView implements GaugeView {
   _group: THREE.Group;
   _base: SimpleImageMesh;
+  _hpBar: EnemyHpBar;
 
   constructor(resources: Resources) {
-    this._group = new Group();
+    this._group = new THREE.Group();
     this._group.scale.set(SCALE, SCALE, SCALE);
 
     const gaugeBaseResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE);
@@ -30,6 +31,10 @@ export class EnemyGaugeView implements GaugeView {
       image: gaugeBase
     });
     this._group.add(this._base.getObject3D());
+
+    this._hpBar = new EnemyHpBar(resources);
+    this._hpBar.getObject3D().position.set(210 ,30, 1);
+    this._group.add(this._hpBar.getObject3D());
   }
 
   /** デストラクタ */
@@ -40,6 +45,7 @@ export class EnemyGaugeView implements GaugeView {
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
     // TODO ゲージ反映を実装する
+    this._hpBar.setValue(model.hp / model.maxHp);
   }
 
   /** プリレンダー */

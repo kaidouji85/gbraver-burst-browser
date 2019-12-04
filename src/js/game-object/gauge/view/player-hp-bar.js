@@ -11,8 +11,8 @@ export const CANVAS_HEIGHT = 512;
 export const MESH_WIDTH = 512;
 export const MESH_HEIGHT = 512;
 
-/** HPバー */
-export class HpBar {
+/** プレイヤーのHPバー */
+export class PlayerHpBar {
   _texture: THREE.Texture;
   _barImage: Image;
   _mesh: THREE.Mesh;
