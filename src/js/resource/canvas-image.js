@@ -18,12 +18,6 @@ export type CanvasImageResource = {
 
 /** キャンバス用画像IDリストをあつめたもの */
 export const CANVAS_IMAGE_IDS = {
-  GAUGE_WINDOW: 'GAUGE_WINDOW',
-  ACTIVE_HP_BAR: 'ACTIVE_HP_BAR',
-  DIS_ACTIVE_HP_BAR: 'DIS_ACTIVE_HP_BAR',
-  ACTIVE_BATTERY_BAR: 'ACTIVE_BATTERY_BAR',
-  DIS_ACTIVE_BATTERY_BAR: 'DIS_ACTIVE_BATTERY_BAR',
-  GAUGE_BAR_BASE: 'GAUGE_BAR_BASE',
   BATTERY_BUTTON: 'BATTERY_BUTTON',
   BATTERY_PLUS: 'BATTERY_PLUS',
   BATTERY_MINUS: 'BATTERY_MINUS',
@@ -46,30 +40,6 @@ export const CANVAS_IMAGE_IDS = {
 
 /** キャンバス用画像設定をあつめたもの */
 export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
-  {
-    id: CANVAS_IMAGE_IDS.GAUGE_WINDOW,
-    path: 'gauge/window.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.ACTIVE_HP_BAR,
-    path: 'gauge/active-hp-bar.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DIS_ACTIVE_HP_BAR,
-    path: 'gauge/disactive-hp-bar.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.ACTIVE_BATTERY_BAR,
-    path: 'gauge/active-battery-bar.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_BAR,
-    path: 'gauge/disactive-battery-bar.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.GAUGE_BAR_BASE,
-    path: 'gauge/bar-base.png',
-  },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_BUTTON,
     path: 'battery-selector/battery-button.png',
