@@ -6,7 +6,7 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {all} from "../../../../../../../animation/all";
 import {delay, empty} from "../../../../../../../animation/delay";
-import {zoomIn} from "../td-camera";
+import {dolly} from "../td-camera";
 
 /** ターン変更のアニメーション */
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
@@ -18,7 +18,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
 
   const activePlayerX = activeTDPlayer.sprite.getObject3D().position.x;
   return all(
-    zoomIn(view.td.camera,activePlayerX, 500)
+    dolly(view.td.camera,activePlayerX, 500)
       .chain(delay(3000)),
 
     delay(700)

@@ -6,7 +6,7 @@ import {ShinBraver} from "../../../../../../../../game-object/armdozer/shin-brav
 import {delay, empty} from "../../../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core/lib/armdozer/burst";
 import {all} from "../../../../../../../../animation/all";
-import {zoomIn} from "../../td-camera";
+import {dolly} from "../../td-camera";
 
 /**
  * シンブレイバーのバーストアニメーション
@@ -33,7 +33,7 @@ export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, Burst>): 
 function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>): Animate {
   const playerX = param.burstPlayerTD.sprite.getObject3D().position.x;
   return all(
-    zoomIn(param.tdCamera, playerX, 500),
+    dolly(param.tdCamera, playerX, 500),
     param.tdObjects.turnIndicator.invisible(),
 
     delay(1300).chain(all(

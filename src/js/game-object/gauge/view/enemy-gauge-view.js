@@ -62,7 +62,7 @@ export class EnemyGaugeView implements GaugeView {
   /** 座標をセットする */
   _setPos(): void {
     this._group.position.x = -150;
-    this._group.position.y = 350;
+    this._group.position.y = 340;
     this._group.position.z = 0;
   }
 

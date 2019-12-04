@@ -33,18 +33,18 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
 }
 
 /**
- * ズームアップ
+ * ドリー
  *
  * @param camera カメラ
- * @param x ズーム対象のX座標
+ * @param x 注視点のX座標
  * @param duration アニメーション時間
  * @return アニメーション
  */
-export function zoomIn(camera: TDCamera, x: number, duration: number): Animate {
+export function dolly(camera: TDCamera, x: number, duration: number): Animate {
   return all(
     camera.moveCamera({
       x: x,
-      z: '-100'
+      z: '-60'
     }, duration),
     camera.moveViewPoint({x: x}, duration)
   );
