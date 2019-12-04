@@ -8,6 +8,7 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {Group} from "three";
+import {HpBar} from "./hp-bar";
 
 export const BASE_CANVAS_SIZE = 1024;
 export const SCALE = 0.3;
@@ -16,6 +17,7 @@ export const SCALE = 0.3;
 export class PlayerGaugeView implements GaugeView {
   _group: THREE.Group;
   _base: SimpleImageMesh;
+  _hpBar: HpBar;
 
   constructor(resources: Resources) {
     this._group = new Group();
@@ -31,6 +33,12 @@ export class PlayerGaugeView implements GaugeView {
       image: gaugeBase
     });
     this._group.add(this._base.getObject3D());
+
+    this._hpBar = new HpBar(resources);
+    this._hpBar.getObject3D().position.set(-210 ,30, 1);
+    this._group.add(this._hpBar.getObject3D());
+
+
   }
 
   /** デストラクタ */
