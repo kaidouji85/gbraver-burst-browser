@@ -14,7 +14,11 @@ npm start
 
 ```
 docker build -t gbraver-burst .
-docker run --name my-gbraver-burst -p 3000:3000 gbraver-burst
+docker run --rm -it --name my-gbraver-burst-dev \
+  -v $PWD:/usr/src/app \
+  -p 8080:8080 \
+  -p 3000:3000 \
+  gbraver-burst-dev
 # ブラウザを起動して、<dockerホスト:3000>を開く
 ```
 
