@@ -13,6 +13,14 @@ npm start
 ## dockerで動かす
 
 ```
+docker build -t <任意のDockerイメージ名> .
+docker run --name <任意のDockerコンテナ名> -p <Dockerホストの任意ポート>:3000 gbraver-burst
+# ブラウザを起動して、<dockerホスト:ポート>を開く
+```
+
+コマンド例
+
+```
 docker build -t gbraver-burst .
 docker run --name my-gbraver-burst -p 3000:3000 gbraver-burst
 # ブラウザを起動して、<dockerホスト:3000>を開く
