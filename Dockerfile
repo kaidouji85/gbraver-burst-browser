@@ -1,12 +1,17 @@
-FROM node:12.13.1-slim
-
-ENV PATH $PATH:/node_modules/.bin
-
-COPY package.json package-lock.json /
+FROM node:12.13.1-slim as builder
+WORKDIR /tmp
+COPY package.json /tmp/
 RUN npm config set registry http://registry.npmjs.org/ && \
-  npm install && \
-  npm cache clean --force
-
+  npm install
 WORKDIR /usr/src/app
-ENTRYPOINT /bin/bash
-EXPOSE 3000 8080
+COPY . /usr/src/app/
+RUN cp -a /tmp/node_modules /usr/src/app/ && \
+  npm run build:production
+
+FROM node:12.13.1-slim as runner
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app/package.json /usr/src/app/package.json
+COPY --from=builder /usr/src/app/build/ /usr/src/app/build
+COPY --from=builder /usr/src/app/node_modules/ /usr/src/app/node_modules
+CMD [ "npm", "run", "serve" ]
+EXPOSE 3000
