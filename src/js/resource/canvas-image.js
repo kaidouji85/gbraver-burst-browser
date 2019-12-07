@@ -37,6 +37,7 @@ export const CANVAS_IMAGE_IDS = {
   PLAYER_GAUGE_BASE: 'PLAYER_GAUGE_BASE',
   ENEMY_GAUGE_BASE: 'ENEMY_GAUGE_BASE',
   HP_BAR: 'HP_BAR',
+  BATTERY_GAUGE: 'BATTERY_GAUGE',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -116,6 +117,10 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.HP_BAR,
     path: 'gauge/hp-bar.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_GAUGE,
+    path: 'gauge/battery-gauge.png',
   }
 ];
 

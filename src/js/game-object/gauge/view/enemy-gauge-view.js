@@ -36,7 +36,7 @@ export class EnemyGaugeView implements GaugeView {
     this._group.add(this._base.getObject3D());
 
     this._hpBar = new EnemyHpBar(resources);
-    this._hpBar.getObject3D().position.set(210 ,30, 1);
+    this._hpBar.getObject3D().position.set(213 ,30.5, 1);
     this._group.add(this._hpBar.getObject3D());
 
     this._hpNumber = new HpNumber(resources);
