@@ -19,6 +19,7 @@ export class PlayerGaugeView implements GaugeView {
   _base: SimpleImageMesh;
   _hpBar: PlayerHpBar;
   _hpNumber: HpNumber;
+  _maxHpNumber: HpNumber;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -40,8 +41,13 @@ export class PlayerGaugeView implements GaugeView {
     this._group.add(this._hpBar.getObject3D());
 
     this._hpNumber = new HpNumber(resources);
-    this._hpNumber.getObject3D().position.set(100, 60, 1);
+    this._hpNumber.getObject3D().position.set(80, 52, 1);
     this._group.add(this._hpNumber.getObject3D());
+
+    this._maxHpNumber = new HpNumber(resources);
+    this._maxHpNumber.getObject3D().position.set(240, 52, 1);
+    this._group.add(this._maxHpNumber.getObject3D());
+
   }
 
   /** デストラクタ */
@@ -55,6 +61,7 @@ export class PlayerGaugeView implements GaugeView {
     // TODO ゲージ反映を実装する
     this._hpBar.setValue(model.hp / model.maxHp);
     this._hpNumber.setValue(model.hp);
+    this._maxHpNumber.setValue(model.maxHp);
   }
 
   /** プリレンダー */
