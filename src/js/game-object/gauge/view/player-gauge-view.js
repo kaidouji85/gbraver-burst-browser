@@ -69,7 +69,7 @@ export class PlayerGaugeView implements GaugeView {
     this._hpBar.setValue(model.hp / model.maxHp);
     this._hpNumber.setValue(model.hp);
     this._maxHpNumber.setValue(model.maxHp);
-    this._batteryGauge.setValue(model.battery);
+    this._batteryGauge.engage(model.batteryList);
   }
 
   /** プリレンダー */
