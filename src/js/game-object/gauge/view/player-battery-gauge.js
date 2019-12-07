@@ -57,14 +57,15 @@ export class PlayerBatteryGauge {
   }
 }
 
+/** バッテリーゲージ1マス分 */
 class BatteryGaugeUnit {
   _group: THREE.Group;
   _gauge: SimpleImageMesh;
+  _back: SimpleImageMesh;
   _value: number;
 
   constructor(resources: Resources, value: number) {
     this._group = new THREE.Group();
-
     this._value = value;
 
     const gaugeResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE);
@@ -75,21 +76,50 @@ class BatteryGaugeUnit {
       image: gaugeImage,
       canvasSize: 128
     });
+    this._gauge.getObject3D().position.z = 1;
     this._group.add(this._gauge.getObject3D());
+
+    const backResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK);
+    const backImage = backResource
+      ? backResource.image
+      : new Image();
+    this._back = new SimpleImageMesh({
+      image: backImage,
+      canvasSize: 128
+    });
+    this._back.getObject3D().position.z = 0;
+    this._group.add(this._back.getObject3D());
   }
 
+  /** デストラクタ相当の処理 */
   destructor() {
     this._gauge.destructor();
+    this._back.destructor();
   }
 
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
   getObject3D(): THREE.Object3D {
     return this._group;
   }
 
+  /**
+   * バッテリー値を取得
+   *
+   * @return バッテリー値
+   */
   getValue(): number {
     return this._value;
   }
 
+  /**
+   * 透明度を設定
+   *
+   * @param opacity 0〜1で指定する透明度、0で完全透明
+   */
   setOpacity(opacity: number): void {
     this._gauge.setOpacity(opacity);
   }
