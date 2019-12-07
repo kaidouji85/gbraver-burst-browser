@@ -39,6 +39,13 @@ export class HpNumber {
     });
   }
 
+  /** デストラクタ相当の処理 */
+  destructor(): void {
+    this._meshList.forEach(v => {
+      v.destructor();
+    });
+  }
+
   /**
    * HP数字の値を設定する
    *

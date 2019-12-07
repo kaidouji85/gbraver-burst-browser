@@ -7,6 +7,6 @@ import {tween} from "../../../animation/tween";
 /** バッテリーを変更するアニメーション */
 export function battery(model: GaugeModel, value: number): Animate {
   return tween(model, t => t
-    .to({battery: value}, 300)
+    .to({battery: value}, 0)
   );
 }

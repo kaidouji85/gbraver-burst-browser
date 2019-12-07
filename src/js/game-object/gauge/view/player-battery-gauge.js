@@ -7,12 +7,16 @@ import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 
 export const MAX_BATTERY = 5;
-export const MIN_BATTERY = 0;
+
+type Gauge = {
+  mesh: SimpleImageMesh,
+  battery: number,
+};
 
 /** プレイヤーバッテリー */
 export class PlayerBatteryGauge {
   _group: THREE.Group;
-  _meshList: SimpleImageMesh[];
+  _gaugeList: Gauge[];
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -21,16 +25,26 @@ export class PlayerBatteryGauge {
     const gauge = gaugeResource
       ? gaugeResource.image
       : new Image();
-    this._meshList = R.times(v => {
+    this._gaugeList = R.times(v => {
       const mesh = new SimpleImageMesh({
         canvasSize: 128,
         image: gauge,
       });
       mesh.getObject3D().position.x = 95 * v;
-      return mesh;
+
+      const battery = v + 1;
+
+      return {mesh: mesh, battery: battery};
     }, MAX_BATTERY);
-    this._meshList.forEach(v => {
-      this._group.add(v.getObject3D());
+    this._gaugeList.forEach(v => {
+      this._group.add(v.mesh.getObject3D());
+    });
+  }
+
+  /** デストラクタ相当の処理 */
+  destructor(): void {
+    this._gaugeList.forEach(v => {
+      v.mesh.destructor();
     });
   }
 
@@ -40,12 +54,11 @@ export class PlayerBatteryGauge {
    * @param value 設定値
    */
   setValue(value: number): void {
-    const correctValue = this._correctValue(value);
-    this._meshList.forEach((v, index) => {
-      const value = index + 1;
-      const isVisible = value <= correctValue;
-      const opacity = isVisible ? 1 : 0;
-      v.setOpacity(opacity);
+    this._gaugeList.forEach((v, index) => {
+      const opacity = v.battery <= value
+        ? 1
+        : 0;
+      v.mesh.setOpacity(opacity);
     });
   }
 
@@ -56,15 +69,5 @@ export class PlayerBatteryGauge {
    */
   getObject3D(): THREE.Object3D {
     return this._group;
-  }
-
-  _correctValue(value: number): number {
-    if (value < MIN_BATTERY) {
-      return MIN_BATTERY;
-    } else if (MAX_BATTERY < value) {
-      return MAX_BATTERY;
-    } else {
-      return Math.floor(value);
-    }
   }
 }

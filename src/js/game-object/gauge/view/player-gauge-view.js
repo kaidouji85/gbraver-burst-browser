@@ -59,6 +59,9 @@ export class PlayerGaugeView implements GaugeView {
   destructor(): void {
     this._base.destructor();
     this._hpBar.destructor();
+    this._hpNumber.destructor();
+    this._maxHpNumber.destructor();
+    this._batteryGauge.destructor();
   }
 
   /** モデルをビューに反映させる */

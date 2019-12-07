@@ -37,7 +37,9 @@ export const CANVAS_IMAGE_IDS = {
   PLAYER_GAUGE_BASE: 'PLAYER_GAUGE_BASE',
   ENEMY_GAUGE_BASE: 'ENEMY_GAUGE_BASE',
   HP_BAR: 'HP_BAR',
+  HP_BAR_BACK: 'HP_BAR_BACK',
   BATTERY_GAUGE: 'BATTERY_GAUGE',
+  BATTERY_GAUGE_BACK: 'BATTERY_GAUGE_BACK',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -119,8 +121,16 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'gauge/hp-bar.png',
   },
   {
+    id: CANVAS_IMAGE_IDS.HP_BAR_BACK,
+    path: 'gauge/hp-bar-back.png',
+  },
+  {
     id: CANVAS_IMAGE_IDS.BATTERY_GAUGE,
     path: 'gauge/battery-gauge.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK,
+    path: 'gauge/battery-gauge-back.png',
   }
 ];
 

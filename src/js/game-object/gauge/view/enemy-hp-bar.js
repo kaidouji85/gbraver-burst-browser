@@ -7,7 +7,6 @@ import {PlayerHpBar} from "./player-hp-bar";
 export class EnemyHpBar extends PlayerHpBar {
   constructor(resources: Resources) {
     super(resources);
-    this._group.scale.x = -1;
-    this._group.position.x *= -1;
+    this.getObject3D().scale.x = -1;
   }
 }
