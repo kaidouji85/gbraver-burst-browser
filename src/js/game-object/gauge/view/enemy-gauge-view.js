@@ -8,6 +8,7 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {EnemyHpBar} from "./enemy-player-bar";
+import {HpNumber} from "./hp-number";
 
 export const BASE_CANVAS_SIZE = 1024;
 export const SCALE = 0.3;
@@ -17,6 +18,8 @@ export class EnemyGaugeView implements GaugeView {
   _group: THREE.Group;
   _base: SimpleImageMesh;
   _hpBar: EnemyHpBar;
+  _hpNumber: HpNumber;
+  _maxHpNumber: HpNumber;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -35,6 +38,14 @@ export class EnemyGaugeView implements GaugeView {
     this._hpBar = new EnemyHpBar(resources);
     this._hpBar.getObject3D().position.set(210 ,30, 1);
     this._group.add(this._hpBar.getObject3D());
+
+    this._hpNumber = new HpNumber(resources);
+    this._hpNumber.getObject3D().position.set(10, 52, 1);
+    this._group.add(this._hpNumber.getObject3D());
+
+    this._maxHpNumber = new HpNumber(resources);
+    this._maxHpNumber.getObject3D().position.set(-145, 52, 1);
+    this._group.add(this._maxHpNumber.getObject3D());
   }
 
   /** デストラクタ */
@@ -46,6 +57,8 @@ export class EnemyGaugeView implements GaugeView {
   engage(model: GaugeModel): void {
     // TODO ゲージ反映を実装する
     this._hpBar.setValue(model.hp / model.maxHp);
+    this._hpNumber.setValue(model.hp);
+    this._maxHpNumber.setValue(model.maxHp);
   }
 
   /** プリレンダー */

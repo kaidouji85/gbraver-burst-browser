@@ -47,7 +47,6 @@ export class PlayerGaugeView implements GaugeView {
     this._maxHpNumber = new HpNumber(resources);
     this._maxHpNumber.getObject3D().position.set(240, 52, 1);
     this._group.add(this._maxHpNumber.getObject3D());
-
   }
 
   /** デストラクタ */
