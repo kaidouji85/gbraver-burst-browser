@@ -35,6 +35,7 @@ export const TEXTURE_IDS = {
   HITMARK_SPARK: 'HITMARK_SPARK',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
+  HP_NUMBER: 'HP_NUMBER',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -111,6 +112,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.DAMAGE_NUMBER,
     path: 'damage-indicator/damage-number.png'
+  },
+  // HPゲージ数字
+  {
+    id: TEXTURE_IDS.HP_NUMBER,
+    path: 'gauge/hp-gauge-number.png'
   }
 ];
 

@@ -18,12 +18,6 @@ export type CanvasImageResource = {
 
 /** キャンバス用画像IDリストをあつめたもの */
 export const CANVAS_IMAGE_IDS = {
-  GAUGE_WINDOW: 'GAUGE_WINDOW',
-  ACTIVE_HP_BAR: 'ACTIVE_HP_BAR',
-  DIS_ACTIVE_HP_BAR: 'DIS_ACTIVE_HP_BAR',
-  ACTIVE_BATTERY_BAR: 'ACTIVE_BATTERY_BAR',
-  DIS_ACTIVE_BATTERY_BAR: 'DIS_ACTIVE_BATTERY_BAR',
-  GAUGE_BAR_BASE: 'GAUGE_BAR_BASE',
   BATTERY_BUTTON: 'BATTERY_BUTTON',
   BATTERY_PLUS: 'BATTERY_PLUS',
   BATTERY_MINUS: 'BATTERY_MINUS',
@@ -40,34 +34,16 @@ export const CANVAS_IMAGE_IDS = {
   SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED',
   PLAYER_TURN: 'PLAYER_TURN',
   ENEMY_TURN: 'ENEMY_TURN',
+  PLAYER_GAUGE_BASE: 'PLAYER_GAUGE_BASE',
+  ENEMY_GAUGE_BASE: 'ENEMY_GAUGE_BASE',
+  HP_BAR: 'HP_BAR',
+  HP_BAR_BACK: 'HP_BAR_BACK',
+  BATTERY_GAUGE: 'BATTERY_GAUGE',
+  BATTERY_GAUGE_BACK: 'BATTERY_GAUGE_BACK',
 };
 
 /** キャンバス用画像設定をあつめたもの */
 export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
-  {
-    id: CANVAS_IMAGE_IDS.GAUGE_WINDOW,
-    path: 'gauge/window.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.ACTIVE_HP_BAR,
-    path: 'gauge/active-hp-bar.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DIS_ACTIVE_HP_BAR,
-    path: 'gauge/disactive-hp-bar.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.ACTIVE_BATTERY_BAR,
-    path: 'gauge/active-battery-bar.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_BAR,
-    path: 'gauge/disactive-battery-bar.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.GAUGE_BAR_BASE,
-    path: 'gauge/bar-base.png',
-  },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_BUTTON,
     path: 'battery-selector/battery-button.png',
@@ -132,6 +108,30 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     id: CANVAS_IMAGE_IDS.ENEMY_TURN,
     path: 'turn/enemy-turn.png',
   },
+  {
+    id: CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE,
+    path: 'gauge/player-gauge-base.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE,
+    path: 'gauge/enemy-gauge-base.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.HP_BAR,
+    path: 'gauge/hp-bar.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.HP_BAR_BACK,
+    path: 'gauge/hp-bar-back.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_GAUGE,
+    path: 'gauge/battery-gauge.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK,
+    path: 'gauge/battery-gauge-back.png',
+  }
 ];
 
 /**

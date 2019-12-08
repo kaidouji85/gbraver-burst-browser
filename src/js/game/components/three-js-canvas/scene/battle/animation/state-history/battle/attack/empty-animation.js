@@ -50,6 +50,6 @@ type ViewDamageResult = NormalHit | CriticalHit | Guard;
 function viewDamage(param: BattleAnimationParam<ArmDozerSprite, ViewDamageResult>): Animate {
   return all(
     param.defenderTD.damageIndicator.popUp(param.result.damage),
-    param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+    param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
   );
 }

@@ -18,18 +18,16 @@ import {all} from "../../../../../../../animation/all";
 export function updateGauge(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const player = gameState.players.find(v => v.playerId === sceneState.playerId);
   const playerTD = view.td.players.find(v => v.playerId === sceneState.playerId);
-  const playerHUD = view.hud.players.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
   const enemyTD = view.td.players.find(v => v.playerId !== sceneState.playerId);
-  const enemyHUD = view.hud.players.find(v => v.playerId !== sceneState.playerId);
-  if (!player || !playerTD || !playerHUD || !enemy || !enemyHUD || !enemyTD) {
+  if (!player || !playerTD || !enemy || !enemyTD) {
     return empty();
   }
 
   return all(
-    playerHUD.gauge.hp(player.armdozer.hp),
-    playerHUD.gauge.battery(player.armdozer.battery),
-    enemyHUD.gauge.hp(enemy.armdozer.hp),
-    enemyHUD.gauge.battery(enemy.armdozer.battery)
+    playerTD.gauge.hp(player.armdozer.hp),
+    playerTD.gauge.battery(player.armdozer.battery),
+    enemyTD.gauge.hp(enemy.armdozer.hp),
+    enemyTD.gauge.battery(enemy.armdozer.battery)
   );
 }

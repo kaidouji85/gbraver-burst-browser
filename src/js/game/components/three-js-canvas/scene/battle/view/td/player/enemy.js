@@ -14,6 +14,7 @@ import {enemyDamageIndicator} from "../../../../../../../../game-object/damage-i
 import type {TDPlayer} from "./index";
 import {enemySpark} from "../../../../../../../../game-object/hitmark/spark";
 import {enemyTurnStart} from "../../../../../../../../game-object/turn-start";
+import {enemyGauge} from "../../../../../../../../game-object/gauge";
 
 /**
  * 敵側の3Dプレイヤーオブジェクト
@@ -26,6 +27,12 @@ import {enemyTurnStart} from "../../../../../../../../game-object/turn-start";
 export function enemyTDObject(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDPlayer<ArmDozerSprite> {
   return {
     playerId: state.playerId,
+    gauge: enemyGauge({
+      resources: resources,
+      listener: listener,
+      hp: state.armdozer.maxHp,
+      battery: state.armdozer.maxBattery,
+    }),
     sprite: createEnemySprite(resources, listener, state),
     hitMark: {
       spark: enemySpark(resources, listener),
