@@ -3,92 +3,95 @@
 import * as THREE from 'three';
 import type {GaugeView} from "./gauge-view";
 import type {GaugeModel} from "../model/gauge-model";
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
-import {drawGauge} from "../../../canvas/gauge";
 import type {Resources} from "../../../resource";
-import * as R from 'ramda';
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
+import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
+import {PlayerHpBar} from "./player-hp-bar";
+import {HpNumber} from "./hp-number";
+import {PlayerBatteryGauge} from "./player-battery-gauge";
 
-export const CANVAS_SIZE = 256;
-export const MESH_SIZE = 200;
+export const BASE_CANVAS_SIZE = 1024;
+export const SCALE = 0.3;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
-  _canvasMesh: CanvasMesh;
-  _resources: Resources;
-  _lastEngagedModel: ?GaugeModel;
+  _group: THREE.Group;
+  _base: SimpleImageMesh;
+  _hpBar: PlayerHpBar;
+  _hpNumber: HpNumber;
+  _maxHpNumber: HpNumber;
+  _batteryGauge: PlayerBatteryGauge;
 
   constructor(resources: Resources) {
-    this._resources = resources;
-    this._canvasMesh = new CanvasMesh({
-      canvasWidth: CANVAS_SIZE,
-      canvasHeight: CANVAS_SIZE,
-      meshWidth: MESH_SIZE,
-      meshHeight: MESH_SIZE,
+    this._group = new THREE.Group();
+    this._group.scale.set(SCALE, SCALE, SCALE);
+
+    const gaugeBaseResource = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE);
+    const gaugeBase = gaugeBaseResource
+      ? gaugeBaseResource.image
+      : new Image();
+    this._base = new SimpleImageMesh({
+      canvasSize: BASE_CANVAS_SIZE,
+      image: gaugeBase
     });
-    this._lastEngagedModel = null;
+    this._group.add(this._base.getObject3D());
+
+    this._hpBar = new PlayerHpBar(resources);
+    this._hpBar.getObject3D().position.set(-212 ,31.5, 1);
+    this._group.add(this._hpBar.getObject3D());
+
+    this._hpNumber = new HpNumber(resources);
+    this._hpNumber.getObject3D().position.set(80, 52, 1);
+    this._group.add(this._hpNumber.getObject3D());
+
+    this._maxHpNumber = new HpNumber(resources);
+    this._maxHpNumber.getObject3D().position.set(240, 52, 1);
+    this._group.add(this._maxHpNumber.getObject3D());
+
+    this._batteryGauge = new PlayerBatteryGauge(resources);
+    this._batteryGauge.getObject3D().position.set(-169.5, -55.5, 1);
+    this._group.add(this._batteryGauge.getObject3D());
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._canvasMesh.destructor();
+    this._base.destructor();
+    this._hpBar.destructor();
+    this._hpNumber.destructor();
+    this._maxHpNumber.destructor();
+    this._batteryGauge.destructor();
   }
 
   /** モデルをビューに反映させる */
   engage(model: GaugeModel): void {
-    if (this._shouldCanvasRefresh(model)) {
-      this._refreshCanvas(model);
-    }
-    this._updateLastEngagedModel(model);
+    this._hpBar.setValue(model.hp / model.maxHp);
+    this._hpNumber.setValue(model.hp);
+    this._maxHpNumber.setValue(model.maxHp);
+    this._batteryGauge.engage(model.batteryList);
   }
 
   /** プリレンダー */
   preRender(action: PreRender): void {
-    this._setPos(action.rendererDOM);
+    this._setPos();
     this._lookAt(action.camera);
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
-    return this._canvasMesh.getObject3D();
-  }
-
-  /** 最後にビューに反映されたモデルを、引数の内容で上書きする */
-  _updateLastEngagedModel(model: GaugeModel): void {
-    this._lastEngagedModel = R.clone(model);
-  }
-
-  /** キャンバスを更新するか否かを判定する、trueで更新する */
-  _shouldCanvasRefresh(model: GaugeModel): boolean {
-    return !R.equals(this._lastEngagedModel, model);
-  }
-
-  /** キャンバスを更新する */
-  _refreshCanvas(model: GaugeModel): void {
-    this._canvasMesh.draw(context => {
-      context.clearRect(0, 0, context.canvas.height, context.canvas.height);
-      drawGauge({
-        context: context,
-        resources: this._resources,
-        dx: CANVAS_SIZE / 2,
-        dy: CANVAS_SIZE / 2,
-        hp: model.hp,
-        maxHp: model.maxHp,
-        battery: model.battery,
-        maxBattery: model.maxBattery
-      });
-    });
+    return this._group;
   }
 
   /** 座標をセットする */
-  _setPos(rendererDOM: HTMLElement): void {
-    this._canvasMesh.mesh.position.x = 100;
-    this._canvasMesh.mesh.position.y = rendererDOM.clientHeight / 2 - 50;
-    this._canvasMesh.mesh.position.z = 0;
+  _setPos(): void {
+    this._group.position.x = 150;
+    this._group.position.y = 340;
+    this._group.position.z = 0;
   }
 
   /** カメラの真正面を向く */
   _lookAt(camera: THREE.Camera): void {
-    this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
+    this._group.quaternion.copy(camera.quaternion);
   }
 }

@@ -2,7 +2,6 @@
 
 import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 import type {TDPlayer} from "../../../view/td/player";
-import type {HUDPlayer} from "../../../view/hud/player";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import {TDCamera} from "../../../../../../../../game-object/camera/td";
 import type {HUDGameObjects} from "../../../view/hud/game-objects";
@@ -24,7 +23,6 @@ import type {ArmDozerSprite} from "../../../../../../../../game-object/armdozer/
 export type BurstAnimationParam<SPRITE: ArmDozerSprite, BURST: Burst> = {
   burstPlayerState: PlayerState,
   burstPlayerTD: TDPlayer<SPRITE>,
-  burstPlayerHUD: HUDPlayer,
   tdObjects: TDGameObjects,
   tdCamera: TDCamera,
   hudObjects: HUDGameObjects,
@@ -48,15 +46,13 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
   const effect: BurstEffect = gameState.effect;
   const burstPlayerState = gameState.players.find(v => v.playerId === effect.burstPlayer);
   const burstPlayerTD = view.td.players.find(v => v.playerId === effect.burstPlayer);
-  const burstPlayerHUD = view.hud.players.find(v => v.playerId === effect.burstPlayer);
-  if (!burstPlayerState || !burstPlayerTD || !burstPlayerHUD) {
+  if (!burstPlayerState || !burstPlayerTD) {
     return null;
   }
 
   return {
     burstPlayerState: burstPlayerState,
     burstPlayerTD:burstPlayerTD,
-    burstPlayerHUD: burstPlayerHUD,
     tdObjects: view.td.gameObjects,
     tdCamera: view.td.camera,
     hudObjects: view.hud.gameObjects,

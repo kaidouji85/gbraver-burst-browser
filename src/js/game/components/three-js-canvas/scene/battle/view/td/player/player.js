@@ -13,6 +13,7 @@ import {playerDamageIndicator} from "../../../../../../../../game-object/damage-
 import type {TDPlayer} from "./index";
 import {playerSpark} from "../../../../../../../../game-object/hitmark/spark";
 import {playerTurnStart} from "../../../../../../../../game-object/turn-start";
+import {playerGauge} from "../../../../../../../../game-object/gauge";
 
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
@@ -26,6 +27,12 @@ export function playerTDObjects(resources: Resources, state: PlayerState, listen
   return {
     playerId: state.playerId,
     sprite: createPlayerSprite(resources, listener, state),
+    gauge: playerGauge({
+      resources: resources,
+      listener: listener,
+      hp: state.armdozer.maxHp,
+      battery: state.armdozer.maxBattery,
+    }),
     hitMark: {
       spark: playerSpark(resources, listener),
     },

@@ -10,6 +10,7 @@ import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {hp} from "./animation/hp";
 import {battery} from './animation/battery';
+import {initialValue} from "./model/initial-value";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -26,12 +27,7 @@ export class Gauge {
 
   constructor(param: Param) {
     this._view = param.view;
-    this._model = {
-      hp: param.hp,
-      maxHp: param.hp,
-      battery: param.battery,
-      maxBattery: param.battery
-    };
+    this._model = initialValue(param.hp, param.battery);
 
     this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
