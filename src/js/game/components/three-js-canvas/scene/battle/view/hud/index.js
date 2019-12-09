@@ -15,11 +15,13 @@ import type {HUDGameObjects} from "./game-objects";
 import {appendHUDGameObjects, createHUDGameObjects, disposeHUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../../../action/game-object-action/create-listener";
+import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
   rendererDOM: HTMLElement,
+  safeAreaInset: SafeAreaInset,
   playerId: PlayerId,
   players: Player[],
   listener: {
@@ -45,6 +47,7 @@ export class HudLayer {
   gameObjects: HUDGameObjects;
 
   _rendererDOM: HTMLElement;
+  _safeAreaInset: SafeAreaInset;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
@@ -53,6 +56,7 @@ export class HudLayer {
 
   constructor(param: Param) {
     this._rendererDOM = param.rendererDOM;
+    this._safeAreaInset = param.safeAreaInset;
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = new Subject();
@@ -107,13 +111,14 @@ export class HudLayer {
     this._preRender.next({
       type: 'PreRender',
       camera: this.camera.getCamera(),
+      safeAreaInset: this._safeAreaInset,
       rendererDOM: this._rendererDOM,
     });
 
     this._render.next({
       type: 'Render',
       scene: this.scene,
-      camera: this.camera.getCamera()
+      camera: this.camera.getCamera(),
     });
   }
 }

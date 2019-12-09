@@ -9,6 +9,7 @@ import type {DOMEvent} from "../../../../../../action/dom-event";
 import type {BattleSceneAction} from "../../../../../../action/battle-scene";
 import type {Render} from "../../../../../../action/game-loop/render";
 import TWEEN from "@tweenjs/tween.js";
+import {createSafeAreaInset} from "../../../../../../safe-area/safe-area-inset";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -39,12 +40,15 @@ export class BattleSceneView {
   _gameLoopHUD: Subject<GameLoop>;
 
   constructor(param: Param) {
+    const safeAreaInset = createSafeAreaInset();
+
     this._gameLoop3D = new Subject();
     this._gameLoopHUD = new Subject();
 
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
+      safeAreaInset: safeAreaInset,
       playerId: param.playerId,
       players: param.players,
       listener: {
@@ -56,6 +60,7 @@ export class BattleSceneView {
     this.hud = new HudLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
+      safeAreaInset: safeAreaInset,
       playerId: param.playerId,
       players: param.players,
       listener: {

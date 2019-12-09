@@ -45,13 +45,13 @@ export function createSafeAreaInset() {
     top: !isNaN(top)
       ? Number(top)
       : 0,
-    bottom : isNaN(bottom)
+    bottom : !isNaN(bottom)
       ? Number(bottom)
       : 0,
-    right: isNaN(right)
+    right: !isNaN(right)
       ? Number(right)
       : 0,
-    left: isNaN(left)
+    left: !isNaN(left)
       ? Number(left)
       : 0
   };

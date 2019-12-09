@@ -19,6 +19,7 @@ import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./
 import {toOverlapObservable} from "../../../../../../../action/overlap/dom-event-to-overlap";
 import type {OverlapAction} from "../../../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../../../action/game-object-action/create-listener";
+import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -26,6 +27,7 @@ type Param = {
   playerId: PlayerId,
   players: Player[],
   rendererDOM: HTMLElement,
+  safeAreaInset: SafeAreaInset,
   listener: {
     domEvent: Observable<DOMEvent>,
     gameLoop: Observable<GameLoop>,
@@ -45,6 +47,7 @@ export class ThreeDimensionLayer {
   gameObjects: TDGameObjects;
 
   _rendererDOM: HTMLElement;
+  _safeAreaInset: SafeAreaInset;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
@@ -56,6 +59,7 @@ export class ThreeDimensionLayer {
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
     this._rendererDOM = param.rendererDOM;
+    this._safeAreaInset = param.safeAreaInset;
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = new Subject();
@@ -120,6 +124,7 @@ export class ThreeDimensionLayer {
       type: 'PreRender',
       camera: this.camera.getCamera(),
       rendererDOM: this._rendererDOM,
+      safeAreaInset: this._safeAreaInset,
     });
 
     this._render.next({

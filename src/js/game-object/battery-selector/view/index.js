@@ -10,6 +10,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {SafeAreaInset} from "../../../safe-area/safe-area-inset";
 
 /** 全体のスケール */
 const SCALE = 0.3;
@@ -100,14 +101,14 @@ export class BatterySelectorView {
 
   /** プリレンダー */
   preRender(action: PreRender): void {
-    this._setPos(action.rendererDOM);
+    this._setPos(action.rendererDOM, action.safeAreaInset);
     this._lookAt(action.camera);
   }
 
   /** 座標を調整する */
-  _setPos(rendererDOM: HTMLElement): void {
-    this._group.position.x = rendererDOM.clientWidth / 2 - PADDING_RIGHT;
-    this._group.position.y = -rendererDOM.clientHeight / 2 + PADDING_BOTTOM;
+  _setPos(rendererDOM: HTMLElement, safeAreaInset: SafeAreaInset): void {
+    this._group.position.x = rendererDOM.clientWidth / 2 - safeAreaInset.right - PADDING_RIGHT;
+    this._group.position.y = -rendererDOM.clientHeight / 2 + safeAreaInset.bottom + PADDING_BOTTOM;
   }
 
   /** カメラの真正面を向く */
