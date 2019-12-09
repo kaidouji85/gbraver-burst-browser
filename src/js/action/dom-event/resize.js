@@ -1,10 +1,13 @@
 // @flow
 
+import type {SafeAreaInset} from "../../safe-area/safe-area-inset";
+
 /** リサイズ */
 export type Resize = {
   type: 'resize',
   width: number,
   height: number,
+  safeAreaInset: SafeAreaInset,
 };
 
 /**

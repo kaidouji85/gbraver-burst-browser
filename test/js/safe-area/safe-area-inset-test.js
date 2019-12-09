@@ -32,3 +32,9 @@ test('空文字の場合は、ゼロを返す', t => {
   const result = getSize(data);
   t.is(result, 0);
 });
+
+test('Windows10版Chromeが返すCSSカスタムプロパティでも、正しく値を取得することができる', t => {
+  const data = ' 12px';
+  const result = getSize(data);
+  t.is(result, 12);
+});

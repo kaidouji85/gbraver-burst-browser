@@ -16,6 +16,7 @@ import {appendHUDGameObjects, createHUDGameObjects, disposeHUDGameObjects} from 
 import type {OverlapAction} from "../../../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../../../action/game-object-action/create-listener";
 import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
+import type {Resize} from "../../../../../../../action/dom-event/resize";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -52,7 +53,7 @@ export class HudLayer {
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
   _overlap: Observable<OverlapAction>;
-  _subscription: Subscription;
+  _subscription: Subscription[];
 
   constructor(param: Param) {
     this._rendererDOM = param.rendererDOM;
@@ -76,9 +77,17 @@ export class HudLayer {
     this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
-    this._subscription = param.listener.gameLoop.subscribe(action => {
-      this._gameLoop(action);
-    });
+    this._subscription = [
+      param.listener.gameLoop.subscribe(action => {
+        this._gameLoop(action);
+      }),
+
+      param.listener.domEvent.subscribe(action => {
+        if (action.type === 'resize') {
+          this._resize(action);
+        }
+      })
+    ];
   }
 
   /** デストラクタ */
@@ -86,7 +95,9 @@ export class HudLayer {
     disposeHUDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();
-    this._subscription.unsubscribe();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -120,5 +131,10 @@ export class HudLayer {
       scene: this.scene,
       camera: this.camera.getCamera(),
     });
+  }
+
+  /** リサイズ */
+  _resize(action: Resize): void {
+    this._safeAreaInset = action.safeAreaInset;
   }
 }
