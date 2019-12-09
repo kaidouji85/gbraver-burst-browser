@@ -63,7 +63,7 @@ export function createSafeAreaInset() {
 export function getSize(origin: string): number {
   const reg = /(?<size>[+-]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][+-]?[0-9]+)?)px/;
   const result = origin.match(reg);
-  if (!result || !result.groups || ('size' in result.groups)) {
+  if (!result || !result.groups || !('size' in result.groups)) {
     return 0;
   }
 
