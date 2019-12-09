@@ -3,7 +3,7 @@
 export type Resize = {
   type: 'resize',
   width: number,
-  height: number
+  height: number,
 };
 
 /** リサイズ時の画面横幅 */
@@ -29,6 +29,6 @@ export function getHeight(): number {
   }
 
   // document.documentElementが存在しないことが理論上あるので、
-  // その時にはwindow.iinnerHeightを使う
+  // その時にはwindow.innerHeightを使う
   return window.innerHeight;
 }
