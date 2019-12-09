@@ -10,6 +10,7 @@ import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
+import type {SafeAreaInset} from "../../../safe-area/safe-area-inset";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -90,7 +91,7 @@ export class BurstButtonView {
 
   /** プリレンダー */
   preRender(action: PreRender): void {
-    this._setPos(action.rendererDOM);
+    this._setPos(action.rendererDOM, action.safeAreaInset);
     this._lookAt(action.camera);
   }
 
@@ -100,9 +101,9 @@ export class BurstButtonView {
   }
 
   /** 表示位置を更新する */
-  _setPos(rendererDOM: HTMLElement): void {
-    this._group.position.x = -rendererDOM.clientWidth / 2 + PADDING_LEFT;
-    this._group.position.y = -rendererDOM.clientHeight / 2 + PADDING_BOTTOM;
+  _setPos(rendererDOM: HTMLElement, safeAreaInset: SafeAreaInset): void {
+    this._group.position.x = -rendererDOM.clientWidth / 2 + safeAreaInset.left + PADDING_LEFT;
+    this._group.position.y = -rendererDOM.clientHeight / 2  + safeAreaInset.bottom + PADDING_BOTTOM;
   }
 
   /** カメラの真正面を向く */
