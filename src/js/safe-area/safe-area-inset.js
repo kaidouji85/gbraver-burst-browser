@@ -42,17 +42,35 @@ export function createSafeAreaInset() {
   const left = style.getPropertyValue(SAFE_AREA_LEFT);
 
   return {
-    top: !isNaN(top)
-      ? Number(top)
-      : 0,
-    bottom : !isNaN(bottom)
-      ? Number(bottom)
-      : 0,
-    right: !isNaN(right)
-      ? Number(right)
-      : 0,
-    left: !isNaN(left)
-      ? Number(left)
-      : 0
+    top: getSize(top),
+    bottom: getSize(bottom),
+    right: getSize(right),
+    left: getSize(left),
   };
+}
+
+/**
+ * セーフエリアインセットプロパティの値を数字型にパースする
+ * パース前の文字列として、以下フォーマットのものを想定している
+ * 以下フォーマット以外を指定した場合は0を返す
+ * 10000px
+ * 10002.34px
+ *
+ *
+ * @param origin パース前
+ * @return パース結果
+ */
+export function getSize(origin: string): number {
+  const reg = /(?<size>[+-]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][+-]?[0-9]+)?)px/;
+  const result = origin.match(reg);
+  if (!result || !result.groups || ('size' in result.groups)) {
+    return 0;
+  }
+
+  const size = result.groups.size;
+  if (isNaN(size)) {
+    return 0;
+  }
+
+  return Number(size);
 }
