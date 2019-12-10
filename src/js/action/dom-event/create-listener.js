@@ -4,6 +4,7 @@ import type {DOMEvent} from "./index";
 import {fromEvent, merge, Observable} from "rxjs";
 import {map} from 'rxjs/operators';
 import {getHeight, getWidth} from "./resize";
+import {createSafeAreaInset} from "../../safe-area/safe-area-inset";
 
 /**
  * DOMイベントリスナを生成する
@@ -53,6 +54,7 @@ export function createDOMEventListener(renderDom: HTMLElement): Observable<DOMEv
       type: 'resize',
       width: getWidth(),
       height: getHeight(),
+      safeAreaInset: createSafeAreaInset(),
     }))
   );
 

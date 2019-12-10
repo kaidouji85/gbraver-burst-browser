@@ -1,12 +1,20 @@
 // @flow
 
+import type {SafeAreaInset} from "../../safe-area/safe-area-inset";
+
+/** リサイズ */
 export type Resize = {
   type: 'resize',
   width: number,
-  height: number
+  height: number,
+  safeAreaInset: SafeAreaInset,
 };
 
-/** リサイズ時の画面横幅 */
+/**
+ * リサイズ時の画面幅を取得する
+ *
+ * @return 画面幅
+ */
 export function getWidth(): number {
   if (document.documentElement) {
     // iOS Chromeではリサイズイベント発火後に、window.innerWidthに正しい値が反映されないが、
@@ -19,7 +27,11 @@ export function getWidth(): number {
   return window.innerWidth;
 }
 
-/** リサイズ時の画面高 */
+/**
+ * リサイズ時の画面高を取得する
+ *
+ * @return 画面高
+ */
 export function getHeight(): number {
   if (document.documentElement) {
     // iOS Chromeではリサイズイベント発火後に、window.innerHeightに正しい値が反映されないが、
@@ -29,6 +41,6 @@ export function getHeight(): number {
   }
 
   // document.documentElementが存在しないことが理論上あるので、
-  // その時にはwindow.iinnerHeightを使う
+  // その時にはwindow.innerHeightを使う
   return window.innerHeight;
 }

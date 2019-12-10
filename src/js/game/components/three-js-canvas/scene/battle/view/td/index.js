@@ -19,6 +19,8 @@ import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./
 import {toOverlapObservable} from "../../../../../../../action/overlap/dom-event-to-overlap";
 import type {OverlapAction} from "../../../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../../../action/game-object-action/create-listener";
+import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
+import type {Resize} from "../../../../../../../action/dom-event/resize";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -26,6 +28,7 @@ type Param = {
   playerId: PlayerId,
   players: Player[],
   rendererDOM: HTMLElement,
+  safeAreaInset: SafeAreaInset,
   listener: {
     domEvent: Observable<DOMEvent>,
     gameLoop: Observable<GameLoop>,
@@ -45,17 +48,19 @@ export class ThreeDimensionLayer {
   gameObjects: TDGameObjects;
 
   _rendererDOM: HTMLElement;
+  _safeAreaInset: SafeAreaInset;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
   _render: Subject<Render>;
   _overlap: Observable<OverlapAction>;
-  _subscription: Subscription;
+  _subscription: Subscription[];
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
     this._rendererDOM = param.rendererDOM;
+    this._safeAreaInset = param.safeAreaInset;
     this._update = new Subject();
     this._preRender = new Subject();
     this._render = new Subject();
@@ -82,9 +87,17 @@ export class ThreeDimensionLayer {
     this.gameObjects = createTDGameObjects(param.resources, gameObjectAction);
     appendTDGameObjects(this.scene, this.gameObjects);
 
-    this._subscription = param.listener.gameLoop.subscribe(action => {
-      this._gameLoop(action);
-    });
+    this._subscription = [
+      param.listener.gameLoop.subscribe(action => {
+        this._gameLoop(action);
+      }),
+
+      param.listener.domEvent.subscribe(action => {
+        if (action.type === 'resize') {
+          this._resize(action);
+        }
+      })
+    ];
   }
 
   /** デストラクタ */
@@ -95,7 +108,9 @@ export class ThreeDimensionLayer {
     disposeTDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();
-    this._subscription.unsubscribe();
+    this._subscription.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -109,7 +124,11 @@ export class ThreeDimensionLayer {
     };
   }
 
-  /** ゲームループの処理 */
+  /**
+   * ゲームループの処理
+   *
+   * @param action アクション
+   */
   _gameLoop(action: GameLoop): void {
     this._update.next({
       type: 'Update',
@@ -120,6 +139,7 @@ export class ThreeDimensionLayer {
       type: 'PreRender',
       camera: this.camera.getCamera(),
       rendererDOM: this._rendererDOM,
+      safeAreaInset: this._safeAreaInset,
     });
 
     this._render.next({
@@ -127,5 +147,14 @@ export class ThreeDimensionLayer {
       scene: this.scene,
       camera: this.camera.getCamera()
     });
+  }
+
+  /**
+   * リサイズ時の処理
+   *
+   * @param action アクション
+   */
+  _resize(action: Resize): void {
+    this._safeAreaInset = action.safeAreaInset;
   }
 }
