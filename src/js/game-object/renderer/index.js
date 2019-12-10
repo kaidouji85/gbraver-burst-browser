@@ -6,8 +6,8 @@ import type {Resize} from "../../action/dom-event/resize";
 import type {Render} from "../../action/game-loop/render";
 import {merge, Observable} from "rxjs";
 import {onWebGLRendererResize} from "../../render/resize";
-import {createDOMEventListener} from "../../action/dom-event/create-listener";
 import type {DOMEvent} from "../../action/dom-event";
+import {createDOMEventStream} from "../../action/dom-event";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -29,7 +29,7 @@ export class Renderer {
 
   constructor(param: Param) {
     this._threeJsRender = param.threeJsRender;
-    this._domEvent = createDOMEventListener(this._threeJsRender.domElement);
+    this._domEvent = createDOMEventStream(this._threeJsRender.domElement);
 
     merge(
       this._domEvent,
