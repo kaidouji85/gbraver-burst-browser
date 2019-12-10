@@ -1,12 +1,10 @@
 // @flow
 
 import type {Resize} from "./resize";
-import type {MouseDown} from "./mouse-down";
-import type {MouseMove} from "./mouse-move";
-import type {MouseUp} from "./mouse-up";
 import type {TouchStart} from "./touch-start";
 import type {TouchMove} from "./touch-move";
 import type {TouchEnd} from "./touch-end";
+import type {MouseDown, MouseMove, MouseUp} from "./mouse";
 
 export type DOMEvent =
   Resize |

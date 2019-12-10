@@ -1,14 +1,12 @@
 // @flow
 
 import * as THREE from "three";
-import type {MouseDown} from "../dom-event/mouse-down";
 import type {MouseRaycaster} from "../../raycaster/mouse/mouse-raycaster";
 import {createMouseRaycaster} from "../../raycaster/mouse/mouse-raycaster";
 import type {TouchStart} from "../dom-event/touch-start";
 import type {TouchStartRaycaster} from "./touch-start-raycaster";
 import {createTouchEventRaycaster} from "../../raycaster/touch/touch-raycaster";
 import type {MouseDownRaycaster} from "./mouse-down-raycaster";
-import type {MouseMove} from "../dom-event/mouse-move";
 import type {MouseMoveRaycaster} from "./mouse-move-raycaster";
 import {isMouseLeftButtonPushed} from "../../mouse/mouse-left-button";
 import type {TouchMoveRaycaster} from "./touch-move-raycaster";
@@ -17,6 +15,7 @@ import {Observable} from "rxjs";
 import type {DOMEvent} from "../dom-event";
 import type {OverlapAction} from "./index";
 import {filter, map} from "rxjs/operators";
+import type {MouseDown, MouseMove} from "../dom-event/mouse";
 
 /** MouseDownからMouseDownRaycasterに変換 */
 export function toMouseDownRaycaster(origin: MouseDown, renderer: THREE.WebGLRenderer, camera: THREE.Camera): MouseDownRaycaster {
