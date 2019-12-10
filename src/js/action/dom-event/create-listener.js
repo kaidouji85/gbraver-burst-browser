@@ -5,6 +5,7 @@ import {fromEvent, merge, Observable} from "rxjs";
 import {map} from 'rxjs/operators';
 import {createResizeStream} from "./resize";
 import {createMouseDownStream, createMouseMoveStream, createMouseUpStream} from "./mouse";
+import {createTouchEndStream, createTouchMoveStream, createTouchStartStream} from "./touch";
 
 /**
  * DOMイベントリスナを生成する
@@ -23,23 +24,15 @@ export function createDOMEventListener(renderDom: HTMLElement): Observable<DOMEv
     map(v => (v: DOMEvent))
   );
 
-  const touchStart = fromEvent(renderDom, 'touchstart').pipe(
-    map(v => {
-      v.preventDefault();
-      return {type: 'touchStart', event: v};
-    }));
-
-  const touchMove = fromEvent(renderDom, 'touchmove').pipe(
-    map(v => {
-      v.preventDefault();
-      return {type: 'touchMove', event: v}
-    }));
-
-  const touchEnd = fromEvent(renderDom, 'touchend').pipe(
-    map(v => {
-      v.preventDefault();
-      return {type: 'touchEnd', event: v};
-    }));
+  const touchStart = createTouchStartStream(renderDom).pipe(
+    map(v => (v: DOMEvent))
+  );
+  const touchMove = createTouchMoveStream(renderDom).pipe(
+    map(v => (v: DOMEvent))
+  );
+  const touchEnd = createTouchEndStream(renderDom).pipe(
+    map(v => (v: DOMEvent))
+  );
 
   const resize: Observable<DOMEvent> = createResizeStream().pipe(
     map(v => (v: DOMEvent))

@@ -8,11 +8,13 @@ export type MouseDown = {
   type: 'mouseDown',
   event: MouseEvent
 };
+
 /** マウスムーブ */
 export type MouseMove = {
   type: 'mouseMove',
   event: MouseEvent
 };
+
 /** マウスアップ */
 export type MouseUp = {
   type: 'mouseUp',
