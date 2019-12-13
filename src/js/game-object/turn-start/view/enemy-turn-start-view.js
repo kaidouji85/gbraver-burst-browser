@@ -41,18 +41,40 @@ export class EnemyTurnStartView implements TurnStartView {
     this._canvas.destructor();
   }
 
-  /** モデルをビューに反映させる */
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
+  getObject3D(): THREE.Object3D {
+    return this._canvas.getObject3D();
+  }
+
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   */
   engage(model: TurnStartModel): void {
     this._refreshOpacity(model);
+    this._refreshScale(model);
     this._refreshPos();
   }
 
-  /** カメラの真正面を向く */
+  /**
+   * カメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
   lookAt(camera: THREE.Camera): void {
     this._canvas.getObject3D().quaternion.copy(camera.quaternion);
   }
 
-  /** 透明度を更新する */
+  /**
+   * 透明度を更新する
+   *
+   * @param model モデル
+   */
   _refreshOpacity(model: TurnStartModel): void {
     this._canvas.setOpacity(model.opacity);
   }
@@ -66,11 +88,13 @@ export class EnemyTurnStartView implements TurnStartView {
   }
 
   /**
-   * シーンに追加するオブジェクトを取得する
+   * スケールを更新する
    *
-   * @return シーンに追加するオブジェクト
+   * @param model モデル
    */
-  getObject3D(): THREE.Object3D {
-    return this._canvas.getObject3D();
+  _refreshScale(model: TurnStartModel): void {
+    const target = this._canvas.getObject3D();
+    target.scale.x = model.scale;
+    target.scale.y = model.scale;
   }
 }
