@@ -9,6 +9,7 @@ import type {TurnStartModel} from "./turn-start-model";
  */
 export function createInitialValue(): TurnStartModel {
   return {
-    opacity: 0
+    opacity: 0,
+    scale: 1,
   };
 }
