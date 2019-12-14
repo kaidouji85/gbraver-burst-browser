@@ -23,7 +23,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
 
     delay(700)
       .chain(activeTDPlayer.turnStart.popUp())
-      .chain(delay(300))
+      .chain(delay(700))
       .chain(all(
         // TODO バッテリー回復値をeffectに持たせる
         activeTDPlayer.recoverBattery.popUp(3),
