@@ -20,6 +20,7 @@ import {avoidToStand} from "./animation/avoid-to-stand";
 import {charge} from "./animation/charge";
 import {hmToStand} from "./animation/hm-to-stand";
 import {down} from "./animation/down";
+import {empty} from "../../../animation/delay";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
@@ -61,6 +62,12 @@ export class NeoLandozer implements ArmDozerSprite {
     return hmToStand(this._model);
   }
 
+  /** ターンスタート */
+  turnStart(): Animate {
+    // TODO アニメーションを実装する
+    return empty();
+  }
+  
   /** ノックバック */
   knockBack(): Animate {
     return knockBack(this._model);
