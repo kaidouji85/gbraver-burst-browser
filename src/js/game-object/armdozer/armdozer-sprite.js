@@ -11,6 +11,12 @@ export interface ArmDozerSprite {
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
 
+  /** ターンスタート */
+  turnStart(): Animate;
+
+  /** ターンスタート -> 立ち */
+  turnStartToStand(): Animate;
+
   /** ノックバック */
   knockBack(): Animate;
 

@@ -6,10 +6,9 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
 import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
-import {delay, empty} from "../../../../../../../animation/delay";
+import {empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
 import {canBurstButtonPush} from "../../ui-logic/burst-button";
-import {toInitial} from "../td-camera";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -44,16 +43,12 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   const canBurst = canBurstButtonPush(playerCommand.command);
   return all(
-    toInitial(view.td.camera, 500),
-
-    delay(800).chain(all(
-      playerTD.gauge.hp(player.armdozer.hp),
-      playerTD.gauge.battery(player.armdozer.battery),
-      enemyTD.gauge.hp(enemy.armdozer.hp),
-      enemyTD.gauge.battery(enemy.armdozer.battery),
-      view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
-      view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
-      view.hud.gameObjects.burstButton.open(canBurst),
-    ))
+    playerTD.gauge.hp(player.armdozer.hp),
+    playerTD.gauge.battery(player.armdozer.battery),
+    enemyTD.gauge.hp(enemy.armdozer.hp),
+    enemyTD.gauge.battery(enemy.armdozer.battery),
+    view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
+    view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
+    view.hud.gameObjects.burstButton.open(canBurst),
   );
 }
