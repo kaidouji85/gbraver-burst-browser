@@ -12,7 +12,7 @@ export const MAX_ANIMATION = 4;
 /** 腕下げガッツ */
 export function shinBraverGutsDown(resources: Resources): ArmdozerAnimation {
   const ret = new HorizontalArmdozerAnimation({
-    id: TEXTURE_IDS.SHIN_BRAVER_GUTS_UP,
+    id: TEXTURE_IDS.SHIN_BRAVER_GUTS_DOWN,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,

@@ -23,12 +23,13 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
   }
 
   const attackerX = activeTDPlayer.sprite.getObject3D().position.x;
-  return all(
-    dolly(view.td.camera, attackerX, 500),
-
-    delay(700)
-      .chain(activeTDPlayer.turnStart.popUp())
-  ).chain(
-    delay(800)
-  );
+  return dolly(view.td.camera, attackerX, 500)
+    .chain(delay(100))
+    .chain(all(
+      activeTDPlayer.sprite.turnStart(),
+      activeTDPlayer.turnStart.popUp()
+    ))
+    .chain(delay(100))
+    .chain(activeTDPlayer.sprite.turnStartToStand())
+    .chain(delay(800));
 }

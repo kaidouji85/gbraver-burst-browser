@@ -67,6 +67,12 @@ export class NeoLandozer implements ArmDozerSprite {
     // TODO アニメーションを実装する
     return empty();
   }
+
+  /** ターンスタート -> 立ち */
+  turnStartToStand(): Animate {
+    // TODO アニメーションを実装する
+    return empty();
+  }
   
   /** ノックバック */
   knockBack(): Animate {

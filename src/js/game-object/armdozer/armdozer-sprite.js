@@ -14,6 +14,9 @@ export interface ArmDozerSprite {
   /** ターンスタート */
   turnStart(): Animate;
 
+  /** ターンスタート -> 立ち */
+  turnStartToStand(): Animate;
+
   /** ノックバック */
   knockBack(): Animate;
 

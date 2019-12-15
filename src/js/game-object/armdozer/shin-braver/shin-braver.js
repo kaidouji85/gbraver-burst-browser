@@ -20,7 +20,8 @@ import {avoidToStand} from "./animation/avoid-to-stand";
 import {punchToStand} from "./animation/punch-to-stand";
 import {charge} from "./animation/charge";
 import {down} from "./animation/down";
-import {empty} from "../../../animation/delay";
+import {turnStart} from "./animation/turn-start";
+import {turnStartToStand} from "./animation/turn-start-to-stand";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -64,8 +65,12 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** ターンスタート */
   turnStart(): Animate {
-    // TODO アニメーションを実装する
-    return empty();
+    return turnStart(this._model);
+  }
+
+  /** ターンスタート -> 立ち */
+  turnStartToStand(): Animate {
+    return turnStartToStand(this._model);
   }
 
   /** ダメージアニメーションを再生する */
