@@ -17,22 +17,20 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
   }
 
   const activePlayerX = activeTDPlayer.sprite.getObject3D().position.x;
-  return dolly(view.td.camera, activePlayerX, 500)
-    .chain(delay(500))
-    .chain(all(
-      activeTDPlayer.sprite.turnStart(),
-      activeTDPlayer.turnStart.popUp()
-    ))
-    .chain(delay(300))
-    .chain(all(
-      // TODO バッテリー回復値をeffectに持たせる
-      activeTDPlayer.recoverBattery.popUp(3),
-      activeTDPlayer.gauge.battery(activeStatus.armdozer.battery))
-    )
-    .chain(delay(800))
-    .chain(all(
-      activeTDPlayer.sprite.turnStartToStand(),
-      toInitial(view.td.camera, 500)
-    ))
-    .chain(delay(500));
+  return all(
+    dolly(view.td.camera, activePlayerX, 500)
+      .chain(delay(500))
+      .chain(activeTDPlayer.turnStart.popUp())
+      .chain(delay(300))
+      .chain(all(
+        // TODO バッテリー回復値をeffectに持たせる
+        activeTDPlayer.recoverBattery.popUp(3),
+        activeTDPlayer.gauge.battery(activeStatus.armdozer.battery))
+      ),
+    activeTDPlayer.sprite.turnStart(),
+  ).chain(delay(800)
+  ).chain(all(
+    activeTDPlayer.sprite.turnStartToStand(),
+    toInitial(view.td.camera, 500))
+  ).chain(delay(500));
 }
