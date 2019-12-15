@@ -8,4 +8,7 @@ export type AnimationType =
   | 'SP_TO_STAND'
   | 'KNOCK_BACK'
   | 'GUARD'
-  | 'DOWN';
+  | 'DOWN'
+  | 'GUTS_UP'
+  | 'GUTS_DOWN'
+  | 'GUTS_TO_STAND';
