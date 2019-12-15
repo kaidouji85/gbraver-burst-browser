@@ -6,7 +6,7 @@ import {ShinBraver} from "../../../../../../../../game-object/armdozer/shin-brav
 import {delay, empty} from "../../../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core/lib/armdozer/burst";
 import {all} from "../../../../../../../../animation/all";
-import {dolly} from "../../td-camera";
+import {dolly, toInitial} from "../../td-camera";
 
 /**
  * シンブレイバーのバーストアニメーション
@@ -35,10 +35,14 @@ function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>):
   return all(
     dolly(param.tdCamera, playerX, 500),
     param.tdObjects.turnIndicator.invisible(),
-
-    delay(1300).chain(all(
-      param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
-      param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
-    ))
+  ).chain(
+    delay(800)
+  ).chain(all(
+    param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
+    param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+  )).chain(
+    delay(800)
+  ).chain(
+    toInitial(param.tdCamera, 500)
   )
 }

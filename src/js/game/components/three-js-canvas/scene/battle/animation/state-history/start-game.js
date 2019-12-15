@@ -6,7 +6,7 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {delay, empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
-import {dolly} from "../td-camera";
+import {dolly, toInitial} from "../td-camera";
 
 /**
  * ゲーム開始時のアニメーション
@@ -31,5 +31,6 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
     ))
     .chain(delay(100))
     .chain(activeTDPlayer.sprite.turnStartToStand())
-    .chain(delay(800));
+    .chain(delay(800))
+    .chain(toInitial(view.td.camera, 500))
 }
