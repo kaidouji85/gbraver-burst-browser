@@ -13,6 +13,7 @@ import {neoLandozerHMCharge} from "../mesh/hm-charge";
 import {neoLandozerHMAttack} from "../mesh/hm-attack";
 import {neoLandozerHMToStand} from "../mesh/hm-to-stand";
 import {neoLandozerDown} from "../mesh/down";
+import {neoLandozerGuts} from "../mesh/guts";
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
@@ -24,6 +25,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   _hmAttack: ArmdozerAnimation;
   _hmToStand: ArmdozerAnimation;
   _down: ArmdozerAnimation;
+  _guts: ArmdozerAnimation;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -34,6 +36,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this._hmAttack = neoLandozerHMAttack(resources);
     this._hmToStand = neoLandozerHMToStand(resources);
     this._down = neoLandozerDown(resources);
+    this._guts = neoLandozerGuts(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -79,7 +82,8 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
       this._hmCharge,
       this._hmAttack,
       this._hmToStand,
-      this._down
+      this._down,
+      this._guts,
     ];
   }
 
@@ -109,6 +113,8 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
         return this._hmToStand;
       case 'DOWN':
         return this._down;
+      case 'GUTS':
+        return this._guts;
       default:
         return this._stand;
     }
