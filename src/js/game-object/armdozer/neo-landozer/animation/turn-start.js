@@ -22,5 +22,5 @@ export function turnStart(model: NeoLandozerModel): Animate {
       model.animation.type = 'GUTS_DOWN';
       model.animation.frame = 0;
     }))
-    .chain(tween(model.animation, t => t.to({frame: 1}, 300)));
+    .chain(tween(model.animation, t => t.to({frame: 1}, 200)));
 }
