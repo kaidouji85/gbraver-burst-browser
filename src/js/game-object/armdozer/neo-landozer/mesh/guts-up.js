@@ -9,10 +9,10 @@ export const MAX_ANIMATION = 4;
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
 
-/** ネオラインドーザ ガッツ */
-export function neoLandozerGuts(resources: Resources): ArmdozerAnimation {
+/** ネオラインドーザ ガッツアップ */
+export function neoLandozerGutsUp(resources: Resources): ArmdozerAnimation {
   const ret = new HorizontalArmdozerAnimation({
-    id: TEXTURE_IDS.NEO_LANDOZER_GUTS,
+    id: TEXTURE_IDS.NEO_LANDOZER_GUTS_UP,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,
