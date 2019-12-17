@@ -8,4 +8,6 @@ export type AnimationType =
   | 'HM_CHARGE'
   | 'HM_ATTACK'
   | 'HM_TO_STAND'
-  | 'DOWN';
+  | 'DOWN'
+  | 'GUTS_DOWN'
+  | 'GUTS_UP';
