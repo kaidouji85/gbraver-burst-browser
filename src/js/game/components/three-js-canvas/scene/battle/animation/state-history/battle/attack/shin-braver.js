@@ -184,7 +184,7 @@ function down(param: BattleAnimationParam<ShinBraver, DownResult>): Animate {
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       ))
-  ).chain(delay(2000))
+  ).chain(delay(1000))
     .chain(param.attackerTD.sprite.punchToStand())
     .chain(delay(1000))
     .chain(param.attackerTD.sprite.turnStart())
