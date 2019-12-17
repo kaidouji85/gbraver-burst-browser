@@ -12,7 +12,8 @@ import {tween} from "../../../animation/tween";
  * @return アニメーション
  */
 export function popUp(model: TurnStartModel): Animate {
-  return tween(model, t => t.to({opacity: 1}, 300))
+  return tween(model, t => t.to({opacity: 0}, 0))
+    .chain(tween(model, t => t.to({opacity: 1}, 300)))
     .chain(delay(1000))
     .chain(tween(model, t => t.to({opacity: 0}, 300)));
 }

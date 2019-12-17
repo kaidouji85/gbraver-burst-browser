@@ -2,5 +2,6 @@
 
 /** ターンスタートモデル */
 export type TurnStartModel = {
-  opacity: number
+  opacity: number,
+  scale: number,
 };

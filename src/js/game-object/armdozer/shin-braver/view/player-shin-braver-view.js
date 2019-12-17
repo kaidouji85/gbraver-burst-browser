@@ -13,6 +13,8 @@ import {shinBraverSPToStand} from "../mesh/sp-to-stand";
 import {shinBraverKnockBack} from "../mesh/knock-back";
 import {shinBraverGuard} from "../mesh/guard";
 import {shinBraverDown} from "../mesh/down";
+import {shinBraverGutsUp} from "../mesh/guts-up";
+import {shinBraverGutsDown} from "../mesh/guts-down";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
@@ -24,6 +26,8 @@ export class PlayerShinBraverView implements ShinBraverView {
   _knockBack: ArmdozerAnimation;
   _guard: ArmdozerAnimation;
   _down: ArmdozerAnimation;
+  _gutsUp: ArmdozerAnimation;
+  _gutsDown: ArmdozerAnimation;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -34,6 +38,8 @@ export class PlayerShinBraverView implements ShinBraverView {
     this._knockBack = shinBraverKnockBack(resources);
     this._guard = shinBraverGuard(resources);
     this._down = shinBraverDown(resources);
+    this._gutsUp = shinBraverGutsUp(resources);
+    this._gutsDown = shinBraverGutsDown(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -82,6 +88,8 @@ export class PlayerShinBraverView implements ShinBraverView {
       this._knockBack,
       this._guard,
       this._down,
+      this._gutsUp,
+      this._gutsDown,
     ];
   }
 
@@ -111,6 +119,10 @@ export class PlayerShinBraverView implements ShinBraverView {
         return this._guard;
       case 'DOWN':
         return this._down;
+      case 'GUTS_UP':
+        return this._gutsUp;
+      case 'GUTS_DOWN':
+        return this._gutsDown;
       default:
         return this._stand;
     }

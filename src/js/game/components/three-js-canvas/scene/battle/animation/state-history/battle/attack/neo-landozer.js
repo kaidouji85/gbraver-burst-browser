@@ -175,9 +175,7 @@ function down(param: BattleAnimationParam<NeoLandozer, DownResult>): Animate {
   return all(
     param.attackerTD.sprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.armHammer())
-      .chain(delay(1300))
-      .chain(param.attackerTD.sprite.hmToStand()),
+      .chain(param.attackerTD.sprite.armHammer()),
 
     delay(1000)
       .chain(
@@ -186,5 +184,9 @@ function down(param: BattleAnimationParam<NeoLandozer, DownResult>): Animate {
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
-  );
+  ).chain(delay(1000))
+    .chain(param.attackerTD.sprite.hmToStand())
+    .chain(delay(1000))
+    .chain(param.attackerTD.sprite.turnStart())
+    .chain(delay(500));
 }

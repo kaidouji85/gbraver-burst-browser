@@ -6,7 +6,7 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {delay, empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
-import {dolly} from "../td-camera";
+import {dolly, toInitial} from "../td-camera";
 
 /**
  * ゲーム開始時のアニメーション
@@ -24,11 +24,12 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
 
   const attackerX = activeTDPlayer.sprite.getObject3D().position.x;
   return all(
-    dolly(view.td.camera, attackerX, 500),
-
-    delay(700)
-      .chain(activeTDPlayer.turnStart.popUp())
-  ).chain(
-    delay(800)
-  );
+    dolly(view.td.camera, attackerX, 500)
+      .chain(delay(500))
+      .chain(activeTDPlayer.turnStart.popUp()),
+    activeTDPlayer.sprite.turnStart()
+  ).chain(all(
+    activeTDPlayer.sprite.turnStartToStand(),
+    toInitial(view.td.camera, 500)
+  )).chain(delay(500))
 }
