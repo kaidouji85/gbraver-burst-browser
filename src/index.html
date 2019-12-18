@@ -21,11 +21,24 @@
       color: rgb(240, 240, 240);
       background-color: rgb(23, 23, 23);
     }
+
+    .first-view {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .first-view--invisible {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <div id="first-view">
-    first view
+  <div id="first-view" class="first-view">
+    INITIALIZING...
   </div>
   <div id="service-worker-update-scene"></div>
   <div id="play-in-landscape"></div>
