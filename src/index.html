@@ -6,8 +6,27 @@
   <meta content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" name="viewport">
   <link href="<%= resource %>/manifest.json" rel="manifest">
   <link href="<%= resource %>/app-icon.png" rel="apple-touch-icon" />
+  <style>
+    html, body {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      color: rgb(240, 240, 240);
+      background-color: rgb(23, 23, 23);
+    }
+  </style>
 </head>
 <body>
+  <div id="first-view">
+    first view
+  </div>
   <div id="service-worker-update-scene"></div>
   <div id="play-in-landscape"></div>
   <div id="loading-scene"></div>
