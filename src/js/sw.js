@@ -14,14 +14,7 @@ PreCaching.precacheAndRoute([
 const RUNTIME_CACHE_KEY = `RUNTIME_CACHE_KEY_-${RUNTIME_CACHE_HASH}`;
 
 Routing.registerRoute(
-  /\/.+-index\.js$/,
-  new Strategies.CacheFirst({
-    cacheName: RUNTIME_CACHE_KEY
-  })
-);
-
-Routing.registerRoute(
-  /\.(?:png|glb|css|json)$/,
+  /\.(?:png|glb|css|json|js)$/,
   new Strategies.CacheFirst({
     cacheName: RUNTIME_CACHE_KEY
   })
