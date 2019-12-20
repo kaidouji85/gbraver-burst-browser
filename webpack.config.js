@@ -51,6 +51,7 @@ module.exports = {
       filename: path.resolve(__dirname, `${BUILD_PATH}/index.html`),
       template: 'src/index.html',
       templateParameters: {
+        BUILD_RESOURCE_PATH: BUILD_RESOURCE_PATH,
         BUILD_INDEX_JS_PATH: BUILD_INDEX_JS_PATH,
         BUILD_CSS_PATH: BUILD_CSS_PATH,
       },
@@ -60,14 +61,6 @@ module.exports = {
       {
         from: path.resolve(__dirname, "src/resources"),
         to: path.resolve(__dirname, BUILD_PATH, BUILD_RESOURCE_PATH)
-      },
-      {
-        from: path.resolve(__dirname, "src/app-icon.png"),
-        to: path.resolve(__dirname, BUILD_PATH, 'app-icon.png')
-      },
-      {
-        from: path.resolve(__dirname, "src/manifest.json"),
-        to: path.resolve(__dirname, BUILD_PATH, 'manifest.json')
       }
     ]),
     new webpack.DefinePlugin({
