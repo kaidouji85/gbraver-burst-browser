@@ -12,13 +12,31 @@ PreCaching.precacheAndRoute([
  * 末尾にビルドごとのハッシュ値を追加して、現行バージョンのキャッシュか否かを判別できるようにしている
  */
 const RUNTIME_CACHE_KEY = `RUNTIME_CACHE_KEY_-${RUNTIME_CACHE_HASH}`;
-
+const NETWORK_FIRST_LIST = [
+  '/app-icon.png',
+  '/manifest.json'
+];
 Routing.registerRoute(
-  /\.(?:png|glb|css|json|js)$/,
+  context => NETWORK_FIRST_LIST.includes(context.url),
+  new Strategies.NetworkFirst({
+    cacheName: RUNTIME_CACHE_KEY
+  })
+);
+
+const CACHE_FIRST_MATCH = /\.(?:png|glb|css|js)$/;
+Routing.registerRoute(
+  context => {
+    if (NETWORK_FIRST_LIST.includes(context.url)) {
+      return false;
+    } else {
+      return CACHE_FIRST_MATCH.test(context.url);
+    }
+  },
   new Strategies.CacheFirst({
     cacheName: RUNTIME_CACHE_KEY
   })
 );
+
 
 self.addEventListener('activate', e => {
   e.waitUntil(clearOldRuntimeCache());
