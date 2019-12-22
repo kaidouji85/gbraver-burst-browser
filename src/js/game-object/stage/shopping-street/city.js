@@ -15,6 +15,7 @@ export class City {
       object: new THREE.Scene()
     };
     this._gltf.object.scale.set(100, 100, 100);
+    this._gltf.object.position.z = -50;
   }
 
   /** デストラクタ */
