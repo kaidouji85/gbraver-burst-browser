@@ -10,6 +10,11 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {PlayerHpBar} from "./player-hp-bar";
 import {HpNumber} from "./hp-number";
 import {PlayerBatteryGauge} from "./player-battery-gauge";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z
+} from "../../armdozer/position";
 
 export const BASE_CANVAS_SIZE = 1024;
 export const SCALE = 0.3;
@@ -85,9 +90,9 @@ export class PlayerGaugeView implements GaugeView {
 
   /** 座標をセットする */
   _setPos(): void {
-    this._group.position.x = 150;
-    this._group.position.y = 340;
-    this._group.position.z = 0;
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
+    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y + 200;
+    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
   }
 
   /** カメラの真正面を向く */
