@@ -18,6 +18,8 @@ export default class ShoppingStreet implements Stage {
 
   constructor(resources: Resources) {
     this._city = new City(resources);
+    this._city.getObject3D().position.z = -50;
+
     this._skyBox = SkyBox(resources);
 
     this._directionalLight1 = new THREE.DirectionalLight(0xAAAAAA, 0.8);
