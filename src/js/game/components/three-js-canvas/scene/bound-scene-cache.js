@@ -1,7 +1,7 @@
 // @flow
 
 import {Subscription} from "rxjs";
-import type {Scene} from "../scene/scene";
+import type {Scene} from "./scene";
 
 /**
  * Gameに関連づけされたシーンのキャッシュ

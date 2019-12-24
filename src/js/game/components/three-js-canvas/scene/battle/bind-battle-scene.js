@@ -1,11 +1,11 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import {Renderer} from "../../../../game-object/renderer";
-import type {BattleRoom, InitialState} from "../../../../battle-room/battle-room";
-import {BoundSceneCache} from "./bound-scene-cache";
-import {BattleScene} from "../scene/battle";
-import {ThreeJSCanvasStream} from "../stream";
+import type {Resources} from "../../../../../resource";
+import {Renderer} from "../../../../../game-object/renderer";
+import type {BattleRoom, InitialState} from "../../../../../battle-room/battle-room";
+import {BoundSceneCache} from "../bound-scene-cache";
+import {BattleScene} from "./battle-scene";
+import {ThreeJSCanvasStream} from "../../stream";
 
 /**
  * 戦闘シーンをゲームに関連付ける

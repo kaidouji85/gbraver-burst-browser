@@ -3,8 +3,8 @@
 import {Renderer} from "../../../game-object/renderer";
 import {createRender} from "../../../render/create-render";
 import {isDevelopment} from "../../../webpack/mode";
-import {BoundSceneCache} from "./bind/bound-scene-cache";
-import {bindBattleScene} from "./bind/bind-battle-scene";
+import {BoundSceneCache} from "./scene/bound-scene-cache";
+import {bindBattleScene} from "./scene/battle/bind-battle-scene";
 import {ThreeJSCanvasStream} from "./stream";
 import {Observable, Subscription} from "rxjs";
 import type {EndBattle} from "../../../action/game/end-battle";
