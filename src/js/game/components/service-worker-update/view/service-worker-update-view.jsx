@@ -1,21 +1,23 @@
 // @flow
 
 import React from 'react';
+import type {ServiceWorkerUpdateState} from "../state/service-worker-update-state";
 
 /** プロパティ */
-type ServiceWorkerUpdateProps = {
-  isVisible: boolean
+type Props = {
+  state: ServiceWorkerUpdateState
 };
 
 /**
- * サービスワーカー更新のReact Component
+ * サービスワーカーアップデートビュー
  *
- * @return サービスワーカー更新
+ * @param props プロパティ
+ * @return ビュー
  */
-export function ServiceWorkerUpdatePresentation(props: ServiceWorkerUpdateProps) {
+export function serviceWorkerUpdateView(props: Props) {
   return (
     <div className="service-worker-update" style={{
-      display: props.isVisible
+      display: props.state.isVisible
         ? 'flex'
         : 'none'
     }}>
