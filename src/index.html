@@ -4,8 +4,11 @@
   <title>gbraver-burst</title>
   <meta charset=utf-8>
   <meta content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" name="viewport">
-  <link href="<%= resource %>/manifest.json" rel="manifest">
-  <link href="<%= resource %>/app-icon.png" rel="apple-touch-icon" />
+  <link rel="manifest" href="<%= BUILD_RESOURCE_PATH%>/manifest.json" />
+  <link rel="apple-touch-icon" href="<%= BUILD_RESOURCE_PATH%>/app-icon.png" />
+  <link rel="preload" href="<%= BUILD_INDEX_JS_PATH %>" as="script" />
+  <link rel="preload" href="<%= BUILD_CSS_PATH %>" as="style" />
+  <link rel="stylesheet" href="<%= BUILD_CSS_PATH %>" />
   <style>
     html, body {
       display: block;
@@ -44,5 +47,6 @@
   <div id="play-in-landscape"></div>
   <div id="loading-scene"></div>
   <div id="title-scene"></div>
+  <script src="<%= BUILD_INDEX_JS_PATH %>" defer></script>
 </body>
 </html>

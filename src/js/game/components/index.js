@@ -58,7 +58,6 @@ export class Components {
   destructor() {
     this._loading.destructor();
     this._serviceWorkerUpdate.destructor();
-    this._title.destructor();
     this._threeJSCanvas.destructor();
   }
 

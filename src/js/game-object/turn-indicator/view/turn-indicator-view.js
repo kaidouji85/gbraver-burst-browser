@@ -7,6 +7,7 @@ import type {TurnIndicatorModel} from "../model/turn-indicator-model";
 import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {CanvasImageResource} from "../../../resource/canvas-image";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
+import {ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
 
 export const MESH_SIZE = 200;
 export const CANVAS_SIZE = 512;
@@ -48,8 +49,8 @@ export class TurnIndicatorView {
     this._canvasMesh.mesh.position.x = model.isPlayerTurn
       ? x
       : -x;
-    this._canvasMesh.mesh.position.y = 150;
-    this._canvasMesh.mesh.position.z = 20;
+    this._canvasMesh.mesh.position.y = ARMDOZER_EFFECT_STANDARD_Y;
+    this._canvasMesh.mesh.position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
 
     this._canvasMesh.setOpacity(model.opacity);
   }

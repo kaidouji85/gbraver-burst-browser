@@ -8,6 +8,11 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {TurnStartModel} from "../model/turn-start-model";
 import {SPRITE_RENDER_ORDER} from "../../../render-order/td-render-order";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z
+} from "../../armdozer/position";
 
 export const MESH_SIZE = 400;
 export const CANVAS_SIZE = 512;
@@ -82,9 +87,9 @@ export class EnemyTurnStartView implements TurnStartView {
   /** 座標を更新する */
   _refreshPos(): void {
     const target = this._canvas.getObject3D();
-    target.position.x = -150;
-    target.position.y = 160;
-    target.position.z = 40;
+    target.position.x = -ARMDOZER_EFFECT_STANDARD_X;
+    target.position.y = ARMDOZER_EFFECT_STANDARD_Y + 10;
+    target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
   }
 
   /**

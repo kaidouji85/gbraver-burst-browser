@@ -5,16 +5,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const hash = new Puid().generate();
 const BUILD_PATH = 'build/production';
-const resourceHash = new Puid().generate();
-const jsHash = new Puid().generate();
+const BUILD_RESOURCE_PATH = `${hash}`;
+const BUILD_INDEX_JS_PATH = `${hash}-index.js`;
+const BUILD_CSS_PATH = `${BUILD_RESOURCE_PATH}/bundle.css`;
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, 'src/js/index.js'),
+  entry: {
+    [BUILD_INDEX_JS_PATH]: path.resolve(__dirname, 'src/js/index.js')
+  },
   output: {
     path: path.resolve(__dirname, BUILD_PATH),
-    filename: `${jsHash}-index.js`
+    filename: '[name]'
   },
   devServer: {
     contentBase: path.resolve(__dirname, BUILD_PATH),
@@ -44,24 +48,26 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'gbraver-burst',
       filename: path.resolve(__dirname, `${BUILD_PATH}/index.html`),
       template: 'src/index.html',
       templateParameters: {
-        resource: resourceHash
-      }
+        BUILD_RESOURCE_PATH: BUILD_RESOURCE_PATH,
+        BUILD_INDEX_JS_PATH: BUILD_INDEX_JS_PATH,
+        BUILD_CSS_PATH: BUILD_CSS_PATH,
+      },
+      inject: false
     }),
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, "src/resources"),
-        to: path.resolve(__dirname, BUILD_PATH, resourceHash)
+        to: path.resolve(__dirname, BUILD_PATH, BUILD_RESOURCE_PATH)
       }
-      ]),
+    ]),
     new webpack.DefinePlugin({
-      GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(resourceHash),
+      GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(BUILD_RESOURCE_PATH),
     }),
     new MiniCssExtractPlugin({
-      filename: `${resourceHash}/bundle.css`
+      filename: BUILD_CSS_PATH
     })
   ]
 };

@@ -21,8 +21,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      REVISION_INDEX_HTML: JSON.stringify(new Puid().generate()),
-      RUNTIME_CACHE_HASH: JSON.stringify(new Puid().generate()),
+      BUILD_HASH: JSON.stringify(new Puid().generate())
     }),
   ]
 };

@@ -7,6 +7,11 @@ import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 import * as THREE from 'three';
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z
+} from "../../armdozer/position";
 
 export const MESH_SIZE = 40;
 export const MAX_NUMBER_SIZE = 4;
@@ -71,9 +76,9 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
   /** 座標を更新する */
   _refreshPos(): void {
-    this._group.position.x = 150;
-    this._group.position.y = 150;
-    this._group.position.z = 20;
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
+    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
+    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
   }
 
   /** 透明度を更新する */

@@ -4,6 +4,7 @@ import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import {HorizontalArmdozerAnimation} from "../../mesh/horizontal-animation";
+import {MESH_Y} from "./position";
 
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
@@ -19,6 +20,6 @@ export function shinBraverStand(resources: Resources): ArmdozerAnimation {
     height: MESH_HEIGHT
   });
   const object = ret.getObject3D();
-  object.position.y = 140;
+  object.position.y = MESH_Y;
   return ret;
 }

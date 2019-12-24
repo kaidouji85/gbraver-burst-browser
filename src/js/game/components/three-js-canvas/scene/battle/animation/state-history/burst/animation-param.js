@@ -9,7 +9,6 @@ import {PlainHUDCamera} from "../../../../../../../../game-object/camera/plain-h
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {ArmdozerState} from "gbraver-burst-core/lib/game-state/armdozer/armdozer-state";
 import type {BurstEffect} from "gbraver-burst-core/lib/effect/burst/burst-effect";
 import type {Burst} from "gbraver-burst-core/lib/armdozer/burst";
 import type {ArmDozerSprite} from "../../../../../../../../game-object/armdozer/armdozer-sprite";
@@ -38,7 +37,7 @@ export type BurstAnimationParam<SPRITE: ArmDozerSprite, BURST: Burst> = {
  * @param gameState ゲームステート
  * @return バーストアニメーションパラメータ
  */
-export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BurstAnimationParam<ArmdozerState, Burst> {
+export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BurstAnimationParam<ArmDozerSprite, Burst> {
   if (gameState.effect.name !== 'BurstEffect') {
     return null;
   }

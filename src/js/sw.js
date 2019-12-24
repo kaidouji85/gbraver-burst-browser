@@ -4,19 +4,14 @@ import * as Routing from 'workbox-routing';
 import * as Strategies from 'workbox-strategies';
 
 PreCaching.precacheAndRoute([
-  {url: "index.html", revision: REVISION_INDEX_HTML}
+  {url: "index.html", revision: BUILD_HASH}
 ]);
 
-/**
- * ランタイムキャッシュのキー
- * 末尾にビルドごとのハッシュ値を追加して、現行バージョンのキャッシュか否かを判別できるようにしている
- */
-const RUNTIME_CACHE_KEY = `RUNTIME_CACHE_KEY_-${RUNTIME_CACHE_HASH}`;
-
+const CACHE_FIRST_NAME = `CACHE_FIRST_NAME_${BUILD_HASH}`;
 Routing.registerRoute(
-  /\.(?:png|glb|css|json|js)$/,
+  /\.(?:png|glb|css|js|json)$/,
   new Strategies.CacheFirst({
-    cacheName: RUNTIME_CACHE_KEY
+    cacheName: CACHE_FIRST_NAME
   })
 );
 
@@ -29,7 +24,7 @@ async function clearOldRuntimeCache() {
   try {
     const keys = await caches.keys();
     const deleteKeys = keys
-      .filter(v => v !== RUNTIME_CACHE_KEY)
+      .filter(v => v !== CACHE_FIRST_NAME)
       .filter(v => v!== Core.cacheNames.precache);
     await Promise.all(deleteKeys.map(v => {
       console.log(`delete cache ${v}`);
