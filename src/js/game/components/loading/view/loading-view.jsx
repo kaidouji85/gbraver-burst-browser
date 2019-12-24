@@ -1,33 +1,33 @@
 // @flow
 
-import React from 'react';
+import React from "react";
+import type {LoadingState} from "../state/loading-state";
 
 /** プロパティ */
-export type Props = {
-  isVisible: boolean,
-  completedRate: number
+type Props = {
+  state: LoadingState
 };
 
 /**
- * ローディングのReact Component
+ * ローディングビュー
  *
  * @param props プロパティ
- * @return 生成結果
+ * @return ビュー
  */
-export function LoadingPresentation(props: Props) {
+export function loadingView(props: Props) {
   return (
     <div className="loading" style={{
-      display: props.isVisible
+      display: props.state.isVisible
         ? 'flex'
         : 'none'
     }}>
       <div className="loading__completed-rate">
         <div className="loading__completed-rate__text">
-          {`LOADING... ${Math.floor(props.completedRate * 100)}%`}
+          {`LOADING... ${Math.floor(props.state.completedRate * 100)}%`}
         </div>
         <div className="loading__completed-rate__bar">
           <div className="loading__completed-rate__bar__completed" style={{
-            width: `${props.completedRate * 100}%`
+            width: `${props.state.completedRate * 100}%`
           }}></div>
         </div>
       </div>

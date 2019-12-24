@@ -8,7 +8,7 @@ import {resourceBasePath} from "../../../resource/resource-base-path";
  *
  * @return ランドスケープ警告ビュー
  */
-export function PlayInLandscapePresentation() {
+export function playInLandscapeView() {
   return (
     <div className="play-in-landscape">
       <span className="play-in-landscape__caption">横向きでプレイしてください</span>
