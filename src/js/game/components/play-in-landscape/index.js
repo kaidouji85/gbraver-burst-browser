@@ -1,11 +1,11 @@
 // @flow
 
 import {render} from 'react-dom';
-import {PlayInLandscapePresentation} from "./presentation";
+import {playInLandscapeView} from "./play-in-landscape-view";
 
 /** ランドスケープでプレイするよう促す警告 */
 export class PlayInLandscape {
   constructor(dom: HTMLElement) {
-    render(PlayInLandscapePresentation(), dom);
+    render(playInLandscapeView(), dom);
   }
 }
