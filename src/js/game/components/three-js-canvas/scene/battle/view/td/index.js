@@ -21,6 +21,7 @@ import type {OverlapAction} from "../../../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../../../action/game-object-action/create-listener";
 import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../../../action/dom-event/resize";
+import {CUBE_TEXTURE_IDS} from "../../../../../../../resource/cube-texture";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -66,6 +67,13 @@ export class ThreeDimensionLayer {
     this._render = new Subject();
 
     this.scene = new THREE.Scene();
+
+    const skyBoxResource = param.resources.cubeTextures.find(v => v.id === CUBE_TEXTURE_IDS.BlueSky);
+    const skyBox: THREE.CubeTexture = skyBoxResource
+      ? skyBoxResource.texture
+      : new THREE.CubeTexture();
+    this.scene.background = skyBox;
+
     this.camera = new TDCamera({
       listener: {
         domEvent: param.listener.domEvent,
@@ -102,6 +110,7 @@ export class ThreeDimensionLayer {
 
   /** デストラクタ */
   destructor(): void {
+    this.scene.background.dispose();
     this.players.forEach(v => {
       disposeTDPlayer(v);
     });
