@@ -2,8 +2,8 @@
   "name": "gbraver-burst-browser",
   "version": "1.0.0",
   "description": "",
-  "engines" : {
-    "node" : "^12.14.0"
+  "engines": {
+    "node": "^12.14.0"
   },
   "main": "src/js/index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "react-dom": "^16.12.0",
     "rxjs": "^6.5.3",
     "stats.js": "^0.17.0",
-    "three": "^0.111.0",
+    "three": "^0.112.0",
     "workbox-core": "^4.3.1",
     "workbox-precaching": "^4.3.1",
     "workbox-routing": "^4.3.1",

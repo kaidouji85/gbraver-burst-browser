@@ -21,6 +21,7 @@ import type {OverlapAction} from "../../../../../../../action/overlap";
 import {toGameObjectActionObservable} from "../../../../../../../action/game-object-action/create-listener";
 import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../../../action/dom-event/resize";
+import {skyBox} from "./sky-box";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -66,6 +67,8 @@ export class ThreeDimensionLayer {
     this._render = new Subject();
 
     this.scene = new THREE.Scene();
+    this.scene.background = skyBox(param.resources);
+
     this.camera = new TDCamera({
       listener: {
         domEvent: param.listener.domEvent,
@@ -102,6 +105,7 @@ export class ThreeDimensionLayer {
 
   /** デストラクタ */
   destructor(): void {
+    this.scene.background.dispose();
     this.players.forEach(v => {
       disposeTDPlayer(v);
     });
