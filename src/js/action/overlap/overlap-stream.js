@@ -10,13 +10,6 @@ import type {DOMEvent} from "../dom-event";
 import type {OverlapAction} from "./index";
 import {filter, map, share} from "rxjs/operators";
 
-const DUMMY_ACTION = {
-  type: 'mouseDownRaycaster',
-  mouse: {
-    raycaster: new THREE.Raycaster()
-  }
-};
-
 /**
  * DOMイベントストリームを当たり判定ストリームに変換する
  *
@@ -42,9 +35,7 @@ export function toOverlapStream(origin: Observable<DOMEvent>, rendererDOM: HTMLE
       }
     }),
     filter(v => !!v),
-    // ストリームのデータ型をObservable<OverlapAction>にするために、この処理を行う
-    // 前の処理でnullはフィルタしているので、DUMMY_ACTIONが使われることはない
-    map(v => v ? v : DUMMY_ACTION),
+    map(v => (v: OverlapAction)),
     share()
   );
 }
