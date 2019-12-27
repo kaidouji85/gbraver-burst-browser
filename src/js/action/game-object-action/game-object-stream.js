@@ -5,7 +5,7 @@ import type {GameObjectAction} from "./index";
 import type {Update} from "../game-loop/update";
 import type {PreRender} from "../game-loop/pre-render";
 import type {OverlapAction} from "../overlap";
-import {map, share, tap} from "rxjs/operators";
+import {map, share} from "rxjs/operators";
 
 /**
  * ゲームオブジェクトアクションストリームを生成する
