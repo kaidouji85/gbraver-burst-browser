@@ -4,7 +4,7 @@ import type {Resources} from '../../../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {DOMEvent} from "../../../../../../../action/dom-event";
-import {toOverlapObservable} from "../../../../../../../action/overlap/dom-event-to-overlap";
+import {toOverlapStream} from "../../../../../../../action/overlap/overlap-stream";
 import type {BattleSceneAction} from "../../../../../../../action/battle-scene";
 import type {Update} from "../../../../../../../action/game-loop/update";
 import type {GameLoop} from "../../../../../../../action/game-loop/game-loop";
@@ -69,7 +69,7 @@ export class HudLayer {
       }
     });
 
-    this._overlap = toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
+    this._overlap = toOverlapStream(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
     const gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
 
     const player = param.players.find(v => v.playerId === param.playerId)

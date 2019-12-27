@@ -16,7 +16,7 @@ import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "./game-objects";
 import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./game-objects";
-import {toOverlapObservable} from "../../../../../../../action/overlap/dom-event-to-overlap";
+import {toOverlapStream} from "../../../../../../../action/overlap/overlap-stream";
 import type {OverlapAction} from "../../../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../../../action/game-object-action/game-object-stream";
 import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
@@ -76,7 +76,7 @@ export class ThreeDimensionLayer {
       }
     });
 
-    this._overlap = toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
+    this._overlap = toOverlapStream(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
     const gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
 
     this.players = [

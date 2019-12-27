@@ -8,7 +8,7 @@ import {Observable, Subject} from "rxjs";
  *
  * @return ゲームループのリスナー
  */
-export function createGameLoopListener(): Observable<GameLoop> {
+export function gameLoopStream(): Observable<GameLoop> {
   const listener: Subject<GameLoop> = new Subject();
   const gameLoop = (time: DOMHighResTimeStamp) => {
     requestAnimationFrame(gameLoop);
