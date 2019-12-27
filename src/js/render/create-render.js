@@ -7,7 +7,7 @@ export function createRender(): THREE.WebGLRenderer {
   const renderer = new THREE.WebGLRenderer();
   renderer.autoClear = false;
   renderer.setSize(window.innerWidth, window.innerHeight);
-  const pixelRatio = renderPixelRatio(window.devicePixcelRatio);
+  const pixelRatio = renderPixelRatio(window.devicePixelRatio);
   renderer.setPixelRatio(pixelRatio);
   return renderer;
 }
