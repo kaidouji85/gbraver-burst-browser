@@ -2,13 +2,11 @@
 
 import type {Resources} from '../../../resource';
 import * as THREE from 'three';
-import SkyBox from './blue-sky';
 import {City} from './city';
 import {Stage} from "../stage";
 
 /** 商店街 */
 export default class ShoppingStreet implements Stage {
-  _skyBox: THREE.Mesh;
   _city: City;
   _directionalLight1: THREE.DirectionalLight;
   _directionalLight2: THREE.DirectionalLight;
@@ -19,8 +17,6 @@ export default class ShoppingStreet implements Stage {
   constructor(resources: Resources) {
     this._city = new City(resources);
     this._city.getObject3D().position.z = -50;
-
-    this._skyBox = SkyBox(resources);
 
     this._directionalLight1 = new THREE.DirectionalLight(0xAAAAAA, 0.8);
     this._directionalLight1.position.set(1, 1, 1);
@@ -40,8 +36,6 @@ export default class ShoppingStreet implements Stage {
   /** デストラクタ */
   destructor(): void {
     this._city.destructor();
-    this._skyBox.geometry.dispose();
-    this._skyBox.material.dispose();
   }
 
   /**
@@ -52,7 +46,6 @@ export default class ShoppingStreet implements Stage {
   getThreeJsObjects(): THREE.Object3D[] {
     return [
       this._city.getObject3D(),
-      this._skyBox,
       this._directionalLight1,
       this._directionalLight2,
       this._directionalLight3,

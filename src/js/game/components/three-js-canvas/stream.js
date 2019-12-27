@@ -3,7 +3,7 @@
 import {Observable, Subject} from "rxjs";
 import type {Render} from "../../../action/game-loop/render";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
-import {createGameLoopListener} from "../../../action/game-loop/create-listener";
+import {gameLoopStream} from "../../../action/game-loop/game-loop-stream";
 import type {EndBattle} from "../../../action/game/end-battle";
 
 /** three.jsキャンバスで使用するイベントストリーム */
@@ -33,6 +33,6 @@ export class ThreeJSCanvasStream {
   constructor() {
     this.render = new Subject();
     this.endBattle = new Subject();
-    this.gameLoop = createGameLoopListener();
+    this.gameLoop = gameLoopStream();
   }
 }

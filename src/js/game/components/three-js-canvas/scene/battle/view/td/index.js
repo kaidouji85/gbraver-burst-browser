@@ -16,11 +16,12 @@ import {enemyTDObject} from "./player/enemy";
 import type {ArmDozerSprite} from "../../../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "./game-objects";
 import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./game-objects";
-import {toOverlapObservable} from "../../../../../../../action/overlap/dom-event-to-overlap";
+import {toOverlapStream} from "../../../../../../../action/overlap/overlap-stream";
 import type {OverlapAction} from "../../../../../../../action/overlap";
-import {toGameObjectActionObservable} from "../../../../../../../action/game-object-action/create-listener";
+import {gameObjectStream} from "../../../../../../../action/game-object-action/game-object-stream";
 import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../../../action/dom-event/resize";
+import {skyBox} from "./sky-box";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -66,6 +67,8 @@ export class ThreeDimensionLayer {
     this._render = new Subject();
 
     this.scene = new THREE.Scene();
+    this.scene.background = skyBox(param.resources);
+
     this.camera = new TDCamera({
       listener: {
         domEvent: param.listener.domEvent,
@@ -73,8 +76,8 @@ export class ThreeDimensionLayer {
       }
     });
 
-    this._overlap = toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
-    const gameObjectAction = toGameObjectActionObservable(this._update, this._preRender, this._overlap);
+    this._overlap = toOverlapStream(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
+    const gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
 
     this.players = [
       playerTDObjects(param.resources, player, gameObjectAction),
@@ -102,6 +105,7 @@ export class ThreeDimensionLayer {
 
   /** デストラクタ */
   destructor(): void {
+    this.scene.background.dispose();
     this.players.forEach(v => {
       disposeTDPlayer(v);
     });
