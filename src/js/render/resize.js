@@ -13,5 +13,6 @@ import * as THREE from 'three';
  */
 export function onWebGLRendererResize(renderer: THREE.WebGLRenderer, width: number, height: number, devicePixelRatio: number): void {
   renderer.setSize(width, height);
-  renderer.setPixelRatio(devicePixelRatio);
+  const pixelRatio = Math.min(window.devicePixelRatio, 2);
+  renderer.setPixelRatio(pixelRatio);
 }
