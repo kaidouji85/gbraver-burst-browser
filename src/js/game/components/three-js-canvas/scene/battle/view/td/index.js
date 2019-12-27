@@ -18,7 +18,7 @@ import type {TDGameObjects} from "./game-objects";
 import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./game-objects";
 import {toOverlapObservable} from "../../../../../../../action/overlap/dom-event-to-overlap";
 import type {OverlapAction} from "../../../../../../../action/overlap";
-import {toGameObjectActionObservable} from "../../../../../../../action/game-object-action/create-listener";
+import {gameObjectStream} from "../../../../../../../action/game-object-action/game-object-stream";
 import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../../../action/dom-event/resize";
 import {skyBox} from "./sky-box";
@@ -77,7 +77,7 @@ export class ThreeDimensionLayer {
     });
 
     this._overlap = toOverlapObservable(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
-    const gameObjectAction = toGameObjectActionObservable(this._update, this._preRender, this._overlap);
+    const gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
 
     this.players = [
       playerTDObjects(param.resources, player, gameObjectAction),
