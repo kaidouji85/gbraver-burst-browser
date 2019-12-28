@@ -16,6 +16,13 @@ export interface BurstIndicatorView {
   engage(model: BurstIndicatorModel): void;
 
   /**
+   * カメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
+  lookAt(camera: THREE.Camera): void;
+
+  /**
    * シーンに追加するオブジェクトを取得する
    *
    * @return シーンに追加するオブジェクト

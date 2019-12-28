@@ -44,7 +44,17 @@ export class PlayerBurstIndicatorView implements BurstIndicatorView {
    * @param model モデル
    */
   engage(model: BurstIndicatorModel): void {
+    this._setOpacity(model);
     this._setPosition();
+  }
+
+  /**
+   * カメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
+  lookAt(camera: THREE.Camera): void {
+    this._mesh.getObject3D().quaternion.copy(camera.quaternion);
   }
 
   /**
@@ -59,7 +69,16 @@ export class PlayerBurstIndicatorView implements BurstIndicatorView {
   /** 座標を設定する */
   _setPosition(): void {
     this._mesh.getObject3D().position.x = ARMDOZER_EFFECT_STANDARD_X;
-    this._mesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y;
-    this._mesh.getObject3D().position.z = ARMDOZER_EFFECT_STANDARD_Z;
+    this._mesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y + 10;
+    this._mesh.getObject3D().position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
+  }
+
+  /**
+   * 透明度を設定する
+   *
+   * @param model モデル
+   */
+  _setOpacity(model: BurstIndicatorModel): void {
+    this._mesh.setOpacity(model.opacity);
   }
 }
