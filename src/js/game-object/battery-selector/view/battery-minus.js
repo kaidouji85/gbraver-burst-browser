@@ -36,6 +36,7 @@ export class BatteryMinus {
       : new Image();
     this._activeButton = new SimpleImageMesh({
       canvasSize: MESH_SIZE,
+      meshSize: MESH_SIZE,
       image: active
     });
 
@@ -46,6 +47,7 @@ export class BatteryMinus {
       : new Image();
     this._buttonDisabled = new SimpleImageMesh({
       canvasSize: MESH_SIZE,
+      meshSize: MESH_SIZE,
       image: buttonDisabled
     });
 

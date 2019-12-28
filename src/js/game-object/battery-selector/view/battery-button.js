@@ -51,6 +51,7 @@ export class BatteryButton {
       : new Image();
     this._button = new SimpleImageMesh({
       canvasSize: MESH_SIZE,
+      meshSize: MESH_SIZE,
       image: button
     });
     this._button.getObject3D().position.set(0, 0, -1);
@@ -73,6 +74,7 @@ export class BatteryButton {
       : new Image();
     this._attackLabel = new SimpleImageMesh({
       canvasSize: MESH_SIZE,
+      meshSize: MESH_SIZE,
       image: attackLabel
     });
     this._attackLabel.getObject3D().position.set(24, -96, 0);
@@ -85,6 +87,7 @@ export class BatteryButton {
       : new Image();
     this._defenseLabel = new SimpleImageMesh({
       canvasSize: MESH_SIZE,
+      meshSize: MESH_SIZE,
       image: defenseLabel
     });
     this._defenseLabel.getObject3D().position.set(24, -96, 0);

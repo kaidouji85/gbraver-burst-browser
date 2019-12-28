@@ -33,16 +33,19 @@ export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, Burst>): 
 function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>): Animate {
   const playerX = param.burstPlayerTD.sprite.getObject3D().position.x;
   return all(
-    dolly(param.tdCamera, playerX, 500),
+    dolly(param.tdCamera, playerX, 500)
+      .chain(delay(500))
+      .chain(param.burstPlayerTD.burstIndicator.popUp())
+      .chain(delay(300))
+      .chain(all(
+        param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
+        param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+      )),
+    param.burstPlayerTD.sprite.turnStart(),
     param.tdObjects.turnIndicator.invisible(),
-  ).chain(
-    delay(800)
+  ).chain(delay(800)
   ).chain(all(
-    param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
-    param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
-  )).chain(
-    delay(800)
-  ).chain(
-    toInitial(param.tdCamera, 500)
-  )
+    toInitial(param.tdCamera, 500),
+    param.burstPlayerTD.sprite.turnStartToStand()
+  ));
 }

@@ -14,6 +14,7 @@ import type {TDPlayer} from "./index";
 import {playerSpark} from "../../../../../../../../game-object/hitmark/spark";
 import {playerTurnStart} from "../../../../../../../../game-object/turn-start";
 import {playerGauge} from "../../../../../../../../game-object/gauge";
+import {playerBurstIndicator} from "../../../../../../../../game-object/burst-indicator";
 
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
@@ -45,7 +46,8 @@ export function playerTDObjects(resources: Resources, state: PlayerState, listen
       resources: resources,
       listener: listener
     }),
-    turnStart: playerTurnStart(resources, listener)
+    turnStart: playerTurnStart(resources, listener),
+    burstIndicator: playerBurstIndicator(resources, listener)
   }
 }
 

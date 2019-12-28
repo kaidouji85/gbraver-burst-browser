@@ -40,6 +40,7 @@ export class BatteryMeter {
       : new Image();
     this._disk = new SimpleImageMesh({
       canvasSize: DISK_SIZE,
+      meshSize: DISK_SIZE,
       image: disk
     });
     this._group.add(this._disk.getObject3D());
