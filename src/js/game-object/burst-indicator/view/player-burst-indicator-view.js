@@ -53,7 +53,7 @@ export class PlayerBurstIndicatorView implements BurstIndicatorView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._mesh;
+    return this._mesh.getObject3D();
   }
 
   /** 座標を設定する */
