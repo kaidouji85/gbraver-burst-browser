@@ -5,6 +5,9 @@ import type {BurstIndicatorModel} from "../model/burst-indicator-model";
 
 /** バーストインジケータビュー */
 export interface BurstIndicatorView {
+  /** デストラクタ相当の処理 */
+  destructor(): void;
+
   /**
    * モデルをビューに反映させる
    *
