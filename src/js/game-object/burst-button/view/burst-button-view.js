@@ -45,6 +45,7 @@ export class BurstButtonView {
       : new Image();
     this._burstButton = new SimpleImageMesh({
       canvasSize: CANVAS_SIZE,
+      meshSize: CANVAS_SIZE,
       image: burstButton
     });
 
@@ -55,6 +56,7 @@ export class BurstButtonView {
       : new Image();
     this._buttonDisabled = new SimpleImageMesh({
       canvasSize: CANVAS_SIZE,
+      meshSize: CANVAS_SIZE,
       image: buttonDisabled
     });
 
