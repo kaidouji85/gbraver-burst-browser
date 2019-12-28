@@ -8,6 +8,8 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {createInitialValue} from "./model/initial-value";
+import {Animate} from "../../animation/animate";
+import {popUp} from "./animation/pop-up";
 
 /**
  * バーストインジケータ
@@ -32,6 +34,15 @@ export class BurstIndicator {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._subscription.unsubscribe();
+  }
+
+  /**
+   * ポップアップ
+   *
+   * @return アニメーション
+   */
+  popUp(): Animate {
+    return popUp(this._model);
   }
 
   /**
