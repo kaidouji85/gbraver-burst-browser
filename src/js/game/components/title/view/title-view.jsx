@@ -18,10 +18,9 @@ type Props = {
  */
 export function titleView(props: Props) {
   return (
-    <div className="title" onClick={props.onTouch} onTouchStart={props.onTouch} style={{
-      display: props.state.isVisible ? 'flex' : 'none'
-    }}>
+    <div className={props.state.isVisible ? 'title' : 'title--invisible'} onClick={props.onTouch} onTouchStart={props.onTouch} >
       <img src={`${resourceBasePath()}/logo.png`} />
+      <p className="title_touch-start">TOUCH START</p>
     </div>
   );
 }
