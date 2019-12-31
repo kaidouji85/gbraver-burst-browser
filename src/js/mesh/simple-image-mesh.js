@@ -4,8 +4,10 @@ import * as THREE from 'three';
 import {CanvasMesh} from "./canvas-mesh";
 import {drawImageInCenter} from "../canvas/draw/image-drawer";
 
+/** コンストラクタのパラメータ */
 type Param = {
   canvasSize: number,
+  meshSize: number,
   image: Image,
 };
 
@@ -17,8 +19,8 @@ export class SimpleImageMesh {
     this._mesh = new CanvasMesh({
       canvasWidth: param.canvasSize,
       canvasHeight: param.canvasSize,
-      meshWidth: param.canvasSize,
-      meshHeight: param.canvasSize,
+      meshWidth: param.meshSize,
+      meshHeight: param.meshSize,
     });
     this._mesh.draw(context => {
       const dx = context.canvas.width / 2;

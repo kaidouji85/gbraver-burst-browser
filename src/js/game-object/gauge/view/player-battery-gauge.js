@@ -74,6 +74,7 @@ class BatteryGaugeUnit {
       : new Image();
     this._gauge = new SimpleImageMesh({
       image: gaugeImage,
+      meshSize: 128,
       canvasSize: 128
     });
     this._gauge.getObject3D().position.z = 1;
@@ -85,6 +86,7 @@ class BatteryGaugeUnit {
       : new Image();
     this._back = new SimpleImageMesh({
       image: backImage,
+      meshSize: 128,
       canvasSize: 128
     });
     this._back.getObject3D().position.z = 0;

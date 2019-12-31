@@ -39,6 +39,7 @@ export class PlayerGaugeView implements GaugeView {
       : new Image();
     this._base = new SimpleImageMesh({
       canvasSize: BASE_CANVAS_SIZE,
+      meshSize: BASE_CANVAS_SIZE,
       image: gaugeBase
     });
     this._group.add(this._base.getObject3D());

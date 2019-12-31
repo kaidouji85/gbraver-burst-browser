@@ -9,6 +9,7 @@ import * as THREE from "three";
 import type {ArmDozerSprite} from "../../../../../../../../game-object/armdozer/armdozer-sprite";
 import {TurnStart} from "../../../../../../../../game-object/turn-start/turn-start";
 import {Gauge} from "../../../../../../../../game-object/gauge/gauge";
+import {BurstIndicator} from "../../../../../../../../game-object/burst-indicator/burst-indicator";
 
 /**
  * 3Dレイヤーのプレイヤー関係オブジェクト
@@ -26,6 +27,7 @@ export type TDPlayer<T: ArmDozerSprite> = {
   recoverBattery: RecoverBattery,
   damageIndicator: DamageIndicator,
   turnStart: TurnStart,
+  burstIndicator: BurstIndicator,
 };
 
 /**
@@ -42,6 +44,7 @@ export function appendTDPlayer<T: ArmDozerSprite>(scene: THREE.Scene, player: TD
   scene.add(player.recoverBattery.getObject3D());
   scene.add(player.damageIndicator.getObject3D());
   scene.add(player.turnStart.getObject3D());
+  scene.add(player.burstIndicator.getObject3D());
 }
 
 /**
@@ -58,4 +61,5 @@ export function disposeTDPlayer<T: ArmDozerSprite>(target: TDPlayer<T>): void {
   target.hitMark.spark.destructor();
   target.recoverBattery.destructor();
   target.turnStart.destructor();
+  target.burstIndicator.destructor();
 }

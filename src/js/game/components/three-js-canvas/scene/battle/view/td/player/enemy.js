@@ -15,6 +15,7 @@ import type {TDPlayer} from "./index";
 import {enemySpark} from "../../../../../../../../game-object/hitmark/spark";
 import {enemyTurnStart} from "../../../../../../../../game-object/turn-start";
 import {enemyGauge} from "../../../../../../../../game-object/gauge";
+import {enemyBurstIndicator} from "../../../../../../../../game-object/burst-indicator";
 
 /**
  * 敵側の3Dプレイヤーオブジェクト
@@ -46,7 +47,8 @@ export function enemyTDObject(resources: Resources, state: PlayerState, listener
       resources: resources,
       listener: listener
     }),
-    turnStart: enemyTurnStart(resources, listener)
+    turnStart: enemyTurnStart(resources, listener),
+    burstIndicator: enemyBurstIndicator(resources, listener)
   }
 }
 
