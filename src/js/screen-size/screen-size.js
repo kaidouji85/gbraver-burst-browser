@@ -5,7 +5,7 @@
  *
  * @return 画面幅
  */
-export function getWidth(): number {
+export function getScreenWidth(): number {
   if (document.documentElement) {
     // iOS Chromeではリサイズイベント発火後に、window.innerWidthに正しい値が反映されないが、
     // document.documentElement.clientWidthは正しく値が取得できる
@@ -22,7 +22,7 @@ export function getWidth(): number {
  *
  * @return 画面高
  */
-export function getHeight(): number {
+export function getScreenHeight(): number {
   if (document.documentElement) {
     // iOS Chromeではリサイズイベント発火後に、window.innerHeightに正しい値が反映されないが、
     // document.documentElement.clientHeightは正しく値が取得できる
