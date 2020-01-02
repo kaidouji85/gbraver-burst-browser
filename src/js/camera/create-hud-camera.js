@@ -1,11 +1,11 @@
 // @flow
 import * as THREE from 'three';
-import {getScreenHeight, getScreenWidth} from "../screen-size/screen-size";
+import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
 
 /** HUDレイヤーのカメラを生成して返す */
 export function createHUDCamera(): THREE {
-  const width = getScreenWidth();
-  const height = getScreenHeight();
+  const width = getViewPortWidth();
+  const height = getViewPortHeight();
   return new THREE.OrthographicCamera(
     -width / 2,
     width / 2,

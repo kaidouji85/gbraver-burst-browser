@@ -4,7 +4,7 @@ import type {SafeAreaInset} from "../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../safe-area/safe-area-inset";
 import {fromEvent, Observable} from "rxjs";
 import {map} from "rxjs/operators";
-import {getScreenHeight, getScreenWidth} from "../../screen-size/screen-size";
+import {getViewPortHeight, getViewPortWidth} from "../../view-port/view-port-size";
 
 /** リサイズ */
 export type Resize = {
@@ -25,8 +25,8 @@ export function createResizeStream(): Observable<Resize> {
       setTimeout(() => {
         subscriber.next({
           type: 'resize',
-          width: getScreenWidth(),
-          height: getScreenHeight(),
+          width: getViewPortWidth(),
+          height: getViewPortHeight(),
           safeAreaInset: createSafeAreaInset(),
         });
       }, 50);
