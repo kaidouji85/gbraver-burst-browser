@@ -20,13 +20,16 @@ export type Resize = {
  * @return ストリーム
  */
 export function createResizeStream(): Observable<Resize> {
-  return fromEvent(window, 'resize').pipe(
-    map(() => ({
-      type: 'resize',
-      width: getScreenWidth(),
-      height: getScreenHeight(),
-      safeAreaInset: createSafeAreaInset(),
-    }))
-  );
+  return new Observable(subscriber => {
+    window.addEventListener('resize', e => {
+      setTimeout(() => {
+        subscriber.next({
+          type: 'resize',
+          width: getScreenWidth(),
+          height: getScreenHeight(),
+          safeAreaInset: createSafeAreaInset(),
+        });
+      }, 50);
+    })
+  });
 }
-
