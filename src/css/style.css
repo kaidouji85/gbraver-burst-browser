@@ -99,9 +99,10 @@
     color: rgb(240, 240, 240);
     font-size: 2em;
     margin-top: 1em;
-    animation: touchStartFlash 3s ease 0s infinite normal;
+    animation: touchStartFlash 1.5s ease 0s infinite alternate;
 }
 
 @keyframes touchStartFlash {
-    50% {opacity: 0;}
+    0% {opacity: 1;}
+    100% {opacity: 0;}
 }
