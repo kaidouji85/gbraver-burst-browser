@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
   <title>gbraver-burst</title>
-  <meta charset=utf-8>
   <meta content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" name="viewport">
   <link rel="manifest" href="<%= BUILD_RESOURCE_PATH%>/manifest.json" />
   <link rel="apple-touch-icon" href="<%= BUILD_RESOURCE_PATH%>/app-icon.png" />
@@ -42,13 +42,13 @@
   </style>
 </head>
 <body>
-  <div id="first-view" class="first-view">
-    INITIALIZING...
-  </div>
-  <div id="service-worker-update-scene"></div>
-  <div id="play-in-landscape"></div>
-  <div id="loading-scene"></div>
-  <div id="title-scene"></div>
-  <script src="<%= BUILD_INDEX_JS_PATH %>" defer></script>
+<div id="first-view" class="first-view">
+  INITIALIZING...
+</div>
+<div id="service-worker-update-scene"></div>
+<div id="play-in-landscape"></div>
+<div id="loading-scene"></div>
+<div id="title-scene"></div>
+<script src="<%= BUILD_INDEX_JS_PATH %>" defer></script>
 </body>
 </html>
