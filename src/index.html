@@ -44,25 +44,43 @@
       display: none;
     }
 
-    .first-view__caption {
+    .first-view__initialize-is-slow {
       width: 100vw;
       height: 100vh;
       display: flex;
       flex-direction: column;
+      padding: 1em;
+      box-sizing: border-box;
     }
 
-    .first-view__caption--invisible {
+    .first-view__initialize-is-slow--invisible {
       display: none;
+    }
+
+    .first-view__initialize-is-slow__title {
+      font-size: 2em;
+      margin-bottom: 1em;
     }
   </style>
 </head>
 <body>
 <div id="first-view" class="first-view">
-  <div id="first-view-initializing" class="first-view__initializing">
+  <div id="first-view__initializing" class="first-view__initializing">
     INITIALIZING...
   </div>
-  <div id="first-view-caption" class="first-view__caption--invisible">
-    TODO 初期化に時間がかかる場合にやってほしいことを書く
+  <div id="first-view__initialize-is-slow" class="first-view__initialize-is-slow--invisible">
+    <div class="first-view__initialize-is-slow__title">
+      初期化が終わりません
+    </div>
+    <div class="first-view__initialize-is-slow__detail">
+      以下手順で症状が改善する可能性があります。
+
+      <ol>
+        <li>Gブレイバー バーストを表示している全てのタブを閉じる</li>
+        <li>インターネットに接続する</li>
+        <li>再度、ブラウザでGブレイバー バーストを開く</li>
+      </ol>
+    </div>
   </div>
 </div>
 <div id="service-worker-update-scene"></div>
@@ -72,12 +90,12 @@
 <script>
   window.addEventListener('load', () => {
     setTimeout(() => {
-      const firstViewCaption = document.getElementById("first-view-caption") || document.createElement('div');
-      firstViewCaption.className = 'first-view__caption';
+      const initializeIsSlow = document.getElementById("first-view__initialize-is-slow") || document.createElement('div');
+      initializeIsSlow.className = 'first-view__initialize-is-slow';
 
-      const firstViewInitializing = document.getElementById("first-view-initializing") || document.createElement('div');
+      const firstViewInitializing = document.getElementById("first-view__initializing") || document.createElement('div');
       firstViewInitializing.className = 'first-view__initializing--invisible';
-    }, 30000);
+    }, 15000);
   });
 </script>
 <script src="<%= BUILD_INDEX_JS_PATH %>" defer></script>
