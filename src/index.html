@@ -27,28 +27,59 @@
       background-color: rgb(23, 23, 23);
     }
 
-    .first-view {
+    .first-view--invisible {
+      display: none;
+    }
+
+    .first-view__initializing {
       width: 100vw;
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
-    .first-view--invisible {
+    .first-view__initializing--invisible {
+      display: none;
+    }
+
+    .first-view__caption {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .first-view__caption--invisible {
       display: none;
     }
   </style>
 </head>
 <body>
 <div id="first-view" class="first-view">
-  INITIALIZING...
+  <div id="first-view-initializing" class="first-view__initializing">
+    INITIALIZING...
+  </div>
+  <div id="first-view-caption" class="first-view__caption--invisible">
+    TODO 初期化に時間がかかる場合にやってほしいことを書く
+  </div>
 </div>
 <div id="service-worker-update-scene"></div>
 <div id="play-in-landscape"></div>
 <div id="loading-scene"></div>
 <div id="title-scene"></div>
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const firstViewCaption = document.getElementById("first-view-caption") || document.createElement('div');
+      firstViewCaption.className = 'first-view__caption';
+
+      const firstViewInitializing = document.getElementById("first-view-initializing") || document.createElement('div');
+      firstViewInitializing.className = 'first-view__initializing--invisible';
+    }, 30000);
+  });
+</script>
 <script src="<%= BUILD_INDEX_JS_PATH %>" defer></script>
 </body>
 </html>
