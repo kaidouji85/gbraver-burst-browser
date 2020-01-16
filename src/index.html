@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
   <title>gbraver-burst</title>
-  <meta charset=utf-8>
   <meta content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" name="viewport">
   <link rel="manifest" href="<%= BUILD_RESOURCE_PATH%>/manifest.json" />
   <link rel="apple-touch-icon" href="<%= BUILD_RESOURCE_PATH%>/app-icon.png" />
@@ -27,28 +27,77 @@
       background-color: rgb(23, 23, 23);
     }
 
-    .first-view {
+    .first-view--invisible {
+      display: none;
+    }
+
+    .first-view__initializing {
       width: 100vw;
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
     }
 
-    .first-view--invisible {
+    .first-view__initializing--invisible {
       display: none;
+    }
+
+    .first-view__initialize-is-slow {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 1em;
+      box-sizing: border-box;
+    }
+
+    .first-view__initialize-is-slow--invisible {
+      display: none;
+    }
+
+    .first-view__initialize-is-slow__title {
+      font-size: 2em;
+      margin-bottom: 1em;
     }
   </style>
 </head>
 <body>
-  <div id="first-view" class="first-view">
+<div id="first-view" class="first-view">
+  <div id="first-view__initializing" class="first-view__initializing">
     INITIALIZING...
   </div>
-  <div id="service-worker-update-scene"></div>
-  <div id="play-in-landscape"></div>
-  <div id="loading-scene"></div>
-  <div id="title-scene"></div>
-  <script src="<%= BUILD_INDEX_JS_PATH %>" defer></script>
+  <div id="first-view__initialize-is-slow" class="first-view__initialize-is-slow--invisible">
+    <div class="first-view__initialize-is-slow__title">
+      初期化が終わりません
+    </div>
+    <div class="first-view__initialize-is-slow__detail">
+      以下手順で症状が改善する可能性があります。
+
+      <ol>
+        <li>Gブレイバー バーストを表示している全てのタブを閉じる</li>
+        <li>インターネットに接続する</li>
+        <li>再度、ブラウザでGブレイバー バーストを開く</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div id="service-worker-update-scene"></div>
+<div id="play-in-landscape"></div>
+<div id="loading-scene"></div>
+<div id="title-scene"></div>
+<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const initializeIsSlow = document.getElementById("first-view__initialize-is-slow") || document.createElement('div');
+      initializeIsSlow.className = 'first-view__initialize-is-slow';
+
+      const firstViewInitializing = document.getElementById("first-view__initializing") || document.createElement('div');
+      firstViewInitializing.className = 'first-view__initializing--invisible';
+    }, 15000);
+  });
+</script>
+<script src="<%= BUILD_INDEX_JS_PATH %>" defer></script>
 </body>
 </html>
