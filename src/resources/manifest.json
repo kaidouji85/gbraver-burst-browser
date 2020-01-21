@@ -1,7 +1,8 @@
 {
   "lang": "ja",
-  "name": "gbraver burst",
-  "short_name": "gbraver",
+  "name": "機動倶楽部 Gブレイバー バースト",
+  "short_name": "GブレB",
+  "description": "巨大ロボットで闘うターンベースRPGです。",
   "icons": [{
     "src": "./app-icon.png",
     "sizes": "192x192",
