@@ -1,7 +1,7 @@
 {
   "name": "gbraver-burst-browser",
   "version": "1.0.0",
-  "description": "",
+  "description": "frontend module for gbraver-burst.",
   "engines": {
     "node": "^12.14.0"
   },
