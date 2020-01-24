@@ -30,8 +30,6 @@
     "gbraver-burst-core": "0.5.4",
     "puid": "^1.0.7",
     "ramda": "^0.26.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
     "rxjs": "^6.5.4",
     "stats.js": "^0.17.0",
     "three": "^0.112.1",
