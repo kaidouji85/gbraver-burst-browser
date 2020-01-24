@@ -16,23 +16,22 @@ type Params = {
 
 /** タイトルビュー */
 export class TitleView {
-  _rootId: string;
+  _root: HTMLElement;
 
   constructor(params: Params) {
-    this._rootId = domUuid();
-
+    const rootId = domUuid();
     params.dom.innerHTML = `
-      <div class="title" id="${this._rootId}">
+      <div class="title" id="${rootId}">
         <img src="${resourceBasePath()}/logo.png"/>
         <p class="title_touch-start">TOUCH START</p>
       </div>
     `;
 
-    const root = document.getElementById(this._rootId) || document.createElement('div');
-    root.addEventListener('click', () => {
+    this._root = document.getElementById(rootId) || document.createElement('div');
+    this._root.addEventListener('click', () => {
       params.onTouch();
     });
-    root.addEventListener('touchstart', () => {
+    this._root.addEventListener('touchstart', () => {
       params.onTouch();
     });
 
@@ -45,7 +44,8 @@ export class TitleView {
    * @param state ステート
    */
   engage(state: TitleState): void {
-    const root = document.getElementById(this._rootId) || document.createElement('div');
-    root.className = state.isVisible ? 'title' : 'title--invisible';
+    this._root.className = state.isVisible
+      ? 'title'
+      : 'title--invisible';
   }
 }
