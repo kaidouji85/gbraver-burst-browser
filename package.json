@@ -1,7 +1,7 @@
 {
   "name": "gbraver-burst-browser",
   "version": "1.0.0",
-  "description": "",
+  "description": "frontend module for gbraver-burst.",
   "engines": {
     "node": "^12.14.0"
   },
@@ -30,11 +30,10 @@
     "gbraver-burst-core": "0.5.4",
     "puid": "^1.0.7",
     "ramda": "^0.26.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
     "rxjs": "^6.5.4",
     "stats.js": "^0.17.0",
     "three": "^0.112.1",
+    "uuid": "^3.4.0",
     "workbox-core": "^4.3.1",
     "workbox-precaching": "^4.3.1",
     "workbox-routing": "^4.3.1",

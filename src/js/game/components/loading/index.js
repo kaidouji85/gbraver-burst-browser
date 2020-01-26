@@ -1,23 +1,25 @@
 // @flow
 
-import {render} from 'react-dom';
 import type {LoadingState} from "./state/loading-state";
 import {createInitialState} from "./state/initial-value";
 import {progress} from "./state/progress";
 import {complete} from "./state/complete";
 import type {LoadingAction, LoadingComplete, LoadingProgress, LoadingStart} from "../../../action/loading/loading";
 import {Observable, Subscription} from "rxjs";
-import {loadingView} from "./view/loading-view";
+import {LoadingView} from "./view/loading-view";
 
 /** ローディング */
 export class Loading {
-  _dom: HTMLElement;
   _state: LoadingState;
+  _view: LoadingView;
   _subscription: Subscription;
 
   constructor(dom: HTMLElement, loading: Observable<LoadingAction>) {
-    this._dom = dom;
     this._state = createInitialState();
+    this._view = new LoadingView({
+      dom: dom,
+      initialState: this._state
+    });
     this._subscription = loading.subscribe(action => {
       if (action.type === 'LoadingStart') {
         this._onLoadingStart(action);
@@ -27,21 +29,11 @@ export class Loading {
         this._onLoadingComplete(action);
       }
     });
-
-    this._engage();
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._subscription.unsubscribe();
-  }
-
-  /** ステートをビューに反映させる */
-  _engage(): void {
-    const component = loadingView({
-      state: this._state
-    });
-    render(component, this._dom);
   }
 
   /**
@@ -51,7 +43,7 @@ export class Loading {
    */
   _onLoadingStart(action: LoadingStart): void {
     this._state = {...this._state, isVisible: true};
-    this._engage();
+    this._view.engage(this._state);
   }
 
   /**
@@ -61,7 +53,7 @@ export class Loading {
    */
   _onLoadingProgress(action: LoadingProgress): void {
     this._state = progress(this._state, action.completedRate);
-    this._engage();
+    this._view.engage(this._state);
   }
 
   /**
@@ -71,6 +63,6 @@ export class Loading {
    */
   _onLoadingComplete(action: LoadingComplete): void {
     this._state = complete(this._state);
-    this._engage();
+    this._view.engage(this._state);
   }
 }

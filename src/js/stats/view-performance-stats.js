@@ -8,8 +8,8 @@ import Stats from 'stats.js';
 export function viewPerformanceStats(dom: HTMLElement): void {
   const stats = new Stats();
   stats.dom.style.position = "absolute";
-  stats.dom.style.top = "1em";
-  stats.dom.style.left = "1em";
+  stats.dom.style.top = "env(safe-area-inset-top)";
+  stats.dom.style.left = "env(safe-area-inset-left)";
   dom.appendChild(stats.dom);
 
   const update = time => {

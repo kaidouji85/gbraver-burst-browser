@@ -1,8 +1,22 @@
 // @flow
 
+/**
+ * セーフエリア関連モジュール
+ * 本モジュールは以下のCSSカスタムプロパティに依存している
+ *　
+ * --safe-area-top
+ * --safe-area-bottom
+ * --safe-area-right
+ * --safe-area-left
+ */
+
+/** CSSカスタムプロパティ セーフエリアトップ */
 export const SAFE_AREA_TOP = '--safe-area-top';
+/** CSSカスタムプロパティ セーフエリアボトム */
 export const SAFE_AREA_BOTTOM = '--safe-area-bottom';
+/** CSSカスタムプロパティ セーフエリアライト */
 export const SAFE_AREA_RIGHT = '--safe-area-right';
+/** CSSカスタムプロパティ セーフエリアレフト */
 export const SAFE_AREA_LEFT = '--safe-area-left';
 
 /** セーフエリアインセット */
