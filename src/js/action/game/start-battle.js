@@ -3,6 +3,7 @@
 import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 
+// TODO 削除する
 /** 戦闘開始 */
 export type StartBattle = {
   type: 'StartBattle',

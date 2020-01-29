@@ -6,15 +6,11 @@ import type {LoadingAction} from "../../action/loading/loading";
 import {ServiceWorkerUpdate} from "./service-worker-update";
 import type {ServiceWorkerAction} from "../../action/service-worker/service-worker";
 import {Title} from "./title";
-import {ThreeJSCanvas} from "../td-scenes";
-import type {EndBattle} from "../../action/game/end-battle";
 import type {EndTitle} from "../../action/game/end-title";
-import type {StartBattle} from "../../action/game/start-battle";
 import {PlayInLandscape} from "./play-in-landscape";
 
 /** イベント通知 */
 type Notifier = {
-  endBattle: Observable<EndBattle>,
   endTitle: Observable<EndTitle>
 };
 
@@ -23,7 +19,6 @@ type Param = {
   listener: {
     loading: Observable<LoadingAction>,
     serviceWorker: Observable<ServiceWorkerAction>,
-    startBattle: Observable<StartBattle>,
   }
 };
 
@@ -33,7 +28,6 @@ export class DOMScenes {
   _serviceWorkerUpdate: ServiceWorkerUpdate;
   _playInLandscape: PlayInLandscape;
   _title: Title;
-  _threeJSCanvas: ThreeJSCanvas;  // TODO 独立させる
 
   constructor(param: Param) {
     const loadingDOM: HTMLElement = document.querySelector('#loading-scene') || document.createElement('div');
@@ -47,18 +41,12 @@ export class DOMScenes {
 
     const playInLandscapeDOM: HTMLElement = document.querySelector("#play-in-landscape") || document.createElement('div');
     this._playInLandscape = new PlayInLandscape(playInLandscapeDOM);
-
-    const body: HTMLElement = document.body
-      ? document.body
-      : document.createElement('body');
-    this._threeJSCanvas = new ThreeJSCanvas(body, param.listener.startBattle);
   }
 
   /** デストラクタ相当の処理 */
   destructor() {
     this._loading.destructor();
     this._serviceWorkerUpdate.destructor();
-    this._threeJSCanvas.destructor();
   }
 
   /**
@@ -68,7 +56,6 @@ export class DOMScenes {
    */
   notifier(): Notifier {
     return {
-      endBattle: this._threeJSCanvas.notifier().endBattle,
       endTitle: this._title.notifier().endTitle,
     };
   }

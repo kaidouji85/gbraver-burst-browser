@@ -9,20 +9,21 @@ import {ThreeJSCanvasStream} from "./stream";
 import {Observable, Subscription} from "rxjs";
 import type {EndBattle} from "../../action/game/end-battle";
 import type {StartBattle} from "../../action/game/start-battle";
+import type {Resources} from "../../resource";
+import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 
 /** イベント通知 */
 type Notifier = {
   endBattle: Observable<EndBattle>
 };
 
-/** three.jsキャンバス全体を管理する */
-export class ThreeJSCanvas {
+/** three.js系シーンを集めたもの */
+export class TDScenes {
   _stream: ThreeJSCanvasStream;
   _renderer: Renderer;
   _sceneCache: ?BoundSceneCache;
-  _subscription: Subscription;
 
-  constructor(parentDOM: HTMLElement, startBattle: Observable<StartBattle>) {
+  constructor(parentDOM: HTMLElement) {
     this._stream = new ThreeJSCanvasStream();
 
     const threeJsRender = createRender();
@@ -35,16 +36,11 @@ export class ThreeJSCanvas {
     });
 
     this._sceneCache = null;
-
-    this._subscription = startBattle.subscribe(action => {
-      this._onStartBattle(action);
-    });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._sceneCache && this._sceneCache.destructor();
-    this._subscription.unsubscribe();
   }
 
   /**
@@ -59,13 +55,13 @@ export class ThreeJSCanvas {
   }
 
   /**
-   * 戦闘開始時の処理
+   * 戦闘開始する
    *
    * @param action アクション
    */
-  _onStartBattle(action: StartBattle): void {
+  startBattle(resources: Resources, room: BattleRoom, initialState: InitialState): void {
     this._sceneCache && this._sceneCache.destructor();
-    this._sceneCache = bindBattleScene(action.resources, this._renderer, this._stream, action.room, action.initialState);
+    this._sceneCache = bindBattleScene(resources, this._renderer, this._stream, room, initialState);
     // デバッグ用にレンダラ情報をコンソールに出力
     if (isDevelopment()) {
       console.log(this._renderer.info());
