@@ -10,7 +10,7 @@ import {invisibleFirstView} from "./first-view/first-view-visible";
 async function main(): Promise<void> {
   try {
     const game = new Game();
-    await game.start();
+    await game.initialize();
     invisibleFirstView();
   } catch(e) {
     throw e;

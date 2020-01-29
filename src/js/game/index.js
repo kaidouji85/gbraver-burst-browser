@@ -1,10 +1,10 @@
 // @flow
 
-import {GameStream} from "./stream";
+import * as THREE from 'three';
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {loadAllResource} from "../resource";
-import {Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
@@ -15,24 +15,30 @@ import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 import type {EndBattle} from "../action/game/end-battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
+import type {ServiceWorkerAction} from "../action/service-worker/service-worker";
+import type {LoadingAction} from "../action/loading/loading";
+import {createLoadingActionListener} from "../action/loading/create-listener";
 
 /** ゲーム全体の管理を行う */
 export class Game {
-  _stream: GameStream;
+  _serviceWorkerStream: Subject<ServiceWorkerAction>;
+  _loading: Observable<LoadingAction>;
+  _vh: CssVH;
   _domScenes: DOMScenes;
   _tdScenes: TDScenes;
   _resources: ?Resources;
   _subscription: Subscription[];
 
   constructor() {
-    const vh = new CssVH();
+    this._serviceWorkerStream = new Subject<ServiceWorkerAction>();
+    this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
 
-    this._stream = new GameStream();
-    
+    this._vh = new CssVH();
+
     this._domScenes = new DOMScenes({
       listener: {
-        loading: this._stream.loading,
-        serviceWorker: this._stream.serviceWorker,
+        loading: this._loading,
+        serviceWorker: this._serviceWorkerStream,
       }
     });
 
@@ -52,8 +58,8 @@ export class Game {
     ];
   }
 
-  /** ゲームを開始する */
-  async start(): Promise<void> {
+  /** ゲームの初期化を行う */
+  async initialize(): Promise<void> {
     try {
       if (isDevelopment()) {
         viewPerformanceStats(document.body);
@@ -63,7 +69,7 @@ export class Game {
         this._subscription = [
           ...this._subscription,
           createServiceWorkerActionListener(serviceWorker)
-            .subscribe(this._stream.serviceWorker)
+            .subscribe(this._serviceWorkerStream)
         ];
       }
     } catch (e) {
