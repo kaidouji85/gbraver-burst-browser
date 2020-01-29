@@ -8,7 +8,6 @@ import {bindBattleScene} from "./battle/bind-battle-scene";
 import {ThreeJSCanvasStream} from "./stream";
 import {Observable, Subscription} from "rxjs";
 import type {EndBattle} from "../../action/game/end-battle";
-import type {StartBattle} from "../../action/game/start-battle";
 import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 
