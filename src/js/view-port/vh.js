@@ -1,6 +1,9 @@
 // @flow
 
 import {getViewPortHeight} from "./view-port-size";
+import type {Resize} from "../action/resize/resize";
+import {Observable, Subscription} from "rxjs";
+import {createResizeStream} from "../action/resize/resize";
 
 /**
  * ビューポート関連のCSSカムタムプロパティを生成する
@@ -17,5 +20,27 @@ export function setVH(): void {
   const vh = getViewPortHeight() * 0.01;
   if(document.documentElement) {
     document.documentElement.style.setProperty(VH, `${vh}px`);
+  }
+}
+
+export class CssVH {
+  _resize: Observable<Resize>;
+  _subscription: Subscription;
+
+  constructor() {
+    this._resize = createResizeStream();
+    this._subscription = this._resize.subscribe(action => {
+      this._onResize(action);
+    });
+
+    setVH();
+  }
+
+  destructor(): void {
+    this._subscription.unsubscribe();
+  }
+
+  _onResize(action: Resize): void {
+    setVH();
   }
 }
