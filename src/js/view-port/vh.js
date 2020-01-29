@@ -5,13 +5,6 @@ import type {Resize} from "../action/resize/resize";
 import {Observable, Subscription} from "rxjs";
 import {createResizeStream} from "../action/resize/resize";
 
-/**
- * ビューポート関連のCSSカムタムプロパティを生成する
- * 本モジュールで生成するCSSカムタムプロパティは以下の通りである
- *
- * --vh
- */
-
 /** CSSカムタムプロパティ ビューポート高 */
 export const VH = '--vh';
 
@@ -23,6 +16,12 @@ export function setVH(): void {
   }
 }
 
+/**
+ * ビューポート関連のCSSカムタムプロパティを生成する
+ * 本モジュールで生成するCSSカムタムプロパティは以下の通りである
+ *
+ * --vh
+ */
 export class CssVH {
   _resize: Observable<Resize>;
   _subscription: Subscription;
@@ -36,10 +35,16 @@ export class CssVH {
     setVH();
   }
 
+  /** デストラクタ相当の処理 */
   destructor(): void {
     this._subscription.unsubscribe();
   }
 
+  /**
+   * リサイズ時の処理
+   *
+   * @param action アクション
+   */
   _onResize(action: Resize): void {
     setVH();
   }
