@@ -8,7 +8,7 @@ import type {PreRender} from "../../../../../../../action/game-loop/pre-render";
 import type {GameLoop} from "../../../../../../../action/game-loop/game-loop";
 import type {Render} from "../../../../../../../action/game-loop/render";
 import {TDCamera} from "../../../../../../../game-object/camera/td";
-import type {DOMEvent} from "../../../../../../../action/dom-event";
+import type {TdDOMEvent} from "../../../../../../../action/td-dom";
 import type {TDPlayer} from "./player";
 import {appendTDPlayer, disposeTDPlayer} from "./player";
 import {playerTDObjects} from "./player/player";
@@ -20,7 +20,7 @@ import {toOverlapStream} from "../../../../../../../action/overlap/overlap-strea
 import type {OverlapAction} from "../../../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../../../action/game-object-action/game-object-stream";
 import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
-import type {Resize} from "../../../../../../../action/dom-event/resize";
+import type {Resize} from "../../../../../../../action/resize/resize";
 import {skyBox} from "./sky-box";
 
 /** コンストラクタのパラメータ */
@@ -31,7 +31,7 @@ type Param = {
   rendererDOM: HTMLElement,
   safeAreaInset: SafeAreaInset,
   listener: {
-    domEvent: Observable<DOMEvent>,
+    domEvent: Observable<TdDOMEvent>,
     gameLoop: Observable<GameLoop>,
   }
 };
