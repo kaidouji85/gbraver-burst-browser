@@ -1,7 +1,7 @@
 // @flow
 
 import {GameStream} from "./stream";
-import {Components} from "./components";
+import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {loadAllResource} from "../resource";
 import {Subscription} from "rxjs";
@@ -14,11 +14,13 @@ import type {EndTitle} from "../action/game/end-title";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 import type {EndBattle} from "../action/game/end-battle";
 import {CssVH} from "../view-port/vh";
+import {TDScenes} from "./td-scenes";
 
 /** ゲーム全体の管理を行う */
 export class Game {
   _stream: GameStream;
-  _components: Components;
+  _domScenes: DOMScenes;
+  _tdScenes: TDScenes;
   _resources: ?Resources;
   _subscription: Subscription[];
 
@@ -26,20 +28,25 @@ export class Game {
     const vh = new CssVH();
 
     this._stream = new GameStream();
-    this._components = new Components({
+    
+    this._domScenes = new DOMScenes({
       listener: {
         loading: this._stream.loading,
         serviceWorker: this._stream.serviceWorker,
-        startBattle:this._stream.startBattle,
       }
     });
+
+    const body = document.body || document.createElement('div');
+    this._tdScenes = new TDScenes(body);
+
     this._resources = null;
+
     this._subscription = [
-      this._components.notifier().endTitle.subscribe(action => {
+      this._domScenes.notifier().endTitle.subscribe(action => {
         this._onEndTitle(action);
       }),
 
-      this._components.notifier().endBattle.subscribe(action => {
+      this._tdScenes.notifier().endBattle.subscribe(action => {
         this._onEndBattle(action);
       })
     ];
@@ -75,12 +82,7 @@ export class Game {
       this._resources = resources;
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._stream.startBattle.next({
-        type: 'StartBattle',
-        resources: resources,
-        room: room,
-        initialState: initialState
-      });
+      this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
       throw e;
     }
@@ -100,12 +102,7 @@ export class Game {
       const resources: Resources = this._resources;
       const room = createDummyBattleRoom();
       const initialState = await room.start();
-      this._stream.startBattle.next({
-        type: 'StartBattle',
-        resources: resources,
-        room: room,
-        initialState: initialState
-      });
+      this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
       throw e;
     }
