@@ -6,7 +6,7 @@ import type {LoadingAction} from "../../action/loading/loading";
 import {ServiceWorkerUpdate} from "./service-worker-update";
 import type {ServiceWorkerAction} from "../../action/service-worker/service-worker";
 import {Title} from "./title";
-import {ThreeJSCanvas} from "./three-js-canvas";
+import {ThreeJSCanvas} from "../td-scenes";
 import type {EndBattle} from "../../action/game/end-battle";
 import type {EndTitle} from "../../action/game/end-title";
 import type {StartBattle} from "../../action/game/start-battle";

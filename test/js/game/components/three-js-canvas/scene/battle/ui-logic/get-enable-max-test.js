@@ -1,7 +1,7 @@
 // @flow
 
 import test from 'ava';
-import {getEnableMax} from "../../../../../../../../src/js/game/dom-scenes/three-js-canvas/scene/battle/ui-logic/battery-selector";
+import {getEnableMax} from "../../../../../../../../src/js/game/td-scenes/battle/ui-logic/battery-selector";
 
 test('一番大きいバッテリー値を返す', t => {
   const result = getEnableMax([
