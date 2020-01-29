@@ -41,10 +41,7 @@ export class TDScenes {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._scene && this._scene.destructor();
-    this._sceneSubscriptions.forEach(v => {
-      v.unsubscribe();
-    });
+    this._disposeScene();
   }
 
   /**
@@ -66,10 +63,7 @@ export class TDScenes {
    * @param initialState 初期状態
    */
   startBattle(resources: Resources, room: BattleRoom, initialState: InitialState): void {
-    this._scene && this._scene.destructor();
-    this._sceneSubscriptions.forEach(v => {
-      v.unsubscribe();
-    });
+    this._disposeScene();
 
     const scene = new BattleScene({
       resources: resources,
@@ -91,5 +85,15 @@ export class TDScenes {
     if (isDevelopment()) {
       console.log(this._renderer.info());
     }
+  }
+
+  /**
+   * 現在表示しているシーンを破棄する
+   */
+  _disposeScene(): void {
+    this._scene && this._scene.destructor();
+    this._sceneSubscriptions.forEach(v => {
+      v.unsubscribe();
+    });
   }
 }
