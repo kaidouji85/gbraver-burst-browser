@@ -3,13 +3,15 @@
 import {Renderer} from "../../game-object/renderer";
 import {createRender} from "../../render/create-render";
 import {isDevelopment} from "../../webpack/mode";
-import {ThreeJSCanvasStream} from "./stream";
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {EndBattle} from "../../action/game/end-battle";
 import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {BattleScene} from "./battle";
 import type {Scene} from "./scene";
+import type {Render} from "../../action/game-loop/render";
+import type {GameLoop} from "../../action/game-loop/game-loop";
+import {gameLoopStream} from "../../action/game-loop/game-loop-stream";
 
 /** イベント通知 */
 type Notifier = {
@@ -18,20 +20,24 @@ type Notifier = {
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
-  _stream: ThreeJSCanvasStream;
+  _renderStream: Subject<Render>;
+  _endBattle: Subject<EndBattle>;
+  _gameLoop: Observable<GameLoop>;
   _renderer: Renderer;
   _scene: ?Scene;
   _sceneSubscriptions: Subscription[];
 
   constructor(parentDOM: HTMLElement) {
-    this._stream = new ThreeJSCanvasStream();
+    this._renderStream = new Subject<Render>();
+    this._endBattle = new Subject<EndBattle>();
+    this._gameLoop = gameLoopStream();
 
     const threeJsRender = createRender();
     parentDOM.appendChild(threeJsRender.domElement);
     this._renderer = new Renderer({
       threeJsRender: threeJsRender,
       listener: {
-        render: this._stream.render
+        render: this._renderStream
       }
     });
 
@@ -51,7 +57,7 @@ export class TDScenes {
    */
   notifier(): Notifier {
     return {
-      endBattle: this._stream.endBattle
+      endBattle: this._endBattle
     };
   }
 
@@ -72,13 +78,13 @@ export class TDScenes {
       initialState: initialState,
       listener: {
         domEvent: this._renderer.notifier().domEvent,
-        gameLoop: this._stream.gameLoop,
+        gameLoop: this._gameLoop,
       }
     });
     this._scene = scene;
     this._sceneSubscriptions = [
-      scene.notifier().render.subscribe(this._stream.render),
-      scene.notifier().endBattle.subscribe(this._stream.endBattle)
+      scene.notifier().render.subscribe(this._renderStream),
+      scene.notifier().endBattle.subscribe(this._endBattle)
     ];
 
     // デバッグ用にレンダラ情報をコンソールに出力
