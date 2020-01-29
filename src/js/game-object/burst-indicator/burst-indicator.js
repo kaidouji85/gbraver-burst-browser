@@ -34,6 +34,7 @@ export class BurstIndicator {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._subscription.unsubscribe();
+    this._view.destructor();
   }
 
   /**
