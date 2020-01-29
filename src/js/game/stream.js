@@ -13,7 +13,7 @@ export class GameStream {
    * サービスワーカーストリームの緩衝材
    * 以下のように、サービスワーカのイベントをGame::_componentsに伝搬している
    *
-   * ServiceWorkerRegistration -> GameStream::serviceWorker -> Game::_components
+   * ServiceWorkerRegistration -> GameStream::serviceWorker -> Game::_domScenes
    *
    * Gmae::_components生成にはサービスワーカーストリームが必要だが、
    * このタイミングではサービスワーカー登録が完了していないため同ストリームを用意することがでいない
@@ -31,11 +31,11 @@ export class GameStream {
    * ゲームから各シーンに戦闘開始を伝えるストリーム
    *
    * ストリームの流れ
-   * Game -> Game::_components
+   * Game -> Game::_domScenes
    *
    * モジュールごとの呼び出し制限
    * Game              -> GameStream::startBattle.next(...)のみ呼び出し可能
-   * Game::_components -> GameStream::startBattle.subscribe(...)のみ呼び出し可能
+   * Game::_domScenes -> GameStream::startBattle.subscribe(...)のみ呼び出し可能
    */
   startBattle: Subject<StartBattle>;
 

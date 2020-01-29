@@ -27,13 +27,13 @@ type Param = {
   }
 };
 
-/** HTML要素を集めたもの */
-export class Components {
+/** HTMLオンリーで生成されたシーンを集めたもの */
+export class DOMScenes {
   _loading: Loading;
   _serviceWorkerUpdate: ServiceWorkerUpdate;
   _playInLandscape: PlayInLandscape;
   _title: Title;
-  _threeJSCanvas: ThreeJSCanvas;
+  _threeJSCanvas: ThreeJSCanvas;  // TODO 独立させる
 
   constructor(param: Param) {
     const loadingDOM: HTMLElement = document.querySelector('#loading-scene') || document.createElement('div');

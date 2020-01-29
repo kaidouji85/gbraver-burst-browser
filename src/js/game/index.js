@@ -1,7 +1,7 @@
 // @flow
 
 import {GameStream} from "./stream";
-import {Components} from "./components";
+import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {loadAllResource} from "../resource";
 import {Subscription} from "rxjs";
@@ -18,7 +18,7 @@ import {CssVH} from "../view-port/vh";
 /** ゲーム全体の管理を行う */
 export class Game {
   _stream: GameStream;
-  _components: Components;
+  _domScenes: DOMScenes;
   _resources: ?Resources;
   _subscription: Subscription[];
 
@@ -26,7 +26,7 @@ export class Game {
     const vh = new CssVH();
 
     this._stream = new GameStream();
-    this._components = new Components({
+    this._domScenes = new DOMScenes({
       listener: {
         loading: this._stream.loading,
         serviceWorker: this._stream.serviceWorker,
@@ -35,11 +35,11 @@ export class Game {
     });
     this._resources = null;
     this._subscription = [
-      this._components.notifier().endTitle.subscribe(action => {
+      this._domScenes.notifier().endTitle.subscribe(action => {
         this._onEndTitle(action);
       }),
 
-      this._components.notifier().endBattle.subscribe(action => {
+      this._domScenes.notifier().endBattle.subscribe(action => {
         this._onEndBattle(action);
       })
     ];
