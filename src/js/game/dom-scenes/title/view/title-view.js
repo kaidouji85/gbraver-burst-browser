@@ -23,7 +23,8 @@ export class TitleView {
     params.dom.innerHTML = `
       <div class="title" id="${rootId}">
         <img src="${resourceBasePath()}/logo.png"/>
-        <p class="title_touch-start">TOUCH START</p>
+        <p class="title__touch-start">TOUCH START</p>
+        <p class="title__copy-right">(C) 2020 Yuusuke Takeuchi</p>
       </div>
     `;
 
