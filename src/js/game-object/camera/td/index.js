@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from "three";
-import type {DOMEvent} from "../../../action/dom-event";
-import type {Resize} from "../../../action/dom-event/resize";
+import type {TdDOMEvent} from "../../../action/td-dom";
+import type {Resize} from "../../../action/resize/resize";
 import {onResizePerspectiveCamera} from "../../../camera/resize";
 import {merge, Observable, Subscription} from "rxjs";
 import type {Battle3DCameraModel} from "./model/model";
@@ -17,7 +17,7 @@ import {moveCamera} from "./animation/move-camera";
 /** コンストラクタのパラメータ */
 type Param = {
   listener: {
-    domEvent: Observable<DOMEvent>,
+    domEvent: Observable<TdDOMEvent>,
     update: Observable<Update>
   }
 };

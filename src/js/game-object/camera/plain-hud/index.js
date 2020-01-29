@@ -2,16 +2,16 @@
 
 import * as THREE from "three";
 import {createHUDCamera} from "../../../camera/create-hud-camera";
-import type {DOMEvent} from "../../../action/dom-event";
+import type {TdDOMEvent} from "../../../action/td-dom";
 import {Observable, Subscription} from "rxjs";
-import type {Resize} from "../../../action/dom-event/resize";
+import type {Resize} from "../../../action/resize/resize";
 import {onResizeOrthographicCamera} from "../../../camera/resize";
 import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
 
 /** コンストラクタのパラメータ */
 type Param = {
   listener: {
-    domEvent: Observable<DOMEvent>
+    domEvent: Observable<TdDOMEvent>
   }
 };
 

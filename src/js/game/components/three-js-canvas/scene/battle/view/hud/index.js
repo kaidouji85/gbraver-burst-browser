@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import type {Resources} from '../../../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {DOMEvent} from "../../../../../../../action/dom-event";
+import type {TdDOMEvent} from "../../../../../../../action/td-dom";
 import {toOverlapStream} from "../../../../../../../action/overlap/overlap-stream";
 import type {BattleSceneAction} from "../../../../../../../action/battle-scene";
 import type {Update} from "../../../../../../../action/game-loop/update";
@@ -16,7 +16,7 @@ import {appendHUDGameObjects, createHUDGameObjects, disposeHUDGameObjects} from 
 import type {OverlapAction} from "../../../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../../../action/game-object-action/game-object-stream";
 import type {SafeAreaInset} from "../../../../../../../safe-area/safe-area-inset";
-import type {Resize} from "../../../../../../../action/dom-event/resize";
+import type {Resize} from "../../../../../../../action/resize/resize";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -27,7 +27,7 @@ export type Param = {
   players: Player[],
   listener: {
     gameLoop: Observable<GameLoop>,
-    domEvent: Observable<DOMEvent>,
+    domEvent: Observable<TdDOMEvent>,
   }
 };
 

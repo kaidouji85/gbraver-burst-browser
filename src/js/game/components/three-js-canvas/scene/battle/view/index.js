@@ -5,7 +5,7 @@ import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {GameLoop} from "../../../../../../action/game-loop/game-loop";
 import {merge, Observable, Subject} from "rxjs";
-import type {DOMEvent} from "../../../../../../action/dom-event";
+import type {TdDOMEvent} from "../../../../../../action/td-dom";
 import type {BattleSceneAction} from "../../../../../../action/battle-scene";
 import type {Render} from "../../../../../../action/game-loop/render";
 import TWEEN from "@tweenjs/tween.js";
@@ -19,7 +19,7 @@ type Param = {
   players: Player[],
   listener: {
     gameLoop: Observable<GameLoop>,
-    domEvent: Observable<DOMEvent>,
+    domEvent: Observable<TdDOMEvent>,
   }
 };
 

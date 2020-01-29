@@ -13,6 +13,7 @@ import {resourceBasePath} from "../resource/resource-base-path";
 import type {EndTitle} from "../action/game/end-title";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 import type {EndBattle} from "../action/game/end-battle";
+import {CssVH} from "../view-port/vh";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -22,6 +23,8 @@ export class Game {
   _subscription: Subscription[];
 
   constructor() {
+    const vh = new CssVH();
+
     this._stream = new GameStream();
     this._components = new Components({
       listener: {

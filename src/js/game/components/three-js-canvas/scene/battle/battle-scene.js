@@ -4,7 +4,7 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../../../../action/game-loop/game-loop";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {DOMEvent} from "../../../../../action/dom-event";
+import type {TdDOMEvent} from "../../../../../action/td-dom";
 import type {DecideBattery} from "../../../../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleRoom, InitialState} from "../../../../../battle-room/battle-room";
@@ -26,7 +26,7 @@ type Param = {
   battleRoom: BattleRoom,
   initialState: InitialState,
   listener: {
-    domEvent: Observable<DOMEvent>,
+    domEvent: Observable<TdDOMEvent>,
     gameLoop: Observable<GameLoop>,
   }
 };
