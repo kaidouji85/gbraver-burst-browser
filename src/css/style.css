@@ -95,6 +95,11 @@
     display: none;
 }
 
+.title__logo {
+    height: 35%;
+    max-height: 171px;
+}
+
 .title__buttons {
     margin-top: 2em;
     margin-bottom: 1em;
