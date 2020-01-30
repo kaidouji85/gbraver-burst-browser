@@ -23,11 +23,11 @@ export class TitleView {
     params.dom.innerHTML = `
       <div class="title" id="${rootId}">
         <img class="title__logo" src="${resourceBasePath()}/logo.png"/>
+        <div class="title__copy-right">(C) 2020 Yuusuke Takeuchi</div>
         <div class="title__buttons">
           <button class="title__buttons__game-start">ゲームスタート</button>
           <button class="title__buttons__how-to-play">遊び方</button>
         </div>
-        <div class="title__copy-right">(C) 2020 Yuusuke Takeuchi</div>
       </div>
     `;
 
