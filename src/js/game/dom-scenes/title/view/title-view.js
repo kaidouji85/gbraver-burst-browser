@@ -22,9 +22,12 @@ export class TitleView {
     const rootId = domUuid();
     params.dom.innerHTML = `
       <div class="title" id="${rootId}">
-        <img src="${resourceBasePath()}/logo.png"/>
-        <p class="title__touch-start">TOUCH START</p>
-        <p class="title__copy-right">(C) 2020 Yuusuke Takeuchi</p>
+        <img class="title__logo" src="${resourceBasePath()}/logo.png"/>
+        <div class="title__buttons">
+          <button class="title__buttons__game-start">ゲームスタート</button>
+          <button class="title__buttons__how-to-play">遊び方</button>
+        </div>
+        <div class="title__copy-right">(C) 2020 Yuusuke Takeuchi</div>
       </div>
     `;
 
