@@ -12,6 +12,8 @@ import type {Scene} from "./scene";
 import type {Render} from "../../action/game-loop/render";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {gameLoopStream} from "../../action/game-loop/game-loop-stream";
+import type {Resize} from "../../action/resize/resize";
+import {createResizeStream} from "../../action/resize/resize";
 
 /** イベント通知 */
 type Notifier = {
@@ -23,6 +25,7 @@ export class TDScenes {
   _renderStream: Subject<Render>;
   _endBattle: Subject<EndBattle>;
   _gameLoop: Observable<GameLoop>;
+  _resize: Observable<Resize>;
   _renderer: Renderer;
   _scene: ?Scene;
   _sceneSubscriptions: Subscription[];
@@ -31,14 +34,14 @@ export class TDScenes {
     this._renderStream = new Subject<Render>();
     this._endBattle = new Subject<EndBattle>();
     this._gameLoop = gameLoopStream();
+    this._resize = createResizeStream();
 
     const threeJsRender = createRender();
     parentDOM.appendChild(threeJsRender.domElement);
     this._renderer = new Renderer({
       threeJsRender: threeJsRender,
-      listener: {
-        render: this._renderStream
-      }
+      renderStream: this._renderStream,
+      resize: this._resize,
     });
 
     this._scene = null;

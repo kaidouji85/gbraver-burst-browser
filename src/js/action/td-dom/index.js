@@ -11,7 +11,7 @@ import {map} from "rxjs/operators";
 
 /** three.jsキャンバス要素のイベントをまとめたもの */
 export type TdDOMEvent =
-  Resize |
+  Resize |  // TODO 削除する
   MouseDown |
   MouseMove |
   MouseUp |
