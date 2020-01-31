@@ -33,6 +33,7 @@ type Param = {
   listener: {
     domEvent: Observable<TdDOMEvent>,
     gameLoop: Observable<GameLoop>,
+    resize: Observable<Resize>,
   }
 };
 
@@ -69,12 +70,7 @@ export class ThreeDimensionLayer {
     this.scene = new THREE.Scene();
     this.scene.background = skyBox(param.resources);
 
-    this.camera = new TDCamera({
-      listener: {
-        domEvent: param.listener.domEvent,
-        update: this._update
-      }
-    });
+    this.camera = new TDCamera(this._update, param.listener.resize);
 
     this._overlap = toOverlapStream(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
     const gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
@@ -95,10 +91,8 @@ export class ThreeDimensionLayer {
         this._gameLoop(action);
       }),
 
-      param.listener.domEvent.subscribe(action => {
-        if (action.type === 'resize') {
-          this._resize(action);
-        }
+      param.listener.resize.subscribe(action => {
+        this._resize(action);
       })
     ];
   }

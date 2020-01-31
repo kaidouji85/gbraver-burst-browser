@@ -1,7 +1,5 @@
 // @flow
 
-import type {Resize} from "../resize/resize";
-import {createResizeStream} from "../resize/resize";
 import type {MouseDown, MouseMove, MouseUp} from "./mouse";
 import {createMouseDownStream, createMouseMoveStream, createMouseUpStream} from "./mouse";
 import type {TouchEnd, TouchMove, TouchStart} from "./touch";
@@ -9,9 +7,8 @@ import {createTouchEndStream, createTouchMoveStream, createTouchStartStream} fro
 import {merge, Observable} from "rxjs";
 import {map} from "rxjs/operators";
 
-/** three.jsキャンバス要素のイベントをまとめたもの */
+/** three.js Renderer要素のイベントをまとめたもの */
 export type TdDOMEvent =
-  Resize |
   MouseDown |
   MouseMove |
   MouseUp |
@@ -20,7 +17,7 @@ export type TdDOMEvent =
   TouchEnd;
 
 /**
- * DOMイベントストリーム
+ * three.js Renderer要素のイベントストリームを生成する
  *
  * @param renderDom three.jsを描画するHTML要素
  * @return ストリーム
@@ -46,10 +43,6 @@ export function createDOMEventStream(renderDom: HTMLElement): Observable<TdDOMEv
     map(v => (v: TdDOMEvent))
   );
 
-  const resize: Observable<TdDOMEvent> = createResizeStream().pipe(
-    map(v => (v: TdDOMEvent))
-  );
-
   return merge(
     mouseDown,
     mouseMove,
@@ -57,6 +50,5 @@ export function createDOMEventStream(renderDom: HTMLElement): Observable<TdDOMEv
     touchStart,
     touchMove,
     touchEnd,
-    resize
   );
 }

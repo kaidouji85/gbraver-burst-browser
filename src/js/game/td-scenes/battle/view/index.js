@@ -10,6 +10,7 @@ import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {Render} from "../../../../action/game-loop/render";
 import TWEEN from "@tweenjs/tween.js";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
+import type {Resize} from "../../../../action/resize/resize";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -20,6 +21,7 @@ type Param = {
   listener: {
     gameLoop: Observable<GameLoop>,
     domEvent: Observable<TdDOMEvent>,
+    resize: Observable<Resize>,
   }
 };
 
@@ -53,7 +55,8 @@ export class BattleSceneView {
       players: param.players,
       listener: {
         domEvent: param.listener.domEvent,
-        gameLoop: this._gameLoop3D
+        gameLoop: this._gameLoop3D,
+        resize: param.listener.resize,
       }
     });
 
@@ -66,6 +69,7 @@ export class BattleSceneView {
       listener: {
         domEvent: param.listener.domEvent,
         gameLoop: this._gameLoopHUD,
+        resize: param.listener.resize
       }
     });
 

@@ -2,8 +2,7 @@
 
 import type {SafeAreaInset} from "../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../safe-area/safe-area-inset";
-import {fromEvent, Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
 import {getViewPortHeight, getViewPortWidth} from "../../view-port/view-port-size";
 
 /** リサイズ */
@@ -13,6 +12,13 @@ export type Resize = {
   height: number,
   safeAreaInset: SafeAreaInset,
 };
+
+/**
+ * リサイズストリーム発火を遅らせる時間（ミリ秒）
+ * ios Safariだと、リサイズ発火直後には正しいビューポートの値が取れない
+ * なので、少しだけの時間待つ
+ */
+export const RESIZE_DELAY = 50;
 
 /**
  * リサイズストリームを生成する
@@ -29,7 +35,7 @@ export function createResizeStream(): Observable<Resize> {
           height: getViewPortHeight(),
           safeAreaInset: createSafeAreaInset(),
         });
-      }, 50);
+      }, RESIZE_DELAY);
     })
   });
 }

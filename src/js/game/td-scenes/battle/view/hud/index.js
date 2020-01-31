@@ -28,6 +28,7 @@ export type Param = {
   listener: {
     gameLoop: Observable<GameLoop>,
     domEvent: Observable<TdDOMEvent>,
+    resize: Observable<Resize>,
   }
 };
 
@@ -63,11 +64,7 @@ export class HudLayer {
     this._render = new Subject();
 
     this.scene = new THREE.Scene();
-    this.camera = new PlainHUDCamera({
-      listener: {
-        domEvent: param.listener.domEvent
-      }
-    });
+    this.camera = new PlainHUDCamera(param.listener.resize);
 
     this._overlap = toOverlapStream(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
     const gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
@@ -82,11 +79,9 @@ export class HudLayer {
         this._gameLoop(action);
       }),
 
-      param.listener.domEvent.subscribe(action => {
-        if (action.type === 'resize') {
-          this._resize(action);
-        }
-      })
+      param.listener.resize.subscribe(action => {
+        this._resize(action);
+      }),
     ];
   }
 
