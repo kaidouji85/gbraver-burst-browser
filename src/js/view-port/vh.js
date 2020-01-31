@@ -3,7 +3,6 @@
 import {getViewPortHeight} from "./view-port-size";
 import type {Resize} from "../action/resize/resize";
 import {Observable, Subscription} from "rxjs";
-import {createResizeStream} from "../action/resize/resize";
 
 /** CSSカムタムプロパティ ビューポート高 */
 export const VH = '--vh';

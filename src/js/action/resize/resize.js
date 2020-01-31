@@ -2,8 +2,7 @@
 
 import type {SafeAreaInset} from "../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../safe-area/safe-area-inset";
-import {fromEvent, Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
 import {getViewPortHeight, getViewPortWidth} from "../../view-port/view-port-size";
 
 /** リサイズ */
