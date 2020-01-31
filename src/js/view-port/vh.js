@@ -8,9 +8,13 @@ import {createResizeStream} from "../action/resize/resize";
 /** CSSカムタムプロパティ ビューポート高 */
 export const VH = '--vh';
 
-/** CSSカムタムプロパティ ビューポート高 の値を再計算する */
-export function setVH(): void {
-  const vh = getViewPortHeight() * 0.01;
+/**
+ * CSSカムタムプロパティ ビューポート高 の値を更新する
+ *
+ * @param viewPortHeight 更新する値
+ */
+export function setVH(viewPortHeight: number): void {
+  const vh = viewPortHeight * 0.01;
   if(document.documentElement) {
     document.documentElement.style.setProperty(VH, `${vh}px`);
   }
@@ -32,7 +36,7 @@ export class CssVH {
       this._onResize(action);
     });
 
-    setVH();
+    setVH(getViewPortHeight());
   }
 
   /** デストラクタ相当の処理 */
@@ -46,6 +50,6 @@ export class CssVH {
    * @param action アクション
    */
   _onResize(action: Resize): void {
-    setVH();
+    setVH(action.height);
   }
 }
