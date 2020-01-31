@@ -33,6 +33,7 @@ type Param = {
   listener: {
     domEvent: Observable<TdDOMEvent>,
     gameLoop: Observable<GameLoop>,
+    resize: Observable<Resize>,
   }
 };
 

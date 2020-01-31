@@ -82,6 +82,7 @@ export class TDScenes {
       listener: {
         domEvent: this._renderer.notifier().domEvent,
         gameLoop: this._gameLoop,
+        resize: this._resize,
       }
     });
     this._scene = scene;

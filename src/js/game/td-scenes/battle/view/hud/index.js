@@ -28,6 +28,7 @@ export type Param = {
   listener: {
     gameLoop: Observable<GameLoop>,
     domEvent: Observable<TdDOMEvent>,
+    resize: Observable<Resize>,
   }
 };
 

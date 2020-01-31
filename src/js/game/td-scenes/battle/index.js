@@ -18,6 +18,7 @@ import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/end-battle";
 import type {Scene} from "../scene";
+import type {Resize} from "../../../action/resize/resize";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -28,6 +29,7 @@ type Param = {
   listener: {
     domEvent: Observable<TdDOMEvent>,
     gameLoop: Observable<GameLoop>,
+    resize: Observable<Resize>
   }
 };
 
@@ -59,6 +61,7 @@ export class BattleScene implements Scene {
       listener: {
         gameLoop: param.listener.gameLoop,
         domEvent: param.listener.domEvent,
+        resize: param.listener.resize,
       }
     });
 
