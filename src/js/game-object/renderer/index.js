@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import {WebGLInfo} from 'three';
 import type {Resize} from "../../action/resize/resize";
 import type {Render} from "../../action/game-loop/render";
-import {merge, Observable, Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {onWebGLRendererResize} from "../../render/resize";
 import type {TdDOMEvent} from "../../action/td-dom";
 import {createDOMEventStream} from "../../action/td-dom";
