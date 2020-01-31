@@ -27,12 +27,10 @@ export function setVH(viewPortHeight: number): void {
  * --vh
  */
 export class CssVH {
-  _resize: Observable<Resize>;
   _subscription: Subscription;
 
-  constructor() {
-    this._resize = createResizeStream();
-    this._subscription = this._resize.subscribe(action => {
+  constructor(resize: Observable<Resize>) {
+    this._subscription = resize.subscribe(action => {
       this._onResize(action);
     });
 

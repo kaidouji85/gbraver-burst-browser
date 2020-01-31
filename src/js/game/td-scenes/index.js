@@ -13,7 +13,6 @@ import type {Render} from "../../action/game-loop/render";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {gameLoopStream} from "../../action/game-loop/game-loop-stream";
 import type {Resize} from "../../action/resize/resize";
-import {createResizeStream} from "../../action/resize/resize";
 
 /** イベント通知 */
 type Notifier = {
@@ -30,11 +29,11 @@ export class TDScenes {
   _scene: ?Scene;
   _sceneSubscriptions: Subscription[];
 
-  constructor(parentDOM: HTMLElement) {
+  constructor(parentDOM: HTMLElement, resize: Observable<Resize>) {
     this._renderStream = new Subject<Render>();
     this._endBattle = new Subject<EndBattle>();
     this._gameLoop = gameLoopStream();
-    this._resize = createResizeStream();
+    this._resize = resize;
 
     const threeJsRender = createRender();
     parentDOM.appendChild(threeJsRender.domElement);

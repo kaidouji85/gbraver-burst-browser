@@ -18,22 +18,26 @@ import {TDScenes} from "./td-scenes";
 import type {ServiceWorkerAction} from "../action/service-worker/service-worker";
 import type {LoadingAction} from "../action/loading/loading";
 import {createLoadingActionListener} from "../action/loading/create-listener";
+import type {Resize} from "../action/resize/resize";
+import {createResizeStream} from "../action/resize/resize";
 
 /** ゲーム全体の管理を行う */
 export class Game {
   _serviceWorkerStream: Subject<ServiceWorkerAction>;
   _loading: Observable<LoadingAction>;
+  _resize: Observable<Resize>;
   _vh: CssVH;
   _domScenes: DOMScenes;
   _tdScenes: TDScenes;
   _resources: ?Resources;
-  _subscription: Subscription[];
+  _subscriptions: Subscription[];
 
   constructor() {
     this._serviceWorkerStream = new Subject<ServiceWorkerAction>();
     this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
+    this._resize = createResizeStream();
 
-    this._vh = new CssVH();
+    this._vh = new CssVH(this._resize);
 
     this._domScenes = new DOMScenes({
       listener: {
@@ -43,11 +47,11 @@ export class Game {
     });
 
     const body = document.body || document.createElement('div');
-    this._tdScenes = new TDScenes(body);
+    this._tdScenes = new TDScenes(body, this._resize);
 
     this._resources = null;
 
-    this._subscription = [
+    this._subscriptions = [
       this._domScenes.notifier().endTitle.subscribe(action => {
         this._onEndTitle(action);
       }),
@@ -66,8 +70,8 @@ export class Game {
       }
       const serviceWorker = await loadServiceWorker();
       if (serviceWorker) {
-        this._subscription = [
-          ...this._subscription,
+        this._subscriptions = [
+          ...this._subscriptions,
           createServiceWorkerActionListener(serviceWorker)
             .subscribe(this._serviceWorkerStream)
         ];
