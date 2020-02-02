@@ -8,6 +8,7 @@ import type {ServiceWorkerAction} from "../../action/service-worker/service-work
 import {Title} from "./title";
 import type {EndTitle} from "../../action/game/end-title";
 import {PlayInLandscape} from "./play-in-landscape";
+import {HowToPlay} from "./how-to-play";
 
 /** イベント通知 */
 type Notifier = {
@@ -28,6 +29,7 @@ export class DOMScenes {
   _serviceWorkerUpdate: ServiceWorkerUpdate;
   _playInLandscape: PlayInLandscape;
   _title: Title;
+  _howToPlay: HowToPlay;
 
   constructor(param: Param) {
     const loadingDOM: HTMLElement = document.querySelector('#loading-scene') || document.createElement('div');
@@ -41,6 +43,9 @@ export class DOMScenes {
 
     const playInLandscapeDOM: HTMLElement = document.querySelector("#play-in-landscape") || document.createElement('div');
     this._playInLandscape = new PlayInLandscape(playInLandscapeDOM);
+
+    const howToPlayDOM: HTMLElement = document.getElementById('how-to-play') || document.createElement('div');
+    this._howToPlay = new HowToPlay(howToPlayDOM);
   }
 
   /** デストラクタ相当の処理 */
