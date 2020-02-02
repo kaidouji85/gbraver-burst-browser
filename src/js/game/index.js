@@ -91,7 +91,18 @@ export class Game {
    * @param action アクション
    */
   async _onEndTitle(action: EndTitle) {
+    if (action.button === 'GameStart') {
+      this._onGameStart();
+    }
+  }
+
+  /**
+   * ゲームスタート時の処理
+   */
+  async _onGameStart() {
     try {
+      this._domScenes.hidden();
+
       const resources = await loadAllResource(`${resourceBasePath()}/`);
       this._resources = resources;
       const room = createDummyBattleRoom();

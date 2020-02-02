@@ -2,15 +2,15 @@
 
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
-import {Observable} from "rxjs";
+import {merge, Observable} from "rxjs";
 import type {EndTitle} from "../../../action/game/end-title";
-import {onTouch} from "./state/on-touch";
 import {TitleView} from "./view/title-view";
-import {tap, map, filter} from "rxjs/operators";
+import {hidden} from "./state/hidden";
+import {filter, map} from "rxjs/operators";
 
 /** イベント通知 */
 export type Notifier = {
-  endTitle: Observable<EndTitle>  //TODO 削除する
+  endTitle: Observable<EndTitle>
 };
 
 /** タイトルシーン */
@@ -26,15 +26,22 @@ export class Title {
       initialState: this._state,
     });
 
-    this._endTitle = this._view.notifier().gameStart.pipe(
-      filter(() => this._state.canOperation),
-      tap(() => {
-        this._state = onTouch(this._state);
-        this._view.engage(this._state);
-      }),
-      map(() => (
-        {type: 'EndTitle'}
-      ))
+    this._endTitle = merge(
+      this._view.notifier().gameStart.pipe(
+        filter(() => this._state.canOperation),
+        map(() => ({
+          type: 'EndTitle',
+          button: 'GameStart'
+        }))
+      ),
+
+      this._view.notifier().howToPlay.pipe(
+        filter(() => this._state.canOperation),
+        map(() => ({
+          type: 'EndTitle',
+          button: 'HowToPlay'
+        }))
+      )
     );
   }
 
@@ -43,5 +50,11 @@ export class Title {
     return {
       endTitle: this._endTitle
     };
+  }
+
+  /** 本シーンを非表示にする */
+  hidden(): void {
+    this._state = hidden(this._state);
+    this._view.engage(this._state);
   }
 }

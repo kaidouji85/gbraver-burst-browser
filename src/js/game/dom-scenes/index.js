@@ -38,4 +38,12 @@ export class DOMScenes {
       endTitle: this._title.notifier().endTitle,
     };
   }
+
+  /**
+   * 本クラス配下のシーンを全て非表示にする
+   * 本メソッドは、3Dシーンを表示する前に呼ばれる想定
+   */
+  hidden(): void {
+    this._title.hidden();
+  }
 }
