@@ -20,6 +20,7 @@ import type {LoadingAction} from "../action/loading/loading";
 import {createLoadingActionListener} from "../action/loading/create-listener";
 import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
+import {InterruptScenes} from "./innterrupt-scenes";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -27,6 +28,7 @@ export class Game {
   _loading: Observable<LoadingAction>;
   _resize: Observable<Resize>;
   _vh: CssVH;
+  _interruptScenes: InterruptScenes;
   _domScenes: DOMScenes;
   _tdScenes: TDScenes;
   _resources: ?Resources;
@@ -39,12 +41,14 @@ export class Game {
 
     this._vh = new CssVH(this._resize);
 
-    this._domScenes = new DOMScenes({
+    this._interruptScenes = new InterruptScenes({
       listener: {
         loading: this._loading,
         serviceWorker: this._serviceWorkerStream,
       }
     });
+
+    this._domScenes = new DOMScenes();
 
     const body = document.body || document.createElement('div');
     this._tdScenes = new TDScenes(body, this._resize);
