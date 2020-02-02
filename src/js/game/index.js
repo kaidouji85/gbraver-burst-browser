@@ -90,14 +90,16 @@ export class Game {
    *
    * @param action アクション
    */
-  async _onEndTitle(action: EndTitle) {
+  _onEndTitle(action: EndTitle) {
     if (action.button === 'GameStart') {
       this._onGameStart();
+    } else if (action.button === 'HowToPlay') {
+      this._onHowToPlay();
     }
   }
 
   /**
-   * ゲームスタート時の処理
+   * タイトルでゲームスタートを押した時の処理
    */
   async _onGameStart() {
     try {
@@ -111,6 +113,13 @@ export class Game {
     } catch (e) {
       throw e;
     }
+  }
+
+  /**
+   * タイトルで遊び方を押した時の処理
+   */
+  _onHowToPlay() {
+    this._domScenes.showHowToPlay();
   }
 
   /**

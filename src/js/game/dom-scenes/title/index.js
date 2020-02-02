@@ -7,6 +7,7 @@ import type {EndTitle} from "../../../action/game/end-title";
 import {TitleView} from "./view/title-view";
 import {hidden} from "./state/hidden";
 import {filter, map} from "rxjs/operators";
+import {show} from "./state/show";
 
 /** イベント通知 */
 export type Notifier = {
@@ -50,6 +51,12 @@ export class Title {
     return {
       endTitle: this._endTitle
     };
+  }
+
+  /** 本シーンを表示する */
+  show(): void {
+    this._state = show(this._state);
+    this._view.engage(this._state);
   }
 
   /** 本シーンを非表示にする */

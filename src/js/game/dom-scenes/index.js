@@ -39,6 +39,12 @@ export class DOMScenes {
     };
   }
 
+  /** 遊び方シーンを表示する */
+  showHowToPlay(): void {
+    this._title.hidden();
+    this._howToPlay.show();
+  }
+
   /**
    * 本クラス配下のシーンを全て非表示にする
    * 本メソッドは、3Dシーンを表示する前に呼ばれる想定
