@@ -2,33 +2,40 @@
 
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
-import {Observable, Subject} from "rxjs";
+import {Observable} from "rxjs";
 import type {EndTitle} from "../../../action/game/end-title";
 import {onTouch} from "./state/on-touch";
 import {TitleView} from "./view/title-view";
+import {tap, map, filter} from "rxjs/operators";
 
 /** イベント通知 */
 export type Notifier = {
-  endTitle: Observable<EndTitle>
+  endTitle: Observable<EndTitle>  //TODO 削除する
 };
 
 /** タイトルシーン */
 export class Title {
   _state: TitleState;
   _view: TitleView;
-  _endTitle: Subject<EndTitle>;
+  _endTitle: Observable<EndTitle>;
 
   constructor(dom: HTMLElement) {
     this._state = createInitialState();
-    this._endTitle = new Subject();
-
     this._view = new TitleView({
       dom: dom,
       initialState: this._state,
-      onTouch: () => {
-        this._onTouch();
-      }
     });
+
+    this._endTitle = this._view.notifier().gameStart.pipe(
+      filter(() => this._state.canOperation),
+      tap(() => {
+        this._state = onTouch(this._state);
+        this._view.engage(this._state);
+      }),
+      map(() => (
+        {type: 'EndTitle'}
+      ))
+    );
   }
 
   /** イベント通知ストリーム */
@@ -36,16 +43,5 @@ export class Title {
     return {
       endTitle: this._endTitle
     };
-  }
-
-  /** 画面タッチ時のイベント */
-  _onTouch(): void {
-    if (!this._state.canOperation) {
-      return;
-    }
-
-    this._state = onTouch(this._state);
-    this._view.engage(this._state);
-    this._endTitle.next({type: 'EndTitle'});
   }
 }
