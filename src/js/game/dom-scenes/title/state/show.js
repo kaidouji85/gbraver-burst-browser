@@ -11,6 +11,7 @@ import type {TitleState} from "./title-state";
 export function show(state: TitleState): TitleState {
   return {
     ...state,
+    canOperation: true,
     isVisible: true,
   };
 }

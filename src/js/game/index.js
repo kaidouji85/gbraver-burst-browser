@@ -21,6 +21,7 @@ import {createLoadingActionListener} from "../action/loading/create-listener";
 import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
+import type {EndHowToPlay} from "../action/game/end-how-to-play";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -58,6 +59,10 @@ export class Game {
     this._subscriptions = [
       this._domScenes.notifier().endTitle.subscribe(action => {
         this._onEndTitle(action);
+      }),
+
+      this._domScenes.notifier().endHowToPlay.subscribe(action => {
+        this._onEndHowToPlay(action);
       }),
 
       this._tdScenes.notifier().endBattle.subscribe(action => {
@@ -120,6 +125,15 @@ export class Game {
    */
   _onHowToPlay() {
     this._domScenes.showHowToPlay();
+  }
+
+  /**
+   * 遊び方シーン終了時の処理
+   *
+   * @param action アクション
+   */
+  _onEndHowToPlay(action: EndHowToPlay): void {
+    this._domScenes.showTitle();
   }
 
   /**
