@@ -2,13 +2,24 @@
 
 import type {HowToPlayState} from "../state/how-to-play-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
+import {Observable, Subject} from "rxjs";
+
+/** イベント通知 */
+type Notifier = {
+  prev: Observable<void>;
+};
 
 /** 遊び方シーンのビュー */
 export class HowToPlayView {
+  _prevStream: Subject<void>;
   _root: HTMLElement;
+  _prev: HTMLElement;
 
   constructor(dom: HTMLElement) {
+    this._prevStream = new Subject<void>();
+
     const rootId = domUuid();
+    const prevId = domUuid();
     dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
         <h1 class="how-to-play__title">遊び方</h1>
@@ -18,11 +29,19 @@ export class HowToPlayView {
           <li class="how-to-play__rule__3">バッテリーの大小でのみ当たり判定が行われる</li>
           <li class="how-to-play__rule__4">1試合に1回だけ機体がパワーアップするバーストが使える</li>
         </ul>
-        <button class="how-to-play__prev">戻る</button>
+        <button class="how-to-play__prev" id="${prevId}">戻る</button>
       </div>
     `;
 
     this._root = document.getElementById(rootId) || document.createElement('div');
+
+    this._prev = document.getElementById(prevId) || document.createElement('div');
+    this._prev.addEventListener('click', () => {
+      this._prevStream.next();
+    });
+    this._prev.addEventListener('touchstart', () => {
+      this._prevStream.next();
+    });
   }
 
   /**
@@ -34,5 +53,16 @@ export class HowToPlayView {
     this._root.className = state.isVisible
       ? 'how-to-play'
       : 'how-to-play--invisible';
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      prev: this._prevStream,
+    };
   }
 }

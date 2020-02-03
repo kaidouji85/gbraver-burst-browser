@@ -9,6 +9,7 @@ import type {HowToPlayState} from "./how-to-play-state";
  */
 export function createInitialState(): HowToPlayState {
   return {
-    isVisible: false
+    isVisible: false,
+    canOperation: false
   };
 }
