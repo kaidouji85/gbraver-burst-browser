@@ -11,7 +11,7 @@ import type {HowToPlayState} from "./how-to-play-state";
 export function hidden(state: HowToPlayState): HowToPlayState {
   return {
     ...state,
-    isVisible: true,
-    canOperation: true
+    isVisible: false,
+    canOperation: false
   };
 }
