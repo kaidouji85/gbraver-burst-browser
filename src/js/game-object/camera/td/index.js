@@ -1,10 +1,9 @@
 // @flow
 
 import * as THREE from "three";
-import type {DOMEvent} from "../../../action/dom-event";
-import type {Resize} from "../../../action/dom-event/resize";
+import type {Resize} from "../../../action/resize/resize";
 import {onResizePerspectiveCamera} from "../../../camera/resize";
-import {merge, Observable, Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {Battle3DCameraModel} from "./model/model";
 import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
@@ -13,42 +12,36 @@ import {Animate} from "../../../animation/animate";
 import type {Position} from './animation/position';
 import {moveViewPoint} from "./animation/move-view-point";
 import {moveCamera} from "./animation/move-camera";
-
-/** コンストラクタのパラメータ */
-type Param = {
-  listener: {
-    domEvent: Observable<DOMEvent>,
-    update: Observable<Update>
-  }
-};
+import {getViewPortHeight, getViewPortWidth} from "../../../view-port/view-port-size";
 
 // TODO カメラ位置、カメラ視点をコンストラクタから渡す
-// TODO TDCaemraに改名する
 /** 戦闘シーン3Dレイヤー用カメラ */
 export class TDCamera {
   _model: Battle3DCameraModel;
   _camera: THREE.PerspectiveCamera;
-  _subscription: Subscription;
+  _subscriptions: Subscription[];
 
-  constructor(param: Param) {
+  constructor(update: Observable<Update>, resize: Observable<Resize>) {
     this._model = createInitialValue();
-    this._camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+    const aspect = getViewPortWidth() / getViewPortHeight();
+    this._camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
 
-    this._subscription = merge(
-      param.listener.domEvent,
-      param.listener.update
-    ).subscribe(action => {
-      if (action.type === 'resize') {
-        this._resize(action);
-      } else if (action.type === 'Update') {
+    this._subscriptions = [
+      update.subscribe(action => {
         this._update(action);
-      }
-    });
+      }),
+
+      resize.subscribe(action => {
+        this._resize(action);
+      })
+    ];
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._subscription.unsubscribe();
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    })
   }
 
   /**

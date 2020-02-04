@@ -6,7 +6,7 @@ import {toMouseDownRaycaster} from "./mouse-down-raycaster";
 import {toMouseMoveRaycaster} from "./mouse-move-raycaster";
 import {toTouchMoveRaycaster} from "./touch-move-raycaster";
 import {Observable} from "rxjs";
-import type {DOMEvent} from "../dom-event";
+import type {TdDOMEvent} from "../td-dom";
 import type {OverlapAction} from "./index";
 import {filter, map, share} from "rxjs/operators";
 
@@ -18,7 +18,7 @@ import {filter, map, share} from "rxjs/operators";
  * @param camera カメラ
  * @return 当たり判定ストリーム
  */
-export function toOverlapStream(origin: Observable<DOMEvent>, rendererDOM: HTMLElement, camera: THREE.Camera): Observable<OverlapAction> {
+export function toOverlapStream(origin: Observable<TdDOMEvent>, rendererDOM: HTMLElement, camera: THREE.Camera): Observable<OverlapAction> {
   return origin.pipe(
     map(v => {
       switch (v.type) {

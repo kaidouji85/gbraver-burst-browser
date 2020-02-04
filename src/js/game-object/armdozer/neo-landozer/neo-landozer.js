@@ -20,7 +20,6 @@ import {avoidToStand} from "./animation/avoid-to-stand";
 import {charge} from "./animation/charge";
 import {hmToStand} from "./animation/hm-to-stand";
 import {down} from "./animation/down";
-import {empty} from "../../../animation/delay";
 import {turnStart} from "./animation/turn-start";
 import {turnStartToStand} from "./animation/turn-start-to-stand";
 

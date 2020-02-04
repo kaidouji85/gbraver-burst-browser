@@ -2,18 +2,10 @@
 
 import * as THREE from "three";
 import {createHUDCamera} from "../../../camera/create-hud-camera";
-import type {DOMEvent} from "../../../action/dom-event";
 import {Observable, Subscription} from "rxjs";
-import type {Resize} from "../../../action/dom-event/resize";
+import type {Resize} from "../../../action/resize/resize";
 import {onResizeOrthographicCamera} from "../../../camera/resize";
 import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
-
-/** コンストラクタのパラメータ */
-type Param = {
-  listener: {
-    domEvent: Observable<DOMEvent>
-  }
-};
 
 /**
  * 汎用HUDレイヤー用カメラ
@@ -23,14 +15,12 @@ export class PlainHUDCamera {
   _camera: THREE.OrthographicCamera;
   _subscription: Subscription;
 
-  constructor(param: Param) {
+  constructor(resize: Observable<Resize>) {
     this._camera = createHUDCamera();
     this._camera.position.z = HUD_CAMERA_ZINDEX;
 
-    this._subscription = param.listener.domEvent.subscribe(action => {
-      if (action.type === 'resize') {
-        this._resize(action);
-      }
+    this._subscription = resize.subscribe(action => {
+      this._resize(action);
     });
   }
 

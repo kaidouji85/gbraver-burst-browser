@@ -3,7 +3,6 @@
 import '../css/style.css';
 import {Game} from './game/index';
 import {invisibleFirstView} from "./first-view/first-view-visible";
-import {setVH} from "./view-port/css-custom-property";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -11,7 +10,7 @@ import {setVH} from "./view-port/css-custom-property";
 async function main(): Promise<void> {
   try {
     const game = new Game();
-    await game.start();
+    await game.initialize();
     invisibleFirstView();
   } catch(e) {
     throw e;
@@ -19,10 +18,5 @@ async function main(): Promise<void> {
 }
 
 window.addEventListener('load', () => {
-  setVH();
   main();
-});
-
-window.addEventListener('resize', () => {
-  setVH();
 });
