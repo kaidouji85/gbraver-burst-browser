@@ -22,9 +22,9 @@ export class HowToPlayView {
     const prevId = domUuid();
     dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
-        <div class="how-to-play__container__header" id="${prevId}">
-          <span class="how-to-play__container__header__prev">↩︎</span>
-          <span class="how-to-play__container__header__title">遊び方</span>
+        <div class="how-to-play__header">
+          <button class="how-to-play__header__prev" id="${prevId}">↵</button>
+          <div class="how-to-play__header__title">遊び方</div>
         </div>
         <div class="how-to-play__content">
           <ul class="how-to-play__content__rule">
@@ -40,10 +40,12 @@ export class HowToPlayView {
     this._root = document.getElementById(rootId) || document.createElement('div');
 
     this._prev = document.getElementById(prevId) || document.createElement('div');
-    this._prev.addEventListener('click', () => {
+    this._prev.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault();
       this._prevStream.next();
     });
-    this._prev.addEventListener('touchstart', () => {
+    this._prev.addEventListener('touchend', (e: TouchEvent) => {
+      e.preventDefault();
       this._prevStream.next();
     });
   }
