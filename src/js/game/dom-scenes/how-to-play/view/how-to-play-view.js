@@ -7,19 +7,26 @@ import {Observable, Subject} from "rxjs";
 /** イベント通知 */
 type Notifier = {
   prev: Observable<void>;
+  paging: Observable<number>;
 };
 
 /** 遊び方シーンのビュー */
 export class HowToPlayView {
   _prevStream: Subject<void>;
+  _pagingStream: Subject<number>;
   _root: HTMLElement;
   _prev: HTMLElement;
+  _prevPage: HTMLElement;
+  _nextPage: HTMLElement;
 
   constructor(dom: HTMLElement) {
     this._prevStream = new Subject<void>();
+    this._pagingStream = new Subject<number>();
 
     const rootId = domUuid();
     const prevId = domUuid();
+    const prevPageId = domUuid();
+    const nextPageId = domUuid();
     dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
         <div class="how-to-play__header">
@@ -34,11 +41,11 @@ export class HowToPlayView {
           </ul>
         </div>
         <div class="how-to-play__footer">
-          <button class="how-to-play__footer__prev" id="${prevId}">↵戻る</button>
+          <button class="how-to-play__footer__prev" id="${prevId}">&crarr;戻る</button>
           <div class="how-to-play__footer__controllers">
-            <button class="how-to-play__footer__controllers__prev">◀</button>
+            <button class="how-to-play__footer__controllers__prev-page" id="${prevPageId}">&lt;</button>
             <div class="how-to-play__footer__controllers__page">5 / 10</div>
-            <button class="how-to-play__footer__controllers__next">►</button>
+            <button class="how-to-play__footer__controllers__next-page" id="${nextPageId}">&gt;</button>
           </div>
         </div>
       </div>
@@ -54,6 +61,26 @@ export class HowToPlayView {
     this._prev.addEventListener('touchend', (e: TouchEvent) => {
       e.preventDefault();
       this._prevStream.next();
+    });
+
+    this._prevPage = document.getElementById(prevPageId) || document.createElement('div');
+    this._prevPage.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault();
+      this._pagingStream.next(-1);
+    });
+    this._prevPage.addEventListener('touchend', (e: TouchEvent) => {
+      e.preventDefault();
+      this._pagingStream.next(-1);
+    });
+
+    this._nextPage = document.getElementById(nextPageId) || document.createElement('div');
+    this._nextPage.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault();
+      this._pagingStream.next(1);
+    });
+    this._nextPage.addEventListener('touchend', (e: TouchEvent) => {
+      e.preventDefault();
+      this._pagingStream.next(1);
     });
   }
 
@@ -76,6 +103,8 @@ export class HowToPlayView {
   notifier(): Notifier {
     return {
       prev: this._prevStream,
+      paging: this._pagingStream,
+
     };
   }
 }
