@@ -22,15 +22,17 @@ export class HowToPlayView {
     const prevId = domUuid();
     dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
-        <div class="how-to-play__container">
-          <h1 class="how-to-play__container__title">遊び方</h1>
-          <ul class="how-to-play__container__rule">
-            <li class="how-to-play__container__rule__1">相手の体力を先にゼロにした方の勝ち</li>
-            <li class="how-to-play__container__rule__2">攻撃、防御側でバッテリーが出せる</li>
-            <li class="how-to-play__container__rule__3">バッテリーの大小でのみ当たり判定が行われる</li>
-            <li class="how-to-play__container__rule__4">1試合に1回だけ機体がパワーアップするバーストが使える</li>
+        <div class="how-to-play__container__header" id="${prevId}">
+          <span class="how-to-play__container__header__prev">↩︎</span>
+          <span class="how-to-play__container__header__title">遊び方</span>
+        </div>
+        <div class="how-to-play__content">
+          <ul class="how-to-play__content__rule">
+            <li class="how-to-play__content__rule__1">相手の体力を先にゼロにした方の勝ち</li>
+            <li class="how-to-play__content__rule__2">攻撃、防御側でバッテリーが出せる</li>
+            <li class="how-to-play__content__rule__3">バッテリーの大小でのみ当たり判定が行われる</li>
+            <li class="how-to-play__content__rule__4">1試合に1回だけ機体がパワーアップするバーストが使える</li>
           </ul>
-          <button class="how-to-play__container__prev" id="${prevId}">戻る</button>
         </div>
       </div>
     `;

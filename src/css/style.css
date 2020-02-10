@@ -3,6 +3,8 @@
     --safe-area-right: env(safe-area-inset-right);
     --safe-area-bottom: env(safe-area-inset-bottom);
     --safe-area-left: env(safe-area-inset-left);
+    --padding-top: calc(var(--safe-area-top) + 1em);
+    --padding-left: calc(var(--safe-area-right) + 1em);
 }
 
 .service-worker-update {
@@ -126,24 +128,11 @@
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
     background-color: rgb(23, 23, 23);
-    padding: 1em;
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-top: var(--padding-top);
+    padding-left: var(--padding-left);
 }
 
 .how-to-play--invisible {
     display: none;
-}
-
-.how-to-play button {
-    width: 10em;
-    height: 3em;
-    margin: 0.5em;
-    font-size: 1em;
-    border-radius: 0.5em;
-    background-color: #1e90ff;
-    color: rgb(240, 240, 240);
-    border: none;
 }
