@@ -23,7 +23,6 @@ export class HowToPlayView {
     dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
         <div class="how-to-play__header">
-          <button class="how-to-play__header__prev" id="${prevId}">↵</button>
           <div class="how-to-play__header__title">遊び方</div>
         </div>
         <div class="how-to-play__content">
@@ -33,6 +32,14 @@ export class HowToPlayView {
             <li class="how-to-play__content__rule__3">バッテリーの大小でのみ当たり判定が行われる</li>
             <li class="how-to-play__content__rule__4">1試合に1回だけ機体がパワーアップするバーストが使える</li>
           </ul>
+        </div>
+        <div class="how-to-play__footer">
+          <button class="how-to-play__footer__prev" id="${prevId}">↵戻る</button>
+          <div class="how-to-play__footer__controllers">
+            <button class="how-to-play__footer__controllers__prev">◀</button>
+            <div class="how-to-play__footer__controllers__page">5 / 10</div>
+            <button class="how-to-play__footer__controllers__next">►</button>
+          </div>
         </div>
       </div>
     `;
