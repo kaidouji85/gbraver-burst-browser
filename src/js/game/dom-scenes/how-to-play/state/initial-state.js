@@ -10,6 +10,8 @@ import type {HowToPlayState} from "./how-to-play-state";
 export function createInitialState(): HowToPlayState {
   return {
     isVisible: false,
-    canOperation: false
+    canOperation: false,
+    page: 1,
+    maxPage: 10,
   };
 }

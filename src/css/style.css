@@ -3,6 +3,10 @@
     --safe-area-right: env(safe-area-inset-right);
     --safe-area-bottom: env(safe-area-inset-bottom);
     --safe-area-left: env(safe-area-inset-left);
+    --screen-padding-top: calc(var(--safe-area-top) + 1em);
+    --screen-padding-left: calc(var(--safe-area-left) + 1em);
+    --screen-padding-right: calc(var(--safe-area-right) + 1em);
+    --screen-padding-bottom: calc(var(--safe-area-bottom) + 1em);
 }
 
 .service-worker-update {
@@ -87,8 +91,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1em;
     box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
 }
 
 .title--invisible {
@@ -123,27 +130,79 @@
 }
 
 .how-to-play {
+    display: flex;
+    flex-direction: column;
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
     background-color: rgb(23, 23, 23);
-    padding: 1em;
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
 }
 
 .how-to-play--invisible {
     display: none;
 }
 
-.how-to-play button {
-    width: 10em;
+.how-to-play__header {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+}
+
+.how-to-play__content {
+    flex: 1 1;
+}
+
+.how-to-play__footer {
+    display: grid;
+    grid-template-columns: 5em 1fr 5em;
+}
+
+.how-to-play__footer__prev {
     height: 3em;
-    margin: 0.5em;
+    width: 6em;
     font-size: 1em;
-    border-radius: 0.5em;
+    border: none;
     background-color: #1e90ff;
     color: rgb(240, 240, 240);
+    border-radius: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.how-to-play__footer__controllers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.how-to-play__footer__controllers button {
+    height: 3em;
+    width: 3em;
+    font-size: 1em;
     border: none;
+    background-color: #1e90ff;
+    color: rgb(240, 240, 240);
+    border-radius: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.how-to-play__footer__controllers__now-page {
+    margin-left: 1em;
+    width: 2em;
+    text-align: end;
+}
+
+.how-to-play__footer__controllers__slash {
+    margin: 0 0.5em;
+}
+
+.how-to-play__footer__controllers__max-page {
+    margin-right: 1em;
+    width: 2em;
 }
