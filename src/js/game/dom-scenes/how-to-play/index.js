@@ -4,10 +4,11 @@ import {HowToPlayView} from "./view/how-to-play-view";
 import type {HowToPlayState} from "./state/how-to-play-state";
 import {createInitialState} from "./state/initial-state";
 import {show} from "./state/show";
-import {Observable} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {EndHowToPlay} from "../../../action/game/end-how-to-play";
 import {filter, map} from "rxjs/operators";
 import {hidden} from "./state/hidden";
+import {pageChange} from "./state/pageChange";
 
 /** イベント通知 */
 type Notifier = {
@@ -19,6 +20,7 @@ export class HowToPlay {
   _state: HowToPlayState;
   _view: HowToPlayView;
   _endHowToPlay: Observable<EndHowToPlay>;
+  _subscriptions: Subscription[];
 
   constructor(dom: HTMLElement) {
     this._state = createInitialState();
@@ -30,7 +32,13 @@ export class HowToPlay {
       map(() => ({
         type: 'EndHowToPlay'
       }))
-    )
+    );
+
+    this._subscriptions = [
+      this._view.notifier().paging.subscribe((value: number) => {
+        this._onPageChange(value);
+      })
+    ];
   }
 
   /**
@@ -58,5 +66,15 @@ export class HowToPlay {
     return {
       endHowToPlay: this._endHowToPlay
     };
+  }
+
+  /**
+   * ページングが変更された際のイベント
+   *
+   * @param difference ページ変化量
+   */
+  _onPageChange(difference: number): void {
+    this._state = pageChange(this._state, difference);
+    this._view.engage(this._state);
   }
 }
