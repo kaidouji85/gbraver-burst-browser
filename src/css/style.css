@@ -192,6 +192,10 @@
     justify-content: center;
 }
 
-.how-to-play__footer__controllers__page {
-    margin: 0 1em;
+.how-to-play__footer__controllers__now-page {
+    margin-left: 1em;
+}
+
+.how-to-play__footer__controllers__max-page {
+    margin-right: 1em;
 }

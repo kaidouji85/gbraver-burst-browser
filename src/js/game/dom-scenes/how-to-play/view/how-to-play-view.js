@@ -18,6 +18,8 @@ export class HowToPlayView {
   _prev: HTMLElement;
   _prevPage: HTMLElement;
   _nextPage: HTMLElement;
+  _nowPage: HTMLElement;
+  _maxPage: HTMLElement;
 
   constructor(dom: HTMLElement) {
     this._prevStream = new Subject<void>();
@@ -27,6 +29,8 @@ export class HowToPlayView {
     const prevId = domUuid();
     const prevPageId = domUuid();
     const nextPageId = domUuid();
+    const nowPageId = domUuid();
+    const maxPageId = domUuid();
     dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
         <div class="how-to-play__header">
@@ -44,7 +48,9 @@ export class HowToPlayView {
           <button class="how-to-play__footer__prev" id="${prevId}">&crarr;戻る</button>
           <div class="how-to-play__footer__controllers">
             <button class="how-to-play__footer__controllers__prev-page" id="${prevPageId}">&lt;</button>
-            <div class="how-to-play__footer__controllers__page">5 / 10</div>
+            <div class="how-to-play__footer__controllers__now-page" id="${nowPageId}"></div>
+            <div class="how-to-play__footer__controllers__slash">/</div>
+            <div class="how-to-play__footer__controllers__max-page" id="${maxPageId}"></div>
             <button class="how-to-play__footer__controllers__next-page" id="${nextPageId}">&gt;</button>
           </div>
         </div>
@@ -82,6 +88,10 @@ export class HowToPlayView {
       e.preventDefault();
       this._pagingStream.next(1);
     });
+
+    this._nowPage = document.getElementById(nowPageId) || document.createElement('div');
+
+    this._maxPage = document.getElementById(maxPageId) || document.createElement('div');
   }
 
   /**
@@ -93,6 +103,8 @@ export class HowToPlayView {
     this._root.className = state.isVisible
       ? 'how-to-play'
       : 'how-to-play--invisible';
+    this._nowPage.innerText = state.page.toString();
+    this._maxPage.innerText = state.maxPage.toString();
   }
 
   /**
