@@ -26,8 +26,8 @@ export function pageChange(state: HowToPlayState, difference: number): HowToPlay
  */
 export function updatePage(origin: number, difference: number, maxPage: number): number {
   const updated = origin + difference;
-  if (updated < 0) {
-    return 0;
+  if (updated < 1) {
+    return 1;
   } else if (maxPage < updated) {
     return maxPage;
   }
