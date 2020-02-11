@@ -36,11 +36,13 @@ export class TitleView {
     const howToPlayId = domUuid();
     params.dom.innerHTML = `
       <div class="title" id="${rootId}">
-        <img class="title__logo" src="${resourceBasePath()}/logo.png"/>
-        <div class="title__copy-right">(C) 2020 Yuusuke Takeuchi</div>
-        <div class="title__buttons">
-          <button class="title__buttons__game-start" id="${gameStartId}" >ゲームスタート</button>
-          <button class="title__buttons__how-to-play" id="${howToPlayId}">遊び方</button>
+        <div class="title__logo">
+          <img class="title__logo__image" src="${resourceBasePath()}/logo.png"/>
+          <div class="title__logo__copy-right">(C) 2020 Yuusuke Takeuchi</div>
+        </div>
+        <div class="title__controllers">
+          <button class="title__controllers__game-start" id="${gameStartId}" >スタート</button>
+          <button class="title__controllers__how-to-play" id="${howToPlayId}">遊び方</button>
         </div>
       </div>
     `;
@@ -48,18 +50,22 @@ export class TitleView {
     this._root = document.getElementById(rootId) || document.createElement('div');
 
     this._gameStart = document.getElementById(gameStartId) || document.createElement('div');
-    this._gameStart.addEventListener('click', () => {
+    this._gameStart.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault();
       this._gameStartStream.next();
     });
-    this._gameStart.addEventListener('touchstart', () => {
+    this._gameStart.addEventListener('touchstart', (e: TouchEvent) => {
+      e.preventDefault();
       this._gameStartStream.next();
     });
 
     this._howToPlay = document.getElementById(howToPlayId) || document.createElement('div');
-    this._howToPlay.addEventListener('click', () => {
+    this._howToPlay.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault();
       this._howToPlayStream.next();
     });
-    this._howToPlay.addEventListener('touchstart', () => {
+    this._howToPlay.addEventListener('touchstart', (e: TouchEvent) => {
+      e.preventDefault();
       this._howToPlayStream.next();
     });
 
