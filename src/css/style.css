@@ -194,8 +194,15 @@
 
 .how-to-play__footer__controllers__now-page {
     margin-left: 1em;
+    width: 2em;
+    text-align: end;
+}
+
+.how-to-play__footer__controllers__slash {
+    margin: 0 0.5em;
 }
 
 .how-to-play__footer__controllers__max-page {
     margin-right: 1em;
+    width: 2em;
 }
