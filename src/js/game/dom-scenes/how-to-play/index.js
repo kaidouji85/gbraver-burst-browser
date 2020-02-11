@@ -8,7 +8,7 @@ import {Observable, Subscription} from "rxjs";
 import type {EndHowToPlay} from "../../../action/game/end-how-to-play";
 import {filter, map} from "rxjs/operators";
 import {hidden} from "./state/hidden";
-import {pageChange} from "./state/pageChange";
+import {pageChange} from "./state/page-change";
 
 /** イベント通知 */
 type Notifier = {
