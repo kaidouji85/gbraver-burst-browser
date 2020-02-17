@@ -23,7 +23,7 @@ export class DOMScenes {
 
   /** デストラクタ相当の処理 */
   destructor() {
-    // NOP
+    this._title.destructor();
   }
 
   /**
@@ -44,7 +44,7 @@ export class DOMScenes {
 
   /**
    * 本クラス配下のシーンを全て非表示にする
-   * 本メソッドは、3Dシーンを表示する前に呼ばれる想定
+   * 本メソッドは、3Dシーンを表示する前に呼ばれる想定である
    */
   hidden(): void {
     this._title.hidden();
