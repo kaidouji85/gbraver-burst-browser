@@ -2,10 +2,17 @@
  
 ロボットで対戦するゲームです。
 
+## git clone直後にやること
+
+```
+cp .env.tepmpate .env
+# .envに適切な値をセットする
+
+npm install
+```
 ## ローカル環境で動かす
 
 ```
-npm install
 npm start
 # ブラウザを起動して<localhost:8080>を開く
 ```
