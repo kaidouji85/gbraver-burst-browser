@@ -5,6 +5,9 @@
 ## ローカル環境で動かす
 
 ```
+cp .env.tepmpate .env
+# .envに適切な値をセットする
+
 npm install
 npm start
 # ブラウザを起動して<localhost:8080>を開く
