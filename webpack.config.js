@@ -4,6 +4,7 @@ const Puid = require('puid');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const GbraverBurstConfig = require('./gbraver-burst-config');
 
 const hash = new Puid().generate();
 const BUILD_PATH = 'build/production';
@@ -65,6 +66,7 @@ module.exports = {
     ]),
     new webpack.DefinePlugin({
       GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(BUILD_RESOURCE_PATH),
+      GBRAVER_BURST_HOW_TO_PLAY: JSON.stringify(GbraverBurstConfig.HOW_TO_PLAY_URL),
     }),
     new MiniCssExtractPlugin({
       filename: BUILD_CSS_PATH
