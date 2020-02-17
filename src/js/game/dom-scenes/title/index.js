@@ -9,6 +9,7 @@ import {hidden} from "./state/hidden";
 import {filter, map} from "rxjs/operators";
 import {show} from "./state/show";
 import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
+import {openWindow} from "../../../window/open-window";
 
 /** イベント通知 */
 export type Notifier = {
@@ -80,6 +81,7 @@ export class Title {
       return;
     }
 
-    window.open(howToPlayMovieURL(), '_new');
+    const url = howToPlayMovieURL();
+    openWindow(url);
   }
 }
