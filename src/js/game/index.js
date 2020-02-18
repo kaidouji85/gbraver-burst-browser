@@ -93,6 +93,8 @@ export class Game {
   _onEndTitle(action: EndTitle) {
     if (action.button === 'GameStart') {
       this._onGameStart();
+    } else if (action.button === 'HowToPlay') {
+      this._onHowToPlay();
     }
   }
 
@@ -111,6 +113,13 @@ export class Game {
     } catch (e) {
       throw e;
     }
+  }
+
+  /**
+   * タイトルで遊び方を押した時の処理
+   */
+  _onHowToPlay() {
+    this._domScenes.showHowToPlay();
   }
 
   /**

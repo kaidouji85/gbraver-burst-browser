@@ -2,7 +2,7 @@
 
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
-import {Observable, Subscription} from "rxjs";
+import {merge, Observable, Subscription} from "rxjs";
 import type {EndTitle} from "../../../action/game/end-title";
 import {TitleView} from "./view/title-view";
 import {hidden} from "./state/hidden";
@@ -21,7 +21,6 @@ export class Title {
   _state: TitleState;
   _view: TitleView;
   _endTitle: Observable<EndTitle>;
-  _subscriptions: Subscription[];
 
   constructor(dom: HTMLElement) {
     this._state = createInitialState();
@@ -30,28 +29,30 @@ export class Title {
       initialState: this._state,
     });
 
-    this._endTitle = this._view.notifier().gameStart.pipe(
-      filter(() => this._state.canOperation),
-      map(() => ({
-        type: 'EndTitle',
-        button: 'GameStart'
-      }))
-    );
+    this._endTitle = merge(
+      this._view.notifier().gameStart.pipe(
+        filter(() => this._state.canOperation),
+        map(() => ({
+          type: 'EndTitle',
+          button: 'GameStart'
+        }))
+      ),
 
-    this._subscriptions = [
-      this._view.notifier().howToPlay.subscribe(() => {
-        this._onHowToPlayClick();
-      })
-    ];
+      this._view.notifier().howToPlay.pipe(
+        filter(() => this._state.canOperation),
+        map(() => ({
+          type: 'EndTitle',
+          button: 'HowToPlay'
+        }))
+      ),
+    );
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._subscriptions.forEach(v => {
-      v.unsubscribe();
-    });
+
   }
 
   /** イベント通知ストリーム */
@@ -71,17 +72,5 @@ export class Title {
   hidden(): void {
     this._state = hidden(this._state);
     this._view.engage(this._state);
-  }
-
-  /**
-   * 遊び方がクリックされた際のイベント
-   */
-  _onHowToPlayClick(): void {
-    if (!this._state.canOperation) {
-      return;
-    }
-
-    const url = howToPlayMovieURL();
-    openWindow(url);
   }
 }

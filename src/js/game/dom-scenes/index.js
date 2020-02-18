@@ -28,7 +28,7 @@ export class DOMScenes {
 
   /** デストラクタ相当の処理 */
   destructor() {
-    this._title.destructor();
+    // NOP
   }
 
   /**
@@ -45,6 +45,12 @@ export class DOMScenes {
   /** タイトルを表示する */
   showTitle(): void {
     this._title.show();
+  }
+
+  /** 遊び方画面を表示する */
+  showHowToPlay(): void {
+    this._title.hidden();
+    this._howToPlay.show();
   }
 
   /**
