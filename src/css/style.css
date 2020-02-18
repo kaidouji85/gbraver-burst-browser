@@ -141,7 +141,7 @@
 
 .how-to-play {
     display: grid;
-    grid-template-rows: min-content 1fr min-content;
+    grid-template-rows: 1fr min-content;
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
     background-color: var(--background-color);
@@ -154,11 +154,6 @@
 
 .how-to-play--invisible {
     display: none;
-}
-
-.how-to-play__title {
-    color: var(--font-color);
-    font-size: 1.3em;
 }
 
 .how-to-play__movie-container {
@@ -174,7 +169,12 @@
     max-height: 315px;
 }
 
-.how-to-play__prev {
+.how-to-play__controllers {
+    display: flex;
+    justify-content: center;
+}
+
+.how-to-play__controllers__prev {
     width: 8em;
     height: 3em;
     font-size: 1em;
