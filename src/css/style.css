@@ -152,6 +152,10 @@
     padding-bottom: var(--screen-padding-bottom);
 }
 
+.how-to-play--invisible {
+    display: none;
+}
+
 .how-to-play__title {
     color: var(--font-color);
     font-size: 1.3em;
