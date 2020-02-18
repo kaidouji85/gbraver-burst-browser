@@ -5,6 +5,14 @@ import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
 import type {HowToPlayState} from "./state/how-to-play-state";
 import {createInitialState} from "./state/initial-state";
 import {show} from "./state/show";
+import {Observable} from "rxjs";
+import type {EndHowToPlay} from "../../../action/game/end-how-to-play";
+import {map} from "rxjs/operators";
+
+/** イベント通知 */
+type Notifier = {
+  endHowToPlay: Observable<EndHowToPlay>
+};
 
 /**
  * 遊び方シーン
@@ -12,6 +20,7 @@ import {show} from "./state/show";
 export class HowToPlay {
   _state: HowToPlayState;
   _view: HowToPlayView;
+  _notifier: Notifier;
 
   constructor(dom: HTMLElement) {
     this._state = createInitialState();
@@ -21,6 +30,12 @@ export class HowToPlay {
       movieURL: howToPlayMovieURL()
     });
     this._view.engage(this._state);
+
+    this._notifier = {
+      endHowToPlay: this._view.notifier().prev.pipe(
+        map(() => ({type: 'EndHowToPlay'}))
+      )
+    };
   }
 
   /**
@@ -29,5 +44,9 @@ export class HowToPlay {
   show(): void {
     this._state = show(this._state);
     this._view.engage(this._state);
+  }
+
+  notifier(): Notifier {
+    return this._notifier;
   }
 }

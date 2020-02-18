@@ -8,8 +8,6 @@ import {TitleView} from "./view/title-view";
 import {hidden} from "./state/hidden";
 import {filter, map} from "rxjs/operators";
 import {show} from "./state/show";
-import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
-import {openWindow} from "../../../window/open-window";
 
 /** イベント通知 */
 export type Notifier = {
