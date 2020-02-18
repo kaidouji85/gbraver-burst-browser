@@ -138,3 +138,16 @@
     color: var(--button-font-color);
     border: none;
 }
+
+.how-to-play {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: var(--background-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+}
