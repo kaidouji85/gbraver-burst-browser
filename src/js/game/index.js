@@ -21,6 +21,7 @@ import {createLoadingActionListener} from "../action/loading/create-listener";
 import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
+import type {EndHowToPlay} from "../action/game/end-how-to-play";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -56,13 +57,23 @@ export class Game {
     this._resources = null;
 
     this._subscriptions = [
-      this._domScenes.notifier().endTitle.subscribe(action => {
-        this._onEndTitle(action);
-      }),
+      this._domScenes.notifier()
+        .endTitle
+        .subscribe(action => {
+          this._onEndTitle(action);
+        }),
 
-      this._tdScenes.notifier().endBattle.subscribe(action => {
-        this._onEndBattle(action);
-      })
+      this._domScenes.notifier()
+        .endHowToPlay
+        .subscribe(action => {
+          this._onEndHowToPlay(action);
+        }),
+
+      this._tdScenes.notifier()
+        .endBattle
+        .subscribe(action => {
+          this._onEndBattle(action);
+        })
     ];
   }
 
@@ -93,6 +104,8 @@ export class Game {
   _onEndTitle(action: EndTitle) {
     if (action.button === 'GameStart') {
       this._onGameStart();
+    } else if (action.button === 'HowToPlay') {
+      this._onHowToPlay();
     }
   }
 
@@ -111,6 +124,22 @@ export class Game {
     } catch (e) {
       throw e;
     }
+  }
+
+  /**
+   * タイトルで遊び方を押した時の処理
+   */
+  _onHowToPlay() {
+    this._domScenes.showHowToPlay();
+  }
+
+  /**
+   * 遊び方シーン終了
+   *
+   * @param action アクション
+   */
+  _onEndHowToPlay(action: EndHowToPlay) {
+    this._domScenes.showTitle();
   }
 
   /**
