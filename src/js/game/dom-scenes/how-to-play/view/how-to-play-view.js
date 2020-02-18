@@ -4,6 +4,7 @@ import type {HowToPlayState} from "../state/how-to-play-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 
+/** イベント通知ストリーム */
 export type Notifier = {
   prev: Observable<void>
 };
