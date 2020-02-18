@@ -8,6 +8,7 @@ import {show} from "./state/show";
 import {Observable} from "rxjs";
 import type {EndHowToPlay} from "../../../action/game/end-how-to-play";
 import {map} from "rxjs/operators";
+import {hidden} from "./state/hidden";
 
 /** イベント通知 */
 type Notifier = {
@@ -46,6 +47,19 @@ export class HowToPlay {
     this._view.engage(this._state);
   }
 
+  /**
+   * 本シーンを非表示にする
+   */
+  hidden(): void {
+    this._state = hidden(this._state);
+    this._view.engage(this._state);
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
   notifier(): Notifier {
     return this._notifier;
   }

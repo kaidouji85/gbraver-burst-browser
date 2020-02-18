@@ -139,7 +139,7 @@ export class Game {
    * @param action アクション
    */
   _onEndHowToPlay(action: EndHowToPlay) {
-    console.log('end how to play');
+    this._domScenes.showTitle();
   }
 
   /**

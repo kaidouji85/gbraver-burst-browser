@@ -50,6 +50,7 @@ export class DOMScenes {
 
   /** タイトルを表示する */
   showTitle(): void {
+    this._howToPlay.hidden();
     this._title.show();
   }
 
@@ -65,5 +66,6 @@ export class DOMScenes {
    */
   hidden(): void {
     this._title.hidden();
+    this._howToPlay.hidden();
   }
 }
