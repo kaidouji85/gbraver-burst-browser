@@ -56,24 +56,18 @@ export class Game {
 
     this._resources = null;
 
+    const domNotifier = this._domScenes.notifier();
+    const tdNotifier = this._tdScenes.notifier();
     this._subscriptions = [
-      this._domScenes.notifier()
-        .endTitle
-        .subscribe(action => {
-          this._onEndTitle(action);
-        }),
-
-      this._domScenes.notifier()
-        .endHowToPlay
-        .subscribe(action => {
-          this._onEndHowToPlay(action);
-        }),
-
-      this._tdScenes.notifier()
-        .endBattle
-        .subscribe(action => {
-          this._onEndBattle(action);
-        })
+      domNotifier.endTitle.subscribe(action => {
+        this._onEndTitle(action);
+      }),
+      domNotifier.endHowToPlay.subscribe(action => {
+        this._onEndHowToPlay(action);
+      }),
+      tdNotifier.endBattle.subscribe(action => {
+        this._onEndBattle(action);
+      })
     ];
   }
 
