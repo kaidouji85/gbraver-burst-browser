@@ -1,12 +1,13 @@
 // @flow
 
 import {HowToPlayView} from "./view/how-to-play-view";
+import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
 import type {HowToPlayState} from "./state/how-to-play-state";
 import {createInitialState} from "./state/initial-state";
 import {show} from "./state/show";
 import {Observable} from "rxjs";
 import type {EndHowToPlay} from "../../../action/game/end-how-to-play";
-import {filter, map} from "rxjs/operators";
+import {map} from "rxjs/operators";
 import {hidden} from "./state/hidden";
 
 /** イベント通知 */
@@ -14,27 +15,32 @@ type Notifier = {
   endHowToPlay: Observable<EndHowToPlay>
 };
 
-/** 遊び方シーン */
+/**
+ * 遊び方シーン
+ */
 export class HowToPlay {
   _state: HowToPlayState;
   _view: HowToPlayView;
-  _endHowToPlay: Observable<EndHowToPlay>;
+  _notifier: Notifier;
 
   constructor(dom: HTMLElement) {
     this._state = createInitialState();
-    this._view = new HowToPlayView(dom);
+
+    this._view = new HowToPlayView({
+      dom: dom,
+      movieURL: howToPlayMovieURL()
+    });
     this._view.engage(this._state);
 
-    this._endHowToPlay = this._view.notifier().prev.pipe(
-      filter(() => this._state.canOperation),
-      map(() => ({
-        type: 'EndHowToPlay'
-      }))
-    )
+    this._notifier = {
+      endHowToPlay: this._view.notifier().prev.pipe(
+        map(() => ({type: 'EndHowToPlay'}))
+      )
+    };
   }
 
   /**
-   * シーンを表示する
+   * 本シーンを表示する
    */
   show(): void {
     this._state = show(this._state);
@@ -42,7 +48,7 @@ export class HowToPlay {
   }
 
   /**
-   * シーンを非表示にする
+   * 本シーンを非表示にする
    */
   hidden(): void {
     this._state = hidden(this._state);
@@ -50,13 +56,11 @@ export class HowToPlay {
   }
 
   /**
-   * イベント通利ストリームを取得する
+   * イベント通知ストリームを取得する
    *
-   * @return イベント通利ストリーム
+   * @return イベント通知ストリーム
    */
   notifier(): Notifier {
-    return {
-      endHowToPlay: this._endHowToPlay
-    };
+    return this._notifier;
   }
 }

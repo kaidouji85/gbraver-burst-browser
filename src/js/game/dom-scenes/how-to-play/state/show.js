@@ -3,7 +3,7 @@
 import type {HowToPlayState} from "./how-to-play-state";
 
 /**
- * シーンを表示する
+ * 本シーンを表示する
  *
  * @param state 変更前の状態
  * @return 変更後の状態
@@ -11,7 +11,6 @@ import type {HowToPlayState} from "./how-to-play-state";
 export function show(state: HowToPlayState): HowToPlayState {
   return {
     ...state,
-    isVisible: true,
-    canOperation: true
+    isVisible: true
   };
 }

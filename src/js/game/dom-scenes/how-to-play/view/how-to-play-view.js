@@ -4,33 +4,37 @@ import type {HowToPlayState} from "../state/how-to-play-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 
-/** イベント通知 */
-type Notifier = {
-  prev: Observable<void>;
+/** イベント通知ストリーム */
+export type Notifier = {
+  prev: Observable<void>
 };
 
-/** 遊び方シーンのビュー */
+/** パラメータ */
+export type Param = {
+  dom: HTMLElement,
+  movieURL: string
+};
+
+/**
+ * 遊び方シーンのビュー
+ */
 export class HowToPlayView {
   _prevStream: Subject<void>;
   _root: HTMLElement;
   _prev: HTMLElement;
 
-  constructor(dom: HTMLElement) {
-    this._prevStream = new Subject<void>();
+  constructor(param: Param) {
+    this._prevStream = new Subject();
 
     const rootId = domUuid();
     const prevId = domUuid();
-    dom.innerHTML = `
+    param.dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
-        <div class="how-to-play__container">
-          <h1 class="how-to-play__container__title">遊び方</h1>
-          <ul class="how-to-play__container__rule">
-            <li class="how-to-play__container__rule__1">相手の体力を先にゼロにした方の勝ち</li>
-            <li class="how-to-play__container__rule__2">攻撃、防御側でバッテリーが出せる</li>
-            <li class="how-to-play__container__rule__3">バッテリーの大小でのみ当たり判定が行われる</li>
-            <li class="how-to-play__container__rule__4">1試合に1回だけ機体がパワーアップするバーストが使える</li>
-          </ul>
-          <button class="how-to-play__container__prev" id="${prevId}">戻る</button>
+        <div class="how-to-play__movie-container">
+          <iframe class="how-to-play__movie-container__movie" width="560" height="315" src="${param.movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="how-to-play__controllers">
+          <button class="how-to-play__controllers__prev" id="${prevId}">戻る</button>
         </div>
       </div>
     `;
@@ -38,18 +42,20 @@ export class HowToPlayView {
     this._root = document.getElementById(rootId) || document.createElement('div');
 
     this._prev = document.getElementById(prevId) || document.createElement('div');
-    this._prev.addEventListener('click', () => {
+    this._prev.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault();
       this._prevStream.next();
     });
-    this._prev.addEventListener('touchstart', () => {
+    this._prev.addEventListener('touchstart', (e: TouchEvent) => {
+      e.preventDefault();
       this._prevStream.next();
     });
   }
 
   /**
-   * ステートをビューに反映する
+   * 状態をビューに反映させる
    *
-   * @param state ステート
+   * @param state 状態
    */
   engage(state: HowToPlayState): void {
     this._root.className = state.isVisible
@@ -58,9 +64,9 @@ export class HowToPlayView {
   }
 
   /**
-   * イベント通知ストリームを取得する
+   * イベント通知
    *
-   * @return イベント通知ストリーム
+   * @return イベント通知
    */
   notifier(): Notifier {
     return {

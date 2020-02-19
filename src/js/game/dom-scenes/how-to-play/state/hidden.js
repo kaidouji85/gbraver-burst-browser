@@ -3,15 +3,14 @@
 import type {HowToPlayState} from "./how-to-play-state";
 
 /**
- * シーンを非表示にする
+ * シーン非表示
  *
- * @param state 更新前のステート
- * @return 更新後のステート
+ * @param state 変更前ステート
+ * @return 変更後ステート
  */
 export function hidden(state: HowToPlayState): HowToPlayState {
   return {
     ...state,
-    isVisible: false,
-    canOperation: false
+    isVisible: false
   };
 }

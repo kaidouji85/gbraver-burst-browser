@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const path = require('path');
 const webpack = require('webpack');
 const Puid = require('puid');
@@ -65,6 +67,7 @@ module.exports = {
     ]),
     new webpack.DefinePlugin({
       GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(BUILD_RESOURCE_PATH),
+      GBRAVER_BURST_HOW_TO_PLAY: JSON.stringify(process.env.HOW_TO_PLAY_URL),
     }),
     new MiniCssExtractPlugin({
       filename: BUILD_CSS_PATH

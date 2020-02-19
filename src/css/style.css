@@ -3,13 +3,22 @@
     --safe-area-right: env(safe-area-inset-right);
     --safe-area-bottom: env(safe-area-inset-bottom);
     --safe-area-left: env(safe-area-inset-left);
+    --screen-padding-top: calc(var(--safe-area-top) + 1em);
+    --screen-padding-left: calc(var(--safe-area-left) + 1em);
+    --screen-padding-right: calc(var(--safe-area-right) + 1em);
+    --screen-padding-bottom: calc(var(--safe-area-bottom) + 1em);
+    --font-color: rgb(240, 240, 240);
+    --background-color: rgb(23, 23, 23);
+    --button-background-color: #1e90ff;
+    --button-font-color: rgb(240, 240, 240);
+
 }
 
 .service-worker-update {
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
-    background-color: rgb(23, 23, 23);
-    color: rgb(240, 240, 240);
+    background-color: var(--background-color);
+    color: var(--font-color);
     display: flex;
     flex-direction: column;
     padding: 1em;
@@ -31,8 +40,8 @@
     .play-in-landscape {
         width: 100vw;
         height: 100vh;
-        background-color: rgb(23, 23, 23);
-        color: rgb(240, 240, 240);
+        background-color: var(--background-color);
+        color: var(--font-color);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -50,8 +59,8 @@
 .loading {
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
-    background-color: rgb(23, 23, 23);
-    color: rgb(240, 240, 240);
+    background-color: var(--background-color);
+    color: var(--font-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -80,15 +89,16 @@
 }
 
 .title {
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    background-color: rgb(23, 23, 23);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1em;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: var(--background-color);
     box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
 }
 
 .title--invisible {
@@ -96,54 +106,80 @@
 }
 
 .title__logo {
-    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1;
+}
+
+.title__logo__image {
+    height: 75%;
     max-height: 171px;
 }
 
-.title__copy-right {
-    margin-top: 1em;
+.title__logo__copy-right {
+    margin-top: 0.5em;
 }
 
-.title__buttons {
-    margin-top: 2em;
-    margin-bottom: 1em;
+.title__controllers {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
-.title__buttons button {
+.title__controllers button {
     width: 10em;
     height: 3em;
-    margin: 0.5em;
+    margin: 0 0.5em;
     font-size: 1em;
     border-radius: 0.5em;
-    background-color: #1e90ff;
-    color: rgb(240, 240, 240);
+    background-color: var(--button-background-color);
+    color: var(--button-font-color);
     border: none;
 }
 
 .how-to-play {
+    display: grid;
+    grid-template-rows: 1fr min-content;
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
-    background-color: rgb(23, 23, 23);
-    padding: 1em;
+    background-color: var(--background-color);
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
 }
 
 .how-to-play--invisible {
     display: none;
 }
 
-.how-to-play button {
+.how-to-play__movie-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 1em;
+}
+
+.how-to-play__movie-container__movie {
+    height: 100%;
+    max-height: 315px;
+}
+
+.how-to-play__controllers {
+    display: flex;
+    justify-content: center;
+}
+
+.how-to-play__controllers__prev {
     width: 10em;
     height: 3em;
-    margin: 0.5em;
     font-size: 1em;
     border-radius: 0.5em;
-    background-color: #1e90ff;
-    color: rgb(240, 240, 240);
+    background-color: var(--button-background-color);
+    color: var(--button-font-color);
     border: none;
 }

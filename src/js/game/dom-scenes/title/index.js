@@ -2,7 +2,7 @@
 
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
-import {merge, Observable} from "rxjs";
+import {merge, Observable, Subscription} from "rxjs";
 import type {EndTitle} from "../../../action/game/end-title";
 import {TitleView} from "./view/title-view";
 import {hidden} from "./state/hidden";
@@ -42,8 +42,15 @@ export class Title {
           type: 'EndTitle',
           button: 'HowToPlay'
         }))
-      )
+      ),
     );
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+
   }
 
   /** イベント通知ストリーム */

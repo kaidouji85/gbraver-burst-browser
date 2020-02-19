@@ -10,7 +10,6 @@ import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {createServiceWorkerActionListener} from "../action/service-worker/create-listener";
 import {resourceBasePath} from "../resource/resource-base-path";
-import type {EndTitle} from "../action/game/end-title";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 import type {EndBattle} from "../action/game/end-battle";
 import {CssVH} from "../view-port/vh";
@@ -22,6 +21,7 @@ import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import type {EndHowToPlay} from "../action/game/end-how-to-play";
+import {filter} from "rxjs/operators";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -56,16 +56,23 @@ export class Game {
 
     this._resources = null;
 
+    const domNotifier = this._domScenes.notifier();
+    const tdNotifier = this._tdScenes.notifier();
     this._subscriptions = [
-      this._domScenes.notifier().endTitle.subscribe(action => {
-        this._onEndTitle(action);
-      }),
-
-      this._domScenes.notifier().endHowToPlay.subscribe(action => {
+      domNotifier.endTitle
+        .pipe(filter(v => v.button === 'GameStart'))
+        .subscribe(action => {
+          this._onEndTitleBecauseGameStart();
+        }),
+      domNotifier.endTitle
+        .pipe(filter(v => v.button === 'HowToPlay'))
+        .subscribe(action => {
+          this._onEndTitleBecauseHowToPlay();
+        }),
+      domNotifier.endHowToPlay.subscribe(action => {
         this._onEndHowToPlay(action);
       }),
-
-      this._tdScenes.notifier().endBattle.subscribe(action => {
+      tdNotifier.endBattle.subscribe(action => {
         this._onEndBattle(action);
       })
     ];
@@ -91,22 +98,9 @@ export class Game {
   }
 
   /**
-   * タイトル終了時の処理
-   *
-   * @param action アクション
+   * 「スタート」を押して、タイトルシーンが終了した
    */
-  _onEndTitle(action: EndTitle) {
-    if (action.button === 'GameStart') {
-      this._onGameStart();
-    } else if (action.button === 'HowToPlay') {
-      this._onHowToPlay();
-    }
-  }
-
-  /**
-   * タイトルでゲームスタートを押した時の処理
-   */
-  async _onGameStart() {
+  async _onEndTitleBecauseGameStart() {
     try {
       this._domScenes.hidden();
 
@@ -121,18 +115,18 @@ export class Game {
   }
 
   /**
-   * タイトルで遊び方を押した時の処理
+   * 「遊び方」を押して、タイトルシーンが終了した
    */
-  _onHowToPlay() {
+  _onEndTitleBecauseHowToPlay() {
     this._domScenes.showHowToPlay();
   }
 
   /**
-   * 遊び方シーン終了時の処理
+   * 遊び方シーン終了
    *
    * @param action アクション
    */
-  _onEndHowToPlay(action: EndHowToPlay): void {
+  _onEndHowToPlay(action: EndHowToPlay) {
     this._domScenes.showTitle();
   }
 

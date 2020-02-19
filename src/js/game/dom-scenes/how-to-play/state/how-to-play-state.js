@@ -2,6 +2,5 @@
 
 /** 遊び方シーンの状態 */
 export type HowToPlayState = {
-  isVisible: boolean,
-  canOperation: boolean
+  isVisible: boolean
 };
