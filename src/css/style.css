@@ -139,42 +139,38 @@
     border: none;
 }
 
-.how-to-play {
-    display: grid;
-    grid-template-rows: 1fr min-content;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    background-color: var(--background-color);
-    box-sizing: border-box;
-    padding-top: var(--screen-padding-top);
-    padding-left: var(--screen-padding-left);
-    padding-right: var(--screen-padding-right);
-    padding-bottom: var(--screen-padding-bottom);
-}
-
 .how-to-play--invisible {
     display: none;
 }
 
-.how-to-play__movie-container {
+.how-to-play__background {
+    position: absolute;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: #000000;
+    opacity: 0.5;
+}
+
+.how-to-play__dialog {
+    --dialog-width: 500px;
+    --dialog-height: 300px;
+    width: var(--dialog-width);
+    height: var(--dialog-height);
+    top: calc(50% - var(--dialog-height) / 2);
+    left: calc(50% - var(--dialog-width) / 2);
+    background-color: var(--background-color);
+    position: absolute;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     padding: 1em;
+    border: solid white 1px;
+    border-radius: 1em;
 }
 
-.how-to-play__movie-container__movie {
-    height: 100%;
-    max-height: 315px;
-}
-
-.how-to-play__controllers {
-    display: flex;
-    justify-content: center;
-}
-
-.how-to-play__controllers__prev {
+.how-to-play__dialog__close {
     width: 10em;
     height: 3em;
     font-size: 1em;

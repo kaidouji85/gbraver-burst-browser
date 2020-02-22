@@ -30,11 +30,10 @@ export class HowToPlayView {
     const prevId = domUuid();
     param.dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
-        <div class="how-to-play__movie-container">
-          <iframe class="how-to-play__movie-container__movie" width="560" height="315" src="${param.movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="how-to-play__controllers">
-          <button class="how-to-play__controllers__prev" id="${prevId}">戻る</button>
+        <div class="how-to-play__background"></div>
+        <div class="how-to-play__dialog">
+          <iframe class="how-to-play__dialog__movie" width="280" height="157.5" src="${param.movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <button class="how-to-play__dialog__close" id="${prevId}">閉じる</button>
         </div>
       </div>
     `;
