@@ -11,6 +11,8 @@
     --background-color: rgb(23, 23, 23);
     --button-background-color: #1e90ff;
     --button-font-color: rgb(240, 240, 240);
+    --dialog-border: solid #a9a9a9 1px;
+    --dialog-border-radius: 0.4em;
 }
 
 .service-worker-update {
@@ -171,8 +173,12 @@
     justify-content: space-between;
     box-sizing: border-box;
     padding: 1em;
-    border: solid white 1px;
-    border-radius: 1em;
+    border: var(--dialog-border);
+    border-radius: var(--dialog-border-radius);
+}
+
+.how-to-play__dialog__movie {
+    border: solid #696969 1px;
 }
 
 .how-to-play__dialog__close {
