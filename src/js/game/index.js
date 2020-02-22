@@ -11,7 +11,7 @@ import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {createServiceWorkerActionListener} from "../action/service-worker/create-listener";
 import {resourceBasePath} from "../resource/resource-base-path";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-import type {EndBattle} from "../action/game/end-battle";
+import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
 import type {ServiceWorkerAction} from "../action/service-worker/service-worker";
@@ -20,8 +20,9 @@ import {createLoadingActionListener} from "../action/loading/create-listener";
 import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
-import type {EndHowToPlay} from "../action/game/end-how-to-play";
-import {filter} from "rxjs/operators";
+import type {EndHowToPlay} from "../action/game/how-to-play";
+import {DOMDialogs} from "./dom-dialogs";
+import type {PushGameStart, PushHowToPlay} from "../action/game/title";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -31,6 +32,7 @@ export class Game {
   _vh: CssVH;
   _interruptScenes: InterruptScenes;
   _domScenes: DOMScenes;
+  _domDialogs: DOMDialogs;
   _tdScenes: TDScenes;
   _resources: ?Resources;
   _subscriptions: Subscription[];
@@ -51,25 +53,24 @@ export class Game {
 
     this._domScenes = new DOMScenes();
 
+    this._domDialogs = new DOMDialogs();
+
     const body = document.body || document.createElement('div');
     this._tdScenes = new TDScenes(body, this._resize);
 
     this._resources = null;
 
-    const domNotifier = this._domScenes.notifier();
+    const domScenesNotifier = this._domScenes.notifier();
+    const domDialogNotifier = this._domDialogs.notifier();
     const tdNotifier = this._tdScenes.notifier();
     this._subscriptions = [
-      domNotifier.endTitle
-        .pipe(filter(v => v.button === 'GameStart'))
-        .subscribe(action => {
-          this._onEndTitleBecauseGameStart();
-        }),
-      domNotifier.endTitle
-        .pipe(filter(v => v.button === 'HowToPlay'))
-        .subscribe(action => {
-          this._onEndTitleBecauseHowToPlay();
-        }),
-      domNotifier.endHowToPlay.subscribe(action => {
+      domScenesNotifier.pushGameStart.subscribe(action => {
+        this._onPushGameStart(action);
+      }),
+      domScenesNotifier.pushHowToPlay.subscribe(action => {
+        this._onPushHowToPlay(action);
+      }),
+      domDialogNotifier.endHowToPlay.subscribe(action => {
         this._onEndHowToPlay(action);
       }),
       tdNotifier.endBattle.subscribe(action => {
@@ -98,9 +99,9 @@ export class Game {
   }
 
   /**
-   * 「スタート」を押して、タイトルシーンが終了した
+   * ゲームスタートボタンを押した
    */
-  async _onEndTitleBecauseGameStart() {
+  async _onPushGameStart(action: PushGameStart) {
     try {
       this._domScenes.hidden();
 
@@ -115,10 +116,10 @@ export class Game {
   }
 
   /**
-   * 「遊び方」を押して、タイトルシーンが終了した
+   * 遊び方ボタンを押した
    */
-  _onEndTitleBecauseHowToPlay() {
-    this._domScenes.showHowToPlay();
+  _onPushHowToPlay(action: PushHowToPlay) {
+    this._domDialogs.showHowToPlay();
   }
 
   /**
@@ -127,7 +128,7 @@ export class Game {
    * @param action アクション
    */
   _onEndHowToPlay(action: EndHowToPlay) {
-    this._domScenes.showTitle();
+    this._domDialogs.hidden();
   }
 
   /**

@@ -4,7 +4,7 @@ import type {ChangeBattery} from "./change-battery";
 import type {DecideBattery} from "./decide-battery";
 import type {DoBurst} from "./do-burst";
 
-/** 戦闘シーンアクション一覧 */
+/** 戦闘シーンで内部的に利用するアクション */
 export type BattleSceneAction =
   StartBattleScene
   | ChangeBattery
