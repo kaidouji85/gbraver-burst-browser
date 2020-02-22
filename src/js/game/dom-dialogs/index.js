@@ -2,7 +2,7 @@
 
 import {HowToPlay} from "./how-to-play";
 import {Observable} from "rxjs";
-import type {EndHowToPlay} from "../../action/game/end-how-to-play";
+import type {EndHowToPlay} from "../../action/game/how-to-play";
 
 /** イベント通知ストリーム */
 type Notifier = {

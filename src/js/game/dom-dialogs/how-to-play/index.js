@@ -6,7 +6,7 @@ import type {HowToPlayState} from "./state/how-to-play-state";
 import {createInitialState} from "./state/initial-state";
 import {show} from "./state/show";
 import {Observable} from "rxjs";
-import type {EndHowToPlay} from "../../../action/game/end-how-to-play";
+import type {EndHowToPlay} from "../../../action/game/how-to-play";
 import {map} from "rxjs/operators";
 import {hidden} from "./state/hidden";
 

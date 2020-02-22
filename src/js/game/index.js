@@ -11,7 +11,7 @@ import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {createServiceWorkerActionListener} from "../action/service-worker/create-listener";
 import {resourceBasePath} from "../resource/resource-base-path";
 import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
-import type {EndBattle} from "../action/game/end-battle";
+import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
 import type {ServiceWorkerAction} from "../action/service-worker/service-worker";
@@ -20,7 +20,7 @@ import {createLoadingActionListener} from "../action/loading/create-listener";
 import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
-import type {EndHowToPlay} from "../action/game/end-how-to-play";
+import type {EndHowToPlay} from "../action/game/how-to-play";
 import {filter} from "rxjs/operators";
 import {DOMDialogs} from "./dom-dialogs";
 

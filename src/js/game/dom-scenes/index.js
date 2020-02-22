@@ -2,7 +2,7 @@
 
 import {Observable} from "rxjs";
 import {Title} from "./title";
-import type {EndTitle} from "../../action/game/end-title";
+import type {EndTitle} from "../../action/game/title";
 
 /** イベント通知 */
 type Notifier = {

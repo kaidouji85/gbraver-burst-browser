@@ -3,7 +3,7 @@
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
 import {merge, Observable} from "rxjs";
-import type {EndTitle} from "../../../action/game/end-title";
+import type {EndTitle} from "../../../action/game/title";
 import {TitleView} from "./view/title-view";
 import {hidden} from "./state/hidden";
 import {filter, map} from "rxjs/operators";
