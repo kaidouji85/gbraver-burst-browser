@@ -21,8 +21,8 @@ import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import type {EndHowToPlay} from "../action/game/how-to-play";
-import {filter} from "rxjs/operators";
 import {DOMDialogs} from "./dom-dialogs";
+import type {PushGameStart, PushHowToPlay} from "../action/game/title";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -64,16 +64,12 @@ export class Game {
     const domDialogNotifier = this._domDialogs.notifier();
     const tdNotifier = this._tdScenes.notifier();
     this._subscriptions = [
-      domScenesNotifier.endTitle
-        .pipe(filter(v => v.button === 'GameStart'))
-        .subscribe(action => {
-          this._onEndTitleBecauseGameStart();
-        }),
-      domScenesNotifier.endTitle
-        .pipe(filter(v => v.button === 'HowToPlay'))
-        .subscribe(action => {
-          this._onEndTitleBecauseHowToPlay();
-        }),
+      domScenesNotifier.pushGameStart.subscribe(action => {
+        this._onPushGameStart(action);
+      }),
+      domScenesNotifier.pushHowToPlay.subscribe(action => {
+        this._onPushHowToPlay(action);
+      }),
       domDialogNotifier.endHowToPlay.subscribe(action => {
         this._onEndHowToPlay(action);
       }),
@@ -103,9 +99,9 @@ export class Game {
   }
 
   /**
-   * 「スタート」を押して、タイトルシーンが終了した
+   * ゲームスタートボタンを押した
    */
-  async _onEndTitleBecauseGameStart() {
+  async _onPushGameStart(action: PushGameStart) {
     try {
       this._domScenes.hidden();
 
@@ -120,9 +116,9 @@ export class Game {
   }
 
   /**
-   * 「遊び方」を押して、タイトルシーンが終了した
+   * 遊び方ボタンを押した
    */
-  _onEndTitleBecauseHowToPlay() {
+  _onPushHowToPlay(action: PushHowToPlay) {
     this._domDialogs.showHowToPlay();
   }
 

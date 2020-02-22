@@ -41,7 +41,7 @@ export class TitleView {
           <div class="title__logo__copy-right">(C) 2020 Yuusuke Takeuchi</div>
         </div>
         <div class="title__controllers">
-          <button class="title__controllers__game-start" id="${gameStartId}" >スタート</button>
+          <button class="title__controllers__game-start" id="${gameStartId}" >ゲームスタート</button>
           <button class="title__controllers__how-to-play" id="${howToPlayId}">遊び方</button>
         </div>
       </div>

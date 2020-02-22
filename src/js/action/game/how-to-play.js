@@ -4,8 +4,7 @@
  * 遊び方ダイアログ -> ゲーム に通知するアクションをまとめたもの
  */
 
-
-/** 遊び方画面を終了する */
+/** 遊び方ダイアログを閉じる */
 export type EndHowToPlay = {
   type: 'EndHowToPlay'
 };

@@ -4,11 +4,12 @@
  * タイトル -> ゲーム に通知されるアクションをまとめたもの
  */
 
-/** 最後に押されたボタン */
-type Button = 'GameStart' | 'HowToPlay';
+/** ゲームスタートボタンが押された */
+export type PushGameStart = {
+  type: 'PushGameStart'
+};
 
-/** タイトルシーン終了 */
-export type EndTitle = {
-  type: 'EndTitle',
-  button: Button,
+/** 遊び方ボタンが押された */
+export type PushHowToPlay = {
+  type: 'PushHowToPlay'
 };
