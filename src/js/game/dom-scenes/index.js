@@ -3,7 +3,7 @@
 import {Observable} from "rxjs";
 import {Title} from "./title";
 import type {EndTitle} from "../../action/game/end-title";
-import {HowToPlay} from "./how-to-play";
+import {HowToPlay} from "../dom-dialogs/how-to-play";
 import type {EndHowToPlay} from "../../action/game/end-how-to-play";
 
 /** イベント通知 */
@@ -18,19 +18,15 @@ type Notifier = {
  */
 export class DOMScenes {
   _title: Title;
-  _howToPlay: HowToPlay;
   _notifier: Notifier;
 
   constructor() {
     const titleDOM: HTMLElement = document.querySelector("#title-scene") || document.createElement('div');
     this._title = new Title(titleDOM);
 
-    const howToPlayDOM: HTMLElement = document.querySelector("#how-to-play") || document.createElement('div');
-    this._howToPlay = new HowToPlay(howToPlayDOM);
-
     this._notifier = {
       endTitle: this._title.notifier().endTitle,
-      endHowToPlay: this._howToPlay.notifier().endHowToPlay,
+      endHowToPlay: new Observable<EndHowToPlay>(),
     };
   }
 
@@ -50,14 +46,12 @@ export class DOMScenes {
 
   /** タイトルを表示する */
   showTitle(): void {
-    this._howToPlay.hidden();
     this._title.show();
   }
 
+  // TODO 削除する
   /** 遊び方画面を表示する */
   showHowToPlay(): void {
-    this._title.hidden();
-    this._howToPlay.show();
   }
 
   /**
@@ -66,6 +60,5 @@ export class DOMScenes {
    */
   hidden(): void {
     this._title.hidden();
-    this._howToPlay.hidden();
   }
 }

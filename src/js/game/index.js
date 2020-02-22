@@ -22,6 +22,7 @@ import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import type {EndHowToPlay} from "../action/game/end-how-to-play";
 import {filter} from "rxjs/operators";
+import {DOMDialogs} from "./dom-dialogs";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -31,6 +32,7 @@ export class Game {
   _vh: CssVH;
   _interruptScenes: InterruptScenes;
   _domScenes: DOMScenes;
+  _domDialogs: DOMDialogs;
   _tdScenes: TDScenes;
   _resources: ?Resources;
   _subscriptions: Subscription[];
@@ -50,6 +52,8 @@ export class Game {
     });
 
     this._domScenes = new DOMScenes();
+
+    this._domDialogs = new DOMDialogs();
 
     const body = document.body || document.createElement('div');
     this._tdScenes = new TDScenes(body, this._resize);
@@ -118,7 +122,7 @@ export class Game {
    * 「遊び方」を押して、タイトルシーンが終了した
    */
   _onEndTitleBecauseHowToPlay() {
-    this._domScenes.showHowToPlay();
+    this._domDialogs.showHowToPlay();
   }
 
   /**
