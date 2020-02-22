@@ -2,7 +2,7 @@
 
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
-import {merge, Observable, Subscription} from "rxjs";
+import {merge, Observable} from "rxjs";
 import type {EndTitle} from "../../../action/game/end-title";
 import {TitleView} from "./view/title-view";
 import {hidden} from "./state/hidden";
@@ -35,7 +35,6 @@ export class Title {
           button: 'GameStart'
         }))
       ),
-
       this._view.notifier().howToPlay.pipe(
         filter(() => this._state.canOperation),
         map(() => ({
@@ -50,7 +49,7 @@ export class Title {
    * デストラクタ相当の処理
    */
   destructor(): void {
-
+    // NOP
   }
 
   /** イベント通知ストリーム */

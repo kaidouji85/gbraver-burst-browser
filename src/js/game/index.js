@@ -60,20 +60,21 @@ export class Game {
 
     this._resources = null;
 
-    const domNotifier = this._domScenes.notifier();
+    const domScenesNotifier = this._domScenes.notifier();
+    const domDialogNotifier = this._domDialogs.notifier();
     const tdNotifier = this._tdScenes.notifier();
     this._subscriptions = [
-      domNotifier.endTitle
+      domScenesNotifier.endTitle
         .pipe(filter(v => v.button === 'GameStart'))
         .subscribe(action => {
           this._onEndTitleBecauseGameStart();
         }),
-      domNotifier.endTitle
+      domScenesNotifier.endTitle
         .pipe(filter(v => v.button === 'HowToPlay'))
         .subscribe(action => {
           this._onEndTitleBecauseHowToPlay();
         }),
-      domNotifier.endHowToPlay.subscribe(action => {
+      domDialogNotifier.endHowToPlay.subscribe(action => {
         this._onEndHowToPlay(action);
       }),
       tdNotifier.endBattle.subscribe(action => {
@@ -131,7 +132,7 @@ export class Game {
    * @param action アクション
    */
   _onEndHowToPlay(action: EndHowToPlay) {
-    this._domScenes.showTitle();
+    this._domDialogs.hidden();
   }
 
   /**
