@@ -11,7 +11,6 @@
     --background-color: rgb(23, 23, 23);
     --button-background-color: #1e90ff;
     --button-font-color: rgb(240, 240, 240);
-
 }
 
 .service-worker-update {
@@ -137,6 +136,12 @@
     background-color: var(--button-background-color);
     color: var(--button-font-color);
     border: none;
+}
+
+@media (orientation: portrait) {
+    .how-to-play {
+        display: none;
+    }
 }
 
 .how-to-play--invisible {
