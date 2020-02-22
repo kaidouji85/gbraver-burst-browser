@@ -3,7 +3,7 @@
 import type {HowToPlayState} from "./how-to-play-state";
 
 /**
- * 本シーンを表示する
+ * 本ダイアログを表示する
  *
  * @param state 変更前の状態
  * @return 変更後の状態

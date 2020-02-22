@@ -16,7 +16,7 @@ export type Param = {
 };
 
 /**
- * 遊び方シーンのビュー
+ * 遊び方ダイアログのビュー
  */
 export class HowToPlayView {
   _prevStream: Subject<void>;

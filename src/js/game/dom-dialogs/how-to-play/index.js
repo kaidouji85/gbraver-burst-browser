@@ -16,7 +16,7 @@ type Notifier = {
 };
 
 /**
- * 遊び方シーン
+ * 遊び方ダイアログ
  */
 export class HowToPlay {
   _state: HowToPlayState;
@@ -40,7 +40,7 @@ export class HowToPlay {
   }
 
   /**
-   * 本シーンを表示する
+   * 本ダイアログを表示する
    */
   show(): void {
     this._state = show(this._state);
@@ -48,7 +48,7 @@ export class HowToPlay {
   }
 
   /**
-   * 本シーンを非表示にする
+   * 本ダイアログを非表示にする
    */
   hidden(): void {
     this._state = hidden(this._state);
