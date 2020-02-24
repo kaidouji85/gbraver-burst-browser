@@ -6,7 +6,7 @@ import {Observable, Subject} from "rxjs";
 
 /** イベント通知ストリーム */
 export type Notifier = {
-  prev: Observable<void>
+  close: Observable<void>
 };
 
 /** パラメータ */
@@ -19,19 +19,19 @@ export type Param = {
  * 遊び方ダイアログのビュー
  */
 export class HowToPlayView {
-  _prevStream: Subject<void>;
+  _closeStream: Subject<void>;
   _root: HTMLElement;
-  _prev: HTMLElement;
+  _closer: HTMLElement;
 
   constructor(param: Param) {
-    this._prevStream = new Subject();
+    this._closeStream = new Subject();
 
     const rootId = domUuid();
-    const prevId = domUuid();
+    const closerId = domUuid();
     param.dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
         <div class="how-to-play__background"></div>
-        <div class="how-to-play__close" id="${prevId}">X</div>
+        <div class="how-to-play__closer" id="${closerId}">X</div>
         <div class="how-to-play__dialog">
           <iframe class="how-to-play__dialog__movie" width="352" height="198" src="${param.movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
         </div>
@@ -40,14 +40,14 @@ export class HowToPlayView {
 
     this._root = document.getElementById(rootId) || document.createElement('div');
 
-    this._prev = document.getElementById(prevId) || document.createElement('div');
-    this._prev.addEventListener('click', (e: MouseEvent) => {
+    this._closer = document.getElementById(closerId) || document.createElement('div');
+    this._closer.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
-      this._prevStream.next();
+      this._closeStream.next();
     });
-    this._prev.addEventListener('touchstart', (e: TouchEvent) => {
+    this._closer.addEventListener('touchstart', (e: TouchEvent) => {
       e.preventDefault();
-      this._prevStream.next();
+      this._closeStream.next();
     });
   }
 
@@ -69,7 +69,7 @@ export class HowToPlayView {
    */
   notifier(): Notifier {
     return {
-      prev: this._prevStream,
+      close: this._closeStream,
     };
   }
 }

@@ -33,7 +33,7 @@ export class HowToPlay {
     this._view.engage(this._state);
 
     this._notifier = {
-      endHowToPlay: this._view.notifier().prev.pipe(
+      endHowToPlay: this._view.notifier().close.pipe(
         map(() => ({type: 'EndHowToPlay'}))
       )
     };

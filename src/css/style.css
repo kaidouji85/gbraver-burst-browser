@@ -160,7 +160,7 @@
     opacity: 0.5;
 }
 
-.how-to-play__close {
+.how-to-play__closer {
     --closer-width: 48px;
     --closer-height: 48px;
     position: absolute;
