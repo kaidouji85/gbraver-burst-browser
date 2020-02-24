@@ -2,14 +2,12 @@
 
 import {Observable} from "rxjs";
 import {Title} from "./title";
-import type {EndTitle} from "../../action/game/end-title";
-import {HowToPlay} from "./how-to-play";
-import type {EndHowToPlay} from "../../action/game/end-how-to-play";
+import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
 
 /** イベント通知 */
 type Notifier = {
-  endTitle: Observable<EndTitle>,
-  endHowToPlay: Observable<EndHowToPlay>,
+  pushGameStart: Observable<PushGameStart>,
+  pushHowToPlay: Observable<PushHowToPlay>,
 };
 
 /**
@@ -18,19 +16,16 @@ type Notifier = {
  */
 export class DOMScenes {
   _title: Title;
-  _howToPlay: HowToPlay;
   _notifier: Notifier;
 
   constructor() {
     const titleDOM: HTMLElement = document.querySelector("#title-scene") || document.createElement('div');
     this._title = new Title(titleDOM);
 
-    const howToPlayDOM: HTMLElement = document.querySelector("#how-to-play") || document.createElement('div');
-    this._howToPlay = new HowToPlay(howToPlayDOM);
-
+    const titleNotifier = this._title.notifier();
     this._notifier = {
-      endTitle: this._title.notifier().endTitle,
-      endHowToPlay: this._howToPlay.notifier().endHowToPlay,
+      pushGameStart: titleNotifier.pushGameStart,
+      pushHowToPlay: titleNotifier.pushHowToPlay,
     };
   }
 
@@ -50,14 +45,7 @@ export class DOMScenes {
 
   /** タイトルを表示する */
   showTitle(): void {
-    this._howToPlay.hidden();
     this._title.show();
-  }
-
-  /** 遊び方画面を表示する */
-  showHowToPlay(): void {
-    this._title.hidden();
-    this._howToPlay.show();
   }
 
   /**
@@ -66,6 +54,5 @@ export class DOMScenes {
    */
   hidden(): void {
     this._title.hidden();
-    this._howToPlay.hidden();
   }
 }

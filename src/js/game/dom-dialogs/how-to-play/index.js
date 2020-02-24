@@ -6,7 +6,7 @@ import type {HowToPlayState} from "./state/how-to-play-state";
 import {createInitialState} from "./state/initial-state";
 import {show} from "./state/show";
 import {Observable} from "rxjs";
-import type {EndHowToPlay} from "../../../action/game/end-how-to-play";
+import type {EndHowToPlay} from "../../../action/game/how-to-play";
 import {map} from "rxjs/operators";
 import {hidden} from "./state/hidden";
 
@@ -16,7 +16,7 @@ type Notifier = {
 };
 
 /**
- * 遊び方シーン
+ * 遊び方ダイアログ
  */
 export class HowToPlay {
   _state: HowToPlayState;
@@ -33,14 +33,14 @@ export class HowToPlay {
     this._view.engage(this._state);
 
     this._notifier = {
-      endHowToPlay: this._view.notifier().prev.pipe(
+      endHowToPlay: this._view.notifier().close.pipe(
         map(() => ({type: 'EndHowToPlay'}))
       )
     };
   }
 
   /**
-   * 本シーンを表示する
+   * 本ダイアログを表示する
    */
   show(): void {
     this._state = show(this._state);
@@ -48,7 +48,7 @@ export class HowToPlay {
   }
 
   /**
-   * 本シーンを非表示にする
+   * 本ダイアログを非表示にする
    */
   hidden(): void {
     this._state = hidden(this._state);

@@ -16,7 +16,7 @@ import type {Command} from "gbraver-burst-core/lib/command/command";
 import {take} from "rxjs/operators";
 import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {delay} from "../../../animation/delay";
-import type {EndBattle} from "../../../action/game/end-battle";
+import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
 

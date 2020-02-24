@@ -11,7 +11,10 @@
     --background-color: rgb(23, 23, 23);
     --button-background-color: #1e90ff;
     --button-font-color: rgb(240, 240, 240);
-
+    --dialog-border: solid #a9a9a9 1px;
+    --dialog-border-radius: 0.4em;
+    --how-to-play-dialog-width: 384px;
+    --how-to-play-dialog-height: 230px;
 }
 
 .service-worker-update {
@@ -139,47 +142,51 @@
     border: none;
 }
 
-.how-to-play {
-    display: grid;
-    grid-template-rows: 1fr min-content;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    background-color: var(--background-color);
-    box-sizing: border-box;
-    padding-top: var(--screen-padding-top);
-    padding-left: var(--screen-padding-left);
-    padding-right: var(--screen-padding-right);
-    padding-bottom: var(--screen-padding-bottom);
+@media (orientation: portrait) {
+    .how-to-play {
+        display: none;
+    }
 }
 
 .how-to-play--invisible {
     display: none;
 }
 
-.how-to-play__movie-container {
+.how-to-play__background {
+    position: absolute;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: #000000;
+    opacity: 0.5;
+}
+
+.how-to-play__closer {
+    --closer-width: 48px;
+    --closer-height: 48px;
+    position: absolute;
+    top: calc(50% - var(--how-to-play-dialog-height) / 2 - var(--closer-height) / 2);
+    left: calc(50% - var(--how-to-play-dialog-width) / 2 - var(--closer-width) / 2);
+    background-color: red;
+    font-color: var(--font-color);
+    z-index: 10;
+    width: var(--closer-width);
+    height: var(--closer-height);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
-    padding: 1em;
+    border-radius: 24px;
 }
 
-.how-to-play__movie-container__movie {
-    height: 100%;
-    max-height: 315px;
-}
-
-.how-to-play__controllers {
+.how-to-play__dialog {
+    width: var(--how-to-play-dialog-width);
+    height: var(--how-to-play-dialog-height);
+    top: calc(50% - var(--how-to-play-dialog-height) / 2);
+    left: calc(50% - var(--how-to-play-dialog-width) / 2);
+    background-color: var(--background-color);
+    position: absolute;
     display: flex;
+    align-items: center;
     justify-content: center;
-}
-
-.how-to-play__controllers__prev {
-    width: 10em;
-    height: 3em;
-    font-size: 1em;
-    border-radius: 0.5em;
-    background-color: var(--button-background-color);
-    color: var(--button-font-color);
-    border: none;
+    border: var(--dialog-border);
+    border-radius: var(--dialog-border-radius);
 }

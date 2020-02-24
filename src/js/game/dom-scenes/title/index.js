@@ -2,8 +2,8 @@
 
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
-import {merge, Observable, Subscription} from "rxjs";
-import type {EndTitle} from "../../../action/game/end-title";
+import {Observable} from "rxjs";
+import type {PushGameStart, PushHowToPlay} from "../../../action/game/title";
 import {TitleView} from "./view/title-view";
 import {hidden} from "./state/hidden";
 import {filter, map} from "rxjs/operators";
@@ -11,14 +11,15 @@ import {show} from "./state/show";
 
 /** イベント通知 */
 export type Notifier = {
-  endTitle: Observable<EndTitle>
+  pushGameStart: Observable<PushGameStart>,
+  pushHowToPlay: Observable<PushHowToPlay>,
 };
 
 /** タイトルシーン */
 export class Title {
   _state: TitleState;
   _view: TitleView;
-  _endTitle: Observable<EndTitle>;
+  _notifier: Notifier;
 
   constructor(dom: HTMLElement) {
     this._state = createInitialState();
@@ -27,37 +28,32 @@ export class Title {
       initialState: this._state,
     });
 
-    this._endTitle = merge(
-      this._view.notifier().gameStart.pipe(
+    this._notifier = {
+      pushGameStart: this._view.notifier().gameStart.pipe(
         filter(() => this._state.canOperation),
         map(() => ({
-          type: 'EndTitle',
-          button: 'GameStart'
+          type: 'PushGameStart'
         }))
       ),
-
-      this._view.notifier().howToPlay.pipe(
+      pushHowToPlay: this._view.notifier().howToPlay.pipe(
         filter(() => this._state.canOperation),
         map(() => ({
-          type: 'EndTitle',
-          button: 'HowToPlay'
+          type: 'PushHowToPlay',
         }))
-      ),
-    );
+      )
+    };
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-
+    // NOP
   }
 
   /** イベント通知ストリーム */
   notifier(): Notifier {
-    return {
-      endTitle: this._endTitle
-    };
+    return this._notifier;
   }
 
   /** 本シーンを表示する */
