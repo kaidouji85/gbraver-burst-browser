@@ -39,6 +39,14 @@ export class HowToPlayView {
     `;
 
     this._root = document.getElementById(rootId) || document.createElement('div');
+    this._root.addEventListener('click', (e: MouseEvent) => {
+      e.preventDefault();
+      this._closeStream.next();
+    });
+    this._root.addEventListener('touchstart', (e: TouchEvent) => {
+      e.preventDefault();
+      this._closeStream.next();
+    });
 
     this._closer = document.getElementById(closerId) || document.createElement('div');
     this._closer.addEventListener('click', (e: MouseEvent) => {
