@@ -31,9 +31,9 @@ export class HowToPlayView {
     param.dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
         <div class="how-to-play__background"></div>
+        <div class="how-to-play__close" id="${prevId}">X</div>
         <div class="how-to-play__dialog">
-          <iframe class="how-to-play__dialog__movie" width="352" height="198" src="${param.movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <button class="how-to-play__dialog__close" id="${prevId}">閉じる</button>
+          <iframe class="how-to-play__dialog__movie" width="352" height="198" src="${param.movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
         </div>
       </div>
     `;
