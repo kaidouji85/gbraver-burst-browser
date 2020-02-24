@@ -13,6 +13,8 @@
     --button-font-color: rgb(240, 240, 240);
     --dialog-border: solid #a9a9a9 1px;
     --dialog-border-radius: 0.4em;
+    --how-to-play-dialog-width: 384px;
+    --how-to-play-dialog-height: 230px;
 }
 
 .service-worker-update {
@@ -158,35 +160,33 @@
     opacity: 0.5;
 }
 
+.how-to-play__closer {
+    --closer-width: 48px;
+    --closer-height: 48px;
+    position: absolute;
+    top: calc(50% - var(--how-to-play-dialog-height) / 2 - var(--closer-height) / 2);
+    left: calc(50% - var(--how-to-play-dialog-width) / 2 - var(--closer-width) / 2);
+    background-color: red;
+    font-color: var(--font-color);
+    z-index: 10;
+    width: var(--closer-width);
+    height: var(--closer-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+}
+
 .how-to-play__dialog {
-    --dialog-width: 500px;
-    --dialog-height: 300px;
-    width: var(--dialog-width);
-    height: var(--dialog-height);
-    top: calc(50% - var(--dialog-height) / 2);
-    left: calc(50% - var(--dialog-width) / 2);
+    width: var(--how-to-play-dialog-width);
+    height: var(--how-to-play-dialog-height);
+    top: calc(50% - var(--how-to-play-dialog-height) / 2);
+    left: calc(50% - var(--how-to-play-dialog-width) / 2);
     background-color: var(--background-color);
     position: absolute;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    padding: 1em;
+    justify-content: center;
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
-}
-
-.how-to-play__dialog__movie {
-    border: solid #696969 1px;
-}
-
-.how-to-play__dialog__close {
-    width: 10em;
-    height: 3em;
-    font-size: 1em;
-    border-radius: 0.5em;
-    background-color: var(--button-background-color);
-    color: var(--button-font-color);
-    border: none;
 }
