@@ -31,7 +31,7 @@ export class HowToPlayView {
     param.dom.innerHTML = `
       <div class="how-to-play" id="${rootId}">
         <div class="how-to-play__background"></div>
-        <div class="how-to-play__closer" id="${closerId}">X</div>
+        <div class="how-to-play__closer" id="${closerId}">&#x2613;</div>
         <div class="how-to-play__dialog">
           <iframe class="how-to-play__dialog__movie" width="352" height="198" src="${param.movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
         </div>
