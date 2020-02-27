@@ -44,7 +44,7 @@ export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): 
   target.stage.getThreeJsObjects()
     .forEach(item => scene.add(item));
   scene.add(target.turnIndicator.getObject3D());
-  scene.add(target.skyBrightness);
+  scene.add(target.skyBrightness.getObject3D());
 }
 
 /**
