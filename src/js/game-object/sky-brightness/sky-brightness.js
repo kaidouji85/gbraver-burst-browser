@@ -20,6 +20,12 @@ export class SkyBrightness {
     this._mesh.material.opacity = 0.5;
   }
 
+  // デストラクタ相当の処理
+  destructor(): void {
+    this._mesh.material.dispose();
+    this._mesh.geometry.dispose();
+  }
+
   /**
    * シーンに追加するオブジェクトを取得する
    *
