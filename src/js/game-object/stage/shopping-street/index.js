@@ -4,6 +4,7 @@ import type {Resources} from '../../../resource';
 import * as THREE from 'three';
 import {City} from './city';
 import {Stage} from "../stage";
+import {SkyBrightness} from "./sky-brightness";
 
 /** 商店街 */
 export default class ShoppingStreet implements Stage {
@@ -13,6 +14,7 @@ export default class ShoppingStreet implements Stage {
   _directionalLight3: THREE.DirectionalLight;
   _directionalLight4: THREE.DirectionalLight;
   _ambientLight: THREE.AmbientLight;
+  _specialMovementSpace: SkyBrightness;
 
   constructor(resources: Resources) {
     this._city = new City(resources);
@@ -31,6 +33,8 @@ export default class ShoppingStreet implements Stage {
     this._directionalLight4.position.set(-1, -1, 1);
 
     this._ambientLight = new THREE.AmbientLight(0xAAAAAA);
+
+    this._specialMovementSpace = new SkyBrightness();
   }
 
   /** デストラクタ */
@@ -51,6 +55,8 @@ export default class ShoppingStreet implements Stage {
       this._directionalLight3,
       this._directionalLight4,
       this._ambientLight,
+      this._specialMovementSpace.getObject3D(),
     ];
   }
 }
+
