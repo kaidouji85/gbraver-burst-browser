@@ -5,7 +5,7 @@ import {TurnIndicator} from "../../../../../game-object/turn-indicator/turn-indi
 import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
-import SchoolField from "../../../../../game-object/stage/shopping-street";
+import SchoolField, {Illumination} from "../../../../../game-object/stage/shopping-street";
 import * as THREE from "three";
 import {SkyBrightness} from "../../../../../game-object/sky-brightness/sky-brightness";
 
@@ -14,6 +14,7 @@ export type TDGameObjects = {
   stage: Stage;
   turnIndicator: TurnIndicator;
   skyBrightness: SkyBrightness;
+  illumination: Illumination;
 };
 
 /**
@@ -31,6 +32,7 @@ export function createTDGameObjects(resources: Resources, listener: Observable<G
       resources: resources
     }),
     skyBrightness: new SkyBrightness(),
+    illumination: new Illumination(),
   };
 }
 
@@ -45,6 +47,9 @@ export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): 
     .forEach(item => scene.add(item));
   scene.add(target.turnIndicator.getObject3D());
   scene.add(target.skyBrightness.getObject3D());
+  target.illumination.getObject3Ds().forEach(v => {
+    scene.add(v);
+  });
 }
 
 /**

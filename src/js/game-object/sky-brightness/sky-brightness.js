@@ -17,10 +17,10 @@ export class SkyBrightness {
       transparent: true,
     });
     this._mesh = new THREE.Mesh(geometry, material);
-    this._mesh.material.opacity = 0.5;
+    this._updateOpacity(0.8);
   }
 
-  // デストラクタ相当の処理
+  /** デストラクタ相当の処理 */
   destructor(): void {
     this._mesh.material.dispose();
     this._mesh.geometry.dispose();
@@ -33,5 +33,14 @@ export class SkyBrightness {
    */
   getObject3D(): THREE.Object3D {
     return this._mesh;
+  }
+
+  /**
+   * 不透明度を更新する
+   *
+   * @param opacity 0〜1で指定する不透明度、1で完全不透明
+   */
+  _updateOpacity(opacity: number):void {
+    this._mesh.material.opacity = opacity;
   }
 }
