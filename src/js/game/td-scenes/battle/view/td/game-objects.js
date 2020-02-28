@@ -5,9 +5,10 @@ import {TurnIndicator} from "../../../../../game-object/turn-indicator/turn-indi
 import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
-import SchoolField, {Illumination} from "../../../../../game-object/stage/shopping-street";
+import SchoolField from "../../../../../game-object/stage/shopping-street";
 import * as THREE from "three";
 import {SkyBrightness} from "../../../../../game-object/sky-brightness/sky-brightness";
+import {Illumination} from "../../../../../game-object/illumination/illumination";
 
 /** 3Dレイヤーのゲームオブジェクト */
 export type TDGameObjects = {
