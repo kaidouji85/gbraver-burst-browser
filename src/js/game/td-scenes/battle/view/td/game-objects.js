@@ -32,8 +32,8 @@ export function createTDGameObjects(resources: Resources, listener: Observable<G
       listener: listener,
       resources: resources
     }),
-    skyBrightness: new SkyBrightness(),
-    illumination: new Illumination(),
+    skyBrightness: new SkyBrightness(listener),
+    illumination: new Illumination(listener),
   };
 }
 
@@ -62,4 +62,5 @@ export function disposeTDGameObjects(target: TDGameObjects): void {
   target.stage.destructor();
   target.turnIndicator.destructor();
   target.skyBrightness.destructor();
+  target.illumination.destructor();
 }
