@@ -41,12 +41,14 @@ function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>):
         param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
         param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
       )),
+    param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.burstPlayerTD.sprite.turnStart(),
     param.tdObjects.turnIndicator.invisible(),
   ).chain(delay(800)
   ).chain(all(
     toInitial(param.tdCamera, 500),
+    param.tdObjects.skyBrightness.brightness(1, 500),
     param.tdObjects.illumination.intensity(1, 500),
     param.burstPlayerTD.sprite.turnStartToStand()
   ));

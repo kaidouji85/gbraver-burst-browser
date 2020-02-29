@@ -32,7 +32,7 @@ export function createTDGameObjects(resources: Resources, listener: Observable<G
       listener: listener,
       resources: resources
     }),
-    skyBrightness: new SkyBrightness(),
+    skyBrightness: new SkyBrightness(listener),
     illumination: new Illumination(listener),
   };
 }
