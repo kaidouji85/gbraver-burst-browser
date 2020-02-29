@@ -62,4 +62,5 @@ export function disposeTDGameObjects(target: TDGameObjects): void {
   target.stage.destructor();
   target.turnIndicator.destructor();
   target.skyBrightness.destructor();
+  target.illumination.destructor();
 }

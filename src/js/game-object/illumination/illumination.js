@@ -31,6 +31,11 @@ export class Illumination {
     });
   }
 
+  /** デストラクタ相当の処理 */
+  destructor(): void {
+    this._subscription.unsubscribe();
+  }
+
   /**
    * シーンに追加するオブジェクトを配列で返す
    *
