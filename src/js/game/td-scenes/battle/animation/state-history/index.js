@@ -10,6 +10,7 @@ import {battleAnimation} from "./battle";
 import {turnChangeAnimation} from "./turn-change";
 import {burstAnimation} from "./burst";
 import {startGameAnimation} from "./start-game";
+import {batteryDeclarationAnimation} from "./battery-declaration";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -27,6 +28,8 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
           return startGameAnimation(view, sceneState, v);
         case 'InputCommand':
           return inputCommandAnimation(view, sceneState, v);
+        case 'BatteryDeclaration':
+          return batteryDeclarationAnimation(view, sceneState, v);
         case 'Battle':
           return battleAnimation(view, sceneState, v);
         case 'TurnChange':
