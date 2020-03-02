@@ -1,15 +1,12 @@
 // @flow
 
-import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
+import type {Battle, BattleResult, GameState, PlayerState} from "gbraver-burst-core";
 import type {TDPlayer} from "../../../view/td/player";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import type {HUDGameObjects} from "../../../view/hud/game-objects";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
-import type {Battle} from "gbraver-burst-core/lib/effect/battle/battle";
 import {TDCamera} from "../../../../../../game-object/camera/td";
 import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
 
@@ -58,10 +55,10 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
   }
 
   return {
-    attackerBattery: effect.attackerBattery,
+    attackerBattery: 1, // TODO 削除する
     attackerState: attackerState,
     attackerTD: attackerTD,
-    defenderBattery: effect.defenderBattery,
+    defenderBattery: 1, // TODO 削除する
     defenderState: defenderState,
     defenderTD: defenderTD,
     tdObjects: view.td.gameObjects,

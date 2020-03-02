@@ -3,7 +3,7 @@
 import {BatteryNumber} from "../../../../../../game-object/battery-number/battery-number";
 import {RecoverBattery} from "../../../../../../game-object/recover-battery/recover-battery";
 import {DamageIndicator} from "../../../../../../game-object/damage-indicator/damage-indicator";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {PlayerId} from "gbraver-burst-core";
 import {Spark} from "../../../../../../game-object/hitmark/spark/spark";
 import * as THREE from "three";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";

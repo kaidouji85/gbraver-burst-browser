@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
