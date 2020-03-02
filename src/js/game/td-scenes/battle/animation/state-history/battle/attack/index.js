@@ -7,7 +7,7 @@ import {neoLandozerAttack} from "./neo-landozer";
 import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam} from "../animation-param";
 import type {ArmDozerSprite} from "../../../../../../../game-object/armdozer/armdozer-sprite";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import type {BattleResult} from "gbraver-burst-core";
 
 /**
  * 攻撃側スプライトに応じて、戦闘アニメーションを切り替える

@@ -2,10 +2,10 @@
 
 import type {NPC} from "./npc";
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {Command} from "gbraver-burst-core/lib/command/command";
-import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
+import type {PlayerId} from "gbraver-burst-core";
+import type {GameState} from "gbraver-burst-core";
+import type {Command} from "gbraver-burst-core";
+import type {PlayerState} from "gbraver-burst-core";
 
 const ZERO_BATTERY = {
   type: 'BATTERY_COMMAND',

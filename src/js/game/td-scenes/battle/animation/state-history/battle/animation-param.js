@@ -1,15 +1,15 @@
 // @flow
 
-import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
+import type {PlayerState} from "gbraver-burst-core";
 import type {TDPlayer} from "../../../view/td/player";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import type {HUDGameObjects} from "../../../view/hud/game-objects";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
-import type {Battle} from "gbraver-burst-core/lib/effect/battle/battle";
+import type {GameState} from "gbraver-burst-core";
+import type {BattleResult} from "gbraver-burst-core";
+import type {Battle} from "gbraver-burst-core";
 import {TDCamera} from "../../../../../../game-object/camera/td";
 import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
 

@@ -1,7 +1,7 @@
-import type {Armdozer} from "gbraver-burst-core/lib/armdozer/armdozer";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {Command} from "gbraver-burst-core/lib/command/command";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Armdozer} from "gbraver-burst-core";
+import type {GameState} from "gbraver-burst-core";
+import type {Command} from "gbraver-burst-core";
+import type {PlayerId} from "gbraver-burst-core";
 
 /**
  * NPCのルーチン

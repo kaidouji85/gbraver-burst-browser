@@ -5,7 +5,7 @@ import {delay} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
 import type {BattleAnimationParam} from "./animation-param";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
+import type {BattleResult} from "gbraver-burst-core";
 
 /**
  * 攻撃、防御側のバッテリーを表示する

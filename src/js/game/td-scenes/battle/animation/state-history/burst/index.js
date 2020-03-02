@@ -3,14 +3,14 @@
 import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
+import type {GameState} from "gbraver-burst-core";
 import {updateGauge} from "../update-gauge";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {shinBraverBurst} from "./shin-braver";
 import {delay, empty} from "../../../../../../animation/delay";
-import type {Burst} from "gbraver-burst-core/lib/armdozer/burst";
+import type {Burst} from "gbraver-burst-core";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 
 /**

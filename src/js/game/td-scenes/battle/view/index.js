@@ -2,7 +2,7 @@
 import type {Resources} from '../../../../resource';
 import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud';
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {merge, Observable, Subject} from "rxjs";
 import type {TdDOMEvent} from "../../../../action/td-dom";

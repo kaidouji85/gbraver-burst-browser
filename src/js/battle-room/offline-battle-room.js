@@ -1,10 +1,10 @@
 // @flow
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {Command} from "gbraver-burst-core/lib/command/command";
+import type {GameState} from "gbraver-burst-core";
+import type {Command} from "gbraver-burst-core";
 import type {NPC, NPCRoutine} from "../npc/npc";
 import {progress, start} from 'gbraver-burst-core';
-import type {Player} from "gbraver-burst-core/lib/player/player";
-import type {PlayerCommand} from "gbraver-burst-core/lib/command/player-command";
+import type {Player} from "gbraver-burst-core";
+import type {PlayerCommand} from "gbraver-burst-core";
 import type {BattleRoom, InitialState} from "./battle-room";
 
 export class OfflineBattleRoom implements BattleRoom {

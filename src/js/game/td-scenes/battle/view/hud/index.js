@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";

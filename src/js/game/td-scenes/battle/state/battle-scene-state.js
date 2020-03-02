@@ -1,4 +1,4 @@
-import type {PlayerId} from "gbraver-burst-core/lib/flow-type";
+import type {PlayerId} from "gbraver-burst-core";
 
 /** 戦闘シーン全体の状態 */
 export type BattleSceneState = {

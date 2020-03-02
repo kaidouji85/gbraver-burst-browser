@@ -1,6 +1,6 @@
 // @flow
 
-import type {Command} from "gbraver-burst-core/lib/command/command";
+import type {Command} from "gbraver-burst-core";
 
 /**
  * バーストが操作可能か否かを判定する

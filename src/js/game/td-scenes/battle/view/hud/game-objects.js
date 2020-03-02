@@ -6,7 +6,7 @@ import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs/index";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {BattleSceneAction} from "../../../../../action/battle-scene";
-import type {Player} from "gbraver-burst-core/lib/player/player";
+import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
 import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";

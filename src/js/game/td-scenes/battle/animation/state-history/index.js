@@ -3,7 +3,7 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
+import type {GameState} from "gbraver-burst-core";
 import {empty} from "../../../../../animation/delay";
 import {inputCommandAnimation} from "./input-command";
 import {battleAnimation} from "./battle";

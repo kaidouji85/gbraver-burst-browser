@@ -1,6 +1,6 @@
 // @flow
 
-import type {Command} from "gbraver-burst-core/lib/command/command";
+import type {Command} from "gbraver-burst-core";
 
 /**
  * バッテリーセレクタの初期値を計算する
