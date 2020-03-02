@@ -27,7 +27,7 @@
   "license": "ISC",
   "dependencies": {
     "@tweenjs/tween.js": "^18.5.0",
-    "gbraver-burst-core": "1.0.0",
+    "gbraver-burst-core": "1.0.1",
     "puid": "^1.0.7",
     "ramda": "^0.27.0",
     "rxjs": "^6.5.4",

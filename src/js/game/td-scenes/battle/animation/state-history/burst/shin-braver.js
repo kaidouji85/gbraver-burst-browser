@@ -7,7 +7,7 @@ import {delay, empty} from "../../../../../../animation/delay";
 import type {Burst} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {dolly, toInitial} from "../../td-camera";
-import type {RecoverBattery} from "gbraver-burst-core/lib/player/armdozer/burst"; // TODO gbraver-burst-core直下からimportする
+import type {RecoverBattery} from "gbraver-burst-core";
 
 /**
  * シンブレイバーのバーストアニメーション

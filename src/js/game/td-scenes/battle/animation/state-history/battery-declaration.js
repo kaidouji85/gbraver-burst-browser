@@ -5,7 +5,7 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
-import type {BatteryDeclaration} from "gbraver-burst-core/lib/effect/battery-declaration/battery-declaration";
+import type {BatteryDeclaration} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 
 /**
