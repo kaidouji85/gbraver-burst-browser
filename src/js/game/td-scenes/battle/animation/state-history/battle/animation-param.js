@@ -58,10 +58,10 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
   }
 
   return {
-    attackerBattery: effect.attackerBattery,
+    attackerBattery: 1, // TODO 削除する
     attackerState: attackerState,
     attackerTD: attackerTD,
-    defenderBattery: effect.defenderBattery,
+    defenderBattery: 1, // TODO 削除する
     defenderState: defenderState,
     defenderTD: defenderTD,
     tdObjects: view.td.gameObjects,
