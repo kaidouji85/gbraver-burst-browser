@@ -2,11 +2,10 @@
 import type {Resources} from "../../../../../../resource";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import {PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
-import type {Player} from "gbraver-burst-core";
+import type {Player, PlayerState} from "gbraver-burst-core";
 import {PlayerNeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
-import type {PlayerState} from "gbraver-burst-core";
 import {playerBatteryNumber} from "../../../../../../game-object/battery-number";
 import {playerRecoverBattery} from "../../../../../../game-object/recover-battery";
 import {playerDamageIndicator} from "../../../../../../game-object/damage-indicator";

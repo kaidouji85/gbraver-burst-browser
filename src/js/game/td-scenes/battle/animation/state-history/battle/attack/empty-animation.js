@@ -5,10 +5,7 @@ import type {BattleAnimationParam} from "../animation-param";
 import type {ArmDozerSprite} from "../../../../../../../game-object/armdozer/armdozer-sprite";
 import {empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
-import type {BattleResult} from "gbraver-burst-core";
-import type {NormalHit} from "gbraver-burst-core";
-import type {CriticalHit} from "gbraver-burst-core";
-import type {Guard} from "gbraver-burst-core";
+import type {BattleResult, CriticalHit, Guard, NormalHit} from "gbraver-burst-core";
 
 /**
  * 数字表示だけをする戦闘アニメーション

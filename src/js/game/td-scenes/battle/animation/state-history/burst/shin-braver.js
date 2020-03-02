@@ -4,10 +4,9 @@ import type {BurstAnimationParam} from "./animation-param";
 import {Animate} from "../../../../../../animation/animate";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {delay, empty} from "../../../../../../animation/delay";
-import type {Burst} from "gbraver-burst-core";
+import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {dolly, toInitial} from "../../td-camera";
-import type {RecoverBattery} from "gbraver-burst-core";
 
 /**
  * シンブレイバーのバーストアニメーション

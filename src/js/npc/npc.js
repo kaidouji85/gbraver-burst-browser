@@ -1,7 +1,4 @@
-import type {Armdozer} from "gbraver-burst-core";
-import type {GameState} from "gbraver-burst-core";
-import type {Command} from "gbraver-burst-core";
-import type {PlayerId} from "gbraver-burst-core";
+import type {Armdozer, Command, GameState, PlayerId} from "gbraver-burst-core";
 
 /**
  * NPCのルーチン

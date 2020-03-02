@@ -5,12 +5,7 @@ import type {BattleAnimationParam} from "../animation-param";
 import {NeoLandozer} from "../../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {delay, empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
-import type {BattleResult} from "gbraver-burst-core";
-import type {NormalHit} from "gbraver-burst-core";
-import type {CriticalHit} from "gbraver-burst-core";
-import type {Guard} from "gbraver-burst-core";
-import type {Miss} from "gbraver-burst-core";
-import type {Feint} from "gbraver-burst-core";
+import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
 
 /**
  * ネオランドーザの攻撃アニメーション
