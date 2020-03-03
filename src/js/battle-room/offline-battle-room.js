@@ -4,6 +4,9 @@ import type {NPC, NPCRoutine} from "../npc/npc";
 import type {BattleRoom, InitialState} from "./battle-room";
 import {GbraverBurstCore} from "gbraver-burst-core/lib/game";
 
+/**
+ * オフラインのバトルルーム
+ */
 export class OfflineBattleRoom implements BattleRoom {
   _player: Player;
   _enemy: Player;
@@ -22,8 +25,12 @@ export class OfflineBattleRoom implements BattleRoom {
     this._gbraverBurstCore = new GbraverBurstCore();
   }
 
-  /** 戦闘開始 */
-  async start(): Promise<InitialState> {
+  /**
+   * 戦闘開始
+   *
+   * @return 初期状態
+   */
+  start(): InitialState {
     this._stateHistory = this._gbraverBurstCore.start(this._player, this._enemy);
     return {
       playerId: this._player.playerId,
@@ -32,23 +39,32 @@ export class OfflineBattleRoom implements BattleRoom {
     };
   }
 
-  /** 戦闘を進める */
+  /**
+   * 戦闘を進める
+   *
+   * @param command 各プレイヤーのコマンド
+   * @return ステートヒストリー
+   */
   async progress(command: Command): Promise<GameState[]> {
-    if (this._stateHistory.length <= 0) {
-      return [];
-    }
+    try {
+      if (this._stateHistory.length <= 0) {
+        return [];
+      }
 
-    const lastState = this._stateHistory[this._stateHistory.length - 1];
-    const playerCommand: PlayerCommand = {
-      playerId: this._player.playerId,
-      command: command
-    };
-    const enemyCommand: PlayerCommand = {
-      playerId: this._enemy.playerId,
-      command: this._routine(this._enemy.playerId, this._stateHistory)
-    };
-    const updateState = this._gbraverBurstCore.progress(lastState, [playerCommand, enemyCommand]);
-    this._stateHistory = [...this._stateHistory, ...updateState];
-    return updateState;
+      const lastState = this._stateHistory[this._stateHistory.length - 1];
+      const playerCommand: PlayerCommand = {
+        playerId: this._player.playerId,
+        command: command
+      };
+      const enemyCommand: PlayerCommand = {
+        playerId: this._enemy.playerId,
+        command: this._routine(this._enemy.playerId, this._stateHistory)
+      };
+      const updateState = this._gbraverBurstCore.progress(lastState, [playerCommand, enemyCommand]);
+      this._stateHistory = [...this._stateHistory, ...updateState];
+      return updateState;
+    } catch (e) {
+      throw e;
+    }
   }
 }

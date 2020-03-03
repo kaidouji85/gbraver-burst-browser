@@ -12,7 +12,7 @@ import {OfflineBattleRoom} from "./offline-battle-room";
  *
  * @return ダミーの戦闘ルーム
  */
-export function createDummyBattleRoom(): BattleRoom {
+export function createDummyBattleRoom(): OfflineBattleRoom {
   const player: Player = {
     playerId: 'test01',
     armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
