@@ -76,7 +76,7 @@ export class TDScenes {
     const scene = new BattleScene({
       resources: resources,
       rendererDOM: this._renderer.getRendererDOM(),
-      battleRoom: room,
+      battleProgress: room,
       initialState: initialState,
       listener: {
         domEvent: this._renderer.notifier().domEvent,
