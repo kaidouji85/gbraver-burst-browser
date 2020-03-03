@@ -9,8 +9,22 @@ export type InitialState = {
   stateHistory: GameState[]
 };
 
-/** バトルルーム */
-export interface BattleRoom {
+/**
+ * 戦闘を開始する
+ */
+export interface BattleStart {
+  /**
+   * 戦闘を開始する
+   *
+   * @return 初期状態
+   */
+  start(): Promise<InitialState>;
+}
+
+/**
+ * 戦闘を進める
+ */
+export interface BattleProgress {
   /**
    * 戦闘を進める
    *
@@ -19,3 +33,6 @@ export interface BattleRoom {
    */
   progress(command: Command): Promise<GameState[]>
 }
+
+/** バトルルーム */
+export interface BattleRoom extends BattleStart, BattleProgress {}

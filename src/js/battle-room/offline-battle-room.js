@@ -30,13 +30,17 @@ export class OfflineBattleRoom implements BattleRoom {
    *
    * @return 初期状態
    */
-  start(): InitialState {
-    this._stateHistory = this._gbraverBurstCore.start(this._player, this._enemy);
-    return {
-      playerId: this._player.playerId,
-      players: [this._player, this._enemy],
-      stateHistory: this._stateHistory
-    };
+  async start(): Promise<InitialState> {
+    try {
+      this._stateHistory = this._gbraverBurstCore.start(this._player, this._enemy);
+      return {
+        playerId: this._player.playerId,
+        players: [this._player, this._enemy],
+        stateHistory: this._stateHistory
+      };
+    } catch (e) {
+      throw e;
+    }
   }
 
   /**

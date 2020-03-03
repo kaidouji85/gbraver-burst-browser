@@ -108,7 +108,7 @@ export class Game {
       const resources = await loadAllResource(`${resourceBasePath()}/`);
       this._resources = resources;
       const room = createDummyBattleRoom();
-      const initialState = room.start();
+      const initialState = await room.start();
       this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
       throw e;
@@ -144,7 +144,7 @@ export class Game {
 
       const resources: Resources = this._resources;
       const room = createDummyBattleRoom();
-      const initialState = room.start();
+      const initialState = await room.start();
       this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
       throw e;

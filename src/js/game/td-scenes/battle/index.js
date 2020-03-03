@@ -7,7 +7,7 @@ import {Observable, Subject, Subscription} from "rxjs";
 import type {TdDOMEvent} from "../../../action/td-dom";
 import type {DecideBattery} from "../../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
-import type {BattleRoom, InitialState} from "../../../battle-room/battle-room";
+import type {BattleProgress, BattleRoom, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
 import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../../action/game-loop/render";
@@ -23,7 +23,7 @@ import type {Resize} from "../../../action/resize/resize";
 type Param = {
   resources: Resources,
   rendererDOM: HTMLElement,
-  battleRoom: BattleRoom,
+  battleProgress: BattleProgress,
   initialState: InitialState,
   listener: {
     domEvent: Observable<TdDOMEvent>,
@@ -44,14 +44,14 @@ type Notifier = {
 export class BattleScene implements Scene {
   _state: BattleSceneState;
   _endBattle: Subject<EndBattle>;
-  _battleRoom: BattleRoom;
+  _battleProgress: BattleProgress;
   _view: BattleSceneView;
   _subscription: Subscription[];
 
   constructor(param: Param) {
     this._state = createInitialState(param.initialState.playerId);
     this._endBattle = new Subject();
-    this._battleRoom = param.battleRoom;
+    this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
@@ -182,7 +182,7 @@ export class BattleScene implements Scene {
       let lastCommand: Command = command;
       let lastState: ?GameState = null;
       for (let i=0; i<100; i++) {
-        const updateState = await this._battleRoom.progress(lastCommand);
+        const updateState = await this._battleProgress.progress(lastCommand);
         await stateHistoryAnimation(this._view, this._state, updateState).play();
 
         if (updateState.length <= 0) {
