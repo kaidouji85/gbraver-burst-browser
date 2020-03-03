@@ -7,7 +7,7 @@ import {Observable, Subject, Subscription} from "rxjs";
 import type {TdDOMEvent} from "../../../action/td-dom";
 import type {DecideBattery} from "../../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
-import type {BattleProgress, BattleRoom, InitialState} from "../../../battle-room/battle-room";
+import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
 import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../../action/game-loop/render";
