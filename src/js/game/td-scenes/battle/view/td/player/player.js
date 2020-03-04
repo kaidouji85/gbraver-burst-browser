@@ -2,7 +2,7 @@
 import type {Resources} from "../../../../../../resource";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import {PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
-import type {Player, PlayerState} from "gbraver-burst-core";
+import type {Player} from "gbraver-burst-core";
 import {PlayerNeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
@@ -23,7 +23,7 @@ import {playerBurstIndicator} from "../../../../../../game-object/burst-indicato
  * @param listener リスナー
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(resources: Resources, state: PlayerState, listener: Observable<GameObjectAction>): TDPlayer<ArmDozerSprite> {
+export function playerTDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer<ArmDozerSprite> {
   return {
     playerId: state.playerId,
     sprite: createPlayerSprite(resources, listener, state),
