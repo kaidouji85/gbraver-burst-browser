@@ -2,7 +2,7 @@
 
 import {PlayerLightingDozerView} from "./player-lighting-dozer-view";
 import type {Resources} from "../../../../resource";
-import type {ShinBraverModel} from "../../shin-braver/model/shin-braver-model";
+import type {LightningDozerModel} from "../model/lightning-dozer-model";
 
 /**
  * 敵側のライトニングドーザビュー
@@ -17,10 +17,12 @@ export class EnemyLightningDozerView extends PlayerLightingDozerView {
    *
    * @param model モデル
    */
-  engage(model: ShinBraverModel): void {
+  engage(model: LightningDozerModel): void {
     super.engage(model);
     const target = this.getObject3D();
     target.position.x *= -1;
     target.scale.x = -1;
   }
+
+
 }

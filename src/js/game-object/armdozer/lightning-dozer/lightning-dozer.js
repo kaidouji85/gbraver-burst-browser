@@ -11,6 +11,7 @@ import type {LightningDozerView} from "./view/lightning-dozer-view";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /**
  *　ライトニングドーザ
@@ -27,6 +28,8 @@ export class LightningDozer implements ArmDozerSprite {
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);
+      } else if (action.type === 'PreRender') {
+        this._onPreRender(action);
       }
     });
   }
@@ -98,5 +101,14 @@ export class LightningDozer implements ArmDozerSprite {
    */
   _onUpdate(action: Update): void {
     this._view.engage(this._model);
+  }
+
+  /**
+   * プリレンダー
+   *
+   * @param action アクション
+   */
+  _onPreRender(action: PreRender): void {
+    this._view.lookAt(action.camera);
   }
 }

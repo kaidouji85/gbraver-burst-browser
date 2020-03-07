@@ -37,6 +37,9 @@ export class PlayerLightingDozerView implements LightningDozerView {
       model.position.y,
       model.position.z
     );
+
+    this._stand.visible(true);
+    this._stand.animate(0);
   }
 
   /**
@@ -46,5 +49,14 @@ export class PlayerLightingDozerView implements LightningDozerView {
    */
   getObject3D(): THREE.Object3D {
     return this._group;
+  }
+
+  /**
+   * カメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
+  lookAt(camera: THREE.Camera): void {
+    this._group.quaternion.copy(camera.quaternion);
   }
 }

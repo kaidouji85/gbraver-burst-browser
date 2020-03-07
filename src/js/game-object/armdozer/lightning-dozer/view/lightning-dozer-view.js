@@ -23,4 +23,11 @@ export interface LightningDozerView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D;
+
+  /** 
+   * カメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
+  lookAt(camera: THREE.Camera): void;
 }
