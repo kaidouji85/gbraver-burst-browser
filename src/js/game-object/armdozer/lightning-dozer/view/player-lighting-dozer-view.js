@@ -11,10 +11,14 @@ import * as THREE from "three";
  * プレイヤー側のライトニングドーザビュー
  */
 export class PlayerLightingDozerView implements LightningDozerView {
+  _group: THREE.Group;
   _stand: ArmdozerAnimation;
 
   constructor(resources: Resources) {
+    this._group = new THREE.Group();
+
     this._stand = lightningDozerStand(resources);
+    this._group.add(this._stand.getObject3D());
   }
 
   /** デストラクタ相当の処理 */
@@ -28,7 +32,11 @@ export class PlayerLightingDozerView implements LightningDozerView {
    * @param model モデル
    */
   engage(model: LightningDozerModel): void {
-    this._stand.getObject3D().position.set(model.position.x, model.position.y, model.position.z);
+    this._group.position.set(
+      model.position.x,
+      model.position.y,
+      model.position.z
+    );
   }
 
   /**
@@ -37,6 +45,6 @@ export class PlayerLightingDozerView implements LightningDozerView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._stand.getObject3D();
+    return this._group;
   }
 }

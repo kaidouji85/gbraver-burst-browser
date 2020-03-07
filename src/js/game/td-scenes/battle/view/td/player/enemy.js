@@ -15,6 +15,7 @@ import {enemySpark} from "../../../../../../game-object/hitmark/spark";
 import {enemyTurnStart} from "../../../../../../game-object/turn-start";
 import {enemyGauge} from "../../../../../../game-object/gauge";
 import {enemyBurstIndicator} from "../../../../../../game-object/burst-indicator";
+import {EnemyLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
 
 /**
  * 敵側の3Dプレイヤーオブジェクト
@@ -56,6 +57,8 @@ export function createEnemySprite(resources: Resources, listener: Observable<Gam
   switch (enemyInfo.armdozer.appearance) {
     case 'neo-landozer':
       return EnemyNeoLandozer(resources, listener);
+    case 'lightning-dozer':
+      return EnemyLightningDozer(resources, listener);
     case 'shin-braver':
     default:
       return EnemyShinBraver(resources, listener);

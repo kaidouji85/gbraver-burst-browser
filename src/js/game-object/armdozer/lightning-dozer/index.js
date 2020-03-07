@@ -13,7 +13,7 @@ import {EnemyLightningDozerView} from "./view/enemy-lightning-dozer-view";
  * @param resources リソース管理オブジェクト
  * @return プレイヤー側のライトニングドーザ
  */
-export function playerLightningDozer(resources: Resources, listener: Observable<GameObjectAction>): LightningDozer {
+export function PlayerLightningDozer(resources: Resources, listener: Observable<GameObjectAction>): LightningDozer {
   const view = new PlayerLightingDozerView(resources);
   return new LightningDozer(resources, listener, view);
 }
@@ -24,7 +24,7 @@ export function playerLightningDozer(resources: Resources, listener: Observable<
  * @param resources リソース管理オブジェクト
  * @return 敵側のライトニングドーザ
  */
-export function enemyLightningDozer(resources: Resources, listener: Observable<GameObjectAction>): LightningDozer {
+export function EnemyLightningDozer(resources: Resources, listener: Observable<GameObjectAction>): LightningDozer {
   const view = new EnemyLightningDozerView(resources);
   return new LightningDozer(resources, listener, view);
 }
