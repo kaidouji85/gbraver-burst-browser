@@ -14,6 +14,7 @@ import {playerSpark} from "../../../../../../game-object/hitmark/spark";
 import {playerTurnStart} from "../../../../../../game-object/turn-start";
 import {playerGauge} from "../../../../../../game-object/gauge";
 import {playerBurstIndicator} from "../../../../../../game-object/burst-indicator";
+import {PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
 
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
@@ -55,6 +56,8 @@ export function createPlayerSprite(resources: Resources, listener: Observable<Ga
   switch (playerInfo.armdozer.appearance) {
     case 'neo-landozer':
       return PlayerNeoLandozer(resources, listener);
+    case 'lightning-dozer':
+      return PlayerLightningDozer(resources, listener);
     case 'shin-braver':
     default:
       return PlayerShinBraver(resources, listener);
