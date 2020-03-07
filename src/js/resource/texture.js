@@ -36,6 +36,7 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_DOWN: 'NEO_LANDOZER_DOWN',
   NEO_LANDOZER_GUTS_UP: 'NEO_LANDOZER_GUTS_UP',
   NEO_LANDOZER_GUTS_DOWN: 'NEO_LANDOZER_GUTS_DOWN',
+  LIGHTNING_DOZER_STAND: 'LIGHTNING_DOZER_STAND',
   HITMARK_SPARK: 'HITMARK_SPARK',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
@@ -117,6 +118,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.NEO_LANDOZER_GUTS_UP,
     path: 'armdozer/neo-landozer/guts-up.png',
+  },
+  // ライトニングドーザ関連
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_STAND,
+    path: 'armdozer/ligjtning-dozer/stand.png',
   },
   // ヒットマーク関連
   {
