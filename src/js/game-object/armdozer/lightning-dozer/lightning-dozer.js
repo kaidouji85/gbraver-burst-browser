@@ -1,26 +1,31 @@
 // @flow
 
 import type {Resources} from "../../../resource";
-import type {ArmdozerAnimation} from "../mesh/armdozer-animation";
 import type {ArmDozerSprite} from "../armdozer-sprite";
-import {lightningDozerStand} from "./mesh/stand";
 import * as THREE from "three";
 import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
+import type {LightningDozerModel} from "./model/lightning-dozer-model";
+import {createInitialValue} from "./model/initial-value";
+import type {LightningDozerView} from "./view/lightning-dozer-view";
+import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../../action/game-object-action";
 
 /**
  *　ライトニングドーザ
  */
 export class LightningDozer implements ArmDozerSprite {
-  _stand: ArmdozerAnimation;
+  _model: LightningDozerModel;
+  _view: LightningDozerView;
 
-  constructor(resources: Resources) {
-    this._stand = lightningDozerStand(resources);
+  constructor(resources: Resources, listener: Observable<GameObjectAction>, view: LightningDozerView) {
+    this._model = createInitialValue();
+    this._view = view;
   }
 
   /** デストラクタ相当の処理 */
   destructor() {
-    this._stand.destructor();
+    this._view.destructor();
   }
 
   /**
@@ -29,7 +34,7 @@ export class LightningDozer implements ArmDozerSprite {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._stand.getObject3D();
+    return this._view.getObject3D();
   }
 
   /** ターンスタート */
