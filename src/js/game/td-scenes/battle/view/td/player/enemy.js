@@ -16,6 +16,7 @@ import {enemyTurnStart} from "../../../../../../game-object/turn-start";
 import {enemyGauge} from "../../../../../../game-object/gauge";
 import {enemyBurstIndicator} from "../../../../../../game-object/burst-indicator";
 import {EnemyLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
+import {ArmdozerAppearances} from "gbraver-burst-core";
 
 /**
  * 敵側の3Dプレイヤーオブジェクト
@@ -55,11 +56,11 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
 /** 与えられたパラメータから敵スプライを生成する */
 export function createEnemySprite(resources: Resources, listener: Observable<GameObjectAction>, enemyInfo: Player): ArmDozerSprite {
   switch (enemyInfo.armdozer.appearance) {
-    case 'neo-landozer':
+    case ArmdozerAppearances.NEO_LANDOZER:
       return EnemyNeoLandozer(resources, listener);
-    case 'lightning-dozer':
+    case ArmdozerAppearances.LIGHTNING_DOZER:
       return EnemyLightningDozer(resources, listener);
-    case 'shin-braver':
+    case ArmdozerAppearances.SHIN_BRAVER:
     default:
       return EnemyShinBraver(resources, listener);
   }
