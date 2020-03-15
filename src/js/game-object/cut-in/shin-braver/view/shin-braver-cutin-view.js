@@ -8,15 +8,18 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import type {ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
 
 /** メッシュの大きさ */
-export const MESH_SIZE = 200;
+export const MESH_SIZE = 500;
 
 /**
  * シンブレイバーカットインのビュー
  */
 export class ShinBraverCutInView implements CutIn {
+  _group: THREE.Group;
   _charge: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
+    this._group = new THREE.Group();
+
     const burstChargeResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_CHARGE);
     const burstCharge = burstChargeResource
       ? burstChargeResource.texture
@@ -27,6 +30,7 @@ export class ShinBraverCutInView implements CutIn {
       height: MESH_SIZE,
       maxAnimation: 4
     });
+    this._group.add(this._charge.getObject3D());
   }
 
   /**
@@ -42,7 +46,9 @@ export class ShinBraverCutInView implements CutIn {
    * @param model モデル
    */
   engage(model: ShinBraverCutInModel): void {
-    // NOP
+    this._group.position.x = model.position.x;
+    this._group.position.y = model.position.y;
+    this._group.position.z = model.position.z;
   }
 
   /**
@@ -51,6 +57,6 @@ export class ShinBraverCutInView implements CutIn {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._charge.getObject3D();
+    return this._group;
   }
 }
