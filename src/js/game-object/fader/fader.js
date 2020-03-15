@@ -14,7 +14,8 @@ import {fadeOut} from "./animation/fade-out";
 /** コンストラクタのパラメータ */
 type Param = {
   isVisible: boolean,
-  listener: Observable<GameObjectAction>
+  listener: Observable<GameObjectAction>,
+  z: number,
 };
 
 /** 画面フェーダー */
@@ -25,7 +26,7 @@ export class Fader {
 
   constructor(param: Param) {
     this._model = createInitialValue(param.isVisible);
-    this._view = new FaderView();
+    this._view = new FaderView(param.z);
     this._subscription = param.listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);

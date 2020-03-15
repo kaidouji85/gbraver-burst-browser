@@ -10,6 +10,7 @@ import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
 import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
+import {HUD_REARMOST_FADER_ZINDEX} from "../../../../../zindex/hud-zindex";
 
 /** HUDレイヤーのゲームオブジェクト */
 export type HUDGameObjects = {
@@ -62,7 +63,8 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
 
   const fader = new Fader({
     isVisible: true,
-    listener: listener
+    listener: listener,
+    z: HUD_REARMOST_FADER_ZINDEX,
   });
 
   return {

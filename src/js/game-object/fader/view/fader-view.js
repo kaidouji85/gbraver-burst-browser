@@ -1,7 +1,6 @@
 // @flow
 
 import * as THREE from 'three';
-import {HUD_FROMTMOST_FADER_ZINDEX} from "../../../zindex/hud-zindex";
 import {FADE_RENDER_ORDER} from "../../../render-order/hud-render-order";
 import type {FaderModel} from "../model/fader-model";
 
@@ -12,14 +11,14 @@ export const MESH_HEIGHT = 1;
 export class FaderView {
   _mesh: THREE.Mesh;
 
-  constructor() {
+  constructor(z: number) {
     const geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT);
     const material = new THREE.MeshBasicMaterial({
       color: 'rgb(10, 10, 10)',
       transparent: true
     });
     this._mesh = new THREE.Mesh(geometry, material);
-    this._mesh.position.z = HUD_FROMTMOST_FADER_ZINDEX;
+    this._mesh.position.z = z;
     this._mesh.renderOrder = FADE_RENDER_ORDER;
   }
 
