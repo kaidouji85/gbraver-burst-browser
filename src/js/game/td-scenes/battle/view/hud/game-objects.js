@@ -10,13 +10,14 @@ import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
 import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
-import {HUD_REARMOST_FADER_ZINDEX} from "../../../../../zindex/hud-zindex";
+import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
 
 /** HUDレイヤーのゲームオブジェクト */
 export type HUDGameObjects = {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
-  fader: Fader;
+  frontmostFader: Fader;
+  rearmostFader: Fader;
   notifier: {
     battleSceneAction: Observable<BattleSceneAction>
   }
@@ -61,16 +62,17 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
     }
   });
 
-  const fader = new Fader({
-    isVisible: true,
-    listener: listener,
-    z: HUD_REARMOST_FADER_ZINDEX,
-  });
-
   return {
     batterySelector: batterySelector,
     burstButton: burstButton,
-    fader: fader,
+    frontmostFader: frontmostFader({
+      listener: listener,
+      isVisible: true,
+    }),
+    rearmostFader: rearmostFader({
+      listener: listener,
+      isVisible: false,
+    }),
     notifier: {
       battleSceneAction: battleSceneAction
     }
@@ -86,7 +88,8 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
 export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects): void {
   scene.add(target.batterySelector.getObject3D());
   scene.add(target.burstButton.getObject3D());
-  scene.add(target.fader.getObject3D());
+  scene.add(target.rearmostFader.getObject3D());
+  scene.add(target.frontmostFader.getObject3D());
 }
 
 /**
@@ -97,4 +100,6 @@ export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects)
 export function disposeHUDGameObjects(target: HUDGameObjects): void {
   target.batterySelector.destructor();
   target.burstButton.destructor();
+  target.rearmostFader.destructor();
+  target.frontmostFader.destructor();
 }
