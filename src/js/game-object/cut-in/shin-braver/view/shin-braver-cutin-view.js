@@ -5,7 +5,7 @@ import type {CutIn} from "../../cut-in";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import type {ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
+import type {AnimationType, ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 500;
@@ -16,11 +16,13 @@ export const MESH_SIZE = 500;
 export class ShinBraverCutInView implements CutIn {
   _group: THREE.Group;
   _charge: HorizontalAnimationMesh;
+  _release: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
-    const burstChargeResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_CHARGE);
+    const burstChargeResource = resources.textures
+      .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_CHARGE);
     const burstCharge = burstChargeResource
       ? burstChargeResource.texture
       : new THREE.Texture();
@@ -30,7 +32,22 @@ export class ShinBraverCutInView implements CutIn {
       height: MESH_SIZE,
       maxAnimation: 4
     });
-    this._group.add(this._charge.getObject3D());
+
+    const burstReleaseResource = resources.textures
+      .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_RELEASE);
+    const burstRelease = burstReleaseResource
+      ? burstReleaseResource.texture
+      : new THREE.Texture();
+    this._release = new HorizontalAnimationMesh({
+      texture: burstRelease,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
+      maxAnimation: 4
+    });
+
+    this._getMeshes().forEach(v => {
+      this._group.add(v.getObject3D());
+    });
   }
 
   /**
@@ -49,6 +66,17 @@ export class ShinBraverCutInView implements CutIn {
     this._group.position.x = model.position.x;
     this._group.position.y = model.position.y;
     this._group.position.z = model.position.z;
+
+    const activeMesh = this._getActiveMesh(model.animation.type);
+    activeMesh.animate(model.animation.frame);
+    activeMesh.setOpacity(model.opacity);
+
+    const disActiveMeshes = this._getMeshes()
+      .filter(v => v !== activeMesh);
+    disActiveMeshes.forEach(v => {
+      v.setOpacity(0);
+    });
+
   }
 
   /**
@@ -58,5 +86,22 @@ export class ShinBraverCutInView implements CutIn {
    */
   getObject3D(): THREE.Object3D {
     return this._group;
+  }
+
+  _getMeshes(): HorizontalAnimationMesh[] {
+    return [
+      this._charge,
+      this._release
+    ];
+  }
+
+  _getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
+    switch (type) {
+      case 'BurstRelease':
+        return this._release;
+      case 'BurstCharge':
+      default:
+        return this._charge;
+    }
   }
 }
