@@ -1,20 +1,19 @@
 // @flow
 
 import * as THREE from 'three';
-import type {CutIn} from "../cut-in";
-import {Animate} from "../../../animation/animate";
-import {empty} from "../../../animation/delay";
-import type {Resources} from "../../../resource";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import {TEXTURE_IDS} from "../../../resource/texture";
+import type {CutIn} from "../../cut-in";
+import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
+import type {Resources} from "../../../../resource";
+import {TEXTURE_IDS} from "../../../../resource/texture";
+import type {ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 200;
 
 /**
- * シンブレイバーカットイン
+ * シンブレイバーカットインのビュー
  */
-export class ShinBraverCutIn implements CutIn {
+export class ShinBraverCutInView implements CutIn {
   _charge: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
@@ -35,6 +34,15 @@ export class ShinBraverCutIn implements CutIn {
    */
   destructor(): void {
     this._charge.destructor();
+  }
+
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   */
+  engage(model: ShinBraverCutInModel): void {
+    // NOP
   }
 
   /**

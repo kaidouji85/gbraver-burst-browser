@@ -76,8 +76,8 @@ export class HudLayer {
     const gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
 
     this.players = param.players.map(v => v.playerId === param.playerId
-      ? playerHUD(param.resources, v)
-      : enemyHUD(param.resources, v)
+      ? playerHUD(param.resources, gameObjectAction, v)
+      : enemyHUD(param.resources, gameObjectAction, v)
     );
     this.players.forEach(v => {
       appendHUDPlayer(this.scene, v);
