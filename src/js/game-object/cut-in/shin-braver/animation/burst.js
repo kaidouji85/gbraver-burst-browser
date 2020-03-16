@@ -14,9 +14,9 @@ import {delay} from "../../../../animation/delay";
  * @return アニメーション
  */
 export function burst(model: ShinBraverCutInModel): Animate {
-  return process(() =>{
-    model.opacity = 1;
-  }).chain(all(
+  return all(
+    tween(model, t => t.to({opacity: 1}, 500)),
+
     process(() => {
       model.scale = 1;
     }).chain(
@@ -40,7 +40,5 @@ export function burst(model: ShinBraverCutInModel): Animate {
     })).chain(
       tween(model.animation, t => t.to({frame: 1}, 200))
     )
-  )).chain(
-    delay(1000)
   );
 }
