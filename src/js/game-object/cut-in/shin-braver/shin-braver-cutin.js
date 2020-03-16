@@ -11,6 +11,7 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
 import {Animate} from "../../../animation/animate";
 import {burst} from "./animation/burst";
+import {hidden} from "./animation/hidden";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 200;
@@ -57,6 +58,15 @@ export class ShinBraverCutIn implements CutIn {
    */
   play(): Animate {
     return burst(this._model);
+  }
+
+  /**
+   * カットインを非表示にする
+   *
+   * @return {Animate}
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**

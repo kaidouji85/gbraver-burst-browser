@@ -14,33 +14,33 @@ import {delay} from "../../../../animation/delay";
  * @return アニメーション
  */
 export function burst(model: ShinBraverCutInModel): Animate {
-
   return process(() =>{
     model.opacity = 1;
   }).chain(all(
     process(() => {
-      model.position.y = 0;
-      model.scale = 0.9;
-    }).chain(all(
-      tween(model, t => t.to({scale: 1.2}, 300)),
-      tween(model.position, t => t.to({y: 80}, 300)),
-    )).chain(delay(200)
-    ).chain(all(
-      tween(model, t => t.to({scale: 1.2}, 300)),
-      tween(model.position, t => t.to({y: 0}, 300)),
-    )),
+      model.scale = 1;
+    }).chain(
+      tween(model, t => t.to({scale: 2}, 300))
+    ).chain(
+      delay(200)
+    ).chain(
+      tween(model, t => t.to({scale: 1}, 200))
+    ),
 
     process(() => {
       model.animation.type = 'BurstCharge';
       model.animation.frame = 0;
-    }).chain(tween(model.animation, t => t.to({frame: 1}, 300))
-    ).chain(delay(200)
+    }).chain(
+      tween(model.animation, t => t.to({frame: 1}, 300))
+    ).chain(
+      delay(200)
     ).chain(process(() => {
       model.animation.type = 'BurstRelease';
       model.animation.frame = 0;
-    })).chain(tween(model.animation, t => t.to({frame: 1}, 200)))
-  )).chain(delay(1000)
-  ).chain(process( () => {
-    model.opacity = 0;
-  }));
+    })).chain(
+      tween(model.animation, t => t.to({frame: 1}, 200))
+    )
+  )).chain(
+    delay(1000)
+  );
 }
