@@ -11,6 +11,8 @@ import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shi
 import {shinBraverBurst} from "./shin-braver";
 import {delay, empty} from "../../../../../../animation/delay";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import type {CutIn} from "../../../../../../game-object/cut-in/cut-in";
+import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 
 /**
  * バーストアニメーション
@@ -36,10 +38,11 @@ export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneSta
  * @param param バーストアニメパラメータ
  * @return バーストアニメーション
  */
-function armdozerAnimation(param: BurstAnimationParam<ArmDozerSprite, Burst>): Animate {
+function armdozerAnimation(param: BurstAnimationParam<ArmDozerSprite, CutIn, Burst>): Animate {
   const sprite = param.burstPlayerTD.sprite;
-  if (sprite instanceof ShinBraver) {
-    const castParam = ((param: any):  BurstAnimationParam<typeof sprite, Burst>);
+  const cutIn = param.burstPlayerHUD.cutIn;
+  if ((sprite instanceof ShinBraver) && (cutIn instanceof ShinBraverCutIn)) {
+    const castParam = ((param: any):  BurstAnimationParam<typeof sprite, typeof cutIn, Burst>);
     return shinBraverBurst(castParam);
   }
 

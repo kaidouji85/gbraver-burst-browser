@@ -9,16 +9,20 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import type {CutIn} from "../../../../../../game-object/cut-in/cut-in";
+import type {HUDPlayer} from "../../../view/hud/player";
 
 /**
  * バーストアニメーションのパラメータ
  *
  * @type SPRITE スプライト
+ * @type CUTIN カットイン
  * @type BURST バースト
  */
-export type BurstAnimationParam<SPRITE: ArmDozerSprite, BURST: Burst> = {
+export type BurstAnimationParam<SPRITE: ArmDozerSprite, CUTIN: CutIn, BURST: Burst> = {
   burstPlayerState: PlayerState,
   burstPlayerTD: TDPlayer<SPRITE>,
+  burstPlayerHUD: HUDPlayer<CUTIN>,
   tdObjects: TDGameObjects,
   tdCamera: TDCamera,
   hudObjects: HUDGameObjects,
@@ -34,7 +38,7 @@ export type BurstAnimationParam<SPRITE: ArmDozerSprite, BURST: Burst> = {
  * @param gameState ゲームステート
  * @return バーストアニメーションパラメータ
  */
-export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BurstAnimationParam<ArmDozerSprite, Burst> {
+export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BurstAnimationParam<ArmDozerSprite, CutIn, Burst> {
   if (gameState.effect.name !== 'BurstEffect') {
     return null;
   }
@@ -42,13 +46,15 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
   const effect: BurstEffect = gameState.effect;
   const burstPlayerState = gameState.players.find(v => v.playerId === effect.burstPlayer);
   const burstPlayerTD = view.td.players.find(v => v.playerId === effect.burstPlayer);
-  if (!burstPlayerState || !burstPlayerTD) {
+  const burstPlayerHUD = view.hud.players.find(v => v.playerId === effect.burstPlayer);
+  if (!burstPlayerState || !burstPlayerTD || !burstPlayerHUD) {
     return null;
   }
 
   return {
     burstPlayerState: burstPlayerState,
     burstPlayerTD:burstPlayerTD,
+    burstPlayerHUD: burstPlayerHUD,
     tdObjects: view.td.gameObjects,
     tdCamera: view.td.camera,
     hudObjects: view.hud.gameObjects,

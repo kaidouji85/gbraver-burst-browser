@@ -7,6 +7,7 @@ import {delay, empty} from "../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {dolly, toInitial} from "../../td-camera";
+import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 
 /**
  * シンブレイバーのバーストアニメーション
@@ -14,10 +15,10 @@ import {dolly, toInitial} from "../../td-camera";
  * @param param バーストアニメーションパラメータ
  * @return バーストアニメーション
  */
-export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, Burst>): Animate {
+export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, ShinBraverCutIn, Burst>): Animate {
   if (param.burst.type === 'RecoverBattery') {
     const castBurst = (param.burst: RecoverBattery);
-    const castParam = ((param: any): BurstAnimationParam<ShinBraver, typeof castBurst>);
+    const castParam = ((param: any): BurstAnimationParam<ShinBraver, ShinBraverCutIn, typeof castBurst>);
     return recoverBattery(castParam);
   }
 
@@ -30,7 +31,7 @@ export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, Burst>): 
  * @param param アニメーションパラメータ
  * @return アニメーション
  */
-function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>): Animate {
+function recoverBattery(param: BurstAnimationParam<ShinBraver, ShinBraverCutIn, RecoverBattery>): Animate {
   const playerX = param.burstPlayerTD.sprite.getObject3D().position.x;
   return all(
     dolly(param.tdCamera, playerX, 500)
