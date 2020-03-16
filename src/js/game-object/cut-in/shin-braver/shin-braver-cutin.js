@@ -9,6 +9,8 @@ import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
+import {Animate} from "../../../animation/animate";
+import {burst} from "./animation/burst";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 200;
@@ -46,6 +48,15 @@ export class ShinBraverCutIn implements CutIn {
    */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * カットインアニメーションを再生する
+   *
+   * @return アニメーション
+   */
+  play(): Animate {
+    return burst(this._model);
   }
 
   /**
