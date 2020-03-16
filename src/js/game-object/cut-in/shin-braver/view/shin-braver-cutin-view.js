@@ -67,6 +67,10 @@ export class ShinBraverCutInView implements CutIn {
     this._group.position.y = model.position.y;
     this._group.position.z = model.position.z;
 
+    this._group.scale.x = model.scale;
+    this._group.scale.y = model.scale;
+    this._group.scale.z = model.scale;
+
     const activeMesh = this._getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);
     activeMesh.setOpacity(model.opacity);
@@ -76,7 +80,6 @@ export class ShinBraverCutInView implements CutIn {
     disActiveMeshes.forEach(v => {
       v.setOpacity(0);
     });
-
   }
 
   /**
@@ -88,6 +91,11 @@ export class ShinBraverCutInView implements CutIn {
     return this._group;
   }
 
+  /**
+   * 本クラスが管理する全メッシュを取得する
+   *
+   * @return 管理する全メッシュ
+   */
   _getMeshes(): HorizontalAnimationMesh[] {
     return [
       this._charge,
@@ -95,6 +103,12 @@ export class ShinBraverCutInView implements CutIn {
     ];
   }
 
+  /**
+   * 指定したアニメーションタイプに対応したメッシュを返す
+   *
+   * @param type アニメーションタイプ
+   * @return メッシュ
+   */
   _getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {
       case 'BurstRelease':

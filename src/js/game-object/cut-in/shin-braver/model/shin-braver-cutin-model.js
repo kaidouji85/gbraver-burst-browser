@@ -23,5 +23,7 @@ export type ShinBraverCutInModel = {
     frame: number
   },
   /** 0〜1で指定する透明度、0で完全透明 */
-  opacity: number
+  opacity: number,
+  /** 拡大率 */
+  scale: number,
 };

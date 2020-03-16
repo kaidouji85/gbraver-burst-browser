@@ -18,6 +18,7 @@ export function createInitialValue(): ShinBraverCutInModel {
       type: 'BurstCharge',
       frame: 0
     },
-    opacity: 1
+    opacity: 0,
+    scale: 1,
   };
 }
