@@ -36,11 +36,11 @@ function recoverBattery(param: BurstAnimationParam<ShinBraver, ShinBraverCutIn, 
     attentionArmDozer(param.tdCamera, param.burstPlayerTD.sprite, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
+    param.tdObjects.turnIndicator.invisible()
   ).chain(delay(500)
   ).chain(all(
-    param.hudObjects.rearmostFader.to(0.9, 300),
+    param.hudObjects.rearmostFader.to(0.8, 300),
     param.burstPlayerHUD.cutIn.play(),
-    param.tdObjects.turnIndicator.invisible()
   )).chain(delay(2000)
   ).chain(all(
     param.hudObjects.rearmostFader.to(0, 300),
@@ -49,7 +49,8 @@ function recoverBattery(param: BurstAnimationParam<ShinBraver, ShinBraverCutIn, 
   ).chain(all(
     param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
-  )).chain(all(
+  )).chain(delay(500)
+  ).chain(all(
     toInitial(param.tdCamera, 500),
     param.tdObjects.skyBrightness.brightness(1, 500),
     param.tdObjects.illumination.intensity(1, 500),
