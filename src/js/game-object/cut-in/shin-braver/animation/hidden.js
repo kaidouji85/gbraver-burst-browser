@@ -18,12 +18,7 @@ export function hidden(model: ShinBraverCutInModel): Animate {
     model.scale = 1;
     model.animation.type = 'BurstRelease';
   }).chain(all(
-    tween(model, t => t.to({opacity: 0}, 500)),
-    tween(model, t => t.to({scale: 1.2}, 500)),
-    tween(model.animation, t => t.to({frame: 0}, 300))
-      .chain(process(() => {
-        model.animation.type = 'BurstCharge';
-        model.animation.frame = 1;
-      })),
+    tween(model, t => t.to({opacity: 0}, 300)),
+    tween(model, t => t.to({scale: 1.2}, 300))
   ));
 }

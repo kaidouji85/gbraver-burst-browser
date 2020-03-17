@@ -10,6 +10,7 @@ import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
 import {fadeIn} from "./animation/fade-in";
 import {fadeOut} from "./animation/fade-out";
+import {to} from "./animation/to";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -56,6 +57,17 @@ export class Fader {
    */
   fadeOut(): Animate {
     return fadeOut(this._model);
+  }
+
+  /**
+   * フェーダを手動で変更
+   *
+   * @param opacity 透明度
+   * @param duration アニメーション時間
+   * @return アニメーション
+   */
+  to(opacity: number, duration: number): Animate {
+    return to(this._model, opacity, duration);
   }
 
   /**

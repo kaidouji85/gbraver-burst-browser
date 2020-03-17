@@ -32,12 +32,12 @@ export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, ShinBrave
  */
 function recoverBattery(param: BurstAnimationParam<ShinBraver, ShinBraverCutIn, RecoverBattery>): Animate {
   return all(
-    param.hudObjects.rearmostFader.fadeOut(),
+    param.hudObjects.rearmostFader.to(0.8, 300),
     param.burstPlayerHUD.cutIn.play(),
     param.tdObjects.turnIndicator.invisible()
   ).chain(delay(2000)
   ).chain(all(
-    param.hudObjects.rearmostFader.fadeIn(),
+    param.hudObjects.rearmostFader.to(0, 300),
     param.burstPlayerHUD.cutIn.hidden(),
   )).chain(delay(800)
   ).chain(all(
