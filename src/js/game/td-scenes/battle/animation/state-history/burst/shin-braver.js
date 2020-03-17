@@ -7,6 +7,7 @@ import {delay, empty} from "../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
+import {attentionArmDozer, toInitial} from "../../td-camera";
 
 /**
  * シンブレイバーのバーストアニメーション
@@ -32,16 +33,25 @@ export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, ShinBrave
  */
 function recoverBattery(param: BurstAnimationParam<ShinBraver, ShinBraverCutIn, RecoverBattery>): Animate {
   return all(
-    param.hudObjects.rearmostFader.to(0.8, 300),
+    attentionArmDozer(param.tdCamera, param.burstPlayerTD.sprite, 500),
+    param.tdObjects.skyBrightness.brightness(0.2, 500),
+    param.tdObjects.illumination.intensity(0.2, 500),
+  ).chain(delay(500)
+  ).chain(all(
+    param.hudObjects.rearmostFader.to(0.9, 300),
     param.burstPlayerHUD.cutIn.play(),
     param.tdObjects.turnIndicator.invisible()
-  ).chain(delay(2000)
+  )).chain(delay(2000)
   ).chain(all(
     param.hudObjects.rearmostFader.to(0, 300),
     param.burstPlayerHUD.cutIn.hidden(),
-  )).chain(delay(800)
+  )).chain(delay(500)
   ).chain(all(
     param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
-  ));
+  )).chain(all(
+    toInitial(param.tdCamera, 500),
+    param.tdObjects.skyBrightness.brightness(1, 500),
+    param.tdObjects.illumination.intensity(1, 500),
+  )).chain(delay(500));
 }
