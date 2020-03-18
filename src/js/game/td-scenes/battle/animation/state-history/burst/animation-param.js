@@ -9,7 +9,6 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
-import type {CutIn} from "../../../../../../game-object/cut-in/cut-in";
 import type {HUDArmdozer} from "../../../view/hud/armdozer";
 
 /**
@@ -50,16 +49,14 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
   const effect: BurstEffect = gameState.effect;
   const burstPlayerState = gameState.players.find(v => v.playerId === effect.burstPlayer);
   const burstPlayerTD = view.td.players.find(v => v.playerId === effect.burstPlayer);
-  const burstPlayerHUD = view.hud.players.find(v => v.playerId === effect.burstPlayer);
   const burstArmdozerHUD = view.hud.armdozers.find(v => v.playerId === effect.burstPlayer);
-  if (!burstPlayerState || !burstPlayerTD || !burstPlayerHUD || !burstArmdozerHUD) {
+  if (!burstPlayerState || !burstPlayerTD || !burstArmdozerHUD) {
     return null;
   }
 
   return {
     burstPlayerState: burstPlayerState,
     burstPlayerTD:burstPlayerTD,
-    burstPlayerHUD: burstPlayerHUD,
     burstArmdozerHUD: burstArmdozerHUD,
     tdObjects: view.td.gameObjects,
     tdCamera: view.td.camera,

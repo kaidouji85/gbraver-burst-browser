@@ -17,11 +17,6 @@ import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {SafeAreaInset} from "../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../action/resize/resize";
-import {playerHUD} from "./player/player";
-import {enemyHUD} from "./player/enemy";
-import type {CutIn} from "../../../../../game-object/cut-in/cut-in";
-import type {HUDPlayer} from "./player";
-import {appendHUDPlayer, disposeHUDPlayer} from "./player";
 import type {HUDArmdozer} from "./armdozer";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer";
 
@@ -51,7 +46,6 @@ type Notifier = {
 export class HudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
-  players: HUDPlayer<CutIn>[];
   armdozers: HUDArmdozer[];
   gameObjects: HUDGameObjects;
 
@@ -75,14 +69,6 @@ export class HudLayer {
 
     this._overlap = toOverlapStream(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
     const gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
-
-    this.players = param.players.map(v => v.playerId === param.playerId
-      ? playerHUD(param.resources, gameObjectAction, v)
-      : enemyHUD(param.resources, gameObjectAction, v)
-    );
-    this.players.forEach(v => {
-      appendHUDPlayer(this.scene, v);
-    });
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
@@ -113,9 +99,6 @@ export class HudLayer {
   /** デストラクタ */
   destructor(): void {
     disposeHUDGameObjects(this.gameObjects);
-    this.players.forEach(v => {
-      disposeHUDPlayer(v);
-    });
     this.camera.destructor();
     this.scene.dispose();
     this._subscription.forEach(v => {
