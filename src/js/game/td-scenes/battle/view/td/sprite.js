@@ -41,12 +41,27 @@ export class TDSprite {
   }
 }
 
+/**
+ * プレイヤースプライを生成する
+ *
+ * @param resources リソース管理オブジェクト
+ * @param listener イベントリスナ
+ * @param playerInfo プレイヤー情報
+ * @return スプライト
+ */
 export function playerSprite(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDSprite {
   return new TDSprite(state.playerId, createPlayerSprite(resources, listener, state));
 }
 
-/** 与えられたパラメータからプレイヤースプライを生成する */
-export function createPlayerSprite(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player): ArmDozerSprite {
+/**
+ * 諸条件から対応するプレイヤースプライトを返す
+ *
+ * @param resources リソース管理オブジェクト
+ * @param listener イベントリスナ
+ * @param playerInfo プレイヤー情報
+ * @return スプライト
+ */
+function createPlayerSprite(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player): ArmDozerSprite {
   switch (playerInfo.armdozer.appearance) {
     case ArmdozerAppearances.NEO_LANDOZER:
       return PlayerNeoLandozer(resources, listener);
@@ -58,12 +73,27 @@ export function createPlayerSprite(resources: Resources, listener: Observable<Ga
   }
 }
 
+/**
+ * 敵スプライを生成する
+ *
+ * @param resources リソース管理オブジェクト
+ * @param listener イベントリスナ
+ * @param enemyInfo プレイヤー情報
+ * @return スプライト
+ */
 export function enemySprite(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDSprite {
   return new TDSprite(state.playerId, createEnemySprite(resources, listener, state));
 }
 
-/** 与えられたパラメータから敵スプライを生成する */
-export function createEnemySprite(resources: Resources, listener: Observable<GameObjectAction>, enemyInfo: Player): ArmDozerSprite {
+/**
+ * 諸条件から対応する敵スプライトを返す
+ *
+ * @param resources リソース管理オブジェクト
+ * @param listener イベントリスナ
+ * @param enemyInfo プレイヤー情報
+ * @return スプライト
+ */
+function createEnemySprite(resources: Resources, listener: Observable<GameObjectAction>, enemyInfo: Player): ArmDozerSprite {
   switch (enemyInfo.armdozer.appearance) {
     case ArmdozerAppearances.NEO_LANDOZER:
       return EnemyNeoLandozer(resources, listener);
