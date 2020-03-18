@@ -1,6 +1,5 @@
 // @flow
 import type {Resources} from "../../../../../../resource";
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {Player} from "gbraver-burst-core";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
@@ -12,7 +11,6 @@ import {playerSpark} from "../../../../../../game-object/hitmark/spark";
 import {playerTurnStart} from "../../../../../../game-object/turn-start";
 import {playerGauge} from "../../../../../../game-object/gauge";
 import {playerBurstIndicator} from "../../../../../../game-object/burst-indicator";
-import {createPlayerSprite} from "../sprite";
 
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
@@ -22,10 +20,9 @@ import {createPlayerSprite} from "../sprite";
  * @param listener リスナー
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer<ArmDozerSprite> {
+export function playerTDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
   return {
     playerId: state.playerId,
-    sprite: createPlayerSprite(resources, listener, state),
     gauge: playerGauge({
       resources: resources,
       listener: listener,

@@ -1,6 +1,5 @@
 // @flow
 
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {Resources} from "../../../../../../resource";
 import type {Player} from "gbraver-burst-core";
 import {Observable} from "rxjs";
@@ -13,7 +12,6 @@ import {enemySpark} from "../../../../../../game-object/hitmark/spark";
 import {enemyTurnStart} from "../../../../../../game-object/turn-start";
 import {enemyGauge} from "../../../../../../game-object/gauge";
 import {enemyBurstIndicator} from "../../../../../../game-object/burst-indicator";
-import {createEnemySprite} from "../sprite";
 
 /**
  * 敵側の3Dプレイヤーオブジェクト
@@ -23,7 +21,7 @@ import {createEnemySprite} from "../sprite";
  * @param listener リスナー
  * @return 3Dプレイヤーオブジェクト
  */
-export function enemyTDObject(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer<ArmDozerSprite> {
+export function enemyTDObject(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
   return {
     playerId: state.playerId,
     gauge: enemyGauge({
@@ -32,7 +30,6 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery,
     }),
-    sprite: createEnemySprite(resources, listener, state),
     hitMark: {
       spark: enemySpark(resources, listener),
     },

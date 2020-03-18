@@ -22,7 +22,7 @@ import {TDSprite} from "../../../view/td/sprite";
  */
 export type BurstAnimationParamX<SPRITE: ArmDozerSprite, HUD_ARMDOZER: HUDArmdozer, BURST: Burst> = {
   burstPlayerState: PlayerState,
-  burstPlayerTD: TDPlayer<SPRITE>,
+  burstPlayerTD: TDPlayer,
   burstSprite: SPRITE,
   burstArmdozerHUD: HUD_ARMDOZER,
   tdObjects: TDGameObjects,

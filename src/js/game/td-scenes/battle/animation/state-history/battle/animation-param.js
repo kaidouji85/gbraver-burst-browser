@@ -20,11 +20,11 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
 export type BattleAnimationParamX<SPRITE: ArmDozerSprite, RESULT: BattleResult> = {
   attackerBattery: number,
   attackerState: PlayerState,
-  attackerTD: TDPlayer<SPRITE>,
+  attackerTD: TDPlayer,
   attackerSprite: SPRITE,
   defenderBattery: number,
   defenderState: PlayerState,
-  defenderTD: TDPlayer<ArmDozerSprite>,
+  defenderTD: TDPlayer,
   defenderSprite: ArmDozerSprite,
   tdObjects: TDGameObjects,
   tdCamera: TDCamera,

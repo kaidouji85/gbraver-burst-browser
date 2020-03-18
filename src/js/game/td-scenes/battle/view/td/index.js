@@ -47,7 +47,7 @@ type Notifier = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: TDCamera;
-  players: TDPlayer<ArmDozerSprite>[];
+  players: TDPlayer[];
   sprites: TDSprite[];
   gameObjects: TDGameObjects;
 
