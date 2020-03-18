@@ -22,6 +22,8 @@ import {enemyHUD} from "./player/enemy";
 import type {CutIn} from "../../../../../game-object/cut-in/cut-in";
 import type {HUDPlayer} from "./player";
 import {appendHUDPlayer, disposeHUDPlayer} from "./player";
+import type {HUDArmdozer} from "./armdozer";
+import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -50,6 +52,7 @@ export class HudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
   players: HUDPlayer<CutIn>[];
+  armdozers: HUDArmdozer[];
   gameObjects: HUDGameObjects;
 
   _rendererDOM: HTMLElement;
@@ -86,6 +89,16 @@ export class HudLayer {
     this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
+    this.armdozers = param.players.map(v => v.playerId === param.playerId
+      ? playerArmdozerHUD(param.resources, gameObjectAction, v)
+      : enemyArmdozerHUD(param.resources, gameObjectAction, v)
+    );
+    this.armdozers.map(v => v.getObject3Ds())
+      .flat()
+      .forEach(v => {
+        this.scene.add(v)
+      });
+
     this._subscription = [
       param.listener.gameLoop.subscribe(action => {
         this._gameLoop(action);
@@ -107,6 +120,9 @@ export class HudLayer {
     this.scene.dispose();
     this._subscription.forEach(v => {
       v.unsubscribe();
+    });
+    this.armdozers.forEach(v => {
+      v.destructor();
     });
   }
 

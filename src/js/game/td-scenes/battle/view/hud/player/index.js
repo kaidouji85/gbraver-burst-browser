@@ -21,7 +21,7 @@ export type HUDPlayer<T: CutIn> = {
  * @param target HUDプレイヤーオブジェクト
  */
 export function appendHUDPlayer<T: CutIn>(scene: THREE.Scene, target: HUDPlayer<T>): void {
-  scene.add(target.cutIn.getObject3D());
+  //scene.add(target.cutIn.getObject3D());
 }
 
 /**
