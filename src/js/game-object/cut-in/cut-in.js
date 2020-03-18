@@ -1,6 +1,5 @@
 // @flow
 
-import {Animate} from "../../animation/animate";
 import * as THREE from 'three';
 
 /**
