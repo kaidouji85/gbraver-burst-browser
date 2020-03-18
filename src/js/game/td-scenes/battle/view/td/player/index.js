@@ -16,9 +16,8 @@ import {BurstIndicator} from "../../../../../../game-object/burst-indicator/burs
  *
  * @type T アームドーザスプライト
  */
-export type TDPlayer<T: ArmDozerSprite> = {
+export type TDPlayer = {
   playerId: PlayerId,
-  sprite: T,
   gauge: Gauge,
   hitMark: {
     spark: Spark
@@ -36,8 +35,7 @@ export type TDPlayer<T: ArmDozerSprite> = {
  * @param scene シーン
  * @param player シーンに追加するオブジェクト群
  */
-export function appendTDPlayer<T: ArmDozerSprite>(scene: THREE.Scene, player: TDPlayer<T>): void {
-  scene.add(player.sprite.getObject3D());
+export function appendTDPlayer(scene: THREE.Scene, player: TDPlayer): void {
   scene.add(player.gauge.getObject3D());
   scene.add(player.hitMark.spark.getObject3D());
   scene.add(player.batteryNumber.getObject3D());
@@ -53,8 +51,7 @@ export function appendTDPlayer<T: ArmDozerSprite>(scene: THREE.Scene, player: TD
  *
  * @param target リソース破棄対象
  */
-export function disposeTDPlayer<T: ArmDozerSprite>(target: TDPlayer<T>): void {
-  target.sprite.destructor();
+export function disposeTDPlayer(target: TDPlayer): void {
   target.gauge.destructor();
   target.batteryNumber.destructor();
   target.damageIndicator.destructor();

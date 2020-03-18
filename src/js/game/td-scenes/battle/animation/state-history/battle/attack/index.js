@@ -5,7 +5,7 @@ import {NeoLandozer} from "../../../../../../../game-object/armdozer/neo-landoze
 import {shinBraverAttack} from "./shin-braver";
 import {neoLandozerAttack} from "./neo-landozer";
 import {emptyAttackAnimation} from "./empty-animation";
-import type {BattleAnimationParam} from "../animation-param";
+import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 import type {ArmDozerSprite} from "../../../../../../../game-object/armdozer/armdozer-sprite";
 import type {BattleResult} from "gbraver-burst-core";
 
@@ -15,13 +15,13 @@ import type {BattleResult} from "gbraver-burst-core";
  * @param param 戦闘アニメパラメータ
  * @return アニメーション
  */
-export function attackAnimation(param: BattleAnimationParam<ArmDozerSprite, BattleResult>): Animate {
-  const sprite = param.attackerTD.sprite;
+export function attackAnimation(param: BattleAnimationParam): Animate {
+  const sprite = param.attackerSprite;
   if (sprite instanceof ShinBraver) {
-    const castParam = ((param: any): BattleAnimationParam<typeof sprite, BattleResult>);
+    const castParam = ((param: any): BattleAnimationParamX<typeof sprite, BattleResult>);
     return shinBraverAttack(castParam);
   } else if (sprite instanceof NeoLandozer) {
-    const castParam = ((param: any): BattleAnimationParam<typeof sprite, BattleResult>);
+    const castParam = ((param: any): BattleAnimationParamX<typeof sprite, BattleResult>);
     return neoLandozerAttack(castParam);
   }
 

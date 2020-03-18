@@ -1,7 +1,7 @@
 // @flow
 
 import {Animate} from "../../../../../../../animation/animate";
-import type {BattleAnimationParam} from "../animation-param";
+import type {BattleAnimationParamX} from "../animation-param";
 import {NeoLandozer} from "../../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {delay, empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
@@ -13,52 +13,52 @@ import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbr
  * @param param パラメータ
  * @return アニメーション
  */
-export function neoLandozerAttack(param: BattleAnimationParam<NeoLandozer, BattleResult>): Animate {
+export function neoLandozerAttack(param: BattleAnimationParamX<NeoLandozer, BattleResult>): Animate {
   if (param.isDeath && param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, DownResult | typeof castResult>);
+    const castParam = ((param: any): BattleAnimationParamX<NeoLandozer, DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, AttackResult | typeof castResult>);
+    const castParam = ((param: any): BattleAnimationParamX<NeoLandozer, AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
   if (param.isDeath && param.result.name === 'CriticalHit') {
     const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, DownResult | typeof castResult>);
+    const castParam = ((param: any): BattleAnimationParamX<NeoLandozer, DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'CriticalHit') {
     const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, AttackResult | typeof castResult>);
+    const castParam = ((param: any): BattleAnimationParamX<NeoLandozer, AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
   if (param.isDeath && param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
-    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, DownResult | typeof castResult>);
+    const castParam = ((param: any): BattleAnimationParamX<NeoLandozer, DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
-    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, typeof castResult>);
+    const castParam = ((param: any): BattleAnimationParamX<NeoLandozer, typeof castResult>);
     return guard(castParam);
   }
 
   if (param.result.name === 'Miss') {
     const castResult = (param.result: Miss);
-    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, typeof castResult>);
+    const castParam = ((param: any): BattleAnimationParamX<NeoLandozer, typeof castResult>);
     return miss(castParam);
   }
 
   if (param.result.name === 'Feint') {
     const castResult = (param.result: Feint);
-    const castParam = ((param: any): BattleAnimationParam<NeoLandozer, typeof castResult>);
+    const castParam = ((param: any): BattleAnimationParamX<NeoLandozer, typeof castResult>);
     return feint(castParam);
   }
 
@@ -74,23 +74,23 @@ type AttackResult = NormalHit | CriticalHit;
  * @param param パラメータ
  * @return アニメーション
  */
-function attack(param: BattleAnimationParam<NeoLandozer, AttackResult>): Animate {
+function attack(param: BattleAnimationParamX<NeoLandozer, AttackResult>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.armHammer())
+      .chain(param.attackerSprite.armHammer())
       .chain(delay(1300))
-      .chain(param.attackerTD.sprite.hmToStand()),
+      .chain(param.attackerSprite.hmToStand()),
 
     delay(1000)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderTD.sprite.knockBack(),
+        param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
       .chain(delay(1300))
-      .chain(param.defenderTD.sprite.knockBackToStand()),
+      .chain(param.defenderSprite.knockBackToStand()),
   );
 }
 
@@ -100,23 +100,23 @@ function attack(param: BattleAnimationParam<NeoLandozer, AttackResult>): Animate
  * @param param パラメータ
  * @return アニメーション
  */
-function guard(param: BattleAnimationParam<NeoLandozer, Guard>): Animate {
+function guard(param: BattleAnimationParamX<NeoLandozer, Guard>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.armHammer())
+      .chain(param.attackerSprite.armHammer())
       .chain(delay(1300))
-      .chain(param.attackerTD.sprite.hmToStand()),
+      .chain(param.attackerSprite.hmToStand()),
 
     delay(1000)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderTD.sprite.guard(),
+        param.defenderSprite.guard(),
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
       .chain(delay(1300))
-      .chain(param.defenderTD.sprite.guardToStand()),
+      .chain(param.defenderSprite.guardToStand()),
   );
 }
 
@@ -126,18 +126,18 @@ function guard(param: BattleAnimationParam<NeoLandozer, Guard>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function miss(param: BattleAnimationParam<NeoLandozer, Miss>): Animate {
+function miss(param: BattleAnimationParamX<NeoLandozer, Miss>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.armHammer())
+      .chain(param.attackerSprite.armHammer())
       .chain(delay(500))
-      .chain(param.attackerTD.sprite.hmToStand()),
+      .chain(param.attackerSprite.hmToStand()),
 
     delay(1000)
-      .chain(param.defenderTD.sprite.avoid())
+      .chain(param.defenderSprite.avoid())
       .chain(delay(1300))
-      .chain(param.defenderTD.sprite.avoidToStand()),
+      .chain(param.defenderSprite.avoidToStand()),
   );
 }
 
@@ -147,14 +147,14 @@ function miss(param: BattleAnimationParam<NeoLandozer, Miss>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function feint(param: BattleAnimationParam<NeoLandozer, Feint>): Animate {
+function feint(param: BattleAnimationParamX<NeoLandozer, Feint>): Animate {
   if (!param.result.isDefenderMoved) {
     return empty();
   }
 
-  return param.defenderTD.sprite.avoid()
+  return param.defenderSprite.avoid()
     .chain(delay(500))
-    .chain(param.defenderTD.sprite.avoidToStand())
+    .chain(param.defenderSprite.avoidToStand())
 }
 
 /** downが受け取ることができる戦闘結果 */
@@ -166,22 +166,22 @@ type DownResult = NormalHit | Guard | CriticalHit;
  * @param param パラメータ
  * @return アニメーション
  */
-function down(param: BattleAnimationParam<NeoLandozer, DownResult>): Animate {
+function down(param: BattleAnimationParamX<NeoLandozer, DownResult>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.armHammer()),
+      .chain(param.attackerSprite.armHammer()),
 
     delay(1000)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderTD.sprite.down(),
+        param.defenderSprite.down(),
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
   ).chain(delay(1000))
-    .chain(param.attackerTD.sprite.hmToStand())
+    .chain(param.attackerSprite.hmToStand())
     .chain(delay(1000))
-    .chain(param.attackerTD.sprite.turnStart())
+    .chain(param.attackerSprite.turnStart())
     .chain(delay(500));
 }
