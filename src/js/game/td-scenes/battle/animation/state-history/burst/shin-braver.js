@@ -41,11 +41,11 @@ function recoverBattery(param: BurstAnimationParamX<ShinBraver, ShinBraverHUD, S
   ).chain(delay(500)
   ).chain(all(
     param.hudObjects.rearmostFader.opacity(0.8, 300),
-    param.burstPlayerHUD.cutIn.play(),
+    param.burstArmdozerHUD.cutIn.play(),
   )).chain(delay(2000)
   ).chain(all(
     param.hudObjects.rearmostFader.opacity(0, 300),
-    param.burstPlayerHUD.cutIn.hidden(),
+    param.burstArmdozerHUD.cutIn.hidden(),
   )).chain(delay(500)
   ).chain(all(
     param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),

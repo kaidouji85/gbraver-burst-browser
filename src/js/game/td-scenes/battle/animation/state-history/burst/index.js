@@ -35,7 +35,7 @@ export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneSta
  */
 function armdozerAnimation(param: BurstAnimationParam): Animate {
   const sprite = param.burstPlayerTD.sprite;
-  const cutIn = param.burstPlayerHUD.cutIn;
+  //const cutIn = param.burstPlayerHUD.cutIn;
   // if ((sprite instanceof ShinBraver) && (cutIn instanceof ShinBraverCutIn)) {
   //   const castParam = ((param: any):  BurstAnimationParamX<typeof sprite, typeof cutIn, Burst>);
   //   return shinBraverBurst(castParam);
