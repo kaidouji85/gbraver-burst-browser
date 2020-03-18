@@ -33,7 +33,7 @@ export function shinBraverBurst(param: BurstAnimationParamX<ShinBraver, ShinBrav
  */
 function recoverBattery(param: BurstAnimationParamX<ShinBraver, ShinBraverHUD, RecoverBattery>): Animate {
   return all(
-    attentionArmDozer(param.tdCamera, param.burstPlayerTD.sprite, 500),
+    attentionArmDozer(param.tdCamera, param.burstSprite, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.tdObjects.turnIndicator.invisible()
