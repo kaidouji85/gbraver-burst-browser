@@ -17,13 +17,15 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
  * @type SPRITE 攻撃側スプライト
  * @type RESULT 戦闘結果
  */
-export type BattleAnimationParam<SPRITE: ArmDozerSprite, RESULT: BattleResult> = {
+export type BattleAnimationParamX<SPRITE: ArmDozerSprite, RESULT: BattleResult> = {
   attackerBattery: number,
   attackerState: PlayerState,
   attackerTD: TDPlayer<SPRITE>,
+  attackerSprite: SPRITE,
   defenderBattery: number,
   defenderState: PlayerState,
   defenderTD: TDPlayer<ArmDozerSprite>,
+  defenderSprite: ArmDozerSprite,
   tdObjects: TDGameObjects,
   tdCamera: TDCamera,
   hudObjects: HUDGameObjects,
@@ -31,6 +33,9 @@ export type BattleAnimationParam<SPRITE: ArmDozerSprite, RESULT: BattleResult> =
   isDeath: boolean,
   result: RESULT
 };
+
+/** 戦闘アニメーション共通で使うパラメータ */
+export type BattleAnimationParam = BattleAnimationParamX<ArmDozerSprite, BattleResult>;
 
 /**
  * 各種オブジェクトから戦闘アニメパラメータを生成する
@@ -40,7 +45,7 @@ export type BattleAnimationParam<SPRITE: ArmDozerSprite, RESULT: BattleResult> =
  * @param gameState ゲームステート
  * @return 戦闘アニメパラメータ
  */
-export function toBattleAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BattleAnimationParam<ArmDozerSprite, BattleResult> {
+export function toBattleAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BattleAnimationParam {
   if (gameState.effect.name !== 'Battle') {
     return null;
   }
@@ -48,9 +53,11 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
   const effect: Battle = gameState.effect;
   const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
   const attackerTD = view.td.players.find(v => v.playerId === effect.attacker);
+  const attackerSprite = view.td.sprites.find(v => v.playerId === effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
   const defenderTD = view.td.players.find(v => v.playerId !== effect.attacker);
-  if (!attackerState || !attackerTD || !defenderState || !defenderTD) {
+  const defenderSprite = view.td.sprites.find(v => v.playerId !== effect.attacker);
+  if (!attackerState || !attackerTD || !attackerSprite || !defenderState || !defenderTD || !defenderSprite) {
     return null;
   }
 
@@ -58,9 +65,11 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
     attackerBattery: 1, // TODO 削除する
     attackerState: attackerState,
     attackerTD: attackerTD,
+    attackerSprite: attackerSprite.sprite,
     defenderBattery: 1, // TODO 削除する
     defenderState: defenderState,
     defenderTD: defenderTD,
+    defenderSprite: defenderSprite.sprite,
     tdObjects: view.td.gameObjects,
     tdCamera: view.td.camera,
     hudObjects: view.hud.gameObjects,
