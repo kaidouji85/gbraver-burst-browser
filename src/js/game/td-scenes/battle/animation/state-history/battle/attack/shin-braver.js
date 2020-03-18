@@ -76,21 +76,21 @@ type AttackResult = NormalHit | CriticalHit;
  */
 function attack(param: BattleAnimationParamX<ShinBraver, AttackResult>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.straightPunch())
+      .chain(param.attackerSprite.straightPunch())
       .chain(delay(1300))
-      .chain(param.attackerTD.sprite.punchToStand()),
+      .chain(param.attackerSprite.punchToStand()),
 
     delay(1000)
       .chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderTD.sprite.knockBack(),
+        param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       ))
       .chain(delay(1300))
-      .chain(param.defenderTD.sprite.knockBackToStand()),
+      .chain(param.defenderSprite.knockBackToStand()),
   );
 }
 
@@ -102,21 +102,21 @@ function attack(param: BattleAnimationParamX<ShinBraver, AttackResult>): Animate
  */
 function guard(param: BattleAnimationParamX<ShinBraver, Guard>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.straightPunch())
+      .chain(param.attackerSprite.straightPunch())
       .chain(delay(1300))
-      .chain(param.attackerTD.sprite.punchToStand()),
+      .chain(param.attackerSprite.punchToStand()),
 
     delay(1000)
       .chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderTD.sprite.guard(),
+        param.defenderSprite.guard(),
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp),
       ))
       .chain(delay(1300))
-      .chain(param.defenderTD.sprite.guardToStand())
+      .chain(param.defenderSprite.guardToStand())
   );
 }
 
@@ -128,16 +128,16 @@ function guard(param: BattleAnimationParamX<ShinBraver, Guard>): Animate {
  */
 function miss(param: BattleAnimationParamX<ShinBraver, Miss>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.straightPunch())
+      .chain(param.attackerSprite.straightPunch())
       .chain(delay(500))
-      .chain(param.attackerTD.sprite.punchToStand()),
+      .chain(param.attackerSprite.punchToStand()),
 
     delay(1000)
-      .chain(param.defenderTD.sprite.avoid())
+      .chain(param.defenderSprite.avoid())
       .chain(delay(1000))
-      .chain(param.defenderTD.sprite.avoidToStand())
+      .chain(param.defenderSprite.avoidToStand())
   );
 }
 
@@ -152,9 +152,9 @@ function feint(param: BattleAnimationParamX<ShinBraver, Feint>): Animate {
     return empty();
   }
 
-  return param.defenderTD.sprite.avoid()
+  return param.defenderSprite.avoid()
     .chain(delay(500))
-    .chain(param.defenderTD.sprite.avoidToStand());
+    .chain(param.defenderSprite.avoidToStand());
 }
 
 /** downが受け取れる戦闘結果 */
@@ -168,20 +168,20 @@ type DownResult = NormalHit | CriticalHit | Guard;
  */
 function down(param: BattleAnimationParamX<ShinBraver, DownResult>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.straightPunch()),
+      .chain(param.attackerSprite.straightPunch()),
 
     delay(1000)
       .chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderTD.sprite.down(),
+        param.defenderSprite.down(),
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       ))
   ).chain(delay(1000))
-    .chain(param.attackerTD.sprite.punchToStand())
+    .chain(param.attackerSprite.punchToStand())
     .chain(delay(1000))
-    .chain(param.attackerTD.sprite.turnStart())
+    .chain(param.attackerSprite.turnStart())
     .chain(delay(500));
 }

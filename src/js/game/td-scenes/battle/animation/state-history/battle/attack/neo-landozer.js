@@ -76,21 +76,21 @@ type AttackResult = NormalHit | CriticalHit;
  */
 function attack(param: BattleAnimationParamX<NeoLandozer, AttackResult>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.armHammer())
+      .chain(param.attackerSprite.armHammer())
       .chain(delay(1300))
-      .chain(param.attackerTD.sprite.hmToStand()),
+      .chain(param.attackerSprite.hmToStand()),
 
     delay(1000)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderTD.sprite.knockBack(),
+        param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
       .chain(delay(1300))
-      .chain(param.defenderTD.sprite.knockBackToStand()),
+      .chain(param.defenderSprite.knockBackToStand()),
   );
 }
 
@@ -102,21 +102,21 @@ function attack(param: BattleAnimationParamX<NeoLandozer, AttackResult>): Animat
  */
 function guard(param: BattleAnimationParamX<NeoLandozer, Guard>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.armHammer())
+      .chain(param.attackerSprite.armHammer())
       .chain(delay(1300))
-      .chain(param.attackerTD.sprite.hmToStand()),
+      .chain(param.attackerSprite.hmToStand()),
 
     delay(1000)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderTD.sprite.guard(),
+        param.defenderSprite.guard(),
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
       .chain(delay(1300))
-      .chain(param.defenderTD.sprite.guardToStand()),
+      .chain(param.defenderSprite.guardToStand()),
   );
 }
 
@@ -128,16 +128,16 @@ function guard(param: BattleAnimationParamX<NeoLandozer, Guard>): Animate {
  */
 function miss(param: BattleAnimationParamX<NeoLandozer, Miss>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.armHammer())
+      .chain(param.attackerSprite.armHammer())
       .chain(delay(500))
-      .chain(param.attackerTD.sprite.hmToStand()),
+      .chain(param.attackerSprite.hmToStand()),
 
     delay(1000)
-      .chain(param.defenderTD.sprite.avoid())
+      .chain(param.defenderSprite.avoid())
       .chain(delay(1300))
-      .chain(param.defenderTD.sprite.avoidToStand()),
+      .chain(param.defenderSprite.avoidToStand()),
   );
 }
 
@@ -152,9 +152,9 @@ function feint(param: BattleAnimationParamX<NeoLandozer, Feint>): Animate {
     return empty();
   }
 
-  return param.defenderTD.sprite.avoid()
+  return param.defenderSprite.avoid()
     .chain(delay(500))
-    .chain(param.defenderTD.sprite.avoidToStand())
+    .chain(param.defenderSprite.avoidToStand())
 }
 
 /** downが受け取ることができる戦闘結果 */
@@ -168,20 +168,20 @@ type DownResult = NormalHit | Guard | CriticalHit;
  */
 function down(param: BattleAnimationParamX<NeoLandozer, DownResult>): Animate {
   return all(
-    param.attackerTD.sprite.charge()
+    param.attackerSprite.charge()
       .chain(delay(600))
-      .chain(param.attackerTD.sprite.armHammer()),
+      .chain(param.attackerSprite.armHammer()),
 
     delay(1000)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderTD.sprite.down(),
+        param.defenderSprite.down(),
         param.defenderTD.hitMark.spark.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
   ).chain(delay(1000))
-    .chain(param.attackerTD.sprite.hmToStand())
+    .chain(param.attackerSprite.hmToStand())
     .chain(delay(1000))
-    .chain(param.attackerTD.sprite.turnStart())
+    .chain(param.attackerSprite.turnStart())
     .chain(delay(500));
 }

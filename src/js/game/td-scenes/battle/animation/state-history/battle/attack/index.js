@@ -16,7 +16,7 @@ import type {BattleResult} from "gbraver-burst-core";
  * @return アニメーション
  */
 export function attackAnimation(param: BattleAnimationParam): Animate {
-  const sprite = param.attackerTD.sprite;
+  const sprite = param.attackerSprite;
   if (sprite instanceof ShinBraver) {
     const castParam = ((param: any): BattleAnimationParamX<typeof sprite, BattleResult>);
     return shinBraverAttack(castParam);
