@@ -1,10 +1,7 @@
 // @flow
 import type {Resources} from "../../../../../../resource";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
-import {PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 import type {Player} from "gbraver-burst-core";
-import {ArmdozerAppearances} from "gbraver-burst-core";
-import {PlayerNeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {playerBatteryNumber} from "../../../../../../game-object/battery-number";
@@ -15,7 +12,7 @@ import {playerSpark} from "../../../../../../game-object/hitmark/spark";
 import {playerTurnStart} from "../../../../../../game-object/turn-start";
 import {playerGauge} from "../../../../../../game-object/gauge";
 import {playerBurstIndicator} from "../../../../../../game-object/burst-indicator";
-import {PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
+import {createPlayerSprite} from "../sprite";
 
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
@@ -52,15 +49,3 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
   }
 }
 
-/** 与えられたパラメータからプレイヤースプライを生成する */
-export function createPlayerSprite(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player): ArmDozerSprite {
-  switch (playerInfo.armdozer.appearance) {
-    case ArmdozerAppearances.NEO_LANDOZER:
-      return PlayerNeoLandozer(resources, listener);
-    case ArmdozerAppearances.LIGHTNING_DOZER:
-      return PlayerLightningDozer(resources, listener);
-    case ArmdozerAppearances.SHIN_BRAVER:
-    default:
-      return PlayerShinBraver(resources, listener);
-  }
-}

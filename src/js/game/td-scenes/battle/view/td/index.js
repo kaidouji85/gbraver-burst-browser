@@ -22,6 +22,7 @@ import {gameObjectStream} from "../../../../../action/game-object-action/game-ob
 import type {SafeAreaInset} from "../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../action/resize/resize";
 import {skyBox} from "./sky-box";
+import {enemySprite, playerSprite, TDSprite} from "./sprite";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -47,6 +48,7 @@ export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: TDCamera;
   players: TDPlayer<ArmDozerSprite>[];
+  sprites: TDSprite[];
   gameObjects: TDGameObjects;
 
   _rendererDOM: HTMLElement;
@@ -83,6 +85,16 @@ export class ThreeDimensionLayer {
       appendTDPlayer(this.scene, v);
     });
 
+    this.sprites = param.players.map(v => v.playerId === param.playerId
+      ? playerSprite(param.resources, v, gameObjectAction)
+      : enemySprite(param.resources, v, gameObjectAction)
+    );
+    this.sprites.map(v => v.getObject3Ds())
+      .flat()
+      .forEach(v => {
+        this.scene.add(v);
+      });
+
     this.gameObjects = createTDGameObjects(param.resources, gameObjectAction);
     appendTDGameObjects(this.scene, this.gameObjects);
 
@@ -102,6 +114,9 @@ export class ThreeDimensionLayer {
     this.scene.background.dispose();
     this.players.forEach(v => {
       disposeTDPlayer(v);
+    });
+    this.sprites.forEach(v => {
+      v.destructor();
     });
     disposeTDGameObjects(this.gameObjects);
     this.camera.destructor();
