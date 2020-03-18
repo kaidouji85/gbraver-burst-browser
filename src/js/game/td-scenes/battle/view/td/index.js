@@ -10,10 +10,7 @@ import type {Render} from "../../../../../action/game-loop/render";
 import {TDCamera} from "../../../../../game-object/camera/td";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
 import type {TDPlayer} from "./player";
-import {appendTDPlayer, disposeTDPlayer} from "./player";
-import {playerTDObjects} from "./player/player";
-import {enemyTDObject} from "./player/enemy";
-import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
+import {enemyTDObject, playerTDObjects} from "./player";
 import type {TDGameObjects} from "./game-objects";
 import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./game-objects";
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
@@ -81,9 +78,11 @@ export class ThreeDimensionLayer {
       playerTDObjects(param.resources, player, gameObjectAction),
       enemyTDObject(param.resources, enemy, gameObjectAction)
     ];
-    this.players.forEach(v => {
-      appendTDPlayer(this.scene, v);
-    });
+    this.players.map(v => v.getObject3Ds())
+      .flat()
+      .forEach(v => {
+        this.scene.add(v);
+      });
 
     this.sprites = param.players.map(v => v.playerId === param.playerId
       ? playerSprite(param.resources, v, gameObjectAction)
@@ -113,7 +112,7 @@ export class ThreeDimensionLayer {
   destructor(): void {
     this.scene.background.dispose();
     this.players.forEach(v => {
-      disposeTDPlayer(v);
+      v.destructor();
     });
     this.sprites.forEach(v => {
       v.destructor();
