@@ -39,11 +39,11 @@ function recoverBattery(param: BurstAnimationParam<ShinBraver, ShinBraverCutIn, 
     param.tdObjects.turnIndicator.invisible()
   ).chain(delay(500)
   ).chain(all(
-    param.hudObjects.rearmostFader.to(0.8, 300),
+    param.hudObjects.rearmostFader.opacity(0.8, 300),
     param.burstPlayerHUD.cutIn.play(),
   )).chain(delay(2000)
   ).chain(all(
-    param.hudObjects.rearmostFader.to(0, 300),
+    param.hudObjects.rearmostFader.opacity(0, 300),
     param.burstPlayerHUD.cutIn.hidden(),
   )).chain(delay(500)
   ).chain(all(

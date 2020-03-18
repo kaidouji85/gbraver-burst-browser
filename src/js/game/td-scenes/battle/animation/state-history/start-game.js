@@ -14,6 +14,7 @@ import {attentionArmDozer, toInitial} from "../td-camera";
  * @param view ビュー
  * @param sceneState シーンの状態
  * @param gameState ゲームの状態
+ * @return アニメーション
  */
 export function startGameAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);

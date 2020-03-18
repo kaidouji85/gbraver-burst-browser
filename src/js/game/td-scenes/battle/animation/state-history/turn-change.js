@@ -8,7 +8,14 @@ import {all} from "../../../../../animation/all";
 import {delay, empty} from "../../../../../animation/delay";
 import {attentionArmDozer, toInitial} from "../td-camera";
 
-/** ターン変更のアニメーション */
+/**
+ * ターン変更のアニメーション
+ *
+ * @param view ビュー
+ * @param sceneState シーン状態
+ * @param gameState ゲーム状態
+ * @return アニメーション
+ */
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);

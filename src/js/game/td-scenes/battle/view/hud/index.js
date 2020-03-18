@@ -45,8 +45,6 @@ type Notifier = {
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
- *
- * @author y.takeuchi
  */
 export class HudLayer {
   scene: THREE.Scene;

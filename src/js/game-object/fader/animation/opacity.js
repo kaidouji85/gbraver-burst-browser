@@ -5,13 +5,13 @@ import type {FaderModel} from "../model/fader-model";
 import {tween} from "../../../animation/tween";
 
 /**
- * フェーダを手動で変更
+ * 透明度を変更
  *
- * @param model モデル
+ * @param value モデル
  * @param opacity 透明度
  * @param duration アニメーション時間
  * @return アニメーション
  */
-export function to(model: FaderModel, opacity: number, duration: number): Animate {
-  return tween(model, t => t.to({opacity: opacity}, duration));
+export function opacity(value: FaderModel, opacity: number, duration: number): Animate {
+  return tween(value, t => t.to({opacity: opacity}, duration));
 }

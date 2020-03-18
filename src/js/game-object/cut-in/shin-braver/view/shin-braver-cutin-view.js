@@ -54,7 +54,9 @@ export class ShinBraverCutInView implements CutIn {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._charge.destructor();
+    this._getMeshes().forEach(v => {
+      v.destructor();
+    });
   }
 
   /**
