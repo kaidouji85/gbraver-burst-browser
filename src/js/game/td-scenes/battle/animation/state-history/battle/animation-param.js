@@ -18,11 +18,9 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
  * @type RESULT 戦闘結果
  */
 export type BattleAnimationParamX<SPRITE: ArmDozerSprite, RESULT: BattleResult> = {
-  attackerBattery: number,
   attackerState: PlayerState,
   attackerTD: TDPlayer,
   attackerSprite: SPRITE,
-  defenderBattery: number,
   defenderState: PlayerState,
   defenderTD: TDPlayer,
   defenderSprite: ArmDozerSprite,
@@ -62,11 +60,9 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
   }
 
   return {
-    attackerBattery: 1, // TODO 削除する
     attackerState: attackerState,
     attackerTD: attackerTD,
     attackerSprite: attackerSprite.sprite,
-    defenderBattery: 1, // TODO 削除する
     defenderState: defenderState,
     defenderTD: defenderTD,
     defenderSprite: defenderSprite.sprite,
