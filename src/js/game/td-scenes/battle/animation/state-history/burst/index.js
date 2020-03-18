@@ -5,9 +5,13 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core";
 import {updateGauge} from "../update-gauge";
-import type {BurstAnimationParam} from "./animation-param";
+import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {delay, empty} from "../../../../../../animation/delay";
+import {ShinBraverHUD} from "../../../view/hud/armdozer/shin-braver";
+import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
+import type {Burst} from "gbraver-burst-core/lib/player/armdozer/burst";
+import {shinBraverBurst} from "./shin-braver";
 
 /**
  * バーストアニメーション
@@ -35,11 +39,11 @@ export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneSta
  */
 function armdozerAnimation(param: BurstAnimationParam): Animate {
   const sprite = param.burstPlayerTD.sprite;
-  //const cutIn = param.burstPlayerHUD.cutIn;
-  // if ((sprite instanceof ShinBraver) && (cutIn instanceof ShinBraverCutIn)) {
-  //   const castParam = ((param: any):  BurstAnimationParamX<typeof sprite, typeof cutIn, Burst>);
-  //   return shinBraverBurst(castParam);
-  // }
+  const armdozerHUD = param.burstArmdozerHUD;
+  if ((sprite instanceof ShinBraver) && (armdozerHUD instanceof ShinBraverHUD)) {
+    const castParam = ((param: any):  BurstAnimationParamX<typeof sprite, typeof armdozerHUD, Burst>);
+    return shinBraverBurst(castParam);
+  }
 
   return empty();
 }

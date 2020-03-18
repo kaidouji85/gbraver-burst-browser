@@ -10,7 +10,6 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {CutIn} from "../../../../../../game-object/cut-in/cut-in";
-import type {HUDPlayer} from "../../../view/hud/player";
 import type {HUDArmdozer} from "../../../view/hud/armdozer";
 
 /**
@@ -21,10 +20,9 @@ import type {HUDArmdozer} from "../../../view/hud/armdozer";
  * @type CUTIN カットイン
  * @type BURST バースト
  */
-export type BurstAnimationParamX<SPRITE: ArmDozerSprite, HUD_ARMDOZER: HUDArmdozer, CUTIN: CutIn, BURST: Burst> = {
+export type BurstAnimationParamX<SPRITE: ArmDozerSprite, HUD_ARMDOZER: HUDArmdozer, BURST: Burst> = {
   burstPlayerState: PlayerState,
   burstPlayerTD: TDPlayer<SPRITE>,
-  burstPlayerHUD: HUDPlayer<CUTIN>,
   burstArmdozerHUD: HUD_ARMDOZER,
   tdObjects: TDGameObjects,
   tdCamera: TDCamera,
@@ -34,7 +32,7 @@ export type BurstAnimationParamX<SPRITE: ArmDozerSprite, HUD_ARMDOZER: HUDArmdoz
 };
 
 /** バーストアニメーションのパラメータ */
-export type BurstAnimationParam = BurstAnimationParamX<ArmDozerSprite, HUDArmdozer, CutIn, Burst>;
+export type BurstAnimationParam = BurstAnimationParamX<ArmDozerSprite, HUDArmdozer, Burst>;
 
 /**
  * バーストアニメーションパラメータを生成する

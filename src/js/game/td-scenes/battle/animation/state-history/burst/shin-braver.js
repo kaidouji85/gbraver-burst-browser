@@ -16,12 +16,12 @@ import {ShinBraverHUD} from "../../../view/hud/armdozer/shin-braver";
  * @param param バーストアニメーションパラメータ
  * @return バーストアニメーション
  */
-export function shinBraverBurst(param: BurstAnimationParamX<ShinBraver, ShinBraverHUD, ShinBraverCutIn, Burst>): Animate {
-  // if (param.burst.type === 'RecoverBattery') {
-  //   const castBurst = (param.burst: RecoverBattery);
-  //   const castParam = ((param: any): BurstAnimationParamX<ShinBraver, ShinBraverCutIn, typeof castBurst>);
-  //   return recoverBattery(castParam);
-  // }
+export function shinBraverBurst(param: BurstAnimationParamX<ShinBraver, ShinBraverHUD, Burst>): Animate {
+  if (param.burst.type === 'RecoverBattery') {
+    const castBurst = (param.burst: RecoverBattery);
+    const castParam = ((param: any): BurstAnimationParamX<ShinBraver, ShinBraverHUD, typeof castBurst>);
+    return recoverBattery(castParam);
+  }
 
   return empty();
 }
@@ -32,7 +32,7 @@ export function shinBraverBurst(param: BurstAnimationParamX<ShinBraver, ShinBrav
  * @param param アニメーションパラメータ
  * @return アニメーション
  */
-function recoverBattery(param: BurstAnimationParamX<ShinBraver, ShinBraverHUD, ShinBraverCutIn, RecoverBattery>): Animate {
+function recoverBattery(param: BurstAnimationParamX<ShinBraver, ShinBraverHUD, RecoverBattery>): Animate {
   return all(
     attentionArmDozer(param.tdCamera, param.burstPlayerTD.sprite, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
