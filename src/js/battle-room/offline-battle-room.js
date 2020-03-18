@@ -1,8 +1,8 @@
 // @flow
 import type {Command, GameState, Player, PlayerCommand} from "gbraver-burst-core";
+import {GbraverBurstCore} from "gbraver-burst-core";
 import type {NPC, NPCRoutine} from "../npc/npc";
 import type {BattleRoom, InitialState} from "./battle-room";
-import {GbraverBurstCore} from "gbraver-burst-core";
 
 /**
  * オフラインのバトルルーム

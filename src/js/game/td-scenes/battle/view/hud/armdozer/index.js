@@ -5,7 +5,7 @@ import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
-import {playerShinBraverHUD, enemyShinBraverHUD} from "./shin-braver";
+import {enemyShinBraverHUD, playerShinBraverHUD} from "./shin-braver";
 
 /**
  * HUDレイヤー アームドーザ固有のオブジェクトを集めたもの

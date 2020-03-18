@@ -6,7 +6,6 @@ import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shi
 import {delay, empty} from "../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
-import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 import {attentionArmDozer, toInitial} from "../../td-camera";
 import {ShinBraverHUD} from "../../../view/hud/armdozer/shin-braver";
 
