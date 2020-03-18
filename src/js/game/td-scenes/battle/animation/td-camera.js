@@ -3,19 +3,20 @@
 import {Animate} from "../../../../animation/animate";
 import {TDCamera} from "../../../../game-object/camera/td";
 import {all} from "../../../../animation/all";
+import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 
 /** カメラ初期位置 */
-export const INITIAL_VIEW_POINT = {
-  x: 0,
-  y: 200,
-  z: 0
-};
-
-/** カメラ視点初期位置 */
 export const INITIAL_CAMERA_POSITION = {
   x: 0,
   y: 220,
   z: 300
+};
+
+/** カメラ視点初期位置 */
+export const INITIAL_VIEW_POINT = {
+  x: 0,
+  y: 200,
+  z: 0
 };
 
 /**
@@ -33,19 +34,25 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
 }
 
 /**
- * ドリー
+ * 指定したアームドーザに注目する
  *
  * @param camera カメラ
- * @param x 注視点のX座標
- * @param duration アニメーション時間
+ * @param target 注目先のアムドーザ
+ * @param duration アニメーション時間(ミリ秒)
  * @return アニメーション
  */
-export function dolly(camera: TDCamera, x: number, duration: number): Animate {
+export function attentionArmDozer(camera: TDCamera, target: ArmDozerSprite, duration: number): Animate {
+  const x = target.getObject3D().position.x;
   return all(
     camera.moveCamera({
       x: x,
-      z: '-60'
+      y: INITIAL_CAMERA_POSITION.y,
+      z: INITIAL_CAMERA_POSITION.z - 60,
     }, duration),
-    camera.moveViewPoint({x: x}, duration)
+    camera.moveViewPoint({
+      x: x,
+      y: INITIAL_VIEW_POINT.y,
+      z: INITIAL_VIEW_POINT.z
+    }, duration)
   );
 }
