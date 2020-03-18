@@ -3,6 +3,7 @@ import type {Resources} from "../../../../../../resource";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import {PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 import type {Player} from "gbraver-burst-core";
+import {ArmdozerAppearances} from "gbraver-burst-core";
 import {PlayerNeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
@@ -15,7 +16,6 @@ import {playerTurnStart} from "../../../../../../game-object/turn-start";
 import {playerGauge} from "../../../../../../game-object/gauge";
 import {playerBurstIndicator} from "../../../../../../game-object/burst-indicator";
 import {PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
-import {ArmdozerAppearances} from "gbraver-burst-core";
 
 /**
  * プレイヤー側の3Dプレイヤーオブジェクト
