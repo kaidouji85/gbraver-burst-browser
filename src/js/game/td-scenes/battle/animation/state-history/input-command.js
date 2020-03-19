@@ -3,8 +3,7 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
+import type {GameState, InputCommand} from "gbraver-burst-core";
 import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
 import {empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";

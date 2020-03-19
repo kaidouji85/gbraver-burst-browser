@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
@@ -17,6 +17,8 @@ import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {SafeAreaInset} from "../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../action/resize/resize";
+import type {HUDArmdozer} from "./armdozer";
+import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -40,12 +42,11 @@ type Notifier = {
 
 /**
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
- *
- * @author y.takeuchi
  */
 export class HudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
+  armdozers: HUDArmdozer[];
   gameObjects: HUDGameObjects;
 
   _rendererDOM: HTMLElement;
@@ -74,6 +75,16 @@ export class HudLayer {
     this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
+    this.armdozers = param.players.map(v => v.playerId === param.playerId
+      ? playerArmdozerHUD(param.resources, gameObjectAction, v)
+      : enemyArmdozerHUD(param.resources, gameObjectAction, v)
+    );
+    this.armdozers.map(v => v.getObject3Ds())
+      .flat()
+      .forEach(v => {
+        this.scene.add(v)
+      });
+
     this._subscription = [
       param.listener.gameLoop.subscribe(action => {
         this._gameLoop(action);
@@ -92,6 +103,9 @@ export class HudLayer {
     this.scene.dispose();
     this._subscription.forEach(v => {
       v.unsubscribe();
+    });
+    this.armdozers.forEach(v => {
+      v.destructor();
     });
   }
 

@@ -3,15 +3,15 @@
 import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
+import type {GameState} from "gbraver-burst-core";
 import {updateGauge} from "../update-gauge";
-import type {BurstAnimationParam} from "./animation-param";
+import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
-import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
-import {shinBraverBurst} from "./shin-braver";
 import {delay, empty} from "../../../../../../animation/delay";
-import type {Burst} from "gbraver-burst-core/lib/armdozer/burst";
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import {ShinBraverHUD} from "../../../view/hud/armdozer/shin-braver";
+import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
+import type {Burst} from "gbraver-burst-core/lib/player/armdozer/burst";
+import {shinBraverBurst} from "./shin-braver";
 
 /**
  * バーストアニメーション
@@ -37,10 +37,11 @@ export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneSta
  * @param param バーストアニメパラメータ
  * @return バーストアニメーション
  */
-function armdozerAnimation(param: BurstAnimationParam<ArmDozerSprite, Burst>): Animate {
-  const sprite = param.burstPlayerTD.sprite;
-  if (sprite instanceof ShinBraver) {
-    const castParam = ((param: any):  BurstAnimationParam<typeof sprite, Burst>);
+function armdozerAnimation(param: BurstAnimationParam): Animate {
+  const sprite = param.burstSprite;
+  const armdozerHUD = param.burstArmdozerHUD;
+  if ((sprite instanceof ShinBraver) && (armdozerHUD instanceof ShinBraverHUD)) {
+    const castParam = ((param: any):  BurstAnimationParamX<typeof sprite, typeof armdozerHUD, Burst>);
     return shinBraverBurst(castParam);
   }
 

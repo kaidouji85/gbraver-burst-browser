@@ -3,22 +3,29 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
+import type {GameState} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 import {delay, empty} from "../../../../../animation/delay";
-import {dolly, toInitial} from "../td-camera";
+import {attentionArmDozer, toInitial} from "../td-camera";
 
-/** ターン変更のアニメーション */
+/**
+ * ターン変更のアニメーション
+ *
+ * @param view ビュー
+ * @param sceneState シーン状態
+ * @param gameState ゲーム状態
+ * @return アニメーション
+ */
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
+  const activeTDSprite = view.td.sprites.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeTDPlayer || !activeStatus) {
+  if (!activeTDPlayer || !activeTDSprite || !activeStatus) {
     return empty();
   }
 
-  const activePlayerX = activeTDPlayer.sprite.getObject3D().position.x;
   return all(
-    dolly(view.td.camera, activePlayerX, 500)
+    attentionArmDozer(view.td.camera, activeTDSprite.sprite, 500)
       .chain(delay(500))
       .chain(activeTDPlayer.turnStart.popUp())
       .chain(delay(300))
@@ -27,10 +34,10 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
         activeTDPlayer.recoverBattery.popUp(3),
         activeTDPlayer.gauge.battery(activeStatus.armdozer.battery))
       ),
-    activeTDPlayer.sprite.turnStart(),
+    activeTDSprite.sprite.turnStart(),
   ).chain(delay(800)
   ).chain(all(
-    activeTDPlayer.sprite.turnStartToStand(),
+    activeTDSprite.sprite.turnStartToStand(),
     toInitial(view.td.camera, 500))
   ).chain(delay(500));
 }

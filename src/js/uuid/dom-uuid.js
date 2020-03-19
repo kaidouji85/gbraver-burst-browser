@@ -1,5 +1,6 @@
 // @flow
-const uuidV4 = require('uuid/v4');
+
+import {v4 as uuidV4} from 'uuid';
 
 /**
  * 動的HTML要素用のユニークIDを生成する

@@ -27,6 +27,8 @@ export const TEXTURE_IDS = {
   SHIN_BRAVER_DOWN: 'SHIN_BRAVER_DOWN',
   SHIN_BRAVER_GUTS_UP: 'SHIN_BRAVER_GUTS_UP',
   SHIN_BRAVER_GUTS_DOWN: 'SHIN_BRAVER_GUTS_DOWN',
+  SHIN_BRAVER_BURST_CHARGE: 'SHIN_BRAVER_BURST_CHARGE',
+  SHIN_BRAVER_BURST_RELEASE: 'SHIN_BRAVER_BURST_RELEASE',
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
   NEO_LANDOZER_KNOCK_BACK: 'NEO_LANDOZER_KNOCK_BACK',
   NEO_LANDOZER_GUARD: 'NEO_LANDOZER_GUARD',
@@ -36,6 +38,7 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_DOWN: 'NEO_LANDOZER_DOWN',
   NEO_LANDOZER_GUTS_UP: 'NEO_LANDOZER_GUTS_UP',
   NEO_LANDOZER_GUTS_DOWN: 'NEO_LANDOZER_GUTS_DOWN',
+  LIGHTNING_DOZER_STAND: 'LIGHTNING_DOZER_STAND',
   HITMARK_SPARK: 'HITMARK_SPARK',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
@@ -81,6 +84,14 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.SHIN_BRAVER_GUTS_DOWN,
     path: 'armdozer/shin-braver/guts-down.png'
   },
+  {
+    id: TEXTURE_IDS.SHIN_BRAVER_BURST_CHARGE,
+    path: 'armdozer/shin-braver/burst-charge.png',
+  },
+  {
+    id: TEXTURE_IDS.SHIN_BRAVER_BURST_RELEASE,
+    path: 'armdozer/shin-braver/burst-release.png',
+  },
   // ネオランドーザ関連
   {
     id: TEXTURE_IDS.NEO_LANDOZER_STAND,
@@ -117,6 +128,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.NEO_LANDOZER_GUTS_UP,
     path: 'armdozer/neo-landozer/guts-up.png',
+  },
+  // ライトニングドーザ関連
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_STAND,
+    path: 'armdozer/ligjtning-dozer/stand.png',
   },
   // ヒットマーク関連
   {

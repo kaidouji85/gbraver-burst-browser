@@ -7,14 +7,13 @@ import {Observable, Subject, Subscription} from "rxjs";
 import type {TdDOMEvent} from "../../../action/td-dom";
 import type {DecideBattery} from "../../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
-import type {BattleRoom, InitialState} from "../../../battle-room/battle-room";
+import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
 import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../../action/game-loop/render";
 import type {DoBurst} from "../../../action/battle-scene/do-burst";
-import type {Command} from "gbraver-burst-core/lib/command/command";
+import type {Command, GameState} from "gbraver-burst-core";
 import {take} from "rxjs/operators";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
 import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
@@ -24,7 +23,7 @@ import type {Resize} from "../../../action/resize/resize";
 type Param = {
   resources: Resources,
   rendererDOM: HTMLElement,
-  battleRoom: BattleRoom,
+  battleProgress: BattleProgress,
   initialState: InitialState,
   listener: {
     domEvent: Observable<TdDOMEvent>,
@@ -45,14 +44,14 @@ type Notifier = {
 export class BattleScene implements Scene {
   _state: BattleSceneState;
   _endBattle: Subject<EndBattle>;
-  _battleRoom: BattleRoom;
+  _battleProgress: BattleProgress;
   _view: BattleSceneView;
   _subscription: Subscription[];
 
   constructor(param: Param) {
     this._state = createInitialState(param.initialState.playerId);
     this._endBattle = new Subject();
-    this._battleRoom = param.battleRoom;
+    this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
@@ -110,7 +109,7 @@ export class BattleScene implements Scene {
   async _start(stateHistory: GameState[]): Promise<void> {
     try {
       const animation = delay(500)
-        .chain(this._view.hud.gameObjects.fader.fadeIn())
+        .chain(this._view.hud.gameObjects.frontmostFader.fadeIn())
         .chain(stateHistoryAnimation(this._view, this._state, stateHistory));
       await animation.play();
       this._state.canOperation = true;
@@ -183,7 +182,7 @@ export class BattleScene implements Scene {
       let lastCommand: Command = command;
       let lastState: ?GameState = null;
       for (let i=0; i<100; i++) {
-        const updateState = await this._battleRoom.progress(lastCommand);
+        const updateState = await this._battleProgress.progress(lastCommand);
         await stateHistoryAnimation(this._view, this._state, updateState).play();
 
         if (updateState.length <= 0) {
@@ -216,7 +215,7 @@ export class BattleScene implements Scene {
   /** ゲーム終了時の処理 */
   async _onEndGame(): Promise<void> {
     try {
-      const animation = this._view.hud.gameObjects.fader.fadeOut();
+      const animation = this._view.hud.gameObjects.frontmostFader.fadeOut();
       await animation.play();
       this._endBattle.next({type: 'endBattle'});
     } catch(e) {

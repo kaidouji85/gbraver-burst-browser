@@ -1,8 +1,6 @@
 // @flow
 
-import type {Command} from "gbraver-burst-core/lib/command/command";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Command, GameState, Player, PlayerId} from "gbraver-burst-core";
 
 /** 初期状態 */
 export type InitialState = {
@@ -11,11 +9,30 @@ export type InitialState = {
   stateHistory: GameState[]
 };
 
-/** バトルルーム */
-export interface BattleRoom {
-  /** 戦闘開始 */
+/**
+ * 戦闘を開始する
+ */
+export interface BattleStart {
+  /**
+   * 戦闘を開始する
+   *
+   * @return 初期状態
+   */
   start(): Promise<InitialState>;
+}
 
-  /** 戦闘を進める */
+/**
+ * 戦闘を進める
+ */
+export interface BattleProgress {
+  /**
+   * 戦闘を進める
+   *
+   * @param command 各プレイヤーのコマンド
+   * @return 結果
+   */
   progress(command: Command): Promise<GameState[]>
 }
+
+/** バトルルーム */
+export interface BattleRoom extends BattleStart, BattleProgress {}

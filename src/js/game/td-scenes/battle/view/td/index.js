@@ -1,7 +1,7 @@
 // @flow
 import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
@@ -10,10 +10,7 @@ import type {Render} from "../../../../../action/game-loop/render";
 import {TDCamera} from "../../../../../game-object/camera/td";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
 import type {TDPlayer} from "./player";
-import {appendTDPlayer, disposeTDPlayer} from "./player";
-import {playerTDObjects} from "./player/player";
-import {enemyTDObject} from "./player/enemy";
-import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
+import {enemyTDObject, playerTDObjects} from "./player";
 import type {TDGameObjects} from "./game-objects";
 import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./game-objects";
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
@@ -22,6 +19,7 @@ import {gameObjectStream} from "../../../../../action/game-object-action/game-ob
 import type {SafeAreaInset} from "../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../action/resize/resize";
 import {skyBox} from "./sky-box";
+import {enemySprite, playerSprite, TDSprite} from "./sprite";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -46,7 +44,8 @@ type Notifier = {
 export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: TDCamera;
-  players: TDPlayer<ArmDozerSprite>[];
+  players: TDPlayer[];
+  sprites: TDSprite[];
   gameObjects: TDGameObjects;
 
   _rendererDOM: HTMLElement;
@@ -79,9 +78,21 @@ export class ThreeDimensionLayer {
       playerTDObjects(param.resources, player, gameObjectAction),
       enemyTDObject(param.resources, enemy, gameObjectAction)
     ];
-    this.players.forEach(v => {
-      appendTDPlayer(this.scene, v);
-    });
+    this.players.map(v => v.getObject3Ds())
+      .flat()
+      .forEach(v => {
+        this.scene.add(v);
+      });
+
+    this.sprites = param.players.map(v => v.playerId === param.playerId
+      ? playerSprite(param.resources, v, gameObjectAction)
+      : enemySprite(param.resources, v, gameObjectAction)
+    );
+    this.sprites.map(v => v.getObject3Ds())
+      .flat()
+      .forEach(v => {
+        this.scene.add(v);
+      });
 
     this.gameObjects = createTDGameObjects(param.resources, gameObjectAction);
     appendTDGameObjects(this.scene, this.gameObjects);
@@ -101,7 +112,10 @@ export class ThreeDimensionLayer {
   destructor(): void {
     this.scene.background.dispose();
     this.players.forEach(v => {
-      disposeTDPlayer(v);
+      v.destructor();
+    });
+    this.sprites.forEach(v => {
+      v.destructor();
     });
     disposeTDGameObjects(this.gameObjects);
     this.camera.destructor();

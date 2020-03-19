@@ -1,12 +1,13 @@
 // @flow
 
-import type {BurstAnimationParam} from "./animation-param";
+import type {BurstAnimationParamX} from "./animation-param";
 import {Animate} from "../../../../../../animation/animate";
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {delay, empty} from "../../../../../../animation/delay";
-import type {Burst, RecoverBattery} from "gbraver-burst-core/lib/armdozer/burst";
+import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
-import {dolly, toInitial} from "../../td-camera";
+import {attentionArmDozer, toInitial} from "../../td-camera";
+import {ShinBraverHUD} from "../../../view/hud/armdozer/shin-braver";
 
 /**
  * シンブレイバーのバーストアニメーション
@@ -14,10 +15,10 @@ import {dolly, toInitial} from "../../td-camera";
  * @param param バーストアニメーションパラメータ
  * @return バーストアニメーション
  */
-export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, Burst>): Animate {
+export function shinBraverBurst(param: BurstAnimationParamX<ShinBraver, ShinBraverHUD, Burst>): Animate {
   if (param.burst.type === 'RecoverBattery') {
     const castBurst = (param.burst: RecoverBattery);
-    const castParam = ((param: any): BurstAnimationParam<ShinBraver, typeof castBurst>);
+    const castParam = ((param: any): BurstAnimationParamX<ShinBraver, ShinBraverHUD, typeof castBurst>);
     return recoverBattery(castParam);
   }
 
@@ -30,22 +31,28 @@ export function shinBraverBurst(param: BurstAnimationParam<ShinBraver, Burst>): 
  * @param param アニメーションパラメータ
  * @return アニメーション
  */
-function recoverBattery(param: BurstAnimationParam<ShinBraver, RecoverBattery>): Animate {
-  const playerX = param.burstPlayerTD.sprite.getObject3D().position.x;
+function recoverBattery(param: BurstAnimationParamX<ShinBraver, ShinBraverHUD, RecoverBattery>): Animate {
   return all(
-    dolly(param.tdCamera, playerX, 500)
-      .chain(delay(500))
-      .chain(param.burstPlayerTD.burstIndicator.popUp())
-      .chain(delay(300))
-      .chain(all(
-        param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
-        param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
-      )),
-    param.burstPlayerTD.sprite.turnStart(),
-    param.tdObjects.turnIndicator.invisible(),
-  ).chain(delay(800)
+    attentionArmDozer(param.tdCamera, param.burstSprite, 500),
+    param.tdObjects.skyBrightness.brightness(0.2, 500),
+    param.tdObjects.illumination.intensity(0.2, 500),
+    param.tdObjects.turnIndicator.invisible()
+  ).chain(delay(500)
+  ).chain(all(
+    param.hudObjects.rearmostFader.opacity(0.8, 300),
+    param.burstArmdozerHUD.cutIn.play(),
+  )).chain(delay(2000)
+  ).chain(all(
+    param.hudObjects.rearmostFader.opacity(0, 300),
+    param.burstArmdozerHUD.cutIn.hidden(),
+  )).chain(delay(500)
+  ).chain(all(
+    param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
+    param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+  )).chain(delay(500)
   ).chain(all(
     toInitial(param.tdCamera, 500),
-    param.burstPlayerTD.sprite.turnStartToStand()
-  ));
+    param.tdObjects.skyBrightness.brightness(1, 500),
+    param.tdObjects.illumination.intensity(1, 500),
+  )).chain(delay(500));
 }

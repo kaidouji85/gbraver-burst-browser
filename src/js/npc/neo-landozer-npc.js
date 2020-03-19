@@ -1,11 +1,8 @@
 // @flow
 
 import type {NPC} from "./npc";
+import type {Command, GameState, PlayerId, PlayerState} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
-import type {GameState} from "gbraver-burst-core/lib/game-state/game-state";
-import type {Command} from "gbraver-burst-core/lib/command/command";
-import type {PlayerState} from "gbraver-burst-core/lib/game-state/player-state";
 
 const ZERO_BATTERY = {
   type: 'BATTERY_COMMAND',

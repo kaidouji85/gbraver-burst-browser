@@ -7,11 +7,15 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import SchoolField from "../../../../../game-object/stage/shopping-street";
 import * as THREE from "three";
+import {SkyBrightness} from "../../../../../game-object/sky-brightness/sky-brightness";
+import {Illumination} from "../../../../../game-object/illumination/illumination";
 
 /** 3Dレイヤーのゲームオブジェクト */
 export type TDGameObjects = {
   stage: Stage;
   turnIndicator: TurnIndicator;
+  skyBrightness: SkyBrightness;
+  illumination: Illumination;
 };
 
 /**
@@ -27,7 +31,9 @@ export function createTDGameObjects(resources: Resources, listener: Observable<G
     turnIndicator: new TurnIndicator({
       listener: listener,
       resources: resources
-    })
+    }),
+    skyBrightness: new SkyBrightness(listener),
+    illumination: new Illumination(listener),
   };
 }
 
@@ -41,6 +47,10 @@ export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): 
   target.stage.getThreeJsObjects()
     .forEach(item => scene.add(item));
   scene.add(target.turnIndicator.getObject3D());
+  scene.add(target.skyBrightness.getObject3D());
+  target.illumination.getObject3Ds().forEach(v => {
+    scene.add(v);
+  });
 }
 
 /**
@@ -51,4 +61,6 @@ export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): 
 export function disposeTDGameObjects(target: TDGameObjects): void {
   target.stage.destructor();
   target.turnIndicator.destructor();
+  target.skyBrightness.destructor();
+  target.illumination.destructor();
 }
