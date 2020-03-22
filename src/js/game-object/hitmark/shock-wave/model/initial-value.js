@@ -28,7 +28,7 @@ export function initialValue(): ShockWaveModel {
       rotate: 2 * v * Math.PI / SHOCK_WAVE_PARAM.MAX_LINES,
       scale: {
         x: 1,
-        y: 1
+        y: 2
       }
     }), SHOCK_WAVE_PARAM.MAX_LINES)
   };

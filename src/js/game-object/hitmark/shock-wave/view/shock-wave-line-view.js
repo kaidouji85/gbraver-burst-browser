@@ -53,6 +53,11 @@ export class ShockWaveLineView {
     );
     this._mesh.rotation.z = model.rotate + Math.PI / 2;
     this._mesh.material.opacity = model.opacity;
+    this._mesh.scale.set(
+      model.scale.x,
+      model.scale.y,
+      1
+    );
   }
   /**
    * シーンに追加するオブジェクトを返す
