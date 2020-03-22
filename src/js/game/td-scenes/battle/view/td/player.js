@@ -135,7 +135,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     }),
     hitMark: {
       spark: playerSpark(resources, listener),
-      shockWave: playerShockWave(resources),
+      shockWave: playerShockWave(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
@@ -170,7 +170,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     }),
     hitMark: {
       spark: enemySpark(resources, listener),
-      shockWave: enemyShockWave(resources),
+      shockWave: enemyShockWave(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,

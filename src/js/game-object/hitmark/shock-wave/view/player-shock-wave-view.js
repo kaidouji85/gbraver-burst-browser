@@ -4,11 +4,7 @@ import * as THREE from 'three';
 import type {ShockWaveView} from "./shock-wave-view";
 import type {Resources} from "../../../../resource";
 import {ShockWaveLine} from "./shock-wave-line";
-import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../../armdozer/position";
+import type {ShockWaveModel} from "../model/shock-wave-model";
 
 /**
  * プレイヤーの衝撃波ビュー
@@ -18,11 +14,6 @@ export class PlayerShockWaveView implements ShockWaveView {
   _lines: ShockWaveLine;
   constructor(resources: Resources) {
     this._group = new THREE.Group();
-    this._group.position.set(
-      ARMDOZER_EFFECT_STANDARD_X,
-      ARMDOZER_EFFECT_STANDARD_Y,
-      ARMDOZER_EFFECT_STANDARD_Z
-    );
 
     this._lines = new ShockWaveLine(resources);
     this._group.add(this._lines.getObject3D());
@@ -33,6 +24,19 @@ export class PlayerShockWaveView implements ShockWaveView {
    */
   destructor(): void {
     this._lines.destructor();
+  }
+
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   */
+  engage(model: ShockWaveModel): void {
+    this._group.position.set(
+      model.position.x,
+      model.position.y,
+      model.position.z
+    );
   }
 
   /**

@@ -1,7 +1,6 @@
 // @flow
 
 import * as THREE from 'three';
-import type {ShockWaveView} from "./shock-wave-view";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import {SPRITE_RENDER_ORDER} from "../../../../render-order/td-render-order";
@@ -12,7 +11,7 @@ export const WIDTH = 200;
 /**
  * プレイヤーの衝撃波ビュー
  */
-export class ShockWaveLine implements ShockWaveView {
+export class ShockWaveLine {
   _mesh: THREE.Mesh;
 
   constructor(resources: Resources) {
