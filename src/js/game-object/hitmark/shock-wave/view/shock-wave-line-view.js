@@ -6,8 +6,8 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import {SPRITE_RENDER_ORDER} from "../../../../render-order/td-render-order";
 import type {ShockWaveLineModel} from "../model/shock-wave-model";
 
-export const HEIGHT = 100;
-export const WIDTH = 100;
+export const HEIGHT = 200;
+export const WIDTH = 200;
 
 /**
  * プレイヤーの衝撃波ビュー

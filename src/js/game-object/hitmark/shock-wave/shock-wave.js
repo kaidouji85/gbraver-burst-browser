@@ -8,6 +8,8 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {Animate} from "../../../animation/animate";
+import {popUp} from "./animation/pop-up";
 
 /**
  * 衝撃波
@@ -35,6 +37,15 @@ export class ShockWave {
   destructor(): void {
     this._view.destructor();
     this._subscription.unsubscribe();
+  }
+
+  /**
+   * 衝撃波を表示する
+   *
+   * @return アニメーション
+   */
+  popUp(): Animate {
+    return popUp(this._model);
   }
 
   /**

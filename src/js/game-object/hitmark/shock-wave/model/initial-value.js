@@ -23,12 +23,12 @@ export function initialValue(): ShockWaveModel {
       z: ARMDOZER_SPRITE_STANDARD_Z,
     },
     lines: R.times(v => ({
-      distance: 100,
-      opacity: 0.5,
+      distance: 0,
+      opacity: 0,
       rotate: 2 * v * Math.PI / SHOCK_WAVE_PARAM.MAX_LINES,
       scale: {
         x: 1,
-        y: 2
+        y: 1
       }
     }), SHOCK_WAVE_PARAM.MAX_LINES)
   };
