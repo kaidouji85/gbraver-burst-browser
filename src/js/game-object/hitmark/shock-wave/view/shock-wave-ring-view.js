@@ -33,8 +33,6 @@ export class ShockWaveRingView {
 
     this._mesh = new THREE.Mesh(geometry, material);
     this._mesh.renderOrder = SPRITE_RENDER_ORDER;
-
-    this._mesh.position.z = RING_Z_INDEX; // TODO engageで実行する
   }
 
   /**
@@ -54,9 +52,10 @@ export class ShockWaveRingView {
     this._mesh.scale.set(
       model.scale,
       model.scale,
-      1
+      model.scale
     );
     this._mesh.material.opacity = model.opacity;
+    this._mesh.position.z = RING_Z_INDEX;
   }
 
   /**

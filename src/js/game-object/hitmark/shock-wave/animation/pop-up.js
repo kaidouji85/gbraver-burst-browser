@@ -7,6 +7,9 @@ import {process} from '../../../../animation/process';
 import {tween} from "../../../../animation/tween";
 import {all} from "../../../../animation/all";
 
+/** アニメーション再生時間 */
+export const DURATION = 800;
+
 /**
  * 衝撃波アニメーション
  *
@@ -27,24 +30,21 @@ export function popUp(model: ShockWaveModel): Animate {
  * @return アニメーション
  */
 function lineAnimation(model: ShockWaveLineModel): Animate {
-  const duration = 1000;
   return process(() => {
     model.opacity = 1;
-    model.scale.x = 1.5;
-    model.scale.y = 0.8;
-    model.distance = 80;
-  }).chain(all(
+    model.scale = 1;
+    model.distance = 30;
+  }).chain(
     tween(
-      model, t=>
-      t.to({opacity: 0, distance: 270}, duration)
-        .easing(TWEEN.Easing.Quadratic.Out)
-    ),
-    tween(
-      model.scale,
-        t => t.to({y: 2.5}, duration)
-          .easing(TWEEN.Easing.Quadratic.Out)
+      model, t =>
+        t.to({
+          opacity: 0,
+          distance: 140,
+          scale: 1.5
+        }, DURATION
+      ).easing(TWEEN.Easing.Quadratic.Out)
     )
-  ))
+  );
 }
 
 /**
@@ -59,8 +59,11 @@ function ringAnimation(model: ShockWaveRingModel): Animate {
     model.scale = 1;
   }).chain(
     tween(model, t =>
-        t.to({opacity: 0, scale: 2}, 1000)
-          .easing(TWEEN.Easing.Quadratic.Out)
+        t.to({
+          opacity: 0,
+          scale: 2
+          }, DURATION
+        ).easing(TWEEN.Easing.Quadratic.Out)
     )
   );
 }

@@ -11,10 +11,7 @@ export type ShockWaveLineModel = {
   /** 角度 */
   rotate: number,
   /** 拡大率 */
-  scale: {
-    x: number,
-    y: number
-  }
+  scale: number
 };
 
 /**

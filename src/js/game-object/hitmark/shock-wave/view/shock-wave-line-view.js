@@ -7,8 +7,8 @@ import {SPRITE_RENDER_ORDER} from "../../../../render-order/td-render-order";
 import type {ShockWaveLineModel} from "../model/shock-wave-model";
 import {LINE_Z_INDEX} from "./z-index";
 
-export const HEIGHT = 200;
-export const WIDTH = 200;
+export const HEIGHT = 100;
+export const WIDTH = 100;
 
 /**
  * プレイヤーの衝撃波ビュー
@@ -48,16 +48,16 @@ export class ShockWaveLineView {
    */
   engage(model: ShockWaveLineModel): void {
     this._mesh.position.set(
-      model.distance * Math.cos(model.rotate),
-      model.distance * Math.sin(model.rotate),
+      (model.distance + WIDTH / 2) * Math.cos(model.rotate),
+      (model.distance + HEIGHT / 2) * Math.sin(model.rotate),
       LINE_Z_INDEX
     );
-    this._mesh.rotation.z = model.rotate + Math.PI / 2;
+    this._mesh.rotation.z = model.rotate;
     this._mesh.material.opacity = model.opacity;
     this._mesh.scale.set(
-      model.scale.x,
-      model.scale.y,
-      1
+      model.scale,
+      model.scale,
+      model.scale
     );
   }
   /**

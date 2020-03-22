@@ -30,10 +30,7 @@ export function initialValue(): ShockWaveModel {
       distance: 0,
       opacity: 0,
       rotate: 2 * v * Math.PI / SHOCK_WAVE_PARAM.MAX_LINES,
-      scale: {
-        x: 1,
-        y: 1
-      }
+      scale: 1
     }), SHOCK_WAVE_PARAM.MAX_LINES)
   };
 }
