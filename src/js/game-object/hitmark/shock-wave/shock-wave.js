@@ -26,6 +26,6 @@ export class ShockWave {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this.getObject3D();
+    return this._view.getObject3D();
   }
 }
