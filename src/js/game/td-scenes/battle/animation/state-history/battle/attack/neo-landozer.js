@@ -86,7 +86,7 @@ function attack(param: BattleAnimationParamX<NeoLandozer, AttackResult>): Animat
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
-        param.defenderTD.hitMark.spark.popUp(),
+        param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
       .chain(delay(1300))
@@ -112,7 +112,7 @@ function guard(param: BattleAnimationParamX<NeoLandozer, Guard>): Animate {
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
-        param.defenderTD.hitMark.spark.popUp(),
+        param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
       .chain(delay(1300))
@@ -176,7 +176,7 @@ function down(param: BattleAnimationParamX<NeoLandozer, DownResult>): Animate {
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
-        param.defenderTD.hitMark.spark.popUp(),
+        param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
   ).chain(delay(1000))

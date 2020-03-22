@@ -26,7 +26,7 @@ export function popUp(model: ShockWaveModel): Animate {
  * @return アニメーション
  */
 function lineAnimation(model: ShockWaveLineModel): Animate {
-  const duration = 1600;
+  const duration = 1000;
   return process(() => {
     model.opacity = 1;
     model.scale.x = 1.5;
@@ -35,12 +35,12 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
   }).chain(all(
     tween(
       model, t=>
-      t.to({opacity: 0, distance: 400}, duration)
+      t.to({opacity: 0, distance: 270}, duration)
         .easing(TWEEN.Easing.Quadratic.Out)
     ),
     tween(
       model.scale,
-        t => t.to({y: 3}, duration)
+        t => t.to({y: 2.5}, duration)
           .easing(TWEEN.Easing.Quadratic.Out)
     )
   ))
