@@ -2,7 +2,7 @@
 
 import TWEEN from '@tweenjs/tween.js';
 import {Animate} from "../../../../animation/animate";
-import type {ShockWaveLineModel, ShockWaveModel} from "../model/shock-wave-model";
+import type {ShockWaveLineModel, ShockWaveModel, ShockWaveRingModel} from "../model/shock-wave-model";
 import {process} from '../../../../animation/process';
 import {tween} from "../../../../animation/tween";
 import {all} from "../../../../animation/all";
@@ -15,7 +15,8 @@ import {all} from "../../../../animation/all";
  */
 export function popUp(model: ShockWaveModel): Animate {
   return all(
-    ...model.lines.map( v => lineAnimation(v))
+    ...model.lines.map( v => lineAnimation(v)),
+    ringAnimation(model.ring)
   )
 }
 
@@ -44,4 +45,22 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
           .easing(TWEEN.Easing.Quadratic.Out)
     )
   ))
+}
+
+/**
+ * 衝撃波リングアニメーション
+ *
+ * @param model モデル
+ * @return アニメーション
+ */
+function ringAnimation(model: ShockWaveRingModel): Animate {
+  return process(() => {
+    model.opacity = 1;
+    model.scale = 1;
+  }).chain(
+    tween(model, t =>
+        t.to({opacity: 0, scale: 2}, 1000)
+          .easing(TWEEN.Easing.Quadratic.Out)
+    )
+  );
 }
