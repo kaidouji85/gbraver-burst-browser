@@ -22,6 +22,10 @@ export function initialValue(): ShockWaveModel {
       y: ARMDOZER_EFFECT_STANDARD_Y,
       z: ARMDOZER_SPRITE_STANDARD_Z,
     },
+    ring: {
+      scale: 1,
+      opacity: 0
+    },
     lines: R.times(v => ({
       distance: 0,
       opacity: 0,

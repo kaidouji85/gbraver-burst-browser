@@ -52,6 +52,8 @@ export class PlayerShockWaveView implements ShockWaveView {
     );
     this._group.scale.set(1,1,1);
 
+    this._ring.engage(model.ring);
+
     if (model.lines.length !== this._lines.length) {
       return;
     }

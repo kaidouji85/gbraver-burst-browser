@@ -4,7 +4,8 @@ import * as THREE from 'three';
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import {SPRITE_RENDER_ORDER} from "../../../../render-order/td-render-order";
-import {RING_Z_INDEX} from "./zindex";
+import {RING_Z_INDEX} from "./z-index";
+import type {ShockWaveRingModel} from "../model/shock-wave-model";
 
 /** メッシュ幅 */
 export const WIDTH = 200;
@@ -36,11 +37,33 @@ export class ShockWaveRingView {
     this._mesh.position.z = RING_Z_INDEX; // TODO engageで実行する
   }
 
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this._mesh.geometry.dispose();
     this._mesh.material.dispose();
   }
 
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   */
+  engage(model: ShockWaveRingModel): void {
+    this._mesh.scale.set(
+      model.scale,
+      model.scale,
+      1
+    );
+    this._mesh.material.opacity = model.opacity;
+  }
+
+  /**
+   * シーンに追加するオブジェクトを返す
+   *
+   * @return シーンに追加するオブジェクト
+   */
   getObject3D(): THREE.Object3D {
     return this._mesh;
   }

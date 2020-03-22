@@ -1,7 +1,7 @@
 // @flow
 
 /**
- * 衝撃波の軌跡
+ * 衝撃波 軌跡 モデル
  */
 export type ShockWaveLineModel = {
   /** 中心からの移動距離 */
@@ -18,6 +18,16 @@ export type ShockWaveLineModel = {
 };
 
 /**
+ * 衝撃波 リング モデル
+ */
+export type ShockWaveRingModel = {
+  /** 不透明度 */
+  opacity: number,
+  /** 拡大率 */
+  scale: number
+};
+
+/**
  * 衝撃波のモデル
  */
 export type ShockWaveModel = {
@@ -27,5 +37,8 @@ export type ShockWaveModel = {
     y: number,
     z: number
   },
+  /** リング */
+  ring: ShockWaveRingModel,
+  /** 軌跡 */
   lines: ShockWaveLineModel[],
 };
