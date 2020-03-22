@@ -40,6 +40,15 @@ export class PlayerShockWaveView implements ShockWaveView {
   }
 
   /**
+   * 指定したカメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
+  lookAt(camera: THREE.Camera): void {
+    this._group.quaternion.copy(camera.quaternion);
+  }
+
+  /**
    * シーンに追加するオブジェクトを返す
    *
    * @return シーンに追加するオブジェクト

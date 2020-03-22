@@ -7,6 +7,7 @@ import {initialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /**
  * 衝撃波
@@ -22,6 +23,8 @@ export class ShockWave {
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);
+      } else if (action.type === 'PreRender') {
+        this._onPreRender(action);
       }
     });
   }
@@ -50,5 +53,14 @@ export class ShockWave {
    */
   _onUpdate(action: Update): void {
     this._view.engage(this._model);
+  }
+
+  /**
+   * プリレンダー時の処理
+   *
+   * @param action アクション
+   */
+  _onPreRender(action: PreRender): void {
+    this._view.lookAt(action.camera);
   }
 }
