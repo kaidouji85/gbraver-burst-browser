@@ -3,39 +3,36 @@
 import * as THREE from 'three';
 import type {ShockWaveView} from "./shock-wave-view";
 import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture";
-
-export const HEIGHT = 200;
-export const WIDTH = 200;
+import {ShockWaveLine} from "./shock-wave-line";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z
+} from "../../../armdozer/position";
 
 /**
  * プレイヤーの衝撃波ビュー
  */
 export class PlayerShockWaveView implements ShockWaveView {
-  _mesh: THREE.Mesh;
-
+  _group: THREE.Group;
+  _lines: ShockWaveLine;
   constructor(resources: Resources) {
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE);
-    const texture = textureResource
-      ? textureResource.texture
-      : new THREE.Texture();
-    const material = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      transparent: true,
-      map: texture
-    });
+    this._group = new THREE.Group();
+    this._group.position.set(
+      ARMDOZER_EFFECT_STANDARD_X,
+      ARMDOZER_EFFECT_STANDARD_Y,
+      ARMDOZER_EFFECT_STANDARD_Z
+    );
 
-    const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, 1, 1);
-
-    this._mesh = new THREE.Mesh(geometry, material);
+    this._lines = new ShockWaveLine(resources);
+    this._group.add(this._lines.getObject3D());
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.geometry.dispose();
-    this._mesh.material.dispose();
+    this._lines.destructor();
   }
 
   /**
@@ -44,6 +41,6 @@ export class PlayerShockWaveView implements ShockWaveView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D() {
-    return this._mesh;
+    return this._group;
   }
 }
