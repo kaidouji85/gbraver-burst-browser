@@ -4,9 +4,10 @@ import * as THREE from 'three';
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import {SPRITE_RENDER_ORDER} from "../../../../render-order/td-render-order";
+import type {ShockWaveLineModel} from "../model/shock-wave-model";
 
-export const HEIGHT = 200;
-export const WIDTH = 200;
+export const HEIGHT = 100;
+export const WIDTH = 100;
 
 /**
  * プレイヤーの衝撃波ビュー
@@ -39,6 +40,20 @@ export class ShockWaveLineView {
     this._mesh.material.dispose();
   }
 
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   */
+  engage(model: ShockWaveLineModel): void {
+    this._mesh.position.set(
+      model.distance * Math.cos(model.rotate),
+      model.distance * Math.sin(model.rotate),
+      0
+    );
+    this._mesh.rotation.z = model.rotate + Math.PI / 2;
+    this._mesh.material.opacity = model.opacity;
+  }
   /**
    * シーンに追加するオブジェクトを返す
    *

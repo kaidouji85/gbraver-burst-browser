@@ -9,7 +9,12 @@ export type ShockWaveLineModel = {
   /** 不透明度 */
   opacity: number,
   /** 角度 */
-  rotate: number
+  rotate: number,
+  /** 拡大率 */
+  scale: {
+    x: number,
+    y: number
+  }
 };
 
 /**

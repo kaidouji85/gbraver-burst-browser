@@ -51,13 +51,7 @@ export class PlayerShockWaveView implements ShockWaveView {
     }
     model.lines.forEach((lineModel: ShockWaveLineModel, i: number) => {
       const lineView: ShockWaveLineView = this._lines[i];
-      const object3D = lineView.getObject3D();
-      object3D.position.set(
-        lineModel.distance * Math.cos(lineModel.rotate),
-        lineModel.distance * Math.sin(lineModel.rotate),
-        0
-      );
-      object3D.rotation.z = lineModel.rotate + Math.PI / 2;
+      lineView.engage(lineModel);
     });
   }
 

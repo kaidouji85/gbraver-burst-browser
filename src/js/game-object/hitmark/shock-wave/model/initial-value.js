@@ -24,8 +24,12 @@ export function initialValue(): ShockWaveModel {
     },
     lines: R.times(v => ({
       distance: 100,
-      opacity: 1,
+      opacity: 0.5,
       rotate: 2 * v * Math.PI / SHOCK_WAVE_PARAM.MAX_LINES,
+      scale: {
+        x: 1,
+        y: 1
+      }
     }), SHOCK_WAVE_PARAM.MAX_LINES)
   };
 }
