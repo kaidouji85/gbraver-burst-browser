@@ -7,6 +7,7 @@ import type {Resources} from "../../../../resource";
 import {ShockWaveLineView} from "./shock-wave-line-view";
 import type {ShockWaveLineModel, ShockWaveModel} from "../model/shock-wave-model";
 import {SHOCK_WAVE_PARAM} from "../param";
+import {ShockWaveRingView} from "./shock-wave-ring-view";
 
 /**
  * プレイヤーの衝撃波ビュー
@@ -14,6 +15,7 @@ import {SHOCK_WAVE_PARAM} from "../param";
 export class PlayerShockWaveView implements ShockWaveView {
   _group: THREE.Group;
   _lines: ShockWaveLineView[];
+  _ring: ShockWaveRingView;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -22,6 +24,9 @@ export class PlayerShockWaveView implements ShockWaveView {
     this._lines.forEach(v => {
       this._group.add(v.getObject3D());
     });
+
+    this._ring = new ShockWaveRingView(resources);
+    this._group.add(this._ring.getObject3D());
   }
 
   /**
@@ -31,6 +36,7 @@ export class PlayerShockWaveView implements ShockWaveView {
     this._lines.forEach(v => {
       v.destructor();
     });
+    this._ring.destructor();
   }
 
   /**

@@ -5,6 +5,7 @@ import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import {SPRITE_RENDER_ORDER} from "../../../../render-order/td-render-order";
 import type {ShockWaveLineModel} from "../model/shock-wave-model";
+import {LINE_Z_INDEX} from "./zindex";
 
 export const HEIGHT = 200;
 export const WIDTH = 200;
@@ -49,7 +50,7 @@ export class ShockWaveLineView {
     this._mesh.position.set(
       model.distance * Math.cos(model.rotate),
       model.distance * Math.sin(model.rotate),
-      0
+      LINE_Z_INDEX
     );
     this._mesh.rotation.z = model.rotate + Math.PI / 2;
     this._mesh.material.opacity = model.opacity;

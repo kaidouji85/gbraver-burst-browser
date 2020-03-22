@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import {SPRITE_RENDER_ORDER} from "../../../../render-order/td-render-order";
+import {RING_Z_INDEX} from "./zindex";
 
 /** メッシュ幅 */
 export const WIDTH = 200;
@@ -11,9 +12,9 @@ export const WIDTH = 200;
 export const HEIGHT = 200;
 
 /**
- * 衝撃波 リング
+ * 衝撃波リングのビュー
  */
-export class ShockWaveRing {
+export class ShockWaveRingView {
   _mesh: THREE.Mesh;
 
   constructor(resources: Resources) {
@@ -31,6 +32,8 @@ export class ShockWaveRing {
 
     this._mesh = new THREE.Mesh(geometry, material);
     this._mesh.renderOrder = SPRITE_RENDER_ORDER;
+
+    this._mesh.position.z = RING_Z_INDEX; // TODO engageで実行する
   }
 
   destructor(): void {
