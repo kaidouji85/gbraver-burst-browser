@@ -11,7 +11,7 @@ export const WIDTH = 200;
 /**
  * プレイヤーの衝撃波ビュー
  */
-export class ShockWaveLine {
+export class ShockWaveLineView {
   _mesh: THREE.Mesh;
 
   constructor(resources: Resources) {
