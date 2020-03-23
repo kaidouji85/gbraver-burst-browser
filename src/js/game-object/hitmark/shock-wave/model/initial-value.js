@@ -7,7 +7,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_SPRITE_STANDARD_Z
 } from "../../../armdozer/position";
-import {SHOCK_WAVE_PARAM} from "../param";
+import {MAX_PARTICLE} from "../max-particle";
 
 /**
  * 衝撃波モデルの初期値を生成する
@@ -29,8 +29,8 @@ export function initialValue(): ShockWaveModel {
     lines: R.times(v => ({
       distance: 0,
       opacity: 0,
-      rotate: 2 * v * Math.PI / SHOCK_WAVE_PARAM.MAX_LINES,
+      rotate: 2 * v * Math.PI / MAX_PARTICLE.LINES,
       scale: 1
-    }), SHOCK_WAVE_PARAM.MAX_LINES)
+    }), MAX_PARTICLE.LINES)
   };
 }

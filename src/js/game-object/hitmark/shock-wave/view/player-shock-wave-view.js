@@ -6,7 +6,7 @@ import type {ShockWaveView} from "./shock-wave-view";
 import type {Resources} from "../../../../resource";
 import {ShockWaveLineView} from "./shock-wave-line-view";
 import type {ShockWaveLineModel, ShockWaveModel} from "../model/shock-wave-model";
-import {SHOCK_WAVE_PARAM} from "../param";
+import {MAX_PARTICLE} from "../max-particle";
 import {ShockWaveRingView} from "./shock-wave-ring-view";
 
 /**
@@ -20,7 +20,7 @@ export class PlayerShockWaveView implements ShockWaveView {
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
-    this._lines = R.times(v => new ShockWaveLineView(resources), SHOCK_WAVE_PARAM.MAX_LINES);
+    this._lines = R.times(v => new ShockWaveLineView(resources), MAX_PARTICLE.LINES);
     this._lines.forEach(v => {
       this._group.add(v.getObject3D());
     });
