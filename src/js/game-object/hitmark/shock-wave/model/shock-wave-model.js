@@ -13,10 +13,10 @@ export type ShockWaveLineModel = {
   /** 現在の拡大率 */
   scale: number,
   /**
-   * 最大拡大率
-   * インスタンスごとにランダム値を割り当てる想定
+   * アニメーションの最終フレームで設定させる拡大率
+   * インスタンスごとにランダム値を割り振る想定
    */
-  maxScale: number,
+  toScale: number,
 };
 
 /**

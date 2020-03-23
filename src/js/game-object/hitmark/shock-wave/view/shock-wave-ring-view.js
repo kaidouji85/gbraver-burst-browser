@@ -28,7 +28,7 @@ export class ShockWaveRingView {
       transparent: true,
       map: texture
     });
-
+    material.blending = THREE.AdditiveBlending;
     const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, 1, 1);
 
     this._mesh = new THREE.Mesh(geometry, material);
