@@ -19,31 +19,52 @@ import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-obj
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import {enemyBurstIndicator, playerBurstIndicator} from "../../../../../game-object/burst-indicator";
+import {ShockWave} from "../../../../../game-object/hitmark/shock-wave/shock-wave";
+import {enemyShockWave, playerShockWave} from "../../../../../game-object/hitmark/shock-wave";
 
 /**
- * コンストラクタのパラメータ
+ * 3Dレイヤー プレイヤー関係オブジェクト フィールド
  */
-export type Param = {
-  playerId: PlayerId,
-  gauge: Gauge,
-  hitMark: {
-    spark: Spark
-  },
-  batteryNumber: BatteryNumber,
-  recoverBattery: RecoverBattery,
-  damageIndicator: DamageIndicator,
-  turnStart: TurnStart,
-  burstIndicator: BurstIndicator,
-};
-
-/**
- * 3Dレイヤーのプレイヤー関係オブジェクト
- */
-export class TDPlayer {
+export interface TDPlayerField {
   playerId: PlayerId;
   gauge: Gauge;
   hitMark: {
-    spark: Spark
+    spark: Spark,
+    shockWave: ShockWave
+  };
+  batteryNumber: BatteryNumber;
+  recoverBattery: RecoverBattery;
+  damageIndicator: DamageIndicator;
+  turnStart: TurnStart;
+  burstIndicator: BurstIndicator;
+}
+
+/**
+ * 3Dレイヤー プレイヤー関係オブジェクト
+ */
+export interface TDPlayer extends TDPlayerField {
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void;
+
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
+  getObject3Ds(): THREE.Object3D[];
+}
+
+/**
+ * 3Dレイヤー プレイヤー関係オブジェクト 実装
+ */
+export class TDPlayerImpl implements TDPlayer {
+  playerId: PlayerId;
+  gauge: Gauge;
+  hitMark: {
+    spark: Spark,
+    shockWave: ShockWave,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -51,7 +72,7 @@ export class TDPlayer {
   turnStart: TurnStart;
   burstIndicator: BurstIndicator;
 
-  constructor(param: Param) {
+  constructor(param: TDPlayerField) {
     this.playerId = param.playerId;
     this.gauge = param.gauge;
     this.hitMark = param.hitMark;
@@ -70,6 +91,7 @@ export class TDPlayer {
     this.batteryNumber.destructor();
     this.damageIndicator.destructor();
     this.hitMark.spark.destructor();
+    this.hitMark.shockWave.destructor();
     this.recoverBattery.destructor();
     this.turnStart.destructor();
     this.burstIndicator.destructor();
@@ -84,6 +106,7 @@ export class TDPlayer {
     return [
       this.gauge.getObject3D(),
       this.hitMark.spark.getObject3D(),
+      this.hitMark.shockWave.getObject3D(),
       this.batteryNumber.getObject3D(),
       this.recoverBattery.getObject3D(),
       this.damageIndicator.getObject3D(),
@@ -102,7 +125,7 @@ export class TDPlayer {
  * @return 3Dプレイヤーオブジェクト
  */
 export function playerTDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
-  const param = {
+  return new TDPlayerImpl({
     playerId: state.playerId,
     gauge: playerGauge({
       resources: resources,
@@ -112,6 +135,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     }),
     hitMark: {
       spark: playerSpark(resources, listener),
+      shockWave: playerShockWave(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
@@ -124,8 +148,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     }),
     turnStart: playerTurnStart(resources, listener),
     burstIndicator: playerBurstIndicator(resources, listener)
-  };
-  return new TDPlayer(param);
+  });
 }
 
 /**
@@ -137,7 +160,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
  * @return 3Dプレイヤーオブジェクト
  */
 export function enemyTDObject(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
-  const param = {
+  return new TDPlayerImpl({
     playerId: state.playerId,
     gauge: enemyGauge({
       resources: resources,
@@ -147,6 +170,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     }),
     hitMark: {
       spark: enemySpark(resources, listener),
+      shockWave: enemyShockWave(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,
@@ -159,6 +183,5 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     }),
     turnStart: enemyTurnStart(resources, listener),
     burstIndicator: enemyBurstIndicator(resources, listener)
-  };
-  return new TDPlayer(param);
+  });
 }

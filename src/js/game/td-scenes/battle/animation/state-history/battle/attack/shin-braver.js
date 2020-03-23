@@ -86,7 +86,7 @@ function attack(param: BattleAnimationParamX<ShinBraver, AttackResult>): Animate
       .chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
-        param.defenderTD.hitMark.spark.popUp(),
+        param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       ))
       .chain(delay(1300))
@@ -112,7 +112,7 @@ function guard(param: BattleAnimationParamX<ShinBraver, Guard>): Animate {
       .chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
-        param.defenderTD.hitMark.spark.popUp(),
+        param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp),
       ))
       .chain(delay(1300))
@@ -176,7 +176,7 @@ function down(param: BattleAnimationParamX<ShinBraver, DownResult>): Animate {
       .chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
-        param.defenderTD.hitMark.spark.popUp(),
+        param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       ))
   ).chain(delay(1000))
