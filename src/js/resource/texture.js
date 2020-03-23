@@ -39,7 +39,6 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_GUTS_UP: 'NEO_LANDOZER_GUTS_UP',
   NEO_LANDOZER_GUTS_DOWN: 'NEO_LANDOZER_GUTS_DOWN',
   LIGHTNING_DOZER_STAND: 'LIGHTNING_DOZER_STAND',
-  HITMARK_SPARK: 'HITMARK_SPARK',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
@@ -137,10 +136,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     path: 'armdozer/ligjtning-dozer/stand.png',
   },
   // ヒットマーク関連
-  {
-    id: TEXTURE_IDS.HITMARK_SPARK,
-    path: 'hitmark/spark.png'
-  },
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
     path: 'hitmark/shock-wave/line.png',

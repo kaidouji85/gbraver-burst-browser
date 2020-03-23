@@ -4,7 +4,6 @@ import {BatteryNumber} from "../../../../../game-object/battery-number/battery-n
 import {RecoverBattery} from "../../../../../game-object/recover-battery/recover-battery";
 import {DamageIndicator} from "../../../../../game-object/damage-indicator/damage-indicator";
 import type {Player, PlayerId} from "gbraver-burst-core";
-import {Spark} from "../../../../../game-object/hitmark/spark/spark";
 import * as THREE from "three";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {Gauge} from "../../../../../game-object/gauge/gauge";
@@ -13,7 +12,6 @@ import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
-import {enemySpark, playerSpark} from "../../../../../game-object/hitmark/spark";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
@@ -29,7 +27,6 @@ export interface TDPlayerField {
   playerId: PlayerId;
   gauge: Gauge;
   hitMark: {
-    spark: Spark,
     shockWave: ShockWave
   };
   batteryNumber: BatteryNumber;
@@ -63,7 +60,6 @@ export class TDPlayerImpl implements TDPlayer {
   playerId: PlayerId;
   gauge: Gauge;
   hitMark: {
-    spark: Spark,
     shockWave: ShockWave,
   };
   batteryNumber: BatteryNumber;
@@ -90,7 +86,6 @@ export class TDPlayerImpl implements TDPlayer {
     this.gauge.destructor();
     this.batteryNumber.destructor();
     this.damageIndicator.destructor();
-    this.hitMark.spark.destructor();
     this.hitMark.shockWave.destructor();
     this.recoverBattery.destructor();
     this.turnStart.destructor();
@@ -105,7 +100,6 @@ export class TDPlayerImpl implements TDPlayer {
   getObject3Ds(): THREE.Object3D[] {
     return [
       this.gauge.getObject3D(),
-      this.hitMark.spark.getObject3D(),
       this.hitMark.shockWave.getObject3D(),
       this.batteryNumber.getObject3D(),
       this.recoverBattery.getObject3D(),
@@ -134,7 +128,6 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
       battery: state.armdozer.maxBattery,
     }),
     hitMark: {
-      spark: playerSpark(resources, listener),
       shockWave: playerShockWave(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
@@ -169,7 +162,6 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
       battery: state.armdozer.maxBattery,
     }),
     hitMark: {
-      spark: enemySpark(resources, listener),
       shockWave: enemyShockWave(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
