@@ -6,6 +6,7 @@ import {PlayerShockWaveView} from "./view/player-shock-wave-view";
 import {EnemyShockWaveView} from "./view/enemy-shock-wave-view";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
+import {initialValue} from "./model/initial-value";
 
 /**
  * プレイヤーの衝撃波を生成する
@@ -15,8 +16,9 @@ import type {GameObjectAction} from "../../../action/game-object-action";
  * @return 衝撃波
  */
 export function playerShockWave(resources: Resources, listener: Observable<GameObjectAction>): ShockWave {
-  const view = new PlayerShockWaveView(resources);
-  return new ShockWave(view, listener);
+  const model = initialValue();
+  const view = new PlayerShockWaveView(resources, model);
+  return new ShockWave(view, model, listener);
 }
 
 /**
@@ -27,6 +29,7 @@ export function playerShockWave(resources: Resources, listener: Observable<GameO
  * @return 衝撃波
  */
 export function enemyShockWave(resources: Resources, listener: Observable<GameObjectAction>): ShockWave {
-  const view = new EnemyShockWaveView(resources);
-  return new ShockWave(view, listener);
+  const model = initialValue();
+  const view = new EnemyShockWaveView(resources, model);
+  return new ShockWave(view, model, listener);
 }

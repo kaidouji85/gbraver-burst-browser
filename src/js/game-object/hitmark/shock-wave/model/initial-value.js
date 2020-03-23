@@ -7,12 +7,12 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_SPRITE_STANDARD_Z
 } from "../../../armdozer/position";
-import {MAX_PARTICLE} from "../max-particle";
+
+export const MAX_LINES = 32;
 
 /**
  * 衝撃波モデルの初期値を生成する
  *
- * @param maxLines 軌跡の最大値
  * @return 生成した初期値
  */
 export function initialValue(): ShockWaveModel {
@@ -29,8 +29,9 @@ export function initialValue(): ShockWaveModel {
     lines: R.times(v => ({
       distance: 0,
       opacity: 0,
-      rotate: 2 * v * Math.PI / MAX_PARTICLE.LINES,
-      scale: 1
-    }), MAX_PARTICLE.LINES)
+      rotate: 2 * v * Math.PI / MAX_LINES,
+      scale: 1,
+      maxScale: 1 + 3 * Math.random()
+    }), MAX_LINES)
   };
 }

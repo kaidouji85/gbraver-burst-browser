@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import type {ShockWaveView} from "./view/shock-wave-view";
 import type {ShockWaveModel} from "./model/shock-wave-model";
-import {initialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
@@ -19,8 +18,8 @@ export class ShockWave {
   _view: ShockWaveView;
   _subscription: Subscription;
 
-  constructor(view: ShockWaveView, listener: Observable<GameObjectAction>) {
-    this._model = initialValue();
+  constructor(view: ShockWaveView, initialModel: ShockWaveModel, listener: Observable<GameObjectAction>) {
+    this._model = initialModel;
     this._view = view;
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {

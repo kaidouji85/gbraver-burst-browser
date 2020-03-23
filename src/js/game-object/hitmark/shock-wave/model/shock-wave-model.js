@@ -10,8 +10,13 @@ export type ShockWaveLineModel = {
   opacity: number,
   /** 角度 */
   rotate: number,
-  /** 拡大率 */
-  scale: number
+  /** 現在の拡大率 */
+  scale: number,
+  /**
+   * 最大拡大率
+   * インスタンスごとにランダム値を割り当てる想定
+   */
+  maxScale: number,
 };
 
 /**
@@ -21,7 +26,7 @@ export type ShockWaveRingModel = {
   /** 不透明度 */
   opacity: number,
   /** 拡大率 */
-  scale: number
+  scale: number,
 };
 
 /**
