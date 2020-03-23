@@ -39,7 +39,7 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
       model, t =>
         t.to({
           opacity: 0,
-          scale: 2  + 2 * Math.random()
+          scale: 1  + 3 * Math.random()
         }, DURATION
       ).easing(TWEEN.Easing.Quadratic.Out)
     )
