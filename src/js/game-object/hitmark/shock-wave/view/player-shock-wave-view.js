@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import * as R from 'ramda';
 import type {ShockWaveView} from "./shock-wave-view";
 import type {Resources} from "../../../../resource";
-import {LineMeshResource, ShockWaveLineView} from "./shock-wave-line-view";
+import {ShockWaveLineView} from "./shock-wave-line-view";
 import type {ShockWaveLineModel, ShockWaveModel} from "../model/shock-wave-model";
 import {SHOCK_WAVE_PARAM} from "../param";
 import {ShockWaveRingView} from "./shock-wave-ring-view";
@@ -14,15 +14,13 @@ import {ShockWaveRingView} from "./shock-wave-ring-view";
  */
 export class PlayerShockWaveView implements ShockWaveView {
   _group: THREE.Group;
-  _lineResource: LineMeshResource;
   _lines: ShockWaveLineView[];
   _ring: ShockWaveRingView;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
-    this._lineResource = new LineMeshResource(resources);
-    this._lines = R.times(v => new ShockWaveLineView(this._lineResource), SHOCK_WAVE_PARAM.MAX_LINES);
+    this._lines = R.times(v => new ShockWaveLineView(resources), SHOCK_WAVE_PARAM.MAX_LINES);
     this._lines.forEach(v => {
       this._group.add(v.getObject3D());
     });
@@ -35,7 +33,9 @@ export class PlayerShockWaveView implements ShockWaveView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._lineResource.destructor();
+    this._lines.forEach(v => {
+      v.destructor();
+    });
     this._ring.destructor();
   }
 

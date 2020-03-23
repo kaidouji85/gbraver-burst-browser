@@ -33,14 +33,13 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
   return process(() => {
     model.opacity = 1;
     model.scale = 1;
-    model.distance = 30;
+    model.distance = 0;
   }).chain(
     tween(
       model, t =>
         t.to({
           opacity: 0,
-          distance: 140,
-          scale: 1.5
+          scale: 3
         }, DURATION
       ).easing(TWEEN.Easing.Quadratic.Out)
     )
