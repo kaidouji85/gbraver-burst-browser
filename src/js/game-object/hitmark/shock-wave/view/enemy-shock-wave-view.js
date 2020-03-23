@@ -8,8 +8,8 @@ import type {ShockWaveModel} from "../model/shock-wave-model";
  * 敵の衝撃波ビュー
  */
 export class EnemyShockWaveView extends PlayerShockWaveView {
-  constructor(resources: Resources) {
-    super(resources);
+  constructor(resources: Resources, initialModel: ShockWaveModel) {
+    super(resources, initialModel);
   }
 
   /**
