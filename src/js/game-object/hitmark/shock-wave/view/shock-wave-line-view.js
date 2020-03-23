@@ -62,8 +62,8 @@ export class ShockWaveLineView {
     this._group.rotation.z = model.rotate;
     this._group.scale.set(
       model.scale,
-      model.scale,
-      model.scale
+      1,
+      1
     );
   }
   /**

@@ -32,8 +32,8 @@ export function popUp(model: ShockWaveModel): Animate {
 function lineAnimation(model: ShockWaveLineModel): Animate {
   return process(() => {
     model.opacity = 1;
-    model.scale = 1;
-    model.distance = 0;
+    model.scale = 0;
+    model.distance = 8;
   }).chain(
     tween(
       model, t =>
@@ -55,12 +55,12 @@ function lineAnimation(model: ShockWaveLineModel): Animate {
 function ringAnimation(model: ShockWaveRingModel): Animate {
   return process(() => {
     model.opacity = 1;
-    model.scale = 1;
+    model.scale = 0;
   }).chain(
     tween(model, t =>
         t.to({
           opacity: 0,
-          scale: 2
+          scale: 1
           }, DURATION
         ).easing(TWEEN.Easing.Quadratic.Out)
     )

@@ -8,9 +8,9 @@ import {RING_Z_INDEX} from "./z-index";
 import type {ShockWaveRingModel} from "../model/shock-wave-model";
 
 /** メッシュ幅 */
-export const WIDTH = 200;
+export const WIDTH = 300;
 /** メッシュ高 */
-export const HEIGHT = 200;
+export const HEIGHT = 300;
 
 /**
  * 衝撃波リングのビュー
