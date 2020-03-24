@@ -8,7 +8,6 @@ import {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import type {Update} from "../../../action/game-loop/update";
 import {Animate} from "../../../animation/animate";
 import {burst} from "./animation/burst";
 import {hidden} from "./animation/hidden";
