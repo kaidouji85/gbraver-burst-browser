@@ -10,10 +10,10 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import type {SafeAreaInset} from "../../../safe-area/safe-area-inset";
+import {devicePerScaleForHUD} from "../../../device-per-scale/hud";
 
 /** 全体のスケール */
-const SCALE = 0.3;
+const GROUP_SCALE = 0.3;
 
 /** 右パディング */
 const PADDING_RIGHT = 112;
@@ -75,7 +75,7 @@ export class BatterySelectorView {
     this._minus.getObject3D().position.set(-256, 176, 0);
     this._group.add(this._minus.getObject3D());
 
-    this._group.scale.set(SCALE, SCALE, SCALE);
+    this._group.scale.set(GROUP_SCALE, GROUP_SCALE, GROUP_SCALE);
   }
 
   /** デストラクタ */
@@ -99,20 +99,21 @@ export class BatterySelectorView {
     this._minus.update(model);
   }
 
-  /** プリレンダー */
+  /**
+   * プリレンダー
+   *
+   * @param action アクション
+   */
   preRender(action: PreRender): void {
-    this._setPos(action.rendererDOM, action.safeAreaInset);
-    this._lookAt(action.camera);
-  }
+    const devicePerScale = devicePerScaleForHUD(action.rendererDOM, action.safeAreaInset);
 
-  /** 座標を調整する */
-  _setPos(rendererDOM: HTMLElement, safeAreaInset: SafeAreaInset): void {
-    this._group.position.x = rendererDOM.clientWidth / 2 - safeAreaInset.right - PADDING_RIGHT;
-    this._group.position.y = -rendererDOM.clientHeight / 2 + safeAreaInset.bottom + PADDING_BOTTOM;
-  }
-
-  /** カメラの真正面を向く */
-  _lookAt(camera: THREE.Camera): void {
-    this._group.quaternion.copy(camera.quaternion);
+    this._group.scale.set(
+      GROUP_SCALE * devicePerScale,
+      GROUP_SCALE * devicePerScale,
+      GROUP_SCALE * devicePerScale
+      );
+    this._group.position.x = action.rendererDOM.clientWidth / 2 -action.safeAreaInset.right -PADDING_RIGHT * devicePerScale;
+    this._group.position.y = -action.rendererDOM.clientHeight / 2 + action.safeAreaInset.bottom + PADDING_BOTTOM * devicePerScale;
+    this._group.quaternion.copy(action.camera.quaternion);
   }
 }
