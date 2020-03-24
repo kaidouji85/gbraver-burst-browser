@@ -6,6 +6,7 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import {SPRITE_RENDER_ORDER} from "../../../../render-order/td-render-order";
 import {RING_Z_INDEX} from "./z-index";
 import type {ShockWaveRingModel} from "../model/shock-wave-model";
+import {SHOCK_WAVE_COLOR} from "./color";
 
 /** メッシュ幅 */
 export const WIDTH = 300;
@@ -26,7 +27,8 @@ export class ShockWaveRingView {
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       transparent: true,
-      map: texture
+      map: texture,
+      color: SHOCK_WAVE_COLOR
     });
     material.blending = THREE.AdditiveBlending;
     const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, 1, 1);
