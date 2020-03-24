@@ -10,6 +10,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {devicePerScaleForHUD} from "../../../device-per-scale/hud";
 
 /** 全体のスケール */
 const GROUP_SCALE = 0.3;
@@ -98,17 +99,20 @@ export class BatterySelectorView {
     this._minus.update(model);
   }
 
-  /** プリレンダー */
+  /**
+   * プリレンダー
+   *
+   * @param action アクション
+   */
   preRender(action: PreRender): void {
-    const safeAreaHeight = action.rendererDOM.clientHeight - action.safeAreaInset.bottom;
-    const devicePerScale = Math.max(1, Math.floor(safeAreaHeight / 375));
+    const devicePerScale = devicePerScaleForHUD(action.rendererDOM, action.safeAreaInset);
 
     this._group.scale.set(
       GROUP_SCALE * devicePerScale,
       GROUP_SCALE * devicePerScale,
       GROUP_SCALE * devicePerScale
       );
-    this._group.position.x = action.rendererDOM.clientWidth / 2 - action.safeAreaInset.right - PADDING_RIGHT * devicePerScale;
+    this._group.position.x = action.rendererDOM.clientWidth / 2 -action.safeAreaInset.right -PADDING_RIGHT * devicePerScale;
     this._group.position.y = -action.rendererDOM.clientHeight / 2 + action.safeAreaInset.bottom + PADDING_BOTTOM * devicePerScale;
     this._group.quaternion.copy(action.camera.quaternion);
   }
