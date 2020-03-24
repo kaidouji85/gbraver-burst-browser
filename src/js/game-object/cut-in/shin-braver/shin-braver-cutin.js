@@ -12,6 +12,7 @@ import type {Update} from "../../../action/game-loop/update";
 import {Animate} from "../../../animation/animate";
 import {burst} from "./animation/burst";
 import {hidden} from "./animation/hidden";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 200;
@@ -28,8 +29,8 @@ export class ShinBraverCutIn implements CutIn {
     this._model = createInitialValue();
     this._view = new ShinBraverCutInView(resources);
     this._subscription = listener.subscribe(action => {
-      if (action.type === 'Update') {
-        this._onUpdate(action);
+      if (action.type === 'PreRender') {
+        this._onPreRender(action);
       }
     });
   }
@@ -70,11 +71,11 @@ export class ShinBraverCutIn implements CutIn {
   }
 
   /**
-   * アップデート時の処理
+   * プリレンダー時の処理
    *
    * @param action アクション
    */
-  _onUpdate(action: Update): void {
-    this._view.engage(this._model);
+  _onPreRender(action: PreRender): void {
+    this._view.engage(this._model, action);
   }
 }
