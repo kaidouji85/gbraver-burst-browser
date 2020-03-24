@@ -6,6 +6,8 @@ import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import type {AnimationType, ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
+import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 500;
@@ -61,17 +63,21 @@ export class ShinBraverCutInView implements CutIn {
 
   /**
    * モデルをビューに反映させる
+   * 本メソッドはプリレンダー時に呼ばれることを想定している
    *
    * @param model モデル
+   * @param preRender プリレンダーのアクション
    */
-  engage(model: ShinBraverCutInModel): void {
-    this._group.position.x = model.position.x;
-    this._group.position.y = model.position.y;
-    this._group.position.z = model.position.z;
+  engage(model: ShinBraverCutInModel, preRender: PreRender): void {
+    const devicePerScale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
 
-    this._group.scale.x = model.scale;
-    this._group.scale.y = model.scale;
-    this._group.scale.z = model.scale;
+    this._group.position.x = model.position.x * devicePerScale;
+    this._group.position.y = model.position.y * devicePerScale;
+    this._group.position.z = model.position.z * devicePerScale;
+
+    this._group.scale.x = model.scale * devicePerScale;
+    this._group.scale.y = model.scale * devicePerScale;
+    this._group.scale.z = model.scale * devicePerScale;
 
     const activeMesh = this._getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);

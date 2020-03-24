@@ -10,7 +10,6 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {HUDArmdozer} from "../../../view/hud/armdozer";
-import {TDSprite} from "../../../view/td/sprite";
 
 /**
  * バーストアニメーションのパラメータ
