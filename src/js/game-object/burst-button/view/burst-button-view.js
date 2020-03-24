@@ -10,13 +10,13 @@ import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import type {SafeAreaInset} from "../../../safe-area/safe-area-inset";
+import {devicePerScaleForHUD} from "../../../device-per-scale/hud";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
 
 /** 全体のスケール */
-const SCALE = 0.3;
+const GROUP_SCALE = 0.3;
 
 /** 左パディング */
 const PADDING_LEFT = 80;
@@ -73,7 +73,7 @@ export class BurstButtonView {
     this._group.add(this._burstButton.getObject3D());
     this._group.add(this._buttonDisabled.getObject3D());
     this._group.add(this._overlap.getObject3D());
-    this._group.scale.set(SCALE, SCALE, SCALE);
+    this._group.scale.set(GROUP_SCALE, GROUP_SCALE, GROUP_SCALE);
   }
 
   /** デストラクタ */
@@ -91,25 +91,32 @@ export class BurstButtonView {
     this._buttonDisabled.setOpacity(disabledOpacity);
   }
 
-  /** プリレンダー */
+  /**
+   * プリレンダー
+   *
+   * @param action アクション
+   */
   preRender(action: PreRender): void {
-    this._setPos(action.rendererDOM, action.safeAreaInset);
-    this._lookAt(action.camera);
+    const devicePerScale = devicePerScaleForHUD(action.rendererDOM, action.safeAreaInset);
+
+    this._group.scale.set(
+      GROUP_SCALE * devicePerScale,
+      GROUP_SCALE * devicePerScale,
+      GROUP_SCALE * devicePerScale
+    );
+    this._group.position.x =
+      -action.rendererDOM.clientWidth / 2
+      +action.safeAreaInset.left
+      +PADDING_LEFT * devicePerScale;
+    this._group.position.y =
+      -action.rendererDOM.clientHeight / 2
+      +action.safeAreaInset.bottom
+      +PADDING_BOTTOM * devicePerScale;
+    this._group.quaternion.copy(action.camera.quaternion);
   }
 
   /** 本ビューで使うthree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._group;
-  }
-
-  /** 表示位置を更新する */
-  _setPos(rendererDOM: HTMLElement, safeAreaInset: SafeAreaInset): void {
-    this._group.position.x = -rendererDOM.clientWidth / 2 + safeAreaInset.left + PADDING_LEFT;
-    this._group.position.y = -rendererDOM.clientHeight / 2  + safeAreaInset.bottom + PADDING_BOTTOM;
-  }
-
-  /** カメラの真正面を向く */
-  _lookAt(camera: THREE.Camera): void {
-    this._group.quaternion.copy(camera.quaternion);
   }
 }
