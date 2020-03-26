@@ -37,6 +37,12 @@ docker-machine ssh default -L 3000:localhost:3000
 # ブラウザを起動して、http://localhost:3000を開く
 ```
 
+## Dockerイメージをビルドする
+
+```
+docker build ./ --build-arg HOW_TO_PLAY_URL=<遊び方動画URL> -t <イメージ名>
+```
+
 ## デプロイする
 本プログラムは静的ファイルのみで構成されています。
 ビルドしたものを、S3などでパブリック公開するけでデプロイ完了です。
