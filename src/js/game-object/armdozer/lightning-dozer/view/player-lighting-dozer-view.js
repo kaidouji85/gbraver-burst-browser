@@ -72,6 +72,11 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this._group.quaternion.copy(camera.quaternion);
   }
 
+  /**
+   * 本ビューの全メッシュを取得する
+   *
+   * @return 本ビューの全メッシュ
+   */
   _getAllMeshes(): ArmdozerAnimation[] {
     return [
       this._stand,
@@ -79,6 +84,12 @@ export class PlayerLightingDozerView implements LightningDozerView {
     ];
   }
 
+  /**
+   * アニメ種別に対応するメッシュを返す
+   *
+   * @param animationType アニメ種別
+   * @return アニメ種別に対応するメッシュ
+   */
   _getActiveMesh(animationType: AnimationType): ArmdozerAnimation {
     switch(animationType) {
       case 'TACKLE':
