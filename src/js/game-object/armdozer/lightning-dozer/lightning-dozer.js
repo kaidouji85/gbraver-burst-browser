@@ -13,7 +13,8 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {tackle} from "./animation/tackle";
-import {tackleToStand} from "./animation/t-to-stand";
+import {tackleToStand} from "./animation/tackle-to-stand";
+import {charge} from "./animation/charge";
 
 /**
  *　ライトニングドーザ
@@ -49,6 +50,16 @@ export class LightningDozer implements ArmDozerSprite {
    */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  // TODO 削除する
+  /**
+   * チャージ
+   *
+   * @return アニメーション
+   */
+  charge(): Animate {
+    return charge(this._model);
   }
 
   /**
