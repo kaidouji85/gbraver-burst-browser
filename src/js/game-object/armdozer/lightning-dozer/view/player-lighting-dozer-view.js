@@ -6,7 +6,9 @@ import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
 import {lightningDozerStand} from "../mesh/stand";
 import type {AnimationType, LightningDozerModel} from "../model/lightning-dozer-model";
 import * as THREE from "three";
-import {lightningDozerTackle} from "../mesh/sp-to-stand";
+import {lightningDozerHmCharge} from "../mesh/hm-charge";
+import {lightningDozerHmAttack} from "../mesh/hm-attack";
+import {lightningDozerHmToStand} from "../mesh/hm-to-stand";
 
 /**
  * プレイヤー側のライトニングドーザビュー
@@ -14,13 +16,18 @@ import {lightningDozerTackle} from "../mesh/sp-to-stand";
 export class PlayerLightingDozerView implements LightningDozerView {
   _group: THREE.Group;
   _stand: ArmdozerAnimation;
-  _tackle: ArmdozerAnimation;
+  _hmCharge: ArmdozerAnimation;
+  _hmAttack: ArmdozerAnimation;
+  _hmToStand: ArmdozerAnimation;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
     this._stand = lightningDozerStand(resources);
-    this._tackle = lightningDozerTackle(resources);
+    this._hmCharge = lightningDozerHmCharge(resources);
+    this._hmAttack = lightningDozerHmAttack(resources);
+    this._hmToStand = lightningDozerHmToStand(resources);
+
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
     });
@@ -28,7 +35,9 @@ export class PlayerLightingDozerView implements LightningDozerView {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._stand.destructor();
+    this._getAllMeshes().forEach(v => {
+      v.destructor();
+    });
   }
 
   /**
@@ -80,7 +89,9 @@ export class PlayerLightingDozerView implements LightningDozerView {
   _getAllMeshes(): ArmdozerAnimation[] {
     return [
       this._stand,
-      this._tackle,
+      this._hmCharge,
+      this._hmAttack,
+      this._hmToStand,
     ];
   }
 
@@ -92,8 +103,12 @@ export class PlayerLightingDozerView implements LightningDozerView {
    */
   _getActiveMesh(animationType: AnimationType): ArmdozerAnimation {
     switch(animationType) {
-      case 'TACKLE':
-        return this._tackle;
+      case 'HM_CHARGE':
+        return this._hmCharge;
+      case 'HM_ATTACK':
+        return this._hmAttack;
+      case 'HM_TO_STAND':
+        return this._hmToStand;
       case 'STAND':
       default:
         return this._stand;

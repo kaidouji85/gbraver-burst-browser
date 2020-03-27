@@ -11,14 +11,14 @@ export const MESH_HEIGHT = 600;
 export const MAX_ANIMATION = 4;
 
 /**
- * ライトニングドーザ タックル
+ * ライトニングドーザ アームハンマー チャージ
  *
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
-export function lightningDozerTackle(resources: Resources): ArmdozerAnimation {
+export function lightningDozerHmCharge(resources: Resources): ArmdozerAnimation {
   const ret = new HorizontalArmdozerAnimation({
-    id: TEXTURE_IDS.LIGHTNING_DOZER_TACKLE,
+    id: TEXTURE_IDS.LIGHTNING_DOZER_HM_CHARGE,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,
