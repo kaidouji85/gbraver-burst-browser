@@ -6,7 +6,13 @@ import {LightningDozer} from "../../../../../../../game-object/armdozer/lightnin
 import {delay, empty} from "../../../../../../../animation/delay";
 import type {BattleResult, CriticalHit, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
-import {ShinBraver} from "../../../../../../../game-object/armdozer/shin-braver/shin-braver";
+
+/**
+ * ライトニングドーザ 戦闘アニメーション パラメータ
+ *
+ * @type RESULT 戦闘結果
+ */
+type LightningDozerBattleParam<RESULT> = BattleAnimationParamX<LightningDozer, RESULT>
 
 /**
  * ライトニングドーザ 戦闘アニメーション
@@ -14,7 +20,7 @@ import {ShinBraver} from "../../../../../../../game-object/armdozer/shin-braver/
  * @param param パラメーター
  * @return アニメーション
  */
-export function lightningDozerAttack(param: BattleAnimationParamX<LightningDozer, BattleResult>): Animate {
+export function lightningDozerAttack(param: LightningDozerBattleParam<BattleResult>): Animate {
   if (param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
     const castParam = ((param: any): BattleAnimationParamX<LightningDozer, AttackResult | typeof castResult>);
@@ -35,22 +41,21 @@ type AttackResult = NormalHit | CriticalHit;
  * @param param パラメータ
  * @return アニメーション
  */
-function attack(param: BattleAnimationParamX<LightningDozer, AttackResult>): Animate {
+function attack(param: LightningDozerBattleParam<AttackResult>): Animate {
   return all(
     param.attackerSprite.charge()
-      .chain(delay(600))
+      .chain(delay(800))
       .chain(param.attackerSprite.armHammer())
-      .chain(delay(1300))
+      .chain(delay(2000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(1000)
+    delay(1200)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-      .chain(delay(1300))
+      ).chain(delay(1800))
       .chain(param.defenderSprite.knockBackToStand()),
   );
 }
