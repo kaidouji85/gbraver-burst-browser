@@ -37,18 +37,19 @@ type AttackResult = NormalHit | CriticalHit;
  */
 function attack(param: BattleAnimationParamX<LightningDozer, AttackResult>): Animate {
   return all(
-    delay(0)
-      .chain(param.attackerSprite.tackle())
+    param.attackerSprite.charge()
+      .chain(delay(600))
+      .chain(param.attackerSprite.armHammer())
       .chain(delay(1300))
-      .chain(param.attackerSprite.tackleToStand()),
+      .chain(param.attackerSprite.hmToStand()),
 
-    delay(200)
-      .chain(all(
+    delay(1000)
+      .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
+      )
       .chain(delay(1300))
       .chain(param.defenderSprite.knockBackToStand()),
   );

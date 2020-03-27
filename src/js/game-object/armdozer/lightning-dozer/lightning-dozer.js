@@ -12,9 +12,9 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import {tackle} from "./animation/tackle";
-import {tackleToStand} from "./animation/tackle-to-stand";
 import {charge} from "./animation/charge";
+import {armHammer} from "./animation/arm-hammer";
+import {hmToStand} from "./animation/hm-to-stand";
 
 /**
  *　ライトニングドーザ
@@ -52,7 +52,6 @@ export class LightningDozer implements ArmDozerSprite {
     return this._view.getObject3D();
   }
 
-  // TODO 削除する
   /**
    * チャージ
    *
@@ -63,21 +62,21 @@ export class LightningDozer implements ArmDozerSprite {
   }
 
   /**
-   * タックル
+   * アームハンマー
    *
    * @return アニメーション
    */
-  tackle(): Animate {
-    return tackle(this._model);
+  armHammer(): Animate {
+    return armHammer(this._model);
   }
 
   /**
-   * タックル -> 立ち
+   * アームハンマー -> 立ち
    *
    * @return アニメーション
    */
-  tackleToStand(): Animate {
-    return tackleToStand(this._model);
+  hmToStand(): Animate {
+    return hmToStand(this._model);
   }
 
   /** ターンスタート */
