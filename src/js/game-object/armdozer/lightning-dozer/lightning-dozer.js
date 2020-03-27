@@ -12,6 +12,9 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {charge} from "./animation/charge";
+import {armHammer} from "./animation/arm-hammer";
+import {hmToStand} from "./animation/hm-to-stand";
 
 /**
  *　ライトニングドーザ
@@ -47,6 +50,33 @@ export class LightningDozer implements ArmDozerSprite {
    */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * チャージ
+   *
+   * @return アニメーション
+   */
+  charge(): Animate {
+    return charge(this._model);
+  }
+
+  /**
+   * アームハンマー
+   *
+   * @return アニメーション
+   */
+  armHammer(): Animate {
+    return armHammer(this._model);
+  }
+
+  /**
+   * アームハンマー -> 立ち
+   *
+   * @return アニメーション
+   */
+  hmToStand(): Animate {
+    return hmToStand(this._model);
   }
 
   /** ターンスタート */

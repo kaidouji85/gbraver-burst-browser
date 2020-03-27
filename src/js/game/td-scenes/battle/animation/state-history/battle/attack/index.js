@@ -7,6 +7,8 @@ import {neoLandozerAttack} from "./neo-landozer";
 import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 import type {BattleResult} from "gbraver-burst-core";
+import {LightningDozer} from "../../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
+import {lightningDozerAttack} from "./lightning-dozer";
 
 /**
  * 攻撃側スプライトに応じて、戦闘アニメーションを切り替える
@@ -19,9 +21,16 @@ export function attackAnimation(param: BattleAnimationParam): Animate {
   if (sprite instanceof ShinBraver) {
     const castParam = ((param: any): BattleAnimationParamX<typeof sprite, BattleResult>);
     return shinBraverAttack(castParam);
-  } else if (sprite instanceof NeoLandozer) {
+  }
+
+  if (sprite instanceof NeoLandozer) {
     const castParam = ((param: any): BattleAnimationParamX<typeof sprite, BattleResult>);
     return neoLandozerAttack(castParam);
+  }
+
+  if (sprite instanceof LightningDozer) {
+    const castParam = ((param: any): BattleAnimationParamX<typeof sprite, BattleResult>);
+    return lightningDozerAttack(castParam);
   }
 
   return emptyAttackAnimation(param);

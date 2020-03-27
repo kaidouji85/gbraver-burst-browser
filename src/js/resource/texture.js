@@ -39,6 +39,9 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_GUTS_UP: 'NEO_LANDOZER_GUTS_UP',
   NEO_LANDOZER_GUTS_DOWN: 'NEO_LANDOZER_GUTS_DOWN',
   LIGHTNING_DOZER_STAND: 'LIGHTNING_DOZER_STAND',
+  LIGHTNING_DOZER_HM_CHARGE: 'LIGHTNING_DOZER_HM_CHARGE',
+  LIGHTNING_DOZER_HM_ATTACK: 'LIGHTNING_DOZER_HM_ATTACK',
+  LIGHTNING_DOZER_HM_TO_STAND: 'LIGHTNING_DOZER_HM_TO_STAND',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
@@ -134,6 +137,18 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_STAND,
     path: 'armdozer/ligjtning-dozer/stand.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_HM_CHARGE,
+    path: 'armdozer/ligjtning-dozer/hm-charge.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_HM_ATTACK,
+    path: 'armdozer/ligjtning-dozer/hm-attack.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_HM_TO_STAND,
+    path: 'armdozer/ligjtning-dozer/hm-to-stand.png',
   },
   // ヒットマーク関連
   {
