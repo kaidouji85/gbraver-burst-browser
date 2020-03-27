@@ -8,6 +8,7 @@ import type {BattleResult, CriticalHit, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
 import type {Guard} from "gbraver-burst-core/lib/effect/battle/result/guard";
 import type {Miss} from "gbraver-burst-core/lib/effect/battle/result/miss";
+import type {Feint} from "gbraver-burst-core/lib/effect/battle/result/feint";
 
 /**
  * ライトニングドーザ 戦闘アニメーション パラメータ
@@ -47,6 +48,12 @@ export function lightningDozerAttack(param: LightningDozerBattleParam<BattleResu
     return attack(castParam);
   }
 
+  if (param.result.name === 'CriticalHit') {
+    const castResult = (param.result: CriticalHit);
+    const castParam = ((param: any): LightningDozerBattleParam<AttackResult | typeof castResult>);
+    return attack(castParam);
+  }
+
   if (param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
     const castParam = ((param: any): LightningDozerBattleParam<Guard | typeof castResult>);
@@ -57,6 +64,12 @@ export function lightningDozerAttack(param: LightningDozerBattleParam<BattleResu
     const castResult = (param.result: Miss);
     const castParam = ((param: any): LightningDozerBattleParam<Miss | typeof castResult>);
     return miss(castParam);
+  }
+
+  if (param.result.name === 'Feint') {
+    const castResult = (param.result: Feint);
+    const castParam = ((param: any): LightningDozerBattleParam<Feint | typeof castResult>);
+    return feint(castParam);
   }
 
   return empty();
@@ -163,4 +176,20 @@ function down(param: LightningDozerBattleParam<DownResult>): Animate {
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       ).chain(delay(500))
   );
+}
+
+/**
+ * フェイント
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function feint(param: LightningDozerBattleParam<Feint>): Animate {
+  if (!param.result.isDefenderMoved) {
+    return empty();
+  }
+
+  return param.defenderSprite.avoid()
+    .chain(delay(500))
+    .chain(param.defenderSprite.avoidToStand());
 }
