@@ -23,21 +23,39 @@ type LightningDozerBattleParam<RESULT> = BattleAnimationParamX<LightningDozer, R
  * @return アニメーション
  */
 export function lightningDozerAttack(param: LightningDozerBattleParam<BattleResult>): Animate {
+  if (param.isDeath && param.result.name === 'NormalHit') {
+    const castResult = (param.result: NormalHit);
+    const castParam = ((param: any): LightningDozerBattleParam<DownResult | typeof castResult>);
+    return down(castParam);
+  }
+
+  if (param.isDeath && param.result.name === 'CriticalHit') {
+    const castResult = (param.result: CriticalHit);
+    const castParam = ((param: any): LightningDozerBattleParam<DownResult | typeof castResult>);
+    return down(castParam);
+  }
+
+  if (param.isDeath && param.result.name === 'Guard') {
+    const castResult = (param.result: Guard);
+    const castParam = ((param: any): LightningDozerBattleParam<DownResult | typeof castResult>);
+    return down(castParam);
+  }
+
   if (param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): BattleAnimationParamX<LightningDozer, AttackResult | typeof castResult>);
+    const castParam = ((param: any): LightningDozerBattleParam<AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
   if (param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
-    const castParam = ((param: any): BattleAnimationParamX<LightningDozer, Guard | typeof castResult>);
+    const castParam = ((param: any): LightningDozerBattleParam<Guard | typeof castResult>);
     return guard(castParam);
   }
 
   if (param.result.name === 'Miss') {
     const castResult = (param.result: Miss);
-    const castParam = ((param: any): BattleAnimationParamX<LightningDozer, Miss | typeof castResult>);
+    const castParam = ((param: any): LightningDozerBattleParam<Miss | typeof castResult>);
     return miss(castParam);
   }
 
@@ -117,5 +135,32 @@ function miss(param: LightningDozerBattleParam<Miss>): Animate {
       .chain(param.defenderSprite.avoid())
       .chain(delay(2000))
       .chain(param.defenderSprite.avoidToStand()),
+  );
+}
+
+/** ダウンが受け取れる戦闘結果 */
+type DownResult = NormalHit | Guard | CriticalHit;
+
+/**
+ * ダウン
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function down(param: LightningDozerBattleParam<DownResult>): Animate {
+  return all(
+    param.attackerSprite.charge()
+      .chain(delay(800))
+      .chain(param.attackerSprite.armHammer())
+      .chain(delay(2000))
+      .chain(param.attackerSprite.hmToStand()),
+
+    delay(1200)
+      .chain(
+        param.defenderTD.damageIndicator.popUp(param.result.damage),
+        param.defenderSprite.down(),
+        param.defenderTD.hitMark.shockWave.popUp(),
+        param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
+      ).chain(delay(500))
   );
 }
