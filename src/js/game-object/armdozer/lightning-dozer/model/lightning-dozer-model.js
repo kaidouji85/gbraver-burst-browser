@@ -5,8 +5,7 @@ export type AnimationType =
   'STAND' |
   'HM_CHARGE' |
   'HM_ATTACK' |
-  'HM_TO_STAND' |
-  'TACKLE'; // TODO 削除する
+  'HM_TO_STAND';
 
 /** ライトニングドーザのモデル */
 export type LightningDozerModel = {
