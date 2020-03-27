@@ -55,7 +55,7 @@ function attack(param: LightningDozerBattleParam<AttackResult>): Animate {
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
-      ).chain(delay(1800))
+      ).chain(delay(2500))
       .chain(param.defenderSprite.knockBackToStand()),
   );
 }
