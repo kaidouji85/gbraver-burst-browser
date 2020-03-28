@@ -17,6 +17,8 @@ import {armHammer} from "./animation/arm-hammer";
 import {hmToStand} from "./animation/hm-to-stand";
 import {knockBack} from "./animation/knock-back";
 import {knockBackToStand} from "./animation/knock-back-to-stand";
+import {avoid} from "./animation/avoid";
+import {avoidToStand} from "./animation/avoid-to-stand";
 
 /**
  *　ライトニングドーザ
@@ -115,12 +117,12 @@ export class LightningDozer implements ArmDozerSprite {
 
   /** 避け */
   avoid(): Animate {
-    return empty();
+    return avoid(this._model);
   }
 
   /** 避け -> 立ち */
   avoidToStand(): Animate {
-    return empty();
+    return avoidToStand(this._model);
   }
 
   /** ダウン */
