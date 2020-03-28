@@ -26,6 +26,5 @@ export function lightningDozerKnockBack(resources: Resources): ArmdozerAnimation
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;
-  object.position.z = 1;
   return ret;
 }
