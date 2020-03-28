@@ -9,6 +9,7 @@ import * as THREE from "three";
 import {lightningDozerHmCharge} from "../mesh/hm-charge";
 import {lightningDozerHmAttack} from "../mesh/hm-attack";
 import {lightningDozerHmToStand} from "../mesh/hm-to-stand";
+import {lightningDozerKnockBack} from "../mesh/knock-back";
 
 /**
  * プレイヤー側のライトニングドーザビュー
@@ -19,6 +20,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
   _hmCharge: ArmdozerAnimation;
   _hmAttack: ArmdozerAnimation;
   _hmToStand: ArmdozerAnimation;
+  _knockBack: ArmdozerAnimation;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -27,6 +29,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this._hmCharge = lightningDozerHmCharge(resources);
     this._hmAttack = lightningDozerHmAttack(resources);
     this._hmToStand = lightningDozerHmToStand(resources);
+    this._knockBack = lightningDozerKnockBack(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -92,6 +95,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
       this._hmCharge,
       this._hmAttack,
       this._hmToStand,
+      this._knockBack,
     ];
   }
 
@@ -109,6 +113,8 @@ export class PlayerLightingDozerView implements LightningDozerView {
         return this._hmAttack;
       case 'HM_TO_STAND':
         return this._hmToStand;
+      case 'KNOCK_BACK':
+        return this._knockBack;
       case 'STAND':
       default:
         return this._stand;
