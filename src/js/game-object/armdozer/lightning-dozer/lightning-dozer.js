@@ -15,6 +15,8 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {charge} from "./animation/charge";
 import {armHammer} from "./animation/arm-hammer";
 import {hmToStand} from "./animation/hm-to-stand";
+import {knockBack} from "./animation/knock-back";
+import {knockBackToStand} from "./animation/knock-back-to-stand";
 
 /**
  *　ライトニングドーザ
@@ -91,22 +93,24 @@ export class LightningDozer implements ArmDozerSprite {
 
   /** ノックバック */
   knockBack(): Animate {
-    return empty();
+    return knockBack(this._model);
   }
 
   /** ノックバック -> 立ちポーズ */
   knockBackToStand(): Animate {
-    return empty();
+    return knockBackToStand(this._model);
   }
 
   /** ガード */
   guard(): Animate {
-    return empty();
+    // TODO ガード専用モーションを作る
+    return knockBack(this._model);
   }
 
   /** ガード -> 立ちポーズ */
   guardToStand(): Animate {
-    return empty();
+    // TODO ガード専用モーションを作る
+    return knockBackToStand(this._model);
   }
 
   /** 避け */
