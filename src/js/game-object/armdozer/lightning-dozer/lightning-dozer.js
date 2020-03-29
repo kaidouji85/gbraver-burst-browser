@@ -19,6 +19,7 @@ import {knockBack} from "./animation/knock-back";
 import {knockBackToStand} from "./animation/knock-back-to-stand";
 import {avoid} from "./animation/avoid";
 import {avoidToStand} from "./animation/avoid-to-stand";
+import {down} from "./animation/down";
 
 /**
  *　ライトニングドーザ
@@ -127,7 +128,7 @@ export class LightningDozer implements ArmDozerSprite {
 
   /** ダウン */
   down(): Animate {
-    return empty();
+    return down(this._model);
   }
 
   /**
