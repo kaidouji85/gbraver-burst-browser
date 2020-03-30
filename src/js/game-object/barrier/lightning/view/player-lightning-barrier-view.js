@@ -7,8 +7,13 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
 import type {LightningBarrierModel} from "../model/lightning-barrier-model";
 
-const WIDTH = 200;
-const HEIGHT = 200;
+/** メッシュ幅 */
+const WIDTH = 400;
+
+/** メッシュ高 */
+const HEIGHT = 400;
+
+/** アニメーション数 */
 const MAX_ANIMATION = 8;
 
 /**

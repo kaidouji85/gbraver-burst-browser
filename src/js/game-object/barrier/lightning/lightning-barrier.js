@@ -1,7 +1,6 @@
 // @flow
 
 import * as THREE from 'three';
-import type {Resources} from "../../../resource";
 import type {LightningBarrierModel} from "./model/lightning-barrier-model";
 import type {LightningBarrierView} from "./view/lightning-barrier-view";
 import {createInitialValue} from "./model/initial-value";
