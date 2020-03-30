@@ -6,7 +6,6 @@ import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
 import {OfflineBattleRoom} from "./offline-battle-room";
 import {LightningDozerNPC} from "../npc/lightning-dozer";
-import {NeoLandozerNpc} from "../npc/neo-landozer-npc";
 
 /**
  * ダミーの戦闘ルームを生成する
