@@ -29,4 +29,13 @@ export class EmptyTDArmdozer implements TDArmdozer {
   getObject3Ds(): THREE.Object3D[] {
     return [];
   }
+
+  /**
+   * アームドーザスプライト配下に置かれるオブジェクトを取得する
+   *
+   * @return アームドーザスプライト配下に置かれるオブジェクト
+   */
+  getUnderSprite(): THREE.Object3D[] {
+    return [];
+  }
 }

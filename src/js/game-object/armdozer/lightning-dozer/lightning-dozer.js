@@ -58,6 +58,15 @@ export class LightningDozer implements ArmDozerSprite {
   }
 
   /**
+   * スプライト配下のオブジェクトを追加する
+   *
+   * @param object オブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void {
+    this._view.addObject3D(object);
+  }
+
+  /**
    * チャージ
    *
    * @return アニメーション

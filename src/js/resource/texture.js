@@ -46,6 +46,7 @@ export const TEXTURE_IDS = {
   LIGHTNING_DOZER_DOWN: 'LIGHTNING_DOZER_DOWN',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
+  BARRIER_LIGHTNING: 'BARRIER_LIGHTNING',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
   HP_NUMBER: 'HP_NUMBER',
@@ -168,6 +169,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING,
     path: 'hitmark/shock-wave/ring.png',
+  },
+  // バリア関連
+  {
+    id: TEXTURE_IDS.BARRIER_LIGHTNING,
+    path: 'barrier/lightning/lightning.png',
   },
   // バッテリー数字
   {

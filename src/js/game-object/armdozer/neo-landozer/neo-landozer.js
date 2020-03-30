@@ -48,6 +48,15 @@ export class NeoLandozer implements ArmDozerSprite {
     this._subscription.unsubscribe();
   }
 
+  /**
+   * スプライト配下のオブジェクトを追加する
+   *
+   * @param object オブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void {
+    this._view.addObject3D(object);
+  }
+
   /** チャージ */
   charge(): Animate {
     return charge(this._model);

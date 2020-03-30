@@ -76,6 +76,15 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     return this._group;
   }
 
+  /**
+   * スプライト配下にオブジェクトを追加する
+   *
+   * @param object 追加するオブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void {
+    this._group.add(object);
+  }
+
   /** 本クラスが保持する全メッシュを返す */
   _getAllMeshes(): ArmdozerAnimation[] {
     return [

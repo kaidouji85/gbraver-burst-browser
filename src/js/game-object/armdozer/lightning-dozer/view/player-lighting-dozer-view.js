@@ -70,6 +70,15 @@ export class PlayerLightingDozerView implements LightningDozerView {
   }
 
   /**
+   * スプライト配下のオブジェクトを追加する
+   *
+   * @param object オブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void {
+    this._group.add(object);
+  }
+
+  /**
    * シーンに追加するオブジェクトを取得する
    *
    * @return シーンに追加するオブジェクト
