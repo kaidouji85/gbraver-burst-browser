@@ -33,7 +33,6 @@ export class PlayerLightningBarrierView implements LightningBarrierView {
       width: WIDTH,
       height: HEIGHT,
     });
-    this._mesh.mesh.material.depthTest = false;
   }
 
   /**
