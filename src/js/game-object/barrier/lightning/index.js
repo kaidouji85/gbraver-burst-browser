@@ -9,7 +9,7 @@ import type {Resources} from "../../../resource";
  * @param resources リソース管理オブジェクト
  * @return 電撃バリア
  */
-export function playerLightningField(resources: Resources): LightningBarrierGameEffect {
+export function playerLightningBarrier(resources: Resources): LightningBarrierGameEffect {
   return new LightningBarrierGameEffect(resources);
 }
 
@@ -19,6 +19,6 @@ export function playerLightningField(resources: Resources): LightningBarrierGame
  * @param resources リソース管理オブジェクト
  * @return 電撃バリア
  */
-export function enemyLightningField(resources: Resources): LightningBarrierGameEffect {
+export function enemyLightningBarrier(resources: Resources): LightningBarrierGameEffect {
   return new LightningBarrierGameEffect(resources);
 }
