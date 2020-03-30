@@ -12,7 +12,7 @@ const MAX_ANIMATION = 8;
 /**
  * 電撃バリア
  */
-export class LightningBarrier {
+export class LightningBarrierGameEffect {
   _mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
