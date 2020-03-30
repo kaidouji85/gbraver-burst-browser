@@ -1,11 +1,11 @@
 // @flow
 
 import {Animate} from "../../../../../../../animation/animate";
-import type {BattleAnimationParamX} from "../animation-param";
+import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 import type {ArmDozerSprite} from "../../../../../../../game-object/armdozer/armdozer-sprite";
 import {empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
-import type {BattleResult, CriticalHit, Guard, NormalHit} from "gbraver-burst-core";
+import type {CriticalHit, Guard, NormalHit} from "gbraver-burst-core";
 
 /**
  * 数字表示だけをする戦闘アニメーション
@@ -13,7 +13,7 @@ import type {BattleResult, CriticalHit, Guard, NormalHit} from "gbraver-burst-co
  * @param param パラメータ
  * @return アニメーション
  */
-export function emptyAttackAnimation(param: BattleAnimationParamX<ArmDozerSprite, BattleResult>): Animate {
+export function emptyAttackAnimation(param: BattleAnimationParam): Animate {
   if (param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
     const castParam = ((param: any): BattleAnimationParamX<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
