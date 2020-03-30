@@ -21,7 +21,8 @@ export type NeoLandozerBattleAnimtionParam<RESULT> =BattleAnimationParamX<NeoLan
  */
 export function toNeoLandozerBattleAnimtionParam(param: BattleAnimationParam): ?NeoLandozerBattleAnimtionParam<BattleResult> {
   if (param.attackerSprite instanceof NeoLandozer) {
-    return ((param: any): NeoLandozerBattleAnimtionParam<BattleResult>);
+    const sprite: NeoLandozer = param.attackerSprite;
+    return ((param: any): BattleAnimationParamX<typeof sprite, typeof param.result>);
   }
   return null;
 }

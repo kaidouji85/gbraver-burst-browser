@@ -23,7 +23,8 @@ export type ShinBraverBattleAnimationParam<RESULT> = BattleAnimationParamX<ShinB
  */
 export function toShinBraverBattleAnimationParam(param: BattleAnimationParam): ?ShinBraverBattleAnimationParam<BattleResult> {
   if (param.attackerSprite instanceof ShinBraver) {
-    return ((param: any): ShinBraverBattleAnimationParam<BattleResult>);
+    const sprite: ShinBraver = param.attackerSprite;
+    return ((param: any): BattleAnimationParamX<typeof sprite, typeof param.result>);
   }
   return null;
 }
@@ -37,49 +38,49 @@ export function toShinBraverBattleAnimationParam(param: BattleAnimationParam): ?
 export function shinBraverAttack(param: ShinBraverBattleAnimationParam<BattleResult>): Animate {
   if (param.isDeath && param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): BattleAnimationParamX<ShinBraver, DownResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattleAnimationParam<DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): BattleAnimationParamX<ShinBraver, AttackResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattleAnimationParam<AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
   if (param.isDeath && param.result.name === 'CriticalHit') {
     const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): BattleAnimationParamX<ShinBraver, DownResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattleAnimationParam<DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'CriticalHit') {
     const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): BattleAnimationParamX<ShinBraver, AttackResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattleAnimationParam<AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
   if (param.isDeath && param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
-    const castParam = ((param: any): BattleAnimationParamX<ShinBraver, DownResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattleAnimationParam<DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
-    const castParam = ((param: any): BattleAnimationParamX<ShinBraver, typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattleAnimationParam<typeof castResult>);
     return guard(castParam);
   }
 
   if (param.result.name === 'Miss') {
     const castResult = (param.result: Miss);
-    const castParam = ((param: any): BattleAnimationParamX<ShinBraver, typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattleAnimationParam<typeof castResult>);
     return miss(castParam);
   }
 
   if (param.result.name === 'Feint') {
     const castResult = (param.result: Feint);
-    const castParam = ((param: any): BattleAnimationParamX<ShinBraver, typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattleAnimationParam<typeof castResult>);
     return feint(castParam);
   }
 
