@@ -3,7 +3,7 @@ import {Animate} from "../../../../../../../animation/animate";
 import {ShinBraver} from "../../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {NeoLandozer} from "../../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {shinBraverAttack, toShinBraverBattleAnimationParam} from "./shin-braver";
-import {neoLandozerAttack} from "./neo-landozer";
+import {neoLandozerAttack, toNeoLandozerBattleAnimtionParam} from "./neo-landozer";
 import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 import type {BattleResult} from "gbraver-burst-core";
@@ -24,9 +24,9 @@ export function attackAnimation(param: BattleAnimationParam): Animate {
     return shinBraverAttack(shinBraver);
   }
 
-  if (sprite instanceof NeoLandozer) {
-    const castParam = ((param: any): BattleAnimationParamX<typeof sprite, BattleResult>);
-    return neoLandozerAttack(castParam);
+  const neoLandozer = toNeoLandozerBattleAnimtionParam(param);
+  if (neoLandozer) {
+    return neoLandozerAttack(neoLandozer);
   }
 
   if (sprite instanceof LightningDozer) {
