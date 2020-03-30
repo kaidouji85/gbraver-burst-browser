@@ -14,4 +14,11 @@ export interface ShinBraverView {
 
   /** Sceneに追加するThree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
+
+  /**
+   * スプライト配下のオブジェクトを追加する
+   *
+   * @param object 追加するオブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void;
 }

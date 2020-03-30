@@ -54,7 +54,7 @@ export class ShinBraver implements ArmDozerSprite {
    * @param object オブジェクト
    */
   addObject3D(object: THREE.Object3D): void {
-    // NOP
+    this._view.addObject3D(object);
   }
 
   /** チャージ */

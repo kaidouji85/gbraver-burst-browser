@@ -12,6 +12,11 @@ export class EnemyLightningBarrier extends PlayerLightningBarrierView {
     super(resources);
   }
 
+  /**
+   * モデルをビューに反映する
+   *
+   * @param model モデル
+   */
   engage(model: LightningBarrierModel): void {
     super.engage(model);
 
