@@ -36,6 +36,7 @@ export class HorizontalAnimationMesh {
     });
     this.mesh = new THREE.Mesh(geometry, material);
     this.mesh.renderOrder = SPRITE_RENDER_ORDER;
+    this.mesh.material.depthTest = false;
   }
 
   /** デストラクタ */

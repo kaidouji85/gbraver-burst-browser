@@ -2,9 +2,7 @@
 
 import type {LightningBarrierModel} from "./lightning-barrier-model";
 import {
-  ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
 } from "../../../armdozer/position";
 
 /**
@@ -17,7 +15,7 @@ export function createInitialValue(): LightningBarrierModel {
     position: {
       x: 0,
       y: ARMDOZER_EFFECT_STANDARD_Y,
-      z: 32
+      z: 1
     }
   };
 }
