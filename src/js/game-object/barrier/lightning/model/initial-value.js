@@ -15,9 +15,9 @@ import {
 export function createInitialValue(): LightningBarrierModel {
   return {
     position: {
-      x: ARMDOZER_EFFECT_STANDARD_X,
+      x: 0,
       y: ARMDOZER_EFFECT_STANDARD_Y,
-      z: ARMDOZER_EFFECT_STANDARD_Z
+      z: 32
     }
   };
 }

@@ -48,6 +48,15 @@ export class ShinBraver implements ArmDozerSprite {
     this._subscription.unsubscribe();
   }
 
+  /**
+   * スプライト配下のオブジェクトを追加する
+   *
+   * @param object オブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void {
+    // NOP
+  }
+
   /** チャージ */
   charge(): Animate {
     return charge(this._model);

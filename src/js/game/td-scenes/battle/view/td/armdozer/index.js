@@ -25,6 +25,13 @@ export interface TDArmdozer {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): THREE.Object3D[];
+
+  /**
+   * アームドーザスプライト配下に置かれるオブジェクトを取得する
+   *
+   * @return アームドーザスプライト配下に置かれるオブジェクト
+   */
+  getUnderSprite(): THREE.Object3D[];
 }
 
 /**

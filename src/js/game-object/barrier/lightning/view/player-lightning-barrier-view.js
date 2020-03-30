@@ -33,6 +33,7 @@ export class PlayerLightningBarrierView implements LightningBarrierView {
       width: WIDTH,
       height: HEIGHT,
     });
+    //this._mesh.mesh.renderOrder -= 1;
   }
 
   /**

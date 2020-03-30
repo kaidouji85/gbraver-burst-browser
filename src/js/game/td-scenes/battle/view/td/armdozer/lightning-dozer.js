@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {LightningBarrierGameEffect} from "../../../../../../game-object/barrier/lightning/lightning-barrier";
 import {enemyLightningBarrier, playerLightningBarrier} from "../../../../../../game-object/barrier/lightning";
+import * as THREE from "three";
 
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト フィールド
@@ -49,6 +50,15 @@ class LightningiDozerTDImpl implements LightningDozerTD {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds() {
+    return [];
+  }
+
+  /**
+   * アームドーザスプライト配下に置かれるオブジェクトを取得する
+   *
+   * @return アームドーザスプライト配下に置かれるオブジェクト
+   */
+  getUnderSprite(): THREE.Object3D[] {
     return [
       this.lightningBarrier.getObject3D()
     ];
