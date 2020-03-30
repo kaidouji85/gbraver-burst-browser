@@ -20,6 +20,13 @@ export interface LightningBarrierView {
   engage(model: LightningBarrierModel): void;
 
   /**
+   * カメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
+  lookAt(camera: THREE.camera): void;
+
+  /**
    * シーンに追加するオブジェクトを取得する
    *
    * @return シーンに追加するオブジェクト

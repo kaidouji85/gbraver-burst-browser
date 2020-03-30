@@ -43,13 +43,22 @@ export class PlayerLightningBarrierView implements LightningBarrierView {
    * @param model モデル
    */
   engage(model: LightningBarrierModel): void {
-    const target = this._mesh.getObject3D();
+    const target = this.getObject3D();
     target.position.set(
       model.position.x,
       model.position.y,
       model.position.z
     );
     target.scale.set(1, 1, 1);
+  }
+
+  /** 
+   * カメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
+  lookAt(camera: THREE.Camera): void {
+    this.getObject3D().quaternion.copy(camera.quaternion);
   }
 
   /**
