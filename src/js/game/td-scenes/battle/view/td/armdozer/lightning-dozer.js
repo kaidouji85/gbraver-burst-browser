@@ -65,7 +65,7 @@ class LightningiDozerTDImpl implements LightningDozerTD {
  */
 export function playerLightningDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerTD {
   return new LightningiDozerTDImpl(state.playerId, {
-    lightningBarrier: playerLightningBarrier(resources)
+    lightningBarrier: playerLightningBarrier(resources, listener)
   });
 }
 
@@ -79,6 +79,6 @@ export function playerLightningDozerTD(resources: Resources, listener: Observabl
  */
 export function enemyLightningDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerTD {
   return new LightningiDozerTDImpl(state.playerId, {
-    lightningBarrier: enemyLightningBarrier(resources)
+    lightningBarrier: enemyLightningBarrier(resources, listener)
   });
 }

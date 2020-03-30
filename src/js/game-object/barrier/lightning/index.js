@@ -2,6 +2,10 @@
 
 import {LightningBarrierGameEffect} from "./lightning-barrier";
 import type {Resources} from "../../../resource";
+import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../../action/game-object-action";
+import {PlayerLightningBarrierView} from "./view/player-lightning-barrier-view";
+import {EnemyLightningBarrier} from "./view/enemy-lightning-barrier";
 
 /**
  * プレイヤー側 電撃バリア
@@ -9,8 +13,9 @@ import type {Resources} from "../../../resource";
  * @param resources リソース管理オブジェクト
  * @return 電撃バリア
  */
-export function playerLightningBarrier(resources: Resources): LightningBarrierGameEffect {
-  return new LightningBarrierGameEffect(resources);
+export function playerLightningBarrier(resources: Resources, listener: Observable<GameObjectAction>): LightningBarrierGameEffect {
+  const view = new PlayerLightningBarrierView(resources);
+  return new LightningBarrierGameEffect(view, listener);
 }
 
 /**
@@ -19,6 +24,7 @@ export function playerLightningBarrier(resources: Resources): LightningBarrierGa
  * @param resources リソース管理オブジェクト
  * @return 電撃バリア
  */
-export function enemyLightningBarrier(resources: Resources): LightningBarrierGameEffect {
-  return new LightningBarrierGameEffect(resources);
+export function enemyLightningBarrier(resources: Resources, listener: Observable<GameObjectAction>): LightningBarrierGameEffect {
+  const view = new EnemyLightningBarrier(resources);
+  return new LightningBarrierGameEffect(view, listener);
 }

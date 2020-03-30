@@ -1,30 +1,29 @@
 // @flow
 
 import * as THREE from 'three';
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture";
-
-const WIDTH = 200;
-const HEIGHT = 200;
-const MAX_ANIMATION = 8;
+import type {LightningBarrierModel} from "./model/lightning-barrier-model";
+import type {LightningBarrierView} from "./view/lightning-barrier-view";
+import {createInitialValue} from "./model/initial-value";
+import {Observable, Subscription} from "rxjs";
+import type {GameObjectAction} from "../../../action/game-object-action";
+import type {Update} from "../../../action/game-loop/update";
 
 /**
  * 電撃バリア
  */
 export class LightningBarrierGameEffect {
-  _mesh: HorizontalAnimationMesh;
+  _model: LightningBarrierModel;
+  _view: LightningBarrierView;
+  _subscription: Subscription;
 
-  constructor(resources: Resources) {
-    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.BARRIER_LIGHTNING);
-    const texture = textureResource
-      ? textureResource.texture
-      : new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({
-      texture: texture,
-      maxAnimation: MAX_ANIMATION,
-      width: WIDTH,
-      height: HEIGHT,
+  constructor(view: LightningBarrierView, listener: Observable<GameObjectAction>) {
+    this._model = createInitialValue();
+    this._view = view;
+    this._subscription = listener.subscribe(action => {
+      if (action.type === 'Update') {
+        this._onUpdate(action);
+      }
     });
   }
 
@@ -32,7 +31,8 @@ export class LightningBarrierGameEffect {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.destructor();
+    this._view.destructor();
+    this._subscription.unsubscribe();
   }
 
   /**
@@ -41,6 +41,15 @@ export class LightningBarrierGameEffect {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this._view.getObject3D();
+  }
+
+  /**
+   * アップデート時の処理
+   *
+   * @param action アクション
+   */
+  _onUpdate(action: Update): void {
+    this._view.engage(this._model);
   }
 }
