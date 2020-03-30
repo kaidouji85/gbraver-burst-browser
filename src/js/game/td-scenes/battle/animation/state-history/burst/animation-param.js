@@ -14,6 +14,7 @@ import type {TDArmdozer} from "../../../view/td/armdozer";
 
 /**
  * バーストアニメーションのパラメータ
+ * 本typeを直接指定してはいけない
  *
  * @type SPRITE スプライト
  * @type HUD_ARMDOZER HUDアームドーザ
