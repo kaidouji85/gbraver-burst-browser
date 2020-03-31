@@ -3,15 +3,24 @@
 import type {NPC} from "./npc";
 import type {Command, GameState, PlayerId, PlayerState} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
+import type {Armdozer} from "gbraver-burst-core/lib/player/armdozer/armdozer";
 
+/** 0バッテリー */
 const ZERO_BATTERY = {
   type: 'BATTERY_COMMAND',
   battery: 0
 };
 
 /** ライトニングドーザ NPC */
-export const LightningDozerNPC: NPC = {
-  armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.LIGHTNING_DOZER) || ArmDozers[0],
+export class LightningDozerNPC implements NPC {
+  /**
+   * アームドーザ
+   */
+  armdozer: Armdozer;
+
+  constructor() {
+    this.armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.LIGHTNING_DOZER) || ArmDozers[0];
+  }
 
   /**
    * 状態に応じたコマンドを返す
@@ -41,32 +50,47 @@ export const LightningDozerNPC: NPC = {
     }
 
     const isAttacker = lastState.activePlayerId === enemyId;
-    return isAttacker ? attackRoutine(enemy, enableCommand.command) : defenseRoutine(enemy, enableCommand.command);
-  }
-};
-
-/** 攻撃ルーチン */
-function attackRoutine(enemy: PlayerState, command: Command[]): Command {
-  const battery3 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
-
-  if (battery3) {
-    return battery3;
+    return isAttacker
+      ? this._attackRoutine(enemy, enableCommand.command)
+      : this._defenseRoutine(enemy, enableCommand.command);
   }
 
-  return ZERO_BATTERY;
-}
+  /**
+   * 攻撃ルーチン
+   *
+   * @param enemy NPCのステータス
+   * @param commands 選択可能なコマンド
+   * @return コマンド
+   */
+   _attackRoutine(enemy: PlayerState, commands: Command[]): Command {
+    const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
 
-/** 防御ルーチン */
-function defenseRoutine(enemy: PlayerState, command: Command[]): Command {
-  const battery1 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-  const battery2 = command.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
-  if (battery2) {
-    return battery2;
+    if (battery3) {
+      return battery3;
+    }
+
+    return ZERO_BATTERY;
   }
 
-  if (battery1) {
-    return battery1;
+  /**
+   * 防御ルーチン
+   *
+   * @param enemy NPCのステータス
+   * @param commands 選択可能なコマンド
+   * @return コマンド
+   */
+  _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
+    const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
+    if (battery2) {
+      return battery2;
+    }
+
+    if (battery1) {
+      return battery1;
+    }
+
+    return ZERO_BATTERY;
   }
 
-  return ZERO_BATTERY;
 }
