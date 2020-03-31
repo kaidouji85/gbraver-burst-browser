@@ -33,8 +33,10 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sceneState: B
     return empty();
   }
 
+  const isAttacker = effect.attacker === sceneState.playerId;
   return all(
     all(
+      view.td.gameObjects.turnIndicator.turnChange(isAttacker),
       attackerTD.batteryNumber.popUp(effect.attackerBattery),
       attackerTD.gauge.battery(attacker.armdozer.battery),
       defenderTD.batteryNumber.popUp(effect.defenderBattery),
