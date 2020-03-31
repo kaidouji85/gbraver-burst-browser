@@ -62,11 +62,18 @@ export class LightningDozerNPC implements NPC {
    * @param commands 選択可能なコマンド
    * @return コマンド
    */
-   _attackRoutine(enemy: PlayerState, commands: Command[]): Command {
-    const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
+  _attackRoutine(enemy: PlayerState, commands: Command[]): Command {
+    const fullAttack = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === enemy.armdozer.maxBattery);
+    const burst = commands.find(v => v.type === 'BURST_COMMAND');
+    const attackBattery = enemy.armdozer.battery - 1;
+    const attack = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === attackBattery);
 
-    if (battery3) {
-      return battery3;
+    if (fullAttack && burst) {
+      return fullAttack;
+    }
+
+    if (attack) {
+      return attack;
     }
 
     return ZERO_BATTERY;
@@ -80,10 +87,17 @@ export class LightningDozerNPC implements NPC {
    * @return コマンド
    */
   _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
+    const burst = commands.find(v => v.type === 'BURST_COMMAND');
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
-    if (battery2) {
-      return battery2;
+    const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
+    const isFullBattery = enemy.armdozer.battery === enemy.armdozer.maxBattery;
+
+    if (isFullBattery && burst && battery3) {
+      return battery3;
+    }
+
+    if (burst) {
+      return burst;
     }
 
     if (battery1) {
@@ -92,5 +106,4 @@ export class LightningDozerNPC implements NPC {
 
     return ZERO_BATTERY;
   }
-
 }
