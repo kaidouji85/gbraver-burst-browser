@@ -11,6 +11,7 @@ import {turnChangeAnimation} from "./turn-change";
 import {burstAnimation} from "./burst";
 import {startGameAnimation} from "./start-game";
 import {batteryDeclarationAnimation} from "./battery-declaration";
+import {reflectAnimation} from "./reflect";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -36,6 +37,8 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
           return turnChangeAnimation(view, sceneState, v);
         case 'BurstEffect':
           return burstAnimation(view, sceneState, v);
+        case 'Reflect':
+          return reflectAnimation(view, sceneState, v);
         default:
           return empty();
       }
