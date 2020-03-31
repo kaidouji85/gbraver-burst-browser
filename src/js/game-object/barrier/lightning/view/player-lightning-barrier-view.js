@@ -8,10 +8,10 @@ import * as THREE from "three";
 import type {LightningBarrierModel} from "../model/lightning-barrier-model";
 
 /** メッシュ幅 */
-const WIDTH = 400;
+const WIDTH = 500;
 
 /** メッシュ高 */
-const HEIGHT = 400;
+const HEIGHT = 500;
 
 /** アニメーション数 */
 const MAX_ANIMATION = 8;

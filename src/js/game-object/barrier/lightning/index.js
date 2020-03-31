@@ -25,6 +25,6 @@ export function playerLightningBarrier(resources: Resources, listener: Observabl
  * @return 電撃バリア
  */
 export function enemyLightningBarrier(resources: Resources, listener: Observable<GameObjectAction>): LightningBarrierGameEffect {
-  const view = new EnemyLightningBarrier(resources);
+  const view = new PlayerLightningBarrierView(resources);
   return new LightningBarrierGameEffect(view, listener);
 }
