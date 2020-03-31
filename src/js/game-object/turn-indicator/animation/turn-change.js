@@ -12,7 +12,7 @@ import {tween} from "../../../animation/tween";
  * @param model モデル
  * @return アニメーション
  */
-export function show(isPlayerTurn: boolean, model: TurnIndicatorModel): Animate {
+export function turnChange(isPlayerTurn: boolean, model: TurnIndicatorModel): Animate {
   return process(() => {
     model.isPlayerTurn = isPlayerTurn;
   }).chain(tween(model, t => t.to({opacity: 1}, 500)));

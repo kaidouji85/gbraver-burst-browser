@@ -10,11 +10,10 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {invisible} from "./animation/invisible";
-import {show} from "./animation/show";
+import {turnChange} from "./animation/turn-change";
 import {Animate} from "../../animation/animate";
 import {createInitialValue} from "./model/initial-value";
 import {waiting} from "./animation/waiting";
-import {process} from '../../animation/process';
 import {filter, first, map} from "rxjs/operators";
 
 /** コンストラクタのパラメータ */
@@ -70,7 +69,7 @@ export class TurnIndicator {
    * @return アニメーション
    */
   turnChange(isPlayerTurn: boolean): Animate {
-    return show(isPlayerTurn, this._model);
+    return turnChange(isPlayerTurn, this._model);
   }
 
   /**
