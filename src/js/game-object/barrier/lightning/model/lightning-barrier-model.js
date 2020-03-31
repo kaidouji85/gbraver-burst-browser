@@ -12,4 +12,9 @@ export type LightningBarrierModel = {
   },
   /** 0〜1で指定する不透明度 */
   opacity: number,
+  /** アニメーション */
+  animation: {
+    /** 0〜1で指定するアニメーションフレーム */
+    frame: number
+  },
 };
