@@ -62,6 +62,8 @@ function lightningBarrier(param: LightningDozerBurstAnimationParam<LightningBarr
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.tdObjects.turnIndicator.invisible()
+  ).chain(delay(1000)
+  ).chain(param.burstArmdozerTD.lightningBarrier.show()
   ).chain(delay(500)
   ).chain(all(
     param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),

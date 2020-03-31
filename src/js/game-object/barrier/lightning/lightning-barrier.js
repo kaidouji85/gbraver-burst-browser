@@ -12,6 +12,9 @@ import {filter, first, map} from "rxjs/operators";
 import {electrification} from "./animation/electrification";
 import {LightningBarrierView} from "./view/lightning-barrier-view";
 import type {Resources} from "../../../resource";
+import {Animate} from "../../../animation/animate";
+import {show} from "./animation/show";
+import {hidden} from "./animation/hidden";
 
 /**
  * 電撃バリア
@@ -63,6 +66,24 @@ export class LightningBarrierGameEffect {
    */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * バリアを表示する
+   *
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this._model);
+  }
+
+  /**
+   * バリアを消す
+   * 
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**
