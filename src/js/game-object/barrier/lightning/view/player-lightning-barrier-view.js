@@ -56,6 +56,7 @@ export class PlayerLightningBarrierView implements LightningBarrierView {
     );
     target.scale.set(1, 1, 1);
     this._mesh.setOpacity(model.opacity);
+    this._mesh.animate(model.animation.frame);
   }
 
   /** 
