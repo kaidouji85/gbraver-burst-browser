@@ -1,7 +1,7 @@
 // @flow
 import type {Command, GameState, Player, PlayerCommand} from "gbraver-burst-core";
 import {GbraverBurstCore} from "gbraver-burst-core";
-import type {NPC, NPCRoutine} from "../npc/npc";
+import type {NPC} from "../npc/npc";
 import type {BattleRoom, InitialState} from "./battle-room";
 
 /**

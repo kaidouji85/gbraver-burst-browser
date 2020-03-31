@@ -5,6 +5,7 @@ import type {Command, GameState, PlayerId, PlayerState} from "gbraver-burst-core
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
 import type {Armdozer} from "gbraver-burst-core/lib/player/armdozer/armdozer";
 
+/** 0バッテリー */
 const ZERO_BATTERY = {
   type: 'BATTERY_COMMAND',
   battery: 0
@@ -12,6 +13,9 @@ const ZERO_BATTERY = {
 
 /** ライトニングドーザ NPC */
 export class LightningDozerNPC implements NPC {
+  /**
+   * アームドーザ
+   */
   armdozer: Armdozer;
 
   constructor() {
