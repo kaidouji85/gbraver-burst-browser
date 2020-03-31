@@ -18,6 +18,6 @@ export function createDummyBattleRoom(): BattleRoom {
     armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
   };
   //const npc: NPC = NeoLandozerNpc;
-  const npc: NPC = LightningDozerNPC;
+  const npc: NPC = new LightningDozerNPC();
   return new OfflineBattleRoom(player, npc);
 }
