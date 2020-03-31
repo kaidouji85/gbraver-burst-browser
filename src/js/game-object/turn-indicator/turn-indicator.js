@@ -62,7 +62,6 @@ export class TurnIndicator {
    */
   turnChange(isPlayerTurn: boolean): Animate {
     return process(() => {
-      this._model.animation = 0;
       waiting(this._model, this._tween).loop();
     }).chain(
       show(isPlayerTurn, this._model)
