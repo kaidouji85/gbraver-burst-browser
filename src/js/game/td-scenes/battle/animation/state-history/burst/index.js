@@ -9,6 +9,7 @@ import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {delay, empty} from "../../../../../../animation/delay";
 import {shinBraverBurst, toShinBraverBurstParam} from "./shin-braver";
+import {lightningDozerBurst, toLightningDozerBurstAnimationParam} from "./lightning-dozer";
 
 /**
  * バーストアニメーション
@@ -38,6 +39,11 @@ function armdozerAnimation(param: BurstAnimationParam): Animate {
   const shinBraverParam = toShinBraverBurstParam(param);
   if (shinBraverParam) {
     return shinBraverBurst(shinBraverParam);
+  }
+
+  const lightningDozer = toLightningDozerBurstAnimationParam(param);
+  if (lightningDozer) {
+    return lightningDozerBurst(lightningDozer);
   }
 
   return empty();

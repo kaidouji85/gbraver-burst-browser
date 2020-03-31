@@ -5,6 +5,8 @@ import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-d
 import type {HUDArmdozer} from "../../../view/hud/armdozer";
 import {LightningDozerTD} from "../../../view/td/armdozer/lightning-dozer";
 import type {Burst} from "gbraver-burst-core/lib/player/armdozer/burst";
+import {Animate} from "../../../../../../animation/animate";
+import {empty} from "../../../../../../animation/delay";
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータ
@@ -20,7 +22,7 @@ export type LightningDozerBurstAnimationParam<BURST> = BurstAnimationParamX<Ligh
  * @param param 変換元
  * @return 変換結果
  */
-export function castLightningDozerBurstAnimationParam(param: BurstAnimationParam): ?LightningDozerBurstAnimationParam<Burst> {
+export function toLightningDozerBurstAnimationParam(param: BurstAnimationParam): ?LightningDozerBurstAnimationParam<Burst> {
   if ((param.burstSprite instanceof LightningDozer) && (param.burstArmdozerTD instanceof LightningDozerTD)) {
     const sprite: LightningDozer = param.burstSprite;
     const armdozerTD: LightningDozerTD = param.burstArmdozerTD;
@@ -28,4 +30,15 @@ export function castLightningDozerBurstAnimationParam(param: BurstAnimationParam
   }
 
   return null;
+}
+
+/**
+ * ライトニングドーザ バーストアニメーション
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+export function lightningDozerBurst(param: LightningDozerBurstAnimationParam<Burst>): Animate {
+  // TODO アニメーションを実装する
+  return empty();
 }
