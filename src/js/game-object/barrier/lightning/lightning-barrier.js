@@ -64,6 +64,11 @@ export class LightningBarrierGameEffect {
     return this._view.getObject3D();
   }
 
+  /**
+   * 初回のアップデート処理
+   *
+   * @param action アクション
+   */
   _onFirstUpdate(action: Update): void {
     electrification(this._model).loop();
   }
