@@ -6,6 +6,7 @@ import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
 import {OfflineBattleRoom} from "./offline-battle-room";
 import {LightningDozerNPC} from "../npc/lightning-dozer";
+import {NeoLandozerNPC} from "../npc/neo-landozer-npc";
 
 /**
  * ダミーの戦闘ルームを生成する
@@ -17,7 +18,7 @@ export function createDummyBattleRoom(): BattleRoom {
     playerId: 'test01',
     armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
   };
-  //const npc: NPC = NeoLandozerNpc;
-  const npc: NPC = new LightningDozerNPC();
+  const npc = new NeoLandozerNPC();
+  //const npc = new LightningDozerNPC();
   return new OfflineBattleRoom(player, npc);
 }
