@@ -17,14 +17,9 @@ interface LightningDozerTDField {
 }
 
 /**
- * 3Dレイヤー ライトニングドーザ 固有オブジェクト
- */
-export interface LightningDozerTD extends TDArmdozer, LightningDozerTDField {}
-
-/**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト 実装
  */
-class LightningiDozerTDImpl implements LightningDozerTD {
+export class LightningDozerTD implements TDArmdozer, LightningDozerTDField {
   /** プレイヤーID */
   playerId: PlayerId;
 
@@ -73,7 +68,7 @@ class LightningiDozerTDImpl implements LightningDozerTD {
  * @return 生成結果
  */
 export function playerLightningDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerTD {
-  return new LightningiDozerTDImpl(state.playerId, {
+  return new LightningDozerTD(state.playerId, {
     lightningBarrier: new LightningBarrierGameEffect(resources, listener)
   });
 }
@@ -87,7 +82,7 @@ export function playerLightningDozerTD(resources: Resources, listener: Observabl
  * @return 生成結果
  */
 export function enemyLightningDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerTD {
-  return new LightningiDozerTDImpl(state.playerId, {
+  return new LightningDozerTD(state.playerId, {
     lightningBarrier: new LightningBarrierGameEffect(resources, listener)
   });
 }
