@@ -6,7 +6,6 @@ import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {LightningBarrierGameEffect} from "../../../../../../game-object/barrier/lightning/lightning-barrier";
-import {enemyLightningBarrier, playerLightningBarrier} from "../../../../../../game-object/barrier/lightning";
 import * as THREE from "three";
 
 /**
@@ -75,7 +74,7 @@ class LightningiDozerTDImpl implements LightningDozerTD {
  */
 export function playerLightningDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerTD {
   return new LightningiDozerTDImpl(state.playerId, {
-    lightningBarrier: playerLightningBarrier(resources, listener)
+    lightningBarrier: new LightningBarrierGameEffect(resources, listener)
   });
 }
 
@@ -89,6 +88,6 @@ export function playerLightningDozerTD(resources: Resources, listener: Observabl
  */
 export function enemyLightningDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerTD {
   return new LightningiDozerTDImpl(state.playerId, {
-    lightningBarrier: enemyLightningBarrier(resources, listener)
+    lightningBarrier: new LightningBarrierGameEffect(resources, listener)
   });
 }

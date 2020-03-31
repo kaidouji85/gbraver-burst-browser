@@ -1,35 +1,78 @@
 // @flow
 
-import * as THREE from 'three';
+import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
+import type {Resources} from "../../../../resource";
+import {TEXTURE_IDS} from "../../../../resource/texture";
+import * as THREE from "three";
 import type {LightningBarrierModel} from "../model/lightning-barrier-model";
+
+/** メッシュ幅 */
+const WIDTH = 500;
+
+/** メッシュ高 */
+const HEIGHT = 500;
+
+/** アニメーション数 */
+const MAX_ANIMATION = 8;
 
 /**
  * 電撃バリアビュー
  */
-export interface LightningBarrierView {
+export class LightningBarrierView {
+  _mesh: HorizontalAnimationMesh;
+
+  constructor(resources: Resources) {
+    const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.BARRIER_LIGHTNING);
+    const texture = textureResource
+      ? textureResource.texture
+      : new THREE.Texture();
+    this._mesh = new HorizontalAnimationMesh({
+      texture: texture,
+      maxAnimation: MAX_ANIMATION,
+      width: WIDTH,
+      height: HEIGHT,
+    });
+  }
+
   /**
    * デストラクタ相当の処理
    */
-  destructor(): void;
+  destructor(): void {
+    this._mesh.destructor();
+  }
 
   /**
-   * モデルをビューに反映する
+   * モデルをビューに反映させる
    *
    * @param model モデル
    */
-  engage(model: LightningBarrierModel): void;
+  engage(model: LightningBarrierModel): void {
+    const target = this.getObject3D();
+    target.position.set(
+      model.position.x,
+      model.position.y,
+      model.position.z
+    );
+    target.scale.set(1, 1, 1);
+    this._mesh.setOpacity(model.opacity);
+    this._mesh.animate(model.animation.frame);
+  }
 
-  /**
+  /** 
    * カメラの真正面を向く
    *
    * @param camera カメラ
    */
-  lookAt(camera: THREE.camera): void;
+  lookAt(camera: THREE.Camera): void {
+    this.getObject3D().quaternion.copy(camera.quaternion);
+  }
 
   /**
    * シーンに追加するオブジェクトを取得する
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D;
+  getObject3D(): THREE.Object3D {
+    return this._mesh.getObject3D();
+  }
 }
