@@ -4,9 +4,11 @@ import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param"
 import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import type {HUDArmdozer} from "../../../view/hud/armdozer";
 import {LightningDozerTD} from "../../../view/td/armdozer/lightning-dozer";
-import type {Burst} from "gbraver-burst-core/lib/player/armdozer/burst";
+import type {Burst, LightningBarrier} from "gbraver-burst-core/lib/player/armdozer/burst";
 import {Animate} from "../../../../../../animation/animate";
-import {empty} from "../../../../../../animation/delay";
+import {delay, empty} from "../../../../../../animation/delay";
+import {all} from "../../../../../../animation/all";
+import {attentionArmDozer, toInitial} from "../../td-camera";
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータ
@@ -39,6 +41,35 @@ export function toLightningDozerBurstAnimationParam(param: BurstAnimationParam):
  * @return アニメーション
  */
 export function lightningDozerBurst(param: LightningDozerBurstAnimationParam<Burst>): Animate {
-  // TODO アニメーションを実装する
+  if (param.burst.type === 'LightningBarrier') {
+    const castBurst: LightningBarrier = param.burst;
+    const castParam= ((param: any):LightningDozerBurstAnimationParam<typeof castBurst>);
+    return lightningBarrier(castParam);
+  }
+
   return empty();
+}
+
+/**
+ * 電撃バリア
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function lightningBarrier(param: LightningDozerBurstAnimationParam<LightningBarrier>): Animate {
+  return all(
+    attentionArmDozer(param.tdCamera, param.burstSprite, 500),
+    param.tdObjects.skyBrightness.brightness(0.2, 500),
+    param.tdObjects.illumination.intensity(0.2, 500),
+    param.tdObjects.turnIndicator.invisible()
+  ).chain(delay(500)
+  ).chain(all(
+    param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
+    param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+  )).chain(delay(500)
+  ).chain(all(
+    toInitial(param.tdCamera, 500),
+    param.tdObjects.skyBrightness.brightness(1, 500),
+    param.tdObjects.illumination.intensity(1, 500),
+  )).chain(delay(500));
 }
