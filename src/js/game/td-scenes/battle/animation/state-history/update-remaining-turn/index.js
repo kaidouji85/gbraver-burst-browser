@@ -4,7 +4,7 @@ import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core";
-import {empty} from "../../../../../../animation/delay";
+import {delay, empty} from "../../../../../../animation/delay";
 import type {UpdateRemainingTurn} from "gbraver-burst-core";
 import type {PlayerId} from "gbraver-burst-core";
 import type {EndArmdozerEffectParam} from "./animation-param";
@@ -62,5 +62,6 @@ function playerUnderRemainingTurn(playerId: PlayerId, view: BattleSceneView, sce
     })
     .reduce((a, b) => a.chain(b), empty());
 
-  return endArmdozerEffectAnimation;
+  return endArmdozerEffectAnimation
+    .chain(delay(500));
 }

@@ -3,7 +3,7 @@
 import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import type {EndArmdozerEffectParam, EndArmdozerEffectParamX} from "./animation-param";
 import {LightningDozerTD} from "../../../view/td/armdozer/lightning-dozer";
-import type {ArmdozerEffect} from "gbraver-burst-core/lib/state/armdozer-effect";
+import type {ArmdozerEffect, TryReflect} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
 
@@ -38,5 +38,25 @@ export function toLightningDozerEndArmdozerEffect(param: EndArmdozerEffectParam)
  * @return アニメーション
  */
 export function lightningDozer(param: LightningDozerEndArmdozerEffect<ArmdozerEffect>): Animate {
+  if (param.endArmdozerEffect.type === 'TryReflect') {
+    const castEffect: TryReflect = param.endArmdozerEffect;
+    const castParam = ((param: any): LightningDozerEndArmdozerEffect<typeof castEffect>);
+    return tryRefrect(castParam);
+  }
+
   return empty();
+}
+
+/**
+ * 反撃
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function tryRefrect(param: LightningDozerEndArmdozerEffect<TryReflect>): Animate {
+  if (param.endArmdozerEffect.effect !== 'Lightning') {
+    return empty();
+  }
+
+  return param.tdArmdozer.lightningBarrier.hidden();
 }
