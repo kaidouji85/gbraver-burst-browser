@@ -6,9 +6,9 @@ import {LightningDozer} from "../../../../../../../game-object/armdozer/lightnin
 import {delay, empty} from "../../../../../../../animation/delay";
 import type {BattleResult, CriticalHit, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
-import type {Guard} from "gbraver-burst-core/lib/effect/battle/result/guard";
-import type {Miss} from "gbraver-burst-core/lib/effect/battle/result/miss";
-import type {Feint} from "gbraver-burst-core/lib/effect/battle/result/feint";
+import type {Guard} from "gbraver-burst-core";
+import type {Miss} from "gbraver-burst-core";
+import type {Feint} from "gbraver-burst-core";
 
 /**
  * ライトニングドーザ 戦闘アニメーション パラメータ

@@ -3,7 +3,7 @@
 import type {NPC} from "./npc";
 import type {Command, GameState, PlayerId, PlayerState} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
-import type {Armdozer} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+import type {Armdozer} from "gbraver-burst-core";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {

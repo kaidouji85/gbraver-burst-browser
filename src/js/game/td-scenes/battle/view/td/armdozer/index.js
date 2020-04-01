@@ -1,12 +1,12 @@
 // @flow
 
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {EmptyTDArmdozer} from "./empty";
-import {ArmdozerAppearances} from "gbraver-burst-core/lib/master/armdozers";
+import {ArmdozerAppearances} from "gbraver-burst-core";
 import {enemyLightningDozerTD, playerLightningDozerTD} from "./lightning-dozer";
 
 /**

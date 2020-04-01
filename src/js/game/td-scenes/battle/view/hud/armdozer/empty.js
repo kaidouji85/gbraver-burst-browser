@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {HUDArmdozer} from "./index";
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core";
 
 /**
  * 空のHUDレイヤーアームドーザ固有オブジェクト
