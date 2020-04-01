@@ -2,7 +2,7 @@
 
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDArmdozer} from "../../../view/td/armdozer";
-import type {ArmdozerEffect} from "gbraver-burst-core/lib/state/armdozer-effect";
+import type {ArmdozerEffect} from "gbraver-burst-core";
 
 /**
  * アームドーザ効果終了アニメーション パラメータ

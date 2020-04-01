@@ -5,7 +5,7 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core";
 import {empty} from "../../../../../../animation/delay";
-import type {UpdateRemainingTurn} from "gbraver-burst-core/lib/effect/update-remaning-turn/update-remaining-turn";
+import type {UpdateRemainingTurn} from "gbraver-burst-core";
 import type {PlayerId} from "gbraver-burst-core";
 import type {EndArmdozerAnimationParam} from "./animation-param";
 import {all} from "../../../../../../animation/all";
