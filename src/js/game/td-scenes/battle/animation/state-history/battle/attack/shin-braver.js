@@ -203,7 +203,5 @@ function down(param: ShinBraverBattleAnimationParam<DownResult>): Animate {
       ))
   ).chain(delay(1000))
     .chain(param.attackerSprite.punchToStand())
-    .chain(delay(1000))
-    .chain(param.attackerSprite.turnStart())
     .chain(delay(500));
 }
