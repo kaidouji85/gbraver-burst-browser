@@ -201,7 +201,5 @@ function down(param: NeoLandozerBattleAnimtionParam<DownResult>): Animate {
       )
   ).chain(delay(1000))
     .chain(param.attackerSprite.hmToStand())
-    .chain(delay(1000))
-    .chain(param.attackerSprite.turnStart())
     .chain(delay(500));
 }

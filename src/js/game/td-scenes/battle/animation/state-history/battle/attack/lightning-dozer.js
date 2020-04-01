@@ -171,7 +171,7 @@ function miss(param: LightningDozerBattleAnimationParam<Miss>): Animate {
 type DownResult = NormalHit | Guard | CriticalHit;
 
 /**
- * ダウン
+ * とどめ
  *
  * @param param パラメータ
  * @return アニメーション
