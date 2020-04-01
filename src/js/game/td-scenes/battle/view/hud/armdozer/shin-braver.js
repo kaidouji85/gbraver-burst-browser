@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {HUDArmdozer} from "./index";
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
