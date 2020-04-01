@@ -23,8 +23,17 @@ export function updateRemainingTurnAnimation(view: BattleSceneView, sceneState: 
   return all(...animations);
 }
 
+/**
+ * プレイヤー毎 効果継続ターン更新アニメーション
+ *
+ * @param playerId プレイヤーID
+ * @param view ビュー
+ * @param sceneState シーンの状態
+ * @param gameState ゲームの状態
+ * @return アニメーション
+ */
 function playerUnderRemainingTurn(playerId: PlayerId, view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
-  if (gameState.effect.name !== 'UpdateRemainingTUrn') {
+  if (gameState.effect.name !== 'UpdateRemainingTurn') {
     return empty();
   }
 
@@ -43,7 +52,7 @@ function playerUnderRemainingTurn(playerId: PlayerId, view: BattleSceneView, sce
       tdArmdozer: tdArmdozer,
       endArmdozerEffect: armdozerEffect.effect
     }))
-    .map((param: EndArmdozerAnimationParam) => {
+    .map((param: EndArmdozerAnimationParam): Animate => {
       // アームドーザゴトのパラメータに振り分ける
       return empty();
     })
