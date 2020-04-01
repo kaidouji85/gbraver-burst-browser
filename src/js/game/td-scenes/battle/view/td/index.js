@@ -107,14 +107,13 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
     this.armdozers.forEach(armdozer => {
-      const sprite = this.sprites.find(v => v.playerId === armdozer.playerId);
-      if (!sprite) {
-        return;
-      }
-
-      armdozer.getUnderSprite().forEach(v => {
-        sprite.sprite.addObject3D(v);
-      });
+      this.sprites
+        .filter(sprite => sprite.playerId === armdozer.playerId)
+        .forEach(sprite => {
+          armdozer.getUnderSprite().forEach(object3D => {
+            sprite.sprite.addObject3D(object3D);
+          });
+        })
     });
 
     this.gameObjects = createTDGameObjects(param.resources, gameObjectAction);
