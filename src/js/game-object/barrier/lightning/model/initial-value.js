@@ -15,7 +15,7 @@ export function createInitialValue(): LightningBarrierModel {
       y: ARMDOZER_EFFECT_STANDARD_Y,
       z: 1
     },
-    opacity: 1,
+    opacity: 0,
     animation: {
       frame: 0
     }

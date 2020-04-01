@@ -11,6 +11,8 @@ import {turnChangeAnimation} from "./turn-change";
 import {burstAnimation} from "./burst";
 import {startGameAnimation} from "./start-game";
 import {batteryDeclarationAnimation} from "./battery-declaration";
+import {reflectAnimation} from "./reflect";
+import {updateRemainingTurnAnimation} from "./update-remaining-turn";
 import {gameEndAnimation} from "./game-end";
 
 /**
@@ -37,6 +39,10 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
           return turnChangeAnimation(view, sceneState, v);
         case 'BurstEffect':
           return burstAnimation(view, sceneState, v);
+        case 'Reflect':
+          return reflectAnimation(view, sceneState, v);
+        case 'UpdateRemainingTurn':
+          return updateRemainingTurnAnimation(view, sceneState, v);
         case 'GameEnd':
           return gameEndAnimation(view, sceneState, v);
         default:
