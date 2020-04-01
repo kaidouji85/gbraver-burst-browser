@@ -7,8 +7,9 @@ import type {GameState} from "gbraver-burst-core";
 import {empty} from "../../../../../../animation/delay";
 import type {UpdateRemainingTurn} from "gbraver-burst-core";
 import type {PlayerId} from "gbraver-burst-core";
-import type {EndArmdozerAnimationParam} from "./animation-param";
+import type {EndArmdozerEffectParam} from "./animation-param";
 import {all} from "../../../../../../animation/all";
+import {lightningDozer, toLightningDozerEndArmdozerEffect} from "./lightning-dozer";
 
 /**
  * 効果継続ターン更新アニメーション
@@ -47,13 +48,16 @@ function playerUnderRemainingTurn(playerId: PlayerId, view: BattleSceneView, sce
   }
 
   const endArmdozerEffectAnimation: Animate = endArmdozerEffects
-    .map((armdozerEffect): EndArmdozerAnimationParam => ({
+    .map((armdozerEffect): EndArmdozerEffectParam => ({
       sprite: sprite.sprite,
       tdArmdozer: tdArmdozer,
       endArmdozerEffect: armdozerEffect.effect
     }))
-    .map((param: EndArmdozerAnimationParam): Animate => {
-      // アームドーザゴトのパラメータに振り分ける
+    .map((param: EndArmdozerEffectParam): Animate => {
+      const lightningDozerParam = toLightningDozerEndArmdozerEffect(param);
+      if (lightningDozerParam) {
+        return lightningDozer(lightningDozerParam);
+      }
       return empty();
     })
     .reduce((a, b) => a.chain(b), empty());

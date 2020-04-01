@@ -12,7 +12,7 @@ import type {ArmdozerEffect} from "gbraver-burst-core";
  * @type TD_ARMDOZER 3Dレイヤーアームドーザ固有オブジェクト
  * @type EFFECT 終了したアームドーザ効果
  */
-export type EndArmdozerAnimationParamX<SPRITE: ArmDozerSprite, TD_ARMDOZER: TDArmdozer, EFFECT> = {
+export type EndArmdozerEffectParamX<SPRITE: ArmDozerSprite, TD_ARMDOZER: TDArmdozer, EFFECT> = {
   sprite: SPRITE,
   tdArmdozer: TD_ARMDOZER,
   endArmdozerEffect: ArmdozerEffect
@@ -21,4 +21,4 @@ export type EndArmdozerAnimationParamX<SPRITE: ArmDozerSprite, TD_ARMDOZER: TDAr
 /**
  * アームドーザ効果終了アニメーション パラメータ
  */
-export type EndArmdozerAnimationParam = EndArmdozerAnimationParamX<ArmDozerSprite, TDArmdozer, ArmdozerEffect>;
+export type EndArmdozerEffectParam = EndArmdozerEffectParamX<ArmDozerSprite, TDArmdozer, ArmdozerEffect>;
