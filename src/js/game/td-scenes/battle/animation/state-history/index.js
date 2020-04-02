@@ -14,6 +14,7 @@ import {batteryDeclarationAnimation} from "./battery-declaration";
 import {reflectAnimation} from "./reflect";
 import {updateRemainingTurnAnimation} from "./update-remaining-turn";
 import {gameEndAnimation} from "./game-end";
+import {rightItselfAnimation} from "./right-itself";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -45,6 +46,8 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
           return updateRemainingTurnAnimation(view, sceneState, v);
         case 'GameEnd':
           return gameEndAnimation(view, sceneState, v);
+        case 'RightItself':
+          return rightItselfAnimation(view, sceneState, v);
         default:
           return empty();
       }
