@@ -17,8 +17,8 @@ export function popUp(model: LightningModel): Animate {
     model.animation.frame = 0;
     model.opacity = 1;
   }).chain(all(
-    tween(model.animation, t => t.to({frame: 1}, 500)),
-    tween(model, t => t.to({opacity:0.5}, 400))
+    tween(model.animation, t => t.to({frame: 1}, 700)),
+    tween(model, t => t.to({opacity:0.5}, 600))
       .chain(tween(model, t => t.to({opacity: 0}, 100))),
   ));
 }
