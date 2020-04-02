@@ -116,8 +116,7 @@ function attack(param: LightningDozerBattleAnimationParam<AttackResult>): Animat
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
-      ).chain(delay(2500))
-      .chain(param.defenderSprite.knockBackToStand()),
+      )
   );
 }
 
@@ -141,8 +140,7 @@ function guard(param: LightningDozerBattleAnimationParam<Guard>): Animate {
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
-      ).chain(delay(2500))
-      .chain(param.defenderSprite.guardToStand()),
+      )
   );
 }
 

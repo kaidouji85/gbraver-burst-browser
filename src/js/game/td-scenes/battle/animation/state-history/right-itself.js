@@ -2,9 +2,10 @@
 
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameState, RightItself} from "gbraver-burst-core";
+import type {GameState, RightItself, BattleResult} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
-import {empty} from "../../../../../animation/delay";
+import {delay, empty} from "../../../../../animation/delay";
+import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 
 /**
  * 防御側 体勢整え
@@ -25,14 +26,24 @@ export function rightItselfAnimation(view: BattleSceneView, sceneState: BattleSc
     return empty();
   }
 
-  switch(effect.battleResult.name) {
+  return getMotion(defenderSprite.sprite, effect.battleResult)
+    .chain(delay(500));
+}
+
+/**
+ * 戦闘結果に応じたモーションを取得する
+ *
+ * @param sprite スプライト
+ * @param battleResult 戦闘結果
+ * @return アニメーション
+ */
+function getMotion(sprite: ArmDozerSprite, battleResult: BattleResult): Animate {
+  switch(battleResult.name) {
     case 'NormalHit':
     case 'CriticalHit':
-      return defenderSprite.sprite.knockBackToStand();
+      return sprite.knockBackToStand();
     case 'Guard':
-      return defenderSprite.sprite.guardToStand();
-    case 'Miss':
-      return defenderSprite.sprite.avoidToStand();
+      return sprite.guardToStand();
     default:
       return empty();
   }
