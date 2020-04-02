@@ -22,6 +22,6 @@ export function createInitialValue(): LightningModel {
     animation: {
       frame: 0
     },
-    opacity: 1
+    opacity: 0
   };
 }

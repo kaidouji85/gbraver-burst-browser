@@ -11,6 +11,7 @@ import {delay} from "../../../../../../animation/delay";
  */
 export function lightning(param: ReflectAnimationParam): Animate {
   return all(
+    param.tdPlayer.hitMark.lightning.popUp(),
     param.sprite.knockBack(),
     param.tdPlayer.damageIndicator.popUp(param.effect.damage),
     param.tdPlayer.gauge.hp(param.state.armdozer.hp),
@@ -27,6 +28,7 @@ export function lightning(param: ReflectAnimationParam): Animate {
  */
 export function deathLightning(param: ReflectAnimationParam): Animate {
   return all(
+    param.tdPlayer.hitMark.lightning.popUp(),
     param.sprite.down(),
     param.tdPlayer.damageIndicator.popUp(param.effect.damage),
     param.tdPlayer.gauge.hp(param.state.armdozer.hp),

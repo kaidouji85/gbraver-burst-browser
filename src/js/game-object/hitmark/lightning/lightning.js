@@ -7,6 +7,8 @@ import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
+import {Animate} from "../../../animation/animate";
+import {popUp} from "./animation/pop-up";
 
 /**
  * 電撃ヒットマーク
@@ -31,6 +33,15 @@ export class Lightning {
    */
   destructor(): void {
     this._view.destructor();
+  }
+
+  /**
+   * エフェクトを一瞬だけ表示する
+   *
+   * @return アニメーション
+   */
+  popUp(): Animate {
+    return popUp(this._model);
   }
 
   /**

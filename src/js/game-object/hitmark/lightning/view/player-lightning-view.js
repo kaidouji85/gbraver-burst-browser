@@ -7,8 +7,11 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
 import type {LightningModel} from "../model/lightning-model";
 
-const WIDTH = 300;
-const HEIGHT = 300;
+/** メッシュ幅 */
+const WIDTH = 350;
+/** メッシュ高 */
+const HEIGHT = 350;
+/** アニメーション数 */
 const MAX_ANIMATION = 8;
 
 /**
