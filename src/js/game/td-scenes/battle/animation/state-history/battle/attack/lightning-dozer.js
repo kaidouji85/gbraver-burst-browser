@@ -205,5 +205,5 @@ function feint(param: LightningDozerBattleAnimationParam<Feint>): Animate {
 
   return param.defenderSprite.avoid()
     .chain(delay(500))
-    .chain(param.defenderSprite.avoidToStand());
+    .chain(param.defenderSprite.avoidToStand())
 }

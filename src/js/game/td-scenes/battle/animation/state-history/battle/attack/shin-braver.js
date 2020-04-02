@@ -197,7 +197,6 @@ function down(param: ShinBraverBattleAnimationParam<DownResult>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       ))
-  ).chain(delay(1000))
-    .chain(param.attackerSprite.punchToStand())
-    .chain(delay(500));
+  ).chain(delay(1000)
+  ).chain(param.attackerSprite.punchToStand());
 }
