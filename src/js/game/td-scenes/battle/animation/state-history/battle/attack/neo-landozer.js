@@ -109,8 +109,6 @@ function attack(param: NeoLandozerBattleAnimtionParam<AttackResult>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
-      .chain(delay(1300))
-      .chain(param.defenderSprite.knockBackToStand()),
   );
 }
 
@@ -135,8 +133,6 @@ function guard(param: NeoLandozerBattleAnimtionParam<Guard>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
-      .chain(delay(1300))
-      .chain(param.defenderSprite.guardToStand()),
   );
 }
 
@@ -199,7 +195,6 @@ function down(param: NeoLandozerBattleAnimtionParam<DownResult>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
       )
-  ).chain(delay(1000))
-    .chain(param.attackerSprite.hmToStand())
-    .chain(delay(500));
+  ).chain(delay(1000)
+  ).chain(param.attackerSprite.hmToStand());
 }

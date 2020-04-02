@@ -4,11 +4,8 @@ import {Animate} from "../../../../../../../animation/animate";
 import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 import {LightningDozer} from "../../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import {delay, empty} from "../../../../../../../animation/delay";
-import type {BattleResult, CriticalHit, NormalHit} from "gbraver-burst-core";
+import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
-import type {Guard} from "gbraver-burst-core";
-import type {Miss} from "gbraver-burst-core";
-import type {Feint} from "gbraver-burst-core";
 
 /**
  * ライトニングドーザ 戦闘アニメーション パラメータ
@@ -116,8 +113,7 @@ function attack(param: LightningDozerBattleAnimationParam<AttackResult>): Animat
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
-      ).chain(delay(2500))
-      .chain(param.defenderSprite.knockBackToStand()),
+      )
   );
 }
 
@@ -141,8 +137,7 @@ function guard(param: LightningDozerBattleAnimationParam<Guard>): Animate {
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
-      ).chain(delay(2500))
-      .chain(param.defenderSprite.guardToStand()),
+      )
   );
 }
 
@@ -207,5 +202,5 @@ function feint(param: LightningDozerBattleAnimationParam<Feint>): Animate {
 
   return param.defenderSprite.avoid()
     .chain(delay(500))
-    .chain(param.defenderSprite.avoidToStand());
+    .chain(param.defenderSprite.avoidToStand())
 }

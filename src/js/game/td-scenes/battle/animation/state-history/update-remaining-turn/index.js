@@ -3,10 +3,8 @@
 import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core";
+import type {GameState, PlayerId, UpdateRemainingTurn} from "gbraver-burst-core";
 import {delay, empty} from "../../../../../../animation/delay";
-import type {UpdateRemainingTurn} from "gbraver-burst-core";
-import type {PlayerId} from "gbraver-burst-core";
 import type {EndArmdozerEffectParam} from "./animation-param";
 import {all} from "../../../../../../animation/all";
 import {lightningDozer, toLightningDozerEndArmdozerEffect} from "./lightning-dozer";
