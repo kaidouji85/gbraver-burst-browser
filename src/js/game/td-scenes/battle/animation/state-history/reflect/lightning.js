@@ -12,9 +12,11 @@ import {delay} from "../../../../../../animation/delay";
 export function lightning(param: ReflectAnimationParam): Animate {
   return all(
     param.tdPlayer.hitMark.lightning.popUp(),
-    param.sprite.knockBack(),
-    param.tdPlayer.damageIndicator.popUp(param.effect.damage),
-    param.tdPlayer.gauge.hp(param.state.armdozer.hp),
+    delay(100).chain(all(
+      param.sprite.knockBack(),
+      param.tdPlayer.damageIndicator.popUp(param.effect.damage),
+      param.tdPlayer.gauge.hp(param.state.armdozer.hp),
+    ))
   ).chain(delay(500)
   ).chain(param.sprite.knockBackToStand()
   ).chain(delay(500));
@@ -29,8 +31,10 @@ export function lightning(param: ReflectAnimationParam): Animate {
 export function deathLightning(param: ReflectAnimationParam): Animate {
   return all(
     param.tdPlayer.hitMark.lightning.popUp(),
-    param.sprite.down(),
-    param.tdPlayer.damageIndicator.popUp(param.effect.damage),
-    param.tdPlayer.gauge.hp(param.state.armdozer.hp),
+    delay(100).chain(all(
+      param.sprite.down(),
+      param.tdPlayer.damageIndicator.popUp(param.effect.damage),
+      param.tdPlayer.gauge.hp(param.state.armdozer.hp),
+    ))
   ).chain(delay(500));
 }
