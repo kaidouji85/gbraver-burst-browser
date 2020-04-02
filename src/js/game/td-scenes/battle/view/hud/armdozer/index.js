@@ -2,11 +2,11 @@
 
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
+import {ArmdozerAppearances} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {enemyShinBraverHUD, playerShinBraverHUD} from "./shin-braver";
-import {ArmdozerAppearances} from "gbraver-burst-core";
 import {EmptyHUDArmdozer} from "./empty";
 
 /**

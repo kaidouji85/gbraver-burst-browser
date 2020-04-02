@@ -6,7 +6,6 @@ import {neoLandozerAttack, toNeoLandozerBattleAnimtionParam} from "./neo-landoze
 import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam} from "../animation-param";
 import {lightningDozerAttack, toLightningDozerBattleAnimationParam} from "./lightning-dozer";
-import {delay} from "../../../../../../../animation/delay";
 
 /**
  * 攻撃側スプライトに応じて、戦闘アニメーションを切り替える
