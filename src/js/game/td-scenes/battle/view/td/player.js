@@ -19,6 +19,8 @@ import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-s
 import {enemyBurstIndicator, playerBurstIndicator} from "../../../../../game-object/burst-indicator";
 import {ShockWave} from "../../../../../game-object/hitmark/shock-wave/shock-wave";
 import {enemyShockWave, playerShockWave} from "../../../../../game-object/hitmark/shock-wave";
+import {Lightning} from "../../../../../game-object/hitmark/lightning/lightning";
+import {enemyLightning, playerLightning} from "../../../../../game-object/hitmark/lightning";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -27,7 +29,8 @@ export interface TDPlayerField {
   playerId: PlayerId;
   gauge: Gauge;
   hitMark: {
-    shockWave: ShockWave
+    shockWave: ShockWave,
+    lightning: Lightning,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -61,6 +64,7 @@ export class TDPlayerImpl implements TDPlayer {
   gauge: Gauge;
   hitMark: {
     shockWave: ShockWave,
+    lightning: Lightning,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -87,6 +91,7 @@ export class TDPlayerImpl implements TDPlayer {
     this.batteryNumber.destructor();
     this.damageIndicator.destructor();
     this.hitMark.shockWave.destructor();
+    this.hitMark.lightning.destructor();
     this.recoverBattery.destructor();
     this.turnStart.destructor();
     this.burstIndicator.destructor();
@@ -101,6 +106,7 @@ export class TDPlayerImpl implements TDPlayer {
     return [
       this.gauge.getObject3D(),
       this.hitMark.shockWave.getObject3D(),
+      this.hitMark.lightning.getObject3D(),
       this.batteryNumber.getObject3D(),
       this.recoverBattery.getObject3D(),
       this.damageIndicator.getObject3D(),
@@ -129,6 +135,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     }),
     hitMark: {
       shockWave: playerShockWave(resources, listener),
+      lightning: playerLightning(resources, listener)
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
@@ -163,6 +170,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     }),
     hitMark: {
       shockWave: enemyShockWave(resources, listener),
+      lightning: enemyLightning(resources, listener)
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,
