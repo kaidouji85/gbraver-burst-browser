@@ -15,7 +15,7 @@ export function turnStartToStand(model: LightningDozerModel): Animate {
   return process(() => {
     model.animation.type = 'GUTS_TO_STAND';
     model.animation.frame = 0;
-  }).chain(tween(model.animation, t => t.to({frame: 1}, 500))
+  }).chain(tween(model.animation, t => t.to({frame: 1}, 400))
   ).chain(process(() => {
       model.animation.type = 'STAND';
       model.animation.frame = 0;
