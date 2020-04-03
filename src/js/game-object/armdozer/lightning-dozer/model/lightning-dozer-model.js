@@ -7,7 +7,9 @@ export type AnimationType =
   'HM_ATTACK' |
   'HM_TO_STAND' |
   'KNOCK_BACK' |
-  'DOWN';
+  'DOWN' |
+  'GUTS_UP' |
+  'GUTS_DOWN';
 
 /** ライトニングドーザのモデル */
 export type LightningDozerModel = {
