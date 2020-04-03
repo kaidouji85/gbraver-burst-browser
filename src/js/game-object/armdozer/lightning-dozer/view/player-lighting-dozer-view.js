@@ -11,6 +11,8 @@ import {lightningDozerHmAttack} from "../mesh/hm-attack";
 import {lightningDozerHmToStand} from "../mesh/hm-to-stand";
 import {lightningDozerKnockBack} from "../mesh/knock-back";
 import {lightningDozerDown} from "../mesh/down";
+import {lightningDozerGutsUp} from "../mesh/guts-up";
+import {lightningDozerGutsDown} from "../mesh/guts-down";
 
 /**
  * プレイヤー側のライトニングドーザビュー
@@ -23,6 +25,8 @@ export class PlayerLightingDozerView implements LightningDozerView {
   _hmToStand: ArmdozerAnimation;
   _knockBack: ArmdozerAnimation;
   _down: ArmdozerAnimation;
+  _gutsUp: ArmdozerAnimation;
+  _gutsDown: ArmdozerAnimation;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -33,6 +37,8 @@ export class PlayerLightingDozerView implements LightningDozerView {
     this._hmToStand = lightningDozerHmToStand(resources);
     this._knockBack = lightningDozerKnockBack(resources);
     this._down = lightningDozerDown(resources);
+    this._gutsUp = lightningDozerGutsUp(resources);
+    this._gutsDown = lightningDozerGutsDown(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -109,6 +115,8 @@ export class PlayerLightingDozerView implements LightningDozerView {
       this._hmToStand,
       this._knockBack,
       this._down,
+      this._gutsUp,
+      this._gutsDown,
     ];
   }
 
@@ -130,6 +138,10 @@ export class PlayerLightingDozerView implements LightningDozerView {
         return this._knockBack;
       case 'DOWN':
         return this._down;
+      case 'GUTS_UP':
+        return this._gutsUp;
+      case 'GUTS_DOWN':
+        return this._gutsDown;
       case 'STAND':
       default:
         return this._stand;

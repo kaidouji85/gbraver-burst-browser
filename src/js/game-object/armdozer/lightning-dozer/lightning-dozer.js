@@ -4,7 +4,6 @@ import type {Resources} from "../../../resource";
 import type {ArmDozerSprite} from "../armdozer-sprite";
 import * as THREE from "three";
 import {Animate} from "../../../animation/animate";
-import {empty} from "../../../animation/delay";
 import type {LightningDozerModel} from "./model/lightning-dozer-model";
 import {createInitialValue} from "./model/initial-value";
 import type {LightningDozerView} from "./view/lightning-dozer-view";
@@ -20,6 +19,8 @@ import {knockBackToStand} from "./animation/knock-back-to-stand";
 import {avoid} from "./animation/avoid";
 import {avoidToStand} from "./animation/avoid-to-stand";
 import {down} from "./animation/down";
+import {turnStart} from "./animation/turn-start";
+import {turnStartToStand} from "./animation/turn-start-to-stand";
 
 /**
  *　ライトニングドーザ
@@ -95,12 +96,12 @@ export class LightningDozer implements ArmDozerSprite {
 
   /** ターンスタート */
   turnStart(): Animate {
-    return empty();
+    return turnStart(this._model);
   }
 
   /** ターンスタート -> 立ち */
   turnStartToStand(): Animate {
-    return empty();
+    return turnStartToStand(this._model);
   }
 
   /** ノックバック */
