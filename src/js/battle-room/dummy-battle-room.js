@@ -17,7 +17,6 @@ export function createDummyBattleRoom(): BattleRoom {
     playerId: 'test01',
     armdozer: ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0]
   };
-  player.armdozer.speed = 1000; // TODO 開発が完了したら削除する
   //const npc = new NeoLandozerNPC();
   const npc = new LightningDozerNPC();
   return new OfflineBattleRoom(player, npc);
