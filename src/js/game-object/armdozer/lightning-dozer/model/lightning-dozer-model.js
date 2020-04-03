@@ -9,7 +9,8 @@ export type AnimationType =
   'KNOCK_BACK' |
   'DOWN' |
   'GUTS_UP' |
-  'GUTS_DOWN';
+  'GUTS_DOWN' |
+  'GUTS_TO_STAND';
 
 /** ライトニングドーザのモデル */
 export type LightningDozerModel = {
