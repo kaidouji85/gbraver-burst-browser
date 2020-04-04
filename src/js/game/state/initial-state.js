@@ -3,6 +3,7 @@
 import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core/lib/master/armdozers";
 import type {Player} from "gbraver-burst-core";
 import type {State} from "./state";
+import {playerUuid} from "../../uuid/player";
 
 /**
  * 初期ステータスを生成する
@@ -12,7 +13,7 @@ import type {State} from "./state";
 export function createInitialState(): State {
   const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) || ArmDozers[0];
   const player: Player = {
-    playerId: 'player',
+    playerId: playerUuid(),
     armdozer: armdozer
   };
 
