@@ -2,7 +2,7 @@
 
 import type {State} from "./state";
 import type {EndBattle} from "../../action/game/battle";
-import type {GameOver} from "gbraver-burst-core/lib/game/end-judging/game-end-judging";
+import type {GameOver} from "gbraver-burst-core";
 
 /** 最大レベル */
 export const MAX_LEVEL = 2;

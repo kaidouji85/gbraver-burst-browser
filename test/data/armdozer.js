@@ -1,6 +1,6 @@
 // @flow
 
-import type {Armdozer} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+import type {Armdozer} from "gbraver-burst-core";
 
 // TODO gbraver-burst-coreと共有する
 /**

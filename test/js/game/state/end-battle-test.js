@@ -6,7 +6,7 @@ import type {State} from "../../../../src/js/game/state/state";
 import {EMPTY_STATE} from "../../../data/state";
 import type {EndBattle} from "../../../../src/js/action/game/battle";
 import {EMPTY_PLAYER} from "../../../data/player";
-import type {Player, GameEndResult} from "gbraver-burst-core";
+import type {Player, GameOver, EvenMatch} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../data/end-battle";
 
 const player: Player = {
@@ -14,17 +14,17 @@ const player: Player = {
   playerId: 'test-player'
 };
 
-const win: GameEndResult = {
+const win: GameOver = {
   type: 'GameOver',
   winner: player.playerId
 };
 
-const lose: GameEndResult = {
+const lose: GameOver = {
   type: 'GameOver',
   winner: 'not-test-player'
 };
 
-const evenMath: GameEndResult = {
+const evenMath: EvenMatch = {
   type: 'EvenMatch'
 };
 
