@@ -23,9 +23,12 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import type {EndHowToPlay} from "../action/game/how-to-play";
 import {DOMDialogs} from "./dom-dialogs";
 import type {PushGameStart, PushHowToPlay} from "../action/game/title";
+import type {State} from "./state/state";
+import {createInitialState} from "./state/initial-state";
 
 /** ゲーム全体の管理を行う */
 export class Game {
+  _state: State;
   _serviceWorkerStream: Subject<ServiceWorkerAction>;
   _loading: Observable<LoadingAction>;
   _resize: Observable<Resize>;
@@ -38,6 +41,8 @@ export class Game {
   _subscriptions: Subscription[];
 
   constructor() {
+    this._state = createInitialState();
+
     this._serviceWorkerStream = new Subject<ServiceWorkerAction>();
     this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
