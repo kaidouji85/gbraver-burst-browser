@@ -1,7 +1,7 @@
 // @flow
 
 import test from 'ava';
-import {endBattle} from "../../../../src/js/game/state/end-battle";
+import {endBattle, MAX_LEVEL} from "../../../../src/js/game/state/end-battle";
 import type {State} from "../../../../src/js/game/state/state";
 import {EMPTY_STATE} from "../../../data/state";
 import type {EndBattle} from "../../../../src/js/action/game/battle";
@@ -79,6 +79,24 @@ test('引き分けの場合はレベルがそのまま', t => {
     gameEnd: {
       ...EMPTY_END_BATTLE.gameEnd,
       result: evenMath
+    }
+  };
+
+  const result = endBattle(state, action);
+  t.deepEqual(result, state);
+});
+
+test('戦闘に勝利しても最大レベルの場合にはそのまま', t => {
+  const state: State = {
+    ...EMPTY_STATE,
+    player: player,
+    level: MAX_LEVEL
+  };
+  const action: EndBattle = {
+    ...EMPTY_END_BATTLE,
+    gameEnd: {
+      ...EMPTY_END_BATTLE.gameEnd,
+      result: win
     }
   };
 
