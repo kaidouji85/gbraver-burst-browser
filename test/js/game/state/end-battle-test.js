@@ -37,3 +37,32 @@ test('戦闘に勝利した場合はレベルが+1される', t => {
   };
   t.deepEqual(result, expected);
 });
+
+test('戦闘に敗北した場合はレベルがそのまま', t => {
+  const player: Player = {
+    ...EMPTY_PLAYER,
+    playerId: 'test-player'
+  };
+  const state: State = {
+    ...EMPTY_STATE,
+    player: player,
+    level: 1
+  };
+  const action: EndBattle = {
+    ...EMPTY_END_BATTLE,
+    gameEnd: {
+      ...EMPTY_END_BATTLE.gameEnd,
+      result: {
+        type: 'GameOver',
+        winner: 'not-test-player'
+      }
+    }
+  };
+
+  const result = endBattle(state, action);
+  const expected = {
+    ...state,
+    level: 1
+  };
+  t.deepEqual(result, expected);
+});
