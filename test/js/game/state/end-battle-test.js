@@ -7,6 +7,7 @@ import {EMPTY_STATE} from "../../../data/state";
 import type {EndBattle} from "../../../../src/js/action/game/battle";
 import {EMPTY_PLAYER} from "../../../data/player";
 import type {Player} from "gbraver-burst-core";
+import {EMPTY_END_BATTLE} from "../../../data/end-battle";
 
 test('戦闘に勝利した場合はレベルが+1される', t => {
   const player: Player = {
@@ -19,9 +20,9 @@ test('戦闘に勝利した場合はレベルが+1される', t => {
     level: 1
   };
   const action: EndBattle = {
-    type: 'endBattle',
+    ...EMPTY_END_BATTLE,
     gameEnd: {
-      name: 'GameEnd',
+      ...EMPTY_END_BATTLE.gameEnd,
       result: {
         type: 'GameOver',
         winner: player.playerId

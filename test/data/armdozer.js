@@ -2,7 +2,7 @@
 
 import type {Armdozer} from "gbraver-burst-core/lib/player/armdozer/armdozer";
 
-// TODO gbraver-burst-coreからインポートする
+// TODO gbraver-burst-coreと共有する
 /**
  * 空のアームドーザ
  */
