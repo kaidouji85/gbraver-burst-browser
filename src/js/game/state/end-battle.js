@@ -31,3 +31,4 @@ export function battleEnd(origin: State, action: EndBattle): State {
     level: updatedLevel
   };
 }
+
