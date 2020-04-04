@@ -21,6 +21,8 @@ import {avoidToStand} from "./animation/avoid-to-stand";
 import {down} from "./animation/down";
 import {turnStart} from "./animation/turn-start";
 import {turnStartToStand} from "./animation/turn-start-to-stand";
+import {guard} from "./animation/guard";
+import {guardToStand} from "./animation/guard-to-stand";
 
 /**
  *　ライトニングドーザ
@@ -116,14 +118,12 @@ export class LightningDozer implements ArmDozerSprite {
 
   /** ガード */
   guard(): Animate {
-    // TODO ガード専用モーションを作る
-    return knockBack(this._model);
+    return guard(this._model);
   }
 
   /** ガード -> 立ちポーズ */
   guardToStand(): Animate {
-    // TODO ガード専用モーションを作る
-    return knockBackToStand(this._model);
+    return guardToStand(this._model);
   }
 
   /** 避け */

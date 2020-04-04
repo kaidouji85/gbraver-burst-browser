@@ -21,5 +21,5 @@ export function guard(model: NeoLandozerModel): Animate {
   return all(
     motion,
     position
-  )
+  );
 }
