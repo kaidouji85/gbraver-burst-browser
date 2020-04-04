@@ -10,7 +10,6 @@ import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {createServiceWorkerActionListener} from "../action/service-worker/create-listener";
 import {resourceBasePath} from "../resource/resource-base-path";
-import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
@@ -23,9 +22,14 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import type {EndHowToPlay} from "../action/game/how-to-play";
 import {DOMDialogs} from "./dom-dialogs";
 import type {PushGameStart, PushHowToPlay} from "../action/game/title";
+import type {State} from "./state/state";
+import {createInitialState} from "./state/initial-state";
+import {createBattleRoom} from "./state/battle-room";
+import {endBattle} from "./state/end-battle";
 
 /** ゲーム全体の管理を行う */
 export class Game {
+  _state: State;
   _serviceWorkerStream: Subject<ServiceWorkerAction>;
   _loading: Observable<LoadingAction>;
   _resize: Observable<Resize>;
@@ -38,6 +42,8 @@ export class Game {
   _subscriptions: Subscription[];
 
   constructor() {
+    this._state = createInitialState();
+
     this._serviceWorkerStream = new Subject<ServiceWorkerAction>();
     this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
@@ -107,7 +113,7 @@ export class Game {
 
       const resources = await loadAllResource(`${resourceBasePath()}/`);
       this._resources = resources;
-      const room = createDummyBattleRoom();
+      const room = createBattleRoom(this._state);
       const initialState = await room.start();
       this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
@@ -141,10 +147,12 @@ export class Game {
       if (!this._resources) {
         return;
       }
-
       const resources: Resources = this._resources;
-      const room = createDummyBattleRoom();
+
+      this._state = endBattle(this._state, action);
+      const room = createBattleRoom(this._state);
       const initialState = await room.start();
+
       this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
       throw e;
