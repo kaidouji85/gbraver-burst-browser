@@ -25,6 +25,8 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {PushGameStart, PushHowToPlay} from "../action/game/title";
 import type {State} from "./state/state";
 import {createInitialState} from "./state/initial-state";
+import {createBattleRoom} from "./state/battle-room";
+import {endBattle} from "./state/end-battle";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -112,7 +114,7 @@ export class Game {
 
       const resources = await loadAllResource(`${resourceBasePath()}/`);
       this._resources = resources;
-      const room = createDummyBattleRoom();
+      const room = createBattleRoom(this._state);
       const initialState = await room.start();
       this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
@@ -146,10 +148,12 @@ export class Game {
       if (!this._resources) {
         return;
       }
-
       const resources: Resources = this._resources;
-      const room = createDummyBattleRoom();
+
+      this._state = endBattle(this._state, action);
+      const room = createBattleRoom(this._state);
       const initialState = await room.start();
+
       this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
       throw e;

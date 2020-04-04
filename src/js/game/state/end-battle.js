@@ -14,7 +14,7 @@ export const MAX_LEVEL = 2;
  * @param action 戦闘終了アクション
  * @return 更新結果
  */
-export function battleEnd(origin: State, action: EndBattle): State {
+export function endBattle(origin: State, action: EndBattle): State {
   if (action.gameEnd.result.type !== 'GameOver') {
     return origin;
   }
