@@ -6,14 +6,25 @@ import type {State} from "../../../../src/js/game/state/state";
 import {EMPTY_STATE} from "../../../data/state";
 import type {EndBattle} from "../../../../src/js/action/game/battle";
 import {EMPTY_PLAYER} from "../../../data/player";
-import type {Player} from "gbraver-burst-core";
+import type {Player, GameEndResult} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../data/end-battle";
 
+const player: Player = {
+  ...EMPTY_PLAYER,
+  playerId: 'test-player'
+};
+
+const win: GameEndResult = {
+  type: 'GameOver',
+  winner: player.playerId
+};
+
+const lose: GameEndResult = {
+  type: 'GameOver',
+  winner: 'not-test-player'
+};
+
 test('戦闘に勝利した場合はレベルが+1される', t => {
-  const player: Player = {
-    ...EMPTY_PLAYER,
-    playerId: 'test-player'
-  };
   const state: State = {
     ...EMPTY_STATE,
     player: player,
@@ -23,10 +34,7 @@ test('戦闘に勝利した場合はレベルが+1される', t => {
     ...EMPTY_END_BATTLE,
     gameEnd: {
       ...EMPTY_END_BATTLE.gameEnd,
-      result: {
-        type: 'GameOver',
-        winner: player.playerId
-      }
+      result: win
     }
   };
 
@@ -39,10 +47,6 @@ test('戦闘に勝利した場合はレベルが+1される', t => {
 });
 
 test('戦闘に敗北した場合はレベルがそのまま', t => {
-  const player: Player = {
-    ...EMPTY_PLAYER,
-    playerId: 'test-player'
-  };
   const state: State = {
     ...EMPTY_STATE,
     player: player,
@@ -52,10 +56,7 @@ test('戦闘に敗北した場合はレベルがそのまま', t => {
     ...EMPTY_END_BATTLE,
     gameEnd: {
       ...EMPTY_END_BATTLE.gameEnd,
-      result: {
-        type: 'GameOver',
-        winner: 'not-test-player'
-      }
+      result: lose
     }
   };
 
@@ -66,3 +67,4 @@ test('戦闘に敗北した場合はレベルがそのまま', t => {
   };
   t.deepEqual(result, expected);
 });
+
