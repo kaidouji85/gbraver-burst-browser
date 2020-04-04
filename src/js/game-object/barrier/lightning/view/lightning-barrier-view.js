@@ -53,7 +53,7 @@ export class LightningBarrierView {
       model.position.y,
       model.position.z
     );
-    target.scale.set(1, 1, 1);
+    target.scale.set(model.scale, model.scale, model.scale);
     this._mesh.setOpacity(model.opacity);
     this._mesh.animate(model.animation.frame);
   }

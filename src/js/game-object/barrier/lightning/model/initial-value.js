@@ -16,6 +16,7 @@ export function createInitialValue(): LightningBarrierModel {
       z: 1
     },
     opacity: 0,
+    scale: 1,
     animation: {
       frame: 0
     }
