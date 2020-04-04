@@ -18,6 +18,7 @@ import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
+import type {GameEnd} from "gbraver-burst-core/lib/effect/game-end/game-end";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -136,7 +137,7 @@ export class BattleScene implements Scene {
         battery: action.battery
       });
       if (lastState && lastState.effect.name === 'GameEnd') {
-        this._onEndGame();
+        this._onEndGame(lastState.effect);
         return;
       }
 
@@ -161,7 +162,7 @@ export class BattleScene implements Scene {
       await invisibleUI(this._view).play();
       const lastState = await this._progressGame({type: 'BURST_COMMAND'});
       if (lastState && lastState.effect.name === 'GameEnd') {
-        this._onEndGame();
+        this._onEndGame(lastState.effect);
         return;
       }
 
@@ -213,11 +214,14 @@ export class BattleScene implements Scene {
   }
 
   /** ゲーム終了時の処理 */
-  async _onEndGame(): Promise<void> {
+  async _onEndGame(gameEnd: GameEnd): Promise<void> {
     try {
       const animation = this._view.hud.gameObjects.frontmostFader.fadeOut();
       await animation.play();
-      this._endBattle.next({type: 'endBattle'});
+      this._endBattle.next({
+        type: 'endBattle',
+        gameEnd: gameEnd
+      });
     } catch(e) {
       throw e;
     }

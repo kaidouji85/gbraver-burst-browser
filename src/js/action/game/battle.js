@@ -1,10 +1,10 @@
 // @flow
 
-/**
- * 戦闘シーン -> ゲーム に通知するアクションをまとめたもの
- */
+import type {GameEnd} from "gbraver-burst-core";
 
 /** 戦闘終了 */
 export type EndBattle = {
-  type: 'endBattle'
+  type: 'endBattle',
+  /** ゲーム終了情報 */
+  gameEnd: GameEnd,
 }
