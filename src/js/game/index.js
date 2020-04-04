@@ -10,7 +10,6 @@ import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {createServiceWorkerActionListener} from "../action/service-worker/create-listener";
 import {resourceBasePath} from "../resource/resource-base-path";
-import {createDummyBattleRoom} from "../battle-room/dummy-battle-room";
 import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";

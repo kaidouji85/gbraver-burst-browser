@@ -18,7 +18,7 @@ import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
-import type {GameEnd} from "gbraver-burst-core/lib/effect/game-end/game-end";
+import type {GameEnd} from "gbraver-burst-core";
 
 /** コンストラクタのパラメータ */
 type Param = {
