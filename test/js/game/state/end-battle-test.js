@@ -24,6 +24,10 @@ const lose: GameEndResult = {
   winner: 'not-test-player'
 };
 
+const evenMath: GameEndResult = {
+  type: 'EvenMatch'
+};
+
 test('戦闘に勝利した場合はレベルが+1される', t => {
   const state: State = {
     ...EMPTY_STATE,
@@ -61,10 +65,23 @@ test('戦闘に敗北した場合はレベルがそのまま', t => {
   };
 
   const result = endBattle(state, action);
-  const expected = {
-    ...state,
-    level: 1
-  };
-  t.deepEqual(result, expected);
+  t.deepEqual(result, state);
 });
 
+test('引き分けの場合はレベルがそのまま', t => {
+  const state: State = {
+    ...EMPTY_STATE,
+    player: player,
+    level: 1
+  };
+  const action: EndBattle = {
+    ...EMPTY_END_BATTLE,
+    gameEnd: {
+      ...EMPTY_END_BATTLE.gameEnd,
+      result: evenMath
+    }
+  };
+
+  const result = endBattle(state, action);
+  t.deepEqual(result, state);
+});
