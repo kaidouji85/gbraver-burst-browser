@@ -18,6 +18,13 @@ export interface LightningDozerView {
   engage(model: LightningDozerModel): void;
 
   /**
+   * スプライト配下のオブジェクトを追加する
+   *
+   * @param object オブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void;
+
+  /**
    * シーンに追加するオブジェクトを取得する
    *
    * @return シーンに追加するオブジェクト

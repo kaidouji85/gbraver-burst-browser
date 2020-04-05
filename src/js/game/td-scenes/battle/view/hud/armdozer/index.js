@@ -1,11 +1,13 @@
 // @flow
 
 import * as THREE from 'three';
-import type {Player, PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {Player, PlayerId} from "gbraver-burst-core";
+import {ArmdozerAppearances} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {enemyShinBraverHUD, playerShinBraverHUD} from "./shin-braver";
+import {EmptyHUDArmdozer} from "./empty";
 
 /**
  * HUDレイヤー アームドーザ固有のオブジェクトを集めたもの
@@ -33,7 +35,12 @@ export interface HUDArmdozer {
  * @return HUDアームドーザ
  */
 export function playerArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozer {
-  return playerShinBraverHUD(resources, listener, state);
+  switch (state.armdozer.appearance) {
+    case ArmdozerAppearances.SHIN_BRAVER:
+      return playerShinBraverHUD(resources, listener, state);
+    default:
+      return new EmptyHUDArmdozer(state);
+  }
 }
 
 /**
@@ -45,5 +52,10 @@ export function playerArmdozerHUD(resources: Resources, listener: Observable<Gam
  * @return HUDアームドーザ
  */
 export function enemyArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozer {
-  return enemyShinBraverHUD(resources, listener, state);
+  switch (state.armdozer.appearance) {
+    case ArmdozerAppearances.SHIN_BRAVER:
+      return enemyShinBraverHUD(resources, listener, state);
+    default:
+      return new EmptyHUDArmdozer(state);
+  }
 }

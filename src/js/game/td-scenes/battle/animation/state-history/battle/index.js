@@ -23,6 +23,6 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
   }
 
   return attackAnimation(param)
-    .chain(delay(500));
+    .chain(delay(1000));
 }
 

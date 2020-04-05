@@ -14,4 +14,11 @@ export interface NeoLandozerView {
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D;
+
+  /**
+   * スプライト配下にオブジェクトを追加する
+   *
+   * @param object 追加するオブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void;
 }

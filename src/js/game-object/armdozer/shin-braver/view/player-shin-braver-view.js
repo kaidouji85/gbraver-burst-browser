@@ -68,6 +68,15 @@ export class PlayerShinBraverView implements ShinBraverView {
     activeMesh.animate(model.animation.frame);
   }
 
+  /**
+   * スプライト配下のオブジェクトを追加する
+   *
+   * @param object 追加するオブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void {
+    this._group.add(object);
+  }
+
   /** カメラの真正面を向く */
   lookAt(camera: THREE.Camera): void {
     this._group.quaternion.copy(camera.quaternion);

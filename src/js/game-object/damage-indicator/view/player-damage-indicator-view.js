@@ -48,9 +48,27 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
   /** モデルをビューに反映させる */
   engage(model: DamageIndicatorModel): void {
-    this._refreshValue(model);
-    this._refreshPos();
-    this._refreshOpacity(model);
+    const values: number[] = String(model.damage)
+      .split('')
+      .map(v => Number(v));
+    this._numbers.forEach((mesh, index: number) => {
+      const hasValue = (index in values);
+      const value = hasValue
+        ? values[index]
+        : 0;
+      const animate =value / MAX_ANIMATION;
+      const positionX = index * MESH_SIZE -(values.length - 1) * MESH_SIZE / 2;
+      const opacity = hasValue
+        ? model.opacity
+        : 0;
+      mesh.animate(animate);
+      mesh.getObject3D().position.x = positionX;
+      mesh.setOpacity(opacity);
+    });
+
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
+    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
+    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
   }
 
   /** カメラの方向を向く */
@@ -61,30 +79,5 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._group;
-  }
-
-  /** ダメージ数字を更新する */
-  _refreshValue(model: DamageIndicatorModel): void {
-    const values = String(model.damage)
-      .split('')
-      .map(v => Number(v));
-    R.zip(this._numbers, values).forEach(([mesh, v], index) => {
-      mesh.animate(v / MAX_ANIMATION);
-      mesh.getObject3D().position.x = index * MESH_SIZE -(values.length - 1) * MESH_SIZE / 2
-    });
-  }
-
-  /** 座標を更新する */
-  _refreshPos(): void {
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
-    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
-  }
-
-  /** 透明度を更新する */
-  _refreshOpacity(model: DamageIndicatorModel): void {
-    this._numbers.forEach(v => {
-      v.setOpacity(model.opacity);
-    });
   }
 }

@@ -14,5 +14,5 @@ export function avoidToStand(model: NeoLandozerModel): Animate {
     tween(model.position, t => t
       .to({x: '-100'}, 500)
     )
-  )
+  );
 }

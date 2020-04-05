@@ -13,5 +13,5 @@ export function avoid(model: NeoLandozerModel): Animate {
   }).chain(
     tween(model.position, t =>
       t.to({x: '+100'}, 150))
-  )
+  );
 }

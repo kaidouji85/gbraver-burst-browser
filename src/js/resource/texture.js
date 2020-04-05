@@ -39,8 +39,19 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_GUTS_UP: 'NEO_LANDOZER_GUTS_UP',
   NEO_LANDOZER_GUTS_DOWN: 'NEO_LANDOZER_GUTS_DOWN',
   LIGHTNING_DOZER_STAND: 'LIGHTNING_DOZER_STAND',
+  LIGHTNING_DOZER_HM_CHARGE: 'LIGHTNING_DOZER_HM_CHARGE',
+  LIGHTNING_DOZER_HM_ATTACK: 'LIGHTNING_DOZER_HM_ATTACK',
+  LIGHTNING_DOZER_HM_TO_STAND: 'LIGHTNING_DOZER_HM_TO_STAND',
+  LIGHTNING_DOZER_KNOCK_BACK: 'LIGHTNING_DOZER_KNOCK_BACK',
+  LIGHTNING_DOZER_DOWN: 'LIGHTNING_DOZER_DOWN',
+  LIGHTNING_DOZER_GUTS_UP: 'LIGHTNING_DOZER_GUTS_UP',
+  LIGHTNING_DOZER_GUTS_DOWN: 'LIGHTNING_DOZER_GUTS_DOWN',
+  LIGHTNING_DOZER_GUTS_TO_STAND: 'LIGHTNING_DOZER_GUTS_TO_STAND',
+  LIGHTNING_DOZER_GUARD: 'LIGHTNING_DOZER_GUARD',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
+  HITMARK_LIGHTNING_RING: 'HITMARK_LIGHTNING_RING',
+  BARRIER_LIGHTNING: 'BARRIER_LIGHTNING',
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
   HP_NUMBER: 'HP_NUMBER',
@@ -135,6 +146,42 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.LIGHTNING_DOZER_STAND,
     path: 'armdozer/ligjtning-dozer/stand.png',
   },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_HM_CHARGE,
+    path: 'armdozer/ligjtning-dozer/hm-charge.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_HM_ATTACK,
+    path: 'armdozer/ligjtning-dozer/hm-attack.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_HM_TO_STAND,
+    path: 'armdozer/ligjtning-dozer/hm-to-stand.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_KNOCK_BACK,
+    path: 'armdozer/ligjtning-dozer/knock-back.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_DOWN,
+    path: 'armdozer/ligjtning-dozer/down.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_GUTS_UP,
+    path: 'armdozer/ligjtning-dozer/guts-up.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_GUTS_DOWN,
+    path: 'armdozer/ligjtning-dozer/guts-down.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_GUTS_TO_STAND,
+    path: 'armdozer/ligjtning-dozer/guts-to-stand.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_GUARD,
+    path: 'armdozer/ligjtning-dozer/guard.png',
+  },
   // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
@@ -143,6 +190,15 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING,
     path: 'hitmark/shock-wave/ring.png',
+  },
+  {
+    id: TEXTURE_IDS.HITMARK_LIGHTNING_RING,
+    path: 'hitmark/lightning/lightning-ring.png',
+  },
+  // バリア関連
+  {
+    id: TEXTURE_IDS.BARRIER_LIGHTNING,
+    path: 'barrier/lightning/lightning.png',
   },
   // バッテリー数字
   {
