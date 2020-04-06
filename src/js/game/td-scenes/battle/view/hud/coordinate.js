@@ -21,8 +21,8 @@ export function toHUDCoordinate(tdCoordinate: Coordinate, camera: THREE.Perspect
   const origin = new THREE.Vector3(tdCoordinate.x, tdCoordinate.y, tdCoordinate.z);
   origin.project(camera);
   return {
-    x: origin.x * rendererDOM.clientWidth,
-    y: origin.y * rendererDOM.clientHeight,
+    x: origin.x * rendererDOM.clientWidth / 2,
+    y: origin.y * rendererDOM.clientHeight / 2,
     z: origin.z
   };
 }

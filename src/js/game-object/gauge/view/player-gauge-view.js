@@ -10,13 +10,11 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {PlayerHpBar} from "./player-hp-bar";
 import {HpNumber} from "./hp-number";
 import {PlayerBatteryGauge} from "./player-battery-gauge";
-import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../armdozer/position";
 
+/** キャンバスの大きさ */
 export const BASE_CANVAS_SIZE = 1024;
+
+/** 基本拡大率 */
 export const SCALE = 0.3;
 
 /** プレイヤーゲージのビュー */
