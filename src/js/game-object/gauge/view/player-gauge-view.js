@@ -91,9 +91,9 @@ export class PlayerGaugeView implements GaugeView {
 
   /** 座標をセットする */
   _setPos(): void {
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
-    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y + 200;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
+    this._group.position.x = 100;
+    this._group.position.y = 0;
+    this._group.position.z = 0;
   }
 
   /** カメラの真正面を向く */

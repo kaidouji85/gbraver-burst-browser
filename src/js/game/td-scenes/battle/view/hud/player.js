@@ -6,7 +6,7 @@ import {Gauge} from "../../../../../game-object/gauge/gauge";
 import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
-import {playerGauge} from "../../../../../game-object/gauge";
+import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
@@ -78,7 +78,7 @@ export function playerHUDObjects(resources: Resources, state: Player, listener: 
 export function enemyHUDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): HUDPlayer {
   return new HUDPlayer({
     playerId: state.playerId,
-    gauge: playerGauge({
+    gauge: enemyGauge({
       resources: resources,
       listener: listener,
       hp: state.armdozer.maxHp,

@@ -19,6 +19,7 @@ import type {SafeAreaInset} from "../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../action/resize/resize";
 import type {HUDArmdozer} from "./armdozer";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer";
+import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -46,6 +47,7 @@ type Notifier = {
 export class HudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
+  playres: HUDPlayer[];
   armdozers: HUDArmdozer[];
   gameObjects: HUDGameObjects;
 
@@ -74,6 +76,16 @@ export class HudLayer {
       || param.players[0];
     this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
+
+    this.playres = param.players.map(v => v.playerId === param.playerId
+      ? playerHUDObjects(param.resources, v, gameObjectAction)
+      : enemyHUDObjects(param.resources, v, gameObjectAction)
+    );
+    this.playres.map(v => v.getObject3Ds())
+      .flat()
+      .forEach(v => {
+        this.scene.add(v);
+      });
 
     this.armdozers = param.players.map(v => v.playerId === param.playerId
       ? playerArmdozerHUD(param.resources, gameObjectAction, v)
