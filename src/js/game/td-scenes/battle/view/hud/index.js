@@ -20,6 +20,20 @@ import type {Resize} from "../../../../../action/resize/resize";
 import type {HUDArmdozer} from "./armdozer";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
+import {ThreeDimensionLayer} from "../td";
+
+/**
+ * HUDレイヤーのゲームループ
+ */
+export type HUDGameLoop =  {
+  /** ゲームループアクション */
+  action: GameLoop,
+  /**
+   * 3Dレイヤー
+   * 同レイヤーのオブジェクトをトラッキングするために使用する想定
+   */
+  td: ThreeDimensionLayer,
+};
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -29,7 +43,7 @@ export type Param = {
   playerId: PlayerId,
   players: Player[],
   listener: {
-    gameLoop: Observable<GameLoop>,
+    gameLoop: Observable<HUDGameLoop>,
     domEvent: Observable<TdDOMEvent>,
     resize: Observable<Resize>,
   }

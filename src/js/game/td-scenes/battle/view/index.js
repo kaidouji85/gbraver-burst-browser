@@ -11,6 +11,7 @@ import type {Render} from "../../../../action/game-loop/render";
 import TWEEN from "@tweenjs/tween.js";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../action/resize/resize";
+import type {HUDGameLoop} from "./hud";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -37,9 +38,8 @@ type Notifier = {
 export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
-
   _gameLoop3D: Subject<GameLoop>;
-  _gameLoopHUD: Subject<GameLoop>;
+  _gameLoopHUD: Subject<HUDGameLoop>;
 
   constructor(param: Param) {
     const safeAreaInset = createSafeAreaInset();
@@ -103,6 +103,9 @@ export class BattleSceneView {
   _gameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
     this._gameLoop3D.next(action);
-    this._gameLoopHUD.next(action);
+    this._gameLoopHUD.next({
+      action: action,
+      td: this.td
+    });
   }
 }
