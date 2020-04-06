@@ -69,6 +69,7 @@ export class HudLayer {
   armdozers: HUDArmdozer[];
   gameObjects: HUDGameObjects;
 
+  _playerId: PlayerId;
   _rendererDOM: HTMLElement;
   _safeAreaInset: SafeAreaInset;
   _update: Subject<Update>;
@@ -78,6 +79,7 @@ export class HudLayer {
   _subscription: Subscription[];
 
   constructor(param: Param) {
+    this._playerId = param.playerId;
     this._rendererDOM = param.rendererDOM;
     this._safeAreaInset = param.safeAreaInset;
     this._update = new Subject();
@@ -180,12 +182,25 @@ export class HudLayer {
    * @param td 3Dレイヤー
    */
   _tracking(td: ThreeDimensionLayer): void {
-    const tdArmdozerEffectPos = {
+    const tdPlayerEffect = {
       x: ARMDOZER_EFFECT_STANDARD_X,
       y: ARMDOZER_EFFECT_STANDARD_Y,
       z: ARMDOZER_EFFECT_STANDARD_Z
     };
-    const hudArmdozerEffectPos = toHUDCoordinate(tdArmdozerEffectPos, td.camera.getCamera(), this._rendererDOM);
+    const tdEnemyEffect = {
+      x: -ARMDOZER_EFFECT_STANDARD_X,
+      y: ARMDOZER_EFFECT_STANDARD_Y,
+      z: ARMDOZER_EFFECT_STANDARD_Z
+    };
+    const hudPlayerEffect = toHUDCoordinate(tdPlayerEffect, td.camera.getCamera(), this._rendererDOM);
+    const hudEnemyEffect = toHUDCoordinate(tdEnemyEffect, td.camera.getCamera(), this._rendererDOM);
+
+    this.playres.forEach(v => {
+      const x = v.playerId === this._playerId
+        ? hudPlayerEffect.x
+        : hudEnemyEffect.x;
+      v.gauge.setPositionX(x);
+    });
   }
 
   /** リサイズ */

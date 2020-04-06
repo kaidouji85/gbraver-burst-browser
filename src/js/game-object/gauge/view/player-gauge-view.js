@@ -61,7 +61,9 @@ export class PlayerGaugeView implements GaugeView {
     this._group.add(this._batteryGauge.getObject3D());
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this._base.destructor();
     this._hpBar.destructor();
@@ -86,13 +88,20 @@ export class PlayerGaugeView implements GaugeView {
     this._group.position.z = 0;
   }
 
-  /** プリレンダー */
+  /**
+   * プリレンダー
+   *
+   * @param action アクション
+   */
   preRender(action: PreRender): void {
     this._group.quaternion.copy(action.camera.quaternion);
-
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
   getObject3D(): THREE.Object3D {
     return this._group;
   }
