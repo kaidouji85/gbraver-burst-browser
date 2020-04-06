@@ -20,6 +20,7 @@ export function initialValue(hp: number, battery: number): GaugeModel {
   return {
     hp: hp,
     maxHp: hp,
-    batteryList: batteryList
+    batteryList: batteryList,
+    positionX: 0
   };
 }

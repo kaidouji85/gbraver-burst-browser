@@ -54,6 +54,15 @@ export class Gauge {
     return battery(this._model, value);
   }
 
+  /**
+   * 本オブジェクトのx座標を指定する
+   *
+   * @param x 設定する値
+   */
+  setPositionX(x: number): void {
+    this._model.positionX = x;
+  }
+
   /** ゲージで使われているthree.jsオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();

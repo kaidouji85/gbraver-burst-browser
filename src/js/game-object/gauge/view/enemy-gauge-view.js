@@ -69,34 +69,29 @@ export class EnemyGaugeView implements GaugeView {
     this._batteryGauge.destructor();
   }
 
-  /** モデルをビューに反映させる */
+  /**
+   * モデルをビューに反映させる
+   * 
+   * @param model モデル
+   */
   engage(model: GaugeModel): void {
     this._hpBar.setValue(model.hp / model.maxHp);
     this._hpNumber.setValue(model.hp);
     this._maxHpNumber.setValue(model.maxHp);
     this._batteryGauge.engage(model.batteryList);
+
+    this._group.position.x = model.positionX;
+    this._group.position.y = 0;
+    this._group.position.z = 0;
   }
 
   /** プリレンダー */
   preRender(action: PreRender): void {
-    this._setPos();
-    this._lookAt(action.camera);
+    this._group.quaternion.copy(action.camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._group;
-  }
-
-  /** 座標をセットする */
-  _setPos(): void {
-    this._group.position.x = -100;
-    this._group.position.y = 0;
-    this._group.position.z = 0;
-  }
-
-  /** カメラの真正面を向く */
-  _lookAt(camera: THREE.Camera): void {
-    this._group.quaternion.copy(camera.quaternion);
   }
 }
