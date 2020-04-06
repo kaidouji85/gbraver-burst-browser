@@ -61,7 +61,7 @@ export interface TDPlayer extends TDPlayerField {
  */
 export class TDPlayerImpl implements TDPlayer {
   playerId: PlayerId;
-  gauge: Gauge;
+  gauge: Gauge; // TODO HUDレイヤーに移動する
   hitMark: {
     shockWave: ShockWave,
     lightning: Lightning,
@@ -104,7 +104,7 @@ export class TDPlayerImpl implements TDPlayer {
    */
   getObject3Ds(): THREE.Object3D[] {
     return [
-      this.gauge.getObject3D(),
+      //this.gauge.getObject3D(),
       this.hitMark.shockWave.getObject3D(),
       this.hitMark.lightning.getObject3D(),
       this.batteryNumber.getObject3D(),
