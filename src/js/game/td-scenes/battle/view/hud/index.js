@@ -25,9 +25,7 @@ import {ThreeDimensionLayer} from "../td";
 /**
  * HUDレイヤーのゲームループ
  */
-export type HUDGameLoop =  {
-  /** ゲームループアクション */
-  action: GameLoop,
+export type HUDGameLoop = GameLoop & {
   /**
    * 3Dレイヤー
    * 同レイヤーのオブジェクトをトラッキングするために使用する想定
@@ -148,11 +146,13 @@ export class HudLayer {
   }
 
   /** ゲームループ */
-  _gameLoop(action: GameLoop): void {
+  _gameLoop(action: HUDGameLoop): void {
     this._update.next({
       type: 'Update',
       time: action.time
     });
+
+    //this._tracking();
 
     this._preRender.next({
       type: 'PreRender',
@@ -166,6 +166,10 @@ export class HudLayer {
       scene: this.scene,
       camera: this.camera.getCamera(),
     });
+  }
+  
+  _tracking(td: ThreeDimensionLayer): void {
+
   }
 
   /** リサイズ */

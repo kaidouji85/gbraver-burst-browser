@@ -104,7 +104,7 @@ export class BattleSceneView {
     TWEEN.update(action.time);
     this._gameLoop3D.next(action);
     this._gameLoopHUD.next({
-      action: action,
+      ...action,
       td: this.td
     });
   }
