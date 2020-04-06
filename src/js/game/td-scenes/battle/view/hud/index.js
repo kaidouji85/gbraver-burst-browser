@@ -21,6 +21,12 @@ import type {HUDArmdozer} from "./armdozer";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 import {ThreeDimensionLayer} from "../td";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z
+} from "../../../../../game-object/armdozer/position";
+import {toHUDCoordinate} from "./coordinate";
 
 /**
  * HUDレイヤーのゲームループ
@@ -152,7 +158,7 @@ export class HudLayer {
       time: action.time
     });
 
-    //this._tracking();
+    this._tracking(action.td);
 
     this._preRender.next({
       type: 'PreRender',
@@ -167,9 +173,19 @@ export class HudLayer {
       camera: this.camera.getCamera(),
     });
   }
-  
-  _tracking(td: ThreeDimensionLayer): void {
 
+  /**
+   * 3Dレイヤーのオブジェクトをトラッキングする
+   *
+   * @param td 3Dレイヤー
+   */
+  _tracking(td: ThreeDimensionLayer): void {
+    const tdArmdozerEffectPos = {
+      x: ARMDOZER_EFFECT_STANDARD_X,
+      y: ARMDOZER_EFFECT_STANDARD_Y,
+      z: ARMDOZER_EFFECT_STANDARD_Z
+    };
+    const hudArmdozerEffectPos = toHUDCoordinate(tdArmdozerEffectPos, td.camera.getCamera(), this._rendererDOM);
   }
 
   /** リサイズ */
