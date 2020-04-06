@@ -38,15 +38,8 @@ export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
 
-  _gameLoop3D: Subject<GameLoop>;
-  _gameLoopHUD: Subject<GameLoop>;
-
   constructor(param: Param) {
     const safeAreaInset = createSafeAreaInset();
-
-    this._gameLoop3D = new Subject();
-    this._gameLoopHUD = new Subject();
-
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
@@ -55,7 +48,6 @@ export class BattleSceneView {
       players: param.players,
       listener: {
         domEvent: param.listener.domEvent,
-        gameLoop: this._gameLoop3D,
         resize: param.listener.resize,
       }
     });
@@ -68,7 +60,6 @@ export class BattleSceneView {
       players: param.players,
       listener: {
         domEvent: param.listener.domEvent,
-        gameLoop: this._gameLoopHUD,
         resize: param.listener.resize
       }
     });
@@ -102,7 +93,7 @@ export class BattleSceneView {
   /** ゲームループ */
   _gameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
-    this._gameLoop3D.next(action);
-    this._gameLoopHUD.next(action);
+    this.td.gameLoop(action);
+    this.hud.gameLoop(action);
   }
 }

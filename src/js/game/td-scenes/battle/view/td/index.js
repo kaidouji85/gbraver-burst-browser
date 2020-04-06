@@ -25,14 +25,21 @@ import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer";
 
 /** コンストラクタのパラメータ */
 type Param = {
+  /** リソース管理 */
   resources: Resources,
+  /** プレイヤーID */
   playerId: PlayerId,
+  /** プレイヤー情報 */
   players: Player[],
+  /** レンダリング対象のHTML要素 */
   rendererDOM: HTMLElement,
+  /** SafeAreaInsetの初期値 */
   safeAreaInset: SafeAreaInset,
+  /** イベントリスナ */
   listener: {
+    /** DOMイベント */
     domEvent: Observable<TdDOMEvent>,
-    gameLoop: Observable<GameLoop>,
+    /** リサイズイベント */
     resize: Observable<Resize>,
   }
 };
@@ -120,10 +127,6 @@ export class ThreeDimensionLayer {
     appendTDGameObjects(this.scene, this.gameObjects);
 
     this._subscription = [
-      param.listener.gameLoop.subscribe(action => {
-        this._gameLoop(action);
-      }),
-
       param.listener.resize.subscribe(action => {
         this._resize(action);
       })
@@ -163,10 +166,11 @@ export class ThreeDimensionLayer {
 
   /**
    * ゲームループの処理
+   * 本メソッドはBattleSceneViewからのみ呼ばれることを想定している
    *
    * @param action アクション
    */
-  _gameLoop(action: GameLoop): void {
+  gameLoop(action: GameLoop): void {
     this._update.next({
       type: 'Update',
       time: action.time

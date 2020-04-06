@@ -23,14 +23,21 @@ import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 
 /** コンストラクタのパラメータ */
 export type Param = {
+  /** リソース管理オブジェクト */
   resources: Resources,
+  /** レンダリング対象のHTML要素 */
   rendererDOM: HTMLElement,
+  /** SafeAreaInsetの初期値 */
   safeAreaInset: SafeAreaInset,
+  /** プレイヤーのID */
   playerId: PlayerId,
+  /** プレイヤー情報 */
   players: Player[],
+  /** イベントリスナ */
   listener: {
-    gameLoop: Observable<GameLoop>,
+    /** DOMイベント */
     domEvent: Observable<TdDOMEvent>,
+    /** Resizeイベント */
     resize: Observable<Resize>,
   }
 };
@@ -98,10 +105,6 @@ export class HudLayer {
       });
 
     this._subscription = [
-      param.listener.gameLoop.subscribe(action => {
-        this._gameLoop(action);
-      }),
-
       param.listener.resize.subscribe(action => {
         this._resize(action);
       }),
@@ -133,8 +136,13 @@ export class HudLayer {
     };
   }
 
-  /** ゲームループ */
-  _gameLoop(action: GameLoop): void {
+  /**
+   * ゲームループ
+   * 本メソッドはBattleSceneViewからのみ呼ばれることを想定している
+   *
+   * @param action アクション
+   */
+  gameLoop(action: GameLoop): void {
     this._update.next({
       type: 'Update',
       time: action.time
