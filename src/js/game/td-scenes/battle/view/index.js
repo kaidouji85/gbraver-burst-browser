@@ -6,7 +6,7 @@ import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
-import {merge, Observable, Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import type {TdDOMEvent} from "../../../../action/td-dom";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {Render} from "../../../../action/game-loop/render";
@@ -51,7 +51,8 @@ export class BattleSceneView {
   _safeAreaInset: SafeAreaInset;
   _rendererDOM: HTMLElement;
   _rendering: Subject<Render>;
-  _gameLoop3D: Subject<GameLoop>;
+  _updateTD: Subject<Update>;
+  _preRenderTD: Subject<PreRender>;
   _updateHUD: Subject<Update>;
   _preRenderHUD: Subject<PreRender>;
 
@@ -60,7 +61,8 @@ export class BattleSceneView {
     this._safeAreaInset = createSafeAreaInset();
     this._rendererDOM = param.rendererDOM;
     this._rendering = new Subject();
-    this._gameLoop3D = new Subject();
+    this._updateTD = new Subject();
+    this._preRenderTD = new Subject();
     this._updateHUD = new Subject();
     this._preRenderHUD = new Subject();
 
@@ -72,8 +74,9 @@ export class BattleSceneView {
       players: param.players,
       listener: {
         domEvent: param.listener.domEvent,
-        gameLoop: this._gameLoop3D,
         resize: param.listener.resize,
+        update: this._updateTD,
+        preRender: this._preRenderTD,
       }
     });
 
@@ -109,10 +112,7 @@ export class BattleSceneView {
    */
   notifier(): Notifier {
     return {
-      render: merge(
-        this._rendering,
-        this.td.notifier().render
-      ),
+      render: this._rendering,
       battleAction: this.hud.notifier().battleAction,
     };
   }
@@ -121,7 +121,21 @@ export class BattleSceneView {
   _gameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
 
-    this._gameLoop3D.next(action);
+    this._updateTD.next({
+      type: 'Update',
+      time: action.time
+    });
+    this._preRenderTD.next({
+      type: 'PreRender',
+      camera: this.td.camera.getCamera(),
+      rendererDOM: this._rendererDOM,
+      safeAreaInset: this._safeAreaInset,
+    });
+    this._rendering.next({
+      type: 'Render',
+      scene: this.td.scene,
+      camera: this.td.camera.getCamera()
+    });
 
     this._updateHUD.next({
       type: 'Update',
