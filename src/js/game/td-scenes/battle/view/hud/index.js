@@ -44,6 +44,7 @@ type Notifier = {
 export class HudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
+  // TODO playersにリネームする
   playres: HUDPlayer[];
   armdozers: HUDArmdozer[];
   gameObjects: HUDGameObjects;
