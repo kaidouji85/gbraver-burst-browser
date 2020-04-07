@@ -19,6 +19,7 @@ import {skyBox} from "./sky-box";
 import {enemySprite, playerSprite, TDSprite} from "./sprite";
 import type {TDArmdozer} from "./armdozer";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer";
+import type {GameObjectAction} from "../../../../../action/game-object-action";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -43,6 +44,7 @@ export class ThreeDimensionLayer {
   armdozers: TDArmdozer[];
   gameObjects: TDGameObjects;
   _overlap: Observable<OverlapAction>;
+  _gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -54,11 +56,11 @@ export class ThreeDimensionLayer {
     this.camera = new TDCamera(param.listener.update, param.listener.resize);
 
     this._overlap = toOverlapStream(param.listener.domEvent, param.rendererDOM, this.camera.getCamera());
-    const gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
+    this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
 
     this.players = [
-      playerTDObjects(param.resources, player, gameObjectAction),
-      enemyTDObject(param.resources, enemy, gameObjectAction)
+      playerTDObjects(param.resources, player, this._gameObjectAction),
+      enemyTDObject(param.resources, enemy, this._gameObjectAction)
     ];
     this.players.map(v => v.getObject3Ds())
       .flat()
@@ -67,8 +69,8 @@ export class ThreeDimensionLayer {
       });
 
     this.sprites = param.players.map(v => v.playerId === param.playerId
-      ? playerSprite(param.resources, v, gameObjectAction)
-      : enemySprite(param.resources, v, gameObjectAction)
+      ? playerSprite(param.resources, v, this._gameObjectAction)
+      : enemySprite(param.resources, v, this._gameObjectAction)
     );
     this.sprites.map(v => v.getObject3Ds())
       .flat()
@@ -77,8 +79,8 @@ export class ThreeDimensionLayer {
       });
 
     this.armdozers = param.players.map(v => v.playerId === param.playerId
-      ? playerTDArmdozer(param.resources, gameObjectAction, v)
-      : enemyTDArmdozer(param.resources, gameObjectAction, v)
+      ? playerTDArmdozer(param.resources, this._gameObjectAction, v)
+      : enemyTDArmdozer(param.resources, this._gameObjectAction, v)
     );
     this.armdozers.map(v => v.getObject3Ds())
       .flat()
@@ -95,7 +97,7 @@ export class ThreeDimensionLayer {
         })
     });
 
-    this.gameObjects = createTDGameObjects(param.resources, gameObjectAction);
+    this.gameObjects = createTDGameObjects(param.resources, this._gameObjectAction);
     appendTDGameObjects(this.scene, this.gameObjects);
   }
 
