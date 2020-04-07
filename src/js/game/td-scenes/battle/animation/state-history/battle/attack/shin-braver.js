@@ -109,7 +109,7 @@ function attack(param: ShinBraverBattleAnimationParam<AttackResult>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
       ))
   );
 }
@@ -133,7 +133,7 @@ function guard(param: ShinBraverBattleAnimationParam<Guard>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderTD.gauge.hp(param.defenderState.armdozer.hp),
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ))
   );
 }
@@ -195,7 +195,7 @@ function down(param: ShinBraverBattleAnimationParam<DownResult>): Animate {
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderTD.gauge.hp(param.defenderState.armdozer.hp)
+        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
       ))
   ).chain(delay(1000)
   ).chain(param.attackerSprite.punchToStand());
