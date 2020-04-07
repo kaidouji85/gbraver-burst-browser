@@ -20,7 +20,7 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../../../game-object/armdozer/position";
-import {toHUDCoordinate} from "./hud/coordinate";
+import {toHUDCoordinate} from "./coordinate";
 
 /** コンストラクタのパラメータ */
 type Param = {
