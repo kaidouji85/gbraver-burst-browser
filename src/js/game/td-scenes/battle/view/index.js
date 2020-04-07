@@ -175,7 +175,7 @@ export class BattleSceneView {
       const x = v.playerId === this._playerId
         ? hudPlayerEffect.x
         : hudEnemyEffect.x;
-      v.gauge.setPositionX(x);
+      v.gauge.tracking(x);
     });
   }
 }

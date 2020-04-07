@@ -10,6 +10,7 @@ import {Animate} from "../../animation/animate";
 import {hp} from "./animation/hp";
 import {battery} from './animation/battery';
 import {initialValue} from "./model/initial-value";
+import {tracking} from "./model/tracking";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -52,13 +53,13 @@ export class Gauge {
   }
 
   /**
-   * 本オブジェクトのx座標を指定する
-   * 3Dレイヤーオブジェクトのトラッキングに利用する想定
+   * 3Dレイヤーのオブジェクをトラッキングする
+   * 座標にはHUDレイヤー系座標に変換したものを指定する
    *
-   * @param x 設定する値
+   * @param x x座標
    */
-  setPositionX(x: number): void {
-    this._model.positionX = x;
+  tracking(x: number): void {
+    this._model = tracking(this._model, x);
   }
 
   /** ゲージで使われているthree.jsオブジェクトを取得する */

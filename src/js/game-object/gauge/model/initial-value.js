@@ -21,6 +21,8 @@ export function initialValue(hp: number, battery: number): GaugeModel {
     hp: hp,
     maxHp: hp,
     batteryList: batteryList,
-    positionX: 0
+    tracking: {
+      x: 0
+    }
   };
 }

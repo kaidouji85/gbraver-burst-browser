@@ -83,7 +83,7 @@ export class EnemyGaugeView implements GaugeView {
     this._batteryGauge.engage(model.batteryList);
 
     const paddingTop = Math.max(MIN_PADDING_TOP, preRender.safeAreaInset.top);
-    this._group.position.x = model.positionX;
+    this._group.position.x = model.tracking.x;
     this._group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop;
     this._group.position.z = 0;
 
