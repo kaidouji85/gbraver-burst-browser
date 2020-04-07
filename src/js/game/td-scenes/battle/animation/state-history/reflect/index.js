@@ -25,7 +25,8 @@ export function reflectAnimation(view: BattleSceneView, sceneState: BattleSceneS
   const state = gameState.players.find(v => v.playerId === effect.damagedPlayer);
   const sprite = view.td.sprites.find(v => v.playerId === effect.damagedPlayer);
   const tdPlayer = view.td.players.find(v => v.playerId === effect.damagedPlayer);
-  if (!state || !sprite || !tdPlayer) {
+  const hudPlayer = view.hud.playres.find(v => v.playerId === effect.damagedPlayer);
+  if (!state || !sprite || !tdPlayer || !hudPlayer) {
     return empty();
   }
 
@@ -33,7 +34,8 @@ export function reflectAnimation(view: BattleSceneView, sceneState: BattleSceneS
     effect: effect,
     state: state,
     sprite: sprite.sprite,
-    tdPlayer: tdPlayer
+    tdPlayer: tdPlayer,
+    hudPlayer: hudPlayer,
   };
 
   if (effect.effect === 'Lightning' && effect.isDeath) {
