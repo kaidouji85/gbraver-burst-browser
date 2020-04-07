@@ -17,9 +17,9 @@ import {all} from "../../../../../animation/all";
  */
 export function updateGauge(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const player = gameState.players.find(v => v.playerId === sceneState.playerId);
-  const playerHUD = view.hud.playres.find(v => v.playerId === sceneState.playerId);
+  const playerHUD = view.hud.players.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
-  const enemyHUD = view.hud.playres.find(v => v.playerId !== sceneState.playerId);
+  const enemyHUD = view.hud.players.find(v => v.playerId !== sceneState.playerId);
   if (!player || !playerHUD || !enemy || !enemyHUD) {
     return empty();
   }

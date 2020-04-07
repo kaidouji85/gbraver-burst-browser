@@ -25,9 +25,9 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const effect: InputCommand = gameState.effect;
   const player = gameState.players.find(v => v.playerId === sceneState.playerId);
   const playerCommand = effect.players.find(v => v.playerId === sceneState.playerId);
-  const playerHUD = view.hud.playres.find(v => v.playerId === sceneState.playerId);
+  const playerHUD = view.hud.players.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
-  const enemyHUD = view.hud.playres.find(v => v.playerId !== sceneState.playerId);
+  const enemyHUD = view.hud.players.find(v => v.playerId !== sceneState.playerId);
   if (!player || !playerCommand || !playerHUD || !enemy || !enemyHUD) {
     return empty();
   }

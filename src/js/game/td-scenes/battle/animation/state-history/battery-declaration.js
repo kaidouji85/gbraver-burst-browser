@@ -28,9 +28,9 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sceneState: B
   }
 
   const attackerTD = view.td.players.find(v => v.playerId === attacker.playerId);
-  const attackerHUD = view.hud.playres.find(v => v.playerId === attacker.playerId);
+  const attackerHUD = view.hud.players.find(v => v.playerId === attacker.playerId);
   const defenderTD = view.td.players.find(v => v.playerId === defender.playerId);
-  const defenderHUD = view.hud.playres.find(v => v.playerId === defender.playerId);
+  const defenderHUD = view.hud.players.find(v => v.playerId === defender.playerId);
   if (!attackerTD || !attackerHUD || !defenderTD || !defenderHUD) {
     return empty();
   }

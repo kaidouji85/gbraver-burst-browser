@@ -25,7 +25,7 @@ export function reflectAnimation(view: BattleSceneView, sceneState: BattleSceneS
   const state = gameState.players.find(v => v.playerId === effect.damagedPlayer);
   const sprite = view.td.sprites.find(v => v.playerId === effect.damagedPlayer);
   const tdPlayer = view.td.players.find(v => v.playerId === effect.damagedPlayer);
-  const hudPlayer = view.hud.playres.find(v => v.playerId === effect.damagedPlayer);
+  const hudPlayer = view.hud.players.find(v => v.playerId === effect.damagedPlayer);
   if (!state || !sprite || !tdPlayer || !hudPlayer) {
     return empty();
   }

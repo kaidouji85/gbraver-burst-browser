@@ -56,7 +56,7 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
   const effect: BurstEffect = gameState.effect;
   const burstPlayerState = gameState.players.find(v => v.playerId === effect.burstPlayer);
   const burstPlayerTD = view.td.players.find(v => v.playerId === effect.burstPlayer);
-  const burstPlayerHUD = view.hud.playres.find(v => v.playerId === effect.burstPlayer);
+  const burstPlayerHUD = view.hud.players.find(v => v.playerId === effect.burstPlayer);
   const burstSprite = view.td.sprites.find(v => v.playerId === effect.burstPlayer);
   const burstArmdozerHUD = view.hud.armdozers.find(v => v.playerId === effect.burstPlayer);
   const burstArmdozerTD = view.td.armdozers.find(v => v.playerId === effect.burstPlayer);

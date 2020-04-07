@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core";
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
 import type {BattleSceneAction} from "../../../../../action/battle-scene";
@@ -44,8 +44,7 @@ type Notifier = {
 export class HudLayer {
   scene: THREE.Scene;
   camera: PlainHUDCamera;
-  // TODO playersにリネームする
-  playres: HUDPlayer[];
+  players: HUDPlayer[];
   armdozers: HUDArmdozer[];
   gameObjects: HUDGameObjects;
   _overlap: Observable<OverlapAction>;
@@ -64,11 +63,11 @@ export class HudLayer {
     this.gameObjects = createHUDGameObjects(param.resources, this._gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
-    this.playres = param.players.map(v => v.playerId === param.playerId
+    this.players = param.players.map(v => v.playerId === param.playerId
       ? playerHUDObjects(param.resources, v, this._gameObjectAction)
       : enemyHUDObjects(param.resources, v, this._gameObjectAction)
     );
-    this.playres.map(v => v.getObject3Ds())
+    this.players.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
         this.scene.add(v);

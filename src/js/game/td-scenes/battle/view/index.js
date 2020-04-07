@@ -171,7 +171,7 @@ export class BattleSceneView {
     const hudPlayerEffect = toHUDCoordinate(tdPlayerEffect, this.td.camera.getCamera(), this._rendererDOM);
     const hudEnemyEffect = toHUDCoordinate(tdEnemyEffect, this.td.camera.getCamera(), this._rendererDOM);
 
-    this.hud.playres.forEach(v => {
+    this.hud.players.forEach(v => {
       const x = v.playerId === this._playerId
         ? hudPlayerEffect.x
         : hudEnemyEffect.x;

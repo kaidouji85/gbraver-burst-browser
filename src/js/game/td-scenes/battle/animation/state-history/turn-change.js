@@ -19,7 +19,7 @@ import {attentionArmDozer, toInitial} from "../td-camera";
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
   const activeTDSprite = view.td.sprites.find(v => v.playerId === gameState.activePlayerId);
-  const activeHUDPlayer = view.hud.playres.find(v => v.playerId === gameState.activePlayerId);
+  const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
   if (!activeTDPlayer || !activeTDSprite || !activeHUDPlayer || !activeStatus) {
     return empty();

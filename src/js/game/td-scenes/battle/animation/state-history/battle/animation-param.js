@@ -54,11 +54,11 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
   const effect: Battle = gameState.effect;
   const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
   const attackerTD = view.td.players.find(v => v.playerId === effect.attacker);
-  const attackerHUD = view.hud.playres.find(v => v.playerId === effect.attacker);
+  const attackerHUD = view.hud.players.find(v => v.playerId === effect.attacker);
   const attackerSprite = view.td.sprites.find(v => v.playerId === effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
   const defenderTD = view.td.players.find(v => v.playerId !== effect.attacker);
-  const defenderHUD = view.hud.playres.find(v => v.playerId !== effect.attacker);
+  const defenderHUD = view.hud.players.find(v => v.playerId !== effect.attacker);
   const defenderSprite = view.td.sprites.find(v => v.playerId !== effect.attacker);
   if (!attackerState || !attackerTD || !attackerHUD || !attackerSprite || !defenderState || !defenderTD || !defenderHUD || !defenderSprite) {
     return null;
