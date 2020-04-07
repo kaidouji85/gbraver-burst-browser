@@ -9,12 +9,18 @@ export interface GaugeView {
   /** デストラクタ */
   destructor(): void;
   
-  /** モデルをビューに反映させる */
-  engage(model: GaugeModel): void;
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   * @param preRender プリレンダーアクション
+   */
+  engage(model: GaugeModel, preRender: PreRender): void;
 
-  /** プリレンダー */
-  preRender(action: PreRender): void;
-
-  /** ビューで使われているthree.jsオブジェクトを取得する */
+  /**
+   * ビューで使われているthree.jsオブジェクトを取得する
+   *
+   * @return 取得結果
+   */
   getObject3D(): THREE.Object3D;
 }

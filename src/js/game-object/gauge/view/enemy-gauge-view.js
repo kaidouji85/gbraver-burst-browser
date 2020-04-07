@@ -71,8 +71,9 @@ export class EnemyGaugeView implements GaugeView {
    * モデルをビューに反映させる
    * 
    * @param model モデル
+   * @param preRender プリレンダー
    */
-  engage(model: GaugeModel): void {
+  engage(model: GaugeModel, preRender: PreRender): void {
     this._hpBar.setValue(model.hp / model.maxHp);
     this._hpNumber.setValue(model.hp);
     this._maxHpNumber.setValue(model.maxHp);
@@ -81,11 +82,8 @@ export class EnemyGaugeView implements GaugeView {
     this._group.position.x = model.positionX;
     this._group.position.y = 0;
     this._group.position.z = 0;
-  }
 
-  /** プリレンダー */
-  preRender(action: PreRender): void {
-    this._group.quaternion.copy(action.camera.quaternion);
+    this._group.quaternion.copy(preRender.camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
