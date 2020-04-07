@@ -10,7 +10,6 @@ import {Animate} from "../../animation/animate";
 import {hp} from "./animation/hp";
 import {battery} from './animation/battery';
 import {initialValue} from "./model/initial-value";
-import {tracking} from "./model/tracking";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -59,7 +58,7 @@ export class Gauge {
    * @param x x座標
    */
   tracking(x: number): void {
-    this._model = tracking(this._model, x);
+    this._model.tracking.x = x;
   }
 
   /** ゲージで使われているthree.jsオブジェクトを取得する */

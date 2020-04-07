@@ -6,12 +6,10 @@ import {DamageIndicator} from "../../../../../game-object/damage-indicator/damag
 import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
-import {Gauge} from "../../../../../game-object/gauge/gauge";
 import {BurstIndicator} from "../../../../../game-object/burst-indicator/burst-indicator";
 import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
-import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
@@ -27,7 +25,6 @@ import {enemyLightning, playerLightning} from "../../../../../game-object/hitmar
  */
 export interface TDPlayerField {
   playerId: PlayerId;
-  gauge: Gauge;
   hitMark: {
     shockWave: ShockWave,
     lightning: Lightning,
@@ -61,7 +58,6 @@ export interface TDPlayer extends TDPlayerField {
  */
 export class TDPlayerImpl implements TDPlayer {
   playerId: PlayerId;
-  gauge: Gauge; // TODO HUDレイヤーに移動する
   hitMark: {
     shockWave: ShockWave,
     lightning: Lightning,
@@ -74,7 +70,6 @@ export class TDPlayerImpl implements TDPlayer {
 
   constructor(param: TDPlayerField) {
     this.playerId = param.playerId;
-    this.gauge = param.gauge;
     this.hitMark = param.hitMark;
     this.batteryNumber = param.batteryNumber;
     this.recoverBattery = param.recoverBattery;
@@ -87,7 +82,6 @@ export class TDPlayerImpl implements TDPlayer {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this.gauge.destructor();
     this.batteryNumber.destructor();
     this.damageIndicator.destructor();
     this.hitMark.shockWave.destructor();
@@ -104,7 +98,6 @@ export class TDPlayerImpl implements TDPlayer {
    */
   getObject3Ds(): THREE.Object3D[] {
     return [
-      //this.gauge.getObject3D(),
       this.hitMark.shockWave.getObject3D(),
       this.hitMark.lightning.getObject3D(),
       this.batteryNumber.getObject3D(),
@@ -127,12 +120,6 @@ export class TDPlayerImpl implements TDPlayer {
 export function playerTDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
-    gauge: playerGauge({
-      resources: resources,
-      listener: listener,
-      hp: state.armdozer.maxHp,
-      battery: state.armdozer.maxBattery,
-    }),
     hitMark: {
       shockWave: playerShockWave(resources, listener),
       lightning: playerLightning(resources, listener)
@@ -162,12 +149,6 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
 export function enemyTDObject(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
-    gauge: enemyGauge({
-      resources: resources,
-      listener: listener,
-      hp: state.armdozer.maxHp,
-      battery: state.armdozer.maxBattery,
-    }),
     hitMark: {
       shockWave: enemyShockWave(resources, listener),
       lightning: enemyLightning(resources, listener)
