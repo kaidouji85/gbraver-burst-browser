@@ -11,6 +11,7 @@ import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {HUDArmdozer} from "../../../view/hud/armdozer";
 import type {TDArmdozer} from "../../../view/td/armdozer";
+import {HUDPlayer} from "../../../view/hud/player";
 
 /**
  * バーストアニメーションのパラメータ
@@ -25,6 +26,7 @@ import type {TDArmdozer} from "../../../view/td/armdozer";
 export type BurstAnimationParamX<SPRITE: ArmDozerSprite, HUD_ARMDOZER: HUDArmdozer, TD_ARMDOZER: TDArmdozer, BURST: Burst> = {
   burstPlayerState: PlayerState,
   burstPlayerTD: TDPlayer,
+  burstPlayerHUD: HUDPlayer,
   burstSprite: SPRITE,
   burstArmdozerHUD: HUD_ARMDOZER,
   burstArmdozerTD: TD_ARMDOZER,
@@ -54,16 +56,18 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
   const effect: BurstEffect = gameState.effect;
   const burstPlayerState = gameState.players.find(v => v.playerId === effect.burstPlayer);
   const burstPlayerTD = view.td.players.find(v => v.playerId === effect.burstPlayer);
+  const burstPlayerHUD = view.hud.playres.find(v => v.playerId === effect.burstPlayer);
   const burstSprite = view.td.sprites.find(v => v.playerId === effect.burstPlayer);
   const burstArmdozerHUD = view.hud.armdozers.find(v => v.playerId === effect.burstPlayer);
   const burstArmdozerTD = view.td.armdozers.find(v => v.playerId === effect.burstPlayer);
-  if (!burstPlayerState || !burstPlayerTD || !burstSprite || !burstArmdozerHUD || !burstArmdozerTD) {
+  if (!burstPlayerState || !burstPlayerTD || !burstPlayerHUD || !burstSprite || !burstArmdozerHUD || !burstArmdozerTD) {
     return null;
   }
 
   return {
     burstPlayerState: burstPlayerState,
     burstPlayerTD:burstPlayerTD,
+    burstPlayerHUD: burstPlayerHUD,
     burstSprite: burstSprite.sprite,
     burstArmdozerHUD: burstArmdozerHUD,
     burstArmdozerTD: burstArmdozerTD,
