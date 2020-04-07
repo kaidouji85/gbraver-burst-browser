@@ -83,7 +83,6 @@ export class BattleSceneView {
     this.hud = new HudLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
-      safeAreaInset: this._safeAreaInset,
       playerId: param.playerId,
       players: param.players,
       listener: {

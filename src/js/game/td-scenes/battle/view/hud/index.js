@@ -13,17 +13,16 @@ import type {HUDGameObjects} from "./game-objects";
 import {appendHUDGameObjects, createHUDGameObjects, disposeHUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
-import type {SafeAreaInset} from "../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../action/resize/resize";
 import type {HUDArmdozer} from "./armdozer";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
+import type {GameObjectAction} from "../../../../../action/game-object-action";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
   rendererDOM: HTMLElement,
-  safeAreaInset: SafeAreaInset,
   playerId: PlayerId,
   players: Player[],
   listener: {
@@ -48,32 +47,25 @@ export class HudLayer {
   playres: HUDPlayer[];
   armdozers: HUDArmdozer[];
   gameObjects: HUDGameObjects;
-
-  _playerId: PlayerId;
-  _rendererDOM: HTMLElement;
-  _safeAreaInset: SafeAreaInset;
   _overlap: Observable<OverlapAction>;
-  _subscription: Subscription[];
+  _gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {
-    this._playerId = param.playerId;
-    this._rendererDOM = param.rendererDOM;
-    this._safeAreaInset = param.safeAreaInset;
 
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera(param.listener.resize);
 
-    this._overlap = toOverlapStream(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
-    const gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
+    this._overlap = toOverlapStream(param.listener.domEvent, param.rendererDOM, this.camera.getCamera());
+    this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
-    this.gameObjects = createHUDGameObjects(param.resources, gameObjectAction, player);
+    this.gameObjects = createHUDGameObjects(param.resources, this._gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
     this.playres = param.players.map(v => v.playerId === param.playerId
-      ? playerHUDObjects(param.resources, v, gameObjectAction)
-      : enemyHUDObjects(param.resources, v, gameObjectAction)
+      ? playerHUDObjects(param.resources, v, this._gameObjectAction)
+      : enemyHUDObjects(param.resources, v, this._gameObjectAction)
     );
     this.playres.map(v => v.getObject3Ds())
       .flat()
@@ -82,20 +74,14 @@ export class HudLayer {
       });
 
     this.armdozers = param.players.map(v => v.playerId === param.playerId
-      ? playerArmdozerHUD(param.resources, gameObjectAction, v)
-      : enemyArmdozerHUD(param.resources, gameObjectAction, v)
+      ? playerArmdozerHUD(param.resources, this._gameObjectAction, v)
+      : enemyArmdozerHUD(param.resources, this._gameObjectAction, v)
     );
     this.armdozers.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
         this.scene.add(v)
       });
-
-    this._subscription = [
-      param.listener.resize.subscribe(action => {
-        this._resize(action);
-      }),
-    ];
   }
 
   /** デストラクタ */
@@ -103,9 +89,6 @@ export class HudLayer {
     disposeHUDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();
-    this._subscription.forEach(v => {
-      v.unsubscribe();
-    });
     this.armdozers.forEach(v => {
       v.destructor();
     });
@@ -120,10 +103,5 @@ export class HudLayer {
     return {
       battleAction: this.gameObjects.notifier.battleSceneAction
     };
-  }
-
-  /** リサイズ */
-  _resize(action: Resize): void {
-    this._safeAreaInset = action.safeAreaInset;
   }
 }
