@@ -10,12 +10,13 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {PlayerHpBar} from "./player-hp-bar";
 import {HpNumber} from "./hp-number";
 import {PlayerBatteryGauge} from "./player-battery-gauge";
+import {devicePerScaleForHUD} from "../../../device-per-scale/hud";
 
 /** キャンバスの大きさ */
 export const BASE_CANVAS_SIZE = 1024;
 
 /** 基本拡大率 */
-export const SCALE = 0.3;
+export const BASE_SCALE = 0.3;
 
 /** 上余白 最小値 */
 export const MIN_PADDING_TOP = 50;
@@ -31,7 +32,7 @@ export class PlayerGaugeView implements GaugeView {
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
-    this._group.scale.set(SCALE, SCALE, SCALE);
+    this._group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
 
     const gaugeBaseResource = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE);
@@ -80,14 +81,22 @@ export class PlayerGaugeView implements GaugeView {
    * @param preRender プリレンダーアクション
    */
   engage(model: GaugeModel, preRender: PreRender): void {
+    const devicePerScale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
+
     this._hpBar.setValue(model.hp / model.maxHp);
     this._hpNumber.setValue(model.hp);
     this._maxHpNumber.setValue(model.maxHp);
     this._batteryGauge.engage(model.batteryList);
 
+    this._group.scale.set(
+      BASE_SCALE * devicePerScale,
+      BASE_SCALE * devicePerScale,
+      BASE_SCALE * devicePerScale
+    );
+
     const paddingTop = Math.max(MIN_PADDING_TOP, preRender.safeAreaInset.top);
     this._group.position.x = model.tracking.x;
-    this._group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop;
+    this._group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop * devicePerScale;
     this._group.position.z = 0;
 
     this._group.quaternion.copy(preRender.camera.quaternion);
