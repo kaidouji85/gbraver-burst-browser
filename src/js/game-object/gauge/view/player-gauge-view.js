@@ -17,6 +17,9 @@ export const BASE_CANVAS_SIZE = 1024;
 /** 基本拡大率 */
 export const SCALE = 0.3;
 
+/** 上余白 最小値 */
+export const MIN_PADDING_TOP = 50;
+
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
   _group: THREE.Group;
@@ -82,8 +85,9 @@ export class PlayerGaugeView implements GaugeView {
     this._maxHpNumber.setValue(model.maxHp);
     this._batteryGauge.engage(model.batteryList);
 
+    const paddingTop = Math.max(MIN_PADDING_TOP, preRender.safeAreaInset.top);
     this._group.position.x = model.positionX;
-    this._group.position.y = 0;
+    this._group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop;
     this._group.position.z = 0;
 
     this._group.quaternion.copy(preRender.camera.quaternion);
