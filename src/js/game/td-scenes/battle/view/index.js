@@ -1,16 +1,26 @@
 // @flow
+
+import TWEEN from "@tweenjs/tween.js";
 import type {Resources} from '../../../../resource';
 import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
-import {merge, Observable, Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import type {TdDOMEvent} from "../../../../action/td-dom";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {Render} from "../../../../action/game-loop/render";
-import TWEEN from "@tweenjs/tween.js";
+import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../action/resize/resize";
+import type {Update} from "../../../../action/game-loop/update";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z
+} from "../../../../game-object/armdozer/position";
+import {toHUDCoordinate} from "./coordinate";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -37,39 +47,49 @@ type Notifier = {
 export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
-
-  _gameLoop3D: Subject<GameLoop>;
-  _gameLoopHUD: Subject<GameLoop>;
+  _playerId: PlayerId;
+  _safeAreaInset: SafeAreaInset;
+  _rendererDOM: HTMLElement;
+  _rendering: Subject<Render>;
+  _updateTD: Subject<Update>;
+  _preRenderTD: Subject<PreRender>;
+  _updateHUD: Subject<Update>;
+  _preRenderHUD: Subject<PreRender>;
 
   constructor(param: Param) {
-    const safeAreaInset = createSafeAreaInset();
-
-    this._gameLoop3D = new Subject();
-    this._gameLoopHUD = new Subject();
+    this._playerId = param.playerId;
+    this._safeAreaInset = createSafeAreaInset();
+    this._rendererDOM = param.rendererDOM;
+    this._rendering = new Subject();
+    this._updateTD = new Subject();
+    this._preRenderTD = new Subject();
+    this._updateHUD = new Subject();
+    this._preRenderHUD = new Subject();
 
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
-      safeAreaInset: safeAreaInset,
+      safeAreaInset: this._safeAreaInset,
       playerId: param.playerId,
       players: param.players,
       listener: {
         domEvent: param.listener.domEvent,
-        gameLoop: this._gameLoop3D,
         resize: param.listener.resize,
+        update: this._updateTD,
+        preRender: this._preRenderTD,
       }
     });
 
     this.hud = new HudLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
-      safeAreaInset: safeAreaInset,
       playerId: param.playerId,
       players: param.players,
       listener: {
         domEvent: param.listener.domEvent,
-        gameLoop: this._gameLoopHUD,
-        resize: param.listener.resize
+        resize: param.listener.resize,
+        update: this._updateHUD,
+        preRender: this._preRenderHUD,
       }
     });
 
@@ -91,10 +111,7 @@ export class BattleSceneView {
    */
   notifier(): Notifier {
     return {
-      render: merge(
-        this.hud.notifier().render,
-        this.td.notifier().render
-      ),
+      render: this._rendering,
       battleAction: this.hud.notifier().battleAction,
     };
   }
@@ -102,7 +119,63 @@ export class BattleSceneView {
   /** ゲームループ */
   _gameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
-    this._gameLoop3D.next(action);
-    this._gameLoopHUD.next(action);
+
+    this._updateTD.next({
+      type: 'Update',
+      time: action.time
+    });
+    this._preRenderTD.next({
+      type: 'PreRender',
+      camera: this.td.camera.getCamera(),
+      rendererDOM: this._rendererDOM,
+      safeAreaInset: this._safeAreaInset,
+    });
+    this._rendering.next({
+      type: 'Render',
+      scene: this.td.scene,
+      camera: this.td.camera.getCamera()
+    });
+
+    this._updateHUD.next({
+      type: 'Update',
+      time: action.time
+    });
+    this._trackingTD();
+    this._preRenderHUD.next({
+      type: 'PreRender',
+      camera: this.hud.camera.getCamera(),
+      rendererDOM: this._rendererDOM,
+      safeAreaInset: this._safeAreaInset,
+    });
+    this._rendering.next({
+      type: 'Render',
+      scene: this.hud.scene,
+      camera: this.hud.camera.getCamera()
+    });
+  }
+
+  /**
+   * 3Dレイヤーの内容をトラッキングする
+   */
+  _trackingTD(): void {
+    const tdPlayerEffect = {
+      x: ARMDOZER_EFFECT_STANDARD_X,
+      y: ARMDOZER_EFFECT_STANDARD_Y,
+      z: ARMDOZER_EFFECT_STANDARD_Z
+    };
+    const tdEnemyEffect = {
+      x: -ARMDOZER_EFFECT_STANDARD_X,
+      y: ARMDOZER_EFFECT_STANDARD_Y,
+      z: ARMDOZER_EFFECT_STANDARD_Z
+    };
+    const hudPlayerEffect = toHUDCoordinate(tdPlayerEffect, this.td.camera.getCamera(), this._rendererDOM);
+    const hudEnemyEffect = toHUDCoordinate(tdEnemyEffect, this.td.camera.getCamera(), this._rendererDOM);
+
+    this.hud.players.forEach(v => {
+      const x = v.playerId === this._playerId
+        ? hudPlayerEffect.x
+        : hudEnemyEffect.x;
+      v.gauge.tracking(x);
+    });
   }
 }

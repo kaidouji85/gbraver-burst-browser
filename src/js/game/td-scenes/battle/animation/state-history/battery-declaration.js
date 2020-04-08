@@ -28,8 +28,10 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sceneState: B
   }
 
   const attackerTD = view.td.players.find(v => v.playerId === attacker.playerId);
+  const attackerHUD = view.hud.players.find(v => v.playerId === attacker.playerId);
   const defenderTD = view.td.players.find(v => v.playerId === defender.playerId);
-  if (!attackerTD || !defenderTD) {
+  const defenderHUD = view.hud.players.find(v => v.playerId === defender.playerId);
+  if (!attackerTD || !attackerHUD || !defenderTD || !defenderHUD) {
     return empty();
   }
 
@@ -38,9 +40,9 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sceneState: B
     all(
       view.td.gameObjects.turnIndicator.turnChange(isAttacker),
       attackerTD.batteryNumber.popUp(effect.attackerBattery),
-      attackerTD.gauge.battery(attacker.armdozer.battery),
+      attackerHUD.gauge.battery(attacker.armdozer.battery),
       defenderTD.batteryNumber.popUp(effect.defenderBattery),
-      defenderTD.gauge.battery(defender.armdozer.battery),
+      defenderHUD.gauge.battery(defender.armdozer.battery),
     ),
 
     delay(1200).chain(

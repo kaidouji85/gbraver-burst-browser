@@ -12,13 +12,12 @@ import {stateHistoryAnimation} from "./animation/state-history";
 import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../../action/game-loop/render";
 import type {DoBurst} from "../../../action/battle-scene/do-burst";
-import type {Command, GameState} from "gbraver-burst-core";
+import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {take} from "rxjs/operators";
 import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
-import type {GameEnd} from "gbraver-burst-core";
 
 /** コンストラクタのパラメータ */
 type Param = {

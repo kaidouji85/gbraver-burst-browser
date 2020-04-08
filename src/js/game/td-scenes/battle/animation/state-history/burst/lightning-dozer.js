@@ -67,7 +67,7 @@ function lightningBarrier(param: LightningDozerBurstAnimationParam<LightningBarr
   ).chain(param.burstArmdozerTD.lightningBarrier.show()
   ).chain(delay(1000)
   ).chain(all(
-    param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
+    param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
   )).chain(delay(1000)
   ).chain(all(
