@@ -10,11 +10,11 @@ import {Observable, Subject} from "rxjs";
 import type {TdDOMEvent} from "../../../../action/td-dom";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {Render} from "../../../../action/game-loop/render";
+import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../action/resize/resize";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
-import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
