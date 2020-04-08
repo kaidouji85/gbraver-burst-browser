@@ -1,6 +1,7 @@
 // @flow
 
 import type {ShinBraverCutInModel} from "./shin-braver-cutin-model";
+import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /**
  * モデルの初期値を生成する
@@ -12,7 +13,7 @@ export function createInitialValue(): ShinBraverCutInModel {
     position: {
       x: 0,
       y: 0,
-      z: 0
+      z: HUD_CUT_IN_ZNIDEX
     },
     animation: {
       type: 'BurstCharge',
