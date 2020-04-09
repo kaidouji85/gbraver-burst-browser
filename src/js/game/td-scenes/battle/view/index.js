@@ -160,22 +160,22 @@ export class BattleSceneView {
   _trackingTD(): void {
     const tdPlayerEffect = {
       x: ARMDOZER_EFFECT_STANDARD_X,
-      y: ARMDOZER_EFFECT_STANDARD_Y,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 150,
       z: ARMDOZER_EFFECT_STANDARD_Z
     };
     const tdEnemyEffect = {
       x: -ARMDOZER_EFFECT_STANDARD_X,
-      y: ARMDOZER_EFFECT_STANDARD_Y,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 200,
       z: ARMDOZER_EFFECT_STANDARD_Z
     };
     const hudPlayerEffect = toHUDCoordinate(tdPlayerEffect, this.td.camera.getCamera(), this._rendererDOM);
     const hudEnemyEffect = toHUDCoordinate(tdEnemyEffect, this.td.camera.getCamera(), this._rendererDOM);
 
     this.hud.players.forEach(v => {
-      const x = v.playerId === this._playerId
-        ? hudPlayerEffect.x
-        : hudEnemyEffect.x;
-      v.gauge.tracking(x);
+      const target = v.playerId === this._playerId
+        ? hudPlayerEffect
+        : hudEnemyEffect;
+      v.gauge.tracking(target.x, target.y);
     });
   }
 }
