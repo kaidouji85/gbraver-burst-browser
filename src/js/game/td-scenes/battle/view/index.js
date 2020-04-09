@@ -160,7 +160,7 @@ export class BattleSceneView {
   _trackingTD(): void {
     const tdPlayerEffect = {
       x: ARMDOZER_EFFECT_STANDARD_X,
-      y: ARMDOZER_EFFECT_STANDARD_Y + 150,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 200,
       z: ARMDOZER_EFFECT_STANDARD_Z
     };
     const tdEnemyEffect = {
