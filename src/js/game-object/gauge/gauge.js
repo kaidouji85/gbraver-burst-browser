@@ -56,9 +56,11 @@ export class Gauge {
    * 座標にはHUDレイヤー系座標に変換したものを指定する
    *
    * @param x x座標
+   * @param y y座標
    */
-  tracking(x: number): void {
+  tracking(x: number, y: number): void {
     this._model.tracking.x = x;
+    this._model.tracking.y = y;
   }
 
   /** ゲージで使われているthree.jsオブジェクトを取得する */

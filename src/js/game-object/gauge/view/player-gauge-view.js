@@ -94,9 +94,12 @@ export class PlayerGaugeView implements GaugeView {
       BASE_SCALE * devicePerScale
     );
 
-    const paddingTop = Math.max(MIN_PADDING_TOP, preRender.safeAreaInset.top);
+    const minY = preRender.rendererDOM.clientHeight / 2
+      - MIN_PADDING_TOP * devicePerScale;
+    const safeAreaY = preRender.rendererDOM.clientHeight / 2
+      - preRender.safeAreaInset.top * devicePerScale;
     this._group.position.x = model.tracking.x;
-    this._group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop * devicePerScale;
+    this._group.position.y = Math.min(minY, safeAreaY, model.tracking.y);
     this._group.position.z = 0;
 
     this._group.quaternion.copy(preRender.camera.quaternion);
