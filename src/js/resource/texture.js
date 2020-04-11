@@ -38,6 +38,8 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_DOWN: 'NEO_LANDOZER_DOWN',
   NEO_LANDOZER_GUTS_UP: 'NEO_LANDOZER_GUTS_UP',
   NEO_LANDOZER_GUTS_DOWN: 'NEO_LANDOZER_GUTS_DOWN',
+  NEO_LANDOZER_CUTIN_UP: 'NEO_LANDOZER_CUTIN_UP',
+  NEO_LANDOZER_CUTIN_DOWN: 'NEO_LANDOZER_CUTIN_DOWN',
   LIGHTNING_DOZER_STAND: 'LIGHTNING_DOZER_STAND',
   LIGHTNING_DOZER_HM_CHARGE: 'LIGHTNING_DOZER_HM_CHARGE',
   LIGHTNING_DOZER_HM_ATTACK: 'LIGHTNING_DOZER_HM_ATTACK',
@@ -140,6 +142,14 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.NEO_LANDOZER_GUTS_UP,
     path: 'armdozer/neo-landozer/guts-up.png',
+  },
+  {
+    id: TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP,
+    path: 'armdozer/neo-landozer/cutin-up.png',
+  },
+  {
+    id:TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
+    path: 'armdozer/neo-landozer/cutin-down.png'
   },
   // ライトニングドーザ関連
   {
