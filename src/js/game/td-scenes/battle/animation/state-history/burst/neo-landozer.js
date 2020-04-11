@@ -5,6 +5,8 @@ import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/n
 import {NeoLandozerHUD} from "../../../view/hud/armdozer/neo-landozer";
 import type {TDArmdozer} from "../../../view/td/armdozer";
 import type {Burst} from "gbraver-burst-core";
+import {Animate} from "../../../../../../animation/animate";
+import {empty} from "../../../../../../animation/delay";
 
 /**
  * ネオランドーザ バーストアニメーション パラメータ
@@ -28,4 +30,14 @@ export function toNeoLandozerBurstAnimationParam(param: BurstAnimationParam): ?N
   }
 
   return null;
+}
+
+/**
+ * ネオランドーザ バースト アニメーション
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+export function neoLandozerBurst(param: NeoLandozerBurstAnimationParam<Burst>): Animate {
+  return empty();
 }
