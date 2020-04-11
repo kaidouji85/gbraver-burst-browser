@@ -181,15 +181,15 @@ export class BattleSceneView {
       v.gauge.tracking(target.x, target.y);
     });
 
-    this.hud.armdozers
-      .map(hudArmdozer => ({
-        hudArmdozer: hudArmdozer,
-        tdSprite: this.td.sprites.find(v => v.playerId === hudArmdozer.playerId)
-      })).filter(v => (v.hudArmdozer instanceof NeoLandozerHUD) && v.tdSprite)
-        .map(v => ((v: any): {hudArmdozer: NeoLandozerHUD, tdSprite: TDSprite}))
-        .forEach(v => {
-          this._trackingNeoLandozerCutIn(v.hudArmdozer.cutIn, v.tdSprite.sprite)
-        })
+    this.hud.armdozers.forEach(hudArmdozer => {
+      this.td.sprites
+        .filter(tdSprite => tdSprite.playerId === hudArmdozer.playerId)
+        .forEach(tdSprite => {
+          if (hudArmdozer instanceof NeoLandozerHUD) {
+            this._trackingNeoLandozerCutIn(hudArmdozer.cutIn, tdSprite.sprite);
+          }
+        });
+    });
   }
 
   /**
