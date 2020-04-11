@@ -1,7 +1,6 @@
 // @flow
 
 import * as THREE from 'three';
-import type {CutIn} from "../cut-in";
 import type {Resources} from "../../../resource";
 import type {ShinBraverCutInModel} from "./model/shin-braver-cutin-model";
 import {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
@@ -19,7 +18,7 @@ export const MESH_SIZE = 200;
 /**
  * シンブレイバーカットイン
  */
-export class ShinBraverCutIn implements CutIn {
+export class ShinBraverCutIn {
   _model: ShinBraverCutInModel;
   _view: ShinBraverCutInView;
   _subscription: Subscription;

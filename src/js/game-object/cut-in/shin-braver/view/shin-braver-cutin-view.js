@@ -1,7 +1,6 @@
 // @flow
 
 import * as THREE from 'three';
-import type {CutIn} from "../../cut-in";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
@@ -15,7 +14,7 @@ export const MESH_SIZE = 500;
 /**
  * シンブレイバーカットインのビュー
  */
-export class ShinBraverCutInView implements CutIn {
+export class ShinBraverCutInView {
   _group: THREE.Group;
   _charge: HorizontalAnimationMesh;
   _release: HorizontalAnimationMesh;
