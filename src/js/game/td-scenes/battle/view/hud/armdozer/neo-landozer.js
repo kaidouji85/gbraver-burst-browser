@@ -8,6 +8,7 @@ import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import type {Player} from "gbraver-burst-core";
+import {enemyNeoLandozerCutIn, playerNeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer";
 
 /**
  * HUDレイヤー ネオランドーザ固有オブジェクト フィールド
@@ -57,7 +58,7 @@ export class NeoLandozerHUD implements HUDArmdozer, NeoLandozerHUDField {
  */
 export function playerNeoLandozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {
-    cutIn: new NeoLandozerCutIn(resources)
+    cutIn: playerNeoLandozerCutIn(resources, listener)
   });
 }
 
@@ -71,6 +72,6 @@ export function playerNeoLandozerHUD(resources: Resources, listener: Observable<
  */
 export function enemyNeoLandozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {
-    cutIn: new NeoLandozerCutIn(resources)
+    cutIn: enemyNeoLandozerCutIn(resources, listener)
   });
 }
