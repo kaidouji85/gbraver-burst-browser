@@ -7,6 +7,8 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import type {NeoLandozerCutInModel} from "./model/neo-landozer-cutin-model";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {Animate} from "../../../animation/animate";
+import {show} from "./animation/show";
 
 /**
  * ネオランドーザ カットイン
@@ -44,6 +46,15 @@ export class NeoLandozerCutIn {
   tracking(x: number, y: number): void {
     this._model.tracking.x = x;
     this._model.tracking.y = y;
+  }
+
+  /**
+   * カットインを表示する
+   *
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this._model);
   }
 
   /**
