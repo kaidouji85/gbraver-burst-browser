@@ -9,6 +9,9 @@ import type {NeoLandozerCutInModel} from "./neo-landozer-cutin-model";
  */
 export function createInitialValue(): NeoLandozerCutInModel {
   return {
+    animation: {
+      type: 'CUT_IN_UP',
+    },
     opacity: 0
   };
 }
