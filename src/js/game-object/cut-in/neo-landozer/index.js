@@ -5,6 +5,7 @@ import type {Resources} from "../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {PlayerNeoLandozerCutInView} from "./view/player-neo-landozer-cutin-view";
+import {EnemyNeoLandozerCutInView} from "./view/enemy-neo-landozer-cutin-view";
 
 /**
  * プレイヤー側 ネオランドーザ カットイン
@@ -26,6 +27,6 @@ export function playerNeoLandozerCutIn(resources: Resources, listener: Observabl
  * @return 生成結果
  */
 export function enemyNeoLandozerCutIn(resources: Resources, listener: Observable<GameObjectAction>): NeoLandozerCutIn {
-  const view = new PlayerNeoLandozerCutInView(resources); // TODO 敵側のビューを実装する
+  const view = new EnemyNeoLandozerCutInView(resources); // TODO 敵側のビューを実装する
   return new NeoLandozerCutIn(view, listener);
 }

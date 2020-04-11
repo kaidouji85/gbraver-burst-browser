@@ -6,6 +6,7 @@ import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
 import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
+import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 export const MAX_ANIMATION = 4;
 export const WIDTH = 500;
@@ -29,6 +30,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
       width: WIDTH,
       height: HEIGHT,
     });
+    this._cutInUp.getObject3D().position.z = HUD_CUT_IN_ZNIDEX;
   }
 
   /**
@@ -39,12 +41,12 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
   }
 
   /**
-   * シーンに追加するオブジェクトを取得する
+   * モデルをビューに反映する
    *
-   * @return シーンに追加するオブジェクト
+   * @param model モデル
    */
   engage(model: NeoLandozerCutInModel): void {
-    // NOP
+    this._cutInUp.getObject3D().scale.set(1, 1, 1);
   }
 
   /**
