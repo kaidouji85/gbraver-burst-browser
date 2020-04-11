@@ -14,7 +14,9 @@ export type NeoLandozerCutInModel = {
   /** アニメーション */
   animation: {
     /** アニメーションタイプ */
-    type: AnimationType
+    type: AnimationType,
+    /** アニメーションフレーム */
+    frame: number
   },
 
   /**

@@ -10,8 +10,9 @@ import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 
 export const MAX_ANIMATION = 4;
-export const WIDTH = 500;
-export const HEIGHT = 500;
+export const WIDTH = 1000;
+export const HEIGHT = 1000;
+export const BASE_PADDING_TOP = 150;
 
 /**
  * プレイヤー側　ネオランドーザ カットイン ビュー
@@ -69,15 +70,18 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    */
   engage(model: NeoLandozerCutInModel, preRender: PreRender): void {
     const activeMesh = this._getActiveMesh(model.animation.type);
-    const disActiveMeshes = this._getAllMeshes()
-      .filter(v => v !== activeMesh);
     activeMesh.setOpacity(1);
-    disActiveMeshes.forEach(v => {
-      v.setOpacity(0);
-    });
+    activeMesh.animate(model.animation.frame);
+
+    this._getAllMeshes()
+      .filter(v => v !== activeMesh)
+      .forEach(v => {
+        v.setOpacity(0);
+      });
 
     this._group.scale.set(1, 1, 1);
     this._group.position.x = model.tracking.x;
+    this._group.position.y = -BASE_PADDING_TOP;
   }
 
   /**

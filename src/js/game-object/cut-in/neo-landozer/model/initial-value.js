@@ -10,7 +10,8 @@ import type {NeoLandozerCutInModel} from "./neo-landozer-cutin-model";
 export function createInitialValue(): NeoLandozerCutInModel {
   return {
     animation: {
-      type: 'CUT_IN_UP',
+      type: 'CUT_IN_DOWN',
+      frame: 1,
     },
     tracking: {
       x: 0
