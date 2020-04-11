@@ -7,6 +7,7 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
 import type {AnimationType, NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
 
 export const MAX_ANIMATION = 4;
 export const WIDTH = 500;
@@ -62,17 +63,19 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    * モデルをビューに反映する
    *
    * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: NeoLandozerCutInModel): void {
+  engage(model: NeoLandozerCutInModel, preRender: PreRender): void {
     const activeMesh = this._getActiveMesh(model.animation.type);
     const disActiveMeshes = this._getAllMeshes()
       .filter(v => v !== activeMesh);
-
     activeMesh.setOpacity(model.opacity);
     disActiveMeshes.forEach(v => {
       v.setOpacity(0);
     });
+
     this._group.scale.set(1, 1, 1);
+    this._group.position.x = model.tracking.x;
   }
 
   /**

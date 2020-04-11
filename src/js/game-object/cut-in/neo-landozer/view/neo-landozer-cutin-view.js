@@ -2,6 +2,7 @@
 
 import * as THREE from 'three';
 import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
 
 /**
  * ネオランドーザ ビュー
@@ -16,8 +17,9 @@ export interface NeoLandozerCutInView {
    * モデルをビューに反映させる
    *
    * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: NeoLandozerCutInModel): void;
+  engage(model: NeoLandozerCutInModel, preRender: PreRender): void;
 
   /**
    * シーンに追加するオブジェクトを取得する

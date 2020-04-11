@@ -12,6 +12,9 @@ export function createInitialValue(): NeoLandozerCutInModel {
     animation: {
       type: 'CUT_IN_UP',
     },
+    tracking: {
+      x: 0
+    },
     opacity: 0
   };
 }
