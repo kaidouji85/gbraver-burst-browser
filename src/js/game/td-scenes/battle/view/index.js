@@ -199,7 +199,13 @@ export class BattleSceneView {
    * @param sprite スプライト
    */
   _trackingNeoLandozerCutIn(cutIn: NeoLandozerCutIn, sprite: ArmDozerSprite): void {
-    const hudPosition = toHUDCoordinate(sprite.getObject3D().position, this.td.camera.getCamera(), this._rendererDOM);
-    cutIn.tracking(hudPosition.x);
+    const target =sprite.getObject3D();
+    const tdPosition = {
+      x: target.position.x,
+      y: ARMDOZER_EFFECT_STANDARD_Y,
+      z: target.position.z
+    };
+    const hudPosition = toHUDCoordinate(tdPosition, this.td.camera.getCamera(), this._rendererDOM);
+    cutIn.tracking(hudPosition.x, hudPosition.y);
   }
 }

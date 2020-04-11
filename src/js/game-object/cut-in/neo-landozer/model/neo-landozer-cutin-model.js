@@ -25,7 +25,9 @@ export type NeoLandozerCutInModel = {
    */
   tracking: {
     /** x座標 */
-    x: number
+    x: number,
+    /** y座標 */
+    y: number,
   },
 
   /** 0〜1で指定する不透明度 */

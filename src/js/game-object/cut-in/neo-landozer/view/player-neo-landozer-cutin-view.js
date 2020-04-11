@@ -8,11 +8,11 @@ import * as THREE from "three";
 import type {AnimationType, NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
+import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
 
 export const MAX_ANIMATION = 4;
-export const WIDTH = 1000;
-export const HEIGHT = 1000;
-export const BASE_PADDING_TOP = 150;
+export const WIDTH = 800;
+export const HEIGHT = 800;
 
 /**
  * プレイヤー側　ネオランドーザ カットイン ビュー
@@ -79,9 +79,10 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
         v.setOpacity(0);
       });
 
-    this._group.scale.set(1, 1, 1);
+    const scale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
+    this._group.scale.set(scale, scale, scale);
     this._group.position.x = model.tracking.x;
-    this._group.position.y = -BASE_PADDING_TOP;
+    this._group.position.y = model.tracking.y;
   }
 
   /**

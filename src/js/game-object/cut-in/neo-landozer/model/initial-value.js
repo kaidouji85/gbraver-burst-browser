@@ -14,7 +14,8 @@ export function createInitialValue(): NeoLandozerCutInModel {
       frame: 1,
     },
     tracking: {
-      x: 0
+      x: 0,
+      y: 0,
     },
     opacity: 1
   };
