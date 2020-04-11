@@ -47,7 +47,9 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
       height: HEIGHT,
     });
 
-    this._group.add(this._cutInDown.getObject3D());
+    this._getAllMeshes().forEach(v => {
+      this._group.add(v.getObject3D());
+    });
   }
 
   /**
@@ -69,7 +71,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
     const activeMesh = this._getActiveMesh(model.animation.type);
     const disActiveMeshes = this._getAllMeshes()
       .filter(v => v !== activeMesh);
-    activeMesh.setOpacity(model.opacity);
+    activeMesh.setOpacity(1);
     disActiveMeshes.forEach(v => {
       v.setOpacity(0);
     });

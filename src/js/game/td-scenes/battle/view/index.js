@@ -21,6 +21,10 @@ import {
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../../../game-object/armdozer/position";
 import {toHUDCoordinate} from "./coordinate";
+import {NeoLandozerCutIn} from "../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
+import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
+import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
+import {TDSprite} from "./td/sprite";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -170,12 +174,32 @@ export class BattleSceneView {
     };
     const hudPlayerEffect = toHUDCoordinate(tdPlayerEffect, this.td.camera.getCamera(), this._rendererDOM);
     const hudEnemyEffect = toHUDCoordinate(tdEnemyEffect, this.td.camera.getCamera(), this._rendererDOM);
-
     this.hud.players.forEach(v => {
       const target = v.playerId === this._playerId
         ? hudPlayerEffect
         : hudEnemyEffect;
       v.gauge.tracking(target.x, target.y);
     });
+
+    this.hud.armdozers
+      .map(hudArmdozer => ({
+        hudArmdozer: hudArmdozer,
+        tdSprite: this.td.sprites.find(v => v.playerId === hudArmdozer.playerId)
+      })).filter(v => (v.hudArmdozer instanceof NeoLandozerHUD) && v.tdSprite)
+        .map(v => ((v: any): {hudArmdozer: NeoLandozerHUD, tdSprite: TDSprite}))
+        .forEach(v => {
+          this._trackingNeoLandozerCutIn(v.hudArmdozer.cutIn, v.tdSprite.sprite)
+        })
+  }
+
+  /**
+   * ネオランドーザカットインのトラッキング
+   *
+   * @param cutIn カットイン
+   * @param sprite スプライト
+   */
+  _trackingNeoLandozerCutIn(cutIn: NeoLandozerCutIn, sprite: ArmDozerSprite): void {
+    const hudPosition = toHUDCoordinate(sprite.getObject3D().position, this.td.camera.getCamera(), this._rendererDOM);
+    cutIn.tracking(hudPosition.x);
   }
 }
