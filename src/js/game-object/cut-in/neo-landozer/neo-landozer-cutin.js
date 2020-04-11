@@ -42,6 +42,6 @@ export class NeoLandozerCutIn {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._cutInUp;
+    return this._cutInUp.getObject3D();
   }
 }

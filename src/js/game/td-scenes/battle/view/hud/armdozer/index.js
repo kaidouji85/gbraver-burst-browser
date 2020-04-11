@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {enemyShinBraverHUD, playerShinBraverHUD} from "./shin-braver";
 import {EmptyHUDArmdozer} from "./empty";
+import {enemyNeoLandozerHUD, playerNeoLandozerHUD} from "./neo-landozer";
 
 /**
  * HUDレイヤー アームドーザ固有のオブジェクトを集めたもの
@@ -38,6 +39,8 @@ export function playerArmdozerHUD(resources: Resources, listener: Observable<Gam
   switch (state.armdozer.appearance) {
     case ArmdozerAppearances.SHIN_BRAVER:
       return playerShinBraverHUD(resources, listener, state);
+    case ArmdozerAppearances.NEO_LANDOZER:
+      return playerNeoLandozerHUD(resources, listener, state);
     default:
       return new EmptyHUDArmdozer(state);
   }
@@ -55,6 +58,8 @@ export function enemyArmdozerHUD(resources: Resources, listener: Observable<Game
   switch (state.armdozer.appearance) {
     case ArmdozerAppearances.SHIN_BRAVER:
       return enemyShinBraverHUD(resources, listener, state);
+    case ArmdozerAppearances.NEO_LANDOZER:
+      return enemyNeoLandozerHUD(resources, listener, state);
     default:
       return new EmptyHUDArmdozer(state);
   }
