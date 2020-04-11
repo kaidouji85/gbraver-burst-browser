@@ -16,21 +16,24 @@ export const HEIGHT = 500;
  * プレイヤー側　ネオランドーザ カットイン ビュー
  */
 export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
+  _group: THREE.Group;
   _cutInUp: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
+    this._group = new THREE.Group();
+    this._group.position.z = HUD_CUT_IN_ZNIDEX;
+
     const cutInUpResource = resources.textures.find(v => v.id === TEXTURE_IDS.NEO_LANDOZER_CUTIN_UP);
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
       : new THREE.Texture();
-
     this._cutInUp = new HorizontalAnimationMesh({
       texture: cutInUp,
       maxAnimation: MAX_ANIMATION,
       width: WIDTH,
       height: HEIGHT,
     });
-    this._cutInUp.getObject3D().position.z = HUD_CUT_IN_ZNIDEX;
+    this._group.add(this._cutInUp.getObject3D());
   }
 
   /**
@@ -46,7 +49,8 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    * @param model モデル
    */
   engage(model: NeoLandozerCutInModel): void {
-    this._cutInUp.getObject3D().scale.set(1, 1, 1);
+    this._cutInUp.setOpacity(model.opacity);
+    this._group.scale.set(1, 1, 1);
   }
 
   /**
@@ -55,6 +59,6 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._cutInUp.getObject3D();
+    return this._group;
   }
 }

@@ -9,6 +9,6 @@ import type {NeoLandozerCutInModel} from "./neo-landozer-cutin-model";
  */
 export function createInitialValue(): NeoLandozerCutInModel {
   return {
-    opacity: 1
+    opacity: 0
   };
 }
