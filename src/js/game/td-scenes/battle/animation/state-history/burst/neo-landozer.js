@@ -7,6 +7,7 @@ import type {TDArmdozer} from "../../../view/td/armdozer";
 import type {Burst} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
+import type {BuffPower} from "gbraver-burst-core/lib/player/armdozer/burst";
 
 /**
  * ネオランドーザ バーストアニメーション パラメータ
@@ -39,5 +40,20 @@ export function toNeoLandozerBurstAnimationParam(param: BurstAnimationParam): ?N
  * @return アニメーション
  */
 export function neoLandozerBurst(param: NeoLandozerBurstAnimationParam<Burst>): Animate {
+  if (param.burst.type === 'BuffPower') {
+    const buffPower = (param.burst: BuffPower);
+    const castParam = ((param: any): NeoLandozerBurstAnimationParam<typeof buffPower>);
+    return neoLandozerBuffPower(castParam);
+  }
+  return empty();
+}
+
+/**
+ * ネオランドーザ バフパワー
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function neoLandozerBuffPower(param: NeoLandozerBurstAnimationParam<BuffPower>): Animate {
   return empty();
 }

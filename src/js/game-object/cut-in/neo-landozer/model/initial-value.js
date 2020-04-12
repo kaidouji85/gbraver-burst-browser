@@ -17,6 +17,6 @@ export function createInitialValue(): NeoLandozerCutInModel {
       x: 0,
       y: 0,
     },
-    opacity: 1
+    opacity: 0
   };
 }
