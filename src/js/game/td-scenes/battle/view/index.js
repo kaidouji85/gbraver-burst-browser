@@ -24,7 +24,6 @@ import {toHUDCoordinate} from "./coordinate";
 import {NeoLandozerCutIn} from "../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
-import {TDSprite} from "./td/sprite";
 
 /** コンストラクタのパラメータ */
 type Param = {

@@ -4,10 +4,9 @@ import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param"
 import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {NeoLandozerHUD} from "../../../view/hud/armdozer/neo-landozer";
 import type {TDArmdozer} from "../../../view/td/armdozer";
-import type {Burst} from "gbraver-burst-core";
+import type {BuffPower, Burst} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import type {BuffPower} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
 

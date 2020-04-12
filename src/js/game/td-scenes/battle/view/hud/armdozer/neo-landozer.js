@@ -2,12 +2,11 @@
 
 import * as THREE from 'three';
 import type {HUDArmdozer} from "./index";
-import type {PlayerId} from "gbraver-burst-core";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import {NeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
-import type {Player} from "gbraver-burst-core";
 import {enemyNeoLandozerCutIn, playerNeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer";
 
 /**

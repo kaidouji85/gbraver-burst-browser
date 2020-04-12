@@ -27,6 +27,6 @@ export function playerNeoLandozerCutIn(resources: Resources, listener: Observabl
  * @return 生成結果
  */
 export function enemyNeoLandozerCutIn(resources: Resources, listener: Observable<GameObjectAction>): NeoLandozerCutIn {
-  const view = new EnemyNeoLandozerCutInView(resources); // TODO 敵側のビューを実装する
+  const view = new EnemyNeoLandozerCutInView(resources);
   return new NeoLandozerCutIn(view, listener);
 }
