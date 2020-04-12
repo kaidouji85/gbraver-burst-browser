@@ -24,6 +24,7 @@ import {toHUDCoordinate} from "./coordinate";
 import {NeoLandozerCutIn} from "../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
+import {Gauge} from "../../../../game-object/gauge/gauge";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -161,23 +162,12 @@ export class BattleSceneView {
    * 3Dレイヤーの内容をトラッキングする
    */
   _trackingTD(): void {
-    const tdPlayerEffect = {
-      x: ARMDOZER_EFFECT_STANDARD_X,
-      y: ARMDOZER_EFFECT_STANDARD_Y + 200,
-      z: ARMDOZER_EFFECT_STANDARD_Z
-    };
-    const tdEnemyEffect = {
-      x: -ARMDOZER_EFFECT_STANDARD_X,
-      y: ARMDOZER_EFFECT_STANDARD_Y + 200,
-      z: ARMDOZER_EFFECT_STANDARD_Z
-    };
-    const hudPlayerEffect = toHUDCoordinate(tdPlayerEffect, this.td.camera.getCamera(), this._rendererDOM);
-    const hudEnemyEffect = toHUDCoordinate(tdEnemyEffect, this.td.camera.getCamera(), this._rendererDOM);
     this.hud.players.forEach(v => {
-      const target = v.playerId === this._playerId
-        ? hudPlayerEffect
-        : hudEnemyEffect;
-      v.gauge.tracking(target.x, target.y);
+      if (v.playerId === this._playerId) {
+        this._trackingPlayerGauge(v.gauge);
+      } else {
+        this._trackingEnemyGauge(v.gauge);
+      }
     });
 
     this.hud.armdozers.forEach(hudArmdozer => {
@@ -189,6 +179,36 @@ export class BattleSceneView {
           }
         });
     });
+  }
+
+  /**
+   * プレイヤーゲージをトラッキングする
+   *
+   * @param gauge ゲージ
+   */
+  _trackingPlayerGauge(gauge: Gauge): void {
+    const tdCoordinate = {
+      x: ARMDOZER_EFFECT_STANDARD_X,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 200,
+      z: ARMDOZER_EFFECT_STANDARD_Z
+    };
+    const hudCoordinate = toHUDCoordinate(tdCoordinate, this.td.camera.getCamera(), this._rendererDOM);
+    gauge.tracking(hudCoordinate.x, hudCoordinate.y);
+  }
+
+  /**
+   * 敵ゲージをトラッキングする
+   *
+   * @param gauge ゲージ
+   */
+  _trackingEnemyGauge(gauge: Gauge): void {
+    const tdCoordinate = {
+      x: -ARMDOZER_EFFECT_STANDARD_X,
+      y: ARMDOZER_EFFECT_STANDARD_Y + 200,
+      z: ARMDOZER_EFFECT_STANDARD_Z
+    };
+    const hudCoordinate = toHUDCoordinate(tdCoordinate, this.td.camera.getCamera(), this._rendererDOM);
+    gauge.tracking(hudCoordinate.x, hudCoordinate.y);
   }
 
   /**
