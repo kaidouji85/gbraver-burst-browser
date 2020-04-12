@@ -14,18 +14,24 @@ import {all} from "../../../../animation/all";
  * @return アニメーション
  */
 export function show(model: NeoLandozerCutInModel): Animate {
-  return process(() => {
-    model.animation.type = 'CUT_IN_UP';
-    model.animation.frame = 0;
-    model.opacity = 0;
-    model.scale = 1;
-  }).chain(all(
-    tween(model.animation, t => t.to({frame: 1}, 300)),
-    tween(model, t => t.to({opacity: 1}, 300))
-  )).chain(delay(100)
-  ).chain(process(() => {
-      model.animation.type = 'CUT_IN_DOWN';
+  return all(
+    process(() => {
+      model.animation.type = 'CUT_IN_UP';
       model.animation.frame = 0;
-    })
-  ).chain(tween(model.animation, t => t.to({frame: 1}, 200)));
+    }).chain(tween(model.animation, t => t.to({frame: 1}, 300))
+    ).chain(delay(100)
+    ).chain(process(() => {
+        model.animation.type = 'CUT_IN_DOWN';
+        model.animation.frame = 0;
+      })
+    ).chain(tween(model.animation, t => t.to({frame: 1}, 200))),
+
+    process(() => {
+      model.opacity = 0;
+    }).chain(tween(model, t => t.to({opacity: 1}, 600))),
+
+    process(() => {
+      model.scale = 0.9;
+    }).chain(tween(model, t => t.to({scale: 1}, 300)))
+  );
 }
