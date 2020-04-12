@@ -1,13 +1,14 @@
 // @flow
 
 import test from 'ava';
-import {endBattle, MAX_LEVEL} from "../../../../src/js/game/state/end-battle";
+import {endBattle} from "../../../../src/js/game/state/end-battle";
 import type {State} from "../../../../src/js/game/state/state";
 import {EMPTY_STATE} from "../../../data/state";
 import type {EndBattle} from "../../../../src/js/action/game/battle";
 import {EMPTY_PLAYER} from "../../../data/player";
 import type {Player, GameOver, EvenMatch} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../data/end-battle";
+import {MAX_LEVEL} from "../../../../src/js/game/state/state";
 
 const player: Player = {
   ...EMPTY_PLAYER,
