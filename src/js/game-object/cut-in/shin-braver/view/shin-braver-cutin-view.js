@@ -1,7 +1,6 @@
 // @flow
 
 import * as THREE from 'three';
-import type {CutIn} from "../../cut-in";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
@@ -15,7 +14,7 @@ export const MESH_SIZE = 500;
 /**
  * シンブレイバーカットインのビュー
  */
-export class ShinBraverCutInView implements CutIn {
+export class ShinBraverCutInView {
   _group: THREE.Group;
   _charge: HorizontalAnimationMesh;
   _release: HorizontalAnimationMesh;
@@ -73,11 +72,11 @@ export class ShinBraverCutInView implements CutIn {
 
     this._group.position.x = model.position.x * devicePerScale;
     this._group.position.y = model.position.y * devicePerScale;
-    this._group.position.z = model.position.z * devicePerScale;
+    this._group.position.z = model.position.z;
 
     this._group.scale.x = model.scale * devicePerScale;
     this._group.scale.y = model.scale * devicePerScale;
-    this._group.scale.z = model.scale * devicePerScale;
+    this._group.scale.z = model.scale;
 
     const activeMesh = this._getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);

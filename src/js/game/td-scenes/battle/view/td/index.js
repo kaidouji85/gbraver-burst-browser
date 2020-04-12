@@ -2,11 +2,9 @@
 import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
-import type {GameLoop} from "../../../../../action/game-loop/game-loop";
-import type {Render} from "../../../../../action/game-loop/render";
 import {TDCamera} from "../../../../../game-object/camera/td";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
 import type {TDPlayer} from "./player";
@@ -16,12 +14,12 @@ import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
-import type {SafeAreaInset} from "../../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../../action/resize/resize";
 import {skyBox} from "./sky-box";
 import {enemySprite, playerSprite, TDSprite} from "./sprite";
 import type {TDArmdozer} from "./armdozer";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer";
+import type {GameObjectAction} from "../../../../../action/game-object-action";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -29,17 +27,12 @@ type Param = {
   playerId: PlayerId,
   players: Player[],
   rendererDOM: HTMLElement,
-  safeAreaInset: SafeAreaInset,
   listener: {
     domEvent: Observable<TdDOMEvent>,
-    gameLoop: Observable<GameLoop>,
     resize: Observable<Resize>,
+    update: Observable<Update>,
+    preRender: Observable<PreRender>,
   }
-};
-
-/** イベント通知 */
-type Notifier = {
-  render: Observable<Render>
 };
 
 /** 3Dレイヤー */
@@ -50,36 +43,24 @@ export class ThreeDimensionLayer {
   sprites: TDSprite[];
   armdozers: TDArmdozer[];
   gameObjects: TDGameObjects;
-
-  _rendererDOM: HTMLElement;
-  _safeAreaInset: SafeAreaInset;
-  _update: Subject<Update>;
-  _preRender: Subject<PreRender>;
-  _render: Subject<Render>;
   _overlap: Observable<OverlapAction>;
-  _subscription: Subscription[];
+  _gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
     const enemy = param.players.find(v => v.playerId !== param.playerId) || param.players[0];
 
-    this._rendererDOM = param.rendererDOM;
-    this._safeAreaInset = param.safeAreaInset;
-    this._update = new Subject();
-    this._preRender = new Subject();
-    this._render = new Subject();
-
     this.scene = new THREE.Scene();
     this.scene.background = skyBox(param.resources);
 
-    this.camera = new TDCamera(this._update, param.listener.resize);
+    this.camera = new TDCamera(param.listener.update, param.listener.resize);
 
-    this._overlap = toOverlapStream(param.listener.domEvent, this._rendererDOM, this.camera.getCamera());
-    const gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
+    this._overlap = toOverlapStream(param.listener.domEvent, param.rendererDOM, this.camera.getCamera());
+    this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
 
     this.players = [
-      playerTDObjects(param.resources, player, gameObjectAction),
-      enemyTDObject(param.resources, enemy, gameObjectAction)
+      playerTDObjects(param.resources, player, this._gameObjectAction),
+      enemyTDObject(param.resources, enemy, this._gameObjectAction)
     ];
     this.players.map(v => v.getObject3Ds())
       .flat()
@@ -88,8 +69,8 @@ export class ThreeDimensionLayer {
       });
 
     this.sprites = param.players.map(v => v.playerId === param.playerId
-      ? playerSprite(param.resources, v, gameObjectAction)
-      : enemySprite(param.resources, v, gameObjectAction)
+      ? playerSprite(param.resources, v, this._gameObjectAction)
+      : enemySprite(param.resources, v, this._gameObjectAction)
     );
     this.sprites.map(v => v.getObject3Ds())
       .flat()
@@ -98,8 +79,8 @@ export class ThreeDimensionLayer {
       });
 
     this.armdozers = param.players.map(v => v.playerId === param.playerId
-      ? playerTDArmdozer(param.resources, gameObjectAction, v)
-      : enemyTDArmdozer(param.resources, gameObjectAction, v)
+      ? playerTDArmdozer(param.resources, this._gameObjectAction, v)
+      : enemyTDArmdozer(param.resources, this._gameObjectAction, v)
     );
     this.armdozers.map(v => v.getObject3Ds())
       .flat()
@@ -116,18 +97,8 @@ export class ThreeDimensionLayer {
         })
     });
 
-    this.gameObjects = createTDGameObjects(param.resources, gameObjectAction);
+    this.gameObjects = createTDGameObjects(param.resources, this._gameObjectAction);
     appendTDGameObjects(this.scene, this.gameObjects);
-
-    this._subscription = [
-      param.listener.gameLoop.subscribe(action => {
-        this._gameLoop(action);
-      }),
-
-      param.listener.resize.subscribe(action => {
-        this._resize(action);
-      })
-    ];
   }
 
   /** デストラクタ */
@@ -145,53 +116,5 @@ export class ThreeDimensionLayer {
     disposeTDGameObjects(this.gameObjects);
     this.camera.destructor();
     this.scene.dispose();
-    this._subscription.forEach(v => {
-      v.unsubscribe();
-    });
-  }
-
-  /**
-   * イベント通知ストリームを取得する
-   *
-   * @return イベント通知ストリーム
-   */
-  notifier(): Notifier {
-    return {
-      render: this._render
-    };
-  }
-
-  /**
-   * ゲームループの処理
-   *
-   * @param action アクション
-   */
-  _gameLoop(action: GameLoop): void {
-    this._update.next({
-      type: 'Update',
-      time: action.time
-    });
-
-    this._preRender.next({
-      type: 'PreRender',
-      camera: this.camera.getCamera(),
-      rendererDOM: this._rendererDOM,
-      safeAreaInset: this._safeAreaInset,
-    });
-
-    this._render.next({
-      type: 'Render',
-      scene: this.scene,
-      camera: this.camera.getCamera()
-    });
-  }
-
-  /**
-   * リサイズ時の処理
-   *
-   * @param action アクション
-   */
-  _resize(action: Resize): void {
-    this._safeAreaInset = action.safeAreaInset;
   }
 }

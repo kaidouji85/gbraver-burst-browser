@@ -1,16 +1,22 @@
 // @flow
+
+import TWEEN from "@tweenjs/tween.js";
 import type {Resources} from '../../../../resource';
 import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
-import {merge, Observable, Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import type {TdDOMEvent} from "../../../../action/td-dom";
 import type {BattleSceneAction} from "../../../../action/battle-scene";
 import type {Render} from "../../../../action/game-loop/render";
-import TWEEN from "@tweenjs/tween.js";
+import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../action/resize/resize";
+import type {Update} from "../../../../action/game-loop/update";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
+import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
+import {trackingEnemyGauge, trackingNeoLandozerCutIn, trackingPlayerGauge} from "./tracking";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -37,39 +43,49 @@ type Notifier = {
 export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
-
-  _gameLoop3D: Subject<GameLoop>;
-  _gameLoopHUD: Subject<GameLoop>;
+  _playerId: PlayerId;
+  _safeAreaInset: SafeAreaInset;
+  _rendererDOM: HTMLElement;
+  _rendering: Subject<Render>;
+  _updateTD: Subject<Update>;
+  _preRenderTD: Subject<PreRender>;
+  _updateHUD: Subject<Update>;
+  _preRenderHUD: Subject<PreRender>;
 
   constructor(param: Param) {
-    const safeAreaInset = createSafeAreaInset();
-
-    this._gameLoop3D = new Subject();
-    this._gameLoopHUD = new Subject();
+    this._playerId = param.playerId;
+    this._safeAreaInset = createSafeAreaInset();
+    this._rendererDOM = param.rendererDOM;
+    this._rendering = new Subject();
+    this._updateTD = new Subject();
+    this._preRenderTD = new Subject();
+    this._updateHUD = new Subject();
+    this._preRenderHUD = new Subject();
 
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
-      safeAreaInset: safeAreaInset,
+      safeAreaInset: this._safeAreaInset,
       playerId: param.playerId,
       players: param.players,
       listener: {
         domEvent: param.listener.domEvent,
-        gameLoop: this._gameLoop3D,
         resize: param.listener.resize,
+        update: this._updateTD,
+        preRender: this._preRenderTD,
       }
     });
 
     this.hud = new HudLayer({
       resources: param.resources,
       rendererDOM: param.rendererDOM,
-      safeAreaInset: safeAreaInset,
       playerId: param.playerId,
       players: param.players,
       listener: {
         domEvent: param.listener.domEvent,
-        gameLoop: this._gameLoopHUD,
-        resize: param.listener.resize
+        resize: param.listener.resize,
+        update: this._updateHUD,
+        preRender: this._preRenderHUD,
       }
     });
 
@@ -78,7 +94,9 @@ export class BattleSceneView {
     });
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.hud.destructor();
     this.td.destructor();
@@ -91,18 +109,73 @@ export class BattleSceneView {
    */
   notifier(): Notifier {
     return {
-      render: merge(
-        this.hud.notifier().render,
-        this.td.notifier().render
-      ),
+      render: this._rendering,
       battleAction: this.hud.notifier().battleAction,
     };
   }
 
-  /** ゲームループ */
+  /**
+   * ゲームループ
+   *
+   * @param action アクション
+   */
   _gameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
-    this._gameLoop3D.next(action);
-    this._gameLoopHUD.next(action);
+
+    this._updateTD.next({
+      type: 'Update',
+      time: action.time
+    });
+    this._preRenderTD.next({
+      type: 'PreRender',
+      camera: this.td.camera.getCamera(),
+      rendererDOM: this._rendererDOM,
+      safeAreaInset: this._safeAreaInset,
+    });
+    this._rendering.next({
+      type: 'Render',
+      scene: this.td.scene,
+      camera: this.td.camera.getCamera()
+    });
+
+    this._updateHUD.next({
+      type: 'Update',
+      time: action.time
+    });
+    this._trackingTD();
+    this._preRenderHUD.next({
+      type: 'PreRender',
+      camera: this.hud.camera.getCamera(),
+      rendererDOM: this._rendererDOM,
+      safeAreaInset: this._safeAreaInset,
+    });
+    this._rendering.next({
+      type: 'Render',
+      scene: this.hud.scene,
+      camera: this.hud.camera.getCamera()
+    });
+  }
+
+  /**
+   * 3Dレイヤーのオブジェクトをトラッキングする
+   */
+  _trackingTD(): void {
+    this.hud.players.forEach(v => {
+      if (v.playerId === this._playerId) {
+        trackingPlayerGauge(this.td.camera.getCamera(), this._rendererDOM, v.gauge);
+      } else {
+        trackingEnemyGauge(this.td.camera.getCamera(), this._rendererDOM, v.gauge);
+      }
+    });
+
+    this.hud.armdozers.forEach(hudArmdozer => {
+      this.td.sprites
+        .filter(tdSprite => tdSprite.playerId === hudArmdozer.playerId)
+        .forEach(tdSprite => {
+          if (hudArmdozer instanceof NeoLandozerHUD) {
+            trackingNeoLandozerCutIn(this.td.camera.getCamera(), this._rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
+          }
+        });
+    });
   }
 }

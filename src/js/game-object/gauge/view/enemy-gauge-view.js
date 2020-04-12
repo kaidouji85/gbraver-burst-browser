@@ -10,14 +10,16 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {EnemyHpBar} from "./enemy-hp-bar";
 import {HpNumber} from "./hp-number";
 import {EnemyBatteryGauge} from "./enemy-battery-gauge";
-import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../armdozer/position";
+import {devicePerScaleForHUD} from "../../../device-per-scale/hud";
 
+/** キャンバスの大きさ */
 export const BASE_CANVAS_SIZE = 1024;
-export const SCALE = 0.3;
+
+/** 基本拡大率 */
+export const BASE_SCALE = 0.3;
+
+/** 上余白 最小値 */
+export const MIN_PADDING_TOP = 50;
 
 /** 敵のビュー */
 export class EnemyGaugeView implements GaugeView {
@@ -30,7 +32,7 @@ export class EnemyGaugeView implements GaugeView {
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
-    this._group.scale.set(SCALE, SCALE, SCALE);
+    this._group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
 
     const gaugeBaseResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE);
     const gaugeBase = gaugeBaseResource
@@ -69,34 +71,39 @@ export class EnemyGaugeView implements GaugeView {
     this._batteryGauge.destructor();
   }
 
-  /** モデルをビューに反映させる */
-  engage(model: GaugeModel): void {
+  /**
+   * モデルをビューに反映させる
+   * 
+   * @param model モデル
+   * @param preRender プリレンダー
+   */
+  engage(model: GaugeModel, preRender: PreRender): void {
+    const devicePerScale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
+
     this._hpBar.setValue(model.hp / model.maxHp);
     this._hpNumber.setValue(model.hp);
     this._maxHpNumber.setValue(model.maxHp);
     this._batteryGauge.engage(model.batteryList);
-  }
 
-  /** プリレンダー */
-  preRender(action: PreRender): void {
-    this._setPos();
-    this._lookAt(action.camera);
+    this._group.scale.set(
+      BASE_SCALE * devicePerScale,
+      BASE_SCALE * devicePerScale,
+      BASE_SCALE * devicePerScale
+    );
+
+    const minY = preRender.rendererDOM.clientHeight / 2
+      - MIN_PADDING_TOP * devicePerScale;
+    const safeAreaY = preRender.rendererDOM.clientHeight / 2
+      - preRender.safeAreaInset.top * devicePerScale;
+    this._group.position.x = model.tracking.x;
+    this._group.position.y = Math.min(minY, safeAreaY, model.tracking.y);
+    this._group.position.z = 0;
+
+    this._group.quaternion.copy(preRender.camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._group;
-  }
-
-  /** 座標をセットする */
-  _setPos(): void {
-    this._group.position.x = -ARMDOZER_EFFECT_STANDARD_X;
-    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y + 200;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
-  }
-
-  /** カメラの真正面を向く */
-  _lookAt(camera: THREE.Camera): void {
-    this._group.quaternion.copy(camera.quaternion);
   }
 }

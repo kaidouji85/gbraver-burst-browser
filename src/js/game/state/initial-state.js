@@ -1,7 +1,7 @@
 // @flow
 
-import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
 import type {Player} from "gbraver-burst-core";
+import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
 import type {State} from "./state";
 import {playerUuid} from "../../uuid/player";
 

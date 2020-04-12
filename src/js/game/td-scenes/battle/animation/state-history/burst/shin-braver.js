@@ -71,7 +71,7 @@ function recoverBattery(param: ShinBraverBurstAnimationParam<RecoverBattery>): A
     param.burstArmdozerHUD.cutIn.hidden(),
   )).chain(delay(500)
   ).chain(all(
-    param.burstPlayerTD.gauge.battery(param.burstPlayerState.armdozer.battery),
+    param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
   )).chain(delay(500)
   ).chain(all(

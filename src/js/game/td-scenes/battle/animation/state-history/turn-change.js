@@ -19,8 +19,9 @@ import {attentionArmDozer, toInitial} from "../td-camera";
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
   const activeTDSprite = view.td.sprites.find(v => v.playerId === gameState.activePlayerId);
+  const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeTDPlayer || !activeTDSprite || !activeStatus) {
+  if (!activeTDPlayer || !activeTDSprite || !activeHUDPlayer || !activeStatus) {
     return empty();
   }
 
@@ -32,7 +33,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
       .chain(all(
         // TODO バッテリー回復値をeffectに持たせる
         activeTDPlayer.recoverBattery.popUp(3),
-        activeTDPlayer.gauge.battery(activeStatus.armdozer.battery))
+        activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery))
       ),
     activeTDSprite.sprite.turnStart(),
   ).chain(delay(800)

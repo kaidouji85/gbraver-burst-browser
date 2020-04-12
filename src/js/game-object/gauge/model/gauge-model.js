@@ -11,5 +11,9 @@ export type GaugeModel = {
   hp: number,
   maxHp: number,
   batteryList: Battery[],
+  tracking: {
+    x: number,
+    y: number,
+  }
 };
 

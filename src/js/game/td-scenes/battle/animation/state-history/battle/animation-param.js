@@ -9,6 +9,7 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import {TDCamera} from "../../../../../../game-object/camera/td";
 import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
+import {HUDPlayer} from "../../../view/hud/player";
 
 /**
  * 戦闘アニメーション共通で使うパラメータ
@@ -20,9 +21,11 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
 export type BattleAnimationParamX<SPRITE: ArmDozerSprite, RESULT: BattleResult> = {
   attackerState: PlayerState,
   attackerTD: TDPlayer,
+  attackerHUD: HUDPlayer,
   attackerSprite: SPRITE,
   defenderState: PlayerState,
   defenderTD: TDPlayer,
+  defenderHUD: HUDPlayer,
   defenderSprite: ArmDozerSprite,
   tdObjects: TDGameObjects,
   tdCamera: TDCamera,
@@ -51,20 +54,24 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
   const effect: Battle = gameState.effect;
   const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
   const attackerTD = view.td.players.find(v => v.playerId === effect.attacker);
+  const attackerHUD = view.hud.players.find(v => v.playerId === effect.attacker);
   const attackerSprite = view.td.sprites.find(v => v.playerId === effect.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
   const defenderTD = view.td.players.find(v => v.playerId !== effect.attacker);
+  const defenderHUD = view.hud.players.find(v => v.playerId !== effect.attacker);
   const defenderSprite = view.td.sprites.find(v => v.playerId !== effect.attacker);
-  if (!attackerState || !attackerTD || !attackerSprite || !defenderState || !defenderTD || !defenderSprite) {
+  if (!attackerState || !attackerTD || !attackerHUD || !attackerSprite || !defenderState || !defenderTD || !defenderHUD || !defenderSprite) {
     return null;
   }
 
   return {
     attackerState: attackerState,
     attackerTD: attackerTD,
+    attackerHUD: attackerHUD,
     attackerSprite: attackerSprite.sprite,
     defenderState: defenderState,
     defenderTD: defenderTD,
+    defenderHUD: defenderHUD,
     defenderSprite: defenderSprite.sprite,
     tdObjects: view.td.gameObjects,
     tdCamera: view.td.camera,
