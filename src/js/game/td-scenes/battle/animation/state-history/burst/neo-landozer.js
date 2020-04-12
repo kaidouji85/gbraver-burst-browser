@@ -67,6 +67,7 @@ function neoLandozerBuffPower(param: NeoLandozerBurstAnimationParam<BuffPower>):
     param.tdObjects.turnIndicator.invisible(),
   ).chain(delay(2000)
   ).chain(all(
+    param.burstArmdozerHUD.cutIn.hidden(),
     param.hudObjects.rearmostFader.opacity(0, 300),
   )).chain(delay(500)
   ).chain(all(
@@ -74,6 +75,7 @@ function neoLandozerBuffPower(param: NeoLandozerBurstAnimationParam<BuffPower>):
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
   )).chain(delay(500)
   ).chain(all(
+    param.burstSprite.turnStartToStand(),
     toInitial(param.tdCamera, 500),
     param.tdObjects.skyBrightness.brightness(1, 500),
     param.tdObjects.illumination.intensity(1, 500),

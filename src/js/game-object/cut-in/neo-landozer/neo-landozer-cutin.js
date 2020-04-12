@@ -9,6 +9,7 @@ import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
+import {hidden} from "./animation/hidden";
 
 /**
  * ネオランドーザ カットイン
@@ -55,6 +56,15 @@ export class NeoLandozerCutIn {
    */
   show(): Animate {
     return show(this._model);
+  }
+
+  /**
+   * カットインを非表示にする
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**

@@ -5,6 +5,7 @@ import {process} from '../../../../animation/process';
 import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 import {tween} from "../../../../animation/tween";
 import {delay} from "../../../../animation/delay";
+import {all} from "../../../../animation/all";
 
 /**
  * カットインを表示する
@@ -17,10 +18,10 @@ export function show(model: NeoLandozerCutInModel): Animate {
     model.animation.type = 'CUT_IN_UP';
     model.animation.frame = 0;
     model.opacity = 0;
-  }).chain(
+  }).chain(all(
     tween(model.animation, t => t.to({frame: 1}, 300)),
     tween(model, t => t.to({opacity: 1}, 300))
-  ).chain(delay(100)
+  )).chain(delay(100)
   ).chain(process(() => {
       model.animation.type = 'CUT_IN_DOWN';
       model.animation.frame = 0;
