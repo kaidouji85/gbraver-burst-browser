@@ -79,12 +79,6 @@ export class NeoLandozerNPC implements NPC {
    * @return コマンド
    */
   _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
-    // TODO 開発が完了したら削除する
-    const burst = commands.find(v => v.type === 'BURST_COMMAND');
-    if (burst) {
-      return burst;
-    }
-
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
     const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
 
