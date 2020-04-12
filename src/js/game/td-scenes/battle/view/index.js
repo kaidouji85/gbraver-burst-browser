@@ -15,16 +15,8 @@ import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../action/resize/resize";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
-import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../../../game-object/armdozer/position";
-import {toHUDCoordinate} from "./coordinate";
-import {NeoLandozerCutIn} from "../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
-import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
-import {Gauge} from "../../../../game-object/gauge/gauge";
+import {trackingEnemyGauge, trackingNeoLandozerCutIn, trackingPlayerGauge} from "./tracking";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -102,7 +94,9 @@ export class BattleSceneView {
     });
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.hud.destructor();
     this.td.destructor();
@@ -120,7 +114,11 @@ export class BattleSceneView {
     };
   }
 
-  /** ゲームループ */
+  /**
+   * ゲームループ
+   *
+   * @param action アクション
+   */
   _gameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
 
@@ -159,14 +157,14 @@ export class BattleSceneView {
   }
 
   /**
-   * 3Dレイヤーの内容をトラッキングする
+   * 3Dレイヤーのオブジェクトをトラッキングする
    */
   _trackingTD(): void {
     this.hud.players.forEach(v => {
       if (v.playerId === this._playerId) {
-        this._trackingPlayerGauge(v.gauge);
+        trackingPlayerGauge(this.td.camera.getCamera(), this._rendererDOM, v.gauge);
       } else {
-        this._trackingEnemyGauge(v.gauge);
+        trackingEnemyGauge(this.td.camera.getCamera(), this._rendererDOM, v.gauge);
       }
     });
 
@@ -175,56 +173,9 @@ export class BattleSceneView {
         .filter(tdSprite => tdSprite.playerId === hudArmdozer.playerId)
         .forEach(tdSprite => {
           if (hudArmdozer instanceof NeoLandozerHUD) {
-            this._trackingNeoLandozerCutIn(hudArmdozer.cutIn, tdSprite.sprite);
+            trackingNeoLandozerCutIn(this.td.camera.getCamera(), this._rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
           }
         });
     });
-  }
-
-  /**
-   * プレイヤーゲージをトラッキングする
-   *
-   * @param gauge ゲージ
-   */
-  _trackingPlayerGauge(gauge: Gauge): void {
-    const tdCoordinate = {
-      x: ARMDOZER_EFFECT_STANDARD_X,
-      y: ARMDOZER_EFFECT_STANDARD_Y + 200,
-      z: ARMDOZER_EFFECT_STANDARD_Z
-    };
-    const hudCoordinate = toHUDCoordinate(tdCoordinate, this.td.camera.getCamera(), this._rendererDOM);
-    gauge.tracking(hudCoordinate.x, hudCoordinate.y);
-  }
-
-  /**
-   * 敵ゲージをトラッキングする
-   *
-   * @param gauge ゲージ
-   */
-  _trackingEnemyGauge(gauge: Gauge): void {
-    const tdCoordinate = {
-      x: -ARMDOZER_EFFECT_STANDARD_X,
-      y: ARMDOZER_EFFECT_STANDARD_Y + 200,
-      z: ARMDOZER_EFFECT_STANDARD_Z
-    };
-    const hudCoordinate = toHUDCoordinate(tdCoordinate, this.td.camera.getCamera(), this._rendererDOM);
-    gauge.tracking(hudCoordinate.x, hudCoordinate.y);
-  }
-
-  /**
-   * ネオランドーザカットインのトラッキング
-   *
-   * @param cutIn カットイン
-   * @param sprite スプライト
-   */
-  _trackingNeoLandozerCutIn(cutIn: NeoLandozerCutIn, sprite: ArmDozerSprite): void {
-    const target =sprite.getObject3D();
-    const tdPosition = {
-      x: target.position.x,
-      y: ARMDOZER_EFFECT_STANDARD_Y,
-      z: target.position.z
-    };
-    const hudPosition = toHUDCoordinate(tdPosition, this.td.camera.getCamera(), this._rendererDOM);
-    cutIn.tracking(hudPosition.x, hudPosition.y);
   }
 }
