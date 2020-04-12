@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {HUDArmdozer} from "./index";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {PlayerId} from "gbraver-burst-core";
 import {NeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";

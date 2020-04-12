@@ -7,7 +7,7 @@ import type {TDArmdozer} from "../../../view/td/armdozer";
 import type {Burst} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import type {BuffPower} from "gbraver-burst-core/lib/player/armdozer/burst";
+import type {BuffPower} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
 
