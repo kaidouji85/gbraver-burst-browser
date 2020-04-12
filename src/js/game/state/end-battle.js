@@ -1,11 +1,9 @@
 // @flow
 
 import type {State} from "./state";
+import {MAX_LEVEL} from "./state";
 import type {EndBattle} from "../../action/game/battle";
 import type {GameOver} from "gbraver-burst-core";
-
-/** 最大レベル */
-export const MAX_LEVEL = 2;
 
 /**
  * 戦闘終了に伴いゲーム情報を更新する
