@@ -81,6 +81,7 @@ export class NeoLandozerNPC implements NPC {
   _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
     const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
+
     if (battery2) {
       return battery2;
     }
