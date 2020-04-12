@@ -13,7 +13,7 @@ const ZERO_BATTERY = {
 /**
  * ネオランドーザ 強いNPC
  */
-export class StringNeoLandozerNPC implements NPC {
+export class StrongNeoLandozerNPC implements NPC {
   /**
    * アームドーザ
    */
@@ -70,19 +70,25 @@ export class StringNeoLandozerNPC implements NPC {
     const maxBattery = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === enemy.armdozer.battery);
     const maxBatteryMinusOne = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === enemy.armdozer.battery - 1);
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+    const battery0 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 0);
 
+    const canFullBatteryAttack = player.armdozer.battery <= 4;
     const plusCorrectPowers = enemy.armdozer.effects.filter(v => v.type === 'CorrectPower' && (0 < v.power));
     const hasPlusCorrectPower = 0 < plusCorrectPowers.length;
 
-    if (burst && (player.armdozer.battery <= 4)) {
+    if (burst && canFullBatteryAttack) {
       return burst;
     }
 
-    if (hasPlusCorrectPower && maxBattery && (player.armdozer.battery <= 4) ) {
+    if (burst && battery0 && !canFullBatteryAttack) {
+      return battery0;
+    }
+
+    if (hasPlusCorrectPower && maxBattery && canFullBatteryAttack) {
       return maxBattery;
     }
 
-    if (!hasPlusCorrectPower && maxBatteryMinusOne) {
+    if (maxBatteryMinusOne) {
       return maxBatteryMinusOne;
     }
 
