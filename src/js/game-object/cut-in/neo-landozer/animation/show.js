@@ -18,6 +18,7 @@ export function show(model: NeoLandozerCutInModel): Animate {
     model.animation.type = 'CUT_IN_UP';
     model.animation.frame = 0;
     model.opacity = 0;
+    model.scale = 1;
   }).chain(all(
     tween(model.animation, t => t.to({frame: 1}, 300)),
     tween(model, t => t.to({opacity: 1}, 300))

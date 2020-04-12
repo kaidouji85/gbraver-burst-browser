@@ -79,7 +79,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
         v.setOpacity(0);
       });
 
-    const scale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
+    const scale = model.scale * devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
     this._group.scale.set(scale, scale, scale);
     this._group.position.x = model.tracking.x;
     this._group.position.y = model.tracking.y;

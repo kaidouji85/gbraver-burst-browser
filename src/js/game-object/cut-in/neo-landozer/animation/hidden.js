@@ -11,5 +11,5 @@ import {tween} from "../../../../animation/tween";
  * @return アニメーション
  */
 export function hidden(model: NeoLandozerCutInModel): Animate {
-  return tween(model, t => t.to({opacity: 0}, 300));
+  return tween(model, t => t.to({opacity: 0, scale: 1.1}, 300));
 }
