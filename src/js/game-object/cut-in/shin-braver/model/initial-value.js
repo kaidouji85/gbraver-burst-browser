@@ -10,14 +10,13 @@ import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
  */
 export function createInitialValue(): ShinBraverCutInModel {
   return {
-    position: {
-      x: 0,
-      y: 0,
-      z: HUD_CUT_IN_ZNIDEX
-    },
     animation: {
-      type: 'BurstCharge',
+      type: 'CUT_IN_UP',
       frame: 0
+    },
+    tracking: {
+      x: 0,
+      y: 0
     },
     opacity: 0,
     scale: 1,

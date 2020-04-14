@@ -7,6 +7,7 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import type {AnimationType, ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
+import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 1000;
@@ -21,6 +22,7 @@ export class ShinBraverCutInView {
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
+    this._group.position.z = HUD_CUT_IN_ZNIDEX;
 
     const cutInUpResource = resources.textures
       .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP);
@@ -51,8 +53,6 @@ export class ShinBraverCutInView {
     });
   }
 
-
-
   /**
    * デストラクタ相当の処理
    */
@@ -72,9 +72,8 @@ export class ShinBraverCutInView {
   engage(model: ShinBraverCutInModel, preRender: PreRender): void {
     const devicePerScale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
 
-    this._group.position.x = model.position.x * devicePerScale;
-    this._group.position.y = model.position.y * devicePerScale;
-    this._group.position.z = model.position.z;
+    this._group.position.x = model.tracking.x;
+    this._group.position.y = model.tracking.y;
 
     this._group.scale.x = model.scale * devicePerScale;
     this._group.scale.y = model.scale * devicePerScale;
