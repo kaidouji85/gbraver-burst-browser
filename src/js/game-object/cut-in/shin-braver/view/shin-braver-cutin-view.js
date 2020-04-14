@@ -13,7 +13,7 @@ import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 export const MESH_SIZE = 800;
 
 /** ベースとなるpadding top */
-export const BASE_PADDING_TOP = 150;
+export const BASE_PADDING_TOP = 350;
 
 /**
  * シンブレイバーカットインのビュー
@@ -84,7 +84,7 @@ export class ShinBraverCutInView {
 
     const scale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     this._group.position.x = model.tracking.x;
-    this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
+    this._group.position.y = preRender.rendererDOM.clientHeight / 2 -BASE_PADDING_TOP * model.scale * scale;
     this._group.position.z = HUD_CUT_IN_ZNIDEX;
 
     this._group.scale.x = model.scale * scale;

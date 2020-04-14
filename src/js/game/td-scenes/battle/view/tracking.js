@@ -62,7 +62,7 @@ export function trackingShinBraverCutIn(tdCamera: THREE.Camera, rendererDOM: HTM
     z: target.position.z
   };
   const hudPosition = toHUDCoordinate(tdPosition, tdCamera, rendererDOM);
-  cutIn.tracking(hudPosition.x, hudPosition.y);
+  cutIn.tracking(hudPosition.x);
 }
 
 /**
