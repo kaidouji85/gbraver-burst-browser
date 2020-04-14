@@ -7,6 +7,7 @@ import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
+import {enemyShinBraverCutIn, playerShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -56,7 +57,7 @@ export class ShinBraverHUD implements HUDArmdozer {
 export function playerShinBraverHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozer {
   return new ShinBraverHUD({
     playerId: state.playerId,
-    cutIn: new ShinBraverCutIn(resources, listener),
+    cutIn: playerShinBraverCutIn(resources, listener),
   });
 }
 
@@ -71,6 +72,6 @@ export function playerShinBraverHUD(resources: Resources, listener: Observable<G
 export function enemyShinBraverHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozer {
   return new ShinBraverHUD({
     playerId: state.playerId,
-    cutIn: new ShinBraverCutIn(resources, listener),
+    cutIn: enemyShinBraverCutIn(resources, listener)
   });
 }
