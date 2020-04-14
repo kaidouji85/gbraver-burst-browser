@@ -11,6 +11,7 @@ import {Animate} from "../../../animation/animate";
 import {burst} from "./animation/burst";
 import {hidden} from "./animation/hidden";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {PlayerShinBraverCutInView} from "./view/player-shin-braver-cutin-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 200;
@@ -25,7 +26,7 @@ export class ShinBraverCutIn {
 
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
-    this._view = new ShinBraverCutInView(resources);
+    this._view = new PlayerShinBraverCutInView(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
