@@ -16,7 +16,7 @@ export function createInitialValue(): ShinBraverCutInModel {
     tracking: {
       x: 0,
     },
-    opacity: 1,
+    opacity: 0,
     scale: 1,
   };
 }

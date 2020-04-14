@@ -64,7 +64,7 @@ function recoverBattery(param: ShinBraverBurstAnimationParam<RecoverBattery>): A
   ).chain(delay(500)
   ).chain(all(
     param.hudObjects.rearmostFader.opacity(0.6, 300),
-    param.burstArmdozerHUD.cutIn.play(),
+    param.burstArmdozerHUD.cutIn.show(),
   )).chain(delay(2000)
   ).chain(all(
     param.hudObjects.rearmostFader.opacity(0, 300),
