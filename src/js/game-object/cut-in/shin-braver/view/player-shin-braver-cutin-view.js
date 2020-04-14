@@ -14,7 +14,7 @@ import type {ShinBraverCutInView} from "./shin-braver-cutin-view";
 export const MESH_SIZE = 800;
 
 /** ベースとなるpadding top */
-export const BASE_PADDING_TOP = 150;
+export const BASE_PADDING_TOP = 100;
 
 /** ベースとなるpadding right */
 export const BASE_PADDING_RIGHT = 50;
