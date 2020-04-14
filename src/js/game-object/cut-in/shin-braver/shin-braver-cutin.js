@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import type {Resources} from "../../../resource";
 import type {ShinBraverCutInModel} from "./model/shin-braver-cutin-model";
-import {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
+import type {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
@@ -11,7 +11,6 @@ import {Animate} from "../../../animation/animate";
 import {burst} from "./animation/burst";
 import {hidden} from "./animation/hidden";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import {PlayerShinBraverCutInView} from "./view/player-shin-braver-cutin-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 200;
@@ -24,9 +23,9 @@ export class ShinBraverCutIn {
   _view: ShinBraverCutInView;
   _subscription: Subscription;
 
-  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: ShinBraverCutInView, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
-    this._view = new PlayerShinBraverCutInView(resources);
+    this._view = view;
     this._subscription = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
