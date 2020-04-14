@@ -3,12 +3,17 @@
 /**
  * アニメーションタイプ
  */
-export type AnimationType = 'BurstCharge' | 'BurstRelease';
+export type AnimationType =
+  'BurstCharge' |   // TODO 削除する
+  'BurstRelease' |  // TODO 削除する
+  'CUT_IN_UP' |
+  'CUT_IN_DOWN';
 
 /**
  * シンブレイバーバーストのモデル
  */
 export type ShinBraverCutInModel = {
+  // TODO 削除する
   /** 表示位置 */
   position: {
     x: number,

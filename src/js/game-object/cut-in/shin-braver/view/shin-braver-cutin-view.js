@@ -9,38 +9,38 @@ import type {PreRender} from "../../../../action/game-loop/pre-render";
 import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
 
 /** メッシュの大きさ */
-export const MESH_SIZE = 500;
+export const MESH_SIZE = 1000;
 
 /**
  * シンブレイバーカットインのビュー
  */
 export class ShinBraverCutInView {
   _group: THREE.Group;
-  _charge: HorizontalAnimationMesh;
-  _release: HorizontalAnimationMesh;
+  _cutInUp: HorizontalAnimationMesh;
+  _cutInDown: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
-    const burstChargeResource = resources.textures
-      .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_CHARGE);
-    const burstCharge = burstChargeResource
-      ? burstChargeResource.texture
+    const cutInUpResource = resources.textures
+      .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP);
+    const cutInUp = cutInUpResource
+      ? cutInUpResource.texture
       : new THREE.Texture();
-    this._charge = new HorizontalAnimationMesh({
-      texture: burstCharge,
+    this._cutInUp = new HorizontalAnimationMesh({
+      texture: cutInUp,
       width: MESH_SIZE,
       height: MESH_SIZE,
       maxAnimation: 4
     });
 
-    const burstReleaseResource = resources.textures
-      .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_BURST_RELEASE);
-    const burstRelease = burstReleaseResource
-      ? burstReleaseResource.texture
+    const cutInDownResource = resources.textures
+      .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN);
+    const cutInDown = cutInDownResource
+      ? cutInDownResource.texture
       : new THREE.Texture();
-    this._release = new HorizontalAnimationMesh({
-      texture: burstRelease,
+    this._cutInDown = new HorizontalAnimationMesh({
+      texture: cutInDown,
       width: MESH_SIZE,
       height: MESH_SIZE,
       maxAnimation: 4
@@ -50,6 +50,8 @@ export class ShinBraverCutInView {
       this._group.add(v.getObject3D());
     });
   }
+
+
 
   /**
    * デストラクタ相当の処理
@@ -105,8 +107,8 @@ export class ShinBraverCutInView {
    */
   _getMeshes(): HorizontalAnimationMesh[] {
     return [
-      this._charge,
-      this._release
+      this._cutInUp,
+      this._cutInDown,
     ];
   }
 
@@ -118,11 +120,11 @@ export class ShinBraverCutInView {
    */
   _getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {
-      case 'BurstRelease':
-        return this._release;
-      case 'BurstCharge':
+      case 'CUT_IN_UP':
+        return this._cutInUp;
+      case 'CUT_IN_DOWN':
       default:
-        return this._charge;
+        return this._cutInDown;
     }
   }
 }
