@@ -16,9 +16,6 @@ export const MESH_SIZE = 800;
 /** ベースとなるpadding top */
 export const BASE_PADDING_TOP = 100;
 
-/** ベースとなるpadding right */
-export const BASE_PADDING_RIGHT = 50;
-
 /**
  * プレイヤー側 シンブレイバーカットインのビュー
  */
@@ -87,7 +84,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
     });
 
     const scale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    this._group.position.x = model.tracking.x - BASE_PADDING_RIGHT * scale;
+    this._group.position.x = model.tracking.x;
     this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
     this._group.position.z = HUD_CUT_IN_ZNIDEX;
 
