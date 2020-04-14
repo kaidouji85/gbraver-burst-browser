@@ -22,6 +22,8 @@ export type ShinBraverCutInModel = {
   tracking: {
     /** x座標 */
     x: number,
+    /** y座標 */
+    y: number,
   },
   /** 0〜1で指定する透明度、0で完全透明 */
   opacity: number,

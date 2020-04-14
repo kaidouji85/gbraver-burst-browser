@@ -18,8 +18,8 @@ export function show(model: ShinBraverCutInModel): Animate {
     process(() => {
       model.animation.type = 'CUT_IN_UP';
       model.animation.frame = 0;
-    }).chain(tween(model.animation, t => t.to({frame: 1}, 300))
-    ).chain(delay(100)
+    }).chain(tween(model.animation, t => t.to({frame: 1}, 400))
+    ).chain(delay(200)
     ).chain(process(() => {
         model.animation.type = 'CUT_IN_DOWN';
         model.animation.frame = 0;

@@ -54,9 +54,11 @@ export class ShinBraverCutIn {
    * 本メソッドにはHUDレイヤー系座標をセットすること
    *
    * @param x x座標
+   * @param y y座標
    */
-  tracking(x: number): void {
+  tracking(x: number, y: number): void {
     this._model.tracking.x = x;
+    this._model.tracking.y = y;
   }
 
   /**
