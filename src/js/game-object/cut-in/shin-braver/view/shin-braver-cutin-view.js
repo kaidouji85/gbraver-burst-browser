@@ -10,7 +10,10 @@ import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
-export const MESH_SIZE = 1000;
+export const MESH_SIZE = 800;
+
+/** ベースとなるpadding top */
+export const BASE_PADDING_TOP = 150;
 
 /**
  * シンブレイバーカットインのビュー
@@ -22,7 +25,6 @@ export class ShinBraverCutInView {
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
-    this._group.position.z = HUD_CUT_IN_ZNIDEX;
 
     const cutInUpResource = resources.textures
       .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP);
@@ -70,15 +72,6 @@ export class ShinBraverCutInView {
    * @param preRender プリレンダーのアクション
    */
   engage(model: ShinBraverCutInModel, preRender: PreRender): void {
-    const devicePerScale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
-
-    this._group.position.x = model.tracking.x;
-    this._group.position.y = model.tracking.y;
-
-    this._group.scale.x = model.scale * devicePerScale;
-    this._group.scale.y = model.scale * devicePerScale;
-    this._group.scale.z = model.scale;
-
     const activeMesh = this._getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);
     activeMesh.setOpacity(model.opacity);
@@ -88,6 +81,15 @@ export class ShinBraverCutInView {
     disActiveMeshes.forEach(v => {
       v.setOpacity(0);
     });
+
+    const scale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
+    this._group.position.x = model.tracking.x;
+    this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
+    this._group.position.z = HUD_CUT_IN_ZNIDEX;
+
+    this._group.scale.x = model.scale * scale;
+    this._group.scale.y = model.scale * scale;
+    this._group.scale.z = model.scale;
   }
 
   /**
