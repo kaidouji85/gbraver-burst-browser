@@ -27,6 +27,8 @@ export const TEXTURE_IDS = {
   SHIN_BRAVER_DOWN: 'SHIN_BRAVER_DOWN',
   SHIN_BRAVER_GUTS_UP: 'SHIN_BRAVER_GUTS_UP',
   SHIN_BRAVER_GUTS_DOWN: 'SHIN_BRAVER_GUTS_DOWN',
+  SHIN_BRAVER_BURST_UP: 'SHIN_BRAVER_BURST_UP',
+  SHIN_BRAVER_BURST_DOWN: 'SHIN_BRAVER_BURST_DOWN',
   SHIN_BRAVER_CUTIN_UP: 'SHIN_BRAVER_CUTIN_UP',
   SHIN_BRAVER_CUTIN_DOWN: 'SHIN_BRAVER_CUTIN_DOWN',
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
@@ -97,6 +99,14 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.SHIN_BRAVER_GUTS_DOWN,
     path: 'armdozer/shin-braver/guts-down.png'
+  },
+  {
+    id: TEXTURE_IDS.SHIN_BRAVER_BURST_UP,
+    path: 'armdozer/shin-braver/burst-up.png',
+  },
+  {
+    id: TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN,
+    path: 'armdozer/shin-braver/burst-down.png',
   },
   {
     id: TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP,

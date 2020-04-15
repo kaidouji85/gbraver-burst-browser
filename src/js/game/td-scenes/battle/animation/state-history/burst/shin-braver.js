@@ -58,6 +58,7 @@ export function shinBraverBurst(param: ShinBraverBurstAnimationParam<Burst>): An
 function recoverBattery(param: ShinBraverBurstAnimationParam<RecoverBattery>): Animate {
   return all(
     param.burstArmdozerHUD.cutIn.show(),
+    param.burstSprite.burst(),
     attentionArmDozer(param.tdCamera, param.burstSprite, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
@@ -73,6 +74,7 @@ function recoverBattery(param: ShinBraverBurstAnimationParam<RecoverBattery>): A
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
   )).chain(delay(500)
   ).chain(all(
+    param.burstSprite.burstToStand(),
     toInitial(param.tdCamera, 500),
     param.tdObjects.skyBrightness.brightness(1, 500),
     param.tdObjects.illumination.intensity(1, 500),
