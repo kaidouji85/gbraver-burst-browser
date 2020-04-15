@@ -22,6 +22,7 @@ import {charge} from "./animation/charge";
 import {down} from "./animation/down";
 import {turnStart} from "./animation/turn-start";
 import {turnStartToStand} from "./animation/turn-start-to-stand";
+import {burst} from "./animation/burst";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -115,6 +116,15 @@ export class ShinBraver implements ArmDozerSprite {
   /** ダウン */
   down(): Animate {
     return down(this._model);
+  }
+
+  /**
+   * バースト
+   *
+   * @return アニメーション
+   */
+  burst(): Animate {
+    return burst(this._model);
   }
 
   /** シーンに追加するオブジェクトを返す */

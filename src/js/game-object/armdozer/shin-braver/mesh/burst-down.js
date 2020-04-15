@@ -18,7 +18,7 @@ export const MAX_ANIMATION = 4;
  */
 export function shinBraverBurstDown(resources: Resources): ArmdozerAnimation {
   const ret = new HorizontalArmdozerAnimation({
-    id: TEXTURE_IDS.SHIN_BRAVER_BURST_UP,
+    id: TEXTURE_IDS.SHIN_BRAVER_BURST_DOWN,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,
