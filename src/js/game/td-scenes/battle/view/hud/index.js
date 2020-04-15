@@ -92,6 +92,9 @@ export class HudLayer {
     this.armdozers.forEach(v => {
       v.destructor();
     });
+    this.players.forEach(v => {
+      v.destructor();
+    });
   }
 
   /**

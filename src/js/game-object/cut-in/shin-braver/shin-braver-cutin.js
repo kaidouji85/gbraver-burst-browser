@@ -1,16 +1,15 @@
 // @flow
 
 import * as THREE from 'three';
-import type {Resources} from "../../../resource";
 import type {ShinBraverCutInModel} from "./model/shin-braver-cutin-model";
-import {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
+import type {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {Animate} from "../../../animation/animate";
-import {burst} from "./animation/burst";
 import {hidden} from "./animation/hidden";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {show} from "./animation/show";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 200;
@@ -23,9 +22,9 @@ export class ShinBraverCutIn {
   _view: ShinBraverCutInView;
   _subscription: Subscription;
 
-  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: ShinBraverCutInView, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
-    this._view = new ShinBraverCutInView(resources);
+    this._view = view;
     this._subscription = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
@@ -51,12 +50,24 @@ export class ShinBraverCutIn {
   }
 
   /**
-   * カットインアニメーションを再生する
+   * 3Dレイヤーのオブジェクトをトラッキングする
+   * 本メソッドにはHUDレイヤー系座標をセットすること
+   *
+   * @param x x座標
+   * @param y y座標
+   */
+  tracking(x: number, y: number): void {
+    this._model.tracking.x = x;
+    this._model.tracking.y = y;
+  }
+
+  /**
+   * カットインを表示する
    *
    * @return アニメーション
    */
-  play(): Animate {
-    return burst(this._model);
+  show(): Animate {
+    return show(this._model);
   }
 
   /**
