@@ -2,9 +2,7 @@
 
 import * as THREE from "three";
 import type {TurnStartView} from "./turn-start-view";
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {Resources} from "../../../resource";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {TurnStartModel} from "../model/turn-start-model";
 import {SPRITE_RENDER_ORDER} from "../../../render-order/td-render-order";
 import {
@@ -12,24 +10,25 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
-import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import {TEXTURE_IDS} from "../../../resource/texture";
 
 export const MESH_SIZE = 300;
-export const CANVAS_SIZE = 512;
 
 /** 敵ターンスタートビュー */
 export class EnemyTurnStartView implements TurnStartView {
-  _mesh: SimpleImageMesh;
+  _mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const indicatorResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.ENEMY_TURN);
-    const indicator: Image = indicatorResource
-      ? indicatorResource.image
-      : new Image();
-    this._mesh = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: MESH_SIZE,
-      image: indicator
+    const enemyTurnResource = resources.textures.find(v => v.id === TEXTURE_IDS.ENEMY_TURN);
+    const enemyTurn = enemyTurnResource
+      ? enemyTurnResource.texture
+      : new THREE.Texture();
+    this._mesh = new HorizontalAnimationMesh({
+      texture: enemyTurn,
+      maxAnimation: 1,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
     });
     this._mesh.getObject3D().renderOrder = SPRITE_RENDER_ORDER;
   }

@@ -3,31 +3,31 @@
 import * as THREE from "three";
 import type {TurnStartView} from "./turn-start-view";
 import type {Resources} from "../../../resource";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {TurnStartModel} from "../model/turn-start-model";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
-import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import {TEXTURE_IDS} from "../../../resource/texture";
 
 export const MESH_SIZE = 300;
-export const CANVAS_SIZE = 512;
 
 /** プレイヤーターンスタートビュー */
 export class PlayerTurnStartView implements TurnStartView {
-  _mesh: SimpleImageMesh;
+  _mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    const indicatorResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_TURN);
-    const indicator: Image = indicatorResource
-      ? indicatorResource.image
-      : new Image();
-    this._mesh = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: MESH_SIZE,
-      image: indicator,
+    const playerTurnResource = resources.textures.find(v => v.id === TEXTURE_IDS.PLAYER_TURN);
+    const playerTurn = playerTurnResource
+      ? playerTurnResource.texture
+      : new THREE.Texture();
+    this._mesh = new HorizontalAnimationMesh({
+      texture: playerTurn,
+      maxAnimation: 1,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
     });
   }
 
