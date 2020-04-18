@@ -32,8 +32,6 @@ export const CANVAS_IMAGE_IDS = {
   BURST_BUTTON: 'BURST_BUTTON',
   BIG_BUTTON_DISABLED: 'BIG_BUTTON_DISABLED',
   SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED',
-  PLAYER_TURN: 'PLAYER_TURN',
-  ENEMY_TURN: 'ENEMY_TURN',
   PLAYER_GAUGE_BASE: 'PLAYER_GAUGE_BASE',
   ENEMY_GAUGE_BASE: 'ENEMY_GAUGE_BASE',
   HP_BAR: 'HP_BAR',
@@ -100,14 +98,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED,
     path: 'button/small-button-disabled.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.PLAYER_TURN,
-    path: 'turn/player-turn.png',
-  },
-  {
-    id: CANVAS_IMAGE_IDS.ENEMY_TURN,
-    path: 'turn/enemy-turn.png',
   },
   {
     id: CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE,

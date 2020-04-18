@@ -2,48 +2,38 @@
 
 import * as THREE from "three";
 import type {TurnStartView} from "./turn-start-view";
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {Resources} from "../../../resource";
-import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {drawImageInCenter} from "../../../canvas/draw/image-drawer";
 import type {TurnStartModel} from "../model/turn-start-model";
-import {SPRITE_RENDER_ORDER} from "../../../render-order/td-render-order";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import {TEXTURE_IDS} from "../../../resource/texture";
 
-export const MESH_SIZE = 400;
-export const CANVAS_SIZE = 512;
+export const MESH_SIZE = 300;
 
 /** プレイヤーターンスタートビュー */
 export class PlayerTurnStartView implements TurnStartView {
-  _canvas: CanvasMesh;
+  _mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    this._canvas = new CanvasMesh({
-      canvasWidth: CANVAS_SIZE,
-      canvasHeight: CANVAS_SIZE,
-      meshWidth: MESH_SIZE,
-      meshHeight: MESH_SIZE,
-    });
-    this._canvas.mesh.renderOrder = SPRITE_RENDER_ORDER;
-
-    const indicatorResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_TURN);
-    const indicator: Image = indicatorResource
-      ? indicatorResource.image
-      : new Image();
-    this._canvas.draw(context => {
-      const dx = context.canvas.width / 2;
-      const dy = context.canvas.height / 2;
-      drawImageInCenter(context, indicator, dx, dy);
+    const playerTurnResource = resources.textures.find(v => v.id === TEXTURE_IDS.PLAYER_TURN);
+    const playerTurn = playerTurnResource
+      ? playerTurnResource.texture
+      : new THREE.Texture();
+    this._mesh = new HorizontalAnimationMesh({
+      texture: playerTurn,
+      maxAnimation: 1,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._canvas.destructor();
+    this._mesh.destructor();
   }
 
   /**
@@ -52,7 +42,7 @@ export class PlayerTurnStartView implements TurnStartView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._canvas.getObject3D();
+    return this._mesh.getObject3D();
   }
 
   /**
@@ -72,7 +62,7 @@ export class PlayerTurnStartView implements TurnStartView {
    * @param camera カメラ
    */
   lookAt(camera: THREE.Camera): void {
-    this._canvas.getObject3D().quaternion.copy(camera.quaternion);
+    this._mesh.getObject3D().quaternion.copy(camera.quaternion);
   }
 
   /**
@@ -81,12 +71,12 @@ export class PlayerTurnStartView implements TurnStartView {
    * @param model モデル
    */
   _refreshOpacity(model: TurnStartModel): void {
-    this._canvas.setOpacity(model.opacity);
+    this._mesh.setOpacity(model.opacity);
   }
 
   /** 座標を更新する */
   _refreshPos(): void {
-    const target = this._canvas.getObject3D();
+    const target = this._mesh.getObject3D();
     target.position.x = ARMDOZER_EFFECT_STANDARD_X;
     target.position.y = ARMDOZER_EFFECT_STANDARD_Y +10;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
@@ -98,7 +88,7 @@ export class PlayerTurnStartView implements TurnStartView {
    * @param model モデル
    */
   _refreshScale(model: TurnStartModel): void {
-    const target = this._canvas.getObject3D();
+    const target = this._mesh.getObject3D();
     target.scale.x = model.scale;
     target.scale.y = model.scale;
   }

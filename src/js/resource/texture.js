@@ -59,6 +59,8 @@ export const TEXTURE_IDS = {
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
   HP_NUMBER: 'HP_NUMBER',
+  PLAYER_TURN: 'PLAYER_TURN',
+  ENEMY_TURN: 'ENEMY_TURN',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -234,6 +236,15 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.HP_NUMBER,
     path: 'gauge/hp-gauge-number.png'
+  },
+  // ターンスタート
+  {
+    id: TEXTURE_IDS.PLAYER_TURN,
+    path: 'turn/player-turn.png',
+  },
+  {
+    id: TEXTURE_IDS.ENEMY_TURN,
+    path: 'turn/enemy-turn.png',
   }
 ];
 
