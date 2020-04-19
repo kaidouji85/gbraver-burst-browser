@@ -5,7 +5,6 @@ import {RecoverBattery} from "../../../../../game-object/recover-battery/recover
 import {DamageIndicator} from "../../../../../game-object/damage-indicator/damage-indicator";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
-import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {BurstIndicator} from "../../../../../game-object/burst-indicator/burst-indicator";
 import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
@@ -13,12 +12,13 @@ import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
-import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import {enemyBurstIndicator, playerBurstIndicator} from "../../../../../game-object/burst-indicator";
 import {ShockWave} from "../../../../../game-object/hitmark/shock-wave/shock-wave";
 import {enemyShockWave, playerShockWave} from "../../../../../game-object/hitmark/shock-wave";
 import {Lightning} from "../../../../../game-object/hitmark/lightning/lightning";
 import {enemyLightning, playerLightning} from "../../../../../game-object/hitmark/lightning";
+import {PopUp} from "../../../../../game-object/pop-up/pop-up/pop-up";
+import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/pop-up/turn-start";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -32,7 +32,7 @@ export interface TDPlayerField {
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
-  turnStart: TurnStart;
+  turnStart: PopUp;
   burstIndicator: BurstIndicator;
 }
 
@@ -65,7 +65,7 @@ export class TDPlayerImpl implements TDPlayer {
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
-  turnStart: TurnStart;
+  turnStart: PopUp;
   burstIndicator: BurstIndicator;
 
   constructor(param: TDPlayerField) {

@@ -1,11 +1,11 @@
 // @flow
 
-import {PopUp} from "../../pop-up/pop-up";
-import type {Resources} from "../../../../resource";
+import {PopUp} from "../pop-up/pop-up";
+import type {Resources} from "../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../action/game-object-action";
-import {PlayerTurnStartView} from "./player-turn-start-view";
-import {EnemyTurnStartView} from "./enemy-turn-start-view";
+import type {GameObjectAction} from "../../../action/game-object-action";
+import {PlayerTurnStartView} from "./view/player-turn-start-view";
+import {EnemyTurnStartView} from "./view/enemy-turn-start-view";
 
 /**
  * プレイヤーターン スタート
