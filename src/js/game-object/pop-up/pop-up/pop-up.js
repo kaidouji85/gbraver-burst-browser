@@ -1,23 +1,25 @@
 // @flow
 
 import * as THREE from 'three';
-import type {TurnStartView} from "./view/turn-start-view";
-import type {TurnStartModel} from "./model/turn-start-model";
-import type {GameObjectAction} from "../../action/game-object-action";
+import type {PopUpView} from "./pop-up-view";
+import type {PopUpModel} from "./model/pop-up-model";
+import type {GameObjectAction} from "../../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../action/game-loop/update";
-import type {PreRender} from "../../action/game-loop/pre-render";
-import {Animate} from "../../animation/animate";
+import type {Update} from "../../../action/game-loop/update";
+import type {PreRender} from "../../../action/game-loop/pre-render";
+import {Animate} from "../../../animation/animate";
 import {popUp} from "./animation/pop-up";
 
-/** ターンスタート */
-export class TurnStart {
-  _model: TurnStartModel;
-  _view: TurnStartView;
+/**
+ * ポップアップ
+ */
+export class PopUp {
+  _model: PopUpModel;
+  _view: PopUpView;
   _subscription: Subscription;
 
-  constructor(view: TurnStartView, listener: Observable<GameObjectAction>) {
+  constructor(view: PopUpView, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._subscription = listener.subscribe(action => {

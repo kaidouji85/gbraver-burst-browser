@@ -1,17 +1,23 @@
 // @flow
 
 import * as THREE from 'three';
-import type {TurnStartModel} from "../model/turn-start-model";
+import type {PopUpModel} from "./model/pop-up-model";
 
-/** ターンスタートビュー */
-export interface TurnStartView {
+/**
+ * ポップアップ ビュー
+ */
+export interface PopUpView {
   /** デストラクタ相当の処理 */
   destructor(): void;
 
-  /** モデルをビューに反映させる */
-  engage(model: TurnStartModel): void;
+  /**
+   * モデルをビューに反映させる
+   */
+  engage(model: PopUpModel): void;
 
-  /** カメラの真正面を向く */
+  /**
+   * カメラの真正面を向く
+   */
   lookAt(camera: THREE.Camera): void;
 
   /**
