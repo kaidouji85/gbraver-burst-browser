@@ -62,6 +62,7 @@ export const TEXTURE_IDS = {
   PLAYER_TURN: 'PLAYER_TURN',
   ENEMY_TURN: 'ENEMY_TURN',
   POWER_UP: 'POWER_UP',
+  REFLECT: 'REFLECT',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -247,10 +248,14 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.ENEMY_TURN,
     path: 'turn/enemy-turn.png',
   },
-  // 効果
+  // 効果ラベル
   {
     id: TEXTURE_IDS.POWER_UP,
     path: 'effect-label/power-up.png',
+  },
+  {
+    id: TEXTURE_IDS.REFLECT,
+    path: 'effect-label/reflect.png',
   },
 ];
 
