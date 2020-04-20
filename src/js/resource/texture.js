@@ -61,6 +61,7 @@ export const TEXTURE_IDS = {
   HP_NUMBER: 'HP_NUMBER',
   PLAYER_TURN: 'PLAYER_TURN',
   ENEMY_TURN: 'ENEMY_TURN',
+  POWER_UP: 'POWER_UP',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -245,7 +246,12 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.ENEMY_TURN,
     path: 'turn/enemy-turn.png',
-  }
+  },
+  // 効果
+  {
+    id: TEXTURE_IDS.POWER_UP,
+    path: 'burst/power-up.png',
+  },
 ];
 
 /**
