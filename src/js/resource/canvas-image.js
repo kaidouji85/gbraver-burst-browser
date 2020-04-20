@@ -38,7 +38,6 @@ export const CANVAS_IMAGE_IDS = {
   HP_BAR_BACK: 'HP_BAR_BACK',
   BATTERY_GAUGE: 'BATTERY_GAUGE',
   BATTERY_GAUGE_BACK: 'BATTERY_GAUGE_BACK',
-  BURST: 'BURST',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -123,10 +122,6 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK,
     path: 'gauge/battery-gauge-back.png',
   },
-  {
-    id: CANVAS_IMAGE_IDS.BURST,
-    path: 'effect-label/burst.png',
-  }
 ];
 
 /**
