@@ -125,7 +125,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   },
   {
     id: CANVAS_IMAGE_IDS.BURST,
-    path: 'burst/burst.png',
+    path: 'effect-label/burst.png',
   }
 ];
 

@@ -250,7 +250,7 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   // 効果
   {
     id: TEXTURE_IDS.POWER_UP,
-    path: 'burst/power-up.png',
+    path: 'effect-label/power-up.png',
   },
 ];
 
