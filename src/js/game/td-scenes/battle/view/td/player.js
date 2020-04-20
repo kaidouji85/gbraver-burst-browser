@@ -19,6 +19,7 @@ import {Lightning} from "../../../../../game-object/hitmark/lightning/lightning"
 import {enemyLightning, playerLightning} from "../../../../../game-object/hitmark/lightning";
 import {PopUp} from "../../../../../game-object/pop-up/pop-up/pop-up";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/pop-up/turn-start";
+import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/pop-up/power-up";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -28,6 +29,9 @@ export interface TDPlayerField {
   hitMark: {
     shockWave: ShockWave,
     lightning: Lightning,
+  };
+  armdozerEffects: {
+    powerUp: PopUp
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -62,6 +66,9 @@ export class TDPlayerImpl implements TDPlayer {
     shockWave: ShockWave,
     lightning: Lightning,
   };
+  armdozerEffects: {
+    powerUp: PopUp
+  };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
@@ -71,6 +78,7 @@ export class TDPlayerImpl implements TDPlayer {
   constructor(param: TDPlayerField) {
     this.playerId = param.playerId;
     this.hitMark = param.hitMark;
+    this.armdozerEffects = param.armdozerEffects;
     this.batteryNumber = param.batteryNumber;
     this.recoverBattery = param.recoverBattery;
     this.damageIndicator = param.damageIndicator;
@@ -86,6 +94,7 @@ export class TDPlayerImpl implements TDPlayer {
     this.damageIndicator.destructor();
     this.hitMark.shockWave.destructor();
     this.hitMark.lightning.destructor();
+    this.armdozerEffects.powerUp.destructor();
     this.recoverBattery.destructor();
     this.turnStart.destructor();
     this.burstIndicator.destructor();
@@ -100,6 +109,7 @@ export class TDPlayerImpl implements TDPlayer {
     return [
       this.hitMark.shockWave.getObject3D(),
       this.hitMark.lightning.getObject3D(),
+      this.armdozerEffects.powerUp.getObject3D(),
       this.batteryNumber.getObject3D(),
       this.recoverBattery.getObject3D(),
       this.damageIndicator.getObject3D(),
@@ -123,6 +133,9 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     hitMark: {
       shockWave: playerShockWave(resources, listener),
       lightning: playerLightning(resources, listener)
+    },
+    armdozerEffects: {
+      powerUp: playerPowerUp(resources, listener)
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
@@ -152,6 +165,9 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     hitMark: {
       shockWave: enemyShockWave(resources, listener),
       lightning: enemyLightning(resources, listener)
+    },
+    armdozerEffects: {
+      powerUp: enemyPowerUp(resources, listener)
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,
