@@ -5,6 +5,7 @@ import type {Resources} from "../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {PlayerPowerUpView} from "./view/player-power-up-view";
+import {EnemyPowerUpView} from "./view/enemy-power-up-view";
 
 /**
  * プレイヤー 攻撃アップ ポップアップ
@@ -26,6 +27,6 @@ export function playerPowerUp(resources: Resources, listener: Observable<GameObj
  * @return 生成結果
  */
 export function enemyPowerUp(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
-  const view = new PlayerPowerUpView(resources);
+  const view = new EnemyPowerUpView(resources);
   return new PopUp(view, listener);
 }

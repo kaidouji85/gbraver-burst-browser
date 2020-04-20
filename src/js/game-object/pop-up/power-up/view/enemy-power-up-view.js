@@ -21,7 +21,6 @@ export class EnemyPowerUpView extends PlayerPowerUpView {
     super.engage(model);
 
     const target = super.getObject3D();
-    target.scale.x *= -1;
     target.position.x *= -1;
   }
 }
