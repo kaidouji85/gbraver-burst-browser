@@ -5,14 +5,12 @@ import {RecoverBattery} from "../../../../../game-object/recover-battery/recover
 import {DamageIndicator} from "../../../../../game-object/damage-indicator/damage-indicator";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
-import {BurstIndicator} from "../../../../../game-object/burst-indicator/burst-indicator";
 import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
-import {enemyBurstIndicator, playerBurstIndicator} from "../../../../../game-object/burst-indicator";
 import {ShockWave} from "../../../../../game-object/hitmark/shock-wave/shock-wave";
 import {enemyShockWave, playerShockWave} from "../../../../../game-object/hitmark/shock-wave";
 import {Lightning} from "../../../../../game-object/hitmark/lightning/lightning";
@@ -37,7 +35,6 @@ export interface TDPlayerField {
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
   turnStart: PopUp;
-  burstIndicator: BurstIndicator;
 }
 
 /**
@@ -73,7 +70,6 @@ export class TDPlayerImpl implements TDPlayer {
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
   turnStart: PopUp;
-  burstIndicator: BurstIndicator;
 
   constructor(param: TDPlayerField) {
     this.playerId = param.playerId;
@@ -83,7 +79,6 @@ export class TDPlayerImpl implements TDPlayer {
     this.recoverBattery = param.recoverBattery;
     this.damageIndicator = param.damageIndicator;
     this.turnStart = param.turnStart;
-    this.burstIndicator = param.burstIndicator;
   }
 
   /**
@@ -97,7 +92,6 @@ export class TDPlayerImpl implements TDPlayer {
     this.armdozerEffects.powerUp.destructor();
     this.recoverBattery.destructor();
     this.turnStart.destructor();
-    this.burstIndicator.destructor();
   }
 
   /**
@@ -114,7 +108,6 @@ export class TDPlayerImpl implements TDPlayer {
       this.recoverBattery.getObject3D(),
       this.damageIndicator.getObject3D(),
       this.turnStart.getObject3D(),
-      this.burstIndicator.getObject3D(),
     ];
   }
 }
@@ -147,7 +140,6 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
       listener: listener
     }),
     turnStart: playerTurnStart(resources, listener),
-    burstIndicator: playerBurstIndicator(resources, listener)
   });
 }
 
@@ -179,6 +171,5 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
       listener: listener
     }),
     turnStart: enemyTurnStart(resources, listener),
-    burstIndicator: enemyBurstIndicator(resources, listener)
   });
 }
