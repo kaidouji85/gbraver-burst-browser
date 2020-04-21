@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "frontend module for gbraver-burst.",
   "engines": {
-    "node": "^12.14.0"
+    "node": "^12.16.2"
   },
   "main": "src/js/index.js",
   "scripts": {
