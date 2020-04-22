@@ -9,8 +9,7 @@ import type {BattleSceneAction} from "../../../../../action/battle-scene";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
-import type {HUDGameObjects} from "./game-objects";
-import {appendHUDGameObjects, createHUDGameObjects, disposeHUDGameObjects} from "./game-objects";
+import {HUDGameObjects, appendHUDGameObjects, disposeHUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../action/resize/resize";
@@ -60,7 +59,7 @@ export class HudLayer {
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
-    this.gameObjects = createHUDGameObjects(param.resources, this._gameObjectAction, player);
+    this.gameObjects = new HUDGameObjects(param.resources, this._gameObjectAction, player);
     appendHUDGameObjects(this.scene, this.gameObjects);
 
     this.players = param.players.map(v => v.playerId === param.playerId

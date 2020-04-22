@@ -35,70 +35,47 @@ export class HUDGameObjects implements HUDGameObjectsField {
     battleSceneAction: Observable<BattleSceneAction>
   }
 
-  constructor(param: HUDGameObjectsField) {
-    this.batterySelector = param.batterySelector;
-    this.burstButton = param.burstButton;
-    this.frontmostFader = param.frontmostFader;
-    this.rearmostFader = param.rearmostFader;
-    this.notifier = param.notifier;
+  constructor(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player) {
+    const battleSceneAction = new Subject();
+
+    this.batterySelector = new BatterySelector({
+      listener: listener,
+      maxBattery: playerInfo.armdozer.maxBattery,
+      resources: resources,
+      onBatteryChange: (battery: number) => {
+        battleSceneAction.next({
+          type: 'changeBattery',
+          battery: battery
+        });
+      },
+      onOkButtonPush: () => {
+        battleSceneAction.next({
+          type: 'decideBattery',
+          battery: this.batterySelector.getBattery()
+        });
+      }
+    });
+    this.burstButton = new BurstButton({
+      resources: resources,
+      listener: listener,
+      onPush: () => {
+        battleSceneAction.next({
+          type: 'doBurst'
+        });
+      }
+    });
+    this.frontmostFader = frontmostFader({
+        listener: listener,
+        isVisible: true,
+      });
+    this.rearmostFader = rearmostFader({
+        listener: listener,
+        isVisible: false,
+      });
+      this.notifier = {
+        battleSceneAction: battleSceneAction
+      };
   }
-}
-
-/**
- * HUDレイヤーゲームオブジェクトを生成する
- *
- * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
- * @param playerInfo プレイヤーの情報
- * @return HUDゲームオブジェクト
- */
-export function createHUDGameObjects(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player): HUDGameObjects {
-  const battleSceneAction = new Subject();
-
-  const batterySelector = new BatterySelector({
-    listener: listener,
-    maxBattery: playerInfo.armdozer.maxBattery,
-    resources: resources,
-    onBatteryChange: (battery: number) => {
-      battleSceneAction.next({
-        type: 'changeBattery',
-        battery: battery
-      });
-    },
-    onOkButtonPush: () => {
-      battleSceneAction.next({
-        type: 'decideBattery',
-        battery: batterySelector.getBattery()
-      });
-    }
-  });
-
-  const burstButton = new BurstButton({
-    resources: resources,
-    listener: listener,
-    onPush: () => {
-      battleSceneAction.next({
-        type: 'doBurst'
-      });
-    }
-  });
-
-  const param = {
-    batterySelector: batterySelector,
-    burstButton: burstButton,
-    frontmostFader: frontmostFader({
-      listener: listener,
-      isVisible: true,
-    }),
-    rearmostFader: rearmostFader({
-      listener: listener,
-      isVisible: false,
-    }),
-    notifier: {
-      battleSceneAction: battleSceneAction
-    }
-  };
-  return new HUDGameObjects(param);
 }
 
 // TODO 削除する
