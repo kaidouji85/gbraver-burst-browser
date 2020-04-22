@@ -104,16 +104,26 @@ export class ThreeDimensionLayer {
   /** デストラクタ */
   destructor(): void {
     this.scene.background.dispose();
-    this.players.forEach(v => {
-      v.destructor();
+    this.players.forEach(player => {
+      player.getObject3Ds().forEach(object => {
+        this.scene.remove(object)
+      });
+      player.destructor();
     });
-    this.sprites.forEach(v => {
-      v.destructor();
+    this.sprites.forEach(sprite => {
+      sprite.getObject3Ds().forEach(object => {
+        this.scene.remove(object);
+      });
+      sprite.destructor();
     });
-    this.armdozers.forEach(v => {
-      v.destructor();
+    this.armdozers.forEach(armdozer => {
+      armdozer.getObject3Ds().forEach(object => {
+        this.scene.remove(object);
+      });
+      armdozer.destructor();
     });
     disposeTDGameObjects(this.gameObjects);
+
     this.camera.destructor();
     this.scene.dispose();
   }

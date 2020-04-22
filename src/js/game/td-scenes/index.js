@@ -101,6 +101,7 @@ export class TDScenes {
    */
   _disposeScene(): void {
     this._scene && this._scene.destructor();
+    this._renderer.dispose();
     this._sceneSubscriptions.forEach(v => {
       v.unsubscribe();
     });

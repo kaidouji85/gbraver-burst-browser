@@ -87,14 +87,21 @@ export class HudLayer {
   /** デストラクタ */
   destructor(): void {
     disposeHUDGameObjects(this.gameObjects);
+    this.armdozers.forEach(armdozer => {
+      armdozer.getObject3Ds().forEach(object => {
+        this.scene.remove(object);
+      });
+      armdozer.destructor();
+    });
+    this.players.forEach(player => {
+      player.getObject3Ds().forEach(object => {
+        this.scene.remove(object);
+      });
+      player.destructor();
+    });
+
     this.camera.destructor();
     this.scene.dispose();
-    this.armdozers.forEach(v => {
-      v.destructor();
-    });
-    this.players.forEach(v => {
-      v.destructor();
-    });
   }
 
   /**
