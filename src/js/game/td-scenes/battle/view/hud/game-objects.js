@@ -12,8 +12,8 @@ import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
 
-/** HUDレイヤーのゲームオブジェクト */
-export type HUDGameObjects = {
+/** HUDレイヤーのゲームオブジェクト フィールド */
+interface HUDGameObjectsField {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
   frontmostFader: Fader;
@@ -21,7 +21,28 @@ export type HUDGameObjects = {
   notifier: {
     battleSceneAction: Observable<BattleSceneAction>
   }
-};
+}
+
+/**
+ * HUDレイヤーのゲームオブジェクト
+ */
+export class HUDGameObjects implements HUDGameObjectsField {
+  batterySelector: BatterySelector;
+  burstButton: BurstButton;
+  frontmostFader: Fader;
+  rearmostFader: Fader;
+  notifier: {
+    battleSceneAction: Observable<BattleSceneAction>
+  }
+
+  constructor(param: HUDGameObjectsField) {
+    this.batterySelector = param.batterySelector;
+    this.burstButton = param.burstButton;
+    this.frontmostFader = param.frontmostFader;
+    this.rearmostFader = param.rearmostFader;
+    this.notifier = param.notifier;
+  }
+}
 
 /**
  * HUDレイヤーゲームオブジェクトを生成する
@@ -62,7 +83,7 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
     }
   });
 
-  return {
+  const param = {
     batterySelector: batterySelector,
     burstButton: burstButton,
     frontmostFader: frontmostFader({
@@ -77,8 +98,10 @@ export function createHUDGameObjects(resources: Resources, listener: Observable<
       battleSceneAction: battleSceneAction
     }
   };
+  return new HUDGameObjects(param);
 }
 
+// TODO 削除する
 /**
  * HUDレイヤーゲームオブジェクトをシーンに追加する
  *
@@ -92,6 +115,7 @@ export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects)
   scene.add(target.frontmostFader.getObject3D());
 }
 
+// TODO 削除する
 /**
  * HUDゲームオブジェクトのリソースを破棄する
  *
