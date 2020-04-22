@@ -10,30 +10,27 @@ import * as THREE from "three";
 import {SkyBrightness} from "../../../../../game-object/sky-brightness/sky-brightness";
 import {Illumination} from "../../../../../game-object/illumination/illumination";
 
-/** 3Dレイヤーのゲームオブジェクト フィールド */
-interface TDGameObjectsField {
-  stage: Stage;
-  turnIndicator: TurnIndicator;
-  skyBrightness: SkyBrightness;
-  illumination: Illumination;
-}
-
-export class TDGameObjects implements TDGameObjectsField {
+/**
+ * 3Dレイヤーのゲームオブジェクト
+ */
+export class TDGameObjects {
   stage: Stage;
   turnIndicator: TurnIndicator;
   skyBrightness: SkyBrightness;
   illumination: Illumination;
 
-  constructor(param: TDGameObjectsField) {
-    this.stage = param.stage;
-    this.turnIndicator = param.turnIndicator;
-    this.skyBrightness = param.skyBrightness;
-    this.illumination = param.illumination;
+  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
+    this.stage = new SchoolField(resources);
+    this.turnIndicator = new TurnIndicator({
+        listener: listener,
+        resources: resources
+      });
+    this.skyBrightness = new SkyBrightness(listener);
+    this.illumination = new Illumination(listener);
   }
 
   /**
    * デストラクタ相当の処理
-   *
    */
   destructor() {
     this.stage.destructor();
@@ -55,24 +52,4 @@ export class TDGameObjects implements TDGameObjectsField {
       ...this.illumination.getObject3Ds()
     ];
   }
-}
-
-/**
- * 3Dレイヤーゲームオブジェクトを生成する
- *
- * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
- * @return 3Dレイヤーゲームオブジェクト
- */
-export function createTDGameObjects(resources: Resources, listener: Observable<GameObjectAction>): TDGameObjects {
-  const param = {
-    stage: new SchoolField(resources),
-    turnIndicator: new TurnIndicator({
-      listener: listener,
-      resources: resources
-    }),
-    skyBrightness: new SkyBrightness(listener),
-    illumination: new Illumination(listener),
-  };
-  return new TDGameObjects(param);
 }

@@ -9,8 +9,7 @@ import {TDCamera} from "../../../../../game-object/camera/td";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
 import type {TDPlayer} from "./player";
 import {enemyTDObject, playerTDObjects} from "./player";
-import type {TDGameObjects} from "./game-objects";
-import {createTDGameObjects} from "./game-objects";
+import {TDGameObjects} from "./game-objects";
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
@@ -97,7 +96,7 @@ export class ThreeDimensionLayer {
         })
     });
 
-    this.gameObjects = createTDGameObjects(param.resources, this._gameObjectAction);
+    this.gameObjects = new TDGameObjects(param.resources, this._gameObjectAction);
     this.gameObjects.getObject3Ds().forEach(object => {
       this.scene.add(object);
     });
