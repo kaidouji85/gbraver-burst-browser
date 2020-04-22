@@ -12,94 +12,92 @@ import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
 
-/** HUDレイヤーのゲームオブジェクト */
-export type HUDGameObjects = {
+/** イベント通知 */
+type Notifier = {
+  battleSceneAction: Observable<BattleSceneAction>
+};
+
+/**
+ * HUDレイヤーのゲームオブジェクト
+ */
+export class HUDGameObjects {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
   frontmostFader: Fader;
   rearmostFader: Fader;
-  notifier: {
-    battleSceneAction: Observable<BattleSceneAction>
-  }
-};
+  _battleSceneAction: Subject<BattleSceneAction>;
 
-/**
- * HUDレイヤーゲームオブジェクトを生成する
- *
- * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
- * @param playerInfo プレイヤーの情報
- * @return HUDゲームオブジェクト
- */
-export function createHUDGameObjects(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player): HUDGameObjects {
-  const battleSceneAction = new Subject();
+  constructor(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player) {
+    this._battleSceneAction = new Subject();
 
-  const batterySelector = new BatterySelector({
-    listener: listener,
-    maxBattery: playerInfo.armdozer.maxBattery,
-    resources: resources,
-    onBatteryChange: (battery: number) => {
-      battleSceneAction.next({
-        type: 'changeBattery',
-        battery: battery
-      });
-    },
-    onOkButtonPush: () => {
-      battleSceneAction.next({
-        type: 'decideBattery',
-        battery: batterySelector.getBattery()
-      });
-    }
-  });
-
-  const burstButton = new BurstButton({
-    resources: resources,
-    listener: listener,
-    onPush: () => {
-      battleSceneAction.next({
-        type: 'doBurst'
-      });
-    }
-  });
-
-  return {
-    batterySelector: batterySelector,
-    burstButton: burstButton,
-    frontmostFader: frontmostFader({
+    this.batterySelector = new BatterySelector({
+      listener: listener,
+      maxBattery: playerInfo.armdozer.maxBattery,
+      resources: resources,
+      onBatteryChange: (battery: number) => {
+        this._battleSceneAction.next({
+          type: 'changeBattery',
+          battery: battery
+        });
+      },
+      onOkButtonPush: () => {
+        this._battleSceneAction.next({
+          type: 'decideBattery',
+          battery: this.batterySelector.getBattery()
+        });
+      }
+    });
+    this.burstButton = new BurstButton({
+      resources: resources,
+      listener: listener,
+      onPush: () => {
+        this._battleSceneAction.next({
+          type: 'doBurst'
+        });
+      }
+    });
+    this.frontmostFader = frontmostFader({
       listener: listener,
       isVisible: true,
-    }),
-    rearmostFader: rearmostFader({
+    });
+    this.rearmostFader = rearmostFader({
       listener: listener,
       isVisible: false,
-    }),
-    notifier: {
-      battleSceneAction: battleSceneAction
+    });
+  }
+
+  /**
+   * デスタラクタ相当の処理
+   */
+  destructor(): void {
+    this.batterySelector.destructor();
+    this.burstButton.destructor();
+    this.rearmostFader.destructor();
+    this.frontmostFader.destructor();
+  }
+
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
+  getObject3Ds(): THREE.Object3D {
+    return [
+      this.batterySelector.getObject3D(),
+      this.burstButton.getObject3D(),
+      this.rearmostFader.getObject3D(),
+      this.frontmostFader.getObject3D(),
+    ];
+  }
+
+  /**
+   * イベント通知
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      battleSceneAction: this._battleSceneAction
     }
-  };
-}
-
-/**
- * HUDレイヤーゲームオブジェクトをシーンに追加する
- *
- * @param scene 追加するシーン
- * @param target HUDレイヤーゲームオブジェクト
- */
-export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects): void {
-  scene.add(target.batterySelector.getObject3D());
-  scene.add(target.burstButton.getObject3D());
-  scene.add(target.rearmostFader.getObject3D());
-  scene.add(target.frontmostFader.getObject3D());
-}
-
-/**
- * HUDゲームオブジェクトのリソースを破棄する
- *
- * @param target リソース破棄対象
- */
-export function disposeHUDGameObjects(target: HUDGameObjects): void {
-  target.batterySelector.destructor();
-  target.burstButton.destructor();
-  target.rearmostFader.destructor();
-  target.frontmostFader.destructor();
+  }
 }

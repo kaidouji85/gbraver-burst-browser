@@ -50,6 +50,13 @@ export class Renderer {
   }
 
   /**
+   * リソースを破棄する
+   */
+  dispose(): void {
+    this._threeJsRender.renderLists.dispose();
+  }
+
+  /**
    * イベント通知ストリームを取得する
    *
    * @return イベント通知ストリーム
