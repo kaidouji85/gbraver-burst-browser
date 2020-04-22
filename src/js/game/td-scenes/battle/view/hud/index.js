@@ -110,7 +110,7 @@ export class HudLayer {
    */
   notifier(): Notifier {
     return {
-      battleAction: this.gameObjects.notifier.battleSceneAction
+      battleAction: this.gameObjects.notifier().battleSceneAction
     };
   }
 }

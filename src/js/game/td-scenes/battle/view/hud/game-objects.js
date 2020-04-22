@@ -12,44 +12,36 @@ import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
 
-/** HUDレイヤーのゲームオブジェクト フィールド */
-interface HUDGameObjectsField {
-  batterySelector: BatterySelector;
-  burstButton: BurstButton;
-  frontmostFader: Fader;
-  rearmostFader: Fader;
-  notifier: {
-    battleSceneAction: Observable<BattleSceneAction>
-  }
-}
+/** イベント通知 */
+type Notifier = {
+  battleSceneAction: Observable<BattleSceneAction>
+};
 
 /**
  * HUDレイヤーのゲームオブジェクト
  */
-export class HUDGameObjects implements HUDGameObjectsField {
+export class HUDGameObjects {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
   frontmostFader: Fader;
   rearmostFader: Fader;
-  notifier: {
-    battleSceneAction: Observable<BattleSceneAction>
-  }
+  _battleSceneAction: Subject<BattleSceneAction>;
 
   constructor(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player) {
-    const battleSceneAction = new Subject();
+    this._battleSceneAction = new Subject();
 
     this.batterySelector = new BatterySelector({
       listener: listener,
       maxBattery: playerInfo.armdozer.maxBattery,
       resources: resources,
       onBatteryChange: (battery: number) => {
-        battleSceneAction.next({
+        this._battleSceneAction.next({
           type: 'changeBattery',
           battery: battery
         });
       },
       onOkButtonPush: () => {
-        battleSceneAction.next({
+        this._battleSceneAction.next({
           type: 'decideBattery',
           battery: this.batterySelector.getBattery()
         });
@@ -59,22 +51,54 @@ export class HUDGameObjects implements HUDGameObjectsField {
       resources: resources,
       listener: listener,
       onPush: () => {
-        battleSceneAction.next({
+        this._battleSceneAction.next({
           type: 'doBurst'
         });
       }
     });
     this.frontmostFader = frontmostFader({
-        listener: listener,
-        isVisible: true,
-      });
+      listener: listener,
+      isVisible: true,
+    });
     this.rearmostFader = rearmostFader({
-        listener: listener,
-        isVisible: false,
-      });
-      this.notifier = {
-        battleSceneAction: battleSceneAction
-      };
+      listener: listener,
+      isVisible: false,
+    });
+  }
+
+  /**
+   * デスタラクタ相当の処理
+   */
+  destructor(): void {
+    this.batterySelector.destructor();
+    this.burstButton.destructor();
+    this.rearmostFader.destructor();
+    this.frontmostFader.destructor();
+  }
+
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
+  getObject3Ds(): THREE.Object3D {
+    return [
+      this.batterySelector.getObject3D(),
+      this.burstButton.getObject3D(),
+      this.rearmostFader.getObject3D(),
+      this.frontmostFader.getObject3D(),
+    ];
+  }
+
+  /**
+   * イベント通知
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      battleSceneAction: this._battleSceneAction
+    }
   }
 }
 
