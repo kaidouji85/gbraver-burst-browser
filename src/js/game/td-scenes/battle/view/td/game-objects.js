@@ -10,13 +10,52 @@ import * as THREE from "three";
 import {SkyBrightness} from "../../../../../game-object/sky-brightness/sky-brightness";
 import {Illumination} from "../../../../../game-object/illumination/illumination";
 
-/** 3Dレイヤーのゲームオブジェクト */
-export type TDGameObjects = {
+/** 3Dレイヤーのゲームオブジェクト フィールド */
+interface TDGameObjectsField {
   stage: Stage;
   turnIndicator: TurnIndicator;
   skyBrightness: SkyBrightness;
   illumination: Illumination;
-};
+}
+
+export class TDGameObjects implements TDGameObjectsField {
+  stage: Stage;
+  turnIndicator: TurnIndicator;
+  skyBrightness: SkyBrightness;
+  illumination: Illumination;
+
+  constructor(param: TDGameObjectsField) {
+    this.stage = param.stage;
+    this.turnIndicator = param.turnIndicator;
+    this.skyBrightness = param.skyBrightness;
+    this.illumination = param.illumination;
+  }
+
+  /**
+   * デストラクタ相当の処理
+   *
+   */
+  destructor() {
+    this.stage.destructor();
+    this.turnIndicator.destructor();
+    this.skyBrightness.destructor();
+    this.illumination.destructor();
+  }
+
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
+  getObject3Ds(): THREE.Object3D[] {
+    return [
+      ...this.stage.getThreeJsObjects(),
+      this.turnIndicator.getObject3D(),
+      this.skyBrightness.getObject3D(),
+      ...this.illumination.getObject3Ds()
+    ];
+  }
+}
 
 /**
  * 3Dレイヤーゲームオブジェクトを生成する
@@ -26,7 +65,7 @@ export type TDGameObjects = {
  * @return 3Dレイヤーゲームオブジェクト
  */
 export function createTDGameObjects(resources: Resources, listener: Observable<GameObjectAction>): TDGameObjects {
-  return {
+  const param = {
     stage: new SchoolField(resources),
     turnIndicator: new TurnIndicator({
       listener: listener,
@@ -35,8 +74,10 @@ export function createTDGameObjects(resources: Resources, listener: Observable<G
     skyBrightness: new SkyBrightness(listener),
     illumination: new Illumination(listener),
   };
+  return new TDGameObjects(param);
 }
 
+// TODO 削除する
 /**
  * 3Dレイヤーゲームオブジェクトをシーンに追加する
  *
@@ -53,6 +94,7 @@ export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): 
   });
 }
 
+// TODO 削除する
 /**
  * 3Dレイヤーゲームオブジェクトのリソースを破棄する
  *
