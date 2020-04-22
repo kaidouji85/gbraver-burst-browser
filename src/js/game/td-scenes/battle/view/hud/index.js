@@ -9,7 +9,7 @@ import type {BattleSceneAction} from "../../../../../action/battle-scene";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
-import {HUDGameObjects, appendHUDGameObjects, disposeHUDGameObjects} from "./game-objects";
+import {HUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../action/resize/resize";
@@ -60,7 +60,9 @@ export class HudLayer {
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
     this.gameObjects = new HUDGameObjects(param.resources, this._gameObjectAction, player);
-    appendHUDGameObjects(this.scene, this.gameObjects);
+    this.gameObjects.getObject3Ds().forEach(object => {
+      this.scene.add(object);
+    });
 
     this.players = param.players.map(v => v.playerId === param.playerId
       ? playerHUDObjects(param.resources, v, this._gameObjectAction)
@@ -85,7 +87,11 @@ export class HudLayer {
 
   /** デストラクタ */
   destructor(): void {
-    disposeHUDGameObjects(this.gameObjects);
+    this.gameObjects.getObject3Ds().forEach(object => {
+      this.scene.remove(object);
+    });
+    this.gameObjects.destructor();
+
     this.armdozers.forEach(armdozer => {
       armdozer.getObject3Ds().forEach(object => {
         this.scene.remove(object);

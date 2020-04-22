@@ -101,30 +101,3 @@ export class HUDGameObjects {
     }
   }
 }
-
-// TODO 削除する
-/**
- * HUDレイヤーゲームオブジェクトをシーンに追加する
- *
- * @param scene 追加するシーン
- * @param target HUDレイヤーゲームオブジェクト
- */
-export function appendHUDGameObjects(scene: THREE.Scene, target: HUDGameObjects): void {
-  scene.add(target.batterySelector.getObject3D());
-  scene.add(target.burstButton.getObject3D());
-  scene.add(target.rearmostFader.getObject3D());
-  scene.add(target.frontmostFader.getObject3D());
-}
-
-// TODO 削除する
-/**
- * HUDゲームオブジェクトのリソースを破棄する
- *
- * @param target リソース破棄対象
- */
-export function disposeHUDGameObjects(target: HUDGameObjects): void {
-  target.batterySelector.destructor();
-  target.burstButton.destructor();
-  target.rearmostFader.destructor();
-  target.frontmostFader.destructor();
-}
