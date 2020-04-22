@@ -15,6 +15,8 @@ import {
 export const MESH_SIZE = 100;
 export const MAX_ANIMATION = 16;
 export const MAX_BATTERY = 9;
+export const NUMBER_X = 20;
+export const SIGN_PADDING = 80;
 
 /** プレイヤーのバッテリー回復*/
 export class PlayerRecoverBatteryView implements RecoverBatteryView {
@@ -35,7 +37,7 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
       height: MESH_SIZE,
       maxAnimation: MAX_ANIMATION,
     });
-    this._signMesh.getObject3D().position.x = -MESH_SIZE / 2;
+    this._signMesh.getObject3D().position.x = NUMBER_X - SIGN_PADDING;
     this._group.add(this._signMesh.getObject3D());
 
     this._numberMesh = new HorizontalAnimationMesh({
@@ -45,7 +47,7 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
       height: MESH_SIZE,
       maxAnimation: MAX_ANIMATION,
     });
-    this._numberMesh.getObject3D().position.x = MESH_SIZE /2;
+    this._numberMesh.getObject3D().position.x = NUMBER_X;
     this._group.add(this._numberMesh.getObject3D());
   }
 
