@@ -76,33 +76,3 @@ export function createTDGameObjects(resources: Resources, listener: Observable<G
   };
   return new TDGameObjects(param);
 }
-
-// TODO 削除する
-/**
- * 3Dレイヤーゲームオブジェクトをシーンに追加する
- *
- * @param scene 追加するシーン
- * @param target 3Dレイヤーゲームオブジェクト
- */
-export function appendTDGameObjects(scene: THREE.Scene, target: TDGameObjects): void {
-  target.stage.getThreeJsObjects()
-    .forEach(item => scene.add(item));
-  scene.add(target.turnIndicator.getObject3D());
-  scene.add(target.skyBrightness.getObject3D());
-  target.illumination.getObject3Ds().forEach(v => {
-    scene.add(v);
-  });
-}
-
-// TODO 削除する
-/**
- * 3Dレイヤーゲームオブジェクトのリソースを破棄する
- *
- * @param target リソース破棄対象
- */
-export function disposeTDGameObjects(target: TDGameObjects): void {
-  target.stage.destructor();
-  target.turnIndicator.destructor();
-  target.skyBrightness.destructor();
-  target.illumination.destructor();
-}
