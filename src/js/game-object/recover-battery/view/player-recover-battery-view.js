@@ -14,9 +14,8 @@ import {
 
 export const MESH_SIZE = 100;
 export const MAX_ANIMATION = 16;
+export const SIGN_FRAME = 10 / MAX_ANIMATION;
 export const MAX_BATTERY = 9;
-export const NUMBER_X = 20;
-export const SIGN_PADDING = 80;
 
 /** プレイヤーのバッテリー回復*/
 export class PlayerRecoverBatteryView implements RecoverBatteryView {
@@ -37,7 +36,6 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
       height: MESH_SIZE,
       maxAnimation: MAX_ANIMATION,
     });
-    this._signMesh.getObject3D().position.x = NUMBER_X - SIGN_PADDING;
     this._group.add(this._signMesh.getObject3D());
 
     this._numberMesh = new HorizontalAnimationMesh({
@@ -47,7 +45,6 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
       height: MESH_SIZE,
       maxAnimation: MAX_ANIMATION,
     });
-    this._numberMesh.getObject3D().position.x = NUMBER_X;
     this._group.add(this._numberMesh.getObject3D());
   }
 
@@ -63,9 +60,20 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
    * @param model モデル
    */
   engage(model: RecoverBatteryModel): void {
-    this._refreshValue(model);
-    this._refreshOpacity(model);
-    this._refreshPos();
+    this._signMesh.animate(SIGN_FRAME);
+    this._signMesh.setOpacity(model.opacity);
+    this._signMesh.getObject3D().position.x = -30;
+    this._signMesh.getObject3D().position.z = 1;
+
+    const battery = Math.min(model.value, MAX_BATTERY) / MAX_ANIMATION;
+    this._numberMesh.animate(battery);
+    this._numberMesh.setOpacity(model.opacity);
+    this._numberMesh.getObject3D().position.x = 40;
+    this._numberMesh.getObject3D().position.z = 0;
+
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
+    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
+    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
   }
 
   /**
@@ -80,31 +88,5 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): THREE.Object3D {
     return this._group;
-  }
-
-  /**
-   * バッテリー値を更新する
-   *
-   * @param model モデル
-   */
-  _refreshValue(model: RecoverBatteryModel): void {
-    const sign = 10 / MAX_ANIMATION;
-    this._signMesh.animate(sign);
-
-    const battery = Math.min(model.value, MAX_BATTERY) / MAX_ANIMATION;
-    this._numberMesh.animate(battery);
-  }
-
-  /** 座標を更新 */
-  _refreshPos(): void {
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
-    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
-  }
-
-  /** 透明度を更新 */
-  _refreshOpacity(model: RecoverBatteryModel): void {
-    this._signMesh.setOpacity(model.opacity);
-    this._numberMesh.setOpacity(model.opacity);
   }
 }
