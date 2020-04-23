@@ -38,16 +38,17 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     });
     this._group.add(this._sign.getObject3D());
 
-    this._numbers = R.times(v => {
-      const mesh = new HorizontalAnimationMesh({
+    this._numbers = R.times(v =>
+      new HorizontalAnimationMesh({
         texture: damageNumber,
         maxAnimation: MAX_ANIMATION,
         width: MESH_SIZE,
         height: MESH_SIZE,
-      });
-      this._group.add(mesh.getObject3D());
-      return mesh;
-    }, MAX_NUMBER_SIZE);
+      })
+    , MAX_NUMBER_SIZE);
+    this._numbers.forEach(v => {
+      this._group.add(v.getObject3D());
+    });
   }
 
   /** デストラクタ */
@@ -63,25 +64,19 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     const values: number[] = String(model.damage)
       .split('')
       .map(v => Number(v));
-    const baseX = -values.length * MESH_SIZE / 2;
 
     this._sign.setOpacity(model.opacity);
     this._sign.animate(MINUS_SIGN_FRAME);
-    this._sign.getObject3D().position.x = baseX;
-
-    this._numbers.forEach((mesh, index: number) => {
-      const hasValue = (index in values);
-      const value = hasValue
-        ? values[index]
-        : 0;
-      const animate =value / MAX_ANIMATION;
-      const positionX = baseX + (index + 1) * MESH_SIZE
-      const opacity = hasValue
-        ? model.opacity
-        : 0;
-      mesh.animate(animate);
-      mesh.getObject3D().position.x = positionX;
-      mesh.setOpacity(opacity);
+    this._sign.getObject3D().position.x = MESH_SIZE * (1/3 -values.length/2);
+    this._numbers.forEach((mesh, meshIndex) => {
+      mesh.setOpacity(0);
+      values
+        .filter((value, valueIndex) => meshIndex === valueIndex)
+        .forEach((value, valueIndex) => {
+          mesh.animate(value / MAX_ANIMATION);
+          mesh.setOpacity(model.opacity);
+          mesh.getObject3D().position.x =   MESH_SIZE * (meshIndex +1 -values.length/2)
+        });
     });
 
     this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
