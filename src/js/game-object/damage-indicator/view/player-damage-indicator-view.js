@@ -16,10 +16,12 @@ import {
 export const MESH_SIZE = 40;
 export const MAX_NUMBER_SIZE = 4;
 export const MAX_ANIMATION = 16;
+export const MINUS_SIGN_FRAME = 11 / MAX_ANIMATION;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
   _group: THREE.Group;
+  _sign: HorizontalAnimationMesh;
   _numbers: HorizontalAnimationMesh[];
 
   constructor(resources: Resources) {
@@ -27,6 +29,15 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
     const damageNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_NUMBER);
     const damageNumber: THREE.Texture = damageNumberResource ? damageNumberResource.texture : new THREE.Texture();
+
+    this._sign = new HorizontalAnimationMesh({
+      texture: damageNumber,
+      maxAnimation: MAX_ANIMATION,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
+    });
+    this._group.add(this._sign.getObject3D());
+
     this._numbers = R.times(v => {
       const mesh = new HorizontalAnimationMesh({
         texture: damageNumber,
@@ -41,6 +52,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
   /** デストラクタ */
   destructor(): void {
+    this._sign.destructor();
     this._numbers.forEach(v => {
       v.destructor();
     });
@@ -51,13 +63,19 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     const values: number[] = String(model.damage)
       .split('')
       .map(v => Number(v));
+    const baseX = -values.length * MESH_SIZE / 2;
+
+    this._sign.setOpacity(model.opacity);
+    this._sign.animate(MINUS_SIGN_FRAME);
+    this._sign.getObject3D().position.x = baseX;
+
     this._numbers.forEach((mesh, index: number) => {
       const hasValue = (index in values);
       const value = hasValue
         ? values[index]
         : 0;
       const animate =value / MAX_ANIMATION;
-      const positionX = index * MESH_SIZE -(values.length - 1) * MESH_SIZE / 2;
+      const positionX = baseX + (index + 1) * MESH_SIZE
       const opacity = hasValue
         ? model.opacity
         : 0;
