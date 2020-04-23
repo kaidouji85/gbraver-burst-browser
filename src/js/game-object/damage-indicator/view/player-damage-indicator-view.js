@@ -16,12 +16,10 @@ import {
 export const MESH_SIZE = 40;
 export const MAX_NUMBER_SIZE = 4;
 export const MAX_ANIMATION = 16;
-export const MINUS_SIGN_FRAME = 11 / MAX_ANIMATION;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
   _group: THREE.Group;
-  _sign: HorizontalAnimationMesh;
   _numbers: HorizontalAnimationMesh[];
 
   constructor(resources: Resources) {
@@ -29,14 +27,6 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
     const damageNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_NUMBER);
     const damageNumber: THREE.Texture = damageNumberResource ? damageNumberResource.texture : new THREE.Texture();
-
-    this._sign = new HorizontalAnimationMesh({
-      texture: damageNumber,
-      maxAnimation: MAX_ANIMATION,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
-    });
-    this._group.add(this._sign.getObject3D());
 
     this._numbers = R.times(v =>
       new HorizontalAnimationMesh({
@@ -53,7 +43,6 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
   /** デストラクタ */
   destructor(): void {
-    this._sign.destructor();
     this._numbers.forEach(v => {
       v.destructor();
     });
@@ -64,10 +53,6 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     const values: number[] = String(model.damage)
       .split('')
       .map(v => Number(v));
-
-    this._sign.setOpacity(model.opacity);
-    this._sign.animate(MINUS_SIGN_FRAME);
-    this._sign.getObject3D().position.x = MESH_SIZE * (1/3 -values.length/2);
     this._numbers.forEach((mesh, meshIndex) => {
       mesh.setOpacity(0);
       values
