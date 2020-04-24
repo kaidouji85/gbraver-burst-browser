@@ -11,3 +11,9 @@ export const Button = () => {
   btn.addEventListener('click', e => console.log(e));
   return btn;
 };
+
+
+export const ShinBraver = () => {
+  const div = document.createElement('div');
+  return div;
+}

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "npm-run-all clean dev-server",
     "start:production": "npm-run-all build:production serve",
-    "start:storybook": "start-storybook -p 6006",
+    "start:storybook": "start-storybook -s ./src -p 6006",
     "start:storybook-static": "npm-run-all clean build:storybook-static serve:storybook-static",
     "test": "ava",
     "build": "npm-run-all clean type-check webpack webpack:sw webpack:clear-sw",
