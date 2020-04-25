@@ -16,6 +16,7 @@ export const MESH_SIZE = 100;
 export const MAX_ANIMATION = 16;
 export const SIGN_FRAME = 10 / MAX_ANIMATION;
 export const MAX_BATTERY = 9;
+export const SIGN_PADDING = 70;
 
 /** プレイヤーのバッテリー回復*/
 export class PlayerRecoverBatteryView implements RecoverBatteryView {
@@ -62,18 +63,18 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
   engage(model: RecoverBatteryModel): void {
     this._signMesh.animate(SIGN_FRAME);
     this._signMesh.setOpacity(model.opacity);
-    this._signMesh.getObject3D().position.x = -30;
+    this._signMesh.getObject3D().position.x = -SIGN_PADDING;
     this._signMesh.getObject3D().position.z = 1;
 
     const battery = Math.min(model.value, MAX_BATTERY) / MAX_ANIMATION;
     this._numberMesh.animate(battery);
     this._numberMesh.setOpacity(model.opacity);
-    this._numberMesh.getObject3D().position.x = 40;
+    this._numberMesh.getObject3D().position.x = 0;
     this._numberMesh.getObject3D().position.z = 0;
 
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X + 30;
     this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
+    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
   }
 
   /**
