@@ -15,8 +15,8 @@ import type {Update} from "../src/js/action/game-loop/update";
 import type {PreRender} from "../src/js/action/game-loop/pre-render";
 import type {GameObjectAction} from "../src/js/action/game-object-action";
 import {gameObjectStream} from "../src/js/action/game-object-action/game-object-stream";
-import {createSafeAreaInset} from "../src/js/safe-area/safe-area-inset";
 import type {SafeAreaInset} from "../src/js/safe-area/safe-area-inset";
+import {createSafeAreaInset} from "../src/js/safe-area/safe-area-inset";
 import type {Resources} from "../src/js/resource";
 import {loadAllResource} from "../src/js/resource";
 import {TDCamera} from "../src/js/game-object/camera/td";
@@ -85,7 +85,7 @@ export class TDGameObjectStub {
       this._gameLoop.subscribe(this._onGameLoop.bind(this))
     ];
   }
-  
+
   /**
    * シーンを開始する
    *
