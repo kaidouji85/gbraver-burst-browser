@@ -1,5 +1,6 @@
 // @flow
 
+import TWEEN from "@tweenjs/tween.js";
 import type {Render} from "../../src/js/action/game-loop/render";
 import * as THREE from "three";
 import {Observable, Subject, Subscription} from "rxjs";
@@ -107,6 +108,7 @@ export class HUDGameObjectStub {
    * @param action アクション
    */
   _onGameLoop(action: GameLoop): void {
+    TWEEN.update(action.time);
     this._update.next({
       type: 'Update',
       time: action.time
