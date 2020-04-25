@@ -8,11 +8,11 @@ import {Observable, Subscription} from "rxjs";
 import {onWebGLRendererResize} from "../../render/resize";
 import type {TdDOMEvent} from "../../action/td-dom";
 import {createDOMEventStream} from "../../action/td-dom";
+import {createRender} from "../../render/create-render";
 
 /** コンストラクタのパラメータ */
 type Param = {
-  threeJsRender: THREE.WebGLRenderer,
-  renderStream: Observable<Render>,
+  render: Observable<Render>,
   resize: Observable<Resize>,
 };
 
@@ -28,7 +28,7 @@ export class Renderer {
   _subscriptions: Subscription[];
 
   constructor(param: Param) {
-    this._threeJsRender = param.threeJsRender;
+    this._threeJsRender = createRender();
     this._domEvent = createDOMEventStream(this._threeJsRender.domElement);
 
     this._subscriptions = [
@@ -36,7 +36,7 @@ export class Renderer {
         this._resize(action);
       }),
 
-      param.renderStream.subscribe(action => {
+      param.render.subscribe(action => {
         this._render(action);
       })
     ];

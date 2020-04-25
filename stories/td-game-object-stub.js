@@ -5,7 +5,6 @@ import * as THREE from "three";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resize} from "../src/js/action/resize/resize";
 import {createResizeStream} from "../src/js/action/resize/resize";
-import {createRender} from "../src/js/render/create-render";
 import {Renderer} from "../src/js/game-object/renderer";
 import type {GameLoop} from "../src/js/action/game-loop/game-loop";
 import {gameLoopStream} from "../src/js/action/game-loop/game-loop-stream";
@@ -69,8 +68,7 @@ export class TDGameObjectStub {
 
     this._renderer = new Renderer({
       resize: this._resize,
-      renderStream: this._render,
-      threeJsRender: createRender()
+      render: this._render,
     });
     this._scene = new THREE.Scene();
     this._camera = new TDCamera(this._update, this._resize);
