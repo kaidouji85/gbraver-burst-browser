@@ -64,16 +64,16 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
   engage(model: RecoverBatteryModel): void {
     this._signMesh.animate(SIGN_FRAME);
     this._signMesh.setOpacity(model.opacity);
-    this._signMesh.getObject3D().position.x = -SIGN_PADDING;
+    this._signMesh.getObject3D().position.x = -SIGN_PADDING + GROUP_PADDING;
     this._signMesh.getObject3D().position.z = 1;
 
     const battery = Math.min(model.value, MAX_BATTERY) / MAX_ANIMATION;
     this._numberMesh.animate(battery);
     this._numberMesh.setOpacity(model.opacity);
-    this._numberMesh.getObject3D().position.x = 0;
+    this._numberMesh.getObject3D().position.x = GROUP_PADDING;
     this._numberMesh.getObject3D().position.z = 0;
 
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X + GROUP_PADDING;
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
     this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
     this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
   }
