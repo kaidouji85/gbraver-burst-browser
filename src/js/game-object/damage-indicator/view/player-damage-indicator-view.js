@@ -16,6 +16,7 @@ import {
 export const MESH_SIZE = 40;
 export const MAX_NUMBER_SIZE = 4;
 export const MAX_ANIMATION = 16;
+export const GROUP_PADDING = 30;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
@@ -64,9 +65,9 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
         });
     });
 
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X + GROUP_PADDING;
     this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
+    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
   }
 
   /** カメラの方向を向く */
