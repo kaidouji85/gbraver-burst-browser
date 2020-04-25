@@ -9,7 +9,6 @@ import {createRender} from "../src/js/render/create-render";
 import {Renderer} from "../src/js/game-object/renderer";
 import type {GameLoop} from "../src/js/action/game-loop/game-loop";
 import {gameLoopStream} from "../src/js/action/game-loop/game-loop-stream";
-import {getViewPortHeight, getViewPortWidth} from "../src/js/view-port/view-port-size";
 import {toOverlapStream} from "../src/js/action/overlap/overlap-stream";
 import type {OverlapAction} from "../src/js/action/overlap";
 import type {Update} from "../src/js/action/game-loop/update";
@@ -18,10 +17,9 @@ import type {GameObjectAction} from "../src/js/action/game-object-action";
 import {gameObjectStream} from "../src/js/action/game-object-action/game-object-stream";
 import {createSafeAreaInset} from "../src/js/safe-area/safe-area-inset";
 import type {SafeAreaInset} from "../src/js/safe-area/safe-area-inset";
-import {createDOMEventStream} from "../src/js/action/td-dom";
-import type {TdDOMEvent} from "../src/js/action/td-dom";
 import type {Resources} from "../src/js/resource";
 import {loadAllResource} from "../src/js/resource";
+import {TDCamera} from "../src/js/game-object/camera/td";
 
 type Object3dCreator  = (resources: Resources, listener: Observable<GameObjectAction>) => THREE.Object3D[];
 
@@ -29,44 +27,44 @@ type Object3dCreator  = (resources: Resources, listener: Observable<GameObjectAc
  * ゲームオブジェクト スタブ
  */
 export class GameObjectStub {
-  _scene: THREE.Scene;
-  _camera: THREE.Camera;
-  _threeJsRenderer: THREE.Renderer;
   _safeAreaInset: SafeAreaInset;
-  _domEvent: Observable<TdDOMEvent>;
-  _gameLoop: Observable<GameLoop>;
   _resize: Observable<Resize>;
-  _render: Subject<Render>;
-  _overlap: Observable<OverlapAction>;
+  _gameLoop: Observable<GameLoop>;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
-  _gameObjectAction: Observable<GameObjectAction>;
+  _render: Subject<Render>;
+
   _renderer: Renderer;
+  _camera: TDCamera;
+  _scene: THREE.Scene;
+
+  _overlap: Observable<OverlapAction>;
+  _gameObjectAction: Observable<GameObjectAction>;
+
   _subscription: Subscription[];
 
   constructor() {
-    this._scene = new THREE.Scene();
-    const aspect = getViewPortWidth() / getViewPortHeight();
-    this._camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
-    this._threeJsRenderer = createRender();
     this._safeAreaInset = createSafeAreaInset();
-
-    this._domEvent = createDOMEventStream(this._threeJsRenderer.domElement);
+    this._resize = createResizeStream();
     this._gameLoop = gameLoopStream();
     this._update = new Subject<Update>();
     this._preRender = new Subject<PreRender>();
-    this._resize = createResizeStream();
-    this._render = new Subject();
-    this._overlap = toOverlapStream(this._domEvent, this._threeJsRenderer.domElement, this._camera);
-    this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
-
+    this._render = new Subject<Render>();
 
     this._renderer = new Renderer({
       resize: this._resize,
       renderStream: this._render,
-      threeJsRender: this._threeJsRenderer
+      threeJsRender: createRender()
     });
+    this._scene = new THREE.Scene();
+    this._camera = new TDCamera(this._update, this._resize);
 
+    this._overlap = toOverlapStream(
+      this._renderer.notifier().domEvent,
+      this._renderer.getRendererDOM(),
+      this._camera.getCamera()
+    );
+    this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
     this._subscription = [
       this._gameLoop.subscribe(this._onGameLoop.bind(this))
     ];
@@ -88,7 +86,7 @@ export class GameObjectStub {
   }
 
   domElement(): HTMLElement{
-    return this._threeJsRenderer.domElement;
+    return this._renderer.getRendererDOM();
   }
 
   /**
@@ -103,13 +101,13 @@ export class GameObjectStub {
     });
     this._preRender.next({
       type: 'PreRender',
-      camera: this._camera,
+      camera: this._camera.getCamera(),
       rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
     this._render.next({
       type: 'Render',
-      camera: this._camera,
+      camera: this._camera.getCamera(),
       scene: this._scene,
     });
   }
