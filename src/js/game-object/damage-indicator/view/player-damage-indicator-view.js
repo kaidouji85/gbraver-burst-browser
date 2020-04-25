@@ -60,7 +60,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
         .forEach((value, valueIndex) => {
           mesh.animate(value / MAX_ANIMATION);
           mesh.setOpacity(model.opacity);
-          mesh.getObject3D().position.x =   MESH_SIZE * (meshIndex +1 -values.length/2)
+          mesh.getObject3D().position.x =   MESH_SIZE * (meshIndex -values.length/2)
         });
     });
 
