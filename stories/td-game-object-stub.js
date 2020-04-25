@@ -24,9 +24,11 @@ import {TDCamera} from "../src/js/game-object/camera/td";
 type Object3dCreator  = (resources: Resources, listener: Observable<GameObjectAction>) => THREE.Object3D[];
 
 /**
- * ゲームオブジェクト スタブ
+ * 3Dレイヤー ゲームオブジェクト スタブ
  */
-export class GameObjectStub {
+export class TDGameObjectStub {
+  _creator: Object3dCreator;
+
   _safeAreaInset: SafeAreaInset;
   _resize: Observable<Resize>;
   _gameLoop: Observable<GameLoop>;
@@ -43,7 +45,14 @@ export class GameObjectStub {
 
   _subscription: Subscription[];
 
-  constructor() {
+  /**
+   * コンストラクタ
+   *
+   * @param creator Object3D生成関数
+   */
+  constructor(creator: Object3dCreator) {
+    this._creator = creator;
+
     this._safeAreaInset = createSafeAreaInset();
     this._resize = createResizeStream();
     this._gameLoop = gameLoopStream();
@@ -70,13 +79,15 @@ export class GameObjectStub {
     ];
   }
 
-  async start(creator: Object3dCreator): Promise<void> {
+  /**
+   * シーンを開始する
+   *
+   * @return 実行結果
+   */
+  async start(): Promise<void> {
     try {
-      console.log('start');
       const resources = await loadAllResource('/');
-      console.log(resources);
-      console.log('complete load resource');
-      const object3Ds = creator(resources, this._gameObjectAction);
+      const object3Ds = this._creator(resources, this._gameObjectAction);
       object3Ds.forEach(object3D => {
         this._scene.add(object3D);
       });
@@ -85,6 +96,11 @@ export class GameObjectStub {
     }
   }
 
+  /**
+   * レンダリング対象のHTML要素を取得する
+   *
+   * @return {HTMLElement}
+   */
   domElement(): HTMLElement{
     return this._renderer.getRendererDOM();
   }
