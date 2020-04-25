@@ -21,6 +21,13 @@ import type {Resources} from "../src/js/resource";
 import {loadAllResource} from "../src/js/resource";
 import {TDCamera} from "../src/js/game-object/camera/td";
 
+/**
+ * Object3D生成コールバック関数
+ *
+ * @param resources リソース管理オブジェクト
+ * @param listener ゲームオブジェクトイベントリスナ
+ * @return　シーンに追加するObject3D
+ */
 type Object3dCreator  = (resources: Resources, listener: Observable<GameObjectAction>) => THREE.Object3D[];
 
 /**
@@ -78,7 +85,7 @@ export class TDGameObjectStub {
       this._gameLoop.subscribe(this._onGameLoop.bind(this))
     ];
   }
-
+  
   /**
    * シーンを開始する
    *
