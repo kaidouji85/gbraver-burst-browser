@@ -17,6 +17,7 @@ export const MAX_ANIMATION = 16;
 export const SIGN_FRAME = 10 / MAX_ANIMATION;
 export const MAX_BATTERY = 9;
 export const SIGN_PADDING = 70;
+export const GROUP_PADDING = 30;
 
 /** プレイヤーのバッテリー回復*/
 export class PlayerRecoverBatteryView implements RecoverBatteryView {
@@ -72,7 +73,7 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
     this._numberMesh.getObject3D().position.x = 0;
     this._numberMesh.getObject3D().position.z = 0;
 
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X + 30;
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X + GROUP_PADDING;
     this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
     this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
   }
