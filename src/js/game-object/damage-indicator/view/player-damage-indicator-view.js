@@ -61,11 +61,11 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
         .forEach((value, valueIndex) => {
           mesh.animate(value / MAX_ANIMATION);
           mesh.setOpacity(model.opacity);
-          mesh.getObject3D().position.x =   MESH_SIZE * (meshIndex -values.length/2)
+          mesh.getObject3D().position.x =   MESH_SIZE * (meshIndex -values.length/2) + GROUP_PADDING;
         });
     });
 
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X + GROUP_PADDING;
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
     this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
     this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
   }
