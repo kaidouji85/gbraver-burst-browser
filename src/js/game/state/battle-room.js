@@ -13,15 +13,17 @@ import {StrongNeoLandozerNPC} from "../../npc/strong-neo-landozer";
  * @return バトルルーム
  */
 export function createBattleRoom(state: State): BattleRoom {
-  switch (state.level) {
-    case 1:
-      return createNeoLandozerRoom(state);
-    case 2:
-      return createLightningDozerRoom(state);
-    case 3:
-    default:
-      return createStrongNeoLandozerRoom(state);
-  }
+  // TODO 開発が完了したら戻す
+  return createLightningDozerRoom(state);
+  // switch (state.level) {
+  //   case 1:
+  //     return createNeoLandozerRoom(state);
+  //   case 2:
+  //     return createLightningDozerRoom(state);
+  //   case 3:
+  //   default:
+  //     return createStrongNeoLandozerRoom(state);
+  // }
 
 }
 
