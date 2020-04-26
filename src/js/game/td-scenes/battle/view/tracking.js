@@ -12,6 +12,44 @@ import {NeoLandozerCutIn} from "../../../../game-object/cut-in/neo-landozer/neo-
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import {ShinBraverCutIn} from "../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 import {LightningDozerCutIn} from "../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
+import {ThreeDimensionLayer} from "./td";
+import {HudLayer} from "./hud";
+import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import {ShinBraverHUD} from "./hud/armdozer/shin-braver";
+import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
+import {LightningDozerHUD} from "./hud/armdozer/lightning-dozer";
+
+/**
+ * 3Dレイヤーのオブジェクトをトラッキングする
+ *
+ * @param td 3Dレイヤー
+ * @param hud HUDレイヤー
+ * @param playerId プレイヤーID
+ * @param rendererDOM レンダリング対象のDOM
+ */
+export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: PlayerId, rendererDOM: HTMLElement): void {
+  hud.players.forEach(v => {
+    if (v.playerId === playerId) {
+      trackingPlayerGauge(td.camera.getCamera(), rendererDOM, v.gauge);
+    } else {
+      trackingEnemyGauge(td.camera.getCamera(), rendererDOM, v.gauge);
+    }
+  });
+
+  hud.armdozers.forEach(hudArmdozer => {
+    td.sprites
+      .filter(tdSprite => tdSprite.playerId === hudArmdozer.playerId)
+      .forEach(tdSprite => {
+        if (hudArmdozer instanceof ShinBraverHUD) {
+          trackingShinBraverCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite)
+        } else if (hudArmdozer instanceof NeoLandozerHUD) {
+          trackingNeoLandozerCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
+        } else if (hudArmdozer instanceof LightningDozerHUD) {
+          trackingLightningDozerCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite)
+        }
+      });
+  });
+}
 
 /**
  * プレイヤーゲージをトラッキングする
