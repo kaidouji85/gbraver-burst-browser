@@ -11,6 +11,7 @@ import {toHUDCoordinate} from "./coordinate";
 import {NeoLandozerCutIn} from "../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 import {ShinBraverCutIn} from "../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
+import {LightningDozerCutIn} from "../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 
 /**
  * プレイヤーゲージをトラッキングする
@@ -74,6 +75,25 @@ export function trackingShinBraverCutIn(tdCamera: THREE.Camera, rendererDOM: HTM
  * @param sprite スプライト
  */
 export function trackingNeoLandozerCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: NeoLandozerCutIn, sprite: ArmDozerSprite): void {
+  const target =sprite.getObject3D();
+  const tdPosition = {
+    x: target.position.x,
+    y: ARMDOZER_EFFECT_STANDARD_Y,
+    z: target.position.z
+  };
+  const hudPosition = toHUDCoordinate(tdPosition, tdCamera, rendererDOM);
+  cutIn.tracking(hudPosition.x, hudPosition.y);
+}
+
+/**
+ * ネオランドーザカットインのトラッキング
+ *
+ * @param tdCamera 3Dレイヤーカメラ
+ * @param rendererDOM レンダリング対象のHTML要素
+ * @param cutIn カットイン
+ * @param sprite スプライト
+ */
+export function trackingLightningDozerCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: LightningDozerCutIn, sprite: ArmDozerSprite): void {
   const target =sprite.getObject3D();
   const tdPosition = {
     x: target.position.x,

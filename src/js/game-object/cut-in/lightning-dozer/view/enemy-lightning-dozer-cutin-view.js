@@ -27,7 +27,6 @@ export class EnemyLightningDozerCutInView extends PlayerLightningDozerCutInView 
   engage(model: LightningDozerCutInModel, preRender: PreRender): void {
     super.engage(model, preRender);
     const target = this.getObject3D();
-    target.position.x *= -1;
     target.scale.x *= -1;
   }
 }

@@ -7,6 +7,7 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import type {LightningDozerCutInView} from "./lightning-dozer-cutin-view";
 import type {LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
+import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 800;
@@ -34,7 +35,8 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
       height: MESH_SIZE,
       maxAnimation: 4
     });
-    this._cutInDown.animate(1); // TODO engageでフレームを指定する
+    this._cutInDown.animate(1); // TODO engageで指定する
+    this._cutInDown.getObject3D().position.z = HUD_CUT_IN_ZNIDEX; // TODO engageで指定する
   }
 
   /**
