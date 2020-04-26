@@ -58,7 +58,7 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
  * @param rendererDOM レンダリング対象のHTML要素
  * @param gauge ゲージ
  */
-export function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: Gauge): void {
+function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: Gauge): void {
   const tdCoordinate = {
     x: ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -75,7 +75,7 @@ export function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLEle
  * @param rendererDOM レンダリング対象のHTML要素
  * @param gauge ゲージ
  */
-export function trackingEnemyGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: Gauge): void {
+function trackingEnemyGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: Gauge): void {
   const tdCoordinate = {
     x: -ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -93,7 +93,7 @@ export function trackingEnemyGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElem
  * @param cutIn カットイン
  * @param sprite スプライト
  */
-export function trackingShinBraverCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: ShinBraverCutIn, sprite: ArmDozerSprite): void {
+function trackingShinBraverCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: ShinBraverCutIn, sprite: ArmDozerSprite): void {
   const target =sprite.getObject3D();
   const tdPosition = {
     x: target.position.x,
@@ -112,7 +112,7 @@ export function trackingShinBraverCutIn(tdCamera: THREE.Camera, rendererDOM: HTM
  * @param cutIn カットイン
  * @param sprite スプライト
  */
-export function trackingNeoLandozerCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: NeoLandozerCutIn, sprite: ArmDozerSprite): void {
+function trackingNeoLandozerCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: NeoLandozerCutIn, sprite: ArmDozerSprite): void {
   const target =sprite.getObject3D();
   const tdPosition = {
     x: target.position.x,
@@ -131,7 +131,7 @@ export function trackingNeoLandozerCutIn(tdCamera: THREE.Camera, rendererDOM: HT
  * @param cutIn カットイン
  * @param sprite スプライト
  */
-export function trackingLightningDozerCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: LightningDozerCutIn, sprite: ArmDozerSprite): void {
+function trackingLightningDozerCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: LightningDozerCutIn, sprite: ArmDozerSprite): void {
   const target =sprite.getObject3D();
   const tdPosition = {
     x: target.position.x,

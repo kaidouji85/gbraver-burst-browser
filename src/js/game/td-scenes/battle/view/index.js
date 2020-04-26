@@ -15,16 +15,7 @@ import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../action/resize/resize";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
-import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
-import {
-  trackingEnemyGauge,
-  trackingLightningDozerCutIn,
-  trackingNeoLandozerCutIn,
-  trackingPlayerGauge,
-  trackingShinBraverCutIn
-} from "./tracking";
-import {ShinBraverHUD} from "./hud/armdozer/shin-braver";
-import {LightningDozerHUD} from "./hud/armdozer/lightning-dozer";
+import {tracking} from "./tracking";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -150,7 +141,7 @@ export class BattleSceneView {
       type: 'Update',
       time: action.time
     });
-    this._trackingTD();
+    tracking(this.td, this.hud, this._playerId, this._rendererDOM);
     this._preRenderHUD.next({
       type: 'PreRender',
       camera: this.hud.camera.getCamera(),
@@ -161,33 +152,6 @@ export class BattleSceneView {
       type: 'Render',
       scene: this.hud.scene,
       camera: this.hud.camera.getCamera()
-    });
-  }
-
-  /**
-   * 3Dレイヤーのオブジェクトをトラッキングする
-   */
-  _trackingTD(): void {
-    this.hud.players.forEach(v => {
-      if (v.playerId === this._playerId) {
-        trackingPlayerGauge(this.td.camera.getCamera(), this._rendererDOM, v.gauge);
-      } else {
-        trackingEnemyGauge(this.td.camera.getCamera(), this._rendererDOM, v.gauge);
-      }
-    });
-
-    this.hud.armdozers.forEach(hudArmdozer => {
-      this.td.sprites
-        .filter(tdSprite => tdSprite.playerId === hudArmdozer.playerId)
-        .forEach(tdSprite => {
-          if (hudArmdozer instanceof ShinBraverHUD) {
-            trackingShinBraverCutIn(this.td.camera.getCamera(), this._rendererDOM, hudArmdozer.cutIn, tdSprite.sprite)
-          } else if (hudArmdozer instanceof NeoLandozerHUD) {
-            trackingNeoLandozerCutIn(this.td.camera.getCamera(), this._rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
-          } else if (hudArmdozer instanceof LightningDozerHUD) {
-            trackingLightningDozerCutIn(this.td.camera.getCamera(), this._rendererDOM, hudArmdozer.cutIn, tdSprite.sprite)
-          }
-        });
     });
   }
 }
