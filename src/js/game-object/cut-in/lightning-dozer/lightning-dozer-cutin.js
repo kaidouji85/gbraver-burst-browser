@@ -7,6 +7,9 @@ import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {Animate} from "../../../animation/animate";
+import {show} from "./animation/show";
+import {hidden} from "./animation/hidden";
 
 /**
  * ライトニングドーザ カットイン
@@ -47,6 +50,24 @@ export class LightningDozerCutIn {
    */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * カットインを表示する
+   *
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this._model);
+  }
+
+  /**
+   * カットインを非表示にする
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**
