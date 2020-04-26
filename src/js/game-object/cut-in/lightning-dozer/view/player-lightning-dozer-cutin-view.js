@@ -14,7 +14,7 @@ import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
 export const MESH_SIZE = 900;
 
 /** ベースとなるpadding top */
-export const BASE_PADDING_TOP = 100;
+export const BASE_PADDING_TOP = 60;
 
 /**
  * プレイヤー ライトニングドーザ カットイン

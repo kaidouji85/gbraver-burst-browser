@@ -64,6 +64,7 @@ function lightningBarrier(param: LightningDozerBurstAnimationParam<LightningBarr
     attentionArmDozer(param.tdCamera, param.burstSprite, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
+    param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible()
   ).chain(delay(2000)
   ).chain(all(
