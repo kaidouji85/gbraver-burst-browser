@@ -2,7 +2,7 @@
 
 import {PlayerLightningDozerCutInView} from "./player-lightning-dozer-cutin-view";
 import type {Resources} from "../../../../resource";
-import type {LightningDozeCutInModel} from "../model/lightning-doze-cutin-model";
+import type {LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
 
 /**
  * 敵 ライトニングドーザ  カットイン ビュー
@@ -22,7 +22,7 @@ export class EnemyLightningDozerCutInView extends PlayerLightningDozerCutInView 
    *
    * @param model モデル
    */
-  engage(model: LightningDozeCutInModel): void {
+  engage(model: LightningDozerCutInModel): void {
     super.engage(model);
     const target = this.getObject3D();
     target.position.x *= -1;

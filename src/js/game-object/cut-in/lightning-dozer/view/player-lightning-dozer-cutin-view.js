@@ -5,7 +5,7 @@ import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import * as THREE from "three";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import type {LightningDozerCutInView} from "./lightning-dozer-cutin-view";
-import type {LightningDozeCutInModel} from "../model/lightning-doze-cutin-model";
+import type {LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 800;
@@ -47,7 +47,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    *
    * @param model モデル
    */
-  engage(model: LightningDozeCutInModel): void {
+  engage(model: LightningDozerCutInModel): void {
     const target = this.getObject3D();
 
     target.position.x = model.tracking.x;

@@ -10,7 +10,7 @@ export type AnimationType =
 /**
  * ライトニングドーザ カットイン モデル
  */
-export type LightningDozeCutInModel = {
+export type LightningDozerCutInModel = {
   /** アニメーション */
   animation: {
     /** アニメーションタイプ */

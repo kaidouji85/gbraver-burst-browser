@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
-import type {LightningDozeCutInModel} from "../model/lightning-doze-cutin-model";
+import type {LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
 
 /**
  * ライトニングドーザ カットイン
@@ -17,7 +17,7 @@ export interface LightningDozerCutInView {
    *
    * @param model モデル
    */
-  engage(model: LightningDozeCutInModel): void;
+  engage(model: LightningDozerCutInModel): void;
 
   /**
    * シーンに追加するオブジェクトを取得する
