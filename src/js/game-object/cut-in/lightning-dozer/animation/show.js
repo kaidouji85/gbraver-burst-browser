@@ -18,7 +18,7 @@ export function show(model: LightningDozerCutInModel): Animate {
     process(() => {
       model.animation.type = 'CUT_IN_UP';
       model.animation.frame = 0;
-    }).chain(tween(model.animation, t => t.to({frame: 1}, 200))
+    }).chain(tween(model.animation, t => t.to({frame: 1}, 300))
     ).chain(delay(500)
     ).chain(process(() => {
         model.animation.type = 'CUT_IN_DOWN';
@@ -28,7 +28,7 @@ export function show(model: LightningDozerCutInModel): Animate {
 
     process(() => {
       model.opacity = 0;
-    }).chain(tween(model, t => t.to({opacity: 1}, 600))),
+    }).chain(tween(model, t => t.to({opacity: 1}, 500))),
 
     process(() => {
       model.scale = 0.9;
