@@ -16,8 +16,15 @@ import type {Resize} from "../../../../action/resize/resize";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
-import {trackingEnemyGauge, trackingNeoLandozerCutIn, trackingPlayerGauge, trackingShinBraverCutIn} from "./tracking";
+import {
+  trackingEnemyGauge,
+  trackingLightningDozerCutIn,
+  trackingNeoLandozerCutIn,
+  trackingPlayerGauge,
+  trackingShinBraverCutIn
+} from "./tracking";
 import {ShinBraverHUD} from "./hud/armdozer/shin-braver";
+import {LightningDozerHUD} from "./hud/armdozer/lightning-dozer";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -177,6 +184,8 @@ export class BattleSceneView {
             trackingShinBraverCutIn(this.td.camera.getCamera(), this._rendererDOM, hudArmdozer.cutIn, tdSprite.sprite)
           } else if (hudArmdozer instanceof NeoLandozerHUD) {
             trackingNeoLandozerCutIn(this.td.camera.getCamera(), this._rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
+          } else if (hudArmdozer instanceof LightningDozerHUD) {
+            trackingLightningDozerCutIn(this.td.camera.getCamera(), this._rendererDOM, hudArmdozer.cutIn, tdSprite.sprite)
           }
         });
     });

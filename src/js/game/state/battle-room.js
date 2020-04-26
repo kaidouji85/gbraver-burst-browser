@@ -22,7 +22,6 @@ export function createBattleRoom(state: State): BattleRoom {
     default:
       return createStrongNeoLandozerRoom(state);
   }
-
 }
 
 /**

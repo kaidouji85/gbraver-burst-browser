@@ -9,6 +9,7 @@ import type {GameObjectAction} from "../../../../../../action/game-object-action
 import {enemyShinBraverHUD, playerShinBraverHUD} from "./shin-braver";
 import {EmptyHUDArmdozer} from "./empty";
 import {enemyNeoLandozerHUD, playerNeoLandozerHUD} from "./neo-landozer";
+import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer";
 
 /**
  * HUDレイヤー アームドーザ固有のオブジェクトを集めたもの
@@ -41,6 +42,8 @@ export function playerArmdozerHUD(resources: Resources, listener: Observable<Gam
       return playerShinBraverHUD(resources, listener, state);
     case ArmdozerAppearances.NEO_LANDOZER:
       return playerNeoLandozerHUD(resources, listener, state);
+    case ArmdozerAppearances.LIGHTNING_DOZER:
+      return playerLightningDozerHUD(resources, listener, state);
     default:
       return new EmptyHUDArmdozer(state);
   }
@@ -60,6 +63,8 @@ export function enemyArmdozerHUD(resources: Resources, listener: Observable<Game
       return enemyShinBraverHUD(resources, listener, state);
     case ArmdozerAppearances.NEO_LANDOZER:
       return enemyNeoLandozerHUD(resources, listener, state);
+    case ArmdozerAppearances.LIGHTNING_DOZER:
+      return enemyLightningDozerHUD(resources, listener, state);
     default:
       return new EmptyHUDArmdozer(state);
   }

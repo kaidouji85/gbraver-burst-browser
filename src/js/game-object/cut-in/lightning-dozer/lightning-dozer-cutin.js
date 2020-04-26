@@ -1,27 +1,33 @@
 // @flow
 
-import * as THREE from 'three';
-import type {ShinBraverCutInModel} from "./model/shin-braver-cutin-model";
-import type {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
+import * as THREE from "three";
+import type {LightningDozerCutInModel} from "./model/lightning-dozer-cutin-model";
+import type {LightningDozerCutInView} from "./view/lightning-dozer-cutin-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import {Animate} from "../../../animation/animate";
-import {hidden} from "./animation/hidden";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
+import {hidden} from "./animation/hidden";
 
 /**
- * シンブレイバーカットイン
+ * ライトニングドーザ カットイン
  */
-export class ShinBraverCutIn {
-  _model: ShinBraverCutInModel;
-  _view: ShinBraverCutInView;
+export class LightningDozerCutIn {
+  _model: LightningDozerCutInModel;
+  _view: LightningDozerCutInView;
   _subscription: Subscription;
 
-  constructor(view: ShinBraverCutInView, listener: Observable<GameObjectAction>) {
-    this._model = createInitialValue();
+  /**
+   * コンストラクタ
+   *
+   * @param view ビュー
+   * @param listener イベントリスナ
+   */
+  constructor(view: LightningDozerCutInView, listener: Observable<GameObjectAction>) {
     this._view = view;
+    this._model = createInitialValue();
     this._subscription = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
@@ -47,18 +53,6 @@ export class ShinBraverCutIn {
   }
 
   /**
-   * 3Dレイヤーのオブジェクトをトラッキングする
-   * 本メソッドにはHUDレイヤー系座標をセットすること
-   *
-   * @param x x座標
-   * @param y y座標
-   */
-  tracking(x: number, y: number): void {
-    this._model.tracking.x = x;
-    this._model.tracking.y = y;
-  }
-
-  /**
    * カットインを表示する
    *
    * @return アニメーション
@@ -70,10 +64,22 @@ export class ShinBraverCutIn {
   /**
    * カットインを非表示にする
    *
-   * @return {Animate}
+   * @return アニメーション
    */
   hidden(): Animate {
     return hidden(this._model);
+  }
+
+  /**
+   * 3Dレイヤーオブジェクトのトラッキンングを行う
+   * 本パラメータにはHUD座標系に変換した値をセットすること
+   *
+   * @param x x座標
+   * @param y y座標
+   */
+  tracking(x: number, y: number): void {
+    this._model.tracking.x = x;
+    this._model.tracking.y = y;
   }
 
   /**
