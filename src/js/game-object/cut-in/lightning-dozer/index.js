@@ -16,7 +16,7 @@ import {EnemyLightningDozerCutInView} from "./view/enemy-lightning-dozer-cutin-v
  */
 export function playerLightningDozerCutIn(resources: Resources, listener: Observable<GameObjectAction>): LightningDozerCutIn {
   const view = new PlayerLightningDozerCutInView(resources);
-  return new LightningDozerCutIn(view);
+  return new LightningDozerCutIn(view, listener);
 }
 
 /**
@@ -28,5 +28,5 @@ export function playerLightningDozerCutIn(resources: Resources, listener: Observ
  */
 export function enemyLightningiDozerCutIn(resources: Resources, listener: Observable<GameObjectAction>): LightningDozerCutIn {
   const view = new EnemyLightningDozerCutInView(resources);
-  return new LightningDozerCutIn(view);
+  return new LightningDozerCutIn(view, listener);
 }
