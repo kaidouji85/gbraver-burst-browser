@@ -91,11 +91,6 @@ export class LightningDozerNPC implements NPC {
     const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
     const isFullBattery = enemy.armdozer.battery === enemy.armdozer.maxBattery;
 
-    // TODO 開発が完了したら戻す
-    if (burst) {
-      return burst;
-    }
-
     if (isFullBattery && burst && battery3) {
       return battery3;
     }
