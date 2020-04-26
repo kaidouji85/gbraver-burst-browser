@@ -11,7 +11,7 @@ import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
 
 /** メッシュの大きさ */
-export const MESH_SIZE = 800;
+export const MESH_SIZE = 900;
 
 /** ベースとなるpadding top */
 export const BASE_PADDING_TOP = 100;
