@@ -38,9 +38,14 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
 
   /** モデルをビューに反映させる */
   engage(model: BatteryNumberModel): void {
-    this._refreshBatteryNumber(model);
-    this._refreshPos();
-    this._refreshOpacity(model);
+    const battery = Math.min(model.battery, MAX_BATTERY_VALUE) / MAX_BATTERY_ANIMATION;
+    this._numberMesh.animate(battery);
+
+    this._numberMesh.setOpacity(model.alpha);
+
+    this._numberMesh.getObject3D().position.x = ARMDOZER_EFFECT_STANDARD_X;
+    this._numberMesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y;
+    this._numberMesh.getObject3D().position.z = ARMDOZER_EFFECT_STANDARD_Z;
   }
 
   /** カメラの方向を向く */
@@ -51,23 +56,5 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): THREE.Object3D {
     return this._numberMesh.getObject3D();
-  }
-
-  /** バッテリー値を更新する */
-  _refreshBatteryNumber(model: BatteryNumberModel): void {
-    const battery = Math.min(model.battery, MAX_BATTERY_VALUE) / MAX_BATTERY_ANIMATION;
-    this._numberMesh.animate(battery);
-  }
-
-  /** 座標を更新する */
-  _refreshPos(): void {
-    this._numberMesh.getObject3D().position.x = ARMDOZER_EFFECT_STANDARD_X;
-    this._numberMesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y;
-    this._numberMesh.getObject3D().position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
-  }
-
-  /** 透明度を更新する */
-  _refreshOpacity(model: BatteryNumberModel): void {
-    this._numberMesh.setOpacity(model.alpha);
   }
 }

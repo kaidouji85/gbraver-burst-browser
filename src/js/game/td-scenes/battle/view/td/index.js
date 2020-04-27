@@ -9,8 +9,7 @@ import {TDCamera} from "../../../../../game-object/camera/td";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
 import type {TDPlayer} from "./player";
 import {enemyTDObject, playerTDObjects} from "./player";
-import type {TDGameObjects} from "./game-objects";
-import {appendTDGameObjects, createTDGameObjects, disposeTDGameObjects} from "./game-objects";
+import {TDGameObjects} from "./game-objects";
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
@@ -97,23 +96,38 @@ export class ThreeDimensionLayer {
         })
     });
 
-    this.gameObjects = createTDGameObjects(param.resources, this._gameObjectAction);
-    appendTDGameObjects(this.scene, this.gameObjects);
+    this.gameObjects = new TDGameObjects(param.resources, this._gameObjectAction);
+    this.gameObjects.getObject3Ds().forEach(object => {
+      this.scene.add(object);
+    });
   }
 
   /** デストラクタ */
   destructor(): void {
     this.scene.background.dispose();
-    this.players.forEach(v => {
-      v.destructor();
+    this.players.forEach(player => {
+      player.getObject3Ds().forEach(object => {
+        this.scene.remove(object)
+      });
+      player.destructor();
     });
-    this.sprites.forEach(v => {
-      v.destructor();
+    this.sprites.forEach(sprite => {
+      sprite.getObject3Ds().forEach(object => {
+        this.scene.remove(object);
+      });
+      sprite.destructor();
     });
-    this.armdozers.forEach(v => {
-      v.destructor();
+    this.armdozers.forEach(armdozer => {
+      armdozer.getObject3Ds().forEach(object => {
+        this.scene.remove(object);
+      });
+      armdozer.destructor();
     });
-    disposeTDGameObjects(this.gameObjects);
+    this.gameObjects.getObject3Ds().forEach(object => {
+      this.scene.remove(object);
+    });
+    this.gameObjects.destructor();
+
     this.camera.destructor();
     this.scene.dispose();
   }

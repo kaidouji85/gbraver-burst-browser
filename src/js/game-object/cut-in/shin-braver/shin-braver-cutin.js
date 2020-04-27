@@ -11,9 +11,6 @@ import {hidden} from "./animation/hidden";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {show} from "./animation/show";
 
-/** メッシュの大きさ */
-export const MESH_SIZE = 200;
-
 /**
  * シンブレイバーカットイン
  */

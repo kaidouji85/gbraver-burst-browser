@@ -52,6 +52,8 @@ export const TEXTURE_IDS = {
   LIGHTNING_DOZER_GUTS_DOWN: 'LIGHTNING_DOZER_GUTS_DOWN',
   LIGHTNING_DOZER_GUTS_TO_STAND: 'LIGHTNING_DOZER_GUTS_TO_STAND',
   LIGHTNING_DOZER_GUARD: 'LIGHTNING_DOZER_GUARD',
+  LIGHTNING_DOZER_CUTIN_UP: 'LIGHTNING_DOZER_CUTIN_UP',
+  LIGHTNING_DOZER_CUTIN_DOWN: 'LIGHTNING_DOZER_CUTIN_DOWN',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
   HITMARK_LIGHTNING_RING: 'HITMARK_LIGHTNING_RING',
@@ -59,6 +61,10 @@ export const TEXTURE_IDS = {
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
   HP_NUMBER: 'HP_NUMBER',
+  PLAYER_TURN: 'PLAYER_TURN',
+  ENEMY_TURN: 'ENEMY_TURN',
+  POWER_UP: 'POWER_UP',
+  REFLECT: 'REFLECT',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -202,6 +208,14 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.LIGHTNING_DOZER_GUARD,
     path: 'armdozer/ligjtning-dozer/guard.png',
   },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_UP,
+    path: 'armdozer/ligjtning-dozer/cutin-up.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN,
+    path: 'armdozer/ligjtning-dozer/cutin-down.png',
+  },
   // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
@@ -234,7 +248,25 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.HP_NUMBER,
     path: 'gauge/hp-gauge-number.png'
-  }
+  },
+  // ターンスタート
+  {
+    id: TEXTURE_IDS.PLAYER_TURN,
+    path: 'turn/player-turn.png',
+  },
+  {
+    id: TEXTURE_IDS.ENEMY_TURN,
+    path: 'turn/enemy-turn.png',
+  },
+  // 効果ラベル
+  {
+    id: TEXTURE_IDS.POWER_UP,
+    path: 'effect-label/power-up.png',
+  },
+  {
+    id: TEXTURE_IDS.REFLECT,
+    path: 'effect-label/reflect.png',
+  },
 ];
 
 /**

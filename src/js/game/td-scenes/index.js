@@ -1,7 +1,6 @@
 // @flow
 
 import {Renderer} from "../../game-object/renderer";
-import {createRender} from "../../render/create-render";
 import {isDevelopment} from "../../webpack/mode";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {EndBattle} from "../../action/game/battle";
@@ -35,13 +34,11 @@ export class TDScenes {
     this._gameLoop = gameLoopStream();
     this._resize = resize;
 
-    const threeJsRender = createRender();
-    parentDOM.appendChild(threeJsRender.domElement);
     this._renderer = new Renderer({
-      threeJsRender: threeJsRender,
-      renderStream: this._renderStream,
+      render: this._renderStream,
       resize: this._resize,
     });
+    parentDOM.appendChild(this._renderer.getRendererDOM())
 
     this._scene = null;
     this._sceneSubscriptions = [];
@@ -101,6 +98,7 @@ export class TDScenes {
    */
   _disposeScene(): void {
     this._scene && this._scene.destructor();
+    this._renderer.dispose();
     this._sceneSubscriptions.forEach(v => {
       v.unsubscribe();
     });

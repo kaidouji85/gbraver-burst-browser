@@ -69,6 +69,8 @@ function neoLandozerBuffPower(param: NeoLandozerBurstAnimationParam<BuffPower>):
     param.burstArmdozerHUD.cutIn.hidden(),
     param.hudObjects.rearmostFader.opacity(0, 300),
   )).chain(delay(500)
+  ).chain(param.burstPlayerTD.armdozerEffects.powerUp.popUp()
+  ).chain(delay(500)
   ).chain(all(
     param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)

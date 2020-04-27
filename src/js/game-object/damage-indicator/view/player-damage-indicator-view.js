@@ -16,6 +16,7 @@ import {
 export const MESH_SIZE = 40;
 export const MAX_NUMBER_SIZE = 4;
 export const MAX_ANIMATION = 16;
+export const GROUP_PADDING = 30;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
@@ -27,16 +28,18 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
 
     const damageNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_NUMBER);
     const damageNumber: THREE.Texture = damageNumberResource ? damageNumberResource.texture : new THREE.Texture();
-    this._numbers = R.times(v => {
-      const mesh = new HorizontalAnimationMesh({
+
+    this._numbers = R.times(v =>
+      new HorizontalAnimationMesh({
         texture: damageNumber,
         maxAnimation: MAX_ANIMATION,
         width: MESH_SIZE,
         height: MESH_SIZE,
-      });
-      this._group.add(mesh.getObject3D());
-      return mesh;
-    }, MAX_NUMBER_SIZE);
+      })
+    , MAX_NUMBER_SIZE);
+    this._numbers.forEach(v => {
+      this._group.add(v.getObject3D());
+    });
   }
 
   /** デストラクタ */
@@ -51,24 +54,20 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     const values: number[] = String(model.damage)
       .split('')
       .map(v => Number(v));
-    this._numbers.forEach((mesh, index: number) => {
-      const hasValue = (index in values);
-      const value = hasValue
-        ? values[index]
-        : 0;
-      const animate =value / MAX_ANIMATION;
-      const positionX = index * MESH_SIZE -(values.length - 1) * MESH_SIZE / 2;
-      const opacity = hasValue
-        ? model.opacity
-        : 0;
-      mesh.animate(animate);
-      mesh.getObject3D().position.x = positionX;
-      mesh.setOpacity(opacity);
+    this._numbers.forEach((mesh, meshIndex) => {
+      mesh.setOpacity(0);
+      values
+        .filter((value, valueIndex) => meshIndex === valueIndex)
+        .forEach((value, valueIndex) => {
+          mesh.animate(value / MAX_ANIMATION);
+          mesh.setOpacity(model.opacity);
+          mesh.getObject3D().position.x =   MESH_SIZE * (meshIndex -values.length/2) + GROUP_PADDING;
+        });
     });
 
     this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
     this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 20;
+    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
   }
 
   /** カメラの方向を向く */
