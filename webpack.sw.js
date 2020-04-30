@@ -1,7 +1,5 @@
-const webpack = require('webpack');
 const config = require('./webpack.config');
 const path = require('path');
-const Puid = require('puid');
 
 module.exports = {
   mode: 'production',
@@ -18,10 +16,5 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
-  },
-  plugins: [
-    new webpack.DefinePlugin({
-      BUILD_HASH: JSON.stringify(new Puid().generate())
-    }),
-  ]
+  }
 };
