@@ -10,8 +10,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const hash = new Puid().generate();
 const BUILD_PATH = 'build/production';
 const BUILD_RESOURCE_PATH = `${hash}`;
-const BUILD_INDEX_JS_PATH = `${hash}-index.js`;
-const BUILD_CSS_PATH = `${BUILD_RESOURCE_PATH}/bundle.css`;
+const BUILD_INDEX_JS_PATH = `index.js`;
+const BUILD_CSS_PATH = `bundle.css`;
 
 module.exports = {
   mode: 'development',

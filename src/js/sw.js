@@ -9,10 +9,15 @@ PreCaching.precacheAndRoute([
 
 const CACHE_FIRST_NAME = `CACHE_FIRST_NAME_${BUILD_HASH}`;
 Routing.registerRoute(
-  /\.(?:png|glb|css|js|json)$/,
+  /\.(?:png|glb|json)$/,
   new Strategies.CacheFirst({
     cacheName: CACHE_FIRST_NAME
   })
+);
+
+Routing.registerRoute(
+  /\.(?:js|css)$/,
+  new Strategies.NetworkFirst()
 );
 
 self.addEventListener('activate', e => {

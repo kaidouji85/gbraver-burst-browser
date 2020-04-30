@@ -21,11 +21,11 @@ export class ServiceWorkerUpdate {
       dom: dom,
       initialState: this._state
     });
-    this._subscription = serviceWorker.subscribe(action => {
-      if (action.type === 'ServiceWorkerWillUpdate') {
-        this._onServiceWorkerWillUpdate(action);
-      }
-    });
+    // this._subscription = serviceWorker.subscribe(action => {
+    //   if (action.type === 'ServiceWorkerWillUpdate') {
+    //     this._onServiceWorkerWillUpdate(action);
+    //   }
+    // });
   }
 
   /** デストラクタ相当の処理 */
