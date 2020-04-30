@@ -1,11 +1,11 @@
 import * as Core from 'workbox-core';
-import * as PreCaching from 'workbox-precaching';
 import * as Routing from 'workbox-routing';
 import * as Strategies from 'workbox-strategies';
 
-PreCaching.precacheAndRoute([
-  {url: "index.html", revision: BUILD_HASH}
-]);
+Routing.registerRoute(
+  /\.(?:html|js|css)$/,
+  new Strategies.NetworkFirst()
+);
 
 const CACHE_FIRST_NAME = `CACHE_FIRST_NAME_${BUILD_HASH}`;
 Routing.registerRoute(
@@ -13,11 +13,6 @@ Routing.registerRoute(
   new Strategies.CacheFirst({
     cacheName: CACHE_FIRST_NAME
   })
-);
-
-Routing.registerRoute(
-  /\.(?:js|css)$/,
-  new Strategies.NetworkFirst()
 );
 
 self.addEventListener('activate', e => {
