@@ -4,16 +4,14 @@ import * as THREE from 'three';
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {loadAllResource} from "../resource";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
-import {createServiceWorkerActionListener} from "../action/service-worker/create-listener";
 import {resourceBasePath} from "../resource/resource-base-path";
 import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
-import type {ServiceWorkerAction} from "../action/service-worker/service-worker";
 import type {LoadingAction} from "../action/loading/loading";
 import {createLoadingActionListener} from "../action/loading/create-listener";
 import type {Resize} from "../action/resize/resize";
@@ -30,7 +28,6 @@ import {endBattle} from "./state/end-battle";
 /** ゲーム全体の管理を行う */
 export class Game {
   _state: State;
-  _serviceWorkerStream: Subject<ServiceWorkerAction>;
   _loading: Observable<LoadingAction>;
   _resize: Observable<Resize>;
   _vh: CssVH;
@@ -39,12 +36,11 @@ export class Game {
   _domDialogs: DOMDialogs;
   _tdScenes: TDScenes;
   _resources: ?Resources;
+  _serviceWorker: ?ServiceWorkerRegistration;
   _subscriptions: Subscription[];
 
   constructor() {
     this._state = createInitialState();
-
-    this._serviceWorkerStream = new Subject<ServiceWorkerAction>();
     this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
 
@@ -53,7 +49,6 @@ export class Game {
     this._interruptScenes = new InterruptScenes({
       listener: {
         loading: this._loading,
-        serviceWorker: this._serviceWorkerStream,
       }
     });
 
@@ -65,6 +60,7 @@ export class Game {
     this._tdScenes = new TDScenes(body, this._resize);
 
     this._resources = null;
+    this._serviceWorker = null;
 
     const domScenesNotifier = this._domScenes.notifier();
     const domDialogNotifier = this._domDialogs.notifier();
@@ -91,14 +87,7 @@ export class Game {
       if (isDevelopment()) {
         viewPerformanceStats(document.body);
       }
-      const serviceWorker = await loadServiceWorker();
-      if (serviceWorker) {
-        this._subscriptions = [
-          ...this._subscriptions,
-          createServiceWorkerActionListener(serviceWorker)
-            .subscribe(this._serviceWorkerStream)
-        ];
-      }
+      this._serviceWorker = await loadServiceWorker();
     } catch (e) {
       throw e;
     }
