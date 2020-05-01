@@ -8,7 +8,6 @@ import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
-import {resourceBasePath} from "../resource/resource-base-path";
 import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
@@ -55,7 +54,9 @@ export class Game {
       loading: this._loading,
     });
 
-    this._domScenes = new DOMScenes();
+    this._domScenes = new DOMScenes({
+      resourcePath: this._resourcePath
+    });
 
     this._domDialogs = new DOMDialogs();
 
