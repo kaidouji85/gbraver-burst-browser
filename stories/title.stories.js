@@ -9,7 +9,8 @@ export default {
 
 export const Scene = () => {
   const stub  = new DOMStub((parent, resourcePath) => {
-    new Title(parent, resourcePath);
+    const scene = new Title(resourcePath);
+    parent.appendChild(scene.getHTMLElement());
   });
   return stub.domElement();
 }

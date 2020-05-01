@@ -25,8 +25,9 @@ export class DOMScenes {
   _notifier: Notifier;
 
   constructor(param: Param) {
+    this._title = new Title(param.resourcePath);
     const titleDOM: HTMLElement = document.querySelector("#title-scene") || document.createElement('div');
-    this._title = new Title(titleDOM, param.resourcePath);
+    titleDOM.appendChild(this._title.getHTMLElement());
 
     const titleNotifier = this._title.notifier();
     this._notifier = {
