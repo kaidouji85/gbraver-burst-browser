@@ -7,33 +7,22 @@ import '../../src/css/style.css';
 /**
  * HTML要素生成コールバック関数
  *
+ * @param parent 親要素
  * @param resourcePath リソースパス
- * @return HTML要素
  */
-export type DOMCreator = (resourcePath: ResourcePath) => HTMLElement[];
+export type DOMCreator = (parent: HTMLElement, resourcePath: ResourcePath) => void;
 
 /**
  * HTML要素系コンポネントのスタブ
  */
 export class DOMStub {
-  _creator: DOMCreator;
   _resourcePath: ResourcePath;
   _parent: HTMLElement;
 
   constructor(creator: DOMCreator) {
-    this._creator = creator;
     this._resourcePath = new StorybookResourcePath();
     this._parent = document.createElement('div');
-  }
-
-  /**
-   * スタブを開始する
-   */
-  start(): void {
-    const elements = this._creator(this._resourcePath);
-    elements.forEach(element => {
-      this._parent.appendChild(element);
-    });
+    creator(this._parent, this._resourcePath);
   }
 
   /**
