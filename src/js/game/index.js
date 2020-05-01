@@ -24,6 +24,7 @@ import type {State} from "./state/state";
 import {createInitialState} from "./state/initial-state";
 import {createBattleRoom} from "./state/battle-room";
 import {endBattle} from "./state/end-battle";
+import type {ResourcePath} from "../resource/path/resource-path";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -35,11 +36,12 @@ export class Game {
   _domScenes: DOMScenes;
   _domDialogs: DOMDialogs;
   _tdScenes: TDScenes;
+  _resourcePath: ResourcePath;
   _resources: ?Resources;
   _serviceWorker: ?ServiceWorkerRegistration;
   _subscriptions: Subscription[];
 
-  constructor() {
+  constructor(resourcePath: ResourcePath) {
     this._state = createInitialState();
     this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
@@ -59,6 +61,7 @@ export class Game {
     const body = document.body || document.createElement('div');
     this._tdScenes = new TDScenes(body, this._resize);
 
+    this._resourcePath = resourcePath;
     this._resources = null;
     this._serviceWorker = null;
 
@@ -100,7 +103,7 @@ export class Game {
     try {
       this._domScenes.hidden();
 
-      const resources = await loadAllResource(`${resourceBasePath()}/`);
+      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
       this._resources = resources;
       const room = createBattleRoom(this._state);
       const initialState = await room.start();

@@ -1,11 +1,11 @@
 // @flow
 
-import type {ResourceBasePath} from "./resource-base-path";
+import type {ResourcePath} from "./resource-path";
 
 /**
  * 製品 リソースベースパス
  */
-export class ProductionResourcePath implements ResourceBasePath {
+export class ProductionResourcePath implements ResourcePath {
   /**
    * リソースベースパスを取得する
    *

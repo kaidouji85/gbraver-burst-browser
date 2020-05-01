@@ -3,7 +3,7 @@
 /**
  * リソースのベースパス
  */
-export interface ResourceBasePath {
+export interface ResourcePath {
   /**
    * リソースベースパスを取得する
    *
