@@ -42,6 +42,8 @@ export class Game {
   _subscriptions: Subscription[];
 
   constructor(resourcePath: ResourcePath) {
+    this._resourcePath = resourcePath;
+
     this._state = createInitialState();
     this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
@@ -49,9 +51,8 @@ export class Game {
     this._vh = new CssVH(this._resize);
 
     this._interruptScenes = new InterruptScenes({
-      listener: {
-        loading: this._loading,
-      }
+      resourcePath: this._resourcePath,
+      loading: this._loading,
     });
 
     this._domScenes = new DOMScenes();
@@ -61,7 +62,6 @@ export class Game {
     const body = document.body || document.createElement('div');
     this._tdScenes = new TDScenes(body, this._resize);
 
-    this._resourcePath = resourcePath;
     this._resources = null;
     this._serviceWorker = null;
 
