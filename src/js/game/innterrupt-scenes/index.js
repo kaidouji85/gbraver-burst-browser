@@ -20,17 +20,24 @@ export class InterruptScenes {
   _playInLandscape: PlayInLandscape;
 
   constructor(param: Param) {
-    const loadingDOM: HTMLElement = document.querySelector('#loading-scene') || document.createElement('div');
     this._loading = new Loading(param.loading);
-    loadingDOM.appendChild(this._loading.getRootHTMLElement());
-
-    const playInLandscapeDOM: HTMLElement = document.querySelector("#play-in-landscape") || document.createElement('div');
     this._playInLandscape = new PlayInLandscape(param.resourcePath);
-    playInLandscapeDOM.appendChild(this._playInLandscape.getRootHTMLElement());
   }
 
   /** デストラクタ相当の処理 */
   destructor() {
     this._loading.destructor();
+  }
+
+  /**
+   * 本クラスに含まれるルートHTML要素を返す
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElements(): HTMLElement[] {
+    return [
+      this._loading.getRootHTMLElement(),
+      this._playInLandscape.getRootHTMLElement(),
+    ];
   }
 }
