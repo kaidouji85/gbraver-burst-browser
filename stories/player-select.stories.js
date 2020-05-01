@@ -9,7 +9,7 @@ export default {
 
 export const Scene = () => {
   const stub = new DOMStub((parent, resourcePath) => {
-    const scene = new PlayerSelect(parent);
+    const scene = new PlayerSelect(parent, resourcePath);
   });
   return stub.domElement();
 }
