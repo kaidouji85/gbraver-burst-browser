@@ -46,22 +46,28 @@ export class Game {
     this._state = createInitialState();
     this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
-
     this._vh = new CssVH(this._resize);
 
     this._interruptScenes = new InterruptScenes({
       resourcePath: this._resourcePath,
       loading: this._loading,
     });
-
     this._domScenes = new DOMScenes({
       resourcePath: this._resourcePath
     });
-
     this._domDialogs = new DOMDialogs();
+    this._tdScenes = new TDScenes(this._resize);
 
     const body = document.body || document.createElement('div');
-    this._tdScenes = new TDScenes(body, this._resize);
+    const elements = [
+      ...this._interruptScenes.getRootHTMLElements(),
+      ...this._domDialogs.getRootHTMLElements(),
+      ...this._domScenes.getRootHTMLElements(),
+      this._tdScenes.getRendererDOM(),
+    ];
+    elements.forEach(element => {
+      body.appendChild(element);
+    });
 
     this._resources = null;
     this._serviceWorker = null;

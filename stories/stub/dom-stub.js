@@ -7,10 +7,16 @@ import '../../src/css/style.css';
 /**
  * HTML要素生成コールバック関数
  *
- * @param parent 親要素
  * @param resourcePath リソースパス
+ * @return 生成したHTML要素
  */
-export type DOMCreator = (parent: HTMLElement, resourcePath: ResourcePath) => void;
+export type DOMCreator = (resourcePath: ResourcePath) => HTMLElement;
+
+export const domStub = (creator: DOMCreator): HTMLElement => {
+  const resourcePath = new StorybookResourcePath();
+  return creator(resourcePath);
+}
+
 
 /**
  * HTML要素系コンポネントのスタブ
@@ -21,8 +27,7 @@ export class DOMStub {
 
   constructor(creator: DOMCreator) {
     this._resourcePath = new StorybookResourcePath();
-    this._parent = document.createElement('div');
-    creator(this._parent, this._resourcePath);
+    this._parent = creator(this._resourcePath);
   }
 
   /**
