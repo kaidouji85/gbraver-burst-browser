@@ -5,13 +5,11 @@ const webpack = require('webpack');
 const Puid = require('puid');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const hash = new Puid().generate();
 const BUILD_PATH = 'build/production';
 const BUILD_RESOURCE_PATH = `${hash}`;
 const BUILD_INDEX_JS_PATH = `index.js`;
-const BUILD_CSS_PATH = `bundle.css`;
 
 module.exports = {
   mode: 'development',
@@ -38,7 +36,7 @@ module.exports = {
       {
         test: /\.css/,
         use: [
-          MiniCssExtractPlugin.loader,
+          'style-loader',
           'css-loader',
           'postcss-loader',
         ],
@@ -55,7 +53,6 @@ module.exports = {
       templateParameters: {
         BUILD_RESOURCE_PATH: BUILD_RESOURCE_PATH,
         BUILD_INDEX_JS_PATH: BUILD_INDEX_JS_PATH,
-        BUILD_CSS_PATH: BUILD_CSS_PATH,
       },
       inject: false
     }),
@@ -68,9 +65,6 @@ module.exports = {
     new webpack.DefinePlugin({
       GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(BUILD_RESOURCE_PATH),
       GBRAVER_BURST_HOW_TO_PLAY: JSON.stringify(process.env.HOW_TO_PLAY_URL),
-    }),
-    new MiniCssExtractPlugin({
-      filename: BUILD_CSS_PATH
     })
   ]
 };

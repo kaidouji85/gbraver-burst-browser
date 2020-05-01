@@ -8,7 +8,7 @@ PreCaching.precacheAndRoute([
 ]);
 
 Routing.registerRoute(
-  /\.(?:js|css)$/,
+  /\.(?:js)$/,
   new Strategies.NetworkFirst({
     plugins: [
       new ExpirationPlugin({
