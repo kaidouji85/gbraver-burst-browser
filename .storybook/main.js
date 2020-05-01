@@ -1,14 +1,25 @@
-const custom = require('../webpack.config');
-
 module.exports = {
   stories: ['../stories/**/*.stories.js'],
   webpackFinal: (config) => {
     return {
       ...config,
       module: {
-        ...config.module,
-        rules: custom.module.rules
-      },
+        rules: [
+          {
+            test: /\.(?:js|jsx)$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+          },
+          {
+            test: /\.css/,
+            use: [
+              'style-loader',
+              'css-loader',
+              'postcss-loader',
+            ],
+          }
+        ]
+      }
     };
   },
 };

@@ -36,6 +36,7 @@
     "ramda": "^0.27.0",
     "rxjs": "^6.5.5",
     "stats.js": "^0.17.0",
+    "style-loader": "^1.2.1",
     "three": "^0.115.0",
     "uuid": "^7.0.3",
     "workbox-core": "^5.1.2",

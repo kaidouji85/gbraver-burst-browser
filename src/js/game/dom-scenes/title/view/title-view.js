@@ -1,9 +1,9 @@
 // @flow
 
 import type {TitleState} from "../state/title-state";
-import {resourceBasePath} from "../../../../resource/resource-base-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
+import type {ResourcePath} from "../../../../resource/path/resource-path";
 
 /** イベント通知 */
 type Notifier = {
@@ -17,6 +17,8 @@ type Params = {
   dom: HTMLElement,
   /** 初期状態 */
   initialState: TitleState,
+  /** リソースパス */
+  resourcePath: ResourcePath,
 };
 
 /** タイトルビュー */
@@ -37,7 +39,7 @@ export class TitleView {
     params.dom.innerHTML = `
       <div class="title" id="${rootId}">
         <div class="title__logo">
-          <img class="title__logo__image" src="${resourceBasePath()}/logo.png"/>
+          <img class="title__logo__image" src="${params.resourcePath.get()}/logo.png"/>
           <div class="title__logo__copy-right">(C) 2020 Yuusuke Takeuchi</div>
         </div>
         <div class="title__controllers">
