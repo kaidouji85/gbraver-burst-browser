@@ -25,7 +25,8 @@ export class InterruptScenes {
     loadingDOM.appendChild(this._loading.getRootHTMLElement());
 
     const playInLandscapeDOM: HTMLElement = document.querySelector("#play-in-landscape") || document.createElement('div');
-    this._playInLandscape = new PlayInLandscape(playInLandscapeDOM, param.resourcePath);
+    this._playInLandscape = new PlayInLandscape(param.resourcePath);
+    playInLandscapeDOM.appendChild(this._playInLandscape.getRootHTMLElement());
   }
 
   /** デストラクタ相当の処理 */
