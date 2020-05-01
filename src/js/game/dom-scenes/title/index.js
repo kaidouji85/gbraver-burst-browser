@@ -8,6 +8,7 @@ import {TitleView} from "./view/title-view";
 import {hidden} from "./state/hidden";
 import {filter, map} from "rxjs/operators";
 import {show} from "./state/show";
+import type {ResourcePath} from "../../../resource/path/resource-path";
 
 /** イベント通知 */
 export type Notifier = {
@@ -21,11 +22,12 @@ export class Title {
   _view: TitleView;
   _notifier: Notifier;
 
-  constructor(dom: HTMLElement) {
+  constructor(dom: HTMLElement, resourcePath: ResourcePath) {
     this._state = createInitialState();
     this._view = new TitleView({
       dom: dom,
       initialState: this._state,
+      resourcePath: resourcePath
     });
 
     this._notifier = {

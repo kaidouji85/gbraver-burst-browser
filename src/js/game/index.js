@@ -8,7 +8,6 @@ import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
-import {resourceBasePath} from "../resource/resource-base-path";
 import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
@@ -24,6 +23,7 @@ import type {State} from "./state/state";
 import {createInitialState} from "./state/initial-state";
 import {createBattleRoom} from "./state/battle-room";
 import {endBattle} from "./state/end-battle";
+import type {ResourcePath} from "../resource/path/resource-path";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -35,11 +35,14 @@ export class Game {
   _domScenes: DOMScenes;
   _domDialogs: DOMDialogs;
   _tdScenes: TDScenes;
+  _resourcePath: ResourcePath;
   _resources: ?Resources;
   _serviceWorker: ?ServiceWorkerRegistration;
   _subscriptions: Subscription[];
 
-  constructor() {
+  constructor(resourcePath: ResourcePath) {
+    this._resourcePath = resourcePath;
+
     this._state = createInitialState();
     this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
@@ -47,12 +50,13 @@ export class Game {
     this._vh = new CssVH(this._resize);
 
     this._interruptScenes = new InterruptScenes({
-      listener: {
-        loading: this._loading,
-      }
+      resourcePath: this._resourcePath,
+      loading: this._loading,
     });
 
-    this._domScenes = new DOMScenes();
+    this._domScenes = new DOMScenes({
+      resourcePath: this._resourcePath
+    });
 
     this._domDialogs = new DOMDialogs();
 
@@ -100,7 +104,7 @@ export class Game {
     try {
       this._domScenes.hidden();
 
-      const resources = await loadAllResource(`${resourceBasePath()}/`);
+      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
       this._resources = resources;
       const room = createBattleRoom(this._state);
       const initialState = await room.start();

@@ -3,6 +3,12 @@
 import {Observable} from "rxjs";
 import {Title} from "./title";
 import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
+import type {ResourcePath} from "../../resource/path/resource-path";
+
+/** コンストラクタのパラメータ */
+type Param = {
+  resourcePath: ResourcePath
+};
 
 /** イベント通知 */
 type Notifier = {
@@ -18,9 +24,9 @@ export class DOMScenes {
   _title: Title;
   _notifier: Notifier;
 
-  constructor() {
+  constructor(param: Param) {
     const titleDOM: HTMLElement = document.querySelector("#title-scene") || document.createElement('div');
-    this._title = new Title(titleDOM);
+    this._title = new Title(titleDOM, param.resourcePath);
 
     const titleNotifier = this._title.notifier();
     this._notifier = {

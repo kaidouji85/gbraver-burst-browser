@@ -4,12 +4,12 @@ import {Loading} from "./loading";
 import {Observable} from "rxjs";
 import type {LoadingAction} from "../../action/loading/loading";
 import {PlayInLandscape} from "./play-in-landscape";
+import type {ResourcePath} from "../../resource/path/resource-path";
 
 /** コンストラクタのパラメータ */
 type Param = {
-  listener: {
-    loading: Observable<LoadingAction>,
-  }
+  resourcePath: ResourcePath,
+  loading: Observable<LoadingAction>,
 };
 
 /**
@@ -21,10 +21,10 @@ export class InterruptScenes {
 
   constructor(param: Param) {
     const loadingDOM: HTMLElement = document.querySelector('#loading-scene') || document.createElement('div');
-    this._loading = new Loading(loadingDOM, param.listener.loading);
+    this._loading = new Loading(loadingDOM, param.loading);
 
     const playInLandscapeDOM: HTMLElement = document.querySelector("#play-in-landscape") || document.createElement('div');
-    this._playInLandscape = new PlayInLandscape(playInLandscapeDOM);
+    this._playInLandscape = new PlayInLandscape(playInLandscapeDOM, param.resourcePath);
   }
 
   /** デストラクタ相当の処理 */
