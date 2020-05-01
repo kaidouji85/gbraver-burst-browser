@@ -60,6 +60,7 @@ export class Game {
 
     const body = document.body || document.createElement('div');
     const elements = [
+      ...this._domDialogs.getRootHTMLElements(),
       ...this._domScenes.getRootHTMLElements(),
       this._tdScenes.getRendererDOM(),
     ];

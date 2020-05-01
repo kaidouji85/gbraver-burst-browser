@@ -23,13 +23,10 @@ export class HowToPlay {
   _view: HowToPlayView;
   _notifier: Notifier;
 
-  constructor(dom: HTMLElement) {
+  constructor() {
     this._state = createInitialState();
 
-    this._view = new HowToPlayView({
-      dom: dom,
-      movieURL: howToPlayMovieURL()
-    });
+    this._view = new HowToPlayView(howToPlayMovieURL());
     this._view.engage(this._state);
 
     this._notifier = {
@@ -62,5 +59,14 @@ export class HowToPlay {
    */
   notifier(): Notifier {
     return this._notifier;
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._view.getRootHTMLElement();
   }
 }
