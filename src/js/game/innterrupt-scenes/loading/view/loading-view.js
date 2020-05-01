@@ -3,11 +3,6 @@
 import type {LoadingState} from "../state/loading-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 
-/** コンストラクタのパラメータ */
-type Param = {
-  dom: HTMLElement,
-  initialState: LoadingState
-};
 
 /** ローディングシーンのビュー */
 export class LoadingView {
@@ -15,27 +10,24 @@ export class LoadingView {
   _text: HTMLElement;
   _bar: HTMLElement;
 
-  constructor(param: Param) {
-    const rootId = domUuid();
+  constructor(initialState: LoadingState) {
     const textId = domUuid();
     const barId = domUuid();
 
-    param.dom.innerHTML = `
-      <div class="loading" id="${rootId}" >
+    this._root = document.createElement('div');
+    this._root.innerHTML = `
       <div class="loading__completed-rate">
-        <div class="loading__completed-rate__text" id="${textId}"></div>
+        <div class="loading__completed-rate__text" data-id="${textId}"></div>
         <div class="loading__completed-rate__bar">
-          <div class="loading__completed-rate__bar__completed" id="${barId}"></div>
+          <div class="loading__completed-rate__bar__completed" data-id="${barId}"></div>
         </div>
       </div>
-    </div>
     `;
 
-    this._root = document.getElementById(rootId) || document.createElement('div');
-    this._text = document.getElementById(textId) || document.createElement('div');
-    this._bar = document.getElementById(barId) || document.createElement('div');
+    this._text = this._root.querySelector(`[data-id="${textId}"]`) || document.createElement('div');
+    this._bar = this._root.querySelector(`[data-id="${barId}"]`) || document.createElement('div');
 
-    this.engage(param.initialState);
+    this.engage(initialState);
   }
 
   /**
@@ -44,10 +36,20 @@ export class LoadingView {
    * @param state 状態
    */
   engage(state: LoadingState): void {
+    this._root.className = 'loading';
     this._root.style.display = state.isVisible
       ? 'flex'
       : 'none';
     this._text.innerText = `LOADING... ${Math.floor(state.completedRate * 100)}%`;
     this._bar.style.width = `${state.completedRate * 100}%`
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
   }
 }
