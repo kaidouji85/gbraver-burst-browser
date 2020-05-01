@@ -12,30 +12,13 @@ import '../../src/css/style.css';
  */
 export type DOMCreator = (resourcePath: ResourcePath) => HTMLElement;
 
-export const domStub = (creator: DOMCreator): HTMLElement => {
+/**
+ *HTML要素スタブ
+ *
+ * @param creator HTML要素生成コールバック関数
+ * @return {function(): *} ストーリー
+ */
+export const domStub = (creator: DOMCreator) => (): HTMLElement => {
   const resourcePath = new StorybookResourcePath();
   return creator(resourcePath);
-}
-
-
-/**
- * HTML要素系コンポネントのスタブ
- */
-export class DOMStub {
-  _resourcePath: ResourcePath;
-  _parent: HTMLElement;
-
-  constructor(creator: DOMCreator) {
-    this._resourcePath = new StorybookResourcePath();
-    this._parent = creator(this._resourcePath);
-  }
-
-  /**
-   * コンポネントの親要素を取得する
-   *
-   * @return {HTMLElement}
-   */
-  domElement(): HTMLElement {
-    return this._parent;
-  }
 }
