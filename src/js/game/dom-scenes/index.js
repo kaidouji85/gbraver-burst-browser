@@ -62,4 +62,6 @@ export class DOMScenes {
   hidden(): void {
     this._title.hidden();
   }
+
+  
 }

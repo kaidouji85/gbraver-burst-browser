@@ -35,7 +35,6 @@ export class TitleView {
     const gameStartId = domUuid();
     const howToPlayId = domUuid();
     this._root.innerHTML = `
-      <div class="title">
         <div class="title__logo">
           <img class="title__logo__image" src="${params.resourcePath.get()}/logo.png"/>
           <div class="title__logo__copy-right">(C) 2020 Yuusuke Takeuchi</div>
@@ -44,7 +43,6 @@ export class TitleView {
           <button class="title__controllers__game-start" data-id="${gameStartId}" >ゲームスタート</button>
           <button class="title__controllers__how-to-play" data-id="${howToPlayId}">遊び方</button>
         </div>
-      </div>
     `;
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
