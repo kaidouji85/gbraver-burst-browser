@@ -91,7 +91,12 @@ export class TitleView {
     };
   }
 
-  getHTMLElement(): HTMLElement {
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
     return this._root;
   }
 }

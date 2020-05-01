@@ -49,6 +49,8 @@ export class Game {
 
     this._vh = new CssVH(this._resize);
 
+    const body = document.body || document.createElement('div');
+
     this._interruptScenes = new InterruptScenes({
       resourcePath: this._resourcePath,
       loading: this._loading,
@@ -57,10 +59,12 @@ export class Game {
     this._domScenes = new DOMScenes({
       resourcePath: this._resourcePath
     });
+    this._domScenes.getRootHTMLElements().forEach(element => {
+      body.appendChild(element);
+    });
 
     this._domDialogs = new DOMDialogs();
 
-    const body = document.body || document.createElement('div');
     this._tdScenes = new TDScenes(body, this._resize);
 
     this._resources = null;

@@ -69,7 +69,12 @@ export class Title {
     this._view.engage(this._state);
   }
 
-  getHTMLElement(): HTMLElement {
-    return this._view.getHTMLElement();
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return {HTMLElement}
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._view.getRootHTMLElement();
   }
 }

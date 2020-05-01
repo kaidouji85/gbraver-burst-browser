@@ -10,6 +10,6 @@ export default {
 export const Scene = () => {
   return domStub((resourcePath) => {
     const scene = new Title(resourcePath);
-    return scene.getHTMLElement();
+    return scene.getRootHTMLElement();
   });
 }

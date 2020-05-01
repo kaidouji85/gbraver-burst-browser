@@ -26,8 +26,6 @@ export class DOMScenes {
 
   constructor(param: Param) {
     this._title = new Title(param.resourcePath);
-    const titleDOM: HTMLElement = document.querySelector("#title-scene") || document.createElement('div');
-    titleDOM.appendChild(this._title.getHTMLElement());
 
     const titleNotifier = this._title.notifier();
     this._notifier = {
@@ -63,5 +61,15 @@ export class DOMScenes {
     this._title.hidden();
   }
 
+  /**
+   * 本クラスに含まれる全てのルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElements(): HTMLElement[] {
+    return [
+      this._title.getRootHTMLElement()
+    ];
+  }
   
 }
