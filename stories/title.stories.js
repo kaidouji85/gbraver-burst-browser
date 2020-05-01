@@ -1,6 +1,6 @@
 // @flow
 
-import {DOMStub} from "./stub/dom-stub";
+import {domStub} from "./stub/dom-stub";
 import {Title} from "../src/js/game/dom-scenes/title";
 
 export default {
@@ -8,9 +8,8 @@ export default {
 };
 
 export const Scene = () => {
-  const stub  = new DOMStub((parent, resourcePath) => {
+  return domStub((resourcePath) => {
     const scene = new Title(resourcePath);
-    parent.appendChild(scene.getHTMLElement());
+    return scene.getHTMLElement();
   });
-  return stub.domElement();
 }
