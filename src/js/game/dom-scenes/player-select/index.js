@@ -6,18 +6,28 @@ import type {ResourcePath} from "../../../resource/path/resource-path";
  * プレイヤーセレクト
  */
 export class PlayerSelect {
+  _root: HTMLElement;
+
   /**
    * コンストラクタ
    *
-   * @param dom 本シーンを追加するHTML要素
    * @param resourcePath リソースパス
    */
-  constructor(dom: HTMLElement, resourcePath: ResourcePath) {
-    dom.innerHTML = `
-      <div class="player-select">
-        プレイヤーセレクト
-        <img class="player-select__armdozer" src="${resourcePath.get()}/armdozer/shin-braver/stand.png">
-      </div>
+  constructor(resourcePath: ResourcePath) {
+    this._root = document.createElement('div');
+    this._root.className = 'player-select';
+    this._root.innerHTML = `
+      プレイヤーセレクト
+      <img class="player-select__armdozer" src="${resourcePath.get()}/armdozer/shin-braver/stand.png">
     `;
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return ルートHTML要素
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
   }
 }
