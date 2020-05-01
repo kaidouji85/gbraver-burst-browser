@@ -28,7 +28,7 @@ export class TDScenes {
   _scene: ?Scene;
   _sceneSubscriptions: Subscription[];
 
-  constructor(parentDOM: HTMLElement, resize: Observable<Resize>) {
+  constructor(resize: Observable<Resize>) {
     this._renderStream = new Subject<Render>();
     this._endBattle = new Subject<EndBattle>();
     this._gameLoop = gameLoopStream();
@@ -38,7 +38,6 @@ export class TDScenes {
       render: this._renderStream,
       resize: this._resize,
     });
-    parentDOM.appendChild(this._renderer.getRendererDOM())
 
     this._scene = null;
     this._sceneSubscriptions = [];
@@ -91,6 +90,15 @@ export class TDScenes {
     if (isDevelopment()) {
       console.log(this._renderer.info());
     }
+  }
+
+  /**
+   * three.jsレンダラのHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRendererDOM(): HTMLElement {
+    return this._renderer.getRendererDOM();
   }
 
   /**

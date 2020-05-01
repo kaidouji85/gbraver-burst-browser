@@ -13,8 +13,6 @@ type Notifier = {
 
 /** コンストラクタのパラメータ */
 type Params = {
-  /** バインド先のHTML要素 */
-  dom: HTMLElement,
   /** 初期状態 */
   initialState: TitleState,
   /** リソースパス */
@@ -32,26 +30,22 @@ export class TitleView {
   constructor(params: Params) {
     this._gameStartStream = new Subject();
     this._howToPlayStream = new Subject();
+    this._root = document.createElement('div');
 
-    const rootId = domUuid();
     const gameStartId = domUuid();
     const howToPlayId = domUuid();
-    params.dom.innerHTML = `
-      <div class="title" id="${rootId}">
+    this._root.innerHTML = `
         <div class="title__logo">
           <img class="title__logo__image" src="${params.resourcePath.get()}/logo.png"/>
           <div class="title__logo__copy-right">(C) 2020 Yuusuke Takeuchi</div>
         </div>
         <div class="title__controllers">
-          <button class="title__controllers__game-start" id="${gameStartId}" >ゲームスタート</button>
-          <button class="title__controllers__how-to-play" id="${howToPlayId}">遊び方</button>
+          <button class="title__controllers__game-start" data-id="${gameStartId}" >ゲームスタート</button>
+          <button class="title__controllers__how-to-play" data-id="${howToPlayId}">遊び方</button>
         </div>
-      </div>
     `;
 
-    this._root = document.getElementById(rootId) || document.createElement('div');
-
-    this._gameStart = document.getElementById(gameStartId) || document.createElement('div');
+    this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
       this._gameStartStream.next();
@@ -61,7 +55,7 @@ export class TitleView {
       this._gameStartStream.next();
     });
 
-    this._howToPlay = document.getElementById(howToPlayId) || document.createElement('div');
+    this._howToPlay = this._root.querySelector(`[data-id="${howToPlayId}"]`) || document.createElement('div');
     this._howToPlay.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
       this._howToPlayStream.next();
@@ -95,5 +89,14 @@ export class TitleView {
       gameStart: this._gameStartStream,
       howToPlay: this._howToPlayStream,
     };
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
   }
 }

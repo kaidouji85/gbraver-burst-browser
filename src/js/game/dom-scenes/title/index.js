@@ -22,10 +22,9 @@ export class Title {
   _view: TitleView;
   _notifier: Notifier;
 
-  constructor(dom: HTMLElement, resourcePath: ResourcePath) {
+  constructor(resourcePath: ResourcePath) {
     this._state = createInitialState();
     this._view = new TitleView({
-      dom: dom,
       initialState: this._state,
       resourcePath: resourcePath
     });
@@ -68,5 +67,14 @@ export class Title {
   hidden(): void {
     this._state = hidden(this._state);
     this._view.engage(this._state);
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return {HTMLElement}
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._view.getRootHTMLElement();
   }
 }

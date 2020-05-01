@@ -10,10 +10,18 @@ export class PlayInLandscape {
   /**
    * コンストラクタ
    *
-   * @param dom 本シーンを追加するHTML要素
    * @param resourcePath リソースパス
    */
-  constructor(dom: HTMLElement, resourcePath: ResourcePath) {
-    this._view = new PlayInLandscapeView(dom, resourcePath);
+  constructor(resourcePath: ResourcePath) {
+    this._view = new PlayInLandscapeView(resourcePath);
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._view.getRootHTMLElement();
   }
 }

@@ -11,7 +11,6 @@ export type Notifier = {
 
 /** パラメータ */
 export type Param = {
-  dom: HTMLElement,
   movieURL: string
 };
 
@@ -23,22 +22,19 @@ export class HowToPlayView {
   _root: HTMLElement;
   _closer: HTMLElement;
 
-  constructor(param: Param) {
+  constructor(movieURL: string) {
     this._closeStream = new Subject();
 
-    const rootId = domUuid();
     const closerId = domUuid();
-    param.dom.innerHTML = `
-      <div class="how-to-play" id="${rootId}">
-        <div class="how-to-play__background"></div>
-        <div class="how-to-play__closer" id="${closerId}">&#x2613;</div>
-        <div class="how-to-play__dialog">
-          <iframe class="how-to-play__dialog__movie" width="352" height="198" src="${param.movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
-        </div>
+    this._root = document.createElement('div');
+    this._root.innerHTML = `
+      <div class="how-to-play__background"></div>
+      <div class="how-to-play__closer" data-id="${closerId}">&#x2613;</div>
+      <div class="how-to-play__dialog">
+        <iframe class="how-to-play__dialog__movie" width="352" height="198" src="${movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
       </div>
     `;
 
-    this._root = document.getElementById(rootId) || document.createElement('div');
     this._root.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
       this._closeStream.next();
@@ -48,7 +44,7 @@ export class HowToPlayView {
       this._closeStream.next();
     });
 
-    this._closer = document.getElementById(closerId) || document.createElement('div');
+    this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
     this._closer.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
       this._closeStream.next();
@@ -79,5 +75,14 @@ export class HowToPlayView {
     return {
       close: this._closeStream,
     };
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
   }
 }

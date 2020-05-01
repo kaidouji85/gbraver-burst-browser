@@ -14,12 +14,9 @@ export class Loading {
   _view: LoadingView;
   _subscription: Subscription;
 
-  constructor(dom: HTMLElement, loading: Observable<LoadingAction>) {
+  constructor(loading: Observable<LoadingAction>) {
     this._state = createInitialState();
-    this._view = new LoadingView({
-      dom: dom,
-      initialState: this._state
-    });
+    this._view = new LoadingView(this._state);
     this._subscription = loading.subscribe(action => {
       if (action.type === 'LoadingStart') {
         this._onLoadingStart(action);
@@ -34,6 +31,15 @@ export class Loading {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._subscription.unsubscribe();
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._view.getRootHTMLElement();
   }
 
   /**
