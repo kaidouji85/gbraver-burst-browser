@@ -97,6 +97,7 @@
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
     background-color: var(--background-color);
+    color: var(--font-color);
     box-sizing: border-box;
     padding-top: var(--screen-padding-top);
     padding-left: var(--screen-padding-left);
