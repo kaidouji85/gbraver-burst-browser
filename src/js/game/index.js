@@ -23,7 +23,9 @@ import {createInitialState} from "./state/initial-state";
 import {createBattleRoom} from "./state/battle-room";
 import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
-import type {SelectArmdozer} from "../action/player-select/select-armdozer";
+import type {SelectionComplete} from "../action/player-select/selection-complete";
+import {selectionComplete} from "./state/selectiin-complete";
+import {loadAllResource} from "../resource";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -88,8 +90,8 @@ export class Game {
       tdNotifier.endBattle.subscribe(action => {
         this._onEndBattle(action);
       }),
-      domScenesNotifier.selectArmdozer.subscribe(action => {
-        this._onArmdozerSelect(action);
+      domScenesNotifier.selectionComplete.subscribe(action => {
+        this._onSelectionComplete(action);
       })
     ];
   }
@@ -109,20 +111,8 @@ export class Game {
   /**
    * ゲームスタートボタンを押した
    */
-  async _onPushGameStart(action: PushGameStart) {
-    try {
-      this._domScenes.showPlayerSelect();
-
-      // this._domScenes.hidden();
-      //
-      // const resources = await loadAllResource(`${this._resourcePath.get()}/`);
-      // this._resources = resources;
-      // const room = createBattleRoom(this._state);
-      // const initialState = await room.start();
-      // this._tdScenes.startBattle(resources, room, initialState);
-    } catch (e) {
-      throw e;
-    }
+  _onPushGameStart(action: PushGameStart) {
+    this._domScenes.showPlayerSelect();
   }
 
   /**
@@ -163,7 +153,24 @@ export class Game {
     }
   }
 
-  _onArmdozerSelect(action: SelectArmdozer): void {
-    console.log(action);
+  /**
+   * プレイヤー選択完了
+   *
+   * @param action アクション
+   */
+  async _onSelectionComplete(action: SelectionComplete): Promise<void> {
+    try {
+      this._state = selectionComplete(this._state, action);
+
+      this._domScenes.hidden();
+
+      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
+      this._resources = resources;
+      const room = createBattleRoom(this._state);
+      const initialState = await room.start();
+      this._tdScenes.startBattle(resources, room, initialState);
+    } catch (e) {
+      throw e;
+    }
   }
 }

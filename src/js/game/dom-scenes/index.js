@@ -6,7 +6,7 @@ import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
 import type {ResourcePath} from "../../resource/path/resource-path";
 import {PlayerSelect} from "./player-select";
 import type {DOMScene} from "./dom-scene";
-import type {SelectArmdozer} from "../../action/player-select/select-armdozer";
+import type {SelectionComplete} from "../../action/player-select/selection-complete";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -17,7 +17,7 @@ type Param = {
 type Notifier = {
   pushGameStart: Observable<PushGameStart>,
   pushHowToPlay: Observable<PushHowToPlay>,
-  selectArmdozer: Observable<SelectArmdozer>,
+  selectionComplete: Observable<SelectionComplete>,
 };
 
 /**
@@ -38,7 +38,7 @@ export class DOMScenes {
     this._notifier = {
       pushGameStart: titleNotifier.pushGameStart,
       pushHowToPlay: titleNotifier.pushHowToPlay,
-      selectArmdozer: playerSelectNotifier.selectArmdozer,
+      selectionComplete: playerSelectNotifier.selectionComplete,
     };
   }
 

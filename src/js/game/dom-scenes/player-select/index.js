@@ -6,14 +6,14 @@ import type {PlayerSelectState} from "./state/player-select-state";
 import {createInitialState} from "./state/initial-state";
 import type {DOMScene} from "../dom-scene";
 import {Observable} from "rxjs";
-import type {SelectArmdozer} from "../../../action/player-select/select-armdozer";
+import type {SelectionComplete} from "../../../action/player-select/selection-complete";
 import {map} from "rxjs/operators";
 
 /**
  * イベント通知
  */
 export type Notifier = {
-  selectArmdozer: Observable<SelectArmdozer>
+  selectionComplete: Observable<SelectionComplete>
 };
 
 /**
@@ -72,9 +72,9 @@ export class PlayerSelect implements DOMScene {
    */
   notifier(): Notifier {
     return {
-      selectArmdozer: this._view.notifier().select.pipe(
+      selectionComplete: this._view.notifier().select.pipe(
         map(id => ({
-          type: 'SelectArmdozer',
+          type: 'SelectionComplete',
           armdozerId: id
         }))
       )
