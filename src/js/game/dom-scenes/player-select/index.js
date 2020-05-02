@@ -18,8 +18,8 @@ export class PlayerSelect {
    * @param resourcePath リソースパス
    */
   constructor(resourcePath: ResourcePath) {
-    this._state = createInitialState();
-    this._view = new PlayerSelectView(resourcePath);
+    this._state = createInitialState(resourcePath);
+    this._view = new PlayerSelectView(resourcePath, this._state);
   }
 
   /**
