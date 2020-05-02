@@ -3,6 +3,7 @@
 import * as THREE from 'three';
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
+import {loadAllResource} from "../resource";
 import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
@@ -25,7 +26,6 @@ import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/player-select/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
-import {loadAllResource} from "../resource";
 
 /** ゲーム全体の管理を行う */
 export class Game {
