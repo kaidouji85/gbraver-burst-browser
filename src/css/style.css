@@ -191,3 +191,42 @@
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
 }
+
+.player-select {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+}
+
+.player-select--invisible {
+    display: none;
+}
+
+.player-select__caption {
+    font-size: 1.5em;
+    flex-grow: 0;
+}
+
+.player-select__armdozers {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.player-select__armdozers__icon {
+    object-fit: none;
+    width: 256px;
+    height: 320px;
+    object-position: 48% 33%;
+}

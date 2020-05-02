@@ -9,6 +9,7 @@ import {hidden} from "./state/hidden";
 import {filter, map} from "rxjs/operators";
 import {show} from "./state/show";
 import type {ResourcePath} from "../../../resource/path/resource-path";
+import type {DOMScene} from "../dom-scene";
 
 /** イベント通知 */
 export type Notifier = {
@@ -17,7 +18,7 @@ export type Notifier = {
 };
 
 /** タイトルシーン */
-export class Title {
+export class Title implements DOMScene {
   _state: TitleState;
   _view: TitleView;
   _notifier: Notifier;
