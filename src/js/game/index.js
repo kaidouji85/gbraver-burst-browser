@@ -108,15 +108,15 @@ export class Game {
    */
   async _onPushGameStart(action: PushGameStart) {
     try {
-      //this._domScenes.showPlayerSelect();
+      this._domScenes.showPlayerSelect();
 
-      this._domScenes.hidden();
-
-      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
-      this._resources = resources;
-      const room = createBattleRoom(this._state);
-      const initialState = await room.start();
-      this._tdScenes.startBattle(resources, room, initialState);
+      // this._domScenes.hidden();
+      //
+      // const resources = await loadAllResource(`${this._resourcePath.get()}/`);
+      // this._resources = resources;
+      // const room = createBattleRoom(this._state);
+      // const initialState = await room.start();
+      // this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
       throw e;
     }
