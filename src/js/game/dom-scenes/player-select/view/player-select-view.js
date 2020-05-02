@@ -56,6 +56,9 @@ export class PlayerSelectView {
   }
 }
 
+/**
+ * アームドーザアイコン ビュー
+ */
 export class ArmdozerIconView {
   _root: HTMLElement;
 

@@ -14,8 +14,16 @@ export function createInitialState(resourcePath: ResourcePath): PlayerSelectStat
   return {
     armdozerIcons: [
       {
+        image: `${resourcePath.get()}/armdozer/neo-landozer/stand.png`,
+        armdozerId: ArmDozerIdList.NEO_LANDOZER
+      },
+      {
         image: `${resourcePath.get()}/armdozer/shin-braver/stand.png`,
         armdozerId: ArmDozerIdList.SHIN_BRAVER
+      },
+      {
+        image: `${resourcePath.get()}/armdozer/ligjtning-dozer/stand.png`,
+        armdozerId: ArmDozerIdList.LIGHTNING_DOZER
       }
     ]
   };
