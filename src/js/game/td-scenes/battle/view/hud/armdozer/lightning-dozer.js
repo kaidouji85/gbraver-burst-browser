@@ -2,7 +2,7 @@
 
 import {LightningDozerCutIn} from "../../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import type {HUDArmdozer} from "./index";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";

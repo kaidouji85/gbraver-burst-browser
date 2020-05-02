@@ -5,7 +5,7 @@ import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon-view";
 import {merge, Observable} from "rxjs";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+import type {ArmDozerId} from "gbraver-burst-core";
 
 /**
  * イベント通知

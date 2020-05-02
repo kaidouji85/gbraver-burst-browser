@@ -14,7 +14,7 @@ import {ShinBraverCutIn} from "../../../../game-object/cut-in/shin-braver/shin-b
 import {LightningDozerCutIn} from "../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import {ThreeDimensionLayer} from "./td";
 import {HudLayer} from "./hud";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {PlayerId} from "gbraver-burst-core";
 import {ShinBraverHUD} from "./hud/armdozer/shin-braver";
 import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
 import {LightningDozerHUD} from "./hud/armdozer/lightning-dozer";

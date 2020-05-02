@@ -2,7 +2,7 @@
 
 import type {ArmdozerIcon} from "../state/player-select-state";
 import {Observable, Subject} from "rxjs";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+import type {ArmDozerId} from "gbraver-burst-core";
 
 /**
  * イベント通知
