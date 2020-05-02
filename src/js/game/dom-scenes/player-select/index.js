@@ -4,11 +4,12 @@ import type {ResourcePath} from "../../../resource/path/resource-path";
 import {PlayerSelectView} from "./view/player-select-view";
 import type {PlayerSelectState} from "./state/player-select-state";
 import {createInitialState} from "./state/initial-state";
+import type {DOMScene} from "../dom-scene";
 
 /**
  * プレイヤーセレクト
  */
-export class PlayerSelect {
+export class PlayerSelect implements DOMScene {
   _state: PlayerSelectState;
   _view: PlayerSelectView;
 
@@ -20,6 +21,13 @@ export class PlayerSelect {
   constructor(resourcePath: ResourcePath) {
     this._state = createInitialState(resourcePath);
     this._view = new PlayerSelectView(resourcePath, this._state);
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    // NOP
   }
 
   /**
