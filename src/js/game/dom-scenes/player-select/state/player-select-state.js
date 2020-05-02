@@ -14,6 +14,9 @@ export type ArmdozerIcon = {
  * プレイヤーセレクト ステート
  */
 export type PlayerSelectState = {
+  /** シーン表示、非表示フラグ、trueで表示する*/
+  isVisible: boolean,
+
   /** アームドーザアイコン */
   armdozerIcons: ArmdozerIcon[]
 };

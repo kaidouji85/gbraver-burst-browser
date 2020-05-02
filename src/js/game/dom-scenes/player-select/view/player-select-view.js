@@ -21,7 +21,6 @@ export class PlayerSelectView {
   constructor(resourcePath: ResourcePath, initialState: PlayerSelectState) {
     const armdozersId = domUuid();
     this._root = document.createElement('div');
-    this._root.className = 'player-select';
     this._root.innerHTML = `
       プレイヤーセレクト
       <div class="player-select__armdozers" id-data="${armdozersId}">
@@ -34,7 +33,9 @@ export class PlayerSelectView {
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
         this._armdozers.appendChild(element);
-      })
+      });
+
+    this.engage(initialState);
   }
 
   /**
@@ -43,7 +44,9 @@ export class PlayerSelectView {
    * @param state ステート
    */
   engage(state: PlayerSelectState): void {
-    // NOP
+    this._root.className = state.isVisible
+      ? 'player-select'
+      : 'player-select--invisible';
   }
 
   /**

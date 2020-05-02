@@ -30,4 +30,20 @@ export class PlayerSelect {
   getRootHTMLElement(): HTMLElement {
     return this._view.getRootHTMLElement();
   }
+
+  /**
+   * 本シーンを表示する
+   */
+  show(): void {
+    this._state.isVisible = true;
+    this._view.engage(this._state);
+  }
+
+  /**
+   * 本シーンを非表示にする
+   */
+  hidden(): void {
+    this._state.isVisible = false;
+    this._view.engage(this._state);
+  }
 }

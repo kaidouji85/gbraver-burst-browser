@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Title} from "./title";
 import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
 import type {ResourcePath} from "../../resource/path/resource-path";
+import {PlayerSelect} from "./player-select";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -22,10 +23,12 @@ type Notifier = {
  */
 export class DOMScenes {
   _title: Title;
+  _playerSelect: PlayerSelect;
   _notifier: Notifier;
 
   constructor(param: Param) {
     this._title = new Title(param.resourcePath);
+    this._playerSelect = new PlayerSelect(param.resourcePath);
 
     const titleNotifier = this._title.notifier();
     this._notifier = {
@@ -59,6 +62,7 @@ export class DOMScenes {
    */
   hidden(): void {
     this._title.hidden();
+    this._playerSelect.hidden();
   }
 
   /**
@@ -68,7 +72,8 @@ export class DOMScenes {
    */
   getRootHTMLElements(): HTMLElement[] {
     return [
-      this._title.getRootHTMLElement()
+      this._title.getRootHTMLElement(),
+      this._playerSelect.getRootHTMLElement(),
     ];
   }
   

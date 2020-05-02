@@ -12,6 +12,7 @@ import type {ResourcePath} from "../../../../resource/path/resource-path";
  */
 export function createInitialState(resourcePath: ResourcePath): PlayerSelectState {
   return {
+    isVisible: false,
     armdozerIcons: [
       {
         image: `${resourcePath.get()}/armdozer/neo-landozer/stand.png`,

@@ -9,5 +9,6 @@ export default {
 
 export const Scene = domStub((resourcePath) => {
   const scene = new PlayerSelect(resourcePath);
+  scene.show();
   return scene.getRootHTMLElement();
 });

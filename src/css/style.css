@@ -206,6 +206,10 @@
     padding-bottom: var(--screen-padding-bottom);
 }
 
+.player-select--invisible {
+    display: none;
+}
+
 .player-select__armdozers__icon {
     width: 512px;
     height: 512px;
