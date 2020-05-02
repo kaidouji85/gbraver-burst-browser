@@ -1,12 +1,16 @@
 // @flow
 
 import type {ResourcePath} from "../../../resource/path/resource-path";
+import {PlayerSelectView} from "./view/player-select-view";
+import type {PlayerSelectState} from "./state/player-select-state";
+import {createInitialState} from "./state/initial-state";
 
 /**
  * プレイヤーセレクト
  */
 export class PlayerSelect {
-  _root: HTMLElement;
+  _state: PlayerSelectState;
+  _view: PlayerSelectView;
 
   /**
    * コンストラクタ
@@ -14,12 +18,8 @@ export class PlayerSelect {
    * @param resourcePath リソースパス
    */
   constructor(resourcePath: ResourcePath) {
-    this._root = document.createElement('div');
-    this._root.className = 'player-select';
-    this._root.innerHTML = `
-      プレイヤーセレクト
-      <img class="player-select__armdozer" src="${resourcePath.get()}/armdozer/shin-braver/stand.png">
-    `;
+    this._state = createInitialState();
+    this._view = new PlayerSelectView(resourcePath);
   }
 
   /**
@@ -28,6 +28,6 @@ export class PlayerSelect {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this._view.getRootHTMLElement();
   }
 }
