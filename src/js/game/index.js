@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {loadAllResource} from "../resource";
 import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
@@ -24,6 +23,7 @@ import {createInitialState} from "./state/initial-state";
 import {createBattleRoom} from "./state/battle-room";
 import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
+import type {SelectArmdozer} from "../action/player-select/select-armdozer";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -87,6 +87,9 @@ export class Game {
       }),
       tdNotifier.endBattle.subscribe(action => {
         this._onEndBattle(action);
+      }),
+      domScenesNotifier.selectArmdozer.subscribe(action => {
+        this._onArmdozerSelect(action);
       })
     ];
   }
@@ -158,5 +161,9 @@ export class Game {
     } catch (e) {
       throw e;
     }
+  }
+
+  _onArmdozerSelect(action: SelectArmdozer): void {
+    console.log(action);
   }
 }

@@ -5,6 +5,16 @@ import {PlayerSelectView} from "./view/player-select-view";
 import type {PlayerSelectState} from "./state/player-select-state";
 import {createInitialState} from "./state/initial-state";
 import type {DOMScene} from "../dom-scene";
+import {Observable} from "rxjs";
+import type {SelectArmdozer} from "../../../action/player-select/select-armdozer";
+import {map} from "rxjs/operators";
+
+/**
+ * イベント通知
+ */
+export type Notifier = {
+  selectArmdozer: Observable<SelectArmdozer>
+};
 
 /**
  * プレイヤーセレクト
@@ -53,5 +63,21 @@ export class PlayerSelect implements DOMScene {
   hidden(): void {
     this._state.isVisible = false;
     this._view.engage(this._state);
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return 取得結果
+   */
+  notifier(): Notifier {
+    return {
+      selectArmdozer: this._view.notifier().select.pipe(
+        map(id => ({
+          type: 'SelectArmdozer',
+          armdozerId: id
+        }))
+      )
+    };
   }
 }

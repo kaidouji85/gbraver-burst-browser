@@ -1,8 +1,18 @@
 // @flow
 
-import type {ArmdozerIcon, PlayerSelectState} from "../state/player-select-state";
+import type {PlayerSelectState} from "../state/player-select-state";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
+import {ArmdozerIconView} from "./armdozer-icon-view";
+import {merge, Observable} from "rxjs";
+import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+
+/**
+ * イベント通知
+ */
+export type Notifier = {
+  select: Observable<ArmDozerId>;
+};
 
 /**
  * プレイヤーセレクト ビュー
@@ -57,21 +67,16 @@ export class PlayerSelectView {
   getRootHTMLElement(): HTMLElement {
     return this._root;
   }
-}
 
-/**
- * アームドーザアイコン ビュー
- */
-export class ArmdozerIconView {
-  _root: HTMLElement;
-
-  constructor(state: ArmdozerIcon) {
-    this._root = document.createElement('img');
-    this._root.src = state.image;
-    this._root.className = 'player-select__armdozers__icon';
-  }
-
-  getRootHTMLElement(): HTMLElement {
-    return this._root;
+  /**
+   * イベント通知を取得する
+   *
+   * @return 取得結果
+   */
+  notifier(): Notifier {
+    const selects: Observable<ArmDozerId>[] = this._armdozerIcons.map(icon => icon.notifier().select);
+    return {
+      select: merge(...selects)
+    };
   }
 }
