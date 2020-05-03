@@ -103,6 +103,7 @@
     padding-left: var(--screen-padding-left);
     padding-right: var(--screen-padding-right);
     padding-bottom: var(--screen-padding-bottom);
+    background-size: cover;
 }
 
 .title--invisible {
