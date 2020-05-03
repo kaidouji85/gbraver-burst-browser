@@ -15,6 +15,9 @@
     --dialog-border-radius: 0.4em;
     --how-to-play-dialog-width: 384px;
     --how-to-play-dialog-height: 230px;
+    --zindex-background: 8;
+    --zindex-dialog: 9;
+    --zindex-close: 10;
 }
 
 .service-worker-update {
@@ -169,6 +172,7 @@
     height: calc(var(--vh, 1vh) * 100);
     background-color: #000000;
     opacity: 0.5;
+    z-index: var(--zindex-background);
 }
 
 .how-to-play__closer {
@@ -186,6 +190,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 24px;
+    z-index: var(--zindex-close);
 }
 
 .how-to-play__dialog {
@@ -200,6 +205,7 @@
     justify-content: center;
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
+    z-index: var(--zindex-dialog)
 }
 
 .player-select {
