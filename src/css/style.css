@@ -15,6 +15,9 @@
     --dialog-border-radius: 0.4em;
     --how-to-play-dialog-width: 384px;
     --how-to-play-dialog-height: 230px;
+    --zindex-background: 8;
+    --zindex-dialog: 9;
+    --zindex-close: 10;
 }
 
 .service-worker-update {
@@ -57,6 +60,10 @@
         font-size: 1.5em;
         margin-bottom: 1em;
     }
+
+    .landscape-only {
+        display: none
+    }
 }
 
 .loading {
@@ -92,8 +99,6 @@
 }
 
 .title {
-    display: flex;
-    flex-direction: column;
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
     background-color: var(--background-color);
@@ -103,6 +108,8 @@
     padding-left: var(--screen-padding-left);
     padding-right: var(--screen-padding-right);
     padding-bottom: var(--screen-padding-bottom);
+    background-size: cover;
+    background-position: 50% 0;
 }
 
 .title--invisible {
@@ -110,16 +117,20 @@
 }
 
 .title__logo {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex: 1 1;
+    justify-content: flex-end;
 }
 
 .title__logo__image {
-    height: 75%;
-    max-height: 171px;
+    height: 35vh;
+    object-fit: contain;
 }
 
 .title__logo__copy-right {
@@ -127,6 +138,12 @@
 }
 
 .title__controllers {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    padding-bottom: var(--screen-padding-bottom);
+
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -143,12 +160,6 @@
     border: none;
 }
 
-@media (orientation: portrait) {
-    .how-to-play {
-        display: none;
-    }
-}
-
 .how-to-play--invisible {
     display: none;
 }
@@ -159,6 +170,7 @@
     height: calc(var(--vh, 1vh) * 100);
     background-color: #000000;
     opacity: 0.5;
+    z-index: var(--zindex-background);
 }
 
 .how-to-play__closer {
@@ -176,6 +188,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 24px;
+    z-index: var(--zindex-close);
 }
 
 .how-to-play__dialog {
@@ -190,6 +203,7 @@
     justify-content: center;
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
+    z-index: var(--zindex-dialog)
 }
 
 .player-select {

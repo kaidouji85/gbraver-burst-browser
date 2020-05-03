@@ -44,6 +44,7 @@ export class TitleView {
           <button class="title__controllers__how-to-play" data-id="${howToPlayId}">遊び方</button>
         </div>
     `;
+    this._root.style.backgroundImage = `url(${params.resourcePath.get()}/title-back.png)`;
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {
@@ -75,7 +76,7 @@ export class TitleView {
    */
   engage(state: TitleState): void {
     this._root.className = state.isVisible
-      ? 'title'
+      ? 'title landscape-only'
       : 'title--invisible';
   }
 
