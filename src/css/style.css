@@ -92,9 +92,6 @@
 }
 
 .title {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
     background-color: var(--background-color);
@@ -113,12 +110,15 @@
 }
 
 .title__logo {
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex: 1 1;
     justify-content: flex-end;
-    padding-bottom: 5vh;
 }
 
 .title__logo__image {
@@ -131,6 +131,12 @@
 }
 
 .title__controllers {
+    position: fixed;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    padding-bottom: var(--screen-padding-bottom);
+
     display: flex;
     flex-direction: row;
     justify-content: center;
