@@ -76,7 +76,7 @@ export class TitleView {
    */
   engage(state: TitleState): void {
     this._root.className = state.isVisible
-      ? 'title'
+      ? 'title landscape-only'
       : 'title--invisible';
   }
 

@@ -60,6 +60,10 @@
         font-size: 1.5em;
         margin-bottom: 1em;
     }
+
+    .landscape-only {
+        display: none
+    }
 }
 
 .loading {
@@ -113,7 +117,7 @@
 }
 
 .title__logo {
-    position: fixed;
+    position: absolute;
     top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -134,7 +138,7 @@
 }
 
 .title__controllers {
-    position: fixed;
+    position: absolute;
     top: 100%;
     left: 50%;
     transform: translate(-50%, -100%);
@@ -154,12 +158,6 @@
     background-color: var(--button-background-color);
     color: var(--button-font-color);
     border: none;
-}
-
-@media (orientation: portrait) {
-    .how-to-play {
-        display: none;
-    }
 }
 
 .how-to-play--invisible {
