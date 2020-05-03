@@ -105,6 +105,7 @@
     padding-right: var(--screen-padding-right);
     padding-bottom: var(--screen-padding-bottom);
     background-size: cover;
+    background-position: 50% 0;
 }
 
 .title--invisible {
