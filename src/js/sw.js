@@ -3,6 +3,10 @@ import * as PreCaching from 'workbox-precaching';
 import * as Strategies from 'workbox-strategies';
 import {ExpirationPlugin} from 'workbox-expiration';
 
+console.log('hello sw');
+console.log(BUILD_HASH);
+console.log(ExpirationPlugin);
+
 PreCaching.precacheAndRoute([
   {url: "index.html", revision: BUILD_HASH}
 ]);
@@ -10,21 +14,21 @@ PreCaching.precacheAndRoute([
 Routing.registerRoute(
   /\.(?:js)$/,
   new Strategies.NetworkFirst({
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 7 * 24 * 60 * 60,
-      }),
-    ],
+    // plugins: [
+    //   new ExpirationPlugin({
+    //     maxAgeSeconds: 7 * 24 * 60 * 60,
+    //   }),
+    // ],
   })
 );
 
 Routing.registerRoute(
   /\.(?:png|glb|json)$/,
   new Strategies.CacheFirst({
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 7 * 24 * 60 * 60,
-      }),
-    ],
+    // plugins: [
+    //   new ExpirationPlugin({
+    //     maxAgeSeconds: 7 * 24 * 60 * 60,
+    //   }),
+    // ],
   })
 );
