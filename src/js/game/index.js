@@ -26,6 +26,7 @@ import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/player-select/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
+import {waitAnimationFrame} from "../animation-frame/wait-animation-frame";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -163,12 +164,17 @@ export class Game {
       this._state = selectionComplete(this._state, action);
 
       this._domScenes.hidden();
+      this._interruptScenes.showLoading();
 
       const resources = await loadAllResource(`${this._resourcePath.get()}/`);
       this._resources = resources;
       const room = createBattleRoom(this._state);
       const initialState = await room.start();
+
       this._tdScenes.startBattle(resources, room, initialState);
+      await waitAnimationFrame();
+
+      this._interruptScenes.hiddenLoading();
     } catch (e) {
       throw e;
     }

@@ -29,6 +29,14 @@ export class InterruptScenes {
     this._loading.destructor();
   }
 
+  showLoading(): void {
+    this._loading.show();
+  }
+
+  hiddenLoading(): void {
+    this._loading.hidden();
+  }
+
   /**
    * 本クラスに含まれるルートHTML要素を返す
    *
