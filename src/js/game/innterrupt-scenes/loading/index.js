@@ -3,8 +3,7 @@
 import type {LoadingState} from "./state/loading-state";
 import {createInitialState} from "./state/initial-value";
 import {progress} from "./state/progress";
-import {complete} from "./state/complete";
-import type {LoadingAction, LoadingComplete, LoadingProgress, LoadingStart} from "../../../action/loading/loading";
+import type {LoadingAction, LoadingProgress} from "../../../action/loading/loading";
 import {Observable, Subscription} from "rxjs";
 import {LoadingView} from "./view/loading-view";
 
@@ -43,7 +42,6 @@ export class Loading {
    */
   show(): void {
     this._state.isVisible = true;
-    this._state.completedRate = 0;
     this._view.engage(this._state);
   }
 

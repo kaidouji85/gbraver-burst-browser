@@ -170,10 +170,10 @@ export class Game {
       this._resources = resources;
       const room = createBattleRoom(this._state);
       const initialState = await room.start();
+      await waitAnimationFrame();
 
       this._tdScenes.startBattle(resources, room, initialState);
       await waitAnimationFrame();
-
       this._interruptScenes.hiddenLoading();
     } catch (e) {
       throw e;
