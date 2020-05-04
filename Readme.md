@@ -67,3 +67,16 @@ aws configure
 ```
 ./scripts/deploy-production.sh <アップロードするS3バケット名>
 ```
+
+## storybookを動かす
+
+```
+npm run start:storybook
+```
+
+## メカデザイン協力
+
+本ゲームのキャラクターは [DOGAL3](http://doga.jp/2010/programs/dogal/dogal3/index.html) で作成しました。
+絵心がなくてもカッコいいメカが作れる、とても素晴らしいツールです。
+
+[![doga-banner](dogabn00.gif)](http://doga.jp/2010/index.html)

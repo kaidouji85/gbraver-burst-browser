@@ -135,6 +135,8 @@
 }
 
 .title__contents__copy-right {
+    display: flex;
+    flex-direction: column;
     font-size: calc(var(--responsive-font-size) * 0.8);
     margin-top: calc(var(--responsive-font-size) * 0.5);
 }
