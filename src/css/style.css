@@ -135,14 +135,15 @@
 }
 
 .title__contents__copy-right {
-    margin-top: 0.5em;
+    font-size: calc(var(--responsive-font-size) * 0.8);
+    margin-top: calc(var(--responsive-font-size) * 0.5);
 }
 
 .title__contents__controllers {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-top: 1rem;
+    padding-top: calc(var(--responsive-font-size) * 2);
 }
 
 .title__contents__controllers button {
