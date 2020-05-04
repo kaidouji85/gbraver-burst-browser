@@ -7,7 +7,7 @@ import type {LoadingAction, LoadingProgress} from "../../../action/loading/loadi
 import {Observable, Subscription} from "rxjs";
 import {LoadingView} from "./view/loading-view";
 import {hidden, show} from "./state/visible";
-import type {DOMScene} from "../../dom-scenes/dom-scene";
+import type {DOMScene} from "../dom-scene";
 
 /** ローディング */
 export class Loading implements DOMScene {

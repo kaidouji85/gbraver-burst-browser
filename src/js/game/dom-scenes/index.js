@@ -7,10 +7,13 @@ import type {ResourcePath} from "../../resource/path/resource-path";
 import {PlayerSelect} from "./player-select";
 import type {DOMScene} from "./dom-scene";
 import type {SelectionComplete} from "../../action/player-select/selection-complete";
+import {Loading} from "./loading";
+import type {LoadingAction} from "../../action/loading/loading";
 
 /** コンストラクタのパラメータ */
 type Param = {
-  resourcePath: ResourcePath
+  resourcePath: ResourcePath,
+  loading: Observable<LoadingAction>
 };
 
 /** イベント通知 */
@@ -27,11 +30,13 @@ type Notifier = {
 export class DOMScenes {
   _title: Title;
   _playerSelect: PlayerSelect;
+  _loading: Loading;
   _notifier: Notifier;
 
   constructor(param: Param) {
     this._title = new Title(param.resourcePath);
     this._playerSelect = new PlayerSelect(param.resourcePath);
+    this._loading = new Loading(param.loading);
 
     const titleNotifier = this._title.notifier();
     const playerSelectNotifier = this._playerSelect.notifier();
@@ -54,6 +59,13 @@ export class DOMScenes {
    */
   notifier(): Notifier {
     return this._notifier;
+  }
+
+  /**
+   * ローディング画面を表示する
+   */
+  showLoading(): void {
+    this._showScene(this._loading);
   }
 
   /** タイトルを表示する */
@@ -95,6 +107,7 @@ export class DOMScenes {
    */
   _getDOMScenes(): DOMScene[] {
     return [
+      this._loading,
       this._title,
       this._playerSelect
     ];
