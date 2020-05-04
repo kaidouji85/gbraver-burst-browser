@@ -15,6 +15,8 @@
     --dialog-border-radius: 0.4em;
     --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
     --how-to-play-dialog-height: calc(var(--vh) * 80);
+    --how-to-player-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
+    --how-to-player-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
     --zindex-background: 8;
     --zindex-dialog: 9;
     --zindex-close: 10;
@@ -205,6 +207,11 @@
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
     z-index: var(--zindex-dialog)
+}
+
+.how-to-play__dialog__movie {
+    width: var(--how-to-player-movie-width);
+    height: var(--how-to-player-movie-height);
 }
 
 .player-select {
