@@ -26,6 +26,7 @@ import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/player-select/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
+import {waitAnimationFrame} from "../animation-frame/wait-animation-frame";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -52,10 +53,11 @@ export class Game {
 
     this._interruptScenes = new InterruptScenes({
       resourcePath: this._resourcePath,
-      loading: this._loading,
+
     });
     this._domScenes = new DOMScenes({
-      resourcePath: this._resourcePath
+      resourcePath: this._resourcePath,
+      loading: this._loading,
     });
     this._domDialogs = new DOMDialogs();
     this._tdScenes = new TDScenes(this._resize);
@@ -132,6 +134,29 @@ export class Game {
   }
 
   /**
+   * プレイヤー選択完了
+   *
+   * @param action アクション
+   */
+  async _onSelectionComplete(action: SelectionComplete): Promise<void> {
+    try {
+      this._state = selectionComplete(this._state, action);
+      this._domScenes.showLoading();
+      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
+      this._resources = resources;
+      const room = createBattleRoom(this._state);
+      const initialState = await room.start();
+      await waitAnimationFrame();
+
+      this._tdScenes.startBattle(resources, room, initialState);
+      await waitAnimationFrame();
+      this._domScenes.hidden();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /**
    * 戦闘終了時の処理
    *
    * @param action アクション
@@ -147,27 +172,6 @@ export class Game {
       const room = createBattleRoom(this._state);
       const initialState = await room.start();
 
-      this._tdScenes.startBattle(resources, room, initialState);
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  /**
-   * プレイヤー選択完了
-   *
-   * @param action アクション
-   */
-  async _onSelectionComplete(action: SelectionComplete): Promise<void> {
-    try {
-      this._state = selectionComplete(this._state, action);
-
-      this._domScenes.hidden();
-
-      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
-      this._resources = resources;
-      const room = createBattleRoom(this._state);
-      const initialState = await room.start();
       this._tdScenes.startBattle(resources, room, initialState);
     } catch (e) {
       throw e;

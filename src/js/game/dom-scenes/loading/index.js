@@ -3,13 +3,14 @@
 import type {LoadingState} from "./state/loading-state";
 import {createInitialState} from "./state/initial-value";
 import {progress} from "./state/progress";
-import {complete} from "./state/complete";
-import type {LoadingAction, LoadingComplete, LoadingProgress, LoadingStart} from "../../../action/loading/loading";
+import type {LoadingAction, LoadingProgress} from "../../../action/loading/loading";
 import {Observable, Subscription} from "rxjs";
 import {LoadingView} from "./view/loading-view";
+import {hidden, show} from "./state/visible";
+import type {DOMScene} from "../dom-scene";
 
 /** ローディング */
-export class Loading {
+export class Loading implements DOMScene {
   _state: LoadingState;
   _view: LoadingView;
   _subscription: Subscription;
@@ -18,12 +19,8 @@ export class Loading {
     this._state = createInitialState();
     this._view = new LoadingView(this._state);
     this._subscription = loading.subscribe(action => {
-      if (action.type === 'LoadingStart') {
-        this._onLoadingStart(action);
-      } else if (action.type === 'LoadingProgress') {
+      if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);
-      } else if (action.type === 'LoadingComplete') {
-        this._onLoadingComplete(action);
       }
     });
   }
@@ -43,12 +40,18 @@ export class Loading {
   }
 
   /**
-   * リソースロードが開始された
-   *
-   * @param action アクション
+   * 本シーンを表示する
    */
-  _onLoadingStart(action: LoadingStart): void {
-    this._state = {...this._state, isVisible: true};
+  show(): void {
+    this._state = show(this._state);
+    this._view.engage(this._state);
+  }
+
+  /**
+   * 本シーンを非表示にする
+   */
+  hidden(): void {
+    this._state = hidden(this._state);
     this._view.engage(this._state);
   }
 
@@ -59,16 +62,6 @@ export class Loading {
    */
   _onLoadingProgress(action: LoadingProgress): void {
     this._state = progress(this._state, action.completedRate);
-    this._view.engage(this._state);
-  }
-
-  /**
-   * リソースのローディングが完了した際のイベント
-   *
-   * @param action アクション
-   */
-  _onLoadingComplete(action: LoadingComplete): void {
-    this._state = complete(this._state);
     this._view.engage(this._state);
   }
 }
