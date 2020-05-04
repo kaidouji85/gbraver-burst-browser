@@ -8,17 +8,21 @@
     --screen-padding-right: calc(var(--safe-area-right) + 1em);
     --screen-padding-bottom: calc(var(--safe-area-bottom) + 1em);
     --font-color: rgb(240, 240, 240);
+    --responsive-font-size: max(3vh, 1rem);
     --background-color: rgb(23, 23, 23);
     --button-background-color: #1e90ff;
     --button-font-color: rgb(240, 240, 240);
+    --button-border-radius: calc(var(--responsive-font-size) * 0.5);
     --dialog-border: solid #a9a9a9 1px;
-    --dialog-border-radius: 0.4em;
-    --how-to-play-dialog-width: 384px;
-    --how-to-play-dialog-height: 230px;
+    --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
+    --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
+    --how-to-play-dialog-height: calc(var(--vh) * 80);
+    --how-to-player-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
+    --how-to-player-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
     --zindex-background: 8;
     --zindex-dialog: 9;
     --zindex-close: 10;
-    --responsive-font-size: max(3vh, 1rem);
+
 }
 
 .service-worker-update {
@@ -153,7 +157,7 @@
     height: calc(var(--responsive-font-size) * 3);
     margin: 0 calc(var(--responsive-font-size) * 0.5);
     font-size: calc(var(--responsive-font-size));
-    border-radius: 0.5em;
+    border-radius: var(--button-border-radius);
     background-color: var(--button-background-color);
     color: var(--button-font-color);
     border: none;
@@ -193,8 +197,10 @@
 .how-to-play__dialog {
     width: var(--how-to-play-dialog-width);
     height: var(--how-to-play-dialog-height);
-    top: calc(50% - var(--how-to-play-dialog-height) / 2);
-    left: calc(50% - var(--how-to-play-dialog-width) / 2);
+    top: calc(var(--vh, 1vh) * 50);
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     background-color: var(--background-color);
     position: absolute;
     display: flex;
@@ -203,6 +209,11 @@
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
     z-index: var(--zindex-dialog)
+}
+
+.how-to-play__dialog__movie {
+    width: var(--how-to-player-movie-width);
+    height: var(--how-to-player-movie-height);
 }
 
 .player-select {
