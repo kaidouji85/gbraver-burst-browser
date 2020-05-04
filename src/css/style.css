@@ -17,8 +17,14 @@
     --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
     --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
     --how-to-play-dialog-height: calc(var(--vh) * 80);
-    --how-to-player-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
-    --how-to-player-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
+    --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
+    --how-to-play-dialog-left: 50%;
+    --how-to-play-closer-width: 48px;
+    --how-to-play-closer-height: 48px;
+    --how-to-play-closer-top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2 - var(--how-to-play-closer-height) / 2);
+    --how-to-play-closer-left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2 - var(--how-to-play-closer-width) / 2);
+    --how-to-play-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
+    --how-to-play-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
     --zindex-background: 8;
     --zindex-dialog: 9;
     --zindex-close: 10;
@@ -177,16 +183,14 @@
 }
 
 .how-to-play__closer {
-    --closer-width: 48px;
-    --closer-height: 48px;
-    position: absolute;
-    top: calc(50% - var(--how-to-play-dialog-height) / 2 - var(--closer-height) / 2);
-    left: calc(50% - var(--how-to-play-dialog-width) / 2 - var(--closer-width) / 2);
+    position: fixed;
+    top: var(--how-to-play-closer-top);
+    left: var(--how-to-play-closer-left);
     background-color: red;
     font-color: var(--font-color);
     z-index: 10;
-    width: var(--closer-width);
-    height: var(--closer-height);
+    width: var(--how-to-play-closer-width);
+    height: var(--how-to-play-closer-height);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -212,8 +216,8 @@
 }
 
 .how-to-play__dialog__movie {
-    width: var(--how-to-player-movie-width);
-    height: var(--how-to-player-movie-height);
+    width: var(--how-to-play-movie-width);
+    height: var(--how-to-play-movie-height);
 }
 
 .player-select {
