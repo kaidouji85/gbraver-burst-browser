@@ -18,6 +18,7 @@
     --zindex-background: 8;
     --zindex-dialog: 9;
     --zindex-close: 10;
+    --responsive-font-size: max(3vh, 1rem);
 }
 
 .service-worker-update {
@@ -145,10 +146,10 @@
 }
 
 .title__contents__controllers button {
-    width: 10em;
-    height: 3em;
-    margin: 0 0.5em;
-    font-size: 1em;
+    width: calc(var(--responsive-font-size) * 10);
+    height: calc(var(--responsive-font-size) * 3);
+    margin: 0 calc(var(--responsive-font-size) * 0.5);
+    font-size: calc(var(--responsive-font-size));
     border-radius: 0.5em;
     background-color: var(--button-background-color);
     color: var(--button-font-color);
