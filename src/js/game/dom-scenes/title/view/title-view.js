@@ -35,13 +35,13 @@ export class TitleView {
     const gameStartId = domUuid();
     const howToPlayId = domUuid();
     this._root.innerHTML = `
-        <div class="title__logo">
-          <img class="title__logo__image" src="${params.resourcePath.get()}/logo.png"/>
-          <div class="title__logo__copy-right">(C) 2020 Yuusuke Takeuchi</div>
-        </div>
-        <div class="title__controllers">
-          <button class="title__controllers__game-start" data-id="${gameStartId}" >ゲームスタート</button>
-          <button class="title__controllers__how-to-play" data-id="${howToPlayId}">遊び方</button>
+        <div class="title__contents">
+          <img class="title__contents__logo" src="${params.resourcePath.get()}/logo.png"/>
+          <div class="title__contents__copy-right">(C) 2020 Yuusuke Takeuchi</div>
+          <div class="title__contents__controllers">
+            <button class="title__contents__controllers__game-start" data-id="${gameStartId}" >ゲームスタート</button>
+            <button class="title__contents__controllers__how-to-play" data-id="${howToPlayId}">遊び方</button>
+          </div>
         </div>
     `;
     this._root.style.backgroundImage = `url(${params.resourcePath.get()}/title-back.png)`;

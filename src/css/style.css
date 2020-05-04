@@ -18,6 +18,7 @@
     --zindex-background: 8;
     --zindex-dialog: 9;
     --zindex-close: 10;
+    --responsive-font-size: max(3vh, 1rem);
 }
 
 .service-worker-update {
@@ -116,7 +117,7 @@
     display: none;
 }
 
-.title__logo {
+.title__contents {
     position: absolute;
     top: calc(var(--vh, 1vh) * 50);
     left: 50%;
@@ -128,32 +129,28 @@
     justify-content: flex-end;
 }
 
-.title__logo__image {
+.title__contents__logo {
     height: 35vh;
     object-fit: contain;
 }
 
-.title__logo__copy-right {
-    margin-top: 0.5em;
+.title__contents__copy-right {
+    font-size: calc(var(--responsive-font-size) * 0.8);
+    margin-top: calc(var(--responsive-font-size) * 0.5);
 }
 
-.title__controllers {
-    position: absolute;
-    top: calc(var(--vh, 1vh) * 100);
-    left: 50%;
-    transform: translate(-50%, -100%);
-    padding-bottom: var(--screen-padding-bottom);
-
+.title__contents__controllers {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding-top: calc(var(--responsive-font-size) * 2);
 }
 
-.title__controllers button {
-    width: 10em;
-    height: 3em;
-    margin: 0 0.5em;
-    font-size: 1em;
+.title__contents__controllers button {
+    width: calc(var(--responsive-font-size) * 10);
+    height: calc(var(--responsive-font-size) * 3);
+    margin: 0 calc(var(--responsive-font-size) * 0.5);
+    font-size: calc(var(--responsive-font-size));
     border-radius: 0.5em;
     background-color: var(--button-background-color);
     color: var(--button-font-color);
