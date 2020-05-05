@@ -23,6 +23,8 @@ export function createBattleRoom(state: State): BattleRoom {
       return shinBraverCourse(state);
     case ArmdozerAppearances.NEO_LANDOZER:
       return neoLandozerCourse(state);
+    case ArmdozerAppearances.LIGHTNING_DOZER:
+      return lightningDozerCource(state);
     default:
       return shinBraverCourse(state);
   }
@@ -53,20 +55,37 @@ function shinBraverCourse(state: State): BattleRoom {
  * @return 生成結果
  */
 function neoLandozerCourse(state: State): BattleRoom {
-  // switch (state.level) {
-  //   case 1:
-  //     return weakShinBraverRoom(state);
-  //   case 2:
-  //     return lightningDozerRoom(state);
-  //   case 3:
-  //   default:
-  //     return shinBraverRoom(state);
-  // }
-  return shinBraverRoom(state);
+  switch (state.level) {
+    case 1:
+      return weakLightningDozer(state);
+    case 2:
+      return shinBraverRoom(state);
+    case 3:
+    default:
+      return lightningDozerRoom(state);
+  }
 }
 
 /**
- * 弱いシンブレイバールームを生成する
+ * ライトニングドーザ を選択した際のコース
+ *
+ * @param state ゲーム状態
+ * @return 生成結果
+ */
+function lightningDozerCource(state: State): BattleRoom {
+  switch (state.level) {
+    case 1:
+      return weakNeoLandozerRoom(state);
+    case 2:
+      return shinBraverRoom(state);
+    case 3:
+    default:
+      return neoLandozerRoom(state);
+  }
+}
+
+/**
+ * 弱いシンブレイバー ルームを生成する
  *
  * @param state ゲーム状態
  * @return 生成結果
@@ -77,7 +96,7 @@ function weakShinBraverRoom(state: State): BattleRoom {
 }
 
 /**
- * シンブレイバールームを生成する
+ * シンブレイバー ルームを生成する
  *
  * @param state ゲーム状態
  * @return 生成結果
@@ -88,7 +107,7 @@ function shinBraverRoom(state: State): BattleRoom {
 }
 
 /**
- * 弱いネオランドーザバトルルームを生成する
+ * 弱いネオランドーザ ルームを生成する
  *
  * @param state ゲーム状態
  * @return 生成結果
@@ -99,7 +118,7 @@ function weakNeoLandozerRoom(state: State): BattleRoom {
 }
 
 /**
- *ネオランドーザのバトルルームを生成する
+ *ネオランドーザ ルームを生成する
  *
  * @param state ゲーム状態
  * @return 生成結果
@@ -110,7 +129,18 @@ function neoLandozerRoom(state: State): BattleRoom {
 }
 
 /**
- * ライトニングドーザバトルルームを生成する
+ * 弱いライトニングドーザルームを生成する
+ *
+ * @param state ゲーム状態
+ * @return 生成結果
+ */
+function weakLightningDozer(state: State): BattleRoom {
+  const npc: NPC = new WeakNeoLandozerNPC();
+  return new OfflineBattleRoom(state.player, npc);
+}
+
+/**
+ * ライトニングドーザルームを生成する
  *
  * @param state ゲーム状態
  * @return 生成結果
