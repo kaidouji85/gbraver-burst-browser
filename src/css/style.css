@@ -259,7 +259,7 @@
 .player-select__armdozers__icon {
     object-fit: cover;
     width: 30vw;
-    border: white solid 0.5px;
+    border: white solid 1px;
     margin: calc(var(--responsive-font-size) * 0.5);
     border-radius: calc(var(--responsive-font-size) * 0.5);
 }
