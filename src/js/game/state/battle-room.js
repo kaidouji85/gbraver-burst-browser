@@ -27,31 +27,49 @@ export function createBattleRoom(state: State): BattleRoom {
   }
 }
 
+/**
+ * シンブレイバーを選択した際のコース
+ *
+ * @param state ゲーム状態
+ * @return 生成結果
+ */
 function shinBraverRoute(state: State): BattleRoom {
   switch (state.level) {
     case 1:
-      return createNeoLandozerRoom(state);
+      return neoLandozerRoom(state);
     case 2:
-      return createLightningDozerRoom(state);
+      return lightningDozerRoom(state);
     case 3:
     default:
-      return createStrongNeoLandozerRoom(state);
+      return strongNeoLandozerRoom(state);
   }
 }
 
+/**
+ * ネオランドーザを選択した際のコース
+ *
+ * @param state ゲーム状態
+ * @return 生成結果
+ */
 function neoLandozerRoute(state: State): BattleRoom {
   switch (state.level) {
     case 1:
-      return createShinBraverRoom(state);
+      return shinBraverRoom(state);
     case 2:
-      return createLightningDozerRoom(state);
+      return lightningDozerRoom(state);
     case 3:
     default:
-      return createShinBraverRoom(state);
+      return shinBraverRoom(state);
   }
 }
 
-function createShinBraverRoom(state: State): BattleRoom {
+/**
+ * 弱いシンブレイバールームを生成する
+ *
+ * @param state ゲーム状態
+ * @return 生成結果
+ */
+function shinBraverRoom(state: State): BattleRoom {
   const npc: NPC = new ShinBraverNPC();
   return new OfflineBattleRoom(state.player, npc);
 }
@@ -62,7 +80,7 @@ function createShinBraverRoom(state: State): BattleRoom {
  * @param state ゲーム状態
  * @return 生成結果
  */
-function createNeoLandozerRoom(state: State): BattleRoom {
+function neoLandozerRoom(state: State): BattleRoom {
   const npc: NPC = new NeoLandozerNPC();
   return new OfflineBattleRoom(state.player, npc);
 }
@@ -73,7 +91,7 @@ function createNeoLandozerRoom(state: State): BattleRoom {
  * @param state ゲーム状態
  * @return 生成結果
  */
-function createStrongNeoLandozerRoom(state: State): BattleRoom {
+function strongNeoLandozerRoom(state: State): BattleRoom {
   const npc: NPC = new StrongNeoLandozerNPC();
   return new OfflineBattleRoom(state.player, npc);
 }
@@ -84,7 +102,7 @@ function createStrongNeoLandozerRoom(state: State): BattleRoom {
  * @param state ゲーム状態
  * @return 生成結果
  */
-function createLightningDozerRoom(state: State): BattleRoom {
+function lightningDozerRoom(state: State): BattleRoom {
   const npc: NPC = new LightningDozerNPC();
   return new OfflineBattleRoom(state.player, npc);
 }
