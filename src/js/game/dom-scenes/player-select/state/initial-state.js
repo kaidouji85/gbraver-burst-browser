@@ -15,15 +15,15 @@ export function createInitialState(resourcePath: ResourcePath): PlayerSelectStat
     isVisible: false,
     armdozerIcons: [
       {
-        image: `${resourcePath.get()}/armdozer/neo-landozer/stand.png`,
+        image: `${resourcePath.get()}/armdozer/neo-landozer/player-select.png`,
         armdozerId: ArmDozerIdList.NEO_LANDOZER
       },
       {
-        image: `${resourcePath.get()}/armdozer/shin-braver/stand.png`,
+        image: `${resourcePath.get()}/armdozer/shin-braver/player-select.png`,
         armdozerId: ArmDozerIdList.SHIN_BRAVER
       },
       {
-        image: `${resourcePath.get()}/armdozer/ligjtning-dozer/stand.png`,
+        image: `${resourcePath.get()}/armdozer/ligjtning-dozer/player-select.png`,
         armdozerId: ArmDozerIdList.LIGHTNING_DOZER
       }
     ]
