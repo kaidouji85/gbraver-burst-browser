@@ -21,8 +21,8 @@
     --how-to-play-dialog-left: 50%;
     --how-to-play-closer-width: 48px;
     --how-to-play-closer-height: 48px;
-    --how-to-play-closer-top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2 - var(--how-to-play-closer-height) / 2);
-    --how-to-play-closer-left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2 - var(--how-to-play-closer-width) / 2);
+    --how-to-play-closer-top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2);
+    --how-to-play-closer-left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
     --how-to-play-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
     --how-to-play-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
     --zindex-background: 8;
@@ -110,6 +110,9 @@
 }
 
 .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
     background-color: var(--background-color);
@@ -128,11 +131,6 @@
 }
 
 .title__contents {
-    position: absolute;
-    top: calc(var(--vh, 1vh) * 50);
-    left: 50%;
-    transform: translate(-50%, -50%);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -144,11 +142,13 @@
     object-fit: contain;
 }
 
-.title__contents__copy-right {
+.title__contents__copy-rights {
     display: flex;
     flex-direction: column;
     font-size: calc(var(--responsive-font-size) * 0.8);
     margin-top: calc(var(--responsive-font-size) * 0.5);
+    background-color: rgba(10, 10, 10, 0.5);
+    padding: calc(var(--responsive-font-size) * 0.3);
 }
 
 .title__contents__controllers {
@@ -186,6 +186,7 @@
     position: fixed;
     top: var(--how-to-play-closer-top);
     left: var(--how-to-play-closer-left);
+    transform: translate(-50%, -50%);
     background-color: red;
     font-color: var(--font-color);
     z-index: 10;

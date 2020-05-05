@@ -37,9 +37,8 @@ export class TitleView {
     this._root.innerHTML = `
       <div class="title__contents">
         <img class="title__contents__logo" src="${params.resourcePath.get()}/logo.png"/>
-        <div class="title__contents__copy-right">
-          <span>(C) 2020 Yuusuke Takeuchi</span>
-          <span>(C) PROJECT TEAM DOGA</span>
+        <div class="title__contents__copy-rights">
+          <span class="title__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
         </div>
         <div class="title__contents__controllers">
           <button class="title__contents__controllers__game-start" data-id="${gameStartId}" >ゲームスタート</button>
