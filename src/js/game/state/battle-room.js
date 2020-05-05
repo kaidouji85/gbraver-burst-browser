@@ -5,9 +5,9 @@ import type {BattleRoom} from "../../battle-room/battle-room";
 import type {NPC} from "../../npc/npc";
 import {LightningDozerNPC} from "../../npc/lightning-dozer";
 import {OfflineBattleRoom} from "../../battle-room/offline-battle-room";
-import {NeoLandozerNPC} from "../../npc/neo-landozer-npc";
-import {StrongNeoLandozerNPC} from "../../npc/strong-neo-landozer";
-import {ShinBraverNPC} from "../../npc/shin-braver";
+import {WeakNeoLandozerNPC} from "../../npc/weak-neo-landozer-npc";
+import {NeoLandozerNPC} from "../../npc/neo-landozer";
+import {ShinBraverNPC} from "../../npc/weak-shin-braver";
 import {ArmdozerAppearances} from "gbraver-burst-core/lib/master/armdozers";
 
 /**
@@ -36,12 +36,12 @@ export function createBattleRoom(state: State): BattleRoom {
 function shinBraverRoute(state: State): BattleRoom {
   switch (state.level) {
     case 1:
-      return neoLandozerRoom(state);
+      return weakNeoLandozerRoom(state);
     case 2:
       return lightningDozerRoom(state);
     case 3:
     default:
-      return strongNeoLandozerRoom(state);
+      return neoLandozerRoom(state);
   }
 }
 
@@ -54,12 +54,12 @@ function shinBraverRoute(state: State): BattleRoom {
 function neoLandozerRoute(state: State): BattleRoom {
   switch (state.level) {
     case 1:
-      return shinBraverRoom(state);
+      return weakShinBraverRoom(state);
     case 2:
       return lightningDozerRoom(state);
     case 3:
     default:
-      return shinBraverRoom(state);
+      return weakShinBraverRoom(state);
   }
 }
 
@@ -69,30 +69,30 @@ function neoLandozerRoute(state: State): BattleRoom {
  * @param state ゲーム状態
  * @return 生成結果
  */
-function shinBraverRoom(state: State): BattleRoom {
+function weakShinBraverRoom(state: State): BattleRoom {
   const npc: NPC = new ShinBraverNPC();
   return new OfflineBattleRoom(state.player, npc);
 }
 
 /**
- * ネオランドーザバトルルームを生成する
+ * 弱いネオランドーザバトルルームを生成する
+ *
+ * @param state ゲーム状態
+ * @return 生成結果
+ */
+function weakNeoLandozerRoom(state: State): BattleRoom {
+  const npc: NPC = new WeakNeoLandozerNPC();
+  return new OfflineBattleRoom(state.player, npc);
+}
+
+/**
+ *ネオランドーザのバトルルームを生成する
  *
  * @param state ゲーム状態
  * @return 生成結果
  */
 function neoLandozerRoom(state: State): BattleRoom {
   const npc: NPC = new NeoLandozerNPC();
-  return new OfflineBattleRoom(state.player, npc);
-}
-
-/**
- * 強いネオランドーザのバトルルームを生成する
- *
- * @param state ゲーム状態
- * @return 生成結果
- */
-function strongNeoLandozerRoom(state: State): BattleRoom {
-  const npc: NPC = new StrongNeoLandozerNPC();
   return new OfflineBattleRoom(state.player, npc);
 }
 

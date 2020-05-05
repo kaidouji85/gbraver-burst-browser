@@ -11,7 +11,7 @@ const ZERO_BATTERY = {
 };
 
 /**
- * シンブレイバー NPC
+ * 弱い シンブレイバー NPC
  */
 export class ShinBraverNPC implements NPC {
   /**
@@ -64,10 +64,10 @@ export class ShinBraverNPC implements NPC {
    * @return コマンド
    */
   _attackRoutine(enemy: PlayerState, commands: Command[]): Command {
-    const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
+    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
 
-    if (battery3) {
-      return battery3;
+    if (battery2) {
+      return battery2;
     }
 
     return ZERO_BATTERY;

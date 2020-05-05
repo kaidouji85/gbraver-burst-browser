@@ -10,7 +10,9 @@ const ZERO_BATTERY = {
   battery: 0
 };
 
-/** ネオランドーザ NPC */
+/**
+ * ネオランドーザNPC
+ */
 export class NeoLandozerNPC implements NPC {
   /**
    * アームドーザ
@@ -40,7 +42,8 @@ export class NeoLandozerNPC implements NPC {
 
     const enableCommand = lastState.effect.players.find(v => v.playerId === enemyId);
     const enemy = lastState.players.find(v => v.playerId === enemyId);
-    if (!enableCommand || !enemy) {
+    const player = lastState.players.find(v => v.playerId !== enemyId);
+    if (!enableCommand || !enemy || !player) {
       return ZERO_BATTERY;
     }
 
@@ -50,7 +53,7 @@ export class NeoLandozerNPC implements NPC {
 
     const isAttacker = lastState.activePlayerId === enemyId;
     return isAttacker
-      ? this._attackRoutine(enemy, enableCommand.command)
+      ? this._attackRoutine(enemy, player, enableCommand.command)
       : this._defenseRoutine(enemy, enableCommand.command);
   }
 
@@ -58,14 +61,39 @@ export class NeoLandozerNPC implements NPC {
    * 攻撃ルーチン
    *
    * @param enemy NPCのステータス
+   * @param player プレイヤーのステータス
    * @param commands 選択可能なコマンド
    * @return コマンド
    */
-  _attackRoutine(enemy: PlayerState, commands: Command[]): Command {
-    const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
+  _attackRoutine(enemy: PlayerState, player: PlayerState, commands: Command[]): Command {
+    const burst = commands.find(v => v.type === 'BURST_COMMAND');
+    const maxBattery = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === enemy.armdozer.battery);
+    const maxBatteryMinusOne = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === enemy.armdozer.battery - 1);
+    const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+    const battery0 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 0);
 
-    if (battery3) {
-      return battery3;
+    const canFullBatteryAttack = player.armdozer.battery <= 4;
+    const plusCorrectPowers = enemy.armdozer.effects.filter(v => v.type === 'CorrectPower' && (0 < v.power));
+    const hasPlusCorrectPower = 0 < plusCorrectPowers.length;
+
+    if (burst && canFullBatteryAttack) {
+      return burst;
+    }
+
+    if (burst && battery0 && !canFullBatteryAttack) {
+      return battery0;
+    }
+
+    if (hasPlusCorrectPower && maxBattery && canFullBatteryAttack) {
+      return maxBattery;
+    }
+
+    if (maxBatteryMinusOne) {
+      return maxBatteryMinusOne;
+    }
+
+    if (battery1) {
+      return battery1;
     }
 
     return ZERO_BATTERY;
@@ -79,11 +107,12 @@ export class NeoLandozerNPC implements NPC {
    * @return コマンド
    */
   _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
+    const burst = commands.find(v => v.type === 'BURST_COMMAND');
+    const maxBattery = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === enemy.armdozer.battery);
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
 
-    if (battery2) {
-      return battery2;
+    if (burst && maxBattery) {
+      return maxBattery;
     }
 
     if (battery1) {
