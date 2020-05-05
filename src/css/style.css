@@ -142,11 +142,13 @@
     object-fit: contain;
 }
 
-.title__contents__copy-right {
+.title__contents__copy-rights {
     display: flex;
     flex-direction: column;
     font-size: calc(var(--responsive-font-size) * 0.8);
     margin-top: calc(var(--responsive-font-size) * 0.5);
+    background-color: rgba(10, 10, 10, 0.5);
+    padding: calc(var(--responsive-font-size) * 0.3);
 }
 
 .title__contents__controllers {
