@@ -8,7 +8,7 @@ import {OfflineBattleRoom} from "../../battle-room/offline-battle-room";
 import {WeakNeoLandozerNPC} from "../../npc/weak-neo-landozer-npc";
 import {NeoLandozerNPC} from "../../npc/neo-landozer";
 import {WeakShinBraverNPC} from "../../npc/weak-shin-braver";
-import {ArmdozerAppearances} from "gbraver-burst-core/lib/master/armdozers";
+import {ArmdozerAppearances} from "gbraver-burst-core";
 import {ShinBraverNPC} from "../../npc/shin-braver";
 import {WeakLightningDozerNPC} from "../../npc/weak-lightning-dozer";
 
