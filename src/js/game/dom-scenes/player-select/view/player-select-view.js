@@ -32,8 +32,10 @@ export class PlayerSelectView {
     const armdozersId = domUuid();
     this._root = document.createElement('div');
     this._root.innerHTML = `
-      <span class="player-select__caption">搭乗機を選択してください</span>
-      <div class="player-select__armdozers" id-data="${armdozersId}">
+      <div class="player-select__contents">
+        <span class="player-select__contents__caption">搭乗機を選択してください</span>
+        <div class="player-select__contents__armdozers" id-data="${armdozersId}">
+        </div>
       </div>
     `;
 
