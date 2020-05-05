@@ -88,15 +88,15 @@ export class ShinBraverNPC implements NPC {
    */
   _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
     const burst = commands.find(v => v.type === 'BURST_COMMAND');
-    const battery5 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
+    const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
 
     if (burst && (enemy.armdozer.battery === 0)) {
       return burst;
     }
 
-    if (!burst && battery5) {
-      return battery5;
+    if (battery3 && (enemy.armdozer.battery === 5)) {
+      return battery3;
     }
 
     if (battery1) {
