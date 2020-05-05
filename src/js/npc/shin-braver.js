@@ -11,9 +11,9 @@ const ZERO_BATTERY = {
 };
 
 /**
- * 弱い シンブレイバー NPC
+ * シンブレイバー NPC
  */
-export class WeakShinBraverNPC implements NPC {
+export class ShinBraverNPC implements NPC {
   /**
    * アームドーザ
    */
@@ -64,10 +64,16 @@ export class WeakShinBraverNPC implements NPC {
    * @return コマンド
    */
   _attackRoutine(enemy: PlayerState, commands: Command[]): Command {
-    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
+    const burst = commands.find(v => v.type === 'BURST_COMMAND');
+    const battery5 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
+    const batteryMaxMinus1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === (enemy.armdozer.battery - 1));
 
-    if (battery2) {
-      return battery2;
+    if (burst && battery5) {
+      return battery5;
+    }
+
+    if (batteryMaxMinus1) {
+      return batteryMaxMinus1;
     }
 
     return ZERO_BATTERY;
@@ -81,11 +87,16 @@ export class WeakShinBraverNPC implements NPC {
    * @return コマンド
    */
   _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
+    const burst = commands.find(v => v.type === 'BURST_COMMAND');
+    const battery5 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
 
-    if (battery2) {
-      return battery2;
+    if (burst && (enemy.armdozer.battery === 0)) {
+      return burst;
+    }
+
+    if (!burst && battery5) {
+      return battery5;
     }
 
     if (battery1) {

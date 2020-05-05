@@ -7,8 +7,9 @@ import {LightningDozerNPC} from "../../npc/lightning-dozer";
 import {OfflineBattleRoom} from "../../battle-room/offline-battle-room";
 import {WeakNeoLandozerNPC} from "../../npc/weak-neo-landozer-npc";
 import {NeoLandozerNPC} from "../../npc/neo-landozer";
-import {ShinBraverNPC} from "../../npc/weak-shin-braver";
+import {WeakShinBraverNPC} from "../../npc/weak-shin-braver";
 import {ArmdozerAppearances} from "gbraver-burst-core/lib/master/armdozers";
+import {ShinBraverNPC} from "../../npc/shin-braver";
 
 /**
  * ゲーム状態に応じたバトルルームを生成する
@@ -19,11 +20,11 @@ import {ArmdozerAppearances} from "gbraver-burst-core/lib/master/armdozers";
 export function createBattleRoom(state: State): BattleRoom {
   switch (state.player.armdozer.appearance) {
     case ArmdozerAppearances.SHIN_BRAVER:
-      return shinBraverRoute(state);
+      return shinBraverCourse(state);
     case ArmdozerAppearances.NEO_LANDOZER:
-      return neoLandozerRoute(state);
+      return neoLandozerCourse(state);
     default:
-      return shinBraverRoute(state);
+      return shinBraverCourse(state);
   }
 }
 
@@ -33,7 +34,7 @@ export function createBattleRoom(state: State): BattleRoom {
  * @param state ゲーム状態
  * @return 生成結果
  */
-function shinBraverRoute(state: State): BattleRoom {
+function shinBraverCourse(state: State): BattleRoom {
   switch (state.level) {
     case 1:
       return weakNeoLandozerRoom(state);
@@ -51,16 +52,17 @@ function shinBraverRoute(state: State): BattleRoom {
  * @param state ゲーム状態
  * @return 生成結果
  */
-function neoLandozerRoute(state: State): BattleRoom {
-  switch (state.level) {
-    case 1:
-      return weakShinBraverRoom(state);
-    case 2:
-      return lightningDozerRoom(state);
-    case 3:
-    default:
-      return weakShinBraverRoom(state);
-  }
+function neoLandozerCourse(state: State): BattleRoom {
+  // switch (state.level) {
+  //   case 1:
+  //     return weakShinBraverRoom(state);
+  //   case 2:
+  //     return lightningDozerRoom(state);
+  //   case 3:
+  //   default:
+  //     return shinBraverRoom(state);
+  // }
+  return shinBraverRoom(state);
 }
 
 /**
@@ -70,6 +72,17 @@ function neoLandozerRoute(state: State): BattleRoom {
  * @return 生成結果
  */
 function weakShinBraverRoom(state: State): BattleRoom {
+  const npc: NPC = new WeakShinBraverNPC();
+  return new OfflineBattleRoom(state.player, npc);
+}
+
+/**
+ * シンブレイバールームを生成する
+ *
+ * @param state ゲーム状態
+ * @return 生成結果
+ */
+function shinBraverRoom(state: State): BattleRoom {
   const npc: NPC = new ShinBraverNPC();
   return new OfflineBattleRoom(state.player, npc);
 }
