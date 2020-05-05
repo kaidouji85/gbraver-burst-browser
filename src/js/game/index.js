@@ -4,16 +4,13 @@ import * as THREE from 'three';
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {loadAllResource} from "../resource";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
-import {createServiceWorkerActionListener} from "../action/service-worker/create-listener";
-import {resourceBasePath} from "../resource/resource-base-path";
 import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
-import type {ServiceWorkerAction} from "../action/service-worker/service-worker";
 import type {LoadingAction} from "../action/loading/loading";
 import {createLoadingActionListener} from "../action/loading/create-listener";
 import type {Resize} from "../action/resize/resize";
@@ -26,11 +23,14 @@ import type {State} from "./state/state";
 import {createInitialState} from "./state/initial-state";
 import {createBattleRoom} from "./state/battle-room";
 import {endBattle} from "./state/end-battle";
+import type {ResourcePath} from "../resource/path/resource-path";
+import type {SelectionComplete} from "../action/player-select/selection-complete";
+import {selectionComplete} from "./state/selectiin-complete";
+import {waitAnimationFrame} from "../animation-frame/wait-animation-frame";
 
 /** ゲーム全体の管理を行う */
 export class Game {
   _state: State;
-  _serviceWorkerStream: Subject<ServiceWorkerAction>;
   _loading: Observable<LoadingAction>;
   _resize: Observable<Resize>;
   _vh: CssVH;
@@ -38,33 +38,43 @@ export class Game {
   _domScenes: DOMScenes;
   _domDialogs: DOMDialogs;
   _tdScenes: TDScenes;
+  _resourcePath: ResourcePath;
   _resources: ?Resources;
+  _serviceWorker: ?ServiceWorkerRegistration;
   _subscriptions: Subscription[];
 
-  constructor() {
-    this._state = createInitialState();
+  constructor(resourcePath: ResourcePath) {
+    this._resourcePath = resourcePath;
 
-    this._serviceWorkerStream = new Subject<ServiceWorkerAction>();
+    this._state = createInitialState();
     this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
-
     this._vh = new CssVH(this._resize);
 
     this._interruptScenes = new InterruptScenes({
-      listener: {
-        loading: this._loading,
-        serviceWorker: this._serviceWorkerStream,
-      }
+      resourcePath: this._resourcePath,
+
     });
-
-    this._domScenes = new DOMScenes();
-
+    this._domScenes = new DOMScenes({
+      resourcePath: this._resourcePath,
+      loading: this._loading,
+    });
     this._domDialogs = new DOMDialogs();
+    this._tdScenes = new TDScenes(this._resize);
 
     const body = document.body || document.createElement('div');
-    this._tdScenes = new TDScenes(body, this._resize);
+    const elements = [
+      ...this._interruptScenes.getRootHTMLElements(),
+      ...this._domDialogs.getRootHTMLElements(),
+      ...this._domScenes.getRootHTMLElements(),
+      this._tdScenes.getRendererDOM(),
+    ];
+    elements.forEach(element => {
+      body.appendChild(element);
+    });
 
     this._resources = null;
+    this._serviceWorker = null;
 
     const domScenesNotifier = this._domScenes.notifier();
     const domDialogNotifier = this._domDialogs.notifier();
@@ -81,6 +91,9 @@ export class Game {
       }),
       tdNotifier.endBattle.subscribe(action => {
         this._onEndBattle(action);
+      }),
+      domScenesNotifier.selectionComplete.subscribe(action => {
+        this._onSelectionComplete(action);
       })
     ];
   }
@@ -91,14 +104,7 @@ export class Game {
       if (isDevelopment()) {
         viewPerformanceStats(document.body);
       }
-      const serviceWorker = await loadServiceWorker();
-      if (serviceWorker) {
-        this._subscriptions = [
-          ...this._subscriptions,
-          createServiceWorkerActionListener(serviceWorker)
-            .subscribe(this._serviceWorkerStream)
-        ];
-      }
+      this._serviceWorker = await loadServiceWorker();
     } catch (e) {
       throw e;
     }
@@ -107,18 +113,8 @@ export class Game {
   /**
    * ゲームスタートボタンを押した
    */
-  async _onPushGameStart(action: PushGameStart) {
-    try {
-      this._domScenes.hidden();
-
-      const resources = await loadAllResource(`${resourceBasePath()}/`);
-      this._resources = resources;
-      const room = createBattleRoom(this._state);
-      const initialState = await room.start();
-      this._tdScenes.startBattle(resources, room, initialState);
-    } catch (e) {
-      throw e;
-    }
+  _onPushGameStart(action: PushGameStart) {
+    this._domScenes.showPlayerSelect();
   }
 
   /**
@@ -135,6 +131,29 @@ export class Game {
    */
   _onEndHowToPlay(action: EndHowToPlay) {
     this._domDialogs.hidden();
+  }
+
+  /**
+   * プレイヤー選択完了
+   *
+   * @param action アクション
+   */
+  async _onSelectionComplete(action: SelectionComplete): Promise<void> {
+    try {
+      this._state = selectionComplete(this._state, action);
+      this._domScenes.showLoading();
+      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
+      this._resources = resources;
+      const room = createBattleRoom(this._state);
+      const initialState = await room.start();
+      await waitAnimationFrame();
+
+      this._tdScenes.startBattle(resources, room, initialState);
+      await waitAnimationFrame();
+      this._domScenes.hidden();
+    } catch (e) {
+      throw e;
+    }
   }
 
   /**

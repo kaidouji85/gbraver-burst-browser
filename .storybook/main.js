@@ -10,5 +10,5 @@ module.exports = {
         rules: custom.module.rules
       },
     };
-  },
+  }
 };

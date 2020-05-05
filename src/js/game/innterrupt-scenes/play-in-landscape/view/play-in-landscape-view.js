@@ -1,17 +1,33 @@
 // @flow
 
-import {resourceBasePath} from "../../../../resource/resource-base-path";
+import type {ResourcePath} from "../../../../resource/path/resource-path";
 
 /**
  * ランドスケープ警告シーンのビュー
  */
 export class PlayInLandscapeView {
-  constructor(dom :HTMLElement) {
-    dom.innerHTML = `
-      <div class="play-in-landscape">
-        <span class="play-in-landscape__caption">横向きでプレイしてください</span>
-        <img class="play-in-landscape__image" src = "${resourceBasePath()}/waring/play-in-landscape.png"/>
-      </div>
+  _root: HTMLElement;
+
+  /**
+   * コンストラクタ
+   *
+   * @param resourcePath リソースパス
+   */
+  constructor(resourcePath: ResourcePath) {
+    this._root = document.createElement('div');
+    this._root.className = 'play-in-landscape';
+    this._root.innerHTML = `
+      <span class="play-in-landscape__caption">横向きでプレイしてください</span>
+      <img class="play-in-landscape__image" src = "${resourcePath.get()}/waring/play-in-landscape.png"/>
     `;
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
   }
 }

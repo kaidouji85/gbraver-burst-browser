@@ -8,13 +8,27 @@
     --screen-padding-right: calc(var(--safe-area-right) + 1em);
     --screen-padding-bottom: calc(var(--safe-area-bottom) + 1em);
     --font-color: rgb(240, 240, 240);
+    --responsive-font-size: max(3vh, 1rem);
     --background-color: rgb(23, 23, 23);
     --button-background-color: #1e90ff;
     --button-font-color: rgb(240, 240, 240);
+    --button-border-radius: calc(var(--responsive-font-size) * 0.5);
     --dialog-border: solid #a9a9a9 1px;
-    --dialog-border-radius: 0.4em;
-    --how-to-play-dialog-width: 384px;
-    --how-to-play-dialog-height: 230px;
+    --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
+    --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
+    --how-to-play-dialog-height: calc(var(--vh) * 80);
+    --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
+    --how-to-play-dialog-left: 50%;
+    --how-to-play-closer-width: 48px;
+    --how-to-play-closer-height: 48px;
+    --how-to-play-closer-top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2);
+    --how-to-play-closer-left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
+    --how-to-play-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
+    --how-to-play-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
+    --zindex-background: 8;
+    --zindex-dialog: 9;
+    --zindex-close: 10;
+
 }
 
 .service-worker-update {
@@ -57,6 +71,10 @@
         font-size: 1.5em;
         margin-bottom: 1em;
     }
+
+    .landscape-only {
+        display: none
+    }
 }
 
 .loading {
@@ -93,59 +111,63 @@
 
 .title {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100vw;
     height: calc(var(--vh, 1vh) * 100);
     background-color: var(--background-color);
+    color: var(--font-color);
     box-sizing: border-box;
     padding-top: var(--screen-padding-top);
     padding-left: var(--screen-padding-left);
     padding-right: var(--screen-padding-right);
     padding-bottom: var(--screen-padding-bottom);
+    background-size: cover;
+    background-position: 50% 0;
 }
 
 .title--invisible {
     display: none;
 }
 
-.title__logo {
+.title__contents {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    flex: 1 1;
+    justify-content: flex-end;
 }
 
-.title__logo__image {
-    height: 75%;
-    max-height: 171px;
+.title__contents__logo {
+    height: 35vh;
+    object-fit: contain;
 }
 
-.title__logo__copy-right {
-    margin-top: 0.5em;
+.title__contents__copy-rights {
+    display: flex;
+    flex-direction: column;
+    font-size: calc(var(--responsive-font-size) * 0.8);
+    margin-top: calc(var(--responsive-font-size) * 0.5);
+    background-color: rgba(10, 10, 10, 0.5);
+    padding: calc(var(--responsive-font-size) * 0.5);
+    border-radius: calc(var(--responsive-font-size) * 0.5);
 }
 
-.title__controllers {
+.title__contents__controllers {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    padding-top: calc(var(--responsive-font-size) * 2);
 }
 
-.title__controllers button {
-    width: 10em;
-    height: 3em;
-    margin: 0 0.5em;
-    font-size: 1em;
-    border-radius: 0.5em;
+.title__contents__controllers button {
+    width: calc(var(--responsive-font-size) * 10);
+    height: calc(var(--responsive-font-size) * 3);
+    margin: 0 calc(var(--responsive-font-size) * 0.5);
+    font-size: calc(var(--responsive-font-size));
+    border-radius: var(--button-border-radius);
     background-color: var(--button-background-color);
     color: var(--button-font-color);
     border: none;
-}
-
-@media (orientation: portrait) {
-    .how-to-play {
-        display: none;
-    }
 }
 
 .how-to-play--invisible {
@@ -158,30 +180,33 @@
     height: calc(var(--vh, 1vh) * 100);
     background-color: #000000;
     opacity: 0.5;
+    z-index: var(--zindex-background);
 }
 
 .how-to-play__closer {
-    --closer-width: 48px;
-    --closer-height: 48px;
-    position: absolute;
-    top: calc(50% - var(--how-to-play-dialog-height) / 2 - var(--closer-height) / 2);
-    left: calc(50% - var(--how-to-play-dialog-width) / 2 - var(--closer-width) / 2);
+    position: fixed;
+    top: var(--how-to-play-closer-top);
+    left: var(--how-to-play-closer-left);
+    transform: translate(-50%, -50%);
     background-color: red;
     font-color: var(--font-color);
     z-index: 10;
-    width: var(--closer-width);
-    height: var(--closer-height);
+    width: var(--how-to-play-closer-width);
+    height: var(--how-to-play-closer-height);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 24px;
+    z-index: var(--zindex-close);
 }
 
 .how-to-play__dialog {
     width: var(--how-to-play-dialog-width);
     height: var(--how-to-play-dialog-height);
-    top: calc(50% - var(--how-to-play-dialog-height) / 2);
-    left: calc(50% - var(--how-to-play-dialog-width) / 2);
+    top: calc(var(--vh, 1vh) * 50);
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     background-color: var(--background-color);
     position: absolute;
     display: flex;
@@ -189,4 +214,55 @@
     justify-content: center;
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
+    z-index: var(--zindex-dialog)
+}
+
+.how-to-play__dialog__movie {
+    width: var(--how-to-play-movie-width);
+    height: var(--how-to-play-movie-height);
+}
+
+.player-select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+}
+
+.player-select--invisible {
+    display: none;
+}
+
+.player-select__contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player-select__contents__caption {
+    font-size: calc(var(--responsive-font-size) * 1.5);
+    margin-bottom: calc(var(--responsive-font-size));
+}
+
+.player-select__contents__armdozers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-select__armdozers__icon {
+    object-fit: cover;
+    width: 30%;
+    margin: calc(var(--responsive-font-size) * 0.5);
+    border-radius: calc(var(--responsive-font-size) * 0.5);
+    background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%);
+    box-shadow: 0 0 0 8px #ddbb04 inset;
 }

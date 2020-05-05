@@ -1,9 +1,9 @@
 // @flow
 
 import type {TitleState} from "../state/title-state";
-import {resourceBasePath} from "../../../../resource/resource-base-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
+import type {ResourcePath} from "../../../../resource/path/resource-path";
 
 /** イベント通知 */
 type Notifier = {
@@ -13,10 +13,10 @@ type Notifier = {
 
 /** コンストラクタのパラメータ */
 type Params = {
-  /** バインド先のHTML要素 */
-  dom: HTMLElement,
   /** 初期状態 */
   initialState: TitleState,
+  /** リソースパス */
+  resourcePath: ResourcePath,
 };
 
 /** タイトルビュー */
@@ -30,26 +30,25 @@ export class TitleView {
   constructor(params: Params) {
     this._gameStartStream = new Subject();
     this._howToPlayStream = new Subject();
+    this._root = document.createElement('div');
 
-    const rootId = domUuid();
     const gameStartId = domUuid();
     const howToPlayId = domUuid();
-    params.dom.innerHTML = `
-      <div class="title" id="${rootId}">
-        <div class="title__logo">
-          <img class="title__logo__image" src="${resourceBasePath()}/logo.png"/>
-          <div class="title__logo__copy-right">(C) 2020 Yuusuke Takeuchi</div>
+    this._root.innerHTML = `
+      <div class="title__contents">
+        <img class="title__contents__logo" src="${params.resourcePath.get()}/logo.png"/>
+        <div class="title__contents__copy-rights">
+          <span class="title__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
         </div>
-        <div class="title__controllers">
-          <button class="title__controllers__game-start" id="${gameStartId}" >ゲームスタート</button>
-          <button class="title__controllers__how-to-play" id="${howToPlayId}">遊び方</button>
+        <div class="title__contents__controllers">
+          <button class="title__contents__controllers__game-start" data-id="${gameStartId}" >ゲームスタート</button>
+          <button class="title__contents__controllers__how-to-play" data-id="${howToPlayId}">遊び方</button>
         </div>
       </div>
     `;
+    this._root.style.backgroundImage = `url(${params.resourcePath.get()}/title-back.png)`;
 
-    this._root = document.getElementById(rootId) || document.createElement('div');
-
-    this._gameStart = document.getElementById(gameStartId) || document.createElement('div');
+    this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
       this._gameStartStream.next();
@@ -59,7 +58,7 @@ export class TitleView {
       this._gameStartStream.next();
     });
 
-    this._howToPlay = document.getElementById(howToPlayId) || document.createElement('div');
+    this._howToPlay = this._root.querySelector(`[data-id="${howToPlayId}"]`) || document.createElement('div');
     this._howToPlay.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
       this._howToPlayStream.next();
@@ -79,7 +78,7 @@ export class TitleView {
    */
   engage(state: TitleState): void {
     this._root.className = state.isVisible
-      ? 'title'
+      ? 'title landscape-only'
       : 'title--invisible';
   }
 
@@ -93,5 +92,14 @@ export class TitleView {
       gameStart: this._gameStartStream,
       howToPlay: this._howToPlayStream,
     };
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
   }
 }

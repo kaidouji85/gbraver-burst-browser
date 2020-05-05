@@ -24,4 +24,4 @@ module.exports = {
       BUILD_HASH: JSON.stringify(new Puid().generate())
     }),
   ]
-};
+}

@@ -14,9 +14,7 @@ export class DOMDialogs {
   _howToPlay: HowToPlay;
 
   constructor() {
-    const howToPlayDOM = document.getElementById("how-to-play")
-      || document.createElement('div');
-    this._howToPlay = new HowToPlay(howToPlayDOM);
+    this._howToPlay = new HowToPlay();
   }
 
   /** 遊び方ダイアログを表示する */
@@ -38,5 +36,16 @@ export class DOMDialogs {
     return {
       endHowToPlay: this._howToPlay.notifier().endHowToPlay,
     }
+  }
+
+  /**
+   * 本クラスに含まれる全てのルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElements(): HTMLElement[] {
+    return [
+      this._howToPlay.getRootHTMLElement()
+    ];
   }
 }

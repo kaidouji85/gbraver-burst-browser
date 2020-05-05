@@ -2,7 +2,7 @@
 
 
 /** アームドーザスプライト 基準X座標 */
-export const ARMDOZER_SPRITE_STANDARD_X = 150;
+export const ARMDOZER_SPRITE_STANDARD_X = 170;
 
 /** アームドーザスプライト 基準Y座標 */
 export const ARMDOZER_SPRITE_STANDARD_Y = 0;
