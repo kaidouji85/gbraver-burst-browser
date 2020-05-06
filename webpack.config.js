@@ -8,8 +8,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const hash = new Puid().generate();
 const BUILD_PATH = 'build/production';
-const BUILD_RESOURCE_PATH = `${hash}`;
+const BUILD_RESOURCE_PATH = `resources/${hash}`;
 const BUILD_INDEX_JS_PATH = `index.js`;
+const BUILD_FAVICON_PATH = 'favicon';
 
 module.exports = {
   mode: 'development',
@@ -60,7 +61,27 @@ module.exports = {
       {
         from: path.resolve(__dirname, "src/resources"),
         to: path.resolve(__dirname, BUILD_PATH, BUILD_RESOURCE_PATH)
-      }
+      },
+      {
+        from: path.resolve(__dirname, "src/favicon.ico"),
+        to: path.resolve(__dirname, BUILD_PATH)
+      },
+      {
+        from: path.resolve(__dirname, "src/favicon-16x16.png"),
+        to: path.resolve(__dirname, BUILD_PATH)
+      },
+      {
+        from: path.resolve(__dirname, "src/favicon-32x32.png"),
+        to: path.resolve(__dirname, BUILD_PATH)
+      },
+      {
+        from: path.resolve(__dirname, "src/manifest.json"),
+        to: path.resolve(__dirname, BUILD_PATH)
+      },
+      {
+        from: path.resolve(__dirname, "src/app-icon.png"),
+        to: path.resolve(__dirname, BUILD_PATH)
+      },
     ]),
     new webpack.DefinePlugin({
       GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(BUILD_RESOURCE_PATH),
