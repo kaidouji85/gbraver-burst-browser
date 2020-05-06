@@ -1,19 +1,20 @@
 // @flow
 
 import type {DOMScene} from "../dom-scene";
+import {MatchCardView} from "./view/match-card-view";
+import type {ResourcePath} from "../../../resource/path/resource-path";
 
+/**
+ * 対戦カード
+ */
 export class MatchCard implements DOMScene {
-  _root: HTMLElement;
+  _view: MatchCardView;
 
   /**
    * コンストラクタ
    */
-  constructor(): void {
-    this._root = document.createElement('div');
-    this._root.className = 'match-card';
-    this._root.innerHTML = `
-      対戦カード
-    `;
+  constructor(resourcePath: ResourcePath): void {
+    this._view = new MatchCardView(resourcePath);
   }
   
   /**
@@ -43,6 +44,6 @@ export class MatchCard implements DOMScene {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this._view.getRootHTMLElement();
   }
 }

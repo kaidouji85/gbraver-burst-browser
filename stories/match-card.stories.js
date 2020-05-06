@@ -8,6 +8,6 @@ export default {
 };
 
 export const Scene = domStub((resourcePath) => {
-  const scene = new MatchCard();
+  const scene = new MatchCard(resourcePath);
   return scene.getRootHTMLElement();
 });
