@@ -12,7 +12,13 @@ export class MatchCardView {
     this._root = document.createElement('div');
     this._root.className = 'match-card';
     this._root.innerHTML = `
-      対戦カード
+      <div class="match-card__contents">
+        <div class="match-card__contents__cards">
+          <img class="match-card__contents__cards__enemy" src="${resourcePath.get()}/armdozer/neo-landozer/player-select.png">
+          <div class="match-card__contents__cards__vs">vs</div>
+          <img class="match-card__contents__cards__player" src="${resourcePath.get()}/armdozer/shin-braver/player-select.png">
+        </div>
+      </div>
     `;
   }
 
