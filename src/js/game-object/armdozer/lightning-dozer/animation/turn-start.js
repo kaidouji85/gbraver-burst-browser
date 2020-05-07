@@ -16,8 +16,8 @@ export function turnStart(model: LightningDozerModel): Animate {
   return process(() => {
     model.animation.type = 'GUTS_UP';
     model.animation.frame = 0;
-  }).chain(tween(model.animation, t => t.to({frame: 1}, 300)))
-    .chain(delay(500))
+  }).chain(tween(model.animation, t => t.to({frame: 1}, 200)))
+    .chain(delay(300))
     .chain(process(() => {
       model.animation.type = 'GUTS_DOWN';
       model.animation.frame = 0;
