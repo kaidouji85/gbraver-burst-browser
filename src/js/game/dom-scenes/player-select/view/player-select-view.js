@@ -6,7 +6,7 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon-view";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {waiTime} from "../../../../wait/wait-time";
+import {waitTime} from "../../../../wait/wait-time";
 
 /**
  * イベント通知
@@ -115,7 +115,7 @@ export class PlayerSelectView {
           .map(v => v.hidden()),
         icon.selected()
       ])
-      await waiTime(2000);
+      await waitTime(2000);
 
       this._select.next(armdozerId);
     } catch(e) {
