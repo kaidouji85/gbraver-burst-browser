@@ -37,7 +37,7 @@ export class PlayerSelect implements DOMScene {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    // NOP
+    this._view.destructor();
   }
 
   /**

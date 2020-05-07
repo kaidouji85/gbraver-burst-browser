@@ -53,4 +53,45 @@ export class ArmdozerIconView {
       select: this._select
     };
   }
+
+  /**
+   * 選択された際のアニメーション
+   *
+   * @return アニメーションPromise
+   */
+  selected(): Promise<void> {
+    const animation = this._root.animate([
+      {transform: 'scale(1, 1)'},
+      {transform: 'scale(1.2, 1.2)'},
+      {transform: 'scale(1, 1)'},
+    ], 200);
+    return waitUntilFinished(animation);
+  }
+
+  /**
+   * 選択されなかった際のアニメーション
+   *
+   * @return アニメーションPromise
+   */
+  noSelected(): Promise<void> {
+    const animation = this._root.animate([
+      {opacity: 1, transform: 'scale(1, 1)'},
+      {opacity: 0, transform: 'scale(0.4, 0.4)'}
+    ], 200);
+    return waitUntilFinished(animation);
+  }
+}
+
+/**
+ * アニメーションが完了するまで待機する
+ *
+ * @param animation アニメーション
+ * @return アニメーションPromise
+ */
+export function waitUntilFinished(animation: Animation): Promise<void> {
+  return new Promise(resolve => {
+    animation.onfinish = () => {
+      resolve();
+    }
+  });
 }

@@ -1,10 +1,10 @@
 // @flow
 
-import type {PlayerSelectState} from "../state/player-select-state";
+import type {ArmdozerIcon, PlayerSelectState} from "../state/player-select-state";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon-view";
-import {merge, Observable} from "rxjs";
+import {merge, Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 
 /**
@@ -21,6 +21,8 @@ export class PlayerSelectView {
   _root: HTMLElement;
   _armdozers: HTMLElement;
   _armdozerIcons: ArmdozerIconView[];
+  _select: Subject<ArmDozerId>;
+  _subscriptions: Subscription[];
 
   /**
    * コンストラクタ
@@ -29,6 +31,8 @@ export class PlayerSelectView {
    * @param initialState 初期ステート
    */
   constructor(resourcePath: ResourcePath, initialState: PlayerSelectState) {
+    this._select = new Subject();
+
     const armdozersId = domUuid();
     this._root = document.createElement('div');
     this._root.innerHTML = `
@@ -47,7 +51,18 @@ export class PlayerSelectView {
         this._armdozers.appendChild(element);
       });
 
+    this._subscriptions = this._armdozerIcons
+      .map(icon => icon.notifier().select.subscribe(armdozerId => {
+        this._onSelected(icon, armdozerId);
+      }));
+
     this.engage(initialState);
+  }
+
+  destructor(): void {
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -76,9 +91,23 @@ export class PlayerSelectView {
    * @return 取得結果
    */
   notifier(): Notifier {
-    const selects: Observable<ArmDozerId>[] = this._armdozerIcons.map(icon => icon.notifier().select);
     return {
-      select: merge(...selects)
+      select: this._select
     };
+  }
+
+  async _onSelected(icon: ArmdozerIconView, armdozerId: ArmDozerId): Promise<void> {
+    try {
+      await Promise.all([
+        ...this._armdozerIcons
+          .filter(v => v !== icon)
+          .map(v => v.noSelected()),
+        icon.selected()
+      ])
+
+      this._select.next(armdozerId);
+    } catch(e) {
+      throw e;
+    }
   }
 }
