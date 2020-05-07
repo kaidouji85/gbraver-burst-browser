@@ -26,7 +26,7 @@ import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/player-select/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
-import {waitAnimationFrame} from "../animation-frame/wait-animation-frame";
+import {waitAnimationFrame} from "../wait/wait-animation-frame";
 
 /** ゲーム全体の管理を行う */
 export class Game {
