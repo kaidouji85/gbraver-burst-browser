@@ -17,7 +17,7 @@ export function armHammer(model: LightningDozerModel): Animate {
     model.animation.type = 'HM_ATTACK';
     model.animation.frame = 0;
   }).chain(all(
-    tween(model.animation, t => t.to({frame: 1}, 100)),
-    tween(model.position, t => t.to({x: '-20'}, 100))
+    tween(model.animation, t => t.to({frame: 1}, 150)),
+    tween(model.position, t => t.to({x: '-40'}, 150))
   ));
 }
