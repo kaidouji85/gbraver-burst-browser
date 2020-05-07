@@ -15,6 +15,8 @@ import {delay} from "../../../../animation/delay";
  */
 export function hmToStand(model: LightningDozerModel): Animate {
   return all(
+    tween(model.position, t => t.to({x: '+80'}, 300)),
+
     process(() => {
       model.animation.type = 'HM_TO_STAND';
       model.animation.frame = 0;
@@ -22,7 +24,6 @@ export function hmToStand(model: LightningDozerModel): Animate {
     ).chain(process(() => {
         model.animation.type = 'STAND';
         model.animation.frame = 0;
-    })).chain(delay(500)
-    ).chain(tween(model.position, t => t.to({x: '+80'}, 300)))
+    }))
   );
 }
