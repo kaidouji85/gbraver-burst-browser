@@ -3,6 +3,7 @@
 import type {ArmdozerIcon} from "../state/player-select-state";
 import {Observable, Subject} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
+import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 
 /**
  * イベント通知
@@ -55,43 +56,37 @@ export class ArmdozerIconView {
   }
 
   /**
-   * 選択された際のアニメーション
+   * アイコン選択アニメーション
    *
-   * @return アニメーションPromise
+   * @return アニメーション
    */
   selected(): Promise<void> {
     const animation = this._root.animate([
       {transform: 'scale(1, 1)'},
-      {transform: 'scale(1.2, 1.2)'},
+      {transform: 'scale(1.1, 1.1)'},
       {transform: 'scale(1, 1)'},
-    ], 200);
-    return waitUntilFinished(animation);
+    ], {
+      duration: 300,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    return waitFinishAnimation(animation);
   }
 
   /**
-   * 選択されなかった際のアニメーション
+   * アイコンを非表示にする
    *
-   * @return アニメーションPromise
+   * @return アニメーション
    */
-  noSelected(): Promise<void> {
+  hidden(): Promise<void> {
     const animation = this._root.animate([
       {opacity: 1, transform: 'scale(1, 1)'},
-      {opacity: 0, transform: 'scale(0.4, 0.4)'}
-    ], 200);
-    return waitUntilFinished(animation);
+      {opacity: 0, transform: 'scale(0.9, 0.9)'}
+    ], {
+      duration: 300,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    return waitFinishAnimation(animation);
   }
-}
-
-/**
- * アニメーションが完了するまで待機する
- *
- * @param animation アニメーション
- * @return アニメーションPromise
- */
-export function waitUntilFinished(animation: Animation): Promise<void> {
-  return new Promise(resolve => {
-    animation.onfinish = () => {
-      resolve();
-    }
-  });
 }

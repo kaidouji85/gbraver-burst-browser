@@ -1,11 +1,12 @@
 // @flow
 
-import type {ArmdozerIcon, PlayerSelectState} from "../state/player-select-state";
+import type {PlayerSelectState} from "../state/player-select-state";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon-view";
-import {merge, Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
+import {waiTime} from "../../../../wait/wait-time";
 
 /**
  * イベント通知
@@ -59,6 +60,9 @@ export class PlayerSelectView {
     this.engage(initialState);
   }
 
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this._subscriptions.forEach(v => {
       v.unsubscribe();
@@ -96,14 +100,22 @@ export class PlayerSelectView {
     };
   }
 
+  /**
+   * アイコンが選択された際の処理
+   *
+   * @param icon 選択されたアイコン
+   * @param armdozerId 選択したアームドーザID
+   * @return 処理結果
+   */
   async _onSelected(icon: ArmdozerIconView, armdozerId: ArmDozerId): Promise<void> {
     try {
       await Promise.all([
         ...this._armdozerIcons
           .filter(v => v !== icon)
-          .map(v => v.noSelected()),
+          .map(v => v.hidden()),
         icon.selected()
       ])
+      await waiTime(2000);
 
       this._select.next(armdozerId);
     } catch(e) {
