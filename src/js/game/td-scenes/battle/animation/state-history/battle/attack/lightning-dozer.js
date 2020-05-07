@@ -101,13 +101,14 @@ type AttackResult = NormalHit | CriticalHit;
  */
 function attack(param: LightningDozerBattleAnimationParam<AttackResult>): Animate {
   return all(
-    param.attackerSprite.charge()
-      .chain(delay(800))
+    delay(800)
+      .chain(param.attackerSprite.charge())
+      .chain(delay(50))
       .chain(param.attackerSprite.armHammer())
       .chain(delay(2000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(1200)
+    delay(1100)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
@@ -126,12 +127,12 @@ function attack(param: LightningDozerBattleAnimationParam<AttackResult>): Animat
 function guard(param: LightningDozerBattleAnimationParam<Guard>): Animate {
   return all(
     param.attackerSprite.charge()
-      .chain(delay(800))
+      .chain(delay(400))
       .chain(param.attackerSprite.armHammer())
       .chain(delay(2000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(1200)
+    delay(800)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
@@ -150,12 +151,12 @@ function guard(param: LightningDozerBattleAnimationParam<Guard>): Animate {
 function miss(param: LightningDozerBattleAnimationParam<Miss>): Animate {
   return all(
     param.attackerSprite.charge()
-      .chain(delay(800))
+      .chain(delay(400))
       .chain(param.attackerSprite.armHammer())
       .chain(delay(1000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(1200)
+    delay(800)
       .chain(param.defenderSprite.avoid())
       .chain(delay(2000))
       .chain(param.defenderSprite.avoidToStand()),
@@ -174,12 +175,12 @@ type DownResult = NormalHit | Guard | CriticalHit;
 function down(param: LightningDozerBattleAnimationParam<DownResult>): Animate {
   return all(
     param.attackerSprite.charge()
-      .chain(delay(800))
+      .chain(delay(400))
       .chain(param.attackerSprite.armHammer())
       .chain(delay(2000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(1200)
+    delay(800)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
