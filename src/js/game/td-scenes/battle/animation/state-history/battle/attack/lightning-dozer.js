@@ -107,7 +107,7 @@ function attack(param: LightningDozerBattleAnimationParam<AttackResult>): Animat
       .chain(delay(2000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(900)
+    delay(1000)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
@@ -131,7 +131,7 @@ function guard(param: LightningDozerBattleAnimationParam<Guard>): Animate {
       .chain(delay(2000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(900)
+    delay(1000)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
@@ -155,7 +155,7 @@ function miss(param: LightningDozerBattleAnimationParam<Miss>): Animate {
       .chain(delay(1000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(900)
+    delay(1000)
       .chain(param.defenderSprite.avoid())
       .chain(delay(2000))
       .chain(param.defenderSprite.avoidToStand()),
@@ -179,7 +179,7 @@ function down(param: LightningDozerBattleAnimationParam<DownResult>): Animate {
       .chain(delay(2000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(900)
+    delay(1000)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),

@@ -14,7 +14,7 @@ import {all} from "../../../../animation/all";
  */
 export function hmToStand(model: LightningDozerModel): Animate {
   return all(
-    tween(model.position, t => t.to({x: '+40'}, 400)),
+    tween(model.position, t => t.to({x: '+20'}, 400)),
 
     process(() => {
       model.animation.type = 'HM_TO_STAND';

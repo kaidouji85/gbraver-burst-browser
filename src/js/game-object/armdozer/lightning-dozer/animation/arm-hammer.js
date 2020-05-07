@@ -18,6 +18,6 @@ export function armHammer(model: LightningDozerModel): Animate {
     model.animation.frame = 0;
   }).chain(all(
     tween(model.animation, t => t.to({frame: 1}, 150)),
-    tween(model.position, t => t.to({x: '-40'}, 150))
+    tween(model.position, t => t.to({x: '-20'}, 150))
   ));
 }
