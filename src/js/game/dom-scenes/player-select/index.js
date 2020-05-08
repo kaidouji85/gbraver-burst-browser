@@ -9,6 +9,7 @@ import {Observable, Subject, Subscription} from "rxjs";
 import type {SelectionComplete} from "../../../action/game/selection-complete";
 import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 import type {SelectArmdozer} from "../../../action/player-select/select-armdozer";
+import {waitTime} from "../../../wait/wait-time";
 
 /**
  * イベント通知
@@ -93,10 +94,34 @@ export class PlayerSelect implements DOMScene {
    *
    * @param action アクション
    */
-  _onArmdozerIconPush(action: SelectArmdozer): void {
-    this._selectionComplete.next({
-      type: 'SelectionComplete',
-      armdozerId: action.armDozerId,
-    });
+  async _onArmdozerIconPush(action: SelectArmdozer): Promise<void> {
+    try {
+      if (!this._state.canOperation) {
+        return;
+      }
+
+      this._state.canOperation = false;
+
+      const selected = this._view.armdozerIcons
+        .find(icon => icon.armDozerId === action.armDozerId);
+      const other = this._view.armdozerIcons
+        .filter(icon => icon.armDozerId !== action.armDozerId);
+      if (!selected) {
+        return;
+      }
+
+      await Promise.all([
+        selected.selected(),
+        ...other.map(v => v.hidden())
+      ]);
+      await waitTime(2000);
+
+      this._selectionComplete.next({
+        type: 'SelectionComplete',
+        armdozerId: action.armDozerId,
+      });
+    } catch(e) {
+      throw e;
+    }
   }
 }

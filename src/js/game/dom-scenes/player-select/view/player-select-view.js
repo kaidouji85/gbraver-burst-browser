@@ -26,9 +26,9 @@ export type Notifier = {
  * プレイヤーセレクト ビュー
  */
 export class PlayerSelectView {
+  armdozerIcons: ArmdozerIconView[];
   _root: HTMLElement;
   _armdozers: HTMLElement;
-  _armdozerIcons: ArmdozerIconView[];
   _select: Observable<SelectArmdozer>;
 
   /**
@@ -50,15 +50,15 @@ export class PlayerSelectView {
     `;
 
     this._armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
-    this._armdozerIcons = armDozerIds
+    this.armdozerIcons = armDozerIds
       .map(armDozerId => createArmdozerIcon(armDozerId, resourcePath));
-    this._armdozerIcons
+    this.armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
         this._armdozers.appendChild(element);
       });
 
-    const selects: Observable<SelectArmdozer>[] = this._armdozerIcons
+    const selects: Observable<SelectArmdozer>[] = this.armdozerIcons
       .map(icon => icon.notifier().select.pipe(
         map(() => ({
           type: 'SelectArmdozer',
