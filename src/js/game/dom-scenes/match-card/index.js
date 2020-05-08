@@ -25,20 +25,6 @@ export class MatchCard implements DOMScene {
   }
 
   /**
-   * シーンを表示する
-   */
-  show(): void {
-    // NOP
-  }
-
-  /**
-   * シーンを非表示にする
-   */
-  hidden(): void {
-    // NOP
-  }
-
-  /**
    * ルートHTML要素を取得する
    *
    * @return ルートHTML要素
