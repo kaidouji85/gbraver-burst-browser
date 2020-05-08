@@ -6,7 +6,7 @@ import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
 import type {ResourcePath} from "../../resource/path/resource-path";
 import {PlayerSelect} from "./player-select";
 import type {DOMScene} from "./dom-scene";
-import type {SelectionComplete} from "../../action/player-select/selection-complete";
+import type {SelectionComplete} from "../../action/game/selection-complete";
 import {Loading} from "./loading";
 import type {LoadingAction} from "../../action/loading/loading";
 

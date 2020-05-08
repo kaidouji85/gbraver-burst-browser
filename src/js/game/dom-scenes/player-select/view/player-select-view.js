@@ -2,11 +2,12 @@
 
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
-import {ArmdozerIconView} from "./armdozer-icon/armdozer-icon-view";
+import {ArmdozerIconView} from "./armdozer-icon-view";
 import {merge, Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {createArmdozerIcon} from "./armdozer-icon";
+import {createArmdozerIcon} from "./armdozer-icon-creator";
 import {map} from "rxjs/operators";
+import type {SelectArmdozer} from "../../../../action/player-select/select-armdozer";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select';
@@ -18,7 +19,7 @@ export const INVISIBLE_ROOT_CLASS_NAME = 'player-select--invisible';
  * イベント通知
  */
 export type Notifier = {
-  select: Observable<ArmdozerIconView>;
+  select: Observable<SelectArmdozer>;
 };
 
 /**
@@ -28,7 +29,7 @@ export class PlayerSelectView {
   _root: HTMLElement;
   _armdozers: HTMLElement;
   _armdozerIcons: ArmdozerIconView[];
-  _select: Observable<ArmdozerIconView>;
+  _select: Observable<SelectArmdozer>;
 
   /**
    * コンストラクタ
@@ -57,13 +58,16 @@ export class PlayerSelectView {
         this._armdozers.appendChild(element);
       });
 
-    const selects: Observable<ArmdozerIconView>[] = this._armdozerIcons
+    const selects: Observable<SelectArmdozer>[] = this._armdozerIcons
       .map(icon => icon.notifier().select.pipe(
-        map(() => icon)
+        map(() => ({
+          type: 'SelectArmdozer',
+          armDozerId: icon.armDozerId
+        }))
       ));
     this._select = merge(...selects);
   }
-  
+
   /**
    * 表示する
    */

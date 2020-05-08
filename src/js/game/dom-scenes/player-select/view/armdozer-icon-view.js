@@ -2,7 +2,7 @@
 
 import {Observable, Subject} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {waitFinishAnimation} from "../../../../../wait/wait-finish-animation";
+import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 
 /**
  * イベント通知

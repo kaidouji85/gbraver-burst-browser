@@ -2,7 +2,7 @@
 
 import {ArmdozerIconView} from "./armdozer-icon-view";
 import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
-import type {ResourcePath} from "../../../../../resource/path/resource-path";
+import type {ResourcePath} from "../../../../resource/path/resource-path";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
 
 /**

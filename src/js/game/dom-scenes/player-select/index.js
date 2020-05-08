@@ -5,10 +5,10 @@ import {PlayerSelectView} from "./view/player-select-view";
 import type {PlayerSelectState} from "./state/player-select-state";
 import {createInitialState} from "./state/initial-state";
 import type {DOMScene} from "../dom-scene";
-import {Observable} from "rxjs";
-import type {SelectionComplete} from "../../../action/player-select/selection-complete";
-import {map} from "rxjs/operators";
+import {Observable, Subject, Subscription} from "rxjs";
+import type {SelectionComplete} from "../../../action/game/selection-complete";
 import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import type {SelectArmdozer} from "../../../action/player-select/select-armdozer";
 
 /**
  * イベント通知
@@ -23,6 +23,8 @@ export type Notifier = {
 export class PlayerSelect implements DOMScene {
   _state: PlayerSelectState;
   _view: PlayerSelectView;
+  _selectionComplete: Subject<SelectionComplete>;
+  _subscription: Subscription;
 
   /**
    * コンストラクタ
@@ -30,6 +32,7 @@ export class PlayerSelect implements DOMScene {
    * @param resourcePath リソースパス
    */
   constructor(resourcePath: ResourcePath) {
+    this._selectionComplete = new Subject();
     this._state = createInitialState(resourcePath);
 
     const armDozerIds = [
@@ -38,12 +41,17 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
     this._view = new PlayerSelectView(resourcePath, armDozerIds);
+
+    this._subscription = this._view.notifier().select.subscribe(icon => {
+      this._onArmdozerIconPush(icon);
+    });
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
+    this._subscription.unsubscribe();
   }
 
   /**
@@ -76,12 +84,19 @@ export class PlayerSelect implements DOMScene {
    */
   notifier(): Notifier {
     return {
-      selectionComplete: this._view.notifier().select.pipe(
-        map(icon => ({
-          type: 'SelectionComplete',
-          armdozerId: icon.armDozerId
-        }))
-      )
+      selectionComplete: this._selectionComplete
     };
+  }
+
+  /**
+   * アームドーザアイコンが選択された際の処理
+   *
+   * @param action アクション
+   */
+  _onArmdozerIconPush(action: SelectArmdozer): void {
+    this._selectionComplete.next({
+      type: 'SelectionComplete',
+      armdozerId: action.armDozerId,
+    });
   }
 }
