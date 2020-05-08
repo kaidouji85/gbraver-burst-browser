@@ -114,7 +114,7 @@ export class PlayerSelect implements DOMScene {
         selected.selected(),
         ...other.map(v => v.hidden())
       ]);
-      await waitTime(2000);
+      await waitTime(1000);
 
       this._selectionComplete.next({
         type: 'SelectionComplete',
