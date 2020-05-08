@@ -24,7 +24,7 @@ import {createInitialState} from "./state/initial-state";
 import {createBattleRoom} from "./state/battle-room";
 import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
-import type {SelectionComplete} from "../action/player-select/selection-complete";
+import type {SelectionComplete} from "../action/game/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 
