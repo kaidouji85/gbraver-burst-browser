@@ -11,10 +11,6 @@ import type {SelectArmdozer} from "../../../../action/player-select/select-armdo
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select';
-
-/** 非表示 ルートHTML要素 class */
-export const INVISIBLE_ROOT_CLASS_NAME = 'player-select--invisible';
-
 /**
  * イベント通知
  */
@@ -66,20 +62,6 @@ export class PlayerSelectView {
         }))
       ));
     this._select = merge(...selects);
-  }
-
-  /**
-   * 本ビューを表示する
-   */
-  show(): void {
-    this._root.className = ROOT_CLASS_NAME;
-  }
-
-  /**
-   * 本ビューを非表示にする
-   */
-  hidden(): void {
-    this._root.className = INVISIBLE_ROOT_CLASS_NAME;
   }
 
   /**

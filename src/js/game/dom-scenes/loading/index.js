@@ -6,7 +6,6 @@ import {progress} from "./state/progress";
 import type {LoadingAction, LoadingProgress} from "../../../action/loading/loading";
 import {Observable, Subscription} from "rxjs";
 import {LoadingView} from "./view/loading-view";
-import {hidden, show} from "./state/visible";
 import type {DOMScene} from "../dom-scene";
 
 /** ローディング */
@@ -37,22 +36,6 @@ export class Loading implements DOMScene {
    */
   getRootHTMLElement(): HTMLElement {
     return this._view.getRootHTMLElement();
-  }
-
-  /**
-   * 本シーンを表示する
-   */
-  show(): void {
-    this._state = show(this._state);
-    this._view.engage(this._state);
-  }
-
-  /**
-   * 本シーンを非表示にする
-   */
-  hidden(): void {
-    this._state = hidden(this._state);
-    this._view.engage(this._state);
   }
 
   /**

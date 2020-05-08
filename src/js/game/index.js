@@ -66,7 +66,7 @@ export class Game {
     const elements = [
       ...this._interruptScenes.getRootHTMLElements(),
       ...this._domDialogs.getRootHTMLElements(),
-      ...this._domScenes.getRootHTMLElements(),
+      this._domScenes.getRootHTMLElement(),
       this._tdScenes.getRendererDOM(),
     ];
     elements.forEach(element => {
@@ -101,6 +101,7 @@ export class Game {
   /** ゲームの初期化を行う */
   async initialize(): Promise<void> {
     try {
+      this._domScenes.showTitle();
       if (isDevelopment()) {
         viewPerformanceStats(document.body);
       }

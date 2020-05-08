@@ -9,7 +9,6 @@ import type {TitleState} from "./title-state";
  */
 export function createInitialState(): TitleState {
   return {
-    isVisible: true,
     canOperation: true
   };
 }
