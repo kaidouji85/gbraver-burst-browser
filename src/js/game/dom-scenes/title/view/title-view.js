@@ -47,6 +47,7 @@ export class TitleView {
       </div>
     `;
     this._root.style.backgroundImage = `url(${params.resourcePath.get()}/title-back.png)`;
+    this._root.className = 'title landscape-only';
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {
@@ -67,19 +68,6 @@ export class TitleView {
       e.preventDefault();
       this._howToPlayStream.next();
     });
-
-    this.engage(params.initialState);
-  }
-
-  /**
-   * モデルをビューに反映させる
-   *
-   * @param state ステート
-   */
-  engage(state: TitleState): void {
-    this._root.className = state.isVisible
-      ? 'title landscape-only'
-      : 'title--invisible';
   }
 
   /**

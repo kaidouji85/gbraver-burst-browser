@@ -24,9 +24,9 @@ import {createInitialState} from "./state/initial-state";
 import {createBattleRoom} from "./state/battle-room";
 import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
-import type {SelectionComplete} from "../action/player-select/selection-complete";
+import type {SelectionComplete} from "../action/game/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
-import {waitAnimationFrame} from "../animation-frame/wait-animation-frame";
+import {waitAnimationFrame} from "../wait/wait-animation-frame";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -66,7 +66,7 @@ export class Game {
     const elements = [
       ...this._interruptScenes.getRootHTMLElements(),
       ...this._domDialogs.getRootHTMLElements(),
-      ...this._domScenes.getRootHTMLElements(),
+      this._domScenes.getRootHTMLElement(),
       this._tdScenes.getRendererDOM(),
     ];
     elements.forEach(element => {
@@ -101,6 +101,7 @@ export class Game {
   /** ゲームの初期化を行う */
   async initialize(): Promise<void> {
     try {
+      this._domScenes.showTitle();
       if (isDevelopment()) {
         viewPerformanceStats(document.body);
       }
