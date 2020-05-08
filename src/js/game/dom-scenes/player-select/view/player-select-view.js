@@ -45,7 +45,8 @@ export class PlayerSelectView {
     `;
 
     this._armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
-    this._armdozerIcons = initialState.armdozerIcons.map(icon => new ArmdozerIconView(icon));
+    this._armdozerIcons = initialState.armdozerIcons
+      .map(icon => new ArmdozerIconView(icon.armdozerId, icon.image));
     this._armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
@@ -53,8 +54,8 @@ export class PlayerSelectView {
       });
 
     this._subscriptions = this._armdozerIcons
-      .map(icon => icon.notifier().select.subscribe(armdozerId => {
-        this._onSelected(icon, armdozerId);
+      .map(icon => icon.notifier().select.subscribe(() => {
+        this._onSelected(icon);
       }));
 
     this.engage(initialState);
@@ -104,10 +105,9 @@ export class PlayerSelectView {
    * アイコンが選択された際の処理
    *
    * @param icon 選択されたアイコン
-   * @param armdozerId 選択したアームドーザID
    * @return 処理結果
    */
-  async _onSelected(icon: ArmdozerIconView, armdozerId: ArmDozerId): Promise<void> {
+  async _onSelected(icon: ArmdozerIconView): Promise<void> {
     try {
       await Promise.all([
         ...this._armdozerIcons
@@ -117,7 +117,7 @@ export class PlayerSelectView {
       ])
       await waitTime(2000);
 
-      this._select.next(armdozerId);
+      this._select.next(icon.armDozerId);
     } catch(e) {
       throw e;
     }

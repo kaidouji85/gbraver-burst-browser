@@ -1,6 +1,5 @@
 // @flow
 
-import type {ArmdozerIcon} from "../state/player-select-state";
 import {Observable, Subject} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
@@ -9,29 +8,31 @@ import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
  * イベント通知
  */
 export type Notifier = {
-  select: Observable<ArmDozerId>
+  select: Observable<void>
 };
 
 /**
  * アームドーザアイコン ビュー
  */
 export class ArmdozerIconView {
+  armDozerId: ArmDozerId;
   _root: HTMLElement;
-  _select: Subject<ArmDozerId>;
+  _select: Subject<void>;
 
-  constructor(state: ArmdozerIcon) {
-    this._select = new Subject<ArmDozerId>();
+  constructor(armDozerId: ArmDozerId, imagePath: string) {
+    this.armDozerId = armDozerId;
+    this._select = new Subject();
 
     this._root = document.createElement('img');
-    this._root.src = state.image;
+    this._root.src = imagePath;
     this._root.className = 'player-select__armdozers__icon';
     this._root.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
-      this._select.next(state.armdozerId);
+      this._select.next();
     });
     this._root.addEventListener('touchstart', (e: TouchEvent) => {
       e.preventDefault();
-      this._select.next(state.armdozerId);
+      this._select.next();
     });
   }
 
