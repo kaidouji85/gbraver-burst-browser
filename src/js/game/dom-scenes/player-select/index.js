@@ -8,6 +8,7 @@ import type {DOMScene} from "../dom-scene";
 import {Observable} from "rxjs";
 import type {SelectionComplete} from "../../../action/player-select/selection-complete";
 import {map} from "rxjs/operators";
+import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 
 /**
  * イベント通知
@@ -30,7 +31,13 @@ export class PlayerSelect implements DOMScene {
    */
   constructor(resourcePath: ResourcePath) {
     this._state = createInitialState(resourcePath);
-    this._view = new PlayerSelectView(resourcePath, this._state);
+
+    const armDozerIds = [
+      ArmDozerIdList.NEO_LANDOZER,
+      ArmDozerIdList.SHIN_BRAVER,
+      ArmDozerIdList.LIGHTNING_DOZER,
+    ];
+    this._view = new PlayerSelectView(resourcePath, armDozerIds);
   }
 
   /**

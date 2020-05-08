@@ -1,6 +1,5 @@
 // @flow
 
-import type {PlayerSelectState} from "../state/player-select-state";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon/armdozer-icon-view";
@@ -36,9 +35,9 @@ export class PlayerSelectView {
    * コンストラクタ
    *
    * @param resourcePath リソースパス
-   * @param initialState 初期ステート
+   * @param armDozerIds アームドーザIDリスト
    */
-  constructor(resourcePath: ResourcePath, initialState: PlayerSelectState) {
+  constructor(resourcePath: ResourcePath, armDozerIds: ArmDozerId[]) {
     this._select = new Subject();
 
     const armdozersId = domUuid();
@@ -53,8 +52,8 @@ export class PlayerSelectView {
     `;
 
     this._armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
-    this._armdozerIcons = initialState.armdozerIcons
-      .map(icon => createArmdozerIcon(icon.armdozerId, resourcePath));
+    this._armdozerIcons = armDozerIds
+      .map(armDozerId => createArmdozerIcon(armDozerId, resourcePath));
     this._armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
