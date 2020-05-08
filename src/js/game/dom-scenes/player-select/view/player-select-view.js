@@ -9,6 +9,12 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../../../wait/wait-time";
 import {createArmdozerIcon} from "./armdozer-icon";
 
+/** ルートHTML要素 class */
+export const ROOT_CLASS_NAME = 'player-select';
+
+/** 非表示 ルートHTML要素 class */
+export const INVISIBLE_ROOT_CLASS_NAME = 'player-select--invisible';
+
 /**
  * イベント通知
  */
@@ -37,6 +43,7 @@ export class PlayerSelectView {
 
     const armdozersId = domUuid();
     this._root = document.createElement('div');
+    this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
       <div class="player-select__contents">
         <span class="player-select__contents__caption">搭乗機を選択してください</span>
@@ -58,8 +65,6 @@ export class PlayerSelectView {
       .map(icon => icon.notifier().select.subscribe(() => {
         this._onSelected(icon);
       }));
-
-    this.engage(initialState);
   }
 
   /**
@@ -72,14 +77,17 @@ export class PlayerSelectView {
   }
 
   /**
-   * ステートをビューに反映させる
-   *
-   * @param state ステート
+   * 表示する
    */
-  engage(state: PlayerSelectState): void {
-    this._root.className = state.isVisible
-      ? 'player-select'
-      : 'player-select--invisible';
+  show(): void {
+    this._root.className = ROOT_CLASS_NAME;
+  }
+
+  /**
+   * 非表示にする
+   */
+  hidden(): void {
+    this._root.className = INVISIBLE_ROOT_CLASS_NAME;
   }
 
   /**

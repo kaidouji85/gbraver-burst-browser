@@ -53,16 +53,14 @@ export class PlayerSelect implements DOMScene {
    * 本シーンを表示する
    */
   show(): void {
-    this._state.isVisible = true;
-    this._view.engage(this._state);
+    this._view.show();
   }
 
   /**
    * 本シーンを非表示にする
    */
   hidden(): void {
-    this._state.isVisible = false;
-    this._view.engage(this._state);
+    this._view.hidden();
   }
 
   /**
