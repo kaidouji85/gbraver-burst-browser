@@ -37,9 +37,7 @@ export class LoadingView {
    */
   engage(state: LoadingState): void {
     this._root.className = 'loading';
-    this._root.style.display = state.isVisible
-      ? 'flex'
-      : 'none';
+    this._root.style.display = 'flex';
     this._text.innerText = `LOADING... ${Math.floor(state.completedRate * 100)}%`;
     this._bar.style.width = `${state.completedRate * 100}%`
   }

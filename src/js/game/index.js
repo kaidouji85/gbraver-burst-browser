@@ -101,6 +101,7 @@ export class Game {
   /** ゲームの初期化を行う */
   async initialize(): Promise<void> {
     try {
+      this._domScenes.showTitle();
       if (isDevelopment()) {
         viewPerformanceStats(document.body);
       }
