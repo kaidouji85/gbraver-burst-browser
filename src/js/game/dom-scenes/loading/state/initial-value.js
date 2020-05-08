@@ -9,7 +9,6 @@ import type {LoadingState} from "./loading-state";
  */
 export function createInitialState(): LoadingState {
   return {
-    isVisible: false,
     completedRate: 0
   };
 }

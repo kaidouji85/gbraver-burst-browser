@@ -1,14 +1,14 @@
 // @flow
 
-import {Observable} from "rxjs";
-import {Title} from "./title";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
 import type {ResourcePath} from "../../resource/path/resource-path";
-import {PlayerSelect} from "./player-select";
-import type {DOMScene} from "./dom-scene";
-import type {SelectionComplete} from "../../action/player-select/selection-complete";
-import {Loading} from "./loading";
+import type {SelectionComplete} from "../../action/game/selection-complete";
 import type {LoadingAction} from "../../action/loading/loading";
+import type {DOMScene} from "./dom-scene";
+import {Loading} from "./loading";
+import {Title} from "./title";
+import {PlayerSelect} from "./player-select";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -28,28 +28,29 @@ type Notifier = {
  * 本クラス配下のいずれか1シーンのみが表示される想定
  */
 export class DOMScenes {
-  _title: Title;
-  _playerSelect: PlayerSelect;
-  _loading: Loading;
-  _notifier: Notifier;
+  _resourcePath: ResourcePath;
+  _root: HTMLElement;
+  _scene: ?DOMScene;
+  _loading: Observable<LoadingAction>;
+  _pushGameStart: Subject<PushGameStart>;
+  _pushHowToPlay: Subject<PushHowToPlay>;
+  _selectionComplete: Subject<SelectionComplete>;
+  _sceneSubscriptions: Subscription[];
 
   constructor(param: Param) {
-    this._title = new Title(param.resourcePath);
-    this._playerSelect = new PlayerSelect(param.resourcePath);
-    this._loading = new Loading(param.loading);
-
-    const titleNotifier = this._title.notifier();
-    const playerSelectNotifier = this._playerSelect.notifier();
-    this._notifier = {
-      pushGameStart: titleNotifier.pushGameStart,
-      pushHowToPlay: titleNotifier.pushHowToPlay,
-      selectionComplete: playerSelectNotifier.selectionComplete,
-    };
+    this._resourcePath = param.resourcePath;
+    this._loading = param.loading;
+    this._root = document.createElement('div');
+    this._pushGameStart = new Subject();
+    this._pushHowToPlay = new Subject();
+    this._selectionComplete = new Subject();
+    this._sceneSubscriptions = [];
+    this._scene = null;
   }
 
   /** デストラクタ相当の処理 */
   destructor() {
-    // NOP
+    this._removeCurrentScene();
   }
 
   /**
@@ -58,26 +59,50 @@ export class DOMScenes {
    * @return イベント通知ストリーム
    */
   notifier(): Notifier {
-    return this._notifier;
+    return {
+      pushGameStart: this._pushGameStart,
+      pushHowToPlay: this._pushHowToPlay,
+      selectionComplete: this._selectionComplete,
+    }
   }
 
   /**
    * ローディング画面を表示する
    */
   showLoading(): void {
-    this._showScene(this._loading);
+    this._removeCurrentScene();
+    const scene = new Loading(this._loading);
+    this._scene = scene
+    this._root.appendChild(scene.getRootHTMLElement());
   }
 
   /** タイトルを表示する */
   showTitle(): void {
-    this._showScene(this._title);
+    this._removeCurrentScene();
+
+    const scene = new Title(this._resourcePath);
+    const notifier = scene.notifier();
+    this._sceneSubscriptions = [
+      notifier.pushGameStart.subscribe(this._pushGameStart),
+      notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
+    ];
+    this._scene = scene;
+    this._root.appendChild(scene.getRootHTMLElement());
   }
 
   /**
    * プレイヤーセレクトを表示する
    */
   showPlayerSelect(): void {
-    this._showScene(this._playerSelect);
+    this._removeCurrentScene();
+
+    const scene = new PlayerSelect(this._resourcePath);
+    const notifier = scene.notifier();
+    this._sceneSubscriptions = [
+      notifier.selectionComplete.subscribe(this._selectionComplete)
+    ];
+    this._scene = scene;
+    this._root.appendChild(scene.getRootHTMLElement());
   }
 
   /**
@@ -85,46 +110,29 @@ export class DOMScenes {
    * 本メソッドは、3Dシーンを表示する前に呼ばれる想定である
    */
   hidden(): void {
-    this._getDOMScenes().forEach(scene => {
-      scene.hidden();
+    this._removeCurrentScene();
+  }
+
+  /**
+   * 本クラスのルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
+  }
+
+  /**
+   * 現在表示しているシーンを取り除く
+   */
+  _removeCurrentScene(): void {
+    this._scene && this._scene.destructor();
+    this._scene && this._scene.getRootHTMLElement().remove();
+    this._scene = null;
+
+    this._sceneSubscriptions.forEach(v => {
+      v.unsubscribe();
     });
-  }
-
-  /**
-   * 本クラスに含まれる全てのルートHTML要素を取得する
-   *
-   * @return 取得結果
-   */
-  getRootHTMLElements(): HTMLElement[] {
-    return this._getDOMScenes()
-      .map(scene => scene.getRootHTMLElement());
-  }
-
-  /**
-   * 本クラスに含まれる全てのシーンを取得する
-   *
-   * @return 取得結果
-   */
-  _getDOMScenes(): DOMScene[] {
-    return [
-      this._loading,
-      this._title,
-      this._playerSelect
-    ];
-  }
-
-  /**
-   * 特定のシーンだけを表示するヘルパーメソッド
-   * 指定したシーン以外は非表示にする
-   *
-   * @param target 表示するシーン
-   */
-  _showScene(target: DOMScene): void {
-    target.show();
-    this._getDOMScenes()
-      .filter(scene => scene !== target)
-      .forEach(scene => {
-        scene.hidden();
-      });
+    this._sceneSubscriptions = [];
   }
 }

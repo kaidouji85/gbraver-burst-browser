@@ -1,7 +1,7 @@
 // @flow
 
 import type {State} from "./state";
-import type {SelectionComplete} from "../../action/player-select/selection-complete";
+import type {SelectionComplete} from "../../action/game/selection-complete";
 import {ArmDozers} from "gbraver-burst-core";
 
 /**

@@ -1,36 +1,42 @@
 // @flow
 
-import type {PlayerSelectState} from "../state/player-select-state";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon-view";
 import {merge, Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
+import {createArmdozerIcon} from "./armdozer-icon-creator";
+import {map} from "rxjs/operators";
+import type {SelectArmdozer} from "../../../../action/player-select/select-armdozer";
 
+/** ルートHTML要素 class */
+export const ROOT_CLASS_NAME = 'player-select';
 /**
  * イベント通知
  */
 export type Notifier = {
-  select: Observable<ArmDozerId>;
+  select: Observable<SelectArmdozer>;
 };
 
 /**
  * プレイヤーセレクト ビュー
  */
 export class PlayerSelectView {
+  armdozerIcons: ArmdozerIconView[];
   _root: HTMLElement;
   _armdozers: HTMLElement;
-  _armdozerIcons: ArmdozerIconView[];
+  _select: Observable<SelectArmdozer>;
 
   /**
    * コンストラクタ
    *
    * @param resourcePath リソースパス
-   * @param initialState 初期ステート
+   * @param armDozerIds アームドーザIDリスト
    */
-  constructor(resourcePath: ResourcePath, initialState: PlayerSelectState) {
+  constructor(resourcePath: ResourcePath, armDozerIds: ArmDozerId[]) {
     const armdozersId = domUuid();
     this._root = document.createElement('div');
+    this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
       <div class="player-select__contents">
         <span class="player-select__contents__caption">搭乗機を選択してください</span>
@@ -40,25 +46,22 @@ export class PlayerSelectView {
     `;
 
     this._armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
-    this._armdozerIcons = initialState.armdozerIcons.map(icon => new ArmdozerIconView(icon));
-    this._armdozerIcons
+    this.armdozerIcons = armDozerIds
+      .map(armDozerId => createArmdozerIcon(armDozerId, resourcePath));
+    this.armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
         this._armdozers.appendChild(element);
       });
 
-    this.engage(initialState);
-  }
-
-  /**
-   * ステートをビューに反映させる
-   *
-   * @param state ステート
-   */
-  engage(state: PlayerSelectState): void {
-    this._root.className = state.isVisible
-      ? 'player-select'
-      : 'player-select--invisible';
+    const selects: Observable<SelectArmdozer>[] = this.armdozerIcons
+      .map(icon => icon.notifier().select.pipe(
+        map(() => ({
+          type: 'SelectArmdozer',
+          armDozerId: icon.armDozerId
+        }))
+      ));
+    this._select = merge(...selects);
   }
 
   /**
@@ -76,9 +79,8 @@ export class PlayerSelectView {
    * @return 取得結果
    */
   notifier(): Notifier {
-    const selects: Observable<ArmDozerId>[] = this._armdozerIcons.map(icon => icon.notifier().select);
     return {
-      select: merge(...selects)
+      select: this._select
     };
   }
 }

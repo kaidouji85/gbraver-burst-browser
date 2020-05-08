@@ -92,7 +92,7 @@ export class LightningBarrierGameEffect {
    * @param action アクション
    */
   _onFirstUpdate(action: Update): void {
-    electrification(this._model).loop();
+    electrification(this._model, this._tweenGroup).loop();
   }
 
   /**

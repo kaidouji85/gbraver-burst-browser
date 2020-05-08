@@ -25,26 +25,12 @@
     --how-to-play-closer-left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
     --how-to-play-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
     --how-to-play-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
+    --armdozer-icon-width: 30vw;
+    --selected-armdozer-icon-width: 35vw;
+    --armdozer-icon-margin: calc(var(--responsive-font-size) * 0.5);
     --zindex-background: 8;
     --zindex-dialog: 9;
     --zindex-close: 10;
-
-}
-
-.service-worker-update {
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    display: flex;
-    flex-direction: column;
-    padding: 1em;
-    box-sizing: border-box;
-}
-
-.service-worker-update__title {
-    font-size: 2em;
-    margin-bottom: 1em;
 }
 
 @media (orientation: landscape) {
@@ -124,10 +110,6 @@
     padding-bottom: var(--screen-padding-bottom);
     background-size: cover;
     background-position: 50% 0;
-}
-
-.title--invisible {
-    display: none;
 }
 
 .title__contents {
@@ -237,10 +219,6 @@
     padding-bottom: var(--screen-padding-bottom);
 }
 
-.player-select--invisible {
-    display: none;
-}
-
 .player-select__contents {
     display: flex;
     flex-direction: column;
@@ -260,6 +238,6 @@
 
 .player-select__armdozers__icon {
     object-fit: cover;
-    width: 30%;
-    margin: calc(var(--responsive-font-size) * 0.5);
+    width: var(--armdozer-icon-width);
+    margin: var(--armdozer-icon-margin);
 }
