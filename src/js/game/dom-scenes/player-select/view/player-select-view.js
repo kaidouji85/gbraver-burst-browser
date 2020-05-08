@@ -3,10 +3,11 @@
 import type {PlayerSelectState} from "../state/player-select-state";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
-import {ArmdozerIconView} from "./armdozer-icon-view";
+import {ArmdozerIconView} from "./armdozer-icon/armdozer-icon-view";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../../../wait/wait-time";
+import {createArmdozerIcon} from "./armdozer-icon";
 
 /**
  * イベント通知
@@ -46,7 +47,7 @@ export class PlayerSelectView {
 
     this._armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
     this._armdozerIcons = initialState.armdozerIcons
-      .map(icon => new ArmdozerIconView(icon.armdozerId, icon.image));
+      .map(icon => createArmdozerIcon(icon.armdozerId, resourcePath));
     this._armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
