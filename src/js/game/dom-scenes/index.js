@@ -114,14 +114,12 @@ export class DOMScenes {
   }
 
   /**
-   * 本クラスに含まれる全てのルートHTML要素を取得する
+   * 本クラスのルートHTML要素を取得する
    *
    * @return 取得結果
    */
-  getRootHTMLElements(): HTMLElement[] {
-    return [
-      this._root
-    ];
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
   }
 
   /**
