@@ -5,7 +5,6 @@ import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import type {LightningDozerModel} from "../model/lightning-dozer-model";
 import {all} from "../../../../animation/all";
-import {delay} from "../../../../animation/delay";
 
 /**
  * アームハンマー -> 立ち

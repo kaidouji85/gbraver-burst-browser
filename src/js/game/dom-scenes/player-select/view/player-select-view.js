@@ -69,14 +69,14 @@ export class PlayerSelectView {
   }
 
   /**
-   * 表示する
+   * 本ビューを表示する
    */
   show(): void {
     this._root.className = ROOT_CLASS_NAME;
   }
 
   /**
-   * 非表示にする
+   * 本ビューを非表示にする
    */
   hidden(): void {
     this._root.className = INVISIBLE_ROOT_CLASS_NAME;

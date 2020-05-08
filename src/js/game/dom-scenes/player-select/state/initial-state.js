@@ -1,7 +1,6 @@
 // @flow
 
 import type {PlayerSelectState} from "./player-select-state";
-import {ArmDozerIdList} from "gbraver-burst-core";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 
 /**

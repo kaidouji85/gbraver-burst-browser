@@ -25,10 +25,12 @@
     --how-to-play-closer-left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
     --how-to-play-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
     --how-to-play-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
+    --armdozer-icon-width: 30vw;
+    --selected-armdozer-icon-width: 35vw;
+    --armdozer-icon-margin: calc(var(--responsive-font-size) * 0.5);
     --zindex-background: 8;
     --zindex-dialog: 9;
     --zindex-close: 10;
-
 }
 
 .service-worker-update {
@@ -260,6 +262,6 @@
 
 .player-select__armdozers__icon {
     object-fit: cover;
-    width: 30vw;
-    margin: calc(var(--responsive-font-size) * 0.5);
+    width: var(--armdozer-icon-width);
+    margin: var(--armdozer-icon-margin);
 }

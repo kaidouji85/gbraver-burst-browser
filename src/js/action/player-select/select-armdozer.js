@@ -1,6 +1,6 @@
 // @flow
 
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+import type {ArmDozerId} from "gbraver-burst-core";
 
 /**
  * アームドーザを選択した

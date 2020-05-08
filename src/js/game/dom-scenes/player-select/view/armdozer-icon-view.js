@@ -63,8 +63,8 @@ export class ArmdozerIconView {
    */
   selected(): Promise<void> {
     const animation = this._root.animate([
-      {width: '30vw', margin: `calc(var(--responsive-font-size) * 0.5)`},
-      {width: '35vw', margin: 0},
+      {width: 'var(--armdozer-icon-width)', margin: 'var(--armdozer-icon-margin)'},
+      {width: 'var(--selected-armdozer-icon-width)', margin: 0},
     ], {
       duration: 500,
       fill: "forwards",
@@ -80,7 +80,7 @@ export class ArmdozerIconView {
    */
   hidden(): Promise<void> {
     const animation = this._root.animate([
-      {opacity: 1, width: '30vw', margin: `calc(var(--responsive-font-size) * 0.5)`},
+      {opacity: 1, width: 'var(--armdozer-icon-width)', margin: 'var(--armdozer-icon-margin)'},
       {opacity: 0, width: '0', margin: 0}
     ], {
       duration: 500,
