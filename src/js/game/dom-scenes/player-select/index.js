@@ -44,7 +44,6 @@ export class PlayerSelect implements DOMScene {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
   }
 
   /**
@@ -78,9 +77,9 @@ export class PlayerSelect implements DOMScene {
   notifier(): Notifier {
     return {
       selectionComplete: this._view.notifier().select.pipe(
-        map(id => ({
+        map(icon => ({
           type: 'SelectionComplete',
-          armdozerId: id
+          armdozerId: icon.armDozerId
         }))
       )
     };

@@ -3,10 +3,10 @@
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon/armdozer-icon-view";
-import {Observable, Subject, Subscription} from "rxjs";
+import {merge, Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {waitTime} from "../../../../wait/wait-time";
 import {createArmdozerIcon} from "./armdozer-icon";
+import {map} from "rxjs/operators";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select';
@@ -18,7 +18,7 @@ export const INVISIBLE_ROOT_CLASS_NAME = 'player-select--invisible';
  * イベント通知
  */
 export type Notifier = {
-  select: Observable<ArmDozerId>;
+  select: Observable<ArmdozerIconView>;
 };
 
 /**
@@ -28,8 +28,7 @@ export class PlayerSelectView {
   _root: HTMLElement;
   _armdozers: HTMLElement;
   _armdozerIcons: ArmdozerIconView[];
-  _select: Subject<ArmDozerId>;
-  _subscriptions: Subscription[];
+  _select: Observable<ArmdozerIconView>;
 
   /**
    * コンストラクタ
@@ -38,8 +37,6 @@ export class PlayerSelectView {
    * @param armDozerIds アームドーザIDリスト
    */
   constructor(resourcePath: ResourcePath, armDozerIds: ArmDozerId[]) {
-    this._select = new Subject();
-
     const armdozersId = domUuid();
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
@@ -60,21 +57,13 @@ export class PlayerSelectView {
         this._armdozers.appendChild(element);
       });
 
-    this._subscriptions = this._armdozerIcons
-      .map(icon => icon.notifier().select.subscribe(() => {
-        this._onSelected(icon);
-      }));
+    const selects: Observable<ArmdozerIconView>[] = this._armdozerIcons
+      .map(icon => icon.notifier().select.pipe(
+        map(() => icon)
+      ));
+    this._select = merge(...selects);
   }
-
-  /**
-   * デストラクタ相当の処理
-   */
-  destructor(): void {
-    this._subscriptions.forEach(v => {
-      v.unsubscribe();
-    });
-  }
-
+  
   /**
    * 表示する
    */
@@ -107,27 +96,5 @@ export class PlayerSelectView {
     return {
       select: this._select
     };
-  }
-
-  /**
-   * アイコンが選択された際の処理
-   *
-   * @param icon 選択されたアイコン
-   * @return 処理結果
-   */
-  async _onSelected(icon: ArmdozerIconView): Promise<void> {
-    try {
-      await Promise.all([
-        ...this._armdozerIcons
-          .filter(v => v !== icon)
-          .map(v => v.hidden()),
-        icon.selected()
-      ])
-      await waitTime(2000);
-
-      this._select.next(icon.armDozerId);
-    } catch(e) {
-      throw e;
-    }
   }
 }
