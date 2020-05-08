@@ -3,7 +3,6 @@
 import type {LoadingState} from "../state/loading-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 
-
 /** ローディングシーンのビュー */
 export class LoadingView {
   _root: HTMLElement;
@@ -23,6 +22,8 @@ export class LoadingView {
         </div>
       </div>
     `;
+    this._root.className = 'loading';
+    this._root.style.display = 'flex';
 
     this._text = this._root.querySelector(`[data-id="${textId}"]`) || document.createElement('div');
     this._bar = this._root.querySelector(`[data-id="${barId}"]`) || document.createElement('div');
@@ -36,8 +37,6 @@ export class LoadingView {
    * @param state 状態
    */
   engage(state: LoadingState): void {
-    this._root.className = 'loading';
-    this._root.style.display = 'flex';
     this._text.innerText = `LOADING... ${Math.floor(state.completedRate * 100)}%`;
     this._bar.style.width = `${state.completedRate * 100}%`
   }

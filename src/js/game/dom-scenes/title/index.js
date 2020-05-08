@@ -5,9 +5,7 @@ import type {TitleState} from "./state/title-state";
 import {Observable} from "rxjs";
 import type {PushGameStart, PushHowToPlay} from "../../../action/game/title";
 import {TitleView} from "./view/title-view";
-import {hidden} from "./state/hidden";
 import {filter, map} from "rxjs/operators";
-import {show} from "./state/show";
 import type {ResourcePath} from "../../../resource/path/resource-path";
 import type {DOMScene} from "../dom-scene";
 
@@ -56,18 +54,6 @@ export class Title implements DOMScene {
   /** イベント通知ストリーム */
   notifier(): Notifier {
     return this._notifier;
-  }
-
-  /** 本シーンを表示する */
-  show(): void {
-    this._state = show(this._state);
-    this._view.engage(this._state);
-  }
-
-  /** 本シーンを非表示にする */
-  hidden(): void {
-    this._state = hidden(this._state);
-    this._view.engage(this._state);
   }
 
   /**

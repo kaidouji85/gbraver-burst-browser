@@ -65,20 +65,6 @@ export class PlayerSelect implements DOMScene {
   }
 
   /**
-   * 本シーンを表示する
-   */
-  show(): void {
-    this._view.show();
-  }
-
-  /**
-   * 本シーンを非表示にする
-   */
-  hidden(): void {
-    this._view.hidden();
-  }
-
-  /**
    * イベント通知ストリームを取得する
    *
    * @return 取得結果
