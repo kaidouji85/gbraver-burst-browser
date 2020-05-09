@@ -9,6 +9,9 @@ import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
 import {Title} from "./title";
 import {PlayerSelect} from "./player-select";
+import {MatchCard} from "./match-card";
+import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+import type {EndMatchCard} from "../../action/game/end-match-card";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -21,6 +24,7 @@ type Notifier = {
   pushGameStart: Observable<PushGameStart>,
   pushHowToPlay: Observable<PushHowToPlay>,
   selectionComplete: Observable<SelectionComplete>,
+  endMatchCard: Observable<EndMatchCard>,
 };
 
 /**
@@ -35,6 +39,7 @@ export class DOMScenes {
   _pushGameStart: Subject<PushGameStart>;
   _pushHowToPlay: Subject<PushHowToPlay>;
   _selectionComplete: Subject<SelectionComplete>;
+  _endMatchCard: Subject<EndMatchCard>;
   _sceneSubscriptions: Subscription[];
 
   constructor(param: Param) {
@@ -44,6 +49,7 @@ export class DOMScenes {
     this._pushGameStart = new Subject();
     this._pushHowToPlay = new Subject();
     this._selectionComplete = new Subject();
+    this._endMatchCard = new Subject();
     this._sceneSubscriptions = [];
     this._scene = null;
   }
@@ -63,6 +69,7 @@ export class DOMScenes {
       pushGameStart: this._pushGameStart,
       pushHowToPlay: this._pushHowToPlay,
       selectionComplete: this._selectionComplete,
+      endMatchCard: this._endMatchCard,
     }
   }
 
@@ -101,6 +108,28 @@ export class DOMScenes {
     this._sceneSubscriptions = [
       notifier.selectionComplete.subscribe(this._selectionComplete)
     ];
+    this._scene = scene;
+    this._root.appendChild(scene.getRootHTMLElement());
+  }
+
+  /**
+   * 対戦カードシーンを表示する
+   *
+   * @param player プレイヤー側 アームドーザID
+   * @param enemy 敵側 アームドーザID
+   * @param caption ステージ名
+   */
+  showMatchCard(player: ArmDozerId, enemy: ArmDozerId, caption: string): void {
+    this._removeCurrentScene();
+
+    const scene = new MatchCard({
+      resourcePath: this._resourcePath,
+      player: player,
+      enemy: enemy,
+      caption: caption
+    });
+    const notifier = scene.notifier();
+    notifier.endMatchCard.subscribe(this._endMatchCard);
     this._scene = scene;
     this._root.appendChild(scene.getRootHTMLElement());
   }
