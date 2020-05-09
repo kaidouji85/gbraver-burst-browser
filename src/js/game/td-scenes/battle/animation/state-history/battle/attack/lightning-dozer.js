@@ -102,12 +102,12 @@ type AttackResult = NormalHit | CriticalHit;
 function attack(param: LightningDozerBattleAnimationParam<AttackResult>): Animate {
   return all(
     param.attackerSprite.charge()
-      .chain(delay(600))
+      .chain(delay(500))
       .chain(param.attackerSprite.armHammer())
       .chain(delay(2000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(1000)
+    delay(800)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
@@ -126,12 +126,12 @@ function attack(param: LightningDozerBattleAnimationParam<AttackResult>): Animat
 function guard(param: LightningDozerBattleAnimationParam<Guard>): Animate {
   return all(
     param.attackerSprite.charge()
-      .chain(delay(600))
+      .chain(delay(500))
       .chain(param.attackerSprite.armHammer())
       .chain(delay(2000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(1000)
+    delay(800)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
@@ -150,12 +150,12 @@ function guard(param: LightningDozerBattleAnimationParam<Guard>): Animate {
 function miss(param: LightningDozerBattleAnimationParam<Miss>): Animate {
   return all(
     param.attackerSprite.charge()
-      .chain(delay(600))
+      .chain(delay(500))
       .chain(param.attackerSprite.armHammer())
       .chain(delay(1000))
       .chain(param.attackerSprite.hmToStand()),
 
-    delay(1000)
+    delay(800)
       .chain(param.defenderSprite.avoid())
       .chain(delay(2000))
       .chain(param.defenderSprite.avoidToStand()),
@@ -174,19 +174,18 @@ type DownResult = NormalHit | Guard | CriticalHit;
 function down(param: LightningDozerBattleAnimationParam<DownResult>): Animate {
   return all(
     param.attackerSprite.charge()
-      .chain(delay(600))
-      .chain(param.attackerSprite.armHammer())
-      .chain(delay(2000))
-      .chain(param.attackerSprite.hmToStand()),
+      .chain(delay(500))
+      .chain(param.attackerSprite.armHammer()),
 
-    delay(1000)
+    delay(800)
       .chain(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
       ).chain(delay(500))
-  );
+  ).chain(delay(500)
+  ).chain(param.attackerSprite.hmToStand());
 }
 
 /**
