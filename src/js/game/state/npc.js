@@ -16,7 +16,7 @@ import {ArmdozerAppearances} from "gbraver-burst-core";
  * @param state 状態
  * @return NPC
  */
-function getNPC(state: State): NPC {
+export function getNPC(state: State): NPC {
   switch (state.player.armdozer.appearance) {
     case ArmdozerAppearances.SHIN_BRAVER:
       return shinBraverCourse(state.level);

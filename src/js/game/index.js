@@ -28,6 +28,9 @@ import type {SelectionComplete} from "../action/game/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {PreLoadLinks} from "./preload-links";
+import {getNPC} from "./state/npc";
+import {waitTime} from "../wait/wait-time";
+import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -150,10 +153,16 @@ export class Game {
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
       this._state = selectionComplete(this._state, action);
-      const room = createBattleRoom(this._state);
+      const npc = getNPC(this._state);
+      this._domScenes.showMatchCard(
+        this._state.player.armdozer.id,
+        npc.armdozer.id,
+        'てきとう'
+      )
+      await waitTime(3000);
+
+      const room = new OfflineBattleRoom(this._state.player, npc);
       const initialState = await room.start();
-
-
       this._domScenes.showLoading();
       const resources = await loadAllResource(`${this._resourcePath.get()}/`);
       this._resources = resources;
