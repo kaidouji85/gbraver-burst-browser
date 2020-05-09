@@ -15,5 +15,8 @@ export const Scene = domStub((resourcePath) => {
     enemy: ArmDozerIdList.NEO_LANDOZER,
     caption: 'STAGE X',
   });
+  scene.notifier().endMatchCard.subscribe(() => {
+    console.log('end!!');
+  });
   return scene.getRootHTMLElement();
 });
