@@ -183,8 +183,8 @@ function down(param: LightningDozerBattleAnimationParam<DownResult>): Animate {
         param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ).chain(delay(500))
-  ).chain(delay(500)
+      )
+  ).chain(delay(1000)
   ).chain(param.attackerSprite.hmToStand());
 }
 
