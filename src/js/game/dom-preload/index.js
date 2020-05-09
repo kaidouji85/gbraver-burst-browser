@@ -6,27 +6,21 @@ import type {ResourcePath} from "../../resource/path/resource-path";
  * HTML要素で利用する素材のプリロード
  */
 export class DOMPreload {
-  _root: HTMLElement;
+  _links: HTMLElement[];
 
   constructor(resourcePath: ResourcePath) {
-    this._root = document.createElement('div');
-    this._root.className = 'dom-preload';
-
     const imageURLs = [
       `${resourcePath.get()}/armdozer/shin-braver/player-select.png`,
       `${resourcePath.get()}/armdozer/neo-landozer/player-select.png`,
       `${resourcePath.get()}/armdozer/ligjtning-dozer/player-select.png`,
     ];
-    const images = imageURLs.map(url => {
-      const img = document.createElement('img');
-      img.src = url;
-      img.className = 'dom-preload__image';
-      return img;
+    this._links = imageURLs.map(url => {
+      const link = document.createElement('link');
+      link.setAttribute('rel', 'preload');
+      link.setAttribute('as', 'image');
+      link.setAttribute('href', url);
+      return link;
     });
-    images.forEach(img => {
-      this._root.appendChild(img);
-    })
-
   }
 
   /**
@@ -34,7 +28,7 @@ export class DOMPreload {
    *
    * @return 取得結果
    */
-  getRootHTMLElement(): HTMLElement {
-    return this._root;
+  getLinks(): HTMLElement [] {
+    return this._links;
   }
 }

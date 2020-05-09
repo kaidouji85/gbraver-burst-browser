@@ -54,6 +54,12 @@ export class Game {
     this._vh = new CssVH(this._resize);
 
     this._domPreload = new DOMPreload(resourcePath);
+    const head = document.head ?? document.createElement('head');
+    this._domPreload.getLinks().forEach(link => {
+      head.appendChild(link);
+    });
+
+
     this._interruptScenes = new InterruptScenes({
       resourcePath: this._resourcePath,
     });
@@ -66,7 +72,6 @@ export class Game {
 
     const body = document.body || document.createElement('div');
     const elements = [
-      this._domPreload.getRootHTMLElement(),
       ...this._interruptScenes.getRootHTMLElements(),
       ...this._domDialogs.getRootHTMLElements(),
       this._domScenes.getRootHTMLElement(),

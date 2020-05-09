@@ -241,7 +241,3 @@
     width: var(--armdozer-icon-width);
     margin: var(--armdozer-icon-margin);
 }
-
-.dom-preload {
-    display: none;
-}
