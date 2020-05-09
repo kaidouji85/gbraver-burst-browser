@@ -27,7 +27,7 @@ import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/game/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import {DOMPreload} from "./dom-preload";
+import {PreLoadLinks} from "./preload-links";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -35,7 +35,7 @@ export class Game {
   _loading: Observable<LoadingAction>;
   _resize: Observable<Resize>;
   _vh: CssVH;
-  _domPreload: DOMPreload;
+  _preLoadLinks: PreLoadLinks;
   _interruptScenes: InterruptScenes;
   _domScenes: DOMScenes;
   _domDialogs: DOMDialogs;
@@ -53,9 +53,9 @@ export class Game {
     this._resize = createResizeStream();
     this._vh = new CssVH(this._resize);
 
-    this._domPreload = new DOMPreload(resourcePath);
+    this._preLoadLinks = new PreLoadLinks(resourcePath);
     const head = document.head ?? document.createElement('head');
-    this._domPreload.getLinks().forEach(link => {
+    this._preLoadLinks.getLinks().forEach(link => {
       head.appendChild(link);
     });
 

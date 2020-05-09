@@ -1,20 +1,16 @@
 // @flow
 
 import type {ResourcePath} from "../../resource/path/resource-path";
+import {imageURLs} from "./image-ruls";
 
 /**
  * HTML要素で利用する素材のプリロード
  */
-export class DOMPreload {
+export class PreLoadLinks {
   _links: HTMLElement[];
 
   constructor(resourcePath: ResourcePath) {
-    const imageURLs = [
-      `${resourcePath.get()}/armdozer/shin-braver/player-select.png`,
-      `${resourcePath.get()}/armdozer/neo-landozer/player-select.png`,
-      `${resourcePath.get()}/armdozer/ligjtning-dozer/player-select.png`,
-    ];
-    this._links = imageURLs.map(url => {
+    this._links = imageURLs(resourcePath).map(url => {
       const link = document.createElement('link');
       link.setAttribute('rel', 'preload');
       link.setAttribute('as', 'image');
@@ -24,7 +20,7 @@ export class DOMPreload {
   }
 
   /**
-   * ルートHTML要素を取得する
+   * linkタグを取得する
    *
    * @return 取得結果
    */
