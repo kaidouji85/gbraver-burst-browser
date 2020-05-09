@@ -150,11 +150,13 @@ export class Game {
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
       this._state = selectionComplete(this._state, action);
+      const room = createBattleRoom(this._state);
+      const initialState = await room.start();
+
+
       this._domScenes.showLoading();
       const resources = await loadAllResource(`${this._resourcePath.get()}/`);
       this._resources = resources;
-      const room = createBattleRoom(this._state);
-      const initialState = await room.start();
       await waitAnimationFrame();
 
       this._tdScenes.startBattle(resources, room, initialState);

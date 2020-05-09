@@ -12,6 +12,7 @@ import {ArmdozerAppearances} from "gbraver-burst-core";
 import {ShinBraverNPC} from "../../npc/shin-braver";
 import {WeakLightningDozerNPC} from "../../npc/weak-lightning-dozer";
 
+// TODO 削除する
 /**
  * ゲーム状態に応じたバトルルームを生成する
  *
