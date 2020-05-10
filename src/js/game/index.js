@@ -27,10 +27,10 @@ import type {SelectionComplete} from "../action/game/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {PreLoadLinks} from "./preload-links";
-import {getNPC} from "./state/npc";
 import {waitTime} from "../wait/wait-time";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
-import {stageName} from "./state/stage-name";
+import {DefaultCourse, NPCCourses} from "./state/npc-course";
+import type {NPCCourse} from "./state/npc-course";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -190,11 +190,15 @@ export class Game {
       }
       const resources: Resources = this._resources;
 
-      const npc = getNPC(this._state);
+      const cource: NPCCourse = NPCCourses.find(v =>
+        v.armdozerId === this._state.player.armdozer.id
+        && v.level === this._state.level
+      ) ?? DefaultCourse;
+      const npc = cource.npc();
       this._domScenes.showMatchCard(
         this._state.player.armdozer.id,
         npc.armdozer.id,
-        stageName(this._state.level)
+        cource.stageName,
       );
       const room = new OfflineBattleRoom(this._state.player, npc);
       const initialState = await room.start();
