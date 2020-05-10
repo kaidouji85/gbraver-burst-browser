@@ -32,6 +32,11 @@ import {waitTime} from "../wait/wait-time";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {stageName} from "./state/stage-name";
 
+/**
+ * 対戦カード画面を表示する最小時間(ミリ秒)
+ */
+export const MIN_MATCH_CARD_VISIBLE_TIME = 3000;
+
 /** ゲーム全体の管理を行う */
 export class Game {
   _state: State;
@@ -152,24 +157,26 @@ export class Game {
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
+      this._domScenes.showLoading();
+      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
+      this._resources = resources;
+      await waitAnimationFrame();
+
+      const startMatchCardTime = new Date().getTime();
       this._state = selectionComplete(this._state, action);
       const npc = getNPC(this._state);
       this._domScenes.showMatchCard(
         this._state.player.armdozer.id,
         npc.armdozer.id,
         stageName(this._state.level)
-      )
-      await waitTime(3000);
-
+      );
       const room = new OfflineBattleRoom(this._state.player, npc);
       const initialState = await room.start();
-      this._domScenes.showLoading();
-      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
-      this._resources = resources;
-      await waitAnimationFrame();
-
       this._tdScenes.startBattle(resources, room, initialState);
-      await waitAnimationFrame();
+      const startBattleTime = new Date().getTime();
+      const remainingTime = MIN_MATCH_CARD_VISIBLE_TIME - (startBattleTime - startMatchCardTime);
+      await waitTime(Math.max(0, remainingTime));
+
       this._domScenes.hidden();
     } catch (e) {
       throw e;
@@ -186,8 +193,9 @@ export class Game {
       if (!this._resources) {
         return;
       }
-      const resources: Resources = this._resources;
 
+      const startMatchCardTime = new Date().getTime();
+      const resources: Resources = this._resources;
       this._state = endBattle(this._state, action);
       const npc = getNPC(this._state);
       this._domScenes.showMatchCard(
@@ -195,12 +203,13 @@ export class Game {
         npc.armdozer.id,
         stageName(this._state.level)
       );
-      await waitTime(3000);
-
       const room = new OfflineBattleRoom(this._state.player, npc);
       const initialState = await room.start();
       this._tdScenes.startBattle(resources, room, initialState);
-      await waitAnimationFrame();
+      const startBattleTime = new Date().getTime();
+      const remainingTime = MIN_MATCH_CARD_VISIBLE_TIME - (startBattleTime - startMatchCardTime);
+      await waitTime(Math.max(0, remainingTime));
+
       this._domScenes.hidden();
     } catch (e) {
       throw e;
