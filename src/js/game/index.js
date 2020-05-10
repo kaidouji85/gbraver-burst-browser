@@ -21,13 +21,16 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {PushGameStart, PushHowToPlay} from "../action/game/title";
 import type {State} from "./state/state";
 import {createInitialState} from "./state/initial-state";
-import {createBattleRoom} from "./state/battle-room";
 import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/game/selection-complete";
 import {selectionComplete} from "./state/selectiin-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {PreLoadLinks} from "./preload-links";
+import {waitTime} from "../wait/wait-time";
+import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
+import type {NPCCourse} from "./state/npc-course";
+import {DefaultCourse, NPCCourses} from "./state/npc-course";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -58,7 +61,6 @@ export class Game {
     this._preLoadLinks.getLinks().forEach(link => {
       head.appendChild(link);
     });
-
 
     this._interruptScenes = new InterruptScenes({
       resourcePath: this._resourcePath,
@@ -150,16 +152,12 @@ export class Game {
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
       this._state = selectionComplete(this._state, action);
+
       this._domScenes.showLoading();
       const resources = await loadAllResource(`${this._resourcePath.get()}/`);
       this._resources = resources;
-      const room = createBattleRoom(this._state);
-      const initialState = await room.start();
       await waitAnimationFrame();
-
-      this._tdScenes.startBattle(resources, room, initialState);
-      await waitAnimationFrame();
-      this._domScenes.hidden();
+      await this._startNPCBattle();
     } catch (e) {
       throw e;
     }
@@ -172,16 +170,42 @@ export class Game {
    */
   async _onEndBattle(action: EndBattle) {
     try {
+      this._state = endBattle(this._state, action);
+
+      await this._startNPCBattle();
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  /**
+   * NPC線をスタートさせる
+   *
+   * @return 実行結果
+   */
+  async _startNPCBattle(): Promise<void> {
+    try {
       if (!this._resources) {
         return;
       }
       const resources: Resources = this._resources;
 
-      this._state = endBattle(this._state, action);
-      const room = createBattleRoom(this._state);
+      const cource: NPCCourse = NPCCourses.find(v =>
+        v.armdozerId === this._state.player.armdozer.id
+        && v.level === this._state.level
+      ) ?? DefaultCourse;
+      const npc = cource.npc();
+      this._domScenes.showMatchCard(
+        this._state.player.armdozer.id,
+        npc.armdozer.id,
+        cource.stageName,
+      );
+      const room = new OfflineBattleRoom(this._state.player, npc);
       const initialState = await room.start();
+      await waitTime(1000);
 
       this._tdScenes.startBattle(resources, room, initialState);
+      this._domScenes.hidden();
     } catch (e) {
       throw e;
     }

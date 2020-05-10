@@ -9,6 +9,8 @@ import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
 import {Title} from "./title";
 import {PlayerSelect} from "./player-select";
+import {MatchCard} from "./match-card";
+import type {ArmDozerId} from "gbraver-burst-core";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -101,6 +103,26 @@ export class DOMScenes {
     this._sceneSubscriptions = [
       notifier.selectionComplete.subscribe(this._selectionComplete)
     ];
+    this._scene = scene;
+    this._root.appendChild(scene.getRootHTMLElement());
+  }
+
+  /**
+   * 対戦カードシーンを表示する
+   *
+   * @param player プレイヤー側 アームドーザID
+   * @param enemy 敵側 アームドーザID
+   * @param caption ステージ名
+   */
+  showMatchCard(player: ArmDozerId, enemy: ArmDozerId, caption: string): void {
+    this._removeCurrentScene();
+
+    const scene = new MatchCard({
+      resourcePath: this._resourcePath,
+      player: player,
+      enemy: enemy,
+      caption: caption
+    });
     this._scene = scene;
     this._root.appendChild(scene.getRootHTMLElement());
   }
