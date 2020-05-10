@@ -215,7 +215,8 @@ export class BattleScene implements Scene {
   /** ゲーム終了時の処理 */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
     try {
-      const animation = this._view.hud.gameObjects.frontmostFader.fadeOut();
+      const animation = this._view.hud.gameObjects.frontmostFader.fadeOut()
+        .chain(delay(3000));
       await animation.play();
       this._endBattle.next({
         type: 'endBattle',

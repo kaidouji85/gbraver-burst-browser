@@ -32,11 +32,6 @@ import {waitTime} from "../wait/wait-time";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {stageName} from "./state/stage-name";
 
-/**
- * 対戦カード画面を表示する最小時間(ミリ秒)
- */
-export const MIN_MATCH_CARD_VISIBLE_TIME = 5000;
-
 /** ゲーム全体の管理を行う */
 export class Game {
   _state: State;
@@ -195,7 +190,6 @@ export class Game {
       }
       const resources: Resources = this._resources;
 
-      const startMatchCardTime = new Date().getTime();
       const npc = getNPC(this._state);
       this._domScenes.showMatchCard(
         this._state.player.armdozer.id,
@@ -204,13 +198,9 @@ export class Game {
       );
       const room = new OfflineBattleRoom(this._state.player, npc);
       const initialState = await room.start();
-      await waitAnimationFrame();
-      
-      this._tdScenes.startBattle(resources, room, initialState);
-      const startBattleTime = new Date().getTime();
-      const remainingTime = MIN_MATCH_CARD_VISIBLE_TIME - (startBattleTime - startMatchCardTime);
-      await waitTime(Math.max(0, remainingTime));
+      await waitTime(1000);
 
+      this._tdScenes.startBattle(resources, room, initialState);
       this._domScenes.hidden();
     } catch (e) {
       throw e;
