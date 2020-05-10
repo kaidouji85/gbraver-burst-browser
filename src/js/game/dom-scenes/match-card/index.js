@@ -3,7 +3,7 @@
 import type {DOMScene} from "../dom-scene";
 import {MatchCardView} from "./view/match-card-view";
 import type {ResourcePath} from "../../../resource/path/resource-path";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+import type {ArmDozerId} from "gbraver-burst-core";
 
 /**
  * コンストラクタのパラメータ

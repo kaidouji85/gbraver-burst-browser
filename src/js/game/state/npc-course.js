@@ -7,8 +7,8 @@ import {LightningDozerNPC} from "../../npc/lightning-dozer";
 import {WeakLightningDozerNPC} from "../../npc/weak-lightning-dozer";
 import {ShinBraverNPC} from "../../npc/shin-braver";
 import {WeakShinBraverNPC} from "../../npc/weak-shin-braver";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import type {ArmDozerId} from "gbraver-burst-core";
+import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
  * NPCコース

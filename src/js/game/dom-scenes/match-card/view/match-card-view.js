@@ -1,7 +1,7 @@
 // @flow
 
 import type {ResourcePath} from "../../../../resource/path/resource-path";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+import type {ArmDozerId} from "gbraver-burst-core";
 import {armDozerId2URL} from "./armdozer-id-to-url";
 
 /**

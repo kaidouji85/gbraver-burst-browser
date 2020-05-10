@@ -10,7 +10,7 @@ import {Loading} from "./loading";
 import {Title} from "./title";
 import {PlayerSelect} from "./player-select";
 import {MatchCard} from "./match-card";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
+import type {ArmDozerId} from "gbraver-burst-core";
 
 /** コンストラクタのパラメータ */
 type Param = {

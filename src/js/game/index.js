@@ -29,8 +29,8 @@ import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {PreLoadLinks} from "./preload-links";
 import {waitTime} from "../wait/wait-time";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
-import {DefaultCourse, NPCCourses} from "./state/npc-course";
 import type {NPCCourse} from "./state/npc-course";
+import {DefaultCourse, NPCCourses} from "./state/npc-course";
 
 /** ゲーム全体の管理を行う */
 export class Game {

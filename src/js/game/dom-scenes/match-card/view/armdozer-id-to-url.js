@@ -1,8 +1,8 @@
 // @flow
 
 import type {ResourcePath} from "../../../../resource/path/resource-path";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import type {ArmDozerId} from "gbraver-burst-core";
+import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
  * アームドーザIDを画像URLに変換する
