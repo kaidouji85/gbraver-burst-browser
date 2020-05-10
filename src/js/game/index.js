@@ -21,7 +21,6 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {PushGameStart, PushHowToPlay} from "../action/game/title";
 import type {State} from "./state/state";
 import {createInitialState} from "./state/initial-state";
-import {createBattleRoom} from "./state/battle-room";
 import {endBattle} from "./state/end-battle";
 import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/game/selection-complete";
@@ -31,6 +30,7 @@ import {PreLoadLinks} from "./preload-links";
 import {getNPC} from "./state/npc";
 import {waitTime} from "../wait/wait-time";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
+import {stageName} from "./state/stage-name";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -157,7 +157,7 @@ export class Game {
       this._domScenes.showMatchCard(
         this._state.player.armdozer.id,
         npc.armdozer.id,
-        'てきとう'
+        stageName(this._state.level)
       )
       await waitTime(3000);
 
@@ -189,10 +189,19 @@ export class Game {
       const resources: Resources = this._resources;
 
       this._state = endBattle(this._state, action);
-      const room = createBattleRoom(this._state);
-      const initialState = await room.start();
+      const npc = getNPC(this._state);
+      this._domScenes.showMatchCard(
+        this._state.player.armdozer.id,
+        npc.armdozer.id,
+        stageName(this._state.level)
+      );
+      await waitTime(3000);
 
+      const room = new OfflineBattleRoom(this._state.player, npc);
+      const initialState = await room.start();
       this._tdScenes.startBattle(resources, room, initialState);
+      await waitAnimationFrame();
+      this._domScenes.hidden();
     } catch (e) {
       throw e;
     }
