@@ -91,8 +91,8 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
-    level: 2,
-    stageName: 'STAGE 2',
+    level: 3,
+    stageName: 'STAGE 3',
     npc: () => new ShinBraverNPC(),
   },
 ];

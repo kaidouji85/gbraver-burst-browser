@@ -2,7 +2,7 @@
 
 import {domStub} from "./stub/dom-stub";
 import {MatchCard} from "../src/js/game/dom-scenes/match-card";
-import {ArmdozerAppearances, ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import {ArmDozerIdList} from "gbraver-burst-core";
 
 export default {
   title: 'match-card'
