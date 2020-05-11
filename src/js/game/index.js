@@ -152,11 +152,22 @@ export class Game {
   }
 
   /**
-   * プレイヤー選択完了
+   * プレイヤーキャラクチャー選択完了時の処理
    *
    * @param action アクション
    */
-  async _onSelectionComplete(action: SelectionComplete): Promise<void> {
+  _onSelectionComplete(action: SelectionComplete): void {
+    if (this._state.inProgress.type === 'NPCBattle') {
+      this._selectionCompletedInNPCBattle(action);
+    }
+  }
+
+  /**
+   * NPC戦闘 プレイヤー選択完了
+   *
+   * @param action アクション
+   */
+  async _selectionCompletedInNPCBattle(action: SelectionComplete): Promise<void> {
     try {
       if (this._state.inProgress.type !== 'NPCBattle') {
         return;
@@ -171,6 +182,7 @@ export class Game {
       const resources = await loadAllResource(`${this._resourcePath.get()}/`);
       this._resources = resources;
       await waitAnimationFrame();
+
       await this._startNPCBattle();
     } catch (e) {
       throw e;
@@ -182,7 +194,20 @@ export class Game {
    *
    * @param action アクション
    */
-  async _onEndBattle(action: EndBattle) {
+  _onEndBattle(action: EndBattle) {
+    if (this._state.inProgress.type === 'NPCBattle') {
+      this._endNPCBattle(action);
+    }
+  }
+
+  /**
+   * NPC戦闘終了時の処理
+   *
+   * @param action アクション
+   * @return {Promise<void>}
+   * @private
+   */
+  async _endNPCBattle(action: EndBattle): Promise<void> {
     try {
       if (this._state.inProgress.type !== 'NPCBattle') {
         return;
