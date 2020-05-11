@@ -1,14 +1,14 @@
 // @flow
 
 import test from 'ava';
-import {endBattle} from "../../../../src/js/game/state/end-battle";
-import type {State} from "../../../../src/js/game/state/state";
-import {EMPTY_STATE} from "../../../data/state";
-import type {EndBattle} from "../../../../src/js/action/game/battle";
-import {EMPTY_PLAYER} from "../../../data/player";
+import type {EndBattle} from "../../../../../src/js/action/game/battle";
+import {EMPTY_PLAYER} from "../../../../data/player";
 import type {Player, GameOver, EvenMatch} from "gbraver-burst-core";
-import {EMPTY_END_BATTLE} from "../../../data/end-battle";
-import {MAX_LEVEL} from "../../../../src/js/game/state/state";
+import {EMPTY_END_BATTLE} from "../../../../data/end-battle";
+import {MAX_LEVEL} from "../../../../../src/js/game/state/state";
+import type {NPCBattle} from "../../../../../src/js/game/state/npc-battle/npc-battle";
+import {EMPTY_NPC_BATTLE} from "../../../../data/npc-battle";
+import {endBattle} from "../../../../../src/js/game/state/npc-battle/end-battle";
 
 const player: Player = {
   ...EMPTY_PLAYER,
@@ -30,8 +30,8 @@ const evenMath: EvenMatch = {
 };
 
 test('戦闘に勝利した場合はレベルが+1される', t => {
-  const state: State = {
-    ...EMPTY_STATE,
+  const state: NPCBattle = {
+    ...EMPTY_NPC_BATTLE,
     player: player,
     level: 1
   };
@@ -52,8 +52,8 @@ test('戦闘に勝利した場合はレベルが+1される', t => {
 });
 
 test('戦闘に敗北した場合はレベルがそのまま', t => {
-  const state: State = {
-    ...EMPTY_STATE,
+  const state: NPCBattle = {
+    ...EMPTY_NPC_BATTLE,
     player: player,
     level: 1
   };
@@ -70,8 +70,8 @@ test('戦闘に敗北した場合はレベルがそのまま', t => {
 });
 
 test('引き分けの場合はレベルがそのまま', t => {
-  const state: State = {
-    ...EMPTY_STATE,
+  const state: NPCBattle = {
+    ...EMPTY_NPC_BATTLE,
     player: player,
     level: 1
   };
@@ -88,8 +88,8 @@ test('引き分けの場合はレベルがそのまま', t => {
 });
 
 test('戦闘に勝利しても最大レベルの場合にはそのまま', t => {
-  const state: State = {
-    ...EMPTY_STATE,
+  const state: NPCBattle = {
+    ...EMPTY_NPC_BATTLE,
     player: player,
     level: MAX_LEVEL
   };
