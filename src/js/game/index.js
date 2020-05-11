@@ -20,17 +20,20 @@ import type {EndHowToPlay} from "../action/game/how-to-play";
 import {DOMDialogs} from "./dom-dialogs";
 import type {PushGameStart, PushHowToPlay} from "../action/game/title";
 import type {State} from "./state/state";
-import {createInitialState} from "./state/initial-state";
-import {endBattle} from "./state/end-battle";
+import {createInitialState} from "./state/state";
 import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/game/selection-complete";
-import {selectionComplete} from "./state/selectiin-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {PreLoadLinks} from "./preload-links";
 import {waitTime} from "../wait/wait-time";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
-import type {NPCCourse} from "./state/npc-course";
-import {DefaultCourse, NPCCourses} from "./state/npc-course";
+import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
+import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
+import type {NPCBattle} from "./state/npc-battle/npc-battle";
+import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
+import {selectionComplete} from "./state/npc-battle/selection-complete";
+import {endBattle} from "./state/npc-battle/end-battle";
+import type {Player} from "gbraver-burst-core";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -125,6 +128,10 @@ export class Game {
    * ゲームスタートボタンを押した
    */
   _onPushGameStart(action: PushGameStart) {
+    this._state = {
+      ...this._state,
+      inProgress: createInitialNPCBattle()
+    };
     this._domScenes.showPlayerSelect();
   }
 
@@ -145,18 +152,37 @@ export class Game {
   }
 
   /**
-   * プレイヤー選択完了
+   * プレイヤーキャラクチャー選択完了時の処理
    *
    * @param action アクション
    */
-  async _onSelectionComplete(action: SelectionComplete): Promise<void> {
+  _onSelectionComplete(action: SelectionComplete): void {
+    if (this._state.inProgress.type === 'NPCBattle') {
+      this._selectionCompletedInNPCBattle(action);
+    }
+  }
+
+  /**
+   * NPC戦闘 プレイヤー選択完了
+   *
+   * @param action アクション
+   */
+  async _selectionCompletedInNPCBattle(action: SelectionComplete): Promise<void> {
     try {
-      this._state = selectionComplete(this._state, action);
+      if (this._state.inProgress.type !== 'NPCBattle') {
+        return;
+      }
+      const npcBattle: NPCBattle = this._state.inProgress;
+      this._state = {
+        ...this._state,
+        inProgress: selectionComplete(npcBattle, action)
+      };
 
       this._domScenes.showLoading();
       const resources = await loadAllResource(`${this._resourcePath.get()}/`);
       this._resources = resources;
       await waitAnimationFrame();
+
       await this._startNPCBattle();
     } catch (e) {
       throw e;
@@ -168,9 +194,29 @@ export class Game {
    *
    * @param action アクション
    */
-  async _onEndBattle(action: EndBattle) {
+  _onEndBattle(action: EndBattle) {
+    if (this._state.inProgress.type === 'NPCBattle') {
+      this._endNPCBattle(action);
+    }
+  }
+
+  /**
+   * NPC戦闘終了時の処理
+   *
+   * @param action アクション
+   * @return {Promise<void>}
+   * @private
+   */
+  async _endNPCBattle(action: EndBattle): Promise<void> {
     try {
-      this._state = endBattle(this._state, action);
+      if (this._state.inProgress.type !== 'NPCBattle') {
+        return;
+      }
+      const npcBattle: NPCBattle = this._state.inProgress;
+      this._state = {
+        ...this._state,
+        inProgress: endBattle(npcBattle, action)
+      };
 
       await this._startNPCBattle();
     } catch (e) {
@@ -190,17 +236,27 @@ export class Game {
       }
       const resources: Resources = this._resources;
 
-      const cource: NPCCourse = NPCCourses.find(v =>
-        v.armdozerId === this._state.player.armdozer.id
-        && v.level === this._state.level
+      if (this._state.inProgress.type !== 'NPCBattle') {
+        return;
+      }
+      const npcBattle: NPCBattle = this._state.inProgress;
+
+      if (!npcBattle.player) {
+        return;
+      }
+      const player: Player = npcBattle.player;
+
+      const course: NPCBattleCourse = NPCBattleCourses.find(v =>
+        v.armdozerId === player.armdozer.id
+        && v.level === npcBattle.level
       ) ?? DefaultCourse;
-      const npc = cource.npc();
+      const npc = course.npc();
       this._domScenes.showMatchCard(
-        this._state.player.armdozer.id,
+        player.armdozer.id,
         npc.armdozer.id,
-        cource.stageName,
+        course.stageName,
       );
-      const room = new OfflineBattleRoom(this._state.player, npc);
+      const room = new OfflineBattleRoom(player, npc);
       const initialState = await room.start();
       await waitTime(1000);
 

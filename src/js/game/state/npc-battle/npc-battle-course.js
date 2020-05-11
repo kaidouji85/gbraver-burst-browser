@@ -1,19 +1,19 @@
 // @flow
 
-import type {NPC} from "../../npc/npc";
-import {NeoLandozerNPC} from "../../npc/neo-landozer";
-import {WeakNeoLandozerNPC} from "../../npc/weak-neo-landozer-npc";
-import {LightningDozerNPC} from "../../npc/lightning-dozer";
-import {WeakLightningDozerNPC} from "../../npc/weak-lightning-dozer";
-import {ShinBraverNPC} from "../../npc/shin-braver";
-import {WeakShinBraverNPC} from "../../npc/weak-shin-braver";
+import type {NPC} from "../../../npc/npc";
+import {NeoLandozerNPC} from "../../../npc/neo-landozer";
+import {WeakNeoLandozerNPC} from "../../../npc/weak-neo-landozer-npc";
+import {LightningDozerNPC} from "../../../npc/lightning-dozer";
+import {WeakLightningDozerNPC} from "../../../npc/weak-lightning-dozer";
+import {ShinBraverNPC} from "../../../npc/shin-braver";
+import {WeakShinBraverNPC} from "../../../npc/weak-shin-braver";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
  * NPCコース
  */
-export type NPCCourse = {
+export type NPCBattleCourse = {
   /** プレイヤー アームドーザID */
   armdozerId: ArmDozerId,
   /** レベル */
@@ -27,7 +27,7 @@ export type NPCCourse = {
 /**
  * デフォルトのステージ
  */
-export const DefaultCourse: NPCCourse = {
+export const DefaultCourse: NPCBattleCourse = {
   armdozerId: ArmDozerIdList.SHIN_BRAVER,
   level: 0,
   stageName: 'STAGE 0',
@@ -37,7 +37,7 @@ export const DefaultCourse: NPCCourse = {
 /**
  * NPCコースをあつめたもの
  */
-export const NPCCourses: NPCCourse[] = [
+export const NPCBattleCourses: NPCBattleCourse[] = [
   /** シンブレイバー */
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
