@@ -1,6 +1,6 @@
 // @flow
 
-import type {Player} from "gbraver-burst-core/lib/player/player";
+import type {Player} from "gbraver-burst-core";
 
 /** 最大レベル */
 export const MAX_LEVEL = 3;

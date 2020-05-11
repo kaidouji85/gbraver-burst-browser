@@ -1,9 +1,9 @@
 // @flow
 
 import type {NPCBattle} from "./npc-battle";
+import {MAX_LEVEL} from "./npc-battle";
 import type {EndBattle} from "../../../action/game/battle";
 import type {GameOver, Player} from "gbraver-burst-core";
-import {MAX_LEVEL} from "./npc-battle";
 
 /**
  * 戦闘終了結果の応じてNPC戦闘を更新する

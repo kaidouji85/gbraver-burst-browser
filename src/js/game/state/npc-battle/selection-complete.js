@@ -1,10 +1,10 @@
 // @flow
 
 import type {NPCBattle} from "./npc-battle";
+import type {Player} from "gbraver-burst-core";
 import {ArmDozers} from "gbraver-burst-core";
 import type {SelectionComplete} from "../../../action/game/selection-complete";
 import {playerUuid} from "../../../uuid/player";
-import type {Player} from "gbraver-burst-core";
 
 /**
  * プレイヤーキャラ選択内容の結果をNPC戦闘に反映させる
