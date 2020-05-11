@@ -4,6 +4,7 @@ import type {State} from "./state";
 import type {SelectionComplete} from "../../action/game/selection-complete";
 import {ArmDozers} from "gbraver-burst-core";
 
+// TODO 削除する
 /**
  * プレイヤー選択完了時の処理
  *

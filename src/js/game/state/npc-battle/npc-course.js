@@ -1,12 +1,12 @@
 // @flow
 
-import type {NPC} from "../../npc/npc";
-import {NeoLandozerNPC} from "../../npc/neo-landozer";
-import {WeakNeoLandozerNPC} from "../../npc/weak-neo-landozer-npc";
-import {LightningDozerNPC} from "../../npc/lightning-dozer";
-import {WeakLightningDozerNPC} from "../../npc/weak-lightning-dozer";
-import {ShinBraverNPC} from "../../npc/shin-braver";
-import {WeakShinBraverNPC} from "../../npc/weak-shin-braver";
+import type {NPC} from "../../../npc/npc";
+import {NeoLandozerNPC} from "../../../npc/neo-landozer";
+import {WeakNeoLandozerNPC} from "../../../npc/weak-neo-landozer-npc";
+import {LightningDozerNPC} from "../../../npc/lightning-dozer";
+import {WeakLightningDozerNPC} from "../../../npc/weak-lightning-dozer";
+import {ShinBraverNPC} from "../../../npc/shin-braver";
+import {WeakShinBraverNPC} from "../../../npc/weak-shin-braver";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 

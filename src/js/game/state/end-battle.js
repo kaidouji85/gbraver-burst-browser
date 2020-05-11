@@ -5,6 +5,7 @@ import {MAX_LEVEL} from "./state";
 import type {EndBattle} from "../../action/game/battle";
 import type {GameOver} from "gbraver-burst-core";
 
+// TODO 削除する
 /**
  * 戦闘終了に伴いゲーム情報を更新する
  *
