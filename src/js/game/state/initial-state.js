@@ -20,5 +20,6 @@ export function createInitialState(): State {
   return {
     player: player,
     level: 1,
+    inProgress: {type: 'None'}
   };
 }

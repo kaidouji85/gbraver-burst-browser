@@ -8,5 +8,6 @@ import {EMPTY_PLAYER} from "./player";
  */
 export const EMPTY_STATE: State = {
   player: EMPTY_PLAYER,
-  level: 1
+  level: 1,
+  inProgress: {type: 'None'}
 };
