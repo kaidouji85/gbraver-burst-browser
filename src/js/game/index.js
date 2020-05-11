@@ -25,17 +25,15 @@ import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/game/selection-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {PreLoadLinks} from "./preload-links";
-import {waitTime} from "../wait/wait-time";
-import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
-import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
-import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
 import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
 import {selectionComplete} from "./state/npc-battle/selection-complete";
 import {endBattle} from "./state/npc-battle/end-battle";
-import type {Player} from "gbraver-burst-core";
+import {npcBattleFlow} from "./flow/npc-battle";
 
-/** ゲーム全体の管理を行う */
+/**
+ * ゲーム全体の管理を行う
+ */
 export class Game {
   _state: State;
   _loading: Observable<LoadingAction>;
@@ -51,6 +49,11 @@ export class Game {
   _serviceWorker: ?ServiceWorkerRegistration;
   _subscriptions: Subscription[];
 
+  /**
+   * コンストラクタ
+   *
+   * @param resourcePath リソースパス
+   */
   constructor(resourcePath: ResourcePath) {
     this._resourcePath = resourcePath;
 
@@ -111,13 +114,18 @@ export class Game {
     ];
   }
 
-  /** ゲームの初期化を行う */
+  /**
+   * ゲームの初期化を行う
+   *
+   * @return 処理結果
+   */
   async initialize(): Promise<void> {
     try {
-      this._domScenes.showTitle();
       if (isDevelopment()) {
         viewPerformanceStats(document.body);
       }
+
+      this._domScenes.showTitle();
       this._serviceWorker = await loadServiceWorker();
     } catch (e) {
       throw e;
@@ -125,18 +133,19 @@ export class Game {
   }
 
   /**
-   * ゲームスタートボタンを押した
+   * ゲームスタートボタンを押した際の処理
+   *
+   * @param action アクション
    */
   _onPushGameStart(action: PushGameStart) {
-    this._state = {
-      ...this._state,
-      inProgress: createInitialNPCBattle()
-    };
+    this._state.inProgress = createInitialNPCBattle();
     this._domScenes.showPlayerSelect();
   }
 
   /**
-   * 遊び方ボタンを押した
+   * 遊び方ボタンを押した際の処理
+   *
+   * @param action アクション
    */
   _onPushHowToPlay(action: PushHowToPlay) {
     this._domDialogs.showHowToPlay();
@@ -152,39 +161,20 @@ export class Game {
   }
 
   /**
-   * プレイヤーキャラクチャー選択完了時の処理
+   * プレイヤーキャラクター 選択完了時の処理
    *
    * @param action アクション
    */
-  _onSelectionComplete(action: SelectionComplete): void {
-    if (this._state.inProgress.type === 'NPCBattle') {
-      this._selectionCompletedInNPCBattle(action);
-    }
-  }
-
-  /**
-   * NPC戦闘 プレイヤー選択完了
-   *
-   * @param action アクション
-   */
-  async _selectionCompletedInNPCBattle(action: SelectionComplete): Promise<void> {
+  async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
-      if (this._state.inProgress.type !== 'NPCBattle') {
-        return;
+      if (this._state.inProgress.type === 'NPCBattle') {
+        const origin: NPCBattle = this._state.inProgress;
+        const updated: NPCBattle = selectionComplete(origin, action);
+        this._state.inProgress = updated;
+        const resources: Resources = await this._getOrLoadResources();
+        await npcBattleFlow(resources, updated, this._domScenes, this._tdScenes);
       }
-      const npcBattle: NPCBattle = this._state.inProgress;
-      this._state = {
-        ...this._state,
-        inProgress: selectionComplete(npcBattle, action)
-      };
-
-      this._domScenes.showLoading();
-      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
-      this._resources = resources;
-      await waitAnimationFrame();
-
-      await this._startNPCBattle();
-    } catch (e) {
+    } catch(e) {
       throw e;
     }
   }
@@ -194,75 +184,39 @@ export class Game {
    *
    * @param action アクション
    */
-  _onEndBattle(action: EndBattle) {
-    if (this._state.inProgress.type === 'NPCBattle') {
-      this._endNPCBattle(action);
-    }
-  }
-
-  /**
-   * NPC戦闘終了時の処理
-   *
-   * @param action アクション
-   * @return {Promise<void>}
-   * @private
-   */
-  async _endNPCBattle(action: EndBattle): Promise<void> {
+  async _onEndBattle(action: EndBattle): Promise<void> {
     try {
-      if (this._state.inProgress.type !== 'NPCBattle') {
-        return;
+      if (this._state.inProgress.type === 'NPCBattle') {
+        const resources: Resources = await this._getOrLoadResources();
+        const origin: NPCBattle = this._state.inProgress;
+        const updated: NPCBattle = endBattle(origin, action);
+        this._state.inProgress = updated;
+        await npcBattleFlow(resources, updated, this._domScenes, this._tdScenes);
       }
-      const npcBattle: NPCBattle = this._state.inProgress;
-      this._state = {
-        ...this._state,
-        inProgress: endBattle(npcBattle, action)
-      };
-
-      await this._startNPCBattle();
-    } catch (e) {
+    } catch(e) {
       throw e;
     }
   }
 
   /**
-   * NPC線をスタートさせる
-   *
-   * @return 実行結果
+   * リソース管理オブジェクトの取得する
+   * ロードされていない場合は、本メソッド内でロードを行い結果を返す
+   * 
+   * @return リソース管理オブジェクト
    */
-  async _startNPCBattle(): Promise<void> {
+  async _getOrLoadResources(): Promise<Resources> {
     try {
-      if (!this._resources) {
-        return;
+      if (this._resources) {
+        const ret: Resources = this._resources;
+        return ret;
       }
-      const resources: Resources = this._resources;
 
-      if (this._state.inProgress.type !== 'NPCBattle') {
-        return;
-      }
-      const npcBattle: NPCBattle = this._state.inProgress;
-
-      if (!npcBattle.player) {
-        return;
-      }
-      const player: Player = npcBattle.player;
-
-      const course: NPCBattleCourse = NPCBattleCourses.find(v =>
-        v.armdozerId === player.armdozer.id
-        && v.level === npcBattle.level
-      ) ?? DefaultCourse;
-      const npc = course.npc();
-      this._domScenes.showMatchCard(
-        player.armdozer.id,
-        npc.armdozer.id,
-        course.stageName,
-      );
-      const room = new OfflineBattleRoom(player, npc);
-      const initialState = await room.start();
-      await waitTime(1000);
-
-      this._tdScenes.startBattle(resources, room, initialState);
-      this._domScenes.hidden();
-    } catch (e) {
+      this._domScenes.showLoading();
+      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
+      this._resources = resources;
+      await waitAnimationFrame();
+      return resources;
+    } catch(e) {
       throw e;
     }
   }
