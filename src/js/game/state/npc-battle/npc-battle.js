@@ -23,7 +23,7 @@ export type NPCBattle = {
  *
  * @return 生成結果
  */
-export function createNPCBattleCourse(): NPCBattle {
+export function createInitialNPCBattle(): NPCBattle {
   return {
     type: 'NPCBattle',
     player: null,

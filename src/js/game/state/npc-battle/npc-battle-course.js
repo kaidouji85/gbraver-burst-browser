@@ -13,7 +13,7 @@ import {ArmDozerIdList} from "gbraver-burst-core";
 /**
  * NPCコース
  */
-export type NPCCourse = {
+export type NPCBattleCourse = {
   /** プレイヤー アームドーザID */
   armdozerId: ArmDozerId,
   /** レベル */
@@ -27,7 +27,7 @@ export type NPCCourse = {
 /**
  * デフォルトのステージ
  */
-export const DefaultCourse: NPCCourse = {
+export const DefaultCourse: NPCBattleCourse = {
   armdozerId: ArmDozerIdList.SHIN_BRAVER,
   level: 0,
   stageName: 'STAGE 0',
@@ -37,7 +37,7 @@ export const DefaultCourse: NPCCourse = {
 /**
  * NPCコースをあつめたもの
  */
-export const NPCCourses: NPCCourse[] = [
+export const NPCBattleCourses: NPCBattleCourse[] = [
   /** シンブレイバー */
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,

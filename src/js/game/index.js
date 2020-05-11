@@ -20,20 +20,20 @@ import type {EndHowToPlay} from "../action/game/how-to-play";
 import {DOMDialogs} from "./dom-dialogs";
 import type {PushGameStart, PushHowToPlay} from "../action/game/title";
 import type {State} from "./state/state";
-import {createInitialState} from "./state/initial-state";
 import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/game/selection-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {PreLoadLinks} from "./preload-links";
 import {waitTime} from "../wait/wait-time";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
-import type {NPCCourse} from "./state/npc-battle/npc-course";
-import {DefaultCourse, NPCCourses} from "./state/npc-battle/npc-course";
-import {createNPCBattleCourse} from "./state/npc-battle/npc-battle";
+import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
+import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
+import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
 import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {selectionComplete} from "./state/npc-battle/selection-complete";
 import {endBattle} from "./state/npc-battle/end-battle";
 import type {Player} from "gbraver-burst-core";
+import {createInitialState} from "./state/state";
 
 /** ゲーム全体の管理を行う */
 export class Game {
@@ -130,7 +130,7 @@ export class Game {
   _onPushGameStart(action: PushGameStart) {
     this._state = {
       ...this._state,
-      inProgress: createNPCBattleCourse()
+      inProgress: createInitialNPCBattle()
     };
     this._domScenes.showPlayerSelect();
   }
@@ -221,7 +221,7 @@ export class Game {
       }
       const player: Player = npcBattle.player;
 
-      const course: NPCCourse = NPCCourses.find(v =>
+      const course: NPCBattleCourse = NPCBattleCourses.find(v =>
         v.armdozerId === player.armdozer.id
         && v.level === npcBattle.level
       ) ?? DefaultCourse;

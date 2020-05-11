@@ -1,6 +1,5 @@
 // @flow
 
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer/armdozer";
 import type {NPCBattle} from "./npc-battle";
 import {ArmDozers} from "gbraver-burst-core";
 import type {SelectionComplete} from "../../../action/game/selection-complete";
