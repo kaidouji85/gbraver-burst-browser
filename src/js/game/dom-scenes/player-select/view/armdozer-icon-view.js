@@ -2,8 +2,10 @@
 
 import {Observable, Subject} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {waitFinishAnimation} from "../../../../../wait/wait-finish-animation";
-import {ImageWithAlternative} from "../../../../../components/image-with-alternative";
+import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
+import {ImageWithAlternative} from "../../../../components/image-with-alternative";
+import {getArmdozerIconURL} from "../../../../armdozer-icon/armdozer-icon-url";
+import type {ResourcePath} from "../../../../resource/path/resource-path";
 
 /**
  * イベント通知
@@ -20,8 +22,13 @@ export class ArmdozerIconView {
   _root: ImageWithAlternative;
   _select: Subject<void>;
 
-
-  constructor(armDozerId: ArmDozerId, imagePath: string) {
+  /**
+   * コンストラクタ
+   *
+   * @param resourcePath リソースパス
+   * @param armDozerId アームドーザID
+   */
+  constructor(resourcePath: ResourcePath, armDozerId: ArmDozerId) {
     this.armDozerId = armDozerId;
     this._select = new Subject();
 
@@ -42,7 +49,7 @@ export class ArmdozerIconView {
       e.preventDefault();
       this._select.next();
     });
-    this._root.getImage().src = imagePath;
+    this._root.getImage().src = getArmdozerIconURL(resourcePath, armDozerId);
   }
 
   /**
