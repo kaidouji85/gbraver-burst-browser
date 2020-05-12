@@ -236,7 +236,7 @@
     justify-content: center;
 }
 
-.player-select__armdozers__icon {
+.player-select__armdozers__icon__image {
     object-fit: cover;
     width: var(--armdozer-icon-width);
     margin: var(--armdozer-icon-margin);

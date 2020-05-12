@@ -17,23 +17,37 @@ export type Notifier = {
 export class ArmdozerIconView {
   armDozerId: ArmDozerId;
   _root: HTMLElement;
+  _image: HTMLElement;
+  _alternative: HTMLElement;
   _select: Subject<void>;
 
   constructor(armDozerId: ArmDozerId, imagePath: string) {
     this.armDozerId = armDozerId;
     this._select = new Subject();
 
-    this._root = document.createElement('img');
-    this._root.src = imagePath;
+    this._root = document.createElement('div');
     this._root.className = 'player-select__armdozers__icon';
-    this._root.addEventListener('click', (e: MouseEvent) => {
+    
+    this._alternative = document.createElement('div');
+    this._alternative.className = 'player-select__armdozers__icon__alternative';
+    this._alternative.style.display = 'none';
+    this._alternative.innerHTML = `
+      だいたいです
+    `;
+    this._root.append(this._alternative);
+
+    this._image = document.createElement('img');
+    this._image.className = 'player-select__armdozers__icon__image';
+    this._image.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
       this._select.next();
     });
-    this._root.addEventListener('touchstart', (e: TouchEvent) => {
+    this._image.addEventListener('touchstart', (e: TouchEvent) => {
       e.preventDefault();
       this._select.next();
     });
+    this._image.src = imagePath;
+    this._root.appendChild(this._image);
   }
 
   /**
@@ -62,7 +76,7 @@ export class ArmdozerIconView {
    * @return アニメーション
    */
   selected(): Promise<void> {
-    const animation = this._root.animate([
+    const animation = this._image.animate([
       {width: 'var(--armdozer-icon-width)', margin: 'var(--armdozer-icon-margin)'},
       {width: 'var(--selected-armdozer-icon-width)', margin: 0},
     ], {
@@ -79,7 +93,7 @@ export class ArmdozerIconView {
    * @return アニメーション
    */
   hidden(): Promise<void> {
-    const animation = this._root.animate([
+    const animation = this._image.animate([
       {opacity: 1, width: 'var(--armdozer-icon-width)', margin: 'var(--armdozer-icon-margin)'},
       {opacity: 0, width: '0', margin: 0}
     ], {
