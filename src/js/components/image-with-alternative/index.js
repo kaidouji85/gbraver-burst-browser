@@ -1,7 +1,5 @@
 // @flow
 
-type ImageConfigure = (image: HTMLImageElement) => void;
-
 /**
  * 代替要素付き画像
  */
@@ -12,21 +10,17 @@ export class ImageWithAlternative {
 
   /**
    * コンストラクタ
-   *
-   * @param imageConfigure イメージに各種設定を追加するコールバック関数
-   * @param alternative 画像が読み込まれるまで表示される代替要素
    */
-  constructor(imageConfigure: ImageConfigure, alternative: HTMLElement ) {
+  constructor() {
     this._root = document.createElement('div');
 
-    this._alternative = alternative;
+    this._alternative = document.createElement('div');
     this._root.appendChild(this._alternative);
 
     this._image = document.createElement('img');
     this._image.addEventListener('load', () => {
       this._alternative.style.display = 'none';
     });
-    imageConfigure(this._image);
     this._root.appendChild(this._image);
   }
 
@@ -37,5 +31,23 @@ export class ImageWithAlternative {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * 画像を取得する
+   *
+   * @return 取得結果
+   */
+  getImage(): HTMLImageElement {
+    return this._image;
+  }
+
+  /**
+   * 代替要素を取得する
+   *
+   * @return 取得結果
+   */
+  getAlternative(): HTMLElement {
+    return this._alternative;
   }
 }
