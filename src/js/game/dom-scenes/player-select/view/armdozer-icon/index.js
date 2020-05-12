@@ -3,7 +3,7 @@
 import {ArmdozerIconView} from "./armdozer-icon-view";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
-import type {ResourcePath} from "../../../../resource/path/resource-path";
+import type {ResourcePath} from "../../../../../resource/path/resource-path";
 
 /**
  * アームドーザアイコンを生成する
