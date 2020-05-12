@@ -17,7 +17,7 @@ export type Notifier = {
 export class ArmdozerIconView {
   armDozerId: ArmDozerId;
   _root: HTMLElement;
-  _image: HTMLElement;
+  _image: HTMLImageElement;
   _alternative: HTMLElement;
   _select: Subject<void>;
 
