@@ -1,17 +1,17 @@
 // @flow
 
-import type {ResourcePath} from "../../../../resource/path/resource-path";
+import type {ResourcePath} from "../resource/path/resource-path";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
- * アームドーザIDを画像URLに変換する
+ * アームドーザIDに対応するアイコン画像のURLを返す
  *
  * @param resourcePath リソースパス
  * @param armDozerId アームドーザID
  * @return 画像URL
  */
-export function armDozerId2URL(resourcePath: ResourcePath, armDozerId: ArmDozerId): string {
+export function getArmdozerIconURL(resourcePath: ResourcePath, armDozerId: ArmDozerId): string {
   switch (armDozerId) {
     case ArmDozerIdList.SHIN_BRAVER:
       return `${resourcePath.get()}/armdozer/shin-braver/player-select.png`;

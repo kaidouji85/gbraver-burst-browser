@@ -2,7 +2,7 @@
 
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {armDozerId2URL} from "./armdozer-id-to-url";
+import {getArmdozerIconURL} from "../../../../armdozer-icon/armdozer-icon-url";
 
 /**
  * 対戦カードシーン ビュー
@@ -27,9 +27,9 @@ export class MatchCardView {
           ${caption}
         </div>
         <div class="match-card__contents__cards">
-          <img class="match-card__contents__cards__enemy" src="${armDozerId2URL(resourcePath, enemy)}">
+          <img class="match-card__contents__cards__enemy" src="${getArmdozerIconURL(resourcePath, enemy)}">
           <div class="match-card__contents__cards__vs">vs</div>
-          <img class="match-card__contents__cards__player" src="${armDozerId2URL(resourcePath, player)}">
+          <img class="match-card__contents__cards__player" src="${getArmdozerIconURL(resourcePath, player)}">
         </div>
       </div>
     `;
