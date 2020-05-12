@@ -30,7 +30,6 @@ export class ArmdozerIconView {
     
     this._alternative = document.createElement('div');
     this._alternative.className = 'player-select__armdozers__icon__alternative';
-    this._alternative.style.display = 'none';
     this._alternative.innerHTML = `
       だいたいです
     `;
@@ -45,6 +44,9 @@ export class ArmdozerIconView {
     this._image.addEventListener('touchstart', (e: TouchEvent) => {
       e.preventDefault();
       this._select.next();
+    });
+    this._image.addEventListener('load', (e: Event) => {
+      this._alternative.style.display = 'none';
     });
     this._image.src = imagePath;
     this._root.appendChild(this._image);
