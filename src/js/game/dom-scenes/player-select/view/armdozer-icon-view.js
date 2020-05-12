@@ -30,7 +30,7 @@ export class ArmdozerIconView {
 
     this._root.getAlternative().className = 'player-select__armdozers__icon__alternative';
     this._root.getAlternative().innerHTML = `
-      だいたいです
+      NOW LOADING...
     `;
 
     this._root.getImage().className = 'player-select__armdozers__icon__image';
