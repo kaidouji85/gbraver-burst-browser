@@ -2,8 +2,8 @@
 
 import {Observable, Subject} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {waitFinishAnimation} from "../../wait/wait-finish-animation";
-import {ImageWithAlternative} from "../image-with-alternative";
+import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
+import {ImageWithAlternative} from "../../../../components/image-with-alternative";
 
 /**
  * イベント通知
@@ -26,14 +26,14 @@ export class ArmdozerIconView {
     this._select = new Subject();
 
     this._root = new ImageWithAlternative();
-    this._root.getRootHTMLElement().className = 'armdozers__icon';
+    this._root.getRootHTMLElement().className = 'player-select__armdozers__icon';
 
-    this._root.getAlternative().className = 'armdozers__icon__alternative';
+    this._root.getAlternative().className = 'player-select__armdozers__icon__alternative';
     this._root.getAlternative().innerHTML = `
       NOW LOADING...
     `;
 
-    this._root.getImage().className = 'armdozers__icon__image';
+    this._root.getImage().className = 'player-select__armdozers__icon__image';
     this._root.getImage().addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
       this._select.next();
