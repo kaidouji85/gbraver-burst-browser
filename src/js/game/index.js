@@ -31,6 +31,7 @@ import {selectionComplete} from "./state/npc-battle/selection-complete";
 import {endBattle} from "./state/npc-battle/end-battle";
 import {npcBattleFlow} from "./flow/npc-battle";
 import {waitTime} from "../wait/wait-time";
+import {DOMFader} from "../components/dom-fader/dom-fader";
 
 /**
  * ゲーム全体の管理を行う
@@ -41,6 +42,7 @@ export class Game {
   _resize: Observable<Resize>;
   _vh: CssVH;
   _preLoadLinks: PreLoadLinks;
+  _fader: DOMFader;
   _interruptScenes: InterruptScenes;
   _domScenes: DOMScenes;
   _domDialogs: DOMDialogs;
@@ -69,6 +71,8 @@ export class Game {
       head.appendChild(link);
     });
 
+    this._fader = new DOMFader();
+
     this._interruptScenes = new InterruptScenes({
       resourcePath: this._resourcePath,
     });
@@ -81,6 +85,7 @@ export class Game {
 
     const body = document.body || document.createElement('div');
     const elements = [
+      this._fader.getRootHTMLElement(),
       ...this._interruptScenes.getRootHTMLElements(),
       ...this._domDialogs.getRootHTMLElements(),
       this._domScenes.getRootHTMLElement(),
