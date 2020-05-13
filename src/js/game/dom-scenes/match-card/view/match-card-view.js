@@ -2,7 +2,7 @@
 
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {getArmdozerIconURL} from "../../../../armdozer-icon/armdozer-icon-url";
+import {getArmdozerIconURL} from "../../../../resource/urls/armdozer-icon-urls";
 
 /**
  * 対戦カードシーン ビュー
