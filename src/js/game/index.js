@@ -253,13 +253,12 @@ export class Game {
       }
       const player: Player = npcBattle.player;
 
+      await this._fader.fadeOut();
       const course: NPCBattleCourse = NPCBattleCourses.find(v =>
         v.armdozerId === player.armdozer.id
         && v.level === npcBattle.level
       ) ?? DefaultCourse;
       const npc = course.npc();
-
-      await this._fader.fadeOut();
       this._domScenes.showMatchCard(
         player.armdozer.id,
         npc.armdozer.id,
@@ -269,11 +268,12 @@ export class Game {
 
       const room = new OfflineBattleRoom(player, npc);
       const initialState = await room.start();
-      await waitTime(1000);
+      this._tdScenes.startBattle(resources, room, initialState);
+      await waitAnimationFrame();
 
       await this._fader.fadeOut();
-      this._tdScenes.startBattle(resources, room, initialState);
       this._domScenes.hidden();
+      await this._fader.hidden();
       await this._fader.fadeIn();
     } catch(e) {
       throw e;

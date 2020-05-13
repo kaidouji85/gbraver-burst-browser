@@ -26,6 +26,13 @@ export class DOMFader {
   }
 
   /**
+   * フェーダーを即座に消す
+   */
+  hidden(): void {
+    this._root.style.display = 'none';
+  }
+
+  /**
    * フェードイン
    *
    * @return アニメーション
