@@ -1,7 +1,7 @@
 // @flow
 
 import {domStub} from "./stub/dom-stub";
-import {DOMFader} from "../src/js/components/dom-fader";
+import {DOMFader} from "../src/js/components/dom-fader/dom-fader";
 
 export default {
   title: 'dom-fader'

@@ -11,6 +11,7 @@ export class DOMFader {
    */
   constructor() {
     this._root = document.createElement('div');
+    this._root.className = 'dom-fader landscape-only';
   }
 
   /**
