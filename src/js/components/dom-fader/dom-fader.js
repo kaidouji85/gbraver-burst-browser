@@ -31,15 +31,23 @@ export class DOMFader {
    * @return アニメーション
    */
   async fadeIn(): Promise<void> {
-    const animation = this._root.animate([
-      {opacity: 1},
-      {opacity: 0}
-    ], {
-      duration: 500,
-      fill: "forwards",
-      easing: 'ease'
-    });
-    return waitFinishAnimation(animation);
+    try {
+      this._root.style.display = 'block';
+
+      const animation = this._root.animate([
+        {opacity: 1, display: 'block'},
+        {opacity: 0, display: 'none'}
+      ], {
+        duration: 500,
+        fill: "forwards",
+        easing: 'ease'
+      });
+      await waitFinishAnimation(animation);
+
+      this._root.style.display = 'none';
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**
@@ -48,14 +56,20 @@ export class DOMFader {
    * @return アニメーション
    */
   async fadeOut(): Promise<void> {
-    const animation = this._root.animate([
-      {opacity: 0},
-      {opacity: 1}
-    ], {
-      duration: 500,
-      fill: "forwards",
-      easing: 'ease'
-    });
-    return waitFinishAnimation(animation);
+    try {
+      this._root.style.display = 'block';
+      
+      const animation = this._root.animate([
+        {opacity: 0},
+        {opacity: 1}
+      ], {
+        duration: 500,
+        fill: "forwards",
+        easing: 'ease'
+      });
+      await waitFinishAnimation(animation);
+    } catch(e) {
+      throw e;
+    }
   }
 }

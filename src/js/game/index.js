@@ -133,6 +133,7 @@ export class Game {
 
       this._domScenes.showTitle();
       this._serviceWorker = await loadServiceWorker();
+      await this._fader.fadeIn();
     } catch (e) {
       throw e;
     }
@@ -143,9 +144,15 @@ export class Game {
    *
    * @param action アクション
    */
-  _onPushGameStart(action: PushGameStart) {
-    this._state.inProgress = createInitialNPCBattle();
-    this._domScenes.showPlayerSelect();
+  async _onPushGameStart(action: PushGameStart) {
+    try {
+      await this._fader.fadeOut();
+      this._state.inProgress = createInitialNPCBattle();
+      this._domScenes.showPlayerSelect();
+      await this._fader.fadeIn();
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**
