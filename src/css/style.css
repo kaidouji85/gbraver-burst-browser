@@ -70,7 +70,6 @@
     position: fixed;
     z-index: var(--zindex-fader);
     background-color: var(--background-color);
-    opacity: 0;
 }
 
 .loading {

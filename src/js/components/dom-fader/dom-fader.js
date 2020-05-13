@@ -1,5 +1,7 @@
 // @flow
 
+import {waitFinishAnimation} from "../../wait/wait-finish-animation";
+
 /**
  * HTML要素で作られたフェーダ
  */
@@ -21,5 +23,39 @@ export class DOMFader {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * フェードイン
+   *
+   * @return アニメーション
+   */
+  async fadeIn(): Promise<void> {
+    const animation = this._root.animate([
+      {opacity: 1},
+      {opacity: 0}
+    ], {
+      duration: 500,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    return waitFinishAnimation(animation);
+  }
+
+  /**
+   * フェードアウト
+   *
+   * @return アニメーション
+   */
+  async fadeOut(): Promise<void> {
+    const animation = this._root.animate([
+      {opacity: 0},
+      {opacity: 1}
+    ], {
+      duration: 500,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    return waitFinishAnimation(animation);
   }
 }
