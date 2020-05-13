@@ -51,5 +51,5 @@ export function neoLandozerIconURL(resourcePath: ResourcePath): string {
  * @return URL
  */
 export function lightningDozerIconURL(resourcePath: ResourcePath): string {
-  return `${resourcePath.get()}/armdozer/ligjtning-dozer/player-select.png`;
+  return `${resourcePath.get()}/armdozer/lightning-dozer/player-select.png`;
 }

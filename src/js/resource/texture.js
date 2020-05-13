@@ -170,51 +170,51 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   // ライトニングドーザ関連
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_STAND,
-    path: 'armdozer/ligjtning-dozer/stand.png',
+    path: 'armdozer/lightning-dozer/stand.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_HM_CHARGE,
-    path: 'armdozer/ligjtning-dozer/hm-charge.png',
+    path: 'armdozer/lightning-dozer/hm-charge.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_HM_ATTACK,
-    path: 'armdozer/ligjtning-dozer/hm-attack.png',
+    path: 'armdozer/lightning-dozer/hm-attack.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_HM_TO_STAND,
-    path: 'armdozer/ligjtning-dozer/hm-to-stand.png',
+    path: 'armdozer/lightning-dozer/hm-to-stand.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_KNOCK_BACK,
-    path: 'armdozer/ligjtning-dozer/knock-back.png',
+    path: 'armdozer/lightning-dozer/knock-back.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_DOWN,
-    path: 'armdozer/ligjtning-dozer/down.png',
+    path: 'armdozer/lightning-dozer/down.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_GUTS_UP,
-    path: 'armdozer/ligjtning-dozer/guts-up.png',
+    path: 'armdozer/lightning-dozer/guts-up.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_GUTS_DOWN,
-    path: 'armdozer/ligjtning-dozer/guts-down.png',
+    path: 'armdozer/lightning-dozer/guts-down.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_GUTS_TO_STAND,
-    path: 'armdozer/ligjtning-dozer/guts-to-stand.png',
+    path: 'armdozer/lightning-dozer/guts-to-stand.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_GUARD,
-    path: 'armdozer/ligjtning-dozer/guard.png',
+    path: 'armdozer/lightning-dozer/guard.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_UP,
-    path: 'armdozer/ligjtning-dozer/cutin-up.png',
+    path: 'armdozer/lightning-dozer/cutin-up.png',
   },
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN,
-    path: 'armdozer/ligjtning-dozer/cutin-down.png',
+    path: 'armdozer/lightning-dozer/cutin-down.png',
   },
   // ヒットマーク関連
   {
