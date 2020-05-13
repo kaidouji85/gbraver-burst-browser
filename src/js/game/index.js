@@ -30,6 +30,7 @@ import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
 import {selectionComplete} from "./state/npc-battle/selection-complete";
 import {endBattle} from "./state/npc-battle/end-battle";
 import {npcBattleFlow} from "./flow/npc-battle";
+import {waitTime} from "../wait/wait-time";
 
 /**
  * ゲーム全体の管理を行う
@@ -215,6 +216,7 @@ export class Game {
       const resources = await loadAllResource(`${this._resourcePath.get()}/`);
       this._resources = resources;
       await waitAnimationFrame();
+      await waitTime(3000);
       return resources;
     } catch(e) {
       throw e;
