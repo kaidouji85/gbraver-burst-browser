@@ -274,7 +274,6 @@ export class Game {
       await this._fader.fadeOut();
       this._domScenes.hidden();
       await this._fader.hidden();
-      await this._fader.fadeIn();
     } catch(e) {
       throw e;
     }
