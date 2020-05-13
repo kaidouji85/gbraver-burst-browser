@@ -5,7 +5,6 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon-view";
 import {merge, Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {createArmdozerIcon} from "./armdozer-icon-creator";
 import {map} from "rxjs/operators";
 import type {SelectArmdozer} from "../../../../action/player-select/select-armdozer";
 
@@ -47,7 +46,7 @@ export class PlayerSelectView {
 
     this._armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
     this.armdozerIcons = armDozerIds
-      .map(armDozerId => createArmdozerIcon(armDozerId, resourcePath));
+      .map(armDozerId => new ArmdozerIconView(resourcePath, armDozerId));
     this.armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
