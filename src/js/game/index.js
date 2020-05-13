@@ -29,9 +29,12 @@ import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
 import {selectionComplete} from "./state/npc-battle/selection-complete";
 import {endBattle} from "./state/npc-battle/end-battle";
-import {npcBattleFlow} from "./flow/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
+import type {Player} from "gbraver-burst-core";
+import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
+import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
+import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 
 /**
  * ゲーム全体の管理を行う
@@ -130,9 +133,10 @@ export class Game {
       if (isDevelopment()) {
         viewPerformanceStats(document.body);
       }
-
-      this._domScenes.showTitle();
       this._serviceWorker = await loadServiceWorker();
+
+      await this._fader.fadeOut();
+      this._domScenes.showTitle();
       await this._fader.fadeIn();
     } catch (e) {
       throw e;
@@ -146,8 +150,9 @@ export class Game {
    */
   async _onPushGameStart(action: PushGameStart) {
     try {
-      await this._fader.fadeOut();
       this._state.inProgress = createInitialNPCBattle();
+
+      await this._fader.fadeOut();
       this._domScenes.showPlayerSelect();
       await this._fader.fadeIn();
     } catch(e) {
@@ -180,12 +185,14 @@ export class Game {
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
+      if (!this._resources) {
+        await this._loadResourcesFlow();
+      }
+
       if (this._state.inProgress.type === 'NPCBattle') {
         const origin: NPCBattle = this._state.inProgress;
-        const updated: NPCBattle = selectionComplete(origin, action);
-        this._state.inProgress = updated;
-        const resources: Resources = await this._getOrLoadResources();
-        await npcBattleFlow(resources, updated, this._domScenes, this._tdScenes);
+        this._state.inProgress = selectionComplete(origin, action);
+        await this._npcBattleFlow();
       }
     } catch(e) {
       throw e;
@@ -200,11 +207,9 @@ export class Game {
   async _onEndBattle(action: EndBattle): Promise<void> {
     try {
       if (this._state.inProgress.type === 'NPCBattle') {
-        const resources: Resources = await this._getOrLoadResources();
         const origin: NPCBattle = this._state.inProgress;
-        const updated: NPCBattle = endBattle(origin, action);
-        this._state.inProgress = updated;
-        await npcBattleFlow(resources, updated, this._domScenes, this._tdScenes);
+        this._state.inProgress = endBattle(origin, action);
+        await this._npcBattleFlow();
       }
     } catch(e) {
       throw e;
@@ -212,24 +217,64 @@ export class Game {
   }
 
   /**
-   * リソース管理オブジェクトの取得する
-   * ロードされていない場合は、本メソッド内でロードを行い結果を返す
-   * 
-   * @return リソース管理オブジェクト
+   * リソース読み込みフロー
+   *
+   * @return 処理結果
    */
-  async _getOrLoadResources(): Promise<Resources> {
+  async _loadResourcesFlow(): Promise<void> {
     try {
-      if (this._resources) {
-        const ret: Resources = this._resources;
-        return ret;
-      }
-
+      await this._fader.fadeOut();
       this._domScenes.showLoading();
-      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
-      this._resources = resources;
+      await this._fader.fadeIn();
+
+      this._resources = await loadAllResource(`${this._resourcePath.get()}/`);
       await waitAnimationFrame();
-      await waitTime(3000);
-      return resources;
+      await waitTime(1000);
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * NPC戦闘フロー
+   *
+   * @return 処理結果
+   */
+  async _npcBattleFlow(): Promise<void> {
+    try {
+      if (!this._resources || (this._state.inProgress.type !== 'NPCBattle')) {
+        return;
+      }
+      const resources: Resources = this._resources;
+      const npcBattle: NPCBattle = this._state.inProgress;
+
+      if (!npcBattle.player) {
+        return;
+      }
+      const player: Player = npcBattle.player;
+
+      const course: NPCBattleCourse = NPCBattleCourses.find(v =>
+        v.armdozerId === player.armdozer.id
+        && v.level === npcBattle.level
+      ) ?? DefaultCourse;
+      const npc = course.npc();
+
+      await this._fader.fadeOut();
+      this._domScenes.showMatchCard(
+        player.armdozer.id,
+        npc.armdozer.id,
+        course.stageName,
+      );
+      await this._fader.fadeIn();
+
+      const room = new OfflineBattleRoom(player, npc);
+      const initialState = await room.start();
+      await waitTime(1000);
+
+      await this._fader.fadeOut();
+      this._tdScenes.startBattle(resources, room, initialState);
+      this._domScenes.hidden();
+      await this._fader.fadeIn();
     } catch(e) {
       throw e;
     }
