@@ -60,13 +60,14 @@ export class TDScenes {
   }
 
   /**
-   * 戦闘開始する
+   * 戦闘シーンを開始する
    *
    * @param resources リソース管理オブジェクト
    * @param room 戦闘ルーム
    * @param initialState 初期状態
+   * @return 生成した戦闘シーン
    */
-  startBattle(resources: Resources, room: BattleRoom, initialState: InitialState): void {
+  startBattle(resources: Resources, room: BattleRoom, initialState: InitialState): BattleScene {
     this._disposeScene();
 
     const scene = new BattleScene({
@@ -90,6 +91,8 @@ export class TDScenes {
     if (isDevelopment()) {
       console.log(this._renderer.info());
     }
+
+    return scene;
   }
 
   /**

@@ -14,7 +14,7 @@ export class FaderView {
   constructor(z: number) {
     const geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT);
     const material = new THREE.MeshBasicMaterial({
-      color: 'rgb(10, 10, 10)',
+      color: 'rgb(23, 23, 23)',
       transparent: true
     });
     this._mesh = new THREE.Mesh(geometry, material);

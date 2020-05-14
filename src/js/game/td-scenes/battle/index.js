@@ -1,4 +1,5 @@
 // @flow
+
 import type {Resources} from '../../../resource';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
@@ -13,7 +14,6 @@ import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../../action/game-loop/render";
 import type {DoBurst} from "../../../action/battle-scene/do-burst";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
-import {take} from "rxjs/operators";
 import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
@@ -43,12 +43,14 @@ type Notifier = {
  */
 export class BattleScene implements Scene {
   _state: BattleSceneState;
+  _initialState: InitialState;
   _endBattle: Subject<EndBattle>;
   _battleProgress: BattleProgress;
   _view: BattleSceneView;
   _subscription: Subscription[];
 
   constructor(param: Param) {
+    this._initialState = param.initialState;
     this._state = createInitialState(param.initialState.playerId);
     this._endBattle = new Subject();
     this._battleProgress = param.battleProgress;
@@ -71,12 +73,6 @@ export class BattleScene implements Scene {
         } else if (action.type === 'doBurst') {
           this._onBurst(action);
         }
-      }),
-
-      param.listener.gameLoop.pipe(
-        take(1)
-      ).subscribe(action => {
-        this._start(param.initialState.stateHistory);
       })
     ];
   }
@@ -102,16 +98,12 @@ export class BattleScene implements Scene {
   }
 
   /**
-   * 戦闘シーン開始時の処理
-   * 
-   * @param stateHistory 初期ステータス
+   * 戦闘を開始する
+   * 画面遷移などが完了したら、本メソッドを呼ぶ想定
    */
-  async _start(stateHistory: GameState[]): Promise<void> {
+  async start(): Promise<void> {
     try {
-      const animation = delay(500)
-        .chain(this._view.hud.gameObjects.frontmostFader.fadeIn())
-        .chain(stateHistoryAnimation(this._view, this._state, stateHistory));
-      await animation.play();
+      await stateHistoryAnimation(this._view, this._state, this._initialState.stateHistory).play();
       this._state.canOperation = true;
     } catch(e) {
       throw e;
@@ -215,9 +207,7 @@ export class BattleScene implements Scene {
   /** ゲーム終了時の処理 */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
     try {
-      const animation = this._view.hud.gameObjects.frontmostFader.fadeOut()
-        .chain(delay(1000));
-      await animation.play();
+      await delay(1000).play();
       this._endBattle.next({
         type: 'endBattle',
         gameEnd: gameEnd
