@@ -272,7 +272,6 @@ export class Game {
       await waitAnimationFrame();
 
       await this._fader.fadeOut();
-      await waitTime(1000);
       this._domScenes.hidden();
       await this._fader.fadeIn();
       await battleScene.start();

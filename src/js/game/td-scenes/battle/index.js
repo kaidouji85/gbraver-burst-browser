@@ -1,4 +1,5 @@
 // @flow
+
 import type {Resources} from '../../../resource';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
@@ -13,12 +14,10 @@ import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../../action/game-loop/render";
 import type {DoBurst} from "../../../action/battle-scene/do-burst";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
-import {take} from "rxjs/operators";
 import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
-import type {State} from "../../state/state";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -99,13 +98,12 @@ export class BattleScene implements Scene {
   }
 
   /**
-   * 戦闘シーン開始時の処理
+   * 戦闘を開始する
+   * 画面遷移などが完了したら、本メソッドを呼ぶ想定
    */
   async start(): Promise<void> {
     try {
-      const animation = delay(500)
-        .chain(stateHistoryAnimation(this._view, this._state, this._initialState.stateHistory));
-      await animation.play();
+      await stateHistoryAnimation(this._view, this._state, this._initialState.stateHistory).play();
       this._state.canOperation = true;
     } catch(e) {
       throw e;
@@ -209,9 +207,7 @@ export class BattleScene implements Scene {
   /** ゲーム終了時の処理 */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
     try {
-      const animation = this._view.hud.gameObjects.frontmostFader.fadeOut()
-        .chain(delay(1000));
-      await animation.play();
+      await delay(1000).play();
       this._endBattle.next({
         type: 'endBattle',
         gameEnd: gameEnd
