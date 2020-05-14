@@ -58,7 +58,7 @@ export class HUDGameObjects {
     });
     this.frontmostFader = frontmostFader({
       listener: listener,
-      isVisible: true,
+      isVisible: false,
     });
     this.rearmostFader = rearmostFader({
       listener: listener,

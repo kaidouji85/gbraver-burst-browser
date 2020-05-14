@@ -18,6 +18,7 @@ import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
+import type {State} from "../../state/state";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -43,12 +44,14 @@ type Notifier = {
  */
 export class BattleScene implements Scene {
   _state: BattleSceneState;
+  _initialState: InitialState;
   _endBattle: Subject<EndBattle>;
   _battleProgress: BattleProgress;
   _view: BattleSceneView;
   _subscription: Subscription[];
 
   constructor(param: Param) {
+    this._initialState = param.initialState;
     this._state = createInitialState(param.initialState.playerId);
     this._endBattle = new Subject();
     this._battleProgress = param.battleProgress;
@@ -71,12 +74,6 @@ export class BattleScene implements Scene {
         } else if (action.type === 'doBurst') {
           this._onBurst(action);
         }
-      }),
-
-      param.listener.gameLoop.pipe(
-        take(1)
-      ).subscribe(action => {
-        this._start(param.initialState.stateHistory);
       })
     ];
   }
@@ -103,14 +100,11 @@ export class BattleScene implements Scene {
 
   /**
    * 戦闘シーン開始時の処理
-   * 
-   * @param stateHistory 初期ステータス
    */
-  async _start(stateHistory: GameState[]): Promise<void> {
+  async start(): Promise<void> {
     try {
       const animation = delay(500)
-        .chain(this._view.hud.gameObjects.frontmostFader.fadeIn())
-        .chain(stateHistoryAnimation(this._view, this._state, stateHistory));
+        .chain(stateHistoryAnimation(this._view, this._state, this._initialState.stateHistory));
       await animation.play();
       this._state.canOperation = true;
     } catch(e) {
