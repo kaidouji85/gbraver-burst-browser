@@ -37,13 +37,7 @@
     --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
     --how-to-play-dialog-height: calc(var(--vh) * 80);
     --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
-    --how-to-play-dialog-left: 50%;
-    --how-to-play-closer-width: 48px;
-    --how-to-play-closer-height: 48px;
-    --how-to-play-closer-top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2);
-    --how-to-play-closer-left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
-    --how-to-play-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
-    --how-to-play-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
+    --how-to-play-dialog-left: 50vw;
 
     /** プレイヤー選択 */
     --armdozer-icon-width: 30vw;
@@ -58,6 +52,10 @@
 }
 
 @media (orientation: portrait) {
+    .landscape-only {
+        display: none
+    }
+
     .play-in-landscape {
         width: 100vw;
         height: 100vh;
@@ -75,12 +73,11 @@
         font-size: 1.5em;
         margin-bottom: 1em;
     }
-
-    .landscape-only {
-        display: none
-    }
 }
 
+/**
+ * フェーダー
+ */
 .dom-fader {
     width: var(--screen-width);
     height: var(--screen-height);
@@ -89,6 +86,9 @@
     background-color: var(--background-color);
 }
 
+/**
+ * ローディング画面
+ */
 .loading {
     width: var(--screen-width);
     height: var(--screen-height);
@@ -121,6 +121,9 @@
     border: none;
 }
 
+/**
+ * タイトル画面
+ */
 .title {
     display: flex;
     align-items: center;
@@ -178,6 +181,9 @@
     border: none;
 }
 
+/**
+ * 遊び方ダイアログ
+ */
 .how-to-play--invisible {
     display: none;
 }
@@ -189,23 +195,6 @@
     background-color: #000000;
     opacity: 0.5;
     z-index: var(--zindex-background);
-}
-
-.how-to-play__closer {
-    position: fixed;
-    top: var(--how-to-play-closer-top);
-    left: var(--how-to-play-closer-left);
-    transform: translate(-50%, -50%);
-    background-color: red;
-    font-color: var(--font-color);
-    z-index: 10;
-    width: var(--how-to-play-closer-width);
-    height: var(--how-to-play-closer-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 24px;
-    z-index: var(--zindex-close);
 }
 
 .how-to-play__dialog {
@@ -225,11 +214,31 @@
     z-index: var(--zindex-dialog)
 }
 
-.how-to-play__dialog__movie {
-    width: var(--how-to-play-movie-width);
-    height: var(--how-to-play-movie-height);
+.how-to-play__closer {
+    position: fixed;
+    top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2);
+    left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
+    transform: translate(-50%, -50%);
+    background-color: red;
+    font-color: var(--font-color);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    z-index: var(--zindex-close);
 }
 
+.how-to-play__dialog__movie {
+    width: calc(var(--how-to-play-dialog-width) * 0.9);
+    height: calc(var(--how-to-play-dialog-height) * 0.9);
+}
+
+/**
+ * プレイヤー選択画面
+ */
 .player-select {
     display: flex;
     align-items: center;
@@ -281,6 +290,9 @@
     justify-content: center;
 }
 
+/**
+ * 対戦カード画面
+ */
 .match-card {
     display: flex;
     align-items: center;
