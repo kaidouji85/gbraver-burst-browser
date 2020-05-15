@@ -87,19 +87,25 @@ export class DOMScenes {
    *
    * @return 開始されたタイトル画面
    */
-  startTitle(): Title {
-    this._removeCurrentScene();
+  async startTitle(): Promise<Title> {
+    try {
+      this._removeCurrentScene();
 
-    const scene = new Title(this._resourcePath);
-    const notifier = scene.notifier();
-    this._sceneSubscriptions = [
-      notifier.pushGameStart.subscribe(this._pushGameStart),
-      notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
-    ];
-    this._scene = scene;
-    this._root.appendChild(scene.getRootHTMLElement());
+      const scene = new Title(this._resourcePath);
+      const notifier = scene.notifier();
+      this._sceneSubscriptions = [
+        notifier.pushGameStart.subscribe(this._pushGameStart),
+        notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
+      ];
+      await scene.preLoad();
 
-    return scene;
+      this._scene = scene;
+      this._root.appendChild(scene.getRootHTMLElement());
+
+      return scene;
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**
@@ -107,18 +113,24 @@ export class DOMScenes {
    *
    * @return 開始されたプレイヤー選択画面
    */
-  startPlayerSelect(): PlayerSelect {
-    this._removeCurrentScene();
+  async startPlayerSelect(): Promise<PlayerSelect> {
+    try {
+      this._removeCurrentScene();
 
-    const scene = new PlayerSelect(this._resourcePath);
-    const notifier = scene.notifier();
-    this._sceneSubscriptions = [
-      notifier.selectionComplete.subscribe(this._selectionComplete)
-    ];
-    this._scene = scene;
-    this._root.appendChild(scene.getRootHTMLElement());
+      const scene = new PlayerSelect(this._resourcePath);
+      const notifier = scene.notifier();
+      this._sceneSubscriptions = [
+        notifier.selectionComplete.subscribe(this._selectionComplete)
+      ];
+      await scene.preLoad();
 
-    return scene;
+      this._scene = scene;
+      this._root.appendChild(scene.getRootHTMLElement());
+
+      return scene;
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**
@@ -129,19 +141,25 @@ export class DOMScenes {
    * @param caption ステージ名
    * @return 開始された対戦カード画面
    */
-  startMatchCard(player: ArmDozerId, enemy: ArmDozerId, caption: string): MatchCard {
-    this._removeCurrentScene();
+  async startMatchCard(player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
+    try {
+      this._removeCurrentScene();
 
-    const scene = new MatchCard({
-      resourcePath: this._resourcePath,
-      player: player,
-      enemy: enemy,
-      caption: caption
-    });
-    this._scene = scene;
-    this._root.appendChild(scene.getRootHTMLElement());
+      const scene = new MatchCard({
+        resourcePath: this._resourcePath,
+        player: player,
+        enemy: enemy,
+        caption: caption
+      });
+      await scene.preLoad();
 
-    return scene;
+      this._scene = scene;
+      this._root.appendChild(scene.getRootHTMLElement());
+
+      return scene;
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**

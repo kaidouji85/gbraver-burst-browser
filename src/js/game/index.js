@@ -136,8 +136,7 @@ export class Game {
       this._serviceWorker = await loadServiceWorker();
 
       await this._fader.fadeOut();
-      const scene = this._domScenes.startTitle();
-      await scene.preLoad();
+      await this._domScenes.startTitle();
       await this._fader.fadeIn();
     } catch (e) {
       throw e;
@@ -154,8 +153,7 @@ export class Game {
       this._state.inProgress = createInitialNPCBattle();
 
       await this._fader.fadeOut();
-      const scene = this._domScenes.startPlayerSelect();
-      await scene.preLoad();
+      await this._domScenes.startPlayerSelect();
       await this._fader.fadeIn();
     } catch(e) {
       throw e;
@@ -261,12 +259,11 @@ export class Game {
         && v.level === npcBattle.level
       ) ?? DefaultCourse;
       const npc = course.npc();
-      const matchCard = this._domScenes.startMatchCard(
+      await this._domScenes.startMatchCard(
         player.armdozer.id,
         npc.armdozer.id,
         course.stageName,
       );
-      await matchCard.preLoad();
       await this._fader.fadeIn();
 
       const room = new OfflineBattleRoom(player, npc);
