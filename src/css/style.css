@@ -23,6 +23,7 @@
     --zindex-dialog: 9;
     --zindex-close: 10;
     --zindex-fader: 11;
+    --zindex-play-in-landscape: 12;
 
     /** ボタン */
     --button-background-color: #1e90ff;
@@ -45,6 +46,9 @@
     --armdozer-icon-margin: calc(var(--responsive-font-size) * 0.5);
 }
 
+/**
+ * ランドスケープ警告画面
+ */
 @media (orientation: landscape) {
     .play-in-landscape {
         display: none;
@@ -52,10 +56,6 @@
 }
 
 @media (orientation: portrait) {
-    .landscape-only {
-        display: none
-    }
-
     .play-in-landscape {
         width: 100vw;
         height: 100vh;
@@ -67,6 +67,7 @@
         justify-content: center;
         padding: 1em;
         box-sizing: border-box;
+        z-index: var(--zindex-play-in-landscape);
     }
 
     .play-in-landscape__caption {
@@ -78,26 +79,43 @@
 /**
  * フェーダー
  */
-.dom-fader {
-    width: var(--screen-width);
-    height: var(--screen-height);
-    position: fixed;
-    z-index: var(--zindex-fader);
-    background-color: var(--background-color);
+@media (orientation: landscape) {
+    .dom-fader {
+        width: var(--screen-width);
+        height: var(--screen-height);
+        position: fixed;
+        z-index: var(--zindex-fader);
+        background-color: var(--background-color);
+    }
 }
+
+@media (orientation: portrait) {
+    .dom-fader {
+        display: none;
+    }
+}
+
 
 /**
  * ローディング画面
  */
-.loading {
-    width: var(--screen-width);
-    height: var(--screen-height);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+@media (orientation: landscape) {
+    .loading {
+        width: var(--screen-width);
+        height: var(--screen-height);
+        background-color: var(--background-color);
+        color: var(--font-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (orientation: portrait) {
+    .loading {
+        display: none;
+    }
 }
 
 .loading__completed-rate {
@@ -124,21 +142,29 @@
 /**
  * タイトル画面
  */
-.title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--screen-width);
-    height: var(--screen-height);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    box-sizing: border-box;
-    padding-top: var(--screen-padding-top);
-    padding-left: var(--screen-padding-left);
-    padding-right: var(--screen-padding-right);
-    padding-bottom: var(--screen-padding-bottom);
-    background-size: cover;
-    background-position: 50% 0;
+@media (orientation: landscape) {
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--screen-width);
+        height: var(--screen-height);
+        background-color: var(--background-color);
+        color: var(--font-color);
+        box-sizing: border-box;
+        padding-top: var(--screen-padding-top);
+        padding-left: var(--screen-padding-left);
+        padding-right: var(--screen-padding-right);
+        padding-bottom: var(--screen-padding-bottom);
+        background-size: cover;
+        background-position: 50% 0;
+    }
+}
+
+@media (orientation: portrait) {
+    .title {
+        display: none;
+    }
 }
 
 .title__contents {
@@ -184,6 +210,18 @@
 /**
  * 遊び方ダイアログ
  */
+@media (orientation: landscape) {
+    .how-to-play {
+        display: block;
+    }
+}
+
+@media (orientation: portrait) {
+    .how-to-play {
+        display: none;
+    }
+}
+
 .how-to-play--invisible {
     display: none;
 }
@@ -239,19 +277,27 @@
 /**
  * プレイヤー選択画面
  */
-.player-select {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--screen-width);
-    height: var(--screen-height);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    box-sizing: border-box;
-    padding-top: var(--screen-padding-top);
-    padding-left: var(--screen-padding-left);
-    padding-right: var(--screen-padding-right);
-    padding-bottom: var(--screen-padding-bottom);
+@media (orientation: landscape) {
+    .player-select {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--screen-width);
+        height: var(--screen-height);
+        background-color: var(--background-color);
+        color: var(--font-color);
+        box-sizing: border-box;
+        padding-top: var(--screen-padding-top);
+        padding-left: var(--screen-padding-left);
+        padding-right: var(--screen-padding-right);
+        padding-bottom: var(--screen-padding-bottom);
+    }
+}
+
+@media (orientation: portrait) {
+    .player-select {
+        display: none;
+    }
 }
 
 .player-select__contents {
@@ -293,19 +339,27 @@
 /**
  * 対戦カード画面
  */
-.match-card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--screen-width);
-    height: var(--screen-height);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    box-sizing: border-box;
-    padding-top: var(--screen-padding-top);
-    padding-left: var(--screen-padding-left);
-    padding-right: var(--screen-padding-right);
-    padding-bottom: var(--screen-padding-bottom);
+@media (orientation: landscape) {
+    .match-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--screen-width);
+        height: var(--screen-height);
+        background-color: var(--background-color);
+        color: var(--font-color);
+        box-sizing: border-box;
+        padding-top: var(--screen-padding-top);
+        padding-left: var(--screen-padding-left);
+        padding-right: var(--screen-padding-right);
+        padding-bottom: var(--screen-padding-bottom);
+    }
+}
+
+@media (orientation: portrait) {
+    .match-card {
+        display: none;
+    }
 }
 
 .match-card__contents__caption {

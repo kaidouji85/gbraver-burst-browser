@@ -47,7 +47,7 @@ export class TitleView {
       </div>
     `;
     this._root.style.backgroundImage = `url(${params.resourcePath.get()}/title-back.png)`;
-    this._root.className = 'title landscape-only';
+    this._root.className = 'title';
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {

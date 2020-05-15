@@ -62,7 +62,7 @@ export class HowToPlayView {
    */
   engage(state: HowToPlayState): void {
     this._root.className = state.isVisible
-      ? 'how-to-play landscape-only'
+      ? 'how-to-play'
       : 'how-to-play--invisible';
   }
 
