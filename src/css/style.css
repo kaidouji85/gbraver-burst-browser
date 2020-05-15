@@ -1,4 +1,5 @@
 :root {
+    /** 画面サイズ */
     --safe-area-top: env(safe-area-inset-top);
     --safe-area-right: env(safe-area-inset-right);
     --safe-area-bottom: env(safe-area-inset-bottom);
@@ -9,14 +10,30 @@
     --screen-padding-bottom: calc(var(--safe-area-bottom) + 1em);
     --screen-width: 100vw;
     --screen-height: calc(var(--vh, 1vh) * 100);
+
+    /** フォント */
     --font-color: rgb(240, 240, 240);
     --responsive-font-size: max(3vh, 1rem);
+
+    /** 背景 */
     --background-color: rgb(23, 23, 23);
+
+    /** z-index */
+    --zindex-background: 8;
+    --zindex-dialog: 9;
+    --zindex-close: 10;
+    --zindex-fader: 11;
+
+    /** ボタン */
     --button-background-color: #1e90ff;
     --button-font-color: rgb(240, 240, 240);
     --button-border-radius: calc(var(--responsive-font-size) * 0.5);
+
+    /** ダイアログ */
     --dialog-border: solid #a9a9a9 1px;
     --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
+
+    /** 遊び方ダイアログ */
     --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
     --how-to-play-dialog-height: calc(var(--vh) * 80);
     --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
@@ -27,13 +44,11 @@
     --how-to-play-closer-left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
     --how-to-play-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
     --how-to-play-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
+
+    /** プレイヤー選択 */
     --armdozer-icon-width: 30vw;
     --selected-armdozer-icon-width: 35vw;
     --armdozer-icon-margin: calc(var(--responsive-font-size) * 0.5);
-    --zindex-background: 8;
-    --zindex-dialog: 9;
-    --zindex-close: 10;
-    --zindex-fader: 11;
 }
 
 @media (orientation: landscape) {
