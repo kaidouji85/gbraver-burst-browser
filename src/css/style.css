@@ -7,6 +7,8 @@
     --screen-padding-left: calc(var(--safe-area-left) + 1em);
     --screen-padding-right: calc(var(--safe-area-right) + 1em);
     --screen-padding-bottom: calc(var(--safe-area-bottom) + 1em);
+    --screen-width: 100vw;
+    --screen-height: calc(var(--vh, 1vh) * 100);
     --font-color: rgb(240, 240, 240);
     --responsive-font-size: max(3vh, 1rem);
     --background-color: rgb(23, 23, 23);
@@ -65,16 +67,16 @@
 }
 
 .dom-fader {
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
+    width: var(--screen-width);
+    height: var(--screen-height);
     position: fixed;
     z-index: var(--zindex-fader);
     background-color: var(--background-color);
 }
 
 .loading {
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
+    width: var(--screen-width);
+    height: var(--screen-height);
     background-color: var(--background-color);
     color: var(--font-color);
     display: flex;
@@ -108,8 +110,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
+    width: var(--screen-width);
+    height: var(--screen-height);
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
@@ -167,8 +169,8 @@
 
 .how-to-play__background {
     position: absolute;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
+    width: var(--screen-width);
+    height: var(--screen-height);
     background-color: #000000;
     opacity: 0.5;
     z-index: var(--zindex-background);
@@ -217,8 +219,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
+    width: var(--screen-width);
+    height: var(--screen-height);
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
@@ -268,8 +270,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
+    width: var(--screen-width);
+    height: var(--screen-height);
     background-color: var(--background-color);
     color: var(--font-color);
     box-sizing: border-box;
