@@ -153,7 +153,8 @@ export class Game {
       this._state.inProgress = createInitialNPCBattle();
 
       await this._fader.fadeOut();
-      this._domScenes.showPlayerSelect();
+      const scene = this._domScenes.startPlayerSelect();
+      await scene.preLoad();
       await this._fader.fadeIn();
     } catch(e) {
       throw e;

@@ -10,6 +10,7 @@ import type {SelectionComplete} from "../../../action/game/selection-complete";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import type {SelectArmdozer} from "../../../action/player-select/select-armdozer";
 import {waitTime} from "../../../wait/wait-time";
+import {lightningDozerIconURL, neoLandozerIconURL, shinBraverIconURL} from "../../../resource/urls/armdozer-icon-urls";
 
 /**
  * イベント通知
@@ -22,6 +23,7 @@ export type Notifier = {
  * プレイヤーセレクト
  */
 export class PlayerSelect implements DOMScene {
+  _resourcePath: ResourcePath;
   _state: PlayerSelectState;
   _view: PlayerSelectView;
   _selectionComplete: Subject<SelectionComplete>;
@@ -33,6 +35,8 @@ export class PlayerSelect implements DOMScene {
    * @param resourcePath リソースパス
    */
   constructor(resourcePath: ResourcePath) {
+    this._resourcePath = resourcePath;
+
     this._selectionComplete = new Subject();
     this._state = createInitialState(resourcePath);
 
@@ -73,6 +77,23 @@ export class PlayerSelect implements DOMScene {
     return {
       selectionComplete: this._selectionComplete
     };
+  }
+
+  /**
+   * 各種リソースのプリロードを行う
+   *
+   * @return 処理結果
+   */
+  async preLoad(): Promise<void> {
+    try {
+      await Promise.all([
+        fetch(shinBraverIconURL(this._resourcePath)),
+        fetch(neoLandozerIconURL(this._resourcePath)),
+        fetch(lightningDozerIconURL(this._resourcePath)),
+      ]);
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**

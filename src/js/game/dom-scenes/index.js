@@ -93,9 +93,11 @@ export class DOMScenes {
   }
 
   /**
-   * プレイヤーセレクトを表示する
+   * 新しくプレイヤー選択画面を開始する
+   *
+   * @return 開始されたプレイヤー選択画面
    */
-  showPlayerSelect(): void {
+  startPlayerSelect(): PlayerSelect {
     this._removeCurrentScene();
 
     const scene = new PlayerSelect(this._resourcePath);
@@ -105,6 +107,8 @@ export class DOMScenes {
     ];
     this._scene = scene;
     this._root.appendChild(scene.getRootHTMLElement());
+
+    return scene;
   }
 
   /**

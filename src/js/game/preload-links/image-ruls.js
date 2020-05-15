@@ -10,9 +10,5 @@ import {lightningDozerIconURL, neoLandozerIconURL, shinBraverIconURL} from "../.
  * @return プリロードする画像ファイル一覧
  */
 export function imageURLs(resourcePath: ResourcePath): string[] {
-  return [
-    shinBraverIconURL(resourcePath),
-    neoLandozerIconURL(resourcePath),
-    lightningDozerIconURL(resourcePath),
-  ];
+  return [];
 }
