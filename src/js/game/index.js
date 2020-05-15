@@ -136,7 +136,8 @@ export class Game {
       this._serviceWorker = await loadServiceWorker();
 
       await this._fader.fadeOut();
-      this._domScenes.startTitle();
+      const scene = this._domScenes.startTitle();
+      await scene.preLoad();
       await this._fader.fadeIn();
     } catch (e) {
       throw e;

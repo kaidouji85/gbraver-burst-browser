@@ -51,6 +51,21 @@ export class Title implements DOMScene {
     // NOP
   }
 
+  /**
+   * 各種リソースのプリロードを行う
+   *
+   * @return 実行結果
+   */
+  async preLoad(): Promise<void> {
+    try {
+      await Promise.all(
+        this._view.getImageURLs().map(url => fetch(url))
+      );
+    } catch(e) {
+      throw e;
+    }
+  }
+
   /** イベント通知ストリーム */
   notifier(): Notifier {
     return this._notifier;

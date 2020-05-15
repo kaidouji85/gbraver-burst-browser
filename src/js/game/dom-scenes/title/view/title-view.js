@@ -27,17 +27,27 @@ export class TitleView {
   _root: HTMLElement;
   _gameStart: HTMLElement;
   _howToPlay: HTMLElement;
+  _imageURLs: {
+    titleLogo: string,
+    titleBack: string
+  };
 
   constructor(params: Params) {
     this._gameStartStream = new Subject();
     this._howToPlayStream = new Subject();
+
+    this._imageURLs = {
+      titleLogo: titleLogoURL(params.resourcePath),
+      titleBack: titleBackURL(params.resourcePath)
+    };
+
     this._root = document.createElement('div');
 
     const gameStartId = domUuid();
     const howToPlayId = domUuid();
     this._root.innerHTML = `
       <div class="title__contents">
-        <img class="title__contents__logo" src="${titleLogoURL(params.resourcePath)}"/>
+        <img class="title__contents__logo" src="${this._imageURLs.titleLogo}"/>
         <div class="title__contents__copy-rights">
           <span class="title__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
         </div>
@@ -47,7 +57,7 @@ export class TitleView {
         </div>
       </div>
     `;
-    this._root.style.backgroundImage = `url(${titleBackURL(params.resourcePath)})`;
+    this._root.style.backgroundImage = `url(${this._imageURLs.titleBack})`;
     this._root.className = 'title';
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
@@ -90,5 +100,16 @@ export class TitleView {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * 本ビューが利用している画像URLを全て返す
+   *
+   * @return 取得結果
+   */
+  getImageURLs(): string[] {
+    return Object.values(this._imageURLs)
+      .filter(v => v instanceof String)
+      .map(v => ((v: any): string));
   }
 }
