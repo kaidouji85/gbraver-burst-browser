@@ -9,6 +9,10 @@ import {getArmdozerIconURL} from "../../../../resource/urls/armdozer-icon-urls";
  */
 export class MatchCardView {
   _root: HTMLElement;
+  _imageURLs: {
+    player: string,
+    enemy: string,
+  }
 
   /**
    * コンストラクタ
@@ -19,6 +23,11 @@ export class MatchCardView {
    * @param caption ステージ名
    */
   constructor(resourcePath: ResourcePath, player: ArmDozerId, enemy: ArmDozerId, caption: string) {
+    this._imageURLs = {
+      player: getArmdozerIconURL(resourcePath, player),
+      enemy: getArmdozerIconURL(resourcePath, enemy),
+    };
+
     this._root = document.createElement('div');
     this._root.className = 'match-card';
     this._root.innerHTML = `
@@ -27,9 +36,9 @@ export class MatchCardView {
           ${caption}
         </div>
         <div class="match-card__contents__cards">
-          <img class="match-card__contents__cards__enemy" src="${getArmdozerIconURL(resourcePath, enemy)}">
+          <img class="match-card__contents__cards__enemy" src="${this._imageURLs.enemy}">
           <div class="match-card__contents__cards__vs">vs</div>
-          <img class="match-card__contents__cards__player" src="${getArmdozerIconURL(resourcePath, player)}">
+          <img class="match-card__contents__cards__player" src="${this._imageURLs.player}">
         </div>
       </div>
     `;
@@ -42,5 +51,16 @@ export class MatchCardView {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * 本ビューが利用している画像URLを全て返す
+   *
+   * @return 取得結果
+   */
+  getImageURLs(): string[] {
+    return Object.values(this._imageURLs)
+      .filter(v => typeof (v) === 'string')
+      .map(v => ((v: any): string));
   }
 }

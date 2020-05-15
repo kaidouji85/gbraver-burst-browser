@@ -109,7 +109,7 @@ export class TitleView {
    */
   getImageURLs(): string[] {
     return Object.values(this._imageURLs)
-      .filter(v => v instanceof String)
+      .filter(v => typeof (v) === 'string')
       .map(v => ((v: any): string));
   }
 }

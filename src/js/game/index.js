@@ -261,11 +261,12 @@ export class Game {
         && v.level === npcBattle.level
       ) ?? DefaultCourse;
       const npc = course.npc();
-      this._domScenes.startMatchCard(
+      const matchCard = this._domScenes.startMatchCard(
         player.armdozer.id,
         npc.armdozer.id,
         course.stageName,
       );
+      await matchCard.preLoad();
       await this._fader.fadeIn();
 
       const room = new OfflineBattleRoom(player, npc);

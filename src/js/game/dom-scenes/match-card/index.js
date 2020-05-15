@@ -36,6 +36,21 @@ export class MatchCard implements DOMScene {
   }
 
   /**
+   * 本シーンで利用する各種リソースをプリロードする
+   *
+   * @return 読み込み結果
+   */
+  async preLoad(): Promise<void> {
+    try {
+      await Promise.all(
+        this._view.getImageURLs().map(url => fetch(url))
+      )
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
    * ルートHTML要素を取得する
    *
    * @return ルートHTML要素
