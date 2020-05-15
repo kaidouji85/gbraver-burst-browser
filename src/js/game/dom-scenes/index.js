@@ -69,17 +69,25 @@ export class DOMScenes {
   }
 
   /**
-   * ローディング画面を表示する
+   * 新しくローディング画面を開始する
+   *
+   * @return 開始されたローディング画面
    */
-  showLoading(): void {
+  startLoading(): Loading {
     this._removeCurrentScene();
     const scene = new Loading(this._loading);
     this._scene = scene
     this._root.appendChild(scene.getRootHTMLElement());
+
+    return scene;
   }
 
-  /** タイトルを表示する */
-  showTitle(): void {
+  /**
+   * 新しくタイトル画面を開始する
+   *
+   * @return 開始されたタイトル画面
+   */
+  startTitle(): Title {
     this._removeCurrentScene();
 
     const scene = new Title(this._resourcePath);
@@ -90,6 +98,8 @@ export class DOMScenes {
     ];
     this._scene = scene;
     this._root.appendChild(scene.getRootHTMLElement());
+
+    return scene;
   }
 
   /**
@@ -112,13 +122,14 @@ export class DOMScenes {
   }
 
   /**
-   * 対戦カードシーンを表示する
+   * 新しく対戦カード画面を開始する
    *
    * @param player プレイヤー側 アームドーザID
    * @param enemy 敵側 アームドーザID
    * @param caption ステージ名
+   * @return 開始された対戦カード画面
    */
-  showMatchCard(player: ArmDozerId, enemy: ArmDozerId, caption: string): void {
+  startMatchCard(player: ArmDozerId, enemy: ArmDozerId, caption: string): MatchCard {
     this._removeCurrentScene();
 
     const scene = new MatchCard({
@@ -129,6 +140,8 @@ export class DOMScenes {
     });
     this._scene = scene;
     this._root.appendChild(scene.getRootHTMLElement());
+
+    return scene;
   }
 
   /**
