@@ -4,6 +4,7 @@ import type {TitleState} from "../state/title-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
+import {titleBackURL, titleLogoURL} from "../../../../resource/urls/title-urls";
 
 /** イベント通知 */
 type Notifier = {
@@ -36,7 +37,7 @@ export class TitleView {
     const howToPlayId = domUuid();
     this._root.innerHTML = `
       <div class="title__contents">
-        <img class="title__contents__logo" src="${params.resourcePath.get()}/logo.png"/>
+        <img class="title__contents__logo" src="${titleLogoURL(params.resourcePath)}"/>
         <div class="title__contents__copy-rights">
           <span class="title__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
         </div>
@@ -46,7 +47,7 @@ export class TitleView {
         </div>
       </div>
     `;
-    this._root.style.backgroundImage = `url(${params.resourcePath.get()}/title-back.png)`;
+    this._root.style.backgroundImage = `url(${titleBackURL(params.resourcePath)})`;
     this._root.className = 'title';
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
