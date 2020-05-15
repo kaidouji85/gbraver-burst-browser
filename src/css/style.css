@@ -1,4 +1,5 @@
 :root {
+    /** 画面サイズ */
     --safe-area-top: env(safe-area-inset-top);
     --safe-area-right: env(safe-area-inset-right);
     --safe-area-bottom: env(safe-area-inset-bottom);
@@ -7,33 +8,47 @@
     --screen-padding-left: calc(var(--safe-area-left) + 1em);
     --screen-padding-right: calc(var(--safe-area-right) + 1em);
     --screen-padding-bottom: calc(var(--safe-area-bottom) + 1em);
+    --screen-width: 100vw;
+    --screen-height: calc(var(--vh, 1vh) * 100);
+
+    /** フォント */
     --font-color: rgb(240, 240, 240);
     --responsive-font-size: max(3vh, 1rem);
+
+    /** 背景 */
     --background-color: rgb(23, 23, 23);
-    --button-background-color: #1e90ff;
-    --button-font-color: rgb(240, 240, 240);
-    --button-border-radius: calc(var(--responsive-font-size) * 0.5);
-    --dialog-border: solid #a9a9a9 1px;
-    --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
-    --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
-    --how-to-play-dialog-height: calc(var(--vh) * 80);
-    --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
-    --how-to-play-dialog-left: 50%;
-    --how-to-play-closer-width: 48px;
-    --how-to-play-closer-height: 48px;
-    --how-to-play-closer-top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2);
-    --how-to-play-closer-left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
-    --how-to-play-movie-width: calc(var(--how-to-play-dialog-width) * 0.9);
-    --how-to-play-movie-height: calc(var(--how-to-play-dialog-height) * 0.9);
-    --armdozer-icon-width: 30vw;
-    --selected-armdozer-icon-width: 35vw;
-    --armdozer-icon-margin: calc(var(--responsive-font-size) * 0.5);
+
+    /** z-index */
     --zindex-background: 8;
     --zindex-dialog: 9;
     --zindex-close: 10;
     --zindex-fader: 11;
+    --zindex-play-in-landscape: 12;
+
+    /** ボタン */
+    --button-background-color: #1e90ff;
+    --button-font-color: rgb(240, 240, 240);
+    --button-border-radius: calc(var(--responsive-font-size) * 0.5);
+
+    /** ダイアログ */
+    --dialog-border: solid #a9a9a9 1px;
+    --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
+
+    /** 遊び方ダイアログ */
+    --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
+    --how-to-play-dialog-height: calc(var(--vh) * 80);
+    --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
+    --how-to-play-dialog-left: 50vw;
+
+    /** プレイヤー選択 */
+    --armdozer-icon-width: 30vw;
+    --selected-armdozer-icon-width: 35vw;
+    --armdozer-icon-margin: calc(var(--responsive-font-size) * 0.5);
 }
 
+/**
+ * ランドスケープ警告画面
+ */
 @media (orientation: landscape) {
     .play-in-landscape {
         display: none;
@@ -52,35 +67,55 @@
         justify-content: center;
         padding: 1em;
         box-sizing: border-box;
+        z-index: var(--zindex-play-in-landscape);
     }
 
     .play-in-landscape__caption {
         font-size: 1.5em;
         margin-bottom: 1em;
     }
+}
 
-    .landscape-only {
-        display: none
+/**
+ * フェーダー
+ */
+@media (orientation: landscape) {
+    .dom-fader {
+        width: var(--screen-width);
+        height: var(--screen-height);
+        position: fixed;
+        z-index: var(--zindex-fader);
+        background-color: var(--background-color);
     }
 }
 
-.dom-fader {
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    position: fixed;
-    z-index: var(--zindex-fader);
-    background-color: var(--background-color);
+@media (orientation: portrait) {
+    .dom-fader {
+        display: none;
+    }
 }
 
-.loading {
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+/**
+ * ローディング画面
+ */
+@media (orientation: landscape) {
+    .loading {
+        width: var(--screen-width);
+        height: var(--screen-height);
+        background-color: var(--background-color);
+        color: var(--font-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (orientation: portrait) {
+    .loading {
+        display: none;
+    }
 }
 
 .loading__completed-rate {
@@ -104,21 +139,32 @@
     border: none;
 }
 
-.title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    box-sizing: border-box;
-    padding-top: var(--screen-padding-top);
-    padding-left: var(--screen-padding-left);
-    padding-right: var(--screen-padding-right);
-    padding-bottom: var(--screen-padding-bottom);
-    background-size: cover;
-    background-position: 50% 0;
+/**
+ * タイトル画面
+ */
+@media (orientation: landscape) {
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--screen-width);
+        height: var(--screen-height);
+        background-color: var(--background-color);
+        color: var(--font-color);
+        box-sizing: border-box;
+        padding-top: var(--screen-padding-top);
+        padding-left: var(--screen-padding-left);
+        padding-right: var(--screen-padding-right);
+        padding-bottom: var(--screen-padding-bottom);
+        background-size: cover;
+        background-position: 50% 0;
+    }
+}
+
+@media (orientation: portrait) {
+    .title {
+        display: none;
+    }
 }
 
 .title__contents {
@@ -161,34 +207,32 @@
     border: none;
 }
 
+/**
+ * 遊び方ダイアログ
+ */
+@media (orientation: landscape) {
+    .how-to-play {
+        display: block;
+    }
+}
+
+@media (orientation: portrait) {
+    .how-to-play {
+        display: none;
+    }
+}
+
 .how-to-play--invisible {
     display: none;
 }
 
 .how-to-play__background {
     position: absolute;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
+    width: var(--screen-width);
+    height: var(--screen-height);
     background-color: #000000;
     opacity: 0.5;
     z-index: var(--zindex-background);
-}
-
-.how-to-play__closer {
-    position: fixed;
-    top: var(--how-to-play-closer-top);
-    left: var(--how-to-play-closer-left);
-    transform: translate(-50%, -50%);
-    background-color: red;
-    font-color: var(--font-color);
-    z-index: 10;
-    width: var(--how-to-play-closer-width);
-    height: var(--how-to-play-closer-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 24px;
-    z-index: var(--zindex-close);
 }
 
 .how-to-play__dialog {
@@ -208,24 +252,52 @@
     z-index: var(--zindex-dialog)
 }
 
-.how-to-play__dialog__movie {
-    width: var(--how-to-play-movie-width);
-    height: var(--how-to-play-movie-height);
-}
-
-.player-select {
+.how-to-play__closer {
+    position: fixed;
+    top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2);
+    left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
+    transform: translate(-50%, -50%);
+    background-color: red;
+    font-color: var(--font-color);
+    z-index: 10;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    box-sizing: border-box;
-    padding-top: var(--screen-padding-top);
-    padding-left: var(--screen-padding-left);
-    padding-right: var(--screen-padding-right);
-    padding-bottom: var(--screen-padding-bottom);
+    border-radius: 24px;
+    z-index: var(--zindex-close);
+}
+
+.how-to-play__dialog__movie {
+    width: calc(var(--how-to-play-dialog-width) * 0.9);
+    height: calc(var(--how-to-play-dialog-height) * 0.9);
+}
+
+/**
+ * プレイヤー選択画面
+ */
+@media (orientation: landscape) {
+    .player-select {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--screen-width);
+        height: var(--screen-height);
+        background-color: var(--background-color);
+        color: var(--font-color);
+        box-sizing: border-box;
+        padding-top: var(--screen-padding-top);
+        padding-left: var(--screen-padding-left);
+        padding-right: var(--screen-padding-right);
+        padding-bottom: var(--screen-padding-bottom);
+    }
+}
+
+@media (orientation: portrait) {
+    .player-select {
+        display: none;
+    }
 }
 
 .player-select__contents {
@@ -264,19 +336,30 @@
     justify-content: center;
 }
 
-.match-card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: calc(var(--vh, 1vh) * 100);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    box-sizing: border-box;
-    padding-top: var(--screen-padding-top);
-    padding-left: var(--screen-padding-left);
-    padding-right: var(--screen-padding-right);
-    padding-bottom: var(--screen-padding-bottom);
+/**
+ * 対戦カード画面
+ */
+@media (orientation: landscape) {
+    .match-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--screen-width);
+        height: var(--screen-height);
+        background-color: var(--background-color);
+        color: var(--font-color);
+        box-sizing: border-box;
+        padding-top: var(--screen-padding-top);
+        padding-left: var(--screen-padding-left);
+        padding-right: var(--screen-padding-right);
+        padding-bottom: var(--screen-padding-bottom);
+    }
+}
+
+@media (orientation: portrait) {
+    .match-card {
+        display: none;
+    }
 }
 
 .match-card__contents__caption {
