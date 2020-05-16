@@ -64,6 +64,21 @@ export class PlayerSelectView {
   }
 
   /**
+   * リソース読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  async waitUntilLoaded(): Promise<void> {
+    try {
+      await Promise.all(
+        this.armdozerIcons.map(icon => icon.waitUntilLoaded())
+      );
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
    * ルートHTML要素を取得する
    *
    * @return ルートHTML要素

@@ -19,6 +19,7 @@ export type Notifier = {
 export class ArmdozerIconView {
   armDozerId: ArmDozerId;
   _root: HTMLImageElement;
+  _isImageLoaded: Promise<void>;
   _select: Subject<void>;
 
   /**
@@ -41,7 +42,21 @@ export class ArmdozerIconView {
       e.preventDefault();
       this._select.next();
     });
+    this._isImageLoaded = new Promise(resolve => {
+      this._root.addEventListener('load', () => {
+        resolve();
+      })
+    });
     this._root.src = getArmdozerIconURL(resourcePath, armDozerId);
+  }
+
+  /**
+   * リソース読み込みが完了するまで待つ
+   *
+   * @return 待機血k
+   */
+  waitUntilLoaded(): Promise<void> {
+    return this._isImageLoaded;
   }
 
   /**

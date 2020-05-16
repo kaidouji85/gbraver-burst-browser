@@ -80,20 +80,12 @@ export class PlayerSelect implements DOMScene {
   }
 
   /**
-   * 各種リソースのプリロードを行う
+   * リソース読み込みが完了するまで待つ
    *
-   * @return 処理結果
+   * @return 待機結果
    */
-  async preLoad(): Promise<void> {
-    try {
-      await Promise.all([
-        fetch(shinBraverIconURL(this._resourcePath)),
-        fetch(neoLandozerIconURL(this._resourcePath)),
-        fetch(lightningDozerIconURL(this._resourcePath)),
-      ]);
-    } catch(e) {
-      throw e;
-    }
+  waitUntilLoaded(): Promise<void> {
+    return this._view.waitUntilLoaded();
   }
 
   /**

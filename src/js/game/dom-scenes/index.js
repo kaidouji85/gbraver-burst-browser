@@ -99,7 +99,7 @@ export class DOMScenes {
       ];
       this._root.appendChild(scene.getRootHTMLElement());
       await scene.waitUntilLoaded();
-      
+
       this._scene = scene;
       return scene;
     } catch(e) {
@@ -121,11 +121,10 @@ export class DOMScenes {
       this._sceneSubscriptions = [
         notifier.selectionComplete.subscribe(this._selectionComplete)
       ];
-      await scene.preLoad();
+      this._root.appendChild(scene.getRootHTMLElement());
+      await scene.waitUntilLoaded();
 
       this._scene = scene;
-      this._root.appendChild(scene.getRootHTMLElement());
-
       return scene;
     } catch(e) {
       throw e;
