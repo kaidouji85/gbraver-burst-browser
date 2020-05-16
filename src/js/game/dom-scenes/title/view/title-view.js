@@ -29,19 +29,10 @@ export class TitleView {
   _isLogoLoaded: Promise<void>;
   _gameStart: HTMLElement;
   _howToPlay: HTMLElement;
-  _imageURLs: {
-    titleLogo: string,
-    titleBack: string
-  };
 
   constructor(params: Params) {
     this._gameStartStream = new Subject();
     this._howToPlayStream = new Subject();
-
-    this._imageURLs = {
-      titleLogo: titleLogoURL(params.resourcePath),
-      titleBack: titleBackURL(params.resourcePath)
-    };
 
     this._root = document.createElement('div');
 
@@ -60,7 +51,7 @@ export class TitleView {
         </div>
       </div>
     `;
-    this._root.style.backgroundImage = `url(${this._imageURLs.titleBack})`;
+    this._root.style.backgroundImage = `url(${titleBackURL(params.resourcePath)})`;
     this._root.className = 'title';
 
     const logoSearch = this._root.querySelector(`[data-id="${logoId}"]`);
