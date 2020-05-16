@@ -42,12 +42,8 @@ export class MatchCard implements DOMScene {
    *
    * @return 待機結果
    */
-  async waitUntilLoaded(): Promise<void> {
-    try {
-      await this._view.waitUntilLoaded();
-    } catch(e) {
-      throw e;
-    }
+  waitUntilLoaded(): Promise<void> {
+    return this._view.waitUntilLoaded();
   }
 
   /**

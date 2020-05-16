@@ -56,7 +56,7 @@ export class Title implements DOMScene {
    *
    * @return 待機結果
    */
-  async waitUntilLoaded(): Promise<void> {
+  waitUntilLoaded(): Promise<void> {
     return this._view.waitUntilLoaded();
   }
 

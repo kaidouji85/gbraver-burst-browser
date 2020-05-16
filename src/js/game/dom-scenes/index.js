@@ -11,6 +11,12 @@ import {Title} from "./title";
 import {PlayerSelect} from "./player-select";
 import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
+import {waitTime} from "../../wait/wait-time";
+
+/**
+ * 最大読み込み待機時間
+ */
+const MAX_LOADING_TIME = 10000;
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -98,7 +104,10 @@ export class DOMScenes {
         notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
       ];
       this._root.appendChild(scene.getRootHTMLElement());
-      await scene.waitUntilLoaded();
+      await Promise.race([
+        scene.waitUntilLoaded(),
+        waitTime(MAX_LOADING_TIME)
+      ]);
 
       this._scene = scene;
       return scene;
@@ -122,7 +131,10 @@ export class DOMScenes {
         notifier.selectionComplete.subscribe(this._selectionComplete)
       ];
       this._root.appendChild(scene.getRootHTMLElement());
-      await scene.waitUntilLoaded();
+      await Promise.race([
+        scene.waitUntilLoaded(),
+        waitTime(MAX_LOADING_TIME),
+      ]);
 
       this._scene = scene;
       return scene;
@@ -150,7 +162,10 @@ export class DOMScenes {
         caption: caption
       });
       this._root.appendChild(scene.getRootHTMLElement());
-      await scene.waitUntilLoaded();
+      await Promise.race([
+        scene.waitUntilLoaded(),
+        waitTime(MAX_LOADING_TIME),
+      ]);
 
       this._scene = scene;
       return scene;

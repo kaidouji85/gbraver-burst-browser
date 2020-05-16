@@ -10,7 +10,6 @@ import type {SelectionComplete} from "../../../action/game/selection-complete";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import type {SelectArmdozer} from "../../../action/player-select/select-armdozer";
 import {waitTime} from "../../../wait/wait-time";
-import {lightningDozerIconURL, neoLandozerIconURL, shinBraverIconURL} from "../../../resource/urls/armdozer-icon-urls";
 
 /**
  * イベント通知
