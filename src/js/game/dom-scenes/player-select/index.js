@@ -22,6 +22,7 @@ export type Notifier = {
  * プレイヤーセレクト
  */
 export class PlayerSelect implements DOMScene {
+  _resourcePath: ResourcePath;
   _state: PlayerSelectState;
   _view: PlayerSelectView;
   _selectionComplete: Subject<SelectionComplete>;
@@ -33,6 +34,8 @@ export class PlayerSelect implements DOMScene {
    * @param resourcePath リソースパス
    */
   constructor(resourcePath: ResourcePath) {
+    this._resourcePath = resourcePath;
+
     this._selectionComplete = new Subject();
     this._state = createInitialState(resourcePath);
 
@@ -73,6 +76,15 @@ export class PlayerSelect implements DOMScene {
     return {
       selectionComplete: this._selectionComplete
     };
+  }
+
+  /**
+   * リソース読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  waitUntilLoaded(): Promise<void> {
+    return this._view.waitUntilLoaded();
   }
 
   /**

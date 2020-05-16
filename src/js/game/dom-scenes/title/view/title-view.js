@@ -4,6 +4,7 @@ import type {TitleState} from "../state/title-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
+import {titleBackURL, titleLogoURL} from "../../../../resource/urls/title-urls";
 
 /** イベント通知 */
 type Notifier = {
@@ -23,20 +24,26 @@ type Params = {
 export class TitleView {
   _gameStartStream: Subject<void>;
   _howToPlayStream: Subject<void>;
+
   _root: HTMLElement;
   _gameStart: HTMLElement;
   _howToPlay: HTMLElement;
 
+  _isTitleBackLoaded: Promise<void>;
+  _isLogoLoaded: Promise<void>;
+
   constructor(params: Params) {
     this._gameStartStream = new Subject();
     this._howToPlayStream = new Subject();
+
     this._root = document.createElement('div');
 
+    const logoId = domUuid();
     const gameStartId = domUuid();
     const howToPlayId = domUuid();
     this._root.innerHTML = `
       <div class="title__contents">
-        <img class="title__contents__logo" src="${params.resourcePath.get()}/logo.png"/>
+        <img class="title__contents__logo" data-id="${logoId}" />
         <div class="title__contents__copy-rights">
           <span class="title__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
         </div>
@@ -46,8 +53,26 @@ export class TitleView {
         </div>
       </div>
     `;
-    this._root.style.backgroundImage = `url(${params.resourcePath.get()}/title-back.png)`;
     this._root.className = 'title';
+    const titleBackImage = new Image();
+    this._isTitleBackLoaded = new Promise(resolve => {
+      titleBackImage.addEventListener('load', () => {
+        this._root.style.backgroundImage = `url(${titleBackImage.src})`;
+        resolve();
+      });
+    });
+    titleBackImage.src = titleBackURL(params.resourcePath);
+
+    const logo = this._root.querySelector(`[data-id="${logoId}"]`);
+    const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement)
+      ? logo
+      : new Image();
+    this._isLogoLoaded = new Promise(resolve => {
+      logoImage.addEventListener('load', () => {
+        resolve();
+      });
+    });
+    logoImage.src = titleLogoURL(params.resourcePath);
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {
@@ -89,5 +114,21 @@ export class TitleView {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * 各種リソースの読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  async waitUntilLoaded(): Promise<void> {
+    try {
+      await Promise.all([
+        this._isTitleBackLoaded,
+        this._isLogoLoaded,
+      ]);
+    } catch(e) {
+      throw e;
+    }
   }
 }

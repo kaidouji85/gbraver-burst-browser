@@ -136,7 +136,7 @@ export class Game {
       this._serviceWorker = await loadServiceWorker();
 
       await this._fader.fadeOut();
-      this._domScenes.showTitle();
+      await this._domScenes.startTitle();
       await this._fader.fadeIn();
     } catch (e) {
       throw e;
@@ -153,7 +153,7 @@ export class Game {
       this._state.inProgress = createInitialNPCBattle();
 
       await this._fader.fadeOut();
-      this._domScenes.showPlayerSelect();
+      await this._domScenes.startPlayerSelect();
       await this._fader.fadeIn();
     } catch(e) {
       throw e;
@@ -224,7 +224,7 @@ export class Game {
   async _loadResourcesFlow(): Promise<void> {
     try {
       await this._fader.fadeOut();
-      this._domScenes.showLoading();
+      this._domScenes.startLoading();
       await this._fader.fadeIn();
 
       this._resources = await loadAllResource(`${this._resourcePath.get()}/`);
@@ -259,7 +259,7 @@ export class Game {
         && v.level === npcBattle.level
       ) ?? DefaultCourse;
       const npc = course.npc();
-      this._domScenes.showMatchCard(
+      await this._domScenes.startMatchCard(
         player.armdozer.id,
         npc.armdozer.id,
         course.stageName,
