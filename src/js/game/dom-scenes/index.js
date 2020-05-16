@@ -76,9 +76,9 @@ export class DOMScenes {
   startLoading(): Loading {
     this._removeCurrentScene();
     const scene = new Loading(this._loading);
-    this._scene = scene
     this._root.appendChild(scene.getRootHTMLElement());
 
+    this._scene = scene
     return scene;
   }
 
@@ -149,11 +149,10 @@ export class DOMScenes {
         enemy: enemy,
         caption: caption
       });
-      await scene.preLoad();
+      this._root.appendChild(scene.getRootHTMLElement());
+      await scene.waitUntilLoaded();
 
       this._scene = scene;
-      this._root.appendChild(scene.getRootHTMLElement());
-
       return scene;
     } catch(e) {
       throw e;

@@ -23,6 +23,8 @@ export class MatchCard implements DOMScene {
 
   /**
    * コンストラクタ
+   *
+   * @param param パラメータ
    */
   constructor(param: Param): void {
     this._view = new MatchCardView(param.resourcePath, param.player, param.enemy, param.caption);
@@ -36,15 +38,13 @@ export class MatchCard implements DOMScene {
   }
 
   /**
-   * 本シーンで利用する各種リソースをプリロードする
+   * 各種リソースの読み込みが完了するまで待つ
    *
-   * @return 読み込み結果
+   * @return 待機結果
    */
-  async preLoad(): Promise<void> {
+  async waitUntilLoaded(): Promise<void> {
     try {
-      await Promise.all(
-        this._view.getImageURLs().map(url => fetch(url))
-      )
+      await this._view.waitUntilLoaded();
     } catch(e) {
       throw e;
     }
