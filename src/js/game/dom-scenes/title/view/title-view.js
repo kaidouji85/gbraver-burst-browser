@@ -24,11 +24,13 @@ type Params = {
 export class TitleView {
   _gameStartStream: Subject<void>;
   _howToPlayStream: Subject<void>;
+
   _root: HTMLElement;
-  _logo: HTMLImageElement;
-  _isLogoLoaded: Promise<void>;
   _gameStart: HTMLElement;
   _howToPlay: HTMLElement;
+
+  _isTitleBackLoaded: Promise<void>;
+  _isLogoLoaded: Promise<void>;
 
   constructor(params: Params) {
     this._gameStartStream = new Subject();
@@ -51,19 +53,26 @@ export class TitleView {
         </div>
       </div>
     `;
-    this._root.style.backgroundImage = `url(${titleBackURL(params.resourcePath)})`;
     this._root.className = 'title';
-
-    const logoSearch = this._root.querySelector(`[data-id="${logoId}"]`);
-    this._logo = (logoSearch instanceof HTMLImageElement)
-      ? logoSearch
-      : new Image();
-    this._isLogoLoaded = new Promise(resolve => {
-      this._logo.addEventListener('load', () => {
+    const titleBackImage = new Image();
+    this._isTitleBackLoaded = new Promise(resolve => {
+      titleBackImage.addEventListener('load', () => {
+        this._root.style.backgroundImage = `url(${titleBackImage.src})`;
         resolve();
       });
     });
-    this._logo.src = titleLogoURL(params.resourcePath);
+    titleBackImage.src = titleBackURL(params.resourcePath);
+
+    const logo = this._root.querySelector(`[data-id="${logoId}"]`);
+    const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement)
+      ? logo
+      : new Image();
+    this._isLogoLoaded = new Promise(resolve => {
+      logoImage.addEventListener('load', () => {
+        resolve();
+      });
+    });
+    logoImage.src = titleLogoURL(params.resourcePath);
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {
@@ -113,6 +122,13 @@ export class TitleView {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    return this._isLogoLoaded;
+    try {
+      await Promise.all([
+        this._isTitleBackLoaded,
+        this._isLogoLoaded,
+      ]);
+    } catch(e) {
+      throw e;
+    }
   }
 }
