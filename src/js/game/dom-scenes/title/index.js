@@ -52,18 +52,12 @@ export class Title implements DOMScene {
   }
 
   /**
-   * 各種リソースのプリロードを行う
+   * 各種リソースの読み込みが完了するまで待つ
    *
-   * @return 実行結果
+   * @return 待機結果
    */
-  async preLoad(): Promise<void> {
-    try {
-      await Promise.all(
-        this._view.getImageURLs().map(url => fetch(url))
-      );
-    } catch(e) {
-      throw e;
-    }
+  async waitUntilLoaded(): Promise<void> {
+    return this._view.waitUntilLoaded();
   }
 
   /** イベント通知ストリーム */

@@ -25,6 +25,8 @@ export class TitleView {
   _gameStartStream: Subject<void>;
   _howToPlayStream: Subject<void>;
   _root: HTMLElement;
+  _logo: HTMLImageElement;
+  _isLogoLoaded: Promise<void>;
   _gameStart: HTMLElement;
   _howToPlay: HTMLElement;
   _imageURLs: {
@@ -43,11 +45,12 @@ export class TitleView {
 
     this._root = document.createElement('div');
 
+    const logoId = domUuid();
     const gameStartId = domUuid();
     const howToPlayId = domUuid();
     this._root.innerHTML = `
       <div class="title__contents">
-        <img class="title__contents__logo" src="${this._imageURLs.titleLogo}"/>
+        <img class="title__contents__logo" data-id="${logoId}" />
         <div class="title__contents__copy-rights">
           <span class="title__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
         </div>
@@ -59,6 +62,17 @@ export class TitleView {
     `;
     this._root.style.backgroundImage = `url(${this._imageURLs.titleBack})`;
     this._root.className = 'title';
+
+    const logoSearch = this._root.querySelector(`[data-id="${logoId}"]`);
+    this._logo = (logoSearch instanceof HTMLImageElement)
+      ? logoSearch
+      : new Image();
+    this._isLogoLoaded = new Promise(resolve => {
+      this._logo.addEventListener('load', () => {
+        resolve();
+      });
+    });
+    this._logo.src = titleLogoURL(params.resourcePath);
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {
@@ -103,13 +117,11 @@ export class TitleView {
   }
 
   /**
-   * 本ビューが利用している画像URLを全て返す
+   * 各種リソースの読み込みが完了するまで待つ
    *
-   * @return 取得結果
+   * @return 待機結果
    */
-  getImageURLs(): string[] {
-    return Object.values(this._imageURLs)
-      .filter(v => typeof (v) === 'string')
-      .map(v => ((v: any): string));
+  async waitUntilLoaded(): Promise<void> {
+    return this._isLogoLoaded;
   }
 }

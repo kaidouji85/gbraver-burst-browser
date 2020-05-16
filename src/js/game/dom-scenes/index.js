@@ -97,7 +97,7 @@ export class DOMScenes {
         notifier.pushGameStart.subscribe(this._pushGameStart),
         notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
       ];
-      await scene.preLoad();
+      await scene.waitUntilLoaded();
 
       this._scene = scene;
       this._root.appendChild(scene.getRootHTMLElement());
