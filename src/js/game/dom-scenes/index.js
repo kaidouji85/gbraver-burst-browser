@@ -97,11 +97,10 @@ export class DOMScenes {
         notifier.pushGameStart.subscribe(this._pushGameStart),
         notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
       ];
-      await scene.waitUntilLoaded();
-
-      this._scene = scene;
       this._root.appendChild(scene.getRootHTMLElement());
-
+      await scene.waitUntilLoaded();
+      
+      this._scene = scene;
       return scene;
     } catch(e) {
       throw e;
