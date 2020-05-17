@@ -3,6 +3,8 @@
 import {Observable, Subject} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
+import {getArmdozerIconURL} from "../../../../resource/urls/armdozer-icon-urls";
+import type {ResourcePath} from "../../../../resource/path/resource-path";
 
 /**
  * イベント通知
@@ -16,16 +18,22 @@ export type Notifier = {
  */
 export class ArmdozerIconView {
   armDozerId: ArmDozerId;
-  _root: HTMLElement;
+  _root: HTMLImageElement;
+  _isImageLoaded: Promise<void>;
   _select: Subject<void>;
 
-  constructor(armDozerId: ArmDozerId, imagePath: string) {
+  /**
+   * コンストラクタ
+   *
+   * @param resourcePath リソースパス
+   * @param armDozerId アームドーザID
+   */
+  constructor(resourcePath: ResourcePath, armDozerId: ArmDozerId) {
     this.armDozerId = armDozerId;
     this._select = new Subject();
 
     this._root = document.createElement('img');
-    this._root.src = imagePath;
-    this._root.className = 'player-select__armdozers__icon';
+    this._root.className = 'player-select__armdozers__icon__image';
     this._root.addEventListener('click', (e: MouseEvent) => {
       e.preventDefault();
       this._select.next();
@@ -34,6 +42,21 @@ export class ArmdozerIconView {
       e.preventDefault();
       this._select.next();
     });
+    this._isImageLoaded = new Promise(resolve => {
+      this._root.addEventListener('load', () => {
+        resolve();
+      })
+    });
+    this._root.src = getArmdozerIconURL(resourcePath, armDozerId);
+  }
+
+  /**
+   * リソース読み込みが完了するまで待つ
+   *
+   * @return 待機血k
+   */
+  waitUntilLoaded(): Promise<void> {
+    return this._isImageLoaded;
   }
 
   /**

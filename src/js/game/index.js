@@ -20,22 +20,32 @@ import type {EndHowToPlay} from "../action/game/how-to-play";
 import {DOMDialogs} from "./dom-dialogs";
 import type {PushGameStart, PushHowToPlay} from "../action/game/title";
 import type {State} from "./state/state";
-import {createInitialState} from "./state/initial-state";
-import {createBattleRoom} from "./state/battle-room";
-import {endBattle} from "./state/end-battle";
+import {createInitialState} from "./state/state";
 import type {ResourcePath} from "../resource/path/resource-path";
 import type {SelectionComplete} from "../action/game/selection-complete";
-import {selectionComplete} from "./state/selectiin-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {PreLoadLinks} from "./preload-links";
+import type {NPCBattle} from "./state/npc-battle/npc-battle";
+import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
+import {selectionComplete} from "./state/npc-battle/selection-complete";
+import {endBattle} from "./state/npc-battle/end-battle";
+import {waitTime} from "../wait/wait-time";
+import {DOMFader} from "../components/dom-fader/dom-fader";
+import type {Player} from "gbraver-burst-core";
+import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
+import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
+import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 
-/** ゲーム全体の管理を行う */
+/**
+ * ゲーム全体の管理を行う
+ */
 export class Game {
   _state: State;
   _loading: Observable<LoadingAction>;
   _resize: Observable<Resize>;
   _vh: CssVH;
   _preLoadLinks: PreLoadLinks;
+  _fader: DOMFader;
   _interruptScenes: InterruptScenes;
   _domScenes: DOMScenes;
   _domDialogs: DOMDialogs;
@@ -45,6 +55,11 @@ export class Game {
   _serviceWorker: ?ServiceWorkerRegistration;
   _subscriptions: Subscription[];
 
+  /**
+   * コンストラクタ
+   *
+   * @param resourcePath リソースパス
+   */
   constructor(resourcePath: ResourcePath) {
     this._resourcePath = resourcePath;
 
@@ -59,6 +74,7 @@ export class Game {
       head.appendChild(link);
     });
 
+    this._fader = new DOMFader();
 
     this._interruptScenes = new InterruptScenes({
       resourcePath: this._resourcePath,
@@ -72,6 +88,7 @@ export class Game {
 
     const body = document.body || document.createElement('div');
     const elements = [
+      this._fader.getRootHTMLElement(),
       ...this._interruptScenes.getRootHTMLElements(),
       ...this._domDialogs.getRootHTMLElements(),
       this._domScenes.getRootHTMLElement(),
@@ -106,28 +123,47 @@ export class Game {
     ];
   }
 
-  /** ゲームの初期化を行う */
+  /**
+   * ゲームの初期化を行う
+   *
+   * @return 処理結果
+   */
   async initialize(): Promise<void> {
     try {
-      this._domScenes.showTitle();
       if (isDevelopment()) {
         viewPerformanceStats(document.body);
       }
       this._serviceWorker = await loadServiceWorker();
+
+      await this._fader.fadeOut();
+      await this._domScenes.startTitle();
+      await this._fader.fadeIn();
     } catch (e) {
       throw e;
     }
   }
 
   /**
-   * ゲームスタートボタンを押した
+   * ゲームスタートボタンを押した際の処理
+   *
+   * @param action アクション
    */
-  _onPushGameStart(action: PushGameStart) {
-    this._domScenes.showPlayerSelect();
+  async _onPushGameStart(action: PushGameStart) {
+    try {
+      this._state.inProgress = createInitialNPCBattle();
+
+      await this._fader.fadeOut();
+      await this._domScenes.startPlayerSelect();
+      await this._fader.fadeIn();
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**
-   * 遊び方ボタンを押した
+   * 遊び方ボタンを押した際の処理
+   *
+   * @param action アクション
    */
   _onPushHowToPlay(action: PushHowToPlay) {
     this._domDialogs.showHowToPlay();
@@ -143,24 +179,22 @@ export class Game {
   }
 
   /**
-   * プレイヤー選択完了
+   * プレイヤーキャラクター 選択完了時の処理
    *
    * @param action アクション
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
-      this._state = selectionComplete(this._state, action);
-      this._domScenes.showLoading();
-      const resources = await loadAllResource(`${this._resourcePath.get()}/`);
-      this._resources = resources;
-      const room = createBattleRoom(this._state);
-      const initialState = await room.start();
-      await waitAnimationFrame();
+      if (!this._resources) {
+        await this._loadResourcesFlow();
+      }
 
-      this._tdScenes.startBattle(resources, room, initialState);
-      await waitAnimationFrame();
-      this._domScenes.hidden();
-    } catch (e) {
+      if (this._state.inProgress.type === 'NPCBattle') {
+        const origin: NPCBattle = this._state.inProgress;
+        this._state.inProgress = selectionComplete(origin, action);
+        await this._npcBattleFlow();
+      }
+    } catch(e) {
       throw e;
     }
   }
@@ -170,19 +204,78 @@ export class Game {
    *
    * @param action アクション
    */
-  async _onEndBattle(action: EndBattle) {
+  async _onEndBattle(action: EndBattle): Promise<void> {
     try {
-      if (!this._resources) {
+      if (this._state.inProgress.type === 'NPCBattle') {
+        const origin: NPCBattle = this._state.inProgress;
+        this._state.inProgress = endBattle(origin, action);
+        await this._npcBattleFlow();
+      }
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * リソース読み込みフロー
+   *
+   * @return 処理結果
+   */
+  async _loadResourcesFlow(): Promise<void> {
+    try {
+      await this._fader.fadeOut();
+      this._domScenes.startLoading();
+      await this._fader.fadeIn();
+
+      this._resources = await loadAllResource(`${this._resourcePath.get()}/`);
+      await waitAnimationFrame();
+      await waitTime(1000);
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * NPC戦闘フロー
+   *
+   * @return 処理結果
+   */
+  async _npcBattleFlow(): Promise<void> {
+    try {
+      if (!this._resources || (this._state.inProgress.type !== 'NPCBattle')) {
         return;
       }
       const resources: Resources = this._resources;
+      const npcBattle: NPCBattle = this._state.inProgress;
 
-      this._state = endBattle(this._state, action);
-      const room = createBattleRoom(this._state);
+      if (!npcBattle.player) {
+        return;
+      }
+      const player: Player = npcBattle.player;
+
+      await this._fader.fadeOut();
+      const course: NPCBattleCourse = NPCBattleCourses.find(v =>
+        v.armdozerId === player.armdozer.id
+        && v.level === npcBattle.level
+      ) ?? DefaultCourse;
+      const npc = course.npc();
+      await this._domScenes.startMatchCard(
+        player.armdozer.id,
+        npc.armdozer.id,
+        course.stageName,
+      );
+      await this._fader.fadeIn();
+
+      const room = new OfflineBattleRoom(player, npc);
       const initialState = await room.start();
+      const battleScene = this._tdScenes.startBattle(resources, room, initialState);
+      await waitAnimationFrame();
 
-      this._tdScenes.startBattle(resources, room, initialState);
-    } catch (e) {
+      await this._fader.fadeOut();
+      this._domScenes.hidden();
+      await this._fader.fadeIn();
+      await battleScene.start();
+    } catch(e) {
       throw e;
     }
   }

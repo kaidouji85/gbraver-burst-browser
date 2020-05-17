@@ -51,6 +51,15 @@ export class Title implements DOMScene {
     // NOP
   }
 
+  /**
+   * 各種リソースの読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  waitUntilLoaded(): Promise<void> {
+    return this._view.waitUntilLoaded();
+  }
+
   /** イベント通知ストリーム */
   notifier(): Notifier {
     return this._notifier;

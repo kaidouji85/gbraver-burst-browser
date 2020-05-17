@@ -4,12 +4,12 @@ import * as Strategies from 'workbox-strategies';
 import {ExpirationPlugin} from 'workbox-expiration';
 
 PreCaching.precacheAndRoute([
-  {url: "/index.html", revision: BUILD_HASH},
-  {url: "/manifest.json", revision: BUILD_HASH},
-  {url: "/favicon.ico", revision: BUILD_HASH},
-  {url: "/favicon-16x16.png", revision: BUILD_HASH},
-  {url: "/favicon-32x32.png", revision: BUILD_HASH},
-  {url: "/app-icon.png", revision: BUILD_HASH},
+  {url: "./index.html", revision: BUILD_HASH},
+  {url: "./manifest.json", revision: BUILD_HASH},
+  {url: "./favicon.ico", revision: BUILD_HASH},
+  {url: "./favicon-16x16.png", revision: BUILD_HASH},
+  {url: "./favicon-32x32.png", revision: BUILD_HASH},
+  {url: "./app-icon.png", revision: BUILD_HASH},
 ]);
 
 Routing.registerRoute(

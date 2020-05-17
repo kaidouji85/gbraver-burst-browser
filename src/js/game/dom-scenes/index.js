@@ -9,6 +9,14 @@ import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
 import {Title} from "./title";
 import {PlayerSelect} from "./player-select";
+import {MatchCard} from "./match-card";
+import type {ArmDozerId} from "gbraver-burst-core";
+import {waitTime} from "../../wait/wait-time";
+
+/**
+ * 最大読み込み待機時間
+ */
+const MAX_LOADING_TIME = 10000;
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -67,42 +75,103 @@ export class DOMScenes {
   }
 
   /**
-   * ローディング画面を表示する
+   * 新しくローディング画面を開始する
+   *
+   * @return 開始されたローディング画面
    */
-  showLoading(): void {
+  startLoading(): Loading {
     this._removeCurrentScene();
     const scene = new Loading(this._loading);
+    this._root.appendChild(scene.getRootHTMLElement());
+
     this._scene = scene
-    this._root.appendChild(scene.getRootHTMLElement());
-  }
-
-  /** タイトルを表示する */
-  showTitle(): void {
-    this._removeCurrentScene();
-
-    const scene = new Title(this._resourcePath);
-    const notifier = scene.notifier();
-    this._sceneSubscriptions = [
-      notifier.pushGameStart.subscribe(this._pushGameStart),
-      notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
-    ];
-    this._scene = scene;
-    this._root.appendChild(scene.getRootHTMLElement());
+    return scene;
   }
 
   /**
-   * プレイヤーセレクトを表示する
+   * 新しくタイトル画面を開始する
+   *
+   * @return 開始されたタイトル画面
    */
-  showPlayerSelect(): void {
-    this._removeCurrentScene();
+  async startTitle(): Promise<Title> {
+    try {
+      this._removeCurrentScene();
 
-    const scene = new PlayerSelect(this._resourcePath);
-    const notifier = scene.notifier();
-    this._sceneSubscriptions = [
-      notifier.selectionComplete.subscribe(this._selectionComplete)
-    ];
-    this._scene = scene;
-    this._root.appendChild(scene.getRootHTMLElement());
+      const scene = new Title(this._resourcePath);
+      const notifier = scene.notifier();
+      this._sceneSubscriptions = [
+        notifier.pushGameStart.subscribe(this._pushGameStart),
+        notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
+      ];
+      this._root.appendChild(scene.getRootHTMLElement());
+      await Promise.race([
+        scene.waitUntilLoaded(),
+        waitTime(MAX_LOADING_TIME)
+      ]);
+
+      this._scene = scene;
+      return scene;
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 新しくプレイヤー選択画面を開始する
+   *
+   * @return 開始されたプレイヤー選択画面
+   */
+  async startPlayerSelect(): Promise<PlayerSelect> {
+    try {
+      this._removeCurrentScene();
+
+      const scene = new PlayerSelect(this._resourcePath);
+      const notifier = scene.notifier();
+      this._sceneSubscriptions = [
+        notifier.selectionComplete.subscribe(this._selectionComplete)
+      ];
+      this._root.appendChild(scene.getRootHTMLElement());
+      await Promise.race([
+        scene.waitUntilLoaded(),
+        waitTime(MAX_LOADING_TIME),
+      ]);
+
+      this._scene = scene;
+      return scene;
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 新しく対戦カード画面を開始する
+   *
+   * @param player プレイヤー側 アームドーザID
+   * @param enemy 敵側 アームドーザID
+   * @param caption ステージ名
+   * @return 開始された対戦カード画面
+   */
+  async startMatchCard(player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
+    try {
+      this._removeCurrentScene();
+
+      const scene = new MatchCard({
+        resourcePath: this._resourcePath,
+        player: player,
+        enemy: enemy,
+        caption: caption
+      });
+      this._root.appendChild(scene.getRootHTMLElement());
+      await Promise.race([
+        scene.waitUntilLoaded(),
+        waitTime(MAX_LOADING_TIME),
+      ]);
+
+      this._scene = scene;
+      return scene;
+    } catch(e) {
+      throw e;
+    }
   }
 
   /**

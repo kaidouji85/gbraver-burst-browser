@@ -14,15 +14,15 @@ import {all} from "../../../../animation/all";
  */
 export function hmToStand(model: LightningDozerModel): Animate {
   return all(
-    tween(model.position, t => t.to({x: '+80'}, 300)),
-
     process(() => {
       model.animation.type = 'HM_TO_STAND';
       model.animation.frame = 0;
-    }).chain(tween(model.animation, t => t.to({frame: 1}, 300))
+    }).chain(tween(model.animation, t => t.to({frame: 1}, 400))
     ).chain(process(() => {
-        model.animation.type = 'STAND';
-        model.animation.frame = 0;
-    }))
+      model.animation.type = 'STAND';
+      model.animation.frame = 0;
+    })),
+
+    tween(model.position, t => t.to({x: '+60'}, 400))
   );
 }

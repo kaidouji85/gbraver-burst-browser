@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import {SPRITE_RENDER_ORDER} from "../../../../render-order/td-render-order";
+import {SPRITE_RENDER_ORDER} from "../../../../render/td-render-order";
 import type {ShockWaveLineModel} from "../model/shock-wave-model";
 import {LINE_Z_INDEX} from "./z-index";
 
