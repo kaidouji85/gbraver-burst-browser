@@ -65,7 +65,7 @@ aws configure
 ### 本番環境にデプロイ
 
 ```
-./scripts/deploy-production.sh <アップロードするS3バケット名>
+./scripts/deploy-production.sh <アップロードするS3バケット名> <CloudFrontのdistributionId>
 ```
 
 ## storybookを動かす
