@@ -12,9 +12,7 @@ export class NPCEnding implements DOMScene {
   constructor(resourcePath: ResourcePath) {
     this._root = document.createElement('div');
     this._root.className = 'npc-ending';
-    this._root.innerHTML = `
-      STAGE ALL CLEAR!!
-    `;
+    this._root.innerHTML = ``;
     this._root.style.backgroundImage = `url(${resourcePath.get()}/ending/end-card.png)`;
   }
 
