@@ -1,6 +1,7 @@
 // @flow
 
 import type {DOMScene} from "../dom-scene";
+import type {ResourcePath} from "../../../resource/path/resource-path";
 
 /**
  * NPCルート エンディング
@@ -8,12 +9,13 @@ import type {DOMScene} from "../dom-scene";
 export class NPCEnding implements DOMScene {
   _root: HTMLElement;
 
-  constructor() {
+  constructor(resourcePath: ResourcePath) {
     this._root = document.createElement('div');
     this._root.className = 'npc-ending';
     this._root.innerHTML = `
-      全クリおめでとう
+      STAGE ALL CLEAR!!
     `;
+    this._root.style.backgroundImage = `url(${resourcePath.get()}/ending/end-card.png)`;
   }
 
   /**
