@@ -12,7 +12,10 @@ export class NPCEnding implements DOMScene {
   constructor(resourcePath: ResourcePath) {
     this._root = document.createElement('div');
     this._root.className = 'npc-ending';
-    this._root.innerHTML = ``;
+    this._root.innerHTML = `
+      <img class="npc-ending__end" src="${resourcePath.get()}/ending/end.png">
+      <img class="npc-ending__logo" src="${resourcePath.get()}/logo.png">
+    `;
     this._root.style.backgroundImage = `url(${resourcePath.get()}/ending/end-card.png)`;
   }
 

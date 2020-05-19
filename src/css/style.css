@@ -400,8 +400,8 @@
 @media (orientation: landscape) {
     .npc-ending {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-end;
+        justify-content: space-between;
         width: var(--screen-width);
         height: var(--screen-height);
         background-color: var(--background-color);
@@ -420,4 +420,14 @@
     .npc-ending {
         display: none;
     }
+}
+
+.npc-ending__end {
+    object-fit: cover;
+    height: calc(var(--vh) * 30);
+}
+
+.npc-ending__logo {
+    object-fit: cover;
+    height: calc(var(--vh) * 30);
 }
