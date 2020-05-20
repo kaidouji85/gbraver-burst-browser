@@ -424,10 +424,10 @@
 
 .npc-ending__end {
     object-fit: cover;
-    height: calc(var(--vh) * 30);
+    width: 50vw;
 }
 
 .npc-ending__logo {
     object-fit: cover;
-    height: calc(var(--vh) * 30);
+    width: 30vw;
 }
