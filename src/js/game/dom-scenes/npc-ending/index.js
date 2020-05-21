@@ -3,12 +3,12 @@
 import type {DOMScene} from "../dom-scene";
 import type {ResourcePath} from "../../../resource/path/resource-path";
 import {Observable, Subject} from "rxjs";
-import type {EndNpcEnding} from "../../../action/game/npc-ending";
+import type {EndNPCEnding} from "../../../action/game/npc-ending";
 import {NPCEndingView} from "./view/npc-ending-view";
 
 /** イベント通知 */
 type Notifier  = {
-  endNpcEnding: Observable<EndNpcEnding>
+  endNpcEnding: Observable<EndNPCEnding>
 };
 
 /**
@@ -16,7 +16,7 @@ type Notifier  = {
  */
 export class NPCEnding implements DOMScene {
   _view: NPCEndingView;
-  _end: Subject<EndNpcEnding>;
+  _end: Subject<EndNPCEnding>;
 
   /**
    * コンストラクタ
@@ -27,7 +27,7 @@ export class NPCEnding implements DOMScene {
     this._end = new Subject();
     setTimeout(() => {
       this._end.next({
-        type: 'EndNpcEnding'
+        type: 'EndNPCEnding'
       });
     }, 5000);
 
