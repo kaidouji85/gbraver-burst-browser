@@ -4,6 +4,7 @@ import type {DOMScene} from "../dom-scene";
 import type {ResourcePath} from "../../../resource/path/resource-path";
 import {Observable, Subject} from "rxjs";
 import type {EndNpcEnding} from "../../../action/game/npc-ending";
+import {NPCEndingView} from "./view/npc-ending-view";
 
 /** イベント通知 */
 type Notifier  = {
@@ -14,26 +15,30 @@ type Notifier  = {
  * NPCルート エンディング
  */
 export class NPCEnding implements DOMScene {
-  _root: HTMLElement;
+  _view: NPCEndingView;
   _end: Subject<EndNpcEnding>;
 
+  /**
+   * コンストラクタ
+   *
+   * @param resourcePath リソースパス
+   */
   constructor(resourcePath: ResourcePath) {
     this._end = new Subject();
+    setTimeout(() => {
+      this._end.next({
+        type: 'EndNpcEnding'
+      });
+    }, 5000);
 
-    this._root = document.createElement('div');
-    this._root.className = 'npc-ending';
-    this._root.innerHTML = `
-      <img class="npc-ending__end" src="${resourcePath.get()}/ending/end.png">
-      <img class="npc-ending__logo" src="${resourcePath.get()}/logo.png">
-    `;
-    this._root.style.backgroundImage = `url(${resourcePath.get()}/ending/end-card.png)`;
+    this._view = new NPCEndingView(resourcePath);
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    // NOP
+    this._view.destructor();
   }
 
   /**
@@ -42,7 +47,7 @@ export class NPCEnding implements DOMScene {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this._view.getRootHTMLElement();
   }
 
   /**
