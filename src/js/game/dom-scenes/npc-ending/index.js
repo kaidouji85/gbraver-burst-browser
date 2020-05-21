@@ -2,14 +2,24 @@
 
 import type {DOMScene} from "../dom-scene";
 import type {ResourcePath} from "../../../resource/path/resource-path";
+import {Observable, Subject} from "rxjs";
+import type {EndNpcEnding} from "../../../action/game/npc-ending";
+
+/** イベント通知 */
+type Notifier  = {
+  endNpcEnding: Observable<EndNpcEnding>
+};
 
 /**
  * NPCルート エンディング
  */
 export class NPCEnding implements DOMScene {
   _root: HTMLElement;
+  _end: Subject<EndNpcEnding>;
 
   constructor(resourcePath: ResourcePath) {
+    this._end = new Subject();
+
     this._root = document.createElement('div');
     this._root.className = 'npc-ending';
     this._root.innerHTML = `
@@ -33,5 +43,16 @@ export class NPCEnding implements DOMScene {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * イベント通知
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      endNpcEnding: this._end
+    };
   }
 }
