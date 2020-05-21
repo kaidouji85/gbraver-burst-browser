@@ -28,7 +28,7 @@ import {PreLoadLinks} from "./preload-links";
 import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
 import {selectionComplete} from "./state/npc-battle/selection-complete";
-import {endBattle} from "./state/npc-battle/end-battle";
+import {endBattle, isNPCEnd} from "./state/npc-battle/end-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
@@ -206,10 +206,16 @@ export class Game {
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
     try {
-      if (this._state.inProgress.type === 'NPCBattle') {
+      if (this._state.inProgress.type === 'NPCBattle' && !isNPCEnd(this._state.inProgress, action)) {
         const origin: NPCBattle = this._state.inProgress;
         this._state.inProgress = endBattle(origin, action);
         await this._npcBattleFlow();
+      } else if (this._state.inProgress.type === 'NPCBattle' && isNPCEnd(this._state.inProgress, action)) {
+        this._state.inProgress = {type: 'None'};
+
+        await this._fader.fadeOut();
+        this._domScenes.startNPCEnding();
+        await this._fader.fadeIn();
       }
     } catch(e) {
       throw e;
