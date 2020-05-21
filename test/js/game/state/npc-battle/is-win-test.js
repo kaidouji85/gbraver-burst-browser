@@ -7,7 +7,7 @@ import type {Player, GameOver, EvenMatch} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../../data/end-battle";
 import type {NPCBattle} from "../../../../../src/js/game/state/npc-battle/npc-battle";
 import {EMPTY_NPC_BATTLE} from "../../../../data/npc-battle";
-import {isWin} from "../../../../../src/js/game/state/npc-battle/end-battle";
+import {isWin} from "../../../../../src/js/game/state/npc-battle/level-up";
 
 const player: Player = {
   ...EMPTY_PLAYER,

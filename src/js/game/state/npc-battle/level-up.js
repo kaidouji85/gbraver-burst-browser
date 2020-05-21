@@ -32,18 +32,18 @@ export function isWin(state: NPCBattle, action: EndBattle): boolean {
  * @param state
  * @return 判定結果、trueで終了
  */
-export function isNPCEnd(state: NPCBattle, action: EndBattle): boolean {
+export function isNPCBattleEnd(state: NPCBattle, action: EndBattle): boolean {
   return (state.level === MAX_LEVEL) && isWin(state, action);
 }
 
 /**
- * 戦闘終了結果の応じてNPC戦闘を更新する
+ * 戦闘終了結果の応じてNPCレベルをアップさせる
  *
  * @param origin 更新前の状態
  * @param action アクション
  * @return 更新結果
  */
-export function endBattle(origin: NPCBattle, action: EndBattle): NPCBattle {
+export function levelUp(origin: NPCBattle, action: EndBattle): NPCBattle {
   if (!isWin(origin, action)) {
     return origin;
   }

@@ -7,7 +7,7 @@ import type {Player, GameOver, EvenMatch} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../../data/end-battle";
 import type {NPCBattle} from "../../../../../src/js/game/state/npc-battle/npc-battle";
 import {EMPTY_NPC_BATTLE} from "../../../../data/npc-battle";
-import {endBattle} from "../../../../../src/js/game/state/npc-battle/end-battle";
+import {levelUp} from "../../../../../src/js/game/state/npc-battle/level-up";
 import {MAX_LEVEL} from "../../../../../src/js/game/state/npc-battle/npc-battle";
 
 const player: Player = {
@@ -43,7 +43,7 @@ test('戦闘に勝利した場合はレベルが+1される', t => {
     }
   };
 
-  const result = endBattle(state, action);
+  const result = levelUp(state, action);
   const expected = {
     ...state,
     level: 2
@@ -65,7 +65,7 @@ test('戦闘に敗北した場合はレベルがそのまま', t => {
     }
   };
 
-  const result = endBattle(state, action);
+  const result = levelUp(state, action);
   t.deepEqual(result, state);
 });
 
@@ -83,7 +83,7 @@ test('引き分けの場合はレベルがそのまま', t => {
     }
   };
 
-  const result = endBattle(state, action);
+  const result = levelUp(state, action);
   t.deepEqual(result, state);
 });
 
@@ -101,6 +101,6 @@ test('戦闘に勝利しても最大レベルの場合にはそのまま', t => 
     }
   };
 
-  const result = endBattle(state, action);
+  const result = levelUp(state, action);
   t.deepEqual(result, state);
 });
