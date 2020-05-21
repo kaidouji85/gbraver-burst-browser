@@ -27,6 +27,6 @@ export function createInitialNPCBattle(): NPCBattle {
   return {
     type: 'NPCBattle',
     player: null,
-    level: 1,
+    level: 3, // TODO 開発が完了したら戻す
   };
 }

@@ -96,6 +96,13 @@ export class TDScenes {
   }
 
   /**
+   * 3Dシーンを非表示にする
+   */
+  hidden(): void {
+    this._disposeScene();
+  }
+
+  /**
    * three.jsレンダラのHTML要素を取得する
    *
    * @return 取得結果

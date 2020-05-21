@@ -212,10 +212,7 @@ export class Game {
         await this._npcBattleFlow();
       } else if (this._state.inProgress.type === 'NPCBattle' && isNPCEnd(this._state.inProgress, action)) {
         this._state.inProgress = {type: 'None'};
-
-        await this._fader.fadeOut();
-        this._domScenes.startNPCEnding();
-        await this._fader.fadeIn();
+        await this._npcEndingFlow();
       }
     } catch(e) {
       throw e;
@@ -281,6 +278,23 @@ export class Game {
       this._domScenes.hidden();
       await this._fader.fadeIn();
       await battleScene.start();
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * NPCルート エンディング フロー
+   *
+   * @return
+   */
+  async _npcEndingFlow(): Promise<void> {
+    try {
+      await this._fader.fadeOut();
+      this._domScenes.startNPCEnding();
+      this._tdScenes.hidden();
+      // NPCエンディングのリソース読み込み完了を待つ
+      await this._fader.fadeIn();
     } catch(e) {
       throw e;
     }
