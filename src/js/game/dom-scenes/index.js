@@ -12,6 +12,7 @@ import {PlayerSelect} from "./player-select";
 import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
+import {NPCEnding} from "./npc-ending";
 
 /**
  * 最大読み込み待機時間
@@ -166,6 +167,25 @@ export class DOMScenes {
         scene.waitUntilLoaded(),
         waitTime(MAX_LOADING_TIME),
       ]);
+
+      this._scene = scene;
+      return scene;
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 新しくNPCエンディング画面を開始する
+   *
+   * @return 開始されたNPCエンディング画面
+   */
+  async startNPCEnding(): Promise<NPCEnding> {
+    try {
+      this._removeCurrentScene();
+
+      const scene = new NPCEnding(this._resourcePath);
+      this._root.appendChild(scene.getRootHTMLElement());
 
       this._scene = scene;
       return scene;
