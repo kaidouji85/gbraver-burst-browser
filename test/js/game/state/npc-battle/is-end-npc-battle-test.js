@@ -7,7 +7,7 @@ import type {Player, GameOver, EvenMatch} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../../data/end-battle";
 import type {NPCBattle} from "../../../../../src/js/game/state/npc-battle/npc-battle";
 import {EMPTY_NPC_BATTLE} from "../../../../data/npc-battle";
-import {levelUp} from "../../../../../src/js/game/state/npc-battle/level-up";
+import {isNPCBattleEnd, isWin} from "../../../../../src/js/game/state/npc-battle/level-up";
 import {MAX_LEVEL} from "../../../../../src/js/game/state/npc-battle/npc-battle";
 
 const player: Player = {
@@ -25,51 +25,7 @@ const lose: GameOver = {
   winner: 'not-test-player'
 };
 
-const evenMath: EvenMatch = {
-  type: 'EvenMatch'
-};
-
-test('戦闘に勝利した場合はレベルが+1される', t => {
-  const state: NPCBattle = {
-    ...EMPTY_NPC_BATTLE,
-    player: player,
-    level: 1
-  };
-  const action: EndBattle = {
-    ...EMPTY_END_BATTLE,
-    gameEnd: {
-      ...EMPTY_END_BATTLE.gameEnd,
-      result: win
-    }
-  };
-
-  const result = levelUp(state, action);
-  const expected = {
-    ...state,
-    level: 2
-  };
-  t.deepEqual(result, expected);
-});
-
-test('勝利以外の場合はレベルがそのまま', t => {
-  const state: NPCBattle = {
-    ...EMPTY_NPC_BATTLE,
-    player: player,
-    level: 1
-  };
-  const action: EndBattle = {
-    ...EMPTY_END_BATTLE,
-    gameEnd: {
-      ...EMPTY_END_BATTLE.gameEnd,
-      result: lose
-    }
-  };
-
-  const result = levelUp(state, action);
-  t.deepEqual(result, state);
-});
-
-test('戦闘に勝利しても最大レベルの場合にはそのまま', t => {
+test('NPC戦闘終了条件が正しく判定できる', t => {
   const state: NPCBattle = {
     ...EMPTY_NPC_BATTLE,
     player: player,
@@ -83,6 +39,42 @@ test('戦闘に勝利しても最大レベルの場合にはそのまま', t => 
     }
   };
 
-  const result = levelUp(state, action);
-  t.deepEqual(result, state);
+  const result = isNPCBattleEnd(state, action);
+  t.true(result);
+});
+
+test('勝利しても最大レベルでない場合はfalseを返す', t => {
+  const state: NPCBattle = {
+    ...EMPTY_NPC_BATTLE,
+    player: player,
+    level: MAX_LEVEL - 1
+  };
+  const action: EndBattle = {
+    ...EMPTY_END_BATTLE,
+    gameEnd: {
+      ...EMPTY_END_BATTLE.gameEnd,
+      result: win
+    }
+  };
+
+  const result = isNPCBattleEnd(state, action);
+  t.false(result);
+});
+
+test('最大レベルでも勝利以外の場合はfalseを返す', t => {
+  const state: NPCBattle = {
+    ...EMPTY_NPC_BATTLE,
+    player: player,
+    level: MAX_LEVEL
+  };
+  const action: EndBattle = {
+    ...EMPTY_END_BATTLE,
+    gameEnd: {
+      ...EMPTY_END_BATTLE.gameEnd,
+      result: lose
+    }
+  };
+
+  const result = isNPCBattleEnd(state, action);
+  t.false(result);
 });
