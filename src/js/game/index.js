@@ -35,6 +35,7 @@ import type {Player} from "gbraver-burst-core";
 import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
 import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
+import type {EndNPCEnding} from "../action/game/npc-ending";
 
 /**
  * ゲーム全体の管理を行う
@@ -119,6 +120,9 @@ export class Game {
       }),
       domScenesNotifier.selectionComplete.subscribe(action => {
         this._onSelectionComplete(action);
+      }),
+      domScenesNotifier.endNPCEnding.subscribe(action => {
+        this._onEndNPCEnding(action);
       })
     ];
   }
@@ -212,8 +216,27 @@ export class Game {
         await this._npcBattleFlow();
       } else if (this._state.inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._state.inProgress, action)) {
         this._state.inProgress = {type: 'None'};
-        await this._npcEndingFlow();
+
+        await this._fader.fadeOut();
+        this._tdScenes.hidden();
+        await this._domScenes.startNPCEnding();
+        await this._fader.fadeIn();
       }
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * NPC戦闘エンディングが終了した際の処理
+   *
+   * @param action アクション
+   */
+  async _onEndNPCEnding(action: EndNPCEnding): Promise<void> {
+    try {
+      await this._fader.fadeOut();
+      await this._domScenes.startTitle();
+      await this._fader.fadeIn();
     } catch(e) {
       throw e;
     }
@@ -278,23 +301,6 @@ export class Game {
       this._domScenes.hidden();
       await this._fader.fadeIn();
       await battleScene.start();
-    } catch(e) {
-      throw e;
-    }
-  }
-
-  /**
-   * NPCルート エンディング フロー
-   *
-   * @return
-   */
-  async _npcEndingFlow(): Promise<void> {
-    try {
-      await this._fader.fadeOut();
-      this._domScenes.startNPCEnding();
-      this._tdScenes.hidden();
-      // NPCエンディングのリソース読み込み完了を待つ
-      await this._fader.fadeIn();
     } catch(e) {
       throw e;
     }

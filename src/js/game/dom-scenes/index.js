@@ -13,6 +13,7 @@ import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
+import type {EndNPCEnding} from "../../action/game/npc-ending";
 
 /**
  * 最大読み込み待機時間
@@ -30,6 +31,7 @@ type Notifier = {
   pushGameStart: Observable<PushGameStart>,
   pushHowToPlay: Observable<PushHowToPlay>,
   selectionComplete: Observable<SelectionComplete>,
+  endNPCEnding: Observable<EndNPCEnding>;
 };
 
 /**
@@ -44,6 +46,7 @@ export class DOMScenes {
   _pushGameStart: Subject<PushGameStart>;
   _pushHowToPlay: Subject<PushHowToPlay>;
   _selectionComplete: Subject<SelectionComplete>;
+  _endNPCEnding: Subject<EndNPCEnding>;
   _sceneSubscriptions: Subscription[];
 
   constructor(param: Param) {
@@ -53,6 +56,7 @@ export class DOMScenes {
     this._pushGameStart = new Subject();
     this._pushHowToPlay = new Subject();
     this._selectionComplete = new Subject();
+    this._endNPCEnding = new Subject();
     this._sceneSubscriptions = [];
     this._scene = null;
   }
@@ -72,6 +76,7 @@ export class DOMScenes {
       pushGameStart: this._pushGameStart,
       pushHowToPlay: this._pushHowToPlay,
       selectionComplete: this._selectionComplete,
+      endNPCEnding: this._endNPCEnding,
     }
   }
 
@@ -186,6 +191,9 @@ export class DOMScenes {
 
       const scene = new NPCEnding(this._resourcePath);
       this._root.appendChild(scene.getRootHTMLElement());
+      this._sceneSubscriptions = [
+        scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)
+      ];
 
       this._scene = scene;
       return scene;
