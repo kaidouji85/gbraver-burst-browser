@@ -60,4 +60,13 @@ export class NPCEnding implements DOMScene {
       endNpcEnding: this._end
     };
   }
+
+  /**
+   * 各種リソースの読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  waitUntilLoaded(): Promise<void> {
+    return this._view.waitUntilLoaded();
+  }
 }

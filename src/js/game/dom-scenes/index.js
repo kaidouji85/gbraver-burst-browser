@@ -194,6 +194,10 @@ export class DOMScenes {
       this._sceneSubscriptions = [
         scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)
       ];
+      await Promise.race([
+        scene.waitUntilLoaded(),
+        waitTime(MAX_LOADING_TIME),
+      ]);
 
       this._scene = scene;
       return scene;
