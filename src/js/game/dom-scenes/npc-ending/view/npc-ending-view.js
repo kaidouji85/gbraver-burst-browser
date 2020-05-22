@@ -12,6 +12,11 @@ export class NPCEndingView {
   _isEndLoaded: Promise<void>;
   _isLogoLoader: Promise<void>;
 
+  /**
+   * コンストラクタ
+   *
+   * @param resourcePath リソースパス
+   */
   constructor(resourcePath: ResourcePath) {
     const endId = domUuid();
     const logoId = domUuid();
@@ -20,20 +25,39 @@ export class NPCEndingView {
     this._root.className = 'npc-ending';
     this._root.innerHTML = `
       <img class="npc-ending__end" data-id="${endId}">
-      <img class="npc-ending__logo" data-id="${logoId}" src="${resourcePath.get()}/logo.png">
+      <img class="npc-ending__logo" data-id="${logoId}">
     `;
-    this._root.style.backgroundImage = `url(${resourcePath.get()}/ending/end-card.png)`;
 
-    const logo = this._root.querySelector(`[data-id="${endId}"]`);
-    const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement)
+    const titleBackImage = new Image();
+    this._isEndCardLoaded = new Promise(resolve => {
+      titleBackImage.addEventListener('load', () => {
+        this._root.style.backgroundImage = `url(${titleBackImage.src})`;
+        resolve();
+      });
+    }) ;
+    titleBackImage.src = `${resourcePath.get()}/ending/end-card.png`;
+
+    const end = this._root.querySelector(`[data-id="${endId}"]`);
+    const endImage: HTMLImageElement = (end instanceof HTMLImageElement)
+      ? end
+      : new Image();
+    this._isEndLoaded =  new Promise(resolve => {
+      endImage.addEventListener('load', () => {
+        resolve();
+      });
+    });
+    endImage.src = `${resourcePath.get()}/ending/end.png`;
+
+    const logo = this._root.querySelector(`[data-id="${logoId}"]`);
+    const logoImage = (logo instanceof  HTMLImageElement)
       ? logo
       : new Image();
-    this._isLogoLoader =  new Promise(resolve => {
+    this._isLogoLoader = new Promise(resolve => {
       logoImage.addEventListener('load', () => {
         resolve();
       });
     });
-    logoImage.src = `${resourcePath.get()}/ending/end.png`;
+    logoImage.src = `${resourcePath.get()}/logo.png`;
   }
 
   /**
@@ -60,7 +84,9 @@ export class NPCEndingView {
   async waitUntilLoaded(): Promise<void> {
     try {
       await Promise.all([
-        this._isLogoLoader
+        this._isEndCardLoaded,
+        this._isEndLoaded,
+        this._isLogoLoader,
       ]);
     } catch(e) {
       throw e;
