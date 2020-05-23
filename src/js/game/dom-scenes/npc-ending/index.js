@@ -5,6 +5,8 @@ import type {ResourcePath} from "../../../resource/path/resource-path";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {EndNPCEnding} from "../../../action/game/npc-ending";
 import {NPCEndingView} from "./view/npc-ending-view";
+import type {NPCEndingState} from "./state/npc-ending-state";
+import {createInitialState} from "./state/initial-state";
 
 /** イベント通知 */
 type Notifier  = {
@@ -15,6 +17,7 @@ type Notifier  = {
  * NPCルート エンディング
  */
 export class NPCEnding implements DOMScene {
+  _state: NPCEndingState;
   _view: NPCEndingView;
   _endNPCEnding: Subject<EndNPCEnding>;
   _subsctiptoons: Subscription[];
@@ -25,6 +28,7 @@ export class NPCEnding implements DOMScene {
    * @param resourcePath リソースパス
    */
   constructor(resourcePath: ResourcePath) {
+    this._state = createInitialState();
     this._endNPCEnding = new Subject();
     this._view = new NPCEndingView(resourcePath);
     this._subsctiptoons = [
@@ -74,6 +78,11 @@ export class NPCEnding implements DOMScene {
    * 画面がクリックされた際の処理
    */
   _onScreenPush(): void {
+    if (!this._state.canOperate) {
+      return;
+    }
+    
+    this._state.canOperate = false;
     this._endNPCEnding.next();
   }
 }
