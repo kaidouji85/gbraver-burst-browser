@@ -54,7 +54,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     level: 3,
-    stageName: 'STAGE 3',
+    stageName: 'STAGE FINAL',
     npc: () => new NeoLandozerNPC(),
   },
   /** ネオランドーザ */
@@ -73,7 +73,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     level: 3,
-    stageName: 'STAGE 3',
+    stageName: 'STAGE FINAL',
     npc: () => new LightningDozerNPC(),
   },
   /** ライトニングドーザ  */
@@ -92,7 +92,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     level: 3,
-    stageName: 'STAGE 3',
+    stageName: 'STAGE FINAL',
     npc: () => new ShinBraverNPC(),
   },
 ];
