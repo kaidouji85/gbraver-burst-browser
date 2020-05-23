@@ -107,18 +107,17 @@ export class NeoLandozerNPC implements NPC {
    * @return コマンド
    */
   _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
-    // TODO 開発が完了したら戻す
-    // const burst = commands.find(v => v.type === 'BURST_COMMAND');
-    // const maxBattery = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === enemy.armdozer.battery);
-    // const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-    //
-    // if (burst && maxBattery) {
-    //   return maxBattery;
-    // }
-    //
-    // if (battery1) {
-    //   return battery1;
-    // }
+    const burst = commands.find(v => v.type === 'BURST_COMMAND');
+    const maxBattery = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === enemy.armdozer.battery);
+    const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+
+    if (burst && maxBattery) {
+      return maxBattery;
+    }
+
+    if (battery1) {
+      return battery1;
+    }
 
     return ZERO_BATTERY;
   }
