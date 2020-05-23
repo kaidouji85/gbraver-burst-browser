@@ -4,7 +4,6 @@ import type {TitleState} from "../state/title-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
-import {titleBackURL, titleLogoURL} from "../../../../resource/urls/title-urls";
 
 /** イベント通知 */
 type Notifier = {
@@ -61,7 +60,7 @@ export class TitleView {
         resolve();
       });
     });
-    titleBackImage.src = titleBackURL(params.resourcePath);
+    titleBackImage.src = `${params.resourcePath.get()}/title-back.png`;
 
     const logo = this._root.querySelector(`[data-id="${logoId}"]`);
     const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement)
@@ -72,7 +71,7 @@ export class TitleView {
         resolve();
       });
     });
-    logoImage.src = titleLogoURL(params.resourcePath);
+    logoImage.src = `${params.resourcePath.get()}/logo.png`;
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {
