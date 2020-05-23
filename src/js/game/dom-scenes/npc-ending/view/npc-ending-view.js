@@ -2,6 +2,14 @@
 
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
+import {Observable, Subject} from "rxjs";
+
+/**
+ * イベント通知
+ */
+type Notifier = {
+  screenPush: Observable<void>
+};
 
 /**
  * NPCルート エンディング ビュー
@@ -11,6 +19,7 @@ export class NPCEndingView {
   _isEndCardLoaded: Promise<void>;
   _isEndLoaded: Promise<void>;
   _isLogoLoader: Promise<void>;
+  _screenPush: Subject<void>;
 
   /**
    * コンストラクタ
@@ -18,6 +27,8 @@ export class NPCEndingView {
    * @param resourcePath リソースパス
    */
   constructor(resourcePath: ResourcePath) {
+    this._screenPush = new Subject();
+
     const endId = domUuid();
     const logoId = domUuid();
 
@@ -58,6 +69,13 @@ export class NPCEndingView {
       });
     });
     logoImage.src = `${resourcePath.get()}/logo.png`;
+
+    this._root.addEventListener('click', (e: MouseEvent) => {
+      this._screenPush.next();
+    });
+    this._root.addEventListener('touchstart', (e: TouchEvent) => {
+      this._screenPush.next();
+    });
   }
 
   /**
@@ -91,5 +109,16 @@ export class NPCEndingView {
     } catch(e) {
       throw e;
     }
+  }
+
+  /**
+   * イベント通知
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      screenPush: this._screenPush,
+    };
   }
 }

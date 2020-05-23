@@ -2,7 +2,7 @@
 
 import type {DOMScene} from "../dom-scene";
 import type {ResourcePath} from "../../../resource/path/resource-path";
-import {Observable, Subject} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {EndNPCEnding} from "../../../action/game/npc-ending";
 import {NPCEndingView} from "./view/npc-ending-view";
 
@@ -16,7 +16,8 @@ type Notifier  = {
  */
 export class NPCEnding implements DOMScene {
   _view: NPCEndingView;
-  _end: Subject<EndNPCEnding>;
+  _endNPCEnding: Subject<EndNPCEnding>;
+  _subsctiptoons: Subscription[];
 
   /**
    * コンストラクタ
@@ -24,14 +25,13 @@ export class NPCEnding implements DOMScene {
    * @param resourcePath リソースパス
    */
   constructor(resourcePath: ResourcePath) {
-    this._end = new Subject();
-    setTimeout(() => {
-      this._end.next({
-        type: 'EndNPCEnding'
-      });
-    }, 5000);
-
+    this._endNPCEnding = new Subject();
     this._view = new NPCEndingView(resourcePath);
+    this._subsctiptoons = [
+      this._view.notifier().screenPush.subscribe(() => {
+        this._onScreenPush();
+      })
+    ];
   }
 
   /**
@@ -57,7 +57,7 @@ export class NPCEnding implements DOMScene {
    */
   notifier(): Notifier {
     return {
-      endNpcEnding: this._end
+      endNpcEnding: this._endNPCEnding
     };
   }
 
@@ -68,5 +68,12 @@ export class NPCEnding implements DOMScene {
    */
   waitUntilLoaded(): Promise<void> {
     return this._view.waitUntilLoaded();
+  }
+
+  /**
+   * 画面がクリックされた際の処理
+   */
+  _onScreenPush(): void {
+    this._endNPCEnding.next();
   }
 }
