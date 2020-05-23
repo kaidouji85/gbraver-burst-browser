@@ -28,7 +28,7 @@ import {PreLoadLinks} from "./preload-links";
 import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
 import {selectionComplete} from "./state/npc-battle/selection-complete";
-import {levelUp, isNPCBattleEnd} from "./state/npc-battle/level-up";
+import {isNPCBattleEnd, levelUp} from "./state/npc-battle/level-up";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
