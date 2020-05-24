@@ -7,12 +7,14 @@ import {empty} from "../../../animation/delay";
 import type {Resources} from "../../../resource";
 import {HorizontalArmdozerAnimation} from "../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
+import type {WingDozerView} from "./view/wing-dozer-view";
+import {PlayerWingDozerView} from "./view/player-wing-dozer-view";
 
 /**
  * ウィングドーザ
  */
 export class WingDozer implements ArmDozerSprite {
-  _mesh: HorizontalArmdozerAnimation;
+  _view: WingDozerView;
 
   /**
    * コンストラクタ
@@ -20,20 +22,14 @@ export class WingDozer implements ArmDozerSprite {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources): void {
-    this._mesh = new HorizontalArmdozerAnimation({
-      id: TEXTURE_IDS.WING_DOZER_STAND,
-      resources: resources,
-      maxAnimation: 1,
-      width: 600,
-      height: 600,
-    });
+    this._view = new PlayerWingDozerView(resources);
   }
 
   /**
    * デストラクタ
    */
   destructor(): void {
-    this._mesh.destructor();
+    this._view.destructor();
   }
 
   /**
@@ -42,7 +38,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this._view.getObject3D();
   }
 
   /**
