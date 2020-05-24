@@ -1,17 +1,19 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import {HorizontalArmdozerAnimation} from "../../mesh/horizontal-animation";
-import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
 import type {WingDozerView} from "./wing-dozer-view";
 import type {WingDozerModel} from "../model/wing-dozer-model";
+import {wingDozerStand} from "../mesh/stand";
+import {Group} from "three";
+import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
 
 /**
  * プレイヤー側 ウィングドーザ ビュー
  */
 export class PlayerWingDozerView implements WingDozerView{
-  _mesh: HorizontalArmdozerAnimation;
+  _stand: ArmdozerAnimation;
+  _group: THREE.Group;
 
   /**
    * コンストラクタ
@@ -19,12 +21,11 @@ export class PlayerWingDozerView implements WingDozerView{
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources): void {
-    this._mesh = new HorizontalArmdozerAnimation({
-      id: TEXTURE_IDS.WING_DOZER_STAND,
-      resources: resources,
-      maxAnimation: 1,
-      width: 600,
-      height: 600,
+    this._stand = wingDozerStand(resources);
+
+    this._group = new Group();
+    this._getAllMeshes().forEach(mesh => {
+      this._group.add(mesh.getObject3D());
     });
   }
 
@@ -32,7 +33,9 @@ export class PlayerWingDozerView implements WingDozerView{
    * デストラクタ
    */
   destructor(): void {
-    this._mesh.destructor();
+    this._getAllMeshes().forEach(mesh => {
+      mesh.destructor();
+    });
   }
 
   /**
@@ -41,7 +44,7 @@ export class PlayerWingDozerView implements WingDozerView{
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this._group;
   }
 
   /**
@@ -50,9 +53,14 @@ export class PlayerWingDozerView implements WingDozerView{
    * @param model モデル
    */
   engage(model: WingDozerModel): void {
-    const target = this._mesh.getObject3D();
-    target.position.x = model.position.x;
-    target.position.y = model.position.y;
-    target.position.z = model.position.z;
+    this._group.position.x = model.position.x;
+    this._group.position.y = model.position.y;
+    this._group.position.z = model.position.z;
+  }
+
+  _getAllMeshes(): ArmdozerAnimation [] {
+    return [
+      this._stand,
+    ];
   }
 }
