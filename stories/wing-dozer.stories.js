@@ -9,7 +9,7 @@ export default {
 
 export const stand = () => {
   const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = new WingDozer(resources);
+    const sprite = new WingDozer(resources, listener);
     return [sprite.getObject3D()];
   });
   stub.start();

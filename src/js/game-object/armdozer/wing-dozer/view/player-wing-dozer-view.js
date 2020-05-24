@@ -5,6 +5,7 @@ import {HorizontalArmdozerAnimation} from "../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
 import type {WingDozerView} from "./wing-dozer-view";
+import type {WingDozerModel} from "../model/wing-dozer-model";
 
 /**
  * プレイヤー側 ウィングドーザ ビュー
@@ -41,5 +42,17 @@ export class PlayerWingDozerView implements WingDozerView{
    */
   getObject3D(): THREE.Object3D {
     return this._mesh.getObject3D();
+  }
+
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   */
+  engage(model: WingDozerModel): void {
+    const target = this._mesh.getObject3D();
+    target.position.x = model.position.x;
+    target.position.y = model.position.y;
+    target.position.z = model.position.z;
   }
 }

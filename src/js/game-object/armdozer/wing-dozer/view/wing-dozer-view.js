@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
+import type {WingDozerModel} from "../model/wing-dozer-model";
 
 /**
  * ウィングドーザ ビュー
@@ -17,4 +18,11 @@ export interface WingDozerView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D;
+
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   */
+  engage(model: WingDozerModel): void;
 }
