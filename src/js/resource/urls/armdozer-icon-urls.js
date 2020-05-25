@@ -20,7 +20,7 @@ export function getArmdozerIconURL(resourcePath: ResourcePath, armDozerId: ArmDo
     case ArmDozerIdList.LIGHTNING_DOZER:
       return lightningDozerIconURL(resourcePath);
     default:
-      return '';
+      return shinBraverIconURL(resourcePath);
   }
 }
 

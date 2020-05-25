@@ -14,7 +14,7 @@ import {EnemyWingDozerView} from "./view/enemy-wing-dozer-view";
  * @param listener イベントリスト
  * @return 生成結果
  */
-export function playerWingDozer(resources: Resources, listener: Observable<GameObjectAction>): WingDozer {
+export function PlayerWingDozer(resources: Resources, listener: Observable<GameObjectAction>): WingDozer {
   const view = new PlayerWingDozerView(resources);
   return new WingDozer(view, listener);
 }
@@ -26,7 +26,7 @@ export function playerWingDozer(resources: Resources, listener: Observable<GameO
  * @param listener イベントリスト
  * @return 生成結果
  */
-export function enemyWingDozer(resources: Resources, listener: Observable<GameObjectAction>): WingDozer {
+export function EnemyWingDozer(resources: Resources, listener: Observable<GameObjectAction>): WingDozer {
   const view = new EnemyWingDozerView(resources);
   return new WingDozer(view, listener);
 }

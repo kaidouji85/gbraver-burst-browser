@@ -9,6 +9,7 @@ import {ShinBraverNPC} from "../../../npc/shin-braver";
 import {WeakShinBraverNPC} from "../../../npc/weak-shin-braver";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
+import {WeakWingDozerNPC} from "../../../npc/weak-wing-dozer-npc";
 
 /**
  * NPCコース
@@ -39,11 +40,20 @@ export const DefaultCourse: NPCBattleCourse = {
  */
 export const NPCBattleCourses: NPCBattleCourse[] = [
   /** シンブレイバー */
+  // TODO 開発が完了したら戻す
+  /*
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     level: 1,
     stageName: 'STAGE 1',
     npc: () => new WeakNeoLandozerNPC(),
+  },
+  */
+  {
+    armdozerId: ArmDozerIdList.SHIN_BRAVER,
+    level: 1,
+    stageName: 'STAGE 1',
+    npc: () => new WeakWingDozerNPC(),
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
