@@ -13,8 +13,8 @@ import {HUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../action/resize/resize";
-import type {HUDArmdozerObjects} from "./armdozer";
-import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer";
+import type {HUDArmdozerObjects} from "./armdozer-objects";
+import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 

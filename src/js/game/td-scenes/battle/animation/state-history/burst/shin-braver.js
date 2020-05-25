@@ -7,7 +7,7 @@ import {delay, empty} from "../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
-import {ShinBraverHUD} from "../../../view/hud/armdozer/shin-braver";
+import {ShinBraverHUD} from "../../../view/hud/armdozer-objects/shin-braver";
 import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 
 /**

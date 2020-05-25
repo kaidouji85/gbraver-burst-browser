@@ -9,7 +9,7 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
-import type {HUDArmdozerObjects} from "../../../view/hud/armdozer";
+import type {HUDArmdozerObjects} from "../../../view/hud/armdozer-objects";
 import {HUDPlayer} from "../../../view/hud/player";
 import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 

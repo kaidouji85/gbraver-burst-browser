@@ -8,7 +8,7 @@ import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
-import {LightningDozerHUD} from "../../../view/hud/armdozer/lightning-dozer";
+import {LightningDozerHUD} from "../../../view/hud/armdozer-objects/lightning-dozer";
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータ
