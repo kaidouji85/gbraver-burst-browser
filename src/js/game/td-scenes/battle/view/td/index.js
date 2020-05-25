@@ -40,7 +40,7 @@ export class ThreeDimensionLayer {
   camera: TDCamera;
   players: TDPlayer[];
   sprites: TDSprite[];
-  armdozers: TDArmdozerObjects[];
+  armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
   _overlap: Observable<OverlapAction>;
   _gameObjectAction: Observable<GameObjectAction>;
@@ -77,16 +77,16 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
 
-    this.armdozers = param.players.map(v => v.playerId === param.playerId
+    this.armdozerObjects = param.players.map(v => v.playerId === param.playerId
       ? playerTDArmdozer(param.resources, this._gameObjectAction, v)
       : enemyTDArmdozer(param.resources, this._gameObjectAction, v)
     );
-    this.armdozers.map(v => v.getObject3Ds())
+    this.armdozerObjects.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
         this.scene.add(v);
       });
-    this.armdozers.forEach(armdozer => {
+    this.armdozerObjects.forEach(armdozer => {
       this.sprites
         .filter(sprite => sprite.playerId === armdozer.playerId)
         .forEach(sprite => {
@@ -117,7 +117,7 @@ export class ThreeDimensionLayer {
       });
       sprite.destructor();
     });
-    this.armdozers.forEach(armdozer => {
+    this.armdozerObjects.forEach(armdozer => {
       armdozer.getObject3Ds().forEach(object => {
         this.scene.remove(object);
       });

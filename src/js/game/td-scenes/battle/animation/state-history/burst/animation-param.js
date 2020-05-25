@@ -59,7 +59,7 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
   const burstPlayerHUD = view.hud.players.find(v => v.playerId === effect.burstPlayer);
   const burstSprite = view.td.sprites.find(v => v.playerId === effect.burstPlayer);
   const burstArmdozerHUD = view.hud.armdozers.find(v => v.playerId === effect.burstPlayer);
-  const burstArmdozerTD = view.td.armdozers.find(v => v.playerId === effect.burstPlayer);
+  const burstArmdozerTD = view.td.armdozerObjects.find(v => v.playerId === effect.burstPlayer);
   if (!burstPlayerState || !burstPlayerTD || !burstPlayerHUD || !burstSprite || !burstArmdozerHUD || !burstArmdozerTD) {
     return null;
   }
