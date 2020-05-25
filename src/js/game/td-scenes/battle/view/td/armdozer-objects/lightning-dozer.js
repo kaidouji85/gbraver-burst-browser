@@ -1,6 +1,6 @@
 // @flow
 
-import type {TDArmdozer} from "./index";
+import type {TDArmdozerObjects} from "./index";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
@@ -19,7 +19,7 @@ interface LightningDozerTDField {
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト 実装
  */
-export class LightningDozerTD implements TDArmdozer, LightningDozerTDField {
+export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDField {
   /** プレイヤーID */
   playerId: PlayerId;
 

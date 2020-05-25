@@ -2,7 +2,7 @@
 
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
-import {LightningDozerTD} from "../../../view/td/armdozer/lightning-dozer";
+import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
 import type {Burst, LightningBarrier} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";

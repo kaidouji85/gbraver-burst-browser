@@ -16,8 +16,8 @@ import {gameObjectStream} from "../../../../../action/game-object-action/game-ob
 import type {Resize} from "../../../../../action/resize/resize";
 import {skyBox} from "./sky-box";
 import {enemySprite, playerSprite, TDSprite} from "./sprite";
-import type {TDArmdozer} from "./armdozer";
-import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer";
+import type {TDArmdozerObjects} from "./armdozer-objects";
+import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 
 /** コンストラクタのパラメータ */
@@ -40,7 +40,7 @@ export class ThreeDimensionLayer {
   camera: TDCamera;
   players: TDPlayer[];
   sprites: TDSprite[];
-  armdozers: TDArmdozer[];
+  armdozers: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
   _overlap: Observable<OverlapAction>;
   _gameObjectAction: Observable<GameObjectAction>;

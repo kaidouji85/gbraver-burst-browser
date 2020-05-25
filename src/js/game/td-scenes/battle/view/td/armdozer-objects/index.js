@@ -12,7 +12,7 @@ import {enemyLightningDozerTD, playerLightningDozerTD} from "./lightning-dozer";
 /**
  * 3Dレイヤー アームドーザ固有のオブジェクトを集めたもの
  */
-export interface TDArmdozer {
+export interface TDArmdozerObjects {
   /** プレイヤーID */
   playerId: PlayerId;
 
@@ -42,7 +42,7 @@ export interface TDArmdozer {
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function playerTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozer {
+export function playerTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.appearance) {
     case ArmdozerAppearances.LIGHTNING_DOZER:
       return playerLightningDozerTD(resources, listener, state);
@@ -59,7 +59,7 @@ export function playerTDArmdozer(resources: Resources, listener: Observable<Game
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function enemyTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozer {
+export function enemyTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.appearance) {
     case ArmdozerAppearances.LIGHTNING_DOZER:
       return enemyLightningDozerTD(resources, listener, state);

@@ -8,13 +8,13 @@ import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
 import {ShinBraverHUD} from "../../../view/hud/armdozer/shin-braver";
-import type {TDArmdozer} from "../../../view/td/armdozer";
+import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects";
 
 /**
  * シンブレイバー バーストアニメーション パラメータ
  * @type BURST バースト種別
  */
-export type ShinBraverBurstAnimationParam<BURST> = BurstAnimationParamX<ShinBraver, ShinBraverHUD, TDArmdozer, Burst>;
+export type ShinBraverBurstAnimationParam<BURST> = BurstAnimationParamX<ShinBraver, ShinBraverHUD, TDArmdozerObjects, Burst>;
 
 /**
  * シンブレイバーバーストアニメーションパラメータに変換する
