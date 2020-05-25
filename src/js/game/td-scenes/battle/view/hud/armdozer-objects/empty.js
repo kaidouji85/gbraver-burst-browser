@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from 'three';
-import type {HUDArmdozer} from "./index";
+import type {HUDArmdozerObjects} from "./index";
 import type {Player, PlayerId} from "gbraver-burst-core";
 
 /**
  * 空のHUDレイヤーアームドーザ固有オブジェクト
  */
-export class EmptyHUDArmdozer implements HUDArmdozer {
+export class EmptyHUDArmdozer implements HUDArmdozerObjects {
   /** プレイヤーID */
   playerId: PlayerId;
 
