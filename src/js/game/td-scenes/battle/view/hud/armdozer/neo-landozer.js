@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
-import type {HUDArmdozer} from "./index";
+import type {HUDArmdozerObjects} from "./index";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {NeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import type {Resources} from "../../../../../../resource";
@@ -19,7 +19,7 @@ interface NeoLandozerHUDField {
 /**
  * HUDレイヤー ネオランドーザ固有のオブジェクトをあつめたもの
  */
-export class NeoLandozerHUD implements HUDArmdozer, NeoLandozerHUDField {
+export class NeoLandozerHUD implements HUDArmdozerObjects, NeoLandozerHUDField {
   playerId: PlayerId;
   cutIn: NeoLandozerCutIn;
 
