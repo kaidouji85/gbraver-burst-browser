@@ -3,18 +3,18 @@
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {ArmdozerAppearances} from "gbraver-burst-core";
-import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
-import type {Resources} from "../../../../../resource";
+import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
-import {EnemyNeoLandozer, PlayerNeoLandozer} from "../../../../../game-object/armdozer/neo-landozer";
-import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../game-object/armdozer/lightning-dozer";
-import {EnemyShinBraver, PlayerShinBraver} from "../../../../../game-object/armdozer/shin-braver";
+import type {GameObjectAction} from "../../../../../../action/game-object-action";
+import {EnemyNeoLandozer, PlayerNeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer";
+import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
+import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 
 /**
- * プレイヤーのスプライト
+ * アームドーザ スプライト
  */
-export class TDSprite {
+export class TDArmdozerSprite {
   playerId: PlayerId;
   sprite: ArmDozerSprite;
 
@@ -48,8 +48,8 @@ export class TDSprite {
  * @param playerInfo プレイヤー情報
  * @return スプライト
  */
-export function playerSprite(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDSprite {
-  return new TDSprite(state.playerId, createPlayerSprite(resources, listener, state));
+export function playerSprite(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDArmdozerSprite {
+  return new TDArmdozerSprite(state.playerId, createPlayerSprite(resources, listener, state));
 }
 
 /**
@@ -80,8 +80,8 @@ function createPlayerSprite(resources: Resources, listener: Observable<GameObjec
  * @param enemyInfo プレイヤー情報
  * @return スプライト
  */
-export function enemySprite(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDSprite {
-  return new TDSprite(state.playerId, createEnemySprite(resources, listener, state));
+export function enemySprite(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDArmdozerSprite {
+  return new TDArmdozerSprite(state.playerId, createEnemySprite(resources, listener, state));
 }
 
 /**

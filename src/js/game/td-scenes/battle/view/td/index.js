@@ -15,7 +15,7 @@ import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../action/resize/resize";
 import {skyBox} from "./sky-box";
-import {enemySprite, playerSprite, TDSprite} from "./sprite";
+import {enemySprite, playerSprite, TDArmdozerSprite} from "./armdozer-sprite/sprite";
 import type {TDArmdozerObjects} from "./armdozer-objects";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
@@ -39,7 +39,7 @@ export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: TDCamera;
   players: TDPlayer[];
-  sprites: TDSprite[];
+  sprites: TDArmdozerSprite[];
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
   _overlap: Observable<OverlapAction>;
