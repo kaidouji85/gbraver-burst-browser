@@ -15,10 +15,11 @@ import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../action/resize/resize";
 import {skyBox} from "./sky-box";
-import {enemySprite, playerSprite, TDArmdozerSprite} from "./armdozer-sprite/sprite";
-import type {TDArmdozerObjects} from "./armdozer-objects";
+import {enemySprite, playerSprite} from "./armdozer-sprite";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
+import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
+import {TDArmdozerSprite} from "./armdozer-sprite/armdozer-sprite";
 
 /** コンストラクタのパラメータ */
 type Param = {

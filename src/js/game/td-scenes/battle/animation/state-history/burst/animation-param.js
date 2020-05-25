@@ -10,8 +10,8 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {HUDArmdozer} from "../../../view/hud/armdozer";
-import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects";
 import {HUDPlayer} from "../../../view/hud/player";
+import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 
 /**
  * バーストアニメーションのパラメータ

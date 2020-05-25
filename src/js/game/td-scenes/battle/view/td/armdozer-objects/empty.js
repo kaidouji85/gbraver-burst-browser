@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import type {TDArmdozerObjects} from "./index";
 import type {Player, PlayerId} from "gbraver-burst-core";
+import type {TDArmdozerObjects} from "./armdozer-objects";
 
 /**
  * 空の3Dレイヤーアームドーザ固有オブジェクト

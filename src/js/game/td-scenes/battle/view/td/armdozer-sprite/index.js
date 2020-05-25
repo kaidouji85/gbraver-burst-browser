@@ -1,7 +1,6 @@
 // @flow
 
-import * as THREE from 'three';
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type {Player} from "gbraver-burst-core";
 import {ArmdozerAppearances} from "gbraver-burst-core";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {Resources} from "../../../../../../resource";
@@ -10,35 +9,7 @@ import type {GameObjectAction} from "../../../../../../action/game-object-action
 import {EnemyNeoLandozer, PlayerNeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer";
 import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
 import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
-
-/**
- * アームドーザ スプライト
- */
-export class TDArmdozerSprite {
-  playerId: PlayerId;
-  sprite: ArmDozerSprite;
-
-  constructor(playerId: PlayerId, sprite: ArmDozerSprite) {
-    this.playerId = playerId;
-    this.sprite = sprite;
-  }
-
-  /** デストラクタ相当の処理 */
-  destructor(): void {
-    this.sprite.destructor();
-  }
-
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
-  getObject3Ds(): THREE.Object3D[] {
-    return [
-      this.sprite.getObject3D()
-    ];
-  }
-}
+import {TDArmdozerSprite} from "./armdozer-sprite";
 
 /**
  * プレイヤースプライを生成する

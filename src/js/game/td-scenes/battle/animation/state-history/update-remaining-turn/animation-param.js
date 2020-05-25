@@ -1,8 +1,8 @@
 // @flow
 
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
-import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects";
 import type {ArmdozerEffect} from "gbraver-burst-core";
+import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 
 /**
  * アームドーザ効果終了アニメーション パラメータ
