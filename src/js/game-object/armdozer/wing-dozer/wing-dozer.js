@@ -24,12 +24,12 @@ export class WingDozer implements ArmDozerSprite {
   /**
    * コンストラクタ
    *
-   * @param resources リソース管理オブジェクト
+   * @param view ビュー
    * @param listenr イベントリスト
    */
-  constructor(resources: Resources, listenr: Observable<GameObjectAction>): void {
+  constructor(view: WingDozerView, listenr: Observable<GameObjectAction>): void {
     this._model = createInitialValue();
-    this._view = new PlayerWingDozerView(resources);
+    this._view = view;
     this._subscription = listenr.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);

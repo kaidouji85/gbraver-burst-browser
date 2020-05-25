@@ -56,6 +56,10 @@ export class PlayerWingDozerView implements WingDozerView{
     this._group.position.x = model.position.x;
     this._group.position.y = model.position.y;
     this._group.position.z = model.position.z;
+
+    this._group.scale.x = 1;
+    this._group.scale.y = 1;
+    this._group.scale.z = 1;
   }
 
   _getAllMeshes(): ArmdozerAnimation [] {
