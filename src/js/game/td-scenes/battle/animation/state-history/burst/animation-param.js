@@ -9,9 +9,9 @@ import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
-import type {HUDArmdozer} from "../../../view/hud/armdozer";
-import type {TDArmdozer} from "../../../view/td/armdozer";
+import type {HUDArmdozerObjects} from "../../../view/hud/armdozer-objects";
 import {HUDPlayer} from "../../../view/hud/player";
+import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 
 /**
  * バーストアニメーションのパラメータ
@@ -23,7 +23,7 @@ import {HUDPlayer} from "../../../view/hud/player";
  * @type CUTIN カットイン
  * @type BURST バースト
  */
-export type BurstAnimationParamX<SPRITE: ArmDozerSprite, HUD_ARMDOZER: HUDArmdozer, TD_ARMDOZER: TDArmdozer, BURST: Burst> = {
+export type BurstAnimationParamX<SPRITE: ArmDozerSprite, HUD_ARMDOZER: HUDArmdozerObjects, TD_ARMDOZER: TDArmdozerObjects, BURST: Burst> = {
   burstPlayerState: PlayerState,
   burstPlayerTD: TDPlayer,
   burstPlayerHUD: HUDPlayer,
@@ -38,7 +38,7 @@ export type BurstAnimationParamX<SPRITE: ArmDozerSprite, HUD_ARMDOZER: HUDArmdoz
 };
 
 /** バーストアニメーションのパラメータ */
-export type BurstAnimationParam = BurstAnimationParamX<ArmDozerSprite, HUDArmdozer, TDArmdozer, Burst>;
+export type BurstAnimationParam = BurstAnimationParamX<ArmDozerSprite, HUDArmdozerObjects, TDArmdozerObjects, Burst>;
 
 /**
  * バーストアニメーションパラメータを生成する
@@ -59,7 +59,7 @@ export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleS
   const burstPlayerHUD = view.hud.players.find(v => v.playerId === effect.burstPlayer);
   const burstSprite = view.td.sprites.find(v => v.playerId === effect.burstPlayer);
   const burstArmdozerHUD = view.hud.armdozers.find(v => v.playerId === effect.burstPlayer);
-  const burstArmdozerTD = view.td.armdozers.find(v => v.playerId === effect.burstPlayer);
+  const burstArmdozerTD = view.td.armdozerObjects.find(v => v.playerId === effect.burstPlayer);
   if (!burstPlayerState || !burstPlayerTD || !burstPlayerHUD || !burstSprite || !burstArmdozerHUD || !burstArmdozerTD) {
     return null;
   }

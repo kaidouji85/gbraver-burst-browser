@@ -14,7 +14,7 @@ import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer
 /**
  * HUDレイヤー アームドーザ固有のオブジェクトを集めたもの
  */
-export interface HUDArmdozer {
+export interface HUDArmdozerObjects {
   playerId: PlayerId;
 
   /** デストラクタ相当の処理 */
@@ -36,7 +36,7 @@ export interface HUDArmdozer {
  * @param state プレイヤー状態
  * @return HUDアームドーザ
  */
-export function playerArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozer {
+export function playerArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
   switch (state.armdozer.appearance) {
     case ArmdozerAppearances.SHIN_BRAVER:
       return playerShinBraverHUD(resources, listener, state);
@@ -57,7 +57,7 @@ export function playerArmdozerHUD(resources: Resources, listener: Observable<Gam
  * @param state プレイヤー状態
  * @return HUDアームドーザ
  */
-export function enemyArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozer {
+export function enemyArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
   switch (state.armdozer.appearance) {
     case ArmdozerAppearances.SHIN_BRAVER:
       return enemyShinBraverHUD(resources, listener, state);

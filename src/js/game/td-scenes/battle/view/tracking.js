@@ -15,9 +15,9 @@ import {LightningDozerCutIn} from "../../../../game-object/cut-in/lightning-doze
 import {ThreeDimensionLayer} from "./td";
 import {HudLayer} from "./hud";
 import type {PlayerId} from "gbraver-burst-core";
-import {ShinBraverHUD} from "./hud/armdozer/shin-braver";
-import {NeoLandozerHUD} from "./hud/armdozer/neo-landozer";
-import {LightningDozerHUD} from "./hud/armdozer/lightning-dozer";
+import {ShinBraverHUD} from "./hud/armdozer-objects/shin-braver";
+import {NeoLandozerHUD} from "./hud/armdozer-objects/neo-landozer";
+import {LightningDozerHUD} from "./hud/armdozer-objects/lightning-dozer";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする

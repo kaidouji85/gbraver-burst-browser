@@ -2,20 +2,20 @@
 
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
-import {NeoLandozerHUD} from "../../../view/hud/armdozer/neo-landozer";
-import type {TDArmdozer} from "../../../view/td/armdozer";
+import {NeoLandozerHUD} from "../../../view/hud/armdozer-objects/neo-landozer";
 import type {BuffPower, Burst} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
+import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 
 /**
  * ネオランドーザ バーストアニメーション パラメータ
  *
  * @type BURST バースト
  */
-type NeoLandozerBurstAnimationParam<BURST> = BurstAnimationParamX<NeoLandozer, NeoLandozerHUD, TDArmdozer, BURST>;
+type NeoLandozerBurstAnimationParam<BURST> = BurstAnimationParamX<NeoLandozer, NeoLandozerHUD, TDArmdozerObjects, BURST>;
 
 /**
  * ネオランドーザ バーストアニメーション パラメータに変換する
