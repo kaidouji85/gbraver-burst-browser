@@ -7,6 +7,9 @@ import type {GlTFResource} from "./gltf";
 import {loadAllGlTFModel} from "./gltf";
 import type {CubeTextureResource} from "./cube-texture";
 import {loadAllCubeTexture} from "./cube-texture";
+import type {SoundResource} from "./sound";
+import {loadAllSounds} from "./sound";
+import type {ResourcePath} from "./path/resource-path";
 
 /**
  * ゲームで使うリソースを集めたもの
@@ -20,6 +23,8 @@ export type Resources = {
   cubeTextures: CubeTextureResource[],
   /** キャンバス用画像 */
   canvasImages: CanvasImageResource[],
+  /** 音楽 */
+  sounds: SoundResource[],
 };
 
 /**
@@ -28,12 +33,14 @@ export type Resources = {
  * @param basePath ベースとなるパス
  * @return 読み込み結果
  */
-export async function loadAllResource(basePath: string): Promise<Resources> {
-  const [gltfs, textures, cubeTextures, canvasImages] = await Promise.all([
+export async function loadAllResource(resourcePath: ResourcePath): Promise<Resources> {
+  const basePath = `${resourcePath.get()}/`;
+  const [gltfs, textures, cubeTextures, canvasImages, sounds] = await Promise.all([
     loadAllGlTFModel(basePath),
     loadAllTexture(basePath),
     loadAllCubeTexture(basePath),
     loadAllCanvasImage(basePath),
+    loadAllSounds(resourcePath),
   ]);
 
   return {
@@ -41,5 +48,6 @@ export async function loadAllResource(basePath: string): Promise<Resources> {
     textures: textures,
     cubeTextures: cubeTextures,
     canvasImages: canvasImages,
+    sounds: sounds,
   };
 }

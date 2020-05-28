@@ -62,3 +62,15 @@ export function loadSound(resourcePath: ResourcePath, config: SoundConfig): Prom
     });
   });
 }
+
+/**
+ * 全ての音楽リソースを読み込む
+ *
+ * @param resourcePath リソースパス
+ * @return 全ての音楽リソース
+ */
+export function loadAllSounds(resourcePath: ResourcePath): Promise<SoundResource[]> {
+  return Promise.all(
+    SOUND_CONFIGS.map(config => loadSound(resourcePath, config))
+  );
+}

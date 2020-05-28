@@ -253,7 +253,7 @@ export class Game {
       this._domScenes.startLoading();
       await this._fader.fadeIn();
 
-      this._resources = await loadAllResource(`${this._resourcePath.get()}/`);
+      this._resources = await loadAllResource(this._resourcePath);
       await waitAnimationFrame();
       await waitTime(1000);
     } catch(e) {
