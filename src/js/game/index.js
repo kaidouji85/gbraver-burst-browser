@@ -81,10 +81,7 @@ export class Game {
     this._interruptScenes = new InterruptScenes({
       resourcePath: this._resourcePath,
     });
-    this._domScenes = new DOMScenes({
-      resourcePath: this._resourcePath,
-      loading: this._loading,
-    });
+    this._domScenes = new DOMScenes();
     this._domDialogs = new DOMDialogs();
     this._tdScenes = new TDScenes(this._resize);
 
@@ -141,7 +138,7 @@ export class Game {
       this._serviceWorker = await loadServiceWorker();
 
       invisibleFirstView();
-      this._domScenes.startLoading();
+      this._domScenes.startLoading(this._loading);
       await this._fader.fadeIn();
       const resources: Resources = await loadAllResource(this._resourcePath);
       this._resources = resources;

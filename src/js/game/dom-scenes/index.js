@@ -16,14 +16,9 @@ import type {EndNPCEnding} from "../../action/game/npc-ending";
 import type {Resources} from "../../resource";
 
 /**
- * 最大読み込み待機時間
+ * 最大読み込み待機時間(ミリ秒)
  */
 const MAX_LOADING_TIME = 10000;
-
-/** コンストラクタのパラメータ */
-type Param = {
-  loading: Observable<LoadingAction>
-};
 
 /** イベント通知 */
 type Notifier = {
@@ -40,15 +35,13 @@ type Notifier = {
 export class DOMScenes {
   _root: HTMLElement;
   _scene: ?DOMScene;
-  _loading: Observable<LoadingAction>;
   _pushGameStart: Subject<PushGameStart>;
   _pushHowToPlay: Subject<PushHowToPlay>;
   _selectionComplete: Subject<SelectionComplete>;
   _endNPCEnding: Subject<EndNPCEnding>;
   _sceneSubscriptions: Subscription[];
 
-  constructor(param: Param) {
-    this._loading = param.loading;
+  constructor() {
     this._root = document.createElement('div');
     this._pushGameStart = new Subject();
     this._pushHowToPlay = new Subject();
@@ -80,11 +73,12 @@ export class DOMScenes {
   /**
    * 新しくローディング画面を開始する
    *
+   * @param loading 読み込み状況ストリーム
    * @return 開始されたローディング画面
    */
-  startLoading(): Loading {
+  startLoading(loading: Observable<LoadingAction>): Loading {
     this._removeCurrentScene();
-    const scene = new Loading(this._loading);
+    const scene = new Loading(loading);
     this._root.appendChild(scene.getRootHTMLElement());
 
     this._scene = scene
