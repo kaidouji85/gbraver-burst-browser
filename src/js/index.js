@@ -2,8 +2,8 @@
 
 import '../css/style.css';
 import {Game} from './game/index';
-import {invisibleFirstView} from "./first-view/first-view-visible";
 import {ProductionResourcePath} from "./resource/path/production-resource-path";
+import {waitAnimationFrame} from "./wait/wait-animation-frame";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -13,7 +13,6 @@ async function main(): Promise<void> {
     const resourcePath = new ProductionResourcePath();
     const game = new Game(resourcePath);
     await game.initialize();
-    invisibleFirstView();
   } catch(e) {
     throw e;
   }

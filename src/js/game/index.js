@@ -36,6 +36,7 @@ import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
 import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import type {EndNPCEnding} from "../action/game/npc-ending";
+import {invisibleFirstView} from "../first-view/first-view-visible";
 
 /**
  * ゲーム全体の管理を行う
@@ -139,8 +140,16 @@ export class Game {
       }
       this._serviceWorker = await loadServiceWorker();
 
+      invisibleFirstView();
+      this._domScenes.startLoading();
+      await this._fader.fadeIn();
+      const resources: Resources = await loadAllResource(this._resourcePath);
+      this._resources = resources;
+      await waitAnimationFrame();
+      await waitTime(1000);
+
       await this._fader.fadeOut();
-      await this._domScenes.startTitle();
+      await this._domScenes.startTitle(resources);
       await this._fader.fadeIn();
     } catch (e) {
       throw e;
@@ -189,10 +198,6 @@ export class Game {
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
-      if (!this._resources) {
-        await this._loadResourcesFlow();
-      }
-
       if (this._state.inProgress.type === 'NPCBattle') {
         const origin: NPCBattle = this._state.inProgress;
         this._state.inProgress = selectionComplete(origin, action);
@@ -234,28 +239,13 @@ export class Game {
    */
   async _onEndNPCEnding(action: EndNPCEnding): Promise<void> {
     try {
+      if (!this._resources) {
+        return;
+      }
+      const resources: Resources = this._resources;
       await this._fader.fadeOut();
-      await this._domScenes.startTitle();
+      await this._domScenes.startTitle(resources);
       await this._fader.fadeIn();
-    } catch(e) {
-      throw e;
-    }
-  }
-
-  /**
-   * リソース読み込みフロー
-   *
-   * @return 処理結果
-   */
-  async _loadResourcesFlow(): Promise<void> {
-    try {
-      await this._fader.fadeOut();
-      this._domScenes.startLoading();
-      await this._fader.fadeIn();
-
-      this._resources = await loadAllResource(this._resourcePath);
-      await waitAnimationFrame();
-      await waitTime(1000);
     } catch(e) {
       throw e;
     }

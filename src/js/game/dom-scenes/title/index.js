@@ -8,6 +8,7 @@ import {TitleView} from "./view/title-view";
 import {filter, map} from "rxjs/operators";
 import type {ResourcePath} from "../../../resource/path/resource-path";
 import type {DOMScene} from "../dom-scene";
+import type {Resources} from "../../../resource";
 
 /** イベント通知 */
 export type Notifier = {
@@ -21,11 +22,11 @@ export class Title implements DOMScene {
   _view: TitleView;
   _notifier: Notifier;
 
-  constructor(resourcePath: ResourcePath) {
+  constructor(resources: Resources) {
     this._state = createInitialState();
     this._view = new TitleView({
       initialState: this._state,
-      resourcePath: resourcePath
+      resourcePath: resources.path
     });
 
     this._notifier = {

@@ -15,6 +15,8 @@ import type {ResourcePath} from "./path/resource-path";
  * ゲームで使うリソースを集めたもの
  */
 export type Resources = {
+  /** リソースパス */
+  path: ResourcePath,
   /** GlTFモデル */
   gltfs: GlTFResource[],
   /** テクスチャ */
@@ -44,6 +46,7 @@ export async function loadAllResource(resourcePath: ResourcePath): Promise<Resou
   ]);
 
   return {
+    path: resourcePath,
     gltfs: gltfs,
     textures: textures,
     cubeTextures: cubeTextures,

@@ -14,6 +14,7 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
 import type {EndNPCEnding} from "../../action/game/npc-ending";
+import type {Resources} from "../../resource";
 
 /**
  * 最大読み込み待機時間
@@ -39,7 +40,7 @@ type Notifier = {
  * 本クラス配下のいずれか1シーンのみが表示される想定
  */
 export class DOMScenes {
-  _resourcePath: ResourcePath;
+  _resourcePath: ResourcePath;  // TODO 削除する
   _root: HTMLElement;
   _scene: ?DOMScene;
   _loading: Observable<LoadingAction>;
@@ -99,11 +100,11 @@ export class DOMScenes {
    *
    * @return 開始されたタイトル画面
    */
-  async startTitle(): Promise<Title> {
+  async startTitle(resources: Resources): Promise<Title> {
     try {
       this._removeCurrentScene();
 
-      const scene = new Title(this._resourcePath);
+      const scene = new Title(resources);
       const notifier = scene.notifier();
       this._sceneSubscriptions = [
         notifier.pushGameStart.subscribe(this._pushGameStart),
