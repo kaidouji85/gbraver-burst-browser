@@ -106,8 +106,8 @@ export class Title implements DOMScene {
     if (!this._state.canOperation) {
       return;
     }
-
-    this._state.canOperation = false;
+    
+    this._pushButton.play();
     this._pushHowToPlay.next({
       type: 'PushHowToPlay'
     });

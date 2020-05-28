@@ -163,10 +163,14 @@ export class Game {
    */
   async _onPushGameStart(action: PushGameStart) {
     try {
-      this._state.inProgress = createInitialNPCBattle();
+      if (!this._resources) {
+        return;
+      }
+      const resources: Resources = this._resources;
 
+      this._state.inProgress = createInitialNPCBattle();
       await this._fader.fadeOut();
-      await this._domScenes.startPlayerSelect();
+      await this._domScenes.startPlayerSelect(resources);
       await this._fader.fadeIn();
     } catch(e) {
       throw e;
@@ -198,10 +202,16 @@ export class Game {
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
+      if (!this._resources) {
+        return;
+      }
+      const resources: Resources = this._resources;
+
       if (this._state.inProgress.type === 'NPCBattle') {
         const origin: NPCBattle = this._state.inProgress;
-        this._state.inProgress = selectionComplete(origin, action);
-        await this._npcBattleFlow();
+        const updated: NPCBattle = selectionComplete(origin, action);
+        this._state.inProgress = updated;
+        await this._npcBattleFlow(resources, updated);
       }
     } catch(e) {
       throw e;
@@ -215,16 +225,21 @@ export class Game {
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
     try {
+      if (!this._resources) {
+        return;
+      }
+      const resources: Resources = this._resources;
+
       if (this._state.inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._state.inProgress, action)) {
         const origin: NPCBattle = this._state.inProgress;
-        this._state.inProgress = levelUp(origin, action);
-        await this._npcBattleFlow();
+        const updated: NPCBattle = levelUp(origin, action);
+        this._state.inProgress = updated;
+        await this._npcBattleFlow(resources, updated);
       } else if (this._state.inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._state.inProgress, action)) {
         this._state.inProgress = {type: 'None'};
-
         await this._fader.fadeOut();
         this._tdScenes.hidden();
-        await this._domScenes.startNPCEnding();
+        await this._domScenes.startNPCEnding(resources);
         await this._fader.fadeIn();
       }
     } catch(e) {
@@ -243,6 +258,7 @@ export class Game {
         return;
       }
       const resources: Resources = this._resources;
+
       await this._fader.fadeOut();
       await this._domScenes.startTitle(resources);
       await this._fader.fadeIn();
@@ -254,16 +270,12 @@ export class Game {
   /**
    * NPC戦闘フロー
    *
+   * @param resources リソース管理オブジェクト
+   * @param npcBattle NPC戦闘ステート
    * @return 処理結果
    */
-  async _npcBattleFlow(): Promise<void> {
+  async _npcBattleFlow(resources: Resources, npcBattle: NPCBattle): Promise<void> {
     try {
-      if (!this._resources || (this._state.inProgress.type !== 'NPCBattle')) {
-        return;
-      }
-      const resources: Resources = this._resources;
-      const npcBattle: NPCBattle = this._state.inProgress;
-
       if (!npcBattle.player) {
         return;
       }
@@ -276,6 +288,7 @@ export class Game {
       ) ?? DefaultCourse;
       const npc = course.npc();
       await this._domScenes.startMatchCard(
+        resources,
         player.armdozer.id,
         npc.armdozer.id,
         course.stageName,

@@ -2,7 +2,6 @@
 
 import {Observable, Subject, Subscription} from "rxjs";
 import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
-import type {ResourcePath} from "../../resource/path/resource-path";
 import type {SelectionComplete} from "../../action/game/selection-complete";
 import type {LoadingAction} from "../../action/loading/loading";
 import type {DOMScene} from "./dom-scene";
@@ -23,7 +22,6 @@ const MAX_LOADING_TIME = 10000;
 
 /** コンストラクタのパラメータ */
 type Param = {
-  resourcePath: ResourcePath,
   loading: Observable<LoadingAction>
 };
 
@@ -40,7 +38,6 @@ type Notifier = {
  * 本クラス配下のいずれか1シーンのみが表示される想定
  */
 export class DOMScenes {
-  _resourcePath: ResourcePath;  // TODO 削除する
   _root: HTMLElement;
   _scene: ?DOMScene;
   _loading: Observable<LoadingAction>;
@@ -51,7 +48,6 @@ export class DOMScenes {
   _sceneSubscriptions: Subscription[];
 
   constructor(param: Param) {
-    this._resourcePath = param.resourcePath;
     this._loading = param.loading;
     this._root = document.createElement('div');
     this._pushGameStart = new Subject();
@@ -98,6 +94,7 @@ export class DOMScenes {
   /**
    * 新しくタイトル画面を開始する
    *
+   * @param resources リソース管理オブジェクト
    * @return 開始されたタイトル画面
    */
   async startTitle(resources: Resources): Promise<Title> {
@@ -126,13 +123,14 @@ export class DOMScenes {
   /**
    * 新しくプレイヤー選択画面を開始する
    *
+   * @param resources リソース管理オブジェクト
    * @return 開始されたプレイヤー選択画面
    */
-  async startPlayerSelect(): Promise<PlayerSelect> {
+  async startPlayerSelect(resources: Resources): Promise<PlayerSelect> {
     try {
       this._removeCurrentScene();
 
-      const scene = new PlayerSelect(this._resourcePath);
+      const scene = new PlayerSelect(resources.path);
       const notifier = scene.notifier();
       this._sceneSubscriptions = [
         notifier.selectionComplete.subscribe(this._selectionComplete)
@@ -153,17 +151,18 @@ export class DOMScenes {
   /**
    * 新しく対戦カード画面を開始する
    *
+   * @param resources リソース管理オブジェクト
    * @param player プレイヤー側 アームドーザID
    * @param enemy 敵側 アームドーザID
    * @param caption ステージ名
    * @return 開始された対戦カード画面
    */
-  async startMatchCard(player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
+  async startMatchCard(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
     try {
       this._removeCurrentScene();
 
       const scene = new MatchCard({
-        resourcePath: this._resourcePath,
+        resourcePath: resources.path,
         player: player,
         enemy: enemy,
         caption: caption
@@ -184,13 +183,14 @@ export class DOMScenes {
   /**
    * 新しくNPCエンディング画面を開始する
    *
+   * @param resources リソース管理オブジェクト
    * @return 開始されたNPCエンディング画面
    */
-  async startNPCEnding(): Promise<NPCEnding> {
+  async startNPCEnding(resources: Resources): Promise<NPCEnding> {
     try {
       this._removeCurrentScene();
 
-      const scene = new NPCEnding(this._resourcePath);
+      const scene = new NPCEnding(resources.path);
       this._root.appendChild(scene.getRootHTMLElement());
       this._sceneSubscriptions = [
         scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)
