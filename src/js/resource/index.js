@@ -23,7 +23,7 @@ export type Resources = {
   cubeTextures: CubeTextureResource[],
   /** キャンバス用画像 */
   canvasImages: CanvasImageResource[],
-  /** 音楽 */
+  /** 音 */
   sounds: SoundResource[],
 };
 

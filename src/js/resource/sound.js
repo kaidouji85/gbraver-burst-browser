@@ -3,11 +3,11 @@
 import type {ResourcePath} from "./path/resource-path";
 import {Howl} from 'howler';
 
-/** 音楽リソースのユニークID */
+/** 音リソースのユニークID */
 export type SoundId = string;
 
 /**
- * 音楽リソースの設定
+ * 音リソースの設定
  */
 export type SoundConfig = {
   id: SoundId,
@@ -15,7 +15,7 @@ export type SoundConfig = {
 };
 
 /**
- * 音楽リソース
+ * 音リソース
  */
 export type SoundResource = {
   id: SoundId,
@@ -23,54 +23,64 @@ export type SoundResource = {
 }
 
 /**
- * 音楽IDを集めたもの
+ * 音IDを集めたもの
  */
 export const SOUND_IDS = {
   PUSH_BUTTON: 'PUSH_BUTTON',
 };
 
 /**
- * 音楽設定をあつめたもの
+ * 音設定をあつめたもの
  */
 export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.PUSH_BUTTON,
-    path: resourcePath => `${resourcePath.get()}/button/push-button.mp3`
+    path: resourcePath => {
+      console.log(`${resourcePath.get()}/button/push-button.mp3`);
+      return `${resourcePath.get()}/button/push-button.mp3`;
+    }
   }
 ];
 
 /**
- * 指定した音楽リソースを読み込む
+ * 指定した音リソースを読み込む
  *
  * @param resourcePath リソースパス
- * @param config 音楽設定
+ * @param config 音設定
  */
 export function loadSound(resourcePath: ResourcePath, config: SoundConfig): Promise<SoundResource> {
   return new Promise((resolve, reject) => {
     const sound = new Howl({
       src: [config.path(resourcePath)]
     });
-    sound.once('load', () => {
-      const resource: SoundResource = {
-        id: config.id,
-        sound: sound
-      };
+    const resource: SoundResource = {
+      id: config.id,
+      sound: sound
+    };
+
+    if (sound.state() === 'loaded') {
+      resolve(resource);
+      return;
+    }
+
+    sound.on('load', () => {
       resolve(resource);
     });
-    sound.once('loaderror', () => {
+    sound.on('loaderror', () => {
       reject();
     });
   });
 }
 
 /**
- * 全ての音楽リソースを読み込む
+ * 全ての音リソースを読み込む
  *
  * @param resourcePath リソースパス
- * @return 全ての音楽リソース
+ * @return 全ての音リソース
  */
 export function loadAllSounds(resourcePath: ResourcePath): Promise<SoundResource[]> {
   return Promise.all(
     SOUND_CONFIGS.map(config => loadSound(resourcePath, config))
   );
+  //return Promise.resolve([]);
 }
