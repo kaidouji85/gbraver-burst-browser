@@ -3,7 +3,6 @@
 import '../css/style.css';
 import {Game} from './game/index';
 import {ProductionResourcePath} from "./resource/path/production-resource-path";
-import {waitAnimationFrame} from "./wait/wait-animation-frame";
 
 /**
  * Gブレイバーバーストのエントリポイント
