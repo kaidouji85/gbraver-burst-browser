@@ -1,6 +1,6 @@
 // @flow
 
-import type {ResourcePath} from "../../../resource/path/resource-path";
+import {Howl} from 'howler';
 import {PlayerSelectView} from "./view/player-select-view";
 import type {PlayerSelectState} from "./state/player-select-state";
 import {createInitialState} from "./state/initial-state";
@@ -10,6 +10,8 @@ import type {SelectionComplete} from "../../../action/game/selection-complete";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import type {SelectArmdozer} from "../../../action/player-select/select-armdozer";
 import {waitTime} from "../../../wait/wait-time";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /**
  * イベント通知
@@ -22,29 +24,33 @@ export type Notifier = {
  * プレイヤーセレクト
  */
 export class PlayerSelect implements DOMScene {
-  _resourcePath: ResourcePath;
   _state: PlayerSelectState;
   _view: PlayerSelectView;
+  _pushButtonSound: Howl;
   _selectionComplete: Subject<SelectionComplete>;
   _subscription: Subscription;
 
   /**
    * コンストラクタ
    *
-   * @param resourcePath リソースパス
+   * @param resources リソース管理オブジェクト
    */
-  constructor(resourcePath: ResourcePath) {
-    this._resourcePath = resourcePath;
+  constructor(resources: Resources) {
 
     this._selectionComplete = new Subject();
-    this._state = createInitialState(resourcePath);
+    this._state = createInitialState();
+    
+    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
+    this._pushButtonSound = pushButtonResource
+      ? pushButtonResource.sound
+      : new Howl();
 
     const armDozerIds = [
       ArmDozerIdList.NEO_LANDOZER,
       ArmDozerIdList.SHIN_BRAVER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._view = new PlayerSelectView(resourcePath, armDozerIds);
+    this._view = new PlayerSelectView(resources.path, armDozerIds);
 
     this._subscription = this._view.notifier().select.subscribe(icon => {
       this._onArmdozerIconPush(icon);
@@ -100,6 +106,7 @@ export class PlayerSelect implements DOMScene {
 
       this._state.canOperation = false;
 
+      this._pushButtonSound.play();
       const selected = this._view.armdozerIcons
         .find(icon => icon.armDozerId === action.armDozerId);
       const other = this._view.armdozerIcons

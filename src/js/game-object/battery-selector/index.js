@@ -1,5 +1,6 @@
 // @flow
 
+import {Howl} from 'howler';
 import TWEEN from '@tweenjs/tween.js';
 import {Observable, Subscription} from 'rxjs';
 import type {Resources} from "../../resource";
@@ -19,6 +20,7 @@ import {close} from './animation/close';
 import {canBatteryMinus} from "./model/can-battery-minus";
 import {canBatteryPlus} from "./model/can-battery-plus";
 import type {PreRender} from "../../action/game-loop/pre-render";
+import {SOUND_IDS} from "../../resource/sound";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -33,12 +35,18 @@ type Param = {
 export class BatterySelector {
   _model: BatterySelectorModel;
   _view: BatterySelectorView;
+  _pushButtonSound: Howl;
   _batteryChangeTween: TWEEN.Group;
   _subscription: Subscription;
 
   constructor(param: Param) {
     this._model = initialValue();
     this._batteryChangeTween = new TWEEN.Group();
+
+    const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
+    this._pushButtonSound = pushButtonResource
+      ? pushButtonResource.sound
+      : new Howl();
 
     this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
@@ -56,6 +64,7 @@ export class BatterySelector {
           return;
         }
 
+        this._pushButtonSound.play();
         param.onOkButtonPush();
       },
       onPlusPush: () => {

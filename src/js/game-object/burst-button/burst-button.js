@@ -1,5 +1,6 @@
 // @flow
 
+import {Howl} from 'howler';
 import * as THREE from 'three';
 import type {BurstButtonModel} from "./model/burst-button-model";
 import {BurstButtonView} from "./view/burst-button-view";
@@ -12,6 +13,7 @@ import {close} from './animation/close';
 import type {Update} from "../../action/game-loop/update";
 import {Animate} from "../../animation/animate";
 import type {PreRender} from "../../action/game-loop/pre-render";
+import {SOUND_IDS} from "../../resource/sound";
 
 type Param = {
   resources: Resources,
@@ -23,9 +25,15 @@ type Param = {
 export class BurstButton {
   _model: BurstButtonModel;
   _view: BurstButtonView;
+  _pushButtonSound: Howl;
   _subscription: Subscription;
 
   constructor(param: Param) {
+    const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
+    this._pushButtonSound = pushButtonResource
+      ? pushButtonResource.sound
+      : new Howl();
+
     this._model = createInitialValue();
     this._view = new BurstButtonView({
       resources: param.resources,
@@ -34,6 +42,8 @@ export class BurstButton {
         if (this._model.disabled || !this._model.canBurst) {
           return;
         }
+
+        this._pushButtonSound.play();
         param.onPush();
       }
     });
