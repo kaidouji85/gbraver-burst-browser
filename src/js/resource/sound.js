@@ -72,19 +72,6 @@ export function loadSound(resourcePath: ResourcePath, config: SoundConfig): Prom
   });
 }
 
-//TODO 削除する
-/**
- * 全ての音リソースを読み込む
- *
- * @param resourcePath リソースパス
- * @return 全ての音リソース
- */
-export function loadAllSounds(resourcePath: ResourcePath): Promise<SoundResource[]> {
-  return Promise.all(
-    SOUND_CONFIGS.map(config => loadSound(resourcePath, config))
-  );
-}
-
 /**
  * 全ての音リソースを読み込む
  *

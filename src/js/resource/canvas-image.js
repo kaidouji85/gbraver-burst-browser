@@ -154,16 +154,6 @@ export function loadCanvasImage(basePath: string, config: CanvasImageConfig): Pr
 /**
  * ゲームで必要なキャンバス用画像を全て読み込む
  *
- * @param basePath ベースとなるパス
- * @return 読み込み結果
- */
-export function loadAllCanvasImage(basePath: string): Promise<CanvasImageResource[]> {
-  return Promise.all(CANVAS_IMAGE_CONFIGS.map(config => loadCanvasImage(basePath, config)));
-}
-
-/**
- * ゲームで必要なキャンバス用画像を全て読み込む
- *
  * @param resourcePath リソースパス
  * @return 読み込み結果
  */

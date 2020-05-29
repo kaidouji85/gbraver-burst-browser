@@ -294,17 +294,6 @@ export function loadTexture(basePath: string, config: TextureConfig): Promise<Te
   });
 }
 
-// TODO 削除する
-/**
- * ゲームで使う全てのテクスチャを読み込む
- *
- * @param basePath ベースとなるパス
- * @returns 読み込み結果
- */
-export async function loadAllTexture(basePath: string): Promise<TextureResource[]> {
-  return await Promise.all(TEXTURE_CONFIGS.map(v => loadTexture(basePath, v)));
-}
-
 /**
  * ゲームで使う全てのテクスチャを読み込む
  *

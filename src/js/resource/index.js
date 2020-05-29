@@ -1,14 +1,14 @@
 // @flow
 import type {TextureResource} from "./texture";
-import {loadAllTexture, loadingAllTextures} from "./texture";
+import {loadingAllTextures} from "./texture";
 import type {CanvasImageResource} from "./canvas-image";
-import {loadAllCanvasImage, loadingAllCanvasImages} from "./canvas-image";
+import {loadingAllCanvasImages} from "./canvas-image";
 import type {GlTFResource} from "./gltf";
-import {loadAllGlTFModel, loadingAllGTLFModels} from "./gltf";
+import {loadingAllGTLFModels} from "./gltf";
 import type {CubeTextureResource} from "./cube-texture";
-import {loadAllCubeTexture, loadingAllCubeTextures} from "./cube-texture";
+import {loadingAllCubeTextures} from "./cube-texture";
 import type {SoundResource} from "./sound";
-import {loadAllSounds, loadingAllSounds} from "./sound";
+import {loadingAllSounds} from "./sound";
 import type {ResourcePath} from "./path/resource-path";
 import {Observable, Subject} from "rxjs";
 import type {LoadingAction} from "../action/loading/loading";
@@ -30,33 +30,6 @@ export type Resources = {
   /** 音 */
   sounds: SoundResource[],
 };
-
-// TODO 削除する
-/**
- * ゲームで使う全てのリソースを読み込む
- *
- * @param basePath ベースとなるパス
- * @return 読み込み結果
- */
-export async function loadAllResource(resourcePath: ResourcePath): Promise<Resources> {
-  const basePath = `${resourcePath.get()}/`;
-  const [gltfs, textures, cubeTextures, canvasImages, sounds] = await Promise.all([
-    loadAllGlTFModel(basePath),
-    loadAllTexture(basePath),
-    loadAllCubeTexture(basePath),
-    loadAllCanvasImage(basePath),
-    loadAllSounds(resourcePath),
-  ]);
-
-  return {
-    path: resourcePath,
-    gltfs: gltfs,
-    textures: textures,
-    cubeTextures: cubeTextures,
-    canvasImages: canvasImages,
-    sounds: sounds,
-  };
-}
 
 /**
  * リソース読み込み

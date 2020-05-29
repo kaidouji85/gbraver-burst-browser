@@ -57,19 +57,6 @@ export function loadGlTF(basePath: string, config: GlTFConfig): Promise<GlTFReso
   });
 }
 
-// TODO 削除する
-/**
- * 全てのglTFリソースを読み込む
- *
- * @param basePath ベースとなるパス
- * @return glTFリソース
- */
-export function loadAllGlTFModel(basePath: string): Promise<GlTFResource[]> {
-  return Promise.all(
-    GLTF_CONFIGS.map(v => loadGlTF(basePath, v))
-  )
-}
-
 /**
  * 全てのglTFリソースを読み込む
  *

@@ -76,17 +76,6 @@ export function loadCubeTexture(basePath: string, config: CubeTextureConfig): Pr
   });
 }
 
-// TODO 削除する
-/**
- * キューブテクスチャを全て読み込む
- *
- * @param basePath resourceフォルダのベースとなるURL
- * @return {Promise<$TupleMap<Array<Promise<CubeTextureResource>>, typeof $await>>}
- */
-export function loadAllCubeTexture(basePath: string): Promise<CubeTextureResource[]> {
-  return Promise.all(CUBE_TEXTURE_CONFIGS.map(v => loadCubeTexture(basePath, v)));
-}
-
 /**
  * キューブテクスチャを全て読み込む
  *

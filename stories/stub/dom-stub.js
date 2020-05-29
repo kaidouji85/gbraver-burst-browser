@@ -1,12 +1,11 @@
 // @flow
 
-import type {ResourcePath} from "../../src/js/resource/path/resource-path";
 import {StorybookResourcePath} from "../../src/js/resource/path/storybook-resource-path";
 import '../../src/css/style.css';
 import {createResizeStream} from "../../src/js/action/resize/resize";
 import {CssVH} from "../../src/js/view-port/vh";
 import type {Resources} from "../../src/js/resource";
-import {loadAllResource} from "../../src/js/resource";
+import {ResourceLoader} from "../../src/js/resource";
 
 /**
  * HTML要素生成コールバック関数
@@ -28,7 +27,8 @@ export const domStub = (creator: DOMCreator) => (): HTMLElement => {
   const vh = new CssVH(resize);
 
   const resourcePath = new StorybookResourcePath();
-  loadAllResource(resourcePath).then(resources => {
+  const loader = new ResourceLoader(resourcePath);
+  loader.load().then(resources => {
     const component = creator(resources);
     root.appendChild(component);
   });
