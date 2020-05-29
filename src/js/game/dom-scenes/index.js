@@ -184,7 +184,7 @@ export class DOMScenes {
     try {
       this._removeCurrentScene();
 
-      const scene = new NPCEnding(resources.path);
+      const scene = new NPCEnding(resources);
       this._root.appendChild(scene.getRootHTMLElement());
       this._sceneSubscriptions = [
         scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)
