@@ -273,15 +273,15 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
 /**
  * テクスチャを読み込む
  *
- * @param basePath ベースとなるパス
+ * @param resourcePath リソースパス
  * @param config テクスチャ設定
  * @return 読み込み結果
  */
-export function loadTexture(basePath: string, config: TextureConfig): Promise<TextureResource> {
+export function loadTexture(resourcePath: ResourcePath, config: TextureConfig): Promise<TextureResource> {
   let loader = new THREE.TextureLoader();
   return new Promise((resolve, reject) => {
     loader.load(
-      `${basePath}${config.path}`,
+      `${resourcePath.get()}/${config.path}`,
       texture => resolve({
         id: config.id,
         texture
@@ -301,5 +301,5 @@ export function loadTexture(basePath: string, config: TextureConfig): Promise<Te
  * @returns 読み込み結果
  */
 export function loadingAllTextures(resourcePath: ResourcePath): Array<Promise<TextureResource>> {
-  return TEXTURE_CONFIGS.map(v => loadTexture(`${resourcePath.get()}/`, v));
+  return TEXTURE_CONFIGS.map(v => loadTexture(resourcePath, v));
 }
