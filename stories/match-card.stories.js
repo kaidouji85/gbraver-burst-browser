@@ -8,9 +8,9 @@ export default {
   title: 'match-card'
 };
 
-export const Scene = domStub((resourcePath) => {
+export const Scene = domStub(resources => {
   const scene = new MatchCard({
-    resourcePath: resourcePath,
+    resourcePath: resources.path,
     player: ArmDozerIdList.LIGHTNING_DOZER,
     enemy: ArmDozerIdList.NEO_LANDOZER,
     caption: 'STAGE X',

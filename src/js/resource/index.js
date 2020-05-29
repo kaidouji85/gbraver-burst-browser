@@ -1,17 +1,24 @@
 // @flow
 import type {TextureResource} from "./texture";
-import {loadAllTexture} from "./texture";
+import {loadingAllTextures} from "./texture";
 import type {CanvasImageResource} from "./canvas-image";
-import {loadAllCanvasImage} from "./canvas-image";
+import {loadingAllCanvasImages} from "./canvas-image";
 import type {GlTFResource} from "./gltf";
-import {loadAllGlTFModel} from "./gltf";
+import {loadingAllGTLFModels} from "./gltf";
 import type {CubeTextureResource} from "./cube-texture";
-import {loadAllCubeTexture} from "./cube-texture";
+import {loadingAllCubeTextures} from "./cube-texture";
+import type {SoundResource} from "./sound";
+import {loadingAllSounds} from "./sound";
+import type {ResourcePath} from "./path/resource-path";
+import {Observable, Subject} from "rxjs";
+import type {LoadingAction} from "../action/loading/loading";
 
 /**
  * ゲームで使うリソースを集めたもの
  */
 export type Resources = {
+  /** リソースパス */
+  path: ResourcePath,
   /** GlTFモデル */
   gltfs: GlTFResource[],
   /** テクスチャ */
@@ -20,26 +27,92 @@ export type Resources = {
   cubeTextures: CubeTextureResource[],
   /** キャンバス用画像 */
   canvasImages: CanvasImageResource[],
+  /** 音 */
+  sounds: SoundResource[],
 };
 
 /**
- * ゲームで使う全てのリソースを読み込む
- *
- * @param basePath ベースとなるパス
- * @return 読み込み結果
+ * リソース読み込み
  */
-export async function loadAllResource(basePath: string): Promise<Resources> {
-  const [gltfs, textures, cubeTextures, canvasImages] = await Promise.all([
-    loadAllGlTFModel(basePath),
-    loadAllTexture(basePath),
-    loadAllCubeTexture(basePath),
-    loadAllCanvasImage(basePath),
-  ]);
+export class ResourceLoader {
+  _resourcePath: ResourcePath;
+  _gltfLoading: Array<Promise<GlTFResource>>;
+  _textureLoading: Array<Promise<TextureResource>>;
+  _cubeTextureLoading: Array<Promise<CubeTextureResource>>;
+  _canvasImageLoading: Array<Promise<CanvasImageResource>>;
+  _soundLoading: Array<Promise<SoundResource>>;
+  _allLoadingCounts: number;
+  _completedLoadingCounts: number;
+  _loading: Subject<LoadingAction>;
 
-  return {
-    gltfs: gltfs,
-    textures: textures,
-    cubeTextures: cubeTextures,
-    canvasImages: canvasImages,
-  };
+  /**
+   * コンストラクタ
+   *
+   * @param resourcePath リソースパス
+   */
+  constructor(resourcePath: ResourcePath) {
+    this._resourcePath = resourcePath;
+    this._gltfLoading = loadingAllGTLFModels(resourcePath);
+    this._textureLoading = loadingAllTextures(resourcePath);
+    this._cubeTextureLoading = loadingAllCubeTextures(resourcePath);
+    this._canvasImageLoading = loadingAllCanvasImages(resourcePath);
+    this._soundLoading = loadingAllSounds(resourcePath);
+
+    const allLoading = [].concat(
+      this._gltfLoading,
+      this._textureLoading,
+      this._cubeTextureLoading,
+      this._canvasImageLoading,
+      this._soundLoading,
+    );
+    this._allLoadingCounts = allLoading.length;
+    this._completedLoadingCounts = 0;
+    this._loading = new Subject();
+    allLoading.forEach(loading => {
+      loading.then(() => {
+        this._completedLoadingCounts ++;
+        this._loading.next({
+          type: 'LoadingProgress',
+          completedRate: this._completedLoadingCounts / this._allLoadingCounts
+        });
+      });
+    });
+  }
+
+  /**
+   * リソースを読み込む
+   *
+   * @return リソース管理オブジェクト
+   */
+  async load(): Promise<Resources> {
+    try {
+      const [gltfs, textures, cubeTextures, canvasImages, sounds] = await Promise.all([
+        Promise.all(this._gltfLoading),
+        Promise.all(this._textureLoading),
+        Promise.all(this._cubeTextureLoading),
+        Promise.all(this._canvasImageLoading),
+        Promise.all(this._soundLoading),
+      ]);
+
+      return {
+        path: this._resourcePath,
+        gltfs: gltfs,
+        textures: textures,
+        cubeTextures: cubeTextures,
+        canvasImages: canvasImages,
+        sounds: sounds,
+      };
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 読み込み進捗率ストリームを取得する
+   *
+   * @return 読み込み進捗率ストリーム
+   */
+  progress(): Observable<LoadingAction> {
+    return this._loading;
+  }
 }
