@@ -4,6 +4,7 @@ import type {TitleState} from "../state/title-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
+import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 
 /** イベント通知 */
 type Notifier = {
@@ -126,6 +127,28 @@ export class TitleView {
         this._isTitleBackLoaded,
         this._isLogoLoaded,
       ]);
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * ゲーム開始ボタンを押した際のアニメーション
+   *
+   * @return {Promise<void>}
+   */
+  async pushGameStartButton(): Promise<void> {
+    try {
+      const animation = this._gameStart.animate([
+        {transform: 'scale(1)'},
+        {transform: 'scale(1.2)'},
+        {transform: 'scale(1)'},
+      ], {
+        duration: 300,
+        fill: "forwards",
+        easing: 'ease'
+      });
+      await waitFinishAnimation(animation);
     } catch(e) {
       throw e;
     }
