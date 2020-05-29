@@ -1,9 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {loadAllResource} from "../resource";
+import {ResourceLoader} from "../resource";
 import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
@@ -11,8 +10,6 @@ import {loadServiceWorker} from "../service-worker/load-service-worker";
 import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
-import type {LoadingAction} from "../action/loading/loading";
-import {createLoadingActionListener} from "../action/loading/create-listener";
 import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
@@ -43,7 +40,6 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
  */
 export class Game {
   _state: State;
-  _loading: Observable<LoadingAction>;
   _resize: Observable<Resize>;
   _vh: CssVH;
   _preLoadLinks: PreLoadLinks;
@@ -66,7 +62,6 @@ export class Game {
     this._resourcePath = resourcePath;
 
     this._state = createInitialState();
-    this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
     this._vh = new CssVH(this._resize);
 
@@ -137,10 +132,11 @@ export class Game {
       }
       this._serviceWorker = await loadServiceWorker();
 
+      const loader = new ResourceLoader(this._resourcePath);
       invisibleFirstView();
-      this._domScenes.startLoading(this._loading);
+      this._domScenes.startLoading(loader.progress());
       await this._fader.fadeIn();
-      const resources: Resources = await loadAllResource(this._resourcePath);
+      const resources: Resources = await loader.load();
       this._resources = resources;
       await waitAnimationFrame();
       await waitTime(1000);

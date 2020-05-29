@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import type {LoadingAction} from "./loading";
 import * as THREE from "three";
 
+// TODO 削除する
 /**
  * ローディングアクションのストリームを生成する
  *
