@@ -2,6 +2,7 @@
 
 import * as THREE from 'three';
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import type {ResourcePath} from "./path/resource-path";
 
 /** glTFリソースID */
 export type GlTFId = string;
@@ -56,6 +57,7 @@ export function loadGlTF(basePath: string, config: GlTFConfig): Promise<GlTFReso
   });
 }
 
+// TODO 削除する
 /**
  * 全てのglTFリソースを読み込む
  *
@@ -66,6 +68,16 @@ export function loadAllGlTFModel(basePath: string): Promise<GlTFResource[]> {
   return Promise.all(
     GLTF_CONFIGS.map(v => loadGlTF(basePath, v))
   )
+}
+
+/**
+ * 全てのglTFリソースを読み込む
+ *
+ * @param resourcePath リソースパス
+ * @return 読み込みPromiseの配列
+ */
+export function loadingAllGTLFModels(resourcePath: ResourcePath): Array<Promise<GlTFResource>> {
+  return GLTF_CONFIGS.map(v => loadGlTF(`${resourcePath.get()}/`, v));
 }
 
 /**

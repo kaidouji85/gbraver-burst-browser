@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
+import type {ResourcePath} from "./path/resource-path";
 
 /** キューブテクスチャID */
 export type CuteTextureId = string;
@@ -75,6 +76,7 @@ export function loadCubeTexture(basePath: string, config: CubeTextureConfig): Pr
   });
 }
 
+// TODO 削除する
 /**
  * キューブテクスチャを全て読み込む
  *
@@ -83,4 +85,14 @@ export function loadCubeTexture(basePath: string, config: CubeTextureConfig): Pr
  */
 export function loadAllCubeTexture(basePath: string): Promise<CubeTextureResource[]> {
   return Promise.all(CUBE_TEXTURE_CONFIGS.map(v => loadCubeTexture(basePath, v)));
+}
+
+/**
+ * キューブテクスチャを全て読み込む
+ *
+ * @param resourcePath リソースパス
+ * @return 読み込み結果
+ */
+export function loadingAllCubeTextures(resourcePath: ResourcePath): Array<Promise<CubeTextureResource>> {
+  return CUBE_TEXTURE_CONFIGS.map(v => loadCubeTexture(`${resourcePath.get()}/`, v));
 }

@@ -1,5 +1,6 @@
 // @flow
 import * as THREE from "three";
+import type {ResourcePath} from "./path/resource-path";
 
 /** テクスチャID */
 export type TextureId = string;
@@ -293,6 +294,7 @@ export function loadTexture(basePath: string, config: TextureConfig): Promise<Te
   });
 }
 
+// TODO 削除する
 /**
  * ゲームで使う全てのテクスチャを読み込む
  *
@@ -301,4 +303,14 @@ export function loadTexture(basePath: string, config: TextureConfig): Promise<Te
  */
 export async function loadAllTexture(basePath: string): Promise<TextureResource[]> {
   return await Promise.all(TEXTURE_CONFIGS.map(v => loadTexture(basePath, v)));
+}
+
+/**
+ * ゲームで使う全てのテクスチャを読み込む
+ *
+ * @param resourcePath リソースパス
+ * @returns 読み込み結果
+ */
+export function loadingAllTextures(resourcePath: ResourcePath): Array<Promise<TextureResource>> {
+  return TEXTURE_CONFIGS.map(v => loadTexture(`${resourcePath.get()}/`, v));
 }

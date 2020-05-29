@@ -10,6 +10,9 @@ import {loadAllCubeTexture} from "./cube-texture";
 import type {SoundResource} from "./sound";
 import {loadAllSounds} from "./sound";
 import type {ResourcePath} from "./path/resource-path";
+import {Observable} from "rxjs";
+import {Loading} from "../game/dom-scenes/loading";
+import type {LoadingAction} from "../action/loading/loading";
 
 /**
  * ゲームで使うリソースを集めたもの
@@ -29,6 +32,7 @@ export type Resources = {
   sounds: SoundResource[],
 };
 
+// TODO 削除する
 /**
  * ゲームで使う全てのリソースを読み込む
  *
@@ -54,3 +58,17 @@ export async function loadAllResource(resourcePath: ResourcePath): Promise<Resou
     sounds: sounds,
   };
 }
+
+// export class ResourceLoader {
+//   constructor(resourcePath: ResourcePath) {
+//
+//   }
+//
+//   load(): Promise<Resources> {
+//
+//   }
+//
+//   progress(): Observable<LoadingAction> {
+//
+//   }
+// }
