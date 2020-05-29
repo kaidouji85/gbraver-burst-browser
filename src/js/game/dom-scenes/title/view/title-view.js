@@ -133,13 +133,35 @@ export class TitleView {
   }
 
   /**
-   * ゲーム開始ボタンを押した際のアニメーション
+   * ゲームスタートボタンを押した際のアニメーション
    *
-   * @return {Promise<void>}
+   * @return アニメーション
    */
   async pushGameStartButton(): Promise<void> {
     try {
       const animation = this._gameStart.animate([
+        {transform: 'scale(1)'},
+        {transform: 'scale(1.2)'},
+        {transform: 'scale(1)'},
+      ], {
+        duration: 300,
+        fill: "forwards",
+        easing: 'ease'
+      });
+      await waitFinishAnimation(animation);
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 遊び方ボタンを押した際のアニメーション
+   *
+   * @return アニメーション
+   */
+  async pushHowToPlayButton(): Promise<void> {
+    try {
+      const animation = this._howToPlay.animate([
         {transform: 'scale(1)'},
         {transform: 'scale(1.2)'},
         {transform: 'scale(1)'},
