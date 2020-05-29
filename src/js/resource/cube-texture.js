@@ -1,6 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
+import type {ResourcePath} from "./path/resource-path";
 
 /** キューブテクスチャID */
 export type CuteTextureId = string;
@@ -43,21 +44,21 @@ export const CUBE_TEXTURE_CONFIGS: CubeTextureConfig[] = [
 /**
  * キューブテクスチャを読み込み
  *
- * @param basePath resourceフォルダのベースとなるURL
+ * @param resourcePath リソースパス
  * @param config キューブテクスチャ設定
  * @return キューブテクスチャリソース
  */
-export function loadCubeTexture(basePath: string, config: CubeTextureConfig): Promise<CubeTextureResource> {
+export function loadCubeTexture(resourcePath: ResourcePath, config: CubeTextureConfig): Promise<CubeTextureResource> {
   return new Promise((resolve, reject) => {
     const loader = new THREE.CubeTextureLoader();
     loader.load(
       [
-        `${basePath}${config.px}`,
-        `${basePath}${config.nx}`,
-        `${basePath}${config.py}`,
-        `${basePath}${config.ny}`,
-        `${basePath}${config.pz}`,
-        `${basePath}${config.nz}`,
+        `${resourcePath.get()}/${config.px}`,
+        `${resourcePath.get()}/${config.nx}`,
+        `${resourcePath.get()}/${config.py}`,
+        `${resourcePath.get()}/${config.ny}`,
+        `${resourcePath.get()}/${config.pz}`,
+        `${resourcePath.get()}/${config.nz}`,
       ],
       (texture: THREE.CubeTexture) => {
         resolve({
@@ -78,9 +79,9 @@ export function loadCubeTexture(basePath: string, config: CubeTextureConfig): Pr
 /**
  * キューブテクスチャを全て読み込む
  *
- * @param basePath resourceフォルダのベースとなるURL
- * @return {Promise<$TupleMap<Array<Promise<CubeTextureResource>>, typeof $await>>}
+ * @param resourcePath リソースパス
+ * @return 読み込み結果
  */
-export function loadAllCubeTexture(basePath: string): Promise<CubeTextureResource[]> {
-  return Promise.all(CUBE_TEXTURE_CONFIGS.map(v => loadCubeTexture(basePath, v)));
+export function loadingAllCubeTextures(resourcePath: ResourcePath): Array<Promise<CubeTextureResource>> {
+  return CUBE_TEXTURE_CONFIGS.map(v => loadCubeTexture(resourcePath, v));
 }

@@ -7,7 +7,7 @@ export default {
   title: 'npc-ending'
 };
 
-export const Scene = domStub((resourcePath) => {
-  const scene = new NPCEnding(resourcePath);
+export const Scene = domStub(resources => {
+  const scene = new NPCEnding(resources.path);
   return scene.getRootHTMLElement();
 });

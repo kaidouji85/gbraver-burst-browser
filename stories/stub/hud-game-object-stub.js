@@ -17,9 +17,10 @@ import type {GameObjectAction} from "../../src/js/action/game-object-action";
 import {gameObjectStream} from "../../src/js/action/game-object-action/game-object-stream";
 import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
-import {loadAllResource} from "../../src/js/resource";
+import {ResourceLoader} from "../../src/js/resource";
 import {PlainHUDCamera} from "../../src/js/game-object/camera/plain-hud";
 import type {Object3dCreator} from "./object3d-creator";
+import {StorybookResourcePath} from "../../src/js/resource/path/storybook-resource-path";
 
 /**
  * HUDレイヤー ゲームオブジェクト スタブ
@@ -83,7 +84,9 @@ export class HUDGameObjectStub {
    */
   async start(): Promise<void> {
     try {
-      const resources = await loadAllResource('/');
+      const resourcePath = new StorybookResourcePath();
+      const loader = new ResourceLoader(resourcePath);
+      const resources = await loader.load();
       const object3Ds = this._creator(resources, this._gameObjectAction);
       object3Ds.forEach(object3D => {
         this._scene.add(object3D);

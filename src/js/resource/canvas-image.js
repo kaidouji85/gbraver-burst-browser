@@ -1,5 +1,6 @@
 // @flow
 import * as THREE from 'three';
+import type {ResourcePath} from "./path/resource-path";
 
 /** キャンバス用画像ID */
 export type CanvasImageId = string;
@@ -127,15 +128,15 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
 /**
  * キャンバス用画像を読み込む
  *
- * @param basePath ベースとなるパス
+ * @param resourcePath リソースパス
  * @param config 読み込み設定
  * @return 読み込み結果
  */
-export function loadCanvasImage(basePath: string, config: CanvasImageConfig): Promise<CanvasImageResource> {
+export function loadCanvasImage(resourcePath: ResourcePath, config: CanvasImageConfig): Promise<CanvasImageResource> {
   return new Promise((resolve, reject) => {
     const loader = new THREE.ImageLoader();
     loader.load(
-      `${basePath}${config.path}`,
+      `${resourcePath.get()}/${config.path}`,
       (image: Image) => {
         resolve({
           id: config.id,
@@ -153,9 +154,9 @@ export function loadCanvasImage(basePath: string, config: CanvasImageConfig): Pr
 /**
  * ゲームで必要なキャンバス用画像を全て読み込む
  *
- * @param basePath ベースとなるパス
+ * @param resourcePath リソースパス
  * @return 読み込み結果
  */
-export function loadAllCanvasImage(basePath: string): Promise<CanvasImageResource[]> {
-  return Promise.all(CANVAS_IMAGE_CONFIGS.map(config => loadCanvasImage(basePath, config)));
+export function loadingAllCanvasImages(resourcePath: ResourcePath): Array<Promise<CanvasImageResource>> {
+  return CANVAS_IMAGE_CONFIGS.map(config => loadCanvasImage(resourcePath, config))
 }

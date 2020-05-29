@@ -1,9 +1,8 @@
 // @flow
 
-import * as THREE from 'three';
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {loadAllResource} from "../resource";
+import {ResourceLoader} from "../resource";
 import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
@@ -11,8 +10,6 @@ import {loadServiceWorker} from "../service-worker/load-service-worker";
 import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
-import type {LoadingAction} from "../action/loading/loading";
-import {createLoadingActionListener} from "../action/loading/create-listener";
 import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
@@ -36,13 +33,13 @@ import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
 import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import type {EndNPCEnding} from "../action/game/npc-ending";
+import {invisibleFirstView} from "../first-view/first-view-visible";
 
 /**
  * ゲーム全体の管理を行う
  */
 export class Game {
   _state: State;
-  _loading: Observable<LoadingAction>;
   _resize: Observable<Resize>;
   _vh: CssVH;
   _preLoadLinks: PreLoadLinks;
@@ -65,7 +62,6 @@ export class Game {
     this._resourcePath = resourcePath;
 
     this._state = createInitialState();
-    this._loading = createLoadingActionListener(THREE.DefaultLoadingManager);
     this._resize = createResizeStream();
     this._vh = new CssVH(this._resize);
 
@@ -80,10 +76,7 @@ export class Game {
     this._interruptScenes = new InterruptScenes({
       resourcePath: this._resourcePath,
     });
-    this._domScenes = new DOMScenes({
-      resourcePath: this._resourcePath,
-      loading: this._loading,
-    });
+    this._domScenes = new DOMScenes();
     this._domDialogs = new DOMDialogs();
     this._tdScenes = new TDScenes(this._resize);
 
@@ -139,8 +132,17 @@ export class Game {
       }
       this._serviceWorker = await loadServiceWorker();
 
+      const loader = new ResourceLoader(this._resourcePath);
+      invisibleFirstView();
+      this._domScenes.startLoading(loader.progress());
+      await this._fader.fadeIn();
+      const resources: Resources = await loader.load();
+      this._resources = resources;
+      await waitAnimationFrame();
+      await waitTime(1000);
+
       await this._fader.fadeOut();
-      await this._domScenes.startTitle();
+      await this._domScenes.startTitle(resources);
       await this._fader.fadeIn();
     } catch (e) {
       throw e;
@@ -154,10 +156,14 @@ export class Game {
    */
   async _onPushGameStart(action: PushGameStart) {
     try {
-      this._state.inProgress = createInitialNPCBattle();
+      if (!this._resources) {
+        return;
+      }
+      const resources: Resources = this._resources;
 
+      this._state.inProgress = createInitialNPCBattle();
       await this._fader.fadeOut();
-      await this._domScenes.startPlayerSelect();
+      await this._domScenes.startPlayerSelect(resources);
       await this._fader.fadeIn();
     } catch(e) {
       throw e;
@@ -190,13 +196,15 @@ export class Game {
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     try {
       if (!this._resources) {
-        await this._loadResourcesFlow();
+        return;
       }
+      const resources: Resources = this._resources;
 
       if (this._state.inProgress.type === 'NPCBattle') {
         const origin: NPCBattle = this._state.inProgress;
-        this._state.inProgress = selectionComplete(origin, action);
-        await this._npcBattleFlow();
+        const updated: NPCBattle = selectionComplete(origin, action);
+        this._state.inProgress = updated;
+        await this._npcBattleFlow(resources, updated);
       }
     } catch(e) {
       throw e;
@@ -210,16 +218,21 @@ export class Game {
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
     try {
+      if (!this._resources) {
+        return;
+      }
+      const resources: Resources = this._resources;
+
       if (this._state.inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._state.inProgress, action)) {
         const origin: NPCBattle = this._state.inProgress;
-        this._state.inProgress = levelUp(origin, action);
-        await this._npcBattleFlow();
+        const updated: NPCBattle = levelUp(origin, action);
+        this._state.inProgress = updated;
+        await this._npcBattleFlow(resources, updated);
       } else if (this._state.inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._state.inProgress, action)) {
         this._state.inProgress = {type: 'None'};
-
         await this._fader.fadeOut();
         this._tdScenes.hidden();
-        await this._domScenes.startNPCEnding();
+        await this._domScenes.startNPCEnding(resources);
         await this._fader.fadeIn();
       }
     } catch(e) {
@@ -234,28 +247,14 @@ export class Game {
    */
   async _onEndNPCEnding(action: EndNPCEnding): Promise<void> {
     try {
-      await this._fader.fadeOut();
-      await this._domScenes.startTitle();
-      await this._fader.fadeIn();
-    } catch(e) {
-      throw e;
-    }
-  }
+      if (!this._resources) {
+        return;
+      }
+      const resources: Resources = this._resources;
 
-  /**
-   * リソース読み込みフロー
-   *
-   * @return 処理結果
-   */
-  async _loadResourcesFlow(): Promise<void> {
-    try {
       await this._fader.fadeOut();
-      this._domScenes.startLoading();
+      await this._domScenes.startTitle(resources);
       await this._fader.fadeIn();
-
-      this._resources = await loadAllResource(`${this._resourcePath.get()}/`);
-      await waitAnimationFrame();
-      await waitTime(1000);
     } catch(e) {
       throw e;
     }
@@ -264,16 +263,12 @@ export class Game {
   /**
    * NPC戦闘フロー
    *
+   * @param resources リソース管理オブジェクト
+   * @param npcBattle NPC戦闘ステート
    * @return 処理結果
    */
-  async _npcBattleFlow(): Promise<void> {
+  async _npcBattleFlow(resources: Resources, npcBattle: NPCBattle): Promise<void> {
     try {
-      if (!this._resources || (this._state.inProgress.type !== 'NPCBattle')) {
-        return;
-      }
-      const resources: Resources = this._resources;
-      const npcBattle: NPCBattle = this._state.inProgress;
-
       if (!npcBattle.player) {
         return;
       }
@@ -286,6 +281,7 @@ export class Game {
       ) ?? DefaultCourse;
       const npc = course.npc();
       await this._domScenes.startMatchCard(
+        resources,
         player.armdozer.id,
         npc.armdozer.id,
         course.stageName,
