@@ -10,10 +10,10 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import {open} from './animation/open';
 import {close} from './animation/close';
-import type {Update} from "../../action/game-loop/update";
 import {Animate} from "../../animation/animate";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {SOUND_IDS} from "../../resource/sound";
+import {decide} from "./animation/decide";
 
 type Param = {
   resources: Resources,
@@ -48,9 +48,7 @@ export class BurstButton {
       }
     });
     this._subscription = param.listener.subscribe(action => {
-      if (action.type === 'Update') {
-        this._update(action);
-      } else if (action.type === 'PreRender') {
+      if (action.type === 'PreRender') {
         this._preRender(action);
       }
     });
@@ -66,15 +64,25 @@ export class BurstButton {
    * ボタンを表示する
    *
    * @param canBurst バースト可能フラグ、trueでバースト可能
+   * @return アニメーション
    */
   open(canBurst: boolean): Animate {
     return open(this._model, canBurst);
   }
 
   /**
+   * 決定アニメーション
+   *
+   * @return アニメーション
+   */
+  decide(): Animate {
+    return decide(this._model);
+  }
+
+  /**
    * ボタンを非表示にする
    *
-   * @param delay 非表示アニメが再生されるまでディライ
+   * @return アニメーション
    */
   close(): Animate {
     return close(this._model);
@@ -85,13 +93,8 @@ export class BurstButton {
     return this._view.getObject3D();
   }
 
-  /** 状態更新 */
-  _update(action: Update): void {
-    this._view.engage(this._model);
-  }
-
   /** プリレンダー */
   _preRender(action: PreRender): void {
-    this._view.preRender(action);
+    this._view.engage(this._model, action);
   }
 }
