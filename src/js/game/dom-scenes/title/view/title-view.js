@@ -144,7 +144,7 @@ export class TitleView {
         {transform: 'scale(1.2)'},
         {transform: 'scale(1)'},
       ], {
-        duration: 300,
+        duration: 200,
         fill: "forwards",
         easing: 'ease'
       });
@@ -166,7 +166,7 @@ export class TitleView {
         {transform: 'scale(1.2)'},
         {transform: 'scale(1)'},
       ], {
-        duration: 300,
+        duration: 200,
         fill: "forwards",
         easing: 'ease'
       });
