@@ -21,6 +21,7 @@ import {canBatteryMinus} from "./model/can-battery-minus";
 import {canBatteryPlus} from "./model/can-battery-plus";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {SOUND_IDS} from "../../resource/sound";
+import {decide} from './animation/decide';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -64,7 +65,6 @@ export class BatterySelector {
           return;
         }
 
-        this._pushButtonSound.play();
         param.onOkButtonPush();
       },
       onPlusPush: () => {
@@ -108,6 +108,16 @@ export class BatterySelector {
     return open(this._model);
   }
 
+  /**
+   * バッテリー決定アニメーション
+   *
+   * @return アニメーション
+   */
+  decide(): Animate {
+    this._pushButtonSound.play();
+    return decide(this._model);
+  }
+
   /** バッテリーセレクタを閉じる */
   close(): Animate {
     return close(this._model);
@@ -126,12 +136,11 @@ export class BatterySelector {
   /** 状態更新 */
   _update(action: Update): void {
     this._batteryChangeTween.update(action.time);
-    this._view.engage(this._model);
   }
 
   /** プリレンダー */
   _preRender(action: PreRender): void {
-    this._view.preRender(action);
+    this._view.engage(this._model, action);
   }
 
   /**

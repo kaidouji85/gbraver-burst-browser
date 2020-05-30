@@ -86,27 +86,11 @@ export class ArmdozerIconView {
    */
   selected(): Promise<void> {
     const animation = this._root.animate([
-      {width: 'var(--armdozer-icon-width)', margin: 'var(--armdozer-icon-margin)'},
-      {width: 'var(--selected-armdozer-icon-width)', margin: 0},
+      {transform: 'scale(1)'},
+      {transform: 'scale(1.1)'},
+      {transform: 'scale(1)'},
     ], {
-      duration: 500,
-      fill: "forwards",
-      easing: 'ease'
-    });
-    return waitFinishAnimation(animation);
-  }
-
-  /**
-   * アイコンを非表示にする
-   *
-   * @return アニメーション
-   */
-  hidden(): Promise<void> {
-    const animation = this._root.animate([
-      {opacity: 1, width: 'var(--armdozer-icon-width)', margin: 'var(--armdozer-icon-margin)'},
-      {opacity: 0, width: '0', margin: 0}
-    ], {
-      duration: 500,
+      duration: 200,
       fill: "forwards",
       easing: 'ease'
     });
