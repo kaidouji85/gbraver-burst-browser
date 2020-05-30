@@ -18,6 +18,7 @@ import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
+import {all} from "../../../animation/all";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -122,7 +123,12 @@ export class BattleScene implements Scene {
       }
 
       this._state.canOperation = false;
-      await invisibleUI(this._view).play();
+      await all(
+        this._view.hud.gameObjects.batterySelector.decide(),
+        this._view.hud.gameObjects.burstButton.close()
+      ).chain(
+        this._view.hud.gameObjects.batterySelector.close()
+      ).play();
       const lastState = await this._progressGame({
         type: 'BATTERY_COMMAND',
         battery: action.battery
