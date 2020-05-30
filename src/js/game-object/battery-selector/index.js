@@ -37,6 +37,7 @@ export class BatterySelector {
   _model: BatterySelectorModel;
   _view: BatterySelectorView;
   _pushButtonSound: Howl;
+  _batteryChangeSound: Howl;
   _batteryChangeTween: TWEEN.Group;
   _subscription: Subscription;
 
@@ -47,6 +48,11 @@ export class BatterySelector {
     const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
+      : new Howl();
+
+    const batteryChangeResource = param.resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_CHANGE);
+    this._batteryChangeSound = batteryChangeResource
+      ? batteryChangeResource.sound
       : new Howl();
 
     this._subscription = param.listener.subscribe(action => {
@@ -154,6 +160,7 @@ export class BatterySelector {
 
     this._model.battery = battery;
     const needle = getNeedleValue(battery);
+    this._batteryChangeSound.play();
     changeNeedle(this._model, this._batteryChangeTween, needle).play();
   }
 }
