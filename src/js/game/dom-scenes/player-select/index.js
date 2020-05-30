@@ -109,16 +109,11 @@ export class PlayerSelect implements DOMScene {
       this._pushButtonSound.play();
       const selected = this._view.armdozerIcons
         .find(icon => icon.armDozerId === action.armDozerId);
-      const other = this._view.armdozerIcons
-        .filter(icon => icon.armDozerId !== action.armDozerId);
       if (!selected) {
         return;
       }
 
-      await Promise.all([
-        selected.selected(),
-        ...other.map(v => v.hidden())
-      ]);
+      await  selected.selected();
       await waitTime(1000);
 
       this._selectionComplete.next({
