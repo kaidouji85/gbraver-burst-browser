@@ -43,7 +43,6 @@ export class BurstButton {
           return;
         }
 
-        this._pushButtonSound.play();
         param.onPush();
       }
     });
@@ -76,6 +75,7 @@ export class BurstButton {
    * @return アニメーション
    */
   decide(): Animate {
+    this._pushButtonSound.play();
     return decide(this._model);
   }
 

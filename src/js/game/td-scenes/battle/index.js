@@ -10,7 +10,6 @@ import type {DecideBattery} from "../../../action/battle-scene/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
-import {invisibleUI} from "./animation/invisible-ui";
 import type {Render} from "../../../action/game-loop/render";
 import type {DoBurst} from "../../../action/battle-scene/do-burst";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
@@ -126,8 +125,8 @@ export class BattleScene implements Scene {
       await all(
         this._view.hud.gameObjects.batterySelector.decide(),
         this._view.hud.gameObjects.burstButton.close()
-      ).chain(
-        this._view.hud.gameObjects.batterySelector.close()
+      ).chain(delay(500)
+      ).chain(this._view.hud.gameObjects.batterySelector.close()
       ).play();
       const lastState = await this._progressGame({
         type: 'BATTERY_COMMAND',
@@ -156,7 +155,12 @@ export class BattleScene implements Scene {
       }
 
       this._state.canOperation = false;
-      await invisibleUI(this._view).play();
+      await all(
+        this._view.hud.gameObjects.burstButton.decide(),
+        this._view.hud.gameObjects.batterySelector.close()
+      ).chain(delay(500)
+      ).chain(this._view.hud.gameObjects.burstButton.close()
+      ).play();
       const lastState = await this._progressGame({type: 'BURST_COMMAND'});
       if (lastState && lastState.effect.name === 'GameEnd') {
         this._onEndGame(lastState.effect);
