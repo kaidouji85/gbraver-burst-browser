@@ -8,6 +8,6 @@ export default {
 };
 
 export const Scene = domStub(resources => {
-  const scene = new PlayerSelect(resources.path);
+  const scene = new PlayerSelect(resources);
   return scene.getRootHTMLElement();
 });

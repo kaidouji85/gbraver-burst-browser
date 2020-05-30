@@ -4,6 +4,7 @@ import type {TitleState} from "../state/title-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
+import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 
 /** イベント通知 */
 type Notifier = {
@@ -126,6 +127,50 @@ export class TitleView {
         this._isTitleBackLoaded,
         this._isLogoLoaded,
       ]);
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * ゲームスタートボタンを押した際のアニメーション
+   *
+   * @return アニメーション
+   */
+  async pushGameStartButton(): Promise<void> {
+    try {
+      const animation = this._gameStart.animate([
+        {transform: 'scale(1)'},
+        {transform: 'scale(1.1)'},
+        {transform: 'scale(1)'},
+      ], {
+        duration: 200,
+        fill: "forwards",
+        easing: 'ease'
+      });
+      await waitFinishAnimation(animation);
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 遊び方ボタンを押した際のアニメーション
+   *
+   * @return アニメーション
+   */
+  async pushHowToPlayButton(): Promise<void> {
+    try {
+      const animation = this._howToPlay.animate([
+        {transform: 'scale(1)'},
+        {transform: 'scale(1.1)'},
+        {transform: 'scale(1)'},
+      ], {
+        duration: 200,
+        fill: "forwards",
+        easing: 'ease'
+      });
+      await waitFinishAnimation(animation);
     } catch(e) {
       throw e;
     }

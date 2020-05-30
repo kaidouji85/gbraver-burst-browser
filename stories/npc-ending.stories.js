@@ -8,6 +8,6 @@ export default {
 };
 
 export const Scene = domStub(resources => {
-  const scene = new NPCEnding(resources.path);
+  const scene = new NPCEnding(resources);
   return scene.getRootHTMLElement();
 });

@@ -124,7 +124,7 @@ export class DOMScenes {
     try {
       this._removeCurrentScene();
 
-      const scene = new PlayerSelect(resources.path);
+      const scene = new PlayerSelect(resources);
       const notifier = scene.notifier();
       this._sceneSubscriptions = [
         notifier.selectionComplete.subscribe(this._selectionComplete)
@@ -184,7 +184,7 @@ export class DOMScenes {
     try {
       this._removeCurrentScene();
 
-      const scene = new NPCEnding(resources.path);
+      const scene = new NPCEnding(resources);
       this._root.appendChild(scene.getRootHTMLElement());
       this._sceneSubscriptions = [
         scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)

@@ -1,12 +1,14 @@
 // @flow
 
+import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
-import type {ResourcePath} from "../../../resource/path/resource-path";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {EndNPCEnding} from "../../../action/game/npc-ending";
 import {NPCEndingView} from "./view/npc-ending-view";
 import type {NPCEndingState} from "./state/npc-ending-state";
 import {createInitialState} from "./state/initial-state";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /** イベント通知 */
 type Notifier  = {
@@ -19,18 +21,25 @@ type Notifier  = {
 export class NPCEnding implements DOMScene {
   _state: NPCEndingState;
   _view: NPCEndingView;
+  _pushButtonSound: Howl;
   _endNPCEnding: Subject<EndNPCEnding>;
   _subsctiptoons: Subscription[];
 
   /**
    * コンストラクタ
    *
-   * @param resourcePath リソースパス
+   * @param resources リソース管理オブジェクト
    */
-  constructor(resourcePath: ResourcePath) {
+  constructor(resources: Resources) {
     this._state = createInitialState();
     this._endNPCEnding = new Subject();
-    this._view = new NPCEndingView(resourcePath);
+    this._view = new NPCEndingView(resources.path);
+
+    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
+    this._pushButtonSound = pushButtonResource
+      ? pushButtonResource.sound
+      : new Howl();
+
     this._subsctiptoons = [
       this._view.notifier().screenPush.subscribe(() => {
         this._onScreenPush();
@@ -83,6 +92,7 @@ export class NPCEnding implements DOMScene {
     }
     
     this._state.canOperate = false;
+    this._pushButtonSound.play();
     this._endNPCEnding.next();
   }
 }

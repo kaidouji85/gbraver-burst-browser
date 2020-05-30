@@ -27,6 +27,7 @@ export type SoundResource = {
  */
 export const SOUND_IDS = {
   PUSH_BUTTON: 'PUSH_BUTTON',
+  BATTERY_CHANGE: 'BATTERY_CHANGE',
 };
 
 /**
@@ -35,10 +36,11 @@ export const SOUND_IDS = {
 export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.PUSH_BUTTON,
-    path: resourcePath => {
-      console.log(`${resourcePath.get()}/button/push-button.mp3`);
-      return `${resourcePath.get()}/button/push-button.mp3`;
-    }
+    path: resourcePath => `${resourcePath.get()}/button/push-button.mp3`
+  },
+  {
+    id: SOUND_IDS.BATTERY_CHANGE,
+    path: resourcePath => `${resourcePath.get()}/battery-selector/battery-change.mp3`
   }
 ];
 
