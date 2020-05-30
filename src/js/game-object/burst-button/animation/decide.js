@@ -11,6 +11,6 @@ import {tween} from "../../../animation/tween";
  * @return アニメーション
  */
 export function decide(model: BurstButtonModel): Animate {
-  return tween(model, t => t.to({scale: 1.1}, 100))
+  return tween(model, t => t.to({scale: 1.2}, 100))
     .chain(tween(model, t => t.to({scale: 1}, 100)));
 }

@@ -11,6 +11,6 @@ import type {BatterySelectorModel} from "../model";
  * @return アニメーション
  */
 export function decide(model: BatterySelectorModel): Animate {
-  return tween(model, t => t.to({scale: 1.1}, 100))
+  return tween(model, t => t.to({scale: 1.05}, 100))
     .chain(tween(model, t => t.to({scale: 1}, 100)))
 }

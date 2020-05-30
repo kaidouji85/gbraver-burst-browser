@@ -141,7 +141,7 @@ export class TitleView {
     try {
       const animation = this._gameStart.animate([
         {transform: 'scale(1)'},
-        {transform: 'scale(1.2)'},
+        {transform: 'scale(1.1)'},
         {transform: 'scale(1)'},
       ], {
         duration: 200,
@@ -163,7 +163,7 @@ export class TitleView {
     try {
       const animation = this._howToPlay.animate([
         {transform: 'scale(1)'},
-        {transform: 'scale(1.2)'},
+        {transform: 'scale(1.1)'},
         {transform: 'scale(1)'},
       ], {
         duration: 200,
