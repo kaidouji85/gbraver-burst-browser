@@ -15,5 +15,9 @@ export function createInitialValue(): WingDozerModel {
       y: ARMDOZER_SPRITE_STANDARD_Y,
       z: ARMDOZER_SPRITE_STANDARD_Z,
     },
+    animation: {
+      type: 'STAND',
+      frame: 0
+    }
   };
 }

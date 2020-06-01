@@ -8,17 +8,17 @@ import {MESH_Y} from "./position";
 
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
-export const MAX_ANIMATION = 1;
+export const MAX_ANIMATION = 4;
 
 /**
- * ウィングドーザ 立ち
+ * ウィングドーザ アッパー アタック
  *
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
-export function wingDozerStand(resources: Resources): ArmdozerAnimation {
+export function wingDozerUpperAttack(resources: Resources): ArmdozerAnimation {
   const ret = new HorizontalArmdozerAnimation({
-    id: TEXTURE_IDS.WING_DOZER_STAND,
+    id: TEXTURE_IDS.WING_DOZER_UPPER_ATTACK,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,

@@ -3,16 +3,20 @@
 import type {Resources} from "../../../../resource";
 import * as THREE from "three";
 import type {WingDozerView} from "./wing-dozer-view";
-import type {WingDozerModel} from "../model/wing-dozer-model";
+import type {AnimationType, WingDozerModel} from "../model/wing-dozer-model";
 import {wingDozerStand} from "../mesh/stand";
 import {Group} from "three";
 import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
+import {wingDozerUpperCharge} from "../mesh/upper-charge";
+import {wingDozerUpperAttack} from "../mesh/upper-attack";
 
 /**
  * プレイヤー側 ウィングドーザ ビュー
  */
 export class PlayerWingDozerView implements WingDozerView{
   _stand: ArmdozerAnimation;
+  _upperCharge: ArmdozerAnimation;
+  _upperAttack: ArmdozerAnimation;
   _group: THREE.Group;
 
   /**
@@ -22,6 +26,8 @@ export class PlayerWingDozerView implements WingDozerView{
    */
   constructor(resources: Resources): void {
     this._stand = wingDozerStand(resources);
+    this._upperCharge = wingDozerUpperCharge(resources);
+    this._upperAttack = wingDozerUpperAttack(resources);
 
     this._group = new Group();
     this._getAllMeshes().forEach(mesh => {
@@ -60,11 +66,43 @@ export class PlayerWingDozerView implements WingDozerView{
     this._group.scale.x = 1;
     this._group.scale.y = 1;
     this._group.scale.z = 1;
+    
+    const activeMesh = this._getActiveMesh(model.animation.type);
+    const disActiveMesh = this._getAllMeshes()
+      .filter(v => v !== activeMesh);
+    activeMesh.visible(true);
+    disActiveMesh.forEach(v => v.visible(false));
   }
 
+  /**
+   * 本ビューに含まれる全メッシュを返す
+   *
+   * @return 全メッシュ
+   */
   _getAllMeshes(): ArmdozerAnimation [] {
     return [
       this._stand,
+      this._upperCharge,
+      this._upperAttack,
     ];
+  }
+
+  /**
+   * アニメーションタイプに応じたメッシュを返す
+   *
+   * @param type あアニメーションタイプ
+   * @return メッシュ
+   */
+  _getActiveMesh(type: AnimationType): ArmdozerAnimation {
+    switch(type) {
+      case 'STAND':
+        return this._stand;
+      case 'UPPER_CHARGE':
+        return this._upperCharge;
+      case 'UPPER_ATTACK':
+        return this._upperAttack;
+      default:
+        return this._stand;
+    }
   }
 }
