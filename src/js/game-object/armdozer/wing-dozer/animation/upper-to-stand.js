@@ -13,15 +13,11 @@ import {process} from '../../../../animation/process';
  */
 export function upperToStand(model: WingDozerModel): Animate {
   return process(() => {
-    model.animation.type = 'UPPER_ATTACK';
-    model.animation.frame = 1;
-  }).chain(tween(model.animation, t => t.to({frame: 0}, 300))
-  ).chain(process(() => {
-    model.animation.type = 'UPPER_CHARGE';
-    model.animation.frame = 1;
-  })).chain(tween(model.animation, t => t.to({frame: 0}, 300)
+    model.animation.type = 'UPPER_TO_STAND';
+    model.animation.frame = 0;
+  }).chain(tween(model.animation, t => t.to({frame: 1}, 300))
   ).chain(process(() => {
     model.animation.type = 'STAND';
     model.animation.frame = 0;
-  })));
+  }));
 }

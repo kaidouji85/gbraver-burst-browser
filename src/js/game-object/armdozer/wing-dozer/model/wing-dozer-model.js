@@ -6,7 +6,8 @@
 export type AnimationType =
   'STAND' |
   'UPPER_CHARGE' |
-  'UPPER_ATTACK';
+  'UPPER_ATTACK' |
+  'UPPER_TO_STAND';
 
 /**
  * ウィングドーザ モデル
