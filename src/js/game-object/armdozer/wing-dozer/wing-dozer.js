@@ -12,6 +12,9 @@ import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
+import {charge} from "./animation/charge";
+import {upper} from "./animation/upper";
+import {upperToStand} from "./animation/upper-to-stand";
 
 /**
  * ウィングドーザ
@@ -142,6 +145,33 @@ export class WingDozer implements ArmDozerSprite {
    */
   down(): Animate {
     return empty();
+  }
+
+  /**
+   * チャージ
+   *
+   * @return アニメーション
+   */
+  charge(): Animate {
+    return charge(this._model);
+  }
+
+  /**
+   * アッパー
+   *
+   * @return アニメーション
+   */
+  upper(): Animate {
+    return upper(this._model);
+  }
+
+  /**
+   * アッパー -> 立ち
+   *
+   * @return アニメーション
+   */
+  upperToStand(): Animate {
+    return upperToStand(this._model);
   }
 
   /**

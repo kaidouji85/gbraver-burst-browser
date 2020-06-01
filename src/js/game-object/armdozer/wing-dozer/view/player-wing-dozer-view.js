@@ -68,9 +68,11 @@ export class PlayerWingDozerView implements WingDozerView{
     this._group.scale.z = 1;
     
     const activeMesh = this._getActiveMesh(model.animation.type);
+    activeMesh.animate(model.animation.frame);
+    activeMesh.visible(true);
+
     const disActiveMesh = this._getAllMeshes()
       .filter(v => v !== activeMesh);
-    activeMesh.visible(true);
     disActiveMesh.forEach(v => v.visible(false));
   }
 
