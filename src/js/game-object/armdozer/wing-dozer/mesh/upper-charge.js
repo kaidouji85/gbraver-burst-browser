@@ -8,7 +8,7 @@ import {MESH_Y} from "./position";
 
 export const MESH_WIDTH = 600;
 export const MESH_HEIGHT = 600;
-export const MAX_ANIMATION = 4;
+export const MAX_ANIMATION = 8;
 
 /**
  * ウィングドーザ アッパー チャージ
