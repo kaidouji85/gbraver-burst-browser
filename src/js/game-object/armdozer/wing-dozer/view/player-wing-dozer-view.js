@@ -9,7 +9,6 @@ import {Group} from "three";
 import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
 import {wingDozerUpperCharge} from "../mesh/upper-charge";
 import {wingDozerUpperAttack} from "../mesh/upper-attack";
-import {wingDozerUpperToStand} from "../mesh/upper-to-stand";
 
 /**
  * プレイヤー側 ウィングドーザ ビュー
@@ -18,7 +17,6 @@ export class PlayerWingDozerView implements WingDozerView{
   _stand: ArmdozerAnimation;
   _upperCharge: ArmdozerAnimation;
   _upperAttack: ArmdozerAnimation;
-  _upperToStand: ArmdozerAnimation;
   _group: THREE.Group;
 
   /**
@@ -30,7 +28,6 @@ export class PlayerWingDozerView implements WingDozerView{
     this._stand = wingDozerStand(resources);
     this._upperCharge = wingDozerUpperCharge(resources);
     this._upperAttack = wingDozerUpperAttack(resources);
-    this._upperToStand = wingDozerUpperToStand(resources);
 
     this._group = new Group();
     this._getAllMeshes().forEach(mesh => {
@@ -89,7 +86,6 @@ export class PlayerWingDozerView implements WingDozerView{
       this._stand,
       this._upperCharge,
       this._upperAttack,
-      this._upperToStand,
     ];
   }
 
@@ -107,8 +103,6 @@ export class PlayerWingDozerView implements WingDozerView{
         return this._upperCharge;
       case 'UPPER_ATTACK':
         return this._upperAttack;
-      case 'UPPER_TO_STAND':
-        return this._upperToStand;
       default:
         return this._stand;
     }
