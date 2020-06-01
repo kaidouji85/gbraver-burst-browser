@@ -15,5 +15,5 @@ export function upper(model: WingDozerModel): Animate {
   return process(() => {
     model.animation.type = 'UPPER_ATTACK';
     model.animation.frame = 0;
-  }).chain(tween(model.animation, t => t.to({frame: 1}, 200)));
+  }).chain(tween(model.animation, t => t.to({frame: 1}, 300)));
 }
