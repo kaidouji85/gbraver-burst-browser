@@ -63,19 +63,19 @@ type AttackResult = NormalHit | CriticalHit;
  * @return アニメーション
  */
 function attack(param: WingDozerBattle<AttackResult>): Animate {
-  return all(
-    param.attackerSprite.charge()
-      .chain(delay(500))
-      .chain(param.attackerSprite.upper())
-      .chain(delay(1000))
-      .chain(param.attackerSprite.upperToStand()),
+  return param.attackerSprite.charge()
+    .chain(delay(700))
+    .chain(all(
+      param.attackerSprite.upper()
+        .chain(delay(1500))
+        .chain(param.attackerSprite.upperToStand()),
 
-    delay(900)
-      .chain(all(
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.knockBack(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
-  );
+      delay(100)
+        .chain(all(
+          param.defenderTD.damageIndicator.popUp(param.result.damage),
+          param.defenderSprite.knockBack(),
+          param.defenderTD.hitMark.shockWave.popUp(),
+          param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+        ))
+    ));
 }
