@@ -64,7 +64,7 @@ type AttackResult = NormalHit | CriticalHit;
  */
 function attack(param: WingDozerBattle<AttackResult>): Animate {
   return param.attackerSprite.charge()
-    .chain(delay(700))
+    .chain(delay(200))
     .chain(all(
       param.attackerSprite.upper()
         .chain(delay(1500))

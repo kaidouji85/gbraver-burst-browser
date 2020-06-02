@@ -15,5 +15,5 @@ export function charge(model: WingDozerModel): Animate {
   return process(() => {
     model.animation.type = 'UPPER_CHARGE';
     model.animation.frame = 0;
-  }).chain(tween(model.animation, t => t.to({frame: 1}, 200)));
+  }).chain(tween(model.animation, t => t.to({frame: 1}, 150)));
 }
