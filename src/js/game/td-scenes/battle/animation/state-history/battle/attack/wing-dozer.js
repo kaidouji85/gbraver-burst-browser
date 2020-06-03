@@ -7,6 +7,7 @@ import {Animate} from "../../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../../animation/delay";
 import type {CriticalHit, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
+import type {Guard} from "gbraver-burst-core/lib/effect/battle/result/guard";
 /**
  * ウィングドーザ 戦闘アニメーション パラメータ
  *
@@ -48,6 +49,12 @@ export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
     return attack(castParam);
   }
 
+  if (param.result.name === 'Guard') {
+    const castResult = (param.result: Guard);
+    const castParam = ((param: any): WingDozerBattle<typeof castResult>);
+    return guard(castParam);
+  }
+
   return empty();
 }
 
@@ -57,7 +64,7 @@ export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
 type AttackResult = NormalHit | CriticalHit;
 
 /**
- * ウィングドーザ 攻撃
+ * ウィングドーザ 攻撃ヒット
  *
  * @param param パラメータ
  * @return アニメーション
@@ -74,6 +81,30 @@ function attack(param: WingDozerBattle<AttackResult>): Animate {
         .chain(all(
           param.defenderTD.damageIndicator.popUp(param.result.damage),
           param.defenderSprite.knockBack(),
+          param.defenderTD.hitMark.shockWave.popUp(),
+          param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+        ))
+    ));
+}
+
+/**
+ * ウィングドーザ 攻撃ガード
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function guard(param: WingDozerBattle<Guard>): Animate {
+  return param.attackerSprite.charge()
+    .chain(delay(800))
+    .chain(all(
+      param.attackerSprite.upper()
+        .chain(delay(2000))
+        .chain(param.attackerSprite.upperToStand()),
+
+      delay(100)
+        .chain(all(
+          param.defenderTD.damageIndicator.popUp(param.result.damage),
+          param.defenderSprite.guard(),
           param.defenderTD.hitMark.shockWave.popUp(),
           param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
         ))
