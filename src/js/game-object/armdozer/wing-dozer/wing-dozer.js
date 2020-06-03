@@ -15,6 +15,8 @@ import type {Update} from "../../../action/game-loop/update";
 import {charge} from "./animation/charge";
 import {upper} from "./animation/upper";
 import {upperToStand} from "./animation/upper-to-stand";
+import {avoid} from "./animation/avoid";
+import {avoidToStand} from "./animation/avoid-to-stand";
 
 /**
  * ウィングドーザ
@@ -126,7 +128,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   avoid(): Animate {
-    return empty();
+    return avoid(this._model);
   }
 
   /**
@@ -135,7 +137,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   avoidToStand(): Animate {
-    return empty();
+    return avoidToStand(this._model);
   }
 
   /**
