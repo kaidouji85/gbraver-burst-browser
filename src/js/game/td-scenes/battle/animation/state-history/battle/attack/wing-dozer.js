@@ -188,9 +188,7 @@ function down(param: WingDozerBattle<DownResult>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(
-      param.attackerSprite.upper()
-        .chain(delay(2000))
-        .chain(param.attackerSprite.upperToStand()),
+      param.attackerSprite.upper(),
 
       delay(100)
         .chain(all(
