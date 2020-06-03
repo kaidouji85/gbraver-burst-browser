@@ -36,16 +36,34 @@ export function toWingDozerBattleAnimationParam(origin: BattleAnimationParam): ?
  * @return アニメーション
  */
 export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
+  if (param.result.name === 'NormalHit' && param.isDeath) {
+    const castResult = (param.result: NormalHit);
+    const castParam = ((param: any): WingDozerBattle<DownResult | typeof castResult>);
+    return down(castParam);
+  }
+
   if (param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
     const castParam = ((param: any): WingDozerBattle<AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
+  if (param.result.name === 'CriticalHit' && param.isDeath) {
+    const castResult = (param.result: CriticalHit);
+    const castParam = ((param: any): WingDozerBattle<DownResult | typeof castResult>);
+    return down(castParam);
+  }
+
   if (param.result.name === 'CriticalHit') {
     const castResult = (param.result: CriticalHit);
     const castParam = ((param: any): WingDozerBattle<AttackResult | typeof castResult>);
     return attack(castParam);
+  }
+
+  if (param.result.name === 'Guard' && param.isDeath) {
+    const castResult = (param.result: Guard);
+    const castParam = ((param: any): WingDozerBattle<DownResult | typeof castResult>);
+    return down(castParam);
   }
 
   if (param.result.name === 'Guard') {
@@ -155,4 +173,33 @@ function feint(param: WingDozerBattle<Feint>): Animate {
   return param.defenderSprite.avoid()
     .chain(delay(500))
     .chain(param.defenderSprite.avoidToStand());
+}
+
+/** downが受け取れる戦闘結果 */
+type DownResult = NormalHit | CriticalHit | Guard;
+
+/**
+ * とどめ
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function down(param: WingDozerBattle<DownResult>): Animate {
+  return param.attackerSprite.charge()
+    .chain(delay(800))
+    .chain(all(
+      param.attackerSprite.upper()
+        .chain(delay(2000))
+        .chain(param.attackerSprite.upperToStand()),
+
+      delay(100)
+        .chain(all(
+          param.defenderTD.damageIndicator.popUp(param.result.damage),
+          param.defenderSprite.down(),
+          param.defenderTD.hitMark.shockWave.popUp(),
+          param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+        ))
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.upperToStand());
 }
