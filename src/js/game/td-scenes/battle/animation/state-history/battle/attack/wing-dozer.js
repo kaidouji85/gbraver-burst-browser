@@ -2,13 +2,11 @@
 
 import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 import {WingDozer} from "../../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
-import type {BattleResult} from "gbraver-burst-core/lib/effect/battle/result/battle-result";
 import {Animate} from "../../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../../animation/delay";
-import type {CriticalHit, NormalHit} from "gbraver-burst-core";
+import type {BattleResult, CriticalHit, NormalHit, Guard, Miss, Feint} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
-import type {Guard} from "gbraver-burst-core/lib/effect/battle/result/guard";
-import type {Miss} from "gbraver-burst-core/lib/effect/battle/result/miss";
+
 /**
  * ウィングドーザ 戦闘アニメーション パラメータ
  *
@@ -60,6 +58,12 @@ export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
     const castResult = (param.result: Miss);
     const castParam = ((param: any): WingDozerBattle<typeof castResult>);
     return miss(castParam);
+  }
+
+  if (param.result.name === 'Feint') {
+    const castResult = (param.result: Feint);
+    const castParam = ((param: any): WingDozerBattle<typeof castResult>);
+    return feint(castParam);
   }
 
   return empty();
@@ -135,4 +139,20 @@ function miss(param: WingDozerBattle<Miss>): Animate {
       delay(100)
         .chain(param.defenderSprite.avoid())
     ));
+}
+
+/**
+ * フェイント
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function feint(param: WingDozerBattle<Feint>): Animate {
+  if (!param.result.isDefenderMoved) {
+    return empty();
+  }
+
+  return param.defenderSprite.avoid()
+    .chain(delay(500))
+    .chain(param.defenderSprite.avoidToStand());
 }
