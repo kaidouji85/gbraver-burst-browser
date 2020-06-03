@@ -154,8 +154,6 @@ function miss(param: ShinBraverBattleAnimationParam<Miss>): Animate {
 
     delay(1000)
       .chain(param.defenderSprite.avoid())
-      .chain(delay(1000))
-      .chain(param.defenderSprite.avoidToStand())
   );
 }
 
