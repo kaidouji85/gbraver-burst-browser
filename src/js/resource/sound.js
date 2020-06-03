@@ -28,6 +28,7 @@ export type SoundResource = {
 export const SOUND_IDS = {
   PUSH_BUTTON: 'PUSH_BUTTON',
   BATTERY_CHANGE: 'BATTERY_CHANGE',
+  SHOCK_WAVE_HIT: 'SHOCK_WAVE_HIT',
 };
 
 /**
@@ -41,6 +42,10 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.BATTERY_CHANGE,
     path: resourcePath => `${resourcePath.get()}/battery-selector/battery-change.mp3`
+  },
+  {
+    id: SOUND_IDS.SHOCK_WAVE_HIT,
+    path: resourcePath => `${resourcePath.get()}/hitmark/shock-wave/hit.mp3`
   }
 ];
 
