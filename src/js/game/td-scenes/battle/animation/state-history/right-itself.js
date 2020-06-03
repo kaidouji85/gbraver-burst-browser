@@ -44,6 +44,8 @@ function getMotion(sprite: ArmDozerSprite, battleResult: BattleResult): Animate 
       return sprite.knockBackToStand();
     case 'Guard':
       return sprite.guardToStand();
+    case 'Miss':
+      return sprite.avoidToStand();
     default:
       return empty();
   }

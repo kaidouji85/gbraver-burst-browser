@@ -157,8 +157,6 @@ function miss(param: LightningDozerBattleAnimationParam<Miss>): Animate {
 
     delay(800)
       .chain(param.defenderSprite.avoid())
-      .chain(delay(2000))
-      .chain(param.defenderSprite.avoidToStand()),
   );
 }
 
