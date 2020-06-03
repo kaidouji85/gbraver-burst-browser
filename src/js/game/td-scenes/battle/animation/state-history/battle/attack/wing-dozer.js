@@ -134,7 +134,5 @@ function miss(param: WingDozerBattle<Miss>): Animate {
 
       delay(100)
         .chain(param.defenderSprite.avoid())
-        .chain(delay(1500))
-        .chain(param.defenderSprite.avoidToStand())
     ));
 }
