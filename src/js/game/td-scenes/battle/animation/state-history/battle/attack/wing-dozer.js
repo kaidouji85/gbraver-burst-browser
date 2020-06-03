@@ -8,6 +8,7 @@ import {delay, empty} from "../../../../../../../animation/delay";
 import type {CriticalHit, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
 import type {Guard} from "gbraver-burst-core/lib/effect/battle/result/guard";
+import type {Miss} from "gbraver-burst-core/lib/effect/battle/result/miss";
 /**
  * ウィングドーザ 戦闘アニメーション パラメータ
  *
@@ -53,6 +54,12 @@ export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
     const castResult = (param.result: Guard);
     const castParam = ((param: any): WingDozerBattle<typeof castResult>);
     return guard(castParam);
+  }
+
+  if (param.result.name === 'Miss') {
+    const castResult = (param.result: Miss);
+    const castParam = ((param: any): WingDozerBattle<typeof castResult>);
+    return miss(castParam);
   }
 
   return empty();
@@ -108,5 +115,26 @@ function guard(param: WingDozerBattle<Guard>): Animate {
           param.defenderTD.hitMark.shockWave.popUp(),
           param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
         ))
+    ));
+}
+
+/**
+ * ウィングドーザ 攻撃ミス
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function miss(param: WingDozerBattle<Miss>): Animate {
+  return param.attackerSprite.charge()
+    .chain(delay(800))
+    .chain(all(
+      param.attackerSprite.upper()
+        .chain(delay(2000))
+        .chain(param.attackerSprite.upperToStand()),
+
+      delay(100)
+        .chain(param.defenderSprite.avoid())
+        .chain(delay(1500))
+        .chain(param.defenderSprite.avoidToStand())
     ));
 }
