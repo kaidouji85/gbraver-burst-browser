@@ -1,5 +1,6 @@
 // @flow
 
+import {Howl} from 'howler';
 import * as THREE from 'three';
 import type {ShockWaveView} from "./view/shock-wave-view";
 import type {ShockWaveModel} from "./model/shock-wave-model";
@@ -9,6 +10,9 @@ import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {popUp} from "./animation/pop-up";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
+import {process} from '../../../animation/process';
 
 /**
  * 衝撃波
@@ -16,11 +20,26 @@ import {popUp} from "./animation/pop-up";
 export class ShockWave {
   _model: ShockWaveModel;
   _view: ShockWaveView;
+  _hitSound: Howl;
   _subscription: Subscription;
 
-  constructor(view: ShockWaveView, initialModel: ShockWaveModel, listener: Observable<GameObjectAction>) {
+  /**
+   * リソース管理オブジェクト
+   *
+   * @param view ビュー
+   * @param initialModel モデルの初期値
+   * @param resources リソース管理オブジェクト
+   * @param listener イベントリスナ
+   */
+  constructor(view: ShockWaveView, initialModel: ShockWaveModel, resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = initialModel;
     this._view = view;
+
+    const hitResource = resources.sounds.find(v => v.id === SOUND_IDS.SHOCK_WAVE_HIT);
+    this._hitSound = hitResource
+      ? hitResource.sound
+      : new Howl();
+
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);
@@ -44,7 +63,10 @@ export class ShockWave {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this._model);
+    return process(() => {
+      this._hitSound.play();
+    })
+      .chain(popUp(this._model));
   }
 
   /**
