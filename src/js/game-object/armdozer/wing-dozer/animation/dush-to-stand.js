@@ -13,15 +13,10 @@ import {process} from '../../../../animation/process';
  */
 export function dashToStand(model: WingDozerModel): Animate {
   return process(() => {
-    model.animation.type = 'DASH_DOWN';
-    model.animation.frame = 1;
+    model.animation.type = 'DASH_TO_STAND';
+    model.animation.frame = 0;
   })
-    .chain(tween(model.animation, t => t.to({frame: 0}, 300)))
-    .chain(process(() => {
-      model.animation.type = 'DASH_UP';
-      model.animation.frame = 1;
-    }))
-    .chain(tween(model.animation, t => t.to({frame: 0}, 300)))
+    .chain(tween(model.animation, t => t.to({frame: 1}, 600)))
     .chain(process(() => {
       model.animation.type = 'STAND';
       model.animation.frame = 0;

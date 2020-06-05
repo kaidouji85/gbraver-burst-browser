@@ -41,3 +41,17 @@ export const attack = () => {
   stub.start();
   return stub.domElement();
 }
+
+export const turnStart = () => {
+  const stub = new TDGameObjectStub((resources, listener) => {
+    const sprite = PlayerWingDozer(resources, listener);
+    const animation = sprite.turnStart()
+      .chain(delay(2000))
+      .chain(sprite.turnStartToStand())
+      .chain(delay(2000));
+    animation.loop();
+    return [sprite.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+}
