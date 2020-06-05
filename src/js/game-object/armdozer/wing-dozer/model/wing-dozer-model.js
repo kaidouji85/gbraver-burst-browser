@@ -8,7 +8,8 @@ export type AnimationType =
   'UPPER_CHARGE' |
   'UPPER_ATTACK' |
   'UPPER_TO_STAND' |
-  'DASH';
+  'DASH_UP' |
+  'DASH_DOWN';
 
 /**
  * ウィングドーザ モデル

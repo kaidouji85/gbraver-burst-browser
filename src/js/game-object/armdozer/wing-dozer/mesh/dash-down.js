@@ -11,14 +11,14 @@ export const MESH_HEIGHT = 600;
 export const MAX_ANIMATION = 4;
 
 /**
- * ウィングドーザ ダッシュ
+ * ウィングドーザ ダッシュ ダウン
  *
  * @param resources リソース管理オブジェクト
  * @return メッシュ
  */
-export function wingDozerDash(resources: Resources): ArmdozerAnimation {
+export function wingDozerDashDown(resources: Resources): ArmdozerAnimation {
   const ret = new HorizontalArmdozerAnimation({
-    id: TEXTURE_IDS.WING_DOZER_DASH,
+    id: TEXTURE_IDS.WING_DOZER_DASH_DOWN,
     maxAnimation: MAX_ANIMATION,
     resources: resources,
     width: MESH_WIDTH,

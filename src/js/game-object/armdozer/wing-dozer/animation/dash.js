@@ -4,6 +4,7 @@ import {Animate} from "../../../../animation/animate";
 import type {WingDozerModel} from "../model/wing-dozer-model";
 import {tween} from "../../../../animation/tween";
 import {process} from '../../../../animation/process';
+import {delay} from "../../../../animation/delay";
 
 /**
  * ダッシュ
@@ -13,8 +14,14 @@ import {process} from '../../../../animation/process';
  */
 export function dash(model: WingDozerModel): Animate {
   return process(() => {
-    model.animation.type = 'DASH';
+    model.animation.type = 'DASH_UP';
     model.animation.frame = 0;
   })
-    .chain(tween(model.animation, t => t.to({frame: 1}, 300)));
+    .chain(tween(model.animation, t => t.to({frame: 1}, 300)))
+    .chain(delay(300))
+    .chain(process(() => {
+      model.animation.type = 'DASH_DOWN';
+      model.animation.frame = 0;
+    }))
+    .chain(tween(model.animation, t => t.to({frame: 1}, 200)));
 }
