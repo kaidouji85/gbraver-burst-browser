@@ -4,9 +4,7 @@ import type {ArmDozerSprite} from "../armdozer-sprite";
 import * as THREE from "three";
 import {Animate} from "../../../animation/animate";
 import {empty} from "../../../animation/delay";
-import type {Resources} from "../../../resource";
 import type {WingDozerView} from "./view/wing-dozer-view";
-import {PlayerWingDozerView} from "./view/player-wing-dozer-view";
 import type {WingDozerModel} from "./model/wing-dozer-model";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
@@ -19,6 +17,8 @@ import {avoid} from "./animation/avoid";
 import {avoidToStand} from "./animation/avoid-to-stand";
 import {dash} from "./animation/dash";
 import {dashToStand} from "./animation/dush-to-stand";
+import {knockBack} from "./animation/knock-back";
+import {knockBackToStand} from "./animation/knock-back-to-stand";
 
 /**
  * ウィングドーザ
@@ -94,7 +94,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   knockBack(): Animate {
-    return empty();
+    return knockBack(this._model);
   }
 
   /**
@@ -103,7 +103,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   knockBackToStand(): Animate {
-    return empty();
+    return knockBackToStand(this._model);
   }
 
   /**
@@ -112,7 +112,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   guard(): Animate {
-    return empty();
+    return knockBack(this._model);
   }
 
   /** 
@@ -121,7 +121,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   guardToStand(): Animate {
-    return empty();
+    return knockBackToStand(this._model);
   }
 
   /**
