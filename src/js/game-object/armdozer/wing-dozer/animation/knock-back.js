@@ -16,6 +16,6 @@ export function knockBack(model: WingDozerModel): Animate {
     model.animation.frame = 1;
     model.animation.type = 'KNOCK_BACK';
   })
-    .chain(tween(model.animation, t => t.to({x: '+20'}, 100)))
-    .chain(tween(model.animation, t => t.to({x: '-20'}, 100)));
+    .chain(tween(model.position, t => t.to({x: '+20'}, 100)))
+    .chain(tween(model.position, t => t.to({x: '-20'}, 100)));
 }
