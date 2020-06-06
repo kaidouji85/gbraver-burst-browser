@@ -18,10 +18,10 @@ export function dash(model: WingDozerModel): Animate {
     model.animation.frame = 0;
   })
     .chain(tween(model.animation, t => t.to({frame: 1}, 300)))
-    .chain(delay(300))
+    .chain(delay(100))
     .chain(process(() => {
       model.animation.type = 'DASH_DOWN';
       model.animation.frame = 0;
     }))
-    .chain(tween(model.animation, t => t.to({frame: 1}, 200)));
+    .chain(tween(model.animation, t => t.to({frame: 1}, 300)));
 }

@@ -16,7 +16,7 @@ export function upperToStand(model: WingDozerModel): Animate {
     model.animation.type = 'UPPER_TO_STAND';
     model.animation.frame = 0;
   })
-    .chain(tween(model.animation, t => t.to({frame: 1}, 600)))
+    .chain(tween(model.animation, t => t.to({frame: 1}, 400)))
     .chain(process(() => {
       model.animation.type = 'STAND';
       model.animation.frame = 0;
