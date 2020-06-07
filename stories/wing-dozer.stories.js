@@ -55,3 +55,15 @@ export const turnStart = () => {
   stub.start();
   return stub.domElement();
 }
+
+export const down = () => {
+  const stub = new TDGameObjectStub((resources, listener) => {
+    const sprite = PlayerWingDozer(resources, listener);
+    const animation = sprite.down()
+      .chain(delay(2000));
+    animation.loop();
+    return [sprite.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+}

@@ -19,6 +19,7 @@ import {dash} from "./animation/dash";
 import {dashToStand} from "./animation/dush-to-stand";
 import {knockBack} from "./animation/knock-back";
 import {knockBackToStand} from "./animation/knock-back-to-stand";
+import {down} from "./animation/down";
 
 /**
  * ウィングドーザ
@@ -148,7 +149,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   down(): Animate {
-    return empty();
+    return down(this._model);
   }
 
   /**
