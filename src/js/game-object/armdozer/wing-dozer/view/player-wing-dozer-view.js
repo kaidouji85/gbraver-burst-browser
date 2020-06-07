@@ -14,6 +14,7 @@ import {wingDozerDashUp} from "../mesh/dash-up";
 import {wingDozerDashDown} from "../mesh/dash-down";
 import {wingDozerDashToStand} from "../mesh/dash-to-stand";
 import {wingDozerKnockBack} from "../mesh/knock-back";
+import {wingDozerDown} from "../mesh/down";
 
 /**
  * プレイヤー側 ウィングドーザ ビュー
@@ -27,6 +28,7 @@ export class PlayerWingDozerView implements WingDozerView{
   _dashDown: ArmdozerAnimation;
   _dashToStand: ArmdozerAnimation;
   _knockBack: ArmdozerAnimation;
+  _down: ArmdozerAnimation;
   _group: THREE.Group;
 
   /**
@@ -43,6 +45,7 @@ export class PlayerWingDozerView implements WingDozerView{
     this._dashDown = wingDozerDashDown(resources);
     this._dashToStand = wingDozerDashToStand(resources);
     this._knockBack = wingDozerKnockBack(resources);
+    this._down = wingDozerDown(resources);
 
     this._group = new Group();
     this._getAllMeshes().forEach(mesh => {
@@ -106,6 +109,7 @@ export class PlayerWingDozerView implements WingDozerView{
       this._dashDown,
       this._dashToStand,
       this._knockBack,
+      this._down,
     ];
   }
 
@@ -133,6 +137,8 @@ export class PlayerWingDozerView implements WingDozerView{
         return this._dashToStand;
       case 'KNOCK_BACK':
         return this._knockBack;
+      case 'DOWN':
+        return this._down;
       default:
         return this._stand;
     }
