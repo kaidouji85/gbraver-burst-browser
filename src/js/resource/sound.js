@@ -27,8 +27,9 @@ export type SoundResource = {
  */
 export const SOUND_IDS = {
   PUSH_BUTTON: 'PUSH_BUTTON',
-  BATTERY_CHANGE: 'BATTERY_CHANGE',
-  SHOCK_WAVE_HIT: 'SHOCK_WAVE_HIT',
+  CHANGE_VALUE: 'CHANGE_VALUE',
+  MECHA_IMPACT: 'MECHA_IMPACT',
+  MOTOR: 'MOTOR',
 };
 
 /**
@@ -40,13 +41,17 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     path: resourcePath => `${resourcePath.get()}/sounds/push-button.mp3`
   },
   {
-    id: SOUND_IDS.BATTERY_CHANGE,
-    path: resourcePath => `${resourcePath.get()}/sounds/battery-change.mp3`
+    id: SOUND_IDS.CHANGE_VALUE,
+    path: resourcePath => `${resourcePath.get()}/sounds/change-value.mp3`
   },
   {
-    id: SOUND_IDS.SHOCK_WAVE_HIT,
+    id: SOUND_IDS.MECHA_IMPACT,
     path: resourcePath => `${resourcePath.get()}/sounds/mecha-impact.mp3`
-  }
+  },
+  {
+    id: SOUND_IDS.MOTOR,
+    path: resourcePath => `${resourcePath.get()}/sounds/motor.mp3`
+  },
 ];
 
 /**

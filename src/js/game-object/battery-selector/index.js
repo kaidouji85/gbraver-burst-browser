@@ -50,7 +50,7 @@ export class BatterySelector {
       ? pushButtonResource.sound
       : new Howl();
 
-    const batteryChangeResource = param.resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_CHANGE);
+    const batteryChangeResource = param.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE);
     this._batteryChangeSound = batteryChangeResource
       ? batteryChangeResource.sound
       : new Howl();

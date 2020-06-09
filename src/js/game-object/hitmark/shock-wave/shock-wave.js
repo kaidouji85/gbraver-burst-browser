@@ -35,7 +35,7 @@ export class ShockWave {
     this._model = initialModel;
     this._view = view;
 
-    const hitResource = resources.sounds.find(v => v.id === SOUND_IDS.SHOCK_WAVE_HIT);
+    const hitResource = resources.sounds.find(v => v.id === SOUND_IDS.MECHA_IMPACT);
     this._hitSound = hitResource
       ? hitResource.sound
       : new Howl();
