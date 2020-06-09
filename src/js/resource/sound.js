@@ -37,15 +37,15 @@ export const SOUND_IDS = {
 export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.PUSH_BUTTON,
-    path: resourcePath => `${resourcePath.get()}/button/push-button.mp3`
+    path: resourcePath => `${resourcePath.get()}/sounds/push-button.mp3`
   },
   {
     id: SOUND_IDS.BATTERY_CHANGE,
-    path: resourcePath => `${resourcePath.get()}/battery-selector/battery-change.mp3`
+    path: resourcePath => `${resourcePath.get()}/sounds/battery-change.mp3`
   },
   {
     id: SOUND_IDS.SHOCK_WAVE_HIT,
-    path: resourcePath => `${resourcePath.get()}/hitmark/shock-wave/hit.mp3`
+    path: resourcePath => `${resourcePath.get()}/sounds/mecha-impact.mp3`
   }
 ];
 
