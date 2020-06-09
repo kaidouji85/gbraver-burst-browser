@@ -1,6 +1,5 @@
 // @flow
 
-import {Howl} from 'howler';
 import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {ShinBraverView} from "./view/shin-braver-view";
@@ -45,7 +44,9 @@ export class ShinBraver implements ArmDozerSprite {
   /**
    * コンストラクタ
    *
-   * @param params パラメータ
+   * @param view ビュー
+   * @param resources リソース管理オブジェクト
+   * @param listener イベントリスナ
    */
   constructor(view: ShinBraverView, resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();

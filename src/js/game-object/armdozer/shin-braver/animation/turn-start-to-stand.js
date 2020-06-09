@@ -4,6 +4,7 @@ import {Animate} from "../../../../animation/animate";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
+import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
 
 /** ターンスタート -> 立ち */
 export function turnStartToStand(model: ShinBraverModel): Animate {

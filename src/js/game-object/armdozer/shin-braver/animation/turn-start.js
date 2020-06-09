@@ -5,8 +5,14 @@ import type {ShinBraverModel} from "../model/shin-braver-model";
 import {tween} from "../../../../animation/tween";
 import {process} from '../../../../animation/process';
 import {delay} from "../../../../animation/delay";
+import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
 
-/** ターンスタート */
+/**
+ * ターンスタート
+ *
+ * @param model モデル
+ * @return アニメーション
+ */
 export function turnStart(model: ShinBraverModel): Animate {
   return process(() => {
     model.animation.type = 'GUTS_UP';

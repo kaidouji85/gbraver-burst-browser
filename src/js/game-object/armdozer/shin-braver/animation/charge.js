@@ -11,6 +11,7 @@ import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
  *
  * @param model モデル
  * @param sounds　音
+ * @return アニメーション
  */
 export function charge(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {
   return process(() => {
