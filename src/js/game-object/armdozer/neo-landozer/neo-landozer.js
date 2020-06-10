@@ -80,17 +80,17 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** アームハンマー -> 立ち */
   hmToStand(): Animate {
-    return hmToStand(this._model);
+    return hmToStand(this._model, this._sounds);
   }
 
   /** ターンスタート */
   turnStart(): Animate {
-    return turnStart(this._model);
+    return turnStart(this._model, this._sounds);
   }
 
   /** ターンスタート -> 立ち */
   turnStartToStand(): Animate {
-    return turnStartToStand(this._model);
+    return turnStartToStand(this._model, this._sounds);
   }
   
   /** ノックバック */
@@ -100,7 +100,7 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** ノックバック -> 立ち*/
   knockBackToStand(): Animate {
-    return knockBackToStand(this._model);
+    return knockBackToStand(this._model, this._sounds);
   }
 
   /** ガード */
@@ -110,7 +110,7 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** ガード -> 立ちポーズ */
   guardToStand(): Animate {
-    return guardToStand(this._model);
+    return guardToStand(this._model, this._sounds);
   }
 
   /** 避け */
