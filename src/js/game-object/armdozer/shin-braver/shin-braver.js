@@ -88,17 +88,17 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** パンチ -> 立ち */
   punchToStand(): Animate {
-    return punchToStand(this._model);
+    return punchToStand(this._model, this._sounds);
   }
 
   /** ターンスタート */
   turnStart(): Animate {
-    return turnStart(this._model);
+    return turnStart(this._model, this._sounds);
   }
 
   /** ターンスタート -> 立ち */
   turnStartToStand(): Animate {
-    return turnStartToStand(this._model);
+    return turnStartToStand(this._model, this._sounds);
   }
 
   /** ダメージアニメーションを再生する */
