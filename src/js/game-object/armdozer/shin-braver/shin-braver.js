@@ -108,7 +108,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** ノックバック -> 立ち */
   knockBackToStand(): Animate {
-    return knockBackToStand(this._model);
+    return knockBackToStand(this._model, this._sounds);
   }
 
   /** ガード */
@@ -118,7 +118,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** ガード -> 立ちポーズ */
   guardToStand(): Animate {
-    return guardToStand(this._model);
+    return guardToStand(this._model, this._sounds);
   }
 
   /** 避け */
@@ -128,7 +128,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** 避け -> 立ち */
   avoidToStand(): Animate {
-    return avoidToStand(this._model);
+    return avoidToStand(this._model, this._sounds);
   }
 
   /** ダウン */
@@ -142,7 +142,7 @@ export class ShinBraver implements ArmDozerSprite {
    * @return アニメーション
    */
   burst(): Animate {
-    return burst(this._model);
+    return burst(this._model, this._sounds);
   }
 
   /**
@@ -151,7 +151,7 @@ export class ShinBraver implements ArmDozerSprite {
    * @return アニメーション
    */
   burstToStand(): Animate {
-    return burstToStand(this._model);
+    return burstToStand(this._model, this._sounds);
   }
 
   /** シーンに追加するオブジェクトを返す */
