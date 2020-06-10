@@ -20,8 +20,8 @@ export function turnStart(model: NeoLandozerModel, sounds: NeoLandozerSounds): A
     model.animation.frame = 0;
     sounds.motor.play();
   })
-    .chain(tween(model.animation, t => t.to({frame: 1}, 350)))
-    .chain(delay(150))
+    .chain(tween(model.animation, t => t.to({frame: 1}, 200)))
+    .chain(delay(300))
     .chain(process(() => {
       model.animation.type = 'GUTS_DOWN';
       model.animation.frame = 0;

@@ -11,7 +11,8 @@ export type SoundId = string;
  */
 export type SoundConfig = {
   id: SoundId,
-  path: (resourcePath: ResourcePath) => string
+  path: (resourcePath: ResourcePath) => string,
+  volume: number
 };
 
 /**
@@ -38,19 +39,23 @@ export const SOUND_IDS = {
 export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.PUSH_BUTTON,
-    path: resourcePath => `${resourcePath.get()}/sounds/push-button.mp3`
+    path: resourcePath => `${resourcePath.get()}/sounds/push-button.mp3`,
+    volume: 1
   },
   {
     id: SOUND_IDS.CHANGE_VALUE,
-    path: resourcePath => `${resourcePath.get()}/sounds/change-value.mp3`
+    path: resourcePath => `${resourcePath.get()}/sounds/change-value.mp3`,
+    volume: 1
   },
   {
     id: SOUND_IDS.MECHA_IMPACT,
-    path: resourcePath => `${resourcePath.get()}/sounds/mecha-impact.mp3`
+    path: resourcePath => `${resourcePath.get()}/sounds/mecha-impact.mp3`,
+    volume: 1
   },
   {
     id: SOUND_IDS.MOTOR,
-    path: resourcePath => `${resourcePath.get()}/sounds/motor.mp3`
+    path: resourcePath => `${resourcePath.get()}/sounds/motor.mp3`,
+    volume: 0.5
   },
 ];
 
@@ -63,11 +68,12 @@ export const SOUND_CONFIGS: SoundConfig[] = [
 export function loadSound(resourcePath: ResourcePath, config: SoundConfig): Promise<SoundResource> {
   return new Promise((resolve, reject) => {
     const sound = new Howl({
-      src: [config.path(resourcePath)]
+      src: [config.path(resourcePath)],
+      volume: config.volume,
     });
     const resource: SoundResource = {
       id: config.id,
-      sound: sound
+      sound: sound,
     };
 
     if (sound.state() === 'loaded') {

@@ -25,7 +25,7 @@ export function burstToStand(model: ShinBraverModel, sounds: ShinBraverSounds): 
       model.animation.type = 'BURST_UP';
       model.animation.frame = 1;
     }))
-    .chain(delay(200))
+    .chain(delay(500))
     .chain(process(() => {
       sounds.motor.play();
     }))

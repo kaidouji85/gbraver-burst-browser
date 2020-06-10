@@ -14,16 +14,16 @@ export function turnStartToStand(model: ShinBraverModel, sounds: ShinBraverSound
     model.animation.frame = 1;
     sounds.motor.play();
   })
-    .chain(tween(model.animation, t => t.to({frame: 0}, 350)))
+    .chain(tween(model.animation, t => t.to({frame: 0}, 300)))
     .chain(process(() => {
       model.animation.type = 'GUTS_UP';
       model.animation.frame = 1;
     }))
-    .chain(delay(100))
+    .chain(delay(300))
     .chain(process(() => {
       sounds.motor.play();
     }))
-    .chain(tween(model.animation, t => t.to({frame: 0}, 350)))
+    .chain(tween(model.animation, t => t.to({frame: 0}, 300)))
     .chain(process(() => {
       model.animation.type = 'STAND';
       model.animation.frame = 0;

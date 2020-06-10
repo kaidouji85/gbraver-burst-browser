@@ -7,11 +7,10 @@ import type {ShinBraverModel} from "../model/shin-braver-model";
 import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
 
 /** 避け -> 立ち */
-export function avoidToStand(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {
+export function avoidToStand(model: ShinBraverModel): Animate {
   return process(() => {
     model.animation.frame = 0;
     model.animation.type = 'STAND';
-    sounds.motor.play();
   }).chain(
     tween(model.position, t => t
       .to({x: '-100'}, 500)
