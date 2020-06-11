@@ -20,7 +20,7 @@ export function turnStartToStand(model: NeoLandozerModel, sounds: NeoLandozerSou
     model.animation.frame = 1;
     sounds.motor.play();
   })
-    .chain(tween(model.animation, t => t.to({frame: 0}, 300)))
+    .chain(tween(model.animation, t => t.to({frame: 0}, 200)))
     .chain(process(() => {
       model.animation.type = 'GUTS_UP';
       model.animation.frame = 1;
@@ -29,7 +29,7 @@ export function turnStartToStand(model: NeoLandozerModel, sounds: NeoLandozerSou
     .chain(process(() => {
       sounds.motor.play();
     }))
-    .chain(tween(model.animation, t => t.to({frame: 0}, 300)))
+    .chain(tween(model.animation, t => t.to({frame: 0}, 200)))
     .chain(process(() => {
       model.animation.type = 'STAND';
       model.animation.frame = 0;

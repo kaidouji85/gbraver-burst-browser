@@ -18,12 +18,12 @@ export function turnStart(model: ShinBraverModel, sounds: ShinBraverSounds): Ani
     model.animation.type = 'GUTS_UP';
     model.animation.frame = 0;
     sounds.motor.play();
-  }).chain(tween(model.animation, t => t.to({frame: 1}, 300)))
+  }).chain(tween(model.animation, t => t.to({frame: 1}, 200)))
     .chain(delay(300))
     .chain(process(() => {
       model.animation.type = 'GUTS_DOWN';
       model.animation.frame = 0;
       sounds.motor.play();
     }))
-    .chain(tween(model.animation, t => t.to({frame: 1}, 300)));
+    .chain(tween(model.animation, t => t.to({frame: 1}, 200)));
 }
