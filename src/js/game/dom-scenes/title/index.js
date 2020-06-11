@@ -2,12 +2,13 @@
 
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
-import {Observable} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {PushGameStart, PushHowToPlay} from "../../../action/game/title";
 import {TitleView} from "./view/title-view";
-import {filter, map} from "rxjs/operators";
-import type {ResourcePath} from "../../../resource/path/resource-path";
 import type {DOMScene} from "../dom-scene";
+import type {Resources} from "../../../resource";
+import {How} from 'howler';
+import {SOUND_IDS} from "../../../resource/sound";
 
 /** イベント通知 */
 export type Notifier = {
@@ -19,36 +20,42 @@ export type Notifier = {
 export class Title implements DOMScene {
   _state: TitleState;
   _view: TitleView;
-  _notifier: Notifier;
+  _pushButton: How;
+  _pushGameStart: Subject<PushGameStart>;
+  _pushHowToPlay: Subject<PushHowToPlay>;
+  _subscriptions: Subscription[];
 
-  constructor(resourcePath: ResourcePath) {
+  constructor(resources: Resources) {
     this._state = createInitialState();
     this._view = new TitleView({
       initialState: this._state,
-      resourcePath: resourcePath
+      resourcePath: resources.path
     });
 
-    this._notifier = {
-      pushGameStart: this._view.notifier().gameStart.pipe(
-        filter(() => this._state.canOperation),
-        map(() => ({
-          type: 'PushGameStart'
-        }))
-      ),
-      pushHowToPlay: this._view.notifier().howToPlay.pipe(
-        filter(() => this._state.canOperation),
-        map(() => ({
-          type: 'PushHowToPlay',
-        }))
-      )
-    };
+    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
+    this._pushButton = pushButtonResource
+      ? pushButtonResource.sound
+      : new How();
+
+    this._pushGameStart = new Subject();
+    this._pushHowToPlay = new Subject();
+    this._subscriptions = [
+      this._view.notifier().gameStart.subscribe(() => {
+        this._onPushGameStart();
+      }),
+      this._view.notifier().howToPlay.subscribe(() => {
+        this._onPushHowToPlay();
+      })
+    ];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    // NOP
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -62,7 +69,10 @@ export class Title implements DOMScene {
 
   /** イベント通知ストリーム */
   notifier(): Notifier {
-    return this._notifier;
+    return {
+      pushGameStart: this._pushGameStart,
+      pushHowToPlay: this._pushHowToPlay,
+    };
   }
 
   /**
@@ -72,5 +82,46 @@ export class Title implements DOMScene {
    */
   getRootHTMLElement(): HTMLElement {
     return this._view.getRootHTMLElement();
+  }
+
+  /**
+   * ゲームスタートが押された際の処理
+   */
+  async _onPushGameStart(): Promise<void> {
+    try {
+      if (!this._state.canOperation) {
+        return;
+      }
+
+      this._state.canOperation = false;
+      this._pushButton.play();
+      await this._view.pushGameStartButton();
+      this._pushGameStart.next({
+        type: 'PushGameStart'
+      });
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 遊び方が押された際の処理
+   */
+  async _onPushHowToPlay(): Promise<void> {
+    try {
+      if (!this._state.canOperation) {
+        return;
+      }
+
+      this._state.canOperation = false;
+      this._pushButton.play();
+      this._view.pushHowToPlayButton();
+      this._pushHowToPlay.next({
+        type: 'PushHowToPlay'
+      });
+      this._state.canOperation = true;
+    } catch(e) {
+      throw e;
+    }
   }
 }

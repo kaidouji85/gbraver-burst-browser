@@ -22,4 +22,6 @@ export type BatterySelectorModel = {
   opacity: number,
   /** 操作不可能フラグ、trueで操作不可能 */
   disabled: boolean,
+  /** 拡大率 */
+  scale: number,
 };

@@ -1,8 +1,11 @@
 // @flow
 
-import type {ResourcePath} from "../../src/js/resource/path/resource-path";
 import {StorybookResourcePath} from "../../src/js/resource/path/storybook-resource-path";
 import '../../src/css/style.css';
+import {createResizeStream} from "../../src/js/action/resize/resize";
+import {CssVH} from "../../src/js/view-port/vh";
+import type {Resources} from "../../src/js/resource";
+import {ResourceLoader} from "../../src/js/resource";
 
 /**
  * HTML要素生成コールバック関数
@@ -10,7 +13,7 @@ import '../../src/css/style.css';
  * @param resourcePath リソースパス
  * @return 生成したHTML要素
  */
-export type DOMCreator = (resourcePath: ResourcePath) => HTMLElement;
+export type DOMCreator = (resources: Resources) => HTMLElement;
 
 /**
  *HTML要素スタブ
@@ -19,6 +22,16 @@ export type DOMCreator = (resourcePath: ResourcePath) => HTMLElement;
  * @return {function(): *} ストーリー
  */
 export const domStub = (creator: DOMCreator) => (): HTMLElement => {
+  const root = document.createElement('div');
+  const resize = createResizeStream();
+  const vh = new CssVH(resize);
+
   const resourcePath = new StorybookResourcePath();
-  return creator(resourcePath);
+  const loader = new ResourceLoader(resourcePath);
+  loader.load().then(resources => {
+    const component = creator(resources);
+    root.appendChild(component);
+  });
+
+  return root;
 }

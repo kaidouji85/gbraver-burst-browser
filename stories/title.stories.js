@@ -7,7 +7,7 @@ export default {
   title: 'title'
 };
 
-export const Scene = domStub((resourcePath) => {
-  const scene = new Title(resourcePath);
+export const Scene = domStub(resources => {
+  const scene = new Title(resources);
   return scene.getRootHTMLElement();
 });

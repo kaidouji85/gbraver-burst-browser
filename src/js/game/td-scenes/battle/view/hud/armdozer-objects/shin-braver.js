@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
-import type {HUDArmdozer} from "./index";
+import type {HUDArmdozerObjects} from "./index";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 import type {Resources} from "../../../../../../resource";
@@ -18,7 +18,7 @@ type Param = {
 /**
  * HUDレイヤー シンブレイバー固有のオブジェクトをあつめたもの
  */
-export class ShinBraverHUD implements HUDArmdozer {
+export class ShinBraverHUD implements HUDArmdozerObjects {
   playerId: PlayerId;
   cutIn: ShinBraverCutIn;
 
@@ -54,7 +54,7 @@ export class ShinBraverHUD implements HUDArmdozer {
  * @param state プレイヤーの状態
  * @return シンブレイバーHUD
  */
-export function playerShinBraverHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozer {
+export function playerShinBraverHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,
     cutIn: playerShinBraverCutIn(resources, listener),
@@ -69,7 +69,7 @@ export function playerShinBraverHUD(resources: Resources, listener: Observable<G
  * @param state プレイヤーの状態
  * @return シンブレイバーHUD
  */
-export function enemyShinBraverHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozer {
+export function enemyShinBraverHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,
     cutIn: enemyShinBraverCutIn(resources, listener)

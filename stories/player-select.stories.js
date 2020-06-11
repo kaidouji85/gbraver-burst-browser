@@ -7,7 +7,7 @@ export default {
   title: 'player-select',
 };
 
-export const Scene = domStub((resourcePath) => {
-  const scene = new PlayerSelect(resourcePath);
+export const Scene = domStub(resources => {
+  const scene = new PlayerSelect(resources);
   return scene.getRootHTMLElement();
 });

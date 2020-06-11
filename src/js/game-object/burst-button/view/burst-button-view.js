@@ -83,36 +83,34 @@ export class BurstButtonView {
     this._overlap.destructor();
   }
 
-  /** モデルをビューに反映させる */
-  engage(model: BurstButtonModel): void {
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   * @param preRender プリレンダー情報
+   */
+  engage(model: BurstButtonModel, preRender: PreRender): void {
     this._burstButton.setOpacity(model.opacity);
 
     const disabledOpacity = model.canBurst ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
-  }
 
-  /**
-   * プリレンダー
-   *
-   * @param action アクション
-   */
-  preRender(action: PreRender): void {
-    const devicePerScale = devicePerScaleForHUD(action.rendererDOM, action.safeAreaInset);
+    const devicePerScale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
 
     this._group.scale.set(
-      GROUP_SCALE * devicePerScale,
-      GROUP_SCALE * devicePerScale,
-      GROUP_SCALE * devicePerScale
+      GROUP_SCALE * devicePerScale * model.scale,
+      GROUP_SCALE * devicePerScale * model.scale,
+      GROUP_SCALE * devicePerScale * model.scale
     );
     this._group.position.x =
-      -action.rendererDOM.clientWidth / 2
-      +action.safeAreaInset.left
+      -preRender.rendererDOM.clientWidth / 2
+      +preRender.safeAreaInset.left
       +PADDING_LEFT * devicePerScale;
     this._group.position.y =
-      -action.rendererDOM.clientHeight / 2
-      +action.safeAreaInset.bottom
+      -preRender.rendererDOM.clientHeight / 2
+      +preRender.safeAreaInset.bottom
       +PADDING_BOTTOM * devicePerScale;
-    this._group.quaternion.copy(action.camera.quaternion);
+    this._group.quaternion.copy(preRender.camera.quaternion);
   }
 
   /** 本ビューで使うthree.jsオブジェクトを取得する */

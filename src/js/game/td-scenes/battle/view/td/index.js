@@ -15,10 +15,11 @@ import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../action/resize/resize";
 import {skyBox} from "./sky-box";
-import {enemySprite, playerSprite, TDSprite} from "./sprite";
-import type {TDArmdozer} from "./armdozer";
-import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer";
+import {enemySprite, playerSprite} from "./armdozer-sprite";
+import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
+import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
+import {TDArmdozerSprite} from "./armdozer-sprite/armdozer-sprite";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -39,8 +40,8 @@ export class ThreeDimensionLayer {
   scene: THREE.Scene;
   camera: TDCamera;
   players: TDPlayer[];
-  sprites: TDSprite[];
-  armdozers: TDArmdozer[];
+  sprites: TDArmdozerSprite[];
+  armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
   _overlap: Observable<OverlapAction>;
   _gameObjectAction: Observable<GameObjectAction>;
@@ -77,16 +78,16 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
 
-    this.armdozers = param.players.map(v => v.playerId === param.playerId
+    this.armdozerObjects = param.players.map(v => v.playerId === param.playerId
       ? playerTDArmdozer(param.resources, this._gameObjectAction, v)
       : enemyTDArmdozer(param.resources, this._gameObjectAction, v)
     );
-    this.armdozers.map(v => v.getObject3Ds())
+    this.armdozerObjects.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
         this.scene.add(v);
       });
-    this.armdozers.forEach(armdozer => {
+    this.armdozerObjects.forEach(armdozer => {
       this.sprites
         .filter(sprite => sprite.playerId === armdozer.playerId)
         .forEach(sprite => {
@@ -117,7 +118,7 @@ export class ThreeDimensionLayer {
       });
       sprite.destructor();
     });
-    this.armdozers.forEach(armdozer => {
+    this.armdozerObjects.forEach(armdozer => {
       armdozer.getObject3Ds().forEach(object => {
         this.scene.remove(object);
       });

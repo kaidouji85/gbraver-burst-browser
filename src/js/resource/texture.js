@@ -1,5 +1,6 @@
 // @flow
 import * as THREE from "three";
+import type {ResourcePath} from "./path/resource-path";
 
 /** テクスチャID */
 export type TextureId = string;
@@ -31,6 +32,7 @@ export const TEXTURE_IDS = {
   SHIN_BRAVER_BURST_DOWN: 'SHIN_BRAVER_BURST_DOWN',
   SHIN_BRAVER_CUTIN_UP: 'SHIN_BRAVER_CUTIN_UP',
   SHIN_BRAVER_CUTIN_DOWN: 'SHIN_BRAVER_CUTIN_DOWN',
+  SHIN_BRAVER_BACK_STEP: 'SHIN_BRAVER_BACK_STEP',
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
   NEO_LANDOZER_KNOCK_BACK: 'NEO_LANDOZER_KNOCK_BACK',
   NEO_LANDOZER_GUARD: 'NEO_LANDOZER_GUARD',
@@ -42,6 +44,7 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_GUTS_DOWN: 'NEO_LANDOZER_GUTS_DOWN',
   NEO_LANDOZER_CUTIN_UP: 'NEO_LANDOZER_CUTIN_UP',
   NEO_LANDOZER_CUTIN_DOWN: 'NEO_LANDOZER_CUTIN_DOWN',
+  NEO_LANDOZER_BACK_STEP: 'NEO_LANDOZER_BACK_STEP',
   LIGHTNING_DOZER_STAND: 'LIGHTNING_DOZER_STAND',
   LIGHTNING_DOZER_HM_CHARGE: 'LIGHTNING_DOZER_HM_CHARGE',
   LIGHTNING_DOZER_HM_ATTACK: 'LIGHTNING_DOZER_HM_ATTACK',
@@ -54,6 +57,7 @@ export const TEXTURE_IDS = {
   LIGHTNING_DOZER_GUARD: 'LIGHTNING_DOZER_GUARD',
   LIGHTNING_DOZER_CUTIN_UP: 'LIGHTNING_DOZER_CUTIN_UP',
   LIGHTNING_DOZER_CUTIN_DOWN: 'LIGHTNING_DOZER_CUTIN_DOWN',
+  LIGHTNING_DOZER_BACK_STEP: 'LIGHTNING_DOZER_BACK_STEP',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
   HITMARK_LIGHTNING_RING: 'HITMARK_LIGHTNING_RING',
@@ -122,6 +126,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN,
     path: 'armdozer/shin-braver/cutin-down.png',
   },
+  {
+    id: TEXTURE_IDS.SHIN_BRAVER_BACK_STEP,
+    path: 'armdozer/shin-braver/back-step.png',
+  },
   // ネオランドーザ関連
   {
     id: TEXTURE_IDS.NEO_LANDOZER_STAND,
@@ -166,6 +174,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id:TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
     path: 'armdozer/neo-landozer/cutin-down.png'
+  },
+  {
+    id:TEXTURE_IDS.NEO_LANDOZER_BACK_STEP,
+    path: 'armdozer/neo-landozer/back-step.png'
   },
   // ライトニングドーザ関連
   {
@@ -215,6 +227,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN,
     path: 'armdozer/lightning-dozer/cutin-down.png',
+  },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_BACK_STEP,
+    path: 'armdozer/lightning-dozer/back-step.png',
   },
   // ヒットマーク関連
   {
@@ -272,15 +288,15 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
 /**
  * テクスチャを読み込む
  *
- * @param basePath ベースとなるパス
+ * @param resourcePath リソースパス
  * @param config テクスチャ設定
  * @return 読み込み結果
  */
-export function loadTexture(basePath: string, config: TextureConfig): Promise<TextureResource> {
+export function loadTexture(resourcePath: ResourcePath, config: TextureConfig): Promise<TextureResource> {
   let loader = new THREE.TextureLoader();
   return new Promise((resolve, reject) => {
     loader.load(
-      `${basePath}${config.path}`,
+      `${resourcePath.get()}/${config.path}`,
       texture => resolve({
         id: config.id,
         texture
@@ -296,9 +312,9 @@ export function loadTexture(basePath: string, config: TextureConfig): Promise<Te
 /**
  * ゲームで使う全てのテクスチャを読み込む
  *
- * @param basePath ベースとなるパス
+ * @param resourcePath リソースパス
  * @returns 読み込み結果
  */
-export async function loadAllTexture(basePath: string): Promise<TextureResource[]> {
-  return await Promise.all(TEXTURE_CONFIGS.map(v => loadTexture(basePath, v)));
+export function loadingAllTextures(resourcePath: ResourcePath): Array<Promise<TextureResource>> {
+  return TEXTURE_CONFIGS.map(v => loadTexture(resourcePath, v));
 }

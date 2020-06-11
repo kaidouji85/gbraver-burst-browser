@@ -1,5 +1,6 @@
 // @flow
 
+import {Howl} from 'howler';
 import TWEEN from '@tweenjs/tween.js';
 import {Observable, Subscription} from 'rxjs';
 import type {Resources} from "../../resource";
@@ -19,6 +20,8 @@ import {close} from './animation/close';
 import {canBatteryMinus} from "./model/can-battery-minus";
 import {canBatteryPlus} from "./model/can-battery-plus";
 import type {PreRender} from "../../action/game-loop/pre-render";
+import {SOUND_IDS} from "../../resource/sound";
+import {decide} from './animation/decide';
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -33,12 +36,24 @@ type Param = {
 export class BatterySelector {
   _model: BatterySelectorModel;
   _view: BatterySelectorView;
+  _pushButtonSound: Howl;
+  _batteryChangeSound: Howl;
   _batteryChangeTween: TWEEN.Group;
   _subscription: Subscription;
 
   constructor(param: Param) {
     this._model = initialValue();
     this._batteryChangeTween = new TWEEN.Group();
+
+    const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
+    this._pushButtonSound = pushButtonResource
+      ? pushButtonResource.sound
+      : new Howl();
+
+    const batteryChangeResource = param.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE);
+    this._batteryChangeSound = batteryChangeResource
+      ? batteryChangeResource.sound
+      : new Howl();
 
     this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
@@ -99,6 +114,16 @@ export class BatterySelector {
     return open(this._model);
   }
 
+  /**
+   * バッテリー決定アニメーション
+   *
+   * @return アニメーション
+   */
+  decide(): Animate {
+    this._pushButtonSound.play();
+    return decide(this._model);
+  }
+
   /** バッテリーセレクタを閉じる */
   close(): Animate {
     return close(this._model);
@@ -117,12 +142,11 @@ export class BatterySelector {
   /** 状態更新 */
   _update(action: Update): void {
     this._batteryChangeTween.update(action.time);
-    this._view.engage(this._model);
   }
 
   /** プリレンダー */
   _preRender(action: PreRender): void {
-    this._view.preRender(action);
+    this._view.engage(this._model, action);
   }
 
   /**
@@ -136,6 +160,7 @@ export class BatterySelector {
 
     this._model.battery = battery;
     const needle = getNeedleValue(battery);
+    this._batteryChangeSound.play();
     changeNeedle(this._model, this._batteryChangeTween, needle).play();
   }
 }

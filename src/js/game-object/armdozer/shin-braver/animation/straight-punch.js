@@ -5,17 +5,18 @@ import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {Animate} from "../../../../animation/animate";
 
-/** ストレートパンチ */
+/**
+ * ストレートパンチ
+ * 
+ * @param model モデル
+ * @return アニメーション
+ */
 export function straightPunch(model: ShinBraverModel): Animate {
   return process(() => {
     model.animation.type = 'SP_ATTACK';
     model.animation.frame = 0;
   }).chain(
-    tween(model.animation, t => t
-      .to({frame: 1}, 250)
-    ),
-    tween(model.position, t => t
-      .to({x: '-80'}, 250)
-    ),
+    tween(model.animation, t => t.to({frame: 1}, 250)),
+    tween(model.position, t => t.to({x: '-80'}, 250)),
   );
 }

@@ -1,12 +1,12 @@
 // @flow
 
-import type {TDArmdozer} from "./index";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {LightningBarrierGameEffect} from "../../../../../../game-object/barrier/lightning/lightning-barrier";
 import * as THREE from "three";
+import type {TDArmdozerObjects} from "./armdozer-objects";
 
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト フィールド
@@ -19,7 +19,7 @@ interface LightningDozerTDField {
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト 実装
  */
-export class LightningDozerTD implements TDArmdozer, LightningDozerTDField {
+export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDField {
   /** プレイヤーID */
   playerId: PlayerId;
 

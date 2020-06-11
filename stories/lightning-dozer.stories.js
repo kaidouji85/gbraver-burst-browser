@@ -1,8 +1,6 @@
 // @flow
 
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
-import {PlayerShinBraver} from "../src/js/game-object/armdozer/shin-braver";
-import {PlayerNeoLandozer} from "../src/js/game-object/armdozer/neo-landozer";
 import {PlayerLightningDozer} from "../src/js/game-object/armdozer/lightning-dozer";
 import {delay} from "../src/js/animation/delay";
 

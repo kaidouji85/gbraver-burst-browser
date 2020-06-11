@@ -4,7 +4,7 @@ import type {TitleState} from "../state/title-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
-import {titleBackURL, titleLogoURL} from "../../../../resource/urls/title-urls";
+import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 
 /** イベント通知 */
 type Notifier = {
@@ -61,7 +61,7 @@ export class TitleView {
         resolve();
       });
     });
-    titleBackImage.src = titleBackURL(params.resourcePath);
+    titleBackImage.src = `${params.resourcePath.get()}/title-back.png`;
 
     const logo = this._root.querySelector(`[data-id="${logoId}"]`);
     const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement)
@@ -72,7 +72,7 @@ export class TitleView {
         resolve();
       });
     });
-    logoImage.src = titleLogoURL(params.resourcePath);
+    logoImage.src = `${params.resourcePath.get()}/logo.png`;
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {
@@ -127,6 +127,50 @@ export class TitleView {
         this._isTitleBackLoaded,
         this._isLogoLoaded,
       ]);
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * ゲームスタートボタンを押した際のアニメーション
+   *
+   * @return アニメーション
+   */
+  async pushGameStartButton(): Promise<void> {
+    try {
+      const animation = this._gameStart.animate([
+        {transform: 'scale(1)'},
+        {transform: 'scale(1.1)'},
+        {transform: 'scale(1)'},
+      ], {
+        duration: 200,
+        fill: "forwards",
+        easing: 'ease'
+      });
+      await waitFinishAnimation(animation);
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * 遊び方ボタンを押した際のアニメーション
+   *
+   * @return アニメーション
+   */
+  async pushHowToPlayButton(): Promise<void> {
+    try {
+      const animation = this._howToPlay.animate([
+        {transform: 'scale(1)'},
+        {transform: 'scale(1.1)'},
+        {transform: 'scale(1)'},
+      ], {
+        duration: 200,
+        fill: "forwards",
+        easing: 'ease'
+      });
+      await waitFinishAnimation(animation);
     } catch(e) {
       throw e;
     }

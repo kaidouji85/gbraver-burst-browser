@@ -18,13 +18,14 @@ export function show(model: NeoLandozerCutInModel): Animate {
     process(() => {
       model.animation.type = 'CUT_IN_UP';
       model.animation.frame = 0;
-    }).chain(tween(model.animation, t => t.to({frame: 1}, 300))
-    ).chain(delay(100)
-    ).chain(process(() => {
+    })
+      .chain(tween(model.animation, t => t.to({frame: 1}, 200)))
+      .chain(delay(300))
+      .chain(process(() => {
         model.animation.type = 'CUT_IN_DOWN';
         model.animation.frame = 0;
-      })
-    ).chain(tween(model.animation, t => t.to({frame: 1}, 200))),
+      }))
+      .chain(tween(model.animation, t => t.to({frame: 1}, 200))),
 
     process(() => {
       model.opacity = 0;
