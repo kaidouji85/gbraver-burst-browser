@@ -15,7 +15,7 @@ export function avoid(model: ShinBraverModel, sounds: ShinBraverSounds): Animate
     sounds.motor.play();
   })
     .chain(all(
-      tween(model.position, t => t.to({x: '+40'}, 150)),
-      tween(model.animation, t => t.to({frame: 1}, 150)),
+      tween(model.position, t => t.to({x: '+40'}, 300)),
+      tween(model.animation, t => t.to({frame: 1}, 300)),
     ));
 }
