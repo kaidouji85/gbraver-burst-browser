@@ -135,7 +135,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   avoid(): Animate {
-    return avoid(this._model);
+    return avoid(this._model, this._sounds);
   }
 
   /**
@@ -144,7 +144,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   avoidToStand(): Animate {
-    return avoidToStand(this._model);
+    return avoidToStand(this._model, this._sounds);
   }
 
   /**
