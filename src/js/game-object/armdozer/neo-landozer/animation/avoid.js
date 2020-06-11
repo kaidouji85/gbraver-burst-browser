@@ -6,7 +6,6 @@ import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {all} from "../../../../animation/all";
 import {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
-import {delay} from "../../../../animation/delay";
 
 /** 避ける */
 export function avoid(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animate {
