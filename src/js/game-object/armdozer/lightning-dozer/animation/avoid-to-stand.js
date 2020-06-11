@@ -20,7 +20,10 @@ export function avoidToStand(model: LightningDozerModel, sounds: LightningDozerS
     model.animation.frame = 1;
     sounds.motor.play();
   })
-    .chain(tween(model.animation, t => t.to({frame: 0}, 300)))
+    .chain(all(
+      tween(model.animation, t => t.to({frame: 0}, 400)),
+      tween(model.position, t => t.to({x: '-100'}, 400))
+    ))
     .chain(process(() => {
       model.animation.type = 'STAND';
       model.animation.frame = 0;
