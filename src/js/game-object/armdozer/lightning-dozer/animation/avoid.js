@@ -5,7 +5,6 @@ import type {LightningDozerModel} from "../model/lightning-dozer-model";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {LightningDozerSounds} from "../sounds/lightning-dozer-sounds";
-import {all} from "../../../../animation/all";
 
 /**
  * 避け
@@ -20,8 +19,5 @@ export function avoid(model: LightningDozerModel, sounds: LightningDozerSounds):
     model.animation.frame = 0;
     sounds.motor.play();
   })
-    .chain(all(
-      tween(model.position, t => t.to({x: '+40'}, 200)),
-      tween(model.animation, t => t.to({frame: 1}, 200)),
-    ));
+    .chain(tween(model.animation, t => t.to({frame: 1}, 200)));
 }
