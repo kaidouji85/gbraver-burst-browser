@@ -15,7 +15,6 @@ export function avoidToStand(model: NeoLandozerModel, sounds: NeoLandozerSounds)
     sounds.motor.play();
   })
     .chain(all(
-      tween(model.position, t => t.to({x: '-40'}, 300)),
       tween(model.animation, t => t.to({frame: 0}, 300))
     ))
     .chain(process(() => {
