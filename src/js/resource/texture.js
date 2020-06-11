@@ -32,6 +32,7 @@ export const TEXTURE_IDS = {
   SHIN_BRAVER_BURST_DOWN: 'SHIN_BRAVER_BURST_DOWN',
   SHIN_BRAVER_CUTIN_UP: 'SHIN_BRAVER_CUTIN_UP',
   SHIN_BRAVER_CUTIN_DOWN: 'SHIN_BRAVER_CUTIN_DOWN',
+  SHIN_BRAVER_BACK_STEP: 'SHIN_BRAVER_BACK_STEP',
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
   NEO_LANDOZER_KNOCK_BACK: 'NEO_LANDOZER_KNOCK_BACK',
   NEO_LANDOZER_GUARD: 'NEO_LANDOZER_GUARD',
@@ -123,6 +124,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN,
     path: 'armdozer/shin-braver/cutin-down.png',
+  },
+  {
+    id: TEXTURE_IDS.SHIN_BRAVER_BACK_STEP,
+    path: 'armdozer/shin-braver/back-step.png',
   },
   // ネオランドーザ関連
   {

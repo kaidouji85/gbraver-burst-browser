@@ -123,12 +123,12 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** 避け */
   avoid(): Animate {
-    return avoid(this._model);
+    return avoid(this._model, this._sounds);
   }
 
   /** 避け -> 立ち */
   avoidToStand(): Animate {
-    return avoidToStand(this._model);
+    return avoidToStand(this._model, this._sounds);
   }
 
   /** ダウン */
