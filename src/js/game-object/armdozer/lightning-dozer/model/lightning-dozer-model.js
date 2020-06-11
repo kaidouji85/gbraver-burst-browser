@@ -11,7 +11,8 @@ export type AnimationType =
   'GUTS_UP' |
   'GUTS_DOWN' |
   'GUTS_TO_STAND' |
-  'GUARD';
+  'GUARD' |
+  'BACK_STEP';
 
 /** ライトニングドーザのモデル */
 export type LightningDozerModel = {

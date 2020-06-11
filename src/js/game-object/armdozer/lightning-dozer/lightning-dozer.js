@@ -23,6 +23,7 @@ import {turnStart} from "./animation/turn-start";
 import {turnStartToStand} from "./animation/turn-start-to-stand";
 import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
+import {LightningDozerSounds} from "./sounds/lightning-dozer-sounds";
 
 /**
  *　ライトニングドーザ
@@ -30,11 +31,13 @@ import {guardToStand} from "./animation/guard-to-stand";
 export class LightningDozer implements ArmDozerSprite {
   _model: LightningDozerModel;
   _view: LightningDozerView;
+  _sounds: LightningDozerSounds;
   _subscription: Subscription;
 
   constructor(resources: Resources, listener: Observable<GameObjectAction>, view: LightningDozerView) {
     this._model = createInitialValue();
     this._view = view;
+    this._sounds = new LightningDozerSounds(resources);
 
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
@@ -75,7 +78,7 @@ export class LightningDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   charge(): Animate {
-    return charge(this._model);
+    return charge(this._model, this._sounds);
   }
 
   /**
@@ -93,17 +96,17 @@ export class LightningDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   hmToStand(): Animate {
-    return hmToStand(this._model);
+    return hmToStand(this._model, this._sounds);
   }
 
   /** ターンスタート */
   turnStart(): Animate {
-    return turnStart(this._model);
+    return turnStart(this._model, this._sounds);
   }
 
   /** ターンスタート -> 立ち */
   turnStartToStand(): Animate {
-    return turnStartToStand(this._model);
+    return turnStartToStand(this._model, this._sounds);
   }
 
   /** ノックバック */
@@ -113,7 +116,7 @@ export class LightningDozer implements ArmDozerSprite {
 
   /** ノックバック -> 立ちポーズ */
   knockBackToStand(): Animate {
-    return knockBackToStand(this._model);
+    return knockBackToStand(this._model, this._sounds);
   }
 
   /** ガード */
@@ -123,17 +126,17 @@ export class LightningDozer implements ArmDozerSprite {
 
   /** ガード -> 立ちポーズ */
   guardToStand(): Animate {
-    return guardToStand(this._model);
+    return guardToStand(this._model, this._sounds);
   }
 
   /** 避け */
   avoid(): Animate {
-    return avoid(this._model);
+    return avoid(this._model, this._sounds);
   }
 
   /** 避け -> 立ち */
   avoidToStand(): Animate {
-    return avoidToStand(this._model);
+    return avoidToStand(this._model, this._sounds);
   }
 
   /** ダウン */

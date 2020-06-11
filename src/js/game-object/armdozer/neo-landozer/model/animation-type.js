@@ -10,4 +10,5 @@ export type AnimationType =
   | 'HM_TO_STAND'
   | 'DOWN'
   | 'GUTS_DOWN'
-  | 'GUTS_UP';
+  | 'GUTS_UP'
+  | 'BACK_STEP';

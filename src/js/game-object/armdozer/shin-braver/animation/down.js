@@ -6,6 +6,7 @@ import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {delay} from "../../../../animation/delay";
 import type {ShinBraverModel} from "../model/shin-braver-model";
+import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
 
 /**
  * ダウン
