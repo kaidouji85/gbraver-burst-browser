@@ -22,18 +22,29 @@ import {hmToStand} from "./animation/hm-to-stand";
 import {down} from "./animation/down";
 import {turnStart} from "./animation/turn-start";
 import {turnStartToStand} from "./animation/turn-start-to-stand";
+import type {Resources} from "../../../resource";
+import {NeoLandozerSounds} from "./sounds/neo-landozer-sounds";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
   _model: NeoLandozerModel;
   _view: NeoLandozerView;
+  _sounds: NeoLandozerSounds;
   _subscription: Subscription;
 
-  constructor(params: { view: NeoLandozerView, listener: Observable<GameObjectAction> }) {
+  /**
+   * コンストラクタ
+   *
+   * @param view ビュー
+   * @param resources リソース管理オブジェクト
+   * @param listener イベントリスナ
+   */
+  constructor(view: NeoLandozerView, resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
-    this._view = params.view;
+    this._view = view;
+    this._sounds = new NeoLandozerSounds(resources);
 
-    this._subscription = params.listener.subscribe(action => {
+    this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
@@ -59,7 +70,7 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** チャージ */
   charge(): Animate {
-    return charge(this._model);
+    return charge(this._model, this._sounds);
   }
 
   /** アームハンマー */
@@ -69,17 +80,17 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** アームハンマー -> 立ち */
   hmToStand(): Animate {
-    return hmToStand(this._model);
+    return hmToStand(this._model, this._sounds);
   }
 
   /** ターンスタート */
   turnStart(): Animate {
-    return turnStart(this._model);
+    return turnStart(this._model, this._sounds);
   }
 
   /** ターンスタート -> 立ち */
   turnStartToStand(): Animate {
-    return turnStartToStand(this._model);
+    return turnStartToStand(this._model, this._sounds);
   }
   
   /** ノックバック */
@@ -89,7 +100,7 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** ノックバック -> 立ち*/
   knockBackToStand(): Animate {
-    return knockBackToStand(this._model);
+    return knockBackToStand(this._model, this._sounds);
   }
 
   /** ガード */
@@ -99,17 +110,17 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** ガード -> 立ちポーズ */
   guardToStand(): Animate {
-    return guardToStand(this._model);
+    return guardToStand(this._model, this._sounds);
   }
 
   /** 避け */
   avoid(): Animate {
-    return avoid(this._model);
+    return avoid(this._model, this._sounds);
   }
 
   /** 避け -> 立ち */
   avoidToStand(): Animate {
-    return avoidToStand(this._model);
+    return avoidToStand(this._model, this._sounds);
   }
 
   /** ダウン */

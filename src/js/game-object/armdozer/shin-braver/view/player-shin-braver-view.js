@@ -17,6 +17,7 @@ import {shinBraverGutsUp} from "../mesh/guts-up";
 import {shinBraverGutsDown} from "../mesh/guts-down";
 import {shinBraverBurstUp} from "../mesh/burst-up";
 import {shinBraverBurstDown} from "../mesh/burst-down";
+import {shinBraverBackStep} from "../mesh/back-step";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
@@ -32,6 +33,7 @@ export class PlayerShinBraverView implements ShinBraverView {
   _gutsDown: ArmdozerAnimation;
   _burstUp: ArmdozerAnimation;
   _burstDown: ArmdozerAnimation;
+  _backStep: ArmdozerAnimation;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -46,6 +48,7 @@ export class PlayerShinBraverView implements ShinBraverView {
     this._gutsDown = shinBraverGutsDown(resources);
     this._burstUp = shinBraverBurstUp(resources);
     this._burstDown = shinBraverBurstDown(resources);
+    this._backStep = shinBraverBackStep(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -106,7 +109,8 @@ export class PlayerShinBraverView implements ShinBraverView {
       this._gutsUp,
       this._gutsDown,
       this._burstUp,
-      this._burstDown
+      this._burstDown,
+      this._backStep,
     ];
   }
 
@@ -144,6 +148,8 @@ export class PlayerShinBraverView implements ShinBraverView {
         return this._burstUp;
       case 'BURST_DOWN':
         return this._burstDown;
+      case 'BACK_STEP':
+        return this._backStep;
       default:
         return this._stand;
     }
