@@ -108,7 +108,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   knockBackToStand(): Animate {
-    return knockBackToStand(this._model);
+    return knockBackToStand(this._model, this._sounds);
   }
 
   /**
@@ -126,7 +126,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   guardToStand(): Animate {
-    return knockBackToStand(this._model);
+    return knockBackToStand(this._model, this._sounds);
   }
 
   /**
