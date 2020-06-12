@@ -65,11 +65,17 @@ export class WingDozerNPC implements NPC {
    */
   _attackRoutine(own: PlayerState, commands: Command[]): Command {
     const burst = commands.find(v => v.type === 'BURST_COMMAND');
-    const battery4 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 4);
+    const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+    const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
     const batteryMaxMinus1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === (own.armdozer.battery - 1));
+    const hasContinuousActive = this._hasContinuousActive(own);
 
-    if (burst && battery4) {
-      return battery4;
+    if (burst && battery3) {
+      return battery3;
+    }
+
+    if (hasContinuousActive && battery1) {
+      return battery1;
     }
 
     if (batteryMaxMinus1) {
@@ -89,9 +95,15 @@ export class WingDozerNPC implements NPC {
   _defenseRoutine(own: PlayerState, commands: Command[]): Command {
     const burst = commands.find(v => v.type === 'BURST_COMMAND');
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+    const maxBattery = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === own.armdozer.battery);
+    const hasContinuousActive = this._hasContinuousActive(own);
 
     if (burst) {
       return burst;
+    }
+
+    if (maxBattery && hasContinuousActive) {
+      return maxBattery;
     }
 
     if (battery1) {
@@ -99,5 +111,11 @@ export class WingDozerNPC implements NPC {
     }
 
     return ZERO_BATTERY;
+  }
+
+  _hasContinuousActive(own: PlayerState): boolean {
+    return own.armdozer.effects
+      .filter(v => v.type === 'ContinuousActivePlayer')
+      .length > 0;
   }
 }
