@@ -95,21 +95,20 @@ type AttackResult = NormalHit | CriticalHit;
  * @return アニメーション
  */
 function attack(param: NeoLandozerBattleAnimtionParam<AttackResult>): Animate {
-  return all(
-    param.attackerSprite.charge()
-      .chain(delay(600))
-      .chain(param.attackerSprite.armHammer())
-      .chain(delay(1300))
-      .chain(param.attackerSprite.hmToStand()),
+  return param.attackerSprite.charge()
+    .chain(delay(600))
+    .chain(all(
+      param.attackerSprite.armHammer(),
 
-    delay(1000)
-      .chain(
+      delay(200).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-  );
+      ))
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.hmToStand());
 }
 
 /**
@@ -119,21 +118,20 @@ function attack(param: NeoLandozerBattleAnimtionParam<AttackResult>): Animate {
  * @return アニメーション
  */
 function guard(param: NeoLandozerBattleAnimtionParam<Guard>): Animate {
-  return all(
-    param.attackerSprite.charge()
-      .chain(delay(600))
-      .chain(param.attackerSprite.armHammer())
-      .chain(delay(1300))
-      .chain(param.attackerSprite.hmToStand()),
+  return param.attackerSprite.charge()
+    .chain(delay(600))
+    .chain(all(
+      param.attackerSprite.armHammer(),
 
-    delay(1000)
-      .chain(
+      delay(200).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-  );
+      ))
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.hmToStand());
 }
 
 /**
@@ -143,16 +141,16 @@ function guard(param: NeoLandozerBattleAnimtionParam<Guard>): Animate {
  * @return アニメーション
  */
 function miss(param: NeoLandozerBattleAnimtionParam<Miss>): Animate {
-  return all(
-    param.attackerSprite.charge()
-      .chain(delay(600))
-      .chain(param.attackerSprite.armHammer())
-      .chain(delay(500))
-      .chain(param.attackerSprite.hmToStand()),
+  return param.attackerSprite.charge()
+    .chain(delay(600))
+    .chain(all(
+      param.attackerSprite.armHammer(),
 
-    delay(1000)
-      .chain(param.defenderSprite.avoid())
-  );
+      delay(200)
+        .chain(param.defenderSprite.avoid())
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.hmToStand());
 }
 
 /**

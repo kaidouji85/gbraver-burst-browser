@@ -6,6 +6,7 @@ import {tween} from "../../../../animation/tween";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
 import {all} from "../../../../animation/all";
+import {delay} from "../../../../animation/delay";
 
 /** 避ける */
 export function avoid(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {
@@ -15,7 +16,16 @@ export function avoid(model: ShinBraverModel, sounds: ShinBraverSounds): Animate
     sounds.motor.play();
   })
     .chain(all(
-      tween(model.animation, t => t.to({frame: 1}, 300)),
+      tween(model.animation, t => t.to({frame: 1}, 200)),
       tween(model.position, t => t.to({x: '+100'}, 300))
-    ));
+    ))
+    .chain(delay(300))
+    .chain(process(() => {
+      sounds.motor.play();
+    }))
+    .chain(tween(model.animation, t => t.to({frame: 0}, 300)))
+    .chain(process(() => {
+      model.animation.type = 'STAND';
+      model.animation.frame = 0;
+    }));
 }
