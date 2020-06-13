@@ -100,21 +100,20 @@ type AttackResult = NormalHit | CriticalHit;
  * @return アニメーション
  */
 function attack(param: LightningDozerBattleAnimationParam<AttackResult>): Animate {
-  return all(
-    param.attackerSprite.charge()
-      .chain(delay(500))
-      .chain(param.attackerSprite.armHammer())
-      .chain(delay(2000))
-      .chain(param.attackerSprite.hmToStand()),
+  return param.attackerSprite.charge()
+    .chain(delay(500))
+    .chain(all(
+      param.attackerSprite.armHammer(),
 
-    delay(800)
-      .chain(
+      delay(100).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-  );
+      ))
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.hmToStand());
 }
 
 /**
@@ -124,21 +123,20 @@ function attack(param: LightningDozerBattleAnimationParam<AttackResult>): Animat
  * @return アニメーション
  */
 function guard(param: LightningDozerBattleAnimationParam<Guard>): Animate {
-  return all(
-    param.attackerSprite.charge()
-      .chain(delay(500))
-      .chain(param.attackerSprite.armHammer())
-      .chain(delay(2000))
-      .chain(param.attackerSprite.hmToStand()),
+  return param.attackerSprite.charge()
+    .chain(delay(500))
+    .chain(all(
+      param.attackerSprite.armHammer(),
 
-    delay(800)
-      .chain(
+      delay(100).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-  );
+      ))
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.hmToStand());
 }
 
 /**
@@ -148,16 +146,16 @@ function guard(param: LightningDozerBattleAnimationParam<Guard>): Animate {
  * @return アニメーション
  */
 function miss(param: LightningDozerBattleAnimationParam<Miss>): Animate {
-  return all(
-    param.attackerSprite.charge()
-      .chain(delay(500))
-      .chain(param.attackerSprite.armHammer())
-      .chain(delay(1000))
-      .chain(param.attackerSprite.hmToStand()),
+  return param.attackerSprite.charge()
+    .chain(delay(500))
+    .chain(all(
+      param.attackerSprite.armHammer(),
 
-    delay(800)
-      .chain(param.defenderSprite.avoid())
-  );
+      delay(100)
+        .chain(param.defenderSprite.avoid())
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.hmToStand());
 }
 
 /** ダウンが受け取れる戦闘結果 */
@@ -170,20 +168,20 @@ type DownResult = NormalHit | Guard | CriticalHit;
  * @return アニメーション
  */
 function down(param: LightningDozerBattleAnimationParam<DownResult>): Animate {
-  return all(
-    param.attackerSprite.charge()
-      .chain(delay(500))
-      .chain(param.attackerSprite.armHammer()),
+  return param.attackerSprite.charge()
+    .chain(delay(500))
+    .chain(all(
+      param.attackerSprite.armHammer(),
 
-    delay(800)
-      .chain(
+      delay(100).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
-  ).chain(delay(1000)
-  ).chain(param.attackerSprite.hmToStand());
+      ))
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.hmToStand());
 }
 
 /**

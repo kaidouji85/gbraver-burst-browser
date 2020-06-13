@@ -14,4 +14,5 @@ export type AnimationType =
   | 'GUTS_TO_STAND'
   | 'BURST_UP'
   | 'BURST_DOWN'
-  | 'BACK_STEP';
+  | 'BACK_STEP'
+  | 'FRONT_STEP';
