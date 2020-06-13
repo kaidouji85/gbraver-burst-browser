@@ -16,6 +16,7 @@ import {neoLandozerDown} from "../mesh/down";
 import {neoLandozerGutsUp} from "../mesh/guts-up";
 import {neoLandozerGutsDown} from "../mesh/guts-down";
 import {neoLandozerBackStep} from "../mesh/back-step";
+import {neoLandozerFrontStep} from "../mesh/front-step";
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
@@ -30,6 +31,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   _gutsUp: ArmdozerAnimation;
   _gutsDown: ArmdozerAnimation;
   _backStep: ArmdozerAnimation;
+  _frontStep: ArmdozerAnimation;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -43,6 +45,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
     this._gutsUp = neoLandozerGutsUp(resources);
     this._gutsDown = neoLandozerGutsDown(resources);
     this._backStep = neoLandozerBackStep(resources);
+    this._frontStep = neoLandozerFrontStep(resources);
 
     this._getAllMeshes().forEach(v => {
       this._group.add(v.getObject3D());
@@ -101,6 +104,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
       this._gutsUp,
       this._gutsDown,
       this._backStep,
+      this._frontStep,
     ];
   }
 
@@ -136,6 +140,8 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
         return this._gutsDown;
       case 'BACK_STEP':
         return this._backStep;
+      case 'FRONT_STEP':
+        return this._frontStep;
       default:
         return this._stand;
     }
