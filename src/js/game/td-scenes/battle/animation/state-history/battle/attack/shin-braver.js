@@ -100,9 +100,7 @@ function attack(param: ShinBraverBattleAnimationParam<AttackResult>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(
-      param.attackerSprite.straightPunch()
-        .chain(delay(1700))
-        .chain(param.attackerSprite.punchToStand()),
+      param.attackerSprite.straightPunch(),
 
       delay(200).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
@@ -110,7 +108,9 @@ function attack(param: ShinBraverBattleAnimationParam<AttackResult>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
       ))
-    ));
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.punchToStand());
 }
 
 /**
@@ -123,9 +123,7 @@ function guard(param: ShinBraverBattleAnimationParam<Guard>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(
-      param.attackerSprite.straightPunch()
-        .chain(delay(1700))
-        .chain(param.attackerSprite.punchToStand()),
+      param.attackerSprite.straightPunch(),
 
       delay(200).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
@@ -133,7 +131,9 @@ function guard(param: ShinBraverBattleAnimationParam<Guard>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
       ))
-    ));
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.punchToStand());
 }
 
 /**
@@ -146,13 +146,13 @@ function miss(param: ShinBraverBattleAnimationParam<Miss>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(
-      param.attackerSprite.straightPunch()
-        .chain(delay(500))
-        .chain(param.attackerSprite.punchToStand()),
+      param.attackerSprite.straightPunch(),
 
       delay(200)
         .chain(param.defenderSprite.avoid())
-    ));
+    ))
+    .chain(delay(1000))
+    .chain(param.attackerSprite.punchToStand());
 }
 
 /**
@@ -184,8 +184,7 @@ function down(param: ShinBraverBattleAnimationParam<DownResult>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(
-      param.attackerSprite.straightPunch()
-        .chain(delay(1700)),
+      param.attackerSprite.straightPunch(),
 
       delay(200).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
