@@ -22,8 +22,8 @@ export function avoid(model: LightningDozerModel, sounds: LightningDozerSounds):
     sounds.motor.play();
   })
     .chain(all(
-      tween(model.animation, t => t.to({frame: 1}, 300)),
-      tween(model.position, t => t.to({x: '+100'}, 300))
+      tween(model.animation, t => t.to({frame: 1}, 200)),
+      tween(model.position, t => t.to({x: '+100'}, 200))
     ))
     .chain(delay(300))
     .chain(process(() => {
