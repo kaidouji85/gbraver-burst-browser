@@ -15,16 +15,16 @@ import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer
  *
  * @type BURST バースト
  */
-type NeoLandozerBurstAnimationParam<BURST> = BurstAnimationParamX<NeoLandozer, NeoLandozerHUD, TDArmdozerObjects, BURST>;
+type NeoLandozerBurst<BURST> = BurstAnimationParamX<NeoLandozer, NeoLandozerHUD, TDArmdozerObjects, BURST>;
 
 /**
- * ネオランドーザ バーストアニメーション パラメータに変換する
- * 変換できない場合はnullを返す
+ * ネオランドーザ バーストアニメーション パラメータにキャストする
+ * キャストできない場合はnullを返す
  *
- * @param param 変換元
- * @return 変換結果
+ * @param param キャスト元
+ * @return キャスト結果
  */
-export function toNeoLandozerBurstAnimationParam(param: BurstAnimationParam): ?NeoLandozerBurstAnimationParam<Burst> {
+export function castNeoLandozerBurst(param: BurstAnimationParam): ?NeoLandozerBurst<Burst> {
   if ((param.burstSprite instanceof NeoLandozer) && (param.burstArmdozerHUD instanceof NeoLandozerHUD)) {
     const sprite = (param.burstSprite: NeoLandozer);
     const armdozerHUD = (param.burstArmdozerHUD: NeoLandozerHUD);
@@ -40,10 +40,10 @@ export function toNeoLandozerBurstAnimationParam(param: BurstAnimationParam): ?N
  * @param param パラメータ
  * @return アニメーション
  */
-export function neoLandozerBurst(param: NeoLandozerBurstAnimationParam<Burst>): Animate {
+export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
   if (param.burst.type === 'BuffPower') {
     const buffPower = (param.burst: BuffPower);
-    const castParam = ((param: any): NeoLandozerBurstAnimationParam<typeof buffPower>);
+    const castParam = ((param: any): NeoLandozerBurst<typeof buffPower>);
     return neoLandozerBuffPower(castParam);
   }
   return empty();
@@ -55,7 +55,7 @@ export function neoLandozerBurst(param: NeoLandozerBurstAnimationParam<Burst>): 
  * @param param パラメータ
  * @return アニメーション
  */
-function neoLandozerBuffPower(param: NeoLandozerBurstAnimationParam<BuffPower>): Animate {
+function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
   return  all(
     param.burstSprite.turnStart(),
     param.burstArmdozerHUD.cutIn.show(),

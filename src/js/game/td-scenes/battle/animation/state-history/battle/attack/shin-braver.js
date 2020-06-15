@@ -12,16 +12,16 @@ import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbr
  *
  * @type RESULT 戦闘結果
  */
-export type ShinBraverBattleAnimationParam<RESULT> = BattleAnimationParamX<ShinBraver, RESULT>;
+export type ShinBraverBattle<RESULT> = BattleAnimationParamX<ShinBraver, RESULT>;
 
 /**
- * シンブレイバー戦闘アニメーションパラメータに変換する
- * 変換できない場合はnullを返す
+ * シンブレイバー戦闘アニメーションパラメータにキャストする
+ * キャストできない場合はnullを返す
  *
- * @param param 変換元
- * @return 変換結果
+ * @param param キャスト元
+ * @return キャスト結果
  */
-export function toShinBraverBattleAnimationParam(param: BattleAnimationParam): ?ShinBraverBattleAnimationParam<BattleResult> {
+export function castShinBraverBattle(param: BattleAnimationParam): ?ShinBraverBattle<BattleResult> {
   if (param.attackerSprite instanceof ShinBraver) {
     const sprite: ShinBraver = param.attackerSprite;
     return ((param: any): BattleAnimationParamX<typeof sprite, typeof param.result>);
@@ -35,52 +35,52 @@ export function toShinBraverBattleAnimationParam(param: BattleAnimationParam): ?
  * @param param パラメータ
  * @return アニメーション
  */
-export function shinBraverAttack(param: ShinBraverBattleAnimationParam<BattleResult>): Animate {
+export function shinBraverAttack(param: ShinBraverBattle<BattleResult>): Animate {
   if (param.isDeath && param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): ShinBraverBattleAnimationParam<DownResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattle<DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): ShinBraverBattleAnimationParam<AttackResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattle<AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
   if (param.isDeath && param.result.name === 'CriticalHit') {
     const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): ShinBraverBattleAnimationParam<DownResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattle<DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'CriticalHit') {
     const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): ShinBraverBattleAnimationParam<AttackResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattle<AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
   if (param.isDeath && param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
-    const castParam = ((param: any): ShinBraverBattleAnimationParam<DownResult | typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattle<DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
-    const castParam = ((param: any): ShinBraverBattleAnimationParam<typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattle<typeof castResult>);
     return guard(castParam);
   }
 
   if (param.result.name === 'Miss') {
     const castResult = (param.result: Miss);
-    const castParam = ((param: any): ShinBraverBattleAnimationParam<typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattle<typeof castResult>);
     return miss(castParam);
   }
 
   if (param.result.name === 'Feint') {
     const castResult = (param.result: Feint);
-    const castParam = ((param: any): ShinBraverBattleAnimationParam<typeof castResult>);
+    const castParam = ((param: any): ShinBraverBattle<typeof castResult>);
     return feint(castParam);
   }
 
@@ -96,7 +96,7 @@ type AttackResult = NormalHit | CriticalHit;
  * @param param パラメータ
  * @return アニメーション
  */
-function attack(param: ShinBraverBattleAnimationParam<AttackResult>): Animate {
+function attack(param: ShinBraverBattle<AttackResult>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(
@@ -119,7 +119,7 @@ function attack(param: ShinBraverBattleAnimationParam<AttackResult>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function guard(param: ShinBraverBattleAnimationParam<Guard>): Animate {
+function guard(param: ShinBraverBattle<Guard>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(
@@ -142,7 +142,7 @@ function guard(param: ShinBraverBattleAnimationParam<Guard>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function miss(param: ShinBraverBattleAnimationParam<Miss>): Animate {
+function miss(param: ShinBraverBattle<Miss>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(
@@ -161,7 +161,7 @@ function miss(param: ShinBraverBattleAnimationParam<Miss>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function feint(param: ShinBraverBattleAnimationParam<Feint>): Animate {
+function feint(param: ShinBraverBattle<Feint>): Animate {
   if (!param.result.isDefenderMoved) {
     return empty();
   }
@@ -180,7 +180,7 @@ type DownResult = NormalHit | CriticalHit | Guard;
  * @param param パラメータ
  * @return アニメーション
  */
-function down(param: ShinBraverBattleAnimationParam<DownResult>): Animate {
+function down(param: ShinBraverBattle<DownResult>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(

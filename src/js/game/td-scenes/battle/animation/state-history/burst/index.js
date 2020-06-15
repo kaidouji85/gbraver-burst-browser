@@ -8,10 +8,11 @@ import {updateGauge} from "../update-gauge";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {delay, empty} from "../../../../../../animation/delay";
-import {shinBraverBurst, toShinBraverBurstParam} from "./shin-braver";
-import {lightningDozerBurst, toLightningDozerBurstAnimationParam} from "./lightning-dozer";
-import {neoLandozerBurst, toNeoLandozerBurstAnimationParam} from "./neo-landozer";
+import {shinBraverBurst, castShinBraverBurst} from "./shin-braver";
+import {lightningDozerBurst, castLightningDozerBurst} from "./lightning-dozer";
+import {neoLandozerBurst, castNeoLandozerBurst} from "./neo-landozer";
 import {toWingDozerBurst, wingDozerBurst} from "./wingdozer";
+
 
 /**
  * バーストアニメーション
@@ -38,17 +39,17 @@ export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneSta
  * @return バーストアニメーション
  */
 function armdozerAnimation(param: BurstAnimationParam): Animate {
-  const shinBraverParam = toShinBraverBurstParam(param);
+  const shinBraverParam = castShinBraverBurst(param);
   if (shinBraverParam) {
     return shinBraverBurst(shinBraverParam);
   }
 
-  const neoLandozer = toNeoLandozerBurstAnimationParam(param);
+  const neoLandozer = castNeoLandozerBurst(param);
   if (neoLandozer) {
     return neoLandozerBurst(neoLandozer);
   }
 
-  const lightningDozer = toLightningDozerBurstAnimationParam(param);
+  const lightningDozer = castLightningDozerBurst(param);
   if (lightningDozer) {
     return lightningDozerBurst(lightningDozer);
   }
