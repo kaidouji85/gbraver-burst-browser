@@ -15,16 +15,16 @@ import {LightningDozerHUD} from "../../../view/hud/armdozer-objects/lightning-do
  *
  * @type BURST バースト
  */
-export type LightningDozerBurstAnimationParam<BURST> = BurstAnimationParamX<LightningDozer, LightningDozerHUD, LightningDozerTD, BURST>;
+export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozer, LightningDozerHUD, LightningDozerTD, BURST>;
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータにキャストする
  * キャストできない場合はnullを返すkaesu
  *
- * @param param 変換元
- * @return 変換結果
+ * @param param キャスト元
+ * @return キャスト結果
  */
-export function toLightningDozerBurstAnimationParam(param: BurstAnimationParam): ?LightningDozerBurstAnimationParam<Burst> {
+export function castLightningDozerBurst(param: BurstAnimationParam): ?LightningDozerBurst<Burst> {
   if ((param.burstSprite instanceof LightningDozer) && (param.burstArmdozerTD instanceof LightningDozerTD) && (param.burstArmdozerHUD instanceof LightningDozerHUD)) {
     const sprite: LightningDozer = param.burstSprite;
     const armdozerHUD: LightningDozerHUD = param.burstArmdozerHUD;
@@ -41,10 +41,10 @@ export function toLightningDozerBurstAnimationParam(param: BurstAnimationParam):
  * @param param パラメータ
  * @return アニメーション
  */
-export function lightningDozerBurst(param: LightningDozerBurstAnimationParam<Burst>): Animate {
+export function lightningDozerBurst(param: LightningDozerBurst<Burst>): Animate {
   if (param.burst.type === 'LightningBarrier') {
     const castBurst: LightningBarrier = param.burst;
-    const castParam= ((param: any):LightningDozerBurstAnimationParam<typeof castBurst>);
+    const castParam= ((param: any):LightningDozerBurst<typeof castBurst>);
     return lightningBarrier(castParam);
   }
 
@@ -57,7 +57,7 @@ export function lightningDozerBurst(param: LightningDozerBurstAnimationParam<Bur
  * @param param パラメータ
  * @return アニメーション
  */
-function lightningBarrier(param: LightningDozerBurstAnimationParam<LightningBarrier>): Animate {
+function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate {
   return all(
     param.burstSprite.turnStart(),
     param.burstArmdozerHUD.cutIn.show(),
