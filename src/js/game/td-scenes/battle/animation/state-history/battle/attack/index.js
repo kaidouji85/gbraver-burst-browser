@@ -6,7 +6,7 @@ import {neoLandozerAttack, castNeoLandozerBattle} from "./neo-landozer";
 import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam} from "../animation-param";
 import {lightningDozerAttack, castLightningDozerBattle} from "./lightning-dozer";
-import {toWingDozerBattleAnimationParam, wingDozerAttack} from "./wing-dozer";
+import {castWingDozerBattle, wingDozerAttack} from "./wing-dozer";
 
 /**
  * 攻撃側スプライトに応じて、戦闘アニメーションを切り替える
@@ -30,7 +30,7 @@ export function attackAnimation(param: BattleAnimationParam): Animate {
     return lightningDozerAttack(lightningDozer);
   }
 
-  const wingDozer = toWingDozerBattleAnimationParam(param);
+  const wingDozer = castWingDozerBattle(param);
   if (wingDozer) {
     return wingDozerAttack(wingDozer);
   }

@@ -22,7 +22,7 @@ export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozer, any, any, BU
  * @param origin キャスト元
  * @return キャスト結果
  */
-export function toWingDozerBurst(origin: BurstAnimationParam): ?WingDozerBurst<Burst> {
+export function castWingDozerBurst(origin: BurstAnimationParam): ?WingDozerBurst<Burst> {
   if (!(origin.burstSprite instanceof WingDozer)) {
     return null;
   }

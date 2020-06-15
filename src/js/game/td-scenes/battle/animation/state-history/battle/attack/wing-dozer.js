@@ -21,7 +21,7 @@ export type WingDozerBattle<Result> = BattleAnimationParamX<WingDozer, Result>;
  * @param origin 変換前
  * @return 変換結果
  */
-export function toWingDozerBattleAnimationParam(origin: BattleAnimationParam): ?WingDozerBattle<BattleResult> {
+export function castWingDozerBattle(origin: BattleAnimationParam): ?WingDozerBattle<BattleResult> {
   if (origin.attackerSprite instanceof WingDozer) {
     const sprite: WingDozer = origin.attackerSprite;
     return ((origin: any): BattleAnimationParamX<typeof sprite, typeof origin.result>);
