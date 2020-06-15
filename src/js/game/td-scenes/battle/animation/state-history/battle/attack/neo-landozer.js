@@ -10,16 +10,16 @@ import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbr
 /**
  * ネオランドーザ 戦闘アニメーション パラメータ
  */
-export type NeoLandozerBattleAnimtionParam<RESULT> =BattleAnimationParamX<NeoLandozer, RESULT>;
+export type NeoLandozerBattle<RESULT> =BattleAnimationParamX<NeoLandozer, RESULT>;
 
 /**
- * ネオランドーザ戦闘アニメーションパラメータに変換する
- * 変換できない場合はnullを返す
+ * ネオランドーザ戦闘アニメーションパラメータにキャストする
+ * キャストできない場合はnullを返す
  *
- * @param param 変換元
- * @return 変換結果
+ * @param param キャスト元
+ * @return キャスト結果
  */
-export function toNeoLandozerBattleAnimtionParam(param: BattleAnimationParam): ?NeoLandozerBattleAnimtionParam<BattleResult> {
+export function castNeoLandozerBattle(param: BattleAnimationParam): ?NeoLandozerBattle<BattleResult> {
   if (param.attackerSprite instanceof NeoLandozer) {
     const sprite: NeoLandozer = param.attackerSprite;
     return ((param: any): BattleAnimationParamX<typeof sprite, typeof param.result>);
@@ -33,52 +33,52 @@ export function toNeoLandozerBattleAnimtionParam(param: BattleAnimationParam): ?
  * @param param パラメータ
  * @return アニメーション
  */
-export function neoLandozerAttack(param: NeoLandozerBattleAnimtionParam<BattleResult>): Animate {
+export function neoLandozerAttack(param: NeoLandozerBattle<BattleResult>): Animate {
   if (param.isDeath && param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): NeoLandozerBattleAnimtionParam<DownResult | typeof castResult>);
+    const castParam = ((param: any): NeoLandozerBattle<DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'NormalHit') {
     const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): NeoLandozerBattleAnimtionParam<AttackResult | typeof castResult>);
+    const castParam = ((param: any): NeoLandozerBattle<AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
   if (param.isDeath && param.result.name === 'CriticalHit') {
     const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): NeoLandozerBattleAnimtionParam<DownResult | typeof castResult>);
+    const castParam = ((param: any): NeoLandozerBattle<DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'CriticalHit') {
     const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): NeoLandozerBattleAnimtionParam<AttackResult | typeof castResult>);
+    const castParam = ((param: any): NeoLandozerBattle<AttackResult | typeof castResult>);
     return attack(castParam);
   }
 
   if (param.isDeath && param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
-    const castParam = ((param: any): NeoLandozerBattleAnimtionParam<DownResult | typeof castResult>);
+    const castParam = ((param: any): NeoLandozerBattle<DownResult | typeof castResult>);
     return down(castParam);
   }
 
   if (param.result.name === 'Guard') {
     const castResult = (param.result: Guard);
-    const castParam = ((param: any): NeoLandozerBattleAnimtionParam<typeof castResult>);
+    const castParam = ((param: any): NeoLandozerBattle<typeof castResult>);
     return guard(castParam);
   }
 
   if (param.result.name === 'Miss') {
     const castResult = (param.result: Miss);
-    const castParam = ((param: any): NeoLandozerBattleAnimtionParam<typeof castResult>);
+    const castParam = ((param: any): NeoLandozerBattle<typeof castResult>);
     return miss(castParam);
   }
 
   if (param.result.name === 'Feint') {
     const castResult = (param.result: Feint);
-    const castParam = ((param: any): NeoLandozerBattleAnimtionParam<typeof castResult>);
+    const castParam = ((param: any): NeoLandozerBattle<typeof castResult>);
     return feint(castParam);
   }
 
@@ -94,7 +94,7 @@ type AttackResult = NormalHit | CriticalHit;
  * @param param パラメータ
  * @return アニメーション
  */
-function attack(param: NeoLandozerBattleAnimtionParam<AttackResult>): Animate {
+function attack(param: NeoLandozerBattle<AttackResult>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(600))
     .chain(all(
@@ -117,7 +117,7 @@ function attack(param: NeoLandozerBattleAnimtionParam<AttackResult>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function guard(param: NeoLandozerBattleAnimtionParam<Guard>): Animate {
+function guard(param: NeoLandozerBattle<Guard>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(600))
     .chain(all(
@@ -140,7 +140,7 @@ function guard(param: NeoLandozerBattleAnimtionParam<Guard>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function miss(param: NeoLandozerBattleAnimtionParam<Miss>): Animate {
+function miss(param: NeoLandozerBattle<Miss>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(600))
     .chain(all(
@@ -159,7 +159,7 @@ function miss(param: NeoLandozerBattleAnimtionParam<Miss>): Animate {
  * @param param パラメータ
  * @return アニメーション
  */
-function feint(param: NeoLandozerBattleAnimtionParam<Feint>): Animate {
+function feint(param: NeoLandozerBattle<Feint>): Animate {
   if (!param.result.isDefenderMoved) {
     return empty();
   }
@@ -178,7 +178,7 @@ type DownResult = NormalHit | Guard | CriticalHit;
  * @param param パラメータ
  * @return アニメーション
  */
-function down(param: NeoLandozerBattleAnimtionParam<DownResult>): Animate {
+function down(param: NeoLandozerBattle<DownResult>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(600))
     .chain(all(
