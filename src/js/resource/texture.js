@@ -82,6 +82,7 @@ export const TEXTURE_IDS = {
   ENEMY_TURN: 'ENEMY_TURN',
   POWER_UP: 'POWER_UP',
   REFLECT: 'REFLECT',
+  CONTINUOUS_ATTACK: 'CONTINUOUS_ATTACK',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -349,6 +350,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.REFLECT,
     path: 'effect-label/reflect.png',
   },
+  {
+    id: TEXTURE_IDS.CONTINUOUS_ATTACK,
+    path: 'effect-label/continuous-attack.png',
+  }
 ];
 
 /**
