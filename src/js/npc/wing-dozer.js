@@ -23,6 +23,7 @@ export class WingDozerNPC implements NPC {
     this.armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.WING_DOZER) || ArmDozers[0];
   }
 
+
   /**
    * ルーチン
    *
@@ -65,25 +66,15 @@ export class WingDozerNPC implements NPC {
    */
   _attackRoutine(own: PlayerState, commands: Command[]): Command {
     const burst = commands.find(v => v.type === 'BURST_COMMAND');
-    const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-    const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
-    const batteryMaxMinus1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === (own.armdozer.battery - 1));
-    const hasContinuousActive = this._hasContinuousActive(own);
+    const battery4 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 4);
+    const battery5 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
 
-    if (burst) {
-      return burst;
+    if (burst && battery5) {
+      return battery5;
     }
 
-    if (burst && battery3) {
-      return battery3;
-    }
-
-    if (hasContinuousActive && battery1) {
-      return battery1;
-    }
-
-    if (batteryMaxMinus1) {
-      return batteryMaxMinus1;
+    if (battery4) {
+      return battery4;
     }
 
     return ZERO_BATTERY;
@@ -99,15 +90,9 @@ export class WingDozerNPC implements NPC {
   _defenseRoutine(own: PlayerState, commands: Command[]): Command {
     const burst = commands.find(v => v.type === 'BURST_COMMAND');
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-    const maxBattery = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === own.armdozer.battery);
-    const hasContinuousActive = this._hasContinuousActive(own);
 
     if (burst) {
       return burst;
-    }
-
-    if (maxBattery && hasContinuousActive) {
-      return maxBattery;
     }
 
     if (battery1) {
@@ -115,11 +100,5 @@ export class WingDozerNPC implements NPC {
     }
 
     return ZERO_BATTERY;
-  }
-
-  _hasContinuousActive(own: PlayerState): boolean {
-    return own.armdozer.effects
-      .filter(v => v.type === 'ContinuousActivePlayer')
-      .length > 0;
   }
 }
