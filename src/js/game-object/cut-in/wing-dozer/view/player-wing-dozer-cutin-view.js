@@ -86,6 +86,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
     
     const activeMesh = this._getActiveMesh(model.animation.type);
     activeMesh.setOpacity(model.opacity);
+    activeMesh.animate(model.animation.frame);
     const disactiveMeshes = this._getAllMeshes()
       .filter(v => v !== activeMesh);
     disactiveMeshes.forEach(v => {
