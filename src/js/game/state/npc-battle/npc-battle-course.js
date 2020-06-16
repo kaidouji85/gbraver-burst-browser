@@ -88,13 +88,13 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     level: 2,
     stageName: 'STAGE 2',
-    npc: () => new WingDozerNPC(),
+    npc: () => new ShinBraverNPC(),
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     level: 3,
     stageName: 'STAGE FINAL',
-    npc: () => new ShinBraverNPC(),
+    npc: () => new WingDozerNPC(),
   },
   /** ウィングドーザ  */
   {
@@ -107,7 +107,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.WING_DOZER,
     level: 2,
     stageName: 'STAGE 2',
-    npc: () => new WingDozerNPC(),
+    npc: () => new LightningDozerNPC(),
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
