@@ -5,7 +5,7 @@ import type {Resources} from "../../../../resource";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
-import type {WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
+import type {AnimationType, WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 800;
@@ -17,7 +17,8 @@ export const BASE_PADDING_TOP = 100;
  * プレイヤー側 ウィングドーザ　カットイン ビュー
  */
 export class PlayerWingDozerCutInView implements WingDozerCutInView {
-  _cutInDown: HorizontalAnimationMesh;
+  _burstUp: HorizontalAnimationMesh;
+  _burstDown: HorizontalAnimationMesh;
   _group: THREE.Group;
 
   /**
@@ -26,13 +27,25 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const cutInDownResource = resources.textures
+    const burstUpResource = resources.textures
       .find(v => v.id === TEXTURE_IDS.WING_DOZER_BURST_UP);
-    const cutInDown = cutInDownResource
-      ? cutInDownResource.texture
+    const burstUp = burstUpResource
+      ? burstUpResource.texture
       : new THREE.Texture();
-    this._cutInDown = new HorizontalAnimationMesh({
-      texture: cutInDown,
+    this._burstUp = new HorizontalAnimationMesh({
+      texture: burstUp,
+      width: MESH_SIZE,
+      height: MESH_SIZE,
+      maxAnimation: 4
+    });
+
+    const burstDownResource = resources.textures
+      .find(v => v.id === TEXTURE_IDS.WING_DOZER_BURST_DOWN);
+    const burstDown = burstDownResource
+      ? burstDownResource.texture
+      : new THREE.Texture();
+    this._burstDown = new HorizontalAnimationMesh({
+      texture: burstDown,
       width: MESH_SIZE,
       height: MESH_SIZE,
       maxAnimation: 4
@@ -48,7 +61,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._cutInDown.destructor();
+    this._burstUp.destructor();
   }
 
   /**
@@ -69,7 +82,16 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
     this._group.position.x = model.tracking.x;
     this._group.position.y = model.tracking.y;
 
-    this._group.scale.set(1, 1, 1);
+    this._group.scale.set(model.scale, model.scale, model.scale);
+    
+    const activeMesh = this._getActiveMesh(model.animation.type);
+    activeMesh.setOpacity(model.opacity);
+    const disactiveMeshes = this._getAllMeshes()
+      .filter(v => v !== activeMesh);
+    disactiveMeshes.forEach(v => {
+      v.setOpacity(0);
+    });
+
   }
 
   /**
@@ -79,7 +101,25 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    */
   _getAllMeshes(): HorizontalAnimationMesh[] {
     return [
-      this._cutInDown
+      this._burstUp,
+      this._burstDown,
     ];
+  }
+
+  /**
+   * アニメーションタイプに応じたメッシュを返す
+   *
+   * @param type アニメーションタイプ
+   * @return アニメーションタイプに応じたメッシュ
+   */
+  _getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
+    switch(type) {
+      case 'BURST_UP':
+        return this._burstUp;
+      case 'BURST_DOWN':
+        return this._burstDown;
+      default:
+        return this._burstUp;
+    }
   }
 }
