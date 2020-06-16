@@ -8,6 +8,9 @@ import {createInitialValue} from "./model/initial-value";
 import type {Update} from "../../../action/game-loop/update";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
+import {Animate} from "../../../animation/animate";
+import {show} from "./animation/show";
+import {hidden} from "./animation/hidden";
 
 /**
  * ウィングドーザ カットイン
@@ -48,6 +51,24 @@ export class WingDozerCutIn {
    */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * カットインを表示する
+   *
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this._model);
+  }
+
+  /**
+   * カットインを消す
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**
