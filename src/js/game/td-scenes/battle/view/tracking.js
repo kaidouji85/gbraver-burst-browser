@@ -1,17 +1,13 @@
 // @flow
 
 import * as THREE from 'three';
-import {Gauge} from "../../../../game-object/gauge/gauge";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../../../game-object/armdozer/position";
 import {toHUDCoordinate} from "./coordinate";
-import {NeoLandozerCutIn} from "../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
-import {ShinBraverCutIn} from "../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
-import {LightningDozerCutIn} from "../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import {ThreeDimensionLayer} from "./td";
 import {HudLayer} from "./hud";
 import type {PlayerId} from "gbraver-burst-core";
@@ -59,7 +55,7 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
  * @param rendererDOM レンダリング対象のHTML要素
  * @param gauge ゲージ
  */
-function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: Gauge): void {
+function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
   const tdCoordinate = {
     x: ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -76,7 +72,7 @@ function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, g
  * @param rendererDOM レンダリング対象のHTML要素
  * @param gauge ゲージ
  */
-function trackingEnemyGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: Gauge): void {
+function trackingEnemyGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
   const tdCoordinate = {
     x: -ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,

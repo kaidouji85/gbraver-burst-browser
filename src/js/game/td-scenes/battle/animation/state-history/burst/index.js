@@ -8,9 +8,9 @@ import {updateGauge} from "../update-gauge";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {delay, empty} from "../../../../../../animation/delay";
-import {shinBraverBurst, castShinBraverBurst} from "./shin-braver";
-import {lightningDozerBurst, castLightningDozerBurst} from "./lightning-dozer";
-import {neoLandozerBurst, castNeoLandozerBurst} from "./neo-landozer";
+import {castShinBraverBurst, shinBraverBurst} from "./shin-braver";
+import {castLightningDozerBurst, lightningDozerBurst} from "./lightning-dozer";
+import {castNeoLandozerBurst, neoLandozerBurst} from "./neo-landozer";
 
 /**
  * バーストアニメーション
