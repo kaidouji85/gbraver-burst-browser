@@ -6,12 +6,15 @@ import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
 import type {AnimationType, WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
+import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
+import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 800;
 
 /** ベースとなるpadding top */
-export const BASE_PADDING_TOP = 100;
+export const BASE_PADDING_TOP = 60;
 
 /**
  * プレイヤー側 ウィングドーザ　カットイン ビュー
@@ -61,7 +64,9 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._burstUp.destructor();
+    this._getAllMeshes().forEach(v => {
+      v.destructor();
+    });
   }
 
   /**
@@ -77,22 +82,24 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * モデルをビューに反映させる
    *
    * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: WingDozerCutInModel): void {
-    this._group.position.x = model.tracking.x;
-    this._group.position.y = model.tracking.y;
-
-    this._group.scale.set(model.scale, model.scale, model.scale);
-    
+  engage(model: WingDozerCutInModel, preRender: PreRender): void {
     const activeMesh = this._getActiveMesh(model.animation.type);
     activeMesh.setOpacity(model.opacity);
     activeMesh.animate(model.animation.frame);
+
     const disactiveMeshes = this._getAllMeshes()
       .filter(v => v !== activeMesh);
     disactiveMeshes.forEach(v => {
       v.setOpacity(0);
     });
 
+    const scale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
+    this._group.scale.set(scale, scale, scale);
+    this._group.position.x = model.tracking.x;
+    this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
+    this._group.position.z = HUD_CUT_IN_ZNIDEX;
   }
 
   /**

@@ -1,6 +1,5 @@
 // @flow
 
-import type {Resources} from "../../../resource";
 import * as THREE from "three";
 import type {WingDozerCutInModel} from "./model/wing-dozer-cutin-model";
 import type {WingDozerCutInView} from "./view/wing-dozer-cutin-view";
@@ -11,11 +10,13 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
+import type {HUDTracking} from "../../../tracking/hud-tracking";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /**
  * ウィングドーザ カットイン
  */
-export class WingDozerCutIn {
+export class WingDozerCutIn implements HUDTracking {
   _model: WingDozerCutInModel;
   _view: WingDozerCutInView;
   _subscription: Subscription;
@@ -30,8 +31,8 @@ export class WingDozerCutIn {
     this._model = createInitialValue();
     this._view = view;
     this._subscription = listener.subscribe(action => {
-      if (action.type === 'Update') {
-        this._onUpdate(action);
+      if (action.type === 'PreRender') {
+        this._onPreRender(action);
       }
     });
   }
@@ -72,11 +73,23 @@ export class WingDozerCutIn {
   }
 
   /**
-   * アップデート時の処理
+   * 3Dレイヤーのオブジェクトをトラッキングする
+   * 本メソッドにはHUDレイヤー系座標をセットすること
+   *
+   * @param x x座標
+   * @param y y座標
+   */
+  tracking(x: number, y: number): void {
+    this._model.tracking.x = x;
+    this._model.tracking.y = y;
+  }
+
+  /**
+   * プリレンダー時の処理
    *
    * @param action アクション
    */
-  _onUpdate(action: Update): void {
-    this._view.engage(this._model);
+  _onPreRender(action: PreRender): void {
+    this._view.engage(this._model, action);
   }
 }

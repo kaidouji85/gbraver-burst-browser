@@ -2,6 +2,7 @@
 
 import * as THREE from 'three';
 import type {WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
 
 /**
  * ウィングドーザ カットイン ビュー
@@ -16,8 +17,9 @@ export interface WingDozerCutInView {
    * モデルをビューに反映させる
    *
    * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: WingDozerCutInModel): void;
+  engage(model: WingDozerCutInModel, preRender: PreRender): void;
 
   /**
    * シーンに追加するオブジェクトを取得する
