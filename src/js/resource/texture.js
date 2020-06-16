@@ -70,6 +70,8 @@ export const TEXTURE_IDS = {
   WING_DOZER_KNOCK_BACK: 'WING_DOZER_KNOCK_BACK',
   WING_DOZER_DOWN: 'WING_DOZER_DOWN',
   WING_DOZER_BACK_STEP: 'WING_DOZER_BACK_STEP',
+  WING_DOZER_BURST_UP: 'WING_DOZER_BURST_UP',
+  WING_DOZER_BURST_DOWN: 'WING_DOZER_BURST_DOWN',
   LIGHTNING_DOZER_FRONT_STEP: 'LIGHTNING_DOZER_FRONT_STEP',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
@@ -298,6 +300,14 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.WING_DOZER_BACK_STEP,
     path: 'armdozer/wing-dozer/back-step.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_BURST_UP,
+    path: 'armdozer/wing-dozer/burst-up.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_BURST_DOWN,
+    path: 'armdozer/wing-dozer/burst-down.png',
   },
   // ヒットマーク関連
   {
