@@ -21,6 +21,8 @@ import {knockBackToStand} from "./animation/knock-back-to-stand";
 import {down} from "./animation/down";
 import {WingDozerSounds} from "./sounds/wing-dozer-sounds";
 import type {Resources} from "../../../resource";
+import {guard} from "./animation/guard";
+import {guardToStand} from "./animation/guard-to-stand";
 
 /**
  * ウィングドーザ
@@ -117,7 +119,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   guard(): Animate {
-    return knockBack(this._model);
+    return guard(this._model);
   }
 
   /** 
@@ -126,7 +128,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   guardToStand(): Animate {
-    return knockBackToStand(this._model, this._sounds);
+    return guardToStand(this._model, this._sounds);
   }
 
   /**
