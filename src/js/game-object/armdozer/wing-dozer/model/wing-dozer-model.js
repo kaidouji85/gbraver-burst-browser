@@ -13,7 +13,8 @@ export type AnimationType =
   'DASH_TO_STAND' |
   'KNOCK_BACK' |
   'DOWN' |
-  'BACK_STEP';
+  'BACK_STEP' |
+  'FRONT_STEP';
 
 /**
  * ウィングドーザ モデル
