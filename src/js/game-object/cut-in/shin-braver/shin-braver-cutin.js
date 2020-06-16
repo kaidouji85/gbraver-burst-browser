@@ -10,11 +10,12 @@ import {Animate} from "../../../animation/animate";
 import {hidden} from "./animation/hidden";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {show} from "./animation/show";
+import type {HUDTracking} from "../../../tracking/hud-tracking";
 
 /**
  * シンブレイバーカットイン
  */
-export class ShinBraverCutIn {
+export class ShinBraverCutIn implements HUDTracking {
   _model: ShinBraverCutInModel;
   _view: ShinBraverCutInView;
   _subscription: Subscription;
