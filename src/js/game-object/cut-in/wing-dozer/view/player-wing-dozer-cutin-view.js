@@ -18,6 +18,7 @@ export const BASE_PADDING_TOP = 100;
  */
 export class PlayerWingDozerCutInView implements WingDozerCutInView {
   _cutInDown: HorizontalAnimationMesh;
+  _group: THREE.Group;
 
   /**
    * コンストラクタ
@@ -36,6 +37,11 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
       height: MESH_SIZE,
       maxAnimation: 4
     });
+
+    this._group = new THREE.Group();
+    this._getAllMeshes().forEach(mesh => {
+      this._group.add(mesh.getObject3D());
+    })
   }
 
   /**
@@ -51,7 +57,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._cutInDown.getObject3D();
+    return this._group;
   }
 
   /**
@@ -60,6 +66,20 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * @param model モデル
    */
   engage(model: WingDozerCutInModel): void {
-    // NOP
+    this._group.position.x = model.tracking.x;
+    this._group.position.y = model.tracking.y;
+
+    this._group.scale.set(1, 1, 1);
+  }
+
+  /**
+   * 本クラスに含まれる全メッシュを取得する
+   *
+   * @return 取得結果
+   */
+  _getAllMeshes(): HorizontalAnimationMesh[] {
+    return [
+      this._cutInDown
+    ];
   }
 }

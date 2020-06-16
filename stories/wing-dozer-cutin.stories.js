@@ -1,10 +1,7 @@
 // @flow
 
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
-import {enemyLightningiDozerCutIn, playerLightningDozerCutIn} from "../src/js/game-object/cut-in/lightning-dozer";
-import {delay} from "../src/js/animation/delay";
-import {LightningDozerCutIn} from "../src/js/game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
-import {WingDozerCutIn} from "../src/js/game-object/cut-in/wing-dozer/wing-dozer-cutin";
+import {enemyWingDozerCutIn, playerWingDozerCutIn} from "../src/js/game-object/cut-in/wing-dozer";
 
 export default {
   title: 'wing-dozer-cutin',
@@ -12,7 +9,16 @@ export default {
 
 export const Player = () => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const cutIn = new WingDozerCutIn(resources);
+    const cutIn = playerWingDozerCutIn(resources, listener);
+    return [cutIn.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+}
+
+export const Enemy = () => {
+  const stub = new HUDGameObjectStub((resources, listener) => {
+    const cutIn = enemyWingDozerCutIn(resources, listener);
     return [cutIn.getObject3D()];
   });
   stub.start();
