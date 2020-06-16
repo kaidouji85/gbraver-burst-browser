@@ -1,41 +1,37 @@
 // @flow
 
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture";
 import * as THREE from "three";
-
-/** メッシュの大きさ */
-export const MESH_SIZE = 800;
-
-/** ベースとなるpadding top */
-export const BASE_PADDING_TOP = 100;
+import type {WingDozerCutInModel} from "./model/wing-dozer-cutin-model";
+import type {WingDozerCutInView} from "./view/wing-dozer-cutin-view";
+import {createInitialValue} from "./model/initial-value";
+import {PlayerWingDozerCutInView} from "./view/player-wing-dozer-cutin-view";
 
 /**
  * ウィングドーザ カットイン
  */
-export class WingDozerCutin {
-  _cutInDown: HorizontalAnimationMesh;
+export class WingDozerCutIn {
+  _model: WingDozerCutInModel;
+  _view: WingDozerCutInView;
 
   constructor(resources: Resources) {
-    const cutInDownResource = resources.textures
-      .find(v => v.id === TEXTURE_IDS.WING_DOZER_BURST_UP);
-    const cutInDown = cutInDownResource
-      ? cutInDownResource.texture
-      : new THREE.Texture();
-    this._cutInDown = new HorizontalAnimationMesh({
-      texture: cutInDown,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
-      maxAnimation: 4
-    });
+    this._model = createInitialValue();
+    this._view = new PlayerWingDozerCutInView(resources);
   }
 
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
-    this._cutInDown.destructor();
+    this._view.destructor();
   }
 
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
   getObject3D(): THREE.Object3D {
-    return this._cutInDown.getObject3D();
+    return this._view.getObject3D();
   }
 }
