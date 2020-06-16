@@ -14,7 +14,8 @@ export type AnimationType =
   'KNOCK_BACK' |
   'DOWN' |
   'BACK_STEP' |
-  'FRONT_STEP';
+  'FRONT_STEP' |
+  'GUARD';
 
 /**
  * ウィングドーザ モデル
