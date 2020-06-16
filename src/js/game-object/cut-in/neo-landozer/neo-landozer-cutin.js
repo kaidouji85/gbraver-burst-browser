@@ -10,11 +10,12 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
+import type {HUDTracking} from "../../../tracking/hud-tracking";
 
 /**
  * ネオランドーザ カットイン
  */
-export class NeoLandozerCutIn {
+export class NeoLandozerCutIn implements HUDTracking {
   _model: NeoLandozerCutInModel;
   _view: NeoLandozerCutInView;
   _subscription: Subscription;
