@@ -9,6 +9,7 @@ import {delay, empty} from "../../../../../../animation/delay";
 import type {ContinuousAttack} from "gbraver-burst-core/lib/player/burst";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
+import {WingDozerHUD} from "../../../view/hud/armdozer-objects/wing-dozer";
 
 /**
  * ウィングドーザ バーストアニメーション パラメータ
@@ -25,12 +26,13 @@ export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozer, any, any, BU
  * @return キャスト結果
  */
 export function castWingDozerBurst(origin: BurstAnimationParam): ?WingDozerBurst<Burst> {
-  if (!(origin.burstSprite instanceof WingDozer)) {
+  if (!(origin.burstSprite instanceof WingDozer) || !(origin.burstArmdozerHUD instanceof WingDozerHUD)) {
     return null;
   }
 
   const sprite: WingDozer = origin.burstSprite;
-  return ((origin: any): BurstAnimationParamX<typeof sprite, any, any, Burst>);
+  const hud: WingDozerHUD = origin.burstArmdozerHUD;
+  return ((origin: any): BurstAnimationParamX<typeof sprite, typeof hud, any, Burst>);
 }
 
 /**
@@ -58,7 +60,7 @@ export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
 export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack>): Animate {
   return  all(
     param.burstSprite.turnStart(),
-    //param.burstArmdozerHUD.cutIn.show(),
+    param.burstArmdozerHUD.cutIn.show(),
     attentionArmDozer(param.tdCamera, param.burstSprite, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
@@ -67,7 +69,7 @@ export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack
   )
     .chain(delay(2000))
     .chain(all(
-      //param.burstArmdozerHUD.cutIn.hidden(),
+      param.burstArmdozerHUD.cutIn.hidden(),
       param.hudObjects.rearmostFader.opacity(0, 300),))
     .chain(delay(500))
     .chain(param.burstPlayerTD.armdozerEffects.continuousAttack.popUp())
