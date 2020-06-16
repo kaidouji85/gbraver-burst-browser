@@ -19,6 +19,7 @@ import {PopUp} from "../../../../../game-object/pop-up/pop-up/pop-up";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/pop-up/turn-start";
 import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/pop-up/power-up";
 import {enemyReflect, playerReflect} from "../../../../../game-object/pop-up/reflect";
+import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/pop-up/continuous-attack";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -32,6 +33,7 @@ export interface TDPlayerField {
   armdozerEffects: {
     powerUp: PopUp,
     reflect: PopUp,
+    continuousAttack: PopUp,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -68,6 +70,7 @@ export class TDPlayerImpl implements TDPlayer {
   armdozerEffects: {
     powerUp: PopUp,
     reflect: PopUp,
+    continuousAttack: PopUp,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -94,6 +97,7 @@ export class TDPlayerImpl implements TDPlayer {
     this.hitMark.lightning.destructor();
     this.armdozerEffects.powerUp.destructor();
     this.armdozerEffects.reflect.destructor();
+    this.armdozerEffects.continuousAttack.destructor();
     this.recoverBattery.destructor();
     this.turnStart.destructor();
   }
@@ -109,6 +113,7 @@ export class TDPlayerImpl implements TDPlayer {
       this.hitMark.lightning.getObject3D(),
       this.armdozerEffects.powerUp.getObject3D(),
       this.armdozerEffects.reflect.getObject3D(),
+      this.armdozerEffects.continuousAttack.getObject3D(),
       this.batteryNumber.getObject3D(),
       this.recoverBattery.getObject3D(),
       this.damageIndicator.getObject3D(),
@@ -135,6 +140,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     armdozerEffects: {
       powerUp: playerPowerUp(resources, listener),
       reflect: playerReflect(resources, listener),
+      continuousAttack: playerContinuousAttack(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
@@ -167,6 +173,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     armdozerEffects: {
       powerUp: enemyPowerUp(resources, listener),
       reflect: enemyReflect(resources, listener),
+      continuousAttack: enemyContinuousAttack(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,

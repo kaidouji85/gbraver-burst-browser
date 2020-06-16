@@ -70,6 +70,10 @@ export class WingDozerNPC implements NPC {
     const batteryMaxMinus1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === (own.armdozer.battery - 1));
     const hasContinuousActive = this._hasContinuousActive(own);
 
+    if (burst) {
+      return burst;
+    }
+
     if (burst && battery3) {
       return battery3;
     }
