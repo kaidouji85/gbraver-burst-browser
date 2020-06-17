@@ -11,10 +11,10 @@ import type {PreRender} from "../../../../action/game-loop/pre-render";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
-export const MESH_SIZE = 830;
+export const MESH_SIZE = 1000;
 
 /** ベースとなるpadding top */
-export const BASE_PADDING_TOP = 60;
+export const BASE_PADDING_TOP = 50;
 
 /**
  * プレイヤー側 ウィングドーザ　カットイン ビュー
