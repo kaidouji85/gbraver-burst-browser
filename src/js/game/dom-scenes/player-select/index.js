@@ -48,6 +48,7 @@ export class PlayerSelect implements DOMScene {
     const armDozerIds = [
       ArmDozerIdList.NEO_LANDOZER,
       ArmDozerIdList.SHIN_BRAVER,
+      ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
     this._view = new PlayerSelectView(resources.path, armDozerIds);

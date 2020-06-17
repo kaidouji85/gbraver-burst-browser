@@ -4,11 +4,12 @@ import type {NPC} from "../../../npc/npc";
 import {NeoLandozerNPC} from "../../../npc/neo-landozer";
 import {WeakNeoLandozerNPC} from "../../../npc/weak-neo-landozer-npc";
 import {LightningDozerNPC} from "../../../npc/lightning-dozer";
-import {WeakLightningDozerNPC} from "../../../npc/weak-lightning-dozer";
 import {ShinBraverNPC} from "../../../npc/shin-braver";
 import {WeakShinBraverNPC} from "../../../npc/weak-shin-braver";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
+import {WeakWingDozerNPC} from "../../../npc/weak-wing-dozer-npc";
+import {WingDozerNPC} from "../../../npc/wing-dozer";
 
 /**
  * NPCコース
@@ -55,20 +56,20 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     level: 3,
     stageName: 'STAGE FINAL',
-    npc: () => new NeoLandozerNPC(),
+    npc: () => new WingDozerNPC(),
   },
   /** ネオランドーザ */
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     level: 1,
     stageName: 'STAGE 1',
-    npc: () => new WeakLightningDozerNPC(),
+    npc: () => new WeakShinBraverNPC(),
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     level: 2,
     stageName: 'STAGE 2',
-    npc: () => new ShinBraverNPC(),
+    npc: () => new WingDozerNPC(),
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
@@ -81,18 +82,37 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     level: 1,
     stageName: 'STAGE 1',
-    npc: () => new WeakShinBraverNPC(),
+    npc: () => new WeakNeoLandozerNPC(),
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     level: 2,
     stageName: 'STAGE 2',
-    npc: () => new NeoLandozerNPC(),
+    npc: () => new ShinBraverNPC(),
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     level: 3,
     stageName: 'STAGE FINAL',
-    npc: () => new ShinBraverNPC(),
+    npc: () => new WingDozerNPC(),
+  },
+  /** ウィングドーザ  */
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    level: 1,
+    stageName: 'STAGE 1',
+    npc: () => new WeakShinBraverNPC(),
+  },
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    level: 2,
+    stageName: 'STAGE 2',
+    npc: () => new NeoLandozerNPC(),
+  },
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    level: 3,
+    stageName: 'STAGE FINAL',
+    npc: () => new LightningDozerNPC(),
   },
 ];

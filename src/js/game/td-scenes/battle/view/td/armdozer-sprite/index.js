@@ -10,13 +10,14 @@ import {EnemyNeoLandozer, PlayerNeoLandozer} from "../../../../../../game-object
 import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
 import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 import {TDArmdozerSprite} from "./armdozer-sprite";
+import {EnemyWingDozer, PlayerWingDozer} from "../../../../../../game-object/armdozer/wing-dozer";
 
 /**
  * プレイヤースプライを生成する
  *
  * @param resources リソース管理オブジェクト
+ * @param state プレイヤー状態
  * @param listener イベントリスナ
- * @param playerInfo プレイヤー情報
  * @return スプライト
  */
 export function playerSprite(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDArmdozerSprite {
@@ -37,6 +38,8 @@ function createPlayerSprite(resources: Resources, listener: Observable<GameObjec
       return PlayerNeoLandozer(resources, listener);
     case ArmdozerAppearances.LIGHTNING_DOZER:
       return PlayerLightningDozer(resources, listener);
+    case ArmdozerAppearances.WING_DOZER:
+      return PlayerWingDozer(resources, listener);
     case ArmdozerAppearances.SHIN_BRAVER:
     default:
       return PlayerShinBraver(resources, listener);
@@ -47,8 +50,8 @@ function createPlayerSprite(resources: Resources, listener: Observable<GameObjec
  * 敵スプライを生成する
  *
  * @param resources リソース管理オブジェクト
+ * @param state プレイヤー状態
  * @param listener イベントリスナ
- * @param enemyInfo プレイヤー情報
  * @return スプライト
  */
 export function enemySprite(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDArmdozerSprite {
@@ -69,6 +72,8 @@ function createEnemySprite(resources: Resources, listener: Observable<GameObject
       return EnemyNeoLandozer(resources, listener);
     case ArmdozerAppearances.LIGHTNING_DOZER:
       return EnemyLightningDozer(resources, listener);
+    case ArmdozerAppearances.WING_DOZER:
+      return EnemyWingDozer(resources, listener);
     case ArmdozerAppearances.SHIN_BRAVER:
     default:
       return EnemyShinBraver(resources, listener);

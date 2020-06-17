@@ -10,6 +10,7 @@ import {Animate} from "../../animation/animate";
 import {hp} from "./animation/hp";
 import {battery} from './animation/battery';
 import {initialValue} from "./model/initial-value";
+import type {HUDTracking} from "../../tracking/hud-tracking";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -19,7 +20,7 @@ type Param = {
 };
 
 /** ゲージ */
-export class Gauge {
+export class Gauge implements HUDTracking {
   _model: GaugeModel;
   _view: GaugeView;
   _subscription: Subscription;

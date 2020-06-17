@@ -19,8 +19,10 @@ export function getArmdozerIconURL(resourcePath: ResourcePath, armDozerId: ArmDo
       return neoLandozerIconURL(resourcePath);
     case ArmDozerIdList.LIGHTNING_DOZER:
       return lightningDozerIconURL(resourcePath);
+    case ArmDozerIdList.WING_DOZER:
+      return wingDozerIconURL(resourcePath);
     default:
-      return '';
+      return shinBraverIconURL(resourcePath);
   }
 }
 
@@ -52,4 +54,13 @@ export function neoLandozerIconURL(resourcePath: ResourcePath): string {
  */
 export function lightningDozerIconURL(resourcePath: ResourcePath): string {
   return `${resourcePath.get()}/armdozer/lightning-dozer/player-select.png`;
+}
+
+/**
+ * ウィングドーザ アイコン URL
+ * @param resourcePath リソースパス
+ * @return URL
+ */
+export function wingDozerIconURL(resourcePath: ResourcePath): string {
+  return `${resourcePath.get()}/armdozer/wing-dozer/player-select.png`;
 }

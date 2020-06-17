@@ -10,11 +10,12 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
+import type {HUDTracking} from "../../../tracking/hud-tracking";
 
 /**
  * ライトニングドーザ カットイン
  */
-export class LightningDozerCutIn {
+export class LightningDozerCutIn implements HUDTracking {
   _model: LightningDozerCutInModel;
   _view: LightningDozerCutInView;
   _subscription: Subscription;

@@ -1,11 +1,12 @@
 // @flow
 
 import {Animate} from "../../../../../../../animation/animate";
-import {shinBraverAttack, toShinBraverBattleAnimationParam} from "./shin-braver";
-import {neoLandozerAttack, toNeoLandozerBattleAnimtionParam} from "./neo-landozer";
+import {castShinBraverBattle, shinBraverAttack} from "./shin-braver";
+import {castNeoLandozerBattle, neoLandozerAttack} from "./neo-landozer";
 import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam} from "../animation-param";
-import {lightningDozerAttack, toLightningDozerBattleAnimationParam} from "./lightning-dozer";
+import {lightningDozerAttack, castLightningDozerBattle} from "./lightning-dozer";
+import {castWingDozerBattle, wingDozerAttack} from "./wing-dozer";
 
 /**
  * 攻撃側スプライトに応じて、戦闘アニメーションを切り替える
@@ -14,19 +15,24 @@ import {lightningDozerAttack, toLightningDozerBattleAnimationParam} from "./ligh
  * @return アニメーション
  */
 export function attackAnimation(param: BattleAnimationParam): Animate {
-  const shinBraver = toShinBraverBattleAnimationParam(param);
+  const shinBraver = castShinBraverBattle(param);
   if (shinBraver) {
     return shinBraverAttack(shinBraver);
   }
 
-  const neoLandozer = toNeoLandozerBattleAnimtionParam(param);
+  const neoLandozer = castNeoLandozerBattle(param);
   if (neoLandozer) {
     return neoLandozerAttack(neoLandozer);
   }
 
-  const lightningDozer = toLightningDozerBattleAnimationParam(param);
+  const lightningDozer = castLightningDozerBattle(param);
   if (lightningDozer) {
     return lightningDozerAttack(lightningDozer);
+  }
+
+  const wingDozer = castWingDozerBattle(param);
+  if (wingDozer) {
+    return wingDozerAttack(wingDozer);
   }
 
   return emptyAttackAnimation(param);

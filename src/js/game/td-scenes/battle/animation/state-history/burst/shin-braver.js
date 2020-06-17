@@ -14,16 +14,16 @@ import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer
  * シンブレイバー バーストアニメーション パラメータ
  * @type BURST バースト種別
  */
-export type ShinBraverBurstAnimationParam<BURST> = BurstAnimationParamX<ShinBraver, ShinBraverHUD, TDArmdozerObjects, Burst>;
+export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraver, ShinBraverHUD, TDArmdozerObjects, Burst>;
 
 /**
- * シンブレイバーバーストアニメーションパラメータに変換する
- * 変換できない場合はnullを返す
+ * シンブレイバーバーストアニメーションパラメータにキャストする
+ * キャストできない場合はnullを返す
  *
- * @param param 変換元
- * @return 変換結果
+ * @param param キャスト元
+ * @return キャスト結果
  */
-export function toShinBraverBurstParam(param: BurstAnimationParam): ?ShinBraverBurstAnimationParam<Burst> {
+export function castShinBraverBurst(param: BurstAnimationParam): ?ShinBraverBurst<Burst> {
   if ((param.burstSprite instanceof ShinBraver) && (param.burstArmdozerHUD instanceof ShinBraverHUD)) {
     const sprite: ShinBraver = param.burstSprite;
     const hudArmdozer: ShinBraverHUD = param.burstArmdozerHUD;
@@ -39,10 +39,10 @@ export function toShinBraverBurstParam(param: BurstAnimationParam): ?ShinBraverB
  * @param param バーストアニメーションパラメータ
  * @return バーストアニメーション
  */
-export function shinBraverBurst(param: ShinBraverBurstAnimationParam<Burst>): Animate {
+export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
   if (param.burst.type === 'RecoverBattery') {
     const castBurst: RecoverBattery = param.burst;
-    const castParam = ((param: any): ShinBraverBurstAnimationParam<typeof castBurst>);
+    const castParam = ((param: any): ShinBraverBurst<typeof castBurst>);
     return recoverBattery(castParam);
   }
 
@@ -55,7 +55,7 @@ export function shinBraverBurst(param: ShinBraverBurstAnimationParam<Burst>): An
  * @param param アニメーションパラメータ
  * @return アニメーション
  */
-function recoverBattery(param: ShinBraverBurstAnimationParam<RecoverBattery>): Animate {
+function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
   return all(
     param.burstArmdozerHUD.cutIn.show(),
     param.burstSprite.burst(),
