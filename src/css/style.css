@@ -41,7 +41,7 @@
     --how-to-play-dialog-left: 50vw;
 
     /** プレイヤー選択 */
-    --armdozer-icon-width: 30vw;
+    --armdozer-icon-width: 23vw;
     --selected-armdozer-icon-width: 35vw;
     --armdozer-icon-margin: calc(var(--responsive-font-size) * 0.5);
 }

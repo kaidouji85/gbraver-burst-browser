@@ -15,6 +15,7 @@ import {ShinBraverHUD} from "./hud/armdozer-objects/shin-braver";
 import {NeoLandozerHUD} from "./hud/armdozer-objects/neo-landozer";
 import {LightningDozerHUD} from "./hud/armdozer-objects/lightning-dozer";
 import type {HUDTracking} from "../../../../tracking/hud-tracking";
+import {WingDozerHUD} from "./hud/armdozer-objects/wing-dozer";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
@@ -42,6 +43,8 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
         } else if (hudArmdozer instanceof NeoLandozerHUD) {
           trackingCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
         } else if (hudArmdozer instanceof LightningDozerHUD) {
+          trackingCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
+        } else if (hudArmdozer instanceof WingDozerHUD) {
           trackingCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
         }
       });

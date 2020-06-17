@@ -11,6 +11,7 @@ import {delay, empty} from "../../../../../../animation/delay";
 import {castShinBraverBurst, shinBraverBurst} from "./shin-braver";
 import {castLightningDozerBurst, lightningDozerBurst} from "./lightning-dozer";
 import {castNeoLandozerBurst, neoLandozerBurst} from "./neo-landozer";
+import {castWingDozerBurst, wingDozerBurst} from "./wingdozer";
 
 /**
  * バーストアニメーション
@@ -50,6 +51,11 @@ function armdozerAnimation(param: BurstAnimationParam): Animate {
   const lightningDozer = castLightningDozerBurst(param);
   if (lightningDozer) {
     return lightningDozerBurst(lightningDozer);
+  }
+
+  const wingDozer = castWingDozerBurst(param);
+  if (wingDozer) {
+    return wingDozerBurst(wingDozer);
   }
 
   return empty();

@@ -60,6 +60,20 @@ export const TEXTURE_IDS = {
   LIGHTNING_DOZER_CUTIN_UP: 'LIGHTNING_DOZER_CUTIN_UP',
   LIGHTNING_DOZER_CUTIN_DOWN: 'LIGHTNING_DOZER_CUTIN_DOWN',
   LIGHTNING_DOZER_BACK_STEP: 'LIGHTNING_DOZER_BACK_STEP',
+  WING_DOZER_STAND: 'WING_DOZER_STAND',
+  WING_DOZER_UPPER_CHARGE: 'WING_DOZER_UPPER_CHARGE',
+  WING_DOZER_UPPER_ATTACK: 'WING_DOZER_UPPER_ATTACK',
+  WING_DOZER_UPPER_TO_STAND: 'WING_DOZER_UPPER_TO_STAND',
+  WING_DOZER_DASH_UP: 'WING_DOZER_DASH_UP',
+  WING_DOZER_DASH_DOWN: 'WING_DOZER_DASH_DOWN',
+  WING_DOZER_DASH_TO_STAND: 'WING_DOZER_DASH_TO_STAND',
+  WING_DOZER_KNOCK_BACK: 'WING_DOZER_KNOCK_BACK',
+  WING_DOZER_DOWN: 'WING_DOZER_DOWN',
+  WING_DOZER_BACK_STEP: 'WING_DOZER_BACK_STEP',
+  WING_DOZER_FRONT_STEP: 'WING_DOZER_FRONT_STEP',
+  WING_DOZER_BURST_UP: 'WING_DOZER_BURST_UP',
+  WING_DOZER_BURST_DOWN: 'WING_DOZER_BURST_DOWN',
+  WING_DOZER_GUARD: 'WING_DOZER_GUARD',
   LIGHTNING_DOZER_FRONT_STEP: 'LIGHTNING_DOZER_FRONT_STEP',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
@@ -72,6 +86,7 @@ export const TEXTURE_IDS = {
   ENEMY_TURN: 'ENEMY_TURN',
   POWER_UP: 'POWER_UP',
   REFLECT: 'REFLECT',
+  CONTINUOUS_ATTACK: 'CONTINUOUS_ATTACK',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -247,6 +262,63 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.LIGHTNING_DOZER_FRONT_STEP,
     path: 'armdozer/lightning-dozer/front-step.png',
   },
+  // ウィングドーザ関連
+  {
+    id: TEXTURE_IDS.WING_DOZER_STAND,
+    path: 'armdozer/wing-dozer/stand.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_UPPER_CHARGE,
+    path: 'armdozer/wing-dozer/upper-charge.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_UPPER_ATTACK,
+    path: 'armdozer/wing-dozer/upper-attack.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_UPPER_TO_STAND,
+    path: 'armdozer/wing-dozer/upper-to-stand.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_DASH_UP,
+    path: 'armdozer/wing-dozer/dash-up.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_DASH_DOWN,
+    path: 'armdozer/wing-dozer/dash-down.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_DASH_TO_STAND,
+    path: 'armdozer/wing-dozer/dash-to-stand.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_KNOCK_BACK,
+    path: 'armdozer/wing-dozer/knock-back.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_DOWN,
+    path: 'armdozer/wing-dozer/down.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_BACK_STEP,
+    path: 'armdozer/wing-dozer/back-step.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_FRONT_STEP,
+    path: 'armdozer/wing-dozer/front-step.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_BURST_UP,
+    path: 'armdozer/wing-dozer/burst-up.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_BURST_DOWN,
+    path: 'armdozer/wing-dozer/burst-down.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_GUARD,
+    path: 'armdozer/wing-dozer/guard.png',
+  },
   // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
@@ -298,6 +370,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.REFLECT,
     path: 'effect-label/reflect.png',
   },
+  {
+    id: TEXTURE_IDS.CONTINUOUS_ATTACK,
+    path: 'effect-label/continuous-attack.png',
+  }
 ];
 
 /**

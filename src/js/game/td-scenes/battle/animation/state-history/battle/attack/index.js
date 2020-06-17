@@ -5,7 +5,8 @@ import {castShinBraverBattle, shinBraverAttack} from "./shin-braver";
 import {castNeoLandozerBattle, neoLandozerAttack} from "./neo-landozer";
 import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam} from "../animation-param";
-import {castLightningDozerBattle, lightningDozerAttack} from "./lightning-dozer";
+import {lightningDozerAttack, castLightningDozerBattle} from "./lightning-dozer";
+import {castWingDozerBattle, wingDozerAttack} from "./wing-dozer";
 
 /**
  * 攻撃側スプライトに応じて、戦闘アニメーションを切り替える
@@ -27,6 +28,11 @@ export function attackAnimation(param: BattleAnimationParam): Animate {
   const lightningDozer = castLightningDozerBattle(param);
   if (lightningDozer) {
     return lightningDozerAttack(lightningDozer);
+  }
+
+  const wingDozer = castWingDozerBattle(param);
+  if (wingDozer) {
+    return wingDozerAttack(wingDozer);
   }
 
   return emptyAttackAnimation(param);
