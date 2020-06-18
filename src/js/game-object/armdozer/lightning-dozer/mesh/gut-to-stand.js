@@ -26,6 +26,5 @@ export function lightningDozerGutsToStand(resources: Resources): ArmdozerAnimati
   });
   const object = ret.getObject3D();
   object.position.y = MESH_Y;
-  object.position.z = 1;
   return ret;
 }

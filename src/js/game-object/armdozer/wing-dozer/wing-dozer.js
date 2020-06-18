@@ -23,6 +23,7 @@ import {WingDozerSounds} from "./sounds/wing-dozer-sounds";
 import type {Resources} from "../../../resource";
 import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /**
  * ウィングドーザ
@@ -47,6 +48,8 @@ export class WingDozer implements ArmDozerSprite {
     this._subscription = listenr.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);
+      } else if (action.type === 'PreRender') {
+        this._onPreRender(action);
       }
     });
   }
@@ -74,7 +77,7 @@ export class WingDozer implements ArmDozerSprite {
    * @param object オブジェクト
    */
   addObject3D(object: THREE.Object3D): void {
-    // NOP
+    this._view.addObject3D(object);
   }
 
   /**
@@ -186,11 +189,20 @@ export class WingDozer implements ArmDozerSprite {
   }
 
   /**
-   * モデルをビューに反映させる
+   * アップデート時の処理
    *
    * @param action アクション
    */
   _onUpdate(action: Update): void {
     this._view.engage(this._model);
+  }
+
+  /**
+   * プリレンダー時の処理
+   *
+   * @param action アクション
+   */
+  _onPreRender(action: PreRender): void {
+    this._view.lookAt(action.camera);
   }
 }

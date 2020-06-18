@@ -104,6 +104,24 @@ export class PlayerWingDozerView implements WingDozerView{
   }
 
   /**
+   * カメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
+  lookAt(camera: THREE.Camera): void {
+    this._group.quaternion.copy(camera.quaternion);
+  }
+
+  /**
+   * スプライト配下のオブジェクトを追加する
+   *
+   * @param object 追加するオブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void {
+    this._group.add(object);
+  }
+
+  /**
    * 本ビューに含まれる全メッシュを返す
    *
    * @return 全メッシュ
