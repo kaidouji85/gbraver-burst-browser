@@ -9,6 +9,8 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import type {Update} from "../../../action/game-loop/update";
 import {Animate} from "../../../animation/animate";
 import {popUp} from "./animation/pop-up";
+import {LightningSounds} from "./sounds/lightning-sounds";
+import type {Resources} from "../../../resource";
 
 /**
  * 電撃ヒットマーク
@@ -16,11 +18,20 @@ import {popUp} from "./animation/pop-up";
 export class Lightning {
  _model: LightningModel;
  _view: LightningView;
+ _sounds: LightningSounds;
  _subscription: Subscription;
-  
-  constructor(view: LightningView, listener: Observable<GameObjectAction>) {
+
+  /**
+   * コンストラクタ
+   *
+   * @param view ビュー
+   * @param resources リソース管理オブジェクト
+   * @param listener イベントリスナ
+   */
+  constructor(view: LightningView, resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
+    this._sounds = new LightningSounds(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);
@@ -41,7 +52,7 @@ export class Lightning {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this._model);
+    return popUp(this._model, this._sounds);
   }
 
   /**

@@ -5,17 +5,20 @@ import {Animate} from "../../../../animation/animate";
 import {tween} from "../../../../animation/tween";
 import {process} from '../../../../animation/process';
 import {all} from "../../../../animation/all";
+import {LightningSounds} from "../sounds/lightning-sounds";
 
 /**
  * エフェクトを一瞬だけ表示する
  *
  * @param model モデル
+ * @param sounds 音
  * @return アニメーション
  */
-export function popUp(model: LightningModel): Animate {
+export function popUp(model: LightningModel, sounds: LightningSounds): Animate {
   return process(() => {
     model.animation.frame = 0;
     model.opacity = 1;
+    sounds.lightning.play();
   }).chain(all(
     tween(model.animation, t => t.to({frame: 1}, 700)),
     tween(model, t => t.to({opacity:0.5}, 600))

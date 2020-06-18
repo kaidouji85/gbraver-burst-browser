@@ -4,7 +4,6 @@ import * as THREE from "three";
 import type {WingDozerCutInModel} from "./model/wing-dozer-cutin-model";
 import type {WingDozerCutInView} from "./view/wing-dozer-cutin-view";
 import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../../action/game-loop/update";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {Animate} from "../../../animation/animate";

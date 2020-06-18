@@ -5,7 +5,7 @@ import {castShinBraverBattle, shinBraverAttack} from "./shin-braver";
 import {castNeoLandozerBattle, neoLandozerAttack} from "./neo-landozer";
 import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam} from "../animation-param";
-import {lightningDozerAttack, castLightningDozerBattle} from "./lightning-dozer";
+import {castLightningDozerBattle, lightningDozerAttack} from "./lightning-dozer";
 import {castWingDozerBattle, wingDozerAttack} from "./wing-dozer";
 
 /**

@@ -31,6 +31,7 @@ export const SOUND_IDS = {
   CHANGE_VALUE: 'CHANGE_VALUE',
   MECHA_IMPACT: 'MECHA_IMPACT',
   MOTOR: 'MOTOR',
+  LIGHTNING: 'LIGHTNING',
 };
 
 /**
@@ -56,6 +57,11 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     id: SOUND_IDS.MOTOR,
     path: resourcePath => `${resourcePath.get()}/sounds/motor.mp3`,
     volume: 0.5
+  },
+  {
+    id: SOUND_IDS.LIGHTNING,
+    path: resourcePath => `${resourcePath.get()}/sounds/lightning.mp3`,
+    volume: 0.4
   },
 ];
 
