@@ -15,6 +15,7 @@ import type {Resources} from "../../../resource";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
+import {LightningBarrierSounds} from "./sounds/lightning-barrier-sounds";
 
 /**
  * 電撃バリア
@@ -22,12 +23,14 @@ import {hidden} from "./animation/hidden";
 export class LightningBarrierGameEffect {
   _model: LightningBarrierModel;
   _view: LightningBarrierView;
+  _sounds: LightningBarrierSounds;
   _tweenGroup: TWEEN.Group;
   _subscriptions: Subscription[];
 
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = new LightningBarrierView(resources);
+    this._sounds = new LightningBarrierSounds(resources);
     this._tweenGroup = new TWEEN.Group();
     this._subscriptions = [
       listener.subscribe(action => {
@@ -74,7 +77,7 @@ export class LightningBarrierGameEffect {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this._model);
+    return show(this._model, this._sounds);
   }
 
   /**
