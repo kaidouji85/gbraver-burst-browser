@@ -43,7 +43,8 @@ export class WingDozerNPC implements NPC {
 
     const enableCommand = lastState.effect.players.find(v => v.playerId === enemyId);
     const enemy = lastState.players.find(v => v.playerId === enemyId);
-    if (!enableCommand || !enemy) {
+    const player = lastState.players.find(v => v.playerId !== enemyId);
+    if (!enableCommand || !enemy || !player) {
       return ZERO_BATTERY;
     }
 
@@ -53,19 +54,21 @@ export class WingDozerNPC implements NPC {
 
     const isAttacker = lastState.activePlayerId === enemyId;
     return isAttacker
-      ? this._attackRoutine(enemy, enableCommand.command)
+      ? this._attackRoutine(enemy, player, enableCommand.command)
       : this._defenseRoutine(enemy, enableCommand.command);
   }
 
   /**
    * 攻撃ルーチン
    *
-   * @param own NPCのステータス
+   * @param enemy NPCのステータス
+   * @param player プレイヤーのステータス
    * @param commands 選択可能なコマンド
    * @return コマンド
    */
-  _attackRoutine(own: PlayerState, commands: Command[]): Command {
+  _attackRoutine(enemy: PlayerState, player: PlayerState, commands: Command[]): Command {
     const burst = commands.find(v => v.type === 'BURST_COMMAND');
+    const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
     const battery4 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 4);
     const battery5 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
 
@@ -73,8 +76,16 @@ export class WingDozerNPC implements NPC {
       return battery5;
     }
 
+    if ((player.armdozer.hp <= enemy.armdozer.power/2) && battery5) {
+      return battery5;
+    }
+
     if (battery4) {
       return battery4;
+    }
+
+    if (battery1) {
+      return battery1;
     }
 
     return ZERO_BATTERY;
@@ -83,11 +94,11 @@ export class WingDozerNPC implements NPC {
   /**
    * 防御ルーチン
    *
-   * @param own NPCのステータス
+   * @param enemy NPCのステータス
    * @param commands 選択可能なコマンド
    * @return コマンド
    */
-  _defenseRoutine(own: PlayerState, commands: Command[]): Command {
+  _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
     const burst = commands.find(v => v.type === 'BURST_COMMAND');
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
 
