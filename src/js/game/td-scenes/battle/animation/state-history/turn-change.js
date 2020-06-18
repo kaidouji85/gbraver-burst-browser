@@ -3,11 +3,10 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core";
+import type {GameState, TurnChange} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 import {delay, empty} from "../../../../../animation/delay";
 import {attentionArmDozer, toInitial} from "../td-camera";
-import type {TurnChange} from "gbraver-burst-core/lib/effect/turn-change/turn-change";
 
 /**
  * ターン変更のアニメーション

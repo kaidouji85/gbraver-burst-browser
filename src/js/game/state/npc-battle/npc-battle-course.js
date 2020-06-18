@@ -8,7 +8,6 @@ import {ShinBraverNPC} from "../../../npc/shin-braver";
 import {WeakShinBraverNPC} from "../../../npc/weak-shin-braver";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
-import {WeakWingDozerNPC} from "../../../npc/weak-wing-dozer-npc";
 import {WingDozerNPC} from "../../../npc/wing-dozer";
 
 /**

@@ -1,12 +1,10 @@
 // @flow
 
 import {WingDozer} from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
-import type {Burst} from "gbraver-burst-core";
+import type {Burst, ContinuousAttack} from "gbraver-burst-core";
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-// TODO gbraver-burst-coreから直接インポートする
-import type {ContinuousAttack} from "gbraver-burst-core/lib/player/burst";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
 import {WingDozerHUD} from "../../../view/hud/armdozer-objects/wing-dozer";
