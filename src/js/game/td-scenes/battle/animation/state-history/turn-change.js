@@ -7,6 +7,7 @@ import type {GameState} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 import {delay, empty} from "../../../../../animation/delay";
 import {attentionArmDozer, toInitial} from "../td-camera";
+import type {TurnChange} from "gbraver-burst-core/lib/effect/turn-change/turn-change";
 
 /**
  * ターン変更のアニメーション
@@ -17,6 +18,11 @@ import {attentionArmDozer, toInitial} from "../td-camera";
  * @return アニメーション
  */
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+  if (gameState.effect.name !== 'TurnChange') {
+    return empty();
+  }
+  const turnChange: TurnChange = gameState.effect;
+
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
   const activeTDSprite = view.td.sprites.find(v => v.playerId === gameState.activePlayerId);
   const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
@@ -30,10 +36,12 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
       .chain(delay(500))
       .chain(activeTDPlayer.turnStart.popUp())
       .chain(delay(300))
-      .chain(all(
-        // TODO バッテリー回復値をeffectに持たせる
-        activeTDPlayer.recoverBattery.popUp(3),
-        activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery))
+      .chain((0 < turnChange.recoverBattery)
+        ? all(
+          activeTDPlayer.recoverBattery.popUp(turnChange.recoverBattery),
+          activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
+        )
+        : empty()
       ),
     activeTDSprite.sprite.turnStart(),
   ).chain(delay(800)

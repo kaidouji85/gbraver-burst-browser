@@ -25,4 +25,19 @@ export interface WingDozerView {
    * @param model モデル
    */
   engage(model: WingDozerModel): void;
+
+  /**
+   * カメラの真正面を向く
+   *
+   * @param camera カメラ
+   */
+  lookAt(camera: THREE.Camera): void;
+
+
+  /**
+   * スプライト配下のオブジェクトを追加する
+   *
+   * @param object 追加するオブジェクト
+   */
+  addObject3D(object: THREE.Object3D): void;
 }
