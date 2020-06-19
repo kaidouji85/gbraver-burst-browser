@@ -3,12 +3,12 @@
 import test from 'ava';
 import type {EndBattle} from "../../../../../src/js/action/game/battle";
 import {EMPTY_PLAYER} from "../../../../data/player";
-import type {Player, GameOver, EvenMatch} from "gbraver-burst-core";
+import type {EvenMatch, GameOver, Player} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../../data/end-battle";
 import type {NPCBattle} from "../../../../../src/js/game/state/npc-battle/npc-battle";
+import {MAX_LEVEL} from "../../../../../src/js/game/state/npc-battle/npc-battle";
 import {EMPTY_NPC_BATTLE} from "../../../../data/npc-battle";
 import {levelUp} from "../../../../../src/js/game/state/npc-battle/level-up";
-import {MAX_LEVEL} from "../../../../../src/js/game/state/npc-battle/npc-battle";
 
 const player: Player = {
   ...EMPTY_PLAYER,
