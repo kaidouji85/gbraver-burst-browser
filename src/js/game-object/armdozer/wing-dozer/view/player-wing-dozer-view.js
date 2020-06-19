@@ -2,10 +2,10 @@
 
 import type {Resources} from "../../../../resource";
 import * as THREE from "three";
+import {Group} from "three";
 import type {WingDozerView} from "./wing-dozer-view";
 import type {AnimationType, WingDozerModel} from "../model/wing-dozer-model";
 import {wingDozerStand} from "../mesh/stand";
-import {Group} from "three";
 import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
 import {wingDozerUpperCharge} from "../mesh/upper-charge";
 import {wingDozerUpperAttack} from "../mesh/upper-attack";

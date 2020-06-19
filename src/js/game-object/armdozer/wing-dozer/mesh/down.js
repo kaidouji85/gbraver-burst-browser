@@ -5,7 +5,7 @@ import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import {HorizontalArmdozerAnimation} from "../../mesh/horizontal-animation";
 import {MESH_Y} from "./position";
-import {MESH_WIDTH, MESH_HEIGHT} from './mesh-size';
+import {MESH_HEIGHT, MESH_WIDTH} from './mesh-size';
 
 export const MAX_ANIMATION = 4;
 

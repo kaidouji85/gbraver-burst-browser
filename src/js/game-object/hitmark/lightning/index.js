@@ -16,7 +16,7 @@ import {EnemyLightningView} from "./view/enemy-lightning-view";
  */
 export function playerLightning(resources: Resources, listener: Observable<GameObjectAction>): Lightning {
   const view = new PlayerLightningView(resources);
-  return new Lightning(view, listener);
+  return new Lightning(view, resources, listener);
 }
 
 /**
@@ -28,5 +28,5 @@ export function playerLightning(resources: Resources, listener: Observable<GameO
  */
 export function enemyLightning(resources: Resources, listener: Observable<GameObjectAction>): Lightning {
   const view = new EnemyLightningView(resources);
-  return new Lightning(view, listener);
+  return new Lightning(view, resources, listener);
 }

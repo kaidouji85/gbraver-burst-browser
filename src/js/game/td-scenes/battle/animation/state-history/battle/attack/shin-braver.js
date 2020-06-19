@@ -166,9 +166,7 @@ function feint(param: ShinBraverBattle<Feint>): Animate {
     return empty();
   }
 
-  return param.defenderSprite.avoid()
-    .chain(delay(500))
-    .chain(param.defenderSprite.avoidToStand());
+  return param.defenderSprite.avoid();
 }
 
 /** downが受け取れる戦闘結果 */
