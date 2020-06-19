@@ -42,7 +42,8 @@ export class WeakWingDozerNPC implements NPC {
 
     const enableCommand = lastState.effect.players.find(v => v.playerId === enemyId);
     const enemy = lastState.players.find(v => v.playerId === enemyId);
-    if (!enableCommand || !enemy) {
+    const player = lastState.players.find(v => v.playerId !== enemyId);
+    if (!enableCommand || !enemy || !player) {
       return ZERO_BATTERY;
     }
 
@@ -52,7 +53,7 @@ export class WeakWingDozerNPC implements NPC {
 
     const isAttacker = lastState.activePlayerId === enemyId;
     return isAttacker
-      ? this._attackRoutine(enemy, enableCommand.command)
+      ? this._attackRoutine(enemy, player, enableCommand.command)
       : this._defenseRoutine(enemy, enableCommand.command);
   }
 
@@ -60,13 +61,14 @@ export class WeakWingDozerNPC implements NPC {
    * 攻撃ルーチン
    *
    * @param enemy NPCのステータス
+   * @param player プレイヤーのステータス
    * @param commands 選択可能なコマンド
    * @return コマンド
    */
-  _attackRoutine(enemy: PlayerState, commands: Command[]): Command {
+  _attackRoutine(enemy: PlayerState, player: PlayerState, commands: Command[]): Command {
     const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
 
-    if (battery2) {
+    if ((0 < player.armdozer.battery) && (player.armdozer.hp === player.armdozer.maxHp) && battery2) {
       return battery2;
     }
 
@@ -82,11 +84,6 @@ export class WeakWingDozerNPC implements NPC {
    */
   _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
-
-    if (battery2) {
-      return battery2;
-    }
 
     if (battery1) {
       return battery1;

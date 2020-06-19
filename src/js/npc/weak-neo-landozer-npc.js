@@ -66,10 +66,10 @@ export class WeakNeoLandozerNPC implements NPC {
    * @return コマンド
    */
   _attackRoutine(enemy: PlayerState, player: PlayerState, commands: Command[]): Command {
-    const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
 
-    if ((0 < player.armdozer.battery) && (enemy.armdozer.power/2 <= player.armdozer.hp) && battery1) {
-      return battery1;
+    if ((0 < player.armdozer.battery) && (player.armdozer.hp === player.armdozer.maxHp) && battery2) {
+      return battery2;
     }
 
     return ZERO_BATTERY;
