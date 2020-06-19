@@ -18,7 +18,7 @@ Routing.registerRoute(
     cacheName: 'js-cache',
     plugins: [
       new ExpirationPlugin({
-        maxAgeSeconds: 7 * 24 * 60 * 60,
+        maxAgeSeconds: 3 * 24 * 60 * 60,
       }),
     ],
   })
@@ -30,7 +30,7 @@ Routing.registerRoute(
     cacheName: 'resource-cache',
     plugins: [
       new ExpirationPlugin({
-        maxAgeSeconds: 7 * 24 * 60 * 60,
+        maxAgeSeconds: 3 * 24 * 60 * 60,
       }),
     ],
   })

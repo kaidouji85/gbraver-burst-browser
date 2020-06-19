@@ -61,7 +61,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.LIGHTNING,
     path: resourcePath => `${resourcePath.get()}/sounds/lightning.mp3`,
-    volume: 0.4
+    volume: 0.3
   },
 ];
 
