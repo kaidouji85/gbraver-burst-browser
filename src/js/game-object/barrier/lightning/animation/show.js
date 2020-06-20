@@ -16,7 +16,7 @@ import {process} from '../../../../animation/process';
  */
 export function show(model: LightningBarrierModel, sounds: LightningBarrierSounds): Animate {
   return process(() => {
-    sounds.lightning.play();
+    sounds.lightningBarrier.play();
   })
     .chain(tween(model, t =>
         t.to({opacity: 1}, 500)
