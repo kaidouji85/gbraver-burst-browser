@@ -14,7 +14,7 @@ import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 export const MESH_SIZE = 1000;
 
 /** ベースとなるpadding top */
-export const BASE_PADDING_TOP = 50;
+export const BASE_PADDING_TOP = 100;
 
 /**
  * プレイヤー側 ウィングドーザ　カットイン ビュー
