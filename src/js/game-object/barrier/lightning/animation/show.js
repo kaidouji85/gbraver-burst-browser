@@ -1,6 +1,5 @@
 // @flow
 
-import TWEEN from '@tweenjs/tween.js';
 import {Animate} from "../../../../animation/animate";
 import type {LightningBarrierModel} from "../model/lightning-barrier-model";
 import {tween} from "../../../../animation/tween";
@@ -18,9 +17,6 @@ export function show(model: LightningBarrierModel, sounds: LightningBarrierSound
   return process(() => {
     sounds.lightningBarrier.play();
   })
-    .chain(tween(model, t =>
-        t.to({opacity: 1}, 1000)
-          .easing(TWEEN.Easing.Quadratic.Out)
-      )
+    .chain(tween(model, t => t.to({opacity: 1}, 1000))
     )
 }
