@@ -17,5 +17,5 @@ export function hidden(model: LightningBarrierModel, sounds: LightningBarrierSou
   return process(() => {
     sounds.lightningBarrier.play();
   })
-    .chain(tween(model, t => t.to({opacity: 0}, 500)));
+    .chain(tween(model, t => t.to({opacity: 0}, 1000)));
 }

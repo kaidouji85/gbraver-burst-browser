@@ -19,7 +19,7 @@ export function show(model: LightningBarrierModel, sounds: LightningBarrierSound
     sounds.lightningBarrier.play();
   })
     .chain(tween(model, t =>
-        t.to({opacity: 1}, 500)
+        t.to({opacity: 1}, 1000)
           .easing(TWEEN.Easing.Quadratic.Out)
       )
     )
