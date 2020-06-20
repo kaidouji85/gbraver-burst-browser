@@ -38,16 +38,25 @@ export function rightItselfAnimation(view: BattleSceneView, sceneState: BattleSc
  * @return アニメーション
  */
 function getMotion(sprite: ArmDozerSprite, battleResult: BattleResult): Animate {
-  switch(battleResult.name) {
-    case 'NormalHit':
-    case 'CriticalHit':
-      return sprite.knockBackToStand();
-    case 'Guard':
-      return sprite.guardToStand();
-    case 'Miss':
-    case 'Feint':
-      return sprite.avoidToStand();
-    default:
-      return empty();
+  if (battleResult.name === 'NormalHit') {
+    return sprite.knockBackToStand();
   }
+
+  if (battleResult.name === 'CriticalHit') {
+    return sprite.knockBackToStand();
+  }
+
+  if (battleResult.name === 'Guard') {
+    return sprite.guardToStand();
+  }
+
+  if (battleResult.name === 'Miss') {
+    return sprite.avoidToStand();
+  }
+
+  if (battleResult.name === 'Feint' && battleResult.isDefenderMoved) {
+    return sprite.avoidToStand();
+  }
+
+  return empty();
 }
