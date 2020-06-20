@@ -16,7 +16,7 @@ export class LightningSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const lightningResource = resources.sounds.find(v => v.id === SOUND_IDS.LIGHTNING);
+    const lightningResource = resources.sounds.find(v => v.id === SOUND_IDS.LIGHTNING_ATTACK);
     this.lightning = lightningResource
       ? lightningResource.sound
       : new Howl();

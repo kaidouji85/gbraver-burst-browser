@@ -31,7 +31,8 @@ export const SOUND_IDS = {
   CHANGE_VALUE: 'CHANGE_VALUE',
   MECHA_IMPACT: 'MECHA_IMPACT',
   MOTOR: 'MOTOR',
-  LIGHTNING: 'LIGHTNING',
+  LIGHTNING_ATTACK: 'LIGHTNING',
+  LIGHTNING_BARRIER: 'SRTART_LIGHTNING_BARRIER',
 };
 
 /**
@@ -59,8 +60,13 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     volume: 0.5
   },
   {
-    id: SOUND_IDS.LIGHTNING,
-    path: resourcePath => `${resourcePath.get()}/sounds/lightning.mp3`,
+    id: SOUND_IDS.LIGHTNING_ATTACK,
+    path: resourcePath => `${resourcePath.get()}/sounds/lightning-attack.mp3`,
+    volume: 0.3
+  },
+  {
+    id: SOUND_IDS.LIGHTNING_BARRIER,
+    path: resourcePath => `${resourcePath.get()}/sounds/lightning-barrier.mp3`,
     volume: 0.3
   },
 ];
