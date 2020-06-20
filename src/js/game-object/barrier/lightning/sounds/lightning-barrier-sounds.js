@@ -16,7 +16,7 @@ export class LightningBarrierSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const lightningResource = resources.sounds.find(v => v.id === SOUND_IDS.LIGHTNING);
+    const lightningResource = resources.sounds.find(v => v.id === SOUND_IDS.START_LIGHTNING_BARRIER);
     this.lightning = lightningResource
       ? lightningResource.sound
       : new Howl();
