@@ -25,7 +25,7 @@ Routing.registerRoute(
 );
 
 Routing.registerRoute(
-  /\/resources\/.*\.(?:png|glb|mp3)$/,
+  /\/resources\/.*\.(?:png|glb|mp3|svg)$/,
   new Strategies.CacheFirst({
     cacheName: 'resource-cache',
     plugins: [

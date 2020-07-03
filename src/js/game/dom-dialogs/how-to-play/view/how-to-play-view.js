@@ -3,6 +3,7 @@
 import type {HowToPlayState} from "../state/how-to-play-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
+import type {ResourcePath} from "../../../../resource/path/resource-path";
 
 /** イベント通知ストリーム */
 export type Notifier = {
@@ -24,7 +25,7 @@ export class HowToPlayView {
   _iframe: HTMLIFrameElement;
   _closer: HTMLElement;
 
-  constructor(movieURL: string) {
+  constructor(movieURL: string, resourcePath: ResourcePath) {
     this._closeStream = new Subject();
 
     const dialogId = domUuid();
@@ -32,9 +33,8 @@ export class HowToPlayView {
     this._root = document.createElement('div');
     this._root.innerHTML = `
       <div class="how-to-play__background"></div>
-      <div class="how-to-play__closer" data-id="${closerId}">&#x2613;</div>
-      <div class="how-to-play__dialog" data-id="${dialogId}">  
-      </div>
+      <img class="how-to-play__closer" src="${resourcePath.get()}/dialog/closer.svg" data-id="${closerId}"></img>
+      <div class="how-to-play__dialog" data-id="${dialogId}">  </div>
     `;
 
     this._root.addEventListener('click', (e: MouseEvent) => {
