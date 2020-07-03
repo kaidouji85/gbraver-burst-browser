@@ -114,7 +114,6 @@ export class Title implements DOMScene {
       }
 
       this._state.canOperation = false;
-      this._pushButton.play();
       this._view.pushHowToPlayButton();
       this._pushHowToPlay.next({
         type: 'PushHowToPlay'

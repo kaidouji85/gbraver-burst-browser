@@ -77,7 +77,7 @@ export class Game {
       resourcePath: this._resourcePath,
     });
     this._domScenes = new DOMScenes();
-    this._domDialogs = new DOMDialogs();
+    this._domDialogs = new DOMDialogs(this._resourcePath);
     this._tdScenes = new TDScenes(this._resize);
 
     const body = document.body || document.createElement('div');

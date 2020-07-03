@@ -3,6 +3,7 @@
 import {HowToPlay} from "./how-to-play";
 import {Observable} from "rxjs";
 import type {EndHowToPlay} from "../../action/game/how-to-play";
+import type {ResourcePath} from "../../resource/path/resource-path";
 
 /** イベント通知ストリーム */
 type Notifier = {
@@ -13,8 +14,8 @@ type Notifier = {
 export class DOMDialogs {
   _howToPlay: HowToPlay;
 
-  constructor() {
-    this._howToPlay = new HowToPlay();
+  constructor(resourcePath: ResourcePath) {
+    this._howToPlay = new HowToPlay(resourcePath);
   }
 
   /** 遊び方ダイアログを表示する */

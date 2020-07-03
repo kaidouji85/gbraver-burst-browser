@@ -9,6 +9,7 @@ import {Observable} from "rxjs";
 import type {EndHowToPlay} from "../../../action/game/how-to-play";
 import {map} from "rxjs/operators";
 import {hidden} from "./state/hidden";
+import type {ResourcePath} from "../../../resource/path/resource-path";
 
 /** イベント通知 */
 type Notifier = {
@@ -23,10 +24,10 @@ export class HowToPlay {
   _view: HowToPlayView;
   _notifier: Notifier;
 
-  constructor() {
+  constructor(resourcePath: ResourcePath) {
     this._state = createInitialState();
 
-    this._view = new HowToPlayView(howToPlayMovieURL());
+    this._view = new HowToPlayView(howToPlayMovieURL(), resourcePath);
     this._view.engage(this._state);
 
     this._notifier = {
