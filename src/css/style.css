@@ -257,15 +257,11 @@
     top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2);
     left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
     transform: translate(-50%, -50%);
-    background-color: red;
-    font-color: var(--font-color);
-    z-index: 10;
     width: 48px;
     height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 24px;
     z-index: var(--zindex-close);
 }
 

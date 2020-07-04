@@ -57,7 +57,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.MOTOR,
     path: resourcePath => `${resourcePath.get()}/sounds/motor.mp3`,
-    volume: 0.5
+    volume: 0.3
   },
   {
     id: SOUND_IDS.LIGHTNING_ATTACK,
