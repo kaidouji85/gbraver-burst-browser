@@ -1,7 +1,6 @@
 // @flow
 
 import type {Player} from "gbraver-burst-core";
-import {ArmdozerAppearances} from "gbraver-burst-core";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
@@ -11,6 +10,7 @@ import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-
 import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 import {TDArmdozerSprite} from "./armdozer-sprite";
 import {EnemyWingDozer, PlayerWingDozer} from "../../../../../../game-object/armdozer/wing-dozer";
+import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 
 /**
  * プレイヤースプライを生成する
@@ -33,14 +33,14 @@ export function playerSprite(resources: Resources, state: Player, listener: Obse
  * @return スプライト
  */
 function createPlayerSprite(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player): ArmDozerSprite {
-  switch (playerInfo.armdozer.appearance) {
-    case ArmdozerAppearances.NEO_LANDOZER:
+  switch (playerInfo.armdozer.id) {
+    case ArmDozerIdList.NEO_LANDOZER:
       return PlayerNeoLandozer(resources, listener);
-    case ArmdozerAppearances.LIGHTNING_DOZER:
+    case ArmDozerIdList.LIGHTNING_DOZER:
       return PlayerLightningDozer(resources, listener);
-    case ArmdozerAppearances.WING_DOZER:
+    case ArmDozerIdList.WING_DOZER:
       return PlayerWingDozer(resources, listener);
-    case ArmdozerAppearances.SHIN_BRAVER:
+    case ArmDozerIdList.SHIN_BRAVER:
     default:
       return PlayerShinBraver(resources, listener);
   }
@@ -67,14 +67,14 @@ export function enemySprite(resources: Resources, state: Player, listener: Obser
  * @return スプライト
  */
 function createEnemySprite(resources: Resources, listener: Observable<GameObjectAction>, enemyInfo: Player): ArmDozerSprite {
-  switch (enemyInfo.armdozer.appearance) {
-    case ArmdozerAppearances.NEO_LANDOZER:
+  switch (enemyInfo.armdozer.id) {
+    case ArmDozerIdList.NEO_LANDOZER:
       return EnemyNeoLandozer(resources, listener);
-    case ArmdozerAppearances.LIGHTNING_DOZER:
+    case ArmDozerIdList.LIGHTNING_DOZER:
       return EnemyLightningDozer(resources, listener);
-    case ArmdozerAppearances.WING_DOZER:
+    case ArmDozerIdList.WING_DOZER:
       return EnemyWingDozer(resources, listener);
-    case ArmdozerAppearances.SHIN_BRAVER:
+    case ArmDozerIdList.SHIN_BRAVER:
     default:
       return EnemyShinBraver(resources, listener);
   }
