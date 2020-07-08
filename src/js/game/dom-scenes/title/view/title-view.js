@@ -5,19 +5,13 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
+import type {Resources} from "../../../../resource";
+import {PathIds} from "../../../../resource/path/path";
 
 /** イベント通知 */
 type Notifier = {
   gameStart: Observable<void>,
   howToPlay: Observable<void>,
-};
-
-/** コンストラクタのパラメータ */
-type Params = {
-  /** 初期状態 */
-  initialState: TitleState,
-  /** リソースパス */
-  resourcePath: ResourcePath,
 };
 
 /** タイトルビュー */
@@ -32,7 +26,12 @@ export class TitleView {
   _isTitleBackLoaded: Promise<void>;
   _isLogoLoaded: Promise<void>;
 
-  constructor(params: Params) {
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   */
+  constructor(resources: Resources) {
     this._gameStartStream = new Subject();
     this._howToPlayStream = new Subject();
 
@@ -61,7 +60,10 @@ export class TitleView {
         resolve();
       });
     });
-    titleBackImage.src = `${params.resourcePath.get()}/title-back.png`;
+    const titleBackResource = resources.paths.find(v => v.id === PathIds.TITLE_BACK);
+    titleBackImage.src = titleBackResource
+      ? titleBackResource.path
+      : '';
 
     const logo = this._root.querySelector(`[data-id="${logoId}"]`);
     const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement)
@@ -72,7 +74,10 @@ export class TitleView {
         resolve();
       });
     });
-    logoImage.src = `${params.resourcePath.get()}/logo.png`;
+    const logoResource = resources.paths.find(v => v.id === PathIds.LOGO);
+    logoImage.src = logoResource
+      ? logoResource.path
+      : '';
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStart.addEventListener('click', (e: MouseEvent) => {

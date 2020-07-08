@@ -40,7 +40,7 @@ export const PathConfigs: PathConfig[] = [
     path: resourcePath => `${resourcePath.get()}/title-back.png`
   },
   {
-    id: PathIds.TITLE_BACK,
+    id: PathIds.LOGO,
     path: resourcePath => `${resourcePath.get()}/logo.png`
   },
 ];

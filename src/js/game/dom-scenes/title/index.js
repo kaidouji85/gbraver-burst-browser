@@ -25,12 +25,14 @@ export class Title implements DOMScene {
   _pushHowToPlay: Subject<PushHowToPlay>;
   _subscriptions: Subscription[];
 
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     this._state = createInitialState();
-    this._view = new TitleView({
-      initialState: this._state,
-      resourcePath: resources.path
-    });
+    this._view = new TitleView(resources);
 
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButton = pushButtonResource
