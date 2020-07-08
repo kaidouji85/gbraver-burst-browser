@@ -1,9 +1,7 @@
 // @flow
 
-import type {TitleState} from "../state/title-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
-import type {ResourceRoot} from "../../../../resource/root/resource-root";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";

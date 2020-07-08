@@ -1,6 +1,5 @@
 // @flow
 
-import type {ResourceRoot} from "../../../../resource/root/resource-root";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon-view";
 import {merge, Observable} from "rxjs";

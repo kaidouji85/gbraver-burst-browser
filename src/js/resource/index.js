@@ -12,8 +12,8 @@ import {loadingAllSounds} from "./sound";
 import type {ResourceRoot} from "./root/resource-root";
 import {Observable, Subject} from "rxjs";
 import type {LoadingAction} from "../action/loading/loading";
-import {getAllPaths} from "./path";
 import type {Path} from "./path";
+import {getAllPaths} from "./path";
 
 /**
  * ゲームで使うリソースを集めたもの
