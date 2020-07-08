@@ -39,7 +39,7 @@ export type Resources = {
  * リソース読み込み
  */
 export class ResourceLoader {
-  _resourcePath: ResourceRoot;
+  _resourceROot: ResourceRoot;
   _gltfLoading: Array<Promise<GlTFResource>>;
   _textureLoading: Array<Promise<TextureResource>>;
   _cubeTextureLoading: Array<Promise<CubeTextureResource>>;
@@ -54,17 +54,17 @@ export class ResourceLoader {
   /**
    * コンストラクタ
    *
-   * @param resourcePath リソースパス
+   * @param resourceRoot リソースルート
    */
-  constructor(resourcePath: ResourceRoot) {
-    this._resourcePath = resourcePath;
-    this._gltfLoading = loadingAllGTLFModels(resourcePath);
-    this._textureLoading = loadingAllTextures(resourcePath);
-    this._cubeTextureLoading = loadingAllCubeTextures(resourcePath);
-    this._canvasImageLoading = loadingAllCanvasImages(resourcePath);
-    this._soundLoading = loadingAllSounds(resourcePath);
+  constructor(resourceRoot: ResourceRoot) {
+    this._resourceROot = resourceRoot;
+    this._gltfLoading = loadingAllGTLFModels(resourceRoot);
+    this._textureLoading = loadingAllTextures(resourceRoot);
+    this._cubeTextureLoading = loadingAllCubeTextures(resourceRoot);
+    this._canvasImageLoading = loadingAllCanvasImages(resourceRoot);
+    this._soundLoading = loadingAllSounds(resourceRoot);
 
-    this._paths = getAllPaths(resourcePath)
+    this._paths = getAllPaths(resourceRoot)
     this._pathLoading = this._paths.map(path => fetch(path.path))
 
     const allLoading = [].concat(
@@ -106,7 +106,7 @@ export class ResourceLoader {
       ]);
 
       return {
-        rootPath: this._resourcePath,
+        rootPath: this._resourceROot,
         gltfs: gltfs,
         textures: textures,
         cubeTextures: cubeTextures,

@@ -93,22 +93,22 @@ export const PathConfigs: PathConfig[] = [
  * パス設定をパスに変換する
  *
  * @param config 設定
- * @param resourcePath リソースルート
+ * @param resourceRoot リソースルート
  * @return パス
  */
-export function toPath(config: PathConfig, resourcePath: ResourceRoot): Path {
+export function toPath(config: PathConfig, resourceRoot: ResourceRoot): Path {
   return {
     id: config.id,
-    path: config.path(resourcePath)
+    path: config.path(resourceRoot)
   };
 }
 
 /**
  * 全てのパスを取得する
  *
- * @param resourcePath リソースルート
+ * @param resourceRoot リソースルート
  * @return 全てのパス
  */
-export function getAllPaths(resourcePath: ResourceRoot): Path[] {
-  return PathConfigs.map(config => toPath(config, resourcePath));
+export function getAllPaths(resourceRoot: ResourceRoot): Path[] {
+  return PathConfigs.map(config => toPath(config, resourceRoot));
 }

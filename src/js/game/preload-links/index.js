@@ -9,8 +9,13 @@ import {imageURLs} from "./image-ruls";
 export class PreLoadLinks {
   _links: HTMLElement[];
 
-  constructor(resourcePath: ResourceRoot) {
-    this._links = imageURLs(resourcePath).map(url => {
+  /**
+   * コンストラクタ
+   *
+   * @param resourceRoot リソースルート
+   */
+  constructor(resourceRoot: ResourceRoot) {
+    this._links = imageURLs(resourceRoot).map(url => {
       const link = document.createElement('link');
       link.setAttribute('rel', 'preload');
       link.setAttribute('as', 'image');

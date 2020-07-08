@@ -39,14 +39,14 @@ export const GLTF_CONFIGS: GlTFConfig[] = [
 /**
  * glTFファイルを読み込む
  *
- * @param resourcePath リソースパス
+ * @param resourceRoot リソースルート
  * @param config 設定
  * @return glTFリソース
  */
-export function loadGlTF(resourcePath: ResourceRoot, config: GlTFConfig): Promise<GlTFResource> {
+export function loadGlTF(resourceRoot: ResourceRoot, config: GlTFConfig): Promise<GlTFResource> {
   return new Promise((resolve, reject) => {
     const loader = new GLTFLoader();
-    const fullPath = `${resourcePath.get()}/${config.path}`;
+    const fullPath = `${resourceRoot.get()}/${config.path}`;
     const onLoad = (object) => resolve({
       id: config.id,
       object: object.scene
@@ -60,11 +60,11 @@ export function loadGlTF(resourcePath: ResourceRoot, config: GlTFConfig): Promis
 /**
  * 全てのglTFリソースを読み込む
  *
- * @param resourcePath リソースパス
+ * @param resourceRoot リソースルート
  * @return 読み込みPromiseの配列
  */
-export function loadingAllGTLFModels(resourcePath: ResourceRoot): Array<Promise<GlTFResource>> {
-  return GLTF_CONFIGS.map(v => loadGlTF(resourcePath, v));
+export function loadingAllGTLFModels(resourceRoot: ResourceRoot): Array<Promise<GlTFResource>> {
+  return GLTF_CONFIGS.map(v => loadGlTF(resourceRoot, v));
 }
 
 /**

@@ -379,15 +379,15 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
 /**
  * テクスチャを読み込む
  *
- * @param resourcePath リソースパス
+ * @param resourceRoot リソースルート
  * @param config テクスチャ設定
  * @return 読み込み結果
  */
-export function loadTexture(resourcePath: ResourceRoot, config: TextureConfig): Promise<TextureResource> {
+export function loadTexture(resourceRoot: ResourceRoot, config: TextureConfig): Promise<TextureResource> {
   let loader = new THREE.TextureLoader();
   return new Promise((resolve, reject) => {
     loader.load(
-      `${resourcePath.get()}/${config.path}`,
+      `${resourceRoot.get()}/${config.path}`,
       texture => resolve({
         id: config.id,
         texture
@@ -403,9 +403,9 @@ export function loadTexture(resourcePath: ResourceRoot, config: TextureConfig): 
 /**
  * ゲームで使う全てのテクスチャを読み込む
  *
- * @param resourcePath リソースパス
+ * @param resourceRoot リソースルート
  * @returns 読み込み結果
  */
-export function loadingAllTextures(resourcePath: ResourceRoot): Array<Promise<TextureResource>> {
-  return TEXTURE_CONFIGS.map(v => loadTexture(resourcePath, v));
+export function loadingAllTextures(resourceRoot: ResourceRoot): Array<Promise<TextureResource>> {
+  return TEXTURE_CONFIGS.map(v => loadTexture(resourceRoot, v));
 }
