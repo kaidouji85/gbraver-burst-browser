@@ -18,7 +18,7 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {PushGameStart, PushHowToPlay} from "../action/game/title";
 import type {State} from "./state/state";
 import {createInitialState} from "./state/state";
-import type {ResourcePath} from "../resource/path/resource-path";
+import type {ResourceRoot} from "../resource/root/resource-root";
 import type {SelectionComplete} from "../action/game/selection-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {PreLoadLinks} from "./preload-links";
@@ -48,7 +48,7 @@ export class Game {
   _domScenes: DOMScenes;
   _domDialogs: DOMDialogs;
   _tdScenes: TDScenes;
-  _resourcePath: ResourcePath;
+  _resourceRoot: ResourceRoot;
   _resources: ?Resources;
   _serviceWorker: ?ServiceWorkerRegistration;
   _subscriptions: Subscription[];
@@ -56,16 +56,16 @@ export class Game {
   /**
    * コンストラクタ
    *
-   * @param resourcePath リソースパス
+   * @param resourceRoot リソースフォルダのルート
    */
-  constructor(resourcePath: ResourcePath) {
-    this._resourcePath = resourcePath;
+  constructor(resourceRoot: ResourceRoot) {
+    this._resourceRoot = resourceRoot;
 
     this._state = createInitialState();
     this._resize = createResizeStream();
     this._vh = new CssVH(this._resize);
 
-    this._preLoadLinks = new PreLoadLinks(resourcePath);
+    this._preLoadLinks = new PreLoadLinks(resourceRoot);
     const head = document.head ?? document.createElement('head');
     this._preLoadLinks.getLinks().forEach(link => {
       head.appendChild(link);
@@ -73,18 +73,16 @@ export class Game {
 
     this._fader = new DOMFader();
 
-    this._interruptScenes = new InterruptScenes({
-      resourcePath: this._resourcePath,
-    });
+    this._interruptScenes = new InterruptScenes();
     this._domScenes = new DOMScenes();
-    this._domDialogs = new DOMDialogs(this._resourcePath);
+    this._domDialogs = new DOMDialogs();
     this._tdScenes = new TDScenes(this._resize);
 
     const body = document.body || document.createElement('div');
     const elements = [
       this._fader.getRootHTMLElement(),
-      ...this._interruptScenes.getRootHTMLElements(),
-      ...this._domDialogs.getRootHTMLElements(),
+      this._interruptScenes.getRootHTMLElement(),
+      this._domDialogs.getRootHTMLElement(),
       this._domScenes.getRootHTMLElement(),
       this._tdScenes.getRendererDOM(),
     ];
@@ -132,12 +130,13 @@ export class Game {
       }
       this._serviceWorker = await loadServiceWorker();
 
-      const loader = new ResourceLoader(this._resourcePath);
+      const loader = new ResourceLoader(this._resourceRoot);
       invisibleFirstView();
       this._domScenes.startLoading(loader.progress());
       await this._fader.fadeIn();
       const resources: Resources = await loader.load();
       this._resources = resources;
+      this._interruptScenes.bind(resources);
       await waitAnimationFrame();
       await waitTime(1000);
 
@@ -176,7 +175,11 @@ export class Game {
    * @param action アクション
    */
   _onPushHowToPlay(action: PushHowToPlay) {
-    this._domDialogs.showHowToPlay();
+    if (!this._resources) {
+      return;
+    }
+
+    this._domDialogs.startHowToPlay(this._resources);
   }
 
   /**

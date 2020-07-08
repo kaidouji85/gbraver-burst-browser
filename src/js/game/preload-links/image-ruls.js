@@ -1,13 +1,13 @@
 // @flow
 
-import type {ResourcePath} from "../../resource/path/resource-path";
+import type {ResourceRoot} from "../../resource/root/resource-root";
 
 /**
  * プリロードする画像ファイル一覧
  *
- * @param resourcePath リソースパス
+ * @param resourceRoot リソースルート
  * @return プリロードする画像ファイル一覧
  */
-export function imageURLs(resourcePath: ResourcePath): string[] {
+export function imageURLs(resourceRoot: ResourceRoot): string[] {
   return [];
 }

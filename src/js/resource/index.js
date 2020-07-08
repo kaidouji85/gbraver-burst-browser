@@ -9,16 +9,20 @@ import type {CubeTextureResource} from "./cube-texture";
 import {loadingAllCubeTextures} from "./cube-texture";
 import type {SoundResource} from "./sound";
 import {loadingAllSounds} from "./sound";
-import type {ResourcePath} from "./path/resource-path";
+import type {ResourceRoot} from "./root/resource-root";
 import {Observable, Subject} from "rxjs";
 import type {LoadingAction} from "../action/loading/loading";
+import type {Path} from "./path";
+import {getAllPaths} from "./path";
 
 /**
  * ゲームで使うリソースを集めたもの
  */
 export type Resources = {
-  /** リソースパス */
-  path: ResourcePath,
+  /** リソースフォルダのルート */
+  rootPath: ResourceRoot,
+  /** パス */
+  paths: Path[],
   /** GlTFモデル */
   gltfs: GlTFResource[],
   /** テクスチャ */
@@ -35,12 +39,14 @@ export type Resources = {
  * リソース読み込み
  */
 export class ResourceLoader {
-  _resourcePath: ResourcePath;
+  _resourceROot: ResourceRoot;
   _gltfLoading: Array<Promise<GlTFResource>>;
   _textureLoading: Array<Promise<TextureResource>>;
   _cubeTextureLoading: Array<Promise<CubeTextureResource>>;
   _canvasImageLoading: Array<Promise<CanvasImageResource>>;
   _soundLoading: Array<Promise<SoundResource>>;
+  _paths: Path[];
+  _pathLoading: Array<Promise<Response>>;
   _allLoadingCounts: number;
   _completedLoadingCounts: number;
   _loading: Subject<LoadingAction>;
@@ -48,15 +54,18 @@ export class ResourceLoader {
   /**
    * コンストラクタ
    *
-   * @param resourcePath リソースパス
+   * @param resourceRoot リソースルート
    */
-  constructor(resourcePath: ResourcePath) {
-    this._resourcePath = resourcePath;
-    this._gltfLoading = loadingAllGTLFModels(resourcePath);
-    this._textureLoading = loadingAllTextures(resourcePath);
-    this._cubeTextureLoading = loadingAllCubeTextures(resourcePath);
-    this._canvasImageLoading = loadingAllCanvasImages(resourcePath);
-    this._soundLoading = loadingAllSounds(resourcePath);
+  constructor(resourceRoot: ResourceRoot) {
+    this._resourceROot = resourceRoot;
+    this._gltfLoading = loadingAllGTLFModels(resourceRoot);
+    this._textureLoading = loadingAllTextures(resourceRoot);
+    this._cubeTextureLoading = loadingAllCubeTextures(resourceRoot);
+    this._canvasImageLoading = loadingAllCanvasImages(resourceRoot);
+    this._soundLoading = loadingAllSounds(resourceRoot);
+
+    this._paths = getAllPaths(resourceRoot)
+    this._pathLoading = this._paths.map(path => fetch(path.path))
 
     const allLoading = [].concat(
       this._gltfLoading,
@@ -64,6 +73,7 @@ export class ResourceLoader {
       this._cubeTextureLoading,
       this._canvasImageLoading,
       this._soundLoading,
+      this._pathLoading,
     );
     this._allLoadingCounts = allLoading.length;
     this._completedLoadingCounts = 0;
@@ -86,21 +96,23 @@ export class ResourceLoader {
    */
   async load(): Promise<Resources> {
     try {
-      const [gltfs, textures, cubeTextures, canvasImages, sounds] = await Promise.all([
+      const [gltfs, textures, cubeTextures, canvasImages, sounds, pathResponses] = await Promise.all([
         Promise.all(this._gltfLoading),
         Promise.all(this._textureLoading),
         Promise.all(this._cubeTextureLoading),
         Promise.all(this._canvasImageLoading),
         Promise.all(this._soundLoading),
+        Promise.all(this._pathLoading),
       ]);
 
       return {
-        path: this._resourcePath,
+        rootPath: this._resourceROot,
         gltfs: gltfs,
         textures: textures,
         cubeTextures: cubeTextures,
         canvasImages: canvasImages,
         sounds: sounds,
+        paths: this._paths
       };
     } catch(e) {
       throw e;

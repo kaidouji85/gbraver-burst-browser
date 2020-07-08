@@ -1,9 +1,10 @@
 // @flow
 
 import {HowToPlay} from "./how-to-play";
-import {Observable} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {EndHowToPlay} from "../../action/game/how-to-play";
-import type {ResourcePath} from "../../resource/path/resource-path";
+import type {Resources} from "../../resource";
+import type {DOMDialog} from "./dialog";
 
 /** イベント通知ストリーム */
 type Notifier = {
@@ -12,20 +13,44 @@ type Notifier = {
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
-  _howToPlay: HowToPlay;
+  _root: HTMLElement;
+  _dialog: ?DOMDialog;
+  _endHowToPlay: Subject<EndHowToPlay>;
+  _dialogSubscriptions: Subscription[];
 
-  constructor(resourcePath: ResourcePath) {
-    this._howToPlay = new HowToPlay(resourcePath);
+
+  /**
+   * コンストラクタ
+   */
+  constructor() {
+    this._root = document.createElement('div');
+    this._dialog = null;
+    this._endHowToPlay = new Subject();
+    this._dialogSubscriptions = [];
   }
 
-  /** 遊び方ダイアログを表示する */
-  showHowToPlay(): void {
-    this._howToPlay.show();
+  /**
+   * 遊び方ダイアログを表示する
+   *
+   * @param resources リソース管理オブジェクト
+   */
+  startHowToPlay(resources: Resources): void {
+    this._removeCurrentDialog();
+
+    const howToPlay = new HowToPlay(resources);
+    const notifier = howToPlay.notifier();
+    this._dialogSubscriptions = [
+      notifier.endHowToPlay.subscribe(this._endHowToPlay)
+    ];
+    this._root.appendChild(howToPlay.getRootHTMLElement());
+    this._dialog = howToPlay;
   }
 
-  /** 前ダイアログを非表示にする */
+  /**
+   * 現在表示しているダイアログを非表示にする
+   */
   hidden(): void {
-    this._howToPlay.hidden();
+    this._removeCurrentDialog();
   }
 
   /**
@@ -35,18 +60,30 @@ export class DOMDialogs {
    */
   notifier(): Notifier {
     return {
-      endHowToPlay: this._howToPlay.notifier().endHowToPlay,
+      endHowToPlay: this._endHowToPlay,
     }
   }
 
   /**
-   * 本クラスに含まれる全てのルートHTML要素を取得する
+   * 本クラスのルートHTML要素を取得する
    *
    * @return 取得結果
    */
-  getRootHTMLElements(): HTMLElement[] {
-    return [
-      this._howToPlay.getRootHTMLElement()
-    ];
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
+  }
+
+  /**
+   * 現在表示しているダイアログを取り除く
+   */
+  _removeCurrentDialog(): void {
+    this._dialog && this._dialog.destructor();
+    this._dialog && this._dialog.getRootHTMLElement().remove();
+    this._dialog = null;
+
+    this._dialogSubscriptions.forEach(v => {
+      v.unsubscribe();
+    });
+    this._dialogSubscriptions = [];
   }
 }

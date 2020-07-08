@@ -1,12 +1,12 @@
 // @flow
 
-import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon-view";
 import {merge, Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {map} from "rxjs/operators";
 import type {SelectArmdozer} from "../../../../action/player-select/select-armdozer";
+import type {Resources} from "../../../../resource";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select';
@@ -29,10 +29,10 @@ export class PlayerSelectView {
   /**
    * コンストラクタ
    *
-   * @param resourcePath リソースパス
+   * @param resources リソース管理オブジェクト
    * @param armDozerIds アームドーザIDリスト
    */
-  constructor(resourcePath: ResourcePath, armDozerIds: ArmDozerId[]) {
+  constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
     const armdozersId = domUuid();
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
@@ -46,7 +46,7 @@ export class PlayerSelectView {
 
     this._armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
     this.armdozerIcons = armDozerIds
-      .map(armDozerId => new ArmdozerIconView(resourcePath, armDozerId));
+      .map(armDozerId => new ArmdozerIconView(resources, armDozerId));
     this.armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {

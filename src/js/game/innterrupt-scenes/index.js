@@ -1,37 +1,44 @@
 // @flow
 
 import {PlayInLandscape} from "./play-in-landscape";
-import type {ResourcePath} from "../../resource/path/resource-path";
-
-/** コンストラクタのパラメータ */
-type Param = {
-  resourcePath: ResourcePath,
-};
+import type {Resources} from "../../resource";
 
 /**
  * 割り込みで表示されるシーンをあつめたもの
  */
 export class InterruptScenes {
-  _playInLandscape: PlayInLandscape;
+  _root: HTMLElement;
 
-  constructor(param: Param) {
-    this._playInLandscape = new PlayInLandscape(param.resourcePath);
+  /**
+   * コンストラクタ
+   */
+  constructor() {
+    this._root = document.createElement('div');
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor() {
     // NOP
   }
 
+  /**
+   * 割り込みシーンをルート要素に関連づける
+   *
+   * @param resources リソース管理オブジェクト
+   */
+  bind(resources: Resources): void {
+    const playInLandscape = new PlayInLandscape(resources);
+    this._root.appendChild(playInLandscape.getRootHTMLElement());
+  }
 
   /**
    * 本クラスに含まれるルートHTML要素を返す
    *
    * @return 取得結果
    */
-  getRootHTMLElements(): HTMLElement[] {
-    return [
-      this._playInLandscape.getRootHTMLElement(),
-    ];
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
   }
 }

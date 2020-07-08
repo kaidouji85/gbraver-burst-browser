@@ -1,9 +1,9 @@
 // @flow
 
 /**
- * リソースのベースパス
+ *  リロースフォルダのルートパス
  */
-export interface ResourcePath {
+export interface ResourceRoot {
   /**
    * リソースベースパスを取得する
    *

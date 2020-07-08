@@ -1,8 +1,9 @@
 // @flow
 
-import type {ResourcePath} from "../../../../resource/path/resource-path";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
+import type {Resources} from "../../../../resource";
+import {PathIds} from "../../../../resource/path";
 
 /**
  * イベント通知
@@ -24,9 +25,9 @@ export class NPCEndingView {
   /**
    * コンストラクタ
    *
-   * @param resourcePath リソースパス
+   * @param resources リソース管理オブジェクト
    */
-  constructor(resourcePath: ResourcePath) {
+  constructor(resources: Resources) {
     this._screenPush = new Subject();
 
     const endId = domUuid();
@@ -46,7 +47,10 @@ export class NPCEndingView {
         resolve();
       });
     }) ;
-    titleBackImage.src = `${resourcePath.get()}/ending/end-card.png`;
+    const endCardResource = resources.paths.find(v => v.id === PathIds.END_CARD);
+    titleBackImage.src = endCardResource
+      ? endCardResource.path
+      : '';
 
     const end = this._root.querySelector(`[data-id="${endId}"]`);
     const endImage: HTMLImageElement = (end instanceof HTMLImageElement)
@@ -57,7 +61,10 @@ export class NPCEndingView {
         resolve();
       });
     });
-    endImage.src = `${resourcePath.get()}/ending/end.png`;
+    const endResource = resources.paths.find(v => v.id === PathIds.END);
+    endImage.src = endResource
+      ? endResource.path
+      : '';
 
     const logo = this._root.querySelector(`[data-id="${logoId}"]`);
     const logoImage = (logo instanceof  HTMLImageElement)
@@ -68,7 +75,10 @@ export class NPCEndingView {
         resolve();
       });
     });
-    logoImage.src = `${resourcePath.get()}/logo.png`;
+    const logoResource = resources.paths.find(v => v.id === PathIds.LOGO);
+    logoImage.src = logoResource
+      ? logoResource.path
+      : '';
 
     this._root.addEventListener('click', (e: MouseEvent) => {
       this._screenPush.next();

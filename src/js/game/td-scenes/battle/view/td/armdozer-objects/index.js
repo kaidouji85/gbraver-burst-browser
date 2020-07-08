@@ -7,7 +7,7 @@ import type {GameObjectAction} from "../../../../../../action/game-object-action
 import {EmptyTDArmdozer} from "./empty";
 import {enemyLightningDozerTD, playerLightningDozerTD} from "./lightning-dozer";
 import type {TDArmdozerObjects} from "./armdozer-objects";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト

@@ -1,6 +1,6 @@
 // flow
 
-import type {ResourcePath} from "./path/resource-path";
+import type {ResourceRoot} from "./root/resource-root";
 import {Howl} from 'howler';
 
 /** 音リソースのユニークID */
@@ -11,7 +11,7 @@ export type SoundId = string;
  */
 export type SoundConfig = {
   id: SoundId,
-  path: (resourcePath: ResourcePath) => string,
+  path: (resourceRoot: ResourceRoot) => string,
   volume: number
 };
 
@@ -41,32 +41,32 @@ export const SOUND_IDS = {
 export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.PUSH_BUTTON,
-    path: resourcePath => `${resourcePath.get()}/sounds/push-button.mp3`,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/push-button.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.CHANGE_VALUE,
-    path: resourcePath => `${resourcePath.get()}/sounds/change-value.mp3`,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/change-value.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.MECHA_IMPACT,
-    path: resourcePath => `${resourcePath.get()}/sounds/mecha-impact.mp3`,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/mecha-impact.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.MOTOR,
-    path: resourcePath => `${resourcePath.get()}/sounds/motor.mp3`,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/motor.mp3`,
     volume: 0.3
   },
   {
     id: SOUND_IDS.LIGHTNING_ATTACK,
-    path: resourcePath => `${resourcePath.get()}/sounds/lightning-attack.mp3`,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-attack.mp3`,
     volume: 0.3
   },
   {
     id: SOUND_IDS.LIGHTNING_BARRIER,
-    path: resourcePath => `${resourcePath.get()}/sounds/lightning-barrier.mp3`,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-barrier.mp3`,
     volume: 0.3
   },
 ];
@@ -74,13 +74,13 @@ export const SOUND_CONFIGS: SoundConfig[] = [
 /**
  * 指定した音リソースを読み込む
  *
- * @param resourcePath リソースパス
+ * @param resourceRoot リソースルート
  * @param config 音設定
  */
-export function loadSound(resourcePath: ResourcePath, config: SoundConfig): Promise<SoundResource> {
+export function loadSound(resourceRoot: ResourceRoot, config: SoundConfig): Promise<SoundResource> {
   return new Promise((resolve, reject) => {
     const sound = new Howl({
-      src: [config.path(resourcePath)],
+      src: [config.path(resourceRoot)],
       volume: config.volume,
     });
     const resource: SoundResource = {
@@ -105,9 +105,9 @@ export function loadSound(resourcePath: ResourcePath, config: SoundConfig): Prom
 /**
  * 全ての音リソースを読み込む
  *
- * @param resourcePath リソースパス
+ * @param resourceRoot リソースルート
  * @return 全ての音リソース
  */
-export function loadingAllSounds(resourcePath: ResourcePath): Array<Promise<SoundResource>> {
-  return SOUND_CONFIGS.map(config => loadSound(resourcePath, config));
+export function loadingAllSounds(resourceRoot: ResourceRoot): Array<Promise<SoundResource>> {
+  return SOUND_CONFIGS.map(config => loadSound(resourceRoot, config));
 }
