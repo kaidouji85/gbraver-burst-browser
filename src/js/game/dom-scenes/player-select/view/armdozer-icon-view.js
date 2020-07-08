@@ -3,7 +3,7 @@
 import {Observable, Subject} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
-import {getArmdozerIconURL} from "../../../../resource/urls/armdozer-icon-urls";
+import {getArmdozerIconURL} from "../../../../armdozer-icon/armdozer-icon-urls";
 import type {ResourceRoot} from "../../../../resource/root/resource-root";
 
 /**

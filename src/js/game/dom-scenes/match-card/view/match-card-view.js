@@ -2,7 +2,7 @@
 
 import type {ResourceRoot} from "../../../../resource/root/resource-root";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {getArmdozerIconURL} from "../../../../resource/urls/armdozer-icon-urls";
+import {getArmdozerIconURL} from "../../../../armdozer-icon/armdozer-icon-urls";
 import {domUuid} from "../../../../uuid/dom-uuid";
 
 /**
