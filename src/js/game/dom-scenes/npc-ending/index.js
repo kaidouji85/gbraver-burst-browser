@@ -33,7 +33,7 @@ export class NPCEnding implements DOMScene {
   constructor(resources: Resources) {
     this._state = createInitialState();
     this._endNPCEnding = new Subject();
-    this._view = new NPCEndingView(resources.rootPath);
+    this._view = new NPCEndingView(resources);
 
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButtonSound = pushButtonResource

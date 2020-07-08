@@ -33,6 +33,8 @@ export const PathIds = {
   NEO_LANDOZER_ICON: 'NEO_LANDOZER_ICON',
   LIGHTNING_DOZER_ICON: 'LIGHTNING_DOZER_ICON',
   WING_DOZER_ICON: 'WING_DOZER_ICON',
+  END: 'END',
+  END_CARD: 'END_CARD',
 };
 
 /**
@@ -66,6 +68,14 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.WING_DOZER_ICON,
     path: root => `${root.get()}/armdozer/wing-dozer/player-select.png`
+  },
+  {
+    id: PathIds.END,
+    path: root => `${root.get()}/ending/end-card.png`
+  },
+  {
+    id: PathIds.END_CARD,
+    path: root => `${root.get()}/ending/end.png`
   },
 ];
 
