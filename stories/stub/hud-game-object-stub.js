@@ -84,8 +84,8 @@ export class HUDGameObjectStub {
    */
   async start(): Promise<void> {
     try {
-      const resourcePath = new StorybookResourceRoot();
-      const loader = new ResourceLoader(resourcePath);
+      const resourceRoot = new StorybookResourceRoot();
+      const loader = new ResourceLoader(resourceRoot);
       const resources = await loader.load();
       const object3Ds = this._creator(resources, this._gameObjectAction);
       object3Ds.forEach(object3D => {

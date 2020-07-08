@@ -10,7 +10,7 @@ import {EmptyHUDArmdozer} from "./empty";
 import {enemyNeoLandozerHUD, playerNeoLandozerHUD} from "./neo-landozer";
 import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer";
 import {enemyWingDozerHUD, playerWingDozerHUD} from "./wing-dozer";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
  * HUDレイヤー アームドーザ固有のオブジェクトを集めたもの

@@ -10,7 +10,7 @@ import {ResourceLoader} from "../../src/js/resource";
 /**
  * HTML要素生成コールバック関数
  *
- * @param resourcePath リソースパス
+ * @param resources リソース管理オブジェクト
  * @return 生成したHTML要素
  */
 export type DOMCreator = (resources: Resources) => HTMLElement;
@@ -26,8 +26,8 @@ export const domStub = (creator: DOMCreator) => (): HTMLElement => {
   const resize = createResizeStream();
   const vh = new CssVH(resize);
 
-  const resourcePath = new StorybookResourceRoot();
-  const loader = new ResourceLoader(resourcePath);
+  const resourceRoot = new StorybookResourceRoot();
+  const loader = new ResourceLoader(resourceRoot);
   loader.load().then(resources => {
     const component = creator(resources);
     root.appendChild(component);

@@ -10,7 +10,7 @@ import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-
 import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 import {TDArmdozerSprite} from "./armdozer-sprite";
 import {EnemyWingDozer, PlayerWingDozer} from "../../../../../../game-object/armdozer/wing-dozer";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
  * プレイヤースプライを生成する
