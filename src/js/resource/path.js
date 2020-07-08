@@ -35,6 +35,7 @@ export const PathIds = {
   WING_DOZER_ICON: 'WING_DOZER_ICON',
   END: 'END',
   END_CARD: 'END_CARD',
+  CLOSER: 'CLOSER',
 };
 
 /**
@@ -76,6 +77,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.END_CARD,
     path: root => `${root.get()}/ending/end.png`
+  },
+  {
+    id: PathIds.CLOSER,
+    path: root => `${root.get()}/dialog/closer.svg`
   },
 ];
 

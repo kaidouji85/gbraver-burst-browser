@@ -75,14 +75,14 @@ export class Game {
 
     this._interruptScenes = new InterruptScenes(this._resourceRoot);
     this._domScenes = new DOMScenes();
-    this._domDialogs = new DOMDialogs(this._resourceRoot);
+    this._domDialogs = new DOMDialogs();
     this._tdScenes = new TDScenes(this._resize);
 
     const body = document.body || document.createElement('div');
     const elements = [
       this._fader.getRootHTMLElement(),
       ...this._interruptScenes.getRootHTMLElements(),
-      ...this._domDialogs.getRootHTMLElements(),
+      this._domDialogs.getRootHTMLElement(),
       this._domScenes.getRootHTMLElement(),
       this._tdScenes.getRendererDOM(),
     ];
@@ -174,7 +174,11 @@ export class Game {
    * @param action アクション
    */
   _onPushHowToPlay(action: PushHowToPlay) {
-    this._domDialogs.showHowToPlay();
+    if (!this._resources) {
+      return;
+    }
+
+    this._domDialogs.startHowToPlay(this._resources);
   }
 
   /**

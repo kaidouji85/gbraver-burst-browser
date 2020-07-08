@@ -4,12 +4,11 @@ import {HowToPlayView} from "./view/how-to-play-view";
 import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
 import type {HowToPlayState} from "./state/how-to-play-state";
 import {createInitialState} from "./state/initial-state";
-import {show} from "./state/show";
 import {Observable} from "rxjs";
 import type {EndHowToPlay} from "../../../action/game/how-to-play";
 import {map} from "rxjs/operators";
-import {hidden} from "./state/hidden";
-import type {ResourceRoot} from "../../../resource/root/resource-root";
+import type {Resources} from "../../../resource";
+import type {DOMDialog} from "../dialog";
 
 /** イベント通知 */
 type Notifier = {
@@ -19,15 +18,20 @@ type Notifier = {
 /**
  * 遊び方ダイアログ
  */
-export class HowToPlay {
+export class HowToPlay implements DOMDialog {
   _state: HowToPlayState;
   _view: HowToPlayView;
   _notifier: Notifier;
 
-  constructor(resourcePath: ResourceRoot) {
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   */
+  constructor(resources: Resources) {
     this._state = createInitialState();
 
-    this._view = new HowToPlayView(howToPlayMovieURL(), resourcePath);
+    this._view = new HowToPlayView(resources, howToPlayMovieURL());
     this._view.engage(this._state);
 
     this._notifier = {
@@ -38,19 +42,10 @@ export class HowToPlay {
   }
 
   /**
-   * 本ダイアログを表示する
+   * デストラクタ相当の処理
    */
-  show(): void {
-    this._state = show(this._state);
-    this._view.engage(this._state);
-  }
-
-  /**
-   * 本ダイアログを非表示にする
-   */
-  hidden(): void {
-    this._state = hidden(this._state);
-    this._view.engage(this._state);
+  destructor(): void {
+    // NOP
   }
 
   /**

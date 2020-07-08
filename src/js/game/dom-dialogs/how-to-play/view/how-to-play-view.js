@@ -3,7 +3,8 @@
 import type {HowToPlayState} from "../state/how-to-play-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
-import type {ResourceRoot} from "../../../../resource/root/resource-root";
+import type {Resources} from "../../../../resource";
+import {PathIds} from "../../../../resource/path";
 
 /** イベント通知ストリーム */
 export type Notifier = {
@@ -21,20 +22,30 @@ export type Param = {
 export class HowToPlayView {
   _closeStream: Subject<void>;
   _root: HTMLElement;
-  _dialog: HTMLElement;
-  _iframe: HTMLIFrameElement;
   _closer: HTMLElement;
 
-  constructor(movieURL: string, resourcePath: ResourceRoot) {
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   * @param movieURL 遊び方動画URL
+   */
+  constructor(resources: Resources, movieURL: string) {
     this._closeStream = new Subject();
 
-    const dialogId = domUuid();
     const closerId = domUuid();
+    const closerResource = resources.paths.find(v => v.id === PathIds.CLOSER);
+    const closerPath = closerResource
+      ? closerResource.path
+      : '';
     this._root = document.createElement('div');
+    this._root.className = 'how-to-play';
     this._root.innerHTML = `
       <div class="how-to-play__background"></div>
-      <img class="how-to-play__closer" src="${resourcePath.get()}/dialog/closer.svg" data-id="${closerId}"></img>
-      <div class="how-to-play__dialog" data-id="${dialogId}">  </div>
+      <img class="how-to-play__closer" src="${closerPath}" data-id="${closerId}"></img>
+      <div class="how-to-play__dialog">
+        <iframe class="how-to-play__dialog__movie" src="${movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+      </div>
     `;
 
     this._root.addEventListener('click', (e: MouseEvent) => {
@@ -45,14 +56,6 @@ export class HowToPlayView {
       e.preventDefault();
       this._closeStream.next();
     });
-
-    this._dialog = this._root.querySelector(`[data-id="${dialogId}"]`) || document.createElement('div');
-
-    this._iframe = document.createElement('iframe');
-    this._iframe.className = 'how-to-play__dialog__movie';
-    this._iframe.src = movieURL;
-    this._iframe.frameBorder = '0';
-    this._iframe.setAttribute('allow', 'fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
 
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
     this._closer.addEventListener('click', (e: MouseEvent) => {
@@ -71,15 +74,7 @@ export class HowToPlayView {
    * @param state 状態
    */
   engage(state: HowToPlayState): void {
-    this._root.className = state.isVisible
-      ? 'how-to-play'
-      : 'how-to-play--invisible';
-
-    if (state.isVisible) {
-      this._appendIFrame()
-    } else {
-      this._removeIFrame();
-    }
+    // NOP
   }
 
   /**
@@ -100,27 +95,5 @@ export class HowToPlayView {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
-  }
-
-  /**
-   * youtube動画iframeをDOMに追加する
-   */
-  _appendIFrame(): void {
-    if (this._dialog.contains(this._iframe)) {
-      return;
-    }
-
-    this._dialog.appendChild(this._iframe);
-  }
-
-  /**
-   * youtube動画iframeをDOMから取り除く
-   */
-  _removeIFrame(): void {
-    if (!this._dialog.contains(this._iframe)) {
-      return;
-    }
-
-    this._dialog.appendChild(this._iframe);
   }
 }

@@ -222,10 +222,6 @@
     }
 }
 
-.how-to-play--invisible {
-    display: none;
-}
-
 .how-to-play__background {
     position: absolute;
     width: var(--screen-width);
