@@ -1,7 +1,7 @@
 // @flow
 
 import {PlayInLandscapeView} from "./view/play-in-landscape-view";
-import type {ResourceRoot} from "../../../resource/root/resource-root";
+import type {Resources} from "../../../resource";
 
 /** ランドスケープ警告シーン */
 export class PlayInLandscape {
@@ -10,10 +10,10 @@ export class PlayInLandscape {
   /**
    * コンストラクタ
    *
-   * @param resourcePath リソースパス
+   * @param resources リソース管理オブジェクト
    */
-  constructor(resourcePath: ResourceRoot) {
-    this._view = new PlayInLandscapeView(resourcePath);
+  constructor(resources: Resources) {
+    this._view = new PlayInLandscapeView(resources);
   }
 
   /**

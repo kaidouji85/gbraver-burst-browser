@@ -29,7 +29,7 @@ export class InterruptScenes {
    * @param resources リソース管理オブジェクト
    */
   bind(resources: Resources): void {
-    const playInLandscape = new PlayInLandscape(resources.rootPath);
+    const playInLandscape = new PlayInLandscape(resources);
     this._root.appendChild(playInLandscape.getRootHTMLElement());
   }
 

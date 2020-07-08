@@ -36,6 +36,7 @@ export const PathIds = {
   END: 'END',
   END_CARD: 'END_CARD',
   CLOSER: 'CLOSER',
+  PLAY_IN_LANDSCAPE: 'PLAY_IN_LANDSCAPE',
 };
 
 /**
@@ -81,6 +82,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.CLOSER,
     path: root => `${root.get()}/dialog/closer.svg`
+  },
+  {
+    id: PathIds.PLAY_IN_LANDSCAPE,
+    path: root => `${root.get()}/waring/play-in-landscape.png`
   },
 ];
 
