@@ -29,6 +29,10 @@ export type Path = {
 export const PathIds = {
   TITLE_BACK: 'TITLE_BACK',
   LOGO: 'LOGO',
+  SHIN_BRAVER_ICON: 'SHIN_BRAVER_ICON',
+  NEO_LANDOZER_ICON: 'NEO_LANDOZER_ICON',
+  LIGHTNING_DOZER_ICON: 'LIGHTNING_DOZER_ICON',
+  WING_DOZER_ICON: 'WING_DOZER_ICON',
 };
 
 /**
@@ -37,11 +41,31 @@ export const PathIds = {
 export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.TITLE_BACK,
-    path: resourcePath => `${resourcePath.get()}/title-back.png`
+    path: root => `${root.get()}/title-back.png`
   },
   {
     id: PathIds.LOGO,
-    path: resourcePath => `${resourcePath.get()}/logo.png`
+    path: root => `${root.get()}/logo.png`
+  },
+  {
+    id: PathIds.SHIN_BRAVER_ICON,
+    path: root => `${root.get()}/armdozer/shin-braver/player-select.png`
+  },
+  {
+    id: PathIds.NEO_LANDOZER_ICON,
+    path: root => `${root.get()}/armdozer/neo-landozer/player-select.png`
+  },
+  {
+    id: PathIds.LIGHTNING_DOZER_ICON,
+    path: root => `${root.get()}/armdozer/lightning-dozer/player-select.png`
+  },
+  {
+    id: PathIds.LIGHTNING_DOZER_ICON,
+    path: root => `${root.get()}/armdozer/lightning-dozer/player-select.png`
+  },
+  {
+    id: PathIds.WING_DOZER_ICON,
+    path: root => `${root.get()}/armdozer/wing-dozer/player-select.png`
   },
 ];
 

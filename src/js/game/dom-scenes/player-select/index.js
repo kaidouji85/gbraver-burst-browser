@@ -51,7 +51,7 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._view = new PlayerSelectView(resources.rootPath, armDozerIds);
+    this._view = new PlayerSelectView(resources, armDozerIds);
 
     this._subscription = this._view.notifier().select.subscribe(icon => {
       this._onArmdozerIconPush(icon);

@@ -4,6 +4,7 @@ import type {ResourceRoot} from "../resource/root/resource-root";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 
+// TODO 削除する
 /**
  * アームドーザIDに対応するアイコン画像のURLを返す
  *
@@ -26,6 +27,7 @@ export function getArmdozerIconURL(resourcePath: ResourceRoot, armDozerId: ArmDo
   }
 }
 
+// TODO 削除する
 /**
  * シンブレイバー アイコン URL
  *
@@ -36,6 +38,7 @@ export function shinBraverIconURL(resourcePath: ResourceRoot): string {
   return `${resourcePath.get()}/armdozer/shin-braver/player-select.png`;
 }
 
+// TODO 削除する
 /**
  * ネオランドーザ アイコン URL
  *
@@ -46,6 +49,7 @@ export function neoLandozerIconURL(resourcePath: ResourceRoot): string {
   return `${resourcePath.get()}/armdozer/neo-landozer/player-select.png`;
 }
 
+// TODO 削除する
 /**
  * ライトニングドーザ アイコン URL
  *
@@ -56,6 +60,7 @@ export function lightningDozerIconURL(resourcePath: ResourceRoot): string {
   return `${resourcePath.get()}/armdozer/lightning-dozer/player-select.png`;
 }
 
+// TODO 削除する
 /**
  * ウィングドーザ アイコン URL
  * @param resourcePath リソースパス
