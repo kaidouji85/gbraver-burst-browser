@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from "three";
-import type {ResourcePath} from "./path/resource-path";
+import type {ResourceRoot} from "./root/resource-root";
 
 /** テクスチャID */
 export type TextureId = string;
@@ -383,7 +383,7 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
  * @param config テクスチャ設定
  * @return 読み込み結果
  */
-export function loadTexture(resourcePath: ResourcePath, config: TextureConfig): Promise<TextureResource> {
+export function loadTexture(resourcePath: ResourceRoot, config: TextureConfig): Promise<TextureResource> {
   let loader = new THREE.TextureLoader();
   return new Promise((resolve, reject) => {
     loader.load(
@@ -406,6 +406,6 @@ export function loadTexture(resourcePath: ResourcePath, config: TextureConfig): 
  * @param resourcePath リソースパス
  * @returns 読み込み結果
  */
-export function loadingAllTextures(resourcePath: ResourcePath): Array<Promise<TextureResource>> {
+export function loadingAllTextures(resourcePath: ResourceRoot): Array<Promise<TextureResource>> {
   return TEXTURE_CONFIGS.map(v => loadTexture(resourcePath, v));
 }

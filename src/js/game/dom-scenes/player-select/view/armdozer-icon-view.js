@@ -4,7 +4,7 @@ import {Observable, Subject} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import {getArmdozerIconURL} from "../../../../resource/urls/armdozer-icon-urls";
-import type {ResourcePath} from "../../../../resource/path/resource-path";
+import type {ResourceRoot} from "../../../../resource/root/resource-root";
 
 /**
  * イベント通知
@@ -28,7 +28,7 @@ export class ArmdozerIconView {
    * @param resourcePath リソースパス
    * @param armDozerId アームドーザID
    */
-  constructor(resourcePath: ResourcePath, armDozerId: ArmDozerId) {
+  constructor(resourcePath: ResourceRoot, armDozerId: ArmDozerId) {
     this.armDozerId = armDozerId;
     this._select = new Subject();
 

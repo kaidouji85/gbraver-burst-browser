@@ -3,7 +3,7 @@
 import type {HowToPlayState} from "../state/how-to-play-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
-import type {ResourcePath} from "../../../../resource/path/resource-path";
+import type {ResourceRoot} from "../../../../resource/root/resource-root";
 
 /** イベント通知ストリーム */
 export type Notifier = {
@@ -25,7 +25,7 @@ export class HowToPlayView {
   _iframe: HTMLIFrameElement;
   _closer: HTMLElement;
 
-  constructor(movieURL: string, resourcePath: ResourcePath) {
+  constructor(movieURL: string, resourcePath: ResourceRoot) {
     this._closeStream = new Subject();
 
     const dialogId = domUuid();

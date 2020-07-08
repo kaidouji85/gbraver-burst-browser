@@ -1,12 +1,7 @@
 // @flow
 
 import {PlayInLandscape} from "./play-in-landscape";
-import type {ResourcePath} from "../../resource/path/resource-path";
-
-/** コンストラクタのパラメータ */
-type Param = {
-  resourcePath: ResourcePath,
-};
+import type {ResourceRoot} from "../../resource/root/resource-root";
 
 /**
  * 割り込みで表示されるシーンをあつめたもの
@@ -14,8 +9,13 @@ type Param = {
 export class InterruptScenes {
   _playInLandscape: PlayInLandscape;
 
-  constructor(param: Param) {
-    this._playInLandscape = new PlayInLandscape(param.resourcePath);
+  /**
+   * コンストラクタ
+   *
+   * @param resourceRoot リソースルート
+   */
+  constructor(resourceRoot: ResourceRoot) {
+    this._playInLandscape = new PlayInLandscape(resourceRoot);
   }
 
   /** デストラクタ相当の処理 */

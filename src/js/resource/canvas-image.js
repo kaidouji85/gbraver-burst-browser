@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from 'three';
-import type {ResourcePath} from "./path/resource-path";
+import type {ResourceRoot} from "./root/resource-root";
 
 /** キャンバス用画像ID */
 export type CanvasImageId = string;
@@ -132,7 +132,7 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
  * @param config 読み込み設定
  * @return 読み込み結果
  */
-export function loadCanvasImage(resourcePath: ResourcePath, config: CanvasImageConfig): Promise<CanvasImageResource> {
+export function loadCanvasImage(resourcePath: ResourceRoot, config: CanvasImageConfig): Promise<CanvasImageResource> {
   return new Promise((resolve, reject) => {
     const loader = new THREE.ImageLoader();
     loader.load(
@@ -157,6 +157,6 @@ export function loadCanvasImage(resourcePath: ResourcePath, config: CanvasImageC
  * @param resourcePath リソースパス
  * @return 読み込み結果
  */
-export function loadingAllCanvasImages(resourcePath: ResourcePath): Array<Promise<CanvasImageResource>> {
+export function loadingAllCanvasImages(resourcePath: ResourceRoot): Array<Promise<CanvasImageResource>> {
   return CANVAS_IMAGE_CONFIGS.map(config => loadCanvasImage(resourcePath, config))
 }

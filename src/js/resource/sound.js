@@ -1,6 +1,6 @@
 // flow
 
-import type {ResourcePath} from "./path/resource-path";
+import type {ResourceRoot} from "./root/resource-root";
 import {Howl} from 'howler';
 
 /** 音リソースのユニークID */
@@ -11,7 +11,7 @@ export type SoundId = string;
  */
 export type SoundConfig = {
   id: SoundId,
-  path: (resourcePath: ResourcePath) => string,
+  path: (resourcePath: ResourceRoot) => string,
   volume: number
 };
 
@@ -77,7 +77,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
  * @param resourcePath リソースパス
  * @param config 音設定
  */
-export function loadSound(resourcePath: ResourcePath, config: SoundConfig): Promise<SoundResource> {
+export function loadSound(resourcePath: ResourceRoot, config: SoundConfig): Promise<SoundResource> {
   return new Promise((resolve, reject) => {
     const sound = new Howl({
       src: [config.path(resourcePath)],
@@ -108,6 +108,6 @@ export function loadSound(resourcePath: ResourcePath, config: SoundConfig): Prom
  * @param resourcePath リソースパス
  * @return 全ての音リソース
  */
-export function loadingAllSounds(resourcePath: ResourcePath): Array<Promise<SoundResource>> {
+export function loadingAllSounds(resourcePath: ResourceRoot): Array<Promise<SoundResource>> {
   return SOUND_CONFIGS.map(config => loadSound(resourcePath, config));
 }

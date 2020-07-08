@@ -1,6 +1,6 @@
 // @flow
 
-import type {ResourcePath} from "../../../../resource/path/resource-path";
+import type {ResourceRoot} from "../../../../resource/root/resource-root";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {getArmdozerIconURL} from "../../../../resource/urls/armdozer-icon-urls";
 import {domUuid} from "../../../../uuid/dom-uuid";
@@ -21,7 +21,7 @@ export class MatchCardView {
    * @param enemy 敵側 アームドーザID
    * @param caption ステージ名
    */
-  constructor(resourcePath: ResourcePath, player: ArmDozerId, enemy: ArmDozerId, caption: string) {
+  constructor(resourcePath: ResourceRoot, player: ArmDozerId, enemy: ArmDozerId, caption: string) {
     const playerId = domUuid();
     const enemyId = domUuid();
     this._root = document.createElement('div');

@@ -9,11 +9,11 @@ import type {CubeTextureResource} from "./cube-texture";
 import {loadingAllCubeTextures} from "./cube-texture";
 import type {SoundResource} from "./sound";
 import {loadingAllSounds} from "./sound";
-import type {ResourcePath} from "./path/resource-path";
+import type {ResourceRoot} from "./root/resource-root";
 import {Observable, Subject} from "rxjs";
 import type {LoadingAction} from "../action/loading/loading";
-import {getAllPaths} from "./path/path";
-import type {Path} from "./path/path";
+import {getAllPaths} from "./path";
+import type {Path} from "./path";
 
 /**
  * ゲームで使うリソースを集めたもの
@@ -21,7 +21,7 @@ import type {Path} from "./path/path";
 export type Resources = {
   // TODO ResourceRootとリネームする
   /** リソースフォルダのルート */
-  path: ResourcePath,
+  path: ResourceRoot,
   /** パス */
   paths: Path[],
   /** GlTFモデル */
@@ -40,7 +40,7 @@ export type Resources = {
  * リソース読み込み
  */
 export class ResourceLoader {
-  _resourcePath: ResourcePath;
+  _resourcePath: ResourceRoot;
   _gltfLoading: Array<Promise<GlTFResource>>;
   _textureLoading: Array<Promise<TextureResource>>;
   _cubeTextureLoading: Array<Promise<CubeTextureResource>>;
@@ -57,7 +57,7 @@ export class ResourceLoader {
    *
    * @param resourcePath リソースパス
    */
-  constructor(resourcePath: ResourcePath) {
+  constructor(resourcePath: ResourceRoot) {
     this._resourcePath = resourcePath;
     this._gltfLoading = loadingAllGTLFModels(resourcePath);
     this._textureLoading = loadingAllTextures(resourcePath);

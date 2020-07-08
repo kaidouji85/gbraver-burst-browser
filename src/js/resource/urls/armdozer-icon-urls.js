@@ -1,7 +1,7 @@
 // @flow
 
 // TODO 別フォルダに移動させる
-import type {ResourcePath} from "../path/resource-path";
+import type {ResourceRoot} from "../root/resource-root";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 
@@ -12,7 +12,7 @@ import {ArmDozerIdList} from "gbraver-burst-core";
  * @param armDozerId アームドーザID
  * @return 画像URL
  */
-export function getArmdozerIconURL(resourcePath: ResourcePath, armDozerId: ArmDozerId): string {
+export function getArmdozerIconURL(resourcePath: ResourceRoot, armDozerId: ArmDozerId): string {
   switch (armDozerId) {
     case ArmDozerIdList.SHIN_BRAVER:
       return shinBraverIconURL(resourcePath);
@@ -33,7 +33,7 @@ export function getArmdozerIconURL(resourcePath: ResourcePath, armDozerId: ArmDo
  * @param resourcePath リソースパス
  * @return URL
  */
-export function shinBraverIconURL(resourcePath: ResourcePath): string {
+export function shinBraverIconURL(resourcePath: ResourceRoot): string {
   return `${resourcePath.get()}/armdozer/shin-braver/player-select.png`;
 }
 
@@ -43,7 +43,7 @@ export function shinBraverIconURL(resourcePath: ResourcePath): string {
  * @param resourcePath リソースパス
  * @return URL
  */
-export function neoLandozerIconURL(resourcePath: ResourcePath): string {
+export function neoLandozerIconURL(resourcePath: ResourceRoot): string {
   return `${resourcePath.get()}/armdozer/neo-landozer/player-select.png`;
 }
 
@@ -53,7 +53,7 @@ export function neoLandozerIconURL(resourcePath: ResourcePath): string {
  * @param resourcePath リソースパス
  * @return URL
  */
-export function lightningDozerIconURL(resourcePath: ResourcePath): string {
+export function lightningDozerIconURL(resourcePath: ResourceRoot): string {
   return `${resourcePath.get()}/armdozer/lightning-dozer/player-select.png`;
 }
 
@@ -62,6 +62,6 @@ export function lightningDozerIconURL(resourcePath: ResourcePath): string {
  * @param resourcePath リソースパス
  * @return URL
  */
-export function wingDozerIconURL(resourcePath: ResourcePath): string {
+export function wingDozerIconURL(resourcePath: ResourceRoot): string {
   return `${resourcePath.get()}/armdozer/wing-dozer/player-select.png`;
 }

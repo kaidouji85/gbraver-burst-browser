@@ -1,6 +1,6 @@
 // @flow
 
-import type {ResourcePath} from "./resource-path";
+import type {ResourceRoot} from "./root/resource-root";
 
 /**
  * パス ID
@@ -12,7 +12,7 @@ export type PathId = string;
  */
 export type PathConfig = {
   id: PathId,
-  path: (basePath: ResourcePath) => string
+  path: (basePath: ResourceRoot) => string
 }
 
 /**
@@ -52,7 +52,7 @@ export const PathConfigs: PathConfig[] = [
  * @param resourcePath リソースルート
  * @return パス
  */
-export function toPath(config: PathConfig, resourcePath: ResourcePath): Path {
+export function toPath(config: PathConfig, resourcePath: ResourceRoot): Path {
   return {
     id: config.id,
     path: config.path(resourcePath)
@@ -65,6 +65,6 @@ export function toPath(config: PathConfig, resourcePath: ResourcePath): Path {
  * @param resourcePath リソースルート
  * @return 全てのパス
  */
-export function getAllPaths(resourcePath: ResourcePath): Path[] {
+export function getAllPaths(resourcePath: ResourceRoot): Path[] {
   return PathConfigs.map(config => toPath(config, resourcePath));
 }

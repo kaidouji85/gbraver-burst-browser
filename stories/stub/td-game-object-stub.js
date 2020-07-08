@@ -20,7 +20,7 @@ import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {ResourceLoader} from "../../src/js/resource";
 import {TDCamera} from "../../src/js/game-object/camera/td";
 import type {Object3dCreator} from "./object3d-creator";
-import {StorybookResourcePath} from "../../src/js/resource/path/storybook-resource-path";
+import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 
 /**
  * 3Dレイヤー ゲームオブジェクト スタブ
@@ -84,7 +84,7 @@ export class TDGameObjectStub {
    */
   async start(): Promise<void> {
     try {
-      const resourcePath = new StorybookResourcePath();
+      const resourcePath = new StorybookResourceRoot();
       const loader = new ResourceLoader(resourcePath);
       const resources = await loader.load();
       const object3Ds = this._creator(resources, this._gameObjectAction);

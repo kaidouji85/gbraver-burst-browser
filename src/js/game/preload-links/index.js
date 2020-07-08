@@ -1,6 +1,6 @@
 // @flow
 
-import type {ResourcePath} from "../../resource/path/resource-path";
+import type {ResourceRoot} from "../../resource/root/resource-root";
 import {imageURLs} from "./image-ruls";
 
 /**
@@ -9,7 +9,7 @@ import {imageURLs} from "./image-ruls";
 export class PreLoadLinks {
   _links: HTMLElement[];
 
-  constructor(resourcePath: ResourcePath) {
+  constructor(resourcePath: ResourceRoot) {
     this._links = imageURLs(resourcePath).map(url => {
       const link = document.createElement('link');
       link.setAttribute('rel', 'preload');

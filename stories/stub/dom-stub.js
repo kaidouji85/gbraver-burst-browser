@@ -1,6 +1,6 @@
 // @flow
 
-import {StorybookResourcePath} from "../../src/js/resource/path/storybook-resource-path";
+import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 import '../../src/css/style.css';
 import {createResizeStream} from "../../src/js/action/resize/resize";
 import {CssVH} from "../../src/js/view-port/vh";
@@ -26,7 +26,7 @@ export const domStub = (creator: DOMCreator) => (): HTMLElement => {
   const resize = createResizeStream();
   const vh = new CssVH(resize);
 
-  const resourcePath = new StorybookResourcePath();
+  const resourcePath = new StorybookResourceRoot();
   const loader = new ResourceLoader(resourcePath);
   loader.load().then(resources => {
     const component = creator(resources);

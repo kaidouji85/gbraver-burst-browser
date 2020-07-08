@@ -1,6 +1,6 @@
 // @flow
 
-import type {ResourcePath} from "../../../../resource/path/resource-path";
+import type {ResourceRoot} from "../../../../resource/root/resource-root";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 
@@ -26,7 +26,7 @@ export class NPCEndingView {
    *
    * @param resourcePath リソースパス
    */
-  constructor(resourcePath: ResourcePath) {
+  constructor(resourcePath: ResourceRoot) {
     this._screenPush = new Subject();
 
     const endId = domUuid();

@@ -2,14 +2,14 @@
 
 import type {DOMScene} from "../dom-scene";
 import {MatchCardView} from "./view/match-card-view";
-import type {ResourcePath} from "../../../resource/path/resource-path";
+import type {ResourceRoot} from "../../../resource/root/resource-root";
 import type {ArmDozerId} from "gbraver-burst-core";
 
 /**
  * コンストラクタのパラメータ
  */
 type Param = {
-  resourcePath: ResourcePath,
+  resourcePath: ResourceRoot,
   player: ArmDozerId,
   enemy: ArmDozerId,
   caption: string,

@@ -1,6 +1,6 @@
 // @flow
 
-import type {ResourcePath} from "../../../../resource/path/resource-path";
+import type {ResourceRoot} from "../../../../resource/root/resource-root";
 
 /**
  * ランドスケープ警告シーンのビュー
@@ -13,7 +13,7 @@ export class PlayInLandscapeView {
    *
    * @param resourcePath リソースパス
    */
-  constructor(resourcePath: ResourcePath) {
+  constructor(resourcePath: ResourceRoot) {
     this._root = document.createElement('div');
     this._root.className = 'play-in-landscape';
     this._root.innerHTML = `

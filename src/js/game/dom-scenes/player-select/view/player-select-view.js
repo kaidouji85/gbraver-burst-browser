@@ -1,6 +1,6 @@
 // @flow
 
-import type {ResourcePath} from "../../../../resource/path/resource-path";
+import type {ResourceRoot} from "../../../../resource/root/resource-root";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {ArmdozerIconView} from "./armdozer-icon-view";
 import {merge, Observable} from "rxjs";
@@ -32,7 +32,7 @@ export class PlayerSelectView {
    * @param resourcePath リソースパス
    * @param armDozerIds アームドーザIDリスト
    */
-  constructor(resourcePath: ResourcePath, armDozerIds: ArmDozerId[]) {
+  constructor(resourcePath: ResourceRoot, armDozerIds: ArmDozerId[]) {
     const armdozersId = domUuid();
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
