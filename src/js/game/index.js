@@ -73,7 +73,7 @@ export class Game {
 
     this._fader = new DOMFader();
 
-    this._interruptScenes = new InterruptScenes(this._resourceRoot);
+    this._interruptScenes = new InterruptScenes();
     this._domScenes = new DOMScenes();
     this._domDialogs = new DOMDialogs();
     this._tdScenes = new TDScenes(this._resize);
@@ -81,7 +81,7 @@ export class Game {
     const body = document.body || document.createElement('div');
     const elements = [
       this._fader.getRootHTMLElement(),
-      ...this._interruptScenes.getRootHTMLElements(),
+      this._interruptScenes.getRootHTMLElement(),
       this._domDialogs.getRootHTMLElement(),
       this._domScenes.getRootHTMLElement(),
       this._tdScenes.getRendererDOM(),
@@ -136,6 +136,7 @@ export class Game {
       await this._fader.fadeIn();
       const resources: Resources = await loader.load();
       this._resources = resources;
+      this._interruptScenes.bind(resources);
       await waitAnimationFrame();
       await waitTime(1000);
 
