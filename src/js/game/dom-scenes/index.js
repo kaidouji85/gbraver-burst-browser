@@ -156,7 +156,7 @@ export class DOMScenes {
       this._removeCurrentScene();
 
       const scene = new MatchCard({
-        resourcePath: resources.rootPath,
+        resources: resources,
         player: player,
         enemy: enemy,
         caption: caption
