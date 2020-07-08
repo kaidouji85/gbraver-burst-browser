@@ -2,8 +2,6 @@
 
 import {HowToPlayView} from "./view/how-to-play-view";
 import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
-import type {HowToPlayState} from "./state/how-to-play-state";
-import {createInitialState} from "./state/initial-state";
 import {Observable} from "rxjs";
 import type {EndHowToPlay} from "../../../action/game/how-to-play";
 import {map} from "rxjs/operators";
@@ -19,7 +17,6 @@ type Notifier = {
  * 遊び方ダイアログ
  */
 export class HowToPlay implements DOMDialog {
-  _state: HowToPlayState;
   _view: HowToPlayView;
   _notifier: Notifier;
 
@@ -29,10 +26,7 @@ export class HowToPlay implements DOMDialog {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._state = createInitialState();
-
     this._view = new HowToPlayView(resources, howToPlayMovieURL());
-    this._view.engage(this._state);
 
     this._notifier = {
       endHowToPlay: this._view.notifier().close.pipe(

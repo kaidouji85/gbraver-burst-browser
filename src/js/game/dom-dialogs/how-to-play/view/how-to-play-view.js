@@ -1,6 +1,5 @@
 // @flow
 
-import type {HowToPlayState} from "../state/how-to-play-state";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable, Subject} from "rxjs";
 import type {Resources} from "../../../../resource";
@@ -66,15 +65,6 @@ export class HowToPlayView {
       e.preventDefault();
       this._closeStream.next();
     });
-  }
-
-  /**
-   * 状態をビューに反映させる
-   *
-   * @param state 状態
-   */
-  engage(state: HowToPlayState): void {
-    // NOP
   }
 
   /**
