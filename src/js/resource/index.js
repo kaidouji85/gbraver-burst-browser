@@ -19,9 +19,8 @@ import type {Path} from "./path";
  * ゲームで使うリソースを集めたもの
  */
 export type Resources = {
-  // TODO ResourceRootとリネームする
   /** リソースフォルダのルート */
-  path: ResourceRoot,
+  rootPath: ResourceRoot,
   /** パス */
   paths: Path[],
   /** GlTFモデル */
@@ -107,7 +106,7 @@ export class ResourceLoader {
       ]);
 
       return {
-        path: this._resourcePath,
+        rootPath: this._resourcePath,
         gltfs: gltfs,
         textures: textures,
         cubeTextures: cubeTextures,
