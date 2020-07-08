@@ -1,5 +1,6 @@
 // @flow
 
+// TODO 別フォルダに移動させる
 import type {ResourcePath} from "../path/resource-path";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
