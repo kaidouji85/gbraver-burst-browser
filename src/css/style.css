@@ -99,23 +99,15 @@
 /**
  * ローディング画面
  */
-@media (orientation: landscape) {
-    .loading {
-        width: var(--screen-width);
-        height: var(--screen-height);
-        background-color: var(--background-color);
-        color: var(--font-color);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-}
-
-@media (orientation: portrait) {
-    .loading {
-        display: none;
-    }
+.loading {
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .loading__completed-rate {

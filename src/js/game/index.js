@@ -136,12 +136,12 @@ export class Game {
       await this._fader.fadeIn();
       const resources: Resources = await loader.load();
       this._resources = resources;
-      this._interruptScenes.bind(resources);
       await waitAnimationFrame();
       await waitTime(1000);
 
       await this._fader.fadeOut();
       await this._domScenes.startTitle(resources);
+      this._interruptScenes.bind(resources);
       await this._fader.fadeIn();
     } catch (e) {
       throw e;
