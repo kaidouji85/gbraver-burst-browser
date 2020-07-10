@@ -25,7 +25,7 @@ export function show(model: WingDozerCutInModel): Animate {
         model.animation.type = 'BURST_DOWN';
         model.animation.frame = 0;
       }))
-      .chain(tween(model.animation, t => t.to({frame: 1}, 200))),
+      .chain(tween(model.animation, t => t.to({frame: 1}, 300))),
 
     process(() => {
       model.opacity = 0;
