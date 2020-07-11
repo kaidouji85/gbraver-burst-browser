@@ -20,7 +20,7 @@ export function dash(model: WingDozerModel, sounds: WingDozerSounds): Animate {
     model.animation.frame = 0;
     sounds.motor.play();
   })
-    .chain(tween(model.animation, t => t.to({frame: 1}, 200)))
+    .chain(tween(model.animation, t => t.to({frame: 1}, 300)))
     .chain(delay(500))
     .chain(process(() => {
       model.animation.type = 'DASH_DOWN';
