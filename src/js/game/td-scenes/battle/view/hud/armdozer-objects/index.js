@@ -2,7 +2,6 @@
 
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
-import {ArmdozerAppearances} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
@@ -11,6 +10,7 @@ import {EmptyHUDArmdozer} from "./empty";
 import {enemyNeoLandozerHUD, playerNeoLandozerHUD} from "./neo-landozer";
 import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer";
 import {enemyWingDozerHUD, playerWingDozerHUD} from "./wing-dozer";
+import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
  * HUDレイヤー アームドーザ固有のオブジェクトを集めたもの
@@ -38,14 +38,14 @@ export interface HUDArmdozerObjects {
  * @return HUDアームドーザ
  */
 export function playerArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
-  switch (state.armdozer.appearance) {
-    case ArmdozerAppearances.SHIN_BRAVER:
+  switch (state.armdozer.id) {
+    case ArmDozerIdList.SHIN_BRAVER:
       return playerShinBraverHUD(resources, listener, state);
-    case ArmdozerAppearances.NEO_LANDOZER:
+    case ArmDozerIdList.NEO_LANDOZER:
       return playerNeoLandozerHUD(resources, listener, state);
-    case ArmdozerAppearances.LIGHTNING_DOZER:
+    case ArmDozerIdList.LIGHTNING_DOZER:
       return playerLightningDozerHUD(resources, listener, state);
-    case ArmdozerAppearances.WING_DOZER:
+    case ArmDozerIdList.WING_DOZER:
       return playerWingDozerHUD(resources, listener, state);
     default:
       return new EmptyHUDArmdozer(state);
@@ -61,14 +61,14 @@ export function playerArmdozerHUD(resources: Resources, listener: Observable<Gam
  * @return HUDアームドーザ
  */
 export function enemyArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
-  switch (state.armdozer.appearance) {
-    case ArmdozerAppearances.SHIN_BRAVER:
+  switch (state.armdozer.id) {
+    case ArmDozerIdList.SHIN_BRAVER:
       return enemyShinBraverHUD(resources, listener, state);
-    case ArmdozerAppearances.NEO_LANDOZER:
+    case ArmDozerIdList.NEO_LANDOZER:
       return enemyNeoLandozerHUD(resources, listener, state);
-    case ArmdozerAppearances.LIGHTNING_DOZER:
+    case ArmDozerIdList.LIGHTNING_DOZER:
       return enemyLightningDozerHUD(resources, listener, state);
-    case ArmdozerAppearances.WING_DOZER:
+    case ArmDozerIdList.WING_DOZER:
       return enemyWingDozerHUD(resources, listener, state);
     default:
       return new EmptyHUDArmdozer(state);

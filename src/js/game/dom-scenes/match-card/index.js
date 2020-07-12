@@ -2,14 +2,14 @@
 
 import type {DOMScene} from "../dom-scene";
 import {MatchCardView} from "./view/match-card-view";
-import type {ResourcePath} from "../../../resource/path/resource-path";
 import type {ArmDozerId} from "gbraver-burst-core";
+import type {Resources} from "../../../resource";
 
 /**
  * コンストラクタのパラメータ
  */
 type Param = {
-  resourcePath: ResourcePath,
+  resources: Resources,
   player: ArmDozerId,
   enemy: ArmDozerId,
   caption: string,
@@ -27,7 +27,7 @@ export class MatchCard implements DOMScene {
    * @param param パラメータ
    */
   constructor(param: Param): void {
-    this._view = new MatchCardView(param.resourcePath, param.player, param.enemy, param.caption);
+    this._view = new MatchCardView(param.resources, param.player, param.enemy, param.caption);
   }
   
   /**

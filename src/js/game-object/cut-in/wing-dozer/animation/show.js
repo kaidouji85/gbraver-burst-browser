@@ -19,13 +19,13 @@ export function show(model: WingDozerCutInModel): Animate {
       model.animation.type = 'BURST_UP';
       model.animation.frame = 0;
     })
-      .chain(tween(model.animation, t => t.to({frame: 1}, 200)))
-      .chain(delay(300))
+      .chain(tween(model.animation, t => t.to({frame: 1}, 300)))
+      .chain(delay(500))
       .chain(process(() => {
         model.animation.type = 'BURST_DOWN';
         model.animation.frame = 0;
       }))
-      .chain(tween(model.animation, t => t.to({frame: 1}, 200))),
+      .chain(tween(model.animation, t => t.to({frame: 1}, 300))),
 
     process(() => {
       model.opacity = 0;

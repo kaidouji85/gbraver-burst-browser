@@ -1,9 +1,9 @@
 // @flow
 
-import type {ResourcePath} from "../../../../resource/path/resource-path";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {getArmdozerIconURL} from "../../../../resource/urls/armdozer-icon-urls";
 import {domUuid} from "../../../../uuid/dom-uuid";
+import type {Resources} from "../../../../resource";
+import {getArmdozerIconPathId} from "../../../../armdozer-icon/armdozer-icon-path";
 
 /**
  * 対戦カードシーン ビュー
@@ -16,12 +16,12 @@ export class MatchCardView {
   /**
    * コンストラクタ
    *
-   * @param resourcePath リソースパス
+   * @param resources リソース管理オブジェクト
    * @param player プレイヤー側 アームドーザID
    * @param enemy 敵側 アームドーザID
    * @param caption ステージ名
    */
-  constructor(resourcePath: ResourcePath, player: ArmDozerId, enemy: ArmDozerId, caption: string) {
+  constructor(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string) {
     const playerId = domUuid();
     const enemyId = domUuid();
     this._root = document.createElement('div');
@@ -48,7 +48,11 @@ export class MatchCardView {
         resolve();
       });
     });
-    playerImage.src = getArmdozerIconURL(resourcePath, player);
+    const playerIconPath = getArmdozerIconPathId(player);
+    const playerIconResource = resources.paths.find(v => v.id === playerIconPath);
+    playerImage.src = playerIconResource
+      ? playerIconResource.path
+      : '';
 
     const enemyElement = this._root.querySelector(`[data-id="${enemyId}"]`);
     const enemyImage = (enemyElement instanceof HTMLImageElement)
@@ -59,7 +63,11 @@ export class MatchCardView {
         resolve();
       });
     });
-    enemyImage.src = getArmdozerIconURL(resourcePath, enemy);
+    const enemyIconPath = getArmdozerIconPathId(enemy);
+    const enemyIconResource = resources.paths.find(v => v.id === enemyIconPath);
+    enemyImage.src = enemyIconResource
+      ? enemyIconResource.path
+      : '';
   }
 
   /**

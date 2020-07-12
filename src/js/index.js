@@ -2,15 +2,15 @@
 
 import '../css/style.css';
 import {Game} from './game/index';
-import {ProductionResourcePath} from "./resource/path/production-resource-path";
+import {ProductionResourceRoot} from "./resource/root/production-resource-root";
 
 /**
  * Gブレイバーバーストのエントリポイント
  */
 async function main(): Promise<void> {
   try {
-    const resourcePath = new ProductionResourcePath();
-    const game = new Game(resourcePath);
+    const resourceRoot = new ProductionResourceRoot();
+    const game = new Game(resourceRoot);
     await game.initialize();
   } catch(e) {
     throw e;
