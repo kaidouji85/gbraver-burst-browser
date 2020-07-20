@@ -6,9 +6,9 @@ import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import type {AnimationType, ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
-import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 import type {ShinBraverCutInView} from "./shin-braver-cutin-view";
+import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 800;
@@ -83,7 +83,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
       v.setOpacity(0);
     });
 
-    const scale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
+    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     this._group.position.x = model.tracking.x;
     this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
     this._group.position.z = HUD_CUT_IN_ZNIDEX;

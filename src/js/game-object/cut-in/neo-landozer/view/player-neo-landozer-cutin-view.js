@@ -8,7 +8,7 @@ import * as THREE from "three";
 import type {AnimationType, NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
-import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
+import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
 
 export const MAX_ANIMATION = 4;
 export const WIDTH = 800;
@@ -79,7 +79,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
         v.setOpacity(0);
       });
 
-    const scale = model.scale * devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
+    const scale = model.scale * HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
     this._group.scale.set(scale, scale, scale);
     this._group.position.x = model.tracking.x;
     this._group.position.y = model.tracking.y;

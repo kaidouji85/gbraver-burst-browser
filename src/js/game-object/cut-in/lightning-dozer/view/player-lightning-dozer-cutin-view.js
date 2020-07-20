@@ -8,7 +8,7 @@ import type {LightningDozerCutInView} from "./lightning-dozer-cutin-view";
 import type {AnimationType, LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
-import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
+import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 900;
@@ -87,7 +87,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
       v.setOpacity(0);
     });
 
-    const scale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
+    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     this._group.position.x = model.tracking.x;
     this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
     this._group.position.z = HUD_CUT_IN_ZNIDEX;

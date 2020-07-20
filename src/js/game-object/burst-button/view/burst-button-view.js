@@ -10,7 +10,7 @@ import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import {devicePerScaleForHUD} from "../../../device-per-scale/hud";
+import {HUDUIScale} from "../../../hud-scale/hud-scale";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -95,7 +95,7 @@ export class BurstButtonView {
     const disabledOpacity = model.canBurst ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
 
-    const devicePerScale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
+    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
 
     this._group.scale.set(
       GROUP_SCALE * devicePerScale * model.scale,
