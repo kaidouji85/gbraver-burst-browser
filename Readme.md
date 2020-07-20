@@ -13,7 +13,7 @@ cp .env.tepmpate .env
 
 npm install
 npm ci
-
+npm start
 # ブラウザを起動して<localhost:8080>を開く
 ```
 
@@ -78,7 +78,9 @@ aws configure
 ## storybookを動かす
 
 ```shell script
+cd <本リポジトリをcloneした場所>
 npm run start:storybook
+# ブラウザからlocalhost:6006を開く
 ```
 
 ## メカデザイン協力
