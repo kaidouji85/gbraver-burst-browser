@@ -6,9 +6,9 @@ import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
 import type {AnimationType, WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
-import {devicePerScaleForHUD} from "../../../../device-per-scale/hud";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
+import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 1000;
@@ -95,7 +95,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
       v.setOpacity(0);
     });
 
-    const scale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
+    const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     this._group.scale.set(scale, scale, scale);
     this._group.position.x = model.tracking.x;
     this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;

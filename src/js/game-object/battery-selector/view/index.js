@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import {devicePerScaleForHUD} from "../../../device-per-scale/hud";
+import {HUDUIScale} from "../../../hud-scale/hud-scale";
 
 /** 全体のスケール */
 const GROUP_SCALE = 0.3;
@@ -103,7 +103,7 @@ export class BatterySelectorView {
     this._plus.update(model);
     this._minus.update(model);
 
-    const devicePerScale = devicePerScaleForHUD(preRender.rendererDOM, preRender.safeAreaInset);
+    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     this._group.scale.set(
       GROUP_SCALE * devicePerScale * model.scale,
       GROUP_SCALE * devicePerScale * model.scale,

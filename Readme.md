@@ -1,46 +1,53 @@
 # Gブレイバーバースト
  
 ロボットで対戦するゲームです。
+[ここ](https://gbraver-burst.com)でサービスを公開しています。
 
 ## ローカル環境で動かす
-
-```
+### 初回
+```shell script
+cd <本リポジトリをcloneした場所>
 cp .env.tepmpate .env
-# 各自の環境に応じた値を.envに記載する
+# 環境に応じた値を.envに記載する
+# .env.templateに各環境変数の詳細が記載されている
 
 npm install
+npm ci
+npm start
+# ブラウザを起動して<localhost:8080>を開く
+```
+
+### 2回目以降
+```shell script
+cd <本リポジトリをcloneした場所>
 npm start
 
 # ブラウザを起動して<localhost:8080>を開く
 ```
 
 ## Dockerで動かす
+### 初回
 
-```
-docker run --name <任意のDockerコンテナ名> -p <Dockerホストの任意ポート>:3000 kaidouji85/gbraver-burst
-```
+```shell script
+touch .env
+# 環境に応じた値を.envに記載する
+# .envの記載内容は本リポジトリの.env.templateを参照
 
-### コマンド例
-
-docker for windows、docker for macが使える場合
-```
-docker run --name my-gbraver-burst -p 3000:3000 kaidouji85/gbraver-burst
-
-# ブラウザを起動して、http://localhost:3000を開く
+docker run --env-file <.envのパス> -p <任意ポート>:3000 kaidouji85/gbraver-burst
+# ブラウザでhttp://localhost:<CLIで指定したポート>/を開く
 ```
 
-docker-machineを使う場合
-```
-docker run --name my-gbraver-burst -p 3000:3000 kaidouji85/gbraver-burst
-docker-machine ssh default -L 3000:localhost:3000
+### 2回目以降
 
-# ブラウザを起動して、http://localhost:3000を開く
+```shell script
+docker run --env-file <.envのパス> -p <Dockerホストの任意ポート>:3000 kaidouji85/gbraver-burst
+# ブラウザでhttp://localhost:<CLIで指定したポート>/を開く
 ```
 
 ## Dockerイメージをビルドする
 
-```
-docker build ./ --build-arg HOW_TO_PLAY_URL=<遊び方動画URL> -t <イメージ名>
+```shell script
+docker build ./
 ```
 
 ## デプロイする
@@ -50,7 +57,7 @@ docker build ./ --build-arg HOW_TO_PLAY_URL=<遊び方動画URL> -t <イメー�
 
 ### 事前準備
 
-```
+```shell script
 # aws cliをインストールする
 aws configure
 # S3へのフル権限を持つアカウントでログインする
@@ -58,20 +65,22 @@ aws configure
 
 ### 開発環境にデプロイ
 
-```
+```shell script
 ./scripts/deploy.sh <アップロードするS3バケット名>
 ```
 
 ### 本番環境にデプロイ
 
-```
+```shell script
 ./scripts/deploy-production.sh <アップロードするS3バケット名> <CloudFrontのdistributionId>
 ```
 
 ## storybookを動かす
 
-```
+```shell script
+cd <本リポジトリをcloneした場所>
 npm run start:storybook
+# ブラウザからlocalhost:6006を開く
 ```
 
 ## メカデザイン協力
