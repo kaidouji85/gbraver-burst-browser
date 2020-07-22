@@ -84,7 +84,7 @@ module.exports = {
           to: path.resolve(__dirname, BUILD_PATH)
         },
         {
-          from: path.resolve(__dirname, "src/ogp-thumbnail.jpeg"),
+          from: path.resolve(__dirname, "src/ogp-thumbnail.png"),
           to: path.resolve(__dirname, BUILD_PATH)
         },
       ]
