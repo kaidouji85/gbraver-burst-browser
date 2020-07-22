@@ -10,7 +10,6 @@ const hash = new Puid().generate();
 const BUILD_PATH = 'build/production';
 const BUILD_RESOURCE_PATH = `resources/${hash}`;
 const BUILD_INDEX_JS_PATH = `index.js`;
-const BUILD_FAVICON_PATH = 'favicon';
 
 module.exports = {
   mode: 'development',
@@ -54,6 +53,7 @@ module.exports = {
       templateParameters: {
         BUILD_RESOURCE_PATH: BUILD_RESOURCE_PATH,
         BUILD_INDEX_JS_PATH: BUILD_INDEX_JS_PATH,
+        OWN_ROOT_URL: process.env.OWN_ROOT_URL,
       },
       inject: false
     }),
@@ -81,6 +81,10 @@ module.exports = {
         },
         {
           from: path.resolve(__dirname, "src/app-icon.png"),
+          to: path.resolve(__dirname, BUILD_PATH)
+        },
+        {
+          from: path.resolve(__dirname, "src/ogp-thumbnail.jpeg"),
           to: path.resolve(__dirname, BUILD_PATH)
         },
       ]
