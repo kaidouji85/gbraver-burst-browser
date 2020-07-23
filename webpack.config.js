@@ -54,6 +54,7 @@ module.exports = {
         BUILD_RESOURCE_PATH: BUILD_RESOURCE_PATH,
         BUILD_INDEX_JS_PATH: BUILD_INDEX_JS_PATH,
         OWN_ROOT_URL: process.env.OWN_ROOT_URL,
+        TWITTER_SITE: process.env.TWITTER_SITE,
       },
       inject: false
     }),
