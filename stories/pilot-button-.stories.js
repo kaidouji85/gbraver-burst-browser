@@ -9,7 +9,7 @@ export default {
 
 export const batterySelector = () => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const button = new PilotButton(resources);
+    const button = new PilotButton(resources, listener);
     return [button.getObject3D()];
   });
   stub.start();

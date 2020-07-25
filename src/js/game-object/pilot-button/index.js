@@ -1,44 +1,43 @@
 // @flow
 
 import * as THREE from 'three';
-import {SimpleImageMesh} from "../../mesh/simple-image-mesh";
 import type {Resources} from "../../resource";
-import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
-
-
-/** キャンバスサイズ */
-const CANVAS_SIZE = 512;
-
-/** 全体のスケール */
-const GROUP_SCALE = 0.3;
-
-/** 左パディング */
-const PADDING_LEFT = 80;
-
-/** 下パディング */
-const PADDING_BOTTOM = 80;
+import {PilotButtonView} from "./view/pilot-button-view";
+import type {PilotButtonModel} from "./model/pilot-button-model";
+import {createInitialValue} from './model/initial-value';
+import {Observable, Subscription} from "rxjs";
+import type {GameObjectAction} from "../../action/game-object-action";
+import type {PreRender} from "../../action/game-loop/pre-render";
 
 /**
  * パイロットボタン
  */
 export class PilotButton {
-  _button: SimpleImageMesh;
+  _model: PilotButtonModel;
+  _view: PilotButtonView;
+  _subscription: Subscription;
 
   /**
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param listener イベントリスナ
    */
-  constructor(resources: Resources) {
-    const pilotButtonResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON);
-    const pilotButton: Image = pilotButtonResource
-      ? pilotButtonResource.image
-      : new Image();
-    this._button = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: CANVAS_SIZE,
-      image: pilotButton,
+  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
+    this._model = createInitialValue();
+    this._view = new PilotButtonView(resources);
+    this._subscription = listener.subscribe(action => {
+      if (action.type === 'PreRender') {
+        this._onPreRender(action);
+      }
     });
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._view.destructor();
   }
 
   /**
@@ -47,6 +46,15 @@ export class PilotButton {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._button.getObject3D();
+    return this._view.getObject3D();
+  }
+
+  /**
+   * プリレンダー時の処理
+   *
+   * @param action アクション
+   */
+  _onPreRender(action: PreRender): void {
+    this._view.engage(this._model, action);
   }
 }
