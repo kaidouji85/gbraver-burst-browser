@@ -13,16 +13,16 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 
 /** キャンバスサイズ */
-const CANVAS_SIZE = 512;
+const CANVAS_SIZE = 1024;
 
 /** 全体のスケール */
-const GROUP_SCALE = 0.3;
+const GROUP_SCALE = 0.3 * 1.2;
 
 /** 左パディング */
-const PADDING_LEFT = 80;
+const PADDING_LEFT = 90;
 
 /** 下パディング */
-const PADDING_BOTTOM = 80;
+const PADDING_BOTTOM = 90;
 
 type Param = {
   resources: Resources,
