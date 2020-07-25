@@ -13,10 +13,10 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 
 /** キャンバスサイズ */
-const CANVAS_SIZE = 1024;
+const CANVAS_SIZE = 512;
 
 /** 全体のスケール */
-const GROUP_SCALE = 0.3 * 1.2;
+const GROUP_SCALE = 0.3;
 
 /** 左パディング */
 const PADDING_LEFT = 90;
@@ -61,7 +61,7 @@ export class BurstButtonView {
     });
 
     this._overlap = circleButtonOverlap({
-      radius: 200,
+      radius: 240,
       segments: 32,
       listener: param.listener,
       onButtonPush: ()=> {
