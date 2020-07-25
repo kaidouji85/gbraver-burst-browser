@@ -11,6 +11,7 @@ import * as THREE from "three";
 import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
+import {PilotButton} from "../../../../../game-object/pilot-button";
 
 /** イベント通知 */
 type Notifier = {
@@ -23,6 +24,7 @@ type Notifier = {
 export class HUDGameObjects {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
+  pilotButton: PilotButton;
   frontmostFader: Fader;
   rearmostFader: Fader;
   _battleSceneAction: Subject<BattleSceneAction>;
@@ -56,6 +58,7 @@ export class HUDGameObjects {
         });
       }
     });
+    this.pilotButton = new PilotButton(resources, listener);
     this.frontmostFader = frontmostFader({
       listener: listener,
       isVisible: false,
@@ -72,6 +75,7 @@ export class HUDGameObjects {
   destructor(): void {
     this.batterySelector.destructor();
     this.burstButton.destructor();
+    this.pilotButton.destructor();
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
   }
@@ -85,6 +89,7 @@ export class HUDGameObjects {
     return [
       this.batterySelector.getObject3D(),
       this.burstButton.getObject3D(),
+      this.pilotButton.getObject3D(),
       this.rearmostFader.getObject3D(),
       this.frontmostFader.getObject3D(),
     ];

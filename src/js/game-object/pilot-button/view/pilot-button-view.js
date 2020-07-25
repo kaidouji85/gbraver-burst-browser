@@ -15,7 +15,7 @@ const CANVAS_SIZE = 512;
 const GROUP_SCALE = 0.3;
 
 /** 左パディング */
-const PADDING_LEFT = 80;
+const PADDING_LEFT = 220;
 
 /** 下パディング */
 const PADDING_BOTTOM = 80;
