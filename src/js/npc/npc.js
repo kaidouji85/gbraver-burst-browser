@@ -1,11 +1,14 @@
-import type {Armdozer, Command, GameState, PlayerId} from "gbraver-burst-core";
+// @flow
+
+import type {Armdozer, Command, GameState, PlayerId, Pilot} from "gbraver-burst-core";
 
 /** NPC */
 export interface NPC {
-  /**
-   * ステータス
-   */
-  armdozer: Armdozer,
+  /** アームドーザ */
+  armdozer: Armdozer;
+
+  /** パイロット */
+  pilot: Pilot;
 
   /**
    * NPCのルーチン
