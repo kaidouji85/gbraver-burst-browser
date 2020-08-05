@@ -2,9 +2,8 @@
 // @flow
 
 import type {NPC} from "./npc";
-import type {Armdozer, Command, GameState, PlayerId, PlayerState, Pilot} from "gbraver-burst-core";
-import {ArmDozerIdList, ArmDozers, Pilots} from "gbraver-burst-core";
-import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
+import type {Armdozer, Command, GameState, Pilot, PlayerId, PlayerState} from "gbraver-burst-core";
+import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {
