@@ -2,8 +2,8 @@
 // @flow
 
 import type {NPC} from "./npc";
-import type {Armdozer, Command, GameState, PlayerId, PlayerState} from "gbraver-burst-core";
-import {ArmDozerIdList, ArmDozers} from "gbraver-burst-core";
+import type {Armdozer, Command, GameState, Pilot, PlayerId, PlayerState} from "gbraver-burst-core";
+import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {
@@ -15,13 +15,15 @@ const ZERO_BATTERY = {
  * 戦闘デモ用 ネオランドーザ NPC
  */
 export class BattleDemoNeoNandozerNPC implements NPC {
-  /**
-   * アームドーザ
-   */
+  /** アームドーザ */
   armdozer: Armdozer;
+
+  /** パイロット */
+  pilot: Pilot;
 
   constructor() {
     this.armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) || ArmDozers[0];
+    this.pilot = Pilots.find(v => v.id === PilotIds.SHINYA) || Pilots[0];
   }
 
   /**

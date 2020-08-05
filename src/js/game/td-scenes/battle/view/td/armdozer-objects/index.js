@@ -1,13 +1,13 @@
 // @flow
 
 import type {Player} from "gbraver-burst-core";
+import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {EmptyTDArmdozer} from "./empty";
 import {enemyLightningDozerTD, playerLightningDozerTD} from "./lightning-dozer";
 import type {TDArmdozerObjects} from "./armdozer-objects";
-import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
