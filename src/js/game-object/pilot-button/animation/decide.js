@@ -2,10 +2,10 @@
 
 import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
-import type {PilotButtonModel} from "./pilot-button-model";
+import type {PilotButtonModel} from "../model/pilot-button-model";
 
 /**
- * 決定アニメーション
+ * ボタンクリック
  *
  * @param model モデル
  * @return アニメーション

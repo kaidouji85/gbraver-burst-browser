@@ -10,7 +10,8 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {open} from "./animation/open";
-import {decide} from "./model/decide";
+import {decide} from "./animation/decide";
+import {close} from "./animation/close";
 
 /**
  * ,イベント通知ストリーム
@@ -70,12 +71,21 @@ export class PilotButton {
   }
 
   /**
-   * 決定アニメーション
+   * ボタンクリック
    *
    * @return アニメーション
    */
   decide(): Animate {
     return decide(this._model);
+  }
+
+  /**
+   * パイロットボタンを非表示にする
+   *
+   * @return アニメーション
+   */
+  close(): Animate {
+    return close(this._model);
   }
 
   /**

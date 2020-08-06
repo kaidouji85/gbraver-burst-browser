@@ -15,6 +15,8 @@ export const pilotButton = () => {
       console.log('push button!!');
       const animation = button.decide()
         .chain(delay(1000))
+        .chain(button.close())
+        .chain(delay(1000))
         .chain(button.open(false));
       animation.play();
     });
