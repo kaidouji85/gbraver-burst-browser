@@ -5,9 +5,16 @@ import type {Resources} from "../../resource";
 import {PilotButtonView} from "./view/pilot-button-view";
 import type {PilotButtonModel} from "./model/pilot-button-model";
 import {createInitialValue} from './model/initial-value';
-import {Observable, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {PreRender} from "../../action/game-loop/pre-render";
+
+/**
+ * ,イベント通知ストリーム
+ */
+type Notifier = {
+  pushButton: Observable<void>
+};
 
 /**
  * パイロットボタン
@@ -47,6 +54,18 @@ export class PilotButton {
    */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    const viewNotifier = this._view.notifier();
+    return {
+      pushButton: viewNotifier.pushButton
+    };
   }
 
   /**

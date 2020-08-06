@@ -9,7 +9,7 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 
 /** キャンバスサイズ */
@@ -25,9 +25,17 @@ const PADDING_LEFT = 250;
 const PADDING_BOTTOM = 80;
 
 /**
+ * イベント通知ストリーム
+ */
+type Notifier = {
+  pushButton: Observable<void>
+};
+
+/**
  * パイロットボタン ビュー
  */
 export class PilotButtonView {
+  _pushButton: Subject<void>;
   _group: THREE.Group;
   _button: SimpleImageMesh;
   _buttonDisabled: SimpleImageMesh;
@@ -40,6 +48,8 @@ export class PilotButtonView {
    * @param listener イベントリスナ
    */
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
+    this._pushButton = new Subject();
+
     this._group = new THREE.Group();
 
     const buttonDisabledResource = resources.canvasImages
@@ -71,7 +81,7 @@ export class PilotButtonView {
       segments: 32,
       listener: listener,
       onButtonPush: ()=> {
-        console.log('clicked!!');
+        this._pushButton.next();
       }
     });
     this._overlap.getObject3D().position.z = 2;
@@ -121,5 +131,16 @@ export class PilotButtonView {
    */
   getObject3D(): THREE.Object3D {
     return this._group;
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      pushButton: this._pushButton
+    };
   }
 }
