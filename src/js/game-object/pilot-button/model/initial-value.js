@@ -9,7 +9,7 @@ import type {PilotButtonModel} from "./pilot-button-model";
  */
 export function createInitialValue(): PilotButtonModel {
   return {
-    opacity: 0.5,
+    opacity: 1,
     disabled: false,
     scale: 1,
     canPilot: true,

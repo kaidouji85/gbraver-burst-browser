@@ -26,6 +26,7 @@ const PADDING_BOTTOM = 80;
 export class PilotButtonView {
   _group: THREE.Group;
   _button: SimpleImageMesh;
+  _buttonDisabled: SimpleImageMesh;
 
   /**
    * コンストラクタ
@@ -34,6 +35,19 @@ export class PilotButtonView {
    */
   constructor(resources: Resources) {
     this._group = new THREE.Group();
+
+    const buttonDisabledResource = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED);
+    const buttonDisabled = buttonDisabledResource
+      ? buttonDisabledResource.image
+      : new Image();
+    this._buttonDisabled = new SimpleImageMesh({
+      canvasSize: CANVAS_SIZE,
+      meshSize: CANVAS_SIZE,
+      image: buttonDisabled
+    });
+    this._buttonDisabled.getObject3D().position.z = 1;
+    this._group.add(this._buttonDisabled.getObject3D());
 
     const pilotButtonResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON);
     const pilotButton: Image = pilotButtonResource
@@ -62,6 +76,9 @@ export class PilotButtonView {
    */
   engage(model: PilotButtonModel, preRender: PreRender): void {
     this._button.setOpacity(model.opacity);
+
+    const disabledOpacity = model.canPilot ? 0 : model.opacity;
+    this._buttonDisabled.setOpacity(disabledOpacity);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     this._group.scale.set(
