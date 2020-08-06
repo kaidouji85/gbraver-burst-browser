@@ -7,6 +7,10 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {PilotButtonModel} from "../model/pilot-button-model";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
+import {ButtonOverlap} from "../../../overlap/button/button-overlap";
+import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
+import {Observable} from "rxjs";
+import type {GameObjectAction} from "../../../action/game-object-action";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -27,13 +31,15 @@ export class PilotButtonView {
   _group: THREE.Group;
   _button: SimpleImageMesh;
   _buttonDisabled: SimpleImageMesh;
+  _overlap: ButtonOverlap;
 
   /**
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param listener イベントリスナ
    */
-  constructor(resources: Resources) {
+  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     this._group = new THREE.Group();
 
     const buttonDisabledResource = resources.canvasImages
@@ -59,6 +65,17 @@ export class PilotButtonView {
       image: pilotButton,
     });
     this._group.add(this._button.getObject3D());
+
+    this._overlap = circleButtonOverlap({
+      radius: 200,
+      segments: 32,
+      listener: listener,
+      onButtonPush: ()=> {
+        console.log('clicked!!');
+      }
+    });
+    this._overlap.getObject3D().position.z = 2;
+    this._group.add(this._overlap.getObject3D());
   }
 
   /**

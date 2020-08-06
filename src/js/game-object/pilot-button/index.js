@@ -25,7 +25,7 @@ export class PilotButton {
    */
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
-    this._view = new PilotButtonView(resources);
+    this._view = new PilotButtonView(resources, listener);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
