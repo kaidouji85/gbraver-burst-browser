@@ -12,6 +12,7 @@ import {Animate} from "../../animation/animate";
 import {open} from "./animation/open";
 import {decide} from "./animation/decide";
 import {close} from "./animation/close";
+import {filter, tap} from "rxjs/operators";
 
 /**
  * ,イベント通知ストリーム
@@ -26,6 +27,7 @@ type Notifier = {
 export class PilotButton {
   _model: PilotButtonModel;
   _view: PilotButtonView;
+  _notifier: Notifier;
   _subscription: Subscription;
 
   /**
@@ -37,6 +39,14 @@ export class PilotButton {
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = new PilotButtonView(resources, listener);
+
+    const viewNotifier = this._view.notifier();
+    this._notifier = {
+      pushButton: viewNotifier.pushButton.pipe(
+        filter(() => (!this._model.disabled) && this._model.canPilot)
+      )
+    };
+
     this._subscription = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
@@ -94,10 +104,7 @@ export class PilotButton {
    * @return イベント通知ストリーム
    */
   notifier(): Notifier {
-    const viewNotifier = this._view.notifier();
-    return {
-      pushButton: viewNotifier.pushButton
-    };
+    return this._notifier;
   }
 
   /**
