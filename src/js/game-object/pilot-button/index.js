@@ -8,6 +8,8 @@ import {createInitialValue} from './model/initial-value';
 import {Observable, Subject, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {PreRender} from "../../action/game-loop/pre-render";
+import {Animate} from "../../animation/animate";
+import {open} from "./animation/open";
 
 /**
  * ,イベント通知ストリーム
@@ -54,6 +56,16 @@ export class PilotButton {
    */
   getObject3D(): THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * パイロットボタン を表示する
+   *
+   * @param canPilot ボタン利用フラグ、trueで利用可能
+   * @return アニメーション
+   */
+  open(canPilot: boolean): Animate {
+    return open(this._model, canPilot);
   }
 
   /**
