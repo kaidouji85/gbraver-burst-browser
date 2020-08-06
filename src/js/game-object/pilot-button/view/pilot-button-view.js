@@ -61,11 +61,13 @@ export class PilotButtonView {
    * @param preRender プリレンダー情報
    */
   engage(model: PilotButtonModel, preRender: PreRender): void {
+    this._button.setOpacity(model.opacity);
+
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     this._group.scale.set(
-      GROUP_SCALE * devicePerScale,
-      GROUP_SCALE * devicePerScale,
-      GROUP_SCALE * devicePerScale
+      GROUP_SCALE * devicePerScale * model.scale,
+      GROUP_SCALE * devicePerScale * model.scale,
+      GROUP_SCALE * devicePerScale * model.scale
     );
     this._group.position.x =
       -preRender.rendererDOM.clientWidth / 2
