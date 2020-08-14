@@ -124,7 +124,8 @@ export class BattleScene implements Scene {
       this._state.canOperation = false;
       await all(
         this._view.hud.gameObjects.batterySelector.decide(),
-        this._view.hud.gameObjects.burstButton.close()
+        this._view.hud.gameObjects.burstButton.close(),
+        this._view.hud.gameObjects.pilotButton.close(),
       ).chain(delay(500)
       ).chain(this._view.hud.gameObjects.batterySelector.close()
       ).play();
@@ -157,10 +158,12 @@ export class BattleScene implements Scene {
       this._state.canOperation = false;
       await all(
         this._view.hud.gameObjects.burstButton.decide(),
-        this._view.hud.gameObjects.batterySelector.close()
-      ).chain(delay(500)
-      ).chain(this._view.hud.gameObjects.burstButton.close()
-      ).play();
+        this._view.hud.gameObjects.batterySelector.close(),
+        this._view.hud.gameObjects.pilotButton.close()
+      )
+        .chain(delay(500))
+        .chain(this._view.hud.gameObjects.burstButton.close())
+        .play();
       const lastState = await this._progressGame({type: 'BURST_COMMAND'});
       if (lastState && lastState.effect.name === 'GameEnd') {
         this._onEndGame(lastState.effect);
