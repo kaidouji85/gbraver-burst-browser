@@ -3,7 +3,7 @@
 import {BatterySelector} from "../../../../../game-object/battery-selector";
 import {BurstButton} from "../../../../../game-object/burst-button/burst-button";
 import type {Resources} from "../../../../../resource";
-import {Observable} from "rxjs/index";
+import {Observable, Subscription} from "rxjs/index";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {BattleSceneAction} from "../../../../../action/battle-scene";
 import type {Player} from "gbraver-burst-core";
@@ -28,6 +28,7 @@ export class HUDGameObjects {
   frontmostFader: Fader;
   rearmostFader: Fader;
   _battleSceneAction: Subject<BattleSceneAction>;
+  _subscriptions: Subscription[];
 
   constructor(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player) {
     this._battleSceneAction = new Subject();
@@ -59,6 +60,7 @@ export class HUDGameObjects {
       }
     });
     this.pilotButton = new PilotButton(resources, listener);
+
     this.frontmostFader = frontmostFader({
       listener: listener,
       isVisible: false,
@@ -67,6 +69,12 @@ export class HUDGameObjects {
       listener: listener,
       isVisible: false,
     });
+
+    this._subscriptions = [
+      this.pilotButton.notifier().pushButton.subscribe(action => {
+        this._battleSceneAction.next({type: 'doPilotSkill'});
+      })
+    ];
   }
 
   /**
@@ -78,6 +86,9 @@ export class HUDGameObjects {
     this.pilotButton.destructor();
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**

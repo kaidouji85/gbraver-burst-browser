@@ -18,6 +18,7 @@ import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
 import {all} from "../../../animation/all";
+import type {PilotSkill} from "gbraver-burst-core/lib/player/pilot";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -72,6 +73,8 @@ export class BattleScene implements Scene {
           this._onDecideBattery(action);
         } else if (action.type === 'doBurst') {
           this._onBurst(action);
+        } else if (action.type === 'doPilotSkill') {
+          this._onPilotSkill(action);
         }
       })
     ];
@@ -171,6 +174,21 @@ export class BattleScene implements Scene {
       }
 
       this._state.canOperation = true;
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  /**
+   * パイロットスキル発動時の処理
+   *
+   * @param action アクション
+   * @return 実行結果
+   * @private
+   */
+  async _onPilotSkill(action: PilotSkill): Promise<void> {
+    try {
+      console.log('pilot skill');
     } catch(e) {
       throw e;
     }
