@@ -188,7 +188,25 @@ export class BattleScene implements Scene {
    */
   async _onPilotSkill(action: PilotSkill): Promise<void> {
     try {
-      console.log('pilot skill');
+      if (!this._state.canOperation) {
+        return;
+      }
+
+      this._state.canOperation = false;
+      await all(
+        this._view.hud.gameObjects.pilotButton.decide(),
+        this._view.hud.gameObjects.burstButton.close(),
+        this._view.hud.gameObjects.batterySelector.close(),
+      ).chain(delay(500))
+        .chain(this._view.hud.gameObjects.pilotButton.close())
+        .play();
+      const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
+      if (lastState && lastState.effect.name === 'GameEnd') {
+        this._onEndGame(lastState.effect);
+        return;
+      }
+
+      this._state.canOperation = true;
     } catch(e) {
       throw e;
     }
@@ -235,7 +253,11 @@ export class BattleScene implements Scene {
     }
   }
 
-  /** ゲーム終了時の処理 */
+  /**
+   * ゲーム終了時の処理
+   *
+   * @param gameEnd ゲーム終了情報
+   */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
     try {
       await delay(1000).play();
