@@ -1,7 +1,6 @@
 // @flow
 
 import * as THREE from 'three';
-import type {Resources} from "../../../resource";
 import type {ShinyaModel} from "./model/shinya-model";
 import {ShinyaView} from "./view/shinya-view";
 import {createInitialValue} from "./model/initial-value";
@@ -16,11 +15,11 @@ export class Shinya {
   /**
    * コンストラクタ
    *
-   * @param resources リソース管理オブジェクト
+   * @param view ビュー
    */
-  constructor(resources: Resources) {
+  constructor(view: ShinyaView) {
     this._model = createInitialValue();
-    this._view = new ShinyaView(resources);
+    this._view = view;
   }
 
   /**

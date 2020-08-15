@@ -1,15 +1,15 @@
 // @flow
 
-import {Shinya} from "../src/js/game-object/pilot/shinya/shinya";
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
+import {playerShinya} from "../src/js/game-object/pilot/shinya";
 
 export default {
   title: 'shinya',
 };
 
-export const shinya = () => {
+export const player = () => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const pilot = new Shinya(resources);
+    const pilot = playerShinya(resources);
     return [pilot.getObject3D()];
   });
   stub.start();
