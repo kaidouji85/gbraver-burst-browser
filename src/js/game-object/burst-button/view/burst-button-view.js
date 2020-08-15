@@ -22,7 +22,7 @@ const GROUP_SCALE = 0.3;
 const PADDING_LEFT = 70;
 
 /** 下パディング */
-const PADDING_BOTTOM = 130;
+const PADDING_BOTTOM = 160;
 
 type Param = {
   resources: Resources,
