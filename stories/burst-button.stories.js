@@ -1,10 +1,6 @@
+// @flow
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
-import {BatterySelector} from "../src/js/game-object/battery-selector";
 import {BurstButton} from "../src/js/game-object/burst-button/burst-button";
-import type {Resources} from "../src/js/resource";
-import {Observable} from "rxjs";
-import type {GameObjectAction} from "../src/js/action/game-object-action";
-import {PilotButton} from "../src/js/game-object/pilot-button";
 
 export default {
   title: 'burst-button',

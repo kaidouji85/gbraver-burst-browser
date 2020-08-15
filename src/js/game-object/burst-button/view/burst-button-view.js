@@ -19,10 +19,10 @@ const CANVAS_SIZE = 512;
 const GROUP_SCALE = 0.3;
 
 /** 左パディング */
-const PADDING_LEFT = 90;
+const PADDING_LEFT = 70;
 
 /** 下パディング */
-const PADDING_BOTTOM = 90;
+const PADDING_BOTTOM = 130;
 
 type Param = {
   resources: Resources,
@@ -68,7 +68,6 @@ export class BurstButtonView {
         param.onPush();
       }
     });
-    this._overlap.setVisible(true);//TODO 開発が終わったら戻す
 
     this._group = new THREE.Group();
     this._group.add(this._burstButton.getObject3D());
