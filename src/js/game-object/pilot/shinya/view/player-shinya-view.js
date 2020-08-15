@@ -45,7 +45,8 @@ export class PlayerShinyaView implements ShinyaView {
    * @param model モデル
    */
   engage(model: ShinyaModel): void {
-    // NOP
+    // TODO モデルにセットされた値を使う
+    this._mesh.getObject3D().scale.set(1, 1, 1);
   }
 
   /**

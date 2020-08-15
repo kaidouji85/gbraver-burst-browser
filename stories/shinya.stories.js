@@ -1,7 +1,7 @@
 // @flow
 
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
-import {playerShinya} from "../src/js/game-object/pilot/shinya";
+import {enemyShinya, playerShinya} from "../src/js/game-object/pilot/shinya";
 
 export default {
   title: 'shinya',
@@ -9,7 +9,16 @@ export default {
 
 export const player = () => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const pilot = playerShinya(resources);
+    const pilot = playerShinya(resources, listener);
+    return [pilot.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+}
+
+export const enemy = () => {
+  const stub = new HUDGameObjectStub((resources, listener) => {
+    const pilot = enemyShinya(resources, listener);
     return [pilot.getObject3D()];
   });
   stub.start();
