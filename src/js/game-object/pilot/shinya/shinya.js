@@ -2,27 +2,32 @@
 
 import * as THREE from 'three';
 import type {Resources} from "../../../resource";
-import {TEXTURE_IDS} from "../../../resource/texture";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-
-export const MESH_SIZE = 800;
-export const MAX_ANIMATION = 1;
+import type {ShinyaModel} from "./model/shinya-model";
+import {ShinyaView} from "./view/shinya-view";
+import {createInitialValue} from "./model/initial-value";
 
 /**
  * シンヤ カットイン
  */
 export class Shinya {
-  _mesh: HorizontalAnimationMesh;
+  _model: ShinyaModel;
+  _view: ShinyaView;
 
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
-    const shinyaResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHINYA_CUTIN);
-    const shinya = shinyaResource?.texture ?? new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({
-      texture: shinya,
-      maxAnimation: MAX_ANIMATION,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
-    });
+    this._model = createInitialValue();
+    this._view = new ShinyaView(resources);
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._view.destructor();
   }
 
   /**
@@ -31,6 +36,6 @@ export class Shinya {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this._view.getObject3D();
   }
 }
