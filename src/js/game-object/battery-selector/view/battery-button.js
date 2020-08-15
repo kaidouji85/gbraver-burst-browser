@@ -94,7 +94,7 @@ export class BatteryButton {
     this._group.add(this._defenseLabel.getObject3D());
 
     const currentBatteryResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_CUREENT_VALUE);
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_CURRENT_VALUE);
     const currentBattery = currentBatteryResource
       ? currentBatteryResource.image
       : new Image();
