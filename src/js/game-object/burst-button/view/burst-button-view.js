@@ -50,7 +50,7 @@ export class BurstButtonView {
     });
 
     const buttonDisabledResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON_DISABLED);
+      .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED);
     const buttonDisabled = buttonDisabledResource
       ? buttonDisabledResource.image
       : new Image();
@@ -61,13 +61,14 @@ export class BurstButtonView {
     });
 
     this._overlap = circleButtonOverlap({
-      radius: 240,
+      radius: 200,
       segments: 32,
       listener: param.listener,
       onButtonPush: ()=> {
         param.onPush();
       }
     });
+    this._overlap.setVisible(true);//TODO 開発が終わったら戻す
 
     this._group = new THREE.Group();
     this._group.add(this._burstButton.getObject3D());
@@ -113,7 +114,11 @@ export class BurstButtonView {
     this._group.quaternion.copy(preRender.camera.quaternion);
   }
 
-  /** 本ビューで使うthree.jsオブジェクトを取得する */
+  /** 
+   * 本ビューで使うthree.jsオブジェクトを取得する
+   *
+   * @return
+   */
   getObject3D(): THREE.Object3D {
     return this._group;
   }

@@ -3,6 +3,7 @@
 import {Animate} from "../../../animation/animate";
 import type {BurstButtonModel} from "../model/burst-button-model";
 import {tween} from "../../../animation/tween";
+import {process} from '../../../animation/process';
 
 /**
  * 決定アニメーション
@@ -11,6 +12,8 @@ import {tween} from "../../../animation/tween";
  * @return アニメーション
  */
 export function decide(model: BurstButtonModel): Animate {
-  return tween(model, t => t.to({scale: 1.2}, 100))
+  return process(() => {
+    model.disabled = true;
+  }).chain(tween(model, t => t.to({scale: 1.2}, 100)))
     .chain(tween(model, t => t.to({scale: 1}, 100)));
 }
