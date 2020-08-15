@@ -75,6 +75,7 @@ export const TEXTURE_IDS = {
   WING_DOZER_BURST_DOWN: 'WING_DOZER_BURST_DOWN',
   WING_DOZER_GUARD: 'WING_DOZER_GUARD',
   LIGHTNING_DOZER_FRONT_STEP: 'LIGHTNING_DOZER_FRONT_STEP',
+  SHINYA_CUTIN: 'SHINYA_CUTIN',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
   HITMARK_LIGHTNING_RING: 'HITMARK_LIGHTNING_RING',
@@ -318,6 +319,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.WING_DOZER_GUARD,
     path: 'armdozer/wing-dozer/guard.png',
+  },
+  // シンヤ関連
+  {
+    id: TEXTURE_IDS.SHINYA_CUTIN,
+    path: 'pilot/shinya/skill-cutin.png',
   },
   // ヒットマーク関連
   {
