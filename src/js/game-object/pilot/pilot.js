@@ -20,6 +20,13 @@ export interface Pilot {
   show(): Animate;
 
   /**
+   * カットインを非表示にする
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate;
+
+  /**
    * シーンに追加するオブジェクトを取得する
    */
   getObject3D(): THREE.Object3D;

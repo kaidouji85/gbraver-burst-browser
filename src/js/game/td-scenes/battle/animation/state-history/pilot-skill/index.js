@@ -44,6 +44,9 @@ function cutIn(param: PilotSkillAnimationParam): Animate {
   )
     .chain(delay(2000))
     .chain(all(
+      param.invokerHUD.pilot.hidden(),
+      param.hudObjects.rearmostFader.opacity(0, 300))
+    ).chain(all(
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),

@@ -10,6 +10,7 @@ import type {PreRender} from "../../../action/game-loop/pre-render";
 import type {Pilot} from "../pilot";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/sohw";
+import {hidden} from "./animation/hidden";
 
 /**
  * シンヤ カットイン
@@ -49,6 +50,15 @@ export class Shinya implements Pilot {
    */
   show(): Animate {
     return show(this._model);
+  }
+
+  /**
+   * カットインを非表示にする
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**
