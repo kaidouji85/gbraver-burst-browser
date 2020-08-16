@@ -4,6 +4,7 @@
  * シンヤ モデル
  */
 export type ShinyaModel = {
+  opacity: number,
   /**
    * トラッキング
    */

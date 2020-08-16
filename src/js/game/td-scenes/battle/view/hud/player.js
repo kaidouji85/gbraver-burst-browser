@@ -7,6 +7,8 @@ import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
+import type {Pilot} from "../../../../../game-object/pilot/pilot";
+import {enemyShinya, playerShinya} from "../../../../../game-object/pilot/shinya";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
@@ -14,6 +16,7 @@ import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
 export interface HUDPlayerField {
   playerId: PlayerId;
   gauge: Gauge;
+  pilot: Pilot;
 }
 
 /**
@@ -22,10 +25,12 @@ export interface HUDPlayerField {
 export class HUDPlayer implements HUDPlayerField{
   playerId: PlayerId;
   gauge: Gauge;
+  pilot: Pilot;
 
   constructor(param: HUDPlayerField) {
     this.playerId = param.playerId;
     this.gauge = param.gauge;
+    this.pilot = param.pilot;
   }
 
   /**
@@ -33,6 +38,7 @@ export class HUDPlayer implements HUDPlayerField{
    */
   destructor(): void {
     this.gauge.destructor();
+    this.pilot.destructor();
   }
 
   /**
@@ -42,7 +48,8 @@ export class HUDPlayer implements HUDPlayerField{
    */
   getObject3Ds(): THREE.Object3D[] {
     return [
-      this.gauge.getObject3D()
+      this.gauge.getObject3D(),
+      this.pilot.getObject3D(),
     ];
   }
 }
@@ -63,7 +70,8 @@ export function playerHUDObjects(resources: Resources, state: Player, listener: 
       listener: listener,
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
-    })
+    }),
+    pilot: playerShinya(resources, listener)
   });
 }
 
@@ -83,6 +91,7 @@ export function enemyHUDObjects(resources: Resources, state: Player, listener: O
       listener: listener,
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
-    })
+    }),
+    pilot: enemyShinya(resources, listener)
   });
 }

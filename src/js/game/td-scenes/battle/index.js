@@ -18,7 +18,7 @@ import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
 import {all} from "../../../animation/all";
-import type {PilotSkill} from "gbraver-burst-core/lib/player/pilot";
+import type {PilotSkill} from "gbraver-burst-core";
 
 /** コンストラクタのパラメータ */
 type Param = {

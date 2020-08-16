@@ -7,11 +7,12 @@ import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {Pilot} from "../pilot";
 
 /**
  * シンヤ カットイン
  */
-export class Shinya {
+export class Shinya implements Pilot {
   _model: ShinyaModel;
   _view: ShinyaView;
   _subscription: Subscription;

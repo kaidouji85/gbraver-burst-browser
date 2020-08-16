@@ -47,6 +47,7 @@ export class PlayerShinyaView implements ShinyaView {
   engage(model: ShinyaModel): void {
     // TODO モデルにセットされた値を使う
     this._mesh.getObject3D().scale.set(1, 1, 1);
+    this._mesh.setOpacity(model.opacity);
   }
 
   /**
