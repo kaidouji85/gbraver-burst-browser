@@ -10,7 +10,14 @@ import type {PreRender} from "../../../../action/game-loop/pre-render";
 import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
-export const MESH_SIZE = 800;
+/**
+ * メッシュの大きさ
+ */
+export const MESH_SIZE = 500;
+
+/**
+ * アニメーション数
+ */
 export const MAX_ANIMATION = 1;
 
 /**
@@ -50,7 +57,6 @@ export class PlayerShinyaView implements ShinyaView {
    */
   engage(model: ShinyaModel, preRender: PreRender): void {
     const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-
     this._mesh.getObject3D().scale.set(scale, scale, scale);
     this._mesh.getObject3D().position.set(
       model.tracking.x,
