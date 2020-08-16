@@ -44,6 +44,18 @@ export class Shinya implements Pilot {
   }
 
   /**
+   * 3Dレイヤーのオブジェクトをトラッキングする
+   * 本メソッドにはHUDレイヤー系座標をセットすること
+   *
+   * @param x x座標
+   * @param y y座標
+   */
+  tracking(x: number, y: number): void {
+    this._model.tracking.x = x;
+    this._model.tracking.y = y;
+  }
+
+  /**
    * カットインを表示する
    *
    * @return アニメーション
@@ -76,6 +88,6 @@ export class Shinya implements Pilot {
    * @param action アクション
    */
   _onPreRender(action: PreRender): void {
-    this._view.engage(this._model);
+    this._view.engage(this._model, action);
   }
 }

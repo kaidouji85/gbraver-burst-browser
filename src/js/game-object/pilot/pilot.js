@@ -2,11 +2,12 @@
 
 import * as THREE from 'three';
 import {Animate} from "../../animation/animate";
+import type {HUDTracking} from "../../tracking/hud-tracking";
 
 /**
  * パイロット カットイン
  */
-export interface Pilot {
+export interface Pilot extends HUDTracking {
   /**
    * デストラクタ相当の処理
    */

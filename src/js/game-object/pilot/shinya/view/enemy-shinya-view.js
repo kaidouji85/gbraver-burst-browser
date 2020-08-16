@@ -3,6 +3,7 @@
 import {PlayerShinyaView} from "./player-shinya-view";
 import type {Resources} from "../../../../resource";
 import type {ShinyaModel} from "../model/shinya-model";
+import type {PreRender} from "../../../../action/game-loop/pre-render";
 
 /**
  * 敵側 シンヤ ビュー
@@ -22,9 +23,10 @@ export class EnemyShinyaView extends PlayerShinyaView {
    * モデルをビューに反映させる
    *
    * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: ShinyaModel) {
-    super.engage(model);
+  engage(model: ShinyaModel, preRender: PreRender) {
+    super.engage(model, preRender);
     const target = this.getObject3D();
     target.scale.x *= -1;
   }
