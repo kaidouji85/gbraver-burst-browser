@@ -8,6 +8,8 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import type {Pilot} from "../pilot";
+import {Animate} from "../../../animation/animate";
+import {show} from "./animation/sohw";
 
 /**
  * シンヤ カットイン
@@ -38,6 +40,15 @@ export class Shinya implements Pilot {
    */
   destructor(): void {
     this._view.destructor();
+  }
+
+  /**
+   * カットインを表示する
+   *
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this._model);
   }
 
   /**
