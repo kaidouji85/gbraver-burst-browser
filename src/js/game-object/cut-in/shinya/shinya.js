@@ -15,7 +15,7 @@ import type {HUDTracking} from "../../../tracking/hud-tracking";
 /**
  * シンヤ カットイン
  */
-export class Shinya implements HUDTracking {
+export class ShinyaCutIn implements HUDTracking {
   _model: ShinyaModel;
   _view: ShinyaView;
   _subscription: Subscription;

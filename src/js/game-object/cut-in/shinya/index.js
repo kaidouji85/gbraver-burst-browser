@@ -1,6 +1,6 @@
 // @flow
 
-import {Shinya} from "./shinya";
+import {ShinyaCutIn} from "./shinya";
 import type {Resources} from "../../../resource";
 import {PlayerShinyaView} from "./view/player-shinya-view";
 import {EnemyShinyaView} from "./view/enemy-shinya-view";
@@ -14,9 +14,9 @@ import type {GameObjectAction} from "../../../action/game-object-action";
  * @param listener イベントリスナ
  * @return シンヤ カットイン
  */
-export function playerShinya(resources: Resources, listener: Observable<GameObjectAction>): Shinya {
+export function playerShinyaCutIn(resources: Resources, listener: Observable<GameObjectAction>): ShinyaCutIn {
   const view = new PlayerShinyaView(resources);
-  return new Shinya(view, listener);
+  return new ShinyaCutIn(view, listener);
 }
 
 /**
@@ -26,7 +26,7 @@ export function playerShinya(resources: Resources, listener: Observable<GameObje
  * @param listener イベントリスナ
  * @return シンヤ カットイン
  */
-export function enemyShinya(resources: Resources, listener: Observable<GameObjectAction>): Shinya {
+export function enemyShinyaCutIn(resources: Resources, listener: Observable<GameObjectAction>): ShinyaCutIn {
   const view = new EnemyShinyaView(resources);
-  return new Shinya(view, listener);
+  return new ShinyaCutIn(view, listener);
 }

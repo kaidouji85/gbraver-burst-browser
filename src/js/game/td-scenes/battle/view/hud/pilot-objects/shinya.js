@@ -3,11 +3,11 @@
 import type {HUDPilotObjects} from "./index";
 import type {Resources} from "../../../../../../resource";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
-import {Shinya} from "../../../../../../game-object/pilot/shinya/shinya";
+import {ShinyaCutIn} from "../../../../../../game-object/cut-in/shinya/shinya";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import type {Player} from "gbraver-burst-core";
-import {enemyShinya, playerShinya} from "../../../../../../game-object/pilot/shinya";
+import {enemyShinyaCutIn, playerShinyaCutIn} from "../../../../../../game-object/cut-in/shinya";
 import * as THREE from "three";
 
 /**
@@ -15,7 +15,7 @@ import * as THREE from "three";
  */
 type Params = {
   playerId: PlayerId,
-  cutIn: Shinya
+  cutIn: ShinyaCutIn
 };
 
 /**
@@ -23,7 +23,7 @@ type Params = {
  */
 export class ShinyaHUD implements HUDPilotObjects {
   playerId: PlayerId;
-  cutIn: Shinya;
+  cutIn: ShinyaCutIn;
 
   /**
    * コンストラクタ
@@ -65,7 +65,7 @@ export class ShinyaHUD implements HUDPilotObjects {
 export function playerShinyaHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): ShinyaHUD {
   return new ShinyaHUD( {
     playerId: state.playerId,
-    cutIn: playerShinya(resources, listener)
+    cutIn: playerShinyaCutIn(resources, listener)
   })
 }
 
@@ -80,6 +80,6 @@ export function playerShinyaHUD(resources: Resources, listener: Observable<GameO
 export function enemyShinyaHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): ShinyaHUD {
   return new ShinyaHUD( {
     playerId: state.playerId,
-    cutIn: enemyShinya(resources, listener)
+    cutIn: enemyShinyaCutIn(resources, listener)
   })
 }
