@@ -7,15 +7,15 @@ import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {PreRender} from "../../../action/game-loop/pre-render";
-import type {Pilot} from "../pilot";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/sohw";
 import {hidden} from "./animation/hidden";
+import type {HUDTracking} from "../../../tracking/hud-tracking";
 
 /**
  * シンヤ カットイン
  */
-export class Shinya implements Pilot {
+export class Shinya implements HUDTracking {
   _model: ShinyaModel;
   _view: ShinyaView;
   _subscription: Subscription;

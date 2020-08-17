@@ -7,8 +7,6 @@ import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
-import type {Pilot} from "../../../../../game-object/pilot/pilot";
-import {enemyShinya, playerShinya} from "../../../../../game-object/pilot/shinya";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
