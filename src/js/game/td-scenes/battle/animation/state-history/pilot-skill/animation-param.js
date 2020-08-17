@@ -2,7 +2,7 @@
 
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState, PilotSkillEffect} from "gbraver-burst-core";
+import type {GameState, PilotSkillEffect, PilotSkill} from "gbraver-burst-core";
 import {HUDGameObjects} from "../../../view/hud/game-objects";
 import {TDGameObjects} from "../../../view/td/game-objects";
 import type {TDPlayer} from "../../../view/td/player";
@@ -13,8 +13,8 @@ import {TDCamera} from "../../../../../../game-object/camera/td";
 /**
  * パイロットスキル アニメーション パラメータ
  */
-export type PilotSkillAnimationParam = {
-  effect: PilotSkillEffect,
+export type PilotSkillAnimationParamX<SKILL: PilotSkill> = {
+  pilotSkill: SKILL,
   invokerTD: TDPlayer,
   invokerHUD: HUDPlayer,
   invokerSprite: ArmDozerSprite,
@@ -22,6 +22,11 @@ export type PilotSkillAnimationParam = {
   hudObjects: HUDGameObjects,
   tdCamera: TDCamera,
 }
+
+/**
+ * パイロットスキル アニメーション パラメータ
+ */
+export type PilotSkillAnimationParam = PilotSkillAnimationParamX<PilotSkill>;
 
 /**
  * パイロットスキル アニメーション パラメータにキャストする
@@ -46,7 +51,7 @@ export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: 
   }
 
   return {
-    effect: effect,
+    pilotSkill: effect.skill,
     invokerSprite: invokerSprite.sprite,
     invokerTD: invokerTD,
     invokerHUD: invokerHUD,
