@@ -34,13 +34,13 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
     }
   });
 
-  hud.players.forEach(hudPlayer => {
-    td.sprites
-      .filter(tdSprite => tdSprite.playerId === hudPlayer.playerId)
-      .forEach(tdSprite => {
-        trackingCutIn(td.camera.getCamera(), rendererDOM, hudPlayer.pilot, tdSprite.sprite);
-      });
-  });
+  // hud.players.forEach(hudPlayer => {
+  //   td.sprites
+  //     .filter(tdSprite => tdSprite.playerId === hudPlayer.playerId)
+  //     .forEach(tdSprite => {
+  //       trackingCutIn(td.camera.getCamera(), rendererDOM, hudPlayer.pilot, tdSprite.sprite);
+  //     });
+  // });
 
   hud.armdozers.forEach(hudArmdozer => {
     td.sprites

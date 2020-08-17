@@ -34,6 +34,7 @@ export function pilotAnimation(view: BattleSceneView, sceneState: BattleSceneSta
  * @return アニメーション
  */
 function cutIn(param: PilotSkillAnimationParam): Animate {
+  /*
   return  all(
     param.invokerHUD.pilot.show(),
     attentionArmDozer(param.tdCamera, param.invokerSprite, 500),
@@ -52,5 +53,8 @@ function cutIn(param: PilotSkillAnimationParam): Animate {
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
     ));
+   */
+
+  return empty();
 }
 

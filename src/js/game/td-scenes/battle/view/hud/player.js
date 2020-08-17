@@ -16,7 +16,6 @@ import {enemyShinya, playerShinya} from "../../../../../game-object/pilot/shinya
 export interface HUDPlayerField {
   playerId: PlayerId;
   gauge: Gauge;
-  pilot: Pilot;
 }
 
 /**
@@ -25,12 +24,10 @@ export interface HUDPlayerField {
 export class HUDPlayer implements HUDPlayerField{
   playerId: PlayerId;
   gauge: Gauge;
-  pilot: Pilot;
 
   constructor(param: HUDPlayerField) {
     this.playerId = param.playerId;
     this.gauge = param.gauge;
-    this.pilot = param.pilot;
   }
 
   /**
@@ -38,7 +35,6 @@ export class HUDPlayer implements HUDPlayerField{
    */
   destructor(): void {
     this.gauge.destructor();
-    this.pilot.destructor();
   }
 
   /**
@@ -49,7 +45,6 @@ export class HUDPlayer implements HUDPlayerField{
   getObject3Ds(): THREE.Object3D[] {
     return [
       this.gauge.getObject3D(),
-      this.pilot.getObject3D(),
     ];
   }
 }
@@ -71,7 +66,6 @@ export function playerHUDObjects(resources: Resources, state: Player, listener: 
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),
-    pilot: playerShinya(resources, listener)
   });
 }
 
@@ -92,6 +86,5 @@ export function enemyHUDObjects(resources: Resources, state: Player, listener: O
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),
-    pilot: enemyShinya(resources, listener)
   });
 }
