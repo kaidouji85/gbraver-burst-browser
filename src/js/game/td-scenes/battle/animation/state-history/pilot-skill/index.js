@@ -3,12 +3,11 @@
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core";
-import {delay, empty} from "../../../../../../animation/delay";
+import {empty} from "../../../../../../animation/delay";
 import {Animate} from "../../../../../../animation/animate";
 import {castPilotSkillAnimationParam} from "./animation-param";
 import type {PilotSkillAnimationParam} from "./animation-param";
-import {all} from "../../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../../td-camera";
+import {castShinyaAnimationParam, shinyaAnimation} from "./shinya";
 
 /**
  * パイロット効果 アニメーション
@@ -34,6 +33,10 @@ export function pilotAnimation(view: BattleSceneView, sceneState: BattleSceneSta
  * @return アニメーション
  */
 function cutIn(param: PilotSkillAnimationParam): Animate {
+  const shinya = castShinyaAnimationParam(param);
+  if (shinya) {
+    return shinyaAnimation(shinya);
+  }
   /*
   return  all(
     param.invokerHUD.pilot.show(),
