@@ -10,6 +10,7 @@ import {HUDPlayer} from "../../../view/hud/player";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import {TDCamera} from "../../../../../../game-object/camera/td";
 import type {HUDPilotObjects} from "../../../view/hud/pilot-objects";
+import type {PlayerState} from "gbraver-burst-core/lib/game/state/player-state";
 
 /**
  * パイロットスキル アニメーション パラメータ
@@ -19,6 +20,7 @@ import type {HUDPilotObjects} from "../../../view/hud/pilot-objects";
 export type PilotSkillAnimationParamX<SKILL: PilotSkill, PILOT: HUDPilotObjects> = {
   skill: SKILL,
   pilot: PILOT,
+  invokerState: PlayerState,
   invokerTD: TDPlayer,
   invokerHUD: HUDPlayer,
   invokerSprite: ArmDozerSprite,
@@ -47,17 +49,19 @@ export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: 
   }
 
   const effect: PilotSkillEffect = gameState.effect;
+  const invokerState = gameState.players.find(v => v.playerId === effect.invokerId);
   const invokerSprite = view.td.sprites.find(v => v.playerId === effect.invokerId);
   const pilot = view.hud.pilots.find(v => v.playerId === effect.invokerId);
   const invokerTD = view.td.players.find(v => v.playerId === effect.invokerId);
   const invokerHUD =view.hud.players.find(v => v.playerId === effect.invokerId);
-  if (!pilot || !invokerSprite || !invokerTD || !invokerHUD) {
+  if (!invokerState || !pilot || !invokerSprite || !invokerTD || !invokerHUD) {
     return null;
   }
 
   return {
     skill: effect.skill,
     pilot: pilot,
+    invokerState: invokerState,
     invokerSprite: invokerSprite.sprite,
     invokerTD: invokerTD,
     invokerHUD: invokerHUD,
