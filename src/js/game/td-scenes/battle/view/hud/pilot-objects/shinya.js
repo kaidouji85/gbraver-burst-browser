@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import type {Player} from "gbraver-burst-core";
 import {enemyShinya, playerShinya} from "../../../../../../game-object/pilot/shinya";
+import * as THREE from "three";
 
 /**
  * コンストラクタのパラメータ
@@ -24,13 +25,32 @@ export class ShinyaHUD implements HUDPilotObjects {
   playerId: PlayerId;
   cutIn: Shinya;
 
+  /**
+   * コンストラクタ
+   *
+   * @param params パラメータ
+   */
   constructor(params: Params) {
     this.playerId = params.playerId;
     this.cutIn = params.cutIn;
   }
 
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.cutIn.destructor();
+  }
+
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
+  getObject3Ds(): THREE.Object3D[] {
+    return [
+      this.cutIn.getObject3D()
+    ];
   }
 }
 

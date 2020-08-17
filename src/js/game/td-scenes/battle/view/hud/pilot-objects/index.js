@@ -1,5 +1,6 @@
 // @flow
 
+import * as THREE from 'three';
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
@@ -12,7 +13,22 @@ import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
  * HUD　パイロット関連オブジェクト
  */
 export interface HUDPilotObjects {
-  playerId: PlayerId,
+  /**
+   * プレイヤーID
+   */
+  playerId: PlayerId;
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void;
+
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return シーンに追加するオブジェクト
+   */
+  getObject3Ds(): THREE.Object3D[];
 }
 
 /**
