@@ -19,10 +19,10 @@ const CANVAS_SIZE = 512;
 const GROUP_SCALE = 0.3;
 
 /** 左パディング */
-const PADDING_LEFT = 180;
+const PADDING_LEFT = 70;
 
 /** 下パディング */
-const PADDING_BOTTOM = 80;
+const PADDING_BOTTOM = 160;
 
 /**
  * イベント通知ストリーム
