@@ -8,6 +8,7 @@ import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
 import {empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
 import {canBurstButtonPush} from "../../ui-logic/burst-button";
+import {canPilotButtonPush} from "../../ui-logic/pilot-button";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -41,6 +42,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   const canBurst = canBurstButtonPush(playerCommand.command);
+  const canPilotSkill = canPilotButtonPush(playerCommand.command);
   return all(
     playerHUD.gauge.hp(player.armdozer.hp),
     playerHUD.gauge.battery(player.armdozer.battery),
@@ -49,5 +51,6 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
     view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
     view.hud.gameObjects.burstButton.open(canBurst),
+    view.hud.gameObjects.pilotButton.open(canPilotSkill),
   );
 }

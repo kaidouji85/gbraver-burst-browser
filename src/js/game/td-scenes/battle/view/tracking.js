@@ -16,6 +16,7 @@ import {NeoLandozerHUD} from "./hud/armdozer-objects/neo-landozer";
 import {LightningDozerHUD} from "./hud/armdozer-objects/lightning-dozer";
 import type {HUDTracking} from "../../../../tracking/hud-tracking";
 import {WingDozerHUD} from "./hud/armdozer-objects/wing-dozer";
+import {ShinyaHUD} from "./hud/pilot-objects/shinya";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
@@ -32,6 +33,16 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
     } else {
       trackingEnemyGauge(td.camera.getCamera(), rendererDOM, v.gauge);
     }
+  });
+
+  hud.pilots.forEach(pilot => {
+    td.sprites
+      .filter(tdSprite => tdSprite.playerId === pilot.playerId)
+      .forEach(tdSprite => {
+        if (pilot instanceof ShinyaHUD) {
+          trackingCutIn(td.camera.getCamera(), rendererDOM, pilot.cutIn, tdSprite.sprite);
+        }
+      });
   });
 
   hud.armdozers.forEach(hudArmdozer => {

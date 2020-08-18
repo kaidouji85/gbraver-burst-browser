@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from 'three';
+import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type {BurstButtonModel} from "../model/burst-button-model";
-import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
+import type {PilotButtonModel} from "../model/pilot-button-model";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import {HUDUIScale} from "../../../hud-scale/hud-scale";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -19,37 +19,40 @@ const CANVAS_SIZE = 512;
 const GROUP_SCALE = 0.3;
 
 /** 左パディング */
-const PADDING_LEFT = 180;
+const PADDING_LEFT = 70;
 
 /** 下パディング */
-const PADDING_BOTTOM = 80;
+const PADDING_BOTTOM = 160;
 
-type Param = {
-  resources: Resources,
-  listener: Observable<GameObjectAction>,
-  onPush: () => void,
+/**
+ * イベント通知ストリーム
+ */
+type Notifier = {
+  pushButton: Observable<void>
 };
 
-/** バーストボタンのビュー */
-export class BurstButtonView {
-  _burstButton: SimpleImageMesh;
+/**
+ * パイロットボタン ビュー
+ */
+export class PilotButtonView {
+  _pushButton: Subject<void>;
+  _group: THREE.Group;
+  _button: SimpleImageMesh;
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
-  _group: THREE.Group;
 
-  constructor(param: Param) {
-    const burstButtonResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON);
-    const burstButton = burstButtonResource
-      ? burstButtonResource.image
-      : new Image();
-    this._burstButton = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: CANVAS_SIZE,
-      image: burstButton
-    });
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   * @param listener イベントリスナ
+   */
+  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
+    this._pushButton = new Subject();
 
-    const buttonDisabledResource = param.resources.canvasImages
+    this._group = new THREE.Group();
+
+    const buttonDisabledResource = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED);
     const buttonDisabled = buttonDisabledResource
       ? buttonDisabledResource.image
@@ -59,28 +62,37 @@ export class BurstButtonView {
       meshSize: CANVAS_SIZE,
       image: buttonDisabled
     });
+    this._buttonDisabled.getObject3D().position.z = 1;
+    this._group.add(this._buttonDisabled.getObject3D());
+
+    const pilotButtonResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON);
+    const pilotButton: Image = pilotButtonResource
+      ? pilotButtonResource.image
+      : new Image();
+    this._button = new SimpleImageMesh({
+      canvasSize: CANVAS_SIZE,
+      meshSize: CANVAS_SIZE,
+      image: pilotButton,
+    });
+    this._group.add(this._button.getObject3D());
 
     this._overlap = circleButtonOverlap({
       radius: 200,
       segments: 32,
-      listener: param.listener,
+      listener: listener,
       onButtonPush: ()=> {
-        param.onPush();
+        this._pushButton.next();
       }
     });
-
-    this._group = new THREE.Group();
-    this._group.add(this._burstButton.getObject3D());
-    this._group.add(this._buttonDisabled.getObject3D());
+    this._overlap.getObject3D().position.z = 2;
     this._group.add(this._overlap.getObject3D());
-    this._group.scale.set(GROUP_SCALE, GROUP_SCALE, GROUP_SCALE);
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
-    this._burstButton.destructor();
-    this._buttonDisabled.destructor();
-    this._overlap.destructor();
+    this._button.destructor();
   }
 
   /**
@@ -89,14 +101,13 @@ export class BurstButtonView {
    * @param model モデル
    * @param preRender プリレンダー情報
    */
-  engage(model: BurstButtonModel, preRender: PreRender): void {
-    this._burstButton.setOpacity(model.opacity);
+  engage(model: PilotButtonModel, preRender: PreRender): void {
+    this._button.setOpacity(model.opacity);
 
-    const disabledOpacity = model.canBurst ? 0 : model.opacity;
+    const disabledOpacity = model.canPilot ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
-
     this._group.scale.set(
       GROUP_SCALE * devicePerScale * model.scale,
       GROUP_SCALE * devicePerScale * model.scale,
@@ -113,12 +124,23 @@ export class BurstButtonView {
     this._group.quaternion.copy(preRender.camera.quaternion);
   }
 
-  /** 
-   * 本ビューで使うthree.jsオブジェクトを取得する
+  /**
+   * シーンに追加するオブジェクトを取得する
    *
-   * @return
+   * @return シーンに追加するオブジェクト
    */
   getObject3D(): THREE.Object3D {
     return this._group;
+  }
+
+  /**
+   * イベント通知ストリームを取得する
+   *
+   * @return イベント通知ストリーム
+   */
+  notifier(): Notifier {
+    return {
+      pushButton: this._pushButton
+    };
   }
 }
