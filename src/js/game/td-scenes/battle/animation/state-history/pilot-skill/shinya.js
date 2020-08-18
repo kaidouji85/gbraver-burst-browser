@@ -1,11 +1,10 @@
 // @flow
 
 import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
-import type {PilotSkill} from "gbraver-burst-core";
+import type {PilotSkill, RecoverBatterySkill} from "gbraver-burst-core";
 import {ShinyaHUD} from "../../../view/hud/pilot-objects/shinya";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import type {RecoverBatterySkill} from "gbraver-burst-core/lib/player/pilot";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
 

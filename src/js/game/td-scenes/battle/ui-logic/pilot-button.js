@@ -2,7 +2,6 @@
 
 import type {Command} from "gbraver-burst-core";
 
-// TODO ユニットテストを追加する
 /**
  * パイロットボタンが押せるか否かを判定する
  *

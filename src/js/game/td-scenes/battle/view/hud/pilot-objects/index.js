@@ -1,12 +1,11 @@
 // @flow
 
 import * as THREE from 'three';
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
-import type {Player} from "gbraver-burst-core";
-import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
+import type {Player, PlayerId} from "gbraver-burst-core";
+import {PilotIds} from "gbraver-burst-core";
 import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
 
 /**

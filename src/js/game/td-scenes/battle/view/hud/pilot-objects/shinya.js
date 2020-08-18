@@ -2,11 +2,10 @@
 
 import type {HUDPilotObjects} from "./index";
 import type {Resources} from "../../../../../../resource";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 import {ShinyaCutIn} from "../../../../../../game-object/cut-in/shinya/shinya";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
-import type {Player} from "gbraver-burst-core";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import {enemyShinyaCutIn, playerShinyaCutIn} from "../../../../../../game-object/cut-in/shinya";
 import * as THREE from "three";
 

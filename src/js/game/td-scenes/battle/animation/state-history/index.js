@@ -15,7 +15,7 @@ import {reflectAnimation} from "./reflect";
 import {updateRemainingTurnAnimation} from "./update-remaining-turn";
 import {gameEndAnimation} from "./game-end";
 import {rightItselfAnimation} from "./right-itself";
-import {pilotAnimation} from "./pilot-skill";
+import {pilotSkillAnimation} from "./pilot-skill";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -50,7 +50,7 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
         case 'RightItself':
           return rightItselfAnimation(view, sceneState, v);
         case 'PilotSkillEffect':
-          return pilotAnimation(view, sceneState, v);
+          return pilotSkillAnimation(view, sceneState, v);
         default:
           return empty();
       }

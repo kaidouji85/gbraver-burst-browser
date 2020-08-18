@@ -2,7 +2,7 @@
 
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState, PilotSkillEffect, PilotSkill} from "gbraver-burst-core";
+import type {GameState, PilotSkillEffect, PilotSkill, PlayerState} from "gbraver-burst-core";
 import {HUDGameObjects} from "../../../view/hud/game-objects";
 import {TDGameObjects} from "../../../view/td/game-objects";
 import type {TDPlayer} from "../../../view/td/player";
@@ -10,7 +10,6 @@ import {HUDPlayer} from "../../../view/hud/player";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import {TDCamera} from "../../../../../../game-object/camera/td";
 import type {HUDPilotObjects} from "../../../view/hud/pilot-objects";
-import type {PlayerState} from "gbraver-burst-core/lib/game/state/player-state";
 
 /**
  * パイロットスキル アニメーション パラメータ

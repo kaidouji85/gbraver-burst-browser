@@ -17,7 +17,7 @@ import {castShinyaAnimationParam, shinyaAnimation} from "./shinya";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function pilotAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+export function pilotSkillAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
   const param = castPilotSkillAnimationParam(view, sceneState, gameState);
   if (!param) {
     return empty();
@@ -37,26 +37,6 @@ function cutIn(param: PilotSkillAnimationParam): Animate {
   if (shinya) {
     return shinyaAnimation(shinya);
   }
-  /*
-  return  all(
-    param.invokerHUD.pilot.show(),
-    attentionArmDozer(param.tdCamera, param.invokerSprite, 500),
-    param.tdObjects.skyBrightness.brightness(0.2, 500),
-    param.tdObjects.illumination.intensity(0.2, 500),
-    param.hudObjects.rearmostFader.opacity(0.6, 500),
-    param.tdObjects.turnIndicator.invisible(),
-  )
-    .chain(delay(2000))
-    .chain(all(
-      param.invokerHUD.pilot.hidden(),
-      param.hudObjects.rearmostFader.opacity(0, 300))
-    ).chain(delay(500))
-    .chain(all(
-      toInitial(param.tdCamera, 500),
-      param.tdObjects.skyBrightness.brightness(1, 500),
-      param.tdObjects.illumination.intensity(1, 500),
-    ));
-   */
 
   return empty();
 }
