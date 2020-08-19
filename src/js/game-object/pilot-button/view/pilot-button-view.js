@@ -93,6 +93,8 @@ export class PilotButtonView {
    */
   destructor(): void {
     this._button.destructor();
+    this._buttonDisabled.destructor();
+    this._overlap.destructor();
   }
 
   /**
