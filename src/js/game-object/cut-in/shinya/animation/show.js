@@ -14,5 +14,6 @@ import {tween} from "../../../../animation/tween";
 export function show(model: ShinyaModel): Animate {
   return process(() => {
     model.opacity = 0;
-  }).chain(tween(model, t => t.to({opacity: 1}, 600)));
+    model.scale = 2;
+  }).chain(tween(model, t => t.to({opacity: 1, scale: 1}, 500)));
 }
