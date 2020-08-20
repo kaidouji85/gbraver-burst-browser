@@ -13,7 +13,7 @@ import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 /**
  * メッシュの大きさ
  */
-export const MESH_SIZE = 500;
+export const MESH_SIZE = 700;
 
 /**
  * アニメーション数
