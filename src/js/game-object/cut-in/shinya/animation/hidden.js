@@ -3,6 +3,7 @@
 import {Animate} from "../../../../animation/animate";
 import type {ShinyaModel} from "../model/shinya-model";
 import {tween} from "../../../../animation/tween";
+import {process} from "../../../../animation/process";
 
 /**
  * カットインを非表示にする
@@ -11,5 +12,9 @@ import {tween} from "../../../../animation/tween";
  * @return アニメーション
  */
 export function hidden(model: ShinyaModel): Animate {
-  return tween(model, t => t.to({opacity: 0, scale: 1.1}, 300));
+  return process(() => {
+    model.opacity = 1;
+    model.scale = 1;
+  })
+    .chain(tween(model, t => t.to({opacity: 0, scale: 1.2}, 300)));
 }
