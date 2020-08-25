@@ -25,7 +25,7 @@ type Param = {
 export class BurstButton {
   _model: BurstButtonModel;
   _view: BurstButtonView;
-  _pushButtonSound: Howl;
+  _pushButtonSound: typeof Howl;
   _subscription: Subscription;
 
   constructor(param: Param) {
@@ -89,7 +89,7 @@ export class BurstButton {
   }
 
   /** three.jsオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 

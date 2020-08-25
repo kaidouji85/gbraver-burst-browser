@@ -1,3 +1,5 @@
+// @flow
+
 import type {ShinBraverModel} from "../model/shin-braver-model";
 import * as THREE from "three";
 
@@ -10,15 +12,15 @@ export interface ShinBraverView {
   engage(model: ShinBraverModel): void;
 
   /** カメラの真正面を向く */
-  lookAt(camera: THREE.Camera): void;
+  lookAt(camera: typeof THREE.Camera): void;
 
   /** Sceneに追加するThree.jsオブジェクトを取得する */
-  getObject3D(): THREE.Object3D;
+  getObject3D(): typeof THREE.Object3D;
 
   /**
    * スプライト配下のオブジェクトを追加する
    *
    * @param object 追加するオブジェクト
    */
-  addObject3D(object: THREE.Object3D): void;
+  addObject3D(object: typeof THREE.Object3D): void;
 }

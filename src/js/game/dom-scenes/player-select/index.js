@@ -26,7 +26,7 @@ export type Notifier = {
 export class PlayerSelect implements DOMScene {
   _state: PlayerSelectState;
   _view: PlayerSelectView;
-  _pushButtonSound: Howl;
+  _pushButtonSound: typeof Howl;
   _selectionComplete: Subject<SelectionComplete>;
   _subscription: Subscription;
 

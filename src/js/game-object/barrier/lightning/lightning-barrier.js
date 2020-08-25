@@ -24,7 +24,7 @@ export class LightningBarrierGameEffect {
   _model: LightningBarrierModel;
   _view: LightningBarrierView;
   _sounds: LightningBarrierSounds;
-  _tweenGroup: TWEEN.Group;
+  _tweenGroup: typeof TWEEN.Group;
   _subscriptions: Subscription[];
 
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
@@ -67,7 +67,7 @@ export class LightningBarrierGameEffect {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 

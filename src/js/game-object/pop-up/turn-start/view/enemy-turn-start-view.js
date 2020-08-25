@@ -41,7 +41,7 @@ export class EnemyTurnStartView implements PopUpView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._mesh.getObject3D();
   }
 
@@ -61,7 +61,7 @@ export class EnemyTurnStartView implements PopUpView {
    *
    * @param camera カメラ
    */
-  lookAt(camera: THREE.Camera): void {
+  lookAt(camera: typeof THREE.Camera): void {
     this._mesh.getObject3D().quaternion.copy(camera.quaternion);
   }
 

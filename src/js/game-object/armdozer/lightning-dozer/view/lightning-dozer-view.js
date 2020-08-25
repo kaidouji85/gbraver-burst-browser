@@ -22,19 +22,19 @@ export interface LightningDozerView {
    *
    * @param object オブジェクト
    */
-  addObject3D(object: THREE.Object3D): void;
+  addObject3D(object: typeof THREE.Object3D): void;
 
   /**
    * シーンに追加するオブジェクトを取得する
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D;
+  getObject3D(): typeof THREE.Object3D;
 
   /** 
    * カメラの真正面を向く
    *
    * @param camera カメラ
    */
-  lookAt(camera: THREE.Camera): void;
+  lookAt(camera: typeof THREE.Camera): void;
 }

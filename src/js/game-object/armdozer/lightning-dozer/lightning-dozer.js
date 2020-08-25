@@ -59,7 +59,7 @@ export class LightningDozer implements ArmDozerSprite {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 
@@ -68,7 +68,7 @@ export class LightningDozer implements ArmDozerSprite {
    *
    * @param object オブジェクト
    */
-  addObject3D(object: THREE.Object3D): void {
+  addObject3D(object: typeof THREE.Object3D): void {
     this._view.addObject3D(object);
   }
 

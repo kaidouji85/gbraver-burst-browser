@@ -20,7 +20,7 @@ export type GlTFResource = {
   /** ID */
   id: GlTFId,
   /** glTFモデル */
-  object: THREE.Scene
+  object: typeof THREE.Scene
 };
 
 /** IDリスト */

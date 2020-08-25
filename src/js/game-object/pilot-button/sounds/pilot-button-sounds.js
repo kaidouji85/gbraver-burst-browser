@@ -8,7 +8,7 @@ import {SOUND_IDS} from "../../../resource/sound";
  * パイロットボタン 効果音
  */
 export class PilotButtonSounds {
-  pushButton: Howl;
+  pushButton: typeof Howl;
 
   /**
    * コンストラクタ

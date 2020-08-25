@@ -24,7 +24,7 @@ type Param = {
 
 /** ターンインジケーター */
 export class TurnIndicator {
-  _tweenGroup: TWEEN.Group;
+  _tweenGroup: typeof TWEEN.Group;
   _model: TurnIndicatorModel;
   _view: TurnIndicatorView;
   _subscription: Subscription[];
@@ -82,7 +82,7 @@ export class TurnIndicator {
   }
 
   /** ターンインジケーターで使うthree.jsオブジェクトを返す */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 

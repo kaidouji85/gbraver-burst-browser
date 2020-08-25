@@ -8,7 +8,7 @@ import {SOUND_IDS} from "../../../../resource/sound";
  * ネオランドーザ 音
  */
 export class NeoLandozerSounds {
-  motor: Howl;
+  motor: typeof Howl;
 
   constructor(resources: Resources) {
     const motorResource = resources.sounds.find(v => v.id === SOUND_IDS.MOTOR);

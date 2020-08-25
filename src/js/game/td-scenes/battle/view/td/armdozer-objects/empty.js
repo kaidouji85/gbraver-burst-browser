@@ -26,7 +26,7 @@ export class EmptyTDArmdozer implements TDArmdozerObjects {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D[] {
+  getObject3Ds(): typeof THREE.Object3D[] {
     return [];
   }
 
@@ -35,7 +35,7 @@ export class EmptyTDArmdozer implements TDArmdozerObjects {
    *
    * @return アームドーザスプライト配下に置かれるオブジェクト
    */
-  getUnderSprite(): THREE.Object3D[] {
+  getUnderSprite(): typeof THREE.Object3D[] {
     return [];
   }
 }

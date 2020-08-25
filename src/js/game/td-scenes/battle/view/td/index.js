@@ -37,7 +37,7 @@ type Param = {
 
 /** 3Dレイヤー */
 export class ThreeDimensionLayer {
-  scene: THREE.Scene;
+  scene: typeof THREE.Scene;
   camera: TDCamera;
   players: TDPlayer[];
   sprites: TDArmdozerSprite[];

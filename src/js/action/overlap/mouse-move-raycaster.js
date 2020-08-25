@@ -18,7 +18,7 @@ export type MouseMoveRaycaster = {
  * @param origin 変換元
  * @return 変換結果
  */
-export function toMouseMoveRaycaster(origin: MouseMove, renderer: THREE.WebGLRenderer, camera: THREE.Camera): MouseMoveRaycaster {
+export function toMouseMoveRaycaster(origin: MouseMove, renderer: typeof THREE.WebGLRenderer, camera: typeof  THREE.Camera): MouseMoveRaycaster {
   const mouseRaycaster: MouseRaycaster = createMouseRaycaster(origin.event, renderer, camera);
   const isLeftButtonClicked = isMouseLeftButtonPushed(origin.event);
 

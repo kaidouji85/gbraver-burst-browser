@@ -26,7 +26,7 @@ export interface HUDArmdozerObjects {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D[];
+  getObject3Ds(): typeof THREE.Object3D[];
 }
 
 /**

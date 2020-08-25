@@ -35,7 +35,7 @@ export class BurstButtonView {
   _burstButton: SimpleImageMesh;
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
 
   constructor(param: Param) {
     const burstButtonResource = param.resources.canvasImages
@@ -118,7 +118,7 @@ export class BurstButtonView {
    *
    * @return
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 }

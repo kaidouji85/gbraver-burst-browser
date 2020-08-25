@@ -10,9 +10,9 @@ import * as THREE from "three";
  * @param resources リソース管理オブジェクト
  * @return スカイボックス用のCubeTexture
  */
-export function skyBox(resources: Resources): THREE.CubeTexture {
+export function skyBox(resources: Resources): typeof THREE.CubeTexture {
   const cubeTextureResource = resources.cubeTextures.find(v => v.id === CUBE_TEXTURE_IDS.BlueSky);
-  const cubeTexture: THREE.CubeTexture = cubeTextureResource
+  const cubeTexture = cubeTextureResource
     ? cubeTextureResource.texture
     : new THREE.CubeTexture();
   return cubeTexture;

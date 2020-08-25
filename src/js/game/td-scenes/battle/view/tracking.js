@@ -69,7 +69,7 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
  * @param rendererDOM レンダリング対象のHTML要素
  * @param gauge ゲージ
  */
-function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
+function trackingPlayerGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
   const tdCoordinate = {
     x: ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -86,7 +86,7 @@ function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, g
  * @param rendererDOM レンダリング対象のHTML要素
  * @param gauge ゲージ
  */
-function trackingEnemyGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
+function trackingEnemyGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
   const tdCoordinate = {
     x: -ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -104,7 +104,7 @@ function trackingEnemyGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, ga
  * @param cutIn カットイン
  * @param sprite スプライト
  */
-function trackingCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: HUDTracking, sprite: ArmDozerSprite): void {
+function trackingCutIn(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, cutIn: HUDTracking, sprite: ArmDozerSprite): void {
   const target =sprite.getObject3D();
   const tdPosition = {
     x: target.position.x,

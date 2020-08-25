@@ -12,7 +12,7 @@ import {ShockWaveRingView} from "./shock-wave-ring-view";
  * プレイヤーの衝撃波ビュー
  */
 export class PlayerShockWaveView implements ShockWaveView {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _lines: ShockWaveLineView[];
   _ring: ShockWaveRingView;
 
@@ -68,7 +68,7 @@ export class PlayerShockWaveView implements ShockWaveView {
    *
    * @param camera カメラ
    */
-  lookAt(camera: THREE.Camera): void {
+  lookAt(camera: typeof THREE.Camera): void {
     this._group.quaternion.copy(camera.quaternion);
   }
 

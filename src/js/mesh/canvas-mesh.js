@@ -1,3 +1,5 @@
+// @flow
+
 import * as THREE from "three";
 import {SPRITE_RENDER_ORDER} from "../render/td-render-order";
 
@@ -12,7 +14,7 @@ type Params = {
 /** キャンバスメッシュおよび関連オブジェクトを集めたクラス */
 export class CanvasMesh {
   /** メッシュ */
-  mesh: THREE.Mesh;
+  mesh: typeof THREE.Mesh;
   /** 描画を行うキャンバス */
   canvas: HTMLCanvasElement;
 
@@ -62,7 +64,7 @@ export class CanvasMesh {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this.mesh;
   }
 }

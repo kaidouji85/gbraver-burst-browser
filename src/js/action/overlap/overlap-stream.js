@@ -18,7 +18,7 @@ import {filter, map, share} from "rxjs/operators";
  * @param camera カメラ
  * @return 当たり判定ストリーム
  */
-export function toOverlapStream(origin: Observable<TdDOMEvent>, rendererDOM: HTMLElement, camera: THREE.Camera): Observable<OverlapAction> {
+export function toOverlapStream(origin: Observable<TdDOMEvent>, rendererDOM: HTMLElement, camera: typeof THREE.Camera): Observable<OverlapAction> {
   return origin.pipe(
     map(v => {
       switch (v.type) {

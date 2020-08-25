@@ -19,11 +19,11 @@ export const BACK_MESH_HEIGHT = 512;
 
 /** プレイヤーのHPバー */
 export class PlayerHpBar {
-  _texture: THREE.Texture;
+  _texture: typeof THREE.Texture;
   _barImage: Image;
-  _mesh: THREE.Mesh;
+  _mesh: typeof THREE.Mesh;
   _back: CanvasMesh;
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -92,7 +92,7 @@ export class PlayerHpBar {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 

@@ -39,13 +39,13 @@ export class WingDozer implements ArmDozerSprite {
    *
    * @param view ビュー
    * @param resources リソース管理オブジェクト
-   * @param listenr イベントリスト
+   * @param listener イベントリスト
    */
-  constructor(view: WingDozerView, resources: Resources, listenr: Observable<GameObjectAction>): void {
+  constructor(view: WingDozerView, resources: Resources, listener: Observable<GameObjectAction>): void {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new WingDozerSounds(resources);
-    this._subscription = listenr.subscribe(action => {
+    this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);
       } else if (action.type === 'PreRender') {
@@ -67,7 +67,7 @@ export class WingDozer implements ArmDozerSprite {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 
@@ -76,7 +76,7 @@ export class WingDozer implements ArmDozerSprite {
    *
    * @param object オブジェクト
    */
-  addObject3D(object: THREE.Object3D): void {
+  addObject3D(object: typeof THREE.Object3D): void {
     this._view.addObject3D(object);
   }
 

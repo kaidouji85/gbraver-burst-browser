@@ -11,7 +11,7 @@ import {tween} from "./tween";
  * @param group TweenGroup
  * @return アニメーション
  */
-export function delay(time: number, group: ?TWEEN.Group): Animate {
+export function delay(time: number, group: ?(typeof TWEEN.Group)): Animate {
   return tween({}, t => t.to({}, time), group)
 }
 

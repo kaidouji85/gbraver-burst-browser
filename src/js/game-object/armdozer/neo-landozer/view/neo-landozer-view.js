@@ -1,3 +1,5 @@
+// @flow
+
 import type {NeoLandozerModel} from "../model/neo-landozer-model";
 import * as THREE from "three";
 
@@ -10,15 +12,15 @@ export interface NeoLandozerView {
   engage(model: NeoLandozerModel): void;
 
   /** カメラの真正面を向く */
-  lookAt(camera: THREE.Camera): void;
+  lookAt(camera: typeof THREE.Camera): void;
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D;
+  getObject3D(): typeof THREE.Object3D;
 
   /**
    * スプライト配下にオブジェクトを追加する
    *
    * @param object 追加するオブジェクト
    */
-  addObject3D(object: THREE.Object3D): void;
+  addObject3D(object: typeof THREE.Object3D): void;
 }

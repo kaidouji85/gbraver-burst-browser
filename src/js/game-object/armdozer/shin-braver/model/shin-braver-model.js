@@ -1,3 +1,4 @@
+// @flow
 import type {AnimationType} from "./animation-type";
 
 /** シンブレイバーのモデル */

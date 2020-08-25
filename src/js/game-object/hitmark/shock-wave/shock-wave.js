@@ -20,7 +20,7 @@ import {process} from '../../../animation/process';
 export class ShockWave {
   _model: ShockWaveModel;
   _view: ShockWaveView;
-  _hitSound: Howl;
+  _hitSound: typeof Howl;
   _subscription: Subscription;
 
   /**
@@ -74,7 +74,7 @@ export class ShockWave {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 

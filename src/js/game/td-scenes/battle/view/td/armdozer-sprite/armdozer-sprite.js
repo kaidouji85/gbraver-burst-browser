@@ -1,3 +1,5 @@
+// @flow
+
 import type {PlayerId} from "gbraver-burst-core";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import * as THREE from "three";
@@ -24,7 +26,7 @@ export class TDArmdozerSprite {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D[] {
+  getObject3Ds(): typeof THREE.Object3D[] {
     return [
       this.sprite.getObject3D()
     ];

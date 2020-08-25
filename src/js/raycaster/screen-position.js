@@ -10,7 +10,7 @@ import * as THREE from "three";
  * @param canvasHeight 画面高
  * @return three.js画面上でのマウス、指の座標
  */
-export function getScreenPosition(clientX: number, clientY: number, canvasWidth: number, canvasHeight: number): THREE.Vector2 {
+export function getScreenPosition(clientX: number, clientY: number, canvasWidth: number, canvasHeight: number): typeof THREE.Vector2 {
   const mouse = new THREE.Vector2();
   mouse.x = (clientX / canvasWidth) * 2 - 1;
   mouse.y = -(clientY / canvasHeight) * 2 + 1;

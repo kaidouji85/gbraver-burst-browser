@@ -1,3 +1,4 @@
+// @flow
 import type {PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 
@@ -16,12 +17,12 @@ export interface TDArmdozerObjects {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D[];
+  getObject3Ds(): typeof THREE.Object3D[];
 
   /**
    * アームドーザスプライト配下に置かれるオブジェクトを取得する
    *
    * @return アームドーザスプライト配下に置かれるオブジェクト
    */
-  getUnderSprite(): THREE.Object3D[];
+  getUnderSprite(): typeof THREE.Object3D[];
 }

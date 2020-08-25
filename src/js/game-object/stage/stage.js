@@ -12,5 +12,5 @@ export interface Stage {
    *
    * @return シーンに追加するオブジェクト
    */
-  getThreeJsObjects(): THREE.Object[];
+  getThreeJsObjects(): typeof THREE.Object[];
 }

@@ -11,7 +11,7 @@ import {tween} from "./tween";
  * @param group TWeenGroup
  * @return アニメーション
  */
-export function process(fn: () => void, group: ?TWEEN.Group): Animate {
+export function process(fn: () => void, group: ?(typeof TWEEN.Group)): Animate {
   return tween({}, t => t
       .to({}, 0)
       .onStart(() => {

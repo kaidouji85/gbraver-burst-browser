@@ -8,7 +8,7 @@ import {SOUND_IDS} from "../../../../resource/sound";
  * シンブレイバー 効果音
  */
 export class ShinBraverSounds {
-  motor: Howl;
+  motor: typeof Howl;
 
   /**
    * コンストラクタ

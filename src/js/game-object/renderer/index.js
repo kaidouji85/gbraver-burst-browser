@@ -23,7 +23,7 @@ type Notifier = {
 
 /** レンダラの挙動をまとめたもの */
 export class Renderer {
-  _threeJsRender: THREE.WebGLRenderer;
+  _threeJsRender: typeof THREE.WebGLRenderer;
   _domEvent: Observable<TdDOMEvent>;
   _subscriptions: Subscription[];
 
@@ -72,7 +72,7 @@ export class Renderer {
    *
    * @return デバッグ用情報
    */
-  info(): WebGLInfo {
+  info(): typeof WebGLInfo {
     return this._threeJsRender.info;
   }
 

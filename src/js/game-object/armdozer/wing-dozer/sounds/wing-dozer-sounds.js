@@ -8,7 +8,7 @@ import {SOUND_IDS} from "../../../../resource/sound";
  * ウィングドーザ関連の音
  */
 export class WingDozerSounds {
-  motor: Howl;
+  motor: typeof Howl;
 
   /**
    * コンストラクタ

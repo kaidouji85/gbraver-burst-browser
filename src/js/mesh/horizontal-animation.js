@@ -5,7 +5,7 @@ import {normalizeTextureOffset} from "../texture/animation/texture-offset";
 import {animatedTexture} from "../texture/animation/texture-animation";
 
 type Param = {
-  texture: THREE.Texture,
+  texture: typeof THREE.Texture,
   maxAnimation: number,
   width: number,
   height: number,
@@ -16,8 +16,8 @@ type Param = {
  * 本クラスで使用するテクスチャは、横方向にのみアニメーション連結されたものである
  */
 export class HorizontalAnimationMesh {
-  texture: THREE.Texture;
-  mesh: THREE.Mesh;
+  texture: typeof THREE.Texture;
+  mesh: typeof THREE.Mesh;
   width: number;
   height: number;
   maxAnimation: number;
@@ -62,7 +62,7 @@ export class HorizontalAnimationMesh {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this.mesh;
   }
 }

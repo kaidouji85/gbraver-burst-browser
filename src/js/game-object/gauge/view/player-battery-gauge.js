@@ -11,7 +11,7 @@ export const MAX_BATTERY = 5;
 
 /** プレイヤーバッテリー */
 export class PlayerBatteryGauge {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _gaugeList: BatteryGaugeUnit[];
 
   constructor(resources: Resources) {
@@ -52,14 +52,14 @@ export class PlayerBatteryGauge {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 }
 
 /** バッテリーゲージ1マス分 */
 class BatteryGaugeUnit {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _gauge: SimpleImageMesh;
   _back: SimpleImageMesh;
   _value: number;
@@ -104,7 +104,7 @@ class BatteryGaugeUnit {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 

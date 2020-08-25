@@ -64,7 +64,7 @@ export class NeoLandozer implements ArmDozerSprite {
    *
    * @param object オブジェクト
    */
-  addObject3D(object: THREE.Object3D): void {
+  addObject3D(object: typeof THREE.Object3D): void {
     this._view.addObject3D(object);
   }
 
@@ -129,7 +129,7 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 

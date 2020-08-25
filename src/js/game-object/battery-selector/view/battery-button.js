@@ -34,7 +34,7 @@ type Param = {
 
 /** バッテリーボタン */
 export class BatteryButton {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _button: SimpleImageMesh;
   _overlap: ButtonOverlap;
   _attackLabel: SimpleImageMesh;
@@ -151,7 +151,7 @@ export class BatteryButton {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 }

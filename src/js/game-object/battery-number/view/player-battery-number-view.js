@@ -22,7 +22,9 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
 
   constructor(resources: Resources) {
     const batteryNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER);
-    const batteryNumber: THREE.Texture = batteryNumberResource ? batteryNumberResource.texture : new THREE.Texture();
+    const batteryNumber = batteryNumberResource
+      ? batteryNumberResource.texture
+      : new THREE.Texture();
     this._numberMesh = new HorizontalAnimationMesh({
       texture: batteryNumber,
       maxAnimation: MAX_BATTERY_ANIMATION,
@@ -49,12 +51,12 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
   }
 
   /** カメラの方向を向く */
-  lookAt(camera: THREE.Camera): void {
+  lookAt(camera: typeof THREE.Camera): void {
     this._numberMesh.getObject3D().quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを返す */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._numberMesh.getObject3D();
   }
 }

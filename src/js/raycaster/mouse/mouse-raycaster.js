@@ -6,7 +6,7 @@ import {createRaycaster} from "../raycaster-creator";
 
 /** マウスのレイキャスト */
 export type MouseRaycaster = {
-  raycaster: THREE.Raycaster
+  raycaster: typeof THREE.Raycaster
 };
 
 /**
@@ -17,8 +17,8 @@ export type MouseRaycaster = {
  * @param camera カメラ
  * @return マウスのレイキャスト
  */
-export function createMouseRaycaster(event: MouseEvent, rendererDOM: HTMLElement, camera: THREE.Camera): MouseRaycaster {
-  const mousePos: THREE.Vectoe2 = getMousePosition(event, rendererDOM);
+export function createMouseRaycaster(event: MouseEvent, rendererDOM: HTMLElement, camera: typeof THREE.Camera): MouseRaycaster {
+  const mousePos = getMousePosition(event, rendererDOM);
   return {
     raycaster: createRaycaster(mousePos, camera)
   };

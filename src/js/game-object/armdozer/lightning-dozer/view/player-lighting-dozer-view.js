@@ -22,7 +22,7 @@ import {lightningDozerFrontStep} from "../mesh/front-step";
  * プレイヤー側のライトニングドーザビュー
  */
 export class PlayerLightingDozerView implements LightningDozerView {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _stand: ArmdozerAnimation;
   _hmCharge: ArmdozerAnimation;
   _hmAttack: ArmdozerAnimation;
@@ -92,7 +92,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
    *
    * @param object オブジェクト
    */
-  addObject3D(object: THREE.Object3D): void {
+  addObject3D(object: typeof THREE.Object3D): void {
     this._group.add(object);
   }
 
@@ -101,7 +101,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 
@@ -110,7 +110,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
    *
    * @param camera カメラ
    */
-  lookAt(camera: THREE.Camera): void {
+  lookAt(camera: typeof THREE.Camera): void {
     this._group.quaternion.copy(camera.quaternion);
   }
 

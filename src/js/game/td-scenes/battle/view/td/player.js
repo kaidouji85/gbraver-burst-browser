@@ -55,7 +55,7 @@ export interface TDPlayer extends TDPlayerField {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D[];
+  getObject3Ds(): typeof THREE.Object3D[];
 }
 
 /**
@@ -107,7 +107,7 @@ export class TDPlayerImpl implements TDPlayer {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D[] {
+  getObject3Ds(): typeof THREE.Object3D[] {
     return [
       this.hitMark.shockWave.getObject3D(),
       this.hitMark.lightning.getObject3D(),

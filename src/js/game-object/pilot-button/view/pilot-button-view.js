@@ -36,7 +36,7 @@ type Notifier = {
  */
 export class PilotButtonView {
   _pushButton: Subject<void>;
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _button: SimpleImageMesh;
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
@@ -131,7 +131,7 @@ export class PilotButtonView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 

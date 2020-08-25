@@ -16,7 +16,7 @@ export type TouchStartRaycaster = {
  * @param origin 変換元
  * @return 変換結果
  */
-export function toTouchStartRaycaster(origin: TouchStart, renderer: THREE.WebGLRenderer, camera: THREE.Camera): TouchStartRaycaster {
+export function toTouchStartRaycaster(origin: TouchStart, renderer: typeof THREE.WebGLRenderer, camera: typeof THREE.Camera): TouchStartRaycaster {
   const touch = createTouchEventRaycaster(origin.event, renderer, camera);
   return {
     type: 'touchStartRaycaster',

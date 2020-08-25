@@ -18,7 +18,7 @@ export const HEIGHT = 800;
  * プレイヤー側　ネオランドーザ カットイン ビュー
  */
 export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _cutInUp: HorizontalAnimationMesh;
   _cutInDown: HorizontalAnimationMesh;
 
@@ -90,7 +90,7 @@ export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 

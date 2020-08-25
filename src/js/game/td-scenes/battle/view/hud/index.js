@@ -43,7 +43,7 @@ type Notifier = {
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
  */
 export class HudLayer {
-  scene: THREE.Scene;
+  scene: typeof THREE.Scene;
   camera: PlainHUDCamera;
   players: HUDPlayer[];
   armdozers: HUDArmdozerObjects[];

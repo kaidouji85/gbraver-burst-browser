@@ -16,7 +16,7 @@ export const HEIGHT = 300;
  * 衝撃波リングのビュー
  */
 export class ShockWaveRingView {
-  _mesh: THREE.Mesh;
+  _mesh: typeof THREE.Mesh;
 
   constructor(resources: Resources) {
     const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING);
@@ -62,7 +62,7 @@ export class ShockWaveRingView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._mesh;
   }
 }
