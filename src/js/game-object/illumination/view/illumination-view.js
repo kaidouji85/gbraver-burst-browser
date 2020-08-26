@@ -7,11 +7,11 @@ import type {IlluminationModel} from "../model/illumination-model";
  * ステージ全体の照明のビュー
  */
 export class IlluminationView {
-  _directionalLight1: THREE.DirectionalLight;
-  _directionalLight2: THREE.DirectionalLight;
-  _directionalLight3: THREE.DirectionalLight;
-  _directionalLight4: THREE.DirectionalLight;
-  _ambientLight: THREE.AmbientLight;
+  _directionalLight1: typeof THREE.DirectionalLight;
+  _directionalLight2: typeof THREE.DirectionalLight;
+  _directionalLight3: typeof THREE.DirectionalLight;
+  _directionalLight4: typeof THREE.DirectionalLight;
+  _ambientLight: typeof THREE.AmbientLight;
 
   constructor() {
     this._directionalLight1 = new THREE.DirectionalLight(0xAAAAAA);
@@ -34,7 +34,7 @@ export class IlluminationView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D[] {
+  getObject3Ds(): typeof THREE.Object3D[] {
     return [
       this._directionalLight1,
       this._directionalLight2,

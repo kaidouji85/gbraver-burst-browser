@@ -16,7 +16,7 @@ import {renderPixelRatio} from "./pixel-ratio";
  * @param height リサイズ後の画面高
  * @param devicePixelRatio デバイスのピクセルレート
  */
-export function onWebGLRendererResize(renderer: THREE.WebGLRenderer, width: number, height: number, devicePixelRatio: number): void {
+export function onWebGLRendererResize(renderer: typeof THREE.WebGLRenderer, width: number, height: number, devicePixelRatio: number): void {
   renderer.setSize(width, height);
   const pixelRatio = renderPixelRatio(devicePixelRatio);
   renderer.setPixelRatio(pixelRatio);

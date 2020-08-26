@@ -22,7 +22,7 @@ import {shinBraverFrontStep} from "../mesh/front-step";
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _stand: ArmdozerAnimation;
   _spCharge: ArmdozerAnimation;
   _spAttack: ArmdozerAnimation;
@@ -85,17 +85,17 @@ export class PlayerShinBraverView implements ShinBraverView {
    *
    * @param object 追加するオブジェクト
    */
-  addObject3D(object: THREE.Object3D): void {
+  addObject3D(object: typeof THREE.Object3D): void {
     this._group.add(object);
   }
 
   /** カメラの真正面を向く */
-  lookAt(camera: THREE.Camera): void {
+  lookAt(camera: typeof THREE.Camera): void {
     this._group.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを返す */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 

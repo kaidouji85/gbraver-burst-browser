@@ -35,7 +35,7 @@ export class PlayerWingDozerView implements WingDozerView{
   _backStep: ArmdozerAnimation;
   _frontStep: ArmdozerAnimation;
   _guard: ArmdozerAnimation;
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
 
   /**
    * コンストラクタ
@@ -76,7 +76,7 @@ export class PlayerWingDozerView implements WingDozerView{
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 
@@ -108,7 +108,7 @@ export class PlayerWingDozerView implements WingDozerView{
    *
    * @param camera カメラ
    */
-  lookAt(camera: THREE.Camera): void {
+  lookAt(camera: typeof THREE.Camera): void {
     this._group.quaternion.copy(camera.quaternion);
   }
 
@@ -117,7 +117,7 @@ export class PlayerWingDozerView implements WingDozerView{
    *
    * @param object 追加するオブジェクト
    */
-  addObject3D(object: THREE.Object3D): void {
+  addObject3D(object: typeof THREE.Object3D): void {
     this._group.add(object);
   }
 

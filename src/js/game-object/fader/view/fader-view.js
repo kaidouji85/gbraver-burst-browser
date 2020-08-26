@@ -9,7 +9,7 @@ export const MESH_HEIGHT = 1;
 
 /** 画面フェーダービュー */
 export class FaderView {
-  _mesh: THREE.Mesh;
+  _mesh: typeof THREE.Mesh;
 
   constructor(z: number) {
     const geometry = new THREE.PlaneGeometry(MESH_WIDTH, MESH_HEIGHT);
@@ -33,7 +33,7 @@ export class FaderView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._mesh;
   }
 

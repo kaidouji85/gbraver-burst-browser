@@ -50,8 +50,8 @@ import TWEEN from '@tweenjs/tween.js';
  * animation.play();
  */
 export class Animate {
-  _start: TWEEN.Tween;
-  _end: TWEEN.Tween;
+  _start: typeof TWEEN.Tween;
+  _end: typeof TWEEN.Tween;
   _time: number;
 
   /**
@@ -61,7 +61,7 @@ export class Animate {
    * @param end 連続したTweenの最後
    * @param time 全体の再生時間
    */
-  constructor(start: TWEEN.Tween, end: TWEEN.Tween, time: number) {
+  constructor(start: typeof TWEEN.Tween, end: typeof TWEEN.Tween, time: number) {
     this._start = start;
     this._end = end;
     this._time = time;

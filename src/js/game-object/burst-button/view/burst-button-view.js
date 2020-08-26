@@ -19,7 +19,7 @@ const CANVAS_SIZE = 512;
 const GROUP_SCALE = 0.3;
 
 /** 左パディング */
-const PADDING_LEFT = 80;
+const PADDING_LEFT = 180;
 
 /** 下パディング */
 const PADDING_BOTTOM = 80;
@@ -35,7 +35,7 @@ export class BurstButtonView {
   _burstButton: SimpleImageMesh;
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
 
   constructor(param: Param) {
     const burstButtonResource = param.resources.canvasImages
@@ -113,8 +113,12 @@ export class BurstButtonView {
     this._group.quaternion.copy(preRender.camera.quaternion);
   }
 
-  /** 本ビューで使うthree.jsオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  /** 
+   * 本ビューで使うthree.jsオブジェクトを取得する
+   *
+   * @return
+   */
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 }

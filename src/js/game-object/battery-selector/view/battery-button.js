@@ -34,7 +34,7 @@ type Param = {
 
 /** バッテリーボタン */
 export class BatteryButton {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _button: SimpleImageMesh;
   _overlap: ButtonOverlap;
   _attackLabel: SimpleImageMesh;
@@ -94,7 +94,7 @@ export class BatteryButton {
     this._group.add(this._defenseLabel.getObject3D());
 
     const currentBatteryResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_CUREENT_VALUE);
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_CURRENT_VALUE);
     const currentBattery = currentBatteryResource
       ? currentBatteryResource.image
       : new Image();
@@ -151,7 +151,7 @@ export class BatteryButton {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 }

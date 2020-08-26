@@ -18,7 +18,7 @@ export type TouchRaycaster = {
   /** タッチごとに割り当てられるユニークID */
   identifier: number,
   /** タッチのレイキャスト */
-  raycaster: THREE.Raycaster
+  raycaster: typeof THREE.Raycaster
 };
 
 /**
@@ -29,7 +29,7 @@ export type TouchRaycaster = {
  * @param camera カメラ
  * @return タッチイベントから作成したレイキャスト
  */
-export function createTouchEventRaycaster(event: TouchEvent, rendererDOM: HTMLElement, camera: THREE.Camera): TouchRaycastContainer {
+export function createTouchEventRaycaster(event: TouchEvent, rendererDOM: HTMLElement, camera: typeof THREE.Camera): TouchRaycastContainer {
   const touchToRaycaster = (touchList: TouchList): TouchRaycaster[] =>
     Object.values(touchList)
       .map(v => {

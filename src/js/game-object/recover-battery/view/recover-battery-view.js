@@ -20,12 +20,12 @@ export interface RecoverBatteryView {
    * 
    * @param camera カメラ
    */
-  lookAt(camera: THREE.Camera): void;
+  lookAt(camera: typeof THREE.Camera): void;
 
   /**
    * シーンに追加するオブジェクトを取得する
    *
    * @return オブジェクト
    */
-  getObject3D(): THREE.Object3D;
+  getObject3D(): typeof THREE.Object3D;
 }

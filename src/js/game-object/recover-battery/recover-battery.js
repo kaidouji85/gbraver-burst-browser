@@ -54,7 +54,7 @@ export class RecoverBattery {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.OBject3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 

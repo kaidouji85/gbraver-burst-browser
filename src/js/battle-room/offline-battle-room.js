@@ -19,7 +19,8 @@ export class OfflineBattleRoom implements BattleRoom {
     this._npc = npc;
     this._enemy = {
       playerId: `enemy-of-${player.playerId}`,
-      armdozer: this._npc.armdozer
+      armdozer: this._npc.armdozer,
+      pilot: this._npc.pilot,
     };
     this._stateHistory = [];
     this._gbraverBurstCore = new GbraverBurstCore();

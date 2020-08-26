@@ -40,9 +40,9 @@ export class HUDPlayer implements HUDPlayerField{
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D[] {
+  getObject3Ds(): typeof THREE.Object3D[] {
     return [
-      this.gauge.getObject3D()
+      this.gauge.getObject3D(),
     ];
   }
 }
@@ -63,7 +63,7 @@ export function playerHUDObjects(resources: Resources, state: Player, listener: 
       listener: listener,
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
-    })
+    }),
   });
 }
 
@@ -83,6 +83,6 @@ export function enemyHUDObjects(resources: Resources, state: Player, listener: O
       listener: listener,
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
-    })
+    }),
   });
 }

@@ -18,5 +18,5 @@ export interface ArmdozerAnimation {
   visible(isVisible: boolean): void;
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D;
+  getObject3D(): typeof THREE.Object3D;
 }

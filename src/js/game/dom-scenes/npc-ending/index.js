@@ -21,9 +21,9 @@ type Notifier  = {
 export class NPCEnding implements DOMScene {
   _state: NPCEndingState;
   _view: NPCEndingView;
-  _pushButtonSound: Howl;
+  _pushButtonSound: typeof Howl;
   _endNPCEnding: Subject<EndNPCEnding>;
-  _subsctiptoons: Subscription[];
+  _subscriptions: Subscription[];
 
   /**
    * コンストラクタ
@@ -40,7 +40,7 @@ export class NPCEnding implements DOMScene {
       ? pushButtonResource.sound
       : new Howl();
 
-    this._subsctiptoons = [
+    this._subscriptions = [
       this._view.notifier().screenPush.subscribe(() => {
         this._onScreenPush();
       })
@@ -52,6 +52,9 @@ export class NPCEnding implements DOMScene {
    */
   destructor(): void {
     this._view.destructor();
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    })
   }
 
   /**

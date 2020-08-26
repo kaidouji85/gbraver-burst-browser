@@ -16,6 +16,7 @@ import {NeoLandozerHUD} from "./hud/armdozer-objects/neo-landozer";
 import {LightningDozerHUD} from "./hud/armdozer-objects/lightning-dozer";
 import type {HUDTracking} from "../../../../tracking/hud-tracking";
 import {WingDozerHUD} from "./hud/armdozer-objects/wing-dozer";
+import {ShinyaHUD} from "./hud/pilot-objects/shinya";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
@@ -32,6 +33,16 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
     } else {
       trackingEnemyGauge(td.camera.getCamera(), rendererDOM, v.gauge);
     }
+  });
+
+  hud.pilots.forEach(pilot => {
+    td.sprites
+      .filter(tdSprite => tdSprite.playerId === pilot.playerId)
+      .forEach(tdSprite => {
+        if (pilot instanceof ShinyaHUD) {
+          trackingCutIn(td.camera.getCamera(), rendererDOM, pilot.cutIn, tdSprite.sprite);
+        }
+      });
   });
 
   hud.armdozers.forEach(hudArmdozer => {
@@ -58,7 +69,7 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
  * @param rendererDOM レンダリング対象のHTML要素
  * @param gauge ゲージ
  */
-function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
+function trackingPlayerGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
   const tdCoordinate = {
     x: ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -75,7 +86,7 @@ function trackingPlayerGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, g
  * @param rendererDOM レンダリング対象のHTML要素
  * @param gauge ゲージ
  */
-function trackingEnemyGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
+function trackingEnemyGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
   const tdCoordinate = {
     x: -ARMDOZER_EFFECT_STANDARD_X,
     y: ARMDOZER_EFFECT_STANDARD_Y + 200,
@@ -93,7 +104,7 @@ function trackingEnemyGauge(tdCamera: THREE.Camera, rendererDOM: HTMLElement, ga
  * @param cutIn カットイン
  * @param sprite スプライト
  */
-function trackingCutIn(tdCamera: THREE.Camera, rendererDOM: HTMLElement, cutIn: HUDTracking, sprite: ArmDozerSprite): void {
+function trackingCutIn(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, cutIn: HUDTracking, sprite: ArmDozerSprite): void {
   const target =sprite.getObject3D();
   const tdPosition = {
     x: target.position.x,

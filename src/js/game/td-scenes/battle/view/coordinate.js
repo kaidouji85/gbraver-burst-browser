@@ -17,7 +17,7 @@ export type Coordinate = {
  * @param rendererDOM レンダリング対象のHTML要素
  * @return 変換結果
  */
-export function toHUDCoordinate(tdCoordinate: Coordinate, camera: THREE.PerspectiveCamera, rendererDOM: HTMLElement): Coordinate {
+export function toHUDCoordinate(tdCoordinate: Coordinate, camera: typeof THREE.PerspectiveCamera, rendererDOM: HTMLElement): Coordinate {
   const origin = new THREE.Vector3(tdCoordinate.x, tdCoordinate.y, tdCoordinate.z);
   origin.project(camera);
   return {

@@ -1,6 +1,7 @@
 // @flow
 
 import type {Player} from "gbraver-burst-core";
+import {ArmDozerIdList} from "gbraver-burst-core";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
@@ -10,7 +11,6 @@ import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-
 import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 import {TDArmdozerSprite} from "./armdozer-sprite";
 import {EnemyWingDozer, PlayerWingDozer} from "../../../../../../game-object/armdozer/wing-dozer";
-import {ArmDozerIdList} from "gbraver-burst-core";
 
 /**
  * プレイヤースプライを生成する

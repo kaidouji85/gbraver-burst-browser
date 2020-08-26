@@ -18,7 +18,7 @@ import {tweenTime} from "./tween-time";
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function tween<T>(model: T, create: (t: TWEEN.Tween) => TWEEN.Tween, group: ?TWEEN.Group): Animate {
+export function tween<T>(model: T, create: (t: typeof TWEEN.Tween) => (typeof TWEEN.Tween), group: ?(typeof TWEEN.Group)): Animate {
   const origin = new TWEEN.Tween(model, group);
   const t = create(origin);
   return new Animate(t, t, tweenTime(origin));

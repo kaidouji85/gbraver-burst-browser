@@ -24,7 +24,7 @@ export default class ShoppingStreet implements Stage {
    *
    * @return 配列にまとめた結果
    */
-  getThreeJsObjects(): THREE.Object3D[] {
+  getThreeJsObjects(): typeof THREE.Object3D[] {
     return [
       this._city.getObject3D(),
     ];

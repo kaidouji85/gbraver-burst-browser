@@ -18,7 +18,7 @@ import {getViewPortHeight, getViewPortWidth} from "../../../view-port/view-port-
 /** 戦闘シーン3Dレイヤー用カメラ */
 export class TDCamera {
   _model: Battle3DCameraModel;
-  _camera: THREE.PerspectiveCamera;
+  _camera: typeof THREE.PerspectiveCamera;
   _subscriptions: Subscription[];
 
   constructor(update: Observable<Update>, resize: Observable<Resize>) {
@@ -67,7 +67,7 @@ export class TDCamera {
   }
 
   /** カメラを取得する */
-  getCamera(): THREE.Camera {
+  getCamera(): typeof THREE.Camera {
     return this._camera;
   }
 

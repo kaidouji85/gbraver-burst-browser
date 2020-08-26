@@ -9,6 +9,6 @@ import {getScreenPosition} from "../screen-position";
  * @param event マウスイベント
  * @param rendererDOM レンダラがバインドされているHTML要素
  */
-export function getMousePosition(event: MouseEvent, rendererDOM: HTMLElement): THREE.Vector2 {
+export function getMousePosition(event: MouseEvent, rendererDOM: HTMLElement): typeof THREE.Vector2 {
   return getScreenPosition(event.clientX, event.clientY, rendererDOM.clientWidth, rendererDOM.clientHeight);
 }

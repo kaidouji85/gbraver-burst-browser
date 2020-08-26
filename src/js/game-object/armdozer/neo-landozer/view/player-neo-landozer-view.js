@@ -20,7 +20,7 @@ import {neoLandozerFrontStep} from "../mesh/front-step";
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _stand: ArmdozerAnimation;
   _knockBack: ArmdozerAnimation;
   _guard: ArmdozerAnimation;
@@ -73,12 +73,12 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   }
 
   /** カメラの真正面を向く */
-  lookAt(camera: THREE.Camera): void {
+  lookAt(camera: typeof THREE.Camera): void {
     this._group.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 
@@ -87,7 +87,7 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
    *
    * @param object 追加するオブジェクト
    */
-  addObject3D(object: THREE.Object3D): void {
+  addObject3D(object: typeof THREE.Object3D): void {
     this._group.add(object);
   }
 

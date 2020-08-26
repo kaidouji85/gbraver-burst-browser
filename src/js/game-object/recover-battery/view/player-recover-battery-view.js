@@ -21,7 +21,7 @@ export const GROUP_PADDING = 30;
 
 /** プレイヤーのバッテリー回復*/
 export class PlayerRecoverBatteryView implements RecoverBatteryView {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _signMesh: HorizontalAnimationMesh;
   _numberMesh: HorizontalAnimationMesh;
 
@@ -29,7 +29,9 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
     this._group = new THREE.Group();
 
     const batteryNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER);
-    const batteryNumber: THREE.Texture = batteryNumberResource ? batteryNumberResource.texture : new THREE.Texture();
+    const batteryNumber = batteryNumberResource
+      ? batteryNumberResource.texture
+      : new THREE.Texture();
 
     this._signMesh = new HorizontalAnimationMesh({
       texture: batteryNumber,
@@ -83,12 +85,12 @@ export class PlayerRecoverBatteryView implements RecoverBatteryView {
    *
    * @param camera カメラ
    */
-  lookAt(camera: THREE.Camera): void {
+  lookAt(camera: typeof THREE.Camera): void {
     this._group.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 }

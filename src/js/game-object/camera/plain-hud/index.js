@@ -12,7 +12,7 @@ import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
  * 本カメラは一切視点変更を行わないカメラである
  */
 export class PlainHUDCamera {
-  _camera: THREE.OrthographicCamera;
+  _camera: typeof THREE.OrthographicCamera;
   _subscription: Subscription;
 
   constructor(resize: Observable<Resize>) {
@@ -30,7 +30,7 @@ export class PlainHUDCamera {
   }
 
   /** カメラを取得する */
-  getCamera(): THREE.Camera {
+  getCamera(): typeof THREE.Camera {
     return this._camera;
   }
 

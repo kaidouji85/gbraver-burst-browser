@@ -24,7 +24,7 @@ export const MAX_VALUE = 5;
 
 /** バッテリーメーター */
 export class BatteryMeter {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _disk: SimpleImageMesh;
   _needle: CanvasMesh;
   _numbers: CanvasMesh[];
@@ -114,7 +114,7 @@ export class BatteryMeter {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 }

@@ -1,4 +1,4 @@
-// flow
+// @flow
 
 import type {ResourceRoot} from "./root/resource-root";
 import {Howl} from 'howler';
@@ -20,7 +20,7 @@ export type SoundConfig = {
  */
 export type SoundResource = {
   id: SoundId,
-  sound: Howl,
+  sound: typeof Howl,
 }
 
 /**

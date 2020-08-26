@@ -37,7 +37,7 @@ export class TDGameObjectStub {
 
   _renderer: Renderer;
   _camera: TDCamera;
-  _scene: THREE.Scene;
+  _scene: typeof THREE.Scene;
 
   _overlap: Observable<OverlapAction>;
   _gameObjectAction: Observable<GameObjectAction>;

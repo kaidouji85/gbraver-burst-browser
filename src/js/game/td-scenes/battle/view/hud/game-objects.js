@@ -3,7 +3,7 @@
 import {BatterySelector} from "../../../../../game-object/battery-selector";
 import {BurstButton} from "../../../../../game-object/burst-button/burst-button";
 import type {Resources} from "../../../../../resource";
-import {Observable} from "rxjs/index";
+import {Observable, Subscription} from "rxjs/index";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {BattleSceneAction} from "../../../../../action/battle-scene";
 import type {Player} from "gbraver-burst-core";
@@ -11,6 +11,7 @@ import * as THREE from "three";
 import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
+import {PilotButton} from "../../../../../game-object/pilot-button";
 
 /** イベント通知 */
 type Notifier = {
@@ -23,9 +24,11 @@ type Notifier = {
 export class HUDGameObjects {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
+  pilotButton: PilotButton;
   frontmostFader: Fader;
   rearmostFader: Fader;
   _battleSceneAction: Subject<BattleSceneAction>;
+  _subscriptions: typeof Subscription[];
 
   constructor(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player) {
     this._battleSceneAction = new Subject();
@@ -56,6 +59,8 @@ export class HUDGameObjects {
         });
       }
     });
+    this.pilotButton = new PilotButton(resources, listener);
+
     this.frontmostFader = frontmostFader({
       listener: listener,
       isVisible: false,
@@ -64,6 +69,12 @@ export class HUDGameObjects {
       listener: listener,
       isVisible: false,
     });
+
+    this._subscriptions = [
+      this.pilotButton.notifier().pushButton.subscribe(action => {
+        this._battleSceneAction.next({type: 'doPilotSkill'});
+      })
+    ];
   }
 
   /**
@@ -72,8 +83,12 @@ export class HUDGameObjects {
   destructor(): void {
     this.batterySelector.destructor();
     this.burstButton.destructor();
+    this.pilotButton.destructor();
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -81,10 +96,11 @@ export class HUDGameObjects {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D {
+  getObject3Ds(): typeof THREE.Object3D {
     return [
       this.batterySelector.getObject3D(),
       this.burstButton.getObject3D(),
+      this.pilotButton.getObject3D(),
       this.rearmostFader.getObject3D(),
       this.frontmostFader.getObject3D(),
     ];

@@ -20,7 +20,7 @@ export type CubeTextureConfig = {
 /** キューブテクスチャリソース */
 export type CubeTextureResource = {
   id: CuteTextureId,
-  texture: THREE.CubeTexture,
+  texture: typeof THREE.CubeTexture,
 };
 
 /** キューブテクスチャIDをまとめたもの */
@@ -60,7 +60,7 @@ export function loadCubeTexture(resourceRoot: ResourceRoot, config: CubeTextureC
         `${resourceRoot.get()}/${config.pz}`,
         `${resourceRoot.get()}/${config.nz}`,
       ],
-      (texture: THREE.CubeTexture) => {
+      (texture: typeof THREE.CubeTexture) => {
         resolve({
           id: config.id,
           texture: texture

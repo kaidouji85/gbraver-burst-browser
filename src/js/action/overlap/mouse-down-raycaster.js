@@ -16,7 +16,7 @@ export type MouseDownRaycaster = {
  * @param origin 変換元
  * @return 変換結果
  */
-export function toMouseDownRaycaster(origin: MouseDown, renderer: THREE.WebGLRenderer, camera: THREE.Camera): MouseDownRaycaster {
+export function toMouseDownRaycaster(origin: MouseDown, renderer: typeof THREE.WebGLRenderer, camera: typeof THREE.Camera): MouseDownRaycaster {
   const mouseRaycaster: MouseRaycaster = createMouseRaycaster(origin.event, renderer, camera);
   return {
     type: 'mouseDownRaycaster',

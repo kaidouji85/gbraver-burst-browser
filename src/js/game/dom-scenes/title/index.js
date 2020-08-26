@@ -7,7 +7,7 @@ import type {PushGameStart, PushHowToPlay} from "../../../action/game/title";
 import {TitleView} from "./view/title-view";
 import type {DOMScene} from "../dom-scene";
 import type {Resources} from "../../../resource";
-import {How} from 'howler';
+import {Howl} from 'howler';
 import {SOUND_IDS} from "../../../resource/sound";
 
 /** イベント通知 */
@@ -20,7 +20,7 @@ export type Notifier = {
 export class Title implements DOMScene {
   _state: TitleState;
   _view: TitleView;
-  _pushButton: How;
+  _pushButton: typeof Howl;
   _pushGameStart: Subject<PushGameStart>;
   _pushHowToPlay: Subject<PushHowToPlay>;
   _subscriptions: Subscription[];
@@ -37,7 +37,7 @@ export class Title implements DOMScene {
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButton = pushButtonResource
       ? pushButtonResource.sound
-      : new How();
+      : new Howl();
 
     this._pushGameStart = new Subject();
     this._pushHowToPlay = new Subject();

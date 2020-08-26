@@ -43,7 +43,7 @@ export class ShinBraverCutIn implements HUDTracking {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 

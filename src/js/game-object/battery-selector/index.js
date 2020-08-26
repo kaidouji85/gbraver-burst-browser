@@ -36,9 +36,9 @@ type Param = {
 export class BatterySelector {
   _model: BatterySelectorModel;
   _view: BatterySelectorView;
-  _pushButtonSound: Howl;
-  _batteryChangeSound: Howl;
-  _batteryChangeTween: TWEEN.Group;
+  _pushButtonSound: typeof Howl;
+  _batteryChangeSound: typeof Howl;
+  _batteryChangeTween: typeof TWEEN.Group;
   _subscription: Subscription;
 
   constructor(param: Param) {
@@ -135,7 +135,7 @@ export class BatterySelector {
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
   }
 

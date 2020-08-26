@@ -8,7 +8,7 @@ import {SOUND_IDS} from "../../../../resource/sound";
  * 電撃バリア 音
  */
 export class LightningBarrierSounds {
-  lightningBarrier: Howl;
+  lightningBarrier: typeof Howl;
 
   /**
    * コンストラクタ

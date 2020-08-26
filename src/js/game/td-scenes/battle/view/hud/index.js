@@ -17,6 +17,8 @@ import type {HUDArmdozerObjects} from "./armdozer-objects";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
+import type {HUDPilotObjects} from "./pilot-objects";
+import {enemyHUDPilotObjects, playerHUDPilotObjects} from "./pilot-objects";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -41,10 +43,11 @@ type Notifier = {
  * HUDレイヤーで使用するオブジェクトを全て集めたもの
  */
 export class HudLayer {
-  scene: THREE.Scene;
+  scene: typeof THREE.Scene;
   camera: PlainHUDCamera;
   players: HUDPlayer[];
   armdozers: HUDArmdozerObjects[];
+  pilots: HUDPilotObjects[];
   gameObjects: HUDGameObjects;
   _overlap: Observable<OverlapAction>;
   _gameObjectAction: Observable<GameObjectAction>;
@@ -81,7 +84,17 @@ export class HudLayer {
     this.armdozers.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
-        this.scene.add(v)
+        this.scene.add(v);
+      });
+
+    this.pilots = param.players.map(v => v.playerId === param.playerId
+      ? playerHUDPilotObjects(param.resources, this._gameObjectAction, v)
+      : enemyHUDPilotObjects(param.resources, this._gameObjectAction, v)
+    );
+    this.pilots.map(v => v.getObject3Ds())
+      .flat()
+      .forEach(v => {
+        this.scene.add(v);
       });
   }
 
@@ -98,12 +111,20 @@ export class HudLayer {
       });
       armdozer.destructor();
     });
+
     this.players.forEach(player => {
       player.getObject3Ds().forEach(object => {
         this.scene.remove(object);
       });
       player.destructor();
     });
+
+    this.pilots.forEach(pilot => {
+      pilot.getObject3Ds().forEach(object => {
+        this.scene.remove(object);
+      });
+      pilot.destructor();
+    })
 
     this.camera.destructor();
     this.scene.dispose();

@@ -37,7 +37,7 @@ export class HUDGameObjectStub {
 
   _renderer: Renderer;
   _camera: PlainHUDCamera;
-  _scene: THREE.Scene;
+  _scene: typeof THREE.Scene;
 
   _overlap: Observable<OverlapAction>;
   _gameObjectAction: Observable<GameObjectAction>;

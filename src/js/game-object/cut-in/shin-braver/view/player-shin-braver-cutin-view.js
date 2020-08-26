@@ -20,7 +20,7 @@ export const BASE_PADDING_TOP = 100;
  * プレイヤー側 シンブレイバーカットインのビュー
  */
 export class PlayerShinBraverCutInView implements ShinBraverCutInView {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _cutInUp: HorizontalAnimationMesh;
   _cutInDown: HorizontalAnimationMesh;
 
@@ -98,7 +98,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 

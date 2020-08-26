@@ -52,7 +52,7 @@ export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDFiel
    *
    * @return アームドーザスプライト配下に置かれるオブジェクト
    */
-  getUnderSprite(): THREE.Object3D[] {
+  getUnderSprite(): typeof THREE.Object3D[] {
     return [
       this.lightningBarrier.getObject3D()
     ];

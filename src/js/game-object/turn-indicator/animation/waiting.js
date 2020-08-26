@@ -14,7 +14,7 @@ import {process} from '../../../animation/process';
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function waiting(model: TurnIndicatorModel, group: TWEEN.Group): Animate {
+export function waiting(model: TurnIndicatorModel, group: typeof TWEEN.Group): Animate {
   return process(() => {
     model.animation = 0;
   },group

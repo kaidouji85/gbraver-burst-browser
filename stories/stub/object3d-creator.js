@@ -12,4 +12,4 @@ import * as THREE from "three";
  * @param listener ゲームオブジェクトイベントリスナ
  * @return　シーンに追加するObject3D
  */
-export type Object3dCreator = (resources: Resources, listener: Observable<GameObjectAction>) => THREE.Object3D[];
+export type Object3dCreator = (resources: Resources, listener: Observable<GameObjectAction>) => typeof THREE.Object3D[];

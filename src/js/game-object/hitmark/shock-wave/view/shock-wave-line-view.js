@@ -16,8 +16,8 @@ export const HEIGHT = 100;
  * プレイヤーの衝撃波ビュー
  */
 export class ShockWaveLineView {
-  _mesh: THREE.Mesh;
-  _group: THREE.Group;
+  _mesh: typeof THREE.Mesh;
+  _group: typeof THREE.Group;
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -71,7 +71,7 @@ export class ShockWaveLineView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D() {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 }

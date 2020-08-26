@@ -13,7 +13,7 @@ import {process} from "../../../../animation/process";
  * @param group Tweenグループ
  * @return アニメーション
  */
-export function electrification(model: LightningBarrierModel, group: TWEEN.Group): Animate {
+export function electrification(model: LightningBarrierModel, group: typeof TWEEN.Group): Animate {
   return process(() => {
     model.animation.frame = 0;
   }, group).chain(

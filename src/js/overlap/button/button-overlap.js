@@ -9,14 +9,14 @@ import {isMeshOverlap} from "../mesh";
 
 /** パラメータ */
 type Param = {
-  geometry: THREE.Geometry,
+  geometry: typeof THREE.Geometry,
   listener: Observable<GameObjectAction>,
   onButtonPush: () => void
 };
 
 /** ボタン押下判定オブジェクト */
 export class ButtonOverlap {
-  _mesh: THREE.Mesh;
+  _mesh: typeof THREE.Mesh;
   _onButtonPush: () => void;
   _subscription: Subscription;
 
@@ -60,7 +60,7 @@ export class ButtonOverlap {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._mesh;
   }
 

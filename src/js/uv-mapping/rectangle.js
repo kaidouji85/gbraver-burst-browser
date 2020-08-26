@@ -13,9 +13,9 @@ import * as THREE from 'three';
  */
 export function rectangle(param: {
   // 平面オブジェクト
-  geo: THREE.PlaneGeometry,
+  geo: typeof THREE.PlaneGeometry,
   // 基準点
-  pos: THREE.Vector2,
+  pos: typeof THREE.Vector2,
   // 幅
   width: number,
   // 高さ

@@ -44,7 +44,7 @@ export class TDGameObjects {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds(): THREE.Object3D[] {
+  getObject3Ds(): typeof THREE.Object3D[] {
     return [
       ...this.stage.getThreeJsObjects(),
       this.turnIndicator.getObject3D(),

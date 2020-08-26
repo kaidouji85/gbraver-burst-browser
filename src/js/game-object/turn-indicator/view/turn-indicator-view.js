@@ -56,12 +56,12 @@ export class TurnIndicatorView {
   }
 
   /** カメラの方向を向く */
-  lookAt(camera: THREE.Camera): void {
+  lookAt(camera: typeof THREE.Camera): void {
     this._canvasMesh.mesh.quaternion.copy(camera.quaternion);
   }
 
   /** ビューで使うthree.jsを返す */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._canvasMesh.getObject3D();
   }
 }

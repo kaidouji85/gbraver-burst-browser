@@ -9,14 +9,14 @@ export interface ArmDozerSprite {
   destructor(): void;
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D;
+  getObject3D(): typeof THREE.Object3D;
 
   /**
    * スプライト配下のオブジェクトを追加する
    *
    * @param object オブジェクト
    */
-  addObject3D(object: THREE.Object3D): void;
+  addObject3D(object: typeof THREE.Object3D): void;
 
   /** ターンスタート */
   turnStart(): Animate;
