@@ -73,7 +73,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.BATTERY_RECOVER,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-recover.mp3`,
-    volume: 1
+    volume: 0.3
   },
 ];
 
