@@ -11,6 +11,8 @@ import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
+import {ShinyaSounds} from "./sounds/shinya-sounds";
+import type {Resources} from "../../../resource";
 
 /**
  * シンヤ カットイン
@@ -18,17 +20,20 @@ import type {HUDTracking} from "../../../tracking/hud-tracking";
 export class ShinyaCutIn implements HUDTracking {
   _model: ShinyaModel;
   _view: ShinyaView;
+  _sounds: ShinyaSounds;
   _subscription: Subscription;
 
   /**
    * コンストラクタ
    *
    * @param view ビュー
+   * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: ShinyaView, listener: Observable<GameObjectAction>) {
+  constructor(view: ShinyaView, resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
+    this._sounds = new ShinyaSounds(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
@@ -61,7 +66,7 @@ export class ShinyaCutIn implements HUDTracking {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this._model);
+    return show(this._model, this._sounds);
   }
 
   /**

@@ -16,7 +16,7 @@ import type {GameObjectAction} from "../../../action/game-object-action";
  */
 export function playerShinyaCutIn(resources: Resources, listener: Observable<GameObjectAction>): ShinyaCutIn {
   const view = new PlayerShinyaView(resources);
-  return new ShinyaCutIn(view, listener);
+  return new ShinyaCutIn(view, resources, listener);
 }
 
 /**
@@ -28,5 +28,5 @@ export function playerShinyaCutIn(resources: Resources, listener: Observable<Gam
  */
 export function enemyShinyaCutIn(resources: Resources, listener: Observable<GameObjectAction>): ShinyaCutIn {
   const view = new EnemyShinyaView(resources);
-  return new ShinyaCutIn(view, listener);
+  return new ShinyaCutIn(view, resources, listener);
 }
