@@ -33,6 +33,7 @@ export const SOUND_IDS = {
   MOTOR: 'MOTOR',
   LIGHTNING_ATTACK: 'LIGHTNING',
   LIGHTNING_BARRIER: 'SRTART_LIGHTNING_BARRIER',
+  BATTERY_RECOVER: 'BATTERY_RECOVER',
 };
 
 /**
@@ -69,6 +70,11 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-barrier.mp3`,
     volume: 0.3
   },
+  {
+    id: SOUND_IDS.BATTERY_RECOVER,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/battery-recover.mp3`,
+    volume: 0.3
+  },
 ];
 
 /**
@@ -76,6 +82,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
  *
  * @param resourceRoot リソースルート
  * @param config 音設定
+ * @return 読み込み結果
  */
 export function loadSound(resourceRoot: ResourceRoot, config: SoundConfig): Promise<SoundResource> {
   return new Promise((resolve, reject) => {
