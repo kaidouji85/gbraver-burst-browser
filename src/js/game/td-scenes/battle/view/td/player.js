@@ -16,10 +16,11 @@ import {enemyShockWave, playerShockWave} from "../../../../../game-object/hitmar
 import {Lightning} from "../../../../../game-object/hitmark/lightning/lightning";
 import {enemyLightning, playerLightning} from "../../../../../game-object/hitmark/lightning";
 import {PopUp} from "../../../../../game-object/pop-up/pop-up/pop-up";
-import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/pop-up/turn-start";
+import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/pop-up/power-up";
 import {enemyReflect, playerReflect} from "../../../../../game-object/pop-up/reflect";
 import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/pop-up/continuous-attack";
+import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -38,7 +39,7 @@ export interface TDPlayerField {
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
-  turnStart: PopUp;
+  turnStart: TurnStart;
 }
 
 /**
@@ -75,7 +76,7 @@ export class TDPlayerImpl implements TDPlayer {
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
-  turnStart: PopUp;
+  turnStart: TurnStart;
 
   constructor(param: TDPlayerField) {
     this.playerId = param.playerId;
