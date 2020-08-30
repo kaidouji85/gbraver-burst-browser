@@ -29,8 +29,11 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
       .chain(delay(500))
       .chain(activeTDPlayer.turnStart.popUp()),
     activeTDSprite.sprite.turnStart()
-  ).chain(all(
-    activeTDSprite.sprite.turnStartToStand(),
-    toInitial(view.td.camera, 500)
-  )).chain(delay(500))
+  )
+    .chain(delay(500))
+    .chain(all(
+      activeTDSprite.sprite.turnStartToStand(),
+      toInitial(view.td.camera, 500)
+  ))
+    .chain(delay(500))
 }
