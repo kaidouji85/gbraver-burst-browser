@@ -35,6 +35,7 @@ export const SOUND_IDS = {
   LIGHTNING_BARRIER: 'SRTART_LIGHTNING_BARRIER',
   BATTERY_RECOVER: 'BATTERY_RECOVER',
   PILOT_SKILL: 'PILOT_SKILL',
+  TURN_START: 'TURN_START',
 };
 
 /**
@@ -79,6 +80,11 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.PILOT_SKILL,
     path: resourceRoot => `${resourceRoot.get()}/sounds/pilot-skill.mp3`,
+    volume: 1
+  },
+  {
+    id: SOUND_IDS.TURN_START,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/turn-start.mp3`,
     volume: 1
   },
 ];
