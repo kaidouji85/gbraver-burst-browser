@@ -10,6 +10,8 @@ import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
+import {TurnStartSounds} from "./sounds/turn-start-sounds";
+import type {Resources} from "../../resource";
 
 /**
  * ターンスタート
@@ -17,11 +19,20 @@ import {popUp} from "./animation/pop-up";
 export class TurnStart {
   _model: TurnStartModel;
   _view: TurnStartView;
+  _sounds: TurnStartSounds;
   _subscription: Subscription;
 
-  constructor(view: TurnStartView, listener: Observable<GameObjectAction>) {
+  /**
+   * コンストラクタ
+   *
+   * @param view ビュー
+   * @param resources リソース管理オブジェクト
+   * @param listener イベントリスナ
+   */
+  constructor(view: TurnStartView, resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
+    this._sounds = new TurnStartSounds(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);
@@ -43,7 +54,7 @@ export class TurnStart {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this._model);
+    return popUp(this._model, this._sounds);
   }
 
   /**

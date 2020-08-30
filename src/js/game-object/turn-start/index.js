@@ -16,7 +16,7 @@ import {TurnStart} from "./turn-start";
  */
 export function playerTurnStart(resources: Resources, listener: Observable<GameObjectAction>): TurnStart {
   const view = new PlayerTurnStartView(resources);
-  return new TurnStart(view, listener);
+  return new TurnStart(view, resources, listener);
 }
 
 /**
@@ -28,5 +28,5 @@ export function playerTurnStart(resources: Resources, listener: Observable<GameO
  */
 export function enemyTurnStart(resources: Resources, listener: Observable<GameObjectAction>): TurnStart {
   const view = new EnemyTurnStartView(resources);
-  return new TurnStart(view, listener);
+  return new TurnStart(view, resources, listener);
 }
