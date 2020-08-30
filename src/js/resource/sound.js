@@ -85,7 +85,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.TURN_START,
     path: resourceRoot => `${resourceRoot.get()}/sounds/turn-start.mp3`,
-    volume: 1
+    volume: 0.3
   },
 ];
 
