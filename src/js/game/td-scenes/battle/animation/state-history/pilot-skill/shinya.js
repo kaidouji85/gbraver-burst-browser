@@ -70,7 +70,7 @@ function shinyaRecoverBattery(param: ShinyaAnimationParamX<RecoverBatterySkill>)
       param.pilot.cutIn.hidden(),
       param.hudObjects.rearmostFader.opacity(0, 300))
     )
-    .chain(delay(1000))
+    .chain(delay(500))
     .chain(all(
       param.invokerHUD.gauge.battery(param.invokerState.armdozer.battery),
       param.invokerTD.recoverBattery.popUp(param.skill.recoverBattery)
