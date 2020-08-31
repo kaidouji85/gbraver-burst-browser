@@ -8,7 +8,7 @@ import {SOUND_IDS} from "../../../../resource/sound";
  * シンヤ カットイン 効果音
  */
 export class ShinyaSounds {
-  pilotSkill: typeof Howl;
+  benefitEffect: typeof Howl;
 
   /**
    * コンストラクタ
@@ -16,8 +16,8 @@ export class ShinyaSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this.pilotSkill = resources.sounds
-      .find(v => v.id === SOUND_IDS.PILOT_SKILL)
+    this.benefitEffect = resources.sounds
+      .find(v => v.id === SOUND_IDS.BENEFIT_EFFECT)
       ?.sound ?? new Howl();
   }
 }

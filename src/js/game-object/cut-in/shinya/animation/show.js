@@ -20,6 +20,6 @@ export function show(model: ShinyaModel, sounds: ShinyaSounds): Animate {
   })
     .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 500)))
     .chain(process(() => {
-      sounds.pilotSkill.play();
+      sounds.benefitEffect.play();
     }));
 }

@@ -34,7 +34,6 @@ export const SOUND_IDS = {
   LIGHTNING_ATTACK: 'LIGHTNING',
   LIGHTNING_BARRIER: 'SRTART_LIGHTNING_BARRIER',
   BATTERY_RECOVER: 'BATTERY_RECOVER',
-  PILOT_SKILL: 'PILOT_SKILL',
   BENEFIT_EFFECT: 'BENEFIT_EFFECT',
 };
 
@@ -76,11 +75,6 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     id: SOUND_IDS.BATTERY_RECOVER,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-recover.mp3`,
     volume: 0.3
-  },
-  {
-    id: SOUND_IDS.PILOT_SKILL,
-    path: resourceRoot => `${resourceRoot.get()}/sounds/pilot-skill.mp3`,
-    volume: 1
   },
   {
     id: SOUND_IDS.BENEFIT_EFFECT,
