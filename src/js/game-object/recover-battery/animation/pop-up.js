@@ -17,7 +17,7 @@ import {process} from '../../../animation/process';
  */
 export function popUp(model: RecoverBatteryModel, sounds: RecoverBatterySounds, value: number): Animate {
   return process(() => {
-    model.scale = 1.2;
+    model.scale = 1.1;
     model.value = value;
     model.opacity = 0;
   })

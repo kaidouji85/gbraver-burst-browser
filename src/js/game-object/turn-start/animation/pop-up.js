@@ -17,7 +17,7 @@ import {process} from '../../../animation/process';
 export function popUp(model: TurnStartModel, sounds: TurnStartSounds): Animate {
   return process(() => {
     model.opacity = 0;
-    model.scale = 1.2;
+    model.scale = 1.1;
   })
     .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 300)))
     .chain(process(() => {
