@@ -16,11 +16,13 @@ import {process} from '../../../animation/process';
  */
 export function popUp(model: TurnStartModel, sounds: TurnStartSounds): Animate {
   return process(() => {
-    sounds.turnStart.play();
     model.opacity = 0;
-    model.scale = 2;
+    model.scale = 1.5;
   })
     .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 300)))
-    .chain(delay(1500))
+    .chain(process(() => {
+      sounds.turnStart.play();
+    }))
+    .chain(delay(1000))
     .chain(tween(model, t => t.to({opacity: 0, scale: 1.3}, 300)));
 }
