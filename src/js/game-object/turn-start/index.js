@@ -1,11 +1,11 @@
 // @flow
 
-import {PopUp} from "../pop-up/pop-up";
-import type {Resources} from "../../../resource";
+import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
+import type {GameObjectAction} from "../../action/game-object-action";
 import {PlayerTurnStartView} from "./view/player-turn-start-view";
 import {EnemyTurnStartView} from "./view/enemy-turn-start-view";
+import {TurnStart} from "./turn-start";
 
 /**
  * プレイヤーターン スタート
@@ -14,9 +14,9 @@ import {EnemyTurnStartView} from "./view/enemy-turn-start-view";
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function playerTurnStart(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
+export function playerTurnStart(resources: Resources, listener: Observable<GameObjectAction>): TurnStart {
   const view = new PlayerTurnStartView(resources);
-  return new PopUp(view, listener);
+  return new TurnStart(view, resources, listener);
 }
 
 /**
@@ -26,7 +26,7 @@ export function playerTurnStart(resources: Resources, listener: Observable<GameO
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function enemyTurnStart(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
+export function enemyTurnStart(resources: Resources, listener: Observable<GameObjectAction>): TurnStart {
   const view = new EnemyTurnStartView(resources);
-  return new PopUp(view, listener);
+  return new TurnStart(view, resources, listener);
 }
