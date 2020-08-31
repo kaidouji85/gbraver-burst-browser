@@ -35,7 +35,7 @@ export const SOUND_IDS = {
   LIGHTNING_BARRIER: 'SRTART_LIGHTNING_BARRIER',
   BATTERY_RECOVER: 'BATTERY_RECOVER',
   PILOT_SKILL: 'PILOT_SKILL',
-  TURN_START: 'TURN_START',
+  BENEFIT_EFFECT: 'BENEFIT_EFFECT',
 };
 
 /**
@@ -83,8 +83,8 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     volume: 1
   },
   {
-    id: SOUND_IDS.TURN_START,
-    path: resourceRoot => `${resourceRoot.get()}/sounds/turn-start.mp3`,
+    id: SOUND_IDS.BENEFIT_EFFECT,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/benefit-effect.mp3`,
     volume: 0.3
   },
 ];

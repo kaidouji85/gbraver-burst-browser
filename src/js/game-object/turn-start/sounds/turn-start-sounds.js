@@ -8,7 +8,7 @@ import {SOUND_IDS} from "../../../resource/sound";
  * ターンスタート 効果音
  */
 export class TurnStartSounds {
-  turnStart: typeof Howl;
+  benefitEffect: typeof Howl;
 
   /**
    * コンストラクタ
@@ -16,8 +16,8 @@ export class TurnStartSounds {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this.turnStart = resources.sounds
-      .find(v => v.id === SOUND_IDS.TURN_START)
+    this.benefitEffect = resources.sounds
+      .find(v => v.id === SOUND_IDS.BENEFIT_EFFECT)
       ?.sound ?? new Howl();
   }
 }
