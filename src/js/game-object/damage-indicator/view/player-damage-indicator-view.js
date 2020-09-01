@@ -70,6 +70,8 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
     this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
     this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
+
+    this._group.scale.set(model.scale, model.scale, model.scale);
   }
 
   /** カメラの方向を向く */
