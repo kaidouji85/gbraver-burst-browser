@@ -39,16 +39,16 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
   }
 
   const isAttacker = effect.attacker === sceneState.playerId;
-  return all(
-    view.td.gameObjects.turnIndicator.turnChange(isAttacker),
-    attackerHUD.gauge.battery(attacker.armdozer.battery),
-    attackerTD.batteryNumber.show(effect.attackerBattery),
-    defenderHUD.gauge.battery(defender.armdozer.battery),
-    defenderTD.batteryNumber.show(effect.defenderBattery),
-  )
-    .chain(process(() => {
-      sounds.benefitEffect.play();
-    }))
+  return process(() => {
+    sounds.benefitEffect.play();
+  })
+    .chain(all(
+      view.td.gameObjects.turnIndicator.turnChange(isAttacker),
+      attackerHUD.gauge.battery(attacker.armdozer.battery),
+      attackerTD.batteryNumber.show(effect.attackerBattery),
+      defenderHUD.gauge.battery(defender.armdozer.battery),
+      defenderTD.batteryNumber.show(effect.defenderBattery),
+    ))
     .chain(delay(1000))
     .chain(all(
       attackerTD.batteryNumber.hidden(),
