@@ -16,7 +16,7 @@ import {EnemyReflectView} from "./view/enemy-reflect-view";
  */
 export function playerReflect(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
   const view = new PlayerReflectView(resources);
-  return new PopUp(view, listener);
+  return new PopUp(view, resources, listener);
 }
 
 /**
@@ -28,5 +28,5 @@ export function playerReflect(resources: Resources, listener: Observable<GameObj
  */
 export function enemyReflect(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
   const view = new EnemyReflectView(resources);
-  return new PopUp(view, listener);
+  return new PopUp(view, resources, listener);
 }

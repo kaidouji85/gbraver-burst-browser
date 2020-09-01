@@ -10,6 +10,8 @@ import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {popUp} from "./animation/pop-up";
+import {PopUpSounds} from "./sounds/pop-up-sounds";
+import type {Resources} from "../../../resource";
 
 /**
  * ポップアップ
@@ -17,9 +19,17 @@ import {popUp} from "./animation/pop-up";
 export class PopUp {
   _model: PopUpModel;
   _view: PopUpView;
+  _sounds: PopUpSounds;
   _subscription: Subscription;
 
-  constructor(view: PopUpView, listener: Observable<GameObjectAction>) {
+  /**
+   * コンストラクタ
+   *
+   * @param view ビュー
+   * @param resources リソース管理オブジェクト
+   * @param listener イベントリスナ
+   */
+  constructor(view: PopUpView, resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._subscription = listener.subscribe(action => {
@@ -43,7 +53,7 @@ export class PopUp {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this._model);
+    return popUp(this._model, this._sounds);
   }
 
   /**

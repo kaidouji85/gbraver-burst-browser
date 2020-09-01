@@ -16,7 +16,7 @@ import {EnemyContinuousAttackView} from "./view/enemy-continuous-attack-view";
  */
 export function playerContinuousAttack(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
   const view = new PlayerContinuousAttackView(resources);
-  return new PopUp(view, listener);
+  return new PopUp(view, resources, listener);
 }
 
 /**
@@ -28,5 +28,5 @@ export function playerContinuousAttack(resources: Resources, listener: Observabl
  */
 export function enemyContinuousAttack(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
   const view = new EnemyContinuousAttackView(resources);
-  return new PopUp(view, listener);
+  return new PopUp(view, resources, listener);
 }
