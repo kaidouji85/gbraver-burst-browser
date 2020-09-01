@@ -19,6 +19,7 @@ import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
 import {all} from "../../../animation/all";
 import type {PilotSkill} from "gbraver-burst-core";
+import {BattleSceneSounds} from "./sounds";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -48,6 +49,7 @@ export class BattleScene implements Scene {
   _endBattle: Subject<EndBattle>;
   _battleProgress: BattleProgress;
   _view: BattleSceneView;
+  _sounds: BattleSceneSounds;
   _subscription: Subscription[];
 
   constructor(param: Param) {
@@ -66,6 +68,7 @@ export class BattleScene implements Scene {
         resize: param.listener.resize,
       }
     });
+    this._sounds = new BattleSceneSounds(param.resources);
 
     this._subscription = [
       this._view.notifier().battleAction.subscribe(action => {
@@ -106,7 +109,7 @@ export class BattleScene implements Scene {
    */
   async start(): Promise<void> {
     try {
-      await stateHistoryAnimation(this._view, this._state, this._initialState.stateHistory).play();
+      await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState.stateHistory).play();
       this._state.canOperation = true;
     } catch(e) {
       throw e;
@@ -224,7 +227,7 @@ export class BattleScene implements Scene {
       let lastState: ?GameState = null;
       for (let i=0; i<100; i++) {
         const updateState = await this._battleProgress.progress(lastCommand);
-        await stateHistoryAnimation(this._view, this._state, updateState).play();
+        await stateHistoryAnimation(this._view, this._sounds, this._state, updateState).play();
 
         if (updateState.length <= 0) {
           return null;

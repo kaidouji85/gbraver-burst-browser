@@ -26,5 +26,5 @@ export function popUp(model: RecoverBatteryModel, sounds: RecoverBatterySounds, 
       sounds.recoverBattery.play();
     }))
     .chain(delay(1000))
-    .chain(tween(model, t => t.to({opacity: 0, scale: 1.1}, 300)));
+    .chain(tween(model, t => t.to({opacity: 0, scale: 1.05}, 300)));
 }

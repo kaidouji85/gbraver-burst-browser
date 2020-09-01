@@ -16,16 +16,18 @@ import {updateRemainingTurnAnimation} from "./update-remaining-turn";
 import {gameEndAnimation} from "./game-end";
 import {rightItselfAnimation} from "./right-itself";
 import {pilotSkillAnimation} from "./pilot-skill";
+import {BattleSceneSounds} from "../../sounds";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
  *
  * @param view 戦闘シーンビュー
+ * @param sounds 戦闘シーン効果音
  * @param sceneState 戦闘シーンの状態
  * @param gameStateList 再生するゲームの状態
  * @return アニメーション
  */
-export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameStateList: GameState[]): Animate {
+export function stateHistoryAnimation(view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState, gameStateList: GameState[]): Animate {
   return gameStateList
     .map(v => {
       switch (v.effect.name) {
@@ -34,7 +36,7 @@ export function stateHistoryAnimation(view: BattleSceneView, sceneState: BattleS
         case 'InputCommand':
           return inputCommandAnimation(view, sceneState, v);
         case 'BatteryDeclaration':
-          return batteryDeclarationAnimation(view, sceneState, v);
+          return batteryDeclarationAnimation(view, sounds, sceneState, v);
         case 'Battle':
           return battleAnimation(view, sceneState, v);
         case 'TurnChange':

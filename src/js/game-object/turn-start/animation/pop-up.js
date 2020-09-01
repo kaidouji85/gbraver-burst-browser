@@ -24,5 +24,5 @@ export function popUp(model: TurnStartModel, sounds: TurnStartSounds): Animate {
       sounds.benefitEffect.play();
     }))
     .chain(delay(1000))
-    .chain(tween(model, t => t.to({opacity: 0, scale: 1.1}, 300)));
+    .chain(tween(model, t => t.to({opacity: 0, scale: 1.05}, 300)));
 }
