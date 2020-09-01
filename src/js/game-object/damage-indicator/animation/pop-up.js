@@ -17,7 +17,7 @@ export function popUp(model: DamageIndicatorModel, damage: number): Animate {
   return process(() => {
     model.opacity = 0;
     model.damage = damage;
-    model.scale = 1.1;
+    model.scale = 1.2;
   })
     .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 300)))
     .chain(delay(1000))

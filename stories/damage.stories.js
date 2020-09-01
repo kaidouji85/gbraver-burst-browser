@@ -1,6 +1,5 @@
 // @flow
 
-import {enemyContinuousAttack, playerContinuousAttack} from "../src/js/game-object/pop-up/continuous-attack";
 import {delay} from "../src/js/animation/delay";
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
 import {enemyDamageIndicator, playerDamageIndicator} from "../src/js/game-object/damage-indicator";

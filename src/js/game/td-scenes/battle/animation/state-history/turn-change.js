@@ -33,17 +33,17 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
   return all(
     activeTDSprite.sprite.turnStart(),
     attentionArmDozer(view.td.camera, activeTDSprite.sprite, 500)
-      .chain(delay(500))
-      .chain(activeTDPlayer.turnStart.popUp())
-      .chain(delay(500))
-      .chain((0 < turnChange.recoverBattery)
-        ? all(
-          activeTDPlayer.recoverBattery.popUp(turnChange.recoverBattery),
-          activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
-        )
-        : empty()
-      )
   )
+    .chain(delay(500))
+    .chain(activeTDPlayer.turnStart.popUp())
+    .chain(delay(500))
+    .chain((0 < turnChange.recoverBattery)
+      ? all(
+        activeTDPlayer.recoverBattery.popUp(turnChange.recoverBattery),
+        activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
+      )
+      : empty()
+    )
     .chain(delay(500))
     .chain(all(
       activeTDSprite.sprite.turnStartToStand(),
