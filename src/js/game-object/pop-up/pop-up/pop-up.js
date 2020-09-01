@@ -32,6 +32,7 @@ export class PopUp {
   constructor(view: PopUpView, resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
+    this._sounds = new PopUpSounds(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);
