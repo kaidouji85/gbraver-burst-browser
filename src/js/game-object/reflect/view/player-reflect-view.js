@@ -1,23 +1,23 @@
 // @flow
 
 import * as THREE from "three";
-import type {PopUpView} from "../../pop-up/pop-up-view";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture";
-import type {PopUpModel} from "../../pop-up/model/pop-up-model";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import type {Resources} from "../../../resource";
+import {TEXTURE_IDS} from "../../../resource/texture";
+import type {PopUpModel} from "../../pop-up/pop-up/model/pop-up-model";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
-} from "../../../armdozer/position";
+} from "../../armdozer/position";
+import type {ReflectView} from "./reflect-view";
 
 export const MESH_SIZE = 300;
 
 /**
  * プレイヤー ダメージ反射 ビュー
  */
-export class PlayerReflectView implements PopUpView {
+export class PlayerReflectView implements ReflectView {
   _mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {

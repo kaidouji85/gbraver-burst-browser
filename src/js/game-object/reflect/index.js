@@ -1,11 +1,11 @@
 // @flow
 
-import {PopUp} from "../pop-up/pop-up";
-import type {Resources} from "../../../resource";
+import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
+import type {GameObjectAction} from "../../action/game-object-action";
 import {PlayerReflectView} from "./view/player-reflect-view";
 import {EnemyReflectView} from "./view/enemy-reflect-view";
+import {ReflectIndicator} from './reflectIndicator';
 
 /**
  * プレイヤー ダメージ反射
@@ -14,9 +14,9 @@ import {EnemyReflectView} from "./view/enemy-reflect-view";
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function playerReflect(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
+export function playerReflectIndicator(resources: Resources, listener: Observable<GameObjectAction>): ReflectIndicator {
   const view = new PlayerReflectView(resources);
-  return new PopUp(view, resources, listener);
+  return new ReflectIndicator(view, resources, listener);
 }
 
 /**
@@ -26,7 +26,7 @@ export function playerReflect(resources: Resources, listener: Observable<GameObj
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function enemyReflect(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
+export function enemyReflectIndicator(resources: Resources, listener: Observable<GameObjectAction>): ReflectIndicator {
   const view = new EnemyReflectView(resources);
-  return new PopUp(view, resources, listener);
+  return new ReflectIndicator(view, resources, listener);
 }

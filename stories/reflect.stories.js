@@ -2,7 +2,7 @@
 
 import {delay} from "../src/js/animation/delay";
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
-import {enemyReflect, playerReflect} from "../src/js/game-object/pop-up/reflect";
+import {enemyReflectIndicator, playerReflectIndicator} from "../src/js/game-object/reflect";
 
 export default {
   title: 'reflect',
@@ -10,7 +10,7 @@ export default {
 
 export const player = () => {
   const stub = new TDGameObjectStub((resources, listener) => {
-    const continuousAttack = playerReflect(resources, listener);
+    const continuousAttack = playerReflectIndicator(resources, listener);
     delay(1000)
       .chain(continuousAttack.popUp())
       .loop();
@@ -24,7 +24,7 @@ export const player = () => {
 
 export const enemy = () => {
   const stub = new TDGameObjectStub((resources, listener) => {
-    const continuousAttack = enemyReflect(resources, listener);
+    const continuousAttack = enemyReflectIndicator(resources, listener);
     delay(1000)
       .chain(continuousAttack.popUp())
       .loop();

@@ -1,8 +1,8 @@
 // @flow
 
 import {PlayerReflectView} from "./player-reflect-view";
-import type {Resources} from "../../../../resource";
-import type {PopUpModel} from "../../pop-up/model/pop-up-model";
+import type {Resources} from "../../../resource";
+import type {PopUpModel} from "../../pop-up/pop-up/model/pop-up-model";
 
 /**
  * 敵 ダメージ反射 ビュー

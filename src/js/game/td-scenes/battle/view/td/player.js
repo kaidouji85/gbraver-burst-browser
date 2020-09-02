@@ -18,9 +18,10 @@ import {enemyLightning, playerLightning} from "../../../../../game-object/hitmar
 import {PopUp} from "../../../../../game-object/pop-up/pop-up/pop-up";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/pop-up/power-up";
-import {enemyReflect, playerReflect} from "../../../../../game-object/pop-up/reflect";
+import {enemyReflectIndicator, playerReflectIndicator} from "../../../../../game-object/reflect";
 import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/pop-up/continuous-attack";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
+import {ReflectIndicator} from "../../../../../game-object/reflect/reflectIndicator";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -33,7 +34,7 @@ export interface TDPlayerField {
   };
   armdozerEffects: {
     powerUp: PopUp,
-    reflect: PopUp,
+    reflect: ReflectIndicator,
     continuousAttack: PopUp,
   };
   batteryNumber: BatteryNumber;
@@ -70,7 +71,7 @@ export class TDPlayerImpl implements TDPlayer {
   };
   armdozerEffects: {
     powerUp: PopUp,
-    reflect: PopUp,
+    reflect: ReflectIndicator,
     continuousAttack: PopUp,
   };
   batteryNumber: BatteryNumber;
@@ -140,7 +141,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     },
     armdozerEffects: {
       powerUp: playerPowerUp(resources, listener),
-      reflect: playerReflect(resources, listener),
+      reflect: playerReflectIndicator(resources, listener),
       continuousAttack: playerContinuousAttack(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
@@ -173,7 +174,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     },
     armdozerEffects: {
       powerUp: enemyPowerUp(resources, listener),
-      reflect: enemyReflect(resources, listener),
+      reflect: enemyReflectIndicator(resources, listener),
       continuousAttack: enemyContinuousAttack(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
