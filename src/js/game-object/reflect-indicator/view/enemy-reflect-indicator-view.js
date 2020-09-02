@@ -1,13 +1,13 @@
 // @flow
 
-import {PlayerReflectView} from "./player-reflect-view";
+import {PlayerReflectIndicatorView} from "./player-reflect-indicator-view";
 import type {Resources} from "../../../resource";
 import type {PopUpModel} from "../../pop-up/pop-up/model/pop-up-model";
 
 /**
  * 敵 ダメージ反射 ビュー
  */
-export class EnemyReflectView extends PlayerReflectView {
+export class EnemyReflectIndicatorView extends PlayerReflectIndicatorView {
   constructor(resources: Resources) {
     super(resources);
   }

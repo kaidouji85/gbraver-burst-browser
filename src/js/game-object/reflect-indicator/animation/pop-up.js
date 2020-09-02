@@ -1,10 +1,9 @@
 // @flow
 
-import type {ReflectModel} from "../model/reflect-model";
+import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
 import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
 import {delay} from "../../../animation/delay";
-import {ReflectSounds} from "../sounds/reflect-sounds";
 import {process} from '../../../animation/process';
 
 /**
@@ -14,11 +13,10 @@ import {process} from '../../../animation/process';
  * @param sounds 効果音
  * @return アニメーション
  */
-export function popUp(model: ReflectModel, sounds: ReflectSounds): Animate {
+export function popUp(model: ReflectIndocatorModel): Animate {
   return process(() => {
     model.opacity = 0;
     model.scale = 1.1;
-    sounds.benefitEffect.play();
   })
     .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 300)))
     .chain(delay(1000))

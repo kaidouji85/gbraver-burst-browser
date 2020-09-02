@@ -2,7 +2,7 @@
 
 import {delay} from "../src/js/animation/delay";
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
-import {enemyReflectIndicator, playerReflectIndicator} from "../src/js/game-object/reflect";
+import {enemyReflectIndicator, playerReflectIndicator} from "../src/js/game-object/reflect-indicator";
 
 export default {
   title: 'reflect',

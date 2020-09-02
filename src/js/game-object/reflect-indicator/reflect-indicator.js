@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import type {ReflectView} from "./view/reflect-view";
-import type {ReflectModel} from "./model/reflect-model";
+import type {ReflectIndicatorView} from "./view/reflect-indicator-view";
+import type {ReflectIndocatorModel} from "./model/reflect-indocator-model";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
@@ -10,29 +10,24 @@ import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
-import {ReflectSounds} from "./sounds/reflect-sounds";
-import type {Resources} from "../../resource";
 
 /**
  * ダメージ反射
  */
 export class ReflectIndicator {
-  _model: ReflectModel;
-  _view: ReflectView;
-  _sounds: ReflectSounds;
+  _model: ReflectIndocatorModel;
+  _view: ReflectIndicatorView;
   _subscription: Subscription;
 
   /**
    * コンストラクタ
    *
    * @param view ビュー
-   * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: ReflectView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: ReflectIndicatorView, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._sounds = new ReflectSounds(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);
@@ -54,7 +49,7 @@ export class ReflectIndicator {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this._model, this._sounds);
+    return popUp(this._model);
   }
 
   /**

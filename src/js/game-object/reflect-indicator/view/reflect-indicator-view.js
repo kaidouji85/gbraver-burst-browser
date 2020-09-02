@@ -1,19 +1,19 @@
 // @flow
 
 import * as THREE from 'three';
-import type {ReflectModel} from "../model/reflect-model";
+import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
 
 /**
  * ダメージ反射 ビュー
  */
-export interface ReflectView {
+export interface ReflectIndicatorView {
   /** デストラクタ相当の処理 */
   destructor(): void;
 
   /**
    * モデルをビューに反映させる
    */
-  engage(model: ReflectModel): void;
+  engage(model: ReflectIndocatorModel): void;
 
   /**
    * カメラの真正面を向く

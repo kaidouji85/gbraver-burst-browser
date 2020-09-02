@@ -3,7 +3,7 @@
 /**
  * ダメージ反射 モデル
  */
-export type ReflectModel = {
+export type ReflectIndocatorModel = {
   opacity: number,
   scale: number,
 };

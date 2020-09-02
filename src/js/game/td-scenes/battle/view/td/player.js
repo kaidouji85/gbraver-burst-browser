@@ -18,10 +18,10 @@ import {enemyLightning, playerLightning} from "../../../../../game-object/hitmar
 import {PopUp} from "../../../../../game-object/pop-up/pop-up/pop-up";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/pop-up/power-up";
-import {enemyReflectIndicator, playerReflectIndicator} from "../../../../../game-object/reflect";
+import {enemyReflectIndicator, playerReflectIndicator} from "../../../../../game-object/reflect-indicator";
 import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/pop-up/continuous-attack";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
-import {ReflectIndicator} from "../../../../../game-object/reflect/reflectIndicator";
+import {ReflectIndicator} from "../../../../../game-object/reflect-indicator/reflect-indicator";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド

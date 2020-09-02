@@ -10,14 +10,14 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
-import type {ReflectView} from "./reflect-view";
+import type {ReflectIndicatorView} from "./reflect-indicator-view";
 
 export const MESH_SIZE = 300;
 
 /**
  * プレイヤー ダメージ反射 ビュー
  */
-export class PlayerReflectView implements ReflectView {
+export class PlayerReflectIndicatorView implements ReflectIndicatorView {
   _mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {

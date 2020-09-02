@@ -3,9 +3,9 @@
 import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {PlayerReflectView} from "./view/player-reflect-view";
-import {EnemyReflectView} from "./view/enemy-reflect-view";
-import {ReflectIndicator} from './reflectIndicator';
+import {PlayerReflectIndicatorView} from "./view/player-reflect-indicator-view";
+import {EnemyReflectIndicatorView} from "./view/enemy-reflect-indicator-view";
+import {ReflectIndicator} from './reflect-indicator';
 
 /**
  * プレイヤー ダメージ反射
@@ -15,8 +15,8 @@ import {ReflectIndicator} from './reflectIndicator';
  * @return 生成結果
  */
 export function playerReflectIndicator(resources: Resources, listener: Observable<GameObjectAction>): ReflectIndicator {
-  const view = new PlayerReflectView(resources);
-  return new ReflectIndicator(view, resources, listener);
+  const view = new PlayerReflectIndicatorView(resources);
+  return new ReflectIndicator(view, listener);
 }
 
 /**
@@ -27,6 +27,6 @@ export function playerReflectIndicator(resources: Resources, listener: Observabl
  * @return 生成結果
  */
 export function enemyReflectIndicator(resources: Resources, listener: Observable<GameObjectAction>): ReflectIndicator {
-  const view = new EnemyReflectView(resources);
-  return new ReflectIndicator(view, resources, listener);
+  const view = new EnemyReflectIndicatorView(resources);
+  return new ReflectIndicator(view, listener);
 }
