@@ -5,8 +5,8 @@ import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core";
 import {empty} from "../../../../../../animation/delay";
 import {Animate} from "../../../../../../animation/animate";
-import {castPilotSkillAnimationParam} from "./animation-param";
 import type {PilotSkillAnimationParam} from "./animation-param";
+import {castPilotSkillAnimationParam} from "./animation-param";
 import {castShinyaAnimationParam, shinyaAnimation} from "./shinya";
 
 /**

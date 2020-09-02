@@ -38,16 +38,22 @@ export class PlayerBatteryNumberView implements BatteryNumberView {
     this._numberMesh.destructor();
   }
 
-  /** モデルをビューに反映させる */
+  /**
+   * モデルをビューに反映させる
+   *
+   * @param model モデル
+   */
   engage(model: BatteryNumberModel): void {
     const battery = Math.min(model.battery, MAX_BATTERY_VALUE) / MAX_BATTERY_ANIMATION;
     this._numberMesh.animate(battery);
 
-    this._numberMesh.setOpacity(model.alpha);
+    this._numberMesh.setOpacity(model.opacity);
 
     this._numberMesh.getObject3D().position.x = ARMDOZER_EFFECT_STANDARD_X;
     this._numberMesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y;
     this._numberMesh.getObject3D().position.z = ARMDOZER_EFFECT_STANDARD_Z;
+
+    this._numberMesh.getObject3D().scale.set(model.scale, model.scale, model.scale);
   }
 
   /** カメラの方向を向く */

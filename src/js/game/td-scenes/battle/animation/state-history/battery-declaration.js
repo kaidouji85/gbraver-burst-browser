@@ -6,16 +6,19 @@ import type {BatteryDeclaration, GameState} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
+import {BattleSceneSounds} from "../../sounds";
+import {process} from '../../../../../animation/process';
 
 /**
  * バッテリー宣言アニメーション
  *
  * @param view ビュー
+ * @param sounds 戦闘シーン効果音
  * @param sceneState シーンの状態
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function batteryDeclarationAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+export function batteryDeclarationAnimation(view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState, gameState: GameState): Animate {
   if (gameState.effect.name !== 'BatteryDeclaration') {
     return empty();
   }
@@ -36,17 +39,21 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sceneState: B
   }
 
   const isAttacker = effect.attacker === sceneState.playerId;
-  return all(
-    all(
+  return process(() => {
+    sounds.benefitEffect.play();
+  })
+    .chain(all(
       view.td.gameObjects.turnIndicator.turnChange(isAttacker),
-      attackerTD.batteryNumber.popUp(effect.attackerBattery),
       attackerHUD.gauge.battery(attacker.armdozer.battery),
-      defenderTD.batteryNumber.popUp(effect.defenderBattery),
+      attackerTD.batteryNumber.show(effect.attackerBattery),
       defenderHUD.gauge.battery(defender.armdozer.battery),
-    ),
-
-    delay(1200).chain(
-      view.td.gameObjects.turnIndicator.invisible()
-    ).chain(delay(500))
-  );
+      defenderTD.batteryNumber.show(effect.defenderBattery),
+    ))
+    .chain(delay(1000))
+    .chain(all(
+      attackerTD.batteryNumber.hidden(),
+      defenderTD.batteryNumber.hidden(),
+      view.td.gameObjects.turnIndicator.invisible(),
+    ))
+    .chain(delay(500));
 }

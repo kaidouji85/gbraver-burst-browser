@@ -6,6 +6,7 @@ import type {DamageIndicatorModel} from "./damage-indicator-model";
 export function createInitialValue(): DamageIndicatorModel {
   return {
     damage: 0,
-    opacity: 0
+    opacity: 0,
+    scale: 1
   };
 }

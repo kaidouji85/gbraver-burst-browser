@@ -3,5 +3,6 @@
 /** ダメージインジケータのモデル */
 export type DamageIndicatorModel = {
   damage: number,
-  opacity: number
+  opacity: number,
+  scale: number,
 }

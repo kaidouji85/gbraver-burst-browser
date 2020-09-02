@@ -15,12 +15,14 @@ import {ShockWave} from "../../../../../game-object/hitmark/shock-wave/shock-wav
 import {enemyShockWave, playerShockWave} from "../../../../../game-object/hitmark/shock-wave";
 import {Lightning} from "../../../../../game-object/hitmark/lightning/lightning";
 import {enemyLightning, playerLightning} from "../../../../../game-object/hitmark/lightning";
-import {PopUp} from "../../../../../game-object/pop-up/pop-up/pop-up";
+import {ContinuousAttackIndicator} from "../../../../../game-object/continuous-attack/continuous-attack-indicator";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
-import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/pop-up/power-up";
-import {enemyReflect, playerReflect} from "../../../../../game-object/pop-up/reflect";
-import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/pop-up/continuous-attack";
+import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/power-up";
+import {enemyReflectIndicator, playerReflectIndicator} from "../../../../../game-object/reflect-indicator";
+import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/continuous-attack";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
+import {ReflectIndicator} from "../../../../../game-object/reflect-indicator/reflect-indicator";
+import {PowerUp} from "../../../../../game-object/power-up/power-up";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -32,9 +34,9 @@ export interface TDPlayerField {
     lightning: Lightning,
   };
   armdozerEffects: {
-    powerUp: PopUp,
-    reflect: PopUp,
-    continuousAttack: PopUp,
+    powerUp: PowerUp,
+    reflect: ReflectIndicator,
+    continuousAttack: ContinuousAttackIndicator,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -69,9 +71,9 @@ export class TDPlayerImpl implements TDPlayer {
     lightning: Lightning,
   };
   armdozerEffects: {
-    powerUp: PopUp,
-    reflect: PopUp,
-    continuousAttack: PopUp,
+    powerUp: PowerUp,
+    reflect: ReflectIndicator,
+    continuousAttack: ContinuousAttackIndicator,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -140,7 +142,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     },
     armdozerEffects: {
       powerUp: playerPowerUp(resources, listener),
-      reflect: playerReflect(resources, listener),
+      reflect: playerReflectIndicator(resources, listener),
       continuousAttack: playerContinuousAttack(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
@@ -173,7 +175,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     },
     armdozerEffects: {
       powerUp: enemyPowerUp(resources, listener),
-      reflect: enemyReflect(resources, listener),
+      reflect: enemyReflectIndicator(resources, listener),
       continuousAttack: enemyContinuousAttack(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
