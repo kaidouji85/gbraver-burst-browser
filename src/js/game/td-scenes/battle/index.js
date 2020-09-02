@@ -12,13 +12,12 @@ import type {BattleProgress, InitialState} from "../../../battle-room/battle-roo
 import {stateHistoryAnimation} from "./animation/state-history";
 import type {Render} from "../../../action/game-loop/render";
 import type {DoBurst} from "../../../action/battle-scene/do-burst";
-import type {Command, GameEnd, GameState} from "gbraver-burst-core";
+import type {Command, GameEnd, GameState, PilotSkill} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
 import {all} from "../../../animation/all";
-import type {PilotSkill} from "gbraver-burst-core";
 import {BattleSceneSounds} from "./sounds";
 
 /** コンストラクタのパラメータ */
