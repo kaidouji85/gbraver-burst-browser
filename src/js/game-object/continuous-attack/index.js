@@ -1,9 +1,9 @@
 // @flow
 
-import {PopUp} from "../pop-up/pop-up";
-import type {Resources} from "../../../resource";
+import {ContinuousAttackIndicator} from "./continuous-attack-indicator";
+import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
+import type {GameObjectAction} from "../../action/game-object-action";
 import {PlayerContinuousAttackView} from "./view/player-continuous-attack-view";
 import {EnemyContinuousAttackView} from "./view/enemy-continuous-attack-view";
 
@@ -14,9 +14,9 @@ import {EnemyContinuousAttackView} from "./view/enemy-continuous-attack-view";
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function playerContinuousAttack(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
+export function playerContinuousAttack(resources: Resources, listener: Observable<GameObjectAction>): ContinuousAttackIndicator {
   const view = new PlayerContinuousAttackView(resources);
-  return new PopUp(view, resources, listener);
+  return new ContinuousAttackIndicator(view, resources, listener);
 }
 
 /**
@@ -26,7 +26,7 @@ export function playerContinuousAttack(resources: Resources, listener: Observabl
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function enemyContinuousAttack(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
+export function enemyContinuousAttack(resources: Resources, listener: Observable<GameObjectAction>): ContinuousAttackIndicator {
   const view = new EnemyContinuousAttackView(resources);
-  return new PopUp(view, resources, listener);
+  return new ContinuousAttackIndicator(view, resources, listener);
 }

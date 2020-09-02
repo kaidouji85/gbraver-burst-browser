@@ -1,25 +1,25 @@
 // @flow
 
 import * as THREE from 'three';
-import type {PopUpView} from "./pop-up-view";
-import type {PopUpModel} from "./model/pop-up-model";
-import type {GameObjectAction} from "../../../action/game-object-action";
+import type {ContinuousAttackView} from "./view/continuous-attack-view";
+import type {ContinuousAttackModel} from "./model/continuous-attack-model";
+import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../../action/game-loop/update";
-import type {PreRender} from "../../../action/game-loop/pre-render";
-import {Animate} from "../../../animation/animate";
+import type {Update} from "../../action/game-loop/update";
+import type {PreRender} from "../../action/game-loop/pre-render";
+import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
-import {PopUpSounds} from "./sounds/pop-up-sounds";
-import type {Resources} from "../../../resource";
+import {ContinuousAttackSounds} from "./sounds/continuous-attack-sounds";
+import type {Resources} from "../../resource";
 
 /**
- * ポップアップ
+ * 連続攻撃
  */
-export class PopUp {
-  _model: PopUpModel;
-  _view: PopUpView;
-  _sounds: PopUpSounds;
+export class ContinuousAttackIndicator {
+  _model: ContinuousAttackModel;
+  _view: ContinuousAttackView;
+  _sounds: ContinuousAttackSounds;
   _subscription: Subscription;
 
   /**
@@ -29,10 +29,10 @@ export class PopUp {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: PopUpView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: ContinuousAttackView, resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._sounds = new PopUpSounds(resources);
+    this._sounds = new ContinuousAttackSounds(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate(action);

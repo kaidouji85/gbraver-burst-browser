@@ -1,7 +1,7 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import type {PopUpModel} from "../../pop-up/model/pop-up-model";
+import type {Resources} from "../../../resource";
+import type {ContinuousAttackModel} from "../model/continuous-attack-model";
 import {PlayerContinuousAttackView} from "./player-continuous-attack-view";
 
 /**
@@ -17,7 +17,7 @@ export class EnemyContinuousAttackView extends PlayerContinuousAttackView {
    *
    * @param model モデル
    */
-  engage(model: PopUpModel): void {
+  engage(model: ContinuousAttackModel): void {
     super.engage(model);
 
     const target = super.getObject3D();

@@ -1,13 +1,13 @@
 // @flow
 
 import {Howl} from 'howler';
-import type {Resources} from "../../../../resource";
-import {SOUND_IDS} from "../../../../resource/sound";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /**
- * ポップアップ 効果音
+ * 連続攻撃 効果音
  */
-export class PopUpSounds {
+export class ContinuousAttackSounds {
   benefitEffect: typeof Howl;
 
   constructor(resources: Resources) {

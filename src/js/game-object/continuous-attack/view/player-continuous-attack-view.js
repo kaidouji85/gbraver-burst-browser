@@ -1,23 +1,23 @@
 // @flow
 
 import * as THREE from "three";
-import type {PopUpView} from "../../pop-up/pop-up-view";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture";
-import type {PopUpModel} from "../../pop-up/model/pop-up-model";
+import type {ContinuousAttackView} from "./continuous-attack-view";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import type {Resources} from "../../../resource";
+import {TEXTURE_IDS} from "../../../resource/texture";
+import type {ContinuousAttackModel} from "../model/continuous-attack-model";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
-} from "../../../armdozer/position";
+} from "../../armdozer/position";
 
 export const MESH_SIZE = 300;
 
 /**
  * プレイヤー 連続攻撃 ビュー
  */
-export class PlayerContinuousAttackView implements PopUpView {
+export class PlayerContinuousAttackView implements ContinuousAttackView {
   _mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
@@ -52,7 +52,7 @@ export class PlayerContinuousAttackView implements PopUpView {
    *
    * @param model モデル
    */
-  engage(model: PopUpModel): void {
+  engage(model: ContinuousAttackModel): void {
     const target = this._mesh.getObject3D();
 
     this._mesh.setOpacity(model.opacity);

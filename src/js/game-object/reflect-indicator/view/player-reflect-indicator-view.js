@@ -4,13 +4,13 @@ import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import type {PopUpModel} from "../../pop-up/pop-up/model/pop-up-model";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
 import type {ReflectIndicatorView} from "./reflect-indicator-view";
+import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
 
 export const MESH_SIZE = 300;
 
@@ -52,7 +52,7 @@ export class PlayerReflectIndicatorView implements ReflectIndicatorView {
    *
    * @param model モデル
    */
-  engage(model: PopUpModel): void {
+  engage(model: ReflectIndocatorModel): void {
     const target = this._mesh.getObject3D();
 
     this._mesh.setOpacity(model.opacity);

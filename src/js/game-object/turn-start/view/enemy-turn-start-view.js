@@ -4,13 +4,13 @@ import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import type {PopUpModel} from "../../pop-up/pop-up/model/pop-up-model";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
 import type {TurnStartView} from "./turn-start-view";
+import type {TurnStartModel} from "../model/turn-start-model";
 
 export const MESH_SIZE = 300;
 
@@ -50,7 +50,7 @@ export class EnemyTurnStartView implements TurnStartView {
    *
    * @param model モデル
    */
-  engage(model: PopUpModel): void {
+  engage(model: TurnStartModel): void {
     this._refreshOpacity(model);
     this._refreshScale(model);
     this._refreshPos();
@@ -70,7 +70,7 @@ export class EnemyTurnStartView implements TurnStartView {
    *
    * @param model モデル
    */
-  _refreshOpacity(model: PopUpModel): void {
+  _refreshOpacity(model: TurnStartModel): void {
     this._mesh.setOpacity(model.opacity);
   }
 
@@ -87,7 +87,7 @@ export class EnemyTurnStartView implements TurnStartView {
    *
    * @param model モデル
    */
-  _refreshScale(model: PopUpModel): void {
+  _refreshScale(model: TurnStartModel): void {
     const target = this._mesh.getObject3D();
     target.scale.x = model.scale;
     target.scale.y = model.scale;

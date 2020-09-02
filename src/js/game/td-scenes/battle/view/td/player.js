@@ -15,11 +15,11 @@ import {ShockWave} from "../../../../../game-object/hitmark/shock-wave/shock-wav
 import {enemyShockWave, playerShockWave} from "../../../../../game-object/hitmark/shock-wave";
 import {Lightning} from "../../../../../game-object/hitmark/lightning/lightning";
 import {enemyLightning, playerLightning} from "../../../../../game-object/hitmark/lightning";
-import {PopUp} from "../../../../../game-object/pop-up/pop-up/pop-up";
+import {ContinuousAttackIndicator} from "../../../../../game-object/continuous-attack/continuous-attack-indicator";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/power-up";
 import {enemyReflectIndicator, playerReflectIndicator} from "../../../../../game-object/reflect-indicator";
-import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/pop-up/continuous-attack";
+import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/continuous-attack";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {ReflectIndicator} from "../../../../../game-object/reflect-indicator/reflect-indicator";
 import {PowerUp} from "../../../../../game-object/power-up/power-up";
@@ -36,7 +36,7 @@ export interface TDPlayerField {
   armdozerEffects: {
     powerUp: PowerUp,
     reflect: ReflectIndicator,
-    continuousAttack: PopUp,
+    continuousAttack: ContinuousAttackIndicator,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -73,7 +73,7 @@ export class TDPlayerImpl implements TDPlayer {
   armdozerEffects: {
     powerUp: PowerUp,
     reflect: ReflectIndicator,
-    continuousAttack: PopUp,
+    continuousAttack: ContinuousAttackIndicator,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;

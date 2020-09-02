@@ -1,19 +1,19 @@
 // @flow
 
 import * as THREE from 'three';
-import type {PopUpModel} from "./model/pop-up-model";
+import type {ContinuousAttackModel} from "../model/continuous-attack-model";
 
 /**
- * ポップアップ ビュー
+ * 連続攻撃 ビュー
  */
-export interface PopUpView {
+export interface ContinuousAttackView {
   /** デストラクタ相当の処理 */
   destructor(): void;
 
   /**
    * モデルをビューに反映させる
    */
-  engage(model: PopUpModel): void;
+  engage(model: ContinuousAttackModel): void;
 
   /**
    * カメラの真正面を向く

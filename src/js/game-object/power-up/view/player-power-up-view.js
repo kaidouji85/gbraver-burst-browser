@@ -4,13 +4,13 @@ import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import type {PopUpModel} from "../../pop-up/pop-up/model/pop-up-model";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
 import type {PowerUpView} from "./power-up-view";
+import type {PowerUpModel} from "../model/power-up-model";
 
 export const MESH_SIZE = 300;
 
@@ -52,7 +52,7 @@ export class PlayerPowerUpView implements PowerUpView {
    *
    * @param model モデル
    */
-  engage(model: PopUpModel): void {
+  engage(model: PowerUpModel): void {
     const target = this._mesh.getObject3D();
 
     this._mesh.setOpacity(model.opacity);
