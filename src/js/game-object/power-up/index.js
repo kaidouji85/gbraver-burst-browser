@@ -1,11 +1,11 @@
 // @flow
 
-import {PopUp} from "../pop-up/pop-up";
-import type {Resources} from "../../../resource";
+import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
+import type {GameObjectAction} from "../../action/game-object-action";
 import {PlayerPowerUpView} from "./view/player-power-up-view";
 import {EnemyPowerUpView} from "./view/enemy-power-up-view";
+import {PowerUp} from "./power-up";
 
 /**
  * プレイヤー 攻撃アップ ポップアップ
@@ -14,9 +14,9 @@ import {EnemyPowerUpView} from "./view/enemy-power-up-view";
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function playerPowerUp(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
+export function playerPowerUp(resources: Resources, listener: Observable<GameObjectAction>): PowerUp {
   const view = new PlayerPowerUpView(resources);
-  return new PopUp(view, resources, listener);
+  return new PowerUp(view, resources, listener);
 }
 
 /**
@@ -26,7 +26,7 @@ export function playerPowerUp(resources: Resources, listener: Observable<GameObj
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function enemyPowerUp(resources: Resources, listener: Observable<GameObjectAction>): PopUp {
+export function enemyPowerUp(resources: Resources, listener: Observable<GameObjectAction>): PowerUp {
   const view = new EnemyPowerUpView(resources);
-  return new PopUp(view, resources, listener);
+  return new PowerUp(view, resources, listener);
 }

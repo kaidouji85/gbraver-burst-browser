@@ -1,23 +1,23 @@
 // @flow
 
 import * as THREE from "three";
-import type {PopUpView} from "../../pop-up/pop-up-view";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import type {Resources} from "../../../../resource";
-import {TEXTURE_IDS} from "../../../../resource/texture";
-import type {PopUpModel} from "../../pop-up/model/pop-up-model";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import type {Resources} from "../../../resource";
+import {TEXTURE_IDS} from "../../../resource/texture";
+import type {PopUpModel} from "../../pop-up/pop-up/model/pop-up-model";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
-} from "../../../armdozer/position";
+} from "../../armdozer/position";
+import type {PowerUpView} from "./power-up-view";
 
 export const MESH_SIZE = 300;
 
 /**
  * プレイヤー 攻撃アップ ビュー
  */
-export class PlayerPowerUpView implements PopUpView {
+export class PlayerPowerUpView implements PowerUpView {
   _mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {

@@ -2,7 +2,7 @@
 
 import {delay} from "../src/js/animation/delay";
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
-import {enemyPowerUp, playerPowerUp} from "../src/js/game-object/pop-up/power-up";
+import {enemyPowerUp, playerPowerUp} from "../src/js/game-object/power-up";
 
 export default {
   title: 'power-up',

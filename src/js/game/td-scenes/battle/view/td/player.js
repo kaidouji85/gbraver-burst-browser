@@ -17,11 +17,12 @@ import {Lightning} from "../../../../../game-object/hitmark/lightning/lightning"
 import {enemyLightning, playerLightning} from "../../../../../game-object/hitmark/lightning";
 import {PopUp} from "../../../../../game-object/pop-up/pop-up/pop-up";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
-import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/pop-up/power-up";
+import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/power-up";
 import {enemyReflectIndicator, playerReflectIndicator} from "../../../../../game-object/reflect-indicator";
 import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/pop-up/continuous-attack";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {ReflectIndicator} from "../../../../../game-object/reflect-indicator/reflect-indicator";
+import {PowerUp} from "../../../../../game-object/power-up/power-up";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -33,7 +34,7 @@ export interface TDPlayerField {
     lightning: Lightning,
   };
   armdozerEffects: {
-    powerUp: PopUp,
+    powerUp: PowerUp,
     reflect: ReflectIndicator,
     continuousAttack: PopUp,
   };
@@ -70,7 +71,7 @@ export class TDPlayerImpl implements TDPlayer {
     lightning: Lightning,
   };
   armdozerEffects: {
-    powerUp: PopUp,
+    powerUp: PowerUp,
     reflect: ReflectIndicator,
     continuousAttack: PopUp,
   };
