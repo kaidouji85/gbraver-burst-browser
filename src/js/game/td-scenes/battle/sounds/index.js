@@ -8,11 +8,11 @@ import {SOUND_IDS} from "../../../../resource/sound";
  * 戦闘シーン 効果音
  */
 export class BattleSceneSounds {
-  benefitEffect: typeof Howl;
+  batteryDeclaration: typeof Howl;
 
   constructor(resources: Resources) {
-    this.benefitEffect = resources.sounds
-      .find(v => v.id === SOUND_IDS.BENEFIT_EFFECT)
+    this.batteryDeclaration = resources.sounds
+      .find(v => v.id === SOUND_IDS.BATTERY_DECLARATION)
       ?.sound ?? new Howl();
   }
 }

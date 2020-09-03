@@ -40,7 +40,7 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
 
   const isAttacker = effect.attacker === sceneState.playerId;
   return process(() => {
-    sounds.benefitEffect.play();
+    sounds.batteryDeclaration.play();
   })
     .chain(all(
       view.td.gameObjects.turnIndicator.turnChange(isAttacker),
