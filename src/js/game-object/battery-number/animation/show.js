@@ -15,8 +15,8 @@ import {tween} from "../../../animation/tween";
 export function show(model: BatteryNumberModel, battery: number): Animate {
   return process(() => {
     model.opacity = 0;
-    model.scale = 1.2;
+    model.scale = 1.5;
     model.battery = battery;
   })
-    .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 300)))
+    .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 400)))
 }
