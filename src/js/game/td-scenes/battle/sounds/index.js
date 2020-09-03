@@ -12,7 +12,7 @@ export class BattleSceneSounds {
 
   constructor(resources: Resources) {
     this.batteryDeclaration = resources.sounds
-      .find(v => v.id === SOUND_IDS.LIGHTNING_ATTACK)
+      .find(v => v.id === SOUND_IDS.BATTERY_DECLARATION)
       ?.sound ?? new Howl();
   }
 }
