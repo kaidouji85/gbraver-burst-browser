@@ -15,7 +15,7 @@ import {process} from '../../../animation/process';
 export function popUp(model: ReflectIndocatorModel): Animate {
   return process(() => {
     model.opacity = 0;
-    model.scale = 1.5;
+    model.scale = 1.2;
   })
     .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 400)))
     .chain(delay(2000))
