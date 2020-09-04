@@ -17,12 +17,12 @@ import {process} from '../../../animation/process';
  */
 export function popUp(model: RecoverBatteryModel, sounds: RecoverBatterySounds, value: number): Animate {
   return process(() => {
-    model.scale = 1.1;
+    model.scale = 1.2;
     model.value = value;
     model.opacity = 0;
     sounds.recoverBattery.play();
   })
-    .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 300)))
-    .chain(delay(1000))
-    .chain(tween(model, t => t.to({opacity: 0, scale: 1.05}, 300)));
+    .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 400)))
+    .chain(delay(2000))
+    .chain(tween(model, t => t.to({opacity: 0, scale: 1.1}, 300)));
 }
