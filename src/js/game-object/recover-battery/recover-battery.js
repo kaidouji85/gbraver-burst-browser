@@ -10,20 +10,36 @@ import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
+import {RecoverBatterySounds} from "./sounds/recover-battery-sounds";
+import type {Resources} from "../../resource";
 
+/**
+ * コンストラクタのパラメータ
+ */
 type Param = {
   view: RecoverBatteryView,
-  listener: Observable<GameObjectAction>
+  resources: Resources,
+  listener: Observable<GameObjectAction>,
 };
 
+/**
+ * バッテリー回復
+ */
 export class RecoverBattery {
   _model: RecoverBatteryModel;
   _view: RecoverBatteryView;
+  _sounds: RecoverBatterySounds;
   _subscription: Subscription;
 
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
   constructor(param: Param): void {
     this._model = createInitialValue();
     this._view = param.view;
+    this._sounds = new RecoverBatterySounds(param.resources);
     this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
@@ -46,7 +62,7 @@ export class RecoverBattery {
    * @return アニメーション
    */
   popUp(value: number): Animate {
-    return popUp(this._model, value);
+    return popUp(this._model, this._sounds, value);
   }
 
   /**

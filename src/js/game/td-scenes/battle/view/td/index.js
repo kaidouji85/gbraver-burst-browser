@@ -130,6 +130,5 @@ export class ThreeDimensionLayer {
     this.gameObjects.destructor();
 
     this.camera.destructor();
-    this.scene.dispose();
   }
 }

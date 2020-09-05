@@ -6,10 +6,11 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import {createInitialValue} from "./model/initial-value";
-import {popUp} from "./animation/pop-up";
 import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
+import {show} from "./animation/show";
+import {hidden} from "./animation/hidden";
 
 type Param = {
   listener: Observable<GameObjectAction>,
@@ -40,9 +41,23 @@ export class BatteryNumber {
     this._subscription.unsubscribe();
   }
 
-  /** バッテリーを表示する */
-  popUp(battery: number): Animate {
-    return popUp(this._model, battery);
+  /**
+   * バッテリー数字を表示する
+   *
+   * @param battery バッテリー値
+   * @return アニメーション
+   */
+  show(battery: number): Animate {
+    return show(this._model, battery);
+  }
+
+  /**
+   * バッテリー数字を消す
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /** シーンに追加するオブジェクトを返す */

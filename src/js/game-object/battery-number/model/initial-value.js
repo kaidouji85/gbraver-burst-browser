@@ -9,7 +9,8 @@ import type {BatteryNumberModel} from "./battery-number-model";
  */
 export function createInitialValue(): BatteryNumberModel {
   return {
-    alpha: 0,
+    opacity: 0,
+    scale: 1,
     battery: 0
   };
 }

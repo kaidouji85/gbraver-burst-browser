@@ -53,7 +53,6 @@ export class HudLayer {
   _gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {
-
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera(param.listener.resize);
 
@@ -127,7 +126,6 @@ export class HudLayer {
     })
 
     this.camera.destructor();
-    this.scene.dispose();
   }
 
   /**

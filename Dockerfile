@@ -1,4 +1,4 @@
-FROM node:12.18.2-slim
+FROM node:12.18.3-slim
 WORKDIR /usr/src/app
 COPY . /usr/src/app/
 RUN npm config set registry http://registry.npmjs.org/ && \
