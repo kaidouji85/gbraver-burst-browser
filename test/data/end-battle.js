@@ -1,3 +1,4 @@
+// @flow
 import type {EndBattle} from "../../src/js/action/game/battle";
 import type {GameEnd} from "gbraver-burst-core";
 
@@ -14,6 +15,6 @@ const EMPTY_GAME_END: GameEnd = {
 };
 /** 空の戦闘終了アクション */
 export const EMPTY_END_BATTLE: EndBattle = {
-  name: 'EndBattle',
+  type: 'endBattle',
   gameEnd: EMPTY_GAME_END
 };

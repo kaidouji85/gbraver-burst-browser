@@ -44,7 +44,7 @@ export function castLightningDozerBurst(param: BurstAnimationParam): ?LightningD
 export function lightningDozerBurst(param: LightningDozerBurst<Burst>): Animate {
   if (param.burst.type === 'LightningBarrier') {
     const castBurst: LightningBarrier = param.burst;
-    const castParam= ((param: any):LightningDozerBurst<typeof castBurst>);
+    const castParam= ((param: any): LightningDozerBurst<typeof castBurst>);
     return lightningBarrier(castParam);
   }
 
