@@ -42,7 +42,7 @@ export type PilotSkillAnimationParam = PilotSkillAnimationParamX<PilotSkill, HUD
  * @param gameState ゲームステート
  * @return キャスト結果
  */
-export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState):  ?PilotSkillAnimationParam {
+export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?PilotSkillAnimationParam {
   if (gameState.effect.name !== 'PilotSkillEffect') {
     return null;
   }

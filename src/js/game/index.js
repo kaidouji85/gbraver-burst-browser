@@ -125,7 +125,7 @@ export class Game {
    */
   async initialize(): Promise<void> {
     try {
-      if (isDevelopment()) {
+      if (isDevelopment() && document.body) {
         viewPerformanceStats(document.body);
       }
       this._serviceWorker = await loadServiceWorker();

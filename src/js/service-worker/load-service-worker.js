@@ -5,7 +5,7 @@
  *
  * @return 登録したサービスワーカー
  */
-export async function loadServiceWorker(): Promise<ServiceWorkerRegistration|null> {
+export async function loadServiceWorker(): Promise<ServiceWorkerRegistration | null> {
   try {
     if (!navigator.serviceWorker) {
       return null;
