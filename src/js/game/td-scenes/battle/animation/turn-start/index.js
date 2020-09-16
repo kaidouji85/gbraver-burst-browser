@@ -7,6 +7,8 @@ import {ShinBraver} from "../../../../../game-object/armdozer/shin-braver/shin-b
 import {shinBraverTurnStart} from "./shin-braver";
 import {neoLandozerTurnStart} from "./neo-landozer";
 import {NeoLandozer} from "../../../../../game-object/armdozer/neo-landozer/neo-landozer";
+import {LightningDozer} from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
+import {lightningDozerTurnStart} from "./lightning-dozer";
 
 /**
  * ターンスタートアニメーション
@@ -22,6 +24,10 @@ export function turnStartAnimation(sprite: ArmDozerSprite, turnStart: TurnStart)
 
   if (sprite instanceof NeoLandozer) {
     return neoLandozerTurnStart(sprite, turnStart);
+  }
+
+  if (sprite instanceof LightningDozer) {
+    return lightningDozerTurnStart(sprite, turnStart);
   }
 
   return defaultTurnStartAnimation(sprite, turnStart);
