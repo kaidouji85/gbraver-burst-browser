@@ -9,6 +9,8 @@ import {neoLandozerTurnStart} from "./neo-landozer";
 import {NeoLandozer} from "../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {LightningDozer} from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import {lightningDozerTurnStart} from "./lightning-dozer";
+import {WingDozer} from "../../../../../game-object/armdozer/wing-dozer/wing-dozer";
+import {wingDozerTurnStart} from "./wing-dozer";
 
 /**
  * ターンスタートアニメーション
@@ -28,6 +30,10 @@ export function turnStartAnimation(sprite: ArmDozerSprite, turnStart: TurnStart)
 
   if (sprite instanceof LightningDozer) {
     return lightningDozerTurnStart(sprite, turnStart);
+  }
+
+  if (sprite instanceof WingDozer) {
+    return wingDozerTurnStart(sprite, turnStart);
   }
 
   return defaultTurnStartAnimation(sprite, turnStart);
