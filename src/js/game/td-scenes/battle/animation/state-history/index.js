@@ -25,6 +25,7 @@ import type {TurnChange} from "gbraver-burst-core/lib/effect/turn-change/turn-ch
 import type {BurstEffect} from "gbraver-burst-core/lib/effect/burst/burst-effect";
 import type {Reflect} from "gbraver-burst-core/lib/effect/reflect/reflect";
 import type {UpdateRemainingTurn} from "gbraver-burst-core/lib/effect/update-remaning-turn/update-remaining-turn";
+import type {GameEnd} from "gbraver-burst-core/lib/effect/game-end/game-end";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -86,9 +87,13 @@ export function stateHistoryAnimation(view: BattleSceneView, sounds: BattleScene
         return updateRemainingTurnAnimation(view, sceneState, state);
       }
 
+      if (v.effect.name === 'GameEnd') {
+        const effect: GameEnd = v.effect;
+        const state = ((v: any): GameStateX<typeof effect>);
+        return gameEndAnimation(view, sceneState, state);
+      }
+
       switch (v.effect.name) {
-        case 'GameEnd':
-          return gameEndAnimation(view, sceneState, v);
         case 'RightItself':
           return rightItselfAnimation(view, sceneState, v);
         case 'PilotSkillEffect':

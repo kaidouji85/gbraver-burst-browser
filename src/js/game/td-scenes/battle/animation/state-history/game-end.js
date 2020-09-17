@@ -2,7 +2,7 @@
 
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameEnd, GameState} from "gbraver-burst-core";
+import type {GameEnd, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 
@@ -14,11 +14,7 @@ import {delay, empty} from "../../../../../animation/delay";
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
-  if (gameState.effect.name !== 'GameEnd') {
-    return empty();
-  }
-
+export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<GameEnd>): Animate {
   const effect: GameEnd = gameState.effect;
   if (effect.result.type !== 'GameOver') {
     return empty();
