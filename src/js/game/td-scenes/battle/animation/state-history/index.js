@@ -18,6 +18,7 @@ import {rightItselfAnimation} from "./right-itself";
 import {pilotSkillAnimation} from "./pilot-skill";
 import {BattleSceneSounds} from "../../sounds";
 import type {StartGame} from "gbraver-burst-core/lib/effect/start-game/start-game";
+import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -37,9 +38,13 @@ export function stateHistoryAnimation(view: BattleSceneView, sounds: BattleScene
         return startGameAnimation(view, sceneState, state);
       }
 
+      if (v.effect.name === 'InputCommand') {
+        const effect: InputCommand = v.effect;
+        const state = ((v: any): GameStateX<typeof effect>);
+        return inputCommandAnimation(view, sceneState, state);
+      }
+
       switch (v.effect.name) {
-        case 'InputCommand':
-          return inputCommandAnimation(view, sceneState, v);
         case 'BatteryDeclaration':
           return batteryDeclarationAnimation(view, sounds, sceneState, v);
         case 'Battle':
