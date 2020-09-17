@@ -3,7 +3,7 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core";
+import type {GameState, GameStateX} from "gbraver-burst-core";
 import {empty} from "../../../../../animation/delay";
 import {inputCommandAnimation} from "./input-command";
 import {battleAnimation} from "./battle";
@@ -17,6 +17,7 @@ import {gameEndAnimation} from "./game-end";
 import {rightItselfAnimation} from "./right-itself";
 import {pilotSkillAnimation} from "./pilot-skill";
 import {BattleSceneSounds} from "../../sounds";
+import type {StartGame} from "gbraver-burst-core/lib/effect/start-game/start-game";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -30,9 +31,13 @@ import {BattleSceneSounds} from "../../sounds";
 export function stateHistoryAnimation(view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState, gameStateList: GameState[]): Animate {
   return gameStateList
     .map(v => {
+      if (v.effect.name === 'StartGame') {
+        const effect: StartGame = v.effect;
+        const state = ((v: any): GameStateX<typeof effect>);
+        return startGameAnimation(view, sceneState, state);
+      }
+
       switch (v.effect.name) {
-        case 'StartGame':
-          return startGameAnimation(view, sceneState, v);
         case 'InputCommand':
           return inputCommandAnimation(view, sceneState, v);
         case 'BatteryDeclaration':
