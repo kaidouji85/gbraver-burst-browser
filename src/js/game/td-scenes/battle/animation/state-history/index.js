@@ -20,6 +20,7 @@ import {BattleSceneSounds} from "../../sounds";
 import type {StartGame} from "gbraver-burst-core/lib/effect/start-game/start-game";
 import type {InputCommand} from "gbraver-burst-core/lib/effect/input-command/input-command";
 import type {BatteryDeclaration} from "gbraver-burst-core/lib/effect/battery-declaration/battery-declaration";
+import type {Battle} from "gbraver-burst-core/lib/effect/battle/battle";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -51,9 +52,13 @@ export function stateHistoryAnimation(view: BattleSceneView, sounds: BattleScene
         return batteryDeclarationAnimation(view, sounds, sceneState, state);
       }
 
+      if (v.effect.name === 'Battle') {
+        const effect: Battle = v.effect;
+        const state = ((v: any): GameStateX<typeof effect>);
+        return battleAnimation(view, sceneState, state);
+      }
+
       switch (v.effect.name) {
-        case 'Battle':
-          return battleAnimation(view, sceneState, v);
         case 'TurnChange':
           return turnChangeAnimation(view, sceneState, v);
         case 'BurstEffect':
