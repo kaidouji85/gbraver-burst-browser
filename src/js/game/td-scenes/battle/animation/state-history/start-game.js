@@ -8,7 +8,7 @@ import {delay, empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../td-camera";
 import {turnStartAnimation} from "../turn-start";
-import type {StartGame} from "gbraver-burst-core/lib/effect/start-game/start-game";
+import type {StartGame} from "gbraver-burst-core";
 
 /**
  * ゲーム開始時のアニメーション

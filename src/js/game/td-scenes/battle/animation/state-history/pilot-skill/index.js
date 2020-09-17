@@ -2,13 +2,12 @@
 
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameStateX} from "gbraver-burst-core";
+import type {GameStateX, PilotSkillEffect} from "gbraver-burst-core";
 import {empty} from "../../../../../../animation/delay";
 import {Animate} from "../../../../../../animation/animate";
 import type {PilotSkillAnimationParam} from "./animation-param";
 import {castPilotSkillAnimationParam} from "./animation-param";
 import {castShinyaAnimationParam, shinyaAnimation} from "./shinya";
-import type {PilotSkillEffect} from "gbraver-burst-core/lib/effect/pilot-skill/pilot-skill-effect";
 
 /**
  * パイロット効果 アニメーション

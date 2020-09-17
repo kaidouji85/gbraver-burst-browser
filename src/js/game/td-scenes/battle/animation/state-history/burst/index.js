@@ -3,7 +3,7 @@
 import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameStateX} from "gbraver-burst-core";
+import type {BurstEffect, GameStateX} from "gbraver-burst-core";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {delay, empty} from "../../../../../../animation/delay";
@@ -11,7 +11,6 @@ import {castShinBraverBurst, shinBraverBurst} from "./shin-braver";
 import {castLightningDozerBurst, lightningDozerBurst} from "./lightning-dozer";
 import {castNeoLandozerBurst, neoLandozerBurst} from "./neo-landozer";
 import {castWingDozerBurst, wingDozerBurst} from "./wingdozer";
-import type {BurstEffect} from "gbraver-burst-core/lib/effect/burst/burst-effect";
 
 /**
  * バーストアニメーション

@@ -3,11 +3,10 @@
 import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameStateX} from "gbraver-burst-core";
+import type {Battle, GameStateX} from "gbraver-burst-core";
 import {delay, empty} from "../../../../../../animation/delay";
 import {attackAnimation} from "./attack";
 import {toBattleAnimationParam} from "./animation-param";
-import type {Battle} from "gbraver-burst-core/lib/effect/battle/battle";
 
 /**
  * 戦闘アニメーション
