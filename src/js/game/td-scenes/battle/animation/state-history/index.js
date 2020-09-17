@@ -27,6 +27,7 @@ import type {Reflect} from "gbraver-burst-core/lib/effect/reflect/reflect";
 import type {UpdateRemainingTurn} from "gbraver-burst-core/lib/effect/update-remaning-turn/update-remaining-turn";
 import type {GameEnd} from "gbraver-burst-core/lib/effect/game-end/game-end";
 import type {RightItself} from "gbraver-burst-core/lib/effect/right-itself/right-itself";
+import type {PilotSkillEffect} from "gbraver-burst-core/lib/effect/pilot-skill/pilot-skill-effect";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
@@ -100,12 +101,13 @@ export function stateHistoryAnimation(view: BattleSceneView, sounds: BattleScene
         return rightItselfAnimation(view, sceneState, state);
       }
 
-      switch (v.effect.name) {
-        case 'PilotSkillEffect':
-          return pilotSkillAnimation(view, sceneState, v);
-        default:
-          return empty();
+      if (v.effect.name === 'PilotSkillEffect') {
+        const effect: PilotSkillEffect = v.effect;
+        const state = ((v: any): GameStateX<typeof effect>);
+        return pilotSkillAnimation(view, sceneState, state);
       }
+      
+      return empty();
     })
     .reduce((a, b) => a.chain(b), empty());
 }
