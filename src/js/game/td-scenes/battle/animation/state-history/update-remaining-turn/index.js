@@ -3,7 +3,7 @@
 import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState, PlayerId, UpdateRemainingTurn} from "gbraver-burst-core";
+import type {GameStateX, PlayerId, UpdateRemainingTurn} from "gbraver-burst-core";
 import {delay, empty} from "../../../../../../animation/delay";
 import type {EndArmdozerEffectParam} from "./animation-param";
 import {all} from "../../../../../../animation/all";
@@ -17,7 +17,7 @@ import {lightningDozer, toLightningDozerEndArmdozerEffect} from "./lightning-doz
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function updateRemainingTurnAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+export function updateRemainingTurnAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<UpdateRemainingTurn>): Animate {
   const animations: Animate[] = gameState.players.map(player => playerUnderRemainingTurn(player.playerId, view, sceneState, gameState));
   return all(...animations);
 }
@@ -31,7 +31,7 @@ export function updateRemainingTurnAnimation(view: BattleSceneView, sceneState: 
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-function playerUnderRemainingTurn(playerId: PlayerId, view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+function playerUnderRemainingTurn(playerId: PlayerId, view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<UpdateRemainingTurn>): Animate {
   if (gameState.effect.name !== 'UpdateRemainingTurn') {
     return empty();
   }
