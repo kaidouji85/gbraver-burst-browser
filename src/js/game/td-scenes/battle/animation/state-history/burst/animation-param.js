@@ -1,6 +1,6 @@
 // @flow
 
-import type {Burst, BurstEffect, GameState, PlayerState} from "gbraver-burst-core";
+import type {Burst, BurstEffect, GameStateX, PlayerState} from "gbraver-burst-core";
 import type {TDPlayer} from "../../../view/td/player";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import {TDCamera} from "../../../../../../game-object/camera/td";
@@ -48,11 +48,7 @@ export type BurstAnimationParam = BurstAnimationParamX<ArmDozerSprite, HUDArmdoz
  * @param gameState ゲームステート
  * @return バーストアニメーションパラメータ
  */
-export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BurstAnimationParam {
-  if (gameState.effect.name !== 'BurstEffect') {
-    return null;
-  }
-
+export function toBurstAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<BurstEffect>): ?BurstAnimationParam {
   const effect: BurstEffect = gameState.effect;
   const burstPlayerState = gameState.players.find(v => v.playerId === effect.burstPlayer);
   const burstPlayerTD = view.td.players.find(v => v.playerId === effect.burstPlayer);
