@@ -3,8 +3,7 @@
 import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core";
-import {updateGauge} from "../update-gauge";
+import type {BurstEffect, GameStateX} from "gbraver-burst-core";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {delay, empty} from "../../../../../../animation/delay";
@@ -21,11 +20,12 @@ import {castWingDozerBurst, wingDozerBurst} from "./wingdozer";
  * @param gameState ゲーム状態
  * @return バーストアニメーション
  */
-export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<BurstEffect>): Animate {
   const param = toBurstAnimationParam(view, sceneState, gameState);
   if (!param) {
-    return updateGauge(view, sceneState, gameState);
+    return empty();
   }
+
   return delay(500)
     .chain(armdozerAnimation(param))
     .chain(delay(500))

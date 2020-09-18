@@ -3,7 +3,21 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core";
+import type {
+  BatteryDeclaration,
+  Battle,
+  BurstEffect,
+  GameEnd,
+  GameState,
+  GameStateX,
+  InputCommand,
+  PilotSkillEffect,
+  Reflect,
+  RightItself,
+  StartGame,
+  TurnChange,
+  UpdateRemainingTurn
+} from "gbraver-burst-core";
 import {empty} from "../../../../../animation/delay";
 import {inputCommandAnimation} from "./input-command";
 import {battleAnimation} from "./battle";
@@ -29,33 +43,85 @@ import {BattleSceneSounds} from "../../sounds";
  */
 export function stateHistoryAnimation(view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState, gameStateList: GameState[]): Animate {
   return gameStateList
-    .map(v => {
-      switch (v.effect.name) {
-        case 'StartGame':
-          return startGameAnimation(view, sceneState, v);
-        case 'InputCommand':
-          return inputCommandAnimation(view, sceneState, v);
-        case 'BatteryDeclaration':
-          return batteryDeclarationAnimation(view, sounds, sceneState, v);
-        case 'Battle':
-          return battleAnimation(view, sceneState, v);
-        case 'TurnChange':
-          return turnChangeAnimation(view, sceneState, v);
-        case 'BurstEffect':
-          return burstAnimation(view, sceneState, v);
-        case 'Reflect':
-          return reflectAnimation(view, sceneState, v);
-        case 'UpdateRemainingTurn':
-          return updateRemainingTurnAnimation(view, sceneState, v);
-        case 'GameEnd':
-          return gameEndAnimation(view, sceneState, v);
-        case 'RightItself':
-          return rightItselfAnimation(view, sceneState, v);
-        case 'PilotSkillEffect':
-          return pilotSkillAnimation(view, sceneState, v);
-        default:
-          return empty();
-      }
-    })
+    .map(v => stateAnimation(v, view, sounds, sceneState))
     .reduce((a, b) => a.chain(b), empty());
+}
+
+/**
+ * ゲームステートをアニメーションに変換する
+ *
+ * @param currentState 変換対象のゲーム ステート
+ * @param view 戦闘シーンビュー
+ * @param sounds 戦闘シーン効果音
+ * @param sceneState 戦闘シーンの状態
+ * @return アニメーション
+ */
+export function stateAnimation(currentState: GameState, view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState): Animate {
+  if (currentState.effect.name === 'StartGame') {
+    const effect: StartGame = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return startGameAnimation(view, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'InputCommand') {
+    const effect: InputCommand = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return inputCommandAnimation(view, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'BatteryDeclaration') {
+    const effect: BatteryDeclaration = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return batteryDeclarationAnimation(view, sounds, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'Battle') {
+    const effect: Battle = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return battleAnimation(view, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'TurnChange') {
+    const effect: TurnChange = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return turnChangeAnimation(view, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'BurstEffect') {
+    const effect: BurstEffect = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return burstAnimation(view, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'Reflect') {
+    const effect: Reflect = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return reflectAnimation(view, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'UpdateRemainingTurn') {
+    const effect: UpdateRemainingTurn = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return updateRemainingTurnAnimation(view, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'GameEnd') {
+    const effect: GameEnd = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return gameEndAnimation(view, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'RightItself') {
+    const effect: RightItself = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return rightItselfAnimation(view, sceneState, state);
+  }
+
+  if (currentState.effect.name === 'PilotSkillEffect') {
+    const effect: PilotSkillEffect = currentState.effect;
+    const state = ((currentState: any): GameStateX<typeof effect>);
+    return pilotSkillAnimation(view, sceneState, state);
+  }
+
+  return empty();
 }
