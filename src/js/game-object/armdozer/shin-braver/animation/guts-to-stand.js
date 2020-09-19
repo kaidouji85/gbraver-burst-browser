@@ -7,8 +7,14 @@ import {tween} from "../../../../animation/tween";
 import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
 import {delay} from "../../../../animation/delay";
 
-/** ターンスタート -> 立ち */
-export function turnStartToStand(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {
+/**
+ * ガッツ -> 立ち
+ *
+ * @param model モデル
+ * @param sounds 効果音
+ * @return アニメーション
+ */
+export function gutsToStand(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {
   return process(() => {
     model.animation.type = 'GUTS_DOWN';
     model.animation.frame = 1;
