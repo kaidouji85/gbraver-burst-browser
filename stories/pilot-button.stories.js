@@ -8,7 +8,7 @@ export default {
   title: 'pilot-button',
 };
 
-export const pilotButton = () => {
+export const pilotButton = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const button = new PilotButton(resources, listener);
     button.notifier().pushButton.subscribe(() => {

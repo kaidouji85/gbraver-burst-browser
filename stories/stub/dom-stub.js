@@ -16,12 +16,19 @@ import {ResourceLoader} from "../../src/js/resource";
 export type DOMCreator = (resources: Resources) => HTMLElement;
 
 /**
+ * HTML要素スタブのストーリー
+ *
+ * @return 表示するHTML要素
+ */
+export type DOMStubStory = () => HTMLElement;
+
+/**
  *HTML要素スタブ
  *
  * @param creator HTML要素生成コールバック関数
- * @return {function(): *} ストーリー
+ * @return ストーリー
  */
-export const domStub = (creator: DOMCreator) => (): HTMLElement => {
+export const domStub = (creator: DOMCreator): DOMStubStory => () => {
   const root = document.createElement('div');
   const resize = createResizeStream();
   const vh = new CssVH(resize);

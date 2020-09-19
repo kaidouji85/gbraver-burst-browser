@@ -29,12 +29,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(?:js|jsx)$/,
+        test: /\.js/,
         exclude: /node_modules/,
         loader: 'babel-loader'
       },
       {
-        test: /\.css/,
+        test: /\.css$/i,
         use: [
           'style-loader',
           'css-loader',
@@ -44,7 +44,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css']
+    extensions: ['.js', '.css']
   },
   plugins: [
     new HtmlWebpackPlugin({

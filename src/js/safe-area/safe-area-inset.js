@@ -28,7 +28,7 @@ export type SafeAreaInset = {
 };
 
 /** 空のセーフエリアインセット */
-export const EMPTY_SAFE_AREA_INSET = {
+export const EMPTY_SAFE_AREA_INSET: SafeAreaInset = {
   top: 0,
   bottom: 0,
   right: 0,
@@ -40,7 +40,7 @@ export const EMPTY_SAFE_AREA_INSET = {
  *
  * @return 生成結果
  */
-export function createSafeAreaInset() {
+export function createSafeAreaInset(): SafeAreaInset {
   if (!document.documentElement) {
     return EMPTY_SAFE_AREA_INSET;
   }

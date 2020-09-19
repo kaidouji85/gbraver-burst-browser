@@ -8,7 +8,7 @@ export default {
   title: 'lightning-dozer',
 };
 
-export const armHammer = () => {
+export const armHammer = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = PlayerLightningDozer(resources, listener);
     const animation  = sprite.charge()
