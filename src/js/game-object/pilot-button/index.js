@@ -5,14 +5,14 @@ import type {Resources} from "../../resource";
 import {PilotButtonView} from "./view/pilot-button-view";
 import type {PilotButtonModel} from "./model/pilot-button-model";
 import {createInitialValue} from './model/initial-value';
-import {Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {open} from "./animation/open";
 import {decide} from "./animation/decide";
 import {close} from "./animation/close";
-import {filter, tap} from "rxjs/operators";
+import {filter} from "rxjs/operators";
 import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
 
 /**

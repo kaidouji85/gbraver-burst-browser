@@ -29,7 +29,6 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
 
   return all(
     turnStartAnimation(activeTDSprite.sprite, activeTDPlayer.turnStart),
-    activeTDSprite.sprite.turnStart(),
     attentionArmDozer(view.td.camera, activeTDSprite.sprite, 500)
   )
     .chain(delay(500))

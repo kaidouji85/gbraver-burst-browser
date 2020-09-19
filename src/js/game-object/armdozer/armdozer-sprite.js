@@ -18,14 +18,6 @@ export interface ArmDozerSprite {
    */
   addObject3D(object: typeof THREE.Object3D): void;
 
-  // TODO 削除する
-  /** ターンスタート */
-  turnStart(): Animate;
-
-  // TODO 削除する
-  /** ターンスタート -> 立ち */
-  turnStartToStand(): Animate;
-
   /** ノックバック */
   knockBack(): Animate;
 

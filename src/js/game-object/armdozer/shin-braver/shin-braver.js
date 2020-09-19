@@ -118,22 +118,6 @@ export class ShinBraver implements ArmDozerSprite {
     return gutsToStand(this._model, this._sounds);
   }
 
-  // TODO 削除する
-  /**
-   * ターンスタート
-   *
-   * @return アニメーション
-   */
-  turnStart(): Animate {
-    return gutsForturnStart(this._model, this._sounds);
-  }
-
-  // TODO 削除する
-  /** ターンスタート -> 立ち */
-  turnStartToStand(): Animate {
-    return gutsToStand(this._model, this._sounds);
-  }
-
   /** ダメージアニメーションを再生する */
   knockBack(): Animate {
     return knockBack(this._model);

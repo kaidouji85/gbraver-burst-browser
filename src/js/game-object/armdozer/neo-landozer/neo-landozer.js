@@ -109,26 +109,6 @@ export class NeoLandozer implements ArmDozerSprite {
   gutsToStand(): Animate {
     return gutsToStand(this._model, this._sounds);
   }
-
-  // TODO 削除する
-  /**
-   * ターンスタート
-   *
-   * @return アニメーション
-   */
-  turnStart(): Animate {
-    return gutsForTurnStart(this._model, this._sounds);
-  }
-
-  // TODO 削除する
-  /**
-   * ターンスタート -> 立ち
-   *
-   * @return アニメーション
-   */
-  turnStartToStand(): Animate {
-    return gutsToStand(this._model, this._sounds);
-  }
   
   /** ノックバック */
   knockBack(): Animate {

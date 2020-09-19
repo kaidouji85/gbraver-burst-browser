@@ -3,12 +3,11 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameStateX} from "gbraver-burst-core";
+import type {GameStateX, StartGame} from "gbraver-burst-core";
 import {delay, empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../td-camera";
 import {turnStartAnimation, turnStartToStandAnimation} from "../turn-start";
-import type {StartGame} from "gbraver-burst-core";
 
 /**
  * ゲーム開始時のアニメーション

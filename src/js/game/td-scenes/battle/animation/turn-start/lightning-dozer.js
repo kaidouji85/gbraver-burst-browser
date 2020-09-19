@@ -15,7 +15,7 @@ import {LightningDozer} from "../../../../../game-object/armdozer/lightning-doze
  */
 export function lightningDozerTurnStart(sprite: LightningDozer, turnStart: TurnStart): Animate {
   return all(
-    sprite.turnStart(),
+    sprite.gutsForTurnStart(),
     delay(600)
       .chain(turnStart.popUp())
   );
