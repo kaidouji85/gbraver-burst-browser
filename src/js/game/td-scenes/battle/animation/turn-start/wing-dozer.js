@@ -7,7 +7,7 @@ import {delay} from "../../../../../animation/delay";
 import {WingDozer} from "../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 
 /**
- * ウィングドーザ ターンスタートアニメーション
+ * ウィングドーザ ターンスタート
  *
  * @param sprite スプライト
  * @param turnStart ターンスタートインジケータ
@@ -19,4 +19,14 @@ export function wingDozerTurnStart(sprite: WingDozer, turnStart: TurnStart): Ani
     delay(900)
       .chain(turnStart.popUp())
   );
+}
+
+/**
+ * ウィングドーザ ターンスタート -> 立ち
+ *
+ * @param sprite スプライト
+ * @return アニメーション
+ */
+export function wingDozerTurnStartToStand(sprite: WingDozer): Animate {
+  return sprite.dashToStand();
 }

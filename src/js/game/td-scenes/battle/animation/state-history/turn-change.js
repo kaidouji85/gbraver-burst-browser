@@ -7,7 +7,7 @@ import type {GameStateX, TurnChange} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 import {delay, empty} from "../../../../../animation/delay";
 import {attentionArmDozer, toInitial} from "../td-camera";
-import {turnStartAnimation} from "../turn-start";
+import {turnStartAnimation, turnStartToStandAnimation} from "../turn-start";
 
 /**
  * ターン変更のアニメーション
@@ -42,7 +42,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     )
     .chain(delay(500))
     .chain(all(
-      activeTDSprite.sprite.turnStartToStand(),
+      turnStartToStandAnimation(activeTDSprite.sprite),
       toInitial(view.td.camera, 500))
     )
     .chain(delay(500));
