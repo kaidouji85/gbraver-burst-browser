@@ -59,7 +59,7 @@ export function lightningDozerBurst(param: LightningDozerBurst<Burst>): Animate 
  */
 function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate {
   return all(
-    param.burstSprite.turnStart(),
+    param.burstSprite.guts(),
     param.burstArmdozerHUD.cutIn.show(),
     attentionArmDozer(param.tdCamera, param.burstSprite, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
@@ -81,7 +81,7 @@ function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate
   )).chain(delay(500)
   ).chain(all(
     toInitial(param.tdCamera, 500),
-    param.burstSprite.turnStartToStand(),
+    param.burstSprite.gutsToStand(),
     param.tdObjects.skyBrightness.brightness(1, 500),
     param.tdObjects.illumination.intensity(1, 500),
   )).chain(delay(500));
