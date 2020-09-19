@@ -14,7 +14,7 @@ import {upper} from "./animation/upper";
 import {upperToStand} from "./animation/upper-to-stand";
 import {avoid} from "./animation/avoid";
 import {avoidToStand} from "./animation/avoid-to-stand";
-import {dash} from "./animation/dash";
+import {dash, dashForTurnStart} from "./animation/dash";
 import {dashToStand} from "./animation/dash-to-stand";
 import {knockBack} from "./animation/knock-back";
 import {knockBackToStand} from "./animation/knock-back-to-stand";
@@ -86,7 +86,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   turnStart(): Animate {
-    return dash(this._model, this._sounds);
+    return dashForTurnStart(this._model, this._sounds);
   }
 
   /**
