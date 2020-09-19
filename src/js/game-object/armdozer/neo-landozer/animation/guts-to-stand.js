@@ -14,7 +14,7 @@ import {delay} from "../../../../animation/delay";
  * @param sounds 音
  * @return アニメーション
  */
-export function turnStartToStand(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animate {
+export function gutsToStand(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animate {
   return process(() => {
     model.animation.type = 'GUTS_DOWN';
     model.animation.frame = 1;
