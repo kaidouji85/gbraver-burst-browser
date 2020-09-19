@@ -57,7 +57,7 @@ export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
  */
 function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
   return  all(
-    param.burstSprite.turnStart(),
+    param.burstSprite.guts(),
     param.burstArmdozerHUD.cutIn.show(),
     attentionArmDozer(param.tdCamera, param.burstSprite, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
@@ -76,7 +76,7 @@ function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
   )).chain(delay(500)
   ).chain(all(
-    param.burstSprite.turnStartToStand(),
+    param.burstSprite.gutsToStand(),
     toInitial(param.tdCamera, 500),
     param.tdObjects.skyBrightness.brightness(1, 500),
     param.tdObjects.illumination.intensity(1, 500),

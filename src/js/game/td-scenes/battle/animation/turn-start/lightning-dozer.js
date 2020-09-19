@@ -7,7 +7,7 @@ import {delay} from "../../../../../animation/delay";
 import {LightningDozer} from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 
 /**
- * ライトニングドーザ ターンスタートアニメーション
+ * ライトニングドーザ ターンスタート
  *
  * @param sprite スプライト
  * @param turnStart ターンスタートインジケータ
@@ -15,8 +15,18 @@ import {LightningDozer} from "../../../../../game-object/armdozer/lightning-doze
  */
 export function lightningDozerTurnStart(sprite: LightningDozer, turnStart: TurnStart): Animate {
   return all(
-    sprite.turnStart(),
-    delay(500)
+    sprite.gutsForTurnStart(),
+    delay(600)
       .chain(turnStart.popUp())
   );
+}
+
+/**
+ * ライトニングドーザ ターンスタート -> 立ち
+ *
+ * @param sprite スプライト
+ * @return アニメーション
+ */
+export function lightningDozerTurnStartToStand(sprite: LightningDozer): Animate {
+  return sprite.gutsToStand();
 }

@@ -42,12 +42,12 @@ export const attack = (): HTMLElement => {
   return stub.domElement();
 }
 
-export const turnStart = (): HTMLElement => {
+export const dash = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = PlayerWingDozer(resources, listener);
-    const animation = sprite.turnStart()
+    const animation = sprite.dash()
       .chain(delay(2000))
-      .chain(sprite.turnStartToStand())
+      .chain(sprite.dashToStand())
       .chain(delay(2000));
     animation.loop();
     return [sprite.getObject3D()];

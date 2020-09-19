@@ -4,16 +4,17 @@ import {Animate} from "../../../../../animation/animate";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {ShinBraver} from "../../../../../game-object/armdozer/shin-braver/shin-braver";
-import {shinBraverTurnStart} from "./shin-braver";
-import {neoLandozerTurnStart} from "./neo-landozer";
+import {shinBraverTurnStart, shinBraverTurnStartToStand} from "./shin-braver";
+import {neoLandozerTurnStart, neoLandozerTurnStartToStand} from "./neo-landozer";
 import {NeoLandozer} from "../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {LightningDozer} from "../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
-import {lightningDozerTurnStart} from "./lightning-dozer";
+import {lightningDozerTurnStart, lightningDozerTurnStartToStand} from "./lightning-dozer";
 import {WingDozer} from "../../../../../game-object/armdozer/wing-dozer/wing-dozer";
-import {wingDozerTurnStart} from "./wing-dozer";
+import {wingDozerTurnStart, wingDozerTurnStartToStand} from "./wing-dozer";
+import {empty} from "../../../../../animation/delay";
 
 /**
- * ターンスタートアニメーション
+ * ターンスタート
  *
  * @param sprite スプライト
  * @param turnStart ターンスタートインジケータ
@@ -36,17 +37,31 @@ export function turnStartAnimation(sprite: ArmDozerSprite, turnStart: TurnStart)
     return wingDozerTurnStart(sprite, turnStart);
   }
 
-  return defaultTurnStartAnimation(sprite, turnStart);
+  return turnStart.popUp();
 }
 
 /**
- * デフォルト ターンスタートアニメーション
+ * ターンスタート -> 立ち
  *
  * @param sprite スプライト
- * @param turnStart ターンスタートインジケータ
  * @return アニメーション
  */
-function defaultTurnStartAnimation(sprite: ArmDozerSprite, turnStart: TurnStart): Animate {
-  return sprite.turnStart()
-    .chain(turnStart.popUp());
+export function turnStartToStandAnimation(sprite: ArmDozerSprite): Animate {
+  if (sprite instanceof ShinBraver) {
+    return shinBraverTurnStartToStand(sprite);
+  }
+
+  if (sprite instanceof NeoLandozer) {
+    return neoLandozerTurnStartToStand(sprite);
+  }
+
+  if (sprite instanceof LightningDozer) {
+    return lightningDozerTurnStartToStand(sprite);
+  }
+
+  if (sprite instanceof WingDozer) {
+    return wingDozerTurnStartToStand(sprite);
+  }
+
+  return empty();
 }

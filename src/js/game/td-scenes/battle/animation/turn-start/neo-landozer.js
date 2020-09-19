@@ -7,7 +7,7 @@ import {all} from "../../../../../animation/all";
 import {delay} from "../../../../../animation/delay";
 
 /**
- * ネオランドーザ ターンスタートアニメーション
+ * ネオランドーザ ターンスタート
  *
  * @param sprite スプライト
  * @param turnStart ターンスタートインジケータ
@@ -15,8 +15,18 @@ import {delay} from "../../../../../animation/delay";
  */
 export function neoLandozerTurnStart(sprite: NeoLandozer, turnStart: TurnStart): Animate {
   return all(
-    sprite.turnStart(),
-    delay(500)
+    sprite.gutsForTurnStart(),
+    delay(600)
       .chain(turnStart.popUp())
   );
+}
+
+/**
+ * ネオランドーザ ターンスタート -> 立ち
+ *
+ * @param sprite スプライト
+ * @return アニメーション
+ */
+export function neoLandozerTurnStartToStand(sprite: NeoLandozer): Animate {
+  return sprite.gutsToStand();
 }

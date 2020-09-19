@@ -13,7 +13,7 @@ import {LightningDozerSounds} from "../sounds/lightning-dozer-sounds";
  * @param sounds 音
  * @return アニメーション
  */
-export function turnStartToStand(model: LightningDozerModel, sounds: LightningDozerSounds): Animate {
+export function gutsToStand(model: LightningDozerModel, sounds: LightningDozerSounds): Animate {
   return process(() => {
     model.animation.type = 'GUTS_TO_STAND';
     model.animation.frame = 0;

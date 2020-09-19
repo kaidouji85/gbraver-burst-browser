@@ -3,12 +3,11 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameStateX} from "gbraver-burst-core";
+import type {GameStateX, StartGame} from "gbraver-burst-core";
 import {delay, empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../td-camera";
-import {turnStartAnimation} from "../turn-start";
-import type {StartGame} from "gbraver-burst-core";
+import {turnStartAnimation, turnStartToStandAnimation} from "../turn-start";
 
 /**
  * ゲーム開始時のアニメーション
@@ -32,7 +31,7 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
   )
     .chain(delay(500))
     .chain(all(
-      activeTDSprite.sprite.turnStartToStand(),
+      turnStartToStandAnimation(activeTDSprite.sprite),
       toInitial(view.td.camera, 500)
     ))
     .chain(delay(500));

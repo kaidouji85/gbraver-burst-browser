@@ -2,7 +2,7 @@
 
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState, GameStateX, PilotSkill, PilotSkillEffect, PlayerState} from "gbraver-burst-core";
+import type {GameStateX, PilotSkill, PilotSkillEffect, PlayerState} from "gbraver-burst-core";
 import {HUDGameObjects} from "../../../view/hud/game-objects";
 import {TDGameObjects} from "../../../view/td/game-objects";
 import type {TDPlayer} from "../../../view/td/player";

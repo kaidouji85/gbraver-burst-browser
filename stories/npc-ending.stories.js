@@ -1,8 +1,8 @@
 // @flow
 
+import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
 import {NPCEnding} from "../src/js/game/dom-scenes/npc-ending";
-import type {DOMStubStory} from "./stub/dom-stub";
 
 export default {
   title: 'npc-ending'
