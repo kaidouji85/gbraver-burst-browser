@@ -43,7 +43,7 @@ export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDFiel
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3Ds() {
+  getObject3Ds(): typeof THREE.Object3D[] {
     return [];
   }
 

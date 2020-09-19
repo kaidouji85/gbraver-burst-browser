@@ -77,7 +77,7 @@ export class PlayerShockWaveView implements ShockWaveView {
    *
    * @return シーンに追加するオブジェクト
    */
-  getObject3D() {
+  getObject3D(): typeof THREE.Object3D {
     return this._group;
   }
 }

@@ -124,7 +124,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    * @param type アニメーションタイプ
    * @return 対応したメッシュ
    */
-  _getActiveMesh(type: AnimationType) {
+  _getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {
       case "CUT_IN_UP":
         return this._cutInUp;

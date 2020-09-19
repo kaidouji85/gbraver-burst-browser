@@ -8,7 +8,7 @@ export default {
   title: 'damage-indicator',
 };
 
-export const player = () => {
+export const player = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const continuousAttack = playerDamageIndicator({
       resources: resources,
@@ -25,7 +25,7 @@ export const player = () => {
   return stub.domElement();
 }
 
-export const enemy = () => {
+export const enemy = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const continuousAttack = enemyDamageIndicator({
       resources: resources,
