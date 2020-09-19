@@ -64,13 +64,13 @@ export function guts(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animat
 }
 
 /**
- * ターンスタート
+ * ターンスタート用 ガッツ
  *
  * @param model モデル
  * @param sounds 効果音
  * @return アニメーション
  */
-export function turnStart(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animate {
+export function gutsForTurnStart(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animate {
   return process(() => {
     sounds.motor.play();
   })

@@ -81,6 +81,34 @@ export class WingDozer implements ArmDozerSprite {
   }
 
   /**
+   * ダッシュ
+   *
+   * @return アニメーション
+   */
+  dash(): Animate {
+    return dash(this._model, this._sounds);
+  }
+
+  /**
+   * ターンスタート用 ダッシュ
+   *
+   * @return アニメーション
+   */
+  dashForTurnStart(): Animate {
+    return dashForTurnStart(this._model, this._sounds);
+  }
+
+  /**
+   * ダッシュ -> 立ち
+   *
+   * @return アニメーション
+   */
+  dashToStand(): Animate {
+    return dashToStand(this._model, this._sounds);
+  }
+
+  // TODO 削除する
+  /**
    * ターンスタート
    *
    * @return アニメーション
@@ -89,6 +117,7 @@ export class WingDozer implements ArmDozerSprite {
     return dashForTurnStart(this._model, this._sounds);
   }
 
+  // TODO 削除する
   /**
    * ターンスタート -> 立ち
    *

@@ -63,13 +63,13 @@ export function guts(model: ShinBraverModel, sounds: ShinBraverSounds): Animate 
 }
 
 /**
- * ターンスタート
+ * ターンスタート用 ガッツ
  *
  * @param model モデル
  * @param sounds 効果音
  * @return アニメーション
  */
-export function turnStart(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {
+export function gutsForturnStart(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {
   return process(() => {
     sounds.motor.play();
   })

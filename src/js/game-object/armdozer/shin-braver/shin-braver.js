@@ -20,7 +20,7 @@ import {avoidToStand} from "./animation/avoid-to-stand";
 import {punchToStand} from "./animation/punch-to-stand";
 import {charge} from "./animation/charge";
 import {down} from "./animation/down";
-import {guts, turnStart} from "./animation/guts";
+import {guts, gutsForturnStart} from "./animation/guts";
 import {gutsToStand} from "./animation/guts-to-stand";
 import {burst} from "./animation/burst";
 import {burstToStand} from "./animation/burst-to-stand";
@@ -92,14 +92,43 @@ export class ShinBraver implements ArmDozerSprite {
   }
 
   /**
+   * ガッツ
+   *
+   * @return アニメーション
+   */
+  guts(): Animate {
+    return guts(this._model, this._sounds);
+  }
+
+  /**
+   * ターンスタート用 ガッツ
+   *
+   * @return アニメーション
+   */
+  gutsForTurnStart(): Animate {
+    return gutsForturnStart(this._model, this._sounds);
+  }
+
+  /**
+   * ガッツ -> 立ち
+   *
+   * @return アニメーション
+   */
+  gutsToStand(): Animate {
+    return gutsToStand(this._model, this._sounds);
+  }
+
+  // TODO 削除する
+  /**
    * ターンスタート
    *
    * @return アニメーション
    */
   turnStart(): Animate {
-    return turnStart(this._model, this._sounds);
+    return gutsForturnStart(this._model, this._sounds);
   }
 
+  // TODO 削除する
   /** ターンスタート -> 立ち */
   turnStartToStand(): Animate {
     return gutsToStand(this._model, this._sounds);

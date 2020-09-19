@@ -99,11 +99,40 @@ export class LightningDozer implements ArmDozerSprite {
     return hmToStand(this._model, this._sounds);
   }
 
+  /**
+   * ガッツ
+   * 
+   * @return アニメーション
+   */
+  guts(): Animate {
+    return guts(this._model, this._sounds);
+  }
+
+  /**
+   * ターンスタート用 ガッツ
+   *
+   * @return アニメーション
+   */
+  gutsForTurnStart(): Animate {
+    return gutsForTurnStart(this._model, this._sounds);
+  }
+
+  /**
+   * ガッツ -> 立ち
+   *
+   * @return アニメーション
+   */
+  gutsToStand(): Animate {
+    return gutsToStand(this._model, this._sounds);
+  }
+
+  // TODO 削除する
   /** ターンスタート */
   turnStart(): Animate {
     return gutsForTurnStart(this._model, this._sounds);
   }
 
+  // TODO 削除する
   /** ターンスタート -> 立ち */
   turnStartToStand(): Animate {
     return gutsToStand(this._model, this._sounds);
