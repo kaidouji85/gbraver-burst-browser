@@ -16,7 +16,7 @@ import {WingDozer} from "../../../../../game-object/armdozer/wing-dozer/wing-doz
 export function wingDozerTurnStart(sprite: WingDozer, turnStart: TurnStart): Animate {
   return all(
     sprite.turnStart(),
-    delay(800)
+    delay(900)
       .chain(turnStart.popUp())
   );
 }

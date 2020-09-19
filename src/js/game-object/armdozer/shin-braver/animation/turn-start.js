@@ -11,6 +11,7 @@ import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
  * ターンスタート
  *
  * @param model モデル
+ * @param sounds 効果音
  * @return アニメーション
  */
 export function turnStart(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {
@@ -23,7 +24,6 @@ export function turnStart(model: ShinBraverModel, sounds: ShinBraverSounds): Ani
     .chain(process(() => {
       model.animation.type = 'GUTS_DOWN';
       model.animation.frame = 0;
-      sounds.motor.play();
     }))
     .chain(tween(model.animation, t => t.to({frame: 1}, 200)));
 }

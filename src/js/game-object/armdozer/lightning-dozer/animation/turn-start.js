@@ -25,7 +25,6 @@ export function turnStart(model: LightningDozerModel, sounds: LightningDozerSoun
     .chain(process(() => {
       model.animation.type = 'GUTS_DOWN';
       model.animation.frame = 0;
-      sounds.motor.play();
     }))
     .chain(tween(model.animation, t => t.to({frame: 1}, 200)));
 }
