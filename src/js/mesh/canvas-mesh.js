@@ -15,17 +15,25 @@ type Params = {
 export class CanvasMesh {
   /** メッシュ */
   mesh: typeof THREE.Mesh;
-  /** 描画を行うキャンバス */
-  canvas: HTMLCanvasElement;
+
+  /** テクスチャ  */
+  texture: typeof THREE.CanvasTexture;
+
+  /**
+   * 描画を行うキャンバス
+   * デストラクタでnullを指定できるようにMaybe Typesを指定した
+   */
+  canvas: ?HTMLCanvasElement;
 
   constructor(params: Params) {
-    this.canvas = document.createElement('canvas');
-    this.canvas.width = params.canvasWidth;
-    this.canvas.height = params.canvasHeight;
+    const canvas = document.createElement('canvas');
+    canvas.width = params.canvasWidth;
+    canvas.height = params.canvasHeight;
+    this.canvas = canvas;
 
-    const texture = new THREE.Texture(this.canvas);
+    this.texture = new THREE.Texture(canvas);
     const material = new THREE.MeshBasicMaterial({
-      map: texture,
+      map: this.texture,
       transparent: true
     });
     const planeGeometry = new THREE.PlaneGeometry(params.meshWidth, params.meshHeight);
@@ -37,8 +45,10 @@ export class CanvasMesh {
   /** デストラクタ */
   destructor(): void {
     this.mesh.geometry.dispose();
+    this.texture.dispose();
+    this.texture.image = null;
     this.mesh.material.dispose();
-    this.mesh.material.map.dispose();
+    this.canvas = null;
   }
 
   /**
@@ -47,6 +57,9 @@ export class CanvasMesh {
    * @param drawFunc 描画関数
    */
   draw(drawFunc: (context: CanvasRenderingContext2D) => void): void {
+    if (!this.canvas) {
+      return;
+    }
     // テクスチャとして使われているキャンバスを更新する場合、
     // 毎回 mesh.material.map.needsUpdate = true とセットする必要がある
     //

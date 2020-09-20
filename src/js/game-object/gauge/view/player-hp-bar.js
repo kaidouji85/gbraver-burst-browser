@@ -17,6 +17,7 @@ export const BACK_CANVAS_HEIGHT= 512;
 export const BACK_MESH_WIDTH = 512;
 export const BACK_MESH_HEIGHT = 512;
 
+// TODO メモリリーク対策をした
 /** プレイヤーのHPバー */
 export class PlayerHpBar {
   _texture: typeof THREE.Texture;
