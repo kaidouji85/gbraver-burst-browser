@@ -105,30 +105,27 @@ export class ThreeDimensionLayer {
 
   /** デストラクタ */
   destructor(): void {
+    const removeTargets: typeof THREE.Object3D[] = [
+      ...this.players.flatMap(v => v.getObject3Ds()),
+      ...this.sprites.flatMap(v => v.getObject3Ds()),
+      ...this.armdozerObjects.flatMap(v => v.getObject3Ds()),
+      ...this.gameObjects.getObject3Ds()
+    ];
+    removeTargets.forEach(v => {
+      this.scene.remove(v);
+    });
+
     this.scene.background.dispose();
     this.players.forEach(player => {
-      player.getObject3Ds().forEach(object => {
-        this.scene.remove(object)
-      });
       player.destructor();
     });
     this.sprites.forEach(sprite => {
-      sprite.getObject3Ds().forEach(object => {
-        this.scene.remove(object);
-      });
       sprite.destructor();
     });
     this.armdozerObjects.forEach(armdozer => {
-      armdozer.getObject3Ds().forEach(object => {
-        this.scene.remove(object);
-      });
       armdozer.destructor();
     });
-    this.gameObjects.getObject3Ds().forEach(object => {
-      this.scene.remove(object);
-    });
     this.gameObjects.destructor();
-
     this.camera.destructor();
   }
 }

@@ -99,32 +99,26 @@ export class HudLayer {
 
   /** デストラクタ */
   destructor(): void {
-    this.gameObjects.getObject3Ds().forEach(object => {
-      this.scene.remove(object);
+    const removeTargets: typeof THREE.Object3D[] = [
+      ...this.gameObjects.getObject3Ds(),
+      ...this.armdozers.flatMap(v => v.getObject3Ds()),
+      ...this.players.flatMap(v => v.getObject3Ds()),
+      ...this.pilots.flatMap(v => v.getObject3Ds()),
+    ];
+    removeTargets.forEach(v => {
+      this.scene.remove(v);
     });
-    this.gameObjects.destructor();
 
+    this.gameObjects.destructor();
     this.armdozers.forEach(armdozer => {
-      armdozer.getObject3Ds().forEach(object => {
-        this.scene.remove(object);
-      });
       armdozer.destructor();
     });
-
     this.players.forEach(player => {
-      player.getObject3Ds().forEach(object => {
-        this.scene.remove(object);
-      });
       player.destructor();
     });
-
     this.pilots.forEach(pilot => {
-      pilot.getObject3Ds().forEach(object => {
-        this.scene.remove(object);
-      });
       pilot.destructor();
     })
-
     this.camera.destructor();
   }
 
