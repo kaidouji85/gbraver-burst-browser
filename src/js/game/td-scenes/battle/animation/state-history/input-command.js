@@ -3,7 +3,7 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameState, InputCommand} from "gbraver-burst-core";
+import type {GameStateX, InputCommand} from "gbraver-burst-core";
 import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
 import {empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
@@ -18,14 +18,9 @@ import {canPilotButtonPush} from "../../ui-logic/pilot-button";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
-  if (gameState.effect.name !== 'InputCommand') {
-    return empty();
-  }
-
-  const effect: InputCommand = gameState.effect;
+export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<InputCommand>): Animate {
   const player = gameState.players.find(v => v.playerId === sceneState.playerId);
-  const playerCommand = effect.players.find(v => v.playerId === sceneState.playerId);
+  const playerCommand = gameState.effect.players.find(v => v.playerId === sceneState.playerId);
   const playerHUD = view.hud.players.find(v => v.playerId === sceneState.playerId);
   const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
   const enemyHUD = view.hud.players.find(v => v.playerId !== sceneState.playerId);

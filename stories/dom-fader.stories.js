@@ -1,5 +1,6 @@
 // @flow
 
+import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
 import {DOMFader} from "../src/js/components/dom-fader/dom-fader";
 import {waitTime} from "../src/js/wait/wait-time";
@@ -8,7 +9,7 @@ export default {
   title: 'dom-fader'
 };
 
-export const Scene = domStub(resources => {
+export const Scene: DOMStubStory = domStub(resources => {
   const fader = new DOMFader();
   (async () => {
     await waitTime(5000);

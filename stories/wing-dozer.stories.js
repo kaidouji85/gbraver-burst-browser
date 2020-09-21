@@ -8,7 +8,7 @@ export default {
   title: 'wing-dozer',
 };
 
-export const stand = () => {
+export const stand = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = PlayerWingDozer(resources, listener);
     return [sprite.getObject3D()];
@@ -17,7 +17,7 @@ export const stand = () => {
   return stub.domElement();
 }
 
-export const enemy = () => {
+export const enemy = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = EnemyWingDozer(resources, listener);
     return [sprite.getObject3D()];
@@ -26,7 +26,7 @@ export const enemy = () => {
   return stub.domElement();
 }
 
-export const attack = () => {
+export const attack = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = PlayerWingDozer(resources, listener);
     const animation = sprite.charge()
@@ -42,12 +42,12 @@ export const attack = () => {
   return stub.domElement();
 }
 
-export const turnStart = () => {
+export const dash = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = PlayerWingDozer(resources, listener);
-    const animation = sprite.turnStart()
+    const animation = sprite.dash()
       .chain(delay(2000))
-      .chain(sprite.turnStartToStand())
+      .chain(sprite.dashToStand())
       .chain(delay(2000));
     animation.loop();
     return [sprite.getObject3D()];
@@ -56,7 +56,7 @@ export const turnStart = () => {
   return stub.domElement();
 }
 
-export const down = () => {
+export const down = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = PlayerWingDozer(resources, listener);
     const animation = sprite.down()

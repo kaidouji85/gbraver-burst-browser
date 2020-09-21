@@ -2,7 +2,7 @@
 
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState, PilotSkill, PilotSkillEffect, PlayerState} from "gbraver-burst-core";
+import type {GameStateX, PilotSkill, PilotSkillEffect, PlayerState} from "gbraver-burst-core";
 import {HUDGameObjects} from "../../../view/hud/game-objects";
 import {TDGameObjects} from "../../../view/td/game-objects";
 import type {TDPlayer} from "../../../view/td/player";
@@ -42,11 +42,7 @@ export type PilotSkillAnimationParam = PilotSkillAnimationParamX<PilotSkill, HUD
  * @param gameState ゲームステート
  * @return キャスト結果
  */
-export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState):  ?PilotSkillAnimationParam {
-  if (gameState.effect.name !== 'PilotSkillEffect') {
-    return null;
-  }
-
+export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<PilotSkillEffect>): ?PilotSkillAnimationParam {
   const effect: PilotSkillEffect = gameState.effect;
   const invokerState = gameState.players.find(v => v.playerId === effect.invokerId);
   const invokerSprite = view.td.sprites.find(v => v.playerId === effect.invokerId);

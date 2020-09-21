@@ -8,7 +8,7 @@ export default {
   title: 'shinya',
 };
 
-export const player = () => {
+export const player = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const pilot = playerShinyaCutIn(resources, listener);
     pilot.show()
@@ -22,7 +22,7 @@ export const player = () => {
   return stub.domElement();
 }
 
-export const enemy = () => {
+export const enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const pilot = enemyShinyaCutIn(resources, listener);
     pilot.show()

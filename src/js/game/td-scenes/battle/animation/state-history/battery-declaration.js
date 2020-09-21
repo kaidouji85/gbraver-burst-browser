@@ -2,7 +2,7 @@
 
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {BatteryDeclaration, GameState} from "gbraver-burst-core";
+import type {BatteryDeclaration, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
@@ -18,12 +18,7 @@ import {process} from '../../../../../animation/process';
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function batteryDeclarationAnimation(view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState, gameState: GameState): Animate {
-  if (gameState.effect.name !== 'BatteryDeclaration') {
-    return empty();
-  }
-
-  const effect: BatteryDeclaration = gameState.effect;
+export function batteryDeclarationAnimation(view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState, gameState: GameStateX<BatteryDeclaration>): Animate {
   const attacker = gameState.players.find(v => v.playerId === gameState.activePlayerId);
   const defender = gameState.players.find(v => v.playerId !== gameState.activePlayerId);
   if (!attacker || !defender) {
@@ -38,16 +33,16 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
     return empty();
   }
 
-  const isAttacker = effect.attacker === sceneState.playerId;
+  const isAttacker = gameState.effect.attacker === sceneState.playerId;
   return process(() => {
     sounds.batteryDeclaration.play();
   })
     .chain(all(
       view.td.gameObjects.turnIndicator.turnChange(isAttacker),
       attackerHUD.gauge.battery(attacker.armdozer.battery),
-      attackerTD.batteryNumber.show(effect.attackerBattery),
+      attackerTD.batteryNumber.show(gameState.effect.attackerBattery),
       defenderHUD.gauge.battery(defender.armdozer.battery),
-      defenderTD.batteryNumber.show(effect.defenderBattery),
+      defenderTD.batteryNumber.show(gameState.effect.defenderBattery),
     ))
     .chain(delay(2000))
     .chain(all(

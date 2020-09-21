@@ -8,12 +8,12 @@ export default {
   title: 'shin-braver',
 };
 
-export const turnStart = () => {
+export const guts = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = PlayerShinBraver(resources, listener);
-    const animation  = sprite.turnStart()
+    const animation  = sprite.guts()
       .chain(delay(2000))
-      .chain(sprite.turnStartToStand())
+      .chain(sprite.gutsToStand())
       .chain(delay(2000))
     animation.loop();
     return [sprite.getObject3D()];

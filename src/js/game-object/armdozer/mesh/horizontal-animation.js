@@ -1,3 +1,4 @@
+// @flow
 import type {ArmdozerAnimation} from "./armdozer-animation";
 import type {TextureId} from "../../../resource/texture";
 import type {Resources} from "../../../resource";
@@ -43,7 +44,7 @@ export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
   }
 
   /** シーンに追加するオブジェクトを取得する */
-  getObject3D(): THREE.Object3D {
+  getObject3D(): typeof THREE.Object3D {
     return this._animation.getObject3D();
   }
 }

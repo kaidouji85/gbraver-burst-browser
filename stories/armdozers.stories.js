@@ -8,7 +8,7 @@ export default {
   title: 'armdozers',
 };
 
-export const shinBraver = () => {
+export const shinBraver = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = PlayerShinBraver(resources, listener);
     return [sprite.getObject3D()];
@@ -17,7 +17,7 @@ export const shinBraver = () => {
   return stub.domElement();
 }
 
-export const neoLandozer = () => {
+export const neoLandozer = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const sprite = PlayerNeoLandozer(resources, listener);
     return [sprite.getObject3D()];

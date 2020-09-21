@@ -6,7 +6,7 @@ export default {
   title: 'battery-selector',
 };
 
-export const batterySelector = () => {
+export const batterySelector = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const selector = new BatterySelector({
       resources: resources,

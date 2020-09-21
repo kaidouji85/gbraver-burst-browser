@@ -19,7 +19,7 @@ export const BACK_MESH_HEIGHT = 512;
 
 /** プレイヤーのHPバー */
 export class PlayerHpBar {
-  _texture: typeof THREE.Texture;
+  _texture: typeof THREE.CanvasTexture;
   _barImage: Image;
   _mesh: typeof THREE.Mesh;
   _back: CanvasMesh;
@@ -37,7 +37,7 @@ export class PlayerHpBar {
       ? barResource.image
       : new Image();
     context.drawImage(this._barImage, 0, context.canvas.height / 2);
-    this._texture = new THREE.Texture(canvas);
+    this._texture = new THREE.CanvasTexture(canvas);
     animatedTexture(this._texture, 2, 1);
     this._texture.needsUpdate = true;
 
@@ -73,6 +73,7 @@ export class PlayerHpBar {
   destructor(): void {
     this._mesh.material.dispose();
     this._mesh.geometry.dispose();
+    this._texture.image = null;
     this._texture.dispose();
     this._back.destructor();
   }

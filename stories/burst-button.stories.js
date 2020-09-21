@@ -6,7 +6,7 @@ export default {
   title: 'burst-button',
 };
 
-export const canBurst = () => {
+export const canBurst = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const burstButton = new BurstButton({
       resources: resources,
@@ -22,7 +22,7 @@ export const canBurst = () => {
   return stub.domElement();
 }
 
-export const disabled = () => {
+export const disabled = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const burstButton = new BurstButton({
       resources: resources,

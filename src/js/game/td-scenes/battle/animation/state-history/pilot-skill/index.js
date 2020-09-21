@@ -2,7 +2,7 @@
 
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameState} from "gbraver-burst-core";
+import type {GameStateX, PilotSkillEffect} from "gbraver-burst-core";
 import {empty} from "../../../../../../animation/delay";
 import {Animate} from "../../../../../../animation/animate";
 import type {PilotSkillAnimationParam} from "./animation-param";
@@ -17,7 +17,7 @@ import {castShinyaAnimationParam, shinyaAnimation} from "./shinya";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function pilotSkillAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
+export function pilotSkillAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<PilotSkillEffect>): Animate {
   const param = castPilotSkillAnimationParam(view, sceneState, gameState);
   if (!param) {
     return empty();

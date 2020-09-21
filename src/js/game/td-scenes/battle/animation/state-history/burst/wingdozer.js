@@ -57,7 +57,7 @@ export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
  */
 export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack>): Animate {
   return  all(
-    param.burstSprite.turnStart(),
+    param.burstSprite.dash(),
     param.burstArmdozerHUD.cutIn.show(),
     attentionArmDozer(param.tdCamera, param.burstSprite, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
@@ -78,7 +78,7 @@ export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack
     ))
     .chain(delay(500))
     .chain(all(
-      param.burstSprite.turnStartToStand(),
+      param.burstSprite.dashToStand(),
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),

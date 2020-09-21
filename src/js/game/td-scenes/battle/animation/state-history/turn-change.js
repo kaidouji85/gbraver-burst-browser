@@ -3,10 +3,11 @@
 import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import type {GameState, TurnChange} from "gbraver-burst-core";
+import type {GameStateX, TurnChange} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 import {delay, empty} from "../../../../../animation/delay";
 import {attentionArmDozer, toInitial} from "../td-camera";
+import {turnStartAnimation, turnStartToStandAnimation} from "../turn-start";
 
 /**
  * ターン変更のアニメーション
@@ -16,12 +17,8 @@ import {attentionArmDozer, toInitial} from "../td-camera";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): Animate {
-  if (gameState.effect.name !== 'TurnChange') {
-    return empty();
-  }
+export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<TurnChange>): Animate {
   const turnChange: TurnChange = gameState.effect;
-
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
   const activeTDSprite = view.td.sprites.find(v => v.playerId === gameState.activePlayerId);
   const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
@@ -31,11 +28,9 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
   }
 
   return all(
-    activeTDSprite.sprite.turnStart(),
+    turnStartAnimation(activeTDSprite.sprite, activeTDPlayer.turnStart),
     attentionArmDozer(view.td.camera, activeTDSprite.sprite, 500)
   )
-    .chain(delay(500))
-    .chain(activeTDPlayer.turnStart.popUp())
     .chain(delay(500))
     .chain((0 < turnChange.recoverBattery)
       ? all(
@@ -46,7 +41,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     )
     .chain(delay(500))
     .chain(all(
-      activeTDSprite.sprite.turnStartToStand(),
+      turnStartToStandAnimation(activeTDSprite.sprite),
       toInitial(view.td.camera, 500))
     )
     .chain(delay(500));

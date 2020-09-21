@@ -8,7 +8,7 @@ export default {
   title: 'reflect',
 };
 
-export const player = () => {
+export const player = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const continuousAttack = playerReflectIndicator(resources, listener);
     delay(1000)
@@ -22,7 +22,7 @@ export const player = () => {
   return stub.domElement();
 }
 
-export const enemy = () => {
+export const enemy = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
     const continuousAttack = enemyReflectIndicator(resources, listener);
     delay(1000)

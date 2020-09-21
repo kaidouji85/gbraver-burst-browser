@@ -1,6 +1,6 @@
 // @flow
 
-import type {Battle, BattleResult, GameState, PlayerState} from "gbraver-burst-core";
+import type {Battle, BattleResult, GameStateX, PlayerState} from "gbraver-burst-core";
 import type {TDPlayer} from "../../../view/td/player";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {TDGameObjects} from "../../../view/td/game-objects";
@@ -46,20 +46,16 @@ export type BattleAnimationParam = BattleAnimationParamX<ArmDozerSprite, BattleR
  * @param gameState ゲームステート
  * @return 戦闘アニメパラメータ
  */
-export function toBattleAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameState): ?BattleAnimationParam {
-  if (gameState.effect.name !== 'Battle') {
-    return null;
-  }
-
-  const effect: Battle = gameState.effect;
-  const attackerState = gameState.players.find(v => v.playerId === effect.attacker);
-  const attackerTD = view.td.players.find(v => v.playerId === effect.attacker);
-  const attackerHUD = view.hud.players.find(v => v.playerId === effect.attacker);
-  const attackerSprite = view.td.sprites.find(v => v.playerId === effect.attacker);
-  const defenderState = gameState.players.find(v => v.playerId !== effect.attacker);
-  const defenderTD = view.td.players.find(v => v.playerId !== effect.attacker);
-  const defenderHUD = view.hud.players.find(v => v.playerId !== effect.attacker);
-  const defenderSprite = view.td.sprites.find(v => v.playerId !== effect.attacker);
+export function toBattleAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<Battle>): ?BattleAnimationParam {
+  const battle: Battle = gameState.effect;
+  const attackerState = gameState.players.find(v => v.playerId === battle.attacker);
+  const attackerTD = view.td.players.find(v => v.playerId === battle.attacker);
+  const attackerHUD = view.hud.players.find(v => v.playerId === battle.attacker);
+  const attackerSprite = view.td.sprites.find(v => v.playerId === battle.attacker);
+  const defenderState = gameState.players.find(v => v.playerId !== battle.attacker);
+  const defenderTD = view.td.players.find(v => v.playerId !== battle.attacker);
+  const defenderHUD = view.hud.players.find(v => v.playerId !== battle.attacker);
+  const defenderSprite = view.td.sprites.find(v => v.playerId !== battle.attacker);
   if (!attackerState || !attackerTD || !attackerHUD || !attackerSprite || !defenderState || !defenderTD || !defenderHUD || !defenderSprite) {
     return null;
   }
@@ -77,7 +73,7 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
     tdCamera: view.td.camera,
     hudObjects: view.hud.gameObjects,
     hudCamera: view.hud.camera,
-    isDeath: effect.isDeath,
-    result: effect.result,
+    isDeath: battle.isDeath,
+    result: battle.result,
   };
 }

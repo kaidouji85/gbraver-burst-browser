@@ -19,8 +19,8 @@ import {knockBackToStand} from "./animation/knock-back-to-stand";
 import {avoid} from "./animation/avoid";
 import {avoidToStand} from "./animation/avoid-to-stand";
 import {down} from "./animation/down";
-import {turnStart} from "./animation/turn-start";
-import {turnStartToStand} from "./animation/turn-start-to-stand";
+import {guts, gutsForTurnStart} from "./animation/guts";
+import {gutsToStand} from "./animation/guts-to-stand";
 import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
 import {LightningDozerSounds} from "./sounds/lightning-dozer-sounds";
@@ -99,14 +99,31 @@ export class LightningDozer implements ArmDozerSprite {
     return hmToStand(this._model, this._sounds);
   }
 
-  /** ターンスタート */
-  turnStart(): Animate {
-    return turnStart(this._model, this._sounds);
+  /**
+   * ガッツ
+   * 
+   * @return アニメーション
+   */
+  guts(): Animate {
+    return guts(this._model, this._sounds);
   }
 
-  /** ターンスタート -> 立ち */
-  turnStartToStand(): Animate {
-    return turnStartToStand(this._model, this._sounds);
+  /**
+   * ターンスタート用 ガッツ
+   *
+   * @return アニメーション
+   */
+  gutsForTurnStart(): Animate {
+    return gutsForTurnStart(this._model, this._sounds);
+  }
+
+  /**
+   * ガッツ -> 立ち
+   *
+   * @return アニメーション
+   */
+  gutsToStand(): Animate {
+    return gutsToStand(this._model, this._sounds);
   }
 
   /** ノックバック */

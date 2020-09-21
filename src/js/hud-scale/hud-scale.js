@@ -1,3 +1,4 @@
+// @flow
 import type {SafeAreaInset} from "../safe-area/safe-area-inset";
 
 /**
