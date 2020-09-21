@@ -50,8 +50,7 @@ export class CanvasMesh {
     this.mesh.material.dispose();
     this.canvas = null;
   }
-
-  // TODO 削除する
+  
   /**
    * キャンバステクスチャに描画するヘルパー関数
    *
