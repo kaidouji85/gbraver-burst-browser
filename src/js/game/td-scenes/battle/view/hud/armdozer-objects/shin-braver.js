@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from 'three';
-import type {HUDArmdozerObjects} from "./index";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {enemyShinBraverCutIn, playerShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver";
+import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 
 /** コンストラクタのパラメータ */
 type Param = {

@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from 'three';
-import type {HUDArmdozerObjects} from "./index";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {WingDozerCutIn} from "../../../../../../game-object/cut-in/wing-dozer/wing-dozer-cutin";
 import {enemyWingDozerCutIn, playerWingDozerCutIn} from "../../../../../../game-object/cut-in/wing-dozer";
+import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 
 /** コンストラクタのパラメータ */
 type Param = {
