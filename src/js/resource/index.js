@@ -95,28 +95,24 @@ export class ResourceLoader {
    * @return リソース管理オブジェクト
    */
   async load(): Promise<Resources> {
-    try {
-      const [gltfs, textures, cubeTextures, canvasImages, sounds, pathResponses] = await Promise.all([
-        Promise.all(this._gltfLoading),
-        Promise.all(this._textureLoading),
-        Promise.all(this._cubeTextureLoading),
-        Promise.all(this._canvasImageLoading),
-        Promise.all(this._soundLoading),
-        Promise.all(this._pathLoading),
-      ]);
+    const [gltfs, textures, cubeTextures, canvasImages, sounds] = await Promise.all([
+      Promise.all(this._gltfLoading),
+      Promise.all(this._textureLoading),
+      Promise.all(this._cubeTextureLoading),
+      Promise.all(this._canvasImageLoading),
+      Promise.all(this._soundLoading),
+      Promise.all(this._pathLoading),
+    ]);
 
-      return {
-        rootPath: this._resourceROot,
-        gltfs: gltfs,
-        textures: textures,
-        cubeTextures: cubeTextures,
-        canvasImages: canvasImages,
-        sounds: sounds,
-        paths: this._paths
-      };
-    } catch(e) {
-      throw e;
-    }
+    return {
+      rootPath: this._resourceROot,
+      gltfs: gltfs,
+      textures: textures,
+      cubeTextures: cubeTextures,
+      canvasImages: canvasImages,
+      sounds: sounds,
+      paths: this._paths
+    };
   }
 
   /**

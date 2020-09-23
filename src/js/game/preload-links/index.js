@@ -1,8 +1,8 @@
 // @flow
 
-import type {ResourceRoot} from "../../resource/root/resource-root";
 import {imageURLs} from "./image-ruls";
 
+// TODO 削除する
 /**
  * HTML要素で利用する素材のプリロード
  */
@@ -11,11 +11,9 @@ export class PreLoadLinks {
 
   /**
    * コンストラクタ
-   *
-   * @param resourceRoot リソースルート
    */
-  constructor(resourceRoot: ResourceRoot) {
-    this._links = imageURLs(resourceRoot).map(url => {
+  constructor() {
+    this._links = imageURLs().map(url => {
       const link = document.createElement('link');
       link.setAttribute('rel', 'preload');
       link.setAttribute('as', 'image');

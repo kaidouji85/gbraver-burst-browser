@@ -69,7 +69,9 @@ export class PlayerHpBar {
     this._group.add(this._back.getObject3D());
   }
 
-  /**　デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this._mesh.material.dispose();
     this._mesh.geometry.dispose();

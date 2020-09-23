@@ -3,7 +3,7 @@
 import test from 'ava';
 import type {EndBattle} from "../../../../../src/js/action/game/battle";
 import {EMPTY_PLAYER} from "../../../../data/player";
-import type {EvenMatch, GameOver, Player} from "gbraver-burst-core";
+import type {GameOver, Player} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../../data/end-battle";
 import type {NPCBattle} from "../../../../../src/js/game/state/npc-battle/npc-battle";
 import {MAX_LEVEL} from "../../../../../src/js/game/state/npc-battle/npc-battle";
@@ -23,10 +23,6 @@ const win: GameOver = {
 const lose: GameOver = {
   type: 'GameOver',
   winner: 'not-test-player'
-};
-
-const evenMath: EvenMatch = {
-  type: 'EvenMatch'
 };
 
 test('戦闘に勝利した場合はレベルが+1される', t => {

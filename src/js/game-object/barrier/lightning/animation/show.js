@@ -10,7 +10,7 @@ import {process} from '../../../../animation/process';
  * バリアを表示する
  *
  * @param model モデル
- * @param sounds　音
+ * @param sounds 効果音
  * @return アニメーション
  */
 export function show(model: LightningBarrierModel, sounds: LightningBarrierSounds): Animate {

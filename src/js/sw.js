@@ -1,3 +1,5 @@
+// @flow
+
 import * as Routing from 'workbox-routing';
 import * as PreCaching from 'workbox-precaching';
 import * as Strategies from 'workbox-strategies';

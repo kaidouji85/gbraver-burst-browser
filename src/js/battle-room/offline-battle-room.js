@@ -32,16 +32,12 @@ export class OfflineBattleRoom implements BattleRoom {
    * @return 初期状態
    */
   async start(): Promise<InitialState> {
-    try {
-      this._stateHistory = this._gbraverBurstCore.start(this._player, this._enemy);
-      return {
-        playerId: this._player.playerId,
-        players: [this._player, this._enemy],
-        stateHistory: this._stateHistory
-      };
-    } catch (e) {
-      throw e;
-    }
+    this._stateHistory = this._gbraverBurstCore.start(this._player, this._enemy);
+    return {
+      playerId: this._player.playerId,
+      players: [this._player, this._enemy],
+      stateHistory: this._stateHistory
+    };
   }
 
   /**
@@ -51,25 +47,21 @@ export class OfflineBattleRoom implements BattleRoom {
    * @return ステートヒストリー
    */
   async progress(command: Command): Promise<GameState[]> {
-    try {
-      if (this._stateHistory.length <= 0) {
-        return [];
-      }
-
-      const lastState = this._stateHistory[this._stateHistory.length - 1];
-      const playerCommand: PlayerCommand = {
-        playerId: this._player.playerId,
-        command: command
-      };
-      const enemyCommand: PlayerCommand = {
-        playerId: this._enemy.playerId,
-        command: this._npc.routine(this._enemy.playerId, this._stateHistory)
-      };
-      const updateState = this._gbraverBurstCore.progress(lastState, [playerCommand, enemyCommand]);
-      this._stateHistory = [...this._stateHistory, ...updateState];
-      return updateState;
-    } catch (e) {
-      throw e;
+    if (this._stateHistory.length <= 0) {
+      return [];
     }
+
+    const lastState = this._stateHistory[this._stateHistory.length - 1];
+    const playerCommand: PlayerCommand = {
+      playerId: this._player.playerId,
+      command: command
+    };
+    const enemyCommand: PlayerCommand = {
+      playerId: this._enemy.playerId,
+      command: this._npc.routine(this._enemy.playerId, this._stateHistory)
+    };
+    const updateState = this._gbraverBurstCore.progress(lastState, [playerCommand, enemyCommand]);
+    this._stateHistory = [...this._stateHistory, ...updateState];
+    return updateState;
   }
 }

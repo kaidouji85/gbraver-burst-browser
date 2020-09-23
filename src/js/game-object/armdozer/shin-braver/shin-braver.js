@@ -7,7 +7,6 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {ShinBraverModel} from "./model/shin-braver-model";
 import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {straightPunch} from "./animation/straight-punch";
@@ -26,13 +25,6 @@ import {burst} from "./animation/burst";
 import {burstToStand} from "./animation/burst-to-stand";
 import type {Resources} from "../../../resource";
 import {ShinBraverSounds} from "./sounds/shin-braver-sounds";
-
-/** コンストラクタのパラメータ */
-type Params = {
-  view: ShinBraverView,
-  resources: Resources,
-  listener: Observable<GameObjectAction>,
-};
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -54,7 +46,7 @@ export class ShinBraver implements ArmDozerSprite {
     this._sounds = new ShinBraverSounds(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._update(action);
+        this._update();
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
@@ -177,7 +169,7 @@ export class ShinBraver implements ArmDozerSprite {
   }
 
   /** 状態更新 */
-  _update(action: Update): void {
+  _update(): void {
     this._view.engage(this._model);
   }
 

@@ -6,7 +6,6 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {show} from "./animation/show";
@@ -28,7 +27,7 @@ export class BatteryNumber {
     this._view = param.view;
     this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._update(action);
+        this._update();
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
@@ -66,7 +65,7 @@ export class BatteryNumber {
   }
 
   /** 状態更新 */
-  _update(action: Update): void {
+  _update(): void {
     this._view.engage(this._model);
   }
 

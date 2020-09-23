@@ -1,6 +1,5 @@
 // @flow
 
-import type {Player} from "gbraver-burst-core";
 import type {InProgress} from "./in-progress";
 
 /** Gameが持つ状態 */
@@ -10,9 +9,9 @@ export type State = {
 };
 
 /**
- * 初期ステータスを生成する
+ * 初期ステートを生成する
  *
- * @return {{level: number, player: Player}}
+ * @return 初期ステート
  */
 export function createInitialState(): State {
   return {

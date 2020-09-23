@@ -15,7 +15,7 @@ export const WIDTH = 800;
 export const HEIGHT = 800;
 
 /**
- * プレイヤー側　ネオランドーザ カットイン ビュー
+ * プレイヤー側 ネオランドーザ カットイン ビュー
  */
 export class PlayerNeoLandozerCutInView implements NeoLandozerCutInView {
   _group: typeof THREE.Group;

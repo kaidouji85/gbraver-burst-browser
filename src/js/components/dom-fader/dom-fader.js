@@ -38,23 +38,19 @@ export class DOMFader {
    * @return アニメーション
    */
   async fadeIn(): Promise<void> {
-    try {
-      this._root.style.display = 'block';
+    this._root.style.display = 'block';
 
-      const animation = this._root.animate([
-        {opacity: 1, display: 'block'},
-        {opacity: 0, display: 'none'}
-      ], {
-        duration: 500,
-        fill: "forwards",
-        easing: 'ease'
-      });
-      await waitFinishAnimation(animation);
+    const animation = this._root.animate([
+      {opacity: 1, display: 'block'},
+      {opacity: 0, display: 'none'}
+    ], {
+      duration: 500,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    await waitFinishAnimation(animation);
 
-      this._root.style.display = 'none';
-    } catch(e) {
-      throw e;
-    }
+    this._root.style.display = 'none';
   }
 
   /**
@@ -63,20 +59,16 @@ export class DOMFader {
    * @return アニメーション
    */
   async fadeOut(): Promise<void> {
-    try {
-      this._root.style.display = 'block';
-      
-      const animation = this._root.animate([
-        {opacity: 0},
-        {opacity: 1}
-      ], {
-        duration: 500,
-        fill: "forwards",
-        easing: 'ease'
-      });
-      await waitFinishAnimation(animation);
-    } catch(e) {
-      throw e;
-    }
+    this._root.style.display = 'block';
+
+    const animation = this._root.animate([
+      {opacity: 0},
+      {opacity: 1}
+    ], {
+      duration: 500,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    await waitFinishAnimation(animation);
   }
 }

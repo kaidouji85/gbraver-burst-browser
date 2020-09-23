@@ -6,7 +6,7 @@ import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 
 /**
- * 敵側 ネオランドーザ　カットイン ビュー
+ * 敵側 ネオランドーザ カットイン ビュー
  */
 export class EnemyNeoLandozerCutInView extends PlayerNeoLandozerCutInView {
   constructor(resources: Resources) {

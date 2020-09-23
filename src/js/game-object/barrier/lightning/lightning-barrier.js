@@ -45,8 +45,8 @@ export class LightningBarrierGameEffect {
         filter(v => v.type === 'Update'),
         map(v => ((v: any): Update)),
         first()
-      ).subscribe((action: Update) => {
-        this._onFirstUpdate(action);
+      ).subscribe(() => {
+        this._onFirstUpdate();
       })
     ];
   }
@@ -91,10 +91,8 @@ export class LightningBarrierGameEffect {
 
   /**
    * 初回のアップデート処理
-   *
-   * @param action アクション
    */
-  _onFirstUpdate(action: Update): void {
+  _onFirstUpdate(): void {
     electrification(this._model, this._tweenGroup).loop();
   }
 

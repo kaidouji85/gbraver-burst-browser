@@ -6,7 +6,6 @@ import type {ShockWaveView} from "./view/shock-wave-view";
 import type {ShockWaveModel} from "./model/shock-wave-model";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {popUp} from "./animation/pop-up";
@@ -42,7 +41,7 @@ export class ShockWave {
 
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate(action);
+        this._onUpdate();
       } else if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -80,10 +79,8 @@ export class ShockWave {
 
   /**
    * アップデート時の処理
-   *
-   * @param action アクション
    */
-  _onUpdate(action: Update): void {
+  _onUpdate(): void {
     this._view.engage(this._model);
   }
 
