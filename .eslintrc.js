@@ -15,11 +15,11 @@ module.exports = {
         "no-undef":　"error"
     },
     "globals": {
-        // flow-typed/gbraver-burst.js配下で定義したグローバル変数
+        // webpack.config.js Webpack Define Pluginで定義したグローバル変数
         GBRAVER_BURST_RESOURCE_HASH: true,
         GBRAVER_BURST_HOW_TO_PLAY: true,
 
-        // flow-typed/sw.js配下で定義したグローバル変数
-        BUILD_HASH: true,
+        // webpack.sw.js Webpack Define Pluginで定義したグローバル変数
+        GBRAVER_BURST_SW_BUILD_HASH: true,
     }
 };
