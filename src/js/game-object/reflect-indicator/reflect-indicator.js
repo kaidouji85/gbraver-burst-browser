@@ -6,7 +6,6 @@ import type {ReflectIndocatorModel} from "./model/reflect-indocator-model";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
@@ -30,7 +29,7 @@ export class ReflectIndicator {
     this._view = view;
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate(action);
+        this._onUpdate();
       } else if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -63,10 +62,8 @@ export class ReflectIndicator {
 
   /**
    * アップデート時の処理
-   *
-   * @param action アクション
    */
-  _onUpdate(action: Update): void {
+  _onUpdate(): void {
     this._view.engage(this._model);
   }
 

@@ -14,7 +14,7 @@ import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer
  * シンブレイバー バーストアニメーション パラメータ
  * @type BURST バースト種別
  */
-export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraver, ShinBraverHUD, TDArmdozerObjects, Burst>;
+export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraver, ShinBraverHUD, TDArmdozerObjects, BURST>;
 
 /**
  * シンブレイバーバーストアニメーションパラメータにキャストする

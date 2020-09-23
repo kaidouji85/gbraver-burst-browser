@@ -7,7 +7,6 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import {popUp} from "./animation/pop-up";
-import type {Update} from "../../action/game-loop/update";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 
@@ -27,7 +26,7 @@ export class DamageIndicator {
     this._model = createInitialValue();
     this._subscription = param.listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._update(action);
+        this._update();
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
@@ -51,7 +50,7 @@ export class DamageIndicator {
   }
 
   /** 状態更新 */
-  _update(action: Update) {
+  _update() {
     this._view.engage(this._model);
   }
 

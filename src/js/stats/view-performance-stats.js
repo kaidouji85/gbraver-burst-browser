@@ -14,7 +14,7 @@ export function viewPerformanceStats(dom: HTMLElement): void {
   stats.dom.style.right = "env(safe-area-inset-right)";
   dom.appendChild(stats.dom);
 
-  const update = time => {
+  const update = () => {
     requestAnimationFrame(update);
     stats.update();
   };

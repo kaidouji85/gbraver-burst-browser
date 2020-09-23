@@ -20,7 +20,7 @@ export class PlayerShockWaveView implements ShockWaveView {
     const maxLines = initialModel.lines.length;
     this._group = new THREE.Group();
 
-    this._lines = R.times(v => new ShockWaveLineView(resources), maxLines);
+    this._lines = R.times(() => new ShockWaveLineView(resources), maxLines);
     this._lines.forEach(v => {
       this._group.add(v.getObject3D());
     });

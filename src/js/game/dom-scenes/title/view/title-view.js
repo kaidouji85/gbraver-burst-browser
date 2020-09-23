@@ -125,14 +125,10 @@ export class TitleView {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    try {
-      await Promise.all([
-        this._isTitleBackLoaded,
-        this._isLogoLoaded,
-      ]);
-    } catch(e) {
-      throw e;
-    }
+    await Promise.all([
+      this._isTitleBackLoaded,
+      this._isLogoLoaded,
+    ]);
   }
 
   /**
@@ -141,20 +137,16 @@ export class TitleView {
    * @return アニメーション
    */
   async pushGameStartButton(): Promise<void> {
-    try {
-      const animation = this._gameStart.animate([
-        {transform: 'scale(1)'},
-        {transform: 'scale(1.1)'},
-        {transform: 'scale(1)'},
-      ], {
-        duration: 200,
-        fill: "forwards",
-        easing: 'ease'
-      });
-      await waitFinishAnimation(animation);
-    } catch(e) {
-      throw e;
-    }
+    const animation = this._gameStart.animate([
+      {transform: 'scale(1)'},
+      {transform: 'scale(1.1)'},
+      {transform: 'scale(1)'},
+    ], {
+      duration: 200,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    await waitFinishAnimation(animation);
   }
 
   /**
@@ -163,19 +155,15 @@ export class TitleView {
    * @return アニメーション
    */
   async pushHowToPlayButton(): Promise<void> {
-    try {
-      const animation = this._howToPlay.animate([
-        {transform: 'scale(1)'},
-        {transform: 'scale(1.1)'},
-        {transform: 'scale(1)'},
-      ], {
-        duration: 200,
-        fill: "forwards",
-        easing: 'ease'
-      });
-      await waitFinishAnimation(animation);
-    } catch(e) {
-      throw e;
-    }
+    const animation = this._howToPlay.animate([
+      {transform: 'scale(1)'},
+      {transform: 'scale(1.1)'},
+      {transform: 'scale(1)'},
+    ], {
+      duration: 200,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    await waitFinishAnimation(animation);
   }
 }

@@ -31,7 +31,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
       ? damageNumberResource.texture
       : new THREE.Texture();
 
-    this._numbers = R.times(v =>
+    this._numbers = R.times(() =>
       new HorizontalAnimationMesh({
         texture: damageNumber,
         maxAnimation: MAX_ANIMATION,
@@ -60,7 +60,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
       mesh.setOpacity(0);
       values
         .filter((value, valueIndex) => meshIndex === valueIndex)
-        .forEach((value, valueIndex) => {
+        .forEach(value => {
           mesh.animate(value / MAX_ANIMATION);
           mesh.setOpacity(model.opacity);
           mesh.getObject3D().position.x =   MESH_SIZE * (meshIndex -values.length/2) + GROUP_PADDING;

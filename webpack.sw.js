@@ -21,7 +21,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      BUILD_HASH: JSON.stringify(new Puid().generate())
+      GBRAVER_BURST_SW_BUILD_HASH: JSON.stringify(new Puid().generate())
     }),
   ]
 }

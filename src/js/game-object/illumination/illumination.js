@@ -6,7 +6,6 @@ import {IlluminationView} from "./view/illumination-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Update} from "../../action/game-loop/update";
 import {Animate} from "../../animation/animate";
 import {intensity} from "./animation/intensity";
 
@@ -26,7 +25,7 @@ export class Illumination {
 
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate(action);
+        this._onUpdate();
       }
     });
   }
@@ -58,10 +57,8 @@ export class Illumination {
 
   /**
    * アップデート時の処理
-   *
-   * @param action アクション
    */
-  _onUpdate(action: Update): void {
+  _onUpdate(): void {
     this._view.engage(this._model);
   }
 }

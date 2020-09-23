@@ -9,7 +9,7 @@ import {PilotIds} from "gbraver-burst-core";
 import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
 
 /**
- * HUD　パイロット関連オブジェクト
+ * HUD パイロット関連オブジェクト
  */
 export interface HUDPilotObjects {
   /**

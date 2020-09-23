@@ -8,13 +8,9 @@ import {ProductionResourceRoot} from "./resource/root/production-resource-root";
  * Gブレイバーバーストのエントリポイント
  */
 async function main(): Promise<void> {
-  try {
-    const resourceRoot = new ProductionResourceRoot();
-    const game = new Game(resourceRoot);
-    await game.initialize();
-  } catch(e) {
-    throw e;
-  }
+  const resourceRoot = new ProductionResourceRoot();
+  const game = new Game(resourceRoot);
+  await game.initialize();
 }
 
 window.addEventListener('load', () => {

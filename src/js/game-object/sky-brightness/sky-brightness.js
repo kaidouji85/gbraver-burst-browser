@@ -8,7 +8,6 @@ import {Animate} from "../../animation/animate";
 import {brightness} from "./animation/brightness";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Update} from "../../action/game-loop/update";
 
 /** 空の明るさ */
 export class SkyBrightness {
@@ -24,7 +23,7 @@ export class SkyBrightness {
 
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate(action);
+        this._onUpdate();
       }
     });
   }
@@ -56,10 +55,8 @@ export class SkyBrightness {
 
   /**
    * アップデート時の処理
-   *
-   * @param action アクション
    */
-  _onUpdate(action: Update): void {
+  _onUpdate(): void {
     this._view.engage(this._model);
   }
 }

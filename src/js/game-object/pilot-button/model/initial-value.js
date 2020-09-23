@@ -3,9 +3,9 @@
 import type {PilotButtonModel} from "./pilot-button-model";
 
 /**
- * パイロットボタン モデル　初期値を生成する
+ * パイロットボタン モデル 初期値を生成する
  *
- * @return 初期値　
+ * @return 初期値
  */
 export function createInitialValue(): PilotButtonModel {
   return {

@@ -100,29 +100,25 @@ export class PlayerSelect implements DOMScene {
    * @param action アクション
    */
   async _onArmdozerIconPush(action: SelectArmdozer): Promise<void> {
-    try {
-      if (!this._state.canOperation) {
-        return;
-      }
-
-      this._state.canOperation = false;
-
-      this._pushButtonSound.play();
-      const selected = this._view.armdozerIcons
-        .find(icon => icon.armDozerId === action.armDozerId);
-      if (!selected) {
-        return;
-      }
-
-      await  selected.selected();
-      await waitTime(1000);
-
-      this._selectionComplete.next({
-        type: 'SelectionComplete',
-        armdozerId: action.armDozerId,
-      });
-    } catch(e) {
-      throw e;
+    if (!this._state.canOperation) {
+      return;
     }
+
+    this._state.canOperation = false;
+
+    this._pushButtonSound.play();
+    const selected = this._view.armdozerIcons
+      .find(icon => icon.armDozerId === action.armDozerId);
+    if (!selected) {
+      return;
+    }
+
+    await  selected.selected();
+    await waitTime(1000);
+
+    this._selectionComplete.next({
+      type: 'SelectionComplete',
+      armdozerId: action.armDozerId,
+    });
   }
 }

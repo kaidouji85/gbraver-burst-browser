@@ -3,7 +3,7 @@
 /**
  * セーフエリア関連モジュール
  * 本モジュールは以下のCSSカスタムプロパティに依存している
- *　
+ *
  * --safe-area-top
  * --safe-area-bottom
  * --safe-area-right

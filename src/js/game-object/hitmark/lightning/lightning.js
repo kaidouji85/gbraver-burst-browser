@@ -6,7 +6,6 @@ import type {LightningView} from "./view/lightning-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import type {Update} from "../../../action/game-loop/update";
 import {Animate} from "../../../animation/animate";
 import {popUp} from "./animation/pop-up";
 import {LightningSounds} from "./sounds/lightning-sounds";
@@ -34,7 +33,7 @@ export class Lightning {
     this._sounds = new LightningSounds(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate(action);
+        this._onUpdate();
       }
     });
   }
@@ -66,10 +65,8 @@ export class Lightning {
 
   /**
    * アップデート時の処理
-   *
-   * @param action アクション
    */
-  _onUpdate(action: Update): void {
+  _onUpdate(): void {
     this._view.engage(this._model);
   }
 }
