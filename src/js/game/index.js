@@ -19,7 +19,6 @@ import {createInitialState} from "./state/state";
 import type {ResourceRoot} from "../resource/root/resource-root";
 import type {SelectionComplete} from "../action/game/selection-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import {PreLoadLinks} from "./preload-links";
 import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
 import {selectionComplete} from "./state/npc-battle/selection-complete";
@@ -39,7 +38,6 @@ export class Game {
   _state: State;
   _resize: Observable<Resize>;
   _vh: CssVH;
-  _preLoadLinks: PreLoadLinks;
   _fader: DOMFader;
   _interruptScenes: InterruptScenes;
   _domScenes: DOMScenes;
@@ -61,12 +59,6 @@ export class Game {
     this._state = createInitialState();
     this._resize = createResizeStream();
     this._vh = new CssVH(this._resize);
-
-    this._preLoadLinks = new PreLoadLinks();
-    const head = document.head ?? document.createElement('head');
-    this._preLoadLinks.getLinks().forEach(link => {
-      head.appendChild(link);
-    });
 
     this._fader = new DOMFader();
 
