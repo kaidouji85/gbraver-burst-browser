@@ -323,7 +323,7 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   // シンヤ関連
   {
     id: TEXTURE_IDS.SHINYA_CUTIN,
-    path: 'pilot/shinya/skill-cutin.png',
+    path: 'pilot/gai/skill-cutin.png',
   },
   // ヒットマーク関連
   {
