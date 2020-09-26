@@ -1,7 +1,6 @@
 // @flow
 
 import {Renderer} from "../../game-object/renderer";
-import {isDevelopment} from "../../webpack/mode";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {EndBattle} from "../../action/game/battle";
 import type {Resources} from "../../resource";
