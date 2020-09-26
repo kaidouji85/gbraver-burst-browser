@@ -87,11 +87,6 @@ export class TDScenes {
       scene.notifier().endBattle.subscribe(this._endBattle)
     ];
 
-    // デバッグ用にレンダラ情報をコンソールに出力
-    if (isDevelopment()) {
-      console.log(this._renderer.info());
-    }
-
     return scene;
   }
 

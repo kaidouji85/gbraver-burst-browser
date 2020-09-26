@@ -12,11 +12,10 @@ export async function loadServiceWorker(): Promise<ServiceWorkerRegistration | n
     }
 
     const sw = await navigator.serviceWorker.register('./sw.js');
-    console.log('service worker register success!');
     return sw;
   } catch (e) {
-    console.log('service worker register failed');
-    console.log(e);
+    //console.error('service worker register failed');
+    //console.error(e);
     return null;
   }
 }
