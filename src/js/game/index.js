@@ -116,7 +116,10 @@ export class Game {
     if (isDevelopment() && document.body) {
       viewPerformanceStats(document.body);
     }
-    this._serviceWorker = await loadServiceWorker();
+    
+    if (!isDevelopment()) {
+      this._serviceWorker = await loadServiceWorker();
+    }
 
     const loader = new ResourceLoader(this._resourceRoot);
     invisibleFirstView();
