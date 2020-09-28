@@ -1,7 +1,6 @@
 // @flow
 
 import {Renderer} from "../../game-object/renderer";
-import {isDevelopment} from "../../webpack/mode";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {EndBattle} from "../../action/game/battle";
 import type {Resources} from "../../resource";
@@ -86,11 +85,6 @@ export class TDScenes {
       scene.notifier().render.subscribe(this._renderStream),
       scene.notifier().endBattle.subscribe(this._endBattle)
     ];
-
-    // デバッグ用にレンダラ情報をコンソールに出力
-    if (isDevelopment()) {
-      console.log(this._renderer.info());
-    }
 
     return scene;
   }
