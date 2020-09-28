@@ -76,6 +76,7 @@ export const TEXTURE_IDS = {
   WING_DOZER_BURST_DOWN: 'WING_DOZER_BURST_DOWN',
   WING_DOZER_GUARD: 'WING_DOZER_GUARD',
   SHINYA_CUTIN: 'SHINYA_CUTIN',
+  GAI_CUTIN: 'GAI_CUTIN',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
   HITMARK_LIGHTNING_RING: 'HITMARK_LIGHTNING_RING',
@@ -323,6 +324,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   // シンヤ関連
   {
     id: TEXTURE_IDS.SHINYA_CUTIN,
+    path: 'pilot/shinya/skill-cutin.png',
+  },
+  // ガイ関連
+  {
+    id: TEXTURE_IDS.GAI_CUTIN,
     path: 'pilot/gai/skill-cutin.png',
   },
   // ヒットマーク関連
