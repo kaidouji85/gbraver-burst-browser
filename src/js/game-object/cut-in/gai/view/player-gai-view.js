@@ -60,7 +60,7 @@ export class PlayerGaiView implements GaiView {
     this._mesh.getObject3D().scale.set(scale, scale, scale);
     this._mesh.getObject3D().position.set(
       model.tracking.x,
-      model.tracking.y - 60 * scale,
+      model.tracking.y - 40 * scale,
       HUD_CUT_IN_ZNIDEX
     );
     this._mesh.setOpacity(model.opacity);
