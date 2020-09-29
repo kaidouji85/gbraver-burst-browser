@@ -5,9 +5,9 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import type {Player} from "gbraver-burst-core";
 import {PilotIds} from "gbraver-burst-core";
-//import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
 import type {HUDPilotObjects} from "./hud-pilot-objects";
 import {enemyGaiHUD, playerGaiHUD} from "./gai";
+import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
 
 /**
  * プレイヤー側 HUDパイロット
@@ -20,10 +20,11 @@ import {enemyGaiHUD, playerGaiHUD} from "./gai";
 export function playerHUDPilotObjects(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
-    default:
-      // TODO 開発が終わったら戻す
-      //return playerShinyaHUD(resources, listener, state);
+      return playerShinyaHUD(resources, listener, state);
+    case PilotIds.GAI:
       return playerGaiHUD(resources, listener, state);
+    default:
+      return playerShinyaHUD(resources, listener, state);
   }
 }
 
@@ -38,9 +39,10 @@ export function playerHUDPilotObjects(resources: Resources, listener: Observable
 export function enemyHUDPilotObjects(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
-    default:
-      // TODO 開発が終わったら戻す
-      //return enemyShinyaHUD(resources, listener, state);
+      return enemyShinyaHUD(resources, listener, state);
+    case PilotIds.GAI:
       return enemyGaiHUD(resources, listener, state);
+    default:
+      return enemyShinyaHUD(resources, listener, state);
   }
 }
