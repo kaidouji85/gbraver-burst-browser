@@ -8,6 +8,7 @@ import {Animate} from "../../../../../../animation/animate";
 import type {PilotSkillAnimationParam} from "./animation-param";
 import {castPilotSkillAnimationParam} from "./animation-param";
 import {castShinyaAnimationParam, shinyaAnimation} from "./shinya";
+import {castGaiAnimationParam, gaiAnimation} from "./gai";
 
 /**
  * パイロット効果 アニメーション
@@ -36,6 +37,11 @@ function cutIn(param: PilotSkillAnimationParam): Animate {
   const shinya = castShinyaAnimationParam(param);
   if (shinya) {
     return shinyaAnimation(shinya);
+  }
+
+  const gai = castGaiAnimationParam(param);
+  if (gai) {
+    return gaiAnimation(gai);
   }
 
   return empty();
