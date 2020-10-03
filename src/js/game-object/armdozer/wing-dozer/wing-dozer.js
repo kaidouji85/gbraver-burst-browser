@@ -8,7 +8,6 @@ import type {WingDozerModel} from "./model/wing-dozer-model";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import type {Update} from "../../../action/game-loop/update";
 import {charge} from "./animation/charge";
 import {upper} from "./animation/upper";
 import {upperToStand} from "./animation/upper-to-stand";
@@ -47,7 +46,7 @@ export class WingDozer implements ArmDozerSprite {
     this._sounds = new WingDozerSounds(resources);
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate(action);
+        this._onUpdate();
       } else if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -199,10 +198,8 @@ export class WingDozer implements ArmDozerSprite {
 
   /**
    * アップデート時の処理
-   *
-   * @param action アクション
    */
-  _onUpdate(action: Update): void {
+  _onUpdate(): void {
     this._view.engage(this._model);
   }
 

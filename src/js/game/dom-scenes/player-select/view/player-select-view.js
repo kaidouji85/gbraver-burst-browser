@@ -69,13 +69,9 @@ export class PlayerSelectView {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    try {
-      await Promise.all(
-        this.armdozerIcons.map(icon => icon.waitUntilLoaded())
-      );
-    } catch(e) {
-      throw e;
-    }
+    await Promise.all(
+      this.armdozerIcons.map(icon => icon.waitUntilLoaded())
+    );
   }
 
   /**

@@ -1,7 +1,6 @@
 // @flow
 
-import * as THREE from 'three';
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type {Player} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
@@ -11,23 +10,7 @@ import {EmptyHUDArmdozer} from "./empty";
 import {enemyNeoLandozerHUD, playerNeoLandozerHUD} from "./neo-landozer";
 import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer";
 import {enemyWingDozerHUD, playerWingDozerHUD} from "./wing-dozer";
-
-/**
- * HUDレイヤー アームドーザ固有のオブジェクトを集めたもの
- */
-export interface HUDArmdozerObjects {
-  playerId: PlayerId;
-
-  /** デストラクタ相当の処理 */
-  destructor(): void;
-
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
-  getObject3Ds(): typeof THREE.Object3D[];
-}
+import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 
 /**
  * プレイヤー側 HUDアームドーザ

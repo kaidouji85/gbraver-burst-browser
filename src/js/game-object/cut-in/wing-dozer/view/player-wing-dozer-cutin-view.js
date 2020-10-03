@@ -17,7 +17,7 @@ export const MESH_SIZE = 1000;
 export const BASE_PADDING_TOP = 100;
 
 /**
- * プレイヤー側 ウィングドーザ　カットイン ビュー
+ * プレイヤー側 ウィングドーザ カットイン ビュー
  */
 export class PlayerWingDozerCutInView implements WingDozerCutInView {
   _burstUp: HorizontalAnimationMesh;

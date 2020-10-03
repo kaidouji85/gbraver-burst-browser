@@ -7,7 +7,6 @@ import type {NeoLandozerView} from "./view/neo-landozer-view";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {knockBack} from "./animation/knock-back";
@@ -46,7 +45,7 @@ export class NeoLandozer implements ArmDozerSprite {
 
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._update(action);
+        this._update();
       } else if (action.type === 'PreRender') {
         this._preRender(action);
       }
@@ -151,7 +150,7 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** 状態更新 */
-  _update(action: Update): void {
+  _update(): void {
     this._view.engage(this._model);
   }
 

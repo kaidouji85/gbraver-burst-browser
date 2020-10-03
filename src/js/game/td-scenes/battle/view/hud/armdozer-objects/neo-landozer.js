@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from 'three';
-import type {HUDArmdozerObjects} from "./index";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {NeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {enemyNeoLandozerCutIn, playerNeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer";
+import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 
 /**
  * HUDレイヤー ネオランドーザ固有オブジェクト フィールド

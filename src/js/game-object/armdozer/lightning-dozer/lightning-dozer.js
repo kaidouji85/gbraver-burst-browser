@@ -9,7 +9,6 @@ import {createInitialValue} from "./model/initial-value";
 import type {LightningDozerView} from "./view/lightning-dozer-view";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import type {Update} from "../../../action/game-loop/update";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {charge} from "./animation/charge";
 import {armHammer} from "./animation/arm-hammer";
@@ -26,7 +25,7 @@ import {guardToStand} from "./animation/guard-to-stand";
 import {LightningDozerSounds} from "./sounds/lightning-dozer-sounds";
 
 /**
- *　ライトニングドーザ
+ * ライトニングドーザ
  */
 export class LightningDozer implements ArmDozerSprite {
   _model: LightningDozerModel;
@@ -41,7 +40,7 @@ export class LightningDozer implements ArmDozerSprite {
 
     this._subscription = listener.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate(action);
+        this._onUpdate();
       } else if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -163,10 +162,8 @@ export class LightningDozer implements ArmDozerSprite {
 
   /**
    * アップデート
-   *
-   * @param action アクション
    */
-  _onUpdate(action: Update): void {
+  _onUpdate(): void {
     this._view.engage(this._model);
   }
 

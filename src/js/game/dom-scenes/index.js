@@ -92,26 +92,22 @@ export class DOMScenes {
    * @return 開始されたタイトル画面
    */
   async startTitle(resources: Resources): Promise<Title> {
-    try {
-      this._removeCurrentScene();
+    this._removeCurrentScene();
 
-      const scene = new Title(resources);
-      const notifier = scene.notifier();
-      this._sceneSubscriptions = [
-        notifier.pushGameStart.subscribe(this._pushGameStart),
-        notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
-      ];
-      this._root.appendChild(scene.getRootHTMLElement());
-      await Promise.race([
-        scene.waitUntilLoaded(),
-        waitTime(MAX_LOADING_TIME)
-      ]);
+    const scene = new Title(resources);
+    const notifier = scene.notifier();
+    this._sceneSubscriptions = [
+      notifier.pushGameStart.subscribe(this._pushGameStart),
+      notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
+    ];
+    this._root.appendChild(scene.getRootHTMLElement());
+    await Promise.race([
+      scene.waitUntilLoaded(),
+      waitTime(MAX_LOADING_TIME)
+    ]);
 
-      this._scene = scene;
-      return scene;
-    } catch(e) {
-      throw e;
-    }
+    this._scene = scene;
+    return scene;
   }
 
   /**
@@ -121,25 +117,21 @@ export class DOMScenes {
    * @return 開始されたプレイヤー選択画面
    */
   async startPlayerSelect(resources: Resources): Promise<PlayerSelect> {
-    try {
-      this._removeCurrentScene();
+    this._removeCurrentScene();
 
-      const scene = new PlayerSelect(resources);
-      const notifier = scene.notifier();
-      this._sceneSubscriptions = [
-        notifier.selectionComplete.subscribe(this._selectionComplete)
-      ];
-      this._root.appendChild(scene.getRootHTMLElement());
-      await Promise.race([
-        scene.waitUntilLoaded(),
-        waitTime(MAX_LOADING_TIME),
-      ]);
+    const scene = new PlayerSelect(resources);
+    const notifier = scene.notifier();
+    this._sceneSubscriptions = [
+      notifier.selectionComplete.subscribe(this._selectionComplete)
+    ];
+    this._root.appendChild(scene.getRootHTMLElement());
+    await Promise.race([
+      scene.waitUntilLoaded(),
+      waitTime(MAX_LOADING_TIME),
+    ]);
 
-      this._scene = scene;
-      return scene;
-    } catch(e) {
-      throw e;
-    }
+    this._scene = scene;
+    return scene;
   }
 
   /**
@@ -152,26 +144,22 @@ export class DOMScenes {
    * @return 開始された対戦カード画面
    */
   async startMatchCard(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
-    try {
-      this._removeCurrentScene();
+    this._removeCurrentScene();
 
-      const scene = new MatchCard({
-        resources: resources,
-        player: player,
-        enemy: enemy,
-        caption: caption
-      });
-      this._root.appendChild(scene.getRootHTMLElement());
-      await Promise.race([
-        scene.waitUntilLoaded(),
-        waitTime(MAX_LOADING_TIME),
-      ]);
+    const scene = new MatchCard({
+      resources: resources,
+      player: player,
+      enemy: enemy,
+      caption: caption
+    });
+    this._root.appendChild(scene.getRootHTMLElement());
+    await Promise.race([
+      scene.waitUntilLoaded(),
+      waitTime(MAX_LOADING_TIME),
+    ]);
 
-      this._scene = scene;
-      return scene;
-    } catch(e) {
-      throw e;
-    }
+    this._scene = scene;
+    return scene;
   }
 
   /**
@@ -181,24 +169,20 @@ export class DOMScenes {
    * @return 開始されたNPCエンディング画面
    */
   async startNPCEnding(resources: Resources): Promise<NPCEnding> {
-    try {
-      this._removeCurrentScene();
+    this._removeCurrentScene();
 
-      const scene = new NPCEnding(resources);
-      this._root.appendChild(scene.getRootHTMLElement());
-      this._sceneSubscriptions = [
-        scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)
-      ];
-      await Promise.race([
-        scene.waitUntilLoaded(),
-        waitTime(MAX_LOADING_TIME),
-      ]);
+    const scene = new NPCEnding(resources);
+    this._root.appendChild(scene.getRootHTMLElement());
+    this._sceneSubscriptions = [
+      scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)
+    ];
+    await Promise.race([
+      scene.waitUntilLoaded(),
+      waitTime(MAX_LOADING_TIME),
+    ]);
 
-      this._scene = scene;
-      return scene;
-    } catch(e) {
-      throw e;
-    }
+    this._scene = scene;
+    return scene;
   }
 
   /**

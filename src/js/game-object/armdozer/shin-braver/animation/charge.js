@@ -10,7 +10,7 @@ import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
  * チャージ
  *
  * @param model モデル
- * @param sounds　音
+ * @param sounds 効果音
  * @return アニメーション
  */
 export function charge(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {

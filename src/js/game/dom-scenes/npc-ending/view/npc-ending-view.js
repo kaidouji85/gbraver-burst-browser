@@ -80,10 +80,10 @@ export class NPCEndingView {
       ? logoResource.path
       : '';
 
-    this._root.addEventListener('click', (e: MouseEvent) => {
+    this._root.addEventListener('click', () => {
       this._screenPush.next();
     });
-    this._root.addEventListener('touchstart', (e: TouchEvent) => {
+    this._root.addEventListener('touchstart', () => {
       this._screenPush.next();
     });
   }
@@ -110,15 +110,11 @@ export class NPCEndingView {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    try {
-      await Promise.all([
-        this._isEndCardLoaded,
-        this._isEndLoaded,
-        this._isLogoLoader,
-      ]);
-    } catch(e) {
-      throw e;
-    }
+    await Promise.all([
+      this._isEndCardLoaded,
+      this._isEndLoaded,
+      this._isLogoLoader,
+    ]);
   }
 
   /**

@@ -27,8 +27,8 @@ export class TDCamera {
     this._camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
 
     this._subscriptions = [
-      update.subscribe(action => {
-        this._update(action);
+      update.subscribe(() => {
+        this._update();
       }),
 
       resize.subscribe(action => {
@@ -77,7 +77,7 @@ export class TDCamera {
   }
 
   /** 状態更新 */
-  _update(action: Update): void {
+  _update(): void {
     engage(this._model, this._camera);
   }
 }

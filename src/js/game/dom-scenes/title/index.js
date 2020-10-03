@@ -90,39 +90,31 @@ export class Title implements DOMScene {
    * ゲームスタートが押された際の処理
    */
   async _onPushGameStart(): Promise<void> {
-    try {
-      if (!this._state.canOperation) {
-        return;
-      }
-
-      this._state.canOperation = false;
-      this._pushButton.play();
-      await this._view.pushGameStartButton();
-      this._pushGameStart.next({
-        type: 'PushGameStart'
-      });
-    } catch(e) {
-      throw e;
+    if (!this._state.canOperation) {
+      return;
     }
+
+    this._state.canOperation = false;
+    this._pushButton.play();
+    await this._view.pushGameStartButton();
+    this._pushGameStart.next({
+      type: 'PushGameStart'
+    });
   }
 
   /**
    * 遊び方が押された際の処理
    */
   async _onPushHowToPlay(): Promise<void> {
-    try {
-      if (!this._state.canOperation) {
-        return;
-      }
-
-      this._state.canOperation = false;
-      this._view.pushHowToPlayButton();
-      this._pushHowToPlay.next({
-        type: 'PushHowToPlay'
-      });
-      this._state.canOperation = true;
-    } catch(e) {
-      throw e;
+    if (!this._state.canOperation) {
+      return;
     }
+
+    this._state.canOperation = false;
+    this._view.pushHowToPlayButton();
+    this._pushHowToPlay.next({
+      type: 'PushHowToPlay'
+    });
+    this._state.canOperation = true;
   }
 }

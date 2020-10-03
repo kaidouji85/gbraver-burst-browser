@@ -15,7 +15,7 @@ import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer
 export type EndArmdozerEffectParamX<SPRITE: ArmDozerSprite, TD_ARMDOZER: TDArmdozerObjects, EFFECT> = {
   sprite: SPRITE,
   tdArmdozer: TD_ARMDOZER,
-  endArmdozerEffect: ArmdozerEffect
+  endArmdozerEffect: EFFECT
 };
 
 /**

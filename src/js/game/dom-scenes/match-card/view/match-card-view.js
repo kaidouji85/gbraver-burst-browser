@@ -85,13 +85,9 @@ export class MatchCardView {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    try {
-      await Promise.all([
-        this._isPlayerLoaded,
-        this._isEnemyLoaded,
-      ]);
-    } catch(e) {
-      throw e;
-    }
+    await Promise.all([
+      this._isPlayerLoaded,
+      this._isEnemyLoaded,
+    ]);
   }
 }

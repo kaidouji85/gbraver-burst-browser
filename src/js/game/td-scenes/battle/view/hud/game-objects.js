@@ -71,7 +71,7 @@ export class HUDGameObjects {
     });
 
     this._subscriptions = [
-      this.pilotButton.notifier().pushButton.subscribe(action => {
+      this.pilotButton.notifier().pushButton.subscribe(() => {
         this._battleSceneAction.next({type: 'doPilotSkill'});
       })
     ];

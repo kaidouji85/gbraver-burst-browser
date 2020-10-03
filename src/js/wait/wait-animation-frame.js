@@ -7,7 +7,7 @@
  */
 export function waitAnimationFrame(): Promise<void> {
   return new Promise(resolve => {
-    requestAnimationFrame(time => {
+    requestAnimationFrame(() => {
       resolve();
     });
   });

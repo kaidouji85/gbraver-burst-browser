@@ -1,6 +1,5 @@
 // @flow
 
-import type {HUDPilotObjects} from "./index";
 import type {Resources} from "../../../../../../resource";
 import {ShinyaCutIn} from "../../../../../../game-object/cut-in/shinya/shinya";
 import {Observable} from "rxjs";
@@ -8,6 +7,7 @@ import type {GameObjectAction} from "../../../../../../action/game-object-action
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {enemyShinyaCutIn, playerShinyaCutIn} from "../../../../../../game-object/cut-in/shinya";
 import * as THREE from "three";
+import type {HUDPilotObjects} from "./hud-pilot-objects";
 
 /**
  * コンストラクタのパラメータ

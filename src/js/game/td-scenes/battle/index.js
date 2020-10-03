@@ -11,8 +11,7 @@ import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
 import type {Render} from "../../../action/game-loop/render";
-import type {DoBurst} from "../../../action/battle-scene/do-burst";
-import type {Command, GameEnd, GameState, PilotSkill} from "gbraver-burst-core";
+import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
 import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
@@ -74,9 +73,9 @@ export class BattleScene implements Scene {
         if (action.type === 'decideBattery') {
           this._onDecideBattery(action);
         } else if (action.type === 'doBurst') {
-          this._onBurst(action);
+          this._onBurst();
         } else if (action.type === 'doPilotSkill') {
-          this._onPilotSkill(action);
+          this._onPilotSkill();
         }
       })
     ];
@@ -107,12 +106,8 @@ export class BattleScene implements Scene {
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
    */
   async start(): Promise<void> {
-    try {
-      await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState.stateHistory).play();
-      this._state.canOperation = true;
-    } catch(e) {
-      throw e;
-    }
+    await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState.stateHistory).play();
+    this._state.canOperation = true;
   }
 
   /**
@@ -121,97 +116,81 @@ export class BattleScene implements Scene {
    * @param action アクション
    */
   async _onDecideBattery(action: DecideBattery): Promise<void> {
-    try {
-      if (!this._state.canOperation) {
-        return;
-      }
-
-      this._state.canOperation = false;
-      await all(
-        this._view.hud.gameObjects.batterySelector.decide(),
-        this._view.hud.gameObjects.burstButton.close(),
-        this._view.hud.gameObjects.pilotButton.close(),
-      ).chain(delay(500)
-      ).chain(this._view.hud.gameObjects.batterySelector.close()
-      ).play();
-      const lastState = await this._progressGame({
-        type: 'BATTERY_COMMAND',
-        battery: action.battery
-      });
-      if (lastState && lastState.effect.name === 'GameEnd') {
-        this._onEndGame(lastState.effect);
-        return;
-      }
-
-      this._state.canOperation = true;
-    } catch (e) {
-      throw e;
+    if (!this._state.canOperation) {
+      return;
     }
+
+    this._state.canOperation = false;
+    await all(
+      this._view.hud.gameObjects.batterySelector.decide(),
+      this._view.hud.gameObjects.burstButton.close(),
+      this._view.hud.gameObjects.pilotButton.close(),
+    ).chain(delay(500)
+    ).chain(this._view.hud.gameObjects.batterySelector.close()
+    ).play();
+    const lastState = await this._progressGame({
+      type: 'BATTERY_COMMAND',
+      battery: action.battery
+    });
+    if (lastState && lastState.effect.name === 'GameEnd') {
+      this._onEndGame(lastState.effect);
+      return;
+    }
+
+    this._state.canOperation = true;
   }
 
   /**
    * バースト時の処理
-   *
-   * @param action アクション
    */
-  async _onBurst(action: DoBurst): Promise<void> {
-    try {
-      if (!this._state.canOperation) {
-        return;
-      }
-
-      this._state.canOperation = false;
-      await all(
-        this._view.hud.gameObjects.burstButton.decide(),
-        this._view.hud.gameObjects.batterySelector.close(),
-        this._view.hud.gameObjects.pilotButton.close()
-      )
-        .chain(delay(500))
-        .chain(this._view.hud.gameObjects.burstButton.close())
-        .play();
-      const lastState = await this._progressGame({type: 'BURST_COMMAND'});
-      if (lastState && lastState.effect.name === 'GameEnd') {
-        this._onEndGame(lastState.effect);
-        return;
-      }
-
-      this._state.canOperation = true;
-    } catch(e) {
-      throw e;
+  async _onBurst(): Promise<void> {
+    if (!this._state.canOperation) {
+      return;
     }
+
+    this._state.canOperation = false;
+    await all(
+      this._view.hud.gameObjects.burstButton.decide(),
+      this._view.hud.gameObjects.batterySelector.close(),
+      this._view.hud.gameObjects.pilotButton.close()
+    )
+      .chain(delay(500))
+      .chain(this._view.hud.gameObjects.burstButton.close())
+      .play();
+    const lastState = await this._progressGame({type: 'BURST_COMMAND'});
+    if (lastState && lastState.effect.name === 'GameEnd') {
+      this._onEndGame(lastState.effect);
+      return;
+    }
+
+    this._state.canOperation = true;
   }
 
   /**
    * パイロットスキル発動時の処理
    *
-   * @param action アクション
    * @return 実行結果
-   * @private
    */
-  async _onPilotSkill(action: PilotSkill): Promise<void> {
-    try {
-      if (!this._state.canOperation) {
-        return;
-      }
-
-      this._state.canOperation = false;
-      await all(
-        this._view.hud.gameObjects.pilotButton.decide(),
-        this._view.hud.gameObjects.burstButton.close(),
-        this._view.hud.gameObjects.batterySelector.close(),
-      ).chain(delay(500))
-        .chain(this._view.hud.gameObjects.pilotButton.close())
-        .play();
-      const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
-      if (lastState && lastState.effect.name === 'GameEnd') {
-        this._onEndGame(lastState.effect);
-        return;
-      }
-
-      this._state.canOperation = true;
-    } catch(e) {
-      throw e;
+  async _onPilotSkill(): Promise<void> {
+    if (!this._state.canOperation) {
+      return;
     }
+
+    this._state.canOperation = false;
+    await all(
+      this._view.hud.gameObjects.pilotButton.decide(),
+      this._view.hud.gameObjects.burstButton.close(),
+      this._view.hud.gameObjects.batterySelector.close(),
+    ).chain(delay(500))
+      .chain(this._view.hud.gameObjects.pilotButton.close())
+      .play();
+    const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
+    if (lastState && lastState.effect.name === 'GameEnd') {
+      this._onEndGame(lastState.effect);
+      return;
+    }
+
+    this._state.canOperation = true;
   }
 
   /**
@@ -221,7 +200,6 @@ export class BattleScene implements Scene {
    * @return ゲームの最新状態、何も更新されなかった場合はnullを返す
    */
   async _progressGame(command: Command): Promise<?GameState> {
-    try {
       let lastCommand: Command = command;
       let lastState: ?GameState = null;
       for (let i=0; i<100; i++) {
@@ -250,9 +228,6 @@ export class BattleScene implements Scene {
       }
 
       return lastState
-    } catch (e) {
-      throw e;
-    }
   }
 
   /**
@@ -261,14 +236,10 @@ export class BattleScene implements Scene {
    * @param gameEnd ゲーム終了情報
    */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
-    try {
-      await delay(1000).play();
-      this._endBattle.next({
-        type: 'endBattle',
-        gameEnd: gameEnd
-      });
-    } catch(e) {
-      throw e;
-    }
+    await delay(1000).play();
+    this._endBattle.next({
+      type: 'endBattle',
+      gameEnd: gameEnd
+    });
   }
 }

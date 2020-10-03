@@ -13,12 +13,12 @@ import {HUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../action/resize/resize";
-import type {HUDArmdozerObjects} from "./armdozer-objects";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
-import type {HUDPilotObjects} from "./pilot-objects";
 import {enemyHUDPilotObjects, playerHUDPilotObjects} from "./pilot-objects";
+import type {HUDPilotObjects} from "./pilot-objects/hud-pilot-objects";
+import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
 
 /** コンストラクタのパラメータ */
 export type Param = {
