@@ -41,37 +41,27 @@ export class NPCEndingView {
     `;
 
     const titleBackImage = new Image();
-    this._isEndCardLoaded = new Promise(resolve => {
-      titleBackImage.addEventListener('load', () => {
+    this._isEndCardLoaded = waitElementLoaded(titleBackImage)
+      .then(() => {
         this._root.style.backgroundImage = `url(${titleBackImage.src})`;
-        resolve();
       });
-    }) ;
-    const endCardResource = resources.paths.find(v => v.id === PathIds.END_CARD);
-    titleBackImage.src = endCardResource
-      ? endCardResource.path
-      : '';
+    titleBackImage.src = resources.paths
+      .find(v => v.id === PathIds.END_CARD)
+      ?.path ?? '';
 
     const end = this._root.querySelector(`[data-id="${endId}"]`);
-    const endImage: HTMLImageElement = (end instanceof HTMLImageElement)
-      ? end
-      : new Image();
+    const endImage = (end instanceof HTMLImageElement) ? end : new Image();
     this._isEndLoaded = waitElementLoaded(endImage);
-
-    const endResource = resources.paths.find(v => v.id === PathIds.END);
-    endImage.src = endResource
-      ? endResource.path
-      : '';
+    endImage.src = resources.paths
+      .find(v => v.id === PathIds.END)
+      ?.path ?? '';
 
     const logo = this._root.querySelector(`[data-id="${logoId}"]`);
-    const logoImage = (logo instanceof  HTMLImageElement)
-      ? logo
-      : new Image();
+    const logoImage = (logo instanceof  HTMLImageElement) ? logo : new Image();
     this._isLogoLoader = waitElementLoaded(logoImage);
-    const logoResource = resources.paths.find(v => v.id === PathIds.LOGO);
-    logoImage.src = logoResource
-      ? logoResource.path
-      : '';
+    logoImage.src = resources.paths
+      .find(v => v.id === PathIds.LOGO)
+      ?.path ?? '';
 
     this._screenPush = pushStream(this._root);
   }
