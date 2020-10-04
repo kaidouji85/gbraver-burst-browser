@@ -12,8 +12,9 @@ import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
-import type {EndNPCEnding} from "./npc-ending/action/action";
 import type {Resources} from "../../resource";
+import type {EndNPCEnding} from "../actions/actions";
+import {map} from "rxjs/operators";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -174,7 +175,11 @@ export class DOMScenes {
     const scene = new NPCEnding(resources);
     this._root.appendChild(scene.getRootHTMLElement());
     this._sceneSubscriptions = [
-      scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)
+      scene.notifier().endNpcEnding.pipe(
+        map(() => ({
+          type: 'EndNPCEnding'
+        })
+      )).subscribe(this._endNPCEnding)
     ];
     await Promise.race([
       scene.waitUntilLoaded(),

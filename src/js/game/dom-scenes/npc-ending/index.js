@@ -3,16 +3,16 @@
 import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {EndNPCEnding} from "./action/action";
 import {NPCEndingView} from "./view/npc-ending-view";
 import type {NPCEndingState} from "./state/npc-ending-state";
 import {createInitialState} from "./state/initial-state";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
+import type {EndNPCEnding} from "../../actions/actions";
 
 /** イベント通知 */
 type Notifier  = {
-  endNpcEnding: Observable<EndNPCEnding>
+  endNpcEnding: Observable<void>
 };
 
 /**
@@ -22,7 +22,7 @@ export class NPCEnding implements DOMScene {
   _state: NPCEndingState;
   _view: NPCEndingView;
   _pushButtonSound: typeof Howl;
-  _endNPCEnding: Subject<EndNPCEnding>;
+  _endNPCEnding: Subject<void>;
   _subscriptions: Subscription[];
 
   /**

@@ -1,10 +1,10 @@
 // @flow
 
+import type {GameEnd} from "gbraver-burst-core";
+
 /**
  * Gameが利用するアクション
  */
-
-import type {GameEnd} from "gbraver-burst-core";
 
 /** 遊び方ダイアログを閉じる */
 export type EndHowToPlay = {
@@ -17,3 +17,10 @@ export type EndBattle = {
   /** ゲーム終了情報 */
   gameEnd: GameEnd,
 }
+
+/**
+ * NPC ルート エンディング 終了
+ */
+export type EndNPCEnding = {
+  type: 'EndNPCEnding'
+};
