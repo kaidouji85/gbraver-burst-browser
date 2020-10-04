@@ -13,7 +13,7 @@ import {stateHistoryAnimation} from "./animation/state-history";
 import type {Render} from "../../../action/game-loop/render";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
-import type {EndBattle} from "../../../action/game/battle";
+import type {EndBattle} from "./action/end-battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
 import {all} from "../../../animation/all";

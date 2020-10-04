@@ -2,7 +2,7 @@
 
 import {Renderer} from "../../game-object/renderer";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {EndBattle} from "../../action/game/battle";
+import type {EndBattle} from "./battle/action/end-battle";
 import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {BattleScene} from "./battle";

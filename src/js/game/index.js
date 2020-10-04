@@ -7,7 +7,7 @@ import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
-import type {EndBattle} from "../action/game/battle";
+import type {EndBattle} from "./td-scenes/battle/action/end-battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
 import type {Resize} from "../action/resize/resize";

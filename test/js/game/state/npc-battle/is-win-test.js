@@ -1,7 +1,7 @@
 // @flow
 
 import test from 'ava';
-import type {EndBattle} from "../../../../../src/js/action/game/battle";
+import type {EndBattle} from "../../../../../src/js/game/td-scenes/battle/action/end-battle";
 import {EMPTY_PLAYER} from "../../../../data/player";
 import type {EvenMatch, GameOver, Player} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../../data/end-battle";
