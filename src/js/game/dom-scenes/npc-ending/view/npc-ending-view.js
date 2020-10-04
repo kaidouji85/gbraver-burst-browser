@@ -5,6 +5,7 @@ import {Observable} from "rxjs";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
 import {pushStream} from "../../../../action/push/push";
+import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 
 /**
  * イベント通知
@@ -55,11 +56,8 @@ export class NPCEndingView {
     const endImage: HTMLImageElement = (end instanceof HTMLImageElement)
       ? end
       : new Image();
-    this._isEndLoaded =  new Promise(resolve => {
-      endImage.addEventListener('load', () => {
-        resolve();
-      });
-    });
+    this._isEndLoaded = waitElementLoaded(endImage);
+
     const endResource = resources.paths.find(v => v.id === PathIds.END);
     endImage.src = endResource
       ? endResource.path
@@ -69,11 +67,7 @@ export class NPCEndingView {
     const logoImage = (logo instanceof  HTMLImageElement)
       ? logo
       : new Image();
-    this._isLogoLoader = new Promise(resolve => {
-      logoImage.addEventListener('load', () => {
-        resolve();
-      });
-    });
+    this._isLogoLoader = waitElementLoaded(logoImage);
     const logoResource = resources.paths.find(v => v.id === PathIds.LOGO);
     logoImage.src = logoResource
       ? logoResource.path

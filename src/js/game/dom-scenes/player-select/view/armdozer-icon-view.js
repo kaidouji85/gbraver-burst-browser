@@ -6,6 +6,7 @@ import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import type {Resources} from "../../../../resource";
 import {getArmdozerIconPathId} from "../../../../armdozer-icon/armdozer-icon-path";
 import {pushStream} from "../../../../action/push/push";
+import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 
 /**
  * イベント通知
@@ -35,11 +36,7 @@ export class ArmdozerIconView {
     this._root = document.createElement('img');
     this._root.className = 'player-select__armdozers__icon__image';
     this._select = pushStream(this._root)
-    this._isImageLoaded = new Promise(resolve => {
-      this._root.addEventListener('load', () => {
-        resolve();
-      })
-    });
+    this._isImageLoaded = waitElementLoaded(this._root);
     const pathId = getArmdozerIconPathId(armDozerId);
     const iconResource = resources.paths.find(v => v.id === pathId);
     this._root.src = iconResource

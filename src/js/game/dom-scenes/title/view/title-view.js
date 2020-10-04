@@ -6,6 +6,7 @@ import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
 import {pushStream} from "../../../../action/push/push";
+import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 
 /** イベント通知 */
 type Notifier = {
@@ -64,11 +65,7 @@ export class TitleView {
     const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement)
       ? logo
       : new Image();
-    this._isLogoLoaded = new Promise(resolve => {
-      logoImage.addEventListener('load', () => {
-        resolve();
-      });
-    });
+    this._isLogoLoaded = waitElementLoaded(logoImage);
     const logoResource = resources.paths.find(v => v.id === PathIds.LOGO);
     logoImage.src = logoResource ? logoResource.path : '';
 
