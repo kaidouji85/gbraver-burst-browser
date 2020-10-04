@@ -13,7 +13,7 @@ export type EndHowToPlay = {
 
 /** 戦闘終了 */
 export type EndBattle = {
-  type: 'endBattle',
+  type: 'EndBattle',
   /** ゲーム終了情報 */
   gameEnd: GameEnd,
 }

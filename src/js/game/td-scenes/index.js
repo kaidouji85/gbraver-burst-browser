@@ -86,7 +86,7 @@ export class TDScenes {
       scene.notifier().render.subscribe(this._renderStream),
       scene.notifier().endBattle.pipe(
         map(v => ({
-          type: 'endBattle',
+          type: 'EndBattle',
           gameEnd: v,
         }))
       ).subscribe(this._endBattle)

@@ -15,6 +15,6 @@ const EMPTY_GAME_END: GameEnd = {
 };
 /** 空の戦闘終了アクション */
 export const EMPTY_END_BATTLE: EndBattle = {
-  type: 'endBattle',
+  type: 'EndBattle',
   gameEnd: EMPTY_GAME_END
 };
