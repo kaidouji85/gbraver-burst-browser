@@ -2,8 +2,8 @@
 
 import type {NPCBattle} from "./npc-battle";
 import {MAX_LEVEL} from "./npc-battle";
-import type {EndBattle} from "../../../action/game/battle";
 import type {GameOver, Player} from "gbraver-burst-core";
+import type {EndBattle} from "../../actions/game-actions";
 
 /**
  * プレイヤーが勝利したか否かを判定する

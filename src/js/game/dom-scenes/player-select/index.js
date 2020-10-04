@@ -6,18 +6,25 @@ import type {PlayerSelectState} from "./state/player-select-state";
 import {createInitialState} from "./state/initial-state";
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {SelectionComplete} from "../../../action/game/selection-complete";
 import {ArmDozerIdList} from "gbraver-burst-core";
-import type {SelectArmdozer} from "../../../action/player-select/select-armdozer";
 import {waitTime} from "../../../wait/wait-time";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
+import type {SelectArmdozer} from "./actions/player-select-actions";
+import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
+
+/**
+ * 選択内容
+ */
+type Choices = {
+  armdozerId: ArmDozerId
+};
 
 /**
  * イベント通知
  */
 export type Notifier = {
-  selectionComplete: Observable<SelectionComplete>
+  selectionComplete: Observable<Choices>
 };
 
 /**
@@ -27,7 +34,7 @@ export class PlayerSelect implements DOMScene {
   _state: PlayerSelectState;
   _view: PlayerSelectView;
   _pushButtonSound: typeof Howl;
-  _selectionComplete: Subject<SelectionComplete>;
+  _selectionComplete: Subject<Choices>;
   _subscription: Subscription;
 
   /**
@@ -117,7 +124,6 @@ export class PlayerSelect implements DOMScene {
     await waitTime(1000);
 
     this._selectionComplete.next({
-      type: 'SelectionComplete',
       armdozerId: action.armDozerId,
     });
   }

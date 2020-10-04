@@ -1,8 +1,6 @@
 // @flow
 
 import {Observable, Subject, Subscription} from "rxjs";
-import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
-import type {SelectionComplete} from "../../action/game/selection-complete";
 import type {LoadingAction} from "../../action/loading/loading";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
@@ -12,8 +10,9 @@ import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
-import type {EndNPCEnding} from "../../action/game/npc-ending";
 import type {Resources} from "../../resource";
+import type {EndNPCEnding, GameStart, ShowHowToPlay, SelectionComplete} from "../actions/game-actions";
+import {map} from "rxjs/operators";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -22,8 +21,8 @@ const MAX_LOADING_TIME = 10000;
 
 /** イベント通知 */
 type Notifier = {
-  pushGameStart: Observable<PushGameStart>,
-  pushHowToPlay: Observable<PushHowToPlay>,
+  pushGameStart: Observable<GameStart>,
+  pushHowToPlay: Observable<ShowHowToPlay>,
   selectionComplete: Observable<SelectionComplete>,
   endNPCEnding: Observable<EndNPCEnding>;
 };
@@ -35,8 +34,8 @@ type Notifier = {
 export class DOMScenes {
   _root: HTMLElement;
   _scene: ?DOMScene;
-  _pushGameStart: Subject<PushGameStart>;
-  _pushHowToPlay: Subject<PushHowToPlay>;
+  _pushGameStart: Subject<GameStart>;
+  _pushHowToPlay: Subject<ShowHowToPlay>;
   _selectionComplete: Subject<SelectionComplete>;
   _endNPCEnding: Subject<EndNPCEnding>;
   _sceneSubscriptions: Subscription[];
@@ -97,8 +96,13 @@ export class DOMScenes {
     const scene = new Title(resources);
     const notifier = scene.notifier();
     this._sceneSubscriptions = [
-      notifier.pushGameStart.subscribe(this._pushGameStart),
-      notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
+      notifier.pushGameStart.pipe(
+        map(() => ({type: 'GameStart'}))
+      ).subscribe(this._pushGameStart),
+
+      notifier.pushHowToPlay.pipe(
+        map(() => ({type: 'ShowHowToPlay'}))
+      ).subscribe(this._pushHowToPlay)
     ];
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
@@ -122,7 +126,12 @@ export class DOMScenes {
     const scene = new PlayerSelect(resources);
     const notifier = scene.notifier();
     this._sceneSubscriptions = [
-      notifier.selectionComplete.subscribe(this._selectionComplete)
+      notifier.selectionComplete.pipe(
+        map(v => ({
+          type: 'SelectionComplete',
+          armdozerId: v.armdozerId
+        }))
+      ).subscribe(this._selectionComplete)
     ];
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
@@ -174,7 +183,11 @@ export class DOMScenes {
     const scene = new NPCEnding(resources);
     this._root.appendChild(scene.getRootHTMLElement());
     this._sceneSubscriptions = [
-      scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)
+      scene.notifier().endNpcEnding.pipe(
+        map(() => ({
+          type: 'EndNPCEnding'
+        })
+      )).subscribe(this._endNPCEnding)
     ];
     await Promise.race([
       scene.waitUntilLoaded(),

@@ -1,13 +1,13 @@
 // @flow
 
 import test from 'ava';
-import type {EndBattle} from "../../../../../src/js/action/game/battle";
 import {EMPTY_PLAYER} from "../../../../data/player";
 import type {EvenMatch, GameOver, Player} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../../data/end-battle";
 import type {NPCBattle} from "../../../../../src/js/game/state/npc-battle/npc-battle";
 import {EMPTY_NPC_BATTLE} from "../../../../data/npc-battle";
 import {isWin} from "../../../../../src/js/game/state/npc-battle/level-up";
+import type {EndBattle} from "../../../../../src/js/game/actions/game-actions";
 
 const player: Player = {
   ...EMPTY_PLAYER,

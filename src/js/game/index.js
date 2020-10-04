@@ -7,7 +7,6 @@ import {Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
-import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
 import type {Resize} from "../action/resize/resize";
@@ -17,7 +16,6 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {State} from "./state/state";
 import {createInitialState} from "./state/state";
 import type {ResourceRoot} from "../resource/root/resource-root";
-import type {SelectionComplete} from "../action/game/selection-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
@@ -30,6 +28,7 @@ import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
 import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
+import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 
 /**
  * ゲーム全体の管理を行う
