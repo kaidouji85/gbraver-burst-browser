@@ -1,12 +1,11 @@
 // @flow
 
-import type {LoadingState} from "../state/loading-state";
-import {domUuid} from "../../../../uuid/dom-uuid";
+import {domUuid} from "../../../uuid/dom-uuid";
 
 /**
  * ローディングシーンのビュー
  */
-export class LoadingView {
+export class LoadingPresentation {
   _root: HTMLElement;
   _text: HTMLElement;
   _bar: HTMLElement;
