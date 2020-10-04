@@ -5,7 +5,7 @@ import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
-import type {BattleSceneAction} from "../../../../../action/battle-scene";
+import type {BattleSceneAction} from "../../action";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";

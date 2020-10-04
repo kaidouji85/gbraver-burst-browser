@@ -8,7 +8,7 @@ import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {TdDOMEvent} from "../../../../action/td-dom";
-import type {BattleSceneAction} from "../../../../action/battle-scene";
+import type {BattleSceneAction} from "../action";
 import type {Render} from "../../../../action/game-loop/render";
 import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
