@@ -4,6 +4,7 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import type {Resources} from "../../../../resource";
 import {getArmdozerIconPathId} from "../../../../armdozer-icon/armdozer-icon-path";
+import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 
 /**
  * 対戦カードシーン ビュー
@@ -43,11 +44,7 @@ export class MatchCardView {
     const playerImage: HTMLImageElement = (playerElement instanceof HTMLImageElement)
       ? playerElement
       : new Image();
-    this._isPlayerLoaded = new Promise(resolve => {
-      playerImage.addEventListener('load', () => {
-        resolve();
-      });
-    });
+    this._isPlayerLoaded = waitElementLoaded(playerImage)
     const playerIconPath = getArmdozerIconPathId(player);
     const playerIconResource = resources.paths.find(v => v.id === playerIconPath);
     playerImage.src = playerIconResource
@@ -58,11 +55,7 @@ export class MatchCardView {
     const enemyImage = (enemyElement instanceof HTMLImageElement)
       ? enemyElement
       : new Image();
-    this._isEnemyLoaded = new Promise(resolve => {
-      enemyImage.addEventListener('load', () => {
-        resolve();
-      });
-    });
+    this._isEnemyLoaded = waitElementLoaded(enemyImage);
     const enemyIconPath = getArmdozerIconPathId(enemy);
     const enemyIconResource = resources.paths.find(v => v.id === enemyIconPath);
     enemyImage.src = enemyIconResource

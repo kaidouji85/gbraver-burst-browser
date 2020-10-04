@@ -6,6 +6,7 @@ import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
 import {pushStream} from "../../../../action/push/push";
+import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 
 /** イベント通知 */
 type Notifier = {
@@ -49,28 +50,20 @@ export class TitleView {
     `;
     this._root.className = 'title';
     const titleBackImage = new Image();
-    this._isTitleBackLoaded = new Promise(resolve => {
-      titleBackImage.addEventListener('load', () => {
+    this._isTitleBackLoaded = waitElementLoaded(titleBackImage)
+      .then(() => {
         this._root.style.backgroundImage = `url(${titleBackImage.src})`;
-        resolve();
       });
-    });
-    const titleBackResource = resources.paths.find(v => v.id === PathIds.TITLE_BACK);
-    titleBackImage.src = titleBackResource
-      ? titleBackResource.path
-      : '';
+    titleBackImage.src = resources.paths.find(v => v.id === PathIds.TITLE_BACK)
+      ?.path ?? '';
 
     const logo = this._root.querySelector(`[data-id="${logoId}"]`);
     const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement)
       ? logo
       : new Image();
-    this._isLogoLoaded = new Promise(resolve => {
-      logoImage.addEventListener('load', () => {
-        resolve();
-      });
-    });
-    const logoResource = resources.paths.find(v => v.id === PathIds.LOGO);
-    logoImage.src = logoResource ? logoResource.path : '';
+    this._isLogoLoaded = waitElementLoaded(logoImage);
+    logoImage.src = resources.paths.find(v => v.id === PathIds.LOGO)
+      ?.path ?? '';
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._gameStartStream = pushStream(this._gameStart)
