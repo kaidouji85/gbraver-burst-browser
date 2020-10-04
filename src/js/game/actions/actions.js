@@ -1,6 +1,6 @@
 // @flow
 
-import type {GameEnd} from "gbraver-burst-core";
+import type {ArmDozerId, GameEnd} from "gbraver-burst-core";
 
 /**
  * Gameが利用するアクション
@@ -24,3 +24,14 @@ export type EndBattle = {
 export type EndNPCEnding = {
   type: 'EndNPCEnding'
 };
+
+/**
+ * 選択完了
+ */
+export type SelectionComplete = {
+  type: 'SelectionComplete',
+
+  /** 選択したアームドーザのID */
+  armdozerId: ArmDozerId
+};
+

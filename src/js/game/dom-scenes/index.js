@@ -2,7 +2,6 @@
 
 import {Observable, Subject, Subscription} from "rxjs";
 import type {PushGameStart, PushHowToPlay} from "./title/action/title";
-import type {SelectionComplete} from "./player-select/action/action";
 import type {LoadingAction} from "../../action/loading/loading";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
@@ -13,7 +12,7 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
 import type {Resources} from "../../resource";
-import type {EndNPCEnding} from "../actions/actions";
+import type {EndNPCEnding, SelectionComplete} from "../actions/actions";
 import {map} from "rxjs/operators";
 
 /**
@@ -123,7 +122,12 @@ export class DOMScenes {
     const scene = new PlayerSelect(resources);
     const notifier = scene.notifier();
     this._sceneSubscriptions = [
-      notifier.selectionComplete.subscribe(this._selectionComplete)
+      notifier.selectionComplete.pipe(
+        map(v => ({
+          type: 'SelectionComplete',
+          armdozerId: v.armdozerId
+        }))
+      ).subscribe(this._selectionComplete)
     ];
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([

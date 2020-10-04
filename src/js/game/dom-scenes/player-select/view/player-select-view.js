@@ -6,7 +6,7 @@ import {merge, Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {map} from "rxjs/operators";
 import type {Resources} from "../../../../resource";
-import type {SelectArmdozer} from "../action/action";
+import type {SelectArmdozer} from "../actions/player-select-actions";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select';

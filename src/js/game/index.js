@@ -16,7 +16,6 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {State} from "./state/state";
 import {createInitialState} from "./state/state";
 import type {ResourceRoot} from "../resource/root/resource-root";
-import type {SelectionComplete} from "./dom-scenes/player-select/action/action";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
@@ -29,7 +28,7 @@ import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
 import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
-import type {EndBattle} from "./actions/actions";
+import type {EndBattle, SelectionComplete} from "./actions/actions";
 
 /**
  * ゲーム全体の管理を行う
