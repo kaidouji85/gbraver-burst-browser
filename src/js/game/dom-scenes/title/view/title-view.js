@@ -1,10 +1,11 @@
 // @flow
 
 import {domUuid} from "../../../../uuid/dom-uuid";
-import {Observable, Subject} from "rxjs";
+import {Observable} from "rxjs";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
+import {pushStream} from "../../../../action/push/push";
 
 /** イベント通知 */
 type Notifier = {
@@ -14,8 +15,8 @@ type Notifier = {
 
 /** タイトルビュー */
 export class TitleView {
-  _gameStartStream: Subject<void>;
-  _howToPlayStream: Subject<void>;
+  _gameStartStream: Observable<void>;
+  _howToPlayStream: Observable<void>;
 
   _root: HTMLElement;
   _gameStart: HTMLElement;
@@ -30,14 +31,10 @@ export class TitleView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._gameStartStream = new Subject();
-    this._howToPlayStream = new Subject();
-
-    this._root = document.createElement('div');
-
     const logoId = domUuid();
     const gameStartId = domUuid();
     const howToPlayId = domUuid();
+    this._root = document.createElement('div');
     this._root.innerHTML = `
       <div class="title__contents">
         <img class="title__contents__logo" data-id="${logoId}" />
@@ -73,29 +70,13 @@ export class TitleView {
       });
     });
     const logoResource = resources.paths.find(v => v.id === PathIds.LOGO);
-    logoImage.src = logoResource
-      ? logoResource.path
-      : '';
+    logoImage.src = logoResource ? logoResource.path : '';
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
-    this._gameStart.addEventListener('click', (e: MouseEvent) => {
-      e.preventDefault();
-      this._gameStartStream.next();
-    });
-    this._gameStart.addEventListener('touchstart', (e: TouchEvent) => {
-      e.preventDefault();
-      this._gameStartStream.next();
-    });
+    this._gameStartStream = pushStream(this._gameStart)
 
     this._howToPlay = this._root.querySelector(`[data-id="${howToPlayId}"]`) || document.createElement('div');
-    this._howToPlay.addEventListener('click', (e: MouseEvent) => {
-      e.preventDefault();
-      this._howToPlayStream.next();
-    });
-    this._howToPlay.addEventListener('touchstart', (e: TouchEvent) => {
-      e.preventDefault();
-      this._howToPlayStream.next();
-    });
+    this._howToPlayStream = pushStream(this._howToPlay);
   }
 
   /**

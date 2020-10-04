@@ -1,10 +1,11 @@
 // @flow
 
-import {Observable, Subject} from "rxjs";
+import {Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import type {Resources} from "../../../../resource";
 import {getArmdozerIconPathId} from "../../../../armdozer-icon/armdozer-icon-path";
+import {pushStream} from "../../../../action/push/push";
 
 /**
  * イベント通知
@@ -20,7 +21,7 @@ export class ArmdozerIconView {
   armDozerId: ArmDozerId;
   _root: HTMLImageElement;
   _isImageLoaded: Promise<void>;
-  _select: Subject<void>;
+  _select: Observable<void>;
 
   /**
    * コンストラクタ
@@ -30,18 +31,10 @@ export class ArmdozerIconView {
    */
   constructor(resources: Resources, armDozerId: ArmDozerId) {
     this.armDozerId = armDozerId;
-    this._select = new Subject();
 
     this._root = document.createElement('img');
     this._root.className = 'player-select__armdozers__icon__image';
-    this._root.addEventListener('click', (e: MouseEvent) => {
-      e.preventDefault();
-      this._select.next();
-    });
-    this._root.addEventListener('touchstart', (e: TouchEvent) => {
-      e.preventDefault();
-      this._select.next();
-    });
+    this._select = pushStream(this._root)
     this._isImageLoaded = new Promise(resolve => {
       this._root.addEventListener('load', () => {
         resolve();
