@@ -8,7 +8,6 @@ import type {NPCEndingState} from "./state/npc-ending-state";
 import {createInitialState} from "./state/initial-state";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
-import type {EndNPCEnding} from "../../actions/game-actions";
 
 /** イベント通知 */
 type Notifier  = {

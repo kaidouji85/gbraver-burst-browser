@@ -3,14 +3,12 @@
 import {HowToPlayView} from "./view/how-to-play-view";
 import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
 import {Observable} from "rxjs";
-import type {EndHowToPlay} from "../../actions/game-actions";
-import {map} from "rxjs/operators";
 import type {Resources} from "../../../resource";
 import type {DOMDialog} from "../dialog";
 
 /** イベント通知 */
 type Notifier = {
-  endHowToPlay: Observable<EndHowToPlay>
+  endHowToPlay: Observable<void>
 };
 
 /**
@@ -29,9 +27,7 @@ export class HowToPlay implements DOMDialog {
     this._view = new HowToPlayView(resources, howToPlayMovieURL());
 
     this._notifier = {
-      endHowToPlay: this._view.notifier().close.pipe(
-        map(() => ({type: 'EndHowToPlay'}))
-      )
+      endHowToPlay: this._view.notifier().close
     };
   }
 

@@ -5,6 +5,7 @@ import {Observable, Subject, Subscription} from "rxjs";
 import type {EndHowToPlay} from "../actions/game-actions";
 import type {Resources} from "../../resource";
 import type {DOMDialog} from "./dialog";
+import {map} from "rxjs/operators";
 
 /** イベント通知ストリーム */
 type Notifier = {
@@ -40,7 +41,9 @@ export class DOMDialogs {
     const howToPlay = new HowToPlay(resources);
     const notifier = howToPlay.notifier();
     this._dialogSubscriptions = [
-      notifier.endHowToPlay.subscribe(this._endHowToPlay)
+      notifier.endHowToPlay.pipe(
+        map(() => ({type: 'EndHowToPlay'}))
+      ).subscribe(this._endHowToPlay)
     ];
     this._root.appendChild(howToPlay.getRootHTMLElement());
     this._dialog = howToPlay;
