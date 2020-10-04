@@ -1,22 +1,26 @@
 // @flow
 
-import type {LoadingState} from "./state/loading-state";
-import {createInitialState} from "./state/initial-value";
-import {progress} from "./state/progress";
 import type {LoadingAction, LoadingProgress} from "../../../action/loading/loading";
 import {Observable, Subscription} from "rxjs";
-import {LoadingView} from "./view/loading-view";
+import {LoadingPresentation} from "./loading-presentation";
 import type {DOMScene} from "../dom-scene";
 
-/** ローディング */
+/**
+ * ローディング
+ */
 export class Loading implements DOMScene {
-  _state: LoadingState;
-  _view: LoadingView;
+  _completedRate: number;
+  _view: LoadingPresentation;
   _subscription: Subscription;
 
+  /**
+   * コンストラクタ
+   *
+   * @param loading ローディングストリーム
+   */
   constructor(loading: Observable<LoadingAction>) {
-    this._state = createInitialState();
-    this._view = new LoadingView(this._state);
+    this._completedRate = 0;
+    this._view = new LoadingPresentation();
     this._subscription = loading.subscribe(action => {
       if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);
@@ -44,7 +48,7 @@ export class Loading implements DOMScene {
    * @param action アクション
    */
   _onLoadingProgress(action: LoadingProgress): void {
-    this._state = progress(this._state, action.completedRate);
-    this._view.engage(this._state);
+    this._completedRate = Math.max(action.completedRate, this._completedRate);
+    this._view.setCompletedRate(this._completedRate);
   }
 }

@@ -1,15 +1,19 @@
 // @flow
 
-import type {LoadingState} from "../state/loading-state";
-import {domUuid} from "../../../../uuid/dom-uuid";
+import {domUuid} from "../../../uuid/dom-uuid";
 
-/** ローディングシーンのビュー */
-export class LoadingView {
+/**
+ * ローディングシーンのビュー
+ */
+export class LoadingPresentation {
   _root: HTMLElement;
   _text: HTMLElement;
   _bar: HTMLElement;
 
-  constructor(initialState: LoadingState) {
+  /**
+   * コンストラクタ
+   */
+  constructor() {
     const textId = domUuid();
     const barId = domUuid();
 
@@ -28,17 +32,17 @@ export class LoadingView {
     this._text = this._root.querySelector(`[data-id="${textId}"]`) || document.createElement('div');
     this._bar = this._root.querySelector(`[data-id="${barId}"]`) || document.createElement('div');
 
-    this.engage(initialState);
+    this.setCompletedRate(0);
   }
 
   /**
-   * 状態をビューに反映させる
+   * ローディング進捗を変更する
    *
-   * @param state 状態
+   * @param completedRate 0〜1で指定する進捗率、1で完了
    */
-  engage(state: LoadingState): void {
-    this._text.innerText = `LOADING... ${Math.floor(state.completedRate * 100)}%`;
-    this._bar.style.width = `${state.completedRate * 100}%`
+  setCompletedRate(completedRate: number): void {
+    this._text.innerText = `LOADING... ${Math.floor(completedRate * 100)}%`;
+    this._bar.style.width = `${completedRate * 100}%`
   }
 
   /**
