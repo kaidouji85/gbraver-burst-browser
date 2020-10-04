@@ -1,9 +1,10 @@
 // @flow
 
 import {domUuid} from "../../../../uuid/dom-uuid";
-import {Observable, Subject} from "rxjs";
+import {merge, Observable,} from "rxjs";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
+import {pushStream} from "../../../../action/push/push";
 
 /** イベント通知ストリーム */
 export type Notifier = {
@@ -19,7 +20,7 @@ export type Param = {
  * 遊び方ダイアログのビュー
  */
 export class HowToPlayView {
-  _closeStream: Subject<void>;
+  _closeStream: Observable<void>;
   _root: HTMLElement;
   _closer: HTMLElement;
 
@@ -30,8 +31,6 @@ export class HowToPlayView {
    * @param movieURL 遊び方動画URL
    */
   constructor(resources: Resources, movieURL: string) {
-    this._closeStream = new Subject();
-
     const closerId = domUuid();
     const closerResource = resources.paths.find(v => v.id === PathIds.CLOSER);
     const closerPath = closerResource
@@ -47,24 +46,12 @@ export class HowToPlayView {
       </div>
     `;
 
-    this._root.addEventListener('click', (e: MouseEvent) => {
-      e.preventDefault();
-      this._closeStream.next();
-    });
-    this._root.addEventListener('touchstart', (e: TouchEvent) => {
-      e.preventDefault();
-      this._closeStream.next();
-    });
-
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
-    this._closer.addEventListener('click', (e: MouseEvent) => {
-      e.preventDefault();
-      this._closeStream.next();
-    });
-    this._closer.addEventListener('touchstart', (e: TouchEvent) => {
-      e.preventDefault();
-      this._closeStream.next();
-    });
+
+    this._closeStream = merge(
+      pushStream(this._root),
+      pushStream(this._closer)
+    );
   }
 
   /**

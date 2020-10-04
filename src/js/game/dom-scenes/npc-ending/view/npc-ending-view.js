@@ -1,9 +1,10 @@
 // @flow
 
 import {domUuid} from "../../../../uuid/dom-uuid";
-import {Observable, Subject} from "rxjs";
+import {Observable} from "rxjs";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
+import {pushStream} from "../../../../action/push/push";
 
 /**
  * イベント通知
@@ -20,7 +21,7 @@ export class NPCEndingView {
   _isEndCardLoaded: Promise<void>;
   _isEndLoaded: Promise<void>;
   _isLogoLoader: Promise<void>;
-  _screenPush: Subject<void>;
+  _screenPush: Observable<void>;
 
   /**
    * コンストラクタ
@@ -28,8 +29,6 @@ export class NPCEndingView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._screenPush = new Subject();
-
     const endId = domUuid();
     const logoId = domUuid();
 
@@ -80,12 +79,7 @@ export class NPCEndingView {
       ? logoResource.path
       : '';
 
-    this._root.addEventListener('click', () => {
-      this._screenPush.next();
-    });
-    this._root.addEventListener('touchstart', () => {
-      this._screenPush.next();
-    });
+    this._screenPush = pushStream(this._root);
   }
 
   /**

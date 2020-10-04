@@ -1,6 +1,6 @@
 // @flow
 
-import {Observable, Subject} from "rxjs";
+import {Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import type {Resources} from "../../../../resource";
