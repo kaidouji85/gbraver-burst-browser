@@ -17,7 +17,7 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {State} from "./state/state";
 import {createInitialState} from "./state/state";
 import type {ResourceRoot} from "../resource/root/resource-root";
-import type {SelectionComplete} from "../action/game/selection-complete";
+import type {SelectionComplete} from "./dom-scenes/player-select/action/action";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";

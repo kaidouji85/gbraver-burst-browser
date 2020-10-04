@@ -12,7 +12,6 @@ export type SelectionComplete = {
   armdozerId: ArmDozerId
 };
 
-// TODO 削除する
 /**
  * アームドーザを選択した
  */

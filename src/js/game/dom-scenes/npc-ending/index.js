@@ -3,7 +3,7 @@
 import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {EndNPCEnding} from "../../../action/game/npc-ending";
+import type {EndNPCEnding} from "./action/action";
 import {NPCEndingView} from "./view/npc-ending-view";
 import type {NPCEndingState} from "./state/npc-ending-state";
 import {createInitialState} from "./state/initial-state";

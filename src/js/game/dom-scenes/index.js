@@ -1,8 +1,8 @@
 // @flow
 
 import {Observable, Subject, Subscription} from "rxjs";
-import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
-import type {SelectionComplete} from "../../action/game/selection-complete";
+import type {PushGameStart, PushHowToPlay} from "./title/action/title";
+import type {SelectionComplete} from "./player-select/action/action";
 import type {LoadingAction} from "../../action/loading/loading";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
@@ -12,7 +12,7 @@ import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
-import type {EndNPCEnding} from "../../action/game/npc-ending";
+import type {EndNPCEnding} from "./npc-ending/action/action";
 import type {Resources} from "../../resource";
 
 /**

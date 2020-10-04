@@ -2,7 +2,7 @@
 
 import {HowToPlay} from "./how-to-play";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {EndHowToPlay} from "../../action/game/how-to-play";
+import type {EndHowToPlay} from "../actions/actions";
 import type {Resources} from "../../resource";
 import type {DOMDialog} from "./dialog";
 

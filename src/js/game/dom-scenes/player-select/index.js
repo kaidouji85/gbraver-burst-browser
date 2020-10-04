@@ -6,7 +6,7 @@ import type {PlayerSelectState} from "./state/player-select-state";
 import {createInitialState} from "./state/initial-state";
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {SelectArmdozer, SelectionComplete} from "../../../action/game/selection-complete";
+import type {SelectArmdozer, SelectionComplete} from "./action/action";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {waitTime} from "../../../wait/wait-time";
 import type {Resources} from "../../../resource";

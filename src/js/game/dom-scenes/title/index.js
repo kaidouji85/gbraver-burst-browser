@@ -3,7 +3,7 @@
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {PushGameStart, PushHowToPlay} from "../../../action/game/title";
+import type {PushGameStart, PushHowToPlay} from "./action/title";
 import {TitleView} from "./view/title-view";
 import type {DOMScene} from "../dom-scene";
 import type {Resources} from "../../../resource";
