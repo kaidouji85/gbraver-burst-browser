@@ -26,7 +26,7 @@ export type EndNPCEnding = {
 };
 
 /**
- * 選択完了
+ * プレイヤー選択完了
  */
 export type SelectionComplete = {
   type: 'SelectionComplete',

@@ -3,7 +3,7 @@
 import {HowToPlayView} from "./view/how-to-play-view";
 import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
 import {Observable} from "rxjs";
-import type {EndHowToPlay} from "../../actions/actions";
+import type {EndHowToPlay} from "../../actions/game-actions";
 import {map} from "rxjs/operators";
 import type {Resources} from "../../../resource";
 import type {DOMDialog} from "../dialog";

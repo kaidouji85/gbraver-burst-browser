@@ -28,7 +28,7 @@ import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
 import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
-import type {EndBattle, SelectionComplete} from "./actions/actions";
+import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 
 /**
  * ゲーム全体の管理を行う

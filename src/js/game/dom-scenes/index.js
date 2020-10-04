@@ -11,7 +11,7 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
 import type {Resources} from "../../resource";
-import type {EndNPCEnding, PushGameStart, PushHowToPlay, SelectionComplete} from "../actions/actions";
+import type {EndNPCEnding, PushGameStart, PushHowToPlay, SelectionComplete} from "../actions/game-actions";
 import {map} from "rxjs/operators";
 
 /**

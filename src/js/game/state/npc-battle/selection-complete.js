@@ -4,7 +4,7 @@ import type {NPCBattle} from "./npc-battle";
 import type {Player} from "gbraver-burst-core";
 import {ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import {playerUuid} from "../../../uuid/player";
-import type {SelectionComplete} from "../../actions/actions";
+import type {SelectionComplete} from "../../actions/game-actions";
 
 /**
  * プレイヤーキャラ選択内容の結果をNPC戦闘に反映させる

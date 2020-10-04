@@ -10,7 +10,7 @@ import type {Render} from "../../action/game-loop/render";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {gameLoopStream} from "../../action/game-loop/game-loop-stream";
 import type {Resize} from "../../action/resize/resize";
-import type {EndBattle} from "../actions/actions";
+import type {EndBattle} from "../actions/game-actions";
 import {map} from "rxjs/operators";
 
 /** イベント通知 */
