@@ -2,7 +2,6 @@
 
 import {Renderer} from "../../game-object/renderer";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {EndBattle} from "./battle/action/end-battle";
 import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {BattleScene} from "./battle";
@@ -11,6 +10,8 @@ import type {Render} from "../../action/game-loop/render";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {gameLoopStream} from "../../action/game-loop/game-loop-stream";
 import type {Resize} from "../../action/resize/resize";
+import type {EndBattle} from "../actions/actions";
+import {map} from "rxjs/operators";
 
 /** イベント通知 */
 type Notifier = {
@@ -83,7 +84,12 @@ export class TDScenes {
     this._scene = scene;
     this._sceneSubscriptions = [
       scene.notifier().render.subscribe(this._renderStream),
-      scene.notifier().endBattle.subscribe(this._endBattle)
+      scene.notifier().endBattle.pipe(
+        map(v => ({
+          type: 'endBattle',
+          gameEnd: v,
+        }))
+      ).subscribe(this._endBattle)
     ];
 
     return scene;

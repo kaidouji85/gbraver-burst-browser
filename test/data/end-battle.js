@@ -1,6 +1,6 @@
 // @flow
-import type {EndBattle} from "../../src/js/game/td-scenes/battle/action/end-battle";
 import type {GameEnd} from "gbraver-burst-core";
+import type {EndBattle} from "../../src/js/game/actions/actions";
 
 // TODO gbraver-burst-coreと共有する
 /**
