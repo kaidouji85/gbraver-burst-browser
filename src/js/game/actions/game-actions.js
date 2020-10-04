@@ -34,12 +34,12 @@ export type SelectionComplete = {
   armdozerId: ArmDozerId
 };
 
-/** ゲームスタートボタンが押された */
-export type PushGameStart = {
-  type: 'PushGameStart'
+/** ゲームスタート */
+export type GameStart = {
+  type: 'GameStart'
 };
 
-/** 遊び方ボタンが押された */
-export type PushHowToPlay = {
-  type: 'PushHowToPlay'
+/** 遊び方動画を表示 */
+export type ShowHowToPlay = {
+  type: 'ShowHowToPlay'
 };

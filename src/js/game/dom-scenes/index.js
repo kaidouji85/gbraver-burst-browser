@@ -11,7 +11,7 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
 import type {Resources} from "../../resource";
-import type {EndNPCEnding, PushGameStart, PushHowToPlay, SelectionComplete} from "../actions/game-actions";
+import type {EndNPCEnding, GameStart, ShowHowToPlay, SelectionComplete} from "../actions/game-actions";
 import {map} from "rxjs/operators";
 
 /**
@@ -21,8 +21,8 @@ const MAX_LOADING_TIME = 10000;
 
 /** イベント通知 */
 type Notifier = {
-  pushGameStart: Observable<PushGameStart>,
-  pushHowToPlay: Observable<PushHowToPlay>,
+  pushGameStart: Observable<GameStart>,
+  pushHowToPlay: Observable<ShowHowToPlay>,
   selectionComplete: Observable<SelectionComplete>,
   endNPCEnding: Observable<EndNPCEnding>;
 };
@@ -34,8 +34,8 @@ type Notifier = {
 export class DOMScenes {
   _root: HTMLElement;
   _scene: ?DOMScene;
-  _pushGameStart: Subject<PushGameStart>;
-  _pushHowToPlay: Subject<PushHowToPlay>;
+  _pushGameStart: Subject<GameStart>;
+  _pushHowToPlay: Subject<ShowHowToPlay>;
   _selectionComplete: Subject<SelectionComplete>;
   _endNPCEnding: Subject<EndNPCEnding>;
   _sceneSubscriptions: Subscription[];
@@ -97,11 +97,11 @@ export class DOMScenes {
     const notifier = scene.notifier();
     this._sceneSubscriptions = [
       notifier.pushGameStart.pipe(
-        map(() => ({type: 'PushGameStart'}))
+        map(() => ({type: 'GameStart'}))
       ).subscribe(this._pushGameStart),
 
       notifier.pushHowToPlay.pipe(
-        map(() => ({type: 'PushHowToPlay'}))
+        map(() => ({type: 'ShowHowToPlay'}))
       ).subscribe(this._pushHowToPlay)
     ];
     this._root.appendChild(scene.getRootHTMLElement());
