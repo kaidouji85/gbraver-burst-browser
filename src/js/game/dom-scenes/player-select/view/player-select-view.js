@@ -5,8 +5,8 @@ import {ArmdozerIconView} from "./armdozer-icon-view";
 import {merge, Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {map} from "rxjs/operators";
-import type {SelectArmdozer} from "../../../../action/player-select/select-armdozer";
 import type {Resources} from "../../../../resource";
+import type {SelectArmdozer} from "../../../../action/game/selection-complete";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select';

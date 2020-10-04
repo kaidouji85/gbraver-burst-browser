@@ -11,3 +11,14 @@ export type SelectionComplete = {
   /** 選択したアームドーザのID */
   armdozerId: ArmDozerId
 };
+
+// TODO 削除する
+/**
+ * アームドーザを選択した
+ */
+export type SelectArmdozer = {
+  type: 'SelectArmdozer',
+
+  /** 選択したアームドーザID */
+  armDozerId: ArmDozerId
+};
