@@ -30,8 +30,16 @@ export type EndNPCEnding = {
  */
 export type SelectionComplete = {
   type: 'SelectionComplete',
-
   /** 選択したアームドーザのID */
   armdozerId: ArmDozerId
 };
 
+/** ゲームスタートボタンが押された */
+export type PushGameStart = {
+  type: 'PushGameStart'
+};
+
+/** 遊び方ボタンが押された */
+export type PushHowToPlay = {
+  type: 'PushHowToPlay'
+};

@@ -3,7 +3,6 @@
 import {createInitialState} from "./state/initial-state";
 import type {TitleState} from "./state/title-state";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {PushGameStart, PushHowToPlay} from "./action/title";
 import {TitleView} from "./view/title-view";
 import type {DOMScene} from "../dom-scene";
 import type {Resources} from "../../../resource";
@@ -12,8 +11,8 @@ import {SOUND_IDS} from "../../../resource/sound";
 
 /** イベント通知 */
 export type Notifier = {
-  pushGameStart: Observable<PushGameStart>,
-  pushHowToPlay: Observable<PushHowToPlay>,
+  pushGameStart: Observable<void>,
+  pushHowToPlay: Observable<void>,
 };
 
 /** タイトルシーン */
@@ -21,8 +20,8 @@ export class Title implements DOMScene {
   _state: TitleState;
   _view: TitleView;
   _pushButton: typeof Howl;
-  _pushGameStart: Subject<PushGameStart>;
-  _pushHowToPlay: Subject<PushHowToPlay>;
+  _pushGameStart: Subject<void>;
+  _pushHowToPlay: Subject<void>;
   _subscriptions: Subscription[];
 
   /**
@@ -97,9 +96,7 @@ export class Title implements DOMScene {
     this._state.canOperation = false;
     this._pushButton.play();
     await this._view.pushGameStartButton();
-    this._pushGameStart.next({
-      type: 'PushGameStart'
-    });
+    this._pushGameStart.next();
   }
 
   /**
@@ -112,9 +109,7 @@ export class Title implements DOMScene {
 
     this._state.canOperation = false;
     this._view.pushHowToPlayButton();
-    this._pushHowToPlay.next({
-      type: 'PushHowToPlay'
-    });
+    this._pushHowToPlay.next();
     this._state.canOperation = true;
   }
 }
