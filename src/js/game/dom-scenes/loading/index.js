@@ -16,7 +16,7 @@ export class Loading implements DOMScene {
 
   constructor(loading: Observable<LoadingAction>) {
     this._state = createInitialState();
-    this._view = new LoadingView(this._state);
+    this._view = new LoadingView();
     this._subscription = loading.subscribe(action => {
       if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);
@@ -45,6 +45,6 @@ export class Loading implements DOMScene {
    */
   _onLoadingProgress(action: LoadingProgress): void {
     this._state = progress(this._state, action.completedRate);
-    this._view.engage(this._state);
+    this._view.setCompletedRate(this._state.completedRate);
   }
 }
