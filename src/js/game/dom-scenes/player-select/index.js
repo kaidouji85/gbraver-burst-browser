@@ -1,9 +1,7 @@
 // @flow
 
 import {Howl} from 'howler';
-import {PlayerSelectView} from "./view/player-select-view";
-import type {PlayerSelectState} from "./state/player-select-state";
-import {createInitialState} from "./state/initial-state";
+import {PlayerSelectPresentation} from "./player-select-presentation";
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
 import {ArmDozerIdList} from "gbraver-burst-core";
@@ -14,7 +12,7 @@ import type {SelectArmdozer} from "./actions/player-select-actions";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 
 /**
- * 選択内容
+ * プレイヤーの選択内容
  */
 type Choices = {
   armdozerId: ArmDozerId
@@ -31,8 +29,8 @@ export type Notifier = {
  * プレイヤーセレクト
  */
 export class PlayerSelect implements DOMScene {
-  _state: PlayerSelectState;
-  _view: PlayerSelectView;
+  _canOperation: boolean;
+  _view: PlayerSelectPresentation;
   _pushButtonSound: typeof Howl;
   _selectionComplete: Subject<Choices>;
   _subscription: Subscription;
@@ -43,10 +41,9 @@ export class PlayerSelect implements DOMScene {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-
     this._selectionComplete = new Subject();
-    this._state = createInitialState();
-    
+    this._canOperation = true;
+
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
@@ -58,7 +55,7 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._view = new PlayerSelectView(resources, armDozerIds);
+    this._view = new PlayerSelectPresentation(resources, armDozerIds);
 
     this._subscription = this._view.notifier().select.subscribe(icon => {
       this._onArmdozerIconPush(icon);
@@ -107,11 +104,11 @@ export class PlayerSelect implements DOMScene {
    * @param action アクション
    */
   async _onArmdozerIconPush(action: SelectArmdozer): Promise<void> {
-    if (!this._state.canOperation) {
+    if (!this._canOperation) {
       return;
     }
 
-    this._state.canOperation = false;
+    this._canOperation = false;
 
     this._pushButtonSound.play();
     const selected = this._view.armdozerIcons
