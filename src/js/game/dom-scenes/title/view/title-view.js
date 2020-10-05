@@ -5,19 +5,20 @@ import {Observable} from "rxjs";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
-import {pushStream} from "../../../../action/push/push";
+import {pushDOMStream} from "../../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
+import type {PushDOM} from "../../../../action/push/push-dom";
 
 /** イベント通知 */
 type Notifier = {
-  gameStart: Observable<void>,
-  howToPlay: Observable<void>,
+  gameStart: Observable<PushDOM>,
+  howToPlay: Observable<PushDOM>,
 };
 
 /** タイトルビュー */
 export class TitleView {
-  _gameStartStream: Observable<void>;
-  _howToPlayStream: Observable<void>;
+  _gameStartStream: Observable<PushDOM>;
+  _howToPlayStream: Observable<PushDOM>;
 
   _root: HTMLElement;
   _gameStart: HTMLElement;
@@ -66,10 +67,10 @@ export class TitleView {
       ?.path ?? '';
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
-    this._gameStartStream = pushStream(this._gameStart)
+    this._gameStartStream = pushDOMStream(this._gameStart);
 
     this._howToPlay = this._root.querySelector(`[data-id="${howToPlayId}"]`) || document.createElement('div');
-    this._howToPlayStream = pushStream(this._howToPlay);
+    this._howToPlayStream = pushDOMStream(this._howToPlay);
   }
 
   /**

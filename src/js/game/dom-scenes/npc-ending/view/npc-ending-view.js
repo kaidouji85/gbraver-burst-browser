@@ -4,14 +4,15 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {Observable} from "rxjs";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
-import {pushStream} from "../../../../action/push/push";
+import {pushDOMStream} from "../../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
+import type {PushDOM} from "../../../../action/push/push-dom";
 
 /**
  * イベント通知
  */
 type Notifier = {
-  screenPush: Observable<void>
+  screenPush: Observable<PushDOM>
 };
 
 /**
@@ -22,7 +23,7 @@ export class NPCEndingView {
   _isEndCardLoaded: Promise<void>;
   _isEndLoaded: Promise<void>;
   _isLogoLoader: Promise<void>;
-  _screenPush: Observable<void>;
+  _screenPush: Observable<PushDOM>;
 
   /**
    * コンストラクタ
@@ -63,7 +64,7 @@ export class NPCEndingView {
       .find(v => v.id === PathIds.LOGO)
       ?.path ?? '';
 
-    this._screenPush = pushStream(this._root);
+    this._screenPush = pushDOMStream(this._root);
   }
 
   /**
