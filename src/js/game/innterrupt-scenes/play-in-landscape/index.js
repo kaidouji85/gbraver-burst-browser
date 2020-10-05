@@ -1,11 +1,13 @@
 // @flow
 
-import {PlayInLandscapeView} from "./view/play-in-landscape-view";
+import {PlayInLandscapePresentation} from "./presentation";
 import type {Resources} from "../../../resource";
 
-/** ランドスケープ警告シーン */
+/**
+ * ランドスケープ警告
+ */
 export class PlayInLandscape {
-  _view: PlayInLandscapeView;
+  _presentation: PlayInLandscapePresentation;
 
   /**
    * コンストラクタ
@@ -13,7 +15,7 @@ export class PlayInLandscape {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._view = new PlayInLandscapeView(resources);
+    this._presentation = new PlayInLandscapePresentation(resources);
   }
 
   /**
@@ -22,6 +24,6 @@ export class PlayInLandscape {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._view.getRootHTMLElement();
+    return this._presentation.getRootHTMLElement();
   }
 }

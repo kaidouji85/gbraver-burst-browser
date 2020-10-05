@@ -1,15 +1,15 @@
 // @flow
 
 import type {ArmDozerId} from "gbraver-burst-core";
-import {domUuid} from "../../../../uuid/dom-uuid";
-import type {Resources} from "../../../../resource";
-import {getArmdozerIconPathId} from "../../../../armdozer-icon/armdozer-icon-path";
-import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
+import {domUuid} from "../../../uuid/dom-uuid";
+import type {Resources} from "../../../resource";
+import {getArmdozerIconPathId} from "../../../armdozer-icon/armdozer-icon-path";
+import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 
 /**
- * 対戦カードシーン ビュー
+ * 対戦カードシーン プレゼンテーション
  */
-export class MatchCardView {
+export class MatchCardPresentation {
   _root: HTMLElement;
   _isPlayerLoaded: Promise<void>;
   _isEnemyLoaded: Promise<void>;

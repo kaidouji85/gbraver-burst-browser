@@ -3,9 +3,7 @@
 import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
-import {NPCEndingView} from "./view/npc-ending-view";
-import type {NPCEndingState} from "./state/npc-ending-state";
-import {createInitialState} from "./state/initial-state";
+import {NPCEndingPresentation} from "./presentation";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 
@@ -18,8 +16,8 @@ type Notifier  = {
  * NPCルート エンディング
  */
 export class NPCEnding implements DOMScene {
-  _state: NPCEndingState;
-  _view: NPCEndingView;
+  _canOperate: boolean;
+  _presentation: NPCEndingPresentation;
   _pushButtonSound: typeof Howl;
   _endNPCEnding: Subject<void>;
   _subscriptions: Subscription[];
@@ -30,9 +28,9 @@ export class NPCEnding implements DOMScene {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._state = createInitialState();
+    this._canOperate = true;
     this._endNPCEnding = new Subject();
-    this._view = new NPCEndingView(resources);
+    this._presentation = new NPCEndingPresentation(resources);
 
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButtonSound = pushButtonResource
@@ -40,7 +38,7 @@ export class NPCEnding implements DOMScene {
       : new Howl();
 
     this._subscriptions = [
-      this._view.notifier().screenPush.subscribe(() => {
+      this._presentation.notifier().screenPush.subscribe(() => {
         this._onScreenPush();
       })
     ];
@@ -50,7 +48,7 @@ export class NPCEnding implements DOMScene {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
+    this._presentation.destructor();
     this._subscriptions.forEach(v => {
       v.unsubscribe();
     })
@@ -62,7 +60,7 @@ export class NPCEnding implements DOMScene {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._view.getRootHTMLElement();
+    return this._presentation.getRootHTMLElement();
   }
 
   /**
@@ -82,18 +80,18 @@ export class NPCEnding implements DOMScene {
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
-    return this._view.waitUntilLoaded();
+    return this._presentation.waitUntilLoaded();
   }
 
   /**
    * 画面がクリックされた際の処理
    */
   _onScreenPush(): void {
-    if (!this._state.canOperate) {
+    if (!this._canOperate) {
       return;
     }
     
-    this._state.canOperate = false;
+    this._canOperate = false;
     this._pushButtonSound.play();
     this._endNPCEnding.next();
   }

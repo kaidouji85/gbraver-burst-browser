@@ -1,12 +1,12 @@
 // @flow
 
-import {domUuid} from "../../../../uuid/dom-uuid";
+import {domUuid} from "../../../uuid/dom-uuid";
 import {Observable} from "rxjs";
-import type {Resources} from "../../../../resource";
-import {PathIds} from "../../../../resource/path";
-import {pushDOMStream} from "../../../../action/push/push-dom";
-import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
-import type {PushDOM} from "../../../../action/push/push-dom";
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
+import {pushDOMStream} from "../../../action/push/push-dom";
+import {waitElementLoaded} from "../../../wait/wait-element-loaded";
+import type {PushDOM} from "../../../action/push/push-dom";
 
 /**
  * イベント通知
@@ -16,9 +16,9 @@ type Notifier = {
 };
 
 /**
- * NPCルート エンディング ビュー
+ * NPCルート エンディング プレゼンテーション
  */
-export class NPCEndingView {
+export class NPCEndingPresentation {
   _root: HTMLElement;
   _isEndCardLoaded: Promise<void>;
   _isEndLoaded: Promise<void>;

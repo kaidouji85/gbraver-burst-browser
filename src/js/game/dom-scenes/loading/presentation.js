@@ -3,7 +3,7 @@
 import {domUuid} from "../../../uuid/dom-uuid";
 
 /**
- * ローディングシーンのビュー
+ * ローディングシーン プレゼンテーション
  */
 export class LoadingPresentation {
   _root: HTMLElement;

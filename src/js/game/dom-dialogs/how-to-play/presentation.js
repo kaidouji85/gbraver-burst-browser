@@ -1,10 +1,10 @@
 // @flow
 
-import {domUuid} from "../../../../uuid/dom-uuid";
+import {domUuid} from "../../../uuid/dom-uuid";
 import {merge, Observable,} from "rxjs";
-import type {Resources} from "../../../../resource";
-import {PathIds} from "../../../../resource/path";
-import {pushDOMStream} from "../../../../action/push/push-dom";
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
+import {pushDOMStream} from "../../../action/push/push-dom";
 import {map} from "rxjs/operators";
 
 /** イベント通知ストリーム */
@@ -18,9 +18,9 @@ export type Param = {
 };
 
 /**
- * 遊び方ダイアログのビュー
+ * 遊び方ダイアログ プレゼンテーション
  */
-export class HowToPlayView {
+export class HowToPlayPresentation {
   _closeStream: Observable<void>;
   _root: HTMLElement;
   _closer: HTMLElement;
