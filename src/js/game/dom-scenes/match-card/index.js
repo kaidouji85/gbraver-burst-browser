@@ -1,7 +1,7 @@
 // @flow
 
 import type {DOMScene} from "../dom-scene";
-import {MatchCardView} from "./view/match-card-view";
+import {MatchCardPresentation} from "./presentation";
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
 
@@ -19,7 +19,7 @@ type Param = {
  * 対戦カード
  */
 export class MatchCard implements DOMScene {
-  _view: MatchCardView;
+  _presentation: MatchCardPresentation;
 
   /**
    * コンストラクタ
@@ -27,7 +27,7 @@ export class MatchCard implements DOMScene {
    * @param param パラメータ
    */
   constructor(param: Param): void {
-    this._view = new MatchCardView(param.resources, param.player, param.enemy, param.caption);
+    this._presentation = new MatchCardPresentation(param.resources, param.player, param.enemy, param.caption);
   }
   
   /**
@@ -43,7 +43,7 @@ export class MatchCard implements DOMScene {
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
-    return this._view.waitUntilLoaded();
+    return this._presentation.waitUntilLoaded();
   }
 
   /**
@@ -52,6 +52,6 @@ export class MatchCard implements DOMScene {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._view.getRootHTMLElement();
+    return this._presentation.getRootHTMLElement();
   }
 }
