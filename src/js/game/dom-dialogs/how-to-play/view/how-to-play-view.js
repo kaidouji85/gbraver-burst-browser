@@ -52,9 +52,7 @@ export class HowToPlayView {
     this._closeStream = merge(
       pushDOMStream(this._root),
       pushDOMStream(this._closer)
-    ).pipe(map(() => {
-      // void
-    }));
+    ).pipe(map(v => ((v: any): void)));
   }
 
   /**
