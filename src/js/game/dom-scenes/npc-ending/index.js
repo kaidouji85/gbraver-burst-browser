@@ -4,8 +4,6 @@ import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
 import {NPCEndingPresentation} from "./presentation";
-import type {NPCEndingState} from "./state/npc-ending-state";
-import {createInitialState} from "./state/initial-state";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 
@@ -18,7 +16,7 @@ type Notifier  = {
  * NPCルート エンディング
  */
 export class NPCEnding implements DOMScene {
-  _state: NPCEndingState;
+  _canOperate: boolean;
   _presentation: NPCEndingPresentation;
   _pushButtonSound: typeof Howl;
   _endNPCEnding: Subject<void>;
@@ -30,7 +28,7 @@ export class NPCEnding implements DOMScene {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._state = createInitialState();
+    this._canOperate = true;
     this._endNPCEnding = new Subject();
     this._presentation = new NPCEndingPresentation(resources);
 
@@ -89,11 +87,11 @@ export class NPCEnding implements DOMScene {
    * 画面がクリックされた際の処理
    */
   _onScreenPush(): void {
-    if (!this._state.canOperate) {
+    if (!this._canOperate) {
       return;
     }
     
-    this._state.canOperate = false;
+    this._canOperate = false;
     this._pushButtonSound.play();
     this._endNPCEnding.next();
   }
