@@ -2,7 +2,7 @@
 
 import type {LoadingAction, LoadingProgress} from "../../../action/loading/loading";
 import {Observable, Subscription} from "rxjs";
-import {LoadingPresentation} from "./loading-presentation";
+import {LoadingPresentation} from "./presentation";
 import type {DOMScene} from "../dom-scene";
 
 /**
@@ -10,7 +10,7 @@ import type {DOMScene} from "../dom-scene";
  */
 export class Loading implements DOMScene {
   _completedRate: number;
-  _view: LoadingPresentation;
+  _presentation: LoadingPresentation;
   _subscription: Subscription;
 
   /**
@@ -20,7 +20,7 @@ export class Loading implements DOMScene {
    */
   constructor(loading: Observable<LoadingAction>) {
     this._completedRate = 0;
-    this._view = new LoadingPresentation();
+    this._presentation = new LoadingPresentation();
     this._subscription = loading.subscribe(action => {
       if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);
@@ -39,7 +39,7 @@ export class Loading implements DOMScene {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._view.getRootHTMLElement();
+    return this._presentation.getRootHTMLElement();
   }
 
   /**
@@ -49,6 +49,6 @@ export class Loading implements DOMScene {
    */
   _onLoadingProgress(action: LoadingProgress): void {
     this._completedRate = Math.max(action.completedRate, this._completedRate);
-    this._view.setCompletedRate(this._completedRate);
+    this._presentation.setCompletedRate(this._completedRate);
   }
 }
