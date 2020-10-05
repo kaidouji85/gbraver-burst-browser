@@ -6,7 +6,6 @@ import {merge, Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {map} from "rxjs/operators";
 import type {Resources} from "../../../resource";
-import type {SelectArmdozer} from "./actions/player-select-actions";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select';
@@ -14,17 +13,19 @@ export const ROOT_CLASS_NAME = 'player-select';
  * イベント通知
  */
 export type Notifier = {
-  select: Observable<SelectArmdozer>;
+  /**
+   * アームドーザを選択した
+   */
+  armdozerSelect: Observable<ArmdozerIcon>;
 };
 
 /**
  * プレイヤーセレクト ビュー
  */
 export class PlayerSelectPresentation {
-  armdozerIcons: ArmdozerIcon[];
   _root: HTMLElement;
-  _armdozers: HTMLElement;
-  _select: Observable<SelectArmdozer>;
+  _armdozerIcons: ArmdozerIcon[];
+  _select: Observable<ArmdozerIcon>;
 
   /**
    * コンストラクタ
@@ -44,22 +45,19 @@ export class PlayerSelectPresentation {
       </div>
     `;
 
-    this._armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
-    this.armdozerIcons = armDozerIds
+    const armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
+    this._armdozerIcons = armDozerIds
       .map(armDozerId => new ArmdozerIcon(resources, armDozerId));
-    this.armdozerIcons
+    this._armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
-        this._armdozers.appendChild(element);
+        armdozers.appendChild(element);
       });
 
-    const selects: Observable<SelectArmdozer>[] = this.armdozerIcons
-      .map(icon => icon.notifier().select.pipe(
-        map(() => ({
-          type: 'SelectArmdozer',
-          armDozerId: icon.armDozerId
-        }))
-      ));
+    const selects: Observable<ArmdozerIcon>[] = this._armdozerIcons.map(icon => {
+      const select = icon.notifier().select;
+      return select.pipe(map(() => icon));
+    });
     this._select = merge(...selects);
   }
 
@@ -70,7 +68,7 @@ export class PlayerSelectPresentation {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all(
-      this.armdozerIcons.map(icon => icon.waitUntilLoaded())
+      this._armdozerIcons.map(icon => icon.waitUntilLoaded())
     );
   }
 
@@ -90,7 +88,7 @@ export class PlayerSelectPresentation {
    */
   notifier(): Notifier {
     return {
-      select: this._select
+      armdozerSelect: this._select
     };
   }
 }
