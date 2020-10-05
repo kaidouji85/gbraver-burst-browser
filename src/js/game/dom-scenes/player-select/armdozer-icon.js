@@ -5,14 +5,15 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
 import type {Resources} from "../../../resource";
 import {getArmdozerIconPathId} from "../../../armdozer-icon/armdozer-icon-path";
-import {pushStream} from "../../../action/push/push";
+import {pushDOMStream} from "../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
+import type {PushDOM} from "../../../action/push/push-dom";
 
 /**
  * イベント通知
  */
 export type Notifier = {
-  select: Observable<void>
+  select: Observable<PushDOM>
 };
 
 /**
@@ -22,7 +23,7 @@ export class ArmdozerIcon {
   armDozerId: ArmDozerId;
   _root: HTMLImageElement;
   _isImageLoaded: Promise<void>;
-  _select: Observable<void>;
+  _select: Observable<PushDOM>;
 
   /**
    * コンストラクタ
@@ -35,7 +36,7 @@ export class ArmdozerIcon {
 
     this._root = document.createElement('img');
     this._root.className = 'player-select__armdozers__icon__image';
-    this._select = pushStream(this._root)
+    this._select = pushDOMStream(this._root)
     this._isImageLoaded = waitElementLoaded(this._root);
     const pathId = getArmdozerIconPathId(armDozerId);
     const iconResource = resources.paths.find(v => v.id === pathId);

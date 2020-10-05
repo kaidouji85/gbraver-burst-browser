@@ -4,7 +4,8 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {merge, Observable,} from "rxjs";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
-import {pushStream} from "../../../../action/push/push";
+import {pushDOMStream} from "../../../../action/push/push-dom";
+import {map} from "rxjs/operators";
 
 /** イベント通知ストリーム */
 export type Notifier = {
@@ -49,9 +50,11 @@ export class HowToPlayView {
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
 
     this._closeStream = merge(
-      pushStream(this._root),
-      pushStream(this._closer)
-    );
+      pushDOMStream(this._root),
+      pushDOMStream(this._closer)
+    ).pipe(map(() => {
+      // void
+    }));
   }
 
   /**
