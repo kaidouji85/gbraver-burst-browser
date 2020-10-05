@@ -2,11 +2,11 @@
 
 import {Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
-import type {Resources} from "../../../../resource";
-import {getArmdozerIconPathId} from "../../../../armdozer-icon/armdozer-icon-path";
-import {pushStream} from "../../../../action/push/push";
-import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
+import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
+import type {Resources} from "../../../resource";
+import {getArmdozerIconPathId} from "../../../armdozer-icon/armdozer-icon-path";
+import {pushStream} from "../../../action/push/push";
+import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 
 /**
  * イベント通知
@@ -18,7 +18,7 @@ export type Notifier = {
 /**
  * アームドーザアイコン ビュー
  */
-export class ArmdozerIconView {
+export class ArmdozerIcon {
   armDozerId: ArmDozerId;
   _root: HTMLImageElement;
   _isImageLoaded: Promise<void>;

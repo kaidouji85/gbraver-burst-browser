@@ -1,20 +1,18 @@
 // @flow
 
 import {Howl} from 'howler';
-import {PlayerSelectView} from "./view/player-select-view";
-import type {PlayerSelectState} from "./state/player-select-state";
-import {createInitialState} from "./state/initial-state";
+import {PlayerSelectPresentation} from "./presentation";
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {waitTime} from "../../../wait/wait-time";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
-import type {SelectArmdozer} from "./actions/player-select-actions";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
+import {ArmdozerIcon} from "./armdozer-icon";
 
 /**
- * 選択内容
+ * プレイヤーの選択内容
  */
 type Choices = {
   armdozerId: ArmDozerId
@@ -31,11 +29,11 @@ export type Notifier = {
  * プレイヤーセレクト
  */
 export class PlayerSelect implements DOMScene {
-  _state: PlayerSelectState;
-  _view: PlayerSelectView;
+  _canOperation: boolean;
+  _presentation: PlayerSelectPresentation;
   _pushButtonSound: typeof Howl;
   _selectionComplete: Subject<Choices>;
-  _subscription: Subscription;
+  _subscriptions: Subscription[];
 
   /**
    * コンストラクタ
@@ -43,10 +41,9 @@ export class PlayerSelect implements DOMScene {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-
     this._selectionComplete = new Subject();
-    this._state = createInitialState();
-    
+    this._canOperation = true;
+
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
@@ -58,18 +55,22 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._view = new PlayerSelectView(resources, armDozerIds);
+    this._presentation = new PlayerSelectPresentation(resources, armDozerIds);
 
-    this._subscription = this._view.notifier().select.subscribe(icon => {
-      this._onArmdozerIconPush(icon);
-    });
+    this._subscriptions = [
+      this._presentation.notifier().armdozerSelect.subscribe(v => {
+        this._onArmdozerSelect(v);
+      })
+    ];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._subscription.unsubscribe();
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -78,7 +79,7 @@ export class PlayerSelect implements DOMScene {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._view.getRootHTMLElement();
+    return this._presentation.getRootHTMLElement();
   }
 
   /**
@@ -98,33 +99,26 @@ export class PlayerSelect implements DOMScene {
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
-    return this._view.waitUntilLoaded();
+    return this._presentation.waitUntilLoaded();
   }
 
   /**
    * アームドーザアイコンが選択された際の処理
    *
-   * @param action アクション
+   * @param icon 選択されたアイコン
    */
-  async _onArmdozerIconPush(action: SelectArmdozer): Promise<void> {
-    if (!this._state.canOperation) {
+  async _onArmdozerSelect(icon: ArmdozerIcon): Promise<void> {
+    if (!this._canOperation) {
       return;
     }
-
-    this._state.canOperation = false;
+    this._canOperation = false;
 
     this._pushButtonSound.play();
-    const selected = this._view.armdozerIcons
-      .find(icon => icon.armDozerId === action.armDozerId);
-    if (!selected) {
-      return;
-    }
-
-    await  selected.selected();
+    await icon.selected();
     await waitTime(1000);
 
     this._selectionComplete.next({
-      armdozerId: action.armDozerId,
+      armdozerId: icon.armDozerId,
     });
   }
 }
