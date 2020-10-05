@@ -1,13 +1,13 @@
 // @flow
 
-import {domUuid} from "../../../../uuid/dom-uuid";
+import {domUuid} from "../../../uuid/dom-uuid";
 import {Observable} from "rxjs";
-import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
-import type {Resources} from "../../../../resource";
-import {PathIds} from "../../../../resource/path";
-import {pushDOMStream} from "../../../../action/push/push-dom";
-import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
-import type {PushDOM} from "../../../../action/push/push-dom";
+import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
+import {pushDOMStream} from "../../../action/push/push-dom";
+import {waitElementLoaded} from "../../../wait/wait-element-loaded";
+import type {PushDOM} from "../../../action/push/push-dom";
 
 /** イベント通知 */
 type Notifier = {
@@ -16,7 +16,7 @@ type Notifier = {
 };
 
 /** タイトルビュー */
-export class TitleView {
+export class TitlePresentation {
   _gameStartStream: Observable<PushDOM>;
   _howToPlayStream: Observable<PushDOM>;
 
