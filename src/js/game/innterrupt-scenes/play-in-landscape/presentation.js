@@ -1,12 +1,12 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import {PathIds} from "../../../../resource/path";
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
 
 /**
- * ランドスケープ警告シーンのビュー
+ * ランドスケープ警告 プレゼンテーション
  */
-export class PlayInLandscapeView {
+export class PlayInLandscapePresentation {
   _root: HTMLElement;
 
   /**
