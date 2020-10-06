@@ -5,18 +5,18 @@ import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
-} from "../../../../game-object/armdozer/position";
-import {toHUDCoordinate} from "./coordinate";
-import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
-import {ThreeDimensionLayer} from "./td";
-import {HudLayer} from "./hud";
+} from "../../../../../game-object/armdozer/position";
+import {toHUDCoordinate} from "../../../../../tracking/coordinate";
+import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
+import {ThreeDimensionLayer} from "../td";
+import {HudLayer} from "../hud";
 import type {PlayerId} from "gbraver-burst-core";
-import {ShinBraverHUD} from "./hud/armdozer-objects/shin-braver";
-import {NeoLandozerHUD} from "./hud/armdozer-objects/neo-landozer";
-import {LightningDozerHUD} from "./hud/armdozer-objects/lightning-dozer";
-import type {HUDTracking} from "../../../../tracking/hud-tracking";
-import {WingDozerHUD} from "./hud/armdozer-objects/wing-dozer";
-import {ShinyaHUD} from "./hud/pilot-objects/shinya";
+import {ShinBraverHUD} from "../hud/armdozer-objects/shin-braver";
+import {NeoLandozerHUD} from "../hud/armdozer-objects/neo-landozer";
+import {LightningDozerHUD} from "../hud/armdozer-objects/lightning-dozer";
+import type {HUDTracking} from "../../../../../tracking/hud-tracking";
+import {WingDozerHUD} from "../hud/armdozer-objects/wing-dozer";
+import {ShinyaHUD} from "../hud/pilot-objects/shinya";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
