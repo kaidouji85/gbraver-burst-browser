@@ -14,6 +14,7 @@ import {trackingCutIn} from "./cutin";
 import {HUDPlayer} from "../hud/player";
 import type {HUDPilotObjects} from "../hud/pilot-objects/hud-pilot-objects";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
+import type {HUDArmdozerObjects} from "../hud/armdozer-objects/hud-armdozer-ibjects";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
@@ -40,15 +41,7 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
     td.sprites
       .filter(tdSprite => tdSprite.playerId === hudArmdozer.playerId)
       .forEach(tdSprite => {
-        if (hudArmdozer instanceof ShinBraverHUD) {
-          trackingCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
-        } else if (hudArmdozer instanceof NeoLandozerHUD) {
-          trackingCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
-        } else if (hudArmdozer instanceof LightningDozerHUD) {
-          trackingCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
-        } else if (hudArmdozer instanceof WingDozerHUD) {
-          trackingCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer.cutIn, tdSprite.sprite);
-        }
+        trackingArmdozerCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer, tdSprite.sprite);
       });
   });
 }
@@ -80,5 +73,25 @@ function trackingGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, 
 function trackingPilotCutIn(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, pilot: HUDPilotObjects, sprite: ArmDozerSprite): void {
   if (pilot instanceof ShinyaHUD) {
     trackingCutIn(tdCamera, rendererDOM, pilot.cutIn, sprite);
+  }
+}
+
+/**
+ * アームドーザカットインのトラッキング
+ *
+ * @param tdCamera カメラ
+ * @param rendererDOM レンダリング対象のDOM
+ * @param hudArmdozer アームドーザカットインが含まれるアームドーザ固有オブジェクト
+ * @param sprite トラッキング対象のスプライト
+ */
+function trackingArmdozerCutIn(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, hudArmdozer: HUDArmdozerObjects, sprite: ArmDozerSprite): void {
+  if (hudArmdozer instanceof ShinBraverHUD) {
+    trackingCutIn(tdCamera, rendererDOM, hudArmdozer.cutIn, sprite);
+  } else if (hudArmdozer instanceof NeoLandozerHUD) {
+    trackingCutIn(tdCamera, rendererDOM, hudArmdozer.cutIn, sprite);
+  } else if (hudArmdozer instanceof LightningDozerHUD) {
+    trackingCutIn(tdCamera, rendererDOM, hudArmdozer.cutIn, sprite);
+  } else if (hudArmdozer instanceof WingDozerHUD) {
+    trackingCutIn(tdCamera, rendererDOM, hudArmdozer.cutIn, sprite);
   }
 }
