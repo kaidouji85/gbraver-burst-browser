@@ -1,5 +1,6 @@
 // @flow
 
+import * as THREE from "three";
 import {ThreeDimensionLayer} from "../td";
 import {HudLayer} from "../hud";
 import type {PlayerId} from "gbraver-burst-core";
@@ -11,6 +12,8 @@ import {ShinyaHUD} from "../hud/pilot-objects/shinya";
 import {trackingEnemyGauge, trackingPlayerGauge} from "./gauge";
 import {trackingCutIn} from "./cutin";
 import {HUDPlayer} from "../hud/player";
+import type {HUDPilotObjects} from "../hud/pilot-objects/hud-pilot-objects";
+import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
@@ -29,9 +32,7 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
     td.sprites
       .filter(tdSprite => tdSprite.playerId === pilot.playerId)
       .forEach(tdSprite => {
-        if (pilot instanceof ShinyaHUD) {
-          trackingCutIn(td.camera.getCamera(), rendererDOM, pilot.cutIn, tdSprite.sprite);
-        }
+        trackingPilotCutIn(td.camera.getCamera(), rendererDOM, pilot, tdSprite.sprite);
       });
   });
 
@@ -68,3 +69,16 @@ function trackingGauge(hudPlayer: HUDPlayer, td:ThreeDimensionLayer, playerId: P
   }
 }
 
+/**
+ * パイロットカットインのトラッキング
+ *
+ * @param tdCamera カメラ
+ * @param rendererDOM レンダリング対象のDOM
+ * @param pilot パイロットカットインが含まれるパイロット固有オブジェクト
+ * @param sprite トラッキング対象のスプライト
+ */
+function trackingPilotCutIn(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, pilot: HUDPilotObjects, sprite: ArmDozerSprite): void {
+  if (pilot instanceof ShinyaHUD) {
+    trackingCutIn(tdCamera, rendererDOM, pilot.cutIn, sprite);
+  }
+}
