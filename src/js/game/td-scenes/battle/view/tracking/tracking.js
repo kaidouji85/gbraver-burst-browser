@@ -25,7 +25,7 @@ import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-
  */
 export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: PlayerId, rendererDOM: HTMLElement): void {
   hud.players.forEach(v => {
-    trackingGauge(v, td, playerId, rendererDOM);
+    trackingGauge(td.camera.getCamera(), rendererDOM, v, playerId);
   });
 
   hud.pilots.forEach(pilot => {
@@ -56,16 +56,16 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
 /**
  * ゲージのトラッキング処理
  *
- * @param hudPlayer ゲージが存在するHUDプレイヤー固有オブジェクト
- * @param td 3Dレイヤー
- * @param playerId プレイヤーID
+ * @param tdCamera カメラ
  * @param rendererDOM レンダリング対象のDOM
+ * @param hudPlayer ゲージが含まれるHUDプレイヤー固有オブジェクト
+ * @param playerId プレイヤーID
  */
-function trackingGauge(hudPlayer: HUDPlayer, td:ThreeDimensionLayer, playerId: PlayerId, rendererDOM: HTMLElement): void {
+function trackingGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, hudPlayer: HUDPlayer, playerId: PlayerId): void {
   if (hudPlayer.playerId === playerId) {
-    trackingPlayerGauge(td.camera.getCamera(), rendererDOM, hudPlayer.gauge);
+    trackingPlayerGauge(tdCamera, rendererDOM, hudPlayer.gauge);
   } else {
-    trackingEnemyGauge(td.camera.getCamera(), rendererDOM, hudPlayer.gauge);
+    trackingEnemyGauge(tdCamera, rendererDOM, hudPlayer.gauge);
   }
 }
 
