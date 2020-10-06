@@ -10,6 +10,7 @@ import {WingDozerHUD} from "../hud/armdozer-objects/wing-dozer";
 import {ShinyaHUD} from "../hud/pilot-objects/shinya";
 import {trackingEnemyGauge, trackingPlayerGauge} from "./gauge";
 import {trackingCutIn} from "./cutin";
+import {HUDPlayer} from "../hud/player";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
@@ -21,11 +22,7 @@ import {trackingCutIn} from "./cutin";
  */
 export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: PlayerId, rendererDOM: HTMLElement): void {
   hud.players.forEach(v => {
-    if (v.playerId === playerId) {
-      trackingPlayerGauge(td.camera.getCamera(), rendererDOM, v.gauge);
-    } else {
-      trackingEnemyGauge(td.camera.getCamera(), rendererDOM, v.gauge);
-    }
+    trackingGauge(v, td, playerId, rendererDOM);
   });
 
   hud.pilots.forEach(pilot => {
@@ -53,5 +50,21 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
         }
       });
   });
+}
+
+/**
+ * ゲージのトラッキング処理
+ *
+ * @param hudPlayer ゲージが存在するHUDプレイヤー固有オブジェクト
+ * @param td 3Dレイヤー
+ * @param playerId プレイヤーID
+ * @param rendererDOM レンダリング対象のDOM
+ */
+function trackingGauge(hudPlayer: HUDPlayer, td:ThreeDimensionLayer, playerId: PlayerId, rendererDOM: HTMLElement): void {
+  if (hudPlayer.playerId === playerId) {
+    trackingPlayerGauge(td.camera.getCamera(), rendererDOM, hudPlayer.gauge);
+  } else {
+    trackingEnemyGauge(td.camera.getCamera(), rendererDOM, hudPlayer.gauge);
+  }
 }
 
