@@ -15,6 +15,7 @@ import {HUDPlayer} from "../hud/player";
 import type {HUDPilotObjects} from "../hud/pilot-objects/hud-pilot-objects";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import type {HUDArmdozerObjects} from "../hud/armdozer-objects/hud-armdozer-ibjects";
+import {GaiHUD} from "../hud/pilot-objects/gai";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
@@ -72,6 +73,8 @@ function trackingGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, 
  */
 function trackingPilotCutIn(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, pilot: HUDPilotObjects, sprite: ArmDozerSprite): void {
   if (pilot instanceof ShinyaHUD) {
+    trackingCutIn(tdCamera, rendererDOM, pilot.cutIn, sprite);
+  } else if (pilot instanceof GaiHUD) {
     trackingCutIn(tdCamera, rendererDOM, pilot.cutIn, sprite);
   }
 }

@@ -15,7 +15,7 @@ import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../action/resize/resize";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
-import {tracking} from "./tracking/tracking";
+import {tracking} from "./tracking";
 
 /** コンストラクタのパラメータ */
 type Param = {
