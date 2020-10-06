@@ -1,22 +1,15 @@
 // @flow
 
-import * as THREE from 'three';
-import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../../../../game-object/armdozer/position";
-import {toHUDCoordinate} from "../../../../../tracking/coordinate";
-import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import {ThreeDimensionLayer} from "../td";
 import {HudLayer} from "../hud";
 import type {PlayerId} from "gbraver-burst-core";
 import {ShinBraverHUD} from "../hud/armdozer-objects/shin-braver";
 import {NeoLandozerHUD} from "../hud/armdozer-objects/neo-landozer";
 import {LightningDozerHUD} from "../hud/armdozer-objects/lightning-dozer";
-import type {HUDTracking} from "../../../../../tracking/hud-tracking";
 import {WingDozerHUD} from "../hud/armdozer-objects/wing-dozer";
 import {ShinyaHUD} from "../hud/pilot-objects/shinya";
+import {trackingEnemyGauge, trackingPlayerGauge} from "./gauge";
+import {trackingCutIn} from "./cutin";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする
@@ -62,55 +55,3 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
   });
 }
 
-/**
- * プレイヤーゲージをトラッキングする
- *
- * @param tdCamera 3Dレイヤーカメラ
- * @param rendererDOM レンダリング対象のHTML要素
- * @param gauge ゲージ
- */
-function trackingPlayerGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
-  const tdCoordinate = {
-    x: ARMDOZER_EFFECT_STANDARD_X,
-    y: ARMDOZER_EFFECT_STANDARD_Y + 200,
-    z: ARMDOZER_EFFECT_STANDARD_Z
-  };
-  const hudCoordinate = toHUDCoordinate(tdCoordinate, tdCamera, rendererDOM);
-  gauge.tracking(hudCoordinate.x, hudCoordinate.y);
-}
-
-/**
- * 敵ゲージをトラッキングする
- *
- * @param tdCamera 3Dレイヤーカメラ
- * @param rendererDOM レンダリング対象のHTML要素
- * @param gauge ゲージ
- */
-function trackingEnemyGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, gauge: HUDTracking): void {
-  const tdCoordinate = {
-    x: -ARMDOZER_EFFECT_STANDARD_X,
-    y: ARMDOZER_EFFECT_STANDARD_Y + 200,
-    z: ARMDOZER_EFFECT_STANDARD_Z
-  };
-  const hudCoordinate = toHUDCoordinate(tdCoordinate, tdCamera, rendererDOM);
-  gauge.tracking(hudCoordinate.x, hudCoordinate.y);
-}
-
-/**
- * カットインのトラッキング
- *
- * @param tdCamera 3Dレイヤーカメラ
- * @param rendererDOM レンダリング対象のHTML要素
- * @param cutIn カットイン
- * @param sprite スプライト
- */
-function trackingCutIn(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, cutIn: HUDTracking, sprite: ArmDozerSprite): void {
-  const target =sprite.getObject3D();
-  const tdPosition = {
-    x: target.position.x,
-    y: ARMDOZER_EFFECT_STANDARD_Y,
-    z: target.position.z
-  };
-  const hudPosition = toHUDCoordinate(tdPosition, tdCamera, rendererDOM);
-  cutIn.tracking(hudPosition.x, hudPosition.y);
-}
