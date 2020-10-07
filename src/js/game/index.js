@@ -81,10 +81,10 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
-    const domDialogNotifier = this._domDialogs.notifier();
     const gameActionNotifier = merge(
       this._tdScenes.gameActionNotifier(),
-      this._domScenes.gameActionNotifier()
+      this._domScenes.gameActionNotifier(),
+      this._domDialogs.gameActionNotifier(),
     );
     this._subscriptions = [
       gameActionNotifier.subscribe(action => {
@@ -98,11 +98,10 @@ export class Game {
           this._onSelectionComplete(action);
         } else if (action.type === 'EndNPCEnding') {
           this._onEndNPCEnding();
+        } else if (action.type === 'EndHowToPlay') {
+          this._onEndHowToPlay();
         }
-      }),
-      domDialogNotifier.endHowToPlay.subscribe(() => {
-        this._onEndHowToPlay();
-      }),
+      })
     ];
   }
 
