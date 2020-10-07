@@ -83,8 +83,12 @@ export class Game {
 
     const domScenesNotifier = this._domScenes.notifier();
     const domDialogNotifier = this._domDialogs.notifier();
-    const tdNotifier = this._tdScenes.notifier();
     this._subscriptions = [
+      this._tdScenes.gameActionNotifier().subscribe(action => {
+        if (action.type === 'EndBattle') {
+          this._onEndBattle(action);
+        }
+      }),
       domScenesNotifier.pushGameStart.subscribe(() => {
         this._onPushGameStart();
       }),
@@ -93,9 +97,6 @@ export class Game {
       }),
       domDialogNotifier.endHowToPlay.subscribe(() => {
         this._onEndHowToPlay();
-      }),
-      tdNotifier.endBattle.subscribe(action => {
-        this._onEndBattle(action);
       }),
       domScenesNotifier.selectionComplete.subscribe(action => {
         this._onSelectionComplete(action);

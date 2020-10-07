@@ -10,13 +10,8 @@ import type {Render} from "../../action/game-loop/render";
 import type {GameLoop} from "../../action/game-loop/game-loop";
 import {gameLoopStream} from "../../action/game-loop/game-loop-stream";
 import type {Resize} from "../../action/resize/resize";
-import type {EndBattle} from "../actions/game-actions";
+import type {EndBattle, GameAction} from "../actions/game-actions";
 import {map} from "rxjs/operators";
-
-/** イベント通知 */
-type Notifier = {
-  endBattle: Observable<EndBattle>
-};
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
@@ -28,6 +23,11 @@ export class TDScenes {
   _scene: ?Scene;
   _sceneSubscriptions: Subscription[];
 
+  /**
+   * コンストラクタ
+   *
+   * @param resize リサイズストリーム
+   */
   constructor(resize: Observable<Resize>) {
     this._renderStream = new Subject<Render>();
     this._endBattle = new Subject<EndBattle>();
@@ -49,14 +49,14 @@ export class TDScenes {
   }
 
   /**
-   * イベント通知ストリームを取得する
+   * ゲームアクション通知を取得する
    *
    * @return イベント通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      endBattle: this._endBattle
-    };
+  gameActionNotifier(): Observable<GameAction> {
+    return this._endBattle.pipe(
+      map(v => (v: GameAction))
+    );
   }
 
   /**
@@ -84,12 +84,12 @@ export class TDScenes {
     this._scene = scene;
     this._sceneSubscriptions = [
       scene.notifier().render.subscribe(this._renderStream),
-      scene.notifier().endBattle.pipe(
-        map(v => ({
+      scene.notifier().endBattle.subscribe(v => {
+        this._endBattle.next({
           type: 'EndBattle',
           gameEnd: v,
-        }))
-      ).subscribe(this._endBattle)
+        });
+      })
     ];
 
     return scene;

@@ -2,10 +2,6 @@
 
 import type {ArmDozerId, GameEnd} from "gbraver-burst-core";
 
-/**
- * Gameが利用するアクション
- */
-
 /** ゲームスタート */
 export type GameStart = {
   type: 'GameStart'
@@ -43,3 +39,13 @@ export type EndBattle = {
 export type EndNPCEnding = {
   type: 'EndNPCEnding'
 };
+
+/**
+ * ゲーム全体で利用するアクション
+ */
+export type GameAction = GameStart
+ | ShowHowToPlay
+ | EndHowToPlay
+ | SelectionComplete
+ | EndBattle
+ | EndNPCEnding;
