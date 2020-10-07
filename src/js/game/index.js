@@ -3,7 +3,7 @@
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {ResourceLoader} from "../resource";
-import {Observable, Subscription} from "rxjs";
+import {merge, Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
@@ -81,27 +81,26 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
-    const domScenesNotifier = this._domScenes.notifier();
-    const domDialogNotifier = this._domDialogs.notifier();
-    const tdNotifier = this._tdScenes.notifier();
+    const gameActionNotifier = merge(
+      this._tdScenes.gameActionNotifier(),
+      this._domScenes.gameActionNotifier(),
+      this._domDialogs.gameActionNotifier(),
+    );
     this._subscriptions = [
-      domScenesNotifier.pushGameStart.subscribe(() => {
-        this._onPushGameStart();
-      }),
-      domScenesNotifier.pushHowToPlay.subscribe(() => {
-        this._onPushHowToPlay();
-      }),
-      domDialogNotifier.endHowToPlay.subscribe(() => {
-        this._onEndHowToPlay();
-      }),
-      tdNotifier.endBattle.subscribe(action => {
-        this._onEndBattle(action);
-      }),
-      domScenesNotifier.selectionComplete.subscribe(action => {
-        this._onSelectionComplete(action);
-      }),
-      domScenesNotifier.endNPCEnding.subscribe(() => {
-        this._onEndNPCEnding();
+      gameActionNotifier.subscribe(action => {
+        if (action.type === 'EndBattle') {
+          this._onEndBattle(action);
+        } else if (action.type === 'GameStart') {
+          this._onGameStart();
+        } else if (action.type === 'ShowHowToPlay') {
+          this._onShowHowToPlay();
+        } else if (action.type === 'SelectionComplete') {
+          this._onSelectionComplete(action);
+        } else if (action.type === 'EndNPCEnding') {
+          this._onEndNPCEnding();
+        } else if (action.type === 'EndHowToPlay') {
+          this._onEndHowToPlay();
+        }
       })
     ];
   }
@@ -136,9 +135,9 @@ export class Game {
   }
 
   /**
-   * ゲームスタートボタンを押した際の処理
+   * ゲームスタート時の処理
    */
-  async _onPushGameStart() {
+  async _onGameStart() {
     if (!this._resources) {
       return;
     }
@@ -151,9 +150,9 @@ export class Game {
   }
 
   /**
-   * 遊び方ボタンを押した際の処理
+   * 遊び方ダイアログ表示
    */
-  _onPushHowToPlay() {
+  _onShowHowToPlay() {
     if (!this._resources) {
       return;
     }
