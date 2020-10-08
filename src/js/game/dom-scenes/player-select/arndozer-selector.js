@@ -47,7 +47,7 @@ export class ArmdozerSelector {
         armdozers.appendChild(element);
       });
     this._subscriptions = this._armdozerIcons.map(v =>
-      v.notifier().select.subscribe(() => {
+      v.selectedNotifier().subscribe(() => {
         this._onArmdozerSelect(v);
       })
     );

@@ -12,13 +12,6 @@ import type {PushDOM} from "../../../action/push/push-dom";
 import {SOUND_IDS} from "../../../resource/sound";
 
 /**
- * イベント通知
- */
-export type Notifier = {
-  select: Observable<PushDOM>
-};
-
-/**
  * アームドーザアイコン ビュー
  */
 export class ArmdozerIcon {
@@ -56,7 +49,7 @@ export class ArmdozerIcon {
   /**
    * リソース読み込みが完了するまで待つ
    *
-   * @return 待機血k
+   * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
     return this._isImageLoaded;
@@ -69,17 +62,6 @@ export class ArmdozerIcon {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
-  }
-
-  /**
-   * イベント通知ストリームを取得する
-   *
-   * @return 取得結果
-   */
-  notifier(): Notifier {
-    return {
-      select: this._select
-    };
   }
 
   /**
@@ -99,5 +81,14 @@ export class ArmdozerIcon {
       easing: 'ease'
     });
     return waitFinishAnimation(animation);
+  }
+
+  /**
+   * アイコン選択通知
+   *
+   * @return 通知ストリーム
+   */
+  selectedNotifier(): Observable<PushDOM> {
+    return this._select;
   }
 }
