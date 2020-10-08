@@ -1,7 +1,6 @@
 // @flow
 
 import {Howl} from 'howler';
-import {ArmdozerSelector} from "./arndozer-selector";
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
 import {ArmDozerIdList} from "gbraver-burst-core";
@@ -10,6 +9,7 @@ import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 import {ArmdozerIcon} from "./armdozer-icon";
+import {PlayerSelectPresentation} from "./presentation";
 
 /**
  * プレイヤーの選択内容
@@ -30,7 +30,7 @@ export type Notifier = {
  */
 export class PlayerSelect implements DOMScene {
   _canOperation: boolean;
-  _armdozerSelector: ArmdozerSelector;
+  _presentation: PlayerSelectPresentation;
   _pushButtonSound: typeof Howl;
   _selectionComplete: Subject<Choices>;
   _subscriptions: Subscription[];
@@ -55,10 +55,10 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._armdozerSelector = new ArmdozerSelector(resources, armDozerIds);
+    this._presentation = new PlayerSelectPresentation(resources, armDozerIds);
 
     this._subscriptions = [
-      this._armdozerSelector.notifier().armdozerSelect.subscribe(v => {
+      this._presentation._armdozerSelector.notifier().armdozerSelect.subscribe(v => {
         this._onArmdozerSelect(v);
       })
     ];
@@ -79,7 +79,7 @@ export class PlayerSelect implements DOMScene {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._armdozerSelector.getRootHTMLElement();
+    return this._presentation.getRootHTMLElement();
   }
 
   /**
@@ -99,7 +99,7 @@ export class PlayerSelect implements DOMScene {
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
-    return this._armdozerSelector.waitUntilLoaded();
+    return this._presentation._armdozerSelector.waitUntilLoaded();
   }
 
   /**

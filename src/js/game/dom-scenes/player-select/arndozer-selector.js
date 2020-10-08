@@ -8,7 +8,7 @@ import {map} from "rxjs/operators";
 import type {Resources} from "../../../resource";
 
 /** ルートHTML要素 class */
-export const ROOT_CLASS_NAME = 'player-select';
+export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
 /**
  * イベント通知
  */
@@ -38,9 +38,9 @@ export class ArmdozerSelector {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
-      <div class="player-select__contents">
-        <span class="player-select__contents__caption">搭乗機を選択してください</span>
-        <div class="player-select__contents__armdozers" id-data="${armdozersId}">
+      <div class="${ROOT_CLASS_NAME}__contents">
+        <span class="${ROOT_CLASS_NAME}__contents__caption">搭乗機を選択してください</span>
+        <div class="${ROOT_CLASS_NAME}__contents__armdozers" id-data="${armdozersId}">
         </div>
       </div>
     `;
