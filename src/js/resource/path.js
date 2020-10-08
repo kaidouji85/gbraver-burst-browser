@@ -33,6 +33,8 @@ export const PathIds = {
   NEO_LANDOZER_ICON: 'NEO_LANDOZER_ICON',
   LIGHTNING_DOZER_ICON: 'LIGHTNING_DOZER_ICON',
   WING_DOZER_ICON: 'WING_DOZER_ICON',
+  SHINYA_ICON: 'SHINYA_ICON',
+  GAI_ICON: 'GAI_ICON',
   END: 'END',
   END_CARD: 'END_CARD',
   CLOSER: 'CLOSER',
@@ -70,6 +72,14 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.WING_DOZER_ICON,
     path: root => `${root.get()}/armdozer/wing-dozer/player-select.png`
+  },
+  {
+    id: PathIds.SHINYA_ICON,
+    path: root => `${root.get()}/pilot/shinya/player-select.png`
+  },
+  {
+    id: PathIds.GAI_ICON,
+    path: root => `${root.get()}/pilot/gai/player-select.png`
   },
   {
     id: PathIds.END,

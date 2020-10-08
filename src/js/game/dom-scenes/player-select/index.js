@@ -1,7 +1,7 @@
 // @flow
 
 import {Howl} from 'howler';
-import {PlayerSelectPresentation} from "./presentation";
+import {ArmdozerSelector} from "./arndozer-selector";
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
 import {ArmDozerIdList} from "gbraver-burst-core";
@@ -30,7 +30,7 @@ export type Notifier = {
  */
 export class PlayerSelect implements DOMScene {
   _canOperation: boolean;
-  _presentation: PlayerSelectPresentation;
+  _presentation: ArmdozerSelector;
   _pushButtonSound: typeof Howl;
   _selectionComplete: Subject<Choices>;
   _subscriptions: Subscription[];
@@ -55,7 +55,7 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._presentation = new PlayerSelectPresentation(resources, armDozerIds);
+    this._presentation = new ArmdozerSelector(resources, armDozerIds);
 
     this._subscriptions = [
       this._presentation.notifier().armdozerSelect.subscribe(v => {

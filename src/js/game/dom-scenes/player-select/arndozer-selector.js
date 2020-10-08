@@ -22,7 +22,7 @@ export type Notifier = {
 /**
  * プレイヤーセレクト ビュー
  */
-export class PlayerSelectPresentation {
+export class ArmdozerSelector {
   _root: HTMLElement;
   _armdozerIcons: ArmdozerIcon[];
   _select: Observable<ArmdozerIcon>;
