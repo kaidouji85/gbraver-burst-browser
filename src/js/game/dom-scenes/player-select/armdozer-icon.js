@@ -4,7 +4,7 @@ import {Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
 import type {Resources} from "../../../resource";
-import {getArmdozerIconPathId} from "../../../armdozer-icon/armdozer-icon-path";
+import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
 import {pushDOMStream} from "../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import type {PushDOM} from "../../../action/push/push-dom";

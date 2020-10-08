@@ -30,7 +30,7 @@ export type Notifier = {
  */
 export class PlayerSelect implements DOMScene {
   _canOperation: boolean;
-  _presentation: ArmdozerSelector;
+  _armdozerSelector: ArmdozerSelector;
   _pushButtonSound: typeof Howl;
   _selectionComplete: Subject<Choices>;
   _subscriptions: Subscription[];
@@ -55,10 +55,10 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._presentation = new ArmdozerSelector(resources, armDozerIds);
+    this._armdozerSelector = new ArmdozerSelector(resources, armDozerIds);
 
     this._subscriptions = [
-      this._presentation.notifier().armdozerSelect.subscribe(v => {
+      this._armdozerSelector.notifier().armdozerSelect.subscribe(v => {
         this._onArmdozerSelect(v);
       })
     ];
@@ -79,7 +79,7 @@ export class PlayerSelect implements DOMScene {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._presentation.getRootHTMLElement();
+    return this._armdozerSelector.getRootHTMLElement();
   }
 
   /**
@@ -99,7 +99,7 @@ export class PlayerSelect implements DOMScene {
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
-    return this._presentation.waitUntilLoaded();
+    return this._armdozerSelector.waitUntilLoaded();
   }
 
   /**
