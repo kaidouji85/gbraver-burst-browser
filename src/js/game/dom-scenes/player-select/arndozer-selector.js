@@ -2,9 +2,10 @@
 
 import {domUuid} from "../../../uuid/dom-uuid";
 import {ArmdozerIcon} from "./armdozer-icon";
-import {Observable, Subject} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
+import {waitTime} from "../../../wait/wait-time";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -17,6 +18,7 @@ export class ArmdozerSelector {
   _root: HTMLElement;
   _armdozerIcons: ArmdozerIcon[];
   _armdozerSelected: Subject<ArmDozerId>;
+  _subscriptions: Subscription[];
 
   /**
    * コンストラクタ
@@ -44,13 +46,21 @@ export class ArmdozerSelector {
       .forEach(element => {
         armdozers.appendChild(element);
       });
-    // TODO デストラクタでサブスクリプションを削除する
-    this._armdozerIcons.map(v =>
+    this._subscriptions = this._armdozerIcons.map(v =>
       v.notifier().select.subscribe(() => {
         this._onArmdozerSelect(v);
       })
     );
     this._armdozerSelected = new Subject<ArmDozerId>();
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -95,6 +105,7 @@ export class ArmdozerSelector {
     this._canOperate = false;
 
     await icon.selected();
+    await waitTime(1000);
     this._armdozerSelected.next(icon.armDozerId);
 
     this._canOperate = true;

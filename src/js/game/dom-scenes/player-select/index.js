@@ -55,7 +55,7 @@ export class PlayerSelect implements DOMScene {
     this._presentation = new PlayerSelectPresentation(resources, armDozerIds);
 
     this._subscriptions = [
-      this._presentation._armdozerSelector.armdozerSelectedNotifier().subscribe(v => {
+      this._presentation.armdozerSelectedNotifier().subscribe(v => {
         this._onArmdozerSelect(v);
       })
     ];
@@ -65,6 +65,7 @@ export class PlayerSelect implements DOMScene {
    * デストラクタ相当の処理
    */
   destructor(): void {
+    this._presentation.destructor();
     this._subscriptions.forEach(v => {
       v.unsubscribe();
     });

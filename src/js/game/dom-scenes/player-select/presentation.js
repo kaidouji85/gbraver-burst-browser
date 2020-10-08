@@ -3,6 +3,7 @@
 import type {Resources} from "../../../resource";
 import {ArmdozerSelector} from "./arndozer-selector";
 import type {ArmDozerId} from "gbraver-burst-core";
+import {Observable} from "rxjs";
 
 /**
  * プレイヤーセレクト プレゼンテーション
@@ -26,6 +27,13 @@ export class PlayerSelectPresentation {
   }
 
   /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._armdozerSelector.destructor();
+  }
+
+  /**
    * ルートHTML要素を取得する
    *
    * @return 取得結果
@@ -41,5 +49,14 @@ export class PlayerSelectPresentation {
    */
   async waitUntilLoaded(): Promise<void> {
     return this._armdozerSelector.waitUntilLoaded();
+  }
+
+  /**
+   * アームドーザ選択の通知
+   *
+   * @return イベント通知ストリーム
+   */
+  armdozerSelectedNotifier(): Observable<ArmDozerId> {
+    return this._armdozerSelector.armdozerSelectedNotifier();
   }
 }
