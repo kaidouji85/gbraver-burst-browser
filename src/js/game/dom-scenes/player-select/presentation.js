@@ -2,7 +2,7 @@
 
 import type {Resources} from "../../../resource";
 import {ArmdozerSelector} from "./arndozer-selector";
-import type {ArmDozerId} from "gbraver-burst-core";
+import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
 import {PilotSelector} from "./pilot-selector";
 
@@ -20,14 +20,14 @@ export class PlayerSelectPresentation {
    * @param resources リソース管理オブジェクト
    * @param armDozerIds 選択できるアームドーザのID
    */
-  constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
+  constructor(resources: Resources, armDozerIds: ArmDozerId[], pilotIds: PilotId[]) {
     this._root = document.createElement('div');
     this._root.className = 'player-select';
 
     this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds);
     this._root.appendChild(this._armdozerSelector.getRootHTMLElement());
 
-    this._pilotSelector = new PilotSelector();
+    this._pilotSelector = new PilotSelector(resources, pilotIds);
     this._root.appendChild(this._pilotSelector.getRootHTMLElement());
   }
 

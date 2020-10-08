@@ -10,12 +10,12 @@ export default {
   title: 'player-select',
 };
 
-export const Scene: DOMStubStory = domStub(resources => {
+export const scene: DOMStubStory = domStub(resources => {
   const scene = new PlayerSelect(resources);
   return scene.getRootHTMLElement();
 });
 
-export const Pilot: DOMStubStory = domStub(resources => {
+export const pilotIcon: DOMStubStory = domStub(resources => {
   const icon = new PilotIcon(resources, PilotIds.SHINYA);
   icon.selectedNotifier().subscribe(() => {
     icon.selected();

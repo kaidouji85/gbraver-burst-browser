@@ -8,6 +8,7 @@ import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 import {PlayerSelectPresentation} from "./presentation";
+import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
 
 /**
  * プレイヤーの選択内容
@@ -52,7 +53,11 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._presentation = new PlayerSelectPresentation(resources, armDozerIds);
+    const pilotIds = [
+      PilotIds.SHINYA,
+      PilotIds.GAI,
+    ];
+    this._presentation = new PlayerSelectPresentation(resources, armDozerIds, pilotIds);
     this._presentation.showArmdozerSelector();
 
     this._subscriptions = [

@@ -1,5 +1,8 @@
 // @flow
 
+import type {Resources} from "../../../resource";
+import type {PilotId} from "gbraver-burst-core";
+
 /**
  * ルート要素のclass名
  */
@@ -13,8 +16,11 @@ export class PilotSelector {
 
   /**
    * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   * @param pilotIds 選択可能なパイロットIDリスト
    */
-  constructor() {
+  constructor(resources: Resources, pilotIds: PilotId[]) {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
