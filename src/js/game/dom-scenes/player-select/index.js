@@ -4,11 +4,9 @@ import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
 import {ArmDozerIdList} from "gbraver-burst-core";
-import {waitTime} from "../../../wait/wait-time";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
-import {ArmdozerIcon} from "./armdozer-icon";
 import {PlayerSelectPresentation} from "./presentation";
 
 /**
@@ -42,7 +40,6 @@ export class PlayerSelect implements DOMScene {
    */
   constructor(resources: Resources) {
     this._selectionComplete = new Subject();
-    this._canOperation = true;
 
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButtonSound = pushButtonResource
@@ -58,7 +55,7 @@ export class PlayerSelect implements DOMScene {
     this._presentation = new PlayerSelectPresentation(resources, armDozerIds);
 
     this._subscriptions = [
-      this._presentation._armdozerSelector.notifier().armdozerSelect.subscribe(v => {
+      this._presentation._armdozerSelector.armdozerSelectedNotifier().subscribe(v => {
         this._onArmdozerSelect(v);
       })
     ];
@@ -105,20 +102,11 @@ export class PlayerSelect implements DOMScene {
   /**
    * アームドーザアイコンが選択された際の処理
    *
-   * @param icon 選択されたアイコン
+   * @param armdozerId 選択されたアームドーザID
    */
-  async _onArmdozerSelect(icon: ArmdozerIcon): Promise<void> {
-    if (!this._canOperation) {
-      return;
-    }
-    this._canOperation = false;
-
-    this._pushButtonSound.play();
-    await icon.selected();
-    await waitTime(1000);
-
+  _onArmdozerSelect(armdozerId: ArmDozerId): void {
     this._selectionComplete.next({
-      armdozerId: icon.armDozerId,
+      armdozerId: armdozerId,
     });
   }
 }
