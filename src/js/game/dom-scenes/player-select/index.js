@@ -99,7 +99,7 @@ export class PlayerSelect implements DOMScene {
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
-    return this._presentation._armdozerSelector.waitUntilLoaded();
+    return this._presentation.waitUntilLoaded();
   }
 
   /**
