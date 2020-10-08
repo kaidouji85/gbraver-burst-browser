@@ -1,5 +1,6 @@
 // @flow
 
+import {Howl} from 'howler';
 import {Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
@@ -8,6 +9,7 @@ import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
 import {pushDOMStream} from "../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import type {PushDOM} from "../../../action/push/push-dom";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /**
  * イベント通知
@@ -21,6 +23,7 @@ export type Notifier = {
  */
 export class ArmdozerIcon {
   armDozerId: ArmDozerId;
+  _pushButton: typeof Howl;
   _root: HTMLImageElement;
   _isImageLoaded: Promise<void>;
   _select: Observable<PushDOM>;
@@ -33,6 +36,11 @@ export class ArmdozerIcon {
    */
   constructor(resources: Resources, armDozerId: ArmDozerId) {
     this.armDozerId = armDozerId;
+
+    this._pushButton = resources.sounds
+      .find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?.sound ?? new Howl();
+
 
     this._root = document.createElement('img');
     this._root.className = 'player-select__armdozers__icon__image';
@@ -80,6 +88,7 @@ export class ArmdozerIcon {
    * @return アニメーション
    */
   selected(): Promise<void> {
+    this._pushButton.play();
     const animation = this._root.animate([
       {transform: 'scale(1)'},
       {transform: 'scale(1.1)'},
