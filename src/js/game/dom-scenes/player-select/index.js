@@ -53,6 +53,7 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
     this._presentation = new PlayerSelectPresentation(resources, armDozerIds);
+    this._presentation.showArmdozerSelector();
 
     this._subscriptions = [
       this._presentation.armdozerSelectedNotifier().subscribe(v => {

@@ -4,6 +4,7 @@ import type {Resources} from "../../../resource";
 import {ArmdozerSelector} from "./arndozer-selector";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
+import {PilotSelector} from "./pilot-selector";
 
 /**
  * プレイヤーセレクト プレゼンテーション
@@ -11,6 +12,7 @@ import {Observable} from "rxjs";
 export class PlayerSelectPresentation {
   _root: HTMLElement;
   _armdozerSelector: ArmdozerSelector;
+  _pilotSelector: PilotSelector;
 
   /**
    * コンストラクタ
@@ -24,6 +26,9 @@ export class PlayerSelectPresentation {
 
     this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds);
     this._root.appendChild(this._armdozerSelector.getRootHTMLElement());
+
+    this._pilotSelector = new PilotSelector();
+    this._root.appendChild(this._pilotSelector.getRootHTMLElement());
   }
 
   /**
@@ -40,6 +45,22 @@ export class PlayerSelectPresentation {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * アームドーザセレクタを表示する
+   */
+  showArmdozerSelector(): void {
+    this._armdozerSelector.show();
+    this._pilotSelector.hidden();
+  }
+
+  /**
+   * パイロットセレクタを表示する
+   */
+  showPilotSelector(): void {
+    this._pilotSelector.show();
+    this._armdozerSelector.hidden();
   }
 
   /**

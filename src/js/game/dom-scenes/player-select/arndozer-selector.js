@@ -64,6 +64,20 @@ export class ArmdozerSelector {
   }
 
   /**
+   * 本コンポネントを表示する
+   */
+  show(): void {
+    this._root.className = ROOT_CLASS_NAME;
+  }
+
+  /**
+   * 本コンポネントを非表示にする
+   */
+  hidden(): void {
+    this._root.className = `${ROOT_CLASS_NAME}--hidden`;
+  }
+
+  /**
    * リソース読み込みが完了するまで待つ
    *
    * @return 待機結果

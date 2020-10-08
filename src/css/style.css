@@ -289,6 +289,10 @@
     height: 100%;
 }
 
+.player-select__armdozer-selector--disable {
+    display: none;
+}
+
 .player-select__armdozer-selector__contents {
     display: flex;
     flex-direction: column;
@@ -324,6 +328,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.player-select__pilot-selector--hidden {
+    display: none;
 }
 
 /**
