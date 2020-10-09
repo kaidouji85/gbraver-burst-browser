@@ -35,7 +35,7 @@ export class PilotIcon {
       ?.sound ?? new Howl();
 
     this._root = document.createElement('img');
-    this._root.className = 'player-select__pilot__icon__image';
+    this._root.className = 'player-select__pilot__icon';
     this._select = pushDOMStream(this._root)
     this._isImageLoaded = waitElementLoaded(this._root);
     const pathId = getPilotIconPathId(pilotId);

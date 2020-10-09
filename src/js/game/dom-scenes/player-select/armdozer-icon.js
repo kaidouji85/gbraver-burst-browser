@@ -35,7 +35,7 @@ export class ArmdozerIcon {
       ?.sound ?? new Howl();
 
     this._root = document.createElement('img');
-    this._root.className = 'player-select__armdozers__icon';
+    this._root.className = 'player-select__armdozer__icon';
     this._select = pushDOMStream(this._root)
     this._isImageLoaded = waitElementLoaded(this._root);
     const pathId = getArmdozerIconPathId(armDozerId);
