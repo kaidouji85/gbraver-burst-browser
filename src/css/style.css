@@ -39,11 +39,6 @@
     --how-to-play-dialog-height: calc(var(--vh) * 80);
     --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
     --how-to-play-dialog-left: 50vw;
-
-    /** プレイヤー選択 */
-    --armdozer-icon-width: 23vw;
-    --selected-armdozer-icon-width: 35vw;
-    --armdozer-icon-margin: calc(var(--responsive-font-size) * 0.5);
 }
 
 /**
@@ -311,23 +306,13 @@
 }
 
 .player-select__armdozers__icon {
-    margin: var(--armdozer-icon-margin);
-}
-
-.player-select__armdozers__icon__image {
     object-fit: cover;
-    width: var(--armdozer-icon-width);
+    width: 23vw;
 }
 
-.player-select__armdozers__icon__alternative {
-    background-color: #696969;
-    font-size: var(--responsive-font-size);
-    width: var(--armdozer-icon-width);
-    height: var(--armdozer-icon-width);
-    border-radius: calc(var(--responsive-font-size) * 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.player-select__pilot-selector {
+    background-color: var(--background-color);
+    color: var(--font-color);
 }
 
 .player-select__pilot-selector--hidden {
