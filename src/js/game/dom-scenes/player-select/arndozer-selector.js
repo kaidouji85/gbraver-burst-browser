@@ -34,12 +34,12 @@ export class ArmdozerSelector {
     this._root.innerHTML = `
       <div class="${ROOT_CLASS_NAME}__contents">
         <span class="${ROOT_CLASS_NAME}__contents__caption">搭乗機を選択してください</span>
-        <div class="${ROOT_CLASS_NAME}__contents__armdozers" id-data="${armdozersId}">
+        <div class="${ROOT_CLASS_NAME}__contents__armdozers" data-id="${armdozersId}">
         </div>
       </div>
     `;
 
-    const armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
+    const armdozers = this._root.querySelector(`[data-id="${armdozersId}"]`) ?? document.createElement('div');
     this._armdozerIcons = armDozerIds.map(v => new ArmdozerIcon(resources, v));
     this._armdozerIcons
       .map(icon => icon.getRootHTMLElement())
