@@ -66,6 +66,17 @@ export class PilotSelector {
   }
 
   /**
+   * リソース読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  async waitUntilLoaded(): Promise<void> {
+    await Promise.all(
+      this._pilotIcons.map(icon => icon.waitUntilLoaded())
+    );
+  }
+
+  /**
    * ルートHTML要素を取得する
    *
    * @return 取得結果

@@ -1,7 +1,7 @@
 // @flow
 
 import type {Resources} from "../../../resource";
-import {ArmdozerSelector} from "./arndozer-selector";
+import {ArmdozerSelector} from "./armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
 import {PilotSelector} from "./pilot-selector";
@@ -69,7 +69,10 @@ export class PlayerSelectPresentation {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    return this._armdozerSelector.waitUntilLoaded();
+    await Promise.all([
+      this._armdozerSelector.waitUntilLoaded(),
+      this._pilotSelector.waitUntilLoaded()
+    ]);
   }
 
   /**

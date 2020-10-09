@@ -7,7 +7,7 @@ import {PilotIds} from "gbraver-burst-core";
 import {PilotIcon} from "../src/js/game/dom-scenes/player-select/pilot-icon";
 import {PilotSelector} from "../src/js/game/dom-scenes/player-select/pilot-selector";
 import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
-import {ArmdozerSelector} from "../src/js/game/dom-scenes/player-select/arndozer-selector";
+import {ArmdozerSelector} from "../src/js/game/dom-scenes/player-select/armdozer-selector";
 
 export default {
   title: 'player-select',
