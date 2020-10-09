@@ -1,10 +1,10 @@
 // @flow
 
 import {HowToPlayPresentation} from "./presentation";
-import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
 import {Observable} from "rxjs";
 import type {Resources} from "../../../resource";
 import type {DOMDialog} from "../dialog";
+import {DefinePlugin} from "../../../webpack/define-plugin";
 
 /** イベント通知 */
 type Notifier = {
@@ -24,7 +24,7 @@ export class HowToPlay implements DOMDialog {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._presentation = new HowToPlayPresentation(resources, howToPlayMovieURL());
+    this._presentation = new HowToPlayPresentation(resources, DefinePlugin.howToPlay);
 
     this._notifier = {
       endHowToPlay: this._presentation.notifier().close
