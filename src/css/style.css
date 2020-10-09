@@ -284,7 +284,7 @@
     height: 100%;
 }
 
-.player-select__armdozer-selector--disable {
+.player-select__armdozer-selector--hidden {
     display: none;
 }
 

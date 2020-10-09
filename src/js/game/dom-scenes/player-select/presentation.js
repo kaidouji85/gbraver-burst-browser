@@ -83,4 +83,13 @@ export class PlayerSelectPresentation {
   armdozerSelectedNotifier(): Observable<ArmDozerId> {
     return this._armdozerSelector.armdozerSelectedNotifier();
   }
+
+  /**
+   * パイロット選択の通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pilotSelectedNotifier(): Observable<PilotId> {
+    return this._pilotSelector.pilotSelectedNotifier();
+  }
 }

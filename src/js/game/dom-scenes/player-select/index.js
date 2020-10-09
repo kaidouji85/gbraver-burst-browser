@@ -9,19 +9,21 @@ import {SOUND_IDS} from "../../../resource/sound";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 import {PlayerSelectPresentation} from "./presentation";
 import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
+import type {PilotId} from "gbraver-burst-core";
 
 /**
  * プレイヤーの選択内容
  */
-type Choices = {
-  armdozerId: ArmDozerId
+type PlayerSelected = {
+  armdozerId: ArmDozerId,
+  pilotId: PilotId
 };
 
 /**
  * イベント通知
  */
 export type Notifier = {
-  selectionComplete: Observable<Choices>
+  selectionComplete: Observable<PlayerSelected>
 };
 
 /**
@@ -31,7 +33,8 @@ export class PlayerSelect implements DOMScene {
   _canOperation: boolean;
   _presentation: PlayerSelectPresentation;
   _pushButtonSound: typeof Howl;
-  _selectionComplete: Subject<Choices>;
+  _playerSelected: PlayerSelected;
+  _selectionComplete: Subject<PlayerSelected>;
   _subscriptions: Subscription[];
 
   /**
@@ -40,6 +43,10 @@ export class PlayerSelect implements DOMScene {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
+    this._playerSelected = {
+      armdozerId: ArmDozerIdList.SHIN_BRAVER,
+      pilotId: PilotIds.SHINYA
+    };
     this._selectionComplete = new Subject();
 
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
@@ -63,6 +70,9 @@ export class PlayerSelect implements DOMScene {
     this._subscriptions = [
       this._presentation.armdozerSelectedNotifier().subscribe(v => {
         this._onArmdozerSelect(v);
+      }),
+      this._presentation.pilotSelectedNotifier().subscribe(v => {
+        this._onPilotSelect(v);
       })
     ];
   }
@@ -112,8 +122,12 @@ export class PlayerSelect implements DOMScene {
    * @param armdozerId 選択されたアームドーザID
    */
   _onArmdozerSelect(armdozerId: ArmDozerId): void {
-    this._selectionComplete.next({
-      armdozerId: armdozerId,
-    });
+    this._playerSelected.armdozerId = armdozerId;
+    this._presentation.showPilotSelector();
+  }
+
+  _onPilotSelect(pilotId: PilotId): void {
+    this._playerSelected.pilotId = pilotId;
+    this._selectionComplete.next(this._playerSelected);
   }
 }
