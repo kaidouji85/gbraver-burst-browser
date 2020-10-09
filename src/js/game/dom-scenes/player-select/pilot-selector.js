@@ -4,6 +4,8 @@ import type {Resources} from "../../../resource";
 import type {PilotId} from "gbraver-burst-core";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {PilotIcon} from "./pilot-icon";
+import {Observable, Subject, Subscription} from "rxjs";
+import {waitTime} from "../../../wait/wait-time";
 
 /**
  * ルート要素のclass名
@@ -16,6 +18,8 @@ export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
 export class PilotSelector {
   _root: HTMLElement;
   _pilotIcons: PilotIcon[];
+  _pilotSelected: Subject<PilotId>;
+  _subscriptions: Subscription[];
 
   /**
    * コンストラクタ
@@ -38,6 +42,13 @@ export class PilotSelector {
     this._pilotIcons.forEach(v => {
       icons.appendChild(v.getRootHTMLElement());
     });
+    
+    this._subscriptions = this._pilotIcons.map(icon =>
+      icon.selectedNotifier().subscribe(() =>
+        this._onPilotSelect(icon)
+      ));
+
+    this._pilotSelected = new Subject();
   }
 
   /**
@@ -61,5 +72,26 @@ export class PilotSelector {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * パイロット選択通知
+   *
+   * @return 通知ストリーム
+   */
+  pilotSelectedNotifier(): Observable<PilotId> {
+    return this._pilotSelected;
+  }
+
+  /**
+   * パイロットが選択された際の処理
+   *
+   * @param icon 選択されたパイロットアイコン
+   * @return 処理結果
+   */
+  async _onPilotSelect(icon: PilotIcon): Promise<void> {
+    await icon.selected();
+    await waitTime(1000);
+    this._pilotSelected.next(icon.pilotId);
   }
 }
