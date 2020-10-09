@@ -8,7 +8,7 @@ import {ArmDozerIdList} from "gbraver-burst-core";
 import {waitTime} from "../../../wait/wait-time";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
+import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmdozerIcon} from "./armdozer-icon";
 
 /**
