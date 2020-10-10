@@ -8,6 +8,7 @@ import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 import {PlayerSelectPresentation} from "./presentation";
 import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
 import type {PilotId} from "gbraver-burst-core";
+import {DOMFader} from "../../../components/dom-fader/dom-fader";
 
 /**
  * プレイヤーの選択内容
@@ -21,6 +22,8 @@ type PlayerSelected = {
  * プレイヤーセレクト
  */
 export class PlayerSelect implements DOMScene {
+  _root: HTMLElement;
+  _fader: DOMFader;
   _presentation: PlayerSelectPresentation;
   _playerSelected: PlayerSelected;
   _selectionComplete: Subject<PlayerSelected>;
@@ -38,6 +41,12 @@ export class PlayerSelect implements DOMScene {
     };
     this._selectionComplete = new Subject();
 
+    this._root = document.createElement('div');
+
+    this._fader = new DOMFader();
+    this._fader.hidden();
+    this._root.appendChild(this._fader.getRootHTMLElement());
+
     const armDozerIds = [
       ArmDozerIdList.NEO_LANDOZER,
       ArmDozerIdList.SHIN_BRAVER,
@@ -50,6 +59,7 @@ export class PlayerSelect implements DOMScene {
     ];
     this._presentation = new PlayerSelectPresentation(resources, armDozerIds, pilotIds);
     this._presentation.showArmdozerSelector();
+    this._root.appendChild(this._presentation.getRootHTMLElement());
 
     this._subscriptions = [
       this._presentation.armdozerSelectedNotifier().subscribe(v => {
@@ -77,7 +87,7 @@ export class PlayerSelect implements DOMScene {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._presentation.getRootHTMLElement();
+    return this._root;
   }
 
   /**
@@ -103,9 +113,11 @@ export class PlayerSelect implements DOMScene {
    *
    * @param armdozerId 選択されたアームドーザID
    */
-  _onArmdozerSelect(armdozerId: ArmDozerId): void {
+  async _onArmdozerSelect(armdozerId: ArmDozerId): Promise<void> {
     this._playerSelected.armdozerId = armdozerId;
+    await this._fader.fadeOut();
     this._presentation.showPilotSelector();
+    await this._fader.fadeIn();
   }
 
   /**
