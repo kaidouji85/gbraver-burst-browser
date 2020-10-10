@@ -325,6 +325,11 @@
     display: none;
 }
 
+.player-select__pilot-selector__caption {
+    font-size: calc(var(--responsive-font-size) * 1.5);
+    margin-bottom: calc(var(--responsive-font-size));
+}
+
 .player-select__pilot__icon {
     object-fit: cover;
     width: 23vw;

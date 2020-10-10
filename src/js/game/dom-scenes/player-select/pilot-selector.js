@@ -17,6 +17,7 @@ export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
  */
 export class PilotSelector {
   _root: HTMLElement;
+  _canOperate: boolean;
   _pilotIcons: PilotIcon[];
   _pilotSelected: Subject<PilotId>;
   _subscriptions: Subscription[];
@@ -28,6 +29,8 @@ export class PilotSelector {
    * @param pilotIds 選択可能なパイロットIDリスト
    */
   constructor(resources: Resources, pilotIds: PilotId[]) {
+    this._canOperate = true;
+
     const iconsId = domUuid();
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
@@ -101,8 +104,15 @@ export class PilotSelector {
    * @return 処理結果
    */
   async _onPilotSelect(icon: PilotIcon): Promise<void> {
+    if (!this._canOperate) {
+      return;
+    }
+    this._canOperate = false;
+
     await icon.selected();
     await waitTime(1000);
     this._pilotSelected.next(icon.pilotId);
+
+    this._canOperate = true;
   }
 }
