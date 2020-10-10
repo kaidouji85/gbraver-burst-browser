@@ -11,7 +11,6 @@ cp .env.tepmpate .env
 # 環境に応じた値を.envに記載する
 # .env.templateに各環境変数の詳細が記載されている
 
-npm install
 npm ci
 npm start
 # ブラウザを起動して<localhost:8080>を開く
