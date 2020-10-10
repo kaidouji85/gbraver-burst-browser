@@ -1,6 +1,7 @@
 // @flow
 
 import type {ArmDozerId, GameEnd} from "gbraver-burst-core";
+import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
 
 /** ゲームスタート */
 export type GameStart = {
@@ -23,7 +24,9 @@ export type EndHowToPlay = {
 export type SelectionComplete = {
   type: 'SelectionComplete',
   /** 選択したアームドーザのID */
-  armdozerId: ArmDozerId
+  armdozerId: ArmDozerId,
+  /** 選択したパイロットのID */
+  pilotId: PilotId,
 };
 
 /** 戦闘終了 */

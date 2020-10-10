@@ -15,7 +15,7 @@ import type {SelectionComplete} from "../../actions/game-actions";
  */
 export function selectionComplete(origin: NPCBattle, action: SelectionComplete): NPCBattle {
   const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];  // TODO 画面から渡されたIDを使うようにする
+  const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
   const player: Player = {
     playerId: playerUuid(),
     armdozer: armdozer,
@@ -25,5 +25,4 @@ export function selectionComplete(origin: NPCBattle, action: SelectionComplete):
     ...origin,
     player: player
   };
-
 }
