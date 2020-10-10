@@ -4,9 +4,9 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import {Observable} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
+import type {PushDOM} from "../../../action/push/push-dom";
 import {pushDOMStream} from "../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-import type {PushDOM} from "../../../action/push/push-dom";
 
 /**
  * イベント通知

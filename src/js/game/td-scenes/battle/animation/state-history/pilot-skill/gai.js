@@ -1,7 +1,7 @@
 // @flow
 
 import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
-import type {PilotSkill, BuffPowerSkill} from "gbraver-burst-core";
+import type {BuffPowerSkill, PilotSkill} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";

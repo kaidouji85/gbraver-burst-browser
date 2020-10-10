@@ -1,9 +1,9 @@
 // @flow
 
-import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
-import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
-import {PathIds} from "../resource/path";
+import type {PilotId} from "gbraver-burst-core";
+import {PilotIds} from "gbraver-burst-core";
 import type {PathId} from "../resource/path";
+import {PathIds} from "../resource/path";
 
 /**
  * パイロットIDに対応したアイコンのパスIDを取得する

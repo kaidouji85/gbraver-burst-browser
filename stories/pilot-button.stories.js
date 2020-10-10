@@ -3,14 +3,16 @@
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {PilotButton} from "../src/js/game-object/pilot-button";
 import {delay} from "../src/js/animation/delay";
+import {PilotIds} from "gbraver-burst-core";
+import type {PilotId} from "gbraver-burst-core";
 
 export default {
   title: 'pilot-button',
 };
 
-export const pilotButton = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, listener) => {
-    const button = new PilotButton(resources, listener);
+function pilotButtonStub(pilotId: PilotId): HUDGameObjectStub {
+  return new HUDGameObjectStub((resources, listener) => {
+    const button = new PilotButton(resources, pilotId, listener);
     button.notifier().pushButton.subscribe(() => {
       console.log('push button!!');
       const animation = button.decide()
@@ -23,6 +25,16 @@ export const pilotButton = (): HTMLElement => {
     button.open(true).play();
     return [button.getObject3D()];
   });
+}
+
+export const shinya = (): HTMLElement => {
+  const stub = pilotButtonStub(PilotIds.SHINYA);
+  stub.start();
+  return stub.domElement();
+}
+
+export const gai = (): HTMLElement => {
+  const stub = pilotButtonStub(PilotIds.GAI);
   stub.start();
   return stub.domElement();
 }
