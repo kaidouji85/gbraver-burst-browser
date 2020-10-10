@@ -12,7 +12,6 @@ import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap
 import {Observable, Subject} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {PilotIcon} from "./pilot-icon";
-import {ShinyaIcon} from "./shinya";
 import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
 import {createPilotIcon} from "./pilot-id-to-icon";
 
