@@ -30,6 +30,7 @@ export class GaiIcon implements PilotIcon {
       width: 400,
       height: 400,
     });
+    this._mesh.getObject3D().position.x = -10;
     this._mesh.getObject3D().position.y = 140;
     this._group.add(this._mesh.getObject3D());
   }
