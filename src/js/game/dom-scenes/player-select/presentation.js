@@ -19,6 +19,7 @@ export class PlayerSelectPresentation {
    *
    * @param resources リソース管理オブジェクト
    * @param armDozerIds 選択できるアームドーザのID
+   * @param pilotIds 選択できるパイロットのID
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[], pilotIds: PilotId[]) {
     this._root = document.createElement('div');

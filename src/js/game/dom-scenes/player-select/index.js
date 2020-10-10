@@ -1,11 +1,9 @@
 // @flow
 
-import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 import {PlayerSelectPresentation} from "./presentation";
 import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
@@ -31,9 +29,7 @@ export type Notifier = {
  * プレイヤーセレクト
  */
 export class PlayerSelect implements DOMScene {
-  _canOperation: boolean;
   _presentation: PlayerSelectPresentation;
-  _pushButtonSound: typeof Howl;
   _playerSelected: PlayerSelected;
   _selectionComplete: Subject<PlayerSelected>;
   _subscriptions: Subscription[];
@@ -49,11 +45,6 @@ export class PlayerSelect implements DOMScene {
       pilotId: PilotIds.SHINYA
     };
     this._selectionComplete = new Subject();
-
-    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this._pushButtonSound = pushButtonResource
-      ? pushButtonResource.sound
-      : new Howl();
 
     const armDozerIds = [
       ArmDozerIdList.NEO_LANDOZER,
