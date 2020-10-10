@@ -278,6 +278,7 @@
 
 .player-select__armdozer-selector {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -288,18 +289,12 @@
     display: none;
 }
 
-.player-select__armdozer-selector__contents {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.player-select__armdozer-selector__contents__caption {
+.player-select__armdozer-selector__caption {
     font-size: calc(var(--responsive-font-size) * 1.5);
     margin-bottom: calc(var(--responsive-font-size));
 }
 
-.player-select__armdozer-selector__contents__armdozers {
+.player-select__armdozer-selector__icons {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -328,6 +323,12 @@
 .player-select__pilot-selector__caption {
     font-size: calc(var(--responsive-font-size) * 1.5);
     margin-bottom: calc(var(--responsive-font-size));
+}
+
+.player-select__pilot-selector__icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .player-select__pilot__icon {

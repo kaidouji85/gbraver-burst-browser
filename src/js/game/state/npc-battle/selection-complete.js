@@ -2,7 +2,7 @@
 
 import type {NPCBattle} from "./npc-battle";
 import type {Player} from "gbraver-burst-core";
-import {ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
+import {ArmDozers, Pilots} from "gbraver-burst-core";
 import {playerUuid} from "../../../uuid/player";
 import type {SelectionComplete} from "../../actions/game-actions";
 
