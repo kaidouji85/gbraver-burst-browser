@@ -17,14 +17,6 @@ type PlayerSelected = {
   pilotId: PilotId
 };
 
-// TODO 削除する
-/**
- * イベント通知
- */
-export type Notifier = {
-  selectionComplete: Observable<PlayerSelected>
-};
-
 /**
  * プレイヤーセレクト
  */
@@ -88,18 +80,11 @@ export class PlayerSelect implements DOMScene {
     return this._presentation.getRootHTMLElement();
   }
 
-  // TODO 削除する
   /**
-   * イベント通知ストリームを取得する
+   * 選択完了通知
    *
-   * @return 取得結果
+   * @return 選択内容
    */
-  notifier(): Notifier {
-    return {
-      selectionComplete: this._selectionComplete
-    };
-  }
-
   selectionCompleteNotifier(): Observable<PlayerSelected> {
     return this._selectionComplete;
   }
@@ -123,6 +108,11 @@ export class PlayerSelect implements DOMScene {
     this._presentation.showPilotSelector();
   }
 
+  /**
+   * パイロットアイコンが選択された際の処理
+   *
+   * @param pilotId 選択されたパイロットID
+   */
   _onPilotSelect(pilotId: PilotId): void {
     this._playerSelected.pilotId = pilotId;
     this._selectionComplete.next(this._playerSelected);
