@@ -27,10 +27,10 @@ export class GaiIcon implements PilotIcon {
     this._mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: 1,
-      width: 270,
-      height: 270,
+      width: 400,
+      height: 400,
     });
-    this._mesh.getObject3D().position.y = 60;
+    this._mesh.getObject3D().position.y = 140;
     this._group.add(this._mesh.getObject3D());
   }
 

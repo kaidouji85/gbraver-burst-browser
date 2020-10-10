@@ -104,6 +104,7 @@ export class PilotButtonView {
    */
   destructor(): void {
     this._button.destructor();
+    this._pilotIcon.destructor();
     this._buttonDisabled.destructor();
     this._overlap.destructor();
   }
@@ -116,7 +117,9 @@ export class PilotButtonView {
    */
   engage(model: PilotButtonModel, preRender: PreRender): void {
     this._button.setOpacity(model.opacity);
-    this._pilotIcon.setOpacity(model.opacity);
+
+    const pilotIconOpacity = model.canPilot ? model.opacity : 0;
+    this._pilotIcon.setOpacity(pilotIconOpacity);
 
     const disabledOpacity = model.canPilot ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
