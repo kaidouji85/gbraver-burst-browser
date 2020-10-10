@@ -11,6 +11,8 @@ import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import {Observable, Subject} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
+import type {PilotIcon} from "./pilot-icon";
+import {ShinyaIcon} from "./shinya";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -38,6 +40,7 @@ export class PilotButtonView {
   _pushButton: Subject<void>;
   _group: typeof THREE.Group;
   _button: SimpleImageMesh;
+  _pilotIcon: PilotIcon;
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
 
@@ -62,9 +65,10 @@ export class PilotButtonView {
       meshSize: CANVAS_SIZE,
       image: buttonDisabled
     });
-    this._buttonDisabled.getObject3D().position.z = 1;
+    this._buttonDisabled.getObject3D().position.z = 2;
     this._group.add(this._buttonDisabled.getObject3D());
 
+    // TODO ?. ?? でスマートに書き直す
     const pilotButtonResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON);
     const pilotButton: Image = pilotButtonResource
       ? pilotButtonResource.image
@@ -76,6 +80,11 @@ export class PilotButtonView {
     });
     this._group.add(this._button.getObject3D());
 
+    // TODO コンストラクタから受け取るようにする
+    this._pilotIcon = new ShinyaIcon(resources);
+    this._pilotIcon.getObject3D().position.z = 1;
+    this._group.add(this._pilotIcon.getObject3D());
+
     this._overlap = circleButtonOverlap({
       radius: 200,
       segments: 32,
@@ -84,7 +93,7 @@ export class PilotButtonView {
         this._pushButton.next();
       }
     });
-    this._overlap.getObject3D().position.z = 2;
+    this._overlap.getObject3D().position.z = 1;
     this._group.add(this._overlap.getObject3D());
   }
 
@@ -105,6 +114,7 @@ export class PilotButtonView {
    */
   engage(model: PilotButtonModel, preRender: PreRender): void {
     this._button.setOpacity(model.opacity);
+    this._pilotIcon.setOpacity(model.opacity);
 
     const disabledOpacity = model.canPilot ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
