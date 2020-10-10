@@ -14,6 +14,7 @@ import {decide} from "./animation/decide";
 import {close} from "./animation/close";
 import {filter} from "rxjs/operators";
 import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
+import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
 
 /**
  * ,イベント通知ストリーム
@@ -41,7 +42,7 @@ export class PilotButton {
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._sounds = new PilotButtonSounds(resources);
-    this._view = new PilotButtonView(resources, listener);
+    this._view = new PilotButtonView(resources, PilotIds.SHINYA, listener);
 
     const viewNotifier = this._view.notifier();
     this._notifier = {

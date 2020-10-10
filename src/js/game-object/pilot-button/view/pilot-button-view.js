@@ -13,6 +13,8 @@ import {Observable, Subject} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {PilotIcon} from "./pilot-icon";
 import {ShinyaIcon} from "./shinya";
+import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
+import {createPilotIcon} from "./pilot-id-to-icon";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -48,9 +50,10 @@ export class PilotButtonView {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param pilotId パイロットID
    * @param listener イベントリスナ
    */
-  constructor(resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(resources: Resources, pilotId: PilotId, listener: Observable<GameObjectAction>) {
     this._pushButton = new Subject();
 
     this._group = new THREE.Group();
@@ -80,8 +83,7 @@ export class PilotButtonView {
     });
     this._group.add(this._button.getObject3D());
 
-    // TODO コンストラクタから受け取るようにする
-    this._pilotIcon = new ShinyaIcon(resources);
+    this._pilotIcon = createPilotIcon(pilotId, resources);
     this._pilotIcon.getObject3D().position.z = 1;
     this._group.add(this._pilotIcon.getObject3D());
 
