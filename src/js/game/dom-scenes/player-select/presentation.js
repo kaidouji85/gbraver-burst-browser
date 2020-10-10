@@ -36,6 +36,7 @@ export class PlayerSelectPresentation {
    */
   destructor(): void {
     this._armdozerSelector.destructor();
+    this._pilotSelector.destructor();
   }
 
   /**

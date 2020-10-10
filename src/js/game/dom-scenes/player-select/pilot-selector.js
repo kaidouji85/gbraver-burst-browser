@@ -55,6 +55,15 @@ export class PilotSelector {
   }
 
   /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    });
+  }
+
+  /**
    * 本コンポネントを表示する
    */
   show(): void {
