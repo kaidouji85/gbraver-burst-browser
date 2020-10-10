@@ -1,8 +1,8 @@
 // @flow
 
 import type {PilotIcon} from "./pilot-icon";
-import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
-import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
+import type {PilotId} from "gbraver-burst-core";
+import {PilotIds} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
 import {ShinyaIcon} from "./shinya";
 import {GaiIcon} from "./gai";

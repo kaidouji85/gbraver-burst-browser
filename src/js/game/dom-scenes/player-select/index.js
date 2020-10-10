@@ -2,12 +2,10 @@
 
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
-import {ArmDozerIdList} from "gbraver-burst-core";
+import type {ArmDozerId, PilotId} from "gbraver-burst-core";
+import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 import {PlayerSelectPresentation} from "./presentation";
-import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
-import type {PilotId} from "gbraver-burst-core";
 import {DOMFader} from "../../../components/dom-fader/dom-fader";
 
 /**

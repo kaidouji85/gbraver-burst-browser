@@ -1,7 +1,6 @@
 // @flow
 
-import type {ArmDozerId, GameEnd} from "gbraver-burst-core";
-import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
+import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
 
 /** ゲームスタート */
 export type GameStart = {

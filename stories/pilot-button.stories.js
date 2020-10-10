@@ -3,8 +3,8 @@
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {PilotButton} from "../src/js/game-object/pilot-button";
 import {delay} from "../src/js/animation/delay";
-import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
-import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
+import {PilotIds} from "gbraver-burst-core";
+import type {PilotId} from "gbraver-burst-core";
 
 export default {
   title: 'pilot-button',
