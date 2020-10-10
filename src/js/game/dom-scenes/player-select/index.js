@@ -1,38 +1,32 @@
 // @flow
 
-import {Howl} from 'howler';
-import {PlayerSelectPresentation} from "./presentation";
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
 import {ArmDozerIdList} from "gbraver-burst-core";
-import {waitTime} from "../../../wait/wait-time";
 import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
-import type {ArmDozerId} from "gbraver-burst-core";
-import {ArmdozerIcon} from "./armdozer-icon";
+import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
+import {PlayerSelectPresentation} from "./presentation";
+import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
+import type {PilotId} from "gbraver-burst-core";
+import {DOMFader} from "../../../components/dom-fader/dom-fader";
 
 /**
  * プレイヤーの選択内容
  */
-type Choices = {
-  armdozerId: ArmDozerId
-};
-
-/**
- * イベント通知
- */
-export type Notifier = {
-  selectionComplete: Observable<Choices>
+type PlayerSelected = {
+  armdozerId: ArmDozerId,
+  pilotId: PilotId
 };
 
 /**
  * プレイヤーセレクト
  */
 export class PlayerSelect implements DOMScene {
-  _canOperation: boolean;
+  _root: HTMLElement;
+  _fader: DOMFader;
   _presentation: PlayerSelectPresentation;
-  _pushButtonSound: typeof Howl;
-  _selectionComplete: Subject<Choices>;
+  _playerSelected: PlayerSelected;
+  _selectionComplete: Subject<PlayerSelected>;
   _subscriptions: Subscription[];
 
   /**
@@ -41,13 +35,17 @@ export class PlayerSelect implements DOMScene {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
+    this._playerSelected = {
+      armdozerId: ArmDozerIdList.SHIN_BRAVER,
+      pilotId: PilotIds.SHINYA
+    };
     this._selectionComplete = new Subject();
-    this._canOperation = true;
 
-    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this._pushButtonSound = pushButtonResource
-      ? pushButtonResource.sound
-      : new Howl();
+    this._root = document.createElement('div');
+
+    this._fader = new DOMFader();
+    this._fader.hidden();
+    this._root.appendChild(this._fader.getRootHTMLElement());
 
     const armDozerIds = [
       ArmDozerIdList.NEO_LANDOZER,
@@ -55,11 +53,20 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._presentation = new PlayerSelectPresentation(resources, armDozerIds);
+    const pilotIds = [
+      PilotIds.SHINYA,
+      PilotIds.GAI,
+    ];
+    this._presentation = new PlayerSelectPresentation(resources, armDozerIds, pilotIds);
+    this._presentation.showArmdozerSelector();
+    this._root.appendChild(this._presentation.getRootHTMLElement());
 
     this._subscriptions = [
-      this._presentation.notifier().armdozerSelect.subscribe(v => {
+      this._presentation.armdozerSelectedNotifier().subscribe(v => {
         this._onArmdozerSelect(v);
+      }),
+      this._presentation.pilotSelectedNotifier().subscribe(v => {
+        this._onPilotSelect(v);
       })
     ];
   }
@@ -68,6 +75,7 @@ export class PlayerSelect implements DOMScene {
    * デストラクタ相当の処理
    */
   destructor(): void {
+    this._presentation.destructor();
     this._subscriptions.forEach(v => {
       v.unsubscribe();
     });
@@ -79,18 +87,16 @@ export class PlayerSelect implements DOMScene {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._presentation.getRootHTMLElement();
+    return this._root;
   }
 
   /**
-   * イベント通知ストリームを取得する
+   * 選択完了通知
    *
-   * @return 取得結果
+   * @return 選択内容
    */
-  notifier(): Notifier {
-    return {
-      selectionComplete: this._selectionComplete
-    };
+  selectionCompleteNotifier(): Observable<PlayerSelected> {
+    return this._selectionComplete;
   }
 
   /**
@@ -105,20 +111,22 @@ export class PlayerSelect implements DOMScene {
   /**
    * アームドーザアイコンが選択された際の処理
    *
-   * @param icon 選択されたアイコン
+   * @param armdozerId 選択されたアームドーザID
    */
-  async _onArmdozerSelect(icon: ArmdozerIcon): Promise<void> {
-    if (!this._canOperation) {
-      return;
-    }
-    this._canOperation = false;
+  async _onArmdozerSelect(armdozerId: ArmDozerId): Promise<void> {
+    this._playerSelected.armdozerId = armdozerId;
+    await this._fader.fadeOut();
+    this._presentation.showPilotSelector();
+    await this._fader.fadeIn();
+  }
 
-    this._pushButtonSound.play();
-    await icon.selected();
-    await waitTime(1000);
-
-    this._selectionComplete.next({
-      armdozerId: icon.armDozerId,
-    });
+  /**
+   * パイロットアイコンが選択された際の処理
+   *
+   * @param pilotId 選択されたパイロットID
+   */
+  _onPilotSelect(pilotId: PilotId): void {
+    this._playerSelected.pilotId = pilotId;
+    this._selectionComplete.next(this._playerSelected);
   }
 }

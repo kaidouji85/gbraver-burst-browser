@@ -124,12 +124,12 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new PlayerSelect(resources);
-    const notifier = scene.notifier();
     this._sceneSubscriptions = [
-      notifier.selectionComplete.subscribe(v => {
+      scene.selectionCompleteNotifier().subscribe(v => {
         this._selectionComplete.next({
           type: 'SelectionComplete',
-          armdozerId: v.armdozerId
+          armdozerId: v.armdozerId,
+          pilotId: v.pilotId,
         });
       })
     ];

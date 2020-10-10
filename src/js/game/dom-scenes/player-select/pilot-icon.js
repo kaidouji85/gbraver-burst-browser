@@ -2,20 +2,20 @@
 
 import {Howl} from 'howler';
 import {Observable} from "rxjs";
-import type {ArmDozerId} from "gbraver-burst-core";
+import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
 import type {Resources} from "../../../resource";
-import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
 import {pushDOMStream} from "../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import type {PushDOM} from "../../../action/push/push-dom";
 import {SOUND_IDS} from "../../../resource/sound";
+import {getPilotIconPathId} from "../../../path/pilot-icon-path";
 
 /**
- * アームドーザアイコン ビュー
+ * パイロットアイコン
  */
-export class ArmdozerIcon {
-  armDozerId: ArmDozerId;
+export class PilotIcon {
+  pilotId: ArmDozerId;
   _pushButton: typeof Howl;
   _root: HTMLImageElement;
   _isImageLoaded: Promise<void>;
@@ -25,20 +25,20 @@ export class ArmdozerIcon {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param armDozerId アームドーザID
+   * @param pilotId パイロットID
    */
-  constructor(resources: Resources, armDozerId: ArmDozerId) {
-    this.armDozerId = armDozerId;
+  constructor(resources: Resources, pilotId: PilotId) {
+    this.pilotId = pilotId;
 
     this._pushButton = resources.sounds
       .find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
 
     this._root = document.createElement('img');
-    this._root.className = 'player-select__armdozer__icon';
+    this._root.className = 'player-select__pilot__icon';
     this._select = pushDOMStream(this._root)
     this._isImageLoaded = waitElementLoaded(this._root);
-    const pathId = getArmdozerIconPathId(armDozerId);
+    const pathId = getPilotIconPathId(pilotId);
     const iconResource = resources.paths.find(v => v.id === pathId);
     this._root.src = iconResource
       ? iconResource.path

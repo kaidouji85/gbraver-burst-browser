@@ -1,64 +1,68 @@
 // @flow
 
-import {domUuid} from "../../../uuid/dom-uuid";
-import {ArmdozerIcon} from "./armdozer-icon";
-import {merge, Observable} from "rxjs";
-import type {ArmDozerId} from "gbraver-burst-core";
-import {map} from "rxjs/operators";
 import type {Resources} from "../../../resource";
-
-/** ルートHTML要素 class */
-export const ROOT_CLASS_NAME = 'player-select';
-/**
- * イベント通知
- */
-export type Notifier = {
-  /**
-   * アームドーザを選択した
-   */
-  armdozerSelect: Observable<ArmdozerIcon>;
-};
+import {ArmdozerSelector} from "./armdozer-selector";
+import type {ArmDozerId, PilotId} from "gbraver-burst-core";
+import {Observable} from "rxjs";
+import {PilotSelector} from "./pilot-selector";
 
 /**
- * プレイヤーセレクト ビュー
+ * プレイヤーセレクト プレゼンテーション
  */
 export class PlayerSelectPresentation {
   _root: HTMLElement;
-  _armdozerIcons: ArmdozerIcon[];
-  _select: Observable<ArmdozerIcon>;
+  _armdozerSelector: ArmdozerSelector;
+  _pilotSelector: PilotSelector;
 
   /**
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param armDozerIds アームドーザIDリスト
+   * @param armDozerIds 選択できるアームドーザのID
+   * @param pilotIds 選択できるパイロットのID
    */
-  constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
-    const armdozersId = domUuid();
+  constructor(resources: Resources, armDozerIds: ArmDozerId[], pilotIds: PilotId[]) {
     this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = `
-      <div class="player-select__contents">
-        <span class="player-select__contents__caption">搭乗機を選択してください</span>
-        <div class="player-select__contents__armdozers" id-data="${armdozersId}">
-        </div>
-      </div>
-    `;
+    this._root.className = 'player-select';
 
-    const armdozers = this._root.querySelector(`[id-data="${armdozersId}"]`) ?? document.createElement('div');
-    this._armdozerIcons = armDozerIds
-      .map(armDozerId => new ArmdozerIcon(resources, armDozerId));
-    this._armdozerIcons
-      .map(icon => icon.getRootHTMLElement())
-      .forEach(element => {
-        armdozers.appendChild(element);
-      });
+    this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds);
+    this._root.appendChild(this._armdozerSelector.getRootHTMLElement());
 
-    const selects: Observable<ArmdozerIcon>[] = this._armdozerIcons.map(icon => {
-      const select = icon.notifier().select;
-      return select.pipe(map(() => icon));
-    });
-    this._select = merge(...selects);
+    this._pilotSelector = new PilotSelector(resources, pilotIds);
+    this._root.appendChild(this._pilotSelector.getRootHTMLElement());
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._armdozerSelector.destructor();
+    this._pilotSelector.destructor();
+  }
+
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
+  getRootHTMLElement(): HTMLElement {
+    return this._root;
+  }
+
+  /**
+   * アームドーザセレクタを表示する
+   */
+  showArmdozerSelector(): void {
+    this._armdozerSelector.show();
+    this._pilotSelector.hidden();
+  }
+
+  /**
+   * パイロットセレクタを表示する
+   */
+  showPilotSelector(): void {
+    this._pilotSelector.show();
+    this._armdozerSelector.hidden();
   }
 
   /**
@@ -67,28 +71,27 @@ export class PlayerSelectPresentation {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all(
-      this._armdozerIcons.map(icon => icon.waitUntilLoaded())
-    );
+    await Promise.all([
+      this._armdozerSelector.waitUntilLoaded(),
+      this._pilotSelector.waitUntilLoaded()
+    ]);
   }
 
   /**
-   * ルートHTML要素を取得する
+   * アームドーザ選択の通知
    *
-   * @return ルートHTML要素
+   * @return イベント通知ストリーム
    */
-  getRootHTMLElement(): HTMLElement {
-    return this._root;
+  armdozerSelectedNotifier(): Observable<ArmDozerId> {
+    return this._armdozerSelector.armdozerSelectedNotifier();
   }
 
   /**
-   * イベント通知を取得する
+   * パイロット選択の通知
    *
-   * @return 取得結果
+   * @return イベント通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      armdozerSelect: this._select
-    };
+  pilotSelectedNotifier(): Observable<PilotId> {
+    return this._pilotSelector.pilotSelectedNotifier();
   }
 }

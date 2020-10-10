@@ -3,7 +3,7 @@
 import type {ArmDozerId} from "gbraver-burst-core";
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {Resources} from "../../../resource";
-import {getArmdozerIconPathId} from "../../../armdozer-icon/armdozer-icon-path";
+import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 
 /**
