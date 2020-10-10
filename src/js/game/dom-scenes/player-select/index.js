@@ -1,34 +1,31 @@
 // @flow
 
-import {Howl} from 'howler';
-import {PlayerSelectView} from "./view/player-select-view";
-import type {PlayerSelectState} from "./state/player-select-state";
-import {createInitialState} from "./state/initial-state";
 import type {DOMScene} from "../dom-scene";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {SelectionComplete} from "../../../action/game/selection-complete";
-import {ArmDozerIdList} from "gbraver-burst-core";
-import type {SelectArmdozer} from "../../../action/player-select/select-armdozer";
-import {waitTime} from "../../../wait/wait-time";
+import type {ArmDozerId, PilotId} from "gbraver-burst-core";
+import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
+import {PlayerSelectPresentation} from "./presentation";
+import {DOMFader} from "../../../components/dom-fader/dom-fader";
 
 /**
- * イベント通知
+ * プレイヤーの選択内容
  */
-export type Notifier = {
-  selectionComplete: Observable<SelectionComplete>
+type PlayerSelected = {
+  armdozerId: ArmDozerId,
+  pilotId: PilotId
 };
 
 /**
  * プレイヤーセレクト
  */
 export class PlayerSelect implements DOMScene {
-  _state: PlayerSelectState;
-  _view: PlayerSelectView;
-  _pushButtonSound: typeof Howl;
-  _selectionComplete: Subject<SelectionComplete>;
-  _subscription: Subscription;
+  _root: HTMLElement;
+  _fader: DOMFader;
+  _presentation: PlayerSelectPresentation;
+  _playerSelected: PlayerSelected;
+  _selectionComplete: Subject<PlayerSelected>;
+  _subscriptions: Subscription[];
 
   /**
    * コンストラクタ
@@ -36,14 +33,17 @@ export class PlayerSelect implements DOMScene {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-
+    this._playerSelected = {
+      armdozerId: ArmDozerIdList.SHIN_BRAVER,
+      pilotId: PilotIds.SHINYA
+    };
     this._selectionComplete = new Subject();
-    this._state = createInitialState();
-    
-    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this._pushButtonSound = pushButtonResource
-      ? pushButtonResource.sound
-      : new Howl();
+
+    this._root = document.createElement('div');
+
+    this._fader = new DOMFader();
+    this._fader.hidden();
+    this._root.appendChild(this._fader.getRootHTMLElement());
 
     const armDozerIds = [
       ArmDozerIdList.NEO_LANDOZER,
@@ -51,18 +51,32 @@ export class PlayerSelect implements DOMScene {
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];
-    this._view = new PlayerSelectView(resources, armDozerIds);
+    const pilotIds = [
+      PilotIds.SHINYA,
+      PilotIds.GAI,
+    ];
+    this._presentation = new PlayerSelectPresentation(resources, armDozerIds, pilotIds);
+    this._presentation.showArmdozerSelector();
+    this._root.appendChild(this._presentation.getRootHTMLElement());
 
-    this._subscription = this._view.notifier().select.subscribe(icon => {
-      this._onArmdozerIconPush(icon);
-    });
+    this._subscriptions = [
+      this._presentation.armdozerSelectedNotifier().subscribe(v => {
+        this._onArmdozerSelect(v);
+      }),
+      this._presentation.pilotSelectedNotifier().subscribe(v => {
+        this._onPilotSelect(v);
+      })
+    ];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._subscription.unsubscribe();
+    this._presentation.destructor();
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -71,18 +85,16 @@ export class PlayerSelect implements DOMScene {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._view.getRootHTMLElement();
+    return this._root;
   }
 
   /**
-   * イベント通知ストリームを取得する
+   * 選択完了通知
    *
-   * @return 取得結果
+   * @return 選択内容
    */
-  notifier(): Notifier {
-    return {
-      selectionComplete: this._selectionComplete
-    };
+  selectionCompleteNotifier(): Observable<PlayerSelected> {
+    return this._selectionComplete;
   }
 
   /**
@@ -91,34 +103,28 @@ export class PlayerSelect implements DOMScene {
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
-    return this._view.waitUntilLoaded();
+    return this._presentation.waitUntilLoaded();
   }
 
   /**
    * アームドーザアイコンが選択された際の処理
    *
-   * @param action アクション
+   * @param armdozerId 選択されたアームドーザID
    */
-  async _onArmdozerIconPush(action: SelectArmdozer): Promise<void> {
-    if (!this._state.canOperation) {
-      return;
-    }
+  async _onArmdozerSelect(armdozerId: ArmDozerId): Promise<void> {
+    this._playerSelected.armdozerId = armdozerId;
+    await this._fader.fadeOut();
+    this._presentation.showPilotSelector();
+    await this._fader.fadeIn();
+  }
 
-    this._state.canOperation = false;
-
-    this._pushButtonSound.play();
-    const selected = this._view.armdozerIcons
-      .find(icon => icon.armDozerId === action.armDozerId);
-    if (!selected) {
-      return;
-    }
-
-    await  selected.selected();
-    await waitTime(1000);
-
-    this._selectionComplete.next({
-      type: 'SelectionComplete',
-      armdozerId: action.armDozerId,
-    });
+  /**
+   * パイロットアイコンが選択された際の処理
+   *
+   * @param pilotId 選択されたパイロットID
+   */
+  _onPilotSelect(pilotId: PilotId): void {
+    this._playerSelected.pilotId = pilotId;
+    this._selectionComplete.next(this._playerSelected);
   }
 }

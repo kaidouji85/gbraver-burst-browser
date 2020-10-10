@@ -1,8 +1,6 @@
 // @flow
 
-import {Observable, Subject, Subscription} from "rxjs";
-import type {PushGameStart, PushHowToPlay} from "../../action/game/title";
-import type {SelectionComplete} from "../../action/game/selection-complete";
+import {merge, Observable, Subject, Subscription} from "rxjs";
 import type {LoadingAction} from "../../action/loading/loading";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
@@ -12,21 +10,14 @@ import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
-import type {EndNPCEnding} from "../../action/game/npc-ending";
 import type {Resources} from "../../resource";
+import type {EndNPCEnding, GameAction, GameStart, SelectionComplete, ShowHowToPlay} from "../actions/game-actions";
+import {map} from "rxjs/operators";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
  */
 const MAX_LOADING_TIME = 10000;
-
-/** イベント通知 */
-type Notifier = {
-  pushGameStart: Observable<PushGameStart>,
-  pushHowToPlay: Observable<PushHowToPlay>,
-  selectionComplete: Observable<SelectionComplete>,
-  endNPCEnding: Observable<EndNPCEnding>;
-};
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
@@ -35,8 +26,8 @@ type Notifier = {
 export class DOMScenes {
   _root: HTMLElement;
   _scene: ?DOMScene;
-  _pushGameStart: Subject<PushGameStart>;
-  _pushHowToPlay: Subject<PushHowToPlay>;
+  _pushGameStart: Subject<GameStart>;
+  _pushHowToPlay: Subject<ShowHowToPlay>;
   _selectionComplete: Subject<SelectionComplete>;
   _endNPCEnding: Subject<EndNPCEnding>;
   _sceneSubscriptions: Subscription[];
@@ -57,18 +48,27 @@ export class DOMScenes {
   }
 
   /**
-   * イベント通知ストリームを取得する
+   * ゲームアクション通知
    *
-   * @return イベント通知ストリーム
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      pushGameStart: this._pushGameStart,
-      pushHowToPlay: this._pushHowToPlay,
-      selectionComplete: this._selectionComplete,
-      endNPCEnding: this._endNPCEnding,
-    }
+  gameActionNotifier(): Observable<GameAction> {
+    return merge(
+      this._pushGameStart.pipe(
+        map(v => (v: GameAction))
+      ),
+      this._pushHowToPlay.pipe(
+        map(v => (v: GameAction))
+      ),
+      this._selectionComplete.pipe(
+        map(v => (v: GameAction))
+      ),
+      this._endNPCEnding.pipe(
+        map(v => (v: GameAction))
+      )
+    );
   }
+
 
   /**
    * 新しくローディング画面を開始する
@@ -97,8 +97,12 @@ export class DOMScenes {
     const scene = new Title(resources);
     const notifier = scene.notifier();
     this._sceneSubscriptions = [
-      notifier.pushGameStart.subscribe(this._pushGameStart),
-      notifier.pushHowToPlay.subscribe(this._pushHowToPlay)
+      notifier.pushGameStart.subscribe(() => {
+        this._pushGameStart.next({type: 'GameStart'});
+      }),
+      notifier.pushHowToPlay.subscribe(() => {
+        this._pushHowToPlay.next({type: 'ShowHowToPlay'});
+      }),
     ];
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
@@ -120,9 +124,14 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new PlayerSelect(resources);
-    const notifier = scene.notifier();
     this._sceneSubscriptions = [
-      notifier.selectionComplete.subscribe(this._selectionComplete)
+      scene.selectionCompleteNotifier().subscribe(v => {
+        this._selectionComplete.next({
+          type: 'SelectionComplete',
+          armdozerId: v.armdozerId,
+          pilotId: v.pilotId,
+        });
+      })
     ];
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
@@ -174,7 +183,9 @@ export class DOMScenes {
     const scene = new NPCEnding(resources);
     this._root.appendChild(scene.getRootHTMLElement());
     this._sceneSubscriptions = [
-      scene.notifier().endNpcEnding.subscribe(this._endNPCEnding)
+      scene.notifier().endNpcEnding.subscribe(() => {
+        this._endNPCEnding.next({type: 'EndNPCEnding'});
+      })
     ];
     await Promise.race([
       scene.waitUntilLoaded(),

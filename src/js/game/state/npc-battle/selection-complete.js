@@ -2,9 +2,9 @@
 
 import type {NPCBattle} from "./npc-battle";
 import type {Player} from "gbraver-burst-core";
-import {ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
-import type {SelectionComplete} from "../../../action/game/selection-complete";
+import {ArmDozers, Pilots} from "gbraver-burst-core";
 import {playerUuid} from "../../../uuid/player";
+import type {SelectionComplete} from "../../actions/game-actions";
 
 /**
  * プレイヤーキャラ選択内容の結果をNPC戦闘に反映させる
@@ -15,7 +15,7 @@ import {playerUuid} from "../../../uuid/player";
  */
 export function selectionComplete(origin: NPCBattle, action: SelectionComplete): NPCBattle {
   const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];  // TODO 画面から渡されたIDを使うようにする
+  const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
   const player: Player = {
     playerId: playerUuid(),
     armdozer: armdozer,
@@ -25,5 +25,4 @@ export function selectionComplete(origin: NPCBattle, action: SelectionComplete):
     ...origin,
     player: player
   };
-
 }

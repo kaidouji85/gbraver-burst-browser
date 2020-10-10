@@ -3,11 +3,10 @@
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {ResourceLoader} from "../resource";
-import {Observable, Subscription} from "rxjs";
+import {merge, Observable, Subscription} from "rxjs";
 import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
-import type {EndBattle} from "../action/game/battle";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
 import type {Resize} from "../action/resize/resize";
@@ -17,7 +16,6 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {State} from "./state/state";
 import {createInitialState} from "./state/state";
 import type {ResourceRoot} from "../resource/root/resource-root";
-import type {SelectionComplete} from "../action/game/selection-complete";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {NPCBattle} from "./state/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
@@ -30,6 +28,7 @@ import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
 import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
+import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 
 /**
  * ゲーム全体の管理を行う
@@ -82,27 +81,26 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
-    const domScenesNotifier = this._domScenes.notifier();
-    const domDialogNotifier = this._domDialogs.notifier();
-    const tdNotifier = this._tdScenes.notifier();
+    const gameActionNotifier = merge(
+      this._tdScenes.gameActionNotifier(),
+      this._domScenes.gameActionNotifier(),
+      this._domDialogs.gameActionNotifier(),
+    );
     this._subscriptions = [
-      domScenesNotifier.pushGameStart.subscribe(() => {
-        this._onPushGameStart();
-      }),
-      domScenesNotifier.pushHowToPlay.subscribe(() => {
-        this._onPushHowToPlay();
-      }),
-      domDialogNotifier.endHowToPlay.subscribe(() => {
-        this._onEndHowToPlay();
-      }),
-      tdNotifier.endBattle.subscribe(action => {
-        this._onEndBattle(action);
-      }),
-      domScenesNotifier.selectionComplete.subscribe(action => {
-        this._onSelectionComplete(action);
-      }),
-      domScenesNotifier.endNPCEnding.subscribe(() => {
-        this._onEndNPCEnding();
+      gameActionNotifier.subscribe(action => {
+        if (action.type === 'EndBattle') {
+          this._onEndBattle(action);
+        } else if (action.type === 'GameStart') {
+          this._onGameStart();
+        } else if (action.type === 'ShowHowToPlay') {
+          this._onShowHowToPlay();
+        } else if (action.type === 'SelectionComplete') {
+          this._onSelectionComplete(action);
+        } else if (action.type === 'EndNPCEnding') {
+          this._onEndNPCEnding();
+        } else if (action.type === 'EndHowToPlay') {
+          this._onEndHowToPlay();
+        }
       })
     ];
   }
@@ -137,9 +135,9 @@ export class Game {
   }
 
   /**
-   * ゲームスタートボタンを押した際の処理
+   * ゲームスタート時の処理
    */
-  async _onPushGameStart() {
+  async _onGameStart() {
     if (!this._resources) {
       return;
     }
@@ -152,9 +150,9 @@ export class Game {
   }
 
   /**
-   * 遊び方ボタンを押した際の処理
+   * 遊び方ダイアログ表示
    */
-  _onPushHowToPlay() {
+  _onShowHowToPlay() {
     if (!this._resources) {
       return;
     }

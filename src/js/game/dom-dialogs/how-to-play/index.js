@@ -1,23 +1,21 @@
 // @flow
 
-import {HowToPlayView} from "./view/how-to-play-view";
-import {howToPlayMovieURL} from "../../../how-to-play/how-to-play-movie";
+import {HowToPlayPresentation} from "./presentation";
 import {Observable} from "rxjs";
-import type {EndHowToPlay} from "../../../action/game/how-to-play";
-import {map} from "rxjs/operators";
 import type {Resources} from "../../../resource";
 import type {DOMDialog} from "../dialog";
+import {DefinePlugin} from "../../../webpack/define-plugin";
 
 /** イベント通知 */
 type Notifier = {
-  endHowToPlay: Observable<EndHowToPlay>
+  endHowToPlay: Observable<void>
 };
 
 /**
  * 遊び方ダイアログ
  */
 export class HowToPlay implements DOMDialog {
-  _view: HowToPlayView;
+  _presentation: HowToPlayPresentation;
   _notifier: Notifier;
 
   /**
@@ -26,12 +24,10 @@ export class HowToPlay implements DOMDialog {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._view = new HowToPlayView(resources, howToPlayMovieURL());
+    this._presentation = new HowToPlayPresentation(resources, DefinePlugin.howToPlay);
 
     this._notifier = {
-      endHowToPlay: this._view.notifier().close.pipe(
-        map(() => ({type: 'EndHowToPlay'}))
-      )
+      endHowToPlay: this._presentation.notifier().close
     };
   }
 
@@ -57,6 +53,6 @@ export class HowToPlay implements DOMDialog {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._view.getRootHTMLElement();
+    return this._presentation.getRootHTMLElement();
   }
 }

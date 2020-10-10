@@ -1,6 +1,7 @@
 // @flow
 
 import type {ResourceRoot} from "./resource-root";
+import {DefinePlugin} from "../../webpack/define-plugin";
 
 /**
  * 製品 リソースフォルダのルートパス
@@ -12,6 +13,6 @@ export class ProductionResourceRoot implements ResourceRoot {
    *  @return 取得結果
    */
   get(): string {
-    return GBRAVER_BURST_RESOURCE_HASH;
+    return DefinePlugin.resourceHash;
   }
 }

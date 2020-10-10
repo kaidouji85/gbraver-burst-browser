@@ -2,14 +2,10 @@
 
 import {HowToPlay} from "./how-to-play";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {EndHowToPlay} from "../../action/game/how-to-play";
+import type {EndHowToPlay, GameAction} from "../actions/game-actions";
 import type {Resources} from "../../resource";
 import type {DOMDialog} from "./dialog";
-
-/** イベント通知ストリーム */
-type Notifier = {
-  endHowToPlay: Observable<EndHowToPlay>,
-};
+import {map} from "rxjs/operators";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -17,7 +13,6 @@ export class DOMDialogs {
   _dialog: ?DOMDialog;
   _endHowToPlay: Subject<EndHowToPlay>;
   _dialogSubscriptions: Subscription[];
-
 
   /**
    * コンストラクタ
@@ -40,7 +35,9 @@ export class DOMDialogs {
     const howToPlay = new HowToPlay(resources);
     const notifier = howToPlay.notifier();
     this._dialogSubscriptions = [
-      notifier.endHowToPlay.subscribe(this._endHowToPlay)
+      notifier.endHowToPlay.subscribe(() => {
+        this._endHowToPlay.next({type: 'EndHowToPlay'});
+      })
     ];
     this._root.appendChild(howToPlay.getRootHTMLElement());
     this._dialog = howToPlay;
@@ -54,14 +51,14 @@ export class DOMDialogs {
   }
 
   /**
-   * イベント通知ストリームを取得する
+   * ゲームアクション通知
    *
    * @return イベント通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      endHowToPlay: this._endHowToPlay,
-    }
+  gameActionNotifier(): Observable<GameAction> {
+    return this._endHowToPlay.pipe(
+      map(v => (v: GameAction))
+    );
   }
 
   /**

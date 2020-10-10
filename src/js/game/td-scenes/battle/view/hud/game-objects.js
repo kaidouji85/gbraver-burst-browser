@@ -5,7 +5,7 @@ import {BurstButton} from "../../../../../game-object/burst-button/burst-button"
 import type {Resources} from "../../../../../resource";
 import {Observable, Subscription} from "rxjs/index";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
-import type {BattleSceneAction} from "../../../../../action/battle-scene";
+import type {BattleSceneAction} from "../../actions";
 import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
 import {Subject} from "rxjs";
@@ -59,7 +59,7 @@ export class HUDGameObjects {
         });
       }
     });
-    this.pilotButton = new PilotButton(resources, listener);
+    this.pilotButton = new PilotButton(resources, playerInfo.pilot.id, listener);
 
     this.frontmostFader = frontmostFader({
       listener: listener,

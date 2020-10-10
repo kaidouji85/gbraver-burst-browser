@@ -6,14 +6,13 @@ import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../../action/game-loop/game-loop";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {TdDOMEvent} from "../../../action/td-dom";
-import type {DecideBattery} from "../../../action/battle-scene/decide-battery";
+import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
 import type {Render} from "../../../action/game-loop/render";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
-import type {EndBattle} from "../../../action/game/battle";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
 import {all} from "../../../animation/all";
@@ -35,7 +34,7 @@ type Param = {
 /** 戦闘シーンのイベント通知 */
 type Notifier = {
   render: Observable<Render>,
-  endBattle: Observable<EndBattle>
+  endBattle: Observable<GameEnd>
 };
 
 /**
@@ -44,7 +43,7 @@ type Notifier = {
 export class BattleScene implements Scene {
   _state: BattleSceneState;
   _initialState: InitialState;
-  _endBattle: Subject<EndBattle>;
+  _endBattle: Subject<GameEnd>;
   _battleProgress: BattleProgress;
   _view: BattleSceneView;
   _sounds: BattleSceneSounds;
@@ -237,9 +236,6 @@ export class BattleScene implements Scene {
    */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
     await delay(1000).play();
-    this._endBattle.next({
-      type: 'endBattle',
-      gameEnd: gameEnd
-    });
+    this._endBattle.next(gameEnd);
   }
 }

@@ -1,13 +1,9 @@
 // @flow
 
 /**
- * webpackがproductionモードでビルドされたか否かを判定する
- *
- * @return 判定結果、trueでproductionモードでビルドされた
+ * webpackのビルドモード
  */
-export function mode(): boolean {
-  return process.env.NODE_ENV === 'production';
-}
+export const MODE = process.env.NODE_ENV;
 
 /**
  * webpackがdevelopmentモードでビルドされたか否かを判定する
@@ -15,5 +11,5 @@ export function mode(): boolean {
  * @return 判定結果、trueでdevelopmentモードでビルドされた
  */
 export function isDevelopment (): boolean {
-  return process.env.NODE_ENV === 'development';
+  return MODE === 'development';
 }
