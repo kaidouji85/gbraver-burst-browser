@@ -277,7 +277,12 @@
 }
 
 .player-select__selector {
+    position: absolute;
+    bottom: max(var(--safe-area-bottom), 2em);
+    width: 100vw;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .player-select__selector__contents {
@@ -285,8 +290,8 @@
 }
 
 .player-select__selector__prev, .player-select__selector__ok {
-    width: calc(var(--responsive-font-size) * 5);
-    /*height: calc(var(--responsive-font-size) * 3);*/
+    width: 25vh;
+    height: 15vh;
     border-radius: var(--button-border-radius);
     background-color: var(--button-background-color);
     color: var(--button-font-color);
@@ -305,7 +310,7 @@
 
 .player-select__armdozer__icon {
     object-fit: cover;
-    height: 20vh;
+    height: 30vh;
 }
 
 .player-select__pilot-selector {
