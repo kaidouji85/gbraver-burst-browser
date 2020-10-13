@@ -313,6 +313,14 @@
     height: 30vh;
 }
 
+.player-select__bust-shot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    object-fit: cover;
+}
+
 .player-select__pilot-selector {
     display: flex;
     flex-direction: column;
