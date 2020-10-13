@@ -276,33 +276,36 @@
     }
 }
 
+.player-select__selector {
+    display: flex;
+}
+
+.player-select__selector__contents {
+    margin: 0 2em;
+}
+
+.player-select__selector__prev, .player-select__selector__ok {
+    width: calc(var(--responsive-font-size) * 5);
+    /*height: calc(var(--responsive-font-size) * 3);*/
+    border-radius: var(--button-border-radius);
+    background-color: var(--button-background-color);
+    color: var(--button-font-color);
+    border: none;
+}
+
 .player-select__armdozer-selector {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
 }
 
 .player-select__armdozer-selector--hidden {
     display: none;
 }
 
-.player-select__armdozer-selector__caption {
-    font-size: calc(var(--responsive-font-size) * 1.5);
-    margin-bottom: calc(var(--responsive-font-size));
-}
-
-.player-select__armdozer-selector__icons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .player-select__armdozer__icon {
     object-fit: cover;
-    width: 23vw;
+    height: 20vh;
 }
 
 .player-select__pilot-selector {

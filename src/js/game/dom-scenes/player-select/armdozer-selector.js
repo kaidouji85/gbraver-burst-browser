@@ -28,20 +28,14 @@ export class ArmdozerSelector {
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
     this._canOperate = true;
-    const armdozersId = domUuid();
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = `
-      <span class="${ROOT_CLASS_NAME}__caption">搭乗機を選択してください</span>
-      <div class="${ROOT_CLASS_NAME}__icons" data-id="${armdozersId}"></div>
-    `;
 
-    const armdozers = this._root.querySelector(`[data-id="${armdozersId}"]`) ?? document.createElement('div');
     this._armdozerIcons = armDozerIds.map(v => new ArmdozerIcon(resources, v));
     this._armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
-        armdozers.appendChild(element);
+        this._root.appendChild(element);
       });
     this._subscriptions = this._armdozerIcons.map(v =>
       v.selectedNotifier().subscribe(() => {

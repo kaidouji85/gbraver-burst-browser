@@ -5,6 +5,7 @@ import {ArmdozerSelector} from "./armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
 import {PilotSelector} from "./pilot-selector";
+import {domUuid} from "../../../uuid/dom-uuid";
 
 /**
  * プレイヤーセレクト プレゼンテーション
@@ -22,14 +23,25 @@ export class PlayerSelectPresentation {
    * @param pilotIds 選択できるパイロットのID
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[], pilotIds: PilotId[]) {
+    const selectorContentsId = domUuid();
+
     this._root = document.createElement('div');
     this._root.className = 'player-select';
+    this._root.innerHTML = `
+      <div class="player-select__selector">
+        <button class="player-select__selector__prev">戻る</button>
+        <div class="player-select__selector__contents" data-id="${selectorContentsId}"></div>
+        <button class="player-select__selector__ok">OK</button>
+      </div>
+    `;
 
+    const selectorContents = this._root.querySelector(`[data-id="${selectorContentsId}"]`)
+      ?? document.createElement('div');
     this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds);
-    this._root.appendChild(this._armdozerSelector.getRootHTMLElement());
+    selectorContents.appendChild(this._armdozerSelector.getRootHTMLElement());
 
     this._pilotSelector = new PilotSelector(resources, pilotIds);
-    this._root.appendChild(this._pilotSelector.getRootHTMLElement());
+    selectorContents.appendChild(this._pilotSelector.getRootHTMLElement());
   }
 
   /**
