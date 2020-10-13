@@ -28,7 +28,8 @@ export class PlayerSelectPresentation {
     this._root = document.createElement('div');
     this._root.className = 'player-select';
     this._root.innerHTML = `
-      <img class="player-select__bust-shot" src="${resources.rootPath.get()}/armdozer/shin-braver/bust-shot.png" />
+      <img class="player-select__armdozer-bust-shot" src="${resources.rootPath.get()}/armdozer/shin-braver/bust-shot.png" />
+      <img class="player-select__pilot-bust-shot" src="${resources.rootPath.get()}/pilot/shinya/bust-shot.png" />
       <div class="player-select__selector">
         <button class="player-select__selector__prev">戻る</button>
         <div class="player-select__selector__contents" data-id="${selectorContentsId}"></div>

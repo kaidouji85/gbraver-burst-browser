@@ -313,11 +313,19 @@
     height: 30vh;
 }
 
-.player-select__bust-shot {
+.player-select__armdozer-bust-shot {
     position: absolute;
     top: 0;
     right: 0;
     height: 100vh;
+    object-fit: cover;
+}
+
+.player-select__pilot-bust-shot {
+    position: absolute;
+    top: 0;
+    right: 55vh;
+    height: 70vh;
     object-fit: cover;
 }
 
