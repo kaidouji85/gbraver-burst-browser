@@ -90,7 +90,6 @@
     }
 }
 
-
 /**
  * ローディング画面
  */
@@ -307,6 +306,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: rgba(10, 10, 10, 0.5);
 }
 
 .player-select__armdozer-selector {
@@ -322,26 +322,18 @@
 .player-select__armdozer__icon {
     object-fit: cover;
     height: calc(var(--vh)*30);
+    margin: 0.5em;
 }
 
 .player-select__pilot-selector {
+    z-index: var(--selector-zindex);
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    background-color: var(--background-color);
-    color: var(--font-color);
-    width: 100%;
-    height: 100%;
+    align-items: center;
 }
 
 .player-select__pilot-selector--hidden {
     display: none;
-}
-
-.player-select__pilot-selector__caption {
-    font-size: calc(var(--responsive-font-size) * 1.5);
-    margin-bottom: calc(var(--responsive-font-size));
 }
 
 .player-select__pilot-selector__icons {
@@ -352,7 +344,8 @@
 
 .player-select__pilot__icon {
     object-fit: cover;
-    width: 23vw;
+    width: calc(var(--vh)*30);
+    margin: 0.5em;
 }
 
 /**

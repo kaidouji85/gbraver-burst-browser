@@ -2,7 +2,6 @@
 
 import type {Resources} from "../../../resource";
 import type {PilotId} from "gbraver-burst-core";
-import {domUuid} from "../../../uuid/dom-uuid";
 import {PilotIcon} from "./pilot-icon";
 import {Observable, Subject, Subscription} from "rxjs";
 import {waitTime} from "../../../wait/wait-time";
@@ -31,19 +30,11 @@ export class PilotSelector {
   constructor(resources: Resources, pilotIds: PilotId[]) {
     this._canOperate = true;
 
-    const iconsId = domUuid();
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = `
-      <div class="${ROOT_CLASS_NAME}__caption">パイロットを選択してください</div>
-      <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
-    `;
-
-    const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
-      ?? document.createElement('div');
     this._pilotIcons = pilotIds.map(v => new PilotIcon(resources, v));
     this._pilotIcons.forEach(v => {
-      icons.appendChild(v.getRootHTMLElement());
+      this._root.appendChild(v.getRootHTMLElement());
     });
     
     this._subscriptions = this._pilotIcons.map(icon =>
