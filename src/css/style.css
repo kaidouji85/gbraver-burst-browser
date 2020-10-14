@@ -309,10 +309,6 @@
     align-items: center;
 }
 
-.player-select__selector__contents {
-    margin: 0 2em;
-}
-
 .player-select__armdozer-selector {
     display: flex;
     align-items: center;

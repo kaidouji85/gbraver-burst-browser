@@ -23,7 +23,7 @@ export class PlayerSelectPresentation {
    * @param pilotIds 選択できるパイロットのID
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[], pilotIds: PilotId[]) {
-    const selectorContentsId = domUuid();
+    const selectorId = domUuid();
 
     this._root = document.createElement('div');
     this._root.className = 'player-select';
@@ -32,18 +32,16 @@ export class PlayerSelectPresentation {
         <img class="player-select__working__armdozer" src="${resources.rootPath.get()}/armdozer/shin-braver/bust-shot.png" />
         <img class="player-select__working__pilot" src="${resources.rootPath.get()}/pilot/shinya/bust-shot.png" />
       </div>
-      <div class="player-select__selector">
-        <div class="player-select__selector__contents" data-id="${selectorContentsId}"></div>
-      </div>
+      <div class="player-select__selector" data-id="${selectorId}"></div>
     `;
 
-    const selectorContents = this._root.querySelector(`[data-id="${selectorContentsId}"]`)
+    const selector = this._root.querySelector(`[data-id="${selectorId}"]`)
       ?? document.createElement('div');
     this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds);
-    selectorContents.appendChild(this._armdozerSelector.getRootHTMLElement());
+    selector.appendChild(this._armdozerSelector.getRootHTMLElement());
 
     this._pilotSelector = new PilotSelector(resources, pilotIds);
-    selectorContents.appendChild(this._pilotSelector.getRootHTMLElement());
+    selector.appendChild(this._pilotSelector.getRootHTMLElement());
   }
 
   /**
