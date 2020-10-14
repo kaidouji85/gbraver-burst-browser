@@ -35,7 +35,7 @@ export class ArmdozerSelector {
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
       <div class="${ROOT_CLASS_NAME}__buttons">
-        <button class="${ROOT_CLASS_NAME}__ok-button">これで出撃</button>
+        <button class="${ROOT_CLASS_NAME}__ok-button" data-id="${okButtonId}">これで出撃</button>
       </div>
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
     `;
