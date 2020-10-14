@@ -30,6 +30,7 @@ export const PathIds = {
   TITLE_BACK: 'TITLE_BACK',
   LOGO: 'LOGO',
   SHIN_BRAVER_ICON: 'SHIN_BRAVER_ICON',
+  SHIN_BRAVER_BUST_SHOT: 'SHIN_BRAVER_BUST_SHOT',
   NEO_LANDOZER_ICON: 'NEO_LANDOZER_ICON',
   LIGHTNING_DOZER_ICON: 'LIGHTNING_DOZER_ICON',
   WING_DOZER_ICON: 'WING_DOZER_ICON',
@@ -56,6 +57,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.SHIN_BRAVER_ICON,
     path: root => `${root.get()}/armdozer/shin-braver/player-select.png`
+  },
+  {
+    id: PathIds.SHIN_BRAVER_BUST_SHOT,
+    path: root => `${root.get()}/armdozer/shin-braver/bust-shot.png`
   },
   {
     id: PathIds.NEO_LANDOZER_ICON,
