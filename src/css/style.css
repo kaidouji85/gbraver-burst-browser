@@ -293,7 +293,7 @@
     width: var(--width);
 }
 
-.player-select__working__pilot {
+.player-select__pilot-bust-shot {
     --width:  calc(var(--vh) * 70);
     position: absolute;
     top: 0;
