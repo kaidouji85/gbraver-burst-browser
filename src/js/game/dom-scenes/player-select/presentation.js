@@ -6,12 +6,14 @@ import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
 import {PilotSelector} from "./pilot-selector";
 import {domUuid} from "../../../uuid/dom-uuid";
+import {ArmdozerBustShot} from "./armdozer-bust-shot";
 
 /**
  * プレイヤーセレクト プレゼンテーション
  */
 export class PlayerSelectPresentation {
   _root: HTMLElement;
+  _armdozerBustShot: ArmdozerBustShot;
   _armdozerSelector: ArmdozerSelector;
   _pilotSelector: PilotSelector;
 
@@ -24,16 +26,21 @@ export class PlayerSelectPresentation {
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[], pilotIds: PilotId[]) {
     const selectorId = domUuid();
+    const workingId = domUuid();
 
     this._root = document.createElement('div');
     this._root.className = 'player-select';
     this._root.innerHTML = `
-      <div class="player-select__working">
-        <img class="player-select__working__armdozer" src="${resources.rootPath.get()}/armdozer/shin-braver/bust-shot.png" />
+      <div class="player-select__working" data-id="${workingId}">
         <img class="player-select__working__pilot" src="${resources.rootPath.get()}/pilot/shinya/bust-shot.png" />
       </div>
       <div class="player-select__selector" data-id="${selectorId}"></div>
     `;
+
+    const working = this._root.querySelector(`[data-id="${workingId}"]`)
+      ?? document.createElement('div');
+    this._armdozerBustShot = new ArmdozerBustShot(resources);
+    working.appendChild(this._armdozerBustShot.getRootHTMLElement());
 
     const selector = this._root.querySelector(`[data-id="${selectorId}"]`)
       ?? document.createElement('div');
