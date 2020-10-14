@@ -1,6 +1,5 @@
 // @flow
 
-import {domUuid} from "../../../uuid/dom-uuid";
 import {ArmdozerIcon} from "./armdozer-icon";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
