@@ -303,20 +303,34 @@
 
 .player-select__selector {
     z-index: var(--selector-zindex);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(10, 10, 10, 0.5);
 }
 
 .player-select__armdozer-selector {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 .player-select__armdozer-selector--hidden {
     display: none;
+}
+
+.player-select__armdozer-selector__ok-button {
+    margin: calc(var(--responsive-font-size) * 2);
+    width: calc(var(--responsive-font-size) * 10);
+    height: calc(var(--responsive-font-size) * 3);
+    border-radius: var(--button-border-radius);
+    background-color: var(--button-background-color);
+    color: var(--button-font-color);
+    border: none;
+}
+
+.player-select__armdozer-selector__icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 10, 10, 0.5);
 }
 
 .player-select__armdozer__icon {

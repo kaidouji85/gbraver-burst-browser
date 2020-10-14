@@ -5,6 +5,7 @@ import {Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
 import {waitTime} from "../../../wait/wait-time";
+import {domUuid} from "../../../uuid/dom-uuid";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -26,16 +27,27 @@ export class ArmdozerSelector {
    * @param armDozerIds アームドーザIDリスト
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
+    const okButtonId = domUuid();
+    const iconsId = domUuid();
+
     this._canOperate = true;
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-
+    this._root.innerHTML = `
+      <div class="${ROOT_CLASS_NAME}__buttons">
+        <button class="${ROOT_CLASS_NAME}__ok-button">これで出撃</button>
+      </div>
+      <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
+    `;
+    const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
+      ?? document.createElement('div');
     this._armdozerIcons = armDozerIds.map(v => new ArmdozerIcon(resources, v));
     this._armdozerIcons
       .map(icon => icon.getRootHTMLElement())
       .forEach(element => {
-        this._root.appendChild(element);
+        icons.appendChild(element);
       });
+
     this._subscriptions = this._armdozerIcons.map(v =>
       v.selectedNotifier().subscribe(() => {
         this._onArmdozerSelect(v);
