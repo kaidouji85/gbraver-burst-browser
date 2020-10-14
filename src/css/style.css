@@ -313,20 +313,24 @@
     height: 30vh;
 }
 
-.player-select__armdozer-bust-shot {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    object-fit: cover;
+.player-select__selected {
+    position: relative;
 }
 
-.player-select__pilot-bust-shot {
+.player-select__selected__armdozer {
+    --width: 100vh;
     position: absolute;
     top: 0;
-    right: 55vh;
-    height: 70vh;
-    object-fit: cover;
+    left: calc(50vw - var(--width)/2 + 20vh);
+    width: var(--width);
+}
+
+.player-select__selected__pilot {
+    --width: 70vh;
+    position: absolute;
+    top: 0;
+    left: calc(50vw - var(--width)/2  - 20vh);
+    width: var(--width);
 }
 
 .player-select__pilot-selector {
