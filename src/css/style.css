@@ -258,6 +258,10 @@
  */
 @media (orientation: landscape) {
     .player-select {
+        --working-zindex: 1;
+        --selector-zindex: 2;
+        display: flex;
+        flex-direction: column;
         width: var(--screen-width);
         height: var(--screen-height);
         background-color: var(--background-color);
@@ -276,10 +280,30 @@
     }
 }
 
-.player-select__selector {
+.player-select__working {
+    z-index: var(--working-zindex);
+    position: relative;
+    flex: 1 1;
+}
+
+.player-select__working__armdozer {
+    --width: calc(var(--vh) * 100);
     position: absolute;
-    bottom: max(var(--safe-area-bottom), 2em);
-    width: 100vw;
+    top: 0;
+    left: calc(50vw - var(--width)/2 + var(--vh)*20);
+    width: var(--width);
+}
+
+.player-select__working__pilot {
+    --width:  calc(var(--vh) * 70);
+    position: absolute;
+    top: 0;
+    left: calc(50vw - var(--width)/2  - var(--vh)*20);
+    width: var(--width);
+}
+
+.player-select__selector {
+    z-index: var(--selector-zindex);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -287,15 +311,6 @@
 
 .player-select__selector__contents {
     margin: 0 2em;
-}
-
-.player-select__selector__prev, .player-select__selector__ok {
-    width: 25vh;
-    height: 15vh;
-    border-radius: var(--button-border-radius);
-    background-color: var(--button-background-color);
-    color: var(--button-font-color);
-    border: none;
 }
 
 .player-select__armdozer-selector {
@@ -310,27 +325,7 @@
 
 .player-select__armdozer__icon {
     object-fit: cover;
-    height: 30vh;
-}
-
-.player-select__selected {
-    position: relative;
-}
-
-.player-select__selected__armdozer {
-    --width: 100vh;
-    position: absolute;
-    top: 0;
-    left: calc(50vw - var(--width)/2 + 20vh);
-    width: var(--width);
-}
-
-.player-select__selected__pilot {
-    --width: 70vh;
-    position: absolute;
-    top: 0;
-    left: calc(50vw - var(--width)/2  - 20vh);
-    width: var(--width);
+    height: calc(var(--vh)*30);
 }
 
 .player-select__pilot-selector {
