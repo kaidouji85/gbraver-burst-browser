@@ -32,8 +32,11 @@ export const PathIds = {
   SHIN_BRAVER_ICON: 'SHIN_BRAVER_ICON',
   SHIN_BRAVER_BUST_SHOT: 'SHIN_BRAVER_BUST_SHOT',
   NEO_LANDOZER_ICON: 'NEO_LANDOZER_ICON',
+  NEO_LANDOZER_BUST_SHOT: 'NEO_LANDOZER_BUST_SHOT',
   LIGHTNING_DOZER_ICON: 'LIGHTNING_DOZER_ICON',
+  LIGHTNING_DOZER_BUST_SHOT: 'LIGHTNING_DOZER_BUST_SHOT',
   WING_DOZER_ICON: 'WING_DOZER_ICON',
+  WING_DOZER_BUST_SHOT: 'WING_DOZER_BUST_SHOT',
   SHINYA_ICON: 'SHINYA_ICON',
   GAI_ICON: 'GAI_ICON',
   END: 'END',
@@ -67,16 +70,24 @@ export const PathConfigs: PathConfig[] = [
     path: root => `${root.get()}/armdozer/neo-landozer/player-select.png`
   },
   {
-    id: PathIds.LIGHTNING_DOZER_ICON,
-    path: root => `${root.get()}/armdozer/lightning-dozer/player-select.png`
+    id: PathIds.NEO_LANDOZER_BUST_SHOT,
+    path: root => `${root.get()}/armdozer/neo-landozer/bust-shot.png`
   },
   {
     id: PathIds.LIGHTNING_DOZER_ICON,
     path: root => `${root.get()}/armdozer/lightning-dozer/player-select.png`
+  },
+  {
+    id: PathIds.LIGHTNING_DOZER_BUST_SHOT,
+    path: root => `${root.get()}/armdozer/lightning-dozer/bust-shot.png`
   },
   {
     id: PathIds.WING_DOZER_ICON,
     path: root => `${root.get()}/armdozer/wing-dozer/player-select.png`
+  },
+  {
+    id: PathIds.WING_DOZER_BUST_SHOT,
+    path: root => `${root.get()}/armdozer/wing-dozer/bust-shot.png`
   },
   {
     id: PathIds.SHINYA_ICON,
