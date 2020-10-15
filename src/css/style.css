@@ -29,6 +29,8 @@
     --button-background-color: #1e90ff;
     --button-font-color: rgb(240, 240, 240);
     --button-border-radius: calc(var(--responsive-font-size) * 0.5);
+    --button-border: none;
+    --button-box-shadow: 0 0 0.5em rgb(25 25 25);
 
     /** ダイアログ */
     --dialog-border: solid #a9a9a9 1px;
@@ -190,7 +192,8 @@
     border-radius: var(--button-border-radius);
     background-color: var(--button-background-color);
     color: var(--button-font-color);
-    border: none;
+    border: var(--button-border);
+    box-shadow: var(--button-box-shadow);
 }
 
 /**
@@ -320,10 +323,12 @@
     margin: calc(var(--responsive-font-size) * 2);
     width: calc(var(--responsive-font-size) * 10);
     height: calc(var(--responsive-font-size) * 3);
+    font-size: var(--responsive-font-size);
     border-radius: var(--button-border-radius);
     background-color: var(--button-background-color);
     color: var(--button-font-color);
-    border: none;
+    border: var(--button-border);
+    box-shadow: var(--button-box-shadow);
 }
 
 .player-select__armdozer-selector__icons {
