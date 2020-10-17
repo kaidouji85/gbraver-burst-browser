@@ -6,6 +6,8 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../resource";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {pushDOMStream} from "../../../../action/push/push-dom";
+import {SOUND_IDS} from "../../../../resource/sound";
+import {Howl} from 'howler';
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -17,6 +19,8 @@ export class ArmdozerSelector {
   _canOperate: boolean;
   _root: HTMLElement;
   _armdozerIcons: ArmdozerIcon[];
+  _changeValueSound: typeof Howl;
+  _decideSound: typeof Howl;
   _currentValue: ArmDozerId;
   _change: Subject<ArmDozerId>;
   _decide: Subject<ArmDozerId>;
@@ -35,6 +39,11 @@ export class ArmdozerSelector {
     this._change = new Subject<ArmDozerId>();
     this._decide = new Subject<ArmDozerId>();
     this._currentValue = armDozerIds[0];
+    
+   this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+     ?.sound ?? new Howl();
+   this._decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+     ?.sound ?? new Howl();
 
     this._canOperate = true;
     this._root = document.createElement('div');
@@ -139,6 +148,7 @@ export class ArmdozerSelector {
       return;
     }
 
+    this._changeValueSound.play();
     this._currentValue = icon.armDozerId;
     this._change.next(this._currentValue);
   }
@@ -147,6 +157,7 @@ export class ArmdozerSelector {
    * 決定ボタンが押された時の処理
    */
   _onOkButtonPush(): void {
+    this._decideSound.play();
     this._decide.next(this._currentValue);
   }
 }
