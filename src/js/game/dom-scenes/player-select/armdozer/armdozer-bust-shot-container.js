@@ -11,22 +11,31 @@ import {
 } from "./amrodzer-bust-shot";
 import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 
-// TODO js-docを書く
+/**
+ * バストショット情報
+ */
+type BustShot = {
+  armdozerId: ArmDozerId,
+  bustShot: ArmdozerBustShot
+};
+
 /**
  * アームドーザバストショット
  */
 export class ArmdozerBustShotContainer {
   _resources: Resources;
   _root: HTMLElement;
-  _bustShots: Array<{armdozerId: ArmDozerId, bustShot: ArmdozerBustShot}>;
+  _bustShots: BustShot[];
 
   /**
    * コンストラクタ
    * @param resources リソース管理オブジェクト
+   * @param armDozerIds アームドーザIDリスト
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
     this._resources = resources;
     this._root = document.createElement('div');
+    this._root.className = 'player-select__armdozer-bust-shot-container';
 
     this._bustShots = armDozerIds.map(v => ({
       armdozerId: v,
@@ -47,6 +56,22 @@ export class ArmdozerBustShotContainer {
     return this._root;
   }
 
+  /**
+   * リソースの読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  async waitUntilLoaded(): Promise<void> {
+    await Promise.all(
+      this._bustShots.map(v => v.bustShot.waitUntilLoaded())
+    );
+  }
+
+  /**
+   * アームドーザバストショットを切り替える
+   *
+   * @param armdozerId アームドーザID
+   */
   switch(armdozerId: ArmDozerId): void {
     this._bustShots.forEach(v => {
       if (v.armdozerId === armdozerId) {
@@ -58,6 +83,13 @@ export class ArmdozerBustShotContainer {
   }
 }
 
+/**
+ * アームドーザIDに対応したバストショットを生成する
+ *
+ * @param armdozerId アームドーザID
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
 function createBustShot(armdozerId: ArmDozerId, resources: Resources): ArmdozerBustShot {
   switch(armdozerId) {
     case ArmDozerIdList.SHIN_BRAVER:

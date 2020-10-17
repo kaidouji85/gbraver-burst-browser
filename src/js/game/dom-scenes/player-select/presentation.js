@@ -8,7 +8,6 @@ import {PilotSelector} from "./pilot-selector";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {ArmdozerBustShotContainer} from "./armdozer/armdozer-bust-shot-container";
 import {PilotBustShot} from "./pilot-bust-shot";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 
 // TODO js-docを書く
 /**
@@ -114,6 +113,7 @@ export class PlayerSelectPresentation {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
+      this._armdozerBustShot.waitUntilLoaded(),
       this._armdozerSelector.waitUntilLoaded(),
       this._pilotSelector.waitUntilLoaded()
     ]);

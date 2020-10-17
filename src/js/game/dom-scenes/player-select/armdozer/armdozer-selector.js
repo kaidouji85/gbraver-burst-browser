@@ -119,6 +119,11 @@ export class ArmdozerSelector {
     return this._change;
   }
 
+  /**
+   * アームドーザ決定通知ストリームを取得する
+   *
+   * @return アームドーザ決定通知ストリーム
+   */
   decideNotifier(): Observable<ArmDozerId> {
     return this._decide;
   }
@@ -134,6 +139,9 @@ export class ArmdozerSelector {
     this._change.next(this._selectedArmdozerId);
   }
 
+  /**
+   * 決定ボタンが押された時の処理
+   */
   _onOkButtonPush(): void {
     this._decide.next(this._selectedArmdozerId);
   }
