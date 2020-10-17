@@ -125,7 +125,7 @@ export class DOMScenes {
 
     const scene = new PlayerSelect(resources);
     this._sceneSubscriptions = [
-      scene.selectionCompleteNotifier().subscribe(v => {
+      scene.decideNotifier().subscribe(v => {
         this._selectionComplete.next({
           type: 'SelectionComplete',
           armdozerId: v.armdozerId,
