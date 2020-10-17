@@ -58,8 +58,16 @@ export class ArmdozerBustShot {
   /**
    * 表示する
    */
-  show(): Promise<void> {
+  show(): void {
     this._image.hidden = false;
+  }
+
+  /**
+   * アニメーションさせる
+   *
+   * @return アニメーション
+   */
+  move(): Promise<void> {
     const animation = this._image.animate([
       {transform: 'translateX(5em)'},
       {transform: 'translateX(0)'},

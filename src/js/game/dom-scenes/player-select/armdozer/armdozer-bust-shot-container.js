@@ -32,7 +32,7 @@ export class ArmdozerBustShotContainer {
    * @param resources リソース管理オブジェクト
    * @param armDozerIds アームドーザIDリスト
    */
-  constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
+  constructor(resources: Resources, armDozerIds: ArmDozerId[], initialArmdozerId: ArmDozerId) {
     this._resources = resources;
     this._root = document.createElement('div');
     this._root.className = 'player-select__armdozer-bust-shot-container';
@@ -42,9 +42,12 @@ export class ArmdozerBustShotContainer {
       bustShot: createBustShot(v, resources)
     }));
     this._bustShots.forEach(v => {
-      v.bustShot.hidden();
       this._root.appendChild(v.bustShot.getRootHTMLElement());
     });
+    this._bustShots.filter(v => v.armdozerId !== initialArmdozerId)
+      .forEach(v => {
+        v.bustShot.hidden();
+      });
   }
 
   /**
@@ -73,13 +76,16 @@ export class ArmdozerBustShotContainer {
    * @param armdozerId アームドーザID
    */
   switch(armdozerId: ArmDozerId): void {
-    this._bustShots.forEach(v => {
-      if (v.armdozerId === armdozerId) {
+    this._bustShots.filter(v => v.armdozerId === armdozerId)
+      .forEach(v => {
         v.bustShot.show();
-      } else {
+        v.bustShot.move();
+      });
+
+    this._bustShots.filter(v => v.armdozerId !== armdozerId)
+      .forEach(v => {
         v.bustShot.hidden();
-      }
-    });
+      });
   }
 }
 

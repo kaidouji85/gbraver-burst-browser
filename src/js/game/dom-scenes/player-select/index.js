@@ -67,8 +67,7 @@ export class PlayerSelect implements DOMScene {
     const working = this._root.querySelector(`[data-id="${workingId}"]`)
       ?? document.createElement('div');
 
-    this._armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds);
-    this._armdozerBustShot.switch(this._armdozerId);
+    this._armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds, this._armdozerId);
     working.appendChild(this._armdozerBustShot.getRootHTMLElement());
 
     this._pilotBustShot = new PilotBustShot(resources);
