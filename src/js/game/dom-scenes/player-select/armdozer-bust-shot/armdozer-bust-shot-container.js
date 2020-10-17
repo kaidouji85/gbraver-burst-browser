@@ -2,14 +2,8 @@
 
 import type {Resources} from "../../../../resource";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
-import {
-  ArmdozerBustShot,
-  lightningDozerBustShot,
-  neoLandozerBustShot,
-  shinBraverBustShot,
-  wingDozerBustShot
-} from "./amrodzer-bust-shot";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import {ArmdozerBustShot} from "./amrodzer-bust-shot";
+import {createBustShot} from "./create-bust-shot";
 
 /**
  * バストショット情報
@@ -89,24 +83,3 @@ export class ArmdozerBustShotContainer {
   }
 }
 
-/**
- * アームドーザIDに対応したバストショットを生成する
- *
- * @param armdozerId アームドーザID
- * @param resources リソース管理オブジェクト
- * @return 生成結果
- */
-function createBustShot(armdozerId: ArmDozerId, resources: Resources): ArmdozerBustShot {
-  switch(armdozerId) {
-    case ArmDozerIdList.SHIN_BRAVER:
-      return shinBraverBustShot(resources);
-    case ArmDozerIdList.NEO_LANDOZER:
-      return neoLandozerBustShot(resources);
-    case ArmDozerIdList.LIGHTNING_DOZER:
-      return lightningDozerBustShot(resources);
-    case ArmDozerIdList.WING_DOZER:
-      return wingDozerBustShot(resources);
-    default:
-      return shinBraverBustShot(resources);
-  }
-}
