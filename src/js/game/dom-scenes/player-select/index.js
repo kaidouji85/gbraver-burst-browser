@@ -46,8 +46,8 @@ export class PlayerSelect implements DOMScene {
     this._root.appendChild(this._fader.getRootHTMLElement());
 
     const armDozerIds = [
-      ArmDozerIdList.NEO_LANDOZER,
       ArmDozerIdList.SHIN_BRAVER,
+      ArmDozerIdList.NEO_LANDOZER,
       ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
     ];

@@ -296,6 +296,30 @@
     width: var(--width);
 }
 
+.player-select__armdozer-bust-shot__neo-landozer {
+    --width: calc(var(--vh) * 100);
+    position: absolute;
+    top: 0;
+    left: calc(50vw - var(--width)/2 + var(--vh)*20);
+    width: var(--width);
+}
+
+.player-select__armdozer-bust-shot__lightning-dozer{
+    --width: calc(var(--vh) * 100);
+    position: absolute;
+    top: 0;
+    left: calc(50vw - var(--width)/2 + var(--vh)*20);
+    width: var(--width);
+}
+
+.player-select__armdozer-bust-shot__wing-dozer {
+    --width: calc(var(--vh) * 100);
+    position: absolute;
+    top: 0;
+    left: calc(50vw - var(--width)/2 + var(--vh)*20);
+    width: var(--width);
+}
+
 .player-select__pilot-bust-shot {
     --width:  calc(var(--vh) * 70);
     position: absolute;
@@ -335,7 +359,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(10, 10, 10, 0.5);
 }
 
 .player-select__armdozer__icon {

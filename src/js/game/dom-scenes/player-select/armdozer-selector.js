@@ -115,15 +115,6 @@ export class ArmdozerSelector {
    * @return 処理結果
    */
   async _onArmdozerSelect(icon: ArmdozerIcon): Promise<void> {
-    if (!this._canOperate) {
-      return;
-    }
-    this._canOperate = false;
-
-    await icon.selected();
-    await waitTime(1000);
     this._armdozerSelected.next(icon.armDozerId);
-
-    this._canOperate = true;
   }
 }

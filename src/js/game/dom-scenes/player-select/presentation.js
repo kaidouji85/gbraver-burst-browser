@@ -3,12 +3,14 @@
 import type {Resources} from "../../../resource";
 import {ArmdozerSelector} from "./armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
-import {Observable} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import {PilotSelector} from "./pilot-selector";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {ArmdozerBustShot} from "./armdozer-bust-shot";
 import {PilotBustShot} from "./pilot-bust-shot";
+import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 
+// TODO js-docを書く
 /**
  * プレイヤーセレクト プレゼンテーション
  */
@@ -18,6 +20,8 @@ export class PlayerSelectPresentation {
   _pilotBustShot: PilotBustShot;
   _armdozerSelector: ArmdozerSelector;
   _pilotSelector: PilotSelector;
+  _armdozerSelectedStream: Subject<ArmDozerId>;
+  _subscriptions: Subscription[];
 
   /**
    * コンストラクタ
@@ -29,6 +33,8 @@ export class PlayerSelectPresentation {
   constructor(resources: Resources, armDozerIds: ArmDozerId[], pilotIds: PilotId[]) {
     const selectorId = domUuid();
     const workingId = domUuid();
+
+    this._armdozerSelectedStream = new Subject();
 
     this._root = document.createElement('div');
     this._root.className = 'player-select';
@@ -54,6 +60,12 @@ export class PlayerSelectPresentation {
 
     this._pilotSelector = new PilotSelector(resources, pilotIds);
     selector.appendChild(this._pilotSelector.getRootHTMLElement());
+
+    this._subscriptions = [
+      this._armdozerSelector.armdozerSelectedNotifier().subscribe(v => {
+        this._onArmdozerIconPush(v);
+      })
+    ];
   }
 
   /**
@@ -62,6 +74,9 @@ export class PlayerSelectPresentation {
   destructor(): void {
     this._armdozerSelector.destructor();
     this._pilotSelector.destructor();
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    })
   }
 
   /**
@@ -107,7 +122,7 @@ export class PlayerSelectPresentation {
    * @return イベント通知ストリーム
    */
   armdozerSelectedNotifier(): Observable<ArmDozerId> {
-    return this._armdozerSelector.armdozerSelectedNotifier();
+    return this._armdozerSelectedStream;
   }
 
   /**
@@ -117,5 +132,21 @@ export class PlayerSelectPresentation {
    */
   pilotSelectedNotifier(): Observable<PilotId> {
     return this._pilotSelector.pilotSelectedNotifier();
+  }
+
+  _onArmdozerIconPush(armdozerId: ArmDozerId): void {
+    this._switchArmdozerBustShot(armdozerId);
+  }
+
+  _switchArmdozerBustShot(armdozerId: ArmDozerId): void {
+    if (armdozerId === ArmDozerIdList.SHIN_BRAVER) {
+      this._armdozerBustShot.shinBraver();
+    } else if (armdozerId === ArmDozerIdList.NEO_LANDOZER) {
+      this._armdozerBustShot.neoLandozer();
+    } else if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER) {
+      this._armdozerBustShot.lightningDozer();
+    } else if (armdozerId === ArmDozerIdList.WING_DOZER) {
+      this._armdozerBustShot.wingDozer();
+    }
   }
 }

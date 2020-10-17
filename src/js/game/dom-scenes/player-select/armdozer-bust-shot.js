@@ -5,6 +5,7 @@ import {PathIds} from "../../../resource/path";
 
 export const ROOT_CLASS_NAME = 'player-select__armdozer-bust-shot';
 
+// TODO js-docを書く
 /**
  * アームドーザバストショット
  */
@@ -38,6 +39,27 @@ export class ArmdozerBustShot {
     const path = this._resources.paths.find(v => v.id === PathIds.SHIN_BRAVER_BUST_SHOT)
       ?.path ?? '';
     this._root.className = `${ROOT_CLASS_NAME}__shin-braver`;
+    this._root.src = path;
+  }
+
+  neoLandozer(): void {
+    const path = this._resources.paths.find(v => v.id === PathIds.NEO_LANDOZER_BUST_SHOT)
+      ?.path ?? '';
+    this._root.className = `${ROOT_CLASS_NAME}__neo-landozer`;
+    this._root.src = path;
+  }
+
+  lightningDozer(): void {
+    const path = this._resources.paths.find(v => v.id === PathIds.LIGHTNING_DOZER_BUST_SHOT)
+      ?.path ?? '';
+    this._root.className = `${ROOT_CLASS_NAME}__lightning-dozer`;
+    this._root.src = path;
+  }
+
+  wingDozer(): void {
+    const path = this._resources.paths.find(v => v.id === PathIds.WING_DOZER_BUST_SHOT)
+      ?.path ?? '';
+    this._root.className = `${ROOT_CLASS_NAME}__wing-dozer`;
     this._root.src = path;
   }
 
