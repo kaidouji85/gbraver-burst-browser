@@ -3,13 +3,13 @@
 import {Howl} from 'howler';
 import {Observable} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
-import type {Resources} from "../../../resource";
-import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
-import type {PushDOM} from "../../../action/push/push-dom";
-import {pushDOMStream} from "../../../action/push/push-dom";
-import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-import {SOUND_IDS} from "../../../resource/sound";
+import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
+import type {Resources} from "../../../../resource";
+import {getArmdozerIconPathId} from "../../../../path/armdozer-icon-path";
+import type {PushDOM} from "../../../../action/push/push-dom";
+import {pushDOMStream} from "../../../../action/push/push-dom";
+import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
+import {SOUND_IDS} from "../../../../resource/sound";
 
 /**
  * アームドーザアイコン ビュー

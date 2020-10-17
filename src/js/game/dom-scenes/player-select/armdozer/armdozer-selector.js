@@ -3,9 +3,9 @@
 import {ArmdozerIcon} from "./armdozer-icon";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
-import type {Resources} from "../../../resource";
-import {domUuid} from "../../../uuid/dom-uuid";
-import {pushDOMStream} from "../../../action/push/push-dom";
+import type {Resources} from "../../../../resource";
+import {domUuid} from "../../../../uuid/dom-uuid";
+import {pushDOMStream} from "../../../../action/push/push-dom";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';

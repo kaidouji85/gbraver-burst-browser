@@ -1,12 +1,12 @@
 // @flow
 
 import type {Resources} from "../../../resource";
-import {ArmdozerSelector} from "./armdozer-selector";
+import {ArmdozerSelector} from "./armdozer/armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {Observable, Subject, Subscription} from "rxjs";
 import {PilotSelector} from "./pilot-selector";
 import {domUuid} from "../../../uuid/dom-uuid";
-import {ArmdozerBustShot} from "./armdozer-bust-shot";
+import {ArmdozerBustShotContainer} from "./armdozer/armdozer-bust-shot-container";
 import {PilotBustShot} from "./pilot-bust-shot";
 import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 
@@ -16,7 +16,7 @@ import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
  */
 export class PlayerSelectPresentation {
   _root: HTMLElement;
-  _armdozerBustShot: ArmdozerBustShot;
+  _armdozerBustShot: ArmdozerBustShotContainer;
   _pilotBustShot: PilotBustShot;
   _armdozerSelector: ArmdozerSelector;
   _pilotSelector: PilotSelector;
@@ -46,7 +46,7 @@ export class PlayerSelectPresentation {
     const working = this._root.querySelector(`[data-id="${workingId}"]`)
       ?? document.createElement('div');
 
-    this._armdozerBustShot = new ArmdozerBustShot(resources);
+    this._armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds);
     working.appendChild(this._armdozerBustShot.getRootHTMLElement());
 
     this._pilotBustShot = new PilotBustShot(resources);
@@ -138,19 +138,7 @@ export class PlayerSelectPresentation {
   }
 
   _onArmdozerIconPush(armdozerId: ArmDozerId): void {
-    this._switchArmdozerBustShot(armdozerId);
-  }
-
-  _switchArmdozerBustShot(armdozerId: ArmDozerId): void {
-    if (armdozerId === ArmDozerIdList.SHIN_BRAVER) {
-      this._armdozerBustShot.shinBraver();
-    } else if (armdozerId === ArmDozerIdList.NEO_LANDOZER) {
-      this._armdozerBustShot.neoLandozer();
-    } else if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER) {
-      this._armdozerBustShot.lightningDozer();
-    } else if (armdozerId === ArmDozerIdList.WING_DOZER) {
-      this._armdozerBustShot.wingDozer();
-    }
+    this._armdozerBustShot.switch(armdozerId);
   }
 
   _onArmdozerDecided(armdozerId: ArmDozerId): void {
