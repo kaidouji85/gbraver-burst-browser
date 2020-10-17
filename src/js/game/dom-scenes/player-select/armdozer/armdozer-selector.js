@@ -17,7 +17,7 @@ export class ArmdozerSelector {
   _canOperate: boolean;
   _root: HTMLElement;
   _armdozerIcons: ArmdozerIcon[];
-  _selectedArmdozerId: ArmDozerId;
+  _currentValue: ArmDozerId;
   _change: Subject<ArmDozerId>;
   _decide: Subject<ArmDozerId>;
   _subscriptions: Subscription[];
@@ -34,7 +34,7 @@ export class ArmdozerSelector {
 
     this._change = new Subject<ArmDozerId>();
     this._decide = new Subject<ArmDozerId>();
-    this._selectedArmdozerId = armDozerIds[0];
+    this._currentValue = armDozerIds[0];
 
     this._canOperate = true;
     this._root = document.createElement('div');
@@ -135,14 +135,18 @@ export class ArmdozerSelector {
    * @return 処理結果
    */
   _onArmdozerSelect(icon: ArmdozerIcon): void {
-    this._selectedArmdozerId = icon.armDozerId;
-    this._change.next(this._selectedArmdozerId);
+    if (this._currentValue === icon.armDozerId) {
+      return;
+    }
+
+    this._currentValue = icon.armDozerId;
+    this._change.next(this._currentValue);
   }
 
   /**
    * 決定ボタンが押された時の処理
    */
   _onOkButtonPush(): void {
-    this._decide.next(this._selectedArmdozerId);
+    this._decide.next(this._currentValue);
   }
 }

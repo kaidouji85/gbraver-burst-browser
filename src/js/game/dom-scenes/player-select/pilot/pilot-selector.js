@@ -1,10 +1,10 @@
 // @flow
 
-import type {Resources} from "../../../resource";
+import type {Resources} from "../../../../resource";
 import type {PilotId} from "gbraver-burst-core";
 import {PilotIcon} from "./pilot-icon";
 import {Observable, Subject, Subscription} from "rxjs";
-import {waitTime} from "../../../wait/wait-time";
+import {waitTime} from "../../../../wait/wait-time";
 
 /**
  * ルート要素のclass名

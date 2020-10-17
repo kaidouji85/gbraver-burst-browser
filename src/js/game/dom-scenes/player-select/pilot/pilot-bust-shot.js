@@ -1,6 +1,6 @@
 // @flow
 
-import type {Resources} from "../../../resource";
+import type {Resources} from "../../../../resource";
 
 /**
  * ルート要素のクラス名

@@ -55,7 +55,13 @@ export class PlayerSelect implements DOMScene {
       PilotIds.SHINYA,
       PilotIds.GAI,
     ];
-    this._presentation = new PlayerSelectPresentation(resources, armDozerIds, pilotIds);
+    this._presentation = new PlayerSelectPresentation(
+      resources,
+      armDozerIds,
+      pilotIds,
+      this._playerSelected.armdozerId,
+      this._playerSelected.pilotId
+    );
     this._presentation.showArmdozerSelector();
     this._root.appendChild(this._presentation.getRootHTMLElement());
 

@@ -4,10 +4,10 @@ import type {Resources} from "../../../resource";
 import {ArmdozerSelector} from "./armdozer/armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {Observable, Subject, Subscription} from "rxjs";
-import {PilotSelector} from "./pilot-selector";
+import {PilotSelector} from "./pilot/pilot-selector";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {ArmdozerBustShotContainer} from "./armdozer/armdozer-bust-shot-container";
-import {PilotBustShot} from "./pilot-bust-shot";
+import {PilotBustShot} from "./pilot/pilot-bust-shot";
 
 // TODO js-docを書く
 /**
@@ -29,7 +29,7 @@ export class PlayerSelectPresentation {
    * @param armDozerIds 選択できるアームドーザのID
    * @param pilotIds 選択できるパイロットのID
    */
-  constructor(resources: Resources, armDozerIds: ArmDozerId[], pilotIds: PilotId[]) {
+  constructor(resources: Resources, armDozerIds: ArmDozerId[], pilotIds: PilotId[], initailArmdozerId: ArmDozerId, initialPilotId: PilotId) {
     const selectorId = domUuid();
     const workingId = domUuid();
 
@@ -46,6 +46,7 @@ export class PlayerSelectPresentation {
       ?? document.createElement('div');
 
     this._armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds);
+    this._armdozerBustShot.switch(initailArmdozerId);
     working.appendChild(this._armdozerBustShot.getRootHTMLElement());
 
     this._pilotBustShot = new PilotBustShot(resources);
