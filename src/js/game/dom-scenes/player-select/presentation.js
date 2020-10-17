@@ -20,7 +20,7 @@ export class PlayerSelectPresentation {
   _pilotBustShot: PilotBustShot;
   _armdozerSelector: ArmdozerSelector;
   _pilotSelector: PilotSelector;
-  _armdozerSelectedStream: Subject<ArmDozerId>;
+  _armdozerDecided: Subject<ArmDozerId>;
   _subscriptions: Subscription[];
 
   /**
@@ -34,7 +34,7 @@ export class PlayerSelectPresentation {
     const selectorId = domUuid();
     const workingId = domUuid();
 
-    this._armdozerSelectedStream = new Subject();
+    this._armdozerDecided = new Subject();
 
     this._root = document.createElement('div');
     this._root.className = 'player-select';
@@ -62,8 +62,11 @@ export class PlayerSelectPresentation {
     selector.appendChild(this._pilotSelector.getRootHTMLElement());
 
     this._subscriptions = [
-      this._armdozerSelector.armdozerSelectedNotifier().subscribe(v => {
+      this._armdozerSelector.changeNotifier().subscribe(v => {
         this._onArmdozerIconPush(v);
+      }),
+      this._armdozerSelector.decideNotifier().subscribe(v => {
+        this._onArmdozerDecided(v);
       })
     ];
   }
@@ -121,8 +124,8 @@ export class PlayerSelectPresentation {
    *
    * @return イベント通知ストリーム
    */
-  armdozerSelectedNotifier(): Observable<ArmDozerId> {
-    return this._armdozerSelectedStream;
+  armdozerDecidedNotifier(): Observable<ArmDozerId> {
+    return this._armdozerDecided;
   }
 
   /**
@@ -148,5 +151,9 @@ export class PlayerSelectPresentation {
     } else if (armdozerId === ArmDozerIdList.WING_DOZER) {
       this._armdozerBustShot.wingDozer();
     }
+  }
+
+  _onArmdozerDecided(armdozerId: ArmDozerId): void {
+    this._armdozerDecided.next(armdozerId);
   }
 }

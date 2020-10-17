@@ -4,8 +4,8 @@ import {ArmdozerIcon} from "./armdozer-icon";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
-import {waitTime} from "../../../wait/wait-time";
 import {domUuid} from "../../../uuid/dom-uuid";
+import {pushDOMStream} from "../../../action/push/push-dom";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -17,7 +17,9 @@ export class ArmdozerSelector {
   _canOperate: boolean;
   _root: HTMLElement;
   _armdozerIcons: ArmdozerIcon[];
-  _armdozerSelected: Subject<ArmDozerId>;
+  _selectedArmdozerId: ArmDozerId;
+  _change: Subject<ArmDozerId>;
+  _decide: Subject<ArmDozerId>;
   _subscriptions: Subscription[];
 
   /**
@@ -29,6 +31,10 @@ export class ArmdozerSelector {
   constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
     const okButtonId = domUuid();
     const iconsId = domUuid();
+
+    this._change = new Subject<ArmDozerId>();
+    this._decide = new Subject<ArmDozerId>();
+    this._selectedArmdozerId = armDozerIds[0];
 
     this._canOperate = true;
     this._root = document.createElement('div');
@@ -48,12 +54,17 @@ export class ArmdozerSelector {
         icons.appendChild(element);
       });
 
+    const okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
+      ?? document.createElement('button');
+
     this._subscriptions = this._armdozerIcons.map(v =>
       v.selectedNotifier().subscribe(() => {
         this._onArmdozerSelect(v);
+      }),
+      pushDOMStream(okButton).subscribe(() => {
+        this._onOkButtonPush();
       })
     );
-    this._armdozerSelected = new Subject<ArmDozerId>();
   }
 
   /**
@@ -104,8 +115,12 @@ export class ArmdozerSelector {
    *
    * @return イベント通知ストリーム
    */
-  armdozerSelectedNotifier(): Observable<ArmDozerId> {
-    return this._armdozerSelected;
+  changeNotifier(): Observable<ArmDozerId> {
+    return this._change;
+  }
+
+  decideNotifier(): Observable<ArmDozerId> {
+    return this._decide;
   }
 
   /**
@@ -114,7 +129,12 @@ export class ArmdozerSelector {
    * @param icon 選択されたアイコン
    * @return 処理結果
    */
-  async _onArmdozerSelect(icon: ArmdozerIcon): Promise<void> {
-    this._armdozerSelected.next(icon.armDozerId);
+  _onArmdozerSelect(icon: ArmdozerIcon): void {
+    this._selectedArmdozerId = icon.armDozerId;
+    this._change.next(this._selectedArmdozerId);
+  }
+
+  _onOkButtonPush(): void {
+    this._decide.next(this._selectedArmdozerId);
   }
 }

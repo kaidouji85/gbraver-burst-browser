@@ -60,7 +60,7 @@ export class PlayerSelect implements DOMScene {
     this._root.appendChild(this._presentation.getRootHTMLElement());
 
     this._subscriptions = [
-      this._presentation.armdozerSelectedNotifier().subscribe(v => {
+      this._presentation.armdozerDecidedNotifier().subscribe(v => {
         this._onArmdozerSelect(v);
       }),
       this._presentation.pilotSelectedNotifier().subscribe(v => {
