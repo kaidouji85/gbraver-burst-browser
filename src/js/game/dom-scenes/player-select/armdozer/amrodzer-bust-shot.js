@@ -3,6 +3,7 @@
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
+import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 
 /**
  * cssクラス名のプレフィックス
@@ -57,8 +58,17 @@ export class ArmdozerBustShot {
   /**
    * 表示する
    */
-  show(): void {
+  show(): Promise<void> {
     this._image.hidden = false;
+    const animation = this._image.animate([
+      {transform: 'translateX(5em)'},
+      {transform: 'translateX(0)'},
+    ], {
+      duration: 200,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    return waitFinishAnimation(animation);
   }
 }
 
