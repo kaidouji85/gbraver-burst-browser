@@ -289,34 +289,34 @@
 }
 
 .player-select__armdozer-bust-shot__shin-braver {
-    --width: calc(var(--vh) * 100);
+    --width: calc(var(--vh) * 200);
     position: absolute;
-    top: 0;
-    left: calc(50vw - var(--width)/2 + var(--vh)*20);
+    top: calc(var(--vh) * -10);
+    left: calc(50vw - var(--width)/2 + var(--vh)*40);
     width: var(--width);
 }
 
 .player-select__armdozer-bust-shot__neo-landozer {
-    --width: calc(var(--vh) * 100);
+    --width: calc(var(--vh) * 200);
     position: absolute;
-    top: 0;
-    left: calc(50vw - var(--width)/2 + var(--vh)*20);
+    top: calc(var(--vh) * -25);
+    left: calc(50vw - var(--width)/2 + var(--vh)*40);
     width: var(--width);
 }
 
 .player-select__armdozer-bust-shot__lightning-dozer{
-    --width: calc(var(--vh) * 100);
+    --width: calc(var(--vh) * 200);
     position: absolute;
-    top: 0;
-    left: calc(50vw - var(--width)/2 + var(--vh)*20);
+    top: calc(var(--vh) * -25);
+    left: calc(50vw - var(--width)/2 + var(--vh)*40);
     width: var(--width);
 }
 
 .player-select__armdozer-bust-shot__wing-dozer {
-    --width: calc(var(--vh) * 100);
+    --width: calc(var(--vh) * 200);
     position: absolute;
-    top: 0;
-    left: calc(50vw - var(--width)/2 + var(--vh)*20);
+    top: calc(var(--vh) * -40);
+    left: calc(50vw - var(--width)/2 + var(--vh)*40);
     width: var(--width);
 }
 
