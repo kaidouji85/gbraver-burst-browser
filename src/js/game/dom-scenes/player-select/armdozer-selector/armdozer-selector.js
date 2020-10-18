@@ -53,11 +53,13 @@ export class ArmdozerSelector {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
-      <div class="${ROOT_CLASS_NAME}__description">
-        <div class="${ROOT_CLASS_NAME}__description__status" data-id="${statusId}"></div>
-        <button class="${ROOT_CLASS_NAME}__description__ok-button" data-id="${okButtonId}">これで出撃</button>
-      </div>
+      <div class="${ROOT_CLASS_NAME}__status" data-id="${statusId}"></div>
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
+      <div class="${ROOT_CLASS_NAME}__controllers">
+        <button class="${ROOT_CLASS_NAME}__controllers__prev-button"">戻る</button>
+        <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}">これで出撃</button>
+      </div>
+      
     `;
     const status = this._root.querySelector(`[data-id="${statusId}"]`)
       ?? document.createElement('div');

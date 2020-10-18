@@ -27,6 +27,7 @@
 
     /** ボタン */
     --button-background-color: #1e90ff;
+    --sub-button-background-color: #696969;
     --button-font-color: rgb(240, 240, 240);
     --button-border-radius: calc(var(--responsive-font-size) * 0.5);
     --button-border: none;
@@ -335,29 +336,22 @@
 .player-select__armdozer-selector {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
 }
 
 .player-select__armdozer-selector--hidden {
     display: none;
 }
 
-.player-select__armdozer-selector__description {
-    display: flex;
-    align-items: center;
-    padding: calc(var(--responsive-font-size) * 0.5);
-    background-color: rgba(10, 10, 10, 0.7);
-    border: var(--dialog-border);
-    border-radius: var(--dialog-border-radius);
+.player-select__armdozer-selector__status {
+    margin-left: 0.5em;
 }
 
-.player-select__armdozer-selector__description__status {
-    margin-right: calc(var(--responsive-font-size) * 2);
-    width: calc(var(--responsive-font-size) * 25);
+.player-select__armdozer-selector__controllers {
+    margin-left: 0.5em;
 }
 
-.player-select__armdozer-selector__description__ok-button {
+.player-select__armdozer-selector__controllers__ok-button {
     width: calc(var(--responsive-font-size) * 10);
     height: calc(var(--responsive-font-size) * 3);
     font-size: var(--responsive-font-size);
@@ -365,12 +359,31 @@
     background-color: var(--button-background-color);
     color: var(--button-font-color);
     border: var(--button-border);
+    box-shadow: var(--button-box-shadow);
+}
+
+.player-select__armdozer-selector__controllers__prev-button {
+    width: calc(var(--responsive-font-size) * 10);
+    height: calc(var(--responsive-font-size) * 3);
+    font-size: var(--responsive-font-size);
+    border-radius: var(--button-border-radius);
+    background-color: var(--sub-button-background-color);
+    color: var(--button-font-color);
+    border: var(--button-border);
+    box-shadow: var(--button-box-shadow);
+    margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .player-select__armdozer-status {
     display: flex;
     flex-direction: column;
     font-size: calc(var(--responsive-font-size) * 0.8);
+    width: calc(var(--responsive-font-size) * 20);
+    height: calc(var(--responsive-font-size) * 5);
+    padding: calc(var(--responsive-font-size) * 0.5);
+    background-color: rgba(10, 10, 10, 0.7);
+    border: var(--dialog-border);
+    border-radius: var(--dialog-border-radius);
 }
 
 .player-select__armdozer-selector__icons {
