@@ -8,16 +8,18 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {Howl} from 'howler';
+import {ArmdozerStatus} from "./armdozer-status";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
 
 /**
- * プレイヤーセレクト ビュー
+ * アームドーザセレクタ
  */
 export class ArmdozerSelector {
   _canOperate: boolean;
   _root: HTMLElement;
+  _armdozerStatus: ArmdozerStatus;
   _armdozerIcons: ArmdozerIcon[];
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
@@ -33,27 +35,34 @@ export class ArmdozerSelector {
    * @param armDozerIds アームドーザIDリスト
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
+    const statusId = domUuid();
     const okButtonId = domUuid();
     const iconsId = domUuid();
 
     this._change = new Subject<ArmDozerId>();
     this._decide = new Subject<ArmDozerId>();
     this._currentValue = armDozerIds[0];
-    
-   this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
-     ?.sound ?? new Howl();
-   this._decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
-     ?.sound ?? new Howl();
+
+    this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
+    this._decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?.sound ?? new Howl();
 
     this._canOperate = true;
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
-      <div class="${ROOT_CLASS_NAME}__buttons">
-        <button class="${ROOT_CLASS_NAME}__ok-button" data-id="${okButtonId}">これで出撃</button>
+      <div class="${ROOT_CLASS_NAME}__description">
+        <div class="${ROOT_CLASS_NAME}__description__status" data-id="${statusId}"></div>
+        <button class="${ROOT_CLASS_NAME}__description__ok-button" data-id="${okButtonId}">これで出撃</button>
       </div>
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
     `;
+    const status = this._root.querySelector(`[data-id="${statusId}"]`)
+      ?? document.createElement('div');
+    this._armdozerStatus = new ArmdozerStatus();
+    status.appendChild(this._armdozerStatus.getRootHTMLElement());
+
     const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
       ?? document.createElement('div');
     this._armdozerIcons = armDozerIds.map(v => new ArmdozerIcon(resources, v));
@@ -67,9 +76,9 @@ export class ArmdozerSelector {
       ?? document.createElement('button');
 
     this._subscriptions = this._armdozerIcons.map(v =>
-      v.selectedNotifier().subscribe(() => {
-        this._onArmdozerSelect(v);
-      }),
+        v.selectedNotifier().subscribe(() => {
+          this._onArmdozerSelect(v);
+        }),
       pushDOMStream(okButton).subscribe(() => {
         this._onOkButtonPush();
       })
