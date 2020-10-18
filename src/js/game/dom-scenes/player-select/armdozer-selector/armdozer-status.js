@@ -1,7 +1,7 @@
 // @flow
 
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
-import {ArmDozers} from "gbraver-burst-core/lib/master/armdozers";
+import type {Armdozer, ArmDozerId} from "gbraver-burst-core";
+import {ArmDozers} from "gbraver-burst-core";
 
 const ROOT_CLASS_NAME = 'player-select__armdozer-status';
 
@@ -43,6 +43,11 @@ export class ArmdozerStatus {
     return this._root;
   }
 
+  /**
+   * 表示内容を切り替える
+   *
+   * @param armdozerId 表示するアームドーザID
+   */
   switch(armdozerId: ArmDozerId) {
     const target = ArmDozers.find(v => v.id === armdozerId);
     if (!target) {
@@ -50,5 +55,10 @@ export class ArmdozerStatus {
     }
 
     this._name.innerText = target.name;
+    this._status.innerText = statusTemplate(target);
   }
+}
+
+function statusTemplate(armdozer: Armdozer): string {
+  return `HP:${armdozer.maxHp} 攻撃: ${armdozer.power} 機動:${armdozer.speed}`;
 }
