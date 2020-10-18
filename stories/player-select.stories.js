@@ -33,7 +33,7 @@ export const armdozerSelector: DOMStubStory = domStub(resources => {
     ArmDozerIdList.WING_DOZER,
     ArmDozerIdList.LIGHTNING_DOZER,
   ];
-  const component = new ArmdozerSelector(resources, armdozerIds);
+  const component = new ArmdozerSelector(resources, armdozerIds, ArmDozerIdList.SHIN_BRAVER);
   return component.getRootHTMLElement();
 });
 

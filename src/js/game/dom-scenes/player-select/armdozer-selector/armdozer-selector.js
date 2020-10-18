@@ -23,7 +23,7 @@ export class ArmdozerSelector {
   _armdozerIcons: ArmdozerIcon[];
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
-  _currentValue: ArmDozerId;
+  _armdozerId: ArmDozerId;
   _change: Subject<ArmDozerId>;
   _decide: Subject<ArmDozerId>;
   _subscriptions: Subscription[];
@@ -33,15 +33,16 @@ export class ArmdozerSelector {
    *
    * @param resources リソース管理オブジェクト
    * @param armDozerIds アームドーザIDリスト
+   * @param initialArmdozerId アームドーザID初期値
    */
-  constructor(resources: Resources, armDozerIds: ArmDozerId[]) {
+  constructor(resources: Resources, armDozerIds: ArmDozerId[], initialArmdozerId: ArmDozerId) {
     const statusId = domUuid();
     const okButtonId = domUuid();
     const iconsId = domUuid();
 
     this._change = new Subject<ArmDozerId>();
     this._decide = new Subject<ArmDozerId>();
-    this._currentValue = armDozerIds[0];
+    this._armdozerId = initialArmdozerId;
 
     this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
@@ -61,6 +62,7 @@ export class ArmdozerSelector {
     const status = this._root.querySelector(`[data-id="${statusId}"]`)
       ?? document.createElement('div');
     this._armdozerStatus = new ArmdozerStatus();
+    this._armdozerStatus.switch(this._armdozerId);
     status.appendChild(this._armdozerStatus.getRootHTMLElement());
 
     const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
@@ -153,13 +155,14 @@ export class ArmdozerSelector {
    * @return 処理結果
    */
   _onArmdozerSelect(icon: ArmdozerIcon): void {
-    if (this._currentValue === icon.armDozerId) {
+    if (this._armdozerId === icon.armDozerId) {
       return;
     }
 
     this._changeValueSound.play();
-    this._currentValue = icon.armDozerId;
-    this._change.next(this._currentValue);
+    this._armdozerStatus.switch(icon.armDozerId);
+    this._armdozerId = icon.armDozerId;
+    this._change.next(this._armdozerId);
   }
 
   /**
@@ -167,6 +170,6 @@ export class ArmdozerSelector {
    */
   _onOkButtonPush(): void {
     this._decideSound.play();
-    this._decide.next(this._currentValue);
+    this._decide.next(this._armdozerId);
   }
 }

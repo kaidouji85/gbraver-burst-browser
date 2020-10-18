@@ -76,7 +76,7 @@ export class PlayerSelect implements DOMScene {
     const selector = this._root.querySelector(`[data-id="${selectorId}"]`)
       ?? document.createElement('div');
 
-    this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds);
+    this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds, this._armdozerId);
     selector.appendChild(this._armdozerSelector.getRootHTMLElement());
 
     this._pilotSelector = new PilotSelector(resources, pilotIds);
