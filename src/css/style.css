@@ -354,7 +354,7 @@
 
 .player-select__armdozer-selector__description__status {
     margin-right: calc(var(--responsive-font-size) * 2);
-    width: calc(var(--responsive-font-size) * 20);
+    width: calc(var(--responsive-font-size) * 25);
 }
 
 .player-select__armdozer-selector__description__ok-button {
