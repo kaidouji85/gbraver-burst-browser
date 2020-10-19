@@ -6,6 +6,8 @@ import {PilotIcon} from "./pilot-icon";
 import {Observable, Subject, Subscription} from "rxjs";
 import {waitTime} from "../../../../wait/wait-time";
 import {domUuid} from "../../../../uuid/dom-uuid";
+import {PilotStatus} from "./pilot-status";
+import {replaceDOM} from "../../../../dom/replace-dom";
 
 /**
  * ルート要素のclass名
@@ -18,6 +20,7 @@ export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
 export class PilotSelector {
   _root: HTMLElement;
   _canOperate: boolean;
+  _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
   _pilotSelected: Subject<PilotId>;
   _subscriptions: Subscription[];
@@ -29,19 +32,25 @@ export class PilotSelector {
    * @param pilotIds 選択可能なパイロットIDリスト
    */
   constructor(resources: Resources, pilotIds: PilotId[]) {
+    const dummyStatusId = domUuid();
     const iconsId = domUuid();
 
     this._canOperate = true;
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
-      <div class="${ROOT_CLASS_NAME}__status"></div>
+      <div data-id="${dummyStatusId}"></div>
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
       <div class="${ROOT_CLASS_NAME}__controllers">
       <button class="${ROOT_CLASS_NAME}__controllers__prev-button"">戻る</button>
       <button class="${ROOT_CLASS_NAME}__controllers__ok-button">これで出撃</button>
       </div>
     `;
+    
+    const dummyStatus = this._root.querySelector(`[data-id="${dummyStatusId}"]`)
+      ?? document.createElement('div');
+    this._pilotStatus = new PilotStatus();
+    replaceDOM(dummyStatus, this._pilotStatus.getRootHTMLElement());
 
     const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
       ?? document.createElement('div');
