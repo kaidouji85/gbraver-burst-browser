@@ -13,5 +13,5 @@ export function replaceDOM(oldElement: HTMLElement, newElement: HTMLElement): vo
     return;
   }
 
-  parent.replaceChild(oldElement, newElement);
+  parent.replaceChild(newElement, oldElement);
 }
