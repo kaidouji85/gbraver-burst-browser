@@ -17,6 +17,10 @@ export class PilotStatus {
   constructor() {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
+    this._root.innerHTML = `
+      <div class="${ROOT_CLASS_NAME}__name">シンヤ</div>
+      <div class="${ROOT_CLASS_NAME}__skill">スキル バッテリーを2回復</div>
+    `;
   }
 
   /**
