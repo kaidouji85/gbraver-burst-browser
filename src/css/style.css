@@ -321,12 +321,15 @@
     width: var(--width);
 }
 
+/* TODO シンヤ専用のスタイルクラスを生成する */
 .player-select__pilot-bust-shot {
-    --width:  calc(var(--vh) * 70);
+    --width:  calc(var(--vh) * 120);
+    --height: var(--width);
     position: absolute;
-    top: 0;
-    left: calc(50vw - var(--width)/2  - var(--vh)*20);
+    left: calc(100vw - var(--width) * 0.8);
+    top: calc(100 * var(--vh) - var(--height) * 0.8);
     width: var(--width);
+    height: var(--height);
 }
 
 .player-select__selector {
@@ -341,14 +344,6 @@
 
 .player-select__armdozer-selector--hidden {
     display: none;
-}
-
-.player-select__armdozer-selector__status {
-    margin-left: 0.5em;
-}
-
-.player-select__armdozer-selector__controllers {
-    margin-left: 0.5em;
 }
 
 .player-select__armdozer-selector__controllers__ok-button {
@@ -390,7 +385,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 75vw;
+    width: 50vw;
 }
 
 .player-select__armdozer-icon {
@@ -400,8 +395,6 @@
 .player-select__armdozer-icon__image {
     width: 100%;
     height: auto;
-    /* height: calc(var(--vh)*30);
-    margin: 0.5em; */
 }
 
 .player-select__pilot-selector {

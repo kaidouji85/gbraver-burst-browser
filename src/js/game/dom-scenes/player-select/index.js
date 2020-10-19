@@ -71,6 +71,7 @@ export class PlayerSelect implements DOMScene {
     working.appendChild(this._armdozerBustShot.getRootHTMLElement());
 
     this._pilotBustShot = new PilotBustShot(resources);
+    this._pilotBustShot.shinya(); // TODO 開発が終わったら消す
     working.appendChild(this._pilotBustShot.getRootHTMLElement());
 
     const selector = this._root.querySelector(`[data-id="${selectorId}"]`)

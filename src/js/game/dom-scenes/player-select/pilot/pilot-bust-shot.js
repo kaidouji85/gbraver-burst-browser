@@ -39,7 +39,7 @@ export class PilotBustShot {
    */
   shinya(): void {
     this._root.className = ROOT_CLASS_NAME;
-    this._root.src = `${this._resources.rootPath.get()}/pilot/shinya/bust-shot.png`;
+    this._root.src = `${this._resources.rootPath.get()}/pilot/shinya/skill-cutin.png`;
   }
 
   /**
