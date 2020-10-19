@@ -9,6 +9,7 @@ import {pushDOMStream} from "../../../../action/push/push-dom";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {Howl} from 'howler';
 import {ArmdozerStatus} from "./armdozer-status";
+import {replaceDOM} from "../../../../dom/replace-dom";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -36,7 +37,7 @@ export class ArmdozerSelector {
    * @param initialArmdozerId アームドーザID初期値
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[], initialArmdozerId: ArmDozerId) {
-    const statusId = domUuid();
+    const dummyStatusId = domUuid();
     const okButtonId = domUuid();
     const iconsId = domUuid();
 
@@ -53,7 +54,7 @@ export class ArmdozerSelector {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
-      <div class="${ROOT_CLASS_NAME}__status" data-id="${statusId}"></div>
+      <div data-id="${dummyStatusId}"></div>
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
       <div class="${ROOT_CLASS_NAME}__controllers">
         <button class="${ROOT_CLASS_NAME}__controllers__prev-button"">戻る</button>
@@ -61,11 +62,11 @@ export class ArmdozerSelector {
       </div>
       
     `;
-    const status = this._root.querySelector(`[data-id="${statusId}"]`)
+    const dummyStatus = this._root.querySelector(`[data-id="${dummyStatusId}"]`)
       ?? document.createElement('div');
     this._armdozerStatus = new ArmdozerStatus();
     this._armdozerStatus.switch(this._armdozerId);
-    status.appendChild(this._armdozerStatus.getRootHTMLElement());
+    replaceDOM(dummyStatus, this._armdozerStatus.getRootHTMLElement());
 
     const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
       ?? document.createElement('div');
