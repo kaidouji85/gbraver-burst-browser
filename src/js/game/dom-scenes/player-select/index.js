@@ -126,6 +126,7 @@ export class PlayerSelect implements DOMScene {
     await Promise.all([
       this._armdozerBustShot.waitUntilLoaded(),
       this._armdozerSelector.waitUntilLoaded(),
+      this._pilotBustShot.waitUnlillLoaded(),
       this._pilotSelector.waitUntilLoaded()
     ]);
   }

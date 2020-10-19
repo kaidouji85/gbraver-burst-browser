@@ -72,4 +72,15 @@ export class PilotBustShotContainer {
       v.bustShot.hidden();
     });
   }
+
+  /**
+   * リソース読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  async waitUnlillLoaded(): Promise<void> {
+    await Promise.all(
+      this._bustShots.map(v => v.bustShot.waitUntilLoaded())
+    );
+  }
 }
