@@ -390,12 +390,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 75vw;
 }
 
-.player-select__armdozer__icon {
-    object-fit: cover;
-    height: calc(var(--vh)*30);
-    margin: 0.5em;
+.player-select__armdozer-icon {
+    flex: 1 1;
+}
+
+.player-select__armdozer-icon__image {
+    width: 100%;
+    height: auto;
+    /* height: calc(var(--vh)*30);
+    margin: 0.5em; */
 }
 
 .player-select__pilot-selector {

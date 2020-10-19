@@ -17,7 +17,8 @@ import {SOUND_IDS} from "../../../../resource/sound";
 export class ArmdozerIcon {
   armDozerId: ArmDozerId;
   _pushButton: typeof Howl;
-  _root: HTMLImageElement;
+  _root: HTMLElement;
+  _image: HTMLImageElement;
   _isImageLoaded: Promise<void>;
   _select: Observable<PushDOM>;
 
@@ -34,13 +35,18 @@ export class ArmdozerIcon {
       .find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
 
-    this._root = document.createElement('img');
-    this._root.className = 'player-select__armdozer__icon';
-    this._select = pushDOMStream(this._root)
-    this._isImageLoaded = waitElementLoaded(this._root);
+    this._root = document.createElement('div');
+    this._root.className = 'player-select__armdozer-icon';
+
+    this._image = document.createElement('img');
+    this._image.className = 'player-select__armdozer-icon__image';
+    this._root.appendChild(this._image);
+    
+    this._select = pushDOMStream(this._image)
+    this._isImageLoaded = waitElementLoaded(this._image);
     const pathId = getArmdozerIconPathId(armDozerId);
     const iconResource = resources.paths.find(v => v.id === pathId);
-    this._root.src = iconResource
+    this._image.src = iconResource
       ? iconResource.path
       : '';
   }
@@ -70,7 +76,7 @@ export class ArmdozerIcon {
    */
   selected(): Promise<void> {
     this._pushButton.play();
-    const animation = this._root.animate([
+    const animation = this._image.animate([
       {transform: 'scale(1)'},
       {transform: 'scale(1.1)'},
       {transform: 'scale(1)'},
