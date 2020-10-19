@@ -7,7 +7,7 @@ import {Observable, Subject, Subscription} from "rxjs";
 import {PilotSelector} from "./pilot-selector/pilot-selector";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {ArmdozerBustShotContainer} from "./armdozer-bust-shot/armdozer-bust-shot-container";
-import {PilotBustShot} from "./pilot-bust-shot/pilot-bust-shot";
+import {PilotBustShotContainer} from "./pilot-bust-shot/pilot-bust-shot-container";
 import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import type {DOMScene} from "../dom-scene";
 
@@ -25,7 +25,7 @@ type PlayerDecide = {
 export class PlayerSelect implements DOMScene {
   _root: HTMLElement;
   _armdozerBustShot: ArmdozerBustShotContainer;
-  _pilotBustShot: PilotBustShot;
+  _pilotBustShot: PilotBustShotContainer;
   _armdozerSelector: ArmdozerSelector;
   _pilotSelector: PilotSelector;
   _armdozerId: ArmDozerId;
@@ -70,8 +70,8 @@ export class PlayerSelect implements DOMScene {
     this._armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds, this._armdozerId);
     working.appendChild(this._armdozerBustShot.getRootHTMLElement());
 
-    this._pilotBustShot = new PilotBustShot(resources);
-    this._pilotBustShot.shinya(); // TODO 開発が終わったら消す
+    this._pilotBustShot = new PilotBustShotContainer(resources);
+    this._pilotBustShot.hidden();
     working.appendChild(this._pilotBustShot.getRootHTMLElement());
 
     const selector = this._root.querySelector(`[data-id="${selectorId}"]`)
@@ -156,6 +156,7 @@ export class PlayerSelect implements DOMScene {
   _onArmdozerDecided(armdozerId: ArmDozerId): void {
     this._armdozerId = armdozerId;
     this._pilotSelector.show();
+    this._pilotBustShot.switch(armdozerId);
     this._armdozerSelector.hidden();
   }
 

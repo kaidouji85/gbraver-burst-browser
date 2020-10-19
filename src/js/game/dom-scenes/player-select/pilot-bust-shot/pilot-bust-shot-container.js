@@ -1,6 +1,7 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
+import type {PilotId} from 'gbraver-burst-core';
 
 /**
  * ルート要素のクラス名
@@ -10,7 +11,7 @@ export const ROOT_CLASS_NAME = 'player-select__pilot-bust-shot';
 /**
  * パイロット バストショット
  */
-export class PilotBustShot {
+export class PilotBustShotContainer {
   _resources: Resources;
   _root: HTMLImageElement;
 
@@ -35,9 +36,12 @@ export class PilotBustShot {
   }
 
   /**
-   * シンヤを表示
+   * パイロットカットインを切り替える
+   * 
+   * @param pilotId 切り替えるパイロットID
    */
-  shinya(): void {
+  switch(pilotId: PilotId): void {
+    // TODO バストショットクラスを生成する
     this._root.className = ROOT_CLASS_NAME;
     this._root.src = `${this._resources.rootPath.get()}/pilot/shinya/skill-cutin.png`;
   }
