@@ -4,7 +4,6 @@ import type {Resources} from "../../../../resource";
 import type {PilotId} from "gbraver-burst-core";
 import {PilotIcon} from "./pilot-icon";
 import {Observable, Subject, Subscription} from "rxjs";
-import {waitTime} from "../../../../wait/wait-time";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {PilotStatus} from "./pilot-status";
 import {replaceDOM} from "../../../../dom/replace-dom";
@@ -60,9 +59,9 @@ export class PilotSelector {
     });
     
     this._subscriptions = this._pilotIcons.map(icon =>
-      icon.selectedNotifier().subscribe(() =>
-        this._onPilotSelect(icon)
-      ));
+      icon.selectedNotifier().subscribe(() =>{
+          this._onPilotChange(icon.pilotId);
+      }));
 
     this._pilotSelected = new Subject();
   }
@@ -120,21 +119,11 @@ export class PilotSelector {
   }
 
   /**
-   * パイロットが選択された際の処理
+   * パイロットが変更された時の処理
    *
-   * @param icon 選択されたパイロットアイコン
-   * @return 処理結果
+   * @param pilotId 変更したパイロットのID
    */
-  async _onPilotSelect(icon: PilotIcon): Promise<void> {
-    if (!this._canOperate) {
-      return;
-    }
-    this._canOperate = false;
-
-    await icon.selected();
-    await waitTime(1000);
-    this._pilotSelected.next(icon.pilotId);
-
-    this._canOperate = true;
+  _onPilotChange(pilotId: PilotId): void {
+    this._pilotStatus.switch(pilotId);
   }
 }
