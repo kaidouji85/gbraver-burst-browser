@@ -38,6 +38,7 @@ export const PathIds = {
   WING_DOZER_ICON: 'WING_DOZER_ICON',
   WING_DOZER_BUST_SHOT: 'WING_DOZER_BUST_SHOT',
   SHINYA_ICON: 'SHINYA_ICON',
+  SHINYA_SKILL_CUTIN: 'SHINYA_SKILL_CUTIN',
   GAI_ICON: 'GAI_ICON',
   END: 'END',
   END_CARD: 'END_CARD',
@@ -92,6 +93,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.SHINYA_ICON,
     path: root => `${root.get()}/pilot/shinya/player-select.png`
+  },
+  {
+    id: PathIds.SHINYA_SKILL_CUTIN,
+    path: root => `${root.get()}/pilot/shinya/skill-cutin.png`
   },
   {
     id: PathIds.GAI_ICON,

@@ -47,14 +47,14 @@ export class PilotBustShot {
    * 非表示にする
    */
   hidden(): void {
-    this._image.style.opacity = 0;
+    this._image.style.opacity = '0';
   }
 
   /**
    * 表示する
    */
   show(): void {
-    this._image.opacity = 1;
+    this._image.style.opacity = '1';
   }
 
   /**

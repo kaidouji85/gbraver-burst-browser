@@ -321,8 +321,7 @@
     width: var(--width);
 }
 
-/* TODO シンヤ専用のスタイルクラスを生成する */
-.player-select__pilot-bust-shot {
+.player-select__pilot-bust-shot__shinya {
     --width:  calc(var(--vh) * 100);
     --height: var(--width);
     position: absolute;

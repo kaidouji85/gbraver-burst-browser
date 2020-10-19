@@ -2,28 +2,38 @@
 
 import type {Resources} from "../../../../resource";
 import type {PilotId} from 'gbraver-burst-core';
+import {PilotBustShot} from "./pilot-bust-shot";
+import {createPilotBustShot} from "./create-bust-shot";
 
 /**
- * ルート要素のクラス名
+ * バストショットとパイロットIDの紐づけ
  */
-export const ROOT_CLASS_NAME = 'player-select__pilot-bust-shot';
+type BustShot = {
+  pilotId: PilotId;
+  bustShot: PilotBustShot;
+};
 
 /**
  * パイロット バストショット
  */
 export class PilotBustShotContainer {
-  _resources: Resources;
-  _root: HTMLImageElement;
+  _bustShots: BustShot[];
+  _root: HTMLElement;
 
   /**
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
    */
-  constructor(resources: Resources) {
-    this._resources = resources;
-    this._root = document.createElement('img');
-    this.hidden();
+  constructor(resources: Resources, pilotIds: PilotId[]) {
+    this._root = document.createElement('div');
+    this._bustShots = pilotIds.map(v => ({
+      pilotId: v,
+      bustShot: createPilotBustShot(resources, v)
+    }));
+    this._bustShots.forEach(v => {
+      this._root.appendChild(v.bustShot.getRootHTMLElement());
+    });
   }
 
   /**
@@ -41,16 +51,25 @@ export class PilotBustShotContainer {
    * @param pilotId 切り替えるパイロットID
    */
   switch(pilotId: PilotId): void {
-    // TODO バストショットクラスを生成する
-    this._root.className = ROOT_CLASS_NAME;
-    this._root.src = `${this._resources.rootPath.get()}/pilot/shinya/skill-cutin.png`;
+    const target = this._bustShots.find(v => v.pilotId === pilotId);
+    if (!target) {
+      return;
+    }
+
+    const others = this._bustShots.filter(v => v !== target);
+    others.forEach(v => {
+      v.bustShot.hidden();
+    });
+    target.bustShot.show();
+    target.bustShot.move();
   }
 
   /**
    * 非表示にする
    */
   hidden(): void {
-    this._root.className = `${ROOT_CLASS_NAME}__hidden`;
-    this._root.src = '';
+    this._bustShots.forEach(v => {
+      v.bustShot.hidden();
+    });
   }
 }
