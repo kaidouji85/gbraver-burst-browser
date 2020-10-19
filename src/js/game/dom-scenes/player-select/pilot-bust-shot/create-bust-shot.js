@@ -22,6 +22,8 @@ export function createPilotBustShot(resources: Resources, pilotId: PilotId): Pil
   switch (pilotId) {
     case PilotIds.SHINYA:
       return shinyaBustShot(resources);
+    case PilotIds.GAI:
+      return gaiBustShot(resources);  
     default:
       return shinyaBustShot(resources);
   }
@@ -37,5 +39,18 @@ function shinyaBustShot(resources: Resources): PilotBustShot {
   const path = resources.paths.find(v => v.id === PathIds.SHINYA_SKILL_CUTIN)
     ?.path ?? '';
   const className = `${ROOT_CLASS_NAME}__shinya`;  
+  return new PilotBustShot(path, className);
+}
+
+/**
+ * ガイのバストショットを生成する
+ * 
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果 
+ */
+function gaiBustShot(resources: Resources): PilotBustShot {
+  const path = resources.paths.find(v => v.id === PathIds.GAI_SKILL_CUTIN)
+  ?.path ?? '';
+  const className = `${ROOT_CLASS_NAME}__gai`;  
   return new PilotBustShot(path, className);
 }

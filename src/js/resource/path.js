@@ -40,6 +40,7 @@ export const PathIds = {
   SHINYA_ICON: 'SHINYA_ICON',
   SHINYA_SKILL_CUTIN: 'SHINYA_SKILL_CUTIN',
   GAI_ICON: 'GAI_ICON',
+  GAI_SKILL_CUTIN: 'GAI_SKILL_CUTIN',
   END: 'END',
   END_CARD: 'END_CARD',
   CLOSER: 'CLOSER',
@@ -101,6 +102,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.GAI_ICON,
     path: root => `${root.get()}/pilot/gai/player-select.png`
+  },
+  {
+    id: PathIds.GAI_SKILL_CUTIN,
+    path: root => `${root.get()}/pilot/gai/skill-cutin.png`
   },
   {
     id: PathIds.END,

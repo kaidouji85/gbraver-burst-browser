@@ -331,6 +331,16 @@
     height: var(--height);
 }
 
+.player-select__pilot-bust-shot__gai {
+    --width: calc(var(--vh) * 100);
+    --height: var(--width);
+    position: absolute;
+    left: calc(100vw - var(--width) * 0.9);
+    top: calc(100 * var(--vh) - var(--height) * 0.9);
+    width: var(--width);
+    height: var(--height);
+}
+
 .player-select__selector {
     z-index: var(--selector-zindex);
 }
