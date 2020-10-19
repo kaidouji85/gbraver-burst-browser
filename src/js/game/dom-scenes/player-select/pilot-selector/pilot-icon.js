@@ -11,13 +11,15 @@ import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {getPilotIconPathId} from "../../../../path/pilot-icon-path";
 
+const ROOT_CLASS_NAME = 'player-select__pilot-icon';
+
 /**
  * パイロットアイコン
  */
 export class PilotIcon {
   pilotId: ArmDozerId;
   _pushButton: typeof Howl;
-  _root: HTMLImageElement;
+  _root: HTMLElement;
   _isImageLoaded: Promise<void>;
   _select: Observable<PushDOM>;
 
@@ -29,20 +31,23 @@ export class PilotIcon {
    */
   constructor(resources: Resources, pilotId: PilotId) {
     this.pilotId = pilotId;
-
     this._pushButton = resources.sounds
       .find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
 
-    this._root = document.createElement('img');
-    this._root.className = 'player-select__pilot__icon';
-    this._select = pushDOMStream(this._root)
-    this._isImageLoaded = waitElementLoaded(this._root);
+    this._root = document.createElement('div');
+    this._root.className = ROOT_CLASS_NAME;
+
+    const image = document.createElement('img');
+    image.className = `${ROOT_CLASS_NAME}__image`;
+    this._select = pushDOMStream(image)
+    this._isImageLoaded = waitElementLoaded(image);
     const pathId = getPilotIconPathId(pilotId);
     const iconResource = resources.paths.find(v => v.id === pathId);
-    this._root.src = iconResource
+    image.src = iconResource
       ? iconResource.path
       : '';
+    this._root.appendChild(image);
   }
 
   /**

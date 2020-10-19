@@ -424,12 +424,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 25vw;
 }
 
-.player-select__pilot__icon {
-    object-fit: cover;
-    width: calc(var(--vh)*30);
-    margin: 0.5em;
+.player-select__pilot-icon {
+    flex: 1 1;
+}
+
+.player-select__pilot-icon__image {
+    width: 100%;
+    height: auto;
 }
 
 /**
