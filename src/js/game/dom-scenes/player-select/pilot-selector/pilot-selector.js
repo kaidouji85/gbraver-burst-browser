@@ -5,6 +5,7 @@ import type {PilotId} from "gbraver-burst-core";
 import {PilotIcon} from "./pilot-icon";
 import {Observable, Subject, Subscription} from "rxjs";
 import {waitTime} from "../../../../wait/wait-time";
+import {domUuid} from "../../../../uuid/dom-uuid";
 
 /**
  * ルート要素のclass名
@@ -28,13 +29,25 @@ export class PilotSelector {
    * @param pilotIds 選択可能なパイロットIDリスト
    */
   constructor(resources: Resources, pilotIds: PilotId[]) {
-    this._canOperate = true;
+    const iconsId = domUuid();
 
+    this._canOperate = true;
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
+    this._root.innerHTML = `
+      <div class="${ROOT_CLASS_NAME}__status"></div>
+      <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
+      <div class="${ROOT_CLASS_NAME}__controllers">
+      <button class="${ROOT_CLASS_NAME}__controllers__prev-button"">戻る</button>
+      <button class="${ROOT_CLASS_NAME}__controllers__ok-button">これで出撃</button>
+      </div>
+    `;
+
+    const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
+      ?? document.createElement('div');
     this._pilotIcons = pilotIds.map(v => new PilotIcon(resources, v));
     this._pilotIcons.forEach(v => {
-      this._root.appendChild(v.getRootHTMLElement());
+      icons.appendChild(v.getRootHTMLElement());
     });
     
     this._subscriptions = this._pilotIcons.map(icon =>
