@@ -19,11 +19,12 @@ export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
  * パイロットセレクタ
  */
 export class PilotSelector {
+  _pilotId: PilotId;
+  _canOperate: boolean;
   _root: HTMLElement;
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
   _okButton: OkButton;
-  _pilotId: PilotId;
   _change: Subject<PilotId>;
   _decide: Subject<PilotId>;
   _prev: Subject<void>;
@@ -38,6 +39,8 @@ export class PilotSelector {
    */
   constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
     this._pilotId = initialPilotId;
+    this._canOperate = true;
+
     this._change = new Subject();
     this._decide = new Subject();
     this._prev = new Subject();
@@ -180,8 +183,16 @@ export class PilotSelector {
   /**
    * OKボタンを押した時の処理
    */
-  _onOkButtonPush(): void {
+  async _onOkButtonPush(): Promise<void> {
+    if (!this._canOperate) {
+      return;
+    }
+    this._canOperate = false;
+
+    await this._okButton.pop();
     this._decide.next(this._pilotId);
+    
+    this._canOperate = true;
   }
 
   /**

@@ -199,10 +199,9 @@ export class ArmdozerSelector {
     }
     this._canOperate = false;
 
-    this._decide.next(this._armdozerId);
     this._decideSound.play();
-    await this._okButton.pop();
-    
+    this._decide.next(this._armdozerId);
+
     this._canOperate = true;
   }
 
