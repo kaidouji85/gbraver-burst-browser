@@ -304,7 +304,7 @@
     --width: calc(var(--vh) * 200);
     position: absolute;
     top: calc(var(--vh) * -10);
-    left: calc(100vw - 0.9 * var(--width));
+    left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
     width: var(--width);
 }
 
@@ -312,7 +312,7 @@
     --width: calc(var(--vh) * 200);
     position: absolute;
     top: calc(var(--vh) * -25);
-    left: calc(100vw - 0.9 * var(--width));
+    left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
     width: var(--width);
 }
 
@@ -320,7 +320,7 @@
     --width: calc(var(--vh) * 200);
     position: absolute;
     top: calc(var(--vh) * -25);
-    left: calc(100vw - 0.9 * var(--width));
+    left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
     width: var(--width);
 }
 
@@ -328,7 +328,7 @@
     --width: calc(var(--vh) * 200);
     position: absolute;
     top: calc(var(--vh) * -40);
-    left: calc(100vw - 0.9 * var(--width));
+    left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
     width: var(--width);
 }
 
@@ -336,7 +336,7 @@
     --width:  calc(var(--vh) * 100);
     --height: var(--width);
     position: absolute;
-    left: calc(100vw - var(--width) * 0.8);
+    left: calc(100vw - var(--width) * 0.8  - var(--safe-area-right));
     top: calc(100 * var(--vh) - var(--height) * 0.8);
     width: var(--width);
     height: var(--height);
@@ -346,7 +346,7 @@
     --width: calc(var(--vh) * 100);
     --height: var(--width);
     position: absolute;
-    left: calc(100vw - var(--width) * 0.9);
+    left: calc(100vw - var(--width) * 0.9 - var(--safe-area-right));
     top: calc(100 * var(--vh) - var(--height) * 0.9);
     width: var(--width);
     height: var(--height);
