@@ -7,6 +7,7 @@ import {Observable, Subject, Subscription} from "rxjs";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {PilotStatus} from "./pilot-status";
 import {replaceDOM} from "../../../../dom/replace-dom";
+import {pushDOMStream} from "../../../../action/push/push-dom";
 
 /**
  * ルート要素のclass名
@@ -39,6 +40,7 @@ export class PilotSelector {
 
     const dummyStatusId = domUuid();
     const iconsId = domUuid();
+    const okButtonId = domUuid();
 
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
@@ -47,7 +49,7 @@ export class PilotSelector {
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
       <div class="${ROOT_CLASS_NAME}__controllers">
       <button class="${ROOT_CLASS_NAME}__controllers__prev-button"">戻る</button>
-      <button class="${ROOT_CLASS_NAME}__controllers__ok-button">これで出撃</button>
+      <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}" >これを載せる</button>
       </div>
     `;
     
@@ -63,11 +65,19 @@ export class PilotSelector {
     this._pilotIcons.forEach(v => {
       icons.appendChild(v.getRootHTMLElement());
     });
+
+    const okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
+      ?? document.createElement('div');
     
-    this._subscriptions = this._pilotIcons.map(icon =>
-      icon.selectedNotifier().subscribe(() =>{
+    this._subscriptions = [
+      ...this._pilotIcons.map(icon =>
+        icon.selectedNotifier().subscribe(() =>{
           this._onPilotChange(icon.pilotId);
-      }));
+        })),
+      pushDOMStream(okButton).subscribe(() => {
+        this._onOkButtonPush();
+      })
+    ];
   }
 
   /**
@@ -144,5 +154,13 @@ export class PilotSelector {
     this._pilotId =pilotId;
     this._pilotStatus.switch(pilotId);
     this._change.next(pilotId);
+  }
+
+
+  /**
+   * OKボタンを押した時の処理
+   */
+  _onOkButtonPush(): void {
+    this._decide.next(this._pilotId);
   }
 }
