@@ -93,7 +93,7 @@ export class PlayerSelect implements DOMScene {
       this._armdozerSelector.decideNotifier().subscribe(v => {
         this._onArmdozerDecided(v);
       }),
-      this._armdozerSelector.prevNotifier().subscribe(v => {
+      this._armdozerSelector.prevNotifier().subscribe(() => {
         this._onArmdozerSelectorPrev();
       }),
       this._pilotSelector.changeNotifier().subscribe(v => {
