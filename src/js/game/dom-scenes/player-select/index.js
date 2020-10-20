@@ -80,7 +80,7 @@ export class PlayerSelect implements DOMScene {
     this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds, this._armdozerId);
     selector.appendChild(this._armdozerSelector.getRootHTMLElement());
 
-    this._pilotSelector = new PilotSelector(resources, pilotIds);
+    this._pilotSelector = new PilotSelector(resources, pilotIds, this._pilotId);
     this._pilotSelector.hidden();
     selector.appendChild(this._pilotSelector.getRootHTMLElement());
 
@@ -158,6 +158,7 @@ export class PlayerSelect implements DOMScene {
     this._armdozerId = armdozerId;
     this._pilotBustShot.switch(this._pilotId);
     this._pilotSelector.show();
+
     this._armdozerSelector.hidden();
   }
 

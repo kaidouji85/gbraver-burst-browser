@@ -42,6 +42,6 @@ export const pilotSelector: DOMStubStory = domStub(resources => {
     PilotIds.SHINYA,
     PilotIds.GAI,
   ];
-  const component = new PilotSelector(resources, pilotIds);
+  const component = new PilotSelector(resources, pilotIds, PilotIds.SHINYA);
   return component.getRootHTMLElement();
 });

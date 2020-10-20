@@ -18,9 +18,9 @@ export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
  */
 export class PilotSelector {
   _root: HTMLElement;
-  _canOperate: boolean;
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
+  _pilotId: PilotId;
   _pilotSelected: Subject<PilotId>;
   _subscriptions: Subscription[];
 
@@ -29,12 +29,14 @@ export class PilotSelector {
    *
    * @param resources リソース管理オブジェクト
    * @param pilotIds 選択可能なパイロットIDリスト
+   * @param initialPilotId パイロットIDの初期値
    */
-  constructor(resources: Resources, pilotIds: PilotId[]) {
+  constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
+    this._pilotId = initialPilotId;
+
     const dummyStatusId = domUuid();
     const iconsId = domUuid();
 
-    this._canOperate = true;
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
@@ -49,6 +51,7 @@ export class PilotSelector {
     const dummyStatus = this._root.querySelector(`[data-id="${dummyStatusId}"]`)
       ?? document.createElement('div');
     this._pilotStatus = new PilotStatus();
+    this._pilotStatus.switch(this._pilotId);
     replaceDOM(dummyStatus, this._pilotStatus.getRootHTMLElement());
 
     const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
