@@ -180,6 +180,10 @@ export class ArmdozerSelector {
    * @return 処理結果
    */
   _onArmdozerSelect(icon: ArmdozerIcon): void {
+    if (!this._canOperate) {
+      return;
+    }
+
     if (this._armdozerId === icon.armDozerId) {
       return;
     }
@@ -209,6 +213,7 @@ export class ArmdozerSelector {
    * 戻るボタンが押された時の処理
    */
   _onPrevButtonPush(): void {
+    this._changeValueSound.play();
     this._prev.next();
   }
 }

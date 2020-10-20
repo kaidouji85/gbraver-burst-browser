@@ -9,6 +9,8 @@ import {PilotStatus} from "./pilot-status";
 import {replaceDOM} from "../../../../dom/replace-dom";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {OkButton} from "../controllers/ok-button";
+import {Howl} from "howler";
+import {SOUND_IDS} from "../../../../resource/sound";
 
 /**
  * ルート要素のclass名
@@ -25,6 +27,8 @@ export class PilotSelector {
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
   _okButton: OkButton;
+  _changeValueSound: typeof Howl;
+  _decideSound: typeof Howl;
   _change: Subject<PilotId>;
   _decide: Subject<PilotId>;
   _prev: Subject<void>;
@@ -44,6 +48,11 @@ export class PilotSelector {
     this._change = new Subject();
     this._decide = new Subject();
     this._prev = new Subject();
+
+    this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
+    this._decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?.sound ?? new Howl();
 
     const dummyStatusId = domUuid();
     const iconsId = domUuid();
@@ -171,10 +180,15 @@ export class PilotSelector {
    * @param pilotId 変更したパイロットのID
    */
   _onPilotChange(pilotId: PilotId): void {
+    if (!this._canOperate) {
+      return;
+    }
+
     if (this._pilotId === pilotId) {
       return;
     }
 
+    this._changeValueSound.play();
     this._pilotId =pilotId;
     this._pilotStatus.switch(pilotId);
     this._change.next(pilotId);
@@ -189,6 +203,7 @@ export class PilotSelector {
     }
     this._canOperate = false;
 
+    this._decideSound.play();
     await this._okButton.pop();
     this._decide.next(this._pilotId);
     
@@ -199,6 +214,7 @@ export class PilotSelector {
    * 戻るボタンを押した時の処理
    */
   _onPrevButtonPush(): void {
+    this._changeValueSound.play();
     this._prev.next();
   }
 }
