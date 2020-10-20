@@ -356,7 +356,8 @@
 }
 
 .player-select__armdozer-selector__controllers__ok-button,
-.player-select__pilot-selector__controllers__ok-button {
+.player-select__pilot-selector__controllers__ok-button,
+.player-select__ok-button {
     width: calc(var(--responsive-font-size) * 10);
     height: calc(var(--responsive-font-size) * 3);
     font-size: var(--responsive-font-size);

@@ -10,6 +10,7 @@ import {SOUND_IDS} from "../../../../resource/sound";
 import {Howl} from 'howler';
 import {ArmdozerStatus} from "./armdozer-status";
 import {replaceDOM} from "../../../../dom/replace-dom";
+import {OkButton} from "../controllers/ok-button";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -22,6 +23,7 @@ export class ArmdozerSelector {
   _root: HTMLElement;
   _armdozerStatus: ArmdozerStatus;
   _armdozerIcons: ArmdozerIcon[];
+  _okButton: OkButton;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
   _armdozerId: ArmDozerId;
@@ -51,7 +53,7 @@ export class ArmdozerSelector {
       ?.sound ?? new Howl();
 
     const dummyStatusId = domUuid();
-    const okButtonId = domUuid();
+    const dummyOkButtonId = domUuid();
     const prevButtonId = domUuid();
     const iconsId = domUuid();
     this._root = document.createElement('div');
@@ -61,7 +63,7 @@ export class ArmdozerSelector {
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
       <div class="${ROOT_CLASS_NAME}__controllers">
         <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${prevButtonId}">戻る</button>
-        <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}">これで出撃</button>
+        <button data-id="${dummyOkButtonId}"></button>
       </div>
       
     `;
@@ -80,8 +82,10 @@ export class ArmdozerSelector {
         icons.appendChild(element);
       });
 
-    const okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
+    const dummyOkButton = this._root.querySelector(`[data-id="${dummyOkButtonId}"]`)
       ?? document.createElement('button');
+    this._okButton = new OkButton('これで出撃');
+    replaceDOM(dummyOkButton, this._okButton.getRootHTMLElement());
 
     const prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
       ?? document.createElement('button');
@@ -91,7 +95,7 @@ export class ArmdozerSelector {
         v.selectedNotifier().subscribe(() => {
           this._onArmdozerSelect(v);
         })),
-      pushDOMStream(okButton).subscribe(() => {
+      this._okButton.pushedNotifier().subscribe(() => {
         this._onOkButtonPush();
       }),
       pushDOMStream(prevButton).subscribe(() => {
