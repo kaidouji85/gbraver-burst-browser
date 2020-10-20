@@ -1,13 +1,13 @@
 // @flow
 
 import type {Resources} from "../../../resource";
-import {ArmdozerSelector} from "./armdozer-selector/armdozer-selector";
+import {ArmdozerSelector} from "./armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {Observable, Subject, Subscription} from "rxjs";
-import {PilotSelector} from "./pilot-selector/pilot-selector";
+import {PilotSelector} from "./pilot-selector";
 import {domUuid} from "../../../uuid/dom-uuid";
-import {ArmdozerBustShotContainer} from "./armdozer-bust-shot/armdozer-bust-shot-container";
-import {PilotBustShotContainer} from "./pilot-bust-shot/pilot-bust-shot-container";
+import {ArmdozerBustShotContainer} from "./armdozer-bust-shot";
+import {PilotBustShotContainer} from "./pilot-bust-shot";
 import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import type {DOMScene} from "../dom-scene";
 

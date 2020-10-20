@@ -25,6 +25,7 @@ export class ArmdozerBustShotContainer {
    * コンストラクタ
    * @param resources リソース管理オブジェクト
    * @param armDozerIds アームドーザIDリスト
+   * @param initialArmdozerId アームドーザIDの初期値
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[], initialArmdozerId: ArmDozerId) {
     this._resources = resources;
