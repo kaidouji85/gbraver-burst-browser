@@ -24,6 +24,7 @@ export class PilotSelector {
   _pilotId: PilotId;
   _change: Subject<PilotId>;
   _decide: Subject<PilotId>;
+  _prev: Subject<void>;
   _subscriptions: Subscription[];
 
   /**
@@ -37,10 +38,12 @@ export class PilotSelector {
     this._pilotId = initialPilotId;
     this._change = new Subject();
     this._decide = new Subject();
+    this._prev = new Subject();
 
     const dummyStatusId = domUuid();
     const iconsId = domUuid();
     const okButtonId = domUuid();
+    const prevButtonId = domUuid();
 
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
@@ -48,7 +51,7 @@ export class PilotSelector {
       <div data-id="${dummyStatusId}"></div>
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
       <div class="${ROOT_CLASS_NAME}__controllers">
-      <button class="${ROOT_CLASS_NAME}__controllers__prev-button"">戻る</button>
+      <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${prevButtonId}">戻る</button>
       <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}" >これを載せる</button>
       </div>
     `;
@@ -67,7 +70,10 @@ export class PilotSelector {
     });
 
     const okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
-      ?? document.createElement('div');
+      ?? document.createElement('button');
+
+    const prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
+      ?? document.createElement('button');
     
     this._subscriptions = [
       ...this._pilotIcons.map(icon =>
@@ -76,7 +82,10 @@ export class PilotSelector {
         })),
       pushDOMStream(okButton).subscribe(() => {
         this._onOkButtonPush();
-      })
+      }),
+      pushDOMStream(prevButton).subscribe(() => {
+        this._onPrevButtonPush();
+      }),
     ];
   }
 
@@ -142,6 +151,14 @@ export class PilotSelector {
   }
 
   /**
+   * 戻る 通知
+   * @return 通知ストリーム
+   */
+  prevNotifier(): Observable<void> {
+    return this._prev;
+  }
+
+  /**
    * パイロットが変更された時の処理
    *
    * @param pilotId 変更したパイロットのID
@@ -156,11 +173,17 @@ export class PilotSelector {
     this._change.next(pilotId);
   }
 
-
   /**
    * OKボタンを押した時の処理
    */
   _onOkButtonPush(): void {
     this._decide.next(this._pilotId);
+  }
+
+  /**
+   * 戻るボタンを押した時の処理
+   */
+  _onPrevButtonPush(): void {
+    this._prev.next();
   }
 }

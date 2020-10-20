@@ -96,6 +96,9 @@ export class PlayerSelect implements DOMScene {
       }),
       this._pilotSelector.decideNotifier().subscribe(v => {
         this._onPilotDecided(v);
+      }),
+      this._pilotSelector.prevNotifier().subscribe(() => {
+        this._onPilotSelectorPrev();
       })
     ];
   }
@@ -187,5 +190,15 @@ export class PlayerSelect implements DOMScene {
       armdozerId: this._armdozerId,
       pilotId: this._pilotId
     });
+  }
+
+  /**
+   * パイロットセレクタの戻るボタンを押した時の処理
+   */
+  _onPilotSelectorPrev(): void {
+    this._pilotSelector.hidden();
+    this._pilotBustShot.hidden();
+
+    this._armdozerSelector.show();
   }
 }
