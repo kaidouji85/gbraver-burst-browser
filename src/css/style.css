@@ -421,6 +421,10 @@
     display: none;
 }
 
+.player-select__pilot-status__skill__label {
+    padding-right: 0.5em;
+}
+
 .player-select__pilot-selector__icons {
     display: flex;
     align-items: center;

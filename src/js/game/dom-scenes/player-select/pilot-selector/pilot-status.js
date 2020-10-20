@@ -2,7 +2,6 @@
 
 import type {PilotId} from "gbraver-burst-core";
 import {domUuid} from "../../../../uuid/dom-uuid";
-import {replaceDOM} from "../../../../dom/replace-dom";
 import {Pilots} from "gbraver-burst-core";
 import {pilotSkillTemplate} from "./status-template";
 
@@ -23,24 +22,21 @@ export class PilotStatus {
    * コンストラクタ
    */
   constructor() {
-    const dummyNameId = domUuid();
+    const nameId = domUuid();
     const skillId = domUuid();
 
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
-      <div data-id="${dummyNameId}"></div>
+      <div class="${ROOT_CLASS_NAME}__name" data-id="${nameId}"></div>
       <div class="${ROOT_CLASS_NAME}__skill">
-        <span class="${ROOT_CLASS_NAME}__skill__label"></span>
+        <span class="${ROOT_CLASS_NAME}__skill__label">スキル</span>
         <span class"${ROOT_CLASS_NAME}__skill__content" data-id="${skillId}"></span>
       </div>
     `;
 
-    const dummyName = this._root.querySelector(`[data-id="${dummyNameId}"]`)
+    this._name = this._root.querySelector(`[data-id="${nameId}"]`)
       ?? document.createElement('div');
-    this._name = document.createElement('div');
-    replaceDOM(dummyName, this._name);
-
     this._skill = this._root.querySelector(`[data-id="${skillId}"]`)
       ?? document.createElement('div');
   }
