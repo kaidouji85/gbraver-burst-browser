@@ -21,7 +21,8 @@ export class PilotSelector {
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
   _pilotId: PilotId;
-  _pilotSelected: Subject<PilotId>;
+  _change: Subject<PilotId>;
+  decide: Subject<PilotId>;
   _subscriptions: Subscription[];
 
   /**
@@ -33,6 +34,8 @@ export class PilotSelector {
    */
   constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
     this._pilotId = initialPilotId;
+    this._change = new Subject();
+    this.decide = new Subject();
 
     const dummyStatusId = domUuid();
     const iconsId = domUuid();
@@ -65,8 +68,6 @@ export class PilotSelector {
       icon.selectedNotifier().subscribe(() =>{
           this._onPilotChange(icon.pilotId);
       }));
-
-    this._pilotSelected = new Subject();
   }
 
   /**
@@ -113,12 +114,21 @@ export class PilotSelector {
   }
 
   /**
+   * パイロット変更通知
+   *
+   * @return 通知ストリーム
+   */
+  changeNotifier(): Observable<PilotId> {
+    return this._change;
+  }
+
+  /**
    * パイロット選択通知
    *
    * @return 通知ストリーム
    */
-  pilotSelectedNotifier(): Observable<PilotId> {
-    return this._pilotSelected;
+  decideNotifier(): Observable<PilotId> {
+    return this.decide;
   }
 
   /**
@@ -128,5 +138,6 @@ export class PilotSelector {
    */
   _onPilotChange(pilotId: PilotId): void {
     this._pilotStatus.switch(pilotId);
+    this._change.next(pilotId);
   }
 }

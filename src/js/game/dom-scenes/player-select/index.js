@@ -86,13 +86,16 @@ export class PlayerSelect implements DOMScene {
 
     this._subscriptions = [
       this._armdozerSelector.changeNotifier().subscribe(v => {
-        this._onArmdozerIconPush(v);
+        this._onArmdozerChange(v);
       }),
       this._armdozerSelector.decideNotifier().subscribe(v => {
         this._onArmdozerDecided(v);
       }),
-      this._pilotSelector.pilotSelectedNotifier().subscribe((v) => {
-        this._onPilotDecide(v);
+      this._pilotSelector.changeNotifier().subscribe(v => {
+        this._onPilotChange(v);
+      }),
+      this._pilotSelector.decideNotifier().subscribe(v => {
+        this._onPilotDecided(v);
       })
     ];
   }
@@ -141,11 +144,11 @@ export class PlayerSelect implements DOMScene {
   }
   
   /**
-   * アームドーザアイコンをクリックした時の処理
+   * アームドーザを変更した時の処理
    *
-   * @param armdozerId 選択したアームドーザID
+   * @param armdozerId 変更したアームドーザID
    */
-  _onArmdozerIconPush(armdozerId: ArmDozerId): void {
+  _onArmdozerChange(armdozerId: ArmDozerId): void {
     this._armdozerBustShot.switch(armdozerId);
   }
 
@@ -163,11 +166,22 @@ export class PlayerSelect implements DOMScene {
   }
 
   /**
-   * パイロットを変更した時の処理
+   * パイロットが変更された時の処理
    *
    * @param pilotId 変更したパイロットID
+   * @private
    */
-  _onPilotDecide(pilotId: PilotId): void {
+  _onPilotChange(pilotId: PilotId): void {
+    this._pilotId = pilotId;
+    this._pilotBustShot.switch(pilotId);
+  }
+
+  /**
+   * パイロットを決定した時の処理
+   *
+   * @param pilotId 決定したパイロットID
+   */
+  _onPilotDecided(pilotId: PilotId): void {
     this._pilotId = pilotId;
     this._playerDecide.next({
       armdozerId: this._armdozerId,
