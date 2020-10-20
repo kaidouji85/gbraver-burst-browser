@@ -1,6 +1,6 @@
 // @flow
 
-import {merge, Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {LoadingAction} from "../../action/loading/loading";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
@@ -11,8 +11,7 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
 import type {Resources} from "../../resource";
-import type {EndNPCEnding, GameAction, GameStart, SelectionComplete, ShowHowToPlay} from "../actions/game-actions";
-import {map} from "rxjs/operators";
+import type {GameAction} from "../actions/game-actions";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -26,20 +25,14 @@ const MAX_LOADING_TIME = 10000;
 export class DOMScenes {
   _root: HTMLElement;
   _scene: ?DOMScene;
-  _pushGameStart: Subject<GameStart>;
-  _pushHowToPlay: Subject<ShowHowToPlay>;
-  _selectionComplete: Subject<SelectionComplete>;
-  _endNPCEnding: Subject<EndNPCEnding>;
+  _gameAction: Subject<GameAction>;
   _sceneSubscriptions: Subscription[];
 
   constructor() {
     this._root = document.createElement('div');
-    this._pushGameStart = new Subject();
-    this._pushHowToPlay = new Subject();
-    this._selectionComplete = new Subject();
-    this._endNPCEnding = new Subject();
-    this._sceneSubscriptions = [];
+    this._gameAction = new Subject();
     this._scene = null;
+    this._sceneSubscriptions = [];
   }
 
   /** デストラクタ相当の処理 */
@@ -53,20 +46,7 @@ export class DOMScenes {
    * @return 通知ストリーム
    */
   gameActionNotifier(): Observable<GameAction> {
-    return merge(
-      this._pushGameStart.pipe(
-        map(v => (v: GameAction))
-      ),
-      this._pushHowToPlay.pipe(
-        map(v => (v: GameAction))
-      ),
-      this._selectionComplete.pipe(
-        map(v => (v: GameAction))
-      ),
-      this._endNPCEnding.pipe(
-        map(v => (v: GameAction))
-      )
-    );
+    return this._gameAction;
   }
 
 
@@ -98,10 +78,10 @@ export class DOMScenes {
     const notifier = scene.notifier();
     this._sceneSubscriptions = [
       notifier.pushGameStart.subscribe(() => {
-        this._pushGameStart.next({type: 'GameStart'});
+        this._gameAction.next({type: 'GameStart'});
       }),
       notifier.pushHowToPlay.subscribe(() => {
-        this._pushHowToPlay.next({type: 'ShowHowToPlay'});
+        this._gameAction.next({type: 'ShowHowToPlay'});
       }),
     ];
     this._root.appendChild(scene.getRootHTMLElement());
@@ -126,7 +106,7 @@ export class DOMScenes {
     const scene = new PlayerSelect(resources);
     this._sceneSubscriptions = [
       scene.selectionCompleteNotifier().subscribe(v => {
-        this._selectionComplete.next({
+        this._gameAction.next({
           type: 'SelectionComplete',
           armdozerId: v.armdozerId,
           pilotId: v.pilotId,
@@ -184,7 +164,7 @@ export class DOMScenes {
     this._root.appendChild(scene.getRootHTMLElement());
     this._sceneSubscriptions = [
       scene.notifier().endNpcEnding.subscribe(() => {
-        this._endNPCEnding.next({type: 'EndNPCEnding'});
+        this._gameAction.next({type: 'EndNPCEnding'});
       })
     ];
     await Promise.race([
