@@ -27,6 +27,7 @@ export class ArmdozerSelector {
   _armdozerId: ArmDozerId;
   _change: Subject<ArmDozerId>;
   _decide: Subject<ArmDozerId>;
+  _prev: Subject<void>;
   _subscriptions: Subscription[];
 
   /**
@@ -37,27 +38,29 @@ export class ArmdozerSelector {
    * @param initialArmdozerId アームドーザID初期値
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[], initialArmdozerId: ArmDozerId) {
-    const dummyStatusId = domUuid();
-    const okButtonId = domUuid();
-    const iconsId = domUuid();
-
     this._change = new Subject<ArmDozerId>();
     this._decide = new Subject<ArmDozerId>();
+    this._prev = new Subject();
+
     this._armdozerId = initialArmdozerId;
+    this._canOperate = true;
 
     this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
     this._decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
 
-    this._canOperate = true;
+    const dummyStatusId = domUuid();
+    const okButtonId = domUuid();
+    const prevButtonId = domUuid();
+    const iconsId = domUuid();
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
       <div data-id="${dummyStatusId}"></div>
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
       <div class="${ROOT_CLASS_NAME}__controllers">
-        <button class="${ROOT_CLASS_NAME}__controllers__prev-button"">戻る</button>
+        <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${prevButtonId}">戻る</button>
         <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}">これで出撃</button>
       </div>
       
@@ -80,14 +83,21 @@ export class ArmdozerSelector {
     const okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
       ?? document.createElement('button');
 
-    this._subscriptions = this._armdozerIcons.map(v =>
+    const prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
+      ?? document.createElement('button');
+
+    this._subscriptions = [
+      ...this._armdozerIcons.map(v =>
         v.selectedNotifier().subscribe(() => {
           this._onArmdozerSelect(v);
-        }),
+        })),
       pushDOMStream(okButton).subscribe(() => {
         this._onOkButtonPush();
-      })
-    );
+      }),
+      pushDOMStream(prevButton).subscribe(() => {
+        this._onPrevButtonPush();
+      }),
+    ];
   }
 
   /**
@@ -152,6 +162,14 @@ export class ArmdozerSelector {
   }
 
   /**
+   * 戻る 通知
+   * @return 通知ストリーム
+   */
+  prevNotifier(): Observable<void> {
+    return this._prev;
+  }
+
+  /**
    * アームドーザアイコンが選択された際の処理
    *
    * @param icon 選択されたアイコン
@@ -174,5 +192,12 @@ export class ArmdozerSelector {
   _onOkButtonPush(): void {
     this._decideSound.play();
     this._decide.next(this._armdozerId);
+  }
+
+  /**
+   * 戻るボタンが押された時の処理
+   */
+  _onPrevButtonPush(): void {
+    this._prev.next();
   }
 }

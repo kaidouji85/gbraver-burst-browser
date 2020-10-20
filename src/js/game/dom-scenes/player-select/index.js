@@ -31,6 +31,7 @@ export class PlayerSelect implements DOMScene {
   _armdozerId: ArmDozerId;
   _pilotId: PilotId;
   _playerDecide: Subject<PlayerDecide>;
+  _prev: Subject<void>;
   _subscriptions: Subscription[];
 
   /**
@@ -56,6 +57,7 @@ export class PlayerSelect implements DOMScene {
     const workingId = domUuid();
 
     this._playerDecide = new Subject();
+    this._prev = new Subject();
 
     this._root = document.createElement('div');
     this._root.className = 'player-select';
@@ -90,6 +92,9 @@ export class PlayerSelect implements DOMScene {
       }),
       this._armdozerSelector.decideNotifier().subscribe(v => {
         this._onArmdozerDecided(v);
+      }),
+      this._armdozerSelector.prevNotifier().subscribe(v => {
+        this._onArmdozerSelectorPrev();
       }),
       this._pilotSelector.changeNotifier().subscribe(v => {
         this._onPilotChange(v);
@@ -140,10 +145,18 @@ export class PlayerSelect implements DOMScene {
   /**
    * 選択完了通知
    *
-   * @return 選択内容
+   * @return 通知ストリーム
    */
   decideNotifier(): Observable<PlayerDecide> {
     return this._playerDecide;
+  }
+
+  /**
+   * 戻る通知
+   * @return 通知ストリーム
+   */
+  prevNotifier(): Observable<void> {
+    return this._prev;
   }
   
   /**
@@ -169,10 +182,16 @@ export class PlayerSelect implements DOMScene {
   }
 
   /**
+   * アームドーザセレクタの戻るボタンを押した時の処理
+   */
+  _onArmdozerSelectorPrev(): void {
+    this._prev.next();
+  }
+
+  /**
    * パイロットが変更された時の処理
    *
    * @param pilotId 変更したパイロットID
-   * @private
    */
   _onPilotChange(pilotId: PilotId): void {
     this._pilotId = pilotId;
