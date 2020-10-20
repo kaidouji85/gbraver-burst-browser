@@ -8,6 +8,7 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {PilotStatus} from "./pilot-status";
 import {replaceDOM} from "../../../../dom/replace-dom";
 import {pushDOMStream} from "../../../../action/push/push-dom";
+import {OkButton} from "../controllers/ok-button";
 
 /**
  * ルート要素のclass名
@@ -21,6 +22,7 @@ export class PilotSelector {
   _root: HTMLElement;
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
+  _okButton: OkButton;
   _pilotId: PilotId;
   _change: Subject<PilotId>;
   _decide: Subject<PilotId>;
@@ -42,7 +44,7 @@ export class PilotSelector {
 
     const dummyStatusId = domUuid();
     const iconsId = domUuid();
-    const okButtonId = domUuid();
+    const dummyOkButtonId = domUuid();
     const prevButtonId = domUuid();
 
     this._root = document.createElement('div');
@@ -52,7 +54,7 @@ export class PilotSelector {
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
       <div class="${ROOT_CLASS_NAME}__controllers">
       <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${prevButtonId}">戻る</button>
-      <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}" >これを載せる</button>
+      <button data-id="${dummyOkButtonId}"></button>
       </div>
     `;
     
@@ -69,8 +71,10 @@ export class PilotSelector {
       icons.appendChild(v.getRootHTMLElement());
     });
 
-    const okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
+    const dummyOkButton = this._root.querySelector(`[data-id="${dummyOkButtonId}"]`)
       ?? document.createElement('button');
+    this._okButton = new OkButton('これを載せる');
+    replaceDOM(dummyOkButton, this._okButton.getRootHTMLElement());
 
     const prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
       ?? document.createElement('button');
@@ -80,7 +84,7 @@ export class PilotSelector {
         icon.selectedNotifier().subscribe(() =>{
           this._onPilotChange(icon.pilotId);
         })),
-      pushDOMStream(okButton).subscribe(() => {
+      this._okButton.pushedNotifier().subscribe(() => {
         this._onOkButtonPush();
       }),
       pushDOMStream(prevButton).subscribe(() => {

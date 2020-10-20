@@ -289,6 +289,17 @@
     flex: 1 1;
 }
 
+.player-select__ok-button {
+    width: calc(var(--responsive-font-size) * 10);
+    height: calc(var(--responsive-font-size) * 3);
+    font-size: var(--responsive-font-size);
+    border-radius: var(--button-border-radius);
+    background-color: var(--button-background-color);
+    color: var(--button-font-color);
+    border: var(--button-border);
+    box-shadow: var(--button-box-shadow);
+}
+
 .player-select__armdozer-bust-shot__shin-braver {
     --width: calc(var(--vh) * 200);
     position: absolute;
@@ -353,19 +364,6 @@
 
 .player-select__armdozer-selector--hidden {
     display: none;
-}
-
-.player-select__armdozer-selector__controllers__ok-button,
-.player-select__pilot-selector__controllers__ok-button,
-.player-select__ok-button {
-    width: calc(var(--responsive-font-size) * 10);
-    height: calc(var(--responsive-font-size) * 3);
-    font-size: var(--responsive-font-size);
-    border-radius: var(--button-border-radius);
-    background-color: var(--button-background-color);
-    color: var(--button-font-color);
-    border: var(--button-border);
-    box-shadow: var(--button-box-shadow);
 }
 
 .player-select__armdozer-selector__controllers__prev-button,
@@ -441,7 +439,6 @@
     width: 100%;
     height: auto;
 }
-
 /**
  * 対戦カード画面
  */
