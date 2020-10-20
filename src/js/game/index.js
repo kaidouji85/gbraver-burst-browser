@@ -96,7 +96,9 @@ export class Game {
           this._onShowHowToPlay();
         } else if (action.type === 'SelectionComplete') {
           this._onSelectionComplete(action);
-        } else if (action.type === 'EndNPCEnding') {
+        } else if (action.type === 'SelectionCancel') {
+          this._onSelectionCancel();
+        }else if (action.type === 'EndNPCEnding') {
           this._onEndNPCEnding();
         } else if (action.type === 'EndHowToPlay') {
           this._onEndHowToPlay();
@@ -184,6 +186,22 @@ export class Game {
       this._state.inProgress = updated;
       await this._npcBattleFlow(resources, updated);
     }
+  }
+
+  /**
+   * プレイヤー選択がキャンセルされた時のイベント
+   * @return 処理結果
+   */
+  async _onSelectionCancel(): Promise<void> {
+    if (!this._resources) {
+      return;
+    }
+    const resources: Resources = this._resources;
+
+    this._state.inProgress = {type: 'None'};
+    await this._fader.fadeOut();
+    await this._domScenes.startTitle(resources);
+    await this._fader.fadeIn();
   }
 
   /**

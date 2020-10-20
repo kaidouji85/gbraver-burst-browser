@@ -28,6 +28,13 @@ export type SelectionComplete = {
   pilotId: PilotId,
 };
 
+/**
+ * プレイヤー選択キャンセル
+ */
+export type SelectionCancel = {
+  type: 'SelectionCancel'
+};
+
 /** 戦闘終了 */
 export type EndBattle = {
   type: 'EndBattle',
@@ -49,5 +56,6 @@ export type GameAction = GameStart
  | ShowHowToPlay
  | EndHowToPlay
  | SelectionComplete
+ | SelectionCancel
  | EndBattle
  | EndNPCEnding;

@@ -111,7 +111,10 @@ export class DOMScenes {
           armdozerId: v.armdozerId,
           pilotId: v.pilotId,
         });
-      })
+      }),
+      scene.prevNotifier().subscribe(() => {
+        this._gameAction.next({type: 'SelectionCancel'});
+      }),
     ];
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
