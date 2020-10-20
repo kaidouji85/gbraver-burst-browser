@@ -72,7 +72,7 @@ export class PlayerSelect implements DOMScene {
     this._armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds, this._armdozerId);
     working.appendChild(this._armdozerBustShot.getRootHTMLElement());
 
-    this._pilotBustShot = new PilotBustShotContainer(resources, pilotIds);
+    this._pilotBustShot = new PilotBustShotContainer(resources, pilotIds, this._pilotId);
     this._pilotBustShot.hidden();
     working.appendChild(this._pilotBustShot.getRootHTMLElement());
 
@@ -214,9 +214,10 @@ export class PlayerSelect implements DOMScene {
   /**
    * パイロットセレクタの戻るボタンを押した時の処理
    */
-  _onPilotSelectorPrev(): void {
-    this._pilotSelector.hidden();
+  async _onPilotSelectorPrev(): Promise<void> {
+    await this._pilotBustShot.exit();
     this._pilotBustShot.hidden();
+    this._pilotSelector.hidden();
 
     this._armdozerSelector.show();
   }

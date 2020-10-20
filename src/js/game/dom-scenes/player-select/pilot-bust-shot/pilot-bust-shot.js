@@ -3,8 +3,6 @@
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 
-export const CLASS_NAME_PREFIX = 'player-select__pilot-bust-shot';
-
 /**
  * パイロットバストショット
  */
@@ -58,14 +56,31 @@ export class PilotBustShot {
   }
 
   /**
-   * アニメーションさせる
+   * 入場
    *
    * @return アニメーション
    */
-  move(): Promise<void> {
+  enter(): Promise<void> {
     const animation = this._image.animate([
       {transform: 'translateX(5em)'},
       {transform: 'translateX(0)'},
+    ], {
+      duration: 200,
+      fill: "forwards",
+      easing: 'ease'
+    });
+    return waitFinishAnimation(animation);
+  }
+
+  /**
+   * 退場
+   *
+   * @return アニメーション
+   */
+  exit(): Promise<void> {
+    const animation = this._image.animate([
+      {transform: 'translateX(0)'},
+      {transform: 'translateX(15em)'},
     ], {
       duration: 200,
       fill: "forwards",

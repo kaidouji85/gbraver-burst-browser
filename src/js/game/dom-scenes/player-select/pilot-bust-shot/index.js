@@ -17,6 +17,7 @@ type BustShot = {
  * パイロット バストショット
  */
 export class PilotBustShotContainer {
+  _pilotId: PilotId;
   _bustShots: BustShot[];
   _root: HTMLElement;
 
@@ -24,14 +25,21 @@ export class PilotBustShotContainer {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param pilotIds パイロットIDリスト
+   * @param initialPilotId パイロットID初期値
    */
-  constructor(resources: Resources, pilotIds: PilotId[]) {
+  constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
+    this._pilotId = initialPilotId;
+
     this._root = document.createElement('div');
     this._bustShots = pilotIds.map(v => ({
       pilotId: v,
       bustShot: createPilotBustShot(resources, v)
     }));
     this._bustShots.forEach(v => {
+      (v.pilotId === this._pilotId)
+        ? v.bustShot.show()
+        : v.bustShot.hidden();
       this._root.appendChild(v.bustShot.getRootHTMLElement());
     });
   }
@@ -56,12 +64,27 @@ export class PilotBustShotContainer {
       return;
     }
 
+    this._pilotId = pilotId;
     const others = this._bustShots.filter(v => v !== target);
     others.forEach(v => {
       v.bustShot.hidden();
     });
     target.bustShot.show();
-    target.bustShot.move();
+    target.bustShot.enter();
+  }
+
+  /**
+   * 退場
+   *
+   * @return アニメーション
+   */
+  async exit(): Promise<void> {
+    const target = this._bustShots.find(v => v.pilotId === this._pilotId);
+    if (!target) {
+      return;
+    }
+    
+    await target.bustShot.exit();
   }
 
   /**
