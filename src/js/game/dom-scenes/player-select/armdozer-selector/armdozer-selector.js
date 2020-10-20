@@ -20,13 +20,13 @@ export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
  */
 export class ArmdozerSelector {
   _canOperate: boolean;
+  _armdozerId: ArmDozerId;
   _root: HTMLElement;
   _armdozerStatus: ArmdozerStatus;
   _armdozerIcons: ArmdozerIcon[];
   _okButton: OkButton;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
-  _armdozerId: ArmDozerId;
   _change: Subject<ArmDozerId>;
   _decide: Subject<ArmDozerId>;
   _prev: Subject<void>;
@@ -193,9 +193,17 @@ export class ArmdozerSelector {
   /**
    * 決定ボタンが押された時の処理
    */
-  _onOkButtonPush(): void {
-    this._decideSound.play();
+  async _onOkButtonPush(): Promise<void> {
+    if (!this._canOperate) {
+      return;
+    }
+    this._canOperate = false;
+
     this._decide.next(this._armdozerId);
+    this._decideSound.play();
+    await this._okButton.pop();
+    
+    this._canOperate = true;
   }
 
   /**
