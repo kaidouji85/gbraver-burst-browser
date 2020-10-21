@@ -3,6 +3,7 @@
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozers} from "gbraver-burst-core";
 import {burstTemplate, statusTemplate} from "./status-template";
+import {domUuid} from "../../../../uuid/dom-uuid";
 
 /**
  * ルート要素のクラス名
@@ -22,20 +23,24 @@ export class ArmdozerStatus {
    * コンストラクタ
    */
   constructor() {
+    const nameId = domUuid();
+    const statusId = domUuid();
+    const burstId = domUuid();
+    
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
+    this._root.innerHTML = `
+      <div class="${ROOT_CLASS_NAME}__name" data-id="${nameId}"></div>
+      <div class="${ROOT_CLASS_NAME}__status" data-id="${statusId}"></div>
+      <div class="${ROOT_CLASS_NAME}__burst" data-id="${burstId}"></div>
+    `;
 
-    this._name = document.createElement('div');
-    this._name.className = `${ROOT_CLASS_NAME}__name`;
-    this._root.appendChild(this._name);
-
-    this._status = document.createElement('div');
-    this._status.className = `${ROOT_CLASS_NAME}__status`;
-    this._root.appendChild(this._status);
-
-    this._burst = document.createElement('div');
-    this._burst.className = `${ROOT_CLASS_NAME}__status`;
-    this._root.appendChild(this._burst);
+    this._name = this._root.querySelector(`[data-id="${nameId}"]`)
+      ?? document.createElement('div');
+    this._status = this._root.querySelector(`[data-id="${statusId}"]`)
+      ?? document.createElement('div');
+    this._burst = this._root.querySelector(`[data-id="${burstId}"]`)
+      ?? document.createElement('div');
   }
 
   /**
