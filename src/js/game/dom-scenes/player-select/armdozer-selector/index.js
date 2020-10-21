@@ -19,8 +19,8 @@ export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
  * アームドーザセレクタ
  */
 export class ArmdozerSelector {
-  _canOperate: boolean;
   _armdozerId: ArmDozerId;
+  _canOperate: boolean;
   _root: HTMLElement;
   _armdozerStatus: ArmdozerStatus;
   _armdozerIcons: ArmdozerIcon[];
@@ -41,11 +41,12 @@ export class ArmdozerSelector {
    * @param initialArmdozerId アームドーザID初期値
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[], initialArmdozerId: ArmDozerId) {
+    this._armdozerId = initialArmdozerId;
+    this._canOperate = true;
+
     this._change = new Subject<ArmDozerId>();
     this._decide = new Subject<ArmDozerId>();
     this._prev = new Subject();
-
-    this._armdozerId = initialArmdozerId;
 
     this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
@@ -182,31 +183,48 @@ export class ArmdozerSelector {
    * @return 処理結果
    */
   _onArmdozerSelect(icon: ArmdozerIcon): void {
-    if (this._armdozerId === icon.armDozerId) {
-      return;
-    }
+    this._exclusive(async (): Promise<void> =>  {
+      if (this._armdozerId === icon.armDozerId) {
+        return;
+      }
 
-    this._changeValueSound.play();
-    this._armdozerStatus.switch(icon.armDozerId);
-    this._armdozerId = icon.armDozerId;
-    this._change.next(this._armdozerId);
+      this._changeValueSound.play();
+      this._armdozerStatus.switch(icon.armDozerId);
+      this._armdozerId = icon.armDozerId;
+      this._change.next(this._armdozerId);
+    });
   }
 
   /**
    * 決定ボタンが押された時の処理
    */
-  async _onOkButtonPush(): Promise<void> {
-    this._decideSound.play();
-    await this._okButton.pop();
-    this._decide.next(this._armdozerId);
+  _onOkButtonPush(): void {
+    this._exclusive(async (): Promise<void> => {
+
+      this._decideSound.play();
+      await this._okButton.pop();
+      this._decide.next(this._armdozerId);
+    });
   }
 
   /**
    * 戻るボタンが押された時の処理
    */
   async _onPrevButtonPush(): Promise<void> {
-    this._changeValueSound.play();
-    await this._prevButton.pop();
-    this._prev.next();
+    this._exclusive(async (): Promise<void> => {
+      this._changeValueSound.play();
+      await this._prevButton.pop();
+      this._prev.next();
+    });
+  }
+
+  async _exclusive(fn: () => Promise<void>): Promise<void> {
+    if (!this._canOperate) {
+      return;
+    }
+
+    this._canOperate=false;
+    await fn();
+    this._canOperate = true;
   }
 }
