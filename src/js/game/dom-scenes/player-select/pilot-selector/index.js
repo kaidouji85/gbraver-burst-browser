@@ -22,7 +22,6 @@ export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
  */
 export class PilotSelector {
   _pilotId: PilotId;
-  _canOperate: boolean;
   _root: HTMLElement;
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
@@ -44,7 +43,6 @@ export class PilotSelector {
    */
   constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
     this._pilotId = initialPilotId;
-    this._canOperate = true;
 
     this._change = new Subject();
     this._decide = new Subject();
@@ -183,10 +181,6 @@ export class PilotSelector {
    * @param pilotId 変更したパイロットのID
    */
   _onPilotChange(pilotId: PilotId): void {
-    if (!this._canOperate) {
-      return;
-    }
-
     if (this._pilotId === pilotId) {
       return;
     }
@@ -201,22 +195,16 @@ export class PilotSelector {
    * OKボタンを押した時の処理
    */
   async _onOkButtonPush(): Promise<void> {
-    if (!this._canOperate) {
-      return;
-    }
-    this._canOperate = false;
-
     this._decideSound.play();
     await this._okButton.pop();
     this._decide.next(this._pilotId);
-    
-    this._canOperate = true;
   }
 
   /**
    * 戻るボタンを押した時の処理
    */
-  _onPrevButtonPush(): void {
+  async _onPrevButtonPush(): Promise<void> {
+    await this._prevButton.pop();
     this._changeValueSound.play();
     this._prev.next();
   }

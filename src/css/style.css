@@ -300,6 +300,18 @@
     box-shadow: var(--button-box-shadow);
 }
 
+.player-select__prev-button {
+    width: calc(var(--responsive-font-size) * 10);
+    height: calc(var(--responsive-font-size) * 3);
+    font-size: var(--responsive-font-size);
+    border-radius: var(--button-border-radius);
+    background-color: var(--sub-button-background-color);
+    color: var(--button-font-color);
+    border: var(--button-border);
+    box-shadow: var(--button-box-shadow);
+    margin-right: calc(var(--responsive-font-size) * 0.5);
+}
+
 .player-select__armdozer-bust-shot__shin-braver {
     --width: calc(var(--vh) * 200);
     position: absolute;
@@ -364,20 +376,6 @@
 
 .player-select__armdozer-selector--hidden {
     display: none;
-}
-
-.player-select__armdozer-selector__controllers__prev-button,
-.player-select__pilot-selector__controllers__prev-button,
-.player-select__prev-button {
-    width: calc(var(--responsive-font-size) * 10);
-    height: calc(var(--responsive-font-size) * 3);
-    font-size: var(--responsive-font-size);
-    border-radius: var(--button-border-radius);
-    background-color: var(--sub-button-background-color);
-    color: var(--button-font-color);
-    border: var(--button-border);
-    box-shadow: var(--button-box-shadow);
-    margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .player-select__armdozer-status,

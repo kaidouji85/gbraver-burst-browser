@@ -46,7 +46,6 @@ export class ArmdozerSelector {
     this._prev = new Subject();
 
     this._armdozerId = initialArmdozerId;
-    this._canOperate = true;
 
     this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
@@ -183,10 +182,6 @@ export class ArmdozerSelector {
    * @return 処理結果
    */
   _onArmdozerSelect(icon: ArmdozerIcon): void {
-    if (!this._canOperate) {
-      return;
-    }
-
     if (this._armdozerId === icon.armDozerId) {
       return;
     }
@@ -201,22 +196,17 @@ export class ArmdozerSelector {
    * 決定ボタンが押された時の処理
    */
   async _onOkButtonPush(): Promise<void> {
-    if (!this._canOperate) {
-      return;
-    }
-    this._canOperate = false;
-
     this._decideSound.play();
+    await this._okButton.pop();
     this._decide.next(this._armdozerId);
-
-    this._canOperate = true;
   }
 
   /**
    * 戻るボタンが押された時の処理
    */
-  _onPrevButtonPush(): void {
+  async _onPrevButtonPush(): Promise<void> {
     this._changeValueSound.play();
+    await this._prevButton.pop();
     this._prev.next();
   }
 }
