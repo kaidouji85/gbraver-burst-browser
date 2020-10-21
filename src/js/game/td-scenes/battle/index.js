@@ -109,7 +109,6 @@ export class BattleScene implements Scene {
    */
   async start(): Promise<void> {
     await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState.stateHistory).play();
-    this._state.canOperation = true;
   }
 
   /**
@@ -131,7 +130,7 @@ export class BattleScene implements Scene {
         battery: action.battery
       });
       if (lastState && lastState.effect.name === 'GameEnd') {
-        this._onEndGame(lastState.effect);
+        await this._onEndGame(lastState.effect);
         return;
       }
     });
@@ -141,26 +140,21 @@ export class BattleScene implements Scene {
    * バースト時の処理
    */
   async _onBurst(): Promise<void> {
-    if (!this._state.canOperation) {
-      return;
-    }
-
-    this._state.canOperation = false;
-    await all(
-      this._view.hud.gameObjects.burstButton.decide(),
-      this._view.hud.gameObjects.batterySelector.close(),
-      this._view.hud.gameObjects.pilotButton.close()
-    )
-      .chain(delay(500))
-      .chain(this._view.hud.gameObjects.burstButton.close())
-      .play();
-    const lastState = await this._progressGame({type: 'BURST_COMMAND'});
-    if (lastState && lastState.effect.name === 'GameEnd') {
-      this._onEndGame(lastState.effect);
-      return;
-    }
-
-    this._state.canOperation = true;
+    this._exclusive.execute(async (): Promise<void> => {
+      await all(
+        this._view.hud.gameObjects.burstButton.decide(),
+        this._view.hud.gameObjects.batterySelector.close(),
+        this._view.hud.gameObjects.pilotButton.close()
+      )
+        .chain(delay(500))
+        .chain(this._view.hud.gameObjects.burstButton.close())
+        .play();
+      const lastState = await this._progressGame({type: 'BURST_COMMAND'});
+      if (lastState && lastState.effect.name === 'GameEnd') {
+        await this._onEndGame(lastState.effect);
+        return;
+      }
+    });
   }
 
   /**
@@ -169,25 +163,20 @@ export class BattleScene implements Scene {
    * @return 実行結果
    */
   async _onPilotSkill(): Promise<void> {
-    if (!this._state.canOperation) {
-      return;
-    }
-
-    this._state.canOperation = false;
-    await all(
-      this._view.hud.gameObjects.pilotButton.decide(),
-      this._view.hud.gameObjects.burstButton.close(),
-      this._view.hud.gameObjects.batterySelector.close(),
-    ).chain(delay(500))
-      .chain(this._view.hud.gameObjects.pilotButton.close())
-      .play();
-    const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
-    if (lastState && lastState.effect.name === 'GameEnd') {
-      this._onEndGame(lastState.effect);
-      return;
-    }
-
-    this._state.canOperation = true;
+    this._exclusive.execute(async (): Promise<void> => {
+      await all(
+        this._view.hud.gameObjects.pilotButton.decide(),
+        this._view.hud.gameObjects.burstButton.close(),
+        this._view.hud.gameObjects.batterySelector.close(),
+      ).chain(delay(500))
+        .chain(this._view.hud.gameObjects.pilotButton.close())
+        .play();
+      const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
+      if (lastState && lastState.effect.name === 'GameEnd') {
+        await this._onEndGame(lastState.effect);
+        return;
+      }
+    });
   }
 
   /**
