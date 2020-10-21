@@ -5,9 +5,9 @@ import {pushDOMStream} from "../../../../action/push/push-dom";
 import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 
 /**
- * OKボタン
+ * ボタン
  */
-export class OkButton {
+export class ControlButton {
   _root: HTMLButtonElement;
   _pushed: Subject<void>;
   _subscription: Subscription;

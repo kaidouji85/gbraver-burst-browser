@@ -10,7 +10,8 @@ import {SOUND_IDS} from "../../../../resource/sound";
 import {Howl} from 'howler';
 import {ArmdozerStatus} from "./armdozer-status";
 import {replaceDOM} from "../../../../dom/replace-dom";
-import {OkButton} from "../controllers/ok-button";
+import {ControlButton} from "../controllers/control-button";
+import {okButton} from "../controllers";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -24,7 +25,7 @@ export class ArmdozerSelector {
   _root: HTMLElement;
   _armdozerStatus: ArmdozerStatus;
   _armdozerIcons: ArmdozerIcon[];
-  _okButton: OkButton;
+  _okButton: ControlButton;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
   _change: Subject<ArmDozerId>;
@@ -84,7 +85,7 @@ export class ArmdozerSelector {
 
     const dummyOkButton = this._root.querySelector(`[data-id="${dummyOkButtonId}"]`)
       ?? document.createElement('button');
-    this._okButton = new OkButton('これで出撃');
+    this._okButton =  okButton('これで出撃');
     replaceDOM(dummyOkButton, this._okButton.getRootHTMLElement());
 
     const prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)

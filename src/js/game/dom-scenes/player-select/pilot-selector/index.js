@@ -8,9 +8,10 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {PilotStatus} from "./pilot-status";
 import {replaceDOM} from "../../../../dom/replace-dom";
 import {pushDOMStream} from "../../../../action/push/push-dom";
-import {OkButton} from "../controllers/ok-button";
+import {ControlButton} from "../controllers/control-button";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
+import {okButton} from "../controllers";
 
 /**
  * ルート要素のclass名
@@ -26,7 +27,7 @@ export class PilotSelector {
   _root: HTMLElement;
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
-  _okButton: OkButton;
+  _okButton: ControlButton;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
   _change: Subject<PilotId>;
@@ -85,7 +86,7 @@ export class PilotSelector {
 
     const dummyOkButton = this._root.querySelector(`[data-id="${dummyOkButtonId}"]`)
       ?? document.createElement('button');
-    this._okButton = new OkButton('これを載せる');
+    this._okButton = okButton('これを載せる');
     replaceDOM(dummyOkButton, this._okButton.getRootHTMLElement());
 
     const prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
