@@ -194,7 +194,7 @@ export class PilotSelector {
 
       const target = this._pilotIcons.find(v => v.pilotId === pilotId);
       if (target) {
-        await target.pop();
+        target.pop();
         this._changeValueSound.play();
       }
     });
@@ -216,8 +216,8 @@ export class PilotSelector {
    */
   _onPrevButtonPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
-      await this._prevButton.pop();
       this._changeValueSound.play();
+      await this._prevButton.pop();
       this._prev.next();
     });
   }

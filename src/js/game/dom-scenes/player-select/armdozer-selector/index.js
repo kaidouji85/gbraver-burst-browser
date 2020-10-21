@@ -204,7 +204,7 @@ export class ArmdozerSelector {
       const target = this._armdozerIcons.find(v => v.armdozerId === armdozerId);
       if (target) {
         this._changeValueSound.play();
-        await target.icon.pop();
+        target.icon.pop();
       }
     });
   }
