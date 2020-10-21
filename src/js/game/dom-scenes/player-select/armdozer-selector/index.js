@@ -11,6 +11,7 @@ import {ArmdozerStatus} from "./armdozer-status";
 import {replaceDOM} from "../../../../dom/replace-dom";
 import {ControlButton} from "../controllers/control-button";
 import {okButton, prevButton} from "../controllers";
+import {Exclusive} from "../../../../exclusive/exclusive";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -20,7 +21,7 @@ export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
  */
 export class ArmdozerSelector {
   _armdozerId: ArmDozerId;
-  _canOperate: boolean;
+  _exclusive: Exclusive;
   _root: HTMLElement;
   _armdozerStatus: ArmdozerStatus;
   _armdozerIcons: ArmdozerIcon[];
@@ -42,7 +43,8 @@ export class ArmdozerSelector {
    */
   constructor(resources: Resources, armDozerIds: ArmDozerId[], initialArmdozerId: ArmDozerId) {
     this._armdozerId = initialArmdozerId;
-    this._canOperate = true;
+
+    this._exclusive = new Exclusive();
 
     this._change = new Subject<ArmDozerId>();
     this._decide = new Subject<ArmDozerId>();
@@ -183,7 +185,7 @@ export class ArmdozerSelector {
    * @return 処理結果
    */
   _onArmdozerSelect(icon: ArmdozerIcon): void {
-    this._exclusive(async (): Promise<void> =>  {
+    this._exclusive.execute(async (): Promise<void> =>  {
       if (this._armdozerId === icon.armDozerId) {
         return;
       }
@@ -199,7 +201,7 @@ export class ArmdozerSelector {
    * 決定ボタンが押された時の処理
    */
   _onOkButtonPush(): void {
-    this._exclusive(async (): Promise<void> => {
+    this._exclusive.execute(async (): Promise<void> => {
 
       this._decideSound.play();
       await this._okButton.pop();
@@ -211,20 +213,10 @@ export class ArmdozerSelector {
    * 戻るボタンが押された時の処理
    */
   async _onPrevButtonPush(): Promise<void> {
-    this._exclusive(async (): Promise<void> => {
+    this._exclusive.execute(async (): Promise<void> => {
       this._changeValueSound.play();
       await this._prevButton.pop();
       this._prev.next();
     });
-  }
-
-  async _exclusive(fn: () => Promise<void>): Promise<void> {
-    if (!this._canOperate) {
-      return;
-    }
-
-    this._canOperate=false;
-    await fn();
-    this._canOperate = true;
   }
 }
