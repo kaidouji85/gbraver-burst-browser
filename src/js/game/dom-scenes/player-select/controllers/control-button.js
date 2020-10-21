@@ -16,10 +16,11 @@ export class ControlButton {
    * コンストラクタ
    *
    * @param label ボタンのラベル
+   * @param className クラス名
    */
-  constructor(label: string) {
+  constructor(label: string, className: string) {
     this._root = document.createElement('button');
-    this._root.className = 'player-select__ok-button';
+    this._root.className = className;
     this._root.innerText = label;
 
     this._pushed = new Subject();

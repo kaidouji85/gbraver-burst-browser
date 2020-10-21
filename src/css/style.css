@@ -367,7 +367,8 @@
 }
 
 .player-select__armdozer-selector__controllers__prev-button,
-.player-select__pilot-selector__controllers__prev-button {
+.player-select__pilot-selector__controllers__prev-button,
+.player-select__prev-button {
     width: calc(var(--responsive-font-size) * 10);
     height: calc(var(--responsive-font-size) * 3);
     font-size: var(--responsive-font-size);
