@@ -186,14 +186,17 @@ export class PilotSelector {
    */
   _onPilotChange(pilotId: PilotId): void {
     this._exclusive.execute(async (): Promise<void> => {
-      if (this._pilotId === pilotId) {
-        return;
+      if (this._pilotId !== pilotId) {
+        this._pilotId =pilotId;
+        this._pilotStatus.switch(pilotId);
+        this._change.next(pilotId);
       }
 
-      this._changeValueSound.play();
-      this._pilotId =pilotId;
-      this._pilotStatus.switch(pilotId);
-      this._change.next(pilotId);
+      const target = this._pilotIcons.find(v => v.pilotId === pilotId);
+      if (target) {
+        await target.pop();
+        this._changeValueSound.play();
+      }
     });
   }
 

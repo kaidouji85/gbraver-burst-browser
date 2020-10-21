@@ -186,8 +186,7 @@ export class ArmdozerSelector {
    */
   _onArmdozerSelect(icon: ArmdozerIcon): void {
     this._exclusive.execute(async (): Promise<void> =>  {
-      const isArmdozerChange = this._armdozerId !== icon.armDozerId;
-      if (isArmdozerChange) {
+      if (this._armdozerId !== icon.armDozerId) {
         this._armdozerId = icon.armDozerId;
         this._armdozerStatus.switch(icon.armDozerId);
         this._change.next(this._armdozerId);
@@ -203,7 +202,6 @@ export class ArmdozerSelector {
    */
   _onOkButtonPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
-
       this._decideSound.play();
       await this._okButton.pop();
       this._decide.next(this._armdozerId);
