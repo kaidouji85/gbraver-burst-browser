@@ -1,14 +1,11 @@
 // @flow
 
-import {Howl} from 'howler';
 import {Observable} from "rxjs";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
-import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
 import type {Resources} from "../../../../resource";
 import type {PushDOM} from "../../../../action/push/push-dom";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
-import {SOUND_IDS} from "../../../../resource/sound";
 import {getPilotIconPathId} from "../../../../path/pilot-icon-path";
 
 const ROOT_CLASS_NAME = 'player-select__pilot-icon';
@@ -18,8 +15,7 @@ const ROOT_CLASS_NAME = 'player-select__pilot-icon';
  */
 export class PilotIcon {
   pilotId: ArmDozerId;
-  _pushButton: typeof Howl;
-  _root: HTMLElement;
+  _image: HTMLImageElement;
   _isImageLoaded: Promise<void>;
   _select: Observable<PushDOM>;
 
@@ -31,23 +27,15 @@ export class PilotIcon {
    */
   constructor(resources: Resources, pilotId: PilotId) {
     this.pilotId = pilotId;
-    this._pushButton = resources.sounds
-      .find(v => v.id === SOUND_IDS.PUSH_BUTTON)
-      ?.sound ?? new Howl();
 
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS_NAME;
+    this._image = document.createElement('img');
+    this._image.className = ROOT_CLASS_NAME;
+    this._select = pushDOMStream(this._image)
+    this._isImageLoaded = waitElementLoaded(this._image);
 
-    const image = document.createElement('img');
-    image.className = `${ROOT_CLASS_NAME}__image`;
-    this._select = pushDOMStream(image)
-    this._isImageLoaded = waitElementLoaded(image);
     const pathId = getPilotIconPathId(pilotId);
-    const iconResource = resources.paths.find(v => v.id === pathId);
-    image.src = iconResource
-      ? iconResource.path
-      : '';
-    this._root.appendChild(image);
+    this._image.src = resources.paths.find(v => v.id === pathId)
+      ?.path ?? '';
   }
 
   /**
@@ -65,26 +53,7 @@ export class PilotIcon {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
-  }
-
-  /**
-   * アイコン選択アニメーション
-   *
-   * @return アニメーション
-   */
-  selected(): Promise<void> {
-    this._pushButton.play();
-    const animation = this._root.animate([
-      {transform: 'scale(1)'},
-      {transform: 'scale(1.1)'},
-      {transform: 'scale(1)'},
-    ], {
-      duration: 200,
-      fill: "forwards",
-      easing: 'ease'
-    });
-    return waitFinishAnimation(animation);
+    return this._image;
   }
 
   /**

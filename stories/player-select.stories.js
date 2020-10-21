@@ -21,7 +21,7 @@ export const scene: DOMStubStory = domStub(resources => {
 export const pilotIcon: DOMStubStory = domStub(resources => {
   const icon = new PilotIcon(resources, PilotIds.SHINYA);
   icon.selectedNotifier().subscribe(() => {
-    icon.selected();
+    // NOP
   });
   return icon.getRootHTMLElement();
 });
