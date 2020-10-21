@@ -328,7 +328,7 @@
     width: var(--width);
 }
 
-.player-select__armdozer-bust-shot__lightning-dozer{
+.player-select__armdozer-bust-shot__lightning-dozer {
     --width: calc(var(--vh) * 200);
     position: absolute;
     top: calc(var(--vh) * -25);
@@ -390,22 +390,18 @@
     background-color: rgba(10, 10, 10, 0.7);
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
+    margin-bottom: 0.5em;
 }
 
 .player-select__armdozer-selector__icons {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 50vw;
+    justify-content: flex-start;
+    margin-bottom: 0.5em;
 }
 
 .player-select__armdozer-icon {
-    flex: 1 1;
-}
-
-.player-select__armdozer-icon__image {
-    width: 100%;
-    height: auto;
+    width: 12.5vw;
 }
 
 .player-select__pilot-selector {
