@@ -11,6 +11,7 @@ import {ControlButton} from "../controllers/control-button";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {okButton, prevButton} from "../controllers";
+import {Exclusive} from "../../../../exclusive/exclusive";
 
 /**
  * ルート要素のclass名
@@ -22,6 +23,7 @@ export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
  */
 export class PilotSelector {
   _pilotId: PilotId;
+  _exclusive: Exclusive;
   _root: HTMLElement;
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
@@ -43,6 +45,8 @@ export class PilotSelector {
    */
   constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
     this._pilotId = initialPilotId;
+
+    this._exclusive = new Exclusive();
 
     this._change = new Subject();
     this._decide = new Subject();
@@ -181,31 +185,37 @@ export class PilotSelector {
    * @param pilotId 変更したパイロットのID
    */
   _onPilotChange(pilotId: PilotId): void {
-    if (this._pilotId === pilotId) {
-      return;
-    }
+    this._exclusive.execute(async (): Promise<void> => {
+      if (this._pilotId === pilotId) {
+        return;
+      }
 
-    this._changeValueSound.play();
-    this._pilotId =pilotId;
-    this._pilotStatus.switch(pilotId);
-    this._change.next(pilotId);
+      this._changeValueSound.play();
+      this._pilotId =pilotId;
+      this._pilotStatus.switch(pilotId);
+      this._change.next(pilotId);
+    });
   }
 
   /**
    * OKボタンを押した時の処理
    */
-  async _onOkButtonPush(): Promise<void> {
-    this._decideSound.play();
-    await this._okButton.pop();
-    this._decide.next(this._pilotId);
+  _onOkButtonPush(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._decideSound.play();
+      await this._okButton.pop();
+      this._decide.next(this._pilotId);
+    });
   }
 
   /**
    * 戻るボタンを押した時の処理
    */
-  async _onPrevButtonPush(): Promise<void> {
-    await this._prevButton.pop();
-    this._changeValueSound.play();
-    this._prev.next();
+  _onPrevButtonPush(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      await this._prevButton.pop();
+      this._changeValueSound.play();
+      this._prev.next();
+    });
   }
 }
