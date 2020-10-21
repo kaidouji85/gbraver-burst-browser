@@ -7,11 +7,10 @@ import {Observable, Subject, Subscription} from "rxjs";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {PilotStatus} from "./pilot-status";
 import {replaceDOM} from "../../../../dom/replace-dom";
-import {pushDOMStream} from "../../../../action/push/push-dom";
 import {ControlButton} from "../controllers/control-button";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
-import {okButton} from "../controllers";
+import {okButton, prevButton} from "../controllers";
 
 /**
  * ルート要素のclass名
@@ -28,6 +27,7 @@ export class PilotSelector {
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
   _okButton: ControlButton;
+  _prevButton: ControlButton;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
   _change: Subject<PilotId>;
@@ -70,11 +70,11 @@ export class PilotSelector {
       <button data-id="${dummyOkButtonId}"></button>
       </div>
     `;
-    
-    const dummyStatus = this._root.querySelector(`[data-id="${dummyStatusId}"]`)
-      ?? document.createElement('div');
+
     this._pilotStatus = new PilotStatus();
     this._pilotStatus.switch(this._pilotId);
+    const dummyStatus = this._root.querySelector(`[data-id="${dummyStatusId}"]`)
+      ?? document.createElement('div');
     replaceDOM(dummyStatus, this._pilotStatus.getRootHTMLElement());
 
     const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
@@ -84,13 +84,15 @@ export class PilotSelector {
       icons.appendChild(v.getRootHTMLElement());
     });
 
+    this._okButton = okButton('これを載せる');
     const dummyOkButton = this._root.querySelector(`[data-id="${dummyOkButtonId}"]`)
       ?? document.createElement('button');
-    this._okButton = okButton('これを載せる');
     replaceDOM(dummyOkButton, this._okButton.getRootHTMLElement());
 
-    const prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
+    this._prevButton = prevButton();
+    const dummyPrevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
       ?? document.createElement('button');
+    replaceDOM(dummyPrevButton, this._prevButton.getRootHTMLElement());
     
     this._subscriptions = [
       ...this._pilotIcons.map(icon =>
@@ -100,7 +102,7 @@ export class PilotSelector {
       this._okButton.pushedNotifier().subscribe(() => {
         this._onOkButtonPush();
       }),
-      pushDOMStream(prevButton).subscribe(() => {
+      this._prevButton.pushedNotifier().subscribe(() => {
         this._onPrevButtonPush();
       }),
     ];
