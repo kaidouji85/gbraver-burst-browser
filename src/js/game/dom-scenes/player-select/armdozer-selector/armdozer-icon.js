@@ -13,7 +13,6 @@ import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
  * アームドーザアイコン ビュー
  */
 export class ArmdozerIcon {
-  armDozerId: ArmDozerId; // TODO 削除する
   _image: HTMLImageElement;
   _isImageLoaded: Promise<void>;
   _select: Observable<PushDOM>;
@@ -25,8 +24,6 @@ export class ArmdozerIcon {
    * @param armDozerId アームドーザID
    */
   constructor(resources: Resources, armDozerId: ArmDozerId) {
-    this.armDozerId = armDozerId;
-
     this._image = document.createElement('img');
     this._image.className = 'player-select__armdozer-icon';
     

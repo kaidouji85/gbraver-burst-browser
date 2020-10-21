@@ -17,6 +17,14 @@ import {Exclusive} from "../../../../exclusive/exclusive";
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
 
 /**
+ * アームドーザアイコン関連オブジェクト
+ */
+type IconObjects = {
+  armdozerId: ArmDozerId,
+  icon: ArmdozerIcon,
+};
+
+/**
  * アームドーザセレクタ
  */
 export class ArmdozerSelector {
@@ -24,7 +32,7 @@ export class ArmdozerSelector {
   _exclusive: Exclusive;
   _root: HTMLElement;
   _armdozerStatus: ArmdozerStatus;
-  _armdozerIcons: ArmdozerIcon[];
+  _armdozerIcons: IconObjects[];
   _okButton: ControlButton;
   _prevButton: ControlButton;
   _changeValueSound: typeof Howl;
@@ -78,11 +86,12 @@ export class ArmdozerSelector {
 
     const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
       ?? document.createElement('div');
-    this._armdozerIcons = armDozerIds.map(v => new ArmdozerIcon(resources, v));
-    this._armdozerIcons
-      .map(icon => icon.getRootHTMLElement())
-      .forEach(element => {
-        icons.appendChild(element);
+    this._armdozerIcons = armDozerIds.map(v => ({
+      armdozerId: v,
+      icon: new ArmdozerIcon(resources, v)
+    }));
+    this._armdozerIcons.forEach(v => {
+        icons.appendChild(v.icon.getRootHTMLElement());
       });
 
     this._okButton =  okButton('これで出撃');
@@ -97,8 +106,8 @@ export class ArmdozerSelector {
 
     this._subscriptions = [
       ...this._armdozerIcons.map(v =>
-        v.selectedNotifier().subscribe(() => {
-          this._onArmdozerSelect(v);
+        v.icon.selectedNotifier().subscribe(() => {
+          this._onArmdozerSelect(v.armdozerId);
         })),
       this._okButton.pushedNotifier().subscribe(() => {
         this._onOkButtonPush();
@@ -139,7 +148,7 @@ export class ArmdozerSelector {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all(
-      this._armdozerIcons.map(icon => icon.waitUntilLoaded())
+      this._armdozerIcons.map(v => v.icon.waitUntilLoaded())
     );
   }
 
@@ -181,19 +190,22 @@ export class ArmdozerSelector {
   /**
    * アームドーザアイコンが選択された際の処理
    *
-   * @param icon 選択されたアイコン
+   * @param armdozerId 選択されたアームドーザID
    * @return 処理結果
    */
-  _onArmdozerSelect(icon: ArmdozerIcon): void {
+  _onArmdozerSelect(armdozerId: ArmDozerId): void {
     this._exclusive.execute(async (): Promise<void> =>  {
-      if (this._armdozerId !== icon.armDozerId) {
-        this._armdozerId = icon.armDozerId;
-        this._armdozerStatus.switch(icon.armDozerId);
+      if (this._armdozerId !== armdozerId) {
+        this._armdozerId = armdozerId;
+        this._armdozerStatus.switch(armdozerId);
         this._change.next(this._armdozerId);
       }
 
-      this._changeValueSound.play();
-      await icon.pop();
+      const target = this._armdozerIcons.find(v => v.armdozerId === armdozerId);
+      if (target) {
+        this._changeValueSound.play();
+        await target.icon.pop();
+      }
     });
   }
 
