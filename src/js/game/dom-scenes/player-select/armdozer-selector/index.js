@@ -186,14 +186,15 @@ export class ArmdozerSelector {
    */
   _onArmdozerSelect(icon: ArmdozerIcon): void {
     this._exclusive.execute(async (): Promise<void> =>  {
-      if (this._armdozerId === icon.armDozerId) {
-        return;
+      const isArmdozerChange = this._armdozerId !== icon.armDozerId;
+      if (isArmdozerChange) {
+        this._armdozerId = icon.armDozerId;
+        this._armdozerStatus.switch(icon.armDozerId);
+        this._change.next(this._armdozerId);
       }
 
       this._changeValueSound.play();
-      this._armdozerStatus.switch(icon.armDozerId);
-      this._armdozerId = icon.armDozerId;
-      this._change.next(this._armdozerId);
+      await icon.pop();
     });
   }
 
