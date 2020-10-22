@@ -16,7 +16,9 @@ const ROOT_CLASS_NAME = 'player-select__armdozer-status';
 export class ArmdozerStatus {
   _root: HTMLElement;
   _name: HTMLElement;
-  _status: HTMLElement;
+  _hp: HTMLElement;
+  _power: HTMLElement;
+  _speed: HTMLElement;
   _burst: HTMLElement;
 
   /**
@@ -24,20 +26,33 @@ export class ArmdozerStatus {
    */
   constructor() {
     const nameId = domUuid();
-    const statusId = domUuid();
+    const hpId = domUuid();
+    const powerId = domUuid();
+    const speedId = domUuid();
     const burstId = domUuid();
     
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
       <div class="${ROOT_CLASS_NAME}__name" data-id="${nameId}"></div>
-      <div class="${ROOT_CLASS_NAME}__status" data-id="${statusId}"></div>
+      <div class="${ROOT_CLASS_NAME}__status">
+        <div class="${ROOT_CLASS_NAME}__status__hp-label">HP</div>
+        <div class="${ROOT_CLASS_NAME}__status__hp-value" data-id="${hpId}" ></div>
+        <div class="${ROOT_CLASS_NAME}__status__power-label">攻撃</div>
+        <div class="${ROOT_CLASS_NAME}__status__power-value" data-id="${powerId}" ></div>
+        <div class="${ROOT_CLASS_NAME}__status__power-label">機動</div>
+        <div class="${ROOT_CLASS_NAME}__status__power-value" data-id="${speedId}" ></div>
+      </div>
       <div class="${ROOT_CLASS_NAME}__burst" data-id="${burstId}"></div>
     `;
 
     this._name = this._root.querySelector(`[data-id="${nameId}"]`)
       ?? document.createElement('div');
-    this._status = this._root.querySelector(`[data-id="${statusId}"]`)
+    this._hp= this._root.querySelector(`[data-id="${hpId}"]`)
+      ?? document.createElement('div');
+    this._power= this._root.querySelector(`[data-id="${powerId}"]`)
+      ?? document.createElement('div');
+    this._speed= this._root.querySelector(`[data-id="${speedId}"]`)
       ?? document.createElement('div');
     this._burst = this._root.querySelector(`[data-id="${burstId}"]`)
       ?? document.createElement('div');
@@ -64,7 +79,9 @@ export class ArmdozerStatus {
     }
 
     this._name.innerText = target.name;
-    this._status.innerText = statusTemplate(target);
+    this._hp.innerText = `${target.maxHp}`;
+    this._power.innerText = `${target.power}`;
+    this._speed.innerText = `${target.speed}`;
     this._burst.innerText = burstTemplate(target.burst);
   }
 }
