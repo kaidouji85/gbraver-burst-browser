@@ -397,6 +397,19 @@
     display: flex;
 }
 
+.player-select__armdozer-status__status__hp-label,
+.player-select__armdozer-status__status__power-label
+{
+    margin-right: calc(var(--responsive-font-size) * 0.2);
+}
+
+.player-select__armdozer-status__status__hp-value,
+.player-select__armdozer-status__status__power-value,
+.player-select__armdozer-status__status__speed-value
+{
+    margin-right: calc(var(--responsive-font-size));
+}
+
 .player-select__armdozer-selector__icons {
     display: flex;
     align-items: center;
