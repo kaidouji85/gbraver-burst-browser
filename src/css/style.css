@@ -410,6 +410,14 @@
     margin-right: calc(var(--responsive-font-size));
 }
 
+.player-select__armdozer-status__burst {
+    display: flex;
+}
+
+.player-select__armdozer-status__burst__label {
+    flex: 0 0 calc(var(--responsive-font-size) * 3.5);
+}
+
 .player-select__armdozer-selector__icons {
     display: flex;
     align-items: center;

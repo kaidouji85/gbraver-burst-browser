@@ -2,7 +2,7 @@
 
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozers} from "gbraver-burst-core";
-import {burstTemplate, statusTemplate} from "./status-template";
+import {burstTemplate} from "./status-template";
 import {domUuid} from "../../../../uuid/dom-uuid";
 
 /**
@@ -43,7 +43,10 @@ export class ArmdozerStatus {
         <div class="${ROOT_CLASS_NAME}__basic__power-label">機動</div>
         <div class="${ROOT_CLASS_NAME}__basic__power-value" data-id="${speedId}" ></div>
       </div>
-      <div class="${ROOT_CLASS_NAME}__burst" data-id="${burstId}"></div>
+      <div class="${ROOT_CLASS_NAME}__burst">
+        <div class="${ROOT_CLASS_NAME}__burst__label">バースト</div>
+        <div class="${ROOT_CLASS_NAME}__burst__content" data-id="${burstId}"></div>
+      </div>
     `;
 
     this._name = this._root.querySelector(`[data-id="${nameId}"]`)
