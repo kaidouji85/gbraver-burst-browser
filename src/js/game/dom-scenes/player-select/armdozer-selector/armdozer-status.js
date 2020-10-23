@@ -35,13 +35,13 @@ export class ArmdozerStatus {
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
       <div class="${ROOT_CLASS_NAME}__name" data-id="${nameId}"></div>
-      <div class="${ROOT_CLASS_NAME}__status">
-        <div class="${ROOT_CLASS_NAME}__status__hp-label">HP</div>
-        <div class="${ROOT_CLASS_NAME}__status__hp-value" data-id="${hpId}" ></div>
-        <div class="${ROOT_CLASS_NAME}__status__power-label">攻撃</div>
-        <div class="${ROOT_CLASS_NAME}__status__power-value" data-id="${powerId}" ></div>
-        <div class="${ROOT_CLASS_NAME}__status__power-label">機動</div>
-        <div class="${ROOT_CLASS_NAME}__status__power-value" data-id="${speedId}" ></div>
+      <div class="${ROOT_CLASS_NAME}__basic">
+        <div class="${ROOT_CLASS_NAME}__basic__hp-label">HP</div>
+        <div class="${ROOT_CLASS_NAME}__basic__hp-value" data-id="${hpId}" ></div>
+        <div class="${ROOT_CLASS_NAME}__basic__power-label">攻撃</div>
+        <div class="${ROOT_CLASS_NAME}__basic__power-value" data-id="${powerId}" ></div>
+        <div class="${ROOT_CLASS_NAME}__basic__power-label">機動</div>
+        <div class="${ROOT_CLASS_NAME}__basic__power-value" data-id="${speedId}" ></div>
       </div>
       <div class="${ROOT_CLASS_NAME}__burst" data-id="${burstId}"></div>
     `;

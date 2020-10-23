@@ -393,19 +393,19 @@
     margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.player-select__armdozer-status__status {
+.player-select__armdozer-status__basic {
     display: flex;
 }
 
-.player-select__armdozer-status__status__hp-label,
-.player-select__armdozer-status__status__power-label
+.player-select__armdozer-status__basic__hp-label,
+.player-select__armdozer-status__basic__power-label,
+.player-select__armdozer-status__basic__speed-label
 {
     margin-right: calc(var(--responsive-font-size) * 0.2);
 }
 
-.player-select__armdozer-status__status__hp-value,
-.player-select__armdozer-status__status__power-value,
-.player-select__armdozer-status__status__speed-value
+.player-select__armdozer-status__basic__hp-value,
+.player-select__armdozer-status__basic__power-value
 {
     margin-right: calc(var(--responsive-font-size));
 }
