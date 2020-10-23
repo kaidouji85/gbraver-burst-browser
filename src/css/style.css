@@ -393,10 +393,6 @@
     margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.player-select__armdozer-status__basic {
-    display: flex;
-}
-
 .player-select__armdozer-status__basic__hp-label,
 .player-select__armdozer-status__basic__power-label,
 .player-select__armdozer-status__basic__speed-label
@@ -410,12 +406,8 @@
     margin-right: calc(var(--responsive-font-size));
 }
 
-.player-select__armdozer-status__burst {
-    display: flex;
-}
-
 .player-select__armdozer-status__burst__label {
-    flex: 0 0 calc(var(--responsive-font-size) * 3.5);
+    margin-right: calc(var(--responsive-font-size) * 0.5);;
 }
 
 .player-select__armdozer-selector__icons {
@@ -441,7 +433,7 @@
 }
 
 .player-select__pilot-status__skill__label {
-    padding-right: 0.5em;
+    padding-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .player-select__pilot-selector__icons {
