@@ -1,6 +1,6 @@
 // @flow
 
-import type {Armdozer, BuffPower, Burst, ContinuousAttack, LightningBarrier, RecoverBattery} from "gbraver-burst-core";
+import type {BuffPower, Burst, ContinuousAttack, LightningBarrier, RecoverBattery} from "gbraver-burst-core";
 
 /**
  * バーストの説明文テンプレート
