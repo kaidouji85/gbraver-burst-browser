@@ -16,7 +16,7 @@
     "build:production": "npm-run-all clean type-check lint lint:test webpack:production webpack:sw webpack:clear-sw",
     "build:storybook-static": "build-storybook -s ./src/resources -o build/storybook-static",
     "clean": "rimraf build",
-    "dev-server": "webpack-dev-server",
+    "dev-server": "webpack serve",
     "serve": "http-server build/production -p 3000 -c-1",
     "serve:storybook-static": "http-server build/storybook-static",
     "webpack": "webpack",
