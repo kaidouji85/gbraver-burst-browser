@@ -105,13 +105,16 @@ export class DOMScenes {
 
     const scene = new PlayerSelect(resources);
     this._sceneSubscriptions = [
-      scene.selectionCompleteNotifier().subscribe(v => {
+      scene.decideNotifier().subscribe(v => {
         this._gameAction.next({
           type: 'SelectionComplete',
           armdozerId: v.armdozerId,
           pilotId: v.pilotId,
         });
-      })
+      }),
+      scene.prevNotifier().subscribe(() => {
+        this._gameAction.next({type: 'SelectionCancel'});
+      }),
     ];
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([

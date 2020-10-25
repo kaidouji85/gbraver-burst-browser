@@ -30,11 +30,17 @@ export const PathIds = {
   TITLE_BACK: 'TITLE_BACK',
   LOGO: 'LOGO',
   SHIN_BRAVER_ICON: 'SHIN_BRAVER_ICON',
+  SHIN_BRAVER_BUST_SHOT: 'SHIN_BRAVER_BUST_SHOT',
   NEO_LANDOZER_ICON: 'NEO_LANDOZER_ICON',
+  NEO_LANDOZER_BUST_SHOT: 'NEO_LANDOZER_BUST_SHOT',
   LIGHTNING_DOZER_ICON: 'LIGHTNING_DOZER_ICON',
+  LIGHTNING_DOZER_BUST_SHOT: 'LIGHTNING_DOZER_BUST_SHOT',
   WING_DOZER_ICON: 'WING_DOZER_ICON',
+  WING_DOZER_BUST_SHOT: 'WING_DOZER_BUST_SHOT',
   SHINYA_ICON: 'SHINYA_ICON',
+  SHINYA_SKILL_CUTIN: 'SHINYA_SKILL_CUTIN',
   GAI_ICON: 'GAI_ICON',
+  GAI_SKILL_CUTIN: 'GAI_SKILL_CUTIN',
   END: 'END',
   END_CARD: 'END_CARD',
   CLOSER: 'CLOSER',
@@ -58,28 +64,48 @@ export const PathConfigs: PathConfig[] = [
     path: root => `${root.get()}/armdozer/shin-braver/player-select.png`
   },
   {
+    id: PathIds.SHIN_BRAVER_BUST_SHOT,
+    path: root => `${root.get()}/armdozer/shin-braver/bust-shot.png`
+  },
+  {
     id: PathIds.NEO_LANDOZER_ICON,
     path: root => `${root.get()}/armdozer/neo-landozer/player-select.png`
   },
   {
-    id: PathIds.LIGHTNING_DOZER_ICON,
-    path: root => `${root.get()}/armdozer/lightning-dozer/player-select.png`
+    id: PathIds.NEO_LANDOZER_BUST_SHOT,
+    path: root => `${root.get()}/armdozer/neo-landozer/bust-shot.png`
   },
   {
     id: PathIds.LIGHTNING_DOZER_ICON,
     path: root => `${root.get()}/armdozer/lightning-dozer/player-select.png`
+  },
+  {
+    id: PathIds.LIGHTNING_DOZER_BUST_SHOT,
+    path: root => `${root.get()}/armdozer/lightning-dozer/bust-shot.png`
   },
   {
     id: PathIds.WING_DOZER_ICON,
     path: root => `${root.get()}/armdozer/wing-dozer/player-select.png`
   },
   {
+    id: PathIds.WING_DOZER_BUST_SHOT,
+    path: root => `${root.get()}/armdozer/wing-dozer/bust-shot.png`
+  },
+  {
     id: PathIds.SHINYA_ICON,
     path: root => `${root.get()}/pilot/shinya/player-select.png`
   },
   {
+    id: PathIds.SHINYA_SKILL_CUTIN,
+    path: root => `${root.get()}/pilot/shinya/skill-cutin.png`
+  },
+  {
     id: PathIds.GAI_ICON,
     path: root => `${root.get()}/pilot/gai/player-select.png`
+  },
+  {
+    id: PathIds.GAI_SKILL_CUTIN,
+    path: root => `${root.get()}/pilot/gai/skill-cutin.png`
   },
   {
     id: PathIds.END,
