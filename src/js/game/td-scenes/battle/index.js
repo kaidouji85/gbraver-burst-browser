@@ -107,8 +107,10 @@ export class BattleScene implements Scene {
    * 戦闘を開始する
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
    */
-  async start(): Promise<void> {
-    await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState.stateHistory).play();
+  start(): Promise<void> {
+    return this._exclusive.execute(async (): Promise<void> => {
+      await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState.stateHistory).play();
+    });
   }
 
   /**
