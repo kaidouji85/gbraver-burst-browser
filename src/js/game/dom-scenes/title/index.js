@@ -17,6 +17,7 @@ export type Notifier = {
 export class Title implements DOMScene {
   _canOperation: boolean;
   _presentation: TitlePresentation;
+  _changeValue: typeof Howl;
   _pushButton: typeof Howl;
   _pushGameStart: Subject<void>;
   _pushHowToPlay: Subject<void>;
@@ -31,10 +32,10 @@ export class Title implements DOMScene {
     this._canOperation = true;
     this._presentation = new TitlePresentation(resources);
 
-    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this._pushButton = pushButtonResource
-      ? pushButtonResource.sound
-      : new Howl();
+    this._pushButton = this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?.sound ?? new Howl();
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
 
     this._pushGameStart = new Subject();
     this._pushHowToPlay = new Subject();
@@ -105,6 +106,7 @@ export class Title implements DOMScene {
       return;
     }
 
+    this._changeValue.play();
     this._canOperation = false;
     this._presentation.pushHowToPlayButton();
     this._pushHowToPlay.next();
