@@ -2,12 +2,12 @@
 
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Observable} from "rxjs";
-import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import type {PushDOM} from "../../../action/push/push-dom";
 import {pushDOMStream} from "../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
+import {pop} from "../../../dom/animation/pop";
 
 /** イベント通知 */
 type Notifier = {
@@ -112,16 +112,7 @@ export class TitlePresentation {
    * @return アニメーション
    */
   async pushGameStartButton(): Promise<void> {
-    const animation = this._gameStart.animate([
-      {transform: 'scale(1)'},
-      {transform: 'scale(1.1)'},
-      {transform: 'scale(1)'},
-    ], {
-      duration: 200,
-      fill: "forwards",
-      easing: 'ease'
-    });
-    await waitFinishAnimation(animation);
+    await pop(this._gameStart);
   }
 
   /**
@@ -130,15 +121,6 @@ export class TitlePresentation {
    * @return アニメーション
    */
   async pushHowToPlayButton(): Promise<void> {
-    const animation = this._howToPlay.animate([
-      {transform: 'scale(1)'},
-      {transform: 'scale(1.1)'},
-      {transform: 'scale(1)'},
-    ], {
-      duration: 200,
-      fill: "forwards",
-      easing: 'ease'
-    });
-    await waitFinishAnimation(animation);
+    await pop(this._howToPlay);
   }
 }

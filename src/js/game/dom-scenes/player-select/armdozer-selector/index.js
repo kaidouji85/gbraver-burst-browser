@@ -8,7 +8,7 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {Howl} from 'howler';
 import {ArmdozerStatus} from "./armdozer-status";
-import {replaceDOM} from "../../../../dom/replace-dom";
+import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {ControlButton} from "../controllers/control-button";
 import {okButton, prevButton} from "../controllers";
 import {Exclusive} from "../../../../exclusive/exclusive";
