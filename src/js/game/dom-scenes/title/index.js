@@ -6,6 +6,7 @@ import type {DOMScene} from "../dom-scene";
 import type {Resources} from "../../../resource";
 import {Howl} from 'howler';
 import {SOUND_IDS} from "../../../resource/sound";
+import {Exclusive} from "../../../exclusive/exclusive";
 
 /** イベント通知 */
 export type Notifier = {
@@ -15,8 +16,9 @@ export type Notifier = {
 
 /** タイトルシーン */
 export class Title implements DOMScene {
-  _canOperation: boolean;
+  _exclusive: Exclusive;
   _presentation: TitlePresentation;
+  _changeValue: typeof Howl;
   _pushButton: typeof Howl;
   _pushGameStart: Subject<void>;
   _pushHowToPlay: Subject<void>;
@@ -28,13 +30,13 @@ export class Title implements DOMScene {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._canOperation = true;
+    this._exclusive = new Exclusive();
     this._presentation = new TitlePresentation(resources);
 
-    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this._pushButton = pushButtonResource
-      ? pushButtonResource.sound
-      : new Howl();
+    this._pushButton = this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?.sound ?? new Howl();
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
 
     this._pushGameStart = new Subject();
     this._pushHowToPlay = new Subject();
@@ -86,28 +88,22 @@ export class Title implements DOMScene {
   /**
    * ゲームスタートが押された際の処理
    */
-  async _onPushGameStart(): Promise<void> {
-    if (!this._canOperation) {
-      return;
-    }
-
-    this._canOperation = false;
-    this._pushButton.play();
-    await this._presentation.pushGameStartButton();
-    this._pushGameStart.next();
+  _onPushGameStart(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._pushButton.play();
+      await this._presentation.pushGameStartButton();
+      this._pushGameStart.next();
+    });
   }
 
   /**
    * 遊び方が押された際の処理
    */
-  async _onPushHowToPlay(): Promise<void> {
-    if (!this._canOperation) {
-      return;
-    }
-
-    this._canOperation = false;
-    this._presentation.pushHowToPlayButton();
-    this._pushHowToPlay.next();
-    this._canOperation = true;
+  _onPushHowToPlay(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._changeValue.play();
+      await this._presentation.pushHowToPlayButton();
+      this._pushHowToPlay.next();
+    });
   }
 }
