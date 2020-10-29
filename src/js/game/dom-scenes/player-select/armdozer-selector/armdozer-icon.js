@@ -7,7 +7,7 @@ import {getArmdozerIconPathId} from "../../../../path/armdozer-icon-path";
 import type {PushDOM} from "../../../../action/push/push-dom";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
-import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
+import {pop} from "../../../../dom/animation/pop";
 
 /**
  * アームドーザアイコン ビュー
@@ -67,15 +67,6 @@ export class ArmdozerIcon {
    * @return アニメーション
    */
   async pop(): Promise<void> {
-    const animation = this._image.animate([
-      {transform: 'scale(1)'},
-      {transform: 'scale(1.1)'},
-      {transform: 'scale(1)'},
-    ], {
-      duration: 200,
-      fill: "forwards",
-      easing: 'ease'
-    });
-    await waitFinishAnimation(animation);
+    await pop(this._image);
   }
 }
