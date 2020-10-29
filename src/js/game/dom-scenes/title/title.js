@@ -10,6 +10,7 @@ import {pop} from "../../../dom/animation/pop";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
+import type {DOMScene} from "../dom-scene";
 
 /** イベント通知 */
 type Notifier = {
@@ -17,8 +18,10 @@ type Notifier = {
   pushHowToPlay: Observable<void>,
 };
 
-/** タイトルビュー */
-export class TitlePresentation {
+/**
+ * タイトル
+ */
+export class Title implements DOMScene {
   _exclusive: Exclusive;
   _root: HTMLElement;
   _gameStart: HTMLElement;

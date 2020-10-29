@@ -4,7 +4,7 @@ import {Observable, Subject, Subscription} from "rxjs";
 import type {LoadingAction} from "../../action/loading/loading";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
-import {Title} from "./title";
+import {Title} from "./title/title";
 import {PlayerSelect} from "./player-select";
 import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
