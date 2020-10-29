@@ -12,12 +12,6 @@ import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {DOMScene} from "../dom-scene";
 
-/** イベント通知 */
-type Notifier = {
-  pushGameStart: Observable<void>,
-  pushHowToPlay: Observable<void>,
-};
-
 /**
  * タイトル
  */
@@ -60,17 +54,14 @@ export class Title implements DOMScene {
     `;
     this._root.className = 'title';
     const titleBackImage = new Image();
-    this._isTitleBackLoaded = waitElementLoaded(titleBackImage)
-      .then(() => {
-        this._root.style.backgroundImage = `url(${titleBackImage.src})`;
-      });
+    this._isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
+      this._root.style.backgroundImage = `url(${titleBackImage.src})`;
+    });
     titleBackImage.src = resources.paths.find(v => v.id === PathIds.TITLE_BACK)
       ?.path ?? '';
 
     const logo = this._root.querySelector(`[data-id="${logoId}"]`);
-    const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement)
-      ? logo
-      : new Image();
+    const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement) ? logo : new Image();
     this._isLogoLoaded = waitElementLoaded(logoImage);
     logoImage.src = resources.paths.find(v => v.id === PathIds.LOGO)
       ?.path ?? '';
@@ -81,11 +72,10 @@ export class Title implements DOMScene {
       ?.sound ?? new Howl();
 
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
-    this._pushGameStart = new Subject();
-
     this._howToPlay = this._root.querySelector(`[data-id="${howToPlayId}"]`) || document.createElement('div');
-    this._pushHowToPlay = new Subject();
 
+    this._pushGameStart = new Subject();
+    this._pushHowToPlay = new Subject();
     this._subscriptions = [
       pushDOMStream(this._gameStart).subscribe(() => {
         this._onPushGameStart();
@@ -106,15 +96,21 @@ export class Title implements DOMScene {
   }
 
   /**
-   * イベント通知ストリームを取得する
+   * ゲームスタートボタン押下通知
    *
    * @return イベント通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      pushGameStart: this._pushGameStart,
-      pushHowToPlay: this._pushHowToPlay,
-    };
+  pushGameStartNotifier(): Observable<void> {
+    return this._pushGameStart;
+  }
+
+  /**
+   * 遊び方ボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushHowToPlayNotifier(): Observable<void> {
+    return this._pushHowToPlay;
   }
 
   /**

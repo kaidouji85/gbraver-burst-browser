@@ -75,12 +75,11 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new Title(resources);
-    const notifier = scene.notifier();
     this._sceneSubscriptions = [
-      notifier.pushGameStart.subscribe(() => {
+      scene.pushGameStartNotifier().subscribe(() => {
         this._gameAction.next({type: 'GameStart'});
       }),
-      notifier.pushHowToPlay.subscribe(() => {
+      scene.pushHowToPlayNotifier().subscribe(() => {
         this._gameAction.next({type: 'ShowHowToPlay'});
       }),
     ];
