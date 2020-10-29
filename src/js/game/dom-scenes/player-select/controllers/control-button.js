@@ -2,7 +2,7 @@
 
 import {Observable, Subject, Subscription} from "rxjs";
 import {pushDOMStream} from "../../../../action/push/push-dom";
-import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
+import {pop} from "../../../../dom/animation/pop";
 
 /**
  * ボタン
@@ -51,16 +51,7 @@ export class ControlButton {
    * @return アニメーション
    */
   async pop(): Promise<void> {
-    const animation = this._root.animate([
-      {transform: 'scale(1)'},
-      {transform: 'scale(1.1)'},
-      {transform: 'scale(1)'},
-    ], {
-      duration: 200,
-      fill: "forwards",
-      easing: 'ease'
-    });
-    await waitFinishAnimation(animation);
+    await pop(this._root);
   }
 
   /**

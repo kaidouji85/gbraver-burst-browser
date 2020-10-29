@@ -6,7 +6,7 @@ import {PilotIcon} from "./pilot-icon";
 import {Observable, Subject, Subscription} from "rxjs";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {PilotStatus} from "./pilot-status";
-import {replaceDOM} from "../../../../dom/replace-dom";
+import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {ControlButton} from "../controllers/control-button";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
