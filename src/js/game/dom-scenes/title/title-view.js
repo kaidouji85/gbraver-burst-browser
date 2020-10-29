@@ -1,31 +1,35 @@
 // @flow
 
 import {domUuid} from "../../../uuid/dom-uuid";
-import {Observable} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import type {PushDOM} from "../../../action/push/push-dom";
 import {pushDOMStream} from "../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {pop} from "../../../dom/animation/pop";
+import {Howl} from "howler";
+import {SOUND_IDS} from "../../../resource/sound";
+import {Exclusive} from "../../../exclusive/exclusive";
 
 /** イベント通知 */
 type Notifier = {
-  gameStart: Observable<PushDOM>,
-  howToPlay: Observable<PushDOM>,
+  pushGameStart: Observable<void>,
+  pushHowToPlay: Observable<void>,
 };
 
 /** タイトルビュー */
 export class TitlePresentation {
-  _gameStartStream: Observable<PushDOM>;
-  _howToPlayStream: Observable<PushDOM>;
-
+  _exclusive: Exclusive;
   _root: HTMLElement;
   _gameStart: HTMLElement;
   _howToPlay: HTMLElement;
-
   _isTitleBackLoaded: Promise<void>;
   _isLogoLoaded: Promise<void>;
+  _changeValue: typeof Howl;
+  _pushButton: typeof Howl;
+  _pushGameStart: Subject<void>;
+  _pushHowToPlay: Subject<void>;
+  _subscriptions: Subscription[];
 
   /**
    * コンストラクタ
@@ -33,6 +37,8 @@ export class TitlePresentation {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
+    this._exclusive = new Exclusive();
+
     const logoId = domUuid();
     const gameStartId = domUuid();
     const howToPlayId = domUuid();
@@ -66,11 +72,34 @@ export class TitlePresentation {
     logoImage.src = resources.paths.find(v => v.id === PathIds.LOGO)
       ?.path ?? '';
 
+    this._pushButton = this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?.sound ?? new Howl();
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
+
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
-    this._gameStartStream = pushDOMStream(this._gameStart);
+    this._pushGameStart = new Subject();
 
     this._howToPlay = this._root.querySelector(`[data-id="${howToPlayId}"]`) || document.createElement('div');
-    this._howToPlayStream = pushDOMStream(this._howToPlay);
+    this._pushHowToPlay = new Subject();
+
+    this._subscriptions = [
+      pushDOMStream(this._gameStart).subscribe(() => {
+        this._onPushGameStart();
+      }),
+      pushDOMStream(this._howToPlay).subscribe(() => {
+        this._onPushHowToPlay()
+      })
+    ];
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._subscriptions.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -80,8 +109,8 @@ export class TitlePresentation {
    */
   notifier(): Notifier {
     return {
-      gameStart: this._gameStartStream,
-      howToPlay: this._howToPlayStream,
+      pushGameStart: this._pushGameStart,
+      pushHowToPlay: this._pushHowToPlay,
     };
   }
 
@@ -107,20 +136,24 @@ export class TitlePresentation {
   }
 
   /**
-   * ゲームスタートボタンを押した際のアニメーション
-   *
-   * @return アニメーション
+   * ゲームスタートが押された際の処理
    */
-  async pushGameStartButton(): Promise<void> {
-    await pop(this._gameStart);
+  _onPushGameStart(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._pushButton.play();
+      await pop(this._gameStart);
+      this._pushGameStart.next();
+    });
   }
 
   /**
-   * 遊び方ボタンを押した際のアニメーション
-   *
-   * @return アニメーション
+   * 遊び方が押された際の処理
    */
-  async pushHowToPlayButton(): Promise<void> {
-    await pop(this._howToPlay);
+  _onPushHowToPlay(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._changeValue.play();
+      await pop(this._howToPlay);
+      this._pushHowToPlay.next();
+    });
   }
 }
