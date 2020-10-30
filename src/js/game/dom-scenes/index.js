@@ -4,7 +4,7 @@ import {Observable, Subject, Subscription} from "rxjs";
 import type {LoadingAction} from "../../action/loading/loading";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
-import {Title} from "./title";
+import {Title} from "./title/title";
 import {PlayerSelect} from "./player-select";
 import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
@@ -75,12 +75,11 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new Title(resources);
-    const notifier = scene.notifier();
     this._sceneSubscriptions = [
-      notifier.pushGameStart.subscribe(() => {
+      scene.pushGameStartNotifier().subscribe(() => {
         this._gameAction.next({type: 'GameStart'});
       }),
-      notifier.pushHowToPlay.subscribe(() => {
+      scene.pushHowToPlayNotifier().subscribe(() => {
         this._gameAction.next({type: 'ShowHowToPlay'});
       }),
     ];
