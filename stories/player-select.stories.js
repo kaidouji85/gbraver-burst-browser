@@ -4,7 +4,7 @@ import {PlayerSelect} from "../src/js/game/dom-scenes/player-select";
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
 import {PilotIds} from "gbraver-burst-core";
-import {PilotIcon} from "../src/js/game/dom-scenes/player-select/pilot-icon";
+import {PilotIcon} from "../src/js/game/dom-scenes/player-select/pilot-selector/pilot-icon";
 import {PilotSelector} from "../src/js/game/dom-scenes/player-select/pilot-selector";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {ArmdozerSelector} from "../src/js/game/dom-scenes/player-select/armdozer-selector";
@@ -21,7 +21,7 @@ export const scene: DOMStubStory = domStub(resources => {
 export const pilotIcon: DOMStubStory = domStub(resources => {
   const icon = new PilotIcon(resources, PilotIds.SHINYA);
   icon.selectedNotifier().subscribe(() => {
-    icon.selected();
+    // NOP
   });
   return icon.getRootHTMLElement();
 });
@@ -33,7 +33,7 @@ export const armdozerSelector: DOMStubStory = domStub(resources => {
     ArmDozerIdList.WING_DOZER,
     ArmDozerIdList.LIGHTNING_DOZER,
   ];
-  const component = new ArmdozerSelector(resources, armdozerIds);
+  const component = new ArmdozerSelector(resources, armdozerIds, ArmDozerIdList.SHIN_BRAVER);
   return component.getRootHTMLElement();
 });
 
@@ -42,6 +42,6 @@ export const pilotSelector: DOMStubStory = domStub(resources => {
     PilotIds.SHINYA,
     PilotIds.GAI,
   ];
-  const component = new PilotSelector(resources, pilotIds);
+  const component = new PilotSelector(resources, pilotIds, PilotIds.SHINYA);
   return component.getRootHTMLElement();
 });

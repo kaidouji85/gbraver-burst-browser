@@ -1,5 +1,6 @@
 [ignore]
-build/*
+<PROJECT_ROOT>/build/.*
+<PROJECT_ROOT>/node_modules/webpack-cli/.*
 
 [include]
 

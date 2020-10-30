@@ -27,8 +27,11 @@
 
     /** ボタン */
     --button-background-color: #1e90ff;
+    --sub-button-background-color: #696969;
     --button-font-color: rgb(240, 240, 240);
     --button-border-radius: calc(var(--responsive-font-size) * 0.5);
+    --button-border: none;
+    --button-box-shadow: 0 0 0.5em rgb(25 25 25);
 
     /** ダイアログ */
     --dialog-border: solid #a9a9a9 1px;
@@ -89,7 +92,6 @@
         display: none;
     }
 }
-
 
 /**
  * ローディング画面
@@ -191,7 +193,8 @@
     border-radius: var(--button-border-radius);
     background-color: var(--button-background-color);
     color: var(--button-font-color);
-    border: none;
+    border: var(--button-border);
+    box-shadow: var(--button-box-shadow);
 }
 
 /**
@@ -258,6 +261,10 @@
  */
 @media (orientation: landscape) {
     .player-select {
+        --working-zindex: 1;
+        --selector-zindex: 2;
+        display: flex;
+        flex-direction: column;
         width: var(--screen-width);
         height: var(--screen-height);
         background-color: var(--background-color);
@@ -276,64 +283,168 @@
     }
 }
 
+.player-select__working {
+    z-index: var(--working-zindex);
+    position: relative;
+    flex: 1 1;
+}
+
+.player-select__ok-button {
+    width: calc(var(--responsive-font-size) * 10);
+    height: calc(var(--responsive-font-size) * 3);
+    font-size: var(--responsive-font-size);
+    border-radius: var(--button-border-radius);
+    background-color: var(--button-background-color);
+    color: var(--button-font-color);
+    border: var(--button-border);
+    box-shadow: var(--button-box-shadow);
+}
+
+.player-select__prev-button {
+    width: calc(var(--responsive-font-size) * 10);
+    height: calc(var(--responsive-font-size) * 3);
+    font-size: var(--responsive-font-size);
+    border-radius: var(--button-border-radius);
+    background-color: var(--sub-button-background-color);
+    color: var(--button-font-color);
+    border: var(--button-border);
+    box-shadow: var(--button-box-shadow);
+    margin-right: calc(var(--responsive-font-size) * 0.5);
+}
+
+.player-select__armdozer-bust-shot__shin-braver {
+    --width: calc(var(--vh) * 200);
+    position: absolute;
+    top: calc(var(--vh) * -10);
+    left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
+    width: var(--width);
+}
+
+.player-select__armdozer-bust-shot__neo-landozer {
+    --width: calc(var(--vh) * 200);
+    position: absolute;
+    top: calc(var(--vh) * -25);
+    left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
+    width: var(--width);
+}
+
+.player-select__armdozer-bust-shot__lightning-dozer {
+    --width: calc(var(--vh) * 200);
+    position: absolute;
+    top: calc(var(--vh) * -25);
+    left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
+    width: var(--width);
+}
+
+.player-select__armdozer-bust-shot__wing-dozer {
+    --width: calc(var(--vh) * 200);
+    position: absolute;
+    top: calc(var(--vh) * -40);
+    left: calc(100vw - 0.8 * var(--width) - var(--safe-area-right));
+    width: var(--width);
+}
+
+.player-select__pilot-bust-shot__shinya {
+    --width:  calc(var(--vh) * 85);
+    --height: var(--width);
+    position: absolute;
+    left: calc(100vw - var(--width) * 0.9  - var(--safe-area-right));
+    top: calc(100 * var(--vh) - var(--height) * 0.9);
+    width: var(--width);
+    height: var(--height);
+}
+
+.player-select__pilot-bust-shot__gai {
+    --width: calc(var(--vh) * 85);
+    --height: var(--width);
+    position: absolute;
+    left: calc(100vw - var(--width) * 0.9 - var(--safe-area-right));
+    top: calc(100 * var(--vh) - var(--height) * 0.9);
+    width: var(--width);
+    height: var(--height);
+}
+
+.player-select__selector {
+    z-index: var(--selector-zindex);
+}
+
 .player-select__armdozer-selector {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+    align-items: flex-start;
 }
 
 .player-select__armdozer-selector--hidden {
     display: none;
 }
 
-.player-select__armdozer-selector__caption {
-    font-size: calc(var(--responsive-font-size) * 1.5);
-    margin-bottom: calc(var(--responsive-font-size));
+.player-select__armdozer-status,
+.player-select__pilot-status {
+    display: flex;
+    flex-direction: column;
+    font-size: calc(var(--responsive-font-size) * 0.8);
+    width: 50vw;
+    box-sizing: border-box;
+    height: calc(var(--responsive-font-size) * 6);
+    padding: calc(var(--responsive-font-size) * 0.5);
+    background-color: rgba(10, 10, 10, 0.7);
+    border: var(--dialog-border);
+    border-radius: var(--dialog-border-radius);
+    margin-bottom: calc(var(--responsive-font-size) * 0.5);
+}
+
+.player-select__armdozer-status__basic__hp-label,
+.player-select__armdozer-status__basic__power-label,
+.player-select__armdozer-status__basic__speed-label
+{
+    margin-right: calc(var(--responsive-font-size) * 0.2);
+}
+
+.player-select__armdozer-status__basic__hp-value,
+.player-select__armdozer-status__basic__power-value
+{
+    margin-right: calc(var(--responsive-font-size));
+}
+
+.player-select__armdozer-status__burst__label {
+    margin-right: calc(var(--responsive-font-size) * 0.5);;
 }
 
 .player-select__armdozer-selector__icons {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.player-select__armdozer__icon {
-    object-fit: cover;
-    width: 23vw;
+.player-select__armdozer-icon {
+    width: 12.5vw;
 }
 
 .player-select__pilot-selector {
+    z-index: var(--selector-zindex);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--background-color);
-    color: var(--font-color);
-    width: 100%;
-    height: 100%;
+    align-items: flex-start;
 }
 
 .player-select__pilot-selector--hidden {
     display: none;
 }
 
-.player-select__pilot-selector__caption {
-    font-size: calc(var(--responsive-font-size) * 1.5);
-    margin-bottom: calc(var(--responsive-font-size));
+.player-select__pilot-status__skill__label {
+    padding-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .player-select__pilot-selector__icons {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.player-select__pilot__icon {
-    object-fit: cover;
-    width: 23vw;
+.player-select__pilot-icon {
+    width: 12.5vw;
 }
 
 /**

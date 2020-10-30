@@ -70,11 +70,9 @@ export class PilotButtonView {
     this._buttonDisabled.getObject3D().position.z = 2;
     this._group.add(this._buttonDisabled.getObject3D());
 
-    // TODO ?. ?? でスマートに書き直す
-    const pilotButtonResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON);
-    const pilotButton: Image = pilotButtonResource
-      ? pilotButtonResource.image
-      : new Image();
+    const pilotButton = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON)
+      ?.image ?? new Image();
     this._button = new SimpleImageMesh({
       canvasSize: CANVAS_SIZE,
       meshSize: CANVAS_SIZE,

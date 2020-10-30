@@ -17,6 +17,7 @@ import type {Scene} from "../scene";
 import type {Resize} from "../../../action/resize/resize";
 import {all} from "../../../animation/all";
 import {BattleSceneSounds} from "./sounds";
+import {Exclusive} from "../../../exclusive/exclusive";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -45,11 +46,13 @@ export class BattleScene implements Scene {
   _initialState: InitialState;
   _endBattle: Subject<GameEnd>;
   _battleProgress: BattleProgress;
+  _exclusive: Exclusive;
   _view: BattleSceneView;
   _sounds: BattleSceneSounds;
   _subscription: Subscription[];
 
   constructor(param: Param) {
+    this._exclusive = new Exclusive();
     this._initialState = param.initialState;
     this._state = createInitialState(param.initialState.playerId);
     this._endBattle = new Subject();
@@ -104,9 +107,10 @@ export class BattleScene implements Scene {
    * 戦闘を開始する
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
    */
-  async start(): Promise<void> {
-    await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState.stateHistory).play();
-    this._state.canOperation = true;
+  start(): Promise<void> {
+    return this._exclusive.execute(async (): Promise<void> => {
+      await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState.stateHistory).play();
+    });
   }
 
   /**
@@ -115,54 +119,44 @@ export class BattleScene implements Scene {
    * @param action アクション
    */
   async _onDecideBattery(action: DecideBattery): Promise<void> {
-    if (!this._state.canOperation) {
-      return;
-    }
-
-    this._state.canOperation = false;
-    await all(
-      this._view.hud.gameObjects.batterySelector.decide(),
-      this._view.hud.gameObjects.burstButton.close(),
-      this._view.hud.gameObjects.pilotButton.close(),
-    ).chain(delay(500)
-    ).chain(this._view.hud.gameObjects.batterySelector.close()
-    ).play();
-    const lastState = await this._progressGame({
-      type: 'BATTERY_COMMAND',
-      battery: action.battery
+    this._exclusive.execute(async (): Promise<void> => {
+      await all(
+        this._view.hud.gameObjects.batterySelector.decide(),
+        this._view.hud.gameObjects.burstButton.close(),
+        this._view.hud.gameObjects.pilotButton.close(),
+      ).chain(delay(500)
+      ).chain(this._view.hud.gameObjects.batterySelector.close()
+      ).play();
+      const lastState = await this._progressGame({
+        type: 'BATTERY_COMMAND',
+        battery: action.battery
+      });
+      if (lastState && lastState.effect.name === 'GameEnd') {
+        await this._onEndGame(lastState.effect);
+        return;
+      }
     });
-    if (lastState && lastState.effect.name === 'GameEnd') {
-      this._onEndGame(lastState.effect);
-      return;
-    }
-
-    this._state.canOperation = true;
   }
 
   /**
    * バースト時の処理
    */
   async _onBurst(): Promise<void> {
-    if (!this._state.canOperation) {
-      return;
-    }
-
-    this._state.canOperation = false;
-    await all(
-      this._view.hud.gameObjects.burstButton.decide(),
-      this._view.hud.gameObjects.batterySelector.close(),
-      this._view.hud.gameObjects.pilotButton.close()
-    )
-      .chain(delay(500))
-      .chain(this._view.hud.gameObjects.burstButton.close())
-      .play();
-    const lastState = await this._progressGame({type: 'BURST_COMMAND'});
-    if (lastState && lastState.effect.name === 'GameEnd') {
-      this._onEndGame(lastState.effect);
-      return;
-    }
-
-    this._state.canOperation = true;
+    this._exclusive.execute(async (): Promise<void> => {
+      await all(
+        this._view.hud.gameObjects.burstButton.decide(),
+        this._view.hud.gameObjects.batterySelector.close(),
+        this._view.hud.gameObjects.pilotButton.close()
+      )
+        .chain(delay(500))
+        .chain(this._view.hud.gameObjects.burstButton.close())
+        .play();
+      const lastState = await this._progressGame({type: 'BURST_COMMAND'});
+      if (lastState && lastState.effect.name === 'GameEnd') {
+        await this._onEndGame(lastState.effect);
+        return;
+      }
+    });
   }
 
   /**
@@ -171,25 +165,20 @@ export class BattleScene implements Scene {
    * @return 実行結果
    */
   async _onPilotSkill(): Promise<void> {
-    if (!this._state.canOperation) {
-      return;
-    }
-
-    this._state.canOperation = false;
-    await all(
-      this._view.hud.gameObjects.pilotButton.decide(),
-      this._view.hud.gameObjects.burstButton.close(),
-      this._view.hud.gameObjects.batterySelector.close(),
-    ).chain(delay(500))
-      .chain(this._view.hud.gameObjects.pilotButton.close())
-      .play();
-    const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
-    if (lastState && lastState.effect.name === 'GameEnd') {
-      this._onEndGame(lastState.effect);
-      return;
-    }
-
-    this._state.canOperation = true;
+    this._exclusive.execute(async (): Promise<void> => {
+      await all(
+        this._view.hud.gameObjects.pilotButton.decide(),
+        this._view.hud.gameObjects.burstButton.close(),
+        this._view.hud.gameObjects.batterySelector.close(),
+      ).chain(delay(500))
+        .chain(this._view.hud.gameObjects.pilotButton.close())
+        .play();
+      const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
+      if (lastState && lastState.effect.name === 'GameEnd') {
+        await this._onEndGame(lastState.effect);
+        return;
+      }
+    });
   }
 
   /**
