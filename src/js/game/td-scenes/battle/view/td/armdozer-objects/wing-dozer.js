@@ -30,7 +30,7 @@ export class WingDpzerTD implements WingDozerTDField, TDArmdozerObjects {
    * コンストラクタ
    *
    * @param playerId プレイヤーID
-   * @param field　フィールド
+   * @param field フィールド
    */
   constructor(playerId: PlayerId, field: WingDozerTDField) {
     this.playerId = playerId;

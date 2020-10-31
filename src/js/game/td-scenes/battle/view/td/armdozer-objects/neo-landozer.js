@@ -30,7 +30,7 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
    * コンストラクタ
    *
    * @param playerId プレイヤーID
-   * @param field　フィールド
+   * @param field フィールド
    */
   constructor(playerId: PlayerId, field: NeoLandozerTDField) {
     this.playerId = playerId;

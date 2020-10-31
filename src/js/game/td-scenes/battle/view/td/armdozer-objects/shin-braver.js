@@ -30,7 +30,7 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
    * コンストラクタ
    *
    * @param playerId プレイヤーID
-   * @param field　フィールド
+   * @param field フィールド
    */
   constructor(playerId: PlayerId, field: ShinBraverTDField) {
     this.playerId = playerId;
