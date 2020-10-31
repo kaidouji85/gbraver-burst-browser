@@ -22,19 +22,10 @@ export interface TDArmdozerObjects {
    */
   sprite(): ArmDozerSprite;
 
-  // TODO 削除する
   /**
    * シーンに追加するオブジェクトを取得する
    *
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[];
-
-  // TODO 削除する
-  /**
-   * アームドーザスプライト配下に置かれるオブジェクトを取得する
-   *
-   * @return アームドーザスプライト配下に置かれるオブジェクト
-   */
-  getUnderSprite(): typeof THREE.Object3D[];
 }

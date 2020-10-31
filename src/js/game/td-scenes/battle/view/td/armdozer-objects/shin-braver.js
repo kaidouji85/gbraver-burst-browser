@@ -63,16 +63,6 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
       this.shinBraver.getObject3D()
     ];
   }
-
-  // TODO 削除する
-  /**
-   * アームドーザスプライト配下に置かれるオブジェクトを取得する
-   *
-   * @return アームドーザスプライト配下に置かれるオブジェクト
-   */
-  getUnderSprite(): typeof THREE.Object3D[] {
-    return [];
-  }
 }
 
 /**
