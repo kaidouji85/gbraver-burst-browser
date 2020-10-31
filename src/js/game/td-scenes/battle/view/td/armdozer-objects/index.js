@@ -8,6 +8,7 @@ import type {GameObjectAction} from "../../../../../../action/game-object-action
 import {enemyLightningDozerTD, playerLightningDozerTD} from "./lightning-dozer";
 import type {TDArmdozerObjects} from "./armdozer-objects";
 import {enemyShinBraverTD, playerShinBraverTD} from "./shin-braver";
+import {enemyWingDozerTD, playerWingDozerTD} from "./wing-dozer";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
@@ -23,6 +24,8 @@ export function playerTDArmdozer(resources: Resources, listener: Observable<Game
       return playerShinBraverTD(resources, listener, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
       return playerLightningDozerTD(resources, listener, state);
+    case ArmDozerIdList.WING_DOZER:
+      return playerWingDozerTD(resources, listener, state);
     default:
       return playerShinBraverTD(resources, listener, state);
   }
@@ -42,6 +45,8 @@ export function enemyTDArmdozer(resources: Resources, listener: Observable<GameO
       return enemyShinBraverTD(resources, listener, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
       return enemyLightningDozerTD(resources, listener, state);
+    case ArmDozerIdList.WING_DOZER:
+      return enemyWingDozerTD(resources, listener, state);
     default:
       return enemyShinBraverTD(resources, listener, state);
   }
