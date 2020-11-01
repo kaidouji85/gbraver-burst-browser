@@ -4,6 +4,7 @@ import type {PlayerId} from "gbraver-burst-core";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import * as THREE from "three";
 
+// TODO 削除する
 /**
  * アームドーザ スプライト
  */

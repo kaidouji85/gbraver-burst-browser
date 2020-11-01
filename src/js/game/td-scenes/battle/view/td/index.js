@@ -1,4 +1,5 @@
 // @flow
+
 import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
@@ -15,7 +16,6 @@ import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../action/resize/resize";
 import {skyBox} from "./sky-box";
-import {enemySprite, playerSprite} from "./armdozer-sprite";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
@@ -40,7 +40,7 @@ export class ThreeDimensionLayer {
   scene: typeof THREE.Scene;
   camera: TDCamera;
   players: TDPlayer[];
-  sprites: TDArmdozerSprite[];
+  sprites: TDArmdozerSprite[];  // TODO 削除する
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
   _overlap: Observable<OverlapAction>;
@@ -68,16 +68,6 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
 
-    this.sprites = param.players.map(v => v.playerId === param.playerId
-      ? playerSprite(param.resources, v, this._gameObjectAction)
-      : enemySprite(param.resources, v, this._gameObjectAction)
-    );
-    this.sprites.map(v => v.getObject3Ds())
-      .flat()
-      .forEach(v => {
-        this.scene.add(v);
-      });
-
     this.armdozerObjects = param.players.map(v => v.playerId === param.playerId
       ? playerTDArmdozer(param.resources, this._gameObjectAction, v)
       : enemyTDArmdozer(param.resources, this._gameObjectAction, v)
@@ -87,15 +77,7 @@ export class ThreeDimensionLayer {
       .forEach(v => {
         this.scene.add(v);
       });
-    this.armdozerObjects.forEach(armdozer => {
-      this.sprites
-        .filter(sprite => sprite.playerId === armdozer.playerId)
-        .forEach(sprite => {
-          armdozer.getUnderSprite().forEach(object3D => {
-            sprite.sprite.addObject3D(object3D);
-          });
-        })
-    });
+    this.sprites = this.armdozerObjects.map(v => new TDArmdozerSprite(v.playerId, v.sprite()));
 
     this.gameObjects = new TDGameObjects(param.resources, this._gameObjectAction);
     this.gameObjects.getObject3Ds().forEach(object => {
