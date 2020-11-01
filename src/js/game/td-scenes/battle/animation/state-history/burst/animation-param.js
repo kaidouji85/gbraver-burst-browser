@@ -27,7 +27,7 @@ export type BurstAnimationParamX<SPRITE: ArmDozerSprite, HUD_ARMDOZER: HUDArmdoz
   burstPlayerState: PlayerState,
   burstPlayerTD: TDPlayer,
   burstPlayerHUD: HUDPlayer,
-  burstSprite: SPRITE,
+  burstSprite: SPRITE,  // TODO 削除する
   burstArmdozerHUD: HUD_ARMDOZER,
   burstArmdozerTD: TD_ARMDOZER,
   tdObjects: TDGameObjects,
