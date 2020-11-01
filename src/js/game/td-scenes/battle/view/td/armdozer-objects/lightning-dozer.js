@@ -49,6 +49,7 @@ export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDFiel
    * デストラクタ相当の処理
    */
   destructor(): void {
+    this.lightningDozer.destructor();
     this.lightningBarrier.destructor();
   }
 

@@ -31,18 +31,18 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
   });
 
   hud.pilots.forEach(pilot => {
-    td.sprites
-      .filter(tdSprite => tdSprite.playerId === pilot.playerId)
-      .forEach(tdSprite => {
-        trackingPilotCutIn(td.camera.getCamera(), rendererDOM, pilot, tdSprite.sprite);
+    td.armdozerObjects
+      .filter(tdArmdozer => tdArmdozer.playerId === pilot.playerId)
+      .forEach(tdArmdozer => {
+        trackingPilotCutIn(td.camera.getCamera(), rendererDOM, pilot, tdArmdozer.sprite());
       });
   });
 
   hud.armdozers.forEach(hudArmdozer => {
-    td.sprites
-      .filter(tdSprite => tdSprite.playerId === hudArmdozer.playerId)
-      .forEach(tdSprite => {
-        trackingArmdozerCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer, tdSprite.sprite);
+    td.armdozerObjects
+      .filter(tdArmdozer => tdArmdozer.playerId === hudArmdozer.playerId)
+      .forEach(tdArmdozer => {
+        trackingArmdozerCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer, tdArmdozer.sprite());
       });
   });
 }

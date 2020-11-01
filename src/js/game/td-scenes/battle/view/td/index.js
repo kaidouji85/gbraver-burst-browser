@@ -19,7 +19,6 @@ import {skyBox} from "./sky-box";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
-import {TDArmdozerSprite} from "./armdozer-sprite/armdozer-sprite";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -40,7 +39,6 @@ export class ThreeDimensionLayer {
   scene: typeof THREE.Scene;
   camera: TDCamera;
   players: TDPlayer[];
-  sprites: TDArmdozerSprite[];  // TODO 削除する
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
   _overlap: Observable<OverlapAction>;
@@ -77,7 +75,6 @@ export class ThreeDimensionLayer {
       .forEach(v => {
         this.scene.add(v);
       });
-    this.sprites = this.armdozerObjects.map(v => new TDArmdozerSprite(v.playerId, v.sprite()));
 
     this.gameObjects = new TDGameObjects(param.resources, this._gameObjectAction);
     this.gameObjects.getObject3Ds().forEach(object => {
@@ -89,7 +86,6 @@ export class ThreeDimensionLayer {
   destructor(): void {
     const removeTargets: typeof THREE.Object3D[] = [
       ...this.players.flatMap(v => v.getObject3Ds()),
-      ...this.sprites.flatMap(v => v.getObject3Ds()),
       ...this.armdozerObjects.flatMap(v => v.getObject3Ds()),
       ...this.gameObjects.getObject3Ds()
     ];
@@ -100,9 +96,6 @@ export class ThreeDimensionLayer {
     this.scene.background.dispose();
     this.players.forEach(player => {
       player.destructor();
-    });
-    this.sprites.forEach(sprite => {
-      sprite.destructor();
     });
     this.armdozerObjects.forEach(armdozer => {
       armdozer.destructor();

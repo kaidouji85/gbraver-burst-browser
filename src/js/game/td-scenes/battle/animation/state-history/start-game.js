@@ -19,19 +19,19 @@ import {turnStartAnimation, turnStartToStandAnimation} from "../turn-start";
  */
 export function startGameAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<StartGame>): Animate {
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
-  const activeTDSprite = view.td.sprites.find(v => v.playerId === gameState.activePlayerId);
+  const activeTDArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeTDPlayer || !activeTDSprite || !activeStatus) {
+  if (!activeTDPlayer || !activeTDArmdozer || !activeStatus) {
     return empty();
   }
 
   return all(
-    turnStartAnimation(activeTDSprite.sprite, activeTDPlayer.turnStart),
-    attentionArmDozer(view.td.camera, activeTDSprite.sprite, 500)
+    turnStartAnimation(activeTDArmdozer.sprite(), activeTDPlayer.turnStart),
+    attentionArmDozer(view.td.camera, activeTDArmdozer.sprite(), 500)
   )
     .chain(delay(500))
     .chain(all(
-      turnStartToStandAnimation(activeTDSprite.sprite),
+      turnStartToStandAnimation(activeTDArmdozer.sprite()),
       toInitial(view.td.camera, 500)
     ))
     .chain(delay(500));

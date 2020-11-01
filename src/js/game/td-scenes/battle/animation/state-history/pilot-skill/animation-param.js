@@ -45,11 +45,11 @@ export type PilotSkillAnimationParam = PilotSkillAnimationParamX<PilotSkill, HUD
 export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<PilotSkillEffect>): ?PilotSkillAnimationParam {
   const effect: PilotSkillEffect = gameState.effect;
   const invokerState = gameState.players.find(v => v.playerId === effect.invokerId);
-  const invokerSprite = view.td.sprites.find(v => v.playerId === effect.invokerId);
+  const invokerArmdozer = view.td.armdozerObjects.find(v => v.playerId === effect.invokerId);
   const pilot = view.hud.pilots.find(v => v.playerId === effect.invokerId);
   const invokerTD = view.td.players.find(v => v.playerId === effect.invokerId);
   const invokerHUD =view.hud.players.find(v => v.playerId === effect.invokerId);
-  if (!invokerState || !pilot || !invokerSprite || !invokerTD || !invokerHUD) {
+  if (!invokerState || !pilot || !invokerArmdozer || !invokerTD || !invokerHUD) {
     return null;
   }
 
@@ -57,7 +57,7 @@ export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: 
     skill: effect.skill,
     pilot: pilot,
     invokerState: invokerState,
-    invokerSprite: invokerSprite.sprite,
+    invokerSprite: invokerArmdozer.sprite(),
     invokerTD: invokerTD,
     invokerHUD: invokerHUD,
     tdObjects: view.td.gameObjects,
