@@ -22,7 +22,7 @@ interface WingDozerTDField {
 /**
  * 3Dレイヤー ウィングドーザ 3Dレイヤー
  */
-export class WingDpzerTD implements WingDozerTDField, TDArmdozerObjects {
+export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
   playerId: PlayerId;
   wingDozer: WingDozer;
 
@@ -73,8 +73,8 @@ export class WingDpzerTD implements WingDozerTDField, TDArmdozerObjects {
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerWingDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): WingDpzerTD {
-  return new WingDpzerTD(state.playerId, {
+export function playerWingDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): WingDozerTD {
+  return new WingDozerTD(state.playerId, {
     wingDozer: PlayerWingDozer(resources, listener)
   });
 }
@@ -87,8 +87,8 @@ export function playerWingDozerTD(resources: Resources, listener: Observable<Gam
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyWingDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): WingDpzerTD {
-  return new WingDpzerTD(state.playerId, {
+export function enemyWingDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): WingDozerTD {
+  return new WingDozerTD(state.playerId, {
     wingDozer: EnemyWingDozer(resources, listener)
   });
 }
