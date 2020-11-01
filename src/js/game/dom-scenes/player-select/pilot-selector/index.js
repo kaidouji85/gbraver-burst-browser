@@ -7,10 +7,8 @@ import {Observable, Subject, Subscription} from "rxjs";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {PilotStatus} from "./pilot-status";
 import {replaceDOM} from "../../../../dom/replace/replace-dom";
-import {ControlButton} from "../controllers/control-button";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
-import {prevButton} from "../controllers";
 import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
@@ -30,7 +28,7 @@ export class PilotSelector {
   _pilotStatus: PilotStatus;
   _pilotIcons: PilotIcon[];
   _okButton: HTMLElement;
-  _prevButton: ControlButton;
+  _prevButton: HTMLElement;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
   _change: Subject<PilotId>;
@@ -91,11 +89,9 @@ export class PilotSelector {
     this._okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
       ?? document.createElement('button');
 
-    this._prevButton = prevButton();
-    const dummyPrevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
+    this._prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
       ?? document.createElement('button');
-    replaceDOM(dummyPrevButton, this._prevButton.getRootHTMLElement());
-    
+
     this._subscriptions = [
       ...this._pilotIcons.map(icon =>
         icon.selectedNotifier().subscribe(() =>{
@@ -104,7 +100,7 @@ export class PilotSelector {
       pushDOMStream(this._okButton).subscribe(() => {
         this._onOkButtonPush();
       }),
-      this._prevButton.pushedNotifier().subscribe(() => {
+      pushDOMStream(this._prevButton).subscribe(() => {
         this._onPrevButtonPush();
       }),
     ];
@@ -217,7 +213,7 @@ export class PilotSelector {
   _onPrevButtonPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
       this._changeValueSound.play();
-      await this._prevButton.pop();
+      await pop(this._prevButton);
       this._prev.next();
     });
   }
