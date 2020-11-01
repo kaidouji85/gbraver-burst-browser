@@ -93,41 +93,7 @@
     }
 }
 
-/**
- * ローディング画面
- */
-.loading {
-    width: var(--screen-width);
-    height: var(--screen-height);
-    background-color: var(--background-color);
-    color: var(--font-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.loading__completed-rate {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.loading__completed-rate__bar {
-    width: 200px;
-    height: 20px;
-    background: #000;
-    border: 2px solid #000;
-}
-
-.loading__completed-rate__bar__completed {
-    width: 0;
-    height: 20px;
-    background: red;
-    border: none;
-}
-
+@import "loading.css";
 @import "player-select.css";
 
 /**
