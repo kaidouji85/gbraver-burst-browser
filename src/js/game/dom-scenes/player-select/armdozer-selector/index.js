@@ -9,8 +9,6 @@ import {SOUND_IDS} from "../../../../resource/sound";
 import {Howl} from 'howler';
 import {ArmdozerStatus} from "./armdozer-status";
 import {replaceDOM} from "../../../../dom/replace/replace-dom";
-import {ControlButton} from "../controllers/control-button";
-import {prevButton} from "../controllers";
 import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
@@ -36,7 +34,7 @@ export class ArmdozerSelector {
   _armdozerStatus: ArmdozerStatus;
   _armdozerIcons: IconObjects[];
   _okButton: HTMLElement;
-  _prevButton: ControlButton;
+  _prevButton: HTMLElement;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
   _change: Subject<ArmDozerId>;
@@ -67,7 +65,7 @@ export class ArmdozerSelector {
 
     const dummyStatusId = domUuid();
     const okButtonId = domUuid();
-    const dummyPrevButtonId = domUuid();
+    const prevButtonId = domUuid();
     const iconsId = domUuid();
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
@@ -75,7 +73,7 @@ export class ArmdozerSelector {
       <div data-id="${dummyStatusId}"></div>
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
       <div class="${ROOT_CLASS_NAME}__controllers">
-        <button data-id="${dummyPrevButtonId}"></button>
+        <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${prevButtonId}">戻る</button>
         <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}">これで出撃</button>
       </div>
       
@@ -99,10 +97,8 @@ export class ArmdozerSelector {
     this._okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
       ?? document.createElement('button');
 
-    this._prevButton = prevButton();
-    const dummyPrevButton = this._root.querySelector(`[data-id="${dummyPrevButtonId}"]`)
+    this._prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
       ?? document.createElement('button');
-    replaceDOM(dummyPrevButton, this._prevButton.getRootHTMLElement());
 
     this._subscriptions = [
       ...this._armdozerIcons.map(v =>
@@ -112,7 +108,7 @@ export class ArmdozerSelector {
       pushDOMStream(this._okButton).subscribe(() => {
         this._onOkButtonPush();
       }),
-      this._prevButton.pushedNotifier().subscribe(() => {
+      pushDOMStream(this._prevButton).subscribe(() => {
         this._onPrevButtonPush();
       }),
     ];
@@ -223,10 +219,10 @@ export class ArmdozerSelector {
   /**
    * 戻るボタンが押された時の処理
    */
-  async _onPrevButtonPush(): Promise<void> {
+  _onPrevButtonPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
       this._changeValueSound.play();
-      await this._prevButton.pop();
+      await pop(this._prevButton);
       this._prev.next();
     });
   }

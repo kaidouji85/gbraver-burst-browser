@@ -301,6 +301,7 @@
     box-shadow: var(--button-box-shadow);
 }
 
+.player-select__armdozer-selector__controllers__prev-button,
 .player-select__prev-button {
     width: calc(var(--responsive-font-size) * 10);
     height: calc(var(--responsive-font-size) * 3);
