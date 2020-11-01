@@ -1,0 +1,62 @@
+/**
+ * 遊び方ダイアログ
+ */
+@media (orientation: landscape) {
+  .how-to-play {
+    --how-to-play-dialog-width: calc(min(var(--how-to-play-dialog-height) * 16 / 9, 90vw));
+    --how-to-play-dialog-height: calc(var(--vh) * 80);
+    --how-to-play-dialog-top: calc(var(--vh, 1vh) * 50);
+    --how-to-play-dialog-left: 50vw;
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .how-to-play {
+    display: none;
+  }
+}
+
+.how-to-play__background {
+  position: absolute;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.how-to-play__dialog {
+  width: var(--how-to-play-dialog-width);
+  height: var(--how-to-play-dialog-height);
+  top: calc(var(--vh, 1vh) * 50);
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background-color: var(--background-color);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog)
+}
+
+.how-to-play__closer {
+  position: fixed;
+  top: calc(var(--how-to-play-dialog-top) - var(--how-to-play-dialog-height) / 2);
+  left: calc(var(--how-to-play-dialog-left) - var(--how-to-play-dialog-width) / 2);
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--zindex-close);
+}
+
+.how-to-play__dialog__movie {
+  width: calc(var(--how-to-play-dialog-width) * 0.9);
+  height: calc(var(--how-to-play-dialog-height) * 0.9);
+}
