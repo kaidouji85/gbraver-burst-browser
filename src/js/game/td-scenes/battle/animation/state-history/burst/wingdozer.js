@@ -8,13 +8,14 @@ import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
 import {WingDozerHUD} from "../../../view/hud/armdozer-objects/wing-dozer";
+import {WingDozerTD} from "../../../view/td/armdozer-objects/wing-dozer";
 
 /**
  * ウィングドーザ バーストアニメーション パラメータ
  *
  * @type BURST バースト
  */
-export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozer, any, any, BURST>;
+export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozer, WingDozerHUD, WingDozerTD, BURST>;
 
 /**
  * ウィングドーザバーストアニメーションパラメータにキャストする
@@ -24,13 +25,13 @@ export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozer, any, any, BU
  * @return キャスト結果
  */
 export function castWingDozerBurst(origin: BurstAnimationParam): ?WingDozerBurst<Burst> {
-  if (!(origin.burstSprite instanceof WingDozer) || !(origin.burstArmdozerHUD instanceof WingDozerHUD)) {
+  if (!(origin.burstArmdozerTD instanceof WingDozerTD) || !(origin.burstArmdozerHUD instanceof WingDozerHUD)) {
     return null;
   }
 
-  const sprite: WingDozer = origin.burstSprite;
+  const td: WingDozerTD = origin.burstArmdozerTD;
   const hud: WingDozerHUD = origin.burstArmdozerHUD;
-  return ((origin: any): BurstAnimationParamX<typeof sprite, typeof hud, any, Burst>);
+  return ((origin: any): BurstAnimationParamX<any, typeof hud, typeof td, Burst>);
 }
 
 /**
@@ -57,9 +58,9 @@ export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
  */
 export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack>): Animate {
   return  all(
-    param.burstSprite.dash(),
+    param.burstArmdozerTD.wingDozer.dash(),
     param.burstArmdozerHUD.cutIn.show(),
-    attentionArmDozer(param.tdCamera, param.burstSprite, 500),
+    attentionArmDozer(param.tdCamera, param.burstArmdozerTD.wingDozer, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
@@ -78,7 +79,7 @@ export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack
     ))
     .chain(delay(500))
     .chain(all(
-      param.burstSprite.dashToStand(),
+      param.burstArmdozerTD.wingDozer.dashToStand(),
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
