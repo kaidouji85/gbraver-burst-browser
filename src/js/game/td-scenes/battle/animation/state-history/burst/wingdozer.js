@@ -1,6 +1,5 @@
 // @flow
 
-import {WingDozer} from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 import type {Burst, ContinuousAttack} from "gbraver-burst-core";
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {Animate} from "../../../../../../animation/animate";
@@ -15,7 +14,7 @@ import {WingDozerTD} from "../../../view/td/armdozer-objects/wing-dozer";
  *
  * @type BURST バースト
  */
-export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozer, WingDozerHUD, WingDozerTD, BURST>;
+export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozerTD, WingDozerHUD, BURST>;
 
 /**
  * ウィングドーザバーストアニメーションパラメータにキャストする
@@ -29,9 +28,9 @@ export function castWingDozerBurst(origin: BurstAnimationParam): ?WingDozerBurst
     return null;
   }
 
-  const td: WingDozerTD = origin.burstArmdozerTD;
-  const hud: WingDozerHUD = origin.burstArmdozerHUD;
-  return ((origin: any): BurstAnimationParamX<any, typeof hud, typeof td, Burst>);
+  const tdArmdozer: WingDozerTD = origin.burstArmdozerTD;
+  const hudArmdozer: WingDozerHUD = origin.burstArmdozerHUD;
+  return ((origin: any): BurstAnimationParamX<typeof tdArmdozer, typeof hudArmdozer, Burst>);
 }
 
 /**

@@ -14,7 +14,7 @@ import {NeoLandozerTD} from "../../../view/td/armdozer-objects/neo-landozer";
  *
  * @type BURST バースト
  */
-type NeoLandozerBurst<BURST> = BurstAnimationParamX<any, NeoLandozerHUD, NeoLandozerTD, BURST>;
+type NeoLandozerBurst<BURST> = BurstAnimationParamX<NeoLandozerTD, NeoLandozerHUD, BURST>;
 
 /**
  * ネオランドーザ バーストアニメーション パラメータにキャストする
@@ -27,7 +27,7 @@ export function castNeoLandozerBurst(param: BurstAnimationParam): ?NeoLandozerBu
   if ((param.burstArmdozerTD instanceof NeoLandozerTD) && (param.burstArmdozerHUD instanceof NeoLandozerHUD)) {
     const armdozerTD = (param.burstArmdozerTD: NeoLandozerTD);
     const armdozerHUD = (param.burstArmdozerHUD: NeoLandozerHUD);
-    return ((param: any): BurstAnimationParamX<any, typeof armdozerHUD, typeof armdozerTD, typeof param.burst>);
+    return ((param: any): BurstAnimationParamX<typeof armdozerTD, typeof armdozerHUD, typeof param.burst>);
   }
 
   return null;

@@ -14,7 +14,7 @@ import {LightningDozerHUD} from "../../../view/hud/armdozer-objects/lightning-do
  *
  * @type BURST バースト
  */
-export type LightningDozerBurst<BURST> = BurstAnimationParamX<any, LightningDozerHUD, LightningDozerTD, BURST>;
+export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozerTD, LightningDozerHUD, BURST>;
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータにキャストする
@@ -27,7 +27,7 @@ export function castLightningDozerBurst(param: BurstAnimationParam): ?LightningD
   if ((param.burstArmdozerTD instanceof LightningDozerTD) && (param.burstArmdozerHUD instanceof LightningDozerHUD)) {
     const armdozerHUD: LightningDozerHUD = param.burstArmdozerHUD;
     const armdozerTD: LightningDozerTD = param.burstArmdozerTD;
-    return ((param: any): BurstAnimationParamX<any, typeof armdozerHUD, typeof armdozerTD, typeof param.burst>);
+    return ((param: any): BurstAnimationParamX<typeof armdozerTD, typeof armdozerHUD, typeof param.burst>);
   }
 
   return null;

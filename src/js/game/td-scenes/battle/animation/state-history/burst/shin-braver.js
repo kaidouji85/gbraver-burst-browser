@@ -13,7 +13,7 @@ import {ShinBraverTD} from "../../../view/td/armdozer-objects/shin-braver";
  * シンブレイバー バーストアニメーション パラメータ
  * @type BURST バースト種別
  */
-export type ShinBraverBurst<BURST> = BurstAnimationParamX<any, ShinBraverHUD, ShinBraverTD, BURST>;
+export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraverTD, ShinBraverHUD, BURST>;
 
 /**
  * シンブレイバーバーストアニメーションパラメータにキャストする
@@ -26,7 +26,7 @@ export function castShinBraverBurst(param: BurstAnimationParam): ?ShinBraverBurs
   if ((param.burstArmdozerTD instanceof ShinBraverTD) && (param.burstArmdozerHUD instanceof ShinBraverHUD)) {
     const tdArmdozer: ShinBraverTD = param.burstArmdozerTD;
     const hudArmdozer: ShinBraverHUD = param.burstArmdozerHUD;
-    return ((param: any): BurstAnimationParamX<any, typeof hudArmdozer, typeof tdArmdozer, typeof param.burst>);
+    return ((param: any): BurstAnimationParamX<typeof tdArmdozer, typeof hudArmdozer, typeof param.burst>);
   }
 
   return null;
