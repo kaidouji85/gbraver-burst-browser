@@ -21,12 +21,12 @@ export function rightItselfAnimation(view: BattleSceneView, sceneState: BattleSc
   }
 
   const effect: RightItself = gameState.effect;
-  const defenderSprite = view.td.sprites.find(v => v.playerId === effect.defender);
-  if (!defenderSprite) {
+  const defenderArmdozer = view.td.armdozerObjects.find(v => v.playerId === effect.defender);
+  if (!defenderArmdozer) {
     return empty();
   }
 
-  return getMotion(defenderSprite.sprite, effect.battleResult)
+  return getMotion(defenderArmdozer.sprite(), effect.battleResult)
     .chain(delay(500));
 }
 
