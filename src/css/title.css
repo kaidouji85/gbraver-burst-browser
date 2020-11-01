@@ -1,0 +1,68 @@
+/**
+ * タイトル画面
+ */
+@media (orientation: landscape) {
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+    background-size: cover;
+    background-position: 50% 0;
+  }
+}
+
+@media (orientation: portrait) {
+  .title {
+    display: none;
+  }
+}
+
+.title__contents {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.title__contents__logo {
+  height: 35vh;
+  object-fit: contain;
+}
+
+.title__contents__copy-rights {
+  display: flex;
+  flex-direction: column;
+  font-size: calc(var(--responsive-font-size) * 0.8);
+  margin-top: calc(var(--responsive-font-size) * 0.5);
+  background-color: rgba(10, 10, 10, 0.5);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  border-radius: calc(var(--responsive-font-size) * 0.5);
+}
+
+.title__contents__controllers {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: calc(var(--responsive-font-size) * 2);
+}
+
+.title__contents__controllers button {
+  width: calc(var(--responsive-font-size) * 10);
+  height: calc(var(--responsive-font-size) * 3);
+  margin: 0 calc(var(--responsive-font-size) * 0.5);
+  font-size: calc(var(--responsive-font-size));
+  border-radius: var(--button-border-radius);
+  background-color: var(--button-background-color);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+}
