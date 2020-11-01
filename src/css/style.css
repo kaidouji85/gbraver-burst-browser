@@ -44,35 +44,7 @@
     --how-to-play-dialog-left: 50vw;
 }
 
-/**
- * ランドスケープ警告画面
- */
-@media (orientation: landscape) {
-    .play-in-landscape {
-        display: none;
-    }
-}
-
-@media (orientation: portrait) {
-    .play-in-landscape {
-        width: 100vw;
-        height: 100vh;
-        background-color: var(--background-color);
-        color: var(--font-color);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 1em;
-        box-sizing: border-box;
-        z-index: var(--zindex-play-in-landscape);
-    }
-
-    .play-in-landscape__caption {
-        font-size: 1.5em;
-        margin-bottom: 1em;
-    }
-}
+@import "play-in-landscape.css";
 
 /**
  * フェーダー
