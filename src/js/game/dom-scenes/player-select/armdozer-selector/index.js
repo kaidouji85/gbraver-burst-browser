@@ -10,8 +10,10 @@ import {Howl} from 'howler';
 import {ArmdozerStatus} from "./armdozer-status";
 import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {ControlButton} from "../controllers/control-button";
-import {okButton, prevButton} from "../controllers";
+import {prevButton} from "../controllers";
 import {Exclusive} from "../../../../exclusive/exclusive";
+import {pushDOMStream} from "../../../../action/push/push-dom";
+import {pop} from "../../../../dom/animation/pop";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -33,7 +35,7 @@ export class ArmdozerSelector {
   _root: HTMLElement;
   _armdozerStatus: ArmdozerStatus;
   _armdozerIcons: IconObjects[];
-  _okButton: ControlButton;
+  _okButton: HTMLElement;
   _prevButton: ControlButton;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
@@ -64,7 +66,7 @@ export class ArmdozerSelector {
       ?.sound ?? new Howl();
 
     const dummyStatusId = domUuid();
-    const dummyOkButtonId = domUuid();
+    const okButtonId = domUuid();
     const dummyPrevButtonId = domUuid();
     const iconsId = domUuid();
     this._root = document.createElement('div');
@@ -74,7 +76,7 @@ export class ArmdozerSelector {
       <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
       <div class="${ROOT_CLASS_NAME}__controllers">
         <button data-id="${dummyPrevButtonId}"></button>
-        <button data-id="${dummyOkButtonId}"></button>
+        <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}">これで出撃</button>
       </div>
       
     `;
@@ -94,10 +96,8 @@ export class ArmdozerSelector {
         icons.appendChild(v.icon.getRootHTMLElement());
       });
 
-    this._okButton =  okButton('これで出撃');
-    const dummyOkButton = this._root.querySelector(`[data-id="${dummyOkButtonId}"]`)
+    this._okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
       ?? document.createElement('button');
-    replaceDOM(dummyOkButton, this._okButton.getRootHTMLElement());
 
     this._prevButton = prevButton();
     const dummyPrevButton = this._root.querySelector(`[data-id="${dummyPrevButtonId}"]`)
@@ -109,7 +109,7 @@ export class ArmdozerSelector {
         v.icon.selectedNotifier().subscribe(() => {
           this._onArmdozerSelect(v.armdozerId);
         })),
-      this._okButton.pushedNotifier().subscribe(() => {
+      pushDOMStream(this._okButton).subscribe(() => {
         this._onOkButtonPush();
       }),
       this._prevButton.pushedNotifier().subscribe(() => {
@@ -215,7 +215,7 @@ export class ArmdozerSelector {
   _onOkButtonPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
       this._decideSound.play();
-      await this._okButton.pop();
+      await pop(this._okButton);
       this._decide.next(this._armdozerId);
     });
   }
