@@ -1,0 +1,57 @@
+/**
+ * 対戦カード画面
+ */
+@media (orientation: landscape) {
+  .match-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+  }
+}
+
+@media (orientation: portrait) {
+  .match-card {
+    display: none;
+  }
+}
+
+.match-card__contents__caption {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--responsive-font-size) * 1.5);
+  margin-bottom: var(--responsive-font-size);
+}
+
+.match-card__contents__cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.match-card__contents__cards__vs {
+  font-size: calc(var(--responsive-font-size) * 3);
+  margin: 0 calc(var(--responsive-font-size) * 5);
+}
+
+.match-card__contents__cards__enemy {
+  object-fit: cover;
+  width: 30%;
+  transform: scale(-1, 1);
+}
+
+.match-card__contents__cards__player {
+  object-fit: cover;
+  width: 30%;
+}
