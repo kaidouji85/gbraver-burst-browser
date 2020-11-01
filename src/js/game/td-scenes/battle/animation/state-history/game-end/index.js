@@ -30,12 +30,12 @@ export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneS
   }
 
   const gameOver = effect.result;
-  const winnerSprite = view.td.sprites.find(v => v.playerId === gameOver.winner);
-  if (!winnerSprite) {
+  const winnerArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameOver.winner);
+  if (!winnerArmdozer) {
     return empty();
   }
 
-  return win(winnerSprite.sprite)
+  return win(winnerArmdozer.sprite())
     .chain(delay(500));
 }
 
