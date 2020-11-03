@@ -20,14 +20,16 @@ export class ArmdozerIcon {
    *
    * @param resources リソース管理オブジェクト
    * @param imagePath 画像ファイルのパス
+   * @param alt 代替テキスト
    */
-  constructor(resources: Resources, imagePath: string) {
+  constructor(resources: Resources, imagePath: string, alt: string) {
     this._image = document.createElement('img');
     this._image.className = 'player-select__armdozer-icon';
     
     this._select = pushDOMStream(this._image)
     this._isImageLoaded = waitElementLoaded(this._image);
     this._image.src = imagePath;
+    this._image.alt = alt;
   }
 
   /**
