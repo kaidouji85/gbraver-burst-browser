@@ -4,6 +4,7 @@ import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
 import {PilotIcon} from "./pilot-icon";
 import type {Resources} from "../../../../resource";
 import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
+import {PathIds} from "../../../../resource/path";
 
 /**
  * パイロットアイコンを生成する
@@ -24,22 +25,26 @@ export function createPilotIcon(resources: Resources, pilotId: PilotId): PilotIc
 }
 
 /**
- * シンヤアイコン
+ * シンヤ アイコン
  * 
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
 function shinyaIcon(resources: Resources): PilotIcon {
-  return new PilotIcon(resources, PilotIds.SHINYA);
+  const path = resources.paths.find(v => v.id === PathIds.SHINYA_ICON)
+    ?.path ?? '';
+  return new PilotIcon(resources, path);
 }
 
 /**
  *
- * ガイアイコン
+ * ガイ アイコン
  *
  * @param resources リソース管理オブジェクト
  * @return 生成結果
  */
 function gaiIcon(resources: Resources): PilotIcon {
-  return new PilotIcon(resources, PilotIds.GAI)
+  const path = resources.paths.find(v => v.id === PathIds.GAI_ICON)
+    ?.path ?? '';
+  return new PilotIcon(resources, path);
 }
