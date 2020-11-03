@@ -1,12 +1,10 @@
 // @flow
 
 import {Observable} from "rxjs";
-import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import type {Resources} from "../../../../resource";
 import type {PushDOM} from "../../../../action/push/push-dom";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
-import {getPilotIconPathId} from "../../../../path/pilot-icon-path";
 import {pop} from "../../../../dom/animation/pop";
 
 const ROOT_CLASS_NAME = 'player-select__pilot-icon';
@@ -15,7 +13,6 @@ const ROOT_CLASS_NAME = 'player-select__pilot-icon';
  * パイロットアイコン
  */
 export class PilotIcon {
-  pilotId: ArmDozerId;
   _image: HTMLImageElement;
   _isImageLoaded: Promise<void>;
   _select: Observable<PushDOM>;
@@ -24,19 +21,16 @@ export class PilotIcon {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param pilotId パイロットID
+   * @param path 画像パス
+   * @param alt 代替テキスト
    */
-  constructor(resources: Resources, pilotId: PilotId) {
-    this.pilotId = pilotId;
-
+  constructor(resources: Resources, path: string, alt: string) {
     this._image = document.createElement('img');
     this._image.className = ROOT_CLASS_NAME;
     this._select = pushDOMStream(this._image)
     this._isImageLoaded = waitElementLoaded(this._image);
-
-    const pathId = getPilotIconPathId(pilotId);
-    this._image.src = resources.paths.find(v => v.id === pathId)
-      ?.path ?? '';
+    this._image.src = path;
+    this._image.alt = alt;
   }
 
   /**

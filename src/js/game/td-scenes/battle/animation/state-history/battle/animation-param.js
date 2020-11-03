@@ -51,12 +51,12 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
   const attackerState = gameState.players.find(v => v.playerId === battle.attacker);
   const attackerTD = view.td.players.find(v => v.playerId === battle.attacker);
   const attackerHUD = view.hud.players.find(v => v.playerId === battle.attacker);
-  const attackerSprite = view.td.sprites.find(v => v.playerId === battle.attacker);
+  const attackerArmdozer = view.td.armdozerObjects.find(v => v.playerId === battle.attacker);
   const defenderState = gameState.players.find(v => v.playerId !== battle.attacker);
   const defenderTD = view.td.players.find(v => v.playerId !== battle.attacker);
   const defenderHUD = view.hud.players.find(v => v.playerId !== battle.attacker);
-  const defenderSprite = view.td.sprites.find(v => v.playerId !== battle.attacker);
-  if (!attackerState || !attackerTD || !attackerHUD || !attackerSprite || !defenderState || !defenderTD || !defenderHUD || !defenderSprite) {
+  const defenderArmdozer = view.td.armdozerObjects.find(v => v.playerId !== battle.attacker);
+  if (!attackerState || !attackerTD || !attackerHUD || !attackerArmdozer || !defenderState || !defenderTD || !defenderHUD || !defenderArmdozer) {
     return null;
   }
 
@@ -64,11 +64,11 @@ export function toBattleAnimationParam(view: BattleSceneView, sceneState: Battle
     attackerState: attackerState,
     attackerTD: attackerTD,
     attackerHUD: attackerHUD,
-    attackerSprite: attackerSprite.sprite,
+    attackerSprite: attackerArmdozer.sprite(),
     defenderState: defenderState,
     defenderTD: defenderTD,
     defenderHUD: defenderHUD,
-    defenderSprite: defenderSprite.sprite,
+    defenderSprite: defenderArmdozer.sprite(),
     tdObjects: view.td.gameObjects,
     tdCamera: view.td.camera,
     hudObjects: view.hud.gameObjects,

@@ -5,9 +5,11 @@ import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
-import {EmptyTDArmdozer} from "./empty";
 import {enemyLightningDozerTD, playerLightningDozerTD} from "./lightning-dozer";
 import type {TDArmdozerObjects} from "./armdozer-objects";
+import {enemyShinBraverTD, playerShinBraverTD} from "./shin-braver";
+import {enemyWingDozerTD, playerWingDozerTD} from "./wing-dozer";
+import {enemyNeoLandozerTD, playerNeoLandozerTD} from "./neo-landozer";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
@@ -19,10 +21,16 @@ import type {TDArmdozerObjects} from "./armdozer-objects";
  */
 export function playerTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.id) {
+    case ArmDozerIdList.SHIN_BRAVER:
+      return playerShinBraverTD(resources, listener, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
       return playerLightningDozerTD(resources, listener, state);
+    case ArmDozerIdList.WING_DOZER:
+      return playerWingDozerTD(resources, listener, state);
+    case ArmDozerIdList.NEO_LANDOZER:
+      return playerNeoLandozerTD(resources, listener, state);
     default:
-      return new EmptyTDArmdozer(state);
+      return playerShinBraverTD(resources, listener, state);
   }
 }
 
@@ -36,9 +44,15 @@ export function playerTDArmdozer(resources: Resources, listener: Observable<Game
  */
 export function enemyTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.id) {
+    case ArmDozerIdList.SHIN_BRAVER:
+      return enemyShinBraverTD(resources, listener, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
       return enemyLightningDozerTD(resources, listener, state);
+    case ArmDozerIdList.WING_DOZER:
+      return enemyWingDozerTD(resources, listener, state);
+    case ArmDozerIdList.NEO_LANDOZER:
+      return enemyNeoLandozerTD(resources, listener, state);
     default:
-      return new EmptyTDArmdozer(state);
+      return enemyShinBraverTD(resources, listener, state);
   }
 }

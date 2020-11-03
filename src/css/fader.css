@@ -1,0 +1,18 @@
+/**
+ * フェーダー
+ */
+@media (orientation: landscape) {
+  .dom-fader {
+    width: var(--screen-width);
+    height: var(--screen-height);
+    position: fixed;
+    z-index: var(--zindex-fader);
+    background-color: var(--background-color);
+  }
+}
+
+@media (orientation: portrait) {
+  .dom-fader {
+    display: none;
+  }
+}

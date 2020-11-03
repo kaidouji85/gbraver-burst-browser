@@ -1,9 +1,7 @@
 // @flow
 
 import {Observable} from "rxjs";
-import type {ArmDozerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../resource";
-import {getArmdozerIconPathId} from "../../../../path/armdozer-icon-path";
 import type {PushDOM} from "../../../../action/push/push-dom";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
@@ -21,17 +19,17 @@ export class ArmdozerIcon {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param armDozerId アームドーザID
+   * @param imagePath 画像ファイルのパス
+   * @param alt 代替テキスト
    */
-  constructor(resources: Resources, armDozerId: ArmDozerId) {
+  constructor(resources: Resources, imagePath: string, alt: string) {
     this._image = document.createElement('img');
     this._image.className = 'player-select__armdozer-icon';
     
     this._select = pushDOMStream(this._image)
     this._isImageLoaded = waitElementLoaded(this._image);
-    const pathId = getArmdozerIconPathId(armDozerId);
-    this._image.src = resources.paths.find(v => v.id === pathId)
-      ?.path ?? '';
+    this._image.src = imagePath;
+    this._image.alt = alt;
   }
 
   /**

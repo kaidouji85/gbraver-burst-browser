@@ -1,7 +1,6 @@
 // @flow
 
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
-import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
 import type {Burst, LightningBarrier} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
@@ -15,7 +14,7 @@ import {LightningDozerHUD} from "../../../view/hud/armdozer-objects/lightning-do
  *
  * @type BURST バースト
  */
-export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozer, LightningDozerHUD, LightningDozerTD, BURST>;
+export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozerTD, LightningDozerHUD, BURST>;
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータにキャストする
@@ -25,11 +24,10 @@ export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozer, Li
  * @return キャスト結果
  */
 export function castLightningDozerBurst(param: BurstAnimationParam): ?LightningDozerBurst<Burst> {
-  if ((param.burstSprite instanceof LightningDozer) && (param.burstArmdozerTD instanceof LightningDozerTD) && (param.burstArmdozerHUD instanceof LightningDozerHUD)) {
-    const sprite: LightningDozer = param.burstSprite;
+  if ((param.burstArmdozerTD instanceof LightningDozerTD) && (param.burstArmdozerHUD instanceof LightningDozerHUD)) {
     const armdozerHUD: LightningDozerHUD = param.burstArmdozerHUD;
     const armdozerTD: LightningDozerTD = param.burstArmdozerTD;
-    return ((param: any): BurstAnimationParamX<typeof sprite, typeof armdozerHUD, typeof armdozerTD, typeof param.burst>);
+    return ((param: any): BurstAnimationParamX<typeof armdozerTD, typeof armdozerHUD, typeof param.burst>);
   }
 
   return null;
@@ -59,9 +57,9 @@ export function lightningDozerBurst(param: LightningDozerBurst<Burst>): Animate 
  */
 function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate {
   return all(
-    param.burstSprite.guts(),
+    param.burstArmdozerTD.lightningDozer.guts(),
     param.burstArmdozerHUD.cutIn.show(),
-    attentionArmDozer(param.tdCamera, param.burstSprite, 500),
+    attentionArmDozer(param.tdCamera, param.burstArmdozerTD.lightningDozer, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
@@ -81,7 +79,7 @@ function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate
   )).chain(delay(500)
   ).chain(all(
     toInitial(param.tdCamera, 500),
-    param.burstSprite.gutsToStand(),
+    param.burstArmdozerTD.lightningDozer.gutsToStand(),
     param.tdObjects.skyBrightness.brightness(1, 500),
     param.tdObjects.illumination.intensity(1, 500),
   )).chain(delay(500));

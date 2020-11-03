@@ -38,16 +38,15 @@ function playerUnderRemainingTurn(playerId: PlayerId, view: BattleSceneView, sce
 
   const effect: UpdateRemainingTurn = gameState.effect;
   const state = gameState.players.find(v => v.playerId === playerId);
-  const sprite = view.td.sprites.find(v => v.playerId === playerId);
   const tdArmdozer = view.td.armdozerObjects.find(v => v.playerId === playerId);
   const endArmdozerEffects = effect.endArmdozerEffects.filter(v => v.playerId === playerId);
-  if (!state || !sprite || !tdArmdozer || (endArmdozerEffects.length <= 0)) {
+  if (!state || !tdArmdozer || (endArmdozerEffects.length <= 0)) {
     return empty();
   }
 
   const endArmdozerEffectAnimation: Animate = endArmdozerEffects
     .map((armdozerEffect): EndArmdozerEffectParam => ({
-      sprite: sprite.sprite,
+      sprite: tdArmdozer.sprite(),
       tdArmdozer: tdArmdozer,
       endArmdozerEffect: armdozerEffect.effect
     }))

@@ -19,17 +19,17 @@ import {deathLightning, lightning} from "./lightning";
 export function reflectAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<Reflect>): Animate {
   const effect: Reflect = gameState.effect;
   const state = gameState.players.find(v => v.playerId === effect.damagedPlayer);
-  const sprite = view.td.sprites.find(v => v.playerId === effect.damagedPlayer);
+  const tdArmdozer = view.td.armdozerObjects.find(v => v.playerId === effect.damagedPlayer);
   const tdPlayer = view.td.players.find(v => v.playerId === effect.damagedPlayer);
   const hudPlayer = view.hud.players.find(v => v.playerId === effect.damagedPlayer);
-  if (!state || !sprite || !tdPlayer || !hudPlayer) {
+  if (!state || !tdArmdozer || !tdPlayer || !hudPlayer) {
     return empty();
   }
 
   const animationParam: ReflectAnimationParam = {
     effect: effect,
     state: state,
-    sprite: sprite.sprite,
+    sprite: tdArmdozer.sprite(),
     tdPlayer: tdPlayer,
     hudPlayer: hudPlayer,
   };

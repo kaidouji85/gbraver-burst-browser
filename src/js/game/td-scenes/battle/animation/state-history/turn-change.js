@@ -20,16 +20,16 @@ import {turnStartAnimation, turnStartToStandAnimation} from "../turn-start";
 export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<TurnChange>): Animate {
   const turnChange: TurnChange = gameState.effect;
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
-  const activeTDSprite = view.td.sprites.find(v => v.playerId === gameState.activePlayerId);
+  const activeTDArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameState.activePlayerId);
   const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeTDPlayer || !activeTDSprite || !activeHUDPlayer || !activeStatus) {
+  if (!activeTDPlayer || !activeTDArmdozer || !activeHUDPlayer || !activeStatus) {
     return empty();
   }
 
   return all(
-    turnStartAnimation(activeTDSprite.sprite, activeTDPlayer.turnStart),
-    attentionArmDozer(view.td.camera, activeTDSprite.sprite, 500)
+    turnStartAnimation(activeTDArmdozer.sprite(), activeTDPlayer.turnStart),
+    attentionArmDozer(view.td.camera, activeTDArmdozer.sprite(), 500)
   )
     .chain(delay(500))
     .chain((0 < turnChange.recoverBattery)
@@ -41,7 +41,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     )
     .chain(delay(500))
     .chain(all(
-      turnStartToStandAnimation(activeTDSprite.sprite),
+      turnStartToStandAnimation(activeTDArmdozer.sprite()),
       toInitial(view.td.camera, 500))
     )
     .chain(delay(500));

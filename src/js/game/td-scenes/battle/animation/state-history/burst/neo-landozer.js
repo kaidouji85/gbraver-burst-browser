@@ -1,21 +1,20 @@
 // @flow
 
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
-import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {NeoLandozerHUD} from "../../../view/hud/armdozer-objects/neo-landozer";
 import type {BuffPower, Burst} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
-import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
+import {NeoLandozerTD} from "../../../view/td/armdozer-objects/neo-landozer";
 
 /**
  * ネオランドーザ バーストアニメーション パラメータ
  *
  * @type BURST バースト
  */
-type NeoLandozerBurst<BURST> = BurstAnimationParamX<NeoLandozer, NeoLandozerHUD, TDArmdozerObjects, BURST>;
+type NeoLandozerBurst<BURST> = BurstAnimationParamX<NeoLandozerTD, NeoLandozerHUD, BURST>;
 
 /**
  * ネオランドーザ バーストアニメーション パラメータにキャストする
@@ -25,10 +24,10 @@ type NeoLandozerBurst<BURST> = BurstAnimationParamX<NeoLandozer, NeoLandozerHUD,
  * @return キャスト結果
  */
 export function castNeoLandozerBurst(param: BurstAnimationParam): ?NeoLandozerBurst<Burst> {
-  if ((param.burstSprite instanceof NeoLandozer) && (param.burstArmdozerHUD instanceof NeoLandozerHUD)) {
-    const sprite = (param.burstSprite: NeoLandozer);
+  if ((param.burstArmdozerTD instanceof NeoLandozerTD) && (param.burstArmdozerHUD instanceof NeoLandozerHUD)) {
+    const armdozerTD = (param.burstArmdozerTD: NeoLandozerTD);
     const armdozerHUD = (param.burstArmdozerHUD: NeoLandozerHUD);
-    return ((param: any): BurstAnimationParamX<typeof sprite, typeof armdozerHUD, typeof param.burstArmdozerTD, typeof param.burst>);
+    return ((param: any): BurstAnimationParamX<typeof armdozerTD, typeof armdozerHUD, typeof param.burst>);
   }
 
   return null;
@@ -57,9 +56,9 @@ export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
  */
 function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
   return  all(
-    param.burstSprite.guts(),
+    param.burstArmdozerTD.neoLandozer.guts(),
     param.burstArmdozerHUD.cutIn.show(),
-    attentionArmDozer(param.tdCamera, param.burstSprite, 500),
+    attentionArmDozer(param.tdCamera, param.burstArmdozerTD.neoLandozer, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
@@ -76,7 +75,7 @@ function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
   )).chain(delay(500)
   ).chain(all(
-    param.burstSprite.gutsToStand(),
+    param.burstArmdozerTD.neoLandozer.gutsToStand(),
     toInitial(param.tdCamera, 500),
     param.tdObjects.skyBrightness.brightness(1, 500),
     param.tdObjects.illumination.intensity(1, 500),

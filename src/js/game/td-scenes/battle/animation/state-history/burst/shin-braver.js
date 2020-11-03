@@ -2,19 +2,18 @@
 
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {Animate} from "../../../../../../animation/animate";
-import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {delay, empty} from "../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../../td-camera";
 import {ShinBraverHUD} from "../../../view/hud/armdozer-objects/shin-braver";
-import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
+import {ShinBraverTD} from "../../../view/td/armdozer-objects/shin-braver";
 
 /**
  * シンブレイバー バーストアニメーション パラメータ
  * @type BURST バースト種別
  */
-export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraver, ShinBraverHUD, TDArmdozerObjects, BURST>;
+export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraverTD, ShinBraverHUD, BURST>;
 
 /**
  * シンブレイバーバーストアニメーションパラメータにキャストする
@@ -24,10 +23,10 @@ export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraver, ShinBraver
  * @return キャスト結果
  */
 export function castShinBraverBurst(param: BurstAnimationParam): ?ShinBraverBurst<Burst> {
-  if ((param.burstSprite instanceof ShinBraver) && (param.burstArmdozerHUD instanceof ShinBraverHUD)) {
-    const sprite: ShinBraver = param.burstSprite;
+  if ((param.burstArmdozerTD instanceof ShinBraverTD) && (param.burstArmdozerHUD instanceof ShinBraverHUD)) {
+    const tdArmdozer: ShinBraverTD = param.burstArmdozerTD;
     const hudArmdozer: ShinBraverHUD = param.burstArmdozerHUD;
-    return ((param: any): BurstAnimationParamX<typeof sprite, typeof hudArmdozer, typeof param.burstArmdozerTD, typeof param.burst>);
+    return ((param: any): BurstAnimationParamX<typeof tdArmdozer, typeof hudArmdozer, typeof param.burst>);
   }
 
   return null;
@@ -58,8 +57,8 @@ export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
 function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
   return all(
     param.burstArmdozerHUD.cutIn.show(),
-    param.burstSprite.burst(),
-    attentionArmDozer(param.tdCamera, param.burstSprite, 500),
+    param.burstArmdozerTD.shinBraver.burst(),
+    attentionArmDozer(param.tdCamera, param.burstArmdozerTD.shinBraver, 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
@@ -74,7 +73,7 @@ function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
     param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
   )).chain(delay(500)
   ).chain(all(
-    param.burstSprite.burstToStand(),
+    param.burstArmdozerTD.shinBraver.burstToStand(),
     toInitial(param.tdCamera, 500),
     param.tdObjects.skyBrightness.brightness(1, 500),
     param.tdObjects.illumination.intensity(1, 500),
