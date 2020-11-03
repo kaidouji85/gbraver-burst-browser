@@ -4,6 +4,7 @@ import {ArmdozerIcon} from "./armdozer-icon";
 import type {Resources} from "../../../../resource";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import {PathIds} from "../../../../resource/path";
 
 /**
  * アームドーザアイコンを生成する
@@ -34,7 +35,9 @@ export function createArmdozerIcon(resources: Resources, armdozerId: ArmDozerId)
  * @return 生成結果
  */
 function shinBraverIcon(resources: Resources): ArmdozerIcon {
-  return new ArmdozerIcon(resources, ArmDozerIdList.SHIN_BRAVER);
+  const path = resources.paths.find(v => v.id === PathIds.SHIN_BRAVER_ICON)
+    ?.path ?? '';
+  return new ArmdozerIcon(resources, path);
 }
 
 /**
@@ -44,7 +47,9 @@ function shinBraverIcon(resources: Resources): ArmdozerIcon {
  * @return 生成結果
  */
 function neoLandozerIcon(resources: Resources): ArmdozerIcon {
-  return new ArmdozerIcon(resources, ArmDozerIdList.NEO_LANDOZER);
+  const path = resources.paths.find(v => v.id === PathIds.NEO_LANDOZER_ICON)
+    ?.path ?? '';
+  return new ArmdozerIcon(resources, path);
 }
 
 /**
@@ -54,7 +59,9 @@ function neoLandozerIcon(resources: Resources): ArmdozerIcon {
  * @return 生成結果
  */
 function lightningDozerIcon(resources: Resources): ArmdozerIcon {
-  return new ArmdozerIcon(resources, ArmDozerIdList.LIGHTNING_DOZER);
+  const path = resources.paths.find(v => v.id === PathIds.LIGHTNING_DOZER_ICON)
+    ?.path ?? '';
+  return new ArmdozerIcon(resources, path);
 }
 
 /**
@@ -64,5 +71,7 @@ function lightningDozerIcon(resources: Resources): ArmdozerIcon {
  * @return 生成結果
  */
 function wingDozerIcon(resources: Resources): ArmdozerIcon {
-  return new ArmdozerIcon(resources, ArmDozerIdList.WING_DOZER);
+  const path = resources.paths.find(v => v.id === PathIds.WING_DOZER_ICON)
+    ?.path ?? '';
+  return new ArmdozerIcon(resources, path);
 }
