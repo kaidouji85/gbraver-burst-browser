@@ -12,6 +12,7 @@ import {SOUND_IDS} from "../../../../resource/sound";
 import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
+import {createPilotIcon} from "./create-pilot-icon";
 
 /**
  * ルート要素のclass名
@@ -81,7 +82,7 @@ export class PilotSelector {
 
     const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
       ?? document.createElement('div');
-    this._pilotIcons = pilotIds.map(v => new PilotIcon(resources, v));
+    this._pilotIcons = pilotIds.map(v => createPilotIcon(resources, v));
     this._pilotIcons.forEach(v => {
       icons.appendChild(v.getRootHTMLElement());
     });
