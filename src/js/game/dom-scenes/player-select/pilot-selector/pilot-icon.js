@@ -1,7 +1,7 @@
 // @flow
 
 import {Observable} from "rxjs";
-import type {ArmDozerId, PilotId} from "gbraver-burst-core";
+import type {PilotId} from "gbraver-burst-core";
 import type {Resources} from "../../../../resource";
 import type {PushDOM} from "../../../../action/push/push-dom";
 import {pushDOMStream} from "../../../../action/push/push-dom";
@@ -15,7 +15,6 @@ const ROOT_CLASS_NAME = 'player-select__pilot-icon';
  * パイロットアイコン
  */
 export class PilotIcon {
-  pilotId: ArmDozerId;
   _image: HTMLImageElement;
   _isImageLoaded: Promise<void>;
   _select: Observable<PushDOM>;
@@ -27,8 +26,6 @@ export class PilotIcon {
    * @param pilotId パイロットID
    */
   constructor(resources: Resources, pilotId: PilotId) {
-    this.pilotId = pilotId;
-
     this._image = document.createElement('img');
     this._image.className = ROOT_CLASS_NAME;
     this._select = pushDOMStream(this._image)
