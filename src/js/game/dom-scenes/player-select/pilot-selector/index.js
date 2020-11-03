@@ -12,6 +12,7 @@ import {SOUND_IDS} from "../../../../resource/sound";
 import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
+import {createPilotIcon} from "./create-pilot-icon";
 
 /**
  * ルート要素のclass名
@@ -26,7 +27,7 @@ export class PilotSelector {
   _exclusive: Exclusive;
   _root: HTMLElement;
   _pilotStatus: PilotStatus;
-  _pilotIcons: PilotIcon[];
+  _pilotIcons: Array<{pilotId: PilotId, icon: PilotIcon}>;
   _okButton: HTMLElement;
   _prevButton: HTMLElement;
   _changeValueSound: typeof Howl;
@@ -81,9 +82,12 @@ export class PilotSelector {
 
     const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
       ?? document.createElement('div');
-    this._pilotIcons = pilotIds.map(v => new PilotIcon(resources, v));
+    this._pilotIcons = pilotIds.map(v => ({
+      pilotId: v,
+      icon: createPilotIcon(resources, v)
+    }));
     this._pilotIcons.forEach(v => {
-      icons.appendChild(v.getRootHTMLElement());
+      icons.appendChild(v.icon.getRootHTMLElement());
     });
 
     this._okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
@@ -93,9 +97,9 @@ export class PilotSelector {
       ?? document.createElement('button');
 
     this._subscriptions = [
-      ...this._pilotIcons.map(icon =>
-        icon.selectedNotifier().subscribe(() =>{
-          this._onPilotChange(icon.pilotId);
+      ...this._pilotIcons.map(v =>
+        v.icon.selectedNotifier().subscribe(() =>{
+          this._onPilotChange(v.pilotId);
         })),
       pushDOMStream(this._okButton).subscribe(() => {
         this._onOkButtonPush();
@@ -136,7 +140,7 @@ export class PilotSelector {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all(
-      this._pilotIcons.map(icon => icon.waitUntilLoaded())
+      this._pilotIcons.map(v => v.icon.waitUntilLoaded())
     );
   }
 
@@ -190,7 +194,7 @@ export class PilotSelector {
 
       const target = this._pilotIcons.find(v => v.pilotId === pilotId);
       if (target) {
-        target.pop();
+        target.icon.pop();
         this._changeValueSound.play();
       }
     });

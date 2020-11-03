@@ -8,6 +8,7 @@ import {PilotIcon} from "../src/js/game/dom-scenes/player-select/pilot-selector/
 import {PilotSelector} from "../src/js/game/dom-scenes/player-select/pilot-selector";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {ArmdozerSelector} from "../src/js/game/dom-scenes/player-select/armdozer-selector";
+import {createPilotIcon} from "../src/js/game/dom-scenes/player-select/pilot-selector/create-pilot-icon";
 
 export default {
   title: 'player-select',
@@ -19,7 +20,7 @@ export const scene: DOMStubStory = domStub(resources => {
 });
 
 export const pilotIcon: DOMStubStory = domStub(resources => {
-  const icon = new PilotIcon(resources, PilotIds.SHINYA);
+  const icon = createPilotIcon(resources, PilotIds.SHINYA);
   icon.selectedNotifier().subscribe(() => {
     // NOP
   });
