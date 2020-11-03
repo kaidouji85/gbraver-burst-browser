@@ -22,13 +22,15 @@ export class PilotIcon {
    *
    * @param resources リソース管理オブジェクト
    * @param path 画像パス
+   * @param alt 代替テキスト
    */
-  constructor(resources: Resources, path: string) {
+  constructor(resources: Resources, path: string, alt: string) {
     this._image = document.createElement('img');
     this._image.className = ROOT_CLASS_NAME;
     this._select = pushDOMStream(this._image)
     this._isImageLoaded = waitElementLoaded(this._image);
     this._image.src = path;
+    this._image.alt = alt;
   }
 
   /**

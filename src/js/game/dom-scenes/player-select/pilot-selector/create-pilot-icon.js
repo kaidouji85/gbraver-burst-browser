@@ -33,7 +33,7 @@ export function createPilotIcon(resources: Resources, pilotId: PilotId): PilotIc
 function shinyaIcon(resources: Resources): PilotIcon {
   const path = resources.paths.find(v => v.id === PathIds.SHINYA_ICON)
     ?.path ?? '';
-  return new PilotIcon(resources, path);
+  return new PilotIcon(resources, path, 'シンヤ アイコン');
 }
 
 /**
@@ -46,5 +46,5 @@ function shinyaIcon(resources: Resources): PilotIcon {
 function gaiIcon(resources: Resources): PilotIcon {
   const path = resources.paths.find(v => v.id === PathIds.GAI_ICON)
     ?.path ?? '';
-  return new PilotIcon(resources, path);
+  return new PilotIcon(resources, path, 'ガイ アイコン');
 }

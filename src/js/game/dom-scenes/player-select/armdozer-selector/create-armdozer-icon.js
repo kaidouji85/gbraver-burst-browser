@@ -37,7 +37,7 @@ export function createArmdozerIcon(resources: Resources, armdozerId: ArmDozerId)
 function shinBraverIcon(resources: Resources): ArmdozerIcon {
   const path = resources.paths.find(v => v.id === PathIds.SHIN_BRAVER_ICON)
     ?.path ?? '';
-  return new ArmdozerIcon(resources, path, 'シンブレイバーアイコン');
+  return new ArmdozerIcon(resources, path, 'シンブレイバー アイコン');
 }
 
 /**
@@ -49,7 +49,7 @@ function shinBraverIcon(resources: Resources): ArmdozerIcon {
 function neoLandozerIcon(resources: Resources): ArmdozerIcon {
   const path = resources.paths.find(v => v.id === PathIds.NEO_LANDOZER_ICON)
     ?.path ?? '';
-  return new ArmdozerIcon(resources, path, 'ネオランドーザアイコン');
+  return new ArmdozerIcon(resources, path, 'ネオランドーザ アイコン');
 }
 
 /**
@@ -61,7 +61,7 @@ function neoLandozerIcon(resources: Resources): ArmdozerIcon {
 function lightningDozerIcon(resources: Resources): ArmdozerIcon {
   const path = resources.paths.find(v => v.id === PathIds.LIGHTNING_DOZER_ICON)
     ?.path ?? '';
-  return new ArmdozerIcon(resources, path, 'ライトニングドーザアイコン');
+  return new ArmdozerIcon(resources, path, 'ライトニングドーザ アイコン');
 }
 
 /**
@@ -73,5 +73,5 @@ function lightningDozerIcon(resources: Resources): ArmdozerIcon {
 function wingDozerIcon(resources: Resources): ArmdozerIcon {
   const path = resources.paths.find(v => v.id === PathIds.WING_DOZER_ICON)
     ?.path ?? '';
-  return new ArmdozerIcon(resources, path, 'ウィングドーザアイコン');
+  return new ArmdozerIcon(resources, path, 'ウィングドーザ アイコン');
 }
