@@ -12,6 +12,7 @@ import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
+import {createArmdozerIcon} from "./create-armdozer-icon";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -88,7 +89,7 @@ export class ArmdozerSelector {
       ?? document.createElement('div');
     this._armdozerIcons = armDozerIds.map(v => ({
       armdozerId: v,
-      icon: new ArmdozerIcon(resources, v)
+      icon: createArmdozerIcon(resources, v)
     }));
     this._armdozerIcons.forEach(v => {
         icons.appendChild(v.icon.getRootHTMLElement());
