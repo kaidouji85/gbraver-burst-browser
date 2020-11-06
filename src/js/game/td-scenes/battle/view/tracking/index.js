@@ -22,28 +22,23 @@ import {GaiHUD} from "../hud/pilot-objects/gai";
  *
  * @param td 3Dレイヤー
  * @param hud HUDレイヤー
- * @param playerId プレイヤーID
+ * @param activePlayerId このゲームを操作しているプレイヤーID
  * @param rendererDOM レンダリング対象のDOM
  */
-export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: PlayerId, rendererDOM: HTMLElement): void {
-  hud.players.forEach(v => {
-    trackingGauge(td.camera.getCamera(), rendererDOM, v, playerId);
-  });
+export function tracking(td: ThreeDimensionLayer, hud: HudLayer, activePlayerId: PlayerId, rendererDOM: HTMLElement): void {
+  const playerIds = td.players.map(v => v.playerId);
+  playerIds.forEach(playerId => {
+    const tdArmdozer = td.armdozerObjects.find(v => v.playerId === playerId);
+    const hudPlayer = hud.players.find(v => v.playerId === playerId);
+    const hudArmdozer = hud.armdozers.find(v => v.playerId === playerId);
+    const hudPilot = hud.pilots.find(v => v.playerId === playerId);
+    if (!tdArmdozer || !hudPlayer || !hudArmdozer || !hudPilot) {
+      return;
+    }
 
-  hud.pilots.forEach(pilot => {
-    td.armdozerObjects
-      .filter(tdArmdozer => tdArmdozer.playerId === pilot.playerId)
-      .forEach(tdArmdozer => {
-        trackingPilotCutIn(td.camera.getCamera(), rendererDOM, pilot, tdArmdozer.sprite());
-      });
-  });
-
-  hud.armdozers.forEach(hudArmdozer => {
-    td.armdozerObjects
-      .filter(tdArmdozer => tdArmdozer.playerId === hudArmdozer.playerId)
-      .forEach(tdArmdozer => {
-        trackingArmdozerCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer, tdArmdozer.sprite());
-      });
+    trackingGauge(td.camera.getCamera(), rendererDOM, hudPlayer, activePlayerId);
+    trackingPilotCutIn(td.camera.getCamera(), rendererDOM, hudPilot, tdArmdozer.sprite());
+    trackingArmdozerCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer, tdArmdozer.sprite());
   });
 }
 
@@ -53,10 +48,10 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, playerId: Playe
  * @param tdCamera カメラ
  * @param rendererDOM レンダリング対象のDOM
  * @param hudPlayer ゲージが含まれるHUDプレイヤー固有オブジェクト
- * @param playerId プレイヤーID
+ * @param activePlayerId このゲームを操作しているプレイヤーID
  */
-function trackingGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, hudPlayer: HUDPlayer, playerId: PlayerId): void {
-  if (hudPlayer.playerId === playerId) {
+function trackingGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, hudPlayer: HUDPlayer, activePlayerId: PlayerId): void {
+  if (hudPlayer.playerId === activePlayerId) {
     trackingPlayerGauge(tdCamera, rendererDOM, hudPlayer.gauge);
   } else {
     trackingEnemyGauge(tdCamera, rendererDOM, hudPlayer.gauge);
