@@ -15,19 +15,19 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/root/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {NPCBattle} from "./state/npc-battle/npc-battle";
-import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
-import {selectionComplete} from "./state/npc-battle/selection-complete";
-import {isNPCBattleEnd, levelUp} from "./state/npc-battle/level-up";
+import type {NPCBattle} from "./in-progress/npc-battle/npc-battle";
+import {createInitialNPCBattle} from "./in-progress/npc-battle/npc-battle";
+import {selectionComplete} from "./in-progress/npc-battle/selection-complete";
+import {isNPCBattleEnd, levelUp} from "./in-progress/npc-battle/level-up";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
-import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
-import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
+import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
+import {DefaultCourse, NPCBattleCourses} from "./in-progress/npc-battle/npc-battle-course";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
-import type {InProgress} from "./state/in-progress";
+import type {InProgress} from "./in-progress/in-progress";
 
 /**
  * ゲーム全体の管理を行う

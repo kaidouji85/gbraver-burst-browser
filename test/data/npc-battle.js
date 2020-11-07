@@ -1,6 +1,6 @@
 // @flow
 
-import type {NPCBattle} from "../../src/js/game/state/npc-battle/npc-battle";
+import type {NPCBattle} from "../../src/js/game/in-progress/npc-battle/npc-battle";
 
 /**
  * 空のNPC戦闘
