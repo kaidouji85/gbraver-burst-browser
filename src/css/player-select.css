@@ -165,12 +165,24 @@
 }
 
 .player-select__armdozer-icon {
+  position: relative;
+}
+
+.player-select__armdozer-icon__image {
   width: var( --armdozer-icon-width);
 }
 
-.player-select__armdozer-icon--selected {
+.player-select__armdozer-icon__image--selected {
   width: var( --armdozer-icon-width);
   filter: brightness(0.4);
+}
+
+.player-select__armdozer-icon__check {
+  width: 12vw;
+  position: absolute;
+  top: -5vh;
+  left: 4vw;
+  z-index: 1;
 }
 
 .player-select__pilot-selector {
