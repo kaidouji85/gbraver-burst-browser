@@ -8,6 +8,11 @@ import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {pop} from "../../../../dom/animation/pop";
 
 /**
+ * トール要素のCSSクラス名
+ */
+const ROOT_CLASS_NAME = 'player-select__armdozer-icon';
+
+/**
  * アームドーザアイコン ビュー
  */
 export class ArmdozerIcon {
@@ -24,7 +29,7 @@ export class ArmdozerIcon {
    */
   constructor(resources: Resources, imagePath: string, alt: string) {
     this._image = document.createElement('img');
-    this._image.className = 'player-select__armdozer-icon';
+    this._image.className = ROOT_CLASS_NAME;
     
     this._select = pushDOMStream(this._image)
     this._isImageLoaded = waitElementLoaded(this._image);
@@ -66,5 +71,16 @@ export class ArmdozerIcon {
    */
   async pop(): Promise<void> {
     await pop(this._image);
+  }
+
+  /**
+   * アイコンが選択された状態にする
+   *
+   * @param isSelected 選択されたか否かのフラグ、trueで選択された
+   */
+  selected(isSelected: boolean): void {
+    this._image.className = isSelected
+      ? `${ROOT_CLASS_NAME}--selected`
+      : ROOT_CLASS_NAME;
   }
 }

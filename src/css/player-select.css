@@ -7,6 +7,7 @@
     --selector-zindex: 2;
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
+    --armdozer-icon-width: 12.5vw;
     display: flex;
     flex-direction: column;
     width: var(--screen-width);
@@ -164,7 +165,12 @@
 }
 
 .player-select__armdozer-icon {
-  width: 12.5vw;
+  width: var( --armdozer-icon-width);
+}
+
+.player-select__armdozer-icon--selected {
+  width: var( --armdozer-icon-width);
+  filter: brightness(0.4);
 }
 
 .player-select__pilot-selector {
