@@ -181,8 +181,7 @@
   width: 12vw;
   position: absolute;
   top: -5vh;
-  left: 4vw;
-  z-index: 1;
+  left: 2vw;
 }
 
 .player-select__pilot-selector {

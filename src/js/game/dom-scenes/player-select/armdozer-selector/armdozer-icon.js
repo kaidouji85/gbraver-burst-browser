@@ -45,6 +45,7 @@ export class ArmdozerIcon {
     this._check.className = CHECK_CLASS_NAME;
     this._check.src = resources.paths.find(v => v.id === PathIds.CHECK)
       ?.path ?? '';
+    this._check.hidden = true;
     this._root.appendChild(this._check);
   }
 
@@ -93,5 +94,6 @@ export class ArmdozerIcon {
     this._image.className = isSelected
       ? `${IMAGE_CLASS_NAME}--selected`
       : IMAGE_CLASS_NAME;
+    this._check.hidden = !isSelected;
   }
 }
