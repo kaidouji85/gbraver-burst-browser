@@ -32,7 +32,6 @@ export class ArmdozerIcon {
   constructor(resources: Resources, imagePath: string, alt: string) {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._select = pushDOMStream(this._root);
 
     this._image = document.createElement('img');
     this._image.className = IMAGE_CLASS_NAME;
@@ -47,6 +46,9 @@ export class ArmdozerIcon {
       ?.path ?? '';
     this._check.hidden = true;
     this._root.appendChild(this._check);
+
+    this._select = pushDOMStream(this._image);
+
   }
 
   /**
@@ -91,6 +93,9 @@ export class ArmdozerIcon {
    * @param isSelected 選択されたか否かのフラグ、trueで選択された
    */
   selected(isSelected: boolean): void {
+    this._root.className = isSelected
+      ? `${ROOT_CLASS_NAME}--selected`
+      : ROOT_CLASS_NAME;
     this._image.className = isSelected
       ? `${IMAGE_CLASS_NAME}--selected`
       : IMAGE_CLASS_NAME;
