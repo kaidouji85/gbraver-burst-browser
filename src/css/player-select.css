@@ -169,11 +169,6 @@
   position: relative;
 }
 
-.player-select__armdozer-icon--selected {
-  position: relative;
-  z-index: 1;
-}
-
 .player-select__armdozer-icon__image {
   width: var( --armdozer-icon-width);
   height: var( --armdozer-icon-height);

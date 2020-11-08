@@ -93,9 +93,6 @@ export class ArmdozerIcon {
    * @param isSelected 選択されたか否かのフラグ、trueで選択された
    */
   selected(isSelected: boolean): void {
-    this._root.className = isSelected
-      ? `${ROOT_CLASS_NAME}--selected`
-      : ROOT_CLASS_NAME;
     this._image.className = isSelected
       ? `${IMAGE_CLASS_NAME}--selected`
       : IMAGE_CLASS_NAME;
