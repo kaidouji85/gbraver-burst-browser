@@ -20,6 +20,7 @@ export class ArmdozerIcon {
   _image: HTMLImageElement;
   _check: HTMLImageElement;
   _isImageLoaded: Promise<void>;
+  _isCheckLoaded: Promise<void>;
   _select: Observable<PushDOM>;
 
   /**
@@ -42,6 +43,7 @@ export class ArmdozerIcon {
 
     this._check = document.createElement('img');
     this._check.className = CHECK_CLASS_NAME;
+    this._isCheckLoaded = waitElementLoaded(this._check);
     this._check.src = resources.paths.find(v => v.id === PathIds.CHECK)
       ?.path ?? '';
     this._check.hidden = true;
@@ -56,8 +58,12 @@ export class ArmdozerIcon {
    *
    * @return 待機結果
    */
-  waitUntilLoaded(): Promise<void> {
-    return this._isImageLoaded;
+  async waitUntilLoaded(): Promise<void> {
+    await Promise.all([
+      this._isImageLoaded,
+      this._isCheckLoaded,
+      ]
+    );
   }
 
   /**
