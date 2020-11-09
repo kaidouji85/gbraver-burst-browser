@@ -49,7 +49,7 @@ export class ArmdozerIcon {
     this._check.hidden = true;
     this._root.appendChild(this._check);
 
-    this._select = pushDOMStream(this._image);
+    this._select = pushDOMStream(this._root);
 
   }
 
