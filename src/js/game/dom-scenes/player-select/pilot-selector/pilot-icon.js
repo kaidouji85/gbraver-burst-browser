@@ -6,9 +6,11 @@ import type {PushDOM} from "../../../../action/push/push-dom";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {pop} from "../../../../dom/animation/pop";
+import {PathIds} from "../../../../resource/path";
 
 const ROOT_CLASS_NAME = 'player-select__pilot-icon';
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
+const CHECK_CLASS_NAME = `${ROOT_CLASS_NAME}__check`;
 
 /**
  * パイロットアイコン
@@ -16,6 +18,7 @@ const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
 export class PilotIcon {
   _root: HTMLElement;
   _image: HTMLImageElement;
+  _check: HTMLImageElement;
   _isImageLoaded: Promise<void>;
   _select: Observable<PushDOM>;
 
@@ -37,7 +40,14 @@ export class PilotIcon {
     this._image.alt = alt;
     this._root.appendChild(this._image);
 
-    this._select = pushDOMStream(this._image)
+    this._check = document.createElement('img');
+    this._check.className = CHECK_CLASS_NAME;
+    this._check.src = resources.paths.find(v => v.id === PathIds.CHECK)
+      ?.path ?? '';
+    //this._check.hidden = true;
+    this._root.appendChild(this._check);
+
+    this._select = pushDOMStream(this._root);
   }
 
   /**
