@@ -44,7 +44,7 @@ export class PilotIcon {
     this._check.className = CHECK_CLASS_NAME;
     this._check.src = resources.paths.find(v => v.id === PathIds.CHECK)
       ?.path ?? '';
-    //this._check.hidden = true;
+    this._check.hidden = true;
     this._root.appendChild(this._check);
 
     this._select = pushDOMStream(this._root);
@@ -84,5 +84,17 @@ export class PilotIcon {
    */
   async pop(): Promise<void> {
     await pop(this._image);
+  }
+
+  /**
+   * アイコンが選択された状態にする
+   *
+   * @param isSelected 選択されたか否かのフラグ、trueで選択された
+   */
+  selected(isSelected: boolean): void {
+    this._image.className = isSelected
+      ? `${IMAGE_CLASS_NAME}--selected`
+      : IMAGE_CLASS_NAME;
+    this._check.hidden = !isSelected;
   }
 }

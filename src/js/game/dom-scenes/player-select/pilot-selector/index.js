@@ -13,6 +13,7 @@ import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createPilotIcon} from "./create-pilot-icon";
+import {init} from "ramda";
 
 /**
  * ルート要素のclass名
@@ -87,6 +88,8 @@ export class PilotSelector {
       icon: createPilotIcon(resources, v)
     }));
     this._pilotIcons.forEach(v => {
+      const isSelected = v.pilotId === initialPilotId;
+      v.icon.selected(isSelected);
       icons.appendChild(v.icon.getRootHTMLElement());
     });
 
@@ -192,11 +195,16 @@ export class PilotSelector {
         this._change.next(pilotId);
       }
 
-      const target = this._pilotIcons.find(v => v.pilotId === pilotId);
-      if (target) {
-        target.icon.pop();
-        this._changeValueSound.play();
-      }
+      this._changeValueSound.play();
+      this._pilotIcons.filter(v => v.pilotId === pilotId)
+        .forEach(v => {
+          v.icon.pop();
+          v.icon.selected(true);
+        });
+      this._pilotIcons.filter(v => v.pilotId !== pilotId)
+        .forEach(v => {
+          v.icon.selected(false);
+        });
     });
   }
 
