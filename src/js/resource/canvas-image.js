@@ -90,11 +90,11 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   },
   {
     id: CANVAS_IMAGE_IDS.BURST_BUTTON,
-    path: 'burst-button/burst-button.png',
+    path: 'button/burst-button.png',
   },
   {
     id: CANVAS_IMAGE_IDS.PILOT_BUTTON,
-    path: 'pilot-button/pilot-button.png',
+    path: 'button/pilot-button.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED,
