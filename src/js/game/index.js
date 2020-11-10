@@ -13,28 +13,27 @@ import type {Resize} from "../action/resize/resize";
 import {createResizeStream} from "../action/resize/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
-import type {State} from "./state/state";
-import {createInitialState} from "./state/state";
 import type {ResourceRoot} from "../resource/root/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {NPCBattle} from "./state/npc-battle/npc-battle";
-import {createInitialNPCBattle} from "./state/npc-battle/npc-battle";
-import {selectionComplete} from "./state/npc-battle/selection-complete";
-import {isNPCBattleEnd, levelUp} from "./state/npc-battle/level-up";
+import type {NPCBattle} from "./in-progress/npc-battle/npc-battle";
+import {createInitialNPCBattle} from "./in-progress/npc-battle/npc-battle";
+import {selectionComplete} from "./in-progress/npc-battle/selection-complete";
+import {isNPCBattleEnd, levelUp} from "./in-progress/npc-battle/level-up";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
-import type {NPCBattleCourse} from "./state/npc-battle/npc-battle-course";
-import {DefaultCourse, NPCBattleCourses} from "./state/npc-battle/npc-battle-course";
+import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
+import {DefaultCourse, NPCBattleCourses} from "./in-progress/npc-battle/npc-battle-course";
 import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
+import type {InProgress} from "./in-progress/in-progress";
 
 /**
  * ゲーム全体の管理を行う
  */
 export class Game {
-  _state: State;
+  _inProgress: InProgress;
   _resize: Observable<Resize>;
   _vh: CssVH;
   _fader: DOMFader;
@@ -55,7 +54,7 @@ export class Game {
   constructor(resourceRoot: ResourceRoot) {
     this._resourceRoot = resourceRoot;
 
-    this._state = createInitialState();
+    this._inProgress = {type: 'None'};
     this._resize = createResizeStream();
     this._vh = new CssVH(this._resize);
 
@@ -145,7 +144,7 @@ export class Game {
     }
     const resources: Resources = this._resources;
 
-    this._state.inProgress = createInitialNPCBattle();
+    this._inProgress = createInitialNPCBattle();
     await this._fader.fadeOut();
     await this._domScenes.startPlayerSelect(resources);
     await this._fader.fadeIn();
@@ -180,10 +179,10 @@ export class Game {
     }
     const resources: Resources = this._resources;
 
-    if (this._state.inProgress.type === 'NPCBattle') {
-      const origin: NPCBattle = this._state.inProgress;
+    if (this._inProgress.type === 'NPCBattle') {
+      const origin: NPCBattle = this._inProgress;
       const updated: NPCBattle = selectionComplete(origin, action);
-      this._state.inProgress = updated;
+      this._inProgress = updated;
       await this._npcBattleFlow(resources, updated);
     }
   }
@@ -198,7 +197,7 @@ export class Game {
     }
     const resources: Resources = this._resources;
 
-    this._state.inProgress = {type: 'None'};
+    this._inProgress = {type: 'None'};
     await this._fader.fadeOut();
     await this._domScenes.startTitle(resources);
     await this._fader.fadeIn();
@@ -215,13 +214,13 @@ export class Game {
     }
     const resources: Resources = this._resources;
 
-    if (this._state.inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._state.inProgress, action)) {
-      const origin: NPCBattle = this._state.inProgress;
+    if (this._inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._inProgress, action)) {
+      const origin: NPCBattle = this._inProgress;
       const updated: NPCBattle = levelUp(origin, action);
-      this._state.inProgress = updated;
+      this._inProgress = updated;
       await this._npcBattleFlow(resources, updated);
-    } else if (this._state.inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._state.inProgress, action)) {
-      this._state.inProgress = {type: 'None'};
+    } else if (this._inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._inProgress, action)) {
+      this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
       await this._domScenes.startNPCEnding(resources);
