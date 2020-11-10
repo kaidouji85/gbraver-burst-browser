@@ -92,6 +92,8 @@ export class ArmdozerSelector {
       icon: createArmdozerIcon(resources, v)
     }));
     this._armdozerIcons.forEach(v => {
+        const isSelected = v.armdozerId === initialArmdozerId;
+        v.icon.selected(isSelected);
         icons.appendChild(v.icon.getRootHTMLElement());
       });
 
@@ -198,11 +200,16 @@ export class ArmdozerSelector {
         this._change.next(this._armdozerId);
       }
 
-      const target = this._armdozerIcons.find(v => v.armdozerId === armdozerId);
-      if (target) {
-        this._changeValueSound.play();
-        target.icon.pop();
-      }
+      this._changeValueSound.play();
+      this._armdozerIcons.filter(v => v.armdozerId === armdozerId)
+        .forEach(v => {
+          v.icon.pop();
+          v.icon.selected(true);
+        });
+      this._armdozerIcons.filter(v => v.armdozerId !== armdozerId)
+        .forEach(v => {
+          v.icon.selected(false);
+        });
     });
   }
 

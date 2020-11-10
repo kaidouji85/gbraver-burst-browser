@@ -45,6 +45,7 @@ export const PathIds = {
   END_CARD: 'END_CARD',
   CLOSER: 'CLOSER',
   PLAY_IN_LANDSCAPE: 'PLAY_IN_LANDSCAPE',
+  CHECK: 'CHECK',
 };
 
 /**
@@ -122,6 +123,10 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.PLAY_IN_LANDSCAPE,
     path: root => `${root.get()}/waring/play-in-landscape.png`
+  },
+  {
+    id: PathIds.CHECK,
+    path: root => `${root.get()}/check/check.png`
   },
 ];
 
