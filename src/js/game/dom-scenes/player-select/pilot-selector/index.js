@@ -13,7 +13,6 @@ import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../action/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createPilotIcon} from "./create-pilot-icon";
-import {init} from "ramda";
 
 /**
  * ルート要素のclass名
