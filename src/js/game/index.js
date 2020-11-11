@@ -208,24 +208,45 @@ export class Game {
    *
    * @param action アクション
    */
-  async _onEndBattle(action: EndBattle): Promise<void> {
+  _onEndBattle(action: EndBattle): void {
+    if (this._inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._inProgress, action)) {
+      this._endBattleAndContinueGame(action);
+    } else if (this._inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._inProgress, action)) {
+      this._endBattleAndEndGame();
+    }
+  }
+
+  /**
+   * 戦闘終了 NPCルート続行
+   *
+   * @param action ゲーム終了アクション
+   * @return 実行結果
+   */
+  async _endBattleAndContinueGame(action: EndBattle): Promise<void> {
+    if (!this._resources || this._inProgress.type !== 'NPCBattle') {
+      return;
+    }
+    const resources: Resources = this._resources;
+    const origin: NPCBattle = this._inProgress;
+    const updated: NPCBattle = levelUp(origin, action);
+    this._inProgress = updated;
+    await this._npcBattleFlow(resources, updated);
+  }
+
+  /**
+   * 戦闘終了 NPCルート終了
+   * @return 実行結果
+   */
+  async _endBattleAndEndGame(): Promise<void> {
     if (!this._resources) {
       return;
     }
     const resources: Resources = this._resources;
-
-    if (this._inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._inProgress, action)) {
-      const origin: NPCBattle = this._inProgress;
-      const updated: NPCBattle = levelUp(origin, action);
-      this._inProgress = updated;
-      await this._npcBattleFlow(resources, updated);
-    } else if (this._inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._inProgress, action)) {
-      this._inProgress = {type: 'None'};
-      await this._fader.fadeOut();
-      this._tdScenes.hidden();
-      await this._domScenes.startNPCEnding(resources);
-      await this._fader.fadeIn();
-    }
+    this._inProgress = {type: 'None'};
+    await this._fader.fadeOut();
+    this._tdScenes.hidden();
+    await this._domScenes.startNPCEnding(resources);
+    await this._fader.fadeIn();
   }
 
   /**
