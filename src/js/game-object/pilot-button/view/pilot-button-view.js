@@ -41,6 +41,7 @@ export class PilotButtonView {
   _pushButton: Subject<void>;
   _group: typeof THREE.Group;
   _button: SimpleImageMesh;
+  _label: SimpleImageMesh;
   _pilotIcon: PilotIcon;
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
@@ -80,6 +81,17 @@ export class PilotButtonView {
     });
     this._group.add(this._button.getObject3D());
 
+    const label = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON_LABEL)
+      ?.image ?? new Image();
+    this._label = new SimpleImageMesh({
+      canvasSize: CANVAS_SIZE,
+      meshSize: CANVAS_SIZE,
+      image: label,
+    });
+    this._label.getObject3D().position.y = -100;
+    this._group.add(this._label.getObject3D());
+
     this._pilotIcon = createPilotIcon(pilotId, resources);
     this._pilotIcon.getObject3D().position.z = 1;
     this._group.add(this._pilotIcon.getObject3D());
@@ -115,8 +127,9 @@ export class PilotButtonView {
   engage(model: PilotButtonModel, preRender: PreRender): void {
     this._button.setOpacity(model.opacity);
 
-    const pilotIconOpacity = model.canPilot ? model.opacity : 0;
-    this._pilotIcon.setOpacity(pilotIconOpacity);
+    const labelOpacity = model.canPilot ? model.opacity : 0;
+    this._label.setOpacity(labelOpacity);
+    this._pilotIcon.setOpacity(labelOpacity);
 
     const disabledOpacity = model.canPilot ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
