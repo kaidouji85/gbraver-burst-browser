@@ -33,6 +33,7 @@ type Param = {
 /** バーストボタンのビュー */
 export class BurstButtonView {
   _burstButton: SimpleImageMesh;
+  _label: SimpleImageMesh;
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
   _group: typeof THREE.Group;
@@ -47,6 +48,15 @@ export class BurstButtonView {
       canvasSize: CANVAS_SIZE,
       meshSize: CANVAS_SIZE,
       image: burstButton
+    });
+
+    const label = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL)
+      ?.image ?? new Image();
+    this._label = new SimpleImageMesh({
+      canvasSize: CANVAS_SIZE,
+      meshSize: CANVAS_SIZE,
+      image: label
     });
 
     const buttonDisabledResource = param.resources.canvasImages
@@ -71,6 +81,7 @@ export class BurstButtonView {
 
     this._group = new THREE.Group();
     this._group.add(this._burstButton.getObject3D());
+    this._group.add(this._label.getObject3D());
     this._group.add(this._buttonDisabled.getObject3D());
     this._group.add(this._overlap.getObject3D());
     this._group.scale.set(GROUP_SCALE, GROUP_SCALE, GROUP_SCALE);
@@ -91,6 +102,9 @@ export class BurstButtonView {
    */
   engage(model: BurstButtonModel, preRender: PreRender): void {
     this._burstButton.setOpacity(model.opacity);
+
+    const labelOpacity = !model.canBurst ? 0 : model.opacity;
+    this._label.setOpacity(labelOpacity);
 
     const disabledOpacity = model.canBurst ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
