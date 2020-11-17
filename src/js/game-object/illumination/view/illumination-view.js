@@ -59,10 +59,10 @@ export class IlluminationView {
    * @param model モデル
    */
   _updateIntensity(model: IlluminationModel): void {
-    this._directionalLight1.intensity = model.intensity * 0.6;
-    this._directionalLight2.intensity = model.intensity * 0.6;
-    this._directionalLight3.intensity = model.intensity * 0.4;
-    this._directionalLight4.intensity = model.intensity * 0.4;
-    this._ambientLight.intensity = model.intensity;
+    this._directionalLight1.intensity = model.intensity * 0.8;
+    this._directionalLight2.intensity = model.intensity * 0.8;
+    this._directionalLight3.intensity = model.intensity * 0.6;
+    this._directionalLight4.intensity = model.intensity * 0.6;
+    this._ambientLight.intensity = model.intensity * 0.8;
   }
 }
