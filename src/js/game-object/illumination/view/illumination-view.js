@@ -63,6 +63,6 @@ export class IlluminationView {
     this._directionalLight2.intensity = model.intensity * 0.8;
     this._directionalLight3.intensity = model.intensity * 0.6;
     this._directionalLight4.intensity = model.intensity * 0.6;
-    this._ambientLight.intensity = model.intensity;
+    this._ambientLight.intensity = model.intensity * 0.8;
   }
 }

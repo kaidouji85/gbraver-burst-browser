@@ -31,7 +31,9 @@ export const CANVAS_IMAGE_IDS = {
   DIS_ACTIVE_BATTERY_SELECTOR_NUMBER: 'DIS_ACTIVE_BATTERY_SELECTOR_NUMBER',
   TURN_INDICATOR: 'TURN_INDICATOR',
   BURST_BUTTON: 'BURST_BUTTON',
+  BURST_BUTTON_LABEL: 'BURST_BUTTON_LABEL',
   PILOT_BUTTON: 'PILOT_BUTTON',
+  PILOT_BUTTON_LABEL: 'PILOT_BUTTON_LABEL',
   BIG_BUTTON_DISABLED: 'BIG_BUTTON_DISABLED',
   SMALL_BUTTON_DISABLED: 'SMALL_BUTTON_DISABLED',
   PLAYER_GAUGE_BASE: 'PLAYER_GAUGE_BASE',
@@ -93,8 +95,16 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
     path: 'button/burst-button.png',
   },
   {
+    id: CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL,
+    path: 'button/burst-button-label.png',
+  },
+  {
     id: CANVAS_IMAGE_IDS.PILOT_BUTTON,
     path: 'button/pilot-button.png',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.PILOT_BUTTON_LABEL,
+    path: 'button/pilot-button-label.png',
   },
   {
     id: CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED,
