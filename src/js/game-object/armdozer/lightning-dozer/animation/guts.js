@@ -28,7 +28,7 @@ function gutsUp(model: LightningDozerModel): Animate {
  * @return アニメーション
  */
 function wait(): Animate {
-  return delay(300);
+  return delay(600);
 }
 
 /**
