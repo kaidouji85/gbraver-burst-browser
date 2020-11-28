@@ -16,7 +16,7 @@ import {delay} from "../../../../../animation/delay";
 export function neoLandozerTurnStart(sprite: NeoLandozer, turnStart: TurnStart): Animate {
   return all(
     sprite.gutsForTurnStart(),
-    delay(600)
+    delay(800)
       .chain(turnStart.popUp())
   );
 }
