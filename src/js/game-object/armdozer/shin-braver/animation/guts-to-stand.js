@@ -25,7 +25,7 @@ export function gutsToStand(model: ShinBraverModel, sounds: ShinBraverSounds): A
       model.animation.type = 'GUTS_UP';
       model.animation.frame = 1;
     }))
-    .chain(delay(300))
+    .chain(delay(500))
     .chain(process(() => {
       sounds.motor.play();
     }))
