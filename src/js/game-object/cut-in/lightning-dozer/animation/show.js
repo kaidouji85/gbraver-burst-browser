@@ -19,7 +19,7 @@ export function show(model: LightningDozerCutInModel): Animate {
       model.animation.type = 'CUT_IN_UP';
       model.animation.frame = 0;
     }).chain(tween(model.animation, t => t.to({frame: 1}, 200))
-    ).chain(delay(300)
+    ).chain(delay(600)
     ).chain(process(() => {
         model.animation.type = 'CUT_IN_DOWN';
         model.animation.frame = 0;
