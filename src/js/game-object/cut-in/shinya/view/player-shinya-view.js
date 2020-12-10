@@ -32,7 +32,8 @@ export class PlayerShinyaView implements ShinyaView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const shinyaResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHINYA_CUTIN);
+    //const shinyaResource = resources.textures.find(v => v.id === TEXTURE_IDS.SHINYA_CUTIN); // TODO 開発終了後に戻す
+    const shinyaResource = resources.textures.find(v => v.id === TEXTURE_IDS.RAITO_CUTIN);
     const shinya = shinyaResource?.texture ?? new THREE.Texture();
     this._mesh = new HorizontalAnimationMesh({
       texture: shinya,
