@@ -28,6 +28,8 @@ import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
+import {PilotIds} from "gbraver-burst-core";
+import {Pilots} from "gbraver-burst-core/lib/master/pilots";
 
 /**
  * ゲーム全体の管理を行う
@@ -274,7 +276,14 @@ export class Game {
     if (!npcBattle.player) {
       return;
     }
-    const player: Player = npcBattle.player;
+    // TODO 開発が完了したら戻す
+    const nowPlayer: Player = npcBattle.player;
+    const raito = Pilots.find(v => v.id === PilotIds.RAITO)
+      ?? Pilots[0];
+    const player: Player = {
+      ...nowPlayer,
+      pilot: raito
+    };
 
     await this._fader.fadeOut();
     const course: NPCBattleCourse = NPCBattleCourses.find(v =>
