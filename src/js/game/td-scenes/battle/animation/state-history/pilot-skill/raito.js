@@ -4,6 +4,8 @@
 import type {PilotSkill} from "gbraver-burst-core";
 import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
 import {RaitoHUD} from "../../../view/hud/pilot-objects/raito";
+import {Animate} from "../../../../../../animation/animate";
+import {empty} from "../../../../../../animation/delay";
 
 /**
  * パイロットスキル ライト アニメーションパラメータ
@@ -30,4 +32,14 @@ export function castRaitoAnimationParam(origin: PilotSkillAnimationParam): ?Rait
   }
 
   return null;
+}
+
+/**
+ * ライト パイロットスキルアニメーション
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+export function raitoAnimation(param: RaitoAnimationParam): Animate {
+  return empty();
 }
