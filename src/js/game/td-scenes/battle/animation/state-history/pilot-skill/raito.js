@@ -74,8 +74,8 @@ function raitoDamageDecrease(param: RaitoAnimationParamX<DamageDecreaseSkill>): 
       param.hudObjects.rearmostFader.opacity(0, 300))
     )
     .chain(delay(500))
-    //.chain(param.invokerTD.armdozerEffects.powerUp.popUp())
-    //.chain(delay(500))
+    .chain(param.invokerTD.armdozerEffects.damageDecrease.popUp())
+    .chain(delay(500))
     .chain(all(
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
