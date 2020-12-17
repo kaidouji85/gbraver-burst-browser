@@ -15,7 +15,7 @@ const ROOT_CLASS_NAME = 'player-select__pilot-bust-shot';
  * パイロットIDに対応したバストショットを生成する
  * 
  * @param resources リソース管理オブジェクト 
- * @param pitlotId パイロットID
+ * @param pilotId パイロットID
  * @return 生成結果 
  */
 export function createPilotBustShot(resources: Resources, pilotId: PilotId): PilotBustShot {
@@ -23,7 +23,9 @@ export function createPilotBustShot(resources: Resources, pilotId: PilotId): Pil
     case PilotIds.SHINYA:
       return shinyaBustShot(resources);
     case PilotIds.GAI:
-      return gaiBustShot(resources);  
+      return gaiBustShot(resources);
+    case PilotIds.RAITO:
+      return raitoBustShot(resources);
     default:
       return shinyaBustShot(resources);
   }
@@ -52,5 +54,18 @@ function gaiBustShot(resources: Resources): PilotBustShot {
   const path = resources.paths.find(v => v.id === PathIds.GAI_SKILL_CUTIN)
   ?.path ?? '';
   const className = `${ROOT_CLASS_NAME}__gai`;  
+  return new PilotBustShot(path, className);
+}
+
+/**
+ * ライトのバストショットを生成する
+ *
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function raitoBustShot(resources: Resources): PilotBustShot {
+  const path = resources.paths.find(v => v.id === PathIds.RAITO_SKILL_CUTIN)
+    ?.path ?? '';
+  const className = `${ROOT_CLASS_NAME}__raito`;
   return new PilotBustShot(path, className);
 }

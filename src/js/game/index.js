@@ -276,15 +276,7 @@ export class Game {
     if (!npcBattle.player) {
       return;
     }
-    // TODO 開発が完了したら戻す
-    const nowPlayer: Player = npcBattle.player;
-    const raito = Pilots.find(v => v.id === PilotIds.RAITO)
-      ?? Pilots[0];
-    const player: Player = {
-      ...nowPlayer,
-      pilot: raito
-    };
-
+    const player: Player = npcBattle.player;
     await this._fader.fadeOut();
     const course: NPCBattleCourse = NPCBattleCourses.find(v =>
       v.armdozerId === player.armdozer.id
