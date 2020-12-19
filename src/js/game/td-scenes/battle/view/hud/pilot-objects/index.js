@@ -8,6 +8,7 @@ import {PilotIds} from "gbraver-burst-core";
 import type {HUDPilotObjects} from "./hud-pilot-objects";
 import {enemyGaiHUD, playerGaiHUD} from "./gai";
 import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
+import {enemyRaitoHUD, playerRaitoHUD} from "./raito";
 
 /**
  * プレイヤー側 HUDパイロット
@@ -23,6 +24,8 @@ export function playerHUDPilotObjects(resources: Resources, listener: Observable
       return playerShinyaHUD(resources, listener, state);
     case PilotIds.GAI:
       return playerGaiHUD(resources, listener, state);
+    case PilotIds.RAITO:
+      return playerRaitoHUD(resources, listener, state);
     default:
       return playerShinyaHUD(resources, listener, state);
   }
@@ -42,6 +45,8 @@ export function enemyHUDPilotObjects(resources: Resources, listener: Observable<
       return enemyShinyaHUD(resources, listener, state);
     case PilotIds.GAI:
       return enemyGaiHUD(resources, listener, state);
+    case PilotIds.RAITO:
+      return enemyRaitoHUD(resources, listener, state);
     default:
       return enemyShinyaHUD(resources, listener, state);
   }

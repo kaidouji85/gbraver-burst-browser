@@ -23,6 +23,8 @@ import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {ReflectIndicator} from "../../../../../game-object/reflect-indicator/reflect-indicator";
 import {PowerUp} from "../../../../../game-object/power-up/power-up";
+import {DamageDecrease} from "../../../../../game-object/damage-decrease/damage-decrease";
+import {enemyDamageDecrease, playerDamageDecrease} from "../../../../../game-object/damage-decrease";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -37,6 +39,7 @@ export interface TDPlayerField {
     powerUp: PowerUp,
     reflect: ReflectIndicator,
     continuousAttack: ContinuousAttackIndicator,
+    damageDecrease: DamageDecrease,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -74,6 +77,7 @@ export class TDPlayerImpl implements TDPlayer {
     powerUp: PowerUp,
     reflect: ReflectIndicator,
     continuousAttack: ContinuousAttackIndicator,
+    damageDecrease: DamageDecrease,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -101,6 +105,7 @@ export class TDPlayerImpl implements TDPlayer {
     this.armdozerEffects.powerUp.destructor();
     this.armdozerEffects.reflect.destructor();
     this.armdozerEffects.continuousAttack.destructor();
+    this.armdozerEffects.damageDecrease.destructor();
     this.recoverBattery.destructor();
     this.turnStart.destructor();
   }
@@ -117,6 +122,7 @@ export class TDPlayerImpl implements TDPlayer {
       this.armdozerEffects.powerUp.getObject3D(),
       this.armdozerEffects.reflect.getObject3D(),
       this.armdozerEffects.continuousAttack.getObject3D(),
+      this.armdozerEffects.damageDecrease.getObject3D(),
       this.batteryNumber.getObject3D(),
       this.recoverBattery.getObject3D(),
       this.damageIndicator.getObject3D(),
@@ -144,6 +150,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
       powerUp: playerPowerUp(resources, listener),
       reflect: playerReflectIndicator(resources, listener),
       continuousAttack: playerContinuousAttack(resources, listener),
+      damageDecrease: playerDamageDecrease(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
@@ -177,6 +184,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
       powerUp: enemyPowerUp(resources, listener),
       reflect: enemyReflectIndicator(resources, listener),
       continuousAttack: enemyContinuousAttack(resources, listener),
+      damageDecrease: enemyDamageDecrease(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,

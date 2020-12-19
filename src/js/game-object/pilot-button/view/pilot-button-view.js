@@ -115,6 +115,7 @@ export class PilotButtonView {
     this._button.destructor();
     this._pilotIcon.destructor();
     this._buttonDisabled.destructor();
+    this._label.destructor();
     this._overlap.destructor();
   }
 

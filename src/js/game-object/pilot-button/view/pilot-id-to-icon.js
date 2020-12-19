@@ -6,6 +6,7 @@ import {PilotIds} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
 import {ShinyaIcon} from "./shinya";
 import {GaiIcon} from "./gai";
+import {RaitoIcon} from "./raito";
 
 /**
  * パイロットIDに対応したパイロットアイコンを生成する
@@ -20,6 +21,8 @@ export function createPilotIcon(pilotId: PilotId, resources: Resources): PilotIc
       return new ShinyaIcon(resources);
     case PilotIds.GAI:
       return new GaiIcon(resources);
+    case PilotIds.RAITO:
+      return new RaitoIcon(resources);
     default:
       return new ShinyaIcon(resources);
   }
