@@ -1,6 +1,7 @@
 // @flow
 
 import type {BuffPowerSkill, PilotSkill, RecoverBatterySkill} from 'gbraver-burst-core';
+import type {DamageDecreaseSkill} from "gbraver-burst-core/lib/player/pilot";
 
 /**
  * パイロットスキルのテンプレート
@@ -14,6 +15,8 @@ export function pilotSkillTemplate(skill: PilotSkill): string {
       return recoverBatterySkillTemplate(skill);
     case 'BuffPowerSkill':
       return buffPowerSkillTemplate(skill);
+    case 'DamageDecreaseSkill':
+      return damageDecreaseSkillTemplate(skill);
     default:
       return '';
   }
@@ -36,5 +39,14 @@ function recoverBatterySkillTemplate(skill: RecoverBatterySkill): string {
  * @return スキル文言
  */
 function buffPowerSkillTemplate(skill: BuffPowerSkill): string {
-  return `2ターンだけ攻撃+${skill.buffPower}`;
+  return `${skill.duration}ターンだけ攻撃+${skill.buffPower}`;
+}
+
+/**
+ * パイロットスキル ダメージ減少
+ * @param skill スキル詳細
+ * @return スキル文言
+ */
+function damageDecreaseSkillTemplate(skill: DamageDecreaseSkill): string {
+  return `${skill.duration}ターンだけダメージ${skill.decrease}減少`;
 }

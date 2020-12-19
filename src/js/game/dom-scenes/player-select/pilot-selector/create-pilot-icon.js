@@ -19,6 +19,8 @@ export function createPilotIcon(resources: Resources, pilotId: PilotId): PilotIc
       return shinyaIcon(resources);
     case PilotIds.GAI:
       return gaiIcon(resources);
+    case PilotIds.RAITO:
+      return raitoIcon(resources);
     default:
       return shinyaIcon(resources);
   }
@@ -47,4 +49,17 @@ function gaiIcon(resources: Resources): PilotIcon {
   const path = resources.paths.find(v => v.id === PathIds.GAI_ICON)
     ?.path ?? '';
   return new PilotIcon(resources, path, 'ガイ アイコン');
+}
+
+/**
+ *
+ * ライト アイコン
+ *
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function raitoIcon(resources: Resources): PilotIcon {
+  const path = resources.paths.find(v => v.id === PathIds.RAITO_ICON)
+    ?.path ?? '';
+  return new PilotIcon(resources, path, 'ライト アイコン');
 }

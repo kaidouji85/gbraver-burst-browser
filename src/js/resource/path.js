@@ -41,6 +41,8 @@ export const PathIds = {
   SHINYA_SKILL_CUTIN: 'SHINYA_SKILL_CUTIN',
   GAI_ICON: 'GAI_ICON',
   GAI_SKILL_CUTIN: 'GAI_SKILL_CUTIN',
+  RAITO_SKILL_CUTIN: 'RAITO_SKILL_CUTIN',
+  RAITO_ICON: 'RAITO_ICON',
   END: 'END',
   END_CARD: 'END_CARD',
   CLOSER: 'CLOSER',
@@ -107,6 +109,14 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.GAI_SKILL_CUTIN,
     path: root => `${root.get()}/pilot/gai/skill-cutin.png`
+  },
+  {
+    id: PathIds.RAITO_SKILL_CUTIN,
+    path: root => `${root.get()}/pilot/raito/skill-cutin.png`
+  },
+  {
+    id: PathIds.RAITO_ICON,
+    path: root => `${root.get()}/pilot/raito/player-select.png`
   },
   {
     id: PathIds.END,

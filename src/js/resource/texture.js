@@ -77,6 +77,7 @@ export const TEXTURE_IDS = {
   WING_DOZER_GUARD: 'WING_DOZER_GUARD',
   SHINYA_CUTIN: 'SHINYA_CUTIN',
   GAI_CUTIN: 'GAI_CUTIN',
+  RAITO_CUTIN: 'RAITO_CUTIN',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
   HITMARK_LIGHTNING_RING: 'HITMARK_LIGHTNING_RING',
@@ -89,6 +90,7 @@ export const TEXTURE_IDS = {
   POWER_UP: 'POWER_UP',
   REFLECT: 'REFLECT',
   CONTINUOUS_ATTACK: 'CONTINUOUS_ATTACK',
+  DAMAGE_DECREASE: 'DAMAGE_DECREASE',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -331,6 +333,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.GAI_CUTIN,
     path: 'pilot/gai/skill-cutin.png',
   },
+  // ライト関連
+  {
+    id: TEXTURE_IDS.RAITO_CUTIN,
+    path: 'pilot/raito/skill-cutin.png',
+  },
   // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
@@ -385,7 +392,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.CONTINUOUS_ATTACK,
     path: 'effect-label/continuous-attack.png',
-  }
+  },
+  {
+    id: TEXTURE_IDS.DAMAGE_DECREASE,
+    path: 'effect-label/damage-decrease.png',
+  },
 ];
 
 /**
