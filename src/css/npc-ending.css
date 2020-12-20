@@ -28,10 +28,11 @@
 
 .npc-ending__end {
   object-fit: cover;
-  width: 50vw;
+  width: 40vw;
+  transform: rotate(20deg);
 }
 
 .npc-ending__logo {
   object-fit: cover;
-  width: 30vw;
+  width: 40vw;
 }
