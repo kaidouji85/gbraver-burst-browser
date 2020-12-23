@@ -82,7 +82,7 @@ export class BatterySelector {
         param.onBatteryChange(this._model.battery);
       },
       onMinusPush: () => {
-        if (this._model.disabled || canBatteryMinus(this._model)) {
+        if (this._model.disabled || !canBatteryMinus(this._model)) {
           return;
         }
 
