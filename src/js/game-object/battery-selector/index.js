@@ -22,6 +22,7 @@ import {canBatteryPlus} from "./model/can-battery-plus";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {SOUND_IDS} from "../../resource/sound";
 import {decide} from './animation/decide';
+import {batteryMinusPop} from "./animation/battery-minus-pop";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -39,11 +40,13 @@ export class BatterySelector {
   _pushButtonSound: typeof Howl;
   _batteryChangeSound: typeof Howl;
   _batteryChangeTween: typeof TWEEN.Group;
+  _batteryMinusTween: typeof TWEEN.Group;
   _subscription: Subscription;
 
   constructor(param: Param) {
     this._model = initialValue();
     this._batteryChangeTween = new TWEEN.Group();
+    this._batteryMinusTween = new TWEEN.Group();
 
     const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButtonSound = pushButtonResource
@@ -86,6 +89,7 @@ export class BatterySelector {
           return;
         }
 
+        this._batteryMinusPop();
         this._batteryChange(this._model.battery - 1);
         param.onBatteryChange(this._model.battery);
       }
@@ -141,12 +145,24 @@ export class BatterySelector {
 
   /** 状態更新 */
   _update(action: Update): void {
+    this._batteryMinusTween.update(action.time);
     this._batteryChangeTween.update(action.time);
   }
 
   /** プリレンダー */
   _preRender(action: PreRender): void {
     this._view.engage(this._model, action);
+  }
+
+  /**
+   * バッテリーマイナスボタン ポップ
+   */
+  _batteryMinusPop(): void {
+    this._batteryMinusTween.update();
+    this._batteryMinusTween.removeAll();
+
+    this._batteryChangeSound.play();
+    batteryMinusPop(this._model, this._batteryMinusTween).play();
   }
 
   /**
@@ -160,7 +176,6 @@ export class BatterySelector {
 
     this._model.battery = battery;
     const needle = getNeedleValue(battery);
-    this._batteryChangeSound.play();
     changeNeedle(this._model, this._batteryChangeTween, needle).play();
   }
 }

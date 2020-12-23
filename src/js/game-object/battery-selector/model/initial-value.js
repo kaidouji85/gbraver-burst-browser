@@ -16,6 +16,7 @@ export function initialValue(): BatterySelectorModel {
     label: 'Attack',
     opacity: 0,
     scale: 1,
+    minusButtonScale: 1,
     disabled: true
   };
 }
