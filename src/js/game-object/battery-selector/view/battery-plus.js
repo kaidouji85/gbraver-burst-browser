@@ -77,7 +77,7 @@ export class BatteryPlus {
   update(model: BatterySelectorModel): void {
     this._activeButton.setOpacity(model.opacity);
 
-    const isDisabledVisible = canBatteryPlus(model);
+    const isDisabledVisible = !canBatteryPlus(model);
     const disabledOpacity = isDisabledVisible ? model.opacity : 0;
     this._buttonDisabled.setOpacity(disabledOpacity);
   }
