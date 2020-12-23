@@ -76,10 +76,20 @@ export class BatteryMinus {
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
     this._activeButton.setOpacity(model.opacity);
+    this._activeButton.getObject3D().scale.set(
+      model.minusButtonScale,
+      model.minusButtonScale,
+      model.minusButtonScale
+    );
 
     const isDisabledVisible = !canBatteryMinus(model);
     const disabledOpacity = isDisabledVisible ? model.opacity : 0;
     this._buttonDisabled.setOpacity(disabledOpacity);
+    this._buttonDisabled.getObject3D().scale.set(
+      model.minusButtonScale,
+      model.minusButtonScale,
+      model.minusButtonScale
+    );
   }
 
   /** シーンに追加するオブジェクトを取得する */
