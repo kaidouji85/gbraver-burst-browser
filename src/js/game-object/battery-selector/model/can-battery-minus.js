@@ -10,5 +10,5 @@ import {MIN_BATTERY} from "./index";
  * @return 判定結果、trueで-1できる
  */
 export function canBatteryMinus(model: BatterySelectorModel): boolean {
-  return model.battery <= MIN_BATTERY;
+  return MIN_BATTERY < model.battery;
 }
