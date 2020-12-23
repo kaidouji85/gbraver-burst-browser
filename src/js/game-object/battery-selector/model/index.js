@@ -26,4 +26,6 @@ export type BatterySelectorModel = {
   scale: number,
   /** -ボタン 拡大率 */
   minusButtonScale: number,
+  /** +ボタン 拡大率 */
+  plusButtonScale: number,
 };

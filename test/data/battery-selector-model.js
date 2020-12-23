@@ -10,5 +10,6 @@ export const EMPTY_BATTERY_SELECTOR: BatterySelectorModel = {
   opacity: 1,
   scale: 1,
   minusButtonScale: 1,
+  plusButtonScale: 1,
   disabled: false,
 };
