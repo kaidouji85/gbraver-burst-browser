@@ -104,11 +104,6 @@ export class BatterySelectorView {
     this._minus.update(model);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
-    this._group.scale.set(
-      GROUP_SCALE * devicePerScale * model.scale,
-      GROUP_SCALE * devicePerScale * model.scale,
-      GROUP_SCALE * devicePerScale * model.scale
-    );
     this._group.position.x = preRender.rendererDOM.clientWidth / 2 -preRender.safeAreaInset.right -PADDING_RIGHT * devicePerScale;
     this._group.position.y = -preRender.rendererDOM.clientHeight / 2 + preRender.safeAreaInset.bottom + PADDING_BOTTOM * devicePerScale;
     this._group.quaternion.copy(preRender.camera.quaternion);
