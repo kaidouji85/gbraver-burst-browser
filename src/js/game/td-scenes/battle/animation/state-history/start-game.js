@@ -30,19 +30,9 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
   const param: MyTurnAnimationParam = {
     tdArmdozer: activeTDArmdozer,
     hudArmdozer: activeHUDArmdozer,
-    tdPlayer: activeTDPlayer
+    tdPlayer: activeTDPlayer,
+    tdCamera: view.td.camera,
   };
   const effects = empty();
   return myTurnAnimation(param, effects);
-
-  // return all(
-  //   turnStartAnimation(activeTDArmdozer.sprite(), activeTDPlayer.turnStart),
-  //   attentionArmDozer(view.td.camera, activeTDArmdozer.sprite(), 500)
-  // )
-  //   .chain(delay(500))
-  //   .chain(all(
-  //     turnStartToStandAnimation(activeTDArmdozer.sprite()),
-  //     toInitial(view.td.camera, 500)
-  //   ))
-  //   .chain(delay(500));
 }
