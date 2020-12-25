@@ -19,4 +19,4 @@ export type MyTurnAnimationParamX<TD_ARMDOZER: TDArmdozerObjects, HUD_ARMDOZER: 
 /**
  * マイターン アニメーションパラメータ
  */
-export type MyTurnAnimationParam = MyTurnAnimationParam<TDArmdozerObjects, HUDArmdozerObjects>;
+export type MyTurnAnimationParam = MyTurnAnimationParamX<TDArmdozerObjects, HUDArmdozerObjects>;
