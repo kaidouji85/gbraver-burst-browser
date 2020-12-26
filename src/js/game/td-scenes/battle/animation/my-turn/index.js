@@ -6,6 +6,7 @@ import {attentionArmDozer, toInitial} from "../td-camera";
 import {delay} from "../../../../../animation/delay";
 import {castShinBraverMyTUrn, shinBraverMyTurn} from "./shin-braver";
 import {castNeoLandozerMyTurn, neoLandozerMyTurn} from "./neo-landozer";
+import {castLightningDozerMyTurn, lightningDozerMyTurn} from "./lightning-dozer";
 
 /**
  * マイターン アニメーション
@@ -23,6 +24,11 @@ export function myTurnAnimation(param: MyTurnAnimationParam, effects: Animate): 
   const neoLandozer = castNeoLandozerMyTurn(param);
   if (neoLandozer) {
     return neoLandozerMyTurn(neoLandozer, effects);
+  }
+
+  const lightningDozer = castLightningDozerMyTurn(param);
+  if (lightningDozer) {
+    return lightningDozerMyTurn(lightningDozer, effects);
   }
 
   return defaultMyTurn(param, effects);

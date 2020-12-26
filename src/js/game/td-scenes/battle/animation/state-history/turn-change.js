@@ -40,10 +40,8 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
   )
     .chain(delay(500));
-  
   const effects = (0 < turnChange.recoverBattery)
     ? recoverBattery
-    : empty()
-
+    : empty();
   return myTurnAnimation(myTurnParam, effects);
 }

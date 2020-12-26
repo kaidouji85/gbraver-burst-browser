@@ -3,8 +3,6 @@
 import type {MyTurnAnimationParam, MyTurnAnimationParamX} from "./animation-param";
 import {NeoLandozerTD} from "../../view/td/armdozer-objects/neo-landozer";
 import {NeoLandozerHUD} from "../../view/hud/armdozer-objects/neo-landozer";
-import {ShinBraverTD} from "../../view/td/armdozer-objects/shin-braver";
-import {ShinBraverHUD} from "../../view/hud/armdozer-objects/shin-braver";
 import {all} from "../../../../../animation/all";
 import {attentionArmDozer, toInitial} from "../td-camera";
 import {delay} from "../../../../../animation/delay";
