@@ -18,7 +18,7 @@ export type WingDozerMyTurnParam = MyTurnAnimationParamX<WingDozerTD, WingDozerH
  * キャストできない場合はnullを返す
  *
  * @param origin キャスト元
- * @return 　キャスト結果
+ * @return キャスト結果
  */
 export function castWingDozerMyTurnParam(origin: MyTurnAnimationParam): ?WingDozerMyTurnParam {
   if ((origin.tdArmdozer instanceof WingDozerTD) && (origin.hudArmdozer instanceof WingDozerHUD)) {

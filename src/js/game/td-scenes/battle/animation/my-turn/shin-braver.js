@@ -18,7 +18,7 @@ export type ShinBraverMyTurn = MyTurnAnimationParamX<ShinBraverTD, ShinBraverHUD
  * キャストできない場合はnullを返す
  *
  * @param origin キャスト元
- * @return 　キャスト結果
+ * @return キャスト結果
  */
 export function castShinBraverMyTUrn(origin: MyTurnAnimationParam): ?ShinBraverMyTurn {
   if ((origin.tdArmdozer instanceof ShinBraverTD) && (origin.hudArmdozer instanceof ShinBraverHUD)) {
