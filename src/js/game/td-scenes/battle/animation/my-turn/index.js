@@ -19,6 +19,17 @@ export function myTurnAnimation(param: MyTurnAnimationParam, effects: Animate): 
     return shinBraverMyTurn(shinBraver, effects);
   }
 
+  return defaultMyTurn(param, effects);
+}
+
+/**
+ * デフォルト マイターン アニメーション
+ *
+ * @param param パラメータ
+ * @param effects バッテリー回復など効果アニメーション
+ * @return アニメーション
+ */
+function defaultMyTurn(param: MyTurnAnimationParam, effects: Animate): Animate {
   return attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500)
     .chain(delay(500))
     .chain(effects)
