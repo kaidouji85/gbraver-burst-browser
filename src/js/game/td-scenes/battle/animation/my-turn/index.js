@@ -7,6 +7,7 @@ import {delay} from "../../../../../animation/delay";
 import {castShinBraverMyTUrn, shinBraverMyTurn} from "./shin-braver";
 import {castNeoLandozerMyTurn, neoLandozerMyTurn} from "./neo-landozer";
 import {castLightningDozerMyTurn, lightningDozerMyTurn} from "./lightning-dozer";
+import {castWingDozerMyTurnParam, wingDozerMyTurn} from "./wing-dozer";
 
 /**
  * マイターン アニメーション
@@ -29,6 +30,11 @@ export function myTurnAnimation(param: MyTurnAnimationParam, effects: Animate): 
   const lightningDozer = castLightningDozerMyTurn(param);
   if (lightningDozer) {
     return lightningDozerMyTurn(lightningDozer, effects);
+  }
+
+  const wingDozer = castWingDozerMyTurnParam(param);
+  if (wingDozer) {
+    return wingDozerMyTurn(wingDozer, effects);
   }
 
   return defaultMyTurn(param, effects);
