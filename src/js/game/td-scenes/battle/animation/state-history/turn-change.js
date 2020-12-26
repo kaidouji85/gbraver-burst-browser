@@ -5,7 +5,7 @@ import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameStateX, TurnChange} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
-import {empty} from "../../../../../animation/delay";
+import {delay, empty} from "../../../../../animation/delay";
 import type {MyTurnAnimationParam} from "../my-turn/animation-param";
 import {myTurnAnimation} from "../my-turn";
 
@@ -35,11 +35,14 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     tdCamera: view.td.camera,
   };
 
+  const recoverBattery = all(
+    activeTDPlayer.recoverBattery.popUp(turnChange.recoverBattery),
+    activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
+  )
+    .chain(delay(500));
+  
   const effects = (0 < turnChange.recoverBattery)
-    ? all(
-      activeTDPlayer.recoverBattery.popUp(turnChange.recoverBattery),
-      activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
-    )
+    ? recoverBattery
     : empty()
 
   return myTurnAnimation(myTurnParam, effects);

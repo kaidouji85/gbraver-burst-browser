@@ -5,6 +5,7 @@ import type {MyTurnAnimationParam} from "./animation-param";
 import {attentionArmDozer, toInitial} from "../td-camera";
 import {delay} from "../../../../../animation/delay";
 import {castShinBraverMyTUrn, shinBraverMyTurn} from "./shin-braver";
+import {castNeoLandozerMyTurn, neoLandozerMyTurn} from "./neo-landozer";
 
 /**
  * マイターン アニメーション
@@ -17,6 +18,11 @@ export function myTurnAnimation(param: MyTurnAnimationParam, effects: Animate): 
   const shinBraver = castShinBraverMyTUrn(param);
   if (shinBraver) {
     return shinBraverMyTurn(shinBraver, effects);
+  }
+
+  const neoLandozer = castNeoLandozerMyTurn(param);
+  if (neoLandozer) {
+    return neoLandozerMyTurn(neoLandozer, effects);
   }
 
   return defaultMyTurn(param, effects);

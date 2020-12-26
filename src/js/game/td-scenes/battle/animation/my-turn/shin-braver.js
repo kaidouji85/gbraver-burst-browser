@@ -45,7 +45,6 @@ export function shinBraverMyTurn(param: ShinBraverMyTurn, effects: Animate): Ani
   )
     .chain(delay(500))
     .chain(effects)
-    .chain(delay(500))
     .chain(all(
       toInitial(param.tdCamera, 500),
       param.tdArmdozer.shinBraver.gutsToStand()
