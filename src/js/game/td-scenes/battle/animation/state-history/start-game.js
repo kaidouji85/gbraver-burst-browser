@@ -4,10 +4,7 @@ import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameStateX, StartGame} from "gbraver-burst-core";
-import {delay, empty} from "../../../../../animation/delay";
-import {all} from "../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../td-camera";
-import {turnStartAnimation, turnStartToStandAnimation} from "../turn-start";
+import {empty} from "../../../../../animation/delay";
 import type {MyTurnAnimationParam} from "../my-turn/animation-param";
 import {myTurnAnimation} from "../my-turn";
 
