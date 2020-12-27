@@ -15,7 +15,9 @@ export function initialValue(): BatterySelectorModel {
     needle: 0,
     label: 'Attack',
     opacity: 0,
-    scale: 1,
+    minusButtonScale: 1,
+    plusButtonScale: 1,
+    batteryButtonScale: 1,
     disabled: true
   };
 }

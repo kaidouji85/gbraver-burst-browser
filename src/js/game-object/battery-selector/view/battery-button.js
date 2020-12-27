@@ -135,6 +135,12 @@ export class BatteryButton {
 
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
+    this._group.scale.set(
+      model.batteryButtonScale,
+      model.batteryButtonScale,
+      1
+    );
+
     const attackOpacity = model.label === 'Attack' ? model.opacity : 0;
     const defenseOpacity = model.label === 'Defense' ? model.opacity : 0;
     this._attackLabel.setOpacity(attackOpacity);
