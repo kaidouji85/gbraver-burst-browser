@@ -74,8 +74,6 @@ export class BatterySelectorView {
     });
     this._minus.getObject3D().position.set(-256, 176, 0);
     this._group.add(this._minus.getObject3D());
-
-    this._group.scale.set(GROUP_SCALE, GROUP_SCALE, GROUP_SCALE);
   }
 
   /** デストラクタ */
@@ -104,6 +102,8 @@ export class BatterySelectorView {
     this._minus.update(model);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const scale = devicePerScale * GROUP_SCALE;
+    this._group.scale.set(scale, scale, scale);
     this._group.position.x = preRender.rendererDOM.clientWidth / 2 -preRender.safeAreaInset.right -PADDING_RIGHT * devicePerScale;
     this._group.position.y = -preRender.rendererDOM.clientHeight / 2 + preRender.safeAreaInset.bottom + PADDING_BOTTOM * devicePerScale;
     this._group.quaternion.copy(preRender.camera.quaternion);
