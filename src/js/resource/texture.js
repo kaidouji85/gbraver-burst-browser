@@ -48,6 +48,7 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_CUTIN_DOWN: 'NEO_LANDOZER_CUTIN_DOWN',
   NEO_LANDOZER_BACK_STEP: 'NEO_LANDOZER_BACK_STEP',
   NEO_LANDOZER_FRONT_STEP: 'NEO_LANDOZER_FRONT_STEP',
+  NEO_LANDOZER_BURST_BUTTON_ICON: 'NEO_LANDOZER_BURST_BUTTON_ICON',
   LIGHTNING_DOZER_STAND: 'LIGHTNING_DOZER_STAND',
   LIGHTNING_DOZER_HM_CHARGE: 'LIGHTNING_DOZER_HM_CHARGE',
   LIGHTNING_DOZER_HM_ATTACK: 'LIGHTNING_DOZER_HM_ATTACK',
@@ -204,16 +205,20 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     path: 'armdozer/neo-landozer/cutin-up.png',
   },
   {
-    id:TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
+    id: TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
     path: 'armdozer/neo-landozer/cutin-down.png'
   },
   {
-    id:TEXTURE_IDS.NEO_LANDOZER_BACK_STEP,
+    id: TEXTURE_IDS.NEO_LANDOZER_BACK_STEP,
     path: 'armdozer/neo-landozer/back-step.png'
   },
   {
-    id:TEXTURE_IDS.NEO_LANDOZER_FRONT_STEP,
+    id: TEXTURE_IDS.NEO_LANDOZER_FRONT_STEP,
     path: 'armdozer/neo-landozer/front-step.png'
+  },
+  {
+    id: TEXTURE_IDS.NEO_LANDOZER_BURST_BUTTON_ICON,
+    path: 'armdozer/neo-landozer/burst-button-icon.png',
   },
   // ライトニングドーザ関連
   {
