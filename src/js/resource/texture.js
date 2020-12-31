@@ -34,6 +34,7 @@ export const TEXTURE_IDS = {
   SHIN_BRAVER_CUTIN_DOWN: 'SHIN_BRAVER_CUTIN_DOWN',
   SHIN_BRAVER_BACK_STEP: 'SHIN_BRAVER_BACK_STEP',
   SHIN_BRAVER_FRONT_STEP: 'SHIN_BRAVER_FRONT_STEP',
+  SHIN_BRAVER_BURST_BUTTON_ICON: 'SHIN_BRAVER_BURST_BUTTON_ICON',
   NEO_LANDOZER_STAND: 'NEO_LANDOZER_STAND',
   NEO_LANDOZER_KNOCK_BACK: 'NEO_LANDOZER_KNOCK_BACK',
   NEO_LANDOZER_GUARD: 'NEO_LANDOZER_GUARD',
@@ -47,6 +48,7 @@ export const TEXTURE_IDS = {
   NEO_LANDOZER_CUTIN_DOWN: 'NEO_LANDOZER_CUTIN_DOWN',
   NEO_LANDOZER_BACK_STEP: 'NEO_LANDOZER_BACK_STEP',
   NEO_LANDOZER_FRONT_STEP: 'NEO_LANDOZER_FRONT_STEP',
+  NEO_LANDOZER_BURST_BUTTON_ICON: 'NEO_LANDOZER_BURST_BUTTON_ICON',
   LIGHTNING_DOZER_STAND: 'LIGHTNING_DOZER_STAND',
   LIGHTNING_DOZER_HM_CHARGE: 'LIGHTNING_DOZER_HM_CHARGE',
   LIGHTNING_DOZER_HM_ATTACK: 'LIGHTNING_DOZER_HM_ATTACK',
@@ -61,6 +63,7 @@ export const TEXTURE_IDS = {
   LIGHTNING_DOZER_CUTIN_DOWN: 'LIGHTNING_DOZER_CUTIN_DOWN',
   LIGHTNING_DOZER_BACK_STEP: 'LIGHTNING_DOZER_BACK_STEP',
   LIGHTNING_DOZER_FRONT_STEP: 'LIGHTNING_DOZER_FRONT_STEP',
+  LIGHTNING_DOZER_BURST_BUTTON_ICON: 'LIGHTNING_DOZER_BURST_BUTTON_ICON',
   WING_DOZER_STAND: 'WING_DOZER_STAND',
   WING_DOZER_UPPER_CHARGE: 'WING_DOZER_UPPER_CHARGE',
   WING_DOZER_UPPER_ATTACK: 'WING_DOZER_UPPER_ATTACK',
@@ -75,6 +78,7 @@ export const TEXTURE_IDS = {
   WING_DOZER_BURST_UP: 'WING_DOZER_BURST_UP',
   WING_DOZER_BURST_DOWN: 'WING_DOZER_BURST_DOWN',
   WING_DOZER_GUARD: 'WING_DOZER_GUARD',
+  WING_DOZER_BURST_BUTTON_ICON: 'WING_DOZER_BURST_BUTTON_ICON',
   SHINYA_CUTIN: 'SHINYA_CUTIN',
   GAI_CUTIN: 'GAI_CUTIN',
   RAITO_CUTIN: 'RAITO_CUTIN',
@@ -156,6 +160,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.SHIN_BRAVER_FRONT_STEP,
     path: 'armdozer/shin-braver/front-step.png',
   },
+  {
+    id: TEXTURE_IDS.SHIN_BRAVER_BURST_BUTTON_ICON,
+    path: 'armdozer/shin-braver/burst-button-icon.png',
+  },
   // ネオランドーザ関連
   {
     id: TEXTURE_IDS.NEO_LANDOZER_STAND,
@@ -198,16 +206,20 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     path: 'armdozer/neo-landozer/cutin-up.png',
   },
   {
-    id:TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
+    id: TEXTURE_IDS.NEO_LANDOZER_CUTIN_DOWN,
     path: 'armdozer/neo-landozer/cutin-down.png'
   },
   {
-    id:TEXTURE_IDS.NEO_LANDOZER_BACK_STEP,
+    id: TEXTURE_IDS.NEO_LANDOZER_BACK_STEP,
     path: 'armdozer/neo-landozer/back-step.png'
   },
   {
-    id:TEXTURE_IDS.NEO_LANDOZER_FRONT_STEP,
+    id: TEXTURE_IDS.NEO_LANDOZER_FRONT_STEP,
     path: 'armdozer/neo-landozer/front-step.png'
+  },
+  {
+    id: TEXTURE_IDS.NEO_LANDOZER_BURST_BUTTON_ICON,
+    path: 'armdozer/neo-landozer/burst-button-icon.png',
   },
   // ライトニングドーザ関連
   {
@@ -266,6 +278,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.LIGHTNING_DOZER_FRONT_STEP,
     path: 'armdozer/lightning-dozer/front-step.png',
   },
+  {
+    id: TEXTURE_IDS.LIGHTNING_DOZER_BURST_BUTTON_ICON,
+    path: 'armdozer/lightning-dozer/burst-button-icon.png',
+  },
   // ウィングドーザ関連
   {
     id: TEXTURE_IDS.WING_DOZER_STAND,
@@ -322,6 +338,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.WING_DOZER_GUARD,
     path: 'armdozer/wing-dozer/guard.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_BURST_BUTTON_ICON,
+    path: 'armdozer/wing-dozer/burst-button-icon.png',
   },
   // シンヤ関連
   {
