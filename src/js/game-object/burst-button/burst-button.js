@@ -14,10 +14,12 @@ import {Animate} from "../../animation/animate";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {SOUND_IDS} from "../../resource/sound";
 import {decide} from "./animation/decide";
+import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 
 type Param = {
   resources: Resources,
   listener: Observable<GameObjectAction>,
+  armDozerId: ArmDozerId,
   onPush: () => void,
 };
 
@@ -38,6 +40,7 @@ export class BurstButton {
     this._view = new BurstButtonView({
       resources: param.resources,
       listener: param.listener,
+      armDozerId: param.armDozerId,
       onPush: () => {
         if (this._model.disabled || !this._model.canBurst) {
           return;

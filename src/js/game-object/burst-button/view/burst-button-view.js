@@ -13,6 +13,7 @@ import type {GameObjectAction} from "../../../action/game-object-action";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import type {ArmdozerIcon} from "./armdozer-icon";
 import {ShinBraverIcon} from "./shin-braver";
+import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -29,6 +30,7 @@ const PADDING_BOTTOM = 80;
 type Param = {
   resources: Resources,
   listener: Observable<GameObjectAction>,
+  armDozerId: ArmDozerId,
   onPush: () => void,
 };
 

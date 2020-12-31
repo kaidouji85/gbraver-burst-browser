@@ -1,6 +1,7 @@
 // @flow
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {BurstButton} from "../src/js/game-object/burst-button/burst-button";
+import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 
 export default {
   title: 'burst-button',
@@ -9,6 +10,7 @@ export default {
 export const canBurst = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const burstButton = new BurstButton({
+      armDozerId: ArmDozerIdList.SHIN_BRAVER,
       resources: resources,
       listener: listener,
       onPush: () => {
@@ -25,6 +27,7 @@ export const canBurst = (): HTMLElement => {
 export const disabled = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const burstButton = new BurstButton({
+      armDozerId: ArmDozerIdList.SHIN_BRAVER,
       resources: resources,
       listener: listener,
       onPush: () => {

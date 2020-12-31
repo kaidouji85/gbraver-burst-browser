@@ -53,6 +53,7 @@ export class HUDGameObjects {
     this.burstButton = new BurstButton({
       resources: resources,
       listener: listener,
+      armDozerId: playerInfo.armdozer.id,
       onPush: () => {
         this._battleSceneAction.next({
           type: 'doBurst'
