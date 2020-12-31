@@ -11,6 +11,9 @@ import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
+import type {ArmdozerIcon} from "./armdozer-icon";
+import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
+import {createArmdozerIcon} from "./create-armdozer-icon";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -27,12 +30,14 @@ const PADDING_BOTTOM = 80;
 type Param = {
   resources: Resources,
   listener: Observable<GameObjectAction>,
+  armDozerId: ArmDozerId,
   onPush: () => void,
 };
 
 /** バーストボタンのビュー */
 export class BurstButtonView {
   _burstButton: SimpleImageMesh;
+  _armdozerIcon: ArmdozerIcon;
   _label: SimpleImageMesh;
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
@@ -51,6 +56,9 @@ export class BurstButtonView {
       image: burstButton
     });
     this._group.add(this._burstButton.getObject3D());
+
+    this._armdozerIcon = createArmdozerIcon(param.armDozerId, param.resources);
+    this._group.add(this._armdozerIcon.getObject3D());
 
     const label = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL)
@@ -86,6 +94,7 @@ export class BurstButtonView {
   /** デストラクタ */
   destructor(): void {
     this._burstButton.destructor();
+    this._armdozerIcon.destructor();
     this._buttonDisabled.destructor();
     this._label.destructor();
     this._overlap.destructor();
@@ -100,8 +109,12 @@ export class BurstButtonView {
   engage(model: BurstButtonModel, preRender: PreRender): void {
     this._burstButton.setOpacity(model.opacity);
 
+    const iconOpacity = !model.canBurst ? 0 : model.opacity;
+    this._armdozerIcon.setOpacity(iconOpacity);
+
     const labelOpacity = !model.canBurst ? 0 : model.opacity;
     this._label.setOpacity(labelOpacity);
+    this._label.getObject3D().position.y = -80;
 
     const disabledOpacity = model.canBurst ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
