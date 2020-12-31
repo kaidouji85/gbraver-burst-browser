@@ -11,6 +11,8 @@ import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
+import type {ArmdozerIcon} from "./armdozer-icon";
+import {ShinBraverIcon} from "./shin-braver";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -33,6 +35,7 @@ type Param = {
 /** バーストボタンのビュー */
 export class BurstButtonView {
   _burstButton: SimpleImageMesh;
+  _armdozerIcon: ArmdozerIcon;
   _label: SimpleImageMesh;
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
@@ -51,6 +54,10 @@ export class BurstButtonView {
       image: burstButton
     });
     this._group.add(this._burstButton.getObject3D());
+
+    // TODO 選択したアームドーザに応じたアイコンを表示する
+    this._armdozerIcon = new ShinBraverIcon(param.resources);
+    this._group.add(this._armdozerIcon.getObject3D());
 
     const label = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL)
@@ -86,6 +93,7 @@ export class BurstButtonView {
   /** デストラクタ */
   destructor(): void {
     this._burstButton.destructor();
+    this._armdozerIcon.destructor();
     this._buttonDisabled.destructor();
     this._label.destructor();
     this._overlap.destructor();
@@ -100,8 +108,12 @@ export class BurstButtonView {
   engage(model: BurstButtonModel, preRender: PreRender): void {
     this._burstButton.setOpacity(model.opacity);
 
+    const iconOpacity = !model.canBurst ? 0 : model.opacity;
+    this._armdozerIcon.setOpacity(iconOpacity);
+
     const labelOpacity = !model.canBurst ? 0 : model.opacity;
     this._label.setOpacity(labelOpacity);
+    this._label.getObject3D().position.y = -80;
 
     const disabledOpacity = model.canBurst ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
