@@ -14,6 +14,7 @@ import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import type {ArmdozerIcon} from "./armdozer-icon";
 import {ShinBraverIcon} from "./shin-braver";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
+import {createArmdozerIcon} from "./create-armdozer-icon";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -57,8 +58,7 @@ export class BurstButtonView {
     });
     this._group.add(this._burstButton.getObject3D());
 
-    // TODO 選択したアームドーザに応じたアイコンを表示する
-    this._armdozerIcon = new ShinBraverIcon(param.resources);
+    this._armdozerIcon = createArmdozerIcon(param.armDozerId, param.resources);
     this._group.add(this._armdozerIcon.getObject3D());
 
     const label = param.resources.canvasImages
