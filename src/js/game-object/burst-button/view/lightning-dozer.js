@@ -7,9 +7,9 @@ import {TEXTURE_IDS} from "../../../resource/texture";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 
 /**
- * シンブレイバーアイコン
+ * ライトニングドーザアイコン
  */
-export class ShinBraverIcon implements ArmdozerIcon {
+export class LightningDozerIcon implements ArmdozerIcon {
   _mesh: HorizontalAnimationMesh;
   _group: typeof THREE.Group;
 
@@ -21,16 +21,16 @@ export class ShinBraverIcon implements ArmdozerIcon {
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
-    const shinBraver = resources.textures.find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_DOWN)
+    const lightningDozer = resources.textures.find(v => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_DOWN)
       ?.texture ?? new THREE.Texture();
     this._mesh = new HorizontalAnimationMesh({
-      texture: shinBraver,
+      texture: lightningDozer,
       maxAnimation: 4,
-      width: 500,
-      height: 500,
+      width: 550,
+      height: 550,
     });
     this._mesh.animate(1);
-    this._mesh.getObject3D().position.y = 100;
+    this._mesh.getObject3D().position.y = 80;
     this._group.add(this._mesh.getObject3D());
   }
 
