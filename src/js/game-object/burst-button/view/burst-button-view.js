@@ -12,7 +12,6 @@ import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import type {ArmdozerIcon} from "./armdozer-icon";
-import {ShinBraverIcon} from "./shin-braver-icon";
 import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
 import {createArmdozerIcon} from "./create-armdozer-icon";
 
