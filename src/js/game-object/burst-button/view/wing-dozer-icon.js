@@ -21,17 +21,16 @@ export class WingDozerIcon implements ArmdozerIcon {
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
-    const neoLandozer = resources.textures.find(v => v.id === TEXTURE_IDS.WING_DOZER_BURST_DOWN)
+    const neoLandozer = resources.textures.find(v => v.id === TEXTURE_IDS.WING_DOZER_BURST_BUTTON_ICON)
       ?.texture ?? new THREE.Texture();
     this._mesh = new HorizontalAnimationMesh({
       texture: neoLandozer,
-      maxAnimation: 4,
-      width: 600,
-      height: 600,
+      maxAnimation: 1,
+      width: 300,
+      height: 300,
     });
     this._mesh.animate(1);
-    this._mesh.getObject3D().position.x = 60;
-    this._mesh.getObject3D().position.y = 80;
+    this._mesh.getObject3D().position.y = 130;
     this._group.add(this._mesh.getObject3D());
   }
 

@@ -75,6 +75,7 @@ export const TEXTURE_IDS = {
   WING_DOZER_BURST_UP: 'WING_DOZER_BURST_UP',
   WING_DOZER_BURST_DOWN: 'WING_DOZER_BURST_DOWN',
   WING_DOZER_GUARD: 'WING_DOZER_GUARD',
+  WING_DOZER_BURST_BUTTON_ICON: 'WING_DOZER_BURST_BUTTON_ICON',
   SHINYA_CUTIN: 'SHINYA_CUTIN',
   GAI_CUTIN: 'GAI_CUTIN',
   RAITO_CUTIN: 'RAITO_CUTIN',
@@ -322,6 +323,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.WING_DOZER_GUARD,
     path: 'armdozer/wing-dozer/guard.png',
+  },
+  {
+    id: TEXTURE_IDS.WING_DOZER_BURST_BUTTON_ICON,
+    path: 'armdozer/wing-dozer/burst-button-icon.png',
   },
   // シンヤ関連
   {
