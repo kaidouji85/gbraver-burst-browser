@@ -82,6 +82,7 @@ export class TDPlayerImpl implements TDPlayer {
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
+  /** @deprecated */
   turnStart: TurnStart;
 
   constructor(param: TDPlayerField) {
