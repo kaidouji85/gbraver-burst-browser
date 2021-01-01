@@ -9,7 +9,7 @@ import type {TurnStartModel} from "../model/turn-start-model";
 import type {PreRender} from "../../../action/game-loop/pre-render";
 import {HUDCutInScale} from "../../../hud-scale/hud-scale";
 
-export const MESH_SIZE = 300;
+export const MESH_SIZE = 350;
 
 /** プレイヤーターンスタートビュー */
 export class PlayerTurnStartView implements TurnStartView {
@@ -54,10 +54,10 @@ export class PlayerTurnStartView implements TurnStartView {
 
     target.position.x = preRender.rendererDOM.clientWidth / 2
       + preRender.safeAreaInset.left
-      - 200 * devicePerScale;
+      + (model.position.x - 200) * devicePerScale;
     target.position.y =  -preRender.rendererDOM.clientHeight / 2
       + preRender.safeAreaInset.bottom
-      + 100 * devicePerScale;
+      + (model.position.y + 100) * devicePerScale;
     target.position.z = 0;
 
     target.scale.x = model.scale * devicePerScale;
