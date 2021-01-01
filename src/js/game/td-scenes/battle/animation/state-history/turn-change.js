@@ -32,6 +32,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     tdArmdozer: activeTDArmdozer,
     hudArmdozer: activeHUDArmdozer,
     tdPlayer: activeTDPlayer,
+    hudPlayer: activeHUDPlayer,
     tdCamera: view.td.camera,
   };
 

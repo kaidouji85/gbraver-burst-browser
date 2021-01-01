@@ -42,7 +42,7 @@ export function shinBraverMyTurn(param: ShinBraverMyTurn, effects: Animate): Ani
     param.tdArmdozer.shinBraver.gutsForTurnStart(),
     delay(600)
       .chain(all(
-        param.tdPlayer.turnStart.popUp(),
+        param.hudPlayer.turnStart.popUp(),
         effects
       ))
   )
