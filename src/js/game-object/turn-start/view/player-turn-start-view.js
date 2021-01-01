@@ -4,14 +4,10 @@ import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../armdozer/position";
 import type {TurnStartView} from "./turn-start-view";
 import type {TurnStartModel} from "../model/turn-start-model";
 import type {PreRender} from "../../../action/game-loop/pre-render";
+import {HUDCutInScale} from "../../../hud-scale/hud-scale";
 
 export const MESH_SIZE = 300;
 
@@ -53,37 +49,21 @@ export class PlayerTurnStartView implements TurnStartView {
    * @param preRender プリレンダー情報
    */
   engage(model: TurnStartModel, preRender: PreRender): void {
-    this._refreshOpacity(model);
-    this._refreshScale(model);
-    this._refreshPos();
-    this._mesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
-  }
-
-  /**
-   * 透明度を更新する
-   *
-   * @param model モデル
-   */
-  _refreshOpacity(model: TurnStartModel): void {
-    this._mesh.setOpacity(model.opacity);
-  }
-
-  /** 座標を更新する */
-  _refreshPos(): void {
     const target = this._mesh.getObject3D();
-    target.position.x = 0;
-    target.position.y = 0;
+    const devicePerScale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
+
+    target.position.x = preRender.rendererDOM.clientWidth / 2
+      + preRender.safeAreaInset.left
+      - 200 * devicePerScale;
+    target.position.y =  -preRender.rendererDOM.clientHeight / 2
+      + preRender.safeAreaInset.bottom
+      + 100 * devicePerScale;
     target.position.z = 0;
-  }
 
-  /**
-   * スケールを更新する
-   *
-   * @param model モデル
-   */
-  _refreshScale(model: TurnStartModel): void {
-    const target = this._mesh.getObject3D();
-    target.scale.x = model.scale;
-    target.scale.y = model.scale;
+    target.scale.x = model.scale * devicePerScale;
+    target.scale.y = model.scale * devicePerScale;
+
+    this._mesh.setOpacity(model.opacity);
+    this._mesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
   }
 }
