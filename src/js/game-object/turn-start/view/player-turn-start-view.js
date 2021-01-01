@@ -77,8 +77,8 @@ export class PlayerTurnStartView implements TurnStartView {
   /** 座標を更新する */
   _refreshPos(): void {
     const target = this._mesh.getObject3D();
-    target.position.x = ARMDOZER_EFFECT_STANDARD_X;
-    target.position.y = ARMDOZER_EFFECT_STANDARD_Y +10;
+    target.position.x = ARMDOZER_EFFECT_STANDARD_X + 200;
+    target.position.y = ARMDOZER_EFFECT_STANDARD_Y +10 - 100;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
   }
 
