@@ -9,6 +9,8 @@ import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
+import {show} from './animation/show';
+import {hidden} from './animation/hidden';
 import {TurnStartSounds} from "./sounds/turn-start-sounds";
 import type {Resources} from "../../resource";
 
@@ -46,12 +48,31 @@ export class TurnStart {
   }
 
   /**
+   * @deprecated
    * ポップアップ
    * 
    * @return アニメーション
    */
   popUp(): Animate {
     return popUp(this._model, this._sounds);
+  }
+
+  /**
+   * 表示する
+   *
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this._model);
+  }
+
+  /**
+   * 非表示にする
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**
