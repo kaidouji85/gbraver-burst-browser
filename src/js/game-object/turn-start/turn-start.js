@@ -33,9 +33,7 @@ export class TurnStart {
     this._view = view;
     this._sounds = new TurnStartSounds(resources);
     this._subscription = listener.subscribe(action => {
-      if (action.type === 'Update') {
-        this._onUpdate();
-      } else if (action.type === 'PreRender') {
+      if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
     });
@@ -66,18 +64,11 @@ export class TurnStart {
   }
 
   /**
-   * アップデート時の処理
-   */
-  _onUpdate(): void {
-    this._view.engage(this._model);
-  }
-
-  /**
    * プリレンダー時の処置
    *
    * @param action アクション
    */
   _onPreRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+    this._view.engage(this._model, action);
   }
 }

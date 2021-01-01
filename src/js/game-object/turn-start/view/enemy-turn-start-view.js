@@ -11,6 +11,7 @@ import {
 } from "../../armdozer/position";
 import type {TurnStartView} from "./turn-start-view";
 import type {TurnStartModel} from "../model/turn-start-model";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 export const MESH_SIZE = 300;
 
@@ -49,20 +50,13 @@ export class EnemyTurnStartView implements TurnStartView {
    * モデルをビューに反映させる
    *
    * @param model モデル
+   * @param preRender プリレンダー
    */
-  engage(model: TurnStartModel): void {
+  engage(model: TurnStartModel, preRender: PreRender): void {
     this._refreshOpacity(model);
     this._refreshScale(model);
     this._refreshPos();
-  }
-
-  /**
-   * カメラの真正面を向く
-   *
-   * @param camera カメラ
-   */
-  lookAt(camera: typeof THREE.Camera): void {
-    this._mesh.getObject3D().quaternion.copy(camera.quaternion);
+    this._mesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
   }
 
   /**
