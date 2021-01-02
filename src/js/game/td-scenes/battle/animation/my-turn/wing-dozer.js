@@ -42,7 +42,7 @@ export function wingDozerMyTurn(param: WingDozerMyTurnParam, effects: Animate): 
     param.tdArmdozer.wingDozer.dash()
       .chain(delay(1000)),
     param.hudPlayer.turnStart.show(),
-    delay(900)
+    delay(800)
       .chain(effects),
   )
     .chain(all(

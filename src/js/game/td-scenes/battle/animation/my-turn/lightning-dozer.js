@@ -42,7 +42,7 @@ export function lightningDozerMyTurn(param: LightningDozerMyTurn, effects: Anima
     param.tdArmdozer.lightningDozer.guts()
       .chain(delay(1000)),
     param.hudPlayer.turnStart.show(),
-    delay(900)
+    delay(800)
       .chain(effects),
   )
     .chain(all(
