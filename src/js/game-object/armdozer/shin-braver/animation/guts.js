@@ -26,7 +26,7 @@ function gutsUp(model: ShinBraverModel): Animate {
  * @return アニメーション
  */
 function wait(): Animate {
-  return delay(300);
+  return delay(500);
 }
 
 /**
