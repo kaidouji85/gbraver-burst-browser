@@ -54,30 +54,16 @@ function gutsDown(model: LightningDozerModel): Animate {
  */
 export function guts(model: LightningDozerModel, sounds: LightningDozerSounds): Animate {
   return process(() => {
+    model.animation.type = 'GUTS_UP';
+    model.animation.frame = 0;
     sounds.motor.play();
   })
-    .chain(gutsUp(model))
-    .chain(wait())
-    .chain(all(
-      gutsDown(model),
-      process(() => {
-        sounds.motor.play();
-      })
-    ));
-}
-
-/**
- * ターンスタート用 ガッツ
- *
- * @param model モデル
- * @param sounds 効果音
- * @return アニメーション
- */
-export function gutsForTurnStart(model: LightningDozerModel, sounds: LightningDozerSounds): Animate {
-  return process(() => {
-    sounds.motor.play();
-  })
-    .chain(gutsUp(model))
-    .chain(wait())
-    .chain(gutsDown(model));
+    .chain(tween(model.animation, t => t.to({frame: 1}, 200)))
+    .chain(delay(600))
+    .chain(process(() => {
+      model.animation.type = 'GUTS_DOWN';
+      model.animation.frame = 0;
+      sounds.motor.play();
+    }))
+    .chain(tween(model.animation, t => t.to({frame: 1}, 200)));
 }
