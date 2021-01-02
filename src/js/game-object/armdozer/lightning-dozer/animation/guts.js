@@ -6,44 +6,6 @@ import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
 import {delay} from "../../../../animation/delay";
 import {LightningDozerSounds} from "../sounds/lightning-dozer-sounds";
-import {all} from "../../../../animation/all";
-
-/**
- * ため
- *
- * @param model モデル
- * @return アニメーション
- */
-function gutsUp(model: LightningDozerModel): Animate {
-  return process(() => {
-    model.animation.type = 'GUTS_UP';
-    model.animation.frame = 0;
-  })
-    .chain(tween(model.animation, t => t.to({frame: 1}, 200)))
-}
-
-/**
- * 待ち
- *
- * @return アニメーション
- */
-function wait(): Animate {
-  return delay(600);
-}
-
-/**
- * 決めポーズ
- *
- * @param model モデル
- * @return アニメーション
- */
-function gutsDown(model: LightningDozerModel): Animate {
-  return process(() => {
-    model.animation.type = 'GUTS_DOWN';
-    model.animation.frame = 0;
-  })
-    .chain(tween(model.animation, t => t.to({frame: 1}, 200)));
-}
 
 /**
  * ガッツ
