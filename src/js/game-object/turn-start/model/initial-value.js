@@ -11,5 +11,9 @@ export function createInitialValue(): TurnStartModel {
   return {
     opacity: 0,
     scale: 1,
+    position: {
+      x: 0,
+      y: 0
+    }
   };
 }

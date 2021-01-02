@@ -9,6 +9,8 @@ import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
+import {show} from './animation/show';
+import {hidden} from './animation/hidden';
 import {TurnStartSounds} from "./sounds/turn-start-sounds";
 import type {Resources} from "../../resource";
 
@@ -33,9 +35,7 @@ export class TurnStart {
     this._view = view;
     this._sounds = new TurnStartSounds(resources);
     this._subscription = listener.subscribe(action => {
-      if (action.type === 'Update') {
-        this._onUpdate();
-      } else if (action.type === 'PreRender') {
+      if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
     });
@@ -48,12 +48,31 @@ export class TurnStart {
   }
 
   /**
+   * @deprecated
    * ポップアップ
    * 
    * @return アニメーション
    */
   popUp(): Animate {
     return popUp(this._model, this._sounds);
+  }
+
+  /**
+   * 表示する
+   *
+   * @return アニメーション
+   */
+  show(): Animate {
+    return show(this._model);
+  }
+
+  /**
+   * 非表示にする
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**
@@ -66,18 +85,11 @@ export class TurnStart {
   }
 
   /**
-   * アップデート時の処理
-   */
-  _onUpdate(): void {
-    this._view.engage(this._model);
-  }
-
-  /**
    * プリレンダー時の処置
    *
    * @param action アクション
    */
   _onPreRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+    this._view.engage(this._model, action);
   }
 }

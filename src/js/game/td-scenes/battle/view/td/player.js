@@ -16,11 +16,9 @@ import {enemyShockWave, playerShockWave} from "../../../../../game-object/hitmar
 import {Lightning} from "../../../../../game-object/hitmark/lightning/lightning";
 import {enemyLightning, playerLightning} from "../../../../../game-object/hitmark/lightning";
 import {ContinuousAttackIndicator} from "../../../../../game-object/continuous-attack/continuous-attack-indicator";
-import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import {enemyPowerUp, playerPowerUp} from "../../../../../game-object/power-up";
 import {enemyReflectIndicator, playerReflectIndicator} from "../../../../../game-object/reflect-indicator";
 import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/continuous-attack";
-import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {ReflectIndicator} from "../../../../../game-object/reflect-indicator/reflect-indicator";
 import {PowerUp} from "../../../../../game-object/power-up/power-up";
 import {DamageDecrease} from "../../../../../game-object/damage-decrease/damage-decrease";
@@ -44,7 +42,6 @@ export interface TDPlayerField {
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
-  turnStart: TurnStart;
 }
 
 /**
@@ -82,7 +79,6 @@ export class TDPlayerImpl implements TDPlayer {
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
-  turnStart: TurnStart;
 
   constructor(param: TDPlayerField) {
     this.playerId = param.playerId;
@@ -91,7 +87,6 @@ export class TDPlayerImpl implements TDPlayer {
     this.batteryNumber = param.batteryNumber;
     this.recoverBattery = param.recoverBattery;
     this.damageIndicator = param.damageIndicator;
-    this.turnStart = param.turnStart;
   }
 
   /**
@@ -107,7 +102,6 @@ export class TDPlayerImpl implements TDPlayer {
     this.armdozerEffects.continuousAttack.destructor();
     this.armdozerEffects.damageDecrease.destructor();
     this.recoverBattery.destructor();
-    this.turnStart.destructor();
   }
 
   /**
@@ -126,7 +120,6 @@ export class TDPlayerImpl implements TDPlayer {
       this.batteryNumber.getObject3D(),
       this.recoverBattery.getObject3D(),
       this.damageIndicator.getObject3D(),
-      this.turnStart.getObject3D(),
     ];
   }
 }
@@ -161,7 +154,6 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
       resources: resources,
       listener: listener
     }),
-    turnStart: playerTurnStart(resources, listener),
   });
 }
 
@@ -195,6 +187,5 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
       resources: resources,
       listener: listener
     }),
-    turnStart: enemyTurnStart(resources, listener),
   });
 }
