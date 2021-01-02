@@ -15,7 +15,7 @@ import {tween} from "../../../animation/tween";
 export function show(model: TurnStartModel): Animate {
   return process(() => {
     model.opacity = 0;
-    model.position.x = 100;
+    model.position.x = 200;
   })
     .chain(all(
       tween(model, t => t.to({opacity: 1}, 400)),
