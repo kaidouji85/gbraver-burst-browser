@@ -41,8 +41,7 @@ export function neoLandozerMyTurn(param: NeoLandozerMyTurn, effects: Animate): A
     attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
     param.tdArmdozer.neoLandozer.gutsForTurnStart(),
     param.hudPlayer.turnStart.show(),
-    delay(800)
-      .chain(effects)
+    effects,
   )
     .chain(delay(500))
     .chain(all(

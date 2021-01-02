@@ -40,14 +40,14 @@ export function lightningDozerMyTurn(param: LightningDozerMyTurn, effects: Anima
   return all(
     attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
     param.tdArmdozer.lightningDozer.gutsForTurnStart(),
-    delay(900)
-      .chain(param.tdPlayer.turnStart.popUp())
+    param.hudPlayer.turnStart.show(),
+    effects,
   )
     .chain(delay(500))
-    .chain(effects)
     .chain(all(
       toInitial(param.tdCamera, 500),
-      param.tdArmdozer.lightningDozer.gutsToStand()
+      param.tdArmdozer.lightningDozer.gutsToStand(),
+      param.hudPlayer.turnStart.hidden(),
     ))
     .chain(delay(500));
 }
