@@ -19,7 +19,7 @@ import {avoidToStand} from "./animation/avoid-to-stand";
 import {charge} from "./animation/charge";
 import {hmToStand} from "./animation/hm-to-stand";
 import {down} from "./animation/down";
-import {guts, gutsForTurnStart} from "./animation/guts";
+import {guts} from "./animation/guts";
 import {gutsToStand} from "./animation/guts-to-stand";
 import type {Resources} from "../../../resource";
 import {NeoLandozerSounds} from "./sounds/neo-landozer-sounds";
@@ -89,15 +89,6 @@ export class NeoLandozer implements ArmDozerSprite {
    */
   guts(): Animate {
     return guts(this._model, this._sounds);
-  }
-
-  /**
-   * ターンスタート用 ガッツ
-   *
-   * @return アニメーション
-   */
-  gutsForTurnStart(): Animate {
-    return gutsForTurnStart(this._model, this._sounds);
   }
 
   /**
