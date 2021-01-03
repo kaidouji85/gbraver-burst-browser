@@ -39,15 +39,16 @@ export function castNeoLandozerMyTurn(origin: MyTurnAnimationParam): ?NeoLandoze
 export function neoLandozerMyTurn(param: NeoLandozerMyTurn, effects: Animate): Animate {
   return all(
     attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
-    param.tdArmdozer.neoLandozer.gutsForTurnStart(),
-    delay(800)
-      .chain(param.tdPlayer.turnStart.popUp())
+    param.tdArmdozer.neoLandozer.guts()
+      .chain(delay(1000)),
+    param.hudPlayer.turnStart.show(),
+    delay(700)
+      .chain(effects),
   )
-    .chain(delay(500))
-    .chain(effects)
     .chain(all(
       toInitial(param.tdCamera, 500),
-      param.tdArmdozer.neoLandozer.gutsToStand()
+      param.tdArmdozer.neoLandozer.gutsToStand(),
+      param.hudPlayer.turnStart.hidden(),
     ))
     .chain(delay(500));
 }

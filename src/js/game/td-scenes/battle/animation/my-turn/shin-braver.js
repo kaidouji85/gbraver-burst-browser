@@ -39,15 +39,16 @@ export function castShinBraverMyTUrn(origin: MyTurnAnimationParam): ?ShinBraverM
 export function shinBraverMyTurn(param: ShinBraverMyTurn, effects: Animate): Animate {
   return all(
     attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
-    param.tdArmdozer.shinBraver.gutsForTurnStart(),
-    delay(600)
-      .chain(param.tdPlayer.turnStart.popUp())
+    param.tdArmdozer.shinBraver.guts()
+      .chain(delay(1000)),
+    param.hudPlayer.turnStart.show(),
+    delay(700)
+      .chain(effects),
   )
-    .chain(delay(500))
-    .chain(effects)
     .chain(all(
       toInitial(param.tdCamera, 500),
-      param.tdArmdozer.shinBraver.gutsToStand()
+      param.tdArmdozer.shinBraver.gutsToStand(),
+      param.hudPlayer.turnStart.hidden(),
     ))
     .chain(delay(500));
 }

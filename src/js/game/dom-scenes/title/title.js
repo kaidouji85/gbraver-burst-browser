@@ -47,8 +47,8 @@ export class Title implements DOMScene {
           <span class="title__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
         </div>
         <div class="title__contents__controllers">
-          <button class="title__contents__controllers__game-start" data-id="${gameStartId}" >ゲームスタート</button>
           <button class="title__contents__controllers__how-to-play" data-id="${howToPlayId}">遊び方</button>
+          <button class="title__contents__controllers__game-start" data-id="${gameStartId}" >ゲームスタート</button>
         </div>
       </div>
     `;

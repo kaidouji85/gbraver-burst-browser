@@ -7,6 +7,8 @@ import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
+import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
+import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
@@ -14,6 +16,7 @@ import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
 export interface HUDPlayerField {
   playerId: PlayerId;
   gauge: Gauge;
+  turnStart: TurnStart;
 }
 
 /**
@@ -22,10 +25,12 @@ export interface HUDPlayerField {
 export class HUDPlayer implements HUDPlayerField{
   playerId: PlayerId;
   gauge: Gauge;
+  turnStart: TurnStart;
 
   constructor(param: HUDPlayerField) {
     this.playerId = param.playerId;
     this.gauge = param.gauge;
+    this.turnStart = param.turnStart;
   }
 
   /**
@@ -33,6 +38,7 @@ export class HUDPlayer implements HUDPlayerField{
    */
   destructor(): void {
     this.gauge.destructor();
+    this.turnStart.destructor();
   }
 
   /**
@@ -43,6 +49,7 @@ export class HUDPlayer implements HUDPlayerField{
   getObject3Ds(): typeof THREE.Object3D[] {
     return [
       this.gauge.getObject3D(),
+      this.turnStart.getObject3D(),
     ];
   }
 }
@@ -64,6 +71,7 @@ export function playerHUDObjects(resources: Resources, state: Player, listener: 
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),
+    turnStart: playerTurnStart(resources, listener),
   });
 }
 
@@ -84,5 +92,6 @@ export function enemyHUDObjects(resources: Resources, state: Player, listener: O
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),
+    turnStart: enemyTurnStart(resources, listener),
   });
 }

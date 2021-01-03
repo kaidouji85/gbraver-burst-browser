@@ -4,6 +4,7 @@ import type {TDArmdozerObjects} from "../../view/td/armdozer-objects/armdozer-ob
 import type {TDPlayer} from "../../view/td/player";
 import type {HUDArmdozerObjects} from "../../view/hud/armdozer-objects/hud-armdozer-ibjects";
 import {TDCamera} from "../../../../../game-object/camera/td";
+import {HUDPlayer} from "../../view/hud/player";
 
 /**
  * マイターン アニメーションパラメータ
@@ -15,6 +16,7 @@ export type MyTurnAnimationParamX<TD_ARMDOZER: TDArmdozerObjects, HUD_ARMDOZER: 
   tdArmdozer: TD_ARMDOZER,
   hudArmdozer: HUD_ARMDOZER,
   tdPlayer: TDPlayer,
+  hudPlayer: HUDPlayer,
   tdCamera: TDCamera,
 };
 

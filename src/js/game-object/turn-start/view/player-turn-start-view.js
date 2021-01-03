@@ -4,15 +4,12 @@ import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../armdozer/position";
 import type {TurnStartView} from "./turn-start-view";
 import type {TurnStartModel} from "../model/turn-start-model";
+import type {PreRender} from "../../../action/game-loop/pre-render";
+import {HUDCutInScale} from "../../../hud-scale/hud-scale";
 
-export const MESH_SIZE = 300;
+export const MESH_SIZE = 400;
 
 /** プレイヤーターンスタートビュー */
 export class PlayerTurnStartView implements TurnStartView {
@@ -49,47 +46,22 @@ export class PlayerTurnStartView implements TurnStartView {
    * モデルをビューに反映させる
    *
    * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: TurnStartModel): void {
-    this._refreshOpacity(model);
-    this._refreshScale(model);
-    this._refreshPos();
-  }
+  engage(model: TurnStartModel, preRender: PreRender): void {
+    const target = this._mesh.getObject3D();
+    const devicePerScale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
 
-  /**
-   * カメラの真正面を向く
-   *
-   * @param camera カメラ
-   */
-  lookAt(camera: typeof THREE.Camera): void {
-    this._mesh.getObject3D().quaternion.copy(camera.quaternion);
-  }
+    target.position.x = model.position.x * devicePerScale;
+    target.position.y =  -preRender.rendererDOM.clientHeight / 2
+      + preRender.safeAreaInset.bottom
+      + (model.position.y + 60) * devicePerScale;
+    target.position.z = 0;
 
-  /**
-   * 透明度を更新する
-   *
-   * @param model モデル
-   */
-  _refreshOpacity(model: TurnStartModel): void {
+    target.scale.x = model.scale * devicePerScale;
+    target.scale.y = model.scale * devicePerScale;
+
     this._mesh.setOpacity(model.opacity);
-  }
-
-  /** 座標を更新する */
-  _refreshPos(): void {
-    const target = this._mesh.getObject3D();
-    target.position.x = ARMDOZER_EFFECT_STANDARD_X;
-    target.position.y = ARMDOZER_EFFECT_STANDARD_Y +10;
-    target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
-  }
-
-  /**
-   * スケールを更新する
-   *
-   * @param model モデル
-   */
-  _refreshScale(model: TurnStartModel): void {
-    const target = this._mesh.getObject3D();
-    target.scale.x = model.scale;
-    target.scale.y = model.scale;
+    this._mesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
   }
 }

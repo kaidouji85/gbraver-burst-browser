@@ -61,8 +61,15 @@
   margin: 0 calc(var(--responsive-font-size) * 0.5);
   font-size: calc(var(--responsive-font-size));
   border-radius: var(--button-border-radius);
-  background-color: var(--button-background-color);
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
+}
+
+.title__contents__controllers__how-to-play {
+  background-color: var(--sub-button-background-color);
+}
+
+.title__contents__controllers__game-start {
+  background-color: var(--button-background-color);
 }

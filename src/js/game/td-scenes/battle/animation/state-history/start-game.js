@@ -18,9 +18,10 @@ import {myTurnAnimation} from "../my-turn";
  */
 export function startGameAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<StartGame>): Animate {
   const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
+  const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeTDArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameState.activePlayerId);
   const activeHUDArmdozer = view.hud.armdozers.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeTDPlayer || !activeTDArmdozer || !activeHUDArmdozer) {
+  if (!activeTDPlayer || !activeHUDPlayer || !activeTDArmdozer || !activeHUDArmdozer) {
     return empty();
   }
 
@@ -28,6 +29,7 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
     tdArmdozer: activeTDArmdozer,
     hudArmdozer: activeHUDArmdozer,
     tdPlayer: activeTDPlayer,
+    hudPlayer: activeHUDPlayer,
     tdCamera: view.td.camera,
   };
   const effects = empty();

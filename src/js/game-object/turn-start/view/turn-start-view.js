@@ -2,6 +2,7 @@
 
 import * as THREE from 'three';
 import type {TurnStartModel} from "../model/turn-start-model";
+import type {PreRender} from "../../../action/game-loop/pre-render";
 
 /**
  * ターンスタート ビュー
@@ -12,13 +13,11 @@ export interface TurnStartView {
 
   /**
    * モデルをビューに反映させる
+   * 
+   * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: TurnStartModel): void;
-
-  /**
-   * カメラの真正面を向く
-   */
-  lookAt(camera: typeof THREE.Camera): void;
+  engage(model: TurnStartModel, preRender: PreRender): void;
 
   /**
    * シーンに追加するオブジェクトを取得する

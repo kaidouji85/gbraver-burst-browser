@@ -39,15 +39,16 @@ export function castLightningDozerMyTurn(origin: MyTurnAnimationParam): ?Lightni
 export function lightningDozerMyTurn(param: LightningDozerMyTurn, effects: Animate): Animate {
   return all(
     attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
-    param.tdArmdozer.lightningDozer.gutsForTurnStart(),
-    delay(900)
-      .chain(param.tdPlayer.turnStart.popUp())
+    param.tdArmdozer.lightningDozer.guts()
+      .chain(delay(1000)),
+    param.hudPlayer.turnStart.show(),
+    delay(800)
+      .chain(effects),
   )
-    .chain(delay(500))
-    .chain(effects)
     .chain(all(
       toInitial(param.tdCamera, 500),
-      param.tdArmdozer.lightningDozer.gutsToStand()
+      param.tdArmdozer.lightningDozer.gutsToStand(),
+      param.hudPlayer.turnStart.hidden(),
     ))
     .chain(delay(500));
 }
