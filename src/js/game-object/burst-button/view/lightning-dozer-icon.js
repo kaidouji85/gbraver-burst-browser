@@ -26,11 +26,12 @@ export class LightningDozerIcon implements ArmdozerIcon {
     this._mesh = new HorizontalAnimationMesh({
       texture: lightningDozer,
       maxAnimation: 1,
-      width: 350,
-      height: 350,
+      width: 420,
+      height: 420,
     });
     this._mesh.animate(1);
-    this._mesh.getObject3D().position.y = 160;
+    this._mesh.getObject3D().position.x = -15;
+    this._mesh.getObject3D().position.y = 200;
     this._group.add(this._mesh.getObject3D());
   }
 
