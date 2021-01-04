@@ -13,6 +13,9 @@
   <meta property="og:image" content="<%= OWN_ROOT_URL %>/ogp-thumbnail.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="<%= TWITTER_SITE %>" />
+  <% if (IS_SEARCH_ENGINE_NO_INDEX) { %>
+    <meta name="robots" content="noindex">
+  <% } %>
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="app-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
