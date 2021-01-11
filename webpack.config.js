@@ -55,6 +55,7 @@ module.exports = {
         BUILD_INDEX_JS_PATH: BUILD_INDEX_JS_PATH,
         OWN_ROOT_URL: process.env.OWN_ROOT_URL,
         TWITTER_SITE: process.env.TWITTER_SITE,
+        IS_SEARCH_ENGINE_NO_INDEX: process.env.IS_SEARCH_ENGINE_NO_INDEX === 'true'
       },
       inject: false
     }),
