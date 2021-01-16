@@ -13,7 +13,7 @@ import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 /**
  * メッシュの大きさ
  */
-export const MESH_SIZE = 550;
+export const MESH_SIZE = 450;
 
 /**
  * アニメーション数
@@ -60,7 +60,7 @@ export class PlayerRaitoView implements RaitoView {
     this._mesh.getObject3D().scale.set(scale, scale, scale);
     this._mesh.getObject3D().position.set(
       model.tracking.x,
-      model.tracking.y,
+      model.tracking.y - 30 + scale,
       HUD_CUT_IN_ZNIDEX
     );
     this._mesh.setOpacity(model.opacity);
