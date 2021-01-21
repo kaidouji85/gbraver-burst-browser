@@ -98,7 +98,9 @@ function attack(param: NeoLandozerBattle<AttackResult>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(600))
     .chain(all(
-      param.attackerSprite.armHammer(),
+      param.attackerSprite.armHammer()
+        .chain(delay(1800))
+        .chain(param.attackerSprite.hmToStand()),
 
       delay(200).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
@@ -106,9 +108,7 @@ function attack(param: NeoLandozerBattle<AttackResult>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
       ))
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.hmToStand());
+    ));
 }
 
 /**

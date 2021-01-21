@@ -97,10 +97,13 @@ type AttackResult = NormalHit | CriticalHit;
  * @return アニメーション
  */
 function attack(param: ShinBraverBattle<AttackResult>): Animate {
+
   return param.attackerSprite.charge()
     .chain(delay(800))
     .chain(all(
-      param.attackerSprite.straightPunch(),
+      param.attackerSprite.straightPunch()
+        .chain(delay(1800))
+        .chain(param.attackerSprite.punchToStand()),
 
       delay(200).chain(all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
@@ -108,9 +111,7 @@ function attack(param: ShinBraverBattle<AttackResult>): Animate {
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
       ))
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.punchToStand());
+    ));
 }
 
 /**
