@@ -152,14 +152,13 @@ function guard(param: ShinBraverBattle<Guard>): Animate {
 function miss(param: ShinBraverBattle<Miss>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
-    .chain(all(
-      param.attackerSprite.straightPunch(),
+    .chain(param.attackerSprite.straightPunch())
+    .chain(
+      delay(1800)
+        .chain(param.attackerSprite.punchToStand()),
 
-      delay(200)
-        .chain(param.defenderSprite.avoid())
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.punchToStand());
+      param.defenderSprite.avoid()
+    );
 }
 
 /**
