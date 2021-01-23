@@ -103,18 +103,18 @@ function attack(param: ShinBraverBattle<AttackResult>): Animate {
     attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
   )
     .chain(delay(800))
+    .chain(param.attackerSprite.straightPunch())
     .chain(all(
-      param.attackerSprite.straightPunch()
-        .chain(delay(1800))
+      delay(1800)
         .chain(param.attackerSprite.punchToStand()),
 
-      delay(100).chain(all(
+      all(
         toInitial(param.tdCamera, 100),
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.knockBack(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
+      )
     ));
 }
 
