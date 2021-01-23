@@ -129,18 +129,18 @@ function attack(param: ShinBraverBattle<AttackResult>): Animate {
 function guard(param: ShinBraverBattle<Guard>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(800))
+    .chain(param.attackerSprite.straightPunch())
     .chain(all(
-      param.attackerSprite.straightPunch(),
+      delay(1800)
+        .chain(param.attackerSprite.punchToStand()),
 
-      delay(200).chain(all(
+      all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.guard(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
-      ))
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.punchToStand());
+      )
+    ));
 }
 
 /**
