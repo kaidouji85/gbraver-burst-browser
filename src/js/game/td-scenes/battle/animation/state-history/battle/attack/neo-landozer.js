@@ -178,12 +178,17 @@ type DownResult = NormalHit | Guard | CriticalHit;
  * @return アニメーション
  */
 function down(param: NeoLandozerBattle<DownResult>): Animate {
-  return param.attackerSprite.charge()
-    .chain(delay(500))
+  return all(
+    param.attackerSprite.charge()
+      .chain(delay(500)),
+    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+  )
     .chain(param.attackerSprite.armHammer())
     .chain(all(
       delay(1800)
         .chain(param.attackerSprite.hmToStand()),
+
+      toInitial(param.tdCamera, 100),
 
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.down(),
