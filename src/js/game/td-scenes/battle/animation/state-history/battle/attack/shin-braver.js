@@ -185,18 +185,24 @@ type DownResult = NormalHit | CriticalHit | Guard;
  * @return アニメーション
  */
 function down(param: ShinBraverBattle<DownResult>): Animate {
-  return param.attackerSprite.charge()
+  return all(
+    param.attackerSprite.charge(),
+    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+  )
     .chain(delay(800))
     .chain(all(
       param.attackerSprite.straightPunch(),
+      toInitial(param.tdCamera, 100),
+    ))
+    .chain(all(
+      delay(1800)
+        .chain(param.attackerSprite.punchToStand()),
 
-      delay(200).chain(all(
+      all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
         param.defenderSprite.down(),
         param.defenderTD.hitMark.shockWave.popUp(),
         param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.punchToStand());
+      )
+    ));
 }
