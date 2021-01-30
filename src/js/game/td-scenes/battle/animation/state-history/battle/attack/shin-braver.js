@@ -99,10 +99,10 @@ type AttackResult = NormalHit | CriticalHit;
  */
 function attack(param: ShinBraverBattle<AttackResult>): Animate {
   return all(
-    param.attackerSprite.charge(),
+    param.attackerSprite.charge()
+      .chain(delay(500)),
     attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
   )
-    .chain(delay(500))
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
       delay(1800)
@@ -185,10 +185,10 @@ type DownResult = NormalHit | CriticalHit | Guard;
  */
 function down(param: ShinBraverBattle<DownResult>): Animate {
   return all(
-    param.attackerSprite.charge(),
+    param.attackerSprite.charge()
+      .chain(delay(500)),
     attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
   )
-    .chain(delay(500))
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
       delay(1800)
