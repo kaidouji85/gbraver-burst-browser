@@ -102,14 +102,13 @@ function attack(param: ShinBraverBattle<AttackResult>): Animate {
     param.attackerSprite.charge(),
     attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
   )
-    .chain(delay(800))
-    .chain(all(
-      param.attackerSprite.straightPunch(),
-      toInitial(param.tdCamera, 100),
-    ))
+    .chain(delay(500))
+    .chain(param.attackerSprite.straightPunch())
     .chain(all(
       delay(1800)
         .chain(param.attackerSprite.punchToStand()),
+
+      toInitial(param.tdCamera, 100),
 
       all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),
@@ -128,7 +127,7 @@ function attack(param: ShinBraverBattle<AttackResult>): Animate {
  */
 function guard(param: ShinBraverBattle<Guard>): Animate {
   return param.attackerSprite.charge()
-    .chain(delay(800))
+    .chain(delay(500))
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
       delay(1800)
@@ -151,7 +150,7 @@ function guard(param: ShinBraverBattle<Guard>): Animate {
  */
 function miss(param: ShinBraverBattle<Miss>): Animate {
   return param.attackerSprite.charge()
-    .chain(delay(800))
+    .chain(delay(500))
     .chain(param.attackerSprite.straightPunch())
     .chain(
       delay(1800)
@@ -189,14 +188,13 @@ function down(param: ShinBraverBattle<DownResult>): Animate {
     param.attackerSprite.charge(),
     attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
   )
-    .chain(delay(800))
-    .chain(all(
-      param.attackerSprite.straightPunch(),
-      toInitial(param.tdCamera, 100),
-    ))
+    .chain(delay(500))
+    .chain(param.attackerSprite.straightPunch())
     .chain(all(
       delay(1800)
         .chain(param.attackerSprite.punchToStand()),
+
+      toInitial(param.tdCamera, 100),
 
       all(
         param.defenderTD.damageIndicator.popUp(param.result.damage),

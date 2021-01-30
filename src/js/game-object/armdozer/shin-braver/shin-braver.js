@@ -75,7 +75,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** ストレートパンチ */
   straightPunch(): Animate {
-    return straightPunch(this._model, this._sounds);
+    return straightPunch(this._model);
   }
 
   /** パンチ -> 立ち */
