@@ -97,24 +97,21 @@ type AttackResult = NormalHit | CriticalHit;
  */
 function attack(param: NeoLandozerBattle<AttackResult>): Animate {
   return all(
-    param.attackerSprite.charge(),
+    param.attackerSprite.charge()
+      .chain(delay(500)),
     attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
   )
-    .chain(delay(800))
+    .chain(param.attackerSprite.armHammer())
     .chain(all(
-      param.attackerSprite.armHammer()
-        .chain(delay(1800))
-        .chain(all(
-          param.attackerSprite.hmToStand(),
-        )),
+      delay(1800)
+        .chain(param.attackerSprite.hmToStand()),
 
-      delay(200).chain(all(
-        toInitial(param.tdCamera, 100),
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.knockBack(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
+      toInitial(param.tdCamera, 100),
+
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderSprite.knockBack(),
+      param.defenderTD.hitMark.shockWave.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
     ));
 }
 
@@ -126,19 +123,17 @@ function attack(param: NeoLandozerBattle<AttackResult>): Animate {
  */
 function guard(param: NeoLandozerBattle<Guard>): Animate {
   return param.attackerSprite.charge()
-    .chain(delay(600))
+    .chain(delay(500))
+    .chain(param.attackerSprite.armHammer())
     .chain(all(
-      param.attackerSprite.armHammer(),
+      delay(1800)
+        .chain(param.attackerSprite.hmToStand()),
 
-      delay(200).chain(all(
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.guard(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.hmToStand());
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderSprite.guard(),
+      param.defenderTD.hitMark.shockWave.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+    ));
 }
 
 /**
@@ -149,15 +144,14 @@ function guard(param: NeoLandozerBattle<Guard>): Animate {
  */
 function miss(param: NeoLandozerBattle<Miss>): Animate {
   return param.attackerSprite.charge()
-    .chain(delay(600))
+    .chain(delay(500))
+    .chain(param.attackerSprite.armHammer())
     .chain(all(
-      param.attackerSprite.armHammer(),
+      delay(1800)
+        .chain(param.attackerSprite.hmToStand()),
 
-      delay(200)
-        .chain(param.defenderSprite.avoid())
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.hmToStand());
+      param.defenderSprite.avoid()
+    ));
 }
 
 /**
@@ -185,17 +179,15 @@ type DownResult = NormalHit | Guard | CriticalHit;
  */
 function down(param: NeoLandozerBattle<DownResult>): Animate {
   return param.attackerSprite.charge()
-    .chain(delay(600))
+    .chain(delay(500))
+    .chain(param.attackerSprite.armHammer())
     .chain(all(
-      param.attackerSprite.armHammer(),
+      delay(1800)
+        .chain(param.attackerSprite.hmToStand()),
 
-      delay(200).chain(all(
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.hmToStand());
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderSprite.down(),
+      param.defenderTD.hitMark.shockWave.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+    ));
 }
