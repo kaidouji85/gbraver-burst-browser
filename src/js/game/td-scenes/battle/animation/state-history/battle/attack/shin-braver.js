@@ -110,12 +110,10 @@ function attack(param: ShinBraverBattle<AttackResult>): Animate {
 
       toInitial(param.tdCamera, 100),
 
-      all(
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.knockBack(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderSprite.knockBack(),
+      param.defenderTD.hitMark.shockWave.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
     ));
 }
 
@@ -133,12 +131,10 @@ function guard(param: ShinBraverBattle<Guard>): Animate {
       delay(1800)
         .chain(param.attackerSprite.punchToStand()),
 
-      all(
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.guard(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
-      )
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderSprite.guard(),
+      param.defenderTD.hitMark.shockWave.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp),
     ));
 }
 
@@ -196,11 +192,9 @@ function down(param: ShinBraverBattle<DownResult>): Animate {
 
       toInitial(param.tdCamera, 100),
 
-      all(
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      )
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderSprite.down(),
+      param.defenderTD.hitMark.shockWave.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
     ));
 }
