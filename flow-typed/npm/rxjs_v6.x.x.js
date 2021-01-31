@@ -122,7 +122,7 @@ declare class rxjs$Observable<T> implements rxjs$Subscribable<T> {
   _trySubscribe(sink: rxjs$Subscriber<T>): rxjs$TeardownLogic;
   forEach(
     next: (value: T) => void,
-    promiseCtor?: Promise.constructor
+    promiseCtor?: typeof Promise.constructor
   ): Promise<void>;
   // @internal  This is an internal implementation detail, do not use.
   _subscribe(subscriber: rxjs$Subscriber<any>): rxjs$TeardownLogic;
@@ -206,7 +206,7 @@ declare class rxjs$Observable<T> implements rxjs$Subscribable<T> {
   ): rxjs$Observable<{...}>;
   toPromise<T>(): Promise<T>;
   toPromise<T>(PromiseCtor: typeof Promise): Promise<T>;
-  toPromise<T>(PromiseCtor: Promise.constructor): Promise<T>;
+  toPromise<T>(PromiseCtor: typeof Promise.constructor): Promise<T>;
 }
 
 declare class rxjs$Subscription implements rxjs$SubscriptionLike {
@@ -832,7 +832,7 @@ declare module "rxjs" {
       ) => rxjs$ObservableInput<T> | void
     ): rxjs$Observable<T>,
     config: {
-      Promise: Promise.constructor,
+      Promise: typeof Promise.constructor,
       useDeprecatedSynchronousErrorHandling: boolean,
       ...
     },

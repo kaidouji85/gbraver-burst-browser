@@ -6,6 +6,7 @@ import {LightningDozer} from "../../../../../../../game-object/armdozer/lightnin
 import {delay, empty} from "../../../../../../../animation/delay";
 import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
+import {attentionArmDozer, toInitial} from "../../../td-camera";
 
 /**
  * ライトニングドーザ 戦闘アニメーション パラメータ
@@ -100,20 +101,23 @@ type AttackResult = NormalHit | CriticalHit;
  * @return アニメーション
  */
 function attack(param: LightningDozerBattle<AttackResult>): Animate {
-  return param.attackerSprite.charge()
-    .chain(delay(500))
+  return all(
+    param.attackerSprite.charge()
+      .chain(delay(500)),
+    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+  )
+    .chain(param.attackerSprite.armHammer())
     .chain(all(
-      param.attackerSprite.armHammer(),
+      delay(1800)
+        .chain(param.attackerSprite.hmToStand()),
 
-      delay(100).chain(all(
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.knockBack(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.hmToStand());
+      toInitial(param.tdCamera, 100),
+
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderSprite.knockBack(),
+      param.defenderTD.hitMark.shockWave.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+    ));
 }
 
 /**
@@ -125,18 +129,16 @@ function attack(param: LightningDozerBattle<AttackResult>): Animate {
 function guard(param: LightningDozerBattle<Guard>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(500))
+    .chain(param.attackerSprite.armHammer())
     .chain(all(
-      param.attackerSprite.armHammer(),
+      delay(1800)
+        .chain(param.attackerSprite.hmToStand()),
 
-      delay(100).chain(all(
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.guard(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.hmToStand());
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderSprite.guard(),
+      param.defenderTD.hitMark.shockWave.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+    ));
 }
 
 /**
@@ -148,14 +150,13 @@ function guard(param: LightningDozerBattle<Guard>): Animate {
 function miss(param: LightningDozerBattle<Miss>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(500))
+    .chain(param.attackerSprite.armHammer())
     .chain(all(
-      param.attackerSprite.armHammer(),
+      delay(1800)
+        .chain(param.attackerSprite.hmToStand()),
 
-      delay(100)
-        .chain(param.defenderSprite.avoid())
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.hmToStand());
+      param.defenderSprite.avoid()
+    ));
 }
 
 /** ダウンが受け取れる戦闘結果 */
@@ -168,20 +169,23 @@ type DownResult = NormalHit | Guard | CriticalHit;
  * @return アニメーション
  */
 function down(param: LightningDozerBattle<DownResult>): Animate {
-  return param.attackerSprite.charge()
-    .chain(delay(500))
+  return all(
+    param.attackerSprite.charge()
+      .chain(delay(500)),
+    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+  )
+    .chain(param.attackerSprite.armHammer())
     .chain(all(
-      param.attackerSprite.armHammer(),
+      delay(1800)
+        .chain(param.attackerSprite.hmToStand()),
 
-      delay(100).chain(all(
-        param.defenderTD.damageIndicator.popUp(param.result.damage),
-        param.defenderSprite.down(),
-        param.defenderTD.hitMark.shockWave.popUp(),
-        param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
-      ))
-    ))
-    .chain(delay(1000))
-    .chain(param.attackerSprite.hmToStand());
+      toInitial(param.tdCamera, 100),
+
+      param.defenderTD.damageIndicator.popUp(param.result.damage),
+      param.defenderSprite.down(),
+      param.defenderTD.hitMark.shockWave.popUp(),
+      param.defenderHUD.gauge.hp(param.defenderState.armdozer.hp)
+    ));
 }
 
 /**
