@@ -2,8 +2,7 @@
 
 import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 import {BattleSceneView} from "../../../view";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameEndX, GameOver, GameStateX} from "gbraver-burst-core";
+import type {GameOver} from "gbraver-burst-core";
 import {TDCamera} from "../../../../../../game-object/camera/td";
 
 /**
@@ -12,7 +11,7 @@ import {TDCamera} from "../../../../../../game-object/camera/td";
  * @type TD_ARMDOZER 3Dレイヤー アームドーザ固有オブジェクト
  */
 export type GameOverParamX<TD_ARMDOZER: TDArmdozerObjects> = {
-  tdArmdozer: TD_ARMDOZER,
+  winnerTdArmdozer: TD_ARMDOZER,
   tdCamera: TDCamera,
 };
 
@@ -26,18 +25,18 @@ export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
  * 変換できない場合はnullを返す
  *
  * @param view ビュー
- * @param gameState ゲームステート
+ * @param gameOver ゲームオーバー
  * @return 変換結果
  */
-export function toGameEndParam(view: BattleSceneView, gameState: GameStateX<GameEndX<GameOver>>): ?GameOverParam {
-  const winnerArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameState.effect.result.winner);
+export function toGameOverParam(view: BattleSceneView, gameOver: GameOver): ?GameOverParam {
+  const winnerArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameOver.winner);
   if (!winnerArmdozer) {
     return null;
   }
 
   const tdArmdozer: TDArmdozerObjects = winnerArmdozer;
   return {
-    tdArmdozer: tdArmdozer,
+    winnerTdArmdozer: tdArmdozer,
     tdCamera: view.td.camera,
   };
 }
