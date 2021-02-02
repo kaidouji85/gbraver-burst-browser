@@ -7,12 +7,12 @@ import {all} from "../../../../../../animation/all";
 import {attentionArmDozer} from "../../td-camera";
 
 /**
- * シンブレイバー ゲームオーバ パラメータ
+ * シンブレイバー ゲームオーバ
  */
 export type ShinBraverGameOver = GameOverParamX<ShinBraverTD>;
 
 /**
- * シンブレイバー ゲームオーバ パラメータにキャストする
+ * シンブレイバーゲームオーバにキャストする
  * キャストできない場合はnullを返す
  *
  * @param origin キャスト元

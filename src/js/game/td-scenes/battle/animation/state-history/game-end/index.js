@@ -8,6 +8,7 @@ import {empty} from "../../../../../../animation/delay";
 import {castShinBraverGameOver, shinBraverWin} from "./shin-braver";
 import {toGameOverParam} from "./animation-param";
 import type {GameOver} from "gbraver-burst-core/lib/game/end-judging/game-end-judging";
+import {castNeoLandozerGameOver, neoLandozerWin} from "./neo-landozer";
 
 /**
  * ゲーム終了アニメーション
@@ -32,6 +33,11 @@ export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneS
   const shinBraver = castShinBraverGameOver(animationParam);
   if (shinBraver) {
     return shinBraverWin(shinBraver);
+  }
+
+  const neoLandozer = castNeoLandozerGameOver(animationParam);
+  if (neoLandozer) {
+    return neoLandozerWin(neoLandozer);
   }
 
   return empty();
