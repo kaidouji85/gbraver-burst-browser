@@ -30,7 +30,7 @@ export function castNeoLandozerGameOver(origin: GameOverParam): ?NeoLandozerGame
 /**
  * ネオランドーザ 勝利
  * 
- * @param sprite スプライト
+ * @param param パラメータ
  * @return アニメーション
  */
 export function neoLandozerWin(param: NeoLandozerGameOver): Animate {

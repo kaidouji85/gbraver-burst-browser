@@ -9,6 +9,7 @@ import {castShinBraverGameOver, shinBraverWin} from "./shin-braver";
 import {toGameOverParam} from "./animation-param";
 import type {GameOver} from "gbraver-burst-core/lib/game/end-judging/game-end-judging";
 import {castNeoLandozerGameOver, neoLandozerWin} from "./neo-landozer";
+import {castLightningDozerGameOver, lightningDozerWin} from "./lightning-dozer";
 
 /**
  * ゲーム終了アニメーション
@@ -40,5 +41,10 @@ export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneS
     return neoLandozerWin(neoLandozer);
   }
 
+  const lightningDozer = castLightningDozerGameOver(animationParam);
+  if (lightningDozer) {
+    return lightningDozerWin(lightningDozer);
+  }
+  
   return empty();
 }
