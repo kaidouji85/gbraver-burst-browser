@@ -1,7 +1,6 @@
 // @flow
 
 import {Animate} from "../../../../../../animation/animate";
-import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import type {GameOverParam, GameOverParamX} from "./animation-param";
 import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
 import {all} from "../../../../../../animation/all";
