@@ -9,6 +9,7 @@ import {castShinBraverGameOver, shinBraverWin} from "./shin-braver";
 import {toGameOverParam} from "./animation-param";
 import {castNeoLandozerGameOver, neoLandozerWin} from "./neo-landozer";
 import {castLightningDozerGameOver, lightningDozerWin} from "./lightning-dozer";
+import {castWingDozerGameOver, wingDozerWin} from "./wing-dozer";
 
 /**
  * ゲーム終了アニメーション
@@ -42,6 +43,11 @@ export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneS
   const lightningDozer = castLightningDozerGameOver(animationParam);
   if (lightningDozer) {
     return lightningDozerWin(lightningDozer);
+  }
+
+  const wingDozer = castWingDozerGameOver(animationParam);
+  if (wingDozer) {
+    return wingDozerWin(wingDozer);
   }
   
   return empty();
