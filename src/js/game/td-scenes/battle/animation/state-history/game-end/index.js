@@ -19,12 +19,11 @@ import {castLightningDozerGameOver, lightningDozerWin} from "./lightning-dozer";
  * @return アニメーション
  */
 export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<GameEnd>): Animate {
-  const effect: GameEnd = gameState.effect;
-  if (effect.result.type !== 'GameOver') {
+  const gameOver = castGameOver(gameState);
+  if (!gameOver) {
     return empty();
   }
 
-  const gameOver: GameOver = effect.result;
   const animationParam = toGameOverParam(view, gameOver);
   if (!animationParam) {
     return empty();
