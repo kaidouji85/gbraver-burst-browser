@@ -2,8 +2,8 @@
 
 import {ArmdozerIcon} from "./armdozer-icon";
 import type {Resources} from "../../../../resource";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import type {ArmDozerId} from "gbraver-burst-core";
+import {ArmDozerIdList} from "gbraver-burst-core";
 import {PathIds} from "../../../../resource/path";
 
 /**
