@@ -1,8 +1,8 @@
 // @flow
 
 import type {ArmdozerIcon} from "./armdozer-icon";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import type {ArmDozerId} from "gbraver-burst-core";
+import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
 import {ShinBraverIcon} from "./shin-braver-icon";
 import {NeoLandozerIcon} from "./neo-landozer-icon";

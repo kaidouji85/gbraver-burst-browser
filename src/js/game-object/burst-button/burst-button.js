@@ -14,7 +14,7 @@ import {Animate} from "../../animation/animate";
 import type {PreRender} from "../../action/game-loop/pre-render";
 import {SOUND_IDS} from "../../resource/sound";
 import {decide} from "./animation/decide";
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
+import type {ArmDozerId} from "gbraver-burst-core";
 
 type Param = {
   resources: Resources,
