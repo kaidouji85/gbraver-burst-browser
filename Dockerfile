@@ -1,4 +1,4 @@
-FROM node:14.15.1-slim
+FROM node:14.15.4-slim
 WORKDIR /usr/src/app
 COPY . /usr/src/app/
 RUN npm ci
