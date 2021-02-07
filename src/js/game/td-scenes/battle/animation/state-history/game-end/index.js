@@ -2,18 +2,14 @@
 
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameEnd, GameStateX} from "gbraver-burst-core";
+import type {GameOver, GameEnd, GameEndX, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
-import {delay, empty} from "../../../../../../animation/delay";
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
-import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
-import {shinBraverWin} from "./shin-braver";
-import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
-import {neoLandozerWin} from "./neo-landozer";
-import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
-import {lightningDozerWin} from "./lightning-dozer";
-import {WingDozer} from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
-import {wingDozerWin} from "./wing-dozer";
+import {empty} from "../../../../../../animation/delay";
+import {castShinBraverGameOver, shinBraverWin} from "./shin-braver";
+import {toGameOverParam} from "./animation-param";
+import {castNeoLandozerGameOver, neoLandozerWin} from "./neo-landozer";
+import {castLightningDozerGameOver, lightningDozerWin} from "./lightning-dozer";
+import {castWingDozerGameOver, wingDozerWin} from "./wing-dozer";
 
 /**
  * ゲーム終了アニメーション
@@ -24,43 +20,51 @@ import {wingDozerWin} from "./wing-dozer";
  * @return アニメーション
  */
 export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<GameEnd>): Animate {
-  const effect: GameEnd = gameState.effect;
-  if (effect.result.type !== 'GameOver') {
+  const gameOver = castGameOver(gameState);
+  if (!gameOver) {
     return empty();
   }
 
-  const gameOver = effect.result;
-  const winnerArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameOver.winner);
-  if (!winnerArmdozer) {
+  const animationParam = toGameOverParam(view, gameOver);
+  if (!animationParam) {
     return empty();
   }
 
-  return win(winnerArmdozer.sprite())
-    .chain(delay(500));
+  const shinBraver = castShinBraverGameOver(animationParam);
+  if (shinBraver) {
+    return shinBraverWin(shinBraver);
+  }
+
+  const neoLandozer = castNeoLandozerGameOver(animationParam);
+  if (neoLandozer) {
+    return neoLandozerWin(neoLandozer);
+  }
+
+  const lightningDozer = castLightningDozerGameOver(animationParam);
+  if (lightningDozer) {
+    return lightningDozerWin(lightningDozer);
+  }
+
+  const wingDozer = castWingDozerGameOver(animationParam);
+  if (wingDozer) {
+    return wingDozerWin(wingDozer);
+  }
+  
+  return empty();
 }
 
 /**
- * 勝利ポーズ
+ * ゲームエンド ゲームオーバにキャストする
+ * キャストできない場合はnullを返す
  *
- * @param sprite スプライト
- * @return アニメーション
+ * @param origin 変換元
+ * @return 変換結果
  */
-function win(sprite: ArmDozerSprite): Animate {
-  if (sprite instanceof ShinBraver) {
-    return shinBraverWin(sprite);
+function castGameOver(origin: GameStateX<GameEnd>): ?GameStateX<GameEndX<GameOver>> {
+  if (origin.effect.result.type !== 'GameOver') {
+    return null;
   }
 
-  if (sprite instanceof NeoLandozer) {
-    return neoLandozerWin(sprite);
-  }
-
-  if (sprite instanceof LightningDozer) {
-    return lightningDozerWin(sprite);
-  }
-
-  if (sprite instanceof WingDozer) {
-    return wingDozerWin(sprite);
-  }
-
-  return empty();
+  const gameOver: GameOver = origin.effect.result;
+  return ((origin: any): GameStateX<GameEndX<typeof gameOver>>);
 }

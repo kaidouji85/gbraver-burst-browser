@@ -1,13 +1,12 @@
 // @flow
 
 import type {TDArmdozerObjects} from "./armdozer-objects";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
+import type {PlayerId, Player} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import * as THREE from "three";
-import type {Player} from "gbraver-burst-core";
 import {WingDozer} from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 import {EnemyWingDozer, PlayerWingDozer} from "../../../../../../game-object/armdozer/wing-dozer";
 

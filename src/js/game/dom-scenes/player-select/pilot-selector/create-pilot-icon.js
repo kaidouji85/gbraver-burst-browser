@@ -1,9 +1,9 @@
 // @flow
 
-import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
+import type {PilotId} from "gbraver-burst-core";
 import {PilotIcon} from "./pilot-icon";
 import type {Resources} from "../../../../resource";
-import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
+import {PilotIds} from "gbraver-burst-core";
 import {PathIds} from "../../../../resource/path";
 
 /**
