@@ -4,7 +4,6 @@ import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {ResourceLoader} from "../resource";
 import {merge, Observable, Subscription} from "rxjs";
-import {isDevelopment} from "../webpack/mode";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
@@ -28,6 +27,7 @@ import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
+import {DefinePlugin} from "../webpack/define-plugin";
 
 /**
  * ゲーム全体の管理を行う
@@ -112,11 +112,11 @@ export class Game {
    * @return 処理結果
    */
   async initialize(): Promise<void> {
-    if (isDevelopment() && document.body) {
+    if (DefinePlugin.isPerformanceStatsVisible && document.body) {
       viewPerformanceStats(document.body);
     }
     
-    if (!isDevelopment()) {
+    if (DefinePlugin.isServiceWorkerUsed) {
       this._serviceWorker = await loadServiceWorker();
     }
 
