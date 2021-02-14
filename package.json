@@ -11,7 +11,7 @@
     "start:production": "npm-run-all build:production serve",
     "start:storybook": "start-storybook -s ./src/resources -p 6006",
     "start:storybook-static": "npm-run-all clean build:storybook-static serve:storybook-static",
-    "test": "ava",
+    "test": "ava -T 600000",
     "build": "npm-run-all clean type-check lint lint:test webpack webpack:sw webpack:clear-sw",
     "build:production": "npm-run-all clean type-check lint lint:test webpack:production webpack:sw webpack:clear-sw",
     "build:storybook-static": "build-storybook -s ./src/resources -o build/storybook-static",
