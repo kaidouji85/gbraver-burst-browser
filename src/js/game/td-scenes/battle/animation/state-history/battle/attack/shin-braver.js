@@ -92,19 +92,33 @@ export function shinBraverAttack(param: ShinBraverBattle<BattleResult>): Animate
 type AttackResult = NormalHit | CriticalHit;
 
 /**
+ * アタッカーにフォーカスを合わせる
+ * attentionArmDozerよりもカメラ移動は控えめ
+ *
+ * @param param パラメータ
+ * @return アニメーション
+ */
+function focusToAttacker(param: ShinBraverBattle<AttackResult>): Animate {
+  const duration = 400;
+  const attackerX = param.attackerSprite.getObject3D().position.x;
+  const attackerTrack = (Math.abs(attackerX) - 40) * Math.sign(attackerX);
+  return all(
+    track(param.tdCamera, attackerTrack, duration),
+    dolly(param.tdCamera, '-40', duration)
+  );
+}
+
+/**
  * 攻撃ヒット
  *
  * @param param パラメータ
  * @return アニメーション
  */
 function attack(param: ShinBraverBattle<AttackResult>): Animate {
-  const attackerX = param.attackerSprite.getObject3D().position.x;
-  const attackerTrack = (Math.abs(attackerX) - 40) * Math.sign(attackerX);
   return all(
     param.attackerSprite.charge()
       .chain(delay(500)),
-    track(param.tdCamera, attackerTrack, 400),
-    dolly(param.tdCamera, '-40', 400)
+    focusToAttacker(param)
   )
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
