@@ -64,3 +64,30 @@ export function attentionArmDozer(camera: TDCamera, target: ArmDozerSprite, dura
     }, duration)
   );
 }
+
+/**
+ * ドリー
+ *
+ * @param camera カメラ
+ * @param z 移動量
+ * @param duration 移動時間
+ * @return アニメーション
+ */
+export function dolly(camera: TDCamera, z: number | string, duration: number): Animate {
+  return camera.moveCamera({z: z}, duration);
+}
+
+/**
+ * トラック
+ *
+ * @param camera カメラ
+ * @param x 移動量
+ * @param duration 移動時間
+ * @return アニメーション
+ */
+export function track(camera: TDCamera, x: number | string, duration: number): Animate {
+  return all(
+    camera.moveCamera({x: x}, duration),
+    camera.moveViewPoint({x: x}, duration),
+  );
+}
