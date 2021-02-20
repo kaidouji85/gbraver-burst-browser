@@ -6,7 +6,8 @@ import {Animate} from "../../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../../animation/delay";
 import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../../../td-camera";
+import {dolly, toInitial, track} from "../../../td-camera";
+import {TDCamera} from "../../../../../../../game-object/camera/td";
 
 /**
  * ウィングドーザ 戦闘アニメーション パラメータ
@@ -89,6 +90,24 @@ export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
 }
 
 /**
+ * アタッカーにフォーカスを合わせる
+ * attentionArmDozerよりもカメラ移動は控えめ
+ *
+ * @param camera カメラ
+ * @param attacker アタッカーのスプライト
+ * @return アニメーション
+ */
+function focusToAttacker(camera: TDCamera, attacker: WingDozer): Animate {
+  const duration = 400;
+  const attackerX = attacker.getObject3D().position.x;
+  const attackerTrack = (Math.abs(attackerX) - 40) * Math.sign(attackerX);
+  return all(
+    track(camera, attackerTrack, duration),
+    dolly(camera, '-40', duration)
+  );
+}
+
+/**
  * attackが受け取れる戦闘結果
  */
 type AttackResult = NormalHit | CriticalHit;
@@ -103,7 +122,7 @@ function attack(param: WingDozerBattle<AttackResult>): Animate {
   return  all(
     param.attackerSprite.charge()
       .chain(delay(600)),
-    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+    focusToAttacker(param.tdCamera, param.attackerSprite)
   )
     .chain(param.attackerSprite.upper())
     .chain(all(
@@ -185,7 +204,7 @@ function down(param: WingDozerBattle<DownResult>): Animate {
   return all(
     param.attackerSprite.charge()
       .chain(delay(600)),
-    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+    focusToAttacker(param.tdCamera, param.attackerSprite)
   )
     .chain(param.attackerSprite.upper())
     .chain(all(
