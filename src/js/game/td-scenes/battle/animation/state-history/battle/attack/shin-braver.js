@@ -6,7 +6,8 @@ import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-par
 import {ShinBraver} from "../../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {all} from "../../../../../../../animation/all";
 import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
-import {attentionArmDozer, dolly, toInitial, track} from "../../../td-camera";
+import {dolly, toInitial, track} from "../../../td-camera";
+import {TDCamera} from "../../../../../../../game-object/camera/td";
 
 /**
  * シンブレイバー 戦闘アニメーション パラメータ
@@ -88,25 +89,25 @@ export function shinBraverAttack(param: ShinBraverBattle<BattleResult>): Animate
   return empty();
 }
 
-/** attackが受け取れる戦闘結果 */
-type AttackResult = NormalHit | CriticalHit;
-
 /**
  * アタッカーにフォーカスを合わせる
- * attentionArmDozerよりもカメラ移動は控えめ
  *
- * @param param パラメータ
+ * @param camera カメラ
+ * @param attacker スプライト
  * @return アニメーション
  */
-function focusToAttacker(param: ShinBraverBattle<AttackResult>): Animate {
+function focusToAttacker(camera: TDCamera, attacker: ShinBraver): Animate {
   const duration = 400;
-  const attackerX = param.attackerSprite.getObject3D().position.x;
+  const attackerX = attacker.getObject3D().position.x;
   const attackerTrack = (Math.abs(attackerX) - 40) * Math.sign(attackerX);
   return all(
-    track(param.tdCamera, attackerTrack, duration),
-    dolly(param.tdCamera, '-40', duration)
+    track(camera, attackerTrack, duration),
+    dolly(camera, '-40', duration)
   );
 }
+
+/** attackが受け取れる戦闘結果 */
+type AttackResult = NormalHit | CriticalHit;
 
 /**
  * 攻撃ヒット
@@ -118,7 +119,7 @@ function attack(param: ShinBraverBattle<AttackResult>): Animate {
   return all(
     param.attackerSprite.charge()
       .chain(delay(500)),
-    focusToAttacker(param)
+    focusToAttacker(param.tdCamera, param.attackerSprite)
   )
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
@@ -200,7 +201,7 @@ function down(param: ShinBraverBattle<DownResult>): Animate {
   return all(
     param.attackerSprite.charge()
       .chain(delay(500)),
-    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+    focusToAttacker(param.tdCamera, param.attackerSprite)
   )
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
