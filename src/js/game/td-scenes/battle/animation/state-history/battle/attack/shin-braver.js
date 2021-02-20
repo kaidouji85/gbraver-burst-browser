@@ -6,7 +6,7 @@ import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-par
 import {ShinBraver} from "../../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import {all} from "../../../../../../../animation/all";
 import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
-import {attentionArmDozer, toInitial} from "../../../td-camera";
+import {attentionArmDozer, dolly, toInitial, track} from "../../../td-camera";
 
 /**
  * シンブレイバー 戦闘アニメーション パラメータ
@@ -98,10 +98,13 @@ type AttackResult = NormalHit | CriticalHit;
  * @return アニメーション
  */
 function attack(param: ShinBraverBattle<AttackResult>): Animate {
+  const attackerX = param.attackerSprite.getObject3D().position.x;
+  const attackerTrack = (Math.abs(attackerX) - 40) * Math.sign(attackerX);
   return all(
     param.attackerSprite.charge()
       .chain(delay(500)),
-    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+    track(param.tdCamera, attackerTrack, 400),
+    dolly(param.tdCamera, '-40', 400)
   )
     .chain(param.attackerSprite.straightPunch())
     .chain(all(

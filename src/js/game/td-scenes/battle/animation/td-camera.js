@@ -74,7 +74,10 @@ export function attentionArmDozer(camera: TDCamera, target: ArmDozerSprite, dura
  * @return アニメーション
  */
 export function dolly(camera: TDCamera, z: number | string, duration: number): Animate {
-  return camera.moveCamera({z: z}, duration);
+  return all(
+    camera.moveCamera({z: z}, duration),
+    camera.moveViewPoint({z: z}, duration),
+  );
 }
 
 /**
