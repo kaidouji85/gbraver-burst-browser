@@ -6,7 +6,8 @@ import {NeoLandozer} from "../../../../../../../game-object/armdozer/neo-landoze
 import {delay, empty} from "../../../../../../../animation/delay";
 import {all} from "../../../../../../../animation/all";
 import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
-import {attentionArmDozer, toInitial} from "../../../td-camera";
+import {dolly, toInitial, track} from "../../../td-camera";
+import {TDCamera} from "../../../../../../../game-object/camera/td";
 
 /**
  * ネオランドーザ 戦闘アニメーション パラメータ
@@ -86,6 +87,24 @@ export function neoLandozerAttack(param: NeoLandozerBattle<BattleResult>): Anima
   return empty();
 }
 
+/**
+ * アタッカーにフォーカスを合わせる
+ * attentionArmDozerよりもカメラ移動は控えめ
+ *
+ * @param camera カメラ
+ * @param attacker アタッカーのスプライト
+ * @return アニメーション
+ */
+function focusToAttacker(camera: TDCamera, attacker: NeoLandozer): Animate {
+  const duration = 400;
+  const attackerX = attacker.getObject3D().position.x;
+  const attackerTrack = (Math.abs(attackerX) - 40) * Math.sign(attackerX);
+  return all(
+    track(camera, attackerTrack, duration),
+    dolly(camera, '-40', duration)
+  );
+}
+
 /** attackが受け取ることができる戦闘結果 */
 type AttackResult = NormalHit | CriticalHit;
 
@@ -99,7 +118,7 @@ function attack(param: NeoLandozerBattle<AttackResult>): Animate {
   return all(
     param.attackerSprite.charge()
       .chain(delay(500)),
-    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+    focusToAttacker(param.tdCamera, param.attackerSprite)
   )
     .chain(param.attackerSprite.armHammer())
     .chain(all(
@@ -181,7 +200,7 @@ function down(param: NeoLandozerBattle<DownResult>): Animate {
   return all(
     param.attackerSprite.charge()
       .chain(delay(500)),
-    attentionArmDozer(param.tdCamera, param.attackerSprite, 400)
+    focusToAttacker(param.tdCamera, param.attackerSprite)
   )
     .chain(param.attackerSprite.armHammer())
     .chain(all(
