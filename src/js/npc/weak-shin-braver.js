@@ -68,13 +68,8 @@ export class WeakShinBraverNPC implements NPC {
    * @return コマンド
    */
   _attackRoutine(enemy: PlayerState, player: PlayerState, commands: Command[]): Command {
-    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
-
-    if ((0 < player.armdozer.battery) && (player.armdozer.hp === player.armdozer.maxHp) && battery2) {
-      return battery2;
-    }
-
-    return ZERO_BATTERY;
+    const battery3 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
+    return battery3 ?? ZERO_BATTERY;
   }
 
   /**
@@ -86,11 +81,7 @@ export class WeakShinBraverNPC implements NPC {
    */
   _defenseRoutine(enemy: PlayerState, commands: Command[]): Command {
     const battery1 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-
-    if (battery1) {
-      return battery1;
-    }
-
-    return ZERO_BATTERY;
+    const battery2 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 2);
+    return battery2 ?? battery1 ?? ZERO_BATTERY;
   }
 }
