@@ -1,7 +1,7 @@
 // @flow
 import type {MouseRaycaster} from "../../raycaster/mouse/mouse-raycaster";
 import {createMouseRaycaster} from "../../raycaster/mouse/mouse-raycaster";
-import type {MouseMove} from "../td-dom/mouse";
+import type {MouseMove} from "../../action/td-dom/mouse";
 import * as THREE from "three";
 import {isMouseLeftButtonPushed} from "../../mouse/mouse-left-button";
 

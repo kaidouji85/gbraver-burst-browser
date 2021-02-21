@@ -11,8 +11,8 @@ import type {TdDOMEvent} from "../../../../../action/td-dom";
 import type {TDPlayer} from "./player";
 import {enemyTDObject, playerTDObjects} from "./player";
 import {TDGameObjects} from "./game-objects";
-import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
-import type {OverlapAction} from "../../../../../action/overlap";
+import {toOverlapStream} from "../../../../../overlap/actions/overlap-stream";
+import type {OverlapActions} from "../../../../../overlap/actions";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../dom/resize/resize";
 import {skyBox} from "./sky-box";
@@ -41,7 +41,7 @@ export class ThreeDimensionLayer {
   players: TDPlayer[];
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
-  _overlap: Observable<OverlapAction>;
+  _overlap: Observable<OverlapActions>;
   _gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {

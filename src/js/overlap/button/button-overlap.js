@@ -1,11 +1,11 @@
 // @flow
 
 import * as THREE from 'three';
-import type {MouseDownRaycaster} from "../../action/overlap/mouse-down-raycaster";
-import type {TouchStartRaycaster} from "../../action/overlap/touch-start-raycaster";
+import type {MouseDownRaycaster} from "../actions/mouse-down-raycaster";
+import type {TouchStartRaycaster} from "../actions/touch-start-raycaster";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {isMeshOverlap} from "../mesh";
+import {isMeshOverlap} from "../mesh/mesh-overlap";
 
 /** パラメータ */
 type Param = {

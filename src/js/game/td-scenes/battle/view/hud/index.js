@@ -4,13 +4,13 @@ import type {Resources} from '../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
-import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
+import {toOverlapStream} from "../../../../../overlap/actions/overlap-stream";
 import type {BattleSceneAction} from "../../actions";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import {HUDGameObjects} from "./game-objects";
-import type {OverlapAction} from "../../../../../action/overlap";
+import type {OverlapActions} from "../../../../../overlap/actions";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../dom/resize/resize";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
@@ -49,7 +49,7 @@ export class HudLayer {
   armdozers: HUDArmdozerObjects[];
   pilots: HUDPilotObjects[];
   gameObjects: HUDGameObjects;
-  _overlap: Observable<OverlapAction>;
+  _overlap: Observable<OverlapActions>;
   _gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {
