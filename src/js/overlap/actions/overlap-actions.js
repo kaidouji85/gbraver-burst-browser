@@ -1,14 +1,26 @@
 // @flow
 
-import * as THREE from "three";
-import {toTouchStartRaycaster} from "./touch-start-raycaster";
+import type {MouseDownRaycaster} from "./mouse-down-raycaster";
 import {toMouseDownRaycaster} from "./mouse-down-raycaster";
+import type {MouseMoveRaycaster} from "./mouse-move-raycaster";
 import {toMouseMoveRaycaster} from "./mouse-move-raycaster";
+import type {TouchStartRaycaster} from "./touch-start-raycaster";
+import {toTouchStartRaycaster} from "./touch-start-raycaster";
+import type {TouchMoveRaycaster} from "./touch-move-raycaster";
 import {toTouchMoveRaycaster} from "./touch-move-raycaster";
 import {Observable} from "rxjs";
 import type {TdDOMEvent} from "../../action/td-dom";
-import type {OverlapActions} from "./index";
+import * as THREE from "three";
 import {filter, map, share} from "rxjs/operators";
+
+/**
+ * オーバーラップ アクション
+ */
+export type OverlapActions =
+  MouseDownRaycaster |
+  MouseMoveRaycaster |
+  TouchStartRaycaster |
+  TouchMoveRaycaster;
 
 /**
  * DOMイベントストリームを当たり判定ストリームに変換する

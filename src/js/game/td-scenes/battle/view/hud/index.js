@@ -4,13 +4,12 @@ import type {Resources} from '../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
 import type {TdDOMEvent} from "../../../../../action/td-dom";
-import {toOverlapStream} from "../../../../../overlap/actions/overlap-stream";
 import type {BattleSceneAction} from "../../actions";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import {HUDGameObjects} from "./game-objects";
-import type {OverlapActions} from "../../../../../overlap/actions";
+import type {OverlapActions} from "../../../../../overlap/actions/overlap-actions";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
 import type {Resize} from "../../../../../dom/resize/resize";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
@@ -19,6 +18,7 @@ import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyHUDPilotObjects, playerHUDPilotObjects} from "./pilot-objects";
 import type {HUDPilotObjects} from "./pilot-objects/hud-pilot-objects";
 import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
+import {toOverlapStream} from "../../../../../overlap/actions/overlap-actions";
 
 /** コンストラクタのパラメータ */
 export type Param = {

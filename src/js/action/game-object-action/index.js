@@ -1,6 +1,6 @@
 // @flow
 
-import type {OverlapActions} from "../../overlap/actions";
+import type {OverlapActions} from "../../overlap/actions/overlap-actions";
 import type {Update} from "../game-loop/update";
 import type {PreRender} from "../game-loop/pre-render";
 
