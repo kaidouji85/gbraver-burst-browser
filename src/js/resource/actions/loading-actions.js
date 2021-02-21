@@ -1,7 +1,7 @@
 // @flow
 
 /** リソース読み込みアクション */
-export type LoadingAction = LoadingProgress;
+export type LoadingActions = LoadingProgress;
 
 /** リソース読み込み中 */
 export type LoadingProgress = {
