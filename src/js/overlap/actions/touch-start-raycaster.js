@@ -1,25 +1,25 @@
 // @flow
 import type {TouchRaycastContainer} from "../../raycaster/touch/touch-raycaster";
 import {createTouchEventRaycaster} from "../../raycaster/touch/touch-raycaster";
-import type {TouchMove} from "../td-dom/touch";
+import type {TouchStart} from "../../action/td-dom/touch";
 import * as THREE from "three";
 
-/** タッチムーブレイキャスター */
-export type TouchMoveRaycaster = {
-  type: 'touchMoveRaycaster',
+/** タッチスタートレイキャスター */
+export type TouchStartRaycaster = {
+  type: 'touchStartRaycaster',
   touch: TouchRaycastContainer
 };
 
 /**
- * TouchMoveからTouchMoveRaycasterに変換する
+ * TouchStartからTouchStartRaycasterに変換する
  *
  * @param origin 変換元
  * @return 変換結果
  */
-export function toTouchMoveRaycaster(origin: TouchMove, renderer: typeof THREE.WebGLRenderer, camera: typeof THREE.Camera): TouchMoveRaycaster {
+export function toTouchStartRaycaster(origin: TouchStart, renderer: typeof THREE.WebGLRenderer, camera: typeof THREE.Camera): TouchStartRaycaster {
   const touch = createTouchEventRaycaster(origin.event, renderer, camera);
   return {
-    type: 'touchMoveRaycaster',
+    type: 'touchStartRaycaster',
     touch: touch
   };
 }
