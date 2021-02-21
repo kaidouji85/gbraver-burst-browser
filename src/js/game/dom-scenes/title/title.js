@@ -4,7 +4,7 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import {pushDOMStream} from "../../../action/push/push-dom";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {pop} from "../../../dom/animation/pop";
 import {Howl} from "howler";

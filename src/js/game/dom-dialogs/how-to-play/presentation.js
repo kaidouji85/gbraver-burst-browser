@@ -4,7 +4,7 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import {merge, Observable,} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import {pushDOMStream} from "../../../action/push/push-dom";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import {map} from "rxjs/operators";
 
 /** イベント通知ストリーム */

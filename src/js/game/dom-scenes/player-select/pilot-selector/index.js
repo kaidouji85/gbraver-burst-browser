@@ -10,7 +10,7 @@ import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {Exclusive} from "../../../../exclusive/exclusive";
-import {pushDOMStream} from "../../../../action/push/push-dom";
+import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createPilotIcon} from "./create-pilot-icon";
 
