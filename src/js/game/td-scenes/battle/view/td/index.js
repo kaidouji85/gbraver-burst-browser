@@ -14,7 +14,7 @@ import {TDGameObjects} from "./game-objects";
 import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
-import type {Resize} from "../../../../../action/resize/resize";
+import type {Resize} from "../../../../../dom/resize/resize";
 import {skyBox} from "./sky-box";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {GameObjectAction} from "../../../../../action/game-object-action";

@@ -12,7 +12,7 @@ import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import {HUDGameObjects} from "./game-objects";
 import type {OverlapAction} from "../../../../../action/overlap";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
-import type {Resize} from "../../../../../action/resize/resize";
+import type {Resize} from "../../../../../dom/resize/resize";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 import type {GameObjectAction} from "../../../../../action/game-object-action";

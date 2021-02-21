@@ -1,7 +1,7 @@
 // @flow
 
 import {getViewPortHeight} from "./view-port-size";
-import type {Resize} from "../action/resize/resize";
+import type {Resize} from "../dom/resize/resize";
 import {Observable, Subscription} from "rxjs";
 
 /** CSSカムタムプロパティ ビューポート高 */

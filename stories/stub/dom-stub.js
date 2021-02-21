@@ -2,7 +2,7 @@
 
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 import '../../src/css/style.css';
-import {createResizeStream} from "../../src/js/action/resize/resize";
+import {createResizeStream} from "../../src/js/dom/resize/resize";
 import {CssVH} from "../../src/js/view-port/vh";
 import type {Resources} from "../../src/js/resource";
 import {ResourceLoader} from "../../src/js/resource";
