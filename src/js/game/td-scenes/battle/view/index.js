@@ -7,7 +7,7 @@ import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../action/game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
-import type {TdDOMEvent} from "../../../../action/td-dom";
+import type {RendererDOMEvents} from "../../../../render/dom-events/dom-events";
 import type {BattleSceneAction} from "../actions";
 import type {Render} from "../../../../action/game-loop/render";
 import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
@@ -25,7 +25,7 @@ type Param = {
   players: Player[],
   listener: {
     gameLoop: Observable<GameLoop>,
-    domEvent: Observable<TdDOMEvent>,
+    domEvent: Observable<RendererDOMEvents>,
     resize: Observable<Resize>,
   }
 };

@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
-import type {TdDOMEvent} from "../../../../../action/td-dom";
+import type {RendererDOMEvents} from "../../../../../render/dom-events/dom-events";
 import type {BattleSceneAction} from "../../actions";
 import type {Update} from "../../../../../action/game-loop/update";
 import type {PreRender} from "../../../../../action/game-loop/pre-render";
@@ -29,7 +29,7 @@ export type Param = {
   listener: {
     update: Observable<Update>,
     preRender: Observable<PreRender>,
-    domEvent: Observable<TdDOMEvent>,
+    domEvent: Observable<RendererDOMEvents>,
     resize: Observable<Resize>,
   }
 };

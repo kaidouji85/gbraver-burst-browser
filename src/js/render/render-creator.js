@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from 'three';
-import {renderPixelRatio} from "./pixel-ratio";
+import {renderPixelRatio} from "./pixel-ratio/pixel-ratio";
 import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
 
 /**

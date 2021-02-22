@@ -5,10 +5,10 @@ import {WebGLInfo} from 'three';
 import type {Resize} from "../../dom/resize/resize";
 import type {Render} from "../../action/game-loop/render";
 import {Observable, Subscription} from "rxjs";
-import {onWebGLRendererResize} from "../../render/resize";
-import type {TdDOMEvent} from "../../action/td-dom";
-import {createDOMEventStream} from "../../action/td-dom";
-import {createRender} from "../../render/create-render";
+import {onWebGLRendererResize} from "../../render/resize/resize";
+import type {RendererDOMEvents} from "../../render/dom-events/dom-events";
+import {createDOMEventStream} from "../../render/dom-events/dom-events";
+import {createRender} from "../../render/render-creator";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -18,13 +18,13 @@ type Param = {
 
 /** イベント通知ストリーム */
 type Notifier = {
-  domEvent: Observable<TdDOMEvent>
+  domEvent: Observable<RendererDOMEvents>
 };
 
 /** レンダラの挙動をまとめたもの */
 export class Renderer {
   _threeJsRender: typeof THREE.WebGLRenderer;
-  _domEvent: Observable<TdDOMEvent>;
+  _domEvent: Observable<RendererDOMEvents>;
   _subscriptions: Subscription[];
 
   constructor(param: Param) {

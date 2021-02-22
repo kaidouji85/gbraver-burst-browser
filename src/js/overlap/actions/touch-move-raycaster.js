@@ -1,7 +1,7 @@
 // @flow
 import type {TouchRaycastContainer} from "../../raycaster/touch/touch-raycaster";
 import {createTouchEventRaycaster} from "../../raycaster/touch/touch-raycaster";
-import type {TouchMove} from "../../action/td-dom/touch";
+import type {TouchMove} from "../../render/dom-events/touch";
 import * as THREE from "three";
 
 /** タッチムーブレイキャスター */

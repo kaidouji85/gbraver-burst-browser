@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
-import {renderPixelRatio} from "./pixel-ratio";
+import {renderPixelRatio} from "../pixel-ratio/pixel-ratio";
 
 /**
  * WebGLRendererリサイズ時の処理
