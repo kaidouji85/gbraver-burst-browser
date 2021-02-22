@@ -9,7 +9,7 @@ import {BatteryMinus} from "./battery-minus";
 import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 
 /** 全体のスケール */

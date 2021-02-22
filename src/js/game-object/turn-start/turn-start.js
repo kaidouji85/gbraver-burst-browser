@@ -6,7 +6,7 @@ import type {TurnStartModel} from "./model/turn-start-model";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../action/game-loop/pre-render";
+import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
 import {show} from './animation/show';

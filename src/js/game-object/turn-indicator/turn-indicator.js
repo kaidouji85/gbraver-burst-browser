@@ -7,14 +7,14 @@ import type {TurnIndicatorModel} from "./model/turn-indicator-model";
 import {TurnIndicatorView} from "./view/turn-indicator-view";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {PreRender} from "../../action/game-loop/pre-render";
+import type {PreRender} from "../../game-loop/pre-render";
 import {invisible} from "./animation/invisible";
 import {turnChange} from "./animation/turn-change";
 import {Animate} from "../../animation/animate";
 import {createInitialValue} from "./model/initial-value";
 import {waiting} from "./animation/waiting";
 import {filter, first, map} from "rxjs/operators";
-import type {Update} from "../../action/game-loop/update";
+import type {Update} from "../../game-loop/update";
 
 /** コンストラクタのパラメータ */
 type Param = {

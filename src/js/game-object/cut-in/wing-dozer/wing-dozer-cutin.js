@@ -10,7 +10,7 @@ import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 
 /**
  * ウィングドーザ カットイン

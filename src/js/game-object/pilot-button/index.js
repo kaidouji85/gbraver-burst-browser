@@ -7,7 +7,7 @@ import type {PilotButtonModel} from "./model/pilot-button-model";
 import {createInitialValue} from './model/initial-value';
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {PreRender} from "../../action/game-loop/pre-render";
+import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {open} from "./animation/open";
 import {decide} from "./animation/decide";

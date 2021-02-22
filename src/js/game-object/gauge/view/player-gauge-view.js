@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import type {GaugeView} from "./gauge-view";
 import type {GaugeModel} from "../model/gauge-model";
 import type {Resources} from "../../../resource";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {PlayerHpBar} from "./player-hp-bar";

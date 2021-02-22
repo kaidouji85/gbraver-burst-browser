@@ -3,7 +3,7 @@
 import {PlayerNeoLandozerCutInView} from "./player-neo-landozer-cutin-view";
 import type {Resources} from "../../../../resource";
 import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
-import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../../game-loop/pre-render";
 
 /**
  * 敵側 ネオランドーザ カットイン ビュー

@@ -6,12 +6,12 @@ import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {BattleScene} from "./battle";
 import type {Scene} from "./scene";
-import type {Render} from "../../action/game-loop/render";
-import type {GameLoop} from "../../action/game-loop/game-loop";
-import {gameLoopStream} from "../../action/game-loop/game-loop-stream";
+import type {Render} from "../../game-loop/render";
+import type {GameLoop} from "../../game-loop/game-loop";
 import type {Resize} from "../../window/resize";
 import type {EndBattle, GameAction} from "../actions/game-actions";
 import {map} from "rxjs/operators";
+import {gameLoopStream} from "../../game-loop/game-loop";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {

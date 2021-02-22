@@ -11,7 +11,7 @@ import {createInitialValue} from "./model/initial-value";
 import {open} from './animation/open';
 import {close} from './animation/close';
 import {Animate} from "../../animation/animate";
-import type {PreRender} from "../../action/game-loop/pre-render";
+import type {PreRender} from "../../game-loop/pre-render";
 import {SOUND_IDS} from "../../resource/sound";
 import {decide} from "./animation/decide";
 import type {ArmDozerId} from "gbraver-burst-core";

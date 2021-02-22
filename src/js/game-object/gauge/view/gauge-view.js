@@ -2,7 +2,7 @@
 
 import type {GaugeModel} from "../model/gauge-model";
 import * as THREE from "three";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 
 /** ゲージのビュー */
 export interface GaugeView {

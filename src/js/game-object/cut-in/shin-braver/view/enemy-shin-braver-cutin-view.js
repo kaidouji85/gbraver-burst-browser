@@ -3,7 +3,7 @@
 import {PlayerShinBraverCutInView} from "./player-shin-braver-cutin-view";
 import type {Resources} from "../../../../resource";
 import type {ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
-import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../../game-loop/pre-render";
 
 /**
  * 敵側 シンブレイバー カットインビュー

@@ -2,8 +2,8 @@
 
 import {merge, Observable} from "rxjs";
 import type {GameObjectAction} from "./index";
-import type {Update} from "../game-loop/update";
-import type {PreRender} from "../game-loop/pre-render";
+import type {Update} from "../../game-loop/update";
+import type {PreRender} from "../../game-loop/pre-render";
 import type {OverlapActions} from "../../overlap/actions/overlap-actions";
 import {map, share} from "rxjs/operators";
 

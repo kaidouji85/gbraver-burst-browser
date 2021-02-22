@@ -8,7 +8,7 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
 import {Animate} from "../../../animation/animate";
 import {hidden} from "./animation/hidden";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 import {show} from "./animation/show";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 

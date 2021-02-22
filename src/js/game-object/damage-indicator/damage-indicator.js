@@ -7,7 +7,7 @@ import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import {popUp} from "./animation/pop-up";
-import type {PreRender} from "../../action/game-loop/pre-render";
+import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 
 type Param = {

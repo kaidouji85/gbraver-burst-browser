@@ -1,7 +1,12 @@
 // @flow
 
-import type {GameLoop} from "./game-loop";
 import {Observable, Subject} from "rxjs";
+
+/** ゲームループ */
+export type GameLoop = {
+  type: 'GameLoop',
+  time: DOMHighResTimeStamp
+};
 
 /**
  * ゲームループのリスナーを生成する

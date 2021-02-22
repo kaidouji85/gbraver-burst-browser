@@ -9,7 +9,7 @@ import {createInitialValue} from "./model/initial-value";
 import type {LightningDozerView} from "./view/lightning-dozer-view";
 import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../../../action/game-object-action";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 import {charge} from "./animation/charge";
 import {armHammer} from "./animation/arm-hammer";
 import {hmToStand} from "./animation/hm-to-stand";

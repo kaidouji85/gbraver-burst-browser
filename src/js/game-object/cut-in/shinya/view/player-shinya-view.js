@@ -6,7 +6,7 @@ import {TEXTURE_IDS} from "../../../../resource/texture";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {ShinyaModel} from "../model/shinya-model";
 import type {ShinyaView} from "./shinya-view";
-import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../../game-loop/pre-render";
 import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 

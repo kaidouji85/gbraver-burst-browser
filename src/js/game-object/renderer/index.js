@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import {WebGLInfo} from 'three';
 import type {Resize} from "../../window/resize";
-import type {Render} from "../../action/game-loop/render";
+import type {Render} from "../../game-loop/render";
 import {Observable, Subscription} from "rxjs";
 import {onWebGLRendererResize} from "../../render/resize/resize";
 import type {RendererDOMEvents} from "../../render/dom-events/dom-events";

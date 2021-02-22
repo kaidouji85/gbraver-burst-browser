@@ -3,14 +3,14 @@
 import type {Resources} from '../../../resource';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
-import type {GameLoop} from "../../../action/game-loop/game-loop";
+import type {GameLoop} from "../../../game-loop/game-loop";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {RendererDOMEvents} from "../../../render/dom-events/dom-events";
 import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
-import type {Render} from "../../../action/game-loop/render";
+import type {Render} from "../../../game-loop/render";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
 import type {Scene} from "../scene";

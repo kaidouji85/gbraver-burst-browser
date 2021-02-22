@@ -22,7 +22,7 @@ import {WingDozerSounds} from "./sounds/wing-dozer-sounds";
 import type {Resources} from "../../../resource";
 import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 
 /**
  * ウィングドーザ

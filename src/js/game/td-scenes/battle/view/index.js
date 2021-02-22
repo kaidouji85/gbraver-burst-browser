@@ -5,16 +5,16 @@ import type {Resources} from '../../../../resource';
 import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core";
-import type {GameLoop} from "../../../../action/game-loop/game-loop";
+import type {GameLoop} from "../../../../game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {RendererDOMEvents} from "../../../../render/dom-events/dom-events";
 import type {BattleSceneAction} from "../actions";
-import type {Render} from "../../../../action/game-loop/render";
+import type {Render} from "../../../../game-loop/render";
 import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../window/resize";
-import type {Update} from "../../../../action/game-loop/update";
-import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {Update} from "../../../../game-loop/update";
+import type {PreRender} from "../../../../game-loop/pre-render";
 import {tracking} from "./tracking";
 
 /** コンストラクタのパラメータ */

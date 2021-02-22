@@ -1,17 +1,16 @@
 // @flow
 
 import TWEEN from "@tweenjs/tween.js";
-import type {Render} from "../../src/js/action/game-loop/render";
+import type {Render} from "../../src/js/game-loop/render";
 import * as THREE from "three";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resize} from "../../src/js/window/resize";
 import {createResizeStream} from "../../src/js/window/resize";
 import {Renderer} from "../../src/js/game-object/renderer";
-import type {GameLoop} from "../../src/js/action/game-loop/game-loop";
-import {gameLoopStream} from "../../src/js/action/game-loop/game-loop-stream";
+import type {GameLoop} from "../../src/js/game-loop/game-loop";
 import type {OverlapActions} from "../../src/js/overlap/actions/overlap-actions";
-import type {Update} from "../../src/js/action/game-loop/update";
-import type {PreRender} from "../../src/js/action/game-loop/pre-render";
+import type {Update} from "../../src/js/game-loop/update";
+import type {PreRender} from "../../src/js/game-loop/pre-render";
 import type {GameObjectAction} from "../../src/js/action/game-object-action";
 import {gameObjectStream} from "../../src/js/action/game-object-action/game-object-stream";
 import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
@@ -21,6 +20,7 @@ import {TDCamera} from "../../src/js/game-object/camera/td";
 import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 import {toOverlapStream} from "../../src/js/overlap/actions/overlap-actions";
+import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 
 /**
  * 3Dレイヤー ゲームオブジェクト スタブ
