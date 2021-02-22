@@ -12,7 +12,7 @@ import type {BattleSceneAction} from "../actions";
 import type {Render} from "../../../../action/game-loop/render";
 import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
-import type {Resize} from "../../../../dom/resize/resize";
+import type {Resize} from "../../../../window/resize";
 import type {Update} from "../../../../action/game-loop/update";
 import type {PreRender} from "../../../../action/game-loop/pre-render";
 import {tracking} from "./tracking";

@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from "three";
-import type {Resize} from "../../../dom/resize/resize";
+import type {Resize} from "../../../window/resize";
 import {onResizePerspectiveCamera} from "../../../camera/resize";
 import {Observable, Subscription} from "rxjs";
 import type {Battle3DCameraModel} from "./model/model";

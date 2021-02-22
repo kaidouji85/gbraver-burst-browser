@@ -14,7 +14,7 @@ import type {Render} from "../../../action/game-loop/render";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
 import type {Scene} from "../scene";
-import type {Resize} from "../../../dom/resize/resize";
+import type {Resize} from "../../../window/resize";
 import {all} from "../../../animation/all";
 import {BattleSceneSounds} from "./sounds";
 import {Exclusive} from "../../../exclusive/exclusive";

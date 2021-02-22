@@ -13,7 +13,7 @@ import {enemyTDObject, playerTDObjects} from "./player";
 import {TDGameObjects} from "./game-objects";
 import type {OverlapActions} from "../../../../../overlap/actions/overlap-actions";
 import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
-import type {Resize} from "../../../../../dom/resize/resize";
+import type {Resize} from "../../../../../window/resize";
 import {skyBox} from "./sky-box";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {GameObjectAction} from "../../../../../action/game-object-action";
