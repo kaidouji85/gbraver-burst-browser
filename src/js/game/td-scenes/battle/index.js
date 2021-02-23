@@ -18,12 +18,15 @@ import {all} from "../../../animation/all";
 import {BattleSceneSounds} from "./sounds";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
+import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
+
+/** 戦闘シーンで利用するレンダラ */
+interface OwnRenderer extends OverlapNotifier, RendererDomGetter {}
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  renderer: OverlapNotifier,
-  rendererDOM: HTMLElement,
+  renderer: OwnRenderer,
   battleProgress: BattleProgress,
   initialState: InitialState,
   listener: {
@@ -60,7 +63,7 @@ export class BattleScene implements Scene {
     this._view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
-      rendererDOM: param.rendererDOM,
+      rendererDOM: param.renderer.getRendererDOM(),
       playerId: param.initialState.playerId,
       players: param.initialState.players,
       listener: {
