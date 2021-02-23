@@ -1,7 +1,6 @@
 // @flow
 
 import TWEEN from "@tweenjs/tween.js";
-import type {Render} from "../../src/js/game-loop/render";
 import * as THREE from "three";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resize} from "../../src/js/window/resize";
@@ -32,7 +31,6 @@ export class HUDGameObjectStub {
   _gameLoop: Observable<GameLoop>;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
-  _render: Subject<Render>;
 
   _renderer: Renderer;
   _camera: PlainHUDCamera;
@@ -56,11 +54,9 @@ export class HUDGameObjectStub {
     this._gameLoop = gameLoopStream();
     this._update = new Subject<Update>();
     this._preRender = new Subject<PreRender>();
-    this._render = new Subject<Render>();
 
     this._renderer = new Renderer({
       resize: this._resize,
-      render: this._render,
     });
     this._scene = new THREE.Scene();
     this._camera = new PlainHUDCamera(this._resize);
@@ -117,10 +113,6 @@ export class HUDGameObjectStub {
       rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
-    this._render.next({
-      type: 'Render',
-      camera: this._camera.getCamera(),
-      scene: this._scene,
-    });
+    this._renderer.rendering(this._camera.getCamera(), this._scene);
   }
 }

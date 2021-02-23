@@ -35,7 +35,6 @@ export class TDScenes {
     this._resize = resize;
 
     this._renderer = new Renderer({
-      render: this._renderStream,
       resize: this._resize,
     });
 
