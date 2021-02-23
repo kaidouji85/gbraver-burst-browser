@@ -77,7 +77,6 @@ export class TDScenes {
       battleProgress: room,
       initialState: initialState,
       listener: {
-        domEvent: this._renderer.notifier().domEvent,
         gameLoop: this._gameLoop,
         resize: this._resize,
       }
