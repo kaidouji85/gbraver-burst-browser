@@ -6,7 +6,7 @@ import * as THREE from "three";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resize} from "../../src/js/window/resize";
 import {createResizeStream} from "../../src/js/window/resize";
-import {Renderer} from "../../src/js/game-object/renderer";
+import {Renderer} from "../../src/js/render";
 import type {GameLoop} from "../../src/js/game-loop/game-loop";
 import type {OverlapActions} from "../../src/js/overlap/actions/overlap-actions";
 import type {Update} from "../../src/js/game-loop/update";

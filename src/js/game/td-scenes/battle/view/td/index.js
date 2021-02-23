@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
 import type {Update} from "../../../../../game-loop/update";
 import type {PreRender} from "../../../../../game-loop/pre-render";
 import {TDCamera} from "../../../../../game-object/camera/td";
-import type {RendererDOMEvents} from "../../../../../render/dom-events/dom-events";
+import type {RendererDOMEvent} from "../../../../../render/dom-event/dom-event";
 import type {TDPlayer} from "./player";
 import {enemyTDObject, playerTDObjects} from "./player";
 import {TDGameObjects} from "./game-objects";
@@ -27,7 +27,7 @@ type Param = {
   players: Player[],
   rendererDOM: HTMLElement,
   listener: {
-    domEvent: Observable<RendererDOMEvents>,
+    domEvent: Observable<RendererDOMEvent>,
     resize: Observable<Resize>,
     update: Observable<Update>,
     preRender: Observable<PreRender>,

@@ -2,13 +2,13 @@
 
 import * as THREE from 'three';
 import {WebGLInfo} from 'three';
-import type {Resize} from "../../window/resize";
-import type {Render} from "../../game-loop/render";
+import type {Resize} from "../window/resize";
+import type {Render} from "../game-loop/render";
 import {Observable, Subscription} from "rxjs";
-import {onWebGLRendererResize} from "../../render/resize/resize";
-import type {RendererDOMEvents} from "../../render/dom-events/dom-events";
-import {createDOMEventStream} from "../../render/dom-events/dom-events";
-import {createRender} from "../../render/render-creator";
+import {onWebGLRendererResize} from "./resize/resize";
+import type {RendererDOMEvent} from "./dom-event/dom-event";
+import {createDOMEventStream} from "./dom-event/dom-event";
+import {createRender} from "./render-creator";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -18,13 +18,13 @@ type Param = {
 
 /** イベント通知ストリーム */
 type Notifier = {
-  domEvent: Observable<RendererDOMEvents>
+  domEvent: Observable<RendererDOMEvent>
 };
 
 /** レンダラの挙動をまとめたもの */
 export class Renderer {
   _threeJsRender: typeof THREE.WebGLRenderer;
-  _domEvent: Observable<RendererDOMEvents>;
+  _domEvent: Observable<RendererDOMEvent>;
   _subscriptions: Subscription[];
 
   constructor(param: Param) {

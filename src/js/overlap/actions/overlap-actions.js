@@ -9,7 +9,7 @@ import {toTouchStartRaycaster} from "./touch-start-raycaster";
 import type {TouchMoveRaycaster} from "./touch-move-raycaster";
 import {toTouchMoveRaycaster} from "./touch-move-raycaster";
 import {Observable} from "rxjs";
-import type {RendererDOMEvents} from "../../render/dom-events/dom-events";
+import type {RendererDOMEvent} from "../../render/dom-event/dom-event";
 import * as THREE from "three";
 import {filter, map, share} from "rxjs/operators";
 
@@ -30,7 +30,7 @@ export type OverlapActions =
  * @param camera カメラ
  * @return 当たり判定ストリーム
  */
-export function toOverlapStream(origin: Observable<RendererDOMEvents>, rendererDOM: HTMLElement, camera: typeof THREE.Camera): Observable<OverlapActions> {
+export function toOverlapStream(origin: Observable<RendererDOMEvent>, rendererDOM: HTMLElement, camera: typeof THREE.Camera): Observable<OverlapActions> {
   return origin.pipe(
     map(v => {
       switch (v.type) {

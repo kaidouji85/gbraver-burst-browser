@@ -1,6 +1,6 @@
 // @flow
 
-import {Renderer} from "../../game-object/renderer";
+import {Renderer} from "../../render";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
