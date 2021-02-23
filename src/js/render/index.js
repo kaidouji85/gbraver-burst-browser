@@ -8,7 +8,10 @@ import {Observable, Subscription} from "rxjs";
 import {onWebGLRendererResize} from "./resize/resize";
 import type {RendererDOMEvent} from "./dom-event/dom-event";
 import {createDOMEventStream} from "./dom-event/dom-event";
-import {createRender} from "./render-creator";
+import {createRender} from "./renderer-creator/renderer-creator";
+import type {OverlapEvent} from "./overlap-event/overlap-event";
+import {toOverlapStream} from "./overlap-event/overlap-event";
+import type {OverlapNotifier} from "./overla-notifier";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -16,13 +19,16 @@ type Param = {
   resize: Observable<Resize>,
 };
 
-/** イベント通知ストリーム */
+/**
+ * @deprecated
+ * イベント通知ストリーム
+ */
 type Notifier = {
   domEvent: Observable<RendererDOMEvent>
 };
 
 /** レンダラの挙動をまとめたもの */
-export class Renderer {
+export class Renderer implements OverlapNotifier {
   _threeJsRender: typeof THREE.WebGLRenderer;
   _domEvent: Observable<RendererDOMEvent>;
   _subscriptions: Subscription[];
@@ -57,6 +63,17 @@ export class Renderer {
   }
 
   /**
+   * オーバーラップイベント通知を生成する
+   *
+   * @param camera カメラ
+   * @return 生成結果
+   */
+  createOverlapNotifier(camera: typeof THREE.Camera): Observable<OverlapEvent> {
+    return toOverlapStream(this._domEvent, this.getRendererDOM(), camera);
+  }
+
+  /**
+   * @deprecated
    * イベント通知ストリームを取得する
    *
    * @return イベント通知ストリーム

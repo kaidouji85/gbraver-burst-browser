@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
-import {renderPixelRatio} from "./pixel-ratio/pixel-ratio";
-import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
+import {renderPixelRatio} from "../pixel-ratio/pixel-ratio";
+import {getViewPortHeight, getViewPortWidth} from "../../view-port/view-port-size";
 
 /**
  * レンダラを生成する
