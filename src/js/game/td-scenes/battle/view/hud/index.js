@@ -19,10 +19,12 @@ import type {HUDPilotObjects} from "./pilot-objects/hud-pilot-objects";
 import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
 import {toOverlapStream} from "../../../../../render/overlap-event/overlap-event";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import type {OverlapNotifier} from "../../../../../render/overla-notifier";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
+  renderer: OverlapNotifier,
   rendererDOM: HTMLElement,
   playerId: PlayerId,
   players: Player[],
@@ -56,7 +58,7 @@ export class HudLayer {
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera(param.listener.resize);
 
-    this._overlap = toOverlapStream(param.listener.domEvent, param.rendererDOM, this.camera.getCamera());
+    this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
     this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
 
     const player = param.players.find(v => v.playerId === param.playerId)
