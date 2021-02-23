@@ -18,7 +18,6 @@ import {ResourceLoader} from "../../src/js/resource";
 import {PlainHUDCamera} from "../../src/js/game-object/camera/plain-hud";
 import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
-import {toOverlapStream} from "../../src/js/render/overlap-event/overlap-event";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 
@@ -66,11 +65,7 @@ export class HUDGameObjectStub {
     this._scene = new THREE.Scene();
     this._camera = new PlainHUDCamera(this._resize);
 
-    this._overlap = toOverlapStream(
-      this._renderer.notifier().domEvent,
-      this._renderer.getRendererDOM(),
-      this._camera.getCamera()
-    );
+    this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
     this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
     this._subscription = [
       this._gameLoop.subscribe(this._onGameLoop.bind(this))

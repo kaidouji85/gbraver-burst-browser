@@ -19,14 +19,6 @@ type Param = {
   resize: Observable<Resize>,
 };
 
-/**
- * @deprecated
- * イベント通知ストリーム
- */
-type Notifier = {
-  domEvent: Observable<RendererDOMEvent>
-};
-
 /** レンダラの挙動をまとめたもの */
 export class Renderer implements OverlapNotifier {
   _threeJsRender: typeof THREE.WebGLRenderer;
@@ -70,18 +62,6 @@ export class Renderer implements OverlapNotifier {
    */
   createOverlapNotifier(camera: typeof THREE.Camera): Observable<OverlapEvent> {
     return toOverlapStream(this._domEvent, this.getRendererDOM(), camera);
-  }
-
-  /**
-   * @deprecated
-   * イベント通知ストリームを取得する
-   *
-   * @return イベント通知ストリーム
-   */
-  notifier(): Notifier {
-    return {
-      domEvent: this._domEvent
-    };
   }
 
   /**
