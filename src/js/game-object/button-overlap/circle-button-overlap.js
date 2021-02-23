@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import {ButtonOverlap} from "./button-overlap";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../game-object/action/game-object-action";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /** パラメータ */
 type Param = {
