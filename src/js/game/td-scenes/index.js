@@ -82,7 +82,6 @@ export class TDScenes {
     });
     this._scene = scene;
     this._sceneSubscriptions = [
-      scene.notifier().render.subscribe(this._renderStream),
       scene.notifier().endBattle.subscribe(v => {
         this._endBattle.next({
           type: 'EndBattle',

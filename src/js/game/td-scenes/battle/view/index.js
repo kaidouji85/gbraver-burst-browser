@@ -17,9 +17,10 @@ import type {PreRender} from "../../../../game-loop/pre-render";
 import {tracking} from "./tracking";
 import type {OverlapNotifier} from "../../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../../render/renderer-dom-getter";
+import type {Rendering} from "../../../../render/rendering";
 
 /** 戦闘シーンビューで利用するレンダラ */
-interface OwnRenderer extends OverlapNotifier, RendererDomGetter {}
+interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -132,11 +133,7 @@ export class BattleSceneView {
       rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
-    this._rendering.next({
-      type: 'Render',
-      scene: this.td.scene,
-      camera: this.td.camera.getCamera()
-    });
+    this._renderer.rendering(this.td.scene, this.td.camera.getCamera());
 
     this._updateHUD.next({
       type: 'Update',
@@ -149,10 +146,6 @@ export class BattleSceneView {
       rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
-    this._rendering.next({
-      type: 'Render',
-      scene: this.hud.scene,
-      camera: this.hud.camera.getCamera()
-    });
+    this._renderer.rendering(this.hud.scene, this.hud.camera.getCamera());
   }
 }

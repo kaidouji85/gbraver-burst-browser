@@ -19,9 +19,10 @@ import {BattleSceneSounds} from "./sounds";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
+import type {Rendering} from "../../../render/rendering";
 
 /** 戦闘シーンで利用するレンダラ */
-interface OwnRenderer extends OverlapNotifier, RendererDomGetter {}
+interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** コンストラクタのパラメータ */
 type Param = {
