@@ -16,12 +16,15 @@ import type {Update} from "../../../../game-loop/update";
 import type {PreRender} from "../../../../game-loop/pre-render";
 import {tracking} from "./tracking";
 import type {OverlapNotifier} from "../../../../render/overla-notifier";
+import type {RendererDomGetter} from "../../../../render/renderer-dom-getter";
+
+/** 戦闘シーンビューで利用するレンダラ */
+interface OwnRenderer extends OverlapNotifier, RendererDomGetter {}
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  renderer: OverlapNotifier,
-  rendererDOM: HTMLElement,
+  renderer: OwnRenderer,
   playerId: PlayerId,
   players: Player[],
   listener: {
@@ -44,7 +47,7 @@ export class BattleSceneView {
   hud: HudLayer;
   _playerId: PlayerId;
   _safeAreaInset: SafeAreaInset;
-  _rendererDOM: HTMLElement;
+  _renderer: OwnRenderer;
   _rendering: Subject<Render>;
   _updateTD: Subject<Update>;
   _preRenderTD: Subject<PreRender>;
@@ -54,7 +57,7 @@ export class BattleSceneView {
   constructor(param: Param) {
     this._playerId = param.playerId;
     this._safeAreaInset = createSafeAreaInset();
-    this._rendererDOM = param.rendererDOM;
+    this._renderer = param.renderer;
     this._rendering = new Subject();
     this._updateTD = new Subject();
     this._preRenderTD = new Subject();
@@ -126,7 +129,7 @@ export class BattleSceneView {
     this._preRenderTD.next({
       type: 'PreRender',
       camera: this.td.camera.getCamera(),
-      rendererDOM: this._rendererDOM,
+      rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
     this._rendering.next({
@@ -139,11 +142,11 @@ export class BattleSceneView {
       type: 'Update',
       time: action.time
     });
-    tracking(this.td, this.hud, this._playerId, this._rendererDOM);
+    tracking(this.td, this.hud, this._playerId, this._renderer.getRendererDOM());
     this._preRenderHUD.next({
       type: 'PreRender',
       camera: this.hud.camera.getCamera(),
-      rendererDOM: this._rendererDOM,
+      rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
     this._rendering.next({
