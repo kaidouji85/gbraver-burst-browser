@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import {WebGLInfo} from 'three';
 import type {Resize} from "../window/resize";
-import type {Render} from "../game-loop/render";
 import {Observable, Subscription} from "rxjs";
 import {onWebGLRendererResize} from "./resize/resize";
 import type {RendererDOMEvent} from "./dom-event/dom-event";
@@ -13,15 +12,15 @@ import type {OverlapEvent} from "./overlap-event/overlap-event";
 import {toOverlapStream} from "./overlap-event/overlap-event";
 import type {OverlapNotifier} from "./overla-notifier";
 import type {RendererDomGetter} from "./renderer-dom-getter";
+import type {Rendering} from "./rendering";
 
 /** コンストラクタのパラメータ */
 type Param = {
-  render: Observable<Render>,
   resize: Observable<Resize>,
 };
 
 /** レンダラの挙動をまとめたもの */
-export class Renderer implements OverlapNotifier, RendererDomGetter {
+export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   _threeJsRender: typeof THREE.WebGLRenderer;
   _domEvent: Observable<RendererDOMEvent>;
   _subscriptions: Subscription[];
@@ -33,10 +32,6 @@ export class Renderer implements OverlapNotifier, RendererDomGetter {
     this._subscriptions = [
       param.resize.subscribe(action => {
         this._resize(action);
-      }),
-
-      param.render.subscribe(action => {
-        this._render(action);
       })
     ];
   }
@@ -83,13 +78,18 @@ export class Renderer implements OverlapNotifier, RendererDomGetter {
     return this._threeJsRender.domElement;
   }
 
+  /**
+   * レンダリングをする
+   *
+   * @param scene シーン
+   * @param camera カメラ
+   */
+  rendering(scene: typeof THREE.Scene, camera: typeof THREE.Camera): void {
+    this._threeJsRender.render(scene, camera);
+  }
+
   /** リサイズ */
   _resize(action: Resize): void {
     onWebGLRendererResize(this._threeJsRender, action.width, action.height, window.devicePixelRatio);
-  }
-
-  /** レンダリング */
-  _render(action: Render): void {
-    this._threeJsRender.render(action.scene, action.camera);
   }
 }

@@ -6,7 +6,6 @@ import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {BattleScene} from "./battle";
 import type {Scene} from "./scene";
-import type {Render} from "../../game-loop/render";
 import type {GameLoop} from "../../game-loop/game-loop";
 import type {Resize} from "../../window/resize";
 import type {EndBattle, GameAction} from "../actions/game-actions";
@@ -15,7 +14,6 @@ import {gameLoopStream} from "../../game-loop/game-loop";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
-  _renderStream: Subject<Render>;
   _endBattle: Subject<EndBattle>;
   _gameLoop: Observable<GameLoop>;
   _resize: Observable<Resize>;
@@ -29,13 +27,11 @@ export class TDScenes {
    * @param resize リサイズストリーム
    */
   constructor(resize: Observable<Resize>) {
-    this._renderStream = new Subject<Render>();
     this._endBattle = new Subject<EndBattle>();
     this._gameLoop = gameLoopStream();
     this._resize = resize;
 
     this._renderer = new Renderer({
-      render: this._renderStream,
       resize: this._resize,
     });
 
@@ -82,7 +78,6 @@ export class TDScenes {
     });
     this._scene = scene;
     this._sceneSubscriptions = [
-      scene.notifier().render.subscribe(this._renderStream),
       scene.notifier().endBattle.subscribe(v => {
         this._endBattle.next({
           type: 'EndBattle',

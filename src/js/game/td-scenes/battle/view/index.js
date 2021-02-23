@@ -8,7 +8,6 @@ import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {BattleSceneAction} from "../actions";
-import type {Render} from "../../../../game-loop/render";
 import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../window/resize";
@@ -17,9 +16,10 @@ import type {PreRender} from "../../../../game-loop/pre-render";
 import {tracking} from "./tracking";
 import type {OverlapNotifier} from "../../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../../render/renderer-dom-getter";
+import type {Rendering} from "../../../../render/rendering";
 
 /** 戦闘シーンビューで利用するレンダラ */
-interface OwnRenderer extends OverlapNotifier, RendererDomGetter {}
+interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -35,7 +35,6 @@ type Param = {
 
 /** 戦闘シーンビューのイベント通知 */
 type Notifier = {
-  render: Observable<Render>,
   battleAction: Observable<BattleSceneAction>,
 };
 
@@ -48,7 +47,6 @@ export class BattleSceneView {
   _playerId: PlayerId;
   _safeAreaInset: SafeAreaInset;
   _renderer: OwnRenderer;
-  _rendering: Subject<Render>;
   _updateTD: Subject<Update>;
   _preRenderTD: Subject<PreRender>;
   _updateHUD: Subject<Update>;
@@ -58,7 +56,6 @@ export class BattleSceneView {
     this._playerId = param.playerId;
     this._safeAreaInset = createSafeAreaInset();
     this._renderer = param.renderer;
-    this._rendering = new Subject();
     this._updateTD = new Subject();
     this._preRenderTD = new Subject();
     this._updateHUD = new Subject();
@@ -109,7 +106,6 @@ export class BattleSceneView {
    */
   notifier(): Notifier {
     return {
-      render: this._rendering,
       battleAction: this.hud.notifier().battleAction,
     };
   }
@@ -132,11 +128,7 @@ export class BattleSceneView {
       rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
-    this._rendering.next({
-      type: 'Render',
-      scene: this.td.scene,
-      camera: this.td.camera.getCamera()
-    });
+    this._renderer.rendering(this.td.scene, this.td.camera.getCamera());
 
     this._updateHUD.next({
       type: 'Update',
@@ -149,10 +141,6 @@ export class BattleSceneView {
       rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
-    this._rendering.next({
-      type: 'Render',
-      scene: this.hud.scene,
-      camera: this.hud.camera.getCamera()
-    });
+    this._renderer.rendering(this.hud.scene, this.hud.camera.getCamera());
   }
 }

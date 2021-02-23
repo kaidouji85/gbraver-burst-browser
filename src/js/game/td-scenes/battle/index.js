@@ -9,7 +9,6 @@ import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
-import type {Render} from "../../../game-loop/render";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
 import type {Scene} from "../scene";
@@ -19,9 +18,10 @@ import {BattleSceneSounds} from "./sounds";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
+import type {Rendering} from "../../../render/rendering";
 
 /** 戦闘シーンで利用するレンダラ */
-interface OwnRenderer extends OverlapNotifier, RendererDomGetter {}
+interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -37,7 +37,6 @@ type Param = {
 
 /** 戦闘シーンのイベント通知 */
 type Notifier = {
-  render: Observable<Render>,
   endBattle: Observable<GameEnd>
 };
 
@@ -100,7 +99,6 @@ export class BattleScene implements Scene {
    */
   notifier(): Notifier {
     return {
-      render: this._view.notifier().render,
       endBattle: this._endBattle
     };
   }
