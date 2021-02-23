@@ -80,11 +80,9 @@ export class BattleSceneView {
     this.hud = new HudLayer({
       resources: param.resources,
       renderer: param.renderer,
-      rendererDOM: param.rendererDOM,
       playerId: param.playerId,
       players: param.players,
       listener: {
-        domEvent: param.listener.domEvent,
         resize: param.listener.resize,
         update: this._updateHUD,
         preRender: this._preRenderHUD,

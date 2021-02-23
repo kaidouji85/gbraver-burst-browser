@@ -3,7 +3,6 @@ import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
-import type {RendererDOMEvent} from "../../../../../render/dom-event/dom-event";
 import type {BattleSceneAction} from "../../actions";
 import type {Update} from "../../../../../game-loop/update";
 import type {PreRender} from "../../../../../game-loop/pre-render";
@@ -17,7 +16,6 @@ import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 import {enemyHUDPilotObjects, playerHUDPilotObjects} from "./pilot-objects";
 import type {HUDPilotObjects} from "./pilot-objects/hud-pilot-objects";
 import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
-import {toOverlapStream} from "../../../../../render/overlap-event/overlap-event";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
 
@@ -25,13 +23,11 @@ import type {OverlapNotifier} from "../../../../../render/overla-notifier";
 export type Param = {
   resources: Resources,
   renderer: OverlapNotifier,
-  rendererDOM: HTMLElement,
   playerId: PlayerId,
   players: Player[],
   listener: {
     update: Observable<Update>,
     preRender: Observable<PreRender>,
-    domEvent: Observable<RendererDOMEvent>,
     resize: Observable<Resize>,
   }
 };
