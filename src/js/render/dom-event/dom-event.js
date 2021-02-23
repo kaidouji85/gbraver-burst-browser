@@ -8,7 +8,7 @@ import {merge, Observable} from "rxjs";
 import {map} from "rxjs/operators";
 
 /** three.js Renderer要素のイベントをまとめたもの */
-export type RendererDOMEvents =
+export type RendererDOMEvent =
   MouseDown |
   MouseMove |
   MouseUp |
@@ -22,25 +22,25 @@ export type RendererDOMEvents =
  * @param renderDom three.jsを描画するHTML要素
  * @return ストリーム
  */
-export function createDOMEventStream(renderDom: HTMLElement): Observable<RendererDOMEvents> {
+export function createDOMEventStream(renderDom: HTMLElement): Observable<RendererDOMEvent> {
   const mouseDown = createMouseDownStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvents))
+    map(v => (v: RendererDOMEvent))
   );
   const mouseMove = createMouseMoveStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvents))
+    map(v => (v: RendererDOMEvent))
   );
   const mouseUp = createMouseUpStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvents))
+    map(v => (v: RendererDOMEvent))
   );
 
   const touchStart = createTouchStartStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvents))
+    map(v => (v: RendererDOMEvent))
   );
   const touchMove = createTouchMoveStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvents))
+    map(v => (v: RendererDOMEvent))
   );
   const touchEnd = createTouchEndStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvents))
+    map(v => (v: RendererDOMEvent))
   );
 
   return merge(

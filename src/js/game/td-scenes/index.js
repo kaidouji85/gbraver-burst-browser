@@ -1,6 +1,6 @@
 // @flow
 
-import {Renderer} from "../../game-object/renderer";
+import {Renderer} from "../../render";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
@@ -72,11 +72,11 @@ export class TDScenes {
 
     const scene = new BattleScene({
       resources: resources,
+      renderer: this._renderer,
       rendererDOM: this._renderer.getRendererDOM(),
       battleProgress: room,
       initialState: initialState,
       listener: {
-        domEvent: this._renderer.notifier().domEvent,
         gameLoop: this._gameLoop,
         resize: this._resize,
       }

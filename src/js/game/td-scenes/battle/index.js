@@ -5,7 +5,6 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../../game-loop/game-loop";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {RendererDOMEvents} from "../../../render/dom-events/dom-events";
 import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
@@ -18,15 +17,16 @@ import type {Resize} from "../../../window/resize";
 import {all} from "../../../animation/all";
 import {BattleSceneSounds} from "./sounds";
 import {Exclusive} from "../../../exclusive/exclusive";
+import type {OverlapNotifier} from "../../../render/overla-notifier";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
+  renderer: OverlapNotifier,
   rendererDOM: HTMLElement,
   battleProgress: BattleProgress,
   initialState: InitialState,
   listener: {
-    domEvent: Observable<RendererDOMEvents>,
     gameLoop: Observable<GameLoop>,
     resize: Observable<Resize>
   }
@@ -59,12 +59,12 @@ export class BattleScene implements Scene {
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,
+      renderer: param.renderer,
       rendererDOM: param.rendererDOM,
       playerId: param.initialState.playerId,
       players: param.initialState.players,
       listener: {
         gameLoop: param.listener.gameLoop,
-        domEvent: param.listener.domEvent,
         resize: param.listener.resize,
       }
     });

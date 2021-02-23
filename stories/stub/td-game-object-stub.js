@@ -6,9 +6,9 @@ import * as THREE from "three";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resize} from "../../src/js/window/resize";
 import {createResizeStream} from "../../src/js/window/resize";
-import {Renderer} from "../../src/js/game-object/renderer";
+import {Renderer} from "../../src/js/render";
 import type {GameLoop} from "../../src/js/game-loop/game-loop";
-import type {OverlapActions} from "../../src/js/overlap/actions/overlap-actions";
+import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
 import type {Update} from "../../src/js/game-loop/update";
 import type {PreRender} from "../../src/js/game-loop/pre-render";
 import {gameObjectStream} from "../../src/js/game-object/action/game-object-action";
@@ -18,7 +18,6 @@ import {ResourceLoader} from "../../src/js/resource";
 import {TDCamera} from "../../src/js/game-object/camera/td";
 import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
-import {toOverlapStream} from "../../src/js/overlap/actions/overlap-actions";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 
@@ -39,7 +38,7 @@ export class TDGameObjectStub {
   _camera: TDCamera;
   _scene: typeof THREE.Scene;
 
-  _overlap: Observable<OverlapActions>;
+  _overlap: Observable<OverlapEvent>;
   _gameObjectAction: Observable<GameObjectAction>;
 
   _subscription: Subscription[];
@@ -66,11 +65,7 @@ export class TDGameObjectStub {
     this._scene = new THREE.Scene();
     this._camera = new TDCamera(this._update, this._resize);
 
-    this._overlap = toOverlapStream(
-      this._renderer.notifier().domEvent,
-      this._renderer.getRendererDOM(),
-      this._camera.getCamera()
-    );
+    this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
     this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
     this._subscription = [
       this._gameLoop.subscribe(this._onGameLoop.bind(this))

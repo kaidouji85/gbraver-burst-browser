@@ -7,7 +7,6 @@ import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
-import type {RendererDOMEvents} from "../../../../render/dom-events/dom-events";
 import type {BattleSceneAction} from "../actions";
 import type {Render} from "../../../../game-loop/render";
 import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
@@ -16,16 +15,17 @@ import type {Resize} from "../../../../window/resize";
 import type {Update} from "../../../../game-loop/update";
 import type {PreRender} from "../../../../game-loop/pre-render";
 import {tracking} from "./tracking";
+import type {OverlapNotifier} from "../../../../render/overla-notifier";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
+  renderer: OverlapNotifier,
   rendererDOM: HTMLElement,
   playerId: PlayerId,
   players: Player[],
   listener: {
     gameLoop: Observable<GameLoop>,
-    domEvent: Observable<RendererDOMEvents>,
     resize: Observable<Resize>,
   }
 };
@@ -63,12 +63,11 @@ export class BattleSceneView {
 
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
-      rendererDOM: param.rendererDOM,
+      renderer: param.renderer,
       safeAreaInset: this._safeAreaInset,
       playerId: param.playerId,
       players: param.players,
       listener: {
-        domEvent: param.listener.domEvent,
         resize: param.listener.resize,
         update: this._updateTD,
         preRender: this._preRenderTD,
@@ -77,11 +76,10 @@ export class BattleSceneView {
 
     this.hud = new HudLayer({
       resources: param.resources,
-      rendererDOM: param.rendererDOM,
+      renderer: param.renderer,
       playerId: param.playerId,
       players: param.players,
       listener: {
-        domEvent: param.listener.domEvent,
         resize: param.listener.resize,
         update: this._updateHUD,
         preRender: this._preRenderHUD,
