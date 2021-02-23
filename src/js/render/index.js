@@ -13,15 +13,17 @@ import type {OverlapEvent} from "./overlap-event/overlap-event";
 import {toOverlapStream} from "./overlap-event/overlap-event";
 import type {OverlapNotifier} from "./overla-notifier";
 import type {RendererDomGetter} from "./renderer-dom-getter";
+import type {Rendering} from "./rendering";
 
 /** コンストラクタのパラメータ */
 type Param = {
+  /** @deprecated */
   render: Observable<Render>,
   resize: Observable<Resize>,
 };
 
 /** レンダラの挙動をまとめたもの */
-export class Renderer implements OverlapNotifier, RendererDomGetter {
+export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   _threeJsRender: typeof THREE.WebGLRenderer;
   _domEvent: Observable<RendererDOMEvent>;
   _subscriptions: Subscription[];
@@ -83,12 +85,25 @@ export class Renderer implements OverlapNotifier, RendererDomGetter {
     return this._threeJsRender.domElement;
   }
 
+  /**
+   * レンダリングをする
+   *
+   * @param scene シーン
+   * @param camera カメラ
+   */
+  rendering(scene: typeof THREE.Scene, camera: typeof THREE.Camera): void {
+    this._threeJsRender.render(scene, camera);
+  }
+
   /** リサイズ */
   _resize(action: Resize): void {
     onWebGLRendererResize(this._threeJsRender, action.width, action.height, window.devicePixelRatio);
   }
 
-  /** レンダリング */
+  /**
+   * @deprecated
+   * レンダリング
+   */
   _render(action: Render): void {
     this._threeJsRender.render(action.scene, action.camera);
   }
