@@ -12,6 +12,7 @@ import {createRender} from "./renderer-creator/renderer-creator";
 import type {OverlapEvent} from "./overlap-event/overlap-event";
 import {toOverlapStream} from "./overlap-event/overlap-event";
 import type {OverlapNotifier} from "./overla-notifier";
+import type {RendererDomGetter} from "./renderer-dom-getter";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -20,7 +21,7 @@ type Param = {
 };
 
 /** レンダラの挙動をまとめたもの */
-export class Renderer implements OverlapNotifier {
+export class Renderer implements OverlapNotifier, RendererDomGetter {
   _threeJsRender: typeof THREE.WebGLRenderer;
   _domEvent: Observable<RendererDOMEvent>;
   _subscriptions: Subscription[];
