@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import type {MouseDownRaycaster} from "../actions/mouse-down-raycaster";
-import type {TouchStartRaycaster} from "../actions/touch-start-raycaster";
+import type {MouseDownRaycaster} from "../../render/overlap-event/mouse-down-raycaster";
+import type {TouchStartRaycaster} from "../../render/overlap-event/touch-start-raycaster";
 import {Observable, Subscription} from "rxjs";
 import {isMeshOverlap} from "../mesh/mesh-overlap";
 import type {GameObjectAction} from "../../game-object/action/game-object-action";

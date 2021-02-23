@@ -9,7 +9,7 @@ import type {Update} from "../../../../../game-loop/update";
 import type {PreRender} from "../../../../../game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import {HUDGameObjects} from "./game-objects";
-import type {OverlapActions} from "../../../../../overlap/actions/overlap-actions";
+import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
 import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
 import type {Resize} from "../../../../../window/resize";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
@@ -17,7 +17,7 @@ import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 import {enemyHUDPilotObjects, playerHUDPilotObjects} from "./pilot-objects";
 import type {HUDPilotObjects} from "./pilot-objects/hud-pilot-objects";
 import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
-import {toOverlapStream} from "../../../../../overlap/actions/overlap-actions";
+import {toOverlapStream} from "../../../../../render/overlap-event/overlap-event";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 
 /** コンストラクタのパラメータ */
@@ -49,7 +49,7 @@ export class HudLayer {
   armdozers: HUDArmdozerObjects[];
   pilots: HUDPilotObjects[];
   gameObjects: HUDGameObjects;
-  _overlap: Observable<OverlapActions>;
+  _overlap: Observable<OverlapEvent>;
   _gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {

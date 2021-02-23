@@ -8,7 +8,7 @@ import type {Resize} from "../../src/js/window/resize";
 import {createResizeStream} from "../../src/js/window/resize";
 import {Renderer} from "../../src/js/render";
 import type {GameLoop} from "../../src/js/game-loop/game-loop";
-import type {OverlapActions} from "../../src/js/overlap/actions/overlap-actions";
+import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
 import type {Update} from "../../src/js/game-loop/update";
 import type {PreRender} from "../../src/js/game-loop/pre-render";
 import {gameObjectStream} from "../../src/js/game-object/action/game-object-action";
@@ -18,7 +18,7 @@ import {ResourceLoader} from "../../src/js/resource";
 import {PlainHUDCamera} from "../../src/js/game-object/camera/plain-hud";
 import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
-import {toOverlapStream} from "../../src/js/overlap/actions/overlap-actions";
+import {toOverlapStream} from "../../src/js/render/overlap-event/overlap-event";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 
@@ -39,7 +39,7 @@ export class HUDGameObjectStub {
   _camera: PlainHUDCamera;
   _scene: typeof THREE.Scene;
 
-  _overlap: Observable<OverlapActions>;
+  _overlap: Observable<OverlapEvent>;
   _gameObjectAction: Observable<GameObjectAction>;
 
   _subscription: Subscription[];
