@@ -4,13 +4,13 @@ import * as THREE from 'three';
 import type {RecoverBatteryModel} from "./model/recover-battery-model";
 import type {RecoverBatteryView} from "./view/recover-battery-view";
 import {createInitialValue} from "./model/initial-value";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
 import {RecoverBatterySounds} from "./sounds/recover-battery-sounds";
 import type {Resources} from "../../resource";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * コンストラクタのパラメータ

@@ -4,8 +4,8 @@ import {BatteryNumber} from "./battery-number";
 import type {Resources} from "../../resource";
 import {PlayerBatteryNumberView} from "./view/player-battery-number-view";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {EnemyBatteryNumberView} from "./view/enemy-battery-number-view";
+import type {GameObjectAction} from "../action/game-object-action";
 
 type Param = {
   resources: Resources,

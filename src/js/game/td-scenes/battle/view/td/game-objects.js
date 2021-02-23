@@ -4,11 +4,11 @@ import type {Stage} from "../../../../../game-object/stage/stage";
 import {TurnIndicator} from "../../../../../game-object/turn-indicator/turn-indicator";
 import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
 import SchoolField from "../../../../../game-object/stage/shopping-street";
 import * as THREE from "three";
 import {SkyBrightness} from "../../../../../game-object/sky-brightness/sky-brightness";
 import {Illumination} from "../../../../../game-object/illumination/illumination";
+import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 
 /**
  * 3Dレイヤーのゲームオブジェクト

@@ -5,7 +5,7 @@ import {ShinBraver} from './shin-braver';
 import {PlayerShinBraverView} from "./view/player-shin-braver-view";
 import {EnemyShinBraverView} from "./view/enemy-shin-braver-view";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー側シンブレイバー

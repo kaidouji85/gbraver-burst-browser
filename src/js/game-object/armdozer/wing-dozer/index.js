@@ -3,9 +3,9 @@
 import {WingDozer} from "./wing-dozer";
 import type {Resources} from "../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {PlayerWingDozerView} from "./view/player-wing-dozer-view";
 import {EnemyWingDozerView} from "./view/enemy-wing-dozer-view";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー側 ウィングドーザを生成する

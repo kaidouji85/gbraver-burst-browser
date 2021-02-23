@@ -10,10 +10,10 @@ import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import {Observable, Subject} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import type {PilotIcon} from "./pilot-icon";
 import type {PilotId} from "gbraver-burst-core";
 import {createPilotIcon} from "./pilot-id-to-icon";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;

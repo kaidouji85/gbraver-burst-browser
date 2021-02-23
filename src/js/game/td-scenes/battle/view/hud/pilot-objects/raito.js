@@ -6,8 +6,8 @@ import {RaitoCutIn} from "../../../../../../game-object/cut-in/raito/raito";
 import * as THREE from "three";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {enemyRaitoCutIn, playerRaitoCutIn} from "../../../../../../game-object/cut-in/raito";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 
 /**
  * コンストラクタのパラメータ

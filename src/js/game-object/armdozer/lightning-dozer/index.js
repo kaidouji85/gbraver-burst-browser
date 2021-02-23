@@ -3,9 +3,9 @@
 import {LightningDozer} from "./lightning-dozer";
 import type {Resources} from "../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {PlayerLightingDozerView} from "./view/player-lighting-dozer-view";
 import {EnemyLightningDozerView} from "./view/enemy-lightning-dozer-view";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー側のライトニングドーザを生成する

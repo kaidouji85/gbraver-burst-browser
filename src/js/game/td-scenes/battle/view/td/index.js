@@ -12,13 +12,13 @@ import type {TDPlayer} from "./player";
 import {enemyTDObject, playerTDObjects} from "./player";
 import {TDGameObjects} from "./game-objects";
 import type {OverlapActions} from "../../../../../overlap/actions/overlap-actions";
-import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
+import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
 import type {Resize} from "../../../../../window/resize";
 import {skyBox} from "./sky-box";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
 import {toOverlapStream} from "../../../../../overlap/actions/overlap-actions";
+import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 
 /** コンストラクタのパラメータ */
 type Param = {

@@ -4,8 +4,8 @@ import * as THREE from 'three';
 import type {MouseDownRaycaster} from "../actions/mouse-down-raycaster";
 import type {TouchStartRaycaster} from "../actions/touch-start-raycaster";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {isMeshOverlap} from "../mesh/mesh-overlap";
+import type {GameObjectAction} from "../../game-object/action/game-object-action";
 
 /** パラメータ */
 type Param = {

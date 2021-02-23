@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerShinyaView} from "./view/player-shinya-view";
 import {EnemyShinyaView} from "./view/enemy-shinya-view";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー側 シンヤ カットイン

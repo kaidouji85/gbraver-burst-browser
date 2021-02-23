@@ -5,7 +5,6 @@ import * as THREE from "three";
 import type {NeoLandozerModel} from "./model/neo-landozer-model";
 import type {NeoLandozerView} from "./view/neo-landozer-view";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
@@ -23,6 +22,7 @@ import {guts} from "./animation/guts";
 import {gutsToStand} from "./animation/guts-to-stand";
 import type {Resources} from "../../../resource";
 import {NeoLandozerSounds} from "./sounds/neo-landozer-sounds";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {

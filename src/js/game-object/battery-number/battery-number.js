@@ -3,13 +3,13 @@
 import type {BatteryNumberModel} from "./model/battery-number-model";
 import type {BatteryNumberView} from "./view/battery-number-view";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import * as THREE from 'three';
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
+import type {GameObjectAction} from "../action/game-object-action";
 
 type Param = {
   listener: Observable<GameObjectAction>,

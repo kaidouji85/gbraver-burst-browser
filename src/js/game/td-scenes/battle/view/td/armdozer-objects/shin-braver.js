@@ -5,10 +5,10 @@ import type {TDArmdozerObjects} from "./armdozer-objects";
 import type {PlayerId, Player} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import * as THREE from "three";
 import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 
 /**
  * 3Dレイヤー シンブレイバー 3Dレイヤー フィールド

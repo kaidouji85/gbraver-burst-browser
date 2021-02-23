@@ -5,8 +5,8 @@ import {ShockWave} from "./shock-wave";
 import {PlayerShockWaveView} from "./view/player-shock-wave-view";
 import {EnemyShockWaveView} from "./view/enemy-shock-wave-view";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {initialValue} from "./model/initial-value";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤーの衝撃波を生成する

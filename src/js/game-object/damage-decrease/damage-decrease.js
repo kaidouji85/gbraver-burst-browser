@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import type {DamageDecreaseView} from "./view/damage-decrease-view";
 import type {DamageDecreaseModel} from "./model/damage-decrease-model";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
@@ -11,6 +10,7 @@ import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
 import {DamageDecreaseSounds} from "./sounds/damage-decrease-sounds";
 import type {Resources} from "../../resource";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * ダメージ減少

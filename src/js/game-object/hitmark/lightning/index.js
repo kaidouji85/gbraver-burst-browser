@@ -3,9 +3,9 @@
 import {Lightning} from "./lightning";
 import type {Resources} from "../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {PlayerLightningView} from "./view/player-lightning-view";
 import {EnemyLightningView} from "./view/enemy-lightning-view";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー側 電撃ヒットマーク

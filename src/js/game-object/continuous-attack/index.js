@@ -3,9 +3,9 @@
 import {ContinuousAttackIndicator} from "./continuous-attack-indicator";
 import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {PlayerContinuousAttackView} from "./view/player-continuous-attack-view";
 import {EnemyContinuousAttackView} from "./view/enemy-continuous-attack-view";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * プレイヤー側 連続攻撃

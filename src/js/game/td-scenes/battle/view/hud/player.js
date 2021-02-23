@@ -5,10 +5,10 @@ import type {Player, PlayerId} from "gbraver-burst-core";
 import {Gauge} from "../../../../../game-object/gauge/gauge";
 import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
+import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド

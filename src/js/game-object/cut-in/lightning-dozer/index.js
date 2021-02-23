@@ -3,9 +3,9 @@
 import {LightningDozerCutIn} from "./lightning-dozer-cutin";
 import type {Resources} from "../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {PlayerLightningDozerCutInView} from "./view/player-lightning-dozer-cutin-view";
 import {EnemyLightningDozerCutInView} from "./view/enemy-lightning-dozer-cutin-view";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー ライトニングドーザ カットイン

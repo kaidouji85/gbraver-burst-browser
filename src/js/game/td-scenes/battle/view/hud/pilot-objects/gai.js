@@ -2,12 +2,12 @@
 
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 import type {HUDPilotObjects} from "./hud-pilot-objects";
 import {GaiCutIn} from "../../../../../../game-object/cut-in/gai/gai";
 import {enemyGaiCutIn, playerGaiCutIn} from "../../../../../../game-object/cut-in/gai";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 
 /**
  * コンストラクタのパラメータ

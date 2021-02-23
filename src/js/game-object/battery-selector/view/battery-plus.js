@@ -7,9 +7,9 @@ import * as THREE from "three";
 import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
 import {canBatteryPlus} from "../model/can-battery-plus";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** メッシュサイズ */
 const MESH_SIZE = 256;

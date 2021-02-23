@@ -3,11 +3,11 @@
 import type {Resources} from "../../../../../../resource";
 import {ShinyaCutIn} from "../../../../../../game-object/cut-in/shinya/shinya";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {enemyShinyaCutIn, playerShinyaCutIn} from "../../../../../../game-object/cut-in/shinya";
 import * as THREE from "three";
 import type {HUDPilotObjects} from "./hud-pilot-objects";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 
 /**
  * コンストラクタのパラメータ

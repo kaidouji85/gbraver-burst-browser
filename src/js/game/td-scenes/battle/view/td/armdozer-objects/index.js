@@ -4,12 +4,12 @@ import type {Player} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {enemyLightningDozerTD, playerLightningDozerTD} from "./lightning-dozer";
 import type {TDArmdozerObjects} from "./armdozer-objects";
 import {enemyShinBraverTD, playerShinBraverTD} from "./shin-braver";
 import {enemyWingDozerTD, playerWingDozerTD} from "./wing-dozer";
 import {enemyNeoLandozerTD, playerNeoLandozerTD} from "./neo-landozer";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト

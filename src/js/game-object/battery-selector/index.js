@@ -6,7 +6,6 @@ import {Observable, Subscription} from 'rxjs';
 import type {Resources} from "../../resource";
 import * as THREE from "three";
 import type {ButtonLabel} from "./model/button-label";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Update} from "../../game-loop/update";
 import {Animate} from "../../animation/animate";
 import {BatterySelectorView} from "./view";
@@ -24,6 +23,7 @@ import {SOUND_IDS} from "../../resource/sound";
 import {decide} from './animation/decide';
 import {batteryMinusPop} from "./animation/battery-minus-pop";
 import {batteryPlusPop} from "./animation/battery-plus-pop";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /** コンストラクタのパラメータ */
 type Param = {

@@ -7,7 +7,6 @@ import type {WingDozerView} from "./view/wing-dozer-view";
 import type {WingDozerModel} from "./model/wing-dozer-model";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {charge} from "./animation/charge";
 import {upper} from "./animation/upper";
 import {upperToStand} from "./animation/upper-to-stand";
@@ -23,6 +22,7 @@ import type {Resources} from "../../../resource";
 import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
 import type {PreRender} from "../../../game-loop/pre-render";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * ウィングドーザ

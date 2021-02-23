@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerGaiView} from "./view/player-gai-view";
 import {EnemyGaiView} from "./view/enemy-gai-view";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー側 ガイ カットイン

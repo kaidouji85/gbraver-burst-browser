@@ -2,10 +2,10 @@
 
 import {RecoverBattery} from "./recover-battery";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Resources} from "../../resource";
 import {PlayerRecoverBatteryView} from "./view/player-recover-battery-view";
 import {EnemyRecoverBatteryView} from "./view/enemy-recover-battery-view";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * プレイヤー側 バッテリー回復

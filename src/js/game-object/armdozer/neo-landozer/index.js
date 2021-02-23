@@ -5,7 +5,7 @@ import {NeoLandozer} from './neo-landozer';
 import {PlayerNeoLandozerView} from "./view/player-neo-landozer-view";
 import {EnemyNeoLandozerView} from "./view/enemy-neo-landozer-view";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー側ネオランドーザ

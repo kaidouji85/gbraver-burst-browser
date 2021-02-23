@@ -5,9 +5,9 @@ import type {IlluminationModel} from "./model/illumination-model";
 import {IlluminationView} from "./view/illumination-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {Animate} from "../../animation/animate";
 import {intensity} from "./animation/intensity";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * ステージ全体の照明

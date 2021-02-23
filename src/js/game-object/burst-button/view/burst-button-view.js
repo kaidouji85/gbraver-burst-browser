@@ -9,11 +9,11 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {ButtonOverlap} from "../../../overlap/button/button-overlap";
 import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import type {ArmdozerIcon} from "./armdozer-icon";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {createArmdozerIcon} from "./create-armdozer-icon";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;

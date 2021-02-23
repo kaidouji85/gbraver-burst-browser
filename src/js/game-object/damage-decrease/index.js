@@ -2,10 +2,10 @@
 
 import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {PlayerDamageDecreaseView} from "./view/player-damage-decrease-view";
 import {EnemyDamageDecreaseView} from "./view/enemy-damage-decrease-view";
 import {DamageDecrease} from "./damage-decrease";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * プレイヤー ダメージ減少 ポップアップ

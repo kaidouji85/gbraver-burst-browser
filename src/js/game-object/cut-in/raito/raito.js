@@ -5,7 +5,6 @@ import type {RaitoModel} from "./model/raito-model";
 import {RaitoView} from "./view/raito-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
@@ -13,6 +12,7 @@ import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import {RaitoSounds} from "./sounds/raito-sounds";
 import type {Resources} from "../../../resource";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * ライト カットイン

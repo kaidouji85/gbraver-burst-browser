@@ -2,10 +2,10 @@
 
 import type {Resources} from "../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {ShinBraverCutIn} from "./shin-braver-cutin";
 import {PlayerShinBraverCutInView} from "./view/player-shin-braver-cutin-view";
 import {EnemyShinBraverCutInView} from "./view/enemy-shin-braver-cutin-view";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー側 シンブレイバー カットイン

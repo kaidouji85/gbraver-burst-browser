@@ -5,12 +5,12 @@ import type {WingDozerCutInModel} from "./model/wing-dozer-cutin-model";
 import type {WingDozerCutInView} from "./view/wing-dozer-cutin-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {PreRender} from "../../../game-loop/pre-render";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * ウィングドーザ カットイン

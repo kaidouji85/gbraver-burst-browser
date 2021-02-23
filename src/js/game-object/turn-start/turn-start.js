@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import type {TurnStartView} from "./view/turn-start-view";
 import type {TurnStartModel} from "./model/turn-start-model";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
@@ -13,6 +12,7 @@ import {show} from './animation/show';
 import {hidden} from './animation/hidden';
 import {TurnStartSounds} from "./sounds/turn-start-sounds";
 import type {Resources} from "../../resource";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * ターンスタート

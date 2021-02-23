@@ -5,7 +5,7 @@ import type {Resources} from "../../resource";
 import {PlayerGaugeView} from "./view/player-gauge-view";
 import {EnemyGaugeView} from "./view/enemy-gauge-view";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
+import type {GameObjectAction} from "../action/game-object-action";
 
 type Param = {
   resources: Resources,
