@@ -63,7 +63,6 @@ export class BattleScene implements Scene {
     this._view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
-      rendererDOM: param.renderer.getRendererDOM(),
       playerId: param.initialState.playerId,
       players: param.initialState.players,
       listener: {
