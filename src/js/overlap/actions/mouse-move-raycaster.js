@@ -1,6 +1,6 @@
 // @flow
-import type {MouseRaycaster} from "../../raycaster/mouse/mouse-raycaster";
-import {createMouseRaycaster} from "../../raycaster/mouse/mouse-raycaster";
+import type {MouseRaycaster} from "../../raycaster/mouse-raycaster";
+import {createMouseRaycaster} from "../../raycaster/mouse-raycaster";
 import type {MouseMove} from "../../render/dom-events/mouse";
 import * as THREE from "three";
 import {isMouseLeftButtonPushed} from "../../mouse/mouse-left-button";

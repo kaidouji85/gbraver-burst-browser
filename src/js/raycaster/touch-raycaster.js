@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
-import {createRaycaster} from "../raycaster-creator";
-import {getTouchPosition} from "./touch-position";
+import {createRaycaster} from "./raycaster";
+import {getScreenPosition} from "./screen-position";
 
 /** タッチのレイキャストを集めたもの */
 export type TouchRaycastContainer = {
@@ -46,4 +46,14 @@ export function createTouchEventRaycaster(event: TouchEvent, rendererDOM: HTMLEl
     targetTouches: touchToRaycaster(event.targetTouches),
     touches: touchToRaycaster(event.touches),
   };
+}
+
+/**
+ * ゲーム画面上でのタッチ座標を取得する
+ *
+ * @param touch タッチ情報
+ * @param rendererDOM レンダラがバインドされているHTML要素
+ */
+export function getTouchPosition(touch: Touch, rendererDOM: HTMLElement): typeof THREE.Vector2 {
+  return getScreenPosition(touch.clientX, touch.clientY, rendererDOM.clientWidth, rendererDOM.clientHeight);
 }
