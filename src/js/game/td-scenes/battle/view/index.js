@@ -8,7 +8,6 @@ import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../game-loop/game-loop";
 import {Observable, Subject} from "rxjs";
 import type {BattleSceneAction} from "../actions";
-import type {Render} from "../../../../game-loop/render";
 import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Resize} from "../../../../window/resize";
@@ -36,7 +35,6 @@ type Param = {
 
 /** 戦闘シーンビューのイベント通知 */
 type Notifier = {
-  render: Observable<Render>,
   battleAction: Observable<BattleSceneAction>,
 };
 
@@ -49,7 +47,6 @@ export class BattleSceneView {
   _playerId: PlayerId;
   _safeAreaInset: SafeAreaInset;
   _renderer: OwnRenderer;
-  _rendering: Subject<Render>;
   _updateTD: Subject<Update>;
   _preRenderTD: Subject<PreRender>;
   _updateHUD: Subject<Update>;
@@ -59,7 +56,6 @@ export class BattleSceneView {
     this._playerId = param.playerId;
     this._safeAreaInset = createSafeAreaInset();
     this._renderer = param.renderer;
-    this._rendering = new Subject();
     this._updateTD = new Subject();
     this._preRenderTD = new Subject();
     this._updateHUD = new Subject();
@@ -110,7 +106,6 @@ export class BattleSceneView {
    */
   notifier(): Notifier {
     return {
-      render: this._rendering,
       battleAction: this.hud.notifier().battleAction,
     };
   }

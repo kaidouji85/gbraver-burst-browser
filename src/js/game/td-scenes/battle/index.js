@@ -9,7 +9,6 @@ import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
-import type {Render} from "../../../game-loop/render";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
 import type {Scene} from "../scene";
@@ -38,7 +37,6 @@ type Param = {
 
 /** 戦闘シーンのイベント通知 */
 type Notifier = {
-  render: Observable<Render>,
   endBattle: Observable<GameEnd>
 };
 
@@ -101,7 +99,6 @@ export class BattleScene implements Scene {
    */
   notifier(): Notifier {
     return {
-      render: this._view.notifier().render,
       endBattle: this._endBattle
     };
   }
