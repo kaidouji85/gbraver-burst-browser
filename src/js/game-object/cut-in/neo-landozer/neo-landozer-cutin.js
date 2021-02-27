@@ -3,14 +3,14 @@
 import * as THREE from "three";
 import type {NeoLandozerCutInView} from "./view/neo-landozer-cutin-view";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import type {NeoLandozerCutInModel} from "./model/neo-landozer-cutin-model";
 import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * ネオランドーザ カットイン

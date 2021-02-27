@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
-import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../../game-loop/pre-render";
 
 /**
  * ネオランドーザ ビュー

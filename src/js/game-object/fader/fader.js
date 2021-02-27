@@ -3,14 +3,14 @@
 import * as THREE from 'three';
 import {FaderView} from "./view/fader-view";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
-import type {PreRender} from "../../action/game-loop/pre-render";
+import type {PreRender} from "../../game-loop/pre-render";
 import type {FaderModel} from "./model/fader-model";
 import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
 import {fadeIn} from "./animation/fade-in";
 import {fadeOut} from "./animation/fade-out";
 import {opacity} from "./animation/opacity";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /** コンストラクタのパラメータ */
 type Param = {

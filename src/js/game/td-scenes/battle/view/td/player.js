@@ -7,7 +7,6 @@ import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 import type {Resources} from "../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
@@ -23,6 +22,7 @@ import {ReflectIndicator} from "../../../../../game-object/reflect-indicator/ref
 import {PowerUp} from "../../../../../game-object/power-up/power-up";
 import {DamageDecrease} from "../../../../../game-object/damage-decrease/damage-decrease";
 import {enemyDamageDecrease, playerDamageDecrease} from "../../../../../game-object/damage-decrease";
+import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド

@@ -11,7 +11,7 @@ import type {SoundResource} from "./sound";
 import {loadingAllSounds} from "./sound";
 import type {ResourceRoot} from "./root/resource-root";
 import {Observable, Subject} from "rxjs";
-import type {LoadingAction} from "../action/loading/loading";
+import type {LoadingActions} from "./actions/loading-actions";
 import type {Path} from "./path";
 import {getAllPaths} from "./path";
 
@@ -49,7 +49,7 @@ export class ResourceLoader {
   _pathLoading: Array<Promise<Response>>;
   _allLoadingCounts: number;
   _completedLoadingCounts: number;
-  _loading: Subject<LoadingAction>;
+  _loading: Subject<LoadingActions>;
 
   /**
    * コンストラクタ
@@ -120,7 +120,7 @@ export class ResourceLoader {
    *
    * @return 読み込み進捗率ストリーム
    */
-  progress(): Observable<LoadingAction> {
+  progress(): Observable<LoadingActions> {
     return this._loading;
   }
 }

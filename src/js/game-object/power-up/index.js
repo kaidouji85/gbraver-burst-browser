@@ -2,10 +2,10 @@
 
 import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {PlayerPowerUpView} from "./view/player-power-up-view";
 import {EnemyPowerUpView} from "./view/enemy-power-up-view";
 import {PowerUp} from "./power-up";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * プレイヤー 攻撃アップ ポップアップ

@@ -4,30 +4,28 @@ import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
-import type {Update} from "../../../../../action/game-loop/update";
-import type {PreRender} from "../../../../../action/game-loop/pre-render";
+import type {Update} from "../../../../../game-loop/update";
+import type {PreRender} from "../../../../../game-loop/pre-render";
 import {TDCamera} from "../../../../../game-object/camera/td";
-import type {TdDOMEvent} from "../../../../../action/td-dom";
 import type {TDPlayer} from "./player";
 import {enemyTDObject, playerTDObjects} from "./player";
 import {TDGameObjects} from "./game-objects";
-import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
-import type {OverlapAction} from "../../../../../action/overlap";
-import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
-import type {Resize} from "../../../../../action/resize/resize";
+import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
+import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
+import type {Resize} from "../../../../../window/resize";
 import {skyBox} from "./sky-box";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
+import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import type {OverlapNotifier} from "../../../../../render/overla-notifier";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
+  renderer: OverlapNotifier,
   playerId: PlayerId,
   players: Player[],
-  rendererDOM: HTMLElement,
   listener: {
-    domEvent: Observable<TdDOMEvent>,
     resize: Observable<Resize>,
     update: Observable<Update>,
     preRender: Observable<PreRender>,
@@ -41,7 +39,7 @@ export class ThreeDimensionLayer {
   players: TDPlayer[];
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
-  _overlap: Observable<OverlapAction>;
+  _overlap: Observable<OverlapEvent>;
   _gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {
@@ -53,7 +51,7 @@ export class ThreeDimensionLayer {
 
     this.camera = new TDCamera(param.listener.update, param.listener.resize);
 
-    this._overlap = toOverlapStream(param.listener.domEvent, param.rendererDOM, this.camera.getCamera());
+    this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
     this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
 
     this.players = [

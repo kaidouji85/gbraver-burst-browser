@@ -3,12 +3,12 @@
 import * as THREE from 'three';
 import type {ReflectIndicatorView} from "./view/reflect-indicator-view";
 import type {ReflectIndocatorModel} from "./model/reflect-indocator-model";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../action/game-loop/pre-render";
+import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * ダメージ反射

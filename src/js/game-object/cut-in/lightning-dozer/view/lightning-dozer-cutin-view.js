@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
-import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../../game-loop/pre-render";
 
 /**
  * ライトニングドーザ カットイン

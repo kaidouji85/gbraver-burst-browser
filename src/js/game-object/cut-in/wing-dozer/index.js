@@ -3,9 +3,9 @@
 import {WingDozerCutIn} from "./wing-dozer-cutin";
 import type {Resources} from "../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {PlayerWingDozerCutInView} from "./view/player-wing-dozer-cutin-view";
 import {EnemyWingDozerCutInView} from "./view/enemy-wing-dozer-cutin-view";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * プレイヤー側 ウィングドーザ カットイン

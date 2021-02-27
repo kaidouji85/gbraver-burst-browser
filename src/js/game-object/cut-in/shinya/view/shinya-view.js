@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {ShinyaModel} from "../model/shinya-model";
-import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../../game-loop/pre-render";
 
 /**
  * シンヤ ビュー

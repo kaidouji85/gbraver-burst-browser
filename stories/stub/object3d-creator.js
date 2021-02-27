@@ -2,8 +2,8 @@
 
 import type {Resources} from "../../src/js/resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../src/js/action/game-object-action";
 import * as THREE from "three";
+import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 
 /**
  * Object3D生成コールバック関数

@@ -4,13 +4,13 @@ import type {Player} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {enemyShinBraverHUD, playerShinBraverHUD} from "./shin-braver";
 import {EmptyHUDArmdozer} from "./empty";
 import {enemyNeoLandozerHUD, playerNeoLandozerHUD} from "./neo-landozer";
 import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer";
 import {enemyWingDozerHUD, playerWingDozerHUD} from "./wing-dozer";
 import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 
 /**
  * プレイヤー側 HUDアームドーザ

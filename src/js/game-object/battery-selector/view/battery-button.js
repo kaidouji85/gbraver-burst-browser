@@ -5,13 +5,13 @@ import * as R from 'ramda';
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {ButtonOverlap} from "../../../overlap/button/button-overlap";
+import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
-import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
+import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import type {BatterySelectorModel} from "../model";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import {drawNumberRight} from "../../../canvas/number/number";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 512;

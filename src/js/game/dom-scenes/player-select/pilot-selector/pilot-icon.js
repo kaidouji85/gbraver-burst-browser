@@ -2,8 +2,8 @@
 
 import {Observable} from "rxjs";
 import type {Resources} from "../../../../resource";
-import type {PushDOM} from "../../../../action/push/push-dom";
-import {pushDOMStream} from "../../../../action/push/push-dom";
+import type {PushDOM} from "../../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {pop} from "../../../../dom/animation/pop";
 import {PathIds} from "../../../../resource/path";

@@ -3,33 +3,31 @@ import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {Observable} from "rxjs";
-import type {TdDOMEvent} from "../../../../../action/td-dom";
-import {toOverlapStream} from "../../../../../action/overlap/overlap-stream";
 import type {BattleSceneAction} from "../../actions";
-import type {Update} from "../../../../../action/game-loop/update";
-import type {PreRender} from "../../../../../action/game-loop/pre-render";
+import type {Update} from "../../../../../game-loop/update";
+import type {PreRender} from "../../../../../game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import {HUDGameObjects} from "./game-objects";
-import type {OverlapAction} from "../../../../../action/overlap";
-import {gameObjectStream} from "../../../../../action/game-object-action/game-object-stream";
-import type {Resize} from "../../../../../action/resize/resize";
+import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
+import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
+import type {Resize} from "../../../../../window/resize";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
 import {enemyHUDPilotObjects, playerHUDPilotObjects} from "./pilot-objects";
 import type {HUDPilotObjects} from "./pilot-objects/hud-pilot-objects";
 import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
+import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import type {OverlapNotifier} from "../../../../../render/overla-notifier";
 
 /** コンストラクタのパラメータ */
 export type Param = {
   resources: Resources,
-  rendererDOM: HTMLElement,
+  renderer: OverlapNotifier,
   playerId: PlayerId,
   players: Player[],
   listener: {
     update: Observable<Update>,
     preRender: Observable<PreRender>,
-    domEvent: Observable<TdDOMEvent>,
     resize: Observable<Resize>,
   }
 };
@@ -49,14 +47,14 @@ export class HudLayer {
   armdozers: HUDArmdozerObjects[];
   pilots: HUDPilotObjects[];
   gameObjects: HUDGameObjects;
-  _overlap: Observable<OverlapAction>;
+  _overlap: Observable<OverlapEvent>;
   _gameObjectAction: Observable<GameObjectAction>;
 
   constructor(param: Param) {
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera(param.listener.resize);
 
-    this._overlap = toOverlapStream(param.listener.domEvent, param.rendererDOM, this.camera.getCamera());
+    this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
     this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
 
     const player = param.players.find(v => v.playerId === param.playerId)

@@ -3,13 +3,13 @@
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../../../../action/game-object-action";
 import {LightningBarrierGameEffect} from "../../../../../../game-object/barrier/lightning/lightning-barrier";
 import * as THREE from "three";
 import type {TDArmdozerObjects} from "./armdozer-objects";
 import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト フィールド

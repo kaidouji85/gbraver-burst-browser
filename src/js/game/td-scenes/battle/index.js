@@ -3,30 +3,33 @@
 import type {Resources} from '../../../resource';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
-import type {GameLoop} from "../../../action/game-loop/game-loop";
+import type {GameLoop} from "../../../game-loop/game-loop";
 import {Observable, Subject, Subscription} from "rxjs";
-import type {TdDOMEvent} from "../../../action/td-dom";
 import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
-import type {Render} from "../../../action/game-loop/render";
 import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
 import type {Scene} from "../scene";
-import type {Resize} from "../../../action/resize/resize";
+import type {Resize} from "../../../window/resize";
 import {all} from "../../../animation/all";
 import {BattleSceneSounds} from "./sounds";
 import {Exclusive} from "../../../exclusive/exclusive";
+import type {OverlapNotifier} from "../../../render/overla-notifier";
+import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
+import type {Rendering} from "../../../render/rendering";
+
+/** 戦闘シーンで利用するレンダラ */
+interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  rendererDOM: HTMLElement,
+  renderer: OwnRenderer,
   battleProgress: BattleProgress,
   initialState: InitialState,
   listener: {
-    domEvent: Observable<TdDOMEvent>,
     gameLoop: Observable<GameLoop>,
     resize: Observable<Resize>
   }
@@ -34,7 +37,6 @@ type Param = {
 
 /** 戦闘シーンのイベント通知 */
 type Notifier = {
-  render: Observable<Render>,
   endBattle: Observable<GameEnd>
 };
 
@@ -59,12 +61,11 @@ export class BattleScene implements Scene {
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,
-      rendererDOM: param.rendererDOM,
+      renderer: param.renderer,
       playerId: param.initialState.playerId,
       players: param.initialState.players,
       listener: {
         gameLoop: param.listener.gameLoop,
-        domEvent: param.listener.domEvent,
         resize: param.listener.resize,
       }
     });
@@ -98,7 +99,6 @@ export class BattleScene implements Scene {
    */
   notifier(): Notifier {
     return {
-      render: this._view.notifier().render,
       endBattle: this._endBattle
     };
   }

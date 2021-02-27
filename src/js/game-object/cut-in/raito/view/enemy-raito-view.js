@@ -3,7 +3,7 @@
 import {PlayerRaitoView} from "./player-raito-view";
 import type {Resources} from "../../../../resource";
 import type {RaitoModel} from "../model/raito-model";
-import type {PreRender} from "../../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../../game-loop/pre-render";
 
 /**
  * 敵側 ライト ビュー

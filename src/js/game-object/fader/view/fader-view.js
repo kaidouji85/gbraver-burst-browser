@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
-import {FADE_RENDER_ORDER} from "../../../render/hud-render-order";
+import {FADE_RENDER_ORDER} from "../../../render/render-order/hud-render-order";
 import type {FaderModel} from "../model/fader-model";
 
 export const MESH_WIDTH = 1;

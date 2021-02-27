@@ -2,8 +2,8 @@
 
 import {Fader} from "./fader";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {HUD_FROMTMOST_FADER_ZINDEX, HUD_REARMOST_FADER_ZINDEX} from "../../zindex/hud-zindex";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /** 画面フェーダ生成のパラメータ */
 type Param = {

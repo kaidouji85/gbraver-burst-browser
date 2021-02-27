@@ -2,10 +2,10 @@
 
 import type {Resources} from "../../resource";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../action/game-object-action";
 import {PlayerTurnStartView} from "./view/player-turn-start-view";
 import {EnemyTurnStartView} from "./view/enemy-turn-start-view";
 import {TurnStart} from "./turn-start";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /**
  * プレイヤーターン スタート

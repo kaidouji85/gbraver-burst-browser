@@ -5,9 +5,8 @@ import TWEEN from '@tweenjs/tween.js';
 import type {LightningBarrierModel} from "./model/lightning-barrier-model";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
-import type {Update} from "../../../action/game-loop/update";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {Update} from "../../../game-loop/update";
+import type {PreRender} from "../../../game-loop/pre-render";
 import {filter, first, map} from "rxjs/operators";
 import {electrification} from "./animation/electrification";
 import {LightningBarrierView} from "./view/lightning-barrier-view";
@@ -16,6 +15,7 @@ import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import {LightningBarrierSounds} from "./sounds/lightning-barrier-sounds";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * 電撃バリア

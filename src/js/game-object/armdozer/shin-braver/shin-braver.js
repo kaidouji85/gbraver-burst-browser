@@ -4,10 +4,9 @@ import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {ShinBraverView} from "./view/shin-braver-view";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import type {ShinBraverModel} from "./model/shin-braver-model";
 import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {straightPunch} from "./animation/straight-punch";
 import {knockBack} from "./animation/knock-back";
@@ -25,6 +24,7 @@ import {burst} from "./animation/burst";
 import {burstToStand} from "./animation/burst-to-stand";
 import type {Resources} from "../../../resource";
 import {ShinBraverSounds} from "./sounds/shin-braver-sounds";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {

@@ -4,12 +4,12 @@ import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import * as THREE from "three";
-import {ButtonOverlap} from "../../../overlap/button/button-overlap";
-import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
+import {ButtonOverlap} from "../../button-overlap/button-overlap";
+import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import {Observable} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import type {BatterySelectorModel} from "../model";
 import {canBatteryMinus} from "../model/can-battery-minus";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** メッシュサイズ */
 const MESH_SIZE = 256;

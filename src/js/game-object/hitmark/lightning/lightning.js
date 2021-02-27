@@ -5,11 +5,11 @@ import type {LightningModel} from "./model/lightning-model";
 import type {LightningView} from "./view/lightning-view";
 import {createInitialValue} from "./model/initial-value";
 import {Observable, Subscription} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import {Animate} from "../../../animation/animate";
 import {popUp} from "./animation/pop-up";
 import {LightningSounds} from "./sounds/lightning-sounds";
 import type {Resources} from "../../../resource";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /**
  * 電撃ヒットマーク

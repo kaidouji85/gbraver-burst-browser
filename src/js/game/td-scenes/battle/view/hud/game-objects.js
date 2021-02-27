@@ -4,7 +4,6 @@ import {BatterySelector} from "../../../../../game-object/battery-selector";
 import {BurstButton} from "../../../../../game-object/burst-button/burst-button";
 import type {Resources} from "../../../../../resource";
 import {Observable, Subscription} from "rxjs/index";
-import type {GameObjectAction} from "../../../../../action/game-object-action";
 import type {BattleSceneAction} from "../../actions";
 import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
@@ -12,6 +11,7 @@ import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
 import {PilotButton} from "../../../../../game-object/pilot-button";
+import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 
 /** イベント通知 */
 type Notifier = {

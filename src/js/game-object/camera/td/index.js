@@ -1,12 +1,12 @@
 // @flow
 
 import * as THREE from "three";
-import type {Resize} from "../../../action/resize/resize";
+import type {Resize} from "../../../window/resize";
 import {onResizePerspectiveCamera} from "../../../camera/resize";
 import {Observable, Subscription} from "rxjs";
 import type {Battle3DCameraModel} from "./model/model";
 import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../../action/game-loop/update";
+import type {Update} from "../../../game-loop/update";
 import {engage} from "./engauge";
 import {Animate} from "../../../animation/animate";
 import type {Position} from './animation/position';

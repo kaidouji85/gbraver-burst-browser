@@ -5,15 +5,15 @@ import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {PilotButtonModel} from "../model/pilot-button-model";
-import type {PreRender} from "../../../action/game-loop/pre-render";
+import type {PreRender} from "../../../game-loop/pre-render";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
-import {ButtonOverlap} from "../../../overlap/button/button-overlap";
-import {circleButtonOverlap} from "../../../overlap/button/circle-button-overlap";
+import {ButtonOverlap} from "../../button-overlap/button-overlap";
+import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import {Observable, Subject} from "rxjs";
-import type {GameObjectAction} from "../../../action/game-object-action";
 import type {PilotIcon} from "./pilot-icon";
 import type {PilotId} from "gbraver-burst-core";
 import {createPilotIcon} from "./pilot-id-to-icon";
+import type {GameObjectAction} from "../../action/game-object-action";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;

@@ -1,6 +1,6 @@
 // @flow
 
-import type {LoadingAction, LoadingProgress} from "../../../action/loading/loading";
+import type {LoadingActions, LoadingProgress} from "../../../resource/actions/loading-actions";
 import {Observable, Subscription} from "rxjs";
 import {LoadingPresentation} from "./presentation";
 import type {DOMScene} from "../dom-scene";
@@ -18,7 +18,7 @@ export class Loading implements DOMScene {
    *
    * @param loading ローディングストリーム
    */
-  constructor(loading: Observable<LoadingAction>) {
+  constructor(loading: Observable<LoadingActions>) {
     this._completedRate = 0;
     this._presentation = new LoadingPresentation();
     this._subscription = loading.subscribe(action => {
