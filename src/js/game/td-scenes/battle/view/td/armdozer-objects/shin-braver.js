@@ -4,11 +4,11 @@ import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shi
 import type {TDArmdozerObjects} from "./armdozer-objects";
 import type {PlayerId, Player} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import * as THREE from "three";
 import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../../stream/core";
 
 /**
  * 3Dレイヤー シンブレイバー 3Dレイヤー フィールド
@@ -72,7 +72,7 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerShinBraverTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): ShinBraverTD {
+export function playerShinBraverTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
     shinBraver: PlayerShinBraver(resources, listener)
   });
@@ -86,7 +86,7 @@ export function playerShinBraverTD(resources: Resources, listener: Observable<Ga
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyShinBraverTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): ShinBraverTD {
+export function enemyShinBraverTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
     shinBraver: EnemyShinBraver(resources, listener)
   });
