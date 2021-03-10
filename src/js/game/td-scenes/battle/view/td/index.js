@@ -18,6 +18,7 @@ import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
+import {toStream} from "../../../../../stream/rxjs";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -65,8 +66,8 @@ export class ThreeDimensionLayer {
       });
 
     this.armdozerObjects = param.players.map(v => v.playerId === param.playerId
-      ? playerTDArmdozer(param.resources, this._gameObjectAction, v)
-      : enemyTDArmdozer(param.resources, this._gameObjectAction, v)
+      ? playerTDArmdozer(param.resources, toStream(this._gameObjectAction), v)
+      : enemyTDArmdozer(param.resources, toStream(this._gameObjectAction), v)
     );
     this.armdozerObjects.map(v => v.getObject3Ds())
       .flat()
