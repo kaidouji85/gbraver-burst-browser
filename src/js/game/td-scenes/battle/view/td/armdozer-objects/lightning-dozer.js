@@ -2,7 +2,6 @@
 
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import {LightningBarrierGameEffect} from "../../../../../../game-object/barrier/lightning/lightning-barrier";
 import * as THREE from "three";
 import type {TDArmdozerObjects} from "./armdozer-objects";
