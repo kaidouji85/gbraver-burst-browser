@@ -143,7 +143,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     armdozerEffects: {
       powerUp: playerPowerUp(resources, listener),
       reflect: playerReflectIndicator(resources, listener),
-      continuousAttack: playerContinuousAttack(resources, listener),
+      continuousAttack: playerContinuousAttack(resources, toStream(listener)),
       damageDecrease: playerDamageDecrease(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
@@ -176,7 +176,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     armdozerEffects: {
       powerUp: enemyPowerUp(resources, listener),
       reflect: enemyReflectIndicator(resources, listener),
-      continuousAttack: enemyContinuousAttack(resources, listener),
+      continuousAttack: enemyContinuousAttack(resources, toStream(listener)),
       damageDecrease: enemyDamageDecrease(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
