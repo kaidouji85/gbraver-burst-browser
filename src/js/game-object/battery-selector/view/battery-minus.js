@@ -6,10 +6,10 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import * as THREE from "three";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
-import {Observable} from "rxjs";
 import type {BatterySelectorModel} from "../model";
 import {canBatteryMinus} from "../model/can-battery-minus";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream} from "../../../stream/core";
 
 /** メッシュサイズ */
 const MESH_SIZE = 256;
@@ -17,7 +17,7 @@ const MESH_SIZE = 256;
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   onPush: () => void
 };
 

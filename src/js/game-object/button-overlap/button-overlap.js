@@ -3,14 +3,14 @@
 import * as THREE from 'three';
 import type {MouseDownRaycaster} from "../../render/overlap-event/mouse-down-raycaster";
 import type {TouchStartRaycaster} from "../../render/overlap-event/touch-start-raycaster";
-import {Observable, Subscription} from "rxjs";
 import {isMeshOverlap} from "../../overlap/mesh-overlap";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, UnSubscriber} from "../../stream/core";
 
 /** パラメータ */
 type Param = {
   geometry: typeof THREE.Geometry,
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   onButtonPush: () => void
 };
 
@@ -18,7 +18,7 @@ type Param = {
 export class ButtonOverlap {
   _mesh: typeof THREE.Mesh;
   _onButtonPush: () => void;
-  _subscription: Subscription;
+  _unSubscriber: UnSubscriber;
 
   constructor(param: Param) {
     const material = new THREE.MeshBasicMaterial({
@@ -27,7 +27,7 @@ export class ButtonOverlap {
     });
     this._mesh = new THREE.Mesh(param.geometry, material);
 
-    this._subscription = param.listener.subscribe(action => {
+    this._unSubscriber = param.listener.subscribe(action => {
       switch (action.type) {
         case 'mouseDownRaycaster':
           this._mouseDownRaycaster(action);
@@ -47,7 +47,7 @@ export class ButtonOverlap {
   destructor(): void {
     this._mesh.geometry.dispose();
     this._mesh.material.dispose();
-    this._subscription.unsubscribe();
+    this._unSubscriber.unSubscribe();
   }
 
   /**

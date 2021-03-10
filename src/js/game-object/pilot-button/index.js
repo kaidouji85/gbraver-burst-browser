@@ -15,6 +15,7 @@ import {filter} from "rxjs/operators";
 import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
 import type {PilotId} from "gbraver-burst-core";
 import type {GameObjectAction} from "../action/game-object-action";
+import {toStream} from "../../stream/rxjs";
 
 /**
  * ,イベント通知ストリーム
@@ -43,7 +44,7 @@ export class PilotButton {
   constructor(resources: Resources, pilotId: PilotId, listener: Observable<GameObjectAction>) {
     this._model = createInitialValue();
     this._sounds = new PilotButtonSounds(resources);
-    this._view = new PilotButtonView(resources, pilotId, listener);
+    this._view = new PilotButtonView(resources, pilotId, toStream(listener));
 
     const viewNotifier = this._view.notifier();
     this._notifier = {

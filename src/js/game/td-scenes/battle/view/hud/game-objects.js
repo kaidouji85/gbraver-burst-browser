@@ -12,6 +12,7 @@ import {Fader} from "../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
 import {PilotButton} from "../../../../../game-object/pilot-button";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import {toStream} from "../../../../../stream/rxjs";
 
 /** イベント通知 */
 type Notifier = {
@@ -34,7 +35,7 @@ export class HUDGameObjects {
     this._battleSceneAction = new Subject();
 
     this.batterySelector = new BatterySelector({
-      listener: listener,
+      listener: toStream(listener),
       maxBattery: playerInfo.armdozer.maxBattery,
       resources: resources,
       onBatteryChange: (battery: number) => {

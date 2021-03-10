@@ -6,12 +6,12 @@ import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
-import {Observable} from "rxjs";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import type {BatterySelectorModel} from "../model";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import {drawNumberRight} from "../../../canvas/number/number";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream} from "../../../stream/core";
 
 /** メッシュサイズ */
 export const MESH_SIZE = 512;
@@ -28,7 +28,7 @@ type BatteryValue = {
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   onPush: () => void
 };
 
