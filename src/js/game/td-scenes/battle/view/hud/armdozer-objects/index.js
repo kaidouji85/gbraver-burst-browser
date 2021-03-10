@@ -11,6 +11,7 @@ import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer
 import {enemyWingDozerHUD, playerWingDozerHUD} from "./wing-dozer";
 import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import {toStream} from "../../../../../../stream/rxjs";
 
 /**
  * プレイヤー側 HUDアームドーザ
@@ -27,7 +28,7 @@ export function playerArmdozerHUD(resources: Resources, listener: Observable<Gam
     case ArmDozerIdList.NEO_LANDOZER:
       return playerNeoLandozerHUD(resources, listener, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
-      return playerLightningDozerHUD(resources, listener, state);
+      return playerLightningDozerHUD(resources, toStream(listener), state);
     case ArmDozerIdList.WING_DOZER:
       return playerWingDozerHUD(resources, listener, state);
     default:
@@ -50,7 +51,7 @@ export function enemyArmdozerHUD(resources: Resources, listener: Observable<Game
     case ArmDozerIdList.NEO_LANDOZER:
       return enemyNeoLandozerHUD(resources, listener, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
-      return enemyLightningDozerHUD(resources, listener, state);
+      return enemyLightningDozerHUD(resources, toStream(listener), state);
     case ArmDozerIdList.WING_DOZER:
       return enemyWingDozerHUD(resources, listener, state);
     default:

@@ -4,6 +4,7 @@ import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {enemyLightningiDozerCutIn, playerLightningDozerCutIn} from "../src/js/game-object/cut-in/lightning-dozer";
 import {delay} from "../src/js/animation/delay";
 import {LightningDozerCutIn} from "../src/js/game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
+import {toStream} from "../src/js";
 
 export default {
   title: 'lightning-dozer-cutin',
@@ -24,7 +25,7 @@ function loopAnimation(cutIn: LightningDozerCutIn): void {
 
 export const Player = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const cutIn = playerLightningDozerCutIn(resources, listener);
+    const cutIn = playerLightningDozerCutIn(resources, toStream(listener));
     loopAnimation(cutIn);
     return [cutIn.getObject3D()];
   });
@@ -34,7 +35,7 @@ export const Player = (): HTMLElement => {
 
 export const Enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const cutIn = enemyLightningiDozerCutIn(resources, listener);
+    const cutIn = enemyLightningiDozerCutIn(resources, toStream(listener));
     loopAnimation(cutIn);
     return [cutIn.getObject3D()];
   });
