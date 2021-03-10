@@ -27,7 +27,7 @@ export function playerTDArmdozer(resources: Resources, listener: Observable<Game
     case ArmDozerIdList.LIGHTNING_DOZER:
       return playerLightningDozerTD(resources, toStream(listener), state);
     case ArmDozerIdList.WING_DOZER:
-      return playerWingDozerTD(resources, listener, state);
+      return playerWingDozerTD(resources, toStream(listener), state);
     case ArmDozerIdList.NEO_LANDOZER:
       return playerNeoLandozerTD(resources, toStream(listener), state);
     default:
@@ -50,7 +50,7 @@ export function enemyTDArmdozer(resources: Resources, listener: Observable<GameO
     case ArmDozerIdList.LIGHTNING_DOZER:
       return enemyLightningDozerTD(resources, toStream(listener), state);
     case ArmDozerIdList.WING_DOZER:
-      return enemyWingDozerTD(resources, listener, state);
+      return enemyWingDozerTD(resources, toStream(listener), state);
     case ArmDozerIdList.NEO_LANDOZER:
       return enemyNeoLandozerTD(resources, toStream(listener), state);
     default:
