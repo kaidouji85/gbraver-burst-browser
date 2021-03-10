@@ -98,7 +98,7 @@ declare interface rxjs$EventListenerOptions {
   once?: boolean;
 }
 
-declare class rxjs$Observable<T> implements rxjs$Subscribable<T> {
+declare class rxjs$Observable<T> {
   // @internal
   _isScalar: boolean;
   // @deprecated  This is an internal implementation detail, do not use.
@@ -226,8 +226,7 @@ declare interface rxjs$Operator<T, R> {
   call(subscriber: rxjs$Subscriber<R>, source: any): rxjs$TeardownLogic;
 }
 
-declare class rxjs$Subscriber<T> extends rxjs$Subscription
-  implements rxjs$Observer<T> {
+declare class rxjs$Subscriber<T> extends rxjs$Subscription {
   static create<T>(
     next?: (x?: T) => void,
     error?: (e?: any) => void,
