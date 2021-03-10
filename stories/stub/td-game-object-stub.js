@@ -19,6 +19,7 @@ import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
+import {toStream} from "../../src/js";
 
 /**
  * 3Dレイヤー ゲームオブジェクト スタブ
@@ -59,7 +60,7 @@ export class TDGameObjectStub {
       resize: this._resize,
     });
     this._scene = new THREE.Scene();
-    this._camera = new TDCamera(this._update, this._resize);
+    this._camera = new TDCamera(toStream(this._update), toStream(this._resize));
 
     this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
     this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);

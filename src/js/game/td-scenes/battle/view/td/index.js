@@ -50,7 +50,7 @@ export class ThreeDimensionLayer {
     this.scene = new THREE.Scene();
     this.scene.background = skyBox(param.resources);
 
-    this.camera = new TDCamera(param.listener.update, param.listener.resize);
+    this.camera = new TDCamera(toStream(param.listener.update), toStream(param.listener.resize));
 
     this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
     this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
