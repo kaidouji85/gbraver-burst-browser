@@ -23,6 +23,7 @@ import {PowerUp} from "../../../../../game-object/power-up/power-up";
 import {DamageDecrease} from "../../../../../game-object/damage-decrease/damage-decrease";
 import {enemyDamageDecrease, playerDamageDecrease} from "../../../../../game-object/damage-decrease";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import {toStream} from "../../../../../stream/rxjs";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -147,7 +148,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
-      listener: listener
+      listener: toStream(listener)
     }),
     recoverBattery: playerRecoverBattery(resources, listener),
     damageIndicator: playerDamageIndicator({
@@ -180,7 +181,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,
-      listener: listener
+      listener: toStream(listener)
     }),
     recoverBattery: enemyRecoverBattery(resources, listener),
     damageIndicator: enemyDamageIndicator({
