@@ -1,7 +1,14 @@
 // @flow
 
 import {Observable} from "rxjs";
-import type {UnSubscriber} from "./un-subscriber";
+
+/**
+ * 購読停止オブジェクト
+ */
+export interface UnSubscriber {
+  /** ストリームの購読を停止する */
+  unSubscribe(): void;
+}
 
 /**
  * ストリーム
@@ -23,4 +30,3 @@ export interface Stream<T> {
    */
   getRxjsObservable(): typeof Observable;
 }
-

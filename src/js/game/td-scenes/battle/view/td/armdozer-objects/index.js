@@ -10,6 +10,7 @@ import {enemyShinBraverTD, playerShinBraverTD} from "./shin-braver";
 import {enemyWingDozerTD, playerWingDozerTD} from "./wing-dozer";
 import {enemyNeoLandozerTD, playerNeoLandozerTD} from "./neo-landozer";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import {toStream} from "../../../../../../stream/rxjs";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
@@ -22,7 +23,7 @@ import type {GameObjectAction} from "../../../../../../game-object/action/game-o
 export function playerTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return playerShinBraverTD(resources, listener, state);
+      return playerShinBraverTD(resources, toStream(listener), state);
     case ArmDozerIdList.LIGHTNING_DOZER:
       return playerLightningDozerTD(resources, listener, state);
     case ArmDozerIdList.WING_DOZER:
@@ -30,7 +31,7 @@ export function playerTDArmdozer(resources: Resources, listener: Observable<Game
     case ArmDozerIdList.NEO_LANDOZER:
       return playerNeoLandozerTD(resources, listener, state);
     default:
-      return playerShinBraverTD(resources, listener, state);
+      return playerShinBraverTD(resources, toStream(listener), state);
   }
 }
 
@@ -45,7 +46,7 @@ export function playerTDArmdozer(resources: Resources, listener: Observable<Game
 export function enemyTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return enemyShinBraverTD(resources, listener, state);
+      return enemyShinBraverTD(resources, toStream(listener), state);
     case ArmDozerIdList.LIGHTNING_DOZER:
       return enemyLightningDozerTD(resources, listener, state);
     case ArmDozerIdList.WING_DOZER:
@@ -53,6 +54,6 @@ export function enemyTDArmdozer(resources: Resources, listener: Observable<GameO
     case ArmDozerIdList.NEO_LANDOZER:
       return enemyNeoLandozerTD(resources, listener, state);
     default:
-      return enemyShinBraverTD(resources, listener, state);
+      return enemyShinBraverTD(resources, toStream(listener), state);
   }
 }
