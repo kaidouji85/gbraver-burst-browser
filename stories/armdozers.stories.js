@@ -20,7 +20,7 @@ export const shinBraver = (): HTMLElement => {
 
 export const neoLandozer = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = PlayerNeoLandozer(resources, listener);
+    const sprite = PlayerNeoLandozer(resources, toStream(listener));
     return [sprite.getObject3D()];
   });
   stub.start();

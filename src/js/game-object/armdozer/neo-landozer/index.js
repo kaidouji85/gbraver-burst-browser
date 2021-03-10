@@ -4,8 +4,8 @@ import type {Resources} from "../../../resource";
 import {NeoLandozer} from './neo-landozer';
 import {PlayerNeoLandozerView} from "./view/player-neo-landozer-view";
 import {EnemyNeoLandozerView} from "./view/enemy-neo-landozer-view";
-import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream} from "../../../stream/core";
 
 /**
  * プレイヤー側ネオランドーザ
@@ -14,7 +14,7 @@ import type {GameObjectAction} from "../../action/game-object-action";
  * @param listener イベントリスナ
  * @return ネオランドーザ
  */
-export function PlayerNeoLandozer(resources: Resources, listener: Observable<GameObjectAction>): NeoLandozer {
+export function PlayerNeoLandozer(resources: Resources, listener: Stream<GameObjectAction>): NeoLandozer {
   const view = new PlayerNeoLandozerView(resources);
   return new NeoLandozer(view, resources, listener);
 }
@@ -26,7 +26,7 @@ export function PlayerNeoLandozer(resources: Resources, listener: Observable<Gam
  * @param listener イベントリスナ
  * @return ネオランドーザ
  */
-export function EnemyNeoLandozer(resources: Resources, listener: Observable<GameObjectAction>): NeoLandozer {
+export function EnemyNeoLandozer(resources: Resources, listener: Stream<GameObjectAction>): NeoLandozer {
   const view = new EnemyNeoLandozerView(resources);
   return new NeoLandozer(view, resources, listener);
 }
