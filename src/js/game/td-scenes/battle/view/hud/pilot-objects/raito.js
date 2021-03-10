@@ -5,9 +5,9 @@ import type {Player, PlayerId} from "gbraver-burst-core";
 import {RaitoCutIn} from "../../../../../../game-object/cut-in/raito/raito";
 import * as THREE from "three";
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import {enemyRaitoCutIn, playerRaitoCutIn} from "../../../../../../game-object/cut-in/raito";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../../stream/core";
 
 /**
  * コンストラクタのパラメータ
@@ -61,7 +61,7 @@ export class RaitoHUD implements HUDPilotObjects {
  * @param state プレイヤーの状態
  * @return ライトHUD
  */
-export function playerRaitoHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): RaitoHUD {
+export function playerRaitoHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): RaitoHUD {
   return new RaitoHUD({
     playerId: state.playerId,
     cutIn: playerRaitoCutIn(resources, listener)
@@ -76,7 +76,7 @@ export function playerRaitoHUD(resources: Resources, listener: Observable<GameOb
  * @param state プレイヤーの状態
  * @return ライトHUD
  */
-export function enemyRaitoHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): RaitoHUD {
+export function enemyRaitoHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): RaitoHUD {
   return new RaitoHUD({
     playerId: state.playerId,
     cutIn: enemyRaitoCutIn(resources, listener)

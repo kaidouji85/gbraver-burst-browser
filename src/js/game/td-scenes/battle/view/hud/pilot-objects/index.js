@@ -26,7 +26,7 @@ export function playerHUDPilotObjects(resources: Resources, listener: Observable
     case PilotIds.GAI:
       return playerGaiHUD(resources, toStream(listener), state);
     case PilotIds.RAITO:
-      return playerRaitoHUD(resources, listener, state);
+      return playerRaitoHUD(resources, toStream(listener), state);
     default:
       return playerShinyaHUD(resources, listener, state);
   }
@@ -47,7 +47,7 @@ export function enemyHUDPilotObjects(resources: Resources, listener: Observable<
     case PilotIds.GAI:
       return enemyGaiHUD(resources, toStream(listener), state);
     case PilotIds.RAITO:
-      return enemyRaitoHUD(resources, listener, state);
+      return enemyRaitoHUD(resources, toStream(listener), state);
     default:
       return enemyShinyaHUD(resources, listener, state);
   }
