@@ -15,13 +15,13 @@ import {hidden} from "./animation/hidden";
 import {LightningBarrierSounds} from "./sounds/lightning-barrier-sounds";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, UnSubscriber} from "../../../stream/core";
+import {firstUpdate} from "../../action/first-update";
 
 /**
  * 電撃バリア
  */
 export class LightningBarrierGameEffect {
   _model: LightningBarrierModel;
-  _isUpdateCalled: boolean;
   _view: LightningBarrierView;
   _sounds: LightningBarrierSounds;
   _tweenGroup: typeof TWEEN.Group;
@@ -29,7 +29,6 @@ export class LightningBarrierGameEffect {
 
   constructor(resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
-    this._isUpdateCalled = false;
     this._view = new LightningBarrierView(resources);
     this._sounds = new LightningBarrierSounds(resources);
     this._tweenGroup = new TWEEN.Group();
@@ -42,11 +41,8 @@ export class LightningBarrierGameEffect {
         }
       }),
 
-      listener.subscribe(action => {
-        if (action.type === 'Update' && !this._isUpdateCalled) {
-          this._onFirstUpdate();
-          this._isUpdateCalled = true;
-        }
+      firstUpdate(listener).subscribe(() => {
+        this._onFirstUpdate();
       })
     ];
   }
