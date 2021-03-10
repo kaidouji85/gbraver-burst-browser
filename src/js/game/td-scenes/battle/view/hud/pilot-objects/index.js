@@ -9,6 +9,7 @@ import {enemyGaiHUD, playerGaiHUD} from "./gai";
 import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
 import {enemyRaitoHUD, playerRaitoHUD} from "./raito";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import {toStream} from "../../../../../../stream/rxjs";
 
 /**
  * プレイヤー側 HUDパイロット
@@ -23,7 +24,7 @@ export function playerHUDPilotObjects(resources: Resources, listener: Observable
     case PilotIds.SHINYA:
       return playerShinyaHUD(resources, listener, state);
     case PilotIds.GAI:
-      return playerGaiHUD(resources, listener, state);
+      return playerGaiHUD(resources, toStream(listener), state);
     case PilotIds.RAITO:
       return playerRaitoHUD(resources, listener, state);
     default:
@@ -44,7 +45,7 @@ export function enemyHUDPilotObjects(resources: Resources, listener: Observable<
     case PilotIds.SHINYA:
       return enemyShinyaHUD(resources, listener, state);
     case PilotIds.GAI:
-      return enemyGaiHUD(resources, listener, state);
+      return enemyGaiHUD(resources, toStream(listener), state);
     case PilotIds.RAITO:
       return enemyRaitoHUD(resources, listener, state);
     default:

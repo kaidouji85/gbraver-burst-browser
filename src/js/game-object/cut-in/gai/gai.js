@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import type {GaiModel} from "./model/gai-model";
 import {GaiView} from "./view/gai-view";
 import {createInitialValue} from "./model/initial-value";
-import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
@@ -13,6 +12,7 @@ import type {HUDTracking} from "../../../tracking/hud-tracking";
 import {GaiSounds} from "./sounds/gai-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, UnSubscriber} from "../../../stream/core";
 
 /**
  * ガイ カットイン
@@ -21,7 +21,7 @@ export class GaiCutIn implements HUDTracking {
   _model: GaiModel;
   _view: GaiView;
   _sounds: GaiSounds;
-  _subscription: Subscription;
+  _unSubscriber: UnSubscriber;
 
   /**
    * コンストラクタ
@@ -30,11 +30,11 @@ export class GaiCutIn implements HUDTracking {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: GaiView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: GaiView, resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new GaiSounds(resources);
-    this._subscription = listener.subscribe(action => {
+    this._unSubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -46,6 +46,7 @@ export class GaiCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
+    this._unSubscriber.unSubscribe();
   }
 
   /**

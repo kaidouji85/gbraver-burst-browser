@@ -1,13 +1,13 @@
 // @flow
 
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 import type {HUDPilotObjects} from "./hud-pilot-objects";
 import {GaiCutIn} from "../../../../../../game-object/cut-in/gai/gai";
 import {enemyGaiCutIn, playerGaiCutIn} from "../../../../../../game-object/cut-in/gai";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../../stream/core";
 
 /**
  * コンストラクタのパラメータ
@@ -61,7 +61,7 @@ export class GaiHUD implements HUDPilotObjects {
  * @param state プレイヤーの状態
  * @return ガイHUD
  */
-export function playerGaiHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): GaiHUD {
+export function playerGaiHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): GaiHUD {
   return new GaiHUD( {
     playerId: state.playerId,
     cutIn: playerGaiCutIn(resources, listener)
@@ -76,7 +76,7 @@ export function playerGaiHUD(resources: Resources, listener: Observable<GameObje
  * @param state プレイヤーの状態
  * @return ガイHUD
  */
-export function enemyGaiHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): GaiHUD {
+export function enemyGaiHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): GaiHUD {
   return new GaiHUD( {
     playerId: state.playerId,
     cutIn: enemyGaiCutIn(resources, listener)
