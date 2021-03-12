@@ -24,7 +24,7 @@ import {toStream} from "../../../../../../stream/rxjs";
 export function playerArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return playerShinBraverHUD(resources, listener, state);
+      return playerShinBraverHUD(resources, toStream(listener), state);
     case ArmDozerIdList.NEO_LANDOZER:
       return playerNeoLandozerHUD(resources, toStream(listener), state);
     case ArmDozerIdList.LIGHTNING_DOZER:
@@ -47,7 +47,7 @@ export function playerArmdozerHUD(resources: Resources, listener: Observable<Gam
 export function enemyArmdozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return enemyShinBraverHUD(resources, listener, state);
+      return enemyShinBraverHUD(resources, toStream(listener), state);
     case ArmDozerIdList.NEO_LANDOZER:
       return enemyNeoLandozerHUD(resources, toStream(listener), state);
     case ArmDozerIdList.LIGHTNING_DOZER:

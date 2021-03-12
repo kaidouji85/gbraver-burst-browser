@@ -4,13 +4,13 @@ import * as THREE from 'three';
 import type {ShinBraverCutInModel} from "./model/shin-braver-cutin-model";
 import type {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
 import {createInitialValue} from "./model/initial-value";
-import {Observable, Subscription} from "rxjs";
 import {Animate} from "../../../animation/animate";
 import {hidden} from "./animation/hidden";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {show} from "./animation/show";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, UnSubscriber} from "../../../stream/core";
 
 /**
  * シンブレイバーカットイン
@@ -18,12 +18,12 @@ import type {GameObjectAction} from "../../action/game-object-action";
 export class ShinBraverCutIn implements HUDTracking {
   _model: ShinBraverCutInModel;
   _view: ShinBraverCutInView;
-  _subscription: Subscription;
+  _unSubscriber: UnSubscriber;
 
-  constructor(view: ShinBraverCutInView, listener: Observable<GameObjectAction>) {
+  constructor(view: ShinBraverCutInView, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._subscription = listener.subscribe(action => {
+    this._unSubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -35,7 +35,7 @@ export class ShinBraverCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unSubscriber.unSubscribe();
   }
 
   /**
