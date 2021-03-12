@@ -31,7 +31,7 @@ export class ShinBraver implements ArmDozerSprite {
   _model: ShinBraverModel;
   _view: ShinBraverView;
   _sounds: ShinBraverSounds;
-  _unSubscription: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -44,7 +44,7 @@ export class ShinBraver implements ArmDozerSprite {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new ShinBraverSounds(resources);
-    this._unSubscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {
@@ -56,7 +56,7 @@ export class ShinBraver implements ArmDozerSprite {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._unSubscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

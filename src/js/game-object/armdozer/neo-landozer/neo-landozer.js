@@ -29,7 +29,7 @@ export class NeoLandozer implements ArmDozerSprite {
   _model: NeoLandozerModel;
   _view: NeoLandozerView;
   _sounds: NeoLandozerSounds;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -43,7 +43,7 @@ export class NeoLandozer implements ArmDozerSprite {
     this._view = view;
     this._sounds = new NeoLandozerSounds(resources);
 
-    this._unSubscriber = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {
@@ -55,7 +55,7 @@ export class NeoLandozer implements ArmDozerSprite {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

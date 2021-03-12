@@ -25,14 +25,14 @@ export class LightningBarrierGameEffect {
   _view: LightningBarrierView;
   _sounds: LightningBarrierSounds;
   _tweenGroup: typeof TWEEN.Group;
-  _unSubscribers: Unsubscriber[];
+  _unsubscribers: Unsubscriber[];
 
   constructor(resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = new LightningBarrierView(resources);
     this._sounds = new LightningBarrierSounds(resources);
     this._tweenGroup = new TWEEN.Group();
-    this._unSubscribers = [
+    this._unsubscribers = [
       listener.subscribe(action => {
         if (action.type === 'Update') {
           this._onUpdate(action);
@@ -52,7 +52,7 @@ export class LightningBarrierGameEffect {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscribers.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
     this._tweenGroup.removeAll();

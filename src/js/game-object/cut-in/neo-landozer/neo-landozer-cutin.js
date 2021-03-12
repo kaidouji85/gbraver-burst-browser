@@ -18,12 +18,12 @@ import type {Stream, Unsubscriber} from "../../../stream/core";
 export class NeoLandozerCutIn implements HUDTracking {
   _model: NeoLandozerCutInModel;
   _view: NeoLandozerCutInView;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
   
   constructor(view: NeoLandozerCutInView, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._unSubscriber = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -35,7 +35,7 @@ export class NeoLandozerCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

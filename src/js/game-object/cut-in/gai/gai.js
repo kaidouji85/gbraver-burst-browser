@@ -21,7 +21,7 @@ export class GaiCutIn implements HUDTracking {
   _model: GaiModel;
   _view: GaiView;
   _sounds: GaiSounds;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -34,7 +34,7 @@ export class GaiCutIn implements HUDTracking {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new GaiSounds(resources);
-    this._unSubscriber = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -46,7 +46,7 @@ export class GaiCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

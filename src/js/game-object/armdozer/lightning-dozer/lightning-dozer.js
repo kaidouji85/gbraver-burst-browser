@@ -31,14 +31,14 @@ export class LightningDozer implements ArmDozerSprite {
   _model: LightningDozerModel;
   _view: LightningDozerView;
   _sounds: LightningDozerSounds;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   constructor(resources: Resources, listener: Stream<GameObjectAction>, view: LightningDozerView) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new LightningDozerSounds(resources);
 
-    this._unSubscriber = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {
@@ -50,7 +50,7 @@ export class LightningDozer implements ArmDozerSprite {
   /** デストラクタ相当の処理 */
   destructor() {
     this._view.destructor();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

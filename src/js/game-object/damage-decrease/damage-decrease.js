@@ -19,7 +19,7 @@ export class DamageDecrease {
   _model: DamageDecreaseModel;
   _view: DamageDecreaseView;
   _sounds: DamageDecreaseSounds;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -32,7 +32,7 @@ export class DamageDecrease {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new DamageDecreaseSounds(resources);
-    this._unSubscriber = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {
@@ -44,7 +44,7 @@ export class DamageDecrease {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

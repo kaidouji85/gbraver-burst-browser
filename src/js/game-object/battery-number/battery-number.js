@@ -20,12 +20,12 @@ type Param = {
 export class BatteryNumber {
   _model: BatteryNumberModel;
   _view: BatteryNumberView;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._model = createInitialValue();
     this._view = param.view;
-    this._unSubscriber = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {
@@ -37,7 +37,7 @@ export class BatteryNumber {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

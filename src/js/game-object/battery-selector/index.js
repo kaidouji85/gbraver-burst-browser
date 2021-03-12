@@ -43,7 +43,7 @@ export class BatterySelector {
   _batteryChangeTween: typeof TWEEN.Group;
   _batteryMinusTween: typeof TWEEN.Group;
   _batteryPlusTween: typeof TWEEN.Group;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._model = initialValue();
@@ -61,7 +61,7 @@ export class BatterySelector {
       ? batteryChangeResource.sound
       : new Howl();
 
-    this._unSubscriber = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
@@ -103,7 +103,7 @@ export class BatterySelector {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

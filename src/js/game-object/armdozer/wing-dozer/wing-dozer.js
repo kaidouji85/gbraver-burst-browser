@@ -31,7 +31,7 @@ export class WingDozer implements ArmDozerSprite {
   _model: WingDozerModel;
   _view: WingDozerView;
   _sounds: WingDozerSounds;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -44,7 +44,7 @@ export class WingDozer implements ArmDozerSprite {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new WingDozerSounds(resources);
-    this._unSubscriber = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {
@@ -58,7 +58,7 @@ export class WingDozer implements ArmDozerSprite {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

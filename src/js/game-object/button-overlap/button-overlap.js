@@ -18,7 +18,7 @@ type Param = {
 export class ButtonOverlap {
   _mesh: typeof THREE.Mesh;
   _onButtonPush: () => void;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     const material = new THREE.MeshBasicMaterial({
@@ -27,7 +27,7 @@ export class ButtonOverlap {
     });
     this._mesh = new THREE.Mesh(param.geometry, material);
 
-    this._unSubscriber = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       switch (action.type) {
         case 'mouseDownRaycaster':
           this._mouseDownRaycaster(action);
@@ -47,7 +47,7 @@ export class ButtonOverlap {
   destructor(): void {
     this._mesh.geometry.dispose();
     this._mesh.material.dispose();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

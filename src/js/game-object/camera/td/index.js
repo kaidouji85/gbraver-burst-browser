@@ -19,14 +19,14 @@ import type {Stream, Unsubscriber} from "../../../stream/core";
 export class TDCamera {
   _model: Battle3DCameraModel;
   _camera: typeof THREE.PerspectiveCamera;
-  _unSubscribers: Unsubscriber[];
+  _unsubscribers: Unsubscriber[];
 
   constructor(update: Stream<Update>, resize: Stream<Resize>) {
     this._model = createInitialValue();
     const aspect = getViewPortWidth() / getViewPortHeight();
     this._camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
 
-    this._unSubscribers = [
+    this._unsubscribers = [
       update.subscribe(() => {
         this._update();
       }),
@@ -39,7 +39,7 @@ export class TDCamera {
 
   /** デストラクタ */
   destructor(): void {
-    this._unSubscribers.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     })
   }

@@ -13,20 +13,20 @@ import type {Stream, Unsubscriber} from "../../../stream/core";
  */
 export class PlainHUDCamera {
   _camera: typeof THREE.OrthographicCamera;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   constructor(resize: Stream<Resize>) {
     this._camera = createHUDCamera();
     this._camera.position.z = HUD_CAMERA_ZINDEX;
 
-    this._unSubscriber = resize.subscribe(action => {
+    this._unsubscriber = resize.subscribe(action => {
       this._resize(action);
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /** カメラを取得する */

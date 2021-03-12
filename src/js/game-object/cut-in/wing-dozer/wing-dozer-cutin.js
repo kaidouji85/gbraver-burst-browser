@@ -18,7 +18,7 @@ import type {Stream, Unsubscriber} from "../../../stream/core";
 export class WingDozerCutIn implements HUDTracking {
   _model: WingDozerCutInModel;
   _view: WingDozerCutInView;
-  _unSubscriber: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -29,7 +29,7 @@ export class WingDozerCutIn implements HUDTracking {
   constructor(view: WingDozerCutInView, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._unSubscriber = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -41,7 +41,7 @@ export class WingDozerCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**
