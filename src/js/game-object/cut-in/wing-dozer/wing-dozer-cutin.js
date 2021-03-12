@@ -4,13 +4,13 @@ import * as THREE from "three";
 import type {WingDozerCutInModel} from "./model/wing-dozer-cutin-model";
 import type {WingDozerCutInView} from "./view/wing-dozer-cutin-view";
 import {createInitialValue} from "./model/initial-value";
-import {Observable, Subscription} from "rxjs";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {PreRender} from "../../../game-loop/pre-render";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, UnSubscriber} from "../../../stream/core";
 
 /**
  * ウィングドーザ カットイン
@@ -18,7 +18,7 @@ import type {GameObjectAction} from "../../action/game-object-action";
 export class WingDozerCutIn implements HUDTracking {
   _model: WingDozerCutInModel;
   _view: WingDozerCutInView;
-  _subscription: Subscription;
+  _unSubscriber: UnSubscriber;
 
   /**
    * コンストラクタ
@@ -26,10 +26,10 @@ export class WingDozerCutIn implements HUDTracking {
    * @param view ビュー
    * @param listener イベントリスナ
    */
-  constructor(view: WingDozerCutInView, listener: Observable<GameObjectAction>) {
+  constructor(view: WingDozerCutInView, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._subscription = listener.subscribe(action => {
+    this._unSubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -41,7 +41,7 @@ export class WingDozerCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unSubscriber.unSubscribe();
   }
 
   /**

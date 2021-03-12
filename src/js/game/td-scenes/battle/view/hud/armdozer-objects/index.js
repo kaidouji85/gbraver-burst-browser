@@ -30,7 +30,7 @@ export function playerArmdozerHUD(resources: Resources, listener: Observable<Gam
     case ArmDozerIdList.LIGHTNING_DOZER:
       return playerLightningDozerHUD(resources, toStream(listener), state);
     case ArmDozerIdList.WING_DOZER:
-      return playerWingDozerHUD(resources, listener, state);
+      return playerWingDozerHUD(resources, toStream(listener), state);
     default:
       return new EmptyHUDArmdozer(state);
   }
@@ -53,7 +53,7 @@ export function enemyArmdozerHUD(resources: Resources, listener: Observable<Game
     case ArmDozerIdList.LIGHTNING_DOZER:
       return enemyLightningDozerHUD(resources, toStream(listener), state);
     case ArmDozerIdList.WING_DOZER:
-      return enemyWingDozerHUD(resources, listener, state);
+      return enemyWingDozerHUD(resources, toStream(listener), state);
     default:
       return new EmptyHUDArmdozer(state);
   }
