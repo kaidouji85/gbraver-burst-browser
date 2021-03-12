@@ -31,7 +31,7 @@ export const commands = () => {
         // NOP
       },
     });
-    const pilotButton = new PilotButton(resources, listener);
+    const pilotButton = new PilotButton(resources, toStream(listener));
 
     all(
       batterySelector.open(1, 5, 'Attack'),

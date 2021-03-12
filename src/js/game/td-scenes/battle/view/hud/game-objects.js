@@ -61,7 +61,7 @@ export class HUDGameObjects {
         });
       }
     });
-    this.pilotButton = new PilotButton(resources, playerInfo.pilot.id, listener);
+    this.pilotButton = new PilotButton(resources, playerInfo.pilot.id, toStream(listener));
 
     this.frontmostFader = frontmostFader({
       listener: toStream(listener),

@@ -5,7 +5,7 @@ import type {Resources} from "../../resource";
 import {PilotButtonView} from "./view/pilot-button-view";
 import type {PilotButtonModel} from "./model/pilot-button-model";
 import {createInitialValue} from './model/initial-value';
-import {Observable, Subscription} from "rxjs";
+import {Observable} from "rxjs";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {open} from "./animation/open";
@@ -15,7 +15,7 @@ import {filter} from "rxjs/operators";
 import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
 import type {PilotId} from "gbraver-burst-core";
 import type {GameObjectAction} from "../action/game-object-action";
-import {toStream} from "../../stream/rxjs";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /**
  * ,イベント通知ストリーム
@@ -32,7 +32,7 @@ export class PilotButton {
   _sounds: PilotButtonSounds;
   _view: PilotButtonView;
   _notifier: Notifier;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -41,10 +41,10 @@ export class PilotButton {
    * @param pilotId パイロットID
    * @param listener イベントリスナ
    */
-  constructor(resources: Resources, pilotId: PilotId, listener: Observable<GameObjectAction>) {
+  constructor(resources: Resources, pilotId: PilotId, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._sounds = new PilotButtonSounds(resources);
-    this._view = new PilotButtonView(resources, pilotId, toStream(listener));
+    this._view = new PilotButtonView(resources, pilotId, listener);
 
     const viewNotifier = this._view.notifier();
     this._notifier = {
@@ -53,7 +53,7 @@ export class PilotButton {
       )
     };
 
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -65,6 +65,7 @@ export class PilotButton {
    */
   destructor(): void {
     this._view.destructor();
+    this._unsubscriber.unsubscribe();
   }
 
   /**
