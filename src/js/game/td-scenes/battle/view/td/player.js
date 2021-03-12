@@ -144,7 +144,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
       powerUp: playerPowerUp(resources, listener),
       reflect: playerReflectIndicator(resources, listener),
       continuousAttack: playerContinuousAttack(resources, toStream(listener)),
-      damageDecrease: playerDamageDecrease(resources, listener),
+      damageDecrease: playerDamageDecrease(resources, toStream(listener)),
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
@@ -177,7 +177,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
       powerUp: enemyPowerUp(resources, listener),
       reflect: enemyReflectIndicator(resources, listener),
       continuousAttack: enemyContinuousAttack(resources, toStream(listener)),
-      damageDecrease: enemyDamageDecrease(resources, listener),
+      damageDecrease: enemyDamageDecrease(resources, toStream(listener)),
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,
