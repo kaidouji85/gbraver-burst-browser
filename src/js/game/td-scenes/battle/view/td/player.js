@@ -141,7 +141,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
       lightning: playerLightning(resources, toStream(listener))
     },
     armdozerEffects: {
-      powerUp: playerPowerUp(resources, listener),
+      powerUp: playerPowerUp(resources, toStream(listener)),
       reflect: playerReflectIndicator(resources, listener),
       continuousAttack: playerContinuousAttack(resources, toStream(listener)),
       damageDecrease: playerDamageDecrease(resources, toStream(listener)),
@@ -174,7 +174,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
       lightning: enemyLightning(resources, toStream(listener))
     },
     armdozerEffects: {
-      powerUp: enemyPowerUp(resources, listener),
+      powerUp: enemyPowerUp(resources, toStream(listener)),
       reflect: enemyReflectIndicator(resources, listener),
       continuousAttack: enemyContinuousAttack(resources, toStream(listener)),
       damageDecrease: enemyDamageDecrease(resources, toStream(listener)),
