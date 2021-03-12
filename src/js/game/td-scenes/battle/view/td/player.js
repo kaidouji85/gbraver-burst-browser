@@ -138,7 +138,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
     playerId: state.playerId,
     hitMark: {
       shockWave: playerShockWave(resources, listener),
-      lightning: playerLightning(resources, listener)
+      lightning: playerLightning(resources, toStream(listener))
     },
     armdozerEffects: {
       powerUp: playerPowerUp(resources, listener),
@@ -171,7 +171,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
     playerId: state.playerId,
     hitMark: {
       shockWave: enemyShockWave(resources, listener),
-      lightning: enemyLightning(resources, listener)
+      lightning: enemyLightning(resources, toStream(listener))
     },
     armdozerEffects: {
       powerUp: enemyPowerUp(resources, listener),

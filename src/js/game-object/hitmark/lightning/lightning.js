@@ -4,12 +4,12 @@ import * as THREE from 'three';
 import type {LightningModel} from "./model/lightning-model";
 import type {LightningView} from "./view/lightning-view";
 import {createInitialValue} from "./model/initial-value";
-import {Observable, Subscription} from "rxjs";
 import {Animate} from "../../../animation/animate";
 import {popUp} from "./animation/pop-up";
 import {LightningSounds} from "./sounds/lightning-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * 電撃ヒットマーク
@@ -18,7 +18,7 @@ export class Lightning {
  _model: LightningModel;
  _view: LightningView;
  _sounds: LightningSounds;
- _subscription: Subscription;
+ _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -27,11 +27,11 @@ export class Lightning {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: LightningView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: LightningView, resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new LightningSounds(resources);
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       }
@@ -43,6 +43,7 @@ export class Lightning {
    */
   destructor(): void {
     this._view.destructor();
+    this._unsubscriber.unsubscribe();
   }
 
   /**
