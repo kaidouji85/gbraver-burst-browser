@@ -4,8 +4,8 @@ import {ShinyaCutIn} from "./shinya";
 import type {Resources} from "../../../resource";
 import {PlayerShinyaView} from "./view/player-shinya-view";
 import {EnemyShinyaView} from "./view/enemy-shinya-view";
-import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream} from "../../../stream/core";
 
 /**
  * プレイヤー側 シンヤ カットイン
@@ -14,7 +14,7 @@ import type {GameObjectAction} from "../../action/game-object-action";
  * @param listener イベントリスナ
  * @return シンヤ カットイン
  */
-export function playerShinyaCutIn(resources: Resources, listener: Observable<GameObjectAction>): ShinyaCutIn {
+export function playerShinyaCutIn(resources: Resources, listener: Stream<GameObjectAction>): ShinyaCutIn {
   const view = new PlayerShinyaView(resources);
   return new ShinyaCutIn(view, resources, listener);
 }
@@ -26,7 +26,7 @@ export function playerShinyaCutIn(resources: Resources, listener: Observable<Gam
  * @param listener イベントリスナ
  * @return シンヤ カットイン
  */
-export function enemyShinyaCutIn(resources: Resources, listener: Observable<GameObjectAction>): ShinyaCutIn {
+export function enemyShinyaCutIn(resources: Resources, listener: Stream<GameObjectAction>): ShinyaCutIn {
   const view = new EnemyShinyaView(resources);
   return new ShinyaCutIn(view, resources, listener);
 }

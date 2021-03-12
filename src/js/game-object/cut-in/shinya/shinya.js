@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import type {ShinyaModel} from "./model/shinya-model";
 import {ShinyaView} from "./view/shinya-view";
 import {createInitialValue} from "./model/initial-value";
-import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
@@ -13,6 +12,7 @@ import type {HUDTracking} from "../../../tracking/hud-tracking";
 import {ShinyaSounds} from "./sounds/shinya-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, UnSubscriber} from "../../../stream/core";
 
 /**
  * シンヤ カットイン
@@ -21,7 +21,7 @@ export class ShinyaCutIn implements HUDTracking {
   _model: ShinyaModel;
   _view: ShinyaView;
   _sounds: ShinyaSounds;
-  _subscription: Subscription;
+  _unSubscriber: UnSubscriber;
 
   /**
    * コンストラクタ
@@ -30,11 +30,11 @@ export class ShinyaCutIn implements HUDTracking {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: ShinyaView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: ShinyaView, resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new ShinyaSounds(resources);
-    this._subscription = listener.subscribe(action => {
+    this._unSubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -46,6 +46,7 @@ export class ShinyaCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
+    this._unSubscriber.unSubscribe();
   }
 
   /**

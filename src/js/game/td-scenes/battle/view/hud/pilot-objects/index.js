@@ -22,13 +22,13 @@ import {toStream} from "../../../../../../stream/rxjs";
 export function playerHUDPilotObjects(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
-      return playerShinyaHUD(resources, listener, state);
+      return playerShinyaHUD(resources, toStream(listener), state);
     case PilotIds.GAI:
       return playerGaiHUD(resources, toStream(listener), state);
     case PilotIds.RAITO:
       return playerRaitoHUD(resources, toStream(listener), state);
     default:
-      return playerShinyaHUD(resources, listener, state);
+      return playerShinyaHUD(resources, toStream(listener), state);
   }
 }
 
@@ -43,12 +43,12 @@ export function playerHUDPilotObjects(resources: Resources, listener: Observable
 export function enemyHUDPilotObjects(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
-      return enemyShinyaHUD(resources, listener, state);
+      return enemyShinyaHUD(resources, toStream(listener), state);
     case PilotIds.GAI:
       return enemyGaiHUD(resources, toStream(listener), state);
     case PilotIds.RAITO:
       return enemyRaitoHUD(resources, toStream(listener), state);
     default:
-      return enemyShinyaHUD(resources, listener, state);
+      return enemyShinyaHUD(resources, toStream(listener), state);
   }
 }

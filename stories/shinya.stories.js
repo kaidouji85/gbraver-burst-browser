@@ -3,6 +3,7 @@
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {enemyShinyaCutIn, playerShinyaCutIn} from "../src/js/game-object/cut-in/shinya";
 import {delay} from "../src/js/animation/delay";
+import {toStream} from "../src/js";
 
 export default {
   title: 'shinya',
@@ -10,7 +11,7 @@ export default {
 
 export const player = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const pilot = playerShinyaCutIn(resources, listener);
+    const pilot = playerShinyaCutIn(resources, toStream(listener));
     pilot.show()
       .chain(delay(2000))
       .chain(pilot.hidden())
@@ -24,7 +25,7 @@ export const player = (): HTMLElement => {
 
 export const enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const pilot = enemyShinyaCutIn(resources, listener);
+    const pilot = enemyShinyaCutIn(resources, toStream(listener));
     pilot.show()
       .chain(delay(2000))
       .chain(pilot.hidden())
