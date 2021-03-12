@@ -9,6 +9,7 @@ import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import {toStream} from "../../../../../stream/rxjs";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
@@ -67,7 +68,7 @@ export function playerHUDObjects(resources: Resources, state: Player, listener: 
     playerId: state.playerId,
     gauge: playerGauge({
       resources: resources,
-      listener: listener,
+      listener: toStream(listener),
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),
@@ -88,7 +89,7 @@ export function enemyHUDObjects(resources: Resources, state: Player, listener: O
     playerId: state.playerId,
     gauge: enemyGauge({
       resources: resources,
-      listener: listener,
+      listener: toStream(listener),
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),

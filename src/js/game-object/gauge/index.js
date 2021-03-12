@@ -4,12 +4,12 @@ import {Gauge} from "./gauge";
 import type {Resources} from "../../resource";
 import {PlayerGaugeView} from "./view/player-gauge-view";
 import {EnemyGaugeView} from "./view/enemy-gauge-view";
-import {Observable} from "rxjs";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream} from "../../stream/core";
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   hp: number,
   battery: number
 };
