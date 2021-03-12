@@ -1,14 +1,14 @@
 // @flow
 
 import {Fader} from "./fader";
-import {Observable} from "rxjs";
 import {HUD_FROMTMOST_FADER_ZINDEX, HUD_REARMOST_FADER_ZINDEX} from "../../zindex/hud-zindex";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream} from "../../stream/core";
 
 /** 画面フェーダ生成のパラメータ */
 type Param = {
   isVisible: boolean,
-  listener: Observable<GameObjectAction>
+  listener: Stream<GameObjectAction>
 };
 
 /**

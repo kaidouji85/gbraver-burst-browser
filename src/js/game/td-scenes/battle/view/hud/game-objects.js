@@ -64,11 +64,11 @@ export class HUDGameObjects {
     this.pilotButton = new PilotButton(resources, playerInfo.pilot.id, listener);
 
     this.frontmostFader = frontmostFader({
-      listener: listener,
+      listener: toStream(listener),
       isVisible: false,
     });
     this.rearmostFader = rearmostFader({
-      listener: listener,
+      listener: toStream(listener),
       isVisible: false,
     });
 
