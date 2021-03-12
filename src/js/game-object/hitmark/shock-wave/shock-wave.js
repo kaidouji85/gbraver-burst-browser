@@ -4,7 +4,6 @@ import {Howl} from 'howler';
 import * as THREE from 'three';
 import type {ShockWaveView} from "./view/shock-wave-view";
 import type {ShockWaveModel} from "./model/shock-wave-model";
-import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {popUp} from "./animation/pop-up";
@@ -12,6 +11,7 @@ import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import {process} from '../../../animation/process';
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * 衝撃波
@@ -20,7 +20,7 @@ export class ShockWave {
   _model: ShockWaveModel;
   _view: ShockWaveView;
   _hitSound: typeof Howl;
-  _subscription: Subscription;
+  _subscription: Unsubscriber;
 
   /**
    * リソース管理オブジェクト
@@ -30,7 +30,7 @@ export class ShockWave {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: ShockWaveView, initialModel: ShockWaveModel, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: ShockWaveView, initialModel: ShockWaveModel, resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = initialModel;
     this._view = view;
 
