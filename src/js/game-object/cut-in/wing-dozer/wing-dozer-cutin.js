@@ -10,7 +10,7 @@ import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {PreRender} from "../../../game-loop/pre-render";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ウィングドーザ カットイン
@@ -18,7 +18,7 @@ import type {Stream, UnSubscriber} from "../../../stream/core";
 export class WingDozerCutIn implements HUDTracking {
   _model: WingDozerCutInModel;
   _view: WingDozerCutInView;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -41,7 +41,7 @@ export class WingDozerCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

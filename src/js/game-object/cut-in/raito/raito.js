@@ -12,7 +12,7 @@ import type {HUDTracking} from "../../../tracking/hud-tracking";
 import {RaitoSounds} from "./sounds/raito-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ライト カットイン
@@ -21,7 +21,7 @@ export class RaitoCutIn implements HUDTracking {
   _model: RaitoModel;
   _view: RaitoView;
   _sounds: RaitoSounds;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -46,7 +46,7 @@ export class RaitoCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

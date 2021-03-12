@@ -5,7 +5,7 @@ import {createHUDCamera} from "../../../camera/create-hud-camera";
 import type {Resize} from "../../../window/resize";
 import {onResizeOrthographicCamera} from "../../../camera/resize";
 import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * 汎用HUDレイヤー用カメラ
@@ -13,7 +13,7 @@ import type {Stream, UnSubscriber} from "../../../stream/core";
  */
 export class PlainHUDCamera {
   _camera: typeof THREE.OrthographicCamera;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   constructor(resize: Stream<Resize>) {
     this._camera = createHUDCamera();
@@ -26,7 +26,7 @@ export class PlainHUDCamera {
 
   /** デストラクタ */
   destructor(): void {
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /** カメラを取得する */

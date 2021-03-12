@@ -12,7 +12,7 @@ import type {HUDTracking} from "../../../tracking/hud-tracking";
 import {GaiSounds} from "./sounds/gai-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ガイ カットイン
@@ -21,7 +21,7 @@ export class GaiCutIn implements HUDTracking {
   _model: GaiModel;
   _view: GaiView;
   _sounds: GaiSounds;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -46,7 +46,7 @@ export class GaiCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

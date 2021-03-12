@@ -12,7 +12,7 @@ import type {HUDTracking} from "../../../tracking/hud-tracking";
 import {ShinyaSounds} from "./sounds/shinya-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * シンヤ カットイン
@@ -21,7 +21,7 @@ export class ShinyaCutIn implements HUDTracking {
   _model: ShinyaModel;
   _view: ShinyaView;
   _sounds: ShinyaSounds;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -46,7 +46,7 @@ export class ShinyaCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

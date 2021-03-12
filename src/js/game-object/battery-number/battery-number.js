@@ -9,7 +9,7 @@ import {Animate} from "../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 type Param = {
   listener: Stream<GameObjectAction>,
@@ -20,7 +20,7 @@ type Param = {
 export class BatteryNumber {
   _model: BatteryNumberModel;
   _view: BatteryNumberView;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._model = createInitialValue();
@@ -37,7 +37,7 @@ export class BatteryNumber {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

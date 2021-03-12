@@ -10,7 +10,7 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {show} from "./animation/show";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * シンブレイバーカットイン
@@ -18,7 +18,7 @@ import type {Stream, UnSubscriber} from "../../../stream/core";
 export class ShinBraverCutIn implements HUDTracking {
   _model: ShinBraverCutInModel;
   _view: ShinBraverCutInView;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   constructor(view: ShinBraverCutInView, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
@@ -35,7 +35,7 @@ export class ShinBraverCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

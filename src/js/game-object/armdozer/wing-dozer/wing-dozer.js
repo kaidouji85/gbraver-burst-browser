@@ -22,7 +22,7 @@ import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
 import type {PreRender} from "../../../game-loop/pre-render";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ウィングドーザ
@@ -31,7 +31,7 @@ export class WingDozer implements ArmDozerSprite {
   _model: WingDozerModel;
   _view: WingDozerView;
   _sounds: WingDozerSounds;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -58,7 +58,7 @@ export class WingDozer implements ArmDozerSprite {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

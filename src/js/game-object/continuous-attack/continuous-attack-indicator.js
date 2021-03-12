@@ -10,7 +10,7 @@ import {popUp} from "./animation/pop-up";
 import {ContinuousAttackSounds} from "./sounds/continuous-attack-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /**
  * 連続攻撃
@@ -19,7 +19,7 @@ export class ContinuousAttackIndicator {
   _model: ContinuousAttackModel;
   _view: ContinuousAttackView;
   _sounds: ContinuousAttackSounds;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -44,7 +44,7 @@ export class ContinuousAttackIndicator {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

@@ -10,7 +10,7 @@ import {popUp} from "./animation/pop-up";
 import {DamageDecreaseSounds} from "./sounds/damage-decrease-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /**
  * ダメージ減少
@@ -19,7 +19,7 @@ export class DamageDecrease {
   _model: DamageDecreaseModel;
   _view: DamageDecreaseView;
   _sounds: DamageDecreaseSounds;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -44,7 +44,7 @@ export class DamageDecrease {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

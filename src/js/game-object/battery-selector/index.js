@@ -23,7 +23,7 @@ import {decide} from './animation/decide';
 import {batteryMinusPop} from "./animation/battery-minus-pop";
 import {batteryPlusPop} from "./animation/battery-plus-pop";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -43,7 +43,7 @@ export class BatterySelector {
   _batteryChangeTween: typeof TWEEN.Group;
   _batteryMinusTween: typeof TWEEN.Group;
   _batteryPlusTween: typeof TWEEN.Group;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._model = initialValue();
@@ -103,7 +103,7 @@ export class BatterySelector {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

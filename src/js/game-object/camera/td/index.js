@@ -12,14 +12,14 @@ import type {Position} from './animation/position';
 import {moveViewPoint} from "./animation/move-view-point";
 import {moveCamera} from "./animation/move-camera";
 import {getViewPortHeight, getViewPortWidth} from "../../../view-port/view-port-size";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 // TODO カメラ位置、カメラ視点をコンストラクタから渡す
 /** 戦闘シーン3Dレイヤー用カメラ */
 export class TDCamera {
   _model: Battle3DCameraModel;
   _camera: typeof THREE.PerspectiveCamera;
-  _unSubscribers: UnSubscriber[];
+  _unSubscribers: Unsubscriber[];
 
   constructor(update: Stream<Update>, resize: Stream<Resize>) {
     this._model = createInitialValue();
@@ -40,7 +40,7 @@ export class TDCamera {
   /** デストラクタ */
   destructor(): void {
     this._unSubscribers.forEach(v => {
-      v.unSubscribe();
+      v.unsubscribe();
     })
   }
 

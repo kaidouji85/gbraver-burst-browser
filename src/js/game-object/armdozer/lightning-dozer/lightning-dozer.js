@@ -22,7 +22,7 @@ import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
 import {LightningDozerSounds} from "./sounds/lightning-dozer-sounds";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ライトニングドーザ
@@ -31,7 +31,7 @@ export class LightningDozer implements ArmDozerSprite {
   _model: LightningDozerModel;
   _view: LightningDozerView;
   _sounds: LightningDozerSounds;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   constructor(resources: Resources, listener: Stream<GameObjectAction>, view: LightningDozerView) {
     this._model = createInitialValue();
@@ -50,7 +50,7 @@ export class LightningDozer implements ArmDozerSprite {
   /** デストラクタ相当の処理 */
   destructor() {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

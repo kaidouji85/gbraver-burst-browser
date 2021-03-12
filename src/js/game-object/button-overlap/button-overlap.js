@@ -5,7 +5,7 @@ import type {MouseDownRaycaster} from "../../render/overlap-event/mouse-down-ray
 import type {TouchStartRaycaster} from "../../render/overlap-event/touch-start-raycaster";
 import {isMeshOverlap} from "../../overlap/mesh-overlap";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /** パラメータ */
 type Param = {
@@ -18,7 +18,7 @@ type Param = {
 export class ButtonOverlap {
   _mesh: typeof THREE.Mesh;
   _onButtonPush: () => void;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   constructor(param: Param) {
     const material = new THREE.MeshBasicMaterial({
@@ -47,7 +47,7 @@ export class ButtonOverlap {
   destructor(): void {
     this._mesh.geometry.dispose();
     this._mesh.material.dispose();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

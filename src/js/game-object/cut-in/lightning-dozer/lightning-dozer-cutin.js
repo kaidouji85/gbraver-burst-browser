@@ -10,7 +10,7 @@ import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ライトニングドーザ カットイン
@@ -18,7 +18,7 @@ import type {Stream, UnSubscriber} from "../../../stream/core";
 export class LightningDozerCutIn implements HUDTracking {
   _model: LightningDozerCutInModel;
   _view: LightningDozerCutInView;
-  _unSubscriber: UnSubscriber;
+  _unSubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -41,7 +41,7 @@ export class LightningDozerCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._unSubscriber.unSubscribe();
+    this._unSubscriber.unsubscribe();
   }
 
   /**

@@ -14,7 +14,7 @@ import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import {LightningBarrierSounds} from "./sounds/lightning-barrier-sounds";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 import {firstUpdate} from "../../action/first-update";
 
 /**
@@ -25,7 +25,7 @@ export class LightningBarrierGameEffect {
   _view: LightningBarrierView;
   _sounds: LightningBarrierSounds;
   _tweenGroup: typeof TWEEN.Group;
-  _unSubscribers: UnSubscriber[];
+  _unSubscribers: Unsubscriber[];
 
   constructor(resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
@@ -53,7 +53,7 @@ export class LightningBarrierGameEffect {
   destructor(): void {
     this._view.destructor();
     this._unSubscribers.forEach(v => {
-      v.unSubscribe();
+      v.unsubscribe();
     });
     this._tweenGroup.removeAll();
   }
