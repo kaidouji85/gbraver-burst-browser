@@ -9,6 +9,7 @@ import * as THREE from "three";
 import {SkyBrightness} from "../../../../../game-object/sky-brightness/sky-brightness";
 import {Illumination} from "../../../../../game-object/illumination/illumination";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import {toStream} from "../../../../../stream/rxjs";
 
 /**
  * 3Dレイヤーのゲームオブジェクト
@@ -26,7 +27,7 @@ export class TDGameObjects {
         resources: resources
       });
     this.skyBrightness = new SkyBrightness(listener);
-    this.illumination = new Illumination(listener);
+    this.illumination = new Illumination(toStream(listener));
   }
 
   /**
