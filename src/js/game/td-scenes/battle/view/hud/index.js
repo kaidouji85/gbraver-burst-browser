@@ -76,8 +76,8 @@ export class HudLayer {
       });
 
     this.armdozers = param.players.map(v => v.playerId === param.playerId
-      ? playerArmdozerHUD(param.resources, this._gameObjectAction, v)
-      : enemyArmdozerHUD(param.resources, this._gameObjectAction, v)
+      ? playerArmdozerHUD(param.resources, toStream(this._gameObjectAction), v)
+      : enemyArmdozerHUD(param.resources, toStream(this._gameObjectAction), v)
     );
     this.armdozers.map(v => v.getObject3Ds())
       .flat()
