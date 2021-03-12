@@ -86,8 +86,8 @@ export class HudLayer {
       });
 
     this.pilots = param.players.map(v => v.playerId === param.playerId
-      ? playerHUDPilotObjects(param.resources, this._gameObjectAction, v)
-      : enemyHUDPilotObjects(param.resources, this._gameObjectAction, v)
+      ? playerHUDPilotObjects(param.resources, toStream(this._gameObjectAction), v)
+      : enemyHUDPilotObjects(param.resources, toStream(this._gameObjectAction), v)
     );
     this.pilots.map(v => v.getObject3Ds())
       .flat()
