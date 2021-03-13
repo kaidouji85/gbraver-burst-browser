@@ -4,7 +4,7 @@ import {merge, Observable} from "rxjs";
 import type {Update} from "../../game-loop/update";
 import type {PreRender} from "../../game-loop/pre-render";
 import type {OverlapEvent} from "../../render/overlap-event/overlap-event";
-import {map, share} from "rxjs/operators";
+import {share} from "rxjs/operators";
 import type {Stream} from "../../stream/core";
 import {toStream} from "../../stream/rxjs";
 
@@ -26,23 +26,4 @@ export function gameObjectStream(update: Stream<Update>, preRender: Stream<PreRe
   const merged = merge(...origin)
     .pipe(share());
   return toStream(merged);
-}
-
-/**
- * @deprecated
- * ゲームオブジェクトアクションストリームを生成する
- *
- * @param update アップデート
- * @param preRender プリレンダー
- * @param overlap 当たり判定
- * @return 生成したストリーム
- */
-export function deprecated_gameObjectStream(update: Observable<Update>, preRender: Observable<PreRender>, overlap: Observable<OverlapEvent>): Observable<GameObjectAction> {
-  return merge(update, preRender, overlap).pipe(
-    map(v => {
-      const ret: GameObjectAction = v;
-      return ret;
-    }),
-    share()
-  );
 }
