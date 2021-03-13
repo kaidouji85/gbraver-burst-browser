@@ -3,7 +3,6 @@
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
 import {PlayerLightningDozer} from "../src/js/game-object/armdozer/lightning-dozer";
 import {delay} from "../src/js/animation/delay";
-import {toStream} from "../src/js";
 
 export default {
   title: 'lightning-dozer',

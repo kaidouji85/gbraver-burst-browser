@@ -3,7 +3,6 @@
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
 import {EnemyWingDozer, PlayerWingDozer} from "../src/js/game-object/armdozer/wing-dozer";
 import {delay} from "../src/js/animation/delay";
-import {toStream} from "../src/js";
 
 export default {
   title: 'wing-dozer',
