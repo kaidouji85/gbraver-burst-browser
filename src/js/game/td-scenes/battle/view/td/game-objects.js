@@ -23,7 +23,7 @@ export class TDGameObjects {
   constructor(resources: Resources, listener: Observable<GameObjectAction>) {
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({
-        listener: listener,
+        listener: toStream(listener),
         resources: resources
       });
     this.skyBrightness = new SkyBrightness(toStream(listener));

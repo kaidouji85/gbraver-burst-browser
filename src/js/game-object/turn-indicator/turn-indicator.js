@@ -5,21 +5,21 @@ import * as THREE from 'three';
 import type {Resources} from "../../resource";
 import type {TurnIndicatorModel} from "./model/turn-indicator-model";
 import {TurnIndicatorView} from "./view/turn-indicator-view";
-import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../game-loop/pre-render";
 import {invisible} from "./animation/invisible";
 import {turnChange} from "./animation/turn-change";
 import {Animate} from "../../animation/animate";
 import {createInitialValue} from "./model/initial-value";
 import {waiting} from "./animation/waiting";
-import {filter, first, map} from "rxjs/operators";
 import type {Update} from "../../game-loop/update";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
+import {firstUpdate} from "../action/first-update";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>
+  listener: Stream<GameObjectAction>
 };
 
 /** ターンインジケーター */
@@ -27,14 +27,14 @@ export class TurnIndicator {
   _tweenGroup: typeof TWEEN.Group;
   _model: TurnIndicatorModel;
   _view: TurnIndicatorView;
-  _subscription: Subscription[];
+  _unsubscribers: Unsubscriber[];
 
   constructor(param: Param) {
     this._tweenGroup = new TWEEN.Group();
     this._model = createInitialValue();
     this._view = new TurnIndicatorView(param.resources);
 
-    this._subscription = [
+    this._unsubscribers = [
       param.listener.subscribe(action => {
         if (action.type === 'Update') {
           this._onUpdate(action);
@@ -43,11 +43,7 @@ export class TurnIndicator {
         }
       }),
 
-      param.listener.pipe(
-        filter(v => v.type === 'Update'),
-        map(v => ((v: any): Update)),
-        first()
-      ).subscribe(() => {
+      firstUpdate(param.listener).subscribe(() => {
         this._onFirstUpdate();
       })
     ];
@@ -56,7 +52,7 @@ export class TurnIndicator {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
     this._tweenGroup.removeAll();
