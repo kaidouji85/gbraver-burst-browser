@@ -5,7 +5,6 @@ import {PilotButton} from "../src/js/game-object/pilot-button";
 import {delay} from "../src/js/animation/delay";
 import {PilotIds} from "gbraver-burst-core";
 import type {PilotId} from "gbraver-burst-core";
-import {toStream} from "../src/js";
 
 export default {
   title: 'pilot-button',
@@ -13,7 +12,7 @@ export default {
 
 function pilotButtonStub(pilotId: PilotId): HUDGameObjectStub {
   return new HUDGameObjectStub((resources, listener) => {
-    const button = new PilotButton(resources, pilotId, toStream(listener));
+    const button = new PilotButton(resources, pilotId, listener);
     button.notifier().pushButton.subscribe(() => {
       console.log('push button!!');
       const animation = button.decide()

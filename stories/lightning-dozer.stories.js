@@ -11,7 +11,7 @@ export default {
 
 export const armHammer = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = PlayerLightningDozer(resources, toStream(listener));
+    const sprite = PlayerLightningDozer(resources, listener);
     const animation  = sprite.charge()
       .chain(delay(1000))
       .chain(sprite.armHammer())

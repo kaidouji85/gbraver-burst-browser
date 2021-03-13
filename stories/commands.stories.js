@@ -4,7 +4,6 @@ import {BurstButton} from "../src/js/game-object/burst-button/burst-button";
 import {PilotButton} from "../src/js/game-object/pilot-button";
 import {all} from "../src/js/animation/all";
 import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
-import {toStream} from "../src/js";
 
 export default {
   title: 'commands',
@@ -14,7 +13,7 @@ export const commands = () => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const batterySelector = new BatterySelector({
       resources: resources,
-      listener: toStream(listener),
+      listener: listener,
       maxBattery: 5,
       onBatteryChange: (battery: number) => {
         // NOP
@@ -26,12 +25,12 @@ export const commands = () => {
     const burstButton = new BurstButton({
       armDozerId: ArmDozerIdList.SHIN_BRAVER,
       resources: resources,
-      listener: toStream(listener),
+      listener: listener,
       onPush: () => {
         // NOP
       },
     });
-    const pilotButton = new PilotButton(resources, toStream(listener));
+    const pilotButton = new PilotButton(resources, listener);
 
     all(
       batterySelector.open(1, 5, 'Attack'),

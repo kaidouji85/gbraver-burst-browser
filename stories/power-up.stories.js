@@ -3,7 +3,6 @@
 import {delay} from "../src/js/animation/delay";
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
 import {enemyPowerUp, playerPowerUp} from "../src/js/game-object/power-up";
-import {toStream} from "../src/js";
 
 export default {
   title: 'power-up',
@@ -11,7 +10,7 @@ export default {
 
 export const player = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
-    const continuousAttack = playerPowerUp(resources, toStream(listener));
+    const continuousAttack = playerPowerUp(resources, listener);
     delay(1000)
       .chain(continuousAttack.popUp())
       .loop();
@@ -25,7 +24,7 @@ export const player = (): HTMLElement => {
 
 export const enemy = (): HTMLElement => {
   const stub = new TDGameObjectStub((resources, listener) => {
-    const continuousAttack = enemyPowerUp(resources, toStream(listener));
+    const continuousAttack = enemyPowerUp(resources, listener);
     delay(1000)
       .chain(continuousAttack.popUp())
       .loop();

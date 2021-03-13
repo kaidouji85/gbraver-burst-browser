@@ -5,7 +5,6 @@ import {enemyWingDozerCutIn, playerWingDozerCutIn} from "../src/js/game-object/c
 import {delay} from "../src/js/animation/delay";
 import {Animate} from "../src/js/animation/animate";
 import {WingDozerCutIn} from "../src/js/game-object/cut-in/wing-dozer/wing-dozer-cutin";
-import {toStream} from "../src/js";
 
 export default {
   title: 'wing-dozer-cutin',
@@ -20,7 +19,7 @@ function cutInAnimation(cutIn: WingDozerCutIn): Animate {
 
 export const Player = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const cutIn = playerWingDozerCutIn(resources, toStream(listener));
+    const cutIn = playerWingDozerCutIn(resources, listener);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];
   });
@@ -30,7 +29,7 @@ export const Player = (): HTMLElement => {
 
 export const Enemy = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const cutIn = enemyWingDozerCutIn(resources, toStream(listener));
+    const cutIn = enemyWingDozerCutIn(resources, listener);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];
   });
