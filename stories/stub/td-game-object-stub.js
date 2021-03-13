@@ -2,7 +2,7 @@
 
 import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Subject} from "rxjs";
 import type {Resize} from "../../src/js/window/resize";
 import {resizeStream} from "../../src/js/window/resize";
 import {Renderer} from "../../src/js/render";
@@ -20,7 +20,7 @@ import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resour
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 import {toStream} from "../../src/js/stream/rxjs";
-import type {Stream} from "../../src/js/stream/core";
+import type {Stream, Unsubscriber} from "../../src/js/stream/core";
 
 /**
  * 3Dレイヤー ゲームオブジェクト スタブ
@@ -30,7 +30,7 @@ export class TDGameObjectStub {
 
   _safeAreaInset: SafeAreaInset;
   _resize: Stream<Resize>;
-  _gameLoop: Observable<GameLoop>;
+  _gameLoop: Stream<GameLoop>;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
 
@@ -41,7 +41,7 @@ export class TDGameObjectStub {
   _overlap: Stream<OverlapEvent>;
   _gameObjectAction: Stream<GameObjectAction>;
 
-  _subscription: Subscription[];
+  _unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -69,7 +69,7 @@ export class TDGameObjectStub {
       toStream(this._preRender),
       this._overlap
     );
-    this._subscription = [
+    this._unsubscriber = [
       this._gameLoop.subscribe(this._onGameLoop.bind(this))
     ];
   }
