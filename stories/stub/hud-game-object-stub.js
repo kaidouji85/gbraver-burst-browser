@@ -4,7 +4,7 @@ import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resize} from "../../src/js/window/resize";
-import {deprecated_createResizeStream} from "../../src/js/window/resize";
+import {resizeStream} from "../../src/js/window/resize";
 import {Renderer} from "../../src/js/render";
 import type {GameLoop} from "../../src/js/game-loop/game-loop";
 import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
@@ -29,7 +29,7 @@ export class HUDGameObjectStub {
   _creator: Object3dCreator;
 
   _safeAreaInset: SafeAreaInset;
-  _resize: Observable<Resize>;
+  _resize: Stream<Resize>;
   _gameLoop: Observable<GameLoop>;
   _update: Subject<Update>;
   _preRender: Subject<PreRender>;
@@ -52,7 +52,7 @@ export class HUDGameObjectStub {
     this._creator = creator;
 
     this._safeAreaInset = createSafeAreaInset();
-    this._resize = deprecated_createResizeStream();
+    this._resize = resizeStream();
     this._gameLoop = gameLoopStream();
     this._update = new Subject<Update>();
     this._preRender = new Subject<PreRender>();
@@ -61,7 +61,7 @@ export class HUDGameObjectStub {
       resize: this._resize,
     });
     this._scene = new THREE.Scene();
-    this._camera = new PlainHUDCamera(toStream(this._resize));
+    this._camera = new PlainHUDCamera(this._resize);
 
     this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
     this._gameObjectAction = gameObjectStream(

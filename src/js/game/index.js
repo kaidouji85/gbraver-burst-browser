@@ -9,7 +9,7 @@ import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
 import type {Resize} from "../window/resize";
-import {deprecated_createResizeStream} from "../window/resize";
+import {deprecated_createResizeStream, resizeStream} from "../window/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/root/resource-root";
@@ -28,13 +28,14 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import {DefinePlugin} from "../webpack/define-plugin";
+import type {Stream} from "../stream/core";
 
 /**
  * ゲーム全体の管理を行う
  */
 export class Game {
   _inProgress: InProgress;
-  _resize: Observable<Resize>;
+  _resize: Stream<Resize>;
   _vh: CssVH;
   _fader: DOMFader;
   _interruptScenes: InterruptScenes;
@@ -55,7 +56,7 @@ export class Game {
     this._resourceRoot = resourceRoot;
 
     this._inProgress = {type: 'None'};
-    this._resize = deprecated_createResizeStream();
+    this._resize = resizeStream();
     this._vh = new CssVH(this._resize);
 
     this._fader = new DOMFader();

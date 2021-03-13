@@ -17,8 +17,8 @@ import {tracking} from "./tracking";
 import type {OverlapNotifier} from "../../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../../render/rendering";
-import {RxjsStreamSource, toStream} from "../../../../stream/rxjs";
-import type {StreamSource} from "../../../../stream/core";
+import {RxjsStreamSource} from "../../../../stream/rxjs";
+import type {Stream, StreamSource} from "../../../../stream/core";
 
 /** 戦闘シーンビューで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -30,8 +30,8 @@ type Param = {
   playerId: PlayerId,
   players: Player[],
   listener: {
-    gameLoop: Observable<GameLoop>,
-    resize: Observable<Resize>,
+    gameLoop: Stream<GameLoop>,
+    resize: Stream<Resize>,
   }
 };
 
@@ -70,7 +70,7 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       listener: {
-        resize: toStream(param.listener.resize),
+        resize: param.listener.resize,
         update: this._updateTD,
         preRender: this._preRenderTD,
       }
@@ -82,7 +82,7 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       listener: {
-        resize: toStream(param.listener.resize),
+        resize: param.listener.resize,
         update: this._updateHUD,
         preRender: this._preRenderHUD,
       }
