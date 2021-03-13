@@ -150,7 +150,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
       resources: resources,
       listener: toStream(listener)
     }),
-    recoverBattery: playerRecoverBattery(resources, listener),
+    recoverBattery: playerRecoverBattery(resources, toStream(listener)),
     damageIndicator: playerDamageIndicator({
       resources: resources,
       listener: toStream(listener)
@@ -183,7 +183,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Obs
       resources: resources,
       listener: toStream(listener)
     }),
-    recoverBattery: enemyRecoverBattery(resources, listener),
+    recoverBattery: enemyRecoverBattery(resources, toStream(listener)),
     damageIndicator: enemyDamageIndicator({
       resources: resources,
       listener: toStream(listener)
