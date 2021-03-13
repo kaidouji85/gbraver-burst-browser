@@ -72,7 +72,7 @@ export function playerHUDObjects(resources: Resources, state: Player, listener: 
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),
-    turnStart: playerTurnStart(resources, listener),
+    turnStart: playerTurnStart(resources, toStream(listener)),
   });
 }
 
@@ -93,6 +93,6 @@ export function enemyHUDObjects(resources: Resources, state: Player, listener: O
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),
-    turnStart: enemyTurnStart(resources, listener),
+    turnStart: enemyTurnStart(resources, toStream(listener)),
   });
 }
