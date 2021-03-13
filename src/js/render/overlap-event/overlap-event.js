@@ -8,10 +8,11 @@ import type {TouchStartRaycaster} from "./touch-start-raycaster";
 import {toTouchStartRaycaster} from "./touch-start-raycaster";
 import type {TouchMoveRaycaster} from "./touch-move-raycaster";
 import {toTouchMoveRaycaster} from "./touch-move-raycaster";
-import {Observable} from "rxjs";
 import type {RendererDOMEvent} from "../dom-event/dom-event";
 import * as THREE from "three";
 import {filter, map, share} from "rxjs/operators";
+import type {Stream} from "../../stream/core";
+import {toStream} from "../../stream/rxjs";
 
 /**
  * オーバーラップ イベント
@@ -30,8 +31,8 @@ export type OverlapEvent =
  * @param camera カメラ
  * @return 当たり判定ストリーム
  */
-export function toOverlapStream(origin: Observable<RendererDOMEvent>, rendererDOM: HTMLElement, camera: typeof THREE.Camera): Observable<OverlapEvent> {
-  return origin.pipe(
+export function toOverlapStream(origin: Stream<RendererDOMEvent>, rendererDOM: HTMLElement, camera: typeof THREE.Camera): Stream<OverlapEvent> {
+  const observable = (origin.getRxjsObservable(): any).pipe(  // TODO rxjsのflow-typedを削除した後に、:anyを消す
     map(v => {
       switch (v.type) {
         case 'mouseDown':
@@ -47,7 +48,7 @@ export function toOverlapStream(origin: Observable<RendererDOMEvent>, rendererDO
       }
     }),
     filter(v => !!v),
-    map(v => (v: OverlapEvent)),
     share()
   );
+  return toStream(observable);
 }

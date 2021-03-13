@@ -49,7 +49,7 @@ export class HudLayer {
   armdozers: HUDArmdozerObjects[];
   pilots: HUDPilotObjects[];
   gameObjects: HUDGameObjects;
-  _overlap: Observable<OverlapEvent>;
+  _overlap: Stream<OverlapEvent>;
   _gameObjectAction: Stream<GameObjectAction>;
 
   constructor(param: Param) {
@@ -60,7 +60,7 @@ export class HudLayer {
     this._gameObjectAction = gameObjectStream(
       toStream(param.listener.update),
       toStream(param.listener.preRender),
-      toStream(this._overlap)
+      this._overlap
     );
 
     const player = param.players.find(v => v.playerId === param.playerId)

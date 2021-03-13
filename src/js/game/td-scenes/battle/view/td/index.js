@@ -41,7 +41,7 @@ export class ThreeDimensionLayer {
   players: TDPlayer[];
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
-  _overlap: Observable<OverlapEvent>;
+  _overlap: Stream<OverlapEvent>;
   _gameObjectAction: Stream<GameObjectAction>;
 
   constructor(param: Param) {
@@ -57,7 +57,7 @@ export class ThreeDimensionLayer {
     this._gameObjectAction = gameObjectStream(
       toStream(param.listener.update),
       toStream(param.listener.preRender),
-      toStream(this._overlap)
+      this._overlap
     );
 
     this.players = [
