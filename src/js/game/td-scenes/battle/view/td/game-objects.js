@@ -26,7 +26,7 @@ export class TDGameObjects {
         listener: listener,
         resources: resources
       });
-    this.skyBrightness = new SkyBrightness(listener);
+    this.skyBrightness = new SkyBrightness(toStream(listener));
     this.illumination = new Illumination(toStream(listener));
   }
 

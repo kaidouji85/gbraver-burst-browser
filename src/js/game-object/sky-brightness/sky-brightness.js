@@ -6,22 +6,22 @@ import {SkyBrightnessView} from "./view/sky-brightness-view";
 import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
 import {brightness} from "./animation/brightness";
-import {Observable, Subscription} from "rxjs";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /** 空の明るさ */
 export class SkyBrightness {
   _model: SkyBrightnessModel;
   _view: SkyBrightnessView;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
-  constructor(listener: Observable<GameObjectAction>) {
+  constructor(listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
 
     this._view = new SkyBrightnessView();
     this._view.engage(this._model);
 
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       }
@@ -31,6 +31,7 @@ export class SkyBrightness {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._view.destructor();
+    this._unsubscriber.unsubscribe();
   }
 
   /**
