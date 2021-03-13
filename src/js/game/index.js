@@ -3,7 +3,7 @@
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {ResourceLoader} from "../resource";
-import {merge, Observable, Subscription} from "rxjs";
+import {merge, Subscription} from "rxjs";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
