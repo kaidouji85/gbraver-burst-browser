@@ -38,7 +38,7 @@ export class TDGameObjectStub {
   _camera: TDCamera;
   _scene: typeof THREE.Scene;
 
-  _overlap: Observable<OverlapEvent>;
+  _overlap: Stream<OverlapEvent>;
   _gameObjectAction: Stream<GameObjectAction>;
 
   _subscription: Subscription[];
@@ -67,7 +67,7 @@ export class TDGameObjectStub {
     this._gameObjectAction = gameObjectStream(
       toStream(this._update),
       toStream(this._preRender),
-      toStream(this._overlap)
+      this._overlap
     );
     this._subscription = [
       this._gameLoop.subscribe(this._onGameLoop.bind(this))

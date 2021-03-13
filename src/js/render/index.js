@@ -9,10 +9,12 @@ import type {RendererDOMEvent} from "./dom-event/dom-event";
 import {createDOMEventStream} from "./dom-event/dom-event";
 import {createRender} from "./renderer-creator/renderer-creator";
 import type {OverlapEvent} from "./overlap-event/overlap-event";
-import {deprecated_toOverlapStream} from "./overlap-event/overlap-event";
+import {toOverlapStream} from "./overlap-event/overlap-event";
 import type {OverlapNotifier} from "./overla-notifier";
 import type {RendererDomGetter} from "./renderer-dom-getter";
 import type {Rendering} from "./rendering";
+import type {Stream} from "../stream/core";
+import {toStream} from "../stream/rxjs";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -56,8 +58,8 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @param camera カメラ
    * @return 生成結果
    */
-  createOverlapNotifier(camera: typeof THREE.Camera): Observable<OverlapEvent> {
-    return deprecated_toOverlapStream(this._domEvent, this.getRendererDOM(), camera);
+  createOverlapNotifier(camera: typeof THREE.Camera): Stream<OverlapEvent> {
+    return toOverlapStream(toStream(this._domEvent), this.getRendererDOM(), camera);
   }
 
   /**

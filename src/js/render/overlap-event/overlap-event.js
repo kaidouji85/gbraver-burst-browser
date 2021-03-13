@@ -80,7 +80,6 @@ export function toOverlapStream(origin: Stream<RendererDOMEvent>, rendererDOM: H
       }
     }),
     filter(v => !!v),
-    map(v => (v: OverlapEvent)),
     share()
   );
   return toStream(observable);
