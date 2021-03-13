@@ -2,10 +2,10 @@
 
 import {LightningDozerCutIn} from "./lightning-dozer-cutin";
 import type {Resources} from "../../../resource";
-import {Observable} from "rxjs";
 import {PlayerLightningDozerCutInView} from "./view/player-lightning-dozer-cutin-view";
 import {EnemyLightningDozerCutInView} from "./view/enemy-lightning-dozer-cutin-view";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream} from "../../../stream/core";
 
 /**
  * プレイヤー ライトニングドーザ カットイン
@@ -14,7 +14,7 @@ import type {GameObjectAction} from "../../action/game-object-action";
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function playerLightningDozerCutIn(resources: Resources, listener: Observable<GameObjectAction>): LightningDozerCutIn {
+export function playerLightningDozerCutIn(resources: Resources, listener: Stream<GameObjectAction>): LightningDozerCutIn {
   const view = new PlayerLightningDozerCutInView(resources);
   return new LightningDozerCutIn(view, listener);
 }
@@ -26,7 +26,7 @@ export function playerLightningDozerCutIn(resources: Resources, listener: Observ
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function enemyLightningiDozerCutIn(resources: Resources, listener: Observable<GameObjectAction>): LightningDozerCutIn {
+export function enemyLightningiDozerCutIn(resources: Resources, listener: Stream<GameObjectAction>): LightningDozerCutIn {
   const view = new EnemyLightningDozerCutInView(resources);
   return new LightningDozerCutIn(view, listener);
 }

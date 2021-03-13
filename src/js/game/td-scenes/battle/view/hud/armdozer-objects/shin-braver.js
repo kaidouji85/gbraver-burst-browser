@@ -4,10 +4,10 @@ import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import {enemyShinBraverCutIn, playerShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver";
 import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -54,7 +54,7 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
  * @param state プレイヤーの状態
  * @return シンブレイバーHUD
  */
-export function playerShinBraverHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
+export function playerShinBraverHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,
     cutIn: playerShinBraverCutIn(resources, listener),
@@ -69,7 +69,7 @@ export function playerShinBraverHUD(resources: Resources, listener: Observable<G
  * @param state プレイヤーの状態
  * @return シンブレイバーHUD
  */
-export function enemyShinBraverHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDArmdozerObjects {
+export function enemyShinBraverHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,
     cutIn: enemyShinBraverCutIn(resources, listener)

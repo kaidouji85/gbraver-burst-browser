@@ -6,7 +6,6 @@ import {DamageIndicator} from "../../../../../game-object/damage-indicator/damag
 import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 import type {Resources} from "../../../../../resource";
-import {Observable} from "rxjs";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
@@ -23,6 +22,7 @@ import {PowerUp} from "../../../../../game-object/power-up/power-up";
 import {DamageDecrease} from "../../../../../game-object/damage-decrease/damage-decrease";
 import {enemyDamageDecrease, playerDamageDecrease} from "../../../../../game-object/damage-decrease";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../stream/core";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -132,7 +132,7 @@ export class TDPlayerImpl implements TDPlayer {
  * @param listener リスナー
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
+export function playerTDObjects(resources: Resources, state: Player, listener: Stream<GameObjectAction>): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
     hitMark: {
@@ -165,7 +165,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
  * @param listener リスナー
  * @return 3Dプレイヤーオブジェクト
  */
-export function enemyTDObject(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
+export function enemyTDObject(resources: Resources, state: Player, listener: Stream<GameObjectAction>): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
     hitMark: {

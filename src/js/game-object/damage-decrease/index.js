@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import {Observable} from "rxjs";
 import {PlayerDamageDecreaseView} from "./view/player-damage-decrease-view";
 import {EnemyDamageDecreaseView} from "./view/enemy-damage-decrease-view";
 import {DamageDecrease} from "./damage-decrease";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream} from "../../stream/core";
 
 /**
  * プレイヤー ダメージ減少 ポップアップ
@@ -14,7 +14,7 @@ import type {GameObjectAction} from "../action/game-object-action";
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function playerDamageDecrease(resources: Resources, listener: Observable<GameObjectAction>): DamageDecrease {
+export function playerDamageDecrease(resources: Resources, listener: Stream<GameObjectAction>): DamageDecrease {
   const view = new PlayerDamageDecreaseView(resources);
   return new DamageDecrease(view, resources, listener);
 }
@@ -26,7 +26,7 @@ export function playerDamageDecrease(resources: Resources, listener: Observable<
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function enemyDamageDecrease(resources: Resources, listener: Observable<GameObjectAction>): DamageDecrease {
+export function enemyDamageDecrease(resources: Resources, listener: Stream<GameObjectAction>): DamageDecrease {
   const view = new EnemyDamageDecreaseView(resources);
   return new DamageDecrease(view, resources, listener);
 }

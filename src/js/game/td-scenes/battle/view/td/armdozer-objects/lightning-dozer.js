@@ -2,7 +2,6 @@
 
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import {LightningBarrierGameEffect} from "../../../../../../game-object/barrier/lightning/lightning-barrier";
 import * as THREE from "three";
 import type {TDArmdozerObjects} from "./armdozer-objects";
@@ -10,6 +9,7 @@ import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-d
 import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../../stream/core";
 
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト フィールド
@@ -82,7 +82,7 @@ export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDFiel
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerLightningDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerTD {
+export function playerLightningDozerTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
     lightningDozer: PlayerLightningDozer(resources, listener),
     lightningBarrier: new LightningBarrierGameEffect(resources, listener)
@@ -97,7 +97,7 @@ export function playerLightningDozerTD(resources: Resources, listener: Observabl
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyLightningDozerTD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerTD {
+export function enemyLightningDozerTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
     lightningDozer: EnemyLightningDozer(resources, listener),
     lightningBarrier: new LightningBarrierGameEffect(resources, listener)

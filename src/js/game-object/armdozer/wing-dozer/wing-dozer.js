@@ -6,7 +6,6 @@ import {Animate} from "../../../animation/animate";
 import type {WingDozerView} from "./view/wing-dozer-view";
 import type {WingDozerModel} from "./model/wing-dozer-model";
 import {createInitialValue} from "./model/initial-value";
-import {Observable, Subscription} from "rxjs";
 import {charge} from "./animation/charge";
 import {upper} from "./animation/upper";
 import {upperToStand} from "./animation/upper-to-stand";
@@ -23,6 +22,7 @@ import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
 import type {PreRender} from "../../../game-loop/pre-render";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ウィングドーザ
@@ -31,7 +31,7 @@ export class WingDozer implements ArmDozerSprite {
   _model: WingDozerModel;
   _view: WingDozerView;
   _sounds: WingDozerSounds;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -40,11 +40,11 @@ export class WingDozer implements ArmDozerSprite {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスト
    */
-  constructor(view: WingDozerView, resources: Resources, listener: Observable<GameObjectAction>): void {
+  constructor(view: WingDozerView, resources: Resources, listener: Stream<GameObjectAction>): void {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new WingDozerSounds(resources);
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {
@@ -58,7 +58,7 @@ export class WingDozer implements ArmDozerSprite {
    */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

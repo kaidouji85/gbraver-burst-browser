@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import type {TurnStartView} from "./view/turn-start-view";
 import type {TurnStartModel} from "./model/turn-start-model";
-import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
@@ -13,6 +12,7 @@ import {hidden} from './animation/hidden';
 import {TurnStartSounds} from "./sounds/turn-start-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /**
  * ターンスタート
@@ -21,7 +21,7 @@ export class TurnStart {
   _model: TurnStartModel;
   _view: TurnStartView;
   _sounds: TurnStartSounds;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -30,11 +30,11 @@ export class TurnStart {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: TurnStartView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: TurnStartView, resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new TurnStartSounds(resources);
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -44,7 +44,7 @@ export class TurnStart {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

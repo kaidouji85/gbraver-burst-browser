@@ -4,7 +4,6 @@ import {PlayerSelect} from "../src/js/game/dom-scenes/player-select";
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
 import {PilotIds} from "gbraver-burst-core";
-import {PilotIcon} from "../src/js/game/dom-scenes/player-select/pilot-selector/pilot-icon";
 import {PilotSelector} from "../src/js/game/dom-scenes/player-select/pilot-selector";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {ArmdozerSelector} from "../src/js/game/dom-scenes/player-select/armdozer-selector";

@@ -3,14 +3,13 @@
 import type {Player} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import {enemyLightningDozerTD, playerLightningDozerTD} from "./lightning-dozer";
 import type {TDArmdozerObjects} from "./armdozer-objects";
 import {enemyShinBraverTD, playerShinBraverTD} from "./shin-braver";
 import {enemyWingDozerTD, playerWingDozerTD} from "./wing-dozer";
 import {enemyNeoLandozerTD, playerNeoLandozerTD} from "./neo-landozer";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import {toStream} from "../../../../../../stream/rxjs";
+import type {Stream} from "../../../../../../stream/core";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
@@ -20,10 +19,10 @@ import {toStream} from "../../../../../../stream/rxjs";
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function playerTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozerObjects {
+export function playerTDArmdozer(resources: Resources, listener: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return playerShinBraverTD(resources, toStream(listener), state);
+      return playerShinBraverTD(resources, listener, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
       return playerLightningDozerTD(resources, listener, state);
     case ArmDozerIdList.WING_DOZER:
@@ -31,7 +30,7 @@ export function playerTDArmdozer(resources: Resources, listener: Observable<Game
     case ArmDozerIdList.NEO_LANDOZER:
       return playerNeoLandozerTD(resources, listener, state);
     default:
-      return playerShinBraverTD(resources, toStream(listener), state);
+      return playerShinBraverTD(resources, listener, state);
   }
 }
 
@@ -43,10 +42,10 @@ export function playerTDArmdozer(resources: Resources, listener: Observable<Game
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function enemyTDArmdozer(resources: Resources, listener: Observable<GameObjectAction>, state: Player): TDArmdozerObjects {
+export function enemyTDArmdozer(resources: Resources, listener: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return enemyShinBraverTD(resources, toStream(listener), state);
+      return enemyShinBraverTD(resources, listener, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
       return enemyLightningDozerTD(resources, listener, state);
     case ArmDozerIdList.WING_DOZER:
@@ -54,6 +53,6 @@ export function enemyTDArmdozer(resources: Resources, listener: Observable<GameO
     case ArmDozerIdList.NEO_LANDOZER:
       return enemyNeoLandozerTD(resources, listener, state);
     default:
-      return enemyShinBraverTD(resources, toStream(listener), state);
+      return enemyShinBraverTD(resources, listener, state);
   }
 }

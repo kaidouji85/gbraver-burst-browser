@@ -3,13 +3,13 @@
 import {BatteryNumber} from "./battery-number";
 import type {Resources} from "../../resource";
 import {PlayerBatteryNumberView} from "./view/player-battery-number-view";
-import {Observable} from "rxjs";
 import {EnemyBatteryNumberView} from "./view/enemy-battery-number-view";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream} from "../../stream/core";
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>
+  listener: Stream<GameObjectAction>
 };
 
 /** プレイヤーのバッテリービュー */

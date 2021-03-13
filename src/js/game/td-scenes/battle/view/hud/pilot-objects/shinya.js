@@ -2,12 +2,12 @@
 
 import type {Resources} from "../../../../../../resource";
 import {ShinyaCutIn} from "../../../../../../game-object/cut-in/shinya/shinya";
-import {Observable} from "rxjs";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {enemyShinyaCutIn, playerShinyaCutIn} from "../../../../../../game-object/cut-in/shinya";
 import * as THREE from "three";
 import type {HUDPilotObjects} from "./hud-pilot-objects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../../stream/core";
 
 /**
  * コンストラクタのパラメータ
@@ -61,7 +61,7 @@ export class ShinyaHUD implements HUDPilotObjects {
  * @param state プレイヤーの状態
  * @return シンヤHUD
  */
-export function playerShinyaHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): ShinyaHUD {
+export function playerShinyaHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): ShinyaHUD {
   return new ShinyaHUD( {
     playerId: state.playerId,
     cutIn: playerShinyaCutIn(resources, listener)
@@ -76,7 +76,7 @@ export function playerShinyaHUD(resources: Resources, listener: Observable<GameO
  * @param state プレイヤーの状態
  * @return シンヤHUD
  */
-export function enemyShinyaHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): ShinyaHUD {
+export function enemyShinyaHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): ShinyaHUD {
   return new ShinyaHUD( {
     playerId: state.playerId,
     cutIn: enemyShinyaCutIn(resources, listener)

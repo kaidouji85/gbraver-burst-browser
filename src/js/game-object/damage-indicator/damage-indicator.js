@@ -3,15 +3,15 @@
 import type {DamageIndicatorView} from "./view/damage-indicator-view";
 import {createInitialValue} from "./model/initial-value";
 import type {DamageIndicatorModel} from "./model/damage-indicator-model";
-import {Observable, Subscription} from "rxjs";
 import * as THREE from 'three';
 import {popUp} from "./animation/pop-up";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 type Param = {
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   view: DamageIndicatorView
 };
 
@@ -19,12 +19,12 @@ type Param = {
 export class DamageIndicator {
   _model: DamageIndicatorModel;
   _view: DamageIndicatorView;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._view = param.view;
     this._model = createInitialValue();
-    this._subscription = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {
@@ -36,7 +36,7 @@ export class DamageIndicator {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /** ダメージ数字を表示する */

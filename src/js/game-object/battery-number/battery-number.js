@@ -2,7 +2,6 @@
 
 import type {BatteryNumberModel} from "./model/battery-number-model";
 import type {BatteryNumberView} from "./view/battery-number-view";
-import {Observable, Subscription} from "rxjs";
 import * as THREE from 'three';
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
@@ -10,9 +9,10 @@ import {Animate} from "../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 type Param = {
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   view: BatteryNumberView
 };
 
@@ -20,12 +20,12 @@ type Param = {
 export class BatteryNumber {
   _model: BatteryNumberModel;
   _view: BatteryNumberView;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._model = createInitialValue();
     this._view = param.view;
-    this._subscription = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {
@@ -37,7 +37,7 @@ export class BatteryNumber {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

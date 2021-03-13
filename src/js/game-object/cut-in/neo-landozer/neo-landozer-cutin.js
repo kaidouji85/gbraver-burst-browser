@@ -2,7 +2,6 @@
 
 import * as THREE from "three";
 import type {NeoLandozerCutInView} from "./view/neo-landozer-cutin-view";
-import {Observable, Subscription} from "rxjs";
 import type {NeoLandozerCutInModel} from "./model/neo-landozer-cutin-model";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../../game-loop/pre-render";
@@ -11,6 +10,7 @@ import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ネオランドーザ カットイン
@@ -18,12 +18,12 @@ import type {GameObjectAction} from "../../action/game-object-action";
 export class NeoLandozerCutIn implements HUDTracking {
   _model: NeoLandozerCutInModel;
   _view: NeoLandozerCutInView;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
   
-  constructor(view: NeoLandozerCutInView, listener: Observable<GameObjectAction>) {
+  constructor(view: NeoLandozerCutInView, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -35,7 +35,7 @@ export class NeoLandozerCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

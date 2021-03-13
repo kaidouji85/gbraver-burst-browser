@@ -4,13 +4,13 @@ import {LightningDozerCutIn} from "../../../../../../game-object/cut-in/lightnin
 import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import {
   enemyLightningiDozerCutIn,
   playerLightningDozerCutIn
 } from "../../../../../../game-object/cut-in/lightning-dozer";
 import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../../stream/core";
 
 /**
  * HUDレイヤー ライトニングドーザ固有オブジェクト フィールド
@@ -64,7 +64,7 @@ export class LightningDozerHUD implements HUDArmdozerObjects, LightningDozerHUDF
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerLightningDozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerHUD {
+export function playerLightningDozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {
     cutIn: playerLightningDozerCutIn(resources, listener)
   });
@@ -78,7 +78,7 @@ export function playerLightningDozerHUD(resources: Resources, listener: Observab
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyLightningDozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): LightningDozerHUD {
+export function enemyLightningDozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {
     cutIn: enemyLightningiDozerCutIn(resources, listener)
   });

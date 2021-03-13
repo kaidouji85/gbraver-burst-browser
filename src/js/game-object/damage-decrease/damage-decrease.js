@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import type {DamageDecreaseView} from "./view/damage-decrease-view";
 import type {DamageDecreaseModel} from "./model/damage-decrease-model";
-import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
@@ -11,6 +10,7 @@ import {popUp} from "./animation/pop-up";
 import {DamageDecreaseSounds} from "./sounds/damage-decrease-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /**
  * ダメージ減少
@@ -19,7 +19,7 @@ export class DamageDecrease {
   _model: DamageDecreaseModel;
   _view: DamageDecreaseView;
   _sounds: DamageDecreaseSounds;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -28,11 +28,11 @@ export class DamageDecrease {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: DamageDecreaseView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: DamageDecreaseView, resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new DamageDecreaseSounds(resources);
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {
@@ -44,7 +44,7 @@ export class DamageDecrease {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

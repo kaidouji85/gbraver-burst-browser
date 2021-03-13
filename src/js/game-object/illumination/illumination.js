@@ -4,10 +4,10 @@ import * as THREE from "three";
 import type {IlluminationModel} from "./model/illumination-model";
 import {IlluminationView} from "./view/illumination-view";
 import {createInitialValue} from "./model/initial-value";
-import {Observable, Subscription} from "rxjs";
 import {Animate} from "../../animation/animate";
 import {intensity} from "./animation/intensity";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /**
  * ステージ全体の照明
@@ -15,15 +15,15 @@ import type {GameObjectAction} from "../action/game-object-action";
 export class Illumination {
   _model: IlluminationModel;
   _view: IlluminationView;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
-  constructor(listener: Observable<GameObjectAction>) {
+  constructor(listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
 
     this._view = new IlluminationView();
     this._view.engage(this._model);
 
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       }
@@ -32,7 +32,7 @@ export class Illumination {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

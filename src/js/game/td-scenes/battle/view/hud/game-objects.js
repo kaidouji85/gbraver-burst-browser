@@ -3,7 +3,7 @@
 import {BatterySelector} from "../../../../../game-object/battery-selector";
 import {BurstButton} from "../../../../../game-object/burst-button/burst-button";
 import type {Resources} from "../../../../../resource";
-import {Observable, Subscription} from "rxjs/index";
+import {Observable} from "rxjs/index";
 import type {BattleSceneAction} from "../../actions";
 import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
@@ -12,6 +12,7 @@ import {Fader} from "../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
 import {PilotButton} from "../../../../../game-object/pilot-button";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import type {Stream, Unsubscriber} from "../../../../../stream/core";
 
 /** イベント通知 */
 type Notifier = {
@@ -28,9 +29,9 @@ export class HUDGameObjects {
   frontmostFader: Fader;
   rearmostFader: Fader;
   _battleSceneAction: Subject<BattleSceneAction>;
-  _subscriptions: typeof Subscription[];
+  _unsubscribers: Unsubscriber[];
 
-  constructor(resources: Resources, listener: Observable<GameObjectAction>, playerInfo: Player) {
+  constructor(resources: Resources, listener: Stream<GameObjectAction>, playerInfo: Player) {
     this._battleSceneAction = new Subject();
 
     this.batterySelector = new BatterySelector({
@@ -71,7 +72,7 @@ export class HUDGameObjects {
       isVisible: false,
     });
 
-    this._subscriptions = [
+    this._unsubscribers = [
       this.pilotButton.notifier().pushButton.subscribe(() => {
         this._battleSceneAction.next({type: 'doPilotSkill'});
       })
@@ -87,7 +88,7 @@ export class HUDGameObjects {
     this.pilotButton.destructor();
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
-    this._subscriptions.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }

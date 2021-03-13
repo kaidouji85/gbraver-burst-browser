@@ -3,12 +3,12 @@
 import * as THREE from 'three';
 import type {ReflectIndicatorView} from "./view/reflect-indicator-view";
 import type {ReflectIndocatorModel} from "./model/reflect-indocator-model";
-import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /**
  * ダメージ反射
@@ -16,7 +16,7 @@ import type {GameObjectAction} from "../action/game-object-action";
 export class ReflectIndicator {
   _model: ReflectIndocatorModel;
   _view: ReflectIndicatorView;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -24,10 +24,10 @@ export class ReflectIndicator {
    * @param view ビュー
    * @param listener イベントリスナ
    */
-  constructor(view: ReflectIndicatorView, listener: Observable<GameObjectAction>) {
+  constructor(view: ReflectIndicatorView, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {
@@ -39,7 +39,7 @@ export class ReflectIndicator {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

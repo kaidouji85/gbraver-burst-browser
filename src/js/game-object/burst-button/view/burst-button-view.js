@@ -8,12 +8,12 @@ import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
-import {Observable} from "rxjs";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import type {ArmdozerIcon} from "./armdozer-icon";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {createArmdozerIcon} from "./create-armdozer-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream} from "../../../stream/core";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -29,7 +29,7 @@ const PADDING_BOTTOM = 80;
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   armDozerId: ArmDozerId,
   onPush: () => void,
 };

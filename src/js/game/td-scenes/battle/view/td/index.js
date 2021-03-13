@@ -18,6 +18,8 @@ import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
+import {toStream} from "../../../../../stream/rxjs";
+import type {Stream} from "../../../../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -40,7 +42,7 @@ export class ThreeDimensionLayer {
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
   _overlap: Observable<OverlapEvent>;
-  _gameObjectAction: Observable<GameObjectAction>;
+  _gameObjectAction: Stream<GameObjectAction>;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];
@@ -49,10 +51,14 @@ export class ThreeDimensionLayer {
     this.scene = new THREE.Scene();
     this.scene.background = skyBox(param.resources);
 
-    this.camera = new TDCamera(param.listener.update, param.listener.resize);
+    this.camera = new TDCamera(toStream(param.listener.update), toStream(param.listener.resize));
 
     this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
+    this._gameObjectAction = gameObjectStream(
+      toStream(param.listener.update),
+      toStream(param.listener.preRender),
+      toStream(this._overlap)
+    );
 
     this.players = [
       playerTDObjects(param.resources, player, this._gameObjectAction),

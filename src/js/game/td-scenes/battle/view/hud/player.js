@@ -4,11 +4,11 @@ import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import {Gauge} from "../../../../../game-object/gauge/gauge";
 import type {Resources} from "../../../../../resource";
-import {Observable} from "rxjs";
 import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../stream/core";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
@@ -62,7 +62,7 @@ export class HUDPlayer implements HUDPlayerField{
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function playerHUDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): HUDPlayer {
+export function playerHUDObjects(resources: Resources, state: Player, listener: Stream<GameObjectAction>): HUDPlayer {
   return new HUDPlayer({
     playerId: state.playerId,
     gauge: playerGauge({
@@ -83,7 +83,7 @@ export function playerHUDObjects(resources: Resources, state: Player, listener: 
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function enemyHUDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): HUDPlayer {
+export function enemyHUDObjects(resources: Resources, state: Player, listener: Stream<GameObjectAction>): HUDPlayer {
   return new HUDPlayer({
     playerId: state.playerId,
     gauge: enemyGauge({

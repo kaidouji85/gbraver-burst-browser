@@ -5,9 +5,9 @@ import {Observable} from "rxjs";
 /**
  * 購読停止オブジェクト
  */
-export interface UnSubscriber {
+export interface Unsubscriber {
   /** ストリームの購読を停止する */
-  unSubscribe(): void;
+  unsubscribe(): void;
 }
 
 /**
@@ -20,7 +20,7 @@ export interface Stream<T> {
    * @param listener イベントリスナ
    * @return 購読停止オブジェクト
    */
-  subscribe(listener: (v: T) => void): UnSubscriber;
+  subscribe(listener: (v: T) => void): Unsubscriber;
 
   /**
    * 本ストリームが内部的に持つrxjsのObservableを取得する

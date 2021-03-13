@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import type {RaitoModel} from "./model/raito-model";
 import {RaitoView} from "./view/raito-view";
 import {createInitialValue} from "./model/initial-value";
-import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
@@ -13,6 +12,7 @@ import type {HUDTracking} from "../../../tracking/hud-tracking";
 import {RaitoSounds} from "./sounds/raito-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ライト カットイン
@@ -21,7 +21,7 @@ export class RaitoCutIn implements HUDTracking {
   _model: RaitoModel;
   _view: RaitoView;
   _sounds: RaitoSounds;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -30,11 +30,11 @@ export class RaitoCutIn implements HUDTracking {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: RaitoView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: RaitoView, resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new RaitoSounds(resources);
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -46,6 +46,7 @@ export class RaitoCutIn implements HUDTracking {
    */
   destructor(): void {
     this._view.destructor();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

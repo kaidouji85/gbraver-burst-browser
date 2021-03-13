@@ -1,7 +1,6 @@
 // @flow
 
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import type {Player} from "gbraver-burst-core";
 import {PilotIds} from "gbraver-burst-core";
 import type {HUDPilotObjects} from "./hud-pilot-objects";
@@ -9,6 +8,7 @@ import {enemyGaiHUD, playerGaiHUD} from "./gai";
 import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
 import {enemyRaitoHUD, playerRaitoHUD} from "./raito";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../../stream/core";
 
 /**
  * プレイヤー側 HUDパイロット
@@ -18,7 +18,7 @@ import type {GameObjectAction} from "../../../../../../game-object/action/game-o
  * @param state プレイヤー状態
  * @return HUDパイロット
  */
-export function playerHUDPilotObjects(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDPilotObjects {
+export function playerHUDPilotObjects(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
       return playerShinyaHUD(resources, listener, state);
@@ -39,7 +39,7 @@ export function playerHUDPilotObjects(resources: Resources, listener: Observable
  * @param state プレイヤー状態
  * @return HUDパイロット
  */
-export function enemyHUDPilotObjects(resources: Resources, listener: Observable<GameObjectAction>, state: Player): HUDPilotObjects {
+export function enemyHUDPilotObjects(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
       return enemyShinyaHUD(resources, listener, state);

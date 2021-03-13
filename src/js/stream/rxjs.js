@@ -1,7 +1,7 @@
 // @flow
 
 import {Observable, Subscription} from "rxjs";
-import type {Stream, UnSubscriber} from "./core";
+import type {Stream, Unsubscriber} from "./core";
 
 /**
  * RXJSのObservableをStreamに変換する
@@ -29,9 +29,9 @@ export function toStream<T>(origin: Observable<T>/* TODO typeof Observable に�
  * @param origin 変換元
  * @return 変換結果
  */
-export function toUnSubscriber(origin: Subscription /* TODO typeof Subscription に変更する*/): UnSubscriber {
+export function toUnSubscriber(origin: Subscription /* TODO typeof Subscription に変更する*/): Unsubscriber {
   return {
-    unSubscribe(): void {
+    unsubscribe(): void {
       origin.unsubscribe();
     }
   };

@@ -24,14 +24,14 @@ import {burstToStand} from "./animation/burst-to-stand";
 import type {Resources} from "../../../resource";
 import {ShinBraverSounds} from "./sounds/shin-braver-sounds";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, UnSubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
   _model: ShinBraverModel;
   _view: ShinBraverView;
   _sounds: ShinBraverSounds;
-  _unSubscription: UnSubscriber;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -44,7 +44,7 @@ export class ShinBraver implements ArmDozerSprite {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new ShinBraverSounds(resources);
-    this._unSubscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {
@@ -56,7 +56,7 @@ export class ShinBraver implements ArmDozerSprite {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._unSubscription.unSubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

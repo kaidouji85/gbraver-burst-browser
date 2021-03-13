@@ -14,6 +14,7 @@ import type {PilotIcon} from "./pilot-icon";
 import type {PilotId} from "gbraver-burst-core";
 import {createPilotIcon} from "./pilot-id-to-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream} from "../../../stream/core";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -53,7 +54,7 @@ export class PilotButtonView {
    * @param pilotId パイロットID
    * @param listener イベントリスナ
    */
-  constructor(resources: Resources, pilotId: PilotId, listener: Observable<GameObjectAction>) {
+  constructor(resources: Resources, pilotId: PilotId, listener: Stream<GameObjectAction>) {
     this._pushButton = new Subject();
 
     this._group = new THREE.Group();
