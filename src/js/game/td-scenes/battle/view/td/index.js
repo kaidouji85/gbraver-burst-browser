@@ -75,7 +75,7 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
 
-    this.gameObjects = new TDGameObjects(param.resources, this._gameObjectAction);
+    this.gameObjects = new TDGameObjects(param.resources, toStream(this._gameObjectAction));
     this.gameObjects.getObject3Ds().forEach(object => {
       this.scene.add(object);
     });
