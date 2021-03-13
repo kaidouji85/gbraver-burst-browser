@@ -6,7 +6,6 @@ import {DamageIndicator} from "../../../../../game-object/damage-indicator/damag
 import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
 import type {Resources} from "../../../../../resource";
-import {Observable} from "rxjs";
 import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-object/battery-number";
 import {enemyRecoverBattery, playerRecoverBattery} from "../../../../../game-object/recover-battery";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
@@ -23,7 +22,7 @@ import {PowerUp} from "../../../../../game-object/power-up/power-up";
 import {DamageDecrease} from "../../../../../game-object/damage-decrease/damage-decrease";
 import {enemyDamageDecrease, playerDamageDecrease} from "../../../../../game-object/damage-decrease";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import {toStream} from "../../../../../stream/rxjs";
+import type {Stream} from "../../../../../stream/core";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -133,27 +132,27 @@ export class TDPlayerImpl implements TDPlayer {
  * @param listener リスナー
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
+export function playerTDObjects(resources: Resources, state: Player, listener: Stream<GameObjectAction>): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
     hitMark: {
-      shockWave: playerShockWave(resources, toStream(listener)),
-      lightning: playerLightning(resources, toStream(listener))
+      shockWave: playerShockWave(resources, listener),
+      lightning: playerLightning(resources, listener)
     },
     armdozerEffects: {
-      powerUp: playerPowerUp(resources, toStream(listener)),
-      reflect: playerReflectIndicator(resources, toStream(listener)),
-      continuousAttack: playerContinuousAttack(resources, toStream(listener)),
-      damageDecrease: playerDamageDecrease(resources, toStream(listener)),
+      powerUp: playerPowerUp(resources, listener),
+      reflect: playerReflectIndicator(resources, listener),
+      continuousAttack: playerContinuousAttack(resources, listener),
+      damageDecrease: playerDamageDecrease(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
-      listener: toStream(listener)
+      listener: listener
     }),
-    recoverBattery: playerRecoverBattery(resources, toStream(listener)),
+    recoverBattery: playerRecoverBattery(resources, listener),
     damageIndicator: playerDamageIndicator({
       resources: resources,
-      listener: toStream(listener)
+      listener: listener
     }),
   });
 }
@@ -166,27 +165,27 @@ export function playerTDObjects(resources: Resources, state: Player, listener: O
  * @param listener リスナー
  * @return 3Dプレイヤーオブジェクト
  */
-export function enemyTDObject(resources: Resources, state: Player, listener: Observable<GameObjectAction>): TDPlayer {
+export function enemyTDObject(resources: Resources, state: Player, listener: Stream<GameObjectAction>): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
     hitMark: {
-      shockWave: enemyShockWave(resources, toStream(listener)),
-      lightning: enemyLightning(resources, toStream(listener))
+      shockWave: enemyShockWave(resources, listener),
+      lightning: enemyLightning(resources, listener)
     },
     armdozerEffects: {
-      powerUp: enemyPowerUp(resources, toStream(listener)),
-      reflect: enemyReflectIndicator(resources, toStream(listener)),
-      continuousAttack: enemyContinuousAttack(resources, toStream(listener)),
-      damageDecrease: enemyDamageDecrease(resources, toStream(listener)),
+      powerUp: enemyPowerUp(resources, listener),
+      reflect: enemyReflectIndicator(resources, listener),
+      continuousAttack: enemyContinuousAttack(resources, listener),
+      damageDecrease: enemyDamageDecrease(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,
-      listener: toStream(listener)
+      listener: listener
     }),
-    recoverBattery: enemyRecoverBattery(resources, toStream(listener)),
+    recoverBattery: enemyRecoverBattery(resources, listener),
     damageIndicator: enemyDamageIndicator({
       resources: resources,
-      listener: toStream(listener)
+      listener: listener
     }),
   });
 }
