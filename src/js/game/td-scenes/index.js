@@ -10,14 +10,13 @@ import type {GameLoop} from "../../game-loop/game-loop";
 import type {Resize} from "../../window/resize";
 import type {EndBattle, GameAction} from "../actions/game-actions";
 import {map} from "rxjs/operators";
-import {deprecated_gameLoopStream} from "../../game-loop/game-loop";
+import {gameLoopStream} from "../../game-loop/game-loop";
 import type {Stream} from "../../stream/core";
-import {toStream} from "../../stream/rxjs";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
   _endBattle: Subject<EndBattle>;
-  _gameLoop: Observable<GameLoop>;
+  _gameLoop: Stream<GameLoop>;
   _resize: Stream<Resize>;
   _renderer: Renderer;
   _scene: ?Scene;
@@ -30,7 +29,7 @@ export class TDScenes {
    */
   constructor(resize: Stream<Resize>) {
     this._endBattle = new Subject<EndBattle>();
-    this._gameLoop = deprecated_gameLoopStream();
+    this._gameLoop = gameLoopStream();
     this._resize = resize;
 
     this._renderer = new Renderer({
@@ -74,7 +73,7 @@ export class TDScenes {
       battleProgress: room,
       initialState: initialState,
       listener: {
-        gameLoop: toStream(this._gameLoop),
+        gameLoop: this._gameLoop,
         resize: this._resize,
       }
     });
