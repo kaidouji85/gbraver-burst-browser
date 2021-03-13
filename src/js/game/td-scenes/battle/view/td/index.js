@@ -3,7 +3,6 @@
 import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
-import {Observable} from "rxjs";
 import type {Update} from "../../../../../game-loop/update";
 import type {PreRender} from "../../../../../game-loop/pre-render";
 import {TDCamera} from "../../../../../game-object/camera/td";
@@ -18,7 +17,6 @@ import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
-import {toStream} from "../../../../../stream/rxjs";
 import type {Stream} from "../../../../../stream/core";
 
 /** コンストラクタのパラメータ */
@@ -28,9 +26,9 @@ type Param = {
   playerId: PlayerId,
   players: Player[],
   listener: {
-    resize: Observable<Resize>,
-    update: Observable<Update>,
-    preRender: Observable<PreRender>,
+    resize: Stream<Resize>,
+    update: Stream<Update>,
+    preRender: Stream<PreRender>,
   }
 };
 
@@ -51,14 +49,10 @@ export class ThreeDimensionLayer {
     this.scene = new THREE.Scene();
     this.scene.background = skyBox(param.resources);
 
-    this.camera = new TDCamera(toStream(param.listener.update), toStream(param.listener.resize));
+    this.camera = new TDCamera(param.listener.update, param.listener.resize);
 
     this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this._gameObjectAction = gameObjectStream(
-      toStream(param.listener.update),
-      toStream(param.listener.preRender),
-      this._overlap
-    );
+    this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
 
     this.players = [
       playerTDObjects(param.resources, player, this._gameObjectAction),

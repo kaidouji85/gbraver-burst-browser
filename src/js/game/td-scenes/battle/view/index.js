@@ -6,7 +6,7 @@ import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../game-loop/game-loop";
-import {Observable, Subject} from "rxjs";
+import {Observable} from "rxjs";
 import type {BattleSceneAction} from "../actions";
 import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
@@ -49,8 +49,8 @@ export class BattleSceneView {
   _playerId: PlayerId;
   _safeAreaInset: SafeAreaInset;
   _renderer: OwnRenderer;
-  _updateTD: Subject<Update>;
-  _preRenderTD: Subject<PreRender>;
+  _updateTD: StreamSource<Update>;
+  _preRenderTD: StreamSource<PreRender>;
   _updateHUD: StreamSource<Update>;
   _preRenderHUD: StreamSource<PreRender>;
 
@@ -58,8 +58,8 @@ export class BattleSceneView {
     this._playerId = param.playerId;
     this._safeAreaInset = createSafeAreaInset();
     this._renderer = param.renderer;
-    this._updateTD = new Subject();
-    this._preRenderTD = new Subject();
+    this._updateTD = new RxjsStreamSource();
+    this._preRenderTD = new RxjsStreamSource();
     this._updateHUD = new RxjsStreamSource();
     this._preRenderHUD = new RxjsStreamSource();
 
@@ -70,7 +70,7 @@ export class BattleSceneView {
       playerId: param.playerId,
       players: param.players,
       listener: {
-        resize: param.listener.resize,
+        resize: toStream(param.listener.resize),
         update: this._updateTD,
         preRender: this._preRenderTD,
       }
