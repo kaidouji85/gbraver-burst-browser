@@ -11,7 +11,7 @@ import type {TDPlayer} from "./player";
 import {enemyTDObject, playerTDObjects} from "./player";
 import {TDGameObjects} from "./game-objects";
 import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
-import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
+import {deprecated_gameObjectStream} from "../../../../../game-object/action/game-object-action";
 import type {Resize} from "../../../../../window/resize";
 import {skyBox} from "./sky-box";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
@@ -53,7 +53,7 @@ export class ThreeDimensionLayer {
     this.camera = new TDCamera(toStream(param.listener.update), toStream(param.listener.resize));
 
     this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
+    this._gameObjectAction = deprecated_gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
 
     this.players = [
       playerTDObjects(param.resources, player, this._gameObjectAction),

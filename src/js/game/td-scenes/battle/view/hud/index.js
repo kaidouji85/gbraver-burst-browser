@@ -9,7 +9,7 @@ import type {PreRender} from "../../../../../game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import {HUDGameObjects} from "./game-objects";
 import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
-import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
+import {deprecated_gameObjectStream} from "../../../../../game-object/action/game-object-action";
 import type {Resize} from "../../../../../window/resize";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
@@ -56,7 +56,7 @@ export class HudLayer {
     this.camera = new PlainHUDCamera(toStream(param.listener.resize));
 
     this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
+    this._gameObjectAction = deprecated_gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];

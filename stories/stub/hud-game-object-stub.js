@@ -10,7 +10,7 @@ import type {GameLoop} from "../../src/js/game-loop/game-loop";
 import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
 import type {Update} from "../../src/js/game-loop/update";
 import type {PreRender} from "../../src/js/game-loop/pre-render";
-import {gameObjectStream} from "../../src/js/game-object/action/game-object-action";
+import {deprecated_gameObjectStream} from "../../src/js/game-object/action/game-object-action";
 import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {ResourceLoader} from "../../src/js/resource";
@@ -63,7 +63,7 @@ export class HUDGameObjectStub {
     this._camera = new PlainHUDCamera(toStream(this._resize));
 
     this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
-    this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
+    this._gameObjectAction = deprecated_gameObjectStream(this._update, this._preRender, this._overlap);
     this._subscription = [
       this._gameLoop.subscribe(this._onGameLoop.bind(this))
     ];
