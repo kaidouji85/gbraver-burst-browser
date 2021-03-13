@@ -30,3 +30,15 @@ export interface Stream<T> {
    */
   getRxjsObservable(): typeof Observable;
 }
+
+/**
+ * ストリームの源泉
+ */
+export interface StreamSource<T> extends Stream<T> {
+  /**
+   * ストリームに新しい値を流す
+   *
+   * @param v ストリームに流す値
+   */
+  next(v: T): void;
+}
