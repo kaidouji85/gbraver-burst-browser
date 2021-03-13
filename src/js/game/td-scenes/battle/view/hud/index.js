@@ -9,7 +9,7 @@ import type {PreRender} from "../../../../../game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
 import {HUDGameObjects} from "./game-objects";
 import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
-import {deprecated_gameObjectStream} from "../../../../../game-object/action/game-object-action";
+import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
 import type {Resize} from "../../../../../window/resize";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
 import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
@@ -19,6 +19,7 @@ import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
 import {toStream} from "../../../../../stream/rxjs";
+import type {Stream} from "../../../../../stream/core";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -49,18 +50,22 @@ export class HudLayer {
   pilots: HUDPilotObjects[];
   gameObjects: HUDGameObjects;
   _overlap: Observable<OverlapEvent>;
-  _gameObjectAction: Observable<GameObjectAction>;
+  _gameObjectAction: Stream<GameObjectAction>;
 
   constructor(param: Param) {
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera(toStream(param.listener.resize));
 
     this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this._gameObjectAction = deprecated_gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
+    this._gameObjectAction = gameObjectStream(
+      toStream(param.listener.update),
+      toStream(param.listener.preRender),
+      toStream(this._overlap)
+    );
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
-    this.gameObjects = new HUDGameObjects(param.resources, toStream(this._gameObjectAction), player);
+    this.gameObjects = new HUDGameObjects(param.resources, this._gameObjectAction, player);
     this.gameObjects.getObject3Ds().forEach(object => {
       this.scene.add(object);
     });
@@ -76,8 +81,8 @@ export class HudLayer {
       });
 
     this.armdozers = param.players.map(v => v.playerId === param.playerId
-      ? playerArmdozerHUD(param.resources, toStream(this._gameObjectAction), v)
-      : enemyArmdozerHUD(param.resources, toStream(this._gameObjectAction), v)
+      ? playerArmdozerHUD(param.resources, this._gameObjectAction, v)
+      : enemyArmdozerHUD(param.resources, this._gameObjectAction, v)
     );
     this.armdozers.map(v => v.getObject3Ds())
       .flat()
@@ -86,8 +91,8 @@ export class HudLayer {
       });
 
     this.pilots = param.players.map(v => v.playerId === param.playerId
-      ? playerHUDPilotObjects(param.resources, toStream(this._gameObjectAction), v)
-      : enemyHUDPilotObjects(param.resources, toStream(this._gameObjectAction), v)
+      ? playerHUDPilotObjects(param.resources, this._gameObjectAction, v)
+      : enemyHUDPilotObjects(param.resources, this._gameObjectAction, v)
     );
     this.pilots.map(v => v.getObject3Ds())
       .flat()
