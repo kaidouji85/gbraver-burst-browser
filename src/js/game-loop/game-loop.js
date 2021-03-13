@@ -1,6 +1,5 @@
 // @flow
 
-import {Observable, Subject} from "rxjs";
 import type {Stream} from "../stream/core";
 import {RxjsStreamSource} from "../stream/rxjs";
 
@@ -9,26 +8,6 @@ export type GameLoop = {
   type: 'GameLoop',
   time: DOMHighResTimeStamp
 };
-
-/**
- * @deprecated
- * ゲームループのリスナーを生成する
- *
- * @return ゲームループのリスナー
- */
-export function deprecated_gameLoopStream(): Observable<GameLoop> {
-  const listener: Subject<GameLoop> = new Subject();
-  const gameLoop = (time: DOMHighResTimeStamp) => {
-    requestAnimationFrame(gameLoop);
-    listener.next({
-      type: 'GameLoop',
-      time: time
-    });
-  };
-  requestAnimationFrame(gameLoop);
-
-  return listener;
-}
 
 /**
  * ゲームループのリスナーを生成する
