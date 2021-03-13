@@ -60,7 +60,7 @@ export class HudLayer {
 
     const player = param.players.find(v => v.playerId === param.playerId)
       || param.players[0];
-    this.gameObjects = new HUDGameObjects(param.resources, this._gameObjectAction, player);
+    this.gameObjects = new HUDGameObjects(param.resources, toStream(this._gameObjectAction), player);
     this.gameObjects.getObject3Ds().forEach(object => {
       this.scene.add(object);
     });

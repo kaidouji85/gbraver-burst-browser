@@ -16,5 +16,5 @@ async function main(): Promise<void> {
 window.addEventListener('load', () => {
   main();
 });
-export {toUnSubscriber} from "./stream/rxjs";
-export {toStream} from "./stream/rxjs";
+export {toUnSubscriber} from "./stream/rxjs"; // TODO 削除する
+export {toStream} from "./stream/rxjs";       // TODO 削除する

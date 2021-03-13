@@ -26,7 +26,7 @@ export const commands = () => {
     const burstButton = new BurstButton({
       armDozerId: ArmDozerIdList.SHIN_BRAVER,
       resources: resources,
-      listener: listener,
+      listener: toStream(listener),
       onPush: () => {
         // NOP
       },
