@@ -4,6 +4,8 @@ import type {SafeAreaInset} from "../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../safe-area/safe-area-inset";
 import {Observable} from "rxjs";
 import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
+import type {Stream} from "../stream/core";
+import {toStream} from "../stream/rxjs";
 
 /** リサイズ */
 export type Resize = {
@@ -21,11 +23,12 @@ export type Resize = {
 export const RESIZE_DELAY = 50;
 
 /**
+ * @deprecated
  * リサイズストリームを生成する
  *
  * @return ストリーム
  */
-export function createResizeStream(): Observable<Resize> {
+export function deprecated_createResizeStream(): Observable<Resize> {
   return new Observable(subscriber => {
     window.addEventListener('resize', () => {
       setTimeout(() => {
@@ -38,4 +41,25 @@ export function createResizeStream(): Observable<Resize> {
       }, RESIZE_DELAY);
     })
   });
+}
+
+/**
+ * リサイズストリームを生成する
+ *
+ * @return ストリーム
+ */
+export function resizeStream(): Stream<Resize> {
+  const origin = new Observable(subscriber => {
+    window.addEventListener('resize', () => {
+      setTimeout(() => {
+        subscriber.next({
+          type: 'resize',
+          width: getViewPortWidth(),
+          height: getViewPortHeight(),
+          safeAreaInset: createSafeAreaInset(),
+        });
+      }, RESIZE_DELAY);
+    })
+  });
+  return toStream(origin);
 }

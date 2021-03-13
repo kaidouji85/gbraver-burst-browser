@@ -4,7 +4,7 @@ import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resize} from "../../src/js/window/resize";
-import {createResizeStream} from "../../src/js/window/resize";
+import {deprecated_createResizeStream} from "../../src/js/window/resize";
 import {Renderer} from "../../src/js/render";
 import type {GameLoop} from "../../src/js/game-loop/game-loop";
 import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
@@ -52,7 +52,7 @@ export class TDGameObjectStub {
     this._creator = creator;
 
     this._safeAreaInset = createSafeAreaInset();
-    this._resize = createResizeStream();
+    this._resize = deprecated_createResizeStream();
     this._gameLoop = gameLoopStream();
     this._update = new Subject<Update>();
     this._preRender = new Subject<PreRender>();

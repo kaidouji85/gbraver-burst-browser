@@ -9,7 +9,7 @@ import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
 import type {Resize} from "../window/resize";
-import {createResizeStream} from "../window/resize";
+import {deprecated_createResizeStream} from "../window/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/root/resource-root";
@@ -55,7 +55,7 @@ export class Game {
     this._resourceRoot = resourceRoot;
 
     this._inProgress = {type: 'None'};
-    this._resize = createResizeStream();
+    this._resize = deprecated_createResizeStream();
     this._vh = new CssVH(this._resize);
 
     this._fader = new DOMFader();

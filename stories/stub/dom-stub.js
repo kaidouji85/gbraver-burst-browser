@@ -2,7 +2,7 @@
 
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 import '../../src/css/style.css';
-import {createResizeStream} from "../../src/js/window/resize";
+import {deprecated_createResizeStream} from "../../src/js/window/resize";
 import {CssVH} from "../../src/js/view-port/vh";
 import type {Resources} from "../../src/js/resource";
 import {ResourceLoader} from "../../src/js/resource";
@@ -30,7 +30,7 @@ export type DOMStubStory = () => HTMLElement;
  */
 export const domStub = (creator: DOMCreator): DOMStubStory => () => {
   const root = document.createElement('div');
-  const resize = createResizeStream();
+  const resize = deprecated_createResizeStream();
   const vh = new CssVH(resize);
 
   const resourceRoot = new StorybookResourceRoot();
