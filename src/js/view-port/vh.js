@@ -2,7 +2,7 @@
 
 import {getViewPortHeight} from "./view-port-size";
 import type {Resize} from "../window/resize";
-import {Observable, Subscription} from "rxjs";
+import type {Stream, Unsubscriber} from "../stream/core";
 
 /** CSSカムタムプロパティ ビューポート高 */
 export const VH = '--vh';
@@ -26,10 +26,10 @@ export function setVH(viewPortHeight: number): void {
  * --vh
  */
 export class CssVH {
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
-  constructor(resize: Observable<Resize>) {
-    this._subscription = resize.subscribe(action => {
+  constructor(resize: Stream<Resize>) {
+    this._unsubscriber = resize.subscribe(action => {
       this._onResize(action);
     });
 
@@ -38,7 +38,7 @@ export class CssVH {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

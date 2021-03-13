@@ -11,12 +11,14 @@ import type {Resize} from "../../window/resize";
 import type {EndBattle, GameAction} from "../actions/game-actions";
 import {map} from "rxjs/operators";
 import {gameLoopStream} from "../../game-loop/game-loop";
+import type {Stream} from "../../stream/core";
+import {toStream} from "../../stream/rxjs";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
   _endBattle: Subject<EndBattle>;
   _gameLoop: Observable<GameLoop>;
-  _resize: Observable<Resize>;
+  _resize: Stream<Resize>;
   _renderer: Renderer;
   _scene: ?Scene;
   _sceneSubscriptions: Subscription[];
@@ -26,7 +28,7 @@ export class TDScenes {
    *
    * @param resize リサイズストリーム
    */
-  constructor(resize: Observable<Resize>) {
+  constructor(resize: Stream<Resize>) {
     this._endBattle = new Subject<EndBattle>();
     this._gameLoop = gameLoopStream();
     this._resize = resize;
@@ -72,7 +74,7 @@ export class TDScenes {
       battleProgress: room,
       initialState: initialState,
       listener: {
-        gameLoop: this._gameLoop,
+        gameLoop: toStream(this._gameLoop),
         resize: this._resize,
       }
     });

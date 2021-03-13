@@ -4,7 +4,7 @@ import type {Resources} from '../../../resource';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../../game-loop/game-loop";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
@@ -19,6 +19,7 @@ import {Exclusive} from "../../../exclusive/exclusive";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -30,8 +31,8 @@ type Param = {
   battleProgress: BattleProgress,
   initialState: InitialState,
   listener: {
-    gameLoop: Observable<GameLoop>,
-    resize: Observable<Resize>
+    gameLoop: Stream<GameLoop>,
+    resize: Stream<Resize>
   }
 };
 
@@ -51,7 +52,7 @@ export class BattleScene implements Scene {
   _exclusive: Exclusive;
   _view: BattleSceneView;
   _sounds: BattleSceneSounds;
-  _subscription: Subscription[];
+  _subscription: Unsubscriber[];
 
   constructor(param: Param) {
     this._exclusive = new Exclusive();
