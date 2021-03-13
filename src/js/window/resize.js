@@ -23,27 +23,6 @@ export type Resize = {
 export const RESIZE_DELAY = 50;
 
 /**
- * @deprecated
- * リサイズストリームを生成する
- *
- * @return ストリーム
- */
-export function deprecated_createResizeStream(): Observable<Resize> {
-  return new Observable(subscriber => {
-    window.addEventListener('resize', () => {
-      setTimeout(() => {
-        subscriber.next({
-          type: 'resize',
-          width: getViewPortWidth(),
-          height: getViewPortHeight(),
-          safeAreaInset: createSafeAreaInset(),
-        });
-      }, RESIZE_DELAY);
-    })
-  });
-}
-
-/**
  * リサイズストリームを生成する
  *
  * @return ストリーム
