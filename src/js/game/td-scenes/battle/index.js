@@ -47,7 +47,7 @@ export class BattleScene implements Scene {
   _exclusive: Exclusive;
   _view: BattleSceneView;
   _sounds: BattleSceneSounds;
-  _subscription: Unsubscriber[];
+  _unsubscriber: Unsubscriber[];
 
   constructor(param: Param) {
     this._exclusive = new Exclusive();
@@ -67,8 +67,8 @@ export class BattleScene implements Scene {
     });
     this._sounds = new BattleSceneSounds(param.resources);
 
-    this._subscription = [
-      this._view.notifier().battleAction.subscribe(action => {
+    this._unsubscriber = [
+      this._view.battleActionNotifier().subscribe(action => {
         if (action.type === 'decideBattery') {
           this._onDecideBattery(action);
         } else if (action.type === 'doBurst') {
@@ -83,7 +83,7 @@ export class BattleScene implements Scene {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.forEach(v => {
+    this._unsubscriber.forEach(v => {
       v.unsubscribe();
     });
   }
