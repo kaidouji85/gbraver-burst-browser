@@ -18,7 +18,6 @@ import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
 import type {Stream} from "../../../../../stream/core";
-import {toStream} from "../../../../../stream/rxjs";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -121,6 +120,6 @@ export class HudLayer {
    * @return 通知ストリーム
    */
   battleActionNotifier(): Stream<BattleSceneAction> {
-    return toStream(this.gameObjects.notifier().battleSceneAction);
+    return this.gameObjects.battleActionNotifier();
   }
 }

@@ -3,21 +3,15 @@
 import {BatterySelector} from "../../../../../game-object/battery-selector";
 import {BurstButton} from "../../../../../game-object/burst-button/burst-button";
 import type {Resources} from "../../../../../resource";
-import {Observable} from "rxjs/index";
 import type {BattleSceneAction} from "../../actions";
 import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
-import {Subject} from "rxjs";
 import {Fader} from "../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
 import {PilotButton} from "../../../../../game-object/pilot-button";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../../../stream/core";
-
-/** イベント通知 */
-type Notifier = {
-  battleSceneAction: Observable<BattleSceneAction>
-};
+import type {Stream, StreamSource, Unsubscriber} from "../../../../../stream/core";
+import {RxjsStreamSource} from "../../../../../stream/rxjs";
 
 /**
  * HUDレイヤーのゲームオブジェクト
@@ -28,24 +22,24 @@ export class HUDGameObjects {
   pilotButton: PilotButton;
   frontmostFader: Fader;
   rearmostFader: Fader;
-  _battleSceneAction: Subject<BattleSceneAction>;
+  _battleAction: StreamSource<BattleSceneAction>;
   _unsubscribers: Unsubscriber[];
 
   constructor(resources: Resources, listener: Stream<GameObjectAction>, playerInfo: Player) {
-    this._battleSceneAction = new Subject();
+    this._battleAction = new RxjsStreamSource();
 
     this.batterySelector = new BatterySelector({
       listener: listener,
       maxBattery: playerInfo.armdozer.maxBattery,
       resources: resources,
       onBatteryChange: (battery: number) => {
-        this._battleSceneAction.next({
+        this._battleAction.next({
           type: 'changeBattery',
           battery: battery
         });
       },
       onOkButtonPush: () => {
-        this._battleSceneAction.next({
+        this._battleAction.next({
           type: 'decideBattery',
           battery: this.batterySelector.getBattery()
         });
@@ -56,7 +50,7 @@ export class HUDGameObjects {
       listener: listener,
       armDozerId: playerInfo.armdozer.id,
       onPush: () => {
-        this._battleSceneAction.next({
+        this._battleAction.next({
           type: 'doBurst'
         });
       }
@@ -74,7 +68,7 @@ export class HUDGameObjects {
 
     this._unsubscribers = [
       this.pilotButton.pushButtonNotifier().subscribe(() => {
-        this._battleSceneAction.next({type: 'doPilotSkill'});
+        this._battleAction.next({type: 'doPilotSkill'});
       })
     ];
   }
@@ -109,13 +103,11 @@ export class HUDGameObjects {
   }
 
   /**
-   * イベント通知
+   * 戦闘シーンアクションを通知する
    *
-   * @return イベント通知ストリーム
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      battleSceneAction: this._battleSceneAction
-    }
+  battleActionNotifier(): Stream<BattleSceneAction> {
+    return this._battleAction;
   }
 }
