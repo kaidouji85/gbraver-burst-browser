@@ -6,7 +6,6 @@ import {ThreeDimensionLayer} from './td';
 import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../game-loop/game-loop";
-import {Observable} from "rxjs";
 import type {BattleSceneAction} from "../actions";
 import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
@@ -33,11 +32,6 @@ type Param = {
     gameLoop: Stream<GameLoop>,
     resize: Stream<Resize>,
   }
-};
-
-/** 戦闘シーンビューのイベント通知 */
-type Notifier = {
-  battleAction: Observable<BattleSceneAction>,
 };
 
 /**
@@ -102,14 +96,11 @@ export class BattleSceneView {
   }
 
   /**
-   * イベント通知ストリームを取得する
-   *
-   * @return イベント通知ストリーム
+   * 戦闘シーンアクションを通知する
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      battleAction: this.hud.notifier().battleAction,
-    };
+  battleActionNotifier(): Stream<BattleSceneAction> {
+    return this.hud.battleActionNotifier();
   }
 
   /**
