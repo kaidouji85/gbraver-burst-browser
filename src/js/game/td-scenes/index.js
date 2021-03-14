@@ -1,7 +1,6 @@
 // @flow
 
 import {Renderer} from "../../render";
-import {Subject, Subscription} from "rxjs";
 import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {BattleScene} from "./battle";
@@ -9,19 +8,18 @@ import type {Scene} from "./scene";
 import type {GameLoop} from "../../game-loop/game-loop";
 import type {Resize} from "../../window/resize";
 import type {EndBattle, GameAction} from "../actions/game-actions";
-import {map} from "rxjs/operators";
 import {gameLoopStream} from "../../game-loop/game-loop";
-import type {Stream} from "../../stream/core";
-import {toStream} from "../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
+import {RxjsStreamSource} from "../../stream/rxjs";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
-  _endBattle: Subject<EndBattle>;
+  _gameAction: StreamSource<GameAction>;
   _gameLoop: Stream<GameLoop>;
   _resize: Stream<Resize>;
   _renderer: Renderer;
   _scene: ?Scene;
-  _sceneSubscriptions: Subscription[];
+  _unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -29,7 +27,7 @@ export class TDScenes {
    * @param resize リサイズストリーム
    */
   constructor(resize: Stream<Resize>) {
-    this._endBattle = new Subject<EndBattle>();
+    this._gameAction = new RxjsStreamSource();
     this._gameLoop = gameLoopStream();
     this._resize = resize;
 
@@ -38,7 +36,7 @@ export class TDScenes {
     });
 
     this._scene = null;
-    this._sceneSubscriptions = [];
+    this._unsubscriber = [];
   }
 
   /** デストラクタ相当の処理 */
@@ -52,10 +50,7 @@ export class TDScenes {
    * @return イベント通知ストリーム
    */
   gameActionNotifier(): Stream<GameAction> {
-    const observable = this._endBattle.pipe(
-      map(v => (v: GameAction))
-    );
-    return toStream(observable);
+    return this._gameAction;
   }
 
   /**
@@ -80,9 +75,9 @@ export class TDScenes {
       }
     });
     this._scene = scene;
-    this._sceneSubscriptions = [
+    this._unsubscriber = [
       scene.notifier().endBattle.subscribe(v => {
-        this._endBattle.next({
+        this._gameAction.next({
           type: 'EndBattle',
           gameEnd: v,
         });
@@ -114,7 +109,7 @@ export class TDScenes {
   _disposeScene(): void {
     this._scene && this._scene.destructor();
     this._renderer.dispose();
-    this._sceneSubscriptions.forEach(v => {
+    this._unsubscriber.forEach(v => {
       v.unsubscribe();
     });
   }
