@@ -7,7 +7,7 @@ import {BattleScene} from "./battle";
 import type {Scene} from "./scene";
 import type {GameLoop} from "../../game-loop/game-loop";
 import type {Resize} from "../../window/resize";
-import type {EndBattle, GameAction} from "../actions/game-actions";
+import type {GameAction} from "../actions/game-actions";
 import {gameLoopStream} from "../../game-loop/game-loop";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import {RxjsStreamSource} from "../../stream/rxjs";
