@@ -9,12 +9,12 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
-import {Observable, Subject} from "rxjs";
 import type {PilotIcon} from "./pilot-icon";
 import type {PilotId} from "gbraver-burst-core";
 import {createPilotIcon} from "./pilot-id-to-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream, StreamSource} from "../../../stream/core";
+import {RxjsStreamSource} from "../../../stream/rxjs";
 
 /** キャンバスサイズ */
 const CANVAS_SIZE = 512;
@@ -29,17 +29,10 @@ const PADDING_LEFT = 70;
 const PADDING_BOTTOM = 160;
 
 /**
- * イベント通知ストリーム
- */
-type Notifier = {
-  pushButton: Observable<void>
-};
-
-/**
  * パイロットボタン ビュー
  */
 export class PilotButtonView {
-  _pushButton: Subject<void>;
+  _pushButton: StreamSource<void>;
   _group: typeof THREE.Group;
   _button: SimpleImageMesh;
   _label: SimpleImageMesh;
@@ -55,8 +48,7 @@ export class PilotButtonView {
    * @param listener イベントリスナ
    */
   constructor(resources: Resources, pilotId: PilotId, listener: Stream<GameObjectAction>) {
-    this._pushButton = new Subject();
-
+    this._pushButton = new RxjsStreamSource();
     this._group = new THREE.Group();
 
     const buttonDisabledResource = resources.canvasImages
@@ -163,13 +155,11 @@ export class PilotButtonView {
   }
 
   /**
-   * イベント通知ストリームを取得する
-   *
-   * @return イベント通知ストリーム
+   * ボタン押下通知
+   * 
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      pushButton: this._pushButton
-    };
+  pushButtonNotifier(): Stream<void> {
+    return this._pushButton;
   }
 }

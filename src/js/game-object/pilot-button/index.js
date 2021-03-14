@@ -5,7 +5,6 @@ import type {Resources} from "../../resource";
 import {PilotButtonView} from "./view/pilot-button-view";
 import type {PilotButtonModel} from "./model/pilot-button-model";
 import {createInitialValue} from './model/initial-value';
-import {Observable} from "rxjs";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {open} from "./animation/open";
@@ -16,13 +15,7 @@ import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
 import type {PilotId} from "gbraver-burst-core";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/core";
-
-/**
- * ,イベント通知ストリーム
- */
-type Notifier = {
-  pushButton: Observable<void>
-};
+import {toStream} from "../../stream/rxjs";
 
 /**
  * パイロットボタン
@@ -31,7 +24,7 @@ export class PilotButton {
   _model: PilotButtonModel;
   _sounds: PilotButtonSounds;
   _view: PilotButtonView;
-  _notifier: Notifier;
+  _pushButton: Stream<void>;
   _unsubscriber: Unsubscriber;
 
   /**
@@ -46,12 +39,10 @@ export class PilotButton {
     this._sounds = new PilotButtonSounds(resources);
     this._view = new PilotButtonView(resources, pilotId, listener);
 
-    const viewNotifier = this._view.notifier();
-    this._notifier = {
-      pushButton: viewNotifier.pushButton.pipe(
-        filter(() => (!this._model.disabled) && this._model.canPilot)
-      )
-    };
+    // TODO rxjsのflow-typedを削除したら :any を消す
+    const pushButtonObservable = (this._view.pushButtonNotifier().getRxjsObservable(): any)
+      .pipe(filter(() => (!this._model.disabled) && this._model.canPilot));
+    this._pushButton = toStream(pushButtonObservable);
 
     this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
@@ -106,12 +97,11 @@ export class PilotButton {
   }
 
   /**
-   * イベント通知ストリームを取得する
-   *
-   * @return イベント通知ストリーム
+   * ボタン押下通知
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return this._notifier;
+  pushButtonNotifier(): Stream<void> {
+    return this._pushButton;
   }
 
   /**
