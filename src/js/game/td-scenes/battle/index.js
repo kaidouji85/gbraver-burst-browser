@@ -4,7 +4,6 @@ import type {Resources} from '../../../resource';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../../game-loop/game-loop";
-import {Observable, Subject} from "rxjs";
 import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
@@ -19,7 +18,8 @@ import {Exclusive} from "../../../exclusive/exclusive";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
-import type {Stream, Unsubscriber} from "../../../stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
+import {RxjsStreamSource} from "../../../stream/rxjs";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -36,18 +36,13 @@ type Param = {
   }
 };
 
-/** 戦闘シーンのイベント通知 */
-type Notifier = {
-  endBattle: Observable<GameEnd>
-};
-
 /**
  * 戦闘シーン
  */
 export class BattleScene implements Scene {
   _state: BattleSceneState;
   _initialState: InitialState;
-  _endBattle: Subject<GameEnd>;
+  _endBattle: StreamSource<GameEnd>;
   _battleProgress: BattleProgress;
   _exclusive: Exclusive;
   _view: BattleSceneView;
@@ -58,7 +53,7 @@ export class BattleScene implements Scene {
     this._exclusive = new Exclusive();
     this._initialState = param.initialState;
     this._state = createInitialState(param.initialState.playerId);
-    this._endBattle = new Subject();
+    this._endBattle = new RxjsStreamSource();
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,
@@ -94,14 +89,12 @@ export class BattleScene implements Scene {
   }
 
   /**
-   * イベント通知ストリームを取得する
+   * ゲーム終了通知
    *
-   * @return イベント通知ストリーム
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      endBattle: this._endBattle
-    };
+  gameEndNotifier(): Stream<GameEnd> {
+    return this._endBattle;
   }
 
   /**
