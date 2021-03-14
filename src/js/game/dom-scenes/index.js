@@ -12,6 +12,8 @@ import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
 import type {Resources} from "../../resource";
 import type {GameAction} from "../actions/game-actions";
+import {toStream} from "../../stream/rxjs";
+import type {Stream} from "../../stream/core";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -45,8 +47,8 @@ export class DOMScenes {
    *
    * @return 通知ストリーム
    */
-  gameActionNotifier(): Observable<GameAction> {
-    return this._gameAction;
+  gameActionNotifier(): Stream<GameAction> {
+    return toStream(this._gameAction);
   }
 
 

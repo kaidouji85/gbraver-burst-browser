@@ -1,7 +1,7 @@
 // @flow
 
 import {Renderer} from "../../render";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import type {Resources} from "../../resource";
 import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
 import {BattleScene} from "./battle";
@@ -12,6 +12,7 @@ import type {EndBattle, GameAction} from "../actions/game-actions";
 import {map} from "rxjs/operators";
 import {gameLoopStream} from "../../game-loop/game-loop";
 import type {Stream} from "../../stream/core";
+import {toStream} from "../../stream/rxjs";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
@@ -50,10 +51,11 @@ export class TDScenes {
    *
    * @return イベント通知ストリーム
    */
-  gameActionNotifier(): Observable<GameAction> {
-    return this._endBattle.pipe(
+  gameActionNotifier(): Stream<GameAction> {
+    const observable = this._endBattle.pipe(
       map(v => (v: GameAction))
     );
+    return toStream(observable);
   }
 
   /**

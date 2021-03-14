@@ -3,7 +3,6 @@
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {ResourceLoader} from "../resource";
-import {merge, Subscription} from "rxjs";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
@@ -28,7 +27,7 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import {DefinePlugin} from "../webpack/define-plugin";
-import type {Stream} from "../stream/core";
+import type {Stream, Unsubscriber} from "../stream/core";
 
 /**
  * ゲーム全体の管理を行う
@@ -45,7 +44,7 @@ export class Game {
   _resourceRoot: ResourceRoot;
   _resources: ?Resources;
   _serviceWorker: ?ServiceWorkerRegistration;
-  _subscriptions: Subscription[];
+  _unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -81,30 +80,28 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
-    const gameActionNotifier = merge(
+    const gameActionStreams = [
       this._tdScenes.gameActionNotifier(),
       this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(),
-    );
-    this._subscriptions = [
-      gameActionNotifier.subscribe(action => {
-        if (action.type === 'EndBattle') {
-          this._onEndBattle(action);
-        } else if (action.type === 'GameStart') {
-          this._onGameStart();
-        } else if (action.type === 'ShowHowToPlay') {
-          this._onShowHowToPlay();
-        } else if (action.type === 'SelectionComplete') {
-          this._onSelectionComplete(action);
-        } else if (action.type === 'SelectionCancel') {
-          this._onSelectionCancel();
-        }else if (action.type === 'EndNPCEnding') {
-          this._onEndNPCEnding();
-        } else if (action.type === 'EndHowToPlay') {
-          this._onEndHowToPlay();
-        }
-      })
+      this._domDialogs.gameActionNotifier()
     ];
+    this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
+      if (action.type === 'EndBattle') {
+        this._onEndBattle(action);
+      } else if (action.type === 'GameStart') {
+        this._onGameStart();
+      } else if (action.type === 'ShowHowToPlay') {
+        this._onShowHowToPlay();
+      } else if (action.type === 'SelectionComplete') {
+        this._onSelectionComplete(action);
+      } else if (action.type === 'SelectionCancel') {
+        this._onSelectionCancel();
+      }else if (action.type === 'EndNPCEnding') {
+        this._onEndNPCEnding();
+      } else if (action.type === 'EndHowToPlay') {
+        this._onEndHowToPlay();
+      }
+    }));
   }
 
   /**

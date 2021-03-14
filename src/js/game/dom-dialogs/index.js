@@ -1,11 +1,13 @@
 // @flow
 
 import {HowToPlay} from "./how-to-play";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import type {EndHowToPlay, GameAction} from "../actions/game-actions";
 import type {Resources} from "../../resource";
 import type {DOMDialog} from "./dialog";
 import {map} from "rxjs/operators";
+import {toStream} from "../../stream/rxjs";
+import type {Stream} from "../../stream/core";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -55,10 +57,11 @@ export class DOMDialogs {
    *
    * @return イベント通知ストリーム
    */
-  gameActionNotifier(): Observable<GameAction> {
-    return this._endHowToPlay.pipe(
+  gameActionNotifier(): Stream<GameAction> {
+    const observable = this._endHowToPlay.pipe(
       map(v => (v: GameAction))
     );
+    return toStream(observable);
   }
 
   /**
