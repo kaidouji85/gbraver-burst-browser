@@ -100,7 +100,7 @@ export class BattleSceneView {
    * @return 通知ストリーム
    */
   battleActionNotifier(): Stream<BattleSceneAction> {
-    return toStream(this.hud.notifier().battleAction);
+    return this.hud.battleActionNotifier();
   }
 
   /**

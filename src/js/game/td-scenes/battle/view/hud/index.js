@@ -2,7 +2,6 @@
 import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
 import type {Player, PlayerId} from "gbraver-burst-core";
-import {Observable} from "rxjs";
 import type {BattleSceneAction} from "../../actions";
 import type {Update} from "../../../../../game-loop/update";
 import type {PreRender} from "../../../../../game-loop/pre-render";
@@ -19,6 +18,7 @@ import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
 import type {Stream} from "../../../../../stream/core";
+import {toStream} from "../../../../../stream/rxjs";
 
 /** コンストラクタのパラメータ */
 export type Param = {
@@ -31,11 +31,6 @@ export type Param = {
     preRender: Stream<PreRender>,
     resize: Stream<Resize>,
   }
-};
-
-/** イベント通知 */
-type Notifier = {
-  battleAction: Observable<BattleSceneAction>,
 };
 
 /**
@@ -122,13 +117,10 @@ export class HudLayer {
   }
 
   /**
-   * イベント通知ストリームを取得
-   *
-   * @return イベント通知ストリーム
+   * 戦闘シーンアクション通知
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      battleAction: this.gameObjects.notifier().battleSceneAction
-    };
+  battleActionNotifier(): Stream<BattleSceneAction> {
+    return toStream(this.gameObjects.notifier().battleSceneAction);
   }
 }
