@@ -4,7 +4,7 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import {merge, Observable,} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import {pushDOMStream} from "../../../dom/push/push-dom";
+import {deprecated_pushDOMStream} from "../../../dom/push/push-dom";
 import {map} from "rxjs/operators";
 
 /** イベント通知ストリーム */
@@ -50,8 +50,8 @@ export class HowToPlayPresentation {
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
 
     this._closeStream = merge(
-      pushDOMStream(this._root),
-      pushDOMStream(this._closer)
+      deprecated_pushDOMStream(this._root),
+      deprecated_pushDOMStream(this._closer)
     ).pipe(map(v => ((v: any): void)));
   }
 

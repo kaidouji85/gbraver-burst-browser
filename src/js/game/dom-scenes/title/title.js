@@ -4,7 +4,7 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import {Observable, Subject, Subscription} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import {pushDOMStream} from "../../../dom/push/push-dom";
+import {deprecated_pushDOMStream} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {pop} from "../../../dom/animation/pop";
 import {Howl} from "howler";
@@ -77,10 +77,10 @@ export class Title implements DOMScene {
     this._pushGameStart = new Subject();
     this._pushHowToPlay = new Subject();
     this._subscriptions = [
-      pushDOMStream(this._gameStart).subscribe(() => {
+      deprecated_pushDOMStream(this._gameStart).subscribe(() => {
         this._onPushGameStart();
       }),
-      pushDOMStream(this._howToPlay).subscribe(() => {
+      deprecated_pushDOMStream(this._howToPlay).subscribe(() => {
         this._onPushHowToPlay()
       })
     ];

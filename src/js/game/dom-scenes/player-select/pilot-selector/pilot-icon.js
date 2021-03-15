@@ -3,7 +3,7 @@
 import {Observable} from "rxjs";
 import type {Resources} from "../../../../resource";
 import type {PushDOM} from "../../../../dom/push/push-dom";
-import {pushDOMStream} from "../../../../dom/push/push-dom";
+import {deprecated_pushDOMStream} from "../../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {pop} from "../../../../dom/animation/pop";
 import {PathIds} from "../../../../resource/path";
@@ -47,7 +47,7 @@ export class PilotIcon {
     this._check.hidden = true;
     this._root.appendChild(this._check);
 
-    this._select = pushDOMStream(this._root);
+    this._select = deprecated_pushDOMStream(this._root);
   }
 
   /**
