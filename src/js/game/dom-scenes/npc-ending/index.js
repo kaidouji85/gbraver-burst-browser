@@ -2,15 +2,11 @@
 
 import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
-import {Observable, Subject, Subscription} from "rxjs";
 import {NPCEndingPresentation} from "./presentation";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
-
-/** イベント通知 */
-type Notifier  = {
-  endNpcEnding: Observable<void>
-};
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
+import {RxjsStreamSource} from "../../../stream/rxjs";
 
 /**
  * NPCルート エンディング
@@ -19,8 +15,8 @@ export class NPCEnding implements DOMScene {
   _canOperate: boolean;
   _presentation: NPCEndingPresentation;
   _pushButtonSound: typeof Howl;
-  _endNPCEnding: Subject<void>;
-  _subscriptions: Subscription[];
+  _endNPCEnding: StreamSource<void>;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -29,7 +25,7 @@ export class NPCEnding implements DOMScene {
    */
   constructor(resources: Resources) {
     this._canOperate = true;
-    this._endNPCEnding = new Subject();
+    this._endNPCEnding = new RxjsStreamSource();
     this._presentation = new NPCEndingPresentation(resources);
 
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
@@ -37,8 +33,8 @@ export class NPCEnding implements DOMScene {
       ? pushButtonResource.sound
       : new Howl();
 
-    this._subscriptions = [
-      this._presentation.notifier().screenPush.subscribe(() => {
+    this._unsubscribers = [
+      this._presentation.screenPushNotifier().subscribe(() => {
         this._onScreenPush();
       })
     ];
@@ -49,7 +45,7 @@ export class NPCEnding implements DOMScene {
    */
   destructor(): void {
     this._presentation.destructor();
-    this._subscriptions.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     })
   }
@@ -64,14 +60,12 @@ export class NPCEnding implements DOMScene {
   }
 
   /**
-   * イベント通知
+   * NPCエンディング終了を通知する
    *
-   * @return イベント通知ストリーム
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      endNpcEnding: this._endNPCEnding
-    };
+  endNPCEndingNotifier(): Stream<void> {
+    return this._endNPCEnding;
   }
 
   /**

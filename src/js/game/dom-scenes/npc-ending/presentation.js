@@ -1,19 +1,12 @@
 // @flow
 
 import {domUuid} from "../../../uuid/dom-uuid";
-import {Observable} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import type {PushDOM} from "../../../dom/push/push-dom";
-import {deprecated_pushDOMStream} from "../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-
-/**
- * イベント通知
- */
-type Notifier = {
-  screenPush: Observable<PushDOM>
-};
+import type {Stream} from "../../../stream/core";
 
 /**
  * NPCルート エンディング プレゼンテーション
@@ -23,7 +16,7 @@ export class NPCEndingPresentation {
   _isEndCardLoaded: Promise<void>;
   _isEndLoaded: Promise<void>;
   _isLogoLoader: Promise<void>;
-  _screenPush: Observable<PushDOM>;
+  _screenPush: Stream<PushDOM>;
 
   /**
    * コンストラクタ
@@ -64,7 +57,7 @@ export class NPCEndingPresentation {
       .find(v => v.id === PathIds.LOGO)
       ?.path ?? '';
 
-    this._screenPush = deprecated_pushDOMStream(this._root);
+    this._screenPush = pushDOMStream(this._root);
   }
 
   /**
@@ -97,13 +90,11 @@ export class NPCEndingPresentation {
   }
 
   /**
-   * イベント通知
+   * 画面押下通知
    *
-   * @return イベント通知ストリーム
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return {
-      screenPush: this._screenPush,
-    };
+  screenPushNotifier(): Stream<PushDOM> {
+    return this._screenPush;
   }
 }
