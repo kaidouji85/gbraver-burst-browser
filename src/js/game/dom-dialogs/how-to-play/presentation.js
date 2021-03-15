@@ -4,18 +4,9 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import {merge, Observable,} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import {deprecated_pushDOMStream, pushDOMStream} from "../../../dom/push/push-dom";
-import {map} from "rxjs/operators";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {Stream} from "../../../stream/core";
 import {toStream} from "../../../stream/rxjs";
-
-/**
- * @deprecated
- * イベント通知ストリーム
- */
-export type Notifier = {
-  close: Observable<void>
-};
 
 /** パラメータ */
 export type Param = {
@@ -26,8 +17,6 @@ export type Param = {
  * 遊び方ダイアログ プレゼンテーション
  */
 export class HowToPlayPresentation {
-  /** @deprecated */
-  _deprecated_closeStream: Observable<void>;
   _close: Stream<void>;
   _root: HTMLElement;
   _closer: HTMLElement;
@@ -62,23 +51,6 @@ export class HowToPlayPresentation {
       (closerPush.getRxjsObservable(): any) // TODO rxjsのflow-typedを削除したら :any を消す
     );
     this._close = toStream(merged);
-    
-    this._deprecated_closeStream = merge(
-      deprecated_pushDOMStream(this._root),
-      deprecated_pushDOMStream(this._closer)
-    ).pipe(map(v => ((v: any): void)));
-  }
-
-  /**
-   * @deprecated
-   * イベント通知
-   *
-   * @return イベント通知
-   */
-  deprecated_notifier(): Notifier {
-    return {
-      close: this._deprecated_closeStream,
-    };
   }
 
   /**

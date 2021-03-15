@@ -1,22 +1,16 @@
 // @flow
 
 import {HowToPlayPresentation} from "./presentation";
-import {Observable} from "rxjs";
 import type {Resources} from "../../../resource";
 import type {DOMDialog} from "../dialog";
 import {DefinePlugin} from "../../../webpack/define-plugin";
-
-/** イベント通知 */
-type Notifier = {
-  endHowToPlay: Observable<void>
-};
+import type {Stream} from "../../../stream/core";
 
 /**
  * 遊び方ダイアログ
  */
 export class HowToPlay implements DOMDialog {
   _presentation: HowToPlayPresentation;
-  _notifier: Notifier;
 
   /**
    * コンストラクタ
@@ -25,10 +19,6 @@ export class HowToPlay implements DOMDialog {
    */
   constructor(resources: Resources) {
     this._presentation = new HowToPlayPresentation(resources, DefinePlugin.howToPlay);
-
-    this._notifier = {
-      endHowToPlay: this._presentation.deprecated_notifier().close
-    };
   }
 
   /**
@@ -39,12 +29,12 @@ export class HowToPlay implements DOMDialog {
   }
 
   /**
-   * イベント通知ストリームを取得する
+   * ダイアログ閉じ通知
    *
-   * @return イベント通知ストリーム
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return this._notifier;
+  closeNotifier(): Stream<void> {
+    return this._presentation.closeNotifier();
   }
 
   /**
