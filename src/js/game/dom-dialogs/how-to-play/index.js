@@ -27,7 +27,7 @@ export class HowToPlay implements DOMDialog {
     this._presentation = new HowToPlayPresentation(resources, DefinePlugin.howToPlay);
 
     this._notifier = {
-      endHowToPlay: this._presentation.notifier().close
+      endHowToPlay: this._presentation.deprecated_notifier().close
     };
   }
 

@@ -4,10 +4,15 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import {merge, Observable,} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import {deprecated_pushDOMStream} from "../../../dom/push/push-dom";
+import {deprecated_pushDOMStream, pushDOMStream} from "../../../dom/push/push-dom";
 import {map} from "rxjs/operators";
+import type {Stream} from "../../../stream/core";
+import {toStream} from "../../../stream/rxjs";
 
-/** イベント通知ストリーム */
+/**
+ * @deprecated
+ * イベント通知ストリーム
+ */
 export type Notifier = {
   close: Observable<void>
 };
@@ -21,7 +26,9 @@ export type Param = {
  * 遊び方ダイアログ プレゼンテーション
  */
 export class HowToPlayPresentation {
-  _closeStream: Observable<void>;
+  /** @deprecated */
+  _deprecated_closeStream: Observable<void>;
+  _close: Stream<void>;
   _root: HTMLElement;
   _closer: HTMLElement;
 
@@ -48,22 +55,39 @@ export class HowToPlayPresentation {
     `;
 
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
-
-    this._closeStream = merge(
+    const rootPush = pushDOMStream(this._root);
+    const closerPush = pushDOMStream(this._closer);
+    const merged = merge(
+      (rootPush.getRxjsObservable(): any),  // TODO rxjsのflow-typedを削除したら :any を消す
+      (closerPush.getRxjsObservable(): any) // TODO rxjsのflow-typedを削除したら :any を消す
+    );
+    this._close = toStream(merged);
+    
+    this._deprecated_closeStream = merge(
       deprecated_pushDOMStream(this._root),
       deprecated_pushDOMStream(this._closer)
     ).pipe(map(v => ((v: any): void)));
   }
 
   /**
+   * @deprecated
    * イベント通知
    *
    * @return イベント通知
    */
-  notifier(): Notifier {
+  deprecated_notifier(): Notifier {
     return {
-      close: this._closeStream,
+      close: this._deprecated_closeStream,
     };
+  }
+
+  /**
+   * ダイアログ閉じの通知
+   *
+   * @return 通知ストリーム
+   */
+  closeNotifier(): Stream<void> {
+    return this._close;
   }
 
   /**
