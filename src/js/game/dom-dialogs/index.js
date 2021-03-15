@@ -1,6 +1,6 @@
 // @flow
 
-import {HowToPlay} from "./how-to-play";
+import {HowToPlay} from "./how-to-play/how-to-play-dialog";
 import type {EndHowToPlay, GameAction} from "../actions/game-actions";
 import type {Resources} from "../../resource";
 import type {DOMDialog} from "./dialog";

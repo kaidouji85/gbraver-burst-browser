@@ -1,22 +1,19 @@
 // @flow
 
 import {domUuid} from "../../../uuid/dom-uuid";
-import {merge, Observable,} from "rxjs";
+import {merge} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {Stream} from "../../../stream/core";
 import {toStream} from "../../../stream/rxjs";
-
-/** パラメータ */
-export type Param = {
-  movieURL: string
-};
+import type {DOMDialog} from "../dialog";
+import {DefinePlugin} from "../../../webpack/define-plugin";
 
 /**
  * 遊び方ダイアログ プレゼンテーション
  */
-export class HowToPlayPresentation {
+export class HowToPlay implements DOMDialog {
   _close: Stream<void>;
   _root: HTMLElement;
   _closer: HTMLElement;
@@ -25,9 +22,9 @@ export class HowToPlayPresentation {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param movieURL 遊び方動画URL
    */
-  constructor(resources: Resources, movieURL: string) {
+  constructor(resources: Resources) {
+    const movieURL = DefinePlugin.howToPlay;
     const closerId = domUuid();
     const closerResource = resources.paths.find(v => v.id === PathIds.CLOSER);
     const closerPath = closerResource
@@ -51,6 +48,13 @@ export class HowToPlayPresentation {
       (closerPush.getRxjsObservable(): any) // TODO rxjsのflow-typedを削除したら :any を消す
     );
     this._close = toStream(merged);
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    // NOP
   }
 
   /**
