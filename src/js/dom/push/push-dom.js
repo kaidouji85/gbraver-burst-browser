@@ -1,6 +1,6 @@
 // @flow
 
-import {fromEvent, merge, Observable} from "rxjs";
+import {fromEvent, merge} from "rxjs";
 import {map} from "rxjs/operators";
 import type {Stream} from "../../stream/core";
 import {toStream} from "../../stream/rxjs";
@@ -11,35 +11,6 @@ import {toStream} from "../../stream/rxjs";
 export type PushDOM = {
   type: 'PushDOM'
 };
-
-/**
- * @deprecated
- * HTML要素押下ストリーム
- *
- * @param dom 押下判定のHTML要素
- * @return ストリーム
- */
-export function deprecated_pushDOMStream(dom: HTMLElement): Observable<PushDOM> {
-  return merge(
-    fromEvent(dom, 'click').pipe(
-      map(v => {
-        v.preventDefault();
-        return {
-          type: 'PushDOM'
-        };
-      })
-    ),
-
-    fromEvent(dom, 'touchstart').pipe(
-      map(v => {
-        v.preventDefault();
-        return {
-          type: 'PushDOM'
-        };
-      })
-    )
-  );
-}
 
 /**
  * HTML要素押下ストリーム

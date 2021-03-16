@@ -1,16 +1,17 @@
 // @flow
 
 import {domUuid} from "../../../uuid/dom-uuid";
-import {Observable, Subject, Subscription} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import {deprecated_pushDOMStream} from "../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {pop} from "../../../dom/animation/pop";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {DOMScene} from "../dom-scene";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
+import {RxjsStreamSource} from "../../../stream/rxjs";
 
 /**
  * タイトル
@@ -24,9 +25,9 @@ export class Title implements DOMScene {
   _isLogoLoaded: Promise<void>;
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
-  _pushGameStart: Subject<void>;
-  _pushHowToPlay: Subject<void>;
-  _subscriptions: Subscription[];
+  _pushGameStart: StreamSource<void>;
+  _pushHowToPlay: StreamSource<void>;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -74,13 +75,13 @@ export class Title implements DOMScene {
     this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
     this._howToPlay = this._root.querySelector(`[data-id="${howToPlayId}"]`) || document.createElement('div');
 
-    this._pushGameStart = new Subject();
-    this._pushHowToPlay = new Subject();
-    this._subscriptions = [
-      deprecated_pushDOMStream(this._gameStart).subscribe(() => {
+    this._pushGameStart = new RxjsStreamSource();
+    this._pushHowToPlay = new RxjsStreamSource();
+    this._unsubscribers = [
+      pushDOMStream(this._gameStart).subscribe(() => {
         this._onPushGameStart();
       }),
-      deprecated_pushDOMStream(this._howToPlay).subscribe(() => {
+      pushDOMStream(this._howToPlay).subscribe(() => {
         this._onPushHowToPlay()
       })
     ];
@@ -90,7 +91,7 @@ export class Title implements DOMScene {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._subscriptions.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -100,7 +101,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushGameStartNotifier(): Observable<void> {
+  pushGameStartNotifier(): Stream<void> {
     return this._pushGameStart;
   }
 
@@ -109,7 +110,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushHowToPlayNotifier(): Observable<void> {
+  pushHowToPlayNotifier(): Stream<void> {
     return this._pushHowToPlay;
   }
 

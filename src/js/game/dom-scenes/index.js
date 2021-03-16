@@ -12,7 +12,7 @@ import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
 import type {Resources} from "../../resource";
 import type {GameAction} from "../actions/game-actions";
-import {RxjsStreamSource, toStream} from "../../stream/rxjs";
+import {RxjsStreamSource} from "../../stream/rxjs";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 
 /**
@@ -78,10 +78,10 @@ export class DOMScenes {
 
     const scene = new Title(resources);
     this._unsubscribers = [
-      toStream(scene.pushGameStartNotifier()).subscribe(() => {
+      scene.pushGameStartNotifier().subscribe(() => {
         this._gameAction.next({type: 'GameStart'});
       }),
-      toStream(scene.pushHowToPlayNotifier()).subscribe(() => {
+      scene.pushHowToPlayNotifier().subscribe(() => {
         this._gameAction.next({type: 'ShowHowToPlay'});
       }),
     ];
