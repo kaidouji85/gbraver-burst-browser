@@ -106,14 +106,14 @@ export class DOMScenes {
 
     const scene = new PlayerSelect(resources);
     this._unsubscribers = [
-      toStream(scene.decideNotifier()).subscribe(v => {
+      scene.decideNotifier().subscribe(v => {
         this._gameAction.next({
           type: 'SelectionComplete',
           armdozerId: v.armdozerId,
           pilotId: v.pilotId,
         });
       }),
-      toStream(scene.prevNotifier()).subscribe(() => {
+      scene.prevNotifier().subscribe(() => {
         this._gameAction.next({type: 'SelectionCancel'});
       }),
     ];

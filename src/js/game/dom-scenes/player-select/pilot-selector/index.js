@@ -3,16 +3,17 @@
 import type {Resources} from "../../../../resource";
 import type {PilotId} from "gbraver-burst-core";
 import {PilotIcon} from "./pilot-icon";
-import {Observable, Subject, Subscription} from "rxjs";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {PilotStatus} from "./pilot-status";
 import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {Exclusive} from "../../../../exclusive/exclusive";
-import {deprecated_pushDOMStream} from "../../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createPilotIcon} from "./create-pilot-icon";
+import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
+import {RxjsStreamSource} from "../../../../stream/rxjs";
 
 /**
  * ルート要素のclass名
@@ -32,10 +33,10 @@ export class PilotSelector {
   _prevButton: HTMLElement;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
-  _change: Subject<PilotId>;
-  _decide: Subject<PilotId>;
-  _prev: Subject<void>;
-  _subscriptions: Subscription[];
+  _change: StreamSource<PilotId>;
+  _decide: StreamSource<PilotId>;
+  _prev: StreamSource<void>;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -49,9 +50,9 @@ export class PilotSelector {
 
     this._exclusive = new Exclusive();
 
-    this._change = new Subject();
-    this._decide = new Subject();
-    this._prev = new Subject();
+    this._change = new RxjsStreamSource();
+    this._decide = new RxjsStreamSource();
+    this._prev = new RxjsStreamSource();
 
     this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
@@ -98,15 +99,15 @@ export class PilotSelector {
     this._prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
       ?? document.createElement('button');
 
-    this._subscriptions = [
+    this._unsubscribers = [
       ...this._pilotIcons.map(v =>
         v.icon.selectedNotifier().subscribe(() =>{
           this._onPilotChange(v.pilotId);
         })),
-      deprecated_pushDOMStream(this._okButton).subscribe(() => {
+      pushDOMStream(this._okButton).subscribe(() => {
         this._onOkButtonPush();
       }),
-      deprecated_pushDOMStream(this._prevButton).subscribe(() => {
+      pushDOMStream(this._prevButton).subscribe(() => {
         this._onPrevButtonPush();
       }),
     ];
@@ -116,7 +117,7 @@ export class PilotSelector {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._subscriptions.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -160,7 +161,7 @@ export class PilotSelector {
    *
    * @return 通知ストリーム
    */
-  changeNotifier(): Observable<PilotId> {
+  changeNotifier(): Stream<PilotId> {
     return this._change;
   }
 
@@ -169,7 +170,7 @@ export class PilotSelector {
    *
    * @return 通知ストリーム
    */
-  decideNotifier(): Observable<PilotId> {
+  decideNotifier(): Stream<PilotId> {
     return this._decide;
   }
 
@@ -177,7 +178,7 @@ export class PilotSelector {
    * 戻る 通知
    * @return 通知ストリーム
    */
-  prevNotifier(): Observable<void> {
+  prevNotifier(): Stream<void> {
     return this._prev;
   }
 

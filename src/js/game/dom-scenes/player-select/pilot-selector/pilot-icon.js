@@ -1,12 +1,12 @@
 // @flow
 
-import {Observable} from "rxjs";
 import type {Resources} from "../../../../resource";
 import type {PushDOM} from "../../../../dom/push/push-dom";
-import {deprecated_pushDOMStream} from "../../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {pop} from "../../../../dom/animation/pop";
 import {PathIds} from "../../../../resource/path";
+import type {Stream} from "../../../../stream/core";
 
 const ROOT_CLASS_NAME = 'player-select__pilot-icon';
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
@@ -20,7 +20,7 @@ export class PilotIcon {
   _image: HTMLImageElement;
   _check: HTMLImageElement;
   _isImageLoaded: Promise<void>;
-  _select: Observable<PushDOM>;
+  _select: Stream<PushDOM>;
 
   /**
    * コンストラクタ
@@ -47,7 +47,7 @@ export class PilotIcon {
     this._check.hidden = true;
     this._root.appendChild(this._check);
 
-    this._select = deprecated_pushDOMStream(this._root);
+    this._select = pushDOMStream(this._root);
   }
 
   /**
@@ -73,7 +73,7 @@ export class PilotIcon {
    *
    * @return 通知ストリーム
    */
-  selectedNotifier(): Observable<PushDOM> {
+  selectedNotifier(): Stream<PushDOM> {
     return this._select;
   }
 

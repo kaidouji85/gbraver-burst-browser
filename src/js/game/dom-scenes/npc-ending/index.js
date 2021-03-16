@@ -8,6 +8,7 @@ import {SOUND_IDS} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 
+// TODO プレゼンテーションと統合したい
 /**
  * NPCルート エンディング
  */
