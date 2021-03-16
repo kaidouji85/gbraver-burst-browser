@@ -9,7 +9,7 @@ import {Howl} from 'howler';
 import {ArmdozerStatus} from "./armdozer-status";
 import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {Exclusive} from "../../../../exclusive/exclusive";
-import {deprecated_pushDOMStream} from "../../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createArmdozerIcon} from "./create-armdozer-icon";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
@@ -109,10 +109,10 @@ export class ArmdozerSelector {
         v.icon.selectedNotifier().subscribe(() => {
           this._onArmdozerSelect(v.armdozerId);
         })),
-      deprecated_pushDOMStream(this._okButton).subscribe(() => {
+      pushDOMStream(this._okButton).subscribe(() => {
         this._onOkButtonPush();
       }),
-      deprecated_pushDOMStream(this._prevButton).subscribe(() => {
+      pushDOMStream(this._prevButton).subscribe(() => {
         this._onPrevButtonPush();
       }),
     ];
