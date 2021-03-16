@@ -1,27 +1,20 @@
 // @flow
 
 import {domUuid} from "../../../uuid/dom-uuid";
-import {merge, Observable,} from "rxjs";
+import {merge} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {pushDOMStream} from "../../../dom/push/push-dom";
-import {map} from "rxjs/operators";
-
-/** イベント通知ストリーム */
-export type Notifier = {
-  close: Observable<void>
-};
-
-/** パラメータ */
-export type Param = {
-  movieURL: string
-};
+import type {Stream} from "../../../stream/core";
+import {toStream} from "../../../stream/rxjs";
+import type {DOMDialog} from "../dialog";
+import {DefinePlugin} from "../../../webpack/define-plugin";
 
 /**
  * 遊び方ダイアログ プレゼンテーション
  */
-export class HowToPlayPresentation {
-  _closeStream: Observable<void>;
+export class HowToPlay implements DOMDialog {
+  _close: Stream<void>;
   _root: HTMLElement;
   _closer: HTMLElement;
 
@@ -29,9 +22,9 @@ export class HowToPlayPresentation {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param movieURL 遊び方動画URL
    */
-  constructor(resources: Resources, movieURL: string) {
+  constructor(resources: Resources) {
+    const movieURL = DefinePlugin.howToPlay;
     const closerId = domUuid();
     const closerResource = resources.paths.find(v => v.id === PathIds.CLOSER);
     const closerPath = closerResource
@@ -48,22 +41,29 @@ export class HowToPlayPresentation {
     `;
 
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
-
-    this._closeStream = merge(
-      pushDOMStream(this._root),
-      pushDOMStream(this._closer)
-    ).pipe(map(v => ((v: any): void)));
+    const rootPush = pushDOMStream(this._root);
+    const closerPush = pushDOMStream(this._closer);
+    const merged = merge(
+      (rootPush.getRxjsObservable(): any),  // TODO rxjsのflow-typedを削除したら :any を消す
+      (closerPush.getRxjsObservable(): any) // TODO rxjsのflow-typedを削除したら :any を消す
+    );
+    this._close = toStream(merged);
   }
 
   /**
-   * イベント通知
-   *
-   * @return イベント通知
+   * デストラクタ相当の処理
    */
-  notifier(): Notifier {
-    return {
-      close: this._closeStream,
-    };
+  destructor(): void {
+    // NOP
+  }
+
+  /**
+   * ダイアログ閉じの通知
+   *
+   * @return 通知ストリーム
+   */
+  closeNotifier(): Stream<void> {
+    return this._close;
   }
 
   /**

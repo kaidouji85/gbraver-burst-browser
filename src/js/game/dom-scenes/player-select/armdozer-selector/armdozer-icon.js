@@ -1,12 +1,12 @@
 // @flow
 
-import {Observable} from "rxjs";
 import type {Resources} from "../../../../resource";
 import type {PushDOM} from "../../../../dom/push/push-dom";
 import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {pop} from "../../../../dom/animation/pop";
 import {PathIds} from "../../../../resource/path";
+import type {Stream} from "../../../../stream/core";
 
 const ROOT_CLASS_NAME = 'player-select__armdozer-icon';
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
@@ -21,7 +21,7 @@ export class ArmdozerIcon {
   _check: HTMLImageElement;
   _isImageLoaded: Promise<void>;
   _isCheckLoaded: Promise<void>;
-  _select: Observable<PushDOM>;
+  _select: Stream<PushDOM>;
 
   /**
    * コンストラクタ
@@ -80,7 +80,7 @@ export class ArmdozerIcon {
    *
    * @return 通知ストリーム
    */
-  selectedNotifier(): Observable<PushDOM> {
+  selectedNotifier(): Stream<PushDOM> {
     return this._select;
   }
 
