@@ -1,9 +1,9 @@
 // @flow
 
 import type {LoadingActions, LoadingProgress} from "../../../resource/actions/loading-actions";
-import {Observable, Subscription} from "rxjs";
 import {LoadingPresentation} from "./presentation";
 import type {DOMScene} from "../dom-scene";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * ローディング
@@ -11,17 +11,17 @@ import type {DOMScene} from "../dom-scene";
 export class Loading implements DOMScene {
   _completedRate: number;
   _presentation: LoadingPresentation;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
    *
    * @param loading ローディングストリーム
    */
-  constructor(loading: Observable<LoadingActions>) {
+  constructor(loading: Stream<LoadingActions>) {
     this._completedRate = 0;
     this._presentation = new LoadingPresentation();
-    this._subscription = loading.subscribe(action => {
+    this._unsubscriber = loading.subscribe(action => {
       if (action.type === 'LoadingProgress') {
         this._onLoadingProgress(action);
       }
@@ -30,7 +30,7 @@ export class Loading implements DOMScene {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

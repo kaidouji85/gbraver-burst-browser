@@ -1,6 +1,5 @@
 // @flow
 
-import {Observable} from "rxjs";
 import type {LoadingActions} from "../../resource/actions/loading-actions";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
@@ -58,7 +57,7 @@ export class DOMScenes {
    * @param loading 読み込み状況ストリーム
    * @return 開始されたローディング画面
    */
-  startLoading(loading: Observable<LoadingActions>): Loading {
+  startLoading(loading: Stream<LoadingActions>): Loading {
     this._removeCurrentScene();
     const scene = new Loading(loading);
     this._root.appendChild(scene.getRootHTMLElement());
