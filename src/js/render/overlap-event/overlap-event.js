@@ -32,7 +32,7 @@ export type OverlapEvent =
  * @return 当たり判定ストリーム
  */
 export function toOverlapStream(origin: Stream<RendererDOMEvent>, rendererDOM: HTMLElement, camera: typeof THREE.Camera): Stream<OverlapEvent> {
-  const observable = (origin.getRxjsObservable(): any).pipe(  // TODO rxjsのflow-typedを削除した後に、:anyを消す
+  const observable = origin.getRxjsObservable().pipe(
     map(v => {
       switch (v.type) {
         case 'mouseDown':

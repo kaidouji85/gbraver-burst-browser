@@ -9,18 +9,16 @@ import type {Stream, StreamSource, Unsubscriber} from "./core";
  * @param origin 変換元
  * @return 変換結果
  */
-export function toStream<T>(origin: Observable<T>/* TODO typeof Observable に変更する */): Stream<T> {
+export function toStream<T>(origin: typeof Observable): Stream<T> {
   return {
     subscribe(listener) {
       const subscription = origin.subscribe((v: T) => {
         listener(v);
       });
-      // TODO rxjsのflow-typedを削除したら、:anyを消す
-      return toUnSubscriber((subscription: any));
+      return toUnSubscriber(subscription);
     },
     getRxjsObservable() {
-      // TODO rxjsのflow-typedを削除したら、:anyを消す
-      return (origin: any);
+      return origin;
     }
   };
 }
@@ -31,7 +29,7 @@ export function toStream<T>(origin: Observable<T>/* TODO typeof Observable に�
  * @param origin 変換元
  * @return 変換結果
  */
-export function toUnSubscriber(origin: Subscription /* TODO typeof Subscription に変更する*/): Unsubscriber {
+export function toUnSubscriber(origin: typeof Subscription): Unsubscriber {
   return {
     unsubscribe(): void {
       origin.unsubscribe();
@@ -43,7 +41,7 @@ export function toUnSubscriber(origin: Subscription /* TODO typeof Subscription 
  * RXJSのストリーム源泉
  */
 export class RxjsStreamSource<T> implements StreamSource<T> {
-  _subject: Subject<T>; // TODO rxjsのflow-typedを削除したら、typeof Subject に変更する
+  _subject: typeof Subject;
 
   /**
    * コンストラクタ
@@ -71,8 +69,7 @@ export class RxjsStreamSource<T> implements StreamSource<T> {
     const subscription = this._subject.subscribe((v: T) => {
       listener(v);
     });
-    // TODO rxjsのflow-typedを削除したら、:anyを消す
-    return toUnSubscriber((subscription: any));
+    return toUnSubscriber(subscription);
   }
 
   /**
@@ -82,7 +79,6 @@ export class RxjsStreamSource<T> implements StreamSource<T> {
    * @return rxjs Observable
    */
   getRxjsObservable(): typeof Observable {
-    // TODO rxjsのflow-typedを削除したら、:anyを消す
-    return (this._subject: any);
+    return this._subject;
   }
 }

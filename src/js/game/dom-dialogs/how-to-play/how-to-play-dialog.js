@@ -44,8 +44,8 @@ export class HowToPlay implements DOMDialog {
     const rootPush = pushDOMStream(this._root);
     const closerPush = pushDOMStream(this._closer);
     const merged = merge(
-      (rootPush.getRxjsObservable(): any),  // TODO rxjsのflow-typedを削除したら :any を消す
-      (closerPush.getRxjsObservable(): any) // TODO rxjsのflow-typedを削除したら :any を消す
+      rootPush.getRxjsObservable(),
+      closerPush.getRxjsObservable()
     );
     this._close = toStream(merged);
   }

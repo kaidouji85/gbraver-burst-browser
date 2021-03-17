@@ -39,8 +39,8 @@ export class PilotButton {
     this._sounds = new PilotButtonSounds(resources);
     this._view = new PilotButtonView(resources, pilotId, listener);
 
-    // TODO rxjsのflow-typedを削除したら :any を消す
-    const pushButtonObservable = (this._view.pushButtonNotifier().getRxjsObservable(): any)
+    const pushButtonObservable = this._view.pushButtonNotifier()
+      .getRxjsObservable()
       .pipe(filter(() => (!this._model.disabled) && this._model.canPilot));
     this._pushButton = toStream(pushButtonObservable);
 

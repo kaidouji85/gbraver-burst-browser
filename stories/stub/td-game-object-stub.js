@@ -2,7 +2,6 @@
 
 import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
-import {Subject} from "rxjs";
 import type {Resize} from "../../src/js/window/resize";
 import {resizeStream} from "../../src/js/window/resize";
 import {Renderer} from "../../src/js/render";
@@ -19,8 +18,8 @@ import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
-import {toStream} from "../../src/js/stream/rxjs";
-import type {Stream, Unsubscriber} from "../../src/js/stream/core";
+import {RxjsStreamSource, toStream} from "../../src/js/stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/core";
 
 /**
  * 3Dレイヤー ゲームオブジェクト スタブ
@@ -31,8 +30,8 @@ export class TDGameObjectStub {
   _safeAreaInset: SafeAreaInset;
   _resize: Stream<Resize>;
   _gameLoop: Stream<GameLoop>;
-  _update: Subject<Update>;
-  _preRender: Subject<PreRender>;
+  _update: StreamSource<Update>;
+  _preRender: StreamSource<PreRender>;
 
   _renderer: Renderer;
   _camera: TDCamera;
@@ -54,8 +53,8 @@ export class TDGameObjectStub {
     this._safeAreaInset = createSafeAreaInset();
     this._resize = resizeStream();
     this._gameLoop = gameLoopStream();
-    this._update = new Subject<Update>();
-    this._preRender = new Subject<PreRender>();
+    this._update = new RxjsStreamSource();
+    this._preRender = new RxjsStreamSource();
 
     this._renderer = new Renderer({
       resize: this._resize,

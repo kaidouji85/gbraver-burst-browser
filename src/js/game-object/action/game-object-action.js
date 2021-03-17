@@ -1,6 +1,6 @@
 // @flow
 
-import {merge, Observable} from "rxjs";
+import {merge} from "rxjs";
 import type {Update} from "../../game-loop/update";
 import type {PreRender} from "../../game-loop/pre-render";
 import type {OverlapEvent} from "../../render/overlap-event/overlap-event";
@@ -22,7 +22,6 @@ export type GameObjectAction = Update | PreRender | OverlapEvent;
 export function gameObjectStream(update: Stream<Update>, preRender: Stream<PreRender>, overlap: Stream<OverlapEvent>): Stream<GameObjectAction> {
   const origin = [update, preRender, overlap]
     .map(v => v.getRxjsObservable())
-    .map(v => ((v: any): Observable<GameObjectAction>));  // TODO rxjsのflow-typedを廃止したら、この行は消す
   const merged = merge(...origin)
     .pipe(share());
   return toStream(merged);

@@ -38,6 +38,5 @@ export function pushDOMStream(dom: HTMLElement): Stream<PushDOM> {
       })
     )
   );
-  // TODO rxjsのflow-typedを消したら :any を削除する
-  return toStream((observable: any));
+  return toStream(observable);
 }
