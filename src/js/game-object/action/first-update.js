@@ -13,8 +13,7 @@ import {toStream} from "../../stream/rxjs";
  * @return 生成結果
  */
 export function firstUpdate(gameObjectAction: Stream<GameObjectAction>): Stream<Update> {
-  const observable: any/*  TODO typeof Observable にする */ = gameObjectAction.getRxjsObservable();
-  const firstUpdateRxjs = observable.pipe(
+  const firstUpdateRxjs = gameObjectAction.getRxjsObservable().pipe(
     filter(v => v.type === 'Update'),
     map(v => ((v: any): Update)),
     first()
