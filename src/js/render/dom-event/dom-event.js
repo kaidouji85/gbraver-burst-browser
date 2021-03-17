@@ -24,7 +24,7 @@ export type RendererDOMEvent =
  * @return ストリーム
  */
 export function createDOMEventStream(renderDom: HTMLElement): Stream<RendererDOMEvent> {
-  const streams: Observable<RendererDOMEvent>[] = [
+  const streams: typeof Observable[] = [
     createMouseDownStream(renderDom),
     createMouseMoveStream(renderDom),
     createMouseUpStream(renderDom),
@@ -32,9 +32,7 @@ export function createDOMEventStream(renderDom: HTMLElement): Stream<RendererDOM
     createTouchMoveStream(renderDom),
     createTouchEndStream(renderDom),
   ]
-    .map(v => v.getRxjsObservable())
-    // TODO rxjsのflow-typedを消したら、この行を削除する
-    .map(v => ((v: any): Observable<RendererDOMEvent>));
+    .map(v => v.getRxjsObservable());
   const observable = merge(...streams);
   return toStream(observable);
 }
