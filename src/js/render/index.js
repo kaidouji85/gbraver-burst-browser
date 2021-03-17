@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import {WebGLInfo} from 'three';
 import type {Resize} from "../window/resize";
-import {Observable} from "rxjs";
 import {onWebGLRendererResize} from "./resize/resize";
 import type {RendererDOMEvent} from "./dom-event/dom-event";
 import {createDOMEventStream} from "./dom-event/dom-event";
@@ -14,7 +13,6 @@ import type {OverlapNotifier} from "./overla-notifier";
 import type {RendererDomGetter} from "./renderer-dom-getter";
 import type {Rendering} from "./rendering";
 import type {Stream, Unsubscriber} from "../stream/core";
-import {toStream} from "../stream/rxjs";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -24,7 +22,7 @@ type Param = {
 /** レンダラの挙動をまとめたもの */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   _threeJsRender: typeof THREE.WebGLRenderer;
-  _domEvent: Observable<RendererDOMEvent>;
+  _domEvent: Stream<RendererDOMEvent>;
   _unsubscriber: Unsubscriber[];
 
   constructor(param: Param) {
@@ -59,7 +57,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @return 生成結果
    */
   createOverlapNotifier(camera: typeof THREE.Camera): Stream<OverlapEvent> {
-    return toOverlapStream(toStream(this._domEvent), this.getRendererDOM(), camera);
+    return toOverlapStream(this._domEvent, this.getRendererDOM(), camera);
   }
 
   /**

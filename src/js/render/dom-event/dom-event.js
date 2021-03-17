@@ -5,7 +5,8 @@ import {createMouseDownStream, createMouseMoveStream, createMouseUpStream} from 
 import type {TouchEnd, TouchMove, TouchStart} from "./touch";
 import {createTouchEndStream, createTouchMoveStream, createTouchStartStream} from "./touch";
 import {merge, Observable} from "rxjs";
-import {map} from "rxjs/operators";
+import type {Stream} from "../../stream/core";
+import {toStream} from "../../stream/rxjs";
 
 /** three.js Renderer要素のイベントをまとめたもの */
 export type RendererDOMEvent =
@@ -22,33 +23,18 @@ export type RendererDOMEvent =
  * @param renderDom three.jsを描画するHTML要素
  * @return ストリーム
  */
-export function createDOMEventStream(renderDom: HTMLElement): Observable<RendererDOMEvent> {
-  const mouseDown = createMouseDownStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvent))
-  );
-  const mouseMove = createMouseMoveStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvent))
-  );
-  const mouseUp = createMouseUpStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvent))
-  );
-
-  const touchStart = createTouchStartStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvent))
-  );
-  const touchMove = createTouchMoveStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvent))
-  );
-  const touchEnd = createTouchEndStream(renderDom).pipe(
-    map(v => (v: RendererDOMEvent))
-  );
-
-  return merge(
-    mouseDown,
-    mouseMove,
-    mouseUp,
-    touchStart,
-    touchMove,
-    touchEnd,
-  );
+export function createDOMEventStream(renderDom: HTMLElement): Stream<RendererDOMEvent> {
+  const streams: Observable<RendererDOMEvent>[] = [
+    createMouseDownStream(renderDom),
+    createMouseMoveStream(renderDom),
+    createMouseUpStream(renderDom),
+    createTouchStartStream(renderDom),
+    createTouchMoveStream(renderDom),
+    createTouchEndStream(renderDom),
+  ]
+    .map(v => v.getRxjsObservable())
+    // TODO rxjsのflow-typedを消したら、この行を削除する
+    .map(v => ((v: any): Observable<RendererDOMEvent>));
+  const observable = merge(...streams);
+  return toStream(observable);
 }
