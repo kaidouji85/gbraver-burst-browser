@@ -20,7 +20,7 @@ export class ShockWave {
   _model: ShockWaveModel;
   _view: ShockWaveView;
   _hitSound: typeof Howl;
-  _subscription: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   /**
    * リソース管理オブジェクト
@@ -39,7 +39,7 @@ export class ShockWave {
       ? hitResource.sound
       : new Howl();
 
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {
@@ -53,7 +53,7 @@ export class ShockWave {
    */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

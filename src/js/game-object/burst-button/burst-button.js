@@ -28,7 +28,7 @@ export class BurstButton {
   _model: BurstButtonModel;
   _view: BurstButtonView;
   _pushButtonSound: typeof Howl;
-  _subscription: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
@@ -49,7 +49,7 @@ export class BurstButton {
         param.onPush();
       }
     });
-    this._subscription = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._preRender(action);
       }
@@ -59,7 +59,7 @@ export class BurstButton {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

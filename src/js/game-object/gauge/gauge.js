@@ -23,13 +23,13 @@ type Param = {
 export class Gauge implements HUDTracking {
   _model: GaugeModel;
   _view: GaugeView;
-  _subscription: Unsubscriber;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._view = param.view;
     this._model = initialValue(param.hp, param.battery);
 
-    this._subscription = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._preRender(action);
       }
@@ -39,7 +39,7 @@ export class Gauge implements HUDTracking {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /** HP変更 */
