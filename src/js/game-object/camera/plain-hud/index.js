@@ -2,10 +2,10 @@
 
 import * as THREE from "three";
 import {createHUDCamera} from "../../../camera/create-hud-camera";
-import {Observable, Subscription} from "rxjs";
 import type {Resize} from "../../../window/resize";
 import {onResizeOrthographicCamera} from "../../../camera/resize";
 import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /**
  * 汎用HUDレイヤー用カメラ
@@ -13,20 +13,20 @@ import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
  */
 export class PlainHUDCamera {
   _camera: typeof THREE.OrthographicCamera;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
-  constructor(resize: Observable<Resize>) {
+  constructor(resize: Stream<Resize>) {
     this._camera = createHUDCamera();
     this._camera.position.z = HUD_CAMERA_ZINDEX;
 
-    this._subscription = resize.subscribe(action => {
+    this._unsubscriber = resize.subscribe(action => {
       this._resize(action);
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /** カメラを取得する */

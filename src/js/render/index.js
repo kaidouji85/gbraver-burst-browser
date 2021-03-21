@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import {WebGLInfo} from 'three';
 import type {Resize} from "../window/resize";
-import {Observable, Subscription} from "rxjs";
 import {onWebGLRendererResize} from "./resize/resize";
 import type {RendererDOMEvent} from "./dom-event/dom-event";
 import {createDOMEventStream} from "./dom-event/dom-event";
@@ -13,23 +12,24 @@ import {toOverlapStream} from "./overlap-event/overlap-event";
 import type {OverlapNotifier} from "./overla-notifier";
 import type {RendererDomGetter} from "./renderer-dom-getter";
 import type {Rendering} from "./rendering";
+import type {Stream, Unsubscriber} from "../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
-  resize: Observable<Resize>,
+  resize: Stream<Resize>,
 };
 
 /** レンダラの挙動をまとめたもの */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   _threeJsRender: typeof THREE.WebGLRenderer;
-  _domEvent: Observable<RendererDOMEvent>;
-  _subscriptions: Subscription[];
+  _domEvent: Stream<RendererDOMEvent>;
+  _unsubscriber: Unsubscriber[];
 
   constructor(param: Param) {
     this._threeJsRender = createRender();
     this._domEvent = createDOMEventStream(this._threeJsRender.domElement);
 
-    this._subscriptions = [
+    this._unsubscriber = [
       param.resize.subscribe(action => {
         this._resize(action);
       })
@@ -38,7 +38,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._subscriptions.forEach(v => {
+    this._unsubscriber.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -56,7 +56,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @param camera カメラ
    * @return 生成結果
    */
-  createOverlapNotifier(camera: typeof THREE.Camera): Observable<OverlapEvent> {
+  createOverlapNotifier(camera: typeof THREE.Camera): Stream<OverlapEvent> {
     return toOverlapStream(this._domEvent, this.getRendererDOM(), camera);
   }
 

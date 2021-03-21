@@ -1,6 +1,5 @@
 // @flow
 
-import {Observable, Subject, Subscription} from "rxjs";
 import type {LoadingActions} from "../../resource/actions/loading-actions";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
@@ -12,6 +11,8 @@ import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending";
 import type {Resources} from "../../resource";
 import type {GameAction} from "../actions/game-actions";
+import {RxjsStreamSource} from "../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -25,14 +26,14 @@ const MAX_LOADING_TIME = 10000;
 export class DOMScenes {
   _root: HTMLElement;
   _scene: ?DOMScene;
-  _gameAction: Subject<GameAction>;
-  _sceneSubscriptions: Subscription[];
+  _gameAction: StreamSource<GameAction>;
+  _unsubscribers: Unsubscriber[];
 
   constructor() {
     this._root = document.createElement('div');
-    this._gameAction = new Subject();
+    this._gameAction = new RxjsStreamSource();
     this._scene = null;
-    this._sceneSubscriptions = [];
+    this._unsubscribers = [];
   }
 
   /** デストラクタ相当の処理 */
@@ -45,7 +46,7 @@ export class DOMScenes {
    *
    * @return 通知ストリーム
    */
-  gameActionNotifier(): Observable<GameAction> {
+  gameActionNotifier(): Stream<GameAction> {
     return this._gameAction;
   }
 
@@ -56,7 +57,7 @@ export class DOMScenes {
    * @param loading 読み込み状況ストリーム
    * @return 開始されたローディング画面
    */
-  startLoading(loading: Observable<LoadingActions>): Loading {
+  startLoading(loading: Stream<LoadingActions>): Loading {
     this._removeCurrentScene();
     const scene = new Loading(loading);
     this._root.appendChild(scene.getRootHTMLElement());
@@ -75,7 +76,7 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new Title(resources);
-    this._sceneSubscriptions = [
+    this._unsubscribers = [
       scene.pushGameStartNotifier().subscribe(() => {
         this._gameAction.next({type: 'GameStart'});
       }),
@@ -103,7 +104,7 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new PlayerSelect(resources);
-    this._sceneSubscriptions = [
+    this._unsubscribers = [
       scene.decideNotifier().subscribe(v => {
         this._gameAction.next({
           type: 'SelectionComplete',
@@ -164,8 +165,8 @@ export class DOMScenes {
 
     const scene = new NPCEnding(resources);
     this._root.appendChild(scene.getRootHTMLElement());
-    this._sceneSubscriptions = [
-      scene.notifier().endNpcEnding.subscribe(() => {
+    this._unsubscribers = [
+      scene.endNPCEndingNotifier().subscribe(() => {
         this._gameAction.next({type: 'EndNPCEnding'});
       })
     ];
@@ -203,9 +204,9 @@ export class DOMScenes {
     this._scene && this._scene.getRootHTMLElement().remove();
     this._scene = null;
 
-    this._sceneSubscriptions.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-    this._sceneSubscriptions = [];
+    this._unsubscribers = [];
   }
 }

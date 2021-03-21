@@ -1,7 +1,9 @@
 // @flow
 
-import {fromEvent, Observable} from "rxjs";
+import {fromEvent} from "rxjs";
 import {map} from "rxjs/operators";
+import type {Stream} from "../../stream/core";
+import {toStream} from "../../stream/rxjs";
 
 /** タッチスタート */
 export type TouchStart = {
@@ -27,12 +29,13 @@ export type TouchEnd = {
  * @param renderDom レンダラーDOM
  * @return ストリーム
  */
-export function createTouchStartStream(renderDom: HTMLElement): Observable<TouchStart> {
-  return fromEvent(renderDom, 'touchstart').pipe(
+export function createTouchStartStream(renderDom: HTMLElement): Stream<TouchStart> {
+  const observable = fromEvent(renderDom, 'touchstart').pipe(
     map(v => {
       v.preventDefault();
       return {type: 'touchStart', event: v};
     }));
+  return toStream(observable);
 }
 
 /**
@@ -41,12 +44,13 @@ export function createTouchStartStream(renderDom: HTMLElement): Observable<Touch
  * @param renderDom レンダラーDOM
  * @return ストリーム
  */
-export function createTouchMoveStream(renderDom: HTMLElement): Observable<TouchMove> {
-  return fromEvent(renderDom, 'touchmove').pipe(
+export function createTouchMoveStream(renderDom: HTMLElement): Stream<TouchMove> {
+  const observable = fromEvent(renderDom, 'touchmove').pipe(
     map(v => {
       v.preventDefault();
       return {type: 'touchMove', event: v}
     }));
+  return toStream(observable);
 }
 
 /**
@@ -55,10 +59,11 @@ export function createTouchMoveStream(renderDom: HTMLElement): Observable<TouchM
  * @param renderDom レンダラーDOM
  * @return ストリーム
  */
-export function createTouchEndStream(renderDom: HTMLElement): Observable<TouchEnd> {
-  return fromEvent(renderDom, 'touchend').pipe(
+export function createTouchEndStream(renderDom: HTMLElement): Stream<TouchEnd> {
+  const observable = fromEvent(renderDom, 'touchend').pipe(
     map(v => {
       v.preventDefault();
       return {type: 'touchEnd', event: v};
     }));
+  return toStream(observable);
 }

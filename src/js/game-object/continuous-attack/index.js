@@ -2,10 +2,10 @@
 
 import {ContinuousAttackIndicator} from "./continuous-attack-indicator";
 import type {Resources} from "../../resource";
-import {Observable} from "rxjs";
 import {PlayerContinuousAttackView} from "./view/player-continuous-attack-view";
 import {EnemyContinuousAttackView} from "./view/enemy-continuous-attack-view";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream} from "../../stream/core";
 
 /**
  * プレイヤー側 連続攻撃
@@ -14,7 +14,7 @@ import type {GameObjectAction} from "../action/game-object-action";
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function playerContinuousAttack(resources: Resources, listener: Observable<GameObjectAction>): ContinuousAttackIndicator {
+export function playerContinuousAttack(resources: Resources, listener: Stream<GameObjectAction>): ContinuousAttackIndicator {
   const view = new PlayerContinuousAttackView(resources);
   return new ContinuousAttackIndicator(view, resources, listener);
 }
@@ -26,7 +26,7 @@ export function playerContinuousAttack(resources: Resources, listener: Observabl
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function enemyContinuousAttack(resources: Resources, listener: Observable<GameObjectAction>): ContinuousAttackIndicator {
+export function enemyContinuousAttack(resources: Resources, listener: Stream<GameObjectAction>): ContinuousAttackIndicator {
   const view = new EnemyContinuousAttackView(resources);
   return new ContinuousAttackIndicator(view, resources, listener);
 }

@@ -5,7 +5,6 @@ import type {Resources} from "../../resource";
 import {PilotButtonView} from "./view/pilot-button-view";
 import type {PilotButtonModel} from "./model/pilot-button-model";
 import {createInitialValue} from './model/initial-value';
-import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {open} from "./animation/open";
@@ -15,13 +14,8 @@ import {filter} from "rxjs/operators";
 import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
 import type {PilotId} from "gbraver-burst-core";
 import type {GameObjectAction} from "../action/game-object-action";
-
-/**
- * ,イベント通知ストリーム
- */
-type Notifier = {
-  pushButton: Observable<void>
-};
+import type {Stream, Unsubscriber} from "../../stream/core";
+import {toStream} from "../../stream/rxjs";
 
 /**
  * パイロットボタン
@@ -30,8 +24,8 @@ export class PilotButton {
   _model: PilotButtonModel;
   _sounds: PilotButtonSounds;
   _view: PilotButtonView;
-  _notifier: Notifier;
-  _subscription: Subscription;
+  _pushButton: Stream<void>;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -40,19 +34,17 @@ export class PilotButton {
    * @param pilotId パイロットID
    * @param listener イベントリスナ
    */
-  constructor(resources: Resources, pilotId: PilotId, listener: Observable<GameObjectAction>) {
+  constructor(resources: Resources, pilotId: PilotId, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._sounds = new PilotButtonSounds(resources);
     this._view = new PilotButtonView(resources, pilotId, listener);
 
-    const viewNotifier = this._view.notifier();
-    this._notifier = {
-      pushButton: viewNotifier.pushButton.pipe(
-        filter(() => (!this._model.disabled) && this._model.canPilot)
-      )
-    };
+    const pushButtonObservable = this._view.pushButtonNotifier()
+      .getRxjsObservable()
+      .pipe(filter(() => (!this._model.disabled) && this._model.canPilot));
+    this._pushButton = toStream(pushButtonObservable);
 
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -64,6 +56,7 @@ export class PilotButton {
    */
   destructor(): void {
     this._view.destructor();
+    this._unsubscriber.unsubscribe();
   }
 
   /**
@@ -104,12 +97,11 @@ export class PilotButton {
   }
 
   /**
-   * イベント通知ストリームを取得する
-   *
-   * @return イベント通知ストリーム
+   * ボタン押下通知
+   * @return 通知ストリーム
    */
-  notifier(): Notifier {
-    return this._notifier;
+  pushButtonNotifier(): Stream<void> {
+    return this._pushButton;
   }
 
   /**

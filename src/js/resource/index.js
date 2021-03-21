@@ -10,10 +10,11 @@ import {loadingAllCubeTextures} from "./cube-texture";
 import type {SoundResource} from "./sound";
 import {loadingAllSounds} from "./sound";
 import type {ResourceRoot} from "./root/resource-root";
-import {Observable, Subject} from "rxjs";
 import type {LoadingActions} from "./actions/loading-actions";
 import type {Path} from "./path";
 import {getAllPaths} from "./path";
+import type {Stream, StreamSource} from "../stream/core";
+import {RxjsStreamSource} from "../stream/rxjs";
 
 /**
  * ゲームで使うリソースを集めたもの
@@ -49,7 +50,7 @@ export class ResourceLoader {
   _pathLoading: Array<Promise<Response>>;
   _allLoadingCounts: number;
   _completedLoadingCounts: number;
-  _loading: Subject<LoadingActions>;
+  _loading: StreamSource<LoadingActions>;
 
   /**
    * コンストラクタ
@@ -77,7 +78,7 @@ export class ResourceLoader {
     );
     this._allLoadingCounts = allLoading.length;
     this._completedLoadingCounts = 0;
-    this._loading = new Subject();
+    this._loading = new RxjsStreamSource();
     allLoading.forEach(loading => {
       loading.then(() => {
         this._completedLoadingCounts ++;
@@ -120,7 +121,7 @@ export class ResourceLoader {
    *
    * @return 読み込み進捗率ストリーム
    */
-  progress(): Observable<LoadingActions> {
+  progress(): Stream<LoadingActions> {
     return this._loading;
   }
 }

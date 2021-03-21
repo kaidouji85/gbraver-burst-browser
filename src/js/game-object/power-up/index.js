@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import {Observable} from "rxjs";
 import {PlayerPowerUpView} from "./view/player-power-up-view";
 import {EnemyPowerUpView} from "./view/enemy-power-up-view";
 import {PowerUp} from "./power-up";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream} from "../../stream/core";
 
 /**
  * プレイヤー 攻撃アップ ポップアップ
@@ -14,7 +14,7 @@ import type {GameObjectAction} from "../action/game-object-action";
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function playerPowerUp(resources: Resources, listener: Observable<GameObjectAction>): PowerUp {
+export function playerPowerUp(resources: Resources, listener: Stream<GameObjectAction>): PowerUp {
   const view = new PlayerPowerUpView(resources);
   return new PowerUp(view, resources, listener);
 }
@@ -26,7 +26,7 @@ export function playerPowerUp(resources: Resources, listener: Observable<GameObj
  * @param listener イベントリスナ
  * @return 生成結果
  */
-export function enemyPowerUp(resources: Resources, listener: Observable<GameObjectAction>): PowerUp {
+export function enemyPowerUp(resources: Resources, listener: Stream<GameObjectAction>): PowerUp {
   const view = new EnemyPowerUpView(resources);
   return new PowerUp(view, resources, listener);
 }

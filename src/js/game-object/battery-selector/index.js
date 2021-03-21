@@ -2,7 +2,6 @@
 
 import {Howl} from 'howler';
 import TWEEN from '@tweenjs/tween.js';
-import {Observable, Subscription} from 'rxjs';
 import type {Resources} from "../../resource";
 import * as THREE from "three";
 import type {ButtonLabel} from "./model/button-label";
@@ -24,11 +23,12 @@ import {decide} from './animation/decide';
 import {batteryMinusPop} from "./animation/battery-minus-pop";
 import {batteryPlusPop} from "./animation/battery-plus-pop";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   maxBattery: number,
   onBatteryChange: (battery: number) => void,
   onOkButtonPush: () => void,
@@ -43,7 +43,7 @@ export class BatterySelector {
   _batteryChangeTween: typeof TWEEN.Group;
   _batteryMinusTween: typeof TWEEN.Group;
   _batteryPlusTween: typeof TWEEN.Group;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._model = initialValue();
@@ -61,7 +61,7 @@ export class BatterySelector {
       ? batteryChangeResource.sound
       : new Howl();
 
-    this._subscription = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
@@ -103,7 +103,7 @@ export class BatterySelector {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

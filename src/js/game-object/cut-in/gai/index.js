@@ -4,8 +4,8 @@ import {GaiCutIn} from "./gai";
 import type {Resources} from "../../../resource";
 import {PlayerGaiView} from "./view/player-gai-view";
 import {EnemyGaiView} from "./view/enemy-gai-view";
-import {Observable} from "rxjs";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream} from "../../../stream/core";
 
 /**
  * プレイヤー側 ガイ カットイン
@@ -14,7 +14,7 @@ import type {GameObjectAction} from "../../action/game-object-action";
  * @param listener イベントリスナ
  * @return ガイ カットイン
  */
-export function playerGaiCutIn(resources: Resources, listener: Observable<GameObjectAction>): GaiCutIn {
+export function playerGaiCutIn(resources: Resources, listener: Stream<GameObjectAction>): GaiCutIn {
   const view = new PlayerGaiView(resources);
   return new GaiCutIn(view, resources, listener);
 }
@@ -26,7 +26,7 @@ export function playerGaiCutIn(resources: Resources, listener: Observable<GameOb
  * @param listener イベントリスナ
  * @return ガイ カットイン
  */
-export function enemyGaiCutIn(resources: Resources, listener: Observable<GameObjectAction>): GaiCutIn {
+export function enemyGaiCutIn(resources: Resources, listener: Stream<GameObjectAction>): GaiCutIn {
   const view = new EnemyGaiView(resources);
   return new GaiCutIn(view, resources, listener);
 }

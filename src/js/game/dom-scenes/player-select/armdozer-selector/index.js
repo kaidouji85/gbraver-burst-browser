@@ -1,7 +1,6 @@
 // @flow
 
 import {ArmdozerIcon} from "./armdozer-icon";
-import {Observable, Subject, Subscription} from "rxjs";
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../resource";
 import {domUuid} from "../../../../uuid/dom-uuid";
@@ -13,6 +12,8 @@ import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createArmdozerIcon} from "./create-armdozer-icon";
+import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
+import {RxjsStreamSource} from "../../../../stream/rxjs";
 
 /** ルートHTML要素 class */
 export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -38,10 +39,10 @@ export class ArmdozerSelector {
   _prevButton: HTMLElement;
   _changeValueSound: typeof Howl;
   _decideSound: typeof Howl;
-  _change: Subject<ArmDozerId>;
-  _decide: Subject<ArmDozerId>;
-  _prev: Subject<void>;
-  _subscriptions: Subscription[];
+  _change: StreamSource<ArmDozerId>;
+  _decide: StreamSource<ArmDozerId>;
+  _prev: StreamSource<void>;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -55,9 +56,9 @@ export class ArmdozerSelector {
 
     this._exclusive = new Exclusive();
 
-    this._change = new Subject<ArmDozerId>();
-    this._decide = new Subject<ArmDozerId>();
-    this._prev = new Subject();
+    this._change = new RxjsStreamSource();
+    this._decide = new RxjsStreamSource();
+    this._prev = new RxjsStreamSource();
 
     this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
@@ -103,7 +104,7 @@ export class ArmdozerSelector {
     this._prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
       ?? document.createElement('button');
 
-    this._subscriptions = [
+    this._unsubscribers = [
       ...this._armdozerIcons.map(v =>
         v.icon.selectedNotifier().subscribe(() => {
           this._onArmdozerSelect(v.armdozerId);
@@ -121,7 +122,7 @@ export class ArmdozerSelector {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._subscriptions.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -165,7 +166,7 @@ export class ArmdozerSelector {
    *
    * @return イベント通知ストリーム
    */
-  changeNotifier(): Observable<ArmDozerId> {
+  changeNotifier(): Stream<ArmDozerId> {
     return this._change;
   }
 
@@ -174,7 +175,7 @@ export class ArmdozerSelector {
    *
    * @return アームドーザ決定通知ストリーム
    */
-  decideNotifier(): Observable<ArmDozerId> {
+  decideNotifier(): Stream<ArmDozerId> {
     return this._decide;
   }
 
@@ -182,7 +183,7 @@ export class ArmdozerSelector {
    * 戻る 通知
    * @return 通知ストリーム
    */
-  prevNotifier(): Observable<void> {
+  prevNotifier(): Stream<void> {
     return this._prev;
   }
 

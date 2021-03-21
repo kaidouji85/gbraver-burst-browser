@@ -3,11 +3,11 @@
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
-import {Observable} from "rxjs";
 import {WingDozerCutIn} from "../../../../../../game-object/cut-in/wing-dozer/wing-dozer-cutin";
 import {enemyWingDozerCutIn, playerWingDozerCutIn} from "../../../../../../game-object/cut-in/wing-dozer";
 import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream} from "../../../../../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -54,7 +54,7 @@ export class WingDozerHUD implements HUDArmdozerObjects {
  * @param state プレイヤーの状態
  * @return ウィングドーザHUD
  */
-export function playerWingDozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): WingDozerHUD {
+export function playerWingDozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): WingDozerHUD {
   return new WingDozerHUD({
     playerId: state.playerId,
     cutIn: playerWingDozerCutIn(resources, listener),
@@ -69,7 +69,7 @@ export function playerWingDozerHUD(resources: Resources, listener: Observable<Ga
  * @param state プレイヤーの状態
  * @return ウィングドーザHUD
  */
-export function enemyWingDozerHUD(resources: Resources, listener: Observable<GameObjectAction>, state: Player): WingDozerHUD {
+export function enemyWingDozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): WingDozerHUD {
   return new WingDozerHUD({
     playerId: state.playerId,
     cutIn: enemyWingDozerCutIn(resources, listener)

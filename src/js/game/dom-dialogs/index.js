@@ -1,18 +1,18 @@
 // @flow
 
-import {HowToPlay} from "./how-to-play";
-import {Observable, Subject, Subscription} from "rxjs";
-import type {EndHowToPlay, GameAction} from "../actions/game-actions";
+import {HowToPlay} from "./how-to-play/how-to-play-dialog";
+import type {GameAction} from "../actions/game-actions";
 import type {Resources} from "../../resource";
 import type {DOMDialog} from "./dialog";
-import {map} from "rxjs/operators";
+import {RxjsStreamSource} from "../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
   _root: HTMLElement;
   _dialog: ?DOMDialog;
-  _endHowToPlay: Subject<EndHowToPlay>;
-  _dialogSubscriptions: Subscription[];
+  _gameAction: StreamSource<GameAction>;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -20,8 +20,8 @@ export class DOMDialogs {
   constructor() {
     this._root = document.createElement('div');
     this._dialog = null;
-    this._endHowToPlay = new Subject();
-    this._dialogSubscriptions = [];
+    this._gameAction = new RxjsStreamSource();
+    this._unsubscribers = [];
   }
 
   /**
@@ -33,10 +33,9 @@ export class DOMDialogs {
     this._removeCurrentDialog();
 
     const howToPlay = new HowToPlay(resources);
-    const notifier = howToPlay.notifier();
-    this._dialogSubscriptions = [
-      notifier.endHowToPlay.subscribe(() => {
-        this._endHowToPlay.next({type: 'EndHowToPlay'});
+    this._unsubscribers = [
+      howToPlay.closeNotifier().subscribe(() => {
+        this._gameAction.next({type: 'EndHowToPlay'});
       })
     ];
     this._root.appendChild(howToPlay.getRootHTMLElement());
@@ -55,10 +54,8 @@ export class DOMDialogs {
    *
    * @return イベント通知ストリーム
    */
-  gameActionNotifier(): Observable<GameAction> {
-    return this._endHowToPlay.pipe(
-      map(v => (v: GameAction))
-    );
+  gameActionNotifier(): Stream<GameAction> {
+    return this._gameAction;
   }
 
   /**
@@ -78,9 +75,9 @@ export class DOMDialogs {
     this._dialog && this._dialog.getRootHTMLElement().remove();
     this._dialog = null;
 
-    this._dialogSubscriptions.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-    this._dialogSubscriptions = [];
+    this._unsubscribers = [];
   }
 }

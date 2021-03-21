@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import type {PowerUpView} from "./view/power-up-view";
 import type {PowerUpModel} from "./model/power-up-model";
-import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
@@ -11,6 +10,7 @@ import {popUp} from "./animation/pop-up";
 import {PowerUpSounds} from "./sounds/power-up-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /**
  * 攻撃アップ
@@ -19,7 +19,7 @@ export class PowerUp {
   _model: PowerUpModel;
   _view: PowerUpView;
   _sounds: PowerUpSounds;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -28,11 +28,11 @@ export class PowerUp {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: PowerUpView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: PowerUpView, resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new PowerUpSounds(resources);
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {
@@ -44,7 +44,7 @@ export class PowerUp {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

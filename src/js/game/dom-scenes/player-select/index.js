@@ -3,13 +3,14 @@
 import type {Resources} from "../../../resource";
 import {ArmdozerSelector} from "./armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
-import {Observable, Subject, Subscription} from "rxjs";
 import {PilotSelector} from "./pilot-selector";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {ArmdozerBustShotContainer} from "./armdozer-bust-shot";
 import {PilotBustShotContainer} from "./pilot-bust-shot";
 import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import type {DOMScene} from "../dom-scene";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
+import {RxjsStreamSource} from "../../../stream/rxjs";
 
 /**
  * プレイヤーの選択内容
@@ -30,9 +31,9 @@ export class PlayerSelect implements DOMScene {
   _pilotSelector: PilotSelector;
   _armdozerId: ArmDozerId;
   _pilotId: PilotId;
-  _playerDecide: Subject<PlayerDecide>;
-  _prev: Subject<void>;
-  _subscriptions: Subscription[];
+  _playerDecide: StreamSource<PlayerDecide>;
+  _prev: StreamSource<void>;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -57,8 +58,8 @@ export class PlayerSelect implements DOMScene {
     const selectorId = domUuid();
     const workingId = domUuid();
 
-    this._playerDecide = new Subject();
-    this._prev = new Subject();
+    this._playerDecide = new RxjsStreamSource();
+    this._prev = new RxjsStreamSource();
 
     this._root = document.createElement('div');
     this._root.className = 'player-select';
@@ -87,7 +88,7 @@ export class PlayerSelect implements DOMScene {
     this._pilotSelector.hidden();
     selector.appendChild(this._pilotSelector.getRootHTMLElement());
 
-    this._subscriptions = [
+    this._unsubscribers = [
       this._armdozerSelector.changeNotifier().subscribe(v => {
         this._onArmdozerChange(v);
       }),
@@ -115,7 +116,7 @@ export class PlayerSelect implements DOMScene {
   destructor(): void {
     this._armdozerSelector.destructor();
     this._pilotSelector.destructor();
-    this._subscriptions.forEach(v => {
+    this._unsubscribers.forEach(v => {
       v.unsubscribe();
     })
   }
@@ -148,7 +149,7 @@ export class PlayerSelect implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  decideNotifier(): Observable<PlayerDecide> {
+  decideNotifier(): Stream<PlayerDecide> {
     return this._playerDecide;
   }
 
@@ -156,7 +157,7 @@ export class PlayerSelect implements DOMScene {
    * 戻る通知
    * @return 通知ストリーム
    */
-  prevNotifier(): Observable<void> {
+  prevNotifier(): Stream<void> {
     return this._prev;
   }
   

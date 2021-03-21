@@ -1,15 +1,15 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import {Observable} from "rxjs";
 import {DamageIndicator} from "./damage-indicator";
 import {PlayerDamageIndicatorView} from "./view/player-damage-indicator-view";
 import {EnemyDamageIndicatorView} from "./view/enemy-damage-indicator-view";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream} from "../../stream/core";
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>
+  listener: Stream<GameObjectAction>
 }
 
 /** プレイヤーのダメージインジケータ */

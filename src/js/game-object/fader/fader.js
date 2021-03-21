@@ -2,7 +2,6 @@
 
 import * as THREE from 'three';
 import {FaderView} from "./view/fader-view";
-import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../game-loop/pre-render";
 import type {FaderModel} from "./model/fader-model";
 import {createInitialValue} from "./model/initial-value";
@@ -11,11 +10,12 @@ import {fadeIn} from "./animation/fade-in";
 import {fadeOut} from "./animation/fade-out";
 import {opacity} from "./animation/opacity";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
   isVisible: boolean,
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   z: number,
 };
 
@@ -23,12 +23,12 @@ type Param = {
 export class Fader {
   _model: FaderModel;
   _view: FaderView;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._model = createInitialValue(param.isVisible);
     this._view = new FaderView(param.z);
-    this._subscription = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }
@@ -38,7 +38,7 @@ export class Fader {
   /** デストラクタ相当の処理 */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

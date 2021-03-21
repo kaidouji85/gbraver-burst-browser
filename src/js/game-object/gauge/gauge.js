@@ -3,7 +3,6 @@
 import * as THREE from 'three';
 import type {GaugeView} from "./view/gauge-view";
 import type {GaugeModel} from "./model/gauge-model";
-import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {hp} from "./animation/hp";
@@ -11,9 +10,10 @@ import {battery} from './animation/battery';
 import {initialValue} from "./model/initial-value";
 import type {HUDTracking} from "../../tracking/hud-tracking";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 type Param = {
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   view: GaugeView,
   hp: number,
   battery: number
@@ -23,13 +23,13 @@ type Param = {
 export class Gauge implements HUDTracking {
   _model: GaugeModel;
   _view: GaugeView;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     this._view = param.view;
     this._model = initialValue(param.hp, param.battery);
 
-    this._subscription = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._preRender(action);
       }
@@ -39,7 +39,7 @@ export class Gauge implements HUDTracking {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /** HP変更 */

@@ -4,7 +4,6 @@ import {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
 import type {NeoLandozerModel} from "./model/neo-landozer-model";
 import type {NeoLandozerView} from "./view/neo-landozer-view";
-import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
@@ -23,13 +22,14 @@ import {gutsToStand} from "./animation/guts-to-stand";
 import type {Resources} from "../../../resource";
 import {NeoLandozerSounds} from "./sounds/neo-landozer-sounds";
 import type {GameObjectAction} from "../../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../../stream/core";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {
   _model: NeoLandozerModel;
   _view: NeoLandozerView;
   _sounds: NeoLandozerSounds;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -38,12 +38,12 @@ export class NeoLandozer implements ArmDozerSprite {
    * @param resources リソース管理オブジェクト
    * @param listener イベントリスナ
    */
-  constructor(view: NeoLandozerView, resources: Resources, listener: Observable<GameObjectAction>) {
+  constructor(view: NeoLandozerView, resources: Resources, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new NeoLandozerSounds(resources);
 
-    this._subscription = listener.subscribe(action => {
+    this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {
@@ -55,7 +55,7 @@ export class NeoLandozer implements ArmDozerSprite {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

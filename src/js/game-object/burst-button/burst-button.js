@@ -5,7 +5,6 @@ import * as THREE from 'three';
 import type {BurstButtonModel} from "./model/burst-button-model";
 import {BurstButtonView} from "./view/burst-button-view";
 import type {Resources} from "../../resource";
-import {Observable, Subscription} from "rxjs";
 import {createInitialValue} from "./model/initial-value";
 import {open} from './animation/open';
 import {close} from './animation/close';
@@ -15,10 +14,11 @@ import {SOUND_IDS} from "../../resource/sound";
 import {decide} from "./animation/decide";
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 type Param = {
   resources: Resources,
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   armDozerId: ArmDozerId,
   onPush: () => void,
 };
@@ -28,7 +28,7 @@ export class BurstButton {
   _model: BurstButtonModel;
   _view: BurstButtonView;
   _pushButtonSound: typeof Howl;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
     const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
@@ -49,7 +49,7 @@ export class BurstButton {
         param.onPush();
       }
     });
-    this._subscription = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._preRender(action);
       }
@@ -59,7 +59,7 @@ export class BurstButton {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

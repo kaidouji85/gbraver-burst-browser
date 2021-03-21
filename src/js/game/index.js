@@ -3,13 +3,12 @@
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {ResourceLoader} from "../resource";
-import {merge, Observable, Subscription} from "rxjs";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
 import type {Resize} from "../window/resize";
-import {createResizeStream} from "../window/resize";
+import {resizeStream} from "../window/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/root/resource-root";
@@ -28,13 +27,14 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import {DefinePlugin} from "../webpack/define-plugin";
+import type {Stream, Unsubscriber} from "../stream/core";
 
 /**
  * ゲーム全体の管理を行う
  */
 export class Game {
   _inProgress: InProgress;
-  _resize: Observable<Resize>;
+  _resize: Stream<Resize>;
   _vh: CssVH;
   _fader: DOMFader;
   _interruptScenes: InterruptScenes;
@@ -44,7 +44,7 @@ export class Game {
   _resourceRoot: ResourceRoot;
   _resources: ?Resources;
   _serviceWorker: ?ServiceWorkerRegistration;
-  _subscriptions: Subscription[];
+  _unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -55,7 +55,7 @@ export class Game {
     this._resourceRoot = resourceRoot;
 
     this._inProgress = {type: 'None'};
-    this._resize = createResizeStream();
+    this._resize = resizeStream();
     this._vh = new CssVH(this._resize);
 
     this._fader = new DOMFader();
@@ -80,30 +80,28 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
-    const gameActionNotifier = merge(
+    const gameActionStreams = [
       this._tdScenes.gameActionNotifier(),
       this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(),
-    );
-    this._subscriptions = [
-      gameActionNotifier.subscribe(action => {
-        if (action.type === 'EndBattle') {
-          this._onEndBattle(action);
-        } else if (action.type === 'GameStart') {
-          this._onGameStart();
-        } else if (action.type === 'ShowHowToPlay') {
-          this._onShowHowToPlay();
-        } else if (action.type === 'SelectionComplete') {
-          this._onSelectionComplete(action);
-        } else if (action.type === 'SelectionCancel') {
-          this._onSelectionCancel();
-        }else if (action.type === 'EndNPCEnding') {
-          this._onEndNPCEnding();
-        } else if (action.type === 'EndHowToPlay') {
-          this._onEndHowToPlay();
-        }
-      })
+      this._domDialogs.gameActionNotifier()
     ];
+    this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
+      if (action.type === 'EndBattle') {
+        this._onEndBattle(action);
+      } else if (action.type === 'GameStart') {
+        this._onGameStart();
+      } else if (action.type === 'ShowHowToPlay') {
+        this._onShowHowToPlay();
+      } else if (action.type === 'SelectionComplete') {
+        this._onSelectionComplete(action);
+      } else if (action.type === 'SelectionCancel') {
+        this._onSelectionCancel();
+      }else if (action.type === 'EndNPCEnding') {
+        this._onEndNPCEnding();
+      } else if (action.type === 'EndHowToPlay') {
+        this._onEndHowToPlay();
+      }
+    }));
   }
 
   /**

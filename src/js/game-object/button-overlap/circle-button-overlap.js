@@ -2,8 +2,8 @@
 
 import * as THREE from 'three';
 import {ButtonOverlap} from "./button-overlap";
-import {Observable} from "rxjs";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream} from "../../stream/core";
 
 /** パラメータ */
 type Param = {
@@ -12,7 +12,7 @@ type Param = {
   /** 円分割数 */
   segments: number,
   /** イベントリスナー */
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
   /** ボタン押下時のコールバック関数 */
   onButtonPush: () => void
 };

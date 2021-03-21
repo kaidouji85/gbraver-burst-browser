@@ -4,13 +4,13 @@ import * as THREE from 'three';
 import type {RecoverBatteryModel} from "./model/recover-battery-model";
 import type {RecoverBatteryView} from "./view/recover-battery-view";
 import {createInitialValue} from "./model/initial-value";
-import {Observable, Subscription} from "rxjs";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {popUp} from "./animation/pop-up";
 import {RecoverBatterySounds} from "./sounds/recover-battery-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {Stream, Unsubscriber} from "../../stream/core";
 
 /**
  * コンストラクタのパラメータ
@@ -18,7 +18,7 @@ import type {GameObjectAction} from "../action/game-object-action";
 type Param = {
   view: RecoverBatteryView,
   resources: Resources,
-  listener: Observable<GameObjectAction>,
+  listener: Stream<GameObjectAction>,
 };
 
 /**
@@ -28,7 +28,7 @@ export class RecoverBattery {
   _model: RecoverBatteryModel;
   _view: RecoverBatteryView;
   _sounds: RecoverBatterySounds;
-  _subscription: Subscription;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -39,7 +39,7 @@ export class RecoverBattery {
     this._model = createInitialValue();
     this._view = param.view;
     this._sounds = new RecoverBatterySounds(param.resources);
-    this._subscription = param.listener.subscribe(action => {
+    this._unsubscriber = param.listener.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {
@@ -51,7 +51,7 @@ export class RecoverBattery {
   /** デストラクタ */
   destructor(): void {
     this._view.destructor();
-    this._subscription.unsubscribe();
+    this._unsubscriber.unsubscribe();
   }
 
   /**

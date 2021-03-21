@@ -13,7 +13,7 @@ export default {
 function pilotButtonStub(pilotId: PilotId): HUDGameObjectStub {
   return new HUDGameObjectStub((resources, listener) => {
     const button = new PilotButton(resources, pilotId, listener);
-    button.notifier().pushButton.subscribe(() => {
+    button.pushButtonNotifier().subscribe(() => {
       console.log('push button!!');
       const animation = button.decide()
         .chain(delay(1000))

@@ -3,7 +3,6 @@
 import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
-import {Observable} from "rxjs";
 import type {Update} from "../../../../../game-loop/update";
 import type {PreRender} from "../../../../../game-loop/pre-render";
 import {TDCamera} from "../../../../../game-object/camera/td";
@@ -18,6 +17,7 @@ import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
+import type {Stream} from "../../../../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -26,9 +26,9 @@ type Param = {
   playerId: PlayerId,
   players: Player[],
   listener: {
-    resize: Observable<Resize>,
-    update: Observable<Update>,
-    preRender: Observable<PreRender>,
+    resize: Stream<Resize>,
+    update: Stream<Update>,
+    preRender: Stream<PreRender>,
   }
 };
 
@@ -39,8 +39,8 @@ export class ThreeDimensionLayer {
   players: TDPlayer[];
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
-  _overlap: Observable<OverlapEvent>;
-  _gameObjectAction: Observable<GameObjectAction>;
+  _overlap: Stream<OverlapEvent>;
+  _gameObjectAction: Stream<GameObjectAction>;
 
   constructor(param: Param) {
     const player = param.players.find(v => v.playerId === param.playerId) || param.players[0];

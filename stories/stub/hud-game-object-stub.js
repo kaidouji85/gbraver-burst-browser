@@ -2,9 +2,8 @@
 
 import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
-import {Observable, Subject, Subscription} from "rxjs";
 import type {Resize} from "../../src/js/window/resize";
-import {createResizeStream} from "../../src/js/window/resize";
+import {resizeStream} from "../../src/js/window/resize";
 import {Renderer} from "../../src/js/render";
 import type {GameLoop} from "../../src/js/game-loop/game-loop";
 import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
@@ -19,6 +18,9 @@ import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
+import {RxjsStreamSource, toStream} from "../../src/js/stream/rxjs";
+import {Stream} from '../../src/js/stream/core';
+import type {StreamSource, Unsubscriber} from "../../src/js/stream/core";
 
 /**
  * HUDレイヤー ゲームオブジェクト スタブ
@@ -27,19 +29,19 @@ export class HUDGameObjectStub {
   _creator: Object3dCreator;
 
   _safeAreaInset: SafeAreaInset;
-  _resize: Observable<Resize>;
-  _gameLoop: Observable<GameLoop>;
-  _update: Subject<Update>;
-  _preRender: Subject<PreRender>;
+  _resize: Stream<Resize>;
+  _gameLoop: Stream<GameLoop>;
+  _update: StreamSource<Update>;
+  _preRender: StreamSource<PreRender>;
 
   _renderer: Renderer;
   _camera: PlainHUDCamera;
   _scene: typeof THREE.Scene;
 
-  _overlap: Observable<OverlapEvent>;
-  _gameObjectAction: Observable<GameObjectAction>;
+  _overlap: Stream<OverlapEvent>;
+  _gameObjectAction: Stream<GameObjectAction>;
 
-  _subscription: Subscription[];
+  _unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -50,10 +52,10 @@ export class HUDGameObjectStub {
     this._creator = creator;
 
     this._safeAreaInset = createSafeAreaInset();
-    this._resize = createResizeStream();
+    this._resize = resizeStream();
     this._gameLoop = gameLoopStream();
-    this._update = new Subject<Update>();
-    this._preRender = new Subject<PreRender>();
+    this._update = new RxjsStreamSource();
+    this._preRender = new RxjsStreamSource();
 
     this._renderer = new Renderer({
       resize: this._resize,
@@ -62,8 +64,12 @@ export class HUDGameObjectStub {
     this._camera = new PlainHUDCamera(this._resize);
 
     this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
-    this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
-    this._subscription = [
+    this._gameObjectAction = gameObjectStream(
+      toStream(this._update),
+      toStream(this._preRender),
+      this._overlap
+    );
+    this._unsubscriber = [
       this._gameLoop.subscribe(this._onGameLoop.bind(this))
     ];
   }
