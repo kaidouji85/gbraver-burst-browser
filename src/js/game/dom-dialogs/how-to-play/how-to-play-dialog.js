@@ -1,22 +1,25 @@
 // @flow
 
+import {Howl} from 'howler';
 import {domUuid} from "../../../uuid/dom-uuid";
-import {merge} from "rxjs";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {pushDOMStream} from "../../../dom/push/push-dom";
-import type {Stream} from "../../../stream/core";
-import {toStream} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
+import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {DOMDialog} from "../dialog";
 import {DefinePlugin} from "../../../webpack/define-plugin";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /**
  * 遊び方ダイアログ プレゼンテーション
  */
 export class HowToPlay implements DOMDialog {
-  _close: Stream<void>;
+  _close: StreamSource<void>;
   _root: HTMLElement;
   _closer: HTMLElement;
+  _unsubscribers: Unsubscriber[];
+  _changeValue: typeof Howl;
 
   /**
    * コンストラクタ
@@ -26,10 +29,11 @@ export class HowToPlay implements DOMDialog {
   constructor(resources: Resources) {
     const movieURL = DefinePlugin.howToPlay;
     const closerId = domUuid();
-    const closerResource = resources.paths.find(v => v.id === PathIds.CLOSER);
-    const closerPath = closerResource
-      ? closerResource.path
-      : '';
+    const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
+      ?.path ?? '';
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
+
     this._root = document.createElement('div');
     this._root.className = 'how-to-play';
     this._root.innerHTML = `
@@ -41,20 +45,20 @@ export class HowToPlay implements DOMDialog {
     `;
 
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
-    const rootPush = pushDOMStream(this._root);
-    const closerPush = pushDOMStream(this._closer);
-    const merged = merge(
-      rootPush.getRxjsObservable(),
-      closerPush.getRxjsObservable()
-    );
-    this._close = toStream(merged);
+    this._close = new RxjsStreamSource();
+    this._unsubscribers = [
+      pushDOMStream(this._root),
+      pushDOMStream(this._closer)
+    ].map(v => v.subscribe(this._onDialogClose.bind(this)));
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    // NOP
+    this._unsubscribers.forEach(v => {
+      v.unsubscribe();
+    })
   }
 
   /**
@@ -73,5 +77,15 @@ export class HowToPlay implements DOMDialog {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * ダイアログを閉じた際の処理
+   *
+   * @return 処理終了後に発火するPromise
+   */
+  async _onDialogClose(): Promise<void> {
+    await this._changeValue.play();
+    this._close.next();
   }
 }
