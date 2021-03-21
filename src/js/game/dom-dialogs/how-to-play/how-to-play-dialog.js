@@ -10,16 +10,18 @@ import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {DOMDialog} from "../dialog";
 import {DefinePlugin} from "../../../webpack/define-plugin";
 import {SOUND_IDS} from "../../../resource/sound";
+import {Exclusive} from "../../../exclusive/exclusive";
 
 /**
  * 遊び方ダイアログ プレゼンテーション
  */
 export class HowToPlay implements DOMDialog {
-  _close: StreamSource<void>;
   _root: HTMLElement;
   _closer: HTMLElement;
+  _close: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
   _changeValue: typeof Howl;
+  _exclusive: Exclusive;
 
   /**
    * コンストラクタ
@@ -50,6 +52,8 @@ export class HowToPlay implements DOMDialog {
       pushDOMStream(this._root),
       pushDOMStream(this._closer)
     ].map(v => v.subscribe(this._onDialogClose.bind(this)));
+
+    this._exclusive = new Exclusive();
   }
 
   /**
@@ -81,11 +85,11 @@ export class HowToPlay implements DOMDialog {
 
   /**
    * ダイアログを閉じた際の処理
-   *
-   * @return 処理終了後に発火するPromise
    */
-  async _onDialogClose(): Promise<void> {
-    await this._changeValue.play();
-    this._close.next();
+  _onDialogClose(): void {
+    this._exclusive.execute(async (): Promise<void>=> {
+      await this._changeValue.play();
+      this._close.next();
+    });
   }
 }
