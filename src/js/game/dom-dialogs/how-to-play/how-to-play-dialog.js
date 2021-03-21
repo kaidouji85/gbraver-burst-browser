@@ -11,6 +11,7 @@ import type {DOMDialog} from "../dialog";
 import {DefinePlugin} from "../../../webpack/define-plugin";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
+import {pop} from "../../../dom/animation/pop";
 
 /**
  * 遊び方ダイアログ プレゼンテーション
@@ -88,7 +89,10 @@ export class HowToPlay implements DOMDialog {
    */
   _onDialogClose(): void {
     this._exclusive.execute(async (): Promise<void>=> {
-      await this._changeValue.play();
+      await Promise.all([
+        this._changeValue.play(),
+        pop(this._closer)
+      ]);
       this._close.next();
     });
   }
