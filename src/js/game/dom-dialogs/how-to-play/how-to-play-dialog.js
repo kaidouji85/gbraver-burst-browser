@@ -49,11 +49,16 @@ export class HowToPlay implements DOMDialog {
 
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
     this._close = new RxjsStreamSource();
-    this._unsubscribers = [
-      pushDOMStream(this._root),
-      pushDOMStream(this._closer)
-    ].map(v => v.subscribe(this._onDialogClose.bind(this)));
 
+    this._unsubscribers = [
+      pushDOMStream(this._closer).subscribe(() => {
+        this._onCloserPush();
+      }),
+
+      pushDOMStream(this._root).subscribe(() => {
+        this._onPushOutsideOfDialog();
+      })
+    ];
     this._exclusive = new Exclusive();
   }
 
@@ -85,14 +90,24 @@ export class HowToPlay implements DOMDialog {
   }
 
   /**
-   * ダイアログを閉じた際の処理
+   * 閉じるアイコンを押した時の処理
    */
-  _onDialogClose(): void {
+  _onCloserPush(): void {
     this._exclusive.execute(async (): Promise<void>=> {
       await Promise.all([
         this._changeValue.play(),
         pop(this._closer)
       ]);
+      this._close.next();
+    });
+  }
+
+  /**
+   * ダイアログ外を押した時の処理
+   */
+  _onPushOutsideOfDialog(): void {
+    this._exclusive.execute(async (): Promise<void>=> {
+      await this._changeValue.play();
       this._close.next();
     });
   }
