@@ -167,8 +167,12 @@
   margin-right: calc(var(--responsive-font-size));
 }
 
+.player-select__armdozer-status__burst {
+  display: flex;
+}
+
 .player-select__armdozer-status__burst__label {
-  margin-right: calc(var(--responsive-font-size) * 0.5);;
+  flex: 0 0 calc(var(--responsive-font-size) * 4);
 }
 
 .player-select__armdozer-selector__icons {

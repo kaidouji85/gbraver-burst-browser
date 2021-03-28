@@ -96,7 +96,7 @@ export class HowToPlay implements DOMDialog {
     this._exclusive.execute(async (): Promise<void>=> {
       await Promise.all([
         this._changeValue.play(),
-        pop(this._closer)
+        pop(this._closer, 1.3)
       ]);
       this._close.next();
     });
