@@ -64,11 +64,7 @@ export class HUDGameObjectStub {
     this._camera = new PlainHUDCamera(this._resize);
 
     this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
-    this._gameObjectAction = gameObjectStream(
-      toStream(this._update),
-      toStream(this._preRender),
-      this._overlap
-    );
+    this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
     this._unsubscriber = [
       this._gameLoop.subscribe(this._onGameLoop.bind(this))
     ];
@@ -119,6 +115,6 @@ export class HUDGameObjectStub {
       rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
-    this._renderer.rendering(this._camera.getCamera(), this._scene);
+    this._renderer.rendering(this._scene, this._camera.getCamera());
   }
 }
