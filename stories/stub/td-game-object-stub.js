@@ -18,7 +18,7 @@ import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
-import {RxjsStreamSource, toStream} from "../../src/js/stream/rxjs";
+import {RxjsStreamSource} from "../../src/js/stream/rxjs";
 import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/core";
 
 /**
@@ -60,14 +60,10 @@ export class TDGameObjectStub {
       resize: this._resize,
     });
     this._scene = new THREE.Scene();
-    this._camera = new TDCamera(toStream(this._update), this._resize);
+    this._camera = new TDCamera(this._update, this._resize);
 
     this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
-    this._gameObjectAction = gameObjectStream(
-      toStream(this._update),
-      toStream(this._preRender),
-      this._overlap
-    );
+    this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
     this._unsubscriber = [
       this._gameLoop.subscribe(this._onGameLoop.bind(this))
     ];
@@ -118,6 +114,6 @@ export class TDGameObjectStub {
       rendererDOM: this._renderer.getRendererDOM(),
       safeAreaInset: this._safeAreaInset,
     });
-    this._renderer.rendering(this._camera.getCamera(), this._scene);
+    this._renderer.rendering(this._scene, this._camera.getCamera());
   }
 }
