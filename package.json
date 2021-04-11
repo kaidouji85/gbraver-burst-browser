@@ -20,7 +20,7 @@
     "serve": "http-server build/production -p 3000 -c-1",
     "serve:storybook-static": "http-server build/storybook-static",
     "webpack": "webpack",
-    "webpack:production": "webpack --config webpack.production.js",
+    "webpack:production": "webpack --mode=production",
     "webpack:sw": "webpack --config webpack.sw.js",
     "webpack:clear-sw": "webpack --config webpack.clear.sw.js",
     "type-check": "flow check",
