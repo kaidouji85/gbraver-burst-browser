@@ -7,10 +7,27 @@ export default {
   title: 'burst-button',
 };
 
-export const canBurst = (): HTMLElement => {
+export const shinBraver = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const burstButton = new BurstButton({
       armDozerId: ArmDozerIdList.SHIN_BRAVER,
+      resources: resources,
+      listener: listener,
+      onPush: () => {
+        burstButton.decide().play();
+      },
+    });
+    burstButton.open(true).play();
+    return [burstButton.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+}
+
+export const wingDozer = (): HTMLElement => {
+  const stub = new HUDGameObjectStub((resources, listener) => {
+    const burstButton = new BurstButton({
+      armDozerId: ArmDozerIdList.WING_DOZER,
       resources: resources,
       listener: listener,
       onPush: () => {
