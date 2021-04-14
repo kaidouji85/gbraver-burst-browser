@@ -2,6 +2,7 @@
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {BurstButton} from "../src/js/game-object/burst-button/burst-button";
 import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import {shinBraverBurstButton, wingDozerBurstButton} from "../src/js/game-object/burst-button";
 
 export default {
   title: 'burst-button',
@@ -26,11 +27,7 @@ export const shinBraver = (): HTMLElement => {
 
 export const wingDozer = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const burstButton = new BurstButton({
-      armDozerId: ArmDozerIdList.WING_DOZER,
-      resources: resources,
-      listener: listener,
-    });
+    const burstButton = new wingDozerBurstButton(resources, listener);
     burstButton.pushButtonNotifier().subscribe(() => {
       burstButton.decide().play();
     });
@@ -43,11 +40,7 @@ export const wingDozer = (): HTMLElement => {
 
 export const disabled = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const burstButton = new BurstButton({
-      armDozerId: ArmDozerIdList.SHIN_BRAVER,
-      resources: resources,
-      listener: listener,
-    });
+    const burstButton = shinBraverBurstButton(resources, listener);
     burstButton.open(false).play();
     return [burstButton.getObject3D()];
   });
