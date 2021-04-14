@@ -14,13 +14,13 @@ import {SOUND_IDS} from "../../resource/sound";
 import {decide} from "./animation/decide";
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
+import {RxjsStreamSource} from "../../stream/rxjs";
 
 type Param = {
   resources: Resources,
   listener: Stream<GameObjectAction>,
   armDozerId: ArmDozerId,
-  onPush: () => void,
 };
 
 /** バーストボタン */
@@ -28,6 +28,7 @@ export class BurstButton {
   _model: BurstButtonModel;
   _view: BurstButtonView;
   _pushButtonSound: typeof Howl;
+  _pushButton: StreamSource<void>;
   _unsubscriber: Unsubscriber;
 
   constructor(param: Param) {
@@ -35,6 +36,7 @@ export class BurstButton {
     this._pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
       : new Howl();
+    this._pushButton = new RxjsStreamSource();
 
     this._model = createInitialValue();
     this._view = new BurstButtonView({
@@ -46,7 +48,7 @@ export class BurstButton {
           return;
         }
 
-        param.onPush();
+        this._pushButton.next();
       }
     });
     this._unsubscriber = param.listener.subscribe(action => {
@@ -94,6 +96,15 @@ export class BurstButton {
   /** three.jsオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * ボタン押下通知
+   *
+   * @return 通知ストリーム
+   */
+  pushButtonNotifier(): Stream<void> {
+    return this._pushButton;
   }
 
   /** プリレンダー */

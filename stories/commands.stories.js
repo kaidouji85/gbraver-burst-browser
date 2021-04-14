@@ -26,9 +26,6 @@ export const commands = () => {
       armDozerId: ArmDozerIdList.SHIN_BRAVER,
       resources: resources,
       listener: listener,
-      onPush: () => {
-        // NOP
-      },
     });
     const pilotButton = new PilotButton(resources, listener);
 

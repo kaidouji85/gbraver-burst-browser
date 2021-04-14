@@ -49,11 +49,6 @@ export class HUDGameObjects {
       resources: resources,
       listener: listener,
       armDozerId: playerInfo.armdozer.id,
-      onPush: () => {
-        this._battleAction.next({
-          type: 'doBurst'
-        });
-      }
     });
     this.pilotButton = new PilotButton(resources, playerInfo.pilot.id, listener);
 
@@ -67,6 +62,9 @@ export class HUDGameObjects {
     });
 
     this._unsubscribers = [
+      this.burstButton.pushButtonNotifier().subscribe(() => {
+        this._battleAction.next({type: 'doBurst'})
+      }),
       this.pilotButton.pushButtonNotifier().subscribe(() => {
         this._battleAction.next({type: 'doPilotSkill'});
       })

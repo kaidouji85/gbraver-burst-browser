@@ -13,9 +13,9 @@ export const shinBraver = (): HTMLElement => {
       armDozerId: ArmDozerIdList.SHIN_BRAVER,
       resources: resources,
       listener: listener,
-      onPush: () => {
-        burstButton.decide().play();
-      },
+    });
+    burstButton.pushButtonNotifier().subscribe(() => {
+      burstButton.decide().play();
     });
     burstButton.open(true).play();
     return [burstButton.getObject3D()];
@@ -30,9 +30,9 @@ export const wingDozer = (): HTMLElement => {
       armDozerId: ArmDozerIdList.WING_DOZER,
       resources: resources,
       listener: listener,
-      onPush: () => {
-        burstButton.decide().play();
-      },
+    });
+    burstButton.pushButtonNotifier().subscribe(() => {
+      burstButton.decide().play();
     });
     burstButton.open(true).play();
     return [burstButton.getObject3D()];
@@ -47,9 +47,6 @@ export const disabled = (): HTMLElement => {
       armDozerId: ArmDozerIdList.SHIN_BRAVER,
       resources: resources,
       listener: listener,
-      onPush: () => {
-        // NOP
-      },
     });
     burstButton.open(false).play();
     return [burstButton.getObject3D()];
