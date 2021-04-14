@@ -4,8 +4,8 @@ import type {Resources} from "../../../../../../resource";
 import type {Stream} from "../../../../../../stream/core";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import type {ArmDozerId} from "gbraver-burst-core";
+import {ArmDozerIdList} from 'gbraver-burst-core';
 import {BurstButton} from "../../../../../../game-object/burst-button/burst-button";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 import {
   lightningDozerBurstButton,
   neoLandozerBurstButton,
