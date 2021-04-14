@@ -10,11 +10,7 @@ export default {
 
 export const shinBraver = (): HTMLElement => {
   const stub = new HUDGameObjectStub((resources, listener) => {
-    const burstButton = new BurstButton({
-      armDozerId: ArmDozerIdList.SHIN_BRAVER,
-      resources: resources,
-      listener: listener,
-    });
+    const burstButton = shinBraverBurstButton(resources, listener);
     burstButton.pushButtonNotifier().subscribe(() => {
       burstButton.decide().play();
     });

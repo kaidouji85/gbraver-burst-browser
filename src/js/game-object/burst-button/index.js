@@ -4,7 +4,10 @@ import type {Resources} from "../../resource";
 import type {Stream} from "../../stream/core";
 import type {GameObjectAction} from "../action/game-object-action";
 import {BurstButton} from "./burst-button";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
+import {ShinBraverIcon} from "./view/shin-braver-icon";
+import {NeoLandozerIcon} from "./view/neo-landozer-icon";
+import {LightningDozerIcon} from "./view/lightning-dozer-icon";
+import {WingDozerIcon} from "./view/wing-dozer-icon";
 
 /**
  * シンブレイバー バーストボタンを生成する
@@ -17,7 +20,7 @@ export function shinBraverBurstButton(resources: Resources, listener: Stream<Gam
   return new BurstButton({
     resources: resources,
     listener: listener,
-    armDozerId: ArmDozerIdList.SHIN_BRAVER,
+    armdozerIcon: new ShinBraverIcon(resources),
   });
 }
 
@@ -32,7 +35,7 @@ export function neoLandozerBurstButton(resources: Resources, listener: Stream<Ga
   return new BurstButton({
     resources: resources,
     listener: listener,
-    armDozerId: ArmDozerIdList.NEO_LANDOZER,
+    armdozerIcon: new NeoLandozerIcon(resources),
   });
 }
 
@@ -47,7 +50,7 @@ export function lightningDozerBurstButton(resources: Resources, listener: Stream
   return new BurstButton({
     resources: resources,
     listener: listener,
-    armDozerId: ArmDozerIdList.LIGHTNING_DOZER,
+    armdozerIcon: new LightningDozerIcon(resources),
   });
 }
 
@@ -62,6 +65,6 @@ export function wingDozerBurstButton(resources: Resources, listener: Stream<Game
   return new BurstButton({
     resources: resources,
     listener: listener,
-    armDozerId: ArmDozerIdList.WING_DOZER,
+    armdozerIcon: new WingDozerIcon(resources),
   });
 }

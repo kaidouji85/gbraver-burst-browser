@@ -10,8 +10,6 @@ import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import type {ArmdozerIcon} from "./armdozer-icon";
-import type {ArmDozerId} from "gbraver-burst-core";
-import {createArmdozerIcon} from "./create-armdozer-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/core";
 
@@ -30,7 +28,7 @@ const PADDING_BOTTOM = 80;
 type Param = {
   resources: Resources,
   listener: Stream<GameObjectAction>,
-  armDozerId: ArmDozerId,
+  armdozerIcon: ArmdozerIcon,
   onPush: () => void,
 };
 
@@ -57,7 +55,7 @@ export class BurstButtonView {
     });
     this._group.add(this._burstButton.getObject3D());
 
-    this._armdozerIcon = createArmdozerIcon(param.armDozerId, param.resources);
+    this._armdozerIcon = param.armdozerIcon;
     this._group.add(this._armdozerIcon.getObject3D());
 
     const label = param.resources.canvasImages

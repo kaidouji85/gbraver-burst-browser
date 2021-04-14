@@ -12,15 +12,15 @@ import {Animate} from "../../animation/animate";
 import type {PreRender} from "../../game-loop/pre-render";
 import {SOUND_IDS} from "../../resource/sound";
 import {decide} from "./animation/decide";
-import type {ArmDozerId} from "gbraver-burst-core";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import {RxjsStreamSource} from "../../stream/rxjs";
+import type {ArmdozerIcon} from "./view/armdozer-icon";
 
 type Param = {
   resources: Resources,
   listener: Stream<GameObjectAction>,
-  armDozerId: ArmDozerId,
+  armdozerIcon: ArmdozerIcon,
 };
 
 /** バーストボタン */
@@ -42,7 +42,7 @@ export class BurstButton {
     this._view = new BurstButtonView({
       resources: param.resources,
       listener: param.listener,
-      armDozerId: param.armDozerId,
+      armdozerIcon: param.armdozerIcon,
       onPush: () => {
         if (this._model.disabled || !this._model.canBurst) {
           return;
