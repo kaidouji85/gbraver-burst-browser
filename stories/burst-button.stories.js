@@ -1,7 +1,5 @@
 // @flow
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
-import {BurstButton} from "../src/js/game-object/burst-button/burst-button";
-import {ArmDozerIdList} from "gbraver-burst-core/lib/master/armdozers";
 import {shinBraverBurstButton, wingDozerBurstButton} from "../src/js/game-object/burst-button";
 
 export default {
