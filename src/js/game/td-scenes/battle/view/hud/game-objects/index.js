@@ -1,17 +1,18 @@
 // @flow
 
-import {BatterySelector} from "../../../../../game-object/battery-selector";
-import {BurstButton} from "../../../../../game-object/burst-button/burst-button";
-import type {Resources} from "../../../../../resource";
-import type {BattleSceneAction} from "../../actions";
+import {BatterySelector} from "../../../../../../game-object/battery-selector";
+import {BurstButton} from "../../../../../../game-object/burst-button/burst-button";
+import type {Resources} from "../../../../../../resource";
+import type {BattleSceneAction} from "../../../actions";
 import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
-import {Fader} from "../../../../../game-object/fader/fader";
-import {frontmostFader, rearmostFader} from "../../../../../game-object/fader";
-import {PilotButton} from "../../../../../game-object/pilot-button";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../../stream/core";
-import {RxjsStreamSource} from "../../../../../stream/rxjs";
+import {Fader} from "../../../../../../game-object/fader/fader";
+import {frontmostFader, rearmostFader} from "../../../../../../game-object/fader";
+import {PilotButton} from "../../../../../../game-object/pilot-button";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Stream, StreamSource, Unsubscriber} from "../../../../../../stream/core";
+import {RxjsStreamSource} from "../../../../../../stream/rxjs";
+import {createBurstButton} from "./burst-button";
 
 /**
  * HUDレイヤーのゲームオブジェクト
@@ -45,11 +46,7 @@ export class HUDGameObjects {
         });
       }
     });
-    this.burstButton = new BurstButton({
-      resources: resources,
-      listener: listener,
-      armDozerId: playerInfo.armdozer.id,
-    });
+    this.burstButton = createBurstButton(resources, listener, playerInfo.armdozer.id);
     this.pilotButton = new PilotButton(resources, playerInfo.pilot.id, listener);
 
     this.frontmostFader = frontmostFader({

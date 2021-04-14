@@ -28,7 +28,7 @@ export function shinBraverBurstButton(resources: Resources, listener: Stream<Gam
  * @param listener イベントリスナ
  * @return バーストボタン
  */
-export function neoLandozerDozerBurstButton(resources: Resources, listener: Stream<GameObjectAction>): BurstButton {
+export function neoLandozerBurstButton(resources: Resources, listener: Stream<GameObjectAction>): BurstButton {
   return new BurstButton({
     resources: resources,
     listener: listener,
