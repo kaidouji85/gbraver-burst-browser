@@ -56,6 +56,8 @@ export class BurstButtonView {
     this._group.add(this._burstButton.getObject3D());
 
     this._armdozerIcon = param.armdozerIcon;
+    this._armdozerIcon.getObject3D().position.z
+      = this._burstButton.getObject3D().position.z + 1;
     this._group.add(this._armdozerIcon.getObject3D());
 
     const label = param.resources.canvasImages
