@@ -42,30 +42,6 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
 }
 
 /**
- * 指定したアームドーザに注目する
- *
- * @param camera カメラ
- * @param target 注目先のアムドーザ
- * @param duration アニメーション時間(ミリ秒)
- * @return アニメーション
- */
-export function attentionArmDozer(camera: TDCamera, target: ArmDozerSprite, duration: number): Animate {
-  const x = target.getObject3D().position.x;
-  return all(
-    camera.moveCamera({
-      x: x,
-      y: INITIAL_CAMERA_POSITION_Y,
-      z: INITIAL_CAMERA_POSITION_Z - 60,
-    }, duration),
-    camera.moveViewPoint({
-      x: x,
-      y: INITIAL_VIEW_POINT_Y,
-      z: INITIAL_VIEW_POINT_Z
-    }, duration)
-  );
-}
-
-/**
  * ドリー
  *
  * @param camera カメラ
@@ -92,5 +68,22 @@ export function track(camera: TDCamera, x: number | string, duration: number): A
   return all(
     camera.moveCamera({x: x}, duration),
     camera.moveViewPoint({x: x}, duration),
+  );
+}
+
+/**
+ * 指定したアームドーザに注目する
+ *
+ * @param camera カメラ
+ * @param target 注目先のアムドーザ
+ * @param duration アニメーション時間(ミリ秒)
+ * @return アニメーション
+ */
+export function attentionArmDozer(camera: TDCamera, target: ArmDozerSprite, duration: number): Animate {
+  const x = target.getObject3D().position.x;
+  const z = '-40';
+  return all(
+    track(camera, x, duration),
+    dolly(camera, z, duration)
   );
 }
