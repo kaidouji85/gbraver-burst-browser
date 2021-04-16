@@ -100,7 +100,7 @@ function focusToAttacker(camera: TDCamera, attacker: ShinBraver): Animate {
   const duration = 400;
   return all(
     track(camera, attacker.getObject3D().position.x * 0.4, duration),
-    dolly(camera, '-20', duration)
+    dolly(camera, '-30', duration)
   );
 }
 

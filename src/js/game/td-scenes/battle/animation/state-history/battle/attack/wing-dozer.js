@@ -99,11 +99,9 @@ export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
  */
 function focusToAttacker(camera: TDCamera, attacker: WingDozer): Animate {
   const duration = 400;
-  const attackerX = attacker.getObject3D().position.x;
-  const attackerTrack = (Math.abs(attackerX) - 40) * Math.sign(attackerX);
   return all(
-    track(camera, attackerTrack, duration),
-    dolly(camera, '-40', duration)
+    track(camera, attacker.getObject3D().position.x * 0.4, duration),
+    dolly(camera, '-30', duration)
   );
 }
 
