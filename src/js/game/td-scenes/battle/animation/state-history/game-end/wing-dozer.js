@@ -4,7 +4,7 @@ import {Animate} from "../../../../../../animation/animate";
 import type {GameOverParam, GameOverParamX} from "./animation-param";
 import {WingDozerTD} from "../../../view/td/armdozer-objects/wing-dozer";
 import {all} from "../../../../../../animation/all";
-import {attentionArmDozer} from "../../td-camera";
+import {dolly, track} from "../../td-camera";
 
 /**
  * ウィングドーザ ゲームオーバ
@@ -36,6 +36,7 @@ export function castWingDozerGameOver(origin: GameOverParam): ?WingDozerGameOver
 export function wingDozerWin(param: WingDozerGameOver): Animate {
   return all(
     param.winnerTdArmdozer.wingDozer.dash(),
-    attentionArmDozer(param.tdCamera, param.winnerTdArmdozer.wingDozer, 400)
+    track(param.tdCamera, param.winnerTdArmdozer.wingDozer.getObject3D().position.x, 400),
+    dolly(param.tdCamera, '-60', 400)
   );
 }
