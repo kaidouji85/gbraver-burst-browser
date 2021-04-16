@@ -31,24 +31,27 @@ export function castNeoLandozerMyTurn(origin: MyTurnAnimationParam): ?NeoLandoze
 
 /**
  * ネオランドーザ マイターン アニメーション
- * 
+ *
  * @param param パラメータ
  * @param effects 各種効果アニメーション
  * @return アニメーション
  */
 export function neoLandozerMyTurn(param: NeoLandozerMyTurn, effects: Animate): Animate {
   return all(
-    attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
-    param.tdArmdozer.neoLandozer.guts()
-      .chain(delay(1000)),
-    param.hudPlayer.turnStart.show(),
+    all(
+      attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
+      param.tdArmdozer.neoLandozer.guts()
+        .chain(delay(1200)),
+      param.hudPlayer.turnStart.show(),
+    )
+      .chain(all(
+        toInitial(param.tdCamera, 500),
+        param.tdArmdozer.neoLandozer.gutsToStand(),
+        param.hudPlayer.turnStart.hidden(),
+      ))
+      .chain(delay(500)),
+
     delay(700)
       .chain(effects),
-  )
-    .chain(all(
-      toInitial(param.tdCamera, 500),
-      param.tdArmdozer.neoLandozer.gutsToStand(),
-      param.hudPlayer.turnStart.hidden(),
-    ))
-    .chain(delay(500));
+  );
 }

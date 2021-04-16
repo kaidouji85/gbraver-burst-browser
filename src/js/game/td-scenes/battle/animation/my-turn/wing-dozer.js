@@ -37,18 +37,20 @@ export function castWingDozerMyTurnParam(origin: MyTurnAnimationParam): ?WingDoz
  * @return アニメーション
  */
 export function wingDozerMyTurn(param: WingDozerMyTurnParam, effects: Animate): Animate {
-  return all(
+  return all(all(
     attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
     param.tdArmdozer.wingDozer.dash()
       .chain(delay(1000)),
     param.hudPlayer.turnStart.show(),
+    )
+      .chain(all(
+        toInitial(param.tdCamera, 500),
+        param.tdArmdozer.wingDozer.dashToStand(),
+        param.hudPlayer.turnStart.hidden(),
+      ))
+      .chain(delay(500)),
+
     delay(800)
       .chain(effects),
-  )
-    .chain(all(
-      toInitial(param.tdCamera, 500),
-      param.tdArmdozer.wingDozer.dashToStand(),
-      param.hudPlayer.turnStart.hidden(),
-    ))
-    .chain(delay(500));
+  );
 }
