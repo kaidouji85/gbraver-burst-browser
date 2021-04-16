@@ -44,7 +44,7 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
       defenderHUD.gauge.battery(defender.armdozer.battery),
       defenderTD.batteryNumber.show(gameState.effect.defenderBattery),
     ))
-    .chain(delay(2000))
+    .chain(delay(1000))
     .chain(all(
       attackerTD.batteryNumber.hidden(),
       defenderTD.batteryNumber.hidden(),
