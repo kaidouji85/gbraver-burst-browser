@@ -6,11 +6,11 @@ import {ShinyaHUD} from "../../../view/hud/pilot-objects/shinya";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../../td-camera";
+import {dolly, toInitial, track} from "../../td-camera";
 
 /**
  * パイロットスキル シンヤ アニメーションパラメータ
- * @type SKILL パイロットスキル
+ * @template SKILL パイロットスキル
  */
 export type ShinyaAnimationParamX<SKILL: PilotSkill> = PilotSkillAnimationParamX<SKILL, ShinyaHUD>;
 
@@ -59,7 +59,8 @@ export function shinyaAnimation(param: ShinyaAnimationParam): Animate {
 function shinyaRecoverBattery(param: ShinyaAnimationParamX<RecoverBatterySkill>): Animate {
   return  all(
     param.pilot.cutIn.show(),
-    attentionArmDozer(param.tdCamera, param.invokerSprite, 500),
+    track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
+    dolly(param.tdCamera, '-60', 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
