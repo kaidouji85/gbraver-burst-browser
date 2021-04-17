@@ -5,14 +5,14 @@ import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param"
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../../td-camera";
+import {dolly, toInitial, track} from "../../td-camera";
 import {WingDozerHUD} from "../../../view/hud/armdozer-objects/wing-dozer";
 import {WingDozerTD} from "../../../view/td/armdozer-objects/wing-dozer";
 
 /**
  * ウィングドーザ バーストアニメーション パラメータ
  *
- * @type BURST バースト
+ * @template BURST バースト
  */
 export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozerTD, WingDozerHUD, BURST>;
 
@@ -59,7 +59,8 @@ export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack
   return  all(
     param.burstArmdozerTD.wingDozer.dash(),
     param.burstArmdozerHUD.cutIn.show(),
-    attentionArmDozer(param.tdCamera, param.burstArmdozerTD.wingDozer, 500),
+    track(param.tdCamera, param.burstArmdozerTD.wingDozer.getObject3D().position.x, 500),
+    dolly(param.tdCamera, '-60', 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),

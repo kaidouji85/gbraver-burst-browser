@@ -12,7 +12,7 @@ import {TDCamera} from "../../../../../../../game-object/camera/td";
 /**
  * シンブレイバー 戦闘アニメーション パラメータ
  *
- * @type RESULT 戦闘結果
+ * @template RESULT 戦闘結果
  */
 export type ShinBraverBattle<RESULT> = BattleAnimationParamX<ShinBraver, RESULT>;
 
@@ -98,11 +98,9 @@ export function shinBraverAttack(param: ShinBraverBattle<BattleResult>): Animate
  */
 function focusToAttacker(camera: TDCamera, attacker: ShinBraver): Animate {
   const duration = 400;
-  const attackerX = attacker.getObject3D().position.x;
-  const attackerTrack = (Math.abs(attackerX) - 40) * Math.sign(attackerX);
   return all(
-    track(camera, attackerTrack, duration),
-    dolly(camera, '-40', duration)
+    track(camera, attacker.getObject3D().position.x * 0.4, duration),
+    dolly(camera, '-30', duration)
   );
 }
 

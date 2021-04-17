@@ -3,7 +3,6 @@
 import {Animate} from "../../../../animation/animate";
 import {TDCamera} from "../../../../game-object/camera/td";
 import {all} from "../../../../animation/all";
-import type {ArmDozerSprite} from "../../../../game-object/armdozer/armdozer-sprite";
 
 /** カメラ初期位置 X */
 export const INITIAL_CAMERA_POSITION_X: number = 0;
@@ -37,30 +36,6 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
       x: INITIAL_VIEW_POINT_X,
       y: INITIAL_VIEW_POINT_Y,
       z: INITIAL_VIEW_POINT_Z,
-    }, duration)
-  );
-}
-
-/**
- * 指定したアームドーザに注目する
- *
- * @param camera カメラ
- * @param target 注目先のアムドーザ
- * @param duration アニメーション時間(ミリ秒)
- * @return アニメーション
- */
-export function attentionArmDozer(camera: TDCamera, target: ArmDozerSprite, duration: number): Animate {
-  const x = target.getObject3D().position.x;
-  return all(
-    camera.moveCamera({
-      x: x,
-      y: INITIAL_CAMERA_POSITION_Y,
-      z: INITIAL_CAMERA_POSITION_Z - 60,
-    }, duration),
-    camera.moveViewPoint({
-      x: x,
-      y: INITIAL_VIEW_POINT_Y,
-      z: INITIAL_VIEW_POINT_Z
     }, duration)
   );
 }
