@@ -97,8 +97,8 @@ export function neoLandozerAttack(param: NeoLandozerBattle<BattleResult>): Anima
 function focusToAttacker(camera: TDCamera, attacker: NeoLandozer): Animate {
   const duration = 400;
   return all(
-    track(camera, attacker.getObject3D().position.x * 0.4, duration),
-    dolly(camera, '-20', duration)
+    track(camera, attacker.getObject3D().position.x * 0.6, duration),
+    dolly(camera, '-30', duration)
   );
 }
 
