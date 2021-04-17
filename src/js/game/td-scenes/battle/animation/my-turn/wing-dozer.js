@@ -5,7 +5,7 @@ import {WingDozerHUD} from "../../view/hud/armdozer-objects/wing-dozer";
 import {WingDozerTD} from "../../view/td/armdozer-objects/wing-dozer";
 import {Animate} from "../../../../../animation/animate";
 import {all} from "../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../td-camera";
+import {dolly, toInitial, track} from "../td-camera";
 import {delay} from "../../../../../animation/delay";
 
 /**
@@ -38,7 +38,8 @@ export function castWingDozerMyTurnParam(origin: MyTurnAnimationParam): ?WingDoz
  */
 export function wingDozerMyTurn(param: WingDozerMyTurnParam, effects: Animate): Animate {
   return all(all(
-    attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
+    track(param.tdCamera, param.tdArmdozer.sprite().getObject3D().position.x, 500),
+    dolly(param.tdCamera, '-40', 500),
     param.tdArmdozer.wingDozer.dash()
       .chain(delay(1000)),
     param.hudPlayer.turnStart.show(),

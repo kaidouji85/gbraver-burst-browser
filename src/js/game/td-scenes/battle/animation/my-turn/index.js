@@ -2,12 +2,13 @@
 
 import {Animate} from "../../../../../animation/animate";
 import type {MyTurnAnimationParam} from "./animation-param";
-import {attentionArmDozer, toInitial} from "../td-camera";
+import {dolly, toInitial, track} from "../td-camera";
 import {delay} from "../../../../../animation/delay";
 import {castShinBraverMyTUrn, shinBraverMyTurn} from "./shin-braver";
 import {castNeoLandozerMyTurn, neoLandozerMyTurn} from "./neo-landozer";
 import {castLightningDozerMyTurn, lightningDozerMyTurn} from "./lightning-dozer";
 import {castWingDozerMyTurnParam, wingDozerMyTurn} from "./wing-dozer";
+import {all} from "../../../../../animation/all";
 
 /**
  * マイターン アニメーション
@@ -48,7 +49,10 @@ export function myTurnAnimation(param: MyTurnAnimationParam, effects: Animate): 
  * @return アニメーション
  */
 function defaultMyTurn(param: MyTurnAnimationParam, effects: Animate): Animate {
-  return attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500)
+  return all(
+    track(param.tdCamera, param.tdArmdozer.sprite().getObject3D().position.x, 500),
+    dolly(param.tdCamera, '-40', 500)
+  )
     .chain(delay(500))
     .chain(effects)
     .chain(toInitial(param.tdCamera, 500))
