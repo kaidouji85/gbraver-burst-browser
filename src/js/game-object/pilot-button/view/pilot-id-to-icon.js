@@ -7,6 +7,7 @@ import type {Resources} from "../../../resource";
 import {ShinyaIcon} from "./shinya";
 import {GaiIcon} from "./gai";
 import {RaitoIcon} from "./raito";
+import {TsubasaIcon} from "./tsubasa";
 
 /**
  * パイロットIDに対応したパイロットアイコンを生成する
@@ -23,6 +24,8 @@ export function createPilotIcon(pilotId: PilotId, resources: Resources): PilotIc
       return new GaiIcon(resources);
     case PilotIds.RAITO:
       return new RaitoIcon(resources);
+    case PilotIds.TSUBASA:
+      return new TsubasaIcon(resources);
     default:
       return new ShinyaIcon(resources);
   }
