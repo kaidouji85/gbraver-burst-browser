@@ -82,6 +82,7 @@ export const TEXTURE_IDS = {
   SHINYA_CUTIN: 'SHINYA_CUTIN',
   GAI_CUTIN: 'GAI_CUTIN',
   RAITO_CUTIN: 'RAITO_CUTIN',
+  TSUBASA_CUTIN: 'TSUBASA_CUTIN',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
   HITMARK_LIGHTNING_RING: 'HITMARK_LIGHTNING_RING',
@@ -357,6 +358,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.RAITO_CUTIN,
     path: 'pilot/raito/skill-cutin.png',
+  },
+  // ツバサ関連
+  {
+    id: TEXTURE_IDS.TSUBASA_CUTIN,
+    path: 'pilot/tsubasa/skill-cutin.png',
   },
   // ヒットマーク関連
   {

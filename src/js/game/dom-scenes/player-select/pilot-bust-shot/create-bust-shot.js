@@ -26,6 +26,8 @@ export function createPilotBustShot(resources: Resources, pilotId: PilotId): Pil
       return gaiBustShot(resources);
     case PilotIds.RAITO:
       return raitoBustShot(resources);
+    case PilotIds.TSUBASA:
+      return tsubasaBustShot(resources);
     default:
       return shinyaBustShot(resources);
   }
@@ -67,5 +69,17 @@ function raitoBustShot(resources: Resources): PilotBustShot {
   const path = resources.paths.find(v => v.id === PathIds.RAITO_SKILL_CUTIN)
     ?.path ?? '';
   const className = `${ROOT_CLASS_NAME}__raito`;
+  return new PilotBustShot(path, className);
+}
+/**
+ * ツバサのバストショットを生成する
+ *
+ * @param resources リソース管理オブジェクト
+ * @return 生成結果
+ */
+function tsubasaBustShot(resources: Resources): PilotBustShot {
+  const path = resources.paths.find(v => v.id === PathIds.TSUBASA_SKILL_CUTIN)
+    ?.path ?? '';
+  const className = `${ROOT_CLASS_NAME}__tsubasa`;
   return new PilotBustShot(path, className);
 }

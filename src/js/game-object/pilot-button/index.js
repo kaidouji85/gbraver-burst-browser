@@ -27,6 +27,7 @@ export class PilotButton {
   _pushButton: Stream<void>;
   _unsubscriber: Unsubscriber;
 
+  // TODO pilotIDをパイロットアイコンに変更する
   /**
    * コンストラクタ
    *

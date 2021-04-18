@@ -51,6 +51,7 @@ export class PlayerSelect implements DOMScene {
       PilotIds.SHINYA,
       PilotIds.GAI,
       PilotIds.RAITO,
+      PilotIds.TSUBASA,
     ];
     this._armdozerId = ArmDozerIdList.SHIN_BRAVER
     this._pilotId = PilotIds.SHINYA;
