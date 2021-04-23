@@ -38,3 +38,15 @@ export const gai = (): HTMLElement => {
   stub.start();
   return stub.domElement();
 }
+
+export const raito = (): HTMLElement => {
+  const stub = pilotButtonStub(PilotIds.RAITO);
+  stub.start();
+  return stub.domElement();
+}
+
+export const tsubasa = (): HTMLElement => {
+  const stub = pilotButtonStub(PilotIds.TSUBASA);
+  stub.start();
+  return stub.domElement();
+}

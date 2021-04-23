@@ -96,6 +96,7 @@ export const TEXTURE_IDS = {
   REFLECT: 'REFLECT',
   CONTINUOUS_ATTACK: 'CONTINUOUS_ATTACK',
   DAMAGE_DECREASE: 'DAMAGE_DECREASE',
+  BATTERY_ENCHANTMENT: 'BATTERY_ENCHANTMENT',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -422,6 +423,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.DAMAGE_DECREASE,
     path: 'effect-label/damage-decrease.png',
+  },
+  {
+    id: TEXTURE_IDS.BATTERY_ENCHANTMENT,
+    path: 'effect-label/battery-enchantment.png',
   },
 ];
 
