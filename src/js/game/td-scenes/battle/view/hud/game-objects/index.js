@@ -13,6 +13,7 @@ import type {GameObjectAction} from "../../../../../../game-object/action/game-o
 import type {Stream, StreamSource, Unsubscriber} from "../../../../../../stream/core";
 import {RxjsStreamSource} from "../../../../../../stream/rxjs";
 import {createBurstButton} from "./burst-button";
+import {createPilotButton} from "./pilot-button";
 
 /**
  * HUDレイヤーのゲームオブジェクト
@@ -47,7 +48,7 @@ export class HUDGameObjects {
       }
     });
     this.burstButton = createBurstButton(resources, listener, playerInfo.armdozer.id);
-    this.pilotButton = new PilotButton(resources, playerInfo.pilot.id, listener);
+    this.pilotButton = createPilotButton(resources, listener, playerInfo.pilot.id);
 
     this.frontmostFader = frontmostFader({
       listener: listener,

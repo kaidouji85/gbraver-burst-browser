@@ -9,6 +9,7 @@ export default {
   title: 'commands',
 };
 
+// TODO @flow 型チェックを追加する
 export const commands = () => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const batterySelector = new BatterySelector({
