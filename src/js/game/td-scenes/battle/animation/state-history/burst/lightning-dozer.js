@@ -6,13 +6,13 @@ import type {Burst, LightningBarrier} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../../td-camera";
+import {dolly, toInitial, track} from "../../td-camera";
 import {LightningDozerHUD} from "../../../view/hud/armdozer-objects/lightning-dozer";
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータ
  *
- * @type BURST バースト
+ * @template BURST バースト
  */
 export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozerTD, LightningDozerHUD, BURST>;
 
@@ -59,7 +59,8 @@ function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate
   return all(
     param.burstArmdozerTD.lightningDozer.guts(),
     param.burstArmdozerHUD.cutIn.show(),
-    attentionArmDozer(param.tdCamera, param.burstArmdozerTD.lightningDozer, 500),
+    track(param.tdCamera, param.burstArmdozerTD.lightningDozer.getObject3D().position.x, 500),
+    dolly(param.tdCamera, '-60', 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),

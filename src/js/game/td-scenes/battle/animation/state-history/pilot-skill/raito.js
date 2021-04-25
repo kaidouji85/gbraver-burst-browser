@@ -7,7 +7,7 @@ import {RaitoHUD} from "../../../view/hud/pilot-objects/raito";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../../td-camera";
+import {dolly, toInitial, track} from "../../td-camera";
 
 /**
  * パイロットスキル ライト アニメーションパラメータ
@@ -61,7 +61,8 @@ export function raitoAnimation(param: RaitoAnimationParam): Animate {
 function raitoDamageDecrease(param: RaitoAnimationParamX<DamageDecreaseSkill>): Animate {
   return  all(
     param.pilot.cutIn.show(),
-    attentionArmDozer(param.tdCamera, param.invokerSprite, 500),
+    track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
+    dolly(param.tdCamera, '-60', 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),

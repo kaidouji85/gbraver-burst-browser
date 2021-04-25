@@ -9,7 +9,7 @@ export default {
   title: 'dom-fader'
 };
 
-export const Scene: DOMStubStory = domStub(resources => {
+export const Scene: DOMStubStory = domStub(() => {
   const fader = new DOMFader();
   (async () => {
     await waitTime(5000);

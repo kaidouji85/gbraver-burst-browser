@@ -5,13 +5,13 @@ import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../../td-camera";
+import {dolly, toInitial, track} from "../../td-camera";
 import {ShinBraverHUD} from "../../../view/hud/armdozer-objects/shin-braver";
 import {ShinBraverTD} from "../../../view/td/armdozer-objects/shin-braver";
 
 /**
  * シンブレイバー バーストアニメーション パラメータ
- * @type BURST バースト種別
+ * @template BURST バースト種別
  */
 export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraverTD, ShinBraverHUD, BURST>;
 
@@ -58,7 +58,8 @@ function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
   return all(
     param.burstArmdozerHUD.cutIn.show(),
     param.burstArmdozerTD.shinBraver.burst(),
-    attentionArmDozer(param.tdCamera, param.burstArmdozerTD.shinBraver, 500),
+    track(param.tdCamera, param.burstArmdozerTD.shinBraver.getObject3D().position.x, 500),
+    dolly(param.tdCamera, '-60', 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),

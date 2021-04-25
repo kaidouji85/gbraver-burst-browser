@@ -26,11 +26,12 @@ export class WingDozerIcon implements ArmdozerIcon {
     this._mesh = new HorizontalAnimationMesh({
       texture: neoLandozer,
       maxAnimation: 1,
-      width: 300,
-      height: 300,
+      width: 280,
+      height: 280,
     });
     this._mesh.animate(1);
-    this._mesh.getObject3D().position.y = 130;
+    this._mesh.getObject3D().position.x = -20;
+    this._mesh.getObject3D().position.y = 120;
     this._group.add(this._mesh.getObject3D());
   }
 

@@ -12,7 +12,7 @@ export const batterySelector = (): HTMLElement => {
       resources: resources,
       listener: listener,
       maxBattery: 5,
-      onBatteryChange: (battery: number) => {
+      onBatteryChange: () => {
         // NOP
       },
       onOkButtonPush: () => {

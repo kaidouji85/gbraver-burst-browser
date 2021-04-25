@@ -10,6 +10,7 @@ import {castPilotSkillAnimationParam} from "./animation-param";
 import {castShinyaAnimationParam, shinyaAnimation} from "./shinya";
 import {castGaiAnimationParam, gaiAnimation} from "./gai";
 import {castRaitoAnimationParam, raitoAnimation} from "./raito";
+import {castTsubasaAnimationParam, tsubasaAnimation} from "./tsubasa";
 
 /**
  * パイロット効果 アニメーション
@@ -48,6 +49,11 @@ function cutIn(param: PilotSkillAnimationParam): Animate {
   const raito = castRaitoAnimationParam(param);
   if (raito) {
     return raitoAnimation(raito);
+  }
+
+  const tsubasa = castTsubasaAnimationParam(param);
+  if (tsubasa) {
+    return tsubasaAnimation(tsubasa);
   }
 
   return empty();

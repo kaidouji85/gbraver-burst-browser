@@ -5,7 +5,7 @@ import {LightningDozerTD} from "../../view/td/armdozer-objects/lightning-dozer";
 import {LightningDozerHUD} from "../../view/hud/armdozer-objects/lightning-dozer";
 import {Animate} from "../../../../../animation/animate";
 import {all} from "../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../td-camera";
+import {dolly, toInitial, track} from "../td-camera";
 import {delay} from "../../../../../animation/delay";
 
 /**
@@ -38,17 +38,21 @@ export function castLightningDozerMyTurn(origin: MyTurnAnimationParam): ?Lightni
  */
 export function lightningDozerMyTurn(param: LightningDozerMyTurn, effects: Animate): Animate {
   return all(
-    attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
-    param.tdArmdozer.lightningDozer.guts()
-      .chain(delay(1000)),
-    param.hudPlayer.turnStart.show(),
+    all(
+      track(param.tdCamera, param.tdArmdozer.sprite().getObject3D().position.x, 500),
+      dolly(param.tdCamera, '-40', 500),
+      param.tdArmdozer.lightningDozer.guts()
+        .chain(delay(1200)),
+      param.hudPlayer.turnStart.show(),
+    )
+      .chain(all(
+        toInitial(param.tdCamera, 500),
+        param.tdArmdozer.lightningDozer.gutsToStand(),
+        param.hudPlayer.turnStart.hidden(),
+      ))
+      .chain(delay(500)),
+
     delay(800)
       .chain(effects),
-  )
-    .chain(all(
-      toInitial(param.tdCamera, 500),
-      param.tdArmdozer.lightningDozer.gutsToStand(),
-      param.hudPlayer.turnStart.hidden(),
-    ))
-    .chain(delay(500));
+  );
 }

@@ -82,6 +82,7 @@ export const TEXTURE_IDS = {
   SHINYA_CUTIN: 'SHINYA_CUTIN',
   GAI_CUTIN: 'GAI_CUTIN',
   RAITO_CUTIN: 'RAITO_CUTIN',
+  TSUBASA_CUTIN: 'TSUBASA_CUTIN',
   HITMARK_SHOCK_WAVE_LINE: 'HITMARK_SHOCK_WAVE_LINE',
   HITMARK_SHOCK_WAVE_RING: 'HITMARK_SHOCK_WAVE_RING',
   HITMARK_LIGHTNING_RING: 'HITMARK_LIGHTNING_RING',
@@ -95,6 +96,7 @@ export const TEXTURE_IDS = {
   REFLECT: 'REFLECT',
   CONTINUOUS_ATTACK: 'CONTINUOUS_ATTACK',
   DAMAGE_DECREASE: 'DAMAGE_DECREASE',
+  BATTERY_ENCHANTMENT: 'BATTERY_ENCHANTMENT',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -358,6 +360,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     id: TEXTURE_IDS.RAITO_CUTIN,
     path: 'pilot/raito/skill-cutin.png',
   },
+  // ツバサ関連
+  {
+    id: TEXTURE_IDS.TSUBASA_CUTIN,
+    path: 'pilot/tsubasa/skill-cutin.png',
+  },
   // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
@@ -416,6 +423,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.DAMAGE_DECREASE,
     path: 'effect-label/damage-decrease.png',
+  },
+  {
+    id: TEXTURE_IDS.BATTERY_ENCHANTMENT,
+    path: 'effect-label/battery-enchantment.png',
   },
 ];
 

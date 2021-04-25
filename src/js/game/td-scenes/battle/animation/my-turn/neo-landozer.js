@@ -4,7 +4,7 @@ import type {MyTurnAnimationParam, MyTurnAnimationParamX} from "./animation-para
 import {NeoLandozerTD} from "../../view/td/armdozer-objects/neo-landozer";
 import {NeoLandozerHUD} from "../../view/hud/armdozer-objects/neo-landozer";
 import {all} from "../../../../../animation/all";
-import {attentionArmDozer, toInitial} from "../td-camera";
+import {dolly, toInitial, track} from "../td-camera";
 import {delay} from "../../../../../animation/delay";
 import {Animate} from "../../../../../animation/animate";
 
@@ -31,24 +31,28 @@ export function castNeoLandozerMyTurn(origin: MyTurnAnimationParam): ?NeoLandoze
 
 /**
  * ネオランドーザ マイターン アニメーション
- * 
+ *
  * @param param パラメータ
  * @param effects 各種効果アニメーション
  * @return アニメーション
  */
 export function neoLandozerMyTurn(param: NeoLandozerMyTurn, effects: Animate): Animate {
   return all(
-    attentionArmDozer(param.tdCamera, param.tdArmdozer.sprite(), 500),
-    param.tdArmdozer.neoLandozer.guts()
-      .chain(delay(1000)),
-    param.hudPlayer.turnStart.show(),
+    all(
+      track(param.tdCamera, param.tdArmdozer.sprite().getObject3D().position.x, 500),
+      dolly(param.tdCamera, '-40', 500),
+      param.tdArmdozer.neoLandozer.guts()
+        .chain(delay(1200)),
+      param.hudPlayer.turnStart.show(),
+    )
+      .chain(all(
+        toInitial(param.tdCamera, 500),
+        param.tdArmdozer.neoLandozer.gutsToStand(),
+        param.hudPlayer.turnStart.hidden(),
+      ))
+      .chain(delay(500)),
+
     delay(700)
       .chain(effects),
-  )
-    .chain(all(
-      toInitial(param.tdCamera, 500),
-      param.tdArmdozer.neoLandozer.gutsToStand(),
-      param.hudPlayer.turnStart.hidden(),
-    ))
-    .chain(delay(500));
+  );
 }

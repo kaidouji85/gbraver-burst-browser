@@ -31,7 +31,7 @@ export type DOMStubStory = () => HTMLElement;
 export const domStub = (creator: DOMCreator): DOMStubStory => () => {
   const root = document.createElement('div');
   const resize = resizeStream();
-  const vh = new CssVH(resize);
+  new CssVH(resize);
 
   const resourceRoot = new StorybookResourceRoot();
   const loader = new ResourceLoader(resourceRoot);

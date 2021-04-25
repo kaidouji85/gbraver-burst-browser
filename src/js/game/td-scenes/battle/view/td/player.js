@@ -23,6 +23,8 @@ import {DamageDecrease} from "../../../../../game-object/damage-decrease/damage-
 import {enemyDamageDecrease, playerDamageDecrease} from "../../../../../game-object/damage-decrease";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {Stream} from "../../../../../stream/core";
+import {BatteryEnchantment} from "../../../../../game-object/battery-enchantment/battery-enchantment";
+import {enemyBatteryEnchantment, playerBatteryEnchantment} from "../../../../../game-object/battery-enchantment";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -38,6 +40,7 @@ export interface TDPlayerField {
     reflect: ReflectIndicator,
     continuousAttack: ContinuousAttackIndicator,
     damageDecrease: DamageDecrease,
+    batteryEnchantment: BatteryEnchantment,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -75,6 +78,7 @@ export class TDPlayerImpl implements TDPlayer {
     reflect: ReflectIndicator,
     continuousAttack: ContinuousAttackIndicator,
     damageDecrease: DamageDecrease,
+    batteryEnchantment: BatteryEnchantment,
   };
   batteryNumber: BatteryNumber;
   recoverBattery: RecoverBattery;
@@ -101,6 +105,7 @@ export class TDPlayerImpl implements TDPlayer {
     this.armdozerEffects.reflect.destructor();
     this.armdozerEffects.continuousAttack.destructor();
     this.armdozerEffects.damageDecrease.destructor();
+    this.armdozerEffects.batteryEnchantment.destructor();
     this.recoverBattery.destructor();
   }
 
@@ -117,6 +122,7 @@ export class TDPlayerImpl implements TDPlayer {
       this.armdozerEffects.reflect.getObject3D(),
       this.armdozerEffects.continuousAttack.getObject3D(),
       this.armdozerEffects.damageDecrease.getObject3D(),
+      this.armdozerEffects.batteryEnchantment.getObject3D(),
       this.batteryNumber.getObject3D(),
       this.recoverBattery.getObject3D(),
       this.damageIndicator.getObject3D(),
@@ -144,6 +150,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: S
       reflect: playerReflectIndicator(resources, listener),
       continuousAttack: playerContinuousAttack(resources, listener),
       damageDecrease: playerDamageDecrease(resources, listener),
+      batteryEnchantment: playerBatteryEnchantment(resources, listener),
     },
     batteryNumber: playerBatteryNumber({
       resources: resources,
@@ -177,6 +184,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Str
       reflect: enemyReflectIndicator(resources, listener),
       continuousAttack: enemyContinuousAttack(resources, listener),
       damageDecrease: enemyDamageDecrease(resources, listener),
+      batteryEnchantment: enemyBatteryEnchantment(resources, listener),
     },
     batteryNumber: enemyBatteryNumber({
       resources: resources,

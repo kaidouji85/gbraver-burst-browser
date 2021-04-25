@@ -89,7 +89,6 @@ export function neoLandozerAttack(param: NeoLandozerBattle<BattleResult>): Anima
 
 /**
  * アタッカーにフォーカスを合わせる
- * attentionArmDozerよりもカメラ移動は控えめ
  *
  * @param camera カメラ
  * @param attacker アタッカーのスプライト
@@ -97,11 +96,9 @@ export function neoLandozerAttack(param: NeoLandozerBattle<BattleResult>): Anima
  */
 function focusToAttacker(camera: TDCamera, attacker: NeoLandozer): Animate {
   const duration = 400;
-  const attackerX = attacker.getObject3D().position.x;
-  const attackerTrack = (Math.abs(attackerX) - 40) * Math.sign(attackerX);
   return all(
-    track(camera, attackerTrack, duration),
-    dolly(camera, '-40', duration)
+    track(camera, attacker.getObject3D().position.x * 0.6, duration),
+    dolly(camera, '-30', duration)
   );
 }
 
