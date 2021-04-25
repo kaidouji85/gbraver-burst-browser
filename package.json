@@ -25,7 +25,8 @@
     "webpack:clear-sw": "webpack --config webpack.clear.sw.js",
     "type-check": "flow check",
     "lint": "eslint src/js",
-    "lint:test": "eslint test"
+    "lint:test": "eslint test",
+    "lint:storybook": "eslint stories"
   },
   "author": "y.takeuchi",
   "license": "ISC",

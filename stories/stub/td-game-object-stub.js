@@ -75,17 +75,13 @@ export class TDGameObjectStub {
    * @return 実行結果
    */
   async start(): Promise<void> {
-    try {
-      const resourceRoot = new StorybookResourceRoot();
-      const loader = new ResourceLoader(resourceRoot);
-      const resources = await loader.load();
-      const object3Ds = this._creator(resources, this._gameObjectAction);
-      object3Ds.forEach(object3D => {
-        this._scene.add(object3D);
-      });
-    } catch(e) {
-      throw e;
-    }
+    const resourceRoot = new StorybookResourceRoot();
+    const loader = new ResourceLoader(resourceRoot);
+    const resources = await loader.load();
+    const object3Ds = this._creator(resources, this._gameObjectAction);
+    object3Ds.forEach(object3D => {
+      this._scene.add(object3D);
+    });
   }
 
   /**

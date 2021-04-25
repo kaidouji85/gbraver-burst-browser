@@ -18,7 +18,7 @@ import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
-import {RxjsStreamSource, toStream} from "../../src/js/stream/rxjs";
+import {RxjsStreamSource} from "../../src/js/stream/rxjs";
 import {Stream} from '../../src/js/stream/core';
 import type {StreamSource, Unsubscriber} from "../../src/js/stream/core";
 
@@ -76,17 +76,13 @@ export class HUDGameObjectStub {
    * @return 実行結果
    */
   async start(): Promise<void> {
-    try {
-      const resourceRoot = new StorybookResourceRoot();
-      const loader = new ResourceLoader(resourceRoot);
-      const resources = await loader.load();
-      const object3Ds = this._creator(resources, this._gameObjectAction);
-      object3Ds.forEach(object3D => {
-        this._scene.add(object3D);
-      });
-    } catch(e) {
-      throw e;
-    }
+    const resourceRoot = new StorybookResourceRoot();
+    const loader = new ResourceLoader(resourceRoot);
+    const resources = await loader.load();
+    const object3Ds = this._creator(resources, this._gameObjectAction);
+    object3Ds.forEach(object3D => {
+      this._scene.add(object3D);
+    });
   }
 
   /**
