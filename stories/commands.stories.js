@@ -1,7 +1,7 @@
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {BatterySelector} from "../src/js/game-object/battery-selector";
 import {BurstButton} from "../src/js/game-object/burst-button/burst-button";
-import {PilotButton} from "../src/js/game-object/pilot-button";
+import {PilotButton} from "../src/js/game-object/pilot-button/pilot-button";
 import {all} from "../src/js/animation/all";
 import {ArmDozerIdList} from "gbraver-burst-core";
 

@@ -1,7 +1,7 @@
 // @flow
 
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
-import {PilotButton} from "../src/js/game-object/pilot-button";
+import {PilotButton} from "../src/js/game-object/pilot-button/pilot-button";
 import {delay} from "../src/js/animation/delay";
 import {PilotIds} from "gbraver-burst-core";
 import type {PilotId} from "gbraver-burst-core";

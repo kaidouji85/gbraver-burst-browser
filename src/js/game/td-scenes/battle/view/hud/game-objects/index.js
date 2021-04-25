@@ -8,7 +8,7 @@ import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
 import {Fader} from "../../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../../game-object/fader";
-import {PilotButton} from "../../../../../../game-object/pilot-button";
+import {PilotButton} from "../../../../../../game-object/pilot-button/pilot-button";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../../../stream/core";
 import {RxjsStreamSource} from "../../../../../../stream/rxjs";
