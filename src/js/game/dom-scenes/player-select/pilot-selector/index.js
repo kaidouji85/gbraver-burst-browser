@@ -124,9 +124,17 @@ export class PilotSelector {
 
   /**
    * 本コンポネントを表示する
+   *
+   * @@aram pilotId 選択するパイロットID
    */
-  show(): void {
+  show(pilotId?: PilotId): void {
     this._root.className = ROOT_CLASS_NAME;
+
+    if (pilotId) {
+      this._pilotId =pilotId;
+      this._pilotStatus.switch(pilotId);
+      this._focusPilotIcon(pilotId);
+    }
   }
 
   /**
@@ -196,15 +204,7 @@ export class PilotSelector {
       }
 
       this._changeValueSound.play();
-      this._pilotIcons.filter(v => v.pilotId === pilotId)
-        .forEach(v => {
-          v.icon.pop();
-          v.icon.selected(true);
-        });
-      this._pilotIcons.filter(v => v.pilotId !== pilotId)
-        .forEach(v => {
-          v.icon.selected(false);
-        });
+      this._focusPilotIcon(pilotId);
     });
   }
 
@@ -228,5 +228,22 @@ export class PilotSelector {
       await pop(this._prevButton);
       this._prev.next();
     });
+  }
+
+  /**
+   * 指定したパイロットアイコンにチェックマークを入れる
+   *
+   * @param pilotId 選択するパイロットID
+   */
+  _focusPilotIcon(pilotId: PilotId): void {
+    this._pilotIcons.filter(v => v.pilotId === pilotId)
+      .forEach(v => {
+        v.icon.pop();
+        v.icon.selected(true);
+      });
+    this._pilotIcons.filter(v => v.pilotId !== pilotId)
+      .forEach(v => {
+        v.icon.selected(false);
+      });
   }
 }
