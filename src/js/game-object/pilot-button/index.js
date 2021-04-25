@@ -4,7 +4,10 @@ import {PilotButton} from "./pilot-button";
 import type {Resources} from "../../resource";
 import type {Stream} from "../../stream/core";
 import type {GameObjectAction} from "../action/game-object-action";
-import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
+import {ShinyaIcon} from "./view/shinya";
+import {GaiIcon} from "./view/gai";
+import {RaitoIcon} from "./view/raito";
+import {TsubasaIcon} from "./view/tsubasa";
 
 /**
  * シンヤ パイロットボタン を生成する
@@ -13,7 +16,8 @@ import {PilotIds} from "gbraver-burst-core/lib/master/pilots";
  * @return パイロットボタン
  */
 export function shinyaPilotButton(resources: Resources, listener: Stream<GameObjectAction>): PilotButton {
-  return new PilotButton(resources, PilotIds.SHINYA, listener);
+  const icon = new ShinyaIcon(resources);
+  return new PilotButton(resources, icon, listener);
 }
 
 /**
@@ -23,7 +27,8 @@ export function shinyaPilotButton(resources: Resources, listener: Stream<GameObj
  * @return パイロットボタン
  */
 export function gaiPilotButton(resources: Resources, listener: Stream<GameObjectAction>): PilotButton {
-  return new PilotButton(resources, PilotIds.GAI, listener);
+  const icon = new GaiIcon(resources);
+  return new PilotButton(resources, icon, listener);
 }
 
 /**
@@ -33,7 +38,8 @@ export function gaiPilotButton(resources: Resources, listener: Stream<GameObject
  * @return パイロットボタン
  */
 export function raitoPilotButton(resources: Resources, listener: Stream<GameObjectAction>): PilotButton {
-  return new PilotButton(resources, PilotIds.RAITO, listener);
+  const icon = new RaitoIcon(resources);
+  return new PilotButton(resources, icon, listener);
 }
 
 /**
@@ -43,5 +49,6 @@ export function raitoPilotButton(resources: Resources, listener: Stream<GameObje
  * @return パイロットボタン
  */
 export function tsubasaPilotButton(resources: Resources, listener: Stream<GameObjectAction>): PilotButton {
-  return new PilotButton(resources, PilotIds.TSUBASA, listener);
+  const icon = new TsubasaIcon(resources);
+  return new PilotButton(resources, icon, listener);
 }

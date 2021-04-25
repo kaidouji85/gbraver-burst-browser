@@ -12,10 +12,10 @@ import {decide} from "./animation/decide";
 import {close} from "./animation/close";
 import {filter} from "rxjs/operators";
 import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
-import type {PilotId} from "gbraver-burst-core";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/core";
 import {toStream} from "../../stream/rxjs";
+import type {PilotIcon} from "./view/pilot-icon";
 
 /**
  * パイロットボタン
@@ -27,18 +27,17 @@ export class PilotButton {
   _pushButton: Stream<void>;
   _unsubscriber: Unsubscriber;
 
-  // TODO pilotIDをパイロットアイコンに変更する
   /**
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param pilotId パイロットID
+   * @param pilotIcon パイロットアイコン
    * @param listener イベントリスナ
    */
-  constructor(resources: Resources, pilotId: PilotId, listener: Stream<GameObjectAction>) {
+  constructor(resources: Resources, pilotIcon: PilotIcon, listener: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._sounds = new PilotButtonSounds(resources);
-    this._view = new PilotButtonView(resources, pilotId, listener);
+    this._view = new PilotButtonView(resources, pilotIcon, listener);
 
     const pushButtonObservable = this._view.pushButtonNotifier()
       .getRxjsObservable()
