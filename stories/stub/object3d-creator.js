@@ -10,6 +10,6 @@ import {Stream} from '../../src/js/stream/core';
  *
  * @param resources リソース管理オブジェクト
  * @param listener ゲームオブジェクトイベントリスナ
- * @return　シーンに追加するObject3D
+ * @return シーンに追加するObject3D
  */
 export type Object3dCreator = (resources: Resources, listener: Stream<GameObjectAction>) => typeof THREE.Object3D[];
