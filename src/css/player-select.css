@@ -126,7 +126,7 @@
 }
 
 .player-select__pilot-bust-shot__tsubasa {
-  --width: calc(var(--vh) * 85);
+  --width: calc(var(--vh) * 95);
   --height: var(--width);
   position: absolute;
   left: calc(100vw - var(--width) * 0.9 - var(--safe-area-right));

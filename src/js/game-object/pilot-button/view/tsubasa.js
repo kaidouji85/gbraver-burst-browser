@@ -31,7 +31,7 @@ export class TsubasaIcon implements PilotIcon {
       height: 400,
     });
     this._mesh.getObject3D().position.x = 10;
-    this._mesh.getObject3D().position.y = 140;
+    this._mesh.getObject3D().position.y = 120;
     this._group.add(this._mesh.getObject3D());
   }
 
