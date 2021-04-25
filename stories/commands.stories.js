@@ -1,7 +1,7 @@
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {BatterySelector} from "../src/js/game-object/battery-selector";
 import {BurstButton} from "../src/js/game-object/burst-button/burst-button";
-import {PilotButton} from "../src/js/game-object/pilot-button";
+import {PilotButton} from "../src/js/game-object/pilot-button/pilot-button";
 import {all} from "../src/js/animation/all";
 import {ArmDozerIdList} from "gbraver-burst-core";
 
@@ -9,6 +9,7 @@ export default {
   title: 'commands',
 };
 
+// TODO @flow 型チェックを追加する
 export const commands = () => {
   const stub = new HUDGameObjectStub((resources, listener) => {
     const batterySelector = new BatterySelector({

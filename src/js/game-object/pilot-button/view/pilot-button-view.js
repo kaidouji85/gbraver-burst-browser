@@ -10,8 +10,6 @@ import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import type {PilotIcon} from "./pilot-icon";
-import type {PilotId} from "gbraver-burst-core";
-import {createPilotIcon} from "./pilot-id-to-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, StreamSource} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
@@ -44,10 +42,10 @@ export class PilotButtonView {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param pilotId パイロットID
+   * @param pilotIcon パイロットアイコン
    * @param listener イベントリスナ
    */
-  constructor(resources: Resources, pilotId: PilotId, listener: Stream<GameObjectAction>) {
+  constructor(resources: Resources, pilotIcon: PilotIcon, listener: Stream<GameObjectAction>) {
     this._pushButton = new RxjsStreamSource();
     this._group = new THREE.Group();
 
@@ -85,7 +83,7 @@ export class PilotButtonView {
     this._label.getObject3D().position.y = -100;
     this._group.add(this._label.getObject3D());
 
-    this._pilotIcon = createPilotIcon(pilotId, resources);
+    this._pilotIcon =pilotIcon;
     this._pilotIcon.getObject3D().position.z = 1;
     this._group.add(this._pilotIcon.getObject3D());
 
