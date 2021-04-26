@@ -32,6 +32,7 @@ export class PlayerSelect implements DOMScene {
   _pilotSelector: PilotSelector;
   _armdozerId: ArmDozerId;
   _pilotId: PilotId;
+  _shouldSetDedicatedPilot: boolean;
   _playerDecide: StreamSource<PlayerDecide>;
   _prev: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
@@ -56,6 +57,7 @@ export class PlayerSelect implements DOMScene {
     ];
     this._armdozerId = ArmDozerIdList.SHIN_BRAVER
     this._pilotId = PilotIds.SHINYA;
+    this._shouldSetDedicatedPilot = true;
 
     const selectorId = domUuid();
     const workingId = domUuid();
@@ -179,7 +181,10 @@ export class PlayerSelect implements DOMScene {
    */
   _onArmdozerDecided(armdozerId: ArmDozerId): void {
     this._armdozerId = armdozerId;
-    this._pilotId = getDedicatedPilot(this._armdozerId);
+    this._pilotId = this._shouldSetDedicatedPilot
+      ? getDedicatedPilot(this._armdozerId)
+      : this._pilotId;
+    this._shouldSetDedicatedPilot = false;
     this._pilotBustShot.switch(this._pilotId);
     this._pilotSelector.show(this._pilotId);
 
