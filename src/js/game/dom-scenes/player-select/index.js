@@ -179,7 +179,7 @@ export class PlayerSelect implements DOMScene {
    */
   _onArmdozerDecided(armdozerId: ArmDozerId): void {
     this._armdozerId = armdozerId;
-    this._pilotId = getDedicatedPilot(this._armdozerId);
+    this._pilotId = getDedicatedPilot(this._armdozerId)
     this._pilotBustShot.switch(this._pilotId);
     this._pilotSelector.show(this._pilotId);
 
