@@ -60,5 +60,5 @@ function damageDecreaseSkillTemplate(skill: DamageDecreaseSkill): string {
  * @return スキル文言
  */
 function batteryEnchantmentSkillTemplate(skill: BatteryEnchantmentSkill): string {
-  return `${skill.duration}ターンだけ出したバッテリー+${skill.batteryEnchantment}`;
+  return `このターンに出したバッテリー+${skill.batteryEnchantment}、ただし次のターンに出したバッテリー -${skill.batteryEnchantment}`;
 }

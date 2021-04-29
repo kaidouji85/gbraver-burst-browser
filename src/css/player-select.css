@@ -226,8 +226,12 @@
   display: none;
 }
 
+.player-select__pilot-status__skill {
+  display: flex;
+}
+
 .player-select__pilot-status__skill__label {
-  padding-right: calc(var(--responsive-font-size) * 0.5);
+  flex: 0 0 calc(var(--responsive-font-size) * 3);
 }
 
 .player-select__pilot-selector__icons {

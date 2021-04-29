@@ -11,6 +11,7 @@ import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
+import {getDedicatedPilot} from "./dedicated-pilot";
 
 /**
  * プレイヤーの選択内容
@@ -178,8 +179,9 @@ export class PlayerSelect implements DOMScene {
    */
   _onArmdozerDecided(armdozerId: ArmDozerId): void {
     this._armdozerId = armdozerId;
+    this._pilotId = getDedicatedPilot(this._armdozerId)
     this._pilotBustShot.switch(this._pilotId);
-    this._pilotSelector.show();
+    this._pilotSelector.show(this._pilotId);
 
     this._armdozerSelector.hidden();
   }

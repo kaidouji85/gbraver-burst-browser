@@ -124,9 +124,24 @@ export class PilotSelector {
 
   /**
    * 本コンポネントを表示する
+   *
+   * @@aram pilotId 選択するパイロットID
    */
-  show(): void {
+  show(pilotId?: PilotId): void {
     this._root.className = ROOT_CLASS_NAME;
+
+    const selected = this._pilotIcons.find(v => v.pilotId === pilotId);
+    if (!pilotId || !selected) {
+      return;
+    }
+
+    this._pilotId = pilotId;
+    selected.icon.selected(true);
+    this._pilotStatus.switch(pilotId);
+    this._pilotIcons.filter(v => v.pilotId !== pilotId)
+      .forEach(v => {
+        v.icon.selected(false);
+      });
   }
 
   /**
@@ -189,18 +204,22 @@ export class PilotSelector {
    */
   _onPilotChange(pilotId: PilotId): void {
     this._exclusive.execute(async (): Promise<void> => {
+      const selected = this._pilotIcons.find(v => v.pilotId === pilotId);
+      if (!selected) {
+        return;
+      }
+
       if (this._pilotId !== pilotId) {
-        this._pilotId =pilotId;
-        this._pilotStatus.switch(pilotId);
         this._change.next(pilotId);
       }
 
+      this._pilotId =pilotId;
+      this._pilotStatus.switch(pilotId);
+
+      selected.icon.pop();
       this._changeValueSound.play();
-      this._pilotIcons.filter(v => v.pilotId === pilotId)
-        .forEach(v => {
-          v.icon.pop();
-          v.icon.selected(true);
-        });
+      selected.icon.selected(true);
+
       this._pilotIcons.filter(v => v.pilotId !== pilotId)
         .forEach(v => {
           v.icon.selected(false);

@@ -31,7 +31,7 @@ export class PilotStatus {
       <div class="${ROOT_CLASS_NAME}__name" data-id="${nameId}"></div>
       <div class="${ROOT_CLASS_NAME}__skill">
         <span class="${ROOT_CLASS_NAME}__skill__label">スキル</span>
-        <span class"${ROOT_CLASS_NAME}__skill__content" data-id="${skillId}"></span>
+        <span class="${ROOT_CLASS_NAME}__skill__content" data-id="${skillId}"></span>
       </div>
     `;
 
