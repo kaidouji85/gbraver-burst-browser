@@ -5,6 +5,7 @@ import type {GameOverParam, GameOverParamX} from "./animation-param";
 import {NeoLandozerTD} from "../../../view/td/armdozer-objects/neo-landozer";
 import {all} from "../../../../../../animation/all";
 import {dolly, track} from "../../td-camera";
+import {delay} from "../../../../../../animation/delay";
 
 /**
  * ネオランドーザ ゲームオーバ
@@ -34,9 +35,10 @@ export function castNeoLandozerGameOver(origin: GameOverParam): ?NeoLandozerGame
  * @return アニメーション
  */
 export function neoLandozerWin(param: NeoLandozerGameOver): Animate {
-  return all(
-    param.winnerTdArmdozer.neoLandozer.guts(),
-    track(param.tdCamera, param.winnerTdArmdozer.neoLandozer.getObject3D().position.x, 400),
-    dolly(param.tdCamera, '-60', 400)
-  );
+  return delay(500)
+    .chain(all(
+      param.winnerTdArmdozer.neoLandozer.guts(),
+      track(param.tdCamera, param.winnerTdArmdozer.neoLandozer.getObject3D().position.x, 800),
+      dolly(param.tdCamera, '-60', 800)
+    ));
 }
