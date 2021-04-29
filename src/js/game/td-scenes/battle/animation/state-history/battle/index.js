@@ -4,7 +4,7 @@ import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {Battle, GameStateX} from "gbraver-burst-core";
-import {delay, empty} from "../../../../../../animation/delay";
+import {empty} from "../../../../../../animation/delay";
 import {attackAnimation} from "./attack";
 import {toBattleAnimationParam} from "./animation-param";
 
@@ -22,7 +22,6 @@ export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneSt
     return empty();
   }
 
-  return attackAnimation(param)
-    .chain(delay(1000));
+  return attackAnimation(param);
 }
 

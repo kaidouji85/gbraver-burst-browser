@@ -10,11 +10,12 @@ import {delay} from "../../../../animation/delay";
 
 /** 避け -> 立ち */
 export function avoidToStand(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animate {
-  return process(() => {
-    model.animation.type = 'FRONT_STEP';
-    model.animation.frame = 0;
-    sounds.motor.play();
-  })
+  return delay(500)
+    .chain(process(() => {
+      model.animation.type = 'FRONT_STEP';
+      model.animation.frame = 0;
+      sounds.motor.play();
+    }))
     .chain(all(
       tween(model.animation, t => t.to({frame: 1}, 300)),
       tween(model.position, t => t.to({x: '-100'}, 300))
