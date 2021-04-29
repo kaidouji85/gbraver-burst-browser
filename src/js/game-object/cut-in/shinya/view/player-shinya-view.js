@@ -58,11 +58,7 @@ export class PlayerShinyaView implements ShinyaView {
   engage(model: ShinyaModel, preRender: PreRender): void {
     const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
     this._mesh.getObject3D().scale.set(scale, scale, scale);
-    this._mesh.getObject3D().position.set(
-      model.tracking.x,
-      model.tracking.y,
-      HUD_CUT_IN_ZNIDEX
-    );
+    this._mesh.getObject3D().position.set(model.position.x, 0, HUD_CUT_IN_ZNIDEX);
     this._mesh.setOpacity(model.opacity);
   }
 

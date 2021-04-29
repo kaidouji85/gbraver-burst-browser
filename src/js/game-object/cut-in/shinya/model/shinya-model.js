@@ -14,7 +14,12 @@ export type ShinyaModel = {
    */
   scale: number,
 
+  position: {
+    x: number
+  },
+
   /**
+   * @deprecated
    * トラッキング
    */
   tracking: {
