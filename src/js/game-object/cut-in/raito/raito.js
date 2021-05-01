@@ -8,7 +8,6 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
-import type {HUDTracking} from "../../../tracking/hud-tracking";
 import {RaitoSounds} from "./sounds/raito-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";
@@ -17,7 +16,7 @@ import type {Stream, Unsubscriber} from "../../../stream/core";
 /**
  * ライト カットイン
  */
-export class RaitoCutIn implements HUDTracking {
+export class RaitoCutIn {
   _model: RaitoModel;
   _view: RaitoView;
   _sounds: RaitoSounds;
@@ -47,18 +46,6 @@ export class RaitoCutIn implements HUDTracking {
   destructor(): void {
     this._view.destructor();
     this._unsubscriber.unsubscribe();
-  }
-
-  /**
-   * 3Dレイヤーのオブジェクトをトラッキングする
-   * 本メソッドにはHUDレイヤー系座標をセットすること
-   *
-   * @param x x座標
-   * @param y y座標
-   */
-  tracking(x: number, y: number): void {
-    this._model.tracking.x = x;
-    this._model.tracking.y = y;
   }
 
   /**

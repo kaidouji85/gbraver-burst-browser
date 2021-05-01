@@ -5,7 +5,6 @@ import type {GameOverParam, GameOverParamX} from "./animation-param";
 import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
 import {all} from "../../../../../../animation/all";
 import {dolly, track} from "../../td-camera";
-import {delay} from "../../../../../../animation/delay";
 
 /**
  * ライトニングドーザ ゲームオーバ
@@ -35,10 +34,9 @@ export function castLightningDozerGameOver(origin: GameOverParam): ?LightningDoz
  * @return アニメーション
  */
 export function lightningDozerWin(param: LightningDozerGameOver): Animate {
-  return delay(500)
-    .chain(all(
-      param.winnerTdArmdozer.lightningDozer.guts(),
-      track(param.tdCamera, param.winnerTdArmdozer.lightningDozer.getObject3D().position.x, 800),
-      dolly(param.tdCamera, '-60', 800)
-    ));
+  return all(
+    param.winnerTdArmdozer.lightningDozer.guts(),
+    track(param.tdCamera, param.winnerTdArmdozer.lightningDozer.getObject3D().position.x, 800),
+    dolly(param.tdCamera, '-60', 800)
+  );
 }

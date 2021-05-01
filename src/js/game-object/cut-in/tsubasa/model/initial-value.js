@@ -11,9 +11,8 @@ export function createInitialValue(): TsubasaModel {
   return {
     opacity: 0,
     scale: 1,
-    tracking: {
-      x: 0,
-      y: 0
+    position: {
+      x: 0
     }
   };
 }

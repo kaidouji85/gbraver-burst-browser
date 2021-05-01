@@ -1,6 +1,5 @@
 // @flow
 
-import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import type {EndArmdozerEffectParam, EndArmdozerEffectParamX} from "./animation-param";
 import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
 import type {ArmdozerEffect, TryReflect} from "gbraver-burst-core";
@@ -10,22 +9,21 @@ import {empty} from "../../../../../../animation/delay";
 /**
  * ライトニングドーザ アームドーザ効果終了パラメータ
  *
- * @type EFFECT アームドーザ効果
+ * @template EFFECT アームドーザ効果
  */
-export type LightningDozerEndArmdozerEffect<EFFECT> = EndArmdozerEffectParamX<LightningDozer, LightningDozerTD, EFFECT>;
+export type LightningDozerEndEffect<EFFECT> = EndArmdozerEffectParamX<LightningDozerTD, EFFECT>;
 
 /**
- * ライトニングドーザ アームドーザ効果終了パラメータに変換する
- * 変換できない場合はnullを返す
+ * ライトニングドーザパラメータにキャストする
+ * キャストできない場合はnullを返す
  *
- * @param param
- * @return 変換結果
+ * @param param キャスト元
+ * @return キャスト結果
  */
-export function toLightningDozerEndArmdozerEffect(param: EndArmdozerEffectParam): ?LightningDozerEndArmdozerEffect<ArmdozerEffect> {
-  if ((param.sprite instanceof LightningDozer) && (param.tdArmdozer instanceof LightningDozerTD)) {
-    const sprite: LightningDozer = param.sprite;
+export function castLightningDozerEndEffect(param: EndArmdozerEffectParam): ?LightningDozerEndEffect<ArmdozerEffect> {
+  if (param.tdArmdozer instanceof LightningDozerTD) {
     const tdArmdozer: LightningDozerTD = param.tdArmdozer;
-    return ((param: any): EndArmdozerEffectParamX<typeof sprite, typeof tdArmdozer, typeof param.endArmdozerEffect>);
+    return ((param: any): EndArmdozerEffectParamX<typeof tdArmdozer, typeof param.endArmdozerEffect>);
   }
 
   return null;
@@ -37,10 +35,10 @@ export function toLightningDozerEndArmdozerEffect(param: EndArmdozerEffectParam)
  * @param param パラメータ
  * @return アニメーション
  */
-export function lightningDozer(param: LightningDozerEndArmdozerEffect<ArmdozerEffect>): Animate {
+export function lightningDozer(param: LightningDozerEndEffect<ArmdozerEffect>): Animate {
   if (param.endArmdozerEffect.type === 'TryReflect') {
     const castEffect: TryReflect = param.endArmdozerEffect;
-    const castParam = ((param: any): LightningDozerEndArmdozerEffect<typeof castEffect>);
+    const castParam = ((param: any): LightningDozerEndEffect<typeof castEffect>);
     return tryRefrect(castParam);
   }
 
@@ -53,7 +51,7 @@ export function lightningDozer(param: LightningDozerEndArmdozerEffect<ArmdozerEf
  * @param param パラメータ
  * @return アニメーション
  */
-function tryRefrect(param: LightningDozerEndArmdozerEffect<TryReflect>): Animate {
+function tryRefrect(param: LightningDozerEndEffect<TryReflect>): Animate {
   if (param.endArmdozerEffect.effect !== 'Lightning') {
     return empty();
   }

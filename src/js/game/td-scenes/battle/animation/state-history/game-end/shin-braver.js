@@ -5,7 +5,6 @@ import type {GameOverParam, GameOverParamX} from "./animation-param";
 import {ShinBraverTD} from "../../../view/td/armdozer-objects/shin-braver";
 import {all} from "../../../../../../animation/all";
 import {dolly, track} from "../../td-camera";
-import {delay} from "../../../../../../animation/delay";
 
 /**
  * シンブレイバー ゲームオーバ
@@ -35,10 +34,9 @@ export function castShinBraverGameOver(origin: GameOverParam): ?ShinBraverGameOv
  * @return アニメーション
  */
 export function shinBraverWin(param: ShinBraverGameOver): Animate {
-  return delay(500)
-    .chain(all(
-      param.winnerTdArmdozer.shinBraver.guts(),
-      track(param.tdCamera, param.winnerTdArmdozer.shinBraver.getObject3D().position.x, 800),
-      dolly(param.tdCamera, '-60', 800)
-    ));
+  return all(
+    param.winnerTdArmdozer.shinBraver.guts(),
+    track(param.tdCamera, param.winnerTdArmdozer.shinBraver.getObject3D().position.x, 800),
+    dolly(param.tdCamera, '-60', 800)
+  );
 }
