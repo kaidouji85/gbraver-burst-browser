@@ -20,7 +20,6 @@ export function popUp(model: DamageIndicatorModel, damage: number): Animate {
     model.scale = 1.1;
   })
     .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 400)))
-    // TODO 1000にする
-    .chain(delay(2000))
+    .chain(delay(1000))
     .chain(tween(model, t => t.to({opacity: 0, scale: 1.05}, 300)));
 }

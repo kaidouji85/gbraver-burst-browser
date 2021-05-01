@@ -120,7 +120,8 @@ function attack(param: NeoLandozerBattle<AttackResult>): Animate {
     .chain(param.attackerSprite.armHammer())
     .chain(all(
       delay(1800)
-        .chain(param.attackerSprite.hmToStand()),
+        .chain(param.attackerSprite.hmToStand())
+        .chain(delay(500)),
 
       toInitial(param.tdCamera, 100),
 
@@ -143,7 +144,8 @@ function guard(param: NeoLandozerBattle<Guard>): Animate {
     .chain(param.attackerSprite.armHammer())
     .chain(all(
       delay(1800)
-        .chain(param.attackerSprite.hmToStand()),
+        .chain(param.attackerSprite.hmToStand())
+        .chain(delay(500)),
 
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.guard(),
@@ -164,7 +166,8 @@ function miss(param: NeoLandozerBattle<Miss>): Animate {
     .chain(param.attackerSprite.armHammer())
     .chain(all(
       delay(1800)
-        .chain(param.attackerSprite.hmToStand()),
+        .chain(param.attackerSprite.hmToStand())
+        .chain(delay(500)),
 
       param.defenderSprite.avoid()
     ));
@@ -202,7 +205,8 @@ function down(param: NeoLandozerBattle<DownResult>): Animate {
     .chain(param.attackerSprite.armHammer())
     .chain(all(
       delay(1800)
-        .chain(param.attackerSprite.hmToStand()),
+        .chain(param.attackerSprite.hmToStand())
+        .chain(delay(1000)),
 
       toInitial(param.tdCamera, 100),
 
