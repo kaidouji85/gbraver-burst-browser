@@ -60,12 +60,12 @@ function gaiBuffPower(param: GaiAnimationParamX<BuffPowerSkill>): Animate {
   return  all(
     param.pilot.cutIn.show(),
     track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
-    dolly(param.tdCamera, '-60', 500),
+    dolly(param.tdCamera, '-40', 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
     param.tdObjects.turnIndicator.invisible(),
   )
-    .chain(delay(2000))
+    .chain(delay(1000))
     .chain(all(
       param.pilot.cutIn.hidden(),
       param.invokerTD.armdozerEffects.powerUp.popUp(),
