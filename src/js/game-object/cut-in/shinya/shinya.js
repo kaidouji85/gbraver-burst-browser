@@ -17,7 +17,7 @@ import type {Stream, Unsubscriber} from "../../../stream/core";
 /**
  * シンヤ カットイン
  */
-export class ShinyaCutIn implements HUDTracking {
+export class ShinyaCutIn {
   _model: ShinyaModel;
   _view: ShinyaView;
   _sounds: ShinyaSounds;
@@ -47,18 +47,6 @@ export class ShinyaCutIn implements HUDTracking {
   destructor(): void {
     this._view.destructor();
     this._unsubscriber.unsubscribe();
-  }
-
-  /**
-   * 3Dレイヤーのオブジェクトをトラッキングする
-   * 本メソッドにはHUDレイヤー系座標をセットすること
-   *
-   * @param x x座標
-   * @param y y座標
-   */
-  tracking(x: number, y: number): void {
-    this._model.tracking.x = x;
-    this._model.tracking.y = y;
   }
 
   /**

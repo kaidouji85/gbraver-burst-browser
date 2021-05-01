@@ -17,11 +17,11 @@ import {all} from "../../../../animation/all";
 export function show(model: ShinyaModel, sounds: ShinyaSounds): Animate {
   return process(() => {
     model.opacity = 0;
-    model.position.x = 400;
+    model.position.x = 200;
   })
     .chain(all(
       tween(model, t => t.to({opacity: 1}, 500)),
-      tween(model.position, t => t.to({x: 200}, 500))
+      tween(model.position, t => t.to({x: 0}, 500)),
     ))
     .chain(process(() => {
       sounds.benefitEffect.play();

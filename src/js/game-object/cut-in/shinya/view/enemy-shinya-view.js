@@ -29,5 +29,6 @@ export class EnemyShinyaView extends PlayerShinyaView {
     super.engage(model, preRender);
     const target = this.getObject3D();
     target.scale.x *= -1;
+    target.position.x *= -1;
   }
 }

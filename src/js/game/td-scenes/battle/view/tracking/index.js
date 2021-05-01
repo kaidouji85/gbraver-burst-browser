@@ -67,9 +67,7 @@ function trackingGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, 
  * @param sprite トラッキング対象のスプライト
  */
 function trackingPilotCutIn(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, pilot: HUDPilotObjects, sprite: ArmDozerSprite): void {
-  if (pilot instanceof ShinyaHUD) {
-    trackingCutIn(tdCamera, rendererDOM, pilot.cutIn, sprite);
-  } else if (pilot instanceof GaiHUD) {
+  if (pilot instanceof GaiHUD) {
     trackingCutIn(tdCamera, rendererDOM, pilot.cutIn, sprite);
   }
 }

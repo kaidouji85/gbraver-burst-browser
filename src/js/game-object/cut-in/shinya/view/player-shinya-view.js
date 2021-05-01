@@ -21,6 +21,11 @@ export const MESH_SIZE = 550;
 export const MAX_ANIMATION = 1;
 
 /**
+ * 右パディング
+ */
+export const PADDING_RIGHT = 200;
+
+/**
  * プレイヤー側 シンヤ ビュー
  */
 export class PlayerShinyaView implements ShinyaView {
@@ -57,8 +62,10 @@ export class PlayerShinyaView implements ShinyaView {
    */
   engage(model: ShinyaModel, preRender: PreRender): void {
     const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
+    const x = preRender.rendererDOM.clientWidth / 2 -preRender.safeAreaInset.right
+      + (+ model.position.x - PADDING_RIGHT) * scale;
     this._mesh.getObject3D().scale.set(scale, scale, scale);
-    this._mesh.getObject3D().position.set(model.position.x, 0, HUD_CUT_IN_ZNIDEX);
+    this._mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
     this._mesh.setOpacity(model.opacity);
   }
 
