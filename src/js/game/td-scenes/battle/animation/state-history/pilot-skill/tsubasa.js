@@ -61,19 +61,16 @@ function tsubasaBatteryEnchantment(param: TsubasaAnimationParamX<BatteryEnchantm
   return  all(
     param.pilot.cutIn.show(),
     track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
-    dolly(param.tdCamera, '-60', 500),
+    dolly(param.tdCamera, '-40', 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
-    param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible(),
   )
-    .chain(delay(2000))
+    .chain(delay(1000))
     .chain(all(
       param.pilot.cutIn.hidden(),
-      param.hudObjects.rearmostFader.opacity(0, 300))
-    )
-    .chain(delay(500))
-    .chain(param.invokerTD.armdozerEffects.batteryEnchantment.popUp())
+      param.invokerTD.armdozerEffects.batteryEnchantment.popUp()
+    ))
     .chain(delay(500))
     .chain(all(
       toInitial(param.tdCamera, 500),
