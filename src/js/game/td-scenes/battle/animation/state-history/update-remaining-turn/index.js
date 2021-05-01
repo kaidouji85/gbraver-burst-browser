@@ -3,11 +3,11 @@
 import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameStateX, PlayerId, UpdateRemainingTurn} from "gbraver-burst-core";
-import {delay, empty} from "../../../../../../animation/delay";
-import type {EndArmdozerEffectParam} from "./animation-param";
-import {all} from "../../../../../../animation/all";
+import type {GameStateX, UpdateRemainingTurn} from "gbraver-burst-core";
+import {empty} from "../../../../../../animation/delay";
 import {lightningDozer, toLightningDozerEndArmdozerEffect} from "./lightning-dozer";
+import {toEndArmDozerEffectParams} from "./animation-param";
+import {all} from "../../../../../../animation/all";
 
 /**
  * 効果継続ターン更新アニメーション
@@ -18,47 +18,17 @@ import {lightningDozer, toLightningDozerEndArmdozerEffect} from "./lightning-doz
  * @return アニメーション
  */
 export function updateRemainingTurnAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<UpdateRemainingTurn>): Animate {
-  const animations: Animate[] = gameState.players.map(player => playerUnderRemainingTurn(player.playerId, view, sceneState, gameState));
+  const animations: Animate[] = gameState.players.map(player =>
+    toEndArmDozerEffectParams(player.playerId, view, gameState)
+      .map(param => {
+        const lightningDozerParam = toLightningDozerEndArmdozerEffect(param);
+        if (lightningDozerParam) {
+          return lightningDozer(lightningDozerParam);
+        }
+
+        return empty();
+      })
+      .reduce((a, b) => a.chain(b), empty())
+  );
   return all(...animations);
-}
-
-/**
- * プレイヤー毎 効果継続ターン更新アニメーション
- *
- * @param playerId プレイヤーID
- * @param view ビュー
- * @param sceneState シーンの状態
- * @param gameState ゲームの状態
- * @return アニメーション
- */
-function playerUnderRemainingTurn(playerId: PlayerId, view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<UpdateRemainingTurn>): Animate {
-  if (gameState.effect.name !== 'UpdateRemainingTurn') {
-    return empty();
-  }
-
-  const effect: UpdateRemainingTurn = gameState.effect;
-  const state = gameState.players.find(v => v.playerId === playerId);
-  const tdArmdozer = view.td.armdozerObjects.find(v => v.playerId === playerId);
-  const endArmdozerEffects = effect.endArmdozerEffects.filter(v => v.playerId === playerId);
-  if (!state || !tdArmdozer || (endArmdozerEffects.length <= 0)) {
-    return empty();
-  }
-
-  const endArmdozerEffectAnimation: Animate = endArmdozerEffects
-    .map((armdozerEffect): EndArmdozerEffectParam => ({
-      sprite: tdArmdozer.sprite(),
-      tdArmdozer: tdArmdozer,
-      endArmdozerEffect: armdozerEffect.effect
-    }))
-    .map((param: EndArmdozerEffectParam): Animate => {
-      const lightningDozerParam = toLightningDozerEndArmdozerEffect(param);
-      if (lightningDozerParam) {
-        return lightningDozer(lightningDozerParam);
-      }
-      return empty();
-    })
-    .reduce((a, b) => a.chain(b), empty());
-
-  return endArmdozerEffectAnimation
-    .chain(delay(500));
 }
