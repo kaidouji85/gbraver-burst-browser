@@ -8,7 +8,6 @@ import {ShinBraverHUD} from "../hud/armdozer-objects/shin-braver";
 import {NeoLandozerHUD} from "../hud/armdozer-objects/neo-landozer";
 import {LightningDozerHUD} from "../hud/armdozer-objects/lightning-dozer";
 import {WingDozerHUD} from "../hud/armdozer-objects/wing-dozer";
-import {ShinyaHUD} from "../hud/pilot-objects/shinya";
 import {trackingEnemyGauge, trackingPlayerGauge} from "./gauge";
 import {trackingCutIn} from "./cutin";
 import {HUDPlayer} from "../hud/player";
@@ -67,9 +66,7 @@ function trackingGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, 
  * @param sprite トラッキング対象のスプライト
  */
 function trackingPilotCutIn(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, pilot: HUDPilotObjects, sprite: ArmDozerSprite): void {
-  if (pilot instanceof ShinyaHUD) {
-    trackingCutIn(tdCamera, rendererDOM, pilot.cutIn, sprite);
-  } else if (pilot instanceof GaiHUD) {
+  if (pilot instanceof GaiHUD) {
     trackingCutIn(tdCamera, rendererDOM, pilot.cutIn, sprite);
   }
 }

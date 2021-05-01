@@ -63,16 +63,11 @@ function shinyaRecoverBattery(param: ShinyaAnimationParamX<RecoverBatterySkill>)
     dolly(param.tdCamera, '-60', 500),
     param.tdObjects.skyBrightness.brightness(0.2, 500),
     param.tdObjects.illumination.intensity(0.2, 500),
-    param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible(),
   )
     .chain(delay(2000))
     .chain(all(
       param.pilot.cutIn.hidden(),
-      param.hudObjects.rearmostFader.opacity(0, 300))
-    )
-    .chain(delay(500))
-    .chain(all(
       param.invokerHUD.gauge.battery(param.invokerState.armdozer.battery),
       param.invokerTD.recoverBattery.popUp(param.skill.recoverBattery)
     ))
