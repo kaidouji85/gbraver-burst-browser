@@ -1,6 +1,5 @@
 // @flow
 
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {ArmdozerEffect, GameStateX, PlayerId, UpdateRemainingTurn} from "gbraver-burst-core";
 import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 import {BattleSceneView} from "../../../view";
@@ -9,13 +8,10 @@ import {BattleSceneView} from "../../../view";
  * アームドーザ効果終了アニメーション パラメータ
  * 本タイプは引数、戻り値などに直接使ってはいけない
  *
- * @template SPRITE スプライト
  * @template TD_ARMDOZER 3Dレイヤーアームドーザ固有オブジェクト
  * @template EFFECT 終了したアームドーザ効果
  */
-export type EndArmdozerEffectParamX<SPRITE: ArmDozerSprite, TD_ARMDOZER: TDArmdozerObjects, EFFECT> = {
-  /** @deprecated */
-  sprite: SPRITE,
+export type EndArmdozerEffectParamX<TD_ARMDOZER: TDArmdozerObjects, EFFECT> = {
   tdArmdozer: TD_ARMDOZER,
   endArmdozerEffect: EFFECT
 };
@@ -23,7 +19,7 @@ export type EndArmdozerEffectParamX<SPRITE: ArmDozerSprite, TD_ARMDOZER: TDArmdo
 /**
  * アームドーザ効果終了アニメーション パラメータ
  */
-export type EndArmdozerEffectParam = EndArmdozerEffectParamX<ArmDozerSprite, TDArmdozerObjects, ArmdozerEffect>;
+export type EndArmdozerEffectParam = EndArmdozerEffectParamX<TDArmdozerObjects, ArmdozerEffect>;
 
 /**
  * 指定したプレイヤーからアニメパラメータ配列を生成する
@@ -42,7 +38,6 @@ export function toEndArmDozerEffectParams(playerId: PlayerId, view: BattleSceneV
   }
 
   return endArmdozerEffects.map(v => ({
-    sprite: tdArmdozer.sprite(),
     tdArmdozer: tdArmdozer,
     endArmdozerEffect: v.effect
   }));

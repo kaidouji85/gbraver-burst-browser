@@ -5,7 +5,7 @@ import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameStateX, UpdateRemainingTurn} from "gbraver-burst-core";
 import {empty} from "../../../../../../animation/delay";
-import {lightningDozer, toLightningDozerEndArmdozerEffect} from "./lightning-dozer";
+import {lightningDozer, castLightningDozerEndEffect} from "./lightning-dozer";
 import {toEndArmDozerEffectParams} from "./animation-param";
 import {all} from "../../../../../../animation/all";
 
@@ -21,7 +21,7 @@ export function updateRemainingTurnAnimation(view: BattleSceneView, sceneState: 
   const animations: Animate[] = gameState.players.map(player =>
     toEndArmDozerEffectParams(player.playerId, view, gameState)
       .map(param => {
-        const lightningDozerParam = toLightningDozerEndArmdozerEffect(param);
+        const lightningDozerParam = castLightningDozerEndEffect(param);
         if (lightningDozerParam) {
           return lightningDozer(lightningDozerParam);
         }
