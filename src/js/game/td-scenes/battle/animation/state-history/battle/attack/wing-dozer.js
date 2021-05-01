@@ -125,7 +125,8 @@ function attack(param: WingDozerBattle<AttackResult>): Animate {
     .chain(param.attackerSprite.upper())
     .chain(all(
       delay(1800)
-        .chain(param.attackerSprite.upperToStand()),
+        .chain(param.attackerSprite.upperToStand())
+        .chain(delay(500)),
 
       toInitial(param.tdCamera, 100),
 
@@ -148,7 +149,8 @@ function guard(param: WingDozerBattle<Guard>): Animate {
     .chain(param.attackerSprite.upper())
     .chain(all(
       delay(1800)
-        .chain(param.attackerSprite.upperToStand()),
+        .chain(param.attackerSprite.upperToStand())
+        .chain(delay(500)),
 
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.guard(),
@@ -169,7 +171,8 @@ function miss(param: WingDozerBattle<Miss>): Animate {
     .chain(param.attackerSprite.upper())
     .chain(all(
       delay(1800)
-        .chain(param.attackerSprite.upperToStand()),
+        .chain(param.attackerSprite.upperToStand())
+        .chain(delay(500)),
 
       param.defenderSprite.avoid()
     ));
@@ -186,7 +189,8 @@ function feint(param: WingDozerBattle<Feint>): Animate {
     return empty();
   }
 
-  return param.defenderSprite.avoid();
+  return param.defenderSprite.avoid()
+    .chain(delay(500));
 }
 
 /** downが受け取れる戦闘結果 */
@@ -207,7 +211,8 @@ function down(param: WingDozerBattle<DownResult>): Animate {
     .chain(param.attackerSprite.upper())
     .chain(all(
       delay(1800)
-        .chain(param.attackerSprite.upperToStand()),
+        .chain(param.attackerSprite.upperToStand())
+        .chain(delay(1000)),
 
       toInitial(param.tdCamera, 100),
 

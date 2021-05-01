@@ -12,16 +12,15 @@ import {delay} from "../../../../animation/delay";
  * 避け -> 立ち
  *
  * @param model モデル
- * @param sounds 音
+ * @param sounds 効果音
  * @return アニメーション
  */
 export function avoidToStand(model: WingDozerModel, sounds: WingDozerSounds): Animate {
-  return delay(500)
-    .chain(process(() => {
+  return process(() => {
       model.animation.type = 'FRONT_STEP';
       model.animation.frame = 0;
       sounds.motor.play();
-    }))
+    })
     .chain(all(
       tween(model.animation, t => t.to({frame: 1}, 300)),
       tween(model.position, t => t.to({x: '-100'}, 300))
