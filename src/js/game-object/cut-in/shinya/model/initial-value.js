@@ -13,10 +13,6 @@ export function createInitialValue(): ShinyaModel {
     scale: 1,
     position: {
       x: 0
-    },
-    tracking: {
-      x: 0,
-      y: 0
     }
   };
 }

@@ -8,7 +8,6 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
-import type {HUDTracking} from "../../../tracking/hud-tracking";
 import {ShinyaSounds} from "./sounds/shinya-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";

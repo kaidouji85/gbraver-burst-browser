@@ -9,26 +9,11 @@ export type ShinyaModel = {
    */
   opacity: number,
 
-  /**
-   * 拡大率
-   */
+  /** 拡大率 */
   scale: number,
 
-  /**
-   * 位置
-   */
+  /** 位置 */
   position: {
     x: number
-  },
-
-  /**
-   * @deprecated
-   * トラッキング
-   */
-  tracking: {
-    /** x座標 */
-    x: number,
-    /** y座標 */
-    y: number
   }
 };

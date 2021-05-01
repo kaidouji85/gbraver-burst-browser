@@ -8,7 +8,6 @@ import {ShinBraverHUD} from "../hud/armdozer-objects/shin-braver";
 import {NeoLandozerHUD} from "../hud/armdozer-objects/neo-landozer";
 import {LightningDozerHUD} from "../hud/armdozer-objects/lightning-dozer";
 import {WingDozerHUD} from "../hud/armdozer-objects/wing-dozer";
-import {ShinyaHUD} from "../hud/pilot-objects/shinya";
 import {trackingEnemyGauge, trackingPlayerGauge} from "./gauge";
 import {trackingCutIn} from "./cutin";
 import {HUDPlayer} from "../hud/player";
