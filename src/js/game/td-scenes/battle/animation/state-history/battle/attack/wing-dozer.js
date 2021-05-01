@@ -189,7 +189,8 @@ function feint(param: WingDozerBattle<Feint>): Animate {
     return empty();
   }
 
-  return param.defenderSprite.avoid();
+  return param.defenderSprite.avoid()
+    .chain(delay(500));
 }
 
 /** downが受け取れる戦闘結果 */

@@ -184,7 +184,8 @@ function feint(param: NeoLandozerBattle<Feint>): Animate {
     return empty();
   }
 
-  return param.defenderSprite.avoid();
+  return param.defenderSprite.avoid()
+    .chain(delay(500));
 }
 
 /** downが受け取ることができる戦闘結果 */
