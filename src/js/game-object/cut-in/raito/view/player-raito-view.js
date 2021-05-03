@@ -56,8 +56,8 @@ export class PlayerRaitoView implements RaitoView {
    */
   engage(model: RaitoModel, preRender: PreRender): void {
     const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    const x = preRender.rendererDOM.clientWidth / 2 -preRender.safeAreaInset.right
-      + (+ model.position.x - PADDING_RIGHT) * scale;
+    const x = preRender.rendererDOM.clientWidth / 2
+      + (model.position.x - PADDING_RIGHT) * scale;
     this._mesh.getObject3D().scale.set(scale, scale, scale);
     this._mesh.getObject3D().position.set(x, 0, HUD_CUT_IN_ZNIDEX);
     this._mesh.setOpacity(model.opacity);
