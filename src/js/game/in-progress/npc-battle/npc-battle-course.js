@@ -8,6 +8,7 @@ import {WeakShinBraverNPC} from "../../../npc/weak-shin-braver";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {WingDozerNPC} from "../../../npc/wing-dozer";
+import {StrongNeoLandozerNPC} from "../../../npc/strong-neo-landozer";
 
 /**
  * NPCコース
@@ -92,7 +93,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     level: 3,
     stageName: 'STAGE FINAL',
-    npc: () => new NeoLandozerNPC(),
+    npc: () => new StrongNeoLandozerNPC(),
   },
   /** ウィングドーザ  */
   {
