@@ -2,7 +2,7 @@
 
 import type {NPC} from "./npc";
 import type {Armdozer, Command, GameState, Pilot, PlayerId, PlayerState} from "gbraver-burst-core";
-import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
+import {ArmDozerIdList, ArmDozers, PilotIds, Pilots, totalCorrectPower} from "gbraver-burst-core";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {
@@ -76,8 +76,7 @@ export class StrongNeoLandozerNPC implements NPC {
     const battery0 = commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 0);
 
     const canFullBatteryAttack = player.armdozer.battery <= 4;
-    const plusCorrectPowers = enemy.armdozer.effects.filter(v => v.type === 'CorrectPower' && (0 < v.power));
-    const hasPlusCorrectPower = 0 < plusCorrectPowers.length;
+    const powerBurstCorrectPower = 900 <= totalCorrectPower(enemy.armdozer.effects);
 
     if (burst && canFullBatteryAttack) {
       return burst;
@@ -91,7 +90,7 @@ export class StrongNeoLandozerNPC implements NPC {
       return battery0;
     }
 
-    if (hasPlusCorrectPower && maxBattery && canFullBatteryAttack) {
+    if (powerBurstCorrectPower && maxBattery && canFullBatteryAttack) {
       return maxBattery;
     }
 
