@@ -1,7 +1,6 @@
 // @flow
 
-import type {ArmDozerId} from "gbraver-burst-core/lib/player/armdozer";
-import type {PilotId} from "gbraver-burst-core/lib/player/pilot";
+import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 
 /**
