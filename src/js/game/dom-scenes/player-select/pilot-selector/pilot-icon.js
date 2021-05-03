@@ -20,6 +20,7 @@ export class PilotIcon {
   _image: HTMLImageElement;
   _check: HTMLImageElement;
   _isImageLoaded: Promise<void>;
+  _isCheckLoaded: Promise<void>;
   _select: Stream<PushDOM>;
 
   /**
@@ -42,6 +43,7 @@ export class PilotIcon {
 
     this._check = document.createElement('img');
     this._check.className = CHECK_CLASS_NAME;
+    this._isCheckLoaded = waitElementLoaded(this._check);
     this._check.src = resources.paths.find(v => v.id === PathIds.CHECK)
       ?.path ?? '';
     this._check.hidden = true;
