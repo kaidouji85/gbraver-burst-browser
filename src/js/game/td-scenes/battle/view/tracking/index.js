@@ -8,9 +8,8 @@ import {ShinBraverHUD} from "../hud/armdozer-objects/shin-braver";
 import {NeoLandozerHUD} from "../hud/armdozer-objects/neo-landozer";
 import {LightningDozerHUD} from "../hud/armdozer-objects/lightning-dozer";
 import {WingDozerHUD} from "../hud/armdozer-objects/wing-dozer";
-import {trackingEnemyGauge, trackingPlayerGauge} from "./gauge";
+import {trackingGauges} from "./gauge";
 import {trackingCutIn} from "./cutin";
-import {HUDPlayer} from "../hud/player";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import type {HUDArmdozerObjects} from "../hud/armdozer-objects/hud-armdozer-ibjects";
 
@@ -23,6 +22,8 @@ import type {HUDArmdozerObjects} from "../hud/armdozer-objects/hud-armdozer-ibje
  * @param rendererDOM レンダリング対象のDOM
  */
 export function tracking(td: ThreeDimensionLayer, hud: HudLayer, activePlayerId: PlayerId, rendererDOM: HTMLElement): void {
+  trackingGauges(td, hud, activePlayerId, rendererDOM);
+
   const playerIds = td.players.map(v => v.playerId);
   playerIds.forEach(playerId => {
     const tdArmdozer = td.armdozerObjects.find(v => v.playerId === playerId);
@@ -32,26 +33,8 @@ export function tracking(td: ThreeDimensionLayer, hud: HudLayer, activePlayerId:
     if (!tdArmdozer || !hudPlayer || !hudArmdozer || !hudPilot) {
       return;
     }
-
-    trackingGauge(td.camera.getCamera(), rendererDOM, hudPlayer, activePlayerId);
     trackingArmdozerCutIn(td.camera.getCamera(), rendererDOM, hudArmdozer, tdArmdozer.sprite());
   });
-}
-
-/**
- * ゲージのトラッキング処理
- *
- * @param tdCamera カメラ
- * @param rendererDOM レンダリング対象のDOM
- * @param hudPlayer ゲージが含まれるHUDプレイヤー固有オブジェクト
- * @param activePlayerId このゲームを操作しているプレイヤーID
- */
-function trackingGauge(tdCamera: typeof THREE.Camera, rendererDOM: HTMLElement, hudPlayer: HUDPlayer, activePlayerId: PlayerId): void {
-  if (hudPlayer.playerId === activePlayerId) {
-    trackingPlayerGauge(tdCamera, rendererDOM, hudPlayer.gauge);
-  } else {
-    trackingEnemyGauge(tdCamera, rendererDOM, hudPlayer.gauge);
-  }
 }
 
 /**
