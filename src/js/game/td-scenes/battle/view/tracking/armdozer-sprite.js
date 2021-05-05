@@ -10,6 +10,9 @@ import {HudLayer} from "../hud";
 import type {Coordinate} from "../../../../../tracking/coordinate";
 import {ShinBraverHUD} from "../hud/armdozer-objects/shin-braver";
 import type {HUDArmdozerObjects} from "../hud/armdozer-objects/hud-armdozer-ibjects";
+import {NeoLandozerHUD} from "../hud/armdozer-objects/neo-landozer";
+import {LightningDozerHUD} from "../hud/armdozer-objects/lightning-dozer";
+import {WingDozerHUD} from "../hud/armdozer-objects/wing-dozer";
 
 /**
  * アームドーザスプライトをトラッキングする
@@ -41,7 +44,19 @@ export function trackingArmdozerSprites(td: ThreeDimensionLayer, hud: HudLayer, 
  */
 function getTracksFromHUDArmdozer(hudArmdozer: HUDArmdozerObjects): HUDTracking[] {
   if (hudArmdozer instanceof ShinBraverHUD) {
-    return getTracksFromHUDShinBraver(hudArmdozer);
+    return getTracksFromShinBraverHUD(hudArmdozer);
+  }
+
+  if (hudArmdozer instanceof NeoLandozerHUD) {
+    return getTracksFromNeoLandozerHUD(hudArmdozer);
+  }
+
+  if (hudArmdozer instanceof LightningDozerHUD) {
+    return getTracksFromLightningDozerHUD(hudArmdozer);
+  }
+
+  if (hudArmdozer instanceof WingDozerHUD) {
+    return getTracksFromWingDozerHUD(hudArmdozer);
   }
 
   return [];
@@ -53,8 +68,38 @@ function getTracksFromHUDArmdozer(hudArmdozer: HUDArmdozerObjects): HUDTracking[
  * @param shinBraverHUD 取得元
  * @return 取得結果
  */
-function getTracksFromHUDShinBraver(shinBraverHUD: ShinBraverHUD): HUDTracking[] {
+function getTracksFromShinBraverHUD(shinBraverHUD: ShinBraverHUD): HUDTracking[] {
   return [shinBraverHUD.cutIn];
+}
+
+/**
+ * ネオランドーザHUDからHUDTrackingを取得する
+ *
+ * @param neoLandozerHUD 取得元
+ * @return 取得結果
+ */
+function getTracksFromNeoLandozerHUD(neoLandozerHUD: NeoLandozerHUD): HUDTracking[] {
+  return [neoLandozerHUD.cutIn];
+}
+
+/**
+ * ライトニングドーザHUDからHUDTrackingを取得する
+ *
+ * @param lightningDozerHUD 取得元
+ * @return 取得結果
+ */
+function getTracksFromLightningDozerHUD(lightningDozerHUD: LightningDozerHUD): HUDTracking[] {
+  return [lightningDozerHUD.cutIn];
+}
+
+/**
+ * ウィングドーザHUDからHUDTrackingを取得する
+ *
+ * @param wingDozerHUD 取得元
+ * @return 取得結果
+ */
+function getTracksFromWingDozerHUD(wingDozerHUD: WingDozerHUD): HUDTracking[] {
+  return [wingDozerHUD.cutIn];
 }
 
 /**
