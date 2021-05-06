@@ -62,8 +62,7 @@ export class ArmdozerIcon {
     await Promise.all([
       this._isImageLoaded,
       this._isCheckLoaded,
-      ]
-    );
+    ]);
   }
 
   /**
