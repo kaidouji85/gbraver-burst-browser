@@ -1,33 +1,8 @@
 // @flow
 
-import type {Command, GameState, Player, PlayerId} from "gbraver-burst-core";
+import type {Command, GameState} from "gbraver-burst-core";
 
-/**
- * @deprecated
- * 初期状態
- */
-export type InitialState = {
-  playerId: PlayerId,
-  players: Player[],
-  stateHistory: GameState[]
-};
-
-/**
- * @deprecated
- * 戦闘を開始する
- */
-export interface BattleStart {
-  /**
-   * 戦闘を開始する
-   *
-   * @return 初期状態
-   */
-  start(): Promise<InitialState>;
-}
-
-/**
- * 戦闘を進める
- */
+/** 戦闘を進める */
 export interface BattleProgress {
   /**
    * 戦闘を進める
@@ -38,5 +13,7 @@ export interface BattleProgress {
   progress(command: Command): Promise<GameState[]>
 }
 
-/** バトルルーム */
-export interface BattleRoom extends BattleStart, BattleProgress {}
+/**
+ * バトルルーム
+ */
+export interface BattleRoom extends BattleProgress {}

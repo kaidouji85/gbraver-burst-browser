@@ -2,22 +2,29 @@
 import type {Command, GameState, Player, PlayerCommand} from "gbraver-burst-core";
 import {GbraverBurstCore} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
-import type {BattleRoom, InitialState} from "./battle-room";
+import type {BattleRoom} from "./battle-room";
 
 /**
  * オフラインのバトルルーム
  */
 export class OfflineBattleRoom implements BattleRoom {
-  _player: Player;
-  _enemy: Player;
+  player: Player;
+  enemy: Player;
+
   _npc: NPC;
   _stateHistory: GameState[];
   _gbraverBurstCore: GbraverBurstCore;
 
+  /**
+   * コンストラクタ
+   *
+   * @param player プレイヤー情報
+   * @param npc NPC
+   */
   constructor(player: Player, npc: NPC) {
-    this._player = player;
+    this.player = player;
     this._npc = npc;
-    this._enemy = {
+    this.enemy = {
       playerId: `enemy-of-${player.playerId}`,
       armdozer: this._npc.armdozer,
       pilot: this._npc.pilot,
@@ -27,17 +34,13 @@ export class OfflineBattleRoom implements BattleRoom {
   }
 
   /**
-   * 戦闘開始
+   * 戦闘を開始する
    *
    * @return 初期状態
    */
-  async start(): Promise<InitialState> {
-    this._stateHistory = this._gbraverBurstCore.start(this._player, this._enemy);
-    return {
-      playerId: this._player.playerId,
-      players: [this._player, this._enemy],
-      stateHistory: this._stateHistory
-    };
+  start(): GameState[] {
+    this._stateHistory = this._gbraverBurstCore.start(this.player, this.enemy);
+    return this._stateHistory
   }
 
   /**
@@ -53,12 +56,12 @@ export class OfflineBattleRoom implements BattleRoom {
 
     const lastState = this._stateHistory[this._stateHistory.length - 1];
     const playerCommand: PlayerCommand = {
-      playerId: this._player.playerId,
+      playerId: this.player.playerId,
       command: command
     };
     const enemyCommand: PlayerCommand = {
-      playerId: this._enemy.playerId,
-      command: this._npc.routine(this._enemy.playerId, this._stateHistory)
+      playerId: this.enemy.playerId,
+      command: this._npc.routine(this.enemy.playerId, this._stateHistory)
     };
     const updateState = this._gbraverBurstCore.progress(lastState, [playerCommand, enemyCommand]);
     this._stateHistory = [...this._stateHistory, ...updateState];
