@@ -6,7 +6,7 @@ import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../../game-loop/game-loop";
 import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
-import type {BattleProgress} from "../../../battle-room/battle-room";
+import type {BattleProgress} from "../../../battle-room/battle-progress";
 import {stateHistoryAnimation} from "./animation/state-history";
 import type {Command, GameEnd, GameState, Player} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";

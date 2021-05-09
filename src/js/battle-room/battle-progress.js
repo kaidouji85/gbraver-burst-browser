@@ -2,7 +2,7 @@
 
 import type {Command, GameState} from "gbraver-burst-core";
 
-/** 戦闘を進める */
+/** バトル進行 */
 export interface BattleProgress {
   /**
    * 戦闘を進める
