@@ -64,11 +64,17 @@ export class TDScenes {
   startBattle(resources: Resources, room: BattleRoom, initialState: InitialState): BattleScene {
     this._disposeScene();
 
+    const player = initialState.players.find(v => v.playerId === initialState.playerId)
+      ?? initialState.players[0];
+    const enemy = initialState.players.find(v => v.playerId !== initialState.playerId)
+      ?? initialState.players[0];
     const scene = new BattleScene({
       resources: resources,
       renderer: this._renderer,
       battleProgress: room,
-      initialState: initialState,
+      player: player,
+      enemy: enemy,
+      initialState: initialState.stateHistory,
       listener: {
         gameLoop: this._gameLoop,
         resize: this._resize,

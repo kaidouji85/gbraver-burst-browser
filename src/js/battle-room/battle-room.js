@@ -2,7 +2,10 @@
 
 import type {Command, GameState, Player, PlayerId} from "gbraver-burst-core";
 
-/** 初期状態 */
+/**
+ * @deprecated
+ * 初期状態
+ */
 export type InitialState = {
   playerId: PlayerId,
   players: Player[],
@@ -10,6 +13,7 @@ export type InitialState = {
 };
 
 /**
+ * @deprecated
  * 戦闘を開始する
  */
 export interface BattleStart {

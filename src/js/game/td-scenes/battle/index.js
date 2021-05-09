@@ -6,9 +6,9 @@ import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../../game-loop/game-loop";
 import type {DecideBattery} from "./actions/decide-battery";
 import {createInitialState} from "./state/initial-state";
-import type {BattleProgress, InitialState} from "../../../battle-room/battle-room";
+import type {BattleProgress} from "../../../battle-room/battle-room";
 import {stateHistoryAnimation} from "./animation/state-history";
-import type {Command, GameEnd, GameState} from "gbraver-burst-core";
+import type {Command, GameEnd, GameState, Player} from "gbraver-burst-core";
 import {delay} from "../../../animation/delay";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../window/resize";
@@ -29,7 +29,9 @@ type Param = {
   resources: Resources,
   renderer: OwnRenderer,
   battleProgress: BattleProgress,
-  initialState: InitialState,
+  initialState: GameState[],
+  player: Player,
+  enemy: Player,
   listener: {
     gameLoop: Stream<GameLoop>,
     resize: Stream<Resize>
@@ -41,7 +43,7 @@ type Param = {
  */
 export class BattleScene implements Scene {
   _state: BattleSceneState;
-  _initialState: InitialState;
+  _initialState: GameState[];
   _endBattle: StreamSource<GameEnd>;
   _battleProgress: BattleProgress;
   _exclusive: Exclusive;
@@ -52,14 +54,14 @@ export class BattleScene implements Scene {
   constructor(param: Param) {
     this._exclusive = new Exclusive();
     this._initialState = param.initialState;
-    this._state = createInitialState(param.initialState.playerId);
+    this._state = createInitialState(param.player.playerId);
     this._endBattle = new RxjsStreamSource();
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
-      playerId: param.initialState.playerId,
-      players: param.initialState.players,
+      playerId: param.player.playerId,
+      players: [param.player, param.enemy],
       listener: {
         gameLoop: param.listener.gameLoop,
         resize: param.listener.resize,
@@ -103,7 +105,7 @@ export class BattleScene implements Scene {
    */
   start(): Promise<void> {
     return this._exclusive.execute(async (): Promise<void> => {
-      await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState.stateHistory).play();
+      await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState).play();
     });
   }
 
