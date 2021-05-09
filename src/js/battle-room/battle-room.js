@@ -12,8 +12,3 @@ export interface BattleProgress {
    */
   progress(command: Command): Promise<GameState[]>
 }
-
-/**
- * バトルルーム
- */
-export interface BattleRoom extends BattleProgress {}

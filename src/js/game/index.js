@@ -289,8 +289,7 @@ export class Game {
     await this._fader.fadeIn();
 
     const room = new OfflineBattleRoom(player, npc);
-    const initialState = room.start();
-    const battleScene = this._tdScenes.startBattle(resources, room, room.player, room.enemy, initialState);
+    const battleScene = this._tdScenes.startBattle(resources, room, room.player, room.enemy, room.initialState);
     await waitAnimationFrame();
 
     await this._fader.fadeOut();

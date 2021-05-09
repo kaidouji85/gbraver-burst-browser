@@ -2,17 +2,17 @@
 import type {Command, GameState, Player, PlayerCommand} from "gbraver-burst-core";
 import {GbraverBurstCore} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
-import type {BattleRoom} from "./battle-room";
+import type {BattleProgress} from "./battle-room";
 
 /**
  * オフラインのバトルルーム
  */
-export class OfflineBattleRoom implements BattleRoom {
+export class OfflineBattleRoom implements BattleProgress {
   player: Player;
   enemy: Player;
-
-  _npc: NPC;
+  initialState: GameState[];
   _stateHistory: GameState[];
+  _npc: NPC;
   _gbraverBurstCore: GbraverBurstCore;
 
   /**
@@ -22,25 +22,17 @@ export class OfflineBattleRoom implements BattleRoom {
    * @param npc NPC
    */
   constructor(player: Player, npc: NPC) {
-    this.player = player;
     this._npc = npc;
+    this._gbraverBurstCore = new GbraverBurstCore();
+
+    this.player = player;
     this.enemy = {
       playerId: `enemy-of-${player.playerId}`,
-      armdozer: this._npc.armdozer,
-      pilot: this._npc.pilot,
+      armdozer: npc.armdozer,
+      pilot: npc.pilot,
     };
-    this._stateHistory = [];
-    this._gbraverBurstCore = new GbraverBurstCore();
-  }
-
-  /**
-   * 戦闘を開始する
-   *
-   * @return 初期状態
-   */
-  start(): GameState[] {
-    this._stateHistory = this._gbraverBurstCore.start(this.player, this.enemy);
-    return this._stateHistory
+    this.initialState = this._gbraverBurstCore.start(this.player, this.enemy);
+    this._stateHistory = this.initialState;
   }
 
   /**
