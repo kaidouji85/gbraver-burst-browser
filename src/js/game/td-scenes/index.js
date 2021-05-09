@@ -11,8 +11,7 @@ import type {GameAction} from "../actions/game-actions";
 import {gameLoopStream} from "../../game-loop/game-loop";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import {RxjsStreamSource} from "../../stream/rxjs";
-import type {Player} from "gbraver-burst-core/lib/player/player";
-import type {GameState} from "gbraver-burst-core/lib/state/game-state";
+import type {Player, GameState} from "gbraver-burst-core";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
