@@ -26,8 +26,8 @@ interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 type Param = {
   resources: Resources,
   renderer: OwnRenderer,
-  playerId: PlayerId,
-  players: Player[],
+  player: Player,
+  enemy: Player,
   listener: {
     gameLoop: Stream<GameLoop>,
     resize: Stream<Resize>,
@@ -49,7 +49,7 @@ export class BattleSceneView {
   _preRenderHUD: StreamSource<PreRender>;
 
   constructor(param: Param) {
-    this._playerId = param.playerId;
+    this._playerId = param.player.playerId;
     this._safeAreaInset = createSafeAreaInset();
     this._renderer = param.renderer;
     this._updateTD = new RxjsStreamSource();
@@ -61,8 +61,8 @@ export class BattleSceneView {
       resources: param.resources,
       renderer: param.renderer,
       safeAreaInset: this._safeAreaInset,
-      playerId: param.playerId,
-      players: param.players,
+      playerId: param.player.playerId,
+      players: [param.player, param.enemy],
       listener: {
         resize: param.listener.resize,
         update: this._updateTD,
@@ -73,8 +73,8 @@ export class BattleSceneView {
     this.hud = new HudLayer({
       resources: param.resources,
       renderer: param.renderer,
-      playerId: param.playerId,
-      players: param.players,
+      playerId: param.player.playerId,
+      players: [param.player, param.enemy],
       listener: {
         resize: param.listener.resize,
         update: this._updateHUD,

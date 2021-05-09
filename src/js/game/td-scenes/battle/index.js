@@ -60,8 +60,8 @@ export class BattleScene implements Scene {
     this._view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
-      playerId: param.player.playerId,
-      players: [param.player, param.enemy],
+      player: param.player,
+      enemy: param.enemy,
       listener: {
         gameLoop: param.listener.gameLoop,
         resize: param.listener.resize,
