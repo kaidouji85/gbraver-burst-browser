@@ -61,8 +61,8 @@ export class BattleSceneView {
       resources: param.resources,
       renderer: param.renderer,
       safeAreaInset: this._safeAreaInset,
-      playerId: param.player.playerId,
-      players: [param.player, param.enemy],
+      player: param.player,
+      enemy: param.enemy,
       listener: {
         resize: param.listener.resize,
         update: this._updateTD,
