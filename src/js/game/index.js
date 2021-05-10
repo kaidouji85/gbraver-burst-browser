@@ -22,7 +22,7 @@ import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
 import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
 import {DefaultCourse, NPCBattleCourses} from "./in-progress/npc-battle/npc-battle-course";
-import {OfflineBattleRoom} from "../battle-room/offline-battle-room";
+import {startOfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
@@ -288,9 +288,8 @@ export class Game {
     );
     await this._fader.fadeIn();
 
-    const room = new OfflineBattleRoom(player, npc);
-    const initialState = await room.start();
-    const battleScene = this._tdScenes.startBattle(resources, room, initialState);
+    const room = startOfflineBattleRoom(player, npc);
+    const battleScene = this._tdScenes.startBattle(resources, room.progress, room.player, room.enemy, room.initialState);
     await waitAnimationFrame();
 
     await this._fader.fadeOut();

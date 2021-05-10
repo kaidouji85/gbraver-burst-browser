@@ -2,7 +2,7 @@
 
 import {Renderer} from "../../render";
 import type {Resources} from "../../resource";
-import type {BattleRoom, InitialState} from "../../battle-room/battle-room";
+import type {BattleProgress} from "../../battle-room/battle-progress";
 import {BattleScene} from "./battle";
 import type {Scene} from "./scene";
 import type {GameLoop} from "../../game-loop/game-loop";
@@ -11,6 +11,7 @@ import type {GameAction} from "../actions/game-actions";
 import {gameLoopStream} from "../../game-loop/game-loop";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import {RxjsStreamSource} from "../../stream/rxjs";
+import type {Player, GameState} from "gbraver-burst-core";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
@@ -57,17 +58,21 @@ export class TDScenes {
    * 戦闘シーンを開始する
    *
    * @param resources リソース管理オブジェクト
-   * @param room 戦闘ルーム
-   * @param initialState 初期状態
+   * @param progress 戦闘を進める
+   * @param player プレイヤー情報
+   * @param enemy 敵情報
+   * @param initialState ゲームの初期状態
    * @return 生成した戦闘シーン
    */
-  startBattle(resources: Resources, room: BattleRoom, initialState: InitialState): BattleScene {
+  startBattle(resources: Resources, progress: BattleProgress, player: Player, enemy: Player, initialState: GameState[]): BattleScene {
     this._disposeScene();
 
     const scene = new BattleScene({
       resources: resources,
       renderer: this._renderer,
-      battleProgress: room,
+      battleProgress: progress,
+      player: player,
+      enemy: enemy,
       initialState: initialState,
       listener: {
         gameLoop: this._gameLoop,

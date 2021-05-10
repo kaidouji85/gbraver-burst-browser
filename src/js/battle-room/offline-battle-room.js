@@ -2,42 +2,57 @@
 import type {Command, GameState, Player, PlayerCommand} from "gbraver-burst-core";
 import {GbraverBurstCore} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
-import type {BattleRoom, InitialState} from "./battle-room";
+import type {BattleProgress} from "./battle-progress";
+
+/** オフライン バトルルーム */
+export type OfflineBattleRoom = {
+  player: Player,
+  enemy: Player,
+  initialState: GameState[],
+  progress: BattleProgress,
+};
 
 /**
- * オフラインのバトルルーム
+ * オフラインバトルルームを開始する
+ *
+ * @param player プレイヤー情報
+ * @param npc NPC
+ * @return オフラインバトルルーム
  */
-export class OfflineBattleRoom implements BattleRoom {
+export function startOfflineBattleRoom(player: Player, npc: NPC): OfflineBattleRoom {
+  const enemy = {
+    playerId: `enemy-of-${player.playerId}`,
+    armdozer: npc.armdozer,
+    pilot: npc.pilot,
+  };
+  const initialState = new GbraverBurstCore().start(player, enemy);
+  const progress = new OfflineBattleProgress(player, enemy, initialState, npc,);
+
+  return {player, enemy, initialState, progress};
+}
+
+/** オフライン バトル進行 */
+export class OfflineBattleProgress implements BattleProgress {
   _player: Player;
   _enemy: Player;
-  _npc: NPC;
   _stateHistory: GameState[];
+  _npc: NPC;
   _gbraverBurstCore: GbraverBurstCore;
 
-  constructor(player: Player, npc: NPC) {
-    this._player = player;
-    this._npc = npc;
-    this._enemy = {
-      playerId: `enemy-of-${player.playerId}`,
-      armdozer: this._npc.armdozer,
-      pilot: this._npc.pilot,
-    };
-    this._stateHistory = [];
-    this._gbraverBurstCore = new GbraverBurstCore();
-  }
-
   /**
-   * 戦闘開始
+   * コンストラクタ
    *
-   * @return 初期状態
+   * @param player プレイヤー情報
+   * @param enemy 敵情報
+   * @param initialState 初期ゲームステート
+   * @param npc NPC
    */
-  async start(): Promise<InitialState> {
-    this._stateHistory = this._gbraverBurstCore.start(this._player, this._enemy);
-    return {
-      playerId: this._player.playerId,
-      players: [this._player, this._enemy],
-      stateHistory: this._stateHistory
-    };
+  constructor(player: Player, enemy: Player, initialState: GameState[], npc: NPC) {
+    this._npc = npc;
+    this._gbraverBurstCore = new GbraverBurstCore();
+    this._player = player;
+    this._enemy = enemy;
+    this._stateHistory = initialState;
   }
 
   /**

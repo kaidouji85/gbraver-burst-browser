@@ -1,7 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../../../resource';
-import type {Player, PlayerId} from "gbraver-burst-core";
+import type {Player} from "gbraver-burst-core";
 import type {BattleSceneAction} from "../../actions";
 import type {Update} from "../../../../../game-loop/update";
 import type {PreRender} from "../../../../../game-loop/pre-render";
@@ -23,8 +23,8 @@ import type {Stream} from "../../../../../stream/core";
 export type Param = {
   resources: Resources,
   renderer: OverlapNotifier,
-  playerId: PlayerId,
-  players: Player[],
+  player: Player,
+  enemy: Player,
   listener: {
     update: Stream<Update>,
     preRender: Stream<PreRender>,
@@ -51,38 +51,35 @@ export class HudLayer {
 
     this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
     this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
-
-    const player = param.players.find(v => v.playerId === param.playerId)
-      || param.players[0];
-    this.gameObjects = new HUDGameObjects(param.resources, this._gameObjectAction, player);
+    this.gameObjects = new HUDGameObjects(param.resources, this._gameObjectAction, param.player);
     this.gameObjects.getObject3Ds().forEach(object => {
       this.scene.add(object);
     });
 
-    this.players = param.players.map(v => v.playerId === param.playerId
-      ? playerHUDObjects(param.resources, v, this._gameObjectAction)
-      : enemyHUDObjects(param.resources, v, this._gameObjectAction)
-    );
+    this.players = [
+      playerHUDObjects(param.resources, param.player, this._gameObjectAction),
+      enemyHUDObjects(param.resources, param.enemy, this._gameObjectAction)
+    ];
     this.players.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
         this.scene.add(v);
       });
 
-    this.armdozers = param.players.map(v => v.playerId === param.playerId
-      ? playerArmdozerHUD(param.resources, this._gameObjectAction, v)
-      : enemyArmdozerHUD(param.resources, this._gameObjectAction, v)
-    );
+    this.armdozers = [
+      playerArmdozerHUD(param.resources, this._gameObjectAction, param.player),
+      enemyArmdozerHUD(param.resources, this._gameObjectAction, param.enemy)
+    ];
     this.armdozers.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
         this.scene.add(v);
       });
 
-    this.pilots = param.players.map(v => v.playerId === param.playerId
-      ? playerHUDPilotObjects(param.resources, this._gameObjectAction, v)
-      : enemyHUDPilotObjects(param.resources, this._gameObjectAction, v)
-    );
+    this.pilots = [
+      playerHUDPilotObjects(param.resources, this._gameObjectAction, param.player),
+      enemyHUDPilotObjects(param.resources, this._gameObjectAction, param.enemy)
+    ];
     this.pilots.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
