@@ -2,6 +2,7 @@
 
 import type {ResourceRoot} from "./resource-root";
 
+// TODO stories直下に移動させる
 /**
  * storybookのリソースフォルダのルートパス
  */
