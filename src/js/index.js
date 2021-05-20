@@ -8,10 +8,14 @@ import {DefinePlugin} from "./webpack/define-plugin";
  * Gブレイバーバーストのエントリポイント
  */
 async function main(): Promise<void> {
-  const resourceRoot = {
-    get: () => DefinePlugin.resourceHash
-  }
-  const game = new Game(resourceRoot);
+  const game = new Game({
+    resourceRoot: {
+      get: () => DefinePlugin.resourceHash
+    },
+    howToPlay: DefinePlugin.howToPlay,
+    isPerformanceStatsVisible: DefinePlugin.isPerformanceStatsVisible === 'true',
+    isServiceWorkerUsed: DefinePlugin.isServiceWorkerUsed === 'true',
+  });
   await game.initialize();
 }
 
