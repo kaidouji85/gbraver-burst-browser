@@ -1,8 +1,7 @@
 // @flow
 
-import type {ResourceRoot} from "./resource-root";
+import type {ResourceRoot} from "../../src/js/resource/resource-root";
 
-// TODO stories直下に移動させる
 /**
  * storybookのリソースフォルダのルートパス
  */

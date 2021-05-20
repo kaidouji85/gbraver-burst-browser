@@ -11,7 +11,7 @@ import type {Resize} from "../window/resize";
 import {resizeStream} from "../window/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
-import type {ResourceRoot} from "../resource/root/resource-root";
+import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {NPCBattle} from "./in-progress/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./in-progress/npc-battle/npc-battle";

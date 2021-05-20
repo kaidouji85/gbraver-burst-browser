@@ -1,6 +1,6 @@
 // @flow
 
-import {StorybookResourceRoot} from "../../src/js/resource/root/storybook-resource-root";
+import {StorybookResourceRoot} from "../resource-root/storybook-resource-root";
 import '../../src/css/style.css';
 import {resizeStream} from "../../src/js/window/resize";
 import {CssVH} from "../../src/js/view-port/vh";
