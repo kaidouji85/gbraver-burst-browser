@@ -1,7 +1,7 @@
 // @flow
 
 import * as THREE from 'three';
-import type {ResourceRoot} from "./root/resource-root";
+import type {ResourceRoot} from "./resource-root";
 
 /** キューブテクスチャID */
 export type CuteTextureId = string;

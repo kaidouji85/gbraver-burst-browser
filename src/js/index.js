@@ -2,14 +2,20 @@
 
 import '../css/style.css';
 import {Game} from './game/index';
-import {ProductionResourceRoot} from "./resource/root/production-resource-root";
+import {DefinePlugin} from "./webpack/define-plugin";
 
 /**
  * Gブレイバーバーストのエントリポイント
  */
 async function main(): Promise<void> {
-  const resourceRoot = new ProductionResourceRoot();
-  const game = new Game(resourceRoot);
+  const game = new Game({
+    resourceRoot: {
+      get: () => DefinePlugin.resourceHash
+    },
+    _howToPlayMovieURL: DefinePlugin.howToPlay,
+    isPerformanceStatsVisible: DefinePlugin.isPerformanceStatsVisible === 'true',
+    isServiceWorkerUsed: DefinePlugin.isServiceWorkerUsed === 'true',
+  });
   await game.initialize();
 }
 

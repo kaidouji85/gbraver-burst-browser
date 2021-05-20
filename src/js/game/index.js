@@ -11,7 +11,7 @@ import type {Resize} from "../window/resize";
 import {resizeStream} from "../window/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
-import type {ResourceRoot} from "../resource/root/resource-root";
+import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {NPCBattle} from "./in-progress/npc-battle/npc-battle";
 import {createInitialNPCBattle} from "./in-progress/npc-battle/npc-battle";
@@ -26,13 +26,25 @@ import {startOfflineBattleRoom} from "../battle-room/offline-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
-import {DefinePlugin} from "../webpack/define-plugin";
 import type {Stream, Unsubscriber} from "../stream/core";
 
-/**
- * ゲーム全体の管理を行う
- */
+/** コンストラクタのパラメータ */
+type Param = {
+  /** リソースルート */
+  resourceRoot: ResourceRoot,
+  /** 遊び方動画のURL */
+  _howToPlayMovieURL: string,
+  /** FPS統計を表示するか否か、trueで表示する */
+  isPerformanceStatsVisible: boolean,
+  /** サービスワーカーを利用するか否か、trueで利用する */
+  isServiceWorkerUsed: boolean,
+};
+
+/** ゲーム全体の管理を行う */
 export class Game {
+  _isPerformanceStatsVisible: boolean;
+  _isServiceWorkerUsed: boolean;
+  _howToPlayMovieURL: string;
   _inProgress: InProgress;
   _resize: Stream<Resize>;
   _vh: CssVH;
@@ -49,10 +61,13 @@ export class Game {
   /**
    * コンストラクタ
    *
-   * @param resourceRoot リソースフォルダのルート
+   * @param param パラメータ
    */
-  constructor(resourceRoot: ResourceRoot) {
-    this._resourceRoot = resourceRoot;
+  constructor(param: Param) {
+    this._resourceRoot = param.resourceRoot;
+    this._isServiceWorkerUsed = param.isServiceWorkerUsed;
+    this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
+    this._howToPlayMovieURL = param._howToPlayMovieURL;
 
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
@@ -110,11 +125,11 @@ export class Game {
    * @return 処理結果
    */
   async initialize(): Promise<void> {
-    if (DefinePlugin.isPerformanceStatsVisible && document.body) {
+    if (this._isPerformanceStatsVisible && document.body) {
       viewPerformanceStats(document.body);
     }
     
-    if (DefinePlugin.isServiceWorkerUsed) {
+    if (this._isServiceWorkerUsed) {
       this._serviceWorker = await loadServiceWorker();
     }
 
@@ -156,7 +171,7 @@ export class Game {
       return;
     }
 
-    this._domDialogs.startHowToPlay(this._resources);
+    this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
   /**
