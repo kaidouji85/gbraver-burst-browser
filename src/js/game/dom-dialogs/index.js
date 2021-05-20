@@ -28,11 +28,12 @@ export class DOMDialogs {
    * 遊び方ダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
+   * @param movieURL 動画のURL
    */
-  startHowToPlay(resources: Resources): void {
+  startHowToPlay(resources: Resources, movieURL: string): void {
     this._removeCurrentDialog();
 
-    const howToPlay = new HowToPlay(resources);
+    const howToPlay = new HowToPlay(resources, movieURL);
     this._unsubscribers = [
       howToPlay.closeNotifier().subscribe(() => {
         this._gameAction.next({type: 'EndHowToPlay'});

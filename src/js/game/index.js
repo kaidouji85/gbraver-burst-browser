@@ -33,7 +33,7 @@ type Param = {
   /** リソースルート */
   resourceRoot: ResourceRoot,
   /** 遊び方動画のURL */
-  howToPlay: string,
+  _howToPlayMovieURL: string,
   /** FPS統計を表示するか否か、trueで表示する */
   isPerformanceStatsVisible: boolean,
   /** サービスワーカーを利用するか否か、trueで利用する */
@@ -44,6 +44,7 @@ type Param = {
 export class Game {
   _isPerformanceStatsVisible: boolean;
   _isServiceWorkerUsed: boolean;
+  _howToPlayMovieURL: string;
   _inProgress: InProgress;
   _resize: Stream<Resize>;
   _vh: CssVH;
@@ -66,6 +67,7 @@ export class Game {
     this._resourceRoot = param.resourceRoot;
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
+    this._howToPlayMovieURL = param._howToPlayMovieURL;
 
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
@@ -169,7 +171,7 @@ export class Game {
       return;
     }
 
-    this._domDialogs.startHowToPlay(this._resources);
+    this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
   /**

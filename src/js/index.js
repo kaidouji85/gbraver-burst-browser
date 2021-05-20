@@ -12,7 +12,7 @@ async function main(): Promise<void> {
     resourceRoot: {
       get: () => DefinePlugin.resourceHash
     },
-    howToPlay: DefinePlugin.howToPlay,
+    _howToPlayMovieURL: DefinePlugin.howToPlay,
     isPerformanceStatsVisible: DefinePlugin.isPerformanceStatsVisible === 'true',
     isServiceWorkerUsed: DefinePlugin.isServiceWorkerUsed === 'true',
   });

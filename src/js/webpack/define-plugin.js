@@ -1,6 +1,9 @@
 // @flow
 
-/** webpack define-pluginから渡された値をまとめたもの */
+/**
+ * webpack define-pluginから渡された値をまとめたもの
+ * 本オブジェクトは、エントリポイントからのみ参照されることを想定している
+ */
 export const DefinePlugin = {
   /** リソースフォルダのハッシュ */
   resourceHash: GBRAVER_BURST_RESOURCE_HASH,
