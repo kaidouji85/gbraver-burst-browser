@@ -1,6 +1,6 @@
 // @flow
 import * as THREE from "three";
-import type {ResourceRoot} from "./root/resource-root";
+import type {ResourceRoot} from "./resource-root";
 
 /** テクスチャID */
 export type TextureId = string;

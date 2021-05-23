@@ -9,7 +9,7 @@ import type {CubeTextureResource} from "./cube-texture";
 import {loadingAllCubeTextures} from "./cube-texture";
 import type {SoundResource} from "./sound";
 import {loadingAllSounds} from "./sound";
-import type {ResourceRoot} from "./root/resource-root";
+import type {ResourceRoot} from "./resource-root";
 import type {LoadingActions} from "./actions/loading-actions";
 import type {Path} from "./path";
 import {getAllPaths} from "./path";

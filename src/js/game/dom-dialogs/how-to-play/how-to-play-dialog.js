@@ -8,7 +8,6 @@ import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {DOMDialog} from "../dialog";
-import {DefinePlugin} from "../../../webpack/define-plugin";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
@@ -28,9 +27,9 @@ export class HowToPlay implements DOMDialog {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param movieURL 動画URL
    */
-  constructor(resources: Resources) {
-    const movieURL = DefinePlugin.howToPlay;
+  constructor(resources: Resources, movieURL: string) {
     const closerId = domUuid();
     const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
       ?.path ?? '';

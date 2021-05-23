@@ -1,6 +1,6 @@
 // @flow
 
-import type {ResourceRoot} from "./resource-root";
+import type {ResourceRoot} from "../../src/js/resource/resource-root";
 
 /**
  * storybookのリソースフォルダのルートパス
