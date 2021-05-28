@@ -6,8 +6,8 @@ import type {NPC} from "../npc/npc";
 import type {BattleProgress} from "./battle-progress";
 import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 
-/** オフライン バトルルーム */
-export type OfflineBattleRoom = {
+/** オフラインバトル */
+export type OfflineBattle = {
   player: Player,
   enemy: Player,
   initialState: GameState[],
@@ -15,13 +15,13 @@ export type OfflineBattleRoom = {
 };
 
 /**
- * オフラインバトルルームを開始する
+ * オフラインバトルを開始する
  *
  * @param player プレイヤー情報
  * @param npc NPC
  * @return オフラインバトルルーム
  */
-export function startOfflineBattleRoom(player: Player, npc: NPC): OfflineBattleRoom {
+export function startOfflineBattle(player: Player, npc: NPC): OfflineBattle {
   const enemy = {
     playerId: `enemy-of-${player.playerId}`,
     armdozer: npc.armdozer,
