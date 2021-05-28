@@ -1,8 +1,10 @@
 // @flow
+
 import type {Command, GameState, Player, PlayerCommand} from "gbraver-burst-core";
 import {GbraverBurstCore} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
 import type {BattleProgress} from "./battle-progress";
+import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 
 /** オフライン バトルルーム */
 export type OfflineBattleRoom = {
@@ -25,34 +27,32 @@ export function startOfflineBattleRoom(player: Player, npc: NPC): OfflineBattleR
     armdozer: npc.armdozer,
     pilot: npc.pilot,
   };
-  const initialState = new GbraverBurstCore().start(player, enemy);
-  const progress = new OfflineBattleProgress(player, enemy, initialState, npc,);
-
+  const core = new GbraverBurstCore([player, enemy]);
+  const initialState = core.stateHistory();
+  const progress = new OfflineBattleProgress(player.playerId, enemy.playerId, core, npc);
   return {player, enemy, initialState, progress};
 }
 
 /** オフライン バトル進行 */
 export class OfflineBattleProgress implements BattleProgress {
-  _player: Player;
-  _enemy: Player;
-  _stateHistory: GameState[];
+  _playerId: PlayerId;
+  _enemyId: PlayerId;
   _npc: NPC;
-  _gbraverBurstCore: GbraverBurstCore;
+  _core: GbraverBurstCore;
 
   /**
    * コンストラクタ
    *
-   * @param player プレイヤー情報
-   * @param enemy 敵情報
-   * @param initialState 初期ゲームステート
+   * @param playerId プレイヤー情報
+   * @param enemyId 敵情報
+   * @param core ゲームコア
    * @param npc NPC
    */
-  constructor(player: Player, enemy: Player, initialState: GameState[], npc: NPC) {
+  constructor(playerId: PlayerId, enemyId: PlayerId, core: GbraverBurstCore, npc: NPC) {
     this._npc = npc;
-    this._gbraverBurstCore = new GbraverBurstCore();
-    this._player = player;
-    this._enemy = enemy;
-    this._stateHistory = initialState;
+    this._core = core;
+    this._playerId = playerId;
+    this._enemyId = enemyId;
   }
 
   /**
@@ -62,21 +62,14 @@ export class OfflineBattleProgress implements BattleProgress {
    * @return ステートヒストリー
    */
   async progress(command: Command): Promise<GameState[]> {
-    if (this._stateHistory.length <= 0) {
-      return [];
-    }
-
-    const lastState = this._stateHistory[this._stateHistory.length - 1];
     const playerCommand: PlayerCommand = {
-      playerId: this._player.playerId,
+      playerId: this._playerId,
       command: command
     };
     const enemyCommand: PlayerCommand = {
-      playerId: this._enemy.playerId,
-      command: this._npc.routine(this._enemy.playerId, this._stateHistory)
+      playerId: this._enemyId,
+      command: this._npc.routine(this._enemyId, this._core.stateHistory())
     };
-    const updateState = this._gbraverBurstCore.progress(lastState, [playerCommand, enemyCommand]);
-    this._stateHistory = [...this._stateHistory, ...updateState];
-    return updateState;
+    return this._core.progress([playerCommand, enemyCommand]);
   }
 }
