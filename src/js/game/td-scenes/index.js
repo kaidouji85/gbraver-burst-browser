@@ -2,7 +2,7 @@
 
 import {Renderer} from "../../render";
 import type {Resources} from "../../resource";
-import type {BattleProgress} from "../../battle-room/battle-progress";
+import type {BattleProgress} from "../../battle/battle-progress";
 import {BattleScene} from "./battle";
 import type {Scene} from "./scene";
 import type {GameLoop} from "../../game-loop/game-loop";
