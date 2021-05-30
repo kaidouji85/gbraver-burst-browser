@@ -12,8 +12,8 @@ export const DefinePlugin = {
   howToPlay: GBRAVER_BURST_HOW_TO_PLAY,
 
   /** FPS統計を表示するか否か、trueで表示する */
-  isPerformanceStatsVisible: GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE === 'true',
+  isPerformanceStatsVisible: GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE,
 
   /** サービスワーカーを利用するか否か、trueで利用する */
-  isServiceWorkerUsed: GBRAVER_BURST_IS_SERVICE_WORKER_USED === 'true',
+  isServiceWorkerUsed: GBRAVER_BURST_IS_SERVICE_WORKER_USED,
 }
