@@ -10,5 +10,8 @@ export default {
 
 export const dialog: DOMStubStory = domStub(resources => {
   const dialog = new LoginDialog(resources, 'ログインしてください');
+  dialog.closeDialogNotifier().subscribe(() => {
+    console.log('close');
+  });
   return dialog.getRootHTMLElement();
 });

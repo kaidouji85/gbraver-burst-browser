@@ -5,10 +5,12 @@ import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {pushDOMStream} from '../../../dom/push/push-dom';
-import type {Unsubscriber} from "../../../stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
+import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {LoginEntering} from './login-entering';
+
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
@@ -16,6 +18,7 @@ export class LoginDialog implements DOMDialog {
   _loginEntering: LoginEntering;
   _dialog: HTMLElement;
   _closer: HTMLImageElement;
+  _closeDialog: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
   _exclusive: Exclusive;
 
@@ -49,10 +52,14 @@ export class LoginDialog implements DOMDialog {
     this._loginEntering.show();
     this._dialog.appendChild(this._loginEntering.getRootHTMLElement());
 
+    this._closeDialog = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._closer).subscribe(() => {
         this._onCloserPush();
       }),
+      this._loginEntering.closeNotifier().subscribe(() => {
+        this._onPushCloseButtonPush();
+      })
     ];
     this._exclusive = new Exclusive();
   }
@@ -76,11 +83,28 @@ export class LoginDialog implements DOMDialog {
   }
 
   /**
+   * ダイアログ閉じる通知
+   * 
+   * @return 通知ストリーム
+   */
+  closeDialogNotifier(): Stream<void> {
+    return this._closeDialog;
+  }
+
+  /**
    * クローザーを押した時の処理
    */
   _onCloserPush(): void {
     this._exclusive.execute(async () => {
       await pop(this._closer, 1.3);
+      this._closeDialog.next();
     });
+  }
+
+  /**
+   * 閉じるボタンを押した時の処理
+   */
+  _onPushCloseButtonPush(): void {
+    this._closeDialog.next();
   }
 }
