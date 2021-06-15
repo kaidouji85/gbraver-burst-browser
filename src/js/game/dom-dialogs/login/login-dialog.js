@@ -29,7 +29,7 @@ type DataIDs = {
 function rootInnerHTML(ids: DataIDs, closerPath: string): string {
   return `
     <div class="login__background"></div>
-    <img class="login__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}"></img>
+    <img class="login__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
     <div class="login__dialog" data-id="${ids.dialog}"></div>
   `;
 }
