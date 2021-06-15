@@ -10,10 +10,12 @@ import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {LoginEntering} from './login-entering';
-
+import type {InputComplete} from './login-entering';
+import type {IdPasswordLogin} from '@gbraver-burst-network/core';
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
+  _login: IdPasswordLogin;
   _root: HTMLElement;
   _loginEntering: LoginEntering;
   _dialog: HTMLElement;
@@ -26,9 +28,12 @@ export class LoginDialog implements DOMDialog {
    * コンストラクタ
    * 
    * @param resources リソース管理オブジェクト
+   * @param login ログイン処理を実行するオブジェクト
    * @param caption 入力フォームに表示されるメッセージ
    */
-  constructor(resources: Resources, caption: string) {
+  constructor(resources: Resources, login: IdPasswordLogin, caption: string) {
+    this._login = login;
+
     const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
       ?.path ?? '';
 
@@ -54,12 +59,12 @@ export class LoginDialog implements DOMDialog {
 
     this._closeDialog = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._closer).subscribe(() => {
-        this._onCloserPush();
-      }),
-      this._loginEntering.closeNotifier().subscribe(() => {
-        this._onPushCloseButtonPush();
-      })
+      pushDOMStream(this._closer)
+        .subscribe(this._onCloserPush.bind(this)),
+      this._loginEntering.closeNotifier()
+        .subscribe(this._onPushCloseButtonPush.bind(this)),
+      this._loginEntering.iunputCompleteNotifier()
+        .subscribe(this._onInputComplete.bind(this))
     ];
     this._exclusive = new Exclusive();
   }
@@ -106,5 +111,18 @@ export class LoginDialog implements DOMDialog {
    */
   _onPushCloseButtonPush(): void {
     this._closeDialog.next();
+  }
+
+  /**
+   * ログイン情報の入力が完了した時の処理
+   * 
+   * @param data 入力した情報
+   */
+  _onInputComplete(data: InputComplete): void {
+    this._exclusive.execute(async () => {
+      const isSuccessLogin = await this._login.login(data.userID, data.password);
+      // TODO 処理分岐をする
+      console.log(isSuccessLogin);
+    });
   }
 }

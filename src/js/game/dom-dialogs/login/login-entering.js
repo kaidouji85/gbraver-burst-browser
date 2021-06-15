@@ -9,20 +9,19 @@ import {Exclusive} from "../../../exclusive/exclusive";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'login-entering';
-
 /** ルート要素が非表示の時のcssクラス名 */
 const INVISIBLE_ROOT_CLASS_NAME = `${ROOT_CLASS_NAME}--invisible`;
 
 /** 入力完了情報 */
-type InputComplete = {
-  userName: string,
+export type InputComplete = {
+  userID: string,
   password: string,
 };
 
 /** ログイン情報入力中 */
 export class LoginEntering {
   _root: HTMLElement;
-  _userName: HTMLInputElement;
+  _userID: HTMLInputElement;
   _password: HTMLInputElement;
   _submit: HTMLButtonElement;
   _closeButton: HTMLButtonElement;
@@ -37,7 +36,7 @@ export class LoginEntering {
    * @param caption 入力フォームに表示されるメッセージ
    */
   constructor(caption: string) {
-    const userNameID = domUuid();
+    const useridID = domUuid();
     const passwordID = domUuid();
     const submitID = domUuid();
     const closeButtonID = domUuid();
@@ -48,7 +47,7 @@ export class LoginEntering {
       <form class="${ROOT_CLASS_NAME}__form">
         <div class="${ROOT_CLASS_NAME}__form__user-name">
           <label class="${ROOT_CLASS_NAME}__form__user-name__label">userid</label>
-          <input class="${ROOT_CLASS_NAME}__form__user-name__input" type="text" name="username" autocomplete="username" data-id="${userNameID}">
+          <input class="${ROOT_CLASS_NAME}__form__user-name__input" type="text" name="userid" autocomplete="username" data-id="${useridID}">
         </div>
         <div class="${ROOT_CLASS_NAME}__form__password">
           <label class="${ROOT_CLASS_NAME}__form__password__label">password</label>
@@ -61,8 +60,8 @@ export class LoginEntering {
       </form>
     `;
 
-    const userName = this._root.querySelector(`[data-id="${userNameID}"]`);
-    this._userName = (userName instanceof HTMLInputElement) ? userName : document.createElement('input');
+    const userID = this._root.querySelector(`[data-id="${useridID}"]`);
+    this._userID = (userID instanceof HTMLInputElement) ? userID : document.createElement('input');
 
     const password = this._root.querySelector(`[data-id="${passwordID}"]`);
     this._password = (password instanceof HTMLInputElement) ? password : document.createElement('input');
@@ -76,12 +75,10 @@ export class LoginEntering {
     this._inputCoomplete = new RxjsStreamSource();
     this._close = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._submit).subscribe(() => {
-        this._onLoginPush();
-      }),
-      pushDOMStream(this._closeButton).subscribe(() => {
-        this._onCloseButtonPush();
-      }),
+      pushDOMStream(this._submit)
+        .subscribe(this._onLoginPush.bind(this)),
+      pushDOMStream(this._closeButton)
+        .subscribe(this._onCloseButtonPush.bind(this)),
     ];
     this._exclusive = new Exclusive();
   }
@@ -142,7 +139,7 @@ export class LoginEntering {
   _onLoginPush(): void {
     this._exclusive.execute(async () => {
       await pop(this._submit);
-      this._inputCoomplete.next({userName: this._userName.value, password: this._password.value});
+      this._inputCoomplete.next({userID: this._userID.value, password: this._password.value});
     });
   }
 

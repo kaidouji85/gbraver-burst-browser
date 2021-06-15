@@ -8,8 +8,14 @@ export default {
   title: 'login',
 };
 
-export const dialog: DOMStubStory = domStub(resources => {
-  const dialog = new LoginDialog(resources, 'ログインしてください');
+const loginMock = {
+  async login(userID: string, password: string): Promise<boolean> {
+    return (userID !== '') && (password !== '');
+  }
+};
+
+export const dialog: DOMStubStory = domStub(resources => {  
+  const dialog = new LoginDialog(resources, loginMock, 'ログインしてください');
   dialog.closeDialogNotifier().subscribe(() => {
     console.log('close');
   });
