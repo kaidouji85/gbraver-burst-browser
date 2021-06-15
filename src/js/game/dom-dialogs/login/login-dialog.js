@@ -41,11 +41,11 @@ export class LoginDialog implements DOMDialog {
         <form class="login__dialog__form">
           <div class="login__dialog__form__user-name">
             <label class="login__dialog__form__user-name__label">userid</label>
-            <input class="login__dialog__form__user-name__input" type="text" name="userid" data-id="${userNameID}">
+            <input class="login__dialog__form__user-name__input" type="text" name="username" autocomplete="username" data-id="${userNameID}">
           </div>
           <div class="login__dialog__form__password">
             <label class="login__dialog__form__password__label">password</label>
-            <input class="login__dialog__form__password__input" type="password" name="password" data-id="${passwordID}">
+            <input class="login__dialog__form__password__input" type="password" name="password" autocomplete="current-password" data-id="${passwordID}">
           </div>
           <div class="login__dialog__form__footer">
             <button class="login__dialog__form__footer__close" data-id="${closeButtonID}">閉じる</button>
