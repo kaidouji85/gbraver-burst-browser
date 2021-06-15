@@ -80,6 +80,10 @@
   justify-content: center;
 }
 
+.login-entering--invisible {
+  display: none 
+}
+
 .login-entering__caption {
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }

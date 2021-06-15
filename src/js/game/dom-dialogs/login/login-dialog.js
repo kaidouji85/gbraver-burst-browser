@@ -45,6 +45,7 @@ export class LoginDialog implements DOMDialog {
     this._dialog = (dialog instanceof HTMLElement) ? dialog : document.createElement('div');
 
     this._loginEntering = new LoginEntering();
+    this._loginEntering.show();
     this._dialog.appendChild(this._loginEntering.getRootHTMLElement());
 
     this._unsubscribers = [
