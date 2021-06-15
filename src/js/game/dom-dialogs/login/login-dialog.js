@@ -6,6 +6,8 @@ import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {pushDOMStream} from '../../../dom/push/push-dom';
 import type {Unsubscriber} from "../../../stream/core";
+import {pop} from "../../../dom/animation/pop";
+import {Exclusive} from "../../../exclusive/exclusive";
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
@@ -16,6 +18,7 @@ export class LoginDialog implements DOMDialog {
   _closeButton: HTMLButtonElement;
   _closer: HTMLImageElement;
   _unsubscribers: Unsubscriber[];
+  _exclusive: Exclusive;
 
   /** 
    * コンストラクタ
@@ -77,7 +80,11 @@ export class LoginDialog implements DOMDialog {
       pushDOMStream(this._closeButton).subscribe(() => {
         this._onCloseButtonPush();
       }),
+      pushDOMStream(this._closer).subscribe(() => {
+        this._onCloserPush();
+      }),
     ];
+    this._exclusive = new Exclusive();
   }
 
   /**
@@ -102,14 +109,28 @@ export class LoginDialog implements DOMDialog {
    * ログインボタンが押された時の処理
    */
   _onLoginPush(): void {
-    // TODO ログインAPI呼び出しをする
-    console.log(this._userName.value, this._password.value);
+    this._exclusive.execute(async () => {
+      await pop(this._submit);
+      // TODO ログインAPI呼び出しをする
+      console.log(this._userName.value, this._password.value);
+    });
   }
 
   /**
    * 閉じるボタンが押された時の処理
    */
   _onCloseButtonPush(): void {
-    // NOP
+    this._exclusive.execute(async () => {
+      await pop(this._closeButton);
+    });
+  }
+
+  /**
+   * クローザーを押した時の処理
+   */
+  _onCloserPush(): void {
+    this._exclusive.execute(async () => {
+      await pop(this._closer, 1.3);
+    });
   }
 }
