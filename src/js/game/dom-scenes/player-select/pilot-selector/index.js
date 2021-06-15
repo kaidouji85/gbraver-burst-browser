@@ -27,7 +27,7 @@ type DataIDs = {
 };
 
 /**
- *　ルート要素のinnerHTML
+ * ルート要素のinnerHTML
  *
  * @param ids data-idを集めたもの
  * @return innerHTML
