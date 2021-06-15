@@ -16,19 +16,67 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
 import {RxjsStreamSource} from "../../../../stream/rxjs";
 
 /** ルートHTML要素 class */
-export const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
+const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
+
+/** data-idを集めたもの */
+type DataIDs = {
+  dummyStatus: string,
+  okButton: string,
+  prevButton: string,
+  icons: string
+};
 
 /**
- * アームドーザアイコン関連オブジェクト
+ * ルート要素のinnerHTML
+ *
+ * @param ids
+ * @return innerHTML
  */
+function rootInnerHTML(ids: DataIDs): string {
+  return `
+    <div data-id="${ids.dummyStatus}"></div>
+    <div class="${ROOT_CLASS_NAME}__icons" data-id="${ids.icons}"></div>
+    <div class="${ROOT_CLASS_NAME}__controllers">
+      <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${ids.prevButton}">戻る</button>
+      <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${ids.okButton}">これで出撃</button>
+    </div>
+  `;
+}
+
+/** ルート要素の子孫要素 */
+type Elements = {
+  dummyStatus: HTMLElement,
+  okButton: HTMLElement,
+  prevButton: HTMLElement,
+  icons: HTMLElement
+}
+
+/**
+ * ルート要素から子孫要素を抽出する
+ *
+ * @param root ルート要素
+ * @param ids data-idを集めたもの
+ * @return 抽出結果
+ */
+function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const dummyStatus = root.querySelector(`[data-id="${ids.dummyStatus}"]`)
+    ?? document.createElement('div');
+  const icons = root.querySelector(`[data-id="${ids.icons}"]`)
+    ?? document.createElement('div');
+  const okButton = root.querySelector(`[data-id="${ids.okButton}"]`)
+    ?? document.createElement('button');
+  const prevButton = root.querySelector(`[data-id="${ids.prevButton}"]`)
+    ?? document.createElement('button');
+  return {dummyStatus, icons, okButton, prevButton};
+}
+
+/** アームドーザアイコン関連オブジェクト */
 type IconObjects = {
   armdozerId: ArmDozerId,
   icon: ArmdozerIcon,
 };
 
-/**
- * アームドーザセレクタ
- */
+/** アームドーザセレクタ */
 export class ArmdozerSelector {
   _armdozerId: ArmDozerId;
   _exclusive: Exclusive;
@@ -65,56 +113,35 @@ export class ArmdozerSelector {
     this._decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
 
-    const dummyStatusId = domUuid();
-    const okButtonId = domUuid();
-    const prevButtonId = domUuid();
-    const iconsId = domUuid();
+    const dataIDs = {dummyStatus: domUuid(), okButton: domUuid(), prevButton: domUuid(), icons: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = `
-      <div data-id="${dummyStatusId}"></div>
-      <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
-      <div class="${ROOT_CLASS_NAME}__controllers">
-        <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${prevButtonId}">戻る</button>
-        <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}">これで出撃</button>
-      </div>
-      
-    `;
-    const dummyStatus = this._root.querySelector(`[data-id="${dummyStatusId}"]`)
-      ?? document.createElement('div');
+    this._root.innerHTML = rootInnerHTML(dataIDs);
+    const elements = extractElements(this._root, dataIDs);
+
     this._armdozerStatus = new ArmdozerStatus();
     this._armdozerStatus.switch(this._armdozerId);
-    replaceDOM(dummyStatus, this._armdozerStatus.getRootHTMLElement());
+    replaceDOM(elements.dummyStatus, this._armdozerStatus.getRootHTMLElement());
 
-    const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
-      ?? document.createElement('div');
-    this._armdozerIcons = armDozerIds.map(v => ({
-      armdozerId: v,
-      icon: createArmdozerIcon(resources, v)
-    }));
+    this._armdozerIcons = armDozerIds
+      .map(v => ({armdozerId: v, icon: createArmdozerIcon(resources, v)}));
     this._armdozerIcons.forEach(v => {
-        const isSelected = v.armdozerId === initialArmdozerId;
-        v.icon.selected(isSelected);
-        icons.appendChild(v.icon.getRootHTMLElement());
+        v.icon.selected(v.armdozerId === initialArmdozerId);
+        elements.icons.appendChild(v.icon.getRootHTMLElement());
       });
 
-    this._okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
-      ?? document.createElement('button');
-
-    this._prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
-      ?? document.createElement('button');
+    this._okButton = elements.okButton;
+    this._prevButton = elements.prevButton;
 
     this._unsubscribers = [
       ...this._armdozerIcons.map(v =>
         v.icon.selectedNotifier().subscribe(() => {
           this._onArmdozerSelect(v.armdozerId);
         })),
-      pushDOMStream(this._okButton).subscribe(() => {
-        this._onOkButtonPush();
-      }),
-      pushDOMStream(this._prevButton).subscribe(() => {
-        this._onPrevButtonPush();
-      }),
+      pushDOMStream(this._okButton)
+        .subscribe(this._onOkButtonPush.bind(this)),
+      pushDOMStream(this._prevButton)
+        .subscribe(this._onPrevButtonPush.bind(this)),
     ];
   }
 

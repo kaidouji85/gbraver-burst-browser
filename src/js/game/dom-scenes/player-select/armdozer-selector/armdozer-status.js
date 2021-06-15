@@ -5,14 +5,73 @@ import {ArmDozers} from "gbraver-burst-core";
 import {burstTemplate} from "./status-template";
 import {domUuid} from "../../../../uuid/dom-uuid";
 
-/**
- * ルート要素のクラス名
- */
+/**ルート要素のクラス名 */
 const ROOT_CLASS_NAME = 'player-select__armdozer-status';
 
+/** data-idを集めたもの */
+type DataIDs = {
+  name: string,
+  hp: string,
+  power: string,
+  speed: string,
+  burst: string
+};
+
 /**
- * アームドーザステータス
+ * ルート要素のinnerHTML
+ *
+ * @param ids data-idを集めたもの
+ * @return innerHTML
  */
+function rootInnerHTML(ids: DataIDs): string {
+  return `
+    <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
+    <div class="${ROOT_CLASS_NAME}__basic">
+      <span class="${ROOT_CLASS_NAME}__basic__hp-label">HP</span>
+      <span class="${ROOT_CLASS_NAME}__basic__hp-value" data-id="${ids.hp}"></span>
+      <span class="${ROOT_CLASS_NAME}__basic__power-label">攻撃</span>
+      <span class="${ROOT_CLASS_NAME}__basic__power-value" data-id="${ids.power}" ></span>
+      <span class="${ROOT_CLASS_NAME}__basic__power-label">機動</span>
+      <span class="${ROOT_CLASS_NAME}__basic__power-value" data-id="${ids.speed}" ></span>
+    </div>
+    <div class="${ROOT_CLASS_NAME}__burst">
+      <span class="${ROOT_CLASS_NAME}__burst__label">バースト</span>
+      <span class="${ROOT_CLASS_NAME}__burst__content" data-id="${ids.burst}"></span>
+    </div>
+  `;
+}
+
+/** ルート要素の子孫要素 */
+type Elements = {
+  name: HTMLElement,
+  hp: HTMLElement,
+  power: HTMLElement,
+  speed: HTMLElement,
+  burst: HTMLElement
+};
+
+/**
+ * ルート要素から子孫要素を抽出する
+ *
+ * @param root ルート要素
+ * @param ids data-idを集めたもの
+ * @return 抽出結果
+ */
+function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const name = root.querySelector(`[data-id="${ids.name}"]`)
+    ?? document.createElement('div');
+  const hp= root.querySelector(`[data-id="${ids.hp}"]`)
+    ?? document.createElement('div');
+  const power= root.querySelector(`[data-id="${ids.power}"]`)
+    ?? document.createElement('div');
+  const speed= root.querySelector(`[data-id="${ids.speed}"]`)
+    ?? document.createElement('div');
+  const burst = root.querySelector(`[data-id="${ids.burst}"]`)
+    ?? document.createElement('div');
+  return {name, hp, power, speed, burst};
+}
+
+/** アームドーザステータス */
 export class ArmdozerStatus {
   _root: HTMLElement;
   _name: HTMLElement;
@@ -25,40 +84,17 @@ export class ArmdozerStatus {
    * コンストラクタ
    */
   constructor() {
-    const nameId = domUuid();
-    const hpId = domUuid();
-    const powerId = domUuid();
-    const speedId = domUuid();
-    const burstId = domUuid();
-    
+    const dataIDs = {name: domUuid(), hp: domUuid(), power: domUuid(), speed: domUuid(), burst: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = `
-      <div class="${ROOT_CLASS_NAME}__name" data-id="${nameId}"></div>
-      <div class="${ROOT_CLASS_NAME}__basic">
-        <span class="${ROOT_CLASS_NAME}__basic__hp-label">HP</span>
-        <span class="${ROOT_CLASS_NAME}__basic__hp-value" data-id="${hpId}" ></span>
-        <span class="${ROOT_CLASS_NAME}__basic__power-label">攻撃</span>
-        <span class="${ROOT_CLASS_NAME}__basic__power-value" data-id="${powerId}" ></span>
-        <span class="${ROOT_CLASS_NAME}__basic__power-label">機動</span>
-        <span class="${ROOT_CLASS_NAME}__basic__power-value" data-id="${speedId}" ></span>
-      </div>
-      <div class="${ROOT_CLASS_NAME}__burst">
-        <span class="${ROOT_CLASS_NAME}__burst__label">バースト</span>
-        <span class="${ROOT_CLASS_NAME}__burst__content" data-id="${burstId}"></span>
-      </div>
-    `;
+    this._root.innerHTML = rootInnerHTML(dataIDs);
+    const elements = extractElements(this._root, dataIDs);
 
-    this._name = this._root.querySelector(`[data-id="${nameId}"]`)
-      ?? document.createElement('div');
-    this._hp= this._root.querySelector(`[data-id="${hpId}"]`)
-      ?? document.createElement('div');
-    this._power= this._root.querySelector(`[data-id="${powerId}"]`)
-      ?? document.createElement('div');
-    this._speed= this._root.querySelector(`[data-id="${speedId}"]`)
-      ?? document.createElement('div');
-    this._burst = this._root.querySelector(`[data-id="${burstId}"]`)
-      ?? document.createElement('div');
+    this._name = elements.name
+    this._hp= elements.hp;
+    this._power = elements.power;
+    this._speed= elements.speed;
+    this._burst = elements.burst;
   }
 
   /**

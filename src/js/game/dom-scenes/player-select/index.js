@@ -13,17 +13,53 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import {getDedicatedPilot} from "./dedicated-pilot";
 
+/** data-idを集めたもの */
+type DataIDs = {
+  selector: string,
+  working: string
+};
+
 /**
- * プレイヤーの選択内容
+ * ルート要素のinnerHTML
+ *
+ * @param ids data-idを集めたもの
+ * @return innerHTML
  */
+function rootInnerHTML(ids: DataIDs): string {
+  return `
+    <div class="player-select__working" data-id="${ids.working}"></div>
+    <div class="player-select__selector" data-id="${ids.selector}"></div>
+  `;
+}
+
+/** ルート要素の子孫要素 */
+type Elements = {
+  selector: HTMLElement,
+  working: HTMLElement,
+};
+
+/**
+ * ルート要素から子孫要素を抽出する
+ *
+ * @param root ルート要素
+ * @param ids data-idを集めたもの
+ * @return 抽出結果
+ */
+function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const working = root.querySelector(`[data-id="${ids.working}"]`)
+    ?? document.createElement('div');
+  const selector = root.querySelector(`[data-id="${ids.selector}"]`)
+    ?? document.createElement('div');
+  return {working, selector};
+}
+
+/** プレイヤーの選択内容 */
 type PlayerDecide = {
   armdozerId: ArmDozerId,
   pilotId: PilotId
 };
 
-/**
- * プレイヤーセレクト プレゼンテーション
- */
+/** プレイヤーセレクト */
 export class PlayerSelect implements DOMScene {
   _root: HTMLElement;
   _armdozerBustShot: ArmdozerBustShotContainer;
@@ -57,58 +93,42 @@ export class PlayerSelect implements DOMScene {
     this._armdozerId = ArmDozerIdList.SHIN_BRAVER
     this._pilotId = PilotIds.SHINYA;
 
-    const selectorId = domUuid();
-    const workingId = domUuid();
-
     this._playerDecide = new RxjsStreamSource();
     this._prev = new RxjsStreamSource();
 
+    const dataIDs = {selector: domUuid(), working: domUuid()};
     this._root = document.createElement('div');
     this._root.className = 'player-select';
-    this._root.innerHTML = `
-      <div class="player-select__working" data-id="${workingId}"></div>
-      <div class="player-select__selector" data-id="${selectorId}"></div>
-    `;
-
-    const working = this._root.querySelector(`[data-id="${workingId}"]`)
-      ?? document.createElement('div');
+    this._root.innerHTML = rootInnerHTML(dataIDs);
+    const elements = extractElements(this._root, dataIDs);
 
     this._armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds, this._armdozerId);
-    working.appendChild(this._armdozerBustShot.getRootHTMLElement());
+    elements.working.appendChild(this._armdozerBustShot.getRootHTMLElement());
 
     this._pilotBustShot = new PilotBustShotContainer(resources, pilotIds, this._pilotId);
     this._pilotBustShot.hidden();
-    working.appendChild(this._pilotBustShot.getRootHTMLElement());
-
-    const selector = this._root.querySelector(`[data-id="${selectorId}"]`)
-      ?? document.createElement('div');
+    elements.working.appendChild(this._pilotBustShot.getRootHTMLElement());
 
     this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds, this._armdozerId);
-    selector.appendChild(this._armdozerSelector.getRootHTMLElement());
+    elements.selector.appendChild(this._armdozerSelector.getRootHTMLElement());
 
     this._pilotSelector = new PilotSelector(resources, pilotIds, this._pilotId);
     this._pilotSelector.hidden();
-    selector.appendChild(this._pilotSelector.getRootHTMLElement());
+    elements.selector.appendChild(this._pilotSelector.getRootHTMLElement());
 
     this._unsubscribers = [
-      this._armdozerSelector.changeNotifier().subscribe(v => {
-        this._onArmdozerChange(v);
-      }),
-      this._armdozerSelector.decideNotifier().subscribe(v => {
-        this._onArmdozerDecided(v);
-      }),
-      this._armdozerSelector.prevNotifier().subscribe(() => {
-        this._onArmdozerSelectorPrev();
-      }),
-      this._pilotSelector.changeNotifier().subscribe(v => {
-        this._onPilotChange(v);
-      }),
-      this._pilotSelector.decideNotifier().subscribe(v => {
-        this._onPilotDecided(v);
-      }),
-      this._pilotSelector.prevNotifier().subscribe(() => {
-        this._onPilotSelectorPrev();
-      })
+      this._armdozerSelector.changeNotifier()
+        .subscribe(this._onArmdozerChange.bind(this)),
+      this._armdozerSelector.decideNotifier()
+        .subscribe(this._onArmdozerDecided.bind(this)),
+      this._armdozerSelector.prevNotifier()
+        .subscribe(this._onArmdozerSelectorPrev.bind(this)),
+      this._pilotSelector.changeNotifier()
+        .subscribe(this._onPilotChange.bind(this)),
+      this._pilotSelector.decideNotifier()
+        .subscribe(this._onPilotDecided.bind(this)),
+      this._pilotSelector.prevNotifier()
+        .subscribe(this._onPilotSelectorPrev.bind(this))
     ];
   }
 
