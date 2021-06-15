@@ -5,14 +5,53 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {Pilots} from "gbraver-burst-core";
 import {pilotSkillTemplate} from "./status-template";
 
-/**
- * ルート要素のクラス名
- */
+/** ルート要素のクラス名 */
 const ROOT_CLASS_NAME = 'player-select__pilot-status';
 
+/** data-idを集めたもの */
+type DataIDs = {
+  name: string,
+  skill: string,
+};
+
 /**
- * パイロットステータス
+ * ルート要素のinnerHTML
+ *
+ * @param ids data-idを集めたもの
+ * @return innerHTML
  */
+function rootInnerHTML(ids: DataIDs): string {
+  return `
+    <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
+    <div class="${ROOT_CLASS_NAME}__skill">
+      <span class="${ROOT_CLASS_NAME}__skill__label">スキル</span>
+      <span class="${ROOT_CLASS_NAME}__skill__content" data-id="${ids.skill}"></span>
+    </div>
+  `;
+}
+
+/** ルート要素の子孫要素 */
+type Elements = {
+  name: HTMLElement,
+  skill: HTMLElement,
+};
+
+/**
+ * ルート要素から子孫要素を抽出する
+ *
+ * @param root ルート要素
+ * @param ids data-idを集めたもの
+ * @return 抽出結果
+ */
+function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const name = root.querySelector(`[data-id="${ids.name}"]`)
+    ?? document.createElement('div');
+  const skill = root.querySelector(`[data-id="${ids.skill}"]`)
+    ?? document.createElement('div');
+  return {name, skill};
+}
+
+/** パイロットステータス */
 export class PilotStatus {
   _root: HTMLElement;
   _name: HTMLElement;
@@ -22,23 +61,14 @@ export class PilotStatus {
    * コンストラクタ
    */
   constructor() {
-    const nameId = domUuid();
-    const skillId = domUuid();
-
+    const dataIDs = {name: domUuid(), skill: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = `
-      <div class="${ROOT_CLASS_NAME}__name" data-id="${nameId}"></div>
-      <div class="${ROOT_CLASS_NAME}__skill">
-        <span class="${ROOT_CLASS_NAME}__skill__label">スキル</span>
-        <span class="${ROOT_CLASS_NAME}__skill__content" data-id="${skillId}"></span>
-      </div>
-    `;
+    this._root.innerHTML = rootInnerHTML(dataIDs);
 
-    this._name = this._root.querySelector(`[data-id="${nameId}"]`)
-      ?? document.createElement('div');
-    this._skill = this._root.querySelector(`[data-id="${skillId}"]`)
-      ?? document.createElement('div');
+    const elements = extractElements(this._root, dataIDs);
+    this._name = elements.name;
+    this._skill = elements.skill;
   }
 
   /**

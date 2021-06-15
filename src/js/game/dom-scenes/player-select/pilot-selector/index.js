@@ -15,14 +15,62 @@ import {createPilotIcon} from "./create-pilot-icon";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
 import {RxjsStreamSource} from "../../../../stream/rxjs";
 
-/**
- * ルート要素のclass名
- */
+/**ルート要素のclass名 */
 export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
 
+/** data-idを集めたもの*/
+type DataIDs = {
+  dummyStatus: string,
+  icons: string,
+  okButton: string,
+  prevButton: string
+};
+
 /**
- * パイロットセレクタ
+ * ルート要素のinnerHTML
+ *
+ * @param ids data-idを集めたもの
+ * @return innerHTML
  */
+function rootInnerHTML(ids: DataIDs): string {
+  return `
+    <div data-id="${ids.dummyStatus}"></div>
+    <div class="${ROOT_CLASS_NAME}__icons" data-id="${ids.icons}"></div>
+    <div class="${ROOT_CLASS_NAME}__controllers">
+    <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${ids.prevButton}">戻る</button>
+    <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${ids.okButton}">これを載せる</button>
+    </div>
+  `;
+}
+
+/** ルート要素の子孫要素 */
+type Elements = {
+  dummyStatus: HTMLElement,
+  icons: HTMLElement,
+  okButton: HTMLElement,
+  prevButton: HTMLElement,
+};
+
+/**
+ *  ルート要素の子孫要素を抽出する
+ *
+ * @param root ルート要素
+ * @param ids data-idを集めたもの
+ * @return 抽出結果
+ */
+function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const dummyStatus = root.querySelector(`[data-id="${ids.dummyStatus}"]`)
+    ?? document.createElement('div');
+  const icons = root.querySelector(`[data-id="${ids.icons}"]`)
+    ?? document.createElement('div');
+  const okButton = root.querySelector(`[data-id="${ids.okButton}"]`)
+    ?? document.createElement('button');
+  const prevButton = root.querySelector(`[data-id="${ids.prevButton}"]`)
+    ?? document.createElement('button');
+  return {dummyStatus, icons, okButton, prevButton};
+}
+
+/**パイロットセレクタ */
 export class PilotSelector {
   _pilotId: PilotId;
   _exclusive: Exclusive;
@@ -47,9 +95,7 @@ export class PilotSelector {
    */
   constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
     this._pilotId = initialPilotId;
-
     this._exclusive = new Exclusive();
-
     this._change = new RxjsStreamSource();
     this._decide = new RxjsStreamSource();
     this._prev = new RxjsStreamSource();
@@ -59,57 +105,34 @@ export class PilotSelector {
     this._decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
 
-    const dummyStatusId = domUuid();
-    const iconsId = domUuid();
-    const okButtonId = domUuid();
-    const prevButtonId = domUuid();
-
+    const dataIDs = {dummyStatus: domUuid(), icons: domUuid(), okButton: domUuid(), prevButton: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = `
-      <div data-id="${dummyStatusId}"></div>
-      <div class="${ROOT_CLASS_NAME}__icons" data-id="${iconsId}"></div>
-      <div class="${ROOT_CLASS_NAME}__controllers">
-      <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${prevButtonId}">戻る</button>
-      <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${okButtonId}">これを載せる</button>
-      </div>
-    `;
+    this._root.innerHTML = rootInnerHTML(dataIDs);
+    const elements = extractElements(this._root, dataIDs);
 
     this._pilotStatus = new PilotStatus();
     this._pilotStatus.switch(this._pilotId);
-    const dummyStatus = this._root.querySelector(`[data-id="${dummyStatusId}"]`)
-      ?? document.createElement('div');
-    replaceDOM(dummyStatus, this._pilotStatus.getRootHTMLElement());
+    replaceDOM(elements.dummyStatus, this._pilotStatus.getRootHTMLElement());
 
-    const icons = this._root.querySelector(`[data-id="${iconsId}"]`)
-      ?? document.createElement('div');
-    this._pilotIcons = pilotIds.map(v => ({
-      pilotId: v,
-      icon: createPilotIcon(resources, v)
-    }));
+    this._pilotIcons = pilotIds.map(v => ({pilotId: v, icon: createPilotIcon(resources, v)}));
     this._pilotIcons.forEach(v => {
-      const isSelected = v.pilotId === initialPilotId;
-      v.icon.selected(isSelected);
-      icons.appendChild(v.icon.getRootHTMLElement());
+      v.icon.selected(v.pilotId === initialPilotId);
+      elements.icons.appendChild(v.icon.getRootHTMLElement());
     });
 
-    this._okButton = this._root.querySelector(`[data-id="${okButtonId}"]`)
-      ?? document.createElement('button');
-
-    this._prevButton = this._root.querySelector(`[data-id="${prevButtonId}"]`)
-      ?? document.createElement('button');
+    this._okButton = elements.okButton;
+    this._prevButton = elements.prevButton;
 
     this._unsubscribers = [
       ...this._pilotIcons.map(v =>
         v.icon.selectedNotifier().subscribe(() =>{
           this._onPilotChange(v.pilotId);
         })),
-      pushDOMStream(this._okButton).subscribe(() => {
-        this._onOkButtonPush();
-      }),
-      pushDOMStream(this._prevButton).subscribe(() => {
-        this._onPrevButtonPush();
-      }),
+      pushDOMStream(this._okButton)
+        .subscribe(this._onOkButtonPush.bind(this)),
+      pushDOMStream(this._prevButton)
+        .subscribe(this._onPrevButtonPush.bind(this)),
     ];
   }
 
