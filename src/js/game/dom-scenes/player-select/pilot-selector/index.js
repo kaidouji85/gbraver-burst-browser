@@ -15,10 +15,42 @@ import {createPilotIcon} from "./create-pilot-icon";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
 import {RxjsStreamSource} from "../../../../stream/rxjs";
 
-/**
- * ルート要素のclass名
- */
+/**ルート要素のclass名 */
 export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
+
+type DataIDs = {
+  dummyStatus: string,
+  icons: string,
+  okButton: string,
+  prevButton: string
+};
+
+function roomInnerHTML(ids: DataIDs): string {
+  return `
+    <div data-id="${ids.dummyStatus}"></div>
+    <div class="${ROOT_CLASS_NAME}__icons" data-id="${ids.icons}"></div>
+    <div class="${ROOT_CLASS_NAME}__controllers">
+    <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${ids.prevButton}">戻る</button>
+    <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${ids.okButton}">これを載せる</button>
+    </div>
+  `;
+}
+
+type Elements = {
+  dummyStatus: HTMLElement,
+  okButton: HTMLElement,
+  prevButton: HTMLElement,
+};
+
+function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const dummyStatus = this._root.querySelector(`[data-id="${ids.dummyStatus}"]`)
+    ?? document.createElement('div');
+  const okButton = root.querySelector(`[data-id="${ids.okButton}"]`)
+    ?? document.createElement('button');
+  const prevButton = root.querySelector(`[data-id="${ids.prevButton}"]`)
+    ?? document.createElement('button');
+  return {dummyStatus, okButton, prevButton};
+}
 
 /**
  * パイロットセレクタ
