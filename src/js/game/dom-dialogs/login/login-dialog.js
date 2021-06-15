@@ -13,6 +13,50 @@ import {LoginEntering} from './login-entering';
 import type {InputComplete} from './login-entering';
 import type {IdPasswordLogin} from '@gbraver-burst-network/core';
 
+/** data-idを集めたもの */
+type DataIDs = {
+  dialog: string,
+  closer: string,
+};
+
+/**
+ * ルート要素のinnerHTML
+ *
+ * @param ids data-idを集めたもの
+ * @param closerPath クロージャ画像のパス
+ * @return innerHTML
+ */
+function rootInnerHTML(ids: DataIDs, closerPath: string): string {
+  return `
+    <div class="login__background"></div>
+    <img class="login__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}"></img>
+    <div class="login__dialog" data-id="${ids.dialog}"></div>
+  `;
+}
+
+/** ルート要素の子孫要素 */
+type Elements = {
+  dialog: HTMLElement,
+  closer: HTMLImageElement,
+};
+
+/**
+ * ルート要素から子孫要素を抽出する
+ *
+ * @param root ルート要素
+ * @param ids data-idを集めたもの
+ * @return 抽出結果
+ */
+function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
+  const closer = (closerElement instanceof HTMLImageElement) ? closerElement : document.createElement('img');
+
+  const dialogElements = root.querySelector(`[data-id="${ids.dialog}"]`);
+  const dialog = (dialogElements instanceof HTMLElement) ? dialogElements : document.createElement('div');
+
+  return {closer, dialog};
+}
+
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
   _login: IdPasswordLogin;
@@ -37,21 +81,14 @@ export class LoginDialog implements DOMDialog {
     const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
       ?.path ?? '';
 
-    const dialogID = domUuid();  
-    const closerID = domUuid();
+    const dataIDs = {dialog: domUuid(), closer: domUuid()};
     this._root = document.createElement('div');
     this._root.className = 'login';
-    this._root.innerHTML = `
-      <div class="login__background"></div>
-      <img class="login__closer" alt="閉じる" src="${closerPath}" data-id="${closerID}"></img>
-      <div class="login__dialog" data-id="${dialogID}"></div>
-    `;
+    this._root.innerHTML = rootInnerHTML(dataIDs, closerPath);
+    const elements = extractElements(this._root, dataIDs);
 
-    const closer = this._root.querySelector(`[data-id="${closerID}"]`);
-    this._closer = (closer instanceof HTMLImageElement) ? closer : document.createElement('img');
-
-    const dialog = this._root.querySelector(`[data-id="${dialogID}"]`);
-    this._dialog = (dialog instanceof HTMLElement) ? dialog : document.createElement('div');
+    this._closer =elements.closer;
+    this._dialog = elements.dialog;
 
     this._loginEntering = new LoginEntering(caption);
     this._loginEntering.show();
