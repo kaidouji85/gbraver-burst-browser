@@ -9,6 +9,6 @@ export default {
 };
 
 export const dialog: DOMStubStory = domStub(resources => {
-  const dialog = new LoginDialog(resources);
+  const dialog = new LoginDialog(resources, 'ログインしてください');
   return dialog.getRootHTMLElement();
 });

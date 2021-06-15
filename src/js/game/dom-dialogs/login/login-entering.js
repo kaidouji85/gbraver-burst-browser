@@ -33,8 +33,10 @@ export class LoginEntering {
 
   /** 
    * コンストラクタ
+   * 
+   * @param caption 入力フォームに表示されるメッセージ
    */
-  constructor() {
+  constructor(caption: string) {
     const userNameID = domUuid();
     const passwordID = domUuid();
     const submitID = domUuid();
@@ -42,7 +44,7 @@ export class LoginEntering {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = `
-      <div class="${ROOT_CLASS_NAME}__caption">カジュアルマッチを始めるには、ログインをしてください</div>
+      <div class="${ROOT_CLASS_NAME}__caption">${caption}</div>
       <form class="${ROOT_CLASS_NAME}__form">
         <div class="${ROOT_CLASS_NAME}__form__user-name">
           <label class="${ROOT_CLASS_NAME}__form__user-name__label">userid</label>

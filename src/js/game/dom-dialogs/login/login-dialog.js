@@ -23,8 +23,9 @@ export class LoginDialog implements DOMDialog {
    * コンストラクタ
    * 
    * @param resources リソース管理オブジェクト
+   * @param caption 入力フォームに表示されるメッセージ
    */
-  constructor(resources: Resources) {
+  constructor(resources: Resources, caption: string) {
     const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
       ?.path ?? '';
 
@@ -44,7 +45,7 @@ export class LoginDialog implements DOMDialog {
     const dialog = this._root.querySelector(`[data-id="${dialogID}"]`);
     this._dialog = (dialog instanceof HTMLElement) ? dialog : document.createElement('div');
 
-    this._loginEntering = new LoginEntering();
+    this._loginEntering = new LoginEntering(caption);
     this._loginEntering.show();
     this._dialog.appendChild(this._loginEntering.getRootHTMLElement());
 
