@@ -70,29 +70,39 @@
   z-index: var(--zindex-dialog)
 }
 
-.login__dialog__caption {
+/** 
+ * ログイン情報入力中
+ */
+ .login-entering {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-entering__caption {
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
-.login__dialog__form__user-name {
+.login-entering__form__user-name {
   display: flex;
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
-.login__dialog__form__password {
+.login-entering__form__password {
   display: flex;
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
-.login__dialog__form__user-name__label, .login__dialog__form__password__label {
+.login-entering__form__user-name__label, .login-entering__form__password__label {
   width: calc(var(--responsive-font-size) * 5.5);
 }
 
-.login__dialog__form__user-name__input, .login__dialog__form__password__input {
+.login-entering__form__user-name__input, .login-entering__form__password__input {
   font-size: var(--responsive-font-size);
 }
 
-.login__dialog__form__footer__sumit {
+.login-entering__form__footer__sumit {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
@@ -103,7 +113,7 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.login__dialog__form__footer__close {
+.login-entering__form__footer__close {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
