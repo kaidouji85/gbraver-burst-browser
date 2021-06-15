@@ -18,6 +18,7 @@ import {RxjsStreamSource} from "../../../../stream/rxjs";
 /**ルート要素のclass名 */
 export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
 
+/** data-idを集めたもの*/
 type DataIDs = {
   dummyStatus: string,
   icons: string,
@@ -25,6 +26,12 @@ type DataIDs = {
   prevButton: string
 };
 
+/**
+ *　ルート要素のinnerHTML
+ *
+ * @param ids data-idを集めたもの
+ * @return innerHTML
+ */
 function rootInnerHTML(ids: DataIDs): string {
   return `
     <div data-id="${ids.dummyStatus}"></div>
@@ -36,6 +43,7 @@ function rootInnerHTML(ids: DataIDs): string {
   `;
 }
 
+/** ルート要素の子孫要素 */
 type Elements = {
   dummyStatus: HTMLElement,
   icons: HTMLElement,
@@ -43,6 +51,13 @@ type Elements = {
   prevButton: HTMLElement,
 };
 
+/**
+ *  ルート要素の子孫要素を抽出する
+ *
+ * @param root ルート要素
+ * @param ids data-idを集めたもの
+ * @return 抽出結果
+ */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const dummyStatus = root.querySelector(`[data-id="${ids.dummyStatus}"]`)
     ?? document.createElement('div');
