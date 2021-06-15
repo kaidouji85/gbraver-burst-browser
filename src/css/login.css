@@ -28,6 +28,28 @@
   z-index: var(--zindex-background);
 }
 
+.login__closer {
+  --icon-width: 48px;
+  --icon-height: 48px;
+  position: fixed;
+  top: calc(
+      var(--login-dialog-top)
+      - var(--login-dialog-height) / 2
+      - var(--icon-width) / 2
+  );
+  left: calc(
+      var(--login-dialog-left)
+      - var(--login-dialog-width) / 2
+      - var(--icon-height) / 2
+  );
+  width: var(--icon-width);
+  height: var(--icon-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--zindex-close);
+}
+
 .login__dialog {
   width: var(--login-dialog-width);
   height: var(--login-dialog-height);

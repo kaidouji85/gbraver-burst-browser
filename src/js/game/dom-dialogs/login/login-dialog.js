@@ -1,17 +1,27 @@
 // @flow
 
 import type {DOMDialog} from "../dialog";
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
   _root: HTMLElement;
 
-  /** コンストラクタ */
-  constructor() {
+  /** 
+   * コンストラクタ
+   * 
+   * @param resources リソース管理オブジェクト
+   */
+  constructor(resources: Resources) {
+    const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
+      ?.path ?? '';
+
     this._root = document.createElement('div');
     this._root.className = 'login';
     this._root.innerHTML = `
       <div class="login__background"></div>
+      <img class="login__closer" alt="閉じる" src="${closerPath}"></img>
       <div class="login__dialog">
         <div class="login__dialog__caption">カジュアルマッチを始めるには、ログインをしてください</div>
         <form class="login__dialog__form">

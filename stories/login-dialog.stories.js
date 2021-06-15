@@ -8,7 +8,7 @@ export default {
   title: 'login',
 };
 
-export const dialog: DOMStubStory = domStub(() => {
-  const dialog = new LoginDialog();
+export const dialog: DOMStubStory = domStub(resources => {
+  const dialog = new LoginDialog(resources);
   return dialog.getRootHTMLElement();
 });
