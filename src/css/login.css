@@ -50,6 +50,10 @@
   z-index: var(--zindex-close);
 }
 
+.login__closer--invisible {
+  display: none;
+}
+
 .login__dialog {
   width: var(--login-dialog-width);
   height: var(--login-dialog-height);

@@ -14,6 +14,13 @@ import type {InputComplete} from './login-entering';
 import type {IdPasswordLogin} from '@gbraver-burst-network/core';
 import {LoginExecuting} from "./login-executing";
 
+/** ルート要素のcssクラス名 */
+const ROOT_CLASS_NAME = 'login';
+/** クローザーのcssクラス名 */
+const CLOSER_CLASS_NAME = `${ROOT_CLASS_NAME}__closer`;
+/** クローザーが非表示の際のcssクラス名 */
+const INVISIBLE_CLOSER_CLASS_NAME = `${CLOSER_CLASS_NAME}--invisible`;
+
 /** data-idを集めたもの */
 type DataIDs = {
   dialog: string,
@@ -29,9 +36,9 @@ type DataIDs = {
  */
 function rootInnerHTML(ids: DataIDs, closerPath: string): string {
   return `
-    <div class="login__background"></div>
-    <img class="login__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
-    <div class="login__dialog" data-id="${ids.dialog}"></div>
+    <div class="${ROOT_CLASS_NAME}__background"></div>
+    <img class="${CLOSER_CLASS_NAME}" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
+    <div class="${ROOT_CLASS_NAME}__dialog" data-id="${ids.dialog}"></div>
   `;
 }
 
@@ -66,6 +73,7 @@ export class LoginDialog implements DOMDialog {
   _closer: HTMLImageElement;
   _loginEntering: LoginEntering;
   _loginExecuting: LoginExecuting;
+  _loginSuccess: StreamSource<void>;
   _closeDialog: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
   _exclusive: Exclusive;
@@ -101,6 +109,7 @@ export class LoginDialog implements DOMDialog {
     this._dialog.appendChild(this._loginExecuting.getRootHTMLElement());
 
     this._closeDialog = new RxjsStreamSource();
+    this._loginSuccess = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._closer)
         .subscribe(this._onCloserPush.bind(this)),
@@ -163,9 +172,32 @@ export class LoginDialog implements DOMDialog {
    */
   _onInputComplete(data: InputComplete): void {
     this._exclusive.execute(async () => {
+      this._switchLoginExecuting();
       const isSuccessLogin = await this._login.login(data.userID, data.password);
-      // TODO 処理分岐をする
-      console.log(isSuccessLogin);
+      if (!isSuccessLogin) {
+        this._switchLoginEntering();
+        return;
+      }
+
+      this._loginSuccess.next();
     });
+  }
+
+  /**
+   * 画面表示をログイン情報入力に切り替える
+   */
+  _switchLoginEntering(): void {
+    this._closer.className = CLOSER_CLASS_NAME;
+    this._loginEntering.show();
+    this._loginExecuting.hidden();
+  }
+
+  /**
+   * 画面表示をログイン中に切り替える
+   */
+  _switchLoginExecuting(): void {
+    this._closer.className = INVISIBLE_CLOSER_CLASS_NAME;
+    this._loginEntering.hidden();
+    this._loginExecuting.show();
   }
 }
