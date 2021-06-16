@@ -103,7 +103,7 @@ export class LoginDialog implements DOMDialog {
     this._closer =elements.closer;
     this._dialog = elements.dialog;
 
-    this._loginEntering = new LoginEntering();
+    this._loginEntering = new LoginEntering(resources);
     this._loginEntering.show();
     this._loginEntering.caption(caption);
     this._dialog.appendChild(this._loginEntering.getRootHTMLElement());

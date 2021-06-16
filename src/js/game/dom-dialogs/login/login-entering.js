@@ -1,11 +1,14 @@
 // @flow
 
+import {Howl} from 'howler';
 import {domUuid} from "../../../uuid/dom-uuid";
 import {pushDOMStream} from '../../../dom/push/push-dom';
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'login-entering';
@@ -111,6 +114,8 @@ export class LoginEntering {
   _password: HTMLInputElement;
   _submit: HTMLButtonElement;
   _closeButton: HTMLButtonElement;
+  _changeValue: typeof Howl;
+  _pushButton: typeof Howl;
   _inputCoomplete: StreamSource<InputComplete>;
   _close: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
@@ -118,8 +123,10 @@ export class LoginEntering {
 
   /** 
    * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
+  constructor(resources: Resources) {
     const dataIDs = {caption: domUuid(), error: domUuid(), userID: domUuid(),
       password: domUuid(), submit: domUuid(), closeButton: domUuid()};
     this._root = document.createElement('div');
@@ -142,7 +149,13 @@ export class LoginEntering {
       pushDOMStream(this._closeButton)
         .subscribe(this._onCloseButtonPush.bind(this)),
     ];
+
     this._exclusive = new Exclusive();
+
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
+    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?.sound ?? new Howl();
   }
 
   /**
@@ -222,7 +235,10 @@ export class LoginEntering {
    */
   _onLoginPush(): void {
     this._exclusive.execute(async () => {
-      await pop(this._submit);
+      await Promise.all([
+        pop(this._submit),
+        this._pushButton.play()
+      ]);
       this._inputCoomplete.next({userID: this._userID.value, password: this._password.value});
     });
   }
@@ -232,7 +248,10 @@ export class LoginEntering {
    */
   _onCloseButtonPush(): void {
     this._exclusive.execute(async () => {
-      await pop(this._closeButton);
+      await Promise.all([
+        pop(this._closeButton),
+        this._changeValue.play()
+      ]);
       this._close.next();
     });
   }

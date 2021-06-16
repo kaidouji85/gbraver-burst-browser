@@ -125,6 +125,8 @@ export class Game {
         this._onEndNPCEnding();
       } else if (action.type === 'EndHowToPlay') {
         this._onEndHowToPlay();
+      } else if (action.type === 'LoginCancel') {
+        this._onLoginCancel();
       }
     }));
   }
@@ -184,6 +186,13 @@ export class Game {
     // TODO 詳細な処理を実装する
     const caption = 'カジュアルマッチを始めるにはログインする必要があります';
     this._domDialogs.startLogin(this._resources, this._api, caption);
+  }
+
+  /**
+   * ログイン中断
+   */
+  _onLoginCancel() {
+    this._domDialogs.hidden();
   }
 
   /**
