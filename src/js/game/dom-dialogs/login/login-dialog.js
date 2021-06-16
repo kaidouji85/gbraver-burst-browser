@@ -198,14 +198,19 @@ export class LoginDialog implements DOMDialog {
    */
   _onInputComplete(data: InputComplete): void {
     this._exclusive.execute(async () => {
-      this._switchLoginExecuting();
-      const isSuccessLogin = await this._login.login(data.userID, data.password);
-      if (!isSuccessLogin) {
-        this._switchLoginEntering();
-        return;
-      }
+      try {
+        this._switchLoginExecuting();
+        const isSuccessLogin = await this._login.login(data.userID, data.password);
+        if (!isSuccessLogin) {
+          this._switchLoginEnteringWithError();
+          return;
+        }
 
-      this._loginSuccess.next();
+        this._loginSuccess.next();
+      } catch (error) {
+        console.error(error);
+        this._switchLoginEnteringWithError();
+      }
     });
   }
 
@@ -220,9 +225,9 @@ export class LoginDialog implements DOMDialog {
   }
 
   /**
-   * 画面表示をログイン情報入力に切り替える
+   * 画面表示をエラーメッセージ表示されているログイン情報入力に切り替える
    */
-  _switchLoginEntering(): void {
+  _switchLoginEnteringWithError(): void {
     this._closer.className = CLOSER_CLASS_NAME;
     this._loginEntering.show();
     this._loginEntering.error('ログインに失敗しました');
