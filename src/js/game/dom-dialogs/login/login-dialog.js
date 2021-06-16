@@ -208,8 +208,8 @@ export class LoginDialog implements DOMDialog {
 
         this._loginSuccess.next();
       } catch (error) {
-        console.error(error);
         this._switchLoginEnteringWithError();
+        throw error;
       }
     });
   }
