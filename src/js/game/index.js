@@ -28,6 +28,7 @@ import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {IdPasswordLogin, LoginCheck} from '@gbraver-burst-network/core';
+import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends IdPasswordLogin, LoginCheck {}
@@ -183,14 +184,42 @@ export class Game {
   async _onCasualMatchStart(): Promise<void> {
     const isLogin = await this._api.isLogin();
     if (isLogin) {
-      const subFlow = {type: 'PlayerSelect'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
-      this._casualMatchPlayerSelectFlow();
+      this._startCasualMatchWithLogin();
     } else {
-      const subFlow = {type: 'Login'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
-      this._casualMatchLoginFlow();
+      this._startCasualMathWithoutLogin();
     }
+  }
+
+  /**
+   * ログインしている状態でカジュアルマッチを開始した
+   */
+  async _startCasualMatchWithLogin(): Promise<void> {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const subFlow = {type: 'PlayerSelect'};
+    this._inProgress = {type: 'CasualMatch', subFlow};
+    this._domDialogs.hidden();
+    await this._fader.fadeOut();
+    await this._domScenes.startPlayerSelect(resources);
+    await this._fader.fadeIn();
+  }
+
+  /**
+   * ログインなしでカジュアルマッチを開始した
+   */
+  _startCasualMathWithoutLogin(): void {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const subFlow = {type: 'Login'};
+    this._inProgress = {type: 'CasualMatch', subFlow};
+    const caption = 'カジュアルマッチを始めるにはログインする必要があります';
+    this._domDialogs.startLogin(resources, this._api, caption);
   }
 
   /**
@@ -203,12 +232,31 @@ export class Game {
   /**
    * ログイン成功
    */
-  async _onLoginSuccess(): Promise<void> {
+  _onLoginSuccess(): void {
     if (this._inProgress.type === 'CasualMatch') {
-      const subFlow = {type: 'PlayerSelect'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
-      this._casualMatchPlayerSelectFlow();
+      const casualMatch: CasualMatch = this._inProgress;
+      this._casualMatchLoginSuccess(casualMatch);
     }
+  }
+
+  /**
+   * カジュアルマッチ開始時のログインに成功した
+   *
+   * @param casualMath カジュアルマッチ情報
+   * @return 処理が完了したら発火するPromise
+   */
+  async _casualMatchLoginSuccess(casualMath: CasualMatch): Promise<void> {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const subFlow = {type: 'PlayerSelect'};
+    this._inProgress = {...casualMath, subFlow};
+    this._domDialogs.hidden();
+    await this._fader.fadeOut();
+    await this._domScenes.startPlayerSelect(resources);
+    await this._fader.fadeIn();
   }
 
   /**
@@ -358,33 +406,5 @@ export class Game {
     this._domScenes.hidden();
     await this._fader.fadeIn();
     await battleScene.start();
-  }
-
-  /**
-   * カジュアルマッチ開始前にログインする
-   */
-  _casualMatchLoginFlow(): void {
-    if (!this._resources) {
-      return;
-    }
-    const resources: Resources = this._resources;
-    const caption = 'カジュアルマッチを始めるにはログインする必要があります';
-    this._domDialogs.startLogin(resources, this._api, caption);
-  }
-
-  /**
-   * カジュアルマッチのプレイヤーセレクト
-   *
-   * @return フローが完了したら発火するPrpmise
-   */
-  async _casualMatchPlayerSelectFlow(): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-    const resources: Resources = this._resources;
-    this._domDialogs.hidden();
-    await this._fader.fadeOut();
-    await this._domScenes.startPlayerSelect(resources);
-    await this._fader.fadeIn();
   }
 }
