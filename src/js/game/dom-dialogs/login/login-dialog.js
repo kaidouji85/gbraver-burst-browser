@@ -12,6 +12,7 @@ import {Exclusive} from "../../../exclusive/exclusive";
 import {LoginEntering} from './login-entering';
 import type {InputComplete} from './login-entering';
 import type {IdPasswordLogin} from '@gbraver-burst-network/core';
+import {LoginExecuting} from "./login-executing";
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -61,9 +62,10 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 export class LoginDialog implements DOMDialog {
   _login: IdPasswordLogin;
   _root: HTMLElement;
-  _loginEntering: LoginEntering;
   _dialog: HTMLElement;
   _closer: HTMLImageElement;
+  _loginEntering: LoginEntering;
+  _loginExecuting: LoginExecuting;
   _closeDialog: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
   _exclusive: Exclusive;
@@ -93,6 +95,10 @@ export class LoginDialog implements DOMDialog {
     this._loginEntering = new LoginEntering(caption);
     this._loginEntering.show();
     this._dialog.appendChild(this._loginEntering.getRootHTMLElement());
+
+    this._loginExecuting = new LoginExecuting();
+    this._loginExecuting.hidden();
+    this._dialog.appendChild(this._loginExecuting.getRootHTMLElement());
 
     this._closeDialog = new RxjsStreamSource();
     this._unsubscribers = [
