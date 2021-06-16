@@ -127,6 +127,8 @@ export class Game {
         this._onEndHowToPlay();
       } else if (action.type === 'LoginCancel') {
         this._onLoginCancel();
+      } else if (action.type === 'LoginSuccess') {
+        this._onLoginSuccess();
       }
     }));
   }
@@ -183,7 +185,6 @@ export class Game {
       return;
     }
 
-    // TODO 詳細な処理を実装する
     const caption = 'カジュアルマッチを始めるにはログインする必要があります';
     this._domDialogs.startLogin(this._resources, this._api, caption);
   }
@@ -191,8 +192,26 @@ export class Game {
   /**
    * ログイン中断
    */
-  _onLoginCancel() {
+  _onLoginCancel(): void {
     this._domDialogs.hidden();
+  }
+
+  /**
+   * ログイン成功
+   */
+  async _onLoginSuccess(): Promise<void> {
+    if (!this._resources) {
+      return;
+    }
+    const resources: Resources = this._resources;
+
+    const subFlow = {type: 'PlayerSelect'};
+    this._inProgress = {type: 'CasualMatch', subFlow};
+
+    this._domDialogs.hidden();
+    await this._fader.fadeOut();
+    await this._domScenes.startPlayerSelect(resources);
+    await this._fader.fadeIn();
   }
 
   /**
