@@ -1,5 +1,6 @@
 // @flow
 
+import {Howl} from 'howler';
 import type {DOMDialog} from "../dialog";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
@@ -13,6 +14,7 @@ import {LoginEntering} from './login-entering';
 import type {InputComplete} from './login-entering';
 import type {IdPasswordLogin} from '@gbraver-burst-network/core';
 import {LoginExecuting} from "./login-executing";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'login';
@@ -25,18 +27,21 @@ const INVISIBLE_CLOSER_CLASS_NAME = `${CLOSER_CLASS_NAME}--invisible`;
 type DataIDs = {
   dialog: string,
   closer: string,
+  backGround: string
 };
 
 /**
  * ルート要素のinnerHTML
  *
  * @param ids data-idを集めたもの
- * @param closerPath クロージャ画像のパス
+ * @param resources リソース管理オブジェクト
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, closerPath: string): string {
+function rootInnerHTML(ids: DataIDs, resources: Resources): string {
+  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
+    ?.path ?? '';
   return `
-    <div class="${ROOT_CLASS_NAME}__background"></div>
+    <div class="${ROOT_CLASS_NAME}__background" data-id="${ids.backGround}"></div>
     <img class="${CLOSER_CLASS_NAME}" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
     <div class="${ROOT_CLASS_NAME}__dialog" data-id="${ids.dialog}"></div>
   `;
@@ -46,6 +51,7 @@ function rootInnerHTML(ids: DataIDs, closerPath: string): string {
 type Elements = {
   dialog: HTMLElement,
   closer: HTMLImageElement,
+  backGround: HTMLElement,
 };
 
 /**
@@ -58,11 +64,11 @@ type Elements = {
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
   const closer = (closerElement instanceof HTMLImageElement) ? closerElement : document.createElement('img');
-
-  const dialogElements = root.querySelector(`[data-id="${ids.dialog}"]`);
-  const dialog = (dialogElements instanceof HTMLElement) ? dialogElements : document.createElement('div');
-
-  return {closer, dialog};
+  const dialog = root.querySelector(`[data-id="${ids.dialog}"]`)
+    ?? document.createElement('div');
+  const backGround = root.querySelector(`[data-id="${ids.backGround}"]`)
+    ?? document.createElement('div');
+  return {closer, dialog, backGround};
 }
 
 /** 本ダイアログで利用するAPIの機能 */
@@ -79,6 +85,7 @@ export class LoginDialog implements DOMDialog {
   _loginSuccess: StreamSource<void>;
   _closeDialog: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
+  _changeValue: typeof Howl;
   _exclusive: Exclusive;
 
   /** 
@@ -91,13 +98,10 @@ export class LoginDialog implements DOMDialog {
   constructor(resources: Resources, login: IdPasswordLogin, caption: string) {
     this._login = login;
 
-    const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
-      ?.path ?? '';
-
-    const dataIDs = {dialog: domUuid(), closer: domUuid()};
+    const dataIDs = {dialog: domUuid(), closer: domUuid(), backGround: domUuid()};
     this._root = document.createElement('div');
     this._root.className = 'login';
-    this._root.innerHTML = rootInnerHTML(dataIDs, closerPath);
+    this._root.innerHTML = rootInnerHTML(dataIDs, resources);
     const elements = extractElements(this._root, dataIDs);
 
     this._closer =elements.closer;
@@ -117,11 +121,17 @@ export class LoginDialog implements DOMDialog {
     this._unsubscribers = [
       pushDOMStream(this._closer)
         .subscribe(this._onCloserPush.bind(this)),
+      pushDOMStream(elements.backGround)
+        .subscribe(this._onPushOutsideOfDialog.bind(this)),
       this._loginEntering.closeNotifier()
         .subscribe(this._onPushCloseButtonPush.bind(this)),
       this._loginEntering.inputCompleteNotifier()
         .subscribe(this._onInputComplete.bind(this))
     ];
+
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
+
     this._exclusive = new Exclusive();
   }
 
@@ -166,7 +176,10 @@ export class LoginDialog implements DOMDialog {
    */
   _onCloserPush(): void {
     this._exclusive.execute(async () => {
-      await pop(this._closer, 1.3);
+      await Promise.all([
+        pop(this._closer, 1.3),
+        this._changeValue.play()
+      ]);
       this._closeDialog.next();
     });
   }
@@ -193,6 +206,16 @@ export class LoginDialog implements DOMDialog {
       }
 
       this._loginSuccess.next();
+    });
+  }
+
+  /**
+   * ダイアログ外を押した時の処理
+   */
+  _onPushOutsideOfDialog(): void {
+    this._exclusive.execute(async (): Promise<void>=> {
+      await this._changeValue.play();
+      this._closeDialog.next();
     });
   }
 
