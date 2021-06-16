@@ -83,6 +83,9 @@ export class DOMScenes {
       scene.pushHowToPlayNotifier().subscribe(() => {
         this._gameAction.next({type: 'ShowHowToPlay'});
       }),
+      scene.pushCasualMatchNotifier().subscribe(() => {
+        this._gameAction.next({type: 'CasualMatchStart'});
+      })
     ];
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([

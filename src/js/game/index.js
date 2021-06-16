@@ -113,6 +113,8 @@ export class Game {
         this._onEndBattle(action);
       } else if (action.type === 'GameStart') {
         this._onGameStart();
+      } else if (action.type === 'CasualMatchStart') {
+        this._onCasualMatchStart();
       } else if (action.type === 'ShowHowToPlay') {
         this._onShowHowToPlay();
       } else if (action.type === 'SelectionComplete') {
@@ -169,6 +171,14 @@ export class Game {
     await this._fader.fadeOut();
     await this._domScenes.startPlayerSelect(resources);
     await this._fader.fadeIn();
+  }
+
+  /**
+   * カジュアルマッチ開始
+   */
+  _onCasualMatchStart(): void {
+    // TODO 詳細な処理を実装する
+    console.log('casual amtch start');
   }
 
   /**
