@@ -27,17 +27,23 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
+import type {IdPasswordLogin, LoginCheck} from '@gbraver-burst-network/core';
+
+/** 本クラスで利用するAPIサーバの機能 */
+interface OwnAPI extends IdPasswordLogin, LoginCheck {}
 
 /** コンストラクタのパラメータ */
 type Param = {
   /** リソースルート */
   resourceRoot: ResourceRoot,
   /** 遊び方動画のURL */
-  _howToPlayMovieURL: string,
+  howToPlayMovieURL: string,
   /** FPS統計を表示するか否か、trueで表示する */
   isPerformanceStatsVisible: boolean,
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean,
+  /** APIサーバのSDK */
+  api: OwnAPI,
 };
 
 /** ゲーム全体の管理を行う */
@@ -46,6 +52,7 @@ export class Game {
   _isServiceWorkerUsed: boolean;
   _howToPlayMovieURL: string;
   _inProgress: InProgress;
+  _api: OwnAPI;
   _resize: Stream<Resize>;
   _vh: CssVH;
   _fader: DOMFader;
@@ -67,11 +74,12 @@ export class Game {
     this._resourceRoot = param.resourceRoot;
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
-    this._howToPlayMovieURL = param._howToPlayMovieURL;
+    this._howToPlayMovieURL = param.howToPlayMovieURL;
 
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
     this._vh = new CssVH(this._resize);
+    this._api = param.api;
 
     this._fader = new DOMFader();
 

@@ -13,9 +13,59 @@ import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 
+/** ルート要素のcssクラス名 */
+const ROOT_CLASS_NAME = 'title';
+
+/** data-idを集めたもの */
+type DataIDs = {
+  logo: string,
+  gameStart: string,
+  howToPlay: string,
+};
+
 /**
- * タイトル
+ * ルート要素のinnerHTML
+ * @param ids
+ * @return innerHTML
  */
+function rootInnerHTML(ids: DataIDs): string {
+  return `
+    <div class="${ROOT_CLASS_NAME}__contents">
+    <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
+    <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
+      <span class="${ROOT_CLASS_NAME}__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
+      </div>
+      <div class="${ROOT_CLASS_NAME}__contents__controllers">
+        <button class="${ROOT_CLASS_NAME}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
+        <button class="${ROOT_CLASS_NAME}__contents__controllers__game-start" data-id="${ids.gameStart}" >ゲームスタート</button>
+      </div>
+    </div>
+  `;
+}
+
+/** ルート要素の子孫要素 */
+type Elements = {
+  logo: HTMLImageElement,
+  gameStart: HTMLElement,
+  howToPlay: HTMLElement,
+};
+
+/**
+ * ルート要素から子孫要素を抽出する
+ * 
+ * @param root ルート要素
+ * @param ids data-idを集めたもの
+ * @return 抽出結果
+ */
+function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
+  const logo = (logoElement instanceof HTMLImageElement) ? logoElement : new Image();
+  const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
+  const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
+  return {logo, gameStart, howToPlay};
+}
+
+/** タイトル */
 export class Title implements DOMScene {
   _exclusive: Exclusive;
   _root: HTMLElement;
@@ -37,23 +87,19 @@ export class Title implements DOMScene {
   constructor(resources: Resources) {
     this._exclusive = new Exclusive();
 
-    const logoId = domUuid();
-    const gameStartId = domUuid();
-    const howToPlayId = domUuid();
+    const dataIDs = {logo: domUuid(), gameStart: domUuid(), howToPlay: domUuid()};
     this._root = document.createElement('div');
-    this._root.innerHTML = `
-      <div class="title__contents">
-        <img class="title__contents__logo" data-id="${logoId}" />
-        <div class="title__contents__copy-rights">
-          <span class="title__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
-        </div>
-        <div class="title__contents__controllers">
-          <button class="title__contents__controllers__how-to-play" data-id="${howToPlayId}">遊び方</button>
-          <button class="title__contents__controllers__game-start" data-id="${gameStartId}" >ゲームスタート</button>
-        </div>
-      </div>
-    `;
-    this._root.className = 'title';
+    this._root.innerHTML = rootInnerHTML(dataIDs);
+    this._root.className = ROOT_CLASS_NAME;
+    const elements = extractElements(this._root, dataIDs);
+
+    this._isLogoLoaded = waitElementLoaded(elements.logo);
+    elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)
+      ?.path ?? '';
+
+    this._gameStart = elements.gameStart;
+    this._howToPlay = elements.howToPlay;
+
     const titleBackImage = new Image();
     this._isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
       this._root.style.backgroundImage = `url(${titleBackImage.src})`;
@@ -61,19 +107,10 @@ export class Title implements DOMScene {
     titleBackImage.src = resources.paths.find(v => v.id === PathIds.TITLE_BACK)
       ?.path ?? '';
 
-    const logo = this._root.querySelector(`[data-id="${logoId}"]`);
-    const logoImage: HTMLImageElement = (logo instanceof HTMLImageElement) ? logo : new Image();
-    this._isLogoLoaded = waitElementLoaded(logoImage);
-    logoImage.src = resources.paths.find(v => v.id === PathIds.LOGO)
-      ?.path ?? '';
-
     this._pushButton = this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
-
-    this._gameStart = this._root.querySelector(`[data-id="${gameStartId}"]`) || document.createElement('div');
-    this._howToPlay = this._root.querySelector(`[data-id="${howToPlayId}"]`) || document.createElement('div');
 
     this._pushGameStart = new RxjsStreamSource();
     this._pushHowToPlay = new RxjsStreamSource();
