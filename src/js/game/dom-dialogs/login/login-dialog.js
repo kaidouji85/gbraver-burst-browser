@@ -65,6 +65,9 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {closer, dialog};
 }
 
+/** 本ダイアログで利用するAPIの機能 */
+export interface OwnAPI extends IdPasswordLogin {}
+
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
   _login: IdPasswordLogin;
@@ -147,6 +150,15 @@ export class LoginDialog implements DOMDialog {
    */
   closeDialogNotifier(): Stream<void> {
     return this._closeDialog;
+  }
+
+  /**
+   * ログイン成功通知
+   * 
+   * @return 通知ストリーム
+   */
+  loginSuccessNotifier(): Stream<void> {
+    return this._loginSuccess;
   }
 
   /**

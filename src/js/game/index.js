@@ -176,9 +176,14 @@ export class Game {
   /**
    * カジュアルマッチ開始
    */
-  _onCasualMatchStart(): void {
+  async _onCasualMatchStart(): Promise<void> {
+    if (!this._resources) {
+      return;
+    }
+
     // TODO 詳細な処理を実装する
-    console.log('casual amtch start');
+    const caption = 'カジュアルマッチを始めるにはログインする必要があります';
+    this._domDialogs.startLogin(this._resources, this._api, caption);
   }
 
   /**
