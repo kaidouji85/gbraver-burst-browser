@@ -100,8 +100,9 @@ export class LoginDialog implements DOMDialog {
     this._closer =elements.closer;
     this._dialog = elements.dialog;
 
-    this._loginEntering = new LoginEntering(caption);
+    this._loginEntering = new LoginEntering();
     this._loginEntering.show();
+    this._loginEntering.caption(caption);
     this._dialog.appendChild(this._loginEntering.getRootHTMLElement());
 
     this._loginExecuting = new LoginExecuting();
@@ -115,7 +116,7 @@ export class LoginDialog implements DOMDialog {
         .subscribe(this._onCloserPush.bind(this)),
       this._loginEntering.closeNotifier()
         .subscribe(this._onPushCloseButtonPush.bind(this)),
-      this._loginEntering.iunputCompleteNotifier()
+      this._loginEntering.inputCompleteNotifier()
         .subscribe(this._onInputComplete.bind(this))
     ];
     this._exclusive = new Exclusive();
@@ -189,6 +190,7 @@ export class LoginDialog implements DOMDialog {
   _switchLoginEntering(): void {
     this._closer.className = CLOSER_CLASS_NAME;
     this._loginEntering.show();
+    this._loginEntering.error('ログインに失敗しました');
     this._loginExecuting.hidden();
   }
 

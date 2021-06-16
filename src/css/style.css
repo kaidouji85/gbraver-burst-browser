@@ -13,6 +13,7 @@
 
     /** フォント */
     --font-color: rgb(240, 240, 240);
+    --error-font-color: rgb(255, 69, 0);
     --responsive-font-size: max(3vh, 1rem);
 
     /** 背景 */

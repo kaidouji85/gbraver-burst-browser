@@ -92,6 +92,19 @@
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
+.login-entering__caption--invisible {
+  display: none;
+}
+
+.login-entering__error {
+  color: var(--error-font-color);
+  margin-bottom: calc(var(--responsive-font-size) * 2);
+}
+
+.login-entering__error--invisible {
+  display: none;
+}
+
 .login-entering__form__user-name {
   display: flex;
   margin-bottom: calc(var(--responsive-font-size) * 0.5);

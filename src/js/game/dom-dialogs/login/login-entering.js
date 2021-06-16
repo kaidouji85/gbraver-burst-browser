@@ -11,9 +11,19 @@ import {Exclusive} from "../../../exclusive/exclusive";
 const ROOT_CLASS_NAME = 'login-entering';
 /** ルート要素が非表示の時のcssクラス名 */
 const INVISIBLE_ROOT_CLASS_NAME = `${ROOT_CLASS_NAME}--invisible`;
+/** キャプションのcssクラス名 */
+const CAPTION_CLASS_NAME = `${ROOT_CLASS_NAME}__caption`;
+/** キャプションが非表示の時のcssクラス名 */
+const INVISIBLE_CAPTION_CLASS_NAME = `${CAPTION_CLASS_NAME}--invisible`;
+/** エラーメッセージのcssクラス名 */
+const ERROR_CLASS_NAME = `${ROOT_CLASS_NAME}__error`;
+/** エラーメッセージが非表示の時のcssクラス名 */
+const INVISIBLE_ERROR_CLASS_NAME = `${ERROR_CLASS_NAME}--invisible`;
 
 /** data-idを集めたもの */
 type DataIDs = {
+  caption: string,
+  error: string,
   userID: string,
   password: string,
   submit: string,
@@ -24,12 +34,12 @@ type DataIDs = {
  * ルート要素のinnerHTML
  * 
  * @param ids data-idを集めたもの
- * @param caption ダイアログに表示するメッセージ
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, caption: string): string {
+function rootInnerHTML(ids: DataIDs): string {
   return `
-    <div class="${ROOT_CLASS_NAME}__caption">${caption}</div>
+    <div class="${CAPTION_CLASS_NAME}" data-id="${ids.caption}"></div>
+    <div class="#{INVISIBLE_ERROR_CLASS_NAME}" data-id="${ids.error}"></div>
     <form class="${ROOT_CLASS_NAME}__form">
       <div class="${ROOT_CLASS_NAME}__form__user-name">
         <label class="${ROOT_CLASS_NAME}__form__user-name__label">userid</label>
@@ -49,6 +59,8 @@ function rootInnerHTML(ids: DataIDs, caption: string): string {
 
 /** ルート要素の子孫要素 */
 type Elements = {
+  caption: HTMLElement,
+  error: HTMLElement,
   userID: HTMLInputElement,
   password: HTMLInputElement,
   submit: HTMLButtonElement,
@@ -63,6 +75,12 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const caption = root.querySelector(`[data-id="${ids.caption}"]`)
+    ?? document.createElement('div');
+
+  const error = root.querySelector(`[data-id="${ids.error}"]`)
+    ?? document.createElement('div');
+
   const userIDElement = root.querySelector(`[data-id="${ids.userID}"]`);
   const userID = (userIDElement instanceof HTMLInputElement) ? userIDElement : document.createElement('input');
 
@@ -75,7 +93,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closeButtonElement = root.querySelector(`[data-id="${ids.closeButton}"]`);
   const closeButton = (closeButtonElement instanceof HTMLButtonElement) ? closeButtonElement : document.createElement('button');
 
-  return {userID, password, submit, closeButton};
+  return {caption, error, userID, password, submit, closeButton};
 }
 
 /** 入力完了情報 */
@@ -87,6 +105,8 @@ export type InputComplete = {
 /** ログイン情報入力中 */
 export class LoginEntering {
   _root: HTMLElement;
+  _caption: HTMLElement;
+  _error: HTMLElement;
   _userID: HTMLInputElement;
   _password: HTMLInputElement;
   _submit: HTMLButtonElement;
@@ -98,16 +118,17 @@ export class LoginEntering {
 
   /** 
    * コンストラクタ
-   * 
-   * @param caption 入力フォームに表示されるメッセージ
    */
-  constructor(caption: string) {
-    const dataIDs = {userID: domUuid(), password: domUuid(), submit: domUuid(), closeButton: domUuid()};
+  constructor() {
+    const dataIDs = {caption: domUuid(), error: domUuid(), userID: domUuid(),
+      password: domUuid(), submit: domUuid(), closeButton: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(dataIDs, caption);
+    this._root.innerHTML = rootInnerHTML(dataIDs);
     const elements = extractElements(this._root, dataIDs);
 
+    this._caption = elements.caption;
+    this._error = elements.error;
     this._userID = elements.userID;
     this._password = elements.password;
     this._submit = elements.submit;
@@ -157,11 +178,33 @@ export class LoginEntering {
   }
 
   /**
+   * キャプションを表示する
+   *
+   * @param content 文言
+   */
+  caption(content: string): void {
+    this._caption.innerText = content;
+    this._caption.className = CAPTION_CLASS_NAME;
+    this._error.className = INVISIBLE_ERROR_CLASS_NAME;
+  }
+
+  /**
+   * エラーメッセージを表示する
+   *
+   * @param content 文言
+   */
+  error(content: string): void {
+    this._error.innerText = content;
+    this._error.className = ERROR_CLASS_NAME;
+    this._caption.className = INVISIBLE_CAPTION_CLASS_NAME;
+  }
+  
+  /**
    * 入力完了通知
    * 
    * @return 通知ストリーム
    */
-  iunputCompleteNotifier(): Stream<InputComplete> {
+  inputCompleteNotifier(): Stream<InputComplete> {
     return this._inputCoomplete;
   }
 
