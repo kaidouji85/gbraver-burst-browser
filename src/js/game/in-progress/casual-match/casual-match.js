@@ -16,7 +16,12 @@ export type CasualMatchX<X> = {
 };
 
 /** カジュアルマッチのサブフロー */
-export type SubFlow = PlayerSelect | Waiting | Battle;
+export type SubFlow = Login | PlayerSelect | Waiting | Battle;
+
+/** ログイン */
+export type Login = {
+  type: 'Login'
+};
 
 /** キャラ選択 */
 export type PlayerSelect = {

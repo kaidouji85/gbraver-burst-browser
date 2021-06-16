@@ -181,12 +181,16 @@ export class Game {
    * カジュアルマッチ開始
    */
   async _onCasualMatchStart(): Promise<void> {
-    if (!this._resources) {
-      return;
+    const isLogin = await this._api.isLogin();
+    if (isLogin) {
+      const subFlow = {type: 'PlayerSelect'};
+      this._inProgress = {type: 'CasualMatch', subFlow};
+      this._casualMatchPlayerSelectFlow();
+    } else {
+      const subFlow = {type: 'Login'};
+      this._inProgress = {type: 'CasualMatch', subFlow};
+      this._casualMatchLoginFlow();
     }
-
-    const caption = 'カジュアルマッチを始めるにはログインする必要があります';
-    this._domDialogs.startLogin(this._resources, this._api, caption);
   }
 
   /**
@@ -200,18 +204,11 @@ export class Game {
    * ログイン成功
    */
   async _onLoginSuccess(): Promise<void> {
-    if (!this._resources) {
-      return;
+    if (this._inProgress.type === 'CasualMatch') {
+      const subFlow = {type: 'PlayerSelect'};
+      this._inProgress = {type: 'CasualMatch', subFlow};
+      this._casualMatchPlayerSelectFlow();
     }
-    const resources: Resources = this._resources;
-
-    const subFlow = {type: 'PlayerSelect'};
-    this._inProgress = {type: 'CasualMatch', subFlow};
-
-    this._domDialogs.hidden();
-    await this._fader.fadeOut();
-    await this._domScenes.startPlayerSelect(resources);
-    await this._fader.fadeIn();
   }
 
   /**
@@ -221,7 +218,6 @@ export class Game {
     if (!this._resources) {
       return;
     }
-
     this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
@@ -362,5 +358,33 @@ export class Game {
     this._domScenes.hidden();
     await this._fader.fadeIn();
     await battleScene.start();
+  }
+
+  /**
+   * カジュアルマッチ開始前にログインする
+   */
+  _casualMatchLoginFlow(): void {
+    if (!this._resources) {
+      return;
+    }
+    const resources: Resources = this._resources;
+    const caption = 'カジュアルマッチを始めるにはログインする必要があります';
+    this._domDialogs.startLogin(resources, this._api, caption);
+  }
+
+  /**
+   * カジュアルマッチのプレイヤーセレクト
+   *
+   * @return フローが完了したら発火するPrpmise
+   */
+  async _casualMatchPlayerSelectFlow(): Promise<void> {
+    if (!this._resources) {
+      return;
+    }
+    const resources: Resources = this._resources;
+    this._domDialogs.hidden();
+    await this._fader.fadeOut();
+    await this._domScenes.startPlayerSelect(resources);
+    await this._fader.fadeIn();
   }
 }
