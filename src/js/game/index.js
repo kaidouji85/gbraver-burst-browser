@@ -290,20 +290,8 @@ export class Game {
       const player = createNPCBattlePlayer(action);
       const updated = {...origin, player};
       const course = findCourse(updated);
-      const npc = course.npc;
-      const battle = startOfflineBattle(player, npc);
       this._inProgress = updated;
-
-      //await this._fader.fadeOut();
-      //await this._domScenes.startMatchCard(resources, player.armdozer.id, npc.armdozer.id, course.stageName);
-      //await this._fader.fadeIn();
-      
-      //const battleScene = this._tdScenes.startBattle(resources, battle.progress, battle.player, battle.enemy, battle.initialState);
-      //await waitAnimationFrame();
-      //await this._fader.fadeOut();
-      //this._domScenes.hidden();
-      //await this._fader.fadeIn();
-      //await battleScene.start();
+      await this._startNPCBattleCrce(resources, player, course);
     }
   }
 
@@ -384,6 +372,29 @@ export class Game {
   }
 
   /**
+   * NPCバトルコースを開始する
+   * 
+   * @param resources リソース管理オブジェクト
+   * @param player プレイヤー
+   * @param cource NPCバトルコース
+   */
+  async _startNPCBattleCrce(resources: Resources, player: Player, course: NPCBattleCourse) {
+    const battle = startOfflineBattle(player, course.npc);
+      
+    await this._fader.fadeOut();
+    await this._domScenes.startMatchCard(resources, player.armdozer.id, course.npc.armdozer.id, course.stageName);
+    await this._fader.fadeIn();
+    
+    const battleScene = this._tdScenes.startBattle(resources, battle.progress, battle.player, battle.enemy, battle.initialState);
+    await waitAnimationFrame();
+    await this._fader.fadeOut();
+    this._domScenes.hidden();
+    await this._fader.fadeIn();
+    await battleScene.start();
+  }
+
+  /**
+   * @deprecated
    * NPC戦闘フロー
    *
    * @param resources リソース管理オブジェクト
