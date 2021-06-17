@@ -26,10 +26,14 @@ type DataIDs = {
 
 /**
  * ルート要素のinnerHTML
- * @param ids
+ * @param ids data-idを集めたもの
+ * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs): string {
+function rootInnerHTML(ids: DataIDs, canCasualMatch: boolean): string {
+  const visibleCasualMatch = `${ROOT_CLASS_NAME}__contents__controllers__casual-match`;
+  const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
+  const casualMatchClassName = canCasualMatch ? visibleCasualMatch: invisibleCasualMatch
   return `
     <div class="${ROOT_CLASS_NAME}__contents">
     <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
@@ -39,7 +43,7 @@ function rootInnerHTML(ids: DataIDs): string {
       <div class="${ROOT_CLASS_NAME}__contents__controllers">
         <button class="${ROOT_CLASS_NAME}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
         <button class="${ROOT_CLASS_NAME}__contents__controllers__game-start" data-id="${ids.gameStart}">ゲームスタート</button>
-        <button class="${ROOT_CLASS_NAME}__contents__controllers__casual-match" data-id="${ids.casualMatch}">カジュアルマッチ</button>
+        <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">カジュアルマッチ</button>
       </div>
     </div>
   `;
@@ -89,13 +93,14 @@ export class Title implements DOMScene {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能である
    */
-  constructor(resources: Resources) {
+  constructor(resources: Resources, canCasualMatch: boolean) {
     this._exclusive = new Exclusive();
 
     const dataIDs = {logo: domUuid(), gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid()};
     this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(dataIDs);
+    this._root.innerHTML = rootInnerHTML(dataIDs, canCasualMatch);
     this._root.className = ROOT_CLASS_NAME;
     const elements = extractElements(this._root, dataIDs);
 

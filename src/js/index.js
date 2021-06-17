@@ -17,6 +17,7 @@ async function main(): Promise<void> {
     howToPlayMovieURL: DefinePlugin.howToPlay,
     isPerformanceStatsVisible: DefinePlugin.isPerformanceStatsVisible === 'true',
     isServiceWorkerUsed: DefinePlugin.isServiceWorkerUsed === 'true',
+    canCasualMatch: DefinePlugin.canCasualMatch === 'true',
   });
   await game.initialize();
 }

@@ -74,3 +74,7 @@
 .title__contents__controllers__casual-match {
   background-color: var(--button-background-color);
 }
+
+.title__contents__controllers__casual-match--invisible {
+  display: none;
+}

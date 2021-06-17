@@ -9,6 +9,6 @@ export default {
 };
 
 export const Scene: DOMStubStory = domStub(resources => {
-  const scene = new Title(resources);
+  const scene = new Title(resources, true);
   return scene.getRootHTMLElement();
 });

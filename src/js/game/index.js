@@ -43,6 +43,8 @@ type Param = {
   isPerformanceStatsVisible: boolean,
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean,
+  /** カジュアルマッチが可能か否か、trueで可能 */
+  canCasualMatch: boolean,
   /** APIサーバのSDK */
   api: OwnAPI,
 };
@@ -52,6 +54,7 @@ export class Game {
   _isPerformanceStatsVisible: boolean;
   _isServiceWorkerUsed: boolean;
   _howToPlayMovieURL: string;
+  _canCasualMatch: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
   _resize: Stream<Resize>;
@@ -76,6 +79,7 @@ export class Game {
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
     this._howToPlayMovieURL = param.howToPlayMovieURL;
+    this._canCasualMatch = param.canCasualMatch;
 
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
@@ -158,7 +162,7 @@ export class Game {
     await waitTime(1000);
 
     await this._fader.fadeOut();
-    await this._domScenes.startTitle(resources);
+    await this._domScenes.startTitle(resources, this._canCasualMatch);
     this._interruptScenes.bind(resources);
     await this._fader.fadeIn();
   }
@@ -307,7 +311,7 @@ export class Game {
 
     this._inProgress = {type: 'None'};
     await this._fader.fadeOut();
-    await this._domScenes.startTitle(resources);
+    await this._domScenes.startTitle(resources, this._canCasualMatch);
     await this._fader.fadeIn();
   }
 
@@ -367,7 +371,7 @@ export class Game {
     const resources: Resources = this._resources;
 
     await this._fader.fadeOut();
-    await this._domScenes.startTitle(resources);
+    await this._domScenes.startTitle(resources, this._canCasualMatch);
     await this._fader.fadeIn();
   }
 
