@@ -167,16 +167,15 @@ export class Game {
   /**
    * ゲームスタート時の処理
    */
-  async _onGameStart() {
-    if (!this._resources) {
+  async _onGameStart(): Promise<void> {
+    if (this._resources) {
+      const resources: Resources = this._resources;
+      this._inProgress = createInitialNPCBattle();
+      await this._fader.fadeOut();
+      await this._domScenes.startPlayerSelect(resources);
+      await this._fader.fadeIn();
       return;
     }
-    const resources: Resources = this._resources;
-
-    this._inProgress = createInitialNPCBattle();
-    await this._fader.fadeOut();
-    await this._domScenes.startPlayerSelect(resources);
-    await this._fader.fadeIn();
   }
 
   /**
@@ -184,43 +183,26 @@ export class Game {
    */
   async _onCasualMatchStart(): Promise<void> {
     const isLogin = await this._api.isLogin();
-    if (isLogin) {
-      this._startCasualMatchWithLogin();
-    } else {
-      this._startCasualMathWithoutLogin();
-    }
-  }
 
-  /**
-   * ログインしている状態でカジュアルマッチを開始した
-   */
-  async _startCasualMatchWithLogin(): Promise<void> {
-    if (!this._resources) {
+    if (isLogin && this._resources) {
+      const resources: Resources = this._resources;
+      const subFlow = {type: 'PlayerSelect'};
+      this._inProgress = {type: 'CasualMatch', subFlow};
+      this._domDialogs.hidden();
+      await this._fader.fadeOut();
+      await this._domScenes.startPlayerSelect(resources);
+      await this._fader.fadeIn();
       return;
     }
 
-    const resources: Resources = this._resources;
-    const subFlow = {type: 'PlayerSelect'};
-    this._inProgress = {type: 'CasualMatch', subFlow};
-    this._domDialogs.hidden();
-    await this._fader.fadeOut();
-    await this._domScenes.startPlayerSelect(resources);
-    await this._fader.fadeIn();
-  }
-
-  /**
-   * ログインなしでカジュアルマッチを開始した
-   */
-  _startCasualMathWithoutLogin(): void {
-    if (!this._resources) {
+    if (!isLogin && this._resources) {
+      const resources: Resources = this._resources;
+      const subFlow = {type: 'Login'};
+      this._inProgress = {type: 'CasualMatch', subFlow};
+      const caption = 'カジュアルマッチを始めるにはログインする必要があります';
+      this._domDialogs.startLogin(resources, this._api, caption);
       return;
     }
-
-    const resources: Resources = this._resources;
-    const subFlow = {type: 'Login'};
-    this._inProgress = {type: 'CasualMatch', subFlow};
-    const caption = 'カジュアルマッチを始めるにはログインする必要があります';
-    this._domDialogs.startLogin(resources, this._api, caption);
   }
 
   /**
@@ -233,41 +215,29 @@ export class Game {
   /**
    * ログイン成功
    */
-  _onLoginSuccess(): void {
-    if (this._inProgress.type === 'CasualMatch') {
-      const casualMatch: CasualMatch = this._inProgress;
-      this._casualMatchLoginSuccess(casualMatch);
-    }
-  }
-
-  /**
-   * カジュアルマッチ開始時のログインに成功した
-   *
-   * @param casualMath カジュアルマッチ情報
-   * @return 処理が完了したら発火するPromise
-   */
-  async _casualMatchLoginSuccess(casualMath: CasualMatch): Promise<void> {
-    if (!this._resources) {
+  async _onLoginSuccess(): Promise<void> {
+    if (this._inProgress.type === 'CasualMatch' && this._resources) {
+      const resources: Resources = this._resources;
+      const origin: CasualMatch = this._inProgress;
+      const subFlow = {type: 'PlayerSelect'};
+      this._inProgress = {...origin, subFlow};
+      this._domDialogs.hidden();
+      await this._fader.fadeOut();
+      await this._domScenes.startPlayerSelect(resources);
+      await this._fader.fadeIn();
       return;
     }
-
-    const resources: Resources = this._resources;
-    const subFlow = {type: 'PlayerSelect'};
-    this._inProgress = {...casualMath, subFlow};
-    this._domDialogs.hidden();
-    await this._fader.fadeOut();
-    await this._domScenes.startPlayerSelect(resources);
-    await this._fader.fadeIn();
   }
 
   /**
    * 遊び方ダイアログ表示
    */
   _onShowHowToPlay() {
-    if (!this._resources) {
+    if (this._resources) {
+      const resources: Resources = this._resources;
+      this._domDialogs.startHowToPlay(resources, this._howToPlayMovieURL);
       return;
     }
-    this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
   /**
@@ -291,6 +261,7 @@ export class Game {
       const course = findCourse(updated);
       this._inProgress = updated;
       await this._startNPCBattleCrce(resources, player, course);
+      return
     }
   }
 
@@ -299,15 +270,14 @@ export class Game {
    * @return 処理結果
    */
   async _onSelectionCancel(): Promise<void> {
-    if (!this._resources) {
+    if (this._resources) {
+      const resources: Resources = this._resources;
+      this._inProgress = {type: 'None'};
+      await this._fader.fadeOut();
+      await this._domScenes.startTitle(resources, this._canCasualMatch);
+      await this._fader.fadeIn();
       return;
     }
-    const resources: Resources = this._resources;
-
-    this._inProgress = {type: 'None'};
-    await this._fader.fadeOut();
-    await this._domScenes.startTitle(resources, this._canCasualMatch);
-    await this._fader.fadeIn();
   }
 
   /**
@@ -342,18 +312,17 @@ export class Game {
    * NPC戦闘エンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
-    if (!this._resources) {
+    if (this._resources) {
+      const resources: Resources = this._resources;
+      await this._fader.fadeOut();
+      await this._domScenes.startTitle(resources, this._canCasualMatch);
+      await this._fader.fadeIn();
       return;
     }
-    const resources: Resources = this._resources;
-
-    await this._fader.fadeOut();
-    await this._domScenes.startTitle(resources, this._canCasualMatch);
-    await this._fader.fadeIn();
   }
 
   /**
-   * NPCバトルコースを開始する
+   * NPCバトルコースを開始するヘルパーメソッド
    * 
    * @param resources リソース管理オブジェクト
    * @param player プレイヤー
