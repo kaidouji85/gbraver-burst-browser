@@ -290,7 +290,7 @@ export class Game {
       const player = createNPCBattlePlayer(action);
       const updated = {...origin, player};
       const course = findCourse(updated);
-      const npc = course.npc();
+      const npc = course.npc;
       const battle = startOfflineBattle(player, npc);
       this._inProgress = updated;
 
@@ -401,7 +401,7 @@ export class Game {
       v.armdozerId === player.armdozer.id
       && v.level === npcBattle.level
     ) ?? DefaultCourse;
-    const npc = course.npc();
+    const npc = course.npc;
     await this._domScenes.startMatchCard(
       resources,
       player.armdozer.id,
