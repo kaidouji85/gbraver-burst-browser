@@ -6,6 +6,8 @@ import type {Resources} from "../../resource";
 import type {DOMDialog} from "./dialog";
 import {RxjsStreamSource} from "../../stream/rxjs";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
+import type {OwnAPI as LoginDialogAPI} from './login/login-dialog';
+import {LoginDialog} from './login/login-dialog';
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -41,6 +43,29 @@ export class DOMDialogs {
     ];
     this._root.appendChild(howToPlay.getRootHTMLElement());
     this._dialog = howToPlay;
+  }
+
+  /**
+   * ログインダイアログを表示する
+   *
+   * @param resources リソース管理オブジェクト
+   * @param api APIサーバSDK
+   * @param caption キャプション
+   */
+  startLogin(resources: Resources, api: LoginDialogAPI, caption: string): void {
+    this._removeCurrentDialog();
+
+    const login = new LoginDialog(resources, api, caption);
+    this._unsubscribers = [
+      login.loginSuccessNotifier().subscribe(() => {
+        this._gameAction.next({type: 'LoginSuccess'});
+      }),
+      login.closeDialogNotifier().subscribe(() => {
+        this._gameAction.next({type: 'LoginCancel'});
+      })
+    ];
+    this._root.appendChild(login.getRootHTMLElement());
+    this._dialog = login;
   }
 
   /**

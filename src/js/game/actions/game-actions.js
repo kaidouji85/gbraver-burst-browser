@@ -7,6 +7,11 @@ export type GameStart = {
   type: 'GameStart'
 };
 
+/** カジュアルマッチスタート */
+export type CasualMatchStart = {
+  type: 'CasualMatchStart'
+};
+
 /** 遊び方動画を表示 */
 export type ShowHowToPlay = {
   type: 'ShowHowToPlay'
@@ -49,13 +54,26 @@ export type EndNPCEnding = {
   type: 'EndNPCEnding'
 };
 
+/** ログインダイアからのログインを中断した */
+export type LoginCancel = {
+  type: 'LoginCancel'
+};
+
+/** ログインダイログからのログインが成功した */
+export type LoginSuccess = {
+  type: 'LoginSuccess'
+};
+
 /**
  * ゲーム全体で利用するアクション
  */
 export type GameAction = GameStart
+ | CasualMatchStart
  | ShowHowToPlay
  | EndHowToPlay
  | SelectionComplete
  | SelectionCancel
  | EndBattle
- | EndNPCEnding;
+ | EndNPCEnding
+ | LoginCancel
+ | LoginSuccess;

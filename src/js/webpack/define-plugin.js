@@ -16,4 +16,10 @@ export const DefinePlugin = {
 
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: GBRAVER_BURST_IS_SERVICE_WORKER_USED,
+
+  /** APIサーバのURL */
+  apiServerURL: GBRAVER_BURST_API_SERVER_URL,
+
+  /** カジュアルマッチが実施できるか否か、trueで実施できる */
+  canCasualMatch: GBRAVER_BURST_CAN_CASUAL_MATCH,
 }
