@@ -64,13 +64,14 @@ export function isNPCBattleEnd(state: NPCBattle, action: EndBattle): boolean {
 }
 
 /**
- * 戦闘終了結果の応じてNPCレベルをアップさせる
+ * 戦闘結果に応じてNPCバトルをレベルアップさせる
+ * 勝った場合は+1、負けた場合は変更なし
  *
  * @param origin 更新前の状態
  * @param action アクション
  * @return 更新結果
  */
-export function levelUp(origin: NPCBattle, action: EndBattle): NPCBattle {
+export function levelUpOrNot(origin: NPCBattle, action: EndBattle): NPCBattle {
   if (!isWin(origin, action)) {
     return origin;
   }

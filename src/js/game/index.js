@@ -14,7 +14,7 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {NPCBattle} from "./in-progress/npc-battle/npc-battle";
-import {createInitialNPCBattle, isNPCBattleEnd, levelUp} from "./in-progress/npc-battle/npc-battle";
+import {createInitialNPCBattle, isNPCBattleEnd, levelUpOrNot} from "./in-progress/npc-battle/npc-battle";
 import {selectionComplete} from "./in-progress/npc-battle/selection-complete";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
@@ -339,7 +339,7 @@ export class Game {
     }
     const resources: Resources = this._resources;
     const origin: NPCBattle = this._inProgress;
-    const updated: NPCBattle = levelUp(origin, action);
+    const updated: NPCBattle = levelUpOrNot(origin, action);
     this._inProgress = updated;
     await this._npcBattleFlow(resources, updated);
   }
