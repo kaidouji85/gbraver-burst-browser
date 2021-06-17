@@ -84,20 +84,15 @@ export class Game {
     this._api = param.api;
 
     this._fader = new DOMFader();
-
     this._interruptScenes = new InterruptScenes();
     this._domScenes = new DOMScenes();
     this._domDialogs = new DOMDialogs();
     this._tdScenes = new TDScenes(this._resize);
 
     const body = document.body || document.createElement('div');
-    const elements = [
-      this._fader.getRootHTMLElement(),
-      this._interruptScenes.getRootHTMLElement(),
-      this._domDialogs.getRootHTMLElement(),
-      this._domScenes.getRootHTMLElement(),
-      this._tdScenes.getRendererDOM(),
-    ];
+    const elements = [this._fader.getRootHTMLElement(), this._interruptScenes.getRootHTMLElement(),
+      this._domDialogs.getRootHTMLElement(), this._domScenes.getRootHTMLElement(), 
+      this._tdScenes.getRendererDOM()];
     elements.forEach(element => {
       body.appendChild(element);
     });
@@ -105,33 +100,19 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
-    const gameActionStreams = [
-      this._tdScenes.gameActionNotifier(),
-      this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier()
-    ];
+    const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(), 
+      this._domDialogs.gameActionNotifier()];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
-      if (action.type === 'EndBattle') {
-        this._onEndBattle(action);
-      } else if (action.type === 'GameStart') {
-        this._onGameStart();
-      } else if (action.type === 'CasualMatchStart') {
-        this._onCasualMatchStart();
-      } else if (action.type === 'ShowHowToPlay') {
-        this._onShowHowToPlay();
-      } else if (action.type === 'SelectionComplete') {
-        this._onSelectionComplete(action);
-      } else if (action.type === 'SelectionCancel') {
-        this._onSelectionCancel();
-      }else if (action.type === 'EndNPCEnding') {
-        this._onEndNPCEnding();
-      } else if (action.type === 'EndHowToPlay') {
-        this._onEndHowToPlay();
-      } else if (action.type === 'LoginCancel') {
-        this._onLoginCancel();
-      } else if (action.type === 'LoginSuccess') {
-        this._onLoginSuccess();
-      }
+      if (action.type === 'EndBattle') { this._onEndBattle(action) }
+      else if (action.type === 'GameStart') { this._onGameStart() }
+      else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
+      else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
+      else if (action.type === 'SelectionComplete') { this._onSelectionComplete(action) }
+      else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
+      else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
+      else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
+      else if (action.type === 'LoginCancel') { this._onLoginCancel() }
+      else if (action.type === 'LoginSuccess') { this._onLoginSuccess() }
     }));
   }
 
@@ -286,7 +267,9 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    if ((this._inProgress.type === 'NPCBattle') && !isNPCBattleEnd(this._inProgress, action) && this._inProgress.player && this._resources) {
+    if ((this._inProgress.type === 'NPCBattle') && !isNPCBattleEnd(this._inProgress, action) 
+      && this._inProgress.player && this._resources) 
+    {
       const resources: Resources = this._resources;
       const player: Player = this._inProgress.player;
       const origin: NPCBattle = this._inProgress;
@@ -297,7 +280,9 @@ export class Game {
       return;
     } 
     
-    if ((this._inProgress.type === 'NPCBattle') && isNPCBattleEnd(this._inProgress, action) && this._resources) {
+    if ((this._inProgress.type === 'NPCBattle') && isNPCBattleEnd(this._inProgress, action) 
+      && this._resources) 
+    {
       const resources: Resources = this._resources;
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
@@ -332,10 +317,12 @@ export class Game {
     const battle = startOfflineBattle(player, course.npc);
       
     await this._fader.fadeOut();
-    await this._domScenes.startMatchCard(resources, player.armdozer.id, course.npc.armdozer.id, course.stageName);
+    await this._domScenes.startMatchCard(resources, player.armdozer.id, course.npc.armdozer.id, 
+      course.stageName);
     await this._fader.fadeIn();
     
-    const battleScene = this._tdScenes.startBattle(resources, battle.progress, battle.player, battle.enemy, battle.initialState);
+    const battleScene = this._tdScenes.startBattle(resources, battle.progress, battle.player, 
+      battle.enemy, battle.initialState);
     await waitAnimationFrame();
     await this._fader.fadeOut();
     this._domScenes.hidden();
