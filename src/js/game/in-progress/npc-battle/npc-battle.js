@@ -2,6 +2,8 @@
 
 import type {GameOver, Player} from "gbraver-burst-core";
 import type {EndBattle} from "../../actions/game-actions";
+import type {NPCBattleCourse} from './npc-battle-course';
+import {DefaultCourse, NPCBattleCourses} from './npc-battle-course';
 
 /** 最大レベル */
 export const MAX_LEVEL = 3;
@@ -81,4 +83,16 @@ export function levelUpOrNot(origin: NPCBattle, action: EndBattle): NPCBattle {
     ...origin,
     level: updatedLevel
   };
+}
+
+/**
+ * NPCバトルの状態に応じたステージを検索する
+ * 
+ * @param player プレイヤー
+ * @param npcBattle NPCバトルの状態
+ * @return 検索結果
+ */
+export function findCourse(player: Player, npcBattle: NPCBattle): NPCBattleCourse {
+  return NPCBattleCourses.find(v => (v.armdozerId === player.armdozer.id) && (v.level === npcBattle.level))
+    ?? DefaultCourse;
 }
