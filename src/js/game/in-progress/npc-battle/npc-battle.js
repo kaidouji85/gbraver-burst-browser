@@ -1,9 +1,11 @@
 // @flow
 
 import type {GameOver, Player} from "gbraver-burst-core";
-import type {EndBattle} from "../../actions/game-actions";
+import {ArmDozers, Pilots} from "gbraver-burst-core";
+import type {SelectionComplete, EndBattle} from "../../actions/game-actions";
 import type {NPCBattleCourse} from './npc-battle-course';
 import {DefaultCourse, NPCBattleCourses} from './npc-battle-course';
+import {playerUuid} from "../../../uuid/player";
 
 /** 最大レベル */
 export const MAX_LEVEL = 3;
@@ -86,13 +88,29 @@ export function levelUpOrNot(origin: NPCBattle, action: EndBattle): NPCBattle {
 }
 
 /**
+ * プレイヤー選択結果からNPCバトル用プレイヤーを生成する
+ * 
+ * @param action プレイヤー選択結果
+ * @return NPCバトル用プレイヤー
+ */
+export function createNPCBattlePlayer(action: SelectionComplete): Player {
+  const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
+  const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
+  return {playerId: playerUuid(), armdozer, pilot};
+}
+
+/**
  * NPCバトルの状態に応じたステージを検索する
  * 
- * @param player プレイヤー
  * @param npcBattle NPCバトルの状態
  * @return 検索結果
  */
-export function findCourse(player: Player, npcBattle: NPCBattle): NPCBattleCourse {
+export function findCourse(npcBattle: NPCBattle): NPCBattleCourse {
+  if (!npcBattle.player) {
+    return DefaultCourse;
+  }
+
+  const player: Player = npcBattle.player;
   return NPCBattleCourses.find(v => (v.armdozerId === player.armdozer.id) && (v.level === npcBattle.level))
     ?? DefaultCourse;
 }
