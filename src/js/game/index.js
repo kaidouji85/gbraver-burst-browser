@@ -150,40 +150,46 @@ export class Game {
    * ゲームスタート時の処理
    */
   async _onGameStart(): Promise<void> {
-    if (this._resources) {
-      const resources: Resources = this._resources;
-      this._inProgress = createInitialNPCBattle();
-      await this._fader.fadeOut();
-      await this._domScenes.startPlayerSelect(resources);
-      await this._fader.fadeIn();
+    if (!this._resources) {
       return;
     }
+
+    const resources: Resources = this._resources;
+    this._inProgress = createInitialNPCBattle();
+    await this._fader.fadeOut();
+    await this._domScenes.startPlayerSelect(resources);
+    await this._fader.fadeIn();
   }
 
   /**
    * カジュアルマッチ開始
    */
   async _onCasualMatchStart(): Promise<void> {
-    const isLogin = await this._api.isLogin();
+    if (!this._resources) {
+      return;
+    }
 
-    if (isLogin && this._resources) {
-      const resources: Resources = this._resources;
+    const resources: Resources = this._resources;
+    const gotoPlayerSelect = async (): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
       this._inProgress = {type: 'CasualMatch', subFlow};
       this._domDialogs.hidden();
       await this._fader.fadeOut();
       await this._domScenes.startPlayerSelect(resources);
       await this._fader.fadeIn();
-      return;
-    }
-
-    if (!isLogin && this._resources) {
-      const resources: Resources = this._resources;
+    };
+    const showLoginDialog = async (): Promise<void> => {
       const subFlow = {type: 'Login'};
       this._inProgress = {type: 'CasualMatch', subFlow};
       const caption = 'カジュアルマッチを始めるにはログインする必要があります';
       this._domDialogs.startLogin(resources, this._api, caption);
-      return;
+    };
+
+    const isLogin = await this._api.isLogin();
+    if (isLogin) {
+      await gotoPlayerSelect();
+    } else {
+      await showLoginDialog();
     }
   }
 
@@ -198,16 +204,21 @@ export class Game {
    * ログイン成功
    */
   async _onLoginSuccess(): Promise<void> {
-    if (this._inProgress.type === 'CasualMatch' && this._resources) {
-      const resources: Resources = this._resources;
-      const origin: CasualMatch = this._inProgress;
+    if (!this._resources) {
+      return;
+    }
+    const resources: Resources = this._resources;
+    const casualMatchLogin = async (origin: CasualMatch): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
       this._inProgress = {...origin, subFlow};
       this._domDialogs.hidden();
       await this._fader.fadeOut();
       await this._domScenes.startPlayerSelect(resources);
       await this._fader.fadeIn();
-      return;
+    };
+
+    if (this._inProgress.type === 'CasualMatch') {
+      await casualMatchLogin(this._inProgress);
     }
   }
 
@@ -215,11 +226,12 @@ export class Game {
    * 遊び方ダイアログ表示
    */
   _onShowHowToPlay() {
-    if (this._resources) {
-      const resources: Resources = this._resources;
-      this._domDialogs.startHowToPlay(resources, this._howToPlayMovieURL);
+    if (!this._resources) {
       return;
     }
+
+    const resources: Resources = this._resources;
+    this._domDialogs.startHowToPlay(resources, this._howToPlayMovieURL);
   }
 
   /**
@@ -235,15 +247,21 @@ export class Game {
    * @param action アクション
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
-    if ((this._inProgress.type === 'NPCBattle') && this._resources) {
-      const resources: Resources = this._resources;
-      const origin: NPCBattle = this._inProgress;
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const npcBattlePlayerSelect = async (origin: NPCBattle): Promise<void> => {
       const player = createNPCBattlePlayer(action);
       const updated = {...origin, player};
       const course = findCourse(updated);
       this._inProgress = updated;
       await this._startNPCBattlecCourse(resources, player, course);
-      return
+    };
+
+    if (this._inProgress.type === 'NPCBattle') {
+      await npcBattlePlayerSelect(this._inProgress);
     }
   }
 
@@ -252,14 +270,15 @@ export class Game {
    * @return 処理結果
    */
   async _onSelectionCancel(): Promise<void> {
-    if (this._resources) {
-      const resources: Resources = this._resources;
-      this._inProgress = {type: 'None'};
-      await this._fader.fadeOut();
-      await this._startTitle(resources);
-      await this._fader.fadeIn();
+    if (!this._resources) {
       return;
     }
+
+    const resources: Resources = this._resources;
+    this._inProgress = {type: 'None'};
+    await this._fader.fadeOut();
+    await this._startTitle(resources);
+    await this._fader.fadeIn();
   }
 
   /**
@@ -268,29 +287,29 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    if ((this._inProgress.type === 'NPCBattle') && !isNPCBattleEnd(this._inProgress, action) 
-      && this._inProgress.player && this._resources) 
-    {
-      const resources: Resources = this._resources;
-      const player: Player = this._inProgress.player;
-      const origin: NPCBattle = this._inProgress;
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const npcBattleContinue = async (player: Player, origin: NPCBattle): Promise<void> => {
       const updated: NPCBattle = levelUpOrNot(origin, action);
-      const course = findCourse(updated);   
+      const course = findCourse(updated);
       this._inProgress = updated;
       await this._startNPCBattlecCourse(resources, player, course);
-      return;
-    } 
-    
-    if ((this._inProgress.type === 'NPCBattle') && isNPCBattleEnd(this._inProgress, action) 
-      && this._resources) 
-    {
-      const resources: Resources = this._resources;
+    };
+    const npcBattleEnd = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
       await this._domScenes.startNPCEnding(resources);
       await this._fader.fadeIn();
-      return;
+    };
+
+    if (this._inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._inProgress, action) && this._inProgress.player) {
+      await npcBattleContinue(this._inProgress.player, this._inProgress);
+    } else if (this._inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._inProgress, action)) {
+      await npcBattleEnd();
     }
   }
 
@@ -298,13 +317,14 @@ export class Game {
    * NPC戦闘エンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
-    if (this._resources) {
-      const resources: Resources = this._resources;
-      await this._fader.fadeOut();
-      await this._startTitle(resources);
-      await this._fader.fadeIn();
+    if (!this._resources) {
       return;
     }
+
+    const resources: Resources = this._resources;
+    await this._fader.fadeOut();
+    await this._startTitle(resources);
+    await this._fader.fadeIn();
   }
 
   /**
