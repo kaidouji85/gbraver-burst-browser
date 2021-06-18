@@ -6,7 +6,7 @@ import {LoginDialog} from '../src/js/game/dom-dialogs/login/login-dialog'
 import {waitTime} from "../src/js/wait/wait-time";
 
 export default {
-  title: 'login',
+  title: 'login-dialog',
 };
 
 const loginMock = {
