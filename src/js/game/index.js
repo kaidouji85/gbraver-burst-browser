@@ -24,12 +24,12 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
-import type {IdPasswordLogin, LoginCheck} from '@gbraver-burst-network/core';
+import type {IdPasswordLogin, LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 
 /** 本クラスで利用するAPIサーバの機能 */
-interface OwnAPI extends IdPasswordLogin, LoginCheck {}
+interface OwnAPI extends IdPasswordLogin, LoginCheck, CasualMatchSDK {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -259,9 +259,30 @@ export class Game {
       this._inProgress = updated;
       await this._startNPCBattlecCourse(resources, player, course);
     };
+    const waitMatching = async (origin: CasualMatch): Promise<void> => {
+      // TODO マッチング中ダイアログを表示する
+      const battle = await this._api.startCasualMatch(action.armdozerId, action.pilotId);
+      const subFlow = {type: 'Battle', battle};
+      this._inProgress = {...origin, subFlow};
+
+      await this._fader.fadeOut();
+      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id,
+        'CasualMatch');
+      await this._fader.fadeIn();
+
+      const battleScene = this._tdScenes.startBattle(resources, battle, battle.player,
+        battle.enemy, battle.initialState);
+      await waitAnimationFrame();
+      await this._fader.fadeOut();
+      this._domScenes.hidden();
+      await this._fader.fadeIn();
+      await battleScene.start();
+    };
 
     if (this._inProgress.type === 'NPCBattle') {
       await npcBattlePlayerSelect(this._inProgress);
+    } else if (this._inProgress.type === 'CasualMatch') {
+      await waitMatching(this._inProgress);
     }
   }
 
@@ -305,11 +326,20 @@ export class Game {
       await this._domScenes.startNPCEnding(resources);
       await this._fader.fadeIn();
     };
+    const endCasualMatch = async (): Promise<void> => {
+      this._inProgress = {type: 'None'};
+      await this._fader.fadeOut();
+      this._tdScenes.hidden();
+      await this._startTitle(resources);
+      await this._fader.fadeIn();
+    };
 
     if (this._inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._inProgress, action) && this._inProgress.player) {
       await npcBattleContinue(this._inProgress.player, this._inProgress);
     } else if (this._inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._inProgress, action)) {
       await npcBattleEnd();
+    } else if (this._inProgress.type === 'CasualMatch') {
+      await endCasualMatch();
     }
   }
 
