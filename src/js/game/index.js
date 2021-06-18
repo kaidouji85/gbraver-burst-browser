@@ -266,7 +266,8 @@ export class Game {
       this._inProgress = {...origin, subFlow};
 
       await this._fader.fadeOut();
-      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'カジュアルマッチ');
+      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id,
+        'CasualMatch');
       await this._fader.fadeIn();
 
       const battleScene = this._tdScenes.startBattle(resources, battle, battle.player,
@@ -325,11 +326,20 @@ export class Game {
       await this._domScenes.startNPCEnding(resources);
       await this._fader.fadeIn();
     };
+    const endCasualMatch = async (): Promise<void> => {
+      this._inProgress = {type: 'None'};
+      await this._fader.fadeOut();
+      this._tdScenes.hidden();
+      await this._startTitle(resources);
+      await this._fader.fadeIn();
+    };
 
     if (this._inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._inProgress, action) && this._inProgress.player) {
       await npcBattleContinue(this._inProgress.player, this._inProgress);
     } else if (this._inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._inProgress, action)) {
       await npcBattleEnd();
+    } else if (this._inProgress.type === 'CasualMatch') {
+      await endCasualMatch();
     }
   }
 
