@@ -3,8 +3,7 @@
  */
 @media (orientation: landscape) {
   .waiting {
-    --wating-dialog-width: calc(var(--wating-dialog-height) * 16 / 9);
-    --wating-dialog-height: calc(min(var(--vh) * 40, var(--responsive-font-size) * 7));
+    --wating-dialog-height: calc(var(--responsive-font-size) * 7);
     --wating-dialog-top: calc(var(--vh, 1vh) * 50);
     --wating-dialog-left: 50vw;
     --control-button-width: calc(var(--responsive-font-size) * 10);
@@ -29,7 +28,7 @@
 }
 
 .waiting__dialog {
-  width: var(--wating-dialog-width);
+  padding: 0 calc(var(--responsive-font-size) * 3);
   height: var(--wating-dialog-height);
   top: calc(var(--vh, 1vh) * 50);
   left: 50%;
