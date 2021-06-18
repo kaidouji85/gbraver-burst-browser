@@ -26,6 +26,7 @@ import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {IdPasswordLogin, LoginCheck} from '@gbraver-burst-network/core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
+import {Title} from "./dom-scenes/title/title";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends IdPasswordLogin, LoginCheck {}
@@ -140,7 +141,7 @@ export class Game {
     await waitTime(1000);
 
     await this._fader.fadeOut();
-    await this._domScenes.startTitle(resources, this._canCasualMatch);
+    await this._startTitle(resources);
     this._interruptScenes.bind(resources);
     await this._fader.fadeIn();
   }
@@ -241,7 +242,7 @@ export class Game {
       const updated = {...origin, player};
       const course = findCourse(updated);
       this._inProgress = updated;
-      await this._startNPCBattleCrce(resources, player, course);
+      await this._startNPCBattlecCourse(resources, player, course);
       return
     }
   }
@@ -255,7 +256,7 @@ export class Game {
       const resources: Resources = this._resources;
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
-      await this._domScenes.startTitle(resources, this._canCasualMatch);
+      await this._startTitle(resources);
       await this._fader.fadeIn();
       return;
     }
@@ -276,7 +277,7 @@ export class Game {
       const updated: NPCBattle = levelUpOrNot(origin, action);
       const course = findCourse(updated);   
       this._inProgress = updated;
-      await this._startNPCBattleCrce(resources, player, course);
+      await this._startNPCBattlecCourse(resources, player, course);
       return;
     } 
     
@@ -300,7 +301,7 @@ export class Game {
     if (this._resources) {
       const resources: Resources = this._resources;
       await this._fader.fadeOut();
-      await this._domScenes.startTitle(resources, this._canCasualMatch);
+      await this._startTitle(resources);
       await this._fader.fadeIn();
       return;
     }
@@ -308,12 +309,12 @@ export class Game {
 
   /**
    * NPCバトルコースを開始するヘルパーメソッド
-   * 
+   *
    * @param resources リソース管理オブジェクト
    * @param player プレイヤー
-   * @param cource NPCバトルコース
+   * @param course NPCバトルコース
    */
-  async _startNPCBattleCrce(resources: Resources, player: Player, course: NPCBattleCourse) {
+  async _startNPCBattlecCourse(resources: Resources, player: Player, course: NPCBattleCourse) {
     const battle = startOfflineBattle(player, course.npc);
       
     await this._fader.fadeOut();
@@ -328,5 +329,17 @@ export class Game {
     this._domScenes.hidden();
     await this._fader.fadeIn();
     await battleScene.start();
+  }
+
+  /**
+   * タイトル画面を開始するヘルパーメソッド
+   * いかなる場合でもcanCasualMatchに同じ値をセットするために、
+   * ヘルパーメソッド化した
+   *
+   * @param resources リソース管理オブジェクト
+   * @return タイトル画面
+   */
+  _startTitle(resources: Resources): Promise<Title> {
+    return this._domScenes.startTitle(resources, this._canCasualMatch);
   }
 }
