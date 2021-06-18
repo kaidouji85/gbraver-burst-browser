@@ -170,6 +170,12 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
+    const loginCheck = async (): Promise<boolean> => {
+      this._domDialogs.startWaiting('ログインチェック中......');
+      const isLogin = await this._api.isLogin();
+      this._domDialogs.hidden();
+      return isLogin;
+    };
     const gotoPlayerSelect = async (): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
       this._inProgress = {type: 'CasualMatch', subFlow};
@@ -185,7 +191,7 @@ export class Game {
       this._domDialogs.startLogin(resources, this._api, caption);
     };
 
-    const isLogin = await this._api.isLogin();
+    const isLogin = await loginCheck();
     if (isLogin) {
       await gotoPlayerSelect();
     } else {
@@ -260,12 +266,13 @@ export class Game {
       await this._startNPCBattlecCourse(resources, player, course);
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
-      // TODO マッチング中ダイアログを表示する
+      this._domDialogs.startWaiting('マッチング中......');
       const battle = await this._api.startCasualMatch(action.armdozerId, action.pilotId);
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
       await this._fader.fadeOut();
+      this._domDialogs.hidden();
       await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id,
         'CasualMatch');
       await this._fader.fadeIn();
