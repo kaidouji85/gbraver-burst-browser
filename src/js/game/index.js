@@ -260,12 +260,13 @@ export class Game {
       await this._startNPCBattlecCourse(resources, player, course);
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
-      // TODO マッチング中ダイアログを表示する
+      this._domDialogs.startWaiting('マッチング中......');
       const battle = await this._api.startCasualMatch(action.armdozerId, action.pilotId);
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
       await this._fader.fadeOut();
+      this._domDialogs.hidden();
       await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id,
         'CasualMatch');
       await this._fader.fadeIn();
