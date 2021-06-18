@@ -2,12 +2,12 @@
 
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
-import {LoadingDialog} from "../src/js/game/dom-dialogs/loading/loading-dialog";
+import {WaitingDialog} from "../src/js/game/dom-dialogs/waiting/waiting-dialog";
 
 export default {
-  title: 'loading-dialog',
+  title: 'waiting-dialog',
 };
 export const dialog: DOMStubStory = domStub(() => {
-  const dialog = new LoadingDialog('通知中......');
+  const dialog = new WaitingDialog('通知中......');
   return dialog.getRootHTMLElement();
 });
