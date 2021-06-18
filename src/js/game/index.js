@@ -170,6 +170,12 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
+    const loginCheck = async (): Promise<boolean> => {
+      this._domDialogs.startWaiting('ログインチェック中......');
+      const isLogin = await this._api.isLogin();
+      this._domDialogs.hidden();
+      return isLogin;
+    };
     const gotoPlayerSelect = async (): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
       this._inProgress = {type: 'CasualMatch', subFlow};
@@ -185,7 +191,7 @@ export class Game {
       this._domDialogs.startLogin(resources, this._api, caption);
     };
 
-    const isLogin = await this._api.isLogin();
+    const isLogin = await loginCheck();
     if (isLogin) {
       await gotoPlayerSelect();
     } else {
