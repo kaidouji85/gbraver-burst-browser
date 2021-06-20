@@ -70,12 +70,13 @@ export class DOMScenes {
    * 新しくタイトル画面を開始する
    *
    * @param resources リソース管理オブジェクト
+   * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能
    * @return 開始されたタイトル画面
    */
-  async startTitle(resources: Resources): Promise<Title> {
+  async startTitle(resources: Resources, canCasualMatch: boolean): Promise<Title> {
     this._removeCurrentScene();
 
-    const scene = new Title(resources);
+    const scene = new Title(resources, canCasualMatch);
     this._unsubscribers = [
       scene.pushGameStartNotifier().subscribe(() => {
         this._gameAction.next({type: 'GameStart'});
@@ -83,6 +84,9 @@ export class DOMScenes {
       scene.pushHowToPlayNotifier().subscribe(() => {
         this._gameAction.next({type: 'ShowHowToPlay'});
       }),
+      scene.pushCasualMatchNotifier().subscribe(() => {
+        this._gameAction.next({type: 'CasualMatchStart'});
+      })
     ];
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([

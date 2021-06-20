@@ -95,6 +95,8 @@ module.exports = {
       GBRAVER_BURST_HOW_TO_PLAY: JSON.stringify(process.env.HOW_TO_PLAY_URL),
       GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE: JSON.stringify(process.env.IS_PERFORMANCE_STATS_VISIBLE),
       GBRAVER_BURST_IS_SERVICE_WORKER_USED: JSON.stringify(process.env.IS_SERVICE_WORKER_USED),
+      GBRAVER_BURST_API_SERVER_URL: JSON.stringify(process.env.API_SERVER_URL),
+      GBRAVER_BURST_CAN_CASUAL_MATCH: JSON.stringify(process.env.CAN_CASUAL_MATCH),
     })
   ]
 };

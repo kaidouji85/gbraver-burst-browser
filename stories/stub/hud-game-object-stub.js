@@ -66,7 +66,9 @@ export class HUDGameObjectStub {
     this._overlap = this._renderer.createOverlapNotifier(this._camera.getCamera());
     this._gameObjectAction = gameObjectStream(this._update, this._preRender, this._overlap);
     this._unsubscriber = [
-      this._gameLoop.subscribe(this._onGameLoop.bind(this))
+      this._gameLoop.subscribe(v => {
+        this._onGameLoop(v);
+      })
     ];
   }
 

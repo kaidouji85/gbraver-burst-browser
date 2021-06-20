@@ -5,9 +5,9 @@ import {EMPTY_PLAYER} from "../../../../data/player";
 import type {GameOver, Player} from "gbraver-burst-core";
 import {EMPTY_END_BATTLE} from "../../../../data/end-battle";
 import type {NPCBattle} from "../../../../../src/js/game/in-progress/npc-battle/npc-battle";
+import {isNPCBattleEnd} from "../../../../../src/js/game/in-progress/npc-battle/npc-battle";
 import {MAX_LEVEL} from "../../../../../src/js/game/in-progress/npc-battle/npc-battle";
 import {EMPTY_NPC_BATTLE} from "../../../../data/npc-battle";
-import {isNPCBattleEnd} from "../../../../../src/js/game/in-progress/npc-battle/level-up";
 import type {EndBattle} from "../../../../../src/js/game/actions/game-actions";
 
 const player: Player = {

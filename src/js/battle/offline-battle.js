@@ -19,7 +19,7 @@ export type OfflineBattle = {
  *
  * @param player プレイヤー情報
  * @param npc NPC
- * @return オフラインバトルルーム
+ * @return オフラインバトル
  */
 export function startOfflineBattle(player: Player, npc: NPC): OfflineBattle {
   const enemy = {
