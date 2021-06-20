@@ -128,12 +128,15 @@ export class Title implements DOMScene {
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._gameStart)
-        .subscribe(this._onPushGameStart.bind(this)),
-      pushDOMStream(this._casualMatch)
-        .subscribe(this._onCasualMatchPush.bind(this)),
-      pushDOMStream(this._howToPlay)
-        .subscribe(this._onPushHowToPlay.bind(this)),
+      pushDOMStream(this._gameStart).subscribe(() => {
+        this._onPushGameStart();
+      }),
+      pushDOMStream(this._casualMatch).subscribe(() => {
+        this._onCasualMatchPush();
+      }),
+      pushDOMStream(this._howToPlay).subscribe(() => {
+        this._onPushHowToPlay();
+      }),
     ];
   }
 

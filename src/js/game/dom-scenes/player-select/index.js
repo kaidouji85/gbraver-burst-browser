@@ -117,18 +117,24 @@ export class PlayerSelect implements DOMScene {
     elements.selector.appendChild(this._pilotSelector.getRootHTMLElement());
 
     this._unsubscribers = [
-      this._armdozerSelector.changeNotifier()
-        .subscribe(this._onArmdozerChange.bind(this)),
-      this._armdozerSelector.decideNotifier()
-        .subscribe(this._onArmdozerDecided.bind(this)),
-      this._armdozerSelector.prevNotifier()
-        .subscribe(this._onArmdozerSelectorPrev.bind(this)),
-      this._pilotSelector.changeNotifier()
-        .subscribe(this._onPilotChange.bind(this)),
-      this._pilotSelector.decideNotifier()
-        .subscribe(this._onPilotDecided.bind(this)),
-      this._pilotSelector.prevNotifier()
-        .subscribe(this._onPilotSelectorPrev.bind(this))
+      this._armdozerSelector.changeNotifier().subscribe(v => {
+        this._onArmdozerChange(v);
+      }),
+      this._armdozerSelector.decideNotifier().subscribe(v => {
+        this._onArmdozerDecided(v);
+      }),
+      this._armdozerSelector.prevNotifier().subscribe(() => {
+        this._onArmdozerSelectorPrev();
+      }),
+      this._pilotSelector.changeNotifier().subscribe(v => {
+        this._onPilotChange(v);
+      }),
+      this._pilotSelector.decideNotifier().subscribe(v => {
+        this._onPilotDecided(v);
+      }),
+      this._pilotSelector.prevNotifier().subscribe(() => {
+        this._onPilotSelectorPrev();
+      })
     ];
   }
 

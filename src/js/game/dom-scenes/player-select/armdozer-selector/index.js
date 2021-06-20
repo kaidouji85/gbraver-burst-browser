@@ -138,10 +138,12 @@ export class ArmdozerSelector {
         v.icon.selectedNotifier().subscribe(() => {
           this._onArmdozerSelect(v.armdozerId);
         })),
-      pushDOMStream(this._okButton)
-        .subscribe(this._onOkButtonPush.bind(this)),
-      pushDOMStream(this._prevButton)
-        .subscribe(this._onPrevButtonPush.bind(this)),
+      pushDOMStream(this._okButton).subscribe(() => {
+        this._onOkButtonPush();
+      }),
+      pushDOMStream(this._prevButton).subscribe(() => {
+        this._onPrevButtonPush();
+      }),
     ];
   }
 

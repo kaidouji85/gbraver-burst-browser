@@ -129,10 +129,12 @@ export class PilotSelector {
         v.icon.selectedNotifier().subscribe(() =>{
           this._onPilotChange(v.pilotId);
         })),
-      pushDOMStream(this._okButton)
-        .subscribe(this._onOkButtonPush.bind(this)),
-      pushDOMStream(this._prevButton)
-        .subscribe(this._onPrevButtonPush.bind(this)),
+      pushDOMStream(this._okButton).subscribe(() => {
+        this._onOkButtonPush();
+      }),
+      pushDOMStream(this._prevButton).subscribe(() => {
+        this._onPrevButtonPush();
+      }),
     ];
   }
 

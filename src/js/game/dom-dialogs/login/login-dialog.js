@@ -119,14 +119,18 @@ export class LoginDialog implements DOMDialog {
     this._closeDialog = new RxjsStreamSource();
     this._loginSuccess = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._closer)
-        .subscribe(this._onCloserPush.bind(this)),
-      pushDOMStream(elements.backGround)
-        .subscribe(this._onPushOutsideOfDialog.bind(this)),
-      this._loginEntering.closeNotifier()
-        .subscribe(this._onPushCloseButtonPush.bind(this)),
-      this._loginEntering.inputCompleteNotifier()
-        .subscribe(this._onInputComplete.bind(this))
+      pushDOMStream(this._closer).subscribe(() => {
+        this._onCloserPush();
+      }),
+      pushDOMStream(elements.backGround).subscribe(() => {
+        this._onPushOutsideOfDialog();
+      }),
+      this._loginEntering.closeNotifier().subscribe(() => {
+        this._onPushCloseButtonPush();
+      }),
+      this._loginEntering.inputCompleteNotifier().subscribe(data => {
+        this._onInputComplete(data);
+      })
     ];
 
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)

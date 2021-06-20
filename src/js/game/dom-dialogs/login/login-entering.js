@@ -144,10 +144,12 @@ export class LoginEntering {
     this._inputCoomplete = new RxjsStreamSource();
     this._close = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._submit)
-        .subscribe(this._onLoginPush.bind(this)),
-      pushDOMStream(this._closeButton)
-        .subscribe(this._onCloseButtonPush.bind(this)),
+      pushDOMStream(this._submit).subscribe(() => {
+        this._onLoginPush();
+      }),
+      pushDOMStream(this._closeButton).subscribe(() => {
+        this._onCloseButtonPush();
+      }),
     ];
 
     this._exclusive = new Exclusive();
