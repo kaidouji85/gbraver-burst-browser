@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+  pre_build:
+    commands:
+      - npm ci
+      - npm run type-check
+      - npm run test
+  build:
+    commands:
+      - ./shell/deploy-production.sh $S3_BUCKET $DISTRIBUTION_ID
