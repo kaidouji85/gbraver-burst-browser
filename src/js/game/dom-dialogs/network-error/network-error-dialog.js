@@ -2,6 +2,9 @@
 
 import type {DOMDialog} from "../dialog";
 import {domUuid} from "../../../uuid/dom-uuid";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
+import {RxjsStreamSource} from '../../../stream/rxjs';
+import {pushDOMStream} from '../../../dom/push/push-dom';
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'network-error';
@@ -50,7 +53,8 @@ type Elements = {
 /** 通信エラー ダイアログ */
 export class NetworkErrorDialog implements DOMDialog {
   _root: HTMLElement;
-  _nextActionButton: HTMLButtonElement;
+  _nextAction: StreamSource<void>;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -64,14 +68,22 @@ export class NetworkErrorDialog implements DOMDialog {
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = rootInnerHTML(dataIDs, caption, nextAction);
     const elements = extractElements(this._root, dataIDs);
-    this._nextActionButton = elements.nextActionButton;
+
+    this._nextAction = new RxjsStreamSource();
+    this._unsubscribers = [
+      pushDOMStream(elements.nextActionButton).subscribe(() => {
+        this._onNextActionPush();
+      })
+    ];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    // NOP
+    this._unsubscribers.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -81,5 +93,21 @@ export class NetworkErrorDialog implements DOMDialog {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * 次の行動を実施するべきタイミングを通知する
+   * 
+   * @return 通知ストリーム
+   */
+  nextActionNotifier(): Stream<void> {
+    return this._nextAction;
+  }
+
+  /**
+   * 次の行動が書かれたボタンを押した時の処理
+   */
+  _onNextActionPush(): void {
+    this._nextAction.next();
   }
 }
