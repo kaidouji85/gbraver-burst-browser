@@ -1,0 +1,48 @@
+/**
+ * 通信エラー ダイアログ
+ */
+ @media (orientation: landscape) {
+  .network-error {
+    --wating-dialog-height: calc(var(--responsive-font-size) * 7);
+    --wating-dialog-top: calc(var(--vh, 1vh) * 50);
+    --wating-dialog-left: 50vw;
+    --control-button-width: calc(var(--responsive-font-size) * 10);
+    --control-button-height: calc(var(--responsive-font-size) * 3);
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .network-error {
+    display: none;
+  }
+}
+
+.network-error__background {
+  position: absolute;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.network-error__dialog {
+  padding: 0 calc(var(--responsive-font-size) * 3);
+  height: var(--wating-dialog-height);
+  top: calc(var(--vh, 1vh) * 50);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+
+  background-color: var(--background-color);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog)
+}
