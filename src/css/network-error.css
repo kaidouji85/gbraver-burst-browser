@@ -3,7 +3,8 @@
  */
  @media (orientation: landscape) {
   .network-error {
-    --wating-dialog-height: calc(var(--responsive-font-size) * 7);
+    --wating-dialog-height: calc(var(--vh) * 50);
+    --wating-dialog-width: calc(min(var(--wating-dialog-height) * 16 / 9, 90vw));
     --wating-dialog-top: calc(var(--vh, 1vh) * 50);
     --wating-dialog-left: 50vw;
     --control-button-width: calc(var(--responsive-font-size) * 10);
@@ -28,7 +29,8 @@
 }
 
 .network-error__dialog {
-  padding: 0 calc(var(--responsive-font-size) * 3);
+  padding: calc(var(--responsive-font-size) * 0.5) calc(var(--responsive-font-size) * 3);
+  width: var(--wating-dialog-width);
   height: var(--wating-dialog-height);
   top: calc(var(--vh, 1vh) * 50);
   left: 50%;
@@ -45,4 +47,19 @@
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog)
+}
+
+.network-error__dialog__caption {
+  margin-bottom: calc(var(--responsive-font-size) * 2);
+}
+
+.network-error__dialog__next-action {
+  width: var(--control-button-width);
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  background-color: var(--button-background-color);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
 }

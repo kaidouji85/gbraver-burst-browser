@@ -9,13 +9,15 @@ const ROOT_CLASS_NAME = 'network-error';
  * ルート要素のinnerHTML
  *
  * @param caption ダイアログに表示する文言
+ * @param nextAction ボタンに表示される文言
  * @return innerHTML
  */
-function rootInnerHTML(caption: string): string {
+function rootInnerHTML(caption: string, nextAction: string): string {
   return `
     <div class="${ROOT_CLASS_NAME}__background"></div>
     <div class="${ROOT_CLASS_NAME}__dialog">
-      <span>${caption}</span>    
+      <span class="${ROOT_CLASS_NAME}__dialog__caption">${caption}</span>
+      <button class="${ROOT_CLASS_NAME}__dialog__next-action">${nextAction}</button>
     </div>
   `;
 }
@@ -28,11 +30,12 @@ export class NetworkErrorDialog implements DOMDialog {
    * コンストラクタ
    *
    * @param caption ダイアログに表示する文言
+   * @param nextAction ボタンに表示される文言
    */
-  constructor(caption: string) {
+  constructor(caption: string, nextAction: string) {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(caption);
+    this._root.innerHTML = rootInnerHTML(caption, nextAction);
   }
 
   /**

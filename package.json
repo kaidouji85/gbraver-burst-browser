@@ -18,7 +18,7 @@
     "clean": "rimraf build",
     "dev-server": "webpack serve",
     "serve": "http-server build/production -p 3000 -c-1",
-    "serve:storybook-static": "http-server build/storybook-static",
+    "serve:storybook-static": "http-server build/storybook-static -c-1",
     "webpack": "webpack",
     "webpack:production": "webpack --mode=production",
     "webpack:sw": "webpack --config webpack.sw.js",
