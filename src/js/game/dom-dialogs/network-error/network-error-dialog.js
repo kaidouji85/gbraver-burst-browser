@@ -5,6 +5,8 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pushDOMStream} from '../../../dom/push/push-dom';
+import {Exclusive} from "../../../exclusive/exclusive";
+import {pop} from "../../../dom/animation/pop";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'network-error';
@@ -53,8 +55,10 @@ type Elements = {
 /** 通信エラー ダイアログ */
 export class NetworkErrorDialog implements DOMDialog {
   _root: HTMLElement;
+  _nextActionButton: HTMLButtonElement;
   _nextAction: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
+  _exclusive: Exclusive;
 
   /**
    * コンストラクタ
@@ -68,13 +72,16 @@ export class NetworkErrorDialog implements DOMDialog {
     this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = rootInnerHTML(dataIDs, caption, nextAction);
     const elements = extractElements(this._root, dataIDs);
+    this._nextActionButton = elements.nextActionButton;
 
     this._nextAction = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(elements.nextActionButton).subscribe(() => {
+      pushDOMStream(this._nextActionButton).subscribe(() => {
         this._onNextActionPush();
       })
     ];
+
+    this._exclusive = new Exclusive();
   }
 
   /**
@@ -96,7 +103,7 @@ export class NetworkErrorDialog implements DOMDialog {
   }
 
   /**
-   * 次の行動を実施するべきタイミングを通知する
+   * 次の行動を実施するタイミングを通知する
    * 
    * @return 通知ストリーム
    */
@@ -108,6 +115,9 @@ export class NetworkErrorDialog implements DOMDialog {
    * 次の行動が書かれたボタンを押した時の処理
    */
   _onNextActionPush(): void {
-    this._nextAction.next();
+    this._exclusive.execute(async ()=> {
+      await pop(this._nextActionButton);
+      this._nextAction.next();
+    });    
   }
 }
