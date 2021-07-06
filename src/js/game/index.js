@@ -114,6 +114,7 @@ export class Game {
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'LoginSuccess') { this._onLoginSuccess() }
+      else if (action.type === 'EndNetworkError') { this._onEndNetworkError() }
     }));
   }
 
@@ -171,10 +172,17 @@ export class Game {
 
     const resources: Resources = this._resources;
     const loginCheck = async (): Promise<boolean> => {
-      this._domDialogs.startWaiting('ログインチェック中......');
-      const isLogin = await this._api.isLogin();
-      this._domDialogs.hidden();
-      return isLogin;
+      try {
+        const subFlow = {type: 'Login'};
+        this._inProgress = {type: 'CasualMatch', subFlow};
+        this._domDialogs.startWaiting('ログインチェック中......');
+        const isLogin = await this._api.isLogin();
+        this._domDialogs.hidden();
+        return isLogin;
+      } catch(e) {
+        this._domDialogs.startNetworkError('ログインチェックに失敗しました', '閉じる');
+        throw e;
+      }
     };
     const gotoPlayerSelect = async (): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
@@ -185,8 +193,6 @@ export class Game {
       await this._fader.fadeIn();
     };
     const showLoginDialog = async (): Promise<void> => {
-      const subFlow = {type: 'Login'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
       const caption = 'カジュアルマッチを始めるにはログインする必要があります';
       this._domDialogs.startLogin(resources, this._api, caption);
     };
@@ -241,10 +247,36 @@ export class Game {
   }
 
   /**
-   * 遊び方シーン終了
+   * 遊び方ダイアログを閉じる
    */
   _onEndHowToPlay() {
     this._domDialogs.hidden();
+  }
+
+  /**
+   * 通信エラーダイアログを閉じる
+   */
+  async _onEndNetworkError() {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const closeDialog = () => {
+      this._domDialogs.hidden();
+    };
+    const gotoTitle = async () => {
+      this._domDialogs.hidden();
+      await this._fader.fadeOut();
+      await this._startTitle(resources);
+      await this._fader.fadeIn();
+    };
+
+    if (this._inProgress.type === 'CasualMatch' && this._inProgress.subFlow.type === 'Login') {
+      closeDialog();
+    } else {
+      await gotoTitle();
+    }
   }
 
   /**
