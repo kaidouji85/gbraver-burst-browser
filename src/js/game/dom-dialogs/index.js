@@ -9,6 +9,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import type {OwnAPI as LoginDialogAPI} from './login/login-dialog';
 import {LoginDialog} from './login/login-dialog';
 import {WaitingDialog} from "./waiting/waiting-dialog";
+import {NetworkErrorDialog} from './network-error/network-error-dialog';
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -80,6 +81,25 @@ export class DOMDialogs {
     const waiting = new WaitingDialog(caption);
     this._root.appendChild(waiting.getRootHTMLElement());
     this._dialog = waiting;
+  }
+
+  /**
+   * 通信エラーダイアログを表示する
+   * 
+   * @param caption ダイアログに表示する文言
+   * @param nextAction 次に起こるアクション 
+   */
+  startNetworkError(caption: string, nextAction: string): void {
+    this._removeCurrentDialog();
+    
+    const networkError = new NetworkErrorDialog(caption, nextAction);
+    this._unsubscribers = [
+      networkError.nextActionNotifier().subscribe(() => {
+        this._gameAction.next({type: 'EndNetworkError'});
+      })
+    ];
+    this._root.appendChild(networkError.getRootHTMLElement());
+    this._dialog = networkError;
   }
 
   /**

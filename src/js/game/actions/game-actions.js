@@ -64,10 +64,15 @@ export type LoginSuccess = {
   type: 'LoginSuccess'
 };
 
-/** 通信エラー */
+/** 通信エラーが発生した */
 export type NetworkError = {
   type: 'NetworkError',
   error: any
+};
+
+/** 通信エラーダイアログを閉じる */
+export type EndNetworkError = {
+  type: 'EndNetworkError'
 };
 
 /**
@@ -83,4 +88,5 @@ export type GameAction = GameStart
  | EndNPCEnding
  | LoginCancel
  | LoginSuccess
- | NetworkError;
+ | NetworkError
+ | EndNetworkError;
