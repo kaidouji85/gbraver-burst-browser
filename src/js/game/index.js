@@ -27,6 +27,7 @@ import type {Stream, Unsubscriber} from "../stream/core";
 import type {IdPasswordLogin, LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
+import {toPostNetworkError} from "./in-progress/network-error";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends IdPasswordLogin, LoginCheck, CasualMatchSDK {}
@@ -260,8 +261,17 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const {caption} = this._nextActionForNetworkError(resources);
-    this._domDialogs.startNetworkError(resources, caption);
+    const postProcessing = toPostNetworkError(this._inProgress);
+    const caption = () => {
+      switch(postProcessing) {
+        case 'Close':
+          return '閉じる';
+        case 'GotoTitle':
+        default:
+          return 'タイトルへ';
+      }
+    };
+    this._domDialogs.startNetworkError(resources, caption());
   }
 
   /**
@@ -273,7 +283,27 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const {handler} = this._nextActionForNetworkError(resources);
+    const close = async () => {
+      this._inProgress = {type: 'None'};
+      this._domDialogs.hidden();
+    };
+    const gotoTitle = async () => {
+      this._inProgress = {type: 'None'};
+      this._domDialogs.hidden();
+      await this._fader.fadeOut();
+      await this._startTitle(resources);
+      await this._fader.fadeIn();
+    };
+    const postProcessing = toPostNetworkError(this._inProgress);
+    const handler = () => {
+      switch(postProcessing) {
+        case 'Close':
+          return close();
+        case 'GotoTitle':
+        default:
+          return gotoTitle();
+      }
+    };
     await handler();
   }
 
@@ -293,7 +323,7 @@ export class Game {
       const updated = {...origin, player};
       const course = findCourse(updated);
       this._inProgress = updated;
-      await this._startNPCBattlecCourse(resources, player, course);
+      await this._startNPCBattleCourse(resources, player, course);
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
@@ -354,7 +384,7 @@ export class Game {
       const updated: NPCBattle = levelUpOrNot(origin, action);
       const course = findCourse(updated);
       this._inProgress = updated;
-      await this._startNPCBattlecCourse(resources, player, course);
+      await this._startNPCBattleCourse(resources, player, course);
     };
     const npcBattleEnd = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
@@ -401,7 +431,7 @@ export class Game {
    * @param player プレイヤー
    * @param course NPCバトルコース
    */
-  async _startNPCBattlecCourse(resources: Resources, player: Player, course: NPCBattleCourse) {
+  async _startNPCBattleCourse(resources: Resources, player: Player, course: NPCBattleCourse) {
     const battle = startOfflineBattle(player, course.npc);
       
     await this._fader.fadeOut();
@@ -428,46 +458,6 @@ export class Game {
    */
   _startTitle(resources: Resources): Promise<Title> {
     return this._domScenes.startTitle(resources, this._canCasualMatch);
-  }
-
-  /**
-   * 通信エラーの次に実行するべき処理
-   * 以下のオブジェクトを返す
-   *
-   * {
-   *   caption: 処理概要、ダイアログのボタンに表示することを想定している
-   *   handler: 処理内容、ダイアログを閉じた後に実行することを想定している
-   * }
-   * 
-   * @param resources リソースオブジェクト
-   * @return 通信エラーの次に実行するべきアクション
-   */
-  _nextActionForNetworkError(resources: Resources): {caption: string, handler: () => Promise<void>} {
-    const close = {
-      caption: '閉じる',
-      handler: async () => {
-        this._inProgress = {type: 'None'};
-        this._domDialogs.hidden();
-      }
-    };
-    const gotoTitle = {
-      caption: 'タイトルへ',
-      handler: async () => {
-        this._inProgress = {type: 'None'};
-        this._domDialogs.hidden();
-        await this._fader.fadeOut();
-        await this._startTitle(resources);
-        await this._fader.fadeIn();
-      }
-    };
-
-    if (this._inProgress.type === 'CasualMatch' && this._inProgress.subFlow.type === 'LoginCheck') {
-      return close;
-    } else if (this._inProgress.type === 'CasualMatch' && this._inProgress.subFlow.type === 'Login') {
-      return close;
-    } else {
-      return gotoTitle;
-    }
   }
 
   /**
