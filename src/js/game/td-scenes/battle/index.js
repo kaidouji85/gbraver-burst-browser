@@ -45,7 +45,7 @@ export class BattleScene implements Scene {
   _state: BattleSceneState;
   _initialState: GameState[];
   _endBattle: StreamSource<GameEnd>;
-  _battleProgressError: StreamSource<any>;
+  _battleProgressError: StreamSource<void>;
   _battleProgress: BattleProgress;
   _exclusive: Exclusive;
   _view: BattleSceneView;
@@ -106,7 +106,7 @@ export class BattleScene implements Scene {
    *
    * @return 通知ストリーム
    */
-  battleErrorNotifier(): Stream<any> {
+  battleErrorNotifier(): Stream<void> {
     return this._battleProgressError;
   }
 
@@ -140,7 +140,7 @@ export class BattleScene implements Scene {
       try {
         lastState = await this._progressGame({type: 'BATTERY_COMMAND', battery: action.battery});
       } catch(error) {
-        this._battleProgressError.next(error);
+        this._battleProgressError.next();
         throw error;
       }
 
@@ -168,7 +168,7 @@ export class BattleScene implements Scene {
       try {
         lastState = await this._progressGame({type: 'BURST_COMMAND'});
       } catch(error) {
-        this._battleProgressError.next(error);
+        this._battleProgressError.next();
         throw error;
       }
 
@@ -198,7 +198,7 @@ export class BattleScene implements Scene {
       try {
         lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
       } catch(error) {
-        this._battleProgressError.next(error);
+        this._battleProgressError.next();
         throw error;
       }
 

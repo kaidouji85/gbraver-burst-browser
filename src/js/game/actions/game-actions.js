@@ -66,8 +66,7 @@ export type LoginSuccess = {
 
 /** 通信エラーが発生した */
 export type NetworkError = {
-  type: 'NetworkError',
-  error: any
+  type: 'NetworkError'
 };
 
 /** 通信エラーダイアログを閉じる */

@@ -114,6 +114,7 @@ export class Game {
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'LoginSuccess') { this._onLoginSuccess() }
+      else if (action.type === 'NetworkError') { this._onNetworkError() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError() }
     }));
   }
@@ -254,6 +255,13 @@ export class Game {
   }
 
   /**
+   * 通信エラーが発生した
+   */
+  _onNetworkError() {
+    this._domDialogs.startNetworkError('通信エラーが発生しました', 'タイトルへ');
+  }
+
+  /**
    * 通信エラーダイアログを閉じる
    */
   async _onEndNetworkError() {
@@ -266,6 +274,7 @@ export class Game {
       this._domDialogs.hidden();
     };
     const gotoTitle = async () => {
+      this._inProgress = {type: 'None'};
       this._domDialogs.hidden();
       await this._fader.fadeOut();
       await this._startTitle(resources);
