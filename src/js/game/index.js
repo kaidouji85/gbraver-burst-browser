@@ -173,17 +173,20 @@ export class Game {
 
     const resources: Resources = this._resources;
     const loginCheck = async (): Promise<boolean> => {
+      const subFlow = {type: 'LoginCheck'};
+      this._inProgress = {type: 'CasualMatch', subFlow};
+      this._domDialogs.startWaiting('ログインチェック中......');
+
+      let isLogin = false;
       try {
-        const subFlow = {type: 'Login'};
-        this._inProgress = {type: 'CasualMatch', subFlow};
-        this._domDialogs.startWaiting('ログインチェック中......');
-        const isLogin = await this._api.isLogin();
-        this._domDialogs.hidden();
-        return isLogin;
-      } catch(e) {
-        this._domDialogs.startNetworkError( '閉じる');
-        throw e;
+        isLogin = await this._api.isLogin();
+      } catch(error) {
+        this._onNetworkError();
+        throw error;
       }
+
+      this._domDialogs.hidden();
+      return isLogin;
     };
     const gotoPlayerSelect = async (): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
@@ -194,6 +197,8 @@ export class Game {
       await this._fader.fadeIn();
     };
     const showLoginDialog = async (): Promise<void> => {
+      const subFlow = {type: 'Login'};
+      this._inProgress = {type: 'CasualMatch', subFlow};
       const caption = 'カジュアルマッチを始めるにはログインする必要があります';
       this._domDialogs.startLogin(resources, this._api, caption);
     };
@@ -258,7 +263,13 @@ export class Game {
    * 通信エラーが発生した
    */
   _onNetworkError() {
-    this._domDialogs.startNetworkError('タイトルへ');
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const {caption} = this._nextActionForNetworkError(resources);
+    this._domDialogs.startNetworkError(caption);
   }
 
   /**
@@ -270,22 +281,8 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const closeDialog = () => {
-      this._domDialogs.hidden();
-    };
-    const gotoTitle = async () => {
-      this._inProgress = {type: 'None'};
-      this._domDialogs.hidden();
-      await this._fader.fadeOut();
-      await this._startTitle(resources);
-      await this._fader.fadeIn();
-    };
-
-    if (this._inProgress.type === 'CasualMatch' && this._inProgress.subFlow.type === 'Login') {
-      closeDialog();
-    } else {
-      await gotoTitle();
-    }
+    const {handler} = this._nextActionForNetworkError(resources);
+    await handler();
   }
 
   /**
@@ -308,7 +305,15 @@ export class Game {
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
-      const battle = await this._api.startCasualMatch(action.armdozerId, action.pilotId);
+
+      let battle = null;
+      try {
+        battle = await this._api.startCasualMatch(action.armdozerId, action.pilotId);
+      } catch(error) {
+        this._onNetworkError();
+        throw error;
+      }
+
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
@@ -439,5 +444,45 @@ export class Game {
    */
   _startTitle(resources: Resources): Promise<Title> {
     return this._domScenes.startTitle(resources, this._canCasualMatch);
+  }
+
+  /**
+   * 通信エラーの次に実行するべき処理
+   * 以下のオブジェクトを返す
+   *
+   * {
+   *   caption: 処理概要、ダイアログのボタンに表示することを想定している
+   *   handler: 処理内容、ダイアログを閉じた後に実行することを想定している
+   * }
+   * 
+   * @param resources リソースオブジェクト
+   * @return 通信エラーの次に実行するべきアクション
+   */
+  _nextActionForNetworkError(resources: Resources): {caption: string, handler: () => Promise<void>} {
+    const close = {
+      caption: '閉じる',
+      handler: async () => {
+        this._inProgress = {type: 'None'};
+        this._domDialogs.hidden();
+      }
+    };
+    const gotoTitle = {
+      caption: 'タイトルへ',
+      handler: async () => {
+        this._inProgress = {type: 'None'};
+        this._domDialogs.hidden();
+        await this._fader.fadeOut();
+        await this._startTitle(resources);
+        await this._fader.fadeIn();
+      }
+    };
+
+    if (this._inProgress.type === 'CasualMatch' && this._inProgress.subFlow.type === 'LoginCheck') {
+      return close;
+    } else if (this._inProgress.type === 'CasualMatch' && this._inProgress.subFlow.type === 'Login') {
+      return close;
+    } else {
+      return gotoTitle;
+    }
   }
 }
