@@ -176,15 +176,7 @@ export class Game {
       const subFlow = {type: 'LoginCheck'};
       this._inProgress = {type: 'CasualMatch', subFlow};
       this._domDialogs.startWaiting('ログインチェック中......');
-
-      let isLogin = false;
-      try {
-        isLogin = await this._api.isLogin();
-      } catch(error) {
-        this._onNetworkError();
-        throw error;
-      }
-
+      const isLogin = this._apiErrorHandling(() => this._api.isLogin());
       this._domDialogs.hidden();
       return isLogin;
     };
@@ -305,15 +297,7 @@ export class Game {
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
-
-      let battle = null;
-      try {
-        battle = await this._api.startCasualMatch(action.armdozerId, action.pilotId);
-      } catch(error) {
-        this._onNetworkError();
-        throw error;
-      }
-
+      const battle = await this._apiErrorHandling(() => this._api.startCasualMatch(action.armdozerId, action.pilotId));
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
@@ -483,6 +467,23 @@ export class Game {
       return close;
     } else {
       return gotoTitle;
+    }
+  }
+
+  /**
+   * エラーハンドリング付きでAPI通信を行う
+   * 本クラスではAPIを直接呼び出さずに、
+   * 本メソッド経由で呼び出すことを想定している
+   *
+   * @param fn API通信を行うコールバック関数
+   * @return 通信レスポンス
+   */
+  async _apiErrorHandling<X>(fn: () => Promise<X>): Promise<X> {
+    try {
+      return await fn();
+    } catch(error) {
+      this._onNetworkError();
+      throw error;
     }
   }
 }
