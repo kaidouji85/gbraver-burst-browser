@@ -25,7 +25,10 @@ export class Exclusive {
     }
 
     this._canExecute = false;
-    await fn();
-    this._canExecute = true;
+    try {
+      await fn();
+    } finally {
+      this._canExecute = true;
+    }
   }
 }

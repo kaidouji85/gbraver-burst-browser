@@ -1,5 +1,6 @@
 // @flow
 
+import {Howl} from 'howler';
 import type {DOMDialog} from "../dialog";
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
@@ -7,6 +8,8 @@ import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pushDOMStream} from '../../../dom/push/push-dom';
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'network-error';
@@ -56,15 +59,17 @@ export class NetworkErrorDialog implements DOMDialog {
   _root: HTMLElement;
   _nextActionButton: HTMLButtonElement;
   _nextAction: StreamSource<void>;
+  _pushButton: typeof Howl;
   _unsubscribers: Unsubscriber[];
   _exclusive: Exclusive;
 
   /**
    * コンストラクタ
    *
+   * @param resources リソース管理オブジェクト
    * @param nextAction ボタンに表示される文言
    */
-  constructor(nextAction: string) {
+  constructor(resources: Resources, nextAction: string) {
     const dataIDs = {nextActionButton: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
@@ -80,6 +85,9 @@ export class NetworkErrorDialog implements DOMDialog {
     ];
 
     this._exclusive = new Exclusive();
+
+    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?.sound ?? new Howl();
   }
 
   /**
@@ -114,7 +122,10 @@ export class NetworkErrorDialog implements DOMDialog {
    */
   _onNextActionPush(): void {
     this._exclusive.execute(async ()=> {
-      await pop(this._nextActionButton);
+      await Promise.all([
+        this._pushButton.play(),
+        pop(this._nextActionButton)
+      ]);
       this._nextAction.next();
     });    
   }

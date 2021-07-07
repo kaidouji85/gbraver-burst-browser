@@ -269,7 +269,7 @@ export class Game {
 
     const resources: Resources = this._resources;
     const {caption} = this._nextActionForNetworkError(resources);
-    this._domDialogs.startNetworkError(caption);
+    this._domDialogs.startNetworkError(resources, caption);
   }
 
   /**

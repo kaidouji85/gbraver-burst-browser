@@ -7,8 +7,8 @@ import {NetworkErrorDialog} from "../src/js/game/dom-dialogs/network-error/netwo
 export default {
   title: 'network-error-dialog',
 };
-export const dialog: DOMStubStory = domStub(() => {
-  const dialog = new NetworkErrorDialog('閉じる');
+export const dialog: DOMStubStory = domStub(resources => {
+  const dialog = new NetworkErrorDialog(resources, '閉じる');
   dialog.nextActionNotifier().subscribe(() => {
     console.log('next action');
   });

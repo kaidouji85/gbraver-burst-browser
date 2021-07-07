@@ -85,13 +85,14 @@ export class DOMDialogs {
 
   /**
    * 通信エラーダイアログを表示する
-   * 
+   *
+   * @param resources リソース管理オブジェクト
    * @param nextAction 次に起こるアクション
    */
-  startNetworkError(nextAction: string): void {
+  startNetworkError(resources: Resources, nextAction: string): void {
     this._removeCurrentDialog();
     
-    const networkError = new NetworkErrorDialog(nextAction);
+    const networkError = new NetworkErrorDialog(resources, nextAction);
     this._unsubscribers = [
       networkError.nextActionNotifier().subscribe(() => {
         this._gameAction.next({type: 'EndNetworkError'});
