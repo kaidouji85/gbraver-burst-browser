@@ -45,6 +45,7 @@ export class BattleScene implements Scene {
   _state: BattleSceneState;
   _initialState: GameState[];
   _endBattle: StreamSource<GameEnd>;
+  _battleError: StreamSource<any>;
   _battleProgress: BattleProgress;
   _exclusive: Exclusive;
   _view: BattleSceneView;
@@ -56,6 +57,7 @@ export class BattleScene implements Scene {
     this._initialState = param.initialState;
     this._state = createInitialState(param.player.playerId);
     this._endBattle = new RxjsStreamSource();
+    this._battleError = new RxjsStreamSource();
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,
@@ -97,6 +99,15 @@ export class BattleScene implements Scene {
    */
   gameEndNotifier(): Stream<GameEnd> {
     return this._endBattle;
+  }
+
+  /**
+   * 戦闘エラーを通知する
+   *
+   * @return 通知ストリーム
+   */
+  battleErrorNotifier(): Stream<any> {
+    return this._battleError;
   }
 
   /**
