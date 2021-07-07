@@ -181,7 +181,7 @@ export class Game {
         this._domDialogs.hidden();
         return isLogin;
       } catch(e) {
-        this._domDialogs.startNetworkError('ログインチェックに失敗しました', '閉じる');
+        this._domDialogs.startNetworkError( '閉じる');
         throw e;
       }
     };
@@ -258,7 +258,7 @@ export class Game {
    * 通信エラーが発生した
    */
   _onNetworkError() {
-    this._domDialogs.startNetworkError('通信エラーが発生しました', 'タイトルへ');
+    this._domDialogs.startNetworkError('タイトルへ');
   }
 
   /**

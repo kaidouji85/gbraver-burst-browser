@@ -8,7 +8,7 @@ export default {
   title: 'network-error-dialog',
 };
 export const dialog: DOMStubStory = domStub(() => {
-  const dialog = new NetworkErrorDialog('通信エラーが発生しました', '閉じる');
+  const dialog = new NetworkErrorDialog('閉じる');
   dialog.nextActionNotifier().subscribe(() => {
     console.log('next action');
   });

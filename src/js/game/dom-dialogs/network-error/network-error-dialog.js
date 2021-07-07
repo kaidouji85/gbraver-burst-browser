@@ -20,15 +20,14 @@ type DataIDs = {
  * ルート要素のinnerHTML
  *
  * @param ids data-idを集めたもの
- * @param caption ダイアログに表示する文言
  * @param nextAction ボタンに表示される文言
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, caption: string, nextAction: string): string {
+function rootInnerHTML(ids: DataIDs, nextAction: string): string {
   return `
     <div class="${ROOT_CLASS_NAME}__background"></div>
     <div class="${ROOT_CLASS_NAME}__dialog">
-      <span class="${ROOT_CLASS_NAME}__dialog__caption">${caption}</span>
+      <span class="${ROOT_CLASS_NAME}__dialog__caption">通信エラーが発生しました</span>
       <button class="${ROOT_CLASS_NAME}__dialog__next-action" data-id="${ids.nextActionButton}">${nextAction}</button>
     </div>
   `;
@@ -63,14 +62,13 @@ export class NetworkErrorDialog implements DOMDialog {
   /**
    * コンストラクタ
    *
-   * @param caption ダイアログに表示する文言
    * @param nextAction ボタンに表示される文言
    */
-  constructor(caption: string, nextAction: string) {
+  constructor(nextAction: string) {
     const dataIDs = {nextActionButton: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(dataIDs, caption, nextAction);
+    this._root.innerHTML = rootInnerHTML(dataIDs, nextAction);
     const elements = extractElements(this._root, dataIDs);
     this._nextActionButton = elements.nextActionButton;
 
