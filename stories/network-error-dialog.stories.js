@@ -9,8 +9,8 @@ export default {
 };
 export const dialog: DOMStubStory = domStub(resources => {
   const dialog = new NetworkErrorDialog(resources, '閉じる');
-  dialog.nextActionNotifier().subscribe(() => {
-    console.log('next action');
+  dialog.postNetworkErrorNotifier().subscribe(() => {
+    console.log('post network error');
   });
   return dialog.getRootHTMLElement();
 });

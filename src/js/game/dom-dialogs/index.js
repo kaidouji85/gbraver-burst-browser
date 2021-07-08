@@ -94,7 +94,7 @@ export class DOMDialogs {
     
     const networkError = new NetworkErrorDialog(resources, nextAction);
     this._unsubscribers = [
-      networkError.nextActionNotifier().subscribe(() => {
+      networkError.postNetworkErrorNotifier().subscribe(() => {
         this._gameAction.next({type: 'EndNetworkError'});
       })
     ];

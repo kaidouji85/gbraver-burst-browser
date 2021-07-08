@@ -113,7 +113,7 @@ export class NetworkErrorDialog implements DOMDialog {
    * 
    * @return 通知ストリーム
    */
-  nextActionNotifier(): Stream<void> {
+  postNetworkErrorNotifier(): Stream<void> {
     return this._postNetworkError;
   }
 
