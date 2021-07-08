@@ -273,8 +273,7 @@ export class Game {
    *   (1)通信エラーダイアログ表示
    *   (2)何等かの処理 or 待ち
    *   (3)本メソッド呼び出し
-   * とすると、(2)でthis._inProgressは変更されていない想定で
-   * 本メソッドの処理は書かれている
+   * とすると、(2)でthis._inProgressは変更されていない想定である
    */
   async _onEndNetworkError() {
     if (!this._resources) {

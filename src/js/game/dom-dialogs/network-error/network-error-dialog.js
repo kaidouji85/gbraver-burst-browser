@@ -80,7 +80,7 @@ export class NetworkErrorDialog implements DOMDialog {
     this._postNetworkError = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._postNetworkErrorButton).subscribe(() => {
-        this._onPostNetworkErrorPush();
+        this._onPostNetworkErrorButtonPush();
       })
     ];
 
@@ -120,7 +120,7 @@ export class NetworkErrorDialog implements DOMDialog {
   /**
    * 通信エラー後処理ボタンを押した時の処理
    */
-  _onPostNetworkErrorPush(): void {
+  _onPostNetworkErrorButtonPush(): void {
     this._exclusive.execute(async ()=> {
       await Promise.all([
         this._pushButton.play(),
