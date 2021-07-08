@@ -16,29 +16,29 @@ const ROOT_CLASS_NAME = 'network-error';
 
 /** data-idを集めたもの */
 type DataIDs = {
-  nextActionButton: string
+  postNetworkErrorButton: string
 };
 
 /**
  * ルート要素のinnerHTML
  *
  * @param ids data-idを集めたもの
- * @param nextAction ボタンに表示される文言
+ * @param postNetworkError 通信エラー後処理の文言
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, nextAction: string): string {
+function rootInnerHTML(ids: DataIDs, postNetworkError: string): string {
   return `
     <div class="${ROOT_CLASS_NAME}__background"></div>
     <div class="${ROOT_CLASS_NAME}__dialog">
       <span class="${ROOT_CLASS_NAME}__dialog__caption">通信エラーが発生しました</span>
-      <button class="${ROOT_CLASS_NAME}__dialog__next-action" data-id="${ids.nextActionButton}">${nextAction}</button>
+      <button class="${ROOT_CLASS_NAME}__dialog__post-network-error" data-id="${ids.postNetworkErrorButton}">${postNetworkError}</button>
     </div>
   `;
 }
 
 /** ルート要素の子孫要素 */
 type Elements = {
-  nextActionButton: HTMLButtonElement
+  postNetworkErrorButton: HTMLButtonElement
 };
 
 /**
@@ -49,16 +49,16 @@ type Elements = {
  * @return 抽出結果
  */
  function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const nextActionButtonElement = root.querySelector(`[data-id="${ids.nextActionButton}"]`);
-  const nextActionButton = (nextActionButtonElement instanceof HTMLButtonElement) ? nextActionButtonElement : document.createElement('button');
-  return {nextActionButton};
+  const postNetworkErrorButtonElement = root.querySelector(`[data-id="${ids.postNetworkErrorButton}"]`);
+  const postNetworkErrorButton = (postNetworkErrorButtonElement instanceof HTMLButtonElement) ? postNetworkErrorButtonElement : document.createElement('button');
+  return {postNetworkErrorButton};
  }
 
 /** 通信エラー ダイアログ */
 export class NetworkErrorDialog implements DOMDialog {
   _root: HTMLElement;
-  _nextActionButton: HTMLButtonElement;
-  _nextAction: StreamSource<void>;
+  _postNetworkErrorButton: HTMLButtonElement;
+  _postNetworkError: StreamSource<void>;
   _pushButton: typeof Howl;
   _unsubscribers: Unsubscriber[];
   _exclusive: Exclusive;
@@ -67,20 +67,20 @@ export class NetworkErrorDialog implements DOMDialog {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param nextAction ボタンに表示される文言
+   * @param postNetworkError 通信エラー後処理の文言
    */
-  constructor(resources: Resources, nextAction: string) {
-    const dataIDs = {nextActionButton: domUuid()};
+  constructor(resources: Resources, postNetworkError: string) {
+    const dataIDs = {postNetworkErrorButton: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(dataIDs, nextAction);
+    this._root.innerHTML = rootInnerHTML(dataIDs, postNetworkError);
     const elements = extractElements(this._root, dataIDs);
-    this._nextActionButton = elements.nextActionButton;
+    this._postNetworkErrorButton = elements.postNetworkErrorButton;
 
-    this._nextAction = new RxjsStreamSource();
+    this._postNetworkError = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._nextActionButton).subscribe(() => {
-        this._onNextActionPush();
+      pushDOMStream(this._postNetworkErrorButton).subscribe(() => {
+        this._onPostNetworkErrorPush();
       })
     ];
 
@@ -109,24 +109,24 @@ export class NetworkErrorDialog implements DOMDialog {
   }
 
   /**
-   * 次の行動を実施するタイミングを通知する
+   * 通信エラー後処理の実行タイミングを通知する
    * 
    * @return 通知ストリーム
    */
   nextActionNotifier(): Stream<void> {
-    return this._nextAction;
+    return this._postNetworkError;
   }
 
   /**
-   * 次の行動が書かれたボタンを押した時の処理
+   * 通信エラー後処理ボタンを押した時の処理
    */
-  _onNextActionPush(): void {
+  _onPostNetworkErrorPush(): void {
     this._exclusive.execute(async ()=> {
       await Promise.all([
         this._pushButton.play(),
-        pop(this._nextActionButton)
+        pop(this._postNetworkErrorButton)
       ]);
-      this._nextAction.next();
+      this._postNetworkError.next();
     });    
   }
 }
