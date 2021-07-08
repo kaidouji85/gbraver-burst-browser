@@ -136,14 +136,7 @@ export class BattleScene implements Scene {
         .chain(this._view.hud.gameObjects.batterySelector.close())
         .play();
 
-      let lastState = null;
-      try {
-        lastState = await this._progressGame({type: 'BATTERY_COMMAND', battery: action.battery});
-      } catch(error) {
-        this._battleProgressError.next();
-        throw error;
-      }
-
+      const lastState = await this._progressGame({type: 'BATTERY_COMMAND', battery: action.battery});
       if (lastState && lastState.effect.name === 'GameEnd') {
         await this._onEndGame(lastState.effect);
       }
@@ -164,14 +157,7 @@ export class BattleScene implements Scene {
         .chain(this._view.hud.gameObjects.burstButton.close())
         .play();
 
-      let lastState = null;
-      try {
-        lastState = await this._progressGame({type: 'BURST_COMMAND'});
-      } catch(error) {
-        this._battleProgressError.next();
-        throw error;
-      }
-
+      const lastState = await this._progressGame({type: 'BURST_COMMAND'});
       if (lastState && lastState.effect.name === 'GameEnd') {
         await this._onEndGame(lastState.effect);
       }
@@ -194,14 +180,7 @@ export class BattleScene implements Scene {
         .chain(this._view.hud.gameObjects.pilotButton.close())
         .play();
 
-      let lastState = null;
-      try {
-        lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
-      } catch(error) {
-        this._battleProgressError.next();
-        throw error;
-      }
-
+      const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
       if (lastState && lastState.effect.name === 'GameEnd') {
         await this._onEndGame(lastState.effect);
       }
@@ -215,27 +194,27 @@ export class BattleScene implements Scene {
    * @return ゲームの最新状態、何も更新されなかった場合はnullを返す
    */
   async _progressGame(command: Command): Promise<?GameState> {
+    const progressWithErrorHandling = async (v: Command): Promise<GameState[]> => {
+      try {
+        return await this._battleProgress.progress(v);
+      } catch(error) {
+        this._battleProgressError.next();
+        throw error;
+      }
+    }
+
     let lastCommand: Command = command;
     let lastState: ?GameState = null;
     for (let i=0; i<100; i++) {
-      const updateState = await this._battleProgress.progress(lastCommand);
+      const updateState = await progressWithErrorHandling(lastCommand);
       await stateHistoryAnimation(this._view, this._sounds, this._state, updateState).play();
-
-      if (updateState.length <= 0) {
-        return null;
-      }
-
-      lastState = updateState[updateState.length - 1];
-      if (lastState.effect.name !== 'InputCommand') {
+      lastState = updateState[updateState.length - 1] ?? null;
+      if (!(lastState && lastState.effect.name === 'InputCommand')) {
         return lastState;
       }
 
       const playerCommand = lastState.effect.players.find(v => v.playerId === this._state.playerId);
-      if (!playerCommand) {
-        return lastState;
-      }
-
-      if (playerCommand.selectable === true) {
+      if (!(playerCommand && playerCommand.selectable === false)) {
         return lastState;
       }
 
