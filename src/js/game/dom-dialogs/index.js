@@ -87,12 +87,12 @@ export class DOMDialogs {
    * 通信エラーダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
-   * @param nextAction 次に起こるアクション
+   * @param postNetworkError 通信エラー後処理の文言
    */
-  startNetworkError(resources: Resources, nextAction: string): void {
+  startNetworkError(resources: Resources, postNetworkError: string): void {
     this._removeCurrentDialog();
     
-    const networkError = new NetworkErrorDialog(resources, nextAction);
+    const networkError = new NetworkErrorDialog(resources, postNetworkError);
     this._unsubscribers = [
       networkError.postNetworkErrorNotifier().subscribe(() => {
         this._gameAction.next({type: 'EndNetworkError'});
