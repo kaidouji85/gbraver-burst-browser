@@ -64,6 +64,9 @@ export class DOMDialogs {
       }),
       login.closeDialogNotifier().subscribe(() => {
         this._gameAction.next({type: 'LoginCancel'});
+      }),
+      login.networkErrorNotifier().subscribe(() => {
+        this._gameAction.next({type: 'NetworkError'});
       })
     ];
     this._root.appendChild(login.getRootHTMLElement());

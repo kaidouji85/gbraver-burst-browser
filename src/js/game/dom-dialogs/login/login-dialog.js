@@ -84,6 +84,7 @@ export class LoginDialog implements DOMDialog {
   _loginExecuting: LoginExecuting;
   _loginSuccess: StreamSource<void>;
   _closeDialog: StreamSource<void>;
+  _networkError: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
   _changeValue: typeof Howl;
   _exclusive: Exclusive;
@@ -95,12 +96,12 @@ export class LoginDialog implements DOMDialog {
    * @param login ログイン処理を実行するオブジェクト
    * @param caption 入力フォームに表示されるメッセージ
    */
-  constructor(resources: Resources, login: IdPasswordLogin, caption: string) {
+  constructor(resources: Resources, login: OwnAPI, caption: string) {
     this._login = login;
 
     const dataIDs = {dialog: domUuid(), closer: domUuid(), backGround: domUuid()};
     this._root = document.createElement('div');
-    this._root.className = 'login';
+    this._root.className = ROOT_CLASS_NAME;
     this._root.innerHTML = rootInnerHTML(dataIDs, resources);
     const elements = extractElements(this._root, dataIDs);
 
@@ -118,6 +119,7 @@ export class LoginDialog implements DOMDialog {
 
     this._closeDialog = new RxjsStreamSource();
     this._loginSuccess = new RxjsStreamSource();
+    this._networkError = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._closer).subscribe(() => {
         this._onCloserPush();
@@ -176,6 +178,15 @@ export class LoginDialog implements DOMDialog {
   }
 
   /**
+   * 通信エラー通知
+   * 
+   * @return 通知ストリーム 
+   */
+  networkErrorNotifier(): Stream<void> {
+    return this._networkError;
+  }
+
+  /**
    * クローザーを押した時の処理
    */
   _onCloserPush(): void {
@@ -202,19 +213,15 @@ export class LoginDialog implements DOMDialog {
    */
   _onInputComplete(data: InputComplete): void {
     this._exclusive.execute(async () => {
-      try {
-        this._switchLoginExecuting();
-        const isSuccessLogin = await this._login.login(data.userID, data.password);
-        if (!isSuccessLogin) {
-          this._switchLoginEnteringWithError();
-          return;
-        }
-
-        this._loginSuccess.next();
-      } catch (error) {
+      this._switchLoginExecuting();
+      const isSuccessLogin = await this._apiErrorHandling(
+        () => this._login.login(data.userID, data.password));
+      if (!isSuccessLogin) {
         this._switchLoginEnteringWithError();
-        throw error;
+        return;
       }
+
+      this._loginSuccess.next();
     });
   }
 
@@ -226,6 +233,21 @@ export class LoginDialog implements DOMDialog {
       await this._changeValue.play();
       this._closeDialog.next();
     });
+  }
+
+  /**
+   * API呼び出しのエラーハンドリング
+   * 
+   * @param fn API呼び出しを行うコールバック関数 
+   * @return API実行結果
+   */
+  async _apiErrorHandling<X>(fn: () => Promise<X>): Promise<X> {
+    try {
+      return await fn();
+    } catch(error) {
+      this._networkError.next();
+      throw error;
+    }
   }
 
   /**
