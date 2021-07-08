@@ -64,6 +64,16 @@ export type LoginSuccess = {
   type: 'LoginSuccess'
 };
 
+/** 通信エラーが発生した */
+export type NetworkError = {
+  type: 'NetworkError'
+};
+
+/** 通信エラーダイアログを閉じる */
+export type EndNetworkError = {
+  type: 'EndNetworkError'
+};
+
 /**
  * ゲーム全体で利用するアクション
  */
@@ -76,4 +86,6 @@ export type GameAction = GameStart
  | EndBattle
  | EndNPCEnding
  | LoginCancel
- | LoginSuccess;
+ | LoginSuccess
+ | NetworkError
+ | EndNetworkError;

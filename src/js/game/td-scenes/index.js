@@ -82,10 +82,13 @@ export class TDScenes {
     this._scene = scene;
     this._unsubscriber = [
       scene.gameEndNotifier().subscribe(v => {
-        this._gameAction.next({
-          type: 'EndBattle',
-          gameEnd: v,
-        });
+        this._gameAction.next({type: 'EndBattle', gameEnd: v,});
+      }),
+      scene.battleErrorNotifier().subscribe(() => {
+        // オフライン系バトルプログレスはバグ以外では、例外を投げることはない
+        // また、オンライン系バトルプログレスは通信エラー以外では、例外を投げることはない
+        // よって、バトルプログレスエラーを通信エラーと見なす
+        this._gameAction.next({type: 'NetworkError'});
       })
     ];
 
