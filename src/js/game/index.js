@@ -27,7 +27,7 @@ import type {Stream, Unsubscriber} from "../stream/core";
 import type {IdPasswordLogin, LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
-import {toPostNetworkError} from "./in-progress/network-error";
+import {getPostNetworkError, postNetworkErrorLabel} from "./in-progress/network-error";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends IdPasswordLogin, LoginCheck, CasualMatchSDK {}
@@ -261,17 +261,9 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const postProcessing = toPostNetworkError(this._inProgress);
-    const caption = () => {
-      switch(postProcessing) {
-        case 'Close':
-          return '閉じる';
-        case 'GotoTitle':
-        default:
-          return 'タイトルへ';
-      }
-    };
-    this._domDialogs.startNetworkError(resources, caption());
+    const postNetworError = getPostNetworkError(this._inProgress);
+    const label = postNetworkErrorLabel(postNetworError);
+    this._domDialogs.startNetworkError(resources, label);
   }
 
   /**
@@ -294,7 +286,7 @@ export class Game {
       await this._startTitle(resources);
       await this._fader.fadeIn();
     };
-    const postProcessing = toPostNetworkError(this._inProgress);
+    const postProcessing = getPostNetworkError(this._inProgress);
     const handler = () => {
       switch(postProcessing) {
         case 'Close':
