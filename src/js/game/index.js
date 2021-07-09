@@ -433,8 +433,8 @@ export class Game {
     const npcBattle = new NPCBattleRoom(player, course.npc);
       
     await this._fader.fadeOut();
-    await this._domScenes.startMatchCard(resources, player.armdozer.id, course.npc.armdozer.id, 
-      course.stageName);
+    await this._domScenes.startMatchCard(resources, npcBattle.player.armdozer.id,
+      npcBattle.enemy.armdozer.id, course.stageName);
     await this._fader.fadeIn();
     
     const battleScene = this._tdScenes.startBattle(resources, npcBattle, npcBattle.player,

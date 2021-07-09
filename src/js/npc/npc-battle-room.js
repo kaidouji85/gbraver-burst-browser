@@ -4,6 +4,7 @@ import type {Command, GameState, Player, PlayerCommand} from "gbraver-burst-core
 import {GbraverBurstCore} from "gbraver-burst-core";
 import type {NPC} from "./npc";
 import type {BattleProgress} from "../game/td-scenes/battle/battle-progress";
+import {playerUuid} from "../uuid/player";
 
 /** NPCバトルルーム */
 export class NPCBattleRoom implements BattleProgress {
@@ -22,7 +23,7 @@ export class NPCBattleRoom implements BattleProgress {
   constructor(player: Player, npc: NPC) {
     this.player = player;
     this._npc = npc;
-    this.enemy = { playerId: `enemy-of-${player.playerId}`, armdozer: npc.armdozer, pilot: npc.pilot,};
+    this.enemy = { playerId: playerUuid(), armdozer: npc.armdozer, pilot: npc.pilot,};
     this._core = new GbraverBurstCore([player, this.enemy]);
     this.initialState = this._core.stateHistory();
   }
