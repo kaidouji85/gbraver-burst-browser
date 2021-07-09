@@ -32,10 +32,8 @@ type Param = {
   initialState: GameState[],
   player: Player,
   enemy: Player,
-  listener: {
-    gameLoop: Stream<GameLoop>,
-    resize: Stream<Resize>
-  }
+  gameLoop: Stream<GameLoop>,
+  resize: Stream<Resize>
 };
 
 /**
@@ -64,10 +62,8 @@ export class BattleScene implements Scene {
       renderer: param.renderer,
       player: param.player,
       enemy: param.enemy,
-      listener: {
-        gameLoop: param.listener.gameLoop,
-        resize: param.listener.resize,
-      }
+      gameLoop: param.gameLoop,
+      resize: param.resize,
     });
     this._sounds = new BattleSceneSounds(param.resources);
 

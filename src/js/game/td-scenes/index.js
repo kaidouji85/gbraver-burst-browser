@@ -74,10 +74,8 @@ export class TDScenes {
       player: player,
       enemy: enemy,
       initialState: initialState,
-      listener: {
-        gameLoop: this._gameLoop,
-        resize: this._resize,
-      }
+      gameLoop: this._gameLoop,
+      resize: this._resize,
     });
     this._scene = scene;
     this._unsubscriber = [
