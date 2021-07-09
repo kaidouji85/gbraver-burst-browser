@@ -332,7 +332,7 @@ export class Game {
       await this._fader.fadeOut();
       this._domDialogs.hidden();
       await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id,
-        'CasualMatch');
+        'CASUAL MATCH');
       await this._fader.fadeIn();
 
       const battleScene = this._tdScenes.startBattle(resources, battle, battle.player,

@@ -7,7 +7,7 @@ import type {HUDPilotObjects} from "./hud-pilot-objects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import type {Stream} from "../../../../../../stream/core";
 import {TsubasaCutIn} from "../../../../../../game-object/cut-in/tsubasa/tsubasa";
-import {playerTsubasaCutIn} from "../../../../../../game-object/cut-in/tsubasa";
+import {enemyTsubasaCutIn, playerTsubasaCutIn} from "../../../../../../game-object/cut-in/tsubasa";
 
 /**
  * コンストラクタのパラメータ
@@ -79,6 +79,6 @@ export function playerTsubasaHUD(resources: Resources, listener: Stream<GameObje
 export function enemyTsubasaHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): TsubasaHUD {
   return new TsubasaHUD( {
     playerId: state.playerId,
-    cutIn: playerTsubasaCutIn(resources, listener)
+    cutIn: enemyTsubasaCutIn(resources, listener)
   })
 }
