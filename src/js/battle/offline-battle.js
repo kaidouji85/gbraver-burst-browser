@@ -1,10 +1,9 @@
 // @flow
 
-import type {Command, GameState, Player, PlayerCommand} from "gbraver-burst-core";
+import type {Command, GameState, Player, PlayerId, PlayerCommand} from "gbraver-burst-core";
 import {GbraverBurstCore} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
 import type {BattleProgress} from "./battle-progress";
-import type {PlayerId} from "gbraver-burst-core/lib/player/player";
 
 /** オフラインバトル */
 export type OfflineBattle = {
