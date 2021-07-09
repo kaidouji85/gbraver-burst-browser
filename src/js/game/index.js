@@ -19,7 +19,7 @@ import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
 import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
-import {startOfflineBattle} from "../battle/offline-battle";
+import {startNPCBattle} from "../npc/npc-battle";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
@@ -430,7 +430,7 @@ export class Game {
    * @param course NPCバトルコース
    */
   async _startNPCBattleCourse(resources: Resources, player: Player, course: NPCBattleCourse) {
-    const battle = startOfflineBattle(player, course.npc);
+    const battle = startNPCBattle(player, course.npc);
       
     await this._fader.fadeOut();
     await this._domScenes.startMatchCard(resources, player.armdozer.id, course.npc.armdozer.id, 

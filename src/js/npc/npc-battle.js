@@ -2,11 +2,11 @@
 
 import type {Command, GameState, Player, PlayerId, PlayerCommand} from "gbraver-burst-core";
 import {GbraverBurstCore} from "gbraver-burst-core";
-import type {NPC} from "../npc/npc";
-import type {BattleProgress} from "./battle-progress";
+import type {NPC} from "./npc";
+import type {BattleProgress} from "../game/td-scenes/battle/battle-progress";
 
-/** オフラインバトル */
-export type OfflineBattle = {
+/** NPCバトル */
+export type NpcBattle = {
   player: Player,
   enemy: Player,
   initialState: GameState[],
@@ -14,13 +14,13 @@ export type OfflineBattle = {
 };
 
 /**
- * オフラインバトルを開始する
+ * NPCバトルを開始する
  *
  * @param player プレイヤー情報
  * @param npc NPC
  * @return オフラインバトル
  */
-export function startOfflineBattle(player: Player, npc: NPC): OfflineBattle {
+export function startNPCBattle(player: Player, npc: NPC): NpcBattle {
   const enemy = {
     playerId: `enemy-of-${player.playerId}`,
     armdozer: npc.armdozer,
@@ -28,12 +28,12 @@ export function startOfflineBattle(player: Player, npc: NPC): OfflineBattle {
   };
   const core = new GbraverBurstCore([player, enemy]);
   const initialState = core.stateHistory();
-  const progress = new OfflineBattleProgress(player.playerId, enemy.playerId, core, npc);
+  const progress = new NPCBattleProgress(player.playerId, enemy.playerId, core, npc);
   return {player, enemy, initialState, progress};
 }
 
-/** オフライン バトル進行 */
-export class OfflineBattleProgress implements BattleProgress {
+/** NPCバトル進行 */
+export class NPCBattleProgress implements BattleProgress {
   _playerId: PlayerId;
   _enemyId: PlayerId;
   _npc: NPC;
