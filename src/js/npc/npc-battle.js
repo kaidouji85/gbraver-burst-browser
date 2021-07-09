@@ -6,7 +6,7 @@ import type {NPC} from "./npc";
 import type {BattleProgress} from "../game/td-scenes/battle/battle-progress";
 
 /** NPCバトル */
-export type NpcBattle = {
+export type NPCBattle = {
   player: Player,
   enemy: Player,
   initialState: GameState[],
@@ -18,9 +18,9 @@ export type NpcBattle = {
  *
  * @param player プレイヤー情報
  * @param npc NPC
- * @return オフラインバトル
+ * @return NPCバトル
  */
-export function startNPCBattle(player: Player, npc: NPC): NpcBattle {
+export function startNPCBattle(player: Player, npc: NPC): NPCBattle {
   const enemy = {
     playerId: `enemy-of-${player.playerId}`,
     armdozer: npc.armdozer,
