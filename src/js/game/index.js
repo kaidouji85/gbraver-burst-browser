@@ -19,7 +19,7 @@ import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
 import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
-import {startOfflineBattle} from "../battle/offline-battle";
+import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
@@ -430,15 +430,15 @@ export class Game {
    * @param course NPCバトルコース
    */
   async _startNPCBattleCourse(resources: Resources, player: Player, course: NPCBattleCourse) {
-    const battle = startOfflineBattle(player, course.npc);
+    const npcBattle = new NPCBattleRoom(player, course.npc);
       
     await this._fader.fadeOut();
-    await this._domScenes.startMatchCard(resources, player.armdozer.id, course.npc.armdozer.id, 
-      course.stageName);
+    await this._domScenes.startMatchCard(resources, npcBattle.player.armdozer.id,
+      npcBattle.enemy.armdozer.id, course.stageName);
     await this._fader.fadeIn();
     
-    const battleScene = this._tdScenes.startBattle(resources, battle.progress, battle.player, 
-      battle.enemy, battle.initialState);
+    const battleScene = this._tdScenes.startBattle(resources, npcBattle, npcBattle.player,
+      npcBattle.enemy, npcBattle.initialState);
     await waitAnimationFrame();
     await this._fader.fadeOut();
     this._domScenes.hidden();
