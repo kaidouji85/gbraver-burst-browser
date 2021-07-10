@@ -53,7 +53,7 @@ function rootInnerHTML(ids: DataIDs): string {
         <input class="${ROOT_CLASS_NAME}__form__password__input" type="password" name="password" autocomplete="current-password" data-id="${ids.password}">
       </div>
       <div class="${ROOT_CLASS_NAME}__form__footer">
-        <button class="${ROOT_CLASS_NAME}__form__footer__close" data-id="${ids.closeButton}">閉じる</button>
+        <button class="${ROOT_CLASS_NAME}__form__footer__close" type="button" data-id="${ids.closeButton}">閉じる</button>
         <button class="${ROOT_CLASS_NAME}__form__footer__sumit" type="submit" data-id="${ids.submit}">ログイン</buton>
       </div>
     </form>
