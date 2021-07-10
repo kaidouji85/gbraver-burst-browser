@@ -1,7 +1,7 @@
 // @flow
 
 import {Observable, Subject, Subscription} from "rxjs";
-import type {Stream, StreamSource, Unsubscriber} from "./core";
+import type {Operator, Stream, StreamSource, Unsubscriber} from "./core";
 
 /**
  * RXJSのObservableをStreamに変換する
@@ -27,7 +27,10 @@ export function toUnSubscriber(origin: typeof Subscription): Unsubscriber {
   };
 }
 
-/** RXJSストリーム */
+/**
+ * RXJSストリーム
+ * @template T　データ型
+ */
 class RxjsStream<T> implements Stream<T> {
   _observable: typeof Observable;
 
@@ -46,7 +49,7 @@ class RxjsStream<T> implements Stream<T> {
    * @param operator オペレータ
    * @return 適用結果
    */
-  chain<U>(operator: (v: Stream<T>) => Stream<U>): Stream<U> {
+  chain<U>(operator:Operator<T, U>): Stream<U> {
     return operator(this);
   }
 
@@ -72,7 +75,10 @@ class RxjsStream<T> implements Stream<T> {
   }
 }
 
-/** RXJSストリーム源泉 */
+/**
+ * RXJSストリーム源泉
+ * @template T データ型
+ */
 export class RxjsStreamSource<T> implements StreamSource<T> {
   _subject: typeof Subject;
 
@@ -98,7 +104,7 @@ export class RxjsStreamSource<T> implements StreamSource<T> {
    * @param operator オペレータ
    * @return 適用結果
    */
-  chain<U>(operator: (v: Stream<T>) => Stream<U>): Stream<U> {
+  chain<U>(operator: Operator<T, U>): Stream<U> {
     return operator(this);
   }
 
