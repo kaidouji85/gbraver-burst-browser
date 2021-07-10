@@ -1,7 +1,7 @@
 // @flow
 
 import {merge as mergeRXJS} from "rxjs";
-import {map as mapRXJS} from 'rxjs/operators';
+import {map as mapRXJS, filter as filterRXJS, first as firstRXJS} from 'rxjs/operators';
 import type {Operator, Stream} from "./core";
 import {toStream} from "./rxjs";
 
@@ -16,6 +16,31 @@ import {toStream} from "./rxjs";
 export const map = <T, U>(fn: T => U): Operator<T, U> => (origin: Stream<T>): Stream<U> => {
   const observable = origin.getRxjsObservable()
     .pipe(mapRXJS(fn));
+  return toStream(observable);
+}
+
+/**
+ * 条件を満たさないストリームを止める
+ *
+ * @template T ストリームデータ型
+ * @param fn 判定関数
+ * @return オペレータ
+ */
+export const filter = <T>(fn: T => boolean): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
+  const observable = origin.getRxjsObservable()
+    .pipe(filterRXJS(fn));
+  return toStream(observable);
+}
+
+/**
+ * 最初のストリーム以外は止める
+ *
+ * @template T ストリームデータ型
+ * @return オペレータ
+ */
+export const first = <T>(): Operator<T, T> =>  (origin: Stream<T>): Stream<T> => {
+  const observable = origin.getRxjsObservable()
+    .pipe(firstRXJS());
   return toStream(observable);
 }
 
