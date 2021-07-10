@@ -10,12 +10,11 @@ import {Animate} from "../../animation/animate";
 import {open} from "./animation/open";
 import {decide} from "./animation/decide";
 import {close} from "./animation/close";
-import {filter} from "rxjs/operators";
 import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/core";
-import {toStream} from "../../stream/rxjs";
 import type {PilotIcon} from "./view/pilot-icon";
+import {filter} from "../../stream/operator";
 
 /**
  * パイロットボタン
@@ -39,11 +38,8 @@ export class PilotButton {
     this._sounds = new PilotButtonSounds(resources);
     this._view = new PilotButtonView(resources, pilotIcon, listener);
 
-    const pushButtonObservable = this._view.pushButtonNotifier()
-      .getRxjsObservable()
-      .pipe(filter(() => (!this._model.disabled) && this._model.canPilot));
-    this._pushButton = toStream(pushButtonObservable);
-
+    this._pushButton = this._view.pushButtonNotifier()
+      .chain(filter(() => !this._model.disabled && this._model.canPilot));
     this._unsubscriber = listener.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
