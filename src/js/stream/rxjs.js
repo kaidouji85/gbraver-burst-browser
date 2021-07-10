@@ -17,8 +17,8 @@ export function toStream<T>(origin: typeof Observable): Stream<T> {
       });
       return toUnSubscriber(subscription);
     },
-    chain<X>(fn: (v: Stream<T>) => Stream<X>): Stream<X> {
-      return fn(stream);
+    chain<U>(operator: (v: Stream<T>) => Stream<U>): Stream<U> {
+      return operator(stream);
     },
     getRxjsObservable() {
       return origin;
@@ -63,8 +63,14 @@ export class RxjsStreamSource<T> implements StreamSource<T> {
     this._subject.next(v);
   }
 
-  chain<X>(fn: (v: Stream<T>) => Stream<X>): Stream<X> {
-    return fn(this);
+  /**
+   * オペレータを適用する
+   *
+   * @param operator オペレータ
+   * @return 適用結果
+   */
+  chain<U>(operator: (v: Stream<T>) => Stream<U>): Stream<U> {
+    return operator(this);
   }
 
   /**

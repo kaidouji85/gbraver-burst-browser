@@ -22,7 +22,13 @@ export interface Stream<T> {
    */
   subscribe(listener: (v: T) => void): Unsubscriber;
 
-  chain<X>(fn: (v: Stream<T>) => Stream<X>): Stream<X>;
+  /**
+   * オペレータを適用する
+   *
+   * @param operator オペレータ
+   * @return 適用結果
+   */
+  chain<U>(operator: (v: Stream<T>) => Stream<U>): Stream<U>;
 
   /**
    * 本ストリームが内部的に持つrxjsのObservableを取得する
