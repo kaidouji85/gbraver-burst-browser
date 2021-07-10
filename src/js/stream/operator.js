@@ -1,7 +1,12 @@
 // @flow
 
 import {merge as mergeRXJS} from "rxjs";
-import {map as mapRXJS, filter as filterRXJS, first as firstRXJS} from 'rxjs/operators';
+import {
+  map as mapRXJS,
+  filter as filterRXJS,
+  first as firstRXJS,
+  share as shareRXJS
+} from 'rxjs/operators';
 import type {Operator, Stream} from "./core";
 import {toStream} from "./rxjs";
 
@@ -41,6 +46,17 @@ export const filter = <T>(fn: T => boolean): Operator<T, T> => (origin: Stream<T
 export const first = <T>(): Operator<T, T> =>  (origin: Stream<T>): Stream<T> => {
   const observable = origin.getRxjsObservable()
     .pipe(firstRXJS());
+  return toStream(observable);
+}
+
+/**
+ * RXJSのshareを呼び出す
+ *
+ * @return オペレータ
+ */
+export const share = <T>(): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
+  const observable = origin.getRxjsObservable()
+    .pipe(shareRXJS());
   return toStream(observable);
 }
 
