@@ -29,7 +29,7 @@ export function toUnSubscriber(origin: typeof Subscription): Unsubscriber {
 
 /**
  * RXJSストリーム
- * @template T　データ型
+ * @template T データ型
  */
 class RxjsStream<T> implements Stream<T> {
   _observable: typeof Observable;
@@ -49,7 +49,7 @@ class RxjsStream<T> implements Stream<T> {
    * @param operator オペレータ
    * @return 適用結果
    */
-  chain<U>(operator:Operator<T, U>): Stream<U> {
+  chain<U>(operator: Operator<T, U>): Stream<U> {
     return operator(this);
   }
 
