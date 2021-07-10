@@ -10,17 +10,21 @@ import type {Stream, StreamSource, Unsubscriber} from "./core";
  * @return 変換結果
  */
 export function toStream<T>(origin: typeof Observable): Stream<T> {
-  return {
+  const stream = {
     subscribe(listener) {
       const subscription = origin.subscribe((v: T) => {
         listener(v);
       });
       return toUnSubscriber(subscription);
     },
+    chain<X>(fn: (v: Stream<T>) => Stream<X>): Stream<X> {
+      return fn(stream);
+    },
     getRxjsObservable() {
       return origin;
     }
   };
+  return stream;
 }
 
 /**
@@ -57,6 +61,10 @@ export class RxjsStreamSource<T> implements StreamSource<T> {
    */
   next(v: T): void {
     this._subject.next(v);
+  }
+
+  chain<X>(fn: (v: Stream<T>) => Stream<X>): Stream<X> {
+    return fn(this);
   }
 
   /**

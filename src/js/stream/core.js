@@ -22,6 +22,8 @@ export interface Stream<T> {
    */
   subscribe(listener: (v: T) => void): Unsubscriber;
 
+  chain<X>(fn: (v: Stream<T>) => Stream<X>): Stream<X>;
+
   /**
    * 本ストリームが内部的に持つrxjsのObservableを取得する
    * 本メソッドはストリーム加工ヘルパー関数の中でのみ呼ばれることを想定している
