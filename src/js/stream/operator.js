@@ -1,6 +1,6 @@
 // @flow
 
-import {map as mapRXJS} from 'rxjs/operators';
+import {map as mapRXJS, merge as mergeRXJS} from 'rxjs/operators';
 import type {Operator, Stream} from "./core";
 import {toStream} from "./rxjs";
 
@@ -13,5 +13,16 @@ import {toStream} from "./rxjs";
 export const map = <T, U>(fn: T => U): Operator<T, U> => (origin: Stream<T>): Stream<U> => {
   const rxjs = origin.getRxjsObservable()
     .pipe(mapRXJS(fn));
+  return toStream(rxjs);
+}
+
+/**
+ * ストリームを合成する
+ *
+ * @param newItem 合成するストリーム
+ * @return オペレータ
+ */
+export const merge = <T, U>(newItem: Stream<U>): Operator<T, U> => (origin: Stream<T>): Stream<U> => {
+  const rxjs = mergeRXJS(origin.getRxjsObservable(), newItem.getRxjsObservable());
   return toStream(rxjs);
 }
