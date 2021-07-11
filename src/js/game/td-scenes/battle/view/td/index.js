@@ -25,11 +25,9 @@ type Param = {
   renderer: OverlapNotifier,
   player: Player,
   enemy: Player,
-  listener: {
-    resize: Stream<Resize>,
-    update: Stream<Update>,
-    preRender: Stream<PreRender>,
-  }
+  resize: Stream<Resize>,
+  update: Stream<Update>,
+  preRender: Stream<PreRender>,
 };
 
 /** 3Dレイヤー */
@@ -51,10 +49,10 @@ export class ThreeDimensionLayer {
     this.scene = new THREE.Scene();
     this.scene.background = skyBox(param.resources);
 
-    this.camera = new TDCamera(param.listener.update, param.listener.resize);
+    this.camera = new TDCamera(param.update, param.resize);
 
     this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
+    this._gameObjectAction = gameObjectStream(param.update, param.preRender, this._overlap);
 
     this.players = [
       playerTDObjects(param.resources, param.player, this._gameObjectAction),

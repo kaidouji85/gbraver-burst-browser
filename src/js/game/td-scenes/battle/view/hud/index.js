@@ -25,11 +25,9 @@ export type Param = {
   renderer: OverlapNotifier,
   player: Player,
   enemy: Player,
-  listener: {
-    update: Stream<Update>,
-    preRender: Stream<PreRender>,
-    resize: Stream<Resize>,
-  }
+  update: Stream<Update>,
+  preRender: Stream<PreRender>,
+  resize: Stream<Resize>,
 };
 
 /**
@@ -47,10 +45,10 @@ export class HudLayer {
 
   constructor(param: Param) {
     this.scene = new THREE.Scene();
-    this.camera = new PlainHUDCamera(param.listener.resize);
+    this.camera = new PlainHUDCamera(param.resize);
 
     this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this._gameObjectAction = gameObjectStream(param.listener.update, param.listener.preRender, this._overlap);
+    this._gameObjectAction = gameObjectStream(param.update, param.preRender, this._overlap);
     this.gameObjects = new HUDGameObjects(param.resources, this._gameObjectAction, param.player);
     this.gameObjects.getObject3Ds().forEach(object => {
       this.scene.add(object);

@@ -11,7 +11,15 @@ export interface Unsubscriber {
 }
 
 /**
+ * オペレータ
+ * @template T 変換前のストリームデータ型
+ * @template U 変換後のストリームデータ型
+ */
+export type Operator<T, U> = (v: Stream<T>) => Stream<U>;
+
+/**
  * ストリーム
+ * @template T ストリームが持つデータの型情報
  */
 export interface Stream<T> {
   /**
@@ -21,6 +29,14 @@ export interface Stream<T> {
    * @return 購読停止オブジェクト
    */
   subscribe(listener: (v: T) => void): Unsubscriber;
+
+  /**
+   * オペレータを適用する
+   *
+   * @param operator オペレータ
+   * @return 適用結果
+   */
+  chain<U>(operator: Operator<T, U>): Stream<U>;
 
   /**
    * 本ストリームが内部的に持つrxjsのObservableを取得する

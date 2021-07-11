@@ -10,9 +10,8 @@ import type {TouchMoveRaycaster} from "./touch-move-raycaster";
 import {toTouchMoveRaycaster} from "./touch-move-raycaster";
 import type {RendererDOMEvent} from "../dom-event/dom-event";
 import * as THREE from "three";
-import {filter, map, share} from "rxjs/operators";
 import type {Stream} from "../../stream/core";
-import {toStream} from "../../stream/rxjs";
+import {filter, map, share} from "../../stream/operator";
 
 /**
  * オーバーラップ イベント
@@ -32,23 +31,21 @@ export type OverlapEvent =
  * @return 当たり判定ストリーム
  */
 export function toOverlapStream(origin: Stream<RendererDOMEvent>, rendererDOM: HTMLElement, camera: typeof THREE.Camera): Stream<OverlapEvent> {
-  const observable = origin.getRxjsObservable().pipe(
-    map(v => {
-      switch (v.type) {
-        case 'mouseDown':
-          return toMouseDownRaycaster(v, rendererDOM, camera);
-        case 'mouseMove':
-          return toMouseMoveRaycaster(v, rendererDOM, camera);
-        case 'touchStart':
-          return toTouchStartRaycaster(v, rendererDOM, camera);
-        case 'touchMove':
-          return toTouchMoveRaycaster(v, rendererDOM, camera);
-        default:
-          return null;
-      }
-    }),
-    filter(v => !!v),
-    share()
-  );
-  return toStream(observable);
+  return origin.chain(map(v => {
+    switch (v.type) {
+      case 'mouseDown':
+        return toMouseDownRaycaster(v, rendererDOM, camera);
+      case 'mouseMove':
+        return toMouseMoveRaycaster(v, rendererDOM, camera);
+      case 'touchStart':
+        return toTouchStartRaycaster(v, rendererDOM, camera);
+      case 'touchMove':
+        return toTouchMoveRaycaster(v, rendererDOM, camera);
+      default:
+        return null;
+    }
+  }))
+    .chain(filter(v => !!v))
+    .chain(map(v => ((v: any): OverlapEvent)))
+    .chain(share());
 }

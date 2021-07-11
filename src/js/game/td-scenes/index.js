@@ -2,7 +2,7 @@
 
 import {Renderer} from "../../render";
 import type {Resources} from "../../resource";
-import type {BattleProgress} from "../../battle/battle-progress";
+import type {BattleProgress} from "./battle/battle-progress";
 import {BattleScene} from "./battle";
 import type {Scene} from "./scene";
 import type {GameLoop} from "../../game-loop/game-loop";
@@ -74,18 +74,19 @@ export class TDScenes {
       player: player,
       enemy: enemy,
       initialState: initialState,
-      listener: {
-        gameLoop: this._gameLoop,
-        resize: this._resize,
-      }
+      gameLoop: this._gameLoop,
+      resize: this._resize,
     });
     this._scene = scene;
     this._unsubscriber = [
       scene.gameEndNotifier().subscribe(v => {
-        this._gameAction.next({
-          type: 'EndBattle',
-          gameEnd: v,
-        });
+        this._gameAction.next({type: 'EndBattle', gameEnd: v,});
+      }),
+      scene.battleErrorNotifier().subscribe(() => {
+        // オフライン系バトルプログレスはバグ以外では、例外を投げることはない
+        // また、オンライン系バトルプログレスは通信エラー以外では、例外を投げることはない
+        // よって、バトルプログレスエラーを通信エラーと見なす
+        this._gameAction.next({type: 'NetworkError'});
       })
     ];
 

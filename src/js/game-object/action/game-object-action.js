@@ -1,12 +1,10 @@
 // @flow
 
-import {merge} from "rxjs";
 import type {Update} from "../../game-loop/update";
 import type {PreRender} from "../../game-loop/pre-render";
 import type {OverlapEvent} from "../../render/overlap-event/overlap-event";
-import {share} from "rxjs/operators";
 import type {Stream} from "../../stream/core";
-import {toStream} from "../../stream/rxjs";
+import {merge, map, share} from "../../stream/operator";
 
 /** 全てのゲームオブジェクトが受け取り可能なアクション */
 export type GameObjectAction = Update | PreRender | OverlapEvent;
@@ -20,9 +18,9 @@ export type GameObjectAction = Update | PreRender | OverlapEvent;
  * @return 生成したストリーム
  */
 export function gameObjectStream(update: Stream<Update>, preRender: Stream<PreRender>, overlap: Stream<OverlapEvent>): Stream<GameObjectAction> {
-  const origin = [update, preRender, overlap]
-    .map(v => v.getRxjsObservable())
-  const merged = merge(...origin)
-    .pipe(share());
-  return toStream(merged);
+  return update
+    .chain(merge(preRender))
+    .chain(merge(overlap))
+    .chain(map(v => (v: GameObjectAction)))
+    .chain(share());
 }

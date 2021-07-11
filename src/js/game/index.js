@@ -19,7 +19,7 @@ import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
 import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
-import {startOfflineBattle} from "../battle/offline-battle";
+import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
@@ -27,6 +27,7 @@ import type {Stream, Unsubscriber} from "../stream/core";
 import type {IdPasswordLogin, LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
+import {getPostNetworkError, postNetworkErrorLabel} from "./in-progress/network-error";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends IdPasswordLogin, LoginCheck, CasualMatchSDK {}
@@ -114,6 +115,8 @@ export class Game {
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'LoginSuccess') { this._onLoginSuccess() }
+      else if (action.type === 'NetworkError') { this._onNetworkError() }
+      else if (action.type === 'EndNetworkError') { this._onEndNetworkError() }
     }));
   }
 
@@ -171,8 +174,10 @@ export class Game {
 
     const resources: Resources = this._resources;
     const loginCheck = async (): Promise<boolean> => {
+      const subFlow = {type: 'LoginCheck'};
+      this._inProgress = {type: 'CasualMatch', subFlow};
       this._domDialogs.startWaiting('ログインチェック中......');
-      const isLogin = await this._api.isLogin();
+      const isLogin = this._apiErrorHandling(() => this._api.isLogin());
       this._domDialogs.hidden();
       return isLogin;
     };
@@ -241,10 +246,63 @@ export class Game {
   }
 
   /**
-   * 遊び方シーン終了
+   * 遊び方ダイアログを閉じる
    */
   _onEndHowToPlay() {
     this._domDialogs.hidden();
+  }
+
+  /**
+   * 通信エラーが発生した
+   */
+  _onNetworkError() {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const postNetworError = getPostNetworkError(this._inProgress);
+    const label = postNetworkErrorLabel(postNetworError);
+    this._domDialogs.startNetworkError(resources, label);
+  }
+
+  /**
+   * 通信エラーダイアログを閉じる
+   * 
+   * なお、本メソッドが呼ばれるまでの流れを
+   *   (1)通信エラーダイアログ表示
+   *   (2)何等かの処理 or 待ち
+   *   (3)本メソッド呼び出し
+   * とすると、(2)でthis._inProgressは変更されていない想定である
+   */
+  async _onEndNetworkError() {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const close = async () => {
+      this._inProgress = {type: 'None'};
+      this._domDialogs.hidden();
+    };
+    const gotoTitle = async () => {
+      this._inProgress = {type: 'None'};
+      this._domDialogs.hidden();
+      await this._fader.fadeOut();
+      await this._startTitle(resources);
+      await this._fader.fadeIn();
+    };
+    const postProcessing = getPostNetworkError(this._inProgress);
+    const handler = () => {
+      switch(postProcessing) {
+        case 'Close':
+          return close();
+        case 'GotoTitle':
+        default:
+          return gotoTitle();
+      }
+    };
+    await handler();
   }
 
   /**
@@ -263,18 +321,18 @@ export class Game {
       const updated = {...origin, player};
       const course = findCourse(updated);
       this._inProgress = updated;
-      await this._startNPCBattlecCourse(resources, player, course);
+      await this._startNPCBattleCourse(resources, player, course);
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
-      const battle = await this._api.startCasualMatch(action.armdozerId, action.pilotId);
+      const battle = await this._apiErrorHandling(() => this._api.startCasualMatch(action.armdozerId, action.pilotId));
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
       await this._fader.fadeOut();
       this._domDialogs.hidden();
       await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id,
-        'CasualMatch');
+        'CASUAL MATCH');
       await this._fader.fadeIn();
 
       const battleScene = this._tdScenes.startBattle(resources, battle, battle.player,
@@ -324,7 +382,7 @@ export class Game {
       const updated: NPCBattle = levelUpOrNot(origin, action);
       const course = findCourse(updated);
       this._inProgress = updated;
-      await this._startNPCBattlecCourse(resources, player, course);
+      await this._startNPCBattleCourse(resources, player, course);
     };
     const npcBattleEnd = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
@@ -371,16 +429,16 @@ export class Game {
    * @param player プレイヤー
    * @param course NPCバトルコース
    */
-  async _startNPCBattlecCourse(resources: Resources, player: Player, course: NPCBattleCourse) {
-    const battle = startOfflineBattle(player, course.npc);
+  async _startNPCBattleCourse(resources: Resources, player: Player, course: NPCBattleCourse) {
+    const npcBattle = new NPCBattleRoom(player, course.npc);
       
     await this._fader.fadeOut();
-    await this._domScenes.startMatchCard(resources, player.armdozer.id, course.npc.armdozer.id, 
-      course.stageName);
+    await this._domScenes.startMatchCard(resources, npcBattle.player.armdozer.id,
+      npcBattle.enemy.armdozer.id, course.stageName);
     await this._fader.fadeIn();
     
-    const battleScene = this._tdScenes.startBattle(resources, battle.progress, battle.player, 
-      battle.enemy, battle.initialState);
+    const battleScene = this._tdScenes.startBattle(resources, npcBattle, npcBattle.player,
+      npcBattle.enemy, npcBattle.initialState);
     await waitAnimationFrame();
     await this._fader.fadeOut();
     this._domScenes.hidden();
@@ -398,5 +456,22 @@ export class Game {
    */
   _startTitle(resources: Resources): Promise<Title> {
     return this._domScenes.startTitle(resources, this._canCasualMatch);
+  }
+
+  /**
+   * エラーハンドリング付きでAPI通信を行う
+   * 本クラスではAPIを直接呼び出さずに、
+   * 本メソッド経由で呼び出すことを想定している
+   *
+   * @param fn API通信を行うコールバック関数
+   * @return 通信レスポンス
+   */
+  async _apiErrorHandling<X>(fn: () => Promise<X>): Promise<X> {
+    try {
+      return await fn();
+    } catch(error) {
+      this._onNetworkError();
+      throw error;
+    }
   }
 }

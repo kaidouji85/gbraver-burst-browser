@@ -7,7 +7,7 @@ export interface BattleProgress {
   /**
    * 戦闘を進める
    *
-   * @param command 各プレイヤーのコマンド
+   * @param command プレイヤーが入力したコマンド
    * @return 結果
    */
   progress(command: Command): Promise<GameState[]>

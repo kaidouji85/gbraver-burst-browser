@@ -1,7 +1,7 @@
 // @flow
 
 import {Observable, Subject, Subscription} from "rxjs";
-import type {Stream, StreamSource, Unsubscriber} from "./core";
+import type {Operator, Stream, StreamSource, Unsubscriber} from "./core";
 
 /**
  * RXJSのObservableをStreamに変換する
@@ -10,17 +10,7 @@ import type {Stream, StreamSource, Unsubscriber} from "./core";
  * @return 変換結果
  */
 export function toStream<T>(origin: typeof Observable): Stream<T> {
-  return {
-    subscribe(listener) {
-      const subscription = origin.subscribe((v: T) => {
-        listener(v);
-      });
-      return toUnSubscriber(subscription);
-    },
-    getRxjsObservable() {
-      return origin;
-    }
-  };
+  return new RxjsStream<T>(origin);
 }
 
 /**
@@ -38,7 +28,56 @@ export function toUnSubscriber(origin: typeof Subscription): Unsubscriber {
 }
 
 /**
- * RXJSのストリーム源泉
+ * RXJSストリーム
+ * @template T データ型
+ */
+class RxjsStream<T> implements Stream<T> {
+  _observable: typeof Observable;
+
+  /**
+   * コンストラクタ
+   *
+   * @param observable RXJS Observable
+   */
+  constructor(observable: typeof Observable) {
+    this._observable = observable;
+  }
+
+  /**
+   * オペレータを適用する
+   *
+   * @param operator オペレータ
+   * @return 適用結果
+   */
+  chain<U>(operator: Operator<T, U>): Stream<U> {
+    return operator(this);
+  }
+
+  /**
+   * ストリームを購読する
+   *
+   * @param listener イベントリスナ
+   * @return 購読停止オブジェクト
+   */
+  subscribe(listener: (v: T) => void): Unsubscriber {
+    const subscription = this._observable.subscribe(listener);
+    return toUnSubscriber(subscription);
+  }
+
+  /**
+   * 本ストリームが内部的に持つrxjsのObservableを取得する
+   * 本メソッドはストリーム加工ヘルパー関数の中でのみ呼ばれることを想定している
+   *
+   * @return rxjs Observable
+   */
+  getRxjsObservable(): typeof Observable {
+    return this._observable;
+  }
+}
+
+/**
+ * RXJSストリーム源泉
+ * @template T データ型
  */
 export class RxjsStreamSource<T> implements StreamSource<T> {
   _subject: typeof Subject;
@@ -57,6 +96,16 @@ export class RxjsStreamSource<T> implements StreamSource<T> {
    */
   next(v: T): void {
     this._subject.next(v);
+  }
+
+  /**
+   * オペレータを適用する
+   *
+   * @param operator オペレータ
+   * @return 適用結果
+   */
+  chain<U>(operator: Operator<T, U>): Stream<U> {
+    return operator(this);
   }
 
   /**

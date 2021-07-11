@@ -28,10 +28,8 @@ type Param = {
   renderer: OwnRenderer,
   player: Player,
   enemy: Player,
-  listener: {
-    gameLoop: Stream<GameLoop>,
-    resize: Stream<Resize>,
-  }
+  gameLoop: Stream<GameLoop>,
+  resize: Stream<Resize>,
 };
 
 /**
@@ -63,11 +61,9 @@ export class BattleSceneView {
       safeAreaInset: this._safeAreaInset,
       player: param.player,
       enemy: param.enemy,
-      listener: {
-        resize: param.listener.resize,
-        update: this._updateTD,
-        preRender: this._preRenderTD,
-      }
+      resize: param.resize,
+      update: this._updateTD,
+      preRender: this._preRenderTD,
     });
 
     this.hud = new HudLayer({
@@ -75,14 +71,12 @@ export class BattleSceneView {
       renderer: param.renderer,
       player: param.player,
       enemy: param.enemy,
-      listener: {
-        resize: param.listener.resize,
-        update: this._updateHUD,
-        preRender: this._preRenderHUD,
-      }
+      resize: param.resize,
+      update: this._updateHUD,
+      preRender: this._preRenderHUD,
     });
 
-    param.listener.gameLoop.subscribe(action => {
+    param.gameLoop.subscribe(action => {
       this._gameLoop(action);
     });
   }
