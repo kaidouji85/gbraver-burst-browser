@@ -43,7 +43,7 @@ function rootInnerHTML(ids: DataIDs, canCasualMatch: boolean): string {
       <div class="${ROOT_CLASS_NAME}__contents__controllers">
         <button class="${ROOT_CLASS_NAME}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
         <button class="${ROOT_CLASS_NAME}__contents__controllers__game-start" data-id="${ids.gameStart}">ゲームスタート</button>
-        <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">カジュアルマッチ</button>
+        <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
       </div>
     </div>
   `;
