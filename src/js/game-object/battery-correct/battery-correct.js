@@ -35,6 +35,6 @@ export class BatteryCorrect {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._numberMesh;
+    return this._numberMesh.getObject3D();
   }
 }
