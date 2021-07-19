@@ -1,32 +1,30 @@
 // @flow
 
 import * as THREE from "three";
-import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation";
-import type {Resources} from "../../resource";
-import {TEXTURE_IDS} from "../../resource/texture";
-
-export const MESH_SIZE = 100;
-export const MAX_BATTERY_ANIMATION = 16;
-//export const MAX_BATTERY_VALUE = 9;
+import type {BatteryCorrectModel} from "./model/battery-correct-model";
+import type {BatteryCorrectView} from "./view/battery-correct-view";
+import {initialValue} from "./model/initial-value";
 
 /** バッテリー補正 */
 export class BatteryCorrect {
-  _numberMesh: HorizontalAnimationMesh;
+  _model: BatteryCorrectModel;
+  _view: BatteryCorrectView;
 
   /**
    * コンストラクタ
    *
-   * @param resources リソース管理オブジェクト
+   * @param view ビュー
    */
-  constructor(resources: Resources) {
-    const batteryNumber = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER)
-      ?.texture ?? new THREE.Texture();
-    this._numberMesh = new HorizontalAnimationMesh({
-      texture: batteryNumber,
-      maxAnimation: MAX_BATTERY_ANIMATION,
-      width: MESH_SIZE,
-      height: MESH_SIZE,
-    });
+  constructor(view: BatteryCorrectView) {
+    this._model = initialValue();
+    this._view = view;
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._view.destructor();
   }
 
   /**
@@ -35,6 +33,6 @@ export class BatteryCorrect {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._numberMesh.getObject3D();
+    return this._view.getObject3D();
   }
 }

@@ -2,6 +2,8 @@
 
 import {BatteryCorrect} from "./battery-correct";
 import type {Resources} from "../../resource";
+import {PlayerBatteryCorrectView} from "./view/player-battery-correct-view";
+import {EnemyBatteryCorrectView} from "./view/enemy-battery-correct-view";
 
 /**
  * プレイヤー側 バッテリー補正
@@ -10,7 +12,8 @@ import type {Resources} from "../../resource";
  * @return バッテリー補正
  */
 export function playerBatteryCorrect(resources: Resources): BatteryCorrect {
-  return new BatteryCorrect(resources);
+  const view = new PlayerBatteryCorrectView(resources);
+  return new BatteryCorrect(view);
 }
 
 /**
@@ -20,5 +23,6 @@ export function playerBatteryCorrect(resources: Resources): BatteryCorrect {
  * @return バッテリー補正
  */
 export function enemyBatteryCorrect(resources: Resources): BatteryCorrect {
-  return new BatteryCorrect(resources);
+  const view = new EnemyBatteryCorrectView(resources);
+  return new BatteryCorrect(view);
 }
