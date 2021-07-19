@@ -6,10 +6,15 @@ import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import * as THREE from "three";
 import type {BatteryCorrectModel} from "../model/battery-correct-model";
+import {
+  ARMDOZER_EFFECT_STANDARD_X,
+  ARMDOZER_EFFECT_STANDARD_Y,
+  ARMDOZER_EFFECT_STANDARD_Z
+} from "../../armdozer/position";
+import type {PreRender} from "../../../game-loop/pre-render";
 
 export const MESH_SIZE = 100;
 export const MAX_BATTERY_ANIMATION = 16;
-//export const MAX_BATTERY_VALUE = 9;
 
 /** プレイヤー側 バッテリー補正ビュー */
 export class PlayerBatteryCorrectView implements BatteryCorrectView {
@@ -42,8 +47,14 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
   }
 
   /** @override */
-  engage(model: BatteryCorrectModel): void {
+  engage(model: BatteryCorrectModel, preRender: PreRender): void {
     const frame = model.correctValue / MAX_BATTERY_ANIMATION;
     this._numberMesh.animate(frame);
+
+    this._numberMesh.getObject3D().position.x = ARMDOZER_EFFECT_STANDARD_X;
+    this._numberMesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y;
+    this._numberMesh.getObject3D().position.z = ARMDOZER_EFFECT_STANDARD_Z;
+
+    this._numberMesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
   }
 }

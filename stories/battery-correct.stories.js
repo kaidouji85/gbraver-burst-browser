@@ -8,8 +8,8 @@ export default {
 };
 
 export const player = (): HTMLElement=> {
-  const stub = new TDGameObjectStub((resources) => {
-    const batteryCorrect = playerBatteryCorrect(resources);
+  const stub = new TDGameObjectStub((resources, listener) => {
+    const batteryCorrect = playerBatteryCorrect(resources, listener);
     return [batteryCorrect.getObject3D()];
   });
   stub.start();
@@ -17,8 +17,8 @@ export const player = (): HTMLElement=> {
 }
 
 export const enemy = (): HTMLElement=> {
-  const stub = new TDGameObjectStub((resources) => {
-    const batteryCorrect = enemyBatteryCorrect(resources);
+  const stub = new TDGameObjectStub((resources, listener) => {
+    const batteryCorrect = enemyBatteryCorrect(resources, listener);
     return [batteryCorrect.getObject3D()];
   });
   stub.start();

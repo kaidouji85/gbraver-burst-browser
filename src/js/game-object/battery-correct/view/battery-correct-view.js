@@ -2,6 +2,7 @@
 
 import * as THREE from 'three';
 import type {BatteryCorrectModel} from "../model/battery-correct-model";
+import type {PreRender} from "../../../game-loop/pre-render";
 
 /** バッテリー補正ビュー */
 export interface BatteryCorrectView {
@@ -14,8 +15,9 @@ export interface BatteryCorrectView {
    * モデルをビューに反映させる
    *
    * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: BatteryCorrectModel): void;
+  engage(model: BatteryCorrectModel, preRender: PreRender): void;
 
   /**
    * シーンに追加するオブジェクトを取得する
