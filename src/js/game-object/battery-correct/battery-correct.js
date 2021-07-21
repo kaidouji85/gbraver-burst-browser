@@ -8,7 +8,7 @@ import type {Stream, Unsubscriber} from "../../stream/core";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {popUp} from "./animation/popUp";
+import {show} from "./animation/show";
 
 /** バッテリー補正 */
 export class BatteryCorrect {
@@ -54,8 +54,8 @@ export class BatteryCorrect {
    * @param correctValue 補正値
    * @return アニメーション
    */
-  popUp(correctValue: number): Animate {
-    return popUp(this._model, correctValue);
+  show(correctValue: number): Animate {
+    return show(this._model, correctValue);
   }
 
   /**

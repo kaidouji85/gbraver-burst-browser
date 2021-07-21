@@ -12,11 +12,11 @@ import {process} from '../../../animation/process';
  * @param correctValue 補正値
  * @return アニメーション
  */
-export function popUp(model: BatteryCorrectModel, correctValue: number): Animate {
+export function show(model: BatteryCorrectModel, correctValue: number): Animate {
   return process(() => {
-    model.opacity = 1;
-    model.scale = 1;
+    model.opacity = 0;
+    model.scale = 1.2;
     model.correctValue = correctValue;
   })
-    .chain(tween(model, t => t.to({opacity: 0, scale: 0.5}, 500)))
+    .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 400)))
 }

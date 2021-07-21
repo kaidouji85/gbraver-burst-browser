@@ -11,7 +11,7 @@ export default {
 export const player = (): HTMLElement=> {
   const stub = new TDGameObjectStub((resources, listener) => {
     const batteryCorrect = playerBatteryCorrect(resources, listener);
-    batteryCorrect.popUp(1)
+    batteryCorrect.show(1)
       .chain(delay(1000))
       .loop();
     return [batteryCorrect.getObject3D()];
@@ -23,7 +23,7 @@ export const player = (): HTMLElement=> {
 export const enemy = (): HTMLElement=> {
   const stub = new TDGameObjectStub((resources, listener) => {
     const batteryCorrect = enemyBatteryCorrect(resources, listener);
-    batteryCorrect.popUp(1)
+    batteryCorrect.show(1)
       .chain(delay(1000))
       .loop();
     return [batteryCorrect.getObject3D()];
