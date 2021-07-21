@@ -9,6 +9,7 @@ import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {show} from "./animation/show";
+import {hidden} from './animation/hidden';
 
 /** バッテリー補正 */
 export class BatteryCorrect {
@@ -56,6 +57,15 @@ export class BatteryCorrect {
    */
   show(correctValue: number): Animate {
     return show(this._model, correctValue);
+  }
+
+  /**
+   * 非表示にする
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**

@@ -51,8 +51,8 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
     const frame = model.correctValue / MAX_BATTERY_ANIMATION;
     this._numberMesh.animate(frame);
 
-    this._numberMesh.getObject3D().position.x = ARMDOZER_EFFECT_STANDARD_X + model.position.x;
-    this._numberMesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y + model.position.y;
+    this._numberMesh.getObject3D().position.x = ARMDOZER_EFFECT_STANDARD_X + 100;
+    this._numberMesh.getObject3D().position.y = ARMDOZER_EFFECT_STANDARD_Y + 100;
     this._numberMesh.getObject3D().position.z = ARMDOZER_EFFECT_STANDARD_Z;
 
     this._numberMesh.setOpacity(model.opacity);
