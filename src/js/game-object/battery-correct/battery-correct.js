@@ -7,6 +7,8 @@ import {initialValue} from "./model/initial-value";
 import type {Stream, Unsubscriber} from "../../stream/core";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
+import {Animate} from "../../animation/animate";
+import {popUp} from "./animation/popUp";
 
 /** バッテリー補正 */
 export class BatteryCorrect {
@@ -44,6 +46,16 @@ export class BatteryCorrect {
    */
   getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * バッテリー補正を表示する
+   *
+   * @param correctValue 補正値
+   * @return アニメーション
+   */
+  popUp(correctValue: number): Animate {
+    return popUp(this._model, correctValue);
   }
 
   /**

@@ -10,5 +10,11 @@ import type {BatteryCorrectModel} from "./battery-correct-model";
 export function initialValue(): BatteryCorrectModel {
   return {
     correctValue: 0,
+    opacity: 1,
+    scale: 1,
+    position: {
+      x: 0,
+      y: 0
+    }
   };
 }
