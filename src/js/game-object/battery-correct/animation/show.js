@@ -15,8 +15,8 @@ import {process} from '../../../animation/process';
 export function show(model: BatteryCorrectModel, correctValue: number): Animate {
   return process(() => {
     model.opacity = 0;
-    model.scale = 1.2;
+    model.scale = 1;
     model.correctValue = correctValue;
   })
-    .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 400)))
+    .chain(tween(model, t => t.to({opacity: 1}, 400)))
 }

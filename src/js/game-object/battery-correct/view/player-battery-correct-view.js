@@ -14,7 +14,7 @@ import {
 import type {PreRender} from "../../../game-loop/pre-render";
 
 /** メッシュの大きさ */
-const MESH_SIZE = 80;
+const MESH_SIZE = 100;
 /** 最大アニメ数 */
 const MAX_BATTERY_ANIMATION = 16;
 /** 絶対価の最大値 */
@@ -55,7 +55,7 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
       width: MESH_SIZE,
       height: MESH_SIZE,
     });
-    this._sign.getObject3D().position.x = -40;
+    this._sign.getObject3D().position.x = -50;
     this._group.add(this._sign.getObject3D());
   }
 
@@ -79,8 +79,8 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
     const sign = 0 <= model.correctValue ? PLUS_SIGN : MINUS_SIGN;
     this._sign.animate(sign);
 
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X + 100;
-    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y + 100;
+    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X + 130;
+    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
     this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
 
     this._value.setOpacity(model.opacity);
