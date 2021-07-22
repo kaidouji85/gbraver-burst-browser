@@ -8,6 +8,30 @@ import {delay, empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
 import {BattleSceneSounds} from "../../sounds";
 import {process} from '../../../../../animation/process';
+import {BatteryNumber} from "../../../../../game-object/battery-number/battery-number";
+import {BatteryCorrect} from "../../../../../game-object/battery-correct/battery-correct";
+
+/**
+ * 補正ありのバッテリー宣言
+ *
+ * @param batteryNumber バッテリー数値スプライト
+ * @param batteryCorrect バッテリー補正スプライト
+ * @param origin 本来のバッテリー
+ * @param correct バッテリー補正値
+ * @param value 出したバッテリー
+ * @return アニメーション
+ */
+function declarationWithCorrect(batteryNumber: BatteryNumber, batteryCorrect: BatteryCorrect, origin: number, correct: number, value: number): Animate {
+  return all(
+    batteryNumber.show(origin),
+    batteryCorrect.show(correct)
+  )
+    .chain(delay(1000))
+    .chain(all(
+      batteryNumber.show(value),
+      batteryCorrect.hidden()
+    ));
+}
 
 /**
  * バッテリー宣言アニメーション
@@ -34,15 +58,25 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
   }
 
   const isAttacker = gameState.effect.attacker === sceneState.playerId;
+  const {attackerBattery, originalBatteryOfAttacker, defenderBattery, originalBatteryOfDefender} = gameState.effect;
+  const attackerCorrect = attackerBattery - originalBatteryOfAttacker;
+  const attackerDeclaration = attackerCorrect !== 0
+    ? declarationWithCorrect(attackerTD.batteryNumber, attackerTD.batteryCorrect, originalBatteryOfAttacker, attackerCorrect, attackerBattery)
+    : attackerTD.batteryNumber.show(attackerBattery);
+  const defenderCorrect = defenderBattery - originalBatteryOfDefender;
+  const defenderDeclaration = defenderCorrect !== 0
+    ? declarationWithCorrect(defenderTD.batteryNumber, defenderTD.batteryCorrect, originalBatteryOfDefender, defenderCorrect, defenderBattery)
+    : defenderTD.batteryNumber.show(defenderBattery);
+
   return process(() => {
     sounds.batteryDeclaration.play();
   })
     .chain(all(
       view.td.gameObjects.turnIndicator.turnChange(isAttacker),
       attackerHUD.gauge.battery(attacker.armdozer.battery),
-      attackerTD.batteryNumber.show(gameState.effect.attackerBattery),
+      attackerDeclaration,
       defenderHUD.gauge.battery(defender.armdozer.battery),
-      defenderTD.batteryNumber.show(gameState.effect.defenderBattery),
+      defenderDeclaration,
     ))
     .chain(delay(1000))
     .chain(all(

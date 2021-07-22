@@ -14,7 +14,7 @@ import {
 import type {PreRender} from "../../../game-loop/pre-render";
 
 /** メッシュの大きさ */
-const MESH_SIZE = 50;
+const MESH_SIZE = 80;
 /** 最大アニメ数 */
 const MAX_BATTERY_ANIMATION = 16;
 /** 絶対価の最大値 */
@@ -55,7 +55,7 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
       width: MESH_SIZE,
       height: MESH_SIZE,
     });
-    this._sign.getObject3D().position.x = -30;
+    this._sign.getObject3D().position.x = -40;
     this._group.add(this._sign.getObject3D());
   }
 
