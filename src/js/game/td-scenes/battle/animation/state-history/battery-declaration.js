@@ -26,11 +26,29 @@ function declarationWithCorrect(batteryNumber: BatteryNumber, batteryCorrect: Ba
     batteryNumber.show(origin),
     batteryCorrect.show(correct)
   )
-    .chain(delay(1000))
+    .chain(delay(500))
     .chain(all(
-      batteryNumber.show(value),
+      batteryNumber.hidden(),
       batteryCorrect.hidden()
-    ));
+    ))
+    .chain(batteryNumber.show(value));
+}
+
+/**
+ * バッテリー補正ありの場合の効果音
+ * declarationWithCorrectとタイミングを合わせている
+ *
+ * @param sounds 効果音
+ * @return アニメーション
+ */
+function soundWithCorrect(sounds: BattleSceneSounds): Animate {
+  return process(() => {
+    sounds.batteryDeclaration.play();
+  })
+    .chain(delay(800))
+    .chain(process(()=> {
+      sounds.batteryDeclaration.play();
+    }))
 }
 
 /**
@@ -67,17 +85,20 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
   const defenderDeclaration = defenderCorrect !== 0
     ? declarationWithCorrect(defenderTD.batteryNumber, defenderTD.batteryCorrect, originalBatteryOfDefender, defenderCorrect, defenderBattery)
     : defenderTD.batteryNumber.show(defenderBattery);
+  const sound = (attackerCorrect !== 0) || (defenderCorrect !== 0)
+    ? soundWithCorrect(sounds)
+    : process(() => {
+      sounds.batteryDeclaration.play();
+    });
 
-  return process(() => {
-    sounds.batteryDeclaration.play();
-  })
-    .chain(all(
-      view.td.gameObjects.turnIndicator.turnChange(isAttacker),
-      attackerHUD.gauge.battery(attacker.armdozer.battery),
-      attackerDeclaration,
-      defenderHUD.gauge.battery(defender.armdozer.battery),
-      defenderDeclaration,
-    ))
+  return all(
+    sound,
+    view.td.gameObjects.turnIndicator.turnChange(isAttacker),
+    attackerHUD.gauge.battery(attacker.armdozer.battery),
+    attackerDeclaration,
+    defenderHUD.gauge.battery(defender.armdozer.battery),
+    defenderDeclaration,
+  )
     .chain(delay(1000))
     .chain(all(
       attackerTD.batteryNumber.hidden(),
