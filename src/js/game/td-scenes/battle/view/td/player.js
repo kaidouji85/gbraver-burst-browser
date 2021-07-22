@@ -25,6 +25,8 @@ import type {GameObjectAction} from "../../../../../game-object/action/game-obje
 import type {Stream} from "../../../../../stream/core";
 import {BatteryEnchantment} from "../../../../../game-object/battery-enchantment/battery-enchantment";
 import {enemyBatteryEnchantment, playerBatteryEnchantment} from "../../../../../game-object/battery-enchantment";
+import {BatteryCorrect} from "../../../../../game-object/battery-correct/battery-correct";
+import {enemyBatteryCorrect, playerBatteryCorrect} from "../../../../../game-object/battery-correct";
 
 /**
  * 3Dレイヤー プレイヤー関係オブジェクト フィールド
@@ -43,6 +45,7 @@ export interface TDPlayerField {
     batteryEnchantment: BatteryEnchantment,
   };
   batteryNumber: BatteryNumber;
+  batteryCorrect: BatteryCorrect;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
 }
@@ -81,6 +84,7 @@ export class TDPlayerImpl implements TDPlayer {
     batteryEnchantment: BatteryEnchantment,
   };
   batteryNumber: BatteryNumber;
+  batteryCorrect: BatteryCorrect;
   recoverBattery: RecoverBattery;
   damageIndicator: DamageIndicator;
 
@@ -89,6 +93,7 @@ export class TDPlayerImpl implements TDPlayer {
     this.hitMark = param.hitMark;
     this.armdozerEffects = param.armdozerEffects;
     this.batteryNumber = param.batteryNumber;
+    this.batteryCorrect = param.batteryCorrect;
     this.recoverBattery = param.recoverBattery;
     this.damageIndicator = param.damageIndicator;
   }
@@ -98,6 +103,7 @@ export class TDPlayerImpl implements TDPlayer {
    */
   destructor(): void {
     this.batteryNumber.destructor();
+    this.batteryCorrect.destructor();
     this.damageIndicator.destructor();
     this.hitMark.shockWave.destructor();
     this.hitMark.lightning.destructor();
@@ -124,6 +130,7 @@ export class TDPlayerImpl implements TDPlayer {
       this.armdozerEffects.damageDecrease.getObject3D(),
       this.armdozerEffects.batteryEnchantment.getObject3D(),
       this.batteryNumber.getObject3D(),
+      this.batteryCorrect.getObject3D(),
       this.recoverBattery.getObject3D(),
       this.damageIndicator.getObject3D(),
     ];
@@ -156,6 +163,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: S
       resources: resources,
       listener: listener
     }),
+    batteryCorrect: playerBatteryCorrect(resources, listener),
     recoverBattery: playerRecoverBattery(resources, listener),
     damageIndicator: playerDamageIndicator({
       resources: resources,
@@ -190,6 +198,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Str
       resources: resources,
       listener: listener
     }),
+    batteryCorrect: enemyBatteryCorrect(resources, listener),
     recoverBattery: enemyRecoverBattery(resources, listener),
     damageIndicator: enemyDamageIndicator({
       resources: resources,
