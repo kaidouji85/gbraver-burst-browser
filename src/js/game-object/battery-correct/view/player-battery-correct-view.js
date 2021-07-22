@@ -75,11 +75,13 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
     const value = absoluteValue / MAX_BATTERY_ANIMATION;
     this._value.animate(value);
 
-    const sign = 0 <= model.correctValue ? PLUS_SIGN : MINUS_SIGN;
+    const sign = (0 <= model.correctValue) ? PLUS_SIGN : MINUS_SIGN;
     this._sign.animate(sign);
 
     this._group.position.x = model.position.x;
     this._group.position.y = model.position.y;
+    // BatteryNumberよりも手前に表示したいので、
+    // ARMDOZER_EFFECT_STANDARD_Zに+1している
     this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 1;
 
     this._value.setOpacity(model.opacity);

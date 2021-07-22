@@ -11,6 +11,32 @@ import {process} from '../../../../../animation/process';
 import type {TDPlayer} from "../../view/td/player";
 
 /**
+ * バッテリー宣言アニメーション
+ *
+ * @param td 3Dレイヤーのプレイヤーオブジェクト
+ * @param value バッテリー値
+ * @return アニメーション
+ */
+function declaration(td: TDPlayer, value: number): Animate {
+  return td.batteryNumber.show(value)
+    .chain(delay(1000));
+}
+
+/**
+ * バッテリー宣言の効果音
+ * プレイヤー、敵側で同時再生したくないので、
+ * declarationとは別関数に切り出している
+ *
+ * @param sounds 効果音
+ * @return アニメーション
+ */
+function declarationSound(sounds: BattleSceneSounds): Animate {
+  return process(() => {
+    sounds.batteryDeclaration.play();
+  });
+}
+
+/**
  * 補正ありのバッテリー宣言
  *
  * @param td 3Dレイヤーのプレイヤーオブジェクト
@@ -25,7 +51,8 @@ function declarationWithCorrect(td: TDPlayer, origin: number, correct: number, v
     .chain(
       td.batteryNumber.change(value),
       td.batteryCorrect.popUp(correct)
-    );
+    )
+    .chain(delay(1000));
 }
 
 /**
@@ -35,7 +62,7 @@ function declarationWithCorrect(td: TDPlayer, origin: number, correct: number, v
  * @param sounds 効果音
  * @return アニメーション
  */
-function soundWithCorrect(sounds: BattleSceneSounds): Animate {
+function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
   return process(() => {
     sounds.batteryDeclaration.play();
   })
@@ -74,16 +101,14 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
   const attackerCorrect = attackerBattery - originalBatteryOfAttacker;
   const attackerDeclaration = attackerCorrect !== 0
     ? declarationWithCorrect(attackerTD, originalBatteryOfAttacker, attackerCorrect, attackerBattery)
-    : attackerTD.batteryNumber.show(attackerBattery);
+    : declaration(attackerTD, attackerBattery);
   const defenderCorrect = defenderBattery - originalBatteryOfDefender;
   const defenderDeclaration = defenderCorrect !== 0
     ? declarationWithCorrect(defenderTD, originalBatteryOfDefender, defenderCorrect, defenderBattery)
-    : defenderTD.batteryNumber.show(defenderBattery);
+    : declaration(defenderTD, defenderBattery);
   const sound = (attackerCorrect !== 0) || (defenderCorrect !== 0)
-    ? soundWithCorrect(sounds)
-    : process(() => {
-      sounds.batteryDeclaration.play();
-    });
+    ? declarationSoundWithCorrect(sounds)
+    : declarationSound(sounds);
 
   return all(
     sound,
@@ -93,7 +118,6 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
     defenderHUD.gauge.battery(defender.armdozer.battery),
     defenderDeclaration,
   )
-    .chain(delay(1000))
     .chain(all(
       attackerTD.batteryNumber.hidden(),
       defenderTD.batteryNumber.hidden(),

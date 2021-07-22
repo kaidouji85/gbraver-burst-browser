@@ -37,6 +37,9 @@ export class BatteryCorrect {
    */
   destructor(): void {
     this._view.destructor();
+    this._unsubscribers.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
