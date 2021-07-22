@@ -7,14 +7,12 @@ import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import type {BatteryCorrectModel} from "../model/battery-correct-model";
 import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
 import type {PreRender} from "../../../game-loop/pre-render";
 
 /** メッシュの大きさ */
-const MESH_SIZE = 100;
+const MESH_SIZE = 50;
 /** 最大アニメ数 */
 const MAX_BATTERY_ANIMATION = 16;
 /** 絶対価の最大値 */
@@ -47,6 +45,7 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
       width: MESH_SIZE,
       height: MESH_SIZE,
     });
+    this._value.getObject3D().position.x = 10;
     this._group.add(this._value.getObject3D());
 
     this._sign = new HorizontalAnimationMesh({
@@ -55,7 +54,7 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
       width: MESH_SIZE,
       height: MESH_SIZE,
     });
-    this._sign.getObject3D().position.x = -50;
+    this._sign.getObject3D().position.x = -20;
     this._group.add(this._sign.getObject3D());
   }
 
@@ -79,9 +78,9 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
     const sign = 0 <= model.correctValue ? PLUS_SIGN : MINUS_SIGN;
     this._sign.animate(sign);
 
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X + 130;
-    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
+    this._group.position.x = model.position.x;
+    this._group.position.y = model.position.y;
+    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 1;
 
     this._value.setOpacity(model.opacity);
     this._sign.setOpacity(model.opacity);

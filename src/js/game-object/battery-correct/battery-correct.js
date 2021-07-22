@@ -10,6 +10,7 @@ import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from './animation/hidden';
+import {popUp} from './animation/pop-up';
 
 /** バッテリー補正 */
 export class BatteryCorrect {
@@ -66,6 +67,10 @@ export class BatteryCorrect {
    */
   hidden(): Animate {
     return hidden(this._model);
+  }
+
+  popUp(value: number): Animate {
+    return popUp(this._model, value);
   }
 
   /**

@@ -22,10 +22,10 @@ import type {TDPlayer} from "../../view/td/player";
 function declarationWithCorrect(td: TDPlayer, origin: number, correct: number, value: number): Animate {
   return td.batteryNumber.show(origin)
     .chain(delay(500))
-    .chain(all(
+    .chain(
       td.batteryNumber.change(value),
-      td.batteryCorrect.show(correct)
-    ));
+      td.batteryCorrect.popUp(correct)
+    );
 }
 
 /**

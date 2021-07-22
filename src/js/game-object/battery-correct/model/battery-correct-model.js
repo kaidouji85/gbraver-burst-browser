@@ -8,4 +8,9 @@ export type BatteryCorrectModel = {
   opacity: number,
   /** 拡大率 */
   scale: number,
+  /** 座標 */
+  position: {
+    x: number,
+    y: number
+  }
 };
