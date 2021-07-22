@@ -8,8 +8,6 @@ import type {Stream, Unsubscriber} from "../../stream/core";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {show} from "./animation/show";
-import {hidden} from './animation/hidden';
 import {popUp} from './animation/pop-up';
 
 /** バッテリー補正 */
@@ -51,24 +49,11 @@ export class BatteryCorrect {
   }
 
   /**
-   * バッテリー補正を表示する
+   * ポップアップ表示
    *
-   * @param correctValue 補正値
+   * @param value 補正値
    * @return アニメーション
    */
-  show(correctValue: number): Animate {
-    return show(this._model, correctValue);
-  }
-
-  /**
-   * 非表示にする
-   *
-   * @return アニメーション
-   */
-  hidden(): Animate {
-    return hidden(this._model);
-  }
-
   popUp(value: number): Animate {
     return popUp(this._model, value);
   }

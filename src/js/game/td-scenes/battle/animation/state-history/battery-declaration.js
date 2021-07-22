@@ -46,19 +46,6 @@ function soundWithCorrect(sounds: BattleSceneSounds): Animate {
 }
 
 /**
- * バッテリー宣言の数字を消す
- *
- * @param td 3Dレイヤーのプレイヤーオブジェクト
- * @return アニメーション
- */
-function hiddenBatteryDeclaration(td: TDPlayer): Animate {
-  return all(
-    td.batteryNumber.hidden(),
-    td.batteryCorrect.hidden()
-  );
-}
-
-/**
  * バッテリー宣言アニメーション
  *
  * @param view ビュー
@@ -108,8 +95,8 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
   )
     .chain(delay(1000))
     .chain(all(
-      hiddenBatteryDeclaration(attackerTD),
-      hiddenBatteryDeclaration(defenderTD),
+      attackerTD.batteryNumber.hidden(),
+      defenderTD.batteryNumber.hidden(),
       view.td.gameObjects.turnIndicator.invisible(),
     ))
     .chain(delay(500));
