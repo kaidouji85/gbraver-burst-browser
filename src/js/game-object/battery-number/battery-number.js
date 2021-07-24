@@ -10,6 +10,7 @@ import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/core";
+import {change} from "./animation/change";
 
 type Param = {
   listener: Stream<GameObjectAction>,
@@ -48,6 +49,16 @@ export class BatteryNumber {
    */
   show(battery: number): Animate {
     return show(this._model, battery);
+  }
+
+  /**
+   * 数字を変更する
+   *
+   * @param battery 変更する値
+   * @return アニメーション
+   */
+  change(battery: number): Animate {
+    return change(this._model, battery);
   }
 
   /**
