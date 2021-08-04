@@ -121,6 +121,8 @@ export class ArmdozerStatus {
     this._hp.innerText = `${target.maxHp}`;
     this._power.innerText = `${target.power}`;
     this._speed.innerText = `${target.speed}`;
-    this._burst.innerText = burstTemplate(target.burst);
+    this._burst.innerHTML = burstTemplate(target.burst)
+      .map(v => `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`)
+      .reduce((a, b) => a + b);
   }
 }

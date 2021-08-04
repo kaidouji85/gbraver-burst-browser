@@ -91,6 +91,8 @@ export class PilotStatus {
     }
 
     this._name.innerText = target.name;
-    this._skill.innerText = pilotSkillTemplate(target.skill);
+    this._skill.innerHTML = pilotSkillTemplate(target.skill)
+      .map(v => `<span class="${ROOT_CLASS_NAME}__skill__content__line">${v}</span>`)
+      .reduce((a, b) => a + b);
   }
 }
