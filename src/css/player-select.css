@@ -185,6 +185,11 @@
   flex: 0 0 calc(var(--responsive-font-size) * 4);
 }
 
+.player-select__armdozer-status__burst__content {
+  display: flex;
+  flex-direction: column;
+}
+
 .player-select__armdozer-selector__icons {
   display: flex;
   align-items: center;
