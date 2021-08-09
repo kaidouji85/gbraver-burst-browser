@@ -8,7 +8,7 @@ import type {BuffPower, Burst, ContinuousAttack, LightningBarrier, RecoverBatter
  * @param burst バースト詳細
  * @return 説明文
  */
-export function burstTemplate(burst: Burst): string {
+export function burstTemplate(burst: Burst): string[] {
   switch(burst.type) {
     case 'RecoverBattery':
       return recoverBatteryTemplate(burst);
@@ -19,7 +19,7 @@ export function burstTemplate(burst: Burst): string {
     case 'ContinuousAttack':
       return continuousAttackTemplate(burst);
     default:
-      return '';
+      return [];
   }
 }
 
@@ -29,8 +29,8 @@ export function burstTemplate(burst: Burst): string {
  * @param burst バースト詳細
  * @return 説明文
  */
-function recoverBatteryTemplate(burst: RecoverBattery): string {
-  return `バッテリーを${burst.recoverBattery}回復`;
+function recoverBatteryTemplate(burst: RecoverBattery): string[] {
+  return [`バッテリーを${burst.recoverBattery}回復`];
 }
 
 /**
@@ -39,8 +39,11 @@ function recoverBatteryTemplate(burst: RecoverBattery): string {
  * @param burst バースト詳細
  * @return 説明文
  */
-function powerBuffTemplate(burst: BuffPower): string {
-  return `バッテリーを${burst.recoverBattery}回復、${burst.duration}ターンだけ攻撃+${burst.buffPower}`;
+function powerBuffTemplate(burst: BuffPower): string[] {
+  return [
+    `バッテリーを${burst.recoverBattery}回復`,
+    `${burst.duration}ターンだけ攻撃+${burst.buffPower}、バッテリー補正無効`,
+  ];
 }
 
 /**
@@ -49,8 +52,11 @@ function powerBuffTemplate(burst: BuffPower): string {
  * @param burst バースト詳細
  * @return 説明文
  */
-function lightningBarrierTemplate(burst: LightningBarrier): string {
-  return `バッテリーを${burst.recoverBattery}回復、${burst.duration}ターンだけ${burst.damage}のダメージ反射`;
+function lightningBarrierTemplate(burst: LightningBarrier): string[] {
+  return [
+    `バッテリーを${burst.recoverBattery}回復`,
+    `${burst.duration}ターンだけ${burst.damage}のダメージ反射`,
+  ];
 }
 
 /**
@@ -59,6 +65,9 @@ function lightningBarrierTemplate(burst: LightningBarrier): string {
  * @param burst バースト詳細
  * @return 説明文
  */
-function continuousAttackTemplate(burst: ContinuousAttack) {
-  return `バッテリーを${burst.recoverBattery}回復、1回だけ連続攻撃ができる`;
+function continuousAttackTemplate(burst: ContinuousAttack): string[] {
+  return [
+    `バッテリーを${burst.recoverBattery}回復`,
+    `1回だけ連続攻撃ができる`,
+  ];
 }

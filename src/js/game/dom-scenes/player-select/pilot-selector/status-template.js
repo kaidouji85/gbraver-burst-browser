@@ -8,7 +8,7 @@ import type {BuffPowerSkill, PilotSkill, RecoverBatterySkill, DamageDecreaseSkil
  * @param skill スキル内容
  * @return スキル文言
  */
-export function pilotSkillTemplate(skill: PilotSkill): string {
+export function pilotSkillTemplate(skill: PilotSkill): string[] {
   switch(skill.type)  {
     case 'RecoverBatterySkill':
       return recoverBatterySkillTemplate(skill);
@@ -19,7 +19,7 @@ export function pilotSkillTemplate(skill: PilotSkill): string {
     case 'BatteryEnchantmentSkill':
       return batteryEnchantmentSkillTemplate(skill);
     default:
-      return '';
+      return [];
   }
 }
 
@@ -29,8 +29,8 @@ export function pilotSkillTemplate(skill: PilotSkill): string {
  * @param skill スキル詳細
  * @return スキル文言
  */
-function recoverBatterySkillTemplate(skill: RecoverBatterySkill): string {
-  return `バッテリーを${skill.recoverBattery}回復`;
+function recoverBatterySkillTemplate(skill: RecoverBatterySkill): string[] {
+  return [`バッテリーを${skill.recoverBattery}回復`];
 }
 
 /**
@@ -39,8 +39,8 @@ function recoverBatterySkillTemplate(skill: RecoverBatterySkill): string {
  * @param skill スキル詳細
  * @return スキル文言
  */
-function buffPowerSkillTemplate(skill: BuffPowerSkill): string {
-  return `${skill.duration}ターンだけ攻撃+${skill.buffPower}`;
+function buffPowerSkillTemplate(skill: BuffPowerSkill): string[] {
+  return [`${skill.duration}ターンだけ攻撃+${skill.buffPower}`];
 }
 
 /**
@@ -48,8 +48,8 @@ function buffPowerSkillTemplate(skill: BuffPowerSkill): string {
  * @param skill スキル詳細
  * @return スキル文言
  */
-function damageDecreaseSkillTemplate(skill: DamageDecreaseSkill): string {
-  return `${skill.duration}ターンだけダメージ${skill.decrease}減少`;
+function damageDecreaseSkillTemplate(skill: DamageDecreaseSkill): string[] {
+  return [`${skill.duration}ターンだけダメージ${skill.decrease}減少`];
 }
 
 /**
@@ -58,6 +58,9 @@ function damageDecreaseSkillTemplate(skill: DamageDecreaseSkill): string {
  * @param skill スキル詳細
  * @return スキル文言
  */
-function batteryEnchantmentSkillTemplate(skill: BatteryEnchantmentSkill): string {
-  return `このターンに出したバッテリー+${skill.batteryEnchantment}、ただし次のターンに出したバッテリー -${skill.batteryEnchantment}`;
+function batteryEnchantmentSkillTemplate(skill: BatteryEnchantmentSkill): string[] {
+  return [
+    `このターンに出したバッテリー+${skill.batteryEnchantment}`,
+    `ただし次のターンに出したバッテリー -${skill.batteryEnchantment}`
+  ];
 }
