@@ -42,7 +42,7 @@ function recoverBatteryTemplate(burst: RecoverBattery): string[] {
 function powerBuffTemplate(burst: BuffPower): string[] {
   return [
     `バッテリーを${burst.recoverBattery}回復`,
-    `${burst.duration}ターンだけ攻撃+${burst.buffPower}、バッテリー補正無効`,
+    `${burst.duration}ターンだけ攻撃+${burst.buffPower}`,
   ];
 }
 
