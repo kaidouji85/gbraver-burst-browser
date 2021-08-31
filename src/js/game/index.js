@@ -438,7 +438,7 @@ export class Game {
     await this._fader.fadeIn();
     
     const battleScene = this._tdScenes.startBattle(resources, npcBattle, npcBattle.player,
-      npcBattle.enemy, npcBattle.initialState);
+      npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     await this._fader.fadeOut();
     this._domScenes.hidden();
