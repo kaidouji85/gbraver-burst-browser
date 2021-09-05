@@ -10,7 +10,6 @@ import {playerUuid} from "../uuid/player";
 export class NPCBattleRoom implements BattleProgress {
   player: Player;
   enemy: Player;
-  initialState: GameState[];
   _core: GbraverBurstCore;
   _npc: NPC;
 
@@ -25,15 +24,18 @@ export class NPCBattleRoom implements BattleProgress {
     this._npc = npc;
     this.enemy = { playerId: playerUuid(), armdozer: npc.armdozer, pilot: npc.pilot,};
     this._core = startGbraverBurst([player, this.enemy]);
-    this.initialState = this._core.stateHistory();
   }
 
   /**
-   * 戦闘を進める
+   * ステートヒストリーを取得する
    *
-   * @param command プレイヤーが入力したコマンド
-   * @return ステートヒストリー
+   * @return 取得結果
    */
+  stateHistory(): GameState[] {
+    return this._core.stateHistory();
+  }
+
+  /** @override */
   async progress(command: Command): Promise<GameState[]> {
     const playerCommand: PlayerCommand = {playerId: this.player.playerId, command};
     const enemyCommand: PlayerCommand = {
