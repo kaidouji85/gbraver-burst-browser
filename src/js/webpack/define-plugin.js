@@ -20,6 +20,12 @@ export const DefinePlugin = {
   /** APIサーバのURL */
   apiServerURL: GBRAVER_BURST_API_SERVER_URL,
 
-  /** カジュアルマッチが実施できるか否か、trueで実施できる */
-  canCasualMatch: GBRAVER_BURST_CAN_CASUAL_MATCH,
+  /** auth0 ドメイン */
+  auth0Domain: GBRAVER_BURST_AUTH0_DOMAIN,
+
+  /** auth0 クライアントID */
+  auth0ClientId: GBRAVER_BURST_AUTH0_CLIENT_ID,
+
+  /** auth0 audience */
+  auth0AudienceId: GBRAVER_BURST_AUTH0_AUDIENCE,
 }

@@ -32,6 +32,7 @@
   "author": "y.takeuchi",
   "license": "ISC",
   "dependencies": {
+    "@gbraver-burst-network/browser-sdk": "^0.6.0",
     "@gbraver-burst-network/core": "^0.6.0",
     "@gbraver-burst-network/monolithic-browser": "^0.6.0",
     "@storybook/manager-webpack5": "^6.3.8",
