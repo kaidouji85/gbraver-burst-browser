@@ -8,6 +8,9 @@ export const DefinePlugin = {
   /** リソースフォルダのハッシュ */
   resourceHash: GBRAVER_BURST_RESOURCE_HASH,
 
+  /** 自身のURL */
+  ownURL: GBRAVER_BURST_OWN_ROOT_URL,
+
   /** 遊び方動画のURL */
   howToPlay: GBRAVER_BURST_HOW_TO_PLAY,
 

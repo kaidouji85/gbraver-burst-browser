@@ -24,13 +24,14 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
-import type {IdPasswordLogin, LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
+import type {LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {getPostNetworkError, postNetworkErrorLabel} from "./in-progress/network-error";
+import {UniversalLogin} from "@gbraver-burst-network/core/lib/login";
 
 /** 本クラスで利用するAPIサーバの機能 */
-interface OwnAPI extends IdPasswordLogin, LoginCheck, CasualMatchSDK {}
+interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -189,18 +190,12 @@ export class Game {
       await this._domScenes.startPlayerSelect(resources);
       await this._fader.fadeIn();
     };
-    const showLoginDialog = async (): Promise<void> => {
-      const subFlow = {type: 'Login'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
-      const caption = 'カジュアルマッチを始めるにはログインする必要があります';
-      this._domDialogs.startLogin(resources, this._api, caption);
-    };
 
     const isLogin = await loginCheck();
     if (isLogin) {
       await gotoPlayerSelect();
     } else {
-      await showLoginDialog();
+      await this._api.gotoLoginPage();
     }
   }
 

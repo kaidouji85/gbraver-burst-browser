@@ -92,13 +92,14 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(BUILD_RESOURCE_PATH),
+      GBRAVER_BURST_OWN_ROOT_URL: JSON.stringify(process.env.OWN_ROOT_URL),
       GBRAVER_BURST_HOW_TO_PLAY: JSON.stringify(process.env.HOW_TO_PLAY_URL),
       GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE: JSON.stringify(process.env.IS_PERFORMANCE_STATS_VISIBLE),
       GBRAVER_BURST_IS_SERVICE_WORKER_USED: JSON.stringify(process.env.IS_SERVICE_WORKER_USED),
       GBRAVER_BURST_API_SERVER_URL: JSON.stringify(process.env.API_SERVER_URL),
       GBRAVER_BURST_AUTH0_DOMAIN: JSON.stringify(process.env.AUTH0_DOMAIN),
       GBRAVER_BURST_AUTH0_CLIENT_ID: JSON.stringify(process.env.AUTH0_CLIENT_ID),
-      GBRAVER_BURST_AUTH0_AUDIENCE: JSON.stringify(process.env._AUDIENCE),
+      GBRAVER_BURST_AUTH0_AUDIENCE: JSON.stringify(process.env.AUTH0_AUDIENCE),
     })
   ]
 };
