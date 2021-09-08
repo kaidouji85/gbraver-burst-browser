@@ -15,14 +15,13 @@ import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'login';
-/** クローザーのcssクラス名 */
-const CLOSER_CLASS_NAME = `${ROOT_CLASS_NAME}__closer`;
 
 /** data-idを集めたもの */
 type DataIDs = {
-  dialog: string,
   closer: string,
-  backGround: string
+  backGround: string,
+  loginButton: string,
+  closeButton: string,
 };
 
 /**
@@ -30,18 +29,20 @@ type DataIDs = {
  *
  * @param ids data-idを集めたもの
  * @param resources リソース管理オブジェクト
+ * @param caption キャプション
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, resources: Resources): string {
+function rootInnerHTML(ids: DataIDs, resources: Resources, caption: string): string {
   const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
     ?.path ?? '';
   return `
     <div class="${ROOT_CLASS_NAME}__background" data-id="${ids.backGround}"></div>
-    <img class="${CLOSER_CLASS_NAME}" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
-    <div class="${ROOT_CLASS_NAME}__dialog" data-id="${ids.dialog}">
+    <img class="${ROOT_CLASS_NAME}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
+    <div class="${ROOT_CLASS_NAME}__dialog">
+      <div class="${ROOT_CLASS_NAME}__dialog__caption">${caption}</div>
       <div class="${ROOT_CLASS_NAME}__dialog__footer">
-        <button class="${ROOT_CLASS_NAME}__dialog__footer__close" type="button">閉じる</button>
-        <button class="${ROOT_CLASS_NAME}__dialog__footer__sumit" type="submit">ログイン</buton>
+        <button class="${ROOT_CLASS_NAME}__dialog__footer__close" data-id="${ids.closeButton}">閉じる</button>
+        <button class="${ROOT_CLASS_NAME}__dialog__footer__login" data-id="${ids.loginButton}">ログイン</buton>
       </div>
     </div>
   `;
@@ -49,9 +50,10 @@ function rootInnerHTML(ids: DataIDs, resources: Resources): string {
 
 /** ルート要素の子孫要素 */
 type Elements = {
-  dialog: HTMLElement,
   closer: HTMLImageElement,
   backGround: HTMLElement,
+  loginButton: HTMLButtonElement,
+  closeButton: HTMLButtonElement,
 };
 
 /**
@@ -64,11 +66,12 @@ type Elements = {
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
   const closer = (closerElement instanceof HTMLImageElement) ? closerElement : document.createElement('img');
-  const dialog = root.querySelector(`[data-id="${ids.dialog}"]`)
-    ?? document.createElement('div');
-  const backGround = root.querySelector(`[data-id="${ids.backGround}"]`)
-    ?? document.createElement('div');
-  return {closer, dialog, backGround};
+  const backGround = root.querySelector(`[data-id="${ids.backGround}"]`) ?? document.createElement('div');
+  const loginButtonElement = root.querySelector(`[data-id="${ids.loginButton}"]`);
+  const loginButton = (loginButtonElement instanceof HTMLButtonElement) ? loginButtonElement : document.createElement('button');
+  const closeButtonElement = root.querySelector(`[data-id="${ids.closeButton}"]`);
+  const closeButton = (closeButtonElement instanceof HTMLButtonElement) ? closeButtonElement : document.createElement('button');
+  return {closer, backGround, loginButton, closeButton};
 }
 
 /** 本ダイアログで利用するAPIの機能 */
@@ -76,15 +79,12 @@ export interface OwnAPI extends IdPasswordLogin {}
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
-  _login: IdPasswordLogin;
   _root: HTMLElement;
-  _dialog: HTMLElement;
   _closer: HTMLImageElement;
-  /** @deprecated */
-  _loginSuccess: StreamSource<void>;
+  _loginButton: HTMLButtonElement;
+  _closeButton: HTMLButtonElement;
   _closeDialog: StreamSource<void>;
-  /** @deprecated */
-  _networkError: StreamSource<void>;
+  _login: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
   _changeValue: typeof Howl;
   _exclusive: Exclusive;
@@ -93,25 +93,21 @@ export class LoginDialog implements DOMDialog {
    * コンストラクタ
    * 
    * @param resources リソース管理オブジェクト
-   * @param login ログイン処理を実行するオブジェクト
    * @param caption 入力フォームに表示されるメッセージ
    */
-  constructor(resources: Resources, login: OwnAPI, caption: string) {
-    this._login = login;
-    console.log(caption);// TODO ダイアログに表示する
-
-    const dataIDs = {dialog: domUuid(), closer: domUuid(), backGround: domUuid()};
+  constructor(resources: Resources, caption: string) {
+    const dataIDs = {closer: domUuid(), backGround: domUuid(), loginButton: domUuid(), closeButton: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(dataIDs, resources);
-    const elements = extractElements(this._root, dataIDs);
+    this._root.innerHTML = rootInnerHTML(dataIDs, resources, caption);
 
+    const elements = extractElements(this._root, dataIDs);
     this._closer =elements.closer;
-    this._dialog = elements.dialog;
+    this._loginButton = elements.loginButton;
+    this._closeButton = elements.closeButton;
 
     this._closeDialog = new RxjsStreamSource();
-    this._loginSuccess = new RxjsStreamSource();
-    this._networkError = new RxjsStreamSource();
+    this._login = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._closer).subscribe(() => {
         this._onCloserPush();
@@ -123,7 +119,6 @@ export class LoginDialog implements DOMDialog {
 
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
-
     this._exclusive = new Exclusive();
   }
 
@@ -155,22 +150,12 @@ export class LoginDialog implements DOMDialog {
   }
 
   /**
-   * ログイン成功通知
-   * 
+   * ログイン実行通知
+   *
    * @return 通知ストリーム
    */
-  loginSuccessNotifier(): Stream<void> {
-    return this._loginSuccess;
-  }
-
-  /**
-   * @deprecated
-   * 通信エラー通知
-   * 
-   * @return 通知ストリーム 
-   */
-  networkErrorNotifier(): Stream<void> {
-    return this._networkError;
+  loginNotifier(): Stream<void> {
+    return this._login;
   }
 
   /**

@@ -57,17 +57,11 @@ export class DOMDialogs {
   startLogin(resources: Resources, api: LoginDialogAPI, caption: string): void {
     this._removeCurrentDialog();
 
-    const login = new LoginDialog(resources, api, caption);
+    const login = new LoginDialog(resources, caption);
     this._unsubscribers = [
-      login.loginSuccessNotifier().subscribe(() => {
-        this._gameAction.next({type: 'LoginSuccess'});
-      }),
       login.closeDialogNotifier().subscribe(() => {
         this._gameAction.next({type: 'LoginCancel'});
       }),
-      login.networkErrorNotifier().subscribe(() => {
-        this._gameAction.next({type: 'NetworkError'});
-      })
     ];
     this._root.appendChild(login.getRootHTMLElement());
     this._dialog = login;
