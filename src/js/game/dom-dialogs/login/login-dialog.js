@@ -87,6 +87,7 @@ export class LoginDialog implements DOMDialog {
   _login: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
   _changeValue: typeof Howl;
+  _pushButton: typeof Howl;
   _exclusive: Exclusive;
 
   /** 
@@ -109,6 +110,12 @@ export class LoginDialog implements DOMDialog {
     this._closeDialog = new RxjsStreamSource();
     this._login = new RxjsStreamSource();
     this._unsubscribers = [
+      pushDOMStream(this._loginButton).subscribe(() => {
+        this._onLoginButtonPush();
+      }),
+      pushDOMStream(this._closeButton).subscribe(() => {
+        this._onCloseButtonPush();
+      }),
       pushDOMStream(this._closer).subscribe(() => {
         this._onCloserPush();
       }),
@@ -118,6 +125,8 @@ export class LoginDialog implements DOMDialog {
     ];
 
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
+    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
     this._exclusive = new Exclusive();
   }
@@ -156,6 +165,32 @@ export class LoginDialog implements DOMDialog {
    */
   loginNotifier(): Stream<void> {
     return this._login;
+  }
+
+  /**
+   * ログインボタンを押した時の処理
+   */
+  _onLoginButtonPush(): void {
+    this._exclusive.execute(async () => {
+      await Promise.all([
+        pop(this._loginButton),
+        this._pushButton.play()
+      ]);
+      this._login.next();
+    });
+  }
+
+  /**
+   * 閉じるボタンを押した時の処理
+   */
+  _onCloseButtonPush(): void {
+    this._exclusive.execute(async () => {
+      await Promise.all([
+        pop(this._closeButton),
+        this._changeValue.play()
+      ]);
+      this._closeDialog.next();
+    });
   }
 
   /**

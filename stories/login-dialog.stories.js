@@ -9,7 +9,10 @@ export default {
 };
 
 export const dialog: DOMStubStory = domStub(resources => {  
-  const dialog = new LoginDialog(resources, 'ログインしてください');
+  const dialog = new LoginDialog(resources, 'ネット対戦をするにはログインしてください');
+  dialog.loginNotifier().subscribe(() => {
+    console.log('login');
+  });
   dialog.closeDialogNotifier().subscribe(() => {
     console.log('close');
   });
