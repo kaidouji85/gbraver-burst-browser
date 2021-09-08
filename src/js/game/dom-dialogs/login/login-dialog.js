@@ -10,18 +10,13 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
-import {LoginEntering} from './login-entering';
-import type {InputComplete} from './login-entering';
 import type {IdPasswordLogin} from '@gbraver-burst-network/core';
-import {LoginExecuting} from "./login-executing";
 import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'login';
 /** クローザーのcssクラス名 */
 const CLOSER_CLASS_NAME = `${ROOT_CLASS_NAME}__closer`;
-/** クローザーが非表示の際のcssクラス名 */
-const INVISIBLE_CLOSER_CLASS_NAME = `${CLOSER_CLASS_NAME}--invisible`;
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -43,7 +38,12 @@ function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   return `
     <div class="${ROOT_CLASS_NAME}__background" data-id="${ids.backGround}"></div>
     <img class="${CLOSER_CLASS_NAME}" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
-    <div class="${ROOT_CLASS_NAME}__dialog" data-id="${ids.dialog}"></div>
+    <div class="${ROOT_CLASS_NAME}__dialog" data-id="${ids.dialog}">
+      <div class="${ROOT_CLASS_NAME}__dialog__footer">
+        <button class="${ROOT_CLASS_NAME}__dialog__footer__close" type="button">閉じる</button>
+        <button class="${ROOT_CLASS_NAME}__dialog__footer__sumit" type="submit">ログイン</buton>
+      </div>
+    </div>
   `;
 }
 
@@ -80,10 +80,10 @@ export class LoginDialog implements DOMDialog {
   _root: HTMLElement;
   _dialog: HTMLElement;
   _closer: HTMLImageElement;
-  _loginEntering: LoginEntering;
-  _loginExecuting: LoginExecuting;
+  /** @deprecated */
   _loginSuccess: StreamSource<void>;
   _closeDialog: StreamSource<void>;
+  /** @deprecated */
   _networkError: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
   _changeValue: typeof Howl;
@@ -98,6 +98,7 @@ export class LoginDialog implements DOMDialog {
    */
   constructor(resources: Resources, login: OwnAPI, caption: string) {
     this._login = login;
+    console.log(caption);// TODO ダイアログに表示する
 
     const dataIDs = {dialog: domUuid(), closer: domUuid(), backGround: domUuid()};
     this._root = document.createElement('div');
@@ -107,15 +108,6 @@ export class LoginDialog implements DOMDialog {
 
     this._closer =elements.closer;
     this._dialog = elements.dialog;
-
-    this._loginEntering = new LoginEntering(resources);
-    this._loginEntering.show();
-    this._loginEntering.caption(caption);
-    this._dialog.appendChild(this._loginEntering.getRootHTMLElement());
-
-    this._loginExecuting = new LoginExecuting();
-    this._loginExecuting.hidden();
-    this._dialog.appendChild(this._loginExecuting.getRootHTMLElement());
 
     this._closeDialog = new RxjsStreamSource();
     this._loginSuccess = new RxjsStreamSource();
@@ -127,12 +119,6 @@ export class LoginDialog implements DOMDialog {
       pushDOMStream(elements.backGround).subscribe(() => {
         this._onPushOutsideOfDialog();
       }),
-      this._loginEntering.closeNotifier().subscribe(() => {
-        this._onPushCloseButtonPush();
-      }),
-      this._loginEntering.inputCompleteNotifier().subscribe(data => {
-        this._onInputComplete(data);
-      })
     ];
 
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
@@ -178,6 +164,7 @@ export class LoginDialog implements DOMDialog {
   }
 
   /**
+   * @deprecated
    * 通信エラー通知
    * 
    * @return 通知ストリーム 
@@ -200,32 +187,6 @@ export class LoginDialog implements DOMDialog {
   }
 
   /**
-   * 閉じるボタンを押した時の処理
-   */
-  _onPushCloseButtonPush(): void {
-    this._closeDialog.next();
-  }
-
-  /**
-   * ログイン情報の入力が完了した時の処理
-   * 
-   * @param data 入力した情報
-   */
-  _onInputComplete(data: InputComplete): void {
-    this._exclusive.execute(async () => {
-      this._switchLoginExecuting();
-      const isSuccessLogin = await this._apiErrorHandling(
-        () => this._login.login(data.userID, data.password));
-      if (!isSuccessLogin) {
-        this._switchLoginEnteringWithError();
-        return;
-      }
-
-      this._loginSuccess.next();
-    });
-  }
-
-  /**
    * ダイアログ外を押した時の処理
    */
   _onPushOutsideOfDialog(): void {
@@ -233,39 +194,5 @@ export class LoginDialog implements DOMDialog {
       await this._changeValue.play();
       this._closeDialog.next();
     });
-  }
-
-  /**
-   * API呼び出しのエラーハンドリング
-   * 
-   * @param fn API呼び出しを行うコールバック関数 
-   * @return API実行結果
-   */
-  async _apiErrorHandling<X>(fn: () => Promise<X>): Promise<X> {
-    try {
-      return await fn();
-    } catch(error) {
-      this._networkError.next();
-      throw error;
-    }
-  }
-
-  /**
-   * 画面表示をエラーメッセージ表示されているログイン情報入力に切り替える
-   */
-  _switchLoginEnteringWithError(): void {
-    this._closer.className = CLOSER_CLASS_NAME;
-    this._loginEntering.show();
-    this._loginEntering.error('ログインに失敗しました');
-    this._loginExecuting.hidden();
-  }
-
-  /**
-   * 画面表示をログイン中に切り替える
-   */
-  _switchLoginExecuting(): void {
-    this._closer.className = INVISIBLE_CLOSER_CLASS_NAME;
-    this._loginEntering.hidden();
-    this._loginExecuting.show();
   }
 }
