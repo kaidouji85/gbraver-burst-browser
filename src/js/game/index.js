@@ -314,11 +314,16 @@ export class Game {
 
       await this._fader.fadeOut();
       this._domDialogs.hidden();
-      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id,
-        'CASUAL MATCH');
+      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
       await this._fader.fadeIn();
 
-      const battleScene = this._tdScenes.startBattle(resources, battle, battle.player,
+      const progress = async (v) =>  {
+        this._domDialogs.startWaiting('通信中');
+        const update = await this._apiErrorHandling(() => battle.progress(v));
+        this._domDialogs.hidden();
+        return update;
+      };
+      const battleScene = this._tdScenes.startBattle(resources, {progress}, battle.player,
         battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await this._fader.fadeOut();
