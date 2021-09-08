@@ -114,8 +114,8 @@ export class Game {
       else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
       else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
+      else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
-      else if (action.type === 'LoginSuccess') { this._onLoginSuccess() }
       else if (action.type === 'NetworkError') { this._onNetworkError() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError() }
     }));
@@ -190,13 +190,23 @@ export class Game {
       await this._domScenes.startPlayerSelect(resources);
       await this._fader.fadeIn();
     };
+    const showLoginDialog = () => {
+      this._domDialogs.startLogin(resources, 'ネット対戦をするにはログインをしてください');
+    };
 
     const isLogin = await loginCheck();
     if (isLogin) {
       await gotoPlayerSelect();
     } else {
-      await this._api.gotoLoginPage();
+      showLoginDialog();
     }
+  }
+
+  /**
+   * ユニバーサルログイン
+   */
+  async _onUniversalLogin(): Promise<void> {
+    await this._api.gotoLoginPage();
   }
 
   /**
@@ -204,28 +214,6 @@ export class Game {
    */
   _onLoginCancel(): void {
     this._domDialogs.hidden();
-  }
-
-  /**
-   * ログイン成功
-   */
-  async _onLoginSuccess(): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-    const resources: Resources = this._resources;
-    const casualMatchLogin = async (origin: CasualMatch): Promise<void> => {
-      const subFlow = {type: 'PlayerSelect'};
-      this._inProgress = {...origin, subFlow};
-      this._domDialogs.hidden();
-      await this._fader.fadeOut();
-      await this._domScenes.startPlayerSelect(resources);
-      await this._fader.fadeIn();
-    };
-
-    if (this._inProgress.type === 'CasualMatch') {
-      await casualMatchLogin(this._inProgress);
-    }
   }
 
   /**

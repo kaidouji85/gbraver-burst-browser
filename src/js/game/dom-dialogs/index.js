@@ -6,7 +6,6 @@ import type {Resources} from "../../resource";
 import type {DOMDialog} from "./dialog";
 import {RxjsStreamSource} from "../../stream/rxjs";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
-import type {OwnAPI as LoginDialogAPI} from './login/login-dialog';
 import {LoginDialog} from './login/login-dialog';
 import {WaitingDialog} from "./waiting/waiting-dialog";
 import {NetworkErrorDialog} from './network-error/network-error-dialog';
@@ -51,14 +50,16 @@ export class DOMDialogs {
    * ログインダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
-   * @param api APIサーバSDK
    * @param caption キャプション
    */
-  startLogin(resources: Resources, api: LoginDialogAPI, caption: string): void {
+  startLogin(resources: Resources, caption: string): void {
     this._removeCurrentDialog();
 
     const login = new LoginDialog(resources, caption);
     this._unsubscribers = [
+      login.loginNotifier().subscribe(() => {
+        this._gameAction.next({type: 'UniversalLogin'});
+      }),
       login.closeDialogNotifier().subscribe(() => {
         this._gameAction.next({type: 'LoginCancel'});
       }),

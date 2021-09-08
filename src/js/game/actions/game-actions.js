@@ -54,14 +54,14 @@ export type EndNPCEnding = {
   type: 'EndNPCEnding'
 };
 
+/** ユニバーサルログインを実行する */
+export type UniversalLogin = {
+  type: 'UniversalLogin'
+};
+
 /** ログインダイアからのログインを中断した */
 export type LoginCancel = {
   type: 'LoginCancel'
-};
-
-/** ログインダイログからのログインが成功した */
-export type LoginSuccess = {
-  type: 'LoginSuccess'
 };
 
 /** 通信エラーが発生した */
@@ -85,7 +85,7 @@ export type GameAction = GameStart
  | SelectionCancel
  | EndBattle
  | EndNPCEnding
+ | UniversalLogin
  | LoginCancel
- | LoginSuccess
  | NetworkError
  | EndNetworkError;
