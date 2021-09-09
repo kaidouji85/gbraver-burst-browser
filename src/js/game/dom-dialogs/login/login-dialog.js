@@ -40,9 +40,9 @@ function rootInnerHTML(ids: DataIDs, resources: Resources, caption: string): str
     <img class="${ROOT_CLASS_NAME}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
     <div class="${ROOT_CLASS_NAME}__dialog">
       <div class="${ROOT_CLASS_NAME}__dialog__caption">${caption}</div>
-      <div class="${ROOT_CLASS_NAME}__dialog__footer">
-        <button class="${ROOT_CLASS_NAME}__dialog__footer__close" data-id="${ids.closeButton}">閉じる</button>
-        <button class="${ROOT_CLASS_NAME}__dialog__footer__login" data-id="${ids.loginButton}">ログイン</buton>
+      <div class="${ROOT_CLASS_NAME}__dialog__controllers">
+        <button class="${ROOT_CLASS_NAME}__dialog__controllers__close" data-id="${ids.closeButton}">閉じる</button>
+        <button class="${ROOT_CLASS_NAME}__dialog__controllers__login" data-id="${ids.loginButton}">ログイン</buton>
       </div>
     </div>
   `;
