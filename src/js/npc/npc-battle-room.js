@@ -3,11 +3,10 @@
 import type {GbraverBurstCore, Command, GameState, Player, PlayerCommand} from "gbraver-burst-core";
 import {startGbraverBurst} from "gbraver-burst-core";
 import type {NPC} from "./npc";
-import type {BattleProgress} from "../game/td-scenes/battle/battle-progress";
 import {playerUuid} from "../uuid/player";
 
 /** NPCバトルルーム */
-export class NPCBattleRoom implements BattleProgress {
+export class NPCBattleRoom {
   player: Player;
   enemy: Player;
   _core: GbraverBurstCore;
@@ -35,7 +34,12 @@ export class NPCBattleRoom implements BattleProgress {
     return this._core.stateHistory();
   }
 
-  /** @override */
+  /**
+   * バトルを進める
+   *
+   * @param command コマンド
+   * @return 更新されたステート
+   */
   async progress(command: Command): Promise<GameState[]> {
     const playerCommand: PlayerCommand = {playerId: this.player.playerId, command};
     const enemyCommand: PlayerCommand = {

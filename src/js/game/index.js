@@ -425,7 +425,8 @@ export class Game {
       npcBattle.enemy.armdozer.id, course.stageName);
     await this._fader.fadeIn();
     
-    const battleScene = this._tdScenes.startBattle(resources, npcBattle, npcBattle.player,
+    const progress = v => Promise.resolve(npcBattle.progress(v));
+    const battleScene = this._tdScenes.startBattle(resources, {progress}, npcBattle.player,
       npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     await this._fader.fadeOut();
