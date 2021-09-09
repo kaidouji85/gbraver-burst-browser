@@ -20,6 +20,9 @@ export const DefinePlugin = {
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: GBRAVER_BURST_IS_SERVICE_WORKER_USED,
 
+  /** APIサーバ経由で利用する機能が使えるか否か、trueで使える */
+  isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE,
+
   /** APIサーバのURL */
   apiServerURL: GBRAVER_BURST_API_SERVER_URL,
 

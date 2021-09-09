@@ -318,7 +318,7 @@ export class Game {
       await this._fader.fadeIn();
 
       const progress = async (v) =>  {
-        this._domDialogs.startWaiting('通信中');
+        this._domDialogs.startWaiting('通信中......');
         const update = await this._apiErrorHandling(() => battle.progress(v));
         this._domDialogs.hidden();
         return update;
