@@ -43,7 +43,6 @@ export class BattleScene implements Scene {
   _state: BattleSceneState;
   _initialState: GameState[];
   _endBattle: StreamSource<GameEnd>;
-  _battleProgressError: StreamSource<void>;
   _battleProgress: BattleProgress;
   _exclusive: Exclusive;
   _view: BattleSceneView;
@@ -55,7 +54,6 @@ export class BattleScene implements Scene {
     this._initialState = param.initialState;
     this._state = createInitialState(param.player.playerId);
     this._endBattle = new RxjsStreamSource();
-    this._battleProgressError = new RxjsStreamSource();
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,
@@ -95,15 +93,6 @@ export class BattleScene implements Scene {
    */
   gameEndNotifier(): Stream<GameEnd> {
     return this._endBattle;
-  }
-
-  /**
-   * バトル進行中のエラーを通知する
-   *
-   * @return 通知ストリーム
-   */
-  battleErrorNotifier(): Stream<void> {
-    return this._battleProgressError;
   }
 
   /**
@@ -190,19 +179,10 @@ export class BattleScene implements Scene {
    * @return ゲームの最新状態、何も更新されなかった場合はnullを返す
    */
   async _progressGame(command: Command): Promise<?GameState> {
-    const progressWithErrorHandling = async (v: Command): Promise<GameState[]> => {
-      try {
-        return await this._battleProgress.progress(v);
-      } catch(error) {
-        this._battleProgressError.next();
-        throw error;
-      }
-    }
-
     let lastCommand: Command = command;
     let lastState: ?GameState = null;
     for (let i=0; i<100; i++) {
-      const updateState = await progressWithErrorHandling(lastCommand);
+      const updateState = await this._battleProgress.progress(lastCommand);
       await stateHistoryAnimation(this._view, this._sounds, this._state, updateState).play();
       lastState = updateState[updateState.length - 1] ?? null;
       if (!(lastState && lastState.effect.name === 'InputCommand')) {
