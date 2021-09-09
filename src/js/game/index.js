@@ -43,8 +43,8 @@ type Param = {
   isPerformanceStatsVisible: boolean,
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean,
-  /** カジュアルマッチが可能か否か、trueで可能 */
-  canCasualMatch: boolean,
+  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
+  isAPIServerEnable: boolean,
   /** APIサーバのSDK */
   api: OwnAPI,
 };
@@ -54,7 +54,7 @@ export class Game {
   _isPerformanceStatsVisible: boolean;
   _isServiceWorkerUsed: boolean;
   _howToPlayMovieURL: string;
-  _canCasualMatch: boolean;
+  _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
   _resize: Stream<Resize>;
@@ -79,7 +79,7 @@ export class Game {
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
     this._howToPlayMovieURL = param.howToPlayMovieURL;
-    this._canCasualMatch = param.canCasualMatch;
+    this._isAPIServerEnable = param.isAPIServerEnable;
 
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
@@ -443,7 +443,7 @@ export class Game {
    * @return タイトル画面
    */
   _startTitle(resources: Resources): Promise<Title> {
-    return this._domScenes.startTitle(resources, this._canCasualMatch);
+    return this._domScenes.startTitle(resources, this._isAPIServerEnable);
   }
 
   /**
