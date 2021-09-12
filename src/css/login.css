@@ -50,10 +50,6 @@
   z-index: var(--zindex-close);
 }
 
-.login__closer--invisible {
-  display: none;
-}
-
 .login__dialog {
   width: var(--login-dialog-width);
   height: var(--login-dialog-height);
@@ -74,67 +70,11 @@
   z-index: var(--zindex-dialog)
 }
 
-/** 
- * ログイン情報入力中
- */
-.login-entering {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.login-entering--invisible {
-  display: none 
-}
-
-.login-entering__caption {
+.login__dialog__caption {
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
-.login-entering__caption--invisible {
-  display: none;
-}
-
-.login-entering__error {
-  color: var(--error-font-color);
-  margin-bottom: calc(var(--responsive-font-size) * 2);
-}
-
-.login-entering__error--invisible {
-  display: none;
-}
-
-.login-entering__form__user-name {
-  display: flex;
-  margin-bottom: calc(var(--responsive-font-size) * 0.5);
-}
-
-.login-entering__form__password {
-  display: flex;
-  margin-bottom: calc(var(--responsive-font-size) * 2);
-}
-
-.login-entering__form__user-name__label, .login-entering__form__password__label {
-  width: calc(var(--responsive-font-size) * 5.5);
-}
-
-.login-entering__form__user-name__input, .login-entering__form__password__input {
-  font-size: var(--responsive-font-size);
-}
-
-.login-entering__form__footer__sumit {
-  width: var(--control-button-width);
-  height: var(--control-button-height);
-  font-size: var(--responsive-font-size);
-  border-radius: var(--button-border-radius);
-  background-color: var(--button-background-color);
-  color: var(--button-font-color);
-  border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
-}
-
-.login-entering__form__footer__close {
+.login__dialog__controllers__close {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
@@ -146,9 +86,13 @@
   margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
-/**
- * ログイン中
- */
-.login-executing--invisible {
-  display: none;
+.login__dialog__controllers__login {
+  width: var(--control-button-width);
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  background-color: var(--button-background-color);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
 }

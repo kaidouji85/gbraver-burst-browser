@@ -14,8 +14,6 @@ export type PostNetworkError = 'GotoTitle' | 'Close';
 export function getPostNetworkError(inProgress: InProgress): PostNetworkError {
   if (inProgress.type === 'CasualMatch' && inProgress.subFlow.type === 'LoginCheck') {
     return 'Close';
-  } else if (inProgress.type === 'CasualMatch' && inProgress.subFlow.type === 'Login') {
-    return 'Close';
   } else {
     return 'GotoTitle';
   }

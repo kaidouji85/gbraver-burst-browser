@@ -3,21 +3,27 @@
 import '../css/style.css';
 import {Game} from './game/index';
 import {DefinePlugin} from "./webpack/define-plugin";
-import {MonolithicBrowser} from '@gbraver-burst-network/monolithic-browser';
+import {createBrowserSDK} from "@gbraver-burst-network/browser-sdk";
 
 /**
  * Gブレイバーバーストのエントリポイント
  */
 async function main(): Promise<void> {
+  const api = await createBrowserSDK(DefinePlugin.ownURL, DefinePlugin.apiServerURL,
+    DefinePlugin.auth0Domain, DefinePlugin.auth0ClientId, DefinePlugin.auth0AudienceId);
+  if(api.isLoginSuccessRedirect()) {
+    await api.afterLoginSuccess();
+  }
+
   const game = new Game({
     resourceRoot: {
       get: () => DefinePlugin.resourceHash
     },
-    api: new MonolithicBrowser(DefinePlugin.apiServerURL),
+    api: api,
     howToPlayMovieURL: DefinePlugin.howToPlay,
     isPerformanceStatsVisible: DefinePlugin.isPerformanceStatsVisible === 'true',
     isServiceWorkerUsed: DefinePlugin.isServiceWorkerUsed === 'true',
-    canCasualMatch: DefinePlugin.canCasualMatch === 'true',
+    isAPIServerEnable: DefinePlugin.isAPIServerEnable === 'true',
   });
   await game.initialize();
 }

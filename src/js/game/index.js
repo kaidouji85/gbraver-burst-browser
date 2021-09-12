@@ -24,13 +24,14 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
-import type {IdPasswordLogin, LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
+import type {LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {getPostNetworkError, postNetworkErrorLabel} from "./in-progress/network-error";
+import {UniversalLogin} from "@gbraver-burst-network/core/lib/login";
 
 /** 本クラスで利用するAPIサーバの機能 */
-interface OwnAPI extends IdPasswordLogin, LoginCheck, CasualMatchSDK {}
+interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -42,8 +43,8 @@ type Param = {
   isPerformanceStatsVisible: boolean,
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean,
-  /** カジュアルマッチが可能か否か、trueで可能 */
-  canCasualMatch: boolean,
+  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
+  isAPIServerEnable: boolean,
   /** APIサーバのSDK */
   api: OwnAPI,
 };
@@ -53,7 +54,7 @@ export class Game {
   _isPerformanceStatsVisible: boolean;
   _isServiceWorkerUsed: boolean;
   _howToPlayMovieURL: string;
-  _canCasualMatch: boolean;
+  _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
   _resize: Stream<Resize>;
@@ -78,7 +79,7 @@ export class Game {
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
     this._howToPlayMovieURL = param.howToPlayMovieURL;
-    this._canCasualMatch = param.canCasualMatch;
+    this._isAPIServerEnable = param.isAPIServerEnable;
 
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
@@ -113,8 +114,8 @@ export class Game {
       else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
       else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
+      else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
-      else if (action.type === 'LoginSuccess') { this._onLoginSuccess() }
       else if (action.type === 'NetworkError') { this._onNetworkError() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError() }
     }));
@@ -189,19 +190,23 @@ export class Game {
       await this._domScenes.startPlayerSelect(resources);
       await this._fader.fadeIn();
     };
-    const showLoginDialog = async (): Promise<void> => {
-      const subFlow = {type: 'Login'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
-      const caption = 'カジュアルマッチを始めるにはログインする必要があります';
-      this._domDialogs.startLogin(resources, this._api, caption);
+    const showLoginDialog = () => {
+      this._domDialogs.startLogin(resources, 'ネット対戦をするにはログインをしてください');
     };
 
     const isLogin = await loginCheck();
     if (isLogin) {
       await gotoPlayerSelect();
     } else {
-      await showLoginDialog();
+      showLoginDialog();
     }
+  }
+
+  /**
+   * ユニバーサルログイン
+   */
+  async _onUniversalLogin(): Promise<void> {
+    await this._api.gotoLoginPage();
   }
 
   /**
@@ -209,28 +214,6 @@ export class Game {
    */
   _onLoginCancel(): void {
     this._domDialogs.hidden();
-  }
-
-  /**
-   * ログイン成功
-   */
-  async _onLoginSuccess(): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-    const resources: Resources = this._resources;
-    const casualMatchLogin = async (origin: CasualMatch): Promise<void> => {
-      const subFlow = {type: 'PlayerSelect'};
-      this._inProgress = {...origin, subFlow};
-      this._domDialogs.hidden();
-      await this._fader.fadeOut();
-      await this._domScenes.startPlayerSelect(resources);
-      await this._fader.fadeIn();
-    };
-
-    if (this._inProgress.type === 'CasualMatch') {
-      await casualMatchLogin(this._inProgress);
-    }
   }
 
   /**
@@ -331,11 +314,16 @@ export class Game {
 
       await this._fader.fadeOut();
       this._domDialogs.hidden();
-      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id,
-        'CASUAL MATCH');
+      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
       await this._fader.fadeIn();
 
-      const battleScene = this._tdScenes.startBattle(resources, battle, battle.player,
+      const progress = async (v) =>  {
+        this._domDialogs.startWaiting('通信中......');
+        const update = await this._apiErrorHandling(() => battle.progress(v));
+        this._domDialogs.hidden();
+        return update;
+      };
+      const battleScene = this._tdScenes.startBattle(resources, {progress}, battle.player,
         battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await this._fader.fadeOut();
@@ -437,7 +425,8 @@ export class Game {
       npcBattle.enemy.armdozer.id, course.stageName);
     await this._fader.fadeIn();
     
-    const battleScene = this._tdScenes.startBattle(resources, npcBattle, npcBattle.player,
+    const progress = v => Promise.resolve(npcBattle.progress(v));
+    const battleScene = this._tdScenes.startBattle(resources, {progress}, npcBattle.player,
       npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     await this._fader.fadeOut();
@@ -455,7 +444,7 @@ export class Game {
    * @return タイトル画面
    */
   _startTitle(resources: Resources): Promise<Title> {
-    return this._domScenes.startTitle(resources, this._canCasualMatch);
+    return this._domScenes.startTitle(resources, this._isAPIServerEnable);
   }
 
   /**

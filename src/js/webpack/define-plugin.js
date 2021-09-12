@@ -8,6 +8,9 @@ export const DefinePlugin = {
   /** リソースフォルダのハッシュ */
   resourceHash: GBRAVER_BURST_RESOURCE_HASH,
 
+  /** 自身のURL */
+  ownURL: GBRAVER_BURST_OWN_ROOT_URL,
+
   /** 遊び方動画のURL */
   howToPlay: GBRAVER_BURST_HOW_TO_PLAY,
 
@@ -17,9 +20,18 @@ export const DefinePlugin = {
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: GBRAVER_BURST_IS_SERVICE_WORKER_USED,
 
+  /** APIサーバ経由で利用する機能が使えるか否か、trueで使える */
+  isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE,
+
   /** APIサーバのURL */
   apiServerURL: GBRAVER_BURST_API_SERVER_URL,
 
-  /** カジュアルマッチが実施できるか否か、trueで実施できる */
-  canCasualMatch: GBRAVER_BURST_CAN_CASUAL_MATCH,
+  /** auth0 ドメイン */
+  auth0Domain: GBRAVER_BURST_AUTH0_DOMAIN,
+
+  /** auth0 クライアントID */
+  auth0ClientId: GBRAVER_BURST_AUTH0_CLIENT_ID,
+
+  /** auth0 audience */
+  auth0AudienceId: GBRAVER_BURST_AUTH0_AUDIENCE,
 }
