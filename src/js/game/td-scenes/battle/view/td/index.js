@@ -12,7 +12,7 @@ import {TDGameObjects} from "./game-objects";
 import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
 import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
 import type {Resize} from "../../../../../window/resize";
-//import {skyBox} from "./sky-box";
+import {skyBox} from "./sky-box";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
@@ -47,7 +47,7 @@ export class ThreeDimensionLayer {
    */
   constructor(param: Param) {
     this.scene = new THREE.Scene();
-    //this.scene.background = skyBox(param.resources);
+    this.scene.background = skyBox(param.resources);
 
     this.camera = new TDCamera(param.update, param.resize);
 
@@ -61,7 +61,7 @@ export class ThreeDimensionLayer {
     this.players.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
-        //this.scene.add(v);
+        this.scene.add(v);
       });
 
 
@@ -72,12 +72,12 @@ export class ThreeDimensionLayer {
     this.armdozerObjects.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {
-        //this.scene.add(v);
+        this.scene.add(v);
       });
 
     this.gameObjects = new TDGameObjects(param.resources, this._gameObjectAction);
     this.gameObjects.getObject3Ds().forEach(object => {
-      //this.scene.add(object);
+      this.scene.add(object);
     });
   }
 
