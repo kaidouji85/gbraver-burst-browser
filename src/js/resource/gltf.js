@@ -32,7 +32,7 @@ export const GLTF_IDS = {
 export const GLTF_CONFIGS: GlTFConfig[] = [
   {
     id: GLTF_IDS.SHOPPING_STREET,
-    path: 'model/shopping-street.glb'
+    path: 'model/shopping-street/shopping-street.glb'
   }
 ];
 
