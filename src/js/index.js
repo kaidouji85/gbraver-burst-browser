@@ -17,7 +17,7 @@ async function main(): Promise<void> {
 
   const game = new Game({
     resourceRoot: {
-      get: () => DefinePlugin.resourceHash
+      get: () => DefinePlugin.resourceRoot
     },
     api: api,
     howToPlayMovieURL: DefinePlugin.howToPlay,

@@ -6,15 +6,15 @@ const uuid = require('uuid');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const resourceHash = uuid.v4();
 const BUILD_PATH = 'build/production';
-const BUILD_RESOURCE_PATH = `resources/${resourceHash}`;
-const BUILD_INDEX_JS_PATH = `index.js`;
+const RESOURCE_HASH = uuid.v4();
+const RESOURCE_ROOT_PATH = `resources/${RESOURCE_HASH}`;
+const INDEX_JS_PATH = `index.js`;
 
 module.exports = {
   mode: 'development',
   entry: {
-    [BUILD_INDEX_JS_PATH]: path.resolve(__dirname, 'src/js/index.js')
+    [INDEX_JS_PATH]: path.resolve(__dirname, 'src/js/index.js')
   },
   output: {
     path: path.resolve(__dirname, BUILD_PATH),
@@ -50,7 +50,7 @@ module.exports = {
       filename: path.resolve(__dirname, `${BUILD_PATH}/index.html`),
       template: 'src/index.html',
       templateParameters: {
-        BUILD_INDEX_JS_PATH: BUILD_INDEX_JS_PATH,
+        BUILD_INDEX_JS_PATH: INDEX_JS_PATH,
         OWN_ROOT_URL: process.env.OWN_ROOT_URL,
         TWITTER_SITE: process.env.TWITTER_SITE,
         IS_SEARCH_ENGINE_NO_INDEX: process.env.IS_SEARCH_ENGINE_NO_INDEX === 'true'
@@ -61,7 +61,7 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, "src/resources"),
-          to: path.resolve(__dirname, BUILD_PATH, BUILD_RESOURCE_PATH)
+          to: path.resolve(__dirname, BUILD_PATH, RESOURCE_ROOT_PATH)
         },
         {
           from: path.resolve(__dirname, "src/favicon.ico"),
@@ -90,7 +90,7 @@ module.exports = {
       ]
     }),
     new webpack.DefinePlugin({
-      GBRAVER_BURST_RESOURCE_HASH: JSON.stringify(BUILD_RESOURCE_PATH),
+      GBRAVER_BURST_RESOURCE_ROOT: JSON.stringify(RESOURCE_ROOT_PATH),
       GBRAVER_BURST_OWN_ROOT_URL: JSON.stringify(process.env.OWN_ROOT_URL),
       GBRAVER_BURST_HOW_TO_PLAY: JSON.stringify(process.env.HOW_TO_PLAY_URL),
       GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE: JSON.stringify(process.env.IS_PERFORMANCE_STATS_VISIBLE),
