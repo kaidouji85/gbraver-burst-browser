@@ -9,6 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BUILD_ROOT = 'build/production';
 const RESOURCE_HASH = uuid.v4();
 const RESOURCE_ROOT = `resources/${RESOURCE_HASH}`;
+const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
+const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 const OUTPUT_JS_NAME = `index.js`;
 
 module.exports = {
@@ -59,7 +61,11 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, "src/resources"),
-          to: path.resolve(__dirname, BUILD_ROOT, `${RESOURCE_ROOT}/desktop`)
+          to: path.resolve(__dirname, BUILD_ROOT, DESKTOP_RESOURCE_ROOT)
+        },
+        {
+          from: path.resolve(__dirname, "src/resources"),
+          to: path.resolve(__dirname, BUILD_ROOT, MOBILE_RESOURCE_ROOT)
         },
         {
           from: path.resolve(__dirname, "src/favicon.ico"),
