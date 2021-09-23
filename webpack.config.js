@@ -2,13 +2,13 @@ require('dotenv').config();
 
 const path = require('path');
 const webpack = require('webpack');
-const Puid = require('puid');
+const uuid = require('uuid');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const hash = new Puid().generate();
+const resourceHash = uuid.v4();
 const BUILD_PATH = 'build/production';
-const BUILD_RESOURCE_PATH = `resources/${hash}`;
+const BUILD_RESOURCE_PATH = `resources/${resourceHash}`;
 const BUILD_INDEX_JS_PATH = `index.js`;
 
 module.exports = {
@@ -50,7 +50,6 @@ module.exports = {
       filename: path.resolve(__dirname, `${BUILD_PATH}/index.html`),
       template: 'src/index.html',
       templateParameters: {
-        BUILD_RESOURCE_PATH: BUILD_RESOURCE_PATH,
         BUILD_INDEX_JS_PATH: BUILD_INDEX_JS_PATH,
         OWN_ROOT_URL: process.env.OWN_ROOT_URL,
         TWITTER_SITE: process.env.TWITTER_SITE,
