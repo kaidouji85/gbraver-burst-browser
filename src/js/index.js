@@ -4,6 +4,7 @@ import '../css/style.css';
 import {Game} from './game/index';
 import {DefinePlugin} from "./webpack/define-plugin";
 import {createBrowserSDK} from "@gbraver-burst-network/browser-sdk";
+import {isMobile} from "./device ditect/is-mobile";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -14,12 +15,12 @@ async function main(): Promise<void> {
   if(api.isLoginSuccessRedirect()) {
     await api.afterLoginSuccess();
   }
-
+  
+  const resourceRoot = isMobile()
+    ? {get: () => DefinePlugin.mobileResourceRoot}
+    : {get: () => DefinePlugin.desktopResourceRoot};
   const game = new Game({
-    resourceRoot: {
-      // TODO 将来的にデバイスごとにリソースルートを切り替える処理を追加する
-      get: () => DefinePlugin.desktopResourceRoot
-    },
+    resourceRoot,
     api: api,
     howToPlayMovieURL: DefinePlugin.howToPlay,
     isPerformanceStatsVisible: DefinePlugin.isPerformanceStatsVisible === 'true',

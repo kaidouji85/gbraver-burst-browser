@@ -8,6 +8,9 @@ export const DefinePlugin = {
   /** デスクトップのリソースルート */
   desktopResourceRoot: GBRAVER_BURST_DESKTOP_RESOURCE_ROOT,
 
+  /** モバイルのリソースルート */
+  mobileResourceRoot: GBRAVER_BURST_MOBILE_RESOURCE_ROOT,
+
   /** 自身のURL */
   ownURL: GBRAVER_BURST_OWN_ROOT_URL,
 
