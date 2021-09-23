@@ -10,7 +10,7 @@ import {loadingAllCubeTextures} from "./cube-texture";
 import type {SoundResource} from "./sound";
 import {loadingAllSounds} from "./sound";
 import type {ResourceRoot} from "./resource-root";
-import type {LoadingActions} from "./actions/loading-actions";
+import type {LoadingActions} from "./loading-actions";
 import type {Path} from "./path";
 import {getAllPaths} from "./path";
 import type {Stream, StreamSource} from "../stream/core";
