@@ -44,10 +44,10 @@ function resizeImage(origin, scale) {
 (async () => {
   console.log('start scale down mobile images');
   const mobileImagePaths = await globPaths('build/production/resources/**/mobile/**/*.png');
-  await Promise.all(mobileImagePaths.map(async v => {
-    console.log(`start ${v}`);
-    await resizeImage(v, '50%');
-    console.log(`complete ${v}`);
-  }));
+  for(const path of mobileImagePaths) {
+    console.log(`start ${path}`);
+    await resizeImage(path, '50%');
+    console.log(`complete ${path}`);
+  }
   console.log('complete scale down mobile images');
 })();
