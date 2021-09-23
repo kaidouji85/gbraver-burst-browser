@@ -6,7 +6,7 @@
  */
 export const DefinePlugin = {
   /** リソースフォルダのハッシュ */
-  resourceHash: GBRAVER_BURST_RESOURCE_HASH,
+  resourceRoot: GBRAVER_BURST_RESOURCE_ROOT,
 
   /** 自身のURL */
   ownURL: GBRAVER_BURST_OWN_ROOT_URL,

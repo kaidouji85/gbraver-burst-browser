@@ -17,7 +17,8 @@ async function main(): Promise<void> {
 
   const game = new Game({
     resourceRoot: {
-      get: () => DefinePlugin.resourceHash
+      // TODO 将来的にデバイスごとにリソースルートを切り替える処理を追加する
+      get: () => `${DefinePlugin.resourceRoot}/desktop`
     },
     api: api,
     howToPlayMovieURL: DefinePlugin.howToPlay,
