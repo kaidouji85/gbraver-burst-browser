@@ -1,5 +1,8 @@
-const im = require('imagemagick');
 const glob = require("glob")
+const sizeOf = require('image-size')
+const sharp = require('sharp');
+
+sharp.cache(false);
 
 /**
  * globパターンでファイル名を検索する
@@ -23,19 +26,16 @@ function globPaths(pattern) {
  * 画像の大きさを変更する
  *
  * @param {string} origin 画像ファイルのパス
- * @param {string} scale 拡大率を50%という形式で指定
- * @return {Promise<string>} imagemagickの標準出力内容
+ * @param {number} scale 拡大率を50%という形式で指定
+ * @return {Promise<void>} 大きさ変更が完了したら発火するPromise
  */
-function resizeImage(origin, scale) {
-  return new Promise((resolve, reject) => {
-    im.convert([origin, '-resize', scale, origin], (err, stdout) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(stdout);
-      }
-    });
-  });
+async function resizeImage(origin, scale) {
+  const size = sizeOf(origin);
+  const height = Math.floor(size.height * scale);
+  const buffer = await sharp(origin)
+    .resize(null, height)
+    .toBuffer();
+  return sharp(buffer).toFile(origin);
 }
 
 /**
@@ -46,7 +46,7 @@ function resizeImage(origin, scale) {
   const mobileImagePaths = await globPaths('build/production/resources/**/mobile/**/*.png');
   for(const path of mobileImagePaths) {
     console.log(`start ${path}`);
-    await resizeImage(path, '50%');
+    await resizeImage(path, 0.5);
     console.log(`complete ${path}`);
   }
   console.log('complete scale down mobile images');
