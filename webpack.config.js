@@ -9,6 +9,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BUILD_ROOT = 'build/production';
 const RESOURCE_HASH = uuid.v4();
 const RESOURCE_ROOT = `resources/${RESOURCE_HASH}`;
+const DESKTOP_RESOURCE_ROOT = `${RESOURCE_ROOT}/desktop`;
+const MOBILE_RESOURCE_ROOT = `${RESOURCE_ROOT}/mobile`;
 const OUTPUT_JS_NAME = `index.js`;
 
 module.exports = {
@@ -59,7 +61,11 @@ module.exports = {
       patterns: [
         {
           from: path.resolve(__dirname, "src/resources"),
-          to: path.resolve(__dirname, BUILD_ROOT, `${RESOURCE_ROOT}/desktop`)
+          to: path.resolve(__dirname, BUILD_ROOT, DESKTOP_RESOURCE_ROOT)
+        },
+        {
+          from: path.resolve(__dirname, "src/resources"),
+          to: path.resolve(__dirname, BUILD_ROOT, MOBILE_RESOURCE_ROOT)
         },
         {
           from: path.resolve(__dirname, "src/favicon.ico"),
@@ -88,7 +94,8 @@ module.exports = {
       ]
     }),
     new webpack.DefinePlugin({
-      GBRAVER_BURST_RESOURCE_ROOT: JSON.stringify(RESOURCE_ROOT),
+      GBRAVER_BURST_DESKTOP_RESOURCE_ROOT: JSON.stringify(DESKTOP_RESOURCE_ROOT),
+      GBRAVER_BURST_MOBILE_RESOURCE_ROOT: JSON.stringify(MOBILE_RESOURCE_ROOT),
       GBRAVER_BURST_OWN_ROOT_URL: JSON.stringify(process.env.OWN_ROOT_URL),
       GBRAVER_BURST_HOW_TO_PLAY: JSON.stringify(process.env.HOW_TO_PLAY_URL),
       GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE: JSON.stringify(process.env.IS_PERFORMANCE_STATS_VISIBLE),

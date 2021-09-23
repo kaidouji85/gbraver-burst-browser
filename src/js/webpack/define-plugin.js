@@ -5,8 +5,11 @@
  * 本オブジェクトは、エントリポイントからのみ参照されることを想定している
  */
 export const DefinePlugin = {
-  /** リソースフォルダのハッシュ */
-  resourceRoot: GBRAVER_BURST_RESOURCE_ROOT,
+  /** デスクトップのリソースルート */
+  desktopResourceRoot: GBRAVER_BURST_DESKTOP_RESOURCE_ROOT,
+
+  /** モバイルのリソースルート */
+  mobileResourceRoot: GBRAVER_BURST_MOBILE_RESOURCE_ROOT,
 
   /** 自身のURL */
   ownURL: GBRAVER_BURST_OWN_ROOT_URL,
