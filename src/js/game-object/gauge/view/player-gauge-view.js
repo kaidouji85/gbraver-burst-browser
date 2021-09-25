@@ -12,9 +12,6 @@ import {HpNumber} from "./hp-number";
 import {PlayerBatteryGauge} from "./player-battery-gauge";
 import {HUDIndicatorScale} from "../../../hud-scale/hud-scale";
 
-/** キャンバスの大きさ */
-export const BASE_CANVAS_SIZE = 1024;
-
 /** 基本拡大率 */
 export const BASE_SCALE = 0.3;
 
@@ -34,16 +31,9 @@ export class PlayerGaugeView implements GaugeView {
     this._group = new THREE.Group();
     this._group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
 
-    const gaugeBaseResource = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE);
-    const gaugeBase = gaugeBaseResource
-      ? gaugeBaseResource.image
-      : new Image();
-    this._base = new SimpleImageMesh({
-      canvasSize: BASE_CANVAS_SIZE,
-      meshSize: BASE_CANVAS_SIZE,
-      image: gaugeBase
-    });
+    const gaugeBase = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE)?.image ?? new Image();
+    this._base = new SimpleImageMesh({canvasSize: 1024, meshSize: 1024, image: gaugeBase, imageWidth: 548});
     this._group.add(this._base.getObject3D());
 
     this._hpBar = new PlayerHpBar(resources);
