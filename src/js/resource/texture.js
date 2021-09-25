@@ -90,6 +90,8 @@ export const TEXTURE_IDS = {
   BATTERY_NUMBER: 'BATTERY_NUMBER',
   DAMAGE_NUMBER: 'DAMAGE_NUMBER',
   HP_NUMBER: 'HP_NUMBER',
+  BATTERY_SELECTOR_NUMBER: 'BATTERY_SELECTOR_NUMBER',
+  DIS_ACTIVE_BATTERY_SELECTOR_NUMBER: 'DIS_ACTIVE_BATTERY_SELECTOR_NUMBER',
   PLAYER_TURN: 'PLAYER_TURN',
   ENEMY_TURN: 'ENEMY_TURN',
   POWER_UP: 'POWER_UP',
@@ -397,6 +399,16 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.HP_NUMBER,
     path: 'gauge/hp-gauge-number.png'
+  },
+  // バッテリーゲージセレクタ 円盤数字
+  {
+    id: TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
+    path: 'battery-selector/active-number.png',
+  },
+  // バッテリーセレクタ 円盤数字(ディスアクティブ)
+  {
+    id: TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
+    path: 'battery-selector/dis-active-number.png',
   },
   // ターンスタート
   {

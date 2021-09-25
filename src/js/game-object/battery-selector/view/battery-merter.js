@@ -5,24 +5,20 @@ import * as R from 'ramda';
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {BatterySelectorModel} from "../model";
-import {drawNumberCenter} from "../../../canvas/number/number";
-
-/** メーター針の大きさ */
-export const NEEDLE_SIZE = 512;
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import {TEXTURE_IDS} from "../../../resource/texture";
 
 /** バッテリーゲージの最大数字 */
 export const MAX_VALUE = 5;
-
 
 /** バッテリーメーター */
 export class BatteryMeter {
   _group: typeof THREE.Group;
   _disk: SimpleImageMesh;
   _needle: SimpleImageMesh;
-  _numbers: CanvasMesh[];
-  _disActiveNumbers: CanvasMesh[];
+  _numbers: HorizontalAnimationMesh[];
+  _disActiveNumbers: HorizontalAnimationMesh[];
 
   constructor(resources: Resources) {
     this._group = new THREE.Group();
@@ -32,17 +28,14 @@ export class BatteryMeter {
     this._disk = new SimpleImageMesh({canvasSize: 1024, meshSize: 1024, image: disk, imageWidth: 539});
     this._group.add(this._disk.getObject3D());
 
-    const disActiveNumber = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER)?.image ?? new Image();
+    const disActiveNumber = resources.textures
+      .find(v => v.id === TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER)?.texture ?? new THREE.Texture();
     this._disActiveNumbers = R.times(R.identity, MAX_VALUE + 1)
       .map((value: number) => batteryNumber(value, disActiveNumber));
     this._disActiveNumbers.forEach(v => this._group.add(v.getObject3D()));
 
-    const activeNumberResource = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_SELECTOR_NUMBER);
-    const activeNumber = activeNumberResource
-      ? activeNumberResource.image
-      : new Image();
+    const activeNumber = resources.textures
+      .find(v => v.id === TEXTURE_IDS.BATTERY_SELECTOR_NUMBER)?.texture ?? new THREE.Texture();
     this._numbers = R.times(R.identity, MAX_VALUE + 1)
       .map((value: number) => batteryNumber(value, activeNumber));
     this._numbers.forEach(v => this._group.add(v.getObject3D()));
@@ -72,12 +65,12 @@ export class BatteryMeter {
     this._needle.getObject3D().rotation.z = Math.PI * (1- model.needle);
     this._disk.setOpacity(model.opacity);
     this._needle.setOpacity(model.opacity);
-    this._numbers.forEach((numberMesh: CanvasMesh, value: number) =>
+    this._numbers.forEach((numberMesh, value) =>
       value <= model.enableMaxBattery
         ? numberMesh.setOpacity(model.opacity)
         : numberMesh.setOpacity(0)
     );
-    this._disActiveNumbers.forEach((numberMesh: CanvasMesh, value: number) => {
+    this._disActiveNumbers.forEach((numberMesh, value) => {
       model.enableMaxBattery < value
         ? numberMesh.setOpacity(model.opacity)
         : numberMesh.setOpacity(0)
@@ -94,16 +87,13 @@ export class BatteryMeter {
  * バッテリーセレクタ数字のCanvasMeshを生成するヘルパー関数
  *
  * @param value 数字の値
- * @param image 数字画像
+ * @param texture テクスチャ
  * @return バッテリーセレクタ数字
  */
-function batteryNumber(value: number, image: Image): CanvasMesh {
-  const numberMesh =new CanvasMesh({canvasWidth: 64, canvasHeight: 64, meshWidth: 64, meshHeight: 64,});
-  numberMesh.draw(context => {
-    const x = context.canvas.width / 2;
-    const y = context.canvas.height / 2;
-    drawNumberCenter(context, image, x, y, value);
-  });
+function batteryNumber(value: number, texture: typeof THREE.Texture): HorizontalAnimationMesh {
+  const maxAnimation = 8;
+  const numberMesh = new HorizontalAnimationMesh({texture, maxAnimation, width: 64, height: 64});
+  numberMesh.animate(value/8);
   const angle = Math.PI - Math.PI / MAX_VALUE * value;
   const radius = 155;
   numberMesh.getObject3D().position.x = radius * Math.cos(angle);
