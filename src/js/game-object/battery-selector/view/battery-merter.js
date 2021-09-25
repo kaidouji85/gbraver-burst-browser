@@ -20,7 +20,7 @@ export const MAX_VALUE = 5;
 export class BatteryMeter {
   _group: typeof THREE.Group;
   _disk: SimpleImageMesh;
-  _needle: CanvasMesh;
+  _needle: SimpleImageMesh;
   _numbers: CanvasMesh[];
   _disActiveNumbers: CanvasMesh[];
 
@@ -47,22 +47,9 @@ export class BatteryMeter {
       .map((value: number) => batteryNumber(value, activeNumber));
     this._numbers.forEach(v => this._group.add(v.getObject3D()));
 
-    const needleResource = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NEEDLE);
-    const needle = needleResource
-      ? needleResource.image
-      : new Image();
-    this._needle = new CanvasMesh({
-      canvasWidth: NEEDLE_SIZE,
-      canvasHeight: NEEDLE_SIZE,
-      meshWidth: NEEDLE_SIZE,
-      meshHeight: NEEDLE_SIZE,
-    });
-    this._needle.draw(context => {
-      const x = context.canvas.width / 2 - 18;
-      const y = context.canvas.height / 2 - 19;
-      context.drawImage(needle, x, y);
-    });
+    const needle = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_NEEDLE)?.image ?? new Image();
+    this._needle = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: needle, imageWidth: 512});
     this._needle.getObject3D().position.y = 1;
     this._group.add(this._needle.getObject3D());
 
