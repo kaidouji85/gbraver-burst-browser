@@ -2,13 +2,16 @@
 
 /**
  * 指定した画像をキャンバスに描画する
- * 画像のローカル座標原点は画像中心
+ *
+ * 画像のローカル座標原点は画像中心である
+ * widthを指定しなかった場合、オリジナル画像のwidthを使用する
+ * またheightはオリジナル画像のアスペクト比から自動計算される
  *
  * @param context 描画対象のキャンバスコンテキスト
  * @param image canvas用画像
  * @param dx 描画X
  * @param dy 描画Y
- * @param width 画像の横幅、指定なしの場合は画像本来の横幅になる
+ * @param width 描画する横幅(ピクセル)
  */
 export function drawImageInCenter(context: CanvasRenderingContext2D, image: Image, dx: number, dy: number, width?: number): void {
   const correctWidth = width ?? image.width;
