@@ -14,9 +14,6 @@ import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, StreamSource} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 
-/** キャンバスサイズ */
-const CANVAS_SIZE = 512;
-
 /** 全体のスケール */
 const GROUP_SCALE = 0.3;
 
@@ -49,37 +46,20 @@ export class PilotButtonView {
     this._pushButton = new RxjsStreamSource();
     this._group = new THREE.Group();
 
-    const buttonDisabledResource = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED);
-    const buttonDisabled = buttonDisabledResource
-      ? buttonDisabledResource.image
-      : new Image();
-    this._buttonDisabled = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: CANVAS_SIZE,
-      image: buttonDisabled
-    });
+    const buttonDisabled = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED)?.image ?? new Image();
+    this._buttonDisabled = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: buttonDisabled, imageWidth: 414});
     this._buttonDisabled.getObject3D().position.z = 2;
     this._group.add(this._buttonDisabled.getObject3D());
 
     const pilotButton = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON)
-      ?.image ?? new Image();
-    this._button = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: CANVAS_SIZE,
-      image: pilotButton,
-    });
+      .find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON)?.image ?? new Image();
+    this._button = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: pilotButton, imageWidth: 414});
     this._group.add(this._button.getObject3D());
 
     const label = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON_LABEL)
-      ?.image ?? new Image();
-    this._label = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: CANVAS_SIZE,
-      image: label,
-    });
+      .find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON_LABEL)?.image ?? new Image();
+    this._label = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: label, imageWidth: 328});
     this._label.getObject3D().position.y = -100;
     this._group.add(this._label.getObject3D());
 
