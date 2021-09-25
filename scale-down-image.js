@@ -1,5 +1,5 @@
-const glob = require("glob")
-const sizeOf = require('image-size')
+const glob = require("glob");
+const sizeOf = require('image-size');
 const sharp = require('sharp');
 
 sharp.cache(false);
