@@ -7,6 +7,7 @@ import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Battery} from "../model/gauge-model";
 
+/** バッテリー最大値 */
 export const MAX_BATTERY = 5;
 
 /** プレイヤーバッテリー */
@@ -14,6 +15,11 @@ export class PlayerBatteryGauge {
   _group: typeof THREE.Group;
   _gaugeList: BatteryGaugeUnit[];
 
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
@@ -64,31 +70,25 @@ class BatteryGaugeUnit {
   _back: SimpleImageMesh;
   _value: number;
 
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   * @param value バッテリー値
+   */
   constructor(resources: Resources, value: number) {
     this._group = new THREE.Group();
     this._value = value;
 
-    const gaugeResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE);
-    const gaugeImage = gaugeResource
-      ? gaugeResource.image
-      : new Image();
-    this._gauge = new SimpleImageMesh({
-      image: gaugeImage,
-      meshSize: 128,
-      canvasSize: 128
-    });
+    const gaugeImage = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE)?.image ?? new Image();
+    this._gauge = new SimpleImageMesh({image: gaugeImage, imageWidth:88, meshSize: 128, canvasSize: 128});
     this._gauge.getObject3D().position.z = 1;
     this._group.add(this._gauge.getObject3D());
 
-    const backResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK);
-    const backImage = backResource
-      ? backResource.image
-      : new Image();
-    this._back = new SimpleImageMesh({
-      image: backImage,
-      meshSize: 128,
-      canvasSize: 128
-    });
+    const backImage = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK)?.image ?? new Image();
+    this._back = new SimpleImageMesh({image: backImage, imageWidth: 88, meshSize: 128, canvasSize: 128});
     this._back.getObject3D().position.z = 0;
     this._group.add(this._back.getObject3D());
   }
