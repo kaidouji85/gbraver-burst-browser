@@ -13,9 +13,6 @@ import {drawNumberRight} from "../../../canvas/number/number";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/core";
 
-/** メッシュサイズ */
-export const MESH_SIZE = 512;
-
 /** バッテリー現在値の最大値 */
 export const MAX_BATTERY = 5;
 
@@ -44,16 +41,9 @@ export class BatteryButton {
   constructor(param: Param) {
     this._group = new THREE.Group();
 
-    const buttonResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BUTTON);
-    const button = buttonResource
-      ? buttonResource.image
-      : new Image();
-    this._button = new SimpleImageMesh({
-      canvasSize: MESH_SIZE,
-      meshSize: MESH_SIZE,
-      image: button
-    });
+    const button = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_BUTTON)?.image ?? new Image();
+    this._button = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: button, imageWidth: 414});
     this._button.getObject3D().position.set(0, 0, -1);
     this._group.add(this._button.getObject3D());
 
@@ -67,44 +57,27 @@ export class BatteryButton {
     });
     this._group.add(this._overlap.getObject3D());
 
-    const attackLabelResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK);
-    const attackLabel = attackLabelResource
-      ? attackLabelResource.image
-      : new Image();
-    this._attackLabel = new SimpleImageMesh({
-      canvasSize: MESH_SIZE,
-      meshSize: MESH_SIZE,
-      image: attackLabel
-    });
+    const attackLabel = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK)?.image ?? new Image();
+    this._attackLabel = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: attackLabel, imageWidth: 264});
     this._attackLabel.getObject3D().position.set(24, -96, 0);
     this._group.add(this._attackLabel.getObject3D());
 
-    const defenseLabelResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_DEFENSE);
-    const defenseLabel = defenseLabelResource
-      ? defenseLabelResource.image
-      : new Image();
-    this._defenseLabel = new SimpleImageMesh({
-      canvasSize: MESH_SIZE,
-      meshSize: MESH_SIZE,
-      image: defenseLabel
-    });
+    const defenseLabel = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_DEFENSE)?.image ?? new Image();
+    this._defenseLabel = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: defenseLabel, imageWidth: 266});
     this._defenseLabel.getObject3D().position.set(24, -96, 0);
     this._group.add(this._defenseLabel.getObject3D());
 
-    const currentBatteryResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_CURRENT_VALUE);
-    const currentBattery = currentBatteryResource
-      ? currentBatteryResource.image
-      : new Image();
+    const currentBattery = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_CURRENT_VALUE)?.image ?? new Image();
     this._batteryValues = R.times(R.identity, MAX_BATTERY + 1)
       .map(value => {
         const mesh = new CanvasMesh({
-          canvasWidth: MESH_SIZE,
-          canvasHeight: MESH_SIZE,
-          meshWidth: MESH_SIZE,
-          meshHeight: MESH_SIZE,
+          canvasWidth: 512,
+          canvasHeight: 512,
+          meshWidth: 512,
+          meshHeight: 512,
         });
         mesh.draw(context => {
           const dx = context.canvas.width / 2;

@@ -11,9 +11,6 @@ import {canBatteryPlus} from "../model/can-battery-plus";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/core";
 
-/** メッシュサイズ */
-const MESH_SIZE = 256;
-
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
@@ -29,27 +26,13 @@ export class BatteryPlus {
   _overlap: ButtonOverlap;
 
   constructor(param: Param) {
-    const activeResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_PLUS);
-    const active = activeResource
-      ? activeResource.image
-      : new Image();
-    this._activeButton = new SimpleImageMesh({
-      canvasSize: MESH_SIZE,
-      meshSize: MESH_SIZE,
-      image: active
-    });
+    const active = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_PLUS)?.image ?? new Image();
+    this._activeButton = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: active, imageWidth: 172});
 
-    const buttonDisabledResource = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED);
-    const buttonDisabled = buttonDisabledResource
-      ? buttonDisabledResource.image
-      : new Image();
-    this._buttonDisabled = new SimpleImageMesh({
-      canvasSize: MESH_SIZE,
-      meshSize: MESH_SIZE,
-      image: buttonDisabled
-    });
+    const buttonDisabled = param.resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED)?.image ?? new Image();
+    this._buttonDisabled = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: buttonDisabled, imageWidth: 176});
 
     this._overlap = circleButtonOverlap({
       radius: 80,

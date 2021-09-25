@@ -9,14 +9,8 @@ import {CanvasMesh} from "../../../mesh/canvas-mesh";
 import type {BatterySelectorModel} from "../model";
 import {drawNumberCenter} from "../../../canvas/number/number";
 
-/** メーター板の大きさ */
-export const DISK_SIZE = 1024;
-
 /** メーター針の大きさ */
 export const NEEDLE_SIZE = 512;
-
-/** メーター数字の大きさ */
-export const NUMBER_SIZE = 64;
 
 /** バッテリーゲージの最大数字 */
 export const MAX_VALUE = 5;
@@ -33,23 +27,13 @@ export class BatteryMeter {
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
-    const diskResource = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_METER);
-    const disk = diskResource
-      ? diskResource.image
-      : new Image();
-    this._disk = new SimpleImageMesh({
-      canvasSize: DISK_SIZE,
-      meshSize: DISK_SIZE,
-      image: disk
-    });
+    const disk = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_METER)?.image ?? new Image();
+    this._disk = new SimpleImageMesh({canvasSize: 1024, meshSize: 1024, image: disk, imageWidth: 539});
     this._group.add(this._disk.getObject3D());
 
-    const disActiveNumberResource = resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER);
-    const disActiveNumber = disActiveNumberResource
-      ? disActiveNumberResource.image
-      : new Image();
+    const disActiveNumber = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER)?.image ?? new Image();
     this._disActiveNumbers = R.times(R.identity, MAX_VALUE + 1)
       .map((value: number) => batteryNumber(value, disActiveNumber));
     this._disActiveNumbers.forEach(v => this._group.add(v.getObject3D()));
@@ -127,12 +111,7 @@ export class BatteryMeter {
  * @return バッテリーセレクタ数字
  */
 function batteryNumber(value: number, image: Image): CanvasMesh {
-  const numberMesh =new CanvasMesh({
-    canvasWidth: NUMBER_SIZE,
-    canvasHeight: NUMBER_SIZE,
-    meshWidth: NUMBER_SIZE,
-    meshHeight: NUMBER_SIZE,
-  });
+  const numberMesh =new CanvasMesh({canvasWidth: 64, canvasHeight: 64, meshWidth: 64, meshHeight: 64,});
   numberMesh.draw(context => {
     const x = context.canvas.width / 2;
     const y = context.canvas.height / 2;
