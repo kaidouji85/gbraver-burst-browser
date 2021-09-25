@@ -13,9 +13,6 @@ import type {ArmdozerIcon} from "./armdozer-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/core";
 
-/** キャンバスサイズ */
-const CANVAS_SIZE = 512;
-
 /** 全体のスケール */
 const GROUP_SCALE = 0.3;
 
@@ -25,6 +22,7 @@ const PADDING_LEFT = 180;
 /** 下パディング */
 const PADDING_BOTTOM = 80;
 
+/** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
   listener: Stream<GameObjectAction>,
@@ -46,38 +44,22 @@ export class BurstButtonView {
     this._group.scale.set(GROUP_SCALE, GROUP_SCALE, GROUP_SCALE);
 
     const burstButton =param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)
-      ?.image ?? new Image();
-    this._burstButton = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: CANVAS_SIZE,
-      image: burstButton
-    });
+      .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)?.image ?? new Image();
+    this._burstButton = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: burstButton, imageWidth: 512});
     this._group.add(this._burstButton.getObject3D());
 
     this._armdozerIcon = param.armdozerIcon;
-    this._armdozerIcon.getObject3D().position.z
-      = this._burstButton.getObject3D().position.z + 1;
+    this._armdozerIcon.getObject3D().position.z = this._burstButton.getObject3D().position.z + 1;
     this._group.add(this._armdozerIcon.getObject3D());
 
     const label = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL)
-      ?.image ?? new Image();
-    this._label = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: CANVAS_SIZE,
-      image: label
-    });
+      .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL)?.image ?? new Image();
+    this._label = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: label, imageWidth: 264});
     this._group.add(this._label.getObject3D());
 
     const buttonDisabled = param.resources.canvasImages
-      .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED)
-      ?.image ?? new Image();
-    this._buttonDisabled = new SimpleImageMesh({
-      canvasSize: CANVAS_SIZE,
-      meshSize: CANVAS_SIZE,
-      image: buttonDisabled
-    });
+      .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED)?.image ?? new Image();
+    this._buttonDisabled = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: buttonDisabled, imageWidth: 414});
     this._group.add(this._buttonDisabled.getObject3D());
 
     this._overlap = circleButtonOverlap({
