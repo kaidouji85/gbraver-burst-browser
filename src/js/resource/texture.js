@@ -92,6 +92,7 @@ export const TEXTURE_IDS = {
   HP_NUMBER: 'HP_NUMBER',
   BATTERY_SELECTOR_NUMBER: 'BATTERY_SELECTOR_NUMBER',
   DIS_ACTIVE_BATTERY_SELECTOR_NUMBER: 'DIS_ACTIVE_BATTERY_SELECTOR_NUMBER',
+  BATTERY_CURRENT_VALUE: 'BATTERY_CURRENT_VALUE',
   PLAYER_TURN: 'PLAYER_TURN',
   ENEMY_TURN: 'ENEMY_TURN',
   POWER_UP: 'POWER_UP',
@@ -409,6 +410,11 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
     path: 'battery-selector/dis-active-number.png',
+  },
+  // バッテリーセレクタ ボタンに表示する数字
+  {
+    id: TEXTURE_IDS.BATTERY_CURRENT_VALUE,
+    path: 'battery-selector/current-battery.png',
   },
   // ターンスタート
   {
