@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "frontend module for gbraver-burst.",
   "engines": {
-    "node": "^16.9.1"
+    "node": "^16.10.0"
   },
   "main": "src/js/index.js",
   "scripts": {
@@ -12,8 +12,8 @@
     "start:storybook": "start-storybook -s ./src/resources -p 6006",
     "start:storybook-static": "run-s clean build:storybook-static serve:storybook-static",
     "test": "ava -T 600000",
-    "build": "run-s clean type-check lint lint:test webpack webpack:sw webpack:clear-sw",
-    "build:production": "run-s clean type-check lint lint:test webpack:production webpack:sw webpack:clear-sw",
+    "build": "run-s clean type-check lint lint:test webpack scale-down-image webpack:sw webpack:clear-sw",
+    "build:production": "run-s clean type-check lint lint:test webpack:production scale-down-image webpack:sw webpack:clear-sw",
     "build:storybook-static": "run-s clean lint:storybook storybook-static",
     "clean": "rimraf build",
     "dev-server": "webpack serve",
@@ -27,7 +27,8 @@
     "type-check": "flow check",
     "lint": "eslint src/js",
     "lint:test": "eslint test",
-    "lint:storybook": "eslint stories"
+    "lint:storybook": "eslint stories",
+    "scale-down-image": "node scale-down-image.js"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -38,7 +39,6 @@
     "@tweenjs/tween.js": "^18.6.4",
     "gbraver-burst-core": "1.10.0",
     "howler": "^2.2.3",
-    "puid": "^1.0.7",
     "ramda": "^0.27.1",
     "rxjs": "^7.3.0",
     "stats.js": "^0.17.0",
@@ -58,7 +58,7 @@
     "@babel/register": "^7.15.3",
     "@storybook/builder-webpack5": "6.3.8",
     "@storybook/html": "6.3.8",
-    "autoprefixer": "^10.3.4",
+    "autoprefixer": "^10.3.5",
     "ava": "3.15.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
@@ -66,19 +66,22 @@
     "css-loader": "^6.3.0",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-flowtype": "^6.0.1",
-    "flow-bin": "^0.160.0",
+    "eslint-plugin-flowtype": "^6.1.0",
+    "flow-bin": "^0.160.2",
+    "glob": "^7.2.0",
     "html-webpack-plugin": "^5.3.2",
     "http-server": "^13.0.2",
+    "image-size": "^1.0.0",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.3.6",
+    "postcss": "^8.3.8",
     "postcss-loader": "^6.1.1",
     "postcss-preset-env": "^6.7.0",
     "rimraf": "^3.0.2",
-    "style-loader": "^3.2.1",
-    "webpack": "^5.53.0",
+    "sharp": "^0.29.1",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.2.1"
+    "webpack-dev-server": "^4.3.0"
   },
   "ava": {
     "babel": {

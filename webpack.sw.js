@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const config = require('./webpack.config');
 const path = require('path');
-const Puid = require('puid');
+const uuid = require('uuid');
 
 module.exports = {
   mode: 'production',
@@ -21,7 +21,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      GBRAVER_BURST_SW_BUILD_HASH: JSON.stringify(new Puid().generate())
+      GBRAVER_BURST_SW_BUILD_HASH: JSON.stringify(uuid.v4())
     }),
   ]
 }

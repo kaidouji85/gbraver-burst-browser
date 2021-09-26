@@ -1,4 +1,4 @@
-FROM node:16.9.0-buster
+FROM node:16.10.0-buster
 WORKDIR /usr/src/app
 COPY . /usr/src/app/
 RUN npm ci

@@ -16,7 +16,8 @@ module.exports = {
     },
     "globals": {
         // webpack.config.js Webpack Define Pluginで定義したグローバル変数
-        GBRAVER_BURST_RESOURCE_HASH: true,
+        GBRAVER_BURST_DESKTOP_RESOURCE_ROOT: true,
+        GBRAVER_BURST_MOBILE_RESOURCE_ROOT: true,
         GBRAVER_BURST_OWN_ROOT_URL: true,
         GBRAVER_BURST_HOW_TO_PLAY: true,
         GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE: true,
