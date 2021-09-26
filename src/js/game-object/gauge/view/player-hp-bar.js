@@ -7,24 +7,29 @@ import {animatedTexture} from "../../../texture/animation/texture-animation";
 import {SPRITE_RENDER_ORDER} from "../../../render/render-order/td-render-order";
 import {CanvasMesh} from "../../../mesh/canvas-mesh";
 
+/** HPバー キャンバス横幅 */
 export const BAR_CANVAS_WIDTH = 1024;
+/** HPバー キャンバス縦幅 */
 export const BAR_CANVAS_HEIGHT = 512;
+/** HPバーメッシュ横幅 */
 export const BAR_MESH_WIDTH = 512;
+/** HPバーメッシュ縦幅 */
 export const BAR_MESH_HEIGHT = 512;
-
-export const BACK_CANVAS_WIDTH = 512;
-export const BACK_CANVAS_HEIGHT= 512;
-export const BACK_MESH_WIDTH = 512;
-export const BACK_MESH_HEIGHT = 512;
+/** キャンバスに描画する際のHPバーの横幅 */
+export const BAR_WIDTH = 472;
 
 /** プレイヤーのHPバー */
 export class PlayerHpBar {
   _texture: typeof THREE.CanvasTexture;
-  _barImage: Image;
   _mesh: typeof THREE.Mesh;
   _back: CanvasMesh;
   _group: typeof THREE.Group;
 
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     this._group = new THREE.Group();
 
@@ -32,11 +37,10 @@ export class PlayerHpBar {
     canvas.width = BAR_CANVAS_WIDTH;
     canvas.height = BAR_CANVAS_HEIGHT;
     const context = canvas.getContext('2d');
-    const barResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR);
-    this._barImage = barResource
-      ? barResource.image
-      : new Image();
-    context.drawImage(this._barImage, 0, context.canvas.height / 2);
+    const bar = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR)?.image ?? new Image();
+    const barHeight = bar.height * BAR_WIDTH / bar.width;
+    context.drawImage(bar, 0, context.canvas.height / 2, BAR_WIDTH, barHeight);
     this._texture = new THREE.CanvasTexture(canvas);
     animatedTexture(this._texture, 2, 1);
     this._texture.needsUpdate = true;
@@ -52,18 +56,13 @@ export class PlayerHpBar {
     this._mesh.renderOrder = SPRITE_RENDER_ORDER;
     this._group.add(this._mesh);
 
-    const backResource = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR_BACK);
-    const back = backResource
-      ? backResource.image
-      : new Image();
-    this._back = new CanvasMesh({
-      canvasWidth: BACK_CANVAS_WIDTH,
-      canvasHeight: BACK_CANVAS_HEIGHT,
-      meshWidth: BACK_MESH_WIDTH,
-      meshHeight: BACK_MESH_HEIGHT,
-    });
+    const back = resources.canvasImages
+      .find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR_BACK)?.image ?? new Image();
+    this._back = new CanvasMesh({canvasWidth: 512, canvasHeight: 512, meshWidth: 512, meshHeight: 512});
     this._back.draw(context => {
-      context.drawImage(back, 0, context.canvas.height / 2);
+      const backWidth = 472;
+      const backHeight = back.height * backWidth / back.width;
+      context.drawImage(back, 0, context.canvas.height / 2, backWidth, backHeight);
     });
     this._back.getObject3D().position.set(BAR_MESH_HEIGHT / 2, 0, 0);
     this._group.add(this._back.getObject3D());
@@ -87,7 +86,7 @@ export class PlayerHpBar {
    */
   setValue(value: number): void {
     const baseOffsetX = 1 - this._correctValue(value);
-    this._texture.offset.x = baseOffsetX * this._barImage.width / BAR_CANVAS_WIDTH;
+    this._texture.offset.x = baseOffsetX * BAR_WIDTH / BAR_CANVAS_WIDTH;
   }
 
   /**
