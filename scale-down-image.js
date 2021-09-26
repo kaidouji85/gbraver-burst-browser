@@ -8,11 +8,12 @@ sharp.cache(false);
  * globパターンでファイル名を検索する
  *
  * @param {string} pattern globパターン
+ * @param {Object|undefined} option オプション
  * @return {Promise<string[]>} 検索結果
  */
-function globPaths(pattern) {
+function globPaths(pattern, option) {
   return new Promise((resolve, reject) => {
-    glob(pattern, (err, paths) => {
+    glob(pattern, option, (err, paths) => {
       if (err) {
         reject(err);
       } else {
@@ -43,9 +44,20 @@ async function resizeImage(origin, scale) {
  */
 (async () => {
   console.log('start scale down mobile images');
-  const mobileImagePaths = await globPaths('build/production/resources/**/mobile/**/*.png');
-  for(const path of mobileImagePaths) {
+  const allImages = 'build/production/resources/**/mobile/**/*.png';
+  const backgroundTextures = 'build/production/resources/**/mobile/**/model/**/*.png';
+
+  console.log('start background texture');
+  const backGroundTexturePaths = await globPaths(backgroundTextures);
+  for(const path of backGroundTexturePaths) {
+    await resizeImage(path, 0.25);
+  }
+
+  console.log('start others');
+  const otherImagePaths = await globPaths(allImages, {ignore:[backgroundTextures]});
+  for(const path of otherImagePaths) {
     await resizeImage(path, 0.5);
   }
+
   console.log('complete scale down mobile images');
 })();
