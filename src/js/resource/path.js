@@ -62,7 +62,7 @@ export const PathConfigs: PathConfig[] = [
   },
   {
     id: PathIds.LOGO,
-    path: root => `${root.get()}/logo.png`
+    path: root => `${root.get()}/logo.svg`
   },
   {
     id: PathIds.SHIN_BRAVER_ICON,
@@ -130,7 +130,7 @@ export const PathConfigs: PathConfig[] = [
   },
   {
     id: PathIds.END,
-    path: root => `${root.get()}/ending/end.png`
+    path: root => `${root.get()}/ending/end.svg`
   },
   {
     id: PathIds.END_CARD,
