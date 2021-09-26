@@ -130,7 +130,7 @@ export const PathConfigs: PathConfig[] = [
   },
   {
     id: PathIds.END,
-    path: root => `${root.get()}/ending/end.png`
+    path: root => `${root.get()}/ending/end.svg`
   },
   {
     id: PathIds.END_CARD,
