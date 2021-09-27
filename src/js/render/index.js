@@ -14,39 +14,32 @@ import type {RendererDomGetter} from "./renderer-dom-getter";
 import type {Rendering} from "./rendering";
 import type {Stream, Unsubscriber} from "../stream/core";
 
-/** コンストラクタのパラメータ */
-type Param = {
-  resize: Stream<Resize>,
-};
-
 /** レンダラの挙動をまとめたもの */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   _threeJsRender: typeof THREE.WebGLRenderer;
   _domEvent: Stream<RendererDOMEvent>;
   _unsubscriber: Unsubscriber[];
 
-  constructor(param: Param) {
+  /**
+   * コンストラクタ
+   *
+   * @param resize リサイズのイベントリスナ
+   */
+  constructor(resize: Stream<Resize>) {
     this._threeJsRender = createRender();
     this._domEvent = createDOMEventStream(this._threeJsRender.domElement);
-
     this._unsubscriber = [
-      param.resize.subscribe(action => {
+      resize.subscribe(action => {
         this._resize(action);
       })
     ];
   }
 
-  /** デストラクタ相当の処理 */
-  destructor(): void {
-    this._unsubscriber.forEach(v => {
-      v.unsubscribe();
-    });
-  }
-
   /**
-   * リソースを破棄する
+   * レンダラが内部的に持つリソースを破棄する
+   * シーン終了時に呼ばれる想定
    */
-  dispose(): void {
+  disposeRenders(): void {
     this._threeJsRender.renderLists.dispose();
   }
 
