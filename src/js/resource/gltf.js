@@ -37,6 +37,14 @@ export const GLTF_CONFIGS: GlTFConfig[] = [
 ];
 
 /**
+ * GLTFローダー
+ *
+ * 同じページ内に複数GLTFが存在するとクラッシュすることがあるので、シングルトンにした
+ * https://github.com/mrdoob/three.js/issues/22445
+ */
+const loader = new GLTFLoader();
+
+/**
  * glTFファイルを読み込む
  *
  * @param resourceRoot リソースルート
@@ -45,7 +53,6 @@ export const GLTF_CONFIGS: GlTFConfig[] = [
  */
 export function loadGlTF(resourceRoot: ResourceRoot, config: GlTFConfig): Promise<GlTFResource> {
   return new Promise((resolve, reject) => {
-    const loader = new GLTFLoader();
     const fullPath = `${resourceRoot.get()}/${config.path}`;
     const onLoad = (object) => resolve({
       id: config.id,

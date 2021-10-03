@@ -32,9 +32,7 @@ export class TDScenes {
     this._gameLoop = gameLoopStream();
     this._resize = resize;
 
-    this._renderer = new Renderer({
-      resize: this._resize,
-    });
+    this._renderer = new Renderer(this._resize);
 
     this._scene = null;
     this._unsubscriber = [];
@@ -108,7 +106,7 @@ export class TDScenes {
    */
   _disposeScene(): void {
     this._scene && this._scene.destructor();
-    this._renderer.dispose();
+    this._renderer.disposeRenders();
     this._unsubscriber.forEach(v => {
       v.unsubscribe();
     });
