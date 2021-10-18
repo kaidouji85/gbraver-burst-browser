@@ -10,7 +10,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
-import type {IdPasswordLogin} from '@gbraver-burst-network/core';
+import type {IdPasswordLogin} from '@gbraver-burst-network/browser-core';
 import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のcssクラス名 */

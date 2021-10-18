@@ -24,11 +24,11 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
-import type {LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
+import type {LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {getPostNetworkError, postNetworkErrorLabel} from "./in-progress/network-error";
-import {UniversalLogin} from "@gbraver-burst-network/core/lib/login";
+import type {UniversalLogin} from "@gbraver-burst-network/browser-core";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK {}

@@ -1,6 +1,6 @@
 // @flow
 
-import type {Battle as BattleSDK} from '@gbraver-burst-network/core';
+import type {Battle as BattleSDK} from '@gbraver-burst-network/browser-core';
 
 /** カジュアルマッチ */
 export type CasualMatch = CasualMatchX<SubFlow>;
