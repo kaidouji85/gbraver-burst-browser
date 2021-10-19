@@ -206,6 +206,7 @@ export class Game {
    * ユニバーサルログイン
    */
   async _onUniversalLogin(): Promise<void> {
+    await this._fader.fadeOut();
     await this._api.gotoLoginPage();
   }
 
@@ -221,6 +222,7 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onLogout(): Promise<void> {
+    await this._fader.fadeOut();
     await this._api.logout();
   }
 
