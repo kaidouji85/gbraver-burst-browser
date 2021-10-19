@@ -63,6 +63,7 @@ function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean):
 /** ルート要素の子孫要素 */
 type Elements = {
   login: HTMLElement,
+  logout: HTMLElement,
   logo: HTMLImageElement,
   gameStart: HTMLElement,
   casualMatch: HTMLElement,
@@ -78,30 +79,33 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const login = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement('div');
+  const logout = root.querySelector(`[data-id="${ids.logout}"]`) ?? document.createElement('div');
   const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
   const logo = (logoElement instanceof HTMLImageElement) ? logoElement : new Image();
   const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  return {login, logo, gameStart, casualMatch, howToPlay};
+  return {login, logout, logo, gameStart, casualMatch, howToPlay};
 }
 
 /** タイトル */
 export class Title implements DOMScene {
   _exclusive: Exclusive;
+  _login: HTMLElement;
+  _logout: HTMLElement;
   _root: HTMLElement;
   _gameStart: HTMLElement;
   _casualMatch: HTMLElement;
   _howToPlay: HTMLElement;
-  _login: HTMLElement;
   _isTitleBackLoaded: Promise<void>;
   _isLogoLoaded: Promise<void>;
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
+  _pushLogin: StreamSource<void>;
+  _pushLogout: StreamSource<void>;
   _pushGameStart: StreamSource<void>;
   _pushCasualMatch: StreamSource<void>;
   _pushHowToPlay: StreamSource<void>;
-  _pushLogin: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
 
   /**
@@ -124,10 +128,11 @@ export class Title implements DOMScene {
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)
       ?.path ?? '';
 
+    this._login = elements.login;
+    this._logout = elements.logout;
     this._gameStart = elements.gameStart;
     this._casualMatch = elements.casualMatch;
     this._howToPlay = elements.howToPlay;
-    this._login = elements.login;
 
     const titleBackImage = new Image();
     this._isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
@@ -146,6 +151,12 @@ export class Title implements DOMScene {
     this._pushCasualMatch = new RxjsStreamSource();
     this._pushLogin = new RxjsStreamSource();
     this._unsubscribers = [
+      pushDOMStream(this._login).subscribe(() => {
+        this._onLoginPush();
+      }),
+      pushDOMStream(this._logout).subscribe(() => {
+        this._onLogoutPush();
+      }),
       pushDOMStream(this._gameStart).subscribe(() => {
         this._onGameStartPush();
       }),
@@ -154,9 +165,6 @@ export class Title implements DOMScene {
       }),
       pushDOMStream(this._howToPlay).subscribe(() => {
         this._onHowToPlayPush();
-      }),
-      pushDOMStream(this._login).subscribe(() => {
-        this._onLoginPush();
       })
     ];
   }
@@ -168,6 +176,24 @@ export class Title implements DOMScene {
     this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
+  }
+
+  /**
+   * ログインボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushLoginNotifier(): Stream<void> {
+    return this._pushLogin;
+  }
+
+  /**
+   * ログアウトボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushLogoutNotifier(): Stream<void> {
+    return this._pushLogout;
   }
 
   /**
@@ -195,15 +221,6 @@ export class Title implements DOMScene {
    */
   pushHowToPlayNotifier(): Stream<void> {
     return this._pushHowToPlay;
-  }
-
-  /**
-   * ログインボタン押下通知
-   *
-   * @return イベント通知ストリーム
-   */
-  pushLoginNotifier(): Stream<void> {
-    return this._pushLogin;
   }
 
   /**
@@ -266,8 +283,19 @@ export class Title implements DOMScene {
    */
   _onLoginPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
-      this._changeValue.play();
+      this._pushButton.play();
       await pop(this._login);
+      this._pushLogin.next();
+    });
+  }
+
+  /**
+   * ログアウトが押された際の処理
+   */
+  _onLogoutPush(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._changeValue.play();
+      await pop(this._logout);
       this._pushLogin.next();
     });
   }
