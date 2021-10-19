@@ -86,6 +86,9 @@ export class DOMScenes {
       }),
       scene.pushCasualMatchNotifier().subscribe(() => {
         this._gameAction.next({type: 'CasualMatchStart'});
+      }),
+      scene.pushLoginNotifier().subscribe(() => {
+        this._gameAction.next({type: 'UniversalLogin'});
       })
     ];
     this._root.appendChild(scene.getRootHTMLElement());

@@ -22,6 +22,7 @@ type DataIDs = {
   gameStart: string,
   casualMatch: string,
   howToPlay: string,
+  login: string,
 };
 
 /**
@@ -35,7 +36,7 @@ function rootInnerHTML(ids: DataIDs, canCasualMatch: boolean): string {
   const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
   const casualMatchClassName = canCasualMatch ? visibleCasualMatch: invisibleCasualMatch
   return `
-    <button class="${ROOT_CLASS_NAME}__login">ログイン</button>
+    <button data-id="${ids.login}" class="${ROOT_CLASS_NAME}__login">ログイン</button>
     <div class="${ROOT_CLASS_NAME}__contents">
       <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
       <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
@@ -56,6 +57,7 @@ type Elements = {
   gameStart: HTMLElement,
   casualMatch: HTMLElement,
   howToPlay: HTMLElement,
+  login: HTMLElement,
 };
 
 /**
@@ -71,7 +73,8 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  return {logo, gameStart, casualMatch, howToPlay};
+  const login = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement('div');
+  return {logo, gameStart, casualMatch, howToPlay, login};
 }
 
 /** タイトル */
@@ -81,6 +84,7 @@ export class Title implements DOMScene {
   _gameStart: HTMLElement;
   _casualMatch: HTMLElement;
   _howToPlay: HTMLElement;
+  _login: HTMLElement;
   _isTitleBackLoaded: Promise<void>;
   _isLogoLoaded: Promise<void>;
   _changeValue: typeof Howl;
@@ -88,6 +92,7 @@ export class Title implements DOMScene {
   _pushGameStart: StreamSource<void>;
   _pushCasualMatch: StreamSource<void>;
   _pushHowToPlay: StreamSource<void>;
+  _pushLogin: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
 
   /**
@@ -99,7 +104,7 @@ export class Title implements DOMScene {
   constructor(resources: Resources, canCasualMatch: boolean) {
     this._exclusive = new Exclusive();
 
-    const dataIDs = {logo: domUuid(), gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid()};
+    const dataIDs = {logo: domUuid(), gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), login: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(dataIDs, canCasualMatch);
     this._root.className = ROOT_CLASS_NAME;
@@ -112,6 +117,7 @@ export class Title implements DOMScene {
     this._gameStart = elements.gameStart;
     this._casualMatch = elements.casualMatch;
     this._howToPlay = elements.howToPlay;
+    this._login = elements.login;
 
     const titleBackImage = new Image();
     this._isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
@@ -128,16 +134,20 @@ export class Title implements DOMScene {
     this._pushGameStart = new RxjsStreamSource();
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
+    this._pushLogin = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._gameStart).subscribe(() => {
-        this._onPushGameStart();
+        this._onGameStartPush();
       }),
       pushDOMStream(this._casualMatch).subscribe(() => {
         this._onCasualMatchPush();
       }),
       pushDOMStream(this._howToPlay).subscribe(() => {
-        this._onPushHowToPlay();
+        this._onHowToPlayPush();
       }),
+      pushDOMStream(this._login).subscribe(() => {
+        this._onLoginPush();
+      })
     ];
   }
 
@@ -178,6 +188,15 @@ export class Title implements DOMScene {
   }
 
   /**
+   * ログインボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushLoginNotifier(): Stream<void> {
+    return this._pushLogin;
+  }
+
+  /**
    * ルートHTML要素を取得する
    *
    * @return 取得結果
@@ -201,7 +220,7 @@ export class Title implements DOMScene {
   /**
    * ゲームスタートが押された際の処理
    */
-  _onPushGameStart(): void {
+  _onGameStartPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
       this._pushButton.play();
       await pop(this._gameStart);
@@ -224,11 +243,22 @@ export class Title implements DOMScene {
   /**
    * 遊び方が押された際の処理
    */
-  _onPushHowToPlay(): void {
+  _onHowToPlayPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
       this._changeValue.play();
       await pop(this._howToPlay);
       this._pushHowToPlay.next();
+    });
+  }
+
+  /**
+   * ログインが押された際の処理
+   */
+  _onLoginPush(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._changeValue.play();
+      await pop(this._login);
+      this._pushLogin.next();
     });
   }
 }
