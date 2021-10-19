@@ -18,11 +18,12 @@ const ROOT_CLASS_NAME = 'title';
 
 /** data-idを集めたもの */
 type DataIDs = {
+  login: string,
+  logout: string,
   logo: string,
   gameStart: string,
   casualMatch: string,
   howToPlay: string,
-  login: string,
 };
 
 /**
@@ -36,11 +37,15 @@ function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean):
   const visibleLogin = `${ROOT_CLASS_NAME}__login`;
   const invisibleLogin = `${visibleLogin}--invisible`;
   const loginClassName = isLogin ? invisibleLogin : visibleLogin;
+  const visibleLogout = `${ROOT_CLASS_NAME}__logout`;
+  const invisibleLogout = `${visibleLogout}--invisible`;
+  const logoutClassName = isLogin ? visibleLogout : invisibleLogout;
   const visibleCasualMatch = `${ROOT_CLASS_NAME}__contents__controllers__casual-match`;
   const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
   const casualMatchClassName = canCasualMatch ? visibleCasualMatch: invisibleCasualMatch;
   return `
     <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
+    <button data-id="${ids.logout}" class="${logoutClassName}">ログアウト</button>
     <div class="${ROOT_CLASS_NAME}__contents">
       <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
       <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
@@ -57,11 +62,11 @@ function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean):
 
 /** ルート要素の子孫要素 */
 type Elements = {
+  login: HTMLElement,
   logo: HTMLImageElement,
   gameStart: HTMLElement,
   casualMatch: HTMLElement,
   howToPlay: HTMLElement,
-  login: HTMLElement,
 };
 
 /**
@@ -72,13 +77,13 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const login = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement('div');
   const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
   const logo = (logoElement instanceof HTMLImageElement) ? logoElement : new Image();
   const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  const login = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement('div');
-  return {logo, gameStart, casualMatch, howToPlay, login};
+  return {login, logo, gameStart, casualMatch, howToPlay};
 }
 
 /** タイトル */
@@ -109,7 +114,7 @@ export class Title implements DOMScene {
   constructor(resources: Resources, isLogin: boolean, canCasualMatch: boolean) {
     this._exclusive = new Exclusive();
 
-    const dataIDs = {logo: domUuid(), gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), login: domUuid()};
+    const dataIDs = {login: domUuid(), logout: domUuid(), logo: domUuid(), gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch);
     this._root.className = ROOT_CLASS_NAME;

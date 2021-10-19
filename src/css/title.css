@@ -44,6 +44,24 @@
   display: none;
 }
 
+.title__logout {
+  position: absolute;
+  top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
+  right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
+  color: var(--button-font-color);
+  background-color: var(--sub-button-background-color);
+  height: calc(var(--responsive-font-size) * 2);
+  padding: 0 calc(var(--responsive-font-size) * 0.75);
+  border: var(--button-border);
+  font-size: calc(var(--responsive-font-size) * 0.8);
+  border-radius: calc(var(--responsive-font-size) * 0.3);
+  box-shadow: var(--button-box-shadow);
+}
+
+.title__logout--invisible {
+  display: none;
+}
+
 .title__contents {
   display: flex;
   flex-direction: column;
