@@ -35,10 +35,11 @@ function rootInnerHTML(ids: DataIDs, canCasualMatch: boolean): string {
   const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
   const casualMatchClassName = canCasualMatch ? visibleCasualMatch: invisibleCasualMatch
   return `
+    <button class="${ROOT_CLASS_NAME}__login">ログイン</button>
     <div class="${ROOT_CLASS_NAME}__contents">
-    <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
-    <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
-      <span class="${ROOT_CLASS_NAME}__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
+      <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
+      <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
+        <span class="${ROOT_CLASS_NAME}__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
       </div>
       <div class="${ROOT_CLASS_NAME}__contents__controllers">
         <button class="${ROOT_CLASS_NAME}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
