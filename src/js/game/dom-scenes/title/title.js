@@ -146,10 +146,11 @@ export class Title implements DOMScene {
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
 
+    this._pushLogin = new RxjsStreamSource();
+    this._pushLogout = new RxjsStreamSource();
     this._pushGameStart = new RxjsStreamSource();
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
-    this._pushLogin = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._login).subscribe(() => {
         this._onLoginPush();
@@ -296,7 +297,7 @@ export class Title implements DOMScene {
     this._exclusive.execute(async (): Promise<void> => {
       this._changeValue.play();
       await pop(this._logout);
-      this._pushLogin.next();
+      this._pushLogout.next();
     });
   }
 }

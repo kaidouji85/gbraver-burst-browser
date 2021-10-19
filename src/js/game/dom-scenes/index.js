@@ -79,6 +79,12 @@ export class DOMScenes {
 
     const scene = new Title(resources, isLogin, canCasualMatch);
     this._unsubscribers = [
+      scene.pushLoginNotifier().subscribe(() => {
+        this._gameAction.next({type: 'UniversalLogin'});
+      }),
+      scene.pushLogoutNotifier().subscribe(() => {
+        this._gameAction.next({type: 'Logout'});
+      }),
       scene.pushGameStartNotifier().subscribe(() => {
         this._gameAction.next({type: 'GameStart'});
       }),
@@ -87,9 +93,6 @@ export class DOMScenes {
       }),
       scene.pushCasualMatchNotifier().subscribe(() => {
         this._gameAction.next({type: 'CasualMatchStart'});
-      }),
-      scene.pushLoginNotifier().subscribe(() => {
-        this._gameAction.next({type: 'UniversalLogin'});
       })
     ];
     this._root.appendChild(scene.getRootHTMLElement());

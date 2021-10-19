@@ -24,14 +24,13 @@ import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
-import type {LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/browser-core';
+import type {LoginCheck, CasualMatch as CasualMatchSDK, UniversalLogin, Logout} from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {getPostNetworkError, postNetworkErrorLabel} from "./in-progress/network-error";
-import type {UniversalLogin} from "@gbraver-burst-network/browser-core";
 
 /** 本クラスで利用するAPIサーバの機能 */
-interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK {}
+interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -115,6 +114,7 @@ export class Game {
       else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
+      else if (action.type === 'Logout') { this._onLogout() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'NetworkError') { this._onNetworkError() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError() }
@@ -214,6 +214,14 @@ export class Game {
    */
   _onLoginCancel(): void {
     this._domDialogs.hidden();
+  }
+
+  /**
+   * ログアウト
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onLogout(): Promise<void> {
+    await this._api.logout();
   }
 
   /**
