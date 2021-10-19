@@ -18,6 +18,8 @@ const ROOT_CLASS_NAME = 'title';
 
 /** data-idを集めたもの */
 type DataIDs = {
+  login: string,
+  logout: string,
   logo: string,
   gameStart: string,
   casualMatch: string,
@@ -27,18 +29,27 @@ type DataIDs = {
 /**
  * ルート要素のinnerHTML
  * @param ids data-idを集めたもの
+ * @param isLogin ログインしているか否かのフラグ、trueでログインしている
  * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, canCasualMatch: boolean): string {
+function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean): string {
+  const visibleLogin = `${ROOT_CLASS_NAME}__login`;
+  const invisibleLogin = `${visibleLogin}--invisible`;
+  const loginClassName = isLogin ? invisibleLogin : visibleLogin;
+  const visibleLogout = `${ROOT_CLASS_NAME}__logout`;
+  const invisibleLogout = `${visibleLogout}--invisible`;
+  const logoutClassName = isLogin ? visibleLogout : invisibleLogout;
   const visibleCasualMatch = `${ROOT_CLASS_NAME}__contents__controllers__casual-match`;
   const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
-  const casualMatchClassName = canCasualMatch ? visibleCasualMatch: invisibleCasualMatch
+  const casualMatchClassName = canCasualMatch ? visibleCasualMatch: invisibleCasualMatch;
   return `
+    <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
+    <button data-id="${ids.logout}" class="${logoutClassName}">ログアウト</button>
     <div class="${ROOT_CLASS_NAME}__contents">
-    <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
-    <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
-      <span class="${ROOT_CLASS_NAME}__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
+      <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
+      <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
+        <span class="${ROOT_CLASS_NAME}__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
       </div>
       <div class="${ROOT_CLASS_NAME}__contents__controllers">
         <button class="${ROOT_CLASS_NAME}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
@@ -51,6 +62,8 @@ function rootInnerHTML(ids: DataIDs, canCasualMatch: boolean): string {
 
 /** ルート要素の子孫要素 */
 type Elements = {
+  login: HTMLElement,
+  logout: HTMLElement,
   logo: HTMLImageElement,
   gameStart: HTMLElement,
   casualMatch: HTMLElement,
@@ -65,17 +78,21 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
+  const login = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement('div');
+  const logout = root.querySelector(`[data-id="${ids.logout}"]`) ?? document.createElement('div');
   const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
   const logo = (logoElement instanceof HTMLImageElement) ? logoElement : new Image();
   const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  return {logo, gameStart, casualMatch, howToPlay};
+  return {login, logout, logo, gameStart, casualMatch, howToPlay};
 }
 
 /** タイトル */
 export class Title implements DOMScene {
   _exclusive: Exclusive;
+  _login: HTMLElement;
+  _logout: HTMLElement;
   _root: HTMLElement;
   _gameStart: HTMLElement;
   _casualMatch: HTMLElement;
@@ -84,6 +101,8 @@ export class Title implements DOMScene {
   _isLogoLoaded: Promise<void>;
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
+  _pushLogin: StreamSource<void>;
+  _pushLogout: StreamSource<void>;
   _pushGameStart: StreamSource<void>;
   _pushCasualMatch: StreamSource<void>;
   _pushHowToPlay: StreamSource<void>;
@@ -93,14 +112,15 @@ export class Title implements DOMScene {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param isLogin ログインしているか否か、trueでログインしている
    * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能である
    */
-  constructor(resources: Resources, canCasualMatch: boolean) {
+  constructor(resources: Resources, isLogin: boolean, canCasualMatch: boolean) {
     this._exclusive = new Exclusive();
 
-    const dataIDs = {logo: domUuid(), gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid()};
+    const dataIDs = {login: domUuid(), logout: domUuid(), logo: domUuid(), gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid()};
     this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(dataIDs, canCasualMatch);
+    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch);
     this._root.className = ROOT_CLASS_NAME;
     const elements = extractElements(this._root, dataIDs);
 
@@ -108,6 +128,8 @@ export class Title implements DOMScene {
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)
       ?.path ?? '';
 
+    this._login = elements.login;
+    this._logout = elements.logout;
     this._gameStart = elements.gameStart;
     this._casualMatch = elements.casualMatch;
     this._howToPlay = elements.howToPlay;
@@ -124,19 +146,27 @@ export class Title implements DOMScene {
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
 
+    this._pushLogin = new RxjsStreamSource();
+    this._pushLogout = new RxjsStreamSource();
     this._pushGameStart = new RxjsStreamSource();
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
     this._unsubscribers = [
+      pushDOMStream(this._login).subscribe(() => {
+        this._onLoginPush();
+      }),
+      pushDOMStream(this._logout).subscribe(() => {
+        this._onLogoutPush();
+      }),
       pushDOMStream(this._gameStart).subscribe(() => {
-        this._onPushGameStart();
+        this._onGameStartPush();
       }),
       pushDOMStream(this._casualMatch).subscribe(() => {
         this._onCasualMatchPush();
       }),
       pushDOMStream(this._howToPlay).subscribe(() => {
-        this._onPushHowToPlay();
-      }),
+        this._onHowToPlayPush();
+      })
     ];
   }
 
@@ -147,6 +177,24 @@ export class Title implements DOMScene {
     this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
+  }
+
+  /**
+   * ログインボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushLoginNotifier(): Stream<void> {
+    return this._pushLogin;
+  }
+
+  /**
+   * ログアウトボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushLogoutNotifier(): Stream<void> {
+    return this._pushLogout;
   }
 
   /**
@@ -200,7 +248,7 @@ export class Title implements DOMScene {
   /**
    * ゲームスタートが押された際の処理
    */
-  _onPushGameStart(): void {
+  _onGameStartPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
       this._pushButton.play();
       await pop(this._gameStart);
@@ -223,11 +271,33 @@ export class Title implements DOMScene {
   /**
    * 遊び方が押された際の処理
    */
-  _onPushHowToPlay(): void {
+  _onHowToPlayPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
       this._changeValue.play();
       await pop(this._howToPlay);
       this._pushHowToPlay.next();
+    });
+  }
+
+  /**
+   * ログインが押された際の処理
+   */
+  _onLoginPush(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._pushButton.play();
+      await pop(this._login);
+      this._pushLogin.next();
+    });
+  }
+
+  /**
+   * ログアウトが押された際の処理
+   */
+  _onLogoutPush(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._changeValue.play();
+      await pop(this._logout);
+      this._pushLogout.next();
     });
   }
 }

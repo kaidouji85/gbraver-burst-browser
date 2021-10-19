@@ -64,6 +64,11 @@ export type LoginCancel = {
   type: 'LoginCancel'
 };
 
+/** ログアウト */
+export type Logout = {
+  type: 'Logout'
+};
+
 /** 通信エラーが発生した */
 export type NetworkError = {
   type: 'NetworkError'
@@ -87,5 +92,6 @@ export type GameAction = GameStart
  | EndNPCEnding
  | UniversalLogin
  | LoginCancel
+ | Logout
  | NetworkError
  | EndNetworkError;
