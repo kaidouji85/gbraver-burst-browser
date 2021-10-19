@@ -28,15 +28,19 @@ type DataIDs = {
 /**
  * ルート要素のinnerHTML
  * @param ids data-idを集めたもの
+ * @param isLogin ログインしているか否かのフラグ、trueでログインしている
  * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, canCasualMatch: boolean): string {
+function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean): string {
+  const visibleLogin = `${ROOT_CLASS_NAME}__login`;
+  const invisibleLogin = `${visibleLogin}--invisible`;
+  const loginClassName = isLogin ? invisibleLogin : visibleLogin;
   const visibleCasualMatch = `${ROOT_CLASS_NAME}__contents__controllers__casual-match`;
   const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
-  const casualMatchClassName = canCasualMatch ? visibleCasualMatch: invisibleCasualMatch
+  const casualMatchClassName = canCasualMatch ? visibleCasualMatch: invisibleCasualMatch;
   return `
-    <button data-id="${ids.login}" class="${ROOT_CLASS_NAME}__login">ログイン</button>
+    <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
     <div class="${ROOT_CLASS_NAME}__contents">
       <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
       <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
@@ -99,14 +103,15 @@ export class Title implements DOMScene {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param isLogin ログインしているか否か、trueでログインしている
    * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能である
    */
-  constructor(resources: Resources, canCasualMatch: boolean) {
+  constructor(resources: Resources, isLogin: boolean, canCasualMatch: boolean) {
     this._exclusive = new Exclusive();
 
     const dataIDs = {logo: domUuid(), gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), login: domUuid()};
     this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(dataIDs, canCasualMatch);
+    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch);
     this._root.className = ROOT_CLASS_NAME;
     const elements = extractElements(this._root, dataIDs);
 

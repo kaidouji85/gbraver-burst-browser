@@ -437,14 +437,15 @@ export class Game {
 
   /**
    * タイトル画面を開始するヘルパーメソッド
-   * いかなる場合でもcanCasualMatchに同じ値をセットするために、
+   * いかなる場合でもcanCasualMatch、isLoginに同じ値をセットするために、
    * ヘルパーメソッド化した
    *
    * @param resources リソース管理オブジェクト
    * @return タイトル画面
    */
-  _startTitle(resources: Resources): Promise<Title> {
-    return this._domScenes.startTitle(resources, this._isAPIServerEnable);
+  async _startTitle(resources: Resources): Promise<Title> {
+    const isLogin = await this._api.isLogin();
+    return this._domScenes.startTitle(resources, isLogin, this._isAPIServerEnable);
   }
 
   /**

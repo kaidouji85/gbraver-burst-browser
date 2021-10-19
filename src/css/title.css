@@ -40,6 +40,10 @@
   box-shadow: var(--button-box-shadow);
 }
 
+.title__login--invisible {
+  display: none;
+}
+
 .title__contents {
   display: flex;
   flex-direction: column;
