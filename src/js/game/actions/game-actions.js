@@ -69,10 +69,6 @@ export type Logout = {
   type: 'Logout'
 };
 
-/** 通信エラーが発生した */
-export type NetworkError = {
-  type: 'NetworkError'
-};
 
 /** 通信エラーダイアログを閉じる */
 export type EndNetworkError = {
@@ -93,5 +89,4 @@ export type GameAction = GameStart
  | UniversalLogin
  | LoginCancel
  | Logout
- | NetworkError
  | EndNetworkError;

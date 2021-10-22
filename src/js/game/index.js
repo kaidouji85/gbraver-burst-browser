@@ -27,7 +27,7 @@ import type {Stream, Unsubscriber} from "../stream/core";
 import type {LoginCheck, CasualMatch as CasualMatchSDK, UniversalLogin, Logout} from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
-import {getPostNetworkError, postNetworkErrorLabel} from "./in-progress/network-error";
+import {getPostNetworkError} from "./in-progress/network-error";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout {}
@@ -116,7 +116,6 @@ export class Game {
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
       else if (action.type === 'Logout') { this._onLogout() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
-      else if (action.type === 'NetworkError') { this._onNetworkError() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError() }
     }));
   }
@@ -175,12 +174,18 @@ export class Game {
 
     const resources: Resources = this._resources;
     const loginCheck = async (): Promise<boolean> => {
-      const subFlow = {type: 'LoginCheck'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
-      this._domDialogs.startWaiting('ログインチェック中......');
-      const isLogin = this._apiErrorHandling(() => this._api.isLogin());
-      this._domDialogs.hidden();
-      return isLogin;
+      try {
+        const subFlow = {type: 'LoginCheck'};
+        this._inProgress = {type: 'CasualMatch', subFlow};
+        this._domDialogs.startWaiting('ログインチェック中......');
+        const isLogin = await this._api.isLogin();
+        this._domDialogs.hidden();
+        return isLogin;
+      } catch (e) {
+        const label = '閉じる';
+        this._domDialogs.startNetworkError(resources, label);
+        throw e;
+      }
     };
     const gotoPlayerSelect = async (): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
@@ -246,20 +251,6 @@ export class Game {
   }
 
   /**
-   * 通信エラーが発生した
-   */
-  _onNetworkError() {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
-    const postNetworError = getPostNetworkError(this._inProgress);
-    const label = postNetworkErrorLabel(postNetworError);
-    this._domDialogs.startNetworkError(resources, label);
-  }
-
-  /**
    * 通信エラーダイアログを閉じる
    * 
    * なお、本メソッドが呼ばれるまでの流れを
@@ -318,7 +309,15 @@ export class Game {
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
-      const battle = await this._apiErrorHandling(() => this._api.startCasualMatch(action.armdozerId, action.pilotId));
+      const battle = await (async () => {
+        try {
+          return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
+        } catch(e) {
+          const label = 'タイトルへ';
+          this._domDialogs.startNetworkError(resources, label);
+          throw e;
+        }
+      })();
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
@@ -328,10 +327,16 @@ export class Game {
       await this._fader.fadeIn();
 
       const progress = async (v) =>  {
-        this._domDialogs.startWaiting('通信中......');
-        const update = await this._apiErrorHandling(() => battle.progress(v));
-        this._domDialogs.hidden();
-        return update;
+        try {
+          this._domDialogs.startWaiting('通信中......');
+          const update = await battle.progress(v);
+          this._domDialogs.hidden();
+          return update;
+        } catch(e) {
+          const label = 'タイトルへ';
+          this._domDialogs.startNetworkError(resources, label);
+          throw e;
+        }
       };
       const battleScene = this._tdScenes.startBattle(resources, {progress}, battle.player,
         battle.enemy, battle.initialState);
@@ -456,22 +461,5 @@ export class Game {
   async _startTitle(resources: Resources): Promise<Title> {
     const isLogin = await this._api.isLogin();
     return this._domScenes.startTitle(resources, isLogin, this._isAPIServerEnable);
-  }
-
-  /**
-   * エラーハンドリング付きでAPI通信を行う
-   * 本クラスではAPIを直接呼び出さずに、
-   * 本メソッド経由で呼び出すことを想定している
-   *
-   * @param fn API通信を行うコールバック関数
-   * @return 通信レスポンス
-   */
-  async _apiErrorHandling<X>(fn: () => Promise<X>): Promise<X> {
-    try {
-      return await fn();
-    } catch(error) {
-      this._onNetworkError();
-      throw error;
-    }
   }
 }
