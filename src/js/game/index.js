@@ -173,8 +173,6 @@ export class Game {
 
     const resources: Resources = this._resources;
     const loginCheck = async (): Promise<boolean> => {
-      const subFlow = {type: 'LoginCheck'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
       this._domDialogs.startWaiting('ログインチェック中......');
       const isLogin = await (async () => {
         try {
