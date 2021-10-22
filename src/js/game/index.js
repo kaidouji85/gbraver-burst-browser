@@ -21,13 +21,12 @@ import type {Player} from "gbraver-burst-core";
 import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
-import type {EndBattle, SelectionComplete} from "./actions/game-actions";
+import type {EndBattle, SelectionComplete, EndNetworkError} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {LoginCheck, CasualMatch as CasualMatchSDK, UniversalLogin, Logout} from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
-import {getPostNetworkError} from "./in-progress/network-error";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout {}
@@ -116,7 +115,7 @@ export class Game {
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
       else if (action.type === 'Logout') { this._onLogout() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
-      else if (action.type === 'EndNetworkError') { this._onEndNetworkError() }
+      else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
     }));
   }
 
@@ -174,18 +173,20 @@ export class Game {
 
     const resources: Resources = this._resources;
     const loginCheck = async (): Promise<boolean> => {
-      try {
-        const subFlow = {type: 'LoginCheck'};
-        this._inProgress = {type: 'CasualMatch', subFlow};
-        this._domDialogs.startWaiting('ログインチェック中......');
-        const isLogin = await this._api.isLogin();
-        this._domDialogs.hidden();
-        return isLogin;
-      } catch (e) {
-        const label = '閉じる';
-        this._domDialogs.startNetworkError(resources, label);
-        throw e;
-      }
+      const subFlow = {type: 'LoginCheck'};
+      this._inProgress = {type: 'CasualMatch', subFlow};
+      this._domDialogs.startWaiting('ログインチェック中......');
+      const isLogin = await (async () => {
+        try {
+          return await this._api.isLogin();
+        } catch (e) {
+          const postNetworkError = {type: 'Close'};
+          this._domDialogs.startNetworkError(resources, postNetworkError);
+          throw e;     
+        }
+      })();
+      this._domDialogs.hidden();
+      return isLogin;
     };
     const gotoPlayerSelect = async (): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
@@ -252,14 +253,8 @@ export class Game {
 
   /**
    * 通信エラーダイアログを閉じる
-   * 
-   * なお、本メソッドが呼ばれるまでの流れを
-   *   (1)通信エラーダイアログ表示
-   *   (2)何等かの処理 or 待ち
-   *   (3)本メソッド呼び出し
-   * とすると、(2)でthis._inProgressは変更されていない想定である
    */
-  async _onEndNetworkError() {
+  async _onEndNetworkError(action: EndNetworkError) {
     if (!this._resources) {
       return;
     }
@@ -276,17 +271,12 @@ export class Game {
       await this._startTitle(resources);
       await this._fader.fadeIn();
     };
-    const postProcessing = getPostNetworkError(this._inProgress);
-    const handler = () => {
-      switch(postProcessing) {
-        case 'Close':
-          return close();
-        case 'GotoTitle':
-        default:
-          return gotoTitle();
-      }
-    };
-    await handler();
+
+    if (action.postNetworkError.type === 'Close') {
+      await close();
+    } else if (action.postNetworkError.type === 'GotoTitle') {
+      await gotoTitle();
+    }
   }
 
   /**
@@ -313,8 +303,8 @@ export class Game {
         try {
           return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
         } catch(e) {
-          const label = 'タイトルへ';
-          this._domDialogs.startNetworkError(resources, label);
+          const postNetworkError = {type: 'GotoTitle'};
+          this._domDialogs.startNetworkError(resources, postNetworkError);
           throw e;
         }
       })();
@@ -333,8 +323,8 @@ export class Game {
           this._domDialogs.hidden();
           return update;
         } catch(e) {
-          const label = 'タイトルへ';
-          this._domDialogs.startNetworkError(resources, label);
+          const postNetworkError = {type: 'GotoTitle'};
+          this._domDialogs.startNetworkError(resources, postNetworkError);
           throw e;
         }
       };

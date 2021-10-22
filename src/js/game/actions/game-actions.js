@@ -1,6 +1,7 @@
 // @flow
 
 import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
+import type {PostNetworkError} from '../dom-dialogs/network-error/post-network-error';
 
 /** ゲームスタート */
 export type GameStart = {
@@ -72,7 +73,9 @@ export type Logout = {
 
 /** 通信エラーダイアログを閉じる */
 export type EndNetworkError = {
-  type: 'EndNetworkError'
+  type: 'EndNetworkError',
+  /** ダイアログを閉じた後の処理に必要な情報 */
+  postNetworkError: PostNetworkError,
 };
 
 /**

@@ -1,5 +1,6 @@
 // @flow
 
+import type {PostNetworkError} from './post-network-error';
 import {Howl} from 'howler';
 import type {DOMDialog} from "../dialog";
 import {domUuid} from "../../../uuid/dom-uuid";
@@ -20,18 +21,35 @@ type DataIDs = {
 };
 
 /**
+ * 通信エラー後処理情報に対応した、ボタンの文言を取得する
+ * 
+ * @param postNetworkError 通信エラー後処理情報
+ * @return ボタン文言
+ */
+function postNetowrkErrorLabel(postNetworkError: PostNetworkError) {
+  switch(postNetworkError.type) {
+    case 'Close':
+      return '閉じる';
+    case 'GotoTitle':
+      return 'タイトルへ';
+    default:
+      return '';  
+  }
+}
+
+/**
  * ルート要素のinnerHTML
  *
  * @param ids data-idを集めたもの
- * @param postNetworkError 通信エラー後処理の文言
+ * @param postNetworkErrorLabel 通信エラー後処理ボタンの文言
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, postNetworkError: string): string {
+function rootInnerHTML(ids: DataIDs, postNetworkErrorLabel: string): string {
   return `
     <div class="${ROOT_CLASS_NAME}__background"></div>
     <div class="${ROOT_CLASS_NAME}__dialog">
       <span class="${ROOT_CLASS_NAME}__dialog__caption">通信エラーが発生しました</span>
-      <button class="${ROOT_CLASS_NAME}__dialog__post-network-error" data-id="${ids.postNetworkErrorButton}">${postNetworkError}</button>
+      <button class="${ROOT_CLASS_NAME}__dialog__post-network-error" data-id="${ids.postNetworkErrorButton}">${postNetworkErrorLabel}</button>
     </div>
   `;
 }
@@ -58,7 +76,8 @@ type Elements = {
 export class NetworkErrorDialog implements DOMDialog {
   _root: HTMLElement;
   _postNetworkErrorButton: HTMLButtonElement;
-  _postNetworkError: StreamSource<void>;
+  _postNetworkError: PostNetworkError;
+  _postNetworkErrorSource: StreamSource<PostNetworkError>;
   _pushButton: typeof Howl;
   _unsubscribers: Unsubscriber[];
   _exclusive: Exclusive;
@@ -67,17 +86,20 @@ export class NetworkErrorDialog implements DOMDialog {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param postNetworkError 通信エラー後処理の文言
+   * @param postNetworkError 通信エラーの後処理情報
    */
-  constructor(resources: Resources, postNetworkError: string) {
+  constructor(resources: Resources, postNetworkError: PostNetworkError) {
+    this._postNetworkError = postNetworkError;
+    
     const dataIDs = {postNetworkErrorButton: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(dataIDs, postNetworkError);
+    const label = postNetowrkErrorLabel(this._postNetworkError);
+    this._root.innerHTML = rootInnerHTML(dataIDs, label);
     const elements = extractElements(this._root, dataIDs);
     this._postNetworkErrorButton = elements.postNetworkErrorButton;
 
-    this._postNetworkError = new RxjsStreamSource();
+    this._postNetworkErrorSource = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._postNetworkErrorButton).subscribe(() => {
         this._onPostNetworkErrorButtonPush();
@@ -113,8 +135,8 @@ export class NetworkErrorDialog implements DOMDialog {
    * 
    * @return 通知ストリーム
    */
-  postNetworkErrorNotifier(): Stream<void> {
-    return this._postNetworkError;
+  postNetworkErrorNotifier(): Stream<PostNetworkError> {
+    return this._postNetworkErrorSource;
   }
 
   /**
@@ -126,7 +148,7 @@ export class NetworkErrorDialog implements DOMDialog {
         this._pushButton.play(),
         pop(this._postNetworkErrorButton)
       ]);
-      this._postNetworkError.next();
+      this._postNetworkErrorSource.next(this._postNetworkError);
     });    
   }
 }
