@@ -14,19 +14,32 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {NPCBattle} from "./in-progress/npc-battle/npc-battle";
-import {createInitialNPCBattle, createNPCBattlePlayer, findCourse, isNPCBattleEnd, levelUpOrNot} from "./in-progress/npc-battle/npc-battle";
+import {
+  createInitialNPCBattle,
+  createNPCBattlePlayer,
+  findCourse,
+  isNPCBattleEnd,
+  levelUpOrNot
+} from "./in-progress/npc-battle/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
 import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
-import type {EndBattle, SelectionComplete, EndNetworkError} from "./actions/game-actions";
+import type {EndBattle, EndNetworkError, GameAction, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
-import type {LoginCheck, CasualMatch as CasualMatchSDK, UniversalLogin, Logout} from '@gbraver-burst-network/browser-core';
+import type {
+  CasualMatch as CasualMatchSDK,
+  LoginCheck,
+  Logout,
+  UniversalLogin
+} from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
+import {SuddenlyBattleEndMonitor} from "./api/suddenly-battle-end-monitor";
+import {map} from "../stream/operator";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout {}
@@ -55,6 +68,7 @@ export class Game {
   _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
+  _suddenlyBattleEndMonitor: SuddenlyBattleEndMonitor;
   _resize: Stream<Resize>;
   _vh: CssVH;
   _fader: DOMFader;
@@ -82,7 +96,9 @@ export class Game {
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
     this._vh = new CssVH(this._resize);
+
     this._api = param.api;
+    this._suddenlyBattleEndMonitor = new SuddenlyBattleEndMonitor();
 
     this._fader = new DOMFader();
     this._interruptScenes = new InterruptScenes();
@@ -101,10 +117,12 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
-    const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(), 
-      this._domDialogs.gameActionNotifier()];
+    const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
+      this._domDialogs.gameActionNotifier(),
+      this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)))];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'EndBattle') { this._onEndBattle(action) }
+      else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
       else if (action.type === 'GameStart') { this._onGameStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
@@ -308,6 +326,7 @@ export class Game {
           throw e;
         }
       })();
+      this._suddenlyBattleEndMonitor.bind(battle);
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
@@ -381,6 +400,7 @@ export class Game {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
+      this._suddenlyBattleEndMonitor.unbind();
       await this._domScenes.startNPCEnding(resources);
       await this._fader.fadeIn();
     };
@@ -399,6 +419,20 @@ export class Game {
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
+  }
+
+  /**
+   * バトル強制終了時の処理
+   */
+  _onSuddenlyEndBattle(): void {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const postNetworkError = {type: 'GotoTitle'};
+    this._domDialogs.startNetworkError(resources, postNetworkError);
+    this._suddenlyBattleEndMonitor.unbind();
   }
 
   /**
