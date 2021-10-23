@@ -19,7 +19,7 @@ export class SuddenlyBattleEndMonitor {
   }
 
   /**
-   * 指定したバトルの強制終了を監視する
+   * バトル強制終了監視を開始する
    *
    * @param battle 監視対象となるバトル
    */
@@ -31,7 +31,7 @@ export class SuddenlyBattleEndMonitor {
   }
 
   /**
-   * バトル強制終了の監視を停止する
+   * バトル強制終了監視を停止する
    */
   unbind(): void {
     if (!this._unSubscriber) {
