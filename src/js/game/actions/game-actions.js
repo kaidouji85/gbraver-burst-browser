@@ -48,6 +48,11 @@ export type EndBattle = {
   gameEnd: GameEnd,
 }
 
+/** バトル強制終了 */
+export type SuddenlyBattleEnd = {
+  type: 'SuddenlyBattleEnd'
+};
+
 /**
  * NPC ルート エンディング 終了
  */
@@ -88,6 +93,7 @@ export type GameAction = GameStart
  | SelectionComplete
  | SelectionCancel
  | EndBattle
+ | SuddenlyBattleEnd
  | EndNPCEnding
  | UniversalLogin
  | LoginCancel
