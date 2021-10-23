@@ -27,13 +27,13 @@ export class RaitoCutIn {
    *
    * @param view ビュー
    * @param resources リソース管理オブジェクト
-   * @param listener イベントリスナ
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: RaitoView, resources: Resources, listener: Stream<GameObjectAction>) {
+  constructor(view: RaitoView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new RaitoSounds(resources);
-    this._unsubscriber = listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }

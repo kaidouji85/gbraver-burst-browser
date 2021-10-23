@@ -27,11 +27,18 @@ export class HUDGameObjects {
   _battleAction: StreamSource<BattleSceneAction>;
   _unsubscribers: Unsubscriber[];
 
-  constructor(resources: Resources, listener: Stream<GameObjectAction>, playerInfo: Player) {
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param playerInfo プレイヤー情報
+   */
+  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, playerInfo: Player) {
     this._battleAction = new RxjsStreamSource();
 
     this.batterySelector = new BatterySelector({
-      listener: listener,
+      gameObjectAction: gameObjectAction,
       maxBattery: playerInfo.armdozer.maxBattery,
       resources: resources,
       onBatteryChange: (battery: number) => {
@@ -47,15 +54,15 @@ export class HUDGameObjects {
         });
       }
     });
-    this.burstButton = createBurstButton(resources, listener, playerInfo.armdozer.id);
-    this.pilotButton = createPilotButton(resources, listener, playerInfo.pilot.id);
+    this.burstButton = createBurstButton(resources, gameObjectAction, playerInfo.armdozer.id);
+    this.pilotButton = createPilotButton(resources, gameObjectAction, playerInfo.pilot.id);
 
     this.frontmostFader = frontmostFader({
-      listener: listener,
+      gameObjectAction: gameObjectAction,
       isVisible: false,
     });
     this.rearmostFader = rearmostFader({
-      listener: listener,
+      gameObjectAction: gameObjectAction,
       isVisible: false,
     });
 

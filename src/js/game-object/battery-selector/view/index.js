@@ -23,10 +23,15 @@ const PADDING_BOTTOM = 80;
 
 /** パラメータ */
 type Param = {
+  /** リソース管理オブジェクト */
   resources: Resources,
-  listener: Stream<GameObjectAction>,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /** OKボタンが押された時に呼ばれるコールバック関数 */
   onOkPush: () => void,
+  /** +ボタンが押された時に呼ばれるコールバック関数 */
   onPlusPush: () => void,
+  /** -ボタンが押された時に呼ばれるコールバック関数 */
   onMinusPush: () => void,
 };
 
@@ -47,7 +52,7 @@ export class BatterySelectorView {
 
     this._button = new BatteryButton({
       resources: param.resources,
-      listener: param.listener,
+      gameObjectAction: param.gameObjectAction,
       onPush: () => {
         param.onOkPush();
       }
@@ -57,7 +62,7 @@ export class BatterySelectorView {
 
     this._plus = new BatteryPlus({
       resources: param.resources,
-      listener: param.listener,
+      gameObjectAction: param.gameObjectAction,
       onPush: () => {
         param.onPlusPush();
       }
@@ -67,7 +72,7 @@ export class BatterySelectorView {
 
     this._minus = new BatteryMinus({
       resources: param.resources,
-      listener: param.listener,
+      gameObjectAction: param.gameObjectAction,
       onPush: () => {
         param.onMinusPush();
       }

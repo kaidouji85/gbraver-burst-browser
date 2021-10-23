@@ -59,19 +59,19 @@ export class HUDPlayer implements HUDPlayerField{
  *
  * @param resources リソース管理オブジェクト
  * @param state プレイヤー情報
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerHUDObjects(resources: Resources, state: Player, listener: Stream<GameObjectAction>): HUDPlayer {
+export function playerHUDObjects(resources: Resources, state: Player, gameObjectAction: Stream<GameObjectAction>): HUDPlayer {
   return new HUDPlayer({
     playerId: state.playerId,
     gauge: playerGauge({
       resources: resources,
-      listener: listener,
+      gameObjectAction: gameObjectAction,
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),
-    turnStart: playerTurnStart(resources, listener),
+    turnStart: playerTurnStart(resources, gameObjectAction),
   });
 }
 
@@ -80,18 +80,18 @@ export function playerHUDObjects(resources: Resources, state: Player, listener: 
  *
  * @param resources リソース管理オブジェクト
  * @param state プレイヤー情報
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyHUDObjects(resources: Resources, state: Player, listener: Stream<GameObjectAction>): HUDPlayer {
+export function enemyHUDObjects(resources: Resources, state: Player, gameObjectAction: Stream<GameObjectAction>): HUDPlayer {
   return new HUDPlayer({
     playerId: state.playerId,
     gauge: enemyGauge({
       resources: resources,
-      listener: listener,
+      gameObjectAction: gameObjectAction,
       hp: state.armdozer.maxHp,
       battery: state.armdozer.maxBattery
     }),
-    turnStart: enemyTurnStart(resources, listener),
+    turnStart: enemyTurnStart(resources, gameObjectAction),
   });
 }

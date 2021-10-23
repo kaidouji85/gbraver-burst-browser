@@ -11,22 +11,22 @@ import type {Stream} from "../../stream/core";
  * プレイヤー ダメージ減少 ポップアップ
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerDamageDecrease(resources: Resources, listener: Stream<GameObjectAction>): DamageDecrease {
+export function playerDamageDecrease(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageDecrease {
   const view = new PlayerDamageDecreaseView(resources);
-  return new DamageDecrease(view, resources, listener);
+  return new DamageDecrease(view, resources, gameObjectAction);
 }
 
 /**
  * 敵 ダメージ減少 ポップアップ
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyDamageDecrease(resources: Resources, listener: Stream<GameObjectAction>): DamageDecrease {
+export function enemyDamageDecrease(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageDecrease {
   const view = new EnemyDamageDecreaseView(resources);
-  return new DamageDecrease(view, resources, listener);
+  return new DamageDecrease(view, resources, gameObjectAction);
 }

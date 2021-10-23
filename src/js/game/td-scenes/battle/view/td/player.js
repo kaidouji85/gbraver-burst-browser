@@ -142,30 +142,27 @@ export class TDPlayerImpl implements TDPlayer {
  *
  * @param resources リソース管理オブジェクト
  * @param state プレイヤーステータス
- * @param listener リスナー
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 3Dプレイヤーオブジェクト
  */
-export function playerTDObjects(resources: Resources, state: Player, listener: Stream<GameObjectAction>): TDPlayer {
+export function playerTDObjects(resources: Resources, state: Player, gameObjectAction: Stream<GameObjectAction>): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
     hitMark: {
-      shockWave: playerShockWave(resources, listener),
-      lightning: playerLightning(resources, listener)
+      shockWave: playerShockWave(resources, gameObjectAction),
+      lightning: playerLightning(resources, gameObjectAction)
     },
     armdozerEffects: {
-      powerUp: playerPowerUp(resources, listener),
-      reflect: playerReflectIndicator(resources, listener),
-      continuousAttack: playerContinuousAttack(resources, listener),
-      damageDecrease: playerDamageDecrease(resources, listener),
-      batteryEnchantment: playerBatteryEnchantment(resources, listener),
+      powerUp: playerPowerUp(resources, gameObjectAction),
+      reflect: playerReflectIndicator(resources, gameObjectAction),
+      continuousAttack: playerContinuousAttack(resources, gameObjectAction),
+      damageDecrease: playerDamageDecrease(resources, gameObjectAction),
+      batteryEnchantment: playerBatteryEnchantment(resources, gameObjectAction),
     },
-    batteryNumber: playerBatteryNumber(resources, listener),
-    batteryCorrect: playerBatteryCorrect(resources, listener),
-    recoverBattery: playerRecoverBattery(resources, listener),
-    damageIndicator: playerDamageIndicator({
-      resources: resources,
-      listener: listener
-    }),
+    batteryNumber: playerBatteryNumber(resources, gameObjectAction),
+    batteryCorrect: playerBatteryCorrect(resources, gameObjectAction),
+    recoverBattery: playerRecoverBattery(resources, gameObjectAction),
+    damageIndicator: playerDamageIndicator(resources, gameObjectAction),
   });
 }
 
@@ -174,29 +171,26 @@ export function playerTDObjects(resources: Resources, state: Player, listener: S
  *
  * @param resources リソース管理オブジェクト
  * @param state プレイヤーステータス
- * @param listener リスナー
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 3Dプレイヤーオブジェクト
  */
-export function enemyTDObject(resources: Resources, state: Player, listener: Stream<GameObjectAction>): TDPlayer {
+export function enemyTDObject(resources: Resources, state: Player, gameObjectAction: Stream<GameObjectAction>): TDPlayer {
   return new TDPlayerImpl({
     playerId: state.playerId,
     hitMark: {
-      shockWave: enemyShockWave(resources, listener),
-      lightning: enemyLightning(resources, listener)
+      shockWave: enemyShockWave(resources, gameObjectAction),
+      lightning: enemyLightning(resources, gameObjectAction)
     },
     armdozerEffects: {
-      powerUp: enemyPowerUp(resources, listener),
-      reflect: enemyReflectIndicator(resources, listener),
-      continuousAttack: enemyContinuousAttack(resources, listener),
-      damageDecrease: enemyDamageDecrease(resources, listener),
-      batteryEnchantment: enemyBatteryEnchantment(resources, listener),
+      powerUp: enemyPowerUp(resources, gameObjectAction),
+      reflect: enemyReflectIndicator(resources, gameObjectAction),
+      continuousAttack: enemyContinuousAttack(resources, gameObjectAction),
+      damageDecrease: enemyDamageDecrease(resources, gameObjectAction),
+      batteryEnchantment: enemyBatteryEnchantment(resources, gameObjectAction),
     },
-    batteryNumber: enemyBatteryNumber(resources, listener),
-    batteryCorrect: enemyBatteryCorrect(resources, listener),
-    recoverBattery: enemyRecoverBattery(resources, listener),
-    damageIndicator: enemyDamageIndicator({
-      resources: resources,
-      listener: listener
-    }),
+    batteryNumber: enemyBatteryNumber(resources, gameObjectAction),
+    batteryCorrect: enemyBatteryCorrect(resources, gameObjectAction),
+    recoverBattery: enemyRecoverBattery(resources, gameObjectAction),
+    damageIndicator: enemyDamageIndicator(resources, gameObjectAction),
   });
 }

@@ -68,13 +68,13 @@ export class NeoLandozerTD implements NeoLandozerTDField, TDArmdozerObjects {
  * プレイヤー 3Dレイヤー ネオランドーザ 3Dレイヤー
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerNeoLandozerTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): NeoLandozerTD {
+export function playerNeoLandozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {
-    neoLandozer: PlayerNeoLandozer(resources, listener)
+    neoLandozer: PlayerNeoLandozer(resources, gameObjectAction)
   });
 }
 
@@ -82,12 +82,12 @@ export function playerNeoLandozerTD(resources: Resources, listener: Stream<GameO
  * 敵 3Dレイヤー ネオランドーザ 3Dレイヤー
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyNeoLandozerTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): NeoLandozerTD {
+export function enemyNeoLandozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): NeoLandozerTD {
   return new NeoLandozerTD(state.playerId, {
-    neoLandozer: EnemyNeoLandozer(resources, listener)
+    neoLandozer: EnemyNeoLandozer(resources, gameObjectAction)
   });
 }

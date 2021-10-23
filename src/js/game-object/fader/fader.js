@@ -14,8 +14,11 @@ import type {Stream, Unsubscriber} from "../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
+  /** 表示フラグ、trueで表示する */
   isVisible: boolean,
-  listener: Stream<GameObjectAction>,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /** Z座標 */
   z: number,
 };
 
@@ -25,10 +28,15 @@ export class Fader {
   _view: FaderView;
   _unsubscriber: Unsubscriber;
 
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this._model = createInitialValue(param.isVisible);
     this._view = new FaderView(param.z);
-    this._unsubscriber = param.listener.subscribe(action => {
+    this._unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }

@@ -27,10 +27,19 @@ import type {Stream, Unsubscriber} from "../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
+  /** リソース管理オブジェクト */
   resources: Resources,
-  listener: Stream<GameObjectAction>,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /** 最大バッテリー */
   maxBattery: number,
+  /**
+   * バッテリー変更時に呼ばれるのコールバック関数
+   *
+   * @param battery 変更後のバッテリー値
+   */
   onBatteryChange: (battery: number) => void,
+  /** 決定ボタンが押された時に呼ばれるコールバック関数 */
   onOkButtonPush: () => void,
 };
 
@@ -45,6 +54,11 @@ export class BatterySelector {
   _batteryPlusTween: typeof TWEEN.Group;
   _unsubscriber: Unsubscriber;
 
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this._model = initialValue();
     this._batteryChangeTween = new TWEEN.Group();
@@ -61,7 +75,7 @@ export class BatterySelector {
       ? batteryChangeResource.sound
       : new Howl();
 
-    this._unsubscriber = param.listener.subscribe(action => {
+    this._unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
         this._update(action);
       } else if (action.type === 'PreRender') {
@@ -71,7 +85,7 @@ export class BatterySelector {
 
     this._view = new BatterySelectorView({
       resources: param.resources,
-      listener: param.listener,
+      gameObjectAction: param.gameObjectAction,
       onOkPush: () => {
         if (this._model.disabled) {
           return;

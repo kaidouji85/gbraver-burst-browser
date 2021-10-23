@@ -11,22 +11,22 @@ import type {Stream} from "../../../stream/core";
  * プレイヤー側 シンヤ カットイン
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return シンヤ カットイン
  */
-export function playerShinyaCutIn(resources: Resources, listener: Stream<GameObjectAction>): ShinyaCutIn {
+export function playerShinyaCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinyaCutIn {
   const view = new PlayerShinyaView(resources);
-  return new ShinyaCutIn(view, resources, listener);
+  return new ShinyaCutIn(view, resources, gameObjectAction);
 }
 
 /**
  * 敵側 シンヤ カットイン
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return シンヤ カットイン
  */
-export function enemyShinyaCutIn(resources: Resources, listener: Stream<GameObjectAction>): ShinyaCutIn {
+export function enemyShinyaCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinyaCutIn {
   const view = new EnemyShinyaView(resources);
-  return new ShinyaCutIn(view, resources, listener);
+  return new ShinyaCutIn(view, resources, gameObjectAction);
 }

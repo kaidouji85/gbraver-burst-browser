@@ -57,14 +57,14 @@ export class RaitoHUD implements HUDPilotObjects {
  * プレイヤー側 ライトHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return ライトHUD
  */
-export function playerRaitoHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): RaitoHUD {
+export function playerRaitoHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): RaitoHUD {
   return new RaitoHUD({
     playerId: state.playerId,
-    cutIn: playerRaitoCutIn(resources, listener)
+    cutIn: playerRaitoCutIn(resources, gameObjectAction)
   });
 }
 
@@ -72,13 +72,13 @@ export function playerRaitoHUD(resources: Resources, listener: Stream<GameObject
  * 敵側 ライトHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return ライトHUD
  */
-export function enemyRaitoHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): RaitoHUD {
+export function enemyRaitoHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): RaitoHUD {
   return new RaitoHUD({
     playerId: state.playerId,
-    cutIn: enemyRaitoCutIn(resources, listener)
+    cutIn: enemyRaitoCutIn(resources, gameObjectAction)
   });
 }

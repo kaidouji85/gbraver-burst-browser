@@ -20,10 +20,16 @@ export class ShinBraverCutIn implements HUDTracking {
   _view: ShinBraverCutInView;
   _unsubscriber: Unsubscriber;
 
-  constructor(view: ShinBraverCutInView, listener: Stream<GameObjectAction>) {
+  /**
+   * コンストラクタ
+   *
+   * @param view ビュー
+   * @param gameObjectAction ゲームオブジェクトアクション
+   */
+  constructor(view: ShinBraverCutInView, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._unsubscriber = listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }

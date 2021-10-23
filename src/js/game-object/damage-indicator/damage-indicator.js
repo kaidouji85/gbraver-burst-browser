@@ -10,21 +10,22 @@ import {Animate} from "../../animation/animate";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/core";
 
-type Param = {
-  listener: Stream<GameObjectAction>,
-  view: DamageIndicatorView
-};
-
 /** ダメージインジケータ */
 export class DamageIndicator {
   _model: DamageIndicatorModel;
   _view: DamageIndicatorView;
   _unsubscriber: Unsubscriber;
 
-  constructor(param: Param) {
-    this._view = param.view;
+  /**
+   * コンストラクタ
+   *
+   * @param view ビュー
+   * @param gameObjectAction Stream<GameObjectAction>
+   */
+  constructor(view: DamageIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
+    this._view = view;
     this._model = createInitialValue();
-    this._unsubscriber = param.listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {

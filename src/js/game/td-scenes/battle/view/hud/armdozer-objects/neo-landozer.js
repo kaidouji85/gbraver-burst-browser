@@ -51,13 +51,13 @@ export class NeoLandozerHUD implements HUDArmdozerObjects, NeoLandozerHUDField {
  * プレイヤー側 HUDレイヤー ネオランドーザ固有オブジェクト
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerNeoLandozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): NeoLandozerHUD {
+export function playerNeoLandozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {
-    cutIn: playerNeoLandozerCutIn(resources, listener)
+    cutIn: playerNeoLandozerCutIn(resources, gameObjectAction)
   });
 }
 
@@ -65,12 +65,12 @@ export function playerNeoLandozerHUD(resources: Resources, listener: Stream<Game
  * 敵側 HUDレイヤー ネオランドーザ固有オブジェクト
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyNeoLandozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): NeoLandozerHUD {
+export function enemyNeoLandozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): NeoLandozerHUD {
   return new NeoLandozerHUD(state.playerId, {
-    cutIn: enemyNeoLandozerCutIn(resources, listener)
+    cutIn: enemyNeoLandozerCutIn(resources, gameObjectAction)
   });
 }

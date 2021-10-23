@@ -57,14 +57,14 @@ export class TsubasaHUD implements HUDPilotObjects {
  * プレイヤー側 ツバサHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return ツバサHUD
  */
-export function playerTsubasaHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): TsubasaHUD {
+export function playerTsubasaHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TsubasaHUD {
   return new TsubasaHUD( {
     playerId: state.playerId,
-    cutIn: playerTsubasaCutIn(resources, listener)
+    cutIn: playerTsubasaCutIn(resources, gameObjectAction)
   })
 }
 
@@ -72,13 +72,13 @@ export function playerTsubasaHUD(resources: Resources, listener: Stream<GameObje
  * 敵側 ツバサHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return ツバサHUD
  */
-export function enemyTsubasaHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): TsubasaHUD {
+export function enemyTsubasaHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TsubasaHUD {
   return new TsubasaHUD( {
     playerId: state.playerId,
-    cutIn: enemyTsubasaCutIn(resources, listener)
+    cutIn: enemyTsubasaCutIn(resources, gameObjectAction)
   })
 }

@@ -60,13 +60,13 @@ export class LightningDozerHUD implements HUDArmdozerObjects, LightningDozerHUDF
  * プレイヤー HUDレイヤー ライトニングドーザ固有オブジェクト
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerLightningDozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): LightningDozerHUD {
+export function playerLightningDozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {
-    cutIn: playerLightningDozerCutIn(resources, listener)
+    cutIn: playerLightningDozerCutIn(resources, gameObjectAction)
   });
 }
 
@@ -74,12 +74,12 @@ export function playerLightningDozerHUD(resources: Resources, listener: Stream<G
  * 敵 HUDレイヤー ライトニングドーザ固有オブジェクト
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyLightningDozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): LightningDozerHUD {
+export function enemyLightningDozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): LightningDozerHUD {
   return new LightningDozerHUD(state.playerId, {
-    cutIn: enemyLightningiDozerCutIn(resources, listener)
+    cutIn: enemyLightningiDozerCutIn(resources, gameObjectAction)
   });
 }

@@ -11,8 +11,8 @@ type Param = {
   radius: number,
   /** 円分割数 */
   segments: number,
-  /** イベントリスナー */
-  listener: Stream<GameObjectAction>,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
   /** ボタン押下時のコールバック関数 */
   onButtonPush: () => void
 };
@@ -27,7 +27,7 @@ export function circleButtonOverlap(param: Param): ButtonOverlap {
   const geometry = new THREE.CircleGeometry(param.radius, param.segments);
   return new ButtonOverlap({
     geometry: geometry,
-    listener: param.listener,
+    gameObjectAction: param.gameObjectAction,
     onButtonPush: () => param.onButtonPush(),
   })
 }
