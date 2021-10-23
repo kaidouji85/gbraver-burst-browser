@@ -11,22 +11,22 @@ import type {GameObjectAction} from "../action/game-object-action";
  * プレイヤー側 バッテリー補正
  *
  * @param resources リソースか管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリー補正
  */
-export function playerBatteryCorrect(resources: Resources, listener: Stream<GameObjectAction>): BatteryCorrect {
+export function playerBatteryCorrect(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryCorrect {
   const view = new PlayerBatteryCorrectView(resources);
-  return new BatteryCorrect(view, listener);
+  return new BatteryCorrect(view, gameObjectAction);
 }
 
 /**
  * 敵側 バッテリー補正
  *
  * @param resources リソースか管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリー補正
  */
-export function enemyBatteryCorrect(resources: Resources, listener: Stream<GameObjectAction>): BatteryCorrect {
+export function enemyBatteryCorrect(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryCorrect {
   const view = new EnemyBatteryCorrectView(resources);
-  return new BatteryCorrect(view, listener);
+  return new BatteryCorrect(view, gameObjectAction);
 }

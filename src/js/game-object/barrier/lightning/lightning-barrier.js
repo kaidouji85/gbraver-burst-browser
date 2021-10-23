@@ -27,13 +27,19 @@ export class LightningBarrierGameEffect {
   _tweenGroup: typeof TWEEN.Group;
   _unsubscribers: Unsubscriber[];
 
-  constructor(resources: Resources, listener: Stream<GameObjectAction>) {
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   * @param gameObjectAction ゲームオブジェクトアクション
+   */
+  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = new LightningBarrierView(resources);
     this._sounds = new LightningBarrierSounds(resources);
     this._tweenGroup = new TWEEN.Group();
     this._unsubscribers = [
-      listener.subscribe(action => {
+      gameObjectAction.subscribe(action => {
         if (action.type === 'Update') {
           this._onUpdate(action);
         } else if (action.type === 'PreRender') {
@@ -41,7 +47,7 @@ export class LightningBarrierGameEffect {
         }
       }),
 
-      firstUpdate(listener).subscribe(() => {
+      firstUpdate(gameObjectAction).subscribe(() => {
         this._onFirstUpdate();
       })
     ];

@@ -159,10 +159,7 @@ export function playerTDObjects(resources: Resources, state: Player, listener: S
       damageDecrease: playerDamageDecrease(resources, listener),
       batteryEnchantment: playerBatteryEnchantment(resources, listener),
     },
-    batteryNumber: playerBatteryNumber({
-      resources: resources,
-      listener: listener
-    }),
+    batteryNumber: playerBatteryNumber(resources, listener),
     batteryCorrect: playerBatteryCorrect(resources, listener),
     recoverBattery: playerRecoverBattery(resources, listener),
     damageIndicator: playerDamageIndicator({
@@ -194,10 +191,7 @@ export function enemyTDObject(resources: Resources, state: Player, listener: Str
       damageDecrease: enemyDamageDecrease(resources, listener),
       batteryEnchantment: enemyBatteryEnchantment(resources, listener),
     },
-    batteryNumber: enemyBatteryNumber({
-      resources: resources,
-      listener: listener
-    }),
+    batteryNumber: enemyBatteryNumber(resources, listener),
     batteryCorrect: enemyBatteryCorrect(resources, listener),
     recoverBattery: enemyRecoverBattery(resources, listener),
     damageIndicator: enemyDamageIndicator({

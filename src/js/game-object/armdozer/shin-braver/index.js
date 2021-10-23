@@ -11,22 +11,22 @@ import type {Stream} from "../../../stream/core";
  * プレイヤー側シンブレイバー
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return シンブレイバー
  */
-export function PlayerShinBraver(resources: Resources, listener: Stream<GameObjectAction>): ShinBraver {
+export function PlayerShinBraver(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinBraver {
   const view = new PlayerShinBraverView(resources);
-  return new ShinBraver(view, resources, listener);
+  return new ShinBraver(view, resources, gameObjectAction);
 }
 
 /**
  * 敵側シンブレイバー
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return シンブレイバー
  */
-export function EnemyShinBraver(resources: Resources, listener: Stream<GameObjectAction>): ShinBraver {
+export function EnemyShinBraver(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinBraver {
   const view = new EnemyShinBraverView(resources);
-  return new ShinBraver(view, resources, listener);
+  return new ShinBraver(view, resources, gameObjectAction);
 }
