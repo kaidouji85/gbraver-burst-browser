@@ -251,6 +251,8 @@ export class Game {
 
   /**
    * 通信エラーダイアログを閉じる
+   *
+   * @param action アクション
    */
   async _onEndNetworkError(action: EndNetworkError) {
     if (!this._resources) {

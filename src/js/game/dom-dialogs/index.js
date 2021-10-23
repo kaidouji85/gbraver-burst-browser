@@ -86,7 +86,7 @@ export class DOMDialogs {
    * 通信エラーダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
-   * @param postNetworkError 通信エラー後処理の文言
+   * @param postNetworkError 通信エラーの後処理情報
    */
   startNetworkError(resources: Resources, postNetworkError: PostNetworkError): void {
     this._removeCurrentDialog();
