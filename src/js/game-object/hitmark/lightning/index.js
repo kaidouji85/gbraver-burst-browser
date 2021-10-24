@@ -11,22 +11,22 @@ import type {Stream} from "../../../stream/core";
  * プレイヤー側 電撃ヒットマーク
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerLightning(resources: Resources, listener: Stream<GameObjectAction>): Lightning {
+export function playerLightning(resources: Resources, gameObjectAction: Stream<GameObjectAction>): Lightning {
   const view = new PlayerLightningView(resources);
-  return new Lightning(view, resources, listener);
+  return new Lightning(view, resources, gameObjectAction);
 }
 
 /**
  * 敵側 電撃ヒットマーク
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyLightning(resources: Resources, listener: Stream<GameObjectAction>): Lightning {
+export function enemyLightning(resources: Resources, gameObjectAction: Stream<GameObjectAction>): Lightning {
   const view = new EnemyLightningView(resources);
-  return new Lightning(view, resources, listener);
+  return new Lightning(view, resources, gameObjectAction);
 }

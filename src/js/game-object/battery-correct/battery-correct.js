@@ -20,13 +20,13 @@ export class BatteryCorrect {
    * コンストラクタ
    *
    * @param view ビュー
-   * @param listener イベントリスナ
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: BatteryCorrectView, listener: Stream<GameObjectAction>) {
+  constructor(view: BatteryCorrectView, gameObjectAction: Stream<GameObjectAction>) {
     this._model = initialValue();
     this._view = view;
     this._unsubscribers = [
-      listener.subscribe(action => {
+      gameObjectAction.subscribe(action => {
         if (action.type === 'PreRender') { this._onPreRender(action) }
       })
     ];

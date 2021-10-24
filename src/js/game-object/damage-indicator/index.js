@@ -7,25 +7,26 @@ import {EnemyDamageIndicatorView} from "./view/enemy-damage-indicator-view";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/core";
 
-type Param = {
-  resources: Resources,
-  listener: Stream<GameObjectAction>
+/**
+ * プレイヤーのダメージインジケータ
+ *
+ * @param resources リソース管理オブジェクト
+ * @param gameObjectAction ゲームオブジェクトアクション
+ * @return ダメージインジケータ
+ */
+export function playerDamageIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageIndicator {
+  const view = new PlayerDamageIndicatorView(resources);
+  return new DamageIndicator(view , gameObjectAction);
 }
 
-/** プレイヤーのダメージインジケータ */
-export function playerDamageIndicator(param: Param): DamageIndicator {
-  const view = new PlayerDamageIndicatorView(param.resources);
-  return new DamageIndicator({
-    listener: param.listener,
-    view: view
-  })
-}
-
-/** 敵のダメージインジケータ */
-export function enemyDamageIndicator(param: Param): DamageIndicator {
-  const view = new EnemyDamageIndicatorView(param.resources);
-  return new DamageIndicator({
-    listener: param.listener,
-    view: view
-  })
+/**
+ * 敵のダメージインジケータ
+ *
+ * @param resources リソース管理オブジェクト
+ * @param gameObjectAction ゲームオブジェクトアクション
+ * @return ダメージインジケータ
+ */
+export function enemyDamageIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): DamageIndicator {
+  const view = new EnemyDamageIndicatorView(resources);
+  return new DamageIndicator(view, gameObjectAction);
 }

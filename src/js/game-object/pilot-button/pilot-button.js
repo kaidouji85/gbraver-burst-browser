@@ -31,16 +31,16 @@ export class PilotButton {
    *
    * @param resources リソース管理オブジェクト
    * @param pilotIcon パイロットアイコン
-   * @param listener イベントリスナ
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(resources: Resources, pilotIcon: PilotIcon, listener: Stream<GameObjectAction>) {
+  constructor(resources: Resources, pilotIcon: PilotIcon, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._sounds = new PilotButtonSounds(resources);
-    this._view = new PilotButtonView(resources, pilotIcon, listener);
+    this._view = new PilotButtonView(resources, pilotIcon, gameObjectAction);
 
     this._pushButton = this._view.pushButtonNotifier()
       .chain(filter(() => !this._model.disabled && this._model.canPilot));
-    this._unsubscriber = listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }

@@ -50,14 +50,14 @@ export class WingDozerHUD implements HUDArmdozerObjects {
  * プレイヤー側 ウィングドーザHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return ウィングドーザHUD
  */
-export function playerWingDozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): WingDozerHUD {
+export function playerWingDozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): WingDozerHUD {
   return new WingDozerHUD({
     playerId: state.playerId,
-    cutIn: playerWingDozerCutIn(resources, listener),
+    cutIn: playerWingDozerCutIn(resources, gameObjectAction),
   });
 }
 
@@ -65,13 +65,13 @@ export function playerWingDozerHUD(resources: Resources, listener: Stream<GameOb
  * 敵側 ウィングドーザHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return ウィングドーザHUD
  */
-export function enemyWingDozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): WingDozerHUD {
+export function enemyWingDozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): WingDozerHUD {
   return new WingDozerHUD({
     playerId: state.playerId,
-    cutIn: enemyWingDozerCutIn(resources, listener)
+    cutIn: enemyWingDozerCutIn(resources, gameObjectAction)
   });
 }

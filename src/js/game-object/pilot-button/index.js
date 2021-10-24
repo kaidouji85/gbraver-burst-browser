@@ -12,43 +12,43 @@ import {TsubasaIcon} from "./view/tsubasa";
 /**
  * シンヤ パイロットボタン を生成する
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function shinyaPilotButton(resources: Resources, listener: Stream<GameObjectAction>): PilotButton {
+export function shinyaPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PilotButton {
   const icon = new ShinyaIcon(resources);
-  return new PilotButton(resources, icon, listener);
+  return new PilotButton(resources, icon, gameObjectAction);
 }
 
 /**
  * ガイ パイロットボタン を生成する
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function gaiPilotButton(resources: Resources, listener: Stream<GameObjectAction>): PilotButton {
+export function gaiPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PilotButton {
   const icon = new GaiIcon(resources);
-  return new PilotButton(resources, icon, listener);
+  return new PilotButton(resources, icon, gameObjectAction);
 }
 
 /**
  * ライト パイロットボタン を生成する
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function raitoPilotButton(resources: Resources, listener: Stream<GameObjectAction>): PilotButton {
+export function raitoPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PilotButton {
   const icon = new RaitoIcon(resources);
-  return new PilotButton(resources, icon, listener);
+  return new PilotButton(resources, icon, gameObjectAction);
 }
 
 /**
  * ツバサ パイロットボタン を生成する
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return パイロットボタン
  */
-export function tsubasaPilotButton(resources: Resources, listener: Stream<GameObjectAction>): PilotButton {
+export function tsubasaPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PilotButton {
   const icon = new TsubasaIcon(resources);
-  return new PilotButton(resources, icon, listener);
+  return new PilotButton(resources, icon, gameObjectAction);
 }

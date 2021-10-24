@@ -28,13 +28,13 @@ export class TurnStart {
    *
    * @param view ビュー
    * @param resources リソース管理オブジェクト
-   * @param listener イベントリスナ
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: TurnStartView, resources: Resources, listener: Stream<GameObjectAction>) {
+  constructor(view: TurnStartView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new TurnStartSounds(resources);
-    this._unsubscriber = listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
       }

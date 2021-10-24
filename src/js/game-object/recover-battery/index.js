@@ -11,14 +11,14 @@ import type {Stream} from "../../stream/core";
  * プレイヤー側 バッテリー回復
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスな
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリー回復
  */
-export function playerRecoverBattery(resources: Resources, listener: Stream<GameObjectAction>): RecoverBattery {
+export function playerRecoverBattery(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RecoverBattery {
   const view = new PlayerRecoverBatteryView(resources);
   return new RecoverBattery({
     resources: resources,
-    listener: listener,
+    gameObjectAction: gameObjectAction,
     view: view
   });
 }
@@ -27,14 +27,14 @@ export function playerRecoverBattery(resources: Resources, listener: Stream<Game
  * 敵側 バッテリー回復
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスな
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return バッテリー回復
  */
-export function enemyRecoverBattery(resources: Resources, listener: Stream<GameObjectAction>): RecoverBattery {
+export function enemyRecoverBattery(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RecoverBattery {
   const view = new EnemyRecoverBatteryView(resources);
   return new RecoverBattery({
     resources: resources,
-    listener: listener,
+    gameObjectAction: gameObjectAction,
     view: view
   });
 }

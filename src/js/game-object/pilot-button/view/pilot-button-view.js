@@ -40,9 +40,9 @@ export class PilotButtonView {
    *
    * @param resources リソース管理オブジェクト
    * @param pilotIcon パイロットアイコン
-   * @param listener イベントリスナ
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(resources: Resources, pilotIcon: PilotIcon, listener: Stream<GameObjectAction>) {
+  constructor(resources: Resources, pilotIcon: PilotIcon, gameObjectAction: Stream<GameObjectAction>) {
     this._pushButton = new RxjsStreamSource();
     this._group = new THREE.Group();
 
@@ -70,7 +70,7 @@ export class PilotButtonView {
     this._overlap = circleButtonOverlap({
       radius: 200,
       segments: 32,
-      listener: listener,
+      gameObjectAction: gameObjectAction,
       onButtonPush: ()=> {
         this._pushButton.next();
       }

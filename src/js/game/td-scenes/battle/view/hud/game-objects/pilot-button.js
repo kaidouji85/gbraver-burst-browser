@@ -17,21 +17,21 @@ import {PilotButton} from "../../../../../../game-object/pilot-button/pilot-butt
  * パイロットIDに対応したパイロットボタンを生成する
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param pilotId パイロットID
  * @return パイロットボタン
  */
-export function createPilotButton(resources: Resources, listener: Stream<GameObjectAction>, pilotId: PilotId): PilotButton {
+export function createPilotButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>, pilotId: PilotId): PilotButton {
   switch (pilotId) {
     case PilotIds.SHINYA:
-      return shinyaPilotButton(resources, listener);
+      return shinyaPilotButton(resources, gameObjectAction);
     case PilotIds.GAI:
-      return gaiPilotButton(resources, listener);
+      return gaiPilotButton(resources, gameObjectAction);
     case PilotIds.RAITO:
-      return raitoPilotButton(resources, listener);
+      return raitoPilotButton(resources, gameObjectAction);
     case PilotIds.TSUBASA:
-      return tsubasaPilotButton(resources, listener);
+      return tsubasaPilotButton(resources, gameObjectAction);
     default:
-      return shinyaPilotButton(resources, listener);
+      return shinyaPilotButton(resources, gameObjectAction);
   }
 }

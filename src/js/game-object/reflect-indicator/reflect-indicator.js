@@ -22,12 +22,12 @@ export class ReflectIndicator {
    * コンストラクタ
    *
    * @param view ビュー
-   * @param listener イベントリスナ
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ReflectIndicatorView, listener: Stream<GameObjectAction>) {
+  constructor(view: ReflectIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._unsubscriber = listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {

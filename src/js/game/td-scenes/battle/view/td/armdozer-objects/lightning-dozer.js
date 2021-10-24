@@ -78,14 +78,14 @@ export class LightningDozerTD implements TDArmdozerObjects, LightningDozerTDFiel
  * プレイヤー 3Dレイヤー ライトニングドーザ固有オブジェクト
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerLightningDozerTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): LightningDozerTD {
+export function playerLightningDozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
-    lightningDozer: PlayerLightningDozer(resources, listener),
-    lightningBarrier: new LightningBarrierGameEffect(resources, listener)
+    lightningDozer: PlayerLightningDozer(resources, gameObjectAction),
+    lightningBarrier: new LightningBarrierGameEffect(resources, gameObjectAction)
   });
 }
 
@@ -93,13 +93,13 @@ export function playerLightningDozerTD(resources: Resources, listener: Stream<Ga
  * 敵 3Dレイヤー ライトニングドーザ固有オブジェクト
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyLightningDozerTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): LightningDozerTD {
+export function enemyLightningDozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): LightningDozerTD {
   return new LightningDozerTD(state.playerId, {
-    lightningDozer: EnemyLightningDozer(resources, listener),
-    lightningBarrier: new LightningBarrierGameEffect(resources, listener)
+    lightningDozer: EnemyLightningDozer(resources, gameObjectAction),
+    lightningBarrier: new LightningBarrierGameEffect(resources, gameObjectAction)
   });
 }

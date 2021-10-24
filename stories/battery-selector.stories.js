@@ -7,10 +7,10 @@ export default {
 };
 
 export const batterySelector = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, listener) => {
+  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
     const selector = new BatterySelector({
       resources: resources,
-      listener: listener,
+      gameObjectAction: gameObjectAction,
       maxBattery: 5,
       onBatteryChange: () => {
         // NOP

@@ -28,9 +28,9 @@ export class ShockWave {
    * @param view ビュー
    * @param initialModel モデルの初期値
    * @param resources リソース管理オブジェクト
-   * @param listener イベントリスナ
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: ShockWaveView, initialModel: ShockWaveModel, resources: Resources, listener: Stream<GameObjectAction>) {
+  constructor(view: ShockWaveView, initialModel: ShockWaveModel, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = initialModel;
     this._view = view;
 
@@ -39,7 +39,7 @@ export class ShockWave {
       ? hitResource.sound
       : new Howl();
 
-    this._unsubscriber = listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {

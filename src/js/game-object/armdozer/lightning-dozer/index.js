@@ -11,20 +11,22 @@ import type {Stream} from "../../../stream/core";
  * プレイヤー側のライトニングドーザを生成する
  *
  * @param resources リソース管理オブジェクト
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return プレイヤー側のライトニングドーザ
  */
-export function PlayerLightningDozer(resources: Resources, listener: Stream<GameObjectAction>): LightningDozer {
+export function PlayerLightningDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozer {
   const view = new PlayerLightingDozerView(resources);
-  return new LightningDozer(resources, listener, view);
+  return new LightningDozer(resources, gameObjectAction, view);
 }
 
 /**
  * 敵側のライトニングドーザを生成する
  *
  * @param resources リソース管理オブジェクト
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 敵側のライトニングドーザ
  */
-export function EnemyLightningDozer(resources: Resources, listener: Stream<GameObjectAction>): LightningDozer {
+export function EnemyLightningDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): LightningDozer {
   const view = new EnemyLightningDozerView(resources);
-  return new LightningDozer(resources, listener, view);
+  return new LightningDozer(resources, gameObjectAction, view);
 }

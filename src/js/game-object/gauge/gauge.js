@@ -12,10 +12,15 @@ import type {HUDTracking} from "../../tracking/hud-tracking";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/core";
 
+/** コンストラクタのパラメータ */
 type Param = {
-  listener: Stream<GameObjectAction>,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /** ビュー */
   view: GaugeView,
+  /** 最大HP */
   hp: number,
+  /** 最大バッテリー */
   battery: number
 };
 
@@ -25,11 +30,16 @@ export class Gauge implements HUDTracking {
   _view: GaugeView;
   _unsubscriber: Unsubscriber;
 
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this._view = param.view;
     this._model = initialValue(param.hp, param.battery);
 
-    this._unsubscriber = param.listener.subscribe(action => {
+    this._unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
         this._preRender(action);
       }

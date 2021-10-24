@@ -18,8 +18,10 @@ import {firstUpdate} from "../action/first-update";
 
 /** コンストラクタのパラメータ */
 type Param = {
+  /** リソース管理オブジェクト */
   resources: Resources,
-  listener: Stream<GameObjectAction>
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>
 };
 
 /** ターンインジケーター */
@@ -29,13 +31,18 @@ export class TurnIndicator {
   _view: TurnIndicatorView;
   _unsubscribers: Unsubscriber[];
 
+  /**
+   * コンストラクタ
+   * 
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this._tweenGroup = new TWEEN.Group();
     this._model = createInitialValue();
     this._view = new TurnIndicatorView(param.resources);
 
     this._unsubscribers = [
-      param.listener.subscribe(action => {
+      param.gameObjectAction.subscribe(action => {
         if (action.type === 'Update') {
           this._onUpdate(action);
         } else if (action.type === 'PreRender') {
@@ -43,7 +50,7 @@ export class TurnIndicator {
         }
       }),
 
-      firstUpdate(param.listener).subscribe(() => {
+      firstUpdate(param.gameObjectAction).subscribe(() => {
         this._onFirstUpdate();
       })
     ];

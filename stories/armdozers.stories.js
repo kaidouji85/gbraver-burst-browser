@@ -9,8 +9,8 @@ export default {
 };
 
 export const shinBraver = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = PlayerShinBraver(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const sprite = PlayerShinBraver(resources, gameObjectAction);
     return [sprite.getObject3D()];
   });
   stub.start();
@@ -18,8 +18,8 @@ export const shinBraver = (): HTMLElement => {
 }
 
 export const neoLandozer = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = PlayerNeoLandozer(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const sprite = PlayerNeoLandozer(resources, gameObjectAction);
     return [sprite.getObject3D()];
   });
   stub.start();

@@ -15,22 +15,22 @@ import type {Stream} from "../../../../../../stream/core";
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function playerTDArmdozer(resources: Resources, listener: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
+export function playerTDArmdozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return playerShinBraverTD(resources, listener, state);
+      return playerShinBraverTD(resources, gameObjectAction, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
-      return playerLightningDozerTD(resources, listener, state);
+      return playerLightningDozerTD(resources, gameObjectAction, state);
     case ArmDozerIdList.WING_DOZER:
-      return playerWingDozerTD(resources, listener, state);
+      return playerWingDozerTD(resources, gameObjectAction, state);
     case ArmDozerIdList.NEO_LANDOZER:
-      return playerNeoLandozerTD(resources, listener, state);
+      return playerNeoLandozerTD(resources, gameObjectAction, state);
     default:
-      return playerShinBraverTD(resources, listener, state);
+      return playerShinBraverTD(resources, gameObjectAction, state);
   }
 }
 
@@ -38,21 +38,21 @@ export function playerTDArmdozer(resources: Resources, listener: Stream<GameObje
  * 敵側  3Dレイヤー アームドーザ固有オブジェクト
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return 生成結果
  */
-export function enemyTDArmdozer(resources: Resources, listener: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
+export function enemyTDArmdozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): TDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return enemyShinBraverTD(resources, listener, state);
+      return enemyShinBraverTD(resources, gameObjectAction, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
-      return enemyLightningDozerTD(resources, listener, state);
+      return enemyLightningDozerTD(resources, gameObjectAction, state);
     case ArmDozerIdList.WING_DOZER:
-      return enemyWingDozerTD(resources, listener, state);
+      return enemyWingDozerTD(resources, gameObjectAction, state);
     case ArmDozerIdList.NEO_LANDOZER:
-      return enemyNeoLandozerTD(resources, listener, state);
+      return enemyNeoLandozerTD(resources, gameObjectAction, state);
     default:
-      return enemyShinBraverTD(resources, listener, state);
+      return enemyShinBraverTD(resources, gameObjectAction, state);
   }
 }

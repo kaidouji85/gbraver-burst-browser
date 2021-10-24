@@ -17,12 +17,6 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import {RxjsStreamSource} from "../../stream/rxjs";
 import type {ArmdozerIcon} from "./view/armdozer-icon";
 
-type Param = {
-  resources: Resources,
-  listener: Stream<GameObjectAction>,
-  armdozerIcon: ArmdozerIcon,
-};
-
 /** バーストボタン */
 export class BurstButton {
   _model: BurstButtonModel;
@@ -31,8 +25,15 @@ export class BurstButton {
   _pushButton: StreamSource<void>;
   _unsubscriber: Unsubscriber;
 
-  constructor(param: Param) {
-    const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param armdozerIcon アームドーザアイコン
+   */
+  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, armdozerIcon: ArmdozerIcon) {
+    const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
     this._pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
       : new Howl();
@@ -40,9 +41,9 @@ export class BurstButton {
 
     this._model = createInitialValue();
     this._view = new BurstButtonView({
-      resources: param.resources,
-      listener: param.listener,
-      armdozerIcon: param.armdozerIcon,
+      resources: resources,
+      gameObjectAction: gameObjectAction,
+      armdozerIcon: armdozerIcon,
       onPush: () => {
         if (this._model.disabled || !this._model.canBurst) {
           return;
@@ -51,7 +52,7 @@ export class BurstButton {
         this._pushButton.next();
       }
     });
-    this._unsubscriber = param.listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
         this._preRender(action);
       }

@@ -11,22 +11,22 @@ import type {Stream} from "../../../stream/core";
  * プレイヤー側 シンブレイバー カットイン
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerShinBraverCutIn(resources: Resources, listener: Stream<GameObjectAction>): ShinBraverCutIn {
+export function playerShinBraverCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinBraverCutIn {
   const view = new PlayerShinBraverCutInView(resources);
-  return new ShinBraverCutIn(view, listener);
+  return new ShinBraverCutIn(view, gameObjectAction);
 }
 
 /**
  * 敵側 シンブレイバー カットイン
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyShinBraverCutIn(resources: Resources, listener: Stream<GameObjectAction>): ShinBraverCutIn {
+export function enemyShinBraverCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ShinBraverCutIn {
   const view = new EnemyShinBraverCutInView(resources);
-  return new ShinBraverCutIn(view, listener);
+  return new ShinBraverCutIn(view, gameObjectAction);
 }

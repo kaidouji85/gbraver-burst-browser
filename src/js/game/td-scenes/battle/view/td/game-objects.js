@@ -19,14 +19,20 @@ export class TDGameObjects {
   skyBrightness: SkyBrightness;
   illumination: Illumination;
 
-  constructor(resources: Resources, listener: Stream<GameObjectAction>) {
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   * @param gameObjectAction ゲームオブジェクトアクション
+   */
+  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this.stage = new SchoolField(resources);
     this.turnIndicator = new TurnIndicator({
-        listener: listener,
+        gameObjectAction: gameObjectAction,
         resources: resources
       });
-    this.skyBrightness = new SkyBrightness(listener);
-    this.illumination = new Illumination(listener);
+    this.skyBrightness = new SkyBrightness(gameObjectAction);
+    this.illumination = new Illumination(gameObjectAction);
   }
 
   /**

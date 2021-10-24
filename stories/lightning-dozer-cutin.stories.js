@@ -23,8 +23,8 @@ function loopAnimation(cutIn: LightningDozerCutIn): void {
 }
 
 export const Player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, listener) => {
-    const cutIn = playerLightningDozerCutIn(resources, listener);
+  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+    const cutIn = playerLightningDozerCutIn(resources, gameObjectAction);
     loopAnimation(cutIn);
     return [cutIn.getObject3D()];
   });
@@ -33,8 +33,8 @@ export const Player = (): HTMLElement => {
 }
 
 export const Enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, listener) => {
-    const cutIn = enemyLightningiDozerCutIn(resources, listener);
+  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+    const cutIn = enemyLightningiDozerCutIn(resources, gameObjectAction);
     loopAnimation(cutIn);
     return [cutIn.getObject3D()];
   });

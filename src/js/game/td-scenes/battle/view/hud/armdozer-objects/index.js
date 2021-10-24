@@ -16,20 +16,20 @@ import type {Stream} from "../../../../../../stream/core";
  * プレイヤー側 HUDアームドーザ
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー状態
  * @return HUDアームドーザ
  */
-export function playerArmdozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
+export function playerArmdozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return playerShinBraverHUD(resources, listener, state);
+      return playerShinBraverHUD(resources, gameObjectAction, state);
     case ArmDozerIdList.NEO_LANDOZER:
-      return playerNeoLandozerHUD(resources, listener, state);
+      return playerNeoLandozerHUD(resources, gameObjectAction, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
-      return playerLightningDozerHUD(resources, listener, state);
+      return playerLightningDozerHUD(resources, gameObjectAction, state);
     case ArmDozerIdList.WING_DOZER:
-      return playerWingDozerHUD(resources, listener, state);
+      return playerWingDozerHUD(resources, gameObjectAction, state);
     default:
       return new EmptyHUDArmdozer(state);
   }
@@ -39,20 +39,20 @@ export function playerArmdozerHUD(resources: Resources, listener: Stream<GameObj
  * 敵側 HUDアームドーザ
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー状態
  * @return HUDアームドーザ
  */
-export function enemyArmdozerHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
+export function enemyArmdozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
   switch (state.armdozer.id) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return enemyShinBraverHUD(resources, listener, state);
+      return enemyShinBraverHUD(resources, gameObjectAction, state);
     case ArmDozerIdList.NEO_LANDOZER:
-      return enemyNeoLandozerHUD(resources, listener, state);
+      return enemyNeoLandozerHUD(resources, gameObjectAction, state);
     case ArmDozerIdList.LIGHTNING_DOZER:
-      return enemyLightningDozerHUD(resources, listener, state);
+      return enemyLightningDozerHUD(resources, gameObjectAction, state);
     case ArmDozerIdList.WING_DOZER:
-      return enemyWingDozerHUD(resources, listener, state);
+      return enemyWingDozerHUD(resources, gameObjectAction, state);
     default:
       return new EmptyHUDArmdozer(state);
   }

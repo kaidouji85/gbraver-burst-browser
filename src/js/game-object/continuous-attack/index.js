@@ -11,22 +11,22 @@ import type {Stream} from "../../stream/core";
  * プレイヤー側 連続攻撃
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerContinuousAttack(resources: Resources, listener: Stream<GameObjectAction>): ContinuousAttackIndicator {
+export function playerContinuousAttack(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ContinuousAttackIndicator {
   const view = new PlayerContinuousAttackView(resources);
-  return new ContinuousAttackIndicator(view, resources, listener);
+  return new ContinuousAttackIndicator(view, resources, gameObjectAction);
 }
 
 /**
  * 敵側 連続攻撃
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyContinuousAttack(resources: Resources, listener: Stream<GameObjectAction>): ContinuousAttackIndicator {
+export function enemyContinuousAttack(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ContinuousAttackIndicator {
   const view = new EnemyContinuousAttackView(resources);
-  return new ContinuousAttackIndicator(view, resources, listener);
+  return new ContinuousAttackIndicator(view, resources, gameObjectAction);
 }

@@ -11,22 +11,22 @@ import type {Stream} from "../../../stream/core";
  * プレイヤー側 ライト カットイン
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return ライト カットイン
  */
-export function playerRaitoCutIn(resources: Resources, listener: Stream<GameObjectAction>): RaitoCutIn {
+export function playerRaitoCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RaitoCutIn {
   const view = new PlayerRaitoView(resources);
-  return new RaitoCutIn(view, resources, listener);
+  return new RaitoCutIn(view, resources, gameObjectAction);
 }
 
 /**
  * 敵側 ライト カットイン
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return ライト カットイン
  */
-export function enemyRaitoCutIn(resources: Resources, listener: Stream<GameObjectAction>): RaitoCutIn {
+export function enemyRaitoCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): RaitoCutIn {
   const view = new EnemyRaitoView(resources);
-  return new RaitoCutIn(view, resources, listener);
+  return new RaitoCutIn(view, resources, gameObjectAction);
 }

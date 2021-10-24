@@ -9,8 +9,11 @@ import type {Stream, Unsubscriber} from "../../stream/core";
 
 /** パラメータ */
 type Param = {
+  /** 当たり判定のジオメトリー */
   geometry: typeof THREE.Geometry,
-  listener: Stream<GameObjectAction>,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /** ボタンを押した時に呼ばれるコールバック関数 */
   onButtonPush: () => void
 };
 
@@ -20,6 +23,11 @@ export class ButtonOverlap {
   _onButtonPush: () => void;
   _unsubscriber: Unsubscriber;
 
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     const material = new THREE.MeshBasicMaterial({
       color: new THREE.Color('rgb(0, 255, 0)'),
@@ -27,7 +35,7 @@ export class ButtonOverlap {
     });
     this._mesh = new THREE.Mesh(param.geometry, material);
 
-    this._unsubscriber = param.listener.subscribe(action => {
+    this._unsubscriber = param.gameObjectAction.subscribe(action => {
       switch (action.type) {
         case 'mouseDownRaycaster':
           this._mouseDownRaycaster(action);

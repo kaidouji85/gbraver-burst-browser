@@ -11,22 +11,22 @@ import type {Stream} from "../../../stream/core";
  * プレイヤー側 ネオランドーザ カットイン
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerNeoLandozerCutIn(resources: Resources, listener: Stream<GameObjectAction>): NeoLandozerCutIn {
+export function playerNeoLandozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozerCutIn {
   const view = new PlayerNeoLandozerCutInView(resources);
-  return new NeoLandozerCutIn(view, listener);
+  return new NeoLandozerCutIn(view, gameObjectAction);
 }
 
 /**
  * 敵側 ネオランドーザ カットイン
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyNeoLandozerCutIn(resources: Resources, listener: Stream<GameObjectAction>): NeoLandozerCutIn {
+export function enemyNeoLandozerCutIn(resources: Resources, gameObjectAction: Stream<GameObjectAction>): NeoLandozerCutIn {
   const view = new EnemyNeoLandozerCutInView(resources);
-  return new NeoLandozerCutIn(view, listener);
+  return new NeoLandozerCutIn(view, gameObjectAction);
 }

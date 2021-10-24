@@ -7,34 +7,36 @@ import type {Stream} from "../../stream/core";
 
 /** 画面フェーダ生成のパラメータ */
 type Param = {
+  /** 表示フラグ、trueで表示する */
   isVisible: boolean,
-  listener: Stream<GameObjectAction>
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>
 };
 
 /**
- * 画面フェーダ 最前面
+ * 最前面画面フェーダ
  *
  * @param param パラメータ
- * @return 生成した画面フェーダ
+ * @return 画面フェーダ
  */
 export function frontmostFader(param: Param): Fader {
   return new Fader({
     isVisible: param.isVisible,
-    listener: param.listener,
+    gameObjectAction: param.gameObjectAction,
     z: HUD_FROMTMOST_FADER_ZINDEX,
   });
 }
 
 /**
- * 画面フェーダ 最背面
+ * 最背面画面フェーダ
  *
  * @param param パラメータ
- * @return 生成した画面フェーダ
+ * @return 画面フェーダ
  */
 export function rearmostFader(param: Param): Fader {
   return new Fader({
     isVisible: param.isVisible,
-    listener: param.listener,
+    gameObjectAction: param.gameObjectAction,
     z: HUD_REARMOST_FADER_ZINDEX,
   });
 }

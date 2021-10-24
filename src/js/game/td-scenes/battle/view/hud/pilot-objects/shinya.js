@@ -57,14 +57,14 @@ export class ShinyaHUD implements HUDPilotObjects {
  * プレイヤー側 シンヤHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return シンヤHUD
  */
-export function playerShinyaHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): ShinyaHUD {
+export function playerShinyaHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): ShinyaHUD {
   return new ShinyaHUD( {
     playerId: state.playerId,
-    cutIn: playerShinyaCutIn(resources, listener)
+    cutIn: playerShinyaCutIn(resources, gameObjectAction)
   })
 }
 
@@ -72,13 +72,13 @@ export function playerShinyaHUD(resources: Resources, listener: Stream<GameObjec
  * 敵側 シンヤHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return シンヤHUD
  */
-export function enemyShinyaHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): ShinyaHUD {
+export function enemyShinyaHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): ShinyaHUD {
   return new ShinyaHUD( {
     playerId: state.playerId,
-    cutIn: enemyShinyaCutIn(resources, listener)
+    cutIn: enemyShinyaCutIn(resources, gameObjectAction)
   })
 }

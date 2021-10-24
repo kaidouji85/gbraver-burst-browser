@@ -9,7 +9,7 @@ import {Stream} from '../../src/js/stream/core';
  * Object3D生成コールバック関数
  *
  * @param resources リソース管理オブジェクト
- * @param listener ゲームオブジェクトイベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return シーンに追加するObject3D
  */
-export type Object3dCreator = (resources: Resources, listener: Stream<GameObjectAction>) => typeof THREE.Object3D[];
+export type Object3dCreator = (resources: Resources, gameObjectAction: Stream<GameObjectAction>) => typeof THREE.Object3D[];

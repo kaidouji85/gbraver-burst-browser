@@ -17,8 +17,11 @@ const BATTERY_VALUE_MAX_ANIMATION = 8;
 
 /** コンストラクタのパラメータ */
 type Param = {
+  /** リソース管理オブジェクト */
   resources: Resources,
-  listener: Stream<GameObjectAction>,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /** ボタンを押した時に呼ばれるコールバック関数 */
   onPush: () => void
 };
 
@@ -31,6 +34,11 @@ export class BatteryButton {
   _defenseLabel: SimpleImageMesh;
   _batteryValue: HorizontalAnimationMesh;
 
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this._group = new THREE.Group();
 
@@ -43,7 +51,7 @@ export class BatteryButton {
     this._overlap = circleButtonOverlap({
       radius: 200,
       segments: 32,
-      listener: param.listener,
+      gameObjectAction: param.gameObjectAction,
       onButtonPush: ()=> {
         param.onPush();
       }
