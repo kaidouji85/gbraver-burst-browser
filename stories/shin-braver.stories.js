@@ -9,8 +9,8 @@ export default {
 };
 
 export const guts = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = PlayerShinBraver(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const sprite = PlayerShinBraver(resources, gameObjectAction);
     const animation  = sprite.guts()
       .chain(delay(2000))
       .chain(sprite.gutsToStand())

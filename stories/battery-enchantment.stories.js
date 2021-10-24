@@ -9,8 +9,8 @@ export default {
 };
 
 export const player = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const continuousAttack = playerBatteryEnchantment(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const continuousAttack = playerBatteryEnchantment(resources, gameObjectAction);
     delay(1000)
       .chain(continuousAttack.popUp())
       .loop();
@@ -23,8 +23,8 @@ export const player = (): HTMLElement => {
 }
 
 export const enemy = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const continuousAttack = enemyBatteryEnchantment(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const continuousAttack = enemyBatteryEnchantment(resources, gameObjectAction);
     delay(1000)
       .chain(continuousAttack.popUp())
       .loop();

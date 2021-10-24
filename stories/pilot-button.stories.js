@@ -14,8 +14,8 @@ export default {
 };
 
 export const shinya = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, listener) => {
-    const button = shinyaPilotButton(resources, listener);
+  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+    const button = shinyaPilotButton(resources, gameObjectAction);
     button.pushButtonNotifier().subscribe(() => {
       console.log('push button!!');
       const animation = button.decide()
@@ -33,8 +33,8 @@ export const shinya = (): HTMLElement => {
 }
 
 export const gai = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, listener) => {
-    const button = gaiPilotButton(resources, listener);
+  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+    const button = gaiPilotButton(resources, gameObjectAction);
     button.pushButtonNotifier().subscribe(() => {
       console.log('push button!!');
       const animation = button.decide()
@@ -52,8 +52,8 @@ export const gai = (): HTMLElement => {
 }
 
 export const raito = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, listener) => {
-    const button = raitoPilotButton(resources, listener);
+  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+    const button = raitoPilotButton(resources, gameObjectAction);
     button.pushButtonNotifier().subscribe(() => {
       console.log('push button!!');
       const animation = button.decide()
@@ -71,8 +71,8 @@ export const raito = (): HTMLElement => {
 }
 
 export const tsubasa = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, listener) => {
-    const button = tsubasaPilotButton(resources, listener);
+  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+    const button = tsubasaPilotButton(resources, gameObjectAction);
     button.pushButtonNotifier().subscribe(() => {
       console.log('push button!!');
       const animation = button.decide()

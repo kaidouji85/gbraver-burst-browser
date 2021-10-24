@@ -11,10 +11,10 @@ export default {
 };
 
 export const commands = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, listener) => {
+  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
     const batterySelector = new BatterySelector({
       resources: resources,
-      gameObjectAction: listener,
+      gameObjectAction: gameObjectAction,
       maxBattery: 5,
       onBatteryChange: () => {
         // NOP
@@ -23,8 +23,8 @@ export const commands = (): HTMLElement => {
         // NOP
       },
     });
-    const burstButton = shinBraverBurstButton(resources, listener);
-    const pilotButton = shinyaPilotButton(resources, listener);
+    const burstButton = shinBraverBurstButton(resources, gameObjectAction);
+    const pilotButton = shinyaPilotButton(resources, gameObjectAction);
 
     all(
       batterySelector.open(1, 5, 'Attack'),

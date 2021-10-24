@@ -9,8 +9,8 @@ export default {
 };
 
 export const stand = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = PlayerWingDozer(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
     return [sprite.getObject3D()];
   });
   stub.start();
@@ -18,8 +18,8 @@ export const stand = (): HTMLElement => {
 }
 
 export const enemy = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = EnemyWingDozer(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const sprite = EnemyWingDozer(resources, gameObjectAction);
     return [sprite.getObject3D()];
   });
   stub.start();
@@ -27,8 +27,8 @@ export const enemy = (): HTMLElement => {
 }
 
 export const attack = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = PlayerWingDozer(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
     const animation = sprite.charge()
       .chain(delay(500))
       .chain(sprite.upper())
@@ -43,8 +43,8 @@ export const attack = (): HTMLElement => {
 }
 
 export const dash = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = PlayerWingDozer(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
     const animation = sprite.dash()
       .chain(delay(2000))
       .chain(sprite.dashToStand())
@@ -57,8 +57,8 @@ export const dash = (): HTMLElement => {
 }
 
 export const down = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, listener) => {
-    const sprite = PlayerWingDozer(resources, listener);
+  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+    const sprite = PlayerWingDozer(resources, gameObjectAction);
     const animation = sprite.down()
       .chain(delay(2000));
     animation.loop();
