@@ -48,14 +48,16 @@ function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean):
     <button data-id="${ids.logout}" class="${logoutClassName}">ログアウト</button>
     <div class="${ROOT_CLASS_NAME}__contents">
       <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
-      <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
-        <span class="${ROOT_CLASS_NAME}__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
-      </div>
       <div class="${ROOT_CLASS_NAME}__contents__controllers">
         <button class="${ROOT_CLASS_NAME}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
         <button class="${ROOT_CLASS_NAME}__contents__controllers__game-start" data-id="${ids.gameStart}">ゲームスタート</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
       </div>
+    </div>
+    <div class="${ROOT_CLASS_NAME}__footer">
+      <span class="${ROOT_CLASS_NAME}__footer__copy-rights">(C) 2020 Yuusuke Takeuchi</span>
+      <a class="${ROOT_CLASS_NAME}__footer__terms-of-service">利用規約</a>
+      <a class="${ROOT_CLASS_NAME}__footer__privacy-policy">プライバシーポリシー</a>
     </div>
   `;
 }
