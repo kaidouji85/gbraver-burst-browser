@@ -24,8 +24,6 @@ type DataIDs = {
   gameStart: string,
   casualMatch: string,
   howToPlay: string,
-  termsOfService: string,
-  privacyPolicy: string,
 };
 
 /**
@@ -33,9 +31,11 @@ type DataIDs = {
  * @param ids data-idを集めたもの
  * @param isLogin ログインしているか否かのフラグ、trueでログインしている
  * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能
+ * @param termsOfServiceURL 利用規約ページのURL
+ * @param privacyPolicyURL プライバシーポリシーページのURL
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean): string {
+function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string): string {
   const visibleLogin = `${ROOT_CLASS_NAME}__login`;
   const invisibleLogin = `${visibleLogin}--invisible`;
   const loginClassName = isLogin ? invisibleLogin : visibleLogin;
@@ -58,8 +58,8 @@ function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean):
     </div>
     <div class="${ROOT_CLASS_NAME}__footer">
       <span class="${ROOT_CLASS_NAME}__footer__copy-rights">(C) 2020 Yuusuke Takeuchi</span>
-      <a data-id="${ids.termsOfService}" class="${ROOT_CLASS_NAME}__footer__terms-of-service">利用規約</a>
-      <a data-id="${ids.privacyPolicy}" class="${ROOT_CLASS_NAME}__footer__privacy-policy">プライバシーポリシー</a>
+      <a class="${ROOT_CLASS_NAME}__footer__terms-of-service" href="${termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
+      <a class="${ROOT_CLASS_NAME}__footer__privacy-policy" href="${privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
     </div>
   `;
 }
@@ -72,8 +72,6 @@ type Elements = {
   gameStart: HTMLElement,
   casualMatch: HTMLElement,
   howToPlay: HTMLElement,
-  termsOfService: HTMLElement,
-  privacyPolicy: HTMLElement,
 };
 
 /**
@@ -91,9 +89,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  const termsOfService = root.querySelector(`[data-id="${ids.termsOfService}"]`) ?? document.createElement('div');
-  const privacyPolicy = root.querySelector(`[data-id="${ids.privacyPolicy}"]`) ?? document.createElement('div');
-  return {login, logout, logo, gameStart, casualMatch, howToPlay, termsOfService, privacyPolicy};
+  return {login, logout, logo, gameStart, casualMatch, howToPlay};
 }
 
 /** タイトル */
@@ -105,8 +101,6 @@ export class Title implements DOMScene {
   _gameStart: HTMLElement;
   _casualMatch: HTMLElement;
   _howToPlay: HTMLElement;
-  _termsOfServiceURL: string;
-  _privacyPolicyURL: string; 
   _isTitleBackLoaded: Promise<void>;
   _isLogoLoaded: Promise<void>;
   _changeValue: typeof Howl;
@@ -129,14 +123,10 @@ export class Title implements DOMScene {
    */
   constructor(resources: Resources, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string) {
     this._exclusive = new Exclusive();
-    
-    this._termsOfServiceURL = termsOfServiceURL;
-    this._privacyPolicyURL = privacyPolicyURL;
-
     const dataIDs = {login: domUuid(), logout: domUuid(), logo: domUuid(), gameStart: domUuid(), 
       casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch);
+    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch, termsOfServiceURL, privacyPolicyURL);
     this._root.className = ROOT_CLASS_NAME;
     const elements = extractElements(this._root, dataIDs);
 
@@ -182,12 +172,6 @@ export class Title implements DOMScene {
       }),
       pushDOMStream(this._howToPlay).subscribe(() => {
         this._onHowToPlayPush();
-      }),
-      pushDOMStream(elements.termsOfService).subscribe(() => {
-        this._onTermsOfServicePush();
-      }),
-      pushDOMStream(elements.privacyPolicy).subscribe(() => {
-        this._onPrivacyPolicyPush();
       })
     ];
   }
@@ -321,19 +305,5 @@ export class Title implements DOMScene {
       await pop(this._logout);
       this._pushLogout.next();
     });
-  }
-
-  /**
-   * 利用規約が押された際の処理
-   */
-  _onTermsOfServicePush(): void {
-    window.open(this._termsOfServiceURL);
-  }
-
-  /**
-   * プライバシーポリシーが押された際の処理
-   */
-  _onPrivacyPolicyPush(): void {
-    window.open(this._privacyPolicyURL);
   }
 }
