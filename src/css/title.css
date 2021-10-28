@@ -112,7 +112,7 @@
   width: 100vw;
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: baseline;
   font-size: var(--responsive-font-size);
   background-color: rgba(10, 10, 10, 0.8);
@@ -128,5 +128,12 @@
 }
 
 .title__footer__terms-of-service {
+  text-decoration: none;
+  color: var(--button-font-color);
   margin-right: calc(var(--responsive-font-size) * 2);
+}
+
+.title__footer__privacy-policy {
+  text-decoration: none;
+  color: var(--button-font-color);
 }
