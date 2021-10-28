@@ -115,8 +115,11 @@
   justify-content: end;
   align-items: baseline;
   font-size: var(--responsive-font-size);
-  background-color: rgba(10, 10, 10, 0.9);
-  padding: calc(var(--responsive-font-size) * 0.2)  var(--responsive-font-size);
+  background-color: rgba(10, 10, 10, 0.8);
+  padding-top: calc(var(--responsive-font-size) * 0.2);
+  padding-bottom: max(calc(var(--responsive-font-size) * 0.2), var(--safe-area-bottom));
+  padding-right: max(var(--responsive-font-size), var(--safe-area-right));
+  padding-left: max(var(--responsive-font-size), var(--safe-area-left));
 }
 
 .title__footer__copy-rights {
