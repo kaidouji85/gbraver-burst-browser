@@ -50,6 +50,10 @@ type Param = {
   resourceRoot: ResourceRoot,
   /** 遊び方動画のURL */
   howToPlayMovieURL: string,
+  /** 利用規約ページのURL */
+  termsOfServiceURL: string,
+  /** プライバシーポリシーページのURL */
+  privacyPolicyURL: string,
   /** FPS統計を表示するか否か、trueで表示する */
   isPerformanceStatsVisible: boolean,
   /** サービスワーカーを利用するか否か、trueで利用する */
@@ -65,6 +69,8 @@ export class Game {
   _isPerformanceStatsVisible: boolean;
   _isServiceWorkerUsed: boolean;
   _howToPlayMovieURL: string;
+  _termsOfServiceURL: string;
+  _privacyPolicyURL: string;
   _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
@@ -91,6 +97,8 @@ export class Game {
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
     this._howToPlayMovieURL = param.howToPlayMovieURL;
+    this._termsOfServiceURL = param.termsOfServiceURL;
+    this._privacyPolicyURL = param.privacyPolicyURL;
     this._isAPIServerEnable = param.isAPIServerEnable;
 
     this._inProgress = {type: 'None'};
@@ -476,14 +484,15 @@ export class Game {
 
   /**
    * タイトル画面を開始するヘルパーメソッド
-   * いかなる場合でもcanCasualMatch、isLoginに同じ値をセットするために、
-   * ヘルパーメソッド化した
-   *
+   * いかなる場合でもisLogin、canCasualMatch、termsOfServiceURL、privacyPolicyURL
+   * に同じ値をセットするために、ヘルパーメソッド化した
+   *    
    * @param resources リソース管理オブジェクト
    * @return タイトル画面
    */
   async _startTitle(resources: Resources): Promise<Title> {
     const isLogin = await this._api.isLogin();
-    return this._domScenes.startTitle(resources, isLogin, this._isAPIServerEnable);
+    return this._domScenes.startTitle(resources, isLogin, this._isAPIServerEnable,
+      this._termsOfServiceURL, this._privacyPolicyURL);
   }
 }

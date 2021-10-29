@@ -31,9 +31,11 @@ type DataIDs = {
  * @param ids data-idを集めたもの
  * @param isLogin ログインしているか否かのフラグ、trueでログインしている
  * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能
+ * @param termsOfServiceURL 利用規約ページのURL
+ * @param privacyPolicyURL プライバシーポリシーページのURL
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean): string {
+function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string): string {
   const visibleLogin = `${ROOT_CLASS_NAME}__login`;
   const invisibleLogin = `${visibleLogin}--invisible`;
   const loginClassName = isLogin ? invisibleLogin : visibleLogin;
@@ -48,14 +50,16 @@ function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean):
     <button data-id="${ids.logout}" class="${logoutClassName}">ログアウト</button>
     <div class="${ROOT_CLASS_NAME}__contents">
       <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
-      <div class="${ROOT_CLASS_NAME}__contents__copy-rights">
-        <span class="${ROOT_CLASS_NAME}__contents__copy-rights__row">(C) 2020 Yuusuke Takeuchi</span>
-      </div>
       <div class="${ROOT_CLASS_NAME}__contents__controllers">
         <button class="${ROOT_CLASS_NAME}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
         <button class="${ROOT_CLASS_NAME}__contents__controllers__game-start" data-id="${ids.gameStart}">ゲームスタート</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
       </div>
+    </div>
+    <div class="${ROOT_CLASS_NAME}__footer">
+      <span class="${ROOT_CLASS_NAME}__footer__copy-rights">(C) 2020 Yuusuke Takeuchi</span>
+      <a class="${ROOT_CLASS_NAME}__footer__terms-of-service" href="${termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
+      <a class="${ROOT_CLASS_NAME}__footer__privacy-policy" href="${privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
     </div>
   `;
 }
@@ -114,13 +118,15 @@ export class Title implements DOMScene {
    * @param resources リソース管理オブジェクト
    * @param isLogin ログインしているか否か、trueでログインしている
    * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能である
+   * @param termsOfServiceURL 利用規約ページのURL
+   * @param privacyPolicyURL プライバシーポリシーページのURL
    */
-  constructor(resources: Resources, isLogin: boolean, canCasualMatch: boolean) {
+  constructor(resources: Resources, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string) {
     this._exclusive = new Exclusive();
-
-    const dataIDs = {login: domUuid(), logout: domUuid(), logo: domUuid(), gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid()};
+    const dataIDs = {login: domUuid(), logout: domUuid(), logo: domUuid(), gameStart: domUuid(), 
+      casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch);
+    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch, termsOfServiceURL, privacyPolicyURL);
     this._root.className = ROOT_CLASS_NAME;
     const elements = extractElements(this._root, dataIDs);
 

@@ -17,6 +17,12 @@ export const DefinePlugin = {
   /** 遊び方動画のURL */
   howToPlay: GBRAVER_BURST_HOW_TO_PLAY,
 
+  /** 利用規約ページのURL */
+  termsOfServiceURL: GBRAVER_BURST_TERMS_OF_SERVICE_URL,
+
+  /** プライバシーポリシーページのURL */
+  privacyPolicyURL:GBRAVER_BURST_PRIVACY_POLICY_URL,
+
   /** FPS統計を表示するか否か、trueで表示する */
   isPerformanceStatsVisible: GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE,
 

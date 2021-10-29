@@ -23,6 +23,8 @@ async function main(): Promise<void> {
     resourceRoot,
     api: api,
     howToPlayMovieURL: DefinePlugin.howToPlay,
+    termsOfServiceURL: DefinePlugin.termsOfServiceURL,
+    privacyPolicyURL: DefinePlugin.privacyPolicyURL,
     isPerformanceStatsVisible: DefinePlugin.isPerformanceStatsVisible === 'true',
     isServiceWorkerUsed: DefinePlugin.isServiceWorkerUsed === 'true',
     isAPIServerEnable: DefinePlugin.isAPIServerEnable === 'true',
