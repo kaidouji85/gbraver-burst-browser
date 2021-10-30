@@ -60,7 +60,6 @@ function damageDecreaseSkillTemplate(skill: DamageDecreaseSkill): string[] {
  */
 function batteryEnchantmentSkillTemplate(skill: BatteryEnchantmentSkill): string[] {
   return [
-    `このターンに0より大きいバッテリーを出した場合、バッテリーに +${skill.batteryEnchantment} する`,
-    `ただし、攻撃補正が半分になる`
+    `2ターンだけ0より大きいバッテリーを出した場合バッテリー+${skill.batteryEnchantment}、ただし攻撃補正が半分になる`,
   ];
 }
