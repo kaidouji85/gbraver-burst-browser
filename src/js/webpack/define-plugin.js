@@ -20,6 +20,9 @@ export const DefinePlugin = {
   /** 利用規約ページのURL */
   termsOfServiceURL: GBRAVER_BURST_TERMS_OF_SERVICE_URL,
 
+  /** 問い合わせページのURL */
+  contactURL: GBRAVER_BURST_CONTACT_URL,
+
   /** プライバシーポリシーページのURL */
   privacyPolicyURL:GBRAVER_BURST_PRIVACY_POLICY_URL,
 
