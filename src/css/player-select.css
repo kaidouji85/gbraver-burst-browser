@@ -5,7 +5,7 @@
   .player-select {
     --working-zindex: 1;
     --selector-zindex: 2;
-    --control-button-width: 24.85vw;
+    --control-button-width: 24vw;
     --control-button-height: calc(var(--responsive-font-size) * 3);
     --armdozer-icon-width: 12.5vw;
     --armdozer-icon-height: 12.5vw;
@@ -54,7 +54,7 @@
 .player-select__pilot-selector__controllers__prev-button {
   width: var(--control-button-width);
   height: var(--control-button-height);
-  margin-right: 0.3vw;
+  margin-right: 1vw;
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
   background-color: var(--sub-button-background-color);
