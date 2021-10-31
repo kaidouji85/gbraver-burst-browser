@@ -25,6 +25,7 @@ async function main(): Promise<void> {
     howToPlayMovieURL: DefinePlugin.howToPlay,
     termsOfServiceURL: DefinePlugin.termsOfServiceURL,
     privacyPolicyURL: DefinePlugin.privacyPolicyURL,
+    contactURL: DefinePlugin.contactURL,
     isPerformanceStatsVisible: DefinePlugin.isPerformanceStatsVisible === 'true',
     isServiceWorkerUsed: DefinePlugin.isServiceWorkerUsed === 'true',
     isAPIServerEnable: DefinePlugin.isAPIServerEnable === 'true',

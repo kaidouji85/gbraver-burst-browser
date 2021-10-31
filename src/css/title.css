@@ -136,4 +136,10 @@
 .title__footer__privacy-policy {
   text-decoration: none;
   color: var(--button-font-color);
+  margin-right: calc(var(--responsive-font-size) * 2);
+}
+
+.title__footer__contact {
+  text-decoration: none;
+  color: var(--button-font-color);
 }

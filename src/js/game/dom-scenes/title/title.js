@@ -33,9 +33,10 @@ type DataIDs = {
  * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能
  * @param termsOfServiceURL 利用規約ページのURL
  * @param privacyPolicyURL プライバシーポリシーページのURL
+ * @param contactURL 問い合わせページのURL
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string): string {
+function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
   const visibleLogin = `${ROOT_CLASS_NAME}__login`;
   const invisibleLogin = `${visibleLogin}--invisible`;
   const loginClassName = isLogin ? invisibleLogin : visibleLogin;
@@ -60,6 +61,7 @@ function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean, 
       <span class="${ROOT_CLASS_NAME}__footer__copy-rights">(C) 2020 Yuusuke Takeuchi</span>
       <a class="${ROOT_CLASS_NAME}__footer__terms-of-service" href="${termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
       <a class="${ROOT_CLASS_NAME}__footer__privacy-policy" href="${privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a class="${ROOT_CLASS_NAME}__footer__contact" href="${contactURL}" target="_blank" rel="noopener">問い合わせ</a>
     </div>
   `;
 }
@@ -120,13 +122,14 @@ export class Title implements DOMScene {
    * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能である
    * @param termsOfServiceURL 利用規約ページのURL
    * @param privacyPolicyURL プライバシーポリシーページのURL
+   * @param contactURL 問い合わせページのURL
    */
-  constructor(resources: Resources, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string) {
+  constructor(resources: Resources, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
     const dataIDs = {login: domUuid(), logout: domUuid(), logo: domUuid(), gameStart: domUuid(), 
       casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch, termsOfServiceURL, privacyPolicyURL);
+    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._root.className = ROOT_CLASS_NAME;
     const elements = extractElements(this._root, dataIDs);
 
