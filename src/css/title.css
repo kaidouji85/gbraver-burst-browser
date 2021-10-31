@@ -92,12 +92,9 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.title__contents__controllers__how-to-play{
-  background-color: var(--sub-button-background-color);
-}
-
 .title__contents__controllers__game-start,
-.title__contents__controllers__casual-match {
+.title__contents__controllers__casual-match,
+.title__contents__controllers__how-to-play {
   background-color: var(--button-background-color);
 }
 

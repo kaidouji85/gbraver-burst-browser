@@ -13,7 +13,6 @@
 
     /** フォント */
     --font-color: rgb(240, 240, 240);
-    --error-font-color: rgb(255, 69, 0);
     --responsive-font-size: max(3vh, 1rem);
 
     /** 背景 */
@@ -27,7 +26,7 @@
     --zindex-play-in-landscape: 12;
 
     /** ボタン */
-    --button-background-color: #1e90ff;
+    --button-background-color: #007bbb;
     --sub-button-background-color: #696969;
     --button-font-color: rgb(240, 240, 240);
     --button-border-radius: calc(var(--responsive-font-size) * 0.5);
