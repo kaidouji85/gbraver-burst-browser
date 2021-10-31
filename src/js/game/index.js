@@ -52,6 +52,8 @@ type Param = {
   howToPlayMovieURL: string,
   /** 利用規約ページのURL */
   termsOfServiceURL: string,
+  /** 問い合わせページのURL */
+  contactURL: string,
   /** プライバシーポリシーページのURL */
   privacyPolicyURL: string,
   /** FPS統計を表示するか否か、trueで表示する */
@@ -71,6 +73,7 @@ export class Game {
   _howToPlayMovieURL: string;
   _termsOfServiceURL: string;
   _privacyPolicyURL: string;
+  _contactURL: string;
   _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
@@ -99,6 +102,7 @@ export class Game {
     this._howToPlayMovieURL = param.howToPlayMovieURL;
     this._termsOfServiceURL = param.termsOfServiceURL;
     this._privacyPolicyURL = param.privacyPolicyURL;
+    this._contactURL = param.contactURL;
     this._isAPIServerEnable = param.isAPIServerEnable;
 
     this._inProgress = {type: 'None'};
@@ -493,6 +497,6 @@ export class Game {
   async _startTitle(resources: Resources): Promise<Title> {
     const isLogin = await this._api.isLogin();
     return this._domScenes.startTitle(resources, isLogin, this._isAPIServerEnable,
-      this._termsOfServiceURL, this._privacyPolicyURL);
+      this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
   }
 }

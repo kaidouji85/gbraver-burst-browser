@@ -74,12 +74,13 @@ export class DOMScenes {
    * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能
    * @param termsOfServiceURL 利用規約ページのURL
    * @param privacyPolicyURL プライバシーポリシーページのURL
+   * @param contactURL 問い合わせページのURL
    * @return 開始されたタイトル画面
    */
-  async startTitle(resources: Resources, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string): Promise<Title> {
+  async startTitle(resources: Resources, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): Promise<Title> {
     this._removeCurrentScene();
 
-    const scene = new Title(resources, isLogin, canCasualMatch, termsOfServiceURL, privacyPolicyURL);
+    const scene = new Title(resources, isLogin, canCasualMatch, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._unsubscribers = [
       scene.pushLoginNotifier().subscribe(() => {
         this._gameAction.next({type: 'UniversalLogin'});
