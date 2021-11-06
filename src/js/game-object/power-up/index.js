@@ -11,22 +11,22 @@ import type {Stream} from "../../stream/core";
  * プレイヤー 攻撃アップ ポップアップ
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerPowerUp(resources: Resources, listener: Stream<GameObjectAction>): PowerUp {
+export function playerPowerUp(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PowerUp {
   const view = new PlayerPowerUpView(resources);
-  return new PowerUp(view, resources, listener);
+  return new PowerUp(view, resources, gameObjectAction);
 }
 
 /**
  * 敵 攻撃アップ ポップアップ
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyPowerUp(resources: Resources, listener: Stream<GameObjectAction>): PowerUp {
+export function enemyPowerUp(resources: Resources, gameObjectAction: Stream<GameObjectAction>): PowerUp {
   const view = new EnemyPowerUpView(resources);
-  return new PowerUp(view, resources, listener);
+  return new PowerUp(view, resources, gameObjectAction);
 }

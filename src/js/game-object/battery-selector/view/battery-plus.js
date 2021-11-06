@@ -13,8 +13,11 @@ import type {Stream} from "../../../stream/core";
 
 /** コンストラクタのパラメータ */
 type Param = {
+  /** リソース管理オブジェクト */
   resources: Resources,
-  listener: Stream<GameObjectAction>,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /** ボタンが押された時に呼ばれるコールバック関数 */
   onPush: () => void
 };
 
@@ -25,6 +28,11 @@ export class BatteryPlus {
   _buttonDisabled: SimpleImageMesh;
   _overlap: ButtonOverlap;
 
+  /**
+   * コンストラクタ
+   * 
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     const active = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_PLUS)?.image ?? new Image();
@@ -37,7 +45,7 @@ export class BatteryPlus {
     this._overlap = circleButtonOverlap({
       radius: 80,
       segments: 32,
-      listener: param.listener,
+      gameObjectAction: param.gameObjectAction,
       onButtonPush: () => {
         param.onPush();
       }

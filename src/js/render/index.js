@@ -23,7 +23,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   /**
    * コンストラクタ
    *
-   * @param resize リサイズのイベントリスナ
+   * @param resize リサイズのストリーム
    */
   constructor(resize: Stream<Resize>) {
     this._threeJsRender = createRender();

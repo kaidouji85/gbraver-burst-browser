@@ -33,12 +33,19 @@ export class LightningDozer implements ArmDozerSprite {
   _sounds: LightningDozerSounds;
   _unsubscriber: Unsubscriber;
 
-  constructor(resources: Resources, listener: Stream<GameObjectAction>, view: LightningDozerView) {
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   * @param gameObjectAction ゲームオブジェクトアクション
+   * @param view ビュー
+   */
+  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, view: LightningDozerView) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new LightningDozerSounds(resources);
 
-    this._unsubscriber = listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {

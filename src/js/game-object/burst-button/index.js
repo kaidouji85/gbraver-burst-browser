@@ -13,58 +13,46 @@ import {WingDozerIcon} from "./view/wing-dozer-icon";
  * シンブレイバー バーストボタンを生成する
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
  */
-export function shinBraverBurstButton(resources: Resources, listener: Stream<GameObjectAction>): BurstButton {
-  return new BurstButton({
-    resources: resources,
-    listener: listener,
-    armdozerIcon: new ShinBraverIcon(resources),
-  });
+export function shinBraverBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BurstButton {
+  const armdozerIcon = new ShinBraverIcon(resources);
+  return new BurstButton(resources, gameObjectAction, armdozerIcon);
 }
 
 /**
  * ネオランドーザ バーストボタンを生成する
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
  */
-export function neoLandozerBurstButton(resources: Resources, listener: Stream<GameObjectAction>): BurstButton {
-  return new BurstButton({
-    resources: resources,
-    listener: listener,
-    armdozerIcon: new NeoLandozerIcon(resources),
-  });
+export function neoLandozerBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BurstButton {
+  const armdozerIcon = new NeoLandozerIcon(resources)
+  return new BurstButton(resources, gameObjectAction, armdozerIcon,);
 }
 
 /**
  * ライトニングドーザ バーストボタンを生成する
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
  */
-export function lightningDozerBurstButton(resources: Resources, listener: Stream<GameObjectAction>): BurstButton {
-  return new BurstButton({
-    resources: resources,
-    listener: listener,
-    armdozerIcon: new LightningDozerIcon(resources),
-  });
+export function lightningDozerBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BurstButton {
+  const armdozerIcon = new LightningDozerIcon(resources);
+  return new BurstButton(resources, gameObjectAction, armdozerIcon);
 }
 
 /**
  * ウィングドーザ バーストボタンを生成する
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return バーストボタン
  */
-export function wingDozerBurstButton(resources: Resources, listener: Stream<GameObjectAction>): BurstButton {
-  return new BurstButton({
-    resources: resources,
-    listener: listener,
-    armdozerIcon: new WingDozerIcon(resources),
-  });
+export function wingDozerBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BurstButton {
+  const armdozerIcon = new WingDozerIcon(resources);
+  return new BurstButton(resources, gameObjectAction, armdozerIcon);
 }

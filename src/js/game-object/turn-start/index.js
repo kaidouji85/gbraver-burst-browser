@@ -11,22 +11,22 @@ import type {Stream} from "../../stream/core";
  * プレイヤーターン スタート
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerTurnStart(resources: Resources, listener: Stream<GameObjectAction>): TurnStart {
+export function playerTurnStart(resources: Resources, gameObjectAction: Stream<GameObjectAction>): TurnStart {
   const view = new PlayerTurnStartView(resources);
-  return new TurnStart(view, resources, listener);
+  return new TurnStart(view, resources, gameObjectAction);
 }
 
 /**
  * 相手ターン スタート
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyTurnStart(resources: Resources, listener: Stream<GameObjectAction>): TurnStart {
+export function enemyTurnStart(resources: Resources, gameObjectAction: Stream<GameObjectAction>): TurnStart {
   const view = new EnemyTurnStartView(resources);
-  return new TurnStart(view, resources, listener);
+  return new TurnStart(view, resources, gameObjectAction);
 }

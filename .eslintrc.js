@@ -1,4 +1,5 @@
 module.exports = {
+    "parser": "@babel/eslint-parser",
     "extends": [
         "eslint:recommended",
         "plugin:flowtype/recommended"
@@ -20,6 +21,9 @@ module.exports = {
         GBRAVER_BURST_MOBILE_RESOURCE_ROOT: true,
         GBRAVER_BURST_OWN_ROOT_URL: true,
         GBRAVER_BURST_HOW_TO_PLAY: true,
+        GBRAVER_BURST_TERMS_OF_SERVICE_URL: true,
+        GBRAVER_BURST_PRIVACY_POLICY_URL: true,
+        GBRAVER_BURST_CONTACT_URL: true,
         GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE: true,
         GBRAVER_BURST_IS_SERVICE_WORKER_USED: true,
         GBRAVER_BURST_IS_API_SERVER_ENABLE: true,

@@ -50,14 +50,14 @@ export class ShinBraverHUD implements HUDArmdozerObjects {
  * プレイヤー側 シンブレイバーHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return シンブレイバーHUD
  */
-export function playerShinBraverHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
+export function playerShinBraverHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,
-    cutIn: playerShinBraverCutIn(resources, listener),
+    cutIn: playerShinBraverCutIn(resources, gameObjectAction),
   });
 }
 
@@ -65,13 +65,13 @@ export function playerShinBraverHUD(resources: Resources, listener: Stream<GameO
  * 敵側 シンブレイバーHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return シンブレイバーHUD
  */
-export function enemyShinBraverHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
+export function enemyShinBraverHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
   return new ShinBraverHUD({
     playerId: state.playerId,
-    cutIn: enemyShinBraverCutIn(resources, listener)
+    cutIn: enemyShinBraverCutIn(resources, gameObjectAction)
   });
 }

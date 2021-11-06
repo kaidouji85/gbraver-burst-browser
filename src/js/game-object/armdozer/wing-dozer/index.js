@@ -11,22 +11,22 @@ import type {Stream} from "../../../stream/core";
  * プレイヤー側 ウィングドーザを生成する
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスト
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function PlayerWingDozer(resources: Resources, listener: Stream<GameObjectAction>): WingDozer {
+export function PlayerWingDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): WingDozer {
   const view = new PlayerWingDozerView(resources);
-  return new WingDozer(view, resources, listener);
+  return new WingDozer(view, resources, gameObjectAction);
 }
 
 /**
  * 敵側 ウィングドーザを生成する
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスト
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function EnemyWingDozer(resources: Resources, listener: Stream<GameObjectAction>): WingDozer {
+export function EnemyWingDozer(resources: Resources, gameObjectAction: Stream<GameObjectAction>): WingDozer {
   const view = new EnemyWingDozerView(resources);
-  return new WingDozer(view, resources, listener);
+  return new WingDozer(view, resources, gameObjectAction);
 }

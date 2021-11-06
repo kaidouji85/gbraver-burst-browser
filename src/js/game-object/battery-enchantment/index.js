@@ -11,22 +11,22 @@ import type {Stream} from "../../stream/core";
  * プレイヤー バッテリー増強 ポップアップ
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function playerBatteryEnchantment(resources: Resources, listener: Stream<GameObjectAction>): BatteryEnchantment {
+export function playerBatteryEnchantment(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryEnchantment {
   const view = new PlayerBatteryEnchantmentView(resources);
-  return new BatteryEnchantment(view, resources, listener);
+  return new BatteryEnchantment(view, resources, gameObjectAction);
 }
 
 /**
  * 敵 バッテリー増強 ポップアップ
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @return 生成結果
  */
-export function enemyBatteryEnchantment(resources: Resources, listener: Stream<GameObjectAction>): BatteryEnchantment {
+export function enemyBatteryEnchantment(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryEnchantment {
   const view = new EnemyBatteryEnchantmentView(resources);
-  return new BatteryEnchantment(view, resources, listener);
+  return new BatteryEnchantment(view, resources, gameObjectAction);
 }

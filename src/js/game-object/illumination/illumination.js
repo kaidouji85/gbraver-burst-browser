@@ -17,13 +17,18 @@ export class Illumination {
   _view: IlluminationView;
   _unsubscriber: Unsubscriber;
 
-  constructor(listener: Stream<GameObjectAction>) {
+  /**
+   * コンストラクタ
+   *
+   * @param gameObjectAction ゲームオブジェクトアクション
+   */
+  constructor(gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
 
     this._view = new IlluminationView();
     this._view.engage(this._model);
 
-    this._unsubscriber = listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       }

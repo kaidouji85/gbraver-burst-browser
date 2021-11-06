@@ -57,14 +57,14 @@ export class GaiHUD implements HUDPilotObjects {
  * プレイヤー側 ガイHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return ガイHUD
  */
-export function playerGaiHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): GaiHUD {
+export function playerGaiHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): GaiHUD {
   return new GaiHUD( {
     playerId: state.playerId,
-    cutIn: playerGaiCutIn(resources, listener)
+    cutIn: playerGaiCutIn(resources, gameObjectAction)
   })
 }
 
@@ -72,13 +72,13 @@ export function playerGaiHUD(resources: Resources, listener: Stream<GameObjectAc
  * 敵側 ガイHUD
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤーの状態
  * @return ガイHUD
  */
-export function enemyGaiHUD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): GaiHUD {
+export function enemyGaiHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): GaiHUD {
   return new GaiHUD( {
     playerId: state.playerId,
-    cutIn: enemyGaiCutIn(resources, listener)
+    cutIn: enemyGaiCutIn(resources, gameObjectAction)
   })
 }

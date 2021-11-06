@@ -12,21 +12,22 @@ import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/core";
 import {change} from "./animation/change";
 
-type Param = {
-  listener: Stream<GameObjectAction>,
-  view: BatteryNumberView
-};
-
 /** バッテリー数字 */
 export class BatteryNumber {
   _model: BatteryNumberModel;
   _view: BatteryNumberView;
   _unsubscriber: Unsubscriber;
 
-  constructor(param: Param) {
+  /**
+   * コンストラクタ
+   *
+   * @param view ビュー
+   * @param gameObjectAction ゲームオブジェクトアクション
+   */
+  constructor(view: BatteryNumberView, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
-    this._view = param.view;
-    this._unsubscriber = param.listener.subscribe(action => {
+    this._view = view;
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
         this._update();
       } else if (action.type === 'PreRender') {

@@ -14,24 +14,35 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {NPCBattle} from "./in-progress/npc-battle/npc-battle";
-import {createInitialNPCBattle, createNPCBattlePlayer, findCourse, isNPCBattleEnd, levelUpOrNot} from "./in-progress/npc-battle/npc-battle";
+import {
+  createInitialNPCBattle,
+  createNPCBattlePlayer,
+  findCourse,
+  isNPCBattleEnd,
+  levelUpOrNot
+} from "./in-progress/npc-battle/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
 import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
-import type {EndBattle, SelectionComplete} from "./actions/game-actions";
+import type {EndBattle, EndNetworkError, GameAction, SelectionComplete} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
-import type {LoginCheck, CasualMatch as CasualMatchSDK} from '@gbraver-burst-network/core';
+import type {
+  CasualMatch as CasualMatchSDK,
+  LoginCheck,
+  Logout,
+  UniversalLogin
+} from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
-import {getPostNetworkError, postNetworkErrorLabel} from "./in-progress/network-error";
-import {UniversalLogin} from "@gbraver-burst-network/core/lib/login";
+import {SuddenlyBattleEndMonitor} from "./api/suddenly-battle-end-monitor";
+import {map} from "../stream/operator";
 
 /** 本クラスで利用するAPIサーバの機能 */
-interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK {}
+interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -39,6 +50,12 @@ type Param = {
   resourceRoot: ResourceRoot,
   /** 遊び方動画のURL */
   howToPlayMovieURL: string,
+  /** 利用規約ページのURL */
+  termsOfServiceURL: string,
+  /** 問い合わせページのURL */
+  contactURL: string,
+  /** プライバシーポリシーページのURL */
+  privacyPolicyURL: string,
   /** FPS統計を表示するか否か、trueで表示する */
   isPerformanceStatsVisible: boolean,
   /** サービスワーカーを利用するか否か、trueで利用する */
@@ -54,9 +71,13 @@ export class Game {
   _isPerformanceStatsVisible: boolean;
   _isServiceWorkerUsed: boolean;
   _howToPlayMovieURL: string;
+  _termsOfServiceURL: string;
+  _privacyPolicyURL: string;
+  _contactURL: string;
   _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
+  _suddenlyBattleEndMonitor: SuddenlyBattleEndMonitor;
   _resize: Stream<Resize>;
   _vh: CssVH;
   _fader: DOMFader;
@@ -79,12 +100,17 @@ export class Game {
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
     this._howToPlayMovieURL = param.howToPlayMovieURL;
+    this._termsOfServiceURL = param.termsOfServiceURL;
+    this._privacyPolicyURL = param.privacyPolicyURL;
+    this._contactURL = param.contactURL;
     this._isAPIServerEnable = param.isAPIServerEnable;
 
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
     this._vh = new CssVH(this._resize);
+
     this._api = param.api;
+    this._suddenlyBattleEndMonitor = new SuddenlyBattleEndMonitor();
 
     this._fader = new DOMFader();
     this._interruptScenes = new InterruptScenes();
@@ -103,10 +129,12 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
-    const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(), 
-      this._domDialogs.gameActionNotifier()];
+    const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
+      this._domDialogs.gameActionNotifier(),
+      this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)))];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'EndBattle') { this._onEndBattle(action) }
+      else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
       else if (action.type === 'GameStart') { this._onGameStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
@@ -115,9 +143,9 @@ export class Game {
       else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
+      else if (action.type === 'Logout') { this._onLogout() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
-      else if (action.type === 'NetworkError') { this._onNetworkError() }
-      else if (action.type === 'EndNetworkError') { this._onEndNetworkError() }
+      else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
     }));
   }
 
@@ -175,10 +203,16 @@ export class Game {
 
     const resources: Resources = this._resources;
     const loginCheck = async (): Promise<boolean> => {
-      const subFlow = {type: 'LoginCheck'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
       this._domDialogs.startWaiting('ログインチェック中......');
-      const isLogin = this._apiErrorHandling(() => this._api.isLogin());
+      const isLogin = await (async () => {
+        try {
+          return await this._api.isLogin();
+        } catch (e) {
+          const postNetworkError = {type: 'Close'};
+          this._domDialogs.startNetworkError(resources, postNetworkError);
+          throw e;     
+        }
+      })();
       this._domDialogs.hidden();
       return isLogin;
     };
@@ -206,6 +240,7 @@ export class Game {
    * ユニバーサルログイン
    */
   async _onUniversalLogin(): Promise<void> {
+    await this._fader.fadeOut();
     await this._api.gotoLoginPage();
   }
 
@@ -214,6 +249,15 @@ export class Game {
    */
   _onLoginCancel(): void {
     this._domDialogs.hidden();
+  }
+
+  /**
+   * ログアウト
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onLogout(): Promise<void> {
+    await this._fader.fadeOut();
+    await this._api.logout();
   }
 
   /**
@@ -236,29 +280,11 @@ export class Game {
   }
 
   /**
-   * 通信エラーが発生した
-   */
-  _onNetworkError() {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
-    const postNetworError = getPostNetworkError(this._inProgress);
-    const label = postNetworkErrorLabel(postNetworError);
-    this._domDialogs.startNetworkError(resources, label);
-  }
-
-  /**
    * 通信エラーダイアログを閉じる
-   * 
-   * なお、本メソッドが呼ばれるまでの流れを
-   *   (1)通信エラーダイアログ表示
-   *   (2)何等かの処理 or 待ち
-   *   (3)本メソッド呼び出し
-   * とすると、(2)でthis._inProgressは変更されていない想定である
+   *
+   * @param action アクション
    */
-  async _onEndNetworkError() {
+  async _onEndNetworkError(action: EndNetworkError) {
     if (!this._resources) {
       return;
     }
@@ -275,17 +301,12 @@ export class Game {
       await this._startTitle(resources);
       await this._fader.fadeIn();
     };
-    const postProcessing = getPostNetworkError(this._inProgress);
-    const handler = () => {
-      switch(postProcessing) {
-        case 'Close':
-          return close();
-        case 'GotoTitle':
-        default:
-          return gotoTitle();
-      }
-    };
-    await handler();
+
+    if (action.postNetworkError.type === 'Close') {
+      await close();
+    } else if (action.postNetworkError.type === 'GotoTitle') {
+      await gotoTitle();
+    }
   }
 
   /**
@@ -308,7 +329,16 @@ export class Game {
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
-      const battle = await this._apiErrorHandling(() => this._api.startCasualMatch(action.armdozerId, action.pilotId));
+      const battle = await (async () => {
+        try {
+          return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
+        } catch(e) {
+          const postNetworkError = {type: 'GotoTitle'};
+          this._domDialogs.startNetworkError(resources, postNetworkError);
+          throw e;
+        }
+      })();
+      this._suddenlyBattleEndMonitor.bind(battle);
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
@@ -318,10 +348,16 @@ export class Game {
       await this._fader.fadeIn();
 
       const progress = async (v) =>  {
-        this._domDialogs.startWaiting('通信中......');
-        const update = await this._apiErrorHandling(() => battle.progress(v));
-        this._domDialogs.hidden();
-        return update;
+        try {
+          this._domDialogs.startWaiting('通信中......');
+          const update = await battle.progress(v);
+          this._domDialogs.hidden();
+          return update;
+        } catch(e) {
+          const postNetworkError = {type: 'GotoTitle'};
+          this._domDialogs.startNetworkError(resources, postNetworkError);
+          throw e;
+        }
       };
       const battleScene = this._tdScenes.startBattle(resources, {progress}, battle.player,
         battle.enemy, battle.initialState);
@@ -376,6 +412,7 @@ export class Game {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
+      this._suddenlyBattleEndMonitor.unbind();
       await this._domScenes.startNPCEnding(resources);
       await this._fader.fadeIn();
     };
@@ -394,6 +431,20 @@ export class Game {
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
+  }
+
+  /**
+   * バトル強制終了時の処理
+   */
+  _onSuddenlyEndBattle(): void {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const postNetworkError = {type: 'GotoTitle'};
+    this._domDialogs.startNetworkError(resources, postNetworkError);
+    this._suddenlyBattleEndMonitor.unbind();
   }
 
   /**
@@ -437,30 +488,15 @@ export class Game {
 
   /**
    * タイトル画面を開始するヘルパーメソッド
-   * いかなる場合でもcanCasualMatchに同じ値をセットするために、
-   * ヘルパーメソッド化した
-   *
+   * いかなる場合でもisLogin、canCasualMatch、termsOfServiceURL、privacyPolicyURL
+   * に同じ値をセットするために、ヘルパーメソッド化した
+   *    
    * @param resources リソース管理オブジェクト
    * @return タイトル画面
    */
-  _startTitle(resources: Resources): Promise<Title> {
-    return this._domScenes.startTitle(resources, this._isAPIServerEnable);
-  }
-
-  /**
-   * エラーハンドリング付きでAPI通信を行う
-   * 本クラスではAPIを直接呼び出さずに、
-   * 本メソッド経由で呼び出すことを想定している
-   *
-   * @param fn API通信を行うコールバック関数
-   * @return 通信レスポンス
-   */
-  async _apiErrorHandling<X>(fn: () => Promise<X>): Promise<X> {
-    try {
-      return await fn();
-    } catch(error) {
-      this._onNetworkError();
-      throw error;
-    }
+  async _startTitle(resources: Resources): Promise<Title> {
+    const isLogin = await this._api.isLogin();
+    return this._domScenes.startTitle(resources, isLogin, this._isAPIServerEnable,
+      this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
   }
 }

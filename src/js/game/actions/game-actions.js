@@ -1,6 +1,7 @@
 // @flow
 
 import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
+import type {PostNetworkError} from '../dom-dialogs/network-error/post-network-error';
 
 /** ゲームスタート */
 export type GameStart = {
@@ -47,6 +48,11 @@ export type EndBattle = {
   gameEnd: GameEnd,
 }
 
+/** バトル強制終了 */
+export type SuddenlyBattleEnd = {
+  type: 'SuddenlyBattleEnd'
+};
+
 /**
  * NPC ルート エンディング 終了
  */
@@ -64,14 +70,17 @@ export type LoginCancel = {
   type: 'LoginCancel'
 };
 
-/** 通信エラーが発生した */
-export type NetworkError = {
-  type: 'NetworkError'
+/** ログアウト */
+export type Logout = {
+  type: 'Logout'
 };
+
 
 /** 通信エラーダイアログを閉じる */
 export type EndNetworkError = {
-  type: 'EndNetworkError'
+  type: 'EndNetworkError',
+  /** ダイアログを閉じた後の処理に必要な情報 */
+  postNetworkError: PostNetworkError,
 };
 
 /**
@@ -84,8 +93,9 @@ export type GameAction = GameStart
  | SelectionComplete
  | SelectionCancel
  | EndBattle
+ | SuddenlyBattleEnd
  | EndNPCEnding
  | UniversalLogin
  | LoginCancel
- | NetworkError
+ | Logout
  | EndNetworkError;

@@ -68,13 +68,13 @@ export class WingDozerTD implements WingDozerTDField, TDArmdozerObjects {
  * プレイヤー 3Dレイヤー ウィングドーザ 3Dレイヤー
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerWingDozerTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): WingDozerTD {
+export function playerWingDozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): WingDozerTD {
   return new WingDozerTD(state.playerId, {
-    wingDozer: PlayerWingDozer(resources, listener)
+    wingDozer: PlayerWingDozer(resources, gameObjectAction)
   });
 }
 
@@ -82,12 +82,12 @@ export function playerWingDozerTD(resources: Resources, listener: Stream<GameObj
  * 敵 3Dレイヤー ウィングドーザ 3Dレイヤー
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyWingDozerTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): WingDozerTD {
+export function enemyWingDozerTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): WingDozerTD {
   return new WingDozerTD(state.playerId, {
-    wingDozer: EnemyWingDozer(resources, listener)
+    wingDozer: EnemyWingDozer(resources, gameObjectAction)
   });
 }

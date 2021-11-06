@@ -24,9 +24,13 @@ const PADDING_BOTTOM = 80;
 
 /** コンストラクタのパラメータ */
 type Param = {
+  /** リソース管理オブジェクト */
   resources: Resources,
-  listener: Stream<GameObjectAction>,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /** アームドーザアイコン */
   armdozerIcon: ArmdozerIcon,
+  /** ボタンを押した時に呼ばれるコールバック関数 */
   onPush: () => void,
 };
 
@@ -39,6 +43,11 @@ export class BurstButtonView {
   _overlap: ButtonOverlap;
   _group: typeof THREE.Group;
 
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this._group = new THREE.Group();
     this._group.scale.set(GROUP_SCALE, GROUP_SCALE, GROUP_SCALE);
@@ -65,7 +74,7 @@ export class BurstButtonView {
     this._overlap = circleButtonOverlap({
       radius: 200,
       segments: 32,
-      listener: param.listener,
+      gameObjectAction: param.gameObjectAction,
       onButtonPush: ()=> {
         param.onPush();
       }

@@ -17,21 +17,21 @@ import {
  * アームドーザIDに対応したバーストボタンを生成する
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param armDozerId アームドーザID
  * @return バーストボタン
  */
-export function createBurstButton(resources: Resources, listener: Stream<GameObjectAction>, armDozerId: ArmDozerId): BurstButton {
+export function createBurstButton(resources: Resources, gameObjectAction: Stream<GameObjectAction>, armDozerId: ArmDozerId): BurstButton {
   switch (armDozerId) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return shinBraverBurstButton(resources, listener);
+      return shinBraverBurstButton(resources, gameObjectAction);
     case ArmDozerIdList.NEO_LANDOZER:
-      return neoLandozerBurstButton(resources, listener);
+      return neoLandozerBurstButton(resources, gameObjectAction);
     case ArmDozerIdList.LIGHTNING_DOZER:
-      return lightningDozerBurstButton(resources, listener);
+      return lightningDozerBurstButton(resources, gameObjectAction);
     case ArmDozerIdList.WING_DOZER:
-      return wingDozerBurstButton(resources, listener);
+      return wingDozerBurstButton(resources, gameObjectAction);
     default:
-      return shinBraverBurstButton(resources, listener);
+      return shinBraverBurstButton(resources, gameObjectAction);
   }
 }

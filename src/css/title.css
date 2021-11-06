@@ -26,6 +26,42 @@
   }
 }
 
+.title__login {
+  position: absolute;
+  top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
+  right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
+  color: var(--button-font-color);
+  background-color: var(--button-background-color);
+  height: calc(var(--responsive-font-size) * 2.5);
+  padding: 0 calc(var(--responsive-font-size) * 1.5);
+  border: var(--button-border);
+  font-size: calc(var(--responsive-font-size));
+  border-radius: calc(var(--responsive-font-size) * 0.3);
+  box-shadow: var(--button-box-shadow);
+}
+
+.title__login--invisible {
+  display: none;
+}
+
+.title__logout {
+  position: absolute;
+  top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
+  right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
+  color: var(--button-font-color);
+  background-color: var(--sub-button-background-color);
+  height: calc(var(--responsive-font-size) * 2.5);
+  padding: 0 calc(var(--responsive-font-size) * 1.5);
+  border: var(--button-border);
+  font-size: calc(var(--responsive-font-size));
+  border-radius: calc(var(--responsive-font-size) * 0.3);
+  box-shadow: var(--button-box-shadow);
+}
+
+.title__logout--invisible {
+  display: none;
+}
+
 .title__contents {
   display: flex;
   flex-direction: column;
@@ -36,16 +72,6 @@
 .title__contents__logo {
   height: 35vh;
   object-fit: contain;
-}
-
-.title__contents__copy-rights {
-  display: flex;
-  flex-direction: column;
-  font-size: calc(var(--responsive-font-size) * 0.8);
-  margin-top: calc(var(--responsive-font-size) * 0.5);
-  background-color: rgba(10, 10, 10, 0.5);
-  padding: calc(var(--responsive-font-size) * 0.5);
-  border-radius: calc(var(--responsive-font-size) * 0.5);
 }
 
 .title__contents__controllers {
@@ -66,15 +92,51 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.title__contents__controllers__how-to-play{
-  background-color: var(--sub-button-background-color);
-}
-
 .title__contents__controllers__game-start,
-.title__contents__controllers__casual-match {
+.title__contents__controllers__casual-match,
+.title__contents__controllers__how-to-play {
   background-color: var(--button-background-color);
 }
 
 .title__contents__controllers__casual-match--invisible {
   display: none;
+}
+
+.title__footer {
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: baseline;
+  font-size: var(--responsive-font-size);
+  background-color: rgba(10, 10, 10, 0.8);
+  padding-top: calc(var(--responsive-font-size) * 0.2);
+  padding-bottom: max(calc(var(--responsive-font-size) * 0.2), var(--safe-area-bottom));
+  padding-right: max(var(--responsive-font-size), var(--safe-area-right));
+  padding-left: max(var(--responsive-font-size), var(--safe-area-left));
+}
+
+.title__footer__copy-rights {
+  font-size: calc(var(--responsive-font-size) * 0.8);
+  margin-right: calc(var(--responsive-font-size) * 2);
+}
+
+.title__footer__terms-of-service {
+  text-decoration: none;
+  color: var(--button-font-color);
+  margin-right: calc(var(--responsive-font-size) * 2);
+}
+
+.title__footer__privacy-policy {
+  text-decoration: none;
+  color: var(--button-font-color);
+  margin-right: calc(var(--responsive-font-size) * 2);
+}
+
+.title__footer__contact {
+  text-decoration: none;
+  color: var(--button-font-color);
 }

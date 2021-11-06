@@ -26,13 +26,13 @@ export class BatteryEnchantment {
    *
    * @param view ビュー
    * @param resources リソース管理オブジェクト
-   * @param listener イベントリスナ
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: BatteryEnchantmentView, resources: Resources, listener: Stream<GameObjectAction>) {
+  constructor(view: BatteryEnchantmentView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
     this._sounds = new BatteryEnchantmentSounds(resources);
-    this._unsubscriber = listener.subscribe(action => {
+    this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
         this._onUpdate();
       } else if (action.type === 'PreRender') {

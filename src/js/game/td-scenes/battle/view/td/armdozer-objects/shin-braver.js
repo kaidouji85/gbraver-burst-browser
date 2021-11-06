@@ -68,13 +68,13 @@ export class ShinBraverTD implements ShinBraverTDField, TDArmdozerObjects {
  * プレイヤー 3Dレイヤー シンブレイバー 3Dレイヤー
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function playerShinBraverTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): ShinBraverTD {
+export function playerShinBraverTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
-    shinBraver: PlayerShinBraver(resources, listener)
+    shinBraver: PlayerShinBraver(resources, gameObjectAction)
   });
 }
 
@@ -82,12 +82,12 @@ export function playerShinBraverTD(resources: Resources, listener: Stream<GameOb
  * 敵 3Dレイヤー シンブレイバー 3Dレイヤー
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー情報
  * @return 生成結果
  */
-export function enemyShinBraverTD(resources: Resources, listener: Stream<GameObjectAction>, state: Player): ShinBraverTD {
+export function enemyShinBraverTD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): ShinBraverTD {
   return new ShinBraverTD(state.playerId, {
-    shinBraver: EnemyShinBraver(resources, listener)
+    shinBraver: EnemyShinBraver(resources, gameObjectAction)
   });
 }

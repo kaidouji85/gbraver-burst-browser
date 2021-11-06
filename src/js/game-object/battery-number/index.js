@@ -7,25 +7,26 @@ import {EnemyBatteryNumberView} from "./view/enemy-battery-number-view";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/core";
 
-type Param = {
-  resources: Resources,
-  listener: Stream<GameObjectAction>
-};
-
-/** プレイヤーのバッテリービュー */
-export function playerBatteryNumber(param: Param): BatteryNumber {
-  const view = new PlayerBatteryNumberView(param.resources);
-  return new BatteryNumber({
-    listener: param.listener,
-    view: view
-  });
+/**
+ * プレイヤーのバッテリービュー
+ *
+ * @param resources リソース管理オブジェクト
+ * @param gameObjectAction ゲームオブジェクトアクション
+ * @return バッテリービュー
+ */
+export function playerBatteryNumber(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryNumber {
+  const view = new PlayerBatteryNumberView(resources);
+  return new BatteryNumber(view, gameObjectAction);
 }
 
-/** 敵のバッテリービュー */
-export function enemyBatteryNumber(param: Param): BatteryNumber {
-  const view = new EnemyBatteryNumberView(param.resources);
-  return new BatteryNumber({
-    listener: param.listener,
-    view: view
-  });
+/**
+ * 敵のバッテリービュー
+ *
+ * @param resources リソース管理オブジェクト
+ * @param gameObjectAction ゲームオブジェクトアクション
+ * @return バッテリービュー
+ */
+export function enemyBatteryNumber(resources: Resources, gameObjectAction: Stream<GameObjectAction>): BatteryNumber {
+  const view = new EnemyBatteryNumberView(resources);
+  return new BatteryNumber(view, gameObjectAction);
 }

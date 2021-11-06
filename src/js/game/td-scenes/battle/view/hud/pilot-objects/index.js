@@ -15,22 +15,22 @@ import {enemyTsubasaHUD, playerTsubasaHUD} from "./tsubasa";
  * プレイヤー側 HUDパイロット
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー状態
  * @return HUDパイロット
  */
-export function playerHUDPilotObjects(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
+export function playerHUDPilotObjects(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
-      return playerShinyaHUD(resources, listener, state);
+      return playerShinyaHUD(resources, gameObjectAction, state);
     case PilotIds.GAI:
-      return playerGaiHUD(resources, listener, state);
+      return playerGaiHUD(resources, gameObjectAction, state);
     case PilotIds.RAITO:
-      return playerRaitoHUD(resources, listener, state);
+      return playerRaitoHUD(resources, gameObjectAction, state);
     case PilotIds.TSUBASA:
-      return playerTsubasaHUD(resources, listener, state);
+      return playerTsubasaHUD(resources, gameObjectAction, state);
     default:
-      return playerShinyaHUD(resources, listener, state);
+      return playerShinyaHUD(resources, gameObjectAction, state);
   }
 }
 
@@ -38,21 +38,21 @@ export function playerHUDPilotObjects(resources: Resources, listener: Stream<Gam
  * 敵側 HUDパイロット
  *
  * @param resources リソース管理オブジェクト
- * @param listener イベントリスナ
+ * @param gameObjectAction ゲームオブジェクトアクション
  * @param state プレイヤー状態
  * @return HUDパイロット
  */
-export function enemyHUDPilotObjects(resources: Resources, listener: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
+export function enemyHUDPilotObjects(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDPilotObjects {
   switch (state.pilot.id) {
     case PilotIds.SHINYA:
-      return enemyShinyaHUD(resources, listener, state);
+      return enemyShinyaHUD(resources, gameObjectAction, state);
     case PilotIds.GAI:
-      return enemyGaiHUD(resources, listener, state);
+      return enemyGaiHUD(resources, gameObjectAction, state);
     case PilotIds.RAITO:
-      return enemyRaitoHUD(resources, listener, state);
+      return enemyRaitoHUD(resources, gameObjectAction, state);
     case PilotIds.TSUBASA:
-      return enemyTsubasaHUD(resources, listener, state);
+      return enemyTsubasaHUD(resources, gameObjectAction, state);
     default:
-      return enemyShinyaHUD(resources, listener, state);
+      return enemyShinyaHUD(resources, gameObjectAction, state);
   }
 }

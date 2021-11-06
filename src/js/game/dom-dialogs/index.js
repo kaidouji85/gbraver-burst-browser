@@ -9,6 +9,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import {LoginDialog} from './login/login-dialog';
 import {WaitingDialog} from "./waiting/waiting-dialog";
 import {NetworkErrorDialog} from './network-error/network-error-dialog';
+import type {PostNetworkError} from './network-error/post-network-error';
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -85,15 +86,15 @@ export class DOMDialogs {
    * 通信エラーダイアログを表示する
    *
    * @param resources リソース管理オブジェクト
-   * @param postNetworkError 通信エラー後処理の文言
+   * @param postNetworkError 通信エラーの後処理情報
    */
-  startNetworkError(resources: Resources, postNetworkError: string): void {
+  startNetworkError(resources: Resources, postNetworkError: PostNetworkError): void {
     this._removeCurrentDialog();
     
     const networkError = new NetworkErrorDialog(resources, postNetworkError);
     this._unsubscribers = [
-      networkError.postNetworkErrorNotifier().subscribe(() => {
-        this._gameAction.next({type: 'EndNetworkError'});
+      networkError.postNetworkErrorNotifier().subscribe((postNetworkError) => {
+        this._gameAction.next({type: 'EndNetworkError', postNetworkError});
       })
     ];
     this._root.appendChild(networkError.getRootHTMLElement());
