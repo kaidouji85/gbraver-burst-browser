@@ -30,22 +30,22 @@ type DataIDs = {
  * ルート要素のinnerHTML
  * @param ids data-idを集めたもの
  * @param isLogin ログインしているか否かのフラグ、trueでログインしている
- * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能
+ * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
  * @param termsOfServiceURL 利用規約ページのURL
  * @param privacyPolicyURL プライバシーポリシーページのURL
  * @param contactURL 問い合わせページのURL
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
+function rootInnerHTML(ids: DataIDs, isLogin: boolean, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
   const visibleLogin = `${ROOT_CLASS_NAME}__login`;
   const invisibleLogin = `${visibleLogin}--invisible`;
-  const loginClassName = isLogin ? invisibleLogin : visibleLogin;
+  const loginClassName = (isApiServerEnable && !isLogin) ?  visibleLogin : invisibleLogin;
   const visibleLogout = `${ROOT_CLASS_NAME}__logout`;
   const invisibleLogout = `${visibleLogout}--invisible`;
-  const logoutClassName = isLogin ? visibleLogout : invisibleLogout;
+  const logoutClassName = (isApiServerEnable && isLogin) ? visibleLogout : invisibleLogout;
   const visibleCasualMatch = `${ROOT_CLASS_NAME}__contents__controllers__casual-match`;
   const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
-  const casualMatchClassName = canCasualMatch ? visibleCasualMatch: invisibleCasualMatch;
+  const casualMatchClassName = isApiServerEnable ? visibleCasualMatch: invisibleCasualMatch;
   return `
     <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
     <button data-id="${ids.logout}" class="${logoutClassName}">ログアウト</button>
@@ -119,17 +119,17 @@ export class Title implements DOMScene {
    *
    * @param resources リソース管理オブジェクト
    * @param isLogin ログインしているか否か、trueでログインしている
-   * @param canCasualMatch カジュアルマッチが可能か否か、trueで可能である
+   * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
    * @param termsOfServiceURL 利用規約ページのURL
    * @param privacyPolicyURL プライバシーポリシーページのURL
    * @param contactURL 問い合わせページのURL
    */
-  constructor(resources: Resources, isLogin: boolean, canCasualMatch: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
+  constructor(resources: Resources, isLogin: boolean, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
     const dataIDs = {login: domUuid(), logout: domUuid(), logo: domUuid(), gameStart: domUuid(), 
       casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, canCasualMatch, termsOfServiceURL, privacyPolicyURL, contactURL);
+    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._root.className = ROOT_CLASS_NAME;
     const elements = extractElements(this._root, dataIDs);
 
