@@ -40,9 +40,10 @@ import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./api/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
+import type {LoggedInUserDelete, UserNameGet} from "@gbraver-burst-network/browser-core/lib";
 
 /** 本クラスで利用するAPIサーバの機能 */
-interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout {}
+interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete, UserNameGet {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -488,15 +489,21 @@ export class Game {
 
   /**
    * タイトル画面を開始するヘルパーメソッド
-   * いかなる場合でもisLogin、canCasualMatch、termsOfServiceURL、privacyPolicyURL
+   * いかなる場合でもuser、canCasualMatch、termsOfServiceURL、privacyPolicyURL
    * に同じ値をセットするために、ヘルパーメソッド化した
    *    
    * @param resources リソース管理オブジェクト
    * @return タイトル画面
    */
   async _startTitle(resources: Resources): Promise<Title> {
+    const guestUser = {type: 'GuestUser'};
+    const createLoggedInUser = async () => {
+      const userName = await this._api.getUserName();
+      return {type: 'LoggedInUser', name: userName};
+    }
     const isLogin = await this._api.isLogin();
-    return this._domScenes.startTitle(resources, isLogin, this._isAPIServerEnable,
+    const user = isLogin ? await createLoggedInUser() : guestUser;
+    return this._domScenes.startTitle(resources, user, this._isAPIServerEnable,
       this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
   }
 }
