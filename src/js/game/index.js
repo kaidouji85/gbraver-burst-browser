@@ -34,16 +34,19 @@ import type {
   CasualMatch as CasualMatchSDK,
   LoginCheck,
   Logout,
-  UniversalLogin
+  UniversalLogin,
+  UserNameGet,
+  UserPictureGet,
+  LoggedInUserDelete,
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./api/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
-import type {LoggedInUserDelete, UserNameGet} from "@gbraver-burst-network/browser-core/lib";
 
 /** 本クラスで利用するAPIサーバの機能 */
-interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete, UserNameGet {}
+interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
+  UserNameGet, UserPictureGet {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -498,8 +501,11 @@ export class Game {
   async _startTitle(resources: Resources): Promise<Title> {
     const guestUser = {type: 'GuestUser'};
     const createLoggedInUser = async () => {
-      const userName = await this._api.getUserName();
-      return {type: 'LoggedInUser', name: userName};
+      const [name, pictureURL] = await Promise.all([
+        this._api.getUserName(),
+        this._api.getUserPictureURL(),
+      ]);
+      return {type: 'LoggedInUser', name, pictureURL};
     }
     const isLogin = await this._api.isLogin();
     const user = isLogin ? await createLoggedInUser() : guestUser;

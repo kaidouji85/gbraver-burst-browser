@@ -12,5 +12,7 @@ export type GuestUser = {
 export type LoggedInUser = {
   type: 'LoggedInUser',
   /** ユーザ名 */
-  name: string
+  name: string,
+  /** 画像URL */
+  pictureURL: string,
 }

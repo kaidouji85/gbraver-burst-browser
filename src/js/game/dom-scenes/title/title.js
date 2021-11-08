@@ -41,15 +41,24 @@ function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean
   const visibleLogin = `${ROOT_CLASS_NAME}__login`;
   const invisibleLogin = `${visibleLogin}--invisible`;
   const loginClassName = (isApiServerEnable && user.type === 'GuestUser') ?  visibleLogin : invisibleLogin;
-  const visibleLogout = `${ROOT_CLASS_NAME}__logout`;
-  const invisibleLogout = `${visibleLogout}--invisible`;
-  const logoutClassName = (isApiServerEnable && user.type === 'LoggedInUser') ? visibleLogout : invisibleLogout;
+  const userName = user.type === 'LoggedInUser' ? user.name : '';
+  const userPictureURL = user.type === 'LoggedInUser' ? user.pictureURL : '';
+  const visibleUser = `${ROOT_CLASS_NAME}__user`;
+  const invisibleUser = `${visibleUser}--invisible`;
+  const userClassName = (isApiServerEnable && user.type === 'LoggedInUser') ? visibleUser : invisibleUser;
   const visibleCasualMatch = `${ROOT_CLASS_NAME}__contents__controllers__casual-match`;
   const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
   const casualMatchClassName = isApiServerEnable ? visibleCasualMatch: invisibleCasualMatch;
   return `
     <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
-    <button data-id="${ids.logout}" class="${logoutClassName}">ログアウト</button>
+    <div class="${userClassName}">
+      <img class="${userClassName}__avatar" src="${userPictureURL}">
+      <div class="${userClassName}__menu">
+        <span class="${userClassName}__menu__name">${userName}</span>
+        <div class="${userClassName}__menu__delete-account">退会</div>
+        <div data-id="${ids.logout}" class="${userClassName}__menu__logout">ログアウト</div>
+      </div>
+    </div>
     <div class="${ROOT_CLASS_NAME}__contents">
       <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
       <div class="${ROOT_CLASS_NAME}__contents__controllers">

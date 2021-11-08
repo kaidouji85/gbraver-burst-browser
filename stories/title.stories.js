@@ -15,7 +15,7 @@ export const guestUser: DOMStubStory = domStub(resources => {
 });
 
 export const loggedInUser: DOMStubStory = domStub(resources => {
-  const user = {type: 'LoggedInUser', name: 'test-user'};
+  const user = {type: 'LoggedInUser', name: 'test-user', pictureURL: 'test-picture'};
   const scene = new Title(resources, user, true, 'terms-of-service', 'privacy-policy', 'contact');
   return scene.getRootHTMLElement();
 });
