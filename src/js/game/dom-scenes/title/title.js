@@ -30,20 +30,20 @@ type DataIDs = {
 /**
  * ルート要素のinnerHTML
  * @param ids data-idを集めたもの
- * @param isLogin ログインしているか否かのフラグ、trueでログインしている
+ * @param user ユーザ情報
  * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
  * @param termsOfServiceURL 利用規約ページのURL
  * @param privacyPolicyURL プライバシーポリシーページのURL
  * @param contactURL 問い合わせページのURL
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, isLogin: boolean, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
+function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
   const visibleLogin = `${ROOT_CLASS_NAME}__login`;
   const invisibleLogin = `${visibleLogin}--invisible`;
-  const loginClassName = (isApiServerEnable && !isLogin) ?  visibleLogin : invisibleLogin;
+  const loginClassName = (isApiServerEnable && user.type === 'GuestUser') ?  visibleLogin : invisibleLogin;
   const visibleLogout = `${ROOT_CLASS_NAME}__logout`;
   const invisibleLogout = `${visibleLogout}--invisible`;
-  const logoutClassName = (isApiServerEnable && isLogin) ? visibleLogout : invisibleLogout;
+  const logoutClassName = (isApiServerEnable && user.type === 'LoggedInUser') ? visibleLogout : invisibleLogout;
   const visibleCasualMatch = `${ROOT_CLASS_NAME}__contents__controllers__casual-match`;
   const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
   const casualMatchClassName = isApiServerEnable ? visibleCasualMatch: invisibleCasualMatch;
@@ -130,8 +130,7 @@ export class Title implements DOMScene {
     const dataIDs = {login: domUuid(), logout: domUuid(), logo: domUuid(), gameStart: domUuid(), 
       casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
-    const isLogin = user.type === 'LoggedInUser';
-    this._root.innerHTML = rootInnerHTML(dataIDs, isLogin, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
+    this._root.innerHTML = rootInnerHTML(dataIDs, user, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._root.className = ROOT_CLASS_NAME;
     const elements = extractElements(this._root, dataIDs);
 
