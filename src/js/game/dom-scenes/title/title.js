@@ -54,8 +54,9 @@ function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean
     <div class="${userClassName}">
       <img class="${userClassName}__avatar" src="${userPictureURL}">
       <div class="${userClassName}__menu">
-        <span class="${userClassName}__menu__name">${userName}</span>
-        <div class="${userClassName}__menu__delete-account">退会</div>
+        <div class="${userClassName}__menu__user-name">${userName}</div>
+        <div class="${userClassName}__menu__separation"></div>
+        <div class="${userClassName}__menu__delete-account">アカウント削除</div>
         <div data-id="${ids.logout}" class="${userClassName}__menu__logout">ログアウト</div>
       </div>
     </div>
