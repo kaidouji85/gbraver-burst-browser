@@ -10,7 +10,6 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
-import type {IdPasswordLogin} from '@gbraver-burst-network/browser-core';
 import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のcssクラス名 */
@@ -73,9 +72,6 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closeButton = (closeButtonElement instanceof HTMLButtonElement) ? closeButtonElement : document.createElement('button');
   return {closer, backGround, loginButton, closeButton};
 }
-
-/** 本ダイアログで利用するAPIの機能 */
-export interface OwnAPI extends IdPasswordLogin {}
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
