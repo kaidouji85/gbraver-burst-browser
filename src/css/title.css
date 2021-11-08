@@ -82,12 +82,11 @@
 
 .title__user__menu__user-name {
   margin: var(--margin-vertical) var(--margin-horizontal);
-  margin-right: calc(var(--responsive-font-size) * 1);
 }
 
 .title__user__menu__separation {
   height: 0;
-  border-top: dashed #a9a9a9 1px;
+  border-top: solid #626262 1px;
   margin: var(--margin-vertical) 0;
 }
 
