@@ -147,6 +147,7 @@ export class Title implements DOMScene {
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
   _pushLogin: StreamSource<void>;
+  _pushDeleteAccount: StreamSource<void>;
   _pushLogout: StreamSource<void>;
   _pushGameStart: StreamSource<void>;
   _pushCasualMatch: StreamSource<void>;
@@ -200,19 +201,23 @@ export class Title implements DOMScene {
       ?.sound ?? new Howl();
 
     this._pushLogin = new RxjsStreamSource();
+    this._pushDeleteAccount = new RxjsStreamSource();
     this._pushLogout = new RxjsStreamSource();
     this._pushGameStart = new RxjsStreamSource();
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._root).subscribe(() => {
+      pushDOMStream(this._root, false, true).subscribe(() => {
         this._onRootPush();
+      }),
+      pushDOMStream(this._deleteAccount).subscribe(() => {
+        this._onPushDeleteAccount();
       }),
       pushDOMStream(this._login).subscribe(() => {
         this._onLoginPush();
       }),
-      pushDOMStream(this._avatar).subscribe(action => {
-        this._onAvatarPush(action);
+      pushDOMStream(this._avatar).subscribe(() => {
+        this._onAvatarPush();
       }),
       pushDOMStream(this._logout).subscribe(() => {
         this._onLogoutPush();
@@ -245,6 +250,15 @@ export class Title implements DOMScene {
    */
   pushLoginNotifier(): Stream<void> {
     return this._pushLogin;
+  }
+
+  /**
+   * アカウント削除ボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushDeleteAccountNotifier(): Stream<void> {
+    return this._pushDeleteAccount;
   }
 
   /**
@@ -370,14 +384,20 @@ export class Title implements DOMScene {
 
   /**
    * アバターが押された時の処理
-   * 
-   * @param action アクション
    */
-  _onAvatarPush(action: PushDOM): void {
+  _onAvatarPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
-      action.event.stopPropagation();
-      this._isUserMenuOpen = !this._isUserMenuOpen;
-      this._isUserMenuOpen ? this._openUserMenu() : this._closeUserMenu();
+      this._isUserMenuOpen ? this._closeUserMenu() : this._openUserMenu();
+    });
+  }
+
+  /**
+   * アカウント削除を押した時の処理
+   */
+  _onPushDeleteAccount(): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      this._changeValue.play();
+      this._pushDeleteAccount.next();
     });
   }
 
