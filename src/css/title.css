@@ -97,9 +97,16 @@
 .title__user__menu__delete-account {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
+.title__user__menu__delete-account:hover {
+  background-color: var(--button-background-color);
+}
 
 .title__user__menu__logout {
   margin: var(--margin-vertical) var(--margin-horizontal);
+}
+
+.title__user__menu__logout:hover {
+  background-color: var(--button-background-color);
 }
 
 .title__contents {

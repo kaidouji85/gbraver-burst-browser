@@ -67,7 +67,10 @@ function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean
     <div class="${userClassName}">
       <img class="${userClassName}__avatar" data-id="${ids.avatar}" >
       <div class="${INVISIBLE_USER_MENU_CLASS}" data-id="${ids.userMenu}">
-        <div class="${USER_MENU_CLASS}__user-name">${userName}</div>
+        <div class="${USER_MENU_CLASS}__user-name">
+          <div class="${USER_MENU_CLASS}__user-name__prefix">ユーザ名</div>
+          <div class="${USER_MENU_CLASS}__user-name__value">${userName}</div>
+        </div>
         <div class="${USER_MENU_CLASS}__separation"></div>
         <div class="${USER_MENU_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
         <div class="${USER_MENU_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
@@ -361,18 +364,21 @@ export class Title implements DOMScene {
   _onLogoutPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
       this._changeValue.play();
-      await pop(this._logout);
       this._pushLogout.next();
     });
   }
 
   /**
    * アバターが押された時の処理
+   * 
+   * @param action アクション
    */
   _onAvatarPush(action: PushDOM): void {
-    action.event.stopPropagation();
-    this._isUserMenuOpen = !this._isUserMenuOpen;
-    this._isUserMenuOpen ? this._openUserMenu() : this._closeUserMenu();
+    this._exclusive.execute(async (): Promise<void> => {
+      action.event.stopPropagation();
+      this._isUserMenuOpen = !this._isUserMenuOpen;
+      this._isUserMenuOpen ? this._openUserMenu() : this._closeUserMenu();
+    });
   }
 
   /**
