@@ -13,6 +13,7 @@ import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleUser} from "./title-user";
+import type {PushDOM} from "../../../dom/push/push-dom";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -36,6 +37,7 @@ const INVISIBLE_CASUAL_MATCH_CLASS = `${CASUAL_MATCH_CLASS}--invisible`
 /** data-idを集めたもの */
 type DataIDs = {
   login: string,
+  userMenu: string,
   avatar: string,
   deleteAccount: string,
   logout: string,
@@ -64,7 +66,7 @@ function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean
     <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
     <div class="${userClassName}">
       <img class="${userClassName}__avatar" data-id="${ids.avatar}" >
-      <div class="${INVISIBLE_USER_MENU_CLASS}">
+      <div class="${INVISIBLE_USER_MENU_CLASS}" data-id="${ids.userMenu}">
         <div class="${USER_MENU_CLASS}__user-name">${userName}</div>
         <div class="${USER_MENU_CLASS}__separation"></div>
         <div class="${USER_MENU_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
@@ -91,6 +93,7 @@ function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean
 /** ルート要素の子孫要素 */
 type Elements = {
   login: HTMLElement,
+  userMenu: HTMLElement,
   avatar: HTMLImageElement,
   deleteAccount: HTMLElement,
   logout: HTMLElement,
@@ -109,6 +112,7 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const login = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement('div');
+  const userMenu = root.querySelector(`[data-id="${ids.userMenu}"]`) ?? document.createElement('div');
   const avatarElement = root.querySelector(`[data-id="${ids.avatar}"]`);
   const avatar = (avatarElement instanceof HTMLImageElement) ? avatarElement : new Image();
   const deleteAccount = root.querySelector(`[data-id="${ids.deleteAccount}"]`) ?? document.createElement('div');
@@ -118,13 +122,15 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  return {login, avatar, deleteAccount, logout, logo, gameStart, casualMatch, howToPlay};
+  return {login, userMenu, avatar, deleteAccount, logout, logo, gameStart, casualMatch, howToPlay};
 }
 
 /** タイトル */
 export class Title implements DOMScene {
   _exclusive: Exclusive;
+  _isUserMenuOpen: boolean;
   _login: HTMLElement;
+  _userMenu: HTMLElement;
   _avatar: HTMLElement;
   _deleteAccount: HTMLElement;
   _logout: HTMLElement;
@@ -156,13 +162,15 @@ export class Title implements DOMScene {
    */
   constructor(resources: Resources, user: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
-    const dataIDs = {login: domUuid(), logout: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logo: domUuid(),
+    this._isUserMenuOpen = false;
+    const dataIDs = {login: domUuid(), userMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
       gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(dataIDs, user, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._root.className = ROOT_CLASS;
     const elements = extractElements(this._root, dataIDs);
     this._login = elements.login;
+    this._userMenu = elements.userMenu;
     this._avatar = elements.avatar;
     this._deleteAccount = elements.deleteAccount;
     this._logout = elements.logout;
@@ -194,8 +202,14 @@ export class Title implements DOMScene {
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
     this._unsubscribers = [
+      pushDOMStream(this._root).subscribe(() => {
+        this._onRootPush();
+      }),
       pushDOMStream(this._login).subscribe(() => {
         this._onLoginPush();
+      }),
+      pushDOMStream(this._avatar).subscribe(action => {
+        this._onAvatarPush(action);
       }),
       pushDOMStream(this._logout).subscribe(() => {
         this._onLogoutPush();
@@ -289,6 +303,14 @@ export class Title implements DOMScene {
   }
 
   /**
+   * ルート要素が押された時の処理
+   * 本画面でウインドウ外が押された時に呼び出される想定
+   */
+  _onRootPush(): void {
+    this._isUserMenuOpen && this._closeUserMenu();
+  }
+
+  /**
    * ゲームスタートが押された際の処理
    */
   _onGameStartPush(): void {
@@ -342,5 +364,30 @@ export class Title implements DOMScene {
       await pop(this._logout);
       this._pushLogout.next();
     });
+  }
+
+  /**
+   * アバターが押された時の処理
+   */
+  _onAvatarPush(action: PushDOM): void {
+    action.event.stopPropagation();
+    this._isUserMenuOpen = !this._isUserMenuOpen;
+    this._isUserMenuOpen ? this._openUserMenu() : this._closeUserMenu();
+  }
+
+  /**
+   * ユーザメニューを開く
+   */
+  _openUserMenu(): void {
+    this._isUserMenuOpen = true;
+    this._userMenu.className = USER_MENU_CLASS;
+  }
+
+  /**
+   * ユーザメニューを閉じる
+   */
+  _closeUserMenu(): void {
+    this._isUserMenuOpen = false;
+    this._userMenu.className = INVISIBLE_USER_MENU_CLASS;
   }
 }
