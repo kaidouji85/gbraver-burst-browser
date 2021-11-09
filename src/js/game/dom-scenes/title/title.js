@@ -14,8 +14,24 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleUser} from "./title-user";
 
-/** ルート要素のcssクラス名 */
-const ROOT_CLASS_NAME = 'title';
+/** ルート要素 class属性 */
+const ROOT_CLASS = 'title';
+/** ログインボタン class属性 */
+const LOGIN_CLASS = `${ROOT_CLASS}__login`;
+/** ログインボタン 非表示 class属性 */
+const INVISIBLE_LOGIN_CLASS = `${LOGIN_CLASS}--invisible`;
+/** ユーザ情報 class属性 */
+const USER_CLASS = `${ROOT_CLASS}__user`;
+/** ユーザ情報 非表示 class属性 */
+const INVISIBLE_USER_CLASS = `${USER_CLASS}--invisible`;
+/** ユーザメニュー class属性 */
+const USER_MENU_CLASS = `${USER_CLASS}__menu`;
+/** ユーザメニュー 非表示 class属性 */
+const INVISIBLE_USER_MENU_CLASS = `${USER_MENU_CLASS}--invisible`;
+/** カジュアルマッチボタン class属性 */
+const CASUAL_MATCH_CLASS = `${ROOT_CLASS}__contents__controllers__casual-match`;
+/** カジュアルマッチボタン 非表示 class属性 */
+const INVISIBLE_CASUAL_MATCH_CLASS = `${CASUAL_MATCH_CLASS}--invisible`
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -40,40 +56,34 @@ type DataIDs = {
  * @return innerHTML
  */
 function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
-  const visibleLogin = `${ROOT_CLASS_NAME}__login`;
-  const invisibleLogin = `${visibleLogin}--invisible`;
-  const loginClassName = (isApiServerEnable && user.type === 'GuestUser') ?  visibleLogin : invisibleLogin;
+  const loginClassName = (isApiServerEnable && user.type === 'GuestUser') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
   const userName = user.type === 'LoggedInUser' ? user.name : '';
-  const visibleUser = `${ROOT_CLASS_NAME}__user`;
-  const invisibleUser = `${visibleUser}--invisible`;
-  const userClassName = (isApiServerEnable && user.type === 'LoggedInUser') ? visibleUser : invisibleUser;
-  const visibleCasualMatch = `${ROOT_CLASS_NAME}__contents__controllers__casual-match`;
-  const invisibleCasualMatch = `${visibleCasualMatch}--invisible`
-  const casualMatchClassName = isApiServerEnable ? visibleCasualMatch: invisibleCasualMatch;
+  const userClassName = (isApiServerEnable && user.type === 'LoggedInUser') ? USER_CLASS : INVISIBLE_USER_CLASS;
+  const casualMatchClassName = isApiServerEnable ? CASUAL_MATCH_CLASS: INVISIBLE_CASUAL_MATCH_CLASS;
   return `
     <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
     <div class="${userClassName}">
       <img class="${userClassName}__avatar" data-id="${ids.avatar}" >
-      <div class="${userClassName}__menu">
-        <div class="${userClassName}__menu__user-name">${userName}</div>
-        <div class="${userClassName}__menu__separation"></div>
-        <div class="${userClassName}__menu__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
-        <div class="${userClassName}__menu__logout" data-id="${ids.logout}">ログアウト</div>
+      <div class="${INVISIBLE_USER_MENU_CLASS}">
+        <div class="${USER_MENU_CLASS}__user-name">${userName}</div>
+        <div class="${USER_MENU_CLASS}__separation"></div>
+        <div class="${USER_MENU_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
+        <div class="${USER_MENU_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
       </div>
     </div>
-    <div class="${ROOT_CLASS_NAME}__contents">
-      <img class="${ROOT_CLASS_NAME}__contents__logo" data-id="${ids.logo}">
-      <div class="${ROOT_CLASS_NAME}__contents__controllers">
-        <button class="${ROOT_CLASS_NAME}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
-        <button class="${ROOT_CLASS_NAME}__contents__controllers__game-start" data-id="${ids.gameStart}">ゲームスタート</button>
+    <div class="${ROOT_CLASS}__contents">
+      <img class="${ROOT_CLASS}__contents__logo" data-id="${ids.logo}">
+      <div class="${ROOT_CLASS}__contents__controllers">
+        <button class="${ROOT_CLASS}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
+        <button class="${ROOT_CLASS}__contents__controllers__game-start" data-id="${ids.gameStart}">ゲームスタート</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
       </div>
     </div>
-    <div class="${ROOT_CLASS_NAME}__footer">
-      <span class="${ROOT_CLASS_NAME}__footer__copy-rights">(C) 2020 Yuusuke Takeuchi</span>
-      <a class="${ROOT_CLASS_NAME}__footer__terms-of-service" href="${termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
-      <a class="${ROOT_CLASS_NAME}__footer__privacy-policy" href="${privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
-      <a class="${ROOT_CLASS_NAME}__footer__contact" href="${contactURL}" target="_blank" rel="noopener">問い合わせ</a>
+    <div class="${ROOT_CLASS}__footer">
+      <span class="${ROOT_CLASS}__footer__copy-rights">(C) 2020 Yuusuke Takeuchi</span>
+      <a class="${ROOT_CLASS}__footer__terms-of-service" href="${termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
+      <a class="${ROOT_CLASS}__footer__privacy-policy" href="${privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a class="${ROOT_CLASS}__footer__contact" href="${contactURL}" target="_blank" rel="noopener">問い合わせ</a>
     </div>
   `;
 }
@@ -150,7 +160,7 @@ export class Title implements DOMScene {
       gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(dataIDs, user, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
-    this._root.className = ROOT_CLASS_NAME;
+    this._root.className = ROOT_CLASS;
     const elements = extractElements(this._root, dataIDs);
     this._login = elements.login;
     this._avatar = elements.avatar;

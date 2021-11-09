@@ -80,6 +80,10 @@
   min-width: 30vw;
 }
 
+.title__user__menu--invisible {
+  display: none;
+}
+
 .title__user__menu__user-name {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
