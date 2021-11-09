@@ -13,7 +13,6 @@ import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleUser} from "./title-user";
-import type {PushDOM} from "../../../dom/push/push-dom";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
