@@ -148,6 +148,7 @@ export class Game {
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
       else if (action.type === 'Logout') { this._onLogout() }
+      else if (action.type === 'AccountDeleteConsent') { this._onAccountDeleteConsent() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
     }));
@@ -262,6 +263,13 @@ export class Game {
   async _onLogout(): Promise<void> {
     await this._fader.fadeOut();
     await this._api.logout();
+  }
+
+  /**
+   * アカウント削除同意
+   */
+  _onAccountDeleteConsent() {
+    console.log('account delete consent');
   }
 
   /**

@@ -89,6 +89,9 @@ export class DOMScenes {
       scene.pushLogoutNotifier().subscribe(() => {
         this._gameAction.next({type: 'Logout'});
       }),
+      scene.pushDeleteAccountNotifier().subscribe(() => {
+        this._gameAction.next({type: 'AccountDeleteConsent'});
+      }),
       scene.pushGameStartNotifier().subscribe(() => {
         this._gameAction.next({type: 'GameStart'});
       }),

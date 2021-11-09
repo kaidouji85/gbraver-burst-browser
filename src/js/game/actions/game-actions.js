@@ -75,6 +75,10 @@ export type Logout = {
   type: 'Logout'
 };
 
+/** アカウント削除同意 */
+export type AccountDeleteConsent = {
+  type: 'AccountDeleteConsent'
+}
 
 /** 通信エラーダイアログを閉じる */
 export type EndNetworkError = {
@@ -98,4 +102,5 @@ export type GameAction = GameStart
  | UniversalLogin
  | LoginCancel
  | Logout
+ | AccountDeleteConsent
  | EndNetworkError;
