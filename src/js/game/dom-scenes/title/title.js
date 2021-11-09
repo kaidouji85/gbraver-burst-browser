@@ -20,6 +20,8 @@ const ROOT_CLASS_NAME = 'title';
 /** data-idを集めたもの */
 type DataIDs = {
   login: string,
+  avatar: string,
+  deleteAccount: string,
   logout: string,
   logo: string,
   gameStart: string,
@@ -42,7 +44,6 @@ function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean
   const invisibleLogin = `${visibleLogin}--invisible`;
   const loginClassName = (isApiServerEnable && user.type === 'GuestUser') ?  visibleLogin : invisibleLogin;
   const userName = user.type === 'LoggedInUser' ? user.name : '';
-  const userPictureURL = user.type === 'LoggedInUser' ? user.pictureURL : '';
   const visibleUser = `${ROOT_CLASS_NAME}__user`;
   const invisibleUser = `${visibleUser}--invisible`;
   const userClassName = (isApiServerEnable && user.type === 'LoggedInUser') ? visibleUser : invisibleUser;
@@ -52,12 +53,12 @@ function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean
   return `
     <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
     <div class="${userClassName}">
-      <img class="${userClassName}__avatar" src="${userPictureURL}">
+      <img class="${userClassName}__avatar" data-id="${ids.avatar}" >
       <div class="${userClassName}__menu">
         <div class="${userClassName}__menu__user-name">${userName}</div>
         <div class="${userClassName}__menu__separation"></div>
-        <div class="${userClassName}__menu__delete-account">アカウント削除</div>
-        <div data-id="${ids.logout}" class="${userClassName}__menu__logout">ログアウト</div>
+        <div class="${userClassName}__menu__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
+        <div class="${userClassName}__menu__logout" data-id="${ids.logout}">ログアウト</div>
       </div>
     </div>
     <div class="${ROOT_CLASS_NAME}__contents">
@@ -80,6 +81,8 @@ function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean
 /** ルート要素の子孫要素 */
 type Elements = {
   login: HTMLElement,
+  avatar: HTMLImageElement,
+  deleteAccount: HTMLElement,
   logout: HTMLElement,
   logo: HTMLImageElement,
   gameStart: HTMLElement,
@@ -96,25 +99,31 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const login = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement('div');
+  const avatarElement = root.querySelector(`[data-id="${ids.avatar}"]`);
+  const avatar = (avatarElement instanceof HTMLImageElement) ? avatarElement : new Image();
+  const deleteAccount = root.querySelector(`[data-id="${ids.deleteAccount}"]`) ?? document.createElement('div');
   const logout = root.querySelector(`[data-id="${ids.logout}"]`) ?? document.createElement('div');
   const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
   const logo = (logoElement instanceof HTMLImageElement) ? logoElement : new Image();
   const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  return {login, logout, logo, gameStart, casualMatch, howToPlay};
+  return {login, avatar, deleteAccount, logout, logo, gameStart, casualMatch, howToPlay};
 }
 
 /** タイトル */
 export class Title implements DOMScene {
   _exclusive: Exclusive;
   _login: HTMLElement;
+  _avatar: HTMLElement;
+  _deleteAccount: HTMLElement;
   _logout: HTMLElement;
   _root: HTMLElement;
   _gameStart: HTMLElement;
   _casualMatch: HTMLElement;
   _howToPlay: HTMLElement;
   _isTitleBackLoaded: Promise<void>;
+  _isAvatarLoaded: Promise<void>;
   _isLogoLoaded: Promise<void>;
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
@@ -137,22 +146,25 @@ export class Title implements DOMScene {
    */
   constructor(resources: Resources, user: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
-    const dataIDs = {login: domUuid(), logout: domUuid(), logo: domUuid(), gameStart: domUuid(), 
-      casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
+    const dataIDs = {login: domUuid(), logout: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logo: domUuid(),
+      gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(dataIDs, user, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._root.className = ROOT_CLASS_NAME;
     const elements = extractElements(this._root, dataIDs);
-
-    this._isLogoLoaded = waitElementLoaded(elements.logo);
-    elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)
-      ?.path ?? '';
-
     this._login = elements.login;
+    this._avatar = elements.avatar;
+    this._deleteAccount = elements.deleteAccount;
     this._logout = elements.logout;
     this._gameStart = elements.gameStart;
     this._casualMatch = elements.casualMatch;
     this._howToPlay = elements.howToPlay;
+
+    this._isAvatarLoaded = (user.type === 'LoggedInUser') ? waitElementLoaded(this._avatar) : Promise.resolve();
+    this._avatar.src = (user.type === 'LoggedInUser') ? user.pictureURL : '';
+
+    this._isLogoLoaded = waitElementLoaded(elements.logo);
+    elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
 
     const titleBackImage = new Image();
     this._isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
@@ -261,6 +273,7 @@ export class Title implements DOMScene {
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
       this._isTitleBackLoaded,
+      this._isAvatarLoaded,
       this._isLogoLoaded,
     ]);
   }
