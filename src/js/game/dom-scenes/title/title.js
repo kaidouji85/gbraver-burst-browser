@@ -131,7 +131,6 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 /** タイトル */
 export class Title implements DOMScene {
   _exclusive: Exclusive;
-  _isAccountMenuOpen: boolean;
   _login: HTMLElement;
   _accountMenu: HTMLElement;
   _avatar: HTMLElement;
@@ -166,7 +165,6 @@ export class Title implements DOMScene {
    */
   constructor(resources: Resources, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
-    this._isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
       gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
@@ -327,9 +325,62 @@ export class Title implements DOMScene {
    */
   _onRootPush(action: PushDOM): void {
     action.event.stopPropagation();
-    this._isAccountMenuOpen && this._closeAccountMenu();
+    if (this._isAccountMenuOpen()) {
+      this._changeValue.play();  
+      this._closeAccountMenu();
+    }
   }
 
+  /**
+   * ログインが押された際の処理
+   * 
+   * @param action アクション
+   */
+  _onLoginPush(action: PushDOM): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
+      this._pushButton.play();
+      await pop(this._login);
+      this._pushLogin.next();
+    });
+  }
+
+  /**
+   * アバターが押された時の処理
+   * 
+   * @param action アクション
+   */
+  _onAvatarPush(action: PushDOM): void {
+    action.event.stopPropagation();
+    action.event.preventDefault();
+    this._changeValue.play();
+    this._isAccountMenuOpen() ? this._closeAccountMenu() : this._openAccountMenu();
+  }
+
+  /**
+   * アカウント削除を押した時の処理
+   * 
+   * @param action アクション
+   */
+  _onPushDeleteAccount(action: PushDOM): void {
+    action.event.stopPropagation();
+    action.event.preventDefault();
+    this._changeValue.play();
+    this._pushDeleteAccount.next();
+  }
+
+  /**
+   * ログアウトが押された際の処理
+   * 
+   * @param action アクション
+   */
+  _onLogoutPush(action: PushDOM): void {
+    action.event.stopPropagation();
+    action.event.preventDefault();
+    this._changeValue.play();
+    this._pushLogout.next();
+  }
+  
   /**
    * ゲームスタートが押された際の処理
    * 
@@ -373,63 +424,18 @@ export class Title implements DOMScene {
   }
 
   /**
-   * ログインが押された際の処理
+   * アカウントメニューが開かれているか否かを判定する
    * 
-   * @param action アクション
+   * @return 判定結果、trueでアカウントメニューが開かれている
    */
-  _onLoginPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this._pushButton.play();
-      await pop(this._login);
-      this._pushLogin.next();
-    });
+  _isAccountMenuOpen(): boolean {
+    return this._accountMenu.className === ACCOUNT_MENU_CLASS;
   }
-
-  /**
-   * アバターが押された時の処理
-   * 
-   * @param action アクション
-   */
-  _onAvatarPush(action: PushDOM): void {
-    action.event.stopPropagation();
-    action.event.preventDefault();
-    this._isAccountMenuOpen ? this._closeAccountMenu() : this._openAccountMenu();
-  }
-
-  /**
-   * アカウント削除を押した時の処理
-   * 
-   * @param action アクション
-   */
-  _onPushDeleteAccount(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
-      action.event.stopPropagation();
-      action.event.preventDefault();
-      this._changeValue.play();
-      this._pushDeleteAccount.next();
-    });
-  }
-
-  /**
-   * ログアウトが押された際の処理
-   * 
-   * @param action アクション
-   */
-     _onLogoutPush(action: PushDOM): void {
-      this._exclusive.execute(async (): Promise<void> => {
-        action.event.stopPropagation();
-        action.event.preventDefault();
-        this._changeValue.play();
-        this._pushLogout.next();
-      });
-    }
 
   /**
    * アカウントメニューを開く
    */
   _openAccountMenu(): void {
-    this._isAccountMenuOpen = true;
     this._accountMenu.className = ACCOUNT_MENU_CLASS;
   }
 
@@ -437,7 +443,6 @@ export class Title implements DOMScene {
    * アカウントメニューを閉じる
    */
   _closeAccountMenu(): void {
-    this._isAccountMenuOpen = false;
     this._accountMenu.className = INVISIBLE_ACCOUNT_MENU_CLASS;
   }
 }
