@@ -7,6 +7,7 @@ import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {pop} from "../../../../dom/animation/pop";
 import {PathIds} from "../../../../resource/path";
 import type {Stream} from "../../../../stream/core";
+import {tap} from '../../../../stream/operator';
 
 const ROOT_CLASS_NAME = 'player-select__armdozer-icon';
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
@@ -49,7 +50,10 @@ export class ArmdozerIcon {
     this._check.hidden = true;
     this._root.appendChild(this._check);
 
-    this._select = pushDOMStream(this._root);
+    this._select = pushDOMStream(this._root)
+      .chain(tap(action => {
+        action.event.preventDefault();
+      }));
 
   }
 

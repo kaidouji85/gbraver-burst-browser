@@ -3,6 +3,7 @@
 import {merge as mergeRXJS} from "rxjs";
 import {
   map as mapRXJS,
+  tap as tapRXJS,
   filter as filterRXJS,
   first as firstRXJS,
   share as shareRXJS
@@ -21,6 +22,19 @@ import {toStream} from "./rxjs";
 export const map = <T, U>(fn: T => U): Operator<T, U> => (origin: Stream<T>): Stream<U> => {
   const observable = origin.getRxjsObservable()
     .pipe(mapRXJS(fn));
+  return toStream(observable);
+}
+
+/**
+ * ストリームデータを変更せずに副作用のある操作を行う
+ * 
+ * @template T ストリームデータ型
+ * @param fn 副作用操作を行う関数
+ * @return オペレータ
+ */
+export const tap = <T>(fn: T => void): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
+  const observable = origin.getRxjsObservable()
+    .pipe(tapRXJS(fn));
   return toStream(observable);
 }
 
