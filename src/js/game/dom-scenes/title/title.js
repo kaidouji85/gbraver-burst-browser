@@ -20,14 +20,14 @@ const ROOT_CLASS = 'title';
 const LOGIN_CLASS = `${ROOT_CLASS}__login`;
 /** ログインボタン 非表示 class属性 */
 const INVISIBLE_LOGIN_CLASS = `${LOGIN_CLASS}--invisible`;
-/** ユーザ情報 class属性 */
-const USER_CLASS = `${ROOT_CLASS}__user`;
-/** ユーザ情報 非表示 class属性 */
-const INVISIBLE_USER_CLASS = `${USER_CLASS}--invisible`;
-/** ユーザメニュー class属性 */
-const USER_MENU_CLASS = `${USER_CLASS}__menu`;
-/** ユーザメニュー 非表示 class属性 */
-const INVISIBLE_USER_MENU_CLASS = `${USER_MENU_CLASS}--invisible`;
+/** アカウント情報 class属性 */
+const ACCOUNT_CLASS = `${ROOT_CLASS}__user`;
+/** アカウント情報 非表示 class属性 */
+const INVISIBLE_ACCOUNT_CLASS = `${ACCOUNT_CLASS}--invisible`;
+/** アカウントメニュー class属性 */
+const ACCOUNT_MENU_CLASS = `${ACCOUNT_CLASS}__menu`;
+/** アカウントメニュー 非表示 class属性 */
+const INVISIBLE_ACCOUNT_MENU_CLASS = `${ACCOUNT_MENU_CLASS}--invisible`;
 /** カジュアルマッチボタン class属性 */
 const CASUAL_MATCH_CLASS = `${ROOT_CLASS}__contents__controllers__casual-match`;
 /** カジュアルマッチボタン 非表示 class属性 */
@@ -36,7 +36,7 @@ const INVISIBLE_CASUAL_MATCH_CLASS = `${CASUAL_MATCH_CLASS}--invisible`
 /** data-idを集めたもの */
 type DataIDs = {
   login: string,
-  userMenu: string,
+  accountMenu: string,
   avatar: string,
   deleteAccount: string,
   logout: string,
@@ -49,30 +49,30 @@ type DataIDs = {
 /**
  * ルート要素のinnerHTML
  * @param ids data-idを集めたもの
- * @param user ユーザ情報
+ * @param account アカウント情報
  * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
  * @param termsOfServiceURL 利用規約ページのURL
  * @param privacyPolicyURL プライバシーポリシーページのURL
  * @param contactURL 問い合わせページのURL
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
-  const loginClassName = (isApiServerEnable && user.type === 'GuestUser') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
-  const userName = user.type === 'LoggedInUser' ? user.name : '';
-  const userClassName = (isApiServerEnable && user.type === 'LoggedInUser') ? USER_CLASS : INVISIBLE_USER_CLASS;
+function rootInnerHTML(ids: DataIDs, account: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
+  const loginClassName = (isApiServerEnable && account.type === 'GuestUser') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
+  const accountName = account.type === 'LoggedInUser' ? account.name : '';
+  const accountClassName = (isApiServerEnable && account.type === 'LoggedInUser') ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
   const casualMatchClassName = isApiServerEnable ? CASUAL_MATCH_CLASS: INVISIBLE_CASUAL_MATCH_CLASS;
   return `
     <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
-    <div class="${userClassName}">
-      <img class="${userClassName}__avatar" data-id="${ids.avatar}" >
-      <div class="${INVISIBLE_USER_MENU_CLASS}" data-id="${ids.userMenu}">
-        <div class="${USER_MENU_CLASS}__user-name">
-          <div class="${USER_MENU_CLASS}__user-name__prefix">ユーザ名</div>
-          <div class="${USER_MENU_CLASS}__user-name__value">${userName}</div>
+    <div class="${accountClassName}">
+      <img class="${accountClassName}__avatar" data-id="${ids.avatar}" >
+      <div class="${INVISIBLE_ACCOUNT_MENU_CLASS}" data-id="${ids.accountMenu}">
+        <div class="${ACCOUNT_MENU_CLASS}__user-name">
+          <div class="${ACCOUNT_MENU_CLASS}__user-name__prefix">アカウント名</div>
+          <div class="${ACCOUNT_MENU_CLASS}__user-name__value">${accountName}</div>
         </div>
-        <div class="${USER_MENU_CLASS}__separation"></div>
-        <div class="${USER_MENU_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
-        <div class="${USER_MENU_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
+        <div class="${ACCOUNT_MENU_CLASS}__separation"></div>
+        <div class="${ACCOUNT_MENU_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
+        <div class="${ACCOUNT_MENU_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
       </div>
     </div>
     <div class="${ROOT_CLASS}__contents">
@@ -95,7 +95,7 @@ function rootInnerHTML(ids: DataIDs, user: TitleUser, isApiServerEnable: boolean
 /** ルート要素の子孫要素 */
 type Elements = {
   login: HTMLElement,
-  userMenu: HTMLElement,
+  accountMenu: HTMLElement,
   avatar: HTMLImageElement,
   deleteAccount: HTMLElement,
   logout: HTMLElement,
@@ -114,7 +114,7 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const login = root.querySelector(`[data-id="${ids.login}"]`) ?? document.createElement('div');
-  const userMenu = root.querySelector(`[data-id="${ids.userMenu}"]`) ?? document.createElement('div');
+  const accountMenu = root.querySelector(`[data-id="${ids.accountMenu}"]`) ?? document.createElement('div');
   const avatarElement = root.querySelector(`[data-id="${ids.avatar}"]`);
   const avatar = (avatarElement instanceof HTMLImageElement) ? avatarElement : new Image();
   const deleteAccount = root.querySelector(`[data-id="${ids.deleteAccount}"]`) ?? document.createElement('div');
@@ -124,15 +124,15 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  return {login, userMenu, avatar, deleteAccount, logout, logo, gameStart, casualMatch, howToPlay};
+  return {login, accountMenu, avatar, deleteAccount, logout, logo, gameStart, casualMatch, howToPlay};
 }
 
 /** タイトル */
 export class Title implements DOMScene {
   _exclusive: Exclusive;
-  _isUserMenuOpen: boolean;
+  _isAccountMenuOpen: boolean;
   _login: HTMLElement;
-  _userMenu: HTMLElement;
+  _accountMenu: HTMLElement;
   _avatar: HTMLElement;
   _deleteAccount: HTMLElement;
   _logout: HTMLElement;
@@ -157,23 +157,23 @@ export class Title implements DOMScene {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
-   * @param user ユーザ情報
+   * @param account アカウント情報
    * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
    * @param termsOfServiceURL 利用規約ページのURL
    * @param privacyPolicyURL プライバシーポリシーページのURL
    * @param contactURL 問い合わせページのURL
    */
-  constructor(resources: Resources, user: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
+  constructor(resources: Resources, account: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
-    this._isUserMenuOpen = false;
-    const dataIDs = {login: domUuid(), userMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
+    this._isAccountMenuOpen = false;
+    const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
       gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(dataIDs, user, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
+    this._root.innerHTML = rootInnerHTML(dataIDs, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._root.className = ROOT_CLASS;
     const elements = extractElements(this._root, dataIDs);
     this._login = elements.login;
-    this._userMenu = elements.userMenu;
+    this._accountMenu = elements.accountMenu;
     this._avatar = elements.avatar;
     this._deleteAccount = elements.deleteAccount;
     this._logout = elements.logout;
@@ -181,8 +181,8 @@ export class Title implements DOMScene {
     this._casualMatch = elements.casualMatch;
     this._howToPlay = elements.howToPlay;
 
-    this._isAvatarLoaded = (user.type === 'LoggedInUser') ? waitElementLoaded(this._avatar) : Promise.resolve();
-    this._avatar.src = (user.type === 'LoggedInUser') ? user.pictureURL : '';
+    this._isAvatarLoaded = (account.type === 'LoggedInUser') ? waitElementLoaded(this._avatar) : Promise.resolve();
+    this._avatar.src = (account.type === 'LoggedInUser') ? account.pictureURL : '';
 
     this._isLogoLoaded = waitElementLoaded(elements.logo);
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
@@ -323,7 +323,7 @@ export class Title implements DOMScene {
    * 本画面でウインドウ外が押された時に呼び出される想定
    */
   _onRootPush(): void {
-    this._isUserMenuOpen && this._closeUserMenu();
+    this._isAccountMenuOpen && this._closeAccountMenu();
   }
 
   /**
@@ -386,7 +386,7 @@ export class Title implements DOMScene {
    */
   _onAvatarPush(): void {
     this._exclusive.execute(async (): Promise<void> => {
-      this._isUserMenuOpen ? this._closeUserMenu() : this._openUserMenu();
+      this._isAccountMenuOpen ? this._closeAccountMenu() : this._openAccountMenu();
     });
   }
 
@@ -401,18 +401,18 @@ export class Title implements DOMScene {
   }
 
   /**
-   * ユーザメニューを開く
+   * アカウントメニューを開く
    */
-  _openUserMenu(): void {
-    this._isUserMenuOpen = true;
-    this._userMenu.className = USER_MENU_CLASS;
+  _openAccountMenu(): void {
+    this._isAccountMenuOpen = true;
+    this._accountMenu.className = ACCOUNT_MENU_CLASS;
   }
 
   /**
-   * ユーザメニューを閉じる
+   * アカウントメニューを閉じる
    */
-  _closeUserMenu(): void {
-    this._isUserMenuOpen = false;
-    this._userMenu.className = INVISIBLE_USER_MENU_CLASS;
+  _closeAccountMenu(): void {
+    this._isAccountMenuOpen = false;
+    this._accountMenu.className = INVISIBLE_ACCOUNT_MENU_CLASS;
   }
 }
