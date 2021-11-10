@@ -85,7 +85,12 @@
 }
 
 .title__account__menu__name {
+  display: flex;
   margin: var(--margin-vertical) var(--margin-horizontal);
+}
+
+.title__account__menu__name__prefix {
+  margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .title__account__menu__separation {
