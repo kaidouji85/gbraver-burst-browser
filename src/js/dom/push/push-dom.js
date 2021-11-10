@@ -7,7 +7,9 @@ import {map, merge} from '../../stream/operator';
 
 /** HTML要素が押下された時のアクション */
 export type PushDOM = {
-  type: 'PushDOM'
+  type: 'PushDOM',
+  /** イベントオブジェクト */
+  event: Event,
 };
 
 /**
@@ -19,16 +21,14 @@ export type PushDOM = {
 export function pushDOMStream(dom: HTMLElement): Stream<PushDOM> {
   const clickRXJS = fromEvent(dom, 'click');
   const click = toStream<MouseEvent>(clickRXJS)
-    .chain(map(e => {
-      e.preventDefault();
-      return {type: 'PushDOM'};
+    .chain(map(event => {
+      return {type: 'PushDOM', event};
     }));
 
   const touchStartRXJS = fromEvent(dom, 'touchstart');
   const touchStart = toStream<TouchEvent>(touchStartRXJS)
-    .chain(map(e => {
-      e.preventDefault();
-      return {type: 'PushDOM'};
+    .chain(map(event => {
+      return {type: 'PushDOM', event};
     }));
 
   return click
