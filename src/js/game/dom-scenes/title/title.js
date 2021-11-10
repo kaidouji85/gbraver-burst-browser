@@ -4,6 +4,7 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {pushDOMStream} from "../../../dom/push/push-dom";
+import type {PushDOM} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {pop} from "../../../dom/animation/pop";
 import {Howl} from "howler";
@@ -206,29 +207,29 @@ export class Title implements DOMScene {
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._root, false, true).subscribe(() => {
-        this._onRootPush();
+      pushDOMStream(this._root).subscribe(action => {
+        this._onRootPush(action);
       }),
-      pushDOMStream(this._deleteAccount).subscribe(() => {
-        this._onPushDeleteAccount();
+      pushDOMStream(this._login).subscribe(action => {
+        this._onLoginPush(action);
       }),
-      pushDOMStream(this._login).subscribe(() => {
-        this._onLoginPush();
+      pushDOMStream(this._avatar).subscribe(action => {
+        this._onAvatarPush(action);
       }),
-      pushDOMStream(this._avatar).subscribe(() => {
-        this._onAvatarPush();
+      pushDOMStream(this._deleteAccount).subscribe(action => {
+        this._onPushDeleteAccount(action);
       }),
-      pushDOMStream(this._logout).subscribe(() => {
-        this._onLogoutPush();
+      pushDOMStream(this._logout).subscribe(action => {
+        this._onLogoutPush(action);
       }),
-      pushDOMStream(this._gameStart).subscribe(() => {
-        this._onGameStartPush();
+      pushDOMStream(this._gameStart).subscribe(action => {
+        this._onGameStartPush(action);
       }),
-      pushDOMStream(this._casualMatch).subscribe(() => {
-        this._onCasualMatchPush();
+      pushDOMStream(this._casualMatch).subscribe(action => {
+        this._onCasualMatchPush(action);
       }),
-      pushDOMStream(this._howToPlay).subscribe(() => {
-        this._onHowToPlayPush();
+      pushDOMStream(this._howToPlay).subscribe(action => {
+        this._onHowToPlayPush(action);
       })
     ];
   }
@@ -321,16 +322,73 @@ export class Title implements DOMScene {
   /**
    * ルート要素が押された時の処理
    * 本画面でウインドウ外が押された時に呼び出される想定
+   * 
+   * @param action アクション
    */
-  _onRootPush(): void {
-    this._isAccountMenuOpen && this._closeAccountMenu();
+  _onRootPush(action: PushDOM): void {
+    action.event.stopPropagation();
+    if (this._isAccountMenuOpen) {
+      this._closeAccountMenu();
+    }
   }
 
   /**
-   * ゲームスタートが押された際の処理
+   * ログインが押された際の処理
+   * 
+   * @param action アクション
    */
-  _onGameStartPush(): void {
+  _onLoginPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
+      this._pushButton.play();
+      await pop(this._login);
+      this._pushLogin.next();
+    });
+  }
+
+  /**
+   * アバターが押された時の処理
+   * 
+   * @param action アクション
+   */
+  _onAvatarPush(action: PushDOM): void {
+    action.event.stopPropagation();
+    action.event.preventDefault();
+    this._isAccountMenuOpen ? this._closeAccountMenu() : this._openAccountMenu();
+  }
+
+  /**
+   * アカウント削除を押した時の処理
+   * 
+   * @param action アクション
+   */
+  _onPushDeleteAccount(action: PushDOM): void {
+    action.event.stopPropagation();
+    action.event.preventDefault();
+    this._changeValue.play();
+    this._pushDeleteAccount.next();
+  }
+
+  /**
+   * ログアウトが押された際の処理
+   * 
+   * @param action アクション
+   */
+  _onLogoutPush(action: PushDOM): void {
+    action.event.stopPropagation();
+    action.event.preventDefault();
+    this._changeValue.play();
+    this._pushLogout.next();
+  }
+  
+  /**
+   * ゲームスタートが押された際の処理
+   * 
+   * @param action アクション
+   */
+  _onGameStartPush(action: PushDOM): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._pushButton.play();
       await pop(this._gameStart);
       this._pushGameStart.next();
@@ -339,10 +397,12 @@ export class Title implements DOMScene {
 
   /**
    * カジュアルマッチが押された時の処理
-   * @private
+   *
+   * @param action アクション
    */
-  _onCasualMatchPush(): void {
+  _onCasualMatchPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._pushButton.play();
       await pop(this._casualMatch);
       this._pushCasualMatch.next();
@@ -351,52 +411,15 @@ export class Title implements DOMScene {
 
   /**
    * 遊び方が押された際の処理
+   * 
+   * @param action アクション
    */
-  _onHowToPlayPush(): void {
+  _onHowToPlayPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._changeValue.play();
       await pop(this._howToPlay);
       this._pushHowToPlay.next();
-    });
-  }
-
-  /**
-   * ログインが押された際の処理
-   */
-  _onLoginPush(): void {
-    this._exclusive.execute(async (): Promise<void> => {
-      this._pushButton.play();
-      await pop(this._login);
-      this._pushLogin.next();
-    });
-  }
-
-  /**
-   * ログアウトが押された際の処理
-   */
-  _onLogoutPush(): void {
-    this._exclusive.execute(async (): Promise<void> => {
-      this._changeValue.play();
-      this._pushLogout.next();
-    });
-  }
-
-  /**
-   * アバターが押された時の処理
-   */
-  _onAvatarPush(): void {
-    this._exclusive.execute(async (): Promise<void> => {
-      this._isAccountMenuOpen ? this._closeAccountMenu() : this._openAccountMenu();
-    });
-  }
-
-  /**
-   * アカウント削除を押した時の処理
-   */
-  _onPushDeleteAccount(): void {
-    this._exclusive.execute(async (): Promise<void> => {
-      this._changeValue.play();
-      this._pushDeleteAccount.next();
     });
   }
 
