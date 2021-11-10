@@ -17,11 +17,9 @@ export type PushDOM = {
  * HTML要素押下ストリーム
  *
  * @param dom 押下判定のHTML要素
- * @param isPreventDefault event.preventDefault()を呼び出すか否か、trueで呼び出す
- * @param  isStopPropagation event.stopPropagation()を呼び出すか否か、trueで呼び出す
  * @return ストリーム
  */
-export function pushDOMStream(dom: HTMLElement, isPreventDefault: boolean = true, isStopPropagation: boolean = true): Stream<PushDOM> {
+export function pushDOMStream(dom: HTMLElement): Stream<PushDOM> {
   const clickRXJS = fromEvent(dom, 'click');
   const click = toStream<MouseEvent>(clickRXJS)
     .chain(map(event => {
