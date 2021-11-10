@@ -500,24 +500,24 @@ export class Game {
 
   /**
    * タイトル画面を開始するヘルパーメソッド
-   * いかなる場合でもuser、canCasualMatch、termsOfServiceURL、privacyPolicyURL
+   * いかなる場合でもaccount、canCasualMatch、termsOfServiceURL、privacyPolicyURL
    * に同じ値をセットするために、ヘルパーメソッド化した
    *    
    * @param resources リソース管理オブジェクト
    * @return タイトル画面
    */
   async _startTitle(resources: Resources): Promise<Title> {
-    const guestUser = {type: 'GuestUser'};
-    const createLoggedInUser = async () => {
+    const guestAccount = {type: 'GuestAccount'};
+    const createLoggedInAccount = async () => {
       const [name, pictureURL] = await Promise.all([
         this._api.getUserName(),
         this._api.getUserPictureURL(),
       ]);
-      return {type: 'LoggedInUser', name, pictureURL};
+      return {type: 'LoggedInAccount', name, pictureURL};
     }
     const isLogin = await this._api.isLogin();
-    const user = isLogin ? await createLoggedInUser() : guestUser;
-    return this._domScenes.startTitle(resources, user, this._isAPIServerEnable,
+    const account = isLogin ? await createLoggedInAccount() : guestAccount;
+    return this._domScenes.startTitle(resources, account, this._isAPIServerEnable,
       this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
   }
 }

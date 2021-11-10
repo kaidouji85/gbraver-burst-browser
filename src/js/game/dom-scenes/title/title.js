@@ -12,7 +12,7 @@ import {Exclusive} from "../../../exclusive/exclusive";
 import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
-import type {TitleUser} from "./title-user";
+import type {TitleAccount} from "./title-account";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -56,10 +56,10 @@ type DataIDs = {
  * @param contactURL 問い合わせページのURL
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, account: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
-  const loginClassName = (isApiServerEnable && account.type === 'GuestUser') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
-  const accountName = account.type === 'LoggedInUser' ? account.name : '';
-  const accountClassName = (isApiServerEnable && account.type === 'LoggedInUser') ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
+function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
+  const loginClassName = (isApiServerEnable && account.type === 'GuestAccount') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
+  const accountName = account.type === 'LoggedInAccount' ? account.name : '';
+  const accountClassName = (isApiServerEnable && account.type === 'LoggedInAccount') ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
   const casualMatchClassName = isApiServerEnable ? CASUAL_MATCH_CLASS: INVISIBLE_CASUAL_MATCH_CLASS;
   return `
     <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
@@ -163,7 +163,7 @@ export class Title implements DOMScene {
    * @param privacyPolicyURL プライバシーポリシーページのURL
    * @param contactURL 問い合わせページのURL
    */
-  constructor(resources: Resources, account: TitleUser, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
+  constructor(resources: Resources, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
     this._isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
@@ -181,8 +181,8 @@ export class Title implements DOMScene {
     this._casualMatch = elements.casualMatch;
     this._howToPlay = elements.howToPlay;
 
-    this._isAvatarLoaded = (account.type === 'LoggedInUser') ? waitElementLoaded(this._avatar) : Promise.resolve();
-    this._avatar.src = (account.type === 'LoggedInUser') ? account.pictureURL : '';
+    this._isAvatarLoaded = (account.type === 'LoggedInAccount') ? waitElementLoaded(this._avatar) : Promise.resolve();
+    this._avatar.src = (account.type === 'LoggedInAccount') ? account.pictureURL : '';
 
     this._isLogoLoaded = waitElementLoaded(elements.logo);
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
