@@ -21,7 +21,7 @@ const LOGIN_CLASS = `${ROOT_CLASS}__login`;
 /** ログインボタン 非表示 class属性 */
 const INVISIBLE_LOGIN_CLASS = `${LOGIN_CLASS}--invisible`;
 /** アカウント情報 class属性 */
-const ACCOUNT_CLASS = `${ROOT_CLASS}__user`;
+const ACCOUNT_CLASS = `${ROOT_CLASS}__account`;
 /** アカウント情報 非表示 class属性 */
 const INVISIBLE_ACCOUNT_CLASS = `${ACCOUNT_CLASS}--invisible`;
 /** アカウントメニュー class属性 */
@@ -66,9 +66,9 @@ function rootInnerHTML(ids: DataIDs, account: TitleUser, isApiServerEnable: bool
     <div class="${accountClassName}">
       <img class="${accountClassName}__avatar" data-id="${ids.avatar}" >
       <div class="${INVISIBLE_ACCOUNT_MENU_CLASS}" data-id="${ids.accountMenu}">
-        <div class="${ACCOUNT_MENU_CLASS}__user-name">
-          <div class="${ACCOUNT_MENU_CLASS}__user-name__prefix">アカウント名</div>
-          <div class="${ACCOUNT_MENU_CLASS}__user-name__value">${accountName}</div>
+        <div class="${ACCOUNT_MENU_CLASS}__name">
+          <div class="${ACCOUNT_MENU_CLASS}__name__prefix">アカウント名</div>
+          <div class="${ACCOUNT_MENU_CLASS}__name__value">${accountName}</div>
         </div>
         <div class="${ACCOUNT_MENU_CLASS}__separation"></div>
         <div class="${ACCOUNT_MENU_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
