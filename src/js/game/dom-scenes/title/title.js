@@ -68,7 +68,7 @@ function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: b
       <img class="${accountClassName}__avatar" data-id="${ids.avatar}" >
       <div class="${INVISIBLE_ACCOUNT_MENU_CLASS}" data-id="${ids.accountMenu}">
         <div class="${ACCOUNT_MENU_CLASS}__name">
-          <div class="${ACCOUNT_MENU_CLASS}__name__prefix">アカウント名：</div>
+          <div class="${ACCOUNT_MENU_CLASS}__name__prefix">アカウント名</div>
           <div class="${ACCOUNT_MENU_CLASS}__name__value">${accountName}</div>
         </div>
         <div class="${ACCOUNT_MENU_CLASS}__separation"></div>
