@@ -4,6 +4,7 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {pushDOMStream} from "../../../dom/push/push-dom";
+import type {PushDOM} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {pop} from "../../../dom/animation/pop";
 import {Howl} from "howler";
@@ -161,20 +162,20 @@ export class Title implements DOMScene {
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._login).subscribe(() => {
-        this._onLoginPush();
+      pushDOMStream(this._login).subscribe(action => {
+        this._onLoginPush(action);
       }),
-      pushDOMStream(this._logout).subscribe(() => {
-        this._onLogoutPush();
+      pushDOMStream(this._logout).subscribe(action => {
+        this._onLogoutPush(action);
       }),
-      pushDOMStream(this._gameStart).subscribe(() => {
-        this._onGameStartPush();
+      pushDOMStream(this._gameStart).subscribe(action => {
+        this._onGameStartPush(action);
       }),
-      pushDOMStream(this._casualMatch).subscribe(() => {
-        this._onCasualMatchPush();
+      pushDOMStream(this._casualMatch).subscribe(action => {
+        this._onCasualMatchPush(action);
       }),
-      pushDOMStream(this._howToPlay).subscribe(() => {
-        this._onHowToPlayPush();
+      pushDOMStream(this._howToPlay).subscribe(action => {
+        this._onHowToPlayPush(action);
       })
     ];
   }
@@ -256,9 +257,12 @@ export class Title implements DOMScene {
 
   /**
    * ゲームスタートが押された際の処理
+   * 
+   * @param action アクション
    */
-  _onGameStartPush(): void {
+  _onGameStartPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._pushButton.play();
       await pop(this._gameStart);
       this._pushGameStart.next();
@@ -267,10 +271,12 @@ export class Title implements DOMScene {
 
   /**
    * カジュアルマッチが押された時の処理
-   * @private
+   *
+   * @param action アクション
    */
-  _onCasualMatchPush(): void {
+  _onCasualMatchPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._pushButton.play();
       await pop(this._casualMatch);
       this._pushCasualMatch.next();
@@ -279,9 +285,12 @@ export class Title implements DOMScene {
 
   /**
    * 遊び方が押された際の処理
+   * 
+   * @param action アクション
    */
-  _onHowToPlayPush(): void {
+  _onHowToPlayPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._changeValue.play();
       await pop(this._howToPlay);
       this._pushHowToPlay.next();
@@ -290,9 +299,12 @@ export class Title implements DOMScene {
 
   /**
    * ログインが押された際の処理
+   * 
+   * @param action アクション
    */
-  _onLoginPush(): void {
+  _onLoginPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._pushButton.play();
       await pop(this._login);
       this._pushLogin.next();
@@ -301,9 +313,12 @@ export class Title implements DOMScene {
 
   /**
    * ログアウトが押された際の処理
+   * 
+   * @param action アクション
    */
-  _onLogoutPush(): void {
+  _onLogoutPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._changeValue.play();
       await pop(this._logout);
       this._pushLogout.next();

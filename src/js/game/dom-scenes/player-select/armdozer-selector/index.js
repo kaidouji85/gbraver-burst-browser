@@ -10,6 +10,7 @@ import {ArmdozerStatus} from "./armdozer-status";
 import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../dom/push/push-dom";
+import type {PushDOM} from "../../../../dom/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createArmdozerIcon} from "./create-armdozer-icon";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
@@ -138,11 +139,11 @@ export class ArmdozerSelector {
         v.icon.selectedNotifier().subscribe(() => {
           this._onArmdozerSelect(v.armdozerId);
         })),
-      pushDOMStream(this._okButton).subscribe(() => {
-        this._onOkButtonPush();
+      pushDOMStream(this._okButton).subscribe(action => {
+        this._onOkButtonPush(action);
       }),
-      pushDOMStream(this._prevButton).subscribe(() => {
-        this._onPrevButtonPush();
+      pushDOMStream(this._prevButton).subscribe(action => {
+        this._onPrevButtonPush(action);
       }),
     ];
   }
@@ -245,9 +246,12 @@ export class ArmdozerSelector {
 
   /**
    * 決定ボタンが押された時の処理
+   * 
+   * @param action アクション
    */
-  _onOkButtonPush(): void {
+  _onOkButtonPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._decideSound.play();
       await pop(this._okButton);
       this._decide.next(this._armdozerId);
@@ -256,9 +260,12 @@ export class ArmdozerSelector {
 
   /**
    * 戻るボタンが押された時の処理
+   * 
+   * @param action アクション
    */
-  _onPrevButtonPush(): void {
+  _onPrevButtonPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._changeValueSound.play();
       await pop(this._prevButton);
       this._prev.next();
