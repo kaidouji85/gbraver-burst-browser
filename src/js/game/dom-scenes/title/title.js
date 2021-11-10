@@ -131,6 +131,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 /** タイトル */
 export class Title implements DOMScene {
   _exclusive: Exclusive;
+  _isAccountMenuOpen: boolean;
   _login: HTMLElement;
   _accountMenu: HTMLElement;
   _avatar: HTMLElement;
@@ -165,6 +166,7 @@ export class Title implements DOMScene {
    */
   constructor(resources: Resources, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
+    this._isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
       gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
     this._root = document.createElement('div');
@@ -325,8 +327,7 @@ export class Title implements DOMScene {
    */
   _onRootPush(action: PushDOM): void {
     action.event.stopPropagation();
-    if (this._isAccountMenuOpen()) {
-      this._changeValue.play();  
+    if (this._isAccountMenuOpen) {
       this._closeAccountMenu();
     }
   }
@@ -353,8 +354,7 @@ export class Title implements DOMScene {
   _onAvatarPush(action: PushDOM): void {
     action.event.stopPropagation();
     action.event.preventDefault();
-    this._changeValue.play();
-    this._isAccountMenuOpen() ? this._closeAccountMenu() : this._openAccountMenu();
+    this._isAccountMenuOpen ? this._closeAccountMenu() : this._openAccountMenu();
   }
 
   /**
@@ -424,18 +424,10 @@ export class Title implements DOMScene {
   }
 
   /**
-   * アカウントメニューが開かれているか否かを判定する
-   * 
-   * @return 判定結果、trueでアカウントメニューが開かれている
-   */
-  _isAccountMenuOpen(): boolean {
-    return this._accountMenu.className === ACCOUNT_MENU_CLASS;
-  }
-
-  /**
    * アカウントメニューを開く
    */
   _openAccountMenu(): void {
+    this._isAccountMenuOpen = true;
     this._accountMenu.className = ACCOUNT_MENU_CLASS;
   }
 
@@ -443,6 +435,7 @@ export class Title implements DOMScene {
    * アカウントメニューを閉じる
    */
   _closeAccountMenu(): void {
+    this._isAccountMenuOpen = false;
     this._accountMenu.className = INVISIBLE_ACCOUNT_MENU_CLASS;
   }
 }
