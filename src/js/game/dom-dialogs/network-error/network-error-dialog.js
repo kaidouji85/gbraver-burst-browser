@@ -7,6 +7,7 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pushDOMStream} from '../../../dom/push/push-dom';
+import type {PushDOM} from '../../../dom/push/push-dom';
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
@@ -101,8 +102,8 @@ export class NetworkErrorDialog implements DOMDialog {
 
     this._postNetworkErrorSource = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._postNetworkErrorButton).subscribe(() => {
-        this._onPostNetworkErrorButtonPush();
+      pushDOMStream(this._postNetworkErrorButton).subscribe(action => {
+        this._onPostNetworkErrorButtonPush(action);
       })
     ];
 
@@ -141,9 +142,12 @@ export class NetworkErrorDialog implements DOMDialog {
 
   /**
    * 通信エラー後処理ボタンを押した時の処理
+   * 
+   * @param action アクション
    */
-  _onPostNetworkErrorButtonPush(): void {
+  _onPostNetworkErrorButtonPush(action: PushDOM): void {
     this._exclusive.execute(async ()=> {
+      action.event.preventDefault();
       await Promise.all([
         this._pushButton.play(),
         pop(this._postNetworkErrorButton)

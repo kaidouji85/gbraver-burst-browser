@@ -10,6 +10,7 @@ import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {Exclusive} from "../../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../../dom/push/push-dom";
+import type {PushDOM} from "../../../../dom/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createPilotIcon} from "./create-pilot-icon";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
@@ -129,11 +130,11 @@ export class PilotSelector {
         v.icon.selectedNotifier().subscribe(() =>{
           this._onPilotChange(v.pilotId);
         })),
-      pushDOMStream(this._okButton).subscribe(() => {
-        this._onOkButtonPush();
+      pushDOMStream(this._okButton).subscribe(action => {
+        this._onOkButtonPush(action);
       }),
-      pushDOMStream(this._prevButton).subscribe(() => {
-        this._onPrevButtonPush();
+      pushDOMStream(this._prevButton).subscribe(action => {
+        this._onPrevButtonPush(action);
       }),
     ];
   }
@@ -254,9 +255,12 @@ export class PilotSelector {
 
   /**
    * OKボタンを押した時の処理
+   * 
+   * @param action アクション
    */
-  _onOkButtonPush(): void {
+  _onOkButtonPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._decideSound.play();
       await pop(this._okButton);
       this._decide.next(this._pilotId);
@@ -265,9 +269,12 @@ export class PilotSelector {
 
   /**
    * 戻るボタンを押した時の処理
+   * 
+   * @param action アクション
    */
-  _onPrevButtonPush(): void {
+  _onPrevButtonPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
       this._changeValueSound.play();
       await pop(this._prevButton);
       this._prev.next();

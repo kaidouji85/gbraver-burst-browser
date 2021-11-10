@@ -8,6 +8,8 @@ import {map, merge} from '../../stream/operator';
 /** HTML要素が押下された時のアクション */
 export type PushDOM = {
   type: 'PushDOM',
+  /** イベントオブジェクト */
+  event: Event,
 };
 
 // TODO アクションにEventオブジェクトをセットして、サブスクライブ側でpreventDefault、stopPropagationを直接呼び出すようにする
@@ -23,17 +25,13 @@ export function pushDOMStream(dom: HTMLElement, isPreventDefault: boolean = true
   const clickRXJS = fromEvent(dom, 'click');
   const click = toStream<MouseEvent>(clickRXJS)
     .chain(map(event => {
-      isPreventDefault && event.preventDefault();
-      isStopPropagation && event.stopPropagation();
-      return {type: 'PushDOM'};
+      return {type: 'PushDOM', event};
     }));
 
   const touchStartRXJS = fromEvent(dom, 'touchstart');
   const touchStart = toStream<TouchEvent>(touchStartRXJS)
     .chain(map(event => {
-      isPreventDefault && event.preventDefault();
-      isStopPropagation && event.stopPropagation();
-      return {type: 'PushDOM'};
+      return {type: 'PushDOM', event};
     }));
 
   return click

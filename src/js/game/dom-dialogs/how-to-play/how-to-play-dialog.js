@@ -5,6 +5,7 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {pushDOMStream} from "../../../dom/push/push-dom";
+import type {PushDOM} from "../../../dom/push/push-dom";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {DOMDialog} from "../dialog";
@@ -50,12 +51,12 @@ export class HowToPlay implements DOMDialog {
     this._close = new RxjsStreamSource();
 
     this._unsubscribers = [
-      pushDOMStream(this._closer).subscribe(() => {
-        this._onCloserPush();
+      pushDOMStream(this._closer).subscribe(action => {
+        this._onCloserPush(action);
       }),
 
-      pushDOMStream(this._root).subscribe(() => {
-        this._onPushOutsideOfDialog();
+      pushDOMStream(this._root).subscribe(action => {
+        this._onPushOutsideOfDialog(action);
       })
     ];
     this._exclusive = new Exclusive();
@@ -90,9 +91,12 @@ export class HowToPlay implements DOMDialog {
 
   /**
    * 閉じるアイコンを押した時の処理
+   * 
+   * @param action アクション
    */
-  _onCloserPush(): void {
+  _onCloserPush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void>=> {
+      action.event.preventDefault();
       await Promise.all([
         this._changeValue.play(),
         pop(this._closer, 1.3)
@@ -103,9 +107,12 @@ export class HowToPlay implements DOMDialog {
 
   /**
    * ダイアログ外を押した時の処理
+   * 
+   * @param action アクション
    */
-  _onPushOutsideOfDialog(): void {
+  _onPushOutsideOfDialog(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void>=> {
+      action.event.preventDefault();
       await this._changeValue.play();
       this._close.next();
     });

@@ -4,7 +4,7 @@ import '../css/style.css';
 import {Game} from './game/index';
 import {DefinePlugin} from "./webpack/define-plugin";
 import {createBrowserSDK} from "@gbraver-burst-network/browser-sdk";
-import {isMobile} from "./device ditect/is-mobile";
+import {isMobile} from "./device-ditect/is-mobile";
 
 /**
  * Gブレイバーバーストのエントリポイント
