@@ -1,0 +1,77 @@
+/**
+ * アカウント削除同意ダイアログ
+ */
+@media (orientation: landscape) {
+  .delete-account-consent {
+    --delete-account-consent-dialog-height: calc(var(--vh) * 50);
+    --delete-account-consent--dialog-width: calc(min(var(--delete-account-consent-dialog-height) * 16 / 9, 90vw));
+    --dialog-top: calc(var(--vh, 1vh) * 50);
+    --dialog-left: 50vw;
+    --control-button-width: calc(var(--responsive-font-size) * 10);
+    --control-button-height: calc(var(--responsive-font-size) * 3);
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .delete-account-consent {
+    display: none;
+  }
+}
+
+.delete-account-consent__background {
+  position: absolute;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.delete-account-consent__dialog {
+  width: var(--delete-account-consent--dialog-width);
+  height: var(--delete-account-consent-dialog-height);
+  top: calc(var(--vh, 1vh) * 50);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+  box-sizing: border-box;
+  padding: 0 calc(var(--responsive-font-size) * 1);
+}
+
+.delete-account-consent__dialog__caption {
+  margin-bottom: calc(var(--responsive-font-size) * 2);
+}
+
+.delete-account-consent__dialog__controllers__close {
+  width: var(--control-button-width);
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  background-color: var(--sub-button-background-color);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+  margin-right: calc(var(--responsive-font-size) * 0.5);
+}
+
+.delete-account-consent__dialog__controllers__delete-account {
+  width: var(--control-button-width);
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  background-color: var(--button-background-color);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+}

@@ -14,10 +14,15 @@ function rootInnerHTML(): string {
   return `
     <div class="${ROOT_CLASS}__background"></div>
     <div class="${ROOT_CLASS}__dialog">
-      <span class="${ROOT_CLASS}__dialog__caption">
-        アカウント削除をするとネット対戦が出来なくなります。
-        本当にアカウント削除しますか？
-      </span>
+      <div class="${ROOT_CLASS}__dialog__caption">
+        <div>アカウント削除をすると、</div>
+        <div>ネット対戦が出来なくなります。</div>
+        <div>本当にアカウント削除しますか？</div>
+      </div>
+      <div class="${ROOT_CLASS}__dialog__controllers">
+        <button class="${ROOT_CLASS}__dialog__controllers__close">閉じる</button>
+        <button class="${ROOT_CLASS}__dialog__controllers__delete-account">　アカウント削除</buton>
+      </div>
     </div>
   `;
 }
