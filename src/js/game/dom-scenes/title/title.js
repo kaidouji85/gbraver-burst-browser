@@ -326,6 +326,7 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   _onRootPush(action: PushDOM): void {
+    action.event.stopPropagation();
     if (this._isAccountMenuOpen) {
       this._closeAccountMenu();
     }
