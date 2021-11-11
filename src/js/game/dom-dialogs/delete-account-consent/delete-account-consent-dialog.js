@@ -5,7 +5,8 @@ import type {DOMScene} from "../../dom-scenes/dom-scene";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
-import type {Unsubscriber} from "../../../stream/core";
+import type {Unsubscriber, Stream, StreamSource} from "../../../stream/core";
+import {RxjsStreamSource} from "../../../stream/rxjs";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
@@ -83,6 +84,8 @@ export class DeleteAccountConsentDialog implements DOMScene {
   _closer: HTMLImageElement;
   _deleteAccountButton: HTMLButtonElement;
   _closeButton: HTMLButtonElement;
+  _deleteAccount: StreamSource<void>;
+  _closeDialog: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
@@ -105,6 +108,8 @@ export class DeleteAccountConsentDialog implements DOMScene {
     this._deleteAccountButton = elements.deleteAccountButton;
     this._closeButton = elements.closeButton;
     
+    this._deleteAccount = new RxjsStreamSource();
+    this._closeDialog = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._backGround).subscribe(action => {
         this._onPushOutsideOfDialog(action);  
@@ -140,6 +145,24 @@ export class DeleteAccountConsentDialog implements DOMScene {
   }
 
   /**
+   * アカウント削除通知
+   * 
+   * @return 通知ストリーム
+   */
+  deleteAccountNotifier(): Stream<void> {
+    return this._deleteAccount;
+  }
+
+  /**
+   * ダイアログを閉じる通知
+   * 
+   * @return 通知ストリーム
+   */
+  closeDialogNotifier(): Stream<void> {
+    return this._closeDialog;
+  }
+
+  /**
    * ダイアログ外を押した際の処理
    * 
    * @param action アクション 
@@ -148,6 +171,7 @@ export class DeleteAccountConsentDialog implements DOMScene {
     this._exclusive.execute(async (): Promise<void> => {
       action.event.stopPropagation();
       await this._changeValue.play();
+      this._closeDialog.next();
     });
   }
 
@@ -160,10 +184,11 @@ export class DeleteAccountConsentDialog implements DOMScene {
     this._exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      Promise.all([
+      await Promise.all([
         pop(this._closer, 1.3),
         this._changeValue.play()
       ]);
+      this._closeDialog.next();
     });
   }
 
@@ -176,10 +201,11 @@ export class DeleteAccountConsentDialog implements DOMScene {
     this._exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      Promise.all([
+      await Promise.all([
         pop(this._deleteAccountButton),
         this._pushButton.play(),
       ]);
+      this._deleteAccount.next();
     }); 
   }
 
@@ -196,6 +222,7 @@ export class DeleteAccountConsentDialog implements DOMScene {
         pop(this._closeButton),
         this._changeValue.play()
       ]);
+      this._closeDialog.next();
     });
   }
 }
