@@ -9,6 +9,6 @@ export default {
 };
 
 export const dialog: DOMStubStory = domStub(resources => {
-  const deleteAccountConsentDialog = new DeleteAccountConsentDialog();
+  const deleteAccountConsentDialog = new DeleteAccountConsentDialog(resources);
   return deleteAccountConsentDialog.getRootHTMLElement();
 });

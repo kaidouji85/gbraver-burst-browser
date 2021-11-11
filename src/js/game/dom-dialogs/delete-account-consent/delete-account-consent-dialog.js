@@ -1,6 +1,8 @@
 // @flow
 
 import type {DOMScene} from "../../dom-scenes/dom-scene";
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'delete-account-consent';
@@ -8,11 +10,15 @@ const ROOT_CLASS = 'delete-account-consent';
 /**
  * ルート要素のinnerHTML
  *
+ * @param resources リソース管理オブジェクト
  * @return innerHTML
  */
-function rootInnerHTML(): string {
+function rootInnerHTML(resources: Resources): string {
+  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
+    ?.path ?? '';
   return `
     <div class="${ROOT_CLASS}__background"></div>
+    <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}">
     <div class="${ROOT_CLASS}__dialog">
       <div class="${ROOT_CLASS}__dialog__caption">
         <div>アカウント削除をすると、</div>
@@ -33,10 +39,12 @@ export class DeleteAccountConsentDialog implements DOMScene {
 
   /**
    * コンストラクタ
+   * 
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
+  constructor(resources: Resources) {
     this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML();
+    this._root.innerHTML = rootInnerHTML(resources);
     this._root.className = ROOT_CLASS;
   }
 
