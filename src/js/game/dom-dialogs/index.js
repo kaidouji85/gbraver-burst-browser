@@ -10,6 +10,7 @@ import {LoginDialog} from './login/login-dialog';
 import {WaitingDialog} from "./waiting/waiting-dialog";
 import {NetworkErrorDialog} from './network-error/network-error-dialog';
 import type {PostNetworkError} from './network-error/post-network-error';
+import {DeleteAccountConsentDialog} from "./delete-account-consent/delete-account-consent-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -99,6 +100,27 @@ export class DOMDialogs {
     ];
     this._root.appendChild(networkError.getRootHTMLElement());
     this._dialog = networkError;
+  }
+
+  /**
+   * アカウント削除同意ダイアログを表示する
+   * 
+   * @param resources リソース管理オブジェクト
+   */
+  startDeleteAccountConsent(resources: Resources): void {
+    this._removeCurrentDialog();
+
+    const deleteAccountConsent = new DeleteAccountConsentDialog(resources);
+    this._unsubscribers = [
+      deleteAccountConsent.deleteAccountNotifier().subscribe(() => {
+        this._gameAction.next({type: 'DeleteAccount'});
+      }),
+      deleteAccountConsent.closeDialogNotifier().subscribe(() => {
+        this._gameAction.next({type: 'CancelAccountDeletion'});
+      }),
+    ];
+    this._root.appendChild(deleteAccountConsent.getRootHTMLElement());
+    this._dialog = deleteAccountConsent;
   }
 
   /**

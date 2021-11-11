@@ -80,6 +80,16 @@ export type AccountDeleteConsent = {
   type: 'AccountDeleteConsent'
 }
 
+/** アカウント削除 */
+export type DeleteAccount = {
+  type: 'DeleteAccount'
+};
+
+/** アカウント削除同意ダイアログを閉じる */
+export type CancelAccountDeletion = {
+  type: 'CancelAccountDeletion'
+};
+
 /** 通信エラーダイアログを閉じる */
 export type EndNetworkError = {
   type: 'EndNetworkError',
@@ -103,4 +113,6 @@ export type GameAction = GameStart
  | LoginCancel
  | Logout
  | AccountDeleteConsent
+ | DeleteAccount
+ | CancelAccountDeletion
  | EndNetworkError;
