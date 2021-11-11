@@ -326,7 +326,6 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   _onRootPush(action: PushDOM): void {
-    action.event.stopPropagation();
     if (this._isAccountMenuOpen) {
       this._closeAccountMenu();
     }
@@ -352,9 +351,13 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   _onAvatarPush(action: PushDOM): void {
-    action.event.stopPropagation();
-    action.event.preventDefault();
-    this._isAccountMenuOpen ? this._closeAccountMenu() : this._openAccountMenu();
+    if (!this._isAccountMenuOpen) {
+      action.event.stopPropagation();
+      action.event.preventDefault();
+      this._changeValue.play();
+      pop(this._avatar, 1.2);
+      this._openAccountMenu();
+    }
   }
 
   /**

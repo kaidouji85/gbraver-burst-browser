@@ -218,7 +218,7 @@ export class DeleteAccountConsentDialog implements DOMScene {
     this._exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      Promise.all([
+      await Promise.all([
         pop(this._closeButton),
         this._changeValue.play()
       ]);
