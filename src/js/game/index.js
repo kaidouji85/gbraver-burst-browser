@@ -149,6 +149,8 @@ export class Game {
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
       else if (action.type === 'Logout') { this._onLogout() }
       else if (action.type === 'AccountDeleteConsent') { this._onAccountDeleteConsent() }
+      else if (action.type === 'DeleteAccount') { this._onDeleteAccount() }
+      else if (action.type === 'CancelAccountDeletion') { this._onCancelAccountDeletion() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
     }));
@@ -268,8 +270,30 @@ export class Game {
   /**
    * アカウント削除同意
    */
-  _onAccountDeleteConsent() {
-    console.log('account delete consent');
+  _onAccountDeleteConsent(): void {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    this._domDialogs.startDeleteAccountConsent(resources);
+  }
+
+  /**
+   * アカウント削除
+   */
+  async _onDeleteAccount(): Promise<void> {
+    this._domDialogs.startWaiting('アカウント削除中')
+    await this._api.deleteLoggedInUser();
+    await this._fader.fadeOut();
+    await this._api.logout();
+  }
+
+  /**
+   * アカウント削除キャンセル
+   */
+  _onCancelAccountDeletion(): void {
+    this._domDialogs.hidden();
   }
 
   /**

@@ -363,7 +363,6 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   _onPushDeleteAccount(action: PushDOM): void {
-    action.event.stopPropagation();
     action.event.preventDefault();
     this._changeValue.play();
     this._pushDeleteAccount.next();
@@ -375,7 +374,6 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   _onLogoutPush(action: PushDOM): void {
-    action.event.stopPropagation();
     action.event.preventDefault();
     this._changeValue.play();
     this._pushLogout.next();
