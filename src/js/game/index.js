@@ -34,7 +34,10 @@ import type {
   CasualMatch as CasualMatchSDK,
   LoginCheck,
   Logout,
-  UniversalLogin
+  UniversalLogin,
+  UserNameGet,
+  UserPictureGet,
+  LoggedInUserDelete,
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
@@ -42,7 +45,8 @@ import {SuddenlyBattleEndMonitor} from "./api/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
 
 /** 本クラスで利用するAPIサーバの機能 */
-interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout {}
+interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
+  UserNameGet, UserPictureGet {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -144,6 +148,9 @@ export class Game {
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
       else if (action.type === 'Logout') { this._onLogout() }
+      else if (action.type === 'AccountDeleteConsent') { this._onAccountDeleteConsent() }
+      else if (action.type === 'DeleteAccount') { this._onDeleteAccount() }
+      else if (action.type === 'CancelAccountDeletion') { this._onCancelAccountDeletion() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
     }));
@@ -258,6 +265,35 @@ export class Game {
   async _onLogout(): Promise<void> {
     await this._fader.fadeOut();
     await this._api.logout();
+  }
+
+  /**
+   * アカウント削除同意
+   */
+  _onAccountDeleteConsent(): void {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    this._domDialogs.startDeleteAccountConsent(resources);
+  }
+
+  /**
+   * アカウント削除
+   */
+  async _onDeleteAccount(): Promise<void> {
+    this._domDialogs.startWaiting('アカウント削除中')
+    await this._api.deleteLoggedInUser();
+    await this._fader.fadeOut();
+    await this._api.logout();
+  }
+
+  /**
+   * アカウント削除キャンセル
+   */
+  _onCancelAccountDeletion(): void {
+    this._domDialogs.hidden();
   }
 
   /**
@@ -488,15 +524,24 @@ export class Game {
 
   /**
    * タイトル画面を開始するヘルパーメソッド
-   * いかなる場合でもisLogin、canCasualMatch、termsOfServiceURL、privacyPolicyURL
+   * いかなる場合でもaccount、canCasualMatch、termsOfServiceURL、privacyPolicyURL
    * に同じ値をセットするために、ヘルパーメソッド化した
    *    
    * @param resources リソース管理オブジェクト
    * @return タイトル画面
    */
   async _startTitle(resources: Resources): Promise<Title> {
+    const guestAccount = {type: 'GuestAccount'};
+    const createLoggedInAccount = async () => {
+      const [name, pictureURL] = await Promise.all([
+        this._api.getUserName(),
+        this._api.getUserPictureURL(),
+      ]);
+      return {type: 'LoggedInAccount', name, pictureURL};
+    }
     const isLogin = await this._api.isLogin();
-    return this._domScenes.startTitle(resources, isLogin, this._isAPIServerEnable,
+    const account = isLogin ? await createLoggedInAccount() : guestAccount;
+    return this._domScenes.startTitle(resources, account, this._isAPIServerEnable,
       this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
   }
 }

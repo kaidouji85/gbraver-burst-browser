@@ -8,7 +8,14 @@ export default {
   title: 'title'
 };
 
-export const Scene: DOMStubStory = domStub(resources => {
-  const scene = new Title(resources, true, true, 'terms-of-service', 'privacy-policy', 'contact');
+export const guestAccount: DOMStubStory = domStub(resources => {
+  const account = {type: 'GuestAccount'};
+  const scene = new Title(resources, account, true, 'terms-of-service', 'privacy-policy', 'contact');
+  return scene.getRootHTMLElement();
+});
+
+export const loggedInAccount: DOMStubStory = domStub(resources => {
+  const account = {type: 'LoggedInAccount', name: 'test-account', pictureURL: 'test-picture'};
+  const scene = new Title(resources, account, true, 'terms-of-service', 'privacy-policy', 'contact');
   return scene.getRootHTMLElement();
 });
