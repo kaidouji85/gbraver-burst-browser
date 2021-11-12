@@ -12,7 +12,6 @@ export type PushDOM = {
   event: Event,
 };
 
-// TODO アクションにEventオブジェクトをセットして、サブスクライブ側でpreventDefault、stopPropagationを直接呼び出すようにする
 /**
  * HTML要素押下ストリーム
  *

@@ -134,7 +134,7 @@ export class Title implements DOMScene {
   _isAccountMenuOpen: boolean;
   _login: HTMLElement;
   _accountMenu: HTMLElement;
-  _avatar: HTMLElement;
+  _avatar: HTMLImageElement;
   _deleteAccount: HTMLElement;
   _logout: HTMLElement;
   _root: HTMLElement;
