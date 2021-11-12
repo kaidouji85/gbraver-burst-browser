@@ -184,8 +184,8 @@ export class Title implements DOMScene {
     this._howToPlay = elements.howToPlay;
 
     this._isAvatarLoaded = (account.type === 'LoggedInAccount') ? waitElementLoaded(this._avatar) : Promise.resolve();
-    this._avatar.src = (account.type === 'LoggedInAccount') ? account.pictureURL : '';
-
+    this._avatar.src = (account.type === 'LoggedInAccount') ? encodeURI(account.pictureURL) : '';
+    
     this._isLogoLoaded = waitElementLoaded(elements.logo);
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
 
