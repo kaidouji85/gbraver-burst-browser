@@ -14,6 +14,7 @@ import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleAccount} from "./title-account";
+import {escapeHTML} from '../../../dom/escape/escape-html';
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -59,7 +60,7 @@ type DataIDs = {
  */
 function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
   const loginClassName = (isApiServerEnable && account.type === 'GuestAccount') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
-  const accountName = account.type === 'LoggedInAccount' ? account.name : '';
+  const accountName = account.type === 'LoggedInAccount' ? escapeHTML(account.name) : '';
   const accountClassName = (isApiServerEnable && account.type === 'LoggedInAccount') ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
   const casualMatchClassName = isApiServerEnable ? CASUAL_MATCH_CLASS: INVISIBLE_CASUAL_MATCH_CLASS;
   return `
@@ -183,8 +184,8 @@ export class Title implements DOMScene {
     this._howToPlay = elements.howToPlay;
 
     this._isAvatarLoaded = (account.type === 'LoggedInAccount') ? waitElementLoaded(this._avatar) : Promise.resolve();
-    this._avatar.src = (account.type === 'LoggedInAccount') ? account.pictureURL : '';
-
+    this._avatar.src = (account.type === 'LoggedInAccount') ? encodeURI(account.pictureURL) : '';
+    
     this._isLogoLoaded = waitElementLoaded(elements.logo);
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
 
