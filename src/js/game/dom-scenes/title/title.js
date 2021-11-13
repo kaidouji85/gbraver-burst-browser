@@ -353,9 +353,9 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   _onAvatarPush(action: PushDOM): void {
+    action.event.preventDefault();
     if (!this._isAccountMenuOpen) {
       action.event.stopPropagation();
-      action.event.preventDefault();
       this._changeValue.play();
       pop(this._avatar, 1.2);
       this._openAccountMenu();
