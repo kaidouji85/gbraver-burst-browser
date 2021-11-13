@@ -3,7 +3,7 @@
  */
 @media (orientation: landscape) {
   .delete-account-consent {
-    --delete-account-consent-dialog-height: calc(var(--vh) * 50);
+    --delete-account-consent-dialog-height: calc(var(--vh) * 80);
     --delete-account-consent-dialog-width: calc(min(var(--delete-account-consent-dialog-height) * 16 / 9, 90vw));
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
