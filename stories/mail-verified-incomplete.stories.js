@@ -9,6 +9,6 @@ export default {
 };
 
 export const scene: DOMStubStory = domStub(resources => {
-  const scene = new MailVerifiedIncomplete();
+  const scene = new MailVerifiedIncomplete('test@mail.address.com');
   return scene.getRootHTMLElement();
 });

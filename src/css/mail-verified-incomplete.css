@@ -1,0 +1,21 @@
+/**
+ * メール認証未完了画面
+ */
+@media (orientation: landscape) {
+  .mail-verified-incomplete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    padding: 5vh;
+  }
+}
+
+@media (orientation: portrait) {
+  .mail-verified-incomplete {
+    display: none;
+  }
+}
