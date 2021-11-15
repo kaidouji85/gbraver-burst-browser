@@ -19,13 +19,9 @@ function rootInnerHTML(mailAddress: string): string {
     <div class="${ROOT_CLASS}__caption">以下手順でメール認証を完了させてから、ゲームを開始してください</div>
     <ol class="${ROOT_CLASS}__procedure">
       <li class="${ROOT_CLASS}__procedure__item">${escapedMailAddress}に送信された認証メールを開く</li>
-      <li class="${ROOT_CLASS}__procedure__item">認証メールに記載された認証用リンクをブラウザで開く</li>
+      <li class="${ROOT_CLASS}__procedure__item">認証メールに記載されたVerify Linkを開く</li>
       <li class="${ROOT_CLASS}__procedure__item">Gブレイバーバーストを再読み込みする</li>
     </ol>
-    <div class="${ROOT_CLASS}__controllers">
-      <button class="${ROOT_CLASS}__controllers__login-with-another-account">別アカウントでログイン</button>
-      <button class="${ROOT_CLASS}__controllers__reload">再読み込み</button>
-    </div>
   `;
 }
 
