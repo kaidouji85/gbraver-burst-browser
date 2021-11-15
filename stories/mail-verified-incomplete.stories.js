@@ -8,7 +8,7 @@ export default {
   title: 'mail-verified-incomplete',
 };
 
-export const scene: DOMStubStory = domStub(resources => {
+export const scene: DOMStubStory = domStub(() => {
   const scene = new MailVerifiedIncomplete('test@mail.address.com');
   return scene.getRootHTMLElement();
 });

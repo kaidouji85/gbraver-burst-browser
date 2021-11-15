@@ -4,8 +4,6 @@
 @media (orientation: landscape) {
   .mail-verified-incomplete {
     --padding: 5vh;
-    --control-button-width: calc(var(--responsive-font-size) * 15);
-    --control-button-height: calc(var(--responsive-font-size) * 3);
     width: var(--screen-width);
     height: var(--screen-height);
     box-sizing: border-box;
