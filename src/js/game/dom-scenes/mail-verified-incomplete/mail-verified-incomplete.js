@@ -22,7 +22,7 @@ function rootInnerHTML(mailAddress: string): string {
   `;
 }
 
-/** メール認証未完了 */
+/** メール認証未完了画面 */
 export class MailVerifiedIncomplete implements DOMScene {
   _root: HTMLElement;
 
