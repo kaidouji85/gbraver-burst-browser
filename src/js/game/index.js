@@ -38,6 +38,8 @@ import type {
   UserNameGet,
   UserPictureGet,
   LoggedInUserDelete,
+  MailVerify,
+  UserMailGet
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
@@ -46,7 +48,7 @@ import {map} from "../stream/operator";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
-  UserNameGet, UserPictureGet {}
+  UserNameGet, UserPictureGet, MailVerify, UserMailGet {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -170,15 +172,22 @@ export class Game {
       this._serviceWorker = await loadServiceWorker();
     }
 
-    const loader = new ResourceLoader(this._resourceRoot);
     invisibleFirstView();
+    const [isLogin, isMailVerified] = await Promise.all([this._api.isLogin(), this._api.isMailVerified()]);
+    if (isLogin && !isMailVerified) {
+      const mailAddress = await this._api.getMail();
+      this._domScenes.startMailVerifiedIncomplete(mailAddress);
+      await this._fader.fadeIn();
+      return;
+    }
+
+    const loader = new ResourceLoader(this._resourceRoot);
     this._domScenes.startLoading(loader.progress());
     await this._fader.fadeIn();
     const resources: Resources = await loader.load();
     this._resources = resources;
     await waitAnimationFrame();
     await waitTime(1000);
-
     await this._fader.fadeOut();
     await this._startTitle(resources);
     this._interruptScenes.bind(resources);

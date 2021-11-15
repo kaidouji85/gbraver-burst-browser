@@ -14,6 +14,7 @@ import type {GameAction} from "../actions/game-actions";
 import {RxjsStreamSource} from "../../stream/rxjs";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import type {TitleAccount} from "./title/title-account";
+import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -51,6 +52,20 @@ export class DOMScenes {
     return this._gameAction;
   }
 
+  /**
+   * メール認証未完了画面を開始する
+   *
+   * @param mailAddress 認証メール送信先
+   * @return 開始されたメール認証未完了画面
+   */
+  startMailVerifiedIncomplete(mailAddress: string): MailVerifiedIncomplete {
+    this._removeCurrentScene();
+
+    const scene = new MailVerifiedIncomplete(mailAddress);
+    this._root.appendChild(scene.getRootHTMLElement());
+    this._scene = scene;
+    return scene;
+  }
 
   /**
    * 新しくローディング画面を開始する

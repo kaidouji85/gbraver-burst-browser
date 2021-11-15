@@ -1,0 +1,34 @@
+/**
+ * メール認証未完了画面
+ */
+@media (orientation: landscape) {
+  .mail-verified-incomplete {
+    --padding: 5vh;
+    width: var(--screen-width);
+    height: var(--screen-height);
+    box-sizing: border-box;
+    padding:
+        max(var(--safe-area-top), var(--padding))
+        max(var(--safe-area-right), var(--padding))
+        max(var(--safe-area-bottom), var(--padding))
+        max(var(--safe-area-left), var(--padding));
+    background-color: var(--background-color);
+    color: var(--font-color);
+    font-size: var(--responsive-font-size);
+  }
+}
+
+@media (orientation: portrait) {
+  .mail-verified-incomplete {
+    display: none;
+  }
+}
+
+.mail-verified-incomplete__title {
+  font-size: calc(var(--responsive-font-size) * 1.5);
+  margin-bottom: var(--responsive-font-size);
+}
+
+.mail-verified-incomplete__procedure {
+  padding-bottom: var(--responsive-font-size);
+}
