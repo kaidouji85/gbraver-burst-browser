@@ -35,8 +35,11 @@ export const DefinePlugin = {
   /** APIサーバ経由で利用する機能が使えるか否か、trueで使える */
   isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE,
 
-  /** APIサーバのURL */
-  apiServerURL: GBRAVER_BURST_API_SERVER_URL,
+  /** Rest API URL */
+  restAPIURL: GBRAVER_BURST_REST_API_URL,
+
+  /** Websocket API URL */
+  websocketAPIURL: GBRAVER_BURST_WEBSOCKET_API_URL,
 
   /** auth0 ドメイン */
   auth0Domain: GBRAVER_BURST_AUTH0_DOMAIN,

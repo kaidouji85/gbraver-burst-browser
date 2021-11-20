@@ -6,11 +6,11 @@ import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {pushDOMStream} from '../../../dom/push/push-dom';
+import type {PushDOM} from '../../../dom/push/push-dom';
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from '../../../stream/rxjs';
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
-import type {IdPasswordLogin} from '@gbraver-burst-network/browser-core';
 import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のcssクラス名 */
@@ -74,9 +74,6 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {closer, backGround, loginButton, closeButton};
 }
 
-/** 本ダイアログで利用するAPIの機能 */
-export interface OwnAPI extends IdPasswordLogin {}
-
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
   _root: HTMLElement;
@@ -110,17 +107,17 @@ export class LoginDialog implements DOMDialog {
     this._closeDialog = new RxjsStreamSource();
     this._login = new RxjsStreamSource();
     this._unsubscribers = [
-      pushDOMStream(this._loginButton).subscribe(() => {
-        this._onLoginButtonPush();
+      pushDOMStream(this._loginButton).subscribe(action => {
+        this._onLoginButtonPush(action);
       }),
-      pushDOMStream(this._closeButton).subscribe(() => {
-        this._onCloseButtonPush();
+      pushDOMStream(this._closeButton).subscribe(action => {
+        this._onCloseButtonPush(action);
       }),
-      pushDOMStream(this._closer).subscribe(() => {
-        this._onCloserPush();
+      pushDOMStream(this._closer).subscribe(action => {
+        this._onCloserPush(action);
       }),
-      pushDOMStream(elements.backGround).subscribe(() => {
-        this._onPushOutsideOfDialog();
+      pushDOMStream(elements.backGround).subscribe(action => {
+        this._onPushOutsideOfDialog(action);
       }),
     ];
 
@@ -169,9 +166,12 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ログインボタンを押した時の処理
+   * 
+   * @param action アクション
    */
-  _onLoginButtonPush(): void {
+  _onLoginButtonPush(action: PushDOM): void {
     this._exclusive.execute(async () => {
+      action.event.preventDefault();
       await Promise.all([
         pop(this._loginButton),
         this._pushButton.play()
@@ -182,9 +182,12 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * 閉じるボタンを押した時の処理
+   * 
+   * @param action アクション
    */
-  _onCloseButtonPush(): void {
+  _onCloseButtonPush(action: PushDOM): void {
     this._exclusive.execute(async () => {
+      action.event.preventDefault();
       await Promise.all([
         pop(this._closeButton),
         this._changeValue.play()
@@ -195,9 +198,12 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * クローザーを押した時の処理
+   * 
+   * @param action アクション
    */
-  _onCloserPush(): void {
+  _onCloserPush(action: PushDOM): void {
     this._exclusive.execute(async () => {
+      action.event.preventDefault();
       await Promise.all([
         pop(this._closer, 1.3),
         this._changeValue.play()
@@ -208,9 +214,12 @@ export class LoginDialog implements DOMDialog {
 
   /**
    * ダイアログ外を押した時の処理
+   * 
+   * @param action アクション
    */
-  _onPushOutsideOfDialog(): void {
+  _onPushOutsideOfDialog(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void>=> {
+      action.event.preventDefault();
       await this._changeValue.play();
       this._closeDialog.next();
     });

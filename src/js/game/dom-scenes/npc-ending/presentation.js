@@ -7,6 +7,7 @@ import type {PushDOM} from "../../../dom/push/push-dom";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import type {Stream} from "../../../stream/core";
+import {tap} from "../../../stream/operator";
 
 /**
  * NPCルート エンディング プレゼンテーション
@@ -57,7 +58,10 @@ export class NPCEndingPresentation {
       .find(v => v.id === PathIds.LOGO)
       ?.path ?? '';
 
-    this._screenPush = pushDOMStream(this._root);
+    this._screenPush = pushDOMStream(this._root)
+      .chain(tap(action => {
+        action.event.preventDefault();
+      }));
   }
 
   /**

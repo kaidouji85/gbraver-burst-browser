@@ -13,6 +13,8 @@ import type {Resources} from "../../resource";
 import type {GameAction} from "../actions/game-actions";
 import {RxjsStreamSource} from "../../stream/rxjs";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
+import type {TitleAccount} from "./title/title-account";
+import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -50,6 +52,20 @@ export class DOMScenes {
     return this._gameAction;
   }
 
+  /**
+   * メール認証未完了画面を開始する
+   *
+   * @param mailAddress 認証メール送信先
+   * @return 開始されたメール認証未完了画面
+   */
+  startMailVerifiedIncomplete(mailAddress: string): MailVerifiedIncomplete {
+    this._removeCurrentScene();
+
+    const scene = new MailVerifiedIncomplete(mailAddress);
+    this._root.appendChild(scene.getRootHTMLElement());
+    this._scene = scene;
+    return scene;
+  }
 
   /**
    * 新しくローディング画面を開始する
@@ -70,23 +86,26 @@ export class DOMScenes {
    * 新しくタイトル画面を開始する
    *
    * @param resources リソース管理オブジェクト
-   * @param isLogin ログインしているか否か、trueでログインしている
+   * @param account アカウント情報
    * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
    * @param termsOfServiceURL 利用規約ページのURL
    * @param privacyPolicyURL プライバシーポリシーページのURL
    * @param contactURL 問い合わせページのURL
    * @return 開始されたタイトル画面
    */
-  async startTitle(resources: Resources, isLogin: boolean, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): Promise<Title> {
+  async startTitle(resources: Resources, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): Promise<Title> {
     this._removeCurrentScene();
 
-    const scene = new Title(resources, isLogin, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
+    const scene = new Title(resources, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._unsubscribers = [
       scene.pushLoginNotifier().subscribe(() => {
         this._gameAction.next({type: 'UniversalLogin'});
       }),
       scene.pushLogoutNotifier().subscribe(() => {
         this._gameAction.next({type: 'Logout'});
+      }),
+      scene.pushDeleteAccountNotifier().subscribe(() => {
+        this._gameAction.next({type: 'AccountDeleteConsent'});
       }),
       scene.pushGameStartNotifier().subscribe(() => {
         this._gameAction.next({type: 'GameStart'});
