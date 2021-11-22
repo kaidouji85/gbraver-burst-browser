@@ -78,7 +78,7 @@ export class TDGameObjectStub {
     const resourceRoot = new StorybookResourceRoot();
     const loader = new ResourceLoader(resourceRoot);
     const resources = await loader.load();
-    const object3Ds = this._creator(resources, this._gameObjectAction);
+    const object3Ds = this._creator(resources, this._gameObjectAction, this._scene);
     object3Ds.forEach(object3D => {
       this._scene.add(object3D);
     });

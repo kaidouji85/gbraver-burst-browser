@@ -10,6 +10,7 @@ import {Stream} from '../../src/js/stream/core';
  *
  * @param resources リソース管理オブジェクト
  * @param gameObjectAction ゲームオブジェクトアクション
+ * @param scene シーン
  * @return シーンに追加するObject3D
  */
-export type Object3dCreator = (resources: Resources, gameObjectAction: Stream<GameObjectAction>) => typeof THREE.Object3D[];
+export type Object3dCreator = (resources: Resources, gameObjectAction: Stream<GameObjectAction>, scene: typeof THREE.Scene) => typeof THREE.Object3D[];
