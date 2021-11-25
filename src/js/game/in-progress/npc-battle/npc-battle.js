@@ -1,6 +1,6 @@
 // @flow
 
-import type {GameEndResult, GameOver, Player} from "gbraver-burst-core";
+import type {GameEndResult, Player} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {SelectionComplete} from "../../actions/game-actions";
 import type {StageLevel, NPCBattleCourse} from './npc-battle-course';

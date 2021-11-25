@@ -43,7 +43,7 @@ export interface NPCBattleCourse {
 }
 
 /** NPCバトルコースのシンプルな実装 */
-class SimpleNPCBattleCourse implements NPCBattleCourse {
+export class SimpleNPCBattleCourse implements NPCBattleCourse {
   _stages: NPCBattleStage[];
 
   /**
