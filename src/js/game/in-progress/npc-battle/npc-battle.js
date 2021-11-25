@@ -3,8 +3,8 @@
 import type {GameOver, Player} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {SelectionComplete, EndBattle} from "../../actions/game-actions";
-import type {NPCBattleCourse} from './npc-battle-course';
-import {DefaultCourse, NPCBattleCourses} from './npc-battle-course';
+import type {NPCBattleStage} from './npc-battle-course';
+import {DefaultStage, getNPCBattleCourse} from './npc-battle-course';
 import {playerUuid} from "../../../uuid/player";
 
 /** 最大レベル */
@@ -105,12 +105,12 @@ export function createNPCBattlePlayer(action: SelectionComplete): Player {
  * @param npcBattle NPCバトルの状態
  * @return 検索結果
  */
-export function findCourse(npcBattle: NPCBattle): NPCBattleCourse {
+export function findStage(npcBattle: NPCBattle): NPCBattleStage {
   if (!npcBattle.player) {
-    return DefaultCourse;
+    return DefaultStage;
   }
 
   const player: Player = npcBattle.player;
-  return NPCBattleCourses.find(v => (v.armdozerId === player.armdozer.id) && (v.level === npcBattle.level))
-    ?? DefaultCourse;
+  const course = getNPCBattleCourse(player.armdozer.id);
+  return course.find(v => v.level === npcBattle.level) ?? DefaultStage;
 }
