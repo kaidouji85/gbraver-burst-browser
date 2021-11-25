@@ -3,11 +3,11 @@
 import type {GameOver, Player} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {SelectionComplete, EndBattle} from "../../actions/game-actions";
-import type {NPCBattleStage, NPCBattleCource} from './npc-battle-course';
+import type {NPCBattleStage, NPCBattleCourse} from './npc-battle-course';
 import {DefaultStage, getNPCBattleCourse} from './npc-battle-course';
 import {playerUuid} from "../../../uuid/player";
 
-/** 最大レベル */
+/** @deprecated 最大レベル */
 export const MAX_LEVEL = 3;
 
 /** プレイヤー選択 */
@@ -15,19 +15,19 @@ export type PlayerSelect = {
   type: 'PlayerSelect'
 };
 
-/** NPCバトル進行中 */
-export type NPCBattleInProgress = {
-  type: 'NPCBattleInProgress',
+/** NPCバトルコース実行中 */
+export type InNPCBattleCourse = {
+  type: 'InNPCBattleCourse',
   /** 進行状況 */
   player: Player,
   /** コース */
-  cource: NPCBattleCource,
+  course: NPCBattleCourse,
   /** ステージレベル */
   level: number,
 };
 
 /** サブフロー */
-export type SubFlow = PlayerSelect | NPCBattleInProgress;
+export type SubFlow = PlayerSelect | InNPCBattleCourse;
 
 /** NPCバトル */
 export type NPCBattle = {
@@ -43,7 +43,7 @@ export type NPCBattle = {
 };
 
 /**
- * NPC戦闘の初期状態を生成する
+ * NPCバトルの初期状態を生成する
  *
  * @return 生成結果
  */
@@ -57,6 +57,46 @@ export function createInitialNPCBattle(): NPCBattle {
 }
 
 /**
+ * NPCバトルコース開始直後のサブフローを生成する
+ * 
+ * @param action プレイヤー選択完了アクション 
+ * @return NPCバトルコース進行中のサブフロー 
+ */
+export function startNPCBattleCourse(action: SelectionComplete): InNPCBattleCourse {
+  const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
+  const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
+  const player = {playerId: playerUuid(), armdozer, pilot};
+  const course = getNPCBattleCourse(armdozer.id);
+  return {type: 'InNPCBattleCourse', player, course, level: 1};
+}
+
+/**
+ * プレイヤーが勝利したか否かを判定する
+ * 
+ * @param player プレイヤー情報
+ * @param action ゲームエンドアクション
+ * @return 判定結果、trueでプレイヤーの勝利
+ */
+export function isPlayerWin(player: Player, action: EndBattle): boolean {
+  if (action.gameEnd.result.type !== 'GameOver') {
+    return false;
+  }
+  const gameOver: GameOver = action.gameEnd.result;
+  return gameOver.winner === player.playerId;
+}
+
+/**
+ * NPCバトルが完了したか否かを判定する
+ * 
+ * @param inNPCBattleCourse NPCバトル進行中のサブフロー
+ * @return 判定結果、trueでNPCバトルが完了した
+ */
+export function isNPCBattleCourseComplete(inNPCBattleCourse: InNPCBattleCourse): boolean {
+  return inNPCBattleCourse.course.length <= inNPCBattleCourse.level;
+}
+
+/**
+ * @deprecated
  * プレイヤー選択結果からNPCバトル用プレイヤーを生成する
  * 
  * @param action プレイヤー選択結果
@@ -69,6 +109,7 @@ export function createInitialNPCBattle(): NPCBattle {
 }
 
 /**
+ * @deprecated
  * プレイヤーが勝利したか否かを判定する
  *
  * @param state NPCバトル
@@ -90,6 +131,7 @@ export function createInitialNPCBattle(): NPCBattle {
 }
 
 /**
+ * @deprecated
  * NPCルートが終了か否かを判定する
  *
  * @param state
@@ -100,6 +142,7 @@ export function isNPCBattleEnd(state: NPCBattle, action: EndBattle): boolean {
 }
 
 /**
+ * @deprecated
  * 戦闘結果に応じてNPCバトルをレベルアップさせる
  * 勝った場合は+1、負けた場合は変更なし
  *

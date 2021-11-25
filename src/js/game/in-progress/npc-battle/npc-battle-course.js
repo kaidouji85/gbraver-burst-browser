@@ -21,7 +21,7 @@ export type NPCBattleStage = {
 };
 
 /** NPCバトルコース */
-export type NPCBattleCource = NPCBattleStage[];
+export type NPCBattleCourse = NPCBattleStage[];
 
 /** デフォルトのステージ */
 export const DefaultStage: NPCBattleStage = {
@@ -31,7 +31,7 @@ export const DefaultStage: NPCBattleStage = {
 };
 
 /** シンブレイバー NPCバトルコース */
-export const ShinBraverNPCCource: NPCBattleCource = [
+export const ShinBraverNPCCourse: NPCBattleCourse = [
   {
     level: 1,
     stageName: 'STAGE 1',
@@ -50,7 +50,7 @@ export const ShinBraverNPCCource: NPCBattleCource = [
 ];
 
 /** ネオランドーザ NPCバトルコース */
-export const NeoLandozerNPCCource: NPCBattleCource = [
+export const NeoLandozerNPCCourse: NPCBattleCourse = [
   {
     level: 1,
     stageName: 'STAGE 1',
@@ -69,7 +69,7 @@ export const NeoLandozerNPCCource: NPCBattleCource = [
 ];
 
 /** ライトニングドーザ NPCバトルコース */
-export const LightningDozerNPCCource: NPCBattleCource = [
+export const LightningDozerNPCCourse: NPCBattleCourse = [
   {
     level: 1,
     stageName: 'STAGE 1',
@@ -88,7 +88,7 @@ export const LightningDozerNPCCource: NPCBattleCource = [
 ];
 
 /** ウィングドーザ NPCバトルコース */
-export const WingDozerNPCCource: NPCBattleCource = [
+export const WingDozerNPCCourse: NPCBattleCourse = [
   {
     level: 1,
     stageName: 'STAGE 1',
@@ -112,17 +112,17 @@ export const WingDozerNPCCource: NPCBattleCource = [
  * @param armdozerId アームドーザID 
  * @return NPCバトルコース
  */
-export function getNPCBattleCourse(armdozerId: ArmDozerId): NPCBattleCource {
+export function getNPCBattleCourse(armdozerId: ArmDozerId): NPCBattleCourse {
   switch(armdozerId) {
     case ArmDozerIdList.SHIN_BRAVER:
-      return ShinBraverNPCCource;
+      return ShinBraverNPCCourse;
     case ArmDozerIdList.NEO_LANDOZER:
-      return NeoLandozerNPCCource;
+      return NeoLandozerNPCCourse;
     case ArmDozerIdList.LIGHTNING_DOZER:
-      return LightningDozerNPCCource;
+      return LightningDozerNPCCourse;
     case ArmDozerIdList.WING_DOZER:
-      return WingDozerNPCCource;
+      return WingDozerNPCCourse;
     default:
-      return ShinBraverNPCCource;    
+      return ShinBraverNPCCourse;    
   }
 }
