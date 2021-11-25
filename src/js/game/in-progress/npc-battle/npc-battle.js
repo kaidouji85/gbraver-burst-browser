@@ -40,20 +40,6 @@ export type NPCBattleX<X> = {
 export type NPCBattle = NPCBattleX<SubFlow>;
 
 /**
- * NPCバトルの初期状態を生成する
- *
- * @return 生成結果
- */
-export function createInitialNPCBattle(): NPCBattle {
-  return {
-    type: 'NPCBattle',
-    subFlow: {type: 'PlayerSelect'},
-    player: null,
-    level: 1,
-  };
-}
-
-/**
  * NPCバトルコース開始直後のサブフローを生成する
  * 
  * @param action プレイヤー選択完了アクション 

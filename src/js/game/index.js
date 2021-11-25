@@ -13,8 +13,8 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {NPCBattle, NPCBattleX, InNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
-import {createInitialNPCBattle, isStageClear, startNPCBattleCourse,} from "./in-progress/npc-battle/npc-battle";
+import type {InNPCBattleCourse, NPCBattle, NPCBattleX} from "./in-progress/npc-battle/npc-battle";
+import {isStageClear, startNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
 import type {NPCBattleStage} from "./in-progress/npc-battle/npc-battle-course";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
@@ -26,14 +26,14 @@ import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {
   CasualMatch as CasualMatchSDK,
+  LoggedInUserDelete,
   LoginCheck,
   Logout,
-  UniversalLogin,
-  UserNameGet,
-  UserPictureGet,
-  LoggedInUserDelete,
   MailVerify,
-  UserMailGet
+  UniversalLogin,
+  UserMailGet,
+  UserNameGet,
+  UserPictureGet
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
@@ -197,7 +197,8 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    this._inProgress = createInitialNPCBattle();
+    const subFlow = {type: 'PlayerSelect'};
+    this._inProgress = {type: 'NPCBattle', subFlow};
     await this._fader.fadeOut();
     await this._domScenes.startPlayerSelect(resources);
     await this._fader.fadeIn();
@@ -360,11 +361,11 @@ export class Game {
 
     const resources: Resources = this._resources;
     const npcBattlePlayerSelect = async (origin: NPCBattle): Promise<void> => {
-      const subFlow = startNPCBattleCourse(action);
-      const updated = {...origin, subFlow};
-      const stage = subFlow.course.stage(subFlow.level);
-      this._inProgress = updated;
-      await this._startNPCBattleStage(resources, subFlow.player, stage);
+      const inNPCBattleCourse = startNPCBattleCourse(action);
+      const {player, level} = inNPCBattleCourse;
+      const stage = inNPCBattleCourse.course.stage(level);
+      this._inProgress = {...origin, subFlow: inNPCBattleCourse};
+      await this._startNPCBattleStage(resources, player, stage);
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
@@ -442,15 +443,17 @@ export class Game {
 
     const resources: Resources = this._resources;
     const npcBattleStageClear = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
-      const updatedLevel = origin.subFlow.level + 1;
-      const updatedSubFlow = {...origin.subFlow, level: updatedLevel};
-      const nextStage = updatedSubFlow.course.stage(updatedSubFlow.level);
-      this._inProgress = {...origin, subFlow: updatedSubFlow};
+      const {level, course} = origin.subFlow;
+      const nextLevel = level + 1;
+      const nextStage = course.stage(nextLevel);
+      const updatedInNPCBattle = {...origin.subFlow, level: nextLevel};
+      this._inProgress = {...origin, subFlow: updatedInNPCBattle};
       await this._startNPCBattleStage(resources, origin.subFlow.player, nextStage);
     };
     const npcBattleStageFailed = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
-      const stage = origin.subFlow.course.stage(origin.subFlow.level);
-      await this._startNPCBattleStage(resources, origin.subFlow.player, stage);
+      const {level, player} = origin.subFlow;
+      const stage = origin.subFlow.course.stage(level);
+      await this._startNPCBattleStage(resources, player, stage);
     }; 
     const npcBattleComplete = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
@@ -469,16 +472,17 @@ export class Game {
     };
 
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'InNPCBattleCourse') {
-      const castedSubFlow: InNPCBattleCourse = this._inProgress.subFlow;
-      const inProgress = ((this._inProgress: any): NPCBattleX<typeof castedSubFlow>);
-      const isNPCBattleStageClear = isStageClear(inProgress.subFlow.player, action.gameEnd.result);
-      const isLastStage = inProgress.subFlow.course.lastStageLevel() <= inProgress.subFlow.level;
+      const inNPCBattleCourse: InNPCBattleCourse = this._inProgress.subFlow;
+      const {player, level, course} = inNPCBattleCourse;
+      const isNPCBattleStageClear = isStageClear(player, action.gameEnd.result);
+      const isLastStage = course.lastStageLevel() <= level;
+      const castedInProgress = ((this._inProgress: any): NPCBattleX<typeof inNPCBattleCourse>);
       if (isNPCBattleStageClear && !isLastStage) {
-        await npcBattleStageClear(inProgress);
+        await npcBattleStageClear(castedInProgress);
       } else if (isNPCBattleStageClear && isLastStage) {
         await npcBattleComplete();
       } else {
-        await npcBattleStageFailed(inProgress);
+        await npcBattleStageFailed(castedInProgress);
       }
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();

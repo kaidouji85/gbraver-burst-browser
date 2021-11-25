@@ -29,7 +29,7 @@ export interface NPCBattleCourse {
   /**
    * 指定したステージを取得する
    * 
-   * @param level 1から始まるステージレベル
+   * @param level ステージレベル
    * @return ステージ
    */
   stage(level: StageLevel): NPCBattleStage;
