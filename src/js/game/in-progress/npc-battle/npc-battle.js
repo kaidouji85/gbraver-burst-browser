@@ -1,116 +1,65 @@
 // @flow
 
-import type {GameOver, Player} from "gbraver-burst-core";
+import type {GameEndResult, Player} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
-import type {SelectionComplete, EndBattle} from "../../actions/game-actions";
-import type {NPCBattleCourse} from './npc-battle-course';
-import {DefaultCourse, NPCBattleCourses} from './npc-battle-course';
+import type {SelectionComplete} from "../../actions/game-actions";
+import type {StageLevel, NPCBattleCourse} from './npc-battle-course';
+import {getNPCBattleCourse} from './npc-battle-course';
 import {playerUuid} from "../../../uuid/player";
 
-/** 最大レベル */
-export const MAX_LEVEL = 3;
-
-/**
- * NPC戦闘
- */
-export type NPCBattle = {
-  type: 'NPCBattle',
-
-  /** プレイヤー情報 */
-  player: ?Player,
-
-  /** ゲームレベル */
-  level: number
+/** プレイヤー選択 */
+export type PlayerSelect = {
+  type: 'PlayerSelect'
 };
 
-/**
- * NPC戦闘の初期状態を生成する
- *
- * @return 生成結果
+/** NPCバトルコース実行中 */
+export type InNPCBattleCourse = {
+  type: 'InNPCBattleCourse',
+  /** 進行状況 */
+  player: Player,
+  /** コース */
+  course: NPCBattleCourse,
+  /** 現在のステージレベル */
+  level: StageLevel,
+};
+
+/** サブフロー */
+export type SubFlow = PlayerSelect | InNPCBattleCourse;
+
+/** 
+ * NPCバトル
+ * @template X サブフローのデータ型
  */
-export function createInitialNPCBattle(): NPCBattle {
-  return {
-    type: 'NPCBattle',
-    player: null,
-    level: 1,
-  };
+export type NPCBattleX<X> = {
+  type: 'NPCBattle',
+  /** サブフロー */
+  subFlow: X
 }
 
-/**
- * プレイヤーが勝利したか否かを判定する
- *
- * @param state NPCバトル
- * @param action アクション
- * @return 判定結果、trueで勝利
- */
- export function isWin(state: NPCBattle, action: EndBattle): boolean {
-  if (action.gameEnd.result.type !== 'GameOver') {
-    return false;
-  }
-  const gameOver: GameOver = action.gameEnd.result;
-
-  if (!state.player) {
-    return false;
-  }
-  const player: Player = state.player;
-
-  return gameOver.winner === player.playerId;
-}
+/** NPCバトル */
+export type NPCBattle = NPCBattleX<SubFlow>;
 
 /**
- * NPCルートが終了か否かを判定する
- *
- * @param state
- * @return 判定結果、trueで終了
- */
-export function isNPCBattleEnd(state: NPCBattle, action: EndBattle): boolean {
-  return (state.level === MAX_LEVEL) && isWin(state, action);
-}
-
-/**
- * 戦闘結果に応じてNPCバトルをレベルアップさせる
- * 勝った場合は+1、負けた場合は変更なし
- *
- * @param origin 更新前の状態
- * @param action アクション
- * @return 更新結果
- */
-export function levelUpOrNot(origin: NPCBattle, action: EndBattle): NPCBattle {
-  if (!isWin(origin, action)) {
-    return origin;
-  }
-
-  const updatedLevel = Math.min(origin.level + 1, MAX_LEVEL);
-  return {
-    ...origin,
-    level: updatedLevel
-  };
-}
-
-/**
- * プレイヤー選択結果からNPCバトル用プレイヤーを生成する
+ * NPCバトルコース開始直後のサブフローを生成する
  * 
- * @param action プレイヤー選択結果
- * @return NPCバトル用プレイヤー
+ * @param action プレイヤー選択完了アクション 
+ * @return NPCバトルコース進行中のサブフロー 
  */
-export function createNPCBattlePlayer(action: SelectionComplete): Player {
+export function startNPCBattleCourse(action: SelectionComplete): InNPCBattleCourse {
   const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
-  return {playerId: playerUuid(), armdozer, pilot};
+  const player = {playerId: playerUuid(), armdozer, pilot};
+  const course = getNPCBattleCourse(armdozer.id);
+  return {type: 'InNPCBattleCourse', player, course, level: 1};
 }
 
 /**
- * NPCバトルの状態に応じたステージを検索する
+ * ステージクリアしたか否かを判定する
  * 
- * @param npcBattle NPCバトルの状態
- * @return 検索結果
+ * @param player プレイヤー情報
+ * @param gameEndResult ゲームエンド結果
+ * @return 判定結果、trueでステージクリアである
  */
-export function findCourse(npcBattle: NPCBattle): NPCBattleCourse {
-  if (!npcBattle.player) {
-    return DefaultCourse;
-  }
-
-  const player: Player = npcBattle.player;
-  return NPCBattleCourses.find(v => (v.armdozerId === player.armdozer.id) && (v.level === npcBattle.level))
-    ?? DefaultCourse;
+export function isStageClear(player: Player, gameEndResult: GameEndResult): boolean {
+  return gameEndResult.type === 'GameOver' && gameEndResult.winner === player.playerId;
 }
