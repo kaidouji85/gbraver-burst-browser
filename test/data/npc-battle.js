@@ -7,6 +7,7 @@ import type {NPCBattle} from "../../src/js/game/in-progress/npc-battle/npc-battl
  */
 export const EMPTY_NPC_BATTLE: NPCBattle = {
   type: 'NPCBattle',
+  subFlow: {type: 'PlayerSelect'},
   player: null,
   level: 1
 }

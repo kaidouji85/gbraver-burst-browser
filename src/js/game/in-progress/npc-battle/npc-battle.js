@@ -3,23 +3,42 @@
 import type {GameOver, Player} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {SelectionComplete, EndBattle} from "../../actions/game-actions";
-import type {NPCBattleStage} from './npc-battle-course';
+import type {NPCBattleStage, NPCBattleCource} from './npc-battle-course';
 import {DefaultStage, getNPCBattleCourse} from './npc-battle-course';
 import {playerUuid} from "../../../uuid/player";
 
 /** 最大レベル */
 export const MAX_LEVEL = 3;
 
-/**
- * NPC戦闘
- */
+/** プレイヤー選択 */
+export type PlayerSelect = {
+  type: 'PlayerSelect'
+};
+
+/** NPCバトル進行中 */
+export type NPCBattleInProgress = {
+  type: 'NPCBattleInProgress',
+  /** 進行状況 */
+  player: Player,
+  /** コース */
+  cource: NPCBattleCource,
+  /** ステージレベル */
+  level: number,
+};
+
+/** サブフロー */
+export type SubFlow = PlayerSelect | NPCBattleInProgress;
+
+/** NPCバトル */
 export type NPCBattle = {
   type: 'NPCBattle',
+  /** サブフロー */
+  subFlow: SubFlow,
 
-  /** プレイヤー情報 */
+  /** @deprecated プレイヤー情報 */
   player: ?Player,
 
-  /** ゲームレベル */
+  /** @deprecated ゲームレベル */
   level: number
 };
 
@@ -31,9 +50,22 @@ export type NPCBattle = {
 export function createInitialNPCBattle(): NPCBattle {
   return {
     type: 'NPCBattle',
+    subFlow: {type: 'PlayerSelect'},
     player: null,
     level: 1,
   };
+}
+
+/**
+ * プレイヤー選択結果からNPCバトル用プレイヤーを生成する
+ * 
+ * @param action プレイヤー選択結果
+ * @return NPCバトル用プレイヤー
+ */
+ export function createNPCBattlePlayer(action: SelectionComplete): Player {
+  const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
+  const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
+  return {playerId: playerUuid(), armdozer, pilot};
 }
 
 /**
@@ -88,18 +120,7 @@ export function levelUpOrNot(origin: NPCBattle, action: EndBattle): NPCBattle {
 }
 
 /**
- * プレイヤー選択結果からNPCバトル用プレイヤーを生成する
- * 
- * @param action プレイヤー選択結果
- * @return NPCバトル用プレイヤー
- */
-export function createNPCBattlePlayer(action: SelectionComplete): Player {
-  const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
-  return {playerId: playerUuid(), armdozer, pilot};
-}
-
-/**
+ * @deprecated
  * NPCバトルの状態に応じたステージを検索する
  * 
  * @param npcBattle NPCバトルの状態
