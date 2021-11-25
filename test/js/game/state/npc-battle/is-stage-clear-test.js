@@ -4,7 +4,7 @@ import test from 'ava';
 import {isStageClear} from "../../../../../src/js/game/in-progress/npc-battle/npc-battle";
 import {EMPTY_PLAYER} from "../../../../data/player";
 
-const player: Player = {...EMPTY_PLAYER, playerId: 'test-player'};
+const player = {...EMPTY_PLAYER, playerId: 'test-player'};
 
 test('勝者がプレイヤーの場合、ステージクリアである', t => {
   const win = {type: 'GameOver', winner: player.playerId};

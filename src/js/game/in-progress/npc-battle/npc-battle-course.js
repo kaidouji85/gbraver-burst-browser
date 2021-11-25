@@ -10,10 +10,14 @@ import {WingDozerNPC} from "../../../npc/wing-dozer";
 import {StrongNeoLandozerNPC} from "../../../npc/strong-neo-landozer";
 import {StrongLightningDozerNPC} from "../../../npc/strong-lightning-dozer";
 
+/**
+ * ステージレベル
+ * 1から始まり+1間隔で増える
+ */
+export type StageLevel = number
+
 /** NPCバトル ステージ */
 export type NPCBattleStage = {
-  /** ステージレベル */
-  level: number,
   /** ステージ名 */
   stageName: string,
   /** 対戦相手 */
@@ -21,90 +25,110 @@ export type NPCBattleStage = {
 };
 
 /** NPCバトルコース */
-export type NPCBattleCourse = NPCBattleStage[];
+export interface NPCBattleCourse {
+  /**
+   * 指定したステージを取得する
+   * 
+   * @param level 1から始まるステージレベル
+   * @return ステージ
+   */
+  stage(level: StageLevel): NPCBattleStage;
+
+  /**
+   * ラストステージのレベルを返す
+   * 
+   * @return ラストステージのレベル
+   */
+  lastStageLevel(): StageLevel;
+}
+
+class SimpleNPCBattleCourse implements NPCBattleCourse {
+  _stages: NPCBattleStage[];
+
+  constructor(stages: NPCBattleStage[]) {
+    this._stages = stages;
+  }
+
+  /** @override */
+  stage(level: StageLevel): NPCBattleStage {
+    return this._stages[level - 1] ?? DefaultStage;
+  }
+
+  /** @override */
+  lastStageLevel(): StageLevel {
+    return this._stages.length;
+  }
+}
 
 /** デフォルトのステージ */
 export const DefaultStage: NPCBattleStage = {
-  level: 0,
   stageName: 'STAGE 0',
   npc: new NeoLandozerNPC()
 };
 
 /** シンブレイバー NPCバトルコース */
-export const ShinBraverNPCCourse: NPCBattleCourse = [
+const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
-    level: 1,
     stageName: 'STAGE 1',
     npc: new WeakNeoLandozerNPC(),
   },
   {
-    level: 2,
     stageName: 'STAGE 2',
     npc: new WingDozerNPC(),
   },
   {
-    level: 3,
     stageName: 'STAGE FINAL',
     npc: new StrongLightningDozerNPC(),
   },
-];
+]);
 
 /** ネオランドーザ NPCバトルコース */
-export const NeoLandozerNPCCourse: NPCBattleCourse = [
+const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
-    level: 1,
     stageName: 'STAGE 1',
     npc: new WeakShinBraverNPC(),
   },
   {
-    level: 2,
     stageName: 'STAGE 2',
     npc: new WingDozerNPC(),
   },
   {
-    level: 3,
     stageName: 'STAGE FINAL',
     npc: new StrongLightningDozerNPC(),
   },
-];
+]);
 
 /** ライトニングドーザ NPCバトルコース */
-export const LightningDozerNPCCourse: NPCBattleCourse = [
+const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
-    level: 1,
     stageName: 'STAGE 1',
     npc: new WeakShinBraverNPC(),
   },
   {
-    level: 2,
     stageName: 'STAGE 2',
     npc: new WingDozerNPC(),
   },
   {
-    level: 3,
     stageName: 'STAGE FINAL',
     npc: new StrongNeoLandozerNPC(),
   },
-];
+]);
 
 /** ウィングドーザ NPCバトルコース */
-export const WingDozerNPCCourse: NPCBattleCourse = [
+const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
-    level: 1,
     stageName: 'STAGE 1',
     npc: new WeakShinBraverNPC(),
   },
   {
-    level: 2,
     stageName: 'STAGE 2',
     npc: new NeoLandozerNPC(),
   },
   {
-    level: 3,
     stageName: 'STAGE FINAL',
     npc: new StrongLightningDozerNPC(),
-  },
-];
+  }
+]);
 
 /**
  * アームドーザIDに対応したNPCバトルコースを取得する

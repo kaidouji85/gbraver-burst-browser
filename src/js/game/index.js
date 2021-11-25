@@ -13,18 +13,12 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {NPCBattle} from "./in-progress/npc-battle/npc-battle";
-import {
-  createInitialNPCBattle,
-  createNPCBattlePlayer,
-  findStage,
-  isNPCBattleEnd,
-  levelUpOrNot
-} from "./in-progress/npc-battle/npc-battle";
+import type {NPCBattle, NPCBattleX, InNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
+import {createInitialNPCBattle, isStageClear, startNPCBattleCourse,} from "./in-progress/npc-battle/npc-battle";
+import type {NPCBattleStage} from "./in-progress/npc-battle/npc-battle-course";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
-import type {NPCBattleStage} from "./in-progress/npc-battle/npc-battle-course";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, EndNetworkError, GameAction, SelectionComplete} from "./actions/game-actions";
@@ -366,11 +360,11 @@ export class Game {
 
     const resources: Resources = this._resources;
     const npcBattlePlayerSelect = async (origin: NPCBattle): Promise<void> => {
-      const player = createNPCBattlePlayer(action);
-      const updated = {...origin, player};
-      const course = findStage(updated);
+      const subFlow = startNPCBattleCourse(action);
+      const updated = {...origin, subFlow};
+      const stage = subFlow.course.stage(subFlow.level);
       this._inProgress = updated;
-      await this._startNPCBattleStage(resources, player, course);
+      await this._startNPCBattleStage(resources, subFlow.player, stage);
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
@@ -447,13 +441,18 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const npcBattleContinue = async (player: Player, origin: NPCBattle): Promise<void> => {
-      const updated: NPCBattle = levelUpOrNot(origin, action);
-      const course = findStage(updated);
-      this._inProgress = updated;
-      await this._startNPCBattleStage(resources, player, course);
+    const npcBattleStageClear = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
+      const updatedLevel = origin.subFlow.level + 1;
+      const updatedSubFlow = {...origin.subFlow, level: updatedLevel};
+      const nextStage = updatedSubFlow.course.stage(updatedSubFlow.level);
+      this._inProgress = {...origin, subFlow: updatedSubFlow};
+      await this._startNPCBattleStage(resources, origin.subFlow.player, nextStage);
     };
-    const npcBattleEnd = async (): Promise<void> => {
+    const npcBattleStageFailed = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
+      const stage = origin.subFlow.course.stage(origin.subFlow.level);
+      await this._startNPCBattleStage(resources, origin.subFlow.player, stage);
+    }; 
+    const npcBattleComplete = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
@@ -469,10 +468,18 @@ export class Game {
       await this._fader.fadeIn();
     };
 
-    if (this._inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._inProgress, action) && this._inProgress.player) {
-      await npcBattleContinue(this._inProgress.player, this._inProgress);
-    } else if (this._inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._inProgress, action)) {
-      await npcBattleEnd();
+    if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'InNPCBattleCourse') {
+      const castedSubFlow: InNPCBattleCourse = this._inProgress.subFlow;
+      const inProgress = ((this._inProgress: any): NPCBattleX<typeof castedSubFlow>);
+      const isNPCBattleStageClear = isStageClear(inProgress.subFlow.player, action.gameEnd.result);
+      const isLastStage = inProgress.subFlow.course.lastStageLevel() <= inProgress.level;
+      if (isNPCBattleStageClear && !isLastStage) {
+        await npcBattleStageClear(inProgress);
+      } else if (isNPCBattleStageClear && isLastStage) {
+        await npcBattleComplete();
+      } else {
+        await npcBattleStageFailed(inProgress);
+      }
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
