@@ -472,7 +472,7 @@ export class Game {
       const castedSubFlow: InNPCBattleCourse = this._inProgress.subFlow;
       const inProgress = ((this._inProgress: any): NPCBattleX<typeof castedSubFlow>);
       const isNPCBattleStageClear = isStageClear(inProgress.subFlow.player, action.gameEnd.result);
-      const isLastStage = inProgress.subFlow.course.lastStageLevel() <= inProgress.level;
+      const isLastStage = inProgress.subFlow.course.lastStageLevel() <= inProgress.subFlow.level;
       if (isNPCBattleStageClear && !isLastStage) {
         await npcBattleStageClear(inProgress);
       } else if (isNPCBattleStageClear && isLastStage) {

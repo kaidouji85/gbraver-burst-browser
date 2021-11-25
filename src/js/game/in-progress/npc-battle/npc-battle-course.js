@@ -42,9 +42,15 @@ export interface NPCBattleCourse {
   lastStageLevel(): StageLevel;
 }
 
+/** NPCバトルコースのシンプルな実装 */
 class SimpleNPCBattleCourse implements NPCBattleCourse {
   _stages: NPCBattleStage[];
 
+  /**
+   * コンストラクタ
+   * 
+   * @param stages コースに含まれる全ステージ 
+   */
   constructor(stages: NPCBattleStage[]) {
     this._stages = stages;
   }

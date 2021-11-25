@@ -33,13 +33,7 @@ export type SubFlow = PlayerSelect | InNPCBattleCourse;
 export type NPCBattleX<X> = {
   type: 'NPCBattle',
   /** サブフロー */
-  subFlow: X,
-
-  /** @deprecated プレイヤー情報 */
-  player: ?Player,
-
-  /** @deprecated ゲームレベル */
-  level: number
+  subFlow: X
 }
 
 /** NPCバトル */
@@ -81,9 +75,5 @@ export function startNPCBattleCourse(action: SelectionComplete): InNPCBattleCour
  * @return 判定結果、trueでステージクリアである
  */
 export function isStageClear(player: Player, gameEndResult: GameEndResult): boolean {
-  if (gameEndResult.type !== 'GameOver') {
-    return false;
-  }
-  const gameOver: GameOver = gameEndResult;
-  return gameOver.winner === player.playerId;
+  return gameEndResult.type === 'GameOver' && gameEndResult.winner === player.playerId;
 }
