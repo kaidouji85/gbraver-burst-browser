@@ -13,18 +13,12 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {NPCBattle} from "./in-progress/npc-battle/npc-battle";
-import {
-  createInitialNPCBattle,
-  createNPCBattlePlayer,
-  findCourse,
-  isNPCBattleEnd,
-  levelUpOrNot
-} from "./in-progress/npc-battle/npc-battle";
+import type {InNPCBattleCourse, NPCBattle, NPCBattleX} from "./in-progress/npc-battle/npc-battle";
+import {isStageClear, startNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
+import type {NPCBattleStage} from "./in-progress/npc-battle/npc-battle-course";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
-import type {NPCBattleCourse} from "./in-progress/npc-battle/npc-battle-course";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {EndBattle, EndNetworkError, GameAction, SelectionComplete} from "./actions/game-actions";
@@ -32,14 +26,14 @@ import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {
   CasualMatch as CasualMatchSDK,
+  LoggedInUserDelete,
   LoginCheck,
   Logout,
-  UniversalLogin,
-  UserNameGet,
-  UserPictureGet,
-  LoggedInUserDelete,
   MailVerify,
-  UserMailGet
+  UniversalLogin,
+  UserMailGet,
+  UserNameGet,
+  UserPictureGet
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
@@ -203,7 +197,8 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    this._inProgress = createInitialNPCBattle();
+    const subFlow = {type: 'PlayerSelect'};
+    this._inProgress = {type: 'NPCBattle', subFlow};
     await this._fader.fadeOut();
     await this._domScenes.startPlayerSelect(resources);
     await this._fader.fadeIn();
@@ -366,11 +361,11 @@ export class Game {
 
     const resources: Resources = this._resources;
     const npcBattlePlayerSelect = async (origin: NPCBattle): Promise<void> => {
-      const player = createNPCBattlePlayer(action);
-      const updated = {...origin, player};
-      const course = findCourse(updated);
-      this._inProgress = updated;
-      await this._startNPCBattleCourse(resources, player, course);
+      const inNPCBattleCourse = startNPCBattleCourse(action);
+      const {player, level} = inNPCBattleCourse;
+      const stage = inNPCBattleCourse.course.stage(level);
+      this._inProgress = {...origin, subFlow: inNPCBattleCourse};
+      await this._startNPCBattleStage(resources, player, stage);
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
@@ -447,13 +442,20 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const npcBattleContinue = async (player: Player, origin: NPCBattle): Promise<void> => {
-      const updated: NPCBattle = levelUpOrNot(origin, action);
-      const course = findCourse(updated);
-      this._inProgress = updated;
-      await this._startNPCBattleCourse(resources, player, course);
+    const npcBattleStageClear = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
+      const {level, course} = origin.subFlow;
+      const nextLevel = level + 1;
+      const nextStage = course.stage(nextLevel);
+      const updatedInNPCBattle = {...origin.subFlow, level: nextLevel};
+      this._inProgress = {...origin, subFlow: updatedInNPCBattle};
+      await this._startNPCBattleStage(resources, origin.subFlow.player, nextStage);
     };
-    const npcBattleEnd = async (): Promise<void> => {
+    const npcBattleStageFailed = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
+      const {level, player} = origin.subFlow;
+      const stage = origin.subFlow.course.stage(level);
+      await this._startNPCBattleStage(resources, player, stage);
+    }; 
+    const npcBattleComplete = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
@@ -469,10 +471,19 @@ export class Game {
       await this._fader.fadeIn();
     };
 
-    if (this._inProgress.type === 'NPCBattle' && !isNPCBattleEnd(this._inProgress, action) && this._inProgress.player) {
-      await npcBattleContinue(this._inProgress.player, this._inProgress);
-    } else if (this._inProgress.type === 'NPCBattle' && isNPCBattleEnd(this._inProgress, action)) {
-      await npcBattleEnd();
+    if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'InNPCBattleCourse') {
+      const inNPCBattleCourse: InNPCBattleCourse = this._inProgress.subFlow;
+      const {player, level, course} = inNPCBattleCourse;
+      const isNPCBattleStageClear = isStageClear(player, action.gameEnd.result);
+      const isLastStage = course.lastStageLevel() <= level;
+      const castedInProgress = ((this._inProgress: any): NPCBattleX<typeof inNPCBattleCourse>);
+      if (isNPCBattleStageClear && !isLastStage) {
+        await npcBattleStageClear(castedInProgress);
+      } else if (isNPCBattleStageClear && isLastStage) {
+        await npcBattleComplete();
+      } else {
+        await npcBattleStageFailed(castedInProgress);
+      }
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
@@ -507,18 +518,18 @@ export class Game {
   }
 
   /**
-   * NPCバトルコースを開始するヘルパーメソッド
+   * NPCバトルのステージを開始するヘルパーメソッド
    *
    * @param resources リソース管理オブジェクト
    * @param player プレイヤー
-   * @param course NPCバトルコース
+   * @param stage NPCバトルステージ
    */
-  async _startNPCBattleCourse(resources: Resources, player: Player, course: NPCBattleCourse) {
-    const npcBattle = new NPCBattleRoom(player, course.npc);
+  async _startNPCBattleStage(resources: Resources, player: Player, stage: NPCBattleStage) {
+    const npcBattle = new NPCBattleRoom(player, stage.npc);
       
     await this._fader.fadeOut();
     await this._domScenes.startMatchCard(resources, npcBattle.player.armdozer.id,
-      npcBattle.enemy.armdozer.id, course.stageName);
+      npcBattle.enemy.armdozer.id, stage.stageName);
     await this._fader.fadeIn();
     
     const progress = v => Promise.resolve(npcBattle.progress(v));

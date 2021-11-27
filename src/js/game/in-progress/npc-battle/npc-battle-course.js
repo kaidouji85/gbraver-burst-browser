@@ -11,107 +11,148 @@ import {StrongNeoLandozerNPC} from "../../../npc/strong-neo-landozer";
 import {StrongLightningDozerNPC} from "../../../npc/strong-lightning-dozer";
 
 /**
- * NPCコース
+ * ステージレベル
+ * 1から始まり+1間隔で増える
  */
-export type NPCBattleCourse = {
-  /** プレイヤー アームドーザID */
-  armdozerId: ArmDozerId,
-  /** レベル */
-  level: number,
+export type StageLevel = number
+
+/** NPCバトル ステージ */
+export type NPCBattleStage = {
   /** ステージ名 */
   stageName: string,
   /** 対戦相手 */
   npc: NPC
 };
 
-/**
- * デフォルトのステージ
- */
-export const DefaultCourse: NPCBattleCourse = {
-  armdozerId: ArmDozerIdList.SHIN_BRAVER,
-  level: 0,
+/** NPCバトルコース */
+export interface NPCBattleCourse {
+  /**
+   * 指定したステージを取得する
+   * 
+   * @param level ステージレベル
+   * @return ステージ
+   */
+  stage(level: StageLevel): NPCBattleStage;
+
+  /**
+   * ラストステージのレベルを返す
+   * 
+   * @return ラストステージのレベル
+   */
+  lastStageLevel(): StageLevel;
+}
+
+/** NPCバトルコースのシンプルな実装 */
+export class SimpleNPCBattleCourse implements NPCBattleCourse {
+  _stages: NPCBattleStage[];
+
+  /**
+   * コンストラクタ
+   * 
+   * @param stages コースに含まれる全ステージ 
+   */
+  constructor(stages: NPCBattleStage[]) {
+    this._stages = stages;
+  }
+
+  /** @override */
+  stage(level: StageLevel): NPCBattleStage {
+    return this._stages[level - 1] ?? DefaultStage;
+  }
+
+  /** @override */
+  lastStageLevel(): StageLevel {
+    return this._stages.length;
+  }
+}
+
+/** デフォルトのステージ */
+export const DefaultStage: NPCBattleStage = {
   stageName: 'STAGE 0',
   npc: new NeoLandozerNPC()
 };
 
-/**
- * NPCコースをあつめたもの
- */
-export const NPCBattleCourses: NPCBattleCourse[] = [
-  /** シンブレイバー */
+/** シンブレイバー NPCバトルコース */
+const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
-    armdozerId: ArmDozerIdList.SHIN_BRAVER,
-    level: 1,
     stageName: 'STAGE 1',
     npc: new WeakNeoLandozerNPC(),
   },
   {
-    armdozerId: ArmDozerIdList.SHIN_BRAVER,
-    level: 2,
     stageName: 'STAGE 2',
     npc: new WingDozerNPC(),
   },
   {
-    armdozerId: ArmDozerIdList.SHIN_BRAVER,
-    level: 3,
     stageName: 'STAGE FINAL',
     npc: new StrongLightningDozerNPC(),
   },
-  /** ネオランドーザ */
+]);
+
+/** ネオランドーザ NPCバトルコース */
+const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
-    armdozerId: ArmDozerIdList.NEO_LANDOZER,
-    level: 1,
     stageName: 'STAGE 1',
     npc: new WeakShinBraverNPC(),
   },
   {
-    armdozerId: ArmDozerIdList.NEO_LANDOZER,
-    level: 2,
     stageName: 'STAGE 2',
     npc: new WingDozerNPC(),
   },
   {
-    armdozerId: ArmDozerIdList.NEO_LANDOZER,
-    level: 3,
     stageName: 'STAGE FINAL',
     npc: new StrongLightningDozerNPC(),
   },
-  /** ライトニングドーザ  */
+]);
+
+/** ライトニングドーザ NPCバトルコース */
+const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
-    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
-    level: 1,
     stageName: 'STAGE 1',
     npc: new WeakShinBraverNPC(),
   },
   {
-    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
-    level: 2,
     stageName: 'STAGE 2',
     npc: new WingDozerNPC(),
   },
   {
-    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
-    level: 3,
     stageName: 'STAGE FINAL',
     npc: new StrongNeoLandozerNPC(),
   },
-  /** ウィングドーザ  */
+]);
+
+/** ウィングドーザ NPCバトルコース */
+const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
-    armdozerId: ArmDozerIdList.WING_DOZER,
-    level: 1,
     stageName: 'STAGE 1',
     npc: new WeakShinBraverNPC(),
   },
   {
-    armdozerId: ArmDozerIdList.WING_DOZER,
-    level: 2,
     stageName: 'STAGE 2',
     npc: new NeoLandozerNPC(),
   },
   {
-    armdozerId: ArmDozerIdList.WING_DOZER,
-    level: 3,
     stageName: 'STAGE FINAL',
     npc: new StrongLightningDozerNPC(),
-  },
-];
+  }
+]);
+
+/**
+ * アームドーザIDに対応したNPCバトルコースを取得する
+ * 
+ * @param armdozerId アームドーザID 
+ * @return NPCバトルコース
+ */
+export function getNPCBattleCourse(armdozerId: ArmDozerId): NPCBattleCourse {
+  switch(armdozerId) {
+    case ArmDozerIdList.SHIN_BRAVER:
+      return ShinBraverNPCCourse;
+    case ArmDozerIdList.NEO_LANDOZER:
+      return NeoLandozerNPCCourse;
+    case ArmDozerIdList.LIGHTNING_DOZER:
+      return LightningDozerNPCCourse;
+    case ArmDozerIdList.WING_DOZER:
+      return WingDozerNPCCourse;
+    default:
+      return ShinBraverNPCCourse;    
+  }
+}
