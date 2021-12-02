@@ -7,13 +7,9 @@ import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 import * as THREE from 'three';
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Y,
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../armdozer/position";
+import {ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
 
-export const MESH_SIZE = 40;
+export const MESH_SIZE = 50;
 export const MAX_NUMBER_SIZE = 4;
 export const MAX_ANIMATION = 16;
 export const GROUP_PADDING = 30;
@@ -68,8 +64,8 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     });
 
     this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
-    this._group.position.y = ARMDOZER_EFFECT_STANDARD_Y;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z;
+    this._group.position.y = 0;
+    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 2;
 
     this._group.scale.set(model.scale, model.scale, model.scale);
   }
