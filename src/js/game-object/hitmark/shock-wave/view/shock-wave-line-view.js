@@ -28,6 +28,7 @@ export class ShockWaveLineView {
       : new THREE.Texture();
     const material = new THREE.MeshBasicMaterial({
       side: THREE.FrontSide,
+      blending: THREE.AdditiveBlending,
       transparent: true,
       map: texture,
     });
