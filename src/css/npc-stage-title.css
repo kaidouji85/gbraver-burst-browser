@@ -43,13 +43,13 @@
   font-weight: bold;
 }
 
-.npc-stage-title__title__stage-number {
+.npc-stage-title__title__stage-level {
   font-size: calc(var(--responsive-font-size) * 2);
   font-weight: bold;
   margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
-.npc-stage-title__title__caption:first-letter {
+.npc-stage-title__title__caption__clause:first-letter {
   font-size: calc(var(--responsive-font-size) * 2.5);
   font-weight: bold;
 }
