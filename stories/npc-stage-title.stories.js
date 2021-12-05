@@ -8,7 +8,7 @@ export default {
   title: 'npc-stage-title'
 };
 
-export const Scene: DOMStubStory = domStub(() => {
-  const scene = new NpcStageTitle();
+export const Scene: DOMStubStory = domStub(resources => {
+  const scene = new NpcStageTitle(resources);
   return scene.getRootHTMLElement();
 });
