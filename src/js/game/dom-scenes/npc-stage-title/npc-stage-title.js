@@ -26,8 +26,10 @@ type DataIDs = {
 function rootInnerHTML(ids: DataIDs, level: StageLevel): string {
   return `
     <div class="${ROOT_CLASS}__title">
-      <div class="${ROOT_CLASS}__title__stage">STAGE</div>
-      <div class="${ROOT_CLASS}__title__stage-level">${level}</div>
+      <div class="${ROOT_CLASS}__title__stage">
+        <div class="${ROOT_CLASS}__title__stage__prefix">STAGE</div>
+        <div class="${ROOT_CLASS}__title__stage__level">${level}</div>
+      </div>
       <div class="${ROOT_CLASS}__title__caption" data-id="${ids.caption}"></div>
     </div>
     <img class="${ROOT_CLASS}__armdozer-icon" data-id="${ids.armDozerIcon}">

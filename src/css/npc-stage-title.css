@@ -35,18 +35,30 @@
 .npc-stage-title__title {
   display: flex;
   align-items: baseline;
+  flex-direction: column;
   font-size: calc(var(--responsive-font-size) * 1.3);
 }
 
-.npc-stage-title__title__stage:first-letter {
+.npc-stage-title__title__stage {
+  display: flex;
+  align-items: baseline;
+}
+
+.npc-stage-title__title__stage__prefix:first-letter {
   font-size: calc(var(--responsive-font-size) * 2.5);
   font-weight: bold;
 }
 
-.npc-stage-title__title__stage-level {
+.npc-stage-title__title__stage__level {
   font-size: calc(var(--responsive-font-size) * 2);
   font-weight: bold;
   margin-right: calc(var(--responsive-font-size) * 0.5);
+}
+
+.npc-stage-title__title__caption {
+  display: flex;
+  align-items: baseline;
+  transform: translateX(calc(var(--responsive-font-size) * 2));
 }
 
 .npc-stage-title__title__caption__clause:first-letter {
