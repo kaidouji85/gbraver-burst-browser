@@ -11,8 +11,7 @@ export function rootInnerHTML(resources: Resources): string {
   const armdozer = resources.paths.find(v => v.id === PathIds.NEO_LANDOZER_ICON)?.path ?? '';
   return `
     <div class="${ROOT_CLASS}__title">
-      <div class="${ROOT_CLASS}__title__s">S</div>
-      <div class="${ROOT_CLASS}__title__tage">TAGE</div>
+      <div class="${ROOT_CLASS}__title__stage">STAGE</div>
       <div class="${ROOT_CLASS}__title__stage-number">10</div>
       <div class="${ROOT_CLASS}__title__caption">敵よりも大きい</div>
       <div class="${ROOT_CLASS}__title__caption">バッテリーを出せ</div>
