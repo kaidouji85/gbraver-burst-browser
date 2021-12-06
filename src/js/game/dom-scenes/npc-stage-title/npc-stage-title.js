@@ -6,6 +6,7 @@ import type {StageLevel} from "../../in-progress/npc-battle/npc-battle-course";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
+import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'npc-stage-title';
@@ -57,8 +58,9 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** NPCステージタイトル */
-export class NpcStageTitle implements DOMScene {
+export class NPCStageTitle implements DOMScene {
   _root: HTMLElement;
+  _isArmDozerIconLoaded: Promise<void>;
 
   /**
    * コンストラクタ
@@ -75,9 +77,11 @@ export class NpcStageTitle implements DOMScene {
     this._root.innerHTML = rootInnerHTML(ids, level);
 
     const elements = extractElements(this._root, ids);
+
+    this._isArmDozerIconLoaded = waitElementLoaded(elements.armDozerIcon);
     const armDozerIconPathID = getArmdozerIconPathId(armDozerId);
-    const armDozerIconPath = resources.paths.find(v => v.id === armDozerIconPathID)?.path ?? '';
-    elements.armDozerIcon.src = armDozerIconPath;
+    elements.armDozerIcon.src = resources.paths.find(v => v.id === armDozerIconPathID)?.path ?? '';
+
     elements.caption.innerHTML = caption
       .map(v => `<div class="${ROOT_CLASS}__title__caption__clause">${v}</div>`)
       .reduce((a, b) => a + b);
@@ -91,5 +95,14 @@ export class NpcStageTitle implements DOMScene {
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * 各種リソースの読み込みが完了するまで待つ
+   *
+   * @return 待機結果
+   */
+  async waitUntilLoaded(): Promise<void> {
+    await this._isArmDozerIconLoaded;
   }
 }

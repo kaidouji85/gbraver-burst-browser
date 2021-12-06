@@ -15,7 +15,7 @@ import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {InNPCBattleCourse, NPCBattle, NPCBattleX} from "./in-progress/npc-battle/npc-battle";
 import {isStageClear, startNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
-import type {NPCBattleStage} from "./in-progress/npc-battle/npc-battle-course";
+import type {NPCBattleStage, StageLevel} from "./in-progress/npc-battle/npc-battle-course";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
@@ -365,7 +365,7 @@ export class Game {
       const {player, level} = inNPCBattleCourse;
       const stage = inNPCBattleCourse.course.stage(level);
       this._inProgress = {...origin, subFlow: inNPCBattleCourse};
-      await this._startNPCBattleStage(resources, player, stage);
+      await this._startNPCBattleStage(resources, player, stage, level);
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
@@ -448,12 +448,12 @@ export class Game {
       const nextStage = course.stage(nextLevel);
       const updatedInNPCBattle = {...origin.subFlow, level: nextLevel};
       this._inProgress = {...origin, subFlow: updatedInNPCBattle};
-      await this._startNPCBattleStage(resources, origin.subFlow.player, nextStage);
+      await this._startNPCBattleStage(resources, origin.subFlow.player, nextStage, nextLevel);
     };
     const npcBattleStageFailed = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
       const {level, player} = origin.subFlow;
       const stage = origin.subFlow.course.stage(level);
-      await this._startNPCBattleStage(resources, player, stage);
+      await this._startNPCBattleStage(resources, player, stage, level);
     }; 
     const npcBattleComplete = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
@@ -523,13 +523,13 @@ export class Game {
    * @param resources リソース管理オブジェクト
    * @param player プレイヤー
    * @param stage NPCバトルステージ
+   * @param level ステージレベル
    */
-  async _startNPCBattleStage(resources: Resources, player: Player, stage: NPCBattleStage) {
+  async _startNPCBattleStage(resources: Resources, player: Player, stage: NPCBattleStage, level: StageLevel) {
     const npcBattle = new NPCBattleRoom(player, stage.npc);
       
     await this._fader.fadeOut();
-    await this._domScenes.startMatchCard(resources, npcBattle.player.armdozer.id,
-      npcBattle.enemy.armdozer.id, stage.stageName);
+    await this._domScenes.startNPCStageTitle(resources, level, stage.caption, npcBattle.enemy.armdozer.id);
     await this._fader.fadeIn();
     
     const progress = v => Promise.resolve(npcBattle.progress(v));

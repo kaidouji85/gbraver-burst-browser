@@ -58,7 +58,7 @@
 .npc-stage-title__title__caption {
   display: flex;
   align-items: baseline;
-  transform: translateX(calc(var(--responsive-font-size) * 2));
+  margin-left: calc(var(--responsive-font-size) * 2);
 }
 
 .npc-stage-title__title__caption__clause:first-letter {

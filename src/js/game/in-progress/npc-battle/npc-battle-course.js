@@ -18,8 +18,10 @@ export type StageLevel = number
 
 /** NPCバトル ステージ */
 export type NPCBattleStage = {
-  /** ステージ名 */
+  /**  @deprecated ステージ名 */
   stageName: string,
+  /** ステージ名 */
+  caption: string[],
   /** 対戦相手 */
   npc: NPC
 };
@@ -69,6 +71,7 @@ export class SimpleNPCBattleCourse implements NPCBattleCourse {
 /** デフォルトのステージ */
 export const DefaultStage: NPCBattleStage = {
   stageName: 'STAGE 0',
+  caption: ['敵よりも大きい','バッテリーを出せ'],
   npc: new NeoLandozerNPC()
 };
 
@@ -76,14 +79,17 @@ export const DefaultStage: NPCBattleStage = {
 const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
     stageName: 'STAGE 1',
+    caption: ['敵よりも大きい','バッテリーを出せ'],
     npc: new WeakNeoLandozerNPC(),
   },
   {
     stageName: 'STAGE 2',
+    caption: ['音速の騎士','ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
   },
   {
     stageName: 'STAGE FINAL',
+    caption: ['不屈の守護神、その名は', 'ライトニングドーザ'],
     npc: new StrongLightningDozerNPC(),
   },
 ]);
@@ -92,14 +98,17 @@ const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
     stageName: 'STAGE 1',
+    caption: ['敵よりも大きい','バッテリーを出せ'],
     npc: new WeakShinBraverNPC(),
   },
   {
     stageName: 'STAGE 2',
+    caption: ['音速の騎士','ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
   },
   {
     stageName: 'STAGE FINAL',
+    caption: ['不屈の守護神、その名は', 'ライトニングドーザ'],
     npc: new StrongLightningDozerNPC(),
   },
 ]);
@@ -108,14 +117,17 @@ const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
     stageName: 'STAGE 1',
+    caption: ['敵よりも大きい','バッテリーを出せ'],
     npc: new WeakShinBraverNPC(),
   },
   {
     stageName: 'STAGE 2',
+    caption: ['音速の騎士','ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
   },
   {
     stageName: 'STAGE FINAL',
+    caption: ['最強の破壊神、', 'ネオランドーザ爆誕'],
     npc: new StrongNeoLandozerNPC(),
   },
 ]);
@@ -124,14 +136,17 @@ const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
     stageName: 'STAGE 1',
+    caption: ['敵よりも大きい','バッテリーを出せ'],
     npc: new WeakShinBraverNPC(),
   },
   {
     stageName: 'STAGE 2',
+    caption: ['最強の破壊神、', 'ネオランドーザ爆誕'],
     npc: new NeoLandozerNPC(),
   },
   {
     stageName: 'STAGE FINAL',
+    caption: ['不屈の守護神、その名は', 'ライトニングドーザ'],
     npc: new StrongLightningDozerNPC(),
   }
 ]);
