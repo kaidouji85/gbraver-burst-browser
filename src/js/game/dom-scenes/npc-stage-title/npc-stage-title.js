@@ -28,7 +28,8 @@ function rootInnerHTML(ids: DataIDs, level: StageLevel): string {
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__title__stage">
-        <div class="${ROOT_CLASS}__title__stage__prefix">STAGE</div>
+        <div class="${ROOT_CLASS}__title__stage__prefix--capitalized">S</div>      
+        <div class="${ROOT_CLASS}__title__stage__prefix">TAGE</div>
         <div class="${ROOT_CLASS}__title__stage__level">${level}</div>
       </div>
       <div class="${ROOT_CLASS}__title__caption" data-id="${ids.caption}"></div>
@@ -83,8 +84,10 @@ export class NPCStageTitle implements DOMScene {
     elements.armDozerIcon.src = resources.paths.find(v => v.id === armDozerIconPathID)?.path ?? '';
 
     elements.caption.innerHTML = caption
-      .map(v => `<div class="${ROOT_CLASS}__title__caption__clause">${v}</div>`)
-      .reduce((a, b) => a + b);
+      .map(v => `
+        <div class="${ROOT_CLASS}__title__caption__clause--capitalized">${v.slice(0,1)}</div>
+        <div class="${ROOT_CLASS}__title__caption__clause">${v.slice(1)}</div>
+      `).reduce((a, b) => a + b);
   }
 
   /** @override */

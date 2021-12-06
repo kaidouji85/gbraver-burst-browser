@@ -44,7 +44,7 @@
   align-items: baseline;
 }
 
-.npc-stage-title__title__stage__prefix:first-letter {
+.npc-stage-title__title__stage__prefix--capitalized {
   font-size: calc(var(--responsive-font-size) * 2.5);
   font-weight: bold;
 }
@@ -61,7 +61,7 @@
   margin-left: calc(var(--responsive-font-size) * 2);
 }
 
-.npc-stage-title__title__caption__clause:first-letter {
+.npc-stage-title__title__caption__clause--capitalized {
   font-size: calc(var(--responsive-font-size) * 2.5);
   font-weight: bold;
 }
