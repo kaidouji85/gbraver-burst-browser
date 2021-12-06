@@ -527,15 +527,17 @@ export class Game {
    */
   async _startNPCBattleStage(resources: Resources, player: Player, stage: NPCBattleStage, level: StageLevel) {
     const npcBattle = new NPCBattleRoom(player, stage.npc);
-      
     await this._fader.fadeOut();
     await this._domScenes.startNPCStageTitle(resources, level, stage.caption, npcBattle.enemy.armdozer.id);
     await this._fader.fadeIn();
-    
+    const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
     const battleScene = this._tdScenes.startBattle(resources, {progress}, npcBattle.player,
       npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
+    const battleSceneReadyTime = Date.now();
+    const latency = battleSceneReadyTime - startNPCStageTitleTime;
+    await waitTime(Math.max(3000- latency, 0));
     await this._fader.fadeOut();
     this._domScenes.hidden();
     await this._fader.fadeIn();
