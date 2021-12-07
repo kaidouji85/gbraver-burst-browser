@@ -30,6 +30,7 @@
   object-fit: cover;
   width: 20vw;
   margin-top: var(--responsive-font-size);
+  transform: scale(-1, 1);
 }
 
 .npc-stage-title__title {
