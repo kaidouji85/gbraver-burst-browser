@@ -10,6 +10,7 @@ import {WingDozerNPC} from "../../../npc/wing-dozer";
 import {StrongNeoLandozerNPC} from "../../../npc/strong-neo-landozer";
 import {StrongLightningDozerNPC} from "../../../npc/strong-lightning-dozer";
 import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../../npc/one-battery";
+import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../../npc/max-battery-attack";
 
 /**
  * ステージレベル
@@ -69,16 +70,38 @@ export class SimpleNPCBattleCourse implements NPCBattleCourse {
 
 /** デフォルトのステージ */
 export const DefaultStage: NPCBattleStage = {
-  caption: ['敵よりも大きい','バッテリーを出せ'],
+  caption: ['敵よりも大きい', 'バッテリーを出せ'],
   npc: new NeoLandozerNPC()
+};
+
+/** 1バッテリー ネオランドーザ */
+const OneBatteryNeoLandozerStage: NPCBattleStage = {
+  caption: ['敵よりも大きい', 'バッテリーを出せ'],
+  npc: oneBatteryNeoLandozerNPC()
+};
+
+/** 1バッテリー シンブレイバー */
+const OneBatteryShinBraverStage: NPCBattleStage = {
+  caption: ['敵よりも大きい', 'バッテリーを出せ'],
+  npc: oneBatteryShinBraverNPC(),
+};
+
+/** 全力攻撃 ウィングドーザ */
+const maxAttackWingDozerStage: NPCBattleStage = {
+  caption: ['0防御は', '即死'],
+  npc: maxBatteryAttackWingDozerNPC()
+};
+
+/** 全力攻撃 シンブレイバー */
+const maxAttackShinBraverStage: NPCBattleStage = {
+  caption: ['0防御は', '即死'],
+  npc: maxBatteryAttackShinBraverNPC()
 };
 
 /** シンブレイバー NPCバトルコース */
 const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  {
-    caption: ['敵よりも大きい','バッテリーを出せ'],
-    npc: oneBatteryNeoLandozerNPC()
-  },
+  OneBatteryNeoLandozerStage,
+  maxAttackWingDozerStage,
   {
     caption: ['相手のバッテリー','切れを狙え'],
     npc: new WeakNeoLandozerNPC(),
@@ -95,10 +118,8 @@ const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 
 /** ネオランドーザ NPCバトルコース */
 const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  {
-    caption: ['敵よりも大きい','バッテリーを出せ'],
-    npc: oneBatteryShinBraverNPC(),
-  },
+  OneBatteryShinBraverStage,
+  maxAttackWingDozerStage,
   {
     caption: ['相手のバッテリー','切れを狙え'],
     npc: new WeakShinBraverNPC(),
@@ -115,10 +136,8 @@ const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 
 /** ライトニングドーザ NPCバトルコース */
 const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  {
-    caption: ['敵よりも大きい','バッテリーを出せ'],
-    npc: oneBatteryNeoLandozerNPC()
-  },
+  OneBatteryNeoLandozerStage,
+  maxAttackWingDozerStage,
   {
     caption: ['相手のバッテリー','切れを狙え'],
     npc: new WeakShinBraverNPC(),
@@ -135,10 +154,8 @@ const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 
 /** ウィングドーザ NPCバトルコース */
 const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  {
-    caption: ['敵よりも大きい','バッテリーを出せ'],
-    npc: oneBatteryNeoLandozerNPC()
-  },
+  OneBatteryNeoLandozerStage,
+  maxAttackShinBraverStage,
   {
     caption: ['相手のバッテリー','切れを狙え'],
     npc: new WeakShinBraverNPC(),
