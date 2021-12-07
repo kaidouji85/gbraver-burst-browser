@@ -2,13 +2,14 @@
 
 import type {NPC} from "../../../npc/npc";
 import {NeoLandozerNPC} from "../../../npc/neo-landozer";
-import {WeakNeoLandozerNPC} from "../../../npc/weak-neo-landozer-npc";
-import {WeakShinBraverNPC} from "../../../npc/weak-shin-braver";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {WingDozerNPC} from "../../../npc/wing-dozer";
 import {StrongNeoLandozerNPC} from "../../../npc/strong-neo-landozer";
 import {StrongLightningDozerNPC} from "../../../npc/strong-lightning-dozer";
+import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../../npc/one-battery";
+import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../../npc/max-battery-attack";
+import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../../../npc/attack-3-defense-2";
 
 /**
  * ステージレベル
@@ -42,6 +43,12 @@ export interface NPCBattleCourse {
   lastStageLevel(): StageLevel;
 }
 
+/** デフォルトのステージ */
+export const DefaultStage: NPCBattleStage = {
+  caption: ['敵よりも大きい', 'バッテリーを出せ'],
+  npc: new NeoLandozerNPC()
+};
+
 /** NPCバトルコースのシンプルな実装 */
 export class SimpleNPCBattleCourse implements NPCBattleCourse {
   _stages: NPCBattleStage[];
@@ -66,18 +73,47 @@ export class SimpleNPCBattleCourse implements NPCBattleCourse {
   }
 }
 
-/** デフォルトのステージ */
-export const DefaultStage: NPCBattleStage = {
-  caption: ['敵よりも大きい','バッテリーを出せ'],
-  npc: new NeoLandozerNPC()
+/** 1バッテリー ネオランドーザ */
+const OneBatteryNeoLandozerStage: NPCBattleStage = {
+  caption: ['敵よりも大きい', 'バッテリーを出せ'],
+  npc: oneBatteryNeoLandozerNPC()
+};
+
+/** 1バッテリー シンブレイバー */
+const OneBatteryShinBraverStage: NPCBattleStage = {
+  caption: OneBatteryNeoLandozerStage.caption,
+  npc: oneBatteryShinBraverNPC(),
+};
+
+/** 全力攻撃 ウィングドーザ */
+const MaxAttackWingDozerStage: NPCBattleStage = {
+  caption: ['ゼロ防御だと即', '死する'],
+  npc: maxBatteryAttackWingDozerNPC()
+};
+
+/** 全力攻撃 シンブレイバー */
+const MaxAttackShinBraverStage: NPCBattleStage = {
+  caption: MaxAttackWingDozerStage.caption,
+  npc: maxBatteryAttackShinBraverNPC()
+};
+
+/** 3攻撃2防御 ライトングドーザ */
+const Attack3Defense2LightningDozerStage: NPCBattleStage = {
+  caption: ['相手のバッテリー', '切れを狙え'],
+  npc: attack3Defense2LightningDozerNPC()
+};
+
+/** 3攻撃2防御 シンブレイバー */
+const Attack3Defense2ShinBraverStage: NPCBattleStage = {
+  caption: Attack3Defense2LightningDozerStage.caption,
+  npc: attack3Defense2ShinBraverNPC()
 };
 
 /** シンブレイバー NPCバトルコース */
 const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  {
-    caption: ['敵よりも大きい','バッテリーを出せ'],
-    npc: new WeakNeoLandozerNPC(),
-  },
+  OneBatteryNeoLandozerStage,
+  MaxAttackWingDozerStage,
+  Attack3Defense2LightningDozerStage,
   {
     caption: ['音速の騎士','ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
@@ -90,10 +126,9 @@ const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 
 /** ネオランドーザ NPCバトルコース */
 const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  {
-    caption: ['敵よりも大きい','バッテリーを出せ'],
-    npc: new WeakShinBraverNPC(),
-  },
+  OneBatteryShinBraverStage,
+  MaxAttackWingDozerStage,
+  Attack3Defense2LightningDozerStage,
   {
     caption: ['音速の騎士','ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
@@ -106,10 +141,9 @@ const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 
 /** ライトニングドーザ NPCバトルコース */
 const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  {
-    caption: ['敵よりも大きい','バッテリーを出せ'],
-    npc: new WeakShinBraverNPC(),
-  },
+  OneBatteryNeoLandozerStage,
+  MaxAttackWingDozerStage,
+  Attack3Defense2ShinBraverStage,
   {
     caption: ['音速の騎士','ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
@@ -122,10 +156,10 @@ const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 
 /** ウィングドーザ NPCバトルコース */
 const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  {
-    caption: ['敵よりも大きい','バッテリーを出せ'],
-    npc: new WeakShinBraverNPC(),
-  },
+  OneBatteryNeoLandozerStage,
+  MaxAttackShinBraverStage,
+  Attack3Defense2LightningDozerStage,
+
   {
     caption: ['最強の破壊神、', 'ネオランドーザ爆誕'],
     npc: new NeoLandozerNPC(),
