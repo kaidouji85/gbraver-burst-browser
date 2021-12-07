@@ -19,8 +19,8 @@ export type SimpleRoutineData = {
 /**
  * シンプルなルーチン
  *
- * @param data ルーチンに渡されるデータ
- * @return 選択するコマンド
+ * @param data ルーチンに渡すデータ
+ * @return NPCが選択するコマンド
  */
 export type SimpleRoutine = (data: SimpleRoutineData) => Command;
 
