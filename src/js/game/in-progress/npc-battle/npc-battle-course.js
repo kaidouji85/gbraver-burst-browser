@@ -9,6 +9,7 @@ import {ArmDozerIdList} from "gbraver-burst-core";
 import {WingDozerNPC} from "../../../npc/wing-dozer";
 import {StrongNeoLandozerNPC} from "../../../npc/strong-neo-landozer";
 import {StrongLightningDozerNPC} from "../../../npc/strong-lightning-dozer";
+import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../../npc/one-battery";
 
 /**
  * ステージレベル
@@ -76,6 +77,10 @@ export const DefaultStage: NPCBattleStage = {
 const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
     caption: ['敵よりも大きい','バッテリーを出せ'],
+    npc: oneBatteryNeoLandozerNPC()
+  },
+  {
+    caption: ['相手のバッテリー','切れを狙え'],
     npc: new WeakNeoLandozerNPC(),
   },
   {
@@ -92,6 +97,10 @@ const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
     caption: ['敵よりも大きい','バッテリーを出せ'],
+    npc: oneBatteryShinBraverNPC(),
+  },
+  {
+    caption: ['相手のバッテリー','切れを狙え'],
     npc: new WeakShinBraverNPC(),
   },
   {
@@ -108,6 +117,10 @@ const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
     caption: ['敵よりも大きい','バッテリーを出せ'],
+    npc: oneBatteryNeoLandozerNPC()
+  },
+  {
+    caption: ['相手のバッテリー','切れを狙え'],
     npc: new WeakShinBraverNPC(),
   },
   {
@@ -124,6 +137,10 @@ const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   {
     caption: ['敵よりも大きい','バッテリーを出せ'],
+    npc: oneBatteryNeoLandozerNPC()
+  },
+  {
+    caption: ['相手のバッテリー','切れを狙え'],
     npc: new WeakShinBraverNPC(),
   },
   {
