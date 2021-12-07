@@ -81,19 +81,19 @@ const OneBatteryNeoLandozerStage: NPCBattleStage = {
 
 /** 1バッテリー シンブレイバー */
 const OneBatteryShinBraverStage: NPCBattleStage = {
-  caption: ['敵よりも大きい', 'バッテリーを出せ'],
+  caption: OneBatteryNeoLandozerStage.caption,
   npc: oneBatteryShinBraverNPC(),
 };
 
 /** 全力攻撃 ウィングドーザ */
 const maxAttackWingDozerStage: NPCBattleStage = {
-  caption: ['0防御は', '即死'],
+  caption: ['ゼロ防御だと即', '死する'],
   npc: maxBatteryAttackWingDozerNPC()
 };
 
 /** 全力攻撃 シンブレイバー */
 const maxAttackShinBraverStage: NPCBattleStage = {
-  caption: ['0防御は', '即死'],
+  caption: maxAttackWingDozerStage.caption,
   npc: maxBatteryAttackShinBraverNPC()
 };
 
