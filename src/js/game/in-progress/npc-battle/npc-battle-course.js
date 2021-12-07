@@ -2,8 +2,6 @@
 
 import type {NPC} from "../../../npc/npc";
 import {NeoLandozerNPC} from "../../../npc/neo-landozer";
-import {WeakNeoLandozerNPC} from "../../../npc/weak-neo-landozer-npc";
-import {WeakShinBraverNPC} from "../../../npc/weak-shin-braver";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {WingDozerNPC} from "../../../npc/wing-dozer";
@@ -11,6 +9,7 @@ import {StrongNeoLandozerNPC} from "../../../npc/strong-neo-landozer";
 import {StrongLightningDozerNPC} from "../../../npc/strong-lightning-dozer";
 import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../../npc/one-battery";
 import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../../npc/max-battery-attack";
+import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../../../npc/attack-3-defense-2";
 
 /**
  * ステージレベル
@@ -98,14 +97,23 @@ const maxAttackShinBraverStage: NPCBattleStage = {
   npc: maxBatteryAttackShinBraverNPC()
 };
 
+/** 3攻撃2防御 ライトングドーザ */
+const attack3Defense2LightningDozerStage: NPCBattleStage = {
+  caption: ['相手のバッテリー', '切れを狙え'],
+  npc: attack3Defense2LightningDozerNPC()
+};
+
+/** 3攻撃2防御 シンブレイバー */
+const attack3Defense2ShinBraverStage: NPCBattleStage = {
+  caption: ['相手のバッテリー', '切れを狙え'],
+  npc: attack3Defense2ShinBraverNPC()
+};
+
 /** シンブレイバー NPCバトルコース */
 const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   maxAttackWingDozerStage,
-  {
-    caption: ['相手のバッテリー','切れを狙え'],
-    npc: new WeakNeoLandozerNPC(),
-  },
+  attack3Defense2LightningDozerStage,
   {
     caption: ['音速の騎士','ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
@@ -120,10 +128,7 @@ const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryShinBraverStage,
   maxAttackWingDozerStage,
-  {
-    caption: ['相手のバッテリー','切れを狙え'],
-    npc: new WeakShinBraverNPC(),
-  },
+  attack3Defense2LightningDozerStage,
   {
     caption: ['音速の騎士','ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
@@ -138,10 +143,7 @@ const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   maxAttackWingDozerStage,
-  {
-    caption: ['相手のバッテリー','切れを狙え'],
-    npc: new WeakShinBraverNPC(),
-  },
+  attack3Defense2ShinBraverStage,
   {
     caption: ['音速の騎士','ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
@@ -156,10 +158,8 @@ const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
 const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   maxAttackShinBraverStage,
-  {
-    caption: ['相手のバッテリー','切れを狙え'],
-    npc: new WeakShinBraverNPC(),
-  },
+  attack3Defense2LightningDozerStage,
+
   {
     caption: ['最強の破壊神、', 'ネオランドーザ爆誕'],
     npc: new NeoLandozerNPC(),
