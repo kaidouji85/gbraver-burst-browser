@@ -8,7 +8,7 @@ export default {
   title: 'degree-of-difficulty',
 };
 
-export const dialog: DOMStubStory = domStub(() => {
-  const dialog = new DegreeOfDifficultyDialog();
+export const dialog: DOMStubStory = domStub(resources => {
+  const dialog = new DegreeOfDifficultyDialog(resources);
   return dialog.getRootHTMLElement();
 });

@@ -1,0 +1,70 @@
+/**
+ * 難易度選択ダイアログ
+ */
+ @media (orientation: landscape) {
+  .degree-of-difficulty {
+    --delete-account-consent-dialog-height: calc(var(--vh) * 80);
+    --delete-account-consent-dialog-width: calc(min(var(--delete-account-consent-dialog-height) * 16 / 9, 90vw));
+    --control-button-width: calc(var(--responsive-font-size) * 10);
+    --control-button-height: calc(var(--responsive-font-size) * 3);
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .degree-of-difficulty {
+    display: none;
+  }
+}
+
+.degree-of-difficulty__background {
+  position: absolute;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.degree-of-difficulty__closer {
+  --icon-width: 48px;
+  --icon-height: 48px;
+  position: fixed;
+  top: calc(
+    calc(var(--vh, 1vh) * 50)
+    - var(--delete-account-consent-dialog-height) / 2
+    - var(--icon-width) / 2
+  );
+  left: calc(
+    50vw
+    - var(--delete-account-consent-dialog-width) / 2
+    - var(--icon-height) / 2
+  );
+  width: var(--icon-width);
+  height: var(--icon-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--zindex-close);
+}
+
+.degree-of-difficulty__dialog {
+  width: var(--delete-account-consent-dialog-width);
+  height: var(--delete-account-consent-dialog-height);
+  top: calc(var(--vh, 1vh) * 50);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+  box-sizing: border-box;
+  padding: 0 calc(var(--responsive-font-size) * 1);
+}
