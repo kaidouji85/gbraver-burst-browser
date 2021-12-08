@@ -36,7 +36,7 @@ import type {
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
-import {SuddenlyBattleEndMonitor} from "./api/suddenly-battle-end-monitor";
+import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
 import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
 

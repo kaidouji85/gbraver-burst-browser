@@ -1,6 +1,6 @@
 // @flow
 
-import type {PostNetworkError} from '../../networ-error/post-network-error';
+import type {PostNetworkError} from '../../network/post-network-error';
 import {Howl} from 'howler';
 import type {DOMDialog} from "../dialog";
 import {domUuid} from "../../../uuid/dom-uuid";
