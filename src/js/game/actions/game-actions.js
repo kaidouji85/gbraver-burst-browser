@@ -1,7 +1,7 @@
 // @flow
 
 import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
-import type {PostNetworkError} from '../dom-dialogs/network-error/post-network-error';
+import type {PostNetworkError} from '../networ-error/post-network-error';
 
 /** ゲームスタート */
 export type GameStart = {

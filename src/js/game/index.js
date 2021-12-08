@@ -15,7 +15,7 @@ import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {InNPCBattleCourse, NPCBattle, NPCBattleX} from "./in-progress/npc-battle/npc-battle";
 import {isStageClear, startNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
-import type {NPCBattleStage, StageLevel} from "./in-progress/npc-battle/npc-battle-course";
+import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-course";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";

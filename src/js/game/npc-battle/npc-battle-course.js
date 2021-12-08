@@ -1,15 +1,15 @@
 // @flow
 
-import type {NPC} from "../../../npc/npc";
-import {NeoLandozerNPC} from "../../../npc/neo-landozer";
+import type {NPC} from "../../npc/npc";
+import {NeoLandozerNPC} from "../../npc/neo-landozer";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
-import {WingDozerNPC} from "../../../npc/wing-dozer";
-import {StrongNeoLandozerNPC} from "../../../npc/strong-neo-landozer";
-import {StrongLightningDozerNPC} from "../../../npc/strong-lightning-dozer";
-import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../../npc/one-battery";
-import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../../npc/max-battery-attack";
-import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../../../npc/attack-3-defense-2";
+import {WingDozerNPC} from "../../npc/wing-dozer";
+import {StrongNeoLandozerNPC} from "../../npc/strong-neo-landozer";
+import {StrongLightningDozerNPC} from "../../npc/strong-lightning-dozer";
+import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../npc/one-battery";
+import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../npc/max-battery-attack";
+import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../../npc/attack-3-defense-2";
 
 /**
  * ステージレベル

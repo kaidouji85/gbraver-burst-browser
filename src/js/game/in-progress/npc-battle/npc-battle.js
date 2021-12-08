@@ -3,8 +3,8 @@
 import type {GameEndResult, Player} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {SelectionComplete} from "../../actions/game-actions";
-import type {StageLevel, NPCBattleCourse} from './npc-battle-course';
-import {getNPCBattleCourse} from './npc-battle-course';
+import type {StageLevel, NPCBattleCourse} from '../../npc-battle/npc-battle-course';
+import {getNPCBattleCourse} from '../../npc-battle/npc-battle-course';
 import {playerUuid} from "../../../uuid/player";
 
 /** プレイヤー選択 */

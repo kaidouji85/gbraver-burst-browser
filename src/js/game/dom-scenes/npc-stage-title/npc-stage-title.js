@@ -2,7 +2,7 @@
 
 import type {DOMScene} from "../dom-scene";
 import type {Resources} from "../../../resource";
-import type {StageLevel} from "../../in-progress/npc-battle/npc-battle-course";
+import type {StageLevel} from "../../npc-battle/npc-battle-course";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
