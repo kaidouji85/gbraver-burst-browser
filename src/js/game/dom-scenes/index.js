@@ -16,7 +16,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import type {TitleAccount} from "./title/title-account";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
-import type {StageLevel} from "../npc-battle/npc-battle-course";
+import type {StageLevel} from "../npc-battle/npc-battle-stage";
 
 /**
  * 最大読み込み待機時間(ミリ秒)

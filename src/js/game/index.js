@@ -15,7 +15,6 @@ import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {InNPCBattleCourse, NPCBattle, NPCBattleX} from "./in-progress/npc-battle/npc-battle";
 import {isStageClear, startNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
-import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-course";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
@@ -39,6 +38,7 @@ import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./api/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
+import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
