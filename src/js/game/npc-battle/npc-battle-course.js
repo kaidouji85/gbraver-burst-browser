@@ -3,6 +3,9 @@
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {NPCBattleStage, StageLevel} from "./npc-battle-stage";
 
+/** NPCバトルコース難易度 */
+export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard';
+
 /** NPCバトルコース */
 export interface NPCBattleCourse {
   /**

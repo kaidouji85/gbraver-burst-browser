@@ -10,5 +10,8 @@ export default {
 
 export const dialog: DOMStubStory = domStub(resources => {
   const dialog = new DegreeOfDifficultyDialog(resources);
+  dialog.selectionCompleteNotifier().subscribe(diffuculty => {
+    console.log(diffuculty);
+  });
   return dialog.getRootHTMLElement();
 });
