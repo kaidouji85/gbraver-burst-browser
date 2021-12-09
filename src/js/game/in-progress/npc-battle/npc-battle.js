@@ -3,9 +3,10 @@
 import type {GameEndResult, Player} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {SelectionComplete} from "../../actions/game-actions";
-import type {StageLevel, NPCBattleCourse} from './npc-battle-course';
-import {getNPCBattleCourse} from './npc-battle-course';
+import type {NPCBattleCourse} from '../../npc-battle/npc-battle-course';
 import {playerUuid} from "../../../uuid/player";
+import {NPCBattleCourseMaster} from "../../npc-battle/npc-battle-course-master";
+import type {StageLevel} from "../../npc-battle/npc-battle-stage";
 
 /** プレイヤー選択 */
 export type PlayerSelect = {
@@ -49,7 +50,7 @@ export function startNPCBattleCourse(action: SelectionComplete): InNPCBattleCour
   const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
   const player = {playerId: playerUuid(), armdozer, pilot};
-  const course = getNPCBattleCourse(armdozer.id);
+  const course = NPCBattleCourseMaster.find(armdozer.id);
   return {type: 'InNPCBattleCourse', player, course, level: 1};
 }
 
