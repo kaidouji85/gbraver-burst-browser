@@ -13,5 +13,8 @@ export const dialog: DOMStubStory = domStub(resources => {
   dialog.selectionCompleteNotifier().subscribe(diffuculty => {
     console.log(diffuculty);
   });
+  dialog.closeDialogNotifier().subscribe(() => {
+    console.log('close dialog');
+  });
   return dialog.getRootHTMLElement();
 });
