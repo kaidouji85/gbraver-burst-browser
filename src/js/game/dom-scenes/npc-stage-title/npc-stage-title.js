@@ -2,11 +2,11 @@
 
 import type {DOMScene} from "../dom-scene";
 import type {Resources} from "../../../resource";
-import type {StageLevel} from "../../in-progress/npc-battle/npc-battle-course";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
+import type {StageLevel} from "../../npc-battle/npc-battle-stage";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'npc-stage-title';

@@ -2,7 +2,8 @@
 
 import test from 'ava';
 import {NeoLandozerNPC} from '../../../../../src/js/npc/neo-landozer';
-import {DefaultStage, SimpleNPCBattleCourse} from '../../../../../src/js/game/in-progress/npc-battle/npc-battle-course';
+import {SimpleNPCBattleCourse} from "../../../../../src/js/game/npc-battle/simple-npc-battle-course";
+import {DefaultStage} from "../../../../../src/js/game/npc-battle/npc-battle-stage";
 
 const stage1 = {caption: ['test stage 1'], npc: new NeoLandozerNPC()};
 const stage2 = {caption: ['test stage 2'], npc: new NeoLandozerNPC()};

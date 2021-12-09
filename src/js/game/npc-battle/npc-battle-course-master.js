@@ -1,77 +1,16 @@
 // @flow
-
-import type {NPC} from "../../../npc/npc";
-import {NeoLandozerNPC} from "../../../npc/neo-landozer";
-import type {ArmDozerId} from "gbraver-burst-core";
+import {WingDozerNPC} from "../../npc/wing-dozer";
+import {StrongNeoLandozerNPC} from "../../npc/strong-neo-landozer";
+import type {ArmDozerId} from 'gbraver-burst-core';
 import {ArmDozerIdList} from "gbraver-burst-core";
-import {WingDozerNPC} from "../../../npc/wing-dozer";
-import {StrongNeoLandozerNPC} from "../../../npc/strong-neo-landozer";
-import {StrongLightningDozerNPC} from "../../../npc/strong-lightning-dozer";
-import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../../npc/one-battery";
-import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../../npc/max-battery-attack";
-import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../../../npc/attack-3-defense-2";
-
-/**
- * ステージレベル
- * 1から始まり+1間隔で増える
- */
-export type StageLevel = number
-
-/** NPCバトル ステージ */
-export type NPCBattleStage = {
-  /** ステージ名 */
-  caption: string[],
-  /** 対戦相手 */
-  npc: NPC
-};
-
-/** NPCバトルコース */
-export interface NPCBattleCourse {
-  /**
-   * 指定したステージを取得する
-   * 
-   * @param level ステージレベル
-   * @return ステージ
-   */
-  stage(level: StageLevel): NPCBattleStage;
-
-  /**
-   * ラストステージのレベルを返す
-   * 
-   * @return ラストステージのレベル
-   */
-  lastStageLevel(): StageLevel;
-}
-
-/** デフォルトのステージ */
-export const DefaultStage: NPCBattleStage = {
-  caption: ['敵よりも大きい', 'バッテリーを出せ'],
-  npc: new NeoLandozerNPC()
-};
-
-/** NPCバトルコースのシンプルな実装 */
-export class SimpleNPCBattleCourse implements NPCBattleCourse {
-  _stages: NPCBattleStage[];
-
-  /**
-   * コンストラクタ
-   * 
-   * @param stages コースに含まれる全ステージ 
-   */
-  constructor(stages: NPCBattleStage[]) {
-    this._stages = stages;
-  }
-
-  /** @override */
-  stage(level: StageLevel): NPCBattleStage {
-    return this._stages[level - 1] ?? DefaultStage;
-  }
-
-  /** @override */
-  lastStageLevel(): StageLevel {
-    return this._stages.length;
-  }
-}
+import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../../npc/attack-3-defense-2";
+import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../npc/one-battery";
+import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../npc/max-battery-attack";
+import {StrongLightningDozerNPC} from "../../npc/strong-lightning-dozer";
+import {NeoLandozerNPC} from "../../npc/neo-landozer";
+import type {NPCBattleCourse, NPCBattleCourseContainer} from "./npc-battle-course";
+import {SimpleNPCBattleCourse} from "./simple-npc-battle-course";
+import type {NPCBattleStage} from "./npc-battle-stage";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
@@ -115,7 +54,7 @@ const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   MaxAttackWingDozerStage,
   Attack3Defense2LightningDozerStage,
   {
-    caption: ['音速の騎士','ウィングドーザ襲来'],
+    caption: ['音速の騎士', 'ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
   },
   {
@@ -130,7 +69,7 @@ const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   MaxAttackWingDozerStage,
   Attack3Defense2LightningDozerStage,
   {
-    caption: ['音速の騎士','ウィングドーザ襲来'],
+    caption: ['音速の騎士', 'ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
   },
   {
@@ -145,7 +84,7 @@ const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   MaxAttackWingDozerStage,
   Attack3Defense2ShinBraverStage,
   {
-    caption: ['音速の騎士','ウィングドーザ襲来'],
+    caption: ['音速の騎士', 'ウィングドーザ襲来'],
     npc: new WingDozerNPC(),
   },
   {
@@ -170,23 +109,26 @@ const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   }
 ]);
 
-/**
- * アームドーザIDに対応したNPCバトルコースを取得する
- * 
- * @param armdozerId アームドーザID 
- * @return NPCバトルコース
- */
-export function getNPCBattleCourse(armdozerId: ArmDozerId): NPCBattleCourse {
-  switch(armdozerId) {
-    case ArmDozerIdList.SHIN_BRAVER:
+/** NPCバトルコースマスタ */
+export const NPCBattleCourseMaster: NPCBattleCourseContainer = {
+  /** @override */
+  find(armdozerId: ArmDozerId) {
+    if (armdozerId === ArmDozerIdList.SHIN_BRAVER) {
       return ShinBraverNPCCourse;
-    case ArmDozerIdList.NEO_LANDOZER:
+    }
+
+    if (armdozerId === ArmDozerIdList.NEO_LANDOZER) {
       return NeoLandozerNPCCourse;
-    case ArmDozerIdList.LIGHTNING_DOZER:
+    }
+
+    if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER) {
       return LightningDozerNPCCourse;
-    case ArmDozerIdList.WING_DOZER:
+    }
+
+    if (armdozerId === ArmDozerIdList.WING_DOZER) {
       return WingDozerNPCCourse;
-    default:
-      return ShinBraverNPCCourse;    
+    }
+
+    return ShinBraverNPCCourse;
   }
 }
