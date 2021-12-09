@@ -59,8 +59,8 @@ type Elements = {
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const easy = root.querySelector(`[data-id="${ids.easy}"]`) ?? document.createElement('div');
-  const normal = root.querySelector(`[data-id="${ids.easy}"]`) ?? document.createElement('div');
-  const hard = root.querySelector(`[data-id="${ids.easy}"]`) ?? document.createElement('div');
+  const normal = root.querySelector(`[data-id="${ids.normal}"]`) ?? document.createElement('div');
+  const hard = root.querySelector(`[data-id="${ids.hard}"]`) ?? document.createElement('div');
   return {easy, normal, hard};
 }
 
@@ -68,6 +68,8 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 export class DegreeOfDifficultyDialog implements DOMDialog {
   _root: HTMLElement;
   _easy: HTMLElement;
+  _normal: HTMLElement;
+  _hard: HTMLElement;
   _exclusive: Exclusive;
   _selectionComplete: StreamSource<NPCBattleCourseDifficulty>;
   _unsubscribers: Unsubscriber[];
@@ -85,10 +87,18 @@ export class DegreeOfDifficultyDialog implements DOMDialog {
 
     const elements = extractElements(this._root, ids);
     this._easy = elements.easy;
+    this._normal = elements.normal;
+    this._hard = elements.hard;
     this._unsubscribers = [
       pushDOMStream(this._easy).subscribe(action => {
         this._onEasyPush(action);
-      })
+      }),
+      pushDOMStream(this._normal).subscribe(action => {
+        this._onNormalPush(action);
+      }),
+      pushDOMStream(this._hard).subscribe(action => {
+        this._onHardPush(action);
+      }),
     ];
 
     this._selectionComplete = new RxjsStreamSource();
@@ -127,6 +137,34 @@ export class DegreeOfDifficultyDialog implements DOMDialog {
       action.event.stopPropagation();
       await pop(this._easy);
       this._selectionComplete.next('Easy');
+    });
+  }
+
+  /**
+   * Normalが押された際の処理
+   * 
+   * @param action アクション 
+   */
+  _onNormalPush(action: PushDOM): void {
+    this._exclusive.execute(async () => {
+      action.event.preventDefault();
+      action.event.stopPropagation();
+      await pop(this._normal);
+      this._selectionComplete.next('Normal');
+    });
+  }
+
+  /**
+   * Hardが押された際の処理
+   * 
+   * @param action アクション 
+   */
+  _onHardPush(action: PushDOM): void {
+    this._exclusive.execute(async () => {
+      action.event.preventDefault();
+      action.event.stopPropagation();
+      await pop(this._hard);
+      this._selectionComplete.next('Hard');
     });
   }
 }
