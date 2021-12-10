@@ -20,7 +20,8 @@ import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
-import type {EndBattle, EndNetworkError, GameAction, SelectionComplete} from "./actions/game-actions";
+import type {EndBattle, EndNetworkError, GameAction, SelectionComplete, 
+  WebSocketAPIError, WebSocketAPIUnintentionalClose} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {
@@ -156,6 +157,8 @@ export class Game {
       else if (action.type === 'CancelAccountDeletion') { this._onCancelAccountDeletion() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
+      else if (action.type === 'WebSocketAPIError') { this._onWebSocketAPIError(action) }
+      else if (action.type === 'WebSocketAPIUnintentionalClose') { this._onWebSocketAPIUnintentionalClose(action) }
     }));
   }
 
@@ -511,6 +514,38 @@ export class Game {
     this._domDialogs.startNetworkError(resources, postNetworkError);
     this._suddenlyBattleEndMonitor.unbind();
     await this._api.disconnectWebsocket();
+  }
+
+  /**
+   * WebSocketAPIエラー時の処理
+   *
+   * @param action アクション
+   */
+  _onWebSocketAPIError(action: WebSocketAPIError): void {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const postNetworkError = {type: 'GotoTitle'};
+    this._domDialogs.startNetworkError(resources, postNetworkError);
+    throw action;
+  }
+
+  /**
+   * WebSocketAPI意図しない切断時の処理
+   *
+   * @param action アクション
+   */
+  _onWebSocketAPIUnintentionalClose(action: WebSocketAPIUnintentionalClose): void {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const postNetworkError = {type: 'GotoTitle'};
+    this._domDialogs.startNetworkError(resources, postNetworkError);
+    throw action;
   }
 
   /**
