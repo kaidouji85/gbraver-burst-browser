@@ -93,14 +93,14 @@ export type CancelAccountDeletion = {
 /** WebSocketAPI エラー発生 */
 export type WebSocketAPIError = {
   type: 'WebSocketAPIError',
-  /** 何かしらのエラー情報 */
+  /** エラー情報 */
   error: any,
 };
 
-/** WebSocketAPI 意図せず切断した */
+/** WebSocketAPI意図せず切断した */
 export type WebSocketAPIUnintentionalClose = {
   type: 'WebSocketAPIUnintentionalClose',
-  /** 何かしらのエラー情報 */
+  /** エラー情報 */
   error: any,
 };
 

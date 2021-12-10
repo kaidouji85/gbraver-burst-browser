@@ -40,6 +40,7 @@ import type {
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
+import {toWebSocketAPIErrorStream, toWebSocketAPIUnintentionalCloseStream} from './network/websocket-api-stream';
 import {map} from "../stream/operator";
 import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
 
@@ -133,9 +134,11 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
+    const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)));
+    const webSocketAPIError = toWebSocketAPIErrorStream(this._api).chain(map(v => (v: GameAction)));
+    const WebSocketAPIUnintentionalClose = toWebSocketAPIUnintentionalCloseStream(this._api).chain(map(v => (v: GameAction)));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(),
-      this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)))];
+      this._domDialogs.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'EndBattle') { this._onEndBattle(action) }
       else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
