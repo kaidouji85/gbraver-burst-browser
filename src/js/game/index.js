@@ -32,18 +32,21 @@ import type {
   UniversalLogin,
   UserMailGet,
   UserNameGet,
-  UserPictureGet
+  UserPictureGet,
+  WebsocketDisconnect,
+  WebsocketErrorNotifier,
+  WebsocketUnintentionalCloseNotifier,
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
 import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
-import type {WebsocketDisconnect} from "@gbraver-burst-network/browser-core/lib";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
-  UserNameGet, UserPictureGet, MailVerify, UserMailGet, WebsocketDisconnect {}
+  UserNameGet, UserPictureGet, MailVerify, UserMailGet, WebsocketDisconnect, 
+  WebsocketErrorNotifier, WebsocketUnintentionalCloseNotifier {}
 
 /** コンストラクタのパラメータ */
 type Param = {

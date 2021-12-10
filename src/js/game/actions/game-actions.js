@@ -90,6 +90,20 @@ export type CancelAccountDeletion = {
   type: 'CancelAccountDeletion'
 };
 
+/** WebSocketAPI エラー発生 */
+export type WebSocketAPIError = {
+  type: 'WebSocketAPIError',
+  /** 何かしらのエラー情報 */
+  error: any,
+};
+
+/** WebSocketAPI 意図せず切断した */
+export type WebSocketAPIUnintentionalClose = {
+  type: 'WebSocketAPIUnintentionalClose',
+  /** 何かしらのエラー情報 */
+  error: any,
+};
+
 /** 通信エラーダイアログを閉じる */
 export type EndNetworkError = {
   type: 'EndNetworkError',
@@ -115,4 +129,6 @@ export type GameAction = GameStart
  | AccountDeleteConsent
  | DeleteAccount
  | CancelAccountDeletion
+ | WebSocketAPIError
+ | WebSocketAPIUnintentionalClose
  | EndNetworkError;
