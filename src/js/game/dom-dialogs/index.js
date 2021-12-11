@@ -133,6 +133,14 @@ export class DOMDialogs {
     this._removeCurrentDialog();
 
     const degreeOfDifficulty = new DegreeOfDifficultyDialog(resources);
+    this._unsubscribers = [
+      degreeOfDifficulty.selectionCompleteNotifier().subscribe(difficulty => {
+        this._gameAction.next({type: 'DifficultySelectionComplete', difficulty});
+      }),
+      degreeOfDifficulty.closeDialogNotifier().subscribe(() => {
+        this._gameAction.next({type: 'DifficultySelectionCancel'});
+      })
+    ];
     this._root.appendChild(degreeOfDifficulty.getRootHTMLElement());
     this._dialog = degreeOfDifficulty;
   }

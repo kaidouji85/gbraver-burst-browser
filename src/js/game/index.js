@@ -13,15 +13,22 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {InNPCBattleCourse, NPCBattle, NPCBattleX} from "./in-progress/npc-battle/npc-battle";
-import {isStageClear, startNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
+import type {
+  DifficultySelect,
+  InNPCBattleCourse,
+  NPCBattle,
+  NPCBattleX,
+} from "./in-progress/npc-battle/npc-battle";
+import {createNPCBattlePlayer, isStageClear, startNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
-import type {EndBattle, EndNetworkError, GameAction, SelectionComplete, 
-  WebSocketAPIError, WebSocketAPIUnintentionalClose} from "./actions/game-actions";
+import type {
+  DifficultySelectionComplete, EndBattle, EndNetworkError, GameAction, SelectionComplete,
+  WebSocketAPIError, WebSocketAPIUnintentionalClose
+} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {
@@ -44,6 +51,7 @@ import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {toWebSocketAPIErrorStream, toWebSocketAPIUnintentionalCloseStream} from './network/websocket-api-stream';
 import {map} from "../stream/operator";
 import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
+import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -148,6 +156,8 @@ export class Game {
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
       else if (action.type === 'SelectionComplete') { this._onSelectionComplete(action) }
       else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
+      else if (action.type === 'DifficultySelectionComplete') { this._onDifficultySelectionComplete(action) }
+      else if (action.type === 'DifficultySelectionCancel') { this._onDifficultySelectionCancel() }
       else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
@@ -370,12 +380,10 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const npcBattlePlayerSelect = async (origin: NPCBattle): Promise<void> => {
-      const inNPCBattleCourse = startNPCBattleCourse(action);
-      const {player, level} = inNPCBattleCourse;
-      const stage = inNPCBattleCourse.course.stage(level);
-      this._inProgress = {...origin, subFlow: inNPCBattleCourse};
-      await this._startNPCBattleStage(resources, player, stage, level);
+    const npcBattlePlayerSelect = async (npcBattle: NPCBattle): Promise<void> => {
+      const difficultySelection = {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId};
+      this._inProgress = {...npcBattle, subFlow: difficultySelection};
+      this._domDialogs.startDegreeOfDifficulty(resources);
     };
     const waitMatching = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
@@ -440,6 +448,49 @@ export class Game {
     await this._fader.fadeOut();
     await this._startTitle(resources);
     await this._fader.fadeIn();
+  }
+
+  /**
+   * 難易度選択完了時のイベント
+   *
+   * @param action アクション
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onDifficultySelectionComplete(action: DifficultySelectionComplete): Promise<void> {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    if (!(this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'DifficultySelect')) {
+      return;
+    }
+
+    const npcBattle: NPCBattle = this._inProgress;
+    const difficultySelect: DifficultySelect = this._inProgress.subFlow;
+    const {armdozerId, pilotId} = difficultySelect;
+    const player = createNPCBattlePlayer(armdozerId, pilotId);
+    const course = NPCBattleCourseMaster.find(armdozerId);
+    const level = 1;
+    const stage = course.stage(level);
+    const inNPCBattleCourse = {type: 'InNPCBattleCourse', player, course, level};
+    this._inProgress = {...npcBattle, subFlow: inNPCBattleCourse};
+    this._domDialogs.hidden();
+    await this._startNPCBattleStage(resources, player, stage, level);
+    console.log(action);  // TODO 選択した難易度をコース選択に反映する
+  }
+
+  /**
+   * 難易度選択キャンセル時のイベント
+   */
+  _onDifficultySelectionCancel(): void {
+    if (!(this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'DifficultySelect')) {
+      return;
+    }
+
+    const playerSelect = {type: 'PlayerSelect'};
+    this._inProgress = {...this._inProgress, subFlow: playerSelect};
+    this._domDialogs.hidden();
   }
 
   /**

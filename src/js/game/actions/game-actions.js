@@ -51,6 +51,13 @@ export type DifficultySelectionComplete = {
   difficulty: NPCBattleCourseDifficulty,
 };
 
+/**
+ * 難易度選択キャンセル
+ */
+export type DifficultySelectionCancel = {
+  type: 'DifficultySelectionCancel'
+};
+
 /** 戦闘終了 */
 export type EndBattle = {
   type: 'EndBattle',
@@ -131,6 +138,7 @@ export type GameAction = GameStart
  | SelectionComplete
  | SelectionCancel
  | DifficultySelectionComplete
+ | DifficultySelectionCancel
  | EndBattle
  | SuddenlyBattleEnd
  | EndNPCEnding

@@ -17,9 +17,9 @@ export type PlayerSelect = {
 export type DifficultySelect = {
   type: 'DifficultySelect',
   /** 選択したアームドーザ */
-  armdozer: ArmDozerId,
+  armdozerId: ArmDozerId,
   /** 選択したパイロット */
-  pilot: PilotId
+  pilotId: PilotId
 };
 
 /** NPCバトルコース実行中 */
@@ -50,6 +50,7 @@ export type NPCBattleX<X> = {
 export type NPCBattle = NPCBattleX<SubFlow>;
 
 /**
+ * @deprecated
  * NPCバトルコース開始直後のサブフローを生成する
  * 
  * @param action プレイヤー選択完了アクション 
@@ -61,6 +62,19 @@ export function startNPCBattleCourse(action: SelectionComplete): InNPCBattleCour
   const player = {playerId: playerUuid(), armdozer, pilot};
   const course = NPCBattleCourseMaster.find(armdozer.id);
   return {type: 'InNPCBattleCourse', player, course, level: 1};
+}
+
+/**
+ * NPCバトル用のプレイヤーを生成する
+ *
+ * @param armdozerId プレイヤーが選択したアームドーザID
+ * @param pilotId プレイヤーが選択したパイロットID
+ * @return 生成したプレイヤー情報
+ */
+export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId): Player {
+  const armdozer = ArmDozers.find(v => v.id === armdozerId) ?? ArmDozers[0];
+  const pilot = Pilots.find(v => v.id === pilotId) ?? Pilots[0];
+  return {playerId: playerUuid(), armdozer, pilot};
 }
 
 /**
