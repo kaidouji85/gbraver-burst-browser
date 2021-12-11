@@ -20,7 +20,8 @@ import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
-import type {EndBattle, EndNetworkError, GameAction, SelectionComplete} from "./actions/game-actions";
+import type {EndBattle, EndNetworkError, GameAction, SelectionComplete, 
+  WebSocketAPIError, WebSocketAPIUnintentionalClose} from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {
@@ -32,17 +33,22 @@ import type {
   UniversalLogin,
   UserMailGet,
   UserNameGet,
-  UserPictureGet
+  UserPictureGet,
+  WebsocketDisconnect,
+  WebsocketErrorNotifier,
+  WebsocketUnintentionalCloseNotifier,
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
+import {toWebSocketAPIErrorStream, toWebSocketAPIUnintentionalCloseStream} from './network/websocket-api-stream';
 import {map} from "../stream/operator";
 import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
-  UserNameGet, UserPictureGet, MailVerify, UserMailGet {}
+  UserNameGet, UserPictureGet, MailVerify, UserMailGet, WebsocketDisconnect, 
+  WebsocketErrorNotifier, WebsocketUnintentionalCloseNotifier {}
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -129,9 +135,11 @@ export class Game {
     this._resources = null;
     this._serviceWorker = null;
 
+    const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)));
+    const webSocketAPIError = toWebSocketAPIErrorStream(this._api).chain(map(v => (v: GameAction)));
+    const WebSocketAPIUnintentionalClose = toWebSocketAPIUnintentionalCloseStream(this._api).chain(map(v => (v: GameAction)));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(),
-      this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)))];
+      this._domDialogs.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'EndBattle') { this._onEndBattle(action) }
       else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
@@ -149,6 +157,8 @@ export class Game {
       else if (action.type === 'CancelAccountDeletion') { this._onCancelAccountDeletion() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
+      else if (action.type === 'WebSocketAPIError') { this._onWebSocketAPIError(action) }
+      else if (action.type === 'WebSocketAPIUnintentionalClose') { this._onWebSocketAPIUnintentionalClose(action) }
     }));
   }
 
@@ -371,6 +381,7 @@ export class Game {
       this._domDialogs.startWaiting('マッチング中......');
       const battle = await (async () => {
         try {
+          await this._api.disconnectWebsocket();
           return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
         } catch(e) {
           const postNetworkError = {type: 'GotoTitle'};
@@ -466,6 +477,7 @@ export class Game {
     const endCasualMatch = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
+      await this._api.disconnectWebsocket();
       this._tdScenes.hidden();
       await this._startTitle(resources);
       await this._fader.fadeIn();
@@ -492,7 +504,7 @@ export class Game {
   /**
    * バトル強制終了時の処理
    */
-  _onSuddenlyEndBattle(): void {
+  async _onSuddenlyEndBattle(): Promise<void> {
     if (!this._resources) {
       return;
     }
@@ -501,6 +513,39 @@ export class Game {
     const postNetworkError = {type: 'GotoTitle'};
     this._domDialogs.startNetworkError(resources, postNetworkError);
     this._suddenlyBattleEndMonitor.unbind();
+    await this._api.disconnectWebsocket();
+  }
+
+  /**
+   * WebSocketAPIエラー時の処理
+   *
+   * @param action アクション
+   */
+  _onWebSocketAPIError(action: WebSocketAPIError): void {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const postNetworkError = {type: 'GotoTitle'};
+    this._domDialogs.startNetworkError(resources, postNetworkError);
+    throw action;
+  }
+
+  /**
+   * WebSocketAPI意図しない切断時の処理
+   *
+   * @param action アクション
+   */
+  _onWebSocketAPIUnintentionalClose(action: WebSocketAPIUnintentionalClose): void {
+    if (!this._resources) {
+      return;
+    }
+
+    const resources: Resources = this._resources;
+    const postNetworkError = {type: 'GotoTitle'};
+    this._domDialogs.startNetworkError(resources, postNetworkError);
+    throw action;
   }
 
   /**
