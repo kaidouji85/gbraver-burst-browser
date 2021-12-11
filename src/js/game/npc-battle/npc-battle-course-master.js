@@ -8,6 +8,7 @@ import type {NPCBattleCourse, NPCBattleCourseContainer, NPCBattleCourseDifficult
 import {SimpleNPCBattleCourse} from "./simple-npc-battle-course";
 import type {NPCBattleStage} from "./npc-battle-stage";
 import {burstNeoLandozer} from "../../npc/burst-neo-landozer";
+import {burstWingDozer} from "../../npc/burst-wing-dozer";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
@@ -51,6 +52,12 @@ const BurstNeoLandozerStage: NPCBattleStage = {
   npc: burstNeoLandozer(),
 };
 
+/** バースト発動 ウィングドーザ */
+const BurstWingDozerStage: NPCBattleStage = {
+  caption: ['音速の騎士', 'ウィングドーザ見参'],
+  npc: burstWingDozer(),
+};
+
 /** デフォルトのコース */
 const DefaultCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
@@ -83,7 +90,8 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstNeoLandozerStage
+      BurstNeoLandozerStage,
+      BurstWingDozerStage,
     ])
   },
   {
@@ -99,7 +107,8 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstNeoLandozerStage
+      BurstNeoLandozerStage,
+      BurstWingDozerStage
     ])
   },
   {
@@ -115,7 +124,8 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstNeoLandozerStage
+      BurstNeoLandozerStage,
+      BurstWingDozerStage
     ])
   },
   {
@@ -131,7 +141,8 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstNeoLandozerStage
+      BurstNeoLandozerStage,
+      BurstWingDozerStage
     ])
   },
 ];
