@@ -19,31 +19,19 @@ const attackRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
   const maxBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
   const maxBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
-  const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-  const battery0 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 0);
-
-  const canFullBatteryAttack = data.player.armdozer.battery <= 4;
   const plusCorrectPowers = data.enemy.armdozer.effects.filter(v => v.type === 'CorrectPower' && (0 < v.power));
   const hasPlusCorrectPower = 0 < plusCorrectPowers.length;
 
-  if (burst && canFullBatteryAttack) {
+  if (burst) {
     return burst;
   }
 
-  if (burst && battery0 && !canFullBatteryAttack) {
-    return battery0;
-  }
-
-  if (hasPlusCorrectPower && maxBattery && canFullBatteryAttack) {
+  if (hasPlusCorrectPower && maxBattery) {
     return maxBattery;
   }
 
   if (maxBatteryMinusOne) {
     return maxBatteryMinusOne;
-  }
-
-  if (battery1) {
-    return battery1;
   }
 
   return ZERO_BATTERY;
