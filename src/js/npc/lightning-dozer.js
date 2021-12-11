@@ -10,7 +10,7 @@ const ZERO_BATTERY = {
   battery: 0
 };
 
-/** ライトニングドーザ NPC */
+/**  @deprecated ライトニングドーザ NPC */
 export class LightningDozerNPC implements NPC {
   /** アームドーザ */
   armdozer: Armdozer;

@@ -1,6 +1,6 @@
 // @flow
 
-import {NeoLandozerNPC} from "../../npc/neo-landozer";
+import {burstNeoLandozer} from "../../npc/burst-neo-landozer";
 import type {NPC} from "../../npc/npc";
 
 /**
@@ -23,5 +23,5 @@ export type NPCBattleStage = {
 /** デフォルトのステージ */
 export const DefaultStage: NPCBattleStage = {
   caption: ['敵よりも大きい', 'バッテリーを出せ'],
-  npc: new NeoLandozerNPC()
+  npc: burstNeoLandozer()
 };

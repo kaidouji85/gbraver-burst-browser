@@ -7,6 +7,7 @@ import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../..
 import type {NPCBattleCourse, NPCBattleCourseContainer, NPCBattleCourseDifficulty} from "./npc-battle-course";
 import {SimpleNPCBattleCourse} from "./simple-npc-battle-course";
 import type {NPCBattleStage} from "./npc-battle-stage";
+import {burstNeoLandozer} from "../../npc/burst-neo-landozer";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
@@ -44,11 +45,22 @@ const Attack3Defense2ShinBraverStage: NPCBattleStage = {
   npc: attack3Defense2ShinBraverNPC()
 };
 
+/** バースト発動 ネオランドーザ */
+const BurstNeoLandozerStage: NPCBattleStage = {
+  caption: ['最強の破壊神', 'ネオランドーザ爆誕'],
+  npc: burstNeoLandozer(),
+};
+
 /** シンブレイバー Easy コース */
 const ShinBraverEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   MaxAttackWingDozerStage,
   Attack3Defense2LightningDozerStage
+]);
+
+/** シンブレイバー Normal コース */
+const ShinBraverNormalCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+  BurstNeoLandozerStage,
 ]);
 
 /** ネオランドーザ Easy コース */
@@ -58,6 +70,12 @@ const NeoLandozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   Attack3Defense2LightningDozerStage
 ]);
 
+/** ネオランドーザ Normal コース */
+const NeoLandozerNormalCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+  BurstNeoLandozerStage,
+]);
+
+
 /** ライトニングドーザ Easy コース */
 const LightningDozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
@@ -65,11 +83,21 @@ const LightningDozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   Attack3Defense2ShinBraverStage
 ]);
 
+/** ライトニングドーザ Normal コース */
+const LightningDozerNormalCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+  BurstNeoLandozerStage,
+]);
+
 /** ウィングドーザ Easy コース */
 const WingDozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   MaxAttackShinBraverStage,
   Attack3Defense2LightningDozerStage
+]);
+
+/** ウィングドーザ Normal コース */
+const WingDozerNormalCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+  BurstNeoLandozerStage,
 ]);
 
 /** NPCバトルコースマスタ */
@@ -80,16 +108,32 @@ export const NPCBattleCourseMaster: NPCBattleCourseContainer = {
       return ShinBraverEasyCourse;
     }
 
+    if (armdozerId === ArmDozerIdList.SHIN_BRAVER && difficulty === 'Normal') {
+      return ShinBraverNormalCourse;
+    }
+
     if (armdozerId === ArmDozerIdList.NEO_LANDOZER && difficulty === 'Easy') {
       return NeoLandozerEasyCourse;
+    }
+
+    if (armdozerId === ArmDozerIdList.NEO_LANDOZER && difficulty === 'Normal') {
+      return NeoLandozerNormalCourse;
     }
 
     if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER && difficulty === 'Easy') {
       return LightningDozerEasyCourse;
     }
 
+    if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER && difficulty === 'Normal') {
+      return LightningDozerNormalCourse;
+    }
+
     if (armdozerId === ArmDozerIdList.WING_DOZER && difficulty === 'Easy') {
       return WingDozerEasyCourse;
+    }
+
+    if (armdozerId === ArmDozerIdList.WING_DOZER && difficulty === 'Normal') {
+      return WingDozerNormalCourse;
     }
 
     return ShinBraverEasyCourse;
