@@ -38,16 +38,15 @@ const attackRoutine: SimpleRoutine = data => {
  */
 const defenseRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
+  const fullDefense = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-  const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
-  const isFullBattery = data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery;
-
-  if (isFullBattery && burst && battery3) {
-    return battery3;
-  }
 
   if (burst) {
     return burst;
+  }
+
+  if (fullDefense) {
+    return fullDefense;
   }
 
   if (battery1) {
@@ -58,12 +57,12 @@ const defenseRoutine: SimpleRoutine = data => {
 };
 
 /**
- * バースト発動 ライトニングドーザ NPC
+ * バースト発動 シンブレイバー NPC
  *
  * @returns NPC
  */
-export function burstLightningDozer(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.LIGHTNING_DOZER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.RAITO) ?? Pilots[0];
+export function burstShinBraver(): NPC {
+  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
+  const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
