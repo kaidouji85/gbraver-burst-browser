@@ -1,14 +1,10 @@
 // @flow
-import {WingDozerNPC} from "../../npc/wing-dozer";
-import {StrongNeoLandozerNPC} from "../../npc/strong-neo-landozer";
 import type {ArmDozerId} from 'gbraver-burst-core';
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../../npc/attack-3-defense-2";
 import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../npc/one-battery";
 import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../npc/max-battery-attack";
-import {StrongLightningDozerNPC} from "../../npc/strong-lightning-dozer";
-import {NeoLandozerNPC} from "../../npc/neo-landozer";
-import type {NPCBattleCourse, NPCBattleCourseContainer} from "./npc-battle-course";
+import type {NPCBattleCourse, NPCBattleCourseContainer, NPCBattleCourseDifficulty} from "./npc-battle-course";
 import {SimpleNPCBattleCourse} from "./simple-npc-battle-course";
 import type {NPCBattleStage} from "./npc-battle-stage";
 
@@ -48,87 +44,54 @@ const Attack3Defense2ShinBraverStage: NPCBattleStage = {
   npc: attack3Defense2ShinBraverNPC()
 };
 
-/** シンブレイバー NPCバトルコース */
-const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+/** シンブレイバー Easy コース */
+const ShinBraverEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   MaxAttackWingDozerStage,
-  Attack3Defense2LightningDozerStage,
-  {
-    caption: ['音速の騎士', 'ウィングドーザ襲来'],
-    npc: new WingDozerNPC(),
-  },
-  {
-    caption: ['不屈の守護神、その名は', 'ライトニングドーザ'],
-    npc: new StrongLightningDozerNPC(),
-  },
+  Attack3Defense2LightningDozerStage
 ]);
 
-/** ネオランドーザ NPCバトルコース */
-const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+/** ネオランドーザ Easy コース */
+const NeoLandozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryShinBraverStage,
   MaxAttackWingDozerStage,
-  Attack3Defense2LightningDozerStage,
-  {
-    caption: ['音速の騎士', 'ウィングドーザ襲来'],
-    npc: new WingDozerNPC(),
-  },
-  {
-    caption: ['不屈の守護神、その名は', 'ライトニングドーザ'],
-    npc: new StrongLightningDozerNPC(),
-  },
+  Attack3Defense2LightningDozerStage
 ]);
 
-/** ライトニングドーザ NPCバトルコース */
-const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+/** ライトニングドーザ Easy コース */
+const LightningDozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   MaxAttackWingDozerStage,
-  Attack3Defense2ShinBraverStage,
-  {
-    caption: ['音速の騎士', 'ウィングドーザ襲来'],
-    npc: new WingDozerNPC(),
-  },
-  {
-    caption: ['最強の破壊神、', 'ネオランドーザ爆誕'],
-    npc: new StrongNeoLandozerNPC(),
-  },
+  Attack3Defense2ShinBraverStage
 ]);
 
-/** ウィングドーザ NPCバトルコース */
-const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+/** ウィングドーザ Easy コース */
+const WingDozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   MaxAttackShinBraverStage,
-  Attack3Defense2LightningDozerStage,
-
-  {
-    caption: ['最強の破壊神、', 'ネオランドーザ爆誕'],
-    npc: new NeoLandozerNPC(),
-  },
-  {
-    caption: ['不屈の守護神、その名は', 'ライトニングドーザ'],
-    npc: new StrongLightningDozerNPC(),
-  }
+  Attack3Defense2LightningDozerStage
 ]);
 
 /** NPCバトルコースマスタ */
 export const NPCBattleCourseMaster: NPCBattleCourseContainer = {
   /** @override */
-  find(armdozerId: ArmDozerId) {
-    if (armdozerId === ArmDozerIdList.SHIN_BRAVER) {
-      return ShinBraverNPCCourse;
+  find(armdozerId: ArmDozerId, difficulty: NPCBattleCourseDifficulty) {
+    if (armdozerId === ArmDozerIdList.SHIN_BRAVER && difficulty === 'Easy') {
+      return ShinBraverEasyCourse;
     }
 
-    if (armdozerId === ArmDozerIdList.NEO_LANDOZER) {
-      return NeoLandozerNPCCourse;
+    if (armdozerId === ArmDozerIdList.NEO_LANDOZER && difficulty === 'Easy') {
+      return NeoLandozerEasyCourse;
     }
 
-    if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER) {
-      return LightningDozerNPCCourse;
+    if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER && difficulty === 'Easy') {
+      return LightningDozerEasyCourse;
     }
 
-    if (armdozerId === ArmDozerIdList.WING_DOZER) {
-      return WingDozerNPCCourse;
+    if (armdozerId === ArmDozerIdList.WING_DOZER && difficulty === 'Easy') {
+      return WingDozerEasyCourse;
     }
 
-    return ShinBraverNPCCourse;
+    return ShinBraverEasyCourse;
   }
 }

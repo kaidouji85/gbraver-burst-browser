@@ -471,14 +471,13 @@ export class Game {
     const difficultySelect: DifficultySelect = this._inProgress.subFlow;
     const {armdozerId, pilotId} = difficultySelect;
     const player = createNPCBattlePlayer(armdozerId, pilotId);
-    const course = NPCBattleCourseMaster.find(armdozerId);
+    const course = NPCBattleCourseMaster.find(armdozerId, action.difficulty);
     const level = INITIAL_STAGE_LEVEL;
     const stage = course.stage(level);
     const inNPCBattleCourse = {type: 'InNPCBattleCourse', player, course, level};
     this._inProgress = {...npcBattle, subFlow: inNPCBattleCourse};
     this._domDialogs.hidden();
     await this._startNPCBattleStage(resources, player, stage, level);
-    console.log(action);  // TODO 選択した難易度をコース選択に反映する
   }
 
   /**
