@@ -19,7 +19,7 @@ import type {
   NPCBattle,
   NPCBattleX,
 } from "./in-progress/npc-battle/npc-battle";
-import {createNPCBattlePlayer, isStageClear, startNPCBattleCourse} from "./in-progress/npc-battle/npc-battle";
+import {createNPCBattlePlayer, isStageClear} from "./in-progress/npc-battle/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
@@ -52,6 +52,7 @@ import {toWebSocketAPIErrorStream, toWebSocketAPIUnintentionalCloseStream} from 
 import {map} from "../stream/operator";
 import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
 import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
+import {INITIAL_STAGE_LEVEL} from "./npc-battle/npc-battle-stage";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -471,7 +472,7 @@ export class Game {
     const {armdozerId, pilotId} = difficultySelect;
     const player = createNPCBattlePlayer(armdozerId, pilotId);
     const course = NPCBattleCourseMaster.find(armdozerId);
-    const level = 1;
+    const level = INITIAL_STAGE_LEVEL;
     const stage = course.stage(level);
     const inNPCBattleCourse = {type: 'InNPCBattleCourse', player, course, level};
     this._inProgress = {...npcBattle, subFlow: inNPCBattleCourse};

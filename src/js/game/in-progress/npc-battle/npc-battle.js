@@ -2,10 +2,8 @@
 
 import type {GameEndResult, Player, ArmDozerId, PilotId} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
-import type {SelectionComplete} from "../../actions/game-actions";
 import type {NPCBattleCourse} from '../../npc-battle/npc-battle-course';
 import {playerUuid} from "../../../uuid/player";
-import {NPCBattleCourseMaster} from "../../npc-battle/npc-battle-course-master";
 import type {StageLevel} from "../../npc-battle/npc-battle-stage";
 
 /** プレイヤー選択 */
@@ -48,21 +46,6 @@ export type NPCBattleX<X> = {
 
 /** NPCバトル */
 export type NPCBattle = NPCBattleX<SubFlow>;
-
-/**
- * @deprecated
- * NPCバトルコース開始直後のサブフローを生成する
- * 
- * @param action プレイヤー選択完了アクション 
- * @return NPCバトルコース進行中のサブフロー 
- */
-export function startNPCBattleCourse(action: SelectionComplete): InNPCBattleCourse {
-  const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
-  const player = {playerId: playerUuid(), armdozer, pilot};
-  const course = NPCBattleCourseMaster.find(armdozer.id);
-  return {type: 'InNPCBattleCourse', player, course, level: 1};
-}
 
 /**
  * NPCバトル用のプレイヤーを生成する

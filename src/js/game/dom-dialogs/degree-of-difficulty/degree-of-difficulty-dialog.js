@@ -1,4 +1,5 @@
 // @flow
+import {Howl} from 'howler';
 import type {Resources} from "../../../resource";
 import type {DOMDialog} from '../dialog';
 import {PathIds} from "../../../resource/path";
@@ -10,6 +11,7 @@ import {Exclusive} from "../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'degree-of-difficulty';
@@ -81,6 +83,8 @@ export class DegreeOfDifficultyDialog implements DOMDialog {
   _selectionComplete: StreamSource<NPCBattleCourseDifficulty>;
   _closeDialog: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
+  _changeValue: typeof Howl;
+  _pushButton: typeof Howl;
 
   /**
    * コンストラクタ
@@ -119,6 +123,8 @@ export class DegreeOfDifficultyDialog implements DOMDialog {
     this._selectionComplete = new RxjsStreamSource();
     this._closeDialog = new RxjsStreamSource();
     this._exclusive = new Exclusive();
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
   }
 
   /** @override */
@@ -160,7 +166,10 @@ export class DegreeOfDifficultyDialog implements DOMDialog {
     this._exclusive.execute(async () => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      await pop(this._easy);
+      await Promise.all([
+        pop(this._easy),
+        this._pushButton.play()
+      ]);
       this._selectionComplete.next('Easy');
     });
   }
@@ -174,7 +183,10 @@ export class DegreeOfDifficultyDialog implements DOMDialog {
     this._exclusive.execute(async () => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      await pop(this._normal);
+      await Promise.all([
+        pop(this._normal),
+        this._pushButton.play()
+      ]) ;
       this._selectionComplete.next('Normal');
     });
   }
@@ -188,7 +200,10 @@ export class DegreeOfDifficultyDialog implements DOMDialog {
     this._exclusive.execute(async () => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      await pop(this._hard);
+      await Promise.all([
+        pop(this._hard),
+        this._pushButton.play()
+      ]);
       this._selectionComplete.next('Hard');
     });
   }
@@ -202,7 +217,10 @@ export class DegreeOfDifficultyDialog implements DOMDialog {
     this._exclusive.execute(async () => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      await pop(this._closer);
+      await Promise.all([
+        pop(this._closer, 1.3),
+        this._changeValue.play()
+      ]) ;
       this._closeDialog.next();
     });
   }
@@ -216,6 +234,7 @@ export class DegreeOfDifficultyDialog implements DOMDialog {
     this._exclusive.execute(async () => {
       action.event.preventDefault();
       action.event.stopPropagation();
+      await this._changeValue.play()
       this._closeDialog.next();
     });
   }

@@ -9,6 +9,9 @@ import type {NPC} from "../../npc/npc";
  */
 export type StageLevel = number
 
+/** NPCバトル開始時のステージレベル */
+export const INITIAL_STAGE_LEVEL = 1;
+
 /** NPCバトル ステージ */
 export type NPCBattleStage = {
   /** ステージ名 */
