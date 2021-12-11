@@ -2,6 +2,7 @@
 
 import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
 import type {PostNetworkError} from '../network/post-network-error';
+import type {NPCBattleCourseDifficulty} from "../npc-battle/npc-battle-course";
 
 /** ゲームスタート */
 export type GameStart = {
@@ -39,6 +40,15 @@ export type SelectionComplete = {
  */
 export type SelectionCancel = {
   type: 'SelectionCancel'
+};
+
+/**
+ * 難易度選択完了
+ */
+export type DifficultySelectionComplete = {
+  type: 'DifficultySelectionComplete',
+  /** 選択した難易度 */
+  difficulty: NPCBattleCourseDifficulty,
 };
 
 /** 戦闘終了 */
@@ -120,6 +130,7 @@ export type GameAction = GameStart
  | EndHowToPlay
  | SelectionComplete
  | SelectionCancel
+ | DifficultySelectionComplete
  | EndBattle
  | SuddenlyBattleEnd
  | EndNPCEnding

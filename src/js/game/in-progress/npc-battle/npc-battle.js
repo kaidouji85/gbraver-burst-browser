@@ -1,6 +1,6 @@
 // @flow
 
-import type {GameEndResult, Player} from "gbraver-burst-core";
+import type {GameEndResult, Player, ArmDozerId, PilotId} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {SelectionComplete} from "../../actions/game-actions";
 import type {NPCBattleCourse} from '../../npc-battle/npc-battle-course';
@@ -11,6 +11,15 @@ import type {StageLevel} from "../../npc-battle/npc-battle-stage";
 /** プレイヤー選択 */
 export type PlayerSelect = {
   type: 'PlayerSelect'
+};
+
+/** 難易度選択 */
+export type DifficultySelect = {
+  type: 'DifficultySelect',
+  /** 選択したアームドーザ */
+  armdozer: ArmDozerId,
+  /** 選択したパイロット */
+  pilot: PilotId
 };
 
 /** NPCバトルコース実行中 */
@@ -25,7 +34,7 @@ export type InNPCBattleCourse = {
 };
 
 /** サブフロー */
-export type SubFlow = PlayerSelect | InNPCBattleCourse;
+export type SubFlow = PlayerSelect | DifficultySelect | InNPCBattleCourse;
 
 /** 
  * NPCバトル

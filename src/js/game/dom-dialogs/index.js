@@ -11,6 +11,7 @@ import {WaitingDialog} from "./waiting/waiting-dialog";
 import {NetworkErrorDialog} from './network-error/network-error-dialog';
 import type {PostNetworkError} from '../network/post-network-error';
 import {DeleteAccountConsentDialog} from "./delete-account-consent/delete-account-consent-dialog";
+import {DegreeOfDifficultyDialog} from "./degree-of-difficulty/degree-of-difficulty-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -121,6 +122,19 @@ export class DOMDialogs {
     ];
     this._root.appendChild(deleteAccountConsent.getRootHTMLElement());
     this._dialog = deleteAccountConsent;
+  }
+
+  /**
+   * 難易度選択ダイアログを表示する
+   *
+   * @param resources リソース管理オブジェクト
+   */
+  startDegreeOfDifficulty(resources: Resources): void {
+    this._removeCurrentDialog();
+
+    const degreeOfDifficulty = new DegreeOfDifficultyDialog(resources);
+    this._root.appendChild(degreeOfDifficulty.getRootHTMLElement());
+    this._dialog = degreeOfDifficulty;
   }
 
   /**
