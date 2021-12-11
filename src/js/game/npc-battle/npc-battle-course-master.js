@@ -51,91 +51,95 @@ const BurstNeoLandozerStage: NPCBattleStage = {
   npc: burstNeoLandozer(),
 };
 
-/** シンブレイバー Easy コース */
-const ShinBraverEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+/** デフォルトのコース */
+const DefaultCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   MaxAttackWingDozerStage,
   Attack3Defense2LightningDozerStage
 ]);
 
-/** シンブレイバー Normal コース */
-const ShinBraverNormalCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  BurstNeoLandozerStage,
-]);
+/** アームドーザ、難易度、コースの対応関係 */
+type CourseMap = {
+  /** プレイヤーが選択したアームドーザID */
+  armdozerId: ArmDozerId,
+  /** プレイヤーが選択した難易度 */
+  difficulty: NPCBattleCourseDifficulty,
+  /** コース */
+  course: NPCBattleCourse
+};
 
-/** ネオランドーザ Easy コース */
-const NeoLandozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  OneBatteryShinBraverStage,
-  MaxAttackWingDozerStage,
-  Attack3Defense2LightningDozerStage
-]);
-
-/** ネオランドーザ Normal コース */
-const NeoLandozerNormalCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  BurstNeoLandozerStage,
-]);
-
-
-/** ライトニングドーザ Easy コース */
-const LightningDozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  OneBatteryNeoLandozerStage,
-  MaxAttackWingDozerStage,
-  Attack3Defense2ShinBraverStage
-]);
-
-/** ライトニングドーザ Normal コース */
-const LightningDozerNormalCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  BurstNeoLandozerStage,
-]);
-
-/** ウィングドーザ Easy コース */
-const WingDozerEasyCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  OneBatteryNeoLandozerStage,
-  MaxAttackShinBraverStage,
-  Attack3Defense2LightningDozerStage
-]);
-
-/** ウィングドーザ Normal コース */
-const WingDozerNormalCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  BurstNeoLandozerStage,
-]);
+/** コースを集めたもの */
+const Courses: CourseMap[] = [
+  {
+    armdozerId: ArmDozerIdList.SHIN_BRAVER,
+    difficulty: 'Easy',
+    course: new SimpleNPCBattleCourse([
+      OneBatteryNeoLandozerStage,
+      MaxAttackWingDozerStage,
+      Attack3Defense2LightningDozerStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.SHIN_BRAVER,
+    difficulty: 'Normal',
+    course: new SimpleNPCBattleCourse([
+      BurstNeoLandozerStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.NEO_LANDOZER,
+    difficulty: 'Easy',
+    course: new SimpleNPCBattleCourse([
+      OneBatteryShinBraverStage,
+      MaxAttackWingDozerStage,
+      Attack3Defense2LightningDozerStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.NEO_LANDOZER,
+    difficulty: 'Normal',
+    course: new SimpleNPCBattleCourse([
+      BurstNeoLandozerStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
+    difficulty: 'Easy',
+    course: new SimpleNPCBattleCourse([
+      OneBatteryNeoLandozerStage,
+      MaxAttackWingDozerStage,
+      Attack3Defense2ShinBraverStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
+    difficulty: 'Normal',
+    course: new SimpleNPCBattleCourse([
+      BurstNeoLandozerStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    difficulty: 'Easy',
+    course: new SimpleNPCBattleCourse([
+      OneBatteryNeoLandozerStage,
+      MaxAttackShinBraverStage,
+      Attack3Defense2LightningDozerStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    difficulty: 'Normal',
+    course: new SimpleNPCBattleCourse([
+      BurstNeoLandozerStage
+    ])
+  },
+];
 
 /** NPCバトルコースマスタ */
 export const NPCBattleCourseMaster: NPCBattleCourseContainer = {
   /** @override */
   find(armdozerId: ArmDozerId, difficulty: NPCBattleCourseDifficulty) {
-    if (armdozerId === ArmDozerIdList.SHIN_BRAVER && difficulty === 'Easy') {
-      return ShinBraverEasyCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.SHIN_BRAVER && difficulty === 'Normal') {
-      return ShinBraverNormalCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.NEO_LANDOZER && difficulty === 'Easy') {
-      return NeoLandozerEasyCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.NEO_LANDOZER && difficulty === 'Normal') {
-      return NeoLandozerNormalCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER && difficulty === 'Easy') {
-      return LightningDozerEasyCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER && difficulty === 'Normal') {
-      return LightningDozerNormalCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.WING_DOZER && difficulty === 'Easy') {
-      return WingDozerEasyCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.WING_DOZER && difficulty === 'Normal') {
-      return WingDozerNormalCourse;
-    }
-
-    return ShinBraverEasyCourse;
+    return Courses.find(v => v.armdozerId === armdozerId && v.difficulty === difficulty)?.course ?? DefaultCourse
   }
 }
