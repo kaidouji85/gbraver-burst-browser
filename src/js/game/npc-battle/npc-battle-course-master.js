@@ -13,6 +13,7 @@ import {burstLightningDozer} from "../../npc/burst-lightning-dozer";
 import {burstShinBraver} from "../../npc/burst-shin-braver";
 import {swiftAttackLightningDozer} from "../../npc/swift-attack-lightning-dozer";
 import {fullDefenseShinBraver} from "../../npc/full-defense-shin-braver";
+import {sturmUndDrangWingDozerNPC} from "../../npc/sturm-und-drang-wing-dozer";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
@@ -82,8 +83,14 @@ const SwiftAttackLightningDozer: NPCBattleStage = {
 
 /** 防御全振り シンブレイバー */
 const FullDefenseShinBraver: NPCBattleStage = {
-  caption: ['難攻不落の白銀', '要塞'],
+  caption: ['難攻不落の' , '要塞'],
   npc: fullDefenseShinBraver(),
+};
+
+/** 疾風怒濤、ウィングドーザ */
+const SturmUndDrangAttackWingDozer: NPCBattleStage = {
+  caption: ['疾風怒濤'],
+  npc: sturmUndDrangWingDozerNPC()
 };
 
 /** デフォルトのコース */
@@ -128,6 +135,7 @@ const Courses: CourseMap[] = [
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
       SwiftAttackLightningDozer,
+      SturmUndDrangAttackWingDozer,
     ])
   },
   {
@@ -153,7 +161,8 @@ const Courses: CourseMap[] = [
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
       SwiftAttackLightningDozer,
-      FullDefenseShinBraver
+      FullDefenseShinBraver,
+      SturmUndDrangAttackWingDozer
     ])
   },
   {
@@ -178,8 +187,8 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      SwiftAttackLightningDozer,
-      FullDefenseShinBraver
+      FullDefenseShinBraver,
+      SturmUndDrangAttackWingDozer
     ])
   },
   {
@@ -205,7 +214,7 @@ const Courses: CourseMap[] = [
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
       SwiftAttackLightningDozer,
-      FullDefenseShinBraver
+      FullDefenseShinBraver,
     ])
   },
 ];
