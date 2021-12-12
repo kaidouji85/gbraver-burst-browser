@@ -11,6 +11,7 @@ import {burstNeoLandozer} from "../../npc/burst-neo-landozer";
 import {burstWingDozer} from "../../npc/burst-wing-dozer";
 import {burstLightningDozer} from "../../npc/burst-lightning-dozer";
 import {burstShinBraver} from "../../npc/burst-shin-braver";
+import {swiftAttackLightningDozer} from "../../npc/swift-attack-lightning-dozer";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
@@ -50,7 +51,7 @@ const Attack3Defense2ShinBraverStage: NPCBattleStage = {
 
 /** バースト発動 シンブレイバー */
 const BurstShinBraverStage: NPCBattleStage = {
-  caption: ['荒削りの救世主', 'シンブレイバー'],
+  caption: ['荒削りの英雄', 'シンブレイバー'],
   npc: burstShinBraver(),
 };
 
@@ -70,6 +71,12 @@ const BurstWingDozerStage: NPCBattleStage = {
 const BurstLightningDozer: NPCBattleStage = {
   caption: ['不屈の守護神', 'ライトニングドーザ'],
   npc: burstLightningDozer()
+};
+
+/** 速攻戦法 ライトニングドーザ */
+const SwiftAttackLightningDozer: NPCBattleStage = {
+  caption: [' 地震、', '雷、火事、親父'],
+  npc: swiftAttackLightningDozer()
 };
 
 /** デフォルトのコース */
@@ -110,6 +117,13 @@ const Courses: CourseMap[] = [
     ])
   },
   {
+    armdozerId: ArmDozerIdList.SHIN_BRAVER,
+    difficulty: 'Hard',
+    course: new SimpleNPCBattleCourse([
+      SwiftAttackLightningDozer,
+    ])
+  },
+  {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Easy',
     course: new SimpleNPCBattleCourse([
@@ -125,6 +139,13 @@ const Courses: CourseMap[] = [
       BurstShinBraverStage,
       BurstWingDozerStage,
       BurstLightningDozer
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.NEO_LANDOZER,
+    difficulty: 'Hard',
+    course: new SimpleNPCBattleCourse([
+      SwiftAttackLightningDozer,
     ])
   },
   {
@@ -146,6 +167,13 @@ const Courses: CourseMap[] = [
     ])
   },
   {
+    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
+    difficulty: 'Hard',
+    course: new SimpleNPCBattleCourse([
+      SwiftAttackLightningDozer,
+    ])
+  },
+  {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Easy',
     course: new SimpleNPCBattleCourse([
@@ -161,6 +189,13 @@ const Courses: CourseMap[] = [
       BurstNeoLandozerStage,
       BurstShinBraverStage,
       BurstLightningDozer
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    difficulty: 'Hard',
+    course: new SimpleNPCBattleCourse([
+      SwiftAttackLightningDozer,
     ])
   },
 ];
