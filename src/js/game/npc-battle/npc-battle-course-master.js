@@ -14,6 +14,7 @@ import {burstShinBraver} from "../../npc/burst-shin-braver";
 import {swiftAttackLightningDozer} from "../../npc/swift-attack-lightning-dozer";
 import {fullDefenseShinBraver} from "../../npc/full-defense-shin-braver";
 import {sturmUndDrangWingDozerNPC} from "../../npc/sturm-und-drang-wing-dozer";
+import {perfectNeoLandozer} from "../../npc/perfect-neo-landozer";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
@@ -77,21 +78,28 @@ const BurstLightningDozer: NPCBattleStage = {
 
 /** 速攻戦法 ライトニングドーザ */
 const SwiftAttackLightningDozer: NPCBattleStage = {
-  caption: [' 地震、', '雷、火事、親父'],
+  caption: ['カウンターを', '警戒せよ'],
   npc: swiftAttackLightningDozer()
 };
 
 /** 防御全振り シンブレイバー */
 const FullDefenseShinBraver: NPCBattleStage = {
-  caption: ['難攻不落の' , '要塞'],
+  caption: ['攻めるタイミングを見', '極めろ'],
   npc: fullDefenseShinBraver(),
 };
 
-/** 疾風怒濤、ウィングドーザ */
+/** 疾風怒濤 ウィングドーザ */
 const SturmUndDrangAttackWingDozer: NPCBattleStage = {
-  caption: ['疾風怒濤'],
+  caption: ['猪突猛進、ひたすら', '耐えろ'],
   npc: sturmUndDrangWingDozerNPC()
 };
+
+/** 究極 ネオランドーザ */
+const PerfectNeoLandozer: NPCBattleStage = {
+  caption: ['攻めも守りも', '完璧だ'],
+  npc: perfectNeoLandozer()
+};
+
 
 /** デフォルトのコース */
 const DefaultCourse = new SimpleNPCBattleCourse([
@@ -136,6 +144,7 @@ const Courses: CourseMap[] = [
     course: new SimpleNPCBattleCourse([
       SwiftAttackLightningDozer,
       SturmUndDrangAttackWingDozer,
+      PerfectNeoLandozer,
     ])
   },
   {
@@ -188,7 +197,8 @@ const Courses: CourseMap[] = [
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
       FullDefenseShinBraver,
-      SturmUndDrangAttackWingDozer
+      SturmUndDrangAttackWingDozer,
+      PerfectNeoLandozer
     ])
   },
   {
@@ -215,6 +225,7 @@ const Courses: CourseMap[] = [
     course: new SimpleNPCBattleCourse([
       SwiftAttackLightningDozer,
       FullDefenseShinBraver,
+      PerfectNeoLandozer
     ])
   },
 ];
