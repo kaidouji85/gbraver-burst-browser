@@ -4,6 +4,7 @@ import type {NPC} from "./npc";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {SimpleRoutine} from "./simple-npc";
 import {SimpleNPC} from "./simple-npc";
+import {canBeatDown} from "./can-beat-down";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {
@@ -16,13 +17,18 @@ const ZERO_BATTERY = {
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = data => {
-  const fullAttack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const attackBattery = data.enemy.armdozer.battery - 1;
-  const attack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === attackBattery);
+  const maxBatteryAttack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
+  const allBatteryAttack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
+  const attack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
+  const canBeatDownWithAllBatteryAttack = canBeatDown(data.enemy, data.enemy.armdozer.battery, data.player, data.player.armdozer.battery);
 
-  if (fullAttack && burst) {
-    return fullAttack;
+  if (burst && maxBatteryAttack) {
+    return maxBatteryAttack;
+  }
+
+  if (canBeatDownWithAllBatteryAttack && !data.player.armdozer.enableBurst && !data.player.pilot.enableSkill && allBatteryAttack) {
+    return allBatteryAttack;
   }
 
   if (attack) {
