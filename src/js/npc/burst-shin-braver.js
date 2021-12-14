@@ -18,13 +18,12 @@ const ZERO_BATTERY = {
  */
 const attackRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
   const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
   const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
   const canBeatDownWithAllBattery = canBeatDown(data.enemy, data.enemy.armdozer.battery, data.player, data.player.armdozer.battery);
 
-  if (burst && battery5) {
-    return battery5;
+  if (burst && allBattery) {
+    return allBattery;
   }
 
   if (canBeatDownWithAllBattery && !data.player.armdozer.enableBurst && !data.player.pilot.enableSkill && allBattery) {
@@ -44,19 +43,26 @@ const attackRoutine: SimpleRoutine = data => {
  */
 const defenseRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
+  const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
+  const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+  const isDefeatedWithBattery3 = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 3);
+  const isDefeatedWithBattery1 = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 1);
 
-  if (burst) {
+  if (burst && data.enemy.armdozer.battery === 0) {
     return burst;
   }
 
-  if (battery5) {
-    return battery5;
+  if (battery3 && !isDefeatedWithBattery3 && data.enemy.armdozer.battery === 5) {
+    return battery3;
   }
 
-  if (battery1) {
+  if (battery1 && !isDefeatedWithBattery1) {
     return battery1;
+  }
+
+  if (allBattery) {
+    return allBattery;
   }
 
   return ZERO_BATTERY;

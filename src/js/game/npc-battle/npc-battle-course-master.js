@@ -160,9 +160,9 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstShinBraverStage,
       BurstWingDozerStage,
-      BurstLightningDozer
+      BurstShinBraverStage,
+      BurstLightningDozer,
     ])
   },
   {
@@ -214,8 +214,8 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstNeoLandozerStage,
       BurstShinBraverStage,
+      BurstNeoLandozerStage,
       BurstLightningDozer
     ])
   },
