@@ -17,16 +17,15 @@ const ZERO_BATTERY = {
  */
 const attackRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const fullAttack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
-  const attackBattery = data.enemy.armdozer.battery - 1;
-  const attack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === attackBattery);
+  const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
+  const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
 
-  if (fullAttack && burst) {
-    return fullAttack;
+  if (allBattery && burst) {
+    return allBattery;
   }
 
-  if (attack) {
-    return attack;
+  if (allBatteryMinusOne) {
+    return allBatteryMinusOne;
   }
 
   return ZERO_BATTERY;
@@ -39,7 +38,7 @@ const attackRoutine: SimpleRoutine = data => {
 const defenseRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
   const pilot = data.commands.find(v => v.type === 'PILOT_SKILL_COMMAND');
-  const fullDefense = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
+  const maxBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
   const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
 
@@ -47,8 +46,8 @@ const defenseRoutine: SimpleRoutine = data => {
     return burst;
   }
 
-  if (!burst && pilot && fullDefense) {
-    return fullDefense;
+  if (!burst && pilot && maxBattery) {
+    return maxBattery;
   }
 
   if (pilot) {

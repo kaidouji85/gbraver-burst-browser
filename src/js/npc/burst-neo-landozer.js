@@ -1,7 +1,7 @@
 // @flow
 
 import type {NPC} from "./npc";
-import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
+import {ArmDozerIdList, ArmDozers, correctPower, PilotIds, Pilots} from "gbraver-burst-core";
 import type {SimpleRoutine} from "./simple-npc";
 import {SimpleNPC} from "./simple-npc";
 
@@ -17,21 +17,20 @@ const ZERO_BATTERY = {
  */
 const attackRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const maxBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
-  const maxBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
-  const plusCorrectPowers = data.enemy.armdozer.effects.filter(v => v.type === 'CorrectPower' && (0 < v.power));
-  const hasPlusCorrectPower = 0 < plusCorrectPowers.length;
+  const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
+  const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
+  const hasPlusCorrectPower = 0 < correctPower(data.enemy.armdozer.effects);
 
   if (burst) {
     return burst;
   }
 
-  if (hasPlusCorrectPower && maxBattery) {
-    return maxBattery;
+  if (hasPlusCorrectPower && allBattery) {
+    return allBattery;
   }
 
-  if (maxBatteryMinusOne) {
-    return maxBatteryMinusOne;
+  if (allBatteryMinusOne) {
+    return allBatteryMinusOne;
   }
 
   return ZERO_BATTERY;
@@ -43,11 +42,11 @@ const attackRoutine: SimpleRoutine = data => {
  */
 const defenseRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const maxBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
+  const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
 
-  if (burst && maxBattery) {
-    return maxBattery;
+  if (burst && allBattery) {
+    return allBattery;
   }
 
   if (battery1) {
