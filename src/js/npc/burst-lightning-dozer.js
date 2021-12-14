@@ -16,12 +16,12 @@ const ZERO_BATTERY = {
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = data => {
-  const maxBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
+  const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
   const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
 
-  if (maxBattery && burst) {
-    return maxBattery;
+  if (battery5 && burst) {
+    return battery5;
   }
 
   if (allBatteryMinusOne) {
@@ -39,9 +39,8 @@ const defenseRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
   const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
-  const isMaxBattery = data.enemy.armdozer.battery === data.enemy.armdozer.maxBattery;
 
-  if (isMaxBattery && burst && battery3) {
+  if (data.enemy.armdozer === 5 && burst && battery3) {
     return battery3;
   }
 

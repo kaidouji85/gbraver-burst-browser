@@ -18,21 +18,21 @@ const ZERO_BATTERY = {
  */
 const attackRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const maxBatteryAttack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
-  const allBatteryAttack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
-  const attack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
-  const canBeatDownWithAllBatteryAttack = canBeatDown(data.enemy, data.enemy.armdozer.battery, data.player, data.player.armdozer.battery);
+  const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
+  const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
+  const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
+  const canBeatDownWithAllBattery = canBeatDown(data.enemy, data.enemy.armdozer.battery, data.player, data.player.armdozer.battery);
 
-  if (burst && maxBatteryAttack) {
-    return maxBatteryAttack;
+  if (burst && battery5) {
+    return battery5;
   }
 
-  if (canBeatDownWithAllBatteryAttack && !data.player.armdozer.enableBurst && !data.player.pilot.enableSkill && allBatteryAttack) {
-    return allBatteryAttack;
+  if (canBeatDownWithAllBattery && !data.player.armdozer.enableBurst && !data.player.pilot.enableSkill && allBattery) {
+    return allBattery;
   }
 
-  if (attack) {
-    return attack;
+  if (allBatteryMinusOne) {
+    return allBatteryMinusOne;
   }
 
   return ZERO_BATTERY;
@@ -44,15 +44,15 @@ const attackRoutine: SimpleRoutine = data => {
  */
 const defenseRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const fullDefense = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
+  const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
 
   if (burst) {
     return burst;
   }
 
-  if (fullDefense) {
-    return fullDefense;
+  if (battery5) {
+    return battery5;
   }
 
   if (battery1) {

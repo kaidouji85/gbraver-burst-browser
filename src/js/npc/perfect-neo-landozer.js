@@ -38,15 +38,15 @@ const attackRoutine: SimpleRoutine = data => {
 const defenseRoutine: SimpleRoutine = data => {
   const pilot = data.commands.find(v => v.type === 'PILOT_SKILL_COMMAND');
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const maxBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
+  const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
 
-  if (pilot && maxBattery) {
+  if (pilot && battery5) {
     return pilot;
   }
 
-  if (burst && maxBattery) {
-    return maxBattery;
+  if (burst && battery5) {
+    return battery5;
   }
 
   if (burst && data.enemy.armdozer.battery === 0) {

@@ -17,20 +17,19 @@ const ZERO_BATTERY = {
  */
 const attackRoutine: SimpleRoutine = data => {
   const pilot = data.commands.find(v => v.type === 'PILOT_SKILL_COMMAND');
-  const maxBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
-  const attackBattery = data.enemy.armdozer.battery - 1;
-  const attack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === attackBattery)
+  const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
+  const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1)
 
-  if (pilot && maxBattery) {
-    return maxBattery;
+  if (pilot && battery5) {
+    return battery5;
   }
 
   if (data.enemy.armdozer.battery === 0 && pilot) {
     return pilot;
   }
 
-  if (attack) {
-    return attack;
+  if (allBatteryMinusOne) {
+    return allBatteryMinusOne;
   }
 
   return ZERO_BATTERY;

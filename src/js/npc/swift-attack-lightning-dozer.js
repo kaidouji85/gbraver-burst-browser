@@ -1,7 +1,7 @@
 // @flow
 
 import type {NPC} from "./npc";
-import {ArmDozerIdList, ArmDozers, PilotIds, Pilots, totalCorrectPower} from "gbraver-burst-core";
+import {ArmDozerIdList, ArmDozers, correctPower, PilotIds, Pilots} from "gbraver-burst-core";
 import type {SimpleRoutine} from "./simple-npc";
 import {SimpleNPC} from "./simple-npc";
 
@@ -16,22 +16,21 @@ const ZERO_BATTERY = {
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = data => {
-  const hasCorrectPower = 0 < totalCorrectPower(data.enemy.armdozer.effects);
-  const fullAttack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.maxBattery);
+  const hasCorrectPower = 0 < correctPower(data.enemy.armdozer.effects);
   const pilot = data.commands.find(v => v.type === 'PILOT_SKILL_COMMAND');
-  const attackBattery = data.enemy.armdozer.battery - 1;
-  const attack = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === attackBattery);
+  const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
+  const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
 
   if (pilot) {
     return pilot;
   }
 
-  if (hasCorrectPower && fullAttack) {
-    return fullAttack;
+  if (hasCorrectPower && battery5) {
+    return battery5;
   }
 
-  if (attack) {
-    return attack;
+  if (allBatteryMinusOne) {
+    return allBatteryMinusOne;
   }
 
   return ZERO_BATTERY;
