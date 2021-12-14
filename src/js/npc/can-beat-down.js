@@ -1,10 +1,7 @@
 // @flow
 
-import {battleResult} from "gbraver-burst-core";
+import {battleResult, updateDefender, isPlayerDeath} from "gbraver-burst-core";
 import type {PlayerState} from "gbraver-burst-core";
-// TODO gbraver-burst-core/libからインポートしているものをcoreから直接importできるようにする
-import {updateDefender} from "gbraver-burst-core/lib/effect/battle/players/update-defender";
-import {isPlayerDeath} from "gbraver-burst-core/lib/state/player-state";
 
 /**
  * 攻撃側が防御側を倒すことができるか否かを判定する
