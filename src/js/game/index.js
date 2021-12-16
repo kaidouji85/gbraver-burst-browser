@@ -476,7 +476,6 @@ export class Game {
     const stage = course.stage(level);
     const inNPCBattleCourse = {type: 'InNPCBattleCourse', player, course, level};
     this._inProgress = {...npcBattle, subFlow: inNPCBattleCourse};
-    this._domDialogs.hidden();
     await this._startNPCBattleStage(resources, player, stage, level);
   }
 
@@ -624,6 +623,7 @@ export class Game {
   async _startNPCBattleStage(resources: Resources, player: Player, stage: NPCBattleStage, level: StageLevel) {
     const npcBattle = new NPCBattleRoom(player, stage.npc);
     await this._fader.fadeOut();
+    this._domDialogs.hidden();
     await this._domScenes.startNPCStageTitle(resources, level, stage.caption, npcBattle.enemy.armdozer.id);
     await this._fader.fadeIn();
     const startNPCStageTitleTime = Date.now();
