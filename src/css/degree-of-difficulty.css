@@ -3,8 +3,8 @@
  */
  @media (orientation: landscape) {
   .degree-of-difficulty {
-    --delete-account-consent-dialog-height: calc(var(--vh) * 80);
-    --delete-account-consent-dialog-width: calc(min(var(--delete-account-consent-dialog-height) * 16 / 9, 90vw));
+    --delete-account-consent-dialog-width: calc(80vw);
+    --delete-account-consent-dialog-height: calc(min(var(--delete-account-consent-dialog-width) * 9 / 16, var(--vh) * 85));
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
     display: block;
@@ -66,7 +66,10 @@
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: 0 calc(var(--responsive-font-size) * 1);
+  padding: var(--responsive-font-size);
+}
+.degree-of-difficulty__dialog__caption {
+  margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
 .degree-of-difficulty__dialog__controllers {
@@ -76,13 +79,12 @@
 }
 
 .degree-of-difficulty__dialog__controllers button {
-  width: calc(var(--responsive-font-size) * 10);
+  width: calc(var(--responsive-font-size) * 8);
   height: calc(var(--responsive-font-size) * 3);
   margin: 0 calc(var(--responsive-font-size) * 0.5);
   font-size: calc(var(--responsive-font-size));
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
   border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
   background-color: var(--button-background-color);
 }
