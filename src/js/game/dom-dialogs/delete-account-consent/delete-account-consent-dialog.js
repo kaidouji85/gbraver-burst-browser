@@ -1,7 +1,7 @@
 // @flow
 
 import {Howl} from 'howler';
-import type {DOMScene} from "../../dom-scenes/dom-scene";
+import type {DOMDialog} from "../dialog";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
@@ -78,7 +78,7 @@ type Elements = {
 }
 
 /** アカウント削除同意ダイアログ */
-export class DeleteAccountConsentDialog implements DOMScene {
+export class DeleteAccountConsentDialog implements DOMDialog {
   _root: HTMLElement;
   _backGround: HTMLElement;
   _closer: HTMLImageElement;

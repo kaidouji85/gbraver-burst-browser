@@ -3,6 +3,9 @@
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {NPCBattleStage, StageLevel} from "./npc-battle-stage";
 
+/** NPCバトルコース難易度 */
+export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard';
+
 /** NPCバトルコース */
 export interface NPCBattleCourse {
   /**
@@ -27,7 +30,8 @@ export interface NPCBattleCourseContainer {
    * 指定したNPCバトルコールを取得する
    *
    * @param armdozerId プレイヤーのアームドーザID
+   * @param difficulty NPCバトルコース難易度
    * @reutrn NPCバトルコース
    */
-  find(armdozerId: ArmDozerId): NPCBattleCourse;
+  find(armdozerId: ArmDozerId, difficulty: NPCBattleCourseDifficulty): NPCBattleCourse;
 }

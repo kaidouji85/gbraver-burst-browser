@@ -1,6 +1,6 @@
 // @flow
 
-import {NeoLandozerNPC} from "../../npc/neo-landozer";
+import {burstNeoLandozer} from "../../npc/burst-neo-landozer";
 import type {NPC} from "../../npc/npc";
 
 /**
@@ -8,6 +8,9 @@ import type {NPC} from "../../npc/npc";
  * 1から始まり+1間隔で増える
  */
 export type StageLevel = number
+
+/** NPCバトル開始時のステージレベル */
+export const INITIAL_STAGE_LEVEL = 1;
 
 /** NPCバトル ステージ */
 export type NPCBattleStage = {
@@ -20,5 +23,5 @@ export type NPCBattleStage = {
 /** デフォルトのステージ */
 export const DefaultStage: NPCBattleStage = {
   caption: ['敵よりも大きい', 'バッテリーを出せ'],
-  npc: new NeoLandozerNPC()
+  npc: burstNeoLandozer()
 };

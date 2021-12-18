@@ -1,16 +1,20 @@
 // @flow
-import {WingDozerNPC} from "../../npc/wing-dozer";
-import {StrongNeoLandozerNPC} from "../../npc/strong-neo-landozer";
 import type {ArmDozerId} from 'gbraver-burst-core';
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../../npc/attack-3-defense-2";
 import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../npc/one-battery";
 import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../npc/max-battery-attack";
-import {StrongLightningDozerNPC} from "../../npc/strong-lightning-dozer";
-import {NeoLandozerNPC} from "../../npc/neo-landozer";
-import type {NPCBattleCourse, NPCBattleCourseContainer} from "./npc-battle-course";
+import type {NPCBattleCourse, NPCBattleCourseContainer, NPCBattleCourseDifficulty} from "./npc-battle-course";
 import {SimpleNPCBattleCourse} from "./simple-npc-battle-course";
 import type {NPCBattleStage} from "./npc-battle-stage";
+import {burstNeoLandozer} from "../../npc/burst-neo-landozer";
+import {burstWingDozer} from "../../npc/burst-wing-dozer";
+import {burstLightningDozer} from "../../npc/burst-lightning-dozer";
+import {burstShinBraver} from "../../npc/burst-shin-braver";
+import {swiftAttackLightningDozer} from "../../npc/swift-attack-lightning-dozer";
+import {fullDefenseShinBraver} from "../../npc/full-defense-shin-braver";
+import {sturmUndDrangWingDozerNPC} from "../../npc/sturm-und-drang-wing-dozer";
+import {perfectNeoLandozer} from "../../npc/perfect-neo-landozer";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
@@ -48,87 +52,188 @@ const Attack3Defense2ShinBraverStage: NPCBattleStage = {
   npc: attack3Defense2ShinBraverNPC()
 };
 
-/** シンブレイバー NPCバトルコース */
-const ShinBraverNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
+/** バースト発動 シンブレイバー */
+const BurstShinBraverStage: NPCBattleStage = {
+  caption: ['荒削りの英雄', 'シンブレイバー'],
+  npc: burstShinBraver(),
+};
+
+/** バースト発動 ネオランドーザ */
+const BurstNeoLandozerStage: NPCBattleStage = {
+  caption: ['究極の破壊神', 'ネオランドーザ'],
+  npc: burstNeoLandozer(),
+};
+
+/** バースト発動 ウィングドーザ */
+const BurstWingDozerStage: NPCBattleStage = {
+  caption: ['音速の騎士', 'ウィングドーザ'],
+  npc: burstWingDozer(),
+};
+
+/** バースト発動 ライトニングドーザ */
+const BurstLightningDozer: NPCBattleStage = {
+  caption: ['不屈の守護神', 'ライトニングドーザ'],
+  npc: burstLightningDozer()
+};
+
+/** 速攻戦法 ライトニングドーザ */
+const SwiftAttackLightningDozer: NPCBattleStage = {
+  caption: ['カウンターを', '警戒せよ'],
+  npc: swiftAttackLightningDozer()
+};
+
+/** 防御全振り シンブレイバー */
+const FullDefenseShinBraver: NPCBattleStage = {
+  caption: ['攻めるタイミングを見', '極めろ'],
+  npc: fullDefenseShinBraver(),
+};
+
+/** 疾風怒濤 ウィングドーザ */
+const SturmUndDrangAttackWingDozer: NPCBattleStage = {
+  caption: ['猪突猛進、ひたすら', '耐えろ'],
+  npc: sturmUndDrangWingDozerNPC()
+};
+
+/** 究極 ネオランドーザ */
+const PerfectNeoLandozer: NPCBattleStage = {
+  caption: ['攻めも守りも', '完璧だ'],
+  npc: perfectNeoLandozer()
+};
+
+
+/** デフォルトのコース */
+const DefaultCourse = new SimpleNPCBattleCourse([
   OneBatteryNeoLandozerStage,
   MaxAttackWingDozerStage,
-  Attack3Defense2LightningDozerStage,
-  {
-    caption: ['音速の騎士', 'ウィングドーザ襲来'],
-    npc: new WingDozerNPC(),
-  },
-  {
-    caption: ['不屈の守護神、その名は', 'ライトニングドーザ'],
-    npc: new StrongLightningDozerNPC(),
-  },
+  Attack3Defense2LightningDozerStage
 ]);
 
-/** ネオランドーザ NPCバトルコース */
-const NeoLandozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  OneBatteryShinBraverStage,
-  MaxAttackWingDozerStage,
-  Attack3Defense2LightningDozerStage,
-  {
-    caption: ['音速の騎士', 'ウィングドーザ襲来'],
-    npc: new WingDozerNPC(),
-  },
-  {
-    caption: ['不屈の守護神、その名は', 'ライトニングドーザ'],
-    npc: new StrongLightningDozerNPC(),
-  },
-]);
+/** アームドーザ、難易度、コースの対応関係 */
+type CourseMap = {
+  /** プレイヤーが選択したアームドーザID */
+  armdozerId: ArmDozerId,
+  /** プレイヤーが選択した難易度 */
+  difficulty: NPCBattleCourseDifficulty,
+  /** コース */
+  course: NPCBattleCourse
+};
 
-/** ライトニングドーザ NPCバトルコース */
-const LightningDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  OneBatteryNeoLandozerStage,
-  MaxAttackWingDozerStage,
-  Attack3Defense2ShinBraverStage,
+/** コースを集めたもの */
+const Courses: CourseMap[] = [
   {
-    caption: ['音速の騎士', 'ウィングドーザ襲来'],
-    npc: new WingDozerNPC(),
+    armdozerId: ArmDozerIdList.SHIN_BRAVER,
+    difficulty: 'Easy',
+    course: new SimpleNPCBattleCourse([
+      OneBatteryNeoLandozerStage,
+      MaxAttackWingDozerStage,
+      Attack3Defense2LightningDozerStage
+    ])
   },
   {
-    caption: ['最強の破壊神、', 'ネオランドーザ爆誕'],
-    npc: new StrongNeoLandozerNPC(),
-  },
-]);
-
-/** ウィングドーザ NPCバトルコース */
-const WingDozerNPCCourse: NPCBattleCourse = new SimpleNPCBattleCourse([
-  OneBatteryNeoLandozerStage,
-  MaxAttackShinBraverStage,
-  Attack3Defense2LightningDozerStage,
-
-  {
-    caption: ['最強の破壊神、', 'ネオランドーザ爆誕'],
-    npc: new NeoLandozerNPC(),
+    armdozerId: ArmDozerIdList.SHIN_BRAVER,
+    difficulty: 'Normal',
+    course: new SimpleNPCBattleCourse([
+      BurstNeoLandozerStage,
+      BurstWingDozerStage,
+      BurstLightningDozer,
+    ])
   },
   {
-    caption: ['不屈の守護神、その名は', 'ライトニングドーザ'],
-    npc: new StrongLightningDozerNPC(),
-  }
-]);
+    armdozerId: ArmDozerIdList.SHIN_BRAVER,
+    difficulty: 'Hard',
+    course: new SimpleNPCBattleCourse([
+      SwiftAttackLightningDozer,
+      SturmUndDrangAttackWingDozer,
+      PerfectNeoLandozer,
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.NEO_LANDOZER,
+    difficulty: 'Easy',
+    course: new SimpleNPCBattleCourse([
+      OneBatteryShinBraverStage,
+      MaxAttackWingDozerStage,
+      Attack3Defense2LightningDozerStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.NEO_LANDOZER,
+    difficulty: 'Normal',
+    course: new SimpleNPCBattleCourse([
+      BurstWingDozerStage,
+      BurstShinBraverStage,
+      BurstLightningDozer,
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.NEO_LANDOZER,
+    difficulty: 'Hard',
+    course: new SimpleNPCBattleCourse([
+      SwiftAttackLightningDozer,
+      FullDefenseShinBraver,
+      SturmUndDrangAttackWingDozer
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
+    difficulty: 'Easy',
+    course: new SimpleNPCBattleCourse([
+      OneBatteryNeoLandozerStage,
+      MaxAttackWingDozerStage,
+      Attack3Defense2ShinBraverStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
+    difficulty: 'Normal',
+    course: new SimpleNPCBattleCourse([
+      BurstNeoLandozerStage,
+      BurstShinBraverStage,
+      BurstWingDozerStage,
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
+    difficulty: 'Hard',
+    course: new SimpleNPCBattleCourse([
+      FullDefenseShinBraver,
+      SturmUndDrangAttackWingDozer,
+      PerfectNeoLandozer
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    difficulty: 'Easy',
+    course: new SimpleNPCBattleCourse([
+      OneBatteryNeoLandozerStage,
+      MaxAttackShinBraverStage,
+      Attack3Defense2LightningDozerStage
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    difficulty: 'Normal',
+    course: new SimpleNPCBattleCourse([
+      BurstShinBraverStage,
+      BurstNeoLandozerStage,
+      BurstLightningDozer
+    ])
+  },
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    difficulty: 'Hard',
+    course: new SimpleNPCBattleCourse([
+      SwiftAttackLightningDozer,
+      FullDefenseShinBraver,
+      PerfectNeoLandozer
+    ])
+  },
+];
 
 /** NPCバトルコースマスタ */
 export const NPCBattleCourseMaster: NPCBattleCourseContainer = {
   /** @override */
-  find(armdozerId: ArmDozerId) {
-    if (armdozerId === ArmDozerIdList.SHIN_BRAVER) {
-      return ShinBraverNPCCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.NEO_LANDOZER) {
-      return NeoLandozerNPCCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.LIGHTNING_DOZER) {
-      return LightningDozerNPCCourse;
-    }
-
-    if (armdozerId === ArmDozerIdList.WING_DOZER) {
-      return WingDozerNPCCourse;
-    }
-
-    return ShinBraverNPCCourse;
+  find(armdozerId: ArmDozerId, difficulty: NPCBattleCourseDifficulty) {
+    return Courses.find(v => v.armdozerId === armdozerId && v.difficulty === difficulty)?.course ?? DefaultCourse
   }
 }
