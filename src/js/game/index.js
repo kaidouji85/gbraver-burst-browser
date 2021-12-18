@@ -380,12 +380,12 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const npcBattlePlayerSelect = async (npcBattle: NPCBattle): Promise<void> => {
+    const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
       const difficultySelection = {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId};
       this._inProgress = {...npcBattle, subFlow: difficultySelection};
       this._domDialogs.startDegreeOfDifficulty(resources);
     };
-    const startCasualMatch = async (): Promise<BattleSDK> => {
+    const waitUntilMatching = async (): Promise<BattleSDK> => {
       try {
         await this._api.disconnectWebsocket();
         return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
@@ -409,9 +409,9 @@ export class Game {
         }
       }
     });
-    const waitMatching = async (origin: CasualMatch): Promise<void> => {
+    const startCasualMatch = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
-      const battle = await startCasualMatch();
+      const battle = await waitUntilMatching();
       this._suddenlyBattleEndMonitor.bind(battle);
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
@@ -432,9 +432,9 @@ export class Game {
     };
 
     if (this._inProgress.type === 'NPCBattle') {
-      await npcBattlePlayerSelect(this._inProgress);
+      await courseDifficultySelect(this._inProgress);
     } else if (this._inProgress.type === 'CasualMatch') {
-      await waitMatching(this._inProgress);
+      await startCasualMatch(this._inProgress);
     }
   }
 
