@@ -234,19 +234,14 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const loginCheck = async (): Promise<boolean> => {
-      this._domDialogs.startWaiting('ログインチェック中......');
-      const isLogin = await (async () => {
-        try {
-          return await this._api.isLogin();
-        } catch (e) {
-          const postNetworkError = {type: 'Close'};
-          this._domDialogs.startNetworkError(resources, postNetworkError);
-          throw e;     
-        }
-      })();
-      this._domDialogs.hidden();
-      return isLogin;
+    const callLoginCheckAPI = async () => {
+      try {
+        return await this._api.isLogin();
+      } catch (e) {
+        const postNetworkError = {type: 'Close'};
+        this._domDialogs.startNetworkError(resources, postNetworkError);
+        throw e;
+      }
     };
     const gotoPlayerSelect = async (): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
@@ -260,7 +255,9 @@ export class Game {
       this._domDialogs.startLogin(resources, 'ネット対戦をするにはログインをしてください');
     };
 
-    const isLogin = await loginCheck();
+    this._domDialogs.startWaiting('ログインチェック中......');
+    const isLogin = await callLoginCheckAPI();
+    this._domDialogs.hidden();
     if (isLogin) {
       await gotoPlayerSelect();
     } else {
