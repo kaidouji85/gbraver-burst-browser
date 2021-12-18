@@ -13,12 +13,7 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {
-  DifficultySelect,
-  InNPCBattleCourse,
-  NPCBattle,
-  NPCBattleX,
-} from "./in-progress/npc-battle/npc-battle";
+import type {DifficultySelect, InNPCBattleCourse, NPCBattle, NPCBattleX,} from "./in-progress/npc-battle/npc-battle";
 import {createNPCBattlePlayer, isStageClear} from "./in-progress/npc-battle/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
@@ -26,12 +21,18 @@ import type {Player} from "gbraver-burst-core";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {
-  DifficultySelectionComplete, EndBattle, EndNetworkError, GameAction, SelectionComplete,
-  WebSocketAPIError, WebSocketAPIUnintentionalClose
+  DifficultySelectionComplete,
+  EndBattle,
+  EndNetworkError,
+  GameAction,
+  SelectionComplete,
+  WebSocketAPIError,
+  WebSocketAPIUnintentionalClose
 } from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {
+  Battle as BattleSDK,
   CasualMatch as CasualMatchSDK,
   LoggedInUserDelete,
   LoginCheck,
@@ -51,8 +52,9 @@ import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {toWebSocketAPIErrorStream, toWebSocketAPIUnintentionalCloseStream} from './network/websocket-api-stream';
 import {map} from "../stream/operator";
 import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
-import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import {INITIAL_STAGE_LEVEL} from "./npc-battle/npc-battle-stage";
+import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
+import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -234,19 +236,14 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const loginCheck = async (): Promise<boolean> => {
-      this._domDialogs.startWaiting('ログインチェック中......');
-      const isLogin = await (async () => {
-        try {
-          return await this._api.isLogin();
-        } catch (e) {
-          const postNetworkError = {type: 'Close'};
-          this._domDialogs.startNetworkError(resources, postNetworkError);
-          throw e;     
-        }
-      })();
-      this._domDialogs.hidden();
-      return isLogin;
+    const callLoginCheckAPI = async () => {
+      try {
+        return await this._api.isLogin();
+      } catch (e) {
+        const postNetworkError = {type: 'Close'};
+        this._domDialogs.startNetworkError(resources, postNetworkError);
+        throw e;
+      }
     };
     const gotoPlayerSelect = async (): Promise<void> => {
       const subFlow = {type: 'PlayerSelect'};
@@ -260,7 +257,9 @@ export class Game {
       this._domDialogs.startLogin(resources, 'ネット対戦をするにはログインをしてください');
     };
 
-    const isLogin = await loginCheck();
+    this._domDialogs.startWaiting('ログインチェック中......');
+    const isLogin = await callLoginCheckAPI();
+    this._domDialogs.hidden();
     if (isLogin) {
       await gotoPlayerSelect();
     } else {
@@ -381,33 +380,23 @@ export class Game {
     }
 
     const resources: Resources = this._resources;
-    const npcBattlePlayerSelect = async (npcBattle: NPCBattle): Promise<void> => {
+    const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
       const difficultySelection = {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId};
       this._inProgress = {...npcBattle, subFlow: difficultySelection};
       this._domDialogs.startDegreeOfDifficulty(resources);
     };
-    const waitMatching = async (origin: CasualMatch): Promise<void> => {
-      this._domDialogs.startWaiting('マッチング中......');
-      const battle = await (async () => {
-        try {
-          await this._api.disconnectWebsocket();
-          return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
-        } catch(e) {
-          const postNetworkError = {type: 'GotoTitle'};
-          this._domDialogs.startNetworkError(resources, postNetworkError);
-          throw e;
-        }
-      })();
-      this._suddenlyBattleEndMonitor.bind(battle);
-      const subFlow = {type: 'Battle', battle};
-      this._inProgress = {...origin, subFlow};
-
-      await this._fader.fadeOut();
-      this._domDialogs.hidden();
-      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
-      await this._fader.fadeIn();
-
-      const progress = async (v) =>  {
+    const waitUntilMatching = async (): Promise<BattleSDK> => {
+      try {
+        await this._api.disconnectWebsocket();
+        return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
+      } catch(e) {
+        const postNetworkError = {type: 'GotoTitle'};
+        this._domDialogs.startNetworkError(resources, postNetworkError);
+        throw e;
+      }
+    };
+    const createBattleProgress = (battle: BattleSDK): BattleProgress => ({
+      progress: async (v) =>  {
         try {
           this._domDialogs.startWaiting('通信中......');
           const update = await battle.progress(v);
@@ -418,8 +407,22 @@ export class Game {
           this._domDialogs.startNetworkError(resources, postNetworkError);
           throw e;
         }
-      };
-      const battleScene = this._tdScenes.startBattle(resources, {progress}, battle.player,
+      }
+    });
+    const startCasualMatch = async (origin: CasualMatch): Promise<void> => {
+      this._domDialogs.startWaiting('マッチング中......');
+      const battle = await waitUntilMatching();
+      this._suddenlyBattleEndMonitor.bind(battle);
+      const subFlow = {type: 'Battle', battle};
+      this._inProgress = {...origin, subFlow};
+
+      await this._fader.fadeOut();
+      this._domDialogs.hidden();
+      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
+      await this._fader.fadeIn();
+
+      const progress = createBattleProgress(battle);
+      const battleScene = this._tdScenes.startBattle(resources, progress, battle.player,
         battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await this._fader.fadeOut();
@@ -429,9 +432,9 @@ export class Game {
     };
 
     if (this._inProgress.type === 'NPCBattle') {
-      await npcBattlePlayerSelect(this._inProgress);
+      await courseDifficultySelect(this._inProgress);
     } else if (this._inProgress.type === 'CasualMatch') {
-      await waitMatching(this._inProgress);
+      await startCasualMatch(this._inProgress);
     }
   }
 
