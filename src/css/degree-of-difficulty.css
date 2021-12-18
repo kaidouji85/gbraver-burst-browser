@@ -5,8 +5,6 @@
   .degree-of-difficulty {
     --delete-account-consent-dialog-width: calc(80vw);
     --delete-account-consent-dialog-height: calc(min(var(--delete-account-consent-dialog-width) * 9 / 16, var(--vh) * 85));
-    --control-button-width: calc(var(--responsive-font-size) * 10);
-    --control-button-height: calc(var(--responsive-font-size) * 3);
     display: block;
   }
 }

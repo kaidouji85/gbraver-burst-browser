@@ -29,6 +29,7 @@ type DataIDs = {
  * ルート要素のinnerHTML
  * 
  * @param resources リソース管理オブジェクト
+ * @param ids data-idを集めたもの
  * @return innerHTML
  */
 function rootInnerHTML(resources: Resources, ids: DataIDs): string {
@@ -39,9 +40,9 @@ function rootInnerHTML(resources: Resources, ids: DataIDs): string {
     <div class="${ROOT_CLASS}__dialog">
       <div class="${ROOT_CLASS}__dialog__caption">難易度を選択してください</div>
       <div class="${ROOT_CLASS}__dialog__controllers">
-        <button class="${ROOT_CLASS}__dialog__controllers__easy" data-id="${ids.easy}">Easy</button>
-        <button class="${ROOT_CLASS}__dialog__controllers__normal" data-id="${ids.normal}">Normal</button>
-        <button class="${ROOT_CLASS}__dialog__controllers__hard" data-id="${ids.hard}">Hard</button>
+        <button class="${ROOT_CLASS}__dialog__controllers__easy" alt="easy-course" data-id="${ids.easy}">Easy</button>
+        <button class="${ROOT_CLASS}__dialog__controllers__normal" alt="normal-course" data-id="${ids.normal}">Normal</button>
+        <button class="${ROOT_CLASS}__dialog__controllers__hard" alt="hard-course" data-id="${ids.hard}">Hard</button>
       </div>
     </div>  
   `;
