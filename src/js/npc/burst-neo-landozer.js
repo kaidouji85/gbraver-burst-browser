@@ -4,6 +4,7 @@ import type {NPC} from "./npc";
 import {ArmDozerIdList, ArmDozers, correctPower, PilotIds, Pilots} from "gbraver-burst-core";
 import type {SimpleRoutine} from "./simple-npc";
 import {SimpleNPC} from "./simple-npc";
+import {canBeatDown} from "./can-beat-down";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {
@@ -20,8 +21,9 @@ const attackRoutine: SimpleRoutine = data => {
   const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
   const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
   const hasPlusCorrectPower = 0 < correctPower(data.enemy.armdozer.effects);
+  const hasDamaged = data.enemy.armdozer.hp  < data.enemy.armdozer.maxHp;
 
-  if (burst) {
+  if (hasDamaged && burst) {
     return burst;
   }
 

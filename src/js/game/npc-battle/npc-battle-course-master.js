@@ -54,25 +54,25 @@ const Attack3Defense2ShinBraverStage: NPCBattleStage = {
 
 /** バースト発動 シンブレイバー */
 const BurstShinBraverStage: NPCBattleStage = {
-  caption: ['荒削りの英雄', 'シンブレイバー'],
+  caption: ['バーストでバッテリー', '回復せよ'],
   npc: burstShinBraver(),
 };
 
 /** バースト発動 ネオランドーザ */
 const BurstNeoLandozerStage: NPCBattleStage = {
-  caption: ['究極の破壊神', 'ネオランドーザ'],
+  caption: ['同じバッテリーならダメージ', '半減'],
   npc: burstNeoLandozer(),
 };
 
 /** バースト発動 ウィングドーザ */
 const BurstWingDozerStage: NPCBattleStage = {
-  caption: ['音速の騎士', 'ウィングドーザ'],
+  caption: ['バースト、', 'パイロットをフル活用しろ'],
   npc: burstWingDozer(),
 };
 
 /** バースト発動 ライトニングドーザ */
 const BurstLightningDozer: NPCBattleStage = {
-  caption: ['不屈の守護神', 'ライトニングドーザ'],
+  caption: ['攻撃は', 'バリアが', '消えた後で'],
   npc: burstLightningDozer()
 };
 
@@ -160,8 +160,8 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstWingDozerStage,
       BurstShinBraverStage,
+      BurstWingDozerStage,
       BurstLightningDozer,
     ])
   },
@@ -187,8 +187,8 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstNeoLandozerStage,
       BurstShinBraverStage,
+      BurstNeoLandozerStage,
       BurstWingDozerStage,
     ])
   },

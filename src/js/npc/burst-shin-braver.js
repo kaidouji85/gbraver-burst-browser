@@ -46,18 +46,16 @@ const defenseRoutine: SimpleRoutine = data => {
   const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
   const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-  const isDefeatedWithBattery3 = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 3);
-  const isDefeatedWithBattery1 = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 1);
 
   if (burst && data.enemy.armdozer.battery === 0) {
     return burst;
   }
 
-  if (battery3 && !isDefeatedWithBattery3 && data.enemy.armdozer.battery === 5) {
+  if (battery3 && data.enemy.armdozer.battery === 5) {
     return battery3;
   }
 
-  if (battery1 && !isDefeatedWithBattery1) {
+  if (battery1) {
     return battery1;
   }
 
