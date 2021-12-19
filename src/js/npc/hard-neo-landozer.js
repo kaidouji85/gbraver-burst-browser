@@ -67,6 +67,6 @@ const defenseRoutine: SimpleRoutine = data => {
  */
 export function hardNeoLandozer(): NPC {
   const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.TSUBASA) ?? Pilots[0];
+  const pilot = Pilots.find(v => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

@@ -83,7 +83,7 @@ const HardShinBraver: NPCBattleStage = {
 };
 
 /** ハードコース ウィングドーザ */
-const HardAttackWingDozer: NPCBattleStage = {
+const HardWingDozer: NPCBattleStage = {
   caption: ['音速の騎士、', 'ウィングドーザ'],
   npc: hardWingDozerNPC()
 };
@@ -141,9 +141,9 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      HardLightningDozer,
-      HardAttackWingDozer,
+      HardWingDozer,
       HardNeoLandozer,
+      HardLightningDozer,
     ])
   },
   {
@@ -168,9 +168,9 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      HardLightningDozer,
       HardShinBraver,
-      HardAttackWingDozer
+      HardWingDozer,
+      HardLightningDozer,
     ])
   },
   {
@@ -196,7 +196,7 @@ const Courses: CourseMap[] = [
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
       HardShinBraver,
-      HardAttackWingDozer,
+      HardWingDozer,
       HardNeoLandozer
     ])
   },
@@ -222,9 +222,9 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      HardLightningDozer,
       HardShinBraver,
-      HardNeoLandozer
+      HardNeoLandozer,
+      HardLightningDozer,
     ])
   },
 ];
