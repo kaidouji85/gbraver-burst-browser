@@ -7,14 +7,14 @@ import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../..
 import type {NPCBattleCourse, NPCBattleCourseContainer, NPCBattleCourseDifficulty} from "./npc-battle-course";
 import {SimpleNPCBattleCourse} from "./simple-npc-battle-course";
 import type {NPCBattleStage} from "./npc-battle-stage";
-import {burstNeoLandozer} from "../../npc/burst-neo-landozer";
-import {burstWingDozer} from "../../npc/burst-wing-dozer";
-import {burstLightningDozer} from "../../npc/burst-lightning-dozer";
-import {burstShinBraver} from "../../npc/burst-shin-braver";
-import {swiftAttackLightningDozer} from "../../npc/swift-attack-lightning-dozer";
-import {fullDefenseShinBraver} from "../../npc/full-defense-shin-braver";
-import {sturmUndDrangWingDozerNPC} from "../../npc/sturm-und-drang-wing-dozer";
-import {perfectNeoLandozer} from "../../npc/perfect-neo-landozer";
+import {normalNeoLandozer} from "../../npc/normal-neo-landozer";
+import {normalWingDozer} from "../../npc/normal-wing-dozer";
+import {normalLightningDozer} from "../../npc/normal-lightning-dozer";
+import {normalShinBraver} from "../../npc/normal-shin-braver";
+import {hardLightningDozer} from "../../npc/hard-lightning-dozer";
+import {hardShinBraver} from "../../npc/hard-shin-braver";
+import {hardWingDozerNPC} from "../../npc/hard-wing-dozer";
+import {hardNeoLandozer} from "../../npc/hard-neo-landozer";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
@@ -52,54 +52,53 @@ const Attack3Defense2ShinBraverStage: NPCBattleStage = {
   npc: attack3Defense2ShinBraverNPC()
 };
 
-/** バースト発動 シンブレイバー */
-const BurstShinBraverStage: NPCBattleStage = {
+/** ノーマルコース シンブレイバー */
+const NormalShinBraverStage: NPCBattleStage = {
   caption: ['バーストでバッテリー', '回復せよ'],
-  npc: burstShinBraver(),
+  npc: normalShinBraver(),
 };
 
-/** バースト発動 ネオランドーザ */
-const BurstNeoLandozerStage: NPCBattleStage = {
+/** ノーマルコース ネオランドーザ */
+const NormalNeoLandozerStage: NPCBattleStage = {
   caption: ['同じバッテリーならダメージ', '半減'],
-  npc: burstNeoLandozer(),
+  npc: normalNeoLandozer(),
 };
 
-/** バースト発動 ウィングドーザ */
-const BurstWingDozerStage: NPCBattleStage = {
+/** ノーマルコース ウィングドーザ */
+const NormalWingDozerStage: NPCBattleStage = {
   caption: ['バースト、', 'パイロットをフル活用しろ'],
-  npc: burstWingDozer(),
+  npc: normalWingDozer(),
 };
 
-/** バースト発動 ライトニングドーザ */
-const BurstLightningDozer: NPCBattleStage = {
+/** ノーマルコース ライトニングドーザ */
+const NormalLightningDozer: NPCBattleStage = {
   caption: ['攻撃は', 'バリアが', '消えた後で'],
-  npc: burstLightningDozer()
+  npc: normalLightningDozer()
 };
 
-/** 速攻戦法 ライトニングドーザ */
-const SwiftAttackLightningDozer: NPCBattleStage = {
-  caption: ['カウンターを', '警戒せよ'],
-  npc: swiftAttackLightningDozer()
+/** ハードコース シンブレイバー */
+const HardShinBraver: NPCBattleStage = {
+  caption: ['荒削りの英雄、', 'シンブレイバー'],
+  npc: hardShinBraver(),
 };
 
-/** 防御全振り シンブレイバー */
-const FullDefenseShinBraver: NPCBattleStage = {
-  caption: ['攻めるタイミングを見', '極めろ'],
-  npc: fullDefenseShinBraver(),
+/** ハードコース ウィングドーザ */
+const HardAttackWingDozer: NPCBattleStage = {
+  caption: ['音速の騎士、', 'ウィングドーザ'],
+  npc: hardWingDozerNPC()
 };
 
-/** 疾風怒濤 ウィングドーザ */
-const SturmUndDrangAttackWingDozer: NPCBattleStage = {
-  caption: ['猪突猛進、ひたすら', '耐えろ'],
-  npc: sturmUndDrangWingDozerNPC()
+/** ハードコース ネオランドーザ */
+const HardNeoLandozer: NPCBattleStage = {
+  caption: ['究極の破壊神、', 'ネオランドーザ'],
+  npc: hardNeoLandozer()
 };
 
-/** 究極 ネオランドーザ */
-const PerfectNeoLandozer: NPCBattleStage = {
-  caption: ['攻めも守りも', '完璧だ'],
-  npc: perfectNeoLandozer()
+/** ハードコース ライトニングドーザ */
+const HardLightningDozer: NPCBattleStage = {
+  caption: ['不屈の守護神、', 'ライトニングドーザ'],
+  npc: hardLightningDozer()
 };
-
 
 /** デフォルトのコース */
 const DefaultCourse = new SimpleNPCBattleCourse([
@@ -133,18 +132,18 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstNeoLandozerStage,
-      BurstWingDozerStage,
-      BurstLightningDozer,
+      NormalNeoLandozerStage,
+      NormalWingDozerStage,
+      NormalLightningDozer,
     ])
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      SwiftAttackLightningDozer,
-      SturmUndDrangAttackWingDozer,
-      PerfectNeoLandozer,
+      HardLightningDozer,
+      HardAttackWingDozer,
+      HardNeoLandozer,
     ])
   },
   {
@@ -160,18 +159,18 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstShinBraverStage,
-      BurstWingDozerStage,
-      BurstLightningDozer,
+      NormalShinBraverStage,
+      NormalWingDozerStage,
+      NormalLightningDozer,
     ])
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      SwiftAttackLightningDozer,
-      FullDefenseShinBraver,
-      SturmUndDrangAttackWingDozer
+      HardLightningDozer,
+      HardShinBraver,
+      HardAttackWingDozer
     ])
   },
   {
@@ -187,18 +186,18 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstShinBraverStage,
-      BurstNeoLandozerStage,
-      BurstWingDozerStage,
+      NormalShinBraverStage,
+      NormalNeoLandozerStage,
+      NormalWingDozerStage,
     ])
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      FullDefenseShinBraver,
-      SturmUndDrangAttackWingDozer,
-      PerfectNeoLandozer
+      HardShinBraver,
+      HardAttackWingDozer,
+      HardNeoLandozer
     ])
   },
   {
@@ -214,18 +213,18 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      BurstShinBraverStage,
-      BurstNeoLandozerStage,
-      BurstLightningDozer
+      NormalShinBraverStage,
+      NormalNeoLandozerStage,
+      NormalLightningDozer
     ])
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      SwiftAttackLightningDozer,
-      FullDefenseShinBraver,
-      PerfectNeoLandozer
+      HardLightningDozer,
+      HardShinBraver,
+      HardNeoLandozer
     ])
   },
 ];

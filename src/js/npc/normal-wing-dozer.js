@@ -16,20 +16,21 @@ const ZERO_BATTERY = {
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = data => {
-  const pilot = data.commands.find(v => v.type === 'PILOT_SKILL_COMMAND');
+  const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
+  const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+  const battery4 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 4);
   const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
-  const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1)
 
-  if (pilot && battery5) {
+  if (burst && battery5) {
     return battery5;
   }
 
-  if (data.enemy.armdozer.battery === 0 && pilot) {
-    return pilot;
+  if (battery4) {
+    return battery4;
   }
 
-  if (allBatteryMinusOne) {
-    return allBatteryMinusOne;
+  if (battery1) {
+    return battery1;
   }
 
   return ZERO_BATTERY;
@@ -47,16 +48,19 @@ const defenseRoutine: SimpleRoutine = data => {
     return burst;
   }
 
-  return battery1 ?? ZERO_BATTERY;
+  if (battery1) {
+    return battery1;
+  }
+
+  return ZERO_BATTERY;
 };
 
 /**
- * 疾風怒濤、ウィングドーザNPC
- *
+ * ノーマルコース ウィングドーザ NPC
  * @return NPC
  */
-export function sturmUndDrangWingDozerNPC(): NPC {
+export function normalWingDozer(): NPC {
   const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.WING_DOZER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
+  const pilot = Pilots.find(v => v.id === PilotIds.TSUBASA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }
