@@ -56,17 +56,16 @@ const defenseRoutine: SimpleRoutine = data => {
   const isDefeatedWithAllBattery = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, data.enemy.armdozer.battery);
   const isDefeatedWithAllBatteryMinusTwo = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, data.enemy.armdozer.battery - 2);
   const isDefeatedWithBattery1 = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 1);
-  const isNotMaxBattery = data.enemy.armdozer.battery < data.enemy.armdozer.maxBattery;
 
   if (pilot) {
     return pilot;
   }
 
-  if (isDefeatedWithAllBattery && isNotMaxBattery && burst) {
+  if (isDefeatedWithAllBattery && data.enemy.armdozer.battery < 5 && burst) {
     return burst;
   }
 
-  if (isDefeatedWithAllBatteryMinusTwo && allBattery) {
+  if (3 <= data.enemy.armdozer.battery && isDefeatedWithAllBatteryMinusTwo && allBattery) {
     return allBattery;
   }
 
@@ -78,7 +77,7 @@ const defenseRoutine: SimpleRoutine = data => {
     return burst;
   }
 
-  if (allBatteryMinusTwo) {
+  if (3 <= data.enemy.armdozer.battery && allBatteryMinusTwo) {
     return allBatteryMinusTwo;
   }
 
