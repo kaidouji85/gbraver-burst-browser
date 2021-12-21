@@ -141,9 +141,9 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
+      HardLightningDozer,
       HardNeoLandozer,
       HardWingDozer,
-      HardLightningDozer,
     ])
   },
   {
@@ -168,9 +168,9 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
+      HardLightningDozer,
       HardShinBraver,
       HardWingDozer,
-      HardLightningDozer,
     ])
   },
   {
@@ -195,8 +195,8 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      HardNeoLandozer,
       HardShinBraver,
+      HardNeoLandozer,
       HardWingDozer,
     ])
   },
@@ -222,9 +222,9 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Hard',
     course: new SimpleNPCBattleCourse([
-      HardNeoLandozer,
-      HardShinBraver,
       HardLightningDozer,
+      HardShinBraver,
+      HardNeoLandozer,
     ])
   },
 ];
