@@ -1,6 +1,6 @@
 // @flow
 
-import {battleResult, updateDefender, isPlayerDeath} from "gbraver-burst-core";
+import {battleResult, updateDefender, isPlayerDeath, correctedBattery} from "gbraver-burst-core";
 import type {PlayerState} from "gbraver-burst-core";
 
 /**
@@ -13,7 +13,9 @@ import type {PlayerState} from "gbraver-burst-core";
  * @return 判定結果、trueで確実に倒せる
  */
 export function canBeatDown(attacker: PlayerState, attackBattery: number, defender: PlayerState, defenseBattery: number): boolean {
-  const result = battleResult(attacker, attackBattery, defender, defenseBattery);
+  const correctedAttackBattery = correctedBattery({type: 'BATTERY_COMMAND', battery: attackBattery}, attacker.armdozer.effects);
+  const correctedDefenseBattery = correctedBattery({type: 'BATTERY_COMMAND', battery: defenseBattery}, defender.armdozer.effects);
+  const result = battleResult(attacker, correctedAttackBattery, defender, correctedDefenseBattery);
   const updatedDefender = updateDefender(result, defender);
   return isPlayerDeath(updatedDefender);
 }
