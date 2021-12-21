@@ -56,11 +56,11 @@ const defenseRoutine: SimpleRoutine = data => {
 };
 
 /**
- * バースト発動 ライトニングドーザ NPC
+ * ノーマルコース ライトニングドーザ NPC
  *
  * @returns NPC
  */
-export function burstLightningDozer(): NPC {
+export function normalLightningDozer(): NPC {
   const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.LIGHTNING_DOZER) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
