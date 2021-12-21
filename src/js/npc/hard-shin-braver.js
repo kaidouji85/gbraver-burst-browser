@@ -49,7 +49,7 @@ const attackRoutine: SimpleRoutine = data => {
 const defenseRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
   const pilot = data.commands.find(v => v.type === 'PILOT_SKILL_COMMAND');
-  const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.player.armdozer.battery);
+  const playerAllBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.player.armdozer.battery);
   const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
   const isDefeatedWithBattery3 = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 3);
@@ -68,12 +68,12 @@ const defenseRoutine: SimpleRoutine = data => {
     return pilot;
   }
 
-  if (isDefeatedWithBattery3 && allBattery) {
-    return allBattery;
+  if (isDefeatedWithBattery3 && playerAllBattery) {
+    return playerAllBattery;
   }
 
-  if (isDefeatedWithBattery1 && allBattery) {
-    return allBattery;
+  if (isDefeatedWithBattery1 && playerAllBattery) {
+    return playerAllBattery;
   }
 
   if (data.enemy.armdozer.battery === 5 && battery3) {
