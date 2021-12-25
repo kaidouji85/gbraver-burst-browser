@@ -4,8 +4,11 @@ import type {DOMScene} from "../dom-scene";
 import {escapeHTML} from "../../../dom/escape/escape-html";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {pushDOMStream} from "../../../dom/push/push-dom";
-import type {Unsubscriber} from "../../../stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import type {PushDOM} from "../../../dom/push/push-dom";
+import {Exclusive} from "../../../exclusive/exclusive";
+import {pop} from "../../../dom/animation/pop";
+import {RxjsStreamSource} from "../../../stream/rxjs";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'mail-verified-incomplete';
@@ -64,7 +67,10 @@ export class MailVerifiedIncomplete implements DOMScene {
   _root: HTMLElement;
   _gotoTitleButton: HTMLElement;
   _reloadButton: HTMLElement;
+  _gotoTitle: StreamSource<void>;
+  _reload: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
+  _exclusive: Exclusive;
 
   /**
    * コンストラクタ
@@ -89,6 +95,10 @@ export class MailVerifiedIncomplete implements DOMScene {
         this._onReloadButtonPush(action);
       }),
     ];
+
+    this._gotoTitle = new RxjsStreamSource();
+    this._reload = new RxjsStreamSource();
+    this._exclusive = new Exclusive();
   }
 
   /** @override */
@@ -104,14 +114,35 @@ export class MailVerifiedIncomplete implements DOMScene {
   }
 
   /**
+   * タイトル遷移通知
+   *
+   * @return 通知ストリーム
+   */
+  gotoTitleNotifier(): Stream<void> {
+    return this._gotoTitle;
+  }
+
+  /**
+   * 再読み込み通知
+   *
+   * @return 通知ストリーム
+   */
+  reloadNotifier(): Stream<void> {
+    return this._reload;
+  }
+
+  /**
    * タイトルへボタンが押された時の処理
    *
    * @param action アクション
    */
   _onGotoTitleButtonPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    console.log('goto title.');
+    this._exclusive.execute(async () => {
+      action.event.preventDefault();
+      action.event.stopPropagation();
+      await pop(this._gotoTitleButton);
+      this._gotoTitle.next();
+    });
   }
 
   /**
@@ -120,8 +151,11 @@ export class MailVerifiedIncomplete implements DOMScene {
    * @param action アクション
    */
   _onReloadButtonPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    console.log('reload.');
+    this._exclusive.execute(async () => {
+      action.event.preventDefault();
+      action.event.stopPropagation();
+      await pop(this._reloadButton);
+      this._reload.next();
+    });
   }
 }
