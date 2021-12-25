@@ -65,6 +65,15 @@ export class DOMScenes {
 
     const scene = new MailVerifiedIncomplete(mailAddress);
     this._root.appendChild(scene.getRootHTMLElement());
+    this._unsubscribers = [
+      scene.gotoTitleNotifier().subscribe(() => {
+        this._gameAction.next({type: 'ExitMailVerifiedIncomplete'});
+      }),
+      scene.reloadNotifier().subscribe(() => {
+        this._gameAction.next({type: 'ReloadRequest'});
+      })
+    ];
+
     this._scene = scene;
     return scene;
   }

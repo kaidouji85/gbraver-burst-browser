@@ -4,6 +4,16 @@ import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
 import type {PostNetworkError} from '../network/post-network-error';
 import type {NPCBattleCourseDifficulty} from "../npc-battle/npc-battle-course";
 
+/** 画面リロード依頼 */
+export type ReloadRequest = {
+  type: 'ReloadRequest'
+}
+
+/** メール認証未完了画面を抜ける */
+export type ExitMailVerifiedIncomplete = {
+  type: 'ExitMailVerifiedIncomplete'
+}
+
 /** ゲームスタート */
 export type GameStart = {
   type: 'GameStart'
@@ -131,7 +141,9 @@ export type EndNetworkError = {
 /**
  * ゲーム全体で利用するアクション
  */
-export type GameAction = GameStart
+export type GameAction = ReloadRequest
+ | ExitMailVerifiedIncomplete
+ | GameStart
  | CasualMatchStart
  | ShowHowToPlay
  | EndHowToPlay
