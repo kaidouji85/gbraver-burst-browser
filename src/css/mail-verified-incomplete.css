@@ -4,6 +4,8 @@
 @media (orientation: landscape) {
   .mail-verified-incomplete {
     --padding: 5vh;
+    --control-button-width: calc(var(--responsive-font-size) * 10);
+    --control-button-height: calc(var(--responsive-font-size) * 3);
     width: var(--screen-width);
     height: var(--screen-height);
     box-sizing: border-box;
@@ -31,4 +33,23 @@
 
 .mail-verified-incomplete__procedure {
   padding-bottom: var(--responsive-font-size);
+}
+
+.mail-verified-incomplete__controllers button {
+  width: var(--control-button-width);
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+}
+
+.mail-verified-incomplete__controllers__goto-title {
+  background-color: var(--sub-button-background-color);
+  margin-right: var(--responsive-font-size);
+}
+
+.mail-verified-incomplete__controllers__reload {
+  background-color: var(--button-background-color);
 }

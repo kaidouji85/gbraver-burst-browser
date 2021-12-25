@@ -2,6 +2,7 @@
 
 import type {DOMScene} from "../dom-scene";
 import {escapeHTML} from "../../../dom/escape/escape-html";
+import type {StreamSource} from "../../../stream/core";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'mail-verified-incomplete';
@@ -22,6 +23,10 @@ function rootInnerHTML(mailAddress: string): string {
       <li class="${ROOT_CLASS}__procedure__item">認証メールに記載されたVerify Linkを開く</li>
       <li class="${ROOT_CLASS}__procedure__item">Gブレイバーバーストを再読み込みする</li>
     </ol>
+    <div class="${ROOT_CLASS}__controllers">
+      <button class="${ROOT_CLASS}__controllers__goto-title">タイトルへ</button>
+      <button class="${ROOT_CLASS}__controllers__reload">再読み込み</button>
+    </div>
   `;
 }
 
