@@ -1,15 +1,23 @@
 // @flow
 
-import type {GameEndResult, Player} from "gbraver-burst-core";
+import type {GameEndResult, Player, ArmDozerId, PilotId} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
-import type {SelectionComplete} from "../../actions/game-actions";
-import type {StageLevel, NPCBattleCourse} from './npc-battle-course';
-import {getNPCBattleCourse} from './npc-battle-course';
+import type {NPCBattleCourse} from '../../npc-battle/npc-battle-course';
 import {playerUuid} from "../../../uuid/player";
+import type {StageLevel} from "../../npc-battle/npc-battle-stage";
 
 /** プレイヤー選択 */
 export type PlayerSelect = {
   type: 'PlayerSelect'
+};
+
+/** 難易度選択 */
+export type DifficultySelect = {
+  type: 'DifficultySelect',
+  /** 選択したアームドーザ */
+  armdozerId: ArmDozerId,
+  /** 選択したパイロット */
+  pilotId: PilotId
 };
 
 /** NPCバトルコース実行中 */
@@ -24,7 +32,7 @@ export type InNPCBattleCourse = {
 };
 
 /** サブフロー */
-export type SubFlow = PlayerSelect | InNPCBattleCourse;
+export type SubFlow = PlayerSelect | DifficultySelect | InNPCBattleCourse;
 
 /** 
  * NPCバトル
@@ -40,17 +48,16 @@ export type NPCBattleX<X> = {
 export type NPCBattle = NPCBattleX<SubFlow>;
 
 /**
- * NPCバトルコース開始直後のサブフローを生成する
- * 
- * @param action プレイヤー選択完了アクション 
- * @return NPCバトルコース進行中のサブフロー 
+ * NPCバトル用のプレイヤーを生成する
+ *
+ * @param armdozerId プレイヤーが選択したアームドーザID
+ * @param pilotId プレイヤーが選択したパイロットID
+ * @return 生成したプレイヤー情報
  */
-export function startNPCBattleCourse(action: SelectionComplete): InNPCBattleCourse {
-  const armdozer = ArmDozers.find(v => v.id === action.armdozerId) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === action.pilotId) ?? Pilots[0];
-  const player = {playerId: playerUuid(), armdozer, pilot};
-  const course = getNPCBattleCourse(armdozer.id);
-  return {type: 'InNPCBattleCourse', player, course, level: 1};
+export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId): Player {
+  const armdozer = ArmDozers.find(v => v.id === armdozerId) ?? ArmDozers[0];
+  const pilot = Pilots.find(v => v.id === pilotId) ?? Pilots[0];
+  return {playerId: playerUuid(), armdozer, pilot};
 }
 
 /**

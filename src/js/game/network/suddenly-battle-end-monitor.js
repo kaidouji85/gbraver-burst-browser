@@ -8,14 +8,14 @@ import type {SuddenlyBattleEnd} from "../actions/game-actions";
 /** バトル強制終了 監視 */
 export class SuddenlyBattleEndMonitor {
   _notifier: StreamSource<SuddenlyBattleEnd>;
-  _unSubscriber: ?Unsubscriber;
+  _unsubscriber: ?Unsubscriber;
 
   /**
    * コンストラクタ
    */
   constructor() {
     this._notifier = new RxjsStreamSource();
-    this._unSubscriber = null;
+    this._unsubscriber = null;
   }
 
   /**
@@ -25,7 +25,7 @@ export class SuddenlyBattleEndMonitor {
    */
   bind(battle: Battle): void {
     this.unbind();
-    this._unSubscriber = toStream(battle.suddenlyBattleNotifier()).subscribe(() => {
+    this._unsubscriber = toStream(battle.suddenlyBattleNotifier()).subscribe(() => {
       this._notifier.next({type: 'SuddenlyBattleEnd'});
     });
   }
@@ -34,12 +34,12 @@ export class SuddenlyBattleEndMonitor {
    * バトル強制終了監視を停止する
    */
   unbind(): void {
-    if (!this._unSubscriber) {
+    if (!this._unsubscriber) {
       return;
     }
 
-    this._unSubscriber.unsubscribe();
-    this._unSubscriber = null;
+    this._unsubscriber.unsubscribe();
+    this._unsubscriber = null;
   }
 
   /**

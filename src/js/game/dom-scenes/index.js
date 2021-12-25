@@ -15,6 +15,8 @@ import {RxjsStreamSource} from "../../stream/rxjs";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import type {TitleAccount} from "./title/title-account";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
+import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
+import type {StageLevel} from "../npc-battle/npc-battle-stage";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -63,6 +65,15 @@ export class DOMScenes {
 
     const scene = new MailVerifiedIncomplete(mailAddress);
     this._root.appendChild(scene.getRootHTMLElement());
+    this._unsubscribers = [
+      scene.gotoTitleNotifier().subscribe(() => {
+        this._gameAction.next({type: 'ExitMailVerifiedIncomplete'});
+      }),
+      scene.reloadNotifier().subscribe(() => {
+        this._gameAction.next({type: 'ReloadRequest'});
+      })
+    ];
+
     this._scene = scene;
     return scene;
   }
@@ -177,6 +188,29 @@ export class DOMScenes {
       enemy: enemy,
       caption: caption
     });
+    this._root.appendChild(scene.getRootHTMLElement());
+    await Promise.race([
+      scene.waitUntilLoaded(),
+      waitTime(MAX_LOADING_TIME),
+    ]);
+
+    this._scene = scene;
+    return scene;
+  }
+
+  /**
+   * NPCステージタイトル画面を開始する
+   *
+   * @param resources リソース管理オブジェクト
+   * @param level ステージレベル
+   * @param caption ステージ名
+   * @param armDozerId アームドーザアイコンのID
+   * @returns 開始されたNPCステージタイトル画面
+   */
+  async startNPCStageTitle(resources: Resources, level: StageLevel, caption: string[], armDozerId: ArmDozerId): Promise<NPCStageTitle> {
+    this._removeCurrentScene();
+
+    const scene = new NPCStageTitle(resources, level, caption, armDozerId);
     this._root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),

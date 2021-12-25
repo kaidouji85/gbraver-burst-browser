@@ -1,0 +1,64 @@
+/**
+ * NPCステージタイトル
+ */
+
+@media (orientation: landscape) {
+  .npc-stage-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+  }
+}
+
+@media (orientation: portrait) {
+  .npc-stage-title {
+    display: none;
+  }
+}
+
+.npc-stage-title__armdozer-icon {
+  object-fit: cover;
+  width: 20vw;
+  margin-top: var(--responsive-font-size);
+  transform: scale(-1, 1);
+}
+
+.npc-stage-title__title {
+  font-size: calc(var(--responsive-font-size) * 1.3);
+}
+
+.npc-stage-title__title__stage {
+  display: flex;
+  align-items: baseline;
+}
+
+.npc-stage-title__title__stage__prefix--capitalized {
+  font-size: calc(var(--responsive-font-size) * 2.5);
+  font-weight: bold;
+}
+
+.npc-stage-title__title__stage__level {
+  font-size: calc(var(--responsive-font-size) * 2);
+  font-weight: bold;
+}
+
+.npc-stage-title__title__caption {
+  display: flex;
+  align-items: baseline;
+  margin-left: calc(var(--responsive-font-size) * 2);
+}
+
+.npc-stage-title__title__caption__clause--capitalized {
+  font-size: calc(var(--responsive-font-size) * 2.5);
+  font-weight: bold;
+}

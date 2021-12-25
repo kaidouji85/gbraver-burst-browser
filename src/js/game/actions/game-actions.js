@@ -1,7 +1,18 @@
 // @flow
 
 import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
-import type {PostNetworkError} from '../dom-dialogs/network-error/post-network-error';
+import type {PostNetworkError} from '../network/post-network-error';
+import type {NPCBattleCourseDifficulty} from "../npc-battle/npc-battle-course";
+
+/** 画面リロード依頼 */
+export type ReloadRequest = {
+  type: 'ReloadRequest'
+}
+
+/** メール認証未完了画面を抜ける */
+export type ExitMailVerifiedIncomplete = {
+  type: 'ExitMailVerifiedIncomplete'
+}
 
 /** ゲームスタート */
 export type GameStart = {
@@ -39,6 +50,22 @@ export type SelectionComplete = {
  */
 export type SelectionCancel = {
   type: 'SelectionCancel'
+};
+
+/**
+ * 難易度選択完了
+ */
+export type DifficultySelectionComplete = {
+  type: 'DifficultySelectionComplete',
+  /** 選択した難易度 */
+  difficulty: NPCBattleCourseDifficulty,
+};
+
+/**
+ * 難易度選択キャンセル
+ */
+export type DifficultySelectionCancel = {
+  type: 'DifficultySelectionCancel'
 };
 
 /** 戦闘終了 */
@@ -90,6 +117,20 @@ export type CancelAccountDeletion = {
   type: 'CancelAccountDeletion'
 };
 
+/** WebSocketAPI エラー発生 */
+export type WebSocketAPIError = {
+  type: 'WebSocketAPIError',
+  /** エラー情報 */
+  error: any,
+};
+
+/** WebSocketAPI意図せず切断した */
+export type WebSocketAPIUnintentionalClose = {
+  type: 'WebSocketAPIUnintentionalClose',
+  /** エラー情報 */
+  error: any,
+};
+
 /** 通信エラーダイアログを閉じる */
 export type EndNetworkError = {
   type: 'EndNetworkError',
@@ -100,12 +141,16 @@ export type EndNetworkError = {
 /**
  * ゲーム全体で利用するアクション
  */
-export type GameAction = GameStart
+export type GameAction = ReloadRequest
+ | ExitMailVerifiedIncomplete
+ | GameStart
  | CasualMatchStart
  | ShowHowToPlay
  | EndHowToPlay
  | SelectionComplete
  | SelectionCancel
+ | DifficultySelectionComplete
+ | DifficultySelectionCancel
  | EndBattle
  | SuddenlyBattleEnd
  | EndNPCEnding
@@ -115,4 +160,6 @@ export type GameAction = GameStart
  | AccountDeleteConsent
  | DeleteAccount
  | CancelAccountDeletion
+ | WebSocketAPIError
+ | WebSocketAPIUnintentionalClose
  | EndNetworkError;

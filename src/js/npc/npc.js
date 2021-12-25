@@ -6,7 +6,6 @@ import type {Armdozer, Command, GameState, Pilot, PlayerId} from "gbraver-burst-
 export interface NPC {
   /** アームドーザ */
   armdozer: Armdozer;
-
   /** パイロット */
   pilot: Pilot;
 
