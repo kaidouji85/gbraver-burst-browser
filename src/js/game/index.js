@@ -152,7 +152,9 @@ export class Game {
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
       this._domDialogs.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
-      if (action.type === 'EndBattle') { this._onEndBattle(action) }
+      if (action.type === 'ReloadRequest') { this._onReloadRequest() }
+      else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
+      else if (action.type === 'EndBattle') { this._onEndBattle(action) }
       else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
       else if (action.type === 'GameStart') { this._onGameStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
@@ -212,7 +214,28 @@ export class Game {
   }
 
   /**
+   * 画面リロード依頼時の処理
+   *
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onReloadRequest(): Promise<void> {
+    await this._fader.fadeOut();
+    window.location.reload();
+  }
+
+  /**
+   * メール認証未完了画面を抜ける時の処理
+   *
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onExitMailVerifiedIncomplete(): Promise<void> {
+    await this._fader.fadeOut();
+    await this._api.logout();
+  }
+
+  /**
    * ゲームスタート時の処理
+   * @return 処理が完了したら発火するPromise
    */
   async _onGameStart(): Promise<void> {
     if (!this._resources) {
