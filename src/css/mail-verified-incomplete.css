@@ -47,7 +47,7 @@
 
 .mail-verified-incomplete__controllers__goto-title {
   background-color: var(--sub-button-background-color);
-  margin-right: var(--responsive-font-size);
+  margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .mail-verified-incomplete__controllers__reload {
