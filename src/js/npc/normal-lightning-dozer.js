@@ -40,7 +40,7 @@ const defenseRoutine: SimpleRoutine = data => {
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
   const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
 
-  if (data.enemy.armdozer === 5 && burst && battery3) {
+  if (data.enemy.armdozer.battery === 5 && burst && battery3) {
     return battery3;
   }
 
