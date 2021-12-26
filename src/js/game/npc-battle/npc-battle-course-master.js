@@ -72,7 +72,7 @@ const NormalWingDozerStage: NPCBattleStage = {
 
 /** ノーマルコース ライトニングドーザ */
 const NormalLightningDozer: NPCBattleStage = {
-  caption: ['攻撃は', 'バリアが', '消えた後で'],
+  caption: ['0攻撃で', 'バリアをやり過ごせ'],
   npc: normalLightningDozer()
 };
 
@@ -132,9 +132,9 @@ const Courses: CourseMap[] = [
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
-      NormalNeoLandozerStage,
       NormalWingDozerStage,
       NormalLightningDozer,
+      NormalNeoLandozerStage,
     ])
   },
   {
@@ -187,8 +187,8 @@ const Courses: CourseMap[] = [
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
       NormalShinBraverStage,
-      NormalNeoLandozerStage,
       NormalWingDozerStage,
+      NormalNeoLandozerStage,
     ])
   },
   {
@@ -214,8 +214,8 @@ const Courses: CourseMap[] = [
     difficulty: 'Normal',
     course: new SimpleNPCBattleCourse([
       NormalShinBraverStage,
+      NormalLightningDozer,
       NormalNeoLandozerStage,
-      NormalLightningDozer
     ])
   },
   {
