@@ -11,7 +11,7 @@
     "start:production": "run-s build:production serve",
     "start:storybook": "start-storybook -s ./src/resources -p 6006",
     "start:storybook-static": "run-s clean build:storybook-static serve:storybook-static",
-    "test": "ava -T 600000",
+    "test": "jest",
     "build": "run-s clean type-check lint lint:test webpack scale-down-image webpack:sw webpack:clear-sw",
     "build:production": "run-s clean type-check lint lint:test webpack:production scale-down-image webpack:sw webpack:clear-sw",
     "build:storybook-static": "run-s clean lint:storybook storybook-static",
@@ -51,7 +51,6 @@
     "workbox-strategies": "^6.4.2"
   },
   "devDependencies": {
-    "@ava/babel": "^2.0.0",
     "@babel/core": "^7.16.7",
     "@babel/eslint-parser": "^7.16.5",
     "@babel/preset-env": "^7.16.7",
@@ -60,18 +59,20 @@
     "@storybook/builder-webpack5": "6.4.9",
     "@storybook/html": "6.4.9",
     "autoprefixer": "^10.4.1",
-    "ava": "3.15.0",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.0",
     "css-loader": "^6.5.1",
     "dotenv": "^10.0.0",
     "eslint": "^8.6.0",
     "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-jest": "^25.3.4",
     "flow-bin": "^0.168.0",
+    "flow-typed": "^3.6.1",
     "glob": "^7.2.0",
     "html-webpack-plugin": "^5.5.0",
     "http-server": "^14.0.0",
     "image-size": "^1.0.0",
+    "jest": "^27.4.7",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",
@@ -82,16 +83,5 @@
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.7.2"
-  },
-  "ava": {
-    "babel": {
-      "compileEnhancements": false
-    },
-    "files": [
-      "test/js/**/*.js"
-    ],
-    "require": [
-      "@babel/register"
-    ]
   }
 }
