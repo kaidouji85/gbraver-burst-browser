@@ -62,16 +62,10 @@ aws configure
 # S3へのフル権限を持つアカウントでログインする
 ```
 
-### 開発環境にデプロイ
+### デプロイ
 
 ```shell script
-./scripts/deploy.sh <アップロードするS3バケット名>
-```
-
-### 本番環境にデプロイ
-
-```shell script
-./scripts/deploy-production.sh <アップロードするS3バケット名> <CloudFrontのdistributionId>
+./deploy.sh <アップロードするS3バケット名> <CloudFrontのdistributionId>
 ```
 
 ## storybookを動かす

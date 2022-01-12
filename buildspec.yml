@@ -11,4 +11,4 @@ phases:
       - npm run test
   build:
     commands:
-      - ./shell/deploy-production.sh $S3_BUCKET $DISTRIBUTION_ID
+      - ./deploy.sh $S3_BUCKET $DISTRIBUTION_ID
