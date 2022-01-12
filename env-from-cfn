@@ -1,0 +1,21 @@
+#!/bin/sh
+
+if [ $# != 1 ]; then
+  echo "invalid params"
+fi
+
+STACK_NAME="${1}"
+OWN_PATH=`cd $(dirname ${0}) && pwd`
+STACK_FILE="${OWN_PATH}/.tmp-api-stack"
+
+aws cloudformation describe-stacks --stack-name "${STACK_NAME}" > "${STACK_FILE}"
+
+if [ -z "${REST_API_URL}" ]; then
+  REST_API_URL=`jq -r '.Stacks[] | .Outputs[] | select(.OutputKey == "HttpApiUrl") | .OutputValue' "${STACK_FILE}"`
+fi
+
+if [ -z "${WEBSOCKET_API_URL}" ]; then
+  WEBSOCKET_API_URL=`jq -r '.Stacks[] | .Outputs[] | select(.OutputKey == "ServiceEndpointWebsocket") | .OutputValue' "${STACK_FILE}"`
+fi
+
+rm "${STACK_FILE}"

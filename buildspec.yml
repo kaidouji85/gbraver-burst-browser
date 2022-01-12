@@ -1,5 +1,8 @@
 version: 0.2
-
+env:
+  parameter-store:
+    SERVICE: /GbraverBurst/dev/service
+    STAGE: /GbraverBurst/dev/stage
 phases:
   install:
     runtime-versions:
@@ -11,4 +14,5 @@ phases:
       - npm run test
   build:
     commands:
-      - ./deploy.sh $S3_BUCKET $DISTRIBUTION_ID
+      - source ./env-from-cfn "${SERVICE}-${STAGE}"
+      - ./deploy.sh "${S3_BUCKET}" "${DISTRIBUTION_ID}"
