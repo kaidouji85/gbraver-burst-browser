@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# CloudFormationの出力から環境変数を読み込む
+# 本スクリプトとCodeBuildで同じ環境変数が定義されている場合、後者を優先する
+
 if [ $# != 1 ]; then
   echo "invalid params"
 fi
