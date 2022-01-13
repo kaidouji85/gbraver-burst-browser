@@ -14,5 +14,6 @@ phases:
       - npm run test
   build:
     commands:
-      - . ./env-from-cfn "${SERVICE}-${STAGE}"
+      - STACK_NAME="${SERVICE}-${STAGE}"
+      - . ./env-from-cfn
       - ./deploy.sh "${S3_BUCKET}" "${DISTRIBUTION_ID}"

@@ -3,13 +3,12 @@
 # CloudFormationの出力から環境変数を読み込む
 # 本スクリプトとCodeBuildで同じ環境変数が定義されている場合、後者を優先する
 
-if [ $# != 1 ]; then
-  echo "invalid params"
+if [ -z "${STACK_NAME}" ]; then
+  echo "required environment variables not specified."
+  return 1
 fi
 
-STACK_NAME="${1}"
-OWN_PATH=`cd $(dirname ${0}) && pwd`
-STACK_FILE="${OWN_PATH}/.tmp-api-stack"
+STACK_FILE=".tmp-api-stack"
 
 aws cloudformation describe-stacks --stack-name "${STACK_NAME}" > "${STACK_FILE}"
 
