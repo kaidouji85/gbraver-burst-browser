@@ -1,8 +1,8 @@
 version: 0.2
 env:
   parameter-store:
-    SERVICE: /GbraverBurst/dev/service
-    STAGE: /GbraverBurst/dev/stage
+    SERVICE: /GbraverBurst/prod/service
+    STAGE: /GbraverBurst/prod/stage
 phases:
   install:
     runtime-versions:
