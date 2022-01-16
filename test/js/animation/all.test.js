@@ -1,10 +1,9 @@
 // @flow
 
-import test from 'ava';
 import {all} from '../../../src/js/animation/all';
 import {tween} from "../../../src/js/animation/tween";
 
-test('再生時間が一番長いものがnextに設定されている', t => {
+test('再生時間が一番長いものがnextに設定されている', () => {
   const p1 = tween({}, t => t
     .to({}, 500)
   );
@@ -16,6 +15,6 @@ test('再生時間が一番長いものがnextに設定されている', t => {
     );
   const v = all(p1, p2, p3);
 
-  t.is(v._end, p3._end);
-  t.is(v._time, 1000);
+  expect(v._end).toBe(p3._end);
+  expect(v._time).toBe(1000);
 });

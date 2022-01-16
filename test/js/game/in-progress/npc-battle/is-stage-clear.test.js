@@ -1,25 +1,24 @@
 // @flow
 
-import test from 'ava';
 import {isStageClear} from "../../../../../src/js/game/in-progress/npc-battle/npc-battle";
 import {EMPTY_PLAYER} from "../../../../data/player";
 
 const player = {...EMPTY_PLAYER, playerId: 'test-player'};
 
-test('勝者がプレイヤーの場合、ステージクリアである', t => {
+test('勝者がプレイヤーの場合、ステージクリアである', () => {
   const win = {type: 'GameOver', winner: player.playerId};
   const result = isStageClear(player, win);
-  t.true(result);
+  expect(result).toBe(true);
 });
 
-test('勝者がNPCの場合、ステージクリアではない', t => {
+test('勝者がNPCの場合、ステージクリアではない', () => {
   const lose = {type: 'GameOver', winner: 'not-test-player'}; 
   const result = isStageClear(player, lose);
-  t.false(result);
+  expect(result).toBe(false);
 });
 
-test('引き分けの場合、ステージクリアではない', t => {
+test('引き分けの場合、ステージクリアではない', () => {
   const evenMatch = {type: 'EvenMatch'};
   const result = isStageClear(player, evenMatch);
-  t.false(result);
+  expect(result).toBe(false);
 });

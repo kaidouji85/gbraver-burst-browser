@@ -50,29 +50,42 @@ docker build ./
 ```
 
 ## デプロイする
-本プログラムは静的ファイルのみで構成されています。
-ビルドしたものを、S3などでパブリック公開するけでデプロイ完了です。
+本プログラムは静的ファイルのみで構成されているので、
+ビルド生成物をPublicに公開すればデプロイ完了です。
 ここでは、S3にアップロードする手順を記載します。
 
 ### 事前準備
+1. [aws cli](https://aws.amazon.com/jp/cli/)をインストールする
+2. ```aws confiure```を[完了させる](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-quickstart.html)
+3. デプロイ対象のS3バケットを用意する
+
+### デプロイコマンド
 
 ```shell script
-# aws cliをインストールする
-aws configure
-# S3へのフル権限を持つアカウントでログインする
+./deploy.sh <アップロードするS3バケット名> <CloudFrontのdistributionId>
 ```
 
-### 開発環境にデプロイ
+## CodeBuild設定
+### 事前準備
+[GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)をデプロイしてください。
+なお、以下が本プロジェクトが直接参照しているものです。
 
-```shell script
-./scripts/deploy.sh <アップロードするS3バケット名>
-```
+* [Serverless Framework](https://github.com/serverless/serverless)で生成した[CloudFormationStack](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/stacks.html)
+* サービス、ステージを設定した[Parameter Store](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html)
 
-### 本番環境にデプロイ
+### 開発環境設定
 
-```shell script
-./scripts/deploy-production.sh <アップロードするS3バケット名> <CloudFrontのdistributionId>
-```
+| 項目名 | 設定値 |
+| ------ | ------ |
+| Buildspec | buildspec.yml |
+| 環境変数 | ```REST_API_URL```、```WEBSOCKET_API_URL```以外の.env.templateに定義されているもの |
+
+### 本番環境設定
+
+| 項目名 | 設定値 |
+| ------ | ------ |
+| Buildspec | prod.buildspec.yml |
+| 環境変数 | ```REST_API_URL```、```WEBSOCKET_API_URL```以外の.env.templateに定義されているもの |
 
 ## storybookを動かす
 

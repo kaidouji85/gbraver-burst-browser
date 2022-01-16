@@ -1,11 +1,10 @@
 // @flow
 
-import test from 'ava';
 import {process} from '../../../src/js/animation/process';
 
-test('processの再生時間は0である', t => {
+test('processの再生時間は0である', () => {
   const v =process(() => {
     // NOP
   });
-  t.is(v._time, 0);
+  expect(v._time).toBe(0);
 });
