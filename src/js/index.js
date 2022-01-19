@@ -5,6 +5,7 @@ import {Game} from './game/index';
 import {DefinePlugin} from "./webpack/define-plugin";
 import {createBrowserSDK} from "@gbraver-burst-network/browser-sdk";
 import {isMobile} from "./device-ditect/is-mobile";
+import {waitTime} from "./wait/wait-time";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -30,6 +31,7 @@ async function main(): Promise<void> {
     isServiceWorkerUsed: DefinePlugin.isServiceWorkerUsed === 'true',
     isAPIServerEnable: DefinePlugin.isAPIServerEnable === 'true',
   });
+  await waitTime(1000);
   await game.initialize();
 }
 
