@@ -47,7 +47,6 @@ export class ResourceLoader {
   _canvasImageLoading: Array<Promise<CanvasImageResource>>;
   _soundLoading: Array<Promise<SoundResource>>;
   _paths: Path[];
-  _pathLoading: Array<Promise<Response>>;
   _allLoadingCounts: number;
   _completedLoadingCounts: number;
   _loading: StreamSource<LoadingActions>;
@@ -64,17 +63,14 @@ export class ResourceLoader {
     this._cubeTextureLoading = loadingAllCubeTextures(resourceRoot);
     this._canvasImageLoading = loadingAllCanvasImages(resourceRoot);
     this._soundLoading = loadingAllSounds(resourceRoot);
-
     this._paths = getAllPaths(resourceRoot)
-    this._pathLoading = this._paths.map(path => fetch(path.path))
-
+    
     const allLoading = [].concat(
       this._gltfLoading,
       this._textureLoading,
       this._cubeTextureLoading,
       this._canvasImageLoading,
       this._soundLoading,
-      this._pathLoading,
     );
     this._allLoadingCounts = allLoading.length;
     this._completedLoadingCounts = 0;
@@ -102,7 +98,6 @@ export class ResourceLoader {
       Promise.all(this._cubeTextureLoading),
       Promise.all(this._canvasImageLoading),
       Promise.all(this._soundLoading),
-      Promise.all(this._pathLoading),
     ]);
 
     return {
