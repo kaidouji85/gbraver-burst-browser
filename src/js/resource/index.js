@@ -36,6 +36,17 @@ export type Resources = {
   sounds: SoundResource[],
 };
 
+/**
+ * 空のリソース管理オブジェクトを生成する
+ *
+ * @param reosurceRoot リソースルート
+ * @return リソース管理オブジェクト
+ */
+export function emptyResources(resourceRoot: ResourceRoot): Resources {
+  return {rootPath: resourceRoot, paths: [], gltfs: [], textures: [], 
+    cubeTextures: [], canvasImages: [], sounds: []};
+}
+
 /** リソース読み込みオブジェクト */
 export type ResourceLoading = {
   /** 読み込みストリーム */
