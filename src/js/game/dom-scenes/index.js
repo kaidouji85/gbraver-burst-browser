@@ -1,6 +1,6 @@
 // @flow
 
-import type {LoadingActions} from "../../resource/loading-actions";
+import type {LoadingActions} from "../../resource/loading";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
 import {Title} from "./title/title";
