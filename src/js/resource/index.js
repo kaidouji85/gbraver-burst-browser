@@ -1,14 +1,22 @@
 // @flow
 import type {TextureConfig, TextureResource} from "./texture";
-import {loadTexture, loadingAllTextures} from "./texture";
+import {TEXTURE_CONFIGS, loadTexture, loadingAllTextures} from "./texture";
 import type {CanvasImageConfig, CanvasImageResource} from "./canvas-image";
-import {loadCanvasImage, loadingAllCanvasImages} from "./canvas-image";
+import {
+  CANVAS_IMAGE_CONFIGS,
+  loadCanvasImage,
+  loadingAllCanvasImages,
+} from "./canvas-image";
 import type {GlTFConfig, GlTFResource} from "./gltf";
-import {loadGlTF, loadingAllGTLFModels} from "./gltf";
+import {GLTF_CONFIGS, loadGlTF, loadingAllGTLFModels} from "./gltf";
 import type {CubeTextureConfig, CubeTextureResource} from "./cube-texture";
-import {loadCubeTexture, loadingAllCubeTextures} from "./cube-texture";
+import {
+  CUBE_TEXTURE_CONFIGS,
+  loadCubeTexture,
+  loadingAllCubeTextures,
+} from "./cube-texture";
 import type {SoundConfig, SoundResource} from "./sound";
-import {loadSound, loadingAllSounds} from "./sound";
+import { SOUND_CONFIGS, loadSound, loadingAllSounds } from "./sound";
 import type {ResourceRoot} from "./resource-root";
 import type {LoadingActions} from "./loading-actions";
 import type {Path} from "./path";
@@ -66,7 +74,7 @@ type ResourceLoadingParams = {
  * @param params 読み込みパラメータ
  * @return リソース読み込みオブジェクト
  */
-export function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
+function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
   const gltfLoadings = params.gltfConfigs.map(v => loadGlTF(params.resourceRoot, v));
   const textureLoadings = params.gltfConfigs.map(v => loadTexture(params.resourceRoot, v));
   const cubeTextureLoadings = params.cubeTextureConfigs.map(v => loadCubeTexture(params.resourceRoot, v));
@@ -76,11 +84,11 @@ export function resourceLoading(params: ResourceLoadingParams): ResourceLoading 
   const loading = new RxjsStreamSource();
   const allLoading = [...gltfLoadings, ...textureLoadings, ...cubeTextureLoadings, ...canvasImageLoadings, ...soundLoadings];
   let completedLoadingCounts = 0;
-  allLoading.flat().forEach(loading => {
-    loading.then(() => {
+  allLoading.flat().forEach(v => {
+    v.then(() => {
       completedLoadingCounts ++;
       const completedRate = completedLoadingCounts / allLoading.length;
-      this._loading.next({type: 'LoadingProgress', completedRate});
+      loading.next({type: 'LoadingProgress', completedRate});
     });
   });
   
@@ -93,6 +101,17 @@ export function resourceLoading(params: ResourceLoadingParams): ResourceLoading 
     return {rootPath: params.resourceRoot, gltfs, textures, cubeTextures, canvasImages, sounds, paths};
   })();
   return {loading, resources};
+}
+
+/**
+ * 全リソースを読み込む
+ *
+ * @param resourceRoot リソースルート
+ * @return リソース読み込みオブジェクト
+ */
+export function fullResourceLoading(resourceRoot: ResourceRoot): ResourceLoading {
+  return resourceLoading({resourceRoot, gltfConfigs: GLTF_CONFIGS, textureConfigs: TEXTURE_CONFIGS,
+    cubeTextureConfigs: CUBE_TEXTURE_CONFIGS, canvasImageConfigs: CANVAS_IMAGE_CONFIGS,soundConfigs: SOUND_CONFIGS});
 }
 
 /**
