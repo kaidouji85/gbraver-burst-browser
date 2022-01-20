@@ -2,7 +2,7 @@
 
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {ResourceLoader} from "../resource";
+import {fullResourceLoading} from "../resource";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
@@ -200,10 +200,10 @@ export class Game {
       return;
     }
 
-    const loader = new ResourceLoader(this._resourceRoot);
-    this._domScenes.startLoading(loader.progress());
+    const resourceLoading = fullResourceLoading(this._resourceRoot);
+    this._domScenes.startLoading(resourceLoading.loading);
     await this._fader.fadeIn();
-    const resources: Resources = await loader.load();
+    const resources: Resources = await resourceLoading.resources;
     this._resources = resources;
     await waitAnimationFrame();
     await waitTime(1000);
