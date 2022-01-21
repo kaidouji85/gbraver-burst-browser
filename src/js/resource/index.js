@@ -84,29 +84,25 @@ function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
   const canvasImageLoadings = params.canvasImageConfigs.map(v => loadCanvasImage(params.resourceRoot, v));
   const soundLoadings = params.soundConfigs.map(v => loadSound(params.resourceRoot, v));
   
-  const loading = new RxjsStreamSource();
+  const loadingActtions = new RxjsStreamSource();
   const allLoading = [...gltfLoadings, ...textureLoadings, ...cubeTextureLoadings, ...canvasImageLoadings, ...soundLoadings];
   let completedLoadingCounts = 0;
-  allLoading.forEach(v => {
-    v.then(() => {
+  allLoading.forEach(loading => {
+    loading.then(() => {
       completedLoadingCounts ++;
       const completedRate = completedLoadingCounts / allLoading.length;
-      loading.next({type: 'LoadingProgress', completedRate});
+      loadingActtions.next({type: 'LoadingProgress', completedRate});
     });
   });
   const resources = (async (): Promise<Resources> => {
-    console.log('start');
     const [gltfs, textures, cubeTextures, canvasImages, sounds] = await Promise.all([
-      Promise.all(gltfLoadings), 
-      Promise.all(textureLoadings), 
-      Promise.all(cubeTextureLoadings),
+      Promise.all(gltfLoadings), Promise.all(textureLoadings), Promise.all(cubeTextureLoadings), 
       Promise.all(canvasImageLoadings), Promise.all(soundLoadings)
     ]);
-    console.log('end');
     const paths = getAllPaths(params.resourceRoot);
     return {rootPath: params.resourceRoot, gltfs, textures, cubeTextures, canvasImages, sounds, paths};
   })();
-  return {loading, resources};
+  return {loading: loadingActtions, resources};
 }
 
 /**

@@ -35,8 +35,8 @@ export const domStub = (creator: DOMCreator): DOMStubStory => () => {
 
   const resourceRoot = new StorybookResourceRoot();
   const resourceLoading = fullResourceLoading(resourceRoot);
-  resourceLoading.resources.then(v => {
-    const component = creator(v);
+  resourceLoading.resources.then(resources => {
+    const component = creator(resources);
     root.appendChild(component);
   });
 
