@@ -10,10 +10,13 @@ export default {
 };
 
 export const shoppingStreet = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, gameObjectAction, scene) => {
+  const stub = new TDGameObjectStub((resources, gameObjectAction, scene, camera) => {
     const illumination = new Illumination(gameObjectAction);
     const backGround = new ShoppingStreet(resources);
     scene.background = skyBox(resources);
+    const cameraScale = 2;
+    camera.moveCamera({y: 220 * cameraScale, z: 300 * cameraScale}, 0).play();
+    camera.moveViewPoint({y: 200 * cameraScale}, 0).play();
     return [...backGround.getThreeJsObjects(), ...illumination.getObject3Ds()];
   });
   stub.start();
