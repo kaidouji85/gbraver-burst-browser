@@ -471,13 +471,3 @@ export function loadTexture(resourceRoot: ResourceRoot, config: TextureConfig): 
     );
   });
 }
-
-/**
- * ゲームで使う全てのテクスチャを読み込む
- *
- * @param resourceRoot リソースルート
- * @returns 読み込み結果
- */
-export function loadingAllTextures(resourceRoot: ResourceRoot): Array<Promise<TextureResource>> {
-  return TEXTURE_CONFIGS.map(v => loadTexture(resourceRoot, v));
-}

@@ -65,16 +65,6 @@ export function loadGlTF(resourceRoot: ResourceRoot, config: GlTFConfig): Promis
 }
 
 /**
- * 全てのglTFリソースを読み込む
- *
- * @param resourceRoot リソースルート
- * @return 読み込みPromiseの配列
- */
-export function loadingAllGTLFModels(resourceRoot: ResourceRoot): Array<Promise<GlTFResource>> {
-  return GLTF_CONFIGS.map(v => loadGlTF(resourceRoot, v));
-}
-
-/**
  * GLTFリソースを解放する
  * 
  * @param target 解放対象

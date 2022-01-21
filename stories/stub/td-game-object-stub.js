@@ -12,7 +12,7 @@ import type {PreRender} from "../../src/js/game-loop/pre-render";
 import {gameObjectStream} from "../../src/js/game-object/action/game-object-action";
 import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
-import {ResourceLoader} from "../../src/js/resource";
+import {fullResourceLoading} from "../../src/js/resource";
 import {TDCamera} from "../../src/js/game-object/camera/td";
 import type {Object3dCreator} from "./object3d-creator";
 import {StorybookResourceRoot} from "../resource-root/storybook-resource-root";
@@ -76,8 +76,8 @@ export class TDGameObjectStub {
    */
   async start(): Promise<void> {
     const resourceRoot = new StorybookResourceRoot();
-    const loader = new ResourceLoader(resourceRoot);
-    const resources = await loader.load();
+    const resourceLoading = fullResourceLoading(resourceRoot);
+    const resources = await resourceLoading.resources;
     const object3Ds = this._creator(resources, this._gameObjectAction, this._scene);
     object3Ds.forEach(object3D => {
       this._scene.add(object3D);

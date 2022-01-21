@@ -150,13 +150,3 @@ export function loadCanvasImage(resourceRoot: ResourceRoot, config: CanvasImageC
     )
   });
 }
-
-/**
- * ゲームで必要なキャンバス用画像を全て読み込む
- *
- * @param resourceRoot リソースルート
- * @return 読み込み結果
- */
-export function loadingAllCanvasImages(resourceRoot: ResourceRoot): Array<Promise<CanvasImageResource>> {
-  return CANVAS_IMAGE_CONFIGS.map(config => loadCanvasImage(resourceRoot, config))
-}

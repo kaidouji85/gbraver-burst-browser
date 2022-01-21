@@ -75,13 +75,3 @@ export function loadCubeTexture(resourceRoot: ResourceRoot, config: CubeTextureC
     );
   });
 }
-
-/**
- * キューブテクスチャを全て読み込む
- *
- * @param resourceRoot リソースルート
- * @return 読み込み結果
- */
-export function loadingAllCubeTextures(resourceRoot: ResourceRoot): Array<Promise<CubeTextureResource>> {
-  return CUBE_TEXTURE_CONFIGS.map(v => loadCubeTexture(resourceRoot, v));
-}
