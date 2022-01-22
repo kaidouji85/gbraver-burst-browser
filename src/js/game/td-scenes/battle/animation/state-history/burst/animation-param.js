@@ -5,7 +5,7 @@ import type {TDPlayer} from "../../../view/td/player";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import {TDCamera} from "../../../../../../game-object/camera/td";
 import type {HUDGameObjects} from "../../../view/hud/game-objects";
-import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
+import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import {HUDPlayer} from "../../../view/hud/player";

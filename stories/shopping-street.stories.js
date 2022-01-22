@@ -26,8 +26,8 @@ export const longShot = (): HTMLElement => {
     const backGround = new ShoppingStreet(resources);
     scene.background = skyBox(resources);
     const distance = 2;
-    camera.moveCamera({y: 220 * distance, z: 300 * distance}, 0).play();
-    camera.moveViewPoint({y: 200 * distance}, 0).play();
+    camera.move({y: 220 * distance, z: 300 * distance}, 0).play();
+    camera.lookAt({y: 200 * distance}, 0).play();
     return [...backGround.getThreeJsObjects(), ...illumination.getObject3Ds()];
   });
   stub.start();

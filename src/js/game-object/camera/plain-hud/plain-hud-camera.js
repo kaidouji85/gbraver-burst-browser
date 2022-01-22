@@ -15,26 +15,40 @@ export class PlainHUDCamera {
   _camera: typeof THREE.OrthographicCamera;
   _unsubscriber: Unsubscriber;
 
+  /**
+   * コンストラクタ
+   *
+   * @param resize リサイズストリーム
+   */
   constructor(resize: Stream<Resize>) {
     this._camera = createHUDCamera();
     this._camera.position.z = HUD_CAMERA_ZINDEX;
-
     this._unsubscriber = resize.subscribe(action => {
       this._resize(action);
     });
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ
+   */
   destructor(): void {
     this._unsubscriber.unsubscribe();
   }
 
-  /** カメラを取得する */
+  /**
+   * カメラを取得する
+   *
+   * @return カメラ
+   */
   getCamera(): typeof THREE.Camera {
     return this._camera;
   }
 
-  /** リサイズ */
+  /**
+   * リサイズ
+   *
+   * @param action アクション
+   */
   _resize(action: Resize): void {
     onResizeOrthographicCamera(this._camera, action.width, action.height);
   }
