@@ -8,7 +8,7 @@ import type {HUDGameObjects} from "../../../view/hud/game-objects";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import {TDCamera} from "../../../../../../game-object/camera/td";
-import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud";
+import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import {HUDPlayer} from "../../../view/hud/player";
 
 /**

@@ -5,7 +5,7 @@ import type {Player} from "gbraver-burst-core";
 import type {BattleSceneAction} from "../../actions";
 import type {Update} from "../../../../../game-loop/update";
 import type {PreRender} from "../../../../../game-loop/pre-render";
-import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud";
+import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import {HUDGameObjects} from "./game-objects";
 import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
 import {gameObjectStream} from "../../../../../game-object/action/game-object-action";

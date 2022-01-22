@@ -13,7 +13,7 @@ import {gameObjectStream} from "../../src/js/game-object/action/game-object-acti
 import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {fullResourceLoading} from "../../src/js/resource";
-import {PlainHUDCamera} from "../../src/js/game-object/camera/plain-hud";
+import {PlainHUDCamera} from "../../src/js/game-object/camera/plain-hud/plain-hud-camera";
 import {StorybookResourceRoot} from "../resource-root/storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
