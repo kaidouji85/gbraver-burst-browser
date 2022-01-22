@@ -10,7 +10,7 @@ export default {
 };
 
 export const shoppingStreet = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, gameObjectAction, scene, camera) => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction, scene, camera}) => {
     const illumination = new Illumination(gameObjectAction);
     const backGround = new ShoppingStreet(resources);
     scene.background = skyBox(resources);
