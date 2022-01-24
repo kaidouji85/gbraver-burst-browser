@@ -116,6 +116,27 @@ export function fullResourceLoading(resourceRoot: ResourceRoot): ResourceLoading
     cubeTextureConfigs: CUBE_TEXTURE_CONFIGS, canvasImageConfigs: CANVAS_IMAGE_CONFIGS,soundConfigs: SOUND_CONFIGS});
 }
 
+/**
+ * 全リソースの差分読み込み
+ * 引数のリソース管理オブジェクトで読み込まれたものはスキップする
+ *
+ * @param resources リソース管理オブジェクト
+ * @return リソース読み込みオブジェクト
+ */
+export function fullResourceLoadingFrom(resources: Resources): ResourceLoading {
+  const gltfIDs = resources.gltfs.map(v => v.id);
+  const gltfConfigs = GLTF_CONFIGS.filter(v => !gltfIDs.includes(v));
+  const textureIDs = resources.textures.map(v => v.id);
+  const textureConfigs = TEXTURE_CONFIGS.filter(v => !textureIDs.includes(v));
+  const cubeTextureIDs = resources.cubeTextures.map(v => v.id);
+  const cubeTextureConfigs = CUBE_TEXTURE_CONFIGS.filter(v => !cubeTextureIDs.includes(v));
+  const canvasImageIDs = resources.canvasImages.map(v => v.id);
+  const canvasImageConfigs = CANVAS_IMAGE_CONFIGS.filter(v => !canvasImageIDs.includes(v));
+  const soundIDs = resources.sounds.map(v => v.id);
+  const soundConfigs = SOUND_CONFIGS.filter(v => !soundIDs.includes(v));
+  return resourceLoading({resourceRoot: resources.rootPath, gltfConfigs, textureConfigs, cubeTextureConfigs, canvasImageConfigs, soundConfigs});
+}
+
 /** タイトルで利用する音声 */
 const TITLE_SOUND_IDS = [
   SOUND_IDS.PUSH_BUTTON,
