@@ -125,16 +125,26 @@ export function fullResourceLoading(resourceRoot: ResourceRoot): ResourceLoading
  */
 export function fullResourceLoadingFrom(resources: Resources): ResourceLoading {
   const gltfIDs = resources.gltfs.map(v => v.id);
-  const gltfConfigs = GLTF_CONFIGS.filter(v => !gltfIDs.includes(v));
+  const gltfConfigs = GLTF_CONFIGS.filter(v => !gltfIDs.includes(v.id));
   const textureIDs = resources.textures.map(v => v.id);
-  const textureConfigs = TEXTURE_CONFIGS.filter(v => !textureIDs.includes(v));
+  const textureConfigs = TEXTURE_CONFIGS.filter(v => !textureIDs.includes(v.id));
   const cubeTextureIDs = resources.cubeTextures.map(v => v.id);
-  const cubeTextureConfigs = CUBE_TEXTURE_CONFIGS.filter(v => !cubeTextureIDs.includes(v));
+  const cubeTextureConfigs = CUBE_TEXTURE_CONFIGS.filter(v => !cubeTextureIDs.includes(v.id));
   const canvasImageIDs = resources.canvasImages.map(v => v.id);
-  const canvasImageConfigs = CANVAS_IMAGE_CONFIGS.filter(v => !canvasImageIDs.includes(v));
+  const canvasImageConfigs = CANVAS_IMAGE_CONFIGS.filter(v => !canvasImageIDs.includes(v.id));
   const soundIDs = resources.sounds.map(v => v.id);
-  const soundConfigs = SOUND_CONFIGS.filter(v => !soundIDs.includes(v));
-  return resourceLoading({resourceRoot: resources.rootPath, gltfConfigs, textureConfigs, cubeTextureConfigs, canvasImageConfigs, soundConfigs});
+  const soundConfigs = SOUND_CONFIGS.filter(v => !soundIDs.includes(v.id));
+  const loading = resourceLoading({resourceRoot: resources.rootPath, gltfConfigs, textureConfigs, cubeTextureConfigs, canvasImageConfigs, soundConfigs});
+  const mergedReosurces = (async () => {
+    const loadedReosurces = await loading.resources;
+    const gltfs = [...resources.gltfs, ...loadedReosurces.gltfs];
+    const textures = [...resources.textures, ...loadedReosurces.textures];
+    const cubeTextures = [...resources.cubeTextures, ...loadedReosurces.cubeTextures];
+    const canvasImages = [...resources.canvasImages, ...loadedReosurces.canvasImages];
+    const sounds = [...resources.sounds, ...loadedReosurces.sounds];
+    return {...resources, gltfs, textures, cubeTextures, canvasImages, sounds};
+  })();
+  return {loading: loading.loading, resources: mergedReosurces};
 }
 
 /** タイトルで利用する音声 */
