@@ -8,7 +8,7 @@ import {GLTF_CONFIGS, loadGlTF} from "./gltf";
 import type {CubeTextureConfig, CubeTextureResource} from "./cube-texture";
 import {CUBE_TEXTURE_CONFIGS, loadCubeTexture} from "./cube-texture";
 import type {SoundConfig, SoundResource} from "./sound";
-import {SOUND_CONFIGS, loadSound} from "./sound";
+import {SOUND_CONFIGS, SOUND_IDS, loadSound} from "./sound";
 import type {ResourceRoot} from "./resource-root";
 import type {LoadingActions} from "./loading-actions";
 import type {Path} from "./path";
@@ -114,4 +114,21 @@ function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
 export function fullResourceLoading(resourceRoot: ResourceRoot): ResourceLoading {
   return resourceLoading({resourceRoot, gltfConfigs: GLTF_CONFIGS, textureConfigs: TEXTURE_CONFIGS,
     cubeTextureConfigs: CUBE_TEXTURE_CONFIGS, canvasImageConfigs: CANVAS_IMAGE_CONFIGS,soundConfigs: SOUND_CONFIGS});
+}
+
+/** タイトルで利用する音声 */
+const TITLE_SOUND_IDS = [
+  SOUND_IDS.PUSH_BUTTON,
+  SOUND_IDS.CHANGE_VALUE
+];
+
+/**
+ * タイトルで利用するリソースを読み込む
+ *
+ * @param resourceRoot リソースルート
+ * @return リソース読み込みオブジェクト
+ */
+export function titleResourceLoading(resourceRoot: ResourceRoot): ResourceLoading {
+  const soundConfigs = SOUND_CONFIGS.filter(v => TITLE_SOUND_IDS.includes(v.id)); 
+  return resourceLoading({resourceRoot, gltfConfigs: [], textureConfigs: [], cubeTextureConfigs: [], canvasImageConfigs: [], soundConfigs});
 }
