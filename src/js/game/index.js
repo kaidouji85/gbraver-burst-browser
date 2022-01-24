@@ -2,7 +2,11 @@
 
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {emptyResources, fullResourceLoading} from "../resource";
+import {
+  emptyResources,
+  fullResourceLoadingFrom,
+  titleResourceLoading,
+} from "../resource";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
@@ -104,6 +108,7 @@ export class Game {
   _tdScenes: TDScenes;
   _resourceRoot: ResourceRoot;
   _resources: Resources;
+  _isFullResourceLoaded: boolean;
   _serviceWorker: ?ServiceWorkerRegistration;
   _unsubscriber: Unsubscriber[];
 
@@ -115,6 +120,7 @@ export class Game {
   constructor(param: Param) {
     this._resourceRoot = param.resourceRoot;
     this._resources = emptyResources(this._resourceRoot);
+    this._isFullResourceLoaded = false;
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
     this._howToPlayMovieURL = param.howToPlayMovieURL;
@@ -200,12 +206,11 @@ export class Game {
       return;
     }
 
-    const resourceLoading = fullResourceLoading(this._resourceRoot);
+    const resourceLoading = titleResourceLoading(this._resourceRoot);
     this._domScenes.startLoading(resourceLoading.loading);
     await this._fader.fadeIn();
     this._resources = await resourceLoading.resources;
     await waitAnimationFrame();
-    await waitTime(1000);
     await this._fader.fadeOut();
     await this._startTitle();
     this._interruptScenes.bind(this._resources);
@@ -237,6 +242,10 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onGameStart(): Promise<void> {
+    if (!this._isFullResourceLoaded) {
+      await this._fullResourceLoading();
+    }
+
     const subFlow = {type: 'PlayerSelect'};
     this._inProgress = {type: 'NPCBattle', subFlow};
     await this._fader.fadeOut();
@@ -246,6 +255,8 @@ export class Game {
 
   /**
    * カジュアルマッチ開始
+   *
+   * @return 処理が完了したら発火するPromise
    */
   async _onCasualMatchStart(): Promise<void> {
     const callLoginCheckAPI = async () => {
@@ -272,11 +283,16 @@ export class Game {
     this._domDialogs.startWaiting('ログインチェック中......');
     const isLogin = await callLoginCheckAPI();
     this._domDialogs.hidden();
-    if (isLogin) {
-      await gotoPlayerSelect();
-    } else {
+    if (!isLogin) {
       showLoginDialog();
+      return;
     }
+
+    if (!this._isFullResourceLoaded) {
+      await this._fullResourceLoading();
+    }
+
+    await gotoPlayerSelect();
   }
 
   /**
@@ -619,5 +635,20 @@ export class Game {
     const account = isLogin ? await createLoggedInAccount() : guestAccount;
     return this._domScenes.startTitle(this._resources, account, this._isAPIServerEnable,
       this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
+  }
+
+  /**
+   * 全リソース読み込みを行うヘルパー関数
+   * リソース読み込み中は専用画面に遷移する
+   *
+   * @return 処理完了したら発火するPromise 
+   */
+  async _fullResourceLoading(): Promise<void> {
+    await this._fader.fadeOut();
+    const resourceLoading = fullResourceLoadingFrom(this._resources);
+    this._domScenes.startLoading(resourceLoading.loading);
+    await this._fader.fadeIn();
+    this._resources = await resourceLoading.resources;
+    this._isFullResourceLoaded = true;
   }
 }

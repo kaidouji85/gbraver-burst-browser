@@ -8,7 +8,7 @@ import {GLTF_CONFIGS, loadGlTF} from "./gltf";
 import type {CubeTextureConfig, CubeTextureResource} from "./cube-texture";
 import {CUBE_TEXTURE_CONFIGS, loadCubeTexture} from "./cube-texture";
 import type {SoundConfig, SoundResource} from "./sound";
-import {SOUND_CONFIGS, loadSound} from "./sound";
+import {SOUND_CONFIGS, SOUND_IDS, loadSound} from "./sound";
 import type {ResourceRoot} from "./resource-root";
 import type {LoadingActions} from "./loading-actions";
 import type {Path} from "./path";
@@ -114,4 +114,52 @@ function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
 export function fullResourceLoading(resourceRoot: ResourceRoot): ResourceLoading {
   return resourceLoading({resourceRoot, gltfConfigs: GLTF_CONFIGS, textureConfigs: TEXTURE_CONFIGS,
     cubeTextureConfigs: CUBE_TEXTURE_CONFIGS, canvasImageConfigs: CANVAS_IMAGE_CONFIGS,soundConfigs: SOUND_CONFIGS});
+}
+
+/**
+ * 全リソースの差分読み込み
+ * 引数のリソース管理オブジェクトで読み込まれたものはスキップする
+ *
+ * @param resources リソース管理オブジェクト
+ * @return リソース読み込みオブジェクト
+ */
+export function fullResourceLoadingFrom(resources: Resources): ResourceLoading {
+  const gltfIDs = resources.gltfs.map(v => v.id);
+  const gltfConfigs = GLTF_CONFIGS.filter(v => !gltfIDs.includes(v.id));
+  const textureIDs = resources.textures.map(v => v.id);
+  const textureConfigs = TEXTURE_CONFIGS.filter(v => !textureIDs.includes(v.id));
+  const cubeTextureIDs = resources.cubeTextures.map(v => v.id);
+  const cubeTextureConfigs = CUBE_TEXTURE_CONFIGS.filter(v => !cubeTextureIDs.includes(v.id));
+  const canvasImageIDs = resources.canvasImages.map(v => v.id);
+  const canvasImageConfigs = CANVAS_IMAGE_CONFIGS.filter(v => !canvasImageIDs.includes(v.id));
+  const soundIDs = resources.sounds.map(v => v.id);
+  const soundConfigs = SOUND_CONFIGS.filter(v => !soundIDs.includes(v.id));
+  const loading = resourceLoading({resourceRoot: resources.rootPath, gltfConfigs, textureConfigs, cubeTextureConfigs, canvasImageConfigs, soundConfigs});
+  const mergedReosurces = (async () => {
+    const loadedReosurces = await loading.resources;
+    const gltfs = [...resources.gltfs, ...loadedReosurces.gltfs];
+    const textures = [...resources.textures, ...loadedReosurces.textures];
+    const cubeTextures = [...resources.cubeTextures, ...loadedReosurces.cubeTextures];
+    const canvasImages = [...resources.canvasImages, ...loadedReosurces.canvasImages];
+    const sounds = [...resources.sounds, ...loadedReosurces.sounds];
+    return {...resources, gltfs, textures, cubeTextures, canvasImages, sounds};
+  })();
+  return {loading: loading.loading, resources: mergedReosurces};
+}
+
+/** タイトルで利用する音声 */
+const TITLE_SOUND_IDS = [
+  SOUND_IDS.PUSH_BUTTON,
+  SOUND_IDS.CHANGE_VALUE
+];
+
+/**
+ * タイトルで利用するリソースを読み込む
+ *
+ * @param resourceRoot リソースルート
+ * @return リソース読み込みオブジェクト
+ */
+export function titleResourceLoading(resourceRoot: ResourceRoot): ResourceLoading {
+  const soundConfigs = SOUND_CONFIGS.filter(v => TITLE_SOUND_IDS.includes(v.id)); 
+  return resourceLoading({resourceRoot, gltfConfigs: [], textureConfigs: [], cubeTextureConfigs: [], canvasImageConfigs: [], soundConfigs});
 }
