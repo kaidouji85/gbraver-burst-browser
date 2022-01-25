@@ -6,4 +6,4 @@ if [ $# != 1 ]; then
 fi
 
 DISTRIBUTION_ID=$1
-aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "/*.*"
+aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "/*"
