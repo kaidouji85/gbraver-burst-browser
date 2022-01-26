@@ -58,7 +58,7 @@ export const PathIds = {
 export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.TITLE_BACK,
-    path: root => `${root.get()}/title-back.png`
+    path: root => `${root.get()}/title-back.webp`
   },
   {
     id: PathIds.LOGO,
