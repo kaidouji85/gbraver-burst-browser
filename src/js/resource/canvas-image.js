@@ -45,83 +45,83 @@ export const CANVAS_IMAGE_IDS = {
 export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BATTERY_BUTTON,
-    path: 'battery-selector/battery-button.png',
+    path: 'battery-selector/battery-button.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_PLUS,
-    path: 'battery-selector/plus-button.png',
+    path: 'battery-selector/plus-button.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_MINUS,
-    path: 'battery-selector/minus-button.png',
+    path: 'battery-selector/minus-button.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_METER,
-    path: 'battery-selector/meter.png',
+    path: 'battery-selector/meter.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_NEEDLE,
-    path: 'battery-selector/needle.png',
+    path: 'battery-selector/needle.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK,
-    path: 'battery-selector/attack-label.png',
+    path: 'battery-selector/attack-label.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_LABEL_DEFENSE,
-    path: 'battery-selector/defense-label.png',
+    path: 'battery-selector/defense-label.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.TURN_INDICATOR,
-    path: 'turn/turn-indicator.png',
+    path: 'turn/turn-indicator.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BURST_BUTTON,
-    path: 'button/burst-button.png',
+    path: 'button/burst-button.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL,
-    path: 'button/burst-button-label.png',
+    path: 'button/burst-button-label.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.PILOT_BUTTON,
-    path: 'button/pilot-button.png',
+    path: 'button/pilot-button.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.PILOT_BUTTON_LABEL,
-    path: 'button/pilot-button-label.png',
+    path: 'button/pilot-button-label.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED,
-    path: 'button/big-button-disabled.png',
+    path: 'button/big-button-disabled.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED,
-    path: 'button/small-button-disabled.png',
+    path: 'button/small-button-disabled.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE,
-    path: 'gauge/player-gauge-base.png',
+    path: 'gauge/player-gauge-base.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.ENEMY_GAUGE_BASE,
-    path: 'gauge/enemy-gauge-base.png',
+    path: 'gauge/enemy-gauge-base.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.HP_BAR,
-    path: 'gauge/hp-bar.png',
+    path: 'gauge/hp-bar.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.HP_BAR_BACK,
-    path: 'gauge/hp-bar-back.png',
+    path: 'gauge/hp-bar-back.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_GAUGE,
-    path: 'gauge/battery-gauge.png',
+    path: 'gauge/battery-gauge.webp',
   },
   {
     id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK,
-    path: 'gauge/battery-gauge-back.png',
+    path: 'gauge/battery-gauge-back.webp',
   },
 ];
 

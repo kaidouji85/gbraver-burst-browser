@@ -351,100 +351,100 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   // シンヤ関連
   {
     id: TEXTURE_IDS.SHINYA_CUTIN,
-    path: 'pilot/shinya/skill-cutin.png',
+    path: 'pilot/shinya/skill-cutin.webp',
   },
   // ガイ関連
   {
     id: TEXTURE_IDS.GAI_CUTIN,
-    path: 'pilot/gai/skill-cutin.png',
+    path: 'pilot/gai/skill-cutin.webp',
   },
   // ライト関連
   {
     id: TEXTURE_IDS.RAITO_CUTIN,
-    path: 'pilot/raito/skill-cutin.png',
+    path: 'pilot/raito/skill-cutin.webp',
   },
   // ツバサ関連
   {
     id: TEXTURE_IDS.TSUBASA_CUTIN,
-    path: 'pilot/tsubasa/skill-cutin.png',
+    path: 'pilot/tsubasa/skill-cutin.webp',
   },
   // ヒットマーク関連
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE,
-    path: 'hitmark/shock-wave/line.png',
+    path: 'hitmark/shock-wave/line.webp',
   },
   {
     id: TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING,
-    path: 'hitmark/shock-wave/ring.png',
+    path: 'hitmark/shock-wave/ring.webp',
   },
   {
     id: TEXTURE_IDS.HITMARK_LIGHTNING_RING,
-    path: 'hitmark/lightning/lightning-ring.png',
+    path: 'hitmark/lightning/lightning-ring.webp',
   },
   // バリア関連
   {
     id: TEXTURE_IDS.BARRIER_LIGHTNING,
-    path: 'barrier/lightning/lightning.png',
+    path: 'barrier/lightning/lightning.webp',
   },
   // バッテリー数字
   {
     id: TEXTURE_IDS.BATTERY_NUMBER,
-    path: 'battery-number/battery-number.png'
+    path: 'battery-number/battery-number.webp'
   },
   // ダメージ数字
   {
     id: TEXTURE_IDS.DAMAGE_NUMBER,
-    path: 'damage-indicator/damage-number.png'
+    path: 'damage-indicator/damage-number.webp'
   },
   // HPゲージ数字
   {
     id: TEXTURE_IDS.HP_NUMBER,
-    path: 'gauge/hp-gauge-number.png'
+    path: 'gauge/hp-gauge-number.webp'
   },
   // バッテリーゲージセレクタ 円盤数字
   {
     id: TEXTURE_IDS.BATTERY_SELECTOR_NUMBER,
-    path: 'battery-selector/active-number.png',
+    path: 'battery-selector/active-number.webp',
   },
   // バッテリーセレクタ 円盤数字(ディスアクティブ)
   {
     id: TEXTURE_IDS.DIS_ACTIVE_BATTERY_SELECTOR_NUMBER,
-    path: 'battery-selector/dis-active-number.png',
+    path: 'battery-selector/dis-active-number.webp',
   },
   // バッテリーセレクタ ボタンに表示する数字
   {
     id: TEXTURE_IDS.BATTERY_CURRENT_VALUE,
-    path: 'battery-selector/current-battery.png',
+    path: 'battery-selector/current-battery.webp',
   },
   // ターンスタート
   {
     id: TEXTURE_IDS.PLAYER_TURN,
-    path: 'turn/player-turn.png',
+    path: 'turn/player-turn.webp',
   },
   {
     id: TEXTURE_IDS.ENEMY_TURN,
-    path: 'turn/enemy-turn.png',
+    path: 'turn/enemy-turn.webp',
   },
   // 効果ラベル
   {
     id: TEXTURE_IDS.POWER_UP,
-    path: 'effect-label/power-up.png',
+    path: 'effect-label/power-up.webp',
   },
   {
     id: TEXTURE_IDS.REFLECT,
-    path: 'effect-label/reflect.png',
+    path: 'effect-label/reflect.webp',
   },
   {
     id: TEXTURE_IDS.CONTINUOUS_ATTACK,
-    path: 'effect-label/continuous-attack.png',
+    path: 'effect-label/continuous-attack.webp',
   },
   {
     id: TEXTURE_IDS.DAMAGE_DECREASE,
-    path: 'effect-label/damage-decrease.png',
+    path: 'effect-label/damage-decrease.webp',
   },
   {
     id: TEXTURE_IDS.BATTERY_ENCHANTMENT,
-    path: 'effect-label/battery-enchantment.png',
+    path: 'effect-label/battery-enchantment.webp',
   },
 ];
 

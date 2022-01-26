@@ -98,35 +98,35 @@ export const PathConfigs: PathConfig[] = [
   },
   {
     id: PathIds.SHINYA_ICON,
-    path: root => `${root.get()}/pilot/shinya/player-select.png`
+    path: root => `${root.get()}/pilot/shinya/player-select.webp`
   },
   {
     id: PathIds.SHINYA_SKILL_CUTIN,
-    path: root => `${root.get()}/pilot/shinya/skill-cutin.png`
+    path: root => `${root.get()}/pilot/shinya/skill-cutin.webp`
   },
   {
     id: PathIds.GAI_ICON,
-    path: root => `${root.get()}/pilot/gai/player-select.png`
+    path: root => `${root.get()}/pilot/gai/player-select.webp`
   },
   {
     id: PathIds.GAI_SKILL_CUTIN,
-    path: root => `${root.get()}/pilot/gai/skill-cutin.png`
+    path: root => `${root.get()}/pilot/gai/skill-cutin.webp`
   },
   {
     id: PathIds.RAITO_SKILL_CUTIN,
-    path: root => `${root.get()}/pilot/raito/skill-cutin.png`
+    path: root => `${root.get()}/pilot/raito/skill-cutin.webp`
   },
   {
     id: PathIds.RAITO_ICON,
-    path: root => `${root.get()}/pilot/raito/player-select.png`
+    path: root => `${root.get()}/pilot/raito/player-select.webp`
   },
   {
     id: PathIds.TSUBASA_SKILL_CUTIN,
-    path: root => `${root.get()}/pilot/tsubasa/skill-cutin.png`
+    path: root => `${root.get()}/pilot/tsubasa/skill-cutin.webp`
   },
   {
     id: PathIds.TSUBASA_ICON,
-    path: root => `${root.get()}/pilot/tsubasa/player-select.png`
+    path: root => `${root.get()}/pilot/tsubasa/player-select.webp`
   },
   {
     id: PathIds.END,
@@ -134,7 +134,7 @@ export const PathConfigs: PathConfig[] = [
   },
   {
     id: PathIds.END_CARD,
-    path: root => `${root.get()}/ending/end-card.png`
+    path: root => `${root.get()}/ending/end-card.webp`
   },
   {
     id: PathIds.CLOSER,
@@ -142,11 +142,11 @@ export const PathConfigs: PathConfig[] = [
   },
   {
     id: PathIds.PLAY_IN_LANDSCAPE,
-    path: root => `${root.get()}/waring/play-in-landscape.png`
+    path: root => `${root.get()}/waring/play-in-landscape.webp`
   },
   {
     id: PathIds.CHECK,
-    path: root => `${root.get()}/check/check.png`
+    path: root => `${root.get()}/check/check.webp`
   },
 ];
 
