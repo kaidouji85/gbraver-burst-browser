@@ -66,35 +66,35 @@ export const PathConfigs: PathConfig[] = [
   },
   {
     id: PathIds.SHIN_BRAVER_ICON,
-    path: root => `${root.get()}/armdozer/shin-braver/player-select.png`
+    path: root => `${root.get()}/armdozer/shin-braver/player-select.webp`
   },
   {
     id: PathIds.SHIN_BRAVER_BUST_SHOT,
-    path: root => `${root.get()}/armdozer/shin-braver/bust-shot.png`
+    path: root => `${root.get()}/armdozer/shin-braver/bust-shot.webp`
   },
   {
     id: PathIds.NEO_LANDOZER_ICON,
-    path: root => `${root.get()}/armdozer/neo-landozer/player-select.png`
+    path: root => `${root.get()}/armdozer/neo-landozer/player-select.webp`
   },
   {
     id: PathIds.NEO_LANDOZER_BUST_SHOT,
-    path: root => `${root.get()}/armdozer/neo-landozer/bust-shot.png`
+    path: root => `${root.get()}/armdozer/neo-landozer/bust-shot.webp`
   },
   {
     id: PathIds.LIGHTNING_DOZER_ICON,
-    path: root => `${root.get()}/armdozer/lightning-dozer/player-select.png`
+    path: root => `${root.get()}/armdozer/lightning-dozer/player-select.webp`
   },
   {
     id: PathIds.LIGHTNING_DOZER_BUST_SHOT,
-    path: root => `${root.get()}/armdozer/lightning-dozer/bust-shot.png`
+    path: root => `${root.get()}/armdozer/lightning-dozer/bust-shot.webp`
   },
   {
     id: PathIds.WING_DOZER_ICON,
-    path: root => `${root.get()}/armdozer/wing-dozer/player-select.png`
+    path: root => `${root.get()}/armdozer/wing-dozer/player-select.webp`
   },
   {
     id: PathIds.WING_DOZER_BUST_SHOT,
-    path: root => `${root.get()}/armdozer/wing-dozer/bust-shot.png`
+    path: root => `${root.get()}/armdozer/wing-dozer/bust-shot.webp`
   },
   {
     id: PathIds.SHINYA_ICON,
