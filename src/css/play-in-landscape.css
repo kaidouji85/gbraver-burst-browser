@@ -21,9 +21,16 @@
     box-sizing: border-box;
     z-index: var(--zindex-play-in-landscape);
   }
+}
 
-  .play-in-landscape__caption {
-    font-size: 1.5em;
-    margin-bottom: 1em;
-  }
+.play-in-landscape__caption {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.play-in-landscape__image {
+  --icon-width: 20vw;
+  --icon-height: calc(var(--icon-width)*0.45);
+  width: var(--icon-width);
+  height: var(--icon-height);
 }
