@@ -22,7 +22,7 @@ import {RxjsStreamSource} from "../stream/rxjs";
 export type Resources = {
   /** リソースフォルダのルート */
   rootPath: ResourceRoot,
-  /** パス */
+  /** 各種リソースのパス */
   paths: Path[],
   /** GlTFモデル */
   gltfs: GlTFResource[],
@@ -72,7 +72,8 @@ type ResourceLoadingParams = {
 };
 
 /**
- * リソース読み込み
+ * リソースを読み込む
+ * なお、本関数ではリソースパスのプリフェッチは行わない
  *
  * @param params 読み込みパラメータ
  * @return リソース読み込みオブジェクト
@@ -107,6 +108,7 @@ function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
 
 /**
  * 全リソースを読み込む
+ * なお、本関数ではリソースパスのプリフェッチは行わない
  *
  * @param resourceRoot リソースルート
  * @return リソース読み込みオブジェクト
@@ -119,7 +121,8 @@ export function fullResourceLoading(resourceRoot: ResourceRoot): ResourceLoading
 /**
  * 全リソースの差分読み込み
  * 引数のリソース管理オブジェクトで読み込まれたものはスキップする
- *
+ * なお、本関数ではリソースパスのプリフェッチは行わない
+ * 
  * @param resources リソース管理オブジェクト
  * @return リソース読み込みオブジェクト
  */
