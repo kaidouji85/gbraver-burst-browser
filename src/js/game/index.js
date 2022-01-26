@@ -207,11 +207,7 @@ export class Game {
     }
 
     const resourceLoading = titleResourceLoading(this._resourceRoot);
-    this._domScenes.startLoading(resourceLoading.loading);
-    await this._fader.fadeIn();
     this._resources = await resourceLoading.resources;
-    await waitAnimationFrame();
-    await this._fader.fadeOut();
     await this._startTitle();
     this._interruptScenes.bind(this._resources);
     await this._fader.fadeIn();
