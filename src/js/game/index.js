@@ -197,11 +197,11 @@ export class Game {
       this._serviceWorker = await loadServiceWorker();
     }
 
-    invisibleFirstView();
     const [isLogin, isMailVerified] = await Promise.all([this._api.isLogin(), this._api.isMailVerified()]);
     if (isLogin && !isMailVerified) {
       const mailAddress = await this._api.getMail();
       this._domScenes.startMailVerifiedIncomplete(mailAddress);
+      invisibleFirstView();
       await this._fader.fadeIn();
       return;
     }
@@ -210,6 +210,7 @@ export class Game {
     this._resources = await resourceLoading.resources;
     await this._startTitle();
     this._interruptScenes.bind(this._resources);
+    invisibleFirstView();
     await this._fader.fadeIn();
   }
 
