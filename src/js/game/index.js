@@ -214,6 +214,7 @@ export class Game {
     const latency = Date.now() - startTime;
     const displayFistViewTime = 500;
     await waitTime(Math.max(displayFistViewTime - latency, 0));
+    await this._fader.fadeOut();
     invisibleFirstView();
     await this._fader.fadeIn();
   }
