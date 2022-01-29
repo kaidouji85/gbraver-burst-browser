@@ -212,8 +212,8 @@ export class Game {
     await this._startTitle();
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
-    const displayFistViewTime = 500;
-    await waitTime(Math.max(displayFistViewTime - latency, 0));
+    const firstViewDisplayTime = 500;
+    await waitTime(Math.max(firstViewDisplayTime - latency, 0));
     await this._fader.fadeOut();
     invisibleFirstView();
     await this._fader.fadeIn();
