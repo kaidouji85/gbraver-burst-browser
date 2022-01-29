@@ -189,6 +189,7 @@ export class Game {
    * @return 処理結果
    */
   async initialize(): Promise<void> {
+    const startTime = Date.now();
     if (this._isPerformanceStatsVisible && document.body) {
       viewPerformanceStats(document.body);
     }
@@ -210,6 +211,10 @@ export class Game {
     this._resources = await resourceLoading.resources;
     await this._startTitle();
     this._interruptScenes.bind(this._resources);
+    const latency = Date.now() - startTime;
+    const firstViewDisplayTime = 500;
+    await waitTime(Math.max(firstViewDisplayTime - latency, 0));
+    await this._fader.fadeOut();
     invisibleFirstView();
     await this._fader.fadeIn();
   }
