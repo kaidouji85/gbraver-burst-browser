@@ -5,13 +5,13 @@ const sharp = require('sharp');
 sharp.cache(false);
 
 /**
- * globパターンでファイル名を検索する
+ * globをPromise化したもの
  *
  * @param {string} pattern globパターン
  * @param {Object|undefined} option オプション
  * @return {Promise<string[]>} 検索結果
  */
-function globPaths(pattern, option) {
+function globPromise(pattern, option) {
   return new Promise((resolve, reject) => {
     glob(pattern, option, (err, paths) => {
       if (err) {
@@ -44,17 +44,17 @@ async function resizeImage(origin, scale) {
  */
 (async () => {
   console.log('start scale down mobile images');
-  const allImages = 'build/production/resources/**/mobile/**/*.png';
-  const backgroundTextures = 'build/production/resources/**/mobile/**/model/**/*.png';
+  const allImages = 'build/production/resources/**/mobile/**/*.+(png|webp)';
+  const modelTextures = 'build/production/resources/**/mobile/**/model/**/*.png';
 
   console.log('start background texture');
-  const backGroundTexturePaths = await globPaths(backgroundTextures);
-  for(const path of backGroundTexturePaths) {
+  const modelTexturePaths = await globPromise(modelTextures);
+  for(const path of modelTexturePaths) {
     await resizeImage(path, 0.25);
   }
 
-  console.log('start others');
-  const otherImagePaths = await globPaths(allImages, {ignore:[backgroundTextures]});
+  console.log('start other images');
+  const otherImagePaths = await globPromise(allImages, {ignore: [modelTextures]});
   for(const path of otherImagePaths) {
     await resizeImage(path, 0.5);
   }

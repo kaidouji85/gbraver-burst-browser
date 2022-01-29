@@ -18,7 +18,7 @@ function cutInAnimation(cutIn: WingDozerCutIn): Animate {
 }
 
 export const Player = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
     const cutIn = playerWingDozerCutIn(resources, gameObjectAction);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];
@@ -28,7 +28,7 @@ export const Player = (): HTMLElement => {
 }
 
 export const Enemy = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
     const cutIn = enemyWingDozerCutIn(resources, gameObjectAction);
     cutInAnimation(cutIn).loop();
     return [cutIn.getObject3D()];

@@ -120,13 +120,3 @@ export function loadSound(resourceRoot: ResourceRoot, config: SoundConfig): Prom
     });
   });
 }
-
-/**
- * 全ての音リソースを読み込む
- *
- * @param resourceRoot リソースルート
- * @return 全ての音リソース
- */
-export function loadingAllSounds(resourceRoot: ResourceRoot): Array<Promise<SoundResource>> {
-  return SOUND_CONFIGS.map(config => loadSound(resourceRoot, config));
-}

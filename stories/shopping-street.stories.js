@@ -9,11 +9,25 @@ export default {
   title: 'shopping-street',
 };
 
-export const shoppingStreet = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, gameObjectAction, scene) => {
+export const game = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction, scene}) => {
     const illumination = new Illumination(gameObjectAction);
     const backGround = new ShoppingStreet(resources);
     scene.background = skyBox(resources);
+    return [...backGround.getThreeJsObjects(), ...illumination.getObject3Ds()];
+  });
+  stub.start();
+  return stub.domElement();
+}
+
+export const longShot = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction, scene, camera}) => {
+    const illumination = new Illumination(gameObjectAction);
+    const backGround = new ShoppingStreet(resources);
+    scene.background = skyBox(resources);
+    const distance = 2;
+    camera.move({y: 220 * distance, z: 300 * distance}, 0).play();
+    camera.lookAt({y: 200 * distance}, 0).play();
     return [...backGround.getThreeJsObjects(), ...illumination.getObject3Ds()];
   });
   stub.start();

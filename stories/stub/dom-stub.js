@@ -5,7 +5,7 @@ import '../../src/css/style.css';
 import {resizeStream} from "../../src/js/window/resize";
 import {CssVH} from "../../src/js/view-port/vh";
 import type {Resources} from "../../src/js/resource";
-import {ResourceLoader} from "../../src/js/resource";
+import {fullResourceLoading} from "../../src/js/resource";
 
 /**
  * HTML要素生成コールバック関数
@@ -34,8 +34,8 @@ export const domStub = (creator: DOMCreator): DOMStubStory => () => {
   new CssVH(resize);
 
   const resourceRoot = new StorybookResourceRoot();
-  const loader = new ResourceLoader(resourceRoot);
-  loader.load().then(resources => {
+  const resourceLoading = fullResourceLoading(resourceRoot);
+  resourceLoading.resources.then(resources => {
     const component = creator(resources);
     root.appendChild(component);
   });

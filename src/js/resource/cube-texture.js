@@ -32,12 +32,12 @@ export const CUBE_TEXTURE_IDS = {
 export const CUBE_TEXTURE_CONFIGS: CubeTextureConfig[] = [
   {
     id: CUBE_TEXTURE_IDS.BlueSky,
-    px: 'sky-box/blue-sky/px.png',
-    nx: 'sky-box/blue-sky/nx.png',
-    py: 'sky-box/blue-sky/py.png',
-    ny: 'sky-box/blue-sky/ny.png',
-    pz: 'sky-box/blue-sky/pz.png',
-    nz: 'sky-box/blue-sky/nz.png',
+    px: 'sky-box/blue-sky/px.webp',
+    nx: 'sky-box/blue-sky/nx.webp',
+    py: 'sky-box/blue-sky/py.webp',
+    ny: 'sky-box/blue-sky/ny.webp',
+    pz: 'sky-box/blue-sky/pz.webp',
+    nz: 'sky-box/blue-sky/nz.webp',
   }
 ];
 
@@ -74,14 +74,4 @@ export function loadCubeTexture(resourceRoot: ResourceRoot, config: CubeTextureC
       }
     );
   });
-}
-
-/**
- * キューブテクスチャを全て読み込む
- *
- * @param resourceRoot リソースルート
- * @return 読み込み結果
- */
-export function loadingAllCubeTextures(resourceRoot: ResourceRoot): Array<Promise<CubeTextureResource>> {
-  return CUBE_TEXTURE_CONFIGS.map(v => loadCubeTexture(resourceRoot, v));
 }

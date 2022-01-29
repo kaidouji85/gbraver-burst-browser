@@ -2,7 +2,11 @@
 
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {ResourceLoader} from "../resource";
+import {
+  emptyResources,
+  fullResourceLoadingFrom,
+  titleResourceLoading,
+} from "../resource";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
@@ -103,7 +107,8 @@ export class Game {
   _domDialogs: DOMDialogs;
   _tdScenes: TDScenes;
   _resourceRoot: ResourceRoot;
-  _resources: ?Resources;
+  _resources: Resources;
+  _isFullResourceLoaded: boolean;
   _serviceWorker: ?ServiceWorkerRegistration;
   _unsubscriber: Unsubscriber[];
 
@@ -114,6 +119,8 @@ export class Game {
    */
   constructor(param: Param) {
     this._resourceRoot = param.resourceRoot;
+    this._resources = emptyResources(this._resourceRoot);
+    this._isFullResourceLoaded = false;
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
     this._howToPlayMovieURL = param.howToPlayMovieURL;
@@ -143,7 +150,6 @@ export class Game {
       body.appendChild(element);
     });
 
-    this._resources = null;
     this._serviceWorker = null;
 
     const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)));
@@ -183,6 +189,7 @@ export class Game {
    * @return 処理結果
    */
   async initialize(): Promise<void> {
+    const startTime = Date.now();
     if (this._isPerformanceStatsVisible && document.body) {
       viewPerformanceStats(document.body);
     }
@@ -191,25 +198,24 @@ export class Game {
       this._serviceWorker = await loadServiceWorker();
     }
 
-    invisibleFirstView();
     const [isLogin, isMailVerified] = await Promise.all([this._api.isLogin(), this._api.isMailVerified()]);
     if (isLogin && !isMailVerified) {
       const mailAddress = await this._api.getMail();
       this._domScenes.startMailVerifiedIncomplete(mailAddress);
+      invisibleFirstView();
       await this._fader.fadeIn();
       return;
     }
 
-    const loader = new ResourceLoader(this._resourceRoot);
-    this._domScenes.startLoading(loader.progress());
-    await this._fader.fadeIn();
-    const resources: Resources = await loader.load();
-    this._resources = resources;
-    await waitAnimationFrame();
-    await waitTime(1000);
+    const resourceLoading = titleResourceLoading(this._resourceRoot);
+    this._resources = await resourceLoading.resources;
+    await this._startTitle();
+    this._interruptScenes.bind(this._resources);
+    const latency = Date.now() - startTime;
+    const firstViewDisplayTime = 500;
+    await waitTime(Math.max(firstViewDisplayTime - latency, 0));
     await this._fader.fadeOut();
-    await this._startTitle(resources);
-    this._interruptScenes.bind(resources);
+    invisibleFirstView();
     await this._fader.fadeIn();
   }
 
@@ -238,33 +244,29 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onGameStart(): Promise<void> {
-    if (!this._resources) {
-      return;
+    if (!this._isFullResourceLoaded) {
+      await this._fullResourceLoading();
     }
 
-    const resources: Resources = this._resources;
     const subFlow = {type: 'PlayerSelect'};
     this._inProgress = {type: 'NPCBattle', subFlow};
     await this._fader.fadeOut();
-    await this._domScenes.startPlayerSelect(resources);
+    await this._domScenes.startPlayerSelect(this._resources);
     await this._fader.fadeIn();
   }
 
   /**
    * カジュアルマッチ開始
+   *
+   * @return 処理が完了したら発火するPromise
    */
   async _onCasualMatchStart(): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     const callLoginCheckAPI = async () => {
       try {
         return await this._api.isLogin();
       } catch (e) {
         const postNetworkError = {type: 'Close'};
-        this._domDialogs.startNetworkError(resources, postNetworkError);
+        this._domDialogs.startNetworkError(this._resources, postNetworkError);
         throw e;
       }
     };
@@ -273,21 +275,26 @@ export class Game {
       this._inProgress = {type: 'CasualMatch', subFlow};
       this._domDialogs.hidden();
       await this._fader.fadeOut();
-      await this._domScenes.startPlayerSelect(resources);
+      await this._domScenes.startPlayerSelect(this._resources);
       await this._fader.fadeIn();
     };
     const showLoginDialog = () => {
-      this._domDialogs.startLogin(resources, 'ネット対戦をするにはログインをしてください');
+      this._domDialogs.startLogin(this._resources, 'ネット対戦をするにはログインをしてください');
     };
 
     this._domDialogs.startWaiting('ログインチェック中......');
     const isLogin = await callLoginCheckAPI();
     this._domDialogs.hidden();
-    if (isLogin) {
-      await gotoPlayerSelect();
-    } else {
+    if (!isLogin) {
       showLoginDialog();
+      return;
     }
+
+    if (!this._isFullResourceLoaded) {
+      await this._fullResourceLoading();
+    }
+
+    await gotoPlayerSelect();
   }
 
   /**
@@ -318,12 +325,7 @@ export class Game {
    * アカウント削除同意
    */
   _onAccountDeleteConsent(): void {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
-    this._domDialogs.startDeleteAccountConsent(resources);
+    this._domDialogs.startDeleteAccountConsent(this._resources);
   }
 
   /**
@@ -347,12 +349,7 @@ export class Game {
    * 遊び方ダイアログ表示
    */
   _onShowHowToPlay() {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
-    this._domDialogs.startHowToPlay(resources, this._howToPlayMovieURL);
+    this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
   /**
@@ -368,11 +365,6 @@ export class Game {
    * @param action アクション
    */
   async _onEndNetworkError(action: EndNetworkError) {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     const close = async () => {
       this._inProgress = {type: 'None'};
       this._domDialogs.hidden();
@@ -381,7 +373,7 @@ export class Game {
       this._inProgress = {type: 'None'};
       this._domDialogs.hidden();
       await this._fader.fadeOut();
-      await this._startTitle(resources);
+      await this._startTitle();
       await this._fader.fadeIn();
     };
 
@@ -398,15 +390,10 @@ export class Game {
    * @param action アクション
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
       const difficultySelection = {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId};
       this._inProgress = {...npcBattle, subFlow: difficultySelection};
-      this._domDialogs.startDegreeOfDifficulty(resources);
+      this._domDialogs.startDegreeOfDifficulty(this._resources);
     };
     const waitUntilMatching = async (): Promise<BattleSDK> => {
       try {
@@ -414,7 +401,7 @@ export class Game {
         return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
       } catch(e) {
         const postNetworkError = {type: 'GotoTitle'};
-        this._domDialogs.startNetworkError(resources, postNetworkError);
+        this._domDialogs.startNetworkError(this._resources, postNetworkError);
         throw e;
       }
     };
@@ -427,7 +414,7 @@ export class Game {
           return update;
         } catch(e) {
           const postNetworkError = {type: 'GotoTitle'};
-          this._domDialogs.startNetworkError(resources, postNetworkError);
+          this._domDialogs.startNetworkError(this._resources, postNetworkError);
           throw e;
         }
       }
@@ -441,11 +428,11 @@ export class Game {
 
       await this._fader.fadeOut();
       this._domDialogs.hidden();
-      await this._domScenes.startMatchCard(resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
+      await this._domScenes.startMatchCard(this._resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
       await this._fader.fadeIn();
 
       const progress = createBattleProgress(battle);
-      const battleScene = this._tdScenes.startBattle(resources, progress, battle.player,
+      const battleScene = this._tdScenes.startBattle(this._resources, progress, battle.player,
         battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await this._fader.fadeOut();
@@ -466,14 +453,9 @@ export class Game {
    * @return 処理結果
    */
   async _onSelectionCancel(): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     this._inProgress = {type: 'None'};
     await this._fader.fadeOut();
-    await this._startTitle(resources);
+    await this._startTitle();
     await this._fader.fadeIn();
   }
 
@@ -484,11 +466,6 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onDifficultySelectionComplete(action: DifficultySelectionComplete): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     if (!(this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'DifficultySelect')) {
       return;
     }
@@ -502,7 +479,7 @@ export class Game {
     const stage = course.stage(level);
     const inNPCBattleCourse = {type: 'InNPCBattleCourse', player, course, level};
     this._inProgress = {...npcBattle, subFlow: inNPCBattleCourse};
-    await this._startNPCBattleStage(resources, player, stage, level);
+    await this._startNPCBattleStage(player, stage, level);
   }
 
   /**
@@ -524,30 +501,25 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     const npcBattleStageClear = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
       const {level, course} = origin.subFlow;
       const nextLevel = level + 1;
       const nextStage = course.stage(nextLevel);
       const updatedInNPCBattle = {...origin.subFlow, level: nextLevel};
       this._inProgress = {...origin, subFlow: updatedInNPCBattle};
-      await this._startNPCBattleStage(resources, origin.subFlow.player, nextStage, nextLevel);
+      await this._startNPCBattleStage(origin.subFlow.player, nextStage, nextLevel);
     };
     const npcBattleStageFailed = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
       const {level, player} = origin.subFlow;
       const stage = origin.subFlow.course.stage(level);
-      await this._startNPCBattleStage(resources, player, stage, level);
+      await this._startNPCBattleStage(player, stage, level);
     }; 
     const npcBattleComplete = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
       this._suddenlyBattleEndMonitor.unbind();
-      await this._domScenes.startNPCEnding(resources);
+      await this._domScenes.startNPCEnding(this._resources);
       await this._fader.fadeIn();
     };
     const endCasualMatch = async (): Promise<void> => {
@@ -555,7 +527,7 @@ export class Game {
       await this._fader.fadeOut();
       await this._api.disconnectWebsocket();
       this._tdScenes.hidden();
-      await this._startTitle(resources);
+      await this._startTitle();
       await this._fader.fadeIn();
     };
 
@@ -581,13 +553,8 @@ export class Game {
    * バトル強制終了時の処理
    */
   async _onSuddenlyEndBattle(): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     const postNetworkError = {type: 'GotoTitle'};
-    this._domDialogs.startNetworkError(resources, postNetworkError);
+    this._domDialogs.startNetworkError(this._resources, postNetworkError);
     this._suddenlyBattleEndMonitor.unbind();
     await this._api.disconnectWebsocket();
   }
@@ -598,13 +565,8 @@ export class Game {
    * @param action アクション
    */
   _onWebSocketAPIError(action: WebSocketAPIError): void {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     const postNetworkError = {type: 'GotoTitle'};
-    this._domDialogs.startNetworkError(resources, postNetworkError);
+    this._domDialogs.startNetworkError(this._resources, postNetworkError);
     throw action;
   }
 
@@ -614,13 +576,8 @@ export class Game {
    * @param action アクション
    */
   _onWebSocketAPIUnintentionalClose(action: WebSocketAPIUnintentionalClose): void {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     const postNetworkError = {type: 'GotoTitle'};
-    this._domDialogs.startNetworkError(resources, postNetworkError);
+    this._domDialogs.startNetworkError(this._resources, postNetworkError);
     throw action;
   }
 
@@ -628,33 +585,27 @@ export class Game {
    * NPC戦闘エンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
-    if (!this._resources) {
-      return;
-    }
-
-    const resources: Resources = this._resources;
     await this._fader.fadeOut();
-    await this._startTitle(resources);
+    await this._startTitle();
     await this._fader.fadeIn();
   }
 
   /**
    * NPCバトルのステージを開始するヘルパーメソッド
    *
-   * @param resources リソース管理オブジェクト
    * @param player プレイヤー
    * @param stage NPCバトルステージ
    * @param level ステージレベル
    */
-  async _startNPCBattleStage(resources: Resources, player: Player, stage: NPCBattleStage, level: StageLevel) {
+  async _startNPCBattleStage(player: Player, stage: NPCBattleStage, level: StageLevel) {
     const npcBattle = new NPCBattleRoom(player, stage.npc);
     await this._fader.fadeOut();
     this._domDialogs.hidden();
-    await this._domScenes.startNPCStageTitle(resources, level, stage.caption, npcBattle.enemy.armdozer.id);
+    await this._domScenes.startNPCStageTitle(this._resources, level, stage.caption, npcBattle.enemy.armdozer.id);
     await this._fader.fadeIn();
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
-    const battleScene = this._tdScenes.startBattle(resources, {progress}, npcBattle.player,
+    const battleScene = this._tdScenes.startBattle(this._resources, {progress}, npcBattle.player,
       npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     const battleSceneReadyTime = Date.now();
@@ -671,10 +622,9 @@ export class Game {
    * いかなる場合でもaccount、canCasualMatch、termsOfServiceURL、privacyPolicyURL
    * に同じ値をセットするために、ヘルパーメソッド化した
    *    
-   * @param resources リソース管理オブジェクト
    * @return タイトル画面
    */
-  async _startTitle(resources: Resources): Promise<Title> {
+  async _startTitle(): Promise<Title> {
     const guestAccount = {type: 'GuestAccount'};
     const createLoggedInAccount = async () => {
       const [name, pictureURL] = await Promise.all([
@@ -685,7 +635,22 @@ export class Game {
     }
     const isLogin = await this._api.isLogin();
     const account = isLogin ? await createLoggedInAccount() : guestAccount;
-    return this._domScenes.startTitle(resources, account, this._isAPIServerEnable,
+    return this._domScenes.startTitle(this._resources, account, this._isAPIServerEnable,
       this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
+  }
+
+  /**
+   * 全リソース読み込みを行うヘルパー関数
+   * リソース読み込み中は専用画面に遷移する
+   *
+   * @return 処理完了したら発火するPromise 
+   */
+  async _fullResourceLoading(): Promise<void> {
+    await this._fader.fadeOut();
+    const resourceLoading = fullResourceLoadingFrom(this._resources);
+    this._domScenes.startLoading(resourceLoading.loading);
+    await this._fader.fadeIn();
+    this._resources = await resourceLoading.resources;
+    this._isFullResourceLoaded = true;
   }
 }

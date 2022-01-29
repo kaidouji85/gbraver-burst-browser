@@ -9,7 +9,7 @@ export default {
 };
 
 export const stand = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
     return [sprite.getObject3D()];
   });
@@ -18,7 +18,7 @@ export const stand = (): HTMLElement => {
 }
 
 export const enemy = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
     const sprite = EnemyWingDozer(resources, gameObjectAction);
     return [sprite.getObject3D()];
   });
@@ -27,7 +27,7 @@ export const enemy = (): HTMLElement => {
 }
 
 export const attack = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
     const animation = sprite.charge()
       .chain(delay(500))
@@ -43,7 +43,7 @@ export const attack = (): HTMLElement => {
 }
 
 export const dash = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
     const animation = sprite.dash()
       .chain(delay(2000))
@@ -57,7 +57,7 @@ export const dash = (): HTMLElement => {
 }
 
 export const down = (): HTMLElement => {
-  const stub = new TDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
     const sprite = PlayerWingDozer(resources, gameObjectAction);
     const animation = sprite.down()
       .chain(delay(2000));

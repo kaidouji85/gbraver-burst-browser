@@ -7,7 +7,7 @@ export default {
 };
 
 export const shinBraver = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
     const burstButton = shinBraverBurstButton(resources, gameObjectAction);
     burstButton.pushButtonNotifier().subscribe(() => {
       burstButton.decide().play();
@@ -20,7 +20,7 @@ export const shinBraver = (): HTMLElement => {
 }
 
 export const wingDozer = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
     const burstButton = new wingDozerBurstButton(resources, gameObjectAction);
     burstButton.pushButtonNotifier().subscribe(() => {
       burstButton.decide().play();
@@ -33,7 +33,7 @@ export const wingDozer = (): HTMLElement => {
 }
 
 export const disabled = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
     const burstButton = shinBraverBurstButton(resources, gameObjectAction);
     burstButton.open(false).play();
     return [burstButton.getObject3D()];

@@ -7,7 +7,7 @@ export default {
 };
 
 export const batterySelector = (): HTMLElement => {
-  const stub = new HUDGameObjectStub((resources, gameObjectAction) => {
+  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
     const selector = new BatterySelector({
       resources: resources,
       gameObjectAction: gameObjectAction,

@@ -27,12 +27,12 @@ export const INITIAL_VIEW_POINT_Z = 0;
  */
 export function toInitial(camera: TDCamera, duration: number): Animate {
   return all(
-    camera.moveCamera({
+    camera.move({
       x: INITIAL_CAMERA_POSITION_X,
       y: INITIAL_CAMERA_POSITION_Y,
       z: INITIAL_CAMERA_POSITION_Z
     }, duration),
-    camera.moveViewPoint({
+    camera.lookAt({
       x: INITIAL_VIEW_POINT_X,
       y: INITIAL_VIEW_POINT_Y,
       z: INITIAL_VIEW_POINT_Z,
@@ -50,8 +50,8 @@ export function toInitial(camera: TDCamera, duration: number): Animate {
  */
 export function dolly(camera: TDCamera, z: number | string, duration: number): Animate {
   return all(
-    camera.moveCamera({z: z}, duration),
-    camera.moveViewPoint({z: z}, duration),
+    camera.move({z: z}, duration),
+    camera.lookAt({z: z}, duration),
   );
 }
 
@@ -65,7 +65,7 @@ export function dolly(camera: TDCamera, z: number | string, duration: number): A
  */
 export function track(camera: TDCamera, x: number | string, duration: number): Animate {
   return all(
-    camera.moveCamera({x: x}, duration),
-    camera.moveViewPoint({x: x}, duration),
+    camera.move({x: x}, duration),
+    camera.lookAt({x: x}, duration),
   );
 }
