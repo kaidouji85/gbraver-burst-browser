@@ -45,6 +45,12 @@ async function resizeImage(origin, scale) {
   const ignoreScaleDownImages = [
     'build/production/resources/**/mobile/armdozer/shin-braver/cutin-down.webp',
     'build/production/resources/**/mobile/armdozer/shin-braver/cutin-up.webp',
+    'build/production/resources/**/mobile/armdozer/neo-landozer/cutin-down.webp',
+    'build/production/resources/**/mobile/armdozer/neo-landozer/cutin-up.webp',
+    'build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-down.webp',
+    'build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-up.webp',
+    'build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp',
+    'build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp',
   ];
 
   console.log('start background texture');
