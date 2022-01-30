@@ -14,11 +14,7 @@ sharp.cache(false);
 function globPromise(pattern, option) {
   return new Promise((resolve, reject) => {
     glob(pattern, option, (err, paths) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(paths);
-      }
+      err ? reject(err) :  resolve(paths);
     });
   });
 }
@@ -46,18 +42,23 @@ async function resizeImage(origin, scale) {
   console.log('start scale down mobile images');
   const allImages = 'build/production/resources/**/mobile/**/*.+(png|webp)';
   const modelTextures = 'build/production/resources/**/mobile/**/model/**/*.png';
+  const ignoreScaleDownImages = [
+    'build/production/resources/**/mobile/armdozer/shin-braver/cutin-down.webp',
+    'build/production/resources/**/mobile/armdozer/shin-braver/cutin-up.webp',
+    'build/production/resources/**/mobile/armdozer/neo-landozer/cutin-down.webp',
+    'build/production/resources/**/mobile/armdozer/neo-landozer/cutin-up.webp',
+    'build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-down.webp',
+    'build/production/resources/**/mobile/armdozer/lightning-dozer/cutin-up.webp',
+    'build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp',
+    'build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp',
+  ];
 
   console.log('start background texture');
-  const modelTexturePaths = await globPromise(modelTextures);
-  for(const path of modelTexturePaths) {
-    await resizeImage(path, 0.25);
-  }
-
-  console.log('start other images');
-  const otherImagePaths = await globPromise(allImages, {ignore: [modelTextures]});
-  for(const path of otherImagePaths) {
-    await resizeImage(path, 0.5);
-  }
-
+  const modelTexturePaths = await globPromise(modelTextures, {ignore: ignoreScaleDownImages});
+  const otherImagePaths = await globPromise(allImages, {ignore: [modelTextures, ...ignoreScaleDownImages]});
+  await Promise.all([
+    ...modelTexturePaths.map(v => resizeImage(v, 0.25)),
+    ...otherImagePaths.map(v => resizeImage(v, 0.5))
+  ])
   console.log('complete scale down mobile images');
 })();
