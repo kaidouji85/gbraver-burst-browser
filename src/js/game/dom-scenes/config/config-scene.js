@@ -4,7 +4,10 @@ import type {
   GbraverBurstBrowserConfig,
   WebGLPixelRatio,
 } from "../../config/browser-config";
-import {WebGLPixelRatios} from "../../config/browser-config";
+import {
+  WebGLPixelRatios,
+  parseWebGLPixexRatio,
+} from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
@@ -86,7 +89,7 @@ export class ConfigScene implements DOMScene {
   _configChangeButton: HTMLElement;
   _exclusive: Exclusive;
   _prev: StreamSource<void>;
-  _configChange: StreamSource<void>;
+  _configChange: StreamSource<GbraverBurstBrowserConfig>;
   _unsubscriver: Unsubscriber[];
 
   /**
@@ -143,7 +146,7 @@ export class ConfigScene implements DOMScene {
    *
    * @return 通知ストリーム
    */
-  configChangeNotifier(): Stream<void> {
+  configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
     return this._configChange;
   }
 
@@ -170,8 +173,31 @@ export class ConfigScene implements DOMScene {
     action.event.preventDefault();
     action.event.stopPropagation();
     this._exclusive.execute(async () => {
+      this._isInputDisabled(true);
       await pop(this._configChangeButton);
-      this._configChange.next();
+      const config = this._parseConfig();
+      this._configChange.next(config);
+      this._isInputDisabled(false);
     });
+  }
+
+  /**
+   * 本シーンの入力要素が操作可能であるか否かの設定をする
+   *
+   * @param isDisabled trueで操作可能である
+   */
+  _isInputDisabled(isDisabled: boolean): void {
+    this._webGLPixelRatioSelector.disabled = isDisabled;
+  }
+
+  /**
+   * 画面の入力値から設定オブジェクトをパースする
+   *
+   * @return パース結果
+   */
+  _parseConfig(): GbraverBurstBrowserConfig {
+    const parsedWebGLPixelRatio = parseWebGLPixexRatio(this._webGLPixelRatioSelector.value);
+    const webGLPixelRatio = parsedWebGLPixelRatio ?? WebGLPixelRatios[0];
+    return {webGLPixelRatio};
   }
 }

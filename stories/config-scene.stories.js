@@ -14,8 +14,9 @@ export const Scene: DOMStubStory = domStub(resources => {
   scene.prevNotifier().subscribe(() => {
     console.log('prev');
   });
-  scene.configChangeNotifier().subscribe(() => {
+  scene.configChangeNotifier().subscribe((config) => {
     console.log('config change');
+    console.log(config);
   });
   return scene.getRootHTMLElement();
 });
