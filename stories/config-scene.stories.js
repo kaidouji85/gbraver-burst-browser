@@ -9,6 +9,7 @@ export default {
 };
 
 export const Scene: DOMStubStory = domStub(resources => {
-  const scene = new ConfigScene();
+  const config = {webGLPixelRatio: 2};
+  const scene = new ConfigScene(config);
   return scene.getRootHTMLElement();
 });
