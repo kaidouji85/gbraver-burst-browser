@@ -82,7 +82,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** 設定画面 */
-export class ConfigScene implements DOMScene {
+export class Config implements DOMScene {
   _root: HTMLElement;
   _webGLPixelRatioSelector: HTMLSelectElement;
   _prevButton: HTMLElement;

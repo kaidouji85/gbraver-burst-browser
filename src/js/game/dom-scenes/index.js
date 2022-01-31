@@ -17,6 +17,8 @@ import type {TitleAccount} from "./title/title-account";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
 import type {StageLevel} from "../npc-battle/npc-battle-stage";
+import {Config} from "./config/config";
+import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -242,6 +244,29 @@ export class DOMScenes {
       waitTime(MAX_LOADING_TIME),
     ]);
 
+    this._scene = scene;
+    return scene;
+  }
+
+  /**
+   * 設定画面を開始する
+   *
+   * @param config Gブレイバーバースト ブラウザ側設定項目
+   * @return 開始された設定画面
+   */
+  startConfig(config: GbraverBurstBrowserConfig): Config {
+    this._removeCurrentScene();
+
+    const scene = new Config(config);
+    this._root.appendChild(scene.getRootHTMLElement());
+    this._unsubscribers = [
+      scene.prevNotifier().subscribe(() => {
+        this._gameAction.next({type: 'ConfigChangeCancel'});
+      }),
+      scene.configChangeNotifier().subscribe(config => {
+        this._gameAction.next({type: 'ConfigChanged', config});
+      })
+    ];
     this._scene = scene;
     return scene;
   }
