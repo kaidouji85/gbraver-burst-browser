@@ -1,6 +1,10 @@
 // @flow
 
-import type {GbraverBurstBrowserConfig} from "../../config/browser-config";
+import type {
+  GbraverBurstBrowserConfig,
+  WebGLPixelRatio,
+} from "../../config/browser-config";
+import {WebGLPixelRatios} from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
 
@@ -22,10 +26,10 @@ type DataIDs = {
  * @return ルート要素のHTML要素
  */
 function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
-  const webGLPixelRatioOption  = (value: number, ) => `
+  const webGLPixelRatioOption  = (value: WebGLPixelRatio) => `
     <option class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector__${value}" 
       value="${value}" ${value===config.webGLPixelRatio ? 'selected' : ""}>${value}</option>`;
-  const webGLPixelRatioOptions = [1, 2]
+  const webGLPixelRatioOptions = WebGLPixelRatios
     .map(v => webGLPixelRatioOption(v))
     .reduce((a, b) => a + b);
   return `
