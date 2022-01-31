@@ -12,7 +12,7 @@ export const WebGLPixelRatios: [WebGLPixelRatio, WebGLPixelRatio] = [1, 2];
  *
  * @return パース結果
  */
-export function parseWebGLPixexRatio(origin: any): ?WebGLPixelRatio {
+export function parseWebGLPixexRatio(origin: any): WebGLPixelRatio | null {
   const parsedInt = parseInt(origin);
   if (isNaN(parsedInt)) {
     return null;
