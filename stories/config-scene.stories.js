@@ -11,5 +11,11 @@ export default {
 export const Scene: DOMStubStory = domStub(resources => {
   const config = {webGLPixelRatio: 2};
   const scene = new ConfigScene(config);
+  scene.prevNotifier().subscribe(() => {
+    console.log('prev');
+  });
+  scene.configChangeNotifier().subscribe(() => {
+    console.log('config change');
+  });
   return scene.getRootHTMLElement();
 });

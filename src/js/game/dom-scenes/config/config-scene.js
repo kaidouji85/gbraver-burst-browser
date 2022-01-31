@@ -7,6 +7,12 @@ import type {
 import {WebGLPixelRatios} from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
+import {pushDOMStream} from "../../../dom/push/push-dom";
+import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {PushDOM} from "../../../dom/push/push-dom";
+import {pop} from "../../../dom/animation/pop";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config-scene';
@@ -44,7 +50,7 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
     </div>
     <div class="${ROOT_CLASS}__footer">
       <button class="${ROOT_CLASS}__footer__prev" data-id="${ids.prev}">戻る</button>
-      <button class="${ROOT_CLASS}__footer__config-change" data-ids="${ids.configChange}">設定変更する</button>
+      <button class="${ROOT_CLASS}__footer__config-change" data-id="${ids.configChange}">設定変更する</button>
     </div>
   `;
 }
@@ -75,6 +81,13 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 /** 設定画面 */
 export class ConfigScene implements DOMScene {
   _root: HTMLElement;
+  _webGLPixelRatioSelector: HTMLSelectElement;
+  _prevButton: HTMLElement;
+  _configChangeButton: HTMLElement;
+  _exclusive: Exclusive;
+  _prev: StreamSource<void>;
+  _configChange: StreamSource<void>;
+  _unsubscriver: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -86,15 +99,79 @@ export class ConfigScene implements DOMScene {
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(ids, config);
     this._root.className = ROOT_CLASS;
+
+    const elements = extractElements(this._root, ids);
+    this._webGLPixelRatioSelector = elements.webGLPixelRatioSelector;
+    this._prevButton = elements.prev;
+    this._configChangeButton = elements.configChange;
+    this._exclusive = new Exclusive();
+    this._prev = new RxjsStreamSource();
+    this._configChange = new RxjsStreamSource();
+    this._unsubscriver = [
+      pushDOMStream(this._prevButton).subscribe(action => {
+        this._onPrevButtonPush(action);
+      }),
+      pushDOMStream(this._configChangeButton).subscribe(action => {
+        this._onConfigChangeButtonPush(action);
+      })
+    ];
   }
 
   /** @override */
   destructor(): void {
-    // NOP
+    this._unsubscriver.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * 戻る通知
+   *
+   * @return 通知ストリーム
+   */
+  prevNotifier(): Stream<void> {
+    return this._prev;
+  }
+
+  /**
+   * 設定変更通知
+   *
+   * @return 通知ストリーム
+   */
+  configChangeNotifier(): Stream<void> {
+    return this._configChange;
+  }
+
+  /**
+   * 戻るボタンを押した際の処理
+   *
+   * @param action アクション
+   */
+  _onPrevButtonPush(action: PushDOM): void {
+    action.event.preventDefault();
+    action.event.stopPropagation();
+    this._exclusive.execute(async () => {
+      await pop(this._prevButton);
+      this._prev.next();
+    });
+  }
+
+  /**
+   * 設定変更するボタンを押した際の処理
+   *
+   * @param action アクション
+   */
+  _onConfigChangeButtonPush(action: PushDOM): void {
+    action.event.preventDefault();
+    action.event.stopPropagation();
+    this._exclusive.execute(async () => {
+      await pop(this._configChangeButton);
+      this._configChange.next();
+    });
   }
 }
