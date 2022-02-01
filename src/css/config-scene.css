@@ -45,6 +45,7 @@
 }
 
 .config-scene__configs__webgl-pixel-ratio__selector {
+  -webkit-appearance: menulist-button;
   width: calc(var(--responsive-font-size) * 5);
   height: calc(var(--responsive-font-size) * 3);
   font-size: var(--font-size);

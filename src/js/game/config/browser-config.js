@@ -1,10 +1,10 @@
 // @flow
 
 /** WebGLピクセルレート */
-export type WebGLPixelRatio = 1 | 2 | 3;
+export type WebGLPixelRatio = 1 | 2;
 
 /** 設定可能なWebGLピクセルレートを集めたもの */
-export const WebGLPixelRatios: [WebGLPixelRatio, WebGLPixelRatio, WebGLPixelRatio] = [1, 2, 3];
+export const WebGLPixelRatios: [WebGLPixelRatio, WebGLPixelRatio] = [1, 2];
 
 /**
  * 任意のオブジェクトをWebGLピクセルレートにパースする
