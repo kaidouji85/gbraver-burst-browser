@@ -438,7 +438,8 @@ export class Game {
       await this._fader.fadeIn();
 
       const progress = createBattleProgress(battle);
-      const battleScene = this._tdScenes.startBattle(this._resources, progress, battle.player,
+      const config = configFromLocalStorage() ?? DefaultConfig;
+      const battleScene = this._tdScenes.startBattle(this._resources, config.webGLPixelRatio, progress, battle.player,
         battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await this._fader.fadeOut();
@@ -645,10 +646,12 @@ export class Game {
     this._domDialogs.hidden();
     await this._domScenes.startNPCStageTitle(this._resources, level, stage.caption, npcBattle.enemy.armdozer.id);
     await this._fader.fadeIn();
+
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
-    const battleScene = this._tdScenes.startBattle(this._resources, {progress}, npcBattle.player,
-      npcBattle.enemy, npcBattle.stateHistory());
+    const config = configFromLocalStorage() ?? DefaultConfig;
+    const battleScene = this._tdScenes.startBattle(this._resources, config.webGLPixelRatio, {progress},
+      npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     const battleSceneReadyTime = Date.now();
     const latency = battleSceneReadyTime - startNPCStageTitleTime;
@@ -656,6 +659,7 @@ export class Game {
     await this._fader.fadeOut();
     this._domScenes.hidden();
     await this._fader.fadeIn();
+
     await battleScene.start();
   }
 

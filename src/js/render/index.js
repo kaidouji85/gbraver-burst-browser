@@ -11,15 +11,13 @@ import type {OverlapNotifier} from "./overla-notifier";
 import type {RendererDomGetter} from "./renderer-dom-getter";
 import type {Rendering} from "./rendering";
 import type {Stream, Unsubscriber} from "../stream/core";
-import {renderPixelRatio} from "./pixel-ratio/pixel-ratio";
 import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
 
-/** レンダラの挙動をまとめたもの */
+/** レンダラ管理オブジェクト */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   _threeJsRender: typeof THREE.WebGLRenderer;
   _domEvent: Stream<RendererDOMEvent>;
   _unsubscriber: Unsubscriber[];
-  _pixelRatio: number;
 
   /**
    * コンストラクタ
@@ -28,11 +26,10 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @param resize リサイズのストリーム
    */
   constructor(initialPixelRatio: number, resize: Stream<Resize>) {
-    this._pixelRatio = renderPixelRatio(initialPixelRatio);
     this._threeJsRender = new THREE.WebGLRenderer();
     this._threeJsRender.autoClear = false;
     this._threeJsRender.setSize(getViewPortWidth(), getViewPortHeight());
-    this._threeJsRender.setPixelRatio(this._pixelRatio);
+    this._threeJsRender.setPixelRatio(initialPixelRatio);
     this._domEvent = createDOMEventStream(this._threeJsRender.domElement);
     this._unsubscriber = [
       resize.subscribe(action => {
@@ -83,8 +80,7 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @param pixelRatio ピクセルレート
    */
   setPixelRatio(pixelRatio: number): void {
-    this._pixelRatio = renderPixelRatio(pixelRatio);
-    this._threeJsRender.setPixelRatio(this._pixelRatio);
+    this._threeJsRender.setPixelRatio(pixelRatio);
   }
 
   /**
