@@ -32,7 +32,7 @@ export class TDScenes {
     this._gameLoop = gameLoopStream();
     this._resize = resize;
 
-    this._renderer = new Renderer(this._resize);
+    this._renderer = new Renderer(window.devicePixelRatio, this._resize);
 
     this._scene = null;
     this._unsubscriber = [];

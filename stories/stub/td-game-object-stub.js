@@ -70,7 +70,7 @@ export class TDGameObjectStub {
     this._update = new RxjsStreamSource();
     this._preRender = new RxjsStreamSource();
 
-    this._renderer = new Renderer(this._resize);
+    this._renderer = new Renderer(window.devicePixelRatio, this._resize);
     this._scene = new THREE.Scene();
     this._camera = new TDCamera(this._update, this._resize);
 
