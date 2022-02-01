@@ -141,12 +141,12 @@ export type EndNetworkError = {
 
 /** 設定変更開始 */
 export type ConfigChangeStart = {
-  type: 'ConfigStart'
+  type: 'ConfigChangeStart'
 };
 
 /** 設定変更完了 */
 export type ConfigChangeComplete = {
-  type: 'ConfigChanged',
+  type: 'ConfigChangeComplete',
   /** 変更した設定内容 */
   config: GbraverBurstBrowserConfig
 };

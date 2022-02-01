@@ -14,7 +14,7 @@ const Keys = {
  * 
  * return 抽出結果
  */
-export function fromLocalStorage(): GbraverBurstBrowserConfig | null {
+export function configFromLocalStorage(): GbraverBurstBrowserConfig | null {
   const parsedWebGLPixelRatio = parseWebGLPixexRatio(window.localStorage.getItem(Keys.WebGLPixexRatio));
   if (parsedWebGLPixelRatio === null) {   
     return null;
@@ -29,6 +29,6 @@ export function fromLocalStorage(): GbraverBurstBrowserConfig | null {
  *
  * @param config Gブレイバーバースト ブラウザ側設定項目
  */
-export function toLocalStorage(config: GbraverBurstBrowserConfig): void {
+export function saveConfigToLocalStorage(config: GbraverBurstBrowserConfig): void {
   window.localStorage.setItem(Keys.WebGLPixexRatio, config.webGLPixelRatio);
 }

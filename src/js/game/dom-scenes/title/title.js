@@ -175,7 +175,7 @@ export class Title implements DOMScene {
     this._exclusive = new Exclusive();
     this._isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
-      gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
+      gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(dataIDs, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._root.className = ROOT_CLASS;
@@ -314,7 +314,7 @@ export class Title implements DOMScene {
    *
    * @return イベント通知ストリーム
    */
-  pushConfig(): Stream<void> {
+  pushConfigNotifier(): Stream<void> {
     return this._pushConfig;
   }
 

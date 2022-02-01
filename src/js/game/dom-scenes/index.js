@@ -128,6 +128,9 @@ export class DOMScenes {
       }),
       scene.pushCasualMatchNotifier().subscribe(() => {
         this._gameAction.next({type: 'CasualMatchStart'});
+      }),
+      scene.pushConfigNotifier().subscribe(() => {
+        this._gameAction.next({type: 'ConfigChangeStart'});
       })
     ];
     this._root.appendChild(scene.getRootHTMLElement());
@@ -264,7 +267,7 @@ export class DOMScenes {
         this._gameAction.next({type: 'ConfigChangeCancel'});
       }),
       scene.configChangeNotifier().subscribe(config => {
-        this._gameAction.next({type: 'ConfigChanged', config});
+        this._gameAction.next({type: 'ConfigChangeComplete', config});
       })
     ];
     this._scene = scene;
