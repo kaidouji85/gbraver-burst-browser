@@ -1,13 +1,8 @@
 // @flow
 
-import type {
-  GbraverBurstBrowserConfig,
-  WebGLPixelRatio,
-} from "../../config/browser-config";
-import {
-  WebGLPixelRatios,
-  parseWebGLPixexRatio,
-} from "../../config/browser-config";
+import {Howl} from "howler";
+import type {GbraverBurstBrowserConfig, WebGLPixelRatio} from "../../config/browser-config";
+import {WebGLPixelRatios, parseWebGLPixexRatio} from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
@@ -16,6 +11,8 @@ import {pushDOMStream} from "../../../dom/push/push-dom";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config-scene';
@@ -87,6 +84,8 @@ export class Config implements DOMScene {
   _webGLPixelRatioSelector: HTMLSelectElement;
   _prevButton: HTMLElement;
   _configChangeButton: HTMLElement;
+  _changeValue: typeof Howl;
+  _pushButton: typeof Howl;
   _exclusive: Exclusive;
   _prev: StreamSource<void>;
   _configChange: StreamSource<GbraverBurstBrowserConfig>;
@@ -95,9 +94,10 @@ export class Config implements DOMScene {
   /**
    * コンストラクタ
    *
+   * @param resources リソース管理オブジェクト
    * @param config Gブレイバーバースト ブラウザ側設定項目
    */
-  constructor(config: GbraverBurstBrowserConfig) {
+  constructor(resources: Resources, config: GbraverBurstBrowserConfig) {
     const ids = {webGLPixelRatioSelector: domUuid(), prev: domUuid(), configChange: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(ids, config);
@@ -118,6 +118,11 @@ export class Config implements DOMScene {
         this._onConfigChangeButtonPush(action);
       })
     ];
+
+    this._pushButton = this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+      ?.sound ?? new Howl();
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+      ?.sound ?? new Howl();
   }
 
   /** @override */
@@ -159,7 +164,10 @@ export class Config implements DOMScene {
     action.event.preventDefault();
     action.event.stopPropagation();
     this._exclusive.execute(async () => {
-      await pop(this._prevButton);
+      await Promise.all([
+        pop(this._prevButton),
+        this._changeValue.play()
+      ]);
       this._prev.next();
     });
   }
@@ -174,10 +182,12 @@ export class Config implements DOMScene {
     action.event.stopPropagation();
     this._exclusive.execute(async () => {
       this._isInputDisabled(true);
-      await pop(this._configChangeButton);
+      await Promise.all([
+        pop(this._configChangeButton),
+        this._pushButton.play()
+      ]);
       const config = this._parseConfig();
       this._configChange.next(config);
-      this._isInputDisabled(false);
     });
   }
 

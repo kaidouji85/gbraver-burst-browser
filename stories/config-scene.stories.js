@@ -8,9 +8,9 @@ export default {
   title: 'config-scene'
 };
 
-export const Scene: DOMStubStory = domStub(() => {
+export const Scene: DOMStubStory = domStub(resources => {
   const config = {webGLPixelRatio: 2};
-  const scene = new Config(config);
+  const scene = new Config(resources, config);
   scene.prevNotifier().subscribe(() => {
     console.log('prev');
   });

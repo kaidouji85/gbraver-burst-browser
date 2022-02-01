@@ -604,7 +604,7 @@ export class Game {
   async _onConfigChangeStart(): Promise<void> {
     await this._fader.fadeOut();
     const config = configFromLocalStorage() ?? DefaultConfig;
-    this._domScenes.startConfig(config);
+    this._domScenes.startConfig(this._resources, config);
     await this._fader.fadeIn();
   }
 

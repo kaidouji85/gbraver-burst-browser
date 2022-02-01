@@ -254,13 +254,14 @@ export class DOMScenes {
   /**
    * 設定画面を開始する
    *
+   * @param resources リソース管理オブジェクト
    * @param config Gブレイバーバースト ブラウザ側設定項目
    * @return 開始された設定画面
    */
-  startConfig(config: GbraverBurstBrowserConfig): Config {
+  startConfig(resources: Resources, config: GbraverBurstBrowserConfig): Config {
     this._removeCurrentScene();
 
-    const scene = new Config(config);
+    const scene = new Config(resources, config);
     this._root.appendChild(scene.getRootHTMLElement());
     this._unsubscribers = [
       scene.prevNotifier().subscribe(() => {
