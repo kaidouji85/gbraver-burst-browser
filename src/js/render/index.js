@@ -22,14 +22,13 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   /**
    * コンストラクタ
    *
-   * @param initialPixelRatio ピクセルレート初期値
    * @param resize リサイズのストリーム
    */
-  constructor(initialPixelRatio: number, resize: Stream<Resize>) {
+  constructor(resize: Stream<Resize>) {
     this._threeJsRender = new THREE.WebGLRenderer();
     this._threeJsRender.autoClear = false;
     this._threeJsRender.setSize(getViewPortWidth(), getViewPortHeight());
-    this._threeJsRender.setPixelRatio(initialPixelRatio);
+    this._threeJsRender.setPixelRatio(window.devicePixelRatio);
     this._domEvent = createDOMEventStream(this._threeJsRender.domElement);
     this._unsubscriber = [
       resize.subscribe(action => {
@@ -80,7 +79,8 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @param pixelRatio ピクセルレート
    */
   setPixelRatio(pixelRatio: number): void {
-    this._threeJsRender.setPixelRatio(pixelRatio);
+    const normalizedPixelRatio = Math.min(window.devicePixelRatio, pixelRatio);
+    this._threeJsRender.setPixelRatio(normalizedPixelRatio);
   }
 
   /**

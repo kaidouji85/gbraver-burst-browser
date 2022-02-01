@@ -29,7 +29,7 @@ export class TDScenes {
    */
   constructor(resize: Stream<Resize>) {
     this._resize = resize;
-    this._renderer = new Renderer(window.devicePixelRatio, this._resize);
+    this._renderer = new Renderer(this._resize);
     this._gameAction = new RxjsStreamSource();
     this._gameLoop = gameLoopStream();
     this._scene = null;
