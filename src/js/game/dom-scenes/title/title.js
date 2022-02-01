@@ -80,6 +80,7 @@ function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: b
     <div class="${ROOT_CLASS}__contents">
       <img class="${ROOT_CLASS}__contents__logo" data-id="${ids.logo}">
       <div class="${ROOT_CLASS}__contents__controllers">
+        <button class="${ROOT_CLASS}__contents__controllers__config" data-id="">設定</button>
         <button class="${ROOT_CLASS}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
         <button class="${ROOT_CLASS}__contents__controllers__game-start" data-id="${ids.gameStart}">ゲームスタート</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
