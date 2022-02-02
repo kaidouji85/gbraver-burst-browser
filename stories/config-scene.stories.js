@@ -3,9 +3,10 @@
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
 import {Config} from "../src/js/game/dom-scenes/config/config";
+import {ConfigChangedDialog} from "../src/js/game/dom-scenes/config/config-changed-dialog";
 
 export default {
-  title: 'config-scene'
+  title: 'config'
 };
 
 export const Scene: DOMStubStory = domStub(resources => {
@@ -20,3 +21,18 @@ export const Scene: DOMStubStory = domStub(resources => {
   });
   return scene.getRootHTMLElement();
 });
+
+export const Dialog: DOMStubStory = domStub(resources => {
+  const dialog = new ConfigChangedDialog(resources);
+  dialog.closeNotifier().subscribe(() => {
+    console.log('on close');
+  });
+  dialog.discardNotifier().subscribe(() => {
+    console.log('on discard');
+  });
+  dialog.acceptNotifer().subscribe(() => {
+    console.log('on accept');
+  });
+  return dialog.getRootHTMLElement();
+});
+

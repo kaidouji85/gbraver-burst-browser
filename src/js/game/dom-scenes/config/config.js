@@ -13,9 +13,10 @@ import type {PushDOM} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
+import {ConfigChangedDialog} from "./config-changed-dialog";
 
 /** ルート要素のclass属性 */
-const ROOT_CLASS = 'config-scene';
+const ROOT_CLASS = 'config';
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -84,6 +85,7 @@ export class Config implements DOMScene {
   _webGLPixelRatioSelector: HTMLSelectElement;
   _prevButton: HTMLElement;
   _configChangeButton: HTMLElement;
+  _dialog: ConfigChangedDialog;
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
   _exclusive: Exclusive;
@@ -123,6 +125,9 @@ export class Config implements DOMScene {
       ?.sound ?? new Howl();
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
+
+    this._dialog = new ConfigChangedDialog(resources);
+    this._root.appendChild(this._dialog.getRootHTMLElement());
   }
 
   /** @override */
@@ -130,6 +135,7 @@ export class Config implements DOMScene {
     this._unsubscriver.forEach(v => {
       v.unsubscribe();
     });
+    this._dialog.destructor();
   }
 
   /** @override */

@@ -12,7 +12,6 @@ import {NetworkErrorDialog} from './network-error/network-error-dialog';
 import type {PostNetworkError} from '../network/post-network-error';
 import {DeleteAccountConsentDialog} from "./delete-account-consent/delete-account-consent-dialog";
 import {DegreeOfDifficultyDialog} from "./degree-of-difficulty/degree-of-difficulty-dialog";
-import { ConfigChangedDialog } from "./config-changed/config-changed-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -144,19 +143,6 @@ export class DOMDialogs {
     ];
     this._root.appendChild(degreeOfDifficulty.getRootHTMLElement());
     this._dialog = degreeOfDifficulty;
-  }
-
-  /**
-   * 設定変更通知ダイアログを表示する
-   *
-   * @param resources リソース管理オブジェクト
-   */
-  startConfigChanged(resources: Resources): void {
-    this._removeCurrentDialog();
-
-    const configChanged = new ConfigChangedDialog(resources);
-    this._root.appendChild(configChanged.getRootHTMLElement());
-    this._dialog = configChanged;
   }
 
   /**

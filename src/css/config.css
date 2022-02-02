@@ -1,0 +1,156 @@
+/** 設定画面 */
+@media (orientation: landscape) {
+  .config {
+    --control-button-width: calc(var(--responsive-font-size) * 10);
+    --control-button-height: calc(var(--responsive-font-size) * 3);
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (orientation: portrait) {
+  .config {
+    display: none;
+  }
+}
+
+.config__title {
+  font-size: calc(var(--responsive-font-size) * 3);
+}
+
+.config__configs {
+  --font-size: calc(var(--responsive-font-size) * 1.5);
+  --config-caption-width: calc(var(--responsive-font-size) * 20);
+  flex-grow: 1;
+  box-sizing: border-box;
+  padding: calc(var(--responsive-font-size) * 1);
+  font-size: var(--font-size);
+}
+
+.config__configs__webgl-pixel-ratio {
+  display: flex;
+  align-items: center;
+}
+.config__configs__webgl-pixel-ratio__caption {
+  width: var(--config-caption-width);
+}
+
+.config__configs__webgl-pixel-ratio__selector {
+  -webkit-appearance: menulist-button;
+  width: calc(var(--responsive-font-size) * 5);
+  height: calc(var(--responsive-font-size) * 3);
+  font-size: var(--font-size);
+}
+
+.config__footer button {
+  width: var(--control-button-width);
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+}
+
+.config__footer__config-change {
+  background-color: var(--button-background-color);
+}
+
+.config__footer__prev {
+  background-color: var(--sub-button-background-color);
+  margin-right: calc(var(--responsive-font-size) * 0.5);
+}
+
+/** 設定変更通知ダイアログ */
+@media (orientation: landscape) {
+  .config-changed {
+    --dialog-height: calc(var(--vh) * 50);
+    --dialog-width: calc(min(var(--dialog-height) * 16 / 9, 90vw));
+    --button-width: calc(var(--responsive-font-size) * 10);
+    --button-height: calc(var(--responsive-font-size) * 3);
+    display: block;
+    position: fixed;
+  }
+}
+
+@media (orientation: portrait) {
+ .config-changed {
+    display: none;
+  }
+}
+
+.config-changed--invisible {
+  display: none;
+}
+
+.config-changed__background {
+  position: fixed;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.config-changed__closer {
+  --icon-width: 48px;
+  --icon-height: 48px;
+  position: fixed;
+  top: calc(calc(var(--vh, 1vh) * 50) - var(--dialog-height)/2 - var(--icon-height)/2);
+  left: calc(50vw - var(--dialog-width)/2 - var(--icon-width)/2);
+  width: var(--icon-width);
+  height: var(--icon-height);
+  z-index: var(--zindex-close);
+}
+
+.config-changed__dialog {
+  width: var(--dialog-width);
+  height: var(--dialog-height);
+  top: calc(var(--vh, 1vh) * 50);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+  box-sizing: border-box;
+}
+
+.config-changed__dialog__caption {
+  margin-bottom: calc(var(--responsive-font-size) * 2);
+}
+
+.config-changed__dialog__controllers button {
+  width: var(--button-width);
+  height: var(--button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+}
+
+.config-changed__dialog__controllers__discard {
+  background-color: var(--sub-button-background-color);
+  margin-right: calc(var(--responsive-font-size) * 0.5);
+}
+
+.config-changed__dialog__controllers__accept {
+  background-color: var(--button-background-color);
+}

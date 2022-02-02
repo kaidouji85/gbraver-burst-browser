@@ -1,7 +1,6 @@
 // @flow
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import type {DOMDialog} from '../dialog';
 import {domUuid} from "../../../uuid/dom-uuid";
 import type { Stream, StreamSource, Unsubscriber } from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
@@ -12,6 +11,8 @@ import {pop} from "../../../dom/animation/pop";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config-changed';
+
+const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -67,7 +68,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** 設定変更通知ダイアログ */
-export class ConfigChangedDialog implements DOMDialog {
+export class ConfigChangedDialog {
   _root: HTMLElement;
   _backGround: HTMLElement;
   _closer: HTMLElement;
@@ -87,7 +88,7 @@ export class ConfigChangedDialog implements DOMDialog {
   constructor(resources: Resources) {
     const ids = {backGround: domUuid(), closer: domUuid(), discard: domUuid(), accept: domUuid()};
     this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS;
+    this._root.className = ROOT_CLASS_INVISIBLE;
     this._root.innerHTML = rootInnerHTML(resources, ids);
 
     const elements = extractElements(this._root, ids);
@@ -116,14 +117,34 @@ export class ConfigChangedDialog implements DOMDialog {
     ];
   }
 
-   /** @override */
+   /**
+    * デストラクタ相当の処理
+    */
   destructor(): void {
     this._unsbusscriber.forEach(v => {
       v.unsubscribe();
     });
   }
 
-  /** @override */
+  /**
+   * ダイアログを表示する
+   */
+  show(): void {
+    this._root.className = ROOT_CLASS;
+  }
+
+  /**
+   * ダイアログを非表示にする
+   */
+  hidden(): void {
+    this._root.className = ROOT_CLASS_INVISIBLE;
+  }
+
+  /**
+   * ルートのHTML要素を取得する
+   *
+   * @return 取得結果
+   */
   getRootHTMLElement(): HTMLElement {
     return this._root;
   }
