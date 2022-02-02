@@ -16,7 +16,7 @@ function rootInnerHTML(resources: Resources): string {
   const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? '';
   return `
     <div class="${ROOT_CLASS}__background"></div>
-    <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}"></img>
+    <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}">
     <div class="${ROOT_CLASS}__dialog">
       <span class="${ROOT_CLASS}__dialog__caption">設定が変更されています</span>
       <div class="${ROOT_CLASS}__dialog__controllers">

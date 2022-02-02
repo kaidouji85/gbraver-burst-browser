@@ -603,10 +603,13 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onConfigChangeStart(): Promise<void> {
+    this._domDialogs.startConfigChanged(this._resources);
+    /*
     await this._fader.fadeOut();
     const config = configFromLocalStorage() ?? DefaultConfig;
     this._domScenes.startConfig(this._resources, config);
     await this._fader.fadeIn();
+    */
   }
 
   /**
