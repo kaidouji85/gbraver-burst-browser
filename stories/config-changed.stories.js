@@ -8,7 +8,7 @@ export default {
   title: 'config-changed'
 };
 
-export const guestAccount: DOMStubStory = domStub(() => {
-  const dialog = new ConfigChangedDialog
+export const guestAccount: DOMStubStory = domStub(resources => {
+  const dialog = new ConfigChangedDialog(resources);
   return dialog.getRootHTMLElement();
 });

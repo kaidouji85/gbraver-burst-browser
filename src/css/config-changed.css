@@ -3,8 +3,6 @@
   .config-changed {
     --dialog-height: calc(var(--vh) * 50);
     --dialog-width: calc(min(var(--dialog-height) * 16 / 9, 90vw));
-    --dialog-top: calc(var(--vh, 1vh) * 50);
-    --dialog-left: 50vw;
     --button-width: calc(var(--responsive-font-size) * 10);
     --button-height: calc(var(--responsive-font-size) * 3);
     display: block;
@@ -24,6 +22,28 @@
   background-color: #000000;
   opacity: 0.5;
   z-index: var(--zindex-background);
+}
+
+.config-changed__closer {
+  --icon-width: 48px;
+  --icon-height: 48px;
+  position: fixed;
+  top: calc(
+    calc(var(--vh, 1vh) * 50)
+    - var(--dialog-height) / 2
+    - var(--icon-height) / 2
+  );
+  left: calc(
+    50vw
+    - var(--dialog-width) / 2
+    - var(--icon-width)
+  );
+  width: var(--icon-width);
+  height: var(--icon-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--zindex-close);
 }
 
 .config-changed__dialog {

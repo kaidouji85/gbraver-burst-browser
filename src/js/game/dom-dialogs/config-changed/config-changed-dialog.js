@@ -1,4 +1,6 @@
 // @flow
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
 import type {DOMDialog} from '../dialog';
 
 /** ルート要素のclass属性 */
@@ -7,11 +9,14 @@ const ROOT_CLASS = 'config-changed';
 /**
  * ルート要素のinnerHTML
  *
+ * @param resources リソース管理オブジェクト
  * @return innerHTML
  */
-function rootInnerHTML(): string {
+function rootInnerHTML(resources: Resources): string {
+  const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? '';
   return `
     <div class="${ROOT_CLASS}__background"></div>
+    <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}"></img>
     <div class="${ROOT_CLASS}__dialog">
       <span class="${ROOT_CLASS}__dialog__caption">設定が変更されています</span>
       <div class="${ROOT_CLASS}__dialog__controllers">
@@ -28,11 +33,13 @@ export class ConfigChangedDialog implements DOMDialog {
 
   /**
    * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
+  constructor(resources: Resources) {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS;
-    this._root.innerHTML = rootInnerHTML();
+    this._root.innerHTML = rootInnerHTML(resources);
   }
 
    /** @override */
