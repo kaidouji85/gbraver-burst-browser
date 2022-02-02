@@ -50,7 +50,7 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
     </div>
     <div class="${ROOT_CLASS}__footer">
       <button class="${ROOT_CLASS}__footer__prev" data-id="${ids.prev}">戻る</button>
-      <button class="${ROOT_CLASS}__footer__config-change" data-id="${ids.configChange}">設定変更する</button>
+      <button class="${ROOT_CLASS}__footer__config-change" data-id="${ids.configChange}">この設定にする</button>
     </div>
   `;
 }
