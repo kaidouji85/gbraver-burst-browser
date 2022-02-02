@@ -10,5 +10,14 @@ export default {
 
 export const guestAccount: DOMStubStory = domStub(resources => {
   const dialog = new ConfigChangedDialog(resources);
+  dialog.closeNotifier().subscribe(() => {
+    console.log('on close');
+  });
+  dialog.discardNotifier().subscribe(() => {
+    console.log('on discard');
+  });
+  dialog.acceptNotifer().subscribe(() => {
+    console.log('on accept');
+  });
   return dialog.getRootHTMLElement();
 });
