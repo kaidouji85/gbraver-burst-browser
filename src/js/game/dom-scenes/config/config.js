@@ -2,7 +2,11 @@
 
 import {Howl} from "howler";
 import type {GbraverBurstBrowserConfig, WebGLPixelRatio} from "../../config/browser-config";
-import {WebGLPixelRatios, parseWebGLPixexRatio} from "../../config/browser-config";
+import {
+  WebGLPixelRatios,
+  isConfigChanged,
+  parseWebGLPixexRatio,
+} from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
@@ -81,6 +85,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** 設定画面 */
 export class Config implements DOMScene {
+  _originConfig: GbraverBurstBrowserConfig;
   _root: HTMLElement;
   _webGLPixelRatioSelector: HTMLSelectElement;
   _prevButton: HTMLElement;
@@ -100,15 +105,21 @@ export class Config implements DOMScene {
    * @param config Gブレイバーバースト ブラウザ側設定項目
    */
   constructor(resources: Resources, config: GbraverBurstBrowserConfig) {
+    this._originConfig = config;
     const ids = {webGLPixelRatioSelector: domUuid(), prev: domUuid(), configChange: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(ids, config);
     this._root.className = ROOT_CLASS;
-
     const elements = extractElements(this._root, ids);
     this._webGLPixelRatioSelector = elements.webGLPixelRatioSelector;
     this._prevButton = elements.prev;
     this._configChangeButton = elements.configChange;
+    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+
+    this._dialog = new ConfigChangedDialog(resources);
+    this._root.appendChild(this._dialog.getRootHTMLElement());
+
     this._exclusive = new Exclusive();
     this._prev = new RxjsStreamSource();
     this._configChange = new RxjsStreamSource();
@@ -118,16 +129,17 @@ export class Config implements DOMScene {
       }),
       pushDOMStream(this._configChangeButton).subscribe(action => {
         this._onConfigChangeButtonPush(action);
-      })
+      }),
+      this._dialog.closeNotifier().subscribe(() => {
+        this._onDialogClose();
+      }),
+      this._dialog.discardNotifier().subscribe(() => {
+        this._onDiscardConfigChange();
+      }),
+      this._dialog.acceptNotifer().subscribe(() => {
+        this._onAcceptConfigChange();
+      }),
     ];
-
-    this._pushButton = this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
-      ?.sound ?? new Howl();
-    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
-      ?.sound ?? new Howl();
-
-    this._dialog = new ConfigChangedDialog(resources);
-    this._root.appendChild(this._dialog.getRootHTMLElement());
   }
 
   /** @override */
@@ -174,6 +186,11 @@ export class Config implements DOMScene {
         pop(this._prevButton),
         this._changeValue.play()
       ]);
+      const updatedConfig = this._parseConfig();
+      if (isConfigChanged(this._originConfig, updatedConfig)) {
+        this._dialog.show();
+        return;
+      }
       this._prev.next();
     });
   }
@@ -192,6 +209,34 @@ export class Config implements DOMScene {
         pop(this._configChangeButton),
         this._pushButton.play()
       ]);
+      const config = this._parseConfig();
+      this._configChange.next(config);
+    });
+  }
+
+  /**
+   * 設定変更通知ダイアログを閉じた時の処理
+   */
+  _onDialogClose() {
+    this._exclusive.execute(async () => {
+      this._dialog.hidden();
+    });
+  }
+
+  /**
+   * 設定変更ダイアログで「設定変更を破棄」を選択した時の処理
+   */
+  _onDiscardConfigChange() {
+    this._exclusive.execute(async () => {
+      this._prev.next();
+    });
+  }
+
+  /**
+   * 設定変更ダイアログで「この設定にする」を選択した時の処理
+   */
+  _onAcceptConfigChange() {
+    this._exclusive.execute(async () => {
       const config = this._parseConfig();
       this._configChange.next(config);
     });
