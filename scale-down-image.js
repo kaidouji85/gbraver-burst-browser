@@ -52,8 +52,6 @@ async function resizeImage(origin, scale) {
     'build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp',
     'build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp',
   ];
-
-  console.log('start background texture');
   const modelTexturePaths = await globPromise(modelTextures, {ignore: ignoreScaleDownImages});
   const otherImagePaths = await globPromise(allImages, {ignore: [modelTextures, ...ignoreScaleDownImages]});
   await Promise.all([
