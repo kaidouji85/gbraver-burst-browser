@@ -1,13 +1,15 @@
 // @flow
+import {Howl} from "howler";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
-import type { Stream, StreamSource, Unsubscriber } from "../../../stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
+import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config-changed';
@@ -76,6 +78,8 @@ export class ConfigChangedDialog {
   _discard: HTMLElement;
   _accept: HTMLElement;
   _exclusive: Exclusive;
+  _changeValue: typeof Howl;
+  _pushButton: typeof Howl;
   _closeStream: StreamSource<void>;
   _acceptStream: StreamSource<void>;
   _discardStream: StreamSource<void>;
@@ -83,6 +87,7 @@ export class ConfigChangedDialog {
 
   /**
    * コンストラクタ
+   * 本ダイアログは生成直後には非表示である
    *
    * @param resources リソース管理オブジェクト
    */
@@ -97,6 +102,9 @@ export class ConfigChangedDialog {
     this._closer = elements.closer;
     this._discard = elements.discard;
     this._accept = elements.accpet;
+
+    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
 
     this._exclusive = new Exclusive();
     this._closeStream = new RxjsStreamSource();
@@ -118,9 +126,9 @@ export class ConfigChangedDialog {
     ];
   }
 
-   /**
-    * デストラクタ相当の処理
-    */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this._unsbusscriber.forEach(v => {
       v.unsubscribe();
@@ -199,7 +207,10 @@ export class ConfigChangedDialog {
     action.event.preventDefault();
     action.event.stopPropagation();
     this._exclusive.execute(async () => {
-      await pop(this._closer, 1.3);
+      await Promise.all([
+        pop(this._closer, 1.3),
+        this._changeValue.play()
+      ]);
       this._closeStream.next();
     });
   }
@@ -213,7 +224,10 @@ export class ConfigChangedDialog {
     action.event.preventDefault();
     action.event.stopPropagation();
     this._exclusive.execute(async () => {
-      await pop(this._discard);
+      await Promise.all([
+        pop(this._discard),
+        this._changeValue.play()
+      ]);
       this._discardStream.next();
     });
   }
@@ -227,7 +241,10 @@ export class ConfigChangedDialog {
     action.event.preventDefault();
     action.event.stopPropagation();
     this._exclusive.execute(async () => {
-      await pop(this._accept);
+      await Promise.all([
+        pop(this._accept),
+        this._pushButton.play()
+      ]);
       this._acceptStream.next();
     });
   }
