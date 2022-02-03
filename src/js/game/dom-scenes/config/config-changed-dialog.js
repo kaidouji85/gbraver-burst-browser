@@ -12,6 +12,7 @@ import {pop} from "../../../dom/animation/pop";
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config-changed';
 
+/** ルート要素非表示時のclass属性 */
 const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
 
 /** data-idを集めたもの */
@@ -33,8 +34,8 @@ function rootInnerHTML(resources: Resources, ids: DataIDs): string {
   const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? '';
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
-    <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
     <div class="${ROOT_CLASS}__dialog">
+      <img class="${ROOT_CLASS}__dialog__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
       <span class="${ROOT_CLASS}__dialog__caption">設定が変更されています</span>
       <div class="${ROOT_CLASS}__dialog__controllers">
         <button class="${ROOT_CLASS}__dialog__controllers__discard" data-id="${ids.discard}">設定変更を破棄</button>

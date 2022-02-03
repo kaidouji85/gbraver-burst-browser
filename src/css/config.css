@@ -71,21 +71,12 @@
 }
 
 /** 設定変更通知ダイアログ */
-@media (orientation: landscape) {
-  .config-changed {
-    --dialog-height: calc(var(--vh) * 50);
-    --dialog-width: calc(min(var(--dialog-height) * 16 / 9, 90vw));
-    --button-width: calc(var(--responsive-font-size) * 10);
-    --button-height: calc(var(--responsive-font-size) * 3);
-    display: block;
-    position: fixed;
-  }
-}
-
-@media (orientation: portrait) {
- .config-changed {
-    display: none;
-  }
+.config-changed {
+  --dialog-width: calc(var(--responsive-font-size) * 30);
+  --dialog-height: calc(var(--dialog-width) * 9/16);
+  --button-width: calc(var(--responsive-font-size) * 10);
+  --button-height: calc(var(--responsive-font-size) * 3);
+  position: fixed;
 }
 
 .config-changed--invisible {
@@ -101,22 +92,9 @@
   z-index: var(--zindex-background);
 }
 
-.config-changed__closer {
-  --icon-width: 48px;
-  --icon-height: 48px;
-  position: fixed;
-  top: calc(calc(var(--vh, 1vh) * 50) - var(--dialog-height)/2 - var(--icon-height)/2);
-  left: calc(50vw - var(--dialog-width)/2 - var(--icon-width)/2);
-  width: var(--icon-width);
-  height: var(--icon-height);
-  z-index: var(--zindex-close);
-}
-
 .config-changed__dialog {
-  width: var(--dialog-width);
-  height: var(--dialog-height);
   top: calc(var(--vh, 1vh) * 50);
-  left: 50%;
+  left: 50vw;
   transform: translate(-50%, -50%);
   color: var(--font-color);
   font-size: var(--responsive-font-size);
@@ -124,16 +102,29 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
-  box-sizing: border-box;
+  padding: calc(var(--responsive-font-size) * 3);
+}
+
+.config-changed__dialog__closer {
+  --icon-width: 48px;
+  --icon-height: 48px;
+  width: var(--icon-width);
+  height: var(--icon-height);
+  position: absolute;
+  top: calc(var(--icon-width) * -0.5);
+  left: calc(var(--icon-height) * -0.5);
 }
 
 .config-changed__dialog__caption {
-  margin-bottom: calc(var(--responsive-font-size) * 2);
+  font-size: calc(var(--responsive-font-size) * 1.2);
+  margin-bottom: calc(var(--responsive-font-size) * 1.5);
+}
+
+.config-changed__dialog__controllers {
+  display: flex;
 }
 
 .config-changed__dialog__controllers button {
