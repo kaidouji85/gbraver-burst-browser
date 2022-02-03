@@ -72,10 +72,10 @@
 
 /** 設定変更通知ダイアログ */
 .config-changed {
-  --dialog-width: calc(var(--responsive-font-size) * 30);
-  --dialog-height: calc(var(--dialog-width) * 9/16);
   --button-width: calc(var(--responsive-font-size) * 10);
   --button-height: calc(var(--responsive-font-size) * 3);
+  --closer-width: 48px;
+  --closer-height: 48px;
   position: fixed;
 }
 
@@ -93,6 +93,7 @@
 }
 
 .config-changed__dialog {
+  --dialog-padding: var(--responsive-font-size);
   top: calc(var(--vh, 1vh) * 50);
   left: 50vw;
   transform: translate(-50%, -50%);
@@ -102,20 +103,22 @@
   position: fixed;
   display: flex;
   flex-direction: column;
+  align-items: center;
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
-  padding: calc(var(--responsive-font-size) * 3);
+  padding-top: var(--closer-height);
+  padding-right: var(--dialog-padding);
+  padding-bottom: var(--dialog-padding);
+  padding-left: var(--dialog-padding);
 }
 
 .config-changed__dialog__closer {
-  --icon-width: 48px;
-  --icon-height: 48px;
-  width: var(--icon-width);
-  height: var(--icon-height);
+  width: var(--closer-width);
+  height: var(--closer-height);
   position: absolute;
-  top: calc(var(--icon-width) * -0.5);
-  left: calc(var(--icon-height) * -0.5);
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
 }
 
 .config-changed__dialog__caption {
@@ -135,11 +138,11 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
+  margin: calc(var(--responsive-font-size) * 0.25);
 }
 
 .config-changed__dialog__controllers__discard {
   background-color: var(--sub-button-background-color);
-  margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
 .config-changed__dialog__controllers__accept {
