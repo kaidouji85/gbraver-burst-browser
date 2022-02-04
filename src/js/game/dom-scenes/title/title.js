@@ -46,6 +46,7 @@ type DataIDs = {
   gameStart: string,
   casualMatch: string,
   howToPlay: string,
+  config: string,
 };
 
 /**
@@ -80,6 +81,7 @@ function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: b
     <div class="${ROOT_CLASS}__contents">
       <img class="${ROOT_CLASS}__contents__logo" data-id="${ids.logo}">
       <div class="${ROOT_CLASS}__contents__controllers">
+        <button class="${ROOT_CLASS}__contents__controllers__config" data-id="${ids.config}">設定</button>
         <button class="${ROOT_CLASS}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
         <button class="${ROOT_CLASS}__contents__controllers__game-start" data-id="${ids.gameStart}">ゲームスタート</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
@@ -105,6 +107,7 @@ type Elements = {
   gameStart: HTMLElement,
   casualMatch: HTMLElement,
   howToPlay: HTMLElement,
+  config: HTMLElement,
 };
 
 /**
@@ -126,7 +129,8 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
-  return {login, accountMenu, avatar, deleteAccount, logout, logo, gameStart, casualMatch, howToPlay};
+  const config = root.querySelector(`[data-id="${ids.config}"]`) ?? document.createElement('div');
+  return {login, accountMenu, avatar, deleteAccount, logout, logo, gameStart, casualMatch, howToPlay, config};
 }
 
 /** タイトル */
@@ -142,6 +146,7 @@ export class Title implements DOMScene {
   _gameStart: HTMLElement;
   _casualMatch: HTMLElement;
   _howToPlay: HTMLElement;
+  _config: HTMLElement;
   _isTitleBackLoaded: Promise<void>;
   _isAvatarLoaded: Promise<void>;
   _isLogoLoaded: Promise<void>;
@@ -153,6 +158,7 @@ export class Title implements DOMScene {
   _pushGameStart: StreamSource<void>;
   _pushCasualMatch: StreamSource<void>;
   _pushHowToPlay: StreamSource<void>;
+  _pushConfig: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
 
   /**
@@ -169,7 +175,7 @@ export class Title implements DOMScene {
     this._exclusive = new Exclusive();
     this._isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
-      gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(),termsOfService: domUuid(), privacyPolicy: domUuid()};
+      gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(dataIDs, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._root.className = ROOT_CLASS;
@@ -182,6 +188,7 @@ export class Title implements DOMScene {
     this._gameStart = elements.gameStart;
     this._casualMatch = elements.casualMatch;
     this._howToPlay = elements.howToPlay;
+    this._config = elements.config;
 
     this._isAvatarLoaded = (account.type === 'LoggedInAccount') ? waitElementLoaded(this._avatar) : Promise.resolve();
     this._avatar.src = (account.type === 'LoggedInAccount') ? account.pictureURL : '';
@@ -207,6 +214,7 @@ export class Title implements DOMScene {
     this._pushGameStart = new RxjsStreamSource();
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
+    this._pushConfig = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._root).subscribe(action => {
         this._onRootPush(action);
@@ -231,6 +239,9 @@ export class Title implements DOMScene {
       }),
       pushDOMStream(this._howToPlay).subscribe(action => {
         this._onHowToPlayPush(action);
+      }),
+      pushDOMStream(this._config).subscribe(action => {
+        this._onConfigPush(action);
       })
     ];
   }
@@ -296,6 +307,15 @@ export class Title implements DOMScene {
    */
   pushHowToPlayNotifier(): Stream<void> {
     return this._pushHowToPlay;
+  }
+
+  /**
+   * 設定ボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushConfigNotifier(): Stream<void> {
+    return this._pushConfig;
   }
 
   /**
@@ -423,6 +443,20 @@ export class Title implements DOMScene {
       this._changeValue.play();
       await pop(this._howToPlay);
       this._pushHowToPlay.next();
+    });
+  }
+
+  /**
+   * 設定が押された時の処理
+   *
+   * @param action アクション
+   */
+  _onConfigPush(action: PushDOM): void {
+    this._exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
+      this._changeValue.play();
+      await pop(this._config);
+      this._pushConfig.next();
     });
   }
 

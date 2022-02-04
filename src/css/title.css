@@ -138,7 +138,6 @@
   justify-content: center;
   padding-top: calc(var(--responsive-font-size) * 2);
 }
-
 .title__contents__controllers button {
   width: calc(var(--responsive-font-size) * 10);
   height: calc(var(--responsive-font-size) * 3);
@@ -150,9 +149,14 @@
   box-shadow: var(--button-box-shadow);
 }
 
+
+.title__contents__controllers__how-to-play,
+.title__contents__controllers__config {
+  background-color: var(--sub-button-background-color);
+}
+
 .title__contents__controllers__game-start,
-.title__contents__controllers__casual-match,
-.title__contents__controllers__how-to-play {
+.title__contents__controllers__casual-match {
   background-color: var(--button-background-color);
 }
 

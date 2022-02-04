@@ -3,18 +3,17 @@
 import * as THREE from 'three';
 import {WebGLInfo} from 'three';
 import type {Resize} from "../window/resize";
-import {onWebGLRendererResize} from "./resize/resize";
 import type {RendererDOMEvent} from "./dom-event/dom-event";
 import {createDOMEventStream} from "./dom-event/dom-event";
-import {createRender} from "./renderer-creator/renderer-creator";
 import type {OverlapEvent} from "./overlap-event/overlap-event";
 import {toOverlapStream} from "./overlap-event/overlap-event";
 import type {OverlapNotifier} from "./overla-notifier";
 import type {RendererDomGetter} from "./renderer-dom-getter";
 import type {Rendering} from "./rendering";
 import type {Stream, Unsubscriber} from "../stream/core";
+import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
 
-/** レンダラの挙動をまとめたもの */
+/** レンダラ管理オブジェクト */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   _threeJsRender: typeof THREE.WebGLRenderer;
   _domEvent: Stream<RendererDOMEvent>;
@@ -26,7 +25,10 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
    * @param resize リサイズのストリーム
    */
   constructor(resize: Stream<Resize>) {
-    this._threeJsRender = createRender();
+    this._threeJsRender = new THREE.WebGLRenderer();
+    this._threeJsRender.autoClear = false;
+    this._threeJsRender.setSize(getViewPortWidth(), getViewPortHeight());
+    this._threeJsRender.setPixelRatio(window.devicePixelRatio);
     this._domEvent = createDOMEventStream(this._threeJsRender.domElement);
     this._unsubscriber = [
       resize.subscribe(action => {
@@ -72,6 +74,16 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
   }
 
   /**
+   * ピクセルレートを設定する
+   *
+   * @param pixelRatio ピクセルレート
+   */
+  setPixelRatio(pixelRatio: number): void {
+    const normalizedPixelRatio = Math.min(window.devicePixelRatio, pixelRatio);
+    this._threeJsRender.setPixelRatio(normalizedPixelRatio);
+  }
+
+  /**
    * レンダリングをする
    *
    * @param scene シーン
@@ -83,6 +95,6 @@ export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {
 
   /** リサイズ */
   _resize(action: Resize): void {
-    onWebGLRendererResize(this._threeJsRender, action.width, action.height, window.devicePixelRatio);
+    this._threeJsRender.setSize(action.width, action.height);
   }
 }

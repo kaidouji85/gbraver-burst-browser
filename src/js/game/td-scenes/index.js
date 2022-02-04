@@ -28,12 +28,10 @@ export class TDScenes {
    * @param resize リサイズストリーム
    */
   constructor(resize: Stream<Resize>) {
+    this._resize = resize;
+    this._renderer = new Renderer(this._resize);
     this._gameAction = new RxjsStreamSource();
     this._gameLoop = gameLoopStream();
-    this._resize = resize;
-
-    this._renderer = new Renderer(this._resize);
-
     this._scene = null;
     this._unsubscriber = [];
   }
@@ -56,32 +54,25 @@ export class TDScenes {
    * 戦闘シーンを開始する
    *
    * @param resources リソース管理オブジェクト
-   * @param progress 戦闘を進める
+   * @param pixelRatio ピクセルレート
+   * @param battleProgress 戦闘を進める
    * @param player プレイヤー情報
    * @param enemy 敵情報
    * @param initialState ゲームの初期状態
    * @return 生成した戦闘シーン
    */
-  startBattle(resources: Resources, progress: BattleProgress, player: Player, enemy: Player, initialState: GameState[]): BattleScene {
+  startBattle(resources: Resources, pixelRatio: number, battleProgress: BattleProgress, player: Player, enemy: Player, initialState: GameState[]): BattleScene {
     this._disposeScene();
 
-    const scene = new BattleScene({
-      resources: resources,
-      renderer: this._renderer,
-      battleProgress: progress,
-      player: player,
-      enemy: enemy,
-      initialState: initialState,
-      gameLoop: this._gameLoop,
-      resize: this._resize,
-    });
+    this._renderer.setPixelRatio(pixelRatio);
+    const scene = new BattleScene({resources, renderer: this._renderer, battleProgress, player, enemy, initialState,
+      gameLoop: this._gameLoop, resize: this._resize});
     this._scene = scene;
     this._unsubscriber = [
       scene.gameEndNotifier().subscribe(v => {
         this._gameAction.next({type: 'EndBattle', gameEnd: v,});
       })
     ];
-
     return scene;
   }
 
