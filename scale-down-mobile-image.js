@@ -36,7 +36,6 @@ async function resizeImage(origin, scale) {
 }
 
 /**
- * エントリポイント
  * モバイル用画像をスケールダウンする
  */
 (async () => {

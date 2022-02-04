@@ -84,10 +84,6 @@ module.exports = {
           to: path.resolve(__dirname, BUILD_ROOT)
         },
         {
-          from: path.resolve(__dirname, "src/app-icon-192x192.png"),
-          to: path.resolve(__dirname, BUILD_ROOT)
-        },
-        {
           from: path.resolve(__dirname, "src/app-icon-512x512.png"),
           to: path.resolve(__dirname, BUILD_ROOT)
         },
