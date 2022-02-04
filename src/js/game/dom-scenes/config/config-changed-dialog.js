@@ -70,7 +70,10 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {backGround, closer, discard, accpet};
 }
 
-/** 設定変更通知ダイアログ */
+/** 
+ * 設定変更通知ダイアログ
+ * 本ダイアログは設定画面から呼び出されることを想定している
+ */
 export class ConfigChangedDialog {
   _root: HTMLElement;
   _backGround: HTMLElement;
@@ -194,6 +197,7 @@ export class ConfigChangedDialog {
     action.event.preventDefault();
     action.event.stopPropagation();
     this._exclusive.execute(async () => {
+      await this._changeValue.play();
       this._closeStream.next();
     });
   }
