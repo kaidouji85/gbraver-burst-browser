@@ -37,6 +37,7 @@ async function resizeImage(origin, scale) {
 
 /**
  * エントリポイント
+ * モバイル用画像をスケールダウンする
  */
 (async () => {
   console.log('start scale down mobile images');

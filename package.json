@@ -12,8 +12,8 @@
     "start:storybook": "start-storybook -s ./src/resources -p 6006",
     "start:storybook-static": "run-s clean build:storybook-static serve:storybook-static",
     "test": "jest",
-    "build": "run-s clean type-check lint lint:test webpack scale-down-image webpack:sw webpack:clear-sw",
-    "build:production": "run-s clean type-check lint lint:test webpack:production scale-down-image webpack:sw webpack:clear-sw",
+    "build": "run-s clean type-check lint lint:test webpack scale-down-mobile-image webpack:sw webpack:clear-sw",
+    "build:production": "run-s clean type-check lint lint:test webpack:production scale-down-mobile-image webpack:sw webpack:clear-sw",
     "build:storybook-static": "run-s clean lint:storybook storybook-static",
     "clean": "rimraf build",
     "dev-server": "webpack serve",
@@ -28,7 +28,7 @@
     "lint": "eslint src/js",
     "lint:test": "eslint test",
     "lint:storybook": "eslint stories",
-    "scale-down-image": "node scale-down-image.js"
+    "scale-down-mobile-image": "node scale-down-mobile-image.js"
   },
   "author": "y.takeuchi",
   "license": "ISC",
