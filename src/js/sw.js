@@ -11,6 +11,7 @@ PreCaching.precacheAndRoute([
   {url: "./favicon.ico", revision: GBRAVER_BURST_SW_BUILD_HASH},
   {url: "./favicon-16x16.png", revision: GBRAVER_BURST_SW_BUILD_HASH},
   {url: "./favicon-32x32.png", revision: GBRAVER_BURST_SW_BUILD_HASH},
+  {url: "./app-icon-180x180.png", revision: GBRAVER_BURST_SW_BUILD_HASH},
   {url: "./app-icon-192x192.png", revision: GBRAVER_BURST_SW_BUILD_HASH},
   {url: "./app-icon-512x512.png", revision: GBRAVER_BURST_SW_BUILD_HASH},
 ]);
