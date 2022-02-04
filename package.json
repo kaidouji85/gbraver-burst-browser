@@ -12,8 +12,8 @@
     "start:storybook": "start-storybook -s ./src/resources -p 6006",
     "start:storybook-static": "run-s clean build:storybook-static serve:storybook-static",
     "test": "jest",
-    "build": "run-s clean type-check lint lint:test webpack scale-down-image webpack:sw webpack:clear-sw",
-    "build:production": "run-s clean type-check lint lint:test webpack:production scale-down-image webpack:sw webpack:clear-sw",
+    "build": "run-s clean type-check lint lint:test webpack generate-icons scale-down-mobile-images webpack:sw webpack:clear-sw",
+    "build:production": "run-s clean type-check lint lint:test webpack:production generate-icons scale-down-mobile-images webpack:sw webpack:clear-sw",
     "build:storybook-static": "run-s clean lint:storybook storybook-static",
     "clean": "rimraf build",
     "dev-server": "webpack serve",
@@ -28,7 +28,8 @@
     "lint": "eslint src/js",
     "lint:test": "eslint test",
     "lint:storybook": "eslint stories",
-    "scale-down-image": "node scale-down-image.js"
+    "scale-down-mobile-images": "node scale-down-mobile-images.js",
+    "generate-icons": "node generate-icons.js"
   },
   "author": "y.takeuchi",
   "license": "ISC",
@@ -80,6 +81,7 @@
     "rimraf": "^3.0.2",
     "sharp": "^0.29.3",
     "style-loader": "^3.3.1",
+    "to-ico": "^1.1.5",
     "webpack": "^5.67.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.3"

@@ -68,23 +68,11 @@ module.exports = {
           to: path.resolve(__dirname, BUILD_ROOT, MOBILE_RESOURCE_ROOT)
         },
         {
-          from: path.resolve(__dirname, "src/favicon.ico"),
-          to: path.resolve(__dirname, BUILD_ROOT)
-        },
-        {
-          from: path.resolve(__dirname, "src/favicon-16x16.png"),
-          to: path.resolve(__dirname, BUILD_ROOT)
-        },
-        {
-          from: path.resolve(__dirname, "src/favicon-32x32.png"),
-          to: path.resolve(__dirname, BUILD_ROOT)
-        },
-        {
           from: path.resolve(__dirname, "src/manifest.json"),
           to: path.resolve(__dirname, BUILD_ROOT)
         },
         {
-          from: path.resolve(__dirname, "src/app-icon.png"),
+          from: path.resolve(__dirname, "src/app-icon-512x512.png"),
           to: path.resolve(__dirname, BUILD_ROOT)
         },
         {
