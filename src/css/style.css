@@ -27,7 +27,7 @@
 
   /** ボタン */
   --button-background-color: #007bbb;
-  --sub-button-background-color: #696969;
+  --sub-button-background-color: #595857;
   --button-font-color: rgb(240, 240, 240);
   --button-border-radius: calc(var(--responsive-font-size) * 0.5);
   --button-border: none;
@@ -53,3 +53,4 @@
 @import "delete-account-consent.css";
 @import "npc-stage-title.css";
 @import "degree-of-difficulty.css";
+@import "config.css";
