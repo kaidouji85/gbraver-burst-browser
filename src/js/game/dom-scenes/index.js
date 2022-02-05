@@ -8,7 +8,7 @@ import {PlayerSelect} from "./player-select";
 import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
-import {NPCEnding} from "./npc-ending";
+import {NPCEnding} from "./npc-ending/npc-ending";
 import type {Resources} from "../../resource";
 import type {GameAction} from "../actions/game-actions";
 import {RxjsStreamSource} from "../../stream/rxjs";
