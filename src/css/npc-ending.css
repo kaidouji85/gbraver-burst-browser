@@ -3,9 +3,6 @@
  */
 @media (orientation: landscape) {
   .npc-ending {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
     width: var(--screen-width);
     height: var(--screen-height);
     background-color: var(--background-color);
@@ -30,9 +27,15 @@
   object-fit: cover;
   width: 40vw;
   transform: rotate(20deg);
+  position: absolute;
+  left: max(var(--safe-area-left), 5vw);
+  bottom: calc(var(--safe-area-bottom) + 5vh);
 }
 
 .npc-ending__logo {
   object-fit: cover;
   width: 35vw;
+  position: absolute;
+  right: max(var(--safe-area-right), 5vw);
+  bottom: var(--safe-area-bottom);
 }
