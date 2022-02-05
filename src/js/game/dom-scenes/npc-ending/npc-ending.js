@@ -97,20 +97,14 @@ export class NPCEnding implements DOMScene {
     ];
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this._unsubscriber.forEach(v => {
       v.unsubscribe();
     })
   }
 
-  /**
-   * ルートHTML要素を取得する
-   *
-   * @return 取得結果
-   */
+  /** @override */
   getRootHTMLElement(): HTMLElement {
     return this._root;
   }
