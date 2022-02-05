@@ -26,10 +26,9 @@
 .npc-ending__end {
   object-fit: cover;
   width: 40vw;
-  transform: rotate(20deg);
   position: absolute;
   left: max(var(--safe-area-left), 5vw);
-  bottom: calc(var(--safe-area-bottom) + 5vh);
+  bottom: var(--safe-area-bottom);
 }
 
 .npc-ending__logo {
