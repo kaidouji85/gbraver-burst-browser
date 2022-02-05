@@ -27,14 +27,14 @@
   object-fit: cover;
   width: 40vw;
   position: absolute;
-  left: max(var(--safe-area-left), 5vw);
-  bottom: var(--safe-area-bottom);
+  left: max(var(--safe-area-left), 5vh);
+  bottom: max(var(--safe-area-bottom), 5vh);
 }
 
 .npc-ending__logo {
   object-fit: cover;
   width: 35vw;
   position: absolute;
-  right: max(var(--safe-area-right), 5vw);
-  bottom: var(--safe-area-bottom);
+  right: max(var(--safe-area-right), 5vh);
+  bottom: max(var(--safe-area-bottom), 5vh);
 }
