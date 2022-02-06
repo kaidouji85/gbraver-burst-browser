@@ -14,7 +14,7 @@ import {pop} from "../../../dom/animation/pop";
 import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素 class属性 */
-const ROOT_CLASS = 'degree-of-difficulty';
+const ROOT_CLASS = 'difficulty';
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -74,7 +74,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** 難易度選択ダイアログ */
-export class DegreeOfDifficultyDialog implements DOMDialog {
+export class DifficultyDialog implements DOMDialog {
   _root: HTMLElement;
   _closer: HTMLElement;
   _easy: HTMLElement;

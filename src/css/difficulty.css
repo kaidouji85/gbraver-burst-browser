@@ -2,7 +2,7 @@
  * 難易度選択ダイアログ
  */
  @media (orientation: landscape) {
-  .degree-of-difficulty {
+  .difficulty {
     --delete-account-consent-dialog-width: calc(80vw);
     --delete-account-consent-dialog-height: calc(min(var(--delete-account-consent-dialog-width) * 9 / 16, var(--vh) * 85));
     display: block;
@@ -10,12 +10,12 @@
 }
 
 @media (orientation: portrait) {
-  .degree-of-difficulty {
+  .difficulty {
     display: none;
   }
 }
 
-.degree-of-difficulty__background {
+.difficulty__background {
   position: absolute;
   width: var(--screen-width);
   height: var(--screen-height);
@@ -24,7 +24,7 @@
   z-index: var(--zindex-background);
 }
 
-.degree-of-difficulty__closer {
+.difficulty__closer {
   --icon-width: 48px;
   --icon-height: 48px;
   position: fixed;
@@ -46,7 +46,7 @@
   z-index: var(--zindex-close);
 }
 
-.degree-of-difficulty__dialog {
+.difficulty__dialog {
   width: var(--delete-account-consent-dialog-width);
   height: var(--delete-account-consent-dialog-height);
   top: calc(var(--vh, 1vh) * 50);
@@ -66,17 +66,17 @@
   box-sizing: border-box;
   padding: var(--responsive-font-size);
 }
-.degree-of-difficulty__dialog__caption {
+.difficulty__dialog__caption {
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
-.degree-of-difficulty__dialog__controllers {
+.difficulty__dialog__controllers {
   display: flex;
   align-items: center;
   margin-top: var(--responsive-font-size);
 }
 
-.degree-of-difficulty__dialog__controllers button {
+.difficulty__dialog__controllers button {
   width: calc(var(--responsive-font-size) * 8);
   height: calc(var(--responsive-font-size) * 3);
   margin: 0 calc(var(--responsive-font-size) * 0.5);
