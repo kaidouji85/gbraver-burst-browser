@@ -14,7 +14,7 @@ import {pop} from "../../../dom/animation/pop";
 import {SOUND_IDS} from "../../../resource/sound";
 
 /** ルート要素 class属性 */
-const ROOT_CLASS = 'degree-of-difficulty';
+const ROOT_CLASS = 'difficulty';
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -36,8 +36,8 @@ function rootInnerHTML(resources: Resources, ids: DataIDs): string {
   const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? '';
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
-    <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
     <div class="${ROOT_CLASS}__dialog">
+      <img class="${ROOT_CLASS}__dialog__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
       <div class="${ROOT_CLASS}__dialog__caption">難易度を選択してください</div>
       <div class="${ROOT_CLASS}__dialog__controllers">
         <button class="${ROOT_CLASS}__dialog__controllers__easy" alt="easy-course" data-id="${ids.easy}">かんたん</button>
@@ -74,7 +74,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 }
 
 /** 難易度選択ダイアログ */
-export class DegreeOfDifficultyDialog implements DOMDialog {
+export class DifficultyDialog implements DOMDialog {
   _root: HTMLElement;
   _closer: HTMLElement;
   _easy: HTMLElement;
