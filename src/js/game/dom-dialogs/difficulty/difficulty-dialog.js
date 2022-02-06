@@ -36,8 +36,8 @@ function rootInnerHTML(resources: Resources, ids: DataIDs): string {
   const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? '';
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
-    <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
     <div class="${ROOT_CLASS}__dialog">
+      <img class="${ROOT_CLASS}__dialog__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
       <div class="${ROOT_CLASS}__dialog__caption">難易度を選択してください</div>
       <div class="${ROOT_CLASS}__dialog__controllers">
         <button class="${ROOT_CLASS}__dialog__controllers__easy" alt="easy-course" data-id="${ids.easy}">かんたん</button>

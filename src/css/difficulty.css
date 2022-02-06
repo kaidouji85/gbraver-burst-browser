@@ -3,8 +3,8 @@
  */
  @media (orientation: landscape) {
   .difficulty {
-    --delete-account-consent-dialog-width: calc(80vw);
-    --delete-account-consent-dialog-height: calc(min(var(--delete-account-consent-dialog-width) * 9 / 16, var(--vh) * 85));
+    --closer-width: 48px;
+    --closer-height: 48px;
     display: block;
   }
 }
@@ -24,33 +24,18 @@
   z-index: var(--zindex-background);
 }
 
-.difficulty__closer {
-  --icon-width: 48px;
-  --icon-height: 48px;
-  position: fixed;
-  top: calc(
-    calc(var(--vh, 1vh) * 50)
-    - var(--delete-account-consent-dialog-height) / 2
-    - var(--icon-width) / 2
-  );
-  left: calc(
-    50vw
-    - var(--delete-account-consent-dialog-width) / 2
-    - var(--icon-height) / 2
-  );
-  width: var(--icon-width);
-  height: var(--icon-height);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: var(--zindex-close);
+.difficulty__dialog__closer {
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
 }
 
 .difficulty__dialog {
-  width: var(--delete-account-consent-dialog-width);
-  height: var(--delete-account-consent-dialog-height);
+  --dialog-padding: var(--responsive-font-size);
   top: calc(var(--vh, 1vh) * 50);
-  left: 50%;
+  left: 50vw;
   transform: translate(-50%, -50%);
   color: var(--font-color);
   font-size: var(--responsive-font-size);
@@ -64,22 +49,26 @@
   border-radius: var(--dialog-border-radius);
   z-index: var(--zindex-dialog);
   box-sizing: border-box;
-  padding: var(--responsive-font-size);
+  padding-top: var(--closer-height);
+  padding-right: var(--dialog-padding);
+  padding-bottom: var(--dialog-padding);
+  padding-left: var(--dialog-padding);
 }
+
 .difficulty__dialog__caption {
-  margin-bottom: calc(var(--responsive-font-size) * 2);
+  font-size: calc(var(--responsive-font-size) * 1.2);
+  margin-bottom: calc(var(--responsive-font-size) * 1.5);
 }
 
 .difficulty__dialog__controllers {
   display: flex;
   align-items: center;
-  margin-top: var(--responsive-font-size);
 }
 
 .difficulty__dialog__controllers button {
   width: calc(var(--responsive-font-size) * 8);
   height: calc(var(--responsive-font-size) * 3);
-  margin: 0 calc(var(--responsive-font-size) * 0.5);
+  margin: calc(var(--responsive-font-size) * 0.4);
   font-size: calc(var(--responsive-font-size));
   border-radius: var(--button-border-radius);
   color: var(--button-font-color);
