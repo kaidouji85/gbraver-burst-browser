@@ -399,7 +399,7 @@ export class Game {
     const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
       const difficultySelection = {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId};
       this._inProgress = {...npcBattle, subFlow: difficultySelection};
-      this._domDialogs.startDegreeOfDifficulty(this._resources);
+      this._domDialogs.startDifficulty(this._resources);
     };
     const waitUntilMatching = async (): Promise<BattleSDK> => {
       try {

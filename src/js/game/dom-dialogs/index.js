@@ -129,7 +129,7 @@ export class DOMDialogs {
    *
    * @param resources リソース管理オブジェクト
    */
-  startDegreeOfDifficulty(resources: Resources): void {
+  startDifficulty(resources: Resources): void {
     this._removeCurrentDialog();
 
     const degreeOfDifficulty = new DifficultyDialog(resources);

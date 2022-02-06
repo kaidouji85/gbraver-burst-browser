@@ -138,6 +138,7 @@
   justify-content: center;
   padding-top: calc(var(--responsive-font-size) * 2);
 }
+
 .title__contents__controllers button {
   width: calc(var(--responsive-font-size) * 10);
   height: calc(var(--responsive-font-size) * 3);
@@ -148,7 +149,6 @@
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
 }
-
 
 .title__contents__controllers__how-to-play,
 .title__contents__controllers__config {
