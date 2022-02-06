@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {RaitoModel} from "./model/raito-model";
-import {RaitoView} from "./view/raito-view";
+import type {RaitoView} from "./view/raito-view";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";

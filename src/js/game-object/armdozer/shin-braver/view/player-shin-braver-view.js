@@ -1,6 +1,6 @@
 // @flow
 
-import {ShinBraverView} from './shin-braver-view';
+import type {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource";
 import type {ShinBraverModel} from "../model/shin-braver-model";

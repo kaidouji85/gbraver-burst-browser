@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {GaiModel} from "./model/gai-model";
-import {GaiView} from "./view/gai-view";
+import type {GaiView} from "./view/gai-view";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";

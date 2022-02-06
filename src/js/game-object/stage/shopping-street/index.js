@@ -3,7 +3,7 @@
 import type {Resources} from '../../../resource';
 import * as THREE from 'three';
 import {City} from './city';
-import {Stage} from "../stage";
+import type {Stage} from "../stage";
 
 /** 商店街 */
 export default class ShoppingStreet implements Stage {

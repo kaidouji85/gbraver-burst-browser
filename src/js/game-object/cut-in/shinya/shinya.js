@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {ShinyaModel} from "./model/shinya-model";
-import {ShinyaView} from "./view/shinya-view";
+import type {ShinyaView} from "./view/shinya-view";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
