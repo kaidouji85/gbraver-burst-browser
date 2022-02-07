@@ -2,7 +2,7 @@
 
 import * as THREE from 'three';
 import type {TsubasaModel} from "./model/tsubasa-model";
-import {TsubasaView} from "./view/tsubasa-view";
+import type {TsubasaView} from "./view/tsubasa-view";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";

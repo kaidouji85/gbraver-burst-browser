@@ -3,6 +3,7 @@
 import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
 import type {PostNetworkError} from '../network/post-network-error';
 import type {NPCBattleCourseDifficulty} from "../npc-battle/npc-battle-course";
+import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 
 /** 画面リロード依頼 */
 export type ReloadRequest = {
@@ -138,6 +139,23 @@ export type EndNetworkError = {
   postNetworkError: PostNetworkError,
 };
 
+/** 設定変更開始 */
+export type ConfigChangeStart = {
+  type: 'ConfigChangeStart'
+};
+
+/** 設定変更完了 */
+export type ConfigChangeComplete = {
+  type: 'ConfigChangeComplete',
+  /** 変更した設定内容 */
+  config: GbraverBurstBrowserConfig
+};
+
+/** 設定変更キャンセル */
+export type ConfigChangeCancel = {
+  type: 'ConfigChangeCancel'
+};
+
 /**
  * ゲーム全体で利用するアクション
  */
@@ -162,4 +180,7 @@ export type GameAction = ReloadRequest
  | CancelAccountDeletion
  | WebSocketAPIError
  | WebSocketAPIUnintentionalClose
- | EndNetworkError;
+ | EndNetworkError
+ | ConfigChangeStart
+ | ConfigChangeComplete
+ | ConfigChangeCancel;

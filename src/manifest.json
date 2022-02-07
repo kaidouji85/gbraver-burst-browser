@@ -2,13 +2,23 @@
   "lang": "ja",
   "name": "機動倶楽部 Gブレイバー バースト",
   "short_name": "GブレB",
-  "description": "巨大ロボットで闘うターンベースRPGです。",
-  "icons": [{
-    "src": "./app-icon.png",
-    "sizes": "192x192",
-    "type": "image/png"
-  }],
+  "description": "巨大ロボ、読み合いバトル",
+  "icons": [
+    {
+      "src": "./app-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./app-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
   "start_url": "./index.html",
   "display": "standalone",
-  "orientation": "landscape-primary"
+  "orientation": "landscape-primary",
+  "theme_color": "#474a4d",
+  "background_color": "#474a4d"
 }

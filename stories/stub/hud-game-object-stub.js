@@ -18,8 +18,7 @@ import {StorybookResourceRoot} from "../resource-root/storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 import {RxjsStreamSource} from "../../src/js/stream/rxjs";
-import {Stream} from '../../src/js/stream/core';
-import type {StreamSource, Unsubscriber} from "../../src/js/stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/core";
 import type {Resources} from "../../src/js/resource";
 
 /** Object3D生成関数パラメータ */

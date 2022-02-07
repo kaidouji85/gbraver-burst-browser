@@ -1,10 +1,10 @@
 // @flow
 
-import {NeoLandozerModel} from "../model/neo-landozer-model";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
 import {Animate} from "../../../../animation/animate";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
+import type {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
 import {all} from "../../../../animation/all";
 import {delay} from "../../../../animation/delay";
 

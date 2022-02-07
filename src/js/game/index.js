@@ -25,6 +25,7 @@ import type {Player} from "gbraver-burst-core";
 import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {
+  ConfigChangeComplete,
   DifficultySelectionComplete,
   EndBattle,
   EndNetworkError,
@@ -59,6 +60,8 @@ import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
 import {INITIAL_STAGE_LEVEL} from "./npc-battle/npc-battle-stage";
 import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
+import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
+import {DefaultConfig} from "./config/default-config";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -180,6 +183,9 @@ export class Game {
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
       else if (action.type === 'WebSocketAPIError') { this._onWebSocketAPIError(action) }
       else if (action.type === 'WebSocketAPIUnintentionalClose') { this._onWebSocketAPIUnintentionalClose(action) }
+      else if (action.type === 'ConfigChangeStart') { this._onConfigChangeStart() }
+      else if (action.type === 'ConfigChangeCancel') { this._onConfigChangeCancel() }
+      else if (action.type === 'ConfigChangeComplete') { this._onConfigChangeComplete(action) }
     }));
   }
 
@@ -393,7 +399,7 @@ export class Game {
     const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
       const difficultySelection = {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId};
       this._inProgress = {...npcBattle, subFlow: difficultySelection};
-      this._domDialogs.startDegreeOfDifficulty(this._resources);
+      this._domDialogs.startDifficulty(this._resources);
     };
     const waitUntilMatching = async (): Promise<BattleSDK> => {
       try {
@@ -432,7 +438,8 @@ export class Game {
       await this._fader.fadeIn();
 
       const progress = createBattleProgress(battle);
-      const battleScene = this._tdScenes.startBattle(this._resources, progress, battle.player,
+      const config = configFromLocalStorage() ?? DefaultConfig;
+      const battleScene = this._tdScenes.startBattle(this._resources, config.webGLPixelRatio, progress, battle.player,
         battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await this._fader.fadeOut();
@@ -591,6 +598,42 @@ export class Game {
   }
 
   /**
+   * 設定変更開始時の処理
+   *
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onConfigChangeStart(): Promise<void> {
+    await this._fader.fadeOut();
+    const config = configFromLocalStorage() ?? DefaultConfig;
+    this._domScenes.startConfig(this._resources, config);
+    await this._fader.fadeIn();
+  }
+
+  /**
+   * 設定変更キャンセル時の処理
+   *
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onConfigChangeCancel(): Promise<void> {
+    await this._fader.fadeOut();
+    await this._startTitle();
+    await this._fader.fadeIn();
+  }
+
+  /**
+   * 設定変更完了時の処理
+   *
+   * @param action
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
+    await this._fader.fadeOut();
+    saveConfigToLocalStorage(action.config);
+    await this._startTitle();
+    await this._fader.fadeIn();
+  }
+
+  /**
    * NPCバトルのステージを開始するヘルパーメソッド
    *
    * @param player プレイヤー
@@ -603,10 +646,12 @@ export class Game {
     this._domDialogs.hidden();
     await this._domScenes.startNPCStageTitle(this._resources, level, stage.caption, npcBattle.enemy.armdozer.id);
     await this._fader.fadeIn();
+
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
-    const battleScene = this._tdScenes.startBattle(this._resources, {progress}, npcBattle.player,
-      npcBattle.enemy, npcBattle.stateHistory());
+    const config = configFromLocalStorage() ?? DefaultConfig;
+    const battleScene = this._tdScenes.startBattle(this._resources, config.webGLPixelRatio, {progress},
+      npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     const battleSceneReadyTime = Date.now();
     const latency = battleSceneReadyTime - startNPCStageTitleTime;
@@ -614,6 +659,7 @@ export class Game {
     await this._fader.fadeOut();
     this._domScenes.hidden();
     await this._fader.fadeIn();
+
     await battleScene.start();
   }
 

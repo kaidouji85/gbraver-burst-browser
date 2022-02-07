@@ -8,7 +8,7 @@ import {PlayerSelect} from "./player-select";
 import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {waitTime} from "../../wait/wait-time";
-import {NPCEnding} from "./npc-ending";
+import {NPCEnding} from "./npc-ending/npc-ending";
 import type {Resources} from "../../resource";
 import type {GameAction} from "../actions/game-actions";
 import {RxjsStreamSource} from "../../stream/rxjs";
@@ -17,6 +17,8 @@ import type {TitleAccount} from "./title/title-account";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
 import type {StageLevel} from "../npc-battle/npc-battle-stage";
+import {Config} from "./config/config";
+import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -126,6 +128,9 @@ export class DOMScenes {
       }),
       scene.pushCasualMatchNotifier().subscribe(() => {
         this._gameAction.next({type: 'CasualMatchStart'});
+      }),
+      scene.pushConfigNotifier().subscribe(() => {
+        this._gameAction.next({type: 'ConfigChangeStart'});
       })
     ];
     this._root.appendChild(scene.getRootHTMLElement());
@@ -242,6 +247,30 @@ export class DOMScenes {
       waitTime(MAX_LOADING_TIME),
     ]);
 
+    this._scene = scene;
+    return scene;
+  }
+
+  /**
+   * 設定画面を開始する
+   *
+   * @param resources リソース管理オブジェクト
+   * @param config Gブレイバーバースト ブラウザ側設定項目
+   * @return 開始された設定画面
+   */
+  startConfig(resources: Resources, config: GbraverBurstBrowserConfig): Config {
+    this._removeCurrentScene();
+
+    const scene = new Config(resources, config);
+    this._root.appendChild(scene.getRootHTMLElement());
+    this._unsubscribers = [
+      scene.prevNotifier().subscribe(() => {
+        this._gameAction.next({type: 'ConfigChangeCancel'});
+      }),
+      scene.configChangeNotifier().subscribe(config => {
+        this._gameAction.next({type: 'ConfigChangeComplete', config});
+      })
+    ];
     this._scene = scene;
     return scene;
   }

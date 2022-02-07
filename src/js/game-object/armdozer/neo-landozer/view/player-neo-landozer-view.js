@@ -1,6 +1,6 @@
 // @flow
 
-import {NeoLandozerView} from './neo-landozer-view';
+import type {NeoLandozerView} from './neo-landozer-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource";
 import type {NeoLandozerModel} from "../model/neo-landozer-model";
