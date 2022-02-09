@@ -16,4 +16,4 @@ phases:
   build:
     commands:
       - . ./buildspec-env
-      - ./deploy.sh "${S3_BUCKET}" "${DISTRIBUTION_ID}"
+      - ./deploy.sh "${S3_BUCKET}" "${DISTRIBUTION_ID}" "${ASSETLINK_JSON_URI}"
