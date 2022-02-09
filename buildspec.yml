@@ -3,7 +3,7 @@ env:
   parameter-store:
     SERVICE: /GbraverBurst/dev/service
     STAGE: /GbraverBurst/dev/stage
-    ASSETLINK_JSON_URI: /GbraverBurst/dev/assetlinkJsonURI
+    ASSETLINKS_JSON_URI: /GbraverBurst/dev/assetlinksJsonURI
 phases:
   install:
     runtime-versions:
@@ -16,4 +16,4 @@ phases:
   build:
     commands:
       - . ./buildspec-env
-      - ./deploy.sh "${S3_BUCKET}" "${DISTRIBUTION_ID}" "${ASSETLINK_JSON_URI}"
+      - ./deploy.sh "${S3_BUCKET}" "${DISTRIBUTION_ID}" "${ASSETLINKS_JSON_URI}"
