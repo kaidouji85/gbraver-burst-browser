@@ -3,6 +3,7 @@ env:
   parameter-store:
     SERVICE: /GbraverBurst/dev/service
     STAGE: /GbraverBurst/dev/stage
+    ASSETLINK_JSON_URI: /GbraverBurst/dev/assetlinkJsonURI
 phases:
   install:
     runtime-versions:
