@@ -58,10 +58,9 @@ async function resizeWebp(origin, scale) {
  */
 (async () => {
   console.log('start scale down mobile images');
+
   const webpImages = 'build/production/resources/**/mobile/**/*.webp';
-  const pngImages =  'build/production/resources/**/mobile/**/*.png';
-  const modelTextures = 'build/production/resources/**/mobile/**/model/**/*.png';
-  const ignoreScaleDownImages = [
+  const ignoreWebpImages = [
     'build/production/resources/**/mobile/armdozer/shin-braver/cutin-down.webp',
     'build/production/resources/**/mobile/armdozer/shin-braver/cutin-up.webp',
     'build/production/resources/**/mobile/armdozer/neo-landozer/cutin-down.webp',
@@ -71,11 +70,16 @@ async function resizeWebp(origin, scale) {
     'build/production/resources/**/mobile/armdozer/wing-dozer/burst-down.webp',
     'build/production/resources/**/mobile/armdozer/wing-dozer/burst-up.webp',
   ];
-  const modelTexturePaths = await globPromise(modelTextures, {ignore: ignoreScaleDownImages});
-  const otherWebPImagePaths = await globPromise(webpImages, {ignore: ignoreScaleDownImages});
-  await Promise.all([
-    ...modelTexturePaths.map(v => resizePng(v, 0.25)),
-    ...otherWebPImagePaths.map(v => resizeWebp(v, 0.5)),
+  const pngModelTextures = 'build/production/resources/**/mobile/**/model/**/*.png';
+
+  const [webpImagePaths, pngModelTexturePaths] = await Promise.all([
+    globPromise(webpImages, {ignore: ignoreWebpImages}),
+    globPromise(pngModelTextures),
   ]);
+  await Promise.all([
+    ...webpImagePaths.map(v => resizeWebp(v, 0.5)),
+    ...pngModelTexturePaths.map(v => resizePng(v, 0.25)),
+  ]);
+
   console.log('complete scale down mobile images');
 })();
