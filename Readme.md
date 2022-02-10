@@ -82,7 +82,19 @@ docker build ./
     | ---- | -- |
     | S3_BUCKET | デプロイ対象となるS3バケット名 |
     | DISTRIBUTION_ID | デプロイ対象のCloudFrontのdistrubution ID |
-  * 必要に応じて.env.templateに定義されている```REST_API_URL```、```WEBSOCKET_API_URL```以外の環境変数を定義する
+    | OWN_ROOT_URL | 開発環境を公開しているURL |
+    | TWITTER_SITE | OGP twitter:site で使うtwitterアカウント |
+    | HOW_TO_PLAY_URL | 遊び方動画のyoutubeのiframe埋め込みのURL |
+    | TERMS_OF_SERVICE_URL | 利用規約ページのURL |
+    | PRIVACY_POLICY_URL | プライバシーポリシーページのURL |
+    | CONTACT_URL | 問い合わせページのURL |
+    | IS_SEARCH_ENGINE_NO_INDEX | 固定値で```true```を指定 |
+    | IS_PERFORMANCE_STATS_VISIBLE | 固定値で```true```を指定 |
+    | IS_SERVICE_WORKER_USED | 固定値で```true```を指定 |
+    | IS_API_SERVER_ENABLE | 固定値で```true```を指定 |
+    | AUTH0_DOMAIN | auth0 ドメイン |
+    | AUTH0_CLIENT_ID | auth0 application client ID |
+    | AUTH0_AUDIENCE | auth0 API audience |
 
 ### 本番環境設定
 * [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の本番環境をデプロイする
@@ -98,7 +110,19 @@ docker build ./
     | ---- | -- |
     | S3_BUCKET | デプロイ対象となるS3バケット名 |
     | DISTRIBUTION_ID | デプロイ対象のCloudFrontのdistrubution ID |
-  * 必要に応じて.env.templateに定義されている```REST_API_URL```、```WEBSOCKET_API_URL```以外の環境変数を定義する
+    | OWN_ROOT_URL | 本番環境を公開しているURL |
+    | TWITTER_SITE | OGP twitter:site で使うtwitterアカウント |
+    | HOW_TO_PLAY_URL | 遊び方動画のyoutubeのiframe埋め込みのURL |
+    | TERMS_OF_SERVICE_URL | 利用規約ページのURL |
+    | PRIVACY_POLICY_URL | プライバシーポリシーページのURL |
+    | CONTACT_URL | 問い合わせページのURL |
+    | IS_SEARCH_ENGINE_NO_INDEX | 固定値で```false```を指定 |
+    | IS_PERFORMANCE_STATS_VISIBLE | 固定値で```false```を指定 |
+    | IS_SERVICE_WORKER_USED | 固定値で```true```を指定 |
+    | IS_API_SERVER_ENABLE | 固定値で```true```を指定 |
+    | AUTH0_DOMAIN | auth0 ドメイン |
+    | AUTH0_CLIENT_ID | auth0 application client ID |
+    | AUTH0_AUDIENCE | auth0 API audience |
 
 ## storybookを動かす
 
