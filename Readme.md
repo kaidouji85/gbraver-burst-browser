@@ -71,24 +71,34 @@ docker build ./
 
 * [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の開発環境をデプロイする
 * 以下の[Parameter Store](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html)を作成する
-
     | 名前 | 種類 | 値 |
     | ---- | ---- | -- |
     | /GbraverBurst/dev/assetlinkJsonURI | String | 開発環境用のassetlinks.jsonのS3 URI |
+    | /GbraverBurst/dev/googleTrackingID | String | 開発環境用のGoogle Analytics トラッキングID |
 * CodeBuildを以下設定で構築する
   * Buildspecには```buildspec.yml```を指定する
-  * ```REST_API_URL```、```WEBSOCKET_API_URL```以外の.env.templateに定義されている環境変数を定義する
+  * 以下の環境変数を設定する
+    | 名前 | 値 |
+    | ---- | -- |
+    | S3_BUCKET | デプロイ対象となるS3バケット名 |
+    | DISTRIBUTION_ID | デプロイ対象のCloudFrontのdistrubution ID |
+  * 必要に応じて.env.templateに定義されている```REST_API_URL```、```WEBSOCKET_API_URL```以外の環境変数を定義する
 
 ### 本番環境設定
 * [GブレイバーバーストAPIサーバ](https://github.com/kaidouji85/gbraver-burst-network)の本番環境をデプロイする
 * 以下の[Parameter Store](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html)を作成する
-
     | 名前 | 種類 | 値 |
     | ---- | ---- | -- |
     | /GbraverBurst/prod/assetlinkJsonURI | String | 本番環境用のassetlinks.jsonのS3 URI |
+    | /GbraverBurst/prod/googleTrackingID | String | 本番環境用のGoogle Analytics トラッキングID |
 * CodeBuildを以下設定で構築する
   * Buildspecには```prod.buildspec.yml```を指定する
-  * ```REST_API_URL```、```WEBSOCKET_API_URL```以外の.env.templateに定義されている環境変数を定義する
+  * 以下の環境変数を設定する
+    | 名前 | 値 |
+    | ---- | -- |
+    | S3_BUCKET | デプロイ対象となるS3バケット名 |
+    | DISTRIBUTION_ID | デプロイ対象のCloudFrontのdistrubution ID |
+  * 必要に応じて.env.templateに定義されている```REST_API_URL```、```WEBSOCKET_API_URL```以外の環境変数を定義する
 
 ## storybookを動かす
 
