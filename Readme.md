@@ -74,7 +74,7 @@ docker build ./
     | 名前 | 種類 | 値 |
     | ---- | ---- | -- |
     | /GbraverBurst/dev/assetlinkJsonURI | String | 開発環境用のassetlinks.jsonのS3 URI |
-    | /GbraverBurst/dev/googleTrackingID | String | 開発環境用のGoogle Analytics トラッキングID |
+    | /GbraverBurst/dev/googleMeasurementID | String | 開発環境用のGoogle Analytics 測定ID |
 * CodeBuildを以下設定で構築する
   * Buildspecには```buildspec.yml```を指定する
   * 以下の環境変数を設定する
@@ -102,7 +102,7 @@ docker build ./
     | 名前 | 種類 | 値 |
     | ---- | ---- | -- |
     | /GbraverBurst/prod/assetlinkJsonURI | String | 本番環境用のassetlinks.jsonのS3 URI |
-    | /GbraverBurst/prod/googleTrackingID | String | 本番環境用のGoogle Analytics トラッキングID |
+    | /GbraverBurst/prod/googleMeasurementID | String | 本番環境用のGoogle Analytics 測定ID |
 * CodeBuildを以下設定で構築する
   * Buildspecには```prod.buildspec.yml```を指定する
   * 以下の環境変数を設定する
