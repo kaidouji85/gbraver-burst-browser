@@ -3,6 +3,8 @@ env:
   parameter-store:
     SERVICE: /GbraverBurst/dev/service
     STAGE: /GbraverBurst/dev/stage
+    ASSETLINKS_JSON_URI: /GbraverBurst/dev/assetlinksJsonURI
+    GOOGLE_MEASUREMENT_ID: /GbraverBurst/dev/googleMeasurementID
 phases:
   install:
     runtime-versions:
@@ -15,4 +17,4 @@ phases:
   build:
     commands:
       - . ./buildspec-env
-      - ./deploy.sh "${S3_BUCKET}" "${DISTRIBUTION_ID}"
+      - ./deploy.sh "${S3_BUCKET}" "${DISTRIBUTION_ID}" "${ASSETLINKS_JSON_URI}"

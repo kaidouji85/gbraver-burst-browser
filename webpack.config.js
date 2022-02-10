@@ -53,7 +53,8 @@ module.exports = {
         INDEX_JS_PATH: OUTPUT_JS_NAME,
         OWN_ROOT_URL: process.env.OWN_ROOT_URL,
         TWITTER_SITE: process.env.TWITTER_SITE,
-        IS_SEARCH_ENGINE_NO_INDEX: process.env.IS_SEARCH_ENGINE_NO_INDEX === 'true'
+        IS_SEARCH_ENGINE_NO_INDEX: process.env.IS_SEARCH_ENGINE_NO_INDEX === 'true',
+        GOOGLE_MEASUREMENT_ID:  process.env.GOOGLE_MEASUREMENT_ID,
       },
       inject: false
     }),
