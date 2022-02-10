@@ -4,7 +4,7 @@ env:
     SERVICE: /GbraverBurst/prod/service
     STAGE: /GbraverBurst/prod/stage
     ASSETLINKS_JSON_URI: /GbraverBurst/prod/assetlinksJsonURI
-    GOOGLE_TRACKING_ID: /GbraverBurst/prod/googleTrackingID
+    GOOGLE_MEASUREMENT_ID: /GbraverBurst/prod/googleMeasurementID
 phases:
   install:
     runtime-versions:
