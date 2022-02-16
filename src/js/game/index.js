@@ -2,11 +2,7 @@
 
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {
-  emptyResources,
-  fullResourceLoadingFrom,
-  titleResourceLoading,
-} from "../resource";
+import {emptyResources, fullResourceLoadingFrom, titleResourceLoading,} from "../resource";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
@@ -52,7 +48,6 @@ import type {
   WebsocketUnintentionalCloseNotifier,
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
-import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {toWebSocketAPIErrorStream, toWebSocketAPIUnintentionalCloseStream} from './network/websocket-api-stream';
 import {map} from "../stream/operator";
@@ -62,6 +57,7 @@ import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
+import type {TitleAccount} from "./dom-scenes/title/title-account";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -207,8 +203,9 @@ export class Game {
     }
 
     const resourceLoading = titleResourceLoading(this._resourceRoot);
-    this._resources = await resourceLoading.resources;
-    await this._startTitle();
+    const [resources, account] = await Promise.all([resourceLoading.resources, this._currentTitleAccount()]);
+    this._resources = resources;
+    await this._domScenes.startTitle(this._resources, account);
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
     const firstViewDisplayTime = 500;
@@ -372,7 +369,8 @@ export class Game {
       this._inProgress = {type: 'None'};
       this._domDialogs.hidden();
       await this._fader.fadeOut();
-      await this._startTitle();
+      const account = await this._currentTitleAccount();
+      await this._domScenes.startTitle(this._resources, account);
       await this._fader.fadeIn();
     };
 
@@ -455,7 +453,8 @@ export class Game {
   async _onSelectionCancel(): Promise<void> {
     this._inProgress = {type: 'None'};
     await this._fader.fadeOut();
-    await this._startTitle();
+    const account = await this._currentTitleAccount();
+    await this._domScenes.startTitle(this._resources, account);
     await this._fader.fadeIn();
   }
 
@@ -527,7 +526,8 @@ export class Game {
       await this._fader.fadeOut();
       await this._api.disconnectWebsocket();
       this._tdScenes.hidden();
-      await this._startTitle();
+      const account = await this._currentTitleAccount();
+      await this._domScenes.startTitle(this._resources, account);
       await this._fader.fadeIn();
     };
 
@@ -586,7 +586,8 @@ export class Game {
    */
   async _onEndNPCEnding(): Promise<void> {
     await this._fader.fadeOut();
-    await this._startTitle();
+    const account = await this._currentTitleAccount();
+    await this._domScenes.startTitle(this._resources, account);
     await this._fader.fadeIn();
   }
 
@@ -609,7 +610,8 @@ export class Game {
    */
   async _onConfigChangeCancel(): Promise<void> {
     await this._fader.fadeOut();
-    await this._startTitle();
+    const account = await this._currentTitleAccount();
+    await this._domScenes.startTitle(this._resources, account);
     await this._fader.fadeIn();
   }
 
@@ -622,7 +624,8 @@ export class Game {
   async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
     await this._fader.fadeOut();
     saveConfigToLocalStorage(action.config);
-    await this._startTitle();
+    const account = await this._currentTitleAccount();
+    await this._domScenes.startTitle(this._resources, account);
     await this._fader.fadeIn();
   }
 
@@ -657,25 +660,21 @@ export class Game {
   }
 
   /**
-   * @deprecated
-   * タイトル画面を開始するヘルパーメソッド
-   * いかなる場合でもaccount
-   * に同じ値をセットするために、ヘルパーメソッド化した
-   *    
-   * @return タイトル画面
+   * APIサーバへのログイン状況からタイトル用アカウントを生成する
+   *
+   * @return 生成したタイトル用アカウント
    */
-  async _startTitle(): Promise<Title> {
-    const guestAccount = {type: 'GuestAccount'};
-    const createLoggedInAccount = async () => {
-      const [name, pictureURL] = await Promise.all([
-        this._api.getUserName(),
-        this._api.getUserPictureURL(),
-      ]);
-      return {type: 'LoggedInAccount', name, pictureURL};
-    }
+  async _currentTitleAccount(): Promise<TitleAccount> {
     const isLogin = await this._api.isLogin();
-    const account = isLogin ? await createLoggedInAccount() : guestAccount;
-    return this._domScenes.startTitle(this._resources, account);
+    if (!isLogin) {
+      return {type: 'GuestAccount'};
+    }
+
+    const [name, pictureURL] = await Promise.all([
+      this._api.getUserName(),
+      this._api.getUserPictureURL(),
+    ]);
+    return {type: 'LoggedInAccount', name, pictureURL};
   }
 
   /**
