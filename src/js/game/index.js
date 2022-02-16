@@ -671,7 +671,6 @@ export class Game {
    * @return タイトル画面
    */
   async _startTitle(): Promise<Title> {
-    const guestAccount = {type: 'GuestAccount'};
     const createLoggedInAccount = async () => {
       const [name, pictureURL] = await Promise.all([
         this._api.getUserName(),
@@ -679,8 +678,9 @@ export class Game {
       ]);
       return {type: 'LoggedInAccount', name, pictureURL};
     }
+
     const isLogin = await this._api.isLogin();
-    const account = isLogin ? await createLoggedInAccount() : guestAccount;
+    const account = isLogin ? await createLoggedInAccount() : {type: 'GuestAccount'};
     return this._domScenes.startTitle(this._resources, account, this._isAPIServerEnable,
       this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
   }
