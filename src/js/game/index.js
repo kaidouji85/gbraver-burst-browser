@@ -95,10 +95,6 @@ export class Game {
   _isPerformanceStatsVisible: boolean;
   _isServiceWorkerUsed: boolean;
   _howToPlayMovieURL: string;
-  _termsOfServiceURL: string;
-  _privacyPolicyURL: string;
-  _contactURL: string;
-  _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
   _suddenlyBattleEndMonitor: SuddenlyBattleEndMonitor;
@@ -127,10 +123,6 @@ export class Game {
     this._isServiceWorkerUsed = param.isServiceWorkerUsed;
     this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
     this._howToPlayMovieURL = param.howToPlayMovieURL;
-    this._termsOfServiceURL = param.termsOfServiceURL;
-    this._privacyPolicyURL = param.privacyPolicyURL;
-    this._contactURL = param.contactURL;
-    this._isAPIServerEnable = param.isAPIServerEnable;
 
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
@@ -141,7 +133,8 @@ export class Game {
 
     this._fader = new DOMFader();
     this._interruptScenes = new InterruptScenes();
-    this._domScenes = new DOMScenes();
+    this._domScenes = new DOMScenes({termsOfServiceURL: param.termsOfServiceURL, contactURL: param.termsOfServiceURL,
+      privacyPolicyURL: param.privacyPolicyURL, isAPIServerEnable: param.isAPIServerEnable});
     this._domDialogs = new DOMDialogs();
     this._tdScenes = new TDScenes(this._resize);
 
@@ -664,8 +657,9 @@ export class Game {
   }
 
   /**
+   * @deprecated
    * タイトル画面を開始するヘルパーメソッド
-   * いかなる場合でもaccount、canCasualMatch、termsOfServiceURL、privacyPolicyURL
+   * いかなる場合でもaccount
    * に同じ値をセットするために、ヘルパーメソッド化した
    *    
    * @return タイトル画面
@@ -681,8 +675,7 @@ export class Game {
     }
     const isLogin = await this._api.isLogin();
     const account = isLogin ? await createLoggedInAccount() : guestAccount;
-    return this._domScenes.startTitle(this._resources, account, this._isAPIServerEnable,
-      this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
+    return this._domScenes.startTitle(this._resources, account);
   }
 
   /**

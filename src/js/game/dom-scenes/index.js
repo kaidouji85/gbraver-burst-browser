@@ -19,11 +19,22 @@ import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
 import type {StageLevel} from "../npc-battle/npc-battle-stage";
 import {Config} from "./config/config";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
+import type {Param} from "../td-scenes/battle/view/hud";
 
-/**
- * 最大読み込み待機時間(ミリ秒)
- */
+/** 最大読み込み待機時間(ミリ秒) */
 const MAX_LOADING_TIME = 10000;
+
+/** コンストラクタのパラメータ */
+type Params = {
+  /** 利用規約ページのURL */
+  termsOfServiceURL: string,
+  /** 問い合わせページのURL */
+  contactURL: string,
+  /** プライバシーポリシーページのURL */
+  privacyPolicyURL: string,
+  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
+  isAPIServerEnable: boolean,
+};
 
 /**
  * HTMLオンリーで生成されたシーンを集めたもの
@@ -32,13 +43,26 @@ const MAX_LOADING_TIME = 10000;
 export class DOMScenes {
   _root: HTMLElement;
   _scene: ?DOMScene;
+  _termsOfServiceURL: string;
+  _contactURL: string;
+  _privacyPolicyURL: string;
+  _isAPIServerEnable: boolean;
   _gameAction: StreamSource<GameAction>;
   _unsubscribers: Unsubscriber[];
 
-  constructor() {
+  /**
+   * コンストラクタ
+   *
+   * @param params パラメータ
+   */
+  constructor(params: Params) {
     this._root = document.createElement('div');
     this._gameAction = new RxjsStreamSource();
     this._scene = null;
+    this._termsOfServiceURL = params.termsOfServiceURL;
+    this._contactURL = params.contactURL;
+    this._privacyPolicyURL = params.privacyPolicyURL;
+    this._isAPIServerEnable = params.isAPIServerEnable;
     this._unsubscribers = [];
   }
 
@@ -100,16 +124,12 @@ export class DOMScenes {
    *
    * @param resources リソース管理オブジェクト
    * @param account アカウント情報
-   * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
-   * @param termsOfServiceURL 利用規約ページのURL
-   * @param privacyPolicyURL プライバシーポリシーページのURL
-   * @param contactURL 問い合わせページのURL
    * @return 開始されたタイトル画面
    */
-  async startTitle(resources: Resources, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): Promise<Title> {
+  async startTitle(resources: Resources, account: TitleAccount): Promise<Title> {
     this._removeCurrentScene();
 
-    const scene = new Title(resources, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
+    const scene = new Title(resources, account, this._isAPIServerEnable, this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
     this._unsubscribers = [
       scene.pushLoginNotifier().subscribe(() => {
         this._gameAction.next({type: 'UniversalLogin'});
