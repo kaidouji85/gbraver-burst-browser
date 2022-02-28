@@ -6,7 +6,7 @@ import type {TurnStartModel} from "./model/turn-start-model";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {show} from './animation/show';
+import {show, showWithSound} from './animation/show';
 import {hidden} from './animation/hidden';
 import {TurnStartSounds} from "./sounds/turn-start-sounds";
 import type {Resources} from "../../resource";
@@ -53,6 +53,15 @@ export class TurnStart {
    */
   show(): Animate {
     return show(this._model);
+  }
+
+  /**
+   * 効果音付きで表示する
+   *
+   * @return アニメーション
+   */
+  showWithSound(): Animate {
+    return showWithSound(this._model, this._sounds);
   }
 
   /**

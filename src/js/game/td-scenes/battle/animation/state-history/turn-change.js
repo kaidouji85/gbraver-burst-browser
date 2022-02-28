@@ -39,8 +39,8 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
       activeHUDPlayer.turnStart.show(),
       showRecoverBattery
     ).chain(delay(600))
-  ).chain(all(
-      activeHUDPlayer.turnStart.hidden(),
-      activeTDPlayer.recoverBattery.hidden(),
-  )).chain(delay(200));
+  ).chain(
+    activeHUDPlayer.turnStart.hidden(),
+    activeTDPlayer.recoverBattery.hidden(),
+  );
 }
