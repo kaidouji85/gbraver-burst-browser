@@ -6,7 +6,7 @@ import type {RecoverBatteryView} from "./view/recover-battery-view";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {popUp} from "./animation/pop-up";
+import {popUp, show, hidden} from "./animation/pop-up";
 import {RecoverBatterySounds} from "./sounds/recover-battery-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
@@ -65,6 +65,25 @@ export class RecoverBattery {
    */
   popUp(value: number): Animate {
     return popUp(this._model, this._sounds, value);
+  }
+
+  /**
+   * 表示
+   *
+   * @param value バッテリー回復量
+   * @return アニメーション
+   */
+  show(value: number): Animate {
+    return show(this._model, this._sounds, value);
+  }
+
+  /**
+   * 非表示
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**
