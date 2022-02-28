@@ -6,7 +6,6 @@ import type {TurnStartModel} from "./model/turn-start-model";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {popUp} from "./animation/pop-up";
 import {show} from './animation/show';
 import {hidden} from './animation/hidden';
 import {TurnStartSounds} from "./sounds/turn-start-sounds";
@@ -45,16 +44,6 @@ export class TurnStart {
   destructor(): void {
     this._view.destructor();
     this._unsubscriber.unsubscribe();
-  }
-
-  /**
-   * @deprecated
-   * ポップアップ
-   * 
-   * @return アニメーション
-   */
-  popUp(): Animate {
-    return popUp(this._model, this._sounds);
   }
 
   /**
