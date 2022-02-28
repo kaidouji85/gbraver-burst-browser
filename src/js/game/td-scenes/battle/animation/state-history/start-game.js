@@ -22,6 +22,5 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
 
   return activeHUDPlayer.turnStart.show()
     .chain(delay(600))
-    .chain(activeHUDPlayer.turnStart.hidden())
-    .chain(delay(200));
+    .chain(delay(200), activeHUDPlayer.turnStart.hidden());
 }
