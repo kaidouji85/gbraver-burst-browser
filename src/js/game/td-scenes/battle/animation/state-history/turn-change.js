@@ -26,16 +26,21 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     return empty();
   }
 
-  const recoverBattery = all(
-    activeTDPlayer.recoverBattery.popUp(turnChange.recoverBattery),
-    activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
-  )
-    .chain(delay(500));
-  const effects = (0 < turnChange.recoverBattery)
-    ? recoverBattery
+  const isBatteryRecover = 0 < turnChange.recoverBattery;
+  const batteryGauge = isBatteryRecover
+    ? activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
     : empty();
-  const turnStart =     activeHUDPlayer.turnStart.show()
-    .chain(delay(600))
-    .chain(activeHUDPlayer.turnStart.hidden());
-  return all(turnStart, effects);
+  const showRecoverBattery = isBatteryRecover
+    ? activeTDPlayer.recoverBattery.show(turnChange.recoverBattery)
+    : empty()
+  return all(
+    batteryGauge,
+    all(
+      activeHUDPlayer.turnStart.show(),
+      showRecoverBattery
+    ).chain(delay(600))
+  ).chain(all(
+      activeHUDPlayer.turnStart.hidden(),
+      activeTDPlayer.recoverBattery.hidden(),
+  )).chain(delay(200));
 }
