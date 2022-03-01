@@ -93,6 +93,11 @@ export class LightningDozer implements ArmDozerSprite {
     this._model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
   }
 
+  /** @override */
+  frontStep(): Animate {
+    return avoidToStand(this._model, this._sounds);
+  }
+
   /**
    * チャージ
    *

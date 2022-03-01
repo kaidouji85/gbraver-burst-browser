@@ -28,6 +28,13 @@ export interface ArmDozerSprite {
    */
   setSecondAttackerPosition(): void;
 
+  /**
+   * 前ステップ
+   *
+   * @return アニメーション
+   */
+  frontStep(): Animate;
+
   /** ノックバック */
   knockBack(): Animate;
 
