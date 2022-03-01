@@ -13,7 +13,7 @@ import {guard} from './animation/guard';
 import {guardToStand} from './animation/guard-to-stand';
 import {avoid} from "./animation/avoid";
 import {armHammer} from "./animation/arm-hammer";
-import {avoidToStand} from "./animation/avoid-to-stand";
+import {frontStep} from "./animation/front-step";
 import {charge} from "./animation/charge";
 import {hmToStand} from "./animation/hm-to-stand";
 import {down} from "./animation/down";
@@ -70,7 +70,7 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** @override */
   setFirstAttackerPosition(): void {
-    this._model.position.x = ARMDOZER_SPRITE_STANDARD_X + 100;
+    this._model.position.x = ARMDOZER_SPRITE_STANDARD_X + 50;
     this._model.position.y = ARMDOZER_SPRITE_STANDARD_Y;
     this._model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
   }
@@ -83,8 +83,8 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** @override */
-  frontStep(): Animate {
-    return avoidToStand(this._model, this._sounds);
+  firstAttacker(): Animate {
+    return frontStep(this._model, this._sounds, 50);
   }
 
   /** チャージ */
@@ -147,7 +147,7 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** 避け -> 立ち */
   avoidToStand(): Animate {
-    return avoidToStand(this._model, this._sounds);
+    return frontStep(this._model, this._sounds);
   }
 
   /** ダウン */

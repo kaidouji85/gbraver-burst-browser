@@ -29,11 +29,11 @@ export interface ArmDozerSprite {
   setSecondAttackerPosition(): void;
 
   /**
-   * 前ステップ
+   * 先行プレイヤーのポーズ
    *
    * @return アニメーション
    */
-  frontStep(): Animate;
+  firstAttacker(): Animate;
 
   /** ノックバック */
   knockBack(): Animate;
