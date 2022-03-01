@@ -16,15 +16,11 @@ import {LightningDozerTD} from "../../view/td/armdozer-objects/lightning-dozer";
  * @return アニメーション
  */
 export function updateRemainingTurnAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<UpdateRemainingTurn>): Animate {
-  const lightningDozerTDs: LightningDozerTD[] = view.td.armdozerObjects
-    .filter(v => v instanceof LightningDozerTD)
-    .map(v => ((v: any): LightningDozerTD));
   const endLightningBarrier = gameState.effect.endArmdozerEffects
     .filter(end => end.effect.type === 'TryReflect' && end.effect.effect === 'Lightning');
-  const endLightningBarrierAnimates: Animate[] = lightningDozerTDs.map(td => {
-    const hasEndEffect = endLightningBarrier.find(end => end.playerId === td.playerId);
-    return hasEndEffect ? td.lightningBarrier.hidden() : empty();
-  });
+  const endLightningBarrierAnimates: Animate[] = view.td.armdozerObjects
+    .filter(td => endLightningBarrier.find(end => end.playerId === td.playerId))
+    .map(td => td instanceof LightningDozerTD ? td.lightningBarrier.hidden() : empty());
   return empty().chain(
     delay(0),
     ...endLightningBarrierAnimates
