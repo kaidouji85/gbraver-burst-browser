@@ -16,11 +16,15 @@ import {delay, empty} from "../../../../../animation/delay";
  */
 export function startGameAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<StartGame>): Animate {
   const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeHUDPlayer) {
+  const activeTDArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameState.activePlayerId);
+
+  if (!activeHUDPlayer || !activeTDArmdozer) {
     return empty();
   }
 
-  return activeHUDPlayer.turnStart.showWithSound()
-    .chain(delay(600))
+  return delay(0).chain(
+    activeHUDPlayer.turnStart.show(),
+    activeTDArmdozer.sprite().avoidToStand(),
+  ).chain(delay(600))
     .chain(delay(200), activeHUDPlayer.turnStart.hidden());
 }

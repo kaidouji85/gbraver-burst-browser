@@ -25,6 +25,7 @@ import type {Resources} from "../../../resource";
 import {ShinBraverSounds} from "./sounds/shin-braver-sounds";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../../stream/core";
+import {ARMDOZER_SPRITE_STANDARD_X, ARMDOZER_SPRITE_STANDARD_Y, ARMDOZER_SPRITE_STANDARD_Z} from "../position";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {
@@ -66,6 +67,20 @@ export class ShinBraver implements ArmDozerSprite {
    */
   addObject3D(object: typeof THREE.Object3D): void {
     this._view.addObject3D(object);
+  }
+
+  /** @override */
+  setFirstAttackerPosition(): void {
+    this._model.position.x = ARMDOZER_SPRITE_STANDARD_X + 100;
+    this._model.position.y = ARMDOZER_SPRITE_STANDARD_Y;
+    this._model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
+  }
+
+  /** @override */
+  setSecondAttackerPosition(): void {
+    this._model.position.x = ARMDOZER_SPRITE_STANDARD_X;
+    this._model.position.y = ARMDOZER_SPRITE_STANDARD_Y;
+    this._model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
   }
 
   /** チャージ */

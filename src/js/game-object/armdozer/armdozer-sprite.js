@@ -18,6 +18,16 @@ export interface ArmDozerSprite {
    */
   addObject3D(object: typeof THREE.Object3D): void;
 
+  /**
+   * 先行プレイヤーの位置に設定
+   */
+  setFirstAttackerPosition(): void;
+
+  /**
+   * 後行プレイヤーの位置に設定
+   */
+  setSecondAttackerPosition(): void;
+
   /** ノックバック */
   knockBack(): Animate;
 
