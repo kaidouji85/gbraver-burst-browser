@@ -2,7 +2,6 @@
 
 import {Animate} from "../../../animation/animate";
 import type {TurnStartModel} from "../model/turn-start-model";
-import {all} from "../../../animation/all";
 import {tween} from "../../../animation/tween";
 
 /**
@@ -12,8 +11,5 @@ import {tween} from "../../../animation/tween";
  * @return アニメーション
  */
 export function hidden(model: TurnStartModel): Animate {
-  return all(
-    tween(model, t => t.to({opacity: 0}, 400)),
-    tween(model.position, t => t.to({x: 200}, 400))
-  )
+  return tween(model, t => t.to({opacity: 0}, 400));
 }
