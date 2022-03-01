@@ -39,7 +39,7 @@ export function lightningDozer(param: LightningDozerEndEffect<ArmdozerEffect>): 
   if (param.endArmdozerEffect.type === 'TryReflect') {
     const castEffect: TryReflect = param.endArmdozerEffect;
     const castParam = ((param: any): LightningDozerEndEffect<typeof castEffect>);
-    return tryRefrect(castParam);
+    return tryReflect(castParam);
   }
 
   return empty();
@@ -51,7 +51,7 @@ export function lightningDozer(param: LightningDozerEndEffect<ArmdozerEffect>): 
  * @param param パラメータ
  * @return アニメーション
  */
-function tryRefrect(param: LightningDozerEndEffect<TryReflect>): Animate {
+function tryReflect(param: LightningDozerEndEffect<TryReflect>): Animate {
   if (param.endArmdozerEffect.effect !== 'Lightning') {
     return empty();
   }
