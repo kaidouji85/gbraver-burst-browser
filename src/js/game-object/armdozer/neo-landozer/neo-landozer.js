@@ -83,7 +83,7 @@ export class NeoLandozer implements ArmDozerSprite {
   }
 
   /** @override */
-  firstAttacker(): Animate {
+  firstAttackerMotion(): Animate {
     return frontStep(this._model, this._sounds, 50);
   }
 

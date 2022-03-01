@@ -42,7 +42,7 @@ export function show(model: RecoverBatteryModel, sounds: RecoverBatterySounds, v
  * 非表示
  *
  * @param model モデル
- * @returns アニメーション
+ * @return アニメーション
  */
 export function hidden(model: RecoverBatteryModel): Animate {
   return tween(model, t => t.to({opacity: 0, scale: 1.1}, 400));

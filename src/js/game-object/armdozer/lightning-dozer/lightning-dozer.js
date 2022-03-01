@@ -94,7 +94,7 @@ export class LightningDozer implements ArmDozerSprite {
   }
 
   /** @override */
-  firstAttacker(): Animate {
+  firstAttackerMotion(): Animate {
     return frontStep(this._model, this._sounds, 50);
   }
 

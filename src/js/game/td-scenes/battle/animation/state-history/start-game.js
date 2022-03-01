@@ -24,7 +24,7 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
 
   return delay(0).chain(
     activeHUDPlayer.turnStart.show(),
-    activeTDArmdozer.sprite().firstAttacker(),
+    activeTDArmdozer.sprite().firstAttackerMotion(),
   ).chain(delay(600))
     .chain(delay(200), activeHUDPlayer.turnStart.hidden());
 }
