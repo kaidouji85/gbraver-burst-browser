@@ -10,7 +10,7 @@ import {charge} from "./animation/charge";
 import {upper} from "./animation/upper";
 import {upperToStand} from "./animation/upper-to-stand";
 import {avoid} from "./animation/avoid";
-import {avoidToStand} from "./animation/avoid-to-stand";
+import {frontStep} from "./animation/front-step";
 import {dash} from "./animation/dash";
 import {dashToStand} from "./animation/dash-to-stand";
 import {knockBack} from "./animation/knock-back";
@@ -23,6 +23,7 @@ import {guardToStand} from "./animation/guard-to-stand";
 import type {PreRender} from "../../../game-loop/pre-render";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../../stream/core";
+import {ARMDOZER_SPRITE_STANDARD_X, ARMDOZER_SPRITE_STANDARD_Y, ARMDOZER_SPRITE_STANDARD_Z} from "../position";
 
 /**
  * ウィングドーザ
@@ -77,6 +78,25 @@ export class WingDozer implements ArmDozerSprite {
    */
   addObject3D(object: typeof THREE.Object3D): void {
     this._view.addObject3D(object);
+  }
+
+  /** @override */
+  setFirstAttackerPosition(): void {
+    this._model.position.x = ARMDOZER_SPRITE_STANDARD_X + 50;
+    this._model.position.y = ARMDOZER_SPRITE_STANDARD_Y;
+    this._model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
+  }
+
+  /** @override */
+  setSecondAttackerPosition(): void {
+    this._model.position.x = ARMDOZER_SPRITE_STANDARD_X;
+    this._model.position.y = ARMDOZER_SPRITE_STANDARD_Y;
+    this._model.position.z = ARMDOZER_SPRITE_STANDARD_Z;
+  }
+
+  /** @override */
+  firstAttackerMotion(): Animate {
+    return frontStep(this._model, this._sounds, 50);
   }
 
   /**
@@ -148,7 +168,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   avoidToStand(): Animate {
-    return avoidToStand(this._model, this._sounds);
+    return frontStep(this._model, this._sounds);
   }
 
   /**

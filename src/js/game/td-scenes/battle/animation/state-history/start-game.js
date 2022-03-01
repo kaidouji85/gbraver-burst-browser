@@ -4,9 +4,7 @@ import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameStateX, StartGame} from "gbraver-burst-core";
-import {empty} from "../../../../../animation/delay";
-import type {MyTurnAnimationParam} from "../my-turn/animation-param";
-import {myTurnAnimation} from "../my-turn";
+import {delay, empty} from "../../../../../animation/delay";
 
 /**
  * ゲーム開始時のアニメーション
@@ -17,21 +15,16 @@ import {myTurnAnimation} from "../my-turn";
  * @return アニメーション
  */
 export function startGameAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<StartGame>): Animate {
-  const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
   const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeTDArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameState.activePlayerId);
-  const activeHUDArmdozer = view.hud.armdozers.find(v => v.playerId === gameState.activePlayerId);
-  if (!activeTDPlayer || !activeHUDPlayer || !activeTDArmdozer || !activeHUDArmdozer) {
+
+  if (!activeHUDPlayer || !activeTDArmdozer) {
     return empty();
   }
 
-  const param: MyTurnAnimationParam = {
-    tdArmdozer: activeTDArmdozer,
-    hudArmdozer: activeHUDArmdozer,
-    tdPlayer: activeTDPlayer,
-    hudPlayer: activeHUDPlayer,
-    tdCamera: view.td.camera,
-  };
-  const effects = empty();
-  return myTurnAnimation(param, effects);
+  return delay(0).chain(
+    activeHUDPlayer.turnStart.show(),
+    activeTDArmdozer.sprite().firstAttackerMotion(),
+  ).chain(delay(600))
+    .chain(delay(200), activeHUDPlayer.turnStart.hidden());
 }

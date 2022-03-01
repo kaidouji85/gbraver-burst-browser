@@ -52,7 +52,9 @@ export class EnemyTurnStartView implements TurnStartView {
     const target = this._mesh.getObject3D();
     const devicePerScale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
 
-    target.position.x = -model.position.x * devicePerScale;
+    target.position.x = -preRender.rendererDOM.clientWidth / 2
+      + preRender.safeAreaInset.left
+      + (MESH_SIZE/2 - model.position.x) * devicePerScale;
     target.position.y =  -preRender.rendererDOM.clientHeight / 2
       + preRender.safeAreaInset.bottom
       + (model.position.y + 60) * devicePerScale;

@@ -2,7 +2,7 @@
 
 import type {Resources} from '../../../../../resource';
 import * as THREE from 'three';
-import type {Player} from "gbraver-burst-core";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import type {Update} from "../../../../../game-loop/update";
 import type {PreRender} from "../../../../../game-loop/pre-render";
 import {TDCamera} from "../../../../../game-object/camera/td";
@@ -23,6 +23,7 @@ import type {Stream} from "../../../../../stream/core";
 type Param = {
   resources: Resources,
   renderer: OverlapNotifier,
+  activePlayerId: PlayerId,
   player: Player,
   enemy: Player,
   resize: Stream<Resize>,
@@ -64,11 +65,14 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
 
-
     this.armdozerObjects = [
       playerTDArmdozer(param.resources, this._gameObjectAction, param.player),
       enemyTDArmdozer(param.resources, this._gameObjectAction, param.enemy)
     ];
+    this.armdozerObjects.forEach(armdozer => {
+      armdozer.playerId === param.activePlayerId
+        ? armdozer.sprite().setFirstAttackerPosition() : armdozer.sprite().setSecondAttackerPosition();
+    })
     this.armdozerObjects.map(v => v.getObject3Ds())
       .flat()
       .forEach(v => {

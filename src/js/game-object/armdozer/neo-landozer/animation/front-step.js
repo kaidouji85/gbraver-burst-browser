@@ -1,21 +1,22 @@
 // @flow
 
 import {Animate} from "../../../../animation/animate";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import type {ShinBraverModel} from "../model/shin-braver-model";
-import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
+import {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
 import {all} from "../../../../animation/all";
 import {delay} from "../../../../animation/delay";
 
 /**
- * 避け -> 立ち
+ * フロントステップ
  *
  * @param model モデル
  * @param sounds 効果音
+ * @param distance 移動距離を絶対値で指定する
  * @return アニメーション
  */
-export function avoidToStand(model: ShinBraverModel, sounds: ShinBraverSounds): Animate {
+export function frontStep(model: NeoLandozerModel, sounds: NeoLandozerSounds, distance: number = 100): Animate {
   return process(() => {
       model.animation.type = 'FRONT_STEP';
       model.animation.frame = 0;
@@ -23,7 +24,7 @@ export function avoidToStand(model: ShinBraverModel, sounds: ShinBraverSounds): 
     })
     .chain(all(
       tween(model.animation, t => t.to({frame: 1}, 300)),
-      tween(model.position, t => t.to({x: '-100'}, 300))
+      tween(model.position, t => t.to({x: `-${Math.abs(distance)}`}, 300))
     ))
     .chain(delay(300))
     .chain(process(() => {

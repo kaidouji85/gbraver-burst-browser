@@ -20,5 +20,5 @@ export function show(model: TurnStartModel): Animate {
     .chain(all(
       tween(model, t => t.to({opacity: 1}, 400)),
       tween(model.position, t => t.to({x: 0}, 400))
-    ))
+    ));
 }

@@ -6,8 +6,6 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameStateX, TurnChange} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 import {delay, empty} from "../../../../../animation/delay";
-import type {MyTurnAnimationParam} from "../my-turn/animation-param";
-import {myTurnAnimation} from "../my-turn";
 
 /**
  * ターン変更のアニメーション
@@ -28,21 +26,21 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     return empty();
   }
 
-  const myTurnParam: MyTurnAnimationParam = {
-    tdArmdozer: activeTDArmdozer,
-    hudArmdozer: activeHUDArmdozer,
-    tdPlayer: activeTDPlayer,
-    hudPlayer: activeHUDPlayer,
-    tdCamera: view.td.camera,
-  };
-
-  const recoverBattery = all(
-    activeTDPlayer.recoverBattery.popUp(turnChange.recoverBattery),
-    activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
-  )
-    .chain(delay(500));
-  const effects = (0 < turnChange.recoverBattery)
-    ? recoverBattery
+  const isBatteryRecover = 0 < turnChange.recoverBattery;
+  const batteryGauge = isBatteryRecover
+    ? activeHUDPlayer.gauge.battery(activeStatus.armdozer.battery)
     : empty();
-  return myTurnAnimation(myTurnParam, effects);
+  const showRecoverBattery = isBatteryRecover
+    ? activeTDPlayer.recoverBattery.show(turnChange.recoverBattery)
+    : empty()
+  return all(
+    batteryGauge,
+    all(
+      activeHUDPlayer.turnStart.show(),
+      showRecoverBattery
+    ).chain(delay(600))
+  ).chain(
+    activeHUDPlayer.turnStart.hidden(),
+    activeTDPlayer.recoverBattery.hidden(),
+  );
 }
