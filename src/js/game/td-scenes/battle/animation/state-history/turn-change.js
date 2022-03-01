@@ -40,6 +40,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
       showRecoverBattery
     ).chain(delay(600))
   ).chain(
+    delay(200),
     activeHUDPlayer.turnStart.hidden(),
     activeTDPlayer.recoverBattery.hidden(),
   );
