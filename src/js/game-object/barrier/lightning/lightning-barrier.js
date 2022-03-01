@@ -88,7 +88,7 @@ export class LightningBarrierGameEffect {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this._model, this._sounds);
+    return hidden(this._model);
   }
 
   /**

@@ -4,10 +4,9 @@ import {Animate} from "../../../../../../animation/animate";
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameStateX, UpdateRemainingTurn} from "gbraver-burst-core";
-import {empty} from "../../../../../../animation/delay";
+import {delay, empty} from "../../../../../../animation/delay";
 import {lightningDozer, castLightningDozerEndEffect} from "./lightning-dozer";
 import {toEndArmDozerEffectParams} from "./animation-param";
-import {all} from "../../../../../../animation/all";
 
 /**
  * 効果継続ターン更新アニメーション
@@ -30,5 +29,8 @@ export function updateRemainingTurnAnimation(view: BattleSceneView, sceneState: 
       })
       .reduce((a, b) => a.chain(b), empty())
   );
-  return all(...animations);
+  return empty().chain(
+    delay(0),
+    ...animations
+  )
 }
