@@ -47,12 +47,11 @@ function declarationSound(sounds: BattleSceneSounds): Animate {
  */
 function declarationWithCorrect(td: TDPlayer, origin: number, correct: number, value: number): Animate {
   return td.batteryNumber.show(origin)
-    .chain(delay(500))
-    .chain(
-      td.batteryNumber.change(value),
-      td.batteryCorrect.popUp(correct)
-    )
-    .chain(delay(1000));
+    .chain(delay(300))
+    .chain(all(
+        td.batteryNumber.change(value),
+        td.batteryCorrect.popUp(correct)
+    )).chain(delay(1000));
 }
 
 /**
@@ -66,7 +65,7 @@ function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
   return process(() => {
     sounds.batteryDeclaration.play();
   })
-    .chain(delay(900))
+    .chain(delay(700))
     .chain(process(()=> {
       sounds.batteryDeclaration.play();
     }))
@@ -117,11 +116,10 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
     attackerDeclaration,
     defenderHUD.gauge.battery(defender.armdozer.battery),
     defenderDeclaration,
-  )
-    .chain(all(
-      attackerTD.batteryNumber.hidden(),
-      defenderTD.batteryNumber.hidden(),
-      view.td.gameObjects.turnIndicator.invisible(),
-    ))
-    .chain(delay(500));
+  ).chain(
+    delay(200),
+    attackerTD.batteryNumber.hidden(),
+    defenderTD.batteryNumber.hidden(),
+    view.td.gameObjects.turnIndicator.invisible()
+  );
 }
