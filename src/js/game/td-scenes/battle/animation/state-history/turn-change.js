@@ -4,7 +4,6 @@ import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameStateX, TurnChange} from "gbraver-burst-core";
-import {all} from "../../../../../animation/all";
 import {delay, empty} from "../../../../../animation/delay";
 
 /**
@@ -32,16 +31,15 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     : empty();
   const showRecoverBattery = isBatteryRecover
     ? activeTDPlayer.recoverBattery.show(turnChange.recoverBattery)
-    : empty()
-  return all(
+    : empty();
+  return empty().chain(
+    delay(800),
     batteryGauge,
-    all(
-      activeHUDPlayer.turnStart.show(),
-      showRecoverBattery
-    ).chain(delay(600))
-  ).chain(
-    delay(200),
-    activeHUDPlayer.turnStart.hidden(),
-    activeTDPlayer.recoverBattery.hidden(),
+    showRecoverBattery
+      .chain(delay(400))
+      .chain(activeTDPlayer.recoverBattery.hidden()),
+    activeHUDPlayer.turnStart.show()
+      .chain(delay(400))
+      .chain(activeHUDPlayer.turnStart.hidden()),
   );
 }

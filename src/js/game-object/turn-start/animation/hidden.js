@@ -11,5 +11,5 @@ import {tween} from "../../../animation/tween";
  * @return アニメーション
  */
 export function hidden(model: TurnStartModel): Animate {
-  return tween(model, t => t.to({opacity: 0}, 400));
+  return tween(model, t => t.to({opacity: 0}, 200));
 }

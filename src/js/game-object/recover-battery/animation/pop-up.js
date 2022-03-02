@@ -45,5 +45,5 @@ export function show(model: RecoverBatteryModel, sounds: RecoverBatterySounds, v
  * @return アニメーション
  */
 export function hidden(model: RecoverBatteryModel): Animate {
-  return tween(model, t => t.to({opacity: 0, scale: 1.1}, 400));
+  return tween(model, t => t.to({opacity: 0, scale: 1.1}, 200));
 }

@@ -22,9 +22,11 @@ export function startGameAnimation(view: BattleSceneView, sceneState: BattleScen
     return empty();
   }
 
-  return delay(0).chain(
-    activeHUDPlayer.turnStart.show(),
+  return empty().chain(
+    delay(800),
     activeTDArmdozer.sprite().firstAttackerMotion(),
-  ).chain(delay(600))
-    .chain(delay(200), activeHUDPlayer.turnStart.hidden());
+    activeHUDPlayer.turnStart.show()
+      .chain(delay(400))
+      .chain(activeHUDPlayer.turnStart.hidden()),
+  );
 }
