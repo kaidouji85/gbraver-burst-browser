@@ -84,7 +84,7 @@ export function stateAnimation(currentState: GameState, view: BattleSceneView, s
   if (currentState.effect.name === 'TurnChange') {
     const effect: TurnChange = currentState.effect;
     const state = ((currentState: any): GameStateX<typeof effect>);
-    return turnChangeAnimation(view, sceneState, state);
+    return turnChangeAnimation(view, sceneState, sounds, state);
   }
 
   if (currentState.effect.name === 'BurstEffect') {
