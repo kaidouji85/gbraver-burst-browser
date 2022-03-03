@@ -55,12 +55,9 @@ export class BattleScene implements Scene {
     this._state = createInitialState(param.player.playerId);
     this._endBattle = new RxjsStreamSource();
     this._battleProgress = param.battleProgress;
-    const activePlayerId = param.initialState.find(v => v.effect.name === 'StartGame')?.activePlayerId
-      ?? param.player.playerId;
     this._view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
-      activePlayerId,
       player: param.player,
       enemy: param.enemy,
       gameLoop: param.gameLoop,

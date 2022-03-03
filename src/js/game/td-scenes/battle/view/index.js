@@ -26,7 +26,6 @@ interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 type Param = {
   resources: Resources,
   renderer: OwnRenderer,
-  activePlayerId: PlayerId,
   player: Player,
   enemy: Player,
   gameLoop: Stream<GameLoop>,
@@ -60,7 +59,6 @@ export class BattleSceneView {
       resources: param.resources,
       renderer: param.renderer,
       safeAreaInset: this._safeAreaInset,
-      activePlayerId: param.activePlayerId,
       player: param.player,
       enemy: param.enemy,
       resize: param.resize,

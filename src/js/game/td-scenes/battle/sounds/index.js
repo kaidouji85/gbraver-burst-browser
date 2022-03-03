@@ -9,10 +9,10 @@ import {SOUND_IDS} from "../../../../resource/sound";
  */
 export class BattleSceneSounds {
   batteryDeclaration: typeof Howl;
+  batteryRecover: typeof Howl;
 
   constructor(resources: Resources) {
-    this.batteryDeclaration = resources.sounds
-      .find(v => v.id === SOUND_IDS.BATTERY_DECLARATION)
-      ?.sound ?? new Howl();
+    this.batteryDeclaration = resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_DECLARATION)?.sound ?? new Howl();
+    this.batteryRecover = resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_RECOVER)?.sound ?? new Howl();
   }
 }

@@ -60,7 +60,7 @@ export function stateAnimation(currentState: GameState, view: BattleSceneView, s
   if (currentState.effect.name === 'StartGame') {
     const effect: StartGame = currentState.effect;
     const state = ((currentState: any): GameStateX<typeof effect>);
-    return startGameAnimation(view, sceneState, state);
+    return startGameAnimation(view, sceneState, sounds, state);
   }
 
   if (currentState.effect.name === 'InputCommand') {
