@@ -13,7 +13,7 @@ import {knockBackToStand} from "./animation/knock-back-to-stand";
 import {avoid} from "./animation/avoid";
 import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
-import {avoidToStand} from "./animation/avoid-to-stand";
+import {frontStep} from "./animation/front-step";
 import {punchToStand} from "./animation/punch-to-stand";
 import {charge} from "./animation/charge";
 import {down} from "./animation/down";
@@ -128,7 +128,7 @@ export class ShinBraver implements ArmDozerSprite {
 
   /** 避け -> 立ち */
   avoidToStand(): Animate {
-    return avoidToStand(this._model, this._sounds);
+    return frontStep(this._model, this._sounds);
   }
 
   /** ダウン */

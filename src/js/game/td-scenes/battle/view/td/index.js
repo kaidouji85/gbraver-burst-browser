@@ -64,7 +64,6 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
 
-
     this.armdozerObjects = [
       playerTDArmdozer(param.resources, this._gameObjectAction, param.player),
       enemyTDArmdozer(param.resources, this._gameObjectAction, param.enemy)

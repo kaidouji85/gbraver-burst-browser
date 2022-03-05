@@ -6,10 +6,8 @@ import type {TurnStartModel} from "./model/turn-start-model";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {popUp} from "./animation/pop-up";
 import {show} from './animation/show';
 import {hidden} from './animation/hidden';
-import {TurnStartSounds} from "./sounds/turn-start-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/core";
@@ -20,7 +18,6 @@ import type {Stream, Unsubscriber} from "../../stream/core";
 export class TurnStart {
   _model: TurnStartModel;
   _view: TurnStartView;
-  _sounds: TurnStartSounds;
   _unsubscriber: Unsubscriber;
 
   /**
@@ -33,7 +30,6 @@ export class TurnStart {
   constructor(view: TurnStartView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = view;
-    this._sounds = new TurnStartSounds(resources);
     this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);
@@ -45,16 +41,6 @@ export class TurnStart {
   destructor(): void {
     this._view.destructor();
     this._unsubscriber.unsubscribe();
-  }
-
-  /**
-   * @deprecated
-   * ポップアップ
-   * 
-   * @return アニメーション
-   */
-  popUp(): Animate {
-    return popUp(this._model, this._sounds);
   }
 
   /**

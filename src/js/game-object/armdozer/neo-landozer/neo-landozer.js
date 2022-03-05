@@ -13,7 +13,7 @@ import {guard} from './animation/guard';
 import {guardToStand} from './animation/guard-to-stand';
 import {avoid} from "./animation/avoid";
 import {armHammer} from "./animation/arm-hammer";
-import {avoidToStand} from "./animation/avoid-to-stand";
+import {frontStep} from "./animation/front-step";
 import {charge} from "./animation/charge";
 import {hmToStand} from "./animation/hm-to-stand";
 import {down} from "./animation/down";
@@ -127,7 +127,7 @@ export class NeoLandozer implements ArmDozerSprite {
 
   /** 避け -> 立ち */
   avoidToStand(): Animate {
-    return avoidToStand(this._model, this._sounds);
+    return frontStep(this._model, this._sounds);
   }
 
   /** ダウン */
