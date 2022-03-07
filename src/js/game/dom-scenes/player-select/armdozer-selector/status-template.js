@@ -30,7 +30,7 @@ export function burstTemplate(burst: Burst): string[] {
  * @return 説明文
  */
 function recoverBatteryTemplate(burst: RecoverBattery): string[] {
-  return [`バッテリーを${burst.recoverBattery}回復`];
+  return [`バッテリーを${burst.recoverBattery}回復する。`];
 }
 
 /**
@@ -41,8 +41,8 @@ function recoverBatteryTemplate(burst: RecoverBattery): string[] {
  */
 function powerBuffTemplate(burst: BuffPower): string[] {
   return [
-    `バッテリーを${burst.recoverBattery}回復`,
-    `${burst.duration}ターンだけ攻撃+${burst.buffPower}`,
+    `バッテリーを${burst.recoverBattery}回復する。`,
+    `${burst.duration}ターンだけ、攻撃+${burst.buffPower}する。`,
   ];
 }
 
@@ -54,8 +54,8 @@ function powerBuffTemplate(burst: BuffPower): string[] {
  */
 function lightningBarrierTemplate(burst: LightningBarrier): string[] {
   return [
-    `バッテリーを${burst.recoverBattery}回復`,
-    `${burst.duration}ターンだけ${burst.damage}のダメージ反射`,
+    `バッテリーを${burst.recoverBattery}回復する。`,
+    `${burst.duration}ターンだけ、相手の攻撃がヒットした場合、相手に${burst.damage}ダメージを与える。`,
   ];
 }
 
@@ -67,7 +67,7 @@ function lightningBarrierTemplate(burst: LightningBarrier): string[] {
  */
 function continuousAttackTemplate(burst: ContinuousAttack): string[] {
   return [
-    `バッテリーを${burst.recoverBattery}回復`,
-    `1回だけ連続攻撃ができる`,
+    `バッテリーを${burst.recoverBattery}回復する。`,
+    `自分ターン終了時に再び自分ターンとなるが、ターン開始時のバッテリー回復はスキップする。`,
   ];
 }

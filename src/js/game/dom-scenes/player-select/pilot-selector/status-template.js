@@ -30,7 +30,7 @@ export function pilotSkillTemplate(skill: PilotSkill): string[] {
  * @return スキル文言
  */
 function recoverBatterySkillTemplate(skill: RecoverBatterySkill): string[] {
-  return [`バッテリーを${skill.recoverBattery}回復`];
+  return [`バッテリーを${skill.recoverBattery}回復する。`];
 }
 
 /**
@@ -40,7 +40,7 @@ function recoverBatterySkillTemplate(skill: RecoverBatterySkill): string[] {
  * @return スキル文言
  */
 function buffPowerSkillTemplate(skill: BuffPowerSkill): string[] {
-  return [`${skill.duration}ターンだけ攻撃+${skill.buffPower}`];
+  return [`${skill.duration}ターンだけ、攻撃+${skill.buffPower}する。`];
 }
 
 /**
@@ -49,7 +49,7 @@ function buffPowerSkillTemplate(skill: BuffPowerSkill): string[] {
  * @return スキル文言
  */
 function damageDecreaseSkillTemplate(skill: DamageDecreaseSkill): string[] {
-  return [`${skill.duration}ターンだけダメージ${skill.decrease}減少`];
+  return [`${skill.duration}ターンだけ、全てのダメージを-${skill.decrease}する。`];
 }
 
 /**
@@ -60,6 +60,6 @@ function damageDecreaseSkillTemplate(skill: DamageDecreaseSkill): string[] {
  */
 function batteryEnchantmentSkillTemplate(skill: BatteryEnchantmentSkill): string[] {
   return [
-    `2ターンだけ0より大きいバッテリーを出した場合バッテリー+${skill.batteryEnchantment}、ただし攻撃補正が半分になる`,
+    `${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnchantment}するが、攻撃補正が半分になる。`,
   ];
 }
