@@ -179,15 +179,11 @@
 
 .player-select__armdozer-status__burst {
   display: flex;
-}
-
-.player-select__armdozer-status__burst__label {
-  flex: 0 0 calc(var(--responsive-font-size) * 4);
+  flex-direction: column;
 }
 
 .player-select__armdozer-status__burst__content {
-  display: flex;
-  flex-direction: column;
+  padding-left: var(--responsive-font-size);
 }
 
 .player-select__armdozer-selector__icons {
@@ -233,15 +229,11 @@
 
 .player-select__pilot-status__skill {
   display: flex;
-}
-
-.player-select__pilot-status__skill__label {
-  flex: 0 0 calc(var(--responsive-font-size) * 3);
+  flex-direction: column;
 }
 
 .player-select__pilot-status__skill__content {
-  display: flex;
-  flex-direction: column;
+  padding-left: var(--responsive-font-size);
 }
 
 .player-select__pilot-selector__icons {

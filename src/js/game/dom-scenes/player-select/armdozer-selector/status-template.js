@@ -68,6 +68,6 @@ function lightningBarrierTemplate(burst: LightningBarrier): string[] {
 function continuousAttackTemplate(burst: ContinuousAttack): string[] {
   return [
     `バッテリーを${burst.recoverBattery}回復する。`,
-    `自分ターン終了時に再び自分ターンとなるが、ターン開始時のバッテリー回復はスキップする。`,
+    `自分ターン終了時に、バッテリー回復なしで再び自分ターンとなる。`,
   ];
 }
