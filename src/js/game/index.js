@@ -215,7 +215,7 @@ export class Game {
 
     const resourceLoading = titleResourceLoading(this._resourceRoot);
     this._resources = await resourceLoading.resources;
-    await this._startTitle();
+    const title = await this._startTitle();
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
     const firstViewDisplayTime = 500;
@@ -223,6 +223,7 @@ export class Game {
     await this._fader.fadeOut();
     invisibleFirstView();
     await this._fader.fadeIn();
+    title.startBGM();
   }
 
   /**

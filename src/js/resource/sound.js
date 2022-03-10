@@ -36,6 +36,7 @@ export const SOUND_IDS = {
   BATTERY_RECOVER: 'BATTERY_RECOVER',
   BATTERY_DECLARATION: 'BATTERY_DECLARATION',
   BENEFIT_EFFECT: 'BENEFIT_EFFECT',
+  TITLE_BGM: 'TITLE_BGM',
 };
 
 /**
@@ -60,32 +61,37 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.MOTOR,
     path: resourceRoot => `${resourceRoot.get()}/sounds/motor.mp3`,
-    volume: 0.3
+    volume: 0.8
   },
   {
     id: SOUND_IDS.LIGHTNING_ATTACK,
     path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-attack.mp3`,
-    volume: 0.3
+    volume: 0.6
   },
   {
     id: SOUND_IDS.LIGHTNING_BARRIER,
     path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-barrier.mp3`,
-    volume: 0.3
+    volume: 0.6
   },
   {
     id: SOUND_IDS.BATTERY_RECOVER,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-recover.mp3`,
-    volume: 0.3
+    volume: 0.6
   },
   {
     id: SOUND_IDS.BATTERY_DECLARATION,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-declaration.mp3`,
-    volume: 0.3
+    volume: 0.6
   },
   {
     id: SOUND_IDS.BENEFIT_EFFECT,
     path: resourceRoot => `${resourceRoot.get()}/sounds/benefit-effect.mp3`,
-    volume: 0.3
+    volume: 0.6
+  },
+  {
+    id: SOUND_IDS.TITLE_BGM,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/title-bgm.mp3`,
+    volume: 0.1
   },
 ];
 

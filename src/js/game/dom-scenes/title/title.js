@@ -152,6 +152,7 @@ export class Title implements DOMScene {
   _isLogoLoaded: Promise<void>;
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
+  _titleBGM: typeof Howl;
   _pushLogin: StreamSource<void>;
   _pushDeleteAccount: StreamSource<void>;
   _pushLogout: StreamSource<void>;
@@ -207,6 +208,8 @@ export class Title implements DOMScene {
       ?.sound ?? new Howl();
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
+    this._titleBGM = resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM)
+      ?.sound ?? new Howl();
 
     this._pushLogin = new RxjsStreamSource();
     this._pushDeleteAccount = new RxjsStreamSource();
@@ -246,13 +249,33 @@ export class Title implements DOMScene {
     ];
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
+  }
+
+  /**
+   * BGM再生を開始する
+   */
+  startBGM(): void {
+    this._titleBGM.loop(true);
+    this._titleBGM.play();
+  }
+
+  /**
+   * BGMを一時停止する
+   */
+  pauseBGM(): void {
+    this._titleBGM.pause();
+  }
+
+  /**
+   * BGMを完全停止する
+   */
+  stopBGM(): void {
+    this._titleBGM.stop();
   }
 
   /**

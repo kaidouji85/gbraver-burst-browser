@@ -39,7 +39,7 @@ export type Resources = {
 /**
  * 空のリソース管理オブジェクトを生成する
  *
- * @param reosurceRoot リソースルート
+ * @param resourceRoot リソースルート
  * @return リソース管理オブジェクト
  */
 export function emptyResources(resourceRoot: ResourceRoot): Resources {
@@ -153,7 +153,8 @@ export function fullResourceLoadingFrom(resources: Resources): ResourceLoading {
 /** タイトルで利用する音声 */
 const TITLE_SOUND_IDS = [
   SOUND_IDS.PUSH_BUTTON,
-  SOUND_IDS.CHANGE_VALUE
+  SOUND_IDS.CHANGE_VALUE,
+  SOUND_IDS.TITLE_BGM,
 ];
 
 /**
