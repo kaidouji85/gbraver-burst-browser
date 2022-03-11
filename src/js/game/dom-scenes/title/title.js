@@ -15,6 +15,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleAccount} from "./title-account";
 import {escapeHTML} from '../../../dom/escape/escape-html';
+import type {NowPlayingBGM} from '../../bgm/now-playing-bgm';
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -153,6 +154,7 @@ export class Title implements DOMScene {
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
   _titleBGM: typeof Howl;
+  _nowPlayingBGM: NowPlayingBGM;
   _pushLogin: StreamSource<void>;
   _pushDeleteAccount: StreamSource<void>;
   _pushLogout: StreamSource<void>;
@@ -166,13 +168,14 @@ export class Title implements DOMScene {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param nowPlayingBGM 再生中BGM管理オブジェクト
    * @param account アカウント情報
    * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
    * @param termsOfServiceURL 利用規約ページのURL
    * @param privacyPolicyURL プライバシーポリシーページのURL
    * @param contactURL 問い合わせページのURL
    */
-  constructor(resources: Resources, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
+  constructor(resources: Resources, nowPlayingBGM: NowPlayingBGM, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
     this._isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
@@ -210,6 +213,7 @@ export class Title implements DOMScene {
       ?.sound ?? new Howl();
     this._titleBGM = resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM)
       ?.sound ?? new Howl();
+    this._nowPlayingBGM = nowPlayingBGM;
 
     this._pushLogin = new RxjsStreamSource();
     this._pushDeleteAccount = new RxjsStreamSource();
@@ -257,25 +261,12 @@ export class Title implements DOMScene {
   }
 
   /**
-   * BGM再生を開始する
+   * タイトル画面を開始する
    */
-  startBGM(): void {
+  start(): void {
     this._titleBGM.loop(true);
     this._titleBGM.play();
-  }
-
-  /**
-   * BGMを一時停止する
-   */
-  pauseBGM(): void {
-    this._titleBGM.pause();
-  }
-
-  /**
-   * BGMを完全停止する
-   */
-  stopBGM(): void {
-    this._titleBGM.stop();
+    this._nowPlayingBGM.switch(this._titleBGM);
   }
 
   /**

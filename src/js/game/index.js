@@ -62,6 +62,8 @@ import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
+import type {NowPlayingBGM} from './bgm/now-playing-bgm';
+import {createNowPlayingBGM} from './bgm/now-playing-bgm';
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -113,6 +115,7 @@ export class Game {
   _resources: Resources;
   _isFullResourceLoaded: boolean;
   _serviceWorker: ?ServiceWorkerRegistration;
+  _nowPlayingBGM: NowPlayingBGM;
   _unsubscriber: Unsubscriber[];
 
   /**
@@ -154,6 +157,7 @@ export class Game {
     });
 
     this._serviceWorker = null;
+    this._nowPlayingBGM = createNowPlayingBGM();
 
     const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)));
     const webSocketAPIError = toWebSocketAPIErrorStream(this._api).chain(map(v => (v: GameAction)));
@@ -223,7 +227,7 @@ export class Game {
     await this._fader.fadeOut();
     invisibleFirstView();
     await this._fader.fadeIn();
-    title.startBGM();
+    title.start();
   }
 
   /**
@@ -682,7 +686,7 @@ export class Game {
 
     const isLogin = await this._api.isLogin();
     const account = isLogin ? await createLoggedInAccount() : {type: 'GuestAccount'};
-    return this._domScenes.startTitle(this._resources, account, this._isAPIServerEnable,
+    return this._domScenes.startTitle(this._resources, this._nowPlayingBGM, account, this._isAPIServerEnable,
       this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
   }
 
