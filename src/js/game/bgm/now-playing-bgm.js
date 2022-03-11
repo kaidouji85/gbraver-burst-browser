@@ -23,18 +23,18 @@ export interface NowPlayingBGM {
    * 
    * @return 現在再生中のBGM
    */
-  get(): typeof Howl;
+  get(): (typeof Howl);
 }
 
 /** NowPlayingBGMのシンプルな実装 */
 class SimpleNowPlayingBGM implements NowPlayingBGM {
-  _playingBGM: typeof Howl;
+  _playingBGM: (typeof Howl) | null;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this._playingBGM = new Howl();
+    this._playingBGM = null;
   }
 
   /** @override */
@@ -44,7 +44,7 @@ class SimpleNowPlayingBGM implements NowPlayingBGM {
 
   /** @override */
   get(): typeof Howl {
-    return this._playingBGM;
+    return this._playingBGM ?? new Howl({mute: true});
   }
 }
 

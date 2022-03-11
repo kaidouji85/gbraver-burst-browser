@@ -360,6 +360,7 @@ export class Game {
    * 遊び方ダイアログ表示
    */
   _onShowHowToPlay() {
+    this._nowPlayingBGM.get().pause();
     this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
@@ -367,6 +368,7 @@ export class Game {
    * 遊び方ダイアログを閉じる
    */
   _onEndHowToPlay() {
+    this._nowPlayingBGM.get().play();
     this._domDialogs.hidden();
   }
 
