@@ -62,8 +62,8 @@ import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
-import type {NowPlayingBGM} from './bgm/now-playing-bgm';
-import {createNowPlayingBGM} from './bgm/now-playing-bgm';
+import type {BGMManager} from './bgm/bgm-manager';
+import {createBGMManager} from './bgm/bgm-manager';
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -115,7 +115,7 @@ export class Game {
   _resources: Resources;
   _isFullResourceLoaded: boolean;
   _serviceWorker: ?ServiceWorkerRegistration;
-  _nowPlayingBGM: NowPlayingBGM;
+  _bgm: BGMManager;
   _unsubscriber: Unsubscriber[];
 
   /**
@@ -157,7 +157,7 @@ export class Game {
     });
 
     this._serviceWorker = null;
-    this._nowPlayingBGM = createNowPlayingBGM();
+    this._bgm = createBGMManager();
 
     const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)));
     const webSocketAPIError = toWebSocketAPIErrorStream(this._api).chain(map(v => (v: GameAction)));
@@ -360,7 +360,8 @@ export class Game {
    * 遊び方ダイアログ表示
    */
   _onShowHowToPlay() {
-    this._nowPlayingBGM.get().pause();
+    const bgm = this._bgm.get();
+    bgm.type === 'NowPlayingBGM' && bgm.sound.pause();
     this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
@@ -368,7 +369,8 @@ export class Game {
    * 遊び方ダイアログを閉じる
    */
   _onEndHowToPlay() {
-    this._nowPlayingBGM.get().play();
+    const bgm = this._bgm.get();
+    bgm.type === 'NowPlayingBGM' && bgm.sound.play();
     this._domDialogs.hidden();
   }
 
@@ -688,7 +690,7 @@ export class Game {
 
     const isLogin = await this._api.isLogin();
     const account = isLogin ? await createLoggedInAccount() : {type: 'GuestAccount'};
-    return this._domScenes.startTitle(this._resources, this._nowPlayingBGM, account, this._isAPIServerEnable,
+    return this._domScenes.startTitle(this._resources, this._bgm, account, this._isAPIServerEnable,
       this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
   }
 
