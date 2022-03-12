@@ -13,13 +13,16 @@ import {delay} from "../../../animation/delay";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../window/resize";
 import {all} from "../../../animation/all";
-import {BattleSceneSounds} from "./sounds";
+import {BattleSceneSounds} from "./sounds/sounds";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
+import {bgmFadeIn, bgmFadeOut} from "../../sounds/fader";
+import {wait} from "@gbraver-burst-network/browser-sdk/lib/wait/wait";
+import type {BGMManager} from "../../sounds/bgm-manager";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -27,6 +30,7 @@ interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
+  bgm: BGMManager,
   renderer: OwnRenderer,
   battleProgress: BattleProgress,
   initialState: GameState[],
@@ -47,6 +51,7 @@ export class BattleScene implements Scene {
   _exclusive: Exclusive;
   _view: BattleSceneView;
   _sounds: BattleSceneSounds;
+  _bgm: BGMManager;
   _unsubscriber: Unsubscriber[];
 
   constructor(param: Param) {
@@ -64,6 +69,7 @@ export class BattleScene implements Scene {
       resize: param.resize,
     });
     this._sounds = new BattleSceneSounds(param.resources);
+    this._bgm = param.bgm;
 
     this._unsubscriber = [
       this._view.battleActionNotifier().subscribe(action => {
@@ -101,6 +107,9 @@ export class BattleScene implements Scene {
    */
   start(): Promise<void> {
     return this._exclusive.execute(async (): Promise<void> => {
+      bgmFadeIn(this._sounds.bgm);
+      this._sounds.bgm.sound.loop(true);
+      this._bgm.switch({type: 'NowPlayingBGM', resource: this._sounds.bgm});
       await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState).play();
     });
   }
@@ -206,7 +215,8 @@ export class BattleScene implements Scene {
    * @param gameEnd ゲーム終了情報
    */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
-    await delay(1000).play();
+    bgmFadeOut(this._sounds.bgm);
+    await wait(1000);
     this._endBattle.next(gameEnd);
   }
 }

@@ -449,8 +449,8 @@ export class Game {
 
       const progress = createBattleProgress(battle);
       const config = configFromLocalStorage() ?? DefaultConfig;
-      const battleScene = this._tdScenes.startBattle(this._resources, config.webGLPixelRatio, progress, battle.player,
-        battle.enemy, battle.initialState);
+      const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, config.webGLPixelRatio, progress,
+        battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await this._fader.fadeOut();
       this._domScenes.hidden();
@@ -660,7 +660,7 @@ export class Game {
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
     const config = configFromLocalStorage() ?? DefaultConfig;
-    const battleScene = this._tdScenes.startBattle(this._resources, config.webGLPixelRatio, {progress},
+    const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, config.webGLPixelRatio, {progress},
       npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     const battleSceneReadyTime = Date.now();

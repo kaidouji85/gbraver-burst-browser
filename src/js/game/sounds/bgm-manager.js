@@ -46,6 +46,8 @@ class SimpleBGMManager implements BGMManager {
 
   /** @override */
   switch(bgm: BGM): void {
+    this._bgm.type === 'NowPlayingBGM' && this._bgm.resource.sound.stop();
+    bgm.type === 'NowPlayingBGM' && bgm.resource.sound.play();
     this._bgm = bgm;
   }
 

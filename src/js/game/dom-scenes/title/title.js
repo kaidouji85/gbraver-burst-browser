@@ -265,7 +265,6 @@ export class Title implements DOMScene {
    */
   start(): void {
     this._titleBGM.sound.loop(true);
-    this._titleBGM.sound.play();
     this._bgm.switch({type: 'NowPlayingBGM', resource: this._titleBGM});
   }
 

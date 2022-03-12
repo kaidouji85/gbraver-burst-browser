@@ -6,7 +6,7 @@ import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameStateX, TurnChange} from "gbraver-burst-core";
 import {delay, empty} from "../../../../../animation/delay";
 import {process} from '../../../../../animation/process';
-import {BattleSceneSounds} from "../../sounds";
+import {BattleSceneSounds} from "../../sounds/sounds";
 
 /**
  * ターン変更のアニメーション
