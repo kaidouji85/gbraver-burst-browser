@@ -387,6 +387,7 @@ export class Game {
     const gotoTitle = async () => {
       this._inProgress = {type: 'None'};
       this._domDialogs.hidden();
+      this._bgm.do(stopWithFadeOut);
       await this._fader.fadeOut();
       const title = await this._startTitle();
       title.playBGM();
@@ -452,6 +453,7 @@ export class Game {
       const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_01,
         config.webGLPixelRatio, progress, battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
+      this._bgm.do(stopWithFadeOut);
       await this._fader.fadeOut();
       this._domScenes.hidden();
       await this._fader.fadeIn();
