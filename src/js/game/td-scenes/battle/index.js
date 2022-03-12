@@ -1,5 +1,4 @@
 // @flow
-
 import type {Resources} from '../../../resource';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
@@ -40,9 +39,7 @@ type Param = {
   resize: Stream<Resize>
 };
 
-/**
- * 戦闘シーン
- */
+/** 戦闘シーン */
 export class BattleScene implements Scene {
   _state: BattleSceneState;
   _initialState: GameState[];
@@ -54,6 +51,11 @@ export class BattleScene implements Scene {
   _bgm: BGMManager;
   _unsubscriber: Unsubscriber[];
 
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this._exclusive = new Exclusive();
     this._initialState = param.initialState;
@@ -84,7 +86,9 @@ export class BattleScene implements Scene {
     ];
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this._view.destructor();
     this._unsubscriber.forEach(v => {
@@ -104,6 +108,8 @@ export class BattleScene implements Scene {
   /**
    * 戦闘を開始する
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
+   *
+   * @return 処理が完了したら発火するPromise
    */
   start(): Promise<void> {
     return this._exclusive.execute(async (): Promise<void> => {
@@ -118,6 +124,7 @@ export class BattleScene implements Scene {
    * バッテリー決定時の処理
    *
    * @param action アクション
+   * @return 処理が完了したら発火するPromise
    */
   async _onDecideBattery(action: DecideBattery): Promise<void> {
     this._exclusive.execute(async (): Promise<void> => {
@@ -139,6 +146,8 @@ export class BattleScene implements Scene {
 
   /**
    * バースト時の処理
+   *
+   * @return 処理が完了したら発火するPromise
    */
   async _onBurst(): Promise<void> {
     this._exclusive.execute(async () => {
@@ -161,7 +170,7 @@ export class BattleScene implements Scene {
   /**
    * パイロットスキル発動時の処理
    *
-   * @return 実行結果
+   * @return 処理が完了したら発火するPromise
    */
   async _onPilotSkill(): Promise<void> {
     this._exclusive.execute(async () => {
@@ -213,6 +222,7 @@ export class BattleScene implements Scene {
    * ゲーム終了時の処理
    *
    * @param gameEnd ゲーム終了情報
+   * @return 処理が完了したら発火するPromise
    */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
     bgmFadeOut(this._sounds.bgm);
