@@ -3,7 +3,7 @@
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
 import {Title} from "../src/js/game/dom-scenes/title/title";
-import {createBGMManager} from '../src/js/game/bgm/bgm-manager';
+import {createBGMManager} from '../src/js/game/sounds/bgm-manager';
 
 export default {
   title: 'title'

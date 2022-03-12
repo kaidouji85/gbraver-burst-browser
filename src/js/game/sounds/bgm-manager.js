@@ -1,6 +1,5 @@
 // @flow
-
-import {Howl} from 'howler';
+import type {SoundResource} from "../../resource/sound";
 
 /** BGMの状態 */
 export type BGM = NowPlayingBGM | NoBGM;
@@ -9,7 +8,7 @@ export type BGM = NowPlayingBGM | NoBGM;
 export type NowPlayingBGM = {
   type: 'NowPlayingBGM',
   /** 再生中のBGM */
-  sound: typeof Howl,
+  resource: SoundResource
 };
 
 /** BGMなし */

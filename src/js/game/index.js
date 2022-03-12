@@ -62,8 +62,9 @@ import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
-import type {BGMManager} from './bgm/bgm-manager';
-import {createBGMManager} from './bgm/bgm-manager';
+import type {BGMManager} from './sounds/bgm-manager';
+import {createBGMManager} from './sounds/bgm-manager';
+import {bgmFadeIn, bgmFadeOut} from "./sounds/fader";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -361,7 +362,7 @@ export class Game {
    */
   _onShowHowToPlay() {
     const bgm = this._bgm.get();
-    bgm.type === 'NowPlayingBGM' && bgm.sound.pause();
+    bgm.type === 'NowPlayingBGM' && bgmFadeOut(bgm.resource);
     this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
@@ -370,7 +371,7 @@ export class Game {
    */
   _onEndHowToPlay() {
     const bgm = this._bgm.get();
-    bgm.type === 'NowPlayingBGM' && bgm.sound.play();
+    bgm.type === 'NowPlayingBGM' && bgmFadeIn(bgm.resource);
     this._domDialogs.hidden();
   }
 

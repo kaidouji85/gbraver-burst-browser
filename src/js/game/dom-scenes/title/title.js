@@ -8,14 +8,15 @@ import type {PushDOM} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {pop} from "../../../dom/animation/pop";
 import {Howl} from "howler";
-import {SOUND_IDS} from "../../../resource/sound";
+import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleAccount} from "./title-account";
 import {escapeHTML} from '../../../dom/escape/escape-html';
-import type {BGMManager} from '../../bgm/bgm-manager';
+import type {BGMManager} from '../../sounds/bgm-manager';
+import type {SoundResource} from "../../../resource/sound";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -153,7 +154,7 @@ export class Title implements DOMScene {
   _isLogoLoaded: Promise<void>;
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
-  _titleBGM: typeof Howl;
+  _titleBGM: SoundResource;
   _bgm: BGMManager;
   _pushLogin: StreamSource<void>;
   _pushDeleteAccount: StreamSource<void>;
@@ -211,8 +212,7 @@ export class Title implements DOMScene {
       ?.sound ?? new Howl();
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
-    this._titleBGM = resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM)
-      ?.sound ?? new Howl();
+    this._titleBGM = resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM) ?? createEmptySoundResource();
     this._bgm = bgm;
 
     this._pushLogin = new RxjsStreamSource();
@@ -264,9 +264,9 @@ export class Title implements DOMScene {
    * タイトル画面を開始する
    */
   start(): void {
-    this._titleBGM.loop(true);
-    this._titleBGM.play();
-    this._bgm.switch({type: 'NowPlayingBGM', sound: this._titleBGM});
+    this._titleBGM.sound.loop(true);
+    this._titleBGM.sound.play();
+    this._bgm.switch({type: 'NowPlayingBGM', resource: this._titleBGM});
   }
 
   /**

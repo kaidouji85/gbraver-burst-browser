@@ -10,17 +10,22 @@ export type SoundId = string;
  * 音リソースの設定
  */
 export type SoundConfig = {
+  /** 音ID*/
   id: SoundId,
+  /** 素材のパス */
   path: (resourceRoot: ResourceRoot) => string,
+  /** 音のボリューム */
   volume: number
 };
 
-/**
- * 音リソース
- */
+/**音リソース */
 export type SoundResource = {
+  /** 音ID */
   id: SoundId,
+  /** 音声データ */
   sound: typeof Howl,
+  /** ボリューム初期設定 */
+  initialVolume: number,
 }
 
 /**
@@ -104,15 +109,8 @@ export const SOUND_CONFIGS: SoundConfig[] = [
  */
 export function loadSound(resourceRoot: ResourceRoot, config: SoundConfig): Promise<SoundResource> {
   return new Promise((resolve, reject) => {
-    const sound = new Howl({
-      src: [config.path(resourceRoot)],
-      volume: config.volume,
-    });
-    const resource: SoundResource = {
-      id: config.id,
-      sound: sound,
-    };
-
+    const sound = new Howl({src: [config.path(resourceRoot)], volume: config.volume});
+    const resource: SoundResource = {id: config.id, sound: sound, initialVolume: config.volume};
     if (sound.state() === 'loaded') {
       resolve(resource);
       return;
@@ -125,4 +123,17 @@ export function loadSound(resourceRoot: ResourceRoot, config: SoundConfig): Prom
       reject();
     });
   });
+}
+
+/**
+ * 空の音リソースを生成する
+ *
+ * @return 生成結果
+ */
+export function createEmptySoundResource(): SoundResource {
+  return {
+    id: 'EmptyResource',
+    sound: new Howl({mute: true}),
+    initialVolume: 0,
+  };
 }

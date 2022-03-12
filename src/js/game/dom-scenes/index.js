@@ -19,7 +19,7 @@ import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
 import type {StageLevel} from "../npc-battle/npc-battle-stage";
 import {Config} from "./config/config";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
-import type {BGMManager} from '../bgm/bgm-manager';
+import type {BGMManager} from '../sounds/bgm-manager';
 
 /**
  * 最大読み込み待機時間(ミリ秒)
