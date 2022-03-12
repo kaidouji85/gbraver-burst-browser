@@ -390,7 +390,8 @@ export class Game {
       this._inProgress = {type: 'None'};
       this._domDialogs.hidden();
       await this._fader.fadeOut();
-      await this._startTitle();
+      const title = await this._startTitle();
+      title.start();
       await this._fader.fadeIn();
     };
 
@@ -545,7 +546,8 @@ export class Game {
       await this._fader.fadeOut();
       await this._api.disconnectWebsocket();
       this._tdScenes.hidden();
-      await this._startTitle();
+      const scene = await this._startTitle();
+      scene.start();
       await this._fader.fadeIn();
     };
 
@@ -604,7 +606,8 @@ export class Game {
    */
   async _onEndNPCEnding(): Promise<void> {
     await this._fader.fadeOut();
-    await this._startTitle();
+    const scene = await this._startTitle();
+    scene.start();
     await this._fader.fadeIn();
   }
 

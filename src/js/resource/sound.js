@@ -1,5 +1,4 @@
 // @flow
-
 import type {ResourceRoot} from "./resource-root";
 import {Howl} from 'howler';
 
@@ -44,6 +43,7 @@ export const SOUND_IDS = {
   TITLE_BGM: 'TITLE_BGM',
   BATTLE_BGM_01: 'BATTLE_BGM_01',
   BATTLE_BGM_02: 'BATTLE_BGM_02',
+  BATTLE_BGM_03: 'BATTLE_BGM_03',
 };
 
 /**
@@ -68,46 +68,51 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.MOTOR,
     path: resourceRoot => `${resourceRoot.get()}/sounds/motor.mp3`,
-    volume: 0.8
+    volume: 1
   },
   {
     id: SOUND_IDS.LIGHTNING_ATTACK,
     path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-attack.mp3`,
-    volume: 0.6
+    volume: 1
   },
   {
     id: SOUND_IDS.LIGHTNING_BARRIER,
     path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-barrier.mp3`,
-    volume: 0.6
+    volume: 1
   },
   {
     id: SOUND_IDS.BATTERY_RECOVER,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-recover.mp3`,
-    volume: 0.6
+    volume: 1
   },
   {
     id: SOUND_IDS.BATTERY_DECLARATION,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-declaration.mp3`,
-    volume: 0.6
+    volume: 1
   },
   {
     id: SOUND_IDS.BENEFIT_EFFECT,
     path: resourceRoot => `${resourceRoot.get()}/sounds/benefit-effect.mp3`,
-    volume: 0.6
+    volume: 1
   },
   {
     id: SOUND_IDS.TITLE_BGM,
     path: resourceRoot => `${resourceRoot.get()}/sounds/title-bgm.mp3`,
-    volume: 0.1
+    volume: 0.2
   },
   {
     id: SOUND_IDS.BATTLE_BGM_01,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battle-01.mp3`,
-    volume: 0.1
+    volume: 0.2
   },
   {
     id: SOUND_IDS.BATTLE_BGM_02,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battle-02.mp3`,
+    volume: 0.2
+  },
+  {
+    id: SOUND_IDS.BATTLE_BGM_03,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/battle-03.mp3`,
     volume: 0.1
   },
 ];

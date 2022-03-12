@@ -17,6 +17,7 @@ import type {TitleAccount} from "./title-account";
 import {escapeHTML} from '../../../dom/escape/escape-html';
 import type {BGMManager} from '../../sounds/bgm-manager';
 import type {SoundResource} from "../../../resource/sound";
+import {bgmFadeIn} from "../../sounds/fader";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -265,6 +266,7 @@ export class Title implements DOMScene {
    */
   start(): void {
     this._titleBGM.sound.loop(true);
+    bgmFadeIn(this._titleBGM);
     this._bgm.switch({type: 'NowPlayingBGM', resource: this._titleBGM});
   }
 
