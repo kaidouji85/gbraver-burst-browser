@@ -33,22 +33,6 @@ export interface BGMManager {
    * @return オペレータ後のBGM
    */
   do(operator: BGMOperator): Promise<BGM>;
-
-  /**
-   * @deprecated
-   * BGMを切り替える
-   * 
-   * @param bgm 切り替えるBGM
-   */
-  switch(bgm: BGM): void;
-
-  /**
-   * @deprecated
-   * 現在のBGMを取得する
-   * 
-   * @return 取得結果
-   */
-  get(): BGM;
 }
 
 /** BGM管理オブジェクトのシンプルな実装 */
@@ -66,24 +50,6 @@ class SimpleBGMManager implements BGMManager {
   async do(operator: BGMOperator): Promise<BGM> {
     const update = await operator(this._bgm);
     this._bgm = update;
-    return this._bgm;
-  }
-
-  /** @override */
-  switch(bgm: BGM): void {
-    if (this._bgm.type === 'NowPlayingBGM' && bgm.type === 'NowPlayingBGM'
-      && this._bgm.resource.sound === bgm.resource.sound
-    ) {
-      return;
-    }
-
-    this._bgm.type === 'NowPlayingBGM' && this._bgm.resource.sound.stop();
-    bgm.type === 'NowPlayingBGM' && bgm.resource.sound.play();
-    this._bgm = bgm;
-  }
-
-  /** @override */
-  get(): BGM {
     return this._bgm;
   }
 }

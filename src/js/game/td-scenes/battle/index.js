@@ -19,10 +19,9 @@ import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
-import {bgmFadeIn, bgmFadeOut} from "../../sounds/fader";
-import {wait} from "@gbraver-burst-network/browser-sdk/lib/wait/wait";
-import type {BGMManager} from "../../sounds/bgm-manager";
+import type {BGMManager} from "../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
+import {playWithFadeIn, stopWithFadeOut} from "../../bgm/bgm-operators";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -115,9 +114,7 @@ export class BattleScene implements Scene {
    */
   start(): Promise<void> {
     return this._exclusive.execute(async (): Promise<void> => {
-      this._sounds.bgm.sound.loop(true);
-      this._bgm.switch({type: 'NowPlayingBGM', resource: this._sounds.bgm});
-      bgmFadeIn(this._sounds.bgm);
+      this._bgm.do(playWithFadeIn(this._sounds.bgm));
       await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState).play();
     });
   }
@@ -227,9 +224,7 @@ export class BattleScene implements Scene {
    * @return 処理が完了したら発火するPromise
    */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
-    bgmFadeOut(this._sounds.bgm);
-    await wait(1000);
-    this._bgm.switch({type: 'NoBGM'})
+    await this._bgm.do(stopWithFadeOut);
     this._endBattle.next(gameEnd);
   }
 }

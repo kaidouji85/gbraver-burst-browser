@@ -62,10 +62,10 @@ import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
-import type {BGMManager} from './sounds/bgm-manager';
-import {createBGMManager} from './sounds/bgm-manager';
-import {bgmFadeIn, bgmFadeOut} from "./sounds/fader";
+import type {BGMManager} from './bgm/bgm-manager';
+import {createBGMManager} from './bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
+import {fadeIn, fadeOut, stopWithFadeOut} from "./bgm/bgm-operators";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -229,7 +229,7 @@ export class Game {
     await this._fader.fadeOut();
     invisibleFirstView();
     await this._fader.fadeIn();
-    title.start();
+    title.playBGM();
   }
 
   /**
@@ -362,8 +362,7 @@ export class Game {
    * 遊び方ダイアログ表示
    */
   _onShowHowToPlay() {
-    const bgm = this._bgm.get();
-    bgm.type === 'NowPlayingBGM' && bgmFadeOut(bgm.resource);
+    this._bgm.do(fadeOut);
     this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
@@ -371,8 +370,7 @@ export class Game {
    * 遊び方ダイアログを閉じる
    */
   _onEndHowToPlay() {
-    const bgm = this._bgm.get();
-    bgm.type === 'NowPlayingBGM' && bgmFadeIn(bgm.resource);
+    this._bgm.do(fadeIn)
     this._domDialogs.hidden();
   }
 
@@ -391,7 +389,7 @@ export class Game {
       this._domDialogs.hidden();
       await this._fader.fadeOut();
       const title = await this._startTitle();
-      title.start();
+      title.playBGM();
       await this._fader.fadeIn();
     };
 
@@ -547,7 +545,7 @@ export class Game {
       await this._api.disconnectWebsocket();
       this._tdScenes.hidden();
       const scene = await this._startTitle();
-      scene.start();
+      scene.playBGM();
       await this._fader.fadeIn();
     };
 
@@ -607,7 +605,7 @@ export class Game {
   async _onEndNPCEnding(): Promise<void> {
     await this._fader.fadeOut();
     const scene = await this._startTitle();
-    scene.start();
+    scene.playBGM();
     await this._fader.fadeIn();
   }
 
@@ -670,8 +668,7 @@ export class Game {
     const battleSceneReadyTime = Date.now();
     const latency = battleSceneReadyTime - startNPCStageTitleTime;
     await waitTime(Math.max(3000- latency, 0));
-    const bgm = this._bgm.get();
-    bgm.type === 'NowPlayingBGM' && bgmFadeOut(bgm.resource);
+    this._bgm.do(stopWithFadeOut);
     await this._fader.fadeOut();
     this._domScenes.hidden();
     await this._fader.fadeIn();

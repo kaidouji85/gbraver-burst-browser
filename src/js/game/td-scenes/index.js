@@ -12,7 +12,7 @@ import {gameLoopStream} from "../../game-loop/game-loop";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import {RxjsStreamSource} from "../../stream/rxjs";
 import type {Player, GameState} from "gbraver-burst-core";
-import type {BGMManager} from "../sounds/bgm-manager";
+import type {BGMManager} from "../bgm/bgm-manager";
 import type {SoundId} from "../../resource/sound";
 
 /** three.js系シーンを集めたもの */
