@@ -16,9 +16,26 @@ export type NoBGM = {
   type: 'NoBGM',
 };
 
+/**
+ * BGMオペレータ
+ *
+ * @param bgm 現在のBGM
+ * @return オペレーション後のBGM
+ */
+export type BGMOperator = (bgm: BGM) => Promise<BGM>;
+
 /** BGM管理オブジェクト */
 export interface BGMManager {
   /**
+   * BGMに何らかの操作をする
+   *
+   * @param operator オペレータ
+   * @return オペレータ後のBGM
+   */
+  do(operator: BGMOperator): Promise<BGM>;
+
+  /**
+   * @deprecated
    * BGMを切り替える
    * 
    * @param bgm 切り替えるBGM
@@ -26,6 +43,7 @@ export interface BGMManager {
   switch(bgm: BGM): void;
 
   /**
+   * @deprecated
    * 現在のBGMを取得する
    * 
    * @return 取得結果
@@ -42,6 +60,13 @@ class SimpleBGMManager implements BGMManager {
    */
   constructor() {
     this._bgm = {type: 'NoBGM'};
+  }
+
+  /** @override */
+  async do(operator: BGMOperator): Promise<BGM> {
+    const update = await operator(this._bgm);
+    this._bgm = update;
+    return this._bgm;
   }
 
   /** @override */

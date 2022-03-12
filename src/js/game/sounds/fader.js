@@ -2,6 +2,7 @@
 import type {SoundResource} from "../../resource/sound";
 
 /**
+ * @deprecated
  * BGMをフェードアウトする
  *
  * @param bgm 操作対象のBGM
@@ -11,6 +12,7 @@ export function bgmFadeOut(bgm: SoundResource): void {
 }
 
 /**
+ * @deprecated
  * BGMをフェードインする
  *
  * @param bgm 操作対象のBGM

@@ -16,8 +16,8 @@ import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleAccount} from "./title-account";
 import {escapeHTML} from '../../../dom/escape/escape-html';
 import type {BGMManager} from '../../sounds/bgm-manager';
+import {playWithFadeIn} from "../../sounds/bgm-operators";
 import type {SoundResource} from "../../../resource/sound";
-import {bgmFadeIn} from "../../sounds/fader";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -264,10 +264,8 @@ export class Title implements DOMScene {
   /**
    * タイトル画面を開始する
    */
-  start(): void {
-    this._titleBGM.sound.loop(true);
-    bgmFadeIn(this._titleBGM);
-    this._bgm.switch({type: 'NowPlayingBGM', resource: this._titleBGM});
+  start() {
+    this._bgm.do(playWithFadeIn(this._titleBGM));
   }
 
   /**
