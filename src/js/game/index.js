@@ -65,6 +65,7 @@ import {DefaultConfig} from "./config/default-config";
 import type {BGMManager} from './sounds/bgm-manager';
 import {createBGMManager} from './sounds/bgm-manager';
 import {bgmFadeIn, bgmFadeOut} from "./sounds/fader";
+import {SOUND_IDS} from "../resource/sound";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -449,8 +450,8 @@ export class Game {
 
       const progress = createBattleProgress(battle);
       const config = configFromLocalStorage() ?? DefaultConfig;
-      const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, config.webGLPixelRatio, progress,
-        battle.player, battle.enemy, battle.initialState);
+      const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_01,
+        config.webGLPixelRatio, progress, battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await this._fader.fadeOut();
       this._domScenes.hidden();
@@ -660,8 +661,8 @@ export class Game {
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
     const config = configFromLocalStorage() ?? DefaultConfig;
-    const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, config.webGLPixelRatio, {progress},
-      npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
+    const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_02, config.webGLPixelRatio,
+      {progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     const battleSceneReadyTime = Date.now();
     const latency = battleSceneReadyTime - startNPCStageTitleTime;

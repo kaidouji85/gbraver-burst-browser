@@ -22,6 +22,7 @@ import {RxjsStreamSource} from "../../../stream/rxjs";
 import {bgmFadeIn, bgmFadeOut} from "../../sounds/fader";
 import {wait} from "@gbraver-burst-network/browser-sdk/lib/wait/wait";
 import type {BGMManager} from "../../sounds/bgm-manager";
+import type {SoundId} from "../../../resource/sound";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -30,6 +31,7 @@ interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 type Param = {
   resources: Resources,
   bgm: BGMManager,
+  playingBGM: SoundId,
   renderer: OwnRenderer,
   battleProgress: BattleProgress,
   initialState: GameState[],
@@ -70,7 +72,7 @@ export class BattleScene implements Scene {
       gameLoop: param.gameLoop,
       resize: param.resize,
     });
-    this._sounds = new BattleSceneSounds(param.resources);
+    this._sounds = new BattleSceneSounds(param.resources, param.playingBGM);
     this._bgm = param.bgm;
 
     this._unsubscriber = [

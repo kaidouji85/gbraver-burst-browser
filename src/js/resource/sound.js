@@ -43,6 +43,7 @@ export const SOUND_IDS = {
   BENEFIT_EFFECT: 'BENEFIT_EFFECT',
   TITLE_BGM: 'TITLE_BGM',
   BATTLE_BGM_01: 'BATTLE_BGM_01',
+  BATTLE_BGM_02: 'BATTLE_BGM_02',
 };
 
 /**
@@ -102,6 +103,11 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.BATTLE_BGM_01,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battle-01.mp3`,
+    volume: 0.1
+  },
+  {
+    id: SOUND_IDS.BATTLE_BGM_02,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/battle-02.mp3`,
     volume: 0.1
   },
 ];
