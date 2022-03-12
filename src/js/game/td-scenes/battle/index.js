@@ -113,9 +113,9 @@ export class BattleScene implements Scene {
    */
   start(): Promise<void> {
     return this._exclusive.execute(async (): Promise<void> => {
-      bgmFadeIn(this._sounds.bgm);
       this._sounds.bgm.sound.loop(true);
       this._bgm.switch({type: 'NowPlayingBGM', resource: this._sounds.bgm});
+      bgmFadeIn(this._sounds.bgm);
       await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState).play();
     });
   }
@@ -227,6 +227,7 @@ export class BattleScene implements Scene {
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
     bgmFadeOut(this._sounds.bgm);
     await wait(1000);
+    this._bgm.switch({type: 'NoBGM'})
     this._endBattle.next(gameEnd);
   }
 }

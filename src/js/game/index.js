@@ -666,6 +666,8 @@ export class Game {
     const battleSceneReadyTime = Date.now();
     const latency = battleSceneReadyTime - startNPCStageTitleTime;
     await waitTime(Math.max(3000- latency, 0));
+    const bgm = this._bgm.get();
+    bgm.type === 'NowPlayingBGM' && bgmFadeOut(bgm.resource);
     await this._fader.fadeOut();
     this._domScenes.hidden();
     await this._fader.fadeIn();
