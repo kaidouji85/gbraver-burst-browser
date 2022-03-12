@@ -15,89 +15,104 @@ import {hardLightningDozer} from "../../npc/hard-lightning-dozer";
 import {hardShinBraver} from "../../npc/hard-shin-braver";
 import {hardWingDozerNPC} from "../../npc/hard-wing-dozer";
 import {hardNeoLandozer} from "../../npc/hard-neo-landozer";
+import {SOUND_IDS} from "../../resource/sound";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
   caption: ['敵よりも大きい', 'バッテリーを出せ'],
-  npc: oneBatteryNeoLandozerNPC()
+  npc: oneBatteryNeoLandozerNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** 1バッテリー シンブレイバー */
 const OneBatteryShinBraverStage: NPCBattleStage = {
   caption: OneBatteryNeoLandozerStage.caption,
   npc: oneBatteryShinBraverNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** 全力攻撃 ウィングドーザ */
 const MaxAttackWingDozerStage: NPCBattleStage = {
   caption: ['ゼロ防御だと即', '死する'],
-  npc: maxBatteryAttackWingDozerNPC()
+  npc: maxBatteryAttackWingDozerNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_02,
 };
 
 /** 全力攻撃 シンブレイバー */
 const MaxAttackShinBraverStage: NPCBattleStage = {
   caption: MaxAttackWingDozerStage.caption,
-  npc: maxBatteryAttackShinBraverNPC()
+  npc: maxBatteryAttackShinBraverNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** 3攻撃2防御 ライトングドーザ */
 const Attack3Defense2LightningDozerStage: NPCBattleStage = {
   caption: ['相手のバッテリー', '切れを狙え'],
-  npc: attack3Defense2LightningDozerNPC()
+  npc: attack3Defense2LightningDozerNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** 3攻撃2防御 シンブレイバー */
 const Attack3Defense2ShinBraverStage: NPCBattleStage = {
   caption: Attack3Defense2LightningDozerStage.caption,
-  npc: attack3Defense2ShinBraverNPC()
+  npc: attack3Defense2ShinBraverNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ノーマルコース シンブレイバー */
 const NormalShinBraverStage: NPCBattleStage = {
   caption: ['バーストでバッテリー', '回復せよ'],
   npc: normalShinBraver(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ノーマルコース ネオランドーザ */
 const NormalNeoLandozerStage: NPCBattleStage = {
   caption: ['同じバッテリーならダメージ', '半減'],
   npc: normalNeoLandozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ノーマルコース ウィングドーザ */
 const NormalWingDozerStage: NPCBattleStage = {
   caption: ['バースト、', 'パイロットをフル活用しろ'],
   npc: normalWingDozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ノーマルコース ライトニングドーザ */
 const NormalLightningDozer: NPCBattleStage = {
   caption: ['0攻撃で', 'バリアをやり過ごせ'],
-  npc: normalLightningDozer()
+  npc: normalLightningDozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ハードコース シンブレイバー */
 const HardShinBraver: NPCBattleStage = {
   caption: ['荒削りの英雄、', 'シンブレイバー'],
   npc: hardShinBraver(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ハードコース ウィングドーザ */
 const HardWingDozer: NPCBattleStage = {
   caption: ['音速の騎士、', 'ウィングドーザ'],
-  npc: hardWingDozerNPC()
+  npc: hardWingDozerNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ハードコース ネオランドーザ */
 const HardNeoLandozer: NPCBattleStage = {
   caption: ['究極の破壊神、', 'ネオランドーザ'],
-  npc: hardNeoLandozer()
+  npc: hardNeoLandozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ハードコース ライトニングドーザ */
 const HardLightningDozer: NPCBattleStage = {
   caption: ['不屈の守護神、', 'ライトニングドーザ'],
-  npc: hardLightningDozer()
+  npc: hardLightningDozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** デフォルトのコース */
