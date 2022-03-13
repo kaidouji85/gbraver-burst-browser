@@ -1,7 +1,15 @@
 // @flow
-import type {BGM, BGMOperator} from "./bgm-manager";
 import {wait} from "@gbraver-burst-network/browser-sdk/lib/wait/wait";
 import type {SoundResource} from "../../resource/sound";
+import type {BGM} from "./bgm";
+
+/**
+ * BGMオペレータ
+ *
+ * @param bgm 現在のBGM
+ * @return オペレーション後のBGM
+ */
+export type BGMOperator = (bgm: BGM) => Promise<BGM>;
 
 /** フェードアウト */
 export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {

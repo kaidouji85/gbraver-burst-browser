@@ -1,28 +1,6 @@
 // @flow
-import type {SoundResource} from "../../resource/sound";
-
-/** BGMの状態 */
-export type BGM = NowPlayingBGM | NoBGM;
-
-/** BGM再生中 */
-export type NowPlayingBGM = {
-  type: 'NowPlayingBGM',
-  /** 再生中のBGM */
-  resource: SoundResource
-};
-
-/** BGMなし */
-export type NoBGM = {
-  type: 'NoBGM',
-};
-
-/**
- * BGMオペレータ
- *
- * @param bgm 現在のBGM
- * @return オペレーション後のBGM
- */
-export type BGMOperator = (bgm: BGM) => Promise<BGM>;
+import type {BGM} from "./bgm";
+import type {BGMOperator} from "./bgm-operators";
 
 /** BGM管理オブジェクト */
 export interface BGMManager {
