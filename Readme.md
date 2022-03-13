@@ -132,9 +132,12 @@ npm run start:storybook
 # ブラウザからlocalhost:6006を開く
 ```
 
-## メカデザイン協力
-
+## スペシャルサンクス
+### メカザイン
 本ゲームのキャラクターは [DOGAL3](http://doga.jp/2010/programs/dogal/dogal3/index.html) で作成しました。
 絵心がなくてもカッコいいメカが作れる、とても素晴らしいツールです。
 
 [![doga-banner](dogabn00.gif)](http://doga.jp/2010/index.html)
+
+### 楽曲提供
+本作は[魔王魂](https://maou.audio)様の楽曲を利用させて頂いております。

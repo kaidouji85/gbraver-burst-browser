@@ -8,13 +8,16 @@ import type {PushDOM} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {pop} from "../../../dom/animation/pop";
 import {Howl} from "howler";
-import {SOUND_IDS} from "../../../resource/sound";
+import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleAccount} from "./title-account";
 import {escapeHTML} from '../../../dom/escape/escape-html';
+import type {BGMManager} from '../../bgm/bgm-manager';
+import {playWithFadeIn} from "../../bgm/bgm-operators";
+import type {SoundResource} from "../../../resource/sound";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -152,6 +155,8 @@ export class Title implements DOMScene {
   _isLogoLoaded: Promise<void>;
   _changeValue: typeof Howl;
   _pushButton: typeof Howl;
+  _titleBGM: SoundResource;
+  _bgm: BGMManager;
   _pushLogin: StreamSource<void>;
   _pushDeleteAccount: StreamSource<void>;
   _pushLogout: StreamSource<void>;
@@ -165,13 +170,14 @@ export class Title implements DOMScene {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param bgm BGM管理オブジェクト
    * @param account アカウント情報
    * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
    * @param termsOfServiceURL 利用規約ページのURL
    * @param privacyPolicyURL プライバシーポリシーページのURL
    * @param contactURL 問い合わせページのURL
    */
-  constructor(resources: Resources, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
+  constructor(resources: Resources, bgm: BGMManager, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
     this._exclusive = new Exclusive();
     this._isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
@@ -207,6 +213,8 @@ export class Title implements DOMScene {
       ?.sound ?? new Howl();
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
+    this._titleBGM = resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM) ?? createEmptySoundResource();
+    this._bgm = bgm;
 
     this._pushLogin = new RxjsStreamSource();
     this._pushDeleteAccount = new RxjsStreamSource();
@@ -246,13 +254,18 @@ export class Title implements DOMScene {
     ];
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
+  }
+
+  /**
+   * BGMを再生開始する
+   */
+  playBGM() {
+    this._bgm.do(playWithFadeIn(this._titleBGM));
   }
 
   /**

@@ -62,6 +62,10 @@ import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
+import type {BGMManager} from './bgm/bgm-manager';
+import {createBGMManager} from './bgm/bgm-manager';
+import {SOUND_IDS} from "../resource/sound";
+import {fadeIn, fadeOut, stopWithFadeOut} from "./bgm/bgm-operators";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -113,6 +117,7 @@ export class Game {
   _resources: Resources;
   _isFullResourceLoaded: boolean;
   _serviceWorker: ?ServiceWorkerRegistration;
+  _bgm: BGMManager;
   _unsubscriber: Unsubscriber[];
 
   /**
@@ -154,6 +159,7 @@ export class Game {
     });
 
     this._serviceWorker = null;
+    this._bgm = createBGMManager();
 
     const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)));
     const webSocketAPIError = toWebSocketAPIErrorStream(this._api).chain(map(v => (v: GameAction)));
@@ -215,7 +221,7 @@ export class Game {
 
     const resourceLoading = titleResourceLoading(this._resourceRoot);
     this._resources = await resourceLoading.resources;
-    await this._startTitle();
+    const title = await this._startTitle();
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
     const firstViewDisplayTime = 500;
@@ -223,6 +229,7 @@ export class Game {
     await this._fader.fadeOut();
     invisibleFirstView();
     await this._fader.fadeIn();
+    title.playBGM();
   }
 
   /**
@@ -355,6 +362,7 @@ export class Game {
    * 遊び方ダイアログ表示
    */
   _onShowHowToPlay() {
+    this._bgm.do(fadeOut);
     this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
   }
 
@@ -362,6 +370,7 @@ export class Game {
    * 遊び方ダイアログを閉じる
    */
   _onEndHowToPlay() {
+    this._bgm.do(fadeIn)
     this._domDialogs.hidden();
   }
 
@@ -378,9 +387,11 @@ export class Game {
     const gotoTitle = async () => {
       this._inProgress = {type: 'None'};
       this._domDialogs.hidden();
+      this._bgm.do(stopWithFadeOut);
       await this._fader.fadeOut();
-      await this._startTitle();
+      const title = await this._startTitle();
       await this._fader.fadeIn();
+      title.playBGM();
     };
 
     if (action.postNetworkError.type === 'Close') {
@@ -439,9 +450,10 @@ export class Game {
 
       const progress = createBattleProgress(battle);
       const config = configFromLocalStorage() ?? DefaultConfig;
-      const battleScene = this._tdScenes.startBattle(this._resources, config.webGLPixelRatio, progress, battle.player,
-        battle.enemy, battle.initialState);
+      const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_01,
+        config.webGLPixelRatio, progress, battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
+      this._bgm.do(stopWithFadeOut);
       await this._fader.fadeOut();
       this._domScenes.hidden();
       await this._fader.fadeIn();
@@ -526,16 +538,18 @@ export class Game {
       await this._fader.fadeOut();
       this._tdScenes.hidden();
       this._suddenlyBattleEndMonitor.unbind();
-      await this._domScenes.startNPCEnding(this._resources);
+      const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
       await this._fader.fadeIn();
+      ending.playBGM();
     };
     const endCasualMatch = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       await this._api.disconnectWebsocket();
       this._tdScenes.hidden();
-      await this._startTitle();
+      const title = await this._startTitle();
       await this._fader.fadeIn();
+      title.playBGM();
     };
 
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'InNPCBattleCourse') {
@@ -592,9 +606,11 @@ export class Game {
    * NPC戦闘エンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
+    this._bgm.do(stopWithFadeOut);
     await this._fader.fadeOut();
-    await this._startTitle();
+    const title = await this._startTitle();
     await this._fader.fadeIn();
+    title.playBGM();
   }
 
   /**
@@ -650,12 +666,13 @@ export class Game {
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
     const config = configFromLocalStorage() ?? DefaultConfig;
-    const battleScene = this._tdScenes.startBattle(this._resources, config.webGLPixelRatio, {progress},
-      npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
+    const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, stage.bgm, config.webGLPixelRatio,
+      {progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     const battleSceneReadyTime = Date.now();
     const latency = battleSceneReadyTime - startNPCStageTitleTime;
     await waitTime(Math.max(3000- latency, 0));
+    this._bgm.do(stopWithFadeOut);
     await this._fader.fadeOut();
     this._domScenes.hidden();
     await this._fader.fadeIn();
@@ -681,7 +698,7 @@ export class Game {
 
     const isLogin = await this._api.isLogin();
     const account = isLogin ? await createLoggedInAccount() : {type: 'GuestAccount'};
-    return this._domScenes.startTitle(this._resources, account, this._isAPIServerEnable,
+    return this._domScenes.startTitle(this._resources, this._bgm, account, this._isAPIServerEnable,
       this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
   }
 

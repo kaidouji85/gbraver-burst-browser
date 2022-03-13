@@ -1,5 +1,4 @@
 // @flow
-
 import type {ResourceRoot} from "./resource-root";
 import {Howl} from 'howler';
 
@@ -10,17 +9,22 @@ export type SoundId = string;
  * 音リソースの設定
  */
 export type SoundConfig = {
+  /** 音ID*/
   id: SoundId,
+  /** 素材のパス */
   path: (resourceRoot: ResourceRoot) => string,
+  /** 音のボリューム */
   volume: number
 };
 
-/**
- * 音リソース
- */
+/**音リソース */
 export type SoundResource = {
+  /** 音ID */
   id: SoundId,
+  /** 音声データ */
   sound: typeof Howl,
+  /** ボリューム初期設定 */
+  initialVolume: number,
 }
 
 /**
@@ -36,6 +40,11 @@ export const SOUND_IDS = {
   BATTERY_RECOVER: 'BATTERY_RECOVER',
   BATTERY_DECLARATION: 'BATTERY_DECLARATION',
   BENEFIT_EFFECT: 'BENEFIT_EFFECT',
+  TITLE_BGM: 'TITLE_BGM',
+  BATTLE_BGM_01: 'BATTLE_BGM_01',
+  BATTLE_BGM_02: 'BATTLE_BGM_02',
+  BATTLE_BGM_03: 'BATTLE_BGM_03',
+  NPC_ENDING: 'NPC_ENDING',
 };
 
 /**
@@ -50,7 +59,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.CHANGE_VALUE,
     path: resourceRoot => `${resourceRoot.get()}/sounds/change-value.mp3`,
-    volume: 1
+    volume: 0.4
   },
   {
     id: SOUND_IDS.MECHA_IMPACT,
@@ -60,32 +69,57 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.MOTOR,
     path: resourceRoot => `${resourceRoot.get()}/sounds/motor.mp3`,
-    volume: 0.3
+    volume: 1
   },
   {
     id: SOUND_IDS.LIGHTNING_ATTACK,
     path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-attack.mp3`,
-    volume: 0.3
+    volume: 1
   },
   {
     id: SOUND_IDS.LIGHTNING_BARRIER,
     path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-barrier.mp3`,
-    volume: 0.3
+    volume: 1
   },
   {
     id: SOUND_IDS.BATTERY_RECOVER,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-recover.mp3`,
-    volume: 0.3
+    volume: 1
   },
   {
     id: SOUND_IDS.BATTERY_DECLARATION,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-declaration.mp3`,
-    volume: 0.3
+    volume: 1
   },
   {
     id: SOUND_IDS.BENEFIT_EFFECT,
     path: resourceRoot => `${resourceRoot.get()}/sounds/benefit-effect.mp3`,
-    volume: 0.3
+    volume: 1
+  },
+  {
+    id: SOUND_IDS.TITLE_BGM,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/title-bgm.mp3`,
+    volume: 0.2
+  },
+  {
+    id: SOUND_IDS.BATTLE_BGM_01,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/battle-01.mp3`,
+    volume: 0.2
+  },
+  {
+    id: SOUND_IDS.BATTLE_BGM_02,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/battle-02.mp3`,
+    volume: 0.2
+  },
+  {
+    id: SOUND_IDS.BATTLE_BGM_03,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/battle-03.mp3`,
+    volume: 0.2
+  },
+  {
+    id: SOUND_IDS.NPC_ENDING,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/npc-ending.mp3`,
+    volume: 0.2
   },
 ];
 
@@ -98,15 +132,8 @@ export const SOUND_CONFIGS: SoundConfig[] = [
  */
 export function loadSound(resourceRoot: ResourceRoot, config: SoundConfig): Promise<SoundResource> {
   return new Promise((resolve, reject) => {
-    const sound = new Howl({
-      src: [config.path(resourceRoot)],
-      volume: config.volume,
-    });
-    const resource: SoundResource = {
-      id: config.id,
-      sound: sound,
-    };
-
+    const sound = new Howl({src: [config.path(resourceRoot)], volume: config.volume});
+    const resource: SoundResource = {id: config.id, sound: sound, initialVolume: config.volume};
     if (sound.state() === 'loaded') {
       resolve(resource);
       return;
@@ -119,4 +146,17 @@ export function loadSound(resourceRoot: ResourceRoot, config: SoundConfig): Prom
       reject();
     });
   });
+}
+
+/**
+ * 空の音リソースを生成する
+ *
+ * @return 生成結果
+ */
+export function createEmptySoundResource(): SoundResource {
+  return {
+    id: 'EmptyResource',
+    sound: new Howl({mute: true}),
+    initialVolume: 0,
+  };
 }

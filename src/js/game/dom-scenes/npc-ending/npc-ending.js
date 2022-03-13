@@ -2,7 +2,7 @@
 import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
 import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
+import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import {domUuid} from "../../../uuid/dom-uuid";
@@ -10,6 +10,9 @@ import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {PathIds} from "../../../resource/path";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
+import type {SoundResource} from "../../../resource/sound";
+import type {BGMManager} from "../../bgm/bgm-manager";
+import {playWithFadeIn} from "../../bgm/bgm-operators";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'npc-ending';
@@ -61,6 +64,8 @@ export class NPCEnding implements DOMScene {
   _isEndLoaded: Promise<void>;
   _isLogoLoader: Promise<void>;
   _pushButtonSound: typeof Howl;
+  _bgm: BGMManager;
+  _endingBGM: SoundResource;
   _canOperation: boolean;
   _endNPCEnding: StreamSource<void>;
   _unsubscriber: Unsubscriber[];
@@ -69,8 +74,9 @@ export class NPCEnding implements DOMScene {
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param bgm BGM管理オブジェクト
    */
-  constructor(resources: Resources) {
+  constructor(resources: Resources, bgm: BGMManager) {
     const ids = {end: domUuid(), logo: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS;
@@ -88,6 +94,8 @@ export class NPCEnding implements DOMScene {
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
 
     this._pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this._bgm = bgm;
+    this._endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.NPC_ENDING) ?? createEmptySoundResource();
     this._canOperation = true;
     this._endNPCEnding = new RxjsStreamSource();
     this._unsubscriber = [
@@ -107,6 +115,13 @@ export class NPCEnding implements DOMScene {
   /** @override */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * BGMの再生開始
+   */
+  playBGM(): void {
+    this._bgm.do(playWithFadeIn(this._endingBGM));
   }
 
   /**

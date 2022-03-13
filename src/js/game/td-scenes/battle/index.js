@@ -1,5 +1,4 @@
 // @flow
-
 import type {Resources} from '../../../resource';
 import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
@@ -13,13 +12,16 @@ import {delay} from "../../../animation/delay";
 import type {Scene} from "../scene";
 import type {Resize} from "../../../window/resize";
 import {all} from "../../../animation/all";
-import {BattleSceneSounds} from "./sounds";
+import {BattleSceneSounds} from "./sounds/sounds";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {BGMManager} from "../../bgm/bgm-manager";
+import type {SoundId} from "../../../resource/sound";
+import {playWithFadeIn, stopWithFadeOut} from "../../bgm/bgm-operators";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -27,6 +29,8 @@ interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
+  bgm: BGMManager,
+  playingBGM: SoundId,
   renderer: OwnRenderer,
   battleProgress: BattleProgress,
   initialState: GameState[],
@@ -36,9 +40,7 @@ type Param = {
   resize: Stream<Resize>
 };
 
-/**
- * 戦闘シーン
- */
+/** 戦闘シーン */
 export class BattleScene implements Scene {
   _state: BattleSceneState;
   _initialState: GameState[];
@@ -47,8 +49,14 @@ export class BattleScene implements Scene {
   _exclusive: Exclusive;
   _view: BattleSceneView;
   _sounds: BattleSceneSounds;
+  _bgm: BGMManager;
   _unsubscriber: Unsubscriber[];
 
+  /**
+   * コンストラクタ
+   *
+   * @param param パラメータ
+   */
   constructor(param: Param) {
     this._exclusive = new Exclusive();
     this._initialState = param.initialState;
@@ -63,7 +71,8 @@ export class BattleScene implements Scene {
       gameLoop: param.gameLoop,
       resize: param.resize,
     });
-    this._sounds = new BattleSceneSounds(param.resources);
+    this._sounds = new BattleSceneSounds(param.resources, param.playingBGM);
+    this._bgm = param.bgm;
 
     this._unsubscriber = [
       this._view.battleActionNotifier().subscribe(action => {
@@ -78,7 +87,9 @@ export class BattleScene implements Scene {
     ];
   }
 
-  /** デストラクタ */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this._view.destructor();
     this._unsubscriber.forEach(v => {
@@ -98,9 +109,12 @@ export class BattleScene implements Scene {
   /**
    * 戦闘を開始する
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
+   *
+   * @return 処理が完了したら発火するPromise
    */
   start(): Promise<void> {
     return this._exclusive.execute(async (): Promise<void> => {
+      this._bgm.do(playWithFadeIn(this._sounds.bgm));
       await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState).play();
     });
   }
@@ -109,6 +123,7 @@ export class BattleScene implements Scene {
    * バッテリー決定時の処理
    *
    * @param action アクション
+   * @return 処理が完了したら発火するPromise
    */
   async _onDecideBattery(action: DecideBattery): Promise<void> {
     this._exclusive.execute(async (): Promise<void> => {
@@ -130,6 +145,8 @@ export class BattleScene implements Scene {
 
   /**
    * バースト時の処理
+   *
+   * @return 処理が完了したら発火するPromise
    */
   async _onBurst(): Promise<void> {
     this._exclusive.execute(async () => {
@@ -152,7 +169,7 @@ export class BattleScene implements Scene {
   /**
    * パイロットスキル発動時の処理
    *
-   * @return 実行結果
+   * @return 処理が完了したら発火するPromise
    */
   async _onPilotSkill(): Promise<void> {
     this._exclusive.execute(async () => {
@@ -204,9 +221,10 @@ export class BattleScene implements Scene {
    * ゲーム終了時の処理
    *
    * @param gameEnd ゲーム終了情報
+   * @return 処理が完了したら発火するPromise
    */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
-    await delay(1000).play();
+    await this._bgm.do(stopWithFadeOut);
     this._endBattle.next(gameEnd);
   }
 }

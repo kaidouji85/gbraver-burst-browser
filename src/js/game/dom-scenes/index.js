@@ -19,6 +19,7 @@ import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
 import type {StageLevel} from "../npc-battle/npc-battle-stage";
 import {Config} from "./config/config";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
+import type {BGMManager} from '../bgm/bgm-manager';
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -99,6 +100,7 @@ export class DOMScenes {
    * 新しくタイトル画面を開始する
    *
    * @param resources リソース管理オブジェクト
+   * @param bgm BGM管理オブジェクト
    * @param account アカウント情報
    * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
    * @param termsOfServiceURL 利用規約ページのURL
@@ -106,10 +108,10 @@ export class DOMScenes {
    * @param contactURL 問い合わせページのURL
    * @return 開始されたタイトル画面
    */
-  async startTitle(resources: Resources, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): Promise<Title> {
+  async startTitle(resources: Resources, bgm: BGMManager, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): Promise<Title> {
     this._removeCurrentScene();
 
-    const scene = new Title(resources, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
+    const scene = new Title(resources, bgm, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._unsubscribers = [
       scene.pushLoginNotifier().subscribe(() => {
         this._gameAction.next({type: 'UniversalLogin'});
@@ -230,12 +232,13 @@ export class DOMScenes {
    * 新しくNPCエンディング画面を開始する
    *
    * @param resources リソース管理オブジェクト
+   * @param bgm BGM管理オブジェクト
    * @return 開始されたNPCエンディング画面
    */
-  async startNPCEnding(resources: Resources): Promise<NPCEnding> {
+  async startNPCEnding(resources: Resources, bgm: BGMManager): Promise<NPCEnding> {
     this._removeCurrentScene();
 
-    const scene = new NPCEnding(resources);
+    const scene = new NPCEnding(resources, bgm);
     this._root.appendChild(scene.getRootHTMLElement());
     this._unsubscribers = [
       scene.endNPCEndingNotifier().subscribe(() => {
