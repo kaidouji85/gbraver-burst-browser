@@ -5,7 +5,7 @@ import type {BGMOperator} from "./bgm-operators";
 /** BGM管理オブジェクト */
 export interface BGMManager {
   /**
-   * BGMに何らかの操作をする
+   * BGMにオペレータを適用する
    *
    * @param operator オペレータ
    * @return オペレータ後のBGM

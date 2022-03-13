@@ -390,8 +390,8 @@ export class Game {
       this._bgm.do(stopWithFadeOut);
       await this._fader.fadeOut();
       const title = await this._startTitle();
-      title.playBGM();
       await this._fader.fadeIn();
+      title.playBGM();
     };
 
     if (action.postNetworkError.type === 'Close') {
@@ -539,17 +539,17 @@ export class Game {
       this._tdScenes.hidden();
       this._suddenlyBattleEndMonitor.unbind();
       const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
-      ending.playBGM();
       await this._fader.fadeIn();
+      ending.playBGM();
     };
     const endCasualMatch = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       await this._api.disconnectWebsocket();
       this._tdScenes.hidden();
-      const scene = await this._startTitle();
-      scene.playBGM();
+      const title = await this._startTitle();
       await this._fader.fadeIn();
+      title.playBGM();
     };
 
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'InNPCBattleCourse') {
@@ -608,9 +608,9 @@ export class Game {
   async _onEndNPCEnding(): Promise<void> {
     this._bgm.do(stopWithFadeOut);
     await this._fader.fadeOut();
-    const scene = await this._startTitle();
-    scene.playBGM();
+    const title = await this._startTitle();
     await this._fader.fadeIn();
+    title.playBGM();
   }
 
   /**
