@@ -232,12 +232,13 @@ export class DOMScenes {
    * 新しくNPCエンディング画面を開始する
    *
    * @param resources リソース管理オブジェクト
+   * @param bgm BGM管理オブジェクト
    * @return 開始されたNPCエンディング画面
    */
-  async startNPCEnding(resources: Resources): Promise<NPCEnding> {
+  async startNPCEnding(resources: Resources, bgm: BGMManager): Promise<NPCEnding> {
     this._removeCurrentScene();
 
-    const scene = new NPCEnding(resources);
+    const scene = new NPCEnding(resources, bgm);
     this._root.appendChild(scene.getRootHTMLElement());
     this._unsubscribers = [
       scene.endNPCEndingNotifier().subscribe(() => {

@@ -44,6 +44,7 @@ export const SOUND_IDS = {
   BATTLE_BGM_01: 'BATTLE_BGM_01',
   BATTLE_BGM_02: 'BATTLE_BGM_02',
   BATTLE_BGM_03: 'BATTLE_BGM_03',
+  NPC_ENDING: 'NPC_ENDING',
 };
 
 /**
@@ -58,7 +59,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.CHANGE_VALUE,
     path: resourceRoot => `${resourceRoot.get()}/sounds/change-value.mp3`,
-    volume: 1
+    volume: 0.4
   },
   {
     id: SOUND_IDS.MECHA_IMPACT,
@@ -113,7 +114,12 @@ export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.BATTLE_BGM_03,
     path: resourceRoot => `${resourceRoot.get()}/sounds/battle-03.mp3`,
-    volume: 0.1
+    volume: 0.2
+  },
+  {
+    id: SOUND_IDS.NPC_ENDING,
+    path: resourceRoot => `${resourceRoot.get()}/sounds/npc-ending.mp3`,
+    volume: 0.2
   },
 ];
 

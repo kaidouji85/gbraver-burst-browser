@@ -538,7 +538,8 @@ export class Game {
       await this._fader.fadeOut();
       this._tdScenes.hidden();
       this._suddenlyBattleEndMonitor.unbind();
-      await this._domScenes.startNPCEnding(this._resources);
+      const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
+      ending.playBGM();
       await this._fader.fadeIn();
     };
     const endCasualMatch = async (): Promise<void> => {
@@ -605,6 +606,7 @@ export class Game {
    * NPC戦闘エンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
+    this._bgm.do(stopWithFadeOut);
     await this._fader.fadeOut();
     const scene = await this._startTitle();
     scene.playBGM();
