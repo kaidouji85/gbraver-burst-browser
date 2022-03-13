@@ -33,6 +33,12 @@ import {pilotSkillAnimation} from "./pilot-skill";
 import {BattleSceneSounds} from "../../sounds/sounds";
 
 /**
+ * 同時再生する効果
+ * 以下効果が連続した場合、アニメーションは並列再生される
+ */
+const parallelPlayEffects = ['TurnChange', 'RightItself', 'UpdateRemainingTurn',];
+
+/**
  * 状態に応じた戦闘シーンのアニメーションを再生する
  *
  * @param view 戦闘シーンビュー
@@ -43,8 +49,15 @@ import {BattleSceneSounds} from "../../sounds/sounds";
  */
 export function stateHistoryAnimation(view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState, gameStateList: GameState[]): Animate {
   return gameStateList
-    .map(v => stateAnimation(v, view, sounds, sceneState))
-    .reduce((a, b) => a.chain(b), empty());
+    .map((state, index) => {
+      const next = gameStateList[index + 1];
+      const isParallel = next && parallelPlayEffects.includes(next.effect.name)
+        && parallelPlayEffects.includes(state.effect.name);
+      const anime = stateAnimation(state, view, sounds, sceneState);
+      return {anime, isParallel};
+    })
+    .reduce((previous, current) =>
+      current.isParallel ? previous.chain(empty(), current.anime) : previous.chain(current.anime), empty());
 }
 
 /**
