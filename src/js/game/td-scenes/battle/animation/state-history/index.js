@@ -30,7 +30,7 @@ import {updateRemainingTurnAnimation} from "./update-remaining-turn";
 import {gameEndAnimation} from "./game-end";
 import {rightItselfAnimation} from "./right-itself";
 import {pilotSkillAnimation} from "./pilot-skill";
-import {BattleSceneSounds} from "../../sounds";
+import {BattleSceneSounds} from "../../sounds/sounds";
 
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する

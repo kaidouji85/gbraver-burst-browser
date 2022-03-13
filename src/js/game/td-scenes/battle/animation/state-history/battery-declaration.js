@@ -6,7 +6,7 @@ import type {BatteryDeclaration, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
-import {BattleSceneSounds} from "../../sounds";
+import {BattleSceneSounds} from "../../sounds/sounds";
 import {process} from '../../../../../animation/process';
 import type {TDPlayer} from "../../view/td/player";
 

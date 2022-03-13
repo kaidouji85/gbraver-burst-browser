@@ -4,11 +4,11 @@ import {normalNeoLandozer} from '../../../../../src/js/npc/normal-neo-landozer';
 import {SimpleNPCBattleCourse} from "../../../../../src/js/game/npc-battle/simple-npc-battle-course";
 import {DefaultStage} from "../../../../../src/js/game/npc-battle/npc-battle-stage";
 
-const stage1 = {caption: ['test stage 1'], npc: normalNeoLandozer()};
-const stage2 = {caption: ['test stage 2'], npc: normalNeoLandozer()};
-const stage3 = {caption: ['test stage 3'], npc: normalNeoLandozer()};
-const stage4 = {caption: ['test stage 4'], npc: normalNeoLandozer()};
-const stage5 = {caption: ['test stage 5'], npc: normalNeoLandozer()};
+const stage1 = {caption: ['test stage 1'], npc: normalNeoLandozer(), bgm: 'bgm-01'};
+const stage2 = {caption: ['test stage 2'], npc: normalNeoLandozer(), bgm: 'bgm-02'};
+const stage3 = {caption: ['test stage 3'], npc: normalNeoLandozer(), bgm: 'bgm-03'};
+const stage4 = {caption: ['test stage 4'], npc: normalNeoLandozer(), bgm: 'bgm-04'};
+const stage5 = {caption: ['test stage 5'], npc: normalNeoLandozer(), bgm: 'bgm-05'};
 const stages = [stage1, stage2, stage3, stage4, stage5];
 
 test('引数に指定したステージ数をXとすると、stagesのX番目の要素が対応するステージである', () => {
