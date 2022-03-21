@@ -9,6 +9,8 @@ import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {Stream} from "../../../../../stream/core";
+import {ResultIndicator} from "../../../../../game-object/result-indicator/result-indicator";
+import {loseIndicator, winIndicator} from "../../../../../game-object/result-indicator";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド
@@ -17,6 +19,7 @@ export interface HUDPlayerField {
   playerId: PlayerId;
   gauge: Gauge;
   turnStart: TurnStart;
+  resultIndicator: ResultIndicator,
 }
 
 /**
@@ -26,11 +29,13 @@ export class HUDPlayer implements HUDPlayerField{
   playerId: PlayerId;
   gauge: Gauge;
   turnStart: TurnStart;
+  resultIndicator: ResultIndicator
 
   constructor(param: HUDPlayerField) {
     this.playerId = param.playerId;
     this.gauge = param.gauge;
     this.turnStart = param.turnStart;
+    this.resultIndicator = param.resultIndicator;
   }
 
   /**
@@ -39,6 +44,7 @@ export class HUDPlayer implements HUDPlayerField{
   destructor(): void {
     this.gauge.destructor();
     this.turnStart.destructor();
+    this.resultIndicator.destructor();
   }
 
   /**
@@ -50,6 +56,7 @@ export class HUDPlayer implements HUDPlayerField{
     return [
       this.gauge.getObject3D(),
       this.turnStart.getObject3D(),
+      this.resultIndicator.getObject3D(),
     ];
   }
 }
@@ -72,6 +79,7 @@ export function playerHUDObjects(resources: Resources, state: Player, gameObject
       battery: state.armdozer.maxBattery
     }),
     turnStart: playerTurnStart(resources, gameObjectAction),
+    resultIndicator: winIndicator(resources, gameObjectAction),
   });
 }
 
@@ -93,5 +101,6 @@ export function enemyHUDObjects(resources: Resources, state: Player, gameObjectA
       battery: state.armdozer.maxBattery
     }),
     turnStart: enemyTurnStart(resources, gameObjectAction),
+    resultIndicator: loseIndicator(resources, gameObjectAction),
   });
 }

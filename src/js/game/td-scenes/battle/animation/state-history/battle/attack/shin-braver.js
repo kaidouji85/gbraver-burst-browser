@@ -204,12 +204,9 @@ function down(param: ShinBraverBattle<DownResult>): Animate {
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
       delay(2300)
-        .chain(param.attackerSprite.punchToStand()),
-      // TODO 勝利、敗北の出し分けをする
-      param.hudObjects.win.slideIn()
-        .chain(delay(1900))
-        .chain(param.hudObjects.win.moveToEdge())
-        .chain(delay(500)),
+        .chain(param.attackerSprite.punchToStand())
+        .chain(delay(1000)),
+      param.attackerHUD.resultIndicator.slideIn(),
       toInitial(param.tdCamera, 100),
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.down(),

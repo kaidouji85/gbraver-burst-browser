@@ -17,11 +17,10 @@ export function slideIn(model: ResultIndicatorModel): Animate {
   const distance = 100;
   return process(() => {
     model.opacity = 0;
-    model.scale = 2;
     model.localCoordinate.x = -distance;
     model.localCoordinate.y = 0;
-    model.worldCoordinate.x = 0;
-    model.worldCoordinate.y = 0;
+    model.worldCoordinate.x = -1;
+    model.worldCoordinate.y = 1;
   }).chain(all(
     tween(model.localCoordinate, t => t.to({x: `+${distance}`}, duration)
       .easing(TWEEN.Easing.Quadratic.Out)),

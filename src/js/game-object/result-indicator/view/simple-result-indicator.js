@@ -8,7 +8,7 @@ import {HUDCutInScale} from "../../../hud-scale/hud-scale";
 import {HUD_RESULT_INDICATOR} from "../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
-const MESH_SIZE = 400;
+const MESH_SIZE = 550;
 
 /** シンプルなビュー実装 */
 export class SimpleIndicatorView implements ResultIndicatorView {
