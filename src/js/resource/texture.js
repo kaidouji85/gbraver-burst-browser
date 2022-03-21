@@ -100,6 +100,8 @@ export const TEXTURE_IDS = {
   CONTINUOUS_ATTACK: 'CONTINUOUS_ATTACK',
   DAMAGE_DECREASE: 'DAMAGE_DECREASE',
   BATTERY_ENCHANTMENT: 'BATTERY_ENCHANTMENT',
+  WIN: 'WIN',
+  LOSE: 'LOSE',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -445,6 +447,15 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.BATTERY_ENCHANTMENT,
     path: 'effect-label/battery-enchantment.webp',
+  },
+  // リザルト
+  {
+    id: TEXTURE_IDS.WIN,
+    path: 'result/win.png',
+  },
+  {
+    id: TEXTURE_IDS.LOSE,
+    path: 'result/lose.png',
   },
 ];
 
