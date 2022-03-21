@@ -8,6 +8,7 @@ import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {slideIn} from "./animation/slide-in";
+import {moveToEdge} from "./animation/move-to-edge";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
@@ -55,6 +56,15 @@ export class ResultIndicator {
    */
   slideIn(): Animate {
     return slideIn(this._model);
+  }
+
+  /**
+   * 端に移動する
+   *
+   * @return アニメーション
+   */
+  moveToEdge(): Animate {
+    return moveToEdge(this._model);
   }
 
   /**

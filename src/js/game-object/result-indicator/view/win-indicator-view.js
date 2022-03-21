@@ -34,8 +34,14 @@ export class WinIndicatorView implements ResultIndicatorView {
   engage(model: ResultIndicatorModel, preRender: PreRender): void {
     const target = this._mesh.getObject3D();
     const devicePerScale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
-    target.position.x = model.position.x * devicePerScale;
-    target.position.y = model.position.y * devicePerScale;
+    const safeAreaX = (0 < model.worldCoordinate.x) ? preRender.safeAreaInset.right : preRender.safeAreaInset.left;
+    const paddingX = 100;
+    target.position.x = model.localCoordinate.x * devicePerScale
+      + model.worldCoordinate.x * (preRender.rendererDOM.clientWidth/2 -safeAreaX -paddingX);
+    const safeAreaY = (0 < model.worldCoordinate.y) ? preRender.safeAreaInset.top : preRender.safeAreaInset.bottom;
+    const paddingY = 50;
+    target.position.y = model.localCoordinate.y * devicePerScale
+      + model.worldCoordinate.y * (preRender.rendererDOM.clientHeight/2 -safeAreaY - paddingY);
     target.position.z = 0;
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;

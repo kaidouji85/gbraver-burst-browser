@@ -13,6 +13,7 @@ export const win = (): HTMLElement => {
     delay(1000)
       .chain(indicator.slideIn())
       .chain(delay(1000))
+      .chain(indicator.moveToEdge())
       .loop();
     return [indicator.getObject3D()];
   });
@@ -23,6 +24,10 @@ export const win = (): HTMLElement => {
 export const lose = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
     const indicator = loseIndicator(resources, gameObjectAction);
+    delay(1000)
+      .chain(indicator.slideIn())
+      .chain(delay(1000))
+      .loop();
     return [indicator.getObject3D()];
   });
   stub.start();

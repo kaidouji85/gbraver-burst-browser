@@ -10,6 +10,7 @@ export function createInitialValue(): ResultIndicatorModel {
   return {
     scale: 1,
     opacity: 0,
-    position: {x: 0, y: 0}
+    worldCoordinate: {x: 0, y: 0},
+    localCoordinate: {x: 0, y: 0},
   };
 }
