@@ -27,6 +27,7 @@ export const lose = (): HTMLElement => {
     delay(1000)
       .chain(indicator.slideIn())
       .chain(delay(1000))
+      .chain(indicator.moveToEdge())
       .loop();
     return [indicator.getObject3D()];
   });

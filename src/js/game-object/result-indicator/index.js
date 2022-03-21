@@ -1,8 +1,8 @@
 // @flow
 import {ResultIndicator} from "./result-indicator";
 import type {Resources} from "../../resource";
-import {WinIndicatorView} from "./view/win-indicator-view";
-import {LoseIndicatorView} from "./view/lose-indicator-view";
+import {winIndicatorView} from "./view/win-indicator-view";
+import {loseIndicatorView} from "./view/lose-indicator-view";
 import type {Stream} from "../../stream/core";
 import type {GameObjectAction} from "../action/game-object-action";
 
@@ -14,7 +14,7 @@ import type {GameObjectAction} from "../action/game-object-action";
  * @return 生成結果
  */
 export function winIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ResultIndicator {
-  const view = new WinIndicatorView(resources);
+  const view = winIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
 }
 
@@ -26,6 +26,6 @@ export function winIndicator(resources: Resources, gameObjectAction: Stream<Game
  * @return 生成結果
  */
 export function loseIndicator(resources: Resources, gameObjectAction: Stream<GameObjectAction>): ResultIndicator {
-  const view = new LoseIndicatorView(resources);
+  const view = loseIndicatorView(resources);
   return new ResultIndicator(view, gameObjectAction);
 }

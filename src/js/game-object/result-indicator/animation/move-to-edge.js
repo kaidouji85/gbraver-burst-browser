@@ -12,13 +12,13 @@ import {all} from "../../../animation/all";
  * @return アニメーション
  */
 export function moveToEdge(model: ResultIndicatorModel): Animate {
-  const duration = 300;
+  const duration = 800;
   return all(
     tween(model.worldCoordinate, t => t.to({x: -1, y: 1}, duration)
-      .easing(TWEEN.Easing.Quadratic.In)
+      .easing(TWEEN.Easing.Quadratic.InOut)
     ),
     tween(model, t => t.to({scale: 1,}, duration)
-      .easing(TWEEN.Easing.Quadratic.In)
+      .easing(TWEEN.Easing.Quadratic.InOut)
     )
   );
 }
