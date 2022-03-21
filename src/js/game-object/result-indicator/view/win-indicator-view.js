@@ -13,5 +13,5 @@ import {SimpleIndicatorView} from "./simple-result-indicator";
  */
 export function winIndicatorView(resources: Resources): ResultIndicatorView {
   const texture = resources.textures.find(v => v.id === TEXTURE_IDS.WIN)?.texture ?? new THREE.Texture();
-  return new SimpleIndicatorView(texture, 60, 30);
+  return new SimpleIndicatorView(texture, 100, 50);
 }

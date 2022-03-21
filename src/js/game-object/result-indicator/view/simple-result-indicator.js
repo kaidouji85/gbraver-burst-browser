@@ -5,9 +5,10 @@ import type {ResultIndicatorView} from "./result-indicator-view";
 import type {ResultIndicatorModel} from "../model/result-indicator-model";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {HUDCutInScale} from "../../../hud-scale/hud-scale";
+import {HUD_RESULT_INDICATOR} from "../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
-const MESH_SIZE = 300;
+const MESH_SIZE = 400;
 
 /** シンプルなビュー実装 */
 export class SimpleIndicatorView implements ResultIndicatorView {
@@ -19,6 +20,8 @@ export class SimpleIndicatorView implements ResultIndicatorView {
    * コンストラクタ
    *
    * @param texture 文言テクスチャ
+   * @param paddingX X方向のパディング
+   * @param paddingY Y方向のパディング
    */
   constructor(texture: typeof THREE.Texture, paddingX: number, paddingY: number) {
     this._mesh = new HorizontalAnimationMesh({texture, maxAnimation: 1, width: MESH_SIZE, height: MESH_SIZE});
@@ -41,7 +44,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
     const safeAreaY = (0 < model.worldCoordinate.y) ? preRender.safeAreaInset.top : preRender.safeAreaInset.bottom;
     target.position.y = model.localCoordinate.y * devicePerScale
       + model.worldCoordinate.y * (preRender.rendererDOM.clientHeight/2 -safeAreaY -this._paddingY * devicePerScale);
-    target.position.z = 0;
+    target.position.z = HUD_RESULT_INDICATOR;
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
     target.quaternion.copy(preRender.camera.quaternion);
