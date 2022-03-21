@@ -10,9 +10,10 @@ import {all} from "../../../animation/all";
  * スライドイン
  *
  * @param model モデル
+ * @param zIndex HUDレイヤー重ね順
  * @return アニメーション
  */
-export function slideIn(model: ResultIndicatorModel): Animate {
+export function slideIn(model: ResultIndicatorModel, zIndex: number): Animate {
   const duration = 200;
   const distance = 50;
   return process(() => {
@@ -20,6 +21,7 @@ export function slideIn(model: ResultIndicatorModel): Animate {
     model.localCoordinate.x = -distance;
     model.localCoordinate.y = 0;
     model.scale = 1.3;
+    model.zIndex = zIndex;
   }).chain(all(
     tween(model.localCoordinate, t => t.to({x: `+${distance}`}, duration)
       .easing(TWEEN.Easing.Quadratic.Out)),

@@ -3,6 +3,7 @@ import type {ReflectAnimationParam} from "./animation-param";
 import {Animate} from "../../../../../../animation/animate";
 import {all} from "../../../../../../animation/all";
 import {delay} from "../../../../../../animation/delay";
+import {HUD_REFLECT_RESULT_INDICATOR} from "../../../../../../zindex/hud-zindex";
 
 /**
  * 電撃バリア
@@ -30,7 +31,7 @@ export function lightning(param: ReflectAnimationParam): Animate {
  */
 export function deathLightning(param: ReflectAnimationParam): Animate {
   return all(
-    param.reflecting.hud.resultIndicator.slideIn()
+    param.reflecting.hud.resultIndicator.slideIn(HUD_REFLECT_RESULT_INDICATOR)
       .chain(delay(500))
       .chain(param.reflecting.hud.resultIndicator.moveToEdge()),
     param.damaged.td.hitMark.lightning.popUp(),

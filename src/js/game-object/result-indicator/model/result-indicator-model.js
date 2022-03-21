@@ -6,6 +6,8 @@ export type ResultIndicatorModel = {
   scale: number,
   /** 透明度 */
   opacity: number,
+  /** HUDレイヤー重ね順 */
+  zIndex: number,
   /** ワールド座標、原点は画面中央 */
   worldCoordinate: {
     /** 画面幅の半分を1とする相対座標 */
@@ -18,6 +20,6 @@ export type ResultIndicatorModel = {
     /** オブジェクト中心からのX軸方向の距離 */
     x: number,
     /** オブジェクト中心からY軸方向の距離 */
-    y: number
+    y: number,
   }
 };

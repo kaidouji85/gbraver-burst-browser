@@ -9,6 +9,8 @@ import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import {slideIn} from "./animation/slide-in";
 import {moveToEdge} from "./animation/move-to-edge";
+import {hidden} from "./animation/hidden";
+import {HUD_RESULT_INDICATOR} from "../../zindex/hud-zindex";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
@@ -52,10 +54,11 @@ export class ResultIndicator {
   /**
    * スライドイン
    *
+   * @param zIndex HUDレイヤー重ね順
    * @return アニメーション
    */
-  slideIn(): Animate {
-    return slideIn(this._model);
+  slideIn(zIndex: number = HUD_RESULT_INDICATOR): Animate {
+    return slideIn(this._model, zIndex);
   }
 
   /**
@@ -65,6 +68,15 @@ export class ResultIndicator {
    */
   moveToEdge(): Animate {
     return moveToEdge(this._model);
+  }
+
+  /**
+   * 非表示
+   *
+   * @return アニメーション
+   */
+  hidden(): Animate {
+    return hidden(this._model);
   }
 
   /**
