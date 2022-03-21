@@ -7,8 +7,8 @@ export default {
 };
 
 export const win = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({resources}) => {
-    const indicator = winIndicator(resources);
+  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
+    const indicator = winIndicator(resources, gameObjectAction);
     return [indicator.getObject3D()];
   });
   stub.start();
@@ -16,8 +16,8 @@ export const win = (): HTMLElement => {
 }
 
 export const lose = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({resources}) => {
-    const indicator = loseIndicator(resources);
+  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
+    const indicator = loseIndicator(resources, gameObjectAction);
     return [indicator.getObject3D()];
   });
   stub.start();

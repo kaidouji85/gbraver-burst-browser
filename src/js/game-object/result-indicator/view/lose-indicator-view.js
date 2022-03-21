@@ -4,6 +4,7 @@ import {TEXTURE_IDS} from "../../../resource/texture";
 import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {ResultIndicatorView} from "./result-indicator-view";
+import type {ResultIndicatorModel} from "../model/result-indicator-model";
 
 /** LOSE ビュー */
 export class LoseIndicatorView implements ResultIndicatorView {
@@ -22,6 +23,13 @@ export class LoseIndicatorView implements ResultIndicatorView {
   /** @override */
   destructor(): void {
     this._mesh.destructor();
+  }
+
+  /** @override */
+  engage(model: ResultIndicatorModel): void {
+    const target = this._mesh.getObject3D();
+    target.position.x = model.position.x;
+    target.position.y = model.position.y;
   }
 
   /** @override */
