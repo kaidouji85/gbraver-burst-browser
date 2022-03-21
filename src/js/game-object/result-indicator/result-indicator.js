@@ -5,6 +5,7 @@ import type {ResultIndicatorModel} from "./model/result-indicator-model";
 import {createInitialValue} from "./model/initial-value";
 import type {Stream, Unsubscriber} from "../../stream/core";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {PreRender} from "../../game-loop/pre-render";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
@@ -22,8 +23,8 @@ export class ResultIndicator {
     this._view = view;
     this._model = createInitialValue();
     this._unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'Update') {
-        this._onUpdate();
+      if (action.type === 'PreRender') {
+        this._onPreRender(action);
       }
     });
   }
@@ -46,9 +47,11 @@ export class ResultIndicator {
   }
 
   /**
-   * Update時の処理
+   * PreRender時の処理
+   *
+   * @param action PreRender情報
    */
-  _onUpdate(): void {
-    this._view.engage(this._model);
+  _onPreRender(action: PreRender): void {
+    this._view.engage(this._model, action);
   }
 }

@@ -5,6 +5,11 @@ import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {ResultIndicatorView} from "./result-indicator-view";
 import type {ResultIndicatorModel} from "../model/result-indicator-model";
+import type {PreRender} from "../../../game-loop/pre-render";
+import {HUDCutInScale} from "../../../hud-scale/hud-scale";
+
+/** メッシュの大きさ */
+const MESH_SIZE = 300;
 
 /** LOSE ビュー */
 export class LoseIndicatorView implements ResultIndicatorView {
@@ -17,7 +22,7 @@ export class LoseIndicatorView implements ResultIndicatorView {
    */
   constructor(resources: Resources) {
     const texture = resources.textures.find(v => v.id === TEXTURE_IDS.LOSE)?.texture ?? new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({texture, maxAnimation: 1, width: 200, height: 200});
+    this._mesh = new HorizontalAnimationMesh({texture, maxAnimation: 1, width: MESH_SIZE, height: MESH_SIZE});
   }
 
   /** @override */
@@ -26,10 +31,16 @@ export class LoseIndicatorView implements ResultIndicatorView {
   }
 
   /** @override */
-  engage(model: ResultIndicatorModel): void {
+  engage(model: ResultIndicatorModel, preRender: PreRender): void {
     const target = this._mesh.getObject3D();
-    target.position.x = model.position.x;
-    target.position.y = model.position.y;
+    const devicePerScale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
+    target.position.x = model.position.x * devicePerScale;
+    target.position.y = model.position.y * devicePerScale;
+    target.position.z = 0;
+    target.scale.x = model.scale * devicePerScale;
+    target.scale.y = model.scale * devicePerScale;
+    target.quaternion.copy(preRender.camera.quaternion);
+    this._mesh.setOpacity(model.opacity);
   }
 
   /** @override */

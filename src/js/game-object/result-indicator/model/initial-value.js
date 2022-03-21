@@ -8,6 +8,8 @@ import type {ResultIndicatorModel} from "./result-indicator-model";
  */
 export function createInitialValue(): ResultIndicatorModel {
   return {
+    scale: 1,
+    opacity: 1,
     position: {x: 0, y: 0}
   };
 }
