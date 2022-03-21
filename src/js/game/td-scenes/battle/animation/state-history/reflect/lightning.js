@@ -12,13 +12,13 @@ import {delay} from "../../../../../../animation/delay";
  */
 export function lightning(param: ReflectAnimationParam): Animate {
   return all(
-    param.tdPlayer.hitMark.lightning.popUp(),
+    param.damaged.td.hitMark.lightning.popUp(),
     delay(100).chain(all(
-      param.sprite.knockBack(),
-      param.tdPlayer.damageIndicator.popUp(param.effect.damage),
-      param.hudPlayer.gauge.hp(param.state.armdozer.hp),
+      param.damaged.sprite.knockBack(),
+      param.damaged.td.damageIndicator.popUp(param.effect.damage),
+      param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
     )))
-    .chain(param.sprite.knockBackToStand())
+    .chain(param.damaged.sprite.knockBackToStand())
     .chain(delay(500));
 }
 
@@ -30,11 +30,14 @@ export function lightning(param: ReflectAnimationParam): Animate {
  */
 export function deathLightning(param: ReflectAnimationParam): Animate {
   return all(
-    param.tdPlayer.hitMark.lightning.popUp(),
+    param.reflecting.hud.resultIndicator.slideIn()
+      .chain(delay(500))
+      .chain(param.reflecting.hud.resultIndicator.moveToEdge()),
+    param.damaged.td.hitMark.lightning.popUp(),
     delay(100).chain(all(
-      param.sprite.down(),
-      param.tdPlayer.damageIndicator.popUp(param.effect.damage),
-      param.hudPlayer.gauge.hp(param.state.armdozer.hp),
+      param.damaged.sprite.down(),
+      param.damaged.td.damageIndicator.popUp(param.effect.damage),
+      param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
     ))
   );
 }

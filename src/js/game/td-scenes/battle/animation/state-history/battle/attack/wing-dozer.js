@@ -208,7 +208,7 @@ function down(param: WingDozerBattle<DownResult>): Animate {
     .chain(all(
       delay(2300)
         .chain(param.attackerSprite.upperToStand())
-        .chain(delay(1000)),
+        .chain(delay(500)),
       param.attackerHUD.resultIndicator.slideIn()
         .chain(delay(500))
         .chain(param.attackerHUD.resultIndicator.moveToEdge()),

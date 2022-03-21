@@ -203,7 +203,7 @@ function down(param: NeoLandozerBattle<DownResult>): Animate {
     .chain(all(
       delay(2300)
         .chain(param.attackerSprite.hmToStand())
-        .chain(delay(1000)),
+        .chain(delay(500)),
       param.attackerHUD.resultIndicator.slideIn()
         .chain(delay(500))
         .chain(param.attackerHUD.resultIndicator.moveToEdge()),
