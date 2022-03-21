@@ -6,6 +6,8 @@ import {createInitialValue} from "./model/initial-value";
 import type {Stream, Unsubscriber} from "../../stream/core";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
+import {Animate} from "../../animation/animate";
+import {slideIn} from "./animation/slide-in";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
@@ -44,6 +46,15 @@ export class ResultIndicator {
    */
   getObject3D(): typeof THREE.Object3D {
     return this._view.getObject3D();
+  }
+
+  /**
+   * スライドイン
+   *
+   * @return アニメーション
+   */
+  slideIn(): Animate {
+    return slideIn(this._model);
   }
 
   /**
