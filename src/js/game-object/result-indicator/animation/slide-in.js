@@ -13,14 +13,13 @@ import {all} from "../../../animation/all";
  * @return アニメーション
  */
 export function slideIn(model: ResultIndicatorModel): Animate {
-  const duration = 400;
-  const distance = 100;
+  const duration = 200;
+  const distance = 50;
   return process(() => {
     model.opacity = 0;
     model.localCoordinate.x = -distance;
     model.localCoordinate.y = 0;
-    model.worldCoordinate.x = -1;
-    model.worldCoordinate.y = 1;
+    model.scale = 1.3;
   }).chain(all(
     tween(model.localCoordinate, t => t.to({x: `+${distance}`}, duration)
       .easing(TWEEN.Easing.Quadratic.Out)),

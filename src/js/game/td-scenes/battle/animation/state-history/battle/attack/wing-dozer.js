@@ -209,7 +209,9 @@ function down(param: WingDozerBattle<DownResult>): Animate {
       delay(2300)
         .chain(param.attackerSprite.upperToStand())
         .chain(delay(1000)),
-      param.attackerHUD.resultIndicator.slideIn(),
+      param.attackerHUD.resultIndicator.slideIn()
+        .chain(delay(500))
+        .chain(param.attackerHUD.resultIndicator.moveToEdge()),
       toInitial(param.tdCamera, 100),
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.down(),

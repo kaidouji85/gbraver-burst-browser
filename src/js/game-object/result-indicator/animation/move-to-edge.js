@@ -12,7 +12,7 @@ import {all} from "../../../animation/all";
  * @return アニメーション
  */
 export function moveToEdge(model: ResultIndicatorModel): Animate {
-  const duration = 800;
+  const duration = 400;
   return all(
     tween(model.worldCoordinate, t => t.to({x: -1, y: 1}, duration)
       .easing(TWEEN.Easing.Quadratic.InOut)
