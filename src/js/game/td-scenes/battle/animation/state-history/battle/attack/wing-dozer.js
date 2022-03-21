@@ -127,9 +127,7 @@ function attack(param: WingDozerBattle<AttackResult>): Animate {
       delay(1800)
         .chain(param.attackerSprite.upperToStand())
         .chain(delay(500)),
-
       toInitial(param.tdCamera, 100),
-
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.knockBack(),
       param.defenderTD.hitMark.shockWave.popUp(),
@@ -151,7 +149,6 @@ function guard(param: WingDozerBattle<Guard>): Animate {
       delay(1800)
         .chain(param.attackerSprite.upperToStand())
         .chain(delay(500)),
-
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.guard(),
       param.defenderTD.hitMark.shockWave.popUp(),
@@ -173,7 +170,6 @@ function miss(param: WingDozerBattle<Miss>): Animate {
       delay(1800)
         .chain(param.attackerSprite.upperToStand())
         .chain(delay(500)),
-
       param.defenderSprite.avoid()
     ));
 }
@@ -210,12 +206,11 @@ function down(param: WingDozerBattle<DownResult>): Animate {
   )
     .chain(param.attackerSprite.upper())
     .chain(all(
-      delay(1800)
+      delay(2300)
         .chain(param.attackerSprite.upperToStand())
         .chain(delay(1000)),
-
+      param.attackerHUD.resultIndicator.slideIn(),
       toInitial(param.tdCamera, 100),
-
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.down(),
       param.defenderTD.hitMark.shockWave.popUp(),
