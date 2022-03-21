@@ -102,6 +102,7 @@ export const TEXTURE_IDS = {
   BATTERY_ENCHANTMENT: 'BATTERY_ENCHANTMENT',
   WIN: 'WIN',
   LOSE: 'LOSE',
+  DRAW: 'DRAW',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -456,6 +457,10 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.LOSE,
     path: 'result/lose.png',
+  },
+  {
+    id: TEXTURE_IDS.DRAW,
+    path: 'result/draw.png',
   },
 ];
 

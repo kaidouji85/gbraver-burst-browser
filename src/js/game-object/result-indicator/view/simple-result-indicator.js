@@ -5,7 +5,6 @@ import type {ResultIndicatorView} from "./result-indicator-view";
 import type {ResultIndicatorModel} from "../model/result-indicator-model";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {HUDCutInScale} from "../../../hud-scale/hud-scale";
-import {HUD_RESULT_INDICATOR} from "../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
 const MESH_SIZE = 400;
