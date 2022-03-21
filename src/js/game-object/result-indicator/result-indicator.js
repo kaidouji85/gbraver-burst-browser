@@ -1,28 +1,25 @@
 // @flow
-import type {Resources} from "../../resource";
-import {HorizontalAnimationMesh} from "../../mesh/horizontal-animation";
 import * as THREE from "three";
-import {TEXTURE_IDS} from "../../resource/texture";
+import type {ResultIndicatorView} from "./view/result-indicator-view";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
-  _mesh: HorizontalAnimationMesh;
+  _view: ResultIndicatorView;
 
   /**
    * コンストラクタ
    *
-   * @param resources リソース管理オブジェクト
+   * @param view ビュー
    */
-  constructor(resources: Resources) {
-    const texture = resources.textures.find(v => v.id === TEXTURE_IDS.WIN)?.texture ?? new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({texture, maxAnimation: 1, width: 200, height: 200});
+  constructor(view: ResultIndicatorView) {
+    this._view = view;
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.destructor();
+    this._view.destructor();
   }
 
   /**
@@ -31,6 +28,6 @@ export class ResultIndicator {
    * @return 取得結果
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this._view.getObject3D();
   }
 }

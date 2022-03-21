@@ -1,7 +1,6 @@
 // @flow
-
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
-import {ResultIndicator} from "../src/js/game-object/result-indicator/result-indicator";
+import {loseIndicator, winIndicator} from "../src/js/game-object/result-indicator";
 
 export default {
   title: 'result-indicator',
@@ -9,7 +8,16 @@ export default {
 
 export const win = (): HTMLElement => {
   const stub = new TDGameObjectStub(({resources}) => {
-    const indicator = new ResultIndicator(resources);
+    const indicator = winIndicator(resources);
+    return [indicator.getObject3D()];
+  });
+  stub.start();
+  return stub.domElement();
+}
+
+export const lose = (): HTMLElement => {
+  const stub = new TDGameObjectStub(({resources}) => {
+    const indicator = loseIndicator(resources);
     return [indicator.getObject3D()];
   });
   stub.start();
