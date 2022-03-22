@@ -1,10 +1,10 @@
 // @flow
 
-import {Animate} from "../../../../../../animation/animate";
-import type {GameOverParam, GameOverParamX} from "./animation-param";
-import {NeoLandozerTD} from "../../../view/td/armdozer-objects/neo-landozer";
-import {all} from "../../../../../../animation/all";
-import {dolly, track} from "../../td-camera";
+import {Animate} from "../../../../../../../animation/animate";
+import type {GameOverParam, GameOverParamX} from "./game-over-param";
+import {NeoLandozerTD} from "../../../../view/td/armdozer-objects/neo-landozer";
+import {all} from "../../../../../../../animation/all";
+import {dolly, track} from "../../../td-camera";
 
 /**
  * ネオランドーザ ゲームオーバ
