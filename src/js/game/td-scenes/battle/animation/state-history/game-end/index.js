@@ -21,7 +21,7 @@ import {evenMatchAnimation} from "./even-match/even-match";
 export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<GameEnd>): Animate {
   const evenMatch = castEvenMatch(gameState);
   if (evenMatch) {
-    return evenMatchAnimation();
+    return evenMatchAnimation(view);
   }
 
   const gameOver = castGameOver(gameState);

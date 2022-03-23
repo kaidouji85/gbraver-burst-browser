@@ -13,6 +13,8 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../../../../stream/
 import {RxjsStreamSource} from "../../../../../../stream/rxjs";
 import {createBurstButton} from "./burst-button";
 import {createPilotButton} from "./pilot-button";
+import {ResultIndicator} from "../../../../../../game-object/result-indicator/result-indicator";
+import {drawIndicator} from "../../../../../../game-object/result-indicator";
 
 /**
  * HUDレイヤーのゲームオブジェクト
@@ -23,6 +25,7 @@ export class HUDGameObjects {
   pilotButton: PilotButton;
   frontmostFader: Fader;
   rearmostFader: Fader;
+  drawIndicator: ResultIndicator;
   _battleAction: StreamSource<BattleSceneAction>;
   _unsubscribers: Unsubscriber[];
 
@@ -65,6 +68,8 @@ export class HUDGameObjects {
       isVisible: false,
     });
 
+    this.drawIndicator = drawIndicator(resources, gameObjectAction);
+
     this._unsubscribers = [
       this.burstButton.pushButtonNotifier().subscribe(() => {
         this._battleAction.next({type: 'doBurst'})
@@ -84,6 +89,7 @@ export class HUDGameObjects {
     this.pilotButton.destructor();
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
+    this.drawIndicator.destructor();
     this._unsubscribers.forEach(v => {
       v.unsubscribe();
     });
@@ -101,6 +107,7 @@ export class HUDGameObjects {
       this.pilotButton.getObject3D(),
       this.rearmostFader.getObject3D(),
       this.frontmostFader.getObject3D(),
+      this.drawIndicator.getObject3D(),
     ];
   }
 
