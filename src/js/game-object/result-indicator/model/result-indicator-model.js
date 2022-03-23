@@ -6,8 +6,6 @@ export type ResultIndicatorModel = {
   scale: number,
   /** 透明度 */
   opacity: number,
-  /** HUDレイヤー重ね順 */
-  zIndex: number,
   /** ワールド座標、原点は画面中央 */
   worldCoordinate: {
     /** 画面幅の半分を1とする相対座標 */

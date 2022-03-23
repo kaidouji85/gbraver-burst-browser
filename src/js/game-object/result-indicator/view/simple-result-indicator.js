@@ -5,6 +5,7 @@ import type {ResultIndicatorView} from "./result-indicator-view";
 import type {ResultIndicatorModel} from "../model/result-indicator-model";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {HUDCutInScale} from "../../../hud-scale/hud-scale";
+import {HUD_RESULT_INDICATOR} from "../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
 const MESH_SIZE = 400;
@@ -43,7 +44,7 @@ export class SimpleIndicatorView implements ResultIndicatorView {
     const safeAreaY = (0 < model.worldCoordinate.y) ? preRender.safeAreaInset.top : preRender.safeAreaInset.bottom;
     target.position.y = model.localCoordinate.y * devicePerScale
       + model.worldCoordinate.y * (preRender.rendererDOM.clientHeight/2 -safeAreaY -this._paddingY * devicePerScale);
-    target.position.z = model.zIndex;
+    target.position.z = HUD_RESULT_INDICATOR;
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
     target.quaternion.copy(preRender.camera.quaternion);

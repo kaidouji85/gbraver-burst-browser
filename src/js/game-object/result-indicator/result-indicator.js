@@ -10,7 +10,6 @@ import {Animate} from "../../animation/animate";
 import {slideIn} from "./animation/slide-in";
 import {moveToEdge} from "./animation/move-to-edge";
 import {hidden} from "./animation/hidden";
-import {HUD_RESULT_INDICATOR} from "../../zindex/hud-zindex";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
@@ -54,11 +53,10 @@ export class ResultIndicator {
   /**
    * スライドイン
    *
-   * @param zIndex HUDレイヤー重ね順
    * @return アニメーション
    */
-  slideIn(zIndex: number = HUD_RESULT_INDICATOR): Animate {
-    return slideIn(this._model, zIndex);
+  slideIn(): Animate {
+    return slideIn(this._model);
   }
 
   /**
