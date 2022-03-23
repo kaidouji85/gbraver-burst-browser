@@ -51,7 +51,7 @@ export class ResultIndicator {
   }
 
   /**
-   * スライドイン
+   * スライドイン表示
    *
    * @return アニメーション
    */
@@ -60,7 +60,7 @@ export class ResultIndicator {
   }
 
   /**
-   * 端に移動する
+   * 画面端に移動する
    *
    * @return アニメーション
    */

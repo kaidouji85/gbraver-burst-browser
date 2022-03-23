@@ -7,7 +7,7 @@ import {tween} from "../../../animation/tween";
 import {all} from "../../../animation/all";
 
 /**
- * スライドイン
+ * スライドイン表示
  *
  * @param model モデル
  * @return アニメーション
@@ -17,6 +17,8 @@ export function slideIn(model: ResultIndicatorModel): Animate {
   const distance = 50;
   return process(() => {
     model.opacity = 0;
+    model.worldCoordinate.x = 0;
+    model.worldCoordinate.y = 0;
     model.localCoordinate.x = -distance;
     model.localCoordinate.y = 0;
     model.scale = 1.3;

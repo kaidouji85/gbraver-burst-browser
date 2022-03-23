@@ -6,7 +6,7 @@ import {tween} from "../../../animation/tween";
 import {all} from "../../../animation/all";
 
 /**
- * 端に移動する
+ * 画面端に移動する
  *
  * @param model モデル
  * @return アニメーション

@@ -14,6 +14,8 @@ export const win = (): HTMLElement => {
       .chain(indicator.slideIn())
       .chain(delay(1000))
       .chain(indicator.moveToEdge())
+      .chain(delay(1000))
+      .chain(indicator.hidden())
       .loop();
     return [indicator.getObject3D()];
   });
@@ -28,6 +30,8 @@ export const lose = (): HTMLElement => {
       .chain(indicator.slideIn())
       .chain(delay(1000))
       .chain(indicator.moveToEdge())
+      .chain(delay(1000))
+      .chain(indicator.hidden())
       .loop();
     return [indicator.getObject3D()];
   });
@@ -42,6 +46,8 @@ export const draw = (): HTMLElement => {
       .chain(indicator.slideIn())
       .chain(delay(1000))
       .chain(indicator.moveToEdge())
+      .chain(delay(1000))
+      .chain(indicator.hidden())
       .loop();
     return [indicator.getObject3D()];
   });
