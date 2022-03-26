@@ -70,7 +70,7 @@ function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate
       param.burstArmdozerHUD.cutIn.hidden(),
       param.hudObjects.rearmostFader.opacity(0, 300),
     ))
-    .chain(delay(200))
+    .chain(delay(300))
     .chain(all(
       param.burstArmdozerTD.lightningBarrier.show(),
       param.burstPlayerTD.armdozerEffects.reflect.popUp(),
@@ -81,11 +81,11 @@ function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate
       param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
     ))
     .chain(delay(200))
-    .chain(all(
+    .chain(
       delay(500),
       toInitial(param.tdCamera, 500),
       param.burstArmdozerTD.lightningDozer.gutsToStand(),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
-    ));
+    );
 }
