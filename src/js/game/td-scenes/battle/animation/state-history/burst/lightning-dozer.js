@@ -1,5 +1,4 @@
 // @flow
-
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
 import type {Burst, LightningBarrier} from "gbraver-burst-core";
@@ -65,23 +64,28 @@ function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible()
-  ).chain(delay(2000)
-  ).chain(all(
-    param.burstArmdozerHUD.cutIn.hidden(),
-    param.hudObjects.rearmostFader.opacity(0, 300),
-  )).chain(delay(500)
-  ).chain(all(
-    param.burstArmdozerTD.lightningBarrier.show(),
-    param.burstPlayerTD.armdozerEffects.reflect.popUp(),
-  )).chain(delay(500)
-  ).chain(all(
-    param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
-    param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
-  )).chain(delay(500)
-  ).chain(all(
-    toInitial(param.tdCamera, 500),
-    param.burstArmdozerTD.lightningDozer.gutsToStand(),
-    param.tdObjects.skyBrightness.brightness(1, 500),
-    param.tdObjects.illumination.intensity(1, 500),
-  )).chain(delay(500));
+  )
+    .chain(delay(1000))
+    .chain(all(
+      param.burstArmdozerHUD.cutIn.hidden(),
+      param.hudObjects.rearmostFader.opacity(0, 300),
+    ))
+    .chain(delay(300))
+    .chain(all(
+      param.burstArmdozerTD.lightningBarrier.show(),
+      param.burstPlayerTD.armdozerEffects.reflect.popUp(),
+    ))
+    .chain(delay(200))
+    .chain(all(
+      param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
+      param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+    ))
+    .chain(delay(200))
+    .chain(
+      delay(500),
+      toInitial(param.tdCamera, 500),
+      param.burstArmdozerTD.lightningDozer.gutsToStand(),
+      param.tdObjects.skyBrightness.brightness(1, 500),
+      param.tdObjects.illumination.intensity(1, 500),
+    );
 }
