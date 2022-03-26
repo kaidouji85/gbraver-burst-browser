@@ -1,5 +1,4 @@
 // @flow
-
 import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
 import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
