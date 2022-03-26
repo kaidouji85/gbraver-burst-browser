@@ -77,7 +77,7 @@ function recoverBattery(param: ShinBraverBurst<RecoverBattery>): Animate {
     ))
     .chain(delay(200))
     .chain(
-      delay(800),
+      delay(500),
       param.burstArmdozerTD.shinBraver.burstToStand(),
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),

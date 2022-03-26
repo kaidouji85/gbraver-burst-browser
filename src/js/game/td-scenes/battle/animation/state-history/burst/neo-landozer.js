@@ -64,21 +64,25 @@ function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
     param.tdObjects.illumination.intensity(0.2, 500),
     param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible(),
-  ).chain(delay(2000)
-  ).chain(all(
-    param.burstArmdozerHUD.cutIn.hidden(),
-    param.hudObjects.rearmostFader.opacity(0, 300),
-  )).chain(delay(500)
-  ).chain(param.burstPlayerTD.armdozerEffects.powerUp.popUp()
-  ).chain(delay(500)
-  ).chain(all(
-    param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
-    param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
-  )).chain(delay(500)
-  ).chain(all(
-    param.burstArmdozerTD.neoLandozer.gutsToStand(),
-    toInitial(param.tdCamera, 500),
-    param.tdObjects.skyBrightness.brightness(1, 500),
-    param.tdObjects.illumination.intensity(1, 500),
-  )).chain(delay(500));
+  )
+    .chain(delay(1000))
+    .chain(all(
+      param.burstArmdozerHUD.cutIn.hidden(),
+      param.hudObjects.rearmostFader.opacity(0, 300)
+    ))
+    .chain(delay(300))
+    .chain(param.burstPlayerTD.armdozerEffects.powerUp.popUp())
+    .chain(delay(200))
+    .chain(all(
+      param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
+      param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
+    ))
+    .chain(delay(200))
+    .chain(
+      delay(500),
+      param.burstArmdozerTD.neoLandozer.gutsToStand(),
+      toInitial(param.tdCamera, 500),
+      param.tdObjects.skyBrightness.brightness(1, 500),
+      param.tdObjects.illumination.intensity(1, 500),
+    );
 }
