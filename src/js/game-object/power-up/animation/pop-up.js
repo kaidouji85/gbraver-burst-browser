@@ -1,5 +1,4 @@
 // @flow
-
 import type {PowerUpModel} from "../model/power-up-model";
 import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
@@ -21,6 +20,6 @@ export function popUp(model: PowerUpModel, sounds: PowerUpSounds): Animate {
     sounds.benefitEffect.play();
   })
     .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 400)))
-    .chain(delay(1000))
-    .chain(tween(model, t => t.to({opacity: 0, scale: 1.1}, 300)));
+    .chain(delay(600))
+    .chain(tween(model, t => t.to({opacity: 0, scale: 1.1}, 200)));
 }

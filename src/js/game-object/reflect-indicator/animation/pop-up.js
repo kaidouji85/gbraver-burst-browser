@@ -1,5 +1,4 @@
 // @flow
-
 import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
 import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
@@ -18,6 +17,6 @@ export function popUp(model: ReflectIndocatorModel): Animate {
     model.scale = 1.2;
   })
     .chain(tween(model, t => t.to({opacity: 1, scale: 1}, 400)))
-    .chain(delay(2000))
-    .chain(tween(model, t => t.to({opacity: 0, scale: 1.1}, 300)));
+    .chain(delay(600))
+    .chain(tween(model, t => t.to({opacity: 0, scale: 1.1}, 200)));
 }
