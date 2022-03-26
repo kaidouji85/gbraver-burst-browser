@@ -1,5 +1,4 @@
 // @flow
-
 import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
 import type {PilotSkill, RecoverBatterySkill} from "gbraver-burst-core";
 import {ShinyaHUD} from "../../../view/hud/pilot-objects/shinya";
@@ -65,18 +64,18 @@ function shinyaRecoverBattery(param: ShinyaAnimationParamX<RecoverBatterySkill>)
     param.tdObjects.illumination.intensity(0.2, 500),
     param.tdObjects.turnIndicator.invisible(),
   )
-    .chain(delay(2000))
+    .chain(delay(1000))
     .chain(param.pilot.cutIn.hidden())
-    .chain(delay(500))
+    .chain(delay(200))
     .chain(all(
       param.invokerHUD.gauge.battery(param.invokerState.armdozer.battery),
       param.invokerTD.recoverBattery.popUp(param.skill.recoverBattery),
     ))
-    .chain(delay(500))
-    .chain(all(
+    .chain(delay(200))
+    .chain(
+      delay(500),
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
-    ))
-    .chain(delay(500));
+    );
 }
