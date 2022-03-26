@@ -1,5 +1,4 @@
 // @flow
-
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {NeoLandozerHUD} from "../../../view/hud/armdozer-objects/neo-landozer";
 import type {BuffPower, Burst} from "gbraver-burst-core";
