@@ -27,7 +27,7 @@ export function rightItselfAnimation(view: BattleSceneView, sceneState: BattleSc
   }
 
   return getMotion(defenderArmdozer.sprite(), effect.battleResult)
-    .chain(delay(200));
+    .chain(delay(500));
 }
 
 /**

@@ -128,9 +128,7 @@ function attack(param: LightningDozerBattle<AttackResult>): Animate {
       delay(1800)
         .chain(param.attackerSprite.hmToStand())
         .chain(delay(500)),
-
       toInitial(param.tdCamera, 100),
-
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.knockBack(),
       param.defenderTD.hitMark.shockWave.popUp(),
@@ -152,7 +150,6 @@ function guard(param: LightningDozerBattle<Guard>): Animate {
       delay(1800)
         .chain(param.attackerSprite.hmToStand())
         .chain(delay(500)),
-
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.guard(),
       param.defenderTD.hitMark.shockWave.popUp(),
@@ -174,7 +171,6 @@ function miss(param: LightningDozerBattle<Miss>): Animate {
       delay(1800)
         .chain(param.attackerSprite.hmToStand())
         .chain(delay(500)),
-
       param.defenderSprite.avoid()
     ));
 }
@@ -196,12 +192,13 @@ function down(param: LightningDozerBattle<DownResult>): Animate {
   )
     .chain(param.attackerSprite.armHammer())
     .chain(all(
-      delay(1800)
+      delay(2300)
         .chain(param.attackerSprite.hmToStand())
-        .chain(delay(1000)),
-
+        .chain(delay(500)),
+      param.attackerHUD.resultIndicator.slideIn()
+        .chain(delay(500))
+        .chain(param.attackerHUD.resultIndicator.moveToEdge()),
       toInitial(param.tdCamera, 100),
-
       param.defenderTD.damageIndicator.popUp(param.result.damage),
       param.defenderSprite.down(),
       param.defenderTD.hitMark.shockWave.popUp(),

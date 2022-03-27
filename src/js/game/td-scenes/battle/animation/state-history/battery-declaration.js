@@ -49,9 +49,9 @@ function declarationWithCorrect(td: TDPlayer, origin: number, correct: number, v
   return td.batteryNumber.show(origin)
     .chain(delay(300))
     .chain(all(
-        td.batteryNumber.change(value),
-        td.batteryCorrect.popUp(correct)
-    )).chain(delay(1000));
+      td.batteryNumber.change(value),
+      td.batteryCorrect.popUp(correct)
+    )).chain(delay(200));
 }
 
 /**

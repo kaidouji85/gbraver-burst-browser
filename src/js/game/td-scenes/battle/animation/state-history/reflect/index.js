@@ -1,5 +1,4 @@
 // @flow
-
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameStateX, Reflect} from "gbraver-burst-core";
@@ -18,21 +17,18 @@ import {deathLightning, lightning} from "./lightning";
  */
 export function reflectAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<Reflect>): Animate {
   const effect: Reflect = gameState.effect;
-  const state = gameState.players.find(v => v.playerId === effect.damagedPlayer);
-  const tdArmdozer = view.td.armdozerObjects.find(v => v.playerId === effect.damagedPlayer);
-  const tdPlayer = view.td.players.find(v => v.playerId === effect.damagedPlayer);
-  const hudPlayer = view.hud.players.find(v => v.playerId === effect.damagedPlayer);
-  if (!state || !tdArmdozer || !tdPlayer || !hudPlayer) {
+  const stateOfDamaged = gameState.players.find(v => v.playerId === effect.damagedPlayer);
+  const tdArmdozerOfDamaged = view.td.armdozerObjects.find(v => v.playerId === effect.damagedPlayer);
+  const tdPlayerOfDamaged = view.td.players.find(v => v.playerId === effect.damagedPlayer);
+  const hudPlayerOfDamaged = view.hud.players.find(v => v.playerId === effect.damagedPlayer);
+  const hudPlayerOfReflecting = view.hud.players.find(v => v.playerId !== effect.damagedPlayer);
+  if (!stateOfDamaged || !tdArmdozerOfDamaged || !tdPlayerOfDamaged || !hudPlayerOfDamaged || !hudPlayerOfReflecting) {
     return empty();
   }
 
-  const animationParam: ReflectAnimationParam = {
-    effect: effect,
-    state: state,
-    sprite: tdArmdozer.sprite(),
-    tdPlayer: tdPlayer,
-    hudPlayer: hudPlayer,
-  };
+  const damaged = {state: stateOfDamaged, sprite: tdArmdozerOfDamaged.sprite(), td: tdPlayerOfDamaged, hud: hudPlayerOfDamaged};
+  const reflecting = {hud: hudPlayerOfReflecting};
+  const animationParam: ReflectAnimationParam = {effect, damaged, reflecting};
 
   if (effect.effect === 'Lightning' && effect.isDeath) {
     return deathLightning(animationParam);

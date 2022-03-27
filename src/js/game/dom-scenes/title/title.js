@@ -91,7 +91,11 @@ function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: b
       </div>
     </div>
     <div class="${ROOT_CLASS}__footer">
-      <span class="${ROOT_CLASS}__footer__copy-rights">(C) 2020 Yuusuke Takeuchi</span>
+      <small class="${ROOT_CLASS}__footer__copy-rights">
+        <span class="${ROOT_CLASS}__footer__copy-rights__symbol">&copy;</span>
+        <span class="${ROOT_CLASS}__footer__copy-rights__year">2022</span>
+        <span class="${ROOT_CLASS}__footer__copy-rights__owner">Pegass85</span>
+      </small>
       <a class="${ROOT_CLASS}__footer__terms-of-service" href="${termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
       <a class="${ROOT_CLASS}__footer__privacy-policy" href="${privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
       <a class="${ROOT_CLASS}__footer__contact" href="${contactURL}" target="_blank" rel="noopener">問い合わせ</a>

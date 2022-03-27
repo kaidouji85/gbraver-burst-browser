@@ -1,5 +1,4 @@
 // @flow
-
 import type {Burst, ContinuousAttack} from "gbraver-burst-core";
 import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 import {Animate} from "../../../../../../animation/animate";
@@ -66,23 +65,23 @@ export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack
     param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible(),
   )
-    .chain(delay(2000))
+    .chain(delay(1000))
     .chain(all(
       param.burstArmdozerHUD.cutIn.hidden(),
       param.hudObjects.rearmostFader.opacity(0, 300),))
-    .chain(delay(500))
+    .chain(delay(300))
     .chain(param.burstPlayerTD.armdozerEffects.continuousAttack.popUp())
-    .chain(delay(500))
+    .chain(delay(200))
     .chain(all(
       param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
       param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
     ))
-    .chain(delay(500))
-    .chain(all(
+    .chain(delay(200))
+    .chain(
+      delay(500),
       param.burstArmdozerTD.wingDozer.dashToStand(),
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
-    ))
-    .chain(delay(500));
+    );
 }

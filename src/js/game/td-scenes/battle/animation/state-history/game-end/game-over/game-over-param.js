@@ -1,9 +1,9 @@
 // @flow
 
-import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
-import {BattleSceneView} from "../../../view";
+import type {TDArmdozerObjects} from "../../../../view/td/armdozer-objects/armdozer-objects";
+import {BattleSceneView} from "../../../../view";
 import type {GameStateX, GameEndX, GameOver } from "gbraver-burst-core";
-import {TDCamera} from "../../../../../../game-object/camera/td";
+import {TDCamera} from "../../../../../../../game-object/camera/td";
 
 /**
  * ゲームオーバー アニメーションパラメータ
@@ -25,7 +25,7 @@ export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
  * 変換できない場合はnullを返す
  *
  * @param view ビュー
- * @param gameOver ゲームオーバー
+ * @param gameState ゲームステート
  * @return 変換結果
  */
 export function toGameOverParam(view: BattleSceneView, gameState: GameStateX<GameEndX<GameOver>>): ?GameOverParam {
