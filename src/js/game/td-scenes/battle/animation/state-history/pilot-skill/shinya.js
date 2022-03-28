@@ -71,11 +71,9 @@ function shinyaRecoverBattery(param: ShinyaAnimationParamX<RecoverBatterySkill>)
       param.invokerHUD.gauge.battery(param.invokerState.armdozer.battery),
       param.invokerTD.recoverBattery.popUp(param.skill.recoverBattery),
     ))
-    .chain(delay(200))
-    .chain(
-      delay(500),
+    .chain(all(
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
-    );
+    ));
 }
