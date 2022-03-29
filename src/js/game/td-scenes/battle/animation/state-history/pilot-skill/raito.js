@@ -69,11 +69,9 @@ function raitoDamageDecrease(param: RaitoAnimationParamX<DamageDecreaseSkill>): 
     .chain(param.pilot.cutIn.hidden())
     .chain(delay(200))
     .chain(param.invokerTD.armdozerEffects.damageDecrease.popUp())
-    .chain(delay(200))
-    .chain(
-      delay(500),
+    .chain(all(
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
-    );
+    ));
 }
