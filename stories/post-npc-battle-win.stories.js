@@ -11,6 +11,9 @@ export default {
 export const floater: DOMStubStory = domStub(() => {
   const floater = new PostNPCBattleWinFloater();
   floater.show();
+  floater.selectionCompleteNotifier().subscribe(postBattle => {
+    console.log(postBattle);
+  });
   return floater.getRootHTMLElement();
 });
 

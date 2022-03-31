@@ -16,6 +16,13 @@ export class DOMFloaters {
   }
 
   /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._postNPCBattleWin.destructor();
+  }
+
+  /**
    * 本クラスのルートHTML要素を取得する
    * 
    * @return 取得結果
