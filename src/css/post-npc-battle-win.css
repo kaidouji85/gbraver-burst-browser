@@ -6,8 +6,6 @@
     position: absolute;
     bottom: var(--safe-area-bottom);
     left: 50vw;
-    transform: translate(-50%, 0);
-    display: flex;
   }
 }
 
