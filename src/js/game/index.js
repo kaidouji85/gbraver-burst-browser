@@ -66,6 +66,7 @@ import type {BGMManager} from './bgm/bgm-manager';
 import {createBGMManager} from './bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stopWithFadeOut} from "./bgm/bgm-operators";
+import {DOMFloaters} from "./dom-floaters/dom-floaters";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -112,6 +113,7 @@ export class Game {
   _interruptScenes: InterruptScenes;
   _domScenes: DOMScenes;
   _domDialogs: DOMDialogs;
+  _domFloaters: DOMFloaters;
   _tdScenes: TDScenes;
   _resourceRoot: ResourceRoot;
   _resources: Resources;
@@ -148,11 +150,12 @@ export class Game {
     this._interruptScenes = new InterruptScenes();
     this._domScenes = new DOMScenes();
     this._domDialogs = new DOMDialogs();
+    this._domFloaters = new DOMFloaters();
     this._tdScenes = new TDScenes(this._resize);
 
     const body = document.body || document.createElement('div');
     const elements = [this._fader.getRootHTMLElement(), this._interruptScenes.getRootHTMLElement(),
-      this._domDialogs.getRootHTMLElement(), this._domScenes.getRootHTMLElement(), 
+      this._domDialogs.getRootHTMLElement(), this._domScenes.getRootHTMLElement(), this._domFloaters.getRootHTMLElement(),
       this._tdScenes.getRendererDOM()];
     elements.forEach(element => {
       body.appendChild(element);

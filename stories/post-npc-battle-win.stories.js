@@ -1,7 +1,7 @@
 // @flow
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
-import {PostNPCBattleWinFloater} from "../src/js/game/dom-floater/post-npc-battle-win/post-npc-battle-win";
+import {PostNPCBattleWinFloater} from "../src/js/game/dom-floaters/post-npc-battle-win/post-npc-battle-win";
 import {waitTime} from "../src/js/wait/wait-time";
 
 export default {
