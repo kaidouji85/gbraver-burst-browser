@@ -1,0 +1,37 @@
+/** NPCバトル勝利後フローター */
+@media (orientation: landscape) {
+  .post-npc-battle-win {
+    --control-button-width: calc(var(--responsive-font-size) * 10);
+    --control-button-height: calc(var(--responsive-font-size) * 3);
+    position: absolute;
+    bottom: var(--safe-area-bottom);
+    left: 50vw;
+    transform: translate(-50%, 0);
+    display: flex;
+  }
+}
+
+@media (orientation: portrait) {
+  .post-npc-battle-win {
+    display: none;
+  }
+}
+
+.post-npc-battle-win__goto-title, .post-npc-battle-win__next-stage {
+  width: var(--control-button-width);
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+  margin: calc(var(--responsive-font-size) * 0.5);
+}
+
+.post-npc-battle-win__goto-title {
+  background-color: var(--sub-button-background-color);
+}
+
+.post-npc-battle-win__next-stage {
+  background-color: var(--button-background-color);
+}
