@@ -4,7 +4,7 @@
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
     position: absolute;
-    bottom: var(--safe-area-bottom);
+    bottom: max(var(--safe-area-bottom), calc(var(--vh, 1vh) * 20));
     left: 50vw;
   }
 }
