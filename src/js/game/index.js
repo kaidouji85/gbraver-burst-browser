@@ -28,9 +28,10 @@ import type {
   DifficultySelectionComplete,
   EndBattle,
   EndNetworkError,
+  PostBattleAction,
   SelectionComplete,
   WebSocketAPIError,
-  WebSocketAPIUnintentionalClose
+  WebSocketAPIUnintentionalClose,
 } from "./actions/game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
@@ -175,6 +176,7 @@ export class Game {
       else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
       else if (action.type === 'EndBattle') { this._onEndBattle(action) }
       else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
+      else if (action.type === 'PostBattleAction') { this._onPostBattleAction(action) }
       else if (action.type === 'GameStart') { this._onGameStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
@@ -572,6 +574,13 @@ export class Game {
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
+  }
+
+  /**
+   * 戦闘終了後アクション決定時の処理
+   */ 
+  _onPostBattleAction(action: PostBattleAction): void {
+    console.log(action);
   }
 
   /**

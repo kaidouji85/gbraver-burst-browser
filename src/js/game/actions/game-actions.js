@@ -81,9 +81,10 @@ export type SuddenlyBattleEnd = {
   type: 'SuddenlyBattleEnd'
 };
 
-/** 戦闘終了後の行動 */
+/** 戦闘終了後アクション決定 */
 export type PostBattleAction = {
   type: 'PostBattleAction',
+  /** 決定したアクション */
   action: PostBattle,
 };
 
