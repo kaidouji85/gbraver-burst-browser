@@ -29,7 +29,7 @@ export interface FutureStream<T> {
 }
 
 /** FutureStreamのシンプルな実装 */
-class SimpleFutureSrream<T> implements FutureStream<T> {
+class SimpleFutureStream<T> implements FutureStream<T> {
   source: StreamSource<T>;
   unsubscriber: ?Unsubscriber;
 
@@ -68,5 +68,5 @@ class SimpleFutureSrream<T> implements FutureStream<T> {
  * @return 生成結果
  */
 export function futureStream<T>(): FutureStream<T> {
-  return new SimpleFutureSrream();
+  return new SimpleFutureStream();
 }
