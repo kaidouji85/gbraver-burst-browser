@@ -1,7 +1,6 @@
 // @flow
-
-import {isStageClear} from "../../../../../src/js/game/in-progress/npc-battle/npc-battle";
-import {EMPTY_PLAYER} from "../../../../data/player";
+import {isStageClear} from "../../../../src/js/game/in-progress/npc-battle";
+import {EMPTY_PLAYER} from "../../../data/player";
 
 const player = {...EMPTY_PLAYER, playerId: 'test-player'};
 
