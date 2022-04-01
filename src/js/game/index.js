@@ -1,5 +1,4 @@
 // @flow
-
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
 import {
@@ -29,7 +28,6 @@ import type {
   DifficultySelectionComplete,
   EndBattle,
   EndNetworkError,
-  GameAction,
   SelectionComplete,
   WebSocketAPIError,
   WebSocketAPIUnintentionalClose
@@ -54,7 +52,6 @@ import type {
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
-import {toWebSocketAPIErrorStream, toWebSocketAPIUnintentionalCloseStream} from './network/websocket-api-stream';
 import {map} from "../stream/operator";
 import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
 import {INITIAL_STAGE_LEVEL} from "./npc-battle/npc-battle-stage";
@@ -66,6 +63,7 @@ import type {BGMManager} from './bgm/bgm-manager';
 import {createBGMManager} from './bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stopWithFadeOut} from "./bgm/bgm-operators";
+import {toStream} from "../stream/rxjs";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -162,11 +160,11 @@ export class Game {
     this._bgm = createBGMManager();
 
     const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier()
-      .chain(map(v => (v: GameAction)));
-    const webSocketAPIError = toWebSocketAPIErrorStream(this._api)
-      .chain(map(v => (v: GameAction)));
-    const WebSocketAPIUnintentionalClose = toWebSocketAPIUnintentionalCloseStream(this._api)
-      .chain(map(v => (v: GameAction)));
+      .chain(map(() => ({type: 'SuddenlyBattleEnd'})));
+    const webSocketAPIError = toStream(this._api.websocketErrorNotifier())
+      .chain(map(error => ({type: 'WebSocketAPIError', error})))
+    const WebSocketAPIUnintentionalClose = toStream(this._api.websocketUnintentionalCloseNotifier())
+      .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
       this._domDialogs.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
