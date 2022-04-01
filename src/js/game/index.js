@@ -106,7 +106,7 @@ export class Game {
   _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
-  _futureSuddenlyBattleEnd: FutureStream<GameAction>;
+  _suddenlyBattleEnd: FutureStream<GameAction>;
   _resize: Stream<Resize>;
   _vh: CssVH;
   _fader: DOMFader;
@@ -160,13 +160,13 @@ export class Game {
     this._serviceWorker = null;
     this._bgm = createBGMManager();
 
-    this._futureSuddenlyBattleEnd = futureStream();
+    this._suddenlyBattleEnd = futureStream();
     const webSocketAPIError = toStream(this._api.websocketErrorNotifier())
       .chain(map(error => ({type: 'WebSocketAPIError', error})))
     const WebSocketAPIUnintentionalClose = toStream(this._api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(), this._futureSuddenlyBattleEnd.stream(), webSocketAPIError, WebSocketAPIUnintentionalClose];
+      this._domDialogs.gameActionNotifier(), this._suddenlyBattleEnd.stream(), webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'ReloadRequest') { this._onReloadRequest() }
       else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
@@ -440,7 +440,7 @@ export class Game {
     const startCasualMatch = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
       const battle = await waitUntilMatching();
-      this._futureSuddenlyBattleEnd.bind(toSuddenlyBattleEnd(battle));
+      this._suddenlyBattleEnd.bind(toSuddenlyBattleEnd(battle));
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
@@ -538,7 +538,7 @@ export class Game {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
-      this._futureSuddenlyBattleEnd.unbind();
+      this._suddenlyBattleEnd.unbind();
       const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
       await this._fader.fadeIn();
       ending.playBGM();
@@ -577,7 +577,7 @@ export class Game {
   async _onSuddenlyEndBattle(): Promise<void> {
     const postNetworkError = {type: 'GotoTitle'};
     this._domDialogs.startNetworkError(this._resources, postNetworkError);
-    this._futureSuddenlyBattleEnd.unbind();
+    this._suddenlyBattleEnd.unbind();
     await this._api.disconnectWebsocket();
   }
 
