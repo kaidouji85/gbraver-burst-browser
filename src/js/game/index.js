@@ -161,9 +161,12 @@ export class Game {
     this._serviceWorker = null;
     this._bgm = createBGMManager();
 
-    const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)));
-    const webSocketAPIError = toWebSocketAPIErrorStream(this._api).chain(map(v => (v: GameAction)));
-    const WebSocketAPIUnintentionalClose = toWebSocketAPIUnintentionalCloseStream(this._api).chain(map(v => (v: GameAction)));
+    const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier()
+      .chain(map(v => (v: GameAction)));
+    const webSocketAPIError = toWebSocketAPIErrorStream(this._api)
+      .chain(map(v => (v: GameAction)));
+    const WebSocketAPIUnintentionalClose = toWebSocketAPIUnintentionalCloseStream(this._api)
+      .chain(map(v => (v: GameAction)));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
       this._domDialogs.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {

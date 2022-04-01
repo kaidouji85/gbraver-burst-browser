@@ -1,5 +1,4 @@
 // @flow
-
 import type {WebsocketErrorNotifier, WebsocketUnintentionalCloseNotifier} from '@gbraver-burst-network/browser-core';
 import type {Stream} from "../../stream/core";
 import {map} from "../../stream/operator";
@@ -14,7 +13,7 @@ import type {WebSocketAPIError, WebSocketAPIUnintentionalClose} from '../actions
  */
 export function toWebSocketAPIErrorStream(api: WebsocketErrorNotifier): Stream<WebSocketAPIError> {
   return toStream(api.websocketErrorNotifier())
-    .chain(map((error: any) => ({type: 'WebSocketAPIError', error})));
+    .chain(map(error => ({type: 'WebSocketAPIError', error})));
 }
 
 /**
@@ -25,5 +24,5 @@ export function toWebSocketAPIErrorStream(api: WebsocketErrorNotifier): Stream<W
  */
 export function toWebSocketAPIUnintentionalCloseStream(api: WebsocketUnintentionalCloseNotifier): Stream<WebSocketAPIUnintentionalClose> {
   return toStream(api.websocketUnintentionalCloseNotifier())
-    .chain(map((error: any) => ({type: 'WebSocketAPIUnintentionalClose', error})));
+    .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
 }
