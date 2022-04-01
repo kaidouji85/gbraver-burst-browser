@@ -52,7 +52,6 @@ import type {
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match/casual-match";
 import {Title} from "./dom-scenes/title/title";
-import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
 import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
 import {INITIAL_STAGE_LEVEL} from "./npc-battle/npc-battle-stage";
@@ -65,6 +64,9 @@ import {createBGMManager} from './bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stopWithFadeOut} from "./bgm/bgm-operators";
 import {toStream} from "../stream/rxjs";
+import type {FutureStream} from "../stream/future-stream";
+import {toSuddenlyBattleEnd} from "./to-suddenly-battle-end";
+import {futureStream} from "../stream/future-stream";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -104,7 +106,7 @@ export class Game {
   _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
-  _suddenlyBattleEndMonitor: SuddenlyBattleEndMonitor;
+  _futureSuddenlyBattleEnd: FutureStream<GameAction>;
   _resize: Stream<Resize>;
   _vh: CssVH;
   _fader: DOMFader;
@@ -139,10 +141,8 @@ export class Game {
     this._inProgress = {type: 'None'};
     this._resize = resizeStream();
     this._vh = new CssVH(this._resize);
-
     this._api = param.api;
-    this._suddenlyBattleEndMonitor = new SuddenlyBattleEndMonitor();
-
+    
     this._fader = new DOMFader();
     this._interruptScenes = new InterruptScenes();
     this._domScenes = new DOMScenes();
@@ -160,13 +160,13 @@ export class Game {
     this._serviceWorker = null;
     this._bgm = createBGMManager();
 
-    const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier().chain(map(v => (v: GameAction)));
+    this._futureSuddenlyBattleEnd = futureStream();
     const webSocketAPIError = toStream(this._api.websocketErrorNotifier())
       .chain(map(error => ({type: 'WebSocketAPIError', error})))
     const WebSocketAPIUnintentionalClose = toStream(this._api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
+      this._domDialogs.gameActionNotifier(), this._futureSuddenlyBattleEnd.notifier(), webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'ReloadRequest') { this._onReloadRequest() }
       else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
@@ -440,7 +440,7 @@ export class Game {
     const startCasualMatch = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
       const battle = await waitUntilMatching();
-      this._suddenlyBattleEndMonitor.bind(battle);
+      this._futureSuddenlyBattleEnd.bind(toSuddenlyBattleEnd(battle));
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
@@ -538,7 +538,7 @@ export class Game {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
-      this._suddenlyBattleEndMonitor.unbind();
+      this._futureSuddenlyBattleEnd.unbind();
       const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
       await this._fader.fadeIn();
       ending.playBGM();
@@ -577,7 +577,7 @@ export class Game {
   async _onSuddenlyEndBattle(): Promise<void> {
     const postNetworkError = {type: 'GotoTitle'};
     this._domDialogs.startNetworkError(this._resources, postNetworkError);
-    this._suddenlyBattleEndMonitor.unbind();
+    this._futureSuddenlyBattleEnd.unbind();
     await this._api.disconnectWebsocket();
   }
 
