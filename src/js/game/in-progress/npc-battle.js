@@ -2,9 +2,9 @@
 
 import type {GameEndResult, Player, ArmDozerId, PilotId} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
-import type {NPCBattleCourse} from '../../npc-battle/npc-battle-course';
-import {playerUuid} from "../../../uuid/player";
-import type {StageLevel} from "../../npc-battle/npc-battle-stage";
+import type {NPCBattleCourse} from '../npc-battle/npc-battle-course';
+import {playerUuid} from "../../uuid/player";
+import type {StageLevel} from "../npc-battle/npc-battle-stage";
 
 /** プレイヤー選択 */
 export type PlayerSelect = {

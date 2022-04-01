@@ -16,8 +16,8 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {DifficultySelect, InNPCBattleCourse, NPCBattle, NPCBattleX,} from "./in-progress/npc-battle/npc-battle";
-import {createNPCBattlePlayer, isStageClear} from "./in-progress/npc-battle/npc-battle";
+import type {DifficultySelect, InNPCBattleCourse, NPCBattle, NPCBattleX,} from "./in-progress/npc-battle";
+import {createNPCBattlePlayer, isStageClear} from "./in-progress/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
@@ -49,7 +49,7 @@ import type {
   WebsocketErrorNotifier,
   WebsocketUnintentionalCloseNotifier,
 } from '@gbraver-burst-network/browser-core';
-import type {CasualMatch} from "./in-progress/casual-match/casual-match";
+import type {CasualMatch} from "./in-progress/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";

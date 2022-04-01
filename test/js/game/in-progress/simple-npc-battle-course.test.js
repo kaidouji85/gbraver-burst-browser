@@ -1,8 +1,7 @@
 // @flow
-
-import {normalNeoLandozer} from '../../../../../src/js/npc/normal-neo-landozer';
-import {SimpleNPCBattleCourse} from "../../../../../src/js/game/npc-battle/simple-npc-battle-course";
-import {DefaultStage} from "../../../../../src/js/game/npc-battle/npc-battle-stage";
+import {normalNeoLandozer} from '../../../../src/js/npc/normal-neo-landozer';
+import {SimpleNPCBattleCourse} from "../../../../src/js/game/npc-battle/simple-npc-battle-course";
+import {DefaultStage} from "../../../../src/js/game/npc-battle/npc-battle-stage";
 
 const stage1 = {caption: ['test stage 1'], npc: normalNeoLandozer(), bgm: 'bgm-01'};
 const stage2 = {caption: ['test stage 2'], npc: normalNeoLandozer(), bgm: 'bgm-02'};
