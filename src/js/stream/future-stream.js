@@ -16,16 +16,16 @@ export interface FutureStream<T> {
   bind(stream: Stream<T>): void;
 
   /**
-   * ストリームを外す
+   * ストリームの関連付けを外す
    */
   unbind(): void;
 
   /**
-   * 通知する
+   * ストリームを取得する
    *
    * @return ストリーム
    */
-  notifier(): Stream<T>;
+  stream(): Stream<T>;
 }
 
 /** FutureStreamのシンプルな実装 */
@@ -56,7 +56,7 @@ class SimpleFutureSrream<T> implements FutureStream<T> {
   }
 
   /** @override */
-  notifier(): Stream<T> {
+  stream(): Stream<T> {
     return this.source;
   }
 }

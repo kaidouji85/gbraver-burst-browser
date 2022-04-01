@@ -166,7 +166,7 @@ export class Game {
     const WebSocketAPIUnintentionalClose = toStream(this._api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(), this._futureSuddenlyBattleEnd.notifier(), webSocketAPIError, WebSocketAPIUnintentionalClose];
+      this._domDialogs.gameActionNotifier(), this._futureSuddenlyBattleEnd.stream(), webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'ReloadRequest') { this._onReloadRequest() }
       else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
