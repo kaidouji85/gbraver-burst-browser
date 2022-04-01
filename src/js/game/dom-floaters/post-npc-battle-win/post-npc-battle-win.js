@@ -5,7 +5,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import {RxjsStreamSource} from "../../../stream/rxjs";
-import type {PostBattle} from "./post-battle";
+import type {PostBattle} from "../../post-battle/post-battle";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'post-npc-battle-win';
@@ -143,7 +143,7 @@ export class PostNPCBattleWinFloater {
   _onGotoTitlePush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._selectionComplete.next('GotoTitle');
+    this._selectionComplete.next({type: 'GotoTitle'});
   }
 
   /**
@@ -154,6 +154,6 @@ export class PostNPCBattleWinFloater {
   _onNextStagePush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._selectionComplete.next('NextStage');
+    this._selectionComplete.next({type: 'NextStage'});
   }
 }
