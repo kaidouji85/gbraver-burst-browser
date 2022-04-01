@@ -1,18 +1,31 @@
 // @flow
+import type { Stream, StreamSource, Unsubscriber } from "../../stream/core";
+import type {GameAction} from "../actions/game-actions";
+import {RxjsStreamSource} from "../../stream/rxjs";
 import {PostNPCBattleWinFloater} from "./post-npc-battle-win/post-npc-battle-win";
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {
   _root: HTMLElement;
   _postNPCBattleWin: PostNPCBattleWinFloater;
+  _gameAction: StreamSource<GameAction>;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
    */
   constructor() {
     this._root = document.createElement('div');
+    this._gameAction = new RxjsStreamSource();
+
     this._postNPCBattleWin = new PostNPCBattleWinFloater();
     this._root.appendChild(this._postNPCBattleWin.getRootHTMLElement());
+
+    this._unsubscribers = [
+      this._postNPCBattleWin.selectionCompleteNotifier().subscribe(postBattle => {
+        this._gameAction.next({type: 'PostBattleAction', action: postBattle});
+      })
+    ];
   }
 
   /**
@@ -29,6 +42,15 @@ export class DOMFloaters {
    */
   getRootHTMLElement(): HTMLElement {
     return this._root;
+  }
+
+  /**
+   * ゲームアクション通知
+   * 
+   * @return 通知ストリーム
+   */
+  gameActionNotifier(): Stream<GameAction> {
+    return this._gameAction;
   }
 
   /**
