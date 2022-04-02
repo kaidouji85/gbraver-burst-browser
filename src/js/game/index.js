@@ -17,7 +17,7 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {DifficultySelect, InNPCBattleCourse, NPCBattle, NPCBattleX,} from "./in-progress/npc-battle";
-import {createNPCBattlePlayer, isStageClear} from "./in-progress/npc-battle";
+import {createNPCBattlePlayer} from "./in-progress/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
@@ -53,7 +53,7 @@ import type {CasualMatch} from "./in-progress/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
-import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
+import type {StageLevel} from "./npc-battle/npc-battle-stage";
 import {INITIAL_STAGE_LEVEL} from "./npc-battle/npc-battle-stage";
 import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
@@ -64,6 +64,8 @@ import {createBGMManager} from './bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stopWithFadeOut} from "./bgm/bgm-operators";
 import {toStream} from "../stream/rxjs";
+import type {NPCBattleStage} from "./npc-battle";
+import {isStageClear} from "./npc-battle";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,

@@ -1,7 +1,8 @@
 // @flow
 
 import type {ArmDozerId} from "gbraver-burst-core";
-import type {NPCBattleStage, StageLevel} from "./npc-battle-stage";
+import type {StageLevel} from "./npc-battle-stage";
+import type {NPCBattleStage} from "../npc-battle";
 
 /** NPCバトルコース難易度 */
 export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard';

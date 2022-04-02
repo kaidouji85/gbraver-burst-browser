@@ -6,7 +6,6 @@ import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../npc/one-b
 import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../npc/max-battery-attack";
 import type {NPCBattleCourse, NPCBattleCourseContainer, NPCBattleCourseDifficulty} from "./npc-battle-course";
 import {SimpleNPCBattleCourse} from "./simple-npc-battle-course";
-import type {NPCBattleStage} from "./npc-battle-stage";
 import {normalNeoLandozer} from "../../npc/normal-neo-landozer";
 import {normalWingDozer} from "../../npc/normal-wing-dozer";
 import {normalLightningDozer} from "../../npc/normal-lightning-dozer";
@@ -16,6 +15,7 @@ import {hardShinBraver} from "../../npc/hard-shin-braver";
 import {hardWingDozerNPC} from "../../npc/hard-wing-dozer";
 import {hardNeoLandozer} from "../../npc/hard-neo-landozer";
 import {SOUND_IDS} from "../../resource/sound";
+import type {NPCBattleStage} from "../npc-battle";
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {

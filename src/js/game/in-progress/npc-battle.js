@@ -1,6 +1,6 @@
 // @flow
 
-import type {GameEndResult, Player, ArmDozerId, PilotId} from "gbraver-burst-core";
+import type {ArmDozerId, PilotId, Player} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {NPCBattleCourse} from '../npc-battle/npc-battle-course';
 import {playerUuid} from "../../uuid/player";
@@ -60,13 +60,3 @@ export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId):
   return {playerId: playerUuid(), armdozer, pilot};
 }
 
-/**
- * ステージクリアしたか否かを判定する
- * 
- * @param player プレイヤー情報
- * @param gameEndResult ゲームエンド結果
- * @return 判定結果、trueでステージクリアである
- */
-export function isStageClear(player: Player, gameEndResult: GameEndResult): boolean {
-  return gameEndResult.type === 'GameOver' && gameEndResult.winner === player.playerId;
-}
