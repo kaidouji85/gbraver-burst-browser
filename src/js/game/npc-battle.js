@@ -2,8 +2,6 @@
 import type {GameEndResult, Player} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
 import type {SoundId} from "../resource/sound";
-import {SOUND_IDS} from "../resource/sound";
-import {normalNeoLandozer} from "../npc/normal-neo-landozer";
 
 /** NPCバトル ステージ */
 export type NPCBattleStage = {
@@ -13,13 +11,6 @@ export type NPCBattleStage = {
   npc: NPC,
   /** 再生するBGMのID */
   bgm: SoundId,
-};
-
-/** デフォルトのステージ */
-export const DefaultStage: NPCBattleStage = {
-  caption: ['敵よりも大きい', 'バッテリーを出せ'],
-  npc: normalNeoLandozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** NPCバトルの状態 */

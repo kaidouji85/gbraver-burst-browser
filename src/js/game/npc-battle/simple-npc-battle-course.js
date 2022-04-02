@@ -1,8 +1,8 @@
 // @flow
 import type {NPCBattleCourse} from "./npc-battle-course";
 import type {StageLevel} from "./npc-battle-stage";
-import {DefaultStage} from "../npc-battle";
 import type {NPCBattleStage} from "../npc-battle";
+import {DefaultStage} from "../npc-battle-course-master";
 
 /** NPCバトルコースのシンプルな実装 */
 export class SimpleNPCBattleCourse implements NPCBattleCourse {
