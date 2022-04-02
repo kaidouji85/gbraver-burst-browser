@@ -1,21 +1,35 @@
 // @flow
-import type {ArmDozerId} from 'gbraver-burst-core';
+import {normalNeoLandozer} from "../npc/normal-neo-landozer";
+import {SOUND_IDS} from "../resource/sound";
+import type {NPCBattleStage} from "./npc-battle";
+import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../npc/one-battery";
+import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../npc/max-battery-attack";
+import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../npc/attack-3-defense-2";
+import {normalShinBraver} from "../npc/normal-shin-braver";
+import {normalWingDozer} from "../npc/normal-wing-dozer";
+import {normalLightningDozer} from "../npc/normal-lightning-dozer";
+import {hardShinBraver} from "../npc/hard-shin-braver";
+import {hardWingDozerNPC} from "../npc/hard-wing-dozer";
+import {hardNeoLandozer} from "../npc/hard-neo-landozer";
+import {hardLightningDozer} from "../npc/hard-lightning-dozer";
+import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
-import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../../npc/attack-3-defense-2";
-import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../../npc/one-battery";
-import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../../npc/max-battery-attack";
-import type {NPCBattleCourse, NPCBattleCourseContainer, NPCBattleCourseDifficulty} from "./npc-battle-course";
-import {SimpleNPCBattleCourse} from "./simple-npc-battle-course";
-import type {NPCBattleStage} from "./npc-battle-stage";
-import {normalNeoLandozer} from "../../npc/normal-neo-landozer";
-import {normalWingDozer} from "../../npc/normal-wing-dozer";
-import {normalLightningDozer} from "../../npc/normal-lightning-dozer";
-import {normalShinBraver} from "../../npc/normal-shin-braver";
-import {hardLightningDozer} from "../../npc/hard-lightning-dozer";
-import {hardShinBraver} from "../../npc/hard-shin-braver";
-import {hardWingDozerNPC} from "../../npc/hard-wing-dozer";
-import {hardNeoLandozer} from "../../npc/hard-neo-landozer";
-import {SOUND_IDS} from "../../resource/sound";
+
+/** NPCバトルコース難易度 */
+export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard';
+
+/**
+ * NPCバトルコースマスタ
+ * 本データはプレイヤー状況とそれに対応したコースの組み合わせである
+ */
+export type NPCBattleCourseMaster = {
+  /** プレイヤーが選択したアームドーザID */
+  armdozerId: ArmDozerId,
+  /** プレイヤーが選択した難易度 */
+  difficulty: NPCBattleCourseDifficulty,
+  /** コース */
+  course: NPCBattleStage[],
+};
 
 /** 1バッテリー ネオランドーザ */
 const OneBatteryNeoLandozerStage: NPCBattleStage = {
@@ -115,139 +129,127 @@ const HardLightningDozer: NPCBattleStage = {
   bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
+/** デフォルトのステージ */
+export const DefaultStage: NPCBattleStage = {
+  caption: ['敵よりも大きい', 'バッテリーを出せ'],
+  npc: normalNeoLandozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
+};
+
 /** デフォルトのコース */
-const DefaultCourse = new SimpleNPCBattleCourse([
+export const DefaultCourse: NPCBattleStage[] = [
   OneBatteryNeoLandozerStage,
   MaxAttackWingDozerStage,
   Attack3Defense2LightningDozerStage
-]);
+];
 
-/** アームドーザ、難易度、コースの対応関係 */
-type CourseMap = {
-  /** プレイヤーが選択したアームドーザID */
-  armdozerId: ArmDozerId,
-  /** プレイヤーが選択した難易度 */
-  difficulty: NPCBattleCourseDifficulty,
-  /** コース */
-  course: NPCBattleCourse
-};
-
-/** コースを集めたもの */
-const Courses: CourseMap[] = [
+export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Easy',
-    course: new SimpleNPCBattleCourse([
+    course: [
       OneBatteryNeoLandozerStage,
       MaxAttackWingDozerStage,
       Attack3Defense2LightningDozerStage
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Normal',
-    course: new SimpleNPCBattleCourse([
+    course: [
       NormalWingDozerStage,
       NormalLightningDozer,
       NormalNeoLandozerStage,
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Hard',
-    course: new SimpleNPCBattleCourse([
+    course: [
       HardLightningDozer,
       HardNeoLandozer,
       HardWingDozer,
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Easy',
-    course: new SimpleNPCBattleCourse([
+    course: [
       OneBatteryShinBraverStage,
       MaxAttackWingDozerStage,
       Attack3Defense2LightningDozerStage
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Normal',
-    course: new SimpleNPCBattleCourse([
+    course: [
       NormalShinBraverStage,
       NormalWingDozerStage,
       NormalLightningDozer,
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Hard',
-    course: new SimpleNPCBattleCourse([
+    course: [
       HardLightningDozer,
       HardShinBraver,
       HardWingDozer,
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Easy',
-    course: new SimpleNPCBattleCourse([
+    course: [
       OneBatteryNeoLandozerStage,
       MaxAttackWingDozerStage,
       Attack3Defense2ShinBraverStage
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Normal',
-    course: new SimpleNPCBattleCourse([
+    course: [
       NormalShinBraverStage,
       NormalWingDozerStage,
       NormalNeoLandozerStage,
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Hard',
-    course: new SimpleNPCBattleCourse([
+    course: [
       HardNeoLandozer,
       HardShinBraver,
       HardWingDozer,
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Easy',
-    course: new SimpleNPCBattleCourse([
+    course: [
       OneBatteryNeoLandozerStage,
       MaxAttackShinBraverStage,
       Attack3Defense2LightningDozerStage
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Normal',
-    course: new SimpleNPCBattleCourse([
+    course: [
       NormalShinBraverStage,
       NormalLightningDozer,
       NormalNeoLandozerStage,
-    ])
+    ]
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Hard',
-    course: new SimpleNPCBattleCourse([
+    course: [
       HardLightningDozer,
       HardNeoLandozer,
       HardShinBraver,
-    ])
+    ]
   },
 ];
-
-/** NPCバトルコースマスタ */
-export const NPCBattleCourseMaster: NPCBattleCourseContainer = {
-  /** @override */
-  find(armdozerId: ArmDozerId, difficulty: NPCBattleCourseDifficulty) {
-    return Courses.find(v => v.armdozerId === armdozerId && v.difficulty === difficulty)?.course ?? DefaultCourse
-  }
-}

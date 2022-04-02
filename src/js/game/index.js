@@ -16,8 +16,12 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {DifficultySelect, InNPCBattleCourse, NPCBattle, NPCBattleX,} from "./in-progress/npc-battle/npc-battle";
-import {createNPCBattlePlayer, isStageClear} from "./in-progress/npc-battle/npc-battle";
+import type {
+  DifficultySelect,
+  NPCBattle,
+  NPCBattleX,
+  PlayingNPCBattle,
+} from "./in-progress/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
@@ -50,13 +54,10 @@ import type {
   WebsocketErrorNotifier,
   WebsocketUnintentionalCloseNotifier,
 } from '@gbraver-burst-network/browser-core';
-import type {CasualMatch} from "./in-progress/casual-match/casual-match";
+import type {CasualMatch} from "./in-progress/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
-import type {NPCBattleStage, StageLevel} from "./npc-battle/npc-battle-stage";
-import {INITIAL_STAGE_LEVEL} from "./npc-battle/npc-battle-stage";
-import {NPCBattleCourseMaster} from "./npc-battle/npc-battle-course-master";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
@@ -66,6 +67,15 @@ import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stopWithFadeOut} from "./bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import {toStream} from "../stream/rxjs";
+import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
+import {
+  createNPCBattlePlayer,
+  startNPCBattle,
+  getStageLevel,
+  getCurrentStage,
+  updateNPCBattle
+} from "./npc-battle";
+import {DefaultCourse, DefaultStage, NPCBattleCourseMasters} from "./npc-battle-course-master";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -499,11 +509,13 @@ export class Game {
     const difficultySelect: DifficultySelect = this._inProgress.subFlow;
     const {armdozerId, pilotId} = difficultySelect;
     const player = createNPCBattlePlayer(armdozerId, pilotId);
-    const course = NPCBattleCourseMaster.find(armdozerId, action.difficulty);
-    const level = INITIAL_STAGE_LEVEL;
-    const stage = course.stage(level);
-    const inNPCBattleCourse = {type: 'InNPCBattleCourse', player, course, level};
-    this._inProgress = {...npcBattle, subFlow: inNPCBattleCourse};
+    const course = NPCBattleCourseMasters
+      .find(v => v.armdozerId === armdozerId && v.difficulty === action.difficulty)?.course ?? DefaultCourse;
+    const npcBattleState = startNPCBattle(player, course);
+    const subFlow = {type: 'PlayingNPCBattle', state: npcBattleState};
+    this._inProgress = {...npcBattle, subFlow};
+    const stage = getCurrentStage(npcBattleState) ?? DefaultStage;
+    const level = getStageLevel(npcBattleState);
     await this._startNPCBattleStage(player, stage, level);
   }
 
@@ -526,19 +538,12 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    const npcBattleStageClear = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
-      const {level, course} = origin.subFlow;
-      const nextLevel = level + 1;
-      const nextStage = course.stage(nextLevel);
-      const updatedInNPCBattle = {...origin.subFlow, level: nextLevel};
-      this._inProgress = {...origin, subFlow: updatedInNPCBattle};
-      await this._startNPCBattleStage(origin.subFlow.player, nextStage, nextLevel);
+    const continueNPCBattle = async (inProgress: NPCBattleX<PlayingNPCBattle>, update: NPCBattleState): Promise<void> => {
+      this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: update}};
+      const level = getStageLevel(update);
+      const stage = getCurrentStage(update) ?? DefaultStage;
+      await this._startNPCBattleStage(update.player, stage, level);
     };
-    const npcBattleStageFailed = async (origin: NPCBattleX<InNPCBattleCourse>): Promise<void> => {
-      const {level, player} = origin.subFlow;
-      const stage = origin.subFlow.course.stage(level);
-      await this._startNPCBattleStage(player, stage, level);
-    }; 
     const npcBattleComplete = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
@@ -558,19 +563,11 @@ export class Game {
       title.playBGM();
     };
 
-    if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'InNPCBattleCourse') {
-      const inNPCBattleCourse: InNPCBattleCourse = this._inProgress.subFlow;
-      const {player, level, course} = inNPCBattleCourse;
-      const isNPCBattleStageClear = isStageClear(player, action.gameEnd.result);
-      const isLastStage = course.lastStageLevel() <= level;
-      const castedInProgress = ((this._inProgress: any): NPCBattleX<typeof inNPCBattleCourse>);
-      if (isNPCBattleStageClear && !isLastStage) {
-        await npcBattleStageClear(castedInProgress);
-      } else if (isNPCBattleStageClear && isLastStage) {
-        await npcBattleComplete();
-      } else {
-        await npcBattleStageFailed(castedInProgress);
-      }
+    if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
+      const playingNPCBattle: PlayingNPCBattle = this._inProgress.subFlow;
+      const inProgress = ((this._inProgress: any): NPCBattleX<typeof playingNPCBattle>);
+      const updatedNPCBattleState = updateNPCBattle(playingNPCBattle.state, action.gameEnd.result);
+      updatedNPCBattleState.isGameClear ? await npcBattleComplete() : await continueNPCBattle(inProgress, updatedNPCBattleState);
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
@@ -616,7 +613,7 @@ export class Game {
   }
 
   /**
-   * NPC戦闘エンディングが終了した際の処理
+   * NPCバトルエンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
     this._bgm.do(stopWithFadeOut);
@@ -669,7 +666,7 @@ export class Game {
    * @param stage NPCバトルステージ
    * @param level ステージレベル
    */
-  async _startNPCBattleStage(player: Player, stage: NPCBattleStage, level: StageLevel) {
+  async _startNPCBattleStage(player: Player, stage: NPCBattleStage, level: number) {
     const npcBattle = new NPCBattleRoom(player, stage.npc);
     await this._fader.fadeOut();
     this._domDialogs.hidden();
