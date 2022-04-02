@@ -1,7 +1,9 @@
 // @flow
-import type {GameEndResult, Player} from "gbraver-burst-core";
+import type {ArmDozerId, GameEndResult, PilotId, Player} from "gbraver-burst-core";
+import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
 import type {SoundId} from "../resource/sound";
+import {playerUuid} from "../uuid/player";
 
 /** NPCバトル ステージ */
 export type NPCBattleStage = {
@@ -29,13 +31,37 @@ export type NPCBattleState = {
 }
 
 /**
- * ステージインデックスをステージNoに変換する
+ * NPCバトル用のプレイヤーを生成する
  *
- * @param stageIndex 変換元
- * @return 変換結果
+ * @param armdozerId プレイヤーが選択したアームドーザID
+ * @param pilotId プレイヤーが選択したパイロットID
+ * @return 生成したプレイヤー情報
  */
-export function toStageNumber(stageIndex: number): number {
-  return stageIndex + 1;
+export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId): Player {
+  const armdozer = ArmDozers.find(v => v.id === armdozerId) ?? ArmDozers[0];
+  const pilot = Pilots.find(v => v.id === pilotId) ?? Pilots[0];
+  return {playerId: playerUuid(), armdozer, pilot};
+}
+
+/**
+ * 現在のステージレベルを取得する
+ *
+ * @param origin NPCバトルステート
+ * @return ステージレベル
+ */
+export function getStageLevel(origin: NPCBattleState): number {
+  return origin.stageIndex + 1;
+}
+
+/**
+ * 現在のステージを取得する
+ * ステージが取得できない場合はnullを返す
+ *
+ * @param origin NPCバトルステート
+ * @return ステージ
+ */
+export function getCurrentStage(origin: NPCBattleState): ?NPCBattleStage {
+  return origin.course[origin.stageIndex] ?? null;
 }
 
 /**
