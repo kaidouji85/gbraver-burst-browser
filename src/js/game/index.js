@@ -57,7 +57,6 @@ import type {CasualMatch} from "./in-progress/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
-import type {StageLevel} from "./npc-battle/npc-battle-stage";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
@@ -655,7 +654,7 @@ export class Game {
    * @param stage NPCバトルステージ
    * @param level ステージレベル
    */
-  async _startNPCBattleStage(player: Player, stage: NPCBattleStage, level: StageLevel) {
+  async _startNPCBattleStage(player: Player, stage: NPCBattleStage, level: number) {
     const npcBattle = new NPCBattleRoom(player, stage.npc);
     await this._fader.fadeOut();
     this._domDialogs.hidden();

@@ -1,6 +1,5 @@
 // @flow
 import type {NPCBattleCourse} from "./npc-battle-course";
-import type {StageLevel} from "./npc-battle-stage";
 import type {NPCBattleStage} from "../npc-battle";
 import {DefaultStage} from "../npc-battle-course-master";
 
@@ -18,12 +17,12 @@ export class SimpleNPCBattleCourse implements NPCBattleCourse {
   }
 
   /** @override */
-  stage(level: StageLevel): NPCBattleStage {
+  stage(level: number): NPCBattleStage {
     return this._stages[level - 1] ?? DefaultStage;
   }
 
   /** @override */
-  lastStageLevel(): StageLevel {
+  lastStageLevel(): number {
     return this._stages.length;
   }
 }

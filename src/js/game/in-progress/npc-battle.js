@@ -2,7 +2,6 @@
 
 import type {ArmDozerId, PilotId, Player} from "gbraver-burst-core";
 import type {NPCBattleCourse} from '../npc-battle/npc-battle-course';
-import type {StageLevel} from "../npc-battle/npc-battle-stage";
 import type {NPCBattleState} from "../npc-battle";
 
 /** プレイヤー選択 */
@@ -27,7 +26,7 @@ export type InNPCBattleCourse = {
   /** コース */
   course: NPCBattleCourse,
   /** 現在のステージレベル */
-  level: StageLevel,
+  level: number,
 };
 
 /** NPCバトルプレイ中 */

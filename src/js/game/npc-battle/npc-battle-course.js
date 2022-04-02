@@ -1,7 +1,6 @@
 // @flow
 
 import type {ArmDozerId} from "gbraver-burst-core";
-import type {StageLevel} from "./npc-battle-stage";
 import type {NPCBattleStage} from "../npc-battle";
 import type {NPCBattleCourseDifficulty} from "../npc-battle-course-master";
 
@@ -13,14 +12,14 @@ export interface NPCBattleCourse {
    * @param level ステージレベル
    * @return ステージ
    */
-  stage(level: StageLevel): NPCBattleStage;
+  stage(level: number): NPCBattleStage;
 
   /**
    * ラストステージのレベルを返す
    * 
    * @return ラストステージのレベル
    */
-  lastStageLevel(): StageLevel;
+  lastStageLevel(): number;
 }
 
 /** NPCバトルコースを集めたもの */
