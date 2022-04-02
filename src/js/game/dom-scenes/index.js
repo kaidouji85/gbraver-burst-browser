@@ -16,7 +16,6 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import type {TitleAccount} from "./title/title-account";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
-import type {StageLevel} from "../npc-battle/npc-battle-stage";
 import {Config} from "./config/config";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {BGMManager} from '../bgm/bgm-manager';
@@ -214,7 +213,7 @@ export class DOMScenes {
    * @param armDozerId アームドーザアイコンのID
    * @returns 開始されたNPCステージタイトル画面
    */
-  async startNPCStageTitle(resources: Resources, level: StageLevel, caption: string[], armDozerId: ArmDozerId): Promise<NPCStageTitle> {
+  async startNPCStageTitle(resources: Resources, level: number, caption: string[], armDozerId: ArmDozerId): Promise<NPCStageTitle> {
     this._removeCurrentScene();
 
     const scene = new NPCStageTitle(resources, level, caption, armDozerId);

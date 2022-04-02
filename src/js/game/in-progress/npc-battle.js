@@ -1,10 +1,6 @@
 // @flow
-
-import type {GameEndResult, Player, ArmDozerId, PilotId} from "gbraver-burst-core";
-import {ArmDozers, Pilots} from "gbraver-burst-core";
-import type {NPCBattleCourse} from '../npc-battle/npc-battle-course';
-import {playerUuid} from "../../uuid/player";
-import type {StageLevel} from "../npc-battle/npc-battle-stage";
+import type {ArmDozerId, PilotId} from "gbraver-burst-core";
+import type {NPCBattleState} from "../npc-battle";
 
 /** プレイヤー選択 */
 export type PlayerSelect = {
@@ -20,19 +16,14 @@ export type DifficultySelect = {
   pilotId: PilotId
 };
 
-/** NPCバトルコース実行中 */
-export type InNPCBattleCourse = {
-  type: 'InNPCBattleCourse',
-  /** 進行状況 */
-  player: Player,
-  /** コース */
-  course: NPCBattleCourse,
-  /** 現在のステージレベル */
-  level: StageLevel,
+/** NPCバトルプレイ中 */
+export type PlayingNPCBattle = {
+  type: 'PlayingNPCBattle',
+  state: NPCBattleState,
 };
 
 /** サブフロー */
-export type SubFlow = PlayerSelect | DifficultySelect | InNPCBattleCourse;
+export type SubFlow = PlayerSelect | DifficultySelect | PlayingNPCBattle;
 
 /** 
  * NPCバトル
@@ -46,27 +37,3 @@ export type NPCBattleX<X> = {
 
 /** NPCバトル */
 export type NPCBattle = NPCBattleX<SubFlow>;
-
-/**
- * NPCバトル用のプレイヤーを生成する
- *
- * @param armdozerId プレイヤーが選択したアームドーザID
- * @param pilotId プレイヤーが選択したパイロットID
- * @return 生成したプレイヤー情報
- */
-export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId): Player {
-  const armdozer = ArmDozers.find(v => v.id === armdozerId) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === pilotId) ?? Pilots[0];
-  return {playerId: playerUuid(), armdozer, pilot};
-}
-
-/**
- * ステージクリアしたか否かを判定する
- * 
- * @param player プレイヤー情報
- * @param gameEndResult ゲームエンド結果
- * @return 判定結果、trueでステージクリアである
- */
-export function isStageClear(player: Player, gameEndResult: GameEndResult): boolean {
-  return gameEndResult.type === 'GameOver' && gameEndResult.winner === player.playerId;
-}
