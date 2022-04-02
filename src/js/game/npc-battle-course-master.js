@@ -20,7 +20,7 @@ export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard';
 
 /**
  * NPCバトルコースマスタ
- * プレイヤー状況とそれに対応したコースの組み合わせ
+ * 本データはプレイヤー状況とそれに対応したコースの組み合わせである
  */
 export type NPCBattleCourseMaster = {
   /** プレイヤーが選択したアームドーザID */
