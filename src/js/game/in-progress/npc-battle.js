@@ -1,7 +1,5 @@
 // @flow
-
-import type {ArmDozerId, PilotId, Player} from "gbraver-burst-core";
-import type {NPCBattleCourse} from '../npc-battle/npc-battle-course';
+import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import type {NPCBattleState} from "../npc-battle";
 
 /** プレイヤー選択 */
@@ -18,17 +16,6 @@ export type DifficultySelect = {
   pilotId: PilotId
 };
 
-/** @deprecated NPCバトルコース実行中 */
-export type InNPCBattleCourse = {
-  type: 'InNPCBattleCourse',
-  /** 進行状況 */
-  player: Player,
-  /** コース */
-  course: NPCBattleCourse,
-  /** 現在のステージレベル */
-  level: number,
-};
-
 /** NPCバトルプレイ中 */
 export type PlayingNPCBattle = {
   type: 'PlayingNPCBattle',
@@ -36,7 +23,7 @@ export type PlayingNPCBattle = {
 };
 
 /** サブフロー */
-export type SubFlow = PlayerSelect | DifficultySelect | InNPCBattleCourse | PlayingNPCBattle;
+export type SubFlow = PlayerSelect | DifficultySelect | PlayingNPCBattle;
 
 /** 
  * NPCバトル
