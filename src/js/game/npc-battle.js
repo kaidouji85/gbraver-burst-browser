@@ -86,6 +86,6 @@ export function updateNPCBattle(origin: NPCBattleState, gameEndResult: GameEndRe
     return {...origin, isGameClear: true};
   }
 
-  const nextStageIndex = origin.stageIndex ++;
+  const nextStageIndex = origin.stageIndex + 1;
   return {...origin, stageIndex: nextStageIndex};
 }
