@@ -6,12 +6,12 @@ import {isLastStage} from "../../../src/js/game/npc-battle";
 const course = [DefaultStage, DefaultStage, DefaultStage];
 const state = {...EMPTY_NPC_BATTLE_STATE, course};
 
-test('courseの配列要素数とstageIndexが同じ場合、ラストステージである', () => {
-  const data = {...state, stageIndex: 3};
+test('(course配列要素数 - 1 = stageIndex)の場合、ラストステージである', () => {
+  const data = {...state, stageIndex: 2};
   expect(isLastStage(data)).toBe(true);
 });
 
-test('courseの配列要素数とstageIndexが異なる場合、ラストステージでない', () => {
-  const data = {...state, stageIndex: 2};
+test('(course配列要素数 -1 != stageIndex)の場合、ラストステージでない', () => {
+  const data = {...state, stageIndex: 0};
   expect(isLastStage(data)).toBe(false);
 });

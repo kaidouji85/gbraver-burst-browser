@@ -601,7 +601,7 @@ export class Game {
   }
 
   /**
-   * NPC戦闘エンディングが終了した際の処理
+   * NPCバトルエンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
     this._bgm.do(stopWithFadeOut);

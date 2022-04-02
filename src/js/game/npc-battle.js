@@ -82,7 +82,7 @@ export function isStageClear(player: Player, gameEndResult: GameEndResult): bool
  * @return 判定結果、trueでラストステージ
  */
 export function isLastStage(state: NPCBattleState): boolean {
-  return state.course.length === state.stageIndex;
+  return state.course.length - 1 === state.stageIndex;
 }
 
 /**

@@ -28,7 +28,7 @@ test('引き分けの場合はステート更新なし', () => {
 });
 
 test('最終ステージで勝利した場合はゲームクリアとなる', () => {
-  const data = {...state, stageIndex: course.length, isGameClear: false};
+  const data = {...state, stageIndex: course.length - 1, isGameClear: false};
   expect(updateNPCBattle(data, win))
     .toEqual({...data, isGameClear: true});
 });
