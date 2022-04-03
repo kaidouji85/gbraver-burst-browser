@@ -35,7 +35,7 @@ import type {
   SelectionComplete,
   WebSocketAPIError,
   WebSocketAPIUnintentionalClose
-} from "./actions/game-actions";
+} from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {
@@ -55,15 +55,15 @@ import type {
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match";
 import {Title} from "./dom-scenes/title/title";
-import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
+import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import {map} from "../stream/operator";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
-import type {BGMManager} from './bgm/bgm-manager';
-import {createBGMManager} from './bgm/bgm-manager';
+import type {BGMManager} from '../bgm/bgm-manager';
+import {createBGMManager} from '../bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
-import {fadeIn, fadeOut, stopWithFadeOut} from "./bgm/bgm-operators";
+import {fadeIn, fadeOut, stopWithFadeOut} from "../bgm/bgm-operators";
 import {toStream} from "../stream/rxjs";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
 import {
@@ -113,7 +113,7 @@ export class Game {
   _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
-  _suddenlyBattleEndMonitor: SuddenlyBattleEndMonitor;
+  _suddenlyBattleEnd: FutureSuddenlyBattleEnd;
   _resize: Stream<Resize>;
   _vh: CssVH;
   _fader: DOMFader;
@@ -150,7 +150,7 @@ export class Game {
     this._vh = new CssVH(this._resize);
 
     this._api = param.api;
-    this._suddenlyBattleEndMonitor = new SuddenlyBattleEndMonitor();
+    this._suddenlyBattleEnd = new FutureSuddenlyBattleEnd();
 
     this._fader = new DOMFader();
     this._interruptScenes = new InterruptScenes();
@@ -169,7 +169,7 @@ export class Game {
     this._serviceWorker = null;
     this._bgm = createBGMManager();
 
-    const suddenlyBattleEnd = this._suddenlyBattleEndMonitor.notifier()
+    const suddenlyBattleEnd = this._suddenlyBattleEnd.stream()
       .chain(map(() => ({type: 'SuddenlyBattleEnd'})));
     const webSocketAPIError = toStream(this._api.websocketErrorNotifier())
       .chain(map(error => ({type: 'WebSocketAPIError', error})))
@@ -450,7 +450,7 @@ export class Game {
     const startCasualMatch = async (origin: CasualMatch): Promise<void> => {
       this._domDialogs.startWaiting('マッチング中......');
       const battle = await waitUntilMatching();
-      this._suddenlyBattleEndMonitor.bind(battle);
+      this._suddenlyBattleEnd.bind(battle);
       const subFlow = {type: 'Battle', battle};
       this._inProgress = {...origin, subFlow};
 
@@ -543,7 +543,7 @@ export class Game {
       this._inProgress = {type: 'None'};
       await this._fader.fadeOut();
       this._tdScenes.hidden();
-      this._suddenlyBattleEndMonitor.unbind();
+      this._suddenlyBattleEnd.unbind();
       const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
       await this._fader.fadeIn();
       ending.playBGM();
@@ -574,7 +574,7 @@ export class Game {
   async _onSuddenlyEndBattle(): Promise<void> {
     const postNetworkError = {type: 'GotoTitle'};
     this._domDialogs.startNetworkError(this._resources, postNetworkError);
-    this._suddenlyBattleEndMonitor.unbind();
+    this._suddenlyBattleEnd.unbind();
     await this._api.disconnectWebsocket();
   }
 

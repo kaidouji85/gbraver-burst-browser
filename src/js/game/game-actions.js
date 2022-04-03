@@ -1,9 +1,9 @@
 // @flow
 
 import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
-import type {PostNetworkError} from '../network/post-network-error';
-import type {GbraverBurstBrowserConfig} from "../config/browser-config";
-import type {NPCBattleCourseDifficulty} from "../npc-battle-courses";
+import type {PostNetworkError} from './post-network-error';
+import type {GbraverBurstBrowserConfig} from "./config/browser-config";
+import type {NPCBattleCourseDifficulty} from "./npc-battle-courses";
 
 /** 画面リロード依頼 */
 export type ReloadRequest = {

@@ -15,8 +15,8 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleAccount} from "./title-account";
 import {escapeHTML} from '../../../dom/escape/escape-html';
-import type {BGMManager} from '../../bgm/bgm-manager';
-import {playWithFadeIn} from "../../bgm/bgm-operators";
+import type {BGMManager} from '../../../bgm/bgm-manager';
+import {playWithFadeIn} from "../../../bgm/bgm-operators";
 import type {SoundResource} from "../../../resource/sound";
 
 /** ルート要素 class属性 */
