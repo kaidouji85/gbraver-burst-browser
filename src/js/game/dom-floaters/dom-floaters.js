@@ -2,12 +2,12 @@
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import type {GameAction} from "../game-actions";
 import {RxjsStreamSource} from "../../stream/rxjs";
-import {PostNPCBattleWinFloater} from "./post-npc-battle-win/post-npc-battle-win";
+import {PostBattleFloater} from "./post-npc-battle-win/post-npc-battle-win";
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {
   _root: HTMLElement;
-  _postNPCBattleWin: PostNPCBattleWinFloater;
+  _postBattle: PostBattleFloater;
   _gameAction: StreamSource<GameAction>;
   _unsubscribers: Unsubscriber[];
 
@@ -18,11 +18,11 @@ export class DOMFloaters {
     this._root = document.createElement('div');
     this._gameAction = new RxjsStreamSource();
 
-    this._postNPCBattleWin = new PostNPCBattleWinFloater();
-    this._root.appendChild(this._postNPCBattleWin.getRootHTMLElement());
+    this._postBattle = new PostBattleFloater();
+    this._root.appendChild(this._postBattle.getRootHTMLElement());
 
     this._unsubscribers = [
-      this._postNPCBattleWin.selectionCompleteNotifier().subscribe(postBattle => {
+      this._postBattle.selectionCompleteNotifier().subscribe(postBattle => {
         this._gameAction.next({type: 'PostBattleAction', action: postBattle});
       })
     ];
@@ -32,7 +32,7 @@ export class DOMFloaters {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._postNPCBattleWin.destructor();
+    this._postBattle.destructor();
   }
 
   /**
@@ -54,18 +54,18 @@ export class DOMFloaters {
   }
 
   /**
-   * NPCバトル勝利後フローターをアニメ付きで表示する
+   * バトル終了後行動選択フローターをアニメ付きで表示する
    * 
    * @return アニメが完了したら発火するPromise
    */
-  async showPostNPCBattleWin(): Promise<void> {
-    await this._postNPCBattleWin.show();
+  async showPostBattle(): Promise<void> {
+    await this._postBattle.show();
   }
 
   /**
-   * NPCバトル勝利後フローターを非表示にする
+   * バトル終了後行動選択フローターを非表示にする
    */
-  hiddenPostNPCBattleWin(): void {
-    this._postNPCBattleWin.hidden();
+  hiddenPostBattle(): void {
+    this._postBattle.hidden();
   }
 }

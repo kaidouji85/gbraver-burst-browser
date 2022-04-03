@@ -1,6 +1,6 @@
-/** NPCバトル勝利後フローター */
+/** バトル終了後行動選択フローター */
 @media (orientation: landscape) {
-  .post-npc-battle-win {
+  .post-battle {
     --control-button-width: calc(var(--responsive-font-size) * 10);
     --control-button-height: calc(var(--responsive-font-size) * 3);
     position: absolute;
@@ -10,12 +10,12 @@
 }
 
 @media (orientation: portrait) {
-  .post-npc-battle-win {
+  .post-battle {
     display: none;
   }
 }
 
-.post-npc-battle-win__goto-title, .post-npc-battle-win__next-stage {
+.post-battle__goto-title, .post-battle__next-stage {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
@@ -26,10 +26,10 @@
   margin: calc(var(--responsive-font-size) * 0.5);
 }
 
-.post-npc-battle-win__goto-title {
+.post-battle__goto-title {
   background-color: var(--sub-button-background-color);
 }
 
-.post-npc-battle-win__next-stage {
+.post-battle__next-stage {
   background-color: var(--button-background-color);
 }

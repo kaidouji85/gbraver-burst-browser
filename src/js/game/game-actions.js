@@ -3,7 +3,7 @@ import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
 import type {PostNetworkError} from './post-network-error';
 import type {GbraverBurstBrowserConfig} from "./config/browser-config";
 import type {NPCBattleCourseDifficulty} from "./npc-battle-courses";
-import type {PostBattle} from "./post-battle/post-battle";
+import type {PostBattle} from "./post-battle";
 
 /** 画面リロード依頼 */
 export type ReloadRequest = {

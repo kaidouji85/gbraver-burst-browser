@@ -5,10 +5,10 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import {RxjsStreamSource} from "../../../stream/rxjs";
-import type {PostBattle} from "../../post-battle/post-battle";
+import type {PostBattle} from "../../post-battle";
 
 /** ルートHTML要素のclass属性 */
-const ROOT_CLASS = 'post-npc-battle-win';
+const ROOT_CLASS = 'post-battle';
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -48,8 +48,8 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {gotoTitle, nextStage};
 }
 
-/** NPCバトル勝利後フローター */
-export class PostNPCBattleWinFloater {
+/** バトル終了後行動選択フローター */
+export class PostBattleFloater {
   _root: HTMLElement;
   _gotoTitle: HTMLElement;
   _nextStage: HTMLElement;
