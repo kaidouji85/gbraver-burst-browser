@@ -35,7 +35,7 @@ import type {
   SelectionComplete,
   WebSocketAPIError,
   WebSocketAPIUnintentionalClose
-} from "./actions/game-actions";
+} from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
 import type {
@@ -55,15 +55,15 @@ import type {
 } from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match";
 import {Title} from "./dom-scenes/title/title";
-import {SuddenlyBattleEndMonitor} from "./network/suddenly-battle-end-monitor";
+import {SuddenlyBattleEndMonitor} from "./suddenly-battle-end-monitor";
 import {map} from "../stream/operator";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
 import {DefaultConfig} from "./config/default-config";
-import type {BGMManager} from './bgm/bgm-manager';
-import {createBGMManager} from './bgm/bgm-manager';
+import type {BGMManager} from '../bgm/bgm-manager';
+import {createBGMManager} from '../bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
-import {fadeIn, fadeOut, stopWithFadeOut} from "./bgm/bgm-operators";
+import {fadeIn, fadeOut, stopWithFadeOut} from "../bgm/bgm-operators";
 import {toStream} from "../stream/rxjs";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
 import {

@@ -1,5 +1,5 @@
 // @flow
-import type {SoundResource} from "../../resource/sound";
+import type {SoundResource} from "../resource/sound";
 
 /** BGMの状態 */
 export type BGM = NowPlayingBGM | NoBGM;

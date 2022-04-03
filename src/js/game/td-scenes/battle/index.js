@@ -19,9 +19,9 @@ import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
-import type {BGMManager} from "../../bgm/bgm-manager";
+import type {BGMManager} from "../../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
-import {playWithFadeIn, stopWithFadeOut} from "../../bgm/bgm-operators";
+import {playWithFadeIn, stopWithFadeOut} from "../../../bgm/bgm-operators";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
