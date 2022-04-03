@@ -19,11 +19,14 @@ export type NPCBattleStage = {
 export type NPCBattleState = {
   /** プレイヤー */
   player: Player,
-  /** コース */
-  course: NPCBattleStage[],
+  /**
+   * NPCバトル全ステージ
+   * ルート分岐はなく、stages[0] -> stages[1] ... と順番に進んでいく
+   */
+  stages: NPCBattleStage[],
   /**
    * 現在プレイ中のステージ
-   * courseの配列indexに相当する
+   * stagesの配列indexに相当する
    */
   stageIndex: number,
   /** ゲームクリアしたかのフラグ、trueでゲームクリア */
@@ -61,7 +64,7 @@ export function getStageLevel(origin: NPCBattleState): number {
  * @return ステージ
  */
 export function getCurrentStage(origin: NPCBattleState): ?NPCBattleStage {
-  return origin.course[origin.stageIndex] ?? null;
+  return origin.stages[origin.stageIndex] ?? null;
 }
 
 /**
@@ -82,18 +85,18 @@ export function isStageClear(player: Player, gameEndResult: GameEndResult): bool
  * @return 判定結果、trueでラストステージ
  */
 export function isLastStage(state: NPCBattleState): boolean {
-  return state.course.length - 1 === state.stageIndex;
+  return state.stages.length - 1 === state.stageIndex;
 }
 
 /**
  * NPCバトル開始直後のステートを生成する
  *
  * @param player プレイヤー
- * @param course コース
+ * @param stages 全ステージ
  * @return NPCバトルステート
  */
-export function startNPCBattle(player: Player, course: NPCBattleStage[]): NPCBattleState {
-  return {player, course, stageIndex: 0, isGameClear: false};
+export function startNPCBattle(player: Player, stages: NPCBattleStage[]): NPCBattleState {
+  return {player, stages: stages, stageIndex: 0, isGameClear: false};
 }
 
 /**
