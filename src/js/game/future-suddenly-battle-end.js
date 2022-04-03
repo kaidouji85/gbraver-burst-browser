@@ -3,8 +3,8 @@ import type {Battle} from '@gbraver-burst-network/browser-core';
 import type {Stream, StreamSource, Unsubscriber} from "../stream/core";
 import {RxjsStreamSource, toStream} from "../stream/rxjs";
 
-/** バトル強制終了 監視 */
-export class SuddenlyBattleEndMonitor {
+/** 将来生成されるバトル管理オブジェクトからバトル強制終了ストリームを取り出す */
+export class FutureSuddenlyBattleEnd {
   _notifier: StreamSource<void>;
   _unsubscriber: ?Unsubscriber;
 
@@ -41,11 +41,11 @@ export class SuddenlyBattleEndMonitor {
   }
 
   /**
-   * バトル強制終了を通知する
+   * バトル強制終了ストリームを取得する
    *
    * @return 通知ストリーム
    */
-  notifier(): Stream<void> {
+  stream(): Stream<void> {
     return this._notifier;
   }
 }
