@@ -180,7 +180,8 @@ export class Game {
     const WebSocketAPIUnintentionalClose = toStream(this._api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
+      this._domDialogs.gameActionNotifier(), this._domFloaters.gameActionNotifier(),
+      suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'ReloadRequest') { this._onReloadRequest() }
       else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
@@ -540,9 +541,7 @@ export class Game {
   async _onEndBattle(action: EndBattle): Promise<void> {
     const continueNPCBattle = async (inProgress: NPCBattleX<PlayingNPCBattle>, update: NPCBattleState): Promise<void> => {
       this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: update}};
-      const level = getStageLevel(update);
-      const stage = getCurrentStage(update) ?? DefaultStage;
-      await this._startNPCBattleStage(update.player, stage, level);
+      await this._domFloaters.showPostBattle();
     };
     const npcBattleComplete = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
@@ -575,9 +574,31 @@ export class Game {
 
   /**
    * 戦闘終了後アクション決定時の処理
+   *
+   * @return 処理が完了したら発火するPromise
    */
-  _onPostBattleAction(action: PostBattleAction): void {
-    console.log(action);
+  async _onPostBattleAction(action: PostBattleAction): Promise<void> {
+    const gotoTitle = async () => {
+      this._inProgress = {type: 'None'};
+      this._bgm.do(stopWithFadeOut);
+      this._domFloaters.hiddenPostBattle();
+      await this._fader.fadeOut();
+      const title = await this._startTitle();
+      await this._fader.fadeIn();
+      title.playBGM();
+    };
+    const startNPCBattleStage = async (state: NPCBattleState) => {
+      this._domFloaters.hiddenPostBattle();
+      const stage = getCurrentStage(state) ?? DefaultStage;
+      const level = getStageLevel(state);
+      await this._startNPCBattleStage(state.player, stage, level);
+    };
+
+    if (action.action.type === 'GotoTitle') {
+      await gotoTitle();
+    } else if (action.action.type === 'NextStage' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
+      await startNPCBattleStage(this._inProgress.subFlow.state);
+    }
   }
 
   /**
