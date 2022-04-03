@@ -22,13 +22,13 @@ export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard';
  * NPCバトルコースマスタ
  * 本データはプレイヤー状況とそれに対応したコースの組み合わせである
  */
-export type NPCBattleCourseMaster = {
+export type NPCBattleCourse = {
   /** プレイヤーが選択したアームドーザID */
   armdozerId: ArmDozerId,
   /** プレイヤーが選択した難易度 */
   difficulty: NPCBattleCourseDifficulty,
-  /** コース */
-  course: NPCBattleStage[],
+  /** 本コースの全ステージ */
+  stages: NPCBattleStage[],
 };
 
 /** 1バッテリー ネオランドーザ */
@@ -136,18 +136,18 @@ export const DefaultStage: NPCBattleStage = {
   bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
-/** デフォルトのコース */
-export const DefaultCourse: NPCBattleStage[] = [
+/** デフォルトのステージ集合 */
+export const DefaultStages: NPCBattleStage[] = [
   OneBatteryNeoLandozerStage,
   MaxAttackWingDozerStage,
   Attack3Defense2LightningDozerStage
 ];
 
-export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
+export const NPCBattleCourses: NPCBattleCourse[] = [
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Easy',
-    course: [
+    stages: [
       OneBatteryNeoLandozerStage,
       MaxAttackWingDozerStage,
       Attack3Defense2LightningDozerStage
@@ -156,7 +156,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Normal',
-    course: [
+    stages: [
       NormalWingDozerStage,
       NormalLightningDozer,
       NormalNeoLandozerStage,
@@ -165,7 +165,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Hard',
-    course: [
+    stages: [
       HardLightningDozer,
       HardNeoLandozer,
       HardWingDozer,
@@ -174,7 +174,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Easy',
-    course: [
+    stages: [
       OneBatteryShinBraverStage,
       MaxAttackWingDozerStage,
       Attack3Defense2LightningDozerStage
@@ -183,7 +183,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Normal',
-    course: [
+    stages: [
       NormalShinBraverStage,
       NormalWingDozerStage,
       NormalLightningDozer,
@@ -192,7 +192,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Hard',
-    course: [
+    stages: [
       HardLightningDozer,
       HardShinBraver,
       HardWingDozer,
@@ -201,7 +201,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Easy',
-    course: [
+    stages: [
       OneBatteryNeoLandozerStage,
       MaxAttackWingDozerStage,
       Attack3Defense2ShinBraverStage
@@ -210,7 +210,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Normal',
-    course: [
+    stages: [
       NormalShinBraverStage,
       NormalWingDozerStage,
       NormalNeoLandozerStage,
@@ -219,7 +219,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Hard',
-    course: [
+    stages: [
       HardNeoLandozer,
       HardShinBraver,
       HardWingDozer,
@@ -228,7 +228,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Easy',
-    course: [
+    stages: [
       OneBatteryNeoLandozerStage,
       MaxAttackShinBraverStage,
       Attack3Defense2LightningDozerStage
@@ -237,7 +237,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Normal',
-    course: [
+    stages: [
       NormalShinBraverStage,
       NormalLightningDozer,
       NormalNeoLandozerStage,
@@ -246,7 +246,7 @@ export const NPCBattleCourseMasters: NPCBattleCourseMaster[] = [
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Hard',
-    course: [
+    stages: [
       HardLightningDozer,
       HardNeoLandozer,
       HardShinBraver,

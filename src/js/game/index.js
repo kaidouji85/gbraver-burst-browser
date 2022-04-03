@@ -73,7 +73,7 @@ import {
   getCurrentStage,
   updateNPCBattle
 } from "./npc-battle";
-import {DefaultCourse, DefaultStage, NPCBattleCourseMasters} from "./npc-battle-course-master";
+import {DefaultStages, DefaultStage, NPCBattleCourses} from "./npc-battle-courses";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -504,9 +504,9 @@ export class Game {
     const difficultySelect: DifficultySelect = this._inProgress.subFlow;
     const {armdozerId, pilotId} = difficultySelect;
     const player = createNPCBattlePlayer(armdozerId, pilotId);
-    const course = NPCBattleCourseMasters
-      .find(v => v.armdozerId === armdozerId && v.difficulty === action.difficulty)?.course ?? DefaultCourse;
-    const npcBattleState = startNPCBattle(player, course);
+    const stages = NPCBattleCourses
+      .find(v => v.armdozerId === armdozerId && v.difficulty === action.difficulty)?.stages ?? DefaultStages;
+    const npcBattleState = startNPCBattle(player, stages);
     const subFlow = {type: 'PlayingNPCBattle', state: npcBattleState};
     this._inProgress = {...npcBattle, subFlow};
     const stage = getCurrentStage(npcBattleState) ?? DefaultStage;
