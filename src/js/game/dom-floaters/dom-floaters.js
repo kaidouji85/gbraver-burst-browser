@@ -1,6 +1,6 @@
 // @flow
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
-import type {GameAction} from "../actions/game-actions";
+import type {GameAction} from "../game-actions";
 import {RxjsStreamSource} from "../../stream/rxjs";
 import {PostNPCBattleWinFloater} from "./post-npc-battle-win/post-npc-battle-win";
 
