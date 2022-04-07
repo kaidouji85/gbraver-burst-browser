@@ -11,8 +11,8 @@ import {PathIds} from "../../../resource/path";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import type {SoundResource} from "../../../resource/sound";
-import type {BGMManager} from "../../bgm/bgm-manager";
-import {playWithFadeIn} from "../../bgm/bgm-operators";
+import type {BGMManager} from "../../../bgm/bgm-manager";
+import {playWithFadeIn} from "../../../bgm/bgm-operators";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'npc-ending';

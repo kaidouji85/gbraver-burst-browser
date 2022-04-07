@@ -23,5 +23,5 @@ export function dashToStand(model: WingDozerModel, sounds: WingDozerSounds): Ani
     .chain(process(() => {
       model.animation.type = 'STAND';
       model.animation.frame = 0;
-    }))
+    }));
 }

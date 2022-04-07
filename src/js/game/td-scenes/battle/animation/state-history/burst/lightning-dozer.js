@@ -80,12 +80,10 @@ function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate
       param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
       param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
     ))
-    .chain(delay(200))
-    .chain(
-      delay(500),
+    .chain(all(
       toInitial(param.tdCamera, 500),
       param.burstArmdozerTD.lightningDozer.gutsToStand(),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
-    );
+    ));
 }

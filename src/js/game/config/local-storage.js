@@ -1,12 +1,11 @@
 // @flow
-
 import type {GbraverBurstBrowserConfig, WebGLPixelRatio} from "./browser-config";
-import {parseWebGLPixexRatio} from "./browser-config";
+import {parseWebGLPixelRatio} from "./browser-config";
 
-/** 設定項目名とLocalStoregeキーのマッピング */
+/** 設定項目名とLocalStorageキーのマッピング */
 const LocalStorageKeys = {
   /** WebGLのピクセルレート */
-  WebGLPixexRatio: 'WebGLPixexRatio'
+  WebGLPixelRatio: 'WebGLPixelRatio'
 }
 
 /**
@@ -16,7 +15,7 @@ const LocalStorageKeys = {
  * return 抽出結果
  */
 export function configFromLocalStorage(): GbraverBurstBrowserConfig | null {
-  const parsedWebGLPixelRatio = parseWebGLPixexRatio(localStorage.getItem(LocalStorageKeys.WebGLPixexRatio));
+  const parsedWebGLPixelRatio = parseWebGLPixelRatio(localStorage.getItem(LocalStorageKeys.WebGLPixelRatio));
   if (parsedWebGLPixelRatio === null) {   
     return null;
   }
@@ -31,5 +30,5 @@ export function configFromLocalStorage(): GbraverBurstBrowserConfig | null {
  * @param config Gブレイバーバースト ブラウザ側設定項目
  */
 export function saveConfigToLocalStorage(config: GbraverBurstBrowserConfig): void {
-  localStorage.setItem(LocalStorageKeys.WebGLPixexRatio, `${config.webGLPixelRatio}`);
+  localStorage.setItem(LocalStorageKeys.WebGLPixelRatio, `${config.webGLPixelRatio}`);
 }

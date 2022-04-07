@@ -5,7 +5,7 @@ import type {GbraverBurstBrowserConfig, WebGLPixelRatio} from "../../config/brow
 import {
   WebGLPixelRatios,
   isConfigChanged,
-  parseWebGLPixexRatio,
+  parseWebGLPixelRatio,
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
@@ -47,7 +47,7 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
     <div class="${ROOT_CLASS}__title">設定</div>
     <div class="${ROOT_CLASS}__configs">
       <div class="${ROOT_CLASS}__configs__webgl-pixel-ratio">
-        <div class="${ROOT_CLASS}__configs__webgl-pixel-ratio__caption">WebGLピクセルレート</div>
+        <div class="${ROOT_CLASS}__configs__webgl-pixel-ratio__caption">戦闘画面のピクセルレート</div>
         <select class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector" data-id="${ids.webGLPixelRatioSelector}">
           ${webGLPixelRatioOptions}
         </select>
@@ -257,7 +257,7 @@ export class Config implements DOMScene {
    * @return パース結果
    */
   _parseConfig(): GbraverBurstBrowserConfig {
-    const parsedWebGLPixelRatio = parseWebGLPixexRatio(this._webGLPixelRatioSelector.value);
+    const parsedWebGLPixelRatio = parseWebGLPixelRatio(this._webGLPixelRatioSelector.value);
     const webGLPixelRatio = parsedWebGLPixelRatio ?? WebGLPixelRatios[0];
     return {webGLPixelRatio};
   }

@@ -76,12 +76,10 @@ export function wingDozerContinuousAttack(param: WingDozerBurst<ContinuousAttack
       param.burstPlayerHUD.gauge.battery(param.burstPlayerState.armdozer.battery),
       param.burstPlayerTD.recoverBattery.popUp(param.burst.recoverBattery)
     ))
-    .chain(delay(200))
-    .chain(
-      delay(500),
+    .chain(all(
       param.burstArmdozerTD.wingDozer.dashToStand(),
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
-    );
+    ));
 }

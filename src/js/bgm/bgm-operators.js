@@ -1,6 +1,6 @@
 // @flow
 import {wait} from "@gbraver-burst-network/browser-sdk/lib/wait/wait";
-import type {SoundResource} from "../../resource/sound";
+import type {SoundResource} from "../resource/sound";
 import type {BGM} from "./bgm";
 
 /**

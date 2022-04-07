@@ -6,7 +6,6 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-import type {StageLevel} from "../../npc-battle/npc-battle-stage";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'npc-stage-title';
@@ -24,7 +23,7 @@ type DataIDs = {
  * @param level ステージレベル
  * @return ルート要素のinnerHTML
  */
-function rootInnerHTML(ids: DataIDs, level: StageLevel): string {
+function rootInnerHTML(ids: DataIDs, level: number): string {
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__title__stage">
@@ -71,7 +70,7 @@ export class NPCStageTitle implements DOMScene {
    * @param caption ステージ名
    * @param armDozerId 対戦するアームドーザのID
    */
-  constructor(resources: Resources, level: StageLevel, caption: string[], armDozerId: ArmDozerId) {
+  constructor(resources: Resources, level: number, caption: string[], armDozerId: ArmDozerId) {
     const ids = {caption: domUuid(), armDozerIcon: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS;
