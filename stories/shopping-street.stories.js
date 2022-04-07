@@ -41,11 +41,13 @@ export const longShot = (): HTMLElement => {
 }
 
 export const highResolutionStillImage = (): HTMLElement => {
-  const width = getViewPortWidth();
-  const height = getViewPortHeight();
+  const screenScale = 3;
+  const width = getViewPortWidth() * screenScale;
+  const height = getViewPortHeight() * screenScale;
   const pixelRatio = window.devicePixelRatio;
-  const position = {x: 0, y: 220, z: 300};
-  const target = {x: 0, y: 200, z: 0};
+  const distanceScale = 1.5;
+  const position = {x: 0, y: 220 * distanceScale, z: 300 * distanceScale};
+  const target = {x: 0, y: 200 * distanceScale, z: 0};
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(width, height);
   renderer.setPixelRatio(pixelRatio);
