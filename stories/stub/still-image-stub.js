@@ -7,35 +7,76 @@ import {fullResourceLoading} from "../../src/js/resource";
 import {RxjsStreamSource} from "../../src/js/stream/rxjs";
 import type {Resources} from "../../src/js/resource";
 
+/** レンダラ設定 */
 type Renderer = {
+  /** 幅 */
   width: number,
+  /** 高さ */
   height: number,
+  /** ピクセルレート */
   pixelRatio: number,
 };
 
+/** カメラ設定 */
 type Camera = {
-  position: {x: number, y: number, z: number},
-  target: {x: number, y: number, z: number},
+  /** カメラ位置 */
+  position: {
+    /** x座標 */
+    x: number,
+    /** y座標 */
+    y: number,
+    /** z座標 */
+    z: number
+  },
+  /** 注視点 */
+  target: {
+    /** x座標 */
+    x: number,
+    /** y座標 */
+    y: number,
+    /** z座標 */
+    z: number
+  },
 };
 
-type GameObjects = {
+/** スタブに追加するthree.jsオブジェクト */
+type Object3Ds = {
   objects: typeof THREE.Object3D[],
   backGround?: typeof THREE.CubeTexture,
 };
 
-type GameObjectsCreatorParams = {
+/** three.jsオブジェクトジェネレータのパラメータ */
+type Object3DsCreatorParams = {
+  /** リソース管理オブジェクト */
   resources: Resources,
+  /** 空のゲームオブジェクトアクション */
   emptyGameObjectAction: Stream<GameObjectAction>,
 };
 
-type GameObjectsCreator = (params: GameObjectsCreatorParams) => GameObjects;
+/**
+ * three.jsオブジェクトジェネレータ
+ *
+ * @param params パラメータ
+ * @return スタブに追加するオブジェクト群
+ */
+type Object3DsCreator = (params: Object3DsCreatorParams) => Object3Ds;
 
+/** スタブのパラメータ */
 type StubParams = {
+  /** レンダラ設定 */
   renderer: Renderer,
+  /** カメラ設定 */
   camera: Camera,
-  creator: GameObjectsCreator
+  /** three.jsオブジェクトジェネレータ */
+  creator: Object3DsCreator
 };
 
+/**
+ * 静止画スタブ
+ *
+ * @param params パラメータ
+ * @return storybookが利用するHTMLElement
+ */
 export function stillImageStub(params: StubParams): HTMLElement {
   const renderer = new THREE.WebGLRenderer();
   const {pixelRatio, width, height} = params.renderer;
