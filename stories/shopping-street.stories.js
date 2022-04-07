@@ -2,7 +2,7 @@
 import {TDGameObjectStub} from "./stub/td-game-object-stub";
 import ShoppingStreet from "../src/js/game-object/stage/shopping-street";
 import {Illumination} from "../src/js/game-object/illumination/illumination";
-import {skyBox} from "../src/js/game/td-scenes/battle/view/td/sky-box";
+import {skyBox as createSkyBox} from "../src/js/game/td-scenes/battle/view/td/sky-box";
 import {stillImageStub} from "./stub/still-image-stub";
 
 export default {
@@ -13,7 +13,7 @@ export const game = (): HTMLElement => {
   const stub = new TDGameObjectStub(({resources, gameObjectAction, scene}) => {
     const illumination = new Illumination(gameObjectAction);
     const shoppingStreet = new ShoppingStreet(resources);
-    scene.background = skyBox(resources);
+    scene.background = createSkyBox(resources);
     return [...shoppingStreet.getThreeJsObjects(), ...illumination.getObject3Ds()];
   });
   stub.start();
@@ -30,8 +30,8 @@ export const highResolutionStillImage = (): HTMLElement => {
     const illumination = new Illumination(emptyGameObjectAction);
     const shoppingStreet = new ShoppingStreet(resources);
     const objects = [...illumination.getObject3Ds(), ...shoppingStreet.getThreeJsObjects()];
-    const backGround = skyBox(resources);
-    return {objects, backGround};
+    const skyBox = createSkyBox(resources);
+    return {objects, skyBox};
   };
   return stillImageStub({camera, renderer, creator});
 };

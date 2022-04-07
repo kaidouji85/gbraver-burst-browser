@@ -41,12 +41,14 @@ type Camera = {
 
 /** スタブに追加するthree.jsオブジェクト */
 type Object3Ds = {
+  /** スタブに追加するオブジェクト */
   objects: typeof THREE.Object3D[],
-  backGround?: typeof THREE.CubeTexture,
+  /** スタブのスカイボックス */
+  skyBox?: typeof THREE.CubeTexture,
 };
 
 /** three.jsオブジェクトジェネレータのパラメータ */
-type Object3DsCreatorParams = {
+type Object3DsGeneratorParams = {
   /** リソース管理オブジェクト */
   resources: Resources,
   /** 空のゲームオブジェクトアクション */
@@ -59,7 +61,7 @@ type Object3DsCreatorParams = {
  * @param params パラメータ
  * @return スタブに追加するオブジェクト群
  */
-type Object3DsCreator = (params: Object3DsCreatorParams) => Object3Ds;
+type Object3DsGenerator = (params: Object3DsGeneratorParams) => Object3Ds;
 
 /** スタブのパラメータ */
 type StubParams = {
@@ -68,7 +70,7 @@ type StubParams = {
   /** カメラ設定 */
   camera: Camera,
   /** three.jsオブジェクトジェネレータ */
-  creator: Object3DsCreator
+  creator: Object3DsGenerator
 };
 
 /**
@@ -96,12 +98,12 @@ export function stillImageStub(params: StubParams): HTMLElement {
     const resourceLoading = fullResourceLoading(resourceRoot);
     const resources = await resourceLoading.resources;
     const emptyGameObjectAction: Stream<GameObjectAction> = new RxjsStreamSource();
-    const {objects, backGround} = params.creator({resources, emptyGameObjectAction});
+    const {objects, skyBox} = params.creator({resources, emptyGameObjectAction});
     const scene = new THREE.Scene();
     objects.forEach(v => {
       scene.add(v);
     });
-    scene.background = backGround ?? null;
+    scene.background = skyBox ?? null;
     renderer.render(scene, camera);
   })();
 
