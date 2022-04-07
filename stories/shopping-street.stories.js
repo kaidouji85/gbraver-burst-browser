@@ -26,31 +26,16 @@ export const game = (): HTMLElement => {
   return stub.domElement();
 }
 
-export const longShot = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({resources, gameObjectAction, scene, camera}) => {
-    const illumination = new Illumination(gameObjectAction);
-    const backGround = new ShoppingStreet(resources);
-    scene.background = skyBox(resources);
-    const distance = 2;
-    camera.move({y: 220 * distance, z: 300 * distance}, 0).play();
-    camera.lookAt({y: 220 * distance}, 0).play();
-    return [...backGround.getThreeJsObjects(), ...illumination.getObject3Ds()];
-  });
-  stub.start();
-  return stub.domElement();
-}
-
 export const highResolutionStillImage = (): HTMLElement => {
-  const screenScale = 3;
-  const width = getViewPortWidth() * screenScale;
-  const height = getViewPortHeight() * screenScale;
-  const pixelRatio = window.devicePixelRatio;
-  const distanceScale = 1.5;
+  const width = 7680;
+  const height = 4320;
+  const pixelRatio = 1;
+  const distanceScale = 2;
   const position = {x: 0, y: 220 * distanceScale, z: 300 * distanceScale};
   const target = {x: 0, y: 200 * distanceScale, z: 0};
   const renderer = new THREE.WebGLRenderer();
-  renderer.setSize(width, height);
   renderer.setPixelRatio(pixelRatio);
+  renderer.setSize(width, height);
 
   (async () => {
     const resourceRoot = new StorybookResourceRoot();
