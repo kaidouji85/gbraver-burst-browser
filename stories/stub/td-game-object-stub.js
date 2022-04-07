@@ -14,7 +14,7 @@ import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {fullResourceLoading} from "../../src/js/resource";
 import {TDCamera} from "../../src/js/game-object/camera/td";
-import {StorybookResourceRoot} from "../resource-root/storybook-resource-root";
+import {StorybookResourceRoot} from "../storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 import {RxjsStreamSource} from "../../src/js/stream/rxjs";
