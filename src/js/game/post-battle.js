@@ -1,7 +1,7 @@
 // @flow
 
 /** 戦闘終了後の挙動の一覧 */
-export type PostBattle = GotoTitle | NextStage | Retry;
+export type PostBattle = GotoTitle | NextStage | Retry | GotoEnding;
 
 /** タイトルへ */
 export type GotoTitle = {
@@ -16,4 +16,9 @@ export type NextStage = {
 /** リトライ */
 export type Retry = {
   type: 'Retry'
+};
+
+/** エンディングへ */
+export type GotoEnding = {
+  type: 'GotoEnding'
 };

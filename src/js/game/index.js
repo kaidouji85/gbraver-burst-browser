@@ -603,6 +603,8 @@ export class Game {
       await gotoTitle();
     } else if (action.action.type === 'NextStage' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
       await startNPCBattleStage(this._inProgress.subFlow.state);
+    } else if (action.action.type === 'Retry' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
+      await startNPCBattleStage(this._inProgress.subFlow.state);
     }
   }
 

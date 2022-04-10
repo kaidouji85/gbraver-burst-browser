@@ -4,7 +4,7 @@ import {domStub} from "./stub/dom-stub";
 import {PostBattleFloater} from "../src/js/game/dom-floaters/post-battle/post-battle";
 import {waitTime} from "../src/js/wait/wait-time";
 import {
-  PostNetworkBattleButtons,
+  PostNetworkBattleButtons, PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
 } from "../src/js/game/dom-floaters/post-battle/post-battle-buttons";
@@ -31,7 +31,16 @@ export const postNPCBattleLose: DOMStubStory = domStub(() => {
   return floater.getRootHTMLElement();
 });
 
-export const postNeteorkBattle: DOMStubStory = domStub(() => {
+export const postNPCBattleComplete: DOMStubStory = domStub(() => {
+  const floater = new PostBattleFloater();
+  floater.show(PostNPCBattleComplete);
+  floater.selectionCompleteNotifier().subscribe(postBattle => {
+    console.log(postBattle);
+  });
+  return floater.getRootHTMLElement();
+});
+
+export const postNetworkBattle: DOMStubStory = domStub(() => {
   const floater = new PostBattleFloater();
   floater.show(PostNetworkBattleButtons);
   floater.selectionCompleteNotifier().subscribe(postBattle => {
