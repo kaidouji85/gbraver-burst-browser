@@ -3,7 +3,7 @@ import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {PostBattle} from "../../post-battle";
-import type {ActionButtonConfig} from "./action-button-config";
+import type {PostBattleButtonConfig} from "./post-battle-button-config";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 
 /** ルートHTML要素のclass属性 */
@@ -56,18 +56,14 @@ export class PostBattleFloater {
 
   /**
    * アニメーション付きでフローターを表示する
-   * 
+   *
+   * @param buttons アクションボタン設定
    * @return アニメーションが完了したら発火するPromise
    */
-  async show(): Promise<void> {
+  async show(buttons: PostBattleButtonConfig[]): Promise<void> {
     this.destructor();
 
-    // TODO 引数から渡すようにする
-    const buttonConfigs: ActionButtonConfig[] = [
-      {style: 'SubButton', action: {type: 'GotoTitle'}, label: 'タイトルへ'},
-      {style: 'MainButton', action: {type: 'NextStage'}, label: '次のステージ'},
-    ];
-    const actionButtons = this._createActionButtons(buttonConfigs);
+    const actionButtons = this._createActionButtons(buttons);
     actionButtons.forEach(v => {
       this._root.appendChild(v.button);
     });
@@ -113,10 +109,10 @@ export class PostBattleFloater {
   /**
    * 戦闘後アクションボタンを生成する
    *
-   * @param buttonConfigs ボタン設定
+   * @param buttons ボタン設定
    * @return 生成結果
    */
-  _createActionButtons(buttonConfigs: ActionButtonConfig[]): ActionButton[] {
+  _createActionButtons(buttons: PostBattleButtonConfig[]): ActionButton[] {
     const getClassName = style => {
       switch(style) {
         case 'MainButton':
@@ -127,7 +123,7 @@ export class PostBattleFloater {
           return `${ROOT_CLASS}__sub-action`;
       }
     };
-    return buttonConfigs.map(({style, action, label}) => {
+    return buttons.map(({style, action, label}) => {
       const button = document.createElement('button');
       button.innerText = label;
       button.className = getClassName(style);

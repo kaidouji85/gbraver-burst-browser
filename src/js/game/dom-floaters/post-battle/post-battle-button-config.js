@@ -5,7 +5,7 @@ import type {PostBattle} from "../../post-battle";
 export type ButtonStyle = 'MainButton' | 'SubButton';
 
 /** 戦闘終了後アクショボタン設定 */
-export type ActionButtonConfig = {
+export type PostBattleButtonConfig = {
   /** 戦闘終了後のアクション */
   action: PostBattle,
   /** ボタンのスタイル */

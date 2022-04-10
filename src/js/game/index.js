@@ -73,9 +73,11 @@ import {
   startNPCBattle,
   getStageLevel,
   getCurrentStage,
-  updateNPCBattle
+  updateNPCBattle, isStageClear
 } from "./npc-battle";
 import {DefaultStages, DefaultStage, NPCBattleCourses} from "./npc-battle-courses";
+import {PostNPCBattleLoseButtons, PostNPCBattleWinButtons} from "./dom-floaters/post-battle/post-battle-buttons";
+import type {PostBattleButtonConfig} from "./dom-floaters/post-battle/post-battle-button-config";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -539,9 +541,9 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    const continueNPCBattle = async (inProgress: NPCBattleX<PlayingNPCBattle>, update: NPCBattleState): Promise<void> => {
+    const continueNPCBattle = async (inProgress: NPCBattleX<PlayingNPCBattle>, update: NPCBattleState, buttons: PostBattleButtonConfig[]): Promise<void> => {
       this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: update}};
-      await this._domFloaters.showPostBattle();
+      await this._domFloaters.showPostBattle(buttons);
     };
     const npcBattleComplete = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
@@ -566,7 +568,10 @@ export class Game {
       const playingNPCBattle: PlayingNPCBattle = this._inProgress.subFlow;
       const inProgress = ((this._inProgress: any): NPCBattleX<typeof playingNPCBattle>);
       const updatedNPCBattleState = updateNPCBattle(playingNPCBattle.state, action.gameEnd.result);
-      updatedNPCBattleState.isGameClear ? await npcBattleComplete() : await continueNPCBattle(inProgress, updatedNPCBattleState);
+      const postBattleButtons = isStageClear(playingNPCBattle.state.player, action.gameEnd.result)
+        ? PostNPCBattleWinButtons : PostNPCBattleLoseButtons;
+      updatedNPCBattleState.isGameClear
+        ? await npcBattleComplete() : await continueNPCBattle(inProgress, updatedNPCBattleState, postBattleButtons);
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
