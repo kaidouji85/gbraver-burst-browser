@@ -76,8 +76,11 @@ import {
   updateNPCBattle, isStageClear
 } from "./npc-battle";
 import {DefaultStages, DefaultStage, NPCBattleCourses} from "./npc-battle-courses";
-import {PostNPCBattleLoseButtons, PostNPCBattleWinButtons} from "./dom-floaters/post-battle/post-battle-buttons";
-import type {PostBattleButtonConfig} from "./dom-floaters/post-battle/post-battle-button-config";
+import {
+  PostNPCBattleComplete,
+  PostNPCBattleLoseButtons,
+  PostNPCBattleWinButtons
+} from "./dom-floaters/post-battle/post-battle-buttons";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -541,18 +544,14 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    const continueNPCBattle = async (inProgress: NPCBattleX<PlayingNPCBattle>, update: NPCBattleState, buttons: PostBattleButtonConfig[]): Promise<void> => {
+    const continueNPCBattle = async (inProgress: NPCBattleX<PlayingNPCBattle>, update: NPCBattleState, isStageClear: boolean): Promise<void> => {
       this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: update}};
+      const buttons = isStageClear ? PostNPCBattleWinButtons : PostNPCBattleLoseButtons;
       await this._domFloaters.showPostBattle(buttons);
     };
     const npcBattleComplete = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
-      await this._fader.fadeOut();
-      this._tdScenes.hidden();
-      this._suddenlyBattleEnd.unbind();
-      const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
-      await this._fader.fadeIn();
-      ending.playBGM();
+      await this._domFloaters.showPostBattle(PostNPCBattleComplete);
     };
     const endCasualMatch = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
@@ -568,10 +567,10 @@ export class Game {
       const playingNPCBattle: PlayingNPCBattle = this._inProgress.subFlow;
       const inProgress = ((this._inProgress: any): NPCBattleX<typeof playingNPCBattle>);
       const updatedNPCBattleState = updateNPCBattle(playingNPCBattle.state, action.gameEnd.result);
-      const postBattleButtons = isStageClear(playingNPCBattle.state.player, action.gameEnd.result)
-        ? PostNPCBattleWinButtons : PostNPCBattleLoseButtons;
+      const isCurrentStageClear = isStageClear(playingNPCBattle.state.player, action.gameEnd.result);
       updatedNPCBattleState.isGameClear
-        ? await npcBattleComplete() : await continueNPCBattle(inProgress, updatedNPCBattleState, postBattleButtons);
+        ? await npcBattleComplete()
+        : await continueNPCBattle(inProgress, updatedNPCBattleState, isCurrentStageClear);
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
@@ -598,6 +597,15 @@ export class Game {
       const level = getStageLevel(state);
       await this._startNPCBattleStage(state.player, stage, level);
     };
+    const gotoEnding = async () => {
+      this._domFloaters.hiddenPostBattle();
+      await this._fader.fadeOut();
+      this._tdScenes.hidden();
+      this._suddenlyBattleEnd.unbind();
+      const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
+      await this._fader.fadeIn();
+      ending.playBGM();
+    };
 
     if (action.action.type === 'GotoTitle') {
       await gotoTitle();
@@ -605,6 +613,8 @@ export class Game {
       await startNPCBattleStage(this._inProgress.subFlow.state);
     } else if (action.action.type === 'Retry' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
       await startNPCBattleStage(this._inProgress.subFlow.state);
+    } else if (action.action.type === 'GotoEnding') {
+      await gotoEnding();
     }
   }
 
