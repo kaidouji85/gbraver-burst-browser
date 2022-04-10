@@ -15,7 +15,7 @@
   }
 }
 
-.post-battle__goto-title, .post-battle__next-stage {
+.post-battle__main-action, .post-battle__sub-action {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
@@ -26,10 +26,10 @@
   margin: calc(var(--responsive-font-size) * 0.5);
 }
 
-.post-battle__goto-title {
+.post-battle__sub-action {
   background-color: var(--sub-button-background-color);
 }
 
-.post-battle__next-stage {
+.post-battle__main-action {
   background-color: var(--button-background-color);
 }

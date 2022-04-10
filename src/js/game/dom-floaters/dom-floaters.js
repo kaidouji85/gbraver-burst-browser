@@ -2,7 +2,7 @@
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
 import type {GameAction} from "../game-actions";
 import {RxjsStreamSource} from "../../stream/rxjs";
-import {PostBattleFloater} from "./post-npc-battle-win/post-npc-battle-win";
+import {PostBattleFloater} from "./post-battle/post-battle";
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {
