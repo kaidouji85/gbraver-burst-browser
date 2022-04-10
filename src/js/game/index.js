@@ -77,6 +77,7 @@ import {
 } from "./npc-battle";
 import {DefaultStages, DefaultStage, NPCBattleCourses} from "./npc-battle-courses";
 import {
+  PostNetworkBattleButtons,
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
@@ -557,13 +558,9 @@ export class Game {
       }
     };
     const endCasualMatch = async (): Promise<void> => {
-      this._inProgress = {type: 'None'};
-      await this._fader.fadeOut();
+      this._suddenlyBattleEnd.unbind();
       await this._api.disconnectWebsocket();
-      this._tdScenes.hidden();
-      const title = await this._startTitle();
-      await this._fader.fadeIn();
-      title.playBGM();
+      await this._domFloaters.showPostBattle(PostNetworkBattleButtons);
     };
 
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
@@ -595,7 +592,6 @@ export class Game {
       this._domFloaters.hiddenPostBattle();
       await this._fader.fadeOut();
       this._tdScenes.hidden();
-      this._suddenlyBattleEnd.unbind();
       const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
       await this._fader.fadeIn();
       ending.playBGM();
