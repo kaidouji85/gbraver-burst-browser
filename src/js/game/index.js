@@ -544,14 +544,17 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    const continueNPCBattle = async (inProgress: NPCBattleX<PlayingNPCBattle>, update: NPCBattleState, isStageClear: boolean): Promise<void> => {
-      this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: update}};
-      const buttons = isStageClear ? PostNPCBattleWinButtons : PostNPCBattleLoseButtons;
-      await this._domFloaters.showPostBattle(buttons);
-    };
-    const npcBattleComplete = async (): Promise<void> => {
-      this._inProgress = {type: 'None'};
-      await this._domFloaters.showPostBattle(PostNPCBattleComplete);
+    const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
+      const updatedState = updateNPCBattle(inProgress.subFlow.state, action.gameEnd.result);
+      this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
+      const isCurrentStageClear = isStageClear(inProgress.subFlow.state.player, action.gameEnd.result);
+      if (isCurrentStageClear && updatedState.isGameClear) {
+        await this._domFloaters.showPostBattle(PostNPCBattleComplete);
+      } else if (isCurrentStageClear) {
+        await this._domFloaters.showPostBattle(PostNPCBattleWinButtons);
+      } else {
+        await this._domFloaters.showPostBattle(PostNPCBattleLoseButtons);
+      }
     };
     const endCasualMatch = async (): Promise<void> => {
       this._inProgress = {type: 'None'};
@@ -566,11 +569,7 @@ export class Game {
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
       const playingNPCBattle: PlayingNPCBattle = this._inProgress.subFlow;
       const inProgress = ((this._inProgress: any): NPCBattleX<typeof playingNPCBattle>);
-      const updatedNPCBattleState = updateNPCBattle(playingNPCBattle.state, action.gameEnd.result);
-      const isCurrentStageClear = isStageClear(playingNPCBattle.state.player, action.gameEnd.result);
-      updatedNPCBattleState.isGameClear
-        ? await npcBattleComplete()
-        : await continueNPCBattle(inProgress, updatedNPCBattleState, isCurrentStageClear);
+      await endNPCBattleStage(inProgress);
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
@@ -591,13 +590,8 @@ export class Game {
       await this._fader.fadeIn();
       title.playBGM();
     };
-    const startNPCBattleStage = async (state: NPCBattleState) => {
-      this._domFloaters.hiddenPostBattle();
-      const stage = getCurrentStage(state) ?? DefaultStage;
-      const level = getStageLevel(state);
-      await this._startNPCBattleStage(state.player, stage, level);
-    };
     const gotoEnding = async () => {
+      this._inProgress = {type: 'None'};
       this._domFloaters.hiddenPostBattle();
       await this._fader.fadeOut();
       this._tdScenes.hidden();
@@ -606,15 +600,21 @@ export class Game {
       await this._fader.fadeIn();
       ending.playBGM();
     };
+    const startNPCBattleStage = async (state: NPCBattleState) => {
+      this._domFloaters.hiddenPostBattle();
+      const stage = getCurrentStage(state) ?? DefaultStage;
+      const level = getStageLevel(state);
+      await this._startNPCBattleStage(state.player, stage, level);
+    };
 
     if (action.action.type === 'GotoTitle') {
       await gotoTitle();
+    } else if (action.action.type === 'GotoEnding') {
+      await gotoEnding();
     } else if (action.action.type === 'NextStage' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
       await startNPCBattleStage(this._inProgress.subFlow.state);
     } else if (action.action.type === 'Retry' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
       await startNPCBattleStage(this._inProgress.subFlow.state);
-    } else if (action.action.type === 'GotoEnding') {
-      await gotoEnding();
     }
   }
 
