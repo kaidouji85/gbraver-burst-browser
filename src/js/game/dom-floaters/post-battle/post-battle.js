@@ -70,8 +70,6 @@ export class PostBattleFloater {
    */
   async show(resources: Resources, buttons: PostBattleButtonConfig[]): Promise<void> {
     await this._exclusive.execute(async () => {
-      this.destructor();
-
       const actionButtons = this._createActionButtons(resources, buttons);
       actionButtons.forEach(v => {
         this._root.appendChild(v.button);
@@ -86,6 +84,7 @@ export class PostBattleFloater {
    */
   hidden(): void {
     this._root.style.display = 'none';
+    this.destructor();
   }
 
   /**

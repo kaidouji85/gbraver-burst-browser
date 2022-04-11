@@ -34,6 +34,9 @@ export class DOMFloaters {
    * デストラクタ相当の処理
    */
   destructor(): void {
+    this._unsubscribers.forEach(v => {
+      v.unsubscribe();
+    });
     this._postBattle.destructor();
   }
 

@@ -73,7 +73,8 @@ import {
   startNPCBattle,
   getStageLevel,
   getCurrentStage,
-  updateNPCBattle, isStageClear
+  updateNPCBattle,
+  isStageClear
 } from "./npc-battle";
 import {DefaultStages, DefaultStage, NPCBattleCourses} from "./npc-battle-courses";
 import {
