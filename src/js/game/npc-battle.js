@@ -70,12 +70,12 @@ export function getCurrentStage(origin: NPCBattleState): ?NPCBattleStage {
 /**
  * ステージクリアしたか否かを判定する
  *
- * @param player プレイヤー情報
+ * @param state NPCバトルステート
  * @param gameEndResult ゲームエンド結果
  * @return 判定結果、trueでステージクリアである
  */
-export function isStageClear(player: Player, gameEndResult: GameEndResult): boolean {
-  return gameEndResult.type === 'GameOver' && gameEndResult.winner === player.playerId;
+export function isNPCBattleStageClear(state: NPCBattleState, gameEndResult: GameEndResult): boolean {
+  return gameEndResult.type === 'GameOver' && gameEndResult.winner === state.player.playerId;
 }
 
 /**
@@ -100,6 +100,7 @@ export function startNPCBattle(player: Player, stages: NPCBattleStage[]): NPCBat
 }
 
 /**
+ * @deprecated
  * 戦闘結果に応じてNPCバトルステートを更新する
  *
  * @param origin 更新前のステート
@@ -107,7 +108,7 @@ export function startNPCBattle(player: Player, stages: NPCBattleStage[]): NPCBat
  * @return NPCバトルステート更新結果
  */
 export function updateNPCBattle(origin: NPCBattleState, gameEndResult: GameEndResult): NPCBattleState {
-  if (!isStageClear(origin.player, gameEndResult)) {
+  if (!isNPCBattleStageClear(origin, gameEndResult)) {
     return origin;
   }
 
