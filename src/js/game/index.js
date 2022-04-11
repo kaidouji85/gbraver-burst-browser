@@ -32,9 +32,10 @@ import type {
   DifficultySelectionComplete,
   EndBattle,
   EndNetworkError,
+  PostBattleAction,
   SelectionComplete,
   WebSocketAPIError,
-  WebSocketAPIUnintentionalClose
+  WebSocketAPIUnintentionalClose,
 } from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/core";
@@ -64,6 +65,7 @@ import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stopWithFadeOut} from "../bgm/bgm-operators";
+import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import {toStream} from "../stream/rxjs";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
 import {
@@ -71,9 +73,16 @@ import {
   startNPCBattle,
   getStageLevel,
   getCurrentStage,
-  updateNPCBattle
+  updateNPCBattle,
+  isStageClear
 } from "./npc-battle";
 import {DefaultStages, DefaultStage, NPCBattleCourses} from "./npc-battle-courses";
+import {
+  PostNetworkBattleButtons,
+  PostNPCBattleComplete,
+  PostNPCBattleLoseButtons,
+  PostNPCBattleWinButtons
+} from "./dom-floaters/post-battle/post-battle-buttons";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -120,6 +129,7 @@ export class Game {
   _interruptScenes: InterruptScenes;
   _domScenes: DOMScenes;
   _domDialogs: DOMDialogs;
+  _domFloaters: DOMFloaters;
   _tdScenes: TDScenes;
   _resourceRoot: ResourceRoot;
   _resources: Resources;
@@ -156,11 +166,12 @@ export class Game {
     this._interruptScenes = new InterruptScenes();
     this._domScenes = new DOMScenes();
     this._domDialogs = new DOMDialogs();
+    this._domFloaters = new DOMFloaters();
     this._tdScenes = new TDScenes(this._resize);
 
     const body = document.body || document.createElement('div');
     const elements = [this._fader.getRootHTMLElement(), this._interruptScenes.getRootHTMLElement(),
-      this._domDialogs.getRootHTMLElement(), this._domScenes.getRootHTMLElement(), 
+      this._domDialogs.getRootHTMLElement(), this._domScenes.getRootHTMLElement(), this._domFloaters.getRootHTMLElement(),
       this._tdScenes.getRendererDOM()];
     elements.forEach(element => {
       body.appendChild(element);
@@ -176,12 +187,14 @@ export class Game {
     const WebSocketAPIUnintentionalClose = toStream(this._api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(), suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
+      this._domDialogs.gameActionNotifier(), this._domFloaters.gameActionNotifier(),
+      suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
     this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'ReloadRequest') { this._onReloadRequest() }
       else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
       else if (action.type === 'EndBattle') { this._onEndBattle(action) }
       else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
+      else if (action.type === 'PostBattleAction') { this._onPostBattleAction(action) }
       else if (action.type === 'GameStart') { this._onGameStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
@@ -533,38 +546,72 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    const continueNPCBattle = async (inProgress: NPCBattleX<PlayingNPCBattle>, update: NPCBattleState): Promise<void> => {
-      this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: update}};
-      const level = getStageLevel(update);
-      const stage = getCurrentStage(update) ?? DefaultStage;
-      await this._startNPCBattleStage(update.player, stage, level);
-    };
-    const npcBattleComplete = async (): Promise<void> => {
-      this._inProgress = {type: 'None'};
-      await this._fader.fadeOut();
-      this._tdScenes.hidden();
-      this._suddenlyBattleEnd.unbind();
-      const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
-      await this._fader.fadeIn();
-      ending.playBGM();
+    const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
+      const updatedState = updateNPCBattle(inProgress.subFlow.state, action.gameEnd.result);
+      this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
+      const isCurrentStageClear = isStageClear(inProgress.subFlow.state.player, action.gameEnd.result);
+      if (isCurrentStageClear && updatedState.isGameClear) {
+        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleComplete);
+      } else if (isCurrentStageClear) {
+        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleWinButtons);
+      } else {
+        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleLoseButtons);
+      }
     };
     const endCasualMatch = async (): Promise<void> => {
-      this._inProgress = {type: 'None'};
-      await this._fader.fadeOut();
+      this._suddenlyBattleEnd.unbind();
       await this._api.disconnectWebsocket();
-      this._tdScenes.hidden();
-      const title = await this._startTitle();
-      await this._fader.fadeIn();
-      title.playBGM();
+      await this._domFloaters.showPostBattle(this._resources, PostNetworkBattleButtons);
     };
 
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
       const playingNPCBattle: PlayingNPCBattle = this._inProgress.subFlow;
       const inProgress = ((this._inProgress: any): NPCBattleX<typeof playingNPCBattle>);
-      const updatedNPCBattleState = updateNPCBattle(playingNPCBattle.state, action.gameEnd.result);
-      updatedNPCBattleState.isGameClear ? await npcBattleComplete() : await continueNPCBattle(inProgress, updatedNPCBattleState);
+      await endNPCBattleStage(inProgress);
     } else if (this._inProgress.type === 'CasualMatch') {
       await endCasualMatch();
+    }
+  }
+
+  /**
+   * 戦闘終了後アクション決定時の処理
+   *
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onPostBattleAction(action: PostBattleAction): Promise<void> {
+    const gotoTitle = async () => {
+      this._inProgress = {type: 'None'};
+      this._bgm.do(stopWithFadeOut);
+      this._domFloaters.hiddenPostBattle();
+      await this._fader.fadeOut();
+      const title = await this._startTitle();
+      await this._fader.fadeIn();
+      title.playBGM();
+    };
+    const gotoEnding = async () => {
+      this._inProgress = {type: 'None'};
+      this._domFloaters.hiddenPostBattle();
+      await this._fader.fadeOut();
+      this._tdScenes.hidden();
+      const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
+      await this._fader.fadeIn();
+      ending.playBGM();
+    };
+    const startNPCBattleStage = async (state: NPCBattleState) => {
+      this._domFloaters.hiddenPostBattle();
+      const stage = getCurrentStage(state) ?? DefaultStage;
+      const level = getStageLevel(state);
+      await this._startNPCBattleStage(state.player, stage, level);
+    };
+
+    if (action.action.type === 'GotoTitle') {
+      await gotoTitle();
+    } else if (action.action.type === 'GotoEnding') {
+      await gotoEnding();
+    } else if (action.action.type === 'NextStage' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
+      await startNPCBattleStage(this._inProgress.subFlow.state);
+    } else if (action.action.type === 'Retry' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
+      await startNPCBattleStage(this._inProgress.subFlow.state);
     }
   }
 

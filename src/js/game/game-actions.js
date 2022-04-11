@@ -1,9 +1,9 @@
 // @flow
-
 import type {ArmDozerId, GameEnd, PilotId} from "gbraver-burst-core";
 import type {PostNetworkError} from './post-network-error';
 import type {GbraverBurstBrowserConfig} from "./config/browser-config";
 import type {NPCBattleCourseDifficulty} from "./npc-battle-courses";
+import type {PostBattle} from "./post-battle";
 
 /** 画面リロード依頼 */
 export type ReloadRequest = {
@@ -79,6 +79,13 @@ export type EndBattle = {
 /** バトル強制終了 */
 export type SuddenlyBattleEnd = {
   type: 'SuddenlyBattleEnd'
+};
+
+/** 戦闘終了後アクション決定 */
+export type PostBattleAction = {
+  type: 'PostBattleAction',
+  /** 決定したアクション */
+  action: PostBattle,
 };
 
 /**
@@ -171,6 +178,7 @@ export type GameAction = ReloadRequest
  | DifficultySelectionCancel
  | EndBattle
  | SuddenlyBattleEnd
+ | PostBattleAction
  | EndNPCEnding
  | UniversalLogin
  | LoginCancel
