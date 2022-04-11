@@ -4,6 +4,7 @@ import type {GameAction} from "../game-actions";
 import {RxjsStreamSource} from "../../stream/rxjs";
 import {PostBattleFloater} from "./post-battle/post-battle";
 import type {PostBattleButtonConfig} from "./post-battle/post-battle-button-config";
+import type {Resources} from "../../resource";
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {
@@ -57,11 +58,12 @@ export class DOMFloaters {
   /**
    * バトル終了後行動選択フローターをアニメ付きで表示する
    *
+   * @param resources リソース管理オブジェクト
    * @param buttons アクションボタン設定
    * @return アニメが完了したら発火するPromise
    */
-  async showPostBattle(buttons: PostBattleButtonConfig[]): Promise<void> {
-    await this._postBattle.show(buttons);
+  async showPostBattle(resources: Resources, buttons: PostBattleButtonConfig[]): Promise<void> {
+    await this._postBattle.show(resources, buttons);
   }
 
   /**

@@ -550,17 +550,17 @@ export class Game {
       this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
       const isCurrentStageClear = isStageClear(inProgress.subFlow.state.player, action.gameEnd.result);
       if (isCurrentStageClear && updatedState.isGameClear) {
-        await this._domFloaters.showPostBattle(PostNPCBattleComplete);
+        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleComplete);
       } else if (isCurrentStageClear) {
-        await this._domFloaters.showPostBattle(PostNPCBattleWinButtons);
+        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleWinButtons);
       } else {
-        await this._domFloaters.showPostBattle(PostNPCBattleLoseButtons);
+        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleLoseButtons);
       }
     };
     const endCasualMatch = async (): Promise<void> => {
       this._suddenlyBattleEnd.unbind();
       await this._api.disconnectWebsocket();
-      await this._domFloaters.showPostBattle(PostNetworkBattleButtons);
+      await this._domFloaters.showPostBattle(this._resources, PostNetworkBattleButtons);
     };
 
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {

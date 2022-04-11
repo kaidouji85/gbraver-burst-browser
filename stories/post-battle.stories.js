@@ -13,46 +13,46 @@ export default {
   title: 'post-battle'
 };
 
-export const postNPCBattleWin: DOMStubStory = domStub(() => {
+export const postNPCBattleWin: DOMStubStory = domStub(resources => {
   const floater = new PostBattleFloater();
-  floater.show(PostNPCBattleWinButtons);
+  floater.show(resources, PostNPCBattleWinButtons);
   floater.selectionCompleteNotifier().subscribe(postBattle => {
     console.log(postBattle);
   });
   return floater.getRootHTMLElement();
 });
 
-export const postNPCBattleLose: DOMStubStory = domStub(() => {
+export const postNPCBattleLose: DOMStubStory = domStub(resources => {
   const floater = new PostBattleFloater();
-  floater.show(PostNPCBattleLoseButtons);
+  floater.show(resources, PostNPCBattleLoseButtons);
   floater.selectionCompleteNotifier().subscribe(postBattle => {
     console.log(postBattle);
   });
   return floater.getRootHTMLElement();
 });
 
-export const postNPCBattleComplete: DOMStubStory = domStub(() => {
+export const postNPCBattleComplete: DOMStubStory = domStub(resources => {
   const floater = new PostBattleFloater();
-  floater.show(PostNPCBattleComplete);
+  floater.show(resources, PostNPCBattleComplete);
   floater.selectionCompleteNotifier().subscribe(postBattle => {
     console.log(postBattle);
   });
   return floater.getRootHTMLElement();
 });
 
-export const postNetworkBattle: DOMStubStory = domStub(() => {
+export const postNetworkBattle: DOMStubStory = domStub(resources => {
   const floater = new PostBattleFloater();
-  floater.show(PostNetworkBattleButtons);
+  floater.show(resources, PostNetworkBattleButtons);
   floater.selectionCompleteNotifier().subscribe(postBattle => {
     console.log(postBattle);
   });
   return floater.getRootHTMLElement();
 });
 
-export const showHidden: DOMStubStory = domStub(() => {
+export const showHidden: DOMStubStory = domStub(resources => {
   const floater = new PostBattleFloater();
   (async () => {
-    await floater.show(PostNPCBattleWinButtons);
+    await floater.show(resources, PostNPCBattleWinButtons);
     await waitTime(3000);
     floater.hidden();
   })();
