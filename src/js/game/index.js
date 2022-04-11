@@ -74,7 +74,7 @@ import {
   getStageLevel,
   getCurrentStage,
   updateNPCBattle,
-  isStageClear
+  isNPCBattleStageClear
 } from "./npc-battle";
 import {DefaultStages, DefaultStage, NPCBattleCourses} from "./npc-battle-courses";
 import {
@@ -547,12 +547,12 @@ export class Game {
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
     const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
-      const updatedState = updateNPCBattle(inProgress.subFlow.state, action.gameEnd.result);
+      const isStageClear = isNPCBattleStageClear(inProgress.subFlow.state, action.gameEnd.result);
+      const updatedState = updateNPCBattle(inProgress.subFlow.state, isStageClear);
       this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
-      const isCurrentStageClear = isStageClear(inProgress.subFlow.state.player, action.gameEnd.result);
-      if (isCurrentStageClear && updatedState.isGameClear) {
+      if (isStageClear && updatedState.isGameClear) {
         await this._domFloaters.showPostBattle(this._resources, PostNPCBattleComplete);
-      } else if (isCurrentStageClear) {
+      } else if (isStageClear) {
         await this._domFloaters.showPostBattle(this._resources, PostNPCBattleWinButtons);
       } else {
         await this._domFloaters.showPostBattle(this._resources, PostNPCBattleLoseButtons);
