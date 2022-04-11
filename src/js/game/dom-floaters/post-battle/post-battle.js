@@ -69,14 +69,16 @@ export class PostBattleFloater {
    * @return アニメーションが完了したら発火するPromise
    */
   async show(resources: Resources, buttons: PostBattleButtonConfig[]): Promise<void> {
-    this.destructor();
+    await this._exclusive.execute(async () => {
+      this.destructor();
 
-    const actionButtons = this._createActionButtons(resources, buttons);
-    actionButtons.forEach(v => {
-      this._root.appendChild(v.button);
+      const actionButtons = this._createActionButtons(resources, buttons);
+      actionButtons.forEach(v => {
+        this._root.appendChild(v.button);
+      });
+      this._unsubscribers = actionButtons.map(v => v.unsubscriber);
+      await this._bottomUp();
     });
-    this._unsubscribers = actionButtons.map(v => v.unsubscriber);
-    await this._bottomUp();
   }
 
   /**
