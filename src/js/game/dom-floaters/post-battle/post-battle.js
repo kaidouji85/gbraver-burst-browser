@@ -9,6 +9,7 @@ import {pushDOMStream} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
+import {Exclusive} from "../../../exclusive/exclusive";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'post-battle';
@@ -24,6 +25,7 @@ type ActionButton = {
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {
   _root: HTMLElement;
+  _exclusive: Exclusive;
   _selectionComplete: StreamSource<PostBattle>;
   _unsubscribers: Unsubscriber[];
 
@@ -35,6 +37,7 @@ export class PostBattleFloater {
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS;
     this._root.style.display = 'none';
+    this._exclusive = new Exclusive();
     this._selectionComplete = new RxjsStreamSource();
     this._unsubscribers = [];
   }
@@ -136,13 +139,13 @@ export class PostBattleFloater {
       const {className, sound} = createButtonStyle(style);
       button.className = className;
       const unsubscriber = pushDOMStream(button).subscribe(({event}) => {
-        (async () => {
+        this._exclusive.execute(async () => {
           event.preventDefault();
           event.stopPropagation();
           sound.play();
           await pop(button);
           this._selectionComplete.next(action);
-        })();
+        });
       });
       return {button, unsubscriber};
     });
