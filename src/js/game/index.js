@@ -547,9 +547,9 @@ export class Game {
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
     const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
-      const updatedState = updateNPCBattle(inProgress.subFlow.state, action.gameEnd.result);
-      this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
       const isStageClear = isNPCBattleStageClear(inProgress.subFlow.state, action.gameEnd.result);
+      const updatedState = updateNPCBattle(inProgress.subFlow.state, isStageClear);
+      this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
       if (isStageClear && updatedState.isGameClear) {
         await this._domFloaters.showPostBattle(this._resources, PostNPCBattleComplete);
       } else if (isStageClear) {

@@ -100,15 +100,14 @@ export function startNPCBattle(player: Player, stages: NPCBattleStage[]): NPCBat
 }
 
 /**
- * @deprecated
  * 戦闘結果に応じてNPCバトルステートを更新する
  *
  * @param origin 更新前のステート
- * @param gameEndResult 戦闘結果
+ * @param isStageClear ステージクリアしたかのフラグ、trueでステージクリアした
  * @return NPCバトルステート更新結果
  */
-export function updateNPCBattle(origin: NPCBattleState, gameEndResult: GameEndResult): NPCBattleState {
-  if (!isNPCBattleStageClear(origin, gameEndResult)) {
+export function updateNPCBattle(origin: NPCBattleState, isStageClear: boolean): NPCBattleState {
+  if (!isStageClear) {
     return origin;
   }
 
