@@ -663,13 +663,13 @@ export class Game {
    * NPCバトルエンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
-    const bgmStopping = (async () => {
+    const stoppingBGM = (async () => {
       await this._bgm.do(fadeOut);
       await this._bgm.do(stop);
     })();
     await this._fader.fadeOut();
     const title = await this._startTitle();
-    await bgmStopping;
+    await stoppingBGM;
     await this._fader.fadeIn();
     title.playBGM();
   }
