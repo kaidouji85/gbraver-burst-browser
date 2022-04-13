@@ -248,8 +248,8 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: 'Hard',
     stages: [
       HardLightningDozer,
-      HardNeoLandozer,
       HardShinBraver,
+      HardNeoLandozer,
     ]
   },
 ];
