@@ -96,7 +96,7 @@ export function isLastStage(state: NPCBattleState): boolean {
  * @return NPCバトルステート
  */
 export function startNPCBattle(player: Player, stages: NPCBattleStage[]): NPCBattleState {
-  return {player, stages: stages, stageIndex: 0, isGameClear: false};
+  return {player, stages: stages, stageIndex: 2, isGameClear: false};
 }
 
 /**

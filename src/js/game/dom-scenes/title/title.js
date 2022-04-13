@@ -16,7 +16,7 @@ import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {TitleAccount} from "./title-account";
 import {escapeHTML} from '../../../dom/escape/escape-html';
 import type {BGMManager} from '../../../bgm/bgm-manager';
-import {fadeIn, play, playWithFadeIn} from "../../../bgm/bgm-operators";
+import {fadeIn, play} from "../../../bgm/bgm-operators";
 import type {SoundResource} from "../../../resource/sound";
 
 /** ルート要素 class属性 */
