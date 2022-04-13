@@ -3,7 +3,6 @@ import type {PostBattleButtonConfig} from "./post-battle-button-config";
 
 /** NPCバトル勝利後のアクションボタン */
 export const PostNPCBattleWinButtons: PostBattleButtonConfig[] = [
-  {style: 'SubButton', action: {type: 'GotoTitle'}, label: 'タイトルへ'},
   {style: 'MainButton', action: {type: 'NextStage'}, label: '次のステージ'},
 ];
 
