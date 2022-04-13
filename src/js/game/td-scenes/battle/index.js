@@ -21,7 +21,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
-import {playWithFadeIn, stopWithFadeOut} from "../../../bgm/bgm-operators";
+import {fadeIn, fadeOut, play, stop} from "../../../bgm/bgm-operators";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -114,7 +114,10 @@ export class BattleScene implements Scene {
    */
   start(): Promise<void> {
     return this._exclusive.execute(async (): Promise<void> => {
-      this._bgm.do(playWithFadeIn(this._sounds.bgm));
+      (async () => {
+        await this._bgm.do(play(this._sounds.bgm));
+        await this._bgm.do(fadeIn);
+      })();
       await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState).play();
     });
   }
@@ -224,7 +227,8 @@ export class BattleScene implements Scene {
    * @return 処理が完了したら発火するPromise
    */
   async _onEndGame(gameEnd: GameEnd): Promise<void> {
-    await this._bgm.do(stopWithFadeOut);
+    await this._bgm.do(fadeOut)
+    await this._bgm.do(stop);
     this._endBattle.next(gameEnd);
   }
 }

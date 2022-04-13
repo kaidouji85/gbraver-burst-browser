@@ -14,40 +14,39 @@ export type BGMOperator = (bgm: BGM) => Promise<BGM>;
 /** フェードアウト */
 export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
-    const duration = 1000;
+    const duration = 500;
     bgm.resource.sound.fade(bgm.resource.initialVolume, 0, duration);
     await wait(duration);
   }
   return bgm;
 };
 
-/** フェードアウトしてそのまま停止 */
-export const stopWithFadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
-  await fadeOut(bgm);
-  bgm.type === 'NowPlayingBGM' && bgm.resource.sound.stop();
-  return {type: 'NoBGM'};
-}
-
 /** フェードイン */
 export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
-    const duration = 1000;
+    const duration = 500;
     bgm.resource.sound.fade(0, bgm.resource.initialVolume, duration);
     await wait(duration);
   }
   return bgm;
 };
 
+/** BGM停止 */
+export const stop = async (bgm: BGM): Promise<BGM> => {
+  bgm.type === 'NowPlayingBGM' && bgm.resource.sound.stop();
+  return {type: 'NoBGM'};
+};
+
 /**
- * フェードインして再生開始
+ * BGMを再生する
+ * BGMがすでに再生されている場合、強制的に停止して新しいBGMを再生する
  *
  * @param resource 再生するBGMの音リソース
  * @return BGMオペレータ
  */
-export const playWithFadeIn = (resource: SoundResource): BGMOperator => async (): Promise<BGM> => {
+export const play = (resource: SoundResource): BGMOperator => async (bgm: BGM): Promise<BGM> => {
+  bgm.type === 'NowPlayingBGM' && bgm.resource.sound.stop();
   resource.sound.play();
   resource.sound.loop(true);
-  const bgm = {type: 'NowPlayingBGM', resource};
-  await fadeIn(bgm);
-  return bgm;
-};
+  return {type: 'NowPlayingBGM', resource};
+}

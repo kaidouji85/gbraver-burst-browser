@@ -12,7 +12,7 @@ import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import type {SoundResource} from "../../../resource/sound";
 import type {BGMManager} from "../../../bgm/bgm-manager";
-import {playWithFadeIn} from "../../../bgm/bgm-operators";
+import {fadeIn, play} from "../../../bgm/bgm-operators";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'npc-ending';
@@ -119,9 +119,12 @@ export class NPCEnding implements DOMScene {
 
   /**
    * BGMの再生開始
+   *
+   * @return BGM再生が完了したら発火するPromise
    */
-  playBGM(): void {
-    this._bgm.do(playWithFadeIn(this._endingBGM));
+  async playBGM(): Promise<void> {
+    await this._bgm.do(play(this._endingBGM));
+    await this._bgm.do(fadeIn);
   }
 
   /**
