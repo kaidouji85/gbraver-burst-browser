@@ -31,7 +31,7 @@ export const ConfigChanged: DOMStubStory = domStub(resources => {
   dialog.discardNotifier().subscribe(() => {
     console.log('on discard');
   });
-  dialog.acceptNotifer().subscribe(() => {
+  dialog.acceptNotifier().subscribe(() => {
     console.log('on accept');
   });
   return dialog.getRootHTMLElement();

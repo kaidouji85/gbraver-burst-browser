@@ -52,7 +52,7 @@ type Elements = {
   backGround: HTMLElement,
   closer: HTMLElement,
   discard: HTMLElement,
-  accpet: HTMLElement,
+  accept: HTMLElement,
 }
 
 /**
@@ -66,8 +66,8 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const backGround = root.querySelector(`[data-id="${ids.backGround}"]`) ?? document.createElement('div');
   const closer = root.querySelector(`[data-id="${ids.closer}"]`) ?? document.createElement('div');
   const discard = root.querySelector(`[data-id="${ids.discard}"]`) ?? document.createElement('div');
-  const accpet = root.querySelector(`[data-id="${ids.accept}"]`) ?? document.createElement('div');
-  return {backGround, closer, discard, accpet};
+  const accept = root.querySelector(`[data-id="${ids.accept}"]`) ?? document.createElement('div');
+  return {backGround, closer, discard, accept};
 }
 
 /** 
@@ -104,7 +104,7 @@ export class ConfigChangedDialog {
     this._backGround = elements.backGround;
     this._closer = elements.closer;
     this._discard = elements.discard;
-    this._accept = elements.accpet;
+    this._accept = elements.accept;
 
     this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
@@ -175,7 +175,7 @@ export class ConfigChangedDialog {
    *
    * @return 通知ストリーム
    */
-  acceptNotifer(): Stream<void> {
+  acceptNotifier(): Stream<void> {
     return this._acceptStream;
   }
 
