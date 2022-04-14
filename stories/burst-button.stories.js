@@ -21,7 +21,7 @@ export const shinBraver = (): HTMLElement => {
 
 export const wingDozer = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
-    const burstButton = new wingDozerBurstButton(resources, gameObjectAction);
+    const burstButton = wingDozerBurstButton(resources, gameObjectAction);
     burstButton.pushButtonNotifier().subscribe(() => {
       burstButton.decide().play();
     });
