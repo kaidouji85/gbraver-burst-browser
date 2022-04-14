@@ -1,10 +1,10 @@
 // @flow
 
 /** WebGLピクセルレート */
-export type WebGLPixelRatio = 1 | 2;
+export type WebGLPixelRatio = 0.5 | 0.75 | 1 | 2;
 
 /** 設定可能なWebGLピクセルレートを集めたもの */
-export const WebGLPixelRatios: [WebGLPixelRatio, WebGLPixelRatio] = [1, 2];
+export const WebGLPixelRatios: [WebGLPixelRatio, WebGLPixelRatio, WebGLPixelRatio, WebGLPixelRatio] = [0.5, 0.75, 1, 2];
 
 /**
  * 任意のオブジェクトをWebGLピクセルレートにパースする
@@ -13,7 +13,7 @@ export const WebGLPixelRatios: [WebGLPixelRatio, WebGLPixelRatio] = [1, 2];
  * @return パース結果
  */
 export function parseWebGLPixelRatio(origin: any): WebGLPixelRatio | null {
-  const parsedInt = parseInt(origin);
+  const parsedInt = Number(origin);
   if (isNaN(parsedInt)) {
     return null;
   }

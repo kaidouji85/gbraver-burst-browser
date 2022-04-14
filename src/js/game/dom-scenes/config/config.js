@@ -39,7 +39,9 @@ type DataIDs = {
 function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
   const webGLPixelRatioOption  = (value: WebGLPixelRatio) => `
     <option class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector__${value}" 
-      value="${value}" ${value===config.webGLPixelRatio ? 'selected' : ""}>${value}</option>`;
+      value="${value}" ${value===config.webGLPixelRatio ? 'selected' : ""}>
+      ${Number(value).toFixed(2)}
+    </option>`;
   const webGLPixelRatioOptions = WebGLPixelRatios
     .map(v => webGLPixelRatioOption(v))
     .reduce((a, b) => a + b);
@@ -136,7 +138,7 @@ export class Config implements DOMScene {
       this._dialog.discardNotifier().subscribe(() => {
         this._onDiscardConfigChange();
       }),
-      this._dialog.acceptNotifer().subscribe(() => {
+      this._dialog.acceptNotifier().subscribe(() => {
         this._onAcceptConfigChange();
       }),
     ];
