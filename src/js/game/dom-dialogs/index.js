@@ -12,6 +12,7 @@ import {NetworkErrorDialog} from './network-error/network-error-dialog';
 import type {PostNetworkError} from '../post-network-error';
 import {DeleteAccountConsentDialog} from "./delete-account-consent/delete-account-consent-dialog";
 import {DifficultyDialog} from "./difficulty/difficulty-dialog";
+import {MatchingDialog} from "./matching/matching-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -143,6 +144,24 @@ export class DOMDialogs {
     ];
     this._root.appendChild(degreeOfDifficulty.getRootHTMLElement());
     this._dialog = degreeOfDifficulty;
+  }
+
+  /**
+   * マッチングダイアログを表示する
+   *
+   * @param resources リソース管理オブジェクト
+   */
+  startMatching(resources: Resources): void {
+    this._removeCurrentDialog();
+
+    const matchingDialog = new MatchingDialog(resources);
+    this._unsubscribers = [
+      matchingDialog.matchingCanceledNotifier().subscribe(() => {
+        this._gameAction.next({type: 'MatchingCanceled'});
+      })
+    ];
+    this._root.appendChild(matchingDialog.getRootHTMLElement());
+    this._dialog = matchingDialog;
   }
 
   /**

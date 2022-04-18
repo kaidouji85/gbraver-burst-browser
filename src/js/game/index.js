@@ -197,6 +197,7 @@ export class Game {
       else if (action.type === 'PostBattleAction') { this._onPostBattleAction(action) }
       else if (action.type === 'GameStart') { this._onGameStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
+      else if (action.type === 'MatchingCanceled') { this._onMatchingCanceled() }
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
       else if (action.type === 'SelectionComplete') { this._onSelectionComplete(action) }
       else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
@@ -335,6 +336,17 @@ export class Game {
   }
 
   /**
+   * マッチング中止
+   *
+   * @return 処理が完了したら発火するPromise
+   */
+  async _onMatchingCanceled(): Promise<void> {
+    this._domDialogs.startWaiting('通信中......');
+    await this._api.disconnectWebsocket();
+    this._domDialogs.hidden();
+  }
+
+  /**
    * ユニバーサルログイン
    */
   async _onUniversalLogin(): Promise<void> {
@@ -464,8 +476,8 @@ export class Game {
         }
       }
     });
-    const startCasualMatch = async (origin: CasualMatch): Promise<void> => {
-      this._domDialogs.startWaiting('マッチング中......');
+    const startMatching = async (origin: CasualMatch): Promise<void> => {
+      this._domDialogs.startMatching(this._resources);
       const battle = await waitUntilMatching();
       this._suddenlyBattleEnd.bind(battle);
       const subFlow = {type: 'Battle', battle};
@@ -495,7 +507,7 @@ export class Game {
     if (this._inProgress.type === 'NPCBattle') {
       await courseDifficultySelect(this._inProgress);
     } else if (this._inProgress.type === 'CasualMatch') {
-      await startCasualMatch(this._inProgress);
+      await startMatching(this._inProgress);
     }
   }
 

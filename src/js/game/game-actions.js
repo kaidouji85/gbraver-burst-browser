@@ -25,6 +25,11 @@ export type CasualMatchStart = {
   type: 'CasualMatchStart'
 };
 
+/** マッチング中止 */
+export type MatchingCanceled = {
+  type: 'MatchingCanceled'
+};
+
 /** 遊び方動画を表示 */
 export type ShowHowToPlay = {
   type: 'ShowHowToPlay'
@@ -170,6 +175,7 @@ export type GameAction = ReloadRequest
  | ExitMailVerifiedIncomplete
  | GameStart
  | CasualMatchStart
+ | MatchingCanceled
  | ShowHowToPlay
  | EndHowToPlay
  | SelectionComplete
