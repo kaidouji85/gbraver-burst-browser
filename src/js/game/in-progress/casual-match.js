@@ -1,7 +1,5 @@
 // @flow
 
-import type {Battle as BattleSDK} from '@gbraver-burst-network/browser-core';
-
 /** カジュアルマッチ */
 export type CasualMatch = CasualMatchX<SubFlow>;
 
@@ -31,6 +29,5 @@ export type Waiting = {
 
 /** 戦闘中 */
 export type Battle = {
-  type: 'Battle',
-  battle: BattleSDK
+  type: 'Battle'
 };

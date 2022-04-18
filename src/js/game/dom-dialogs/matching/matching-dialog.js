@@ -96,7 +96,6 @@ export class MatchingDialog implements DOMDialog {
         this._onCancelPush(action);
       })
     ];
-
   }
 
   /**
