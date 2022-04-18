@@ -195,7 +195,7 @@ export class Game {
       else if (action.type === 'EndBattle') { this._onEndBattle(action) }
       else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
       else if (action.type === 'PostBattleAction') { this._onPostBattleAction(action) }
-      else if (action.type === 'GameStart') { this._onGameStart() }
+      else if (action.type === 'ArcadeStart') { this._onArcadeStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
       else if (action.type === 'MatchingCanceled') { this._onMatchingCanceled() }
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
@@ -278,16 +278,16 @@ export class Game {
   }
 
   /**
-   * ゲームスタート時の処理
+   * アーケードモード開始
+   *
    * @return 処理が完了したら発火するPromise
    */
-  async _onGameStart(): Promise<void> {
+  async _onArcadeStart(): Promise<void> {
     if (!this._isFullResourceLoaded) {
       await this._fullResourceLoading();
     }
 
-    const subFlow = {type: 'PlayerSelect'};
-    this._inProgress = {type: 'NPCBattle', subFlow};
+    this._inProgress = {type: 'NPCBattle', subFlow: {type: 'PlayerSelect'}};
     await this._fader.fadeOut();
     await this._domScenes.startPlayerSelect(this._resources);
     await this._fader.fadeIn();
