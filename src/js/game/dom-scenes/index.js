@@ -122,7 +122,7 @@ export class DOMScenes {
         this._gameAction.next({type: 'AccountDeleteConsent'});
       }),
       scene.pushArcadeNotifier().subscribe(() => {
-        this._gameAction.next({type: 'GameStart'});
+        this._gameAction.next({type: 'ArcadeStart'});
       }),
       scene.pushHowToPlayNotifier().subscribe(() => {
         this._gameAction.next({type: 'ShowHowToPlay'});
