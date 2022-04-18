@@ -1,20 +1,18 @@
-/**
- * 作業待ち ダイアログ
- */
+/** マッチング ダイアログ */
 @media (orientation: landscape) {
-  .waiting {
-    --wating-dialog-height: calc(var(--responsive-font-size) * 7);
+  .matching {
+    --dialog-height: calc(var(--responsive-font-size) * 7);
     display: block;
   }
 }
 
 @media (orientation: portrait) {
-  .waiting {
+  .matching {
     display: none;
   }
 }
 
-.waiting__background {
+.matching__background {
   position: absolute;
   width: var(--screen-width);
   height: var(--screen-height);
@@ -23,9 +21,9 @@
   z-index: var(--zindex-background);
 }
 
-.waiting__dialog {
+.matching__dialog {
   padding: 0 calc(var(--responsive-font-size) * 3);
-  height: var(--wating-dialog-height);
+  height: var(--dialog-height);
   top: calc(var(--vh, 1vh) * 50);
   left: 50%;
   transform: translate(-50%, -50%);
