@@ -480,7 +480,7 @@ export class Game {
       this._domDialogs.startMatching(this._resources);
       const battle = await waitUntilMatching();
       this._suddenlyBattleEnd.bind(battle);
-      const subFlow = {type: 'Battle', battle};
+      const subFlow = {type: 'Battle'};
       this._inProgress = {...origin, subFlow};
 
       await this._fader.fadeOut();
