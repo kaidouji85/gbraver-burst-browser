@@ -7,7 +7,7 @@ import {MatchingDialog} from "../src/js/game/dom-dialogs/matching/matching-dialo
 export default {
   title: 'matching-dialog',
 };
-export const dialog: DOMStubStory = domStub(() => {
-  const dialog = new MatchingDialog();
+export const dialog: DOMStubStory = domStub(resources => {
+  const dialog = new MatchingDialog(resources);
   return dialog.getRootHTMLElement();
 });
