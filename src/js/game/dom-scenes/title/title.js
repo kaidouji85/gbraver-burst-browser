@@ -46,7 +46,7 @@ type DataIDs = {
   deleteAccount: string,
   logout: string,
   logo: string,
-  gameStart: string,
+  arcade: string,
   casualMatch: string,
   howToPlay: string,
   config: string,
@@ -86,7 +86,7 @@ function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: b
       <div class="${ROOT_CLASS}__contents__controllers">
         <button class="${ROOT_CLASS}__contents__controllers__config" data-id="${ids.config}">設定</button>
         <button class="${ROOT_CLASS}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
-        <button class="${ROOT_CLASS}__contents__controllers__game-start" data-id="${ids.gameStart}">ゲームスタート</button>
+        <button class="${ROOT_CLASS}__contents__controllers__arcade" data-id="${ids.arcade}">アーケード</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
       </div>
     </div>
@@ -111,7 +111,7 @@ type Elements = {
   deleteAccount: HTMLElement,
   logout: HTMLElement,
   logo: HTMLImageElement,
-  gameStart: HTMLElement,
+  arcade: HTMLElement,
   casualMatch: HTMLElement,
   howToPlay: HTMLElement,
   config: HTMLElement,
@@ -133,11 +133,11 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const logout = root.querySelector(`[data-id="${ids.logout}"]`) ?? document.createElement('div');
   const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
   const logo = (logoElement instanceof HTMLImageElement) ? logoElement : new Image();
-  const gameStart = root.querySelector(`[data-id="${ids.gameStart}"]`) ?? document.createElement('div');
+  const arcade = root.querySelector(`[data-id="${ids.arcade}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
   const config = root.querySelector(`[data-id="${ids.config}"]`) ?? document.createElement('div');
-  return {login, accountMenu, avatar, deleteAccount, logout, logo, gameStart, casualMatch, howToPlay, config};
+  return {login, accountMenu, avatar, deleteAccount, logout, logo, arcade, casualMatch, howToPlay, config};
 }
 
 /** タイトル */
@@ -150,7 +150,7 @@ export class Title implements DOMScene {
   _deleteAccount: HTMLElement;
   _logout: HTMLElement;
   _root: HTMLElement;
-  _gameStart: HTMLElement;
+  _arcade: HTMLElement;
   _casualMatch: HTMLElement;
   _howToPlay: HTMLElement;
   _config: HTMLElement;
@@ -164,7 +164,7 @@ export class Title implements DOMScene {
   _pushLogin: StreamSource<void>;
   _pushDeleteAccount: StreamSource<void>;
   _pushLogout: StreamSource<void>;
-  _pushGameStart: StreamSource<void>;
+  _pushArcade: StreamSource<void>;
   _pushCasualMatch: StreamSource<void>;
   _pushHowToPlay: StreamSource<void>;
   _pushConfig: StreamSource<void>;
@@ -185,7 +185,7 @@ export class Title implements DOMScene {
     this._exclusive = new Exclusive();
     this._isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
-      gameStart: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
+      arcade: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(dataIDs, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this._root.className = ROOT_CLASS;
@@ -195,7 +195,7 @@ export class Title implements DOMScene {
     this._avatar = elements.avatar;
     this._deleteAccount = elements.deleteAccount;
     this._logout = elements.logout;
-    this._gameStart = elements.gameStart;
+    this._arcade = elements.arcade;
     this._casualMatch = elements.casualMatch;
     this._howToPlay = elements.howToPlay;
     this._config = elements.config;
@@ -223,7 +223,7 @@ export class Title implements DOMScene {
     this._pushLogin = new RxjsStreamSource();
     this._pushDeleteAccount = new RxjsStreamSource();
     this._pushLogout = new RxjsStreamSource();
-    this._pushGameStart = new RxjsStreamSource();
+    this._pushArcade = new RxjsStreamSource();
     this._pushHowToPlay = new RxjsStreamSource();
     this._pushCasualMatch = new RxjsStreamSource();
     this._pushConfig = new RxjsStreamSource();
@@ -243,8 +243,8 @@ export class Title implements DOMScene {
       pushDOMStream(this._logout).subscribe(action => {
         this._onLogoutPush(action);
       }),
-      pushDOMStream(this._gameStart).subscribe(action => {
-        this._onGameStartPush(action);
+      pushDOMStream(this._arcade).subscribe(action => {
+        this._onArcadePush(action);
       }),
       pushDOMStream(this._casualMatch).subscribe(action => {
         this._onCasualMatchPush(action);
@@ -303,12 +303,12 @@ export class Title implements DOMScene {
   }
 
   /**
-   * ゲームスタートボタン押下通知
+   * アーケードボタン押下通知
    *
    * @return イベント通知ストリーム
    */
-  pushGameStartNotifier(): Stream<void> {
-    return this._pushGameStart;
+  pushArcadeNotifier(): Stream<void> {
+    return this._pushArcade;
   }
 
   /**
@@ -425,16 +425,16 @@ export class Title implements DOMScene {
   }
   
   /**
-   * ゲームスタートが押された際の処理
+   * アーケードが押された際の処理
    * 
    * @param action アクション
    */
-  _onGameStartPush(action: PushDOM): void {
+  _onArcadePush(action: PushDOM): void {
     this._exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
       this._pushButton.play();
-      await pop(this._gameStart);
-      this._pushGameStart.next();
+      await pop(this._arcade);
+      this._pushArcade.next();
     });
   }
 

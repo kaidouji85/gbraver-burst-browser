@@ -121,7 +121,7 @@ export class DOMScenes {
       scene.pushDeleteAccountNotifier().subscribe(() => {
         this._gameAction.next({type: 'AccountDeleteConsent'});
       }),
-      scene.pushGameStartNotifier().subscribe(() => {
+      scene.pushArcadeNotifier().subscribe(() => {
         this._gameAction.next({type: 'GameStart'});
       }),
       scene.pushHowToPlayNotifier().subscribe(() => {
