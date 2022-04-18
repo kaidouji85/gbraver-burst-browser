@@ -1,0 +1,75 @@
+/** マッチング ダイアログ */
+@media (orientation: landscape) {
+  .matching {
+    --dialog-width: calc(min(var(--dialog-height) * 16 / 9, 50vw));
+    --dialog-height: calc(var(--responsive-font-size) * 10);
+    --closer-width: 48px;
+    --closer-height: 48px;
+    --control-button-width: calc(var(--responsive-font-size) * 10);
+    --control-button-height: calc(var(--responsive-font-size) * 3);
+    display: block;
+  }
+}
+
+@media (orientation: portrait) {
+  .matching {
+    display: none;
+  }
+}
+
+.matching__background {
+  position: absolute;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.matching__dialog {
+  --dialog-padding: var(--responsive-font-size);
+  width: var(--dialog-width);
+  height: var(--dialog-height);
+  top: calc(var(--vh, 1vh) * 50);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+  box-sizing: border-box;
+}
+
+.matching__dialog__closer {
+  position: absolute;
+  top: calc(var(--closer-height) * -0.5);
+  left: calc(var(--closer-width) * -0.5);
+  width: var(--closer-width);
+  height: var(--closer-height);
+  z-index: var(--zindex-close);
+}
+
+.matching__dialog__caption {
+  display: flex;
+  justify-content: center;
+  font-size: calc(var(--responsive-font-size) * 1.2);
+  margin-bottom: calc(var(--responsive-font-size) * 1.5);
+}
+
+.matching__dialog__cancel {
+  width: var(--control-button-width);
+  height: var(--control-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  background-color: var(--button-background-color);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+}
