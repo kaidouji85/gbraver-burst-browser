@@ -1,4 +1,5 @@
 // @flow
+import {Howl} from 'howler';
 import type {DOMDialog} from "../dialog";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
@@ -7,6 +8,9 @@ import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
 import {RxjsStreamSource} from "../../../stream/rxjs";
+import {SOUND_IDS} from "../../../resource/sound";
+import {Exclusive} from "../../../exclusive/exclusive";
+import {pop} from "../../../dom/animation/pop";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS = 'matching';
@@ -61,6 +65,9 @@ export class MatchingDialog implements DOMDialog {
   _root: HTMLElement;
   _closer: HTMLImageElement;
   _cancel: HTMLElement;
+  _changeValue: typeof Howl;
+  _pushButton: typeof Howl;
+  _exclusive: Exclusive;
   _matchingCanceled: StreamSource<void>;
   _unsubscribers: Unsubscriber[];
 
@@ -77,6 +84,9 @@ export class MatchingDialog implements DOMDialog {
     const elements = extractElements(this._root, ids);
     this._closer = elements.closer;
     this._cancel = elements.cancel;
+    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this._exclusive = new Exclusive();
     this._matchingCanceled = new RxjsStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._closer).subscribe(action => {
@@ -124,7 +134,11 @@ export class MatchingDialog implements DOMDialog {
   _onCloserPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._matchingCanceled.next();
+    this._exclusive.execute(async () => {
+      this._changeValue.play();
+      await pop(this._closer, 1.3);
+      this._matchingCanceled.next();
+    });
   }
 
   /**
@@ -135,6 +149,10 @@ export class MatchingDialog implements DOMDialog {
   _onCancelPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._matchingCanceled.next();
+    this._exclusive.execute(async () => {
+      this._pushButton.play();
+      await pop(this._cancel);
+      this._matchingCanceled.next();
+    });
   }
 }

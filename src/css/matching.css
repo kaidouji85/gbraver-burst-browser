@@ -49,9 +49,8 @@
 
 .matching__dialog__closer {
   position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -50%);
+  top: calc(var(--closer-height) * -0.5);
+  left: calc(var(--closer-width) * -0.5);
   width: var(--closer-width);
   height: var(--closer-height);
   z-index: var(--zindex-close);
