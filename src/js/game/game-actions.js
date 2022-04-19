@@ -15,9 +15,9 @@ export type ExitMailVerifiedIncomplete = {
   type: 'ExitMailVerifiedIncomplete'
 }
 
-/** ゲームスタート */
-export type GameStart = {
-  type: 'GameStart'
+/** アーケードモード開始 */
+export type ArcadeStart = {
+  type: 'ArcadeStart'
 };
 
 /** カジュアルマッチスタート */
@@ -173,7 +173,7 @@ export type ConfigChangeCancel = {
  */
 export type GameAction = ReloadRequest
  | ExitMailVerifiedIncomplete
- | GameStart
+ | ArcadeStart
  | CasualMatchStart
  | MatchingCanceled
  | ShowHowToPlay
