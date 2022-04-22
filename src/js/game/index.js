@@ -302,8 +302,7 @@ export class Game {
       try {
         return await this._api.isLogin();
       } catch (e) {
-        const postNetworkError = {type: 'Close'};
-        this._domDialogs.startNetworkError(this._resources, postNetworkError);
+        this._domDialogs.startNetworkError(this._resources, {type: 'Close'});
         throw e;
       }
     };
@@ -454,8 +453,7 @@ export class Game {
         await this._api.disconnectWebsocket();
         return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
       } catch(e) {
-        const postNetworkError = {type: 'GotoTitle'};
-        this._domDialogs.startNetworkError(this._resources, postNetworkError);
+        this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
         throw e;
       }
     };
@@ -467,8 +465,7 @@ export class Game {
           this._domDialogs.hidden();
           return update;
         } catch(e) {
-          const postNetworkError = {type: 'GotoTitle'};
-          this._domDialogs.startNetworkError(this._resources, postNetworkError);
+          this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
           throw e;
         }
       }
@@ -637,8 +634,7 @@ export class Game {
    * バトル強制終了時の処理
    */
   async _onSuddenlyEndBattle(): Promise<void> {
-    const postNetworkError = {type: 'GotoTitle'};
-    this._domDialogs.startNetworkError(this._resources, postNetworkError);
+    this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
     this._suddenlyBattleEnd.unbind();
     await this._api.disconnectWebsocket();
   }
@@ -649,8 +645,7 @@ export class Game {
    * @param action アクション
    */
   _onWebSocketAPIError(action: WebSocketAPIError): void {
-    const postNetworkError = {type: 'GotoTitle'};
-    this._domDialogs.startNetworkError(this._resources, postNetworkError);
+    this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
     throw action;
   }
 
@@ -660,8 +655,7 @@ export class Game {
    * @param action アクション
    */
   _onWebSocketAPIUnintentionalClose(action: WebSocketAPIUnintentionalClose): void {
-    const postNetworkError = {type: 'GotoTitle'};
-    this._domDialogs.startNetworkError(this._resources, postNetworkError);
+    this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
     throw action;
   }
 
