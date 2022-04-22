@@ -747,11 +747,11 @@ export class Game {
     await waitTime(Math.max(3000- latency, 0));
 
     await Promise.all([(async () => {
-      await this._bgm.do(fadeOut);
-      await this._bgm.do(stop);
-    })(), (async () => {
       await this._fader.fadeOut();
       this._domScenes.hidden();
+    })(), (async () => {
+      await this._bgm.do(fadeOut);
+      await this._bgm.do(stop);
     })()]);
     await this._fader.fadeIn();
     await battleScene.start();
