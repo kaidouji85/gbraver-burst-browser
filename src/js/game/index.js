@@ -308,8 +308,7 @@ export class Game {
       }
     };
     const gotoPlayerSelect = async (): Promise<void> => {
-      const subFlow = {type: 'PlayerSelect'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
+      this._inProgress = {type: 'CasualMatch', subFlow: {type: 'PlayerSelect'}};
       this._domDialogs.hidden();
       await this._fader.fadeOut();
       await this._domScenes.startPlayerSelect(this._resources);
@@ -447,8 +446,7 @@ export class Game {
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
-      const difficultySelection = {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId};
-      this._inProgress = {...npcBattle, subFlow: difficultySelection};
+      this._inProgress = {...npcBattle, subFlow: {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId}};
       this._domDialogs.startDifficulty(this._resources);
     };
     const waitUntilMatching = async (): Promise<BattleSDK> => {
@@ -479,8 +477,7 @@ export class Game {
       this._domDialogs.startMatching(this._resources);
       const battle = await waitUntilMatching();
       this._suddenlyBattleEnd.bind(battle);
-      const subFlow = {type: 'Battle'};
-      this._inProgress = {...origin, subFlow};
+      this._inProgress = {...origin, subFlow: {type: 'Battle'}};
 
       await this._fader.fadeOut();
       this._domDialogs.hidden();
@@ -539,8 +536,7 @@ export class Game {
     const stages = NPCBattleCourses
       .find(v => v.armdozerId === armdozerId && v.difficulty === action.difficulty)?.stages ?? DefaultStages;
     const npcBattleState = startNPCBattle(player, stages);
-    const subFlow = {type: 'PlayingNPCBattle', state: npcBattleState};
-    this._inProgress = {...npcBattle, subFlow};
+    this._inProgress = {...npcBattle, subFlow: {type: 'PlayingNPCBattle', state: npcBattleState}};
     const stage = getCurrentStage(npcBattleState) ?? DefaultStage;
     const level = getStageLevel(npcBattleState);
     await this._startNPCBattleStage(player, stage, level);
@@ -554,8 +550,7 @@ export class Game {
       return;
     }
 
-    const playerSelect = {type: 'PlayerSelect'};
-    this._inProgress = {...this._inProgress, subFlow: playerSelect};
+    this._inProgress = {...this._inProgress, subFlow: {type: 'PlayerSelect'}};
     this._domDialogs.hidden();
   }
 
