@@ -249,8 +249,7 @@ export class Game {
     const title = await this._startTitle();
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
-    const firstViewDisplayTime = 500;
-    await waitTime(Math.max(firstViewDisplayTime - latency, 0));
+    await waitTime(500 - latency);
     await this._fader.fadeOut();
     invisibleFirstView();
     await this._fader.fadeIn();
@@ -742,9 +741,8 @@ export class Game {
     const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, stage.bgm, config.webGLPixelRatio,
       {progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
-    const battleSceneReadyTime = Date.now();
-    const latency = battleSceneReadyTime - startNPCStageTitleTime;
-    await waitTime(Math.max(3000- latency, 0));
+    const latency = Date.now() - startNPCStageTitleTime;
+    await waitTime(3000- latency);
 
     await Promise.all([(async () => {
       await this._fader.fadeOut();
