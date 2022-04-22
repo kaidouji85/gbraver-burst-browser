@@ -423,13 +423,13 @@ export class Game {
     const gotoTitle = async () => {
       this._inProgress = {type: 'None'};
       this._domDialogs.hidden();
-      const stoppingBGM = async () => {
+      const [title] = await Promise.all([(async () => {
+        await this._fader.fadeOut();
+        return await this._startTitle();
+      })(), (async () => {
         await this._bgm.do(fadeOut);
         await this._bgm.do(stop);
-      };
-      await this._fader.fadeOut();
-      const title = await this._startTitle();
-      await stoppingBGM;
+      })()]);
       await this._fader.fadeIn();
       title.playBGM();
     };
@@ -493,13 +493,13 @@ export class Game {
       const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_01,
         config.webGLPixelRatio, progress, battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
-      const stoppingBGM = (async () => {
+      await Promise.all([(async () => {
+        await this._fader.fadeOut();
+        this._domScenes.hidden();  
+      })(), (async () => {
         await this._bgm.do(fadeOut);
         await this._bgm.do(stop);
-      })();
-      await this._fader.fadeOut();
-      this._domScenes.hidden();
-      await stoppingBGM;
+      })()]);
       await this._fader.fadeIn();
       await battleScene.start();
     };
@@ -601,14 +601,14 @@ export class Game {
   async _onPostBattleAction(action: PostBattleAction): Promise<void> {
     const gotoTitle = async () => {
       this._inProgress = {type: 'None'};
-      const stoppingBGM = (async () => {
+      this._domFloaters.hiddenPostBattle();
+      const [title] = await Promise.all([(async () => {
+        await this._fader.fadeOut();
+        return await this._startTitle();  
+      })(), (async () => {
         await this._bgm.do(fadeOut);
         await this._bgm.do(stop);
-      })();
-      this._domFloaters.hiddenPostBattle();
-      await this._fader.fadeOut();
-      const title = await this._startTitle();
-      await stoppingBGM;
+      })()]);
       await this._fader.fadeIn();
       title.playBGM();
     };
@@ -675,13 +675,13 @@ export class Game {
    * NPCバトルエンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
-    const stoppingBGM = (async () => {
+    const [title] = await Promise.all([(async () => {
+      await this._fader.fadeOut();
+      return await this._startTitle();  
+    })(), (async () => {
       await this._bgm.do(fadeOut);
       await this._bgm.do(stop);
-    })();
-    await this._fader.fadeOut();
-    const title = await this._startTitle();
-    await stoppingBGM;
+    })()]);
     await this._fader.fadeIn();
     title.playBGM();
   }
@@ -745,15 +745,15 @@ export class Game {
     const battleSceneReadyTime = Date.now();
     const latency = battleSceneReadyTime - startNPCStageTitleTime;
     await waitTime(Math.max(3000- latency, 0));
-    const stoopingBGM = (async () => {
+
+    await Promise.all([(async () => {
+      await this._fader.fadeOut();
+      this._domScenes.hidden();
+    })(), (async () => {
       await this._bgm.do(fadeOut);
       await this._bgm.do(stop);
-    })();
-    await this._fader.fadeOut();
-    this._domScenes.hidden();
-    await stoopingBGM;
+    })()]);
     await this._fader.fadeIn();
-
     await battleScene.start();
   }
 
