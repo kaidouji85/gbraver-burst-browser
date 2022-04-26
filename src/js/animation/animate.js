@@ -101,4 +101,24 @@ export class Animate {
     this._time += next._time;
     return this;
   }
+
+  /**
+   * アニメーション再生時間を延長、短縮する
+   *
+   * @param scale 再生時間のスケール
+   */
+  timeScale(scale: number): void {
+    this._time = this._time * scale;
+    const durationScale = (tween: typeof TWEEN.Tween, scaledTweens: typeof TWEEN.Tween[]): void => {
+      if (scaledTweens.includes(tween)) {
+        return;
+      }
+      const newScaledTweens = [...scaledTweens, tween];
+      tween._duration = tween._duration * scale;
+      tween._chainedTweens.forEach((child: typeof TWEEN.Tween) => {
+        durationScale(child, newScaledTweens);
+      });
+    };
+    durationScale(this._start, []);
+  }
 }
