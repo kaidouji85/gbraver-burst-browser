@@ -1,6 +1,7 @@
 // @flow
 
 import TWEEN from '@tweenjs/tween.js';
+import {scaleTweenDuration} from "./duration";
 
 /**
  * アニメーション
@@ -99,6 +100,18 @@ export class Animate {
     this._end.chain(next._start, ...pararellTweens);
     this._end = next._end;
     this._time += next._time;
+    return this;
+  }
+
+  /**
+   * アニメーション再生時間をスケールする
+   *
+   * @param scale スケール比率
+   * @return 再生時間をスケールしたアニメーション
+   */
+  timeScale(scale: number): Animate {
+    this._time = this._time * scale;
+    scaleTweenDuration(this._start, scale);
     return this;
   }
 }

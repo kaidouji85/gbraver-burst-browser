@@ -4,11 +4,9 @@ import {Animate} from "../../../../../animation/animate";
 import {BattleSceneView} from "../../view";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameStateX, InputCommand} from "gbraver-burst-core";
-import {getEnableMax, getInitialBattery} from "../../ui-logic/battery-selector";
 import {empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
-import {canBurstButtonPush} from "../../ui-logic/burst-button";
-import {canPilotButtonPush} from "../../ui-logic/pilot-button";
+import {canBurstButtonPush, canPilotButtonPush, getEnableMax, getInitialBattery} from "../../ui-logic";
 
 /**
  * コマンド入力フェイズのアニメーション

@@ -1,6 +1,6 @@
 // @flow
 
-import {canBurstButtonPush} from "../../../../../../src/js/game/td-scenes/battle/ui-logic/burst-button";
+import {canBurstButtonPush} from "../../../../../src/js/game/td-scenes/battle/ui-logic";
 
 test('バーストコマンドが選択可能な場合、バーストボタンは操作可能である', () => {
   const result = canBurstButtonPush([

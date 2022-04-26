@@ -22,6 +22,7 @@ import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
 import {fadeIn, fadeOut, play, stop} from "../../../bgm/bgm-operators";
+import {Animate} from "../../../animation/animate";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -50,6 +51,7 @@ export class BattleScene implements Scene {
   _view: BattleSceneView;
   _sounds: BattleSceneSounds;
   _bgm: BGMManager;
+  _animationTimeScale: number;
   _unsubscriber: Unsubscriber[];
 
   /**
@@ -72,6 +74,7 @@ export class BattleScene implements Scene {
       resize: param.resize,
     });
     this._sounds = new BattleSceneSounds(param.resources, param.playingBGM);
+    this._animationTimeScale  = 1;  // TODO パラメータで渡せるようにする
     this._bgm = param.bgm;
 
     this._unsubscriber = [
@@ -118,7 +121,7 @@ export class BattleScene implements Scene {
         await this._bgm.do(play(this._sounds.bgm));
         await this._bgm.do(fadeIn);
       })();
-      await stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState).play();
+      await this._playAnimation(stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState));
     });
   }
 
@@ -130,14 +133,15 @@ export class BattleScene implements Scene {
    */
   async _onDecideBattery(action: DecideBattery): Promise<void> {
     this._exclusive.execute(async (): Promise<void> => {
-      await all(
-        this._view.hud.gameObjects.batterySelector.decide(),
-        this._view.hud.gameObjects.burstButton.close(),
-        this._view.hud.gameObjects.pilotButton.close(),
-      )
-        .chain(delay(500))
-        .chain(this._view.hud.gameObjects.batterySelector.close())
-        .play();
+      await this._playAnimation(
+        all(
+          this._view.hud.gameObjects.batterySelector.decide(),
+          this._view.hud.gameObjects.burstButton.close(),
+          this._view.hud.gameObjects.pilotButton.close()
+        )
+          .chain(delay(500))
+          .chain(this._view.hud.gameObjects.batterySelector.close())
+      );
 
       const lastState = await this._progressGame({type: 'BATTERY_COMMAND', battery: action.battery});
       if (lastState && lastState.effect.name === 'GameEnd') {
@@ -153,15 +157,15 @@ export class BattleScene implements Scene {
    */
   async _onBurst(): Promise<void> {
     this._exclusive.execute(async () => {
-      await all(
-        this._view.hud.gameObjects.burstButton.decide(),
-        this._view.hud.gameObjects.batterySelector.close(),
-        this._view.hud.gameObjects.pilotButton.close()
-      )
-        .chain(delay(500))
-        .chain(this._view.hud.gameObjects.burstButton.close())
-        .play();
-
+      await this._playAnimation(
+        all(
+          this._view.hud.gameObjects.burstButton.decide(),
+          this._view.hud.gameObjects.batterySelector.close(),
+          this._view.hud.gameObjects.pilotButton.close()
+        )
+          .chain(delay(500))
+          .chain(this._view.hud.gameObjects.burstButton.close())
+      );
       const lastState = await this._progressGame({type: 'BURST_COMMAND'});
       if (lastState && lastState.effect.name === 'GameEnd') {
         await this._onEndGame(lastState.effect);
@@ -176,14 +180,15 @@ export class BattleScene implements Scene {
    */
   async _onPilotSkill(): Promise<void> {
     this._exclusive.execute(async () => {
-      await all(
-        this._view.hud.gameObjects.pilotButton.decide(),
-        this._view.hud.gameObjects.burstButton.close(),
-        this._view.hud.gameObjects.batterySelector.close(),
-      )
-        .chain(delay(500))
-        .chain(this._view.hud.gameObjects.pilotButton.close())
-        .play();
+      await this._playAnimation(
+        all(
+          this._view.hud.gameObjects.pilotButton.decide(),
+          this._view.hud.gameObjects.burstButton.close(),
+          this._view.hud.gameObjects.batterySelector.close(),
+        )
+          .chain(delay(500))
+          .chain(this._view.hud.gameObjects.pilotButton.close())
+      );
 
       const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
       if (lastState && lastState.effect.name === 'GameEnd') {
@@ -203,7 +208,7 @@ export class BattleScene implements Scene {
     let lastState: ?GameState = null;
     for (let i=0; i<100; i++) {
       const updateState = await this._battleProgress.progress(lastCommand);
-      await stateHistoryAnimation(this._view, this._sounds, this._state, updateState).play();
+      await this._playAnimation(stateHistoryAnimation(this._view, this._sounds, this._state, updateState));
       lastState = updateState[updateState.length - 1] ?? null;
       if (!(lastState && lastState.effect.name === 'InputCommand')) {
         return lastState;
@@ -230,5 +235,15 @@ export class BattleScene implements Scene {
     await this._bgm.do(fadeOut)
     await this._bgm.do(stop);
     this._endBattle.next(gameEnd);
+  }
+
+  /**
+   * タイムスケールに常に同じ値をセットして、アニメーションを再生するヘルパーメソッド
+   *
+   * @param animate 再生するアニメーション
+   * @return アニメーションが完了したら発火するPromise
+   */
+  async _playAnimation(animate: Animate): Promise<void> {
+    await animate.timeScale(this._animationTimeScale).play();
   }
 }
