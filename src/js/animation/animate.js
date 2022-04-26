@@ -1,6 +1,7 @@
 // @flow
 
 import TWEEN from '@tweenjs/tween.js';
+import {scaleTweenDuration} from "./duration";
 
 /**
  * アニメーション
@@ -110,17 +111,7 @@ export class Animate {
    */
   timeScale(scale: number): Animate {
     this._time = this._time * scale;
-    const durationScale = (tween: typeof TWEEN.Tween, scaledTweens: typeof TWEEN.Tween[]): void => {
-      if (scaledTweens.includes(tween)) {
-        return;
-      }
-      const newScaledTweens = [...scaledTweens, tween];
-      tween._duration = tween._duration * scale;
-      tween._chainedTweens.forEach((child: typeof TWEEN.Tween) => {
-        durationScale(child, newScaledTweens);
-      });
-    };
-    durationScale(this._start, []);
+    scaleTweenDuration(this._start, scale);
     return this;
   }
 }
