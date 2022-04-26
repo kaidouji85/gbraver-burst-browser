@@ -103,11 +103,12 @@ export class Animate {
   }
 
   /**
-   * アニメーション再生時間を延長、短縮する
+   * アニメーション再生時間をスケールする
    *
-   * @param scale 再生時間のスケール
+   * @param scale スケール比率
+   * @return 再生時間をスケールしたアニメーション
    */
-  timeScale(scale: number): void {
+  timeScale(scale: number): Animate {
     this._time = this._time * scale;
     const durationScale = (tween: typeof TWEEN.Tween, scaledTweens: typeof TWEEN.Tween[]): void => {
       if (scaledTweens.includes(tween)) {
@@ -120,5 +121,6 @@ export class Animate {
       });
     };
     durationScale(this._start, []);
+    return this;
   }
 }
