@@ -121,7 +121,7 @@ export class BattleScene implements Scene {
         await this._bgm.do(play(this._sounds.bgm));
         await this._bgm.do(fadeIn);
       })();
-      await this._playAnimation(stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState))
+      await this._playAnimation(stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState));
     });
   }
 
