@@ -1,6 +1,6 @@
 // @flow
 
-import {getEnableMax} from "../../../../../../src/js/game/td-scenes/battle/ui-logic/battery-selector";
+import {getEnableMax} from "../../../../../src/js/game/td-scenes/battle/ui-logic";
 
 test('一番大きいバッテリー値を返す', () => {
   const result = getEnableMax([
