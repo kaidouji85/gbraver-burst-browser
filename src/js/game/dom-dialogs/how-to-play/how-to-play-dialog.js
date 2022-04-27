@@ -1,5 +1,4 @@
 // @flow
-
 import {Howl} from 'howler';
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {Resources} from "../../../resource";
@@ -11,7 +10,7 @@ import type {DOMDialog} from "../dialog";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /**
  * 遊び方ダイアログ プレゼンテーション
@@ -48,7 +47,7 @@ export class HowToPlay implements DOMDialog {
     `;
 
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
-    this._close = new RxjsStreamSource();
+    this._close = createStreamSource();
 
     this._unsubscribers = [
       pushDOMStream(this._closer).subscribe(action => {

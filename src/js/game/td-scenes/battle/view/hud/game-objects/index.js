@@ -14,7 +14,7 @@ import {createBurstButton} from "./burst-button";
 import {createPilotButton} from "./pilot-button";
 import {ResultIndicator} from "../../../../../../game-object/result-indicator/result-indicator";
 import {drawIndicator} from "../../../../../../game-object/result-indicator";
-import {RxjsStreamSource} from "../../../../../../stream/stream";
+import {createStreamSource} from "../../../../../../stream/stream";
 
 /**
  * HUDレイヤーのゲームオブジェクト
@@ -37,7 +37,7 @@ export class HUDGameObjects {
    * @param playerInfo プレイヤー情報
    */
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, playerInfo: Player) {
-    this._battleAction = new RxjsStreamSource();
+    this._battleAction = createStreamSource();
 
     this.batterySelector = new BatterySelector({
       gameObjectAction: gameObjectAction,

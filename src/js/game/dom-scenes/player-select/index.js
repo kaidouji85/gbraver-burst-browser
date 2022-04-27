@@ -1,5 +1,4 @@
 // @flow
-
 import type {Resources} from "../../../resource";
 import {ArmdozerSelector} from "./armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
@@ -11,7 +10,7 @@ import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {getDedicatedPilot} from "./dedicated-pilot";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -93,8 +92,8 @@ export class PlayerSelect implements DOMScene {
     this._armdozerId = ArmDozerIdList.SHIN_BRAVER
     this._pilotId = PilotIds.SHINYA;
 
-    this._playerDecide = new RxjsStreamSource();
-    this._prev = new RxjsStreamSource();
+    this._playerDecide = createStreamSource();
+    this._prev = createStreamSource();
 
     const dataIDs = {selector: domUuid(), working: domUuid()};
     this._root = document.createElement('div');

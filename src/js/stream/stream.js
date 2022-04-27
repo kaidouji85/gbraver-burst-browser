@@ -59,6 +59,77 @@ export interface StreamSource<T> extends Stream<T> {
 }
 
 /**
+ * RXJSストリーム
+ * @template T データ型
+ */
+class RxjsStream<T> implements Stream<T> {
+  _observable: typeof Observable;
+
+  /**
+   * コンストラクタ
+   *
+   * @param observable RXJS Observable
+   */
+  constructor(observable: typeof Observable) {
+    this._observable = observable;
+  }
+
+  /** @override */
+  chain<U>(operator: Operator<T, U>): Stream<U> {
+    return operator(this);
+  }
+
+  /** @override */
+  subscribe(listener: (v: T) => void): Unsubscriber {
+    const subscription = this._observable.subscribe(listener);
+    return createUnSubscriber(subscription);
+  }
+
+  /** @override */
+  getRxjsObservable(): typeof Observable {
+    return this._observable;
+  }
+}
+
+/**
+ * RXJSストリームソース
+ * @template T データ型
+ */
+export class RxjsStreamSource<T> implements StreamSource<T> {
+  _subject: typeof Subject;
+
+  /**
+   * コンストラクタ
+   */
+  constructor() {
+    this._subject = new Subject<T>();
+  }
+
+  /** @override */
+  next(v: T): void {
+    this._subject.next(v);
+  }
+
+  /** @override */
+  chain<U>(operator: Operator<T, U>): Stream<U> {
+    return operator(this);
+  }
+
+  /** @override */
+  subscribe(listener: (v: T) => void): Unsubscriber {
+    const subscription = this._subject.subscribe((v: T) => {
+      listener(v);
+    });
+    return createUnSubscriber(subscription);
+  }
+
+  /** @override */
+  getRxjsObservable(): typeof Observable {
+    return this._subject;
+  }
+}
+
+/**
  * Streamを生成する
  *
  * @param observable RXJS Observable
@@ -83,106 +154,10 @@ function createUnSubscriber(subscription: typeof Subscription): Unsubscriber {
 }
 
 /**
- * RXJSストリーム
- * @template T データ型
+ * StreamSourceを生成する
+ *
+ * @return 生成結果
  */
-class RxjsStream<T> implements Stream<T> {
-  _observable: typeof Observable;
-
-  /**
-   * コンストラクタ
-   *
-   * @param observable RXJS Observable
-   */
-  constructor(observable: typeof Observable) {
-    this._observable = observable;
-  }
-
-  /**
-   * オペレータを適用する
-   *
-   * @param operator オペレータ
-   * @return 適用結果
-   */
-  chain<U>(operator: Operator<T, U>): Stream<U> {
-    return operator(this);
-  }
-
-  /**
-   * ストリームを購読する
-   *
-   * @param listener イベントリスナ
-   * @return 購読停止オブジェクト
-   */
-  subscribe(listener: (v: T) => void): Unsubscriber {
-    const subscription = this._observable.subscribe(listener);
-    return createUnSubscriber(subscription);
-  }
-
-  /**
-   * 本ストリームが内部的に持つrxjsのObservableを取得する
-   * 本メソッドはストリーム加工ヘルパー関数の中でのみ呼ばれることを想定している
-   *
-   * @return rxjs Observable
-   */
-  getRxjsObservable(): typeof Observable {
-    return this._observable;
-  }
-}
-
-/**
- * RXJSストリーム源泉
- * @template T データ型
- */
-export class RxjsStreamSource<T> implements StreamSource<T> {
-  _subject: typeof Subject;
-
-  /**
-   * コンストラクタ
-   */
-  constructor() {
-    this._subject = new Subject<T>();
-  }
-
-  /**
-   * ストリームに新しい値を流す
-   *
-   * @param v ストリームに流す値
-   */
-  next(v: T): void {
-    this._subject.next(v);
-  }
-
-  /**
-   * オペレータを適用する
-   *
-   * @param operator オペレータ
-   * @return 適用結果
-   */
-  chain<U>(operator: Operator<T, U>): Stream<U> {
-    return operator(this);
-  }
-
-  /**
-   * ストリームを購読する
-   *
-   * @param listener イベントリスナ
-   * @return 購読停止オブジェクト
-   */
-  subscribe(listener: (v: T) => void): Unsubscriber {
-    const subscription = this._subject.subscribe((v: T) => {
-      listener(v);
-    });
-    return createUnSubscriber(subscription);
-  }
-
-  /**
-   * 本ストリームが内部的に持つrxjsのObservableを取得する
-   * 本メソッドはストリーム加工ヘルパー関数の中でのみ呼ばれることを想定している
-   *
-   * @return rxjs Observable
-   */
-  getRxjsObservable(): typeof Observable {
-    return this._subject;
-  }
+export function createStreamSource<T>(): StreamSource<T> {
+  return new RxjsStreamSource<T>();
 }

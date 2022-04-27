@@ -9,7 +9,7 @@ import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'post-battle';
@@ -38,7 +38,7 @@ export class PostBattleFloater {
     this._root.className = ROOT_CLASS;
     this._root.style.display = 'none';
     this._exclusive = new Exclusive();
-    this._selectionComplete = new RxjsStreamSource();
+    this._selectionComplete = createStreamSource();
     this._unsubscribers = [];
   }
 

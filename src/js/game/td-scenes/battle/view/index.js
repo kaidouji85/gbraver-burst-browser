@@ -1,5 +1,4 @@
 // @flow
-
 import TWEEN from "@tweenjs/tween.js";
 import type {Resources} from '../../../../resource';
 import {ThreeDimensionLayer} from './td';
@@ -17,7 +16,7 @@ import type {OverlapNotifier} from "../../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../../render/rendering";
 import type {Stream, StreamSource} from "../../../../stream/stream";
-import {RxjsStreamSource} from "../../../../stream/stream";
+import {createStreamSource} from "../../../../stream/stream";
 
 /** 戦闘シーンビューで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -50,10 +49,10 @@ export class BattleSceneView {
     this._playerId = param.player.playerId;
     this._safeAreaInset = createSafeAreaInset();
     this._renderer = param.renderer;
-    this._updateTD = new RxjsStreamSource();
-    this._preRenderTD = new RxjsStreamSource();
-    this._updateHUD = new RxjsStreamSource();
-    this._preRenderHUD = new RxjsStreamSource();
+    this._updateTD = createStreamSource();
+    this._preRenderTD = createStreamSource();
+    this._updateHUD = createStreamSource();
+    this._preRenderHUD = createStreamSource();
 
     this.td = new ThreeDimensionLayer({
       resources: param.resources,

@@ -1,5 +1,4 @@
 // @flow
-
 import {Renderer} from "../../render";
 import type {Resources} from "../../resource";
 import type {BattleProgress} from "./battle/battle-progress";
@@ -13,7 +12,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import type {Player, GameState} from "gbraver-burst-core";
 import type {BGMManager} from "../../bgm/bgm-manager";
 import type {SoundId} from "../../resource/sound";
-import {RxjsStreamSource} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
@@ -32,7 +31,7 @@ export class TDScenes {
   constructor(resize: Stream<Resize>) {
     this._resize = resize;
     this._renderer = new Renderer(this._resize);
-    this._gameAction = new RxjsStreamSource();
+    this._gameAction = createStreamSource();
     this._gameLoop = gameLoopStream();
     this._scene = null;
     this._unsubscriber = [];

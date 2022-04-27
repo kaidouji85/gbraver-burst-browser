@@ -22,7 +22,7 @@ import type {BGMManager} from "../../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
 import {fadeIn, fadeOut, play, stop} from "../../../bgm/bgm-operators";
 import {Animate} from "../../../animation/animate";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -63,7 +63,7 @@ export class BattleScene implements Scene {
     this._exclusive = new Exclusive();
     this._initialState = param.initialState;
     this._state = createInitialState(param.player.playerId);
-    this._endBattle = new RxjsStreamSource();
+    this._endBattle = createStreamSource();
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,

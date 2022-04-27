@@ -14,7 +14,7 @@ import type {LoadingActions} from "./loading-actions";
 import type {Path} from "./path";
 import {getAllPaths} from "./path";
 import type {Stream} from "../stream/stream";
-import {RxjsStreamSource} from "../stream/stream";
+import {createStreamSource} from "../stream/stream";
 
 /**
  * ゲームで使うリソースを集めたもの
@@ -85,14 +85,14 @@ function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
   const canvasImageLoadings = params.canvasImageConfigs.map(v => loadCanvasImage(params.resourceRoot, v));
   const soundLoadings = params.soundConfigs.map(v => loadSound(params.resourceRoot, v));
   
-  const loadingActtions = new RxjsStreamSource();
+  const loadingActions = createStreamSource();
   const allLoading = [...gltfLoadings, ...textureLoadings, ...cubeTextureLoadings, ...canvasImageLoadings, ...soundLoadings];
   let completedLoadingCounts = 0;
   allLoading.forEach(loading => {
     loading.then(() => {
       completedLoadingCounts ++;
       const completedRate = completedLoadingCounts / allLoading.length;
-      loadingActtions.next({type: 'LoadingProgress', completedRate});
+      loadingActions.next({type: 'LoadingProgress', completedRate});
     });
   });
   const resources = (async (): Promise<Resources> => {
@@ -103,7 +103,7 @@ function resourceLoading(params: ResourceLoadingParams): ResourceLoading {
     const paths = getAllPaths(params.resourceRoot);
     return {rootPath: params.resourceRoot, gltfs, textures, cubeTextures, canvasImages, sounds, paths};
   })();
-  return {loading: loadingActtions, resources};
+  return {loading: loadingActions, resources};
 }
 
 /**

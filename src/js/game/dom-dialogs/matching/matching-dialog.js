@@ -10,7 +10,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS = 'matching';
@@ -87,7 +87,7 @@ export class MatchingDialog implements DOMDialog {
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
     this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
     this._exclusive = new Exclusive();
-    this._matchingCanceled = new RxjsStreamSource();
+    this._matchingCanceled = createStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._closer).subscribe(action => {
         this._onCloserPush(action);

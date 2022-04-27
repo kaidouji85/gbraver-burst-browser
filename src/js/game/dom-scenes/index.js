@@ -1,5 +1,4 @@
 // @flow
-
 import type {LoadingActions} from "../../resource/loading-actions";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
@@ -18,7 +17,7 @@ import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
 import {Config} from "./config/config";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {BGMManager} from '../../bgm/bgm-manager';
-import {RxjsStreamSource} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -37,7 +36,7 @@ export class DOMScenes {
 
   constructor() {
     this._root = document.createElement('div');
-    this._gameAction = new RxjsStreamSource();
+    this._gameAction = createStreamSource();
     this._scene = null;
     this._unsubscribers = [];
   }

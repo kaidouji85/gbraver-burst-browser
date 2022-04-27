@@ -1,7 +1,6 @@
 // @flow
-
 import type {Stream} from "../stream/stream";
-import {RxjsStreamSource} from "../stream/stream";
+import {createStreamSource} from "../stream/stream";
 
 /** ゲームループ */
 export type GameLoop = {
@@ -15,7 +14,7 @@ export type GameLoop = {
  * @return ゲームループストリーム
  */
 export function gameLoopStream(): Stream<GameLoop> {
-  const source = new RxjsStreamSource<GameLoop>();
+  const source = createStreamSource<GameLoop>();
   const gameLoop = (time: DOMHighResTimeStamp) => {
     requestAnimationFrame(gameLoop);
     source.next({

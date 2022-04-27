@@ -1,5 +1,4 @@
 // @flow
-
 import type {DOMScene} from "../dom-scene";
 import {escapeHTML} from "../../../dom/escape/escape-html";
 import {domUuid} from "../../../uuid/dom-uuid";
@@ -8,7 +7,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'mail-verified-incomplete';
@@ -96,8 +95,8 @@ export class MailVerifiedIncomplete implements DOMScene {
       }),
     ];
 
-    this._gotoTitle = new RxjsStreamSource();
-    this._reload = new RxjsStreamSource();
+    this._gotoTitle = createStreamSource();
+    this._reload = createStreamSource();
     this._exclusive = new Exclusive();
   }
 

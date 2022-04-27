@@ -1,5 +1,4 @@
 // @flow
-
 import type {PostNetworkError} from '../../post-network-error';
 import {Howl} from 'howler';
 import type {DOMDialog} from "../dialog";
@@ -11,7 +10,7 @@ import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'network-error';
@@ -100,7 +99,7 @@ export class NetworkErrorDialog implements DOMDialog {
     const elements = extractElements(this._root, dataIDs);
     this._postNetworkErrorButton = elements.postNetworkErrorButton;
 
-    this._postNetworkErrorSource = new RxjsStreamSource();
+    this._postNetworkErrorSource = createStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._postNetworkErrorButton).subscribe(action => {
         this._onPostNetworkErrorButtonPush(action);

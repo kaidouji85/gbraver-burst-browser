@@ -1,5 +1,4 @@
 // @flow
-
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
@@ -17,7 +16,7 @@ import {escapeHTML} from '../../../dom/escape/escape-html';
 import type {BGMManager} from '../../../bgm/bgm-manager';
 import {fadeIn, play} from "../../../bgm/bgm-operators";
 import type {SoundResource} from "../../../resource/sound";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -220,13 +219,13 @@ export class Title implements DOMScene {
     this._titleBGM = resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM) ?? createEmptySoundResource();
     this._bgm = bgm;
 
-    this._pushLogin = new RxjsStreamSource();
-    this._pushDeleteAccount = new RxjsStreamSource();
-    this._pushLogout = new RxjsStreamSource();
-    this._pushArcade = new RxjsStreamSource();
-    this._pushHowToPlay = new RxjsStreamSource();
-    this._pushCasualMatch = new RxjsStreamSource();
-    this._pushConfig = new RxjsStreamSource();
+    this._pushLogin = createStreamSource();
+    this._pushDeleteAccount = createStreamSource();
+    this._pushLogout = createStreamSource();
+    this._pushArcade = createStreamSource();
+    this._pushHowToPlay = createStreamSource();
+    this._pushCasualMatch = createStreamSource();
+    this._pushConfig = createStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._root).subscribe(action => {
         this._onRootPush(action);

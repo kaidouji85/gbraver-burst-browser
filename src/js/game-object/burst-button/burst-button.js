@@ -1,5 +1,4 @@
 // @flow
-
 import {Howl} from 'howler';
 import * as THREE from 'three';
 import type {BurstButtonModel} from "./model/burst-button-model";
@@ -15,7 +14,7 @@ import {decide} from "./animation/decide";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import type {ArmdozerIcon} from "./view/armdozer-icon";
-import {RxjsStreamSource} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 
 /** バーストボタン */
 export class BurstButton {
@@ -37,7 +36,7 @@ export class BurstButton {
     this._pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
       : new Howl();
-    this._pushButton = new RxjsStreamSource();
+    this._pushButton = createStreamSource();
 
     this._model = createInitialValue();
     this._view = new BurstButtonView({

@@ -11,7 +11,7 @@ import type {PushDOM} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import {SOUND_IDS} from "../../../resource/sound";
 import type {NPCBattleCourseDifficulty} from "../../npc-battle-courses";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'difficulty';
@@ -121,8 +121,8 @@ export class DifficultyDialog implements DOMDialog {
       }),
     ];
 
-    this._selectionComplete = new RxjsStreamSource();
-    this._closeDialog = new RxjsStreamSource();
+    this._selectionComplete = createStreamSource();
+    this._closeDialog = createStreamSource();
     this._exclusive = new Exclusive();
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
     this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();

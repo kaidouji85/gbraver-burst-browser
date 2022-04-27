@@ -12,7 +12,7 @@ import type {PushDOM} from "../../../dom/push/push-dom";
 import type {SoundResource} from "../../../resource/sound";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeIn, play} from "../../../bgm/bgm-operators";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'npc-ending';
@@ -97,7 +97,7 @@ export class NPCEnding implements DOMScene {
     this._bgm = bgm;
     this._endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.BATTLE_BGM_02) ?? createEmptySoundResource();
     this._canOperation = true;
-    this._endNPCEnding = new RxjsStreamSource();
+    this._endNPCEnding = createStreamSource();
     this._unsubscriber = [
       pushDOMStream(this._root).subscribe(action => {
         this._onScreenPush(action);

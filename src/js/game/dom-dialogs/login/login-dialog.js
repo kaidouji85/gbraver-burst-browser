@@ -1,5 +1,4 @@
 // @flow
-
 import {Howl} from 'howler';
 import type {DOMDialog} from "../dialog";
 import type {Resources} from "../../../resource";
@@ -11,7 +10,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {SOUND_IDS} from "../../../resource/sound";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'login';
@@ -104,8 +103,8 @@ export class LoginDialog implements DOMDialog {
     this._loginButton = elements.loginButton;
     this._closeButton = elements.closeButton;
 
-    this._closeDialog = new RxjsStreamSource();
-    this._login = new RxjsStreamSource();
+    this._closeDialog = createStreamSource();
+    this._login = createStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._loginButton).subscribe(action => {
         this._onLoginButtonPush(action);

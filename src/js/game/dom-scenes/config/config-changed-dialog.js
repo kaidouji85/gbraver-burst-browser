@@ -9,7 +9,7 @@ import {Exclusive} from "../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import {SOUND_IDS} from "../../../resource/sound";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config-changed';
@@ -110,9 +110,9 @@ export class ConfigChangedDialog {
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
 
     this._exclusive = new Exclusive();
-    this._closeStream = new RxjsStreamSource();
-    this._acceptStream = new RxjsStreamSource();
-    this._discardStream = new RxjsStreamSource();
+    this._closeStream = createStreamSource();
+    this._acceptStream = createStreamSource();
+    this._discardStream = createStreamSource();
     this._unsbusscriber = [
       pushDOMStream(this._backGround).subscribe(action => {
         this._onBackGroundPush(action);

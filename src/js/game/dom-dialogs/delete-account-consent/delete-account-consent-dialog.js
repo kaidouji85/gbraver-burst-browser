@@ -11,7 +11,7 @@ import type {PushDOM} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {SOUND_IDS} from "../../../resource/sound";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'delete-account-consent';
@@ -108,8 +108,8 @@ export class DeleteAccountConsentDialog implements DOMDialog {
     this._deleteAccountButton = elements.deleteAccountButton;
     this._closeButton = elements.closeButton;
     
-    this._deleteAccount = new RxjsStreamSource();
-    this._closeDialog = new RxjsStreamSource();
+    this._deleteAccount = createStreamSource();
+    this._closeDialog = createStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._backGround).subscribe(action => {
         this._onPushOutsideOfDialog(action);  

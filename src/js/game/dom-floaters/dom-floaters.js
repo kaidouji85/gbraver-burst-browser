@@ -4,7 +4,7 @@ import type {GameAction} from "../game-actions";
 import {PostBattleFloater} from "./post-battle/post-battle";
 import type {PostBattleButtonConfig} from "./post-battle/post-battle-button-config";
 import type {Resources} from "../../resource";
-import {RxjsStreamSource} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {
@@ -18,7 +18,7 @@ export class DOMFloaters {
    */
   constructor() {
     this._root = document.createElement('div');
-    this._gameAction = new RxjsStreamSource();
+    this._gameAction = createStreamSource();
 
     this._postBattle = new PostBattleFloater();
     this._root.appendChild(this._postBattle.getRootHTMLElement());

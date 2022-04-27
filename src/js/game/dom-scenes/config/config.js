@@ -1,5 +1,4 @@
 // @flow
-
 import {Howl} from "howler";
 import type {GbraverBurstBrowserConfig, WebGLPixelRatio} from "../../config/browser-config";
 import {
@@ -17,7 +16,7 @@ import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import {ConfigChangedDialog} from "./config-changed-dialog";
-import {RxjsStreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config';
@@ -123,8 +122,8 @@ export class Config implements DOMScene {
     this._root.appendChild(this._dialog.getRootHTMLElement());
 
     this._exclusive = new Exclusive();
-    this._prev = new RxjsStreamSource();
-    this._configChange = new RxjsStreamSource();
+    this._prev = createStreamSource();
+    this._configChange = createStreamSource();
     this._unsubscriver = [
       pushDOMStream(this._prevButton).subscribe(action => {
         this._onPrevButtonPush(action);

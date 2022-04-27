@@ -1,5 +1,4 @@
 // @flow
-
 import {HowToPlay} from "./how-to-play/how-to-play-dialog";
 import type {GameAction} from "../game-actions";
 import type {Resources} from "../../resource";
@@ -12,7 +11,7 @@ import type {PostNetworkError} from '../post-network-error';
 import {DeleteAccountConsentDialog} from "./delete-account-consent/delete-account-consent-dialog";
 import {DifficultyDialog} from "./difficulty/difficulty-dialog";
 import {MatchingDialog} from "./matching/matching-dialog";
-import {RxjsStreamSource} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
@@ -27,7 +26,7 @@ export class DOMDialogs {
   constructor() {
     this._root = document.createElement('div');
     this._dialog = null;
-    this._gameAction = new RxjsStreamSource();
+    this._gameAction = createStreamSource();
     this._unsubscribers = [];
   }
 
