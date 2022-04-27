@@ -95,7 +95,7 @@ class RxjsStream<T> implements Stream<T> {
  * RXJSストリームソース
  * @template T データ型
  */
-export class RxjsStreamSource<T> implements StreamSource<T> {
+class RxjsStreamSource<T> implements StreamSource<T> {
   _subject: typeof Subject;
 
   /**
