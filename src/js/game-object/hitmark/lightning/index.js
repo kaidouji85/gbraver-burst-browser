@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerLightningView} from "./view/player-lightning-view";
 import {EnemyLightningView} from "./view/enemy-lightning-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側 電撃ヒットマーク

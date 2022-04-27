@@ -8,8 +8,8 @@ import {
   first as firstRXJS,
   share as shareRXJS
 } from 'rxjs/operators';
-import type {Operator, Stream} from "./core";
-import {toStream} from "./rxjs";
+import type {Operator, Stream} from "./stream";
+import {toStream} from "./stream";
 
 /**
  * ストリームデータを変換する

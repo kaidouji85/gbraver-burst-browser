@@ -13,7 +13,7 @@ import {createInitialValue} from "./model/initial-value";
 import {waiting} from "./animation/waiting";
 import type {Update} from "../../game-loop/update";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 import {firstUpdate} from "../action/first-update";
 
 /** コンストラクタのパラメータ */

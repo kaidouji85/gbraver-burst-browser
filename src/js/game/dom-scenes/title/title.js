@@ -11,13 +11,13 @@ import {Howl} from "howler";
 import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {DOMScene} from "../dom-scene";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import type {TitleAccount} from "./title-account";
 import {escapeHTML} from '../../../dom/escape/escape-html';
 import type {BGMManager} from '../../../bgm/bgm-manager';
 import {fadeIn, play} from "../../../bgm/bgm-operators";
 import type {SoundResource} from "../../../resource/sound";
+import {RxjsStreamSource} from "../../../stream/stream";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';

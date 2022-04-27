@@ -7,7 +7,7 @@ import type {Resources} from "../../../../../../resource";
 import {enemyShinBraverCutIn, playerShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver";
 import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /** コンストラクタのパラメータ */
 type Param = {

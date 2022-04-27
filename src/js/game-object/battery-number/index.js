@@ -5,7 +5,7 @@ import type {Resources} from "../../resource";
 import {PlayerBatteryNumberView} from "./view/player-battery-number-view";
 import {EnemyBatteryNumberView} from "./view/enemy-battery-number-view";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 
 /**
  * プレイヤーのバッテリービュー

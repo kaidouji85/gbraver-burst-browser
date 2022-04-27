@@ -3,8 +3,7 @@ import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
 import type {Resources} from "../../../resource";
 import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {PathIds} from "../../../resource/path";
@@ -13,6 +12,7 @@ import type {PushDOM} from "../../../dom/push/push-dom";
 import type {SoundResource} from "../../../resource/sound";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeIn, play} from "../../../bgm/bgm-operators";
+import {RxjsStreamSource} from "../../../stream/stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'npc-ending';

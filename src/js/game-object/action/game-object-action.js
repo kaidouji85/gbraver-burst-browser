@@ -3,7 +3,7 @@
 import type {Update} from "../../game-loop/update";
 import type {PreRender} from "../../game-loop/pre-render";
 import type {OverlapEvent} from "../../render/overlap-event/overlap-event";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 import {merge, map, share} from "../../stream/operator";
 
 /** 全てのゲームオブジェクトが受け取り可能なアクション */

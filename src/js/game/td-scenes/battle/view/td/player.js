@@ -22,7 +22,7 @@ import {PowerUp} from "../../../../../game-object/power-up/power-up";
 import {DamageDecrease} from "../../../../../game-object/damage-decrease/damage-decrease";
 import {enemyDamageDecrease, playerDamageDecrease} from "../../../../../game-object/damage-decrease";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../stream/core";
+import type {Stream} from "../../../../../stream/stream";
 import {BatteryEnchantment} from "../../../../../game-object/battery-enchantment/battery-enchantment";
 import {enemyBatteryEnchantment, playerBatteryEnchantment} from "../../../../../game-object/battery-enchantment";
 import {BatteryCorrect} from "../../../../../game-object/battery-correct/battery-correct";

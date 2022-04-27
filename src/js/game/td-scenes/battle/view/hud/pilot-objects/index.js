@@ -8,7 +8,7 @@ import {enemyGaiHUD, playerGaiHUD} from "./gai";
 import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
 import {enemyRaitoHUD, playerRaitoHUD} from "./raito";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 import {enemyTsubasaHUD, playerTsubasaHUD} from "./tsubasa";
 
 /**

@@ -16,8 +16,8 @@ import {tracking} from "./tracking";
 import type {OverlapNotifier} from "../../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../../render/rendering";
-import {RxjsStreamSource} from "../../../../stream/rxjs";
-import type {Stream, StreamSource} from "../../../../stream/core";
+import type {Stream, StreamSource} from "../../../../stream/stream";
+import {RxjsStreamSource} from "../../../../stream/stream";
 
 /** 戦闘シーンビューで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}

@@ -7,7 +7,7 @@ import * as THREE from "three";
 import type {Resources} from "../../../../../../resource";
 import {enemyRaitoCutIn, playerRaitoCutIn} from "../../../../../../game-object/cut-in/raito";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * コンストラクタのパラメータ

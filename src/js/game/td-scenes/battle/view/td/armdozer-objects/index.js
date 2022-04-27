@@ -9,7 +9,7 @@ import {enemyShinBraverTD, playerShinBraverTD} from "./shin-braver";
 import {enemyWingDozerTD, playerWingDozerTD} from "./wing-dozer";
 import {enemyNeoLandozerTD, playerNeoLandozerTD} from "./neo-landozer";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * プレイヤー側  3Dレイヤー アームドーザ固有オブジェクト

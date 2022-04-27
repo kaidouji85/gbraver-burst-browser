@@ -8,7 +8,7 @@ import * as THREE from "three";
 import {WingDozer} from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 import {EnemyWingDozer, PlayerWingDozer} from "../../../../../../game-object/armdozer/wing-dozer";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * 3Dレイヤー ウィングドーザ 3Dレイヤー フィールド

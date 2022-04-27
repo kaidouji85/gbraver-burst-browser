@@ -10,14 +10,14 @@ import {
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {pushDOMStream} from "../../../dom/push/push-dom";
-import {RxjsStreamSource} from "../../../stream/rxjs";
 import type {PushDOM} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import {ConfigChangedDialog} from "./config-changed-dialog";
+import {RxjsStreamSource} from "../../../stream/stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config';

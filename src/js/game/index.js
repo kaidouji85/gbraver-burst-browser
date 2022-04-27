@@ -38,7 +38,7 @@ import type {
   WebSocketAPIUnintentionalClose,
 } from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
-import type {Stream, Unsubscriber} from "../stream/core";
+import type {Stream, Unsubscriber} from "../stream/stream";
 import type {
   Battle as BattleSDK,
   CasualMatch as CasualMatchSDK,
@@ -66,7 +66,6 @@ import {createBGMManager} from '../bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
-import {toStream} from "../stream/rxjs";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
 import {
   createNPCBattlePlayer,
@@ -83,6 +82,7 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
+import {toStream} from "../stream/stream";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,

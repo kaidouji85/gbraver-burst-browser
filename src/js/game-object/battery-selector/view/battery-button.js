@@ -8,7 +8,7 @@ import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import type {BatterySelectorModel} from "../model";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
 

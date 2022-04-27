@@ -11,8 +11,8 @@ import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import type {PilotIcon} from "./pilot-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, StreamSource} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource} from "../../../stream/stream";
+import {RxjsStreamSource} from "../../../stream/stream";
 
 /** 全体のスケール */
 const GROUP_SCALE = 0.3;

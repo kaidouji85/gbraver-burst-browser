@@ -10,7 +10,7 @@ import type {BatterySelectorModel} from "../model";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /** 全体のスケール */
 const GROUP_SCALE = 0.3;

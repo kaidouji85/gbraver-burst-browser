@@ -1,7 +1,7 @@
 // @flow
 
-import type {Stream} from "../stream/core";
-import {RxjsStreamSource} from "../stream/rxjs";
+import type {Stream} from "../stream/stream";
+import {RxjsStreamSource} from "../stream/stream";
 
 /** ゲームループ */
 export type GameLoop = {

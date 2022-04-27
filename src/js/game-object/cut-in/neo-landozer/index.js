@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerNeoLandozerCutInView} from "./view/player-neo-landozer-cutin-view";
 import {EnemyNeoLandozerCutInView} from "./view/enemy-neo-landozer-cutin-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側 ネオランドーザ カットイン

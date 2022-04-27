@@ -22,7 +22,7 @@ import {gutsToStand} from "./animation/guts-to-stand";
 import type {Resources} from "../../../resource";
 import {NeoLandozerSounds} from "./sounds/neo-landozer-sounds";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {

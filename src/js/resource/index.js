@@ -13,8 +13,8 @@ import type {ResourceRoot} from "./resource-root";
 import type {LoadingActions} from "./loading-actions";
 import type {Path} from "./path";
 import {getAllPaths} from "./path";
-import type {Stream} from "../stream/core";
-import {RxjsStreamSource} from "../stream/rxjs";
+import type {Stream} from "../stream/stream";
+import {RxjsStreamSource} from "../stream/stream";
 
 /**
  * ゲームで使うリソースを集めたもの

@@ -5,7 +5,7 @@ import type {Resources} from "../../resource";
 import {PlayerGaugeView} from "./view/player-gauge-view";
 import {EnemyGaugeView} from "./view/enemy-gauge-view";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 
 /** ゲージのパラメータ */
 type Param = {

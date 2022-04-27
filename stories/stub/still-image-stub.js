@@ -1,11 +1,11 @@
 // @flow
 import * as THREE from "three";
-import type {Stream} from "../../src/js/stream/core";
+import type {Stream} from "../../src/js/stream/stream";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 import {StorybookResourceRoot} from "../storybook-resource-root";
 import {fullResourceLoading} from "../../src/js/resource";
-import {RxjsStreamSource} from "../../src/js/stream/rxjs";
 import type {Resources} from "../../src/js/resource";
+import {RxjsStreamSource} from "../../src/js/stream/stream";
 
 /** レンダラ設定 */
 type Renderer = {

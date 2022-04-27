@@ -8,7 +8,7 @@ import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdoz
 import * as THREE from "three";
 import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * 3Dレイヤー シンブレイバー 3Dレイヤー フィールド

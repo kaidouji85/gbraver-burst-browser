@@ -4,8 +4,8 @@ import type {SafeAreaInset} from "../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../safe-area/safe-area-inset";
 import {Observable} from "rxjs";
 import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
-import type {Stream} from "../stream/core";
-import {toStream} from "../stream/rxjs";
+import type {Stream} from "../stream/stream";
+import {toStream} from "../stream/stream";
 
 /** リサイズ */
 export type Resize = {

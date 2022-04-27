@@ -13,8 +13,8 @@ import {pushDOMStream} from "../../../../dom/push/push-dom";
 import type {PushDOM} from "../../../../dom/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createArmdozerIcon} from "./create-armdozer-icon";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
-import {RxjsStreamSource} from "../../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
+import {RxjsStreamSource} from "../../../../stream/stream";
 
 /** ルートHTML要素 class */
 const ROOT_CLASS_NAME = 'player-select__armdozer-selector';

@@ -17,7 +17,7 @@ import type {HUDPilotObjects} from "./pilot-objects/hud-pilot-objects";
 import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
-import type {Stream} from "../../../../../stream/core";
+import type {Stream} from "../../../../../stream/stream";
 
 /** コンストラクタのパラメータ */
 export type Param = {

@@ -10,7 +10,7 @@ import {battery} from './animation/battery';
 import {initialValue} from "./model/initial-value";
 import type {HUDTracking} from "../../tracking/hud-tracking";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /** コンストラクタのパラメータ */
 type Param = {

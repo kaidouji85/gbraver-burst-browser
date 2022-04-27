@@ -4,8 +4,7 @@ import {HowToPlay} from "./how-to-play/how-to-play-dialog";
 import type {GameAction} from "../game-actions";
 import type {Resources} from "../../resource";
 import type {DOMDialog} from "./dialog";
-import {RxjsStreamSource} from "../../stream/rxjs";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {LoginDialog} from './login/login-dialog';
 import {WaitingDialog} from "./waiting/waiting-dialog";
 import {NetworkErrorDialog} from './network-error/network-error-dialog';
@@ -13,6 +12,7 @@ import type {PostNetworkError} from '../post-network-error';
 import {DeleteAccountConsentDialog} from "./delete-account-consent/delete-account-consent-dialog";
 import {DifficultyDialog} from "./difficulty/difficulty-dialog";
 import {MatchingDialog} from "./matching/matching-dialog";
+import {RxjsStreamSource} from "../../stream/stream";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {

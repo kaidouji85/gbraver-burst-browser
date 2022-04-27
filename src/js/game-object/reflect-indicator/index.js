@@ -5,7 +5,7 @@ import {PlayerReflectIndicatorView} from "./view/player-reflect-indicator-view";
 import {EnemyReflectIndicatorView} from "./view/enemy-reflect-indicator-view";
 import {ReflectIndicator} from './reflect-indicator';
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 
 /**
  * プレイヤー ダメージ反射

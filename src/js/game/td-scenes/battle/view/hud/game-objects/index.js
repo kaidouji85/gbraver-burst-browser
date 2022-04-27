@@ -9,12 +9,12 @@ import {Fader} from "../../../../../../game-object/fader/fader";
 import {frontmostFader, rearmostFader} from "../../../../../../game-object/fader";
 import {PilotButton} from "../../../../../../game-object/pilot-button/pilot-button";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../../../stream/core";
-import {RxjsStreamSource} from "../../../../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../../../../stream/stream";
 import {createBurstButton} from "./burst-button";
 import {createPilotButton} from "./pilot-button";
 import {ResultIndicator} from "../../../../../../game-object/result-indicator/result-indicator";
 import {drawIndicator} from "../../../../../../game-object/result-indicator";
+import {RxjsStreamSource} from "../../../../../../stream/stream";
 
 /**
  * HUDレイヤーのゲームオブジェクト

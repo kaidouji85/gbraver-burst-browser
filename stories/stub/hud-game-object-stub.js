@@ -17,9 +17,9 @@ import {PlainHUDCamera} from "../../src/js/game-object/camera/plain-hud/plain-hu
 import {StorybookResourceRoot} from "../storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
-import {RxjsStreamSource} from "../../src/js/stream/rxjs";
-import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/stream";
 import type {Resources} from "../../src/js/resource";
+import {RxjsStreamSource} from "../../src/js/stream/stream";
 
 /** Object3D生成関数パラメータ */
 type Object3DParams = {

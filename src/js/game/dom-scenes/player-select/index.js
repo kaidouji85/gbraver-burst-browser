@@ -9,9 +9,9 @@ import {ArmdozerBustShotContainer} from "./armdozer-bust-shot";
 import {PilotBustShotContainer} from "./pilot-bust-shot";
 import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import type {DOMScene} from "../dom-scene";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {getDedicatedPilot} from "./dedicated-pilot";
+import {RxjsStreamSource} from "../../../stream/stream";
 
 /** data-idを集めたもの */
 type DataIDs = {

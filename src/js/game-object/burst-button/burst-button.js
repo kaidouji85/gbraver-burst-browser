@@ -13,9 +13,9 @@ import type {PreRender} from "../../game-loop/pre-render";
 import {SOUND_IDS} from "../../resource/sound";
 import {decide} from "./animation/decide";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
-import {RxjsStreamSource} from "../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import type {ArmdozerIcon} from "./view/armdozer-icon";
+import {RxjsStreamSource} from "../../stream/stream";
 
 /** バーストボタン */
 export class BurstButton {

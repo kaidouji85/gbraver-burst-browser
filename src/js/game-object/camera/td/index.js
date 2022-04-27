@@ -12,7 +12,7 @@ import type {Position} from './position';
 import {lookAt} from "./animation/look-at";
 import {move} from "./animation/move";
 import {getViewPortHeight, getViewPortWidth} from "../../../view-port/view-port-size";
-import type {Stream, Unsubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 
 // TODO カメラ位置、カメラ視点をコンストラクタから渡す
 /** 戦闘シーン3Dレイヤー用カメラ */

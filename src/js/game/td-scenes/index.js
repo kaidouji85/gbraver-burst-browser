@@ -9,11 +9,11 @@ import type {GameLoop} from "../../game-loop/game-loop";
 import type {Resize} from "../../window/resize";
 import type {GameAction} from "../game-actions";
 import {gameLoopStream} from "../../game-loop/game-loop";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
-import {RxjsStreamSource} from "../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import type {Player, GameState} from "gbraver-burst-core";
 import type {BGMManager} from "../../bgm/bgm-manager";
 import type {SoundId} from "../../resource/sound";
+import {RxjsStreamSource} from "../../stream/stream";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
