@@ -132,6 +132,7 @@ class RxjsStreamSource<T> implements StreamSource<T> {
 /**
  * Streamを生成する
  *
+ * @template T データ型
  * @param observable RXJS Observable
  * @return 生成結果
  */
@@ -156,6 +157,7 @@ function createUnSubscriber(subscription: typeof Subscription): Unsubscriber {
 /**
  * StreamSourceを生成する
  *
+ * @template T データ型
  * @return 生成結果
  */
 export function createStreamSource<T>(): StreamSource<T> {
