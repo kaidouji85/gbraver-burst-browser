@@ -9,7 +9,7 @@ import {
   share as shareRXJS
 } from 'rxjs/operators';
 import type {Operator, Stream} from "./stream";
-import {toStream} from "./stream";
+import {createStream} from "./stream";
 
 /**
  * ストリームデータを変換する
@@ -22,7 +22,7 @@ import {toStream} from "./stream";
 export const map = <T, U>(fn: T => U): Operator<T, U> => (origin: Stream<T>): Stream<U> => {
   const observable = origin.getRxjsObservable()
     .pipe(mapRXJS(fn));
-  return toStream(observable);
+  return createStream(observable);
 }
 
 /**
@@ -35,7 +35,7 @@ export const map = <T, U>(fn: T => U): Operator<T, U> => (origin: Stream<T>): St
 export const tap = <T>(fn: T => void): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
   const observable = origin.getRxjsObservable()
     .pipe(tapRXJS(fn));
-  return toStream(observable);
+  return createStream(observable);
 }
 
 /**
@@ -48,7 +48,7 @@ export const tap = <T>(fn: T => void): Operator<T, T> => (origin: Stream<T>): St
 export const filter = <T>(fn: T => boolean): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
   const observable = origin.getRxjsObservable()
     .pipe(filterRXJS(fn));
-  return toStream(observable);
+  return createStream(observable);
 }
 
 /**
@@ -60,7 +60,7 @@ export const filter = <T>(fn: T => boolean): Operator<T, T> => (origin: Stream<T
 export const first = <T>(): Operator<T, T> =>  (origin: Stream<T>): Stream<T> => {
   const observable = origin.getRxjsObservable()
     .pipe(firstRXJS());
-  return toStream(observable);
+  return createStream(observable);
 }
 
 /**
@@ -71,7 +71,7 @@ export const first = <T>(): Operator<T, T> =>  (origin: Stream<T>): Stream<T> =>
 export const share = <T>(): Operator<T, T> => (origin: Stream<T>): Stream<T> => {
   const observable = origin.getRxjsObservable()
     .pipe(shareRXJS());
-  return toStream(observable);
+  return createStream(observable);
 }
 
 /**
@@ -84,5 +84,5 @@ export const share = <T>(): Operator<T, T> => (origin: Stream<T>): Stream<T> => 
  */
 export const merge = <T, U>(newItem: Stream<U>): Operator<T, T | U> => (origin: Stream<T>): Stream<T | U> => {
   const observable = mergeRXJS(origin.getRxjsObservable(), newItem.getRxjsObservable());
-  return toStream(observable);
+  return createStream(observable);
 }

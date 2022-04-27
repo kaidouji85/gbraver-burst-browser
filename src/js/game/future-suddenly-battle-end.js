@@ -1,7 +1,7 @@
 // @flow
 import type {Battle} from '@gbraver-burst-network/browser-core';
 import type {Stream, StreamSource, Unsubscriber} from "../stream/stream";
-import {RxjsStreamSource, toStream} from "../stream/stream";
+import {RxjsStreamSource, createStream} from "../stream/stream";
 
 /** 将来生成されるバトル管理オブジェクトからバトル強制終了ストリームを取り出す */
 export class FutureSuddenlyBattleEnd {
@@ -23,7 +23,7 @@ export class FutureSuddenlyBattleEnd {
    */
   bind(battle: Battle): void {
     this.unbind();
-    this._unsubscriber = toStream(battle.suddenlyBattleNotifier()).subscribe(() => {
+    this._unsubscriber = createStream(battle.suddenlyBattleNotifier()).subscribe(() => {
       this._notifier.next();
     });
   }

@@ -82,7 +82,7 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
-import {toStream} from "../stream/stream";
+import {createStream} from "../stream/stream";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -182,9 +182,9 @@ export class Game {
 
     const suddenlyBattleEnd = this._suddenlyBattleEnd.stream()
       .chain(map(() => ({type: 'SuddenlyBattleEnd'})));
-    const webSocketAPIError = toStream(this._api.websocketErrorNotifier())
+    const webSocketAPIError = createStream(this._api.websocketErrorNotifier())
       .chain(map(error => ({type: 'WebSocketAPIError', error})))
-    const WebSocketAPIUnintentionalClose = toStream(this._api.websocketUnintentionalCloseNotifier())
+    const WebSocketAPIUnintentionalClose = createStream(this._api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
       this._domDialogs.gameActionNotifier(), this._domFloaters.gameActionNotifier(),

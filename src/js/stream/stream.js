@@ -59,25 +59,25 @@ export interface StreamSource<T> extends Stream<T> {
 }
 
 /**
- * RXJSのObservableをStreamに変換する
+ * Streamを生成する
  *
- * @param origin 変換元
- * @return 変換結果
+ * @param observable RXJS Observable
+ * @return 生成結果
  */
-export function toStream<T>(origin: typeof Observable): Stream<T> {
-  return new RxjsStream<T>(origin);
+export function createStream<T>(observable: typeof Observable): Stream<T> {
+  return new RxjsStream<T>(observable);
 }
 
 /**
- * RXJSのSubscriptionをunSubscribeに変換する
+ * unSubscribeを生成する
  *
- * @param origin 変換元
- * @return 変換結果
+ * @param subscription RXJS Subscription
+ * @return 生成結果
  */
-export function toUnSubscriber(origin: typeof Subscription): Unsubscriber {
+function createUnSubscriber(subscription: typeof Subscription): Unsubscriber {
   return {
     unsubscribe(): void {
-      origin.unsubscribe();
+      subscription.unsubscribe();
     }
   };
 }
@@ -116,7 +116,7 @@ class RxjsStream<T> implements Stream<T> {
    */
   subscribe(listener: (v: T) => void): Unsubscriber {
     const subscription = this._observable.subscribe(listener);
-    return toUnSubscriber(subscription);
+    return createUnSubscriber(subscription);
   }
 
   /**
@@ -173,7 +173,7 @@ export class RxjsStreamSource<T> implements StreamSource<T> {
     const subscription = this._subject.subscribe((v: T) => {
       listener(v);
     });
-    return toUnSubscriber(subscription);
+    return createUnSubscriber(subscription);
   }
 
   /**
