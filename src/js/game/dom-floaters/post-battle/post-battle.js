@@ -2,6 +2,7 @@
 import {Howl} from 'howler';
 import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {PostBattle} from "../../post-battle";
 import type {PostBattleButtonConfig} from "./post-battle-button-config";
 import {pushDOMStream} from "../../../dom/push/push-dom";
@@ -9,7 +10,6 @@ import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
-import {createStreamSource} from "../../../stream/stream";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'post-battle';

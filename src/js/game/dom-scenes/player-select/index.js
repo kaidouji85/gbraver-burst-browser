@@ -2,15 +2,15 @@
 import type {Resources} from "../../../resource";
 import {ArmdozerSelector} from "./armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
+import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import {PilotSelector} from "./pilot-selector";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {ArmdozerBustShotContainer} from "./armdozer-bust-shot";
 import {PilotBustShotContainer} from "./pilot-bust-shot";
-import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
 import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {getDedicatedPilot} from "./dedicated-pilot";
 import {createStreamSource} from "../../../stream/stream";
+import {getDedicatedPilot} from "./dedicated-pilot";
 
 /** data-idを集めたもの */
 type DataIDs = {

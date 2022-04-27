@@ -2,8 +2,8 @@
 
 import {fromEvent} from "rxjs";
 import type {Stream} from "../../stream/stream";
-import {map, merge} from '../../stream/operator';
 import {createStream} from "../../stream/stream";
+import {map, merge} from '../../stream/operator';
 
 /** HTML要素が押下された時のアクション */
 export type PushDOM = {

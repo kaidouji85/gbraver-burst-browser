@@ -13,8 +13,8 @@ import {SOUND_IDS} from "../../resource/sound";
 import {decide} from "./animation/decide";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import type {ArmdozerIcon} from "./view/armdozer-icon";
 import {createStreamSource} from "../../stream/stream";
+import type {ArmdozerIcon} from "./view/armdozer-icon";
 
 /** バーストボタン */
 export class BurstButton {

@@ -2,7 +2,7 @@
 
 import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import type {TDArmdozerObjects} from "./armdozer-objects";
-import type {PlayerId, Player} from "gbraver-burst-core";
+import type {Player, PlayerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../../../resource";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import * as THREE from "three";

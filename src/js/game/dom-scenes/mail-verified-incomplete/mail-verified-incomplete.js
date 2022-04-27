@@ -2,12 +2,12 @@
 import type {DOMScene} from "../dom-scene";
 import {escapeHTML} from "../../../dom/escape/escape-html";
 import {domUuid} from "../../../uuid/dom-uuid";
+import type {PushDOM} from "../../../dom/push/push-dom";
 import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import type {PushDOM} from "../../../dom/push/push-dom";
+import {createStreamSource} from "../../../stream/stream";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
-import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'mail-verified-incomplete';

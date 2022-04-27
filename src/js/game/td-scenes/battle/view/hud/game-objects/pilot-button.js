@@ -3,8 +3,8 @@
 import type {Stream} from "../../../../../../stream/stream";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import type {PilotId} from "gbraver-burst-core";
-import type {Resources} from "../../../../../../resource";
 import {PilotIds} from "gbraver-burst-core";
+import type {Resources} from "../../../../../../resource";
 import {
   gaiPilotButton,
   raitoPilotButton,

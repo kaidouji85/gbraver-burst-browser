@@ -1,6 +1,6 @@
 // @flow
 import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
-import type {PilotSkill, BatteryEnchantmentSkill} from "gbraver-burst-core";
+import type {BatteryEnchantmentSkill, PilotSkill} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";

@@ -2,8 +2,8 @@
 
 import {fromEvent} from "rxjs";
 import type {Stream} from "../../stream/stream";
-import {map} from "../../stream/operator";
 import {createStream} from "../../stream/stream";
+import {map} from "../../stream/operator";
 
 /** タッチスタート */
 export type TouchStart = {

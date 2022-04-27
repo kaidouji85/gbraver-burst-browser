@@ -6,9 +6,7 @@ import type {Resources} from "../../../resource";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import type {BatteryCorrectModel} from "../model/battery-correct-model";
-import {
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../armdozer/position";
+import {ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
 import type {PreRender} from "../../../game-loop/pre-render";
 
 /** メッシュの大きさ */

@@ -2,21 +2,21 @@
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {pop} from "../../../dom/animation/pop";
 import {Howl} from "howler";
+import type {SoundResource} from "../../../resource/sound";
 import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {DOMScene} from "../dom-scene";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {TitleAccount} from "./title-account";
 import {escapeHTML} from '../../../dom/escape/escape-html';
 import type {BGMManager} from '../../../bgm/bgm-manager';
 import {fadeIn, play} from "../../../bgm/bgm-operators";
-import type {SoundResource} from "../../../resource/sound";
-import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';

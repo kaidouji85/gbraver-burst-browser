@@ -11,13 +11,13 @@ import {NPCEnding} from "./npc-ending/npc-ending";
 import type {Resources} from "../../resource";
 import type {GameAction} from "../game-actions";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 import type {TitleAccount} from "./title/title-account";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
 import {Config} from "./config/config";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
 import type {BGMManager} from '../../bgm/bgm-manager';
-import {createStreamSource} from "../../stream/stream";
 
 /**
  * 最大読み込み待機時間(ミリ秒)

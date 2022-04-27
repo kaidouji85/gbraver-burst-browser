@@ -5,14 +5,14 @@ import type {BattleProgress} from "./battle/battle-progress";
 import {BattleScene} from "./battle";
 import type {Scene} from "./scene";
 import type {GameLoop} from "../../game-loop/game-loop";
+import {gameLoopStream} from "../../game-loop/game-loop";
 import type {Resize} from "../../window/resize";
 import type {GameAction} from "../game-actions";
-import {gameLoopStream} from "../../game-loop/game-loop";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import type {Player, GameState} from "gbraver-burst-core";
+import {createStreamSource} from "../../stream/stream";
+import type {GameState, Player} from "gbraver-burst-core";
 import type {BGMManager} from "../../bgm/bgm-manager";
 import type {SoundId} from "../../resource/sound";
-import {createStreamSource} from "../../stream/stream";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {

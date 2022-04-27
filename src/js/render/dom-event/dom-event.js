@@ -5,7 +5,7 @@ import {createMouseDownStream, createMouseMoveStream, createMouseUpStream} from 
 import type {TouchEnd, TouchMove, TouchStart} from "./touch";
 import {createTouchEndStream, createTouchMoveStream, createTouchStartStream} from "./touch";
 import type {Stream} from "../../stream/stream";
-import {merge, map} from "../../stream/operator";
+import {map, merge} from "../../stream/operator";
 
 /** three.js Renderer要素のイベントをまとめたもの */
 export type RendererDOMEvent =

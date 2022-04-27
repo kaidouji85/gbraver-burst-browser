@@ -4,14 +4,14 @@ import type {Resources} from "../../../resource";
 import type {DOMDialog} from '../dialog';
 import {PathIds} from "../../../resource/path";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import {SOUND_IDS} from "../../../resource/sound";
 import type {NPCBattleCourseDifficulty} from "../../npc-battle-courses";
-import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'difficulty';

@@ -18,11 +18,11 @@ import type {OverlapNotifier} from "../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
 import {fadeIn, fadeOut, play, stop} from "../../../bgm/bgm-operators";
 import {Animate} from "../../../animation/animate";
-import {createStreamSource} from "../../../stream/stream";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}

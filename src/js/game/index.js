@@ -1,11 +1,7 @@
 // @flow
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {
-  emptyResources,
-  fullResourceLoadingFrom,
-  titleResourceLoading,
-} from "../resource";
+import {emptyResources, fullResourceLoadingFrom, titleResourceLoading,} from "../resource";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
@@ -16,12 +12,7 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {
-  DifficultySelect,
-  NPCBattle,
-  NPCBattleX,
-  PlayingNPCBattle,
-} from "./in-progress/npc-battle";
+import type {DifficultySelect, NPCBattle, NPCBattleX, PlayingNPCBattle,} from "./in-progress/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
@@ -39,6 +30,7 @@ import type {
 } from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/stream";
+import {createStream} from "../stream/stream";
 import type {
   Battle as BattleSDK,
   CasualMatch as CasualMatchSDK,
@@ -69,20 +61,19 @@ import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
 import {
   createNPCBattlePlayer,
-  startNPCBattle,
-  getStageLevel,
   getCurrentStage,
-  updateNPCBattle,
-  isNPCBattleStageClear
+  getStageLevel,
+  isNPCBattleStageClear,
+  startNPCBattle,
+  updateNPCBattle
 } from "./npc-battle";
-import {DefaultStages, DefaultStage, NPCBattleCourses} from "./npc-battle-courses";
+import {DefaultStage, DefaultStages, NPCBattleCourses} from "./npc-battle-courses";
 import {
   PostNetworkBattleButtons,
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
-import {createStream} from "../stream/stream";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,

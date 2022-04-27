@@ -4,13 +4,13 @@ import type {DOMDialog} from "../dialog";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
-import {pushDOMStream} from '../../../dom/push/push-dom';
 import type {PushDOM} from '../../../dom/push/push-dom';
+import {pushDOMStream} from '../../../dom/push/push-dom';
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {SOUND_IDS} from "../../../resource/sound";
-import {createStreamSource} from "../../../stream/stream";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'login';

@@ -1,6 +1,6 @@
 // @flow
 import type {TextureConfig, TextureResource} from "./texture";
-import {TEXTURE_CONFIGS, loadTexture} from "./texture";
+import {loadTexture, TEXTURE_CONFIGS} from "./texture";
 import type {CanvasImageConfig, CanvasImageResource} from "./canvas-image";
 import {CANVAS_IMAGE_CONFIGS, loadCanvasImage,} from "./canvas-image";
 import type {GlTFConfig, GlTFResource} from "./gltf";
@@ -8,7 +8,7 @@ import {GLTF_CONFIGS, loadGlTF} from "./gltf";
 import type {CubeTextureConfig, CubeTextureResource} from "./cube-texture";
 import {CUBE_TEXTURE_CONFIGS, loadCubeTexture} from "./cube-texture";
 import type {SoundConfig, SoundResource} from "./sound";
-import {SOUND_CONFIGS, SOUND_IDS, loadSound} from "./sound";
+import {loadSound, SOUND_CONFIGS, SOUND_IDS} from "./sound";
 import type {ResourceRoot} from "./resource-root";
 import type {LoadingActions} from "./loading-actions";
 import type {Path} from "./path";

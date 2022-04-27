@@ -7,10 +7,7 @@ import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 import * as THREE from 'three';
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import {
-  ARMDOZER_EFFECT_STANDARD_X,
-  ARMDOZER_EFFECT_STANDARD_Z
-} from "../../armdozer/position";
+import {ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
 
 export const MESH_SIZE = 50;
 export const MAX_NUMBER_SIZE = 4;

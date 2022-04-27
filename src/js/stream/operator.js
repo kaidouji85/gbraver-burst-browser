@@ -2,11 +2,11 @@
 
 import {merge as mergeRXJS} from "rxjs";
 import {
-  map as mapRXJS,
-  tap as tapRXJS,
   filter as filterRXJS,
   first as firstRXJS,
-  share as shareRXJS
+  map as mapRXJS,
+  share as shareRXJS,
+  tap as tapRXJS
 } from 'rxjs/operators';
 import type {Operator, Stream} from "./stream";
 import {createStream} from "./stream";
