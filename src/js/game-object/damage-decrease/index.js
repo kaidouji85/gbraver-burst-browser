@@ -5,7 +5,7 @@ import {PlayerDamageDecreaseView} from "./view/player-damage-decrease-view";
 import {EnemyDamageDecreaseView} from "./view/enemy-damage-decrease-view";
 import {DamageDecrease} from "./damage-decrease";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 
 /**
  * プレイヤー ダメージ減少 ポップアップ

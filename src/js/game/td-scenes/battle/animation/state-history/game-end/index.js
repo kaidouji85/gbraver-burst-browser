@@ -2,7 +2,7 @@
 
 import {BattleSceneView} from "../../../view";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
-import type {GameOver, GameEnd, GameEndX, GameStateX} from "gbraver-burst-core";
+import type {GameEnd, GameEndX, GameOver, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
 import {toGameOverParam} from "./game-over/game-over-param";

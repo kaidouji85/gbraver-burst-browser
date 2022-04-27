@@ -11,7 +11,7 @@ import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import {HUDUIScale} from "../../../hud-scale/hud-scale";
 import type {ArmdozerIcon} from "./armdozer-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /** 全体のスケール */
 const GROUP_SCALE = 0.3;

@@ -2,8 +2,8 @@
 
 import {Howl} from 'howler';
 import type {Resources} from "../../../../resource";
-import {createEmptySoundResource, SOUND_IDS} from "../../../../resource/sound";
 import type {SoundId, SoundResource} from "../../../../resource/sound";
+import {createEmptySoundResource, SOUND_IDS} from "../../../../resource/sound";
 
 /** 戦闘シーン 効果音 */
 export class BattleSceneSounds {

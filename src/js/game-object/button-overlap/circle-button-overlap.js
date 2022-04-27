@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import {ButtonOverlap} from "./button-overlap";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 
 /** パラメータ */
 type Param = {

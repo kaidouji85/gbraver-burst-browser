@@ -5,10 +5,10 @@ import type {DOMDialog} from "../dialog";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
-import type {Unsubscriber, Stream, StreamSource} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
-import {pushDOMStream} from "../../../dom/push/push-dom";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {PushDOM} from "../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {SOUND_IDS} from "../../../resource/sound";
@@ -108,8 +108,8 @@ export class DeleteAccountConsentDialog implements DOMDialog {
     this._deleteAccountButton = elements.deleteAccountButton;
     this._closeButton = elements.closeButton;
     
-    this._deleteAccount = new RxjsStreamSource();
-    this._closeDialog = new RxjsStreamSource();
+    this._deleteAccount = createStreamSource();
+    this._closeDialog = createStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._backGround).subscribe(action => {
         this._onPushOutsideOfDialog(action);  

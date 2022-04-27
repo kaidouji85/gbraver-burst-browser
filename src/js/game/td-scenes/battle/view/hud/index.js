@@ -8,6 +8,7 @@ import type {PreRender} from "../../../../../game-loop/pre-render";
 import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
 import {HUDGameObjects} from "./game-objects";
 import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
+import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
 import type {Resize} from "../../../../../window/resize";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
@@ -15,9 +16,8 @@ import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 import {enemyHUDPilotObjects, playerHUDPilotObjects} from "./pilot-objects";
 import type {HUDPilotObjects} from "./pilot-objects/hud-pilot-objects";
 import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
-import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import type {OverlapNotifier} from "../../../../../render/overla-notifier";
-import type {Stream} from "../../../../../stream/core";
+import type {Stream} from "../../../../../stream/stream";
 
 /** コンストラクタのパラメータ */
 export type Param = {

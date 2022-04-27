@@ -4,10 +4,10 @@ import type {DOMDialog} from "../dialog";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import {pushDOMStream} from "../../../dom/push/push-dom";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
@@ -87,7 +87,7 @@ export class MatchingDialog implements DOMDialog {
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
     this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
     this._exclusive = new Exclusive();
-    this._matchingCanceled = new RxjsStreamSource();
+    this._matchingCanceled = createStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._closer).subscribe(action => {
         this._onCloserPush(action);

@@ -8,7 +8,7 @@ import {popUp} from "./animation/pop-up";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /** ダメージインジケータ */
 export class DamageIndicator {

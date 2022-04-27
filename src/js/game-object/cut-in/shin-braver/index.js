@@ -5,7 +5,7 @@ import {ShinBraverCutIn} from "./shin-braver-cutin";
 import {PlayerShinBraverCutInView} from "./view/player-shin-braver-cutin-view";
 import {EnemyShinBraverCutInView} from "./view/enemy-shin-braver-cutin-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側 シンブレイバー カットイン

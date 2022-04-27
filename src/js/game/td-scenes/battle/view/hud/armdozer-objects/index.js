@@ -10,7 +10,7 @@ import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer
 import {enemyWingDozerHUD, playerWingDozerHUD} from "./wing-dozer";
 import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * プレイヤー側 HUDアームドーザ

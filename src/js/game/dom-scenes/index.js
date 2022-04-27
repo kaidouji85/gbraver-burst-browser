@@ -1,5 +1,4 @@
 // @flow
-
 import type {LoadingActions} from "../../resource/loading-actions";
 import type {DOMScene} from "./dom-scene";
 import {Loading} from "./loading";
@@ -11,8 +10,8 @@ import {waitTime} from "../../wait/wait-time";
 import {NPCEnding} from "./npc-ending/npc-ending";
 import type {Resources} from "../../resource";
 import type {GameAction} from "../game-actions";
-import {RxjsStreamSource} from "../../stream/rxjs";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 import type {TitleAccount} from "./title/title-account";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
@@ -37,7 +36,7 @@ export class DOMScenes {
 
   constructor() {
     this._root = document.createElement('div');
-    this._gameAction = new RxjsStreamSource();
+    this._gameAction = createStreamSource();
     this._scene = null;
     this._unsubscribers = [];
   }

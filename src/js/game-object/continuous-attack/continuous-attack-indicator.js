@@ -10,7 +10,7 @@ import {popUp} from "./animation/pop-up";
 import {ContinuousAttackSounds} from "./sounds/continuous-attack-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /**
  * 連続攻撃

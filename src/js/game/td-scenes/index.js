@@ -1,17 +1,16 @@
 // @flow
-
 import {Renderer} from "../../render";
 import type {Resources} from "../../resource";
 import type {BattleProgress} from "./battle/battle-progress";
 import {BattleScene} from "./battle";
 import type {Scene} from "./scene";
 import type {GameLoop} from "../../game-loop/game-loop";
+import {gameLoopStream} from "../../game-loop/game-loop";
 import type {Resize} from "../../window/resize";
 import type {GameAction} from "../game-actions";
-import {gameLoopStream} from "../../game-loop/game-loop";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
-import {RxjsStreamSource} from "../../stream/rxjs";
-import type {Player, GameState} from "gbraver-burst-core";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
+import type {GameState, Player} from "gbraver-burst-core";
 import type {BGMManager} from "../../bgm/bgm-manager";
 import type {SoundId} from "../../resource/sound";
 
@@ -32,7 +31,7 @@ export class TDScenes {
   constructor(resize: Stream<Resize>) {
     this._resize = resize;
     this._renderer = new Renderer(this._resize);
-    this._gameAction = new RxjsStreamSource();
+    this._gameAction = createStreamSource();
     this._gameLoop = gameLoopStream();
     this._scene = null;
     this._unsubscriber = [];

@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerWingDozerView} from "./view/player-wing-dozer-view";
 import {EnemyWingDozerView} from "./view/enemy-wing-dozer-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側 ウィングドーザを生成する

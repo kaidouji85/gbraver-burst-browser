@@ -1,5 +1,4 @@
 // @flow
-
 import * as THREE from 'three';
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
@@ -11,8 +10,8 @@ import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import type {PilotIcon} from "./pilot-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, StreamSource} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 
 /** 全体のスケール */
 const GROUP_SCALE = 0.3;
@@ -43,7 +42,7 @@ export class PilotButtonView {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(resources: Resources, pilotIcon: PilotIcon, gameObjectAction: Stream<GameObjectAction>) {
-    this._pushButton = new RxjsStreamSource();
+    this._pushButton = createStreamSource();
     this._group = new THREE.Group();
 
     const buttonDisabled = resources.canvasImages

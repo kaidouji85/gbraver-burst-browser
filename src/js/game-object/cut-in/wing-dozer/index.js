@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerWingDozerCutInView} from "./view/player-wing-dozer-cutin-view";
 import {EnemyWingDozerCutInView} from "./view/enemy-wing-dozer-cutin-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側 ウィングドーザ カットイン

@@ -4,8 +4,8 @@ import type {SafeAreaInset} from "../safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../safe-area/safe-area-inset";
 import {Observable} from "rxjs";
 import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
-import type {Stream} from "../stream/core";
-import {toStream} from "../stream/rxjs";
+import type {Stream} from "../stream/stream";
+import {createStream} from "../stream/stream";
 
 /** リサイズ */
 export type Resize = {
@@ -40,5 +40,5 @@ export function resizeStream(): Stream<Resize> {
       }, RESIZE_DELAY);
     })
   });
-  return toStream(origin);
+  return createStream(origin);
 }

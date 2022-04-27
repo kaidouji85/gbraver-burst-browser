@@ -5,7 +5,7 @@ import {NeoLandozer} from './neo-landozer';
 import {PlayerNeoLandozerView} from "./view/player-neo-landozer-view";
 import {EnemyNeoLandozerView} from "./view/enemy-neo-landozer-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側ネオランドーザ

@@ -1,13 +1,12 @@
 // @flow
-
 import {Howl} from 'howler';
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import {pushDOMStream} from "../../../dom/push/push-dom";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {DOMDialog} from "../dialog";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
@@ -48,7 +47,7 @@ export class HowToPlay implements DOMDialog {
     `;
 
     this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
-    this._close = new RxjsStreamSource();
+    this._close = createStreamSource();
 
     this._unsubscribers = [
       pushDOMStream(this._closer).subscribe(action => {

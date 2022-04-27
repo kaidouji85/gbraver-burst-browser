@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerRaitoView} from "./view/player-raito-view";
 import {EnemyRaitoView} from "./view/enemy-raito-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側 ライト カットイン

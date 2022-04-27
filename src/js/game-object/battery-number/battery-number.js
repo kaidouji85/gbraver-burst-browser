@@ -9,7 +9,7 @@ import {Animate} from "../../animation/animate";
 import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 import {change} from "./animation/change";
 
 /** バッテリー数字 */

@@ -1,13 +1,12 @@
 // @flow
-
 import type {PostNetworkError} from '../../post-network-error';
 import {Howl} from 'howler';
 import type {DOMDialog} from "../dialog";
 import {domUuid} from "../../../uuid/dom-uuid";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from '../../../stream/rxjs';
-import {pushDOMStream} from '../../../dom/push/push-dom';
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {PushDOM} from '../../../dom/push/push-dom';
+import {pushDOMStream} from '../../../dom/push/push-dom';
 import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
@@ -100,7 +99,7 @@ export class NetworkErrorDialog implements DOMDialog {
     const elements = extractElements(this._root, dataIDs);
     this._postNetworkErrorButton = elements.postNetworkErrorButton;
 
-    this._postNetworkErrorSource = new RxjsStreamSource();
+    this._postNetworkErrorSource = createStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._postNetworkErrorButton).subscribe(action => {
         this._onPostNetworkErrorButtonPush(action);

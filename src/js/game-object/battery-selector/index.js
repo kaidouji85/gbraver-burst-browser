@@ -23,7 +23,7 @@ import {decide} from './animation/decide';
 import {batteryMinusPop} from "./animation/battery-minus-pop";
 import {batteryPlusPop} from "./animation/battery-plus-pop";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /** コンストラクタのパラメータ */
 type Param = {

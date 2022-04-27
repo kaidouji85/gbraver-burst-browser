@@ -1,14 +1,13 @@
 // @flow
-
 import {Howl} from 'howler';
 import type {DOMDialog} from "../dialog";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
-import {pushDOMStream} from '../../../dom/push/push-dom';
 import type {PushDOM} from '../../../dom/push/push-dom';
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from '../../../stream/rxjs';
+import {pushDOMStream} from '../../../dom/push/push-dom';
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import {pop} from "../../../dom/animation/pop";
 import {Exclusive} from "../../../exclusive/exclusive";
 import {SOUND_IDS} from "../../../resource/sound";
@@ -104,8 +103,8 @@ export class LoginDialog implements DOMDialog {
     this._loginButton = elements.loginButton;
     this._closeButton = elements.closeButton;
 
-    this._closeDialog = new RxjsStreamSource();
-    this._login = new RxjsStreamSource();
+    this._closeDialog = createStreamSource();
+    this._login = createStreamSource();
     this._unsubscribers = [
       pushDOMStream(this._loginButton).subscribe(action => {
         this._onLoginButtonPush(action);

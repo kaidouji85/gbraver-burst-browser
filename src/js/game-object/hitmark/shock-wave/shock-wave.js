@@ -11,7 +11,7 @@ import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import {process} from '../../../animation/process';
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 
 /**
  * 衝撃波

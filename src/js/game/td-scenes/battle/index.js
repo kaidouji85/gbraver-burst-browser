@@ -17,8 +17,8 @@ import {Exclusive} from "../../../exclusive/exclusive";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
 import {fadeIn, fadeOut, play, stop} from "../../../bgm/bgm-operators";
@@ -63,7 +63,7 @@ export class BattleScene implements Scene {
     this._exclusive = new Exclusive();
     this._initialState = param.initialState;
     this._state = createInitialState(param.player.playerId);
-    this._endBattle = new RxjsStreamSource();
+    this._endBattle = createStreamSource();
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
       resources: param.resources,

@@ -5,7 +5,7 @@ import {DamageIndicator} from "./damage-indicator";
 import {PlayerDamageIndicatorView} from "./view/player-damage-indicator-view";
 import {EnemyDamageIndicatorView} from "./view/enemy-damage-indicator-view";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 
 /**
  * プレイヤーのダメージインジケータ

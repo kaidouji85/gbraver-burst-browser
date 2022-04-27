@@ -5,7 +5,7 @@ import {PlayerTurnStartView} from "./view/player-turn-start-view";
 import {EnemyTurnStartView} from "./view/enemy-turn-start-view";
 import {TurnStart} from "./turn-start";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 
 /**
  * プレイヤーターン スタート

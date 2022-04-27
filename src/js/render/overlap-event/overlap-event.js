@@ -10,7 +10,7 @@ import type {TouchMoveRaycaster} from "./touch-move-raycaster";
 import {toTouchMoveRaycaster} from "./touch-move-raycaster";
 import type {RendererDOMEvent} from "../dom-event/dom-event";
 import * as THREE from "three";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 import {filter, map, share} from "../../stream/operator";
 
 /**

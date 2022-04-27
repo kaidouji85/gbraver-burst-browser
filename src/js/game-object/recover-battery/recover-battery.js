@@ -6,11 +6,11 @@ import type {RecoverBatteryView} from "./view/recover-battery-view";
 import {createInitialValue} from "./model/initial-value";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {popUp, show, hidden} from "./animation/pop-up";
+import {hidden, popUp, show} from "./animation/pop-up";
 import {RecoverBatterySounds} from "./sounds/recover-battery-sounds";
 import type {Resources} from "../../resource";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /**
  * コンストラクタのパラメータ

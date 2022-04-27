@@ -1,9 +1,9 @@
 // @flow
 
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 import type {GameObjectAction} from "./game-object-action";
 import type {Update} from "../../game-loop/update";
-import {filter, map, first} from "../../stream/operator";
+import {filter, first, map} from "../../stream/operator";
 
 /**
  * 初回だけ発火するUpdateストリームを生成する

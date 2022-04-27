@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import type {OverlapEvent} from "./overlap-event/overlap-event";
-import type {Stream} from "../stream/core";
+import type {Stream} from "../stream/stream";
 
 /**
  * オーバーラップイベントを通知する

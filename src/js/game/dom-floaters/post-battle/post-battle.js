@@ -1,8 +1,8 @@
 // @flow
 import {Howl} from 'howler';
 import {waitFinishAnimation} from "../../../wait/wait-finish-animation";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {PostBattle} from "../../post-battle";
 import type {PostBattleButtonConfig} from "./post-battle-button-config";
 import {pushDOMStream} from "../../../dom/push/push-dom";
@@ -38,7 +38,7 @@ export class PostBattleFloater {
     this._root.className = ROOT_CLASS;
     this._root.style.display = 'none';
     this._exclusive = new Exclusive();
-    this._selectionComplete = new RxjsStreamSource();
+    this._selectionComplete = createStreamSource();
     this._unsubscribers = [];
   }
 
