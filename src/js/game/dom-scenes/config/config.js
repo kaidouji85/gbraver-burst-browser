@@ -1,7 +1,7 @@
 // @flow
 import {Howl} from "howler";
-import type {GbraverBurstBrowserConfig, WebGLPixelRatio} from "../../config/browser-config";
-import {isConfigChanged, parseWebGLPixelRatio, WebGLPixelRatios,} from "../../config/browser-config";
+import type {BattleAnimationSpeed, GbraverBurstBrowserConfig, WebGLPixelRatio} from "../../config/browser-config";
+import {BattleAnimationSpeeds, isConfigChanged, parseWebGLPixelRatio, WebGLPixelRatios} from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
@@ -32,17 +32,29 @@ type DataIDs = {
  * @return ルート要素のHTML要素
  */
 function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
+  const battleAnimationSpeedOption = (value: BattleAnimationSpeed) => `
+    <option class="${ROOT_CLASS}__configs__battle-animation-speed__selector__option"
+      value="${value}" ${value===config.battleAnimationSpeed ? 'selected' : ""}>
+      ${Number(value).toFixed(1)}倍
+    </option>`;
+  const battleAnimationSpeedOptions = BattleAnimationSpeeds.map(v => battleAnimationSpeedOption(v))
+    .reduce((a, b) => a + b);
   const webGLPixelRatioOption  = (value: WebGLPixelRatio) => `
-    <option class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector__${value}" 
+    <option class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector__option" 
       value="${value}" ${value===config.webGLPixelRatio ? 'selected' : ""}>
       ${Number(value).toFixed(2)}
     </option>`;
-  const webGLPixelRatioOptions = WebGLPixelRatios
-    .map(v => webGLPixelRatioOption(v))
+  const webGLPixelRatioOptions = WebGLPixelRatios.map(v => webGLPixelRatioOption(v))
     .reduce((a, b) => a + b);
   return `
     <div class="${ROOT_CLASS}__title">設定</div>
     <div class="${ROOT_CLASS}__configs">
+      <div class="${ROOT_CLASS}__configs__battle-animation-speed">
+        <div class="${ROOT_CLASS}__configs__battle-animation-speed__caption">戦闘アニメ再生速度</div>
+        <select class="${ROOT_CLASS}__configs__battle-animation-speed__selector">
+          ${battleAnimationSpeedOptions}
+        </select>
+      </div>
       <div class="${ROOT_CLASS}__configs__webgl-pixel-ratio">
         <div class="${ROOT_CLASS}__configs__webgl-pixel-ratio__caption">戦闘画面のピクセルレート</div>
         <select class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector" data-id="${ids.webGLPixelRatioSelector}">
@@ -93,7 +105,7 @@ export class Config implements DOMScene {
   _exclusive: Exclusive;
   _prev: StreamSource<void>;
   _configChange: StreamSource<GbraverBurstBrowserConfig>;
-  _unsubscriver: Unsubscriber[];
+  _unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -120,7 +132,7 @@ export class Config implements DOMScene {
     this._exclusive = new Exclusive();
     this._prev = createStreamSource();
     this._configChange = createStreamSource();
-    this._unsubscriver = [
+    this._unsubscriber = [
       pushDOMStream(this._prevButton).subscribe(action => {
         this._onPrevButtonPush(action);
       }),
@@ -141,7 +153,7 @@ export class Config implements DOMScene {
 
   /** @override */
   destructor(): void {
-    this._unsubscriver.forEach(v => {
+    this._unsubscriber.forEach(v => {
       v.unsubscribe();
     });
     this._dialog.destructor();
@@ -255,7 +267,7 @@ export class Config implements DOMScene {
    */
   _parseConfig(): GbraverBurstBrowserConfig {
     const webGLPixelRatio = parseWebGLPixelRatio(this._webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
-    const battleAnimeSpeed = 1; // TODO 設定画面の値をセットする
-    return {webGLPixelRatio, battleAnimeSpeed};
+    const battleAnimationSpeed = 1; // TODO 設定画面の値をセットする
+    return {webGLPixelRatio, battleAnimationSpeed};
   }
 }

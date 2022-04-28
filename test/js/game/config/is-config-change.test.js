@@ -3,7 +3,7 @@
 import type {GbraverBurstBrowserConfig} from "../../../../src/js/game/config/browser-config";
 import {isConfigChanged} from "../../../../src/js/game/config/browser-config";
 
-const origin: GbraverBurstBrowserConfig = {webGLPixelRatio: 2, battleAnimeSpeed: 1};
+const origin: GbraverBurstBrowserConfig = {webGLPixelRatio: 2, battleAnimationSpeed: 1};
 
 test('WebGLピクセルレートの変更を正しく検知できる', () => {
   const update = {...origin, webGLPixelRatio: 1};
@@ -11,7 +11,12 @@ test('WebGLピクセルレートの変更を正しく検知できる', () => {
 });
 
 test('戦闘アニメ再生速度の変更を正しく検知できる', () => {
-  const update = {...origin, battleAnimeSpeed: 2};
+  const update = {...origin, battleAnimationSpeed: 2};
+  expect(isConfigChanged(origin, update)).toBe(true);
+});
+
+test('複数項目の変更を正しく検知できる', () => {
+  const update = {...origin, webGLPixelRatio: 1, battleAnimationSpeed: 2};
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 

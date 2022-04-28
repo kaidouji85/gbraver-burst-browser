@@ -22,10 +22,10 @@ export function parseWebGLPixelRatio(origin: any): WebGLPixelRatio | null {
 }
 
 /** 戦闘アニメ再生速度(n倍速) */
-export type BattleAnimeSpeed = number;
+export type BattleAnimationSpeed = number;
 
 /** 設定可能な戦闘アニメ再生速度をあつめたもの */
-export const BattleAnimationSpeeds: BattleAnimeSpeed[] = [1, 1.5, 2];
+export const BattleAnimationSpeeds: BattleAnimationSpeed[] = [1, 1.5, 2];
 
 /**
  * 任意のオブジェクトを戦闘アニメ再生速度にパースする
@@ -34,7 +34,7 @@ export const BattleAnimationSpeeds: BattleAnimeSpeed[] = [1, 1.5, 2];
  * @param origin 
  * @return パース結果 
  */
-export function parseBattleAnimationSpeed(origin: any): BattleAnimeSpeed | null {
+export function parseBattleAnimationSpeed(origin: any): BattleAnimationSpeed | null {
   const value = Number(origin);
   if (isNaN(value)) {
     return null;
@@ -48,7 +48,7 @@ export type GbraverBurstBrowserConfig = {
   /** WebGLピクセルレート */
   webGLPixelRatio: WebGLPixelRatio,
   /** 戦闘アニメ再生速度 */
-  battleAnimeSpeed: BattleAnimeSpeed,
+  battleAnimationSpeed: BattleAnimationSpeed,
 };
 
 /**
@@ -59,5 +59,5 @@ export type GbraverBurstBrowserConfig = {
  * @return 判定結果、trueで設定変更された
  */
 export function isConfigChanged(origin: GbraverBurstBrowserConfig, update: GbraverBurstBrowserConfig): boolean {
-  return (origin.webGLPixelRatio !== update.webGLPixelRatio) || (origin.battleAnimeSpeed !== update.battleAnimeSpeed);
+  return (origin.webGLPixelRatio !== update.webGLPixelRatio) || (origin.battleAnimationSpeed !== update.battleAnimationSpeed);
 }
