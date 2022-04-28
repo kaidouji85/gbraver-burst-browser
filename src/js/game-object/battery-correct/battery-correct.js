@@ -4,7 +4,7 @@ import * as THREE from "three";
 import type {BatteryCorrectModel} from "./model/battery-correct-model";
 import type {BatteryCorrectView} from "./view/battery-correct-view";
 import {initialValue} from "./model/initial-value";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";

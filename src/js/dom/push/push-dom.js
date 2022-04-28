@@ -1,8 +1,8 @@
 // @flow
 
 import {fromEvent} from "rxjs";
-import type {Stream} from "../../stream/core";
-import {toStream} from "../../stream/rxjs";
+import type {Stream} from "../../stream/stream";
+import {createStream} from "../../stream/stream";
 import {map, merge} from '../../stream/operator';
 
 /** HTML要素が押下された時のアクション */
@@ -20,13 +20,13 @@ export type PushDOM = {
  */
 export function pushDOMStream(dom: HTMLElement): Stream<PushDOM> {
   const clickRXJS = fromEvent(dom, 'click');
-  const click = toStream<MouseEvent>(clickRXJS)
+  const click = createStream<MouseEvent>(clickRXJS)
     .chain(map(event => {
       return {type: 'PushDOM', event};
     }));
 
   const touchStartRXJS = fromEvent(dom, 'touchstart');
-  const touchStart = toStream<TouchEvent>(touchStartRXJS)
+  const touchStart = createStream<TouchEvent>(touchStartRXJS)
     .chain(map(event => {
       return {type: 'PushDOM', event};
     }));

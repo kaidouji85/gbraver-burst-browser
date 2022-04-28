@@ -1,6 +1,6 @@
 // @flow
 
-import type {Command, GameState, PlayerId, PlayerState, Armdozer, Pilot} from "gbraver-burst-core";
+import type {Armdozer, Command, GameState, Pilot, PlayerId, PlayerState} from "gbraver-burst-core";
 import type {NPC} from "./npc";
 
 /** 0バッテリー */

@@ -9,7 +9,7 @@ import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import type {BatterySelectorModel} from "../model";
 import {canBatteryPlus} from "../model/can-battery-plus";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /** コンストラクタのパラメータ */
 type Param = {

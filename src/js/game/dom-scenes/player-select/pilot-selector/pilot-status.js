@@ -1,8 +1,8 @@
 // @flow
 
 import type {PilotId} from "gbraver-burst-core";
-import {domUuid} from "../../../../uuid/dom-uuid";
 import {Pilots} from "gbraver-burst-core";
+import {domUuid} from "../../../../uuid/dom-uuid";
 import {pilotSkillTemplate} from "./status-template";
 
 /** ルート要素のクラス名 */

@@ -7,7 +7,7 @@ import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
 import {intensity} from "./animation/intensity";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /**
  * ステージ全体の照明

@@ -1,11 +1,11 @@
 // @flow
 import * as THREE from "three";
-import type {Stream} from "../../src/js/stream/core";
+import type {Stream} from "../../src/js/stream/stream";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 import {StorybookResourceRoot} from "../storybook-resource-root";
 import {fullResourceLoading} from "../../src/js/resource";
-import {RxjsStreamSource} from "../../src/js/stream/rxjs";
 import type {Resources} from "../../src/js/resource";
+import {createStreamSource} from "../../src/js/stream/stream";
 
 /** レンダラ設定 */
 type Renderer = {
@@ -97,7 +97,7 @@ export function stillImageStub(params: StubParams): HTMLElement {
     const resourceRoot = new StorybookResourceRoot();
     const resourceLoading = fullResourceLoading(resourceRoot);
     const resources = await resourceLoading.resources;
-    const emptyGameObjectAction: Stream<GameObjectAction> = new RxjsStreamSource();
+    const emptyGameObjectAction: Stream<GameObjectAction> = createStreamSource();
     const {objects, skyBox} = params.creator({resources, emptyGameObjectAction});
     const scene = new THREE.Scene();
     objects.forEach(v => {

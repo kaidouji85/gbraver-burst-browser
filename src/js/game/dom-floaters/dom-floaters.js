@@ -1,7 +1,7 @@
 // @flow
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 import type {GameAction} from "../game-actions";
-import {RxjsStreamSource} from "../../stream/rxjs";
 import {PostBattleFloater} from "./post-battle/post-battle";
 import type {PostBattleButtonConfig} from "./post-battle/post-battle-button-config";
 import type {Resources} from "../../resource";
@@ -18,7 +18,7 @@ export class DOMFloaters {
    */
   constructor() {
     this._root = document.createElement('div');
-    this._gameAction = new RxjsStreamSource();
+    this._gameAction = createStreamSource();
 
     this._postBattle = new PostBattleFloater();
     this._root.appendChild(this._postBattle.getRootHTMLElement());

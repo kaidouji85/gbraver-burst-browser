@@ -5,7 +5,7 @@ import type {Resources} from "../../resource";
 import {PlayerContinuousAttackView} from "./view/player-continuous-attack-view";
 import {EnemyContinuousAttackView} from "./view/enemy-continuous-attack-view";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 
 /**
  * プレイヤー側 連続攻撃

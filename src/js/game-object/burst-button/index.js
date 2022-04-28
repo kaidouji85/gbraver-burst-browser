@@ -1,7 +1,7 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 import {BurstButton} from "./burst-button";
 import {ShinBraverIcon} from "./view/shin-braver-icon";

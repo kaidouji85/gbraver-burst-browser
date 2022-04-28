@@ -12,7 +12,7 @@ import {decide} from "./animation/decide";
 import {close} from "./animation/close";
 import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 import type {PilotIcon} from "./view/pilot-icon";
 import {filter} from "../../stream/operator";
 

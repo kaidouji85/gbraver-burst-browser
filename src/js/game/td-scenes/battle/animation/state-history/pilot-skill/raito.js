@@ -1,5 +1,5 @@
 // @flow
-import type {PilotSkill, DamageDecreaseSkill} from "gbraver-burst-core";
+import type {DamageDecreaseSkill, PilotSkill} from "gbraver-burst-core";
 import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
 import {RaitoHUD} from "../../../view/hud/pilot-objects/raito";
 import {Animate} from "../../../../../../animation/animate";

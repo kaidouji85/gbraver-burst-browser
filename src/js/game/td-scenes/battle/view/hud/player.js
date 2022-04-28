@@ -8,7 +8,7 @@ import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
 import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
 import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../stream/core";
+import type {Stream} from "../../../../../stream/stream";
 import {ResultIndicator} from "../../../../../game-object/result-indicator/result-indicator";
 import {loseIndicator, winIndicator} from "../../../../../game-object/result-indicator";
 

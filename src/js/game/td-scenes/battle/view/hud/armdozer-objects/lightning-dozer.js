@@ -10,7 +10,7 @@ import {
 } from "../../../../../../game-object/cut-in/lightning-dozer";
 import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * HUDレイヤー ライトニングドーザ固有オブジェクト フィールド

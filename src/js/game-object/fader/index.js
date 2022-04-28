@@ -3,7 +3,7 @@
 import {Fader} from "./fader";
 import {HUD_FROMTMOST_FADER_ZINDEX, HUD_REARMOST_FADER_ZINDEX} from "../../zindex/hud-zindex";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 
 /** 画面フェーダ生成のパラメータ */
 type Param = {

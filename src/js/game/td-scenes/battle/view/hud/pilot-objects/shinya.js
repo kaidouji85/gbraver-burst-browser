@@ -7,7 +7,7 @@ import {enemyShinyaCutIn, playerShinyaCutIn} from "../../../../../../game-object
 import * as THREE from "three";
 import type {HUDPilotObjects} from "./hud-pilot-objects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * コンストラクタのパラメータ

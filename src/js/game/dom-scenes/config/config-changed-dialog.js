@@ -3,11 +3,11 @@ import {Howl} from "howler";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {PushDOM} from "../../../dom/push/push-dom";
-import {Exclusive} from "../../../exclusive/exclusive";
 import {pushDOMStream} from "../../../dom/push/push-dom";
+import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation/pop";
 import {SOUND_IDS} from "../../../resource/sound";
 
@@ -110,9 +110,9 @@ export class ConfigChangedDialog {
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
 
     this._exclusive = new Exclusive();
-    this._closeStream = new RxjsStreamSource();
-    this._acceptStream = new RxjsStreamSource();
-    this._discardStream = new RxjsStreamSource();
+    this._closeStream = createStreamSource();
+    this._acceptStream = createStreamSource();
+    this._discardStream = createStreamSource();
     this._unsbusscriber = [
       pushDOMStream(this._backGround).subscribe(action => {
         this._onBackGroundPush(action);

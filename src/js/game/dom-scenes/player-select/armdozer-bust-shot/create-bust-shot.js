@@ -1,9 +1,9 @@
 // @flow
 
 import type {ArmDozerId} from "gbraver-burst-core";
+import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../../resource";
 import {ArmdozerBustShot, CLASS_NAME_PREFIX} from "./amrodzer-bust-shot";
-import {ArmDozerIdList} from "gbraver-burst-core";
 import {PathIds} from "../../../../resource/path";
 
 /**

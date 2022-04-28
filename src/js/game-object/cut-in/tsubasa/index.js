@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerTsubasaView} from "./view/player-tsubasa-view";
 import {EnemyTsubasaView} from "./view/enemy-tsubasa-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側 ツバサ カットイン

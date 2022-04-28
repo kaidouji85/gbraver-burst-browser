@@ -9,7 +9,7 @@ import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-d
 import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト フィールド

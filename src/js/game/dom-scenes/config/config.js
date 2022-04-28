@@ -1,19 +1,14 @@
 // @flow
-
 import {Howl} from "howler";
 import type {GbraverBurstBrowserConfig, WebGLPixelRatio} from "../../config/browser-config";
-import {
-  WebGLPixelRatios,
-  isConfigChanged,
-  parseWebGLPixelRatio,
-} from "../../config/browser-config";
+import {isConfigChanged, parseWebGLPixelRatio, WebGLPixelRatios,} from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {pushDOMStream} from "../../../dom/push/push-dom";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {PushDOM} from "../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
@@ -123,8 +118,8 @@ export class Config implements DOMScene {
     this._root.appendChild(this._dialog.getRootHTMLElement());
 
     this._exclusive = new Exclusive();
-    this._prev = new RxjsStreamSource();
-    this._configChange = new RxjsStreamSource();
+    this._prev = createStreamSource();
+    this._configChange = createStreamSource();
     this._unsubscriver = [
       pushDOMStream(this._prevButton).subscribe(action => {
         this._onPrevButtonPush(action);
