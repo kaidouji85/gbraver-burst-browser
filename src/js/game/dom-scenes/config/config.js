@@ -36,7 +36,7 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
   const battleAnimationSpeedOption = (value: BattleAnimationSpeed) => `
     <option class="${ROOT_CLASS}__configs__battle-animation-speed__selector__option"
       value="${value}" ${value===config.battleAnimationSpeed ? 'selected' : ""}>
-      ${Number(value).toFixed(1)}倍
+      ${value}倍
     </option>`;
   const battleAnimationSpeedOptions = BattleAnimationSpeeds.map(v => battleAnimationSpeedOption(v))
     .reduce((a, b) => a + b);

@@ -25,7 +25,7 @@ export function parseWebGLPixelRatio(origin: any): WebGLPixelRatio | null {
 export type BattleAnimationSpeed = number;
 
 /** 設定可能な戦闘アニメ再生速度をあつめたもの */
-export const BattleAnimationSpeeds: BattleAnimationSpeed[] = [1, 1.5, 2];
+export const BattleAnimationSpeeds: BattleAnimationSpeed[] = [1, 2, 4];
 
 /**
  * 任意のオブジェクトを戦闘アニメ再生速度にパースする

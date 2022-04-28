@@ -6,7 +6,7 @@ test('有効な戦闘アニメ再生速度はパースできる', () => {
 });
 
 test('文字列でも有効な戦闘アニメ再生速度ならパースできる', () => {
-  expect(parseBattleAnimationSpeed('1.5')).toBe(1.5);
+  expect(parseBattleAnimationSpeed('2')).toBe(2);
 });
 
 test('無効な戦闘アニメ再生速度はパースできない', () => {
