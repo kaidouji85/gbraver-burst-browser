@@ -1,0 +1,30 @@
+// @flow
+import {parseBattleAnimationSpeed} from "../../../../src/js/game/config/browser-config";
+
+test('有効な戦闘アニメ倍率はパースできる', () => {
+  expect(parseBattleAnimationSpeed(1)).toBe(1);
+});
+
+test('文字列でも有効な戦闘アニメ倍率ならパースできる', () => {
+  expect(parseBattleAnimationSpeed('1.5')).toBe(1.5);
+});
+
+test('無効な戦闘アニメ倍率はパースできない', () => {
+  expect(parseBattleAnimationSpeed(1.1)).toBe(null);
+});
+
+test('有効な戦闘アニメ倍率でない文字列はパースできない', () => {
+  expect(parseBattleAnimationSpeed('2x')).toBe(null);
+});
+
+test('空文字はパースできない', () => {
+  expect(parseBattleAnimationSpeed('')).toBe(null);
+});
+
+test('nullはパースできない', () => {
+  expect(parseBattleAnimationSpeed(null)).toBe(null);
+});
+
+test('undefinedはパースできない', () => {
+  expect(parseBattleAnimationSpeed(undefined)).toBe(null);
+});

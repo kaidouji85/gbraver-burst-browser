@@ -13,13 +13,34 @@ export const WebGLPixelRatios: WebGLPixelRatio[] = [0.5, 0.75, 1, 2];
  * @return パース結果
  */
 export function parseWebGLPixelRatio(origin: any): WebGLPixelRatio | null {
-  const parsedInt = Number(origin);
-  if (isNaN(parsedInt)) {
+  const value = Number(origin);
+  if (isNaN(value)) {
     return null;
   }
 
-  const finedWebGLPixelRatio = WebGLPixelRatios.find(v => v === parsedInt);
-  return finedWebGLPixelRatio ?? null;
+  return WebGLPixelRatios.find(v => v === value) ?? null;
+}
+
+/** 戦闘アニメ倍率 */
+export type BattleAnimeSpeed = number;
+
+/** 設定可能な戦闘アニメ倍率をあつめたもの */
+export const BattleAnimationSpeeds: BattleAnimeSpeed[] = [1, 1.5, 2];
+
+/**
+ * 任意のオブジェクトを戦闘アニメ倍率にパースする
+ * パースできない場合はnullを返す
+ *
+ * @param origin 
+ * @return パース結果 
+ */
+export function parseBattleAnimationSpeed(origin: any): BattleAnimeSpeed | null {
+  const value = Number(origin);
+  if (isNaN(value)) {
+    return null;
+  }
+
+  return BattleAnimationSpeeds.find(v => v === value) ?? null;
 }
 
 /** Gブレイバーバースト ブラウザ側設定項目 */
