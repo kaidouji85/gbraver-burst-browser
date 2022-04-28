@@ -34,6 +34,7 @@ type Param = {
   playingBGM: SoundId,
   renderer: OwnRenderer,
   battleProgress: BattleProgress,
+  animationTimeScale: number,
   initialState: GameState[],
   player: Player,
   enemy: Player,
@@ -74,7 +75,7 @@ export class BattleScene implements Scene {
       resize: param.resize,
     });
     this._sounds = new BattleSceneSounds(param.resources, param.playingBGM);
-    this._animationTimeScale  = 1;  // TODO パラメータで渡せるようにする
+    this._animationTimeScale = param.animationTimeScale;
     this._bgm = param.bgm;
 
     this._unsubscriber = [
@@ -90,9 +91,7 @@ export class BattleScene implements Scene {
     ];
   }
 
-  /**
-   * デストラクタ相当の処理
-   */
+  /** @override */
   destructor(): void {
     this._view.destructor();
     this._unsubscriber.forEach(v => {

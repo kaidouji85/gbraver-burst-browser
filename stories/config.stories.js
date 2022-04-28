@@ -10,7 +10,7 @@ export default {
 };
 
 export const Scene: DOMStubStory = domStub(resources => {
-  const config = {webGLPixelRatio: 2};
+  const config = {webGLPixelRatio: 2, battleAnimationSpeed: 1};
   const scene = new Config(resources, config);
   scene.prevNotifier().subscribe(() => {
     console.log('prev');

@@ -475,7 +475,7 @@ export class Game {
       const progress = createBattleProgress(battle);
       const config = configFromLocalStorage() ?? DefaultConfig;
       const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_01,
-        config.webGLPixelRatio, progress, battle.player, battle.enemy, battle.initialState);
+        config.webGLPixelRatio, 1 / config.battleAnimationSpeed, progress, battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await Promise.all([(async () => {
         await this._fader.fadeOut();
@@ -718,8 +718,8 @@ export class Game {
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
     const config = configFromLocalStorage() ?? DefaultConfig;
-    const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, stage.bgm, config.webGLPixelRatio,
-      {progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
+    const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, stage.bgm, config.webGLPixelRatio, 
+      1 / config.battleAnimationSpeed ,{progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     const latency = Date.now() - startNPCStageTitleTime;
     await waitTime(3000- latency);
