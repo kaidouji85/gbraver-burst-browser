@@ -58,18 +58,19 @@ export class TDScenes {
    * @param bgm BGM管理オブジェクト
    * @param playingBGM 再生するBGMのID
    * @param pixelRatio ピクセルレート
+   * @param animationTimeScale アニメーションのタイムスケール
    * @param battleProgress 戦闘を進める
    * @param player プレイヤー情報
    * @param enemy 敵情報
    * @param initialState ゲームの初期状態
    * @return 生成した戦闘シーン
    */
-  startBattle(resources: Resources, bgm: BGMManager, playingBGM: SoundId, pixelRatio: number, battleProgress: BattleProgress, player: Player, enemy: Player, initialState: GameState[]): BattleScene {
+  startBattle(resources: Resources, bgm: BGMManager, playingBGM: SoundId, pixelRatio: number, animationTimeScale: number, battleProgress: BattleProgress, player: Player, enemy: Player, initialState: GameState[]): BattleScene {
     this._disposeScene();
 
     this._renderer.setPixelRatio(pixelRatio);
-    const scene = new BattleScene({resources, bgm, playingBGM, renderer: this._renderer, battleProgress, player, enemy, initialState,
-      gameLoop: this._gameLoop, resize: this._resize});
+    const scene = new BattleScene({resources, bgm, playingBGM, renderer: this._renderer, battleProgress, animationTimeScale, 
+      player, enemy, initialState, gameLoop: this._gameLoop, resize: this._resize});
     this._scene = scene;
     this._unsubscriber = [
       scene.gameEndNotifier().subscribe(v => {
