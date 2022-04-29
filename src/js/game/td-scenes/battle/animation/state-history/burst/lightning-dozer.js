@@ -17,7 +17,7 @@ export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozerTD, 
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータにキャストする
- * キャストできない場合はnullを返すkaesu
+ * キャストできない場合はnullを返す
  *
  * @param param キャスト元
  * @return キャスト結果

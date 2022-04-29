@@ -19,7 +19,7 @@ export function lightning(param: ReflectAnimationParam): Animate {
       param.damaged.hud.gauge.hp(param.damaged.state.armdozer.hp),
     )))
     .chain(param.damaged.sprite.knockBackToStand())
-    .chain(delay(500));
+    .chain(delay(300));
 }
 
 /**
