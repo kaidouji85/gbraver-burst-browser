@@ -1,5 +1,4 @@
 // @flow
-
 import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 import {WingDozer} from "../../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 import {Animate} from "../../../../../../../animation/animate";
@@ -124,7 +123,7 @@ function attack(param: WingDozerBattle<AttackResult>): Animate {
   )
     .chain(param.attackerSprite.upper())
     .chain(all(
-      delay(1800)
+      delay(1000)
         .chain(param.attackerSprite.upperToStand())
         .chain(delay(500)),
       toInitial(param.tdCamera, 100),
@@ -146,7 +145,7 @@ function guard(param: WingDozerBattle<Guard>): Animate {
     .chain(delay(600))
     .chain(param.attackerSprite.upper())
     .chain(all(
-      delay(1800)
+      delay(1000)
         .chain(param.attackerSprite.upperToStand())
         .chain(delay(500)),
       param.defenderTD.damageIndicator.popUp(param.result.damage),
@@ -166,12 +165,10 @@ function miss(param: WingDozerBattle<Miss>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(600))
     .chain(param.attackerSprite.upper())
-    .chain(all(
-      delay(1800)
-        .chain(param.attackerSprite.upperToStand())
-        .chain(delay(500)),
-      param.defenderSprite.avoid()
-    ));
+    .chain(param.defenderSprite.avoid())
+    .chain(delay(500))
+    .chain(param.attackerSprite.upperToStand())
+    .chain(delay(500));
 }
 
 /**
@@ -206,7 +203,7 @@ function down(param: WingDozerBattle<DownResult>): Animate {
   )
     .chain(param.attackerSprite.upper())
     .chain(all(
-      delay(2300)
+      delay(1500)
         .chain(param.attackerSprite.upperToStand())
         .chain(delay(500)),
       param.attackerHUD.resultIndicator.slideIn()

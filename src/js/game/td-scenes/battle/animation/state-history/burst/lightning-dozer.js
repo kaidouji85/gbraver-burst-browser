@@ -17,7 +17,7 @@ export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozerTD, 
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータにキャストする
- * キャストできない場合はnullを返すkaesu
+ * キャストできない場合はnullを返す
  *
  * @param param キャスト元
  * @return キャスト結果
@@ -65,7 +65,7 @@ function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate
     param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible()
   )
-    .chain(delay(1000))
+    .chain(delay(800))
     .chain(all(
       param.burstArmdozerHUD.cutIn.hidden(),
       param.hudObjects.rearmostFader.opacity(0, 300),

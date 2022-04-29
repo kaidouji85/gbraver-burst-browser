@@ -64,7 +64,7 @@ function shinyaRecoverBattery(param: ShinyaAnimationParamX<RecoverBatterySkill>)
     param.tdObjects.illumination.intensity(0.2, 500),
     param.tdObjects.turnIndicator.invisible(),
   )
-    .chain(delay(1000))
+    .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
     .chain(delay(200))
     .chain(all(
