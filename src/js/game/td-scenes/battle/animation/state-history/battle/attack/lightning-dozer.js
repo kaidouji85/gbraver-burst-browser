@@ -1,5 +1,4 @@
 // @flow
-
 import {Animate} from "../../../../../../../animation/animate";
 import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 import {LightningDozer} from "../../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
@@ -125,7 +124,7 @@ function attack(param: LightningDozerBattle<AttackResult>): Animate {
   )
     .chain(param.attackerSprite.armHammer())
     .chain(all(
-      delay(1800)
+      delay(1000)
         .chain(param.attackerSprite.hmToStand())
         .chain(delay(500)),
       toInitial(param.tdCamera, 100),
@@ -147,7 +146,7 @@ function guard(param: LightningDozerBattle<Guard>): Animate {
     .chain(delay(500))
     .chain(param.attackerSprite.armHammer())
     .chain(all(
-      delay(1800)
+      delay(1000)
         .chain(param.attackerSprite.hmToStand())
         .chain(delay(500)),
       param.defenderTD.damageIndicator.popUp(param.result.damage),
@@ -167,12 +166,10 @@ function miss(param: LightningDozerBattle<Miss>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(500))
     .chain(param.attackerSprite.armHammer())
-    .chain(all(
-      delay(1800)
-        .chain(param.attackerSprite.hmToStand())
-        .chain(delay(500)),
-      param.defenderSprite.avoid()
-    ));
+    .chain(param.defenderSprite.avoid())
+    .chain(delay(500))
+    .chain(param.attackerSprite.hmToStand())
+    .chain(delay(500));
 }
 
 /** ダウンが受け取れる戦闘結果 */
@@ -192,7 +189,7 @@ function down(param: LightningDozerBattle<DownResult>): Animate {
   )
     .chain(param.attackerSprite.armHammer())
     .chain(all(
-      delay(2300)
+      delay(1500)
         .chain(param.attackerSprite.hmToStand())
         .chain(delay(500)),
       param.attackerHUD.resultIndicator.slideIn()
