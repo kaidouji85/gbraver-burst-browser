@@ -8,7 +8,7 @@ import * as THREE from "three";
 import {SkyBrightness} from "../../../../../game-object/sky-brightness/sky-brightness";
 import {Illumination} from "../../../../../game-object/illumination/illumination";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../stream/core";
+import type {Stream} from "../../../../../stream/stream";
 
 /**
  * 3Dレイヤーのゲームオブジェクト

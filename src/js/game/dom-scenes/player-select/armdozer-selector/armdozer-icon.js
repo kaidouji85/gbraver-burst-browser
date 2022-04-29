@@ -6,7 +6,7 @@ import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {pop} from "../../../../dom/animation/pop";
 import {PathIds} from "../../../../resource/path";
-import type {Stream} from "../../../../stream/core";
+import type {Stream} from "../../../../stream/stream";
 import {tap} from '../../../../stream/operator';
 
 const ROOT_CLASS_NAME = 'player-select__armdozer-icon';

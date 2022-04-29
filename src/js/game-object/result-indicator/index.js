@@ -3,7 +3,7 @@ import {ResultIndicator} from "./result-indicator";
 import type {Resources} from "../../resource";
 import {winIndicatorView} from "./view/win-indicator-view";
 import {loseIndicatorView} from "./view/lose-indicator-view";
-import type {Stream} from "../../stream/core";
+import type {Stream} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 import {drawIndicatorView} from "./view/draw-indicator-view";
 

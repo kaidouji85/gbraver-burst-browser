@@ -7,7 +7,7 @@ import type {HUDPilotObjects} from "./hud-pilot-objects";
 import {GaiCutIn} from "../../../../../../game-object/cut-in/gai/gai";
 import {enemyGaiCutIn, playerGaiCutIn} from "../../../../../../game-object/cut-in/gai";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * コンストラクタのパラメータ

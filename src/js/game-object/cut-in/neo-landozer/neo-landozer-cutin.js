@@ -10,7 +10,7 @@ import {show} from "./animation/show";
 import {hidden} from "./animation/hidden";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 
 /**
  * ネオランドーザ カットイン

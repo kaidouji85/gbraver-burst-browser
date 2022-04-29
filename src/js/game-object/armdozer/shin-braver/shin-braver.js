@@ -24,7 +24,7 @@ import {burstToStand} from "./animation/burst-to-stand";
 import type {Resources} from "../../../resource";
 import {ShinBraverSounds} from "./sounds/shin-braver-sounds";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {

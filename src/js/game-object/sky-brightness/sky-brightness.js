@@ -7,7 +7,7 @@ import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
 import {brightness} from "./animation/brightness";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /** 空の明るさ */
 export class SkyBrightness {

@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerLightingDozerView} from "./view/player-lighting-dozer-view";
 import {EnemyLightningDozerView} from "./view/enemy-lightning-dozer-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側のライトニングドーザを生成する

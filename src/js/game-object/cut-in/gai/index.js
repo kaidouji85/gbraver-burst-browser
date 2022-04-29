@@ -5,7 +5,7 @@ import type {Resources} from "../../../resource";
 import {PlayerGaiView} from "./view/player-gai-view";
 import {EnemyGaiView} from "./view/enemy-gai-view";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤー側 ガイ カットイン

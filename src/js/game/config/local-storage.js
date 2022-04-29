@@ -1,11 +1,13 @@
 // @flow
-import type {GbraverBurstBrowserConfig, WebGLPixelRatio} from "./browser-config";
-import {parseWebGLPixelRatio} from "./browser-config";
+import type {BattleAnimationSpeed, GbraverBurstBrowserConfig, WebGLPixelRatio} from "./browser-config";
+import {parseBattleAnimationSpeed, parseWebGLPixelRatio} from "./browser-config";
 
 /** 設定項目名とLocalStorageキーのマッピング */
 const LocalStorageKeys = {
   /** WebGLのピクセルレート */
-  WebGLPixelRatio: 'WebGLPixelRatio'
+  WebGLPixelRatio: 'WebGLPixelRatio',
+  /** 戦闘アニメ再生速度 */
+  BattleAnimationSpeed: 'BattleAnimationSpeed',
 }
 
 /**
@@ -16,12 +18,14 @@ const LocalStorageKeys = {
  */
 export function configFromLocalStorage(): GbraverBurstBrowserConfig | null {
   const parsedWebGLPixelRatio = parseWebGLPixelRatio(localStorage.getItem(LocalStorageKeys.WebGLPixelRatio));
-  if (parsedWebGLPixelRatio === null) {   
+  const parsedBattleAnimeSpeed = parseBattleAnimationSpeed(localStorage.getItem(LocalStorageKeys.BattleAnimationSpeed))
+  if (parsedWebGLPixelRatio === null || parsedBattleAnimeSpeed === null) {   
     return null;
   }
 
   const webGLPixelRatio: WebGLPixelRatio = parsedWebGLPixelRatio;
-  return {webGLPixelRatio}
+  const battleAnimationSpeed: BattleAnimationSpeed = parsedBattleAnimeSpeed;
+  return {webGLPixelRatio, battleAnimationSpeed};
 }
 
 /**
@@ -31,4 +35,5 @@ export function configFromLocalStorage(): GbraverBurstBrowserConfig | null {
  */
 export function saveConfigToLocalStorage(config: GbraverBurstBrowserConfig): void {
   localStorage.setItem(LocalStorageKeys.WebGLPixelRatio, `${config.webGLPixelRatio}`);
+  localStorage.setItem(LocalStorageKeys.BattleAnimationSpeed, `${config.battleAnimationSpeed}`);
 }

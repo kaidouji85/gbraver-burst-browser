@@ -1,5 +1,4 @@
 // @flow
-
 import {Animate} from "../../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../../animation/delay";
 import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
@@ -121,7 +120,7 @@ function attack(param: ShinBraverBattle<AttackResult>): Animate {
   )
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
-      delay(1800)
+      delay(1000)
         .chain(param.attackerSprite.punchToStand())
         .chain(delay(500)),
       toInitial(param.tdCamera, 100),
@@ -143,7 +142,7 @@ function guard(param: ShinBraverBattle<Guard>): Animate {
     .chain(delay(500))
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
-      delay(1800)
+      delay(1000)
         .chain(param.attackerSprite.punchToStand())
         .chain(delay(500)),
       param.defenderTD.damageIndicator.popUp(param.result.damage),
@@ -163,12 +162,10 @@ function miss(param: ShinBraverBattle<Miss>): Animate {
   return param.attackerSprite.charge()
     .chain(delay(500))
     .chain(param.attackerSprite.straightPunch())
-    .chain(all(
-      delay(1800)
-        .chain(param.attackerSprite.punchToStand())
-        .chain(delay(500)),
-      param.defenderSprite.avoid()
-    ));
+    .chain(param.defenderSprite.avoid())
+    .chain(delay(500))
+    .chain(param.attackerSprite.punchToStand())
+    .chain(delay(500));
 }
 
 /**
@@ -203,7 +200,7 @@ function down(param: ShinBraverBattle<DownResult>): Animate {
   )
     .chain(param.attackerSprite.straightPunch())
     .chain(all(
-      delay(2300)
+      delay(1500)
         .chain(param.attackerSprite.punchToStand())
         .chain(delay(500)),
       param.attackerHUD.resultIndicator.slideIn()

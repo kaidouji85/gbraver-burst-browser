@@ -3,12 +3,12 @@ import {Howl} from 'howler';
 import type {Resources} from "../../../resource";
 import type {DOMDialog} from '../dialog';
 import {PathIds} from "../../../resource/path";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import {pop} from "../../../dom/animation/pop";
 import {SOUND_IDS} from "../../../resource/sound";
 import type {NPCBattleCourseDifficulty} from "../../npc-battle-courses";
@@ -121,8 +121,8 @@ export class DifficultyDialog implements DOMDialog {
       }),
     ];
 
-    this._selectionComplete = new RxjsStreamSource();
-    this._closeDialog = new RxjsStreamSource();
+    this._selectionComplete = createStreamSource();
+    this._closeDialog = createStreamSource();
     this._exclusive = new Exclusive();
     this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
     this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();

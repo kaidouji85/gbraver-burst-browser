@@ -5,7 +5,7 @@ import type {MouseDownRaycaster} from "../../render/overlap-event/mouse-down-ray
 import type {TouchStartRaycaster} from "../../render/overlap-event/touch-start-raycaster";
 import {isMeshOverlap} from "../../overlap/mesh-overlap";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /** パラメータ */
 type Param = {

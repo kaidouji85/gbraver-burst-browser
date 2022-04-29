@@ -1,5 +1,4 @@
 // @flow
-
 import {ArmdozerIcon} from "./armdozer-icon";
 import type {ArmDozerId} from "gbraver-burst-core";
 import type {Resources} from "../../../../resource";
@@ -9,12 +8,12 @@ import {Howl} from 'howler';
 import {ArmdozerStatus} from "./armdozer-status";
 import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {Exclusive} from "../../../../exclusive/exclusive";
-import {pushDOMStream} from "../../../../dom/push/push-dom";
 import type {PushDOM} from "../../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createArmdozerIcon} from "./create-armdozer-icon";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
-import {RxjsStreamSource} from "../../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
+import {createStreamSource} from "../../../../stream/stream";
 
 /** ルートHTML要素 class */
 const ROOT_CLASS_NAME = 'player-select__armdozer-selector';
@@ -105,9 +104,9 @@ export class ArmdozerSelector {
 
     this._exclusive = new Exclusive();
 
-    this._change = new RxjsStreamSource();
-    this._decide = new RxjsStreamSource();
-    this._prev = new RxjsStreamSource();
+    this._change = createStreamSource();
+    this._decide = createStreamSource();
+    this._prev = createStreamSource();
 
     this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();

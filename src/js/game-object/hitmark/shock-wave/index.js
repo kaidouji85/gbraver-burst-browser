@@ -6,7 +6,7 @@ import {PlayerShockWaveView} from "./view/player-shock-wave-view";
 import {EnemyShockWaveView} from "./view/enemy-shock-wave-view";
 import {initialValue} from "./model/initial-value";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream} from "../../../stream/core";
+import type {Stream} from "../../../stream/stream";
 
 /**
  * プレイヤーの衝撃波を生成する

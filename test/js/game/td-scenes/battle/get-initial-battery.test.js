@@ -1,6 +1,6 @@
 // @flow
 
-import {getInitialBattery} from "../../../../../../src/js/game/td-scenes/battle/ui-logic/battery-selector";
+import {getInitialBattery} from "../../../../../src/js/game/td-scenes/battle/ui-logic";
 
 test('選択可能なバッテリー上限が1以上の場合、バッテリーセレクタの初期値は1になる', () => {
   const result = getInitialBattery(4);

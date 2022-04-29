@@ -1,11 +1,7 @@
 // @flow
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {
-  emptyResources,
-  fullResourceLoadingFrom,
-  titleResourceLoading,
-} from "../resource";
+import {emptyResources, fullResourceLoadingFrom, titleResourceLoading,} from "../resource";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
@@ -16,12 +12,7 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {
-  DifficultySelect,
-  NPCBattle,
-  NPCBattleX,
-  PlayingNPCBattle,
-} from "./in-progress/npc-battle";
+import type {DifficultySelect, NPCBattle, NPCBattleX, PlayingNPCBattle,} from "./in-progress/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {Player} from "gbraver-burst-core";
@@ -38,7 +29,8 @@ import type {
   WebSocketAPIUnintentionalClose,
 } from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
-import type {Stream, Unsubscriber} from "../stream/core";
+import type {Stream, Unsubscriber} from "../stream/stream";
+import {createStream} from "../stream/stream";
 import type {
   Battle as BattleSDK,
   CasualMatch as CasualMatchSDK,
@@ -66,17 +58,16 @@ import {createBGMManager} from '../bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
-import {toStream} from "../stream/rxjs";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
 import {
   createNPCBattlePlayer,
-  startNPCBattle,
-  getStageLevel,
   getCurrentStage,
-  updateNPCBattle,
-  isNPCBattleStageClear
+  getStageLevel,
+  isNPCBattleStageClear,
+  startNPCBattle,
+  updateNPCBattle
 } from "./npc-battle";
-import {DefaultStages, DefaultStage, NPCBattleCourses} from "./npc-battle-courses";
+import {DefaultStage, DefaultStages, NPCBattleCourses} from "./npc-battle-courses";
 import {
   PostNetworkBattleButtons,
   PostNPCBattleComplete,
@@ -182,9 +173,9 @@ export class Game {
 
     const suddenlyBattleEnd = this._suddenlyBattleEnd.stream()
       .chain(map(() => ({type: 'SuddenlyBattleEnd'})));
-    const webSocketAPIError = toStream(this._api.websocketErrorNotifier())
+    const webSocketAPIError = createStream(this._api.websocketErrorNotifier())
       .chain(map(error => ({type: 'WebSocketAPIError', error})))
-    const WebSocketAPIUnintentionalClose = toStream(this._api.websocketUnintentionalCloseNotifier())
+    const WebSocketAPIUnintentionalClose = createStream(this._api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
     const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
       this._domDialogs.gameActionNotifier(), this._domFloaters.gameActionNotifier(),
@@ -249,8 +240,7 @@ export class Game {
     const title = await this._startTitle();
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
-    const firstViewDisplayTime = 500;
-    await waitTime(Math.max(firstViewDisplayTime - latency, 0));
+    await waitTime(500 - latency);
     await this._fader.fadeOut();
     invisibleFirstView();
     await this._fader.fadeIn();
@@ -303,14 +293,12 @@ export class Game {
       try {
         return await this._api.isLogin();
       } catch (e) {
-        const postNetworkError = {type: 'Close'};
-        this._domDialogs.startNetworkError(this._resources, postNetworkError);
+        this._domDialogs.startNetworkError(this._resources, {type: 'Close'});
         throw e;
       }
     };
     const gotoPlayerSelect = async (): Promise<void> => {
-      const subFlow = {type: 'PlayerSelect'};
-      this._inProgress = {type: 'CasualMatch', subFlow};
+      this._inProgress = {type: 'CasualMatch', subFlow: {type: 'PlayerSelect'}};
       this._domDialogs.hidden();
       await this._fader.fadeOut();
       await this._domScenes.startPlayerSelect(this._resources);
@@ -423,13 +411,13 @@ export class Game {
     const gotoTitle = async () => {
       this._inProgress = {type: 'None'};
       this._domDialogs.hidden();
-      const stoppingBGM = async () => {
+      const [title] = await Promise.all([(async () => {
+        await this._fader.fadeOut();
+        return await this._startTitle();
+      })(), (async () => {
         await this._bgm.do(fadeOut);
         await this._bgm.do(stop);
-      };
-      await this._fader.fadeOut();
-      const title = await this._startTitle();
-      await stoppingBGM;
+      })()]);
       await this._fader.fadeIn();
       title.playBGM();
     };
@@ -448,8 +436,7 @@ export class Game {
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
-      const difficultySelection = {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId};
-      this._inProgress = {...npcBattle, subFlow: difficultySelection};
+      this._inProgress = {...npcBattle, subFlow: {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId}};
       this._domDialogs.startDifficulty(this._resources);
     };
     const waitUntilMatching = async (): Promise<BattleSDK> => {
@@ -457,8 +444,7 @@ export class Game {
         await this._api.disconnectWebsocket();
         return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
       } catch(e) {
-        const postNetworkError = {type: 'GotoTitle'};
-        this._domDialogs.startNetworkError(this._resources, postNetworkError);
+        this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
         throw e;
       }
     };
@@ -470,8 +456,7 @@ export class Game {
           this._domDialogs.hidden();
           return update;
         } catch(e) {
-          const postNetworkError = {type: 'GotoTitle'};
-          this._domDialogs.startNetworkError(this._resources, postNetworkError);
+          this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
           throw e;
         }
       }
@@ -480,8 +465,7 @@ export class Game {
       this._domDialogs.startMatching(this._resources);
       const battle = await waitUntilMatching();
       this._suddenlyBattleEnd.bind(battle);
-      const subFlow = {type: 'Battle'};
-      this._inProgress = {...origin, subFlow};
+      this._inProgress = {...origin, subFlow: {type: 'Battle'}};
 
       await this._fader.fadeOut();
       this._domDialogs.hidden();
@@ -491,15 +475,15 @@ export class Game {
       const progress = createBattleProgress(battle);
       const config = configFromLocalStorage() ?? DefaultConfig;
       const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_01,
-        config.webGLPixelRatio, progress, battle.player, battle.enemy, battle.initialState);
+        config.webGLPixelRatio, 1 / config.battleAnimationSpeed, progress, battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
-      const stoppingBGM = (async () => {
+      await Promise.all([(async () => {
+        await this._fader.fadeOut();
+        this._domScenes.hidden();  
+      })(), (async () => {
         await this._bgm.do(fadeOut);
         await this._bgm.do(stop);
-      })();
-      await this._fader.fadeOut();
-      this._domScenes.hidden();
-      await stoppingBGM;
+      })()]);
       await this._fader.fadeIn();
       await battleScene.start();
     };
@@ -540,8 +524,7 @@ export class Game {
     const stages = NPCBattleCourses
       .find(v => v.armdozerId === armdozerId && v.difficulty === action.difficulty)?.stages ?? DefaultStages;
     const npcBattleState = startNPCBattle(player, stages);
-    const subFlow = {type: 'PlayingNPCBattle', state: npcBattleState};
-    this._inProgress = {...npcBattle, subFlow};
+    this._inProgress = {...npcBattle, subFlow: {type: 'PlayingNPCBattle', state: npcBattleState}};
     const stage = getCurrentStage(npcBattleState) ?? DefaultStage;
     const level = getStageLevel(npcBattleState);
     await this._startNPCBattleStage(player, stage, level);
@@ -555,8 +538,7 @@ export class Game {
       return;
     }
 
-    const playerSelect = {type: 'PlayerSelect'};
-    this._inProgress = {...this._inProgress, subFlow: playerSelect};
+    this._inProgress = {...this._inProgress, subFlow: {type: 'PlayerSelect'}};
     this._domDialogs.hidden();
   }
 
@@ -601,14 +583,14 @@ export class Game {
   async _onPostBattleAction(action: PostBattleAction): Promise<void> {
     const gotoTitle = async () => {
       this._inProgress = {type: 'None'};
-      const stoppingBGM = (async () => {
+      this._domFloaters.hiddenPostBattle();
+      const [title] = await Promise.all([(async () => {
+        await this._fader.fadeOut();
+        return await this._startTitle();  
+      })(), (async () => {
         await this._bgm.do(fadeOut);
         await this._bgm.do(stop);
-      })();
-      this._domFloaters.hiddenPostBattle();
-      await this._fader.fadeOut();
-      const title = await this._startTitle();
-      await stoppingBGM;
+      })()]);
       await this._fader.fadeIn();
       title.playBGM();
     };
@@ -643,8 +625,7 @@ export class Game {
    * バトル強制終了時の処理
    */
   async _onSuddenlyEndBattle(): Promise<void> {
-    const postNetworkError = {type: 'GotoTitle'};
-    this._domDialogs.startNetworkError(this._resources, postNetworkError);
+    this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
     this._suddenlyBattleEnd.unbind();
     await this._api.disconnectWebsocket();
   }
@@ -655,8 +636,7 @@ export class Game {
    * @param action アクション
    */
   _onWebSocketAPIError(action: WebSocketAPIError): void {
-    const postNetworkError = {type: 'GotoTitle'};
-    this._domDialogs.startNetworkError(this._resources, postNetworkError);
+    this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
     throw action;
   }
 
@@ -666,8 +646,7 @@ export class Game {
    * @param action アクション
    */
   _onWebSocketAPIUnintentionalClose(action: WebSocketAPIUnintentionalClose): void {
-    const postNetworkError = {type: 'GotoTitle'};
-    this._domDialogs.startNetworkError(this._resources, postNetworkError);
+    this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
     throw action;
   }
 
@@ -675,13 +654,13 @@ export class Game {
    * NPCバトルエンディングが終了した際の処理
    */
   async _onEndNPCEnding(): Promise<void> {
-    const stoppingBGM = (async () => {
+    const [title] = await Promise.all([(async () => {
+      await this._fader.fadeOut();
+      return await this._startTitle();  
+    })(), (async () => {
       await this._bgm.do(fadeOut);
       await this._bgm.do(stop);
-    })();
-    await this._fader.fadeOut();
-    const title = await this._startTitle();
-    await stoppingBGM;
+    })()]);
     await this._fader.fadeIn();
     title.playBGM();
   }
@@ -739,21 +718,20 @@ export class Game {
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
     const config = configFromLocalStorage() ?? DefaultConfig;
-    const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, stage.bgm, config.webGLPixelRatio,
-      {progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
+    const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, stage.bgm, config.webGLPixelRatio, 
+      1 / config.battleAnimationSpeed ,{progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
-    const battleSceneReadyTime = Date.now();
-    const latency = battleSceneReadyTime - startNPCStageTitleTime;
-    await waitTime(Math.max(3000- latency, 0));
-    const stoopingBGM = (async () => {
+    const latency = Date.now() - startNPCStageTitleTime;
+    await waitTime(3000- latency);
+
+    await Promise.all([(async () => {
+      await this._fader.fadeOut();
+      this._domScenes.hidden();
+    })(), (async () => {
       await this._bgm.do(fadeOut);
       await this._bgm.do(stop);
-    })();
-    await this._fader.fadeOut();
-    this._domScenes.hidden();
-    await stoopingBGM;
+    })()]);
     await this._fader.fadeIn();
-
     await battleScene.start();
   }
 

@@ -10,7 +10,7 @@ import {toOverlapStream} from "./overlap-event/overlap-event";
 import type {OverlapNotifier} from "./overla-notifier";
 import type {RendererDomGetter} from "./renderer-dom-getter";
 import type {Rendering} from "./rendering";
-import type {Stream, Unsubscriber} from "../stream/core";
+import type {Stream, Unsubscriber} from "../stream/stream";
 import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
 
 /** レンダラ管理オブジェクト */

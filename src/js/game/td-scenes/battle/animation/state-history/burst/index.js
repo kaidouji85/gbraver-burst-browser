@@ -6,7 +6,7 @@ import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {BurstEffect, GameStateX} from "gbraver-burst-core";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
-import {delay, empty} from "../../../../../../animation/delay";
+import {empty} from "../../../../../../animation/delay";
 import {castShinBraverBurst, shinBraverBurst} from "./shin-braver";
 import {castLightningDozerBurst, lightningDozerBurst} from "./lightning-dozer";
 import {castNeoLandozerBurst, neoLandozerBurst} from "./neo-landozer";
@@ -26,9 +26,7 @@ export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneSta
     return empty();
   }
 
-  return delay(500)
-    .chain(armdozerAnimation(param))
-    .chain(delay(500))
+  return armdozerAnimation(param);
 }
 
 /**

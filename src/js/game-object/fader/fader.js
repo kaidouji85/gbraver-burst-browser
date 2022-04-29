@@ -10,7 +10,7 @@ import {fadeIn} from "./animation/fade-in";
 import {fadeOut} from "./animation/fade-out";
 import {opacity} from "./animation/opacity";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/core";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /** コンストラクタのパラメータ */
 type Param = {

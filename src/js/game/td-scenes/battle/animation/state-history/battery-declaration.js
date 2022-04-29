@@ -19,7 +19,7 @@ import type {TDPlayer} from "../../view/td/player";
  */
 function declaration(td: TDPlayer, value: number): Animate {
   return td.batteryNumber.show(value)
-    .chain(delay(1000));
+    .chain(delay(800));
 }
 
 /**
@@ -65,7 +65,7 @@ function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
   return process(() => {
     sounds.batteryDeclaration.play();
   })
-    .chain(delay(700))
+    .chain(delay(600))
     .chain(process(()=> {
       sounds.batteryDeclaration.play();
     }))
@@ -117,7 +117,7 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
     defenderHUD.gauge.battery(defender.armdozer.battery),
     defenderDeclaration,
   ).chain(
-    delay(200),
+    delay(0),
     attackerTD.batteryNumber.hidden(),
     defenderTD.batteryNumber.hidden(),
     view.td.gameObjects.turnIndicator.invisible()

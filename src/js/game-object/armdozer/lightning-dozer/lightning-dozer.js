@@ -22,7 +22,7 @@ import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
 import {LightningDozerSounds} from "./sounds/lightning-dozer-sounds";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 
 /**
  * ライトニングドーザ

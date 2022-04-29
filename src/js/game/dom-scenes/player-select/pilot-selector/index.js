@@ -1,5 +1,4 @@
 // @flow
-
 import type {Resources} from "../../../../resource";
 import type {PilotId} from "gbraver-burst-core";
 import {PilotIcon} from "./pilot-icon";
@@ -9,12 +8,12 @@ import {replaceDOM} from "../../../../dom/replace/replace-dom";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {Exclusive} from "../../../../exclusive/exclusive";
-import {pushDOMStream} from "../../../../dom/push/push-dom";
 import type {PushDOM} from "../../../../dom/push/push-dom";
+import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {pop} from "../../../../dom/animation/pop";
 import {createPilotIcon} from "./create-pilot-icon";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/core";
-import {RxjsStreamSource} from "../../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
+import {createStreamSource} from "../../../../stream/stream";
 
 /**ルート要素のclass名 */
 export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
@@ -97,9 +96,9 @@ export class PilotSelector {
   constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
     this._pilotId = initialPilotId;
     this._exclusive = new Exclusive();
-    this._change = new RxjsStreamSource();
-    this._decide = new RxjsStreamSource();
-    this._prev = new RxjsStreamSource();
+    this._change = createStreamSource();
+    this._decide = createStreamSource();
+    this._prev = createStreamSource();
 
     this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();

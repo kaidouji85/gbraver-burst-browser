@@ -9,7 +9,7 @@ import {popUp} from "./animation/pop-up";
 import {LightningSounds} from "./sounds/lightning-sounds";
 import type {Resources} from "../../../resource";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 
 /**
  * 電撃ヒットマーク

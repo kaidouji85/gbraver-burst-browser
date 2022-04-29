@@ -10,7 +10,7 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {show} from "./animation/show";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/core";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 
 /**
  * シンブレイバーカットイン

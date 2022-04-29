@@ -2,15 +2,15 @@
 import {Howl} from 'howler';
 import type {DOMScene} from "../dom-scene";
 import type {Resources} from "../../../resource";
+import type {SoundResource} from "../../../resource/sound";
 import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/core";
-import {RxjsStreamSource} from "../../../stream/rxjs";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {PathIds} from "../../../resource/path";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {PushDOM} from "../../../dom/push/push-dom";
-import type {SoundResource} from "../../../resource/sound";
+import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeIn, play} from "../../../bgm/bgm-operators";
 
@@ -97,7 +97,7 @@ export class NPCEnding implements DOMScene {
     this._bgm = bgm;
     this._endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.BATTLE_BGM_02) ?? createEmptySoundResource();
     this._canOperation = true;
-    this._endNPCEnding = new RxjsStreamSource();
+    this._endNPCEnding = createStreamSource();
     this._unsubscriber = [
       pushDOMStream(this._root).subscribe(action => {
         this._onScreenPush(action);

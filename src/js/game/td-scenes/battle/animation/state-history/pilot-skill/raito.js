@@ -1,5 +1,5 @@
 // @flow
-import type {PilotSkill, DamageDecreaseSkill} from "gbraver-burst-core";
+import type {DamageDecreaseSkill, PilotSkill} from "gbraver-burst-core";
 import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
 import {RaitoHUD} from "../../../view/hud/pilot-objects/raito";
 import {Animate} from "../../../../../../animation/animate";
@@ -65,7 +65,7 @@ function raitoDamageDecrease(param: RaitoAnimationParamX<DamageDecreaseSkill>): 
     param.tdObjects.illumination.intensity(0.2, 500),
     param.tdObjects.turnIndicator.invisible(),
   )
-    .chain(delay(1000))
+    .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
     .chain(delay(200))
     .chain(param.invokerTD.armdozerEffects.damageDecrease.popUp())

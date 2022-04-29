@@ -1,7 +1,7 @@
 // @flow
 
-import {battleResult, updateDefender, isPlayerDeath, correctedBattery} from "gbraver-burst-core";
 import type {PlayerState} from "gbraver-burst-core";
+import {battleResult, correctedBattery, isPlayerDeath, updateDefender} from "gbraver-burst-core";
 
 /**
  * 攻撃側が防御側を倒すことができるか否かを判定する

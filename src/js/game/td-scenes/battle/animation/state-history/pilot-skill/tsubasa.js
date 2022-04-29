@@ -1,6 +1,6 @@
 // @flow
 import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
-import type {PilotSkill, BatteryEnchantmentSkill} from "gbraver-burst-core";
+import type {BatteryEnchantmentSkill, PilotSkill} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {all} from "../../../../../../animation/all";
@@ -64,7 +64,7 @@ function tsubasaBatteryEnchantment(param: TsubasaAnimationParamX<BatteryEnchantm
     param.tdObjects.illumination.intensity(0.2, 500),
     param.tdObjects.turnIndicator.invisible(),
   )
-    .chain(delay(1000))
+    .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
     .chain(delay(200))
     .chain(param.invokerTD.armdozerEffects.batteryEnchantment.popUp())

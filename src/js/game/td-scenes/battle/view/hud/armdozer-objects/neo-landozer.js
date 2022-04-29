@@ -7,7 +7,7 @@ import type {Resources} from "../../../../../../resource";
 import {enemyNeoLandozerCutIn, playerNeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer";
 import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../../stream/core";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * HUDレイヤー ネオランドーザ固有オブジェクト フィールド

@@ -1,7 +1,7 @@
 // @flow
 
-import {canPilotButtonPush} from "../../../../../../src/js/game/td-scenes/battle/ui-logic/pilot-button";
 import type {Command} from "gbraver-burst-core";
+import {canPilotButtonPush} from "../../../../../src/js/game/td-scenes/battle/ui-logic";
 
 test('パイロットスキルコマンドが利用できる場合、パイロットボタンが押せる', () => {
   const commands: Command[] = [

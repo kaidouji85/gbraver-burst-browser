@@ -2,7 +2,7 @@
 
 import type {TDArmdozerObjects} from "../../../../view/td/armdozer-objects/armdozer-objects";
 import {BattleSceneView} from "../../../../view";
-import type {GameStateX, GameEndX, GameOver } from "gbraver-burst-core";
+import type {GameEndX, GameOver, GameStateX} from "gbraver-burst-core";
 import {TDCamera} from "../../../../../../../game-object/camera/td";
 
 /**

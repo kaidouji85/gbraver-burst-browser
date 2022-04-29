@@ -1,10 +1,10 @@
 // @flow
 
 import type {PilotId} from 'gbraver-burst-core';
+import {PilotIds} from 'gbraver-burst-core';
 import {PilotBustShot} from "./pilot-bust-shot";
 import type {Resources} from '../../../../resource';
 import {PathIds} from "../../../../resource/path";
-import { PilotIds } from 'gbraver-burst-core';
 
 /**
  * ルート要素のクラス名

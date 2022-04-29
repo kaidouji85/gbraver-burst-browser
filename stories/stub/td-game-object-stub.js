@@ -1,5 +1,4 @@
 // @flow
-
 import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
 import type {Resize} from "../../src/js/window/resize";
@@ -17,9 +16,9 @@ import {TDCamera} from "../../src/js/game-object/camera/td";
 import {StorybookResourceRoot} from "../storybook-resource-root";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
-import {RxjsStreamSource} from "../../src/js/stream/rxjs";
-import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/core";
+import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/stream";
 import type {Resources} from "../../src/js/resource";
+import {createStreamSource} from "../../src/js/stream/stream";
 
 /** Object3D生成関数パラメータ */
 type Object3DCreatorParams = {
@@ -67,8 +66,8 @@ export class TDGameObjectStub {
     this._safeAreaInset = createSafeAreaInset();
     this._resize = resizeStream();
     this._gameLoop = gameLoopStream();
-    this._update = new RxjsStreamSource();
-    this._preRender = new RxjsStreamSource();
+    this._update = createStreamSource();
+    this._preRender = createStreamSource();
 
     this._renderer = new Renderer(this._resize);
     this._scene = new THREE.Scene();
