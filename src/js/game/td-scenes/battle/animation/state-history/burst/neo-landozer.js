@@ -64,7 +64,7 @@ function neoLandozerBuffPower(param: NeoLandozerBurst<BuffPower>): Animate {
     param.hudObjects.rearmostFader.opacity(0.6, 500),
     param.tdObjects.turnIndicator.invisible(),
   )
-    .chain(delay(1000))
+    .chain(delay(800))
     .chain(all(
       param.burstArmdozerHUD.cutIn.hidden(),
       param.hudObjects.rearmostFader.opacity(0, 300)
