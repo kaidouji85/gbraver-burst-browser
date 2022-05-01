@@ -141,10 +141,9 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this._view.hud.gameObjects.batterySelector.close())
       );
-
       const lastState = await this._progressGame({type: 'BATTERY_COMMAND', battery: action.battery});
       if (lastState && lastState.effect.name === 'GameEnd') {
-        await this._onEndGame(lastState.effect);
+        await this._endGame(lastState.effect);
       }
     });
   }
@@ -167,7 +166,7 @@ export class BattleScene implements Scene {
       );
       const lastState = await this._progressGame({type: 'BURST_COMMAND'});
       if (lastState && lastState.effect.name === 'GameEnd') {
-        await this._onEndGame(lastState.effect);
+        await this._endGame(lastState.effect);
       }
     });
   }
@@ -188,10 +187,9 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this._view.hud.gameObjects.pilotButton.close())
       );
-
       const lastState = await this._progressGame({type: 'PILOT_SKILL_COMMAND'});
       if (lastState && lastState.effect.name === 'GameEnd') {
-        await this._onEndGame(lastState.effect);
+        await this._endGame(lastState.effect);
       }
     });
   }
@@ -225,12 +223,12 @@ export class BattleScene implements Scene {
   }
 
   /**
-   * ゲーム終了時の処理
+   * ゲームを終了させる
    *
    * @param gameEnd ゲーム終了情報
    * @return 処理が完了したら発火するPromise
    */
-  async _onEndGame(gameEnd: GameEnd): Promise<void> {
+  async _endGame(gameEnd: GameEnd): Promise<void> {
     await this._bgm.do(fadeOut)
     await this._bgm.do(stop);
     this._endBattle.next(gameEnd);
