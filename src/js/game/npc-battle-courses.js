@@ -1,22 +1,22 @@
 // @flow
-import {normalNeoLandozer} from "../npc/normal-neo-landozer";
+import {hardNeoLandozer} from "../npc/hard-neo-landozer";
 import {SOUND_IDS} from "../resource/sound";
 import type {NPCBattleStage} from "./npc-battle";
 import {oneBatteryNeoLandozerNPC, oneBatteryShinBraverNPC} from "../npc/one-battery";
 import {maxBatteryAttackShinBraverNPC, maxBatteryAttackWingDozerNPC} from "../npc/max-battery-attack";
 import {attack3Defense2LightningDozerNPC, attack3Defense2ShinBraverNPC} from "../npc/attack-3-defense-2";
-import {normalShinBraver} from "../npc/normal-shin-braver";
-import {normalWingDozer} from "../npc/normal-wing-dozer";
-import {normalLightningDozer} from "../npc/normal-lightning-dozer";
 import {hardShinBraver} from "../npc/hard-shin-braver";
-import {hardWingDozerNPC} from "../npc/hard-wing-dozer";
-import {hardNeoLandozer} from "../npc/hard-neo-landozer";
+import {hardWingDozer} from "../npc/hard-wing-dozer";
 import {hardLightningDozer} from "../npc/hard-lightning-dozer";
+import {veryHardShinBraver} from "../npc/very-hard-shin-braver";
+import {veryHardWingDozerNPC} from "../npc/very-hard-wing-dozer";
+import {veryHardNeoLandozer} from "../npc/very-hard-neo-landozer";
+import {veryHardLightningDozer} from "../npc/very-hard-lightning-dozer";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 
 /** NPCバトルコース難易度 */
-export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard';
+export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard' | 'VeryHard';
 
 /**
  * NPCバトルコースマスタ
@@ -73,66 +73,66 @@ const Attack3Defense2ShinBraverStage: NPCBattleStage = {
   bgm: SOUND_IDS.BATTLE_BGM_03,
 };
 
-/** ノーマルコース シンブレイバー */
-const NormalShinBraverStage: NPCBattleStage = {
-  caption: ['バーストでバッテリー', '回復せよ'],
-  npc: normalShinBraver(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
-};
-
-/** ノーマルコース ネオランドーザ */
-const NormalNeoLandozerStage: NPCBattleStage = {
-  caption: ['同じバッテリーならダメージ', '半減'],
-  npc: normalNeoLandozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_03,
-};
-
-/** ノーマルコース ウィングドーザ */
-const NormalWingDozerStage: NPCBattleStage = {
-  caption: ['バースト、', 'パイロットをフル活用しろ'],
-  npc: normalWingDozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
-};
-
-/** ノーマルコース ライトニングドーザ */
-const NormalLightningDozer: NPCBattleStage = {
-  caption: ['0攻撃で', 'バリアをやり過ごせ'],
-  npc: normalLightningDozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_02,
-};
-
 /** ハードコース シンブレイバー */
-const HardShinBraver: NPCBattleStage = {
-  caption: ['荒削りの英雄、', 'シンブレイバー'],
+const HardShinBraverStage: NPCBattleStage = {
+  caption: ['バーストでバッテリー', '回復せよ'],
   npc: hardShinBraver(),
   bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
-/** ハードコース ウィングドーザ */
-const HardWingDozer: NPCBattleStage = {
-  caption: ['音速の騎士、', 'ウィングドーザ'],
-  npc: hardWingDozerNPC(),
+/** ハードコース ネオランドーザ */
+const HardNeoLandozerStage: NPCBattleStage = {
+  caption: ['同じバッテリーならダメージ', '半減'],
+  npc: hardNeoLandozer(),
   bgm: SOUND_IDS.BATTLE_BGM_03,
 };
 
-/** ハードコース ネオランドーザ */
-const HardNeoLandozer: NPCBattleStage = {
-  caption: ['究極の破壊神、', 'ネオランドーザ'],
-  npc: hardNeoLandozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_02,
+/** ハードコース ウィングドーザ */
+const HardWingDozerStage: NPCBattleStage = {
+  caption: ['バースト、', 'パイロットをフル活用しろ'],
+  npc: hardWingDozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ハードコース ライトニングドーザ */
 const HardLightningDozer: NPCBattleStage = {
-  caption: ['不屈の守護神、', 'ライトニングドーザ'],
+  caption: ['0攻撃で', 'バリアをやり過ごせ'],
   npc: hardLightningDozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_02,
+};
+
+/** ベリーハードコース シンブレイバー */
+const VeryHardShinBraver: NPCBattleStage = {
+  caption: ['荒削りの英雄、', 'シンブレイバー'],
+  npc: veryHardShinBraver(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
+};
+
+/** ベリーハードコース ウィングドーザ */
+const VeryHardWingDozer: NPCBattleStage = {
+  caption: ['音速の騎士、', 'ウィングドーザ'],
+  npc: veryHardWingDozerNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_03,
+};
+
+/** ベリーハードコース ネオランドーザ */
+const VeryHardNeoLandozer: NPCBattleStage = {
+  caption: ['究極の破壊神、', 'ネオランドーザ'],
+  npc: veryHardNeoLandozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_02,
+};
+
+/** ベリーハードコース ライトニングドーザ */
+const VeryHardLightningDozer: NPCBattleStage = {
+  caption: ['不屈の守護神、', 'ライトニングドーザ'],
+  npc: veryHardLightningDozer(),
   bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** デフォルトのステージ */
 export const DefaultStage: NPCBattleStage = {
   caption: ['敵よりも大きい', 'バッテリーを出せ'],
-  npc: normalNeoLandozer(),
+  npc: hardNeoLandozer(),
   bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
@@ -155,20 +155,20 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
-    difficulty: 'Normal',
+    difficulty: 'Hard',
     stages: [
-      NormalWingDozerStage,
-      NormalLightningDozer,
-      NormalNeoLandozerStage,
+      HardWingDozerStage,
+      HardLightningDozer,
+      HardNeoLandozerStage,
     ]
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
-    difficulty: 'Hard',
+    difficulty: 'VeryHard',
     stages: [
-      HardLightningDozer,
-      HardNeoLandozer,
-      HardWingDozer,
+      VeryHardLightningDozer,
+      VeryHardNeoLandozer,
+      VeryHardWingDozer,
     ]
   },
   {
@@ -182,20 +182,20 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
-    difficulty: 'Normal',
+    difficulty: 'Hard',
     stages: [
-      NormalShinBraverStage,
-      NormalWingDozerStage,
-      NormalLightningDozer,
+      HardShinBraverStage,
+      HardWingDozerStage,
+      HardLightningDozer,
     ]
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
-    difficulty: 'Hard',
+    difficulty: 'VeryHard',
     stages: [
-      HardLightningDozer,
-      HardShinBraver,
-      HardWingDozer,
+      VeryHardLightningDozer,
+      VeryHardShinBraver,
+      VeryHardWingDozer,
     ]
   },
   {
@@ -209,20 +209,20 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
-    difficulty: 'Normal',
+    difficulty: 'Hard',
     stages: [
-      NormalShinBraverStage,
-      NormalWingDozerStage,
-      NormalNeoLandozerStage,
+      HardShinBraverStage,
+      HardWingDozerStage,
+      HardNeoLandozerStage,
     ]
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
-    difficulty: 'Hard',
+    difficulty: 'VeryHard',
     stages: [
-      HardNeoLandozer,
-      HardShinBraver,
-      HardWingDozer,
+      VeryHardNeoLandozer,
+      VeryHardShinBraver,
+      VeryHardWingDozer,
     ]
   },
   {
@@ -236,20 +236,20 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
-    difficulty: 'Normal',
+    difficulty: 'Hard',
     stages: [
-      NormalShinBraverStage,
-      NormalLightningDozer,
-      NormalNeoLandozerStage,
+      HardShinBraverStage,
+      HardLightningDozer,
+      HardNeoLandozerStage,
     ]
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
-    difficulty: 'Hard',
+    difficulty: 'VeryHard',
     stages: [
-      HardLightningDozer,
-      HardShinBraver,
-      HardNeoLandozer,
+      VeryHardLightningDozer,
+      VeryHardShinBraver,
+      VeryHardNeoLandozer,
     ]
   },
 ];
