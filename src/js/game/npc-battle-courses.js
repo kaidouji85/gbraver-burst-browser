@@ -14,6 +14,7 @@ import {veryHardNeoLandozer} from "../npc/very-hard-neo-landozer";
 import {veryHardLightningDozer} from "../npc/very-hard-lightning-dozer";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
+import {attack4Defense1LightningDozerNPC, attack4Defense1ShinBraverNPC} from "../npc/attack-4-defense-1";
 
 /** NPCバトルコース難易度 */
 export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard' | 'VeryHard';
@@ -71,6 +72,20 @@ const Attack3Defense2ShinBraverStage: NPCBattleStage = {
   caption: Attack3Defense2LightningDozerStage.caption,
   npc: attack3Defense2ShinBraverNPC(),
   bgm: SOUND_IDS.BATTLE_BGM_03,
+};
+
+/** 4攻撃1防御 ライトニングドーザ */
+const Attack4Defense1LightningDozer: NPCBattleStage = {
+  caption: ['攻撃にはバッテリーを', '2以上使え'],
+  npc: attack4Defense1LightningDozerNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
+};
+
+/** 4攻撃1防御 シンブレイバー */
+const Attack4Defense1ShinBraver: NPCBattleStage = {
+  caption: Attack4Defense1LightningDozer.caption,
+  npc: attack4Defense1ShinBraverNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ハードコース シンブレイバー */
@@ -155,6 +170,13 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
+    difficulty: 'Normal',
+    stages: [
+      Attack4Defense1LightningDozer,
+    ]
+  },
+  {
+    armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Hard',
     stages: [
       HardWingDozerStage,
@@ -178,6 +200,13 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
       OneBatteryShinBraverStage,
       MaxAttackWingDozerStage,
       Attack3Defense2LightningDozerStage
+    ]
+  },
+  {
+    armdozerId: ArmDozerIdList.NEO_LANDOZER,
+    difficulty: 'Normal',
+    stages: [
+      Attack4Defense1LightningDozer
     ]
   },
   {
@@ -209,6 +238,13 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
+    difficulty: 'Normal',
+    stages: [
+      Attack4Defense1ShinBraver,
+    ]
+  },
+  {
+    armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Hard',
     stages: [
       HardShinBraverStage,
@@ -232,6 +268,13 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
       OneBatteryNeoLandozerStage,
       MaxAttackShinBraverStage,
       Attack3Defense2LightningDozerStage
+    ]
+  },
+  {
+    armdozerId: ArmDozerIdList.WING_DOZER,
+    difficulty: 'Normal',
+    stages: [
+      Attack4Defense1LightningDozer,
     ]
   },
   {
