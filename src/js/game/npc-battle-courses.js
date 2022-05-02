@@ -15,6 +15,7 @@ import {veryHardLightningDozer} from "../npc/very-hard-lightning-dozer";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {attack4Defense1LightningDozerNPC, attack4Defense1ShinBraverNPC} from "../npc/attack-4-defense-1";
+import {prioritizeDefenseNeoLandozer, prioritizeDefenseShinBraverNPC} from "../npc/prioritize-defense";
 
 /** NPCバトルコース難易度 */
 export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard' | 'VeryHard';
@@ -86,6 +87,20 @@ const Attack4Defense1ShinBraver: NPCBattleStage = {
   caption: Attack4Defense1LightningDozer.caption,
   npc: attack4Defense1ShinBraverNPC(),
   bgm: SOUND_IDS.BATTLE_BGM_01,
+};
+
+/** 防御優先 ネオランドーザ */
+const PrioritizeDefenseNeoLandozer: NPCBattleStage = {
+  caption: ['0攻撃で敵を', '消耗させろ'],
+  npc: prioritizeDefenseNeoLandozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_02,
+};
+
+/** 防御優先 シンブレイバー */
+const PrioritizeDefenseShinBraver: NPCBattleStage = {
+  caption: PrioritizeDefenseNeoLandozer.caption,
+  npc: prioritizeDefenseShinBraverNPC(),
+  bgm: SOUND_IDS.BATTLE_BGM_02,
 };
 
 /** ハードコース シンブレイバー */
@@ -173,6 +188,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: 'Normal',
     stages: [
       Attack4Defense1LightningDozer,
+      PrioritizeDefenseNeoLandozer,
     ]
   },
   {
@@ -206,7 +222,8 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Normal',
     stages: [
-      Attack4Defense1LightningDozer
+      Attack4Defense1LightningDozer,
+      PrioritizeDefenseShinBraver,
     ]
   },
   {
@@ -241,6 +258,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: 'Normal',
     stages: [
       Attack4Defense1ShinBraver,
+      PrioritizeDefenseNeoLandozer,
     ]
   },
   {
@@ -275,6 +293,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: 'Normal',
     stages: [
       Attack4Defense1LightningDozer,
+      PrioritizeDefenseNeoLandozer,
     ]
   },
   {
