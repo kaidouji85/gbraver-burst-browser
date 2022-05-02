@@ -43,12 +43,12 @@ const defenseRoutine: SimpleRoutine = ({commands, enemy, player}) => {
 };
 
 /**
- * 防御優先、ネオランドーザNPC
+ * 防御優先、ウィングドーザNPC
  *
  * @return NPC
  */
-export function prioritizeDefenseNeoLandozer(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) ?? ArmDozers[0];
+export function prioritizeDefenseWingDozer(): NPC {
+  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.WING_DOZER) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === PilotIds.RAITO) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

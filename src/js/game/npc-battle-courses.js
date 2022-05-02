@@ -15,7 +15,7 @@ import {veryHardLightningDozer} from "../npc/very-hard-lightning-dozer";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {attack4Defense1LightningDozerNPC, attack4Defense1ShinBraverNPC} from "../npc/attack-4-defense-1";
-import {prioritizeDefenseNeoLandozer, prioritizeDefenseShinBraverNPC} from "../npc/prioritize-defense";
+import {prioritizeDefenseWingDozer, prioritizeDefenseShinBraverNPC} from "../npc/prioritize-defense";
 import {burstAttack5NeoLandozer} from "../npc/burst-attack-5-neo-landozer";
 
 /** NPCバトルコース難易度 */
@@ -90,16 +90,16 @@ const Attack4Defense1ShinBraver: NPCBattleStage = {
   bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
-/** 防御優先 ネオランドーザ */
-const PrioritizeDefenseNeoLandozer: NPCBattleStage = {
+/** 防御優先 ウィングドーザ */
+const PrioritizeDefenseWingDozer: NPCBattleStage = {
   caption: ['0攻撃で敵を', '消耗させろ'],
-  npc: prioritizeDefenseNeoLandozer(),
+  npc: prioritizeDefenseWingDozer(),
   bgm: SOUND_IDS.BATTLE_BGM_02,
 };
 
 /** 防御優先 シンブレイバー */
 const PrioritizeDefenseShinBraver: NPCBattleStage = {
-  caption: PrioritizeDefenseNeoLandozer.caption,
+  caption: PrioritizeDefenseWingDozer.caption,
   npc: prioritizeDefenseShinBraverNPC(),
   bgm: SOUND_IDS.BATTLE_BGM_02,
 };
@@ -196,7 +196,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: 'Normal',
     stages: [
       Attack4Defense1LightningDozer,
-      PrioritizeDefenseNeoLandozer,
+      PrioritizeDefenseWingDozer,
       BurstAttack5NeoLandozder,
     ]
   },
@@ -232,7 +232,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: 'Normal',
     stages: [
       Attack4Defense1LightningDozer,
-      PrioritizeDefenseShinBraver,
+      PrioritizeDefenseWingDozer,
     ]
   },
   {
@@ -267,7 +267,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: 'Normal',
     stages: [
       Attack4Defense1ShinBraver,
-      PrioritizeDefenseNeoLandozer,
+      PrioritizeDefenseWingDozer,
       BurstAttack5NeoLandozder,
     ]
   },
@@ -303,7 +303,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: 'Normal',
     stages: [
       Attack4Defense1LightningDozer,
-      PrioritizeDefenseNeoLandozer,
+      PrioritizeDefenseShinBraver,
       BurstAttack5NeoLandozder,
     ]
   },
