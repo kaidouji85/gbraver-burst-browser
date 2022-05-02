@@ -16,6 +16,7 @@ import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {attack4Defense1LightningDozerNPC, attack4Defense1ShinBraverNPC} from "../npc/attack-4-defense-1";
 import {prioritizeDefenseNeoLandozer, prioritizeDefenseShinBraverNPC} from "../npc/prioritize-defense";
+import {burstAttack5NeoLandozer} from "../npc/burst-attack-5-neo-landozer";
 
 /** NPCバトルコース難易度 */
 export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard' | 'VeryHard';
@@ -101,6 +102,13 @@ const PrioritizeDefenseShinBraver: NPCBattleStage = {
   caption: PrioritizeDefenseNeoLandozer.caption,
   npc: prioritizeDefenseShinBraverNPC(),
   bgm: SOUND_IDS.BATTLE_BGM_02,
+};
+
+/** 5攻撃+バースト ネオランドーザ */
+const BurstAttack5NeoLandozder: NPCBattleStage = {
+  caption: ['同じバッテリーだとダメージ','半減'],
+  npc: burstAttack5NeoLandozer(),
+  bgm: SOUND_IDS.BATTLE_BGM_03,
 };
 
 /** ハードコース シンブレイバー */
@@ -189,6 +197,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     stages: [
       Attack4Defense1LightningDozer,
       PrioritizeDefenseNeoLandozer,
+      BurstAttack5NeoLandozder,
     ]
   },
   {
@@ -259,6 +268,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     stages: [
       Attack4Defense1ShinBraver,
       PrioritizeDefenseNeoLandozer,
+      BurstAttack5NeoLandozder,
     ]
   },
   {
@@ -294,6 +304,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     stages: [
       Attack4Defense1LightningDozer,
       PrioritizeDefenseNeoLandozer,
+      BurstAttack5NeoLandozder,
     ]
   },
   {
