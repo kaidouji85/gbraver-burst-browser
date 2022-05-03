@@ -15,7 +15,7 @@ import {veryHardLightningDozer} from "../npc/very-hard-lightning-dozer";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import {attack4Defense1LightningDozerNPC, attack4Defense1ShinBraverNPC} from "../npc/attack-4-defense-1";
-import {prioritizeDefenseWingDozer, prioritizeDefenseShinBraverNPC} from "../npc/prioritize-defense";
+import {prioritizeDefenseShinBraverNPC, prioritizeDefenseWingDozer} from "../npc/prioritize-defense";
 import {burstAttack5NeoLandozer} from "../npc/burst-attack-5-neo-landozer";
 import {fullAttackWingDozer} from "../npc/full-attack-wing-dozer";
 
