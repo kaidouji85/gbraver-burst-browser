@@ -1,7 +1,13 @@
 // @flow
 import {Howl} from "howler";
 import type {BattleAnimationSpeed, GbraverBurstBrowserConfig, WebGLPixelRatio} from "../../config/browser-config";
-import {BattleAnimationSpeeds, isConfigChanged, parseBattleAnimationSpeed, parseWebGLPixelRatio, WebGLPixelRatios} from "../../config/browser-config";
+import {
+  BattleAnimationSpeeds,
+  isConfigChanged,
+  parseBattleAnimationSpeed,
+  parseWebGLPixelRatio,
+  WebGLPixelRatios
+} from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
