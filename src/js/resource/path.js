@@ -50,6 +50,10 @@ export const PathIds = {
   CLOSER: 'CLOSER',
   PLAY_IN_LANDSCAPE: 'PLAY_IN_LANDSCAPE',
   CHECK: 'CHECK',
+  NPC_COURSE_EASY_ICON: 'NPC_COURSE_EASY_ICON',
+  NPC_COURSE_NORMAL_ICON: 'NPC_COURSE_NORMAL_ICON',
+  NPC_COURSE_HARD_ICON: 'NPC_COURSE_HARD_ICON',
+  NPC_COURSE_VERY_HARD_ICON: 'NPC_COURSE_VERY_HARD_ICON',
 };
 
 /**
@@ -147,6 +151,22 @@ export const PathConfigs: PathConfig[] = [
   {
     id: PathIds.CHECK,
     path: root => `${root.get()}/check/check.webp`
+  },
+  {
+    id: PathIds.NPC_COURSE_EASY_ICON,
+    path: root => `${root.get()}/npc-course/easy.svg`
+  },
+  {
+    id: PathIds.NPC_COURSE_NORMAL_ICON,
+    path: root => `${root.get()}/npc-course/normal.svg`
+  },
+  {
+    id: PathIds.NPC_COURSE_HARD_ICON,
+    path: root => `${root.get()}/npc-course/hard.svg`
+  },
+  {
+    id: PathIds.NPC_COURSE_VERY_HARD_ICON,
+    path: root => `${root.get()}/npc-course/very-hard.svg`
   },
 ];
 
