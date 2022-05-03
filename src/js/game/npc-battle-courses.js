@@ -36,80 +36,69 @@ export type NPCBattleCourse = {
 };
 
 /** 1バッテリー ネオランドーザ */
-const OneBatteryNeoLandozerStage: NPCBattleStage = {
+const OneBatteryNeoLandozerStage = {
   caption: ['敵よりも大きい', 'バッテリーを出せ'],
   npc: oneBatteryNeoLandozerNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** 1バッテリー シンブレイバー */
-const OneBatteryShinBraverStage: NPCBattleStage = {
+const OneBatteryShinBraverStage = {
   caption: OneBatteryNeoLandozerStage.caption,
   npc: oneBatteryShinBraverNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** 全力攻撃 ウィングドーザ */
-const MaxAttackWingDozerStage: NPCBattleStage = {
+const MaxAttackWingDozerStage = {
   caption: ['ゼロ防御だと即', '死する'],
   npc: maxBatteryAttackWingDozerNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_02,
 };
 
 /** 全力攻撃 シンブレイバー */
-const MaxAttackShinBraverStage: NPCBattleStage = {
+const MaxAttackShinBraverStage = {
   caption: MaxAttackWingDozerStage.caption,
   npc: maxBatteryAttackShinBraverNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_02,
 };
 
 /** 3攻撃2防御 ライトングドーザ */
-const Attack3Defense2LightningDozerStage: NPCBattleStage = {
+const Attack3Defense2LightningDozerStage = {
   caption: ['相手のバッテリー', '切れを狙え'],
   npc: attack3Defense2LightningDozerNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_03,
 };
 
 /** 3攻撃2防御 シンブレイバー */
-const Attack3Defense2ShinBraverStage: NPCBattleStage = {
+const Attack3Defense2ShinBraverStage = {
   caption: Attack3Defense2LightningDozerStage.caption,
   npc: attack3Defense2ShinBraverNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_03,
 };
 
 /** 4攻撃1防御 ライトニングドーザ */
-const Attack4Defense1LightningDozer: NPCBattleStage = {
+const Attack4Defense1LightningDozer = {
   caption: ['攻撃にはバッテリーを', '2以上使え'],
   npc: attack4Defense1LightningDozerNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** 4攻撃1防御 シンブレイバー */
-const Attack4Defense1ShinBraver: NPCBattleStage = {
+const Attack4Defense1ShinBraver = {
   caption: Attack4Defense1LightningDozer.caption,
   npc: attack4Defense1ShinBraverNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** 防御優先 ウィングドーザ */
-const PrioritizeDefenseWingDozer: NPCBattleStage = {
+const PrioritizeDefenseWingDozer = {
   caption: ['0攻撃で敵を', '消耗させろ'],
   npc: prioritizeDefenseWingDozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_02,
 };
 
 /** 防御優先 シンブレイバー */
-const PrioritizeDefenseShinBraver: NPCBattleStage = {
+const PrioritizeDefenseShinBraver = {
   caption: PrioritizeDefenseWingDozer.caption,
   npc: prioritizeDefenseShinBraverNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_02,
 };
 
 /** 5攻撃+バースト ネオランドーザ */
-const BurstAttack5NeoLandozder: NPCBattleStage = {
+const BurstAttack5NeoLandozder = {
   caption: ['同じバッテリーだとダメージ','半減'],
   npc: burstAttack5NeoLandozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_03,
 };
 
 /** 攻撃全振り ウィングドーザ */
@@ -119,59 +108,51 @@ const FullAttackWingDozer = {
 };
 
 /** ハードコース シンブレイバー */
-const HardShinBraverStage: NPCBattleStage = {
+const HardShinBraverStage = {
   caption: ['バーストでバッテリー', '回復せよ'],
   npc: hardShinBraver(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ハードコース ネオランドーザ */
-const HardNeoLandozerStage: NPCBattleStage = {
+const HardNeoLandozerStage = {
   caption: ['同じバッテリーならダメージ', '半減'],
   npc: hardNeoLandozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_03,
 };
 
 /** ハードコース ウィングドーザ */
-const HardWingDozerStage: NPCBattleStage = {
+const HardWingDozerStage = {
   caption: ['バースト、', 'パイロットをフル活用しろ'],
   npc: hardWingDozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ハードコース ライトニングドーザ */
-const HardLightningDozer: NPCBattleStage = {
+const HardLightningDozer = {
   caption: ['0攻撃で', 'バリアをやり過ごせ'],
   npc: hardLightningDozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_02,
 };
 
 /** ベリーハードコース シンブレイバー */
-const VeryHardShinBraver: NPCBattleStage = {
+const VeryHardShinBraver = {
   caption: ['荒削りの英雄、', 'シンブレイバー'],
   npc: veryHardShinBraver(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** ベリーハードコース ウィングドーザ */
-const VeryHardWingDozer: NPCBattleStage = {
+const VeryHardWingDozer = {
   caption: ['音速の騎士、', 'ウィングドーザ'],
   npc: veryHardWingDozerNPC(),
-  bgm: SOUND_IDS.BATTLE_BGM_03,
 };
 
 /** ベリーハードコース ネオランドーザ */
-const VeryHardNeoLandozer: NPCBattleStage = {
+const VeryHardNeoLandozer = {
   caption: ['究極の破壊神、', 'ネオランドーザ'],
   npc: veryHardNeoLandozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_02,
 };
 
 /** ベリーハードコース ライトニングドーザ */
-const VeryHardLightningDozer: NPCBattleStage = {
+const VeryHardLightningDozer = {
   caption: ['不屈の守護神、', 'ライトニングドーザ'],
   npc: veryHardLightningDozer(),
-  bgm: SOUND_IDS.BATTLE_BGM_01,
 };
 
 /** デフォルトのステージ */
@@ -183,9 +164,9 @@ export const DefaultStage: NPCBattleStage = {
 
 /** デフォルトのステージ集合 */
 export const DefaultStages: NPCBattleStage[] = [
-  OneBatteryNeoLandozerStage,
-  MaxAttackWingDozerStage,
-  Attack3Defense2LightningDozerStage
+  {...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+  {...MaxAttackWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+  {...Attack3Defense2LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
 ];
 
 export const NPCBattleCourses: NPCBattleCourse[] = [
@@ -193,53 +174,53 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Easy',
     stages: [
-      OneBatteryNeoLandozerStage,
-      MaxAttackWingDozerStage,
-      Attack3Defense2LightningDozerStage
+      {...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...MaxAttackWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...Attack3Defense2LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Normal',
     stages: [
-      Attack4Defense1LightningDozer,
-      PrioritizeDefenseWingDozer,
-      BurstAttack5NeoLandozder,
+      {...Attack4Defense1LightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...PrioritizeDefenseWingDozer, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...BurstAttack5NeoLandozder, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Hard',
     stages: [
-      HardWingDozerStage,
-      HardLightningDozer,
-      HardNeoLandozerStage,
+      {...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'VeryHard',
     stages: [
-      VeryHardLightningDozer,
-      VeryHardNeoLandozer,
-      VeryHardWingDozer,
+      {...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...VeryHardWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Easy',
     stages: [
-      OneBatteryShinBraverStage,
-      MaxAttackWingDozerStage,
-      Attack3Defense2LightningDozerStage
+      {...OneBatteryShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...MaxAttackWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...Attack3Defense2LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03}
     ]
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Normal',
     stages: [
-      Attack4Defense1LightningDozer,
-      PrioritizeDefenseWingDozer,
+      {...Attack4Defense1LightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...PrioritizeDefenseWingDozer, bgm: SOUND_IDS.BATTLE_BGM_02},
       {...FullAttackWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03}
     ]
   },
@@ -247,90 +228,90 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'Hard',
     stages: [
-      HardShinBraverStage,
-      HardWingDozerStage,
-      HardLightningDozer,
+      {...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.NEO_LANDOZER,
     difficulty: 'VeryHard',
     stages: [
-      VeryHardLightningDozer,
-      VeryHardShinBraver,
-      VeryHardWingDozer,
+      {...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...VeryHardShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...VeryHardWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Easy',
     stages: [
-      OneBatteryNeoLandozerStage,
-      MaxAttackWingDozerStage,
-      Attack3Defense2ShinBraverStage
+      {...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...MaxAttackWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...Attack3Defense2ShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Normal',
     stages: [
-      Attack4Defense1ShinBraver,
-      PrioritizeDefenseWingDozer,
-      BurstAttack5NeoLandozder,
+      {...Attack4Defense1ShinBraver, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...PrioritizeDefenseWingDozer, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...BurstAttack5NeoLandozder, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Hard',
     stages: [
-      HardShinBraverStage,
-      HardWingDozerStage,
-      HardNeoLandozerStage,
+      {...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'VeryHard',
     stages: [
-      VeryHardNeoLandozer,
-      VeryHardShinBraver,
-      VeryHardWingDozer,
+      {...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...VeryHardShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...VeryHardWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Easy',
     stages: [
-      OneBatteryNeoLandozerStage,
-      MaxAttackShinBraverStage,
-      Attack3Defense2LightningDozerStage
+      {...OneBatteryNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...MaxAttackShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...Attack3Defense2LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Normal',
     stages: [
-      Attack4Defense1LightningDozer,
-      PrioritizeDefenseShinBraver,
-      BurstAttack5NeoLandozder,
+      {...Attack4Defense1LightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...PrioritizeDefenseShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...BurstAttack5NeoLandozder, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Hard',
     stages: [
-      HardShinBraverStage,
-      HardLightningDozer,
-      HardNeoLandozerStage,
+      {...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'VeryHard',
     stages: [
-      VeryHardLightningDozer,
-      VeryHardShinBraver,
-      VeryHardNeoLandozer,
+      {...VeryHardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...VeryHardShinBraver, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...VeryHardNeoLandozer, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
 ];
