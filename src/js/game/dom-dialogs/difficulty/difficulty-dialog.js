@@ -23,6 +23,7 @@ type DataIDs = {
   easy: string,
   normal: string,
   hard: string,
+  veryHard: string,
 };
 
 /**
@@ -43,6 +44,7 @@ function rootInnerHTML(resources: Resources, ids: DataIDs): string {
         <button class="${ROOT_CLASS}__dialog__controllers__easy" alt="easy-course" data-id="${ids.easy}">かんたん</button>
         <button class="${ROOT_CLASS}__dialog__controllers__normal" alt="normal-course" data-id="${ids.normal}">ふつう</button>
         <button class="${ROOT_CLASS}__dialog__controllers__hard" alt="hard-course" data-id="${ids.hard}">むずかしい</button>
+        <button class="${ROOT_CLASS}__dialog__controllers__hard" alt="very-hard-course" data-id="${ids.veryHard}">げきむず</button>
       </div>
     </div>  
   `;
@@ -55,6 +57,7 @@ type Elements = {
   easy: HTMLElement,
   normal: HTMLElement,
   hard: HTMLElement,
+  veryHard: HTMLElement,
 };
 
 /**
@@ -70,7 +73,8 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const easy = root.querySelector(`[data-id="${ids.easy}"]`) ?? document.createElement('div');
   const normal = root.querySelector(`[data-id="${ids.normal}"]`) ?? document.createElement('div');
   const hard = root.querySelector(`[data-id="${ids.hard}"]`) ?? document.createElement('div');
-  return {backGround, closer, easy, normal, hard};
+  const veryHard = root.querySelector(`[data-id="${ids.veryHard}"]`) ?? document.createElement('div');
+  return {backGround, closer, easy, normal, hard, veryHard};
 }
 
 /** 難易度選択ダイアログ */
@@ -80,6 +84,7 @@ export class DifficultyDialog implements DOMDialog {
   _easy: HTMLElement;
   _normal: HTMLElement;
   _hard: HTMLElement;
+  _veryHard: HTMLElement;
   _exclusive: Exclusive;
   _selectionComplete: StreamSource<NPCBattleCourseDifficulty>;
   _closeDialog: StreamSource<void>;
@@ -93,7 +98,7 @@ export class DifficultyDialog implements DOMDialog {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const ids = {backGround: domUuid(), closer: domUuid(), easy: domUuid(), normal: domUuid(), hard: domUuid()};
+    const ids = {backGround: domUuid(), closer: domUuid(), easy: domUuid(), normal: domUuid(), hard: domUuid(), veryHard: domUuid()};
     this._root = document.createElement('div');
     this._root.className = ROOT_CLASS;
     this._root.innerHTML = rootInnerHTML(resources, ids);
@@ -103,6 +108,7 @@ export class DifficultyDialog implements DOMDialog {
     this._easy = elements.easy;
     this._normal = elements.normal;
     this._hard = elements.hard;
+    this._veryHard = elements.veryHard;
     this._unsubscribers = [
       pushDOMStream(elements.backGround).subscribe(action => {
         this._onBackGroundPush(action);
@@ -119,6 +125,9 @@ export class DifficultyDialog implements DOMDialog {
       pushDOMStream(this._hard).subscribe(action => {
         this._onHardPush(action);
       }),
+      pushDOMStream(this._veryHard).subscribe(action => {
+        this._onVeryHardPush(action);
+      })
     ];
 
     this._selectionComplete = createStreamSource();
@@ -164,13 +173,11 @@ export class DifficultyDialog implements DOMDialog {
    * @param action アクション 
    */
   _onEasyPush(action: PushDOM): void {
+    action.event.preventDefault();
+    action.event.stopPropagation();
     this._exclusive.execute(async () => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
-      await Promise.all([
-        pop(this._easy),
-        this._pushButton.play()
-      ]);
+      this._pushButton.play();
+      await pop(this._easy);
       this._selectionComplete.next('Easy');
     });
   }
@@ -181,13 +188,11 @@ export class DifficultyDialog implements DOMDialog {
    * @param action アクション 
    */
   _onNormalPush(action: PushDOM): void {
+    action.event.preventDefault();
+    action.event.stopPropagation();
     this._exclusive.execute(async () => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
-      await Promise.all([
-        pop(this._normal),
-        this._pushButton.play()
-      ]) ;
+      this._pushButton.play();
+      await pop(this._normal);
       this._selectionComplete.next('Normal');
     });
   }
@@ -198,14 +203,27 @@ export class DifficultyDialog implements DOMDialog {
    * @param action アクション 
    */
   _onHardPush(action: PushDOM): void {
+    action.event.preventDefault();
+    action.event.stopPropagation();
     this._exclusive.execute(async () => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
-      await Promise.all([
-        pop(this._hard),
-        this._pushButton.play()
-      ]);
+      this._pushButton.play()
+      await pop(this._hard);
       this._selectionComplete.next('Hard');
+    });
+  }
+
+  /**
+   * VeryHardが押された際の処理
+   *
+   * @param action アクション
+   */
+  _onVeryHardPush(action: PushDOM): void {
+    action.event.preventDefault();
+    action.event.stopPropagation();
+    this._exclusive.execute(async () => {
+      this._pushButton.play();
+      await pop(this._veryHard);
+      this._selectionComplete.next('VeryHard');
     });
   }
 
@@ -215,13 +233,11 @@ export class DifficultyDialog implements DOMDialog {
    * @param action アクション 
    */
   _onCloserPush(action: PushDOM): void {
+    action.event.preventDefault();
+    action.event.stopPropagation();
     this._exclusive.execute(async () => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
-      await Promise.all([
-        pop(this._closer, 1.3),
-        this._changeValue.play()
-      ]) ;
+      this._changeValue.play();
+      await pop(this._closer, 1.3);
       this._closeDialog.next();
     });
   }
@@ -232,9 +248,9 @@ export class DifficultyDialog implements DOMDialog {
    * @param action アクション 
    */
   _onBackGroundPush(action: PushDOM): void {
+    action.event.preventDefault();
+    action.event.stopPropagation();
     this._exclusive.execute(async () => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
       await this._changeValue.play()
       this._closeDialog.next();
     });
