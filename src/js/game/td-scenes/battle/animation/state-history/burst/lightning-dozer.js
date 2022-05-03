@@ -85,5 +85,6 @@ function lightningBarrier(param: LightningDozerBurst<LightningBarrier>): Animate
       param.burstArmdozerTD.lightningDozer.gutsToStand(),
       param.tdObjects.skyBrightness.brightness(1, 500),
       param.tdObjects.illumination.intensity(1, 500),
-    ));
+    ))
+    .chain(delay(200));
 }
