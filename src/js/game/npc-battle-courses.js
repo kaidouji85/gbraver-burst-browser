@@ -17,6 +17,7 @@ import {ArmDozerIdList} from "gbraver-burst-core";
 import {attack4Defense1LightningDozerNPC, attack4Defense1ShinBraverNPC} from "../npc/attack-4-defense-1";
 import {prioritizeDefenseWingDozer, prioritizeDefenseShinBraverNPC} from "../npc/prioritize-defense";
 import {burstAttack5NeoLandozer} from "../npc/burst-attack-5-neo-landozer";
+import {fullAttackWingDozer} from "../npc/full-attack-wing-dozer";
 
 /** NPCバトルコース難易度 */
 export type NPCBattleCourseDifficulty = 'Easy' | 'Normal' | 'Hard' | 'VeryHard';
@@ -109,6 +110,12 @@ const BurstAttack5NeoLandozder: NPCBattleStage = {
   caption: ['同じバッテリーだとダメージ','半減'],
   npc: burstAttack5NeoLandozer(),
   bgm: SOUND_IDS.BATTLE_BGM_03,
+};
+
+/** 攻撃全振り ウィングドーザ */
+const FullAttackWingDozer = {
+  caption: ['バーストで相手を一', '撃粉砕せよ'],
+  npc: fullAttackWingDozer(),
 };
 
 /** ハードコース シンブレイバー */
@@ -233,6 +240,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     stages: [
       Attack4Defense1LightningDozer,
       PrioritizeDefenseWingDozer,
+      {...FullAttackWingDozer, bgm: SOUND_IDS.BATTLE_BGM_03}
     ]
   },
   {
