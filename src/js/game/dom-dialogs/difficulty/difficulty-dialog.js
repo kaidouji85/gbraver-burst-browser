@@ -35,16 +35,32 @@ type DataIDs = {
  */
 function rootInnerHTML(resources: Resources, ids: DataIDs): string {
   const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)?.path ?? '';
+  const easyIconPath = resources.paths.find(v => v.id === PathIds.NPC_COURSE_EASY_ICON)?.path ?? '';
+  const normalIconPath = resources.paths.find(v => v.id === PathIds.NPC_COURSE_NORMAL_ICON)?.path ?? '';
+  const hardIconPath = resources.paths.find(v => v.id === PathIds.NPC_COURSE_HARD_ICON)?.path ?? '';
+  const veryHardIconPath = resources.paths.find(v => v.id === PathIds.NPC_COURSE_VERY_HARD_ICON)?.path ?? '';
   return `
     <div class="${ROOT_CLASS}__background" data-id="${ids.backGround}"></div>
     <div class="${ROOT_CLASS}__dialog">
       <img class="${ROOT_CLASS}__dialog__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
       <div class="${ROOT_CLASS}__dialog__caption">難易度を選択してください</div>
       <div class="${ROOT_CLASS}__dialog__controllers">
-        <button class="${ROOT_CLASS}__dialog__controllers__easy" alt="easy-course" data-id="${ids.easy}">かんたん</button>
-        <button class="${ROOT_CLASS}__dialog__controllers__normal" alt="normal-course" data-id="${ids.normal}">ふつう</button>
-        <button class="${ROOT_CLASS}__dialog__controllers__hard" alt="hard-course" data-id="${ids.hard}">むずかしい</button>
-        <button class="${ROOT_CLASS}__dialog__controllers__hard" alt="very-hard-course" data-id="${ids.veryHard}">げきむず</button>
+        <div class="${ROOT_CLASS}__dialog__controllers__easy">
+          <img class="${ROOT_CLASS}__dialog__controllers__easy__icon" alt="易" src="${easyIconPath}">
+          <button class="${ROOT_CLASS}__dialog__controllers__easy__button" alt="easy-course" data-id="${ids.easy}">かんたん</button>
+        </div>
+        <div class="${ROOT_CLASS}__dialog__controllers__normal">
+          <img class="${ROOT_CLASS}__dialog__controllers__normal__icon" alt="普" src="${normalIconPath}">
+          <button class="${ROOT_CLASS}__dialog__controllers__normal__button" alt="normal-course" data-id="${ids.normal}">ふつう</button>
+        </div>
+        <div class="${ROOT_CLASS}__dialog__controllers__hard">
+          <img class="${ROOT_CLASS}__dialog__controllers__hard__icon" alt="難" src="${hardIconPath}">
+          <button class="${ROOT_CLASS}__dialog__controllers__hard__button" alt="hard-course" data-id="${ids.hard}">むずい</button>
+        </div>
+        <div class="${ROOT_CLASS}__dialog__controllers__very-hard">
+          <img class="${ROOT_CLASS}__dialog__controllers__very-hard__icon" alt="檄" src="${veryHardIconPath}">
+          <button class="${ROOT_CLASS}__dialog__controllers__very-hard__button" alt="very-hard-course" data-id="${ids.veryHard}">げきむず</button>
+        </div>
       </div>
     </div>  
   `;
