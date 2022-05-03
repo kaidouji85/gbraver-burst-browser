@@ -46,6 +46,10 @@ const defenseRoutine: SimpleRoutine = data => {
   const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
 
+  if (data.enemy.armdozer.battery === 0 && burst) {
+    return burst;
+  }
+
   if (burst && allBattery) {
     return allBattery;
   }
