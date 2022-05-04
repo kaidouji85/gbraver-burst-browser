@@ -8,7 +8,7 @@ import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
-import {HUDUIScale} from "../../../hud-scale/hud-scale";
+import {HUDUIScale} from "../../scale";
 import type {ArmdozerIcon} from "./armdozer-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
@@ -110,7 +110,7 @@ export class BurstButtonView {
     const disabledOpacity = model.canBurst ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
 
-    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const devicePerScale = HUDUIScale(preRender.rendererDOM);
 
     this._group.scale.set(
       GROUP_SCALE * devicePerScale * model.scale,

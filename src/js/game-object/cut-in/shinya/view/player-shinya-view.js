@@ -7,7 +7,7 @@ import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {ShinyaModel} from "../model/shinya-model";
 import type {ShinyaView} from "./shinya-view";
 import type {PreRender} from "../../../../game-loop/pre-render";
-import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
+import {HUDCutInScale} from "../../../scale";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */

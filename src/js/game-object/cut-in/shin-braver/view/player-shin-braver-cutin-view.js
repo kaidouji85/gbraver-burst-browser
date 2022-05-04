@@ -8,7 +8,7 @@ import type {AnimationType, ShinBraverCutInModel} from "../model/shin-braver-cut
 import type {PreRender} from "../../../../game-loop/pre-render";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 import type {ShinBraverCutInView} from "./shin-braver-cutin-view";
-import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
+import {HUDCutInScale} from "../../../scale";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 800;

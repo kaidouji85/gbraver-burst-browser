@@ -8,7 +8,7 @@ import {BatteryPlus} from "./battery-plus";
 import {BatteryMinus} from "./battery-minus";
 import type {BatterySelectorModel} from "../model";
 import type {PreRender} from "../../../game-loop/pre-render";
-import {HUDUIScale} from "../../../hud-scale/hud-scale";
+import {HUDUIScale} from "../../scale";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
 
@@ -106,7 +106,7 @@ export class BatterySelectorView {
     this._plus.update(model);
     this._minus.update(model);
 
-    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const devicePerScale = HUDUIScale(preRender.rendererDOM);
     const scale = devicePerScale * GROUP_SCALE;
     this._group.scale.set(scale, scale, scale);
     this._group.position.x = preRender.rendererDOM.clientWidth / 2 -preRender.safeAreaInset.right -PADDING_RIGHT * devicePerScale;
