@@ -1,5 +1,4 @@
 // @flow
-
 import * as THREE from 'three';
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
@@ -12,15 +11,6 @@ import {HUDUIScale} from "../../scale";
 import type {ArmdozerIcon} from "./armdozer-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
-
-/** 全体のスケール */
-const GROUP_SCALE = 0.3;
-
-/** 左パディング */
-const PADDING_LEFT = 180;
-
-/** 下パディング */
-const PADDING_BOTTOM = 80;
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -50,7 +40,6 @@ export class BurstButtonView {
    */
   constructor(param: Param) {
     this._group = new THREE.Group();
-    this._group.scale.set(GROUP_SCALE, GROUP_SCALE, GROUP_SCALE);
 
     const burstButton =param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)?.image ?? new Image();
@@ -112,19 +101,16 @@ export class BurstButtonView {
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
 
-    this._group.scale.set(
-      GROUP_SCALE * devicePerScale * model.scale,
-      GROUP_SCALE * devicePerScale * model.scale,
-      GROUP_SCALE * devicePerScale * model.scale
-    );
-    this._group.position.x =
-      -preRender.rendererDOM.clientWidth / 2
-      +preRender.safeAreaInset.left
-      +PADDING_LEFT * devicePerScale;
-    this._group.position.y =
-      -preRender.rendererDOM.clientHeight / 2
-      +preRender.safeAreaInset.bottom
-      +PADDING_BOTTOM * devicePerScale;
+    const groupScale = devicePerScale * model.scale * 0.3;
+    this._group.scale.set(groupScale, groupScale, groupScale);
+    const paddingLeft = 175;
+    const marginLeft = 10;
+    this._group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
+      + Math.max(marginLeft, preRender.safeAreaInset.left);
+    const paddingBottom = 65;
+    const marginBottom = 10;
+    this._group.position.y = -preRender.rendererDOM.clientHeight / 2 + paddingBottom * devicePerScale
+      + Math.max(marginBottom, preRender.safeAreaInset.bottom);
     this._group.quaternion.copy(preRender.camera.quaternion);
   }
 
