@@ -5,19 +5,19 @@ import type {Resize} from "../../src/js/window/resize";
 import {resizeStream} from "../../src/js/window/resize";
 import {Renderer} from "../../src/js/render";
 import type {GameLoop} from "../../src/js/game-loop/game-loop";
+import {gameLoopStream} from "../../src/js/game-loop/game-loop";
 import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
 import type {Update} from "../../src/js/game-loop/update";
 import type {PreRender} from "../../src/js/game-loop/pre-render";
+import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 import {gameObjectStream} from "../../src/js/game-object/action/game-object-action";
 import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
+import type {Resources} from "../../src/js/resource";
 import {fullResourceLoading} from "../../src/js/resource";
 import {TDCamera} from "../../src/js/game-object/camera/td";
 import {StorybookResourceRoot} from "../storybook-resource-root";
-import {gameLoopStream} from "../../src/js/game-loop/game-loop";
-import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/stream";
-import type {Resources} from "../../src/js/resource";
 import {createStreamSource} from "../../src/js/stream/stream";
 
 /** Object3D生成関数パラメータ */

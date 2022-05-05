@@ -1,5 +1,4 @@
 // @flow
-
 import * as THREE from "three";
 import type {Resources} from "../../../resource";
 import {BatteryButton} from "./battery-button";
@@ -8,18 +7,9 @@ import {BatteryPlus} from "./battery-plus";
 import {BatteryMinus} from "./battery-minus";
 import type {BatterySelectorModel} from "../model";
 import type {PreRender} from "../../../game-loop/pre-render";
-import {HUDUIScale} from "../../../hud-scale/hud-scale";
+import {HUDUIScale} from "../../scale";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
-
-/** 全体のスケール */
-const GROUP_SCALE = 0.3;
-
-/** 右パディング */
-const PADDING_RIGHT = 112;
-
-/** 下パディング */
-const PADDING_BOTTOM = 80;
 
 /** パラメータ */
 type Param = {
@@ -107,10 +97,16 @@ export class BatterySelectorView {
     this._minus.update(model);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
-    const scale = devicePerScale * GROUP_SCALE;
-    this._group.scale.set(scale, scale, scale);
-    this._group.position.x = preRender.rendererDOM.clientWidth / 2 -preRender.safeAreaInset.right -PADDING_RIGHT * devicePerScale;
-    this._group.position.y = -preRender.rendererDOM.clientHeight / 2 + preRender.safeAreaInset.bottom + PADDING_BOTTOM * devicePerScale;
+    const groupScale = devicePerScale * 0.3;
+    this._group.scale.set(groupScale, groupScale, groupScale);
+    const paddingRight = 105;
+    const marginRight = 10;
+    this._group.position.x = preRender.rendererDOM.clientWidth / 2 - paddingRight * devicePerScale
+      - Math.max(marginRight, preRender.safeAreaInset.right);
+    const paddingBottom = 65;
+    const marginBottom = 10;
+    this._group.position.y = -preRender.rendererDOM.clientHeight / 2 + paddingBottom * devicePerScale
+      + Math.max(marginBottom, preRender.safeAreaInset.bottom);
     this._group.quaternion.copy(preRender.camera.quaternion);
   }
 }

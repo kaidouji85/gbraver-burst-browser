@@ -17,12 +17,17 @@ const ZERO_BATTERY = {
  * 攻撃ルーチン
  */
 const attackRoutine: SimpleRoutine = data => {
+  const pilot = data.commands.find(v => v.type === 'PILOT_SKILL_COMMAND');
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
   const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
   const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
   const canBeatDownWithAllBattery = canBeatDown(data.enemy, data.enemy.armdozer.battery, data.player, data.player.armdozer.battery);
 
-  if (burst && allBattery) {
+  if (pilot) {
+    return pilot;
+  }
+
+  if (allBattery && burst) {
     return allBattery;
   }
 
@@ -43,15 +48,35 @@ const attackRoutine: SimpleRoutine = data => {
  */
 const defenseRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
+  const pilot = data.commands.find(v => v.type === 'PILOT_SKILL_COMMAND');
+  const playerAllBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.player.armdozer.battery);
   const battery3 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 3);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
+  const isDefeatedWithBattery3 = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 3);
+  const isDefeatedWithBattery1 = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, 1);
+  const isDefeatedWithAllBattery = canBeatDown(data.player, data.player.armdozer.battery, data.enemy, data.enemy.armdozer.battery);
 
-  if (burst && data.enemy.armdozer.battery === 0) {
+  if (data.enemy.armdozer.battery === 0 && burst) {
     return burst;
   }
 
-  if (battery3 && data.enemy.armdozer.battery === 5) {
+  if (isDefeatedWithAllBattery && data.enemy.armdozer.battery < 5 && burst) {
+    return burst;
+  }
+
+  if (isDefeatedWithAllBattery && pilot) {
+    return pilot;
+  }
+
+  if (isDefeatedWithBattery3 && playerAllBattery) {
+    return playerAllBattery;
+  }
+
+  if (isDefeatedWithBattery1 && playerAllBattery) {
+    return playerAllBattery;
+  }
+
+  if (data.enemy.armdozer.battery === 5 && battery3) {
     return battery3;
   }
 
@@ -59,20 +84,16 @@ const defenseRoutine: SimpleRoutine = data => {
     return battery1;
   }
 
-  if (allBattery) {
-    return allBattery;
-  }
-
   return ZERO_BATTERY;
 };
 
 /**
- * ノーマルコース シンブレイバー NPC
+ * ベリーハードコース シンブレイバー NPC
  *
  * @returns NPC
  */
-export function normalShinBraver(): NPC {
+export function veryHardShinBraver(): NPC {
   const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
+  const pilot = Pilots.find(v => v.id === PilotIds.TSUBASA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

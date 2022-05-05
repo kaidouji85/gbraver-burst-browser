@@ -8,7 +8,7 @@ import type {LightningDozerCutInView} from "./lightning-dozer-cutin-view";
 import type {AnimationType, LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
 import type {PreRender} from "../../../../game-loop/pre-render";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
-import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
+import {HUDCutInScale} from "../../../scale";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 900;

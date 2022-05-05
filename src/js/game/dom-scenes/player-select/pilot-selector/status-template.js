@@ -66,6 +66,7 @@ function damageDecreaseSkillTemplate(skill: DamageDecreaseSkill): string[] {
  */
 function batteryEnchantmentSkillTemplate(skill: BatteryEnchantmentSkill): string[] {
   return [
-    `${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnchantment}するが、攻撃補正が半分になる。`,
+    `${skill.duration}ターンだけ、0より大きいバッテリーを出した場合にバッテリー+${skill.batteryEnchantment}する。`,
+    `ただし「攻撃+X」というバースト効果を「攻撃+X/2」として扱う。`,
   ];
 }

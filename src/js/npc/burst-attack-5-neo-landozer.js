@@ -1,7 +1,6 @@
 // @flow
-
 import type {NPC} from "./npc";
-import {ArmDozerIdList, ArmDozers, correctPower, PilotIds, Pilots} from "gbraver-burst-core";
+import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {SimpleRoutine} from "./simple-npc";
 import {SimpleNPC} from "./simple-npc";
 
@@ -18,23 +17,12 @@ const ZERO_BATTERY = {
 const attackRoutine: SimpleRoutine = data => {
   const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
   const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
-  const allBatteryMinusOne = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery - 1);
-  const hasPlusCorrectPower = 0 < correctPower(data.enemy.armdozer.effects);
-  const hasDamaged = data.enemy.armdozer.hp  < data.enemy.armdozer.maxHp;
 
-  if (hasDamaged && burst) {
+  if (burst) {
     return burst;
   }
 
-  if (hasPlusCorrectPower && allBattery) {
-    return allBattery;
-  }
-
-  if (allBatteryMinusOne) {
-    return allBatteryMinusOne;
-  }
-
-  return ZERO_BATTERY;
+  return allBattery ?? ZERO_BATTERY;
 };
 
 /**
@@ -42,27 +30,16 @@ const attackRoutine: SimpleRoutine = data => {
  * 防御ルーチン
  */
 const defenseRoutine: SimpleRoutine = data => {
-  const burst = data.commands.find(v => v.type === 'BURST_COMMAND');
-  const allBattery = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === data.enemy.armdozer.battery);
   const battery1 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 1);
-
-  if (burst && allBattery) {
-    return allBattery;
-  }
-
-  if (battery1) {
-    return battery1;
-  }
-
-  return ZERO_BATTERY;
+  return battery1 ?? ZERO_BATTERY;
 };
 
 /**
- * ノーマルコース ネオランドーザNPC
+ * バースト+5攻撃 ネオランドーザNPC
  *
  * @return NPC
  */
-export function normalNeoLandozer(): NPC {
+export function burstAttack5NeoLandozer(): NPC {
   const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === PilotIds.GAI) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
