@@ -102,7 +102,7 @@ export class BatterySelectorView {
     const paddingRight = 105;
     const marginRight = 10;
     this._group.position.x = preRender.rendererDOM.clientWidth / 2 - paddingRight * devicePerScale
-      -Math.max(marginRight, preRender.safeAreaInset.right);
+      - Math.max(marginRight, preRender.safeAreaInset.right);
     const paddingBottom = 65;
     const marginBottom = 10;
     this._group.position.y = -preRender.rendererDOM.clientHeight / 2 + paddingBottom * devicePerScale
