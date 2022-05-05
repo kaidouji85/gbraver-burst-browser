@@ -5,22 +5,13 @@ import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {PilotButtonModel} from "../model/pilot-button-model";
 import type {PreRender} from "../../../game-loop/pre-render";
-import {HUDUIScale} from "../../../hud-scale/hud-scale";
+import {HUDUIScale} from "../../scale";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import type {PilotIcon} from "./pilot-icon";
 import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, StreamSource} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
-
-/** 全体のスケール */
-const GROUP_SCALE = 0.3;
-
-/** 左パディング */
-const PADDING_LEFT = 70;
-
-/** 下パディング */
-const PADDING_BOTTOM = 160;
 
 /**
  * パイロットボタン ビュー
@@ -106,19 +97,16 @@ export class PilotButtonView {
     this._buttonDisabled.setOpacity(disabledOpacity);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
-    this._group.scale.set(
-      GROUP_SCALE * devicePerScale * model.scale,
-      GROUP_SCALE * devicePerScale * model.scale,
-      GROUP_SCALE * devicePerScale * model.scale
-    );
-    this._group.position.x =
-      -preRender.rendererDOM.clientWidth / 2
-      +preRender.safeAreaInset.left
-      +PADDING_LEFT * devicePerScale;
-    this._group.position.y =
-      -preRender.rendererDOM.clientHeight / 2
-      +preRender.safeAreaInset.bottom
-      +PADDING_BOTTOM * devicePerScale;
+    const groupScale = 0.3 * devicePerScale * model.scale
+    this._group.scale.set(groupScale, groupScale, groupScale);
+    const paddingLeft = 65;
+    const marginLeft = 10;
+    this._group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
+      + Math.max(marginLeft, preRender.safeAreaInset.left);
+    const paddingBottom = 145;
+    const marginBottom = 10;
+    this._group.position.y = -preRender.rendererDOM.clientHeight / 2 + paddingBottom * devicePerScale
+      + Math.max(marginBottom, preRender.safeAreaInset.bottom);
     this._group.quaternion.copy(preRender.camera.quaternion);
   }
 

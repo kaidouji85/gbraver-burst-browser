@@ -8,7 +8,7 @@ import * as THREE from "three";
 import type {AnimationType, WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
 import type {PreRender} from "../../../../game-loop/pre-render";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
-import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
+import {HUDCutInScale} from "../../../scale";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 1000;

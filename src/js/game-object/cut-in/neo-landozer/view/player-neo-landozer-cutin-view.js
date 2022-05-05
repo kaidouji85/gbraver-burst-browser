@@ -8,7 +8,7 @@ import * as THREE from "three";
 import type {AnimationType, NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 import type {PreRender} from "../../../../game-loop/pre-render";
-import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
+import {HUDCutInScale} from "../../../scale";
 
 export const MAX_ANIMATION = 4;
 export const WIDTH = 800;

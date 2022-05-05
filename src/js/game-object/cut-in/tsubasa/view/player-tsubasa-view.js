@@ -7,7 +7,7 @@ import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {TsubasaModel} from "../model/tsubasa-model";
 import type {TsubasaView} from "./tsubasa-view";
 import type {PreRender} from "../../../../game-loop/pre-render";
-import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
+import {HUDCutInScale} from "../../../scale";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */

@@ -7,7 +7,7 @@ import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {RaitoModel} from "../model/raito-model";
 import type {RaitoView} from "./raito-view";
 import type {PreRender} from "../../../../game-loop/pre-render";
-import {HUDCutInScale} from "../../../../hud-scale/hud-scale";
+import {HUDCutInScale} from "../../../scale";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */

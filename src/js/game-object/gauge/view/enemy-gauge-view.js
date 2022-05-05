@@ -10,7 +10,7 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {EnemyHpBar} from "./enemy-hp-bar";
 import {HpNumber} from "./hp-number";
 import {EnemyBatteryGauge} from "./enemy-battery-gauge";
-import {HUDIndicatorScale} from "../../../hud-scale/hud-scale";
+import {HUDUIScale} from "../../scale";
 
 /** 基本拡大率 */
 export const BASE_SCALE = 0.3;
@@ -69,7 +69,7 @@ export class EnemyGaugeView implements GaugeView {
    * @param preRender プリレンダー
    */
   engage(model: GaugeModel, preRender: PreRender): void {
-    const devicePerScale = HUDIndicatorScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
 
     this._hpBar.setValue(model.hp / model.maxHp);
     this._hpNumber.setValue(model.hp);

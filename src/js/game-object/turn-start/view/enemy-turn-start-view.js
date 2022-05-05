@@ -7,7 +7,7 @@ import {TEXTURE_IDS} from "../../../resource/texture";
 import type {TurnStartView} from "./turn-start-view";
 import type {TurnStartModel} from "../model/turn-start-model";
 import type {PreRender} from "../../../game-loop/pre-render";
-import {HUDCutInScale} from "../../../hud-scale/hud-scale";
+import {HUDCutInScale} from "../../scale";
 
 export const MESH_SIZE = 400;
 

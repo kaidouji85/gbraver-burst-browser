@@ -10,7 +10,7 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {PlayerHpBar} from "./player-hp-bar";
 import {HpNumber} from "./hp-number";
 import {PlayerBatteryGauge} from "./player-battery-gauge";
-import {HUDIndicatorScale} from "../../../hud-scale/hud-scale";
+import {HUDUIScale} from "../../scale";
 
 /** 基本拡大率 */
 export const BASE_SCALE = 0.3;
@@ -71,7 +71,7 @@ export class PlayerGaugeView implements GaugeView {
    * @param preRender プリレンダーアクション
    */
   engage(model: GaugeModel, preRender: PreRender): void {
-    const devicePerScale = HUDIndicatorScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
 
     this._hpBar.setValue(model.hp / model.maxHp);
     this._hpNumber.setValue(model.hp);
