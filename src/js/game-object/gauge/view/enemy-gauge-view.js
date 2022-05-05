@@ -69,7 +69,7 @@ export class EnemyGaugeView implements GaugeView {
    * @param preRender プリレンダー
    */
   engage(model: GaugeModel, preRender: PreRender): void {
-    const devicePerScale = HUDUIScale(preRender.rendererDOM);
+    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
 
     this._hpBar.setValue(model.hp / model.maxHp);
     this._hpNumber.setValue(model.hp);

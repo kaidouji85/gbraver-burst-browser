@@ -5,7 +5,7 @@ import type {SafeAreaInset} from "../safe-area/safe-area-inset";
  * HUDレイヤー カットインのスケール
  *
  * @param rendererDOM レンダリング対象HTML要素
- * @param safeAreaInset セーブエリア情報
+ * @param safeAreaInset セーフエリア情報
  * @return スケール
  */
 export function HUDCutInScale(rendererDOM: HTMLElement, safeAreaInset: SafeAreaInset): number {
@@ -17,9 +17,10 @@ export function HUDCutInScale(rendererDOM: HTMLElement, safeAreaInset: SafeAreaI
  * HUDレイヤー ユーザインタフェースのスケール
  *
  * @param rendererDOM レンダリング対象HTML要素
+ * @param safeAreaInset セーフエリア情報
  * @return スケール
  */
-export function HUDUIScale(rendererDOM: HTMLElement): number {
+export function HUDUIScale(rendererDOM: HTMLElement, safeAreaInset: SafeAreaInset): number {
   const batterySelectorOriginHeight = 234;
-  return Math.max(rendererDOM.clientHeight / batterySelectorOriginHeight * 0.4, 1);
+  return Math.max((rendererDOM.clientHeight - safeAreaInset.bottom) / batterySelectorOriginHeight * 0.45, 1);
 }

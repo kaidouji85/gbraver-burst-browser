@@ -105,7 +105,7 @@ export class PilotButtonView {
     const disabledOpacity = model.canPilot ? 0 : model.opacity;
     this._buttonDisabled.setOpacity(disabledOpacity);
 
-    const devicePerScale = HUDUIScale(preRender.rendererDOM);
+    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     this._group.scale.set(
       GROUP_SCALE * devicePerScale * model.scale,
       GROUP_SCALE * devicePerScale * model.scale,
