@@ -192,9 +192,9 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
     difficulty: 'Hard',
     stages: [
-      {...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
-      {...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_02},
-      {...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
+      {...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
@@ -220,7 +220,7 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     difficulty: 'Normal',
     stages: [
       {...Attack4Defense1LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
-      {...PrioritizeDefenseWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...PrioritizeDefenseShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_02},
       {...FullAttackWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03}
     ]
   },
@@ -264,9 +264,9 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.LIGHTNING_DOZER,
     difficulty: 'Hard',
     stages: [
-      {...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01},
-      {...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_02},
-      {...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
+      {...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...HardWingDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
@@ -300,9 +300,9 @@ export const NPCBattleCourses: NPCBattleCourse[] = [
     armdozerId: ArmDozerIdList.WING_DOZER,
     difficulty: 'Hard',
     stages: [
-      {...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_01},
-      {...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_02},
-      {...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
+      {...HardNeoLandozerStage, bgm: SOUND_IDS.BATTLE_BGM_01},
+      {...HardShinBraverStage, bgm: SOUND_IDS.BATTLE_BGM_02},
+      {...HardLightningDozer, bgm: SOUND_IDS.BATTLE_BGM_03},
     ]
   },
   {
