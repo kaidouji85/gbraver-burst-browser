@@ -240,7 +240,7 @@ export class Game {
     const resourceLoading = titleResourceLoading(this._resourceRoot);
     this._resources = await resourceLoading.resources;
     const config = configFromLocalStorage() ?? DefaultConfig;
-    this._engageSound(config);
+    this._reflectSoundVolume(config);
     const title = await this._startTitle();
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
@@ -777,11 +777,11 @@ export class Game {
   }
 
   /**
-   * 音量設定を音リソースに反映させる
+   * 音量設定を音リソースに反映させるヘルパーメソッド
    *
-   * @param config ブラウザ設定
+   * @param config 反映するブラウザ設定
    */
-  _engageSound(config: GbraverBurstBrowserConfig): void {
+  _reflectSoundVolume(config: GbraverBurstBrowserConfig): void {
     const updateBGM = (origin: SoundResource): SoundResource => {
       return {...origin, soundTypeVolume: config.bgmVolume};
     };

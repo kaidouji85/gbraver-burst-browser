@@ -1,11 +1,16 @@
 // @flow
 import {Howl} from "howler";
-import type {BattleAnimationSpeed, GbraverBurstBrowserConfig, WebGLPixelRatio} from "../../config/browser-config";
+import type {
+  BattleAnimationSpeed,
+  GbraverBurstBrowserConfig,
+  SoundVolume,
+  WebGLPixelRatio
+} from "../../config/browser-config";
 import {
   BattleAnimationSpeeds,
   isConfigChanged,
-  parseBattleAnimationSpeed,
-  parseWebGLPixelRatio,
+  parseBattleAnimationSpeed, parseSoundVolume,
+  parseWebGLPixelRatio, SoundVolumes,
   WebGLPixelRatios
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
@@ -19,6 +24,8 @@ import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import {ConfigChangedDialog} from "./config-changed-dialog";
+import type {ChangeDOM} from "../../../dom/input/input-dom";
+import {inputDOMStream} from "../../../dom/input/input-dom";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config';
@@ -27,9 +34,21 @@ const ROOT_CLASS = 'config';
 type DataIDs = {
   battleAnimationSpeedSelector: string,
   webGLPixelRatioSelector: string,
+  bgmVolumeSelector: string,
+  bgmVolumeValue: string,
   prev: string,
   configChange: string,
 };
+
+/**
+ * 音量を画面表示用にパースする
+ *
+ * @param volume 音量
+ * @return パース結果
+ */
+function soundVolumeLabel(volume: SoundVolume): string {
+  return volume.toFixed(1);
+}
 
 /**
  * ルート要素のHTML要素
@@ -70,8 +89,8 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
       </div>
       <div class="${ROOT_CLASS}__configs__bgm-volume">
         <div class="${ROOT_CLASS}__configs__bgm-volume__caption">BGM音量</div>
-        <input class="${ROOT_CLASS}__configs__bgm-volume__selector" type="range" min="0" max="1" step="0.1">
-        <div class="${ROOT_CLASS}__configs__bgm-volume__value">0.1</div>
+        <input class="${ROOT_CLASS}__configs__bgm-volume__selector" type="range" min="0" max="1" step="0.1" value="${config.bgmVolume}" data-id="${ids.bgmVolumeSelector}">
+        <div class="${ROOT_CLASS}__configs__bgm-volume__value" data-id="${ids.bgmVolumeValue}">${soundVolumeLabel(config.bgmVolume)}</div>
       </div>
       <div class="${ROOT_CLASS}__configs__se-volume">
         <div class="${ROOT_CLASS}__configs__se-volume__caption">SE音量</div>
@@ -90,6 +109,8 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
 type Elements = {
   battleAnimationSpeedSelector: HTMLSelectElement,
   webGLPixelRatioSelector: HTMLSelectElement,
+  bgmVolumeSelector: HTMLInputElement,
+  bgmVolumeValue: HTMLElement,
   prev: HTMLElement,
   configChange: HTMLElement,
 };
@@ -108,9 +129,13 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const extractedWebGlPixelRatioSelector = root.querySelector(`[data-id="${ids.webGLPixelRatioSelector}"]`);
   const webGLPixelRatioSelector = (extractedWebGlPixelRatioSelector instanceof HTMLSelectElement) 
     ? extractedWebGlPixelRatioSelector : document.createElement('select');
+  const extractedBGMVolumeSelector = root.querySelector(`[data-id="${ids.bgmVolumeSelector}"]`);
+  const bgmVolumeSelector = (extractedBGMVolumeSelector instanceof HTMLInputElement)
+    ? extractedBGMVolumeSelector : document.createElement('input');
+  const bgmVolumeValue = root.querySelector(`[data-id="${ids.bgmVolumeValue}"]`) ?? document.createElement('div');
   const prev = root.querySelector(`[data-id="${ids.prev}"]`) ?? document.createElement('button');
   const configChange = root.querySelector(`[data-id="${ids.configChange}"]`) ?? document.createElement('button');
-  return {battleAnimationSpeedSelector, webGLPixelRatioSelector, prev, configChange};
+  return {battleAnimationSpeedSelector, webGLPixelRatioSelector, prev, configChange, bgmVolumeSelector, bgmVolumeValue};
 }
 
 /** 設定画面 */
@@ -119,6 +144,8 @@ export class Config implements DOMScene {
   _root: HTMLElement;
   _battleAnimationSpeedSelector: HTMLSelectElement;
   _webGLPixelRatioSelector: HTMLSelectElement;
+  _bgmVolumeSelector: HTMLInputElement;
+  _bgmVolumeValue: HTMLElement;
   _prevButton: HTMLElement;
   _configChangeButton: HTMLElement;
   _dialog: ConfigChangedDialog;
@@ -137,14 +164,16 @@ export class Config implements DOMScene {
    */
   constructor(resources: Resources, config: GbraverBurstBrowserConfig) {
     this._originConfig = config;
-    const ids = {battleAnimationSpeedSelector: domUuid(), webGLPixelRatioSelector: domUuid(), 
-      prev: domUuid(), configChange: domUuid()};
+    const ids = {battleAnimationSpeedSelector: domUuid(), webGLPixelRatioSelector: domUuid(),
+      bgmVolumeSelector: domUuid(), bgmVolumeValue: domUuid(), prev: domUuid(), configChange: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(ids, config);
     this._root.className = ROOT_CLASS;
     const elements = extractElements(this._root, ids);
     this._battleAnimationSpeedSelector = elements.battleAnimationSpeedSelector;
     this._webGLPixelRatioSelector = elements.webGLPixelRatioSelector;
+    this._bgmVolumeSelector = elements.bgmVolumeSelector;
+    this._bgmVolumeValue = elements.bgmVolumeValue;
     this._prevButton = elements.prev;
     this._configChangeButton = elements.configChange;
     this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
@@ -157,6 +186,9 @@ export class Config implements DOMScene {
     this._prev = createStreamSource();
     this._configChange = createStreamSource();
     this._unsubscriber = [
+      inputDOMStream(this._bgmVolumeSelector).subscribe(action => {
+        this._onBGMVolumeChange(action);
+      }),
       pushDOMStream(this._prevButton).subscribe(action => {
         this._onPrevButtonPush(action);
       }),
@@ -204,6 +236,20 @@ export class Config implements DOMScene {
    */
   configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
     return this._configChange;
+  }
+
+  /**
+   * BGM音量を変更した際の処理
+   *
+   * @param action アクション
+   */
+  _onBGMVolumeChange(action: ChangeDOM): void {
+    action.event.preventDefault();
+    action.event.stopPropagation();
+    this._exclusive.execute(async () => {
+      const value = parseSoundVolume(this._bgmVolumeSelector.value) ?? 1;
+      this._bgmVolumeValue.innerText = soundVolumeLabel(value);
+    });
   }
 
   /**
@@ -293,6 +339,7 @@ export class Config implements DOMScene {
   _parseConfig(): GbraverBurstBrowserConfig {
     const battleAnimationSpeed = parseBattleAnimationSpeed(this._battleAnimationSpeedSelector.value) ?? BattleAnimationSpeeds[0];
     const webGLPixelRatio = parseWebGLPixelRatio(this._webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
-    return {battleAnimationSpeed, webGLPixelRatio, bgmVolume: 1}; // TODO 設定画面の値を入力する
+    const bgmVolume = parseSoundVolume(this._bgmVolumeSelector.value) ?? SoundVolumes[0];
+    return {battleAnimationSpeed, webGLPixelRatio, bgmVolume};
   }
 }
