@@ -68,6 +68,11 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
           ${webGLPixelRatioOptions}
         </select>
       </div>
+      <div class="${ROOT_CLASS}__configs__bgm-volume">
+        <div class="${ROOT_CLASS}__configs__bgm-volume__caption">BGM音量</div>
+        <input class="${ROOT_CLASS}__configs__bgm-volume__selector" type="range" min="0" max="1" step="0.1">
+        <div class="${ROOT_CLASS}__configs__bgm-volume__value">0.1</div>
+      </div>
     </div>
     <div class="${ROOT_CLASS}__footer">
       <button class="${ROOT_CLASS}__footer__prev" data-id="${ids.prev}">戻る</button>
