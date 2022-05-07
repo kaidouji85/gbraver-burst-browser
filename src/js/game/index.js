@@ -76,6 +76,7 @@ import {
 } from "./dom-floaters/post-battle/post-battle-buttons";
 import type {GbraverBurstBrowserConfig} from "./config/browser-config";
 import type {SoundResource} from "../resource/sound";
+import {isSoundConfigChanged} from "./config/browser-config";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -699,7 +700,15 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
+    const changeSoundVolume = async () => {
+      await this._bgm.do(fadeOut);
+      this._reflectSoundVolume(action.config);
+      await this._bgm.do(fadeIn);
+    };
+
     await this._fader.fadeOut();
+    const origin = configFromLocalStorage() ?? DefaultConfig;
+    isSoundConfigChanged(origin, action.config) && await changeSoundVolume();
     saveConfigToLocalStorage(action.config);
     await this._startTitle();
     await this._fader.fadeIn();
@@ -782,8 +791,8 @@ export class Game {
    * @param config 反映するブラウザ設定
    */
   _reflectSoundVolume(config: GbraverBurstBrowserConfig): void {
-    const updateBGM = (origin: SoundResource): SoundResource => {
-      return {...origin, soundTypeVolume: config.bgmVolume};
+    const updateBGM = (origin: SoundResource): void => {
+      origin.soundTypeVolume = config.bgmVolume;
     };
     this._resources.sounds.forEach(sound => {
       if (sound.type === 'BGM') {
