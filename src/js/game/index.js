@@ -279,6 +279,8 @@ export class Game {
   async _onArcadeStart(): Promise<void> {
     if (!this._isFullResourceLoaded) {
       await this._fullResourceLoading();
+      const config = configFromLocalStorage() ?? DefaultConfig;
+      this._reflectSoundVolume(config);
     }
 
     this._inProgress = {type: 'NPCBattle', subFlow: {type: 'PlayerSelect'}};
@@ -322,6 +324,8 @@ export class Game {
 
     if (!this._isFullResourceLoaded) {
       await this._fullResourceLoading();
+      const config = configFromLocalStorage() ?? DefaultConfig;
+      this._reflectSoundVolume(config);
     }
 
     await gotoPlayerSelect();
@@ -787,7 +791,9 @@ export class Game {
     const getSoundTypeVolume = sound => {
       if (sound.type === 'BGM') {
         return config.bgmVolume;
-      } else {
+      } else if (sound.type === 'SE') {
+        return config.seVolume;
+      }else {
         return sound.soundTypeVolume;
       }
     }
