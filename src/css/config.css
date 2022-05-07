@@ -24,7 +24,7 @@
 }
 
 .config__title {
-  font-size: calc(var(--responsive-font-size) * 2);
+  font-size: calc(var(--responsive-font-size) * 1.5);
 }
 
 .config__configs {
@@ -42,12 +42,7 @@
 .config__configs__se-volume {
   display: flex;
   align-items: center;
-}
-
-.config__configs__battle-animation-speed,
-.config__configs__webgl-pixel-ratio,
-.config__configs__bgm-volume {
-  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+  min-height: calc(var(--responsive-font-size) * 3.6);
 }
 
 .config__configs__battle-animation-speed__caption,
