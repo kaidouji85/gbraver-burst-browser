@@ -5,12 +5,17 @@ import {Howl} from 'howler';
 /** 音リソースのユニークID */
 export type SoundId = string;
 
+/** 音種別 */
+export type SoundType = 'BGM' | 'SE';
+
 /**
  * 音リソースの設定
  */
 export type SoundConfig = {
   /** 音ID*/
   id: SoundId,
+  /** 音種別 */
+  type: SoundType,
   /** 素材のパス */
   path: (resourceRoot: ResourceRoot) => string,
   /** 音のボリューム */
@@ -21,10 +26,24 @@ export type SoundConfig = {
 export type SoundResource = {
   /** 音ID */
   id: SoundId,
+  /** 音種別 */
+  type: SoundType,
   /** 音声データ */
   sound: typeof Howl,
-  /** ボリューム初期設定 */
-  initialVolume: number,
+  /** ボリューム係数 */
+  volumeCoefficient: number,
+  /** 音種別ごとのボリューム */
+  soundTypeVolume: number,
+}
+
+/**
+ * 音リソースのHowlボリュームを取得する
+ *
+ * @param sound 音リソース
+ * @return Howlで使うボリューム
+ */
+export function getVolume(sound: SoundResource): number {
+  return sound.volumeCoefficient * sound.soundTypeVolume;
 }
 
 /**
@@ -52,66 +71,79 @@ export const SOUND_IDS = {
 export const SOUND_CONFIGS: SoundConfig[] = [
   {
     id: SOUND_IDS.PUSH_BUTTON,
+    type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/push-button.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.CHANGE_VALUE,
+    type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/change-value.mp3`,
     volume: 0.4
   },
   {
     id: SOUND_IDS.MECHA_IMPACT,
+    type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/mecha-impact.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.MOTOR,
+    type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/motor.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.LIGHTNING_ATTACK,
+    type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-attack.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.LIGHTNING_BARRIER,
+    type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/lightning-barrier.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.BATTERY_RECOVER,
+    type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-recover.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.BATTERY_DECLARATION,
+    type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/battery-declaration.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.BENEFIT_EFFECT,
+    type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/benefit-effect.mp3`,
     volume: 1
   },
   {
     id: SOUND_IDS.TITLE_BGM,
+    type: 'BGM',
     path: resourceRoot => `${resourceRoot.get()}/sounds/title-bgm.mp3`,
     volume: 0.2
   },
   {
     id: SOUND_IDS.BATTLE_BGM_01,
+    type: 'BGM',
     path: resourceRoot => `${resourceRoot.get()}/sounds/battle-01.mp3`,
     volume: 0.2
   },
   {
     id: SOUND_IDS.BATTLE_BGM_02,
+    type: 'BGM',
     path: resourceRoot => `${resourceRoot.get()}/sounds/battle-02.mp3`,
     volume: 0.2
   },
   {
     id: SOUND_IDS.BATTLE_BGM_03,
+    type: 'BGM',
     path: resourceRoot => `${resourceRoot.get()}/sounds/battle-03.mp3`,
     volume: 0.2
   }
@@ -119,6 +151,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
 
 /**
  * 指定した音リソースを読み込む
+ * 音種別ごとのボリュームには初期値として1がセットされる
  *
  * @param resourceRoot リソースルート
  * @param config 音設定
@@ -127,7 +160,8 @@ export const SOUND_CONFIGS: SoundConfig[] = [
 export function loadSound(resourceRoot: ResourceRoot, config: SoundConfig): Promise<SoundResource> {
   return new Promise((resolve, reject) => {
     const sound = new Howl({src: [config.path(resourceRoot)], volume: config.volume});
-    const resource: SoundResource = {id: config.id, sound: sound, initialVolume: config.volume};
+    const resource: SoundResource = {id: config.id, type: config.type, sound: sound, volumeCoefficient: config.volume,
+      soundTypeVolume: 1};
     if (sound.state() === 'loaded') {
       resolve(resource);
       return;
@@ -150,7 +184,9 @@ export function loadSound(resourceRoot: ResourceRoot, config: SoundConfig): Prom
 export function createEmptySoundResource(): SoundResource {
   return {
     id: 'EmptyResource',
+    type: 'SE',
     sound: new Howl({mute: true}),
-    initialVolume: 0,
+    soundTypeVolume: 1,
+    volumeCoefficient: 1,
   };
 }

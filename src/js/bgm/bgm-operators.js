@@ -2,6 +2,7 @@
 import {wait} from "@gbraver-burst-network/browser-sdk/lib/wait/wait";
 import type {SoundResource} from "../resource/sound";
 import type {BGM} from "./bgm";
+import {getVolume} from "../resource/sound";
 
 /**
  * BGMオペレータ
@@ -15,7 +16,7 @@ export type BGMOperator = (bgm: BGM) => Promise<BGM>;
 export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
     const duration = 500;
-    bgm.resource.sound.fade(bgm.resource.initialVolume, 0, duration);
+    bgm.resource.sound.fade(getVolume(bgm.resource), 0, duration);
     await wait(duration);
   }
   return bgm;
@@ -25,7 +26,7 @@ export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
 export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
     const duration = 500;
-    bgm.resource.sound.fade(0, bgm.resource.initialVolume, duration);
+    bgm.resource.sound.fade(0, getVolume(bgm.resource), duration);
     await wait(duration);
   }
   return bgm;
