@@ -74,6 +74,8 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
+import type {GbraverBurstBrowserConfig} from "./config/browser-config";
+import type {SoundResource} from "../resource/sound";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -237,6 +239,8 @@ export class Game {
 
     const resourceLoading = titleResourceLoading(this._resourceRoot);
     this._resources = await resourceLoading.resources;
+    const config = configFromLocalStorage() ?? DefaultConfig;
+    this._engageSound(config);
     const title = await this._startTitle();
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
@@ -770,5 +774,21 @@ export class Game {
     await this._fader.fadeIn();
     this._resources = await resourceLoading.resources;
     this._isFullResourceLoaded = true;
+  }
+
+  /**
+   * 音量設定を音リソースに反映させる
+   *
+   * @param config ブラウザ設定
+   */
+  _engageSound(config: GbraverBurstBrowserConfig): void {
+    const updateBGM = (origin: SoundResource): SoundResource => {
+      return {...origin, soundTypeVolume: config.bgmVolume};
+    };
+    this._resources.sounds.forEach(sound => {
+      if (sound.type === 'BGM') {
+        updateBGM(sound);
+      }
+    });
   }
 }
