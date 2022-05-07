@@ -3,7 +3,7 @@
 import type {GbraverBurstBrowserConfig} from "../../../../src/js/game/config/browser-config";
 import {isConfigChanged} from "../../../../src/js/game/config/browser-config";
 
-const origin: GbraverBurstBrowserConfig = {webGLPixelRatio: 2, battleAnimationSpeed: 1};
+const origin: GbraverBurstBrowserConfig = {webGLPixelRatio: 2, battleAnimationSpeed: 1, bgmVolume: 1};
 
 test('WebGLピクセルレートの変更を正しく検知できる', () => {
   const update = {...origin, webGLPixelRatio: 1};

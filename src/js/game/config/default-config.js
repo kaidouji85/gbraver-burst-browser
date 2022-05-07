@@ -5,4 +5,5 @@ import type {GbraverBurstBrowserConfig} from "./browser-config";
 export const DefaultConfig: GbraverBurstBrowserConfig = {
   webGLPixelRatio: 2,
   battleAnimationSpeed: 1,
+  bgmVolume: 1,
 };

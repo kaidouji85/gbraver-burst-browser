@@ -293,6 +293,6 @@ export class Config implements DOMScene {
   _parseConfig(): GbraverBurstBrowserConfig {
     const battleAnimationSpeed = parseBattleAnimationSpeed(this._battleAnimationSpeedSelector.value) ?? BattleAnimationSpeeds[0];
     const webGLPixelRatio = parseWebGLPixelRatio(this._webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
-    return {battleAnimationSpeed, webGLPixelRatio};
+    return {battleAnimationSpeed, webGLPixelRatio, bgmVolume: 1}; // TODO 設定画面の値を入力する
   }
 }
