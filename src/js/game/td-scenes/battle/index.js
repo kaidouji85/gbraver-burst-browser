@@ -21,7 +21,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
-import {fadeIn, fadeOut, play, stop} from "../../../bgm/bgm-operators";
+import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
 import {Animate} from "../../../animation/animate";
 
 /** 戦闘シーンで利用するレンダラ */
