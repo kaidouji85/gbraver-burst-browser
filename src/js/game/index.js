@@ -55,7 +55,7 @@ import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-s
 import {DefaultConfig} from "./config/default-config";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
-import {SOUND_IDS} from "../resource/sound";
+import {getVolume, SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
@@ -75,7 +75,6 @@ import {
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
 import type {GbraverBurstBrowserConfig} from "./config/browser-config";
-import type {SoundResource} from "../resource/sound";
 import {isSoundConfigChanged} from "./config/browser-config";
 
 /** 本クラスで利用するAPIサーバの機能 */
@@ -700,15 +699,9 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
-    const changeSoundVolume = async () => {
-      await this._bgm.do(fadeOut);
-      this._reflectSoundVolume(action.config);
-      await this._bgm.do(fadeIn);
-    };
-
     await this._fader.fadeOut();
     const origin = configFromLocalStorage() ?? DefaultConfig;
-    isSoundConfigChanged(origin, action.config) && await changeSoundVolume();
+    isSoundConfigChanged(origin, action.config) && this._reflectSoundVolume(action.config);
     saveConfigToLocalStorage(action.config);
     await this._startTitle();
     await this._fader.fadeIn();
@@ -791,13 +784,16 @@ export class Game {
    * @param config 反映するブラウザ設定
    */
   _reflectSoundVolume(config: GbraverBurstBrowserConfig): void {
-    const updateBGM = (origin: SoundResource): void => {
-      origin.soundTypeVolume = config.bgmVolume;
-    };
-    this._resources.sounds.forEach(sound => {
+    const getSoundTypeVolume = sound => {
       if (sound.type === 'BGM') {
-        updateBGM(sound);
+        return config.bgmVolume;
+      } else {
+        return sound.soundTypeVolume;
       }
+    }
+    this._resources.sounds.forEach(sound => {
+      sound.soundTypeVolume = getSoundTypeVolume(sound);
+      sound.sound.volume(getVolume(sound));
     });
   }
 }
