@@ -340,6 +340,6 @@ export class Config implements DOMScene {
     const battleAnimationSpeed = parseBattleAnimationSpeed(this._battleAnimationSpeedSelector.value) ?? BattleAnimationSpeeds[0];
     const webGLPixelRatio = parseWebGLPixelRatio(this._webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
     const bgmVolume = parseSoundVolume(this._bgmVolumeSelector.value) ?? SoundVolumes[0];
-    return {battleAnimationSpeed, webGLPixelRatio, bgmVolume};
+    return {battleAnimationSpeed, webGLPixelRatio, bgmVolume, seVolume: 1}; // TODO 画面から値をセットする
   }
 }

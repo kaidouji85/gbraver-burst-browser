@@ -10,6 +10,8 @@ const LocalStorageKeys = {
   BattleAnimationSpeed: 'BattleAnimationSpeed',
   /** BGM音量 */
   BGMVolume: 'BGMVolume',
+  /** SE音量 */
+  SEVolume: 'SEVolume',
 }
 
 /**
@@ -22,14 +24,16 @@ export function configFromLocalStorage(): GbraverBurstBrowserConfig | null {
   const parsedWebGLPixelRatio = parseWebGLPixelRatio(localStorage.getItem(LocalStorageKeys.WebGLPixelRatio));
   const parsedBattleAnimeSpeed = parseBattleAnimationSpeed(localStorage.getItem(LocalStorageKeys.BattleAnimationSpeed));
   const parsedBGMVolume = parseSoundVolume(localStorage.getItem(LocalStorageKeys.BGMVolume));
-  if (parsedWebGLPixelRatio === null || parsedBattleAnimeSpeed === null || parsedBGMVolume === null) {
+  const parsedSEVolume = parseSoundVolume(localStorage.getItem(LocalStorageKeys.SEVolume));
+  if (parsedWebGLPixelRatio === null || parsedBattleAnimeSpeed === null || parsedBGMVolume === null || parsedSEVolume === null) {
     return null;
   }
 
   const webGLPixelRatio: WebGLPixelRatio = parsedWebGLPixelRatio;
   const battleAnimationSpeed: BattleAnimationSpeed = parsedBattleAnimeSpeed;
   const bgmVolume: SoundVolume = parsedBGMVolume;
-  return {webGLPixelRatio, battleAnimationSpeed, bgmVolume};
+  const seVolume: SoundVolume = parsedSEVolume;
+  return {webGLPixelRatio, battleAnimationSpeed, bgmVolume, seVolume};
 }
 
 /**
@@ -41,4 +45,5 @@ export function saveConfigToLocalStorage(config: GbraverBurstBrowserConfig): voi
   localStorage.setItem(LocalStorageKeys.WebGLPixelRatio, `${config.webGLPixelRatio}`);
   localStorage.setItem(LocalStorageKeys.BattleAnimationSpeed, `${config.battleAnimationSpeed}`);
   localStorage.setItem(LocalStorageKeys.BGMVolume, `${config.bgmVolume}`);
+  localStorage.setItem(LocalStorageKeys.SEVolume, `${config.seVolume}`);
 }

@@ -78,6 +78,8 @@ export type GbraverBurstBrowserConfig = {
   battleAnimationSpeed: BattleAnimationSpeed,
   /** BGM音量 */
   bgmVolume: SoundVolume,
+  /** SE音量 */
+  seVolume: SoundVolume,
 };
 
 /**
@@ -100,5 +102,5 @@ export function isConfigChanged(origin: GbraverBurstBrowserConfig, update: Gbrav
  * @return 判定結果、trueで設定変更された
  */
 export function isSoundConfigChanged(origin: GbraverBurstBrowserConfig, update: GbraverBurstBrowserConfig): boolean {
-  return (origin.bgmVolume !== update.bgmVolume);
+  return (origin.bgmVolume !== update.bgmVolume) || (origin.seVolume !== update.seVolume);
 }
