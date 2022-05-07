@@ -15,8 +15,13 @@ test('戦闘アニメ再生速度の変更を正しく検知できる', () => {
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 
+test('BGM音量の変更を正しく検知できる', () => {
+  const update = {...origin, bgmVolume: 0.5};
+  expect(isConfigChanged(origin, update)).toBe(true);
+});
+
 test('複数項目の変更を正しく検知できる', () => {
-  const update = {...origin, webGLPixelRatio: 1, battleAnimationSpeed: 2};
+  const update = {...origin, webGLPixelRatio: 1, battleAnimationSpeed: 2, bgmVolume: 0.5};
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 

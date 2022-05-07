@@ -58,6 +58,10 @@ export const SoundVolumes: SoundVolume[] = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7
  * @return パース結果
  */
 export function parseSoundVolume(origin: any): SoundVolume | null {
+  if (origin === null || origin === undefined || origin === '') {
+    return null;
+  }
+
   const value = Number(origin);
   if (isNaN(value)) {
     return null;
