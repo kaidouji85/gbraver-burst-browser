@@ -21,7 +21,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
-import {fadeIn, fadeOut, play, stop} from "../../../bgm/bgm-operators";
+import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
 import {Animate} from "../../../animation/animate";
 
 /** 戦闘シーンで利用するレンダラ */
@@ -116,10 +116,7 @@ export class BattleScene implements Scene {
    */
   start(): Promise<void> {
     return this._exclusive.execute(async (): Promise<void> => {
-      (async () => {
-        await this._bgm.do(play(this._sounds.bgm));
-        await this._bgm.do(fadeIn);
-      })();
+      this._bgm.do(play(this._sounds.bgm));
       await this._playAnimation(stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState));
     });
   }
