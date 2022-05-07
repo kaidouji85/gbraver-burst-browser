@@ -24,7 +24,7 @@
 }
 
 .config__title {
-  font-size: calc(var(--responsive-font-size) * 3);
+  font-size: calc(var(--responsive-font-size) * 2);
 }
 
 .config__configs {
@@ -38,19 +38,22 @@
 
 .config__configs__battle-animation-speed,
 .config__configs__webgl-pixel-ratio,
-.config__configs__bgm-volume {
+.config__configs__bgm-volume,
+.config__configs__se-volume {
   display: flex;
   align-items: center;
 }
 
 .config__configs__battle-animation-speed,
-.config__configs__webgl-pixel-ratio {
+.config__configs__webgl-pixel-ratio,
+.config__configs__bgm-volume {
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
 }
 
 .config__configs__battle-animation-speed__caption,
 .config__configs__webgl-pixel-ratio__caption,
-.config__configs__bgm-volume__caption {
+.config__configs__bgm-volume__caption,
+.config__configs__se-volume__caption {
   width: var(--config-caption-width);
 }
 
@@ -62,7 +65,8 @@
   font-size: var(--font-size);
 }
 
-.config__configs__bgm-volume__selector {
+.config__configs__bgm-volume__selector,
+.config__configs__se-volume__selector {
   width: calc(var(--responsive-font-size) * 14);
   margin-right: calc(var(--responsive-font-size) * 2);
 }
