@@ -2,6 +2,7 @@
 import type {SoundResource} from "../resource/sound";
 import type {BGM} from "./bgm";
 import {getVolume} from "../resource/sound";
+import {waitTime} from "../wait/wait-time";
 
 /**
  * BGMオペレータ
@@ -14,12 +15,9 @@ export type BGMOperator = (bgm: BGM) => Promise<BGM>;
 /** フェードアウト */
 export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
-    return new Promise(resolve => {
-      bgm.resource.sound.fade(getVolume(bgm.resource), 0, 500);
-      bgm.resource.sound.on('fade', () => {
-        resolve(bgm);
-      });
-    });
+    const duration = 500;
+    bgm.resource.sound.fade(getVolume(bgm.resource), 0, duration);
+    await waitTime(duration);
   }
   return bgm;
 };
@@ -27,12 +25,9 @@ export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
 /** フェードイン */
 export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
-    return new Promise(resolve => {
-      bgm.resource.sound.fade(0, getVolume(bgm.resource), 500);
-      bgm.resource.sound.on('fade', () => {
-        resolve(bgm);
-      })
-    });
+    const duration = 500;
+    bgm.resource.sound.fade(0, getVolume(bgm.resource), duration);
+    await waitTime(duration);
   }
   return bgm;
 };
