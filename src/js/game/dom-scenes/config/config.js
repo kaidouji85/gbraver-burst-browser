@@ -9,8 +9,10 @@ import type {
 import {
   BattleAnimationSpeeds,
   isConfigChanged,
-  parseBattleAnimationSpeed, parseSoundVolume,
-  parseWebGLPixelRatio, SoundVolumes,
+  parseBattleAnimationSpeed,
+  parseSoundVolume,
+  parseWebGLPixelRatio,
+  SoundVolumes,
   WebGLPixelRatios
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
@@ -359,6 +361,8 @@ export class Config implements DOMScene {
   _isInputDisabled(isDisabled: boolean): void {
     this._webGLPixelRatioSelector.disabled = isDisabled;
     this._battleAnimationSpeedSelector.disabled = isDisabled;
+    this._bgmVolumeSelector.disabled = isDisabled;
+    this._seVolumeSelector.disabled = isDisabled;
   }
 
   /**

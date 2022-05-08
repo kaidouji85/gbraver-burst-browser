@@ -1,7 +1,7 @@
 // @flow
 import type {SoundResource} from "../resource/sound";
-import type {BGM} from "./bgm";
 import {howlVolume} from "../resource/sound";
+import type {BGM} from "./bgm";
 import {waitTime} from "../wait/wait-time";
 
 /**
