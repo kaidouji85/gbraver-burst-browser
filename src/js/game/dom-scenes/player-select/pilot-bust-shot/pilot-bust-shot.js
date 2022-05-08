@@ -1,7 +1,7 @@
 // @flow
 
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
-import {waitFinishAnimation} from "../../../../wait/wait-finish-animation";
+import {waitFinishAnimation} from "../../../../dom/animation";
 
 /**
  * パイロットバストショット

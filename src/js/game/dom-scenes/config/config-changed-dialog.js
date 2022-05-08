@@ -5,11 +5,11 @@ import {PathIds} from "../../../resource/path";
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
-import type {PushDOM} from "../../../dom/push/push-dom";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import {Exclusive} from "../../../exclusive/exclusive";
-import {pop} from "../../../dom/animation/pop";
+import {pop} from "../../../dom/animation";
 import {SOUND_IDS} from "../../../resource/sound";
+import type {PushDOM} from "../../../dom/event-stream";
+import {pushDOMStream} from "../../../dom/event-stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config-changed';

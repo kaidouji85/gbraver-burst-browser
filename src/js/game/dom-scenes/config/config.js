@@ -20,14 +20,12 @@ import {domUuid} from "../../../uuid/dom-uuid";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
-import type {PushDOM} from "../../../dom/push/push-dom";
-import {pushDOMStream} from "../../../dom/push/push-dom";
-import {pop} from "../../../dom/animation/pop";
+import {pop} from "../../../dom/animation";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import {ConfigChangedDialog} from "./config-changed-dialog";
-import type {InputDOM} from "../../../dom/input/input-dom";
-import {inputDOMStream} from "../../../dom/input/input-dom";
+import type {InputDOM, PushDOM} from "../../../dom/event-stream";
+import {inputDOMStream, pushDOMStream} from "../../../dom/event-stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config';

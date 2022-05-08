@@ -3,14 +3,14 @@ import {Howl} from 'howler';
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import type {PushDOM} from "../../../dom/push/push-dom";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {DOMDialog} from "../dialog";
 import {SOUND_IDS} from "../../../resource/sound";
 import {Exclusive} from "../../../exclusive/exclusive";
-import {pop} from "../../../dom/animation/pop";
+import {pop} from "../../../dom/animation";
+import type {PushDOM} from "../../../dom/event-stream";
+import {pushDOMStream} from "../../../dom/event-stream";
 
 /**
  * 遊び方ダイアログ プレゼンテーション
