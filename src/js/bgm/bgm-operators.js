@@ -1,7 +1,7 @@
 // @flow
 import type {SoundResource} from "../resource/sound";
 import type {BGM} from "./bgm";
-import {getVolume} from "../resource/sound";
+import {howlVolume} from "../resource/sound";
 import {waitTime} from "../wait/wait-time";
 
 /**
@@ -16,7 +16,7 @@ export type BGMOperator = (bgm: BGM) => Promise<BGM>;
 export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
     const duration = 500;
-    bgm.resource.sound.fade(getVolume(bgm.resource), 0, duration);
+    bgm.resource.sound.fade(howlVolume(bgm.resource), 0, duration);
     await waitTime(duration);
   }
   return bgm;
@@ -26,7 +26,7 @@ export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
 export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
     const duration = 500;
-    bgm.resource.sound.fade(0, getVolume(bgm.resource), duration);
+    bgm.resource.sound.fade(0, howlVolume(bgm.resource), duration);
     await waitTime(duration);
   }
   return bgm;
@@ -49,6 +49,6 @@ export const play = (resource: SoundResource): BGMOperator => async (bgm: BGM): 
   bgm.type === 'NowPlayingBGM' && bgm.resource.sound.stop();
   resource.sound.play();
   resource.sound.loop(true);
-  resource.sound.volume(getVolume(resource));
+  resource.sound.volume(howlVolume(resource));
   return {type: 'NowPlayingBGM', resource};
 }

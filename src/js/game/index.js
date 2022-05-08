@@ -55,7 +55,7 @@ import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-s
 import {DefaultConfig} from "./config/default-config";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
-import {getVolume, SOUND_IDS} from "../resource/sound";
+import {howlVolume, SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
@@ -794,12 +794,13 @@ export class Game {
       } else if (sound.type === 'SE') {
         return config.seVolume;
       }else {
-        return sound.soundTypeVolume;
+        return sound.volume;
       }
-    }
+    };
+
     this._resources.sounds.forEach(sound => {
       sound.volume = getSoundTypeVolume(sound);
-      sound.sound.volume(getVolume(sound));
+      sound.sound.volume(howlVolume(sound));
     });
   }
 }

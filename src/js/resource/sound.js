@@ -37,12 +37,12 @@ export type SoundResource = {
 }
 
 /**
- * 音リソースのHowlボリュームを取得する
+ * Howlで利用するボリューム
  *
  * @param sound 音リソース
  * @return Howlで使うボリューム
  */
-export function getVolume(sound: SoundResource): number {
+export function howlVolume(sound: SoundResource): number {
   return sound.volumeScale * sound.volume;
 }
 
