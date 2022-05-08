@@ -5,7 +5,11 @@ import {Howl} from 'howler';
 /** 音リソースのユニークID */
 export type SoundId = string;
 
-/** 音種別 */
+/**
+ * 音種別
+ * 音量調整のグルーピングに利用する
+ * たとえばBGMは音量0、SEは音量MAXとしたい時に、本データ型で音の種別を判別する
+ */
 export type SoundType = 'BGM' | 'SE';
 
 /**
@@ -76,6 +80,7 @@ export const SOUND_IDS = {
   BATTLE_BGM_01: 'BATTLE_BGM_01',
   BATTLE_BGM_02: 'BATTLE_BGM_02',
   BATTLE_BGM_03: 'BATTLE_BGM_03',
+  NPC_ENDING: 'NPC_ENDING',
 };
 
 /**
@@ -159,7 +164,13 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     type: 'BGM',
     path: resourceRoot => `${resourceRoot.get()}/sounds/battle-03.mp3`,
     volumeScale: 0.2
-  }
+  },
+  {
+    id: SOUND_IDS.NPC_ENDING,
+    type: 'BGM',
+    path: resourceRoot => `${resourceRoot.get()}/sounds/npc-ending.mp3`,
+    volumeScale: 0.2
+  },
 ];
 
 /**
