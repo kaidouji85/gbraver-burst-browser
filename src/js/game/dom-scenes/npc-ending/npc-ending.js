@@ -9,10 +9,10 @@ import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {PathIds} from "../../../resource/path";
-import type {PushDOM} from "../../../dom/push/push-dom";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeIn, play} from "../../../bgm/bgm-operators";
+import type {PushDOM} from "../../../dom/event-stream";
+import {pushDOMStream} from "../../../dom/event-stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'npc-ending';

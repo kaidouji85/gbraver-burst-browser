@@ -1,6 +1,6 @@
 // @flow
 
-import {waitFinishAnimation} from "../../wait/wait-finish-animation";
+import {waitFinishAnimation} from "../../dom/animation";
 
 /**
  * HTML要素で作られたフェーダ
