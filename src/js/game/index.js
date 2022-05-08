@@ -798,7 +798,7 @@ export class Game {
       }
     }
     this._resources.sounds.forEach(sound => {
-      sound.soundTypeVolume = getSoundTypeVolume(sound);
+      sound.volume = getSoundTypeVolume(sound);
       sound.sound.volume(getVolume(sound));
     });
   }
