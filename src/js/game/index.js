@@ -788,18 +788,19 @@ export class Game {
    * @param config 反映するブラウザ設定
    */
   _reflectSoundVolume(config: GbraverBurstBrowserConfig): void {
-    const getSoundTypeVolume = sound => {
-      if (sound.type === 'BGM') {
-        return config.bgmVolume;
-      } else if (sound.type === 'SE') {
-        return config.seVolume;
-      }else {
-        return sound.volume;
+    const getVolume = sound => {
+      switch(sound.type) {
+        case 'BGM':
+          return config.bgmVolume;
+        case 'SE':
+          return config.seVolume;
+        default:
+          return sound.volume;
       }
     };
 
     this._resources.sounds.forEach(sound => {
-      sound.volume = getSoundTypeVolume(sound);
+      sound.volume = getVolume(sound);
       sound.sound.volume(howlVolume(sound));
     });
   }
