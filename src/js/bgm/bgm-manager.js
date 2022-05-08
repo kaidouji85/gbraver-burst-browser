@@ -16,18 +16,22 @@ export interface BGMManager {
 /** BGM管理オブジェクトのシンプルな実装 */
 class SimpleBGMManager implements BGMManager {
   _bgm: BGM;
+  _lastOperation: Promise<BGM>;
 
   /**
    * コンストラクタ
    */
   constructor() {
     this._bgm = {type: 'NoBGM'};
+    this._lastOperation = Promise.resolve(this._bgm);
   }
 
   /** @override */
   async do(operator: BGMOperator): Promise<BGM> {
-    const update = await operator(this._bgm);
-    this._bgm = update;
+    const prevOperation = this._lastOperation;
+    this._lastOperation = operator(this._bgm);
+    await prevOperation;
+    this._bgm = await this._lastOperation;
     return this._bgm;
   }
 }

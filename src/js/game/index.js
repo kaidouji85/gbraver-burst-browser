@@ -55,7 +55,7 @@ import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-s
 import {DefaultConfig} from "./config/default-config";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
-import {SOUND_IDS} from "../resource/sound";
+import {howlVolume, SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
@@ -74,6 +74,8 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
+import type {GbraverBurstBrowserConfig} from "./config/browser-config";
+import {isSoundConfigChanged} from "./config/browser-config";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -237,6 +239,8 @@ export class Game {
 
     const resourceLoading = titleResourceLoading(this._resourceRoot);
     this._resources = await resourceLoading.resources;
+    const config = configFromLocalStorage() ?? DefaultConfig;
+    this._reflectSoundVolume(config);
     const title = await this._startTitle();
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
@@ -275,6 +279,8 @@ export class Game {
   async _onArcadeStart(): Promise<void> {
     if (!this._isFullResourceLoaded) {
       await this._fullResourceLoading();
+      const config = configFromLocalStorage() ?? DefaultConfig;
+      this._reflectSoundVolume(config);
     }
 
     this._inProgress = {type: 'NPCBattle', subFlow: {type: 'PlayerSelect'}};
@@ -318,6 +324,8 @@ export class Game {
 
     if (!this._isFullResourceLoaded) {
       await this._fullResourceLoading();
+      const config = configFromLocalStorage() ?? DefaultConfig;
+      this._reflectSoundVolume(config);
     }
 
     await gotoPlayerSelect();
@@ -696,6 +704,8 @@ export class Game {
    */
   async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
     await this._fader.fadeOut();
+    const origin = configFromLocalStorage() ?? DefaultConfig;
+    isSoundConfigChanged(origin, action.config) && this._reflectSoundVolume(action.config);
     saveConfigToLocalStorage(action.config);
     await this._startTitle();
     await this._fader.fadeIn();
@@ -770,5 +780,28 @@ export class Game {
     await this._fader.fadeIn();
     this._resources = await resourceLoading.resources;
     this._isFullResourceLoaded = true;
+  }
+
+  /**
+   * 音量設定を音リソースに反映させるヘルパーメソッド
+   *
+   * @param config 反映するブラウザ設定
+   */
+  _reflectSoundVolume(config: GbraverBurstBrowserConfig): void {
+    const getVolume = sound => {
+      switch(sound.type) {
+        case 'BGM':
+          return config.bgmVolume;
+        case 'SE':
+          return config.seVolume;
+        default:
+          return sound.volume;
+      }
+    };
+
+    this._resources.sounds.forEach(sound => {
+      sound.volume = getVolume(sound);
+      sound.sound.volume(howlVolume(sound));
+    });
   }
 }

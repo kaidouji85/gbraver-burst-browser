@@ -24,12 +24,11 @@
 }
 
 .config__title {
-  font-size: calc(var(--responsive-font-size) * 3);
+  font-size: var(--responsive-font-size);
 }
 
 .config__configs {
-  --font-size: calc(var(--responsive-font-size) * 1.5);
-  --config-caption-width: calc(var(--responsive-font-size) * 20);
+  --font-size: var(--responsive-font-size);
   flex-grow: 1;
   box-sizing: border-box;
   padding: calc(var(--responsive-font-size) * 1);
@@ -37,26 +36,33 @@
 }
 
 .config__configs__battle-animation-speed,
-.config__configs__webgl-pixel-ratio {
+.config__configs__webgl-pixel-ratio,
+.config__configs__bgm-volume,
+.config__configs__se-volume {
   display: flex;
   align-items: center;
-}
-
-.config__configs__battle-animation-speed {
-  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+  min-height: calc(var(--responsive-font-size) * 3);
 }
 
 .config__configs__battle-animation-speed__caption,
-.config__configs__webgl-pixel-ratio__caption {
-  width: var(--config-caption-width);
+.config__configs__webgl-pixel-ratio__caption,
+.config__configs__bgm-volume__caption,
+.config__configs__se-volume__caption {
+  width: calc(var(--responsive-font-size) * 15);
 }
 
 .config__configs__battle-animation-speed__selector,
 .config__configs__webgl-pixel-ratio__selector {
   -webkit-appearance: menulist-button;
-  min-width: calc(var(--responsive-font-size) * 6);
-  height: calc(var(--responsive-font-size) * 3);
+  min-width: calc(var(--responsive-font-size) * 7);
+  height: calc(var(--responsive-font-size) * 2);
   font-size: var(--font-size);
+}
+
+.config__configs__bgm-volume__selector,
+.config__configs__se-volume__selector {
+  width: calc(var(--responsive-font-size) * 14);
+  margin-right: calc(var(--responsive-font-size) * 2);
 }
 
 .config__footer button {
