@@ -25,7 +25,7 @@ test('SE音量の変更を正しく検知できる', () => {
 });
 
 test('複数項目の変更を正しく検知できる', () => {
-  const update = {...origin, webGLPixelRatio: 1, battleAnimationSpeed: 2, bgmVolume: 0.5};
+  const update = {...origin, webGLPixelRatio: 1, battleAnimationSpeed: 2, bgmVolume: 0.5, seVolume: 0.2};
   expect(isConfigChanged(origin, update)).toBe(true);
 });
 

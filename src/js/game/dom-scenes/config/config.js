@@ -26,7 +26,7 @@ import {pop} from "../../../dom/animation/pop";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
 import {ConfigChangedDialog} from "./config-changed-dialog";
-import type {ChangeDOM} from "../../../dom/input/input-dom";
+import type {InputDOM} from "../../../dom/input/input-dom";
 import {inputDOMStream} from "../../../dom/input/input-dom";
 
 /** ルート要素のclass属性 */
@@ -261,7 +261,7 @@ export class Config implements DOMScene {
    *
    * @param action アクション
    */
-  _onBGMVolumeChange(action: ChangeDOM): void {
+  _onBGMVolumeChange(action: InputDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
     this._exclusive.execute(async () => {
@@ -275,7 +275,7 @@ export class Config implements DOMScene {
    *
    * @param action アクション
    */
-  _onSEVolumeChange(action: ChangeDOM): void {
+  _onSEVolumeChange(action: InputDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
     this._exclusive.execute(async () => {

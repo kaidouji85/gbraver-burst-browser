@@ -30,10 +30,23 @@ export type SoundResource = {
   type: SoundType,
   /** 音声データ */
   sound: typeof Howl,
-  /** ボリュームスケール */
-  volumeScale: number,
-  /** ボリューム */
+  /**
+   * ボリューム
+   * 本プロパティには設定画面の入力内容をセットする想定であり、フェードイン、フェードアウトで利用する
+   * フェードイン処理とは音量を0 -> X に変更することだが、
+   * フェードイン開始時にHowlの音量が0であることが多いので、Xの値をHowlから取得できない
+   * フェードインのためにどこかしらにXの値を保持する必要があるので、本プロパティにXをセットしている
+   */
   volume: number,
+  /**
+   * ボリュームスケール
+   * ソフトウェア的に音量調整をするために利用する
+   * たとえば、効果音AをBGMの半分の音量にしたい場合、
+   *   BGM volumeScale = 1
+   *   効果音A volumeScale = 0.5
+   * とする
+   */
+  volumeScale: number,
 }
 
 /**
@@ -151,7 +164,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
 
 /**
  * 指定した音リソースを読み込む
- * 音種別ごとのボリュームには初期値として1がセットされる
+ * ボリュームには初期値として1がセットされる
  *
  * @param resourceRoot リソースルート
  * @param config 音設定

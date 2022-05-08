@@ -4,11 +4,11 @@ import {createStream} from "../../stream/stream";
 import {fromEvent} from "rxjs";
 import {map} from '../../stream/operator';
 
-/** DOMの入力状態が変更された */
-export type ChangeDOM = {
+/** inputイベントをラッピングしたもの */
+export type InputDOM = {
   type: 'ChangeDOM',
   /** イベントオブジェクト */
-  event: Event
+  event: InputEvent
 };
 
 /**
@@ -17,7 +17,7 @@ export type ChangeDOM = {
  * @param dom ストリーム生成元のDOM
  * @returns 生成結果
  */
-export function inputDOMStream(dom: HTMLInputElement): Stream<ChangeDOM> {
+export function inputDOMStream(dom: HTMLInputElement): Stream<InputDOM> {
   return createStream(fromEvent(dom, 'input'))
     .chain(map(event => ({type: 'ChangeDOM', event})));
 }
