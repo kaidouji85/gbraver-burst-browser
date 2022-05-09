@@ -1,15 +1,15 @@
 // @flow
 import {Howl} from "howler";
 import type {
-  BattleAnimationSpeed,
+  BattleAnimationTimeScale,
   GbraverBurstBrowserConfig,
   SoundVolume,
   WebGLPixelRatio
 } from "../../config/browser-config";
 import {
-  BattleAnimationSpeeds,
+  BattleAnimationTimeScales,
   isConfigChanged,
-  parseBattleAnimationSpeed,
+  parseBattleAnimationTimeScale,
   parseSoundVolume,
   parseWebGLPixelRatio,
   SoundVolumes,
@@ -32,7 +32,7 @@ const ROOT_CLASS = 'config';
 
 /** data-idを集めたもの */
 type DataIDs = {
-  battleAnimationSpeedSelector: string,
+  battleAnimationTimeScaleSelector: string,
   webGLPixelRatioSelector: string,
   bgmVolumeSelector: string,
   bgmVolumeValue: string,
@@ -60,12 +60,12 @@ function soundVolumeLabel(volume: SoundVolume): string {
  * @return ルート要素のHTML要素
  */
 function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
-  const battleAnimationSpeedOption = (value: BattleAnimationSpeed) => `
-    <option class="${ROOT_CLASS}__configs__battle-animation-speed__selector__option"
-      value="${value}" ${value===config.battleAnimationSpeed ? 'selected' : ""}>
-      ${value}倍
+  const battleAnimationTimeScaleOption = (value: BattleAnimationTimeScale) => `
+    <option class="${ROOT_CLASS}__configs__battle-animation-time-scale__selector__option"
+      value="${value}" ${value===config.battleAnimationTimeScale ? 'selected' : ""}>
+      ${Math.floor(1/value)}倍
     </option>`;
-  const battleAnimationSpeedOptions = BattleAnimationSpeeds.map(v => battleAnimationSpeedOption(v))
+  const battleAnimationTimeScaleOptions = BattleAnimationTimeScales.map(v => battleAnimationTimeScaleOption(v))
     .reduce((a, b) => a + b);
   const webGLPixelRatioOption  = (value: WebGLPixelRatio) => `
     <option class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector__option" 
@@ -77,10 +77,10 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
   return `
     <div class="${ROOT_CLASS}__title">設定</div>
     <div class="${ROOT_CLASS}__configs">
-      <div class="${ROOT_CLASS}__configs__battle-animation-speed">
-        <div class="${ROOT_CLASS}__configs__battle-animation-speed__caption">戦闘アニメ再生速度</div>
-        <select class="${ROOT_CLASS}__configs__battle-animation-speed__selector" data-id="${ids.battleAnimationSpeedSelector}">
-          ${battleAnimationSpeedOptions}
+      <div class="${ROOT_CLASS}__configs__battle-animation-time-scale">
+        <div class="${ROOT_CLASS}__configs__battle-animation-time-scale__caption">戦闘アニメ再生速度</div>
+        <select class="${ROOT_CLASS}__configs__battle-animation-time-scale__selector" data-id="${ids.battleAnimationTimeScaleSelector}">
+          ${battleAnimationTimeScaleOptions}
         </select>
       </div>
       <div class="${ROOT_CLASS}__configs__webgl-pixel-ratio">
@@ -109,7 +109,7 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
 
 /** ルート要素の子孫要素 */
 type Elements = {
-  battleAnimationSpeedSelector: HTMLSelectElement,
+  battleAnimationTimeScaleSelector: HTMLSelectElement,
   webGLPixelRatioSelector: HTMLSelectElement,
   bgmVolumeSelector: HTMLInputElement,
   bgmVolumeValue: HTMLElement,
@@ -127,9 +127,9 @@ type Elements = {
  * @return 抽出結果
  */
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
-  const extractedBattleAnimationSpeedSelector = root.querySelector(`[data-id="${ids.battleAnimationSpeedSelector}"]`);
-  const battleAnimationSpeedSelector = (extractedBattleAnimationSpeedSelector instanceof HTMLSelectElement)
-    ? extractedBattleAnimationSpeedSelector : document.createElement('select');
+  const extractedBattleAnimationTimeScaleSelector = root.querySelector(`[data-id="${ids.battleAnimationTimeScaleSelector}"]`);
+  const battleAnimationTimeScaleSelector = (extractedBattleAnimationTimeScaleSelector instanceof HTMLSelectElement)
+    ? extractedBattleAnimationTimeScaleSelector : document.createElement('select');
   const extractedWebGlPixelRatioSelector = root.querySelector(`[data-id="${ids.webGLPixelRatioSelector}"]`);
   const webGLPixelRatioSelector = (extractedWebGlPixelRatioSelector instanceof HTMLSelectElement) 
     ? extractedWebGlPixelRatioSelector : document.createElement('select');
@@ -143,14 +143,14 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const seVolumeValue = root.querySelector(`[data-id="${ids.seVolumeValue}"]`) ?? document.createElement('div');
   const prev = root.querySelector(`[data-id="${ids.prev}"]`) ?? document.createElement('button');
   const configChange = root.querySelector(`[data-id="${ids.configChange}"]`) ?? document.createElement('button');
-  return {battleAnimationSpeedSelector, webGLPixelRatioSelector, prev, configChange, bgmVolumeSelector, bgmVolumeValue, seVolumeSelector, seVolumeValue};
+  return {battleAnimationTimeScaleSelector, webGLPixelRatioSelector, prev, configChange, bgmVolumeSelector, bgmVolumeValue, seVolumeSelector, seVolumeValue};
 }
 
 /** 設定画面 */
 export class Config implements DOMScene {
   _originConfig: GbraverBurstBrowserConfig;
   _root: HTMLElement;
-  _battleAnimationSpeedSelector: HTMLSelectElement;
+  _battleAnimationTimeScaleSelector: HTMLSelectElement;
   _webGLPixelRatioSelector: HTMLSelectElement;
   _bgmVolumeSelector: HTMLInputElement;
   _bgmVolumeValue: HTMLElement;
@@ -174,14 +174,14 @@ export class Config implements DOMScene {
    */
   constructor(resources: Resources, config: GbraverBurstBrowserConfig) {
     this._originConfig = config;
-    const ids = {battleAnimationSpeedSelector: domUuid(), webGLPixelRatioSelector: domUuid(),
+    const ids = {battleAnimationTimeScaleSelector: domUuid(), webGLPixelRatioSelector: domUuid(),
       bgmVolumeSelector: domUuid(), bgmVolumeValue: domUuid(), seVolumeSelector: domUuid(), seVolumeValue: domUuid(),
       prev: domUuid(), configChange: domUuid()};
     this._root = document.createElement('div');
     this._root.innerHTML = rootInnerHTML(ids, config);
     this._root.className = ROOT_CLASS;
     const elements = extractElements(this._root, ids);
-    this._battleAnimationSpeedSelector = elements.battleAnimationSpeedSelector;
+    this._battleAnimationTimeScaleSelector = elements.battleAnimationTimeScaleSelector;
     this._webGLPixelRatioSelector = elements.webGLPixelRatioSelector;
     this._bgmVolumeSelector = elements.bgmVolumeSelector;
     this._bgmVolumeValue = elements.bgmVolumeValue;
@@ -358,7 +358,7 @@ export class Config implements DOMScene {
    */
   _isInputDisabled(isDisabled: boolean): void {
     this._webGLPixelRatioSelector.disabled = isDisabled;
-    this._battleAnimationSpeedSelector.disabled = isDisabled;
+    this._battleAnimationTimeScaleSelector.disabled = isDisabled;
     this._bgmVolumeSelector.disabled = isDisabled;
     this._seVolumeSelector.disabled = isDisabled;
   }
@@ -369,10 +369,10 @@ export class Config implements DOMScene {
    * @return パース結果
    */
   _parseConfig(): GbraverBurstBrowserConfig {
-    const battleAnimationSpeed = parseBattleAnimationSpeed(this._battleAnimationSpeedSelector.value) ?? BattleAnimationSpeeds[0];
+    const battleAnimationTimeScale = parseBattleAnimationTimeScale(this._battleAnimationTimeScaleSelector.value) ?? BattleAnimationTimeScales[0];
     const webGLPixelRatio = parseWebGLPixelRatio(this._webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
     const bgmVolume = parseSoundVolume(this._bgmVolumeSelector.value) ?? SoundVolumes[0];
     const seVolume = parseSoundVolume(this._seVolumeSelector.value) ?? SoundVolumes[0];
-    return {battleAnimationSpeed, webGLPixelRatio, bgmVolume, seVolume};
+    return {battleAnimationTimeScale, webGLPixelRatio, bgmVolume, seVolume};
   }
 }
