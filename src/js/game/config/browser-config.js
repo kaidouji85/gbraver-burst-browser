@@ -22,26 +22,26 @@ export function parseWebGLPixelRatio(origin: any): WebGLPixelRatio | null {
   return WebGLPixelRatios.find(v => v === value) ?? null;
 }
 
-/** 戦闘アニメ再生速度(n倍速) */
-export type BattleAnimationSpeed = number;
+/** 戦闘アニメタイムスケール */
+export type BattleAnimationTimeScale = number;
 
-/** 設定可能な戦闘アニメ再生速度をあつめたもの */
-export const BattleAnimationSpeeds: BattleAnimationSpeed[] = [1, 2, 4];
+/** 設定可能な戦闘アニメタイムスケールをあつめたもの */
+export const BattleAnimationTimeScales: BattleAnimationTimeScale[] = [1, 0.5, 0.25];
 
 /**
- * 任意のオブジェクトを戦闘アニメ再生速度にパースする
+ * 任意のオブジェクトを戦闘アニメタイムスケールにパースする
  * パースできない場合はnullを返す
  *
  * @param origin パース元
  * @return パース結果 
  */
-export function parseBattleAnimationSpeed(origin: any): BattleAnimationSpeed | null {
+export function parseBattleAnimationTimeScale(origin: any): BattleAnimationTimeScale | null {
   const value = Number(origin);
   if (isNaN(value)) {
     return null;
   }
 
-  return BattleAnimationSpeeds.find(v => v === value) ?? null;
+  return BattleAnimationTimeScales.find(v => v === value) ?? null;
 }
 
 /** 音量 */
@@ -74,8 +74,8 @@ export function parseSoundVolume(origin: any): SoundVolume | null {
 export type GbraverBurstBrowserConfig = {
   /** WebGLピクセルレート */
   webGLPixelRatio: WebGLPixelRatio,
-  /** 戦闘アニメ再生速度 */
-  battleAnimationSpeed: BattleAnimationSpeed,
+  /** 戦闘アニメタイムスケール */
+  battleAnimationTimeScale: BattleAnimationTimeScale,
   /** BGM音量 */
   bgmVolume: SoundVolume,
   /** SE音量 */
@@ -90,7 +90,7 @@ export type GbraverBurstBrowserConfig = {
  * @return 判定結果、trueで設定変更された
  */
 export function isConfigChanged(origin: GbraverBurstBrowserConfig, update: GbraverBurstBrowserConfig): boolean {
-  return (origin.webGLPixelRatio !== update.webGLPixelRatio) || (origin.battleAnimationSpeed !== update.battleAnimationSpeed)
+  return (origin.webGLPixelRatio !== update.webGLPixelRatio) || (origin.battleAnimationTimeScale !== update.battleAnimationTimeScale)
     || isSoundConfigChanged(origin, update);
 }
 

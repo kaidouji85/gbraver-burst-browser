@@ -2,7 +2,7 @@
 import type {GbraverBurstBrowserConfig} from "../../../../src/js/game/config/browser-config";
 import {isSoundConfigChanged} from "../../../../src/js/game/config/browser-config";
 
-const origin: GbraverBurstBrowserConfig = {webGLPixelRatio: 2, battleAnimationSpeed: 1, bgmVolume: 1, seVolume: 1};
+const origin: GbraverBurstBrowserConfig = {webGLPixelRatio: 2, battleAnimationTimeScale: 1, bgmVolume: 1, seVolume: 1};
 
 test('BGM音量が変更された場合、音量関係設定が変更されたとみなす', () => {
   const update = {...origin, bgmVolume: 0.4, seVolume: 0.2};

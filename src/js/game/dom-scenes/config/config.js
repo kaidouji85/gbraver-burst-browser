@@ -1,15 +1,15 @@
 // @flow
 import {Howl} from "howler";
 import type {
-  BattleAnimationSpeed,
+  BattleAnimationTimeScale,
   GbraverBurstBrowserConfig,
   SoundVolume,
   WebGLPixelRatio
 } from "../../config/browser-config";
 import {
-  BattleAnimationSpeeds,
+  BattleAnimationTimeScales,
   isConfigChanged,
-  parseBattleAnimationSpeed,
+  parseBattleAnimationTimeScale,
   parseSoundVolume,
   parseWebGLPixelRatio,
   SoundVolumes,
@@ -60,12 +60,12 @@ function soundVolumeLabel(volume: SoundVolume): string {
  * @return ルート要素のHTML要素
  */
 function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
-  const battleAnimationSpeedOption = (value: BattleAnimationSpeed) => `
+  const battleAnimationSpeedOption = (value: BattleAnimationTimeScale) => `
     <option class="${ROOT_CLASS}__configs__battle-animation-speed__selector__option"
-      value="${value}" ${value===config.battleAnimationSpeed ? 'selected' : ""}>
-      ${value}倍
+      value="${value}" ${value===config.battleAnimationTimeScale ? 'selected' : ""}>
+      ${Math.floor(1/value)}倍
     </option>`;
-  const battleAnimationSpeedOptions = BattleAnimationSpeeds.map(v => battleAnimationSpeedOption(v))
+  const battleAnimationSpeedOptions = BattleAnimationTimeScales.map(v => battleAnimationSpeedOption(v))
     .reduce((a, b) => a + b);
   const webGLPixelRatioOption  = (value: WebGLPixelRatio) => `
     <option class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector__option" 
@@ -369,10 +369,10 @@ export class Config implements DOMScene {
    * @return パース結果
    */
   _parseConfig(): GbraverBurstBrowserConfig {
-    const battleAnimationSpeed = parseBattleAnimationSpeed(this._battleAnimationSpeedSelector.value) ?? BattleAnimationSpeeds[0];
+    const battleAnimationTimeScale = parseBattleAnimationTimeScale(this._battleAnimationSpeedSelector.value) ?? BattleAnimationTimeScales[0];
     const webGLPixelRatio = parseWebGLPixelRatio(this._webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
     const bgmVolume = parseSoundVolume(this._bgmVolumeSelector.value) ?? SoundVolumes[0];
     const seVolume = parseSoundVolume(this._seVolumeSelector.value) ?? SoundVolumes[0];
-    return {battleAnimationSpeed, webGLPixelRatio, bgmVolume, seVolume};
+    return {battleAnimationTimeScale: battleAnimationTimeScale, webGLPixelRatio, bgmVolume, seVolume};
   }
 }
