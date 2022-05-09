@@ -35,7 +35,7 @@
   font-size: var(--font-size);
 }
 
-.config__configs__battle-animation-speed,
+.config__configs__battle-animation-time-scale,
 .config__configs__webgl-pixel-ratio,
 .config__configs__bgm-volume,
 .config__configs__se-volume {
@@ -44,14 +44,14 @@
   min-height: calc(var(--responsive-font-size) * 3);
 }
 
-.config__configs__battle-animation-speed__caption,
+.config__configs__battle-animation-time-scale__caption,
 .config__configs__webgl-pixel-ratio__caption,
 .config__configs__bgm-volume__caption,
 .config__configs__se-volume__caption {
   width: calc(var(--responsive-font-size) * 15);
 }
 
-.config__configs__battle-animation-speed__selector,
+.config__configs__battle-animation-time-scale__selector,
 .config__configs__webgl-pixel-ratio__selector {
   -webkit-appearance: menulist-button;
   min-width: calc(var(--responsive-font-size) * 7);
