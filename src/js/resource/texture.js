@@ -103,10 +103,6 @@ export const TEXTURE_IDS = {
   WIN: 'WIN',
   LOSE: 'LOSE',
   DRAW: 'DRAW',
-  TIME_SCALE_BUTTON: 'TIME_SCALE_BUTTON',
-  TIME_SCALE_100: 'TIME_SCALE_100',
-  TIME_SCALE_050: 'TIME_SCALE_050',
-  TIME_SCALE_025: 'TIME_SCALE_025',
 };
 
 /** テクスチャ設定をまとめたもの */
@@ -465,23 +461,6 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
   {
     id: TEXTURE_IDS.DRAW,
     path: 'result/draw.png',
-  },
-  // アニメーションタイムスケールボタン関連
-  {
-    id: TEXTURE_IDS.TIME_SCALE_BUTTON,
-    path: 'button/time-scale-button.webp'
-  },
-  {
-    id: TEXTURE_IDS.TIME_SCALE_100,
-    path: 'button/time-scale-100.webp'
-  },
-  {
-    id: TEXTURE_IDS.TIME_SCALE_050,
-    path: 'button/time-scale-050.webp'
-  },
-  {
-    id: TEXTURE_IDS.TIME_SCALE_025,
-    path: 'button/time-scale-025.webp'
   },
 ];
 
