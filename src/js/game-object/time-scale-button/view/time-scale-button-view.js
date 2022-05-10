@@ -11,7 +11,7 @@ import {HUDUIScale} from "../../scale";
 const CANVAS_SIZE = 256;
 
 /** メッシュサイズ */
-const MESH_SIZE = 100;
+const MESH_SIZE = 70;
 
 /** アニメーションタイムスケールボタンビュー */
 export class TimeScaleButtonView {
@@ -93,11 +93,11 @@ export class TimeScaleButtonView {
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     const groupScale = devicePerScale;
     this._group.scale.set(groupScale, groupScale, groupScale);
-    const paddingLeft = 40;
-    const marginLeft = 10;
+    const paddingLeft = 25;
+    const marginLeft = 15;
     this._group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
       + Math.max(marginLeft, preRender.safeAreaInset.left);
-    const paddingTop = 40;
+    const paddingTop = 25;
     const marginTop = 10;
     this._group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop * devicePerScale
       - Math.max(marginTop, preRender.safeAreaInset.top);

@@ -15,6 +15,7 @@ import {createBurstButton} from "./burst-button";
 import {createPilotButton} from "./pilot-button";
 import {ResultIndicator} from "../../../../../../game-object/result-indicator/result-indicator";
 import {drawIndicator} from "../../../../../../game-object/result-indicator";
+import {TimeScaleButton} from "../../../../../../game-object/time-scale-button/time-scale-button";
 
 /**
  * HUDレイヤーのゲームオブジェクト
@@ -23,6 +24,7 @@ export class HUDGameObjects {
   batterySelector: BatterySelector;
   burstButton: BurstButton;
   pilotButton: PilotButton;
+  timeScaleButton: TimeScaleButton;
   frontmostFader: Fader;
   rearmostFader: Fader;
   drawIndicator: ResultIndicator;
@@ -58,6 +60,7 @@ export class HUDGameObjects {
     });
     this.burstButton = createBurstButton(resources, gameObjectAction, playerInfo.armdozer.id);
     this.pilotButton = createPilotButton(resources, gameObjectAction, playerInfo.pilot.id);
+    this.timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
 
     this.frontmostFader = frontmostFader({
       gameObjectAction: gameObjectAction,
@@ -87,6 +90,7 @@ export class HUDGameObjects {
     this.batterySelector.destructor();
     this.burstButton.destructor();
     this.pilotButton.destructor();
+    this.timeScaleButton.destructor();
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
     this.drawIndicator.destructor();
@@ -105,6 +109,7 @@ export class HUDGameObjects {
       this.batterySelector.getObject3D(),
       this.burstButton.getObject3D(),
       this.pilotButton.getObject3D(),
+      this.timeScaleButton.getObject3D(),
       this.rearmostFader.getObject3D(),
       this.frontmostFader.getObject3D(),
       this.drawIndicator.getObject3D(),
