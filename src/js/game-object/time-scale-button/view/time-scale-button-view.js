@@ -93,12 +93,12 @@ export class TimeScaleButtonView {
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     const groupScale = devicePerScale;
     this._group.scale.set(groupScale, groupScale, groupScale);
-    const paddingLeft = 26;
-    const marginLeft = 10;
+    const paddingLeft = 25;
+    const marginLeft = 5;
     this._group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
       + Math.max(marginLeft, preRender.safeAreaInset.left);
     const paddingTop = 25;
-    const marginTop = 10;
+    const marginTop = 5;
     this._group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop * devicePerScale
       - Math.max(marginTop, preRender.safeAreaInset.top);
   }
