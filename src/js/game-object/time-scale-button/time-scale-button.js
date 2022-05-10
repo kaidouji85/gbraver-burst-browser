@@ -6,6 +6,7 @@ import {TimeScaleButtonView} from "./view/time-scale-button-view";
 import {createInitialValue} from "./model/initial-value";
 import type {Stream, Unsubscriber} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
+import type {PreRender} from "../../game-loop/pre-render";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
@@ -24,7 +25,7 @@ export class TimeScaleButton {
     this._view = new TimeScaleButtonView(resources);
     this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
-        this._onPreRender();
+        this._onPreRender(action);
       }
     });
   }
@@ -47,8 +48,10 @@ export class TimeScaleButton {
 
   /**
    * プリレンダー時の処理
+   *
+   * @param preRender プリレンダー
    */
-  _onPreRender(): void {
-    this._view.engage(this._model);
+  _onPreRender(preRender: PreRender): void {
+    this._view.engage(this._model, preRender);
   }
 }

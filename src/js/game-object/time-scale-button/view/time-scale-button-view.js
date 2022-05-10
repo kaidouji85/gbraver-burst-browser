@@ -4,6 +4,8 @@ import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {TimeScaleButtonModel} from "../model/time-scale-button-model";
+import type {PreRender} from "../../../game-loop/pre-render";
+import {HUDUIScale} from "../../scale";
 
 /** canvasサイズ */
 const CANVAS_SIZE = 256;
@@ -13,7 +15,7 @@ const MESH_SIZE = 100;
 
 /** アニメーションタイムスケールボタンビュー */
 export class TimeScaleButtonView {
-  _group: THREE.Group;
+  _group: typeof THREE.Group;
   _button: SimpleImageMesh;
   _timeScale100: SimpleImageMesh;
   _timeScale050: SimpleImageMesh;
@@ -67,8 +69,9 @@ export class TimeScaleButtonView {
    * モデルをビューに反映させる
    *
    * @param model モデル
+   * @param preRender プリレンダー情報
    */
-  engage(model: TimeScaleButtonModel): void {
+  engage(model: TimeScaleButtonModel, preRender: PreRender): void {
     const activeTimeScale = (() => {
       switch(model.timeScale) {
         case 1:
@@ -86,5 +89,17 @@ export class TimeScaleButtonView {
       const opacity = timeScale === activeTimeScale ? 1 : 0;
       timeScale.setOpacity(opacity);
     });
+
+    const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
+    const groupScale = devicePerScale;
+    this._group.scale.set(groupScale, groupScale, groupScale);
+    const paddingLeft = 40;
+    const marginLeft = 10;
+    this._group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
+      + Math.max(marginLeft, preRender.safeAreaInset.left);
+    const paddingTop = 40;
+    const marginTop = 10;
+    this._group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop * devicePerScale
+      - Math.max(marginTop, preRender.safeAreaInset.top);
   }
 }
