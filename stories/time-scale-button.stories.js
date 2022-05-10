@@ -7,8 +7,8 @@ export default {
 };
 
 export const timeScaleButton = (): HTMLElement => {
-  const stub = new HUDGameObjectStub(({resources}) => {
-    const timeScaleButton = new TimeScaleButton(resources);
+  const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
+    const timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
     return [timeScaleButton.getObject3D()];
   });
   stub.start();

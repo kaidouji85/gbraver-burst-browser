@@ -1,29 +1,39 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from "../../resource";
-import {CANVAS_IMAGE_IDS} from "../../resource/canvas-image";
-import {SimpleImageMesh} from "../../mesh/simple-image-mesh";
-
-/** canvasサイズ */
-const CANVAS_SIZE = 256;
-
-/** メッシュサイズ */
-const MESH_SIZE = 100;
+import type {TimeScaleButtonModel} from "./model/time-scale-button-model";
+import {TimeScaleButtonView} from "./view/time-scale-button-view";
+import {createInitialValue} from "./model/initial-value";
+import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
-  _button: SimpleImageMesh;
+  _model: TimeScaleButtonModel;
+  _view: TimeScaleButtonView;
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(resources: Resources) {
-    const buttonImage = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_BUTTON)?.image ?? new Image();
-    this._button = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: buttonImage, imageWidth: 256});
-    this._button.getObject3D().position.x = 0;
-    this._button.getObject3D().position.y = 0;
+  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+    this._model = createInitialValue();
+    this._view = new TimeScaleButtonView(resources);
+    this._unsubscriber = gameObjectAction.subscribe(action => {
+      if (action.type === 'PreRender') {
+        this._onPreRender();
+      }
+    });
+  }
+
+  /**
+   * デストラクタ相当の処理
+   */
+  destructor(): void {
+    this._view.destructor();
   }
 
   /**
@@ -32,6 +42,13 @@ export class TimeScaleButton {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._button.getObject3D();
+    return this._view.getObject3D();
+  }
+
+  /**
+   * プリレンダー時の処理
+   */
+  _onPreRender(): void {
+    this._view.engage(this._model);
   }
 }
