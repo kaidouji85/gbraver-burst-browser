@@ -4,6 +4,7 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../../game-loop/game-loop";
 import type {DecideBattery} from "./actions/decide-battery";
+import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress} from "./battle-progress";
 import {stateHistoryAnimation} from "./animation/state-history";
@@ -84,6 +85,8 @@ export class BattleScene implements Scene {
           this._onBurst();
         } else if (action.type === 'doPilotSkill') {
           this._onPilotSkill();
+        } else if (action.type === 'ToggleTimeScale') {
+          this._onToggleTimeScale(action);
         }
       })
     ];
@@ -169,6 +172,18 @@ export class BattleScene implements Scene {
   }
 
   /**
+   * タイムスケールをトグルした際の処理
+   * 
+   * @param action アクション
+   */
+  _onToggleTimeScale(action: ToggleTimeScale): void {
+    this._exclusive.execute(async () => {
+      this._state.animationTimeScale = action.timeScale;
+      await this._view.hud.gameObjects.timeScaleButton.toggle(action.timeScale).play();
+    });
+  }
+
+  /**
    * パイロットスキル発動時の処理
    *
    * @return 処理が完了したら発火するPromise
@@ -191,6 +206,8 @@ export class BattleScene implements Scene {
       }
     });
   }
+
+
 
   /**
    * ゲームを進める

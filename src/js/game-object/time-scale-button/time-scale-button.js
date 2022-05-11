@@ -98,11 +98,11 @@ export class TimeScaleButton {
   /**
    * タイムスケールを切り替える
    * 
+   * @param timeScale 切り替えるタイムスケール
    * @return アニメーション
    */
-  toggle(): Animate {
-    const nextTimeScale = getNextTimeScale(this._model.timeScale);
-    return toggle(this._model, nextTimeScale);
+  toggle(timeScale: number): Animate {
+    return toggle(this._model, timeScale);
   }
 
   /**

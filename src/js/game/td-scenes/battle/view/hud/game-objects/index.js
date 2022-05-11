@@ -79,6 +79,9 @@ export class HUDGameObjects {
       }),
       this.pilotButton.pushButtonNotifier().subscribe(() => {
         this._battleAction.next({type: 'doPilotSkill'});
+      }),
+      this.timeScaleButton.pushNotifier().subscribe(action => {
+        this._battleAction.next({type: 'ToggleTimeScale', timeScale: action.nextTimeScale});
       })
     ];
   }

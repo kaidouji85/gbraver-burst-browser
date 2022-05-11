@@ -11,7 +11,7 @@ export const timeScaleButton = (): HTMLElement => {
     const timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
     timeScaleButton.pushNotifier().subscribe(action => {
       console.log('push', action);
-      timeScaleButton.toggle().play();
+      timeScaleButton.toggle(action.nextTimeScale).play();
     });
     timeScaleButton.open(1).play();
     return [timeScaleButton.getObject3D()];
