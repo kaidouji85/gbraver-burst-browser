@@ -52,7 +52,6 @@ export class BattleScene implements Scene {
   _view: BattleSceneView;
   _sounds: BattleSceneSounds;
   _bgm: BGMManager;
-  _animationTimeScale: number;
   _unsubscriber: Unsubscriber[];
 
   /**
@@ -63,7 +62,7 @@ export class BattleScene implements Scene {
   constructor(param: Param) {
     this._exclusive = new Exclusive();
     this._initialState = param.initialState;
-    this._state = createInitialState(param.player.playerId);
+    this._state = createInitialState(param.player.playerId, param.initialAnimationTimeScale);
     this._endBattle = createStreamSource();
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
@@ -75,7 +74,6 @@ export class BattleScene implements Scene {
       resize: param.resize,
     });
     this._sounds = new BattleSceneSounds(param.resources, param.playingBGM);
-    this._animationTimeScale = param.initialAnimationTimeScale;
     this._bgm = param.bgm;
 
     this._unsubscriber = [
@@ -238,6 +236,6 @@ export class BattleScene implements Scene {
    * @return アニメーションが完了したら発火するPromise
    */
   async _playAnimation(animate: Animate): Promise<void> {
-    await animate.timeScale(this._animationTimeScale).play();
+    await animate.timeScale(this._state.animationTimeScale).play();
   }
 }
