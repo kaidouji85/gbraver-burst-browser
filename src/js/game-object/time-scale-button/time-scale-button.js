@@ -15,11 +15,14 @@ import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
 import type {Update} from "../../game-loop/update";
 import type {Animate} from "../../animation/animate";
+import {createTimeScaleButtonSounds} from "./sounds/time-scale-sounds";
+import type {TimeScaleButtonSounds} from "./sounds/time-scale-sounds";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
   _model: TimeScaleButtonModel;
   _view: TimeScaleButtonView;
+  _sounds: TimeScaleButtonSounds;
   _toggleTween: typeof TWEEN.Group;
   _toggle: StreamSource<number>;
   _unsubscribers: Unsubscriber[];
@@ -33,6 +36,7 @@ export class TimeScaleButton {
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = new TimeScaleButtonView(resources, gameObjectAction);
+    this._sounds = createTimeScaleButtonSounds(resources);
     this._toggleTween = new TWEEN.Group();
     this._toggle = createStreamSource();
     this._unsubscribers = [
@@ -125,7 +129,7 @@ export class TimeScaleButton {
     this._toggleTween.update();
     this._toggleTween.removeAll();
     const nextTimeScale = getNextTimeScale(this._model.timeScale);
-    toggle(this._model, this._toggleTween, nextTimeScale).play();
+    toggle(this._model, this._sounds, this._toggleTween, nextTimeScale).play();
     this._toggle.next(nextTimeScale);
   }
 }
