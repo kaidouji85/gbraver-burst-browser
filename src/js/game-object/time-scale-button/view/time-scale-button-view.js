@@ -121,7 +121,7 @@ export class TimeScaleButtonView {
     });
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
-    const groupScale = devicePerScale;
+    const groupScale = model.scale * devicePerScale;
     this._group.scale.set(groupScale, groupScale, groupScale);
     const paddingLeft = 25;
     const marginLeft = 5;

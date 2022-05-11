@@ -8,6 +8,7 @@ import type {TimeScaleButtonModel} from "./time-scale-button-model";
  */
 export function createInitialValue(): TimeScaleButtonModel {
   return {
-    timeScale: 1
+    timeScale: 1,
+    scale: 1,
   };
 }

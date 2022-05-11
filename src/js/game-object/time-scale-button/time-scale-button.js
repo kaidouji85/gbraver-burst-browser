@@ -7,12 +7,14 @@ import {createInitialValue} from "./model/initial-value";
 import type {Stream, Unsubscriber} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
+import type { Animate } from "../../animation/animate";
+import { toggle } from "./animation/toggle";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
   _model: TimeScaleButtonModel;
   _view: TimeScaleButtonView;
-  _unsubscribers: Unsubscriber[];
+  _unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -23,16 +25,11 @@ export class TimeScaleButton {
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = new TimeScaleButtonView(resources, gameObjectAction);
-    this._unsubscribers = [
-      gameObjectAction.subscribe(action => {
-        if (action.type === 'PreRender') {
-          this._onPreRender(action);
-        }
-      }),
-      this._view.pushButtonNotifier().subscribe(() => {
-        this._onButtonPush();
-      })
-    ];
+    this._unsubscriber = gameObjectAction.subscribe(action => {
+      if (action.type === 'PreRender') {
+        this._onPreRender(action);
+      }
+    });
   }
 
   /**
@@ -40,9 +37,7 @@ export class TimeScaleButton {
    */
   destructor(): void {
     this._view.destructor();
-    this._unsubscribers.forEach(v => {
-      v.unsubscribe();
-    });
+    this._unsubscriber.unsubscribe();
   }
 
   /**
@@ -55,18 +50,29 @@ export class TimeScaleButton {
   }
 
   /**
+   * ボタン押下通知
+   * 
+   * @return 通知ストリーム
+   */
+  pushNotifier(): Stream<void> {
+    return this._view.pushButtonNotifier();
+  }
+
+  /**
+   * タイムスケールを切り替える
+   * 
+   * @return アニメーション
+   */
+  toggle(): Animate {
+    return toggle(this._model, 0.5);  // TODO 現在値に応じて次の値を設定する
+  }
+
+  /**
    * プリレンダー時の処理
    *
    * @param preRender プリレンダー
    */
   _onPreRender(preRender: PreRender): void {
     this._view.engage(this._model, preRender);
-  }
-
-  /**
-   * ボタン押下時の処理
-   */
-  _onButtonPush(): void {
-    console.log('push');
   }
 }

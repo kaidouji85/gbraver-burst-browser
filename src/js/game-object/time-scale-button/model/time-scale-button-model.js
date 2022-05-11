@@ -7,4 +7,6 @@ export const TimeScales = [1, 0.5, 0.25];
 export type TimeScaleButtonModel = {
   /** タイムスケール */
   timeScale: number,
+  /** ボタンのスケール */
+  scale: number,
 };
