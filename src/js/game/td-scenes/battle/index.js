@@ -131,7 +131,8 @@ export class BattleScene implements Scene {
         all(
           this._view.hud.gameObjects.batterySelector.decide(),
           this._view.hud.gameObjects.burstButton.close(),
-          this._view.hud.gameObjects.pilotButton.close()
+          this._view.hud.gameObjects.pilotButton.close(),
+          this._view.hud.gameObjects.timeScaleButton.close(),
         )
           .chain(delay(500))
           .chain(this._view.hud.gameObjects.batterySelector.close())
@@ -154,7 +155,8 @@ export class BattleScene implements Scene {
         all(
           this._view.hud.gameObjects.burstButton.decide(),
           this._view.hud.gameObjects.batterySelector.close(),
-          this._view.hud.gameObjects.pilotButton.close()
+          this._view.hud.gameObjects.pilotButton.close(),
+          this._view.hud.gameObjects.timeScaleButton.close(),
         )
           .chain(delay(500))
           .chain(this._view.hud.gameObjects.burstButton.close())
@@ -178,6 +180,7 @@ export class BattleScene implements Scene {
           this._view.hud.gameObjects.pilotButton.decide(),
           this._view.hud.gameObjects.burstButton.close(),
           this._view.hud.gameObjects.batterySelector.close(),
+          this._view.hud.gameObjects.timeScaleButton.close(),
         )
           .chain(delay(500))
           .chain(this._view.hud.gameObjects.pilotButton.close())

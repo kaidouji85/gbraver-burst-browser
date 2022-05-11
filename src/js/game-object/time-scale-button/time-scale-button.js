@@ -1,6 +1,7 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from "../../resource";
+import {close} from "./animation/close";
 import {open} from "./animation/open";
 import {toggle} from "./animation/toggle";
 import type {TimeScaleButtonModel} from "./model/time-scale-button-model";
@@ -83,6 +84,15 @@ export class TimeScaleButton {
    */
   open(timeScale: number): Animate {
     return open(this._model, timeScale);
+  }
+
+  /**
+   * ボタンを非表示にする
+   * 
+   * @return アニメーション
+   */
+  close(): Animate {
+    return close(this._model);
   }
 
   /**
