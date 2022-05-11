@@ -75,7 +75,7 @@ import {
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
 import type {GbraverBurstBrowserConfig} from "./config/browser-config";
-import {isSoundConfigChanged} from "./config/browser-config";
+import {BattleAnimationTimeScales, isSoundConfigChanged, parseBattleAnimationTimeScale} from "./config/browser-config";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -556,17 +556,26 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
+    const saveAnimationTimeScale = () => {
+      const battleAnimationTimeScale = parseBattleAnimationTimeScale(action.animationTimeScale) ?? BattleAnimationTimeScales[0];
+      const origin = configFromLocalStorage() ?? DefaultConfig;
+      const update = {...origin, battleAnimationTimeScale};
+      saveConfigToLocalStorage(update);
+    };
     const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
       const isStageClear = isNPCBattleStageClear(inProgress.subFlow.state, action.gameEnd.result);
       const updatedState = updateNPCBattle(inProgress.subFlow.state, isStageClear);
       this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
-      if (isStageClear && updatedState.isGameClear) {
-        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleComplete);
-      } else if (isStageClear) {
-        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleWinButtons);
-      } else {
-        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleLoseButtons);
-      }
+      const postBattleButtons = (() => {
+        if (isStageClear && updatedState.isGameClear) {
+          return PostNPCBattleComplete;
+        } else if (isStageClear) {
+          return PostNPCBattleWinButtons;
+        } else {
+          return PostNPCBattleLoseButtons;
+        }
+      })();
+      await this._domFloaters.showPostBattle(this._resources, postBattleButtons);
     };
     const endCasualMatch = async (): Promise<void> => {
       this._suddenlyBattleEnd.unbind();
@@ -574,6 +583,7 @@ export class Game {
       await this._domFloaters.showPostBattle(this._resources, PostNetworkBattleButtons);
     };
 
+    saveAnimationTimeScale();
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
       const playingNPCBattle: PlayingNPCBattle = this._inProgress.subFlow;
       const inProgress = ((this._inProgress: any): NPCBattleX<typeof playingNPCBattle>);

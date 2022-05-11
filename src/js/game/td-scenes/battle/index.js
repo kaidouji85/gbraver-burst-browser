@@ -28,6 +28,14 @@ import {Animate} from "../../../animation/animate";
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
+/** バトル終了情報 */
+type BattleEnd = {
+  /** ゲーム終了情報 */
+  gameEnd: GameEnd,
+  /** アニメーションタイムスケール */
+  animationTimeScale: number,
+};
+
 /** コンストラクタのパラメータ */
 type Param = {
   resources: Resources,
@@ -47,7 +55,7 @@ type Param = {
 export class BattleScene implements Scene {
   _state: BattleSceneState;
   _initialState: GameState[];
-  _endBattle: StreamSource<GameEnd>;
+  _endBattle: StreamSource<BattleEnd>;
   _battleProgress: BattleProgress;
   _exclusive: Exclusive;
   _view: BattleSceneView;
@@ -105,7 +113,7 @@ export class BattleScene implements Scene {
    *
    * @return 通知ストリーム
    */
-  gameEndNotifier(): Stream<GameEnd> {
+  gameEndNotifier(): Stream<BattleEnd> {
     return this._endBattle;
   }
 
@@ -241,7 +249,7 @@ export class BattleScene implements Scene {
   async _endGame(gameEnd: GameEnd): Promise<void> {
     await this._bgm.do(fadeOut)
     await this._bgm.do(stop);
-    this._endBattle.next(gameEnd);
+    this._endBattle.next({gameEnd, animationTimeScale: this._state.animationTimeScale});
   }
 
   /**

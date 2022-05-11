@@ -74,7 +74,7 @@ export class TDScenes {
     this._scene = scene;
     this._unsubscriber = [
       scene.gameEndNotifier().subscribe(v => {
-        this._gameAction.next({type: 'EndBattle', gameEnd: v,});
+        this._gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
       })
     ];
     return scene;
