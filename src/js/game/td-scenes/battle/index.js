@@ -172,15 +172,6 @@ export class BattleScene implements Scene {
   }
 
   /**
-   * タイムスケールをトグルした際の処理
-   * 
-   * @param action アクション
-   */
-  _onToggleTimeScale(action: ToggleTimeScale): void {
-    this._state.animationTimeScale = action.timeScale;
-  }
-
-  /**
    * パイロットスキル発動時の処理
    *
    * @return 処理が完了したら発火するPromise
@@ -204,7 +195,14 @@ export class BattleScene implements Scene {
     });
   }
 
-
+  /**
+   * タイムスケール変更時の処理
+   * 
+   * @param action アクション
+   */
+   _onToggleTimeScale(action: ToggleTimeScale): void {
+    this._state.animationTimeScale = action.timeScale;
+  }
 
   /**
    * ゲームを進める

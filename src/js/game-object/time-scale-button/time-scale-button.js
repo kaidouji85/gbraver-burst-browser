@@ -1,4 +1,5 @@
 // @flow
+import TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
 import type {Resources} from "../../resource";
 import {close} from "./animation/close";
@@ -12,12 +13,14 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
+import type {Update} from "../../game-loop/update";
 import type {Animate} from "../../animation/animate";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
   _model: TimeScaleButtonModel;
   _view: TimeScaleButtonView;
+  _toggleTween: typeof TWEEN.Group;
   _toggle: StreamSource<number>;
   _unsubscribers: Unsubscriber[];
 
@@ -30,10 +33,13 @@ export class TimeScaleButton {
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = new TimeScaleButtonView(resources, gameObjectAction);
+    this._toggleTween = new TWEEN.Group();
     this._toggle = createStreamSource();
     this._unsubscribers = [
       gameObjectAction.subscribe(action => {
-        if (action.type === 'PreRender') {
+        if (action.type === 'Update') {
+          this._onUpdate(action);
+        } else if (action.type === 'PreRender') {
           this._onPreRender(action);
         }
       }),
@@ -91,12 +97,21 @@ export class TimeScaleButton {
   }
 
   /**
+   * アップデート時の処理
+   * 
+   * @param action アクション 
+   */
+  _onUpdate(action: Update): void {
+    this._toggleTween.update(action.time);
+  }
+
+  /**
    * プリレンダー時の処理
    *
-   * @param preRender プリレンダー
+   * @param action アクション
    */
-  _onPreRender(preRender: PreRender): void {
-    this._view.engage(this._model, preRender);
+  _onPreRender(action: PreRender): void {
+    this._view.engage(this._model, action);
   }
 
   /**
@@ -107,8 +122,10 @@ export class TimeScaleButton {
       return;
     }
 
+    this._toggleTween.update();
+    this._toggleTween.removeAll();
     const nextTimeScale = getNextTimeScale(this._model.timeScale);
-    toggle(this._model, nextTimeScale).play();
+    toggle(this._model, this._toggleTween, nextTimeScale).play();
     this._toggle.next(nextTimeScale);
   }
 }
