@@ -1,14 +1,24 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from "../../resource";
+import {toggle} from "./animation/toggle";
 import type {TimeScaleButtonModel} from "./model/time-scale-button-model";
-import {TimeScaleButtonView} from "./view/time-scale-button-view";
+import {getNextTimeScale} from "./model/next-time-scale";
 import {createInitialValue} from "./model/initial-value";
+import {TimeScaleButtonView} from "./view/time-scale-button-view";
 import type {Stream, Unsubscriber} from "../../stream/stream";
+import {map} from "../../stream/operator";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
-import type { Animate } from "../../animation/animate";
-import { toggle } from "./animation/toggle";
+import type {Animate} from "../../animation/animate";
+
+/** ボタン押下情報 */
+type PushButton = {
+  /** タイムスケール現在値 */
+  timeScale: number,
+  /** トグル後のタイムスケール */
+  nextTimeScale: number
+};
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
@@ -54,8 +64,13 @@ export class TimeScaleButton {
    * 
    * @return 通知ストリーム
    */
-  pushNotifier(): Stream<void> {
-    return this._view.pushButtonNotifier();
+  pushNotifier(): Stream<PushButton> {
+    return this._view.pushButtonNotifier()
+      .chain(map(() => {
+        const timeScale = this._model.timeScale;
+        const nextTimeScale = getNextTimeScale(timeScale);
+        return {timeScale, nextTimeScale};    
+      }));
   }
 
   /**
@@ -64,7 +79,8 @@ export class TimeScaleButton {
    * @return アニメーション
    */
   toggle(): Animate {
-    return toggle(this._model, 0.5);  // TODO 現在値に応じて次の値を設定する
+    const nextTimeScale = getNextTimeScale(this._model.timeScale);
+    return toggle(this._model, nextTimeScale);
   }
 
   /**
