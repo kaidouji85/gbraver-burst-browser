@@ -10,5 +10,7 @@ export function createInitialValue(): TimeScaleButtonModel {
   return {
     timeScale: 1,
     scale: 1,
+    opacity: 0,
+    disabled: true,
   };
 }

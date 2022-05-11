@@ -34,7 +34,7 @@ type Param = {
   playingBGM: SoundId,
   renderer: OwnRenderer,
   battleProgress: BattleProgress,
-  animationTimeScale: number,
+  initialAnimationTimeScale: number,
   initialState: GameState[],
   player: Player,
   enemy: Player,
@@ -75,7 +75,7 @@ export class BattleScene implements Scene {
       resize: param.resize,
     });
     this._sounds = new BattleSceneSounds(param.resources, param.playingBGM);
-    this._animationTimeScale = param.animationTimeScale;
+    this._animationTimeScale = param.initialAnimationTimeScale;
     this._bgm = param.bgm;
 
     this._unsubscriber = [

@@ -13,6 +13,7 @@ export const timeScaleButton = (): HTMLElement => {
       console.log('push', action);
       timeScaleButton.toggle().play();
     });
+    timeScaleButton.open(1).play();
     return [timeScaleButton.getObject3D()];
   });
   stub.start();

@@ -55,14 +55,14 @@ export class TimeScaleButtonView {
     this._group.add(this._timeScale025.getObject3D());
 
     this._overlap = circleButtonOverlap({
-      radius: 25, 
+      radius: 30, 
       segments:32, 
       gameObjectAction, 
       onButtonPush: () => {
         this._pushButton.next();
-      }
+      },
+      visible: false
     });
-    this._overlap.getObject3D().position.z = 1;
     this._group.add(this._overlap.getObject3D());
   }
 
@@ -116,9 +116,10 @@ export class TimeScaleButtonView {
     })();
     const timeScales = [this._timeScale100, this._timeScale050, this._timeScale025];
     timeScales.forEach(timeScale => {
-      const opacity = timeScale === activeTimeScale ? 1 : 0;
+      const opacity = timeScale === activeTimeScale ? model.opacity : 0;
       timeScale.setOpacity(opacity);
     });
+    this._button.setOpacity(model.opacity);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     const groupScale = model.scale * devicePerScale;

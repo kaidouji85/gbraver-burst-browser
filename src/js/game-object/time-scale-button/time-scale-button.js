@@ -1,13 +1,14 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from "../../resource";
+import {open} from "./animation/open";
 import {toggle} from "./animation/toggle";
 import type {TimeScaleButtonModel} from "./model/time-scale-button-model";
 import {getNextTimeScale} from "./model/next-time-scale";
 import {createInitialValue} from "./model/initial-value";
 import {TimeScaleButtonView} from "./view/time-scale-button-view";
 import type {Stream, Unsubscriber} from "../../stream/stream";
-import {map} from "../../stream/operator";
+import {filter, map} from "../../stream/operator";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
 import type {Animate} from "../../animation/animate";
@@ -66,11 +67,22 @@ export class TimeScaleButton {
    */
   pushNotifier(): Stream<PushButton> {
     return this._view.pushButtonNotifier()
+      .chain(filter(() => !this._model.disabled))
       .chain(map(() => {
         const timeScale = this._model.timeScale;
         const nextTimeScale = getNextTimeScale(timeScale);
         return {timeScale, nextTimeScale};    
       }));
+  }
+
+  /**
+   * ボタンを表示する
+   * 
+   * @param timeScale タイムスケール値 
+   * @return アニメーション
+   */
+  open(timeScale: number): Animate {
+    return open(this._model, timeScale);
   }
 
   /**
