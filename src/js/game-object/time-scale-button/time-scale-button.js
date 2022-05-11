@@ -12,7 +12,7 @@ import type {PreRender} from "../../game-loop/pre-render";
 export class TimeScaleButton {
   _model: TimeScaleButtonModel;
   _view: TimeScaleButtonView;
-  _unsubscriber: Unsubscriber;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -23,11 +23,16 @@ export class TimeScaleButton {
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = new TimeScaleButtonView(resources, gameObjectAction);
-    this._unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'PreRender') {
-        this._onPreRender(action);
-      }
-    });
+    this._unsubscribers = [
+      gameObjectAction.subscribe(action => {
+        if (action.type === 'PreRender') {
+          this._onPreRender(action);
+        }
+      }),
+      this._view.pushButtonNotifier().subscribe(() => {
+        this._onButtonPush();
+      })
+    ];
   }
 
   /**
@@ -35,6 +40,9 @@ export class TimeScaleButton {
    */
   destructor(): void {
     this._view.destructor();
+    this._unsubscribers.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -53,5 +61,12 @@ export class TimeScaleButton {
    */
   _onPreRender(preRender: PreRender): void {
     this._view.engage(this._model, preRender);
+  }
+
+  /**
+   * ボタン押下時の処理
+   */
+  _onButtonPush(): void {
+    console.log('push');
   }
 }

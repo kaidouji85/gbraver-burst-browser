@@ -3,7 +3,8 @@ import * as THREE from 'three';
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
-import type {Stream} from "../../../stream/stream";
+import type {Stream, StreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {TimeScaleButtonModel} from "../model/time-scale-button-model";
 import type {PreRender} from "../../../game-loop/pre-render";
 import type {GameObjectAction} from "../../action/game-object-action";
@@ -25,14 +26,17 @@ export class TimeScaleButtonView {
   _timeScale050: SimpleImageMesh;
   _timeScale025: SimpleImageMesh;
   _overlap: ButtonOverlap;
+  _pushButton: StreamSource<void>;
 
   /**
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
+   * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._group = new THREE.Group();
+    this._pushButton = createStreamSource();
 
     const buttonImage = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_BUTTON)?.image ?? new Image();
     this._button = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: buttonImage, imageWidth: 256});
@@ -55,9 +59,8 @@ export class TimeScaleButtonView {
       segments:32, 
       gameObjectAction, 
       onButtonPush: () => {
-        // NOP
-      },
-      visible: true,  // TODO 開発が終わったらfalseにする
+        this._pushButton.next();
+      }
     });
     this._overlap.getObject3D().position.z = 1;
     this._group.add(this._overlap.getObject3D());
@@ -71,6 +74,7 @@ export class TimeScaleButtonView {
     this._timeScale100.destructor();
     this._timeScale050.destructor();
     this._timeScale025.destructor();
+    this._overlap.destructor();
   }
 
   /**
@@ -80,6 +84,15 @@ export class TimeScaleButtonView {
    */
   getObject3D(): typeof THREE.Object3D {
     return this._group;
+  }
+
+  /**
+   * ボタン押下通知
+   * 
+   * @return 通知ストリーム
+   */
+  pushButtonNotifier(): Stream<void> {
+    return this._pushButton;
   }
 
   /**
