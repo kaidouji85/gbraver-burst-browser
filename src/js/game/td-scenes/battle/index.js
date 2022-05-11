@@ -85,7 +85,7 @@ export class BattleScene implements Scene {
           this._onBurst();
         } else if (action.type === 'doPilotSkill') {
           this._onPilotSkill();
-        } else if (action.type === 'ToggleTimeScale') {
+        } else if (action.type === 'toggleTimeScale') {
           this._onToggleTimeScale(action);
         }
       })
@@ -177,10 +177,7 @@ export class BattleScene implements Scene {
    * @param action アクション
    */
   _onToggleTimeScale(action: ToggleTimeScale): void {
-    this._exclusive.execute(async () => {
-      this._state.animationTimeScale = action.timeScale;
-      await this._view.hud.gameObjects.timeScaleButton.toggle(action.timeScale).play();
-    });
+    this._state.animationTimeScale = action.timeScale;
   }
 
   /**

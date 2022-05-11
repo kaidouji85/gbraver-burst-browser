@@ -9,9 +9,8 @@ export default {
 export const timeScaleButton = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({resources, gameObjectAction}) => {
     const timeScaleButton = new TimeScaleButton(resources, gameObjectAction);
-    timeScaleButton.pushNotifier().subscribe(action => {
-      console.log('push', action);
-      timeScaleButton.toggle(action.nextTimeScale).play();
+    timeScaleButton.toggleNotifier().subscribe(timeScale => {
+      console.log('push', timeScale);
     });
     timeScaleButton.open(1).play();
     return [timeScaleButton.getObject3D()];

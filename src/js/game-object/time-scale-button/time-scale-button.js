@@ -8,25 +8,18 @@ import type {TimeScaleButtonModel} from "./model/time-scale-button-model";
 import {getNextTimeScale} from "./model/next-time-scale";
 import {createInitialValue} from "./model/initial-value";
 import {TimeScaleButtonView} from "./view/time-scale-button-view";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import {filter, map} from "../../stream/operator";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
 import type {Animate} from "../../animation/animate";
-
-/** ボタン押下情報 */
-type PushButton = {
-  /** タイムスケール現在値 */
-  timeScale: number,
-  /** トグル後のタイムスケール */
-  nextTimeScale: number
-};
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
   _model: TimeScaleButtonModel;
   _view: TimeScaleButtonView;
-  _unsubscriber: Unsubscriber;
+  _toggle: StreamSource<number>;
+  _unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -37,11 +30,17 @@ export class TimeScaleButton {
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
     this._view = new TimeScaleButtonView(resources, gameObjectAction);
-    this._unsubscriber = gameObjectAction.subscribe(action => {
-      if (action.type === 'PreRender') {
-        this._onPreRender(action);
-      }
-    });
+    this._toggle = createStreamSource();
+    this._unsubscribers = [
+      gameObjectAction.subscribe(action => {
+        if (action.type === 'PreRender') {
+          this._onPreRender(action);
+        }
+      }),
+      this._view.pushButtonNotifier().subscribe(() => {
+        this._onButtonPush();
+      })
+    ];
   }
 
   /**
@@ -49,7 +48,9 @@ export class TimeScaleButton {
    */
   destructor(): void {
     this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this._unsubscribers.forEach(v => {
+      v.unsubscribe();
+    });
   }
 
   /**
@@ -62,18 +63,12 @@ export class TimeScaleButton {
   }
 
   /**
-   * ボタン押下通知
+   * タイムスケール変更通知
    * 
    * @return 通知ストリーム
    */
-  pushNotifier(): Stream<PushButton> {
-    return this._view.pushButtonNotifier()
-      .chain(filter(() => !this._model.disabled))
-      .chain(map(() => {
-        const timeScale = this._model.timeScale;
-        const nextTimeScale = getNextTimeScale(timeScale);
-        return {timeScale, nextTimeScale};    
-      }));
+  toggleNotifier(): Stream<number> {
+    return this._toggle;
   }
 
   /**
@@ -96,21 +91,24 @@ export class TimeScaleButton {
   }
 
   /**
-   * タイムスケールを切り替える
-   * 
-   * @param timeScale 切り替えるタイムスケール
-   * @return アニメーション
-   */
-  toggle(timeScale: number): Animate {
-    return toggle(this._model, timeScale);
-  }
-
-  /**
    * プリレンダー時の処理
    *
    * @param preRender プリレンダー
    */
   _onPreRender(preRender: PreRender): void {
     this._view.engage(this._model, preRender);
+  }
+
+  /**
+   * ボタン押下時の処理
+   */
+  _onButtonPush(): void {
+    if (this._model.disabled) {
+      return;
+    }
+
+    const nextTimeScale = getNextTimeScale(this._model.timeScale);
+    toggle(this._model, nextTimeScale).play();
+    this._toggle.next(nextTimeScale);
   }
 }
