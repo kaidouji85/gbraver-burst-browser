@@ -15,8 +15,8 @@ import type {GameObjectAction} from "../action/game-object-action";
 import type {PreRender} from "../../game-loop/pre-render";
 import type {Update} from "../../game-loop/update";
 import type {Animate} from "../../animation/animate";
-import {createTimeScaleButtonSounds} from "./sounds/time-scale-sounds";
 import type {TimeScaleButtonSounds} from "./sounds/time-scale-sounds";
+import {createTimeScaleButtonSounds} from "./sounds/time-scale-sounds";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
