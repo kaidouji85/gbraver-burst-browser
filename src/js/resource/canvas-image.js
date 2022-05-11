@@ -39,6 +39,10 @@ export const CANVAS_IMAGE_IDS = {
   HP_BAR_BACK: 'HP_BAR_BACK',
   BATTERY_GAUGE: 'BATTERY_GAUGE',
   BATTERY_GAUGE_BACK: 'BATTERY_GAUGE_BACK',
+  TIME_SCALE_BUTTON: 'TIME_SCALE_BUTTON',
+  TIME_SCALE_100: 'TIME_SCALE_100',
+  TIME_SCALE_050: 'TIME_SCALE_050',
+  TIME_SCALE_025: 'TIME_SCALE_025',
 };
 
 /** キャンバス用画像設定をあつめたもの */
@@ -122,6 +126,22 @@ export const CANVAS_IMAGE_CONFIGS: CanvasImageConfig[] = [
   {
     id: CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK,
     path: 'gauge/battery-gauge-back.webp',
+  },
+  {
+    id: CANVAS_IMAGE_IDS.TIME_SCALE_BUTTON,
+    path: 'button/time-scale-button.webp'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.TIME_SCALE_100,
+    path: 'button/time-scale-100.webp'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.TIME_SCALE_050,
+    path: 'button/time-scale-050.webp'
+  },
+  {
+    id: CANVAS_IMAGE_IDS.TIME_SCALE_025,
+    path: 'button/time-scale-025.webp'
   },
 ];
 

@@ -79,6 +79,8 @@ export type EndBattle = {
   type: 'EndBattle',
   /** ゲーム終了情報 */
   gameEnd: GameEnd,
+  /** アニメーションタイムスケール */
+  animationTimeScale: number,
 }
 
 /** バトル強制終了 */

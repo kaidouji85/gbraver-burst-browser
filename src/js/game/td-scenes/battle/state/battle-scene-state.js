@@ -5,4 +5,6 @@ import type {PlayerId} from "gbraver-burst-core";
 export type BattleSceneState = {
   /** 画面を開いているプレイヤーID */
   playerId: PlayerId,
+  /** アニメーションタイムスケール */
+  animationTimeScale: number,
 };

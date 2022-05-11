@@ -45,5 +45,6 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
     view.hud.gameObjects.burstButton.open(canBurst),
     view.hud.gameObjects.pilotButton.open(canPilotSkill),
+    view.hud.gameObjects.timeScaleButton.open(sceneState.animationTimeScale),
   );
 }
