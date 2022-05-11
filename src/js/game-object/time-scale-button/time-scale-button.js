@@ -22,7 +22,7 @@ export class TimeScaleButton {
    */
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._model = createInitialValue();
-    this._view = new TimeScaleButtonView(resources);
+    this._view = new TimeScaleButtonView(resources, gameObjectAction);
     this._unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
         this._onPreRender(action);

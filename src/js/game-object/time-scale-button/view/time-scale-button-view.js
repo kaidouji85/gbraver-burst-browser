@@ -3,8 +3,12 @@ import * as THREE from 'three';
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
+import type {Stream} from "../../../stream/stream";
 import type {TimeScaleButtonModel} from "../model/time-scale-button-model";
 import type {PreRender} from "../../../game-loop/pre-render";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {ButtonOverlap} from "../../button-overlap/button-overlap";
+import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
 import {HUDUIScale} from "../../scale";
 
 /** canvasサイズ */
@@ -20,13 +24,14 @@ export class TimeScaleButtonView {
   _timeScale100: SimpleImageMesh;
   _timeScale050: SimpleImageMesh;
   _timeScale025: SimpleImageMesh;
+  _overlap: ButtonOverlap;
 
   /**
    * コンストラクタ
    *
    * @param resources リソース管理オブジェクト
    */
-  constructor(resources: Resources) {
+  constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this._group = new THREE.Group();
 
     const buttonImage = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_BUTTON)?.image ?? new Image();
@@ -44,6 +49,18 @@ export class TimeScaleButtonView {
     const timeScale025 = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_025)?.image ?? new Image();
     this._timeScale025 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale025, imageWidth: 256});
     this._group.add(this._timeScale025.getObject3D());
+
+    this._overlap = circleButtonOverlap({
+      radius: 25, 
+      segments:32, 
+      gameObjectAction, 
+      onButtonPush: () => {
+        // NOP
+      },
+      visible: true,  // TODO 開発が終わったらfalseにする
+    });
+    this._overlap.getObject3D().position.z = 1;
+    this._group.add(this._overlap.getObject3D());
   }
 
   /**
