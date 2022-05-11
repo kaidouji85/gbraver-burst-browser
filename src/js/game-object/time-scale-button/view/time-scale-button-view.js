@@ -102,18 +102,12 @@ export class TimeScaleButtonView {
    * @param preRender プリレンダー情報
    */
   engage(model: TimeScaleButtonModel, preRender: PreRender): void {
-    const activeTimeScale = (() => {
-      switch(model.timeScale) {
-        case 1:
-          return this._timeScale100;
-        case 0.5:
-          return this._timeScale050;
-        case 0.25:
-          return this._timeScale025;
-        default:
-          return this._timeScale100;
-      }
-    })();
+    const activeTimeScales: {timeScale: number, sprite: SimpleImageMesh}[] = [
+      {timeScale: 1, sprite: this._timeScale100},
+      {timeScale: 0.5, sprite: this._timeScale050},
+      {timeScale: 0.25, sprite: this._timeScale025},
+    ];
+    const activeTimeScale = activeTimeScales.find(v => v.timeScale === model.timeScale)?.sprite ?? this._timeScale100;
     const timeScales = [this._timeScale100, this._timeScale050, this._timeScale025];
     timeScales.forEach(timeScale => {
       const opacity = timeScale === activeTimeScale ? model.opacity : 0;
