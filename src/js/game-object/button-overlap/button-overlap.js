@@ -14,7 +14,12 @@ type Param = {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
   /** ボタンを押した時に呼ばれるコールバック関数 */
-  onButtonPush: () => void
+  onButtonPush: () => void,
+  /** 
+   * デバッグ用途で当たり判定を表示・非表示するフラグ
+   * trueで当たり判定を表示する
+   */
+  visible?: boolean,
 };
 
 /** ボタン押下判定オブジェクト */
@@ -31,7 +36,7 @@ export class ButtonOverlap {
   constructor(param: Param) {
     const material = new THREE.MeshBasicMaterial({
       color: new THREE.Color('rgb(0, 255, 0)'),
-      visible: false
+      visible: param.visible ?? false,
     });
     this._mesh = new THREE.Mesh(param.geometry, material);
 

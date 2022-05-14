@@ -1,7 +1,8 @@
 // @flow
-import {wait} from "@gbraver-burst-network/browser-sdk/lib/wait/wait";
 import type {SoundResource} from "../resource/sound";
+import {howlVolume} from "../resource/sound";
 import type {BGM} from "./bgm";
+import {waitTime} from "../wait/wait-time";
 
 /**
  * BGMオペレータ
@@ -15,8 +16,8 @@ export type BGMOperator = (bgm: BGM) => Promise<BGM>;
 export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
     const duration = 500;
-    bgm.resource.sound.fade(bgm.resource.initialVolume, 0, duration);
-    await wait(duration);
+    bgm.resource.sound.fade(howlVolume(bgm.resource), 0, duration);
+    await waitTime(duration);
   }
   return bgm;
 };
@@ -25,8 +26,8 @@ export const fadeOut: BGMOperator = async (bgm: BGM): Promise<BGM> => {
 export const fadeIn: BGMOperator = async (bgm: BGM): Promise<BGM> => {
   if (bgm.type === 'NowPlayingBGM') {
     const duration = 500;
-    bgm.resource.sound.fade(0, bgm.resource.initialVolume, duration);
-    await wait(duration);
+    bgm.resource.sound.fade(0, howlVolume(bgm.resource), duration);
+    await waitTime(duration);
   }
   return bgm;
 };
@@ -48,5 +49,6 @@ export const play = (resource: SoundResource): BGMOperator => async (bgm: BGM): 
   bgm.type === 'NowPlayingBGM' && bgm.resource.sound.stop();
   resource.sound.play();
   resource.sound.loop(true);
+  resource.sound.volume(howlVolume(resource));
   return {type: 'NowPlayingBGM', resource};
 }

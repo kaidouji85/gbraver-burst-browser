@@ -1,6 +1,6 @@
 // @flow
 
-import {escapeHTML} from "../../../../src/js/dom/escape/escape-html";
+import {escapeHTML} from "../../../../src/js/dom/escape-html";
 
 test('HTML特殊文字をエスケープできる', () => {
   const data = `<script>alert("danger")</script><span onclick='alert("trap")'>テスト&文言</span>`;

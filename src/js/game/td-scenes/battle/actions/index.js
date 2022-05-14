@@ -5,6 +5,7 @@ import type {ChangeBattery} from "./change-battery";
 import type {DecideBattery} from "./decide-battery";
 import type {DoBurst} from "./do-burst";
 import type {DoPilotSkill} from "./do-pilot-skill";
+import type {ToggleTimeScale} from "./toggle-time-scale";
 
 /** 戦闘シーンアクション */
 export type BattleSceneAction =
@@ -12,4 +13,5 @@ export type BattleSceneAction =
   | ChangeBattery
   | DecideBattery
   | DoBurst
-  | DoPilotSkill;
+  | DoPilotSkill
+  | ToggleTimeScale;

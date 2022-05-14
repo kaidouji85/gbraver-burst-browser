@@ -55,7 +55,7 @@ import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-s
 import {DefaultConfig} from "./config/default-config";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
-import {SOUND_IDS} from "../resource/sound";
+import {howlVolume, SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
@@ -74,6 +74,8 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
+import type {GbraverBurstBrowserConfig} from "./config/browser-config";
+import {BattleAnimationTimeScales, isSoundConfigChanged, parseBattleAnimationTimeScale} from "./config/browser-config";
 
 /** 本クラスで利用するAPIサーバの機能 */
 interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -237,6 +239,8 @@ export class Game {
 
     const resourceLoading = titleResourceLoading(this._resourceRoot);
     this._resources = await resourceLoading.resources;
+    const config = configFromLocalStorage() ?? DefaultConfig;
+    this._reflectSoundVolume(config);
     const title = await this._startTitle();
     this._interruptScenes.bind(this._resources);
     const latency = Date.now() - startTime;
@@ -275,6 +279,8 @@ export class Game {
   async _onArcadeStart(): Promise<void> {
     if (!this._isFullResourceLoaded) {
       await this._fullResourceLoading();
+      const config = configFromLocalStorage() ?? DefaultConfig;
+      this._reflectSoundVolume(config);
     }
 
     this._inProgress = {type: 'NPCBattle', subFlow: {type: 'PlayerSelect'}};
@@ -318,6 +324,8 @@ export class Game {
 
     if (!this._isFullResourceLoaded) {
       await this._fullResourceLoading();
+      const config = configFromLocalStorage() ?? DefaultConfig;
+      this._reflectSoundVolume(config);
     }
 
     await gotoPlayerSelect();
@@ -475,7 +483,7 @@ export class Game {
       const progress = createBattleProgress(battle);
       const config = configFromLocalStorage() ?? DefaultConfig;
       const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_01,
-        config.webGLPixelRatio, 1 / config.battleAnimationSpeed, progress, battle.player, battle.enemy, battle.initialState);
+        config.webGLPixelRatio, config.battleAnimationTimeScale, progress, battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await Promise.all([(async () => {
         await this._fader.fadeOut();
@@ -548,17 +556,26 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
+    const saveAnimationTimeScale = () => {
+      const battleAnimationTimeScale = parseBattleAnimationTimeScale(action.animationTimeScale) ?? BattleAnimationTimeScales[0];
+      const origin = configFromLocalStorage() ?? DefaultConfig;
+      const update = {...origin, battleAnimationTimeScale};
+      saveConfigToLocalStorage(update);
+    };
     const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
       const isStageClear = isNPCBattleStageClear(inProgress.subFlow.state, action.gameEnd.result);
       const updatedState = updateNPCBattle(inProgress.subFlow.state, isStageClear);
       this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
-      if (isStageClear && updatedState.isGameClear) {
-        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleComplete);
-      } else if (isStageClear) {
-        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleWinButtons);
-      } else {
-        await this._domFloaters.showPostBattle(this._resources, PostNPCBattleLoseButtons);
-      }
+      const postBattleButtons = (() => {
+        if (isStageClear && updatedState.isGameClear) {
+          return PostNPCBattleComplete;
+        } else if (isStageClear) {
+          return PostNPCBattleWinButtons;
+        } else {
+          return PostNPCBattleLoseButtons;
+        }
+      })();
+      await this._domFloaters.showPostBattle(this._resources, postBattleButtons);
     };
     const endCasualMatch = async (): Promise<void> => {
       this._suddenlyBattleEnd.unbind();
@@ -566,6 +583,7 @@ export class Game {
       await this._domFloaters.showPostBattle(this._resources, PostNetworkBattleButtons);
     };
 
+    saveAnimationTimeScale();
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
       const playingNPCBattle: PlayingNPCBattle = this._inProgress.subFlow;
       const inProgress = ((this._inProgress: any): NPCBattleX<typeof playingNPCBattle>);
@@ -696,6 +714,8 @@ export class Game {
    */
   async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
     await this._fader.fadeOut();
+    const origin = configFromLocalStorage() ?? DefaultConfig;
+    isSoundConfigChanged(origin, action.config) && this._reflectSoundVolume(action.config);
     saveConfigToLocalStorage(action.config);
     await this._startTitle();
     await this._fader.fadeIn();
@@ -719,7 +739,7 @@ export class Game {
     const progress = v => Promise.resolve(npcBattle.progress(v));
     const config = configFromLocalStorage() ?? DefaultConfig;
     const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, stage.bgm, config.webGLPixelRatio, 
-      1 / config.battleAnimationSpeed ,{progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
+      config.battleAnimationTimeScale ,{progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     const latency = Date.now() - startNPCStageTitleTime;
     await waitTime(3000- latency);
@@ -770,5 +790,28 @@ export class Game {
     await this._fader.fadeIn();
     this._resources = await resourceLoading.resources;
     this._isFullResourceLoaded = true;
+  }
+
+  /**
+   * 音量設定を音リソースに反映させるヘルパーメソッド
+   *
+   * @param config 反映するブラウザ設定
+   */
+  _reflectSoundVolume(config: GbraverBurstBrowserConfig): void {
+    const getVolume = sound => {
+      switch(sound.type) {
+        case 'BGM':
+          return config.bgmVolume;
+        case 'SE':
+          return config.seVolume;
+        default:
+          return sound.volume;
+      }
+    };
+
+    this._resources.sounds.forEach(sound => {
+      sound.volume = getVolume(sound);
+      sound.sound.volume(howlVolume(sound));
+    });
   }
 }

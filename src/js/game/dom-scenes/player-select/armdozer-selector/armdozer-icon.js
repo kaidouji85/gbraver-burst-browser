@@ -1,13 +1,13 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import type {PushDOM} from "../../../../dom/push/push-dom";
-import {pushDOMStream} from "../../../../dom/push/push-dom";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
-import {pop} from "../../../../dom/animation/pop";
+import {pop} from "../../../../dom/animation";
 import {PathIds} from "../../../../resource/path";
 import type {Stream} from "../../../../stream/stream";
 import {tap} from '../../../../stream/operator';
+import type {PushDOM} from "../../../../dom/event-stream";
+import {pushDOMStream} from "../../../../dom/event-stream";
 
 const ROOT_CLASS_NAME = 'player-select__armdozer-icon';
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;

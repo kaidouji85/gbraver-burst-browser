@@ -4,6 +4,7 @@ import {BattleSceneView} from "./view";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import type {GameLoop} from "../../../game-loop/game-loop";
 import type {DecideBattery} from "./actions/decide-battery";
+import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {createInitialState} from "./state/initial-state";
 import type {BattleProgress} from "./battle-progress";
 import {stateHistoryAnimation} from "./animation/state-history";
@@ -21,11 +22,19 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import type {SoundId} from "../../../resource/sound";
-import {fadeIn, fadeOut, play, stop} from "../../../bgm/bgm-operators";
+import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
 import {Animate} from "../../../animation/animate";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
+
+/** バトル終了情報 */
+type BattleEnd = {
+  /** ゲーム終了情報 */
+  gameEnd: GameEnd,
+  /** アニメーションタイムスケール */
+  animationTimeScale: number,
+};
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -34,7 +43,7 @@ type Param = {
   playingBGM: SoundId,
   renderer: OwnRenderer,
   battleProgress: BattleProgress,
-  animationTimeScale: number,
+  initialAnimationTimeScale: number,
   initialState: GameState[],
   player: Player,
   enemy: Player,
@@ -46,13 +55,12 @@ type Param = {
 export class BattleScene implements Scene {
   _state: BattleSceneState;
   _initialState: GameState[];
-  _endBattle: StreamSource<GameEnd>;
+  _endBattle: StreamSource<BattleEnd>;
   _battleProgress: BattleProgress;
   _exclusive: Exclusive;
   _view: BattleSceneView;
   _sounds: BattleSceneSounds;
   _bgm: BGMManager;
-  _animationTimeScale: number;
   _unsubscriber: Unsubscriber[];
 
   /**
@@ -63,7 +71,7 @@ export class BattleScene implements Scene {
   constructor(param: Param) {
     this._exclusive = new Exclusive();
     this._initialState = param.initialState;
-    this._state = createInitialState(param.player.playerId);
+    this._state = createInitialState(param.player.playerId, param.initialAnimationTimeScale);
     this._endBattle = createStreamSource();
     this._battleProgress = param.battleProgress;
     this._view = new BattleSceneView({
@@ -75,7 +83,6 @@ export class BattleScene implements Scene {
       resize: param.resize,
     });
     this._sounds = new BattleSceneSounds(param.resources, param.playingBGM);
-    this._animationTimeScale = param.animationTimeScale;
     this._bgm = param.bgm;
 
     this._unsubscriber = [
@@ -86,6 +93,8 @@ export class BattleScene implements Scene {
           this._onBurst();
         } else if (action.type === 'doPilotSkill') {
           this._onPilotSkill();
+        } else if (action.type === 'toggleTimeScale') {
+          this._onToggleTimeScale(action);
         }
       })
     ];
@@ -104,7 +113,7 @@ export class BattleScene implements Scene {
    *
    * @return 通知ストリーム
    */
-  gameEndNotifier(): Stream<GameEnd> {
+  gameEndNotifier(): Stream<BattleEnd> {
     return this._endBattle;
   }
 
@@ -116,10 +125,7 @@ export class BattleScene implements Scene {
    */
   start(): Promise<void> {
     return this._exclusive.execute(async (): Promise<void> => {
-      (async () => {
-        await this._bgm.do(play(this._sounds.bgm));
-        await this._bgm.do(fadeIn);
-      })();
+      this._bgm.do(play(this._sounds.bgm));
       await this._playAnimation(stateHistoryAnimation(this._view, this._sounds, this._state, this._initialState));
     });
   }
@@ -136,7 +142,8 @@ export class BattleScene implements Scene {
         all(
           this._view.hud.gameObjects.batterySelector.decide(),
           this._view.hud.gameObjects.burstButton.close(),
-          this._view.hud.gameObjects.pilotButton.close()
+          this._view.hud.gameObjects.pilotButton.close(),
+          this._view.hud.gameObjects.timeScaleButton.close(),
         )
           .chain(delay(500))
           .chain(this._view.hud.gameObjects.batterySelector.close())
@@ -159,7 +166,8 @@ export class BattleScene implements Scene {
         all(
           this._view.hud.gameObjects.burstButton.decide(),
           this._view.hud.gameObjects.batterySelector.close(),
-          this._view.hud.gameObjects.pilotButton.close()
+          this._view.hud.gameObjects.pilotButton.close(),
+          this._view.hud.gameObjects.timeScaleButton.close(),
         )
           .chain(delay(500))
           .chain(this._view.hud.gameObjects.burstButton.close())
@@ -183,6 +191,7 @@ export class BattleScene implements Scene {
           this._view.hud.gameObjects.pilotButton.decide(),
           this._view.hud.gameObjects.burstButton.close(),
           this._view.hud.gameObjects.batterySelector.close(),
+          this._view.hud.gameObjects.timeScaleButton.close(),
         )
           .chain(delay(500))
           .chain(this._view.hud.gameObjects.pilotButton.close())
@@ -192,6 +201,15 @@ export class BattleScene implements Scene {
         await this._endGame(lastState.effect);
       }
     });
+  }
+
+  /**
+   * タイムスケール変更時の処理
+   * 
+   * @param action アクション
+   */
+   _onToggleTimeScale(action: ToggleTimeScale): void {
+    this._state.animationTimeScale = action.timeScale;
   }
 
   /**
@@ -231,7 +249,7 @@ export class BattleScene implements Scene {
   async _endGame(gameEnd: GameEnd): Promise<void> {
     await this._bgm.do(fadeOut)
     await this._bgm.do(stop);
-    this._endBattle.next(gameEnd);
+    this._endBattle.next({gameEnd, animationTimeScale: this._state.animationTimeScale});
   }
 
   /**
@@ -241,6 +259,6 @@ export class BattleScene implements Scene {
    * @return アニメーションが完了したら発火するPromise
    */
   async _playAnimation(animate: Animate): Promise<void> {
-    await animate.timeScale(this._animationTimeScale).play();
+    await animate.timeScale(this._state.animationTimeScale).play();
   }
 }

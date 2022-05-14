@@ -4,16 +4,16 @@ import type {PilotId} from "gbraver-burst-core";
 import {PilotIcon} from "./pilot-icon";
 import {domUuid} from "../../../../uuid/dom-uuid";
 import {PilotStatus} from "./pilot-status";
-import {replaceDOM} from "../../../../dom/replace/replace-dom";
+import {replaceDOM} from "../../../../dom/replace-dom";
 import {Howl} from "howler";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {Exclusive} from "../../../../exclusive/exclusive";
-import type {PushDOM} from "../../../../dom/push/push-dom";
-import {pushDOMStream} from "../../../../dom/push/push-dom";
-import {pop} from "../../../../dom/animation/pop";
+import {pop} from "../../../../dom/animation";
 import {createPilotIcon} from "./create-pilot-icon";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
 import {createStreamSource} from "../../../../stream/stream";
+import type {PushDOM} from "../../../../dom/event-stream";
+import {pushDOMStream} from "../../../../dom/event-stream";
 
 /**ルート要素のclass名 */
 export const ROOT_CLASS_NAME = 'player-select__pilot-selector';

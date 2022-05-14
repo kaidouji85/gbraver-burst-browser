@@ -6,14 +6,14 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {SOUND_IDS} from "../../../../resource/sound";
 import {Howl} from 'howler';
 import {ArmdozerStatus} from "./armdozer-status";
-import {replaceDOM} from "../../../../dom/replace/replace-dom";
+import {replaceDOM} from "../../../../dom/replace-dom";
 import {Exclusive} from "../../../../exclusive/exclusive";
-import type {PushDOM} from "../../../../dom/push/push-dom";
-import {pushDOMStream} from "../../../../dom/push/push-dom";
-import {pop} from "../../../../dom/animation/pop";
+import {pop} from "../../../../dom/animation";
 import {createArmdozerIcon} from "./create-armdozer-icon";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
 import {createStreamSource} from "../../../../stream/stream";
+import type {PushDOM} from "../../../../dom/event-stream";
+import {pushDOMStream} from "../../../../dom/event-stream";
 
 /** ルートHTML要素 class */
 const ROOT_CLASS_NAME = 'player-select__armdozer-selector';

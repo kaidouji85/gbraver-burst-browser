@@ -14,7 +14,12 @@ type Param = {
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
   /** ボタン押下時のコールバック関数 */
-  onButtonPush: () => void
+  onButtonPush: () => void,
+  /** 
+   * デバッグ用途で当たり判定を表示・非表示するフラグ
+   * trueで当たり判定を表示する
+   */
+  visible?: boolean,
 };
 
 /**
@@ -29,5 +34,6 @@ export function circleButtonOverlap(param: Param): ButtonOverlap {
     geometry: geometry,
     gameObjectAction: param.gameObjectAction,
     onButtonPush: () => param.onButtonPush(),
+    visible: param.visible
   })
 }

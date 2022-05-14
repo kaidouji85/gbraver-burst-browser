@@ -9,10 +9,10 @@ import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import {PathIds} from "../../../resource/path";
-import type {PushDOM} from "../../../dom/push/push-dom";
-import {pushDOMStream} from "../../../dom/push/push-dom";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeIn, play} from "../../../bgm/bgm-operators";
+import type {PushDOM} from "../../../dom/event-stream";
+import {pushDOMStream} from "../../../dom/event-stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'npc-ending';
@@ -95,7 +95,7 @@ export class NPCEnding implements DOMScene {
 
     this._pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
     this._bgm = bgm;
-    this._endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.BATTLE_BGM_02) ?? createEmptySoundResource();
+    this._endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.NPC_ENDING) ?? createEmptySoundResource();
     this._canOperation = true;
     this._endNPCEnding = createStreamSource();
     this._unsubscriber = [
