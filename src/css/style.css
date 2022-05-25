@@ -32,7 +32,7 @@
 
   /** フォント */
   --font-color: rgb(240, 240, 240);
-  --responsive-font-size: max(3vh, 1rem);
+  --responsive-font-size: max(3vh, 10px);
 
   /** 背景 */
   --background-color: rgb(23, 23, 23);
