@@ -1,3 +1,22 @@
+@import "play-in-landscape.css";
+@import "mail-verified-incomplete.css";
+@import "fader.css";
+@import "loading.css";
+@import "title.css";
+@import "player-select.css";
+@import "how-to-play.css";
+@import "match-card.css";
+@import "npc-ending.css";
+@import "login.css";
+@import "waiting.css";
+@import "network-error.css";
+@import "delete-account-consent.css";
+@import "npc-stage-title.css";
+@import "difficulty.css";
+@import "config.css";
+@import "post-battle.css";
+@import "matching.css";
+
 :root {
   /** 画面サイズ */
   --safe-area-top: env(safe-area-inset-top);
@@ -37,22 +56,3 @@
   --dialog-border: solid #a9a9a9 1px;
   --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
 }
-
-@import "play-in-landscape.css";
-@import "mail-verified-incomplete.css";
-@import "fader.css";
-@import "loading.css";
-@import "title.css";
-@import "player-select.css";
-@import "how-to-play.css";
-@import "match-card.css";
-@import "npc-ending.css";
-@import "login.css";
-@import "waiting.css";
-@import "network-error.css";
-@import "delete-account-consent.css";
-@import "npc-stage-title.css";
-@import "difficulty.css";
-@import "config.css";
-@import "post-battle.css";
-@import "matching.css";
