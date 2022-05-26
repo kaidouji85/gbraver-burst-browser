@@ -32,7 +32,7 @@
 
   /** フォント */
   --font-color: rgb(240, 240, 240);
-  --responsive-font-size: max(3vh, 1rem);
+  --responsive-font-size: 10px;
 
   /** 背景 */
   --background-color: rgb(23, 23, 23);
@@ -55,4 +55,11 @@
   /** ダイアログ */
   --dialog-border: solid #a9a9a9 1px;
   --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
+}
+
+/* iPhoneXランドスケープ画面高以上の場合に有効になるメディアクエリ */
+@media (min-height: 375px) {
+  :root {
+    --responsive-font-size: max(3vh, 1rem);
+  }
 }
