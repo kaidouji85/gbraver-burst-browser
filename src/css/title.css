@@ -133,6 +133,7 @@
 }
 
 .title__contents__controllers {
+  width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
