@@ -1,5 +1,8 @@
 version: 0.2
 env:
+  variables:
+    IS_SEARCH_ENGINE_NO_INDEX: true
+    IS_SERVICE_WORKER_USED: true
   parameter-store:
     SERVICE: /GbraverBurst/dev/service
     STAGE: /GbraverBurst/dev/stage
@@ -13,13 +16,11 @@ env:
     TERMS_OF_SERVICE_URL: /GbraverBurst/dev/termsOfServiceUrl
     PRIVACY_POLICY_URL: /GbraverBurst/dev/privacyPolicyUrl
     CONTACT_URL: /GbraverBurst/dev/contactURL
-    IS_SEARCH_ENGINE_NO_INDEX: true
     IS_PERFORMANCE_STATS_VISIBLE: /GbraverBurst/dev/isPerformanceStatsVisible
-    IS_SERVICE_WORKER_USED: true
     IS_API_SERVER_ENABLE: /GbraverBurst/dev/isAPIServerEnable
     AUTH0_DOMAIN: /GbraverBurst/dev/auth0Domain
     AUTH0_CLIENT_ID: /GbraverBurst/dev/auth0ClientId
-    AUTH0_AUDIENCE: /GbraverBurst/dev/auth0Audience    
+    AUTH0_AUDIENCE: /GbraverBurst/dev/auth0Audience
 phases:
   install:
     runtime-versions:
