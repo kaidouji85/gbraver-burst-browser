@@ -95,28 +95,22 @@ docker build ./
 * 以下の[Parameter Store](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html)を作成する
     | 名前 | 種類 | 値 |
     | ---- | ---- | -- |
-    | /GbraverBurst/prod/assetlinkJsonURI | String | 本番環境用のassetlinks.jsonのS3 URI |
+    | /GbraverBurst/prod/assetlinksJsonURI | String | 本番環境用のassetlinks.jsonのS3 URI |
     | /GbraverBurst/prod/googleMeasurementID | String | 本番環境用のGoogle Analytics 測定ID |
+    | /GbraverBurst/prod/s3Bucket | String | デプロイ対象となるS3バケット名 |
+    | /GbraverBurst/prod/distributionId | String | デプロイ対象のCloudFrontのdistrubution ID |
+    | /GbraverBurst/prod/ownRootUrl | String | 本番環境を公開しているURL |
+    | /GbraverBurst/prod/twitterSite | String | OGP twitter:site で使うtwitterアカウント |
+    | /GbraverBurst/prod/howToPlayUrl | String | 遊び方動画のyoutubeのiframe埋め込みのURL |
+    | /GbraverBurst/prod/termsOfServiceUrl | String | 利用規約ページのURL |
+    | /GbraverBurst/prod/privacyPolicyUrl | String | プライバシーポリシーページのURL |
+    | /GbraverBurst/prod/contactURL | String | 問い合わせページのURL |
+    | /GbraverBurst/prod/isPerformanceStatsVisible | String | FPSを表示するか否かのフラグ、```true```でFPSを表示 |
+    | /GbraverBurst/prod/isAPIServerEnable | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
+    | /GbraverBurst/prod/auth0ClientId | SecureString | auth0 application client ID |
+
 * CodeBuildを以下設定で構築する
   * Buildspecには```prod.buildspec.yml```を指定する
-  * 以下の環境変数を設定する
-    | 名前 | 値 |
-    | ---- | -- |
-    | S3_BUCKET | デプロイ対象となるS3バケット名 |
-    | DISTRIBUTION_ID | デプロイ対象のCloudFrontのdistrubution ID |
-    | OWN_ROOT_URL | 本番環境を公開しているURL |
-    | TWITTER_SITE | OGP twitter:site で使うtwitterアカウント |
-    | HOW_TO_PLAY_URL | 遊び方動画のyoutubeのiframe埋め込みのURL |
-    | TERMS_OF_SERVICE_URL | 利用規約ページのURL |
-    | PRIVACY_POLICY_URL | プライバシーポリシーページのURL |
-    | CONTACT_URL | 問い合わせページのURL |
-    | IS_SEARCH_ENGINE_NO_INDEX | 固定値で```false```を指定 |
-    | IS_PERFORMANCE_STATS_VISIBLE | 固定値で```false```を指定 |
-    | IS_SERVICE_WORKER_USED | 固定値で```true```を指定 |
-    | IS_API_SERVER_ENABLE | 固定値で```true```を指定 |
-    | AUTH0_DOMAIN | auth0 ドメイン |
-    | AUTH0_CLIENT_ID | auth0 application client ID |
-    | AUTH0_AUDIENCE | auth0 API audience |
 
 ## storybookを動かす
 
