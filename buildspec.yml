@@ -5,6 +5,21 @@ env:
     STAGE: /GbraverBurst/dev/stage
     ASSETLINKS_JSON_URI: /GbraverBurst/dev/assetlinksJsonURI
     GOOGLE_MEASUREMENT_ID: /GbraverBurst/dev/googleMeasurementID
+    S3_BUCKET: /GbraverBurst/dev/s3Bucket
+    DISTRIBUTION_ID: /GbraverBurst/dev/distributionId
+    OWN_ROOT_URL: /GbraverBurst/dev/ownRootUrl
+    TWITTER_SITE: /GbraverBurst/dev/twitterSite
+    HOW_TO_PLAY_URL: /GbraverBurst/dev/howToPlayUrl
+    TERMS_OF_SERVICE_URL: /GbraverBurst/dev/termsOfServiceUrl
+    PRIVACY_POLICY_URL: /GbraverBurst/dev/privacyPolicyUrl
+    CONTACT_URL: /GbraverBurst/dev/contactURL
+    IS_SEARCH_ENGINE_NO_INDEX: true
+    IS_PERFORMANCE_STATS_VISIBLE: /GbraverBurst/dev/isPerformanceStatsVisible
+    IS_SERVICE_WORKER_USED: true
+    IS_API_SERVER_ENABLE: /GbraverBurst/dev/isAPIServerEnable
+    AUTH0_DOMAIN: /GbraverBurst/dev/auth0Domain
+    AUTH0_CLIENT_ID: /GbraverBurst/dev/auth0ClientId
+    AUTH0_AUDIENCE: /GbraverBurst/dev/auth0Audience    
 phases:
   install:
     runtime-versions:
