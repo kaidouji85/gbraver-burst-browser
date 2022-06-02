@@ -26,10 +26,16 @@ type Object3DCreatorParams = {
   resources: Resources,
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
-  /** シーン */
-  scene: typeof THREE.Scene,
   /** カメラ */
   camera: TDCamera
+};
+
+/** スタブに追加するthree.jsオブジェクト */
+type Object3Ds = {
+  /** スタブに追加するオブジェクト */
+  objects: typeof THREE.Object3D[],
+  /** スタブのスカイボックス */
+  skyBox?: typeof THREE.CubeTexture,
 };
 
 /**
@@ -38,7 +44,7 @@ type Object3DCreatorParams = {
  * @param params パラメータ
  * @return シーンに追加するObject3D
  */
-type Object3DCreator = (params: Object3DCreatorParams) => typeof THREE.Object3D[];
+type Object3DCreator = (params: Object3DCreatorParams) => Object3Ds;
 
 /** 3Dレイヤー ゲームオブジェクト スタブ */
 export class TDGameObjectStub {
@@ -91,11 +97,12 @@ export class TDGameObjectStub {
     const resourceRoot = new StorybookResourceRoot();
     const resourceLoading = fullResourceLoading(resourceRoot);
     const resources = await resourceLoading.resources;
-    const object3Ds = this._creator({resources, gameObjectAction: this._gameObjectAction,
+    const {objects, skyBox} = this._creator({resources, gameObjectAction: this._gameObjectAction,
       scene: this._scene, camera: this._camera});
-    object3Ds.forEach(object3D => {
+    objects.forEach(object3D => {
       this._scene.add(object3D);
     });
+    this._scene.background = skyBox ?? null;
   }
 
   /**

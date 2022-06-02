@@ -18,7 +18,7 @@ export const armHammer = (): HTMLElement => {
       .chain(sprite.hmToStand())
       .chain(delay(2000));
     animation.loop();
-    return [sprite.getObject3D()];
+    return {objects: [sprite.getObject3D()]};
   });
   stub.start();
   return stub.domElement();
