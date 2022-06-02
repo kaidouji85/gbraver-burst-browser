@@ -10,11 +10,12 @@ export default {
 };
 
 export const game = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({resources, gameObjectAction, scene}) => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
     const illumination = new Illumination(gameObjectAction);
     const shoppingStreet = new ShoppingStreet(resources);
-    scene.background = createSkyBox(resources);
-    return [...shoppingStreet.getThreeJsObjects(), ...illumination.getObject3Ds()];
+    const objects = [...shoppingStreet.getThreeJsObjects(), ...illumination.getObject3Ds()];
+    const skyBox = createSkyBox(resources);
+    return {objects, skyBox};
   });
   stub.start();
   return stub.domElement();

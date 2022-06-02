@@ -16,7 +16,7 @@ export const player = (): HTMLElement=> {
       .chain(batteryCorrect.popUp(-1))
       .chain(delay(1000))
       .loop();
-    return [batteryCorrect.getObject3D()];
+    return {objects: [batteryCorrect.getObject3D()]};
   });
   stub.start();
   return stub.domElement();
@@ -30,7 +30,7 @@ export const enemy = (): HTMLElement=> {
       .chain(batteryCorrect.popUp(-1))
       .chain(delay(1000))
       .loop();
-    return [batteryCorrect.getObject3D()];
+    return {objects: [batteryCorrect.getObject3D()]};
   });
   stub.start();
   return stub.domElement();
