@@ -26,8 +26,6 @@ type Object3DParams = {
   resources: Resources,
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
-  /** シーン */
-  scene: typeof THREE.Scene,
 };
 
 /**
