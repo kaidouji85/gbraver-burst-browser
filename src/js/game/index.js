@@ -51,7 +51,6 @@ import {Title} from "./dom-scenes/title/title";
 import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import {map} from "../stream/operator";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
-import {DefaultConfig} from "./config/default-config";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
 import {howlVolume, SOUND_IDS} from "../resource/sound";
