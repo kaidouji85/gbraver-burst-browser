@@ -4,6 +4,7 @@ import '../css/style.css';
 import {Game} from './game/index';
 import {createBrowserSDK} from "@gbraver-burst-network/browser-sdk";
 import {isMobile} from "./device-ditect/is-mobile";
+import {createLocalStorageConfigRepository} from "./game/config/local-storage";
 
 /**
  * Gブレイバーバーストのエントリポイント
@@ -21,6 +22,7 @@ async function main(): Promise<void> {
   const game = new Game({
     resourceRoot,
     api: api,
+    config: createLocalStorageConfigRepository(),
     howToPlayMovieURL: GBRAVER_BURST_HOW_TO_PLAY,
     termsOfServiceURL: GBRAVER_BURST_TERMS_OF_SERVICE_URL,
     privacyPolicyURL: GBRAVER_BURST_PRIVACY_POLICY_URL,

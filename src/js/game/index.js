@@ -51,8 +51,6 @@ import {Title} from "./dom-scenes/title/title";
 import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import {map} from "../stream/operator";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
-import {configFromLocalStorage, saveConfigToLocalStorage} from "./config/local-storage";
-import {DefaultConfig} from "./config/default-config";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
 import {howlVolume, SOUND_IDS} from "../resource/sound";
@@ -74,7 +72,7 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
-import type {GbraverBurstBrowserConfig} from "./config/browser-config";
+import type {GbraverBurstBrowserConfig, GbraverBurstBrowserConfigRepository} from "./config/browser-config";
 import {BattleAnimationTimeScales, isSoundConfigChanged, parseBattleAnimationTimeScale} from "./config/browser-config";
 
 /** 本クラスで利用するAPIサーバの機能 */
@@ -102,6 +100,8 @@ type Param = {
   isAPIServerEnable: boolean,
   /** APIサーバのSDK */
   api: OwnAPI,
+  /** ブラウザ設定リポジトリ */
+  config: GbraverBurstBrowserConfigRepository
 };
 
 /** ゲーム全体の管理を行う */
@@ -115,6 +115,7 @@ export class Game {
   _isAPIServerEnable: boolean;
   _inProgress: InProgress;
   _api: OwnAPI;
+  _config: GbraverBurstBrowserConfigRepository;
   _suddenlyBattleEnd: FutureSuddenlyBattleEnd;
   _resize: Stream<Resize>;
   _vh: CssVH;
@@ -153,6 +154,7 @@ export class Game {
     this._vh = new CssVH(this._resize);
 
     this._api = param.api;
+    this._config = param.config;
     this._suddenlyBattleEnd = new FutureSuddenlyBattleEnd();
 
     this._fader = new DOMFader();
@@ -239,7 +241,7 @@ export class Game {
 
     const resourceLoading = titleResourceLoading(this._resourceRoot);
     this._resources = await resourceLoading.resources;
-    const config = configFromLocalStorage() ?? DefaultConfig;
+    const config = await this._config.load();
     this._reflectSoundVolume(config);
     const title = await this._startTitle();
     this._interruptScenes.bind(this._resources);
@@ -279,7 +281,7 @@ export class Game {
   async _onArcadeStart(): Promise<void> {
     if (!this._isFullResourceLoaded) {
       await this._fullResourceLoading();
-      const config = configFromLocalStorage() ?? DefaultConfig;
+      const config = await this._config.load();
       this._reflectSoundVolume(config);
     }
 
@@ -324,7 +326,7 @@ export class Game {
 
     if (!this._isFullResourceLoaded) {
       await this._fullResourceLoading();
-      const config = configFromLocalStorage() ?? DefaultConfig;
+      const config = await this._config.load();
       this._reflectSoundVolume(config);
     }
 
@@ -481,7 +483,7 @@ export class Game {
       await this._fader.fadeIn();
 
       const progress = createBattleProgress(battle);
-      const config = configFromLocalStorage() ?? DefaultConfig;
+      const config = await this._config.load();
       const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_01,
         config.webGLPixelRatio, config.battleAnimationTimeScale, progress, battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
@@ -556,11 +558,11 @@ export class Game {
    * @param action アクション
    */
   async _onEndBattle(action: EndBattle): Promise<void> {
-    const saveAnimationTimeScale = () => {
+    const saveAnimationTimeScale = async () => {
       const battleAnimationTimeScale = parseBattleAnimationTimeScale(action.animationTimeScale) ?? BattleAnimationTimeScales[0];
-      const origin = configFromLocalStorage() ?? DefaultConfig;
+      const origin = await this._config.load();
       const update = {...origin, battleAnimationTimeScale};
-      saveConfigToLocalStorage(update);
+      await this._config.save(update);
     };
     const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
       const isStageClear = isNPCBattleStageClear(inProgress.subFlow.state, action.gameEnd.result);
@@ -583,7 +585,7 @@ export class Game {
       await this._domFloaters.showPostBattle(this._resources, PostNetworkBattleButtons);
     };
 
-    saveAnimationTimeScale();
+    await saveAnimationTimeScale();
     if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
       const playingNPCBattle: PlayingNPCBattle = this._inProgress.subFlow;
       const inProgress = ((this._inProgress: any): NPCBattleX<typeof playingNPCBattle>);
@@ -690,7 +692,7 @@ export class Game {
    */
   async _onConfigChangeStart(): Promise<void> {
     await this._fader.fadeOut();
-    const config = configFromLocalStorage() ?? DefaultConfig;
+    const config = await this._config.load();
     this._domScenes.startConfig(this._resources, config);
     await this._fader.fadeIn();
   }
@@ -714,9 +716,9 @@ export class Game {
    */
   async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
     await this._fader.fadeOut();
-    const origin = configFromLocalStorage() ?? DefaultConfig;
+    const origin = await this._config.load();
     isSoundConfigChanged(origin, action.config) && this._reflectSoundVolume(action.config);
-    saveConfigToLocalStorage(action.config);
+    await this._config.save(action.config);
     await this._startTitle();
     await this._fader.fadeIn();
   }
@@ -737,7 +739,7 @@ export class Game {
 
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
-    const config = configFromLocalStorage() ?? DefaultConfig;
+    const config = await this._config.load();
     const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, stage.bgm, config.webGLPixelRatio, 
       config.battleAnimationTimeScale ,{progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
