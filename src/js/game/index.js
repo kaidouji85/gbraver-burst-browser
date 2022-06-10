@@ -16,7 +16,6 @@ import type {
   ConfigChangeComplete,
   DifficultySelectionComplete,
   EndNetworkError,
-  PostBattleAction,
   SelectionComplete,
   WebSocketAPIError,
   WebSocketAPIUnintentionalClose,
@@ -34,7 +33,6 @@ import {createBGMManager} from '../bgm/bgm-manager';
 import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
-import type {NPCBattleState} from "./npc-battle";
 import {
   createNPCBattlePlayer,
   getCurrentStage,
@@ -54,6 +52,7 @@ import {onReloadRequest} from "./game-procedure/on-reload-request";
 import {onExitMailVerifiedIncomplete} from "./game-procedure/on-exit-mai-verified-incomplete";
 import {onEndBattle} from "./game-procedure/on-end-battle";
 import {onSuddenlyEndBattle} from "./game-procedure/on-suddenly-battle-end";
+import {onPostBattleAction} from "./game-procedure/on-post-battle-action";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -168,8 +167,9 @@ export class Game implements GameProps {
         onEndBattle(this, action);
       } else if (action.type === 'SuddenlyBattleEnd') { 
         onSuddenlyEndBattle(this);
+      } else if (action.type === 'PostBattleAction') { 
+        onPostBattleAction(this, action);
       }
-      else if (action.type === 'PostBattleAction') { this._onPostBattleAction(action) }
       else if (action.type === 'ArcadeStart') { this._onArcadeStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
       else if (action.type === 'MatchingCanceled') { this._onMatchingCanceled() }
@@ -481,52 +481,6 @@ export class Game implements GameProps {
 
     this.inProgress = {...this.inProgress, subFlow: {type: 'PlayerSelect'}};
     this.domDialogs.hidden();
-  }
-
-  /**
-   * 戦闘終了後アクション決定時の処理
-   *
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onPostBattleAction(action: PostBattleAction): Promise<void> {
-    const gotoTitle = async () => {
-      this.inProgress = {type: 'None'};
-      this.domFloaters.hiddenPostBattle();
-      const [title] = await Promise.all([(async () => {
-        await this.fader.fadeOut();
-        return await startTitle(this);
-      })(), (async () => {
-        await this.bgm.do(fadeOut);
-        await this.bgm.do(stop);
-      })()]);
-      await this.fader.fadeIn();
-      title.playBGM();
-    };
-    const gotoEnding = async () => {
-      this.inProgress = {type: 'None'};
-      this.domFloaters.hiddenPostBattle();
-      await this.fader.fadeOut();
-      this.tdScenes.hidden();
-      const ending = await this.domScenes.startNPCEnding(this.resources, this.bgm);
-      await this.fader.fadeIn();
-      ending.playBGM();
-    };
-    const gotoNPCBattleStage = async (state: NPCBattleState) => {
-      this.domFloaters.hiddenPostBattle();
-      const stage = getCurrentStage(state) ?? DefaultStage;
-      const level = getStageLevel(state);
-      await startNPCBattleStage(this, state.player, stage, level);
-    };
-
-    if (action.action.type === 'GotoTitle') {
-      await gotoTitle();
-    } else if (action.action.type === 'GotoEnding') {
-      await gotoEnding();
-    } else if (action.action.type === 'NextStage' && this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'PlayingNPCBattle') {
-      await gotoNPCBattleStage(this.inProgress.subFlow.state);
-    } else if (action.action.type === 'Retry' && this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'PlayingNPCBattle') {
-      await gotoNPCBattleStage(this.inProgress.subFlow.state);
-    }
   }
 
   /**
