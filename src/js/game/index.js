@@ -53,6 +53,7 @@ import {initialize} from "./game-procedure/initialize";
 import {onReloadRequest} from "./game-procedure/on-reload-request";
 import {onExitMailVerifiedIncomplete} from "./game-procedure/on-exit-mai-verified-incomplete";
 import {onEndBattle} from "./game-procedure/on-end-battle";
+import {onSuddenlyEndBattle} from "./game-procedure/on-suddenly-battle-end";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -165,8 +166,9 @@ export class Game implements GameProps {
         onExitMailVerifiedIncomplete(this);
       } else if (action.type === 'EndBattle') {
         onEndBattle(this, action);
+      } else if (action.type === 'SuddenlyBattleEnd') { 
+        onSuddenlyEndBattle(this);
       }
-      else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
       else if (action.type === 'PostBattleAction') { this._onPostBattleAction(action) }
       else if (action.type === 'ArcadeStart') { this._onArcadeStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
@@ -525,15 +527,6 @@ export class Game implements GameProps {
     } else if (action.action.type === 'Retry' && this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'PlayingNPCBattle') {
       await gotoNPCBattleStage(this.inProgress.subFlow.state);
     }
-  }
-
-  /**
-   * バトル強制終了時の処理
-   */
-  async _onSuddenlyEndBattle(): Promise<void> {
-    this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
-    this.suddenlyBattleEnd.unbind();
-    await this.api.disconnectWebsocket();
   }
 
   /**

@@ -13,6 +13,7 @@ import {isNPCBattleStageClear, updateNPCBattle} from "../npc-battle";
 
 /**
  * 戦闘終了時の処理
+ * 本関数にはpropsを変更する副作用がある
  *
  * @param props ゲームプロパティ
  * @param action アクション
