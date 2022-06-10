@@ -10,12 +10,11 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
-import type {DifficultySelect, NPCBattle, NPCBattleX, PlayingNPCBattle,} from "./in-progress/npc-battle";
+import type {DifficultySelect, NPCBattle} from "./in-progress/npc-battle";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {
   ConfigChangeComplete,
   DifficultySelectionComplete,
-  EndBattle,
   EndNetworkError,
   PostBattleAction,
   SelectionComplete,
@@ -40,19 +39,11 @@ import {
   createNPCBattlePlayer,
   getCurrentStage,
   getStageLevel,
-  isNPCBattleStageClear,
   startNPCBattle,
-  updateNPCBattle
 } from "./npc-battle";
 import {DefaultStage, DefaultStages, NPCBattleCourses} from "./npc-battle-courses";
-import {
-  PostNetworkBattleButtons,
-  PostNPCBattleComplete,
-  PostNPCBattleLoseButtons,
-  PostNPCBattleWinButtons
-} from "./dom-floaters/post-battle/post-battle-buttons";
 import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
-import {BattleAnimationTimeScales, isSoundConfigChanged, parseBattleAnimationTimeScale} from "./config/browser-config";
+import {isSoundConfigChanged} from "./config/browser-config";
 import type {GameAPI, GameProps} from "./game-props";
 import {startNPCBattleStage} from "./game-procedure/start-npc-battle-stage";
 import {reflectSoundVolume} from "./reflect-sound-volume";
@@ -61,6 +52,7 @@ import {startTitle} from "./game-procedure/start-title";
 import {initialize} from "./game-procedure/initialize";
 import {onReloadRequest} from "./game-procedure/on-reload-request";
 import {onExitMailVerifiedIncomplete} from "./game-procedure/on-exit-mai-verified-incomplete";
+import {onEndBattle} from "./game-procedure/on-end-battle";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -171,8 +163,9 @@ export class Game implements GameProps {
         onReloadRequest(this);
       } else if (action.type === 'ExitMailVerifiedIncomplete') {
         onExitMailVerifiedIncomplete(this);
+      } else if (action.type === 'EndBattle') {
+        onEndBattle(this, action);
       }
-      else if (action.type === 'EndBattle') { this._onEndBattle(action) }
       else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
       else if (action.type === 'PostBattleAction') { this._onPostBattleAction(action) }
       else if (action.type === 'ArcadeStart') { this._onArcadeStart() }
@@ -486,49 +479,6 @@ export class Game implements GameProps {
 
     this.inProgress = {...this.inProgress, subFlow: {type: 'PlayerSelect'}};
     this.domDialogs.hidden();
-  }
-
-  /**
-   * 戦闘終了時の処理
-   *
-   * @param action アクション
-   */
-  async _onEndBattle(action: EndBattle): Promise<void> {
-    const saveAnimationTimeScale = async () => {
-      const battleAnimationTimeScale = parseBattleAnimationTimeScale(action.animationTimeScale) ?? BattleAnimationTimeScales[0];
-      const origin = await this.config.load();
-      const update = {...origin, battleAnimationTimeScale};
-      await this.config.save(update);
-    };
-    const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
-      const isStageClear = isNPCBattleStageClear(inProgress.subFlow.state, action.gameEnd.result);
-      const updatedState = updateNPCBattle(inProgress.subFlow.state, isStageClear);
-      this.inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
-      const postBattleButtons = (() => {
-        if (isStageClear && updatedState.isGameClear) {
-          return PostNPCBattleComplete;
-        } else if (isStageClear) {
-          return PostNPCBattleWinButtons;
-        } else {
-          return PostNPCBattleLoseButtons;
-        }
-      })();
-      await this.domFloaters.showPostBattle(this.resources, postBattleButtons);
-    };
-    const endCasualMatch = async (): Promise<void> => {
-      this.suddenlyBattleEnd.unbind();
-      await this.api.disconnectWebsocket();
-      await this.domFloaters.showPostBattle(this.resources, PostNetworkBattleButtons);
-    };
-
-    await saveAnimationTimeScale();
-    if (this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'PlayingNPCBattle') {
-      const playingNPCBattle: PlayingNPCBattle = this.inProgress.subFlow;
-      const inProgress = ((this.inProgress: any): NPCBattleX<typeof playingNPCBattle>);
-      await endNPCBattleStage(inProgress);
-    } else if (this.inProgress.type === 'CasualMatch') {
-      await endCasualMatch();
-    }
   }
 
   /**
