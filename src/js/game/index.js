@@ -31,7 +31,6 @@ import type {Stream, Unsubscriber} from "../stream/stream";
 import {createStream} from "../stream/stream";
 import type {Battle as BattleSDK} from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match";
-import {Title} from "./dom-scenes/title/title";
 import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import {map} from "../stream/operator";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
@@ -62,6 +61,7 @@ import type {GameAPI, GameProps} from "./game-props";
 import {startNPCBattleStage} from "./game-procedure/start-npc-battle-stage";
 import {reflectSoundVolume} from "./reflect-sound-volume";
 import {fullResourceLoading} from "./game-procedure/full-resource-loading";
+import {startTitle} from "./game-procedure/start-title";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -226,7 +226,7 @@ export class Game implements GameProps {
     this.resources = await resourceLoading.resources;
     const config = await this.config.load();
     reflectSoundVolume(this.resources, config);
-    const title = await this._startTitle();
+    const title = await startTitle(this);
     this.interruptScenes.bind(this.resources);
     const latency = Date.now() - startTime;
     await waitTime(500 - latency);
@@ -406,7 +406,7 @@ export class Game implements GameProps {
       this.domDialogs.hidden();
       const [title] = await Promise.all([(async () => {
         await this.fader.fadeOut();
-        return await this._startTitle();
+        return await startTitle(this);
       })(), (async () => {
         await this.bgm.do(fadeOut);
         await this.bgm.do(stop);
@@ -495,7 +495,7 @@ export class Game implements GameProps {
   async _onSelectionCancel(): Promise<void> {
     this.inProgress = {type: 'None'};
     await this.fader.fadeOut();
-    await this._startTitle();
+    await startTitle(this);
     await this.fader.fadeIn();
   }
 
@@ -589,7 +589,7 @@ export class Game implements GameProps {
       this.domFloaters.hiddenPostBattle();
       const [title] = await Promise.all([(async () => {
         await this.fader.fadeOut();
-        return await this._startTitle();  
+        return await startTitle(this);
       })(), (async () => {
         await this.bgm.do(fadeOut);
         await this.bgm.do(stop);
@@ -659,7 +659,7 @@ export class Game implements GameProps {
   async _onEndNPCEnding(): Promise<void> {
     const [title] = await Promise.all([(async () => {
       await this.fader.fadeOut();
-      return await this._startTitle();  
+      return await startTitle(this);
     })(), (async () => {
       await this.bgm.do(fadeOut);
       await this.bgm.do(stop);
@@ -687,7 +687,7 @@ export class Game implements GameProps {
    */
   async _onConfigChangeCancel(): Promise<void> {
     await this.fader.fadeOut();
-    await this._startTitle();
+    await startTitle(this);
     await this.fader.fadeIn();
   }
 
@@ -702,29 +702,7 @@ export class Game implements GameProps {
     const origin = await this.config.load();
     isSoundConfigChanged(origin, action.config) && reflectSoundVolume(this.resources, action.config);
     await this.config.save(action.config);
-    await this._startTitle();
+    await startTitle(this);
     await this.fader.fadeIn();
-  }
-
-  /**
-   * タイトル画面を開始するヘルパーメソッド
-   * いかなる場合でもaccount、canCasualMatch、termsOfServiceURL、privacyPolicyURL
-   * に同じ値をセットするために、ヘルパーメソッド化した
-   *    
-   * @return タイトル画面
-   */
-  async _startTitle(): Promise<Title> {
-    const createLoggedInAccount = async () => {
-      const [name, pictureURL] = await Promise.all([
-        this.api.getUserName(),
-        this.api.getUserPictureURL(),
-      ]);
-      return {type: 'LoggedInAccount', name, pictureURL};
-    }
-
-    const isLogin = await this.api.isLogin();
-    const account = isLogin ? await createLoggedInAccount() : {type: 'GuestAccount'};
-    return this.domScenes.startTitle(this.resources, this.bgm, account, this.isAPIServerEnable,
-      this.termsOfServiceURL, this.privacyPolicyURL, this.contactURL);
   }
 }
