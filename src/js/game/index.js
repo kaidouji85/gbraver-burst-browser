@@ -37,7 +37,7 @@ import {map} from "../stream/operator";
 import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
-import {howlVolume, SOUND_IDS} from "../resource/sound";
+import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import type {NPCBattleState} from "./npc-battle";
@@ -56,10 +56,11 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons
 } from "./dom-floaters/post-battle/post-battle-buttons";
-import type {GbraverBurstBrowserConfig, GbraverBurstBrowserConfigRepository} from "./config/browser-config";
+import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
 import {BattleAnimationTimeScales, isSoundConfigChanged, parseBattleAnimationTimeScale} from "./config/browser-config";
 import type {GameAPI, GameProps} from "./game-props";
 import {startNPCBattleStage} from "./game-procedure/start-npc-battle-stage";
+import {reflectSoundVolume} from "./reflect-sound-volume";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -223,7 +224,7 @@ export class Game implements GameProps {
     const resourceLoading = titleResourceLoading(this.resourceRoot);
     this.resources = await resourceLoading.resources;
     const config = await this.config.load();
-    this._reflectSoundVolume(config);
+    reflectSoundVolume(this.resources, config);
     const title = await this._startTitle();
     this.interruptScenes.bind(this.resources);
     const latency = Date.now() - startTime;
@@ -263,7 +264,7 @@ export class Game implements GameProps {
     if (!this.isFullResourceLoaded) {
       await this._fullResourceLoading();
       const config = await this.config.load();
-      this._reflectSoundVolume(config);
+      reflectSoundVolume(this.resources, config);
     }
 
     this.inProgress = {type: 'NPCBattle', subFlow: {type: 'PlayerSelect'}};
@@ -308,7 +309,7 @@ export class Game implements GameProps {
     if (!this.isFullResourceLoaded) {
       await this._fullResourceLoading();
       const config = await this.config.load();
-      this._reflectSoundVolume(config);
+      reflectSoundVolume(this.resources, config);
     }
 
     await gotoPlayerSelect();
@@ -698,7 +699,7 @@ export class Game implements GameProps {
   async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
     await this.fader.fadeOut();
     const origin = await this.config.load();
-    isSoundConfigChanged(origin, action.config) && this._reflectSoundVolume(action.config);
+    isSoundConfigChanged(origin, action.config) && reflectSoundVolume(this.resources, action.config);
     await this.config.save(action.config);
     await this._startTitle();
     await this.fader.fadeIn();
@@ -739,28 +740,5 @@ export class Game implements GameProps {
     await this.fader.fadeIn();
     this.resources = await resourceLoading.resources;
     this.isFullResourceLoaded = true;
-  }
-
-  /**
-   * 音量設定を音リソースに反映させるヘルパーメソッド
-   *
-   * @param config 反映するブラウザ設定
-   */
-  _reflectSoundVolume(config: GbraverBurstBrowserConfig): void {
-    const getVolume = sound => {
-      switch(sound.type) {
-        case 'BGM':
-          return config.bgmVolume;
-        case 'SE':
-          return config.seVolume;
-        default:
-          return sound.volume;
-      }
-    };
-
-    this.resources.sounds.forEach(sound => {
-      sound.volume = getVolume(sound);
-      sound.sound.volume(howlVolume(sound));
-    });
   }
 }
