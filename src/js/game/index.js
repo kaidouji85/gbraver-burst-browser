@@ -31,21 +31,7 @@ import type {
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/stream";
 import {createStream} from "../stream/stream";
-import type {
-  Battle as BattleSDK,
-  CasualMatch as CasualMatchSDK,
-  LoggedInUserDelete,
-  LoginCheck,
-  Logout,
-  MailVerify,
-  UniversalLogin,
-  UserMailGet,
-  UserNameGet,
-  UserPictureGet,
-  WebsocketDisconnect,
-  WebsocketErrorNotifier,
-  WebsocketUnintentionalCloseNotifier,
-} from '@gbraver-burst-network/browser-core';
+import type {Battle as BattleSDK} from '@gbraver-burst-network/browser-core';
 import type {CasualMatch} from "./in-progress/casual-match";
 import {Title} from "./dom-scenes/title/title";
 import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
@@ -74,11 +60,7 @@ import {
 } from "./dom-floaters/post-battle/post-battle-buttons";
 import type {GbraverBurstBrowserConfig, GbraverBurstBrowserConfigRepository} from "./config/browser-config";
 import {BattleAnimationTimeScales, isSoundConfigChanged, parseBattleAnimationTimeScale} from "./config/browser-config";
-
-/** 本クラスで利用するAPIサーバの機能 */
-interface OwnAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
-  UserNameGet, UserPictureGet, MailVerify, UserMailGet, WebsocketDisconnect, 
-  WebsocketErrorNotifier, WebsocketUnintentionalCloseNotifier {}
+import type {GameAPI, GameProps} from "./game-props";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -99,38 +81,38 @@ type Param = {
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
   isAPIServerEnable: boolean,
   /** APIサーバのSDK */
-  api: OwnAPI,
+  api: GameAPI,
   /** ブラウザ設定リポジトリ */
   config: GbraverBurstBrowserConfigRepository
 };
 
-/** ゲーム全体の管理を行う */
-export class Game {
-  _isPerformanceStatsVisible: boolean;
-  _isServiceWorkerUsed: boolean;
-  _howToPlayMovieURL: string;
-  _termsOfServiceURL: string;
-  _privacyPolicyURL: string;
-  _contactURL: string;
-  _isAPIServerEnable: boolean;
-  _inProgress: InProgress;
-  _api: OwnAPI;
-  _config: GbraverBurstBrowserConfigRepository;
-  _suddenlyBattleEnd: FutureSuddenlyBattleEnd;
-  _resize: Stream<Resize>;
-  _vh: CssVH;
-  _fader: DOMFader;
-  _interruptScenes: InterruptScenes;
-  _domScenes: DOMScenes;
-  _domDialogs: DOMDialogs;
-  _domFloaters: DOMFloaters;
-  _tdScenes: TDScenes;
-  _resourceRoot: ResourceRoot;
-  _resources: Resources;
-  _isFullResourceLoaded: boolean;
-  _serviceWorker: ?ServiceWorkerRegistration;
-  _bgm: BGMManager;
-  _unsubscriber: Unsubscriber[];
+/** ゲーム管理オブジェクト */
+export class Game implements GameProps {
+  isPerformanceStatsVisible: boolean;
+  isServiceWorkerUsed: boolean;
+  howToPlayMovieURL: string;
+  termsOfServiceURL: string;
+  privacyPolicyURL: string;
+  contactURL: string;
+  isAPIServerEnable: boolean;
+  inProgress: InProgress;
+  api: GameAPI;
+  config: GbraverBurstBrowserConfigRepository;
+  suddenlyBattleEnd: FutureSuddenlyBattleEnd;
+  resize: Stream<Resize>;
+  vh: CssVH;
+  fader: DOMFader;
+  interruptScenes: InterruptScenes;
+  domScenes: DOMScenes;
+  domDialogs: DOMDialogs;
+  domFloaters: DOMFloaters;
+  tdScenes: TDScenes;
+  resourceRoot: ResourceRoot;
+  resources: Resources;
+  isFullResourceLoaded: boolean;
+  serviceWorker: ?ServiceWorkerRegistration;
+  bgm: BGMManager;
+  unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -138,53 +120,53 @@ export class Game {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this._resourceRoot = param.resourceRoot;
-    this._resources = emptyResources(this._resourceRoot);
-    this._isFullResourceLoaded = false;
-    this._isServiceWorkerUsed = param.isServiceWorkerUsed;
-    this._isPerformanceStatsVisible = param.isPerformanceStatsVisible;
-    this._howToPlayMovieURL = param.howToPlayMovieURL;
-    this._termsOfServiceURL = param.termsOfServiceURL;
-    this._privacyPolicyURL = param.privacyPolicyURL;
-    this._contactURL = param.contactURL;
-    this._isAPIServerEnable = param.isAPIServerEnable;
+    this.resourceRoot = param.resourceRoot;
+    this.resources = emptyResources(this.resourceRoot);
+    this.isFullResourceLoaded = false;
+    this.isServiceWorkerUsed = param.isServiceWorkerUsed;
+    this.isPerformanceStatsVisible = param.isPerformanceStatsVisible;
+    this.howToPlayMovieURL = param.howToPlayMovieURL;
+    this.termsOfServiceURL = param.termsOfServiceURL;
+    this.privacyPolicyURL = param.privacyPolicyURL;
+    this.contactURL = param.contactURL;
+    this.isAPIServerEnable = param.isAPIServerEnable;
 
-    this._inProgress = {type: 'None'};
-    this._resize = resizeStream();
-    this._vh = new CssVH(this._resize);
+    this.inProgress = {type: 'None'};
+    this.resize = resizeStream();
+    this.vh = new CssVH(this.resize);
 
-    this._api = param.api;
-    this._config = param.config;
-    this._suddenlyBattleEnd = new FutureSuddenlyBattleEnd();
+    this.api = param.api;
+    this.config = param.config;
+    this.suddenlyBattleEnd = new FutureSuddenlyBattleEnd();
 
-    this._fader = new DOMFader();
-    this._interruptScenes = new InterruptScenes();
-    this._domScenes = new DOMScenes();
-    this._domDialogs = new DOMDialogs();
-    this._domFloaters = new DOMFloaters();
-    this._tdScenes = new TDScenes(this._resize);
+    this.fader = new DOMFader();
+    this.interruptScenes = new InterruptScenes();
+    this.domScenes = new DOMScenes();
+    this.domDialogs = new DOMDialogs();
+    this.domFloaters = new DOMFloaters();
+    this.tdScenes = new TDScenes(this.resize);
 
     const body = document.body || document.createElement('div');
-    const elements = [this._fader.getRootHTMLElement(), this._interruptScenes.getRootHTMLElement(),
-      this._domDialogs.getRootHTMLElement(), this._domScenes.getRootHTMLElement(), this._domFloaters.getRootHTMLElement(),
-      this._tdScenes.getRendererDOM()];
+    const elements = [this.fader.getRootHTMLElement(), this.interruptScenes.getRootHTMLElement(),
+      this.domDialogs.getRootHTMLElement(), this.domScenes.getRootHTMLElement(), this.domFloaters.getRootHTMLElement(),
+      this.tdScenes.getRendererDOM()];
     elements.forEach(element => {
       body.appendChild(element);
     });
 
-    this._serviceWorker = null;
-    this._bgm = createBGMManager();
+    this.serviceWorker = null;
+    this.bgm = createBGMManager();
 
-    const suddenlyBattleEnd = this._suddenlyBattleEnd.stream()
+    const suddenlyBattleEnd = this.suddenlyBattleEnd.stream()
       .chain(map(() => ({type: 'SuddenlyBattleEnd'})));
-    const webSocketAPIError = createStream(this._api.websocketErrorNotifier())
+    const webSocketAPIError = createStream(this.api.websocketErrorNotifier())
       .chain(map(error => ({type: 'WebSocketAPIError', error})))
-    const WebSocketAPIUnintentionalClose = createStream(this._api.websocketUnintentionalCloseNotifier())
+    const WebSocketAPIUnintentionalClose = createStream(this.api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
-    const gameActionStreams = [this._tdScenes.gameActionNotifier(), this._domScenes.gameActionNotifier(),
-      this._domDialogs.gameActionNotifier(), this._domFloaters.gameActionNotifier(),
+    const gameActionStreams = [this.tdScenes.gameActionNotifier(), this.domScenes.gameActionNotifier(),
+      this.domDialogs.gameActionNotifier(), this.domFloaters.gameActionNotifier(),
       suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
-    this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
+    this.unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'ReloadRequest') { this._onReloadRequest() }
       else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
       else if (action.type === 'EndBattle') { this._onEndBattle(action) }
@@ -222,34 +204,34 @@ export class Game {
    */
   async initialize(): Promise<void> {
     const startTime = Date.now();
-    if (this._isPerformanceStatsVisible && document.body) {
+    if (this.isPerformanceStatsVisible && document.body) {
       viewPerformanceStats(document.body);
     }
     
-    if (this._isServiceWorkerUsed) {
-      this._serviceWorker = await loadServiceWorker();
+    if (this.isServiceWorkerUsed) {
+      this.serviceWorker = await loadServiceWorker();
     }
 
-    const [isLogin, isMailVerified] = await Promise.all([this._api.isLogin(), this._api.isMailVerified()]);
+    const [isLogin, isMailVerified] = await Promise.all([this.api.isLogin(), this.api.isMailVerified()]);
     if (isLogin && !isMailVerified) {
-      const mailAddress = await this._api.getMail();
-      this._domScenes.startMailVerifiedIncomplete(mailAddress);
+      const mailAddress = await this.api.getMail();
+      this.domScenes.startMailVerifiedIncomplete(mailAddress);
       invisibleFirstView();
-      await this._fader.fadeIn();
+      await this.fader.fadeIn();
       return;
     }
 
-    const resourceLoading = titleResourceLoading(this._resourceRoot);
-    this._resources = await resourceLoading.resources;
-    const config = await this._config.load();
+    const resourceLoading = titleResourceLoading(this.resourceRoot);
+    this.resources = await resourceLoading.resources;
+    const config = await this.config.load();
     this._reflectSoundVolume(config);
     const title = await this._startTitle();
-    this._interruptScenes.bind(this._resources);
+    this.interruptScenes.bind(this.resources);
     const latency = Date.now() - startTime;
     await waitTime(500 - latency);
-    await this._fader.fadeOut();
+    await this.fader.fadeOut();
     invisibleFirstView();
-    await this._fader.fadeIn();
+    await this.fader.fadeIn();
     title.playBGM();
   }
 
@@ -259,7 +241,7 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onReloadRequest(): Promise<void> {
-    await this._fader.fadeOut();
+    await this.fader.fadeOut();
     window.location.reload();
   }
 
@@ -269,8 +251,8 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onExitMailVerifiedIncomplete(): Promise<void> {
-    await this._fader.fadeOut();
-    await this._api.logout();
+    await this.fader.fadeOut();
+    await this.api.logout();
   }
 
   /**
@@ -279,16 +261,16 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onArcadeStart(): Promise<void> {
-    if (!this._isFullResourceLoaded) {
+    if (!this.isFullResourceLoaded) {
       await this._fullResourceLoading();
-      const config = await this._config.load();
+      const config = await this.config.load();
       this._reflectSoundVolume(config);
     }
 
-    this._inProgress = {type: 'NPCBattle', subFlow: {type: 'PlayerSelect'}};
-    await this._fader.fadeOut();
-    await this._domScenes.startPlayerSelect(this._resources);
-    await this._fader.fadeIn();
+    this.inProgress = {type: 'NPCBattle', subFlow: {type: 'PlayerSelect'}};
+    await this.fader.fadeOut();
+    await this.domScenes.startPlayerSelect(this.resources);
+    await this.fader.fadeIn();
   }
 
   /**
@@ -299,34 +281,34 @@ export class Game {
   async _onCasualMatchStart(): Promise<void> {
     const callLoginCheckAPI = async () => {
       try {
-        return await this._api.isLogin();
+        return await this.api.isLogin();
       } catch (e) {
-        this._domDialogs.startNetworkError(this._resources, {type: 'Close'});
+        this.domDialogs.startNetworkError(this.resources, {type: 'Close'});
         throw e;
       }
     };
     const gotoPlayerSelect = async (): Promise<void> => {
-      this._inProgress = {type: 'CasualMatch', subFlow: {type: 'PlayerSelect'}};
-      this._domDialogs.hidden();
-      await this._fader.fadeOut();
-      await this._domScenes.startPlayerSelect(this._resources);
-      await this._fader.fadeIn();
+      this.inProgress = {type: 'CasualMatch', subFlow: {type: 'PlayerSelect'}};
+      this.domDialogs.hidden();
+      await this.fader.fadeOut();
+      await this.domScenes.startPlayerSelect(this.resources);
+      await this.fader.fadeIn();
     };
     const showLoginDialog = () => {
-      this._domDialogs.startLogin(this._resources, 'ネット対戦をするにはログインをしてください');
+      this.domDialogs.startLogin(this.resources, 'ネット対戦をするにはログインをしてください');
     };
 
-    this._domDialogs.startWaiting('ログインチェック中......');
+    this.domDialogs.startWaiting('ログインチェック中......');
     const isLogin = await callLoginCheckAPI();
-    this._domDialogs.hidden();
+    this.domDialogs.hidden();
     if (!isLogin) {
       showLoginDialog();
       return;
     }
 
-    if (!this._isFullResourceLoaded) {
+    if (!this.isFullResourceLoaded) {
       await this._fullResourceLoading();
-      const config = await this._config.load();
+      const config = await this.config.load();
       this._reflectSoundVolume(config);
     }
 
@@ -339,24 +321,24 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onMatchingCanceled(): Promise<void> {
-    this._domDialogs.startWaiting('通信中......');
-    await this._api.disconnectWebsocket();
-    this._domDialogs.hidden();
+    this.domDialogs.startWaiting('通信中......');
+    await this.api.disconnectWebsocket();
+    this.domDialogs.hidden();
   }
 
   /**
    * ユニバーサルログイン
    */
   async _onUniversalLogin(): Promise<void> {
-    await this._fader.fadeOut();
-    await this._api.gotoLoginPage();
+    await this.fader.fadeOut();
+    await this.api.gotoLoginPage();
   }
 
   /**
    * ログイン中断
    */
   _onLoginCancel(): void {
-    this._domDialogs.hidden();
+    this.domDialogs.hidden();
   }
 
   /**
@@ -364,48 +346,48 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onLogout(): Promise<void> {
-    await this._fader.fadeOut();
-    await this._api.logout();
+    await this.fader.fadeOut();
+    await this.api.logout();
   }
 
   /**
    * アカウント削除同意
    */
   _onAccountDeleteConsent(): void {
-    this._domDialogs.startDeleteAccountConsent(this._resources);
+    this.domDialogs.startDeleteAccountConsent(this.resources);
   }
 
   /**
    * アカウント削除
    */
   async _onDeleteAccount(): Promise<void> {
-    this._domDialogs.startWaiting('アカウント削除中')
-    await this._api.deleteLoggedInUser();
-    await this._fader.fadeOut();
-    await this._api.logout();
+    this.domDialogs.startWaiting('アカウント削除中')
+    await this.api.deleteLoggedInUser();
+    await this.fader.fadeOut();
+    await this.api.logout();
   }
 
   /**
    * アカウント削除キャンセル
    */
   _onCancelAccountDeletion(): void {
-    this._domDialogs.hidden();
+    this.domDialogs.hidden();
   }
 
   /**
    * 遊び方ダイアログ表示
    */
   _onShowHowToPlay() {
-    this._bgm.do(fadeOut);
-    this._domDialogs.startHowToPlay(this._resources, this._howToPlayMovieURL);
+    this.bgm.do(fadeOut);
+    this.domDialogs.startHowToPlay(this.resources, this.howToPlayMovieURL);
   }
 
   /**
    * 遊び方ダイアログを閉じる
    */
   _onEndHowToPlay() {
-    this._bgm.do(fadeIn)
-    this._domDialogs.hidden();
+    this.bgm.do(fadeIn)
+    this.domDialogs.hidden();
   }
 
   /**
@@ -415,20 +397,20 @@ export class Game {
    */
   async _onEndNetworkError(action: EndNetworkError) {
     const close = async () => {
-      this._inProgress = {type: 'None'};
-      this._domDialogs.hidden();
+      this.inProgress = {type: 'None'};
+      this.domDialogs.hidden();
     };
     const gotoTitle = async () => {
-      this._inProgress = {type: 'None'};
-      this._domDialogs.hidden();
+      this.inProgress = {type: 'None'};
+      this.domDialogs.hidden();
       const [title] = await Promise.all([(async () => {
-        await this._fader.fadeOut();
+        await this.fader.fadeOut();
         return await this._startTitle();
       })(), (async () => {
-        await this._bgm.do(fadeOut);
-        await this._bgm.do(stop);
+        await this.bgm.do(fadeOut);
+        await this.bgm.do(stop);
       })()]);
-      await this._fader.fadeIn();
+      await this.fader.fadeIn();
       title.playBGM();
     };
 
@@ -446,62 +428,62 @@ export class Game {
    */
   async _onSelectionComplete(action: SelectionComplete): Promise<void> {
     const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
-      this._inProgress = {...npcBattle, subFlow: {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId}};
-      this._domDialogs.startDifficulty(this._resources);
+      this.inProgress = {...npcBattle, subFlow: {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId}};
+      this.domDialogs.startDifficulty(this.resources);
     };
     const waitUntilMatching = async (): Promise<BattleSDK> => {
       try {
-        await this._api.disconnectWebsocket();
-        return await this._api.startCasualMatch(action.armdozerId, action.pilotId);
+        await this.api.disconnectWebsocket();
+        return await this.api.startCasualMatch(action.armdozerId, action.pilotId);
       } catch(e) {
-        this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
+        this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
         throw e;
       }
     };
     const createBattleProgress = (battle: BattleSDK): BattleProgress => ({
       progress: async (v) =>  {
         try {
-          this._domDialogs.startWaiting('通信中......');
+          this.domDialogs.startWaiting('通信中......');
           const update = await battle.progress(v);
-          this._domDialogs.hidden();
+          this.domDialogs.hidden();
           return update;
         } catch(e) {
-          this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
+          this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
           throw e;
         }
       }
     });
     const startMatching = async (origin: CasualMatch): Promise<void> => {
-      this._domDialogs.startMatching(this._resources);
+      this.domDialogs.startMatching(this.resources);
       const battle = await waitUntilMatching();
-      this._suddenlyBattleEnd.bind(battle);
-      this._inProgress = {...origin, subFlow: {type: 'Battle'}};
+      this.suddenlyBattleEnd.bind(battle);
+      this.inProgress = {...origin, subFlow: {type: 'Battle'}};
 
-      await this._fader.fadeOut();
-      this._domDialogs.hidden();
-      await this._domScenes.startMatchCard(this._resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
-      await this._fader.fadeIn();
+      await this.fader.fadeOut();
+      this.domDialogs.hidden();
+      await this.domScenes.startMatchCard(this.resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
+      await this.fader.fadeIn();
 
       const progress = createBattleProgress(battle);
-      const config = await this._config.load();
-      const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, SOUND_IDS.BATTLE_BGM_01,
+      const config = await this.config.load();
+      const battleScene = this.tdScenes.startBattle(this.resources, this.bgm, SOUND_IDS.BATTLE_BGM_01,
         config.webGLPixelRatio, config.battleAnimationTimeScale, progress, battle.player, battle.enemy, battle.initialState);
       await waitAnimationFrame();
       await Promise.all([(async () => {
-        await this._fader.fadeOut();
-        this._domScenes.hidden();  
+        await this.fader.fadeOut();
+        this.domScenes.hidden();
       })(), (async () => {
-        await this._bgm.do(fadeOut);
-        await this._bgm.do(stop);
+        await this.bgm.do(fadeOut);
+        await this.bgm.do(stop);
       })()]);
-      await this._fader.fadeIn();
+      await this.fader.fadeIn();
       await battleScene.start();
     };
 
-    if (this._inProgress.type === 'NPCBattle') {
-      await courseDifficultySelect(this._inProgress);
-    } else if (this._inProgress.type === 'CasualMatch') {
-      await startMatching(this._inProgress);
+    if (this.inProgress.type === 'NPCBattle') {
+      await courseDifficultySelect(this.inProgress);
+    } else if (this.inProgress.type === 'CasualMatch') {
+      await startMatching(this.inProgress);
     }
   }
 
@@ -510,10 +492,10 @@ export class Game {
    * @return 処理結果
    */
   async _onSelectionCancel(): Promise<void> {
-    this._inProgress = {type: 'None'};
-    await this._fader.fadeOut();
+    this.inProgress = {type: 'None'};
+    await this.fader.fadeOut();
     await this._startTitle();
-    await this._fader.fadeIn();
+    await this.fader.fadeIn();
   }
 
   /**
@@ -523,18 +505,18 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onDifficultySelectionComplete(action: DifficultySelectionComplete): Promise<void> {
-    if (!(this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'DifficultySelect')) {
+    if (!(this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'DifficultySelect')) {
       return;
     }
 
-    const npcBattle: NPCBattle = this._inProgress;
-    const difficultySelect: DifficultySelect = this._inProgress.subFlow;
+    const npcBattle: NPCBattle = this.inProgress;
+    const difficultySelect: DifficultySelect = this.inProgress.subFlow;
     const {armdozerId, pilotId} = difficultySelect;
     const player = createNPCBattlePlayer(armdozerId, pilotId);
     const stages = NPCBattleCourses
       .find(v => v.armdozerId === armdozerId && v.difficulty === action.difficulty)?.stages ?? DefaultStages;
     const npcBattleState = startNPCBattle(player, stages);
-    this._inProgress = {...npcBattle, subFlow: {type: 'PlayingNPCBattle', state: npcBattleState}};
+    this.inProgress = {...npcBattle, subFlow: {type: 'PlayingNPCBattle', state: npcBattleState}};
     const stage = getCurrentStage(npcBattleState) ?? DefaultStage;
     const level = getStageLevel(npcBattleState);
     await this._startNPCBattleStage(player, stage, level);
@@ -544,12 +526,12 @@ export class Game {
    * 難易度選択キャンセル時のイベント
    */
   _onDifficultySelectionCancel(): void {
-    if (!(this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'DifficultySelect')) {
+    if (!(this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'DifficultySelect')) {
       return;
     }
 
-    this._inProgress = {...this._inProgress, subFlow: {type: 'PlayerSelect'}};
-    this._domDialogs.hidden();
+    this.inProgress = {...this.inProgress, subFlow: {type: 'PlayerSelect'}};
+    this.domDialogs.hidden();
   }
 
   /**
@@ -560,14 +542,14 @@ export class Game {
   async _onEndBattle(action: EndBattle): Promise<void> {
     const saveAnimationTimeScale = async () => {
       const battleAnimationTimeScale = parseBattleAnimationTimeScale(action.animationTimeScale) ?? BattleAnimationTimeScales[0];
-      const origin = await this._config.load();
+      const origin = await this.config.load();
       const update = {...origin, battleAnimationTimeScale};
-      await this._config.save(update);
+      await this.config.save(update);
     };
     const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
       const isStageClear = isNPCBattleStageClear(inProgress.subFlow.state, action.gameEnd.result);
       const updatedState = updateNPCBattle(inProgress.subFlow.state, isStageClear);
-      this._inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
+      this.inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
       const postBattleButtons = (() => {
         if (isStageClear && updatedState.isGameClear) {
           return PostNPCBattleComplete;
@@ -577,20 +559,20 @@ export class Game {
           return PostNPCBattleLoseButtons;
         }
       })();
-      await this._domFloaters.showPostBattle(this._resources, postBattleButtons);
+      await this.domFloaters.showPostBattle(this.resources, postBattleButtons);
     };
     const endCasualMatch = async (): Promise<void> => {
-      this._suddenlyBattleEnd.unbind();
-      await this._api.disconnectWebsocket();
-      await this._domFloaters.showPostBattle(this._resources, PostNetworkBattleButtons);
+      this.suddenlyBattleEnd.unbind();
+      await this.api.disconnectWebsocket();
+      await this.domFloaters.showPostBattle(this.resources, PostNetworkBattleButtons);
     };
 
     await saveAnimationTimeScale();
-    if (this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
-      const playingNPCBattle: PlayingNPCBattle = this._inProgress.subFlow;
-      const inProgress = ((this._inProgress: any): NPCBattleX<typeof playingNPCBattle>);
+    if (this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'PlayingNPCBattle') {
+      const playingNPCBattle: PlayingNPCBattle = this.inProgress.subFlow;
+      const inProgress = ((this.inProgress: any): NPCBattleX<typeof playingNPCBattle>);
       await endNPCBattleStage(inProgress);
-    } else if (this._inProgress.type === 'CasualMatch') {
+    } else if (this.inProgress.type === 'CasualMatch') {
       await endCasualMatch();
     }
   }
@@ -602,29 +584,29 @@ export class Game {
    */
   async _onPostBattleAction(action: PostBattleAction): Promise<void> {
     const gotoTitle = async () => {
-      this._inProgress = {type: 'None'};
-      this._domFloaters.hiddenPostBattle();
+      this.inProgress = {type: 'None'};
+      this.domFloaters.hiddenPostBattle();
       const [title] = await Promise.all([(async () => {
-        await this._fader.fadeOut();
+        await this.fader.fadeOut();
         return await this._startTitle();  
       })(), (async () => {
-        await this._bgm.do(fadeOut);
-        await this._bgm.do(stop);
+        await this.bgm.do(fadeOut);
+        await this.bgm.do(stop);
       })()]);
-      await this._fader.fadeIn();
+      await this.fader.fadeIn();
       title.playBGM();
     };
     const gotoEnding = async () => {
-      this._inProgress = {type: 'None'};
-      this._domFloaters.hiddenPostBattle();
-      await this._fader.fadeOut();
-      this._tdScenes.hidden();
-      const ending = await this._domScenes.startNPCEnding(this._resources, this._bgm);
-      await this._fader.fadeIn();
+      this.inProgress = {type: 'None'};
+      this.domFloaters.hiddenPostBattle();
+      await this.fader.fadeOut();
+      this.tdScenes.hidden();
+      const ending = await this.domScenes.startNPCEnding(this.resources, this.bgm);
+      await this.fader.fadeIn();
       ending.playBGM();
     };
     const startNPCBattleStage = async (state: NPCBattleState) => {
-      this._domFloaters.hiddenPostBattle();
+      this.domFloaters.hiddenPostBattle();
       const stage = getCurrentStage(state) ?? DefaultStage;
       const level = getStageLevel(state);
       await this._startNPCBattleStage(state.player, stage, level);
@@ -634,10 +616,10 @@ export class Game {
       await gotoTitle();
     } else if (action.action.type === 'GotoEnding') {
       await gotoEnding();
-    } else if (action.action.type === 'NextStage' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
-      await startNPCBattleStage(this._inProgress.subFlow.state);
-    } else if (action.action.type === 'Retry' && this._inProgress.type === 'NPCBattle' && this._inProgress.subFlow.type === 'PlayingNPCBattle') {
-      await startNPCBattleStage(this._inProgress.subFlow.state);
+    } else if (action.action.type === 'NextStage' && this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'PlayingNPCBattle') {
+      await startNPCBattleStage(this.inProgress.subFlow.state);
+    } else if (action.action.type === 'Retry' && this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'PlayingNPCBattle') {
+      await startNPCBattleStage(this.inProgress.subFlow.state);
     }
   }
 
@@ -645,9 +627,9 @@ export class Game {
    * バトル強制終了時の処理
    */
   async _onSuddenlyEndBattle(): Promise<void> {
-    this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
-    this._suddenlyBattleEnd.unbind();
-    await this._api.disconnectWebsocket();
+    this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
+    this.suddenlyBattleEnd.unbind();
+    await this.api.disconnectWebsocket();
   }
 
   /**
@@ -656,7 +638,7 @@ export class Game {
    * @param action アクション
    */
   _onWebSocketAPIError(action: WebSocketAPIError): void {
-    this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
+    this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
     throw action;
   }
 
@@ -666,7 +648,7 @@ export class Game {
    * @param action アクション
    */
   _onWebSocketAPIUnintentionalClose(action: WebSocketAPIUnintentionalClose): void {
-    this._domDialogs.startNetworkError(this._resources, {type: 'GotoTitle'});
+    this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
     throw action;
   }
 
@@ -675,13 +657,13 @@ export class Game {
    */
   async _onEndNPCEnding(): Promise<void> {
     const [title] = await Promise.all([(async () => {
-      await this._fader.fadeOut();
+      await this.fader.fadeOut();
       return await this._startTitle();  
     })(), (async () => {
-      await this._bgm.do(fadeOut);
-      await this._bgm.do(stop);
+      await this.bgm.do(fadeOut);
+      await this.bgm.do(stop);
     })()]);
-    await this._fader.fadeIn();
+    await this.fader.fadeIn();
     title.playBGM();
   }
 
@@ -691,10 +673,10 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onConfigChangeStart(): Promise<void> {
-    await this._fader.fadeOut();
-    const config = await this._config.load();
-    this._domScenes.startConfig(this._resources, config);
-    await this._fader.fadeIn();
+    await this.fader.fadeOut();
+    const config = await this.config.load();
+    this.domScenes.startConfig(this.resources, config);
+    await this.fader.fadeIn();
   }
 
   /**
@@ -703,9 +685,9 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onConfigChangeCancel(): Promise<void> {
-    await this._fader.fadeOut();
+    await this.fader.fadeOut();
     await this._startTitle();
-    await this._fader.fadeIn();
+    await this.fader.fadeIn();
   }
 
   /**
@@ -715,12 +697,12 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
-    await this._fader.fadeOut();
-    const origin = await this._config.load();
+    await this.fader.fadeOut();
+    const origin = await this.config.load();
     isSoundConfigChanged(origin, action.config) && this._reflectSoundVolume(action.config);
-    await this._config.save(action.config);
+    await this.config.save(action.config);
     await this._startTitle();
-    await this._fader.fadeIn();
+    await this.fader.fadeIn();
   }
 
   /**
@@ -732,28 +714,28 @@ export class Game {
    */
   async _startNPCBattleStage(player: Player, stage: NPCBattleStage, level: number) {
     const npcBattle = new NPCBattleRoom(player, stage.npc);
-    await this._fader.fadeOut();
-    this._domDialogs.hidden();
-    await this._domScenes.startNPCStageTitle(this._resources, level, stage.caption, npcBattle.enemy.armdozer.id);
-    await this._fader.fadeIn();
+    await this.fader.fadeOut();
+    this.domDialogs.hidden();
+    await this.domScenes.startNPCStageTitle(this.resources, level, stage.caption, npcBattle.enemy.armdozer.id);
+    await this.fader.fadeIn();
 
     const startNPCStageTitleTime = Date.now();
     const progress = v => Promise.resolve(npcBattle.progress(v));
-    const config = await this._config.load();
-    const battleScene = this._tdScenes.startBattle(this._resources, this._bgm, stage.bgm, config.webGLPixelRatio, 
+    const config = await this.config.load();
+    const battleScene = this.tdScenes.startBattle(this.resources, this.bgm, stage.bgm, config.webGLPixelRatio,
       config.battleAnimationTimeScale ,{progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
     await waitAnimationFrame();
     const latency = Date.now() - startNPCStageTitleTime;
     await waitTime(3000- latency);
 
     await Promise.all([(async () => {
-      await this._fader.fadeOut();
-      this._domScenes.hidden();
+      await this.fader.fadeOut();
+      this.domScenes.hidden();
     })(), (async () => {
-      await this._bgm.do(fadeOut);
-      await this._bgm.do(stop);
+      await this.bgm.do(fadeOut);
+      await this.bgm.do(stop);
     })()]);
-    await this._fader.fadeIn();
+    await this.fader.fadeIn();
     await battleScene.start();
   }
 
@@ -767,16 +749,16 @@ export class Game {
   async _startTitle(): Promise<Title> {
     const createLoggedInAccount = async () => {
       const [name, pictureURL] = await Promise.all([
-        this._api.getUserName(),
-        this._api.getUserPictureURL(),
+        this.api.getUserName(),
+        this.api.getUserPictureURL(),
       ]);
       return {type: 'LoggedInAccount', name, pictureURL};
     }
 
-    const isLogin = await this._api.isLogin();
+    const isLogin = await this.api.isLogin();
     const account = isLogin ? await createLoggedInAccount() : {type: 'GuestAccount'};
-    return this._domScenes.startTitle(this._resources, this._bgm, account, this._isAPIServerEnable,
-      this._termsOfServiceURL, this._privacyPolicyURL, this._contactURL);
+    return this.domScenes.startTitle(this.resources, this.bgm, account, this.isAPIServerEnable,
+      this.termsOfServiceURL, this.privacyPolicyURL, this.contactURL);
   }
 
   /**
@@ -786,12 +768,12 @@ export class Game {
    * @return 処理完了したら発火するPromise 
    */
   async _fullResourceLoading(): Promise<void> {
-    await this._fader.fadeOut();
-    const resourceLoading = fullResourceLoadingFrom(this._resources);
-    this._domScenes.startLoading(resourceLoading.loading);
-    await this._fader.fadeIn();
-    this._resources = await resourceLoading.resources;
-    this._isFullResourceLoaded = true;
+    await this.fader.fadeOut();
+    const resourceLoading = fullResourceLoadingFrom(this.resources);
+    this.domScenes.startLoading(resourceLoading.loading);
+    await this.fader.fadeIn();
+    this.resources = await resourceLoading.resources;
+    this.isFullResourceLoaded = true;
   }
 
   /**
@@ -811,7 +793,7 @@ export class Game {
       }
     };
 
-    this._resources.sounds.forEach(sound => {
+    this.resources.sounds.forEach(sound => {
       sound.volume = getVolume(sound);
       sound.sound.volume(howlVolume(sound));
     });
