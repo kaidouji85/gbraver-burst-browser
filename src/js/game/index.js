@@ -1,9 +1,7 @@
 // @flow
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {emptyResources, titleResourceLoading,} from "../resource";
-import {viewPerformanceStats} from "../stats/view-performance-stats";
-import {loadServiceWorker} from "../service-worker/load-service-worker";
+import {emptyResources} from "../resource";
 import {CssVH} from "../view-port/vh";
 import {TDScenes} from "./td-scenes";
 import type {Resize} from "../window/resize";
@@ -13,9 +11,7 @@ import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {DifficultySelect, NPCBattle, NPCBattleX, PlayingNPCBattle,} from "./in-progress/npc-battle";
-import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
-import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {
   ConfigChangeComplete,
   DifficultySelectionComplete,
@@ -62,6 +58,7 @@ import {startNPCBattleStage} from "./game-procedure/start-npc-battle-stage";
 import {reflectSoundVolume} from "./reflect-sound-volume";
 import {fullResourceLoading} from "./game-procedure/full-resource-loading";
 import {startTitle} from "./game-procedure/start-title";
+import {initialize} from "./game-procedure/initialize";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -201,39 +198,10 @@ export class Game implements GameProps {
   /**
    * ゲームの初期化を行う
    *
-   * @return 処理結果
+   * @return 処理が完了したら発火するPromise
    */
   async initialize(): Promise<void> {
-    const startTime = Date.now();
-    if (this.isPerformanceStatsVisible && document.body) {
-      viewPerformanceStats(document.body);
-    }
-    
-    if (this.isServiceWorkerUsed) {
-      this.serviceWorker = await loadServiceWorker();
-    }
-
-    const [isLogin, isMailVerified] = await Promise.all([this.api.isLogin(), this.api.isMailVerified()]);
-    if (isLogin && !isMailVerified) {
-      const mailAddress = await this.api.getMail();
-      this.domScenes.startMailVerifiedIncomplete(mailAddress);
-      invisibleFirstView();
-      await this.fader.fadeIn();
-      return;
-    }
-
-    const resourceLoading = titleResourceLoading(this.resourceRoot);
-    this.resources = await resourceLoading.resources;
-    const config = await this.config.load();
-    reflectSoundVolume(this.resources, config);
-    const title = await startTitle(this);
-    this.interruptScenes.bind(this.resources);
-    const latency = Date.now() - startTime;
-    await waitTime(500 - latency);
-    await this.fader.fadeOut();
-    invisibleFirstView();
-    await this.fader.fadeIn();
-    title.playBGM();
+    await initialize(this);
   }
 
   /**
