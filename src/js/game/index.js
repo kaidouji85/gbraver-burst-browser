@@ -60,6 +60,7 @@ import {fullResourceLoading} from "./game-procedure/full-resource-loading";
 import {startTitle} from "./game-procedure/start-title";
 import {initialize} from "./game-procedure/initialize";
 import {onReloadRequest} from "./game-procedure/on-reload-request";
+import {onExitMailVerifiedIncomplete} from "./game-procedure/on-exit-mai-verified-incomplete";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -168,8 +169,9 @@ export class Game implements GameProps {
     this.unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'ReloadRequest') { 
         onReloadRequest(this);
+      } else if (action.type === 'ExitMailVerifiedIncomplete') {
+        onExitMailVerifiedIncomplete(this);
       }
-      else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
       else if (action.type === 'EndBattle') { this._onEndBattle(action) }
       else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
       else if (action.type === 'PostBattleAction') { this._onPostBattleAction(action) }
@@ -205,16 +207,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * メール認証未完了画面を抜ける時の処理
-   *
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onExitMailVerifiedIncomplete(): Promise<void> {
-    await this.fader.fadeOut();
-    await this.api.logout();
   }
 
   /**
