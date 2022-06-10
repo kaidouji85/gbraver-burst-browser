@@ -15,8 +15,6 @@ import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {DifficultySelect, NPCBattle, NPCBattleX, PlayingNPCBattle,} from "./in-progress/npc-battle";
 import {waitTime} from "../wait/wait-time";
 import {DOMFader} from "../components/dom-fader/dom-fader";
-import type {Player} from "gbraver-burst-core";
-import {NPCBattleRoom} from "../npc/npc-battle-room";
 import {invisibleFirstView} from "../first-view/first-view-visible";
 import type {
   ConfigChangeComplete,
@@ -42,7 +40,7 @@ import {createBGMManager} from '../bgm/bgm-manager';
 import {howlVolume, SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
-import type {NPCBattleStage, NPCBattleState} from "./npc-battle";
+import type {NPCBattleState} from "./npc-battle";
 import {
   createNPCBattlePlayer,
   getCurrentStage,
@@ -61,6 +59,7 @@ import {
 import type {GbraverBurstBrowserConfig, GbraverBurstBrowserConfigRepository} from "./config/browser-config";
 import {BattleAnimationTimeScales, isSoundConfigChanged, parseBattleAnimationTimeScale} from "./config/browser-config";
 import type {GameAPI, GameProps} from "./game-props";
+import {startNPCBattleStage} from "./game-procedure/start-npc-battle-stage";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -519,7 +518,7 @@ export class Game implements GameProps {
     this.inProgress = {...npcBattle, subFlow: {type: 'PlayingNPCBattle', state: npcBattleState}};
     const stage = getCurrentStage(npcBattleState) ?? DefaultStage;
     const level = getStageLevel(npcBattleState);
-    await this._startNPCBattleStage(player, stage, level);
+    await startNPCBattleStage(this, player, stage, level);
   }
 
   /**
@@ -605,11 +604,11 @@ export class Game implements GameProps {
       await this.fader.fadeIn();
       ending.playBGM();
     };
-    const startNPCBattleStage = async (state: NPCBattleState) => {
+    const gotoNPCBattleStage = async (state: NPCBattleState) => {
       this.domFloaters.hiddenPostBattle();
       const stage = getCurrentStage(state) ?? DefaultStage;
       const level = getStageLevel(state);
-      await this._startNPCBattleStage(state.player, stage, level);
+      await startNPCBattleStage(this, state.player, stage, level);
     };
 
     if (action.action.type === 'GotoTitle') {
@@ -617,9 +616,9 @@ export class Game implements GameProps {
     } else if (action.action.type === 'GotoEnding') {
       await gotoEnding();
     } else if (action.action.type === 'NextStage' && this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'PlayingNPCBattle') {
-      await startNPCBattleStage(this.inProgress.subFlow.state);
+      await gotoNPCBattleStage(this.inProgress.subFlow.state);
     } else if (action.action.type === 'Retry' && this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'PlayingNPCBattle') {
-      await startNPCBattleStage(this.inProgress.subFlow.state);
+      await gotoNPCBattleStage(this.inProgress.subFlow.state);
     }
   }
 
@@ -703,40 +702,6 @@ export class Game implements GameProps {
     await this.config.save(action.config);
     await this._startTitle();
     await this.fader.fadeIn();
-  }
-
-  /**
-   * NPCバトルのステージを開始するヘルパーメソッド
-   *
-   * @param player プレイヤー
-   * @param stage NPCバトルステージ
-   * @param level ステージレベル
-   */
-  async _startNPCBattleStage(player: Player, stage: NPCBattleStage, level: number) {
-    const npcBattle = new NPCBattleRoom(player, stage.npc);
-    await this.fader.fadeOut();
-    this.domDialogs.hidden();
-    await this.domScenes.startNPCStageTitle(this.resources, level, stage.caption, npcBattle.enemy.armdozer.id);
-    await this.fader.fadeIn();
-
-    const startNPCStageTitleTime = Date.now();
-    const progress = v => Promise.resolve(npcBattle.progress(v));
-    const config = await this.config.load();
-    const battleScene = this.tdScenes.startBattle(this.resources, this.bgm, stage.bgm, config.webGLPixelRatio,
-      config.battleAnimationTimeScale ,{progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
-    await waitAnimationFrame();
-    const latency = Date.now() - startNPCStageTitleTime;
-    await waitTime(3000- latency);
-
-    await Promise.all([(async () => {
-      await this.fader.fadeOut();
-      this.domScenes.hidden();
-    })(), (async () => {
-      await this.bgm.do(fadeOut);
-      await this.bgm.do(stop);
-    })()]);
-    await this.fader.fadeIn();
-    await battleScene.start();
   }
 
   /**
