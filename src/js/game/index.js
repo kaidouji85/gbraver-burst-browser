@@ -1,7 +1,7 @@
 // @flow
 import {DOMScenes} from "./dom-scenes";
 import type {Resources} from "../resource";
-import {emptyResources, fullResourceLoadingFrom, titleResourceLoading,} from "../resource";
+import {emptyResources, titleResourceLoading,} from "../resource";
 import {viewPerformanceStats} from "../stats/view-performance-stats";
 import {loadServiceWorker} from "../service-worker/load-service-worker";
 import {CssVH} from "../view-port/vh";
@@ -61,6 +61,7 @@ import {BattleAnimationTimeScales, isSoundConfigChanged, parseBattleAnimationTim
 import type {GameAPI, GameProps} from "./game-props";
 import {startNPCBattleStage} from "./game-procedure/start-npc-battle-stage";
 import {reflectSoundVolume} from "./reflect-sound-volume";
+import {fullResourceLoading} from "./game-procedure/full-resource-loading";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -262,7 +263,7 @@ export class Game implements GameProps {
    */
   async _onArcadeStart(): Promise<void> {
     if (!this.isFullResourceLoaded) {
-      await this._fullResourceLoading();
+      await fullResourceLoading(this);
       const config = await this.config.load();
       reflectSoundVolume(this.resources, config);
     }
@@ -307,7 +308,7 @@ export class Game implements GameProps {
     }
 
     if (!this.isFullResourceLoaded) {
-      await this._fullResourceLoading();
+      await fullResourceLoading(this);
       const config = await this.config.load();
       reflectSoundVolume(this.resources, config);
     }
@@ -725,20 +726,5 @@ export class Game implements GameProps {
     const account = isLogin ? await createLoggedInAccount() : {type: 'GuestAccount'};
     return this.domScenes.startTitle(this.resources, this.bgm, account, this.isAPIServerEnable,
       this.termsOfServiceURL, this.privacyPolicyURL, this.contactURL);
-  }
-
-  /**
-   * 全リソース読み込みを行うヘルパー関数
-   * リソース読み込み中は専用画面に遷移する
-   *
-   * @return 処理完了したら発火するPromise 
-   */
-  async _fullResourceLoading(): Promise<void> {
-    await this.fader.fadeOut();
-    const resourceLoading = fullResourceLoadingFrom(this.resources);
-    this.domScenes.startLoading(resourceLoading.loading);
-    await this.fader.fadeIn();
-    this.resources = await resourceLoading.resources;
-    this.isFullResourceLoaded = true;
   }
 }
