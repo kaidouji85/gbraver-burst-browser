@@ -59,6 +59,7 @@ import {reflectSoundVolume} from "./reflect-sound-volume";
 import {fullResourceLoading} from "./game-procedure/full-resource-loading";
 import {startTitle} from "./game-procedure/start-title";
 import {initialize} from "./game-procedure/initialize";
+import {onReloadRequest} from "./game-procedure/on-reload-request";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -165,7 +166,9 @@ export class Game implements GameProps {
       this.domDialogs.gameActionNotifier(), this.domFloaters.gameActionNotifier(),
       suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
     this.unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
-      if (action.type === 'ReloadRequest') { this._onReloadRequest() }
+      if (action.type === 'ReloadRequest') { 
+        onReloadRequest(this);
+      }
       else if (action.type === 'ExitMailVerifiedIncomplete') { this._onExitMailVerifiedIncomplete() }
       else if (action.type === 'EndBattle') { this._onEndBattle(action) }
       else if (action.type === 'SuddenlyBattleEnd') { this._onSuddenlyEndBattle() }
@@ -202,16 +205,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * 画面リロード依頼時の処理
-   *
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onReloadRequest(): Promise<void> {
-    await this.fader.fadeOut();
-    window.location.reload();
   }
 
   /**
