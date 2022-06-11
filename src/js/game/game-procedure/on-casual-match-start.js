@@ -1,7 +1,7 @@
 // @flow
-import {fullResourceLoading} from "./full-resource-loading";
-import {reflectSoundVolume} from "../reflect-sound-volume";
 import type {GameProps} from "../game-props";
+import {reflectSoundVolume} from "../reflect-sound-volume";
+import {fullResourceLoading} from "./full-resource-loading";
 
 /**
  * カジュアルマッチ開始

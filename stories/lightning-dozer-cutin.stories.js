@@ -1,9 +1,9 @@
 // @flow
 
-import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
-import {enemyLightningiDozerCutIn, playerLightningDozerCutIn} from "../src/js/game-object/cut-in/lightning-dozer";
 import {delay} from "../src/js/animation/delay";
+import {enemyLightningiDozerCutIn, playerLightningDozerCutIn} from "../src/js/game-object/cut-in/lightning-dozer";
 import {LightningDozerCutIn} from "../src/js/game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
+import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 
 export default {
   title: 'lightning-dozer-cutin',

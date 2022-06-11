@@ -1,7 +1,7 @@
 // @flow
 
-import type {LightningDozerModel} from "../model/lightning-dozer-model";
 import * as THREE from 'three';
+import type {LightningDozerModel} from "../model/lightning-dozer-model";
 
 /**
  * ライトニングドーザビュー

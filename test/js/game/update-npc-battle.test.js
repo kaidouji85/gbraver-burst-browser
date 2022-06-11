@@ -1,8 +1,8 @@
 // @flow
-import {DefaultStage} from "../../../src/js/game/npc-battle-courses";
-import {EMPTY_PLAYER} from "../../data/player";
-import {EMPTY_NPC_BATTLE_STATE} from "../../data/npc-battle";
 import {updateNPCBattle} from "../../../src/js/game/npc-battle";
+import {DefaultStage} from "../../../src/js/game/npc-battle-courses";
+import {EMPTY_NPC_BATTLE_STATE} from "../../data/npc-battle";
+import {EMPTY_PLAYER} from "../../data/player";
 
 const stages = [DefaultStage, DefaultStage, DefaultStage, DefaultStage];
 const player = {...EMPTY_PLAYER, playerId: 'test-player'};

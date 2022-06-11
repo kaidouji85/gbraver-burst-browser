@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import type {BatteryCorrectModel} from "../model/battery-correct-model";
 import type {PreRender} from "../../../game-loop/pre-render";
+import type {BatteryCorrectModel} from "../model/battery-correct-model";
 
 /** バッテリー補正ビュー */
 export interface BatteryCorrectView {

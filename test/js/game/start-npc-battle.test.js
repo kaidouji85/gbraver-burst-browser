@@ -1,7 +1,7 @@
 // @flow
-import {EMPTY_PLAYER} from "../../data/player";
-import {DefaultStage} from "../../../src/js/game/npc-battle-courses";
 import {startNPCBattle} from "../../../src/js/game/npc-battle";
+import {DefaultStage} from "../../../src/js/game/npc-battle-courses";
+import {EMPTY_PLAYER} from "../../data/player";
 
 test('NPCバトルステートの初期状態を正しく作ることができる', () => {
   const player = EMPTY_PLAYER;

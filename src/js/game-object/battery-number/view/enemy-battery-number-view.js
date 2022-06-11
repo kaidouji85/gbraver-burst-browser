@@ -1,8 +1,8 @@
 // @flow
 
-import {PlayerBatteryNumberView} from "./player-battery-number-view";
 import type {Resources} from "../../../resource";
 import type {BatteryNumberModel} from "../model/battery-number-model";
+import {PlayerBatteryNumberView} from "./player-battery-number-view";
 
 export class EnemyBatteryNumberView extends PlayerBatteryNumberView {
   constructor(resources: Resources) {

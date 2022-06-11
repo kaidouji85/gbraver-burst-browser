@@ -1,8 +1,8 @@
 // @flow
 
 import {Animate} from "../../../../animation/animate";
-import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 import {tween} from "../../../../animation/tween";
+import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 
 /**
  * カットインを非表示にする

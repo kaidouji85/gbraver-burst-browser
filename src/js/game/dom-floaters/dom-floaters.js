@@ -1,10 +1,10 @@
 // @flow
+import type {Resources} from "../../resource";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
 import type {GameAction} from "../game-actions";
 import {PostBattleFloater} from "./post-battle/post-battle";
 import type {PostBattleButtonConfig} from "./post-battle/post-battle-button-config";
-import type {Resources} from "../../resource";
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {

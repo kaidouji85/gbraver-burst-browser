@@ -1,13 +1,13 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
-import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 import {pop} from "../../../../dom/animation";
-import {PathIds} from "../../../../resource/path";
-import type {Stream} from "../../../../stream/stream";
-import {tap} from "../../../../stream/operator";
 import type {PushDOM} from "../../../../dom/event-stream";
 import {pushDOMStream} from "../../../../dom/event-stream";
+import type {Resources} from "../../../../resource";
+import {PathIds} from "../../../../resource/path";
+import {tap} from "../../../../stream/operator";
+import type {Stream} from "../../../../stream/stream";
+import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 
 const ROOT_CLASS_NAME = 'player-select__pilot-icon';
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;

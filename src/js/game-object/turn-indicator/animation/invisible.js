@@ -1,8 +1,8 @@
 // @flow
 
-import type {TurnIndicatorModel} from "../model/turn-indicator-model";
 import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
+import type {TurnIndicatorModel} from "../model/turn-indicator-model";
 
 /**
  * ターンインジケータを非表示にする

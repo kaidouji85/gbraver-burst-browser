@@ -1,15 +1,15 @@
 // @flow
 
 import * as THREE from 'three';
-import type {LightningModel} from "./model/lightning-model";
-import type {LightningView} from "./view/lightning-view";
-import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../../animation/animate";
-import {popUp} from "./animation/pop-up";
-import {LightningSounds} from "./sounds/lightning-sounds";
 import type {Resources} from "../../../resource";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {popUp} from "./animation/pop-up";
+import {createInitialValue} from "./model/initial-value";
+import type {LightningModel} from "./model/lightning-model";
+import {LightningSounds} from "./sounds/lightning-sounds";
+import type {LightningView} from "./view/lightning-view";
 
 /**
  * 電撃ヒットマーク

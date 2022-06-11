@@ -1,13 +1,13 @@
 // @flow
 
-import {BattleSceneView} from "../../view";
-import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {BatteryDeclaration, GameStateX} from "gbraver-burst-core";
+import {all} from "../../../../../animation/all";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
-import {all} from "../../../../../animation/all";
-import {BattleSceneSounds} from "../../sounds/sounds";
 import {process} from '../../../../../animation/process';
+import {BattleSceneSounds} from "../../sounds/sounds";
+import type {BattleSceneState} from "../../state/battle-scene-state";
+import {BattleSceneView} from "../../view";
 import type {TDPlayer} from "../../view/td/player";
 
 /**

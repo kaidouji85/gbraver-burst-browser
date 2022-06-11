@@ -1,9 +1,9 @@
 // @flow
 
-import type {NeoLandozerModel} from "../model/neo-landozer-model";
 import {Animate} from "../../../../animation/animate";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
 import type {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
 
 /** ノックバック -> 立ち */

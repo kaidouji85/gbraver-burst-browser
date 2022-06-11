@@ -2,10 +2,10 @@
 
 import TWEEN from '@tweenjs/tween.js';
 import {Animate} from "../../../../animation/animate";
-import type {NeoLandozerModel} from "../model/neo-landozer-model";
+import {delay} from "../../../../animation/delay";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {delay} from "../../../../animation/delay";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
 
 /**
  * ダウン

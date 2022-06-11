@@ -1,10 +1,10 @@
 // @flow
 
-import {ThreeDimensionLayer} from "../td";
-import {HudLayer} from "../hud";
 import type {PlayerId} from "gbraver-burst-core";
-import {trackingGauges} from "./gauge";
+import {HudLayer} from "../hud";
+import {ThreeDimensionLayer} from "../td";
 import {trackingArmdozerSprites} from "./armdozer-sprite";
+import {trackingGauges} from "./gauge";
 
 /**
  * 3Dレイヤーのオブジェクトをトラッキングする

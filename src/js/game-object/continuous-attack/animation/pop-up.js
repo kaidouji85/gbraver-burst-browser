@@ -1,10 +1,10 @@
 // @flow
-import type {ContinuousAttackModel} from "../model/continuous-attack-model";
 import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
 import {delay} from "../../../animation/delay";
-import {ContinuousAttackSounds} from "../sounds/continuous-attack-sounds";
 import {process} from '../../../animation/process';
+import {tween} from "../../../animation/tween";
+import type {ContinuousAttackModel} from "../model/continuous-attack-model";
+import {ContinuousAttackSounds} from "../sounds/continuous-attack-sounds";
 
 /**
  * ポップアップ

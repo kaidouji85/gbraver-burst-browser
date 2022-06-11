@@ -1,28 +1,28 @@
 // @flow
 
-import type {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
-import type {NeoLandozerModel} from "./model/neo-landozer-model";
-import type {NeoLandozerView} from "./view/neo-landozer-view";
-import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
-import {knockBack} from "./animation/knock-back";
-import {knockBackToStand} from "./animation/knock-back-to-stand";
+import type {PreRender} from "../../../game-loop/pre-render";
+import type {Resources} from "../../../resource";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import type {ArmDozerSprite} from '../armdozer-sprite';
+import {armHammer} from "./animation/arm-hammer";
+import {avoid} from "./animation/avoid";
+import {charge} from "./animation/charge";
+import {down} from "./animation/down";
+import {frontStep} from "./animation/front-step";
 import {guard} from './animation/guard';
 import {guardToStand} from './animation/guard-to-stand';
-import {avoid} from "./animation/avoid";
-import {armHammer} from "./animation/arm-hammer";
-import {frontStep} from "./animation/front-step";
-import {charge} from "./animation/charge";
-import {hmToStand} from "./animation/hm-to-stand";
-import {down} from "./animation/down";
 import {guts} from "./animation/guts";
 import {gutsToStand} from "./animation/guts-to-stand";
-import type {Resources} from "../../../resource";
+import {hmToStand} from "./animation/hm-to-stand";
+import {knockBack} from "./animation/knock-back";
+import {knockBackToStand} from "./animation/knock-back-to-stand";
+import {createInitialValue} from "./model/initial-value";
+import type {NeoLandozerModel} from "./model/neo-landozer-model";
 import {NeoLandozerSounds} from "./sounds/neo-landozer-sounds";
-import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {NeoLandozerView} from "./view/neo-landozer-view";
 
 /** ネオランドーザのゲームオブジェクト */
 export class NeoLandozer implements ArmDozerSprite {

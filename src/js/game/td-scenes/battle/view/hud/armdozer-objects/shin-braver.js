@@ -1,13 +1,13 @@
 // @flow
 
-import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
+import * as THREE from 'three';
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import {enemyShinBraverCutIn, playerShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver";
 import {ShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver/shin-braver-cutin";
 import type {Resources} from "../../../../../../resource";
-import {enemyShinBraverCutIn, playerShinBraverCutIn} from "../../../../../../game-object/cut-in/shin-braver";
-import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
-import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import type {Stream} from "../../../../../../stream/stream";
+import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 
 /** コンストラクタのパラメータ */
 type Param = {

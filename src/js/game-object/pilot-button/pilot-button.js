@@ -1,20 +1,20 @@
 // @flow
 
 import * as THREE from 'three';
-import type {Resources} from "../../resource";
-import {PilotButtonView} from "./view/pilot-button-view";
-import type {PilotButtonModel} from "./model/pilot-button-model";
-import {createInitialValue} from './model/initial-value';
-import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {open} from "./animation/open";
-import {decide} from "./animation/decide";
-import {close} from "./animation/close";
-import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
-import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/stream";
-import type {PilotIcon} from "./view/pilot-icon";
+import type {PreRender} from "../../game-loop/pre-render";
+import type {Resources} from "../../resource";
 import {filter} from "../../stream/operator";
+import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {close} from "./animation/close";
+import {decide} from "./animation/decide";
+import {open} from "./animation/open";
+import {createInitialValue} from './model/initial-value';
+import type {PilotButtonModel} from "./model/pilot-button-model";
+import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
+import {PilotButtonView} from "./view/pilot-button-view";
+import type {PilotIcon} from "./view/pilot-icon";
 
 /**
  * パイロットボタン

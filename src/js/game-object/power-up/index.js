@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import {PlayerPowerUpView} from "./view/player-power-up-view";
-import {EnemyPowerUpView} from "./view/enemy-power-up-view";
-import {PowerUp} from "./power-up";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {PowerUp} from "./power-up";
+import {EnemyPowerUpView} from "./view/enemy-power-up-view";
+import {PlayerPowerUpView} from "./view/player-power-up-view";
 
 /**
  * プレイヤー 攻撃アップ ポップアップ

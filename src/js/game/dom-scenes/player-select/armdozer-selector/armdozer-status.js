@@ -2,8 +2,8 @@
 
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozers} from "gbraver-burst-core";
-import {burstTemplate} from "./status-template";
 import {domUuid} from "../../../../uuid/dom-uuid";
+import {burstTemplate} from "./status-template";
 
 /**ルート要素のクラス名 */
 const ROOT_CLASS_NAME = 'player-select__armdozer-status';

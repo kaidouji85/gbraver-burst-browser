@@ -1,11 +1,11 @@
 // @flow
-import {ResultIndicator} from "./result-indicator";
 import type {Resources} from "../../resource";
-import {winIndicatorView} from "./view/win-indicator-view";
-import {loseIndicatorView} from "./view/lose-indicator-view";
 import type {Stream} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
+import {ResultIndicator} from "./result-indicator";
 import {drawIndicatorView} from "./view/draw-indicator-view";
+import {loseIndicatorView} from "./view/lose-indicator-view";
+import {winIndicatorView} from "./view/win-indicator-view";
 
 /**
  * WINインジケータを生成する

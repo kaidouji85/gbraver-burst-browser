@@ -1,7 +1,7 @@
 // @flow
 
-import {PlayInLandscape} from "./play-in-landscape";
 import type {Resources} from "../../resource";
+import {PlayInLandscape} from "./play-in-landscape";
 
 /**
  * 割り込みで表示されるシーンをあつめたもの

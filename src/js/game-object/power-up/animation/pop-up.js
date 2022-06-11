@@ -1,10 +1,10 @@
 // @flow
-import type {PowerUpModel} from "../model/power-up-model";
 import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
 import {delay} from "../../../animation/delay";
-import {PowerUpSounds} from "../sounds/power-up-sounds";
 import {process} from '../../../animation/process';
+import {tween} from "../../../animation/tween";
+import type {PowerUpModel} from "../model/power-up-model";
+import {PowerUpSounds} from "../sounds/power-up-sounds";
 
 /**
  * ポップアップ

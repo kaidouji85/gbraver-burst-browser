@@ -1,9 +1,9 @@
 // @flow
 
-import type {BurstButtonModel} from "../model/burst-button-model";
 import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
 import {process} from '../../../animation/process';
+import {tween} from "../../../animation/tween";
+import type {BurstButtonModel} from "../model/burst-button-model";
 
 /**
  * バーストボタンを表示する

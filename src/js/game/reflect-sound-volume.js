@@ -1,7 +1,7 @@
 // @flow
-import type {GbraverBurstBrowserConfig} from "./config/browser-config";
-import {howlVolume} from "../resource/sound";
 import type {Resources} from "../resource";
+import {howlVolume} from "../resource/sound";
+import type {GbraverBurstBrowserConfig} from "./config/browser-config";
 
 /**
  * 音量設定を音リソースに反映させるヘルパー関数

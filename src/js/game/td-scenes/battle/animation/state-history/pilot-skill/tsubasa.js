@@ -1,11 +1,11 @@
 // @flow
-import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
 import type {BatteryEnchantmentSkill, PilotSkill} from "gbraver-burst-core";
+import {all} from "../../../../../../animation/all";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import {all} from "../../../../../../animation/all";
-import {dolly, toInitial, track} from "../../td-camera";
 import {TsubasaHUD} from "../../../view/hud/pilot-objects/tsubasa";
+import {dolly, toInitial, track} from "../../td-camera";
+import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
 
 /**
  * パイロットスキル ツバサ アニメーションパラメータ

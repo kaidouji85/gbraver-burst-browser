@@ -1,10 +1,10 @@
 // @flow
 import TWEEN from '@tweenjs/tween.js';
-import type {ResultIndicatorModel} from "../model/result-indicator-model";
+import {all} from "../../../animation/all";
 import {Animate} from "../../../animation/animate";
 import {process} from '../../../animation/process';
 import {tween} from "../../../animation/tween";
-import {all} from "../../../animation/all";
+import type {ResultIndicatorModel} from "../model/result-indicator-model";
 
 /**
  * スライドイン表示

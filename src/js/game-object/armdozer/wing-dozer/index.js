@@ -1,11 +1,11 @@
 // @flow
 
-import {WingDozer} from "./wing-dozer";
 import type {Resources} from "../../../resource";
-import {PlayerWingDozerView} from "./view/player-wing-dozer-view";
-import {EnemyWingDozerView} from "./view/enemy-wing-dozer-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {EnemyWingDozerView} from "./view/enemy-wing-dozer-view";
+import {PlayerWingDozerView} from "./view/player-wing-dozer-view";
+import {WingDozer} from "./wing-dozer";
 
 /**
  * プレイヤー側 ウィングドーザを生成する

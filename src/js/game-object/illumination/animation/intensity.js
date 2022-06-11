@@ -1,8 +1,8 @@
 // @flow
 
-import type {IlluminationModel} from "../model/illumination-model";
 import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
+import type {IlluminationModel} from "../model/illumination-model";
 
 /**
  * 照明の強さを変更する

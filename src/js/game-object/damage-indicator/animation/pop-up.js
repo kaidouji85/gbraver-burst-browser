@@ -1,10 +1,10 @@
 // @flow
 
-import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
 import {delay} from "../../../animation/delay";
 import {process} from '../../../animation/process';
+import {tween} from "../../../animation/tween";
+import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 
 /**
  * ダメージを表示する

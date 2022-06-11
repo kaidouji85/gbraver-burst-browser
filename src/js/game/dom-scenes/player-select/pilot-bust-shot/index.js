@@ -1,9 +1,9 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
 import type {PilotId} from 'gbraver-burst-core';
-import {PilotBustShot} from "./pilot-bust-shot";
+import type {Resources} from "../../../../resource";
 import {createPilotBustShot} from "./create-bust-shot";
+import {PilotBustShot} from "./pilot-bust-shot";
 
 /**
  * バストショットとパイロットIDの紐づけ

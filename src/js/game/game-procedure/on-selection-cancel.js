@@ -1,6 +1,6 @@
 // @flow
-import {startTitle} from "./start-title";
 import type {GameProps} from "../game-props";
+import {startTitle} from "./start-title";
 
 /**
  * プレイヤー選択がキャンセルされた時のイベント

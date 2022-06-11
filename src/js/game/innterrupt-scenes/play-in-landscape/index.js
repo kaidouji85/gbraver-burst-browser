@@ -1,7 +1,7 @@
 // @flow
 
-import {PlayInLandscapePresentation} from "./presentation";
 import type {Resources} from "../../../resource";
+import {PlayInLandscapePresentation} from "./presentation";
 
 /**
  * ランドスケープ警告

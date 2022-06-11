@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from 'three';
-import type {GaugeView} from "./view/gauge-view";
-import type {GaugeModel} from "./model/gauge-model";
-import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {hp} from "./animation/hp";
-import {battery} from './animation/battery';
-import {initialValue} from "./model/initial-value";
+import type {PreRender} from "../../game-loop/pre-render";
+import type {Stream, Unsubscriber} from "../../stream/stream";
 import type {HUDTracking} from "../../tracking/hud-tracking";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/stream";
+import {battery} from './animation/battery';
+import {hp} from "./animation/hp";
+import type {GaugeModel} from "./model/gauge-model";
+import {initialValue} from "./model/initial-value";
+import type {GaugeView} from "./view/gauge-view";
 
 /** コンストラクタのパラメータ */
 type Param = {

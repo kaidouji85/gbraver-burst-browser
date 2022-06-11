@@ -1,11 +1,11 @@
 // @flow
 
-import {RecoverBattery} from "./recover-battery";
 import type {Resources} from "../../resource";
-import {PlayerRecoverBatteryView} from "./view/player-recover-battery-view";
-import {EnemyRecoverBatteryView} from "./view/enemy-recover-battery-view";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {RecoverBattery} from "./recover-battery";
+import {EnemyRecoverBatteryView} from "./view/enemy-recover-battery-view";
+import {PlayerRecoverBatteryView} from "./view/player-recover-battery-view";
 
 /**
  * プレイヤー側 バッテリー回復

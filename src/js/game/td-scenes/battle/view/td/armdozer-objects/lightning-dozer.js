@@ -1,15 +1,15 @@
 // @flow
 
 import type {Player, PlayerId} from "gbraver-burst-core";
-import type {Resources} from "../../../../../../resource";
-import {LightningBarrierGameEffect} from "../../../../../../game-object/barrier/lightning/lightning-barrier";
 import * as THREE from "three";
-import type {TDArmdozerObjects} from "./armdozer-objects";
-import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
-import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import {EnemyLightningDozer, PlayerLightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer";
+import {LightningDozer} from "../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
+import {LightningBarrierGameEffect} from "../../../../../../game-object/barrier/lightning/lightning-barrier";
+import type {Resources} from "../../../../../../resource";
 import type {Stream} from "../../../../../../stream/stream";
+import type {TDArmdozerObjects} from "./armdozer-objects";
 
 /**
  * 3Dレイヤー ライトニングドーザ 固有オブジェクト フィールド

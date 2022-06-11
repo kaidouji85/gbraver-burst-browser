@@ -1,12 +1,12 @@
 // @flow
 
-import {PilotButton} from "./pilot-button";
 import type {Resources} from "../../resource";
 import type {Stream} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
-import {ShinyaIcon} from "./view/shinya";
+import {PilotButton} from "./pilot-button";
 import {GaiIcon} from "./view/gai";
 import {RaitoIcon} from "./view/raito";
+import {ShinyaIcon} from "./view/shinya";
 import {TsubasaIcon} from "./view/tsubasa";
 
 /**

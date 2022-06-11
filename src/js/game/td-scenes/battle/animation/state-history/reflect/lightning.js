@@ -1,8 +1,8 @@
 //@flow
-import type {ReflectAnimationParam} from "./animation-param";
-import {Animate} from "../../../../../../animation/animate";
 import {all} from "../../../../../../animation/all";
+import {Animate} from "../../../../../../animation/animate";
 import {delay} from "../../../../../../animation/delay";
+import type {ReflectAnimationParam} from "./animation-param";
 
 /**
  * 電撃バリア

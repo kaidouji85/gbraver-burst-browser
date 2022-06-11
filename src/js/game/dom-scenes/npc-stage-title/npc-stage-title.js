@@ -1,11 +1,11 @@
 // @flow
 
-import type {DOMScene} from "../dom-scene";
-import type {Resources} from "../../../resource";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {domUuid} from "../../../uuid/dom-uuid";
 import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
+import type {Resources} from "../../../resource";
+import {domUuid} from "../../../uuid/dom-uuid";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
+import type {DOMScene} from "../dom-scene";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'npc-stage-title';

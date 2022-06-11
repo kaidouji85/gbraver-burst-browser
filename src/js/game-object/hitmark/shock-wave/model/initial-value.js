@@ -1,11 +1,11 @@
 // @flow
 
-import type {ShockWaveModel} from "./shock-wave-model";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_SPRITE_STANDARD_Z
 } from "../../../armdozer/position";
+import type {ShockWaveModel} from "./shock-wave-model";
 
 /**
  * 軌跡のランダムシード

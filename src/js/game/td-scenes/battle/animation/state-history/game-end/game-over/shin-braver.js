@@ -1,10 +1,10 @@
 // @flow
 
-import {Animate} from "../../../../../../../animation/animate";
-import type {GameOverParam, GameOverParamX} from "./game-over-param";
-import {ShinBraverTD} from "../../../../view/td/armdozer-objects/shin-braver";
 import {all} from "../../../../../../../animation/all";
+import {Animate} from "../../../../../../../animation/animate";
+import {ShinBraverTD} from "../../../../view/td/armdozer-objects/shin-braver";
 import {dolly, track} from "../../../td-camera";
+import type {GameOverParam, GameOverParamX} from "./game-over-param";
 
 /**
  * シンブレイバー ゲームオーバ

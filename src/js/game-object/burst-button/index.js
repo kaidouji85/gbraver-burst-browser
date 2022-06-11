@@ -4,9 +4,9 @@ import type {Resources} from "../../resource";
 import type {Stream} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 import {BurstButton} from "./burst-button";
-import {ShinBraverIcon} from "./view/shin-braver-icon";
-import {NeoLandozerIcon} from "./view/neo-landozer-icon";
 import {LightningDozerIcon} from "./view/lightning-dozer-icon";
+import {NeoLandozerIcon} from "./view/neo-landozer-icon";
+import {ShinBraverIcon} from "./view/shin-braver-icon";
 import {WingDozerIcon} from "./view/wing-dozer-icon";
 
 /**

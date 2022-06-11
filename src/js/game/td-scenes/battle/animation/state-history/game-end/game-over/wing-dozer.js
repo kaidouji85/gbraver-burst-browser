@@ -1,10 +1,10 @@
 // @flow
 
-import {Animate} from "../../../../../../../animation/animate";
-import type {GameOverParam, GameOverParamX} from "./game-over-param";
-import {WingDozerTD} from "../../../../view/td/armdozer-objects/wing-dozer";
 import {all} from "../../../../../../../animation/all";
+import {Animate} from "../../../../../../../animation/animate";
+import {WingDozerTD} from "../../../../view/td/armdozer-objects/wing-dozer";
 import {dolly, track} from "../../../td-camera";
+import type {GameOverParam, GameOverParamX} from "./game-over-param";
 
 /**
  * ウィングドーザ ゲームオーバ

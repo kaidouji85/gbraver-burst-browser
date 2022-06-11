@@ -1,28 +1,28 @@
 // @flow
 
-import type {ArmDozerSprite} from "../armdozer-sprite";
 import * as THREE from "three";
 import {Animate} from "../../../animation/animate";
-import type {WingDozerView} from "./view/wing-dozer-view";
-import type {WingDozerModel} from "./model/wing-dozer-model";
-import {createInitialValue} from "./model/initial-value";
-import {charge} from "./animation/charge";
-import {upper} from "./animation/upper";
-import {upperToStand} from "./animation/upper-to-stand";
+import type {PreRender} from "../../../game-loop/pre-render";
+import type {Resources} from "../../../resource";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import type {ArmDozerSprite} from "../armdozer-sprite";
 import {avoid} from "./animation/avoid";
-import {frontStep} from "./animation/front-step";
+import {charge} from "./animation/charge";
 import {dash} from "./animation/dash";
 import {dashToStand} from "./animation/dash-to-stand";
-import {knockBack} from "./animation/knock-back";
-import {knockBackToStand} from "./animation/knock-back-to-stand";
 import {down} from "./animation/down";
-import {WingDozerSounds} from "./sounds/wing-dozer-sounds";
-import type {Resources} from "../../../resource";
+import {frontStep} from "./animation/front-step";
 import {guard} from "./animation/guard";
 import {guardToStand} from "./animation/guard-to-stand";
-import type {PreRender} from "../../../game-loop/pre-render";
-import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
+import {knockBack} from "./animation/knock-back";
+import {knockBackToStand} from "./animation/knock-back-to-stand";
+import {upper} from "./animation/upper";
+import {upperToStand} from "./animation/upper-to-stand";
+import {createInitialValue} from "./model/initial-value";
+import type {WingDozerModel} from "./model/wing-dozer-model";
+import {WingDozerSounds} from "./sounds/wing-dozer-sounds";
+import type {WingDozerView} from "./view/wing-dozer-view";
 
 /**
  * ウィングドーザ

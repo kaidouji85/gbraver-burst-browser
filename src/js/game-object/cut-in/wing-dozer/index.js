@@ -1,11 +1,11 @@
 // @flow
 
-import {WingDozerCutIn} from "./wing-dozer-cutin";
 import type {Resources} from "../../../resource";
-import {PlayerWingDozerCutInView} from "./view/player-wing-dozer-cutin-view";
-import {EnemyWingDozerCutInView} from "./view/enemy-wing-dozer-cutin-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {EnemyWingDozerCutInView} from "./view/enemy-wing-dozer-cutin-view";
+import {PlayerWingDozerCutInView} from "./view/player-wing-dozer-cutin-view";
+import {WingDozerCutIn} from "./wing-dozer-cutin";
 
 /**
  * プレイヤー側 ウィングドーザ カットイン

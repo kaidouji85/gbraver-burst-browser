@@ -1,8 +1,8 @@
 // @flow
-import type {Stream} from "../stream/stream";
-import {createStream} from "../stream/stream";
 import {fromEvent} from "rxjs";
 import {map, merge} from "../stream/operator";
+import type {Stream} from "../stream/stream";
+import {createStream} from "../stream/stream";
 
 /** HTML要素が押下された時のアクション */
 export type PushDOM = {

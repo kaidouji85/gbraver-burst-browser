@@ -9,8 +9,8 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
-import type {ReflectIndicatorView} from "./reflect-indicator-view";
 import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
+import type {ReflectIndicatorView} from "./reflect-indicator-view";
 
 export const MESH_SIZE = 300;
 

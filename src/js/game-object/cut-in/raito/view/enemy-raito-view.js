@@ -1,9 +1,9 @@
 // @flow
 
-import {PlayerRaitoView} from "./player-raito-view";
+import type {PreRender} from "../../../../game-loop/pre-render";
 import type {Resources} from "../../../../resource";
 import type {RaitoModel} from "../model/raito-model";
-import type {PreRender} from "../../../../game-loop/pre-render";
+import {PlayerRaitoView} from "./player-raito-view";
 
 /**
  * 敵側 ライト ビュー

@@ -1,8 +1,8 @@
 // @flow
 
-import {PlayerWingDozerView} from "./player-wing-dozer-view";
 import type {Resources} from "../../../../resource";
 import type {WingDozerModel} from "../model/wing-dozer-model";
+import {PlayerWingDozerView} from "./player-wing-dozer-view";
 
 /**
  * 敵側 ウィングドーザ ビュー

@@ -1,17 +1,17 @@
 // @flow
 
 import * as THREE from 'three';
-import type {TsubasaModel} from "./model/tsubasa-model";
-import type {TsubasaView} from "./view/tsubasa-view";
-import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
-import {show} from "./animation/show";
-import {hidden} from "./animation/hidden";
-import {TsubasaSounds} from "./sounds/tsubasa-sounds";
+import type {PreRender} from "../../../game-loop/pre-render";
 import type {Resources} from "../../../resource";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {hidden} from "./animation/hidden";
+import {show} from "./animation/show";
+import {createInitialValue} from "./model/initial-value";
+import type {TsubasaModel} from "./model/tsubasa-model";
+import {TsubasaSounds} from "./sounds/tsubasa-sounds";
+import type {TsubasaView} from "./view/tsubasa-view";
 
 /**
  * ツバサ カットイン

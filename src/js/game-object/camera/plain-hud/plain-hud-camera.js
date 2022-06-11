@@ -2,10 +2,10 @@
 
 import * as THREE from "three";
 import {createHUDCamera} from "../../../camera/create-hud-camera";
-import type {Resize} from "../../../window/resize";
 import {onResizeOrthographicCamera} from "../../../camera/resize";
-import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {Resize} from "../../../window/resize";
+import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
 
 /**
  * 汎用HUDレイヤー用カメラ

@@ -1,19 +1,4 @@
 // @flow
-import type {InProgress} from "./in-progress/in-progress";
-import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
-import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
-import type {Stream} from "../stream/stream";
-import type {Resize} from "../window/resize";
-import {CssVH} from "../view-port/vh";
-import {DOMFader} from "../components/dom-fader/dom-fader";
-import {InterruptScenes} from "./innterrupt-scenes";
-import {DOMScenes} from "./dom-scenes";
-import {DOMDialogs} from "./dom-dialogs";
-import {DOMFloaters} from "./dom-floaters/dom-floaters";
-import {TDScenes} from "./td-scenes";
-import type {ResourceRoot} from "../resource/resource-root";
-import type {Resources} from "../resource";
-import type {BGMManager} from "../bgm/bgm-manager";
 import type {
   CasualMatch as CasualMatchSDK,
   LoggedInUserDelete,
@@ -28,9 +13,24 @@ import type {
   WebsocketErrorNotifier,
   WebsocketUnintentionalCloseNotifier
 } from "@gbraver-burst-network/browser-core";
-import {emptyResources} from "../resource";
-import {resizeStream} from "../window/resize";
+import type {BGMManager} from "../bgm/bgm-manager";
 import {createBGMManager} from "../bgm/bgm-manager";
+import {DOMFader} from "../components/dom-fader/dom-fader";
+import type {Resources} from "../resource";
+import {emptyResources} from "../resource";
+import type {ResourceRoot} from "../resource/resource-root";
+import type {Stream} from "../stream/stream";
+import {CssVH} from "../view-port/vh";
+import type {Resize} from "../window/resize";
+import {resizeStream} from "../window/resize";
+import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
+import {DOMDialogs} from "./dom-dialogs";
+import {DOMFloaters} from "./dom-floaters/dom-floaters";
+import {DOMScenes} from "./dom-scenes";
+import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
+import type {InProgress} from "./in-progress/in-progress";
+import {InterruptScenes} from "./innterrupt-scenes";
+import {TDScenes} from "./td-scenes";
 
 /** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
 export interface GameAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,

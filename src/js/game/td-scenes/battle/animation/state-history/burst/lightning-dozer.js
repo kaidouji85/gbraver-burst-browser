@@ -1,12 +1,12 @@
 // @flow
-import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
-import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
 import type {Burst, LightningBarrier} from "gbraver-burst-core";
+import {all} from "../../../../../../animation/all";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import {all} from "../../../../../../animation/all";
-import {dolly, toInitial, track} from "../../td-camera";
 import {LightningDozerHUD} from "../../../view/hud/armdozer-objects/lightning-dozer";
+import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
+import {dolly, toInitial, track} from "../../td-camera";
+import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータ

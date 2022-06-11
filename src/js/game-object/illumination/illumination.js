@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from "three";
-import type {IlluminationModel} from "./model/illumination-model";
-import {IlluminationView} from "./view/illumination-view";
-import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
-import {intensity} from "./animation/intensity";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {intensity} from "./animation/intensity";
+import type {IlluminationModel} from "./model/illumination-model";
+import {createInitialValue} from "./model/initial-value";
+import {IlluminationView} from "./view/illumination-view";
 
 /**
  * ステージ全体の照明

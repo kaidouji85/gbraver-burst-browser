@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from 'three';
-import type {DamageDecreaseView} from "./view/damage-decrease-view";
+import {Animate} from "../../animation/animate";
+import type {PreRender} from "../../game-loop/pre-render";
+import type {Resources} from "../../resource";
+import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {popUp} from "./animation/pop-up";
 import type {DamageDecreaseModel} from "./model/damage-decrease-model";
 import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../game-loop/pre-render";
-import {Animate} from "../../animation/animate";
-import {popUp} from "./animation/pop-up";
 import {DamageDecreaseSounds} from "./sounds/damage-decrease-sounds";
-import type {Resources} from "../../resource";
-import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {DamageDecreaseView} from "./view/damage-decrease-view";
 
 /**
  * ダメージ減少

@@ -1,12 +1,12 @@
 // @flow
-import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
-import {NeoLandozerHUD} from "../../../view/hud/armdozer-objects/neo-landozer";
 import type {BuffPower, Burst} from "gbraver-burst-core";
+import {all} from "../../../../../../animation/all";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import {all} from "../../../../../../animation/all";
-import {dolly, toInitial, track} from "../../td-camera";
+import {NeoLandozerHUD} from "../../../view/hud/armdozer-objects/neo-landozer";
 import {NeoLandozerTD} from "../../../view/td/armdozer-objects/neo-landozer";
+import {dolly, toInitial, track} from "../../td-camera";
+import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 
 /**
  * ネオランドーザ バーストアニメーション パラメータ

@@ -1,24 +1,24 @@
 // @flow
 
-import type {ShinBraverView} from './shin-braver-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource";
-import type {ShinBraverModel} from "../model/shin-braver-model";
 import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
-import {shinBraverStand} from "../mesh/stand";
-import type {AnimationType} from "../model/animation-type";
+import {shinBraverBackStep} from "../mesh/back-step";
+import {shinBraverBurstDown} from "../mesh/burst-down";
+import {shinBraverBurstUp} from "../mesh/burst-up";
+import {shinBraverDown} from "../mesh/down";
+import {shinBraverFrontStep} from "../mesh/front-step";
+import {shinBraverGuard} from "../mesh/guard";
+import {shinBraverGutsDown} from "../mesh/guts-down";
+import {shinBraverGutsUp} from "../mesh/guts-up";
+import {shinBraverKnockBack} from "../mesh/knock-back";
 import {shinBraverSPAttack,} from "../mesh/sp-attack";
 import {shinBraverSPCharge} from "../mesh/sp-charge";
 import {shinBraverSPToStand} from "../mesh/sp-to-stand";
-import {shinBraverKnockBack} from "../mesh/knock-back";
-import {shinBraverGuard} from "../mesh/guard";
-import {shinBraverDown} from "../mesh/down";
-import {shinBraverGutsUp} from "../mesh/guts-up";
-import {shinBraverGutsDown} from "../mesh/guts-down";
-import {shinBraverBurstUp} from "../mesh/burst-up";
-import {shinBraverBurstDown} from "../mesh/burst-down";
-import {shinBraverBackStep} from "../mesh/back-step";
-import {shinBraverFrontStep} from "../mesh/front-step";
+import {shinBraverStand} from "../mesh/stand";
+import type {AnimationType} from "../model/animation-type";
+import type {ShinBraverModel} from "../model/shin-braver-model";
+import type {ShinBraverView} from './shin-braver-view';
 
 /** プレイヤー側シンブレイバーのビュー */
 export class PlayerShinBraverView implements ShinBraverView {

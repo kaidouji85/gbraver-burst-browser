@@ -1,14 +1,14 @@
 // @flow
 
-import type {WingDozerCutInView} from "./wing-dozer-cutin-view";
-import type {Resources} from "../../../../resource";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import {TEXTURE_IDS} from "../../../../resource/texture";
 import * as THREE from "three";
-import type {AnimationType, WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
 import type {PreRender} from "../../../../game-loop/pre-render";
+import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
+import type {Resources} from "../../../../resource";
+import {TEXTURE_IDS} from "../../../../resource/texture";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 import {HUDCutInScale} from "../../../scale";
+import type {AnimationType, WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
+import type {WingDozerCutInView} from "./wing-dozer-cutin-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 1000;

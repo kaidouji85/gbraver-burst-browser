@@ -2,16 +2,16 @@
 
 import * as THREE from 'three';
 import {WebGLInfo} from 'three';
+import type {Stream, Unsubscriber} from "../stream/stream";
+import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
 import type {Resize} from "../window/resize";
 import type {RendererDOMEvent} from "./dom-event/dom-event";
 import {createDOMEventStream} from "./dom-event/dom-event";
+import type {OverlapNotifier} from "./overla-notifier";
 import type {OverlapEvent} from "./overlap-event/overlap-event";
 import {toOverlapStream} from "./overlap-event/overlap-event";
-import type {OverlapNotifier} from "./overla-notifier";
 import type {RendererDomGetter} from "./renderer-dom-getter";
 import type {Rendering} from "./rendering";
-import type {Stream, Unsubscriber} from "../stream/stream";
-import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
 
 /** レンダラ管理オブジェクト */
 export class Renderer implements OverlapNotifier, RendererDomGetter, Rendering {

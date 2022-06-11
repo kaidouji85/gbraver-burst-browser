@@ -2,8 +2,8 @@
 
 import type {Command, GameState, GbraverBurstCore, Player, PlayerCommand} from "gbraver-burst-core";
 import {startGbraverBurst} from "gbraver-burst-core";
-import type {NPC} from "./npc";
 import {playerUuid} from "../uuid/player";
+import type {NPC} from "./npc";
 
 /** NPCバトルルーム */
 export class NPCBattleRoom {

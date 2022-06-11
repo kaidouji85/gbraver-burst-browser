@@ -9,8 +9,8 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
-import type {DamageDecreaseView} from "./damage-decrease-view";
 import type {DamageDecreaseModel} from "../model/damage-decrease-model";
+import type {DamageDecreaseView} from "./damage-decrease-view";
 
 export const MESH_SIZE = 300;
 

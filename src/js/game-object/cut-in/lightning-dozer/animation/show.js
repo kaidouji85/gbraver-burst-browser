@@ -1,10 +1,10 @@
 // @flow
 
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
+import {delay} from "../../../../animation/delay";
 import {process} from '../../../../animation/process';
 import {tween} from "../../../../animation/tween";
-import {delay} from "../../../../animation/delay";
-import {all} from "../../../../animation/all";
 import type {LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
 
 /**

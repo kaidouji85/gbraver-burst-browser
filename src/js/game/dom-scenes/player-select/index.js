@@ -1,16 +1,16 @@
 // @flow
-import type {Resources} from "../../../resource";
-import {ArmdozerSelector} from "./armdozer-selector";
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
 import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
-import {PilotSelector} from "./pilot-selector";
-import {domUuid} from "../../../uuid/dom-uuid";
-import {ArmdozerBustShotContainer} from "./armdozer-bust-shot";
-import {PilotBustShotContainer} from "./pilot-bust-shot";
-import type {DOMScene} from "../dom-scene";
+import type {Resources} from "../../../resource";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
+import {domUuid} from "../../../uuid/dom-uuid";
+import type {DOMScene} from "../dom-scene";
+import {ArmdozerBustShotContainer} from "./armdozer-bust-shot";
+import {ArmdozerSelector} from "./armdozer-selector";
 import {getDedicatedPilot} from "./dedicated-pilot";
+import {PilotBustShotContainer} from "./pilot-bust-shot";
+import {PilotSelector} from "./pilot-selector";
 
 /** data-idを集めたもの */
 type DataIDs = {

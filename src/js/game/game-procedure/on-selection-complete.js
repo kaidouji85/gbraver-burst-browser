@@ -1,13 +1,13 @@
 // @flow
-import type {SelectionComplete} from "../game-actions";
-import type {NPCBattle} from "../in-progress/npc-battle";
 import type {Battle as BattleSDK} from "@gbraver-burst-network/browser-core";
-import type {BattleProgress} from "../td-scenes/battle/battle-progress";
-import type {CasualMatch} from "../in-progress/casual-match";
+import {fadeOut, stop} from "../../bgm/bgm-operators";
 import {SOUND_IDS} from "../../resource/sound";
 import {waitAnimationFrame} from "../../wait/wait-animation-frame";
-import {fadeOut, stop} from "../../bgm/bgm-operators";
+import type {SelectionComplete} from "../game-actions";
 import type {GameProps} from "../game-props";
+import type {CasualMatch} from "../in-progress/casual-match";
+import type {NPCBattle} from "../in-progress/npc-battle";
+import type {BattleProgress} from "../td-scenes/battle/battle-progress";
 
 /**
  * プレイヤーキャラクター 選択完了時の処理

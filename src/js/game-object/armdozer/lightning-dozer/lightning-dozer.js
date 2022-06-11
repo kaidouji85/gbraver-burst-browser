@@ -1,28 +1,28 @@
 // @flow
 
-import type {Resources} from "../../../resource";
-import type {ArmDozerSprite} from "../armdozer-sprite";
 import * as THREE from "three";
 import {Animate} from "../../../animation/animate";
-import type {LightningDozerModel} from "./model/lightning-dozer-model";
-import {createInitialValue} from "./model/initial-value";
-import type {LightningDozerView} from "./view/lightning-dozer-view";
 import type {PreRender} from "../../../game-loop/pre-render";
-import {charge} from "./animation/charge";
+import type {Resources} from "../../../resource";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import type {ArmDozerSprite} from "../armdozer-sprite";
 import {armHammer} from "./animation/arm-hammer";
+import {avoid} from "./animation/avoid";
+import {charge} from "./animation/charge";
+import {down} from "./animation/down";
+import {frontStep} from "./animation/front-step";
+import {guard} from "./animation/guard";
+import {guardToStand} from "./animation/guard-to-stand";
+import {guts} from "./animation/guts";
+import {gutsToStand} from "./animation/guts-to-stand";
 import {hmToStand} from "./animation/hm-to-stand";
 import {knockBack} from "./animation/knock-back";
 import {knockBackToStand} from "./animation/knock-back-to-stand";
-import {avoid} from "./animation/avoid";
-import {frontStep} from "./animation/front-step";
-import {down} from "./animation/down";
-import {guts} from "./animation/guts";
-import {gutsToStand} from "./animation/guts-to-stand";
-import {guard} from "./animation/guard";
-import {guardToStand} from "./animation/guard-to-stand";
+import {createInitialValue} from "./model/initial-value";
+import type {LightningDozerModel} from "./model/lightning-dozer-model";
 import {LightningDozerSounds} from "./sounds/lightning-dozer-sounds";
-import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {LightningDozerView} from "./view/lightning-dozer-view";
 
 /**
  * ライトニングドーザ

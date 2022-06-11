@@ -1,18 +1,18 @@
 // @flow
 
 import * as THREE from "three";
-import type {HUDTracking} from "../../../../../tracking/hud-tracking";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
 import {ARMDOZER_EFFECT_STANDARD_Y} from "../../../../../game-object/armdozer/position";
 import type {Coordinate} from "../../../../../tracking/coordinate";
 import {toHUDCoordinate} from "../../../../../tracking/coordinate";
-import {ThreeDimensionLayer} from "../td";
+import type {HUDTracking} from "../../../../../tracking/hud-tracking";
 import {HudLayer} from "../hud";
-import {ShinBraverHUD} from "../hud/armdozer-objects/shin-braver";
 import type {HUDArmdozerObjects} from "../hud/armdozer-objects/hud-armdozer-ibjects";
-import {NeoLandozerHUD} from "../hud/armdozer-objects/neo-landozer";
 import {LightningDozerHUD} from "../hud/armdozer-objects/lightning-dozer";
+import {NeoLandozerHUD} from "../hud/armdozer-objects/neo-landozer";
+import {ShinBraverHUD} from "../hud/armdozer-objects/shin-braver";
 import {WingDozerHUD} from "../hud/armdozer-objects/wing-dozer";
+import {ThreeDimensionLayer} from "../td";
 
 /**
  * アームドーザスプライトをトラッキングする

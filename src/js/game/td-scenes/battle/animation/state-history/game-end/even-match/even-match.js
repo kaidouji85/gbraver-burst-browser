@@ -1,8 +1,8 @@
 // @flow
+import {all} from "../../../../../../../animation/all";
 import {Animate} from "../../../../../../../animation/animate";
 import {delay} from "../../../../../../../animation/delay";
 import {BattleSceneView} from "../../../../view";
-import {all} from "../../../../../../../animation/all";
 
 /**
  * 引き分けアニメーション

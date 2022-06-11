@@ -1,11 +1,11 @@
 // @flow
 
-import type {LightningView} from "./lightning-view";
+import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import * as THREE from "three";
 import type {LightningModel} from "../model/lightning-model";
+import type {LightningView} from "./lightning-view";
 
 /** メッシュ幅 */
 const WIDTH = 350;

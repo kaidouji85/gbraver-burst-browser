@@ -1,8 +1,8 @@
 // @flow
+import * as THREE from "three";
 import type {MouseRaycaster} from "../../raycaster/mouse-raycaster";
 import {createMouseRaycaster} from "../../raycaster/mouse-raycaster";
 import type {MouseDown} from "../dom-event/mouse";
-import * as THREE from "three";
 
 /** マウスダウンレイキャスター*/
 export type MouseDownRaycaster = {

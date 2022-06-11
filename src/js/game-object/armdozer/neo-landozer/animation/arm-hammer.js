@@ -1,8 +1,8 @@
 // @flow
 
+import {Animate} from "../../../../animation/animate";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {Animate} from "../../../../animation/animate";
 import type {NeoLandozerModel} from "../model/neo-landozer-model";
 
 /** アームハンマー */

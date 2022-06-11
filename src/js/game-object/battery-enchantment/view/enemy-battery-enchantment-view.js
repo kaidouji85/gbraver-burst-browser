@@ -1,8 +1,8 @@
 // @flow
 
-import {PlayerBatteryEnchantmentView} from "./player-battery-enchantment-view";
 import type {Resources} from "../../../resource";
 import type {BatteryEnchantmentModel} from "../model/battery-enchantment-model";
+import {PlayerBatteryEnchantmentView} from "./player-battery-enchantment-view";
 
 /**
  * 敵 バッテリー増強 ビュー

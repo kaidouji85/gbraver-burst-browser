@@ -1,8 +1,8 @@
 // @flow
 
-import type {Battle3DCameraModel} from "../model/model";
-import {tween} from "../../../../animation/tween";
 import {Animate} from "../../../../animation/animate";
+import {tween} from "../../../../animation/tween";
+import type {Battle3DCameraModel} from "../model/model";
 import type {Position} from "../position";
 
 /**

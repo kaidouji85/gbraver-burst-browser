@@ -1,11 +1,11 @@
 // @flow
 import type {DamageDecreaseSkill, PilotSkill} from "gbraver-burst-core";
-import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
-import {RaitoHUD} from "../../../view/hud/pilot-objects/raito";
+import {all} from "../../../../../../animation/all";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import {all} from "../../../../../../animation/all";
+import {RaitoHUD} from "../../../view/hud/pilot-objects/raito";
 import {dolly, toInitial, track} from "../../td-camera";
+import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
 
 /**
  * パイロットスキル ライト アニメーションパラメータ

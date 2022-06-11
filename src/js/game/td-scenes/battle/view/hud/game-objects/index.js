@@ -1,21 +1,21 @@
 // @flow
-import {BatterySelector} from "../../../../../../game-object/battery-selector";
-import {BurstButton} from "../../../../../../game-object/burst-button/burst-button";
-import type {Resources} from "../../../../../../resource";
-import type {BattleSceneAction} from "../../../actions";
 import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
-import {Fader} from "../../../../../../game-object/fader/fader";
-import {frontmostFader, rearmostFader} from "../../../../../../game-object/fader";
-import {PilotButton} from "../../../../../../game-object/pilot-button/pilot-button";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import {BatterySelector} from "../../../../../../game-object/battery-selector";
+import {BurstButton} from "../../../../../../game-object/burst-button/burst-button";
+import {frontmostFader, rearmostFader} from "../../../../../../game-object/fader";
+import {Fader} from "../../../../../../game-object/fader/fader";
+import {PilotButton} from "../../../../../../game-object/pilot-button/pilot-button";
+import {drawIndicator} from "../../../../../../game-object/result-indicator";
+import {ResultIndicator} from "../../../../../../game-object/result-indicator/result-indicator";
+import {TimeScaleButton} from "../../../../../../game-object/time-scale-button/time-scale-button";
+import type {Resources} from "../../../../../../resource";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../../../stream/stream";
 import {createStreamSource} from "../../../../../../stream/stream";
+import type {BattleSceneAction} from "../../../actions";
 import {createBurstButton} from "./burst-button";
 import {createPilotButton} from "./pilot-button";
-import {ResultIndicator} from "../../../../../../game-object/result-indicator/result-indicator";
-import {drawIndicator} from "../../../../../../game-object/result-indicator";
-import {TimeScaleButton} from "../../../../../../game-object/time-scale-button/time-scale-button";
 
 /**
  * HUDレイヤーのゲームオブジェクト

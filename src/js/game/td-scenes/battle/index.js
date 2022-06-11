@@ -1,29 +1,29 @@
 // @flow
-import type {Resources} from '../../../resource';
-import {BattleSceneView} from "./view";
-import type {BattleSceneState} from "./state/battle-scene-state";
-import type {GameLoop} from "../../../game-loop/game-loop";
-import type {DecideBattery} from "./actions/decide-battery";
-import type {ToggleTimeScale} from "./actions/toggle-time-scale";
-import {createInitialState} from "./state/initial-state";
-import type {BattleProgress} from "./battle-progress";
-import {stateHistoryAnimation} from "./animation/state-history";
 import type {Command, GameEnd, GameState, Player} from "gbraver-burst-core";
-import {delay} from "../../../animation/delay";
-import type {Scene} from "../scene";
-import type {Resize} from "../../../window/resize";
 import {all} from "../../../animation/all";
-import {BattleSceneSounds} from "./sounds/sounds";
+import {Animate} from "../../../animation/animate";
+import {delay} from "../../../animation/delay";
+import type {BGMManager} from "../../../bgm/bgm-manager";
+import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
 import {Exclusive} from "../../../exclusive/exclusive";
+import type {GameLoop} from "../../../game-loop/game-loop";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
+import type {Resources} from '../../../resource';
+import type {SoundId} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
-import type {BGMManager} from "../../../bgm/bgm-manager";
-import type {SoundId} from "../../../resource/sound";
-import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
-import {Animate} from "../../../animation/animate";
+import type {Resize} from "../../../window/resize";
+import type {Scene} from "../scene";
+import type {DecideBattery} from "./actions/decide-battery";
+import type {ToggleTimeScale} from "./actions/toggle-time-scale";
+import {stateHistoryAnimation} from "./animation/state-history";
+import type {BattleProgress} from "./battle-progress";
+import {BattleSceneSounds} from "./sounds/sounds";
+import type {BattleSceneState} from "./state/battle-scene-state";
+import {createInitialState} from "./state/initial-state";
+import {BattleSceneView} from "./view";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}

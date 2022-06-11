@@ -1,14 +1,14 @@
 // @flow
 
-import type {Resources} from "../../../../../../resource";
 import type {Player} from "gbraver-burst-core";
 import {PilotIds} from "gbraver-burst-core";
-import type {HUDPilotObjects} from "./hud-pilot-objects";
-import {enemyGaiHUD, playerGaiHUD} from "./gai";
-import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
-import {enemyRaitoHUD, playerRaitoHUD} from "./raito";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Resources} from "../../../../../../resource";
 import type {Stream} from "../../../../../../stream/stream";
+import {enemyGaiHUD, playerGaiHUD} from "./gai";
+import type {HUDPilotObjects} from "./hud-pilot-objects";
+import {enemyRaitoHUD, playerRaitoHUD} from "./raito";
+import {enemyShinyaHUD, playerShinyaHUD} from "./shinya";
 import {enemyTsubasaHUD, playerTsubasaHUD} from "./tsubasa";
 
 /**

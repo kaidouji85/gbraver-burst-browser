@@ -1,9 +1,9 @@
 // @flow
+import * as THREE from "three";
 import type {Resources} from "../../../resource";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import * as THREE from "three";
-import {SimpleIndicatorView} from "./simple-result-indicator";
 import type {ResultIndicatorView} from "./result-indicator-view";
+import {SimpleIndicatorView} from "./simple-result-indicator";
 
 /**
  * DRAWビューを生成する

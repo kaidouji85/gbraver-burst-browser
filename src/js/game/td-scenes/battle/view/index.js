@@ -1,22 +1,22 @@
 // @flow
 import TWEEN from "@tweenjs/tween.js";
-import type {Resources} from '../../../../resource';
-import {ThreeDimensionLayer} from './td';
-import {HudLayer} from './hud';
 import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../game-loop/game-loop";
-import type {BattleSceneAction} from "../actions";
-import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
-import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
-import type {Resize} from "../../../../window/resize";
-import type {Update} from "../../../../game-loop/update";
 import type {PreRender} from "../../../../game-loop/pre-render";
-import {tracking} from "./tracking";
+import type {Update} from "../../../../game-loop/update";
 import type {OverlapNotifier} from "../../../../render/overla-notifier";
 import type {RendererDomGetter} from "../../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../../render/rendering";
+import type {Resources} from '../../../../resource';
+import type {SafeAreaInset} from "../../../../safe-area/safe-area-inset";
+import {createSafeAreaInset} from "../../../../safe-area/safe-area-inset";
 import type {Stream, StreamSource} from "../../../../stream/stream";
 import {createStreamSource} from "../../../../stream/stream";
+import type {Resize} from "../../../../window/resize";
+import type {BattleSceneAction} from "../actions";
+import {HudLayer} from './hud';
+import {ThreeDimensionLayer} from './td';
+import {tracking} from "./tracking";
 
 /** 戦闘シーンビューで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}

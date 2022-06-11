@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import type {GaiModel} from "../model/gai-model";
 import type {PreRender} from "../../../../game-loop/pre-render";
+import type {GaiModel} from "../model/gai-model";
 
 /**
  * ガイ ビュー

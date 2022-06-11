@@ -2,9 +2,9 @@
 
 import type {PilotId} from "gbraver-burst-core";
 import {PilotIds} from "gbraver-burst-core";
-import {PilotIcon} from "./pilot-icon";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
+import {PilotIcon} from "./pilot-icon";
 
 /**
  * パイロットアイコンを生成する

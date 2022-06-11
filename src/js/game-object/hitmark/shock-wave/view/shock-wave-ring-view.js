@@ -1,11 +1,11 @@
 // @flow
 
 import * as THREE from 'three';
+import {SPRITE_RENDER_ORDER} from "../../../../render/render-order/td-render-order";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import {SPRITE_RENDER_ORDER} from "../../../../render/render-order/td-render-order";
-import {RING_Z_INDEX} from "./z-index";
 import type {ShockWaveRingModel} from "../model/shock-wave-model";
+import {RING_Z_INDEX} from "./z-index";
 
 /** メッシュ幅 */
 export const WIDTH = 300;

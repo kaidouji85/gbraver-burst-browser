@@ -1,8 +1,8 @@
 // @flow
 
+import {DifficultyDialog} from "../src/js/game/dom-dialogs/difficulty/difficulty-dialog";
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
-import {DifficultyDialog} from "../src/js/game/dom-dialogs/difficulty/difficulty-dialog";
 
 export default {
   title: 'difficulty',

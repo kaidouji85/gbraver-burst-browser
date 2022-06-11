@@ -1,10 +1,10 @@
 // @flow
 
 import * as THREE from 'three';
-import type {PilotIcon} from "./pilot-icon";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import type {PilotIcon} from "./pilot-icon";
 
 /**
  * シンヤ パイロットアイコン

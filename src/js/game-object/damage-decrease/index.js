@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import {PlayerDamageDecreaseView} from "./view/player-damage-decrease-view";
-import {EnemyDamageDecreaseView} from "./view/enemy-damage-decrease-view";
-import {DamageDecrease} from "./damage-decrease";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {DamageDecrease} from "./damage-decrease";
+import {EnemyDamageDecreaseView} from "./view/enemy-damage-decrease-view";
+import {PlayerDamageDecreaseView} from "./view/player-damage-decrease-view";
 
 /**
  * プレイヤー ダメージ減少 ポップアップ

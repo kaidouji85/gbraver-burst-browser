@@ -1,9 +1,9 @@
 // @flow
 
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {all} from "../../../../animation/all";
 import type {WingDozerModel} from "../model/wing-dozer-model";
 
 /**

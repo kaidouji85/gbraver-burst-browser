@@ -1,8 +1,8 @@
 // @flow
 
+import {LoginDialog} from '../src/js/game/dom-dialogs/login/login-dialog'
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
-import {LoginDialog} from '../src/js/game/dom-dialogs/login/login-dialog'
 
 export default {
   title: 'login-dialog',

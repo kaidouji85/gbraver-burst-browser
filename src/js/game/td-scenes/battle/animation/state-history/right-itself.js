@@ -1,11 +1,11 @@
 // @flow
 
-import {BattleSceneView} from "../../view";
-import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {BattleResult, GameStateX, RightItself} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
+import type {BattleSceneState} from "../../state/battle-scene-state";
+import {BattleSceneView} from "../../view";
 
 /**
  * 防御側 体勢整え

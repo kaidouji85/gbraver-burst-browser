@@ -1,8 +1,8 @@
 // @flow
 
 import {delay} from "../src/js/animation/delay";
-import {TDGameObjectStub} from "./stub/td-game-object-stub";
 import {enemyReflectIndicator, playerReflectIndicator} from "../src/js/game-object/reflect-indicator";
+import {TDGameObjectStub} from "./stub/td-game-object-stub";
 
 export default {
   title: 'reflect',

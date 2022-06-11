@@ -1,9 +1,9 @@
 // @flow
 
+import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import * as THREE from "three";
 import type {LightningBarrierModel} from "../model/lightning-barrier-model";
 
 /** メッシュ幅 */

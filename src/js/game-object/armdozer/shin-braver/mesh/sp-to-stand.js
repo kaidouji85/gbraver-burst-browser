@@ -1,8 +1,8 @@
 // @flow
 
 import type {Resources} from "../../../../resource";
-import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
 import {TEXTURE_IDS} from "../../../../resource/texture";
+import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
 import {HorizontalArmdozerAnimation} from "../../mesh/horizontal-animation";
 import {MESH_Y} from "./position";
 

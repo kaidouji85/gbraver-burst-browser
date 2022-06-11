@@ -1,12 +1,12 @@
 // @flow
 
 import type {Resources} from "../../../resource";
-import {ShockWave} from "./shock-wave";
-import {PlayerShockWaveView} from "./view/player-shock-wave-view";
-import {EnemyShockWaveView} from "./view/enemy-shock-wave-view";
-import {initialValue} from "./model/initial-value";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {initialValue} from "./model/initial-value";
+import {ShockWave} from "./shock-wave";
+import {EnemyShockWaveView} from "./view/enemy-shock-wave-view";
+import {PlayerShockWaveView} from "./view/player-shock-wave-view";
 
 /**
  * プレイヤーの衝撃波を生成する

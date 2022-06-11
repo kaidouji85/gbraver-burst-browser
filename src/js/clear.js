@@ -1,7 +1,7 @@
 // @flow
 
-import {unregisterServiceWorker} from "./service-worker/unregister-service-worker";
 import {clearCache} from "./service-worker/clear-chache";
+import {unregisterServiceWorker} from "./service-worker/unregister-service-worker";
 
 /**
  * ServiceWorkerクリアページスクリプトのエントリポイント

@@ -1,12 +1,12 @@
 // @flow
 
-import {Animate} from "../../../../../../animation/animate";
-import {BattleSceneView} from "../../../view";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {Battle, GameStateX} from "gbraver-burst-core";
+import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
-import {attackAnimation} from "./attack";
+import type {BattleSceneState} from "../../../state/battle-scene-state";
+import {BattleSceneView} from "../../../view";
 import {toBattleAnimationParam} from "./animation-param";
+import {attackAnimation} from "./attack";
 
 /**
  * 戦闘アニメーション

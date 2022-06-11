@@ -1,9 +1,9 @@
 // @flow
 
-import {Fader} from "./fader";
+import type {Stream} from "../../stream/stream";
 import {HUD_FROMTMOST_FADER_ZINDEX, HUD_REARMOST_FADER_ZINDEX} from "../../zindex/hud-zindex";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream} from "../../stream/stream";
+import {Fader} from "./fader";
 
 /** 画面フェーダ生成のパラメータ */
 type Param = {

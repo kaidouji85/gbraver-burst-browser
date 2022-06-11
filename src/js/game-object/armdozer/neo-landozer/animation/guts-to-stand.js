@@ -1,11 +1,11 @@
 // @flow
 
 import {Animate} from "../../../../animation/animate";
-import type {NeoLandozerModel} from "../model/neo-landozer-model";
-import {tween} from "../../../../animation/tween";
-import {process} from '../../../../animation/process';
-import {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
 import {delay} from "../../../../animation/delay";
+import {process} from '../../../../animation/process';
+import {tween} from "../../../../animation/tween";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
+import {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
 
 /**
  * ターンスタート -> 立ち

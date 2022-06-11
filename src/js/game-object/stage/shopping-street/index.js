@@ -1,9 +1,9 @@
 // @flow
 
-import type {Resources} from '../../../resource';
 import * as THREE from 'three';
-import {City} from './city';
+import type {Resources} from '../../../resource';
 import type {Stage} from "../stage";
+import {City} from './city';
 
 /** 商店街 */
 export default class ShoppingStreet implements Stage {

@@ -1,8 +1,8 @@
 // @flow
 
 import {delay} from "../src/js/animation/delay";
-import {TDGameObjectStub} from "./stub/td-game-object-stub";
 import {enemyPowerUp, playerPowerUp} from "../src/js/game-object/power-up";
+import {TDGameObjectStub} from "./stub/td-game-object-stub";
 
 export default {
   title: 'power-up',

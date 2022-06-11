@@ -1,11 +1,11 @@
 // @flow
 import * as THREE from "three";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import type {ResultIndicatorView} from "./result-indicator-view";
-import type {ResultIndicatorModel} from "../model/result-indicator-model";
 import type {PreRender} from "../../../game-loop/pre-render";
-import {HUDCutInScale} from "../../scale";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {HUD_RESULT_INDICATOR} from "../../../zindex/hud-zindex";
+import {HUDCutInScale} from "../../scale";
+import type {ResultIndicatorModel} from "../model/result-indicator-model";
+import type {ResultIndicatorView} from "./result-indicator-view";
 
 /** メッシュの大きさ */
 const MESH_SIZE = 400;

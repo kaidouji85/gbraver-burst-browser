@@ -1,10 +1,10 @@
 // @flow
 
-import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
-import {enemyWingDozerCutIn, playerWingDozerCutIn} from "../src/js/game-object/cut-in/wing-dozer";
-import {delay} from "../src/js/animation/delay";
 import {Animate} from "../src/js/animation/animate";
+import {delay} from "../src/js/animation/delay";
+import {enemyWingDozerCutIn, playerWingDozerCutIn} from "../src/js/game-object/cut-in/wing-dozer";
 import {WingDozerCutIn} from "../src/js/game-object/cut-in/wing-dozer/wing-dozer-cutin";
+import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 
 export default {
   title: 'wing-dozer-cutin',

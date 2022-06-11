@@ -1,11 +1,11 @@
 // @flow
 
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
-import type {GaiModel} from "../model/gai-model";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
+import type {GaiModel} from "../model/gai-model";
 import {GaiSounds} from "../sounds/gai-sounds";
-import {all} from "../../../../animation/all";
 
 /**
  * カットインを表示する

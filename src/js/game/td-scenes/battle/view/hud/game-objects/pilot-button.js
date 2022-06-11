@@ -1,10 +1,8 @@
 // @flow
 
-import type {Stream} from "../../../../../../stream/stream";
-import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import type {PilotId} from "gbraver-burst-core";
 import {PilotIds} from "gbraver-burst-core";
-import type {Resources} from "../../../../../../resource";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import {
   gaiPilotButton,
   raitoPilotButton,
@@ -12,6 +10,8 @@ import {
   tsubasaPilotButton
 } from "../../../../../../game-object/pilot-button";
 import {PilotButton} from "../../../../../../game-object/pilot-button/pilot-button";
+import type {Resources} from "../../../../../../resource";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * パイロットIDに対応したパイロットボタンを生成する

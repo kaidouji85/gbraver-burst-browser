@@ -1,10 +1,10 @@
 // @flow
 
-import {ArmdozerIcon} from "./armdozer-icon";
-import type {Resources} from "../../../../resource";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
+import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
+import {ArmdozerIcon} from "./armdozer-icon";
 
 /**
  * アームドーザアイコンを生成する
