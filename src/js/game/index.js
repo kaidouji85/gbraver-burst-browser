@@ -50,6 +50,7 @@ import {onEndNetworkError} from "./game-procedure/on-end-network-error";
 import {onWebSocketAPIError} from "./game-procedure/on-websocker-api-error";
 import {onWebSocketAPIUnintentionalClose} from "./game-procedure/on-web-socket-api-unintentional-close";
 import {onConfigChangeStart} from "./game-procedure/on-config-change-start";
+import {onConfigChangeCancel} from "./game-procedure/on-config-change-cancel";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -206,8 +207,9 @@ export class Game implements GameProps {
         onWebSocketAPIUnintentionalClose(this, action);
       } else if (action.type === 'ConfigChangeStart') {
         onConfigChangeStart(this);
+      } else if (action.type === 'ConfigChangeCancel') {
+        onConfigChangeCancel(this);
       }
-      else if (action.type === 'ConfigChangeCancel') { this._onConfigChangeCancel() }
       else if (action.type === 'ConfigChangeComplete') { this._onConfigChangeComplete(action) }
     }));
   }
@@ -219,17 +221,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * 設定変更キャンセル時の処理
-   *
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onConfigChangeCancel(): Promise<void> {
-    await this.fader.fadeOut();
-    await startTitle(this);
-    await this.fader.fadeIn();
   }
 
   /**
