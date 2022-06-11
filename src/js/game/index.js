@@ -10,10 +10,7 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {DOMFader} from "../components/dom-fader/dom-fader";
-import type {
-  ConfigChangeComplete,
-  WebSocketAPIUnintentionalClose,
-} from "./game-actions";
+import type {ConfigChangeComplete} from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/stream";
 import {createStream} from "../stream/stream";
@@ -51,6 +48,7 @@ import {onCancelAccountDeletion} from "./game-procedure/on-cancel-account-deleti
 import {onLoginCancel} from "./game-procedure/on-login-cancel";
 import {onEndNetworkError} from "./game-procedure/on-end-network-error";
 import {onWebSocketAPIError} from "./game-procedure/on-websocker-api-error";
+import {onWebSocketAPIUnintentionalClose} from "./game-procedure/on-web-socket-api-unintentional-close";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -203,8 +201,9 @@ export class Game implements GameProps {
         onEndNetworkError(this, action);
       } else if (action.type === 'WebSocketAPIError') {
         onWebSocketAPIError(this, action);
+      } else if (action.type === 'WebSocketAPIUnintentionalClose') {
+        onWebSocketAPIUnintentionalClose(this, action);
       }
-      else if (action.type === 'WebSocketAPIUnintentionalClose') { this._onWebSocketAPIUnintentionalClose(action) }
       else if (action.type === 'ConfigChangeStart') { this._onConfigChangeStart() }
       else if (action.type === 'ConfigChangeCancel') { this._onConfigChangeCancel() }
       else if (action.type === 'ConfigChangeComplete') { this._onConfigChangeComplete(action) }
@@ -218,16 +217,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * WebSocketAPI意図しない切断時の処理
-   *
-   * @param action アクション
-   */
-  _onWebSocketAPIUnintentionalClose(action: WebSocketAPIUnintentionalClose): void {
-    this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
-    throw action;
   }
 
   /**
