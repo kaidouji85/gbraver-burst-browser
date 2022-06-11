@@ -1,25 +1,8 @@
 // @flow
-import {DOMScenes} from "./dom-scenes";
-import type {Resources} from "../resource";
-import {emptyResources} from "../resource";
-import {CssVH} from "../view-port/vh";
-import {TDScenes} from "./td-scenes";
-import type {Resize} from "../window/resize";
-import {resizeStream} from "../window/resize";
-import {InterruptScenes} from "./innterrupt-scenes";
-import {DOMDialogs} from "./dom-dialogs";
-import type {ResourceRoot} from "../resource/resource-root";
-import {DOMFader} from "../components/dom-fader/dom-fader";
-import type {InProgress} from "./in-progress/in-progress";
-import type {Stream, Unsubscriber} from "../stream/stream";
+import type {Unsubscriber} from "../stream/stream";
 import {createStream} from "../stream/stream";
-import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import {map} from "../stream/operator";
-import type {BGMManager} from '../bgm/bgm-manager';
-import {createBGMManager} from '../bgm/bgm-manager';
-import {DOMFloaters} from "./dom-floaters/dom-floaters";
-import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
-import type {GameAPI, GameProps} from "./game-props";
+import type {GameProps, GamePropsGeneratorParam} from "./game-props";
 import {initialize} from "./game-procedure/initialize";
 import {onReloadRequest} from "./game-procedure/on-reload-request";
 import {onExitMailVerifiedIncomplete} from "./game-procedure/on-exit-mai-verified-incomplete";
@@ -48,58 +31,15 @@ import {onWebSocketAPIUnintentionalClose} from "./game-procedure/on-web-socket-a
 import {onConfigChangeStart} from "./game-procedure/on-config-change-start";
 import {onConfigChangeCancel} from "./game-procedure/on-config-change-cancel";
 import {onConfigChangeComplete} from "./game-procedure/on-config-change-complete";
+import {generateGameProps} from "./game-props";
 
 /** コンストラクタのパラメータ */
-type Param = {
-  /** リソースルート */
-  resourceRoot: ResourceRoot,
-  /** 遊び方動画のURL */
-  howToPlayMovieURL: string,
-  /** 利用規約ページのURL */
-  termsOfServiceURL: string,
-  /** 問い合わせページのURL */
-  contactURL: string,
-  /** プライバシーポリシーページのURL */
-  privacyPolicyURL: string,
-  /** FPS統計を表示するか否か、trueで表示する */
-  isPerformanceStatsVisible: boolean,
-  /** サービスワーカーを利用するか否か、trueで利用する */
-  isServiceWorkerUsed: boolean,
-  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
-  isAPIServerEnable: boolean,
-  /** APIサーバのSDK */
-  api: GameAPI,
-  /** ブラウザ設定リポジトリ */
-  config: GbraverBurstBrowserConfigRepository
-};
+type Param = GamePropsGeneratorParam;
 
 /** ゲーム管理オブジェクト */
-export class Game implements GameProps {
-  isPerformanceStatsVisible: boolean;
-  isServiceWorkerUsed: boolean;
-  howToPlayMovieURL: string;
-  termsOfServiceURL: string;
-  privacyPolicyURL: string;
-  contactURL: string;
-  isAPIServerEnable: boolean;
-  inProgress: InProgress;
-  api: GameAPI;
-  config: GbraverBurstBrowserConfigRepository;
-  suddenlyBattleEnd: FutureSuddenlyBattleEnd;
-  resize: Stream<Resize>;
-  vh: CssVH;
-  fader: DOMFader;
-  interruptScenes: InterruptScenes;
-  domScenes: DOMScenes;
-  domDialogs: DOMDialogs;
-  domFloaters: DOMFloaters;
-  tdScenes: TDScenes;
-  resourceRoot: ResourceRoot;
-  resources: Resources;
-  isFullResourceLoaded: boolean;
-  serviceWorker: ?ServiceWorkerRegistration;
-  bgm: BGMManager;
-  unsubscriber: Unsubscriber[];
+export class Game {
+  _props: GameProps;
+  _unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -107,107 +47,88 @@ export class Game implements GameProps {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this.resourceRoot = param.resourceRoot;
-    this.resources = emptyResources(this.resourceRoot);
-    this.isFullResourceLoaded = false;
-    this.isServiceWorkerUsed = param.isServiceWorkerUsed;
-    this.isPerformanceStatsVisible = param.isPerformanceStatsVisible;
-    this.howToPlayMovieURL = param.howToPlayMovieURL;
-    this.termsOfServiceURL = param.termsOfServiceURL;
-    this.privacyPolicyURL = param.privacyPolicyURL;
-    this.contactURL = param.contactURL;
-    this.isAPIServerEnable = param.isAPIServerEnable;
-
-    this.inProgress = {type: 'None'};
-    this.resize = resizeStream();
-    this.vh = new CssVH(this.resize);
-
-    this.api = param.api;
-    this.config = param.config;
-    this.suddenlyBattleEnd = new FutureSuddenlyBattleEnd();
-
-    this.fader = new DOMFader();
-    this.interruptScenes = new InterruptScenes();
-    this.domScenes = new DOMScenes();
-    this.domDialogs = new DOMDialogs();
-    this.domFloaters = new DOMFloaters();
-    this.tdScenes = new TDScenes(this.resize);
-
+    this._props = generateGameProps(param);
     const body = document.body || document.createElement('div');
-    const elements = [this.fader.getRootHTMLElement(), this.interruptScenes.getRootHTMLElement(),
-      this.domDialogs.getRootHTMLElement(), this.domScenes.getRootHTMLElement(), this.domFloaters.getRootHTMLElement(),
-      this.tdScenes.getRendererDOM()];
+    const elements = [
+      this._props.fader.getRootHTMLElement(),
+      this._props.interruptScenes.getRootHTMLElement(),
+      this._props.domDialogs.getRootHTMLElement(),
+      this._props.domScenes.getRootHTMLElement(),
+      this._props.domFloaters.getRootHTMLElement(),
+      this._props.tdScenes.getRendererDOM()];
     elements.forEach(element => {
       body.appendChild(element);
     });
-
-    this.serviceWorker = null;
-    this.bgm = createBGMManager();
-
-    const suddenlyBattleEnd = this.suddenlyBattleEnd.stream()
+    const suddenlyBattleEnd = this._props.suddenlyBattleEnd.stream()
       .chain(map(() => ({type: 'SuddenlyBattleEnd'})));
-    const webSocketAPIError = createStream(this.api.websocketErrorNotifier())
+    const webSocketAPIError = createStream(this._props.api.websocketErrorNotifier())
       .chain(map(error => ({type: 'WebSocketAPIError', error})))
-    const WebSocketAPIUnintentionalClose = createStream(this.api.websocketUnintentionalCloseNotifier())
+    const WebSocketAPIUnintentionalClose = createStream(this._props.api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
-    const gameActionStreams = [this.tdScenes.gameActionNotifier(), this.domScenes.gameActionNotifier(),
-      this.domDialogs.gameActionNotifier(), this.domFloaters.gameActionNotifier(),
-      suddenlyBattleEnd, webSocketAPIError, WebSocketAPIUnintentionalClose];
-    this.unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
+    const gameActionStreams = [
+      this._props.tdScenes.gameActionNotifier(),
+      this._props.domScenes.gameActionNotifier(),
+      this._props.domDialogs.gameActionNotifier(),
+      this._props.domFloaters.gameActionNotifier(),
+      suddenlyBattleEnd,
+      webSocketAPIError,
+      WebSocketAPIUnintentionalClose
+    ];
+    this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'ReloadRequest') { 
-        onReloadRequest(this);
+        onReloadRequest(this._props);
       } else if (action.type === 'ExitMailVerifiedIncomplete') {
-        onExitMailVerifiedIncomplete(this);
+        onExitMailVerifiedIncomplete(this._props);
       } else if (action.type === 'EndBattle') {
-        onEndBattle(this, action);
+        onEndBattle(this._props, action);
       } else if (action.type === 'SuddenlyBattleEnd') { 
-        onSuddenlyEndBattle(this);
+        onSuddenlyEndBattle(this._props);
       } else if (action.type === 'PostBattleAction') { 
-        onPostBattleAction(this, action);
+        onPostBattleAction(this._props, action);
       } else if (action.type === 'ArcadeStart') {
-        onArcadeStart(this);
+        onArcadeStart(this._props);
       } else if (action.type === 'CasualMatchStart') {
-        onCasualMatchStart(this);
+        onCasualMatchStart(this._props);
       } else if (action.type === 'MatchingCanceled') {
-        onMatchingCanceled(this);
+        onMatchingCanceled(this._props);
       } else if (action.type === 'ShowHowToPlay') {
-        onShowHowToPlay(this);
+        onShowHowToPlay(this._props);
       } else if (action.type === 'SelectionComplete') {
-        onSelectionComplete(this, action);
+        onSelectionComplete(this._props, action);
       } else if (action.type === 'SelectionCancel') {
-        onSelectionCancel(this);
+        onSelectionCancel(this._props);
       } else if (action.type === 'DifficultySelectionComplete') {
-        onDifficultySelectionComplete(this, action);
+        onDifficultySelectionComplete(this._props, action);
       } else if (action.type === 'DifficultySelectionCancel') {
-        onDifficultySelectionCancel(this);
+        onDifficultySelectionCancel(this._props);
       } else if (action.type === 'EndNPCEnding') {
-        onEndNPCEnding(this);
+        onEndNPCEnding(this._props);
       } else if (action.type === 'EndHowToPlay') {
-        onEndHowToPlay(this);
+        onEndHowToPlay(this._props);
       } else if (action.type === 'UniversalLogin') {
-        onUniversalLogin(this);
+        onUniversalLogin(this._props);
       } else if (action.type === 'Logout') {
-        onLogout(this);
+        onLogout(this._props);
       } else if (action.type === 'AccountDeleteConsent') {
-        onAccountDeleteConsent(this);
+        onAccountDeleteConsent(this._props);
       } else if (action.type === 'DeleteAccount') {
-        onDeleteAccount(this);
+        onDeleteAccount(this._props);
       } else if (action.type === 'CancelAccountDeletion') {
-        onCancelAccountDeletion(this);
+        onCancelAccountDeletion(this._props);
       } else if (action.type === 'LoginCancel') {
-        onLoginCancel(this);
+        onLoginCancel(this._props);
       } else if (action.type === 'EndNetworkError') {
-        onEndNetworkError(this, action);
+        onEndNetworkError(this._props, action);
       } else if (action.type === 'WebSocketAPIError') {
-        onWebSocketAPIError(this, action);
+        onWebSocketAPIError(this._props, action);
       } else if (action.type === 'WebSocketAPIUnintentionalClose') {
-        onWebSocketAPIUnintentionalClose(this, action);
+        onWebSocketAPIUnintentionalClose(this._props, action);
       } else if (action.type === 'ConfigChangeStart') {
-        onConfigChangeStart(this);
+        onConfigChangeStart(this._props);
       } else if (action.type === 'ConfigChangeCancel') {
-        onConfigChangeCancel(this);
+        onConfigChangeCancel(this._props);
       } else if (action.type === 'ConfigChangeComplete') {
-        onConfigChangeComplete(this, action);
+        onConfigChangeComplete(this._props, action);
       }
     }));
   }
@@ -218,6 +139,6 @@ export class Game implements GameProps {
    * @return 処理が完了したら発火するPromise
    */
   async initialize(): Promise<void> {
-    await initialize(this);
+    await initialize(this._props);
   }
 }
