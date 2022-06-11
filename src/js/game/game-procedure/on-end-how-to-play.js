@@ -7,7 +7,7 @@ import type {GameProps} from "../game-props";
  *
  * @param props ゲームプロパティ
  */
-export function onEndHowToPlay(props: GameProps): void {
+export function onEndHowToPlay(props: $ReadOnly<GameProps>): void {
   props.bgm.do(fadeIn)
   props.domDialogs.hidden();
 }
