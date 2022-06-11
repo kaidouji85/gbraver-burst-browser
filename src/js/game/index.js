@@ -9,28 +9,22 @@ import {resizeStream} from "../window/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
-import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import type {DifficultySelect, NPCBattle} from "./in-progress/npc-battle";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {
   ConfigChangeComplete,
   DifficultySelectionComplete,
   EndNetworkError,
-  SelectionComplete,
   WebSocketAPIError,
   WebSocketAPIUnintentionalClose,
 } from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/stream";
 import {createStream} from "../stream/stream";
-import type {Battle as BattleSDK} from '@gbraver-burst-network/browser-core';
-import type {CasualMatch} from "./in-progress/casual-match";
 import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import {map} from "../stream/operator";
-import type {BattleProgress} from "./td-scenes/battle/battle-progress";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
-import {SOUND_IDS} from "../resource/sound";
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import {
@@ -56,6 +50,7 @@ import {onArcadeStart} from "./game-procedure/on-arcade-start";
 import {onCasualMatchStart} from "./game-procedure/on-casual-match-start";
 import {onMatchingCanceled} from "./game-procedure/on-matching-cancel";
 import {onShowHowToPlay} from "./game-procedure/on-show-how-to-play";
+import {onSelectionComplete} from "./game-procedure/on-selection-complete";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -181,7 +176,9 @@ export class Game implements GameProps {
       } else if (action.type === 'ShowHowToPlay') {
         onShowHowToPlay(this);
       }
-      else if (action.type === 'SelectionComplete') { this._onSelectionComplete(action) }
+      else if (action.type === 'SelectionComplete') {
+        onSelectionComplete(this, action);
+      }
       else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
       else if (action.type === 'DifficultySelectionComplete') { this._onDifficultySelectionComplete(action) }
       else if (action.type === 'DifficultySelectionCancel') { this._onDifficultySelectionCancel() }
@@ -295,72 +292,6 @@ export class Game implements GameProps {
       await close();
     } else if (action.postNetworkError.type === 'GotoTitle') {
       await gotoTitle();
-    }
-  }
-
-  /**
-   * プレイヤーキャラクター 選択完了時の処理
-   *
-   * @param action アクション
-   */
-  async _onSelectionComplete(action: SelectionComplete): Promise<void> {
-    const courseDifficultySelect = async (npcBattle: NPCBattle): Promise<void> => {
-      this.inProgress = {...npcBattle, subFlow: {type: 'DifficultySelect', armdozerId: action.armdozerId, pilotId: action.pilotId}};
-      this.domDialogs.startDifficulty(this.resources);
-    };
-    const waitUntilMatching = async (): Promise<BattleSDK> => {
-      try {
-        await this.api.disconnectWebsocket();
-        return await this.api.startCasualMatch(action.armdozerId, action.pilotId);
-      } catch(e) {
-        this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
-        throw e;
-      }
-    };
-    const createBattleProgress = (battle: BattleSDK): BattleProgress => ({
-      progress: async (v) =>  {
-        try {
-          this.domDialogs.startWaiting('通信中......');
-          const update = await battle.progress(v);
-          this.domDialogs.hidden();
-          return update;
-        } catch(e) {
-          this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
-          throw e;
-        }
-      }
-    });
-    const startMatching = async (origin: CasualMatch): Promise<void> => {
-      this.domDialogs.startMatching(this.resources);
-      const battle = await waitUntilMatching();
-      this.suddenlyBattleEnd.bind(battle);
-      this.inProgress = {...origin, subFlow: {type: 'Battle'}};
-
-      await this.fader.fadeOut();
-      this.domDialogs.hidden();
-      await this.domScenes.startMatchCard(this.resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
-      await this.fader.fadeIn();
-
-      const progress = createBattleProgress(battle);
-      const config = await this.config.load();
-      const battleScene = this.tdScenes.startBattle(this.resources, this.bgm, SOUND_IDS.BATTLE_BGM_01,
-        config.webGLPixelRatio, config.battleAnimationTimeScale, progress, battle.player, battle.enemy, battle.initialState);
-      await waitAnimationFrame();
-      await Promise.all([(async () => {
-        await this.fader.fadeOut();
-        this.domScenes.hidden();
-      })(), (async () => {
-        await this.bgm.do(fadeOut);
-        await this.bgm.do(stop);
-      })()]);
-      await this.fader.fadeIn();
-      await battleScene.start();
-    };
-
-    if (this.inProgress.type === 'NPCBattle') {
-      await courseDifficultySelect(this.inProgress);
-    } else if (this.inProgress.type === 'CasualMatch') {
-      await startMatching(this.inProgress);
     }
   }
 
