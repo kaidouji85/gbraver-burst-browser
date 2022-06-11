@@ -1,11 +1,11 @@
 // @flow
 
 import TWEEN from '@tweenjs/tween.js';
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
-import type {ShockWaveLineModel, ShockWaveModel, ShockWaveRingModel} from "../model/shock-wave-model";
 import {process} from '../../../../animation/process';
 import {tween} from "../../../../animation/tween";
-import {all} from "../../../../animation/all";
+import type {ShockWaveLineModel, ShockWaveModel, ShockWaveRingModel} from "../model/shock-wave-model";
 
 /** アニメーション再生時間 */
 export const DURATION = 800;

@@ -1,9 +1,9 @@
 // @flow
 
-import {PlayerNeoLandozerCutInView} from "./player-neo-landozer-cutin-view";
+import type {PreRender} from "../../../../game-loop/pre-render";
 import type {Resources} from "../../../../resource";
 import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
-import type {PreRender} from "../../../../game-loop/pre-render";
+import {PlayerNeoLandozerCutInView} from "./player-neo-landozer-cutin-view";
 
 /**
  * 敵側 ネオランドーザ カットイン ビュー

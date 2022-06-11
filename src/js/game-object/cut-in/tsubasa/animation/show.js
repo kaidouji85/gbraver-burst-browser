@@ -1,11 +1,11 @@
 // @flow
 
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
-import type {TsubasaModel} from "../model/tsubasa-model";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
+import type {TsubasaModel} from "../model/tsubasa-model";
 import {TsubasaSounds} from "../sounds/tsubasa-sounds";
-import {all} from "../../../../animation/all";
 
 /**
  * カットインを表示する

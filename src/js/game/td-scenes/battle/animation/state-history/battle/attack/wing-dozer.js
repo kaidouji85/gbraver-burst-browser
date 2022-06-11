@@ -1,12 +1,12 @@
 // @flow
-import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
-import {WingDozer} from "../../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
-import {Animate} from "../../../../../../../animation/animate";
-import {delay, empty} from "../../../../../../../animation/delay";
 import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
-import {dolly, toInitial, track} from "../../../td-camera";
+import {Animate} from "../../../../../../../animation/animate";
+import {delay, empty} from "../../../../../../../animation/delay";
+import {WingDozer} from "../../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 import {TDCamera} from "../../../../../../../game-object/camera/td";
+import {dolly, toInitial, track} from "../../../td-camera";
+import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 
 /**
  * ウィングドーザ 戦闘アニメーション パラメータ

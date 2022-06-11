@@ -1,8 +1,8 @@
 // @flow
 
 import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
 import {process} from '../../../animation/process';
+import {tween} from "../../../animation/tween";
 import type {PilotButtonModel} from "../model/pilot-button-model";
 import {PilotButtonSounds} from "../sounds/pilot-button-sounds";
 

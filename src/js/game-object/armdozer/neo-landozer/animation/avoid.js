@@ -1,12 +1,12 @@
 // @flow
 
-import type {NeoLandozerModel} from "../model/neo-landozer-model";
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
+import {delay} from "../../../../animation/delay";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
 import type {NeoLandozerSounds} from "../sounds/neo-landozer-sounds";
-import {all} from "../../../../animation/all";
-import {delay} from "../../../../animation/delay";
 
 /** 避ける */
 export function avoid(model: NeoLandozerModel, sounds: NeoLandozerSounds): Animate {

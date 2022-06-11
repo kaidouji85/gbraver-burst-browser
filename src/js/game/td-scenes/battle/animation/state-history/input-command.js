@@ -1,12 +1,12 @@
 // @flow
 
-import {Animate} from "../../../../../animation/animate";
-import {BattleSceneView} from "../../view";
-import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameStateX, InputCommand} from "gbraver-burst-core";
-import {empty} from "../../../../../animation/delay";
 import {all} from "../../../../../animation/all";
+import {Animate} from "../../../../../animation/animate";
+import {empty} from "../../../../../animation/delay";
+import type {BattleSceneState} from "../../state/battle-scene-state";
 import {canBurstButtonPush, canPilotButtonPush, getEnableMax, getInitialBattery} from "../../ui-logic";
+import {BattleSceneView} from "../../view";
 
 /**
  * コマンド入力フェイズのアニメーション

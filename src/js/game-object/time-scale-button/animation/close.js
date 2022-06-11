@@ -1,8 +1,8 @@
 // @flow
-import type {TimeScaleButtonModel} from "../model/time-scale-button-model";
 import type {Animate} from "../../../animation/animate";
 import {process} from "../../../animation/process";
 import {tween} from "../../../animation/tween";
+import type {TimeScaleButtonModel} from "../model/time-scale-button-model";
 
 /**
  * ボタンを非表示にする

@@ -1,23 +1,23 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
 import * as THREE from "three";
 import {Group} from "three";
-import type {WingDozerView} from "./wing-dozer-view";
-import type {AnimationType, WingDozerModel} from "../model/wing-dozer-model";
-import {wingDozerStand} from "../mesh/stand";
+import type {Resources} from "../../../../resource";
 import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
-import {wingDozerUpperCharge} from "../mesh/upper-charge";
-import {wingDozerUpperAttack} from "../mesh/upper-attack";
-import {wingDozerUpperToStand} from "../mesh/upper-to-stand";
-import {wingDozerDashUp} from "../mesh/dash-up";
+import {wingDozerBackStep} from "../mesh/back-step";
 import {wingDozerDashDown} from "../mesh/dash-down";
 import {wingDozerDashToStand} from "../mesh/dash-to-stand";
-import {wingDozerKnockBack} from "../mesh/knock-back";
+import {wingDozerDashUp} from "../mesh/dash-up";
 import {wingDozerDown} from "../mesh/down";
-import {wingDozerBackStep} from "../mesh/back-step";
 import {wingDozerFrontStep} from "../mesh/front-step";
 import {wingDozerGuard} from "../mesh/guard";
+import {wingDozerKnockBack} from "../mesh/knock-back";
+import {wingDozerStand} from "../mesh/stand";
+import {wingDozerUpperAttack} from "../mesh/upper-attack";
+import {wingDozerUpperCharge} from "../mesh/upper-charge";
+import {wingDozerUpperToStand} from "../mesh/upper-to-stand";
+import type {AnimationType, WingDozerModel} from "../model/wing-dozer-model";
+import type {WingDozerView} from "./wing-dozer-view";
 
 /**
  * プレイヤー側 ウィングドーザ ビュー

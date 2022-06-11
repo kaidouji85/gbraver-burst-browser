@@ -1,12 +1,12 @@
 // @flow
 
-import * as THREE from 'three';
 import * as R from 'ramda';
-import type {ShockWaveView} from "./shock-wave-view";
+import * as THREE from 'three';
 import type {Resources} from "../../../../resource";
-import {ShockWaveLineView} from "./shock-wave-line-view";
 import type {ShockWaveLineModel, ShockWaveModel} from "../model/shock-wave-model";
+import {ShockWaveLineView} from "./shock-wave-line-view";
 import {ShockWaveRingView} from "./shock-wave-ring-view";
+import type {ShockWaveView} from "./shock-wave-view";
 
 /**
  * プレイヤーの衝撃波ビュー

@@ -1,7 +1,7 @@
 // @flow
-import {startTitle} from "./start-title";
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {GameProps} from "../game-props";
+import {startTitle} from "./start-title";
 
 /**
  * NPCバトルエンディングが終了した際の処理

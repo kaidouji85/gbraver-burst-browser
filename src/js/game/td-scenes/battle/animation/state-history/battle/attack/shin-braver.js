@@ -1,12 +1,12 @@
 // @flow
+import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
+import {all} from "../../../../../../../animation/all";
 import {Animate} from "../../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../../animation/delay";
-import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 import {ShinBraver} from "../../../../../../../game-object/armdozer/shin-braver/shin-braver";
-import {all} from "../../../../../../../animation/all";
-import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
-import {dolly, toInitial, track} from "../../../td-camera";
 import {TDCamera} from "../../../../../../../game-object/camera/td";
+import {dolly, toInitial, track} from "../../../td-camera";
+import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 
 /**
  * シンブレイバー 戦闘アニメーション パラメータ

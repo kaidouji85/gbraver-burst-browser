@@ -1,11 +1,11 @@
 // @flow
 
-import {Animate} from "../../../../animation/animate";
-import {process} from '../../../../animation/process';
-import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
-import {tween} from "../../../../animation/tween";
-import {delay} from "../../../../animation/delay";
 import {all} from "../../../../animation/all";
+import {Animate} from "../../../../animation/animate";
+import {delay} from "../../../../animation/delay";
+import {process} from '../../../../animation/process';
+import {tween} from "../../../../animation/tween";
+import type {NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 
 /**
  * カットインを表示する

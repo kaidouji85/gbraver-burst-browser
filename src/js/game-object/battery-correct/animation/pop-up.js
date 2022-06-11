@@ -1,11 +1,11 @@
 // @flow
 
+import {all} from "../../../animation/all";
 import {Animate} from "../../../animation/animate";
-import type {BatteryCorrectModel} from "../model/battery-correct-model";
 import {process} from '../../../animation/process';
 import {tween} from "../../../animation/tween";
-import {all} from "../../../animation/all";
 import {ARMDOZER_EFFECT_STANDARD_Y} from "../../armdozer/position";
+import type {BatteryCorrectModel} from "../model/battery-correct-model";
 
 /**
  * ポップアップ表示

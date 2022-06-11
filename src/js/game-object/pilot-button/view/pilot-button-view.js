@@ -1,17 +1,17 @@
 // @flow
 import * as THREE from 'three';
+import type {PreRender} from "../../../game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type {PilotButtonModel} from "../model/pilot-button-model";
-import type {PreRender} from "../../../game-loop/pre-render";
-import {HUDUIScale} from "../../scale";
-import {ButtonOverlap} from "../../button-overlap/button-overlap";
-import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
-import type {PilotIcon} from "./pilot-icon";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, StreamSource} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {ButtonOverlap} from "../../button-overlap/button-overlap";
+import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
+import {HUDUIScale} from "../../scale";
+import type {PilotButtonModel} from "../model/pilot-button-model";
+import type {PilotIcon} from "./pilot-icon";
 
 /**
  * パイロットボタン ビュー

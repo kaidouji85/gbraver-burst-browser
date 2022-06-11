@@ -1,9 +1,9 @@
 // @flow
 
 import {fromEvent} from "rxjs";
+import {map} from "../../stream/operator";
 import type {Stream} from "../../stream/stream";
 import {createStream} from "../../stream/stream";
-import {map} from "../../stream/operator";
 
 /** マウスダウン */
 export type MouseDown = {

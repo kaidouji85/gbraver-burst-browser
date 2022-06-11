@@ -1,23 +1,23 @@
 // @flow
-import type {LoadingActions} from "../../resource/loading-actions";
-import type {DOMScene} from "./dom-scene";
-import {Loading} from "./loading";
-import {Title} from "./title/title";
-import {PlayerSelect} from "./player-select";
-import {MatchCard} from "./match-card";
 import type {ArmDozerId} from "gbraver-burst-core";
-import {waitTime} from "../../wait/wait-time";
-import {NPCEnding} from "./npc-ending/npc-ending";
+import type {BGMManager} from '../../bgm/bgm-manager';
 import type {Resources} from "../../resource";
-import type {GameAction} from "../game-actions";
+import type {LoadingActions} from "../../resource/loading-actions";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
-import type {TitleAccount} from "./title/title-account";
-import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
-import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
-import {Config} from "./config/config";
+import {waitTime} from "../../wait/wait-time";
 import type {GbraverBurstBrowserConfig} from "../config/browser-config";
-import type {BGMManager} from '../../bgm/bgm-manager';
+import type {GameAction} from "../game-actions";
+import {Config} from "./config/config";
+import type {DOMScene} from "./dom-scene";
+import {Loading} from "./loading";
+import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
+import {MatchCard} from "./match-card";
+import {NPCEnding} from "./npc-ending/npc-ending";
+import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
+import {PlayerSelect} from "./player-select";
+import {Title} from "./title/title";
+import type {TitleAccount} from "./title/title-account";
 
 /**
  * 最大読み込み待機時間(ミリ秒)

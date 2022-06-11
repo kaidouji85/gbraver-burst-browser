@@ -1,11 +1,11 @@
 // @flow
 
-import {Gauge} from "./gauge";
 import type {Resources} from "../../resource";
-import {PlayerGaugeView} from "./view/player-gauge-view";
-import {EnemyGaugeView} from "./view/enemy-gauge-view";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {Gauge} from "./gauge";
+import {EnemyGaugeView} from "./view/enemy-gauge-view";
+import {PlayerGaugeView} from "./view/player-gauge-view";
 
 /** ゲージのパラメータ */
 type Param = {

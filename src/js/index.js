@@ -1,10 +1,10 @@
 // @flow
 
-import '../css/style.css';
-import {Game} from './game/index';
 import {createBrowserSDK} from "@gbraver-burst-network/browser-sdk";
+import '../css/style.css';
 import {isMobile} from "./device-ditect/is-mobile";
 import {createLocalStorageConfigRepository} from "./game/config/local-storage";
+import {Game} from './game/index';
 
 /**
  * Gブレイバーバーストのエントリポイント

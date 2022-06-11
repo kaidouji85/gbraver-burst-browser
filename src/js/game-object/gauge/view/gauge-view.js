@@ -1,8 +1,8 @@
 // @flow
 
-import type {GaugeModel} from "../model/gauge-model";
 import * as THREE from "three";
 import type {PreRender} from "../../../game-loop/pre-render";
+import type {GaugeModel} from "../model/gauge-model";
 
 /** ゲージのビュー */
 export interface GaugeView {

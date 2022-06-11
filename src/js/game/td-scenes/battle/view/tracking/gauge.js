@@ -1,6 +1,6 @@
 // @flow
+import type {PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
-import type {HUDTracking} from "../../../../../tracking/hud-tracking";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
@@ -8,10 +8,10 @@ import {
 } from "../../../../../game-object/armdozer/position";
 import type {Coordinate} from "../../../../../tracking/coordinate";
 import {toHUDCoordinate} from "../../../../../tracking/coordinate";
-import {ThreeDimensionLayer} from "../td";
+import type {HUDTracking} from "../../../../../tracking/hud-tracking";
 import {HudLayer} from "../hud";
-import type {PlayerId} from "gbraver-burst-core";
 import {HUDPlayer} from "../hud/player";
+import {ThreeDimensionLayer} from "../td";
 
 /**
  * ゲージをトラッキングする

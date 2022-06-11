@@ -1,7 +1,7 @@
 // @flow
 
-import {PlayerBatteryGauge} from "./player-battery-gauge";
 import type {Resources} from "../../../resource";
+import {PlayerBatteryGauge} from "./player-battery-gauge";
 
 /** 敵のバッテリーゲージ */
 export class EnemyBatteryGauge extends PlayerBatteryGauge {

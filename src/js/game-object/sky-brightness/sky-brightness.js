@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from "three";
+import {Animate} from "../../animation/animate";
+import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {brightness} from "./animation/brightness";
+import {createInitialValue} from "./model/initial-value";
 import type {SkyBrightnessModel} from "./model/sky-brightness-model";
 import {SkyBrightnessView} from "./view/sky-brightness-view";
-import {createInitialValue} from "./model/initial-value";
-import {Animate} from "../../animation/animate";
-import {brightness} from "./animation/brightness";
-import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/stream";
 
 /** 空の明るさ */
 export class SkyBrightness {

@@ -1,8 +1,8 @@
 // @flow
 
-import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
-import {enemyShinyaCutIn, playerShinyaCutIn} from "../src/js/game-object/cut-in/shinya";
 import {delay} from "../src/js/animation/delay";
+import {enemyShinyaCutIn, playerShinyaCutIn} from "../src/js/game-object/cut-in/shinya";
+import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 
 export default {
   title: 'shinya',

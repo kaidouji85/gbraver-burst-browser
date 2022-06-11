@@ -1,7 +1,7 @@
 // @flow
 
-import type {BatteryCorrectModel} from "./battery-correct-model";
 import {ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Y} from "../../armdozer/position";
+import type {BatteryCorrectModel} from "./battery-correct-model";
 
 /**
  * モデルの初期値を生成する

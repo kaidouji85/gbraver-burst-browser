@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import type {TurnStartModel} from "../model/turn-start-model";
 import type {PreRender} from "../../../game-loop/pre-render";
+import type {TurnStartModel} from "../model/turn-start-model";
 
 /**
  * ターンスタート ビュー

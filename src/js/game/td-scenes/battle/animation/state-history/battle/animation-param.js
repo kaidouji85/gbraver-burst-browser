@@ -1,15 +1,15 @@
 // @flow
 
 import type {Battle, BattleResult, GameStateX, PlayerState} from "gbraver-burst-core";
-import type {TDPlayer} from "../../../view/td/player";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
-import type {TDGameObjects} from "../../../view/td/game-objects";
-import type {HUDGameObjects} from "../../../view/hud/game-objects";
-import {BattleSceneView} from "../../../view";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
-import {TDCamera} from "../../../../../../game-object/camera/td";
 import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud/plain-hud-camera";
+import {TDCamera} from "../../../../../../game-object/camera/td";
+import type {BattleSceneState} from "../../../state/battle-scene-state";
+import {BattleSceneView} from "../../../view";
+import type {HUDGameObjects} from "../../../view/hud/game-objects";
 import {HUDPlayer} from "../../../view/hud/player";
+import type {TDGameObjects} from "../../../view/td/game-objects";
+import type {TDPlayer} from "../../../view/td/player";
 
 /**
  * 戦闘アニメーション共通で使うパラメータ

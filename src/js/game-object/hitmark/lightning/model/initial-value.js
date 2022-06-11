@@ -1,11 +1,11 @@
 // @flow
 
-import type {LightningModel} from "./lightning-model";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../../armdozer/position";
+import type {LightningModel} from "./lightning-model";
 
 /**
  * 電撃ヒットマークモデルの初期値を生成する

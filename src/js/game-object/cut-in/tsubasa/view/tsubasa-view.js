@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import type {TsubasaModel} from "../model/tsubasa-model";
 import type {PreRender} from "../../../../game-loop/pre-render";
+import type {TsubasaModel} from "../model/tsubasa-model";
 
 /**
  * ツバサ ビュー

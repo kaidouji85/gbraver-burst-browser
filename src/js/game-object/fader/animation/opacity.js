@@ -1,8 +1,8 @@
 // @flow
 
 import {Animate} from "../../../animation/animate";
-import type {FaderModel} from "../model/fader-model";
 import {tween} from "../../../animation/tween";
+import type {FaderModel} from "../model/fader-model";
 
 /**
  * 透明度を変更

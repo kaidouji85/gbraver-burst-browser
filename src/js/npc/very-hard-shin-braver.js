@@ -1,10 +1,10 @@
 // @flow
 
-import type {NPC} from "./npc";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
+import {canBeatDown} from "./can-beat-down";
+import type {NPC} from "./npc";
 import type {SimpleRoutine} from "./simple-npc";
 import {SimpleNPC} from "./simple-npc";
-import {canBeatDown} from "./can-beat-down";
 
 /** 0バッテリー */
 const ZERO_BATTERY = {

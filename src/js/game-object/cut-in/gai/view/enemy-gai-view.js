@@ -1,9 +1,9 @@
 // @flow
 
-import {PlayerGaiView} from "./player-gai-view";
+import type {PreRender} from "../../../../game-loop/pre-render";
 import type {Resources} from "../../../../resource";
 import type {GaiModel} from "../model/gai-model";
-import type {PreRender} from "../../../../game-loop/pre-render";
+import {PlayerGaiView} from "./player-gai-view";
 
 /**
  * 敵側 ガイ ビュー

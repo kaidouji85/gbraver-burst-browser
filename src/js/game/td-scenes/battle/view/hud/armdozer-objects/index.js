@@ -2,15 +2,15 @@
 
 import type {Player} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
-import type {Resources} from "../../../../../../resource";
-import {enemyShinBraverHUD, playerShinBraverHUD} from "./shin-braver";
-import {EmptyHUDArmdozer} from "./empty";
-import {enemyNeoLandozerHUD, playerNeoLandozerHUD} from "./neo-landozer";
-import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer";
-import {enemyWingDozerHUD, playerWingDozerHUD} from "./wing-dozer";
-import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {Resources} from "../../../../../../resource";
 import type {Stream} from "../../../../../../stream/stream";
+import {EmptyHUDArmdozer} from "./empty";
+import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
+import {enemyLightningDozerHUD, playerLightningDozerHUD} from "./lightning-dozer";
+import {enemyNeoLandozerHUD, playerNeoLandozerHUD} from "./neo-landozer";
+import {enemyShinBraverHUD, playerShinBraverHUD} from "./shin-braver";
+import {enemyWingDozerHUD, playerWingDozerHUD} from "./wing-dozer";
 
 /**
  * プレイヤー側 HUDアームドーザ

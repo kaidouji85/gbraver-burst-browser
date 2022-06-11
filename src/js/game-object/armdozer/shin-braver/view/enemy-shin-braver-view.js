@@ -1,8 +1,8 @@
 // @flow
 
-import {PlayerShinBraverView} from "./player-shin-braver-view";
 import type {Resources} from "../../../../resource";
 import type {ShinBraverModel} from "../model/shin-braver-model";
+import {PlayerShinBraverView} from "./player-shin-braver-view";
 
 /**
  *  敵側シンブレイバー

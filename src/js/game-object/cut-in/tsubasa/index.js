@@ -1,11 +1,11 @@
 // @flow
 
-import {TsubasaCutIn} from "./tsubasa";
 import type {Resources} from "../../../resource";
-import {PlayerTsubasaView} from "./view/player-tsubasa-view";
-import {EnemyTsubasaView} from "./view/enemy-tsubasa-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {TsubasaCutIn} from "./tsubasa";
+import {EnemyTsubasaView} from "./view/enemy-tsubasa-view";
+import {PlayerTsubasaView} from "./view/player-tsubasa-view";
 
 /**
  * プレイヤー側 ツバサ カットイン

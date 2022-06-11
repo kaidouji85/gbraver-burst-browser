@@ -1,12 +1,12 @@
 // @flow
-import {Animate} from "../../../../../../../animation/animate";
-import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
-import {LightningDozer} from "../../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
-import {delay, empty} from "../../../../../../../animation/delay";
 import type {BattleResult, CriticalHit, Feint, Guard, Miss, NormalHit} from "gbraver-burst-core";
 import {all} from "../../../../../../../animation/all";
-import {dolly, toInitial, track} from "../../../td-camera";
+import {Animate} from "../../../../../../../animation/animate";
+import {delay, empty} from "../../../../../../../animation/delay";
+import {LightningDozer} from "../../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import {TDCamera} from "../../../../../../../game-object/camera/td";
+import {dolly, toInitial, track} from "../../../td-camera";
+import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
 
 /**
  * ライトニングドーザ 戦闘アニメーション パラメータ

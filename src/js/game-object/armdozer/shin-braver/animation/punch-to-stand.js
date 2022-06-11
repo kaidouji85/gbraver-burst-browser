@@ -1,9 +1,9 @@
 // @flow
 
-import type {ShinBraverModel} from "../model/shin-braver-model";
+import {Animate} from "../../../../animation/animate";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {Animate} from "../../../../animation/animate";
+import type {ShinBraverModel} from "../model/shin-braver-model";
 import {ShinBraverSounds} from "../sounds/shin-braver-sounds";
 
 /** ストレートパンチ -> 立ち */

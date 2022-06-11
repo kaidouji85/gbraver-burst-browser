@@ -2,8 +2,8 @@
 
 import * as TWEEN from '@tweenjs/tween.js';
 import {Animate} from "../../../animation/animate";
-import type {BatterySelectorModel} from "../model";
 import {tween} from "../../../animation/tween";
+import type {BatterySelectorModel} from "../model";
 
 /**
  * プラスボタン ポップ

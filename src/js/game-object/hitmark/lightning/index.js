@@ -1,11 +1,11 @@
 // @flow
 
-import {Lightning} from "./lightning";
 import type {Resources} from "../../../resource";
-import {PlayerLightningView} from "./view/player-lightning-view";
-import {EnemyLightningView} from "./view/enemy-lightning-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {Lightning} from "./lightning";
+import {EnemyLightningView} from "./view/enemy-lightning-view";
+import {PlayerLightningView} from "./view/player-lightning-view";
 
 /**
  * プレイヤー側 電撃ヒットマーク

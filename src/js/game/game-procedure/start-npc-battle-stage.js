@@ -1,11 +1,11 @@
 // @flow
 import type {Player} from "gbraver-burst-core";
-import type {NPCBattleStage} from "../npc-battle";
+import {fadeOut, stop} from "../../bgm/bgm-operators";
 import {NPCBattleRoom} from "../../npc/npc-battle-room";
 import {waitAnimationFrame} from "../../wait/wait-animation-frame";
 import {waitTime} from "../../wait/wait-time";
-import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {GameProps} from "../game-props";
+import type {NPCBattleStage} from "../npc-battle";
 
 /**
  * NPCバトルのステージを開始するヘルパー関数

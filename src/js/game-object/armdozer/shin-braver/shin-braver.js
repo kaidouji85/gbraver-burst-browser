@@ -1,30 +1,30 @@
 // @flow
 
-import type {ArmDozerSprite} from '../armdozer-sprite';
 import * as THREE from "three";
-import type {ShinBraverView} from "./view/shin-braver-view";
-import type {ShinBraverModel} from "./model/shin-braver-model";
-import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
-import {straightPunch} from "./animation/straight-punch";
-import {knockBack} from "./animation/knock-back";
-import {knockBackToStand} from "./animation/knock-back-to-stand";
+import type {PreRender} from "../../../game-loop/pre-render";
+import type {Resources} from "../../../resource";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import type {ArmDozerSprite} from '../armdozer-sprite';
 import {avoid} from "./animation/avoid";
-import {guard} from "./animation/guard";
-import {guardToStand} from "./animation/guard-to-stand";
-import {frontStep} from "./animation/front-step";
-import {punchToStand} from "./animation/punch-to-stand";
-import {charge} from "./animation/charge";
-import {down} from "./animation/down";
-import {guts} from "./animation/guts";
-import {gutsToStand} from "./animation/guts-to-stand";
 import {burst} from "./animation/burst";
 import {burstToStand} from "./animation/burst-to-stand";
-import type {Resources} from "../../../resource";
+import {charge} from "./animation/charge";
+import {down} from "./animation/down";
+import {frontStep} from "./animation/front-step";
+import {guard} from "./animation/guard";
+import {guardToStand} from "./animation/guard-to-stand";
+import {guts} from "./animation/guts";
+import {gutsToStand} from "./animation/guts-to-stand";
+import {knockBack} from "./animation/knock-back";
+import {knockBackToStand} from "./animation/knock-back-to-stand";
+import {punchToStand} from "./animation/punch-to-stand";
+import {straightPunch} from "./animation/straight-punch";
+import {createInitialValue} from "./model/initial-value";
+import type {ShinBraverModel} from "./model/shin-braver-model";
 import {ShinBraverSounds} from "./sounds/shin-braver-sounds";
-import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {ShinBraverView} from "./view/shin-braver-view";
 
 /** シンブレイバーのゲームオブジェクト */
 export class ShinBraver implements ArmDozerSprite {

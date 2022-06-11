@@ -1,8 +1,8 @@
 // @flow
 
-import {PlayerReflectIndicatorView} from "./player-reflect-indicator-view";
 import type {Resources} from "../../../resource";
 import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
+import {PlayerReflectIndicatorView} from "./player-reflect-indicator-view";
 
 /**
  * 敵 ダメージ反射 ビュー

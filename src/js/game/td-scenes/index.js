@@ -1,18 +1,18 @@
 // @flow
-import {Renderer} from "../../render";
-import type {Resources} from "../../resource";
-import type {BattleProgress} from "./battle/battle-progress";
-import {BattleScene} from "./battle";
-import type {Scene} from "./scene";
-import type {GameLoop} from "../../game-loop/game-loop";
-import {gameLoopStream} from "../../game-loop/game-loop";
-import type {Resize} from "../../window/resize";
-import type {GameAction} from "../game-actions";
-import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
-import {createStreamSource} from "../../stream/stream";
 import type {GameState, Player} from "gbraver-burst-core";
 import type {BGMManager} from "../../bgm/bgm-manager";
+import type {GameLoop} from "../../game-loop/game-loop";
+import {gameLoopStream} from "../../game-loop/game-loop";
+import {Renderer} from "../../render";
+import type {Resources} from "../../resource";
 import type {SoundId} from "../../resource/sound";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
+import type {Resize} from "../../window/resize";
+import type {GameAction} from "../game-actions";
+import {BattleScene} from "./battle";
+import type {BattleProgress} from "./battle/battle-progress";
+import type {Scene} from "./scene";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {

@@ -1,8 +1,8 @@
 // @flow
 
+import {MailVerifiedIncomplete} from "../src/js/game/dom-scenes/mail-verified-incomplete/mail-verified-incomplete";
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
-import {MailVerifiedIncomplete} from "../src/js/game/dom-scenes/mail-verified-incomplete/mail-verified-incomplete";
 
 export default {
   title: 'mail-verified-incomplete',

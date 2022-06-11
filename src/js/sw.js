@@ -1,9 +1,9 @@
 // @flow
 
-import * as Routing from 'workbox-routing';
-import * as PreCaching from 'workbox-precaching';
-import * as Strategies from 'workbox-strategies';
 import {ExpirationPlugin} from 'workbox-expiration';
+import * as PreCaching from 'workbox-precaching';
+import * as Routing from 'workbox-routing';
+import * as Strategies from 'workbox-strategies';
 
 PreCaching.precacheAndRoute([
   {url: "./index.html", revision: GBRAVER_BURST_SW_BUILD_HASH},

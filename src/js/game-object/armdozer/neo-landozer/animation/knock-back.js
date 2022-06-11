@@ -1,11 +1,11 @@
 // @flow
 
-import type {NeoLandozerModel} from "../model/neo-landozer-model";
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
+import {empty} from "../../../../animation/delay";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {empty} from "../../../../animation/delay";
-import {all} from "../../../../animation/all";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
 
 /** ノックバック */
 export function knockBack(model: NeoLandozerModel): Animate {

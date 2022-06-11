@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from 'three';
-import type {RecoverBatteryView} from "./recover-battery-view";
-import type {RecoverBatteryModel} from "../model/recover-battery-model";
-import type {Resources} from "../../../resource";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import type {Resources} from "../../../resource";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import {
   ARMDOZER_EFFECT_STANDARD_X,
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
+import type {RecoverBatteryModel} from "../model/recover-battery-model";
+import type {RecoverBatteryView} from "./recover-battery-view";
 
 export const MESH_SIZE = 100;
 export const MAX_ANIMATION = 16;

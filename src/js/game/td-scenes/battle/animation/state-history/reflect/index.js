@@ -1,9 +1,9 @@
 // @flow
-import {BattleSceneView} from "../../../view";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameStateX, Reflect} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
+import type {BattleSceneState} from "../../../state/battle-scene-state";
+import {BattleSceneView} from "../../../view";
 import type {ReflectAnimationParam} from "./animation-param";
 import {deathLightning, lightning} from "./lightning";
 

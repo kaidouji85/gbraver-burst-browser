@@ -1,8 +1,8 @@
 // @flow
 
-import {TDGameObjectStub} from "./stub/td-game-object-stub";
-import {enemyBatteryCorrect, playerBatteryCorrect} from "../src/js/game-object/battery-correct";
 import {delay} from "../src/js/animation/delay";
+import {enemyBatteryCorrect, playerBatteryCorrect} from "../src/js/game-object/battery-correct";
+import {TDGameObjectStub} from "./stub/td-game-object-stub";
 
 export default {
   title: 'battery-correct'

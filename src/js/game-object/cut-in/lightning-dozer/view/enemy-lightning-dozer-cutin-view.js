@@ -1,9 +1,9 @@
 // @flow
 
-import {PlayerLightningDozerCutInView} from "./player-lightning-dozer-cutin-view";
+import type {PreRender} from "../../../../game-loop/pre-render";
 import type {Resources} from "../../../../resource";
 import type {LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
-import type {PreRender} from "../../../../game-loop/pre-render";
+import {PlayerLightningDozerCutInView} from "./player-lightning-dozer-cutin-view";
 
 /**
  * 敵 ライトニングドーザ  カットイン ビュー

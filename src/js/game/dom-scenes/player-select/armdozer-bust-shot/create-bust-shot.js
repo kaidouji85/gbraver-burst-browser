@@ -3,8 +3,8 @@
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from "gbraver-burst-core";
 import type {Resources} from "../../../../resource";
-import {ArmdozerBustShot, CLASS_NAME_PREFIX} from "./amrodzer-bust-shot";
 import {PathIds} from "../../../../resource/path";
+import {ArmdozerBustShot, CLASS_NAME_PREFIX} from "./amrodzer-bust-shot";
 
 /**
  * アームドーザIDに対応したバストショットを生成する

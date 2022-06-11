@@ -1,15 +1,15 @@
 // @flow
 import * as THREE from "three";
-import type {ResultIndicatorView} from "./view/result-indicator-view";
-import type {ResultIndicatorModel} from "./model/result-indicator-model";
-import {createInitialValue} from "./model/initial-value";
+import {Animate} from "../../animation/animate";
+import type {PreRender} from "../../game-loop/pre-render";
 import type {Stream, Unsubscriber} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {PreRender} from "../../game-loop/pre-render";
-import {Animate} from "../../animation/animate";
-import {slideIn} from "./animation/slide-in";
-import {moveToEdge} from "./animation/move-to-edge";
 import {hidden} from "./animation/hidden";
+import {moveToEdge} from "./animation/move-to-edge";
+import {slideIn} from "./animation/slide-in";
+import {createInitialValue} from "./model/initial-value";
+import type {ResultIndicatorModel} from "./model/result-indicator-model";
+import type {ResultIndicatorView} from "./view/result-indicator-view";
 
 /** リザルトインジケータ */
 export class ResultIndicator {

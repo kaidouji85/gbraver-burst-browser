@@ -1,14 +1,14 @@
 // @flow
 
 import * as THREE from 'three';
-import type {ReflectIndicatorView} from "./view/reflect-indicator-view";
-import type {ReflectIndocatorModel} from "./model/reflect-indocator-model";
-import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {popUp} from "./animation/pop-up";
-import type {GameObjectAction} from "../action/game-object-action";
+import type {PreRender} from "../../game-loop/pre-render";
 import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {popUp} from "./animation/pop-up";
+import {createInitialValue} from "./model/initial-value";
+import type {ReflectIndocatorModel} from "./model/reflect-indocator-model";
+import type {ReflectIndicatorView} from "./view/reflect-indicator-view";
 
 /**
  * ダメージ反射

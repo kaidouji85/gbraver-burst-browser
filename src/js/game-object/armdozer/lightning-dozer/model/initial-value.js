@@ -1,7 +1,7 @@
 // @flow
 
-import type {LightningDozerModel} from "./lightning-dozer-model";
 import {ARMDOZER_SPRITE_STANDARD_X, ARMDOZER_SPRITE_STANDARD_Y, ARMDOZER_SPRITE_STANDARD_Z} from "../../position";
+import type {LightningDozerModel} from "./lightning-dozer-model";
 
 /**
  * ライトニングドーザモデルの初期値を生成する

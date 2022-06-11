@@ -1,5 +1,14 @@
 // @flow
 import {Howl} from "howler";
+import {pop} from "../../../dom/animation";
+import type {InputDOM, PushDOM} from "../../../dom/event-stream";
+import {inputDOMStream, pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
+import {domUuid} from "../../../uuid/dom-uuid";
 import type {
   BattleAnimationTimeScale,
   GbraverBurstBrowserConfig,
@@ -16,16 +25,7 @@ import {
   WebGLPixelRatios
 } from "../../config/browser-config";
 import type {DOMScene} from "../dom-scene";
-import {domUuid} from "../../../uuid/dom-uuid";
-import {Exclusive} from "../../../exclusive/exclusive";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import {pop} from "../../../dom/animation";
-import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
 import {ConfigChangedDialog} from "./config-changed-dialog";
-import type {InputDOM, PushDOM} from "../../../dom/event-stream";
-import {inputDOMStream, pushDOMStream} from "../../../dom/event-stream";
 
 /** ルート要素のclass属性 */
 const ROOT_CLASS = 'config';

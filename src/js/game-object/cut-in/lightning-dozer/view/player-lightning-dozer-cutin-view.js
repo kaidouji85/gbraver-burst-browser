@@ -1,14 +1,14 @@
 // @flow
 
 import * as THREE from "three";
-import type {Resources} from "../../../../resource";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
-import {TEXTURE_IDS} from "../../../../resource/texture";
-import type {LightningDozerCutInView} from "./lightning-dozer-cutin-view";
-import type {AnimationType, LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
 import type {PreRender} from "../../../../game-loop/pre-render";
+import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
+import type {Resources} from "../../../../resource";
+import {TEXTURE_IDS} from "../../../../resource/texture";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 import {HUDCutInScale} from "../../../scale";
+import type {AnimationType, LightningDozerCutInModel} from "../model/lightning-dozer-cutin-model";
+import type {LightningDozerCutInView} from "./lightning-dozer-cutin-view";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 900;

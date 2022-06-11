@@ -1,8 +1,8 @@
 // @flow
-import type {EndNetworkError} from "../game-actions";
-import {startTitle} from "./start-title";
 import {fadeOut, stop} from "../../bgm/bgm-operators";
+import type {EndNetworkError} from "../game-actions";
 import type {GameProps} from "../game-props";
+import {startTitle} from "./start-title";
 
 /**
  * 通信エラーダイアログを閉じる

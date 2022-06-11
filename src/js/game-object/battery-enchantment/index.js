@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import {PlayerBatteryEnchantmentView} from "./view/player-battery-enchantment-view";
-import {EnemyBatteryEnchantmentView} from "./view/enemy-battery-enchantment-view";
-import {BatteryEnchantment} from "./battery-enchantment";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {BatteryEnchantment} from "./battery-enchantment";
+import {EnemyBatteryEnchantmentView} from "./view/enemy-battery-enchantment-view";
+import {PlayerBatteryEnchantmentView} from "./view/player-battery-enchantment-view";
 
 /**
  * プレイヤー バッテリー増強 ポップアップ

@@ -1,6 +1,6 @@
 // @flow
-import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {TimeScaleButton} from "../src/js/game-object/time-scale-button/time-scale-button";
+import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 
 export default {
   title: 'time-scale-button',

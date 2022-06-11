@@ -1,13 +1,13 @@
 // @flow
 
 import * as R from 'ramda';
-import type {DamageIndicatorView} from "./damage-indicator-view";
-import type {Resources} from "../../../resource";
-import type {DamageIndicatorModel} from "../model/damage-indicator-model";
 import * as THREE from 'three';
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import type {Resources} from "../../../resource";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import {ARMDOZER_EFFECT_STANDARD_X, ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
+import type {DamageIndicatorModel} from "../model/damage-indicator-model";
+import type {DamageIndicatorView} from "./damage-indicator-view";
 
 export const MESH_SIZE = 50;
 export const MAX_NUMBER_SIZE = 4;

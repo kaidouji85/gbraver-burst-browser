@@ -1,15 +1,15 @@
 // @flow
 
-import {Animate} from "../../../../../../animation/animate";
-import {BattleSceneView} from "../../../view";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {BurstEffect, GameStateX} from "gbraver-burst-core";
+import {Animate} from "../../../../../../animation/animate";
+import {empty} from "../../../../../../animation/delay";
+import type {BattleSceneState} from "../../../state/battle-scene-state";
+import {BattleSceneView} from "../../../view";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
-import {empty} from "../../../../../../animation/delay";
-import {castShinBraverBurst, shinBraverBurst} from "./shin-braver";
 import {castLightningDozerBurst, lightningDozerBurst} from "./lightning-dozer";
 import {castNeoLandozerBurst, neoLandozerBurst} from "./neo-landozer";
+import {castShinBraverBurst, shinBraverBurst} from "./shin-braver";
 import {castWingDozerBurst, wingDozerBurst} from "./wingdozer";
 
 /**

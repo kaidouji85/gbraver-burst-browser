@@ -1,9 +1,9 @@
 // @flow
 
-import {PlayerWingDozerCutInView} from "./player-wing-dozer-cutin-view";
+import type {PreRender} from "../../../../game-loop/pre-render";
 import type {Resources} from "../../../../resource";
 import type {WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
-import type {PreRender} from "../../../../game-loop/pre-render";
+import {PlayerWingDozerCutInView} from "./player-wing-dozer-cutin-view";
 
 /**
  * 敵側 ウィングドーザ カットイン ビュー

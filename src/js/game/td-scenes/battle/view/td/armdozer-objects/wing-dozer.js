@@ -1,14 +1,14 @@
 // @flow
 
-import type {TDArmdozerObjects} from "./armdozer-objects";
 import type {Player, PlayerId} from "gbraver-burst-core";
-import type {Resources} from "../../../../../../resource";
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import * as THREE from "three";
-import {WingDozer} from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
-import {EnemyWingDozer, PlayerWingDozer} from "../../../../../../game-object/armdozer/wing-dozer";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import {EnemyWingDozer, PlayerWingDozer} from "../../../../../../game-object/armdozer/wing-dozer";
+import {WingDozer} from "../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
+import type {Resources} from "../../../../../../resource";
 import type {Stream} from "../../../../../../stream/stream";
+import type {TDArmdozerObjects} from "./armdozer-objects";
 
 /**
  * 3Dレイヤー ウィングドーザ 3Dレイヤー フィールド

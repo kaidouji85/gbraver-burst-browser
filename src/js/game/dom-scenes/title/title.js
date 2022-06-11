@@ -1,22 +1,22 @@
 // @flow
-import {domUuid} from "../../../uuid/dom-uuid";
-import type {Resources} from "../../../resource";
-import {PathIds} from "../../../resource/path";
-import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-import {pop} from "../../../dom/animation";
 import {Howl} from "howler";
-import type {SoundResource} from "../../../resource/sound";
-import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
-import {Exclusive} from "../../../exclusive/exclusive";
-import type {DOMScene} from "../dom-scene";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import type {TitleAccount} from "./title-account";
-import {escapeHTML} from '../../../dom/escape-html';
 import type {BGMManager} from '../../../bgm/bgm-manager';
 import {fadeIn, play} from "../../../bgm/bgm-operators";
+import {pop} from "../../../dom/animation";
+import {escapeHTML} from '../../../dom/escape-html';
 import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
+import type {SoundResource} from "../../../resource/sound";
+import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
+import {domUuid} from "../../../uuid/dom-uuid";
+import {waitElementLoaded} from "../../../wait/wait-element-loaded";
+import type {DOMScene} from "../dom-scene";
+import type {TitleAccount} from "./title-account";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';

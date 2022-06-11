@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../../resource";
-import {ShinBraver} from './shin-braver';
-import {PlayerShinBraverView} from "./view/player-shin-braver-view";
-import {EnemyShinBraverView} from "./view/enemy-shin-braver-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {ShinBraver} from './shin-braver';
+import {EnemyShinBraverView} from "./view/enemy-shin-braver-view";
+import {PlayerShinBraverView} from "./view/player-shin-braver-view";
 
 /**
  * プレイヤー側シンブレイバー

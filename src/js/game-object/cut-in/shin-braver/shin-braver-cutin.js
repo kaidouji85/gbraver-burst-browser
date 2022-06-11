@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from 'three';
-import type {ShinBraverCutInModel} from "./model/shin-braver-cutin-model";
-import type {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
-import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../../animation/animate";
-import {hidden} from "./animation/hidden";
 import type {PreRender} from "../../../game-loop/pre-render";
-import {show} from "./animation/show";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
+import {hidden} from "./animation/hidden";
+import {show} from "./animation/show";
+import {createInitialValue} from "./model/initial-value";
+import type {ShinBraverCutInModel} from "./model/shin-braver-cutin-model";
+import type {ShinBraverCutInView} from "./view/shin-braver-cutin-view";
 
 /**
  * シンブレイバーカットイン

@@ -1,9 +1,9 @@
 // @flow
 
-import {Animate} from "../../../animation/animate";
-import type {GaugeModel} from "../model/gauge-model";
-import {tween} from "../../../animation/tween";
 import {all} from "../../../animation/all";
+import {Animate} from "../../../animation/animate";
+import {tween} from "../../../animation/tween";
+import type {GaugeModel} from "../model/gauge-model";
 
 /**
  * バッテリーを変更するアニメーション

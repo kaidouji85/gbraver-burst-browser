@@ -1,11 +1,11 @@
 // @flow
 
-import {StorybookResourceRoot} from "../storybook-resource-root";
 import '../../src/css/style.css';
-import {resizeStream} from "../../src/js/window/resize";
-import {CssVH} from "../../src/js/view-port/vh";
 import type {Resources} from "../../src/js/resource";
 import {fullResourceLoading} from "../../src/js/resource";
+import {CssVH} from "../../src/js/view-port/vh";
+import {resizeStream} from "../../src/js/window/resize";
+import {StorybookResourceRoot} from "../storybook-resource-root";
 
 /**
  * HTML要素生成コールバック関数

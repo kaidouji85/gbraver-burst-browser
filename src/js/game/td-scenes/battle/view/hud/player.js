@@ -1,16 +1,16 @@
 // @flow
 
-import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
-import {Gauge} from "../../../../../game-object/gauge/gauge";
-import type {Resources} from "../../../../../resource";
-import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
-import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
-import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
+import * as THREE from 'three';
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
-import type {Stream} from "../../../../../stream/stream";
-import {ResultIndicator} from "../../../../../game-object/result-indicator/result-indicator";
+import {enemyGauge, playerGauge} from "../../../../../game-object/gauge";
+import {Gauge} from "../../../../../game-object/gauge/gauge";
 import {loseIndicator, winIndicator} from "../../../../../game-object/result-indicator";
+import {ResultIndicator} from "../../../../../game-object/result-indicator/result-indicator";
+import {enemyTurnStart, playerTurnStart} from "../../../../../game-object/turn-start";
+import {TurnStart} from "../../../../../game-object/turn-start/turn-start";
+import type {Resources} from "../../../../../resource";
+import type {Stream} from "../../../../../stream/stream";
 
 /**
  * HUDレイヤー プレイヤー固有オブジェクト フィールド

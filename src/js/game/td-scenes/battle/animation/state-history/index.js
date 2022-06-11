@@ -1,8 +1,5 @@
 // @flow
 
-import {Animate} from "../../../../../animation/animate";
-import {BattleSceneView} from "../../view";
-import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {
   BatteryDeclaration,
   Battle,
@@ -18,19 +15,22 @@ import type {
   TurnChange,
   UpdateRemainingTurn
 } from "gbraver-burst-core";
+import {Animate} from "../../../../../animation/animate";
 import {empty} from "../../../../../animation/delay";
-import {inputCommandAnimation} from "./input-command";
-import {battleAnimation} from "./battle";
-import {turnChangeAnimation} from "./turn-change";
-import {burstAnimation} from "./burst";
-import {startGameAnimation} from "./start-game";
-import {batteryDeclarationAnimation} from "./battery-declaration";
-import {reflectAnimation} from "./reflect";
-import {updateRemainingTurnAnimation} from "./update-remaining-turn";
-import {gameEndAnimation} from "./game-end";
-import {rightItselfAnimation} from "./right-itself";
-import {pilotSkillAnimation} from "./pilot-skill";
 import {BattleSceneSounds} from "../../sounds/sounds";
+import type {BattleSceneState} from "../../state/battle-scene-state";
+import {BattleSceneView} from "../../view";
+import {batteryDeclarationAnimation} from "./battery-declaration";
+import {battleAnimation} from "./battle";
+import {burstAnimation} from "./burst";
+import {gameEndAnimation} from "./game-end";
+import {inputCommandAnimation} from "./input-command";
+import {pilotSkillAnimation} from "./pilot-skill";
+import {reflectAnimation} from "./reflect";
+import {rightItselfAnimation} from "./right-itself";
+import {startGameAnimation} from "./start-game";
+import {turnChangeAnimation} from "./turn-change";
+import {updateRemainingTurnAnimation} from "./update-remaining-turn";
 
 /**
  * 同時再生する効果

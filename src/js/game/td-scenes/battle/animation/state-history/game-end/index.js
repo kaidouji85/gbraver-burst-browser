@@ -1,12 +1,12 @@
 // @flow
-import {BattleSceneView} from "../../../view";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {EvenMatch, GameEnd, GameEndX, GameOver, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
-import {toGameOverParam} from "./game-over/game-over-param";
-import {gameOverAnimation} from "./game-over/game-over";
+import type {BattleSceneState} from "../../../state/battle-scene-state";
+import {BattleSceneView} from "../../../view";
 import {evenMatchAnimation} from "./even-match/even-match";
+import {gameOverAnimation} from "./game-over/game-over";
+import {toGameOverParam} from "./game-over/game-over-param";
 
 /**
  * ゲーム終了アニメーション

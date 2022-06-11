@@ -1,17 +1,17 @@
 // @flow
 
-import type {Resources} from "../../../../../../resource";
-import type {Stream} from "../../../../../../stream/stream";
-import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import type {ArmDozerId} from "gbraver-burst-core";
 import {ArmDozerIdList} from 'gbraver-burst-core';
-import {BurstButton} from "../../../../../../game-object/burst-button/burst-button";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import {
   lightningDozerBurstButton,
   neoLandozerBurstButton,
   shinBraverBurstButton,
   wingDozerBurstButton
 } from "../../../../../../game-object/burst-button";
+import {BurstButton} from "../../../../../../game-object/burst-button/burst-button";
+import type {Resources} from "../../../../../../resource";
+import type {Stream} from "../../../../../../stream/stream";
 
 /**
  * アームドーザIDに対応したバーストボタンを生成する

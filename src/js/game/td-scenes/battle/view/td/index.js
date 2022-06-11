@@ -1,23 +1,23 @@
 // @flow
 
-import type {Resources} from '../../../../../resource';
-import * as THREE from 'three';
 import type {Player} from "gbraver-burst-core";
-import type {Update} from "../../../../../game-loop/update";
+import * as THREE from 'three';
 import type {PreRender} from "../../../../../game-loop/pre-render";
-import {TDCamera} from "../../../../../game-object/camera/td";
-import type {TDPlayer} from "./player";
-import {enemyTDObject, playerTDObjects} from "./player";
-import {TDGameObjects} from "./game-objects";
-import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
+import type {Update} from "../../../../../game-loop/update";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
+import {TDCamera} from "../../../../../game-object/camera/td";
+import type {OverlapNotifier} from "../../../../../render/overla-notifier";
+import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
+import type {Resources} from '../../../../../resource';
+import type {Stream} from "../../../../../stream/stream";
 import type {Resize} from "../../../../../window/resize";
-import {skyBox} from "./sky-box";
 import {enemyTDArmdozer, playerTDArmdozer} from "./armdozer-objects";
 import type {TDArmdozerObjects} from "./armdozer-objects/armdozer-objects";
-import type {OverlapNotifier} from "../../../../../render/overla-notifier";
-import type {Stream} from "../../../../../stream/stream";
+import {TDGameObjects} from "./game-objects";
+import type {TDPlayer} from "./player";
+import {enemyTDObject, playerTDObjects} from "./player";
+import {skyBox} from "./sky-box";
 
 /** コンストラクタのパラメータ */
 type Param = {

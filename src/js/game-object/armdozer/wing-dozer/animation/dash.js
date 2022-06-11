@@ -1,10 +1,10 @@
 // @flow
 
 import {Animate} from "../../../../animation/animate";
-import type {WingDozerModel} from "../model/wing-dozer-model";
-import {tween} from "../../../../animation/tween";
-import {process} from '../../../../animation/process';
 import {delay} from "../../../../animation/delay";
+import {process} from '../../../../animation/process';
+import {tween} from "../../../../animation/tween";
+import type {WingDozerModel} from "../model/wing-dozer-model";
 import {WingDozerSounds} from "../sounds/wing-dozer-sounds";
 
 /**

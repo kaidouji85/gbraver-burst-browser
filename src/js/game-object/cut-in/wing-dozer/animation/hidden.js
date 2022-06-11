@@ -1,8 +1,8 @@
 // @flow
 
 import {Animate} from "../../../../animation/animate";
-import type {WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
 import {tween} from "../../../../animation/tween";
+import type {WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
 
 /**
  * カットインを消す

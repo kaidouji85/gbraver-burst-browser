@@ -1,10 +1,10 @@
 // @flow
 
-import {Animate} from "../../../../animation/animate";
-import type {GaiModel} from "../model/gai-model";
-import {tween} from "../../../../animation/tween";
-import {process} from "../../../../animation/process";
 import {all} from "../../../../animation/all";
+import {Animate} from "../../../../animation/animate";
+import {process} from "../../../../animation/process";
+import {tween} from "../../../../animation/tween";
+import type {GaiModel} from "../model/gai-model";
 
 /**
  * カットインを非表示にする

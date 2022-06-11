@@ -1,9 +1,9 @@
 // @flow
-import type {ConfigChangeComplete} from "../game-actions";
 import {isSoundConfigChanged} from "../config/browser-config";
+import type {ConfigChangeComplete} from "../game-actions";
+import type {GameProps} from "../game-props";
 import {reflectSoundVolume} from "../reflect-sound-volume";
 import {startTitle} from "./start-title";
-import type {GameProps} from "../game-props";
 
 /**
  * 設定変更完了時の処理

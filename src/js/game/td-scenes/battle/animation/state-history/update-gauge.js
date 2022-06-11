@@ -1,11 +1,11 @@
 // @flow
 
-import {BattleSceneView} from "../../view";
-import type {BattleSceneState} from "../../state/battle-scene-state";
 import type {GameState} from "gbraver-burst-core";
+import {all} from "../../../../../animation/all";
 import {Animate} from "../../../../../animation/animate";
 import {empty} from "../../../../../animation/delay";
-import {all} from "../../../../../animation/all";
+import type {BattleSceneState} from "../../state/battle-scene-state";
+import {BattleSceneView} from "../../view";
 
 /**
  * ゲージを最新状態に更新する

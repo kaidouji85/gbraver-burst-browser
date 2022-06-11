@@ -1,16 +1,16 @@
 // @flow
 
 import type {Burst, BurstEffect, GameStateX, PlayerState} from "gbraver-burst-core";
-import type {TDPlayer} from "../../../view/td/player";
-import type {TDGameObjects} from "../../../view/td/game-objects";
-import {TDCamera} from "../../../../../../game-object/camera/td";
-import type {HUDGameObjects} from "../../../view/hud/game-objects";
 import {PlainHUDCamera} from "../../../../../../game-object/camera/plain-hud/plain-hud-camera";
-import {BattleSceneView} from "../../../view";
+import {TDCamera} from "../../../../../../game-object/camera/td";
 import type {BattleSceneState} from "../../../state/battle-scene-state";
+import {BattleSceneView} from "../../../view";
+import type {HUDArmdozerObjects} from "../../../view/hud/armdozer-objects/hud-armdozer-ibjects";
+import type {HUDGameObjects} from "../../../view/hud/game-objects";
 import {HUDPlayer} from "../../../view/hud/player";
 import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
-import type {HUDArmdozerObjects} from "../../../view/hud/armdozer-objects/hud-armdozer-ibjects";
+import type {TDGameObjects} from "../../../view/td/game-objects";
+import type {TDPlayer} from "../../../view/td/player";
 
 /**
  * バーストアニメーションのパラメータ

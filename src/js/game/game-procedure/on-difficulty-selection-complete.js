@@ -1,10 +1,10 @@
 // @flow
 import type {DifficultySelectionComplete} from "../game-actions";
+import type {GameProps} from "../game-props";
 import type {DifficultySelect, NPCBattle} from "../in-progress/npc-battle";
 import {createNPCBattlePlayer, getCurrentStage, getStageLevel, startNPCBattle} from "../npc-battle";
 import {DefaultStage, DefaultStages, NPCBattleCourses} from "../npc-battle-courses";
 import {startNPCBattleStage} from "./start-npc-battle-stage";
-import type {GameProps} from "../game-props";
 
 /**
  * 難易度選択完了時のイベント

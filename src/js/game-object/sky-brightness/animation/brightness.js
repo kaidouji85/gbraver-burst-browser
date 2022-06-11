@@ -1,8 +1,8 @@
 // @flow
 
-import type {SkyBrightnessModel} from "../model/sky-brightness-model";
 import {Animate} from "../../../animation/animate";
 import {tween} from "../../../animation/tween";
+import type {SkyBrightnessModel} from "../model/sky-brightness-model";
 
 /**
  * 空の明るさを変更する

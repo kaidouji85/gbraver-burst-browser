@@ -1,14 +1,14 @@
 // @flow
 import {Howl} from 'howler';
+import {pop, waitFinishAnimation} from "../../../dom/animation";
+import {pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {PostBattle} from "../../post-battle";
 import type {PostBattleButtonConfig} from "./post-battle-button-config";
-import {pop, waitFinishAnimation} from "../../../dom/animation";
-import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
-import {Exclusive} from "../../../exclusive/exclusive";
-import {pushDOMStream} from "../../../dom/event-stream";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'post-battle';

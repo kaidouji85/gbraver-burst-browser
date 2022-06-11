@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from 'three';
-import type {PowerUpView} from "./view/power-up-view";
-import type {PowerUpModel} from "./model/power-up-model";
-import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {popUp} from "./animation/pop-up";
-import {PowerUpSounds} from "./sounds/power-up-sounds";
+import type {PreRender} from "../../game-loop/pre-render";
 import type {Resources} from "../../resource";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {popUp} from "./animation/pop-up";
+import {createInitialValue} from "./model/initial-value";
+import type {PowerUpModel} from "./model/power-up-model";
+import {PowerUpSounds} from "./sounds/power-up-sounds";
+import type {PowerUpView} from "./view/power-up-view";
 
 /**
  * 攻撃アップ

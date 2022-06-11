@@ -1,17 +1,17 @@
 // @flow
 
 import * as THREE from 'three';
-import type {RaitoModel} from "./model/raito-model";
-import type {RaitoView} from "./view/raito-view";
-import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
-import {show} from "./animation/show";
-import {hidden} from "./animation/hidden";
-import {RaitoSounds} from "./sounds/raito-sounds";
+import type {PreRender} from "../../../game-loop/pre-render";
 import type {Resources} from "../../../resource";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {hidden} from "./animation/hidden";
+import {show} from "./animation/show";
+import {createInitialValue} from "./model/initial-value";
+import type {RaitoModel} from "./model/raito-model";
+import {RaitoSounds} from "./sounds/raito-sounds";
+import type {RaitoView} from "./view/raito-view";
 
 /**
  * ライト カットイン

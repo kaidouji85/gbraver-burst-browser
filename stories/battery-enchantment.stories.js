@@ -1,8 +1,8 @@
 // @flow
 
 import {delay} from "../src/js/animation/delay";
-import {TDGameObjectStub} from "./stub/td-game-object-stub";
 import {enemyBatteryEnchantment, playerBatteryEnchantment} from "../src/js/game-object/battery-enchantment";
+import {TDGameObjectStub} from "./stub/td-game-object-stub";
 
 export default {
   title: 'battery-enchantment',

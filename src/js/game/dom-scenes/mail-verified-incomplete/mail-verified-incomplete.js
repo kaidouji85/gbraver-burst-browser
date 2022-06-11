@@ -1,13 +1,13 @@
 // @flow
-import type {DOMScene} from "../dom-scene";
-import {escapeHTML} from "../../../dom/escape-html";
-import {domUuid} from "../../../uuid/dom-uuid";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation";
+import {escapeHTML} from "../../../dom/escape-html";
 import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
+import {domUuid} from "../../../uuid/dom-uuid";
+import type {DOMScene} from "../dom-scene";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'mail-verified-incomplete';

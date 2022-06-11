@@ -1,8 +1,8 @@
 // @flow
 
 import type {BatterySelectorModel} from "../../../../../src/js/game-object/battery-selector/model";
-import {EMPTY_BATTERY_SELECTOR} from "../../../../data/battery-selector-model";
 import {canBatteryPlus} from "../../../../../src/js/game-object/battery-selector/model/can-battery-plus";
+import {EMPTY_BATTERY_SELECTOR} from "../../../../data/battery-selector-model";
 
 test('バッテリーが最大値以上の場合、バッテリー+ボタンを押すことはできない', () => {
   const data: BatterySelectorModel = {

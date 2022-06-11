@@ -1,15 +1,15 @@
 // @flow
 
-import {BattleSceneView} from "../../../view";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
 import type {GameStateX, PilotSkillEffect} from "gbraver-burst-core";
-import {empty} from "../../../../../../animation/delay";
 import {Animate} from "../../../../../../animation/animate";
+import {empty} from "../../../../../../animation/delay";
+import type {BattleSceneState} from "../../../state/battle-scene-state";
+import {BattleSceneView} from "../../../view";
 import type {PilotSkillAnimationParam} from "./animation-param";
 import {castPilotSkillAnimationParam} from "./animation-param";
-import {castShinyaAnimationParam, shinyaAnimation} from "./shinya";
 import {castGaiAnimationParam, gaiAnimation} from "./gai";
 import {castRaitoAnimationParam, raitoAnimation} from "./raito";
+import {castShinyaAnimationParam, shinyaAnimation} from "./shinya";
 import {castTsubasaAnimationParam, tsubasaAnimation} from "./tsubasa";
 
 /**

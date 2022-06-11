@@ -2,19 +2,19 @@
 
 import TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
-import type {Resources} from "../../resource";
-import type {TurnIndicatorModel} from "./model/turn-indicator-model";
-import {TurnIndicatorView} from "./view/turn-indicator-view";
-import type {PreRender} from "../../game-loop/pre-render";
-import {invisible} from "./animation/invisible";
-import {turnChange} from "./animation/turn-change";
 import {Animate} from "../../animation/animate";
-import {createInitialValue} from "./model/initial-value";
-import {waiting} from "./animation/waiting";
+import type {PreRender} from "../../game-loop/pre-render";
 import type {Update} from "../../game-loop/update";
-import type {GameObjectAction} from "../action/game-object-action";
+import type {Resources} from "../../resource";
 import type {Stream, Unsubscriber} from "../../stream/stream";
 import {firstUpdate} from "../action/first-update";
+import type {GameObjectAction} from "../action/game-object-action";
+import {invisible} from "./animation/invisible";
+import {turnChange} from "./animation/turn-change";
+import {waiting} from "./animation/waiting";
+import {createInitialValue} from "./model/initial-value";
+import type {TurnIndicatorModel} from "./model/turn-indicator-model";
+import {TurnIndicatorView} from "./view/turn-indicator-view";
 
 /** コンストラクタのパラメータ */
 type Param = {

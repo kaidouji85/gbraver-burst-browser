@@ -1,19 +1,19 @@
 // @flow
-import {ArmdozerIcon} from "./armdozer-icon";
 import type {ArmDozerId} from "gbraver-burst-core";
-import type {Resources} from "../../../../resource";
-import {domUuid} from "../../../../uuid/dom-uuid";
-import {SOUND_IDS} from "../../../../resource/sound";
 import {Howl} from 'howler';
-import {ArmdozerStatus} from "./armdozer-status";
-import {replaceDOM} from "../../../../dom/replace-dom";
-import {Exclusive} from "../../../../exclusive/exclusive";
 import {pop} from "../../../../dom/animation";
-import {createArmdozerIcon} from "./create-armdozer-icon";
-import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
-import {createStreamSource} from "../../../../stream/stream";
 import type {PushDOM} from "../../../../dom/event-stream";
 import {pushDOMStream} from "../../../../dom/event-stream";
+import {replaceDOM} from "../../../../dom/replace-dom";
+import {Exclusive} from "../../../../exclusive/exclusive";
+import type {Resources} from "../../../../resource";
+import {SOUND_IDS} from "../../../../resource/sound";
+import type {Stream, StreamSource, Unsubscriber} from "../../../../stream/stream";
+import {createStreamSource} from "../../../../stream/stream";
+import {domUuid} from "../../../../uuid/dom-uuid";
+import {ArmdozerIcon} from "./armdozer-icon";
+import {ArmdozerStatus} from "./armdozer-status";
+import {createArmdozerIcon} from "./create-armdozer-icon";
 
 /** ルートHTML要素 class */
 const ROOT_CLASS_NAME = 'player-select__armdozer-selector';

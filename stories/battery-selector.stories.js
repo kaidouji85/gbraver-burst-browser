@@ -1,6 +1,6 @@
 // @flow
-import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {BatterySelector} from "../src/js/game-object/battery-selector";
+import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 
 export default {
   title: 'battery-selector',

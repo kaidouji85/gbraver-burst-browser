@@ -1,5 +1,11 @@
 // @flow
-import type {BattleAnimationTimeScale, GbraverBurstBrowserConfig, GbraverBurstBrowserConfigRepository, SoundVolume, WebGLPixelRatio} from "./browser-config";
+import type {
+  BattleAnimationTimeScale,
+  GbraverBurstBrowserConfig,
+  GbraverBurstBrowserConfigRepository,
+  SoundVolume,
+  WebGLPixelRatio
+} from "./browser-config";
 import {parseBattleAnimationTimeScale, parseSoundVolume, parseWebGLPixelRatio} from "./browser-config";
 import {DefaultConfig} from "./default-config";
 

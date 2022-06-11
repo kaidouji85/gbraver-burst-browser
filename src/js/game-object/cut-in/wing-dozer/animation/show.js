@@ -1,11 +1,11 @@
 // @flow
 
-import {Animate} from "../../../../animation/animate";
-import type {WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
 import {all} from "../../../../animation/all";
+import {Animate} from "../../../../animation/animate";
+import {delay} from "../../../../animation/delay";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {delay} from "../../../../animation/delay";
+import type {WingDozerCutInModel} from "../model/wing-dozer-cutin-model";
 
 /**
  * カットインを表示する

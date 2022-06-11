@@ -1,9 +1,9 @@
 // @flow
-import type {ArmdozerAnimation} from "./armdozer-animation";
-import type {TextureId} from "../../../resource/texture";
-import type {Resources} from "../../../resource";
 import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import type {Resources} from "../../../resource";
+import type {TextureId} from "../../../resource/texture";
+import type {ArmdozerAnimation} from "./armdozer-animation";
 
 type Param = {
   id: TextureId,

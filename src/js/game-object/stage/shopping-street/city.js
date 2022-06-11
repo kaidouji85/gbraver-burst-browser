@@ -1,6 +1,6 @@
 // @flow
-import type {Resources} from "../../../resource";
 import * as THREE from 'three';
+import type {Resources} from "../../../resource";
 import type {GlTFResource} from "../../../resource/gltf";
 import {disposeGltfModel, GLTF_IDS} from "../../../resource/gltf";
 

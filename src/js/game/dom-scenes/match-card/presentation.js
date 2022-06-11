@@ -1,9 +1,9 @@
 // @flow
 
 import type {ArmDozerId} from "gbraver-burst-core";
-import {domUuid} from "../../../uuid/dom-uuid";
-import type {Resources} from "../../../resource";
 import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
+import type {Resources} from "../../../resource";
+import {domUuid} from "../../../uuid/dom-uuid";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 
 /**

@@ -1,9 +1,9 @@
 // @flow
-import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
 import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
 import {delay} from "../../../animation/delay";
 import {process} from '../../../animation/process';
+import {tween} from "../../../animation/tween";
+import type {ReflectIndocatorModel} from "../model/reflect-indocator-model";
 
 /**
  * ポップアップ

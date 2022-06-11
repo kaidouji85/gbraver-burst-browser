@@ -1,23 +1,23 @@
 // @flow
-import * as THREE from 'three';
-import type {Resources} from '../../../../../resource';
 import type {Player} from "gbraver-burst-core";
-import type {BattleSceneAction} from "../../actions";
-import type {Update} from "../../../../../game-loop/update";
+import * as THREE from 'three';
 import type {PreRender} from "../../../../../game-loop/pre-render";
-import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
-import {HUDGameObjects} from "./game-objects";
-import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
+import type {Update} from "../../../../../game-loop/update";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
+import {PlainHUDCamera} from "../../../../../game-object/camera/plain-hud/plain-hud-camera";
+import type {OverlapNotifier} from "../../../../../render/overla-notifier";
+import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
+import type {Resources} from '../../../../../resource';
+import type {Stream} from "../../../../../stream/stream";
 import type {Resize} from "../../../../../window/resize";
+import type {BattleSceneAction} from "../../actions";
 import {enemyArmdozerHUD, playerArmdozerHUD} from "./armdozer-objects";
-import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
+import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
+import {HUDGameObjects} from "./game-objects";
 import {enemyHUDPilotObjects, playerHUDPilotObjects} from "./pilot-objects";
 import type {HUDPilotObjects} from "./pilot-objects/hud-pilot-objects";
-import type {HUDArmdozerObjects} from "./armdozer-objects/hud-armdozer-ibjects";
-import type {OverlapNotifier} from "../../../../../render/overla-notifier";
-import type {Stream} from "../../../../../stream/stream";
+import {enemyHUDObjects, HUDPlayer, playerHUDObjects} from "./player";
 
 /** コンストラクタのパラメータ */
 export type Param = {

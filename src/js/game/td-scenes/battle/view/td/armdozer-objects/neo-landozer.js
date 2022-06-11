@@ -1,14 +1,14 @@
 // @flow
 
-import type {TDArmdozerObjects} from "./armdozer-objects";
 import type {Player, PlayerId} from "gbraver-burst-core";
-import type {Resources} from "../../../../../../resource";
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import * as THREE from "three";
-import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
-import {EnemyNeoLandozer, PlayerNeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import {EnemyNeoLandozer, PlayerNeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer";
+import {NeoLandozer} from "../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
+import type {Resources} from "../../../../../../resource";
 import type {Stream} from "../../../../../../stream/stream";
+import type {TDArmdozerObjects} from "./armdozer-objects";
 
 /**
  * 3Dレイヤー ネオランドーザ 3Dレイヤー フィールド

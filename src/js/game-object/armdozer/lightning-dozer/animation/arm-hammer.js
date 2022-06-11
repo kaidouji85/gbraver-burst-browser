@@ -1,10 +1,10 @@
 // @flow
 
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
-import type {LightningDozerModel} from "../model/lightning-dozer-model";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {all} from "../../../../animation/all";
+import type {LightningDozerModel} from "../model/lightning-dozer-model";
 
 /**
  * アームハンマー

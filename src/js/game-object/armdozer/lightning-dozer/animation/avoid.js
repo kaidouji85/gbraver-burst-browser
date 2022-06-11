@@ -1,12 +1,12 @@
 // @flow
 
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
-import type {LightningDozerModel} from "../model/lightning-dozer-model";
+import {delay} from "../../../../animation/delay";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
+import type {LightningDozerModel} from "../model/lightning-dozer-model";
 import {LightningDozerSounds} from "../sounds/lightning-dozer-sounds";
-import {all} from "../../../../animation/all";
-import {delay} from "../../../../animation/delay";
 
 /**
  * 避け

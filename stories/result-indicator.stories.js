@@ -1,7 +1,7 @@
 // @flow
+import {delay} from '../src/js/animation/delay';
 import {drawIndicator, loseIndicator, winIndicator} from "../src/js/game-object/result-indicator";
 import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
-import {delay} from '../src/js/animation/delay';
 
 export default {
   title: 'result-indicator',

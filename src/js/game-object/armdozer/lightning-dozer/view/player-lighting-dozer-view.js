@@ -1,22 +1,22 @@
 // @flow
 
-import type {LightningDozerView} from "./lightning-dozer-view";
+import * as THREE from "three";
 import type {Resources} from "../../../../resource";
 import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
-import {lightningDozerStand} from "../mesh/stand";
-import type {AnimationType, LightningDozerModel} from "../model/lightning-dozer-model";
-import * as THREE from "three";
-import {lightningDozerHmCharge} from "../mesh/hm-charge";
+import {lightningDozerBackStep} from "../mesh/back-step";
+import {lightningDozerDown} from "../mesh/down";
+import {lightningDozerFrontStep} from "../mesh/front-step";
+import {lightningDozerGuard} from "../mesh/guard";
+import {lightningDozerGutsToStand} from "../mesh/gut-to-stand";
+import {lightningDozerGutsDown} from "../mesh/guts-down";
+import {lightningDozerGutsUp} from "../mesh/guts-up";
 import {lightningDozerHmAttack} from "../mesh/hm-attack";
+import {lightningDozerHmCharge} from "../mesh/hm-charge";
 import {lightningDozerHmToStand} from "../mesh/hm-to-stand";
 import {lightningDozerKnockBack} from "../mesh/knock-back";
-import {lightningDozerDown} from "../mesh/down";
-import {lightningDozerGutsUp} from "../mesh/guts-up";
-import {lightningDozerGutsDown} from "../mesh/guts-down";
-import {lightningDozerGutsToStand} from "../mesh/gut-to-stand";
-import {lightningDozerGuard} from "../mesh/guard";
-import {lightningDozerBackStep} from "../mesh/back-step";
-import {lightningDozerFrontStep} from "../mesh/front-step";
+import {lightningDozerStand} from "../mesh/stand";
+import type {AnimationType, LightningDozerModel} from "../model/lightning-dozer-model";
+import type {LightningDozerView} from "./lightning-dozer-view";
 
 /**
  * プレイヤー側のライトニングドーザビュー

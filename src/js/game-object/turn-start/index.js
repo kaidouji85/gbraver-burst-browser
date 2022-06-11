@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import {PlayerTurnStartView} from "./view/player-turn-start-view";
-import {EnemyTurnStartView} from "./view/enemy-turn-start-view";
-import {TurnStart} from "./turn-start";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {TurnStart} from "./turn-start";
+import {EnemyTurnStartView} from "./view/enemy-turn-start-view";
+import {PlayerTurnStartView} from "./view/player-turn-start-view";
 
 /**
  * プレイヤーターン スタート
