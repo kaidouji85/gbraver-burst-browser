@@ -43,6 +43,7 @@ import {onShowHowToPlay} from "./game-procedure/on-show-how-to-play";
 import {onSelectionComplete} from "./game-procedure/on-selection-complete";
 import {onSelectionCancel} from "./game-procedure/on-selection-cancel";
 import {onDifficultySelectionComplete} from "./game-procedure/on-difficulty-selection-complete";
+import {onDifficultySelectionCancel} from "./game-procedure/on-difficulty-selection-cancel";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -167,15 +168,15 @@ export class Game implements GameProps {
         onMatchingCanceled(this);
       } else if (action.type === 'ShowHowToPlay') {
         onShowHowToPlay(this);
-      }
-      else if (action.type === 'SelectionComplete') {
+      } else if (action.type === 'SelectionComplete') {
         onSelectionComplete(this, action);
       } else if (action.type === 'SelectionCancel') {
         onSelectionCancel(this);
       } else if (action.type === 'DifficultySelectionComplete') {
         onDifficultySelectionComplete(this, action);
+      } else if (action.type === 'DifficultySelectionCancel') {
+        onDifficultySelectionCancel(this);
       }
-      else if (action.type === 'DifficultySelectionCancel') { this._onDifficultySelectionCancel() }
       else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
@@ -287,18 +288,6 @@ export class Game implements GameProps {
     } else if (action.postNetworkError.type === 'GotoTitle') {
       await gotoTitle();
     }
-  }
-
-  /**
-   * 難易度選択キャンセル時のイベント
-   */
-  _onDifficultySelectionCancel(): void {
-    if (!(this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'DifficultySelect')) {
-      return;
-    }
-
-    this.inProgress = {...this.inProgress, subFlow: {type: 'PlayerSelect'}};
-    this.domDialogs.hidden();
   }
 
   /**
