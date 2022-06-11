@@ -47,6 +47,7 @@ import {onDifficultySelectionCancel} from "./game-procedure/on-difficulty-select
 import {onEndNPCEnding} from "./game-procedure/on-end-npc-ending";
 import {onEndHowToPlay} from "./game-procedure/on-end-how-to-play";
 import {onUniversalLogin} from "./game-procedure/on-universal-login";
+import {onLogout} from "./game-procedure/on-logout";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -185,8 +186,9 @@ export class Game implements GameProps {
         onEndHowToPlay(this);
       } else if (action.type === 'UniversalLogin') {
         onUniversalLogin(this);
+      } else if (action.type === 'Logout') {
+        onLogout(this);
       }
-      else if (action.type === 'Logout') { this._onLogout() }
       else if (action.type === 'AccountDeleteConsent') { this._onAccountDeleteConsent() }
       else if (action.type === 'DeleteAccount') { this._onDeleteAccount() }
       else if (action.type === 'CancelAccountDeletion') { this._onCancelAccountDeletion() }
@@ -214,15 +216,6 @@ export class Game implements GameProps {
    */
   _onLoginCancel(): void {
     this.domDialogs.hidden();
-  }
-
-  /**
-   * ログアウト
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onLogout(): Promise<void> {
-    await this.fader.fadeOut();
-    await this.api.logout();
   }
 
   /**
