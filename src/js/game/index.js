@@ -10,7 +10,6 @@ import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
 import {DOMFader} from "../components/dom-fader/dom-fader";
-import type {ConfigChangeComplete} from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
 import type {Stream, Unsubscriber} from "../stream/stream";
 import {createStream} from "../stream/stream";
@@ -20,10 +19,7 @@ import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
-import {isSoundConfigChanged} from "./config/browser-config";
 import type {GameAPI, GameProps} from "./game-props";
-import {reflectSoundVolume} from "./reflect-sound-volume";
-import {startTitle} from "./game-procedure/start-title";
 import {initialize} from "./game-procedure/initialize";
 import {onReloadRequest} from "./game-procedure/on-reload-request";
 import {onExitMailVerifiedIncomplete} from "./game-procedure/on-exit-mai-verified-incomplete";
@@ -51,6 +47,7 @@ import {onWebSocketAPIError} from "./game-procedure/on-websocker-api-error";
 import {onWebSocketAPIUnintentionalClose} from "./game-procedure/on-web-socket-api-unintentional-close";
 import {onConfigChangeStart} from "./game-procedure/on-config-change-start";
 import {onConfigChangeCancel} from "./game-procedure/on-config-change-cancel";
+import {onConfigChangeComplete} from "./game-procedure/on-config-change-complete";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -209,8 +206,9 @@ export class Game implements GameProps {
         onConfigChangeStart(this);
       } else if (action.type === 'ConfigChangeCancel') {
         onConfigChangeCancel(this);
+      } else if (action.type === 'ConfigChangeComplete') {
+        onConfigChangeComplete(this, action);
       }
-      else if (action.type === 'ConfigChangeComplete') { this._onConfigChangeComplete(action) }
     }));
   }
 
@@ -221,20 +219,5 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * 設定変更完了時の処理
-   *
-   * @param action
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onConfigChangeComplete(action: ConfigChangeComplete): Promise<void> {
-    await this.fader.fadeOut();
-    const origin = await this.config.load();
-    isSoundConfigChanged(origin, action.config) && reflectSoundVolume(this.resources, action.config);
-    await this.config.save(action.config);
-    await startTitle(this);
-    await this.fader.fadeIn();
   }
 }
