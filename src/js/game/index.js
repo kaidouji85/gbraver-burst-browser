@@ -9,11 +9,9 @@ import {resizeStream} from "../window/resize";
 import {InterruptScenes} from "./innterrupt-scenes";
 import {DOMDialogs} from "./dom-dialogs";
 import type {ResourceRoot} from "../resource/resource-root";
-import type {DifficultySelect, NPCBattle} from "./in-progress/npc-battle";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {
   ConfigChangeComplete,
-  DifficultySelectionComplete,
   EndNetworkError,
   WebSocketAPIError,
   WebSocketAPIUnintentionalClose,
@@ -27,17 +25,9 @@ import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
 import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
-import {
-  createNPCBattlePlayer,
-  getCurrentStage,
-  getStageLevel,
-  startNPCBattle,
-} from "./npc-battle";
-import {DefaultStage, DefaultStages, NPCBattleCourses} from "./npc-battle-courses";
 import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
 import {isSoundConfigChanged} from "./config/browser-config";
 import type {GameAPI, GameProps} from "./game-props";
-import {startNPCBattleStage} from "./game-procedure/start-npc-battle-stage";
 import {reflectSoundVolume} from "./reflect-sound-volume";
 import {startTitle} from "./game-procedure/start-title";
 import {initialize} from "./game-procedure/initialize";
@@ -52,6 +42,7 @@ import {onMatchingCanceled} from "./game-procedure/on-matching-cancel";
 import {onShowHowToPlay} from "./game-procedure/on-show-how-to-play";
 import {onSelectionComplete} from "./game-procedure/on-selection-complete";
 import {onSelectionCancel} from "./game-procedure/on-selection-cancel";
+import {onDifficultySelectionComplete} from "./game-procedure/on-difficulty-selection-complete";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -181,8 +172,9 @@ export class Game implements GameProps {
         onSelectionComplete(this, action);
       } else if (action.type === 'SelectionCancel') {
         onSelectionCancel(this);
+      } else if (action.type === 'DifficultySelectionComplete') {
+        onDifficultySelectionComplete(this, action);
       }
-      else if (action.type === 'DifficultySelectionComplete') { this._onDifficultySelectionComplete(action) }
       else if (action.type === 'DifficultySelectionCancel') { this._onDifficultySelectionCancel() }
       else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
@@ -295,30 +287,6 @@ export class Game implements GameProps {
     } else if (action.postNetworkError.type === 'GotoTitle') {
       await gotoTitle();
     }
-  }
-
-  /**
-   * 難易度選択完了時のイベント
-   *
-   * @param action アクション
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onDifficultySelectionComplete(action: DifficultySelectionComplete): Promise<void> {
-    if (!(this.inProgress.type === 'NPCBattle' && this.inProgress.subFlow.type === 'DifficultySelect')) {
-      return;
-    }
-
-    const npcBattle: NPCBattle = this.inProgress;
-    const difficultySelect: DifficultySelect = this.inProgress.subFlow;
-    const {armdozerId, pilotId} = difficultySelect;
-    const player = createNPCBattlePlayer(armdozerId, pilotId);
-    const stages = NPCBattleCourses
-      .find(v => v.armdozerId === armdozerId && v.difficulty === action.difficulty)?.stages ?? DefaultStages;
-    const npcBattleState = startNPCBattle(player, stages);
-    this.inProgress = {...npcBattle, subFlow: {type: 'PlayingNPCBattle', state: npcBattleState}};
-    const stage = getCurrentStage(npcBattleState) ?? DefaultStage;
-    const level = getStageLevel(npcBattleState);
-    await startNPCBattleStage(this, player, stage, level);
   }
 
   /**
