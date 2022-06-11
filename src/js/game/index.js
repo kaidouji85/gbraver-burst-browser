@@ -49,6 +49,7 @@ import {onEndHowToPlay} from "./game-procedure/on-end-how-to-play";
 import {onUniversalLogin} from "./game-procedure/on-universal-login";
 import {onLogout} from "./game-procedure/on-logout";
 import {onAccountDeleteConsent} from "./game-procedure/on-account-delete-consent";
+import {onDeleteAccount} from "./game-procedure/on-delete-account";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -191,8 +192,9 @@ export class Game implements GameProps {
         onLogout(this);
       } else if (action.type === 'AccountDeleteConsent') {
         onAccountDeleteConsent(this);
+      } else if (action.type === 'DeleteAccount') {
+        onDeleteAccount(this);
       }
-      else if (action.type === 'DeleteAccount') { this._onDeleteAccount() }
       else if (action.type === 'CancelAccountDeletion') { this._onCancelAccountDeletion() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
@@ -218,16 +220,6 @@ export class Game implements GameProps {
    */
   _onLoginCancel(): void {
     this.domDialogs.hidden();
-  }
-
-  /**
-   * アカウント削除
-   */
-  async _onDeleteAccount(): Promise<void> {
-    this.domDialogs.startWaiting('アカウント削除中')
-    await this.api.deleteLoggedInUser();
-    await this.fader.fadeOut();
-    await this.api.logout();
   }
 
   /**
