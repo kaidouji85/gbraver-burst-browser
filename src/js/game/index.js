@@ -55,6 +55,7 @@ import {onPostBattleAction} from "./game-procedure/on-post-battle-action";
 import {onArcadeStart} from "./game-procedure/on-arcade-start";
 import {onCasualMatchStart} from "./game-procedure/on-casual-match-start";
 import {onMatchingCanceled} from "./game-procedure/on-matching-cancel";
+import {onShowHowToPlay} from "./game-procedure/on-show-how-to-play";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -177,8 +178,9 @@ export class Game implements GameProps {
         onCasualMatchStart(this);
       } else if (action.type === 'MatchingCanceled') {
         onMatchingCanceled(this);
+      } else if (action.type === 'ShowHowToPlay') {
+        onShowHowToPlay(this);
       }
-      else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
       else if (action.type === 'SelectionComplete') { this._onSelectionComplete(action) }
       else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
       else if (action.type === 'DifficultySelectionComplete') { this._onDifficultySelectionComplete(action) }
@@ -255,14 +257,6 @@ export class Game implements GameProps {
    */
   _onCancelAccountDeletion(): void {
     this.domDialogs.hidden();
-  }
-
-  /**
-   * 遊び方ダイアログ表示
-   */
-  _onShowHowToPlay() {
-    this.bgm.do(fadeOut);
-    this.domDialogs.startHowToPlay(this.resources, this.howToPlayMovieURL);
   }
 
   /**
