@@ -50,6 +50,7 @@ import {onUniversalLogin} from "./game-procedure/on-universal-login";
 import {onLogout} from "./game-procedure/on-logout";
 import {onAccountDeleteConsent} from "./game-procedure/on-account-delete-consent";
 import {onDeleteAccount} from "./game-procedure/on-delete-account";
+import {onCancelAccountDeletion} from "./game-procedure/on-cancel-account-deletion";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -194,8 +195,9 @@ export class Game implements GameProps {
         onAccountDeleteConsent(this);
       } else if (action.type === 'DeleteAccount') {
         onDeleteAccount(this);
+      } else if (action.type === 'CancelAccountDeletion') {
+        onCancelAccountDeletion(this);
       }
-      else if (action.type === 'CancelAccountDeletion') { this._onCancelAccountDeletion() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
       else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
       else if (action.type === 'WebSocketAPIError') { this._onWebSocketAPIError(action) }
@@ -219,13 +221,6 @@ export class Game implements GameProps {
    * ログイン中断
    */
   _onLoginCancel(): void {
-    this.domDialogs.hidden();
-  }
-
-  /**
-   * アカウント削除キャンセル
-   */
-  _onCancelAccountDeletion(): void {
     this.domDialogs.hidden();
   }
 
