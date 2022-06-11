@@ -28,6 +28,9 @@ import type {
   WebsocketErrorNotifier,
   WebsocketUnintentionalCloseNotifier
 } from "@gbraver-burst-network/browser-core";
+import {emptyResources} from "../resource";
+import {resizeStream} from "../window/resize";
+import {createBGMManager} from "../bgm/bgm-manager";
 
 /** ゲーム管理オブジェクトで利用するAPIサーバの機能 */
 export interface GameAPI extends UniversalLogin, LoginCheck, CasualMatchSDK, Logout, LoggedInUserDelete,
@@ -64,4 +67,65 @@ export interface GameProps {
   serviceWorker: ?ServiceWorkerRegistration;
   bgm: BGMManager;
   unsubscriber: Unsubscriber[];
+}
+
+/** GamePropsジェネレータパラメータ */
+type Param = {
+  /** リソースルート */
+  resourceRoot: ResourceRoot,
+  /** 遊び方動画のURL */
+  howToPlayMovieURL: string,
+  /** 利用規約ページのURL */
+  termsOfServiceURL: string,
+  /** 問い合わせページのURL */
+  contactURL: string,
+  /** プライバシーポリシーページのURL */
+  privacyPolicyURL: string,
+  /** FPS統計を表示するか否か、trueで表示する */
+  isPerformanceStatsVisible: boolean,
+  /** サービスワーカーを利用するか否か、trueで利用する */
+  isServiceWorkerUsed: boolean,
+  /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
+  isAPIServerEnable: boolean,
+  /** APIサーバのSDK */
+  api: GameAPI,
+  /** ブラウザ設定リポジトリ */
+  config: GbraverBurstBrowserConfigRepository
+};
+
+/**
+ * ゲームプロパティを生成する
+ *
+ * @param param パラメータ
+ * @return 生成結果
+ */
+export function createGameProps(param: Param): GameProps {
+  const resize = resizeStream()
+  return {
+    resourceRoot: param.resourceRoot,
+    resources: emptyResources(param.resourceRoot),
+    isFullResourceLoaded: false,
+    isServiceWorkerUsed: param.isServiceWorkerUsed,
+    isPerformanceStatsVisible: param.isPerformanceStatsVisible,
+    howToPlayMovieURL: param.howToPlayMovieURL,
+    termsOfServiceURL: param.termsOfServiceURL,
+    privacyPolicyURL: param.privacyPolicyURL,
+    contactURL: param.contactURL,
+    isAPIServerEnable: param.isAPIServerEnable,
+    inProgress: {type: 'None'},
+    resize,
+    vh: new CssVH(resize),
+    api: param.api,
+    config: param.config,
+    suddenlyBattleEnd: new FutureSuddenlyBattleEnd(),
+    fader: new DOMFader(),
+    interruptScenes: new InterruptScenes(),
+    domScenes: new DOMScenes(),
+    domDialogs: new DOMDialogs(),
+    domFloaters: new DOMFloaters(),
+    tdScenes: new TDScenes(resize),
+    serviceWorker: null,
+    bgm: createBGMManager(),
+    unsubscriber: []
+  };
 }
