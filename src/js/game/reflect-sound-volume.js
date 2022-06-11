@@ -5,6 +5,7 @@ import type {Resources} from "../resource";
 
 /**
  * 音量設定を音リソースに反映させるヘルパー関数
+ * 本関数にはresourcesを変更する副作用がある
  *
  * @param resources リソース管理オブジェクト
  * @param config 反映するブラウザ設定
