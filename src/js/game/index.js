@@ -12,7 +12,6 @@ import type {ResourceRoot} from "../resource/resource-root";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {
   ConfigChangeComplete,
-  EndNetworkError,
   WebSocketAPIError,
   WebSocketAPIUnintentionalClose,
 } from "./game-actions";
@@ -23,7 +22,6 @@ import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import {map} from "../stream/operator";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
-import {fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
 import {isSoundConfigChanged} from "./config/browser-config";
@@ -52,6 +50,7 @@ import {onAccountDeleteConsent} from "./game-procedure/on-account-delete-consent
 import {onDeleteAccount} from "./game-procedure/on-delete-account";
 import {onCancelAccountDeletion} from "./game-procedure/on-cancel-account-deletion";
 import {onLoginCancel} from "./game-procedure/on-login-cancel";
+import {onEndNetworkError} from "./game-procedure/on-end-network-error";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -200,8 +199,9 @@ export class Game implements GameProps {
         onCancelAccountDeletion(this);
       } else if (action.type === 'LoginCancel') {
         onLoginCancel(this);
+      } else if (action.type === 'EndNetworkError') {
+        onEndNetworkError(this, action);
       }
-      else if (action.type === 'EndNetworkError') { this._onEndNetworkError(action) }
       else if (action.type === 'WebSocketAPIError') { this._onWebSocketAPIError(action) }
       else if (action.type === 'WebSocketAPIUnintentionalClose') { this._onWebSocketAPIUnintentionalClose(action) }
       else if (action.type === 'ConfigChangeStart') { this._onConfigChangeStart() }
@@ -217,37 +217,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * 通信エラーダイアログを閉じる
-   *
-   * @param action アクション
-   */
-  async _onEndNetworkError(action: EndNetworkError) {
-    const close = async () => {
-      this.inProgress = {type: 'None'};
-      this.domDialogs.hidden();
-    };
-    const gotoTitle = async () => {
-      this.inProgress = {type: 'None'};
-      this.domDialogs.hidden();
-      const [title] = await Promise.all([(async () => {
-        await this.fader.fadeOut();
-        return await startTitle(this);
-      })(), (async () => {
-        await this.bgm.do(fadeOut);
-        await this.bgm.do(stop);
-      })()]);
-      await this.fader.fadeIn();
-      title.playBGM();
-    };
-
-    if (action.postNetworkError.type === 'Close') {
-      await close();
-    } else if (action.postNetworkError.type === 'GotoTitle') {
-      await gotoTitle();
-    }
   }
 
   /**
