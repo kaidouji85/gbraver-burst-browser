@@ -45,7 +45,6 @@ import {isSoundConfigChanged} from "./config/browser-config";
 import type {GameAPI, GameProps} from "./game-props";
 import {startNPCBattleStage} from "./game-procedure/start-npc-battle-stage";
 import {reflectSoundVolume} from "./reflect-sound-volume";
-import {fullResourceLoading} from "./game-procedure/full-resource-loading";
 import {startTitle} from "./game-procedure/start-title";
 import {initialize} from "./game-procedure/initialize";
 import {onReloadRequest} from "./game-procedure/on-reload-request";
@@ -54,6 +53,7 @@ import {onEndBattle} from "./game-procedure/on-end-battle";
 import {onSuddenlyEndBattle} from "./game-procedure/on-suddenly-battle-end";
 import {onPostBattleAction} from "./game-procedure/on-post-battle-action";
 import {onArcadeStart} from "./game-procedure/on-arcade-start";
+import {onCasualMatchStart} from "./game-procedure/on-casual-match-start";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -172,9 +172,10 @@ export class Game implements GameProps {
         onPostBattleAction(this, action);
       } else if (action.type === 'ArcadeStart') {
         onArcadeStart(this);
+      } else if (action.type === 'CasualMatchStart') {
+        onCasualMatchStart(this);
       }
-      else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
-      else if (action.type === 'MatchingCanceled') { this._onMatchingCanceled() }
+      else if (action.type === 'MatchingCanceled') { this._onMatchingCanceled()}
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
       else if (action.type === 'SelectionComplete') { this._onSelectionComplete(action) }
       else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
@@ -204,48 +205,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * カジュアルマッチ開始
-   *
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onCasualMatchStart(): Promise<void> {
-    const callLoginCheckAPI = async () => {
-      try {
-        return await this.api.isLogin();
-      } catch (e) {
-        this.domDialogs.startNetworkError(this.resources, {type: 'Close'});
-        throw e;
-      }
-    };
-    const gotoPlayerSelect = async (): Promise<void> => {
-      this.inProgress = {type: 'CasualMatch', subFlow: {type: 'PlayerSelect'}};
-      this.domDialogs.hidden();
-      await this.fader.fadeOut();
-      await this.domScenes.startPlayerSelect(this.resources);
-      await this.fader.fadeIn();
-    };
-    const showLoginDialog = () => {
-      this.domDialogs.startLogin(this.resources, 'ネット対戦をするにはログインをしてください');
-    };
-
-    this.domDialogs.startWaiting('ログインチェック中......');
-    const isLogin = await callLoginCheckAPI();
-    this.domDialogs.hidden();
-    if (!isLogin) {
-      showLoginDialog();
-      return;
-    }
-
-    if (!this.isFullResourceLoaded) {
-      await fullResourceLoading(this);
-      const config = await this.config.load();
-      reflectSoundVolume(this.resources, config);
-    }
-
-    await gotoPlayerSelect();
   }
 
   /**
