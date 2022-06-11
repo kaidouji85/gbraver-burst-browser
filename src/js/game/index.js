@@ -51,6 +51,7 @@ import {onCasualMatchStart} from "./game-procedure/on-casual-match-start";
 import {onMatchingCanceled} from "./game-procedure/on-matching-cancel";
 import {onShowHowToPlay} from "./game-procedure/on-show-how-to-play";
 import {onSelectionComplete} from "./game-procedure/on-selection-complete";
+import {onSelectionCancel} from "./game-procedure/on-selection-cancel";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -178,8 +179,9 @@ export class Game implements GameProps {
       }
       else if (action.type === 'SelectionComplete') {
         onSelectionComplete(this, action);
+      } else if (action.type === 'SelectionCancel') {
+        onSelectionCancel(this);
       }
-      else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
       else if (action.type === 'DifficultySelectionComplete') { this._onDifficultySelectionComplete(action) }
       else if (action.type === 'DifficultySelectionCancel') { this._onDifficultySelectionCancel() }
       else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
@@ -293,17 +295,6 @@ export class Game implements GameProps {
     } else if (action.postNetworkError.type === 'GotoTitle') {
       await gotoTitle();
     }
-  }
-
-  /**
-   * プレイヤー選択がキャンセルされた時のイベント
-   * @return 処理結果
-   */
-  async _onSelectionCancel(): Promise<void> {
-    this.inProgress = {type: 'None'};
-    await this.fader.fadeOut();
-    await startTitle(this);
-    await this.fader.fadeIn();
   }
 
   /**
