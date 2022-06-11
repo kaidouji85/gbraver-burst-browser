@@ -8,6 +8,7 @@ import type {GameProps} from "../game-props";
 
 /**
  * 難易度選択完了時のイベント
+ * 本関数はpropsを変更する副作用がある
  *
  * @param props ゲームプロパティ
  * @param action アクション

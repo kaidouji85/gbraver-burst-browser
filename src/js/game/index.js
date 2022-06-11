@@ -44,6 +44,7 @@ import {onSelectionComplete} from "./game-procedure/on-selection-complete";
 import {onSelectionCancel} from "./game-procedure/on-selection-cancel";
 import {onDifficultySelectionComplete} from "./game-procedure/on-difficulty-selection-complete";
 import {onDifficultySelectionCancel} from "./game-procedure/on-difficulty-selection-cancel";
+import {onEndNPCEnding} from "./game-procedure/on-end-npc-ending";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -176,8 +177,9 @@ export class Game implements GameProps {
         onDifficultySelectionComplete(this, action);
       } else if (action.type === 'DifficultySelectionCancel') {
         onDifficultySelectionCancel(this);
+      } else if (action.type === 'EndNPCEnding') {
+        onEndNPCEnding(this);
       }
-      else if (action.type === 'EndNPCEnding') { this._onEndNPCEnding() }
       else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
       else if (action.type === 'Logout') { this._onLogout() }
@@ -308,21 +310,6 @@ export class Game implements GameProps {
   _onWebSocketAPIUnintentionalClose(action: WebSocketAPIUnintentionalClose): void {
     this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
     throw action;
-  }
-
-  /**
-   * NPCバトルエンディングが終了した際の処理
-   */
-  async _onEndNPCEnding(): Promise<void> {
-    const [title] = await Promise.all([(async () => {
-      await this.fader.fadeOut();
-      return await startTitle(this);
-    })(), (async () => {
-      await this.bgm.do(fadeOut);
-      await this.bgm.do(stop);
-    })()]);
-    await this.fader.fadeIn();
-    title.playBGM();
   }
 
   /**
