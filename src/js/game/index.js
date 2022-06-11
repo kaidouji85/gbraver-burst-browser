@@ -49,6 +49,7 @@ import {onLoginCancel} from "./game-procedure/on-login-cancel";
 import {onEndNetworkError} from "./game-procedure/on-end-network-error";
 import {onWebSocketAPIError} from "./game-procedure/on-websocker-api-error";
 import {onWebSocketAPIUnintentionalClose} from "./game-procedure/on-web-socket-api-unintentional-close";
+import {onConfigChangeStart} from "./game-procedure/on-config-change-start";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -203,8 +204,9 @@ export class Game implements GameProps {
         onWebSocketAPIError(this, action);
       } else if (action.type === 'WebSocketAPIUnintentionalClose') {
         onWebSocketAPIUnintentionalClose(this, action);
+      } else if (action.type === 'ConfigChangeStart') {
+        onConfigChangeStart(this);
       }
-      else if (action.type === 'ConfigChangeStart') { this._onConfigChangeStart() }
       else if (action.type === 'ConfigChangeCancel') { this._onConfigChangeCancel() }
       else if (action.type === 'ConfigChangeComplete') { this._onConfigChangeComplete(action) }
     }));
@@ -217,18 +219,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * 設定変更開始時の処理
-   *
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onConfigChangeStart(): Promise<void> {
-    await this.fader.fadeOut();
-    const config = await this.config.load();
-    this.domScenes.startConfig(this.resources, config);
-    await this.fader.fadeIn();
   }
 
   /**
