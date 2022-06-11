@@ -53,6 +53,7 @@ import {onExitMailVerifiedIncomplete} from "./game-procedure/on-exit-mai-verifie
 import {onEndBattle} from "./game-procedure/on-end-battle";
 import {onSuddenlyEndBattle} from "./game-procedure/on-suddenly-battle-end";
 import {onPostBattleAction} from "./game-procedure/on-post-battle-action";
+import {onArcadeStart} from "./game-procedure/on-arcade-start";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -169,8 +170,9 @@ export class Game implements GameProps {
         onSuddenlyEndBattle(this);
       } else if (action.type === 'PostBattleAction') { 
         onPostBattleAction(this, action);
+      } else if (action.type === 'ArcadeStart') {
+        onArcadeStart(this);
       }
-      else if (action.type === 'ArcadeStart') { this._onArcadeStart() }
       else if (action.type === 'CasualMatchStart') { this._onCasualMatchStart() }
       else if (action.type === 'MatchingCanceled') { this._onMatchingCanceled() }
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
@@ -202,24 +204,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * アーケードモード開始
-   *
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onArcadeStart(): Promise<void> {
-    if (!this.isFullResourceLoaded) {
-      await fullResourceLoading(this);
-      const config = await this.config.load();
-      reflectSoundVolume(this.resources, config);
-    }
-
-    this.inProgress = {type: 'NPCBattle', subFlow: {type: 'PlayerSelect'}};
-    await this.fader.fadeOut();
-    await this.domScenes.startPlayerSelect(this.resources);
-    await this.fader.fadeIn();
   }
 
   /**
