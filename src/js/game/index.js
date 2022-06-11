@@ -23,7 +23,7 @@ import {FutureSuddenlyBattleEnd} from "./future-suddenly-battle-end";
 import {map} from "../stream/operator";
 import type {BGMManager} from '../bgm/bgm-manager';
 import {createBGMManager} from '../bgm/bgm-manager';
-import {fadeIn, fadeOut, stop} from "../bgm/bgm-operators";
+import {fadeOut, stop} from "../bgm/bgm-operators";
 import {DOMFloaters} from "./dom-floaters/dom-floaters";
 import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
 import {isSoundConfigChanged} from "./config/browser-config";
@@ -45,6 +45,7 @@ import {onSelectionCancel} from "./game-procedure/on-selection-cancel";
 import {onDifficultySelectionComplete} from "./game-procedure/on-difficulty-selection-complete";
 import {onDifficultySelectionCancel} from "./game-procedure/on-difficulty-selection-cancel";
 import {onEndNPCEnding} from "./game-procedure/on-end-npc-ending";
+import {onEndHowToPlay} from "./game-procedure/on-end-how-to-play";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -179,8 +180,9 @@ export class Game implements GameProps {
         onDifficultySelectionCancel(this);
       } else if (action.type === 'EndNPCEnding') {
         onEndNPCEnding(this);
+      } else if (action.type === 'EndHowToPlay') {
+        onEndHowToPlay(this);
       }
-      else if (action.type === 'EndHowToPlay') { this._onEndHowToPlay() }
       else if (action.type === 'UniversalLogin') { this._onUniversalLogin() }
       else if (action.type === 'Logout') { this._onLogout() }
       else if (action.type === 'AccountDeleteConsent') { this._onAccountDeleteConsent() }
@@ -250,14 +252,6 @@ export class Game implements GameProps {
    * アカウント削除キャンセル
    */
   _onCancelAccountDeletion(): void {
-    this.domDialogs.hidden();
-  }
-
-  /**
-   * 遊び方ダイアログを閉じる
-   */
-  _onEndHowToPlay() {
-    this.bgm.do(fadeIn)
     this.domDialogs.hidden();
   }
 
