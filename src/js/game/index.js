@@ -12,7 +12,6 @@ import type {ResourceRoot} from "../resource/resource-root";
 import {DOMFader} from "../components/dom-fader/dom-fader";
 import type {
   ConfigChangeComplete,
-  WebSocketAPIError,
   WebSocketAPIUnintentionalClose,
 } from "./game-actions";
 import type {InProgress} from "./in-progress/in-progress";
@@ -51,6 +50,7 @@ import {onDeleteAccount} from "./game-procedure/on-delete-account";
 import {onCancelAccountDeletion} from "./game-procedure/on-cancel-account-deletion";
 import {onLoginCancel} from "./game-procedure/on-login-cancel";
 import {onEndNetworkError} from "./game-procedure/on-end-network-error";
+import {onWebSocketAPIError} from "./game-procedure/on-websocker-api-error";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -201,8 +201,9 @@ export class Game implements GameProps {
         onLoginCancel(this);
       } else if (action.type === 'EndNetworkError') {
         onEndNetworkError(this, action);
+      } else if (action.type === 'WebSocketAPIError') {
+        onWebSocketAPIError(this, action);
       }
-      else if (action.type === 'WebSocketAPIError') { this._onWebSocketAPIError(action) }
       else if (action.type === 'WebSocketAPIUnintentionalClose') { this._onWebSocketAPIUnintentionalClose(action) }
       else if (action.type === 'ConfigChangeStart') { this._onConfigChangeStart() }
       else if (action.type === 'ConfigChangeCancel') { this._onConfigChangeCancel() }
@@ -217,16 +218,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * WebSocketAPIエラー時の処理
-   *
-   * @param action アクション
-   */
-  _onWebSocketAPIError(action: WebSocketAPIError): void {
-    this.domDialogs.startNetworkError(this.resources, {type: 'GotoTitle'});
-    throw action;
   }
 
   /**
