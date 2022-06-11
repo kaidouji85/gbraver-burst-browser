@@ -48,6 +48,7 @@ import {onEndNPCEnding} from "./game-procedure/on-end-npc-ending";
 import {onEndHowToPlay} from "./game-procedure/on-end-how-to-play";
 import {onUniversalLogin} from "./game-procedure/on-universal-login";
 import {onLogout} from "./game-procedure/on-logout";
+import {onAccountDeleteConsent} from "./game-procedure/on-account-delete-consent";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -188,8 +189,9 @@ export class Game implements GameProps {
         onUniversalLogin(this);
       } else if (action.type === 'Logout') {
         onLogout(this);
+      } else if (action.type === 'AccountDeleteConsent') {
+        onAccountDeleteConsent(this);
       }
-      else if (action.type === 'AccountDeleteConsent') { this._onAccountDeleteConsent() }
       else if (action.type === 'DeleteAccount') { this._onDeleteAccount() }
       else if (action.type === 'CancelAccountDeletion') { this._onCancelAccountDeletion() }
       else if (action.type === 'LoginCancel') { this._onLoginCancel() }
@@ -216,13 +218,6 @@ export class Game implements GameProps {
    */
   _onLoginCancel(): void {
     this.domDialogs.hidden();
-  }
-
-  /**
-   * アカウント削除同意
-   */
-  _onAccountDeleteConsent(): void {
-    this.domDialogs.startDeleteAccountConsent(this.resources);
   }
 
   /**
