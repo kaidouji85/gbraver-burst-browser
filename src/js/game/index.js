@@ -54,6 +54,7 @@ import {onSuddenlyEndBattle} from "./game-procedure/on-suddenly-battle-end";
 import {onPostBattleAction} from "./game-procedure/on-post-battle-action";
 import {onArcadeStart} from "./game-procedure/on-arcade-start";
 import {onCasualMatchStart} from "./game-procedure/on-casual-match-start";
+import {onMatchingCanceled} from "./game-procedure/on-matching-cancel";
 
 /** コンストラクタのパラメータ */
 type Param = {
@@ -174,8 +175,9 @@ export class Game implements GameProps {
         onArcadeStart(this);
       } else if (action.type === 'CasualMatchStart') {
         onCasualMatchStart(this);
+      } else if (action.type === 'MatchingCanceled') {
+        onMatchingCanceled(this);
       }
-      else if (action.type === 'MatchingCanceled') { this._onMatchingCanceled()}
       else if (action.type === 'ShowHowToPlay') { this._onShowHowToPlay() }
       else if (action.type === 'SelectionComplete') { this._onSelectionComplete(action) }
       else if (action.type === 'SelectionCancel') { this._onSelectionCancel() }
@@ -205,17 +207,6 @@ export class Game implements GameProps {
    */
   async initialize(): Promise<void> {
     await initialize(this);
-  }
-
-  /**
-   * マッチング中止
-   *
-   * @return 処理が完了したら発火するPromise
-   */
-  async _onMatchingCanceled(): Promise<void> {
-    this.domDialogs.startWaiting('通信中......');
-    await this.api.disconnectWebsocket();
-    this.domDialogs.hidden();
   }
 
   /**
