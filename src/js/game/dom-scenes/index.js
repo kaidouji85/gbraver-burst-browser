@@ -29,16 +29,16 @@ const MAX_LOADING_TIME = 10000;
  * 本クラス配下のいずれか1シーンのみが表示される想定
  */
 export class DOMScenes {
-  _root: HTMLElement;
-  _scene: ?DOMScene;
-  _gameAction: StreamSource<GameAction>;
-  _unsubscribers: Unsubscriber[];
+  #root: HTMLElement;
+  #scene: ?DOMScene;
+  #gameAction: StreamSource<GameAction>;
+  #unsubscribers: Unsubscriber[];
 
   constructor() {
-    this._root = document.createElement('div');
-    this._gameAction = createStreamSource();
-    this._scene = null;
-    this._unsubscribers = [];
+    this.#root = document.createElement('div');
+    this.#gameAction = createStreamSource();
+    this.#scene = null;
+    this.#unsubscribers = [];
   }
 
   /** デストラクタ相当の処理 */
@@ -52,7 +52,7 @@ export class DOMScenes {
    * @return 通知ストリーム
    */
   gameActionNotifier(): Stream<GameAction> {
-    return this._gameAction;
+    return this.#gameAction;
   }
 
   /**
@@ -65,17 +65,17 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new MailVerifiedIncomplete(mailAddress);
-    this._root.appendChild(scene.getRootHTMLElement());
-    this._unsubscribers = [
+    this.#root.appendChild(scene.getRootHTMLElement());
+    this.#unsubscribers = [
       scene.gotoTitleNotifier().subscribe(() => {
-        this._gameAction.next({type: 'ExitMailVerifiedIncomplete'});
+        this.#gameAction.next({type: 'ExitMailVerifiedIncomplete'});
       }),
       scene.reloadNotifier().subscribe(() => {
-        this._gameAction.next({type: 'ReloadRequest'});
+        this.#gameAction.next({type: 'ReloadRequest'});
       })
     ];
 
-    this._scene = scene;
+    this.#scene = scene;
     return scene;
   }
 
@@ -88,9 +88,9 @@ export class DOMScenes {
   startLoading(loading: Stream<LoadingActions>): Loading {
     this._removeCurrentScene();
     const scene = new Loading(loading);
-    this._root.appendChild(scene.getRootHTMLElement());
+    this.#root.appendChild(scene.getRootHTMLElement());
 
-    this._scene = scene
+    this.#scene = scene
     return scene;
   }
 
@@ -110,36 +110,36 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new Title(resources, bgm, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
-    this._unsubscribers = [
+    this.#unsubscribers = [
       scene.pushLoginNotifier().subscribe(() => {
-        this._gameAction.next({type: 'UniversalLogin'});
+        this.#gameAction.next({type: 'UniversalLogin'});
       }),
       scene.pushLogoutNotifier().subscribe(() => {
-        this._gameAction.next({type: 'Logout'});
+        this.#gameAction.next({type: 'Logout'});
       }),
       scene.pushDeleteAccountNotifier().subscribe(() => {
-        this._gameAction.next({type: 'AccountDeleteConsent'});
+        this.#gameAction.next({type: 'AccountDeleteConsent'});
       }),
       scene.pushArcadeNotifier().subscribe(() => {
-        this._gameAction.next({type: 'ArcadeStart'});
+        this.#gameAction.next({type: 'ArcadeStart'});
       }),
       scene.pushHowToPlayNotifier().subscribe(() => {
-        this._gameAction.next({type: 'ShowHowToPlay'});
+        this.#gameAction.next({type: 'ShowHowToPlay'});
       }),
       scene.pushCasualMatchNotifier().subscribe(() => {
-        this._gameAction.next({type: 'CasualMatchStart'});
+        this.#gameAction.next({type: 'CasualMatchStart'});
       }),
       scene.pushConfigNotifier().subscribe(() => {
-        this._gameAction.next({type: 'ConfigChangeStart'});
+        this.#gameAction.next({type: 'ConfigChangeStart'});
       })
     ];
-    this._root.appendChild(scene.getRootHTMLElement());
+    this.#root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),
       waitTime(MAX_LOADING_TIME)
     ]);
 
-    this._scene = scene;
+    this.#scene = scene;
     return scene;
   }
 
@@ -153,25 +153,25 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new PlayerSelect(resources);
-    this._unsubscribers = [
+    this.#unsubscribers = [
       scene.decideNotifier().subscribe(v => {
-        this._gameAction.next({
+        this.#gameAction.next({
           type: 'SelectionComplete',
           armdozerId: v.armdozerId,
           pilotId: v.pilotId,
         });
       }),
       scene.prevNotifier().subscribe(() => {
-        this._gameAction.next({type: 'SelectionCancel'});
+        this.#gameAction.next({type: 'SelectionCancel'});
       }),
     ];
-    this._root.appendChild(scene.getRootHTMLElement());
+    this.#root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),
       waitTime(MAX_LOADING_TIME),
     ]);
 
-    this._scene = scene;
+    this.#scene = scene;
     return scene;
   }
 
@@ -193,13 +193,13 @@ export class DOMScenes {
       enemy: enemy,
       caption: caption
     });
-    this._root.appendChild(scene.getRootHTMLElement());
+    this.#root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),
       waitTime(MAX_LOADING_TIME),
     ]);
 
-    this._scene = scene;
+    this.#scene = scene;
     return scene;
   }
 
@@ -216,13 +216,13 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new NPCStageTitle(resources, level, caption, armDozerId);
-    this._root.appendChild(scene.getRootHTMLElement());
+    this.#root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),
       waitTime(MAX_LOADING_TIME),
     ]);
 
-    this._scene = scene;
+    this.#scene = scene;
     return scene;
   }
 
@@ -237,10 +237,10 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new NPCEnding(resources, bgm);
-    this._root.appendChild(scene.getRootHTMLElement());
-    this._unsubscribers = [
+    this.#root.appendChild(scene.getRootHTMLElement());
+    this.#unsubscribers = [
       scene.endNPCEndingNotifier().subscribe(() => {
-        this._gameAction.next({type: 'EndNPCEnding'});
+        this.#gameAction.next({type: 'EndNPCEnding'});
       })
     ];
     await Promise.race([
@@ -248,7 +248,7 @@ export class DOMScenes {
       waitTime(MAX_LOADING_TIME),
     ]);
 
-    this._scene = scene;
+    this.#scene = scene;
     return scene;
   }
 
@@ -263,16 +263,16 @@ export class DOMScenes {
     this._removeCurrentScene();
 
     const scene = new Config(resources, config);
-    this._root.appendChild(scene.getRootHTMLElement());
-    this._unsubscribers = [
+    this.#root.appendChild(scene.getRootHTMLElement());
+    this.#unsubscribers = [
       scene.prevNotifier().subscribe(() => {
-        this._gameAction.next({type: 'ConfigChangeCancel'});
+        this.#gameAction.next({type: 'ConfigChangeCancel'});
       }),
       scene.configChangeNotifier().subscribe(config => {
-        this._gameAction.next({type: 'ConfigChangeComplete', config});
+        this.#gameAction.next({type: 'ConfigChangeComplete', config});
       })
     ];
-    this._scene = scene;
+    this.#scene = scene;
     return scene;
   }
 
@@ -290,20 +290,20 @@ export class DOMScenes {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
    * 現在表示しているシーンを取り除く
    */
   _removeCurrentScene(): void {
-    this._scene && this._scene.destructor();
-    this._scene && this._scene.getRootHTMLElement().remove();
-    this._scene = null;
+    this.#scene && this.#scene.destructor();
+    this.#scene && this.#scene.getRootHTMLElement().remove();
+    this.#scene = null;
 
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-    this._unsubscribers = [];
+    this.#unsubscribers = [];
   }
 }

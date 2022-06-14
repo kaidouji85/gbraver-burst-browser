@@ -7,13 +7,13 @@ import {PlayInLandscape} from "./play-in-landscape";
  * 割り込みで表示されるシーンをあつめたもの
  */
 export class InterruptScenes {
-  _root: HTMLElement;
+  #root: HTMLElement;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this._root = document.createElement('div');
+    this.#root = document.createElement('div');
   }
 
   /**
@@ -30,7 +30,7 @@ export class InterruptScenes {
    */
   bind(resources: Resources): void {
     const playInLandscape = new PlayInLandscape(resources);
-    this._root.appendChild(playInLandscape.getRootHTMLElement());
+    this.#root.appendChild(playInLandscape.getRootHTMLElement());
   }
 
   /**
@@ -39,6 +39,6 @@ export class InterruptScenes {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 }

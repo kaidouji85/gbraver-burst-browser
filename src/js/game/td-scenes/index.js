@@ -16,12 +16,12 @@ import type {Scene} from "./scene";
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
-  _gameAction: StreamSource<GameAction>;
-  _gameLoop: Stream<GameLoop>;
-  _resize: Stream<Resize>;
-  _renderer: Renderer;
-  _scene: ?Scene;
-  _unsubscriber: Unsubscriber[];
+  #gameAction: StreamSource<GameAction>;
+  #gameLoop: Stream<GameLoop>;
+  #resize: Stream<Resize>;
+  #renderer: Renderer;
+  #scene: ?Scene;
+  #unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -29,12 +29,12 @@ export class TDScenes {
    * @param resize リサイズストリーム
    */
   constructor(resize: Stream<Resize>) {
-    this._resize = resize;
-    this._renderer = new Renderer(this._resize);
-    this._gameAction = createStreamSource();
-    this._gameLoop = gameLoopStream();
-    this._scene = null;
-    this._unsubscriber = [];
+    this.#resize = resize;
+    this.#renderer = new Renderer(this.#resize);
+    this.#gameAction = createStreamSource();
+    this.#gameLoop = gameLoopStream();
+    this.#scene = null;
+    this.#unsubscriber = [];
   }
 
   /** デストラクタ相当の処理 */
@@ -48,7 +48,7 @@ export class TDScenes {
    * @return イベント通知ストリーム
    */
   gameActionNotifier(): Stream<GameAction> {
-    return this._gameAction;
+    return this.#gameAction;
   }
 
   /**
@@ -68,13 +68,13 @@ export class TDScenes {
   startBattle(resources: Resources, bgm: BGMManager, playingBGM: SoundId, pixelRatio: number, initialAnimationTimeScale: number, battleProgress: BattleProgress, player: Player, enemy: Player, initialState: GameState[]): BattleScene {
     this._disposeScene();
 
-    this._renderer.setPixelRatio(pixelRatio);
-    const scene = new BattleScene({resources, bgm, playingBGM, renderer: this._renderer, battleProgress, initialAnimationTimeScale, 
-      player, enemy, initialState, gameLoop: this._gameLoop, resize: this._resize});
-    this._scene = scene;
-    this._unsubscriber = [
+    this.#renderer.setPixelRatio(pixelRatio);
+    const scene = new BattleScene({resources, bgm, playingBGM, renderer: this.#renderer, battleProgress, initialAnimationTimeScale,
+      player, enemy, initialState, gameLoop: this.#gameLoop, resize: this.#resize});
+    this.#scene = scene;
+    this.#unsubscriber = [
       scene.gameEndNotifier().subscribe(v => {
-        this._gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
+        this.#gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
       })
     ];
     return scene;
@@ -93,16 +93,16 @@ export class TDScenes {
    * @return 取得結果
    */
   getRendererDOM(): HTMLElement {
-    return this._renderer.getRendererDOM();
+    return this.#renderer.getRendererDOM();
   }
 
   /**
    * 現在表示しているシーンを破棄する
    */
   _disposeScene(): void {
-    this._scene && this._scene.destructor();
-    this._renderer.disposeRenders();
-    this._unsubscriber.forEach(v => {
+    this.#scene && this.#scene.destructor();
+    this.#renderer.disposeRenders();
+    this.#unsubscriber.forEach(v => {
       v.unsubscribe();
     });
   }

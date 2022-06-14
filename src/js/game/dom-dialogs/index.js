@@ -15,19 +15,19 @@ import {WaitingDialog} from "./waiting/waiting-dialog";
 
 /** HTML ダイアログをあつめたもの */
 export class DOMDialogs {
-  _root: HTMLElement;
-  _dialog: ?DOMDialog;
-  _gameAction: StreamSource<GameAction>;
-  _unsubscribers: Unsubscriber[];
+  #root: HTMLElement;
+  #dialog: ?DOMDialog;
+  #gameAction: StreamSource<GameAction>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this._root = document.createElement('div');
-    this._dialog = null;
-    this._gameAction = createStreamSource();
-    this._unsubscribers = [];
+    this.#root = document.createElement('div');
+    this.#dialog = null;
+    this.#gameAction = createStreamSource();
+    this.#unsubscribers = [];
   }
 
   /**
@@ -40,13 +40,13 @@ export class DOMDialogs {
     this._removeCurrentDialog();
 
     const howToPlay = new HowToPlay(resources, movieURL);
-    this._unsubscribers = [
+    this.#unsubscribers = [
       howToPlay.closeNotifier().subscribe(() => {
-        this._gameAction.next({type: 'EndHowToPlay'});
+        this.#gameAction.next({type: 'EndHowToPlay'});
       })
     ];
-    this._root.appendChild(howToPlay.getRootHTMLElement());
-    this._dialog = howToPlay;
+    this.#root.appendChild(howToPlay.getRootHTMLElement());
+    this.#dialog = howToPlay;
   }
 
   /**
@@ -59,16 +59,16 @@ export class DOMDialogs {
     this._removeCurrentDialog();
 
     const login = new LoginDialog(resources, caption);
-    this._unsubscribers = [
+    this.#unsubscribers = [
       login.loginNotifier().subscribe(() => {
-        this._gameAction.next({type: 'UniversalLogin'});
+        this.#gameAction.next({type: 'UniversalLogin'});
       }),
       login.closeDialogNotifier().subscribe(() => {
-        this._gameAction.next({type: 'LoginCancel'});
+        this.#gameAction.next({type: 'LoginCancel'});
       }),
     ];
-    this._root.appendChild(login.getRootHTMLElement());
-    this._dialog = login;
+    this.#root.appendChild(login.getRootHTMLElement());
+    this.#dialog = login;
   }
 
   /**
@@ -80,8 +80,8 @@ export class DOMDialogs {
     this._removeCurrentDialog();
 
     const waiting = new WaitingDialog(caption);
-    this._root.appendChild(waiting.getRootHTMLElement());
-    this._dialog = waiting;
+    this.#root.appendChild(waiting.getRootHTMLElement());
+    this.#dialog = waiting;
   }
 
   /**
@@ -94,13 +94,13 @@ export class DOMDialogs {
     this._removeCurrentDialog();
     
     const networkError = new NetworkErrorDialog(resources, postNetworkError);
-    this._unsubscribers = [
+    this.#unsubscribers = [
       networkError.postNetworkErrorNotifier().subscribe((postNetworkError) => {
-        this._gameAction.next({type: 'EndNetworkError', postNetworkError});
+        this.#gameAction.next({type: 'EndNetworkError', postNetworkError});
       })
     ];
-    this._root.appendChild(networkError.getRootHTMLElement());
-    this._dialog = networkError;
+    this.#root.appendChild(networkError.getRootHTMLElement());
+    this.#dialog = networkError;
   }
 
   /**
@@ -112,16 +112,16 @@ export class DOMDialogs {
     this._removeCurrentDialog();
 
     const deleteAccountConsent = new DeleteAccountConsentDialog(resources);
-    this._unsubscribers = [
+    this.#unsubscribers = [
       deleteAccountConsent.deleteAccountNotifier().subscribe(() => {
-        this._gameAction.next({type: 'DeleteAccount'});
+        this.#gameAction.next({type: 'DeleteAccount'});
       }),
       deleteAccountConsent.closeDialogNotifier().subscribe(() => {
-        this._gameAction.next({type: 'CancelAccountDeletion'});
+        this.#gameAction.next({type: 'CancelAccountDeletion'});
       }),
     ];
-    this._root.appendChild(deleteAccountConsent.getRootHTMLElement());
-    this._dialog = deleteAccountConsent;
+    this.#root.appendChild(deleteAccountConsent.getRootHTMLElement());
+    this.#dialog = deleteAccountConsent;
   }
 
   /**
@@ -133,16 +133,16 @@ export class DOMDialogs {
     this._removeCurrentDialog();
 
     const degreeOfDifficulty = new DifficultyDialog(resources);
-    this._unsubscribers = [
+    this.#unsubscribers = [
       degreeOfDifficulty.selectionCompleteNotifier().subscribe(difficulty => {
-        this._gameAction.next({type: 'DifficultySelectionComplete', difficulty});
+        this.#gameAction.next({type: 'DifficultySelectionComplete', difficulty});
       }),
       degreeOfDifficulty.closeDialogNotifier().subscribe(() => {
-        this._gameAction.next({type: 'DifficultySelectionCancel'});
+        this.#gameAction.next({type: 'DifficultySelectionCancel'});
       })
     ];
-    this._root.appendChild(degreeOfDifficulty.getRootHTMLElement());
-    this._dialog = degreeOfDifficulty;
+    this.#root.appendChild(degreeOfDifficulty.getRootHTMLElement());
+    this.#dialog = degreeOfDifficulty;
   }
 
   /**
@@ -154,13 +154,13 @@ export class DOMDialogs {
     this._removeCurrentDialog();
 
     const matchingDialog = new MatchingDialog(resources);
-    this._unsubscribers = [
+    this.#unsubscribers = [
       matchingDialog.matchingCanceledNotifier().subscribe(() => {
-        this._gameAction.next({type: 'MatchingCanceled'});
+        this.#gameAction.next({type: 'MatchingCanceled'});
       })
     ];
-    this._root.appendChild(matchingDialog.getRootHTMLElement());
-    this._dialog = matchingDialog;
+    this.#root.appendChild(matchingDialog.getRootHTMLElement());
+    this.#dialog = matchingDialog;
   }
 
   /**
@@ -176,7 +176,7 @@ export class DOMDialogs {
    * @return イベント通知ストリーム
    */
   gameActionNotifier(): Stream<GameAction> {
-    return this._gameAction;
+    return this.#gameAction;
   }
 
   /**
@@ -185,20 +185,20 @@ export class DOMDialogs {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
    * 現在表示しているダイアログを取り除く
    */
   _removeCurrentDialog(): void {
-    this._dialog && this._dialog.destructor();
-    this._dialog && this._dialog.getRootHTMLElement().remove();
-    this._dialog = null;
+    this.#dialog && this.#dialog.destructor();
+    this.#dialog && this.#dialog.getRootHTMLElement().remove();
+    this.#dialog = null;
 
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-    this._unsubscribers = [];
+    this.#unsubscribers = [];
   }
 }
