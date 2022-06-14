@@ -16,7 +16,7 @@ export class EnemyShinBraverView extends PlayerShinBraverView {
   /** モデルをビューに反映させる */
   engage(model: ShinBraverModel): void {
     super.engage(model);
-    this._group.position.x *= -1;
-    this._group.scale.x = -1;
+    this.getObject3D().position.x *= -1;
+    this.getObject3D().scale.x = -1;
   }
 }
