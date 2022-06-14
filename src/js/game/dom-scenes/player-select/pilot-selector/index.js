@@ -72,19 +72,19 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /**パイロットセレクタ */
 export class PilotSelector {
-  _pilotId: PilotId;
-  _exclusive: Exclusive;
-  _root: HTMLElement;
-  _pilotStatus: PilotStatus;
-  _pilotIcons: Array<{pilotId: PilotId, icon: PilotIcon}>;
-  _okButton: HTMLElement;
-  _prevButton: HTMLElement;
-  _changeValueSound: typeof Howl;
-  _decideSound: typeof Howl;
-  _change: StreamSource<PilotId>;
-  _decide: StreamSource<PilotId>;
-  _prev: StreamSource<void>;
-  _unsubscribers: Unsubscriber[];
+  #pilotId: PilotId;
+  #exclusive: Exclusive;
+  #root: HTMLElement;
+  #pilotStatus: PilotStatus;
+  #pilotIcons: Array<{pilotId: PilotId, icon: PilotIcon}>;
+  #okButton: HTMLElement;
+  #prevButton: HTMLElement;
+  #changeValueSound: typeof Howl;
+  #decideSound: typeof Howl;
+  #change: StreamSource<PilotId>;
+  #decide: StreamSource<PilotId>;
+  #prev: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -94,46 +94,46 @@ export class PilotSelector {
    * @param initialPilotId パイロットIDの初期値
    */
   constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
-    this._pilotId = initialPilotId;
-    this._exclusive = new Exclusive();
-    this._change = createStreamSource();
-    this._decide = createStreamSource();
-    this._prev = createStreamSource();
+    this.#pilotId = initialPilotId;
+    this.#exclusive = new Exclusive();
+    this.#change = createStreamSource();
+    this.#decide = createStreamSource();
+    this.#prev = createStreamSource();
 
-    this._changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+    this.#changeValueSound = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
-    this._decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+    this.#decideSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
 
     const dataIDs = {dummyStatus: domUuid(), icons: domUuid(), okButton: domUuid(), prevButton: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(dataIDs);
-    const elements = extractElements(this._root, dataIDs);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS_NAME;
+    this.#root.innerHTML = rootInnerHTML(dataIDs);
+    const elements = extractElements(this.#root, dataIDs);
 
-    this._pilotStatus = new PilotStatus();
-    this._pilotStatus.switch(this._pilotId);
-    replaceDOM(elements.dummyStatus, this._pilotStatus.getRootHTMLElement());
+    this.#pilotStatus = new PilotStatus();
+    this.#pilotStatus.switch(this.#pilotId);
+    replaceDOM(elements.dummyStatus, this.#pilotStatus.getRootHTMLElement());
 
-    this._pilotIcons = pilotIds.map(v => ({pilotId: v, icon: createPilotIcon(resources, v)}));
-    this._pilotIcons.forEach(v => {
+    this.#pilotIcons = pilotIds.map(v => ({pilotId: v, icon: createPilotIcon(resources, v)}));
+    this.#pilotIcons.forEach(v => {
       v.icon.selected(v.pilotId === initialPilotId);
       elements.icons.appendChild(v.icon.getRootHTMLElement());
     });
 
-    this._okButton = elements.okButton;
-    this._prevButton = elements.prevButton;
+    this.#okButton = elements.okButton;
+    this.#prevButton = elements.prevButton;
 
-    this._unsubscribers = [
-      ...this._pilotIcons.map(v =>
+    this.#unsubscribers = [
+      ...this.#pilotIcons.map(v =>
         v.icon.selectedNotifier().subscribe(() =>{
-          this._onPilotChange(v.pilotId);
+          this.#onPilotChange(v.pilotId);
         })),
-      pushDOMStream(this._okButton).subscribe(action => {
-        this._onOkButtonPush(action);
+      pushDOMStream(this.#okButton).subscribe(action => {
+        this.#onOkButtonPush(action);
       }),
-      pushDOMStream(this._prevButton).subscribe(action => {
-        this._onPrevButtonPush(action);
+      pushDOMStream(this.#prevButton).subscribe(action => {
+        this.#onPrevButtonPush(action);
       }),
     ];
   }
@@ -142,7 +142,7 @@ export class PilotSelector {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -153,17 +153,17 @@ export class PilotSelector {
    * @@aram pilotId 選択するパイロットID
    */
   show(pilotId?: PilotId): void {
-    this._root.className = ROOT_CLASS_NAME;
+    this.#root.className = ROOT_CLASS_NAME;
 
-    const selected = this._pilotIcons.find(v => v.pilotId === pilotId);
+    const selected = this.#pilotIcons.find(v => v.pilotId === pilotId);
     if (!pilotId || !selected) {
       return;
     }
 
-    this._pilotId = pilotId;
+    this.#pilotId = pilotId;
     selected.icon.selected(true);
-    this._pilotStatus.switch(pilotId);
-    this._pilotIcons.filter(v => v.pilotId !== pilotId)
+    this.#pilotStatus.switch(pilotId);
+    this.#pilotIcons.filter(v => v.pilotId !== pilotId)
       .forEach(v => {
         v.icon.selected(false);
       });
@@ -173,7 +173,7 @@ export class PilotSelector {
    * 本コンポネントを非表示にする
    */
   hidden(): void {
-    this._root.className = `${ROOT_CLASS_NAME}--hidden`;
+    this.#root.className = `${ROOT_CLASS_NAME}--hidden`;
   }
 
   /**
@@ -183,7 +183,7 @@ export class PilotSelector {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all(
-      this._pilotIcons.map(v => v.icon.waitUntilLoaded())
+      this.#pilotIcons.map(v => v.icon.waitUntilLoaded())
     );
   }
 
@@ -193,7 +193,7 @@ export class PilotSelector {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -202,7 +202,7 @@ export class PilotSelector {
    * @return 通知ストリーム
    */
   changeNotifier(): Stream<PilotId> {
-    return this._change;
+    return this.#change;
   }
 
   /**
@@ -211,7 +211,7 @@ export class PilotSelector {
    * @return 通知ストリーム
    */
   decideNotifier(): Stream<PilotId> {
-    return this._decide;
+    return this.#decide;
   }
 
   /**
@@ -219,7 +219,7 @@ export class PilotSelector {
    * @return 通知ストリーム
    */
   prevNotifier(): Stream<void> {
-    return this._prev;
+    return this.#prev;
   }
 
   /**
@@ -227,25 +227,25 @@ export class PilotSelector {
    *
    * @param pilotId 変更したパイロットのID
    */
-  _onPilotChange(pilotId: PilotId): void {
-    this._exclusive.execute(async (): Promise<void> => {
-      const selected = this._pilotIcons.find(v => v.pilotId === pilotId);
+  #onPilotChange(pilotId: PilotId): void {
+    this.#exclusive.execute(async (): Promise<void> => {
+      const selected = this.#pilotIcons.find(v => v.pilotId === pilotId);
       if (!selected) {
         return;
       }
 
-      if (this._pilotId !== pilotId) {
-        this._change.next(pilotId);
+      if (this.#pilotId !== pilotId) {
+        this.#change.next(pilotId);
       }
 
-      this._pilotId =pilotId;
-      this._pilotStatus.switch(pilotId);
+      this.#pilotId =pilotId;
+      this.#pilotStatus.switch(pilotId);
 
       selected.icon.pop();
-      this._changeValueSound.play();
+      this.#changeValueSound.play();
       selected.icon.selected(true);
 
-      this._pilotIcons.filter(v => v.pilotId !== pilotId)
+      this.#pilotIcons.filter(v => v.pilotId !== pilotId)
         .forEach(v => {
           v.icon.selected(false);
         });
@@ -257,12 +257,12 @@ export class PilotSelector {
    * 
    * @param action アクション
    */
-  _onOkButtonPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onOkButtonPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this._decideSound.play();
-      await pop(this._okButton);
-      this._decide.next(this._pilotId);
+      this.#decideSound.play();
+      await pop(this.#okButton);
+      this.#decide.next(this.#pilotId);
     });
   }
 
@@ -271,12 +271,12 @@ export class PilotSelector {
    * 
    * @param action アクション
    */
-  _onPrevButtonPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onPrevButtonPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this._changeValueSound.play();
-      await pop(this._prevButton);
-      this._prev.next();
+      this.#changeValueSound.play();
+      await pop(this.#prevButton);
+      this.#prev.next();
     });
   }
 }

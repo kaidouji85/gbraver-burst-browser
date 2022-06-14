@@ -16,12 +16,12 @@ import type {DOMDialog} from "../dialog";
  * 遊び方ダイアログ プレゼンテーション
  */
 export class HowToPlay implements DOMDialog {
-  _root: HTMLElement;
-  _closer: HTMLElement;
-  _close: StreamSource<void>;
-  _unsubscribers: Unsubscriber[];
-  _changeValue: typeof Howl;
-  _exclusive: Exclusive;
+  #root: HTMLElement;
+  #closer: HTMLElement;
+  #close: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
+  #changeValue: typeof Howl;
+  #exclusive: Exclusive;
 
   /**
    * コンストラクタ
@@ -33,12 +33,12 @@ export class HowToPlay implements DOMDialog {
     const closerId = domUuid();
     const closerPath = resources.paths.find(v => v.id === PathIds.CLOSER)
       ?.path ?? '';
-    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
 
-    this._root = document.createElement('div');
-    this._root.className = 'how-to-play';
-    this._root.innerHTML = `
+    this.#root = document.createElement('div');
+    this.#root.className = 'how-to-play';
+    this.#root.innerHTML = `
       <div class="how-to-play__background"></div>
       <img class="how-to-play__closer" alt="閉じる" src="${closerPath}" data-id="${closerId}"></img>
       <div class="how-to-play__dialog">
@@ -46,26 +46,26 @@ export class HowToPlay implements DOMDialog {
       </div>
     `;
 
-    this._closer = this._root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
-    this._close = createStreamSource();
+    this.#closer = this.#root.querySelector(`[data-id="${closerId}"]`) || document.createElement('div');
+    this.#close = createStreamSource();
 
-    this._unsubscribers = [
-      pushDOMStream(this._closer).subscribe(action => {
-        this._onCloserPush(action);
+    this.#unsubscribers = [
+      pushDOMStream(this.#closer).subscribe(action => {
+        this.#onCloserPush(action);
       }),
 
-      pushDOMStream(this._root).subscribe(action => {
-        this._onPushOutsideOfDialog(action);
+      pushDOMStream(this.#root).subscribe(action => {
+        this.#onPushOutsideOfDialog(action);
       })
     ];
-    this._exclusive = new Exclusive();
+    this.#exclusive = new Exclusive();
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     })
   }
@@ -76,7 +76,7 @@ export class HowToPlay implements DOMDialog {
    * @return 通知ストリーム
    */
   closeNotifier(): Stream<void> {
-    return this._close;
+    return this.#close;
   }
 
   /**
@@ -85,7 +85,7 @@ export class HowToPlay implements DOMDialog {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -93,14 +93,14 @@ export class HowToPlay implements DOMDialog {
    * 
    * @param action アクション
    */
-  _onCloserPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void>=> {
+  #onCloserPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void>=> {
       action.event.preventDefault();
       await Promise.all([
-        this._changeValue.play(),
-        pop(this._closer, 1.3)
+        this.#changeValue.play(),
+        pop(this.#closer, 1.3)
       ]);
-      this._close.next();
+      this.#close.next();
     });
   }
 
@@ -109,11 +109,11 @@ export class HowToPlay implements DOMDialog {
    * 
    * @param action アクション
    */
-  _onPushOutsideOfDialog(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void>=> {
+  #onPushOutsideOfDialog(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void>=> {
       action.event.preventDefault();
-      await this._changeValue.play();
-      this._close.next();
+      await this.#changeValue.play();
+      this.#close.next();
     });
   }
 }

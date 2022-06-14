@@ -73,28 +73,28 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** アームドーザステータス */
 export class ArmdozerStatus {
-  _root: HTMLElement;
-  _name: HTMLElement;
-  _hp: HTMLElement;
-  _power: HTMLElement;
-  _speed: HTMLElement;
-  _burst: HTMLElement;
+  #root: HTMLElement;
+  #name: HTMLElement;
+  #hp: HTMLElement;
+  #power: HTMLElement;
+  #speed: HTMLElement;
+  #burst: HTMLElement;
 
   /**
    * コンストラクタ
    */
   constructor() {
     const dataIDs = {name: domUuid(), hp: domUuid(), power: domUuid(), speed: domUuid(), burst: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(dataIDs);
-    const elements = extractElements(this._root, dataIDs);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS_NAME;
+    this.#root.innerHTML = rootInnerHTML(dataIDs);
+    const elements = extractElements(this.#root, dataIDs);
 
-    this._name = elements.name
-    this._hp= elements.hp;
-    this._power = elements.power;
-    this._speed= elements.speed;
-    this._burst = elements.burst;
+    this.#name = elements.name
+    this.#hp= elements.hp;
+    this.#power = elements.power;
+    this.#speed= elements.speed;
+    this.#burst = elements.burst;
   }
 
   /**
@@ -103,7 +103,7 @@ export class ArmdozerStatus {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -117,11 +117,11 @@ export class ArmdozerStatus {
       return;
     }
 
-    this._name.innerText = target.name;
-    this._hp.innerText = `${target.maxHp}`;
-    this._power.innerText = `${target.power}`;
-    this._speed.innerText = `${target.speed}`;
-    this._burst.innerHTML = burstTemplate(target.burst)
+    this.#name.innerText = target.name;
+    this.#hp.innerText = `${target.maxHp}`;
+    this.#power.innerText = `${target.power}`;
+    this.#speed.innerText = `${target.speed}`;
+    this.#burst.innerHTML = burstTemplate(target.burst)
       .map(v => `<span class="${ROOT_CLASS_NAME}__burst__content__line">${v}</span>`)
       .reduce((a, b) => a + b);
   }

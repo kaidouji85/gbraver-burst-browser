@@ -19,7 +19,7 @@ type Param = {
  * 対戦カード
  */
 export class MatchCard implements DOMScene {
-  _presentation: MatchCardPresentation;
+  #presentation: MatchCardPresentation;
 
   /**
    * コンストラクタ
@@ -27,7 +27,7 @@ export class MatchCard implements DOMScene {
    * @param param パラメータ
    */
   constructor(param: Param): void {
-    this._presentation = new MatchCardPresentation(param.resources, param.player, param.enemy, param.caption);
+    this.#presentation = new MatchCardPresentation(param.resources, param.player, param.enemy, param.caption);
   }
   
   /**
@@ -43,7 +43,7 @@ export class MatchCard implements DOMScene {
    * @return 待機結果
    */
   waitUntilLoaded(): Promise<void> {
-    return this._presentation.waitUntilLoaded();
+    return this.#presentation.waitUntilLoaded();
   }
 
   /**
@@ -52,6 +52,6 @@ export class MatchCard implements DOMScene {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._presentation.getRootHTMLElement();
+    return this.#presentation.getRootHTMLElement();
   }
 }

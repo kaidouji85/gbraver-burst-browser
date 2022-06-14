@@ -62,14 +62,14 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** マッチング ダイアログ */
 export class MatchingDialog implements DOMDialog {
-  _root: HTMLElement;
-  _closer: HTMLImageElement;
-  _cancel: HTMLElement;
-  _changeValue: typeof Howl;
-  _pushButton: typeof Howl;
-  _exclusive: Exclusive;
-  _matchingCanceled: StreamSource<void>;
-  _unsubscribers: Unsubscriber[];
+  #root: HTMLElement;
+  #closer: HTMLImageElement;
+  #cancel: HTMLElement;
+  #changeValue: typeof Howl;
+  #pushButton: typeof Howl;
+  #exclusive: Exclusive;
+  #matchingCanceled: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -78,22 +78,22 @@ export class MatchingDialog implements DOMDialog {
    */
   constructor(resources: Resources) {
     const ids = {closer: domUuid(), cancel: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS;
-    this._root.innerHTML = rootInnerHTML(ids, resources);
-    const elements = extractElements(this._root, ids);
-    this._closer = elements.closer;
-    this._cancel = elements.cancel;
-    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
-    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
-    this._exclusive = new Exclusive();
-    this._matchingCanceled = createStreamSource();
-    this._unsubscribers = [
-      pushDOMStream(this._closer).subscribe(action => {
-        this._onCloserPush(action);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS;
+    this.#root.innerHTML = rootInnerHTML(ids, resources);
+    const elements = extractElements(this.#root, ids);
+    this.#closer = elements.closer;
+    this.#cancel = elements.cancel;
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#exclusive = new Exclusive();
+    this.#matchingCanceled = createStreamSource();
+    this.#unsubscribers = [
+      pushDOMStream(this.#closer).subscribe(action => {
+        this.#onCloserPush(action);
       }),
-      pushDOMStream(this._cancel).subscribe(action => {
-        this._onCancelPush(action);
+      pushDOMStream(this.#cancel).subscribe(action => {
+        this.#onCancelPush(action);
       })
     ];
   }
@@ -102,7 +102,7 @@ export class MatchingDialog implements DOMDialog {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -113,7 +113,7 @@ export class MatchingDialog implements DOMDialog {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -122,7 +122,7 @@ export class MatchingDialog implements DOMDialog {
    * @return 通知ストリーム
    */
   matchingCanceledNotifier(): Stream<void> {
-    return this._matchingCanceled;
+    return this.#matchingCanceled;
   }
 
   /**
@@ -130,13 +130,13 @@ export class MatchingDialog implements DOMDialog {
    *
    * @param action アクション
    */
-  _onCloserPush(action: PushDOM): void {
+  #onCloserPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
-      this._changeValue.play();
-      await pop(this._closer, 1.3);
-      this._matchingCanceled.next();
+    this.#exclusive.execute(async () => {
+      this.#changeValue.play();
+      await pop(this.#closer, 1.3);
+      this.#matchingCanceled.next();
     });
   }
 
@@ -145,13 +145,13 @@ export class MatchingDialog implements DOMDialog {
    *
    * @param action アクション
    */
-  _onCancelPush(action: PushDOM): void {
+  #onCancelPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
-      this._pushButton.play();
-      await pop(this._cancel);
-      this._matchingCanceled.next();
+    this.#exclusive.execute(async () => {
+      this.#pushButton.play();
+      await pop(this.#cancel);
+      this.#matchingCanceled.next();
     });
   }
 }

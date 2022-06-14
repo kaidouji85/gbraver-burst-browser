@@ -7,7 +7,7 @@ import {PathIds} from "../../../resource/path";
  * ランドスケープ警告 プレゼンテーション
  */
 export class PlayInLandscapePresentation {
-  _root: HTMLElement;
+  #root: HTMLElement;
 
   /**
    * コンストラクタ
@@ -20,9 +20,9 @@ export class PlayInLandscapePresentation {
       ? playInLandscapeResource.path
       : '';
 
-    this._root = document.createElement('div');
-    this._root.className = 'play-in-landscape';
-    this._root.innerHTML = `
+    this.#root = document.createElement('div');
+    this.#root.className = 'play-in-landscape';
+    this.#root.innerHTML = `
       <span class="play-in-landscape__caption">横向きでプレイしてください</span>
       <img class="play-in-landscape__image" src = "${playInLandscapePath}"/>
     `;
@@ -34,6 +34,6 @@ export class PlayInLandscapePresentation {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 }

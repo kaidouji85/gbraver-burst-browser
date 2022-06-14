@@ -22,7 +22,7 @@ function rootInnerHTML(caption: string): string {
 
 /** 作業待ち ダイアログ */
 export class WaitingDialog implements DOMDialog {
-  _root: HTMLElement;
+  #root: HTMLElement;
 
   /**
    * コンストラクタ
@@ -30,9 +30,9 @@ export class WaitingDialog implements DOMDialog {
    * @param caption ダイアログに表示する文言
    */
   constructor(caption: string) {
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(caption);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS_NAME;
+    this.#root.innerHTML = rootInnerHTML(caption);
   }
 
   /**
@@ -48,6 +48,6 @@ export class WaitingDialog implements DOMDialog {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 }

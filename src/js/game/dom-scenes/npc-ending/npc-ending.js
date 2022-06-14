@@ -59,16 +59,16 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** NPCルート エンディング */
 export class NPCEnding implements DOMScene {
-  _root: HTMLElement;
-  _isEndCardLoaded: Promise<void>;
-  _isEndLoaded: Promise<void>;
-  _isLogoLoader: Promise<void>;
-  _pushButtonSound: typeof Howl;
-  _bgm: BGMManager;
-  _endingBGM: SoundResource;
-  _canOperation: boolean;
-  _endNPCEnding: StreamSource<void>;
-  _unsubscriber: Unsubscriber[];
+  #root: HTMLElement;
+  #isEndCardLoaded: Promise<void>;
+  #isEndLoaded: Promise<void>;
+  #isLogoLoader: Promise<void>;
+  #pushButtonSound: typeof Howl;
+  #bgm: BGMManager;
+  #endingBGM: SoundResource;
+  #canOperation: boolean;
+  #endNPCEnding: StreamSource<void>;
+  #unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -78,43 +78,43 @@ export class NPCEnding implements DOMScene {
    */
   constructor(resources: Resources, bgm: BGMManager) {
     const ids = {end: domUuid(), logo: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS;
-    this._root.innerHTML = rootInnerHTML(ids);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS;
+    this.#root.innerHTML = rootInnerHTML(ids);
 
-    const elements = extractElements(this._root, ids);
+    const elements = extractElements(this.#root, ids);
     const titleBackImage = new Image();
     titleBackImage.src = resources.paths.find(v => v.id === PathIds.END_CARD)?.path ?? '';
-    this._isEndCardLoaded = waitElementLoaded(titleBackImage).then(() => {
-      this._root.style.backgroundImage = `url(${titleBackImage.src})`;
+    this.#isEndCardLoaded = waitElementLoaded(titleBackImage).then(() => {
+      this.#root.style.backgroundImage = `url(${titleBackImage.src})`;
     });
-    this._isEndLoaded = waitElementLoaded(elements.end);
+    this.#isEndLoaded = waitElementLoaded(elements.end);
     elements.end.src = resources.paths.find(v => v.id === PathIds.END)?.path ?? '';
-    this._isLogoLoader = waitElementLoaded(elements.logo);
+    this.#isLogoLoader = waitElementLoaded(elements.logo);
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
 
-    this._pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
-    this._bgm = bgm;
-    this._endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.NPC_ENDING) ?? createEmptySoundResource();
-    this._canOperation = true;
-    this._endNPCEnding = createStreamSource();
-    this._unsubscriber = [
-      pushDOMStream(this._root).subscribe(action => {
-        this._onScreenPush(action);
+    this.#pushButtonSound = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#bgm = bgm;
+    this.#endingBGM = resources.sounds.find(v => v.id === SOUND_IDS.NPC_ENDING) ?? createEmptySoundResource();
+    this.#canOperation = true;
+    this.#endNPCEnding = createStreamSource();
+    this.#unsubscriber = [
+      pushDOMStream(this.#root).subscribe(action => {
+        this.#onScreenPush(action);
       }),
     ];
   }
 
   /** @override */
   destructor(): void {
-    this._unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach(v => {
       v.unsubscribe();
     })
   }
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -123,8 +123,8 @@ export class NPCEnding implements DOMScene {
    * @return BGM再生が完了したら発火するPromise
    */
   async playBGM(): Promise<void> {
-    await this._bgm.do(play(this._endingBGM));
-    await this._bgm.do(fadeIn);
+    await this.#bgm.do(play(this.#endingBGM));
+    await this.#bgm.do(fadeIn);
   }
 
   /**
@@ -133,7 +133,7 @@ export class NPCEnding implements DOMScene {
    * @return 通知ストリーム
    */
   endNPCEndingNotifier(): Stream<void> {
-    return this._endNPCEnding;
+    return this.#endNPCEnding;
   }
 
   /**
@@ -142,7 +142,7 @@ export class NPCEnding implements DOMScene {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await Promise.all([this._isEndLoaded, this._isEndCardLoaded, this._isLogoLoader]);
+    await Promise.all([this.#isEndLoaded, this.#isEndCardLoaded, this.#isLogoLoader]);
   }
 
   /**
@@ -150,15 +150,15 @@ export class NPCEnding implements DOMScene {
    *
    * @param action アクション
    */
-  _onScreenPush(action: PushDOM): void {
-    if (!this._canOperation) {
+  #onScreenPush(action: PushDOM): void {
+    if (!this.#canOperation) {
       return;
     }
 
-    this._canOperation = false;
+    this.#canOperation = false;
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._pushButtonSound.play();
-    this._endNPCEnding.next();
+    this.#pushButtonSound.play();
+    this.#endNPCEnding.next();
   }
 }

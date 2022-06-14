@@ -79,17 +79,17 @@ type Elements = {
 
 /** アカウント削除同意ダイアログ */
 export class DeleteAccountConsentDialog implements DOMDialog {
-  _root: HTMLElement;
-  _backGround: HTMLElement;
-  _closer: HTMLImageElement;
-  _deleteAccountButton: HTMLButtonElement;
-  _closeButton: HTMLButtonElement;
-  _deleteAccount: StreamSource<void>;
-  _closeDialog: StreamSource<void>;
-  _unsubscribers: Unsubscriber[];
-  _changeValue: typeof Howl;
-  _pushButton: typeof Howl;
-  _exclusive: Exclusive;
+  #root: HTMLElement;
+  #backGround: HTMLElement;
+  #closer: HTMLImageElement;
+  #deleteAccountButton: HTMLButtonElement;
+  #closeButton: HTMLButtonElement;
+  #deleteAccount: StreamSource<void>;
+  #closeDialog: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
+  #changeValue: typeof Howl;
+  #pushButton: typeof Howl;
+  #exclusive: Exclusive;
 
   /**
    * コンストラクタ
@@ -98,50 +98,50 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    */
   constructor(resources: Resources) {
     const ids = {backGround: domUuid(), closer: domUuid(), deleteAccountButton: domUuid(), closeButton: domUuid()};
-    this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(ids, resources);
-    this._root.className = ROOT_CLASS;
+    this.#root = document.createElement('div');
+    this.#root.innerHTML = rootInnerHTML(ids, resources);
+    this.#root.className = ROOT_CLASS;
     
-    const elements = extractElements(this._root, ids);
-    this._backGround = elements.backGround;
-    this._closer = elements.closer;
-    this._deleteAccountButton = elements.deleteAccountButton;
-    this._closeButton = elements.closeButton;
+    const elements = extractElements(this.#root, ids);
+    this.#backGround = elements.backGround;
+    this.#closer = elements.closer;
+    this.#deleteAccountButton = elements.deleteAccountButton;
+    this.#closeButton = elements.closeButton;
     
-    this._deleteAccount = createStreamSource();
-    this._closeDialog = createStreamSource();
-    this._unsubscribers = [
-      pushDOMStream(this._backGround).subscribe(action => {
-        this._onPushOutsideOfDialog(action);  
+    this.#deleteAccount = createStreamSource();
+    this.#closeDialog = createStreamSource();
+    this.#unsubscribers = [
+      pushDOMStream(this.#backGround).subscribe(action => {
+        this.#onPushOutsideOfDialog(action);
       }),
-      pushDOMStream(this._closer).subscribe(action => {
-        this._onCloserPush(action);  
+      pushDOMStream(this.#closer).subscribe(action => {
+        this.#onCloserPush(action);
       }),
-      pushDOMStream(this._deleteAccountButton).subscribe(action => {
-        this._onDeleteAccountButtonPush(action);  
+      pushDOMStream(this.#deleteAccountButton).subscribe(action => {
+        this.#onDeleteAccountButtonPush(action);
       }),
-      pushDOMStream(this._closeButton).subscribe(action => {
-        this._onCloseButtonPush(action);  
+      pushDOMStream(this.#closeButton).subscribe(action => {
+        this.#onCloseButtonPush(action);
       }),
     ];
 
-    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
-    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
-    this._exclusive = new Exclusive();
+    this.#exclusive = new Exclusive();
   }
 
   /** @override */
   destructor(): void {
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -150,7 +150,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    * @return 通知ストリーム
    */
   deleteAccountNotifier(): Stream<void> {
-    return this._deleteAccount;
+    return this.#deleteAccount;
   }
 
   /**
@@ -159,7 +159,7 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    * @return 通知ストリーム
    */
   closeDialogNotifier(): Stream<void> {
-    return this._closeDialog;
+    return this.#closeDialog;
   }
 
   /**
@@ -167,11 +167,11 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    * 
    * @param action アクション 
    */
-   _onPushOutsideOfDialog(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+   #onPushOutsideOfDialog(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.stopPropagation();
-      await this._changeValue.play();
-      this._closeDialog.next();
+      await this.#changeValue.play();
+      this.#closeDialog.next();
     });
   }
 
@@ -180,15 +180,15 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    * 
    * @param action アクション 
    */
-  _onCloserPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onCloserPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
       action.event.stopPropagation();
       await Promise.all([
-        pop(this._closer, 1.3),
-        this._changeValue.play()
+        pop(this.#closer, 1.3),
+        this.#changeValue.play()
       ]);
-      this._closeDialog.next();
+      this.#closeDialog.next();
     });
   }
 
@@ -197,15 +197,15 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    * 
    * @param action アクション 
    */
-  _onDeleteAccountButtonPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onDeleteAccountButtonPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
       action.event.stopPropagation();
       await Promise.all([
-        pop(this._deleteAccountButton),
-        this._pushButton.play(),
+        pop(this.#deleteAccountButton),
+        this.#pushButton.play(),
       ]);
-      this._deleteAccount.next();
+      this.#deleteAccount.next();
     }); 
   }
 
@@ -214,15 +214,15 @@ export class DeleteAccountConsentDialog implements DOMDialog {
    * 
    * @param action アクション 
    */
-  _onCloseButtonPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onCloseButtonPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
       action.event.stopPropagation();
       await Promise.all([
-        pop(this._closeButton),
-        this._changeValue.play()
+        pop(this.#closeButton),
+        this.#changeValue.play()
       ]);
-      this._closeDialog.next();
+      this.#closeDialog.next();
     });
   }
 }

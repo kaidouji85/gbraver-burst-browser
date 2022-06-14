@@ -1,5 +1,4 @@
 // @flow
-
 import {createBrowserSDK} from "@gbraver-burst-network/browser-sdk";
 import '../css/style.css';
 import {isMobile} from "./device-ditect/is-mobile";

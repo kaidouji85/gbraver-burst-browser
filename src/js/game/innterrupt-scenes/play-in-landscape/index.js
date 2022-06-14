@@ -7,7 +7,7 @@ import {PlayInLandscapePresentation} from "./presentation";
  * ランドスケープ警告
  */
 export class PlayInLandscape {
-  _presentation: PlayInLandscapePresentation;
+  #presentation: PlayInLandscapePresentation;
 
   /**
    * コンストラクタ
@@ -15,7 +15,7 @@ export class PlayInLandscape {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._presentation = new PlayInLandscapePresentation(resources);
+    this.#presentation = new PlayInLandscapePresentation(resources);
   }
 
   /**
@@ -24,6 +24,6 @@ export class PlayInLandscape {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._presentation.getRootHTMLElement();
+    return this.#presentation.getRootHTMLElement();
   }
 }
