@@ -22,44 +22,44 @@ import type {LightningDozerView} from "./lightning-dozer-view";
  * プレイヤー側のライトニングドーザビュー
  */
 export class PlayerLightingDozerView implements LightningDozerView {
-  _group: typeof THREE.Group;
-  _stand: ArmdozerAnimation;
-  _hmCharge: ArmdozerAnimation;
-  _hmAttack: ArmdozerAnimation;
-  _hmToStand: ArmdozerAnimation;
-  _knockBack: ArmdozerAnimation;
-  _down: ArmdozerAnimation;
-  _gutsUp: ArmdozerAnimation;
-  _gutsDown: ArmdozerAnimation;
-  _gutsToStand: ArmdozerAnimation;
-  _guard: ArmdozerAnimation;
-  _backStep: ArmdozerAnimation;
-  _frontStep: ArmdozerAnimation;
+  #group: typeof THREE.Group;
+  #stand: ArmdozerAnimation;
+  #hmCharge: ArmdozerAnimation;
+  #hmAttack: ArmdozerAnimation;
+  #hmToStand: ArmdozerAnimation;
+  #knockBack: ArmdozerAnimation;
+  #down: ArmdozerAnimation;
+  #gutsUp: ArmdozerAnimation;
+  #gutsDown: ArmdozerAnimation;
+  #gutsToStand: ArmdozerAnimation;
+  #guard: ArmdozerAnimation;
+  #backStep: ArmdozerAnimation;
+  #frontStep: ArmdozerAnimation;
 
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
-    this._stand = lightningDozerStand(resources);
-    this._hmCharge = lightningDozerHmCharge(resources);
-    this._hmAttack = lightningDozerHmAttack(resources);
-    this._hmToStand = lightningDozerHmToStand(resources);
-    this._knockBack = lightningDozerKnockBack(resources);
-    this._down = lightningDozerDown(resources);
-    this._gutsUp = lightningDozerGutsUp(resources);
-    this._gutsDown = lightningDozerGutsDown(resources);
-    this._gutsToStand = lightningDozerGutsToStand(resources);
-    this._guard = lightningDozerGuard(resources);
-    this._backStep = lightningDozerBackStep(resources);
-    this._frontStep = lightningDozerFrontStep(resources);
+    this.#stand = lightningDozerStand(resources);
+    this.#hmCharge = lightningDozerHmCharge(resources);
+    this.#hmAttack = lightningDozerHmAttack(resources);
+    this.#hmToStand = lightningDozerHmToStand(resources);
+    this.#knockBack = lightningDozerKnockBack(resources);
+    this.#down = lightningDozerDown(resources);
+    this.#gutsUp = lightningDozerGutsUp(resources);
+    this.#gutsDown = lightningDozerGutsDown(resources);
+    this.#gutsToStand = lightningDozerGutsToStand(resources);
+    this.#guard = lightningDozerGuard(resources);
+    this.#backStep = lightningDozerBackStep(resources);
+    this.#frontStep = lightningDozerFrontStep(resources);
 
-    this._getAllMeshes().forEach(v => {
-      this._group.add(v.getObject3D());
+    this.#getAllMeshes().forEach(v => {
+      this.#group.add(v.getObject3D());
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._getAllMeshes().forEach(v => {
+    this.#getAllMeshes().forEach(v => {
       v.destructor();
     });
   }
@@ -70,17 +70,17 @@ export class PlayerLightingDozerView implements LightningDozerView {
    * @param model モデル
    */
   engage(model: LightningDozerModel): void {
-    this._group.position.set(
+    this.#group.position.set(
       model.position.x,
       model.position.y,
       model.position.z
     );
 
-    const activeMesh = this._getActiveMesh(model.animation.type);
+    const activeMesh = this.#getActiveMesh(model.animation.type);
     activeMesh.visible(true);
     activeMesh.animate(model.animation.frame);
 
-    const disActiveMeshes = this._getAllMeshes()
+    const disActiveMeshes = this.#getAllMeshes()
       .filter(v => v !== activeMesh);
     disActiveMeshes.forEach(v => {
       v.visible(false);
@@ -93,7 +93,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
    * @param object オブジェクト
    */
   addObject3D(object: typeof THREE.Object3D): void {
-    this._group.add(object);
+    this.#group.add(object);
   }
 
   /**
@@ -102,7 +102,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -111,7 +111,7 @@ export class PlayerLightingDozerView implements LightningDozerView {
    * @param camera カメラ
    */
   lookAt(camera: typeof THREE.Camera): void {
-    this._group.quaternion.copy(camera.quaternion);
+    this.#group.quaternion.copy(camera.quaternion);
   }
 
   /**
@@ -119,20 +119,20 @@ export class PlayerLightingDozerView implements LightningDozerView {
    *
    * @return 本ビューの全メッシュ
    */
-  _getAllMeshes(): ArmdozerAnimation[] {
+  #getAllMeshes(): ArmdozerAnimation[] {
     return [
-      this._stand,
-      this._hmCharge,
-      this._hmAttack,
-      this._hmToStand,
-      this._knockBack,
-      this._down,
-      this._gutsUp,
-      this._gutsDown,
-      this._gutsToStand,
-      this._guard,
-      this._backStep,
-      this._frontStep,
+      this.#stand,
+      this.#hmCharge,
+      this.#hmAttack,
+      this.#hmToStand,
+      this.#knockBack,
+      this.#down,
+      this.#gutsUp,
+      this.#gutsDown,
+      this.#gutsToStand,
+      this.#guard,
+      this.#backStep,
+      this.#frontStep,
     ];
   }
 
@@ -142,33 +142,33 @@ export class PlayerLightingDozerView implements LightningDozerView {
    * @param animationType アニメ種別
    * @return アニメ種別に対応するメッシュ
    */
-  _getActiveMesh(animationType: AnimationType): ArmdozerAnimation {
+  #getActiveMesh(animationType: AnimationType): ArmdozerAnimation {
     switch(animationType) {
       case 'HM_CHARGE':
-        return this._hmCharge;
+        return this.#hmCharge;
       case 'HM_ATTACK':
-        return this._hmAttack;
+        return this.#hmAttack;
       case 'HM_TO_STAND':
-        return this._hmToStand;
+        return this.#hmToStand;
       case 'KNOCK_BACK':
-        return this._knockBack;
+        return this.#knockBack;
       case 'DOWN':
-        return this._down;
+        return this.#down;
       case 'GUTS_UP':
-        return this._gutsUp;
+        return this.#gutsUp;
       case 'GUTS_DOWN':
-        return this._gutsDown;
+        return this.#gutsDown;
       case 'GUTS_TO_STAND':
-        return this._gutsToStand;
+        return this.#gutsToStand;
       case 'GUARD':
-        return this._guard;
+        return this.#guard;
       case 'BACK_STEP':
-        return this._backStep;
+        return this.#backStep;
       case 'FRONT_STEP':
-        return this._frontStep;
+        return this.#frontStep;
       case 'STAND':
       default:
-        return this._stand;
+        return this.#stand;
     }
   }
 }

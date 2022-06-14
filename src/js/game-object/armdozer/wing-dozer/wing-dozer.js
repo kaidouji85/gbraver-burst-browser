@@ -28,10 +28,10 @@ import type {WingDozerView} from "./view/wing-dozer-view";
  * ウィングドーザ
  */
 export class WingDozer implements ArmDozerSprite {
-  _model: WingDozerModel;
-  _view: WingDozerView;
-  _sounds: WingDozerSounds;
-  _unsubscriber: Unsubscriber;
+  #model: WingDozerModel;
+  #view: WingDozerView;
+  #sounds: WingDozerSounds;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -41,14 +41,14 @@ export class WingDozer implements ArmDozerSprite {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: WingDozerView, resources: Resources, gameObjectAction: Stream<GameObjectAction>): void {
-    this._model = createInitialValue();
-    this._view = view;
-    this._sounds = new WingDozerSounds(resources);
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue();
+    this.#view = view;
+    this.#sounds = new WingDozerSounds(resources);
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate();
+        this.#onUpdate();
       } else if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
@@ -57,8 +57,8 @@ export class WingDozer implements ArmDozerSprite {
    * デストラクタ
    */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -67,7 +67,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -76,7 +76,7 @@ export class WingDozer implements ArmDozerSprite {
    * @param object オブジェクト
    */
   addObject3D(object: typeof THREE.Object3D): void {
-    this._view.addObject3D(object);
+    this.#view.addObject3D(object);
   }
 
   /**
@@ -85,7 +85,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   dash(): Animate {
-    return dash(this._model, this._sounds);
+    return dash(this.#model, this.#sounds);
   }
 
   /**
@@ -94,7 +94,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   dashToStand(): Animate {
-    return dashToStand(this._model, this._sounds);
+    return dashToStand(this.#model, this.#sounds);
   }
 
   /**
@@ -103,7 +103,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   knockBack(): Animate {
-    return knockBack(this._model);
+    return knockBack(this.#model);
   }
 
   /**
@@ -112,7 +112,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   knockBackToStand(): Animate {
-    return knockBackToStand(this._model, this._sounds);
+    return knockBackToStand(this.#model, this.#sounds);
   }
 
   /**
@@ -121,7 +121,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   guard(): Animate {
-    return guard(this._model);
+    return guard(this.#model);
   }
 
   /** 
@@ -130,7 +130,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   guardToStand(): Animate {
-    return guardToStand(this._model, this._sounds);
+    return guardToStand(this.#model, this.#sounds);
   }
 
   /**
@@ -139,7 +139,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   avoid(): Animate {
-    return avoid(this._model, this._sounds);
+    return avoid(this.#model, this.#sounds);
   }
 
   /**
@@ -148,7 +148,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   avoidToStand(): Animate {
-    return frontStep(this._model, this._sounds);
+    return frontStep(this.#model, this.#sounds);
   }
 
   /**
@@ -157,7 +157,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   down(): Animate {
-    return down(this._model);
+    return down(this.#model);
   }
 
   /**
@@ -166,7 +166,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   charge(): Animate {
-    return charge(this._model, this._sounds);
+    return charge(this.#model, this.#sounds);
   }
 
   /**
@@ -175,7 +175,7 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   upper(): Animate {
-    return upper(this._model);
+    return upper(this.#model);
   }
 
   /**
@@ -184,14 +184,14 @@ export class WingDozer implements ArmDozerSprite {
    * @return アニメーション
    */
   upperToStand(): Animate {
-    return upperToStand(this._model, this._sounds);
+    return upperToStand(this.#model, this.#sounds);
   }
 
   /**
    * アップデート時の処理
    */
-  _onUpdate(): void {
-    this._view.engage(this._model);
+  #onUpdate(): void {
+    this.#view.engage(this.#model);
   }
 
   /**
@@ -199,7 +199,7 @@ export class WingDozer implements ArmDozerSprite {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+  #onPreRender(action: PreRender): void {
+    this.#view.lookAt(action.camera);
   }
 }
