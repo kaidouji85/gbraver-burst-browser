@@ -38,8 +38,8 @@ type Param = GamePropsGeneratorParam;
 
 /** ゲーム管理オブジェクト */
 export class Game {
-  _props: GameProps;
-  _unsubscriber: Unsubscriber[];
+  #props: GameProps;
+  #unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -47,88 +47,88 @@ export class Game {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this._props = generateGameProps(param);
+    this.#props = generateGameProps(param);
     const body = document.body || document.createElement('div');
     const elements = [
-      this._props.fader.getRootHTMLElement(),
-      this._props.interruptScenes.getRootHTMLElement(),
-      this._props.domDialogs.getRootHTMLElement(),
-      this._props.domScenes.getRootHTMLElement(),
-      this._props.domFloaters.getRootHTMLElement(),
-      this._props.tdScenes.getRendererDOM()];
+      this.#props.fader.getRootHTMLElement(),
+      this.#props.interruptScenes.getRootHTMLElement(),
+      this.#props.domDialogs.getRootHTMLElement(),
+      this.#props.domScenes.getRootHTMLElement(),
+      this.#props.domFloaters.getRootHTMLElement(),
+      this.#props.tdScenes.getRendererDOM()];
     elements.forEach(element => {
       body.appendChild(element);
     });
-    const suddenlyBattleEnd = this._props.suddenlyBattleEnd.stream()
+    const suddenlyBattleEnd = this.#props.suddenlyBattleEnd.stream()
       .chain(map(() => ({type: 'SuddenlyBattleEnd'})));
-    const webSocketAPIError = createStream(this._props.api.websocketErrorNotifier())
+    const webSocketAPIError = createStream(this.#props.api.websocketErrorNotifier())
       .chain(map(error => ({type: 'WebSocketAPIError', error})))
-    const WebSocketAPIUnintentionalClose = createStream(this._props.api.websocketUnintentionalCloseNotifier())
+    const WebSocketAPIUnintentionalClose = createStream(this.#props.api.websocketUnintentionalCloseNotifier())
       .chain(map(error => ({type: 'WebSocketAPIUnintentionalClose', error})));
     const gameActionStreams = [
-      this._props.tdScenes.gameActionNotifier(),
-      this._props.domScenes.gameActionNotifier(),
-      this._props.domDialogs.gameActionNotifier(),
-      this._props.domFloaters.gameActionNotifier(),
+      this.#props.tdScenes.gameActionNotifier(),
+      this.#props.domScenes.gameActionNotifier(),
+      this.#props.domDialogs.gameActionNotifier(),
+      this.#props.domFloaters.gameActionNotifier(),
       suddenlyBattleEnd,
       webSocketAPIError,
       WebSocketAPIUnintentionalClose
     ];
-    this._unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
+    this.#unsubscriber = gameActionStreams.map(v => v.subscribe(action => {
       if (action.type === 'ReloadRequest') { 
-        onReloadRequest(this._props);
+        onReloadRequest(this.#props);
       } else if (action.type === 'ExitMailVerifiedIncomplete') {
-        onExitMailVerifiedIncomplete(this._props);
+        onExitMailVerifiedIncomplete(this.#props);
       } else if (action.type === 'EndBattle') {
-        onEndBattle(this._props, action);
+        onEndBattle(this.#props, action);
       } else if (action.type === 'SuddenlyBattleEnd') { 
-        onSuddenlyEndBattle(this._props);
+        onSuddenlyEndBattle(this.#props);
       } else if (action.type === 'PostBattleAction') { 
-        onPostBattleAction(this._props, action);
+        onPostBattleAction(this.#props, action);
       } else if (action.type === 'ArcadeStart') {
-        onArcadeStart(this._props);
+        onArcadeStart(this.#props);
       } else if (action.type === 'CasualMatchStart') {
-        onCasualMatchStart(this._props);
+        onCasualMatchStart(this.#props);
       } else if (action.type === 'MatchingCanceled') {
-        onMatchingCanceled(this._props);
+        onMatchingCanceled(this.#props);
       } else if (action.type === 'ShowHowToPlay') {
-        onShowHowToPlay(this._props);
+        onShowHowToPlay(this.#props);
       } else if (action.type === 'SelectionComplete') {
-        onSelectionComplete(this._props, action);
+        onSelectionComplete(this.#props, action);
       } else if (action.type === 'SelectionCancel') {
-        onSelectionCancel(this._props);
+        onSelectionCancel(this.#props);
       } else if (action.type === 'DifficultySelectionComplete') {
-        onDifficultySelectionComplete(this._props, action);
+        onDifficultySelectionComplete(this.#props, action);
       } else if (action.type === 'DifficultySelectionCancel') {
-        onDifficultySelectionCancel(this._props);
+        onDifficultySelectionCancel(this.#props);
       } else if (action.type === 'EndNPCEnding') {
-        onEndNPCEnding(this._props);
+        onEndNPCEnding(this.#props);
       } else if (action.type === 'EndHowToPlay') {
-        onEndHowToPlay(this._props);
+        onEndHowToPlay(this.#props);
       } else if (action.type === 'UniversalLogin') {
-        onUniversalLogin(this._props);
+        onUniversalLogin(this.#props);
       } else if (action.type === 'Logout') {
-        onLogout(this._props);
+        onLogout(this.#props);
       } else if (action.type === 'AccountDeleteConsent') {
-        onAccountDeleteConsent(this._props);
+        onAccountDeleteConsent(this.#props);
       } else if (action.type === 'DeleteAccount') {
-        onDeleteAccount(this._props);
+        onDeleteAccount(this.#props);
       } else if (action.type === 'CancelAccountDeletion') {
-        onCancelAccountDeletion(this._props);
+        onCancelAccountDeletion(this.#props);
       } else if (action.type === 'LoginCancel') {
-        onLoginCancel(this._props);
+        onLoginCancel(this.#props);
       } else if (action.type === 'EndNetworkError') {
-        onEndNetworkError(this._props, action);
+        onEndNetworkError(this.#props, action);
       } else if (action.type === 'WebSocketAPIError') {
-        onWebSocketAPIError(this._props, action);
+        onWebSocketAPIError(this.#props, action);
       } else if (action.type === 'WebSocketAPIUnintentionalClose') {
-        onWebSocketAPIUnintentionalClose(this._props, action);
+        onWebSocketAPIUnintentionalClose(this.#props, action);
       } else if (action.type === 'ConfigChangeStart') {
-        onConfigChangeStart(this._props);
+        onConfigChangeStart(this.#props);
       } else if (action.type === 'ConfigChangeCancel') {
-        onConfigChangeCancel(this._props);
+        onConfigChangeCancel(this.#props);
       } else if (action.type === 'ConfigChangeComplete') {
-        onConfigChangeComplete(this._props, action);
+        onConfigChangeComplete(this.#props, action);
       }
     }));
   }
@@ -139,6 +139,6 @@ export class Game {
    * @return 処理が完了したら発火するPromise
    */
   async initialize(): Promise<void> {
-    await initialize(this._props);
+    await initialize(this.#props);
   }
 }
