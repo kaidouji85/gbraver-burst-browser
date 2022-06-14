@@ -148,23 +148,23 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** 設定画面 */
 export class Config implements DOMScene {
-  _originConfig: GbraverBurstBrowserConfig;
-  _root: HTMLElement;
-  _battleAnimationTimeScaleSelector: HTMLSelectElement;
-  _webGLPixelRatioSelector: HTMLSelectElement;
-  _bgmVolumeSelector: HTMLInputElement;
-  _bgmVolumeValue: HTMLElement;
-  _seVolumeSelector: HTMLInputElement;
-  _seVolumeValue: HTMLElement;
-  _prevButton: HTMLElement;
-  _configChangeButton: HTMLElement;
-  _dialog: ConfigChangedDialog;
-  _changeValue: typeof Howl;
-  _pushButton: typeof Howl;
-  _exclusive: Exclusive;
-  _prev: StreamSource<void>;
-  _configChange: StreamSource<GbraverBurstBrowserConfig>;
-  _unsubscriber: Unsubscriber[];
+  #originConfig: GbraverBurstBrowserConfig;
+  #root: HTMLElement;
+  #battleAnimationTimeScaleSelector: HTMLSelectElement;
+  #webGLPixelRatioSelector: HTMLSelectElement;
+  #bgmVolumeSelector: HTMLInputElement;
+  #bgmVolumeValue: HTMLElement;
+  #seVolumeSelector: HTMLInputElement;
+  #seVolumeValue: HTMLElement;
+  #prevButton: HTMLElement;
+  #configChangeButton: HTMLElement;
+  #dialog: ConfigChangedDialog;
+  #changeValue: typeof Howl;
+  #pushButton: typeof Howl;
+  #exclusive: Exclusive;
+  #prev: StreamSource<void>;
+  #configChange: StreamSource<GbraverBurstBrowserConfig>;
+  #unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -173,67 +173,67 @@ export class Config implements DOMScene {
    * @param config Gブレイバーバースト ブラウザ側設定項目
    */
   constructor(resources: Resources, config: GbraverBurstBrowserConfig) {
-    this._originConfig = config;
+    this.#originConfig = config;
     const ids = {battleAnimationTimeScaleSelector: domUuid(), webGLPixelRatioSelector: domUuid(),
       bgmVolumeSelector: domUuid(), bgmVolumeValue: domUuid(), seVolumeSelector: domUuid(), seVolumeValue: domUuid(),
       prev: domUuid(), configChange: domUuid()};
-    this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(ids, config);
-    this._root.className = ROOT_CLASS;
-    const elements = extractElements(this._root, ids);
-    this._battleAnimationTimeScaleSelector = elements.battleAnimationTimeScaleSelector;
-    this._webGLPixelRatioSelector = elements.webGLPixelRatioSelector;
-    this._bgmVolumeSelector = elements.bgmVolumeSelector;
-    this._bgmVolumeValue = elements.bgmVolumeValue;
-    this._seVolumeSelector = elements.seVolumeSelector;
-    this._seVolumeValue = elements.seVolumeValue;
-    this._prevButton = elements.prev;
-    this._configChangeButton = elements.configChange;
-    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
-    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+    this.#root = document.createElement('div');
+    this.#root.innerHTML = rootInnerHTML(ids, config);
+    this.#root.className = ROOT_CLASS;
+    const elements = extractElements(this.#root, ids);
+    this.#battleAnimationTimeScaleSelector = elements.battleAnimationTimeScaleSelector;
+    this.#webGLPixelRatioSelector = elements.webGLPixelRatioSelector;
+    this.#bgmVolumeSelector = elements.bgmVolumeSelector;
+    this.#bgmVolumeValue = elements.bgmVolumeValue;
+    this.#seVolumeSelector = elements.seVolumeSelector;
+    this.#seVolumeValue = elements.seVolumeValue;
+    this.#prevButton = elements.prev;
+    this.#configChangeButton = elements.configChange;
+    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
 
-    this._dialog = new ConfigChangedDialog(resources);
-    this._root.appendChild(this._dialog.getRootHTMLElement());
+    this.#dialog = new ConfigChangedDialog(resources);
+    this.#root.appendChild(this.#dialog.getRootHTMLElement());
 
-    this._exclusive = new Exclusive();
-    this._prev = createStreamSource();
-    this._configChange = createStreamSource();
-    this._unsubscriber = [
-      inputDOMStream(this._bgmVolumeSelector).subscribe(action => {
-        this._onBGMVolumeChange(action);
+    this.#exclusive = new Exclusive();
+    this.#prev = createStreamSource();
+    this.#configChange = createStreamSource();
+    this.#unsubscriber = [
+      inputDOMStream(this.#bgmVolumeSelector).subscribe(action => {
+        this.#onBGMVolumeChange(action);
       }),
-      inputDOMStream(this._seVolumeSelector).subscribe(action => {
-        this._onSEVolumeChange(action);
+      inputDOMStream(this.#seVolumeSelector).subscribe(action => {
+        this.#onSEVolumeChange(action);
       }),
-      pushDOMStream(this._prevButton).subscribe(action => {
-        this._onPrevButtonPush(action);
+      pushDOMStream(this.#prevButton).subscribe(action => {
+        this.#onPrevButtonPush(action);
       }),
-      pushDOMStream(this._configChangeButton).subscribe(action => {
-        this._onConfigChangeButtonPush(action);
+      pushDOMStream(this.#configChangeButton).subscribe(action => {
+        this.#onConfigChangeButtonPush(action);
       }),
-      this._dialog.closeNotifier().subscribe(() => {
-        this._onDialogClose();
+      this.#dialog.closeNotifier().subscribe(() => {
+        this.#onDialogClose();
       }),
-      this._dialog.discardNotifier().subscribe(() => {
-        this._onDiscardConfigChange();
+      this.#dialog.discardNotifier().subscribe(() => {
+        this.#onDiscardConfigChange();
       }),
-      this._dialog.acceptNotifier().subscribe(() => {
-        this._onAcceptConfigChange();
+      this.#dialog.acceptNotifier().subscribe(() => {
+        this.#onAcceptConfigChange();
       }),
     ];
   }
 
   /** @override */
   destructor(): void {
-    this._unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach(v => {
       v.unsubscribe();
     });
-    this._dialog.destructor();
+    this.#dialog.destructor();
   }
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -242,7 +242,7 @@ export class Config implements DOMScene {
    * @return 通知ストリーム
    */
   prevNotifier(): Stream<void> {
-    return this._prev;
+    return this.#prev;
   }
 
   /**
@@ -251,7 +251,7 @@ export class Config implements DOMScene {
    * @return 通知ストリーム
    */
   configChangeNotifier(): Stream<GbraverBurstBrowserConfig> {
-    return this._configChange;
+    return this.#configChange;
   }
 
   /**
@@ -259,12 +259,12 @@ export class Config implements DOMScene {
    *
    * @param action アクション
    */
-  _onBGMVolumeChange(action: InputDOM): void {
+  #onBGMVolumeChange(action: InputDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
-      const value = parseSoundVolume(this._bgmVolumeSelector.value) ?? 1;
-      this._bgmVolumeValue.innerText = soundVolumeLabel(value);
+    this.#exclusive.execute(async () => {
+      const value = parseSoundVolume(this.#bgmVolumeSelector.value) ?? 1;
+      this.#bgmVolumeValue.innerText = soundVolumeLabel(value);
     });
   }
 
@@ -273,12 +273,12 @@ export class Config implements DOMScene {
    *
    * @param action アクション
    */
-  _onSEVolumeChange(action: InputDOM): void {
+  #onSEVolumeChange(action: InputDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
-      const value = parseSoundVolume(this._seVolumeSelector.value) ?? 1;
-      this._seVolumeValue.innerText = soundVolumeLabel(value);
+    this.#exclusive.execute(async () => {
+      const value = parseSoundVolume(this.#seVolumeSelector.value) ?? 1;
+      this.#seVolumeValue.innerText = soundVolumeLabel(value);
     });
   }
 
@@ -287,20 +287,20 @@ export class Config implements DOMScene {
    *
    * @param action アクション
    */
-  _onPrevButtonPush(action: PushDOM): void {
+  #onPrevButtonPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
+    this.#exclusive.execute(async () => {
       await Promise.all([
-        pop(this._prevButton),
-        this._changeValue.play()
+        pop(this.#prevButton),
+        this.#changeValue.play()
       ]);
-      const updatedConfig = this._parseConfig();
-      if (isConfigChanged(this._originConfig, updatedConfig)) {
-        this._dialog.show();
+      const updatedConfig = this.#parseConfig();
+      if (isConfigChanged(this.#originConfig, updatedConfig)) {
+        this.#dialog.show();
         return;
       }
-      this._prev.next();
+      this.#prev.next();
     });
   }
 
@@ -309,45 +309,45 @@ export class Config implements DOMScene {
    *
    * @param action アクション
    */
-  _onConfigChangeButtonPush(action: PushDOM): void {
+  #onConfigChangeButtonPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
-      this._isInputDisabled(true);
+    this.#exclusive.execute(async () => {
+      this.#isInputDisabled(true);
       await Promise.all([
-        pop(this._configChangeButton),
-        this._pushButton.play()
+        pop(this.#configChangeButton),
+        this.#pushButton.play()
       ]);
-      const config = this._parseConfig();
-      this._configChange.next(config);
+      const config = this.#parseConfig();
+      this.#configChange.next(config);
     });
   }
 
   /**
    * 設定変更通知ダイアログを閉じた時の処理
    */
-  _onDialogClose() {
-    this._exclusive.execute(async () => {
-      this._dialog.hidden();
+  #onDialogClose() {
+    this.#exclusive.execute(async () => {
+      this.#dialog.hidden();
     });
   }
 
   /**
    * 設定変更ダイアログで「設定変更を破棄」を選択した時の処理
    */
-  _onDiscardConfigChange() {
-    this._exclusive.execute(async () => {
-      this._prev.next();
+  #onDiscardConfigChange() {
+    this.#exclusive.execute(async () => {
+      this.#prev.next();
     });
   }
 
   /**
    * 設定変更ダイアログで「この設定にする」を選択した時の処理
    */
-  _onAcceptConfigChange() {
-    this._exclusive.execute(async () => {
-      const config = this._parseConfig();
-      this._configChange.next(config);
+  #onAcceptConfigChange() {
+    this.#exclusive.execute(async () => {
+      const config = this.#parseConfig();
+      this.#configChange.next(config);
     });
   }
 
@@ -356,11 +356,11 @@ export class Config implements DOMScene {
    *
    * @param isDisabled trueで操作可能である
    */
-  _isInputDisabled(isDisabled: boolean): void {
-    this._webGLPixelRatioSelector.disabled = isDisabled;
-    this._battleAnimationTimeScaleSelector.disabled = isDisabled;
-    this._bgmVolumeSelector.disabled = isDisabled;
-    this._seVolumeSelector.disabled = isDisabled;
+  #isInputDisabled(isDisabled: boolean): void {
+    this.#webGLPixelRatioSelector.disabled = isDisabled;
+    this.#battleAnimationTimeScaleSelector.disabled = isDisabled;
+    this.#bgmVolumeSelector.disabled = isDisabled;
+    this.#seVolumeSelector.disabled = isDisabled;
   }
 
   /**
@@ -368,11 +368,11 @@ export class Config implements DOMScene {
    *
    * @return パース結果
    */
-  _parseConfig(): GbraverBurstBrowserConfig {
-    const battleAnimationTimeScale = parseBattleAnimationTimeScale(this._battleAnimationTimeScaleSelector.value) ?? BattleAnimationTimeScales[0];
-    const webGLPixelRatio = parseWebGLPixelRatio(this._webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
-    const bgmVolume = parseSoundVolume(this._bgmVolumeSelector.value) ?? SoundVolumes[0];
-    const seVolume = parseSoundVolume(this._seVolumeSelector.value) ?? SoundVolumes[0];
+  #parseConfig(): GbraverBurstBrowserConfig {
+    const battleAnimationTimeScale = parseBattleAnimationTimeScale(this.#battleAnimationTimeScaleSelector.value) ?? BattleAnimationTimeScales[0];
+    const webGLPixelRatio = parseWebGLPixelRatio(this.#webGLPixelRatioSelector.value) ?? WebGLPixelRatios[0];
+    const bgmVolume = parseSoundVolume(this.#bgmVolumeSelector.value) ?? SoundVolumes[0];
+    const seVolume = parseSoundVolume(this.#seVolumeSelector.value) ?? SoundVolumes[0];
     return {battleAnimationTimeScale, webGLPixelRatio, bgmVolume, seVolume};
   }
 }

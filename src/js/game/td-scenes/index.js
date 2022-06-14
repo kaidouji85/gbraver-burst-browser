@@ -39,7 +39,7 @@ export class TDScenes {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._disposeScene();
+    this.#disposeScene();
   }
 
   /**
@@ -66,7 +66,7 @@ export class TDScenes {
    * @return 生成した戦闘シーン
    */
   startBattle(resources: Resources, bgm: BGMManager, playingBGM: SoundId, pixelRatio: number, initialAnimationTimeScale: number, battleProgress: BattleProgress, player: Player, enemy: Player, initialState: GameState[]): BattleScene {
-    this._disposeScene();
+    this.#disposeScene();
 
     this.#renderer.setPixelRatio(pixelRatio);
     const scene = new BattleScene({resources, bgm, playingBGM, renderer: this.#renderer, battleProgress, initialAnimationTimeScale,
@@ -84,7 +84,7 @@ export class TDScenes {
    * 3Dシーンを非表示にする
    */
   hidden(): void {
-    this._disposeScene();
+    this.#disposeScene();
   }
 
   /**
@@ -99,7 +99,7 @@ export class TDScenes {
   /**
    * 現在表示しているシーンを破棄する
    */
-  _disposeScene(): void {
+  #disposeScene(): void {
     this.#scene && this.#scene.destructor();
     this.#renderer.disposeRenders();
     this.#unsubscriber.forEach(v => {

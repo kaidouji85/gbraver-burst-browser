@@ -40,23 +40,23 @@ export class HudLayer {
   armdozers: HUDArmdozerObjects[];
   pilots: HUDPilotObjects[];
   gameObjects: HUDGameObjects;
-  _overlap: Stream<OverlapEvent>;
-  _gameObjectAction: Stream<GameObjectAction>;
+  #overlap: Stream<OverlapEvent>;
+  #gameObjectAction: Stream<GameObjectAction>;
 
   constructor(param: Param) {
     this.scene = new THREE.Scene();
     this.camera = new PlainHUDCamera(param.resize);
 
-    this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this._gameObjectAction = gameObjectStream(param.update, param.preRender, this._overlap);
-    this.gameObjects = new HUDGameObjects(param.resources, this._gameObjectAction, param.player);
+    this.#overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
+    this.#gameObjectAction = gameObjectStream(param.update, param.preRender, this.#overlap);
+    this.gameObjects = new HUDGameObjects(param.resources, this.#gameObjectAction, param.player);
     this.gameObjects.getObject3Ds().forEach(object => {
       this.scene.add(object);
     });
 
     this.players = [
-      playerHUDObjects(param.resources, param.player, this._gameObjectAction),
-      enemyHUDObjects(param.resources, param.enemy, this._gameObjectAction)
+      playerHUDObjects(param.resources, param.player, this.#gameObjectAction),
+      enemyHUDObjects(param.resources, param.enemy, this.#gameObjectAction)
     ];
     this.players.map(v => v.getObject3Ds())
       .flat()
@@ -65,8 +65,8 @@ export class HudLayer {
       });
 
     this.armdozers = [
-      playerArmdozerHUD(param.resources, this._gameObjectAction, param.player),
-      enemyArmdozerHUD(param.resources, this._gameObjectAction, param.enemy)
+      playerArmdozerHUD(param.resources, this.#gameObjectAction, param.player),
+      enemyArmdozerHUD(param.resources, this.#gameObjectAction, param.enemy)
     ];
     this.armdozers.map(v => v.getObject3Ds())
       .flat()
@@ -75,8 +75,8 @@ export class HudLayer {
       });
 
     this.pilots = [
-      playerHUDPilotObjects(param.resources, this._gameObjectAction, param.player),
-      enemyHUDPilotObjects(param.resources, this._gameObjectAction, param.enemy)
+      playerHUDPilotObjects(param.resources, this.#gameObjectAction, param.player),
+      enemyHUDPilotObjects(param.resources, this.#gameObjectAction, param.enemy)
     ];
     this.pilots.map(v => v.getObject3Ds())
       .flat()

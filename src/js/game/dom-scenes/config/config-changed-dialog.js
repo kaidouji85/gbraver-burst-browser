@@ -75,18 +75,18 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
  * 本ダイアログは設定画面から呼び出されることを想定している
  */
 export class ConfigChangedDialog {
-  _root: HTMLElement;
-  _backGround: HTMLElement;
-  _closer: HTMLElement;
-  _discard: HTMLElement;
-  _accept: HTMLElement;
-  _exclusive: Exclusive;
-  _changeValue: typeof Howl;
-  _pushButton: typeof Howl;
-  _closeStream: StreamSource<void>;
-  _acceptStream: StreamSource<void>;
-  _discardStream: StreamSource<void>;
-  _unsbusscriber: Unsubscriber[];
+  #root: HTMLElement;
+  #backGround: HTMLElement;
+  #closer: HTMLElement;
+  #discard: HTMLElement;
+  #accept: HTMLElement;
+  #exclusive: Exclusive;
+  #changeValue: typeof Howl;
+  #pushButton: typeof Howl;
+  #closeStream: StreamSource<void>;
+  #acceptStream: StreamSource<void>;
+  #discardStream: StreamSource<void>;
+  #unsbusscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -96,35 +96,35 @@ export class ConfigChangedDialog {
    */
   constructor(resources: Resources) {
     const ids = {backGround: domUuid(), closer: domUuid(), discard: domUuid(), accept: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS_INVISIBLE;
-    this._root.innerHTML = rootInnerHTML(resources, ids);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS_INVISIBLE;
+    this.#root.innerHTML = rootInnerHTML(resources, ids);
 
-    const elements = extractElements(this._root, ids);
-    this._backGround = elements.backGround;
-    this._closer = elements.closer;
-    this._discard = elements.discard;
-    this._accept = elements.accept;
+    const elements = extractElements(this.#root, ids);
+    this.#backGround = elements.backGround;
+    this.#closer = elements.closer;
+    this.#discard = elements.discard;
+    this.#accept = elements.accept;
 
-    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
-    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
+    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
 
-    this._exclusive = new Exclusive();
-    this._closeStream = createStreamSource();
-    this._acceptStream = createStreamSource();
-    this._discardStream = createStreamSource();
-    this._unsbusscriber = [
-      pushDOMStream(this._backGround).subscribe(action => {
-        this._onBackGroundPush(action);
+    this.#exclusive = new Exclusive();
+    this.#closeStream = createStreamSource();
+    this.#acceptStream = createStreamSource();
+    this.#discardStream = createStreamSource();
+    this.#unsbusscriber = [
+      pushDOMStream(this.#backGround).subscribe(action => {
+        this.#onBackGroundPush(action);
       }),
-      pushDOMStream(this._closer).subscribe(action => {
-        this._onCloserPush(action);
+      pushDOMStream(this.#closer).subscribe(action => {
+        this.#onCloserPush(action);
       }),
-      pushDOMStream(this._discard).subscribe(action => {
-        this._onDiscardPush(action)
+      pushDOMStream(this.#discard).subscribe(action => {
+        this.#onDiscardPush(action)
       }),
-      pushDOMStream(this._accept).subscribe(action => {
-        this._onAcceptPush(action);
+      pushDOMStream(this.#accept).subscribe(action => {
+        this.#onAcceptPush(action);
       })
     ];
   }
@@ -133,7 +133,7 @@ export class ConfigChangedDialog {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._unsbusscriber.forEach(v => {
+    this.#unsbusscriber.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -142,14 +142,14 @@ export class ConfigChangedDialog {
    * ダイアログを表示する
    */
   show(): void {
-    this._root.className = ROOT_CLASS;
+    this.#root.className = ROOT_CLASS;
   }
 
   /**
    * ダイアログを非表示にする
    */
   hidden(): void {
-    this._root.className = ROOT_CLASS_INVISIBLE;
+    this.#root.className = ROOT_CLASS_INVISIBLE;
   }
 
   /**
@@ -158,7 +158,7 @@ export class ConfigChangedDialog {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -167,7 +167,7 @@ export class ConfigChangedDialog {
    * @return 通知ストリーム
    */
   closeNotifier(): Stream<void> {
-    return this._closeStream;
+    return this.#closeStream;
   }
 
   /**
@@ -176,7 +176,7 @@ export class ConfigChangedDialog {
    * @return 通知ストリーム
    */
   acceptNotifier(): Stream<void> {
-    return this._acceptStream;
+    return this.#acceptStream;
   }
 
   /**
@@ -185,7 +185,7 @@ export class ConfigChangedDialog {
    * @return 通知ストリーム
    */
   discardNotifier(): Stream<void> {
-    return this._discardStream;
+    return this.#discardStream;
   }
 
   /**
@@ -193,12 +193,12 @@ export class ConfigChangedDialog {
    *
    * @param action アクション
    */
-  _onBackGroundPush(action: PushDOM): void {
+  #onBackGroundPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
-      await this._changeValue.play();
-      this._closeStream.next();
+    this.#exclusive.execute(async () => {
+      await this.#changeValue.play();
+      this.#closeStream.next();
     });
   }
 
@@ -207,15 +207,15 @@ export class ConfigChangedDialog {
    *
    * @param action アクション
    */
-  _onCloserPush(action: PushDOM): void {
+  #onCloserPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
+    this.#exclusive.execute(async () => {
       await Promise.all([
-        pop(this._closer, 1.3),
-        this._changeValue.play()
+        pop(this.#closer, 1.3),
+        this.#changeValue.play()
       ]);
-      this._closeStream.next();
+      this.#closeStream.next();
     });
   }
 
@@ -224,15 +224,15 @@ export class ConfigChangedDialog {
    *
    * @param action アクション
    */
-  _onDiscardPush(action: PushDOM): void {
+  #onDiscardPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
+    this.#exclusive.execute(async () => {
       await Promise.all([
-        pop(this._discard),
-        this._changeValue.play()
+        pop(this.#discard),
+        this.#changeValue.play()
       ]);
-      this._discardStream.next();
+      this.#discardStream.next();
     });
   }
 
@@ -241,15 +241,15 @@ export class ConfigChangedDialog {
    *
    * @param action アクション
    */
-  _onAcceptPush(action: PushDOM): void {
+  #onAcceptPush(action: PushDOM): void {
     action.event.preventDefault();
     action.event.stopPropagation();
-    this._exclusive.execute(async () => {
+    this.#exclusive.execute(async () => {
       await Promise.all([
-        pop(this._accept),
-        this._pushButton.play()
+        pop(this.#accept),
+        this.#pushButton.play()
       ]);
-      this._acceptStream.next();
+      this.#acceptStream.next();
     });
   }
 }

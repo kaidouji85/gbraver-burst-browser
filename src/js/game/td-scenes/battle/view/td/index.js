@@ -37,8 +37,8 @@ export class ThreeDimensionLayer {
   players: TDPlayer[];
   armdozerObjects: TDArmdozerObjects[];
   gameObjects: TDGameObjects;
-  _overlap: Stream<OverlapEvent>;
-  _gameObjectAction: Stream<GameObjectAction>;
+  #overlap: Stream<OverlapEvent>;
+  #gameObjectAction: Stream<GameObjectAction>;
 
   /**
    * コンストラクタ
@@ -51,12 +51,12 @@ export class ThreeDimensionLayer {
 
     this.camera = new TDCamera(param.update, param.resize);
 
-    this._overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
-    this._gameObjectAction = gameObjectStream(param.update, param.preRender, this._overlap);
+    this.#overlap = param.renderer.createOverlapNotifier(this.camera.getCamera());
+    this.#gameObjectAction = gameObjectStream(param.update, param.preRender, this.#overlap);
 
     this.players = [
-      playerTDObjects(param.resources, param.player, this._gameObjectAction),
-      enemyTDObject(param.resources, param.enemy, this._gameObjectAction)
+      playerTDObjects(param.resources, param.player, this.#gameObjectAction),
+      enemyTDObject(param.resources, param.enemy, this.#gameObjectAction)
     ];
     this.players.map(v => v.getObject3Ds())
       .flat()
@@ -65,8 +65,8 @@ export class ThreeDimensionLayer {
       });
 
     this.armdozerObjects = [
-      playerTDArmdozer(param.resources, this._gameObjectAction, param.player),
-      enemyTDArmdozer(param.resources, this._gameObjectAction, param.enemy)
+      playerTDArmdozer(param.resources, this.#gameObjectAction, param.player),
+      enemyTDArmdozer(param.resources, this.#gameObjectAction, param.enemy)
     ];
     this.armdozerObjects.map(v => v.getObject3Ds())
       .flat()
@@ -74,7 +74,7 @@ export class ThreeDimensionLayer {
         this.scene.add(v);
       });
 
-    this.gameObjects = new TDGameObjects(param.resources, this._gameObjectAction);
+    this.gameObjects = new TDGameObjects(param.resources, this.#gameObjectAction);
     this.gameObjects.getObject3Ds().forEach(object => {
       this.scene.add(object);
     });

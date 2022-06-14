@@ -53,22 +53,22 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** パイロットステータス */
 export class PilotStatus {
-  _root: HTMLElement;
-  _name: HTMLElement;
-  _skill: HTMLElement;
+  #root: HTMLElement;
+  #name: HTMLElement;
+  #skill: HTMLElement;
 
   /**
    * コンストラクタ
    */
   constructor() {
     const dataIDs = {name: domUuid(), skill: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(dataIDs);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS_NAME;
+    this.#root.innerHTML = rootInnerHTML(dataIDs);
 
-    const elements = extractElements(this._root, dataIDs);
-    this._name = elements.name;
-    this._skill = elements.skill;
+    const elements = extractElements(this.#root, dataIDs);
+    this.#name = elements.name;
+    this.#skill = elements.skill;
   }
 
   /**
@@ -76,7 +76,7 @@ export class PilotStatus {
    * @return ルートHTML要素
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -90,8 +90,8 @@ export class PilotStatus {
       return;
     }
 
-    this._name.innerText = target.name;
-    this._skill.innerHTML = pilotSkillTemplate(target.skill)
+    this.#name.innerText = target.name;
+    this.#skill.innerHTML = pilotSkillTemplate(target.skill)
       .map(v => `<span class="${ROOT_CLASS_NAME}__skill__content__line">${v}</span>`)
       .reduce((a, b) => a + b);
   }

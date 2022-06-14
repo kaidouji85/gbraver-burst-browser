@@ -37,7 +37,7 @@ export class DOMDialogs {
    * @param movieURL 動画のURL
    */
   startHowToPlay(resources: Resources, movieURL: string): void {
-    this._removeCurrentDialog();
+    this.#removeCurrentDialog();
 
     const howToPlay = new HowToPlay(resources, movieURL);
     this.#unsubscribers = [
@@ -56,7 +56,7 @@ export class DOMDialogs {
    * @param caption キャプション
    */
   startLogin(resources: Resources, caption: string): void {
-    this._removeCurrentDialog();
+    this.#removeCurrentDialog();
 
     const login = new LoginDialog(resources, caption);
     this.#unsubscribers = [
@@ -77,7 +77,7 @@ export class DOMDialogs {
    * @param caption ダイアログに表示する文言
    */
   startWaiting(caption: string): void {
-    this._removeCurrentDialog();
+    this.#removeCurrentDialog();
 
     const waiting = new WaitingDialog(caption);
     this.#root.appendChild(waiting.getRootHTMLElement());
@@ -91,7 +91,7 @@ export class DOMDialogs {
    * @param postNetworkError 通信エラーの後処理情報
    */
   startNetworkError(resources: Resources, postNetworkError: PostNetworkError): void {
-    this._removeCurrentDialog();
+    this.#removeCurrentDialog();
     
     const networkError = new NetworkErrorDialog(resources, postNetworkError);
     this.#unsubscribers = [
@@ -109,7 +109,7 @@ export class DOMDialogs {
    * @param resources リソース管理オブジェクト
    */
   startDeleteAccountConsent(resources: Resources): void {
-    this._removeCurrentDialog();
+    this.#removeCurrentDialog();
 
     const deleteAccountConsent = new DeleteAccountConsentDialog(resources);
     this.#unsubscribers = [
@@ -130,7 +130,7 @@ export class DOMDialogs {
    * @param resources リソース管理オブジェクト
    */
   startDifficulty(resources: Resources): void {
-    this._removeCurrentDialog();
+    this.#removeCurrentDialog();
 
     const degreeOfDifficulty = new DifficultyDialog(resources);
     this.#unsubscribers = [
@@ -151,7 +151,7 @@ export class DOMDialogs {
    * @param resources リソース管理オブジェクト
    */
   startMatching(resources: Resources): void {
-    this._removeCurrentDialog();
+    this.#removeCurrentDialog();
 
     const matchingDialog = new MatchingDialog(resources);
     this.#unsubscribers = [
@@ -167,7 +167,7 @@ export class DOMDialogs {
    * 現在表示しているダイアログを非表示にする
    */
   hidden(): void {
-    this._removeCurrentDialog();
+    this.#removeCurrentDialog();
   }
 
   /**
@@ -191,7 +191,7 @@ export class DOMDialogs {
   /**
    * 現在表示しているダイアログを取り除く
    */
-  _removeCurrentDialog(): void {
+  #removeCurrentDialog(): void {
     this.#dialog && this.#dialog.destructor();
     this.#dialog && this.#dialog.getRootHTMLElement().remove();
     this.#dialog = null;

@@ -43,7 +43,7 @@ export class DOMScenes {
 
   /** デストラクタ相当の処理 */
   destructor() {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
   }
 
   /**
@@ -62,7 +62,7 @@ export class DOMScenes {
    * @return 開始されたメール認証未完了画面
    */
   startMailVerifiedIncomplete(mailAddress: string): MailVerifiedIncomplete {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
 
     const scene = new MailVerifiedIncomplete(mailAddress);
     this.#root.appendChild(scene.getRootHTMLElement());
@@ -86,7 +86,7 @@ export class DOMScenes {
    * @return 開始されたローディング画面
    */
   startLoading(loading: Stream<LoadingActions>): Loading {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
     const scene = new Loading(loading);
     this.#root.appendChild(scene.getRootHTMLElement());
 
@@ -107,7 +107,7 @@ export class DOMScenes {
    * @return 開始されたタイトル画面
    */
   async startTitle(resources: Resources, bgm: BGMManager, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): Promise<Title> {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
 
     const scene = new Title(resources, bgm, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this.#unsubscribers = [
@@ -150,7 +150,7 @@ export class DOMScenes {
    * @return 開始されたプレイヤー選択画面
    */
   async startPlayerSelect(resources: Resources): Promise<PlayerSelect> {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
 
     const scene = new PlayerSelect(resources);
     this.#unsubscribers = [
@@ -185,7 +185,7 @@ export class DOMScenes {
    * @return 開始された対戦カード画面
    */
   async startMatchCard(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string): Promise<MatchCard> {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
 
     const scene = new MatchCard({
       resources: resources,
@@ -213,7 +213,7 @@ export class DOMScenes {
    * @returns 開始されたNPCステージタイトル画面
    */
   async startNPCStageTitle(resources: Resources, level: number, caption: string[], armDozerId: ArmDozerId): Promise<NPCStageTitle> {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
 
     const scene = new NPCStageTitle(resources, level, caption, armDozerId);
     this.#root.appendChild(scene.getRootHTMLElement());
@@ -234,7 +234,7 @@ export class DOMScenes {
    * @return 開始されたNPCエンディング画面
    */
   async startNPCEnding(resources: Resources, bgm: BGMManager): Promise<NPCEnding> {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
 
     const scene = new NPCEnding(resources, bgm);
     this.#root.appendChild(scene.getRootHTMLElement());
@@ -260,7 +260,7 @@ export class DOMScenes {
    * @return 開始された設定画面
    */
   startConfig(resources: Resources, config: GbraverBurstBrowserConfig): Config {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
 
     const scene = new Config(resources, config);
     this.#root.appendChild(scene.getRootHTMLElement());
@@ -281,7 +281,7 @@ export class DOMScenes {
    * 本メソッドは、3Dシーンを表示する前に呼ばれる想定である
    */
   hidden(): void {
-    this._removeCurrentScene();
+    this.#removeCurrentScene();
   }
 
   /**
@@ -296,7 +296,7 @@ export class DOMScenes {
   /**
    * 現在表示しているシーンを取り除く
    */
-  _removeCurrentScene(): void {
+  #removeCurrentScene(): void {
     this.#scene && this.#scene.destructor();
     this.#scene && this.#scene.getRootHTMLElement().remove();
     this.#scene = null;

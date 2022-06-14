@@ -37,32 +37,32 @@ type Param = {
 export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
-  _playerId: PlayerId;
-  _safeAreaInset: SafeAreaInset;
-  _renderer: OwnRenderer;
-  _updateTD: StreamSource<Update>;
-  _preRenderTD: StreamSource<PreRender>;
-  _updateHUD: StreamSource<Update>;
-  _preRenderHUD: StreamSource<PreRender>;
+  #playerId: PlayerId;
+  #safeAreaInset: SafeAreaInset;
+  #renderer: OwnRenderer;
+  #updateTD: StreamSource<Update>;
+  #preRenderTD: StreamSource<PreRender>;
+  #updateHUD: StreamSource<Update>;
+  #preRenderHUD: StreamSource<PreRender>;
 
   constructor(param: Param) {
-    this._playerId = param.player.playerId;
-    this._safeAreaInset = createSafeAreaInset();
-    this._renderer = param.renderer;
-    this._updateTD = createStreamSource();
-    this._preRenderTD = createStreamSource();
-    this._updateHUD = createStreamSource();
-    this._preRenderHUD = createStreamSource();
+    this.#playerId = param.player.playerId;
+    this.#safeAreaInset = createSafeAreaInset();
+    this.#renderer = param.renderer;
+    this.#updateTD = createStreamSource();
+    this.#preRenderTD = createStreamSource();
+    this.#updateHUD = createStreamSource();
+    this.#preRenderHUD = createStreamSource();
 
     this.td = new ThreeDimensionLayer({
       resources: param.resources,
       renderer: param.renderer,
-      safeAreaInset: this._safeAreaInset,
+      safeAreaInset: this.#safeAreaInset,
       player: param.player,
       enemy: param.enemy,
       resize: param.resize,
-      update: this._updateTD,
-      preRender: this._preRenderTD,
+      update: this.#updateTD,
+      preRender: this.#preRenderTD,
     });
 
     this.hud = new HudLayer({
@@ -71,12 +71,12 @@ export class BattleSceneView {
       player: param.player,
       enemy: param.enemy,
       resize: param.resize,
-      update: this._updateHUD,
-      preRender: this._preRenderHUD,
+      update: this.#updateHUD,
+      preRender: this.#preRenderHUD,
     });
 
     param.gameLoop.subscribe(action => {
-      this._gameLoop(action);
+      this.#gameLoop(action);
     });
   }
 
@@ -101,32 +101,32 @@ export class BattleSceneView {
    *
    * @param action アクション
    */
-  _gameLoop(action: GameLoop): void {
+  #gameLoop(action: GameLoop): void {
     TWEEN.update(action.time);
 
-    this._updateTD.next({
+    this.#updateTD.next({
       type: 'Update',
       time: action.time
     });
-    this._preRenderTD.next({
+    this.#preRenderTD.next({
       type: 'PreRender',
       camera: this.td.camera.getCamera(),
-      rendererDOM: this._renderer.getRendererDOM(),
-      safeAreaInset: this._safeAreaInset,
+      rendererDOM: this.#renderer.getRendererDOM(),
+      safeAreaInset: this.#safeAreaInset,
     });
-    this._renderer.rendering(this.td.scene, this.td.camera.getCamera());
+    this.#renderer.rendering(this.td.scene, this.td.camera.getCamera());
 
-    this._updateHUD.next({
+    this.#updateHUD.next({
       type: 'Update',
       time: action.time
     });
-    tracking(this.td, this.hud, this._playerId, this._renderer.getRendererDOM());
-    this._preRenderHUD.next({
+    tracking(this.td, this.hud, this.#playerId, this.#renderer.getRendererDOM());
+    this.#preRenderHUD.next({
       type: 'PreRender',
       camera: this.hud.camera.getCamera(),
-      rendererDOM: this._renderer.getRendererDOM(),
-      safeAreaInset: this._safeAreaInset,
+      rendererDOM: this.#renderer.getRendererDOM(),
+      safeAreaInset: this.#safeAreaInset,
     });
-    this._renderer.rendering(this.hud.scene, this.hud.camera.getCamera());
+    this.#renderer.rendering(this.hud.scene, this.hud.camera.getCamera());
   }
 }

@@ -60,16 +60,16 @@ type PlayerDecide = {
 
 /** プレイヤーセレクト */
 export class PlayerSelect implements DOMScene {
-  _root: HTMLElement;
-  _armdozerBustShot: ArmdozerBustShotContainer;
-  _pilotBustShot: PilotBustShotContainer;
-  _armdozerSelector: ArmdozerSelector;
-  _pilotSelector: PilotSelector;
-  _armdozerId: ArmDozerId;
-  _pilotId: PilotId;
-  _playerDecide: StreamSource<PlayerDecide>;
-  _prev: StreamSource<void>;
-  _unsubscribers: Unsubscriber[];
+  #root: HTMLElement;
+  #armdozerBustShot: ArmdozerBustShotContainer;
+  #pilotBustShot: PilotBustShotContainer;
+  #armdozerSelector: ArmdozerSelector;
+  #pilotSelector: PilotSelector;
+  #armdozerId: ArmDozerId;
+  #pilotId: PilotId;
+  #playerDecide: StreamSource<PlayerDecide>;
+  #prev: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -89,50 +89,50 @@ export class PlayerSelect implements DOMScene {
       PilotIds.RAITO,
       PilotIds.TSUBASA,
     ];
-    this._armdozerId = ArmDozerIdList.SHIN_BRAVER
-    this._pilotId = PilotIds.SHINYA;
+    this.#armdozerId = ArmDozerIdList.SHIN_BRAVER
+    this.#pilotId = PilotIds.SHINYA;
 
-    this._playerDecide = createStreamSource();
-    this._prev = createStreamSource();
+    this.#playerDecide = createStreamSource();
+    this.#prev = createStreamSource();
 
     const dataIDs = {selector: domUuid(), working: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = 'player-select';
-    this._root.innerHTML = rootInnerHTML(dataIDs);
-    const elements = extractElements(this._root, dataIDs);
+    this.#root = document.createElement('div');
+    this.#root.className = 'player-select';
+    this.#root.innerHTML = rootInnerHTML(dataIDs);
+    const elements = extractElements(this.#root, dataIDs);
 
-    this._armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds, this._armdozerId);
-    elements.working.appendChild(this._armdozerBustShot.getRootHTMLElement());
+    this.#armdozerBustShot = new ArmdozerBustShotContainer(resources, armDozerIds, this.#armdozerId);
+    elements.working.appendChild(this.#armdozerBustShot.getRootHTMLElement());
 
-    this._pilotBustShot = new PilotBustShotContainer(resources, pilotIds, this._pilotId);
-    this._pilotBustShot.hidden();
-    elements.working.appendChild(this._pilotBustShot.getRootHTMLElement());
+    this.#pilotBustShot = new PilotBustShotContainer(resources, pilotIds, this.#pilotId);
+    this.#pilotBustShot.hidden();
+    elements.working.appendChild(this.#pilotBustShot.getRootHTMLElement());
 
-    this._armdozerSelector = new ArmdozerSelector(resources,armDozerIds, this._armdozerId);
-    elements.selector.appendChild(this._armdozerSelector.getRootHTMLElement());
+    this.#armdozerSelector = new ArmdozerSelector(resources,armDozerIds, this.#armdozerId);
+    elements.selector.appendChild(this.#armdozerSelector.getRootHTMLElement());
 
-    this._pilotSelector = new PilotSelector(resources, pilotIds, this._pilotId);
-    this._pilotSelector.hidden();
-    elements.selector.appendChild(this._pilotSelector.getRootHTMLElement());
+    this.#pilotSelector = new PilotSelector(resources, pilotIds, this.#pilotId);
+    this.#pilotSelector.hidden();
+    elements.selector.appendChild(this.#pilotSelector.getRootHTMLElement());
 
-    this._unsubscribers = [
-      this._armdozerSelector.changeNotifier().subscribe(v => {
-        this._onArmdozerChange(v);
+    this.#unsubscribers = [
+      this.#armdozerSelector.changeNotifier().subscribe(v => {
+        this.#onArmdozerChange(v);
       }),
-      this._armdozerSelector.decideNotifier().subscribe(v => {
-        this._onArmdozerDecided(v);
+      this.#armdozerSelector.decideNotifier().subscribe(v => {
+        this.#onArmdozerDecided(v);
       }),
-      this._armdozerSelector.prevNotifier().subscribe(() => {
-        this._onArmdozerSelectorPrev();
+      this.#armdozerSelector.prevNotifier().subscribe(() => {
+        this.#onArmdozerSelectorPrev();
       }),
-      this._pilotSelector.changeNotifier().subscribe(v => {
-        this._onPilotChange(v);
+      this.#pilotSelector.changeNotifier().subscribe(v => {
+        this.#onPilotChange(v);
       }),
-      this._pilotSelector.decideNotifier().subscribe(v => {
-        this._onPilotDecided(v);
+      this.#pilotSelector.decideNotifier().subscribe(v => {
+        this.#onPilotDecided(v);
       }),
-      this._pilotSelector.prevNotifier().subscribe(() => {
-        this._onPilotSelectorPrev();
+      this.#pilotSelector.prevNotifier().subscribe(() => {
+        this.#onPilotSelectorPrev();
       })
     ];
   }
@@ -141,9 +141,9 @@ export class PlayerSelect implements DOMScene {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._armdozerSelector.destructor();
-    this._pilotSelector.destructor();
-    this._unsubscribers.forEach(v => {
+    this.#armdozerSelector.destructor();
+    this.#pilotSelector.destructor();
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     })
   }
@@ -154,7 +154,7 @@ export class PlayerSelect implements DOMScene {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -164,10 +164,10 @@ export class PlayerSelect implements DOMScene {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
-      this._armdozerBustShot.waitUntilLoaded(),
-      this._armdozerSelector.waitUntilLoaded(),
-      this._pilotBustShot.waitUnlillLoaded(),
-      this._pilotSelector.waitUntilLoaded()
+      this.#armdozerBustShot.waitUntilLoaded(),
+      this.#armdozerSelector.waitUntilLoaded(),
+      this.#pilotBustShot.waitUnlillLoaded(),
+      this.#pilotSelector.waitUntilLoaded()
     ]);
   }
 
@@ -177,7 +177,7 @@ export class PlayerSelect implements DOMScene {
    * @return 通知ストリーム
    */
   decideNotifier(): Stream<PlayerDecide> {
-    return this._playerDecide;
+    return this.#playerDecide;
   }
 
   /**
@@ -185,7 +185,7 @@ export class PlayerSelect implements DOMScene {
    * @return 通知ストリーム
    */
   prevNotifier(): Stream<void> {
-    return this._prev;
+    return this.#prev;
   }
   
   /**
@@ -193,8 +193,8 @@ export class PlayerSelect implements DOMScene {
    *
    * @param armdozerId 変更したアームドーザID
    */
-  _onArmdozerChange(armdozerId: ArmDozerId): void {
-    this._armdozerBustShot.switch(armdozerId);
+  #onArmdozerChange(armdozerId: ArmDozerId): void {
+    this.#armdozerBustShot.switch(armdozerId);
   }
 
   /**
@@ -202,20 +202,20 @@ export class PlayerSelect implements DOMScene {
    *
    * @param armdozerId 決定したアームドーザID
    */
-  _onArmdozerDecided(armdozerId: ArmDozerId): void {
-    this._armdozerId = armdozerId;
-    this._pilotId = getDedicatedPilot(this._armdozerId)
-    this._pilotBustShot.switch(this._pilotId);
-    this._pilotSelector.show(this._pilotId);
+  #onArmdozerDecided(armdozerId: ArmDozerId): void {
+    this.#armdozerId = armdozerId;
+    this.#pilotId = getDedicatedPilot(this.#armdozerId)
+    this.#pilotBustShot.switch(this.#pilotId);
+    this.#pilotSelector.show(this.#pilotId);
 
-    this._armdozerSelector.hidden();
+    this.#armdozerSelector.hidden();
   }
 
   /**
    * アームドーザセレクタの戻るボタンを押した時の処理
    */
-  _onArmdozerSelectorPrev(): void {
-    this._prev.next();
+  #onArmdozerSelectorPrev(): void {
+    this.#prev.next();
   }
 
   /**
@@ -223,9 +223,9 @@ export class PlayerSelect implements DOMScene {
    *
    * @param pilotId 変更したパイロットID
    */
-  _onPilotChange(pilotId: PilotId): void {
-    this._pilotId = pilotId;
-    this._pilotBustShot.switch(pilotId);
+  #onPilotChange(pilotId: PilotId): void {
+    this.#pilotId = pilotId;
+    this.#pilotBustShot.switch(pilotId);
   }
 
   /**
@@ -233,22 +233,22 @@ export class PlayerSelect implements DOMScene {
    *
    * @param pilotId 決定したパイロットID
    */
-  _onPilotDecided(pilotId: PilotId): void {
-    this._pilotId = pilotId;
-    this._playerDecide.next({
-      armdozerId: this._armdozerId,
-      pilotId: this._pilotId
+  #onPilotDecided(pilotId: PilotId): void {
+    this.#pilotId = pilotId;
+    this.#playerDecide.next({
+      armdozerId: this.#armdozerId,
+      pilotId: this.#pilotId
     });
   }
 
   /**
    * パイロットセレクタの戻るボタンを押した時の処理
    */
-  async _onPilotSelectorPrev(): Promise<void> {
-    await this._pilotBustShot.exit();
-    this._pilotBustShot.hidden();
-    this._pilotSelector.hidden();
+  async #onPilotSelectorPrev(): Promise<void> {
+    await this.#pilotBustShot.exit();
+    this.#pilotBustShot.hidden();
+    this.#pilotSelector.hidden();
 
-    this._armdozerSelector.show();
+    this.#armdozerSelector.show();
   }
 }

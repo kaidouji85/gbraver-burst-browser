@@ -9,9 +9,9 @@ import {LoadingPresentation} from "./presentation";
  * ローディング
  */
 export class Loading implements DOMScene {
-  _completedRate: number;
-  _presentation: LoadingPresentation;
-  _unsubscriber: Unsubscriber;
+  #completedRate: number;
+  #presentation: LoadingPresentation;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -19,18 +19,18 @@ export class Loading implements DOMScene {
    * @param loading ローディングストリーム
    */
   constructor(loading: Stream<LoadingActions>) {
-    this._completedRate = 0;
-    this._presentation = new LoadingPresentation();
-    this._unsubscriber = loading.subscribe(action => {
+    this.#completedRate = 0;
+    this.#presentation = new LoadingPresentation();
+    this.#unsubscriber = loading.subscribe(action => {
       if (action.type === 'LoadingProgress') {
-        this._onLoadingProgress(action);
+        this.#onLoadingProgress(action);
       }
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._unsubscriber.unsubscribe();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -39,7 +39,7 @@ export class Loading implements DOMScene {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._presentation.getRootHTMLElement();
+    return this.#presentation.getRootHTMLElement();
   }
 
   /**
@@ -47,8 +47,8 @@ export class Loading implements DOMScene {
    *
    * @param action アクション
    */
-  _onLoadingProgress(action: LoadingProgress): void {
-    this._completedRate = Math.max(action.completedRate, this._completedRate);
-    this._presentation.setCompletedRate(this._completedRate);
+  #onLoadingProgress(action: LoadingProgress): void {
+    this.#completedRate = Math.max(action.completedRate, this.#completedRate);
+    this.#presentation.setCompletedRate(this.#completedRate);
   }
 }

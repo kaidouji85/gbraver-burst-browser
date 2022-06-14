@@ -59,8 +59,8 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** NPCステージタイトル */
 export class NPCStageTitle implements DOMScene {
-  _root: HTMLElement;
-  _isArmDozerIconLoaded: Promise<void>;
+  #root: HTMLElement;
+  #isArmDozerIconLoaded: Promise<void>;
 
   /**
    * コンストラクタ
@@ -72,13 +72,13 @@ export class NPCStageTitle implements DOMScene {
    */
   constructor(resources: Resources, level: number, caption: string[], armDozerId: ArmDozerId) {
     const ids = {caption: domUuid(), armDozerIcon: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS;
-    this._root.innerHTML = rootInnerHTML(ids, level);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS;
+    this.#root.innerHTML = rootInnerHTML(ids, level);
 
-    const elements = extractElements(this._root, ids);
+    const elements = extractElements(this.#root, ids);
 
-    this._isArmDozerIconLoaded = waitElementLoaded(elements.armDozerIcon);
+    this.#isArmDozerIconLoaded = waitElementLoaded(elements.armDozerIcon);
     const armDozerIconPathID = getArmdozerIconPathId(armDozerId);
     elements.armDozerIcon.src = resources.paths.find(v => v.id === armDozerIconPathID)?.path ?? '';
 
@@ -96,7 +96,7 @@ export class NPCStageTitle implements DOMScene {
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -105,6 +105,6 @@ export class NPCStageTitle implements DOMScene {
    * @return 待機結果
    */
   async waitUntilLoaded(): Promise<void> {
-    await this._isArmDozerIconLoaded;
+    await this.#isArmDozerIconLoaded;
   }
 }

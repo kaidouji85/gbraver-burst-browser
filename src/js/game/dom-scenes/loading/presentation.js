@@ -6,9 +6,9 @@ import {domUuid} from "../../../uuid/dom-uuid";
  * ローディングシーン プレゼンテーション
  */
 export class LoadingPresentation {
-  _root: HTMLElement;
-  _text: HTMLElement;
-  _bar: HTMLElement;
+  #root: HTMLElement;
+  #text: HTMLElement;
+  #bar: HTMLElement;
 
   /**
    * コンストラクタ
@@ -17,8 +17,8 @@ export class LoadingPresentation {
     const textId = domUuid();
     const barId = domUuid();
 
-    this._root = document.createElement('div');
-    this._root.innerHTML = `
+    this.#root = document.createElement('div');
+    this.#root.innerHTML = `
       <div class="loading__completed-rate">
         <div class="loading__completed-rate__text" data-id="${textId}"></div>
         <div class="loading__completed-rate__bar">
@@ -26,11 +26,11 @@ export class LoadingPresentation {
         </div>
       </div>
     `;
-    this._root.className = 'loading';
-    this._root.style.display = 'flex';
+    this.#root.className = 'loading';
+    this.#root.style.display = 'flex';
 
-    this._text = this._root.querySelector(`[data-id="${textId}"]`) || document.createElement('div');
-    this._bar = this._root.querySelector(`[data-id="${barId}"]`) || document.createElement('div');
+    this.#text = this.#root.querySelector(`[data-id="${textId}"]`) || document.createElement('div');
+    this.#bar = this.#root.querySelector(`[data-id="${barId}"]`) || document.createElement('div');
 
     this.setCompletedRate(0);
   }
@@ -41,8 +41,8 @@ export class LoadingPresentation {
    * @param completedRate 0〜1で指定する進捗率、1で完了
    */
   setCompletedRate(completedRate: number): void {
-    this._text.innerText = `LOADING... ${Math.floor(completedRate * 100)}%`;
-    this._bar.style.width = `${completedRate * 100}%`
+    this.#text.innerText = `LOADING... ${Math.floor(completedRate * 100)}%`;
+    this.#bar.style.width = `${completedRate * 100}%`
   }
 
   /**
@@ -51,6 +51,6 @@ export class LoadingPresentation {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 }
