@@ -1,8 +1,8 @@
 // @flow
 
-import {PlayerDamageDecreaseView} from "./player-damage-decrease-view";
 import type {Resources} from "../../../resource";
 import type {DamageDecreaseModel} from "../model/damage-decrease-model";
+import {PlayerDamageDecreaseView} from "./player-damage-decrease-view";
 
 /**
  * 敵 ダメージ減少 ビュー

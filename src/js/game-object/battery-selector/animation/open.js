@@ -1,9 +1,9 @@
 // @flow
 
 import {Animate} from "../../../animation/animate";
-import type {BatterySelectorModel} from "../model";
-import {tween} from "../../../animation/tween";
 import {process} from "../../../animation/process";
+import {tween} from "../../../animation/tween";
+import type {BatterySelectorModel} from "../model";
 
 /**
  * ボタン表示アニメーション

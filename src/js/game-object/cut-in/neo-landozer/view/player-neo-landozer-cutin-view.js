@@ -1,14 +1,14 @@
 // @flow
 
-import type {NeoLandozerCutInView} from "./neo-landozer-cutin-view";
+import * as THREE from "three";
+import type {PreRender} from "../../../../game-loop/pre-render";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import * as THREE from "three";
-import type {AnimationType, NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
 import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
-import type {PreRender} from "../../../../game-loop/pre-render";
 import {HUDCutInScale} from "../../../scale";
+import type {AnimationType, NeoLandozerCutInModel} from "../model/neo-landozer-cutin-model";
+import type {NeoLandozerCutInView} from "./neo-landozer-cutin-view";
 
 export const MAX_ANIMATION = 4;
 export const WIDTH = 800;

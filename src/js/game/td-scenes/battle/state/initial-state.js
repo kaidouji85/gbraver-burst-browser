@@ -1,7 +1,7 @@
 // @flow
 
-import type {BattleSceneState} from "./battle-scene-state";
 import type {PlayerId} from "gbraver-burst-core";
+import type {BattleSceneState} from "./battle-scene-state";
 
 /** 
  * 初期状態を生成する

@@ -1,14 +1,14 @@
 // @flow
 
-import type {DamageIndicatorView} from "./view/damage-indicator-view";
-import {createInitialValue} from "./model/initial-value";
-import type {DamageIndicatorModel} from "./model/damage-indicator-model";
 import * as THREE from 'three';
-import {popUp} from "./animation/pop-up";
-import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import type {GameObjectAction} from "../action/game-object-action";
+import type {PreRender} from "../../game-loop/pre-render";
 import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {popUp} from "./animation/pop-up";
+import type {DamageIndicatorModel} from "./model/damage-indicator-model";
+import {createInitialValue} from "./model/initial-value";
+import type {DamageIndicatorView} from "./view/damage-indicator-view";
 
 /** ダメージインジケータ */
 export class DamageIndicator {

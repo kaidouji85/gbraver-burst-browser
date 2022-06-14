@@ -1,11 +1,11 @@
 // @flow
 
-import {ShinyaCutIn} from "./shinya";
 import type {Resources} from "../../../resource";
-import {PlayerShinyaView} from "./view/player-shinya-view";
-import {EnemyShinyaView} from "./view/enemy-shinya-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {ShinyaCutIn} from "./shinya";
+import {EnemyShinyaView} from "./view/enemy-shinya-view";
+import {PlayerShinyaView} from "./view/player-shinya-view";
 
 /**
  * プレイヤー側 シンヤ カットイン

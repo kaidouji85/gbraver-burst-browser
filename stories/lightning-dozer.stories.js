@@ -1,8 +1,8 @@
 // @flow
 
-import {TDGameObjectStub} from "./stub/td-game-object-stub";
-import {PlayerLightningDozer} from "../src/js/game-object/armdozer/lightning-dozer";
 import {delay} from "../src/js/animation/delay";
+import {PlayerLightningDozer} from "../src/js/game-object/armdozer/lightning-dozer";
+import {TDGameObjectStub} from "./stub/td-game-object-stub";
 
 export default {
   title: 'lightning-dozer',
@@ -18,7 +18,7 @@ export const armHammer = (): HTMLElement => {
       .chain(sprite.hmToStand())
       .chain(delay(2000));
     animation.loop();
-    return [sprite.getObject3D()];
+    return {objects: [sprite.getObject3D()]};
   });
   stub.start();
   return stub.domElement();

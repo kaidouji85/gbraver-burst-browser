@@ -1,22 +1,22 @@
 // @flow
-import {domUuid} from "../../../uuid/dom-uuid";
-import type {Resources} from "../../../resource";
-import {PathIds} from "../../../resource/path";
-import {waitElementLoaded} from "../../../wait/wait-element-loaded";
-import {pop} from "../../../dom/animation";
 import {Howl} from "howler";
-import type {SoundResource} from "../../../resource/sound";
-import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
-import {Exclusive} from "../../../exclusive/exclusive";
-import type {DOMScene} from "../dom-scene";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import type {TitleAccount} from "./title-account";
-import {escapeHTML} from '../../../dom/escape-html';
 import type {BGMManager} from '../../../bgm/bgm-manager';
 import {fadeIn, play} from "../../../bgm/bgm-operators";
+import {pop} from "../../../dom/animation";
+import {escapeHTML} from '../../../dom/escape-html';
 import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
+import type {SoundResource} from "../../../resource/sound";
+import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
+import {domUuid} from "../../../uuid/dom-uuid";
+import {waitElementLoaded} from "../../../wait/wait-element-loaded";
+import type {DOMScene} from "../dom-scene";
+import type {TitleAccount} from "./title-account";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
@@ -141,33 +141,33 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** タイトル */
 export class Title implements DOMScene {
-  _exclusive: Exclusive;
-  _isAccountMenuOpen: boolean;
-  _login: HTMLElement;
-  _accountMenu: HTMLElement;
-  _avatar: HTMLImageElement;
-  _deleteAccount: HTMLElement;
-  _logout: HTMLElement;
-  _root: HTMLElement;
-  _arcade: HTMLElement;
-  _casualMatch: HTMLElement;
-  _howToPlay: HTMLElement;
-  _config: HTMLElement;
-  _isTitleBackLoaded: Promise<void>;
-  _isAvatarLoaded: Promise<void>;
-  _isLogoLoaded: Promise<void>;
-  _changeValue: typeof Howl;
-  _pushButton: typeof Howl;
-  _titleBGM: SoundResource;
-  _bgm: BGMManager;
-  _pushLogin: StreamSource<void>;
-  _pushDeleteAccount: StreamSource<void>;
-  _pushLogout: StreamSource<void>;
-  _pushArcade: StreamSource<void>;
-  _pushCasualMatch: StreamSource<void>;
-  _pushHowToPlay: StreamSource<void>;
-  _pushConfig: StreamSource<void>;
-  _unsubscribers: Unsubscriber[];
+  #exclusive: Exclusive;
+  #isAccountMenuOpen: boolean;
+  #login: HTMLElement;
+  #accountMenu: HTMLElement;
+  #avatar: HTMLImageElement;
+  #deleteAccount: HTMLElement;
+  #logout: HTMLElement;
+  #root: HTMLElement;
+  #arcade: HTMLElement;
+  #casualMatch: HTMLElement;
+  #howToPlay: HTMLElement;
+  #config: HTMLElement;
+  #isTitleBackLoaded: Promise<void>;
+  #isAvatarLoaded: Promise<void>;
+  #isLogoLoaded: Promise<void>;
+  #changeValue: typeof Howl;
+  #pushButton: typeof Howl;
+  #titleBGM: SoundResource;
+  #bgm: BGMManager;
+  #pushLogin: StreamSource<void>;
+  #pushDeleteAccount: StreamSource<void>;
+  #pushLogout: StreamSource<void>;
+  #pushArcade: StreamSource<void>;
+  #pushCasualMatch: StreamSource<void>;
+  #pushHowToPlay: StreamSource<void>;
+  #pushConfig: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -181,85 +181,85 @@ export class Title implements DOMScene {
    * @param contactURL 問い合わせページのURL
    */
   constructor(resources: Resources, bgm: BGMManager, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
-    this._exclusive = new Exclusive();
-    this._isAccountMenuOpen = false;
+    this.#exclusive = new Exclusive();
+    this.#isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
       arcade: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
-    this._root = document.createElement('div');
-    this._root.innerHTML = rootInnerHTML(dataIDs, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
-    this._root.className = ROOT_CLASS;
-    const elements = extractElements(this._root, dataIDs);
-    this._login = elements.login;
-    this._accountMenu = elements.accountMenu;
-    this._avatar = elements.avatar;
-    this._deleteAccount = elements.deleteAccount;
-    this._logout = elements.logout;
-    this._arcade = elements.arcade;
-    this._casualMatch = elements.casualMatch;
-    this._howToPlay = elements.howToPlay;
-    this._config = elements.config;
+    this.#root = document.createElement('div');
+    this.#root.innerHTML = rootInnerHTML(dataIDs, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
+    this.#root.className = ROOT_CLASS;
+    const elements = extractElements(this.#root, dataIDs);
+    this.#login = elements.login;
+    this.#accountMenu = elements.accountMenu;
+    this.#avatar = elements.avatar;
+    this.#deleteAccount = elements.deleteAccount;
+    this.#logout = elements.logout;
+    this.#arcade = elements.arcade;
+    this.#casualMatch = elements.casualMatch;
+    this.#howToPlay = elements.howToPlay;
+    this.#config = elements.config;
 
-    this._isAvatarLoaded = (account.type === 'LoggedInAccount') ? waitElementLoaded(this._avatar) : Promise.resolve();
-    this._avatar.src = (account.type === 'LoggedInAccount') ? account.pictureURL : '';
+    this.#isAvatarLoaded = (account.type === 'LoggedInAccount') ? waitElementLoaded(this.#avatar) : Promise.resolve();
+    this.#avatar.src = (account.type === 'LoggedInAccount') ? account.pictureURL : '';
     
-    this._isLogoLoaded = waitElementLoaded(elements.logo);
+    this.#isLogoLoaded = waitElementLoaded(elements.logo);
     elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
 
     const titleBackImage = new Image();
-    this._isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
-      this._root.style.backgroundImage = `url(${titleBackImage.src})`;
+    this.#isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
+      this.#root.style.backgroundImage = `url(${titleBackImage.src})`;
     });
     titleBackImage.src = resources.paths.find(v => v.id === PathIds.TITLE_BACK)
       ?.path ?? '';
 
-    this._pushButton = this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+    this.#pushButton = this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
-    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
-    this._titleBGM = resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM) ?? createEmptySoundResource();
-    this._bgm = bgm;
+    this.#titleBGM = resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM) ?? createEmptySoundResource();
+    this.#bgm = bgm;
 
-    this._pushLogin = createStreamSource();
-    this._pushDeleteAccount = createStreamSource();
-    this._pushLogout = createStreamSource();
-    this._pushArcade = createStreamSource();
-    this._pushHowToPlay = createStreamSource();
-    this._pushCasualMatch = createStreamSource();
-    this._pushConfig = createStreamSource();
-    this._unsubscribers = [
-      pushDOMStream(this._root).subscribe(action => {
-        this._onRootPush(action);
+    this.#pushLogin = createStreamSource();
+    this.#pushDeleteAccount = createStreamSource();
+    this.#pushLogout = createStreamSource();
+    this.#pushArcade = createStreamSource();
+    this.#pushHowToPlay = createStreamSource();
+    this.#pushCasualMatch = createStreamSource();
+    this.#pushConfig = createStreamSource();
+    this.#unsubscribers = [
+      pushDOMStream(this.#root).subscribe(action => {
+        this.#onRootPush(action);
       }),
-      pushDOMStream(this._login).subscribe(action => {
-        this._onLoginPush(action);
+      pushDOMStream(this.#login).subscribe(action => {
+        this.#onLoginPush(action);
       }),
-      pushDOMStream(this._avatar).subscribe(action => {
-        this._onAvatarPush(action);
+      pushDOMStream(this.#avatar).subscribe(action => {
+        this.#onAvatarPush(action);
       }),
-      pushDOMStream(this._deleteAccount).subscribe(action => {
-        this._onPushDeleteAccount(action);
+      pushDOMStream(this.#deleteAccount).subscribe(action => {
+        this.#onPushDeleteAccount(action);
       }),
-      pushDOMStream(this._logout).subscribe(action => {
-        this._onLogoutPush(action);
+      pushDOMStream(this.#logout).subscribe(action => {
+        this.#onLogoutPush(action);
       }),
-      pushDOMStream(this._arcade).subscribe(action => {
-        this._onArcadePush(action);
+      pushDOMStream(this.#arcade).subscribe(action => {
+        this.#onArcadePush(action);
       }),
-      pushDOMStream(this._casualMatch).subscribe(action => {
-        this._onCasualMatchPush(action);
+      pushDOMStream(this.#casualMatch).subscribe(action => {
+        this.#onCasualMatchPush(action);
       }),
-      pushDOMStream(this._howToPlay).subscribe(action => {
-        this._onHowToPlayPush(action);
+      pushDOMStream(this.#howToPlay).subscribe(action => {
+        this.#onHowToPlayPush(action);
       }),
-      pushDOMStream(this._config).subscribe(action => {
-        this._onConfigPush(action);
+      pushDOMStream(this.#config).subscribe(action => {
+        this.#onConfigPush(action);
       })
     ];
   }
 
   /** @override */
   destructor(): void {
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -270,8 +270,8 @@ export class Title implements DOMScene {
    * @return BGM再生が完了したら発火するPromise
    */
   async playBGM(): Promise<void> {
-    await this._bgm.do(play(this._titleBGM));
-    await this._bgm.do(fadeIn);
+    await this.#bgm.do(play(this.#titleBGM));
+    await this.#bgm.do(fadeIn);
   }
 
   /**
@@ -280,7 +280,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushLoginNotifier(): Stream<void> {
-    return this._pushLogin;
+    return this.#pushLogin;
   }
 
   /**
@@ -289,7 +289,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushDeleteAccountNotifier(): Stream<void> {
-    return this._pushDeleteAccount;
+    return this.#pushDeleteAccount;
   }
 
   /**
@@ -298,7 +298,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushLogoutNotifier(): Stream<void> {
-    return this._pushLogout;
+    return this.#pushLogout;
   }
 
   /**
@@ -307,7 +307,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushArcadeNotifier(): Stream<void> {
-    return this._pushArcade;
+    return this.#pushArcade;
   }
 
   /**
@@ -316,7 +316,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushCasualMatchNotifier(): Stream<void> {
-    return this._pushCasualMatch;
+    return this.#pushCasualMatch;
   }
 
   /**
@@ -325,7 +325,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushHowToPlayNotifier(): Stream<void> {
-    return this._pushHowToPlay;
+    return this.#pushHowToPlay;
   }
 
   /**
@@ -334,7 +334,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushConfigNotifier(): Stream<void> {
-    return this._pushConfig;
+    return this.#pushConfig;
   }
 
   /**
@@ -343,7 +343,7 @@ export class Title implements DOMScene {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -353,9 +353,9 @@ export class Title implements DOMScene {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
-      this._isTitleBackLoaded,
-      this._isAvatarLoaded,
-      this._isLogoLoaded,
+      this.#isTitleBackLoaded,
+      this.#isAvatarLoaded,
+      this.#isLogoLoaded,
     ]);
   }
 
@@ -365,10 +365,10 @@ export class Title implements DOMScene {
    * 
    * @param action アクション
    */
-  _onRootPush(action: PushDOM): void {
+  #onRootPush(action: PushDOM): void {
     action.event.stopPropagation();
-    if (this._isAccountMenuOpen) {
-      this._closeAccountMenu();
+    if (this.#isAccountMenuOpen) {
+      this.#closeAccountMenu();
     }
   }
 
@@ -377,12 +377,12 @@ export class Title implements DOMScene {
    * 
    * @param action アクション
    */
-  _onLoginPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onLoginPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this._pushButton.play();
-      await pop(this._login);
-      this._pushLogin.next();
+      this.#pushButton.play();
+      await pop(this.#login);
+      this.#pushLogin.next();
     });
   }
 
@@ -391,13 +391,13 @@ export class Title implements DOMScene {
    * 
    * @param action アクション
    */
-  _onAvatarPush(action: PushDOM): void {
+  #onAvatarPush(action: PushDOM): void {
     action.event.preventDefault();
-    if (!this._isAccountMenuOpen) {
+    if (!this.#isAccountMenuOpen) {
       action.event.stopPropagation();
-      this._changeValue.play();
-      pop(this._avatar, 1.2);
-      this._openAccountMenu();
+      this.#changeValue.play();
+      pop(this.#avatar, 1.2);
+      this.#openAccountMenu();
     }
   }
 
@@ -406,10 +406,10 @@ export class Title implements DOMScene {
    * 
    * @param action アクション
    */
-  _onPushDeleteAccount(action: PushDOM): void {
+  #onPushDeleteAccount(action: PushDOM): void {
     action.event.preventDefault();
-    this._changeValue.play();
-    this._pushDeleteAccount.next();
+    this.#changeValue.play();
+    this.#pushDeleteAccount.next();
   }
 
   /**
@@ -417,10 +417,10 @@ export class Title implements DOMScene {
    * 
    * @param action アクション
    */
-  _onLogoutPush(action: PushDOM): void {
+  #onLogoutPush(action: PushDOM): void {
     action.event.preventDefault();
-    this._changeValue.play();
-    this._pushLogout.next();
+    this.#changeValue.play();
+    this.#pushLogout.next();
   }
   
   /**
@@ -428,12 +428,12 @@ export class Title implements DOMScene {
    * 
    * @param action アクション
    */
-  _onArcadePush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onArcadePush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this._pushButton.play();
-      await pop(this._arcade);
-      this._pushArcade.next();
+      this.#pushButton.play();
+      await pop(this.#arcade);
+      this.#pushArcade.next();
     });
   }
 
@@ -442,12 +442,12 @@ export class Title implements DOMScene {
    *
    * @param action アクション
    */
-  _onCasualMatchPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onCasualMatchPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this._pushButton.play();
-      await pop(this._casualMatch);
-      this._pushCasualMatch.next();
+      this.#pushButton.play();
+      await pop(this.#casualMatch);
+      this.#pushCasualMatch.next();
     });
   }
 
@@ -456,12 +456,12 @@ export class Title implements DOMScene {
    * 
    * @param action アクション
    */
-  _onHowToPlayPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onHowToPlayPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this._changeValue.play();
-      await pop(this._howToPlay);
-      this._pushHowToPlay.next();
+      this.#changeValue.play();
+      await pop(this.#howToPlay);
+      this.#pushHowToPlay.next();
     });
   }
 
@@ -470,28 +470,28 @@ export class Title implements DOMScene {
    *
    * @param action アクション
    */
-  _onConfigPush(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void> => {
+  #onConfigPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this._changeValue.play();
-      await pop(this._config);
-      this._pushConfig.next();
+      this.#changeValue.play();
+      await pop(this.#config);
+      this.#pushConfig.next();
     });
   }
 
   /**
    * アカウントメニューを開く
    */
-  _openAccountMenu(): void {
-    this._isAccountMenuOpen = true;
-    this._accountMenu.className = ACCOUNT_MENU_CLASS;
+  #openAccountMenu(): void {
+    this.#isAccountMenuOpen = true;
+    this.#accountMenu.className = ACCOUNT_MENU_CLASS;
   }
 
   /**
    * アカウントメニューを閉じる
    */
-  _closeAccountMenu(): void {
-    this._isAccountMenuOpen = false;
-    this._accountMenu.className = INVISIBLE_ACCOUNT_MENU_CLASS;
+  #closeAccountMenu(): void {
+    this.#isAccountMenuOpen = false;
+    this.#accountMenu.className = INVISIBLE_ACCOUNT_MENU_CLASS;
   }
 }

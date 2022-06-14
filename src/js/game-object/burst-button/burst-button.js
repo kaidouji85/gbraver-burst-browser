@@ -1,20 +1,20 @@
 // @flow
 import {Howl} from 'howler';
 import * as THREE from 'three';
-import type {BurstButtonModel} from "./model/burst-button-model";
-import {BurstButtonView} from "./view/burst-button-view";
-import type {Resources} from "../../resource";
-import {createInitialValue} from "./model/initial-value";
-import {open} from './animation/open';
-import {close} from './animation/close';
 import {Animate} from "../../animation/animate";
 import type {PreRender} from "../../game-loop/pre-render";
+import type {Resources} from "../../resource";
 import {SOUND_IDS} from "../../resource/sound";
-import {decide} from "./animation/decide";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {close} from './animation/close';
+import {decide} from "./animation/decide";
+import {open} from './animation/open';
+import type {BurstButtonModel} from "./model/burst-button-model";
+import {createInitialValue} from "./model/initial-value";
 import type {ArmdozerIcon} from "./view/armdozer-icon";
+import {BurstButtonView} from "./view/burst-button-view";
 
 /** バーストボタン */
 export class BurstButton {

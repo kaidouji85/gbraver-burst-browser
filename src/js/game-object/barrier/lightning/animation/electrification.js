@@ -2,9 +2,9 @@
 
 import TWEEN from '@tweenjs/tween.js';
 import {Animate} from "../../../../animation/animate";
-import type {LightningBarrierModel} from "../model/lightning-barrier-model";
-import {tween} from "../../../../animation/tween";
 import {process} from "../../../../animation/process";
+import {tween} from "../../../../animation/tween";
+import type {LightningBarrierModel} from "../model/lightning-barrier-model";
 
 /**
  * 帯電

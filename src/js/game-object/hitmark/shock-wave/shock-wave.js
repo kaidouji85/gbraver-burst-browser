@@ -2,16 +2,16 @@
 
 import {Howl} from 'howler';
 import * as THREE from 'three';
-import type {ShockWaveView} from "./view/shock-wave-view";
-import type {ShockWaveModel} from "./model/shock-wave-model";
-import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
-import {popUp} from "./animation/pop-up";
+import {process} from '../../../animation/process';
+import type {PreRender} from "../../../game-loop/pre-render";
 import type {Resources} from "../../../resource";
 import {SOUND_IDS} from "../../../resource/sound";
-import {process} from '../../../animation/process';
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {popUp} from "./animation/pop-up";
+import type {ShockWaveModel} from "./model/shock-wave-model";
+import type {ShockWaveView} from "./view/shock-wave-view";
 
 /**
  * 衝撃波

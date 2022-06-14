@@ -1,10 +1,10 @@
 // @flow
 
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
+import {empty} from "../../../../animation/delay";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {empty} from "../../../../animation/delay";
-import {all} from "../../../../animation/all";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 
 /** ノックバック */

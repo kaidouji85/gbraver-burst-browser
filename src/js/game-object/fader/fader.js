@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from 'three';
-import {FaderView} from "./view/fader-view";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {FaderModel} from "./model/fader-model";
-import {createInitialValue} from "./model/initial-value";
 import {Animate} from "../../animation/animate";
+import type {PreRender} from "../../game-loop/pre-render";
+import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
 import {fadeIn} from "./animation/fade-in";
 import {fadeOut} from "./animation/fade-out";
 import {opacity} from "./animation/opacity";
-import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {FaderModel} from "./model/fader-model";
+import {createInitialValue} from "./model/initial-value";
+import {FaderView} from "./view/fader-view";
 
 /** コンストラクタのパラメータ */
 type Param = {

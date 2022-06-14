@@ -1,14 +1,14 @@
 // @flow
 import {Howl} from 'howler';
+import {pop, waitFinishAnimation} from "../../../dom/animation";
+import {pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {PostBattle} from "../../post-battle";
 import type {PostBattleButtonConfig} from "./post-battle-button-config";
-import {pop, waitFinishAnimation} from "../../../dom/animation";
-import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
-import {Exclusive} from "../../../exclusive/exclusive";
-import {pushDOMStream} from "../../../dom/event-stream";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'post-battle';
@@ -23,32 +23,32 @@ type ActionButton = {
 
 /** バトル終了後行動選択フローター */
 export class PostBattleFloater {
-  _root: HTMLElement;
-  _exclusive: Exclusive;
-  _selectionComplete: StreamSource<PostBattle>;
-  _unsubscribers: Unsubscriber[];
+  #root: HTMLElement;
+  #exclusive: Exclusive;
+  #selectionComplete: StreamSource<PostBattle>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
    * 本クラスの初期表示は(display: none)である
    */
   constructor() {
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS;
-    this._root.style.display = 'none';
-    this._exclusive = new Exclusive();
-    this._selectionComplete = createStreamSource();
-    this._unsubscribers = [];
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS;
+    this.#root.style.display = 'none';
+    this.#exclusive = new Exclusive();
+    this.#selectionComplete = createStreamSource();
+    this.#unsubscribers = [];
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-    this._root.innerHTML = '';
+    this.#root.innerHTML = '';
   }
 
   /**
@@ -57,7 +57,7 @@ export class PostBattleFloater {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -68,13 +68,13 @@ export class PostBattleFloater {
    * @return アニメーションが完了したら発火するPromise
    */
   async show(resources: Resources, buttons: PostBattleButtonConfig[]): Promise<void> {
-    await this._exclusive.execute(async () => {
-      const actionButtons = this._createActionButtons(resources, buttons);
+    await this.#exclusive.execute(async () => {
+      const actionButtons = this.#createActionButtons(resources, buttons);
       actionButtons.forEach(v => {
-        this._root.appendChild(v.button);
+        this.#root.appendChild(v.button);
       });
-      this._unsubscribers = actionButtons.map(v => v.unsubscriber);
-      await this._bottomUp();
+      this.#unsubscribers = actionButtons.map(v => v.unsubscriber);
+      await this.#bottomUp();
     });
   }
 
@@ -82,7 +82,7 @@ export class PostBattleFloater {
    * フローターを非表示にする
    */
   hidden(): void {
-    this._root.style.display = 'none';
+    this.#root.style.display = 'none';
     this.destructor();
   }
 
@@ -93,7 +93,7 @@ export class PostBattleFloater {
    * @return 通知ストリーム
    */
   selectionCompleteNotifier(): Stream<PostBattle> {
-    return this._selectionComplete;
+    return this.#selectionComplete;
   }
 
   /**
@@ -101,9 +101,9 @@ export class PostBattleFloater {
    *
    * @return アニメーションが完了したら発火するプロミス
    */
-  async _bottomUp(): Promise<void> {
-    this._root.style.display = 'flex';
-    const animation = this._root.animate([
+  async #bottomUp(): Promise<void> {
+    this.#root.style.display = 'flex';
+    const animation = this.#root.animate([
       {transform: 'translate(-50%, 100%)'},
       {transform: 'translate(-50%, 0)'}
     ], {
@@ -121,7 +121,7 @@ export class PostBattleFloater {
    * @param buttons ボタン設定
    * @return 生成結果
    */
-  _createActionButtons(resources: Resources, buttons: PostBattleButtonConfig[]): ActionButton[] {
+  #createActionButtons(resources: Resources, buttons: PostBattleButtonConfig[]): ActionButton[] {
     const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
     const changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
     const createButtonStyle = style => {
@@ -139,12 +139,12 @@ export class PostBattleFloater {
       const {className, sound} = createButtonStyle(style);
       button.className = className;
       const unsubscriber = pushDOMStream(button).subscribe(({event}) => {
-        this._exclusive.execute(async () => {
+        this.#exclusive.execute(async () => {
           event.preventDefault();
           event.stopPropagation();
           sound.play();
           await pop(button);
-          this._selectionComplete.next(action);
+          this.#selectionComplete.next(action);
         });
       });
       return {button, unsubscriber};

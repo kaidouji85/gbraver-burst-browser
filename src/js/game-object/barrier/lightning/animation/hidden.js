@@ -1,8 +1,8 @@
 // @flow
 
 import {Animate} from "../../../../animation/animate";
-import type {LightningBarrierModel} from "../model/lightning-barrier-model";
 import {tween} from "../../../../animation/tween";
+import type {LightningBarrierModel} from "../model/lightning-barrier-model";
 
 /**
  * バリアを消す

@@ -1,11 +1,11 @@
 // @flow
-import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
 import type {PilotSkill, RecoverBatterySkill} from "gbraver-burst-core";
-import {ShinyaHUD} from "../../../view/hud/pilot-objects/shinya";
+import {all} from "../../../../../../animation/all";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import {all} from "../../../../../../animation/all";
+import {ShinyaHUD} from "../../../view/hud/pilot-objects/shinya";
 import {dolly, toInitial, track} from "../../td-camera";
+import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
 
 /**
  * パイロットスキル シンヤ アニメーションパラメータ

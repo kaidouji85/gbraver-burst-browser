@@ -1,9 +1,9 @@
 // @flow
 
 import {Animate} from "../../../animation/animate";
-import type {BurstButtonModel} from "../model/burst-button-model";
-import {tween} from "../../../animation/tween";
 import {process} from '../../../animation/process';
+import {tween} from "../../../animation/tween";
+import type {BurstButtonModel} from "../model/burst-button-model";
 
 /**
  * 決定アニメーション

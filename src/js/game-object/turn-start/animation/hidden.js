@@ -1,8 +1,8 @@
 // @flow
 
 import {Animate} from "../../../animation/animate";
-import type {TurnStartModel} from "../model/turn-start-model";
 import {tween} from "../../../animation/tween";
+import type {TurnStartModel} from "../model/turn-start-model";
 
 /**
  * 非表示アニメーション

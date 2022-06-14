@@ -1,18 +1,18 @@
 // @flow
 
 import * as THREE from "three";
-import type {Resize} from "../../../window/resize";
-import {onResizePerspectiveCamera} from "../../../camera/resize";
-import type {Battle3DCameraModel} from "./model/model";
-import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../../game-loop/update";
-import {engage} from "./engauge";
 import {Animate} from "../../../animation/animate";
-import type {Position} from './position';
+import {onResizePerspectiveCamera} from "../../../camera/resize";
+import type {Update} from "../../../game-loop/update";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
+import {getViewPortHeight, getViewPortWidth} from "../../../view-port/view-port-size";
+import type {Resize} from "../../../window/resize";
 import {lookAt} from "./animation/look-at";
 import {move} from "./animation/move";
-import {getViewPortHeight, getViewPortWidth} from "../../../view-port/view-port-size";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
+import {engage} from "./engauge";
+import {createInitialValue} from "./model/initial-value";
+import type {Battle3DCameraModel} from "./model/model";
+import type {Position} from './position';
 
 // TODO カメラ位置、カメラ視点をコンストラクタから渡す
 /** 戦闘シーン3Dレイヤー用カメラ */

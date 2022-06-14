@@ -1,9 +1,9 @@
 // @flow
 
-import type {BatteryNumberModel} from "../model/battery-number-model";
 import {Animate} from "../../../animation/animate";
 import {process} from "../../../animation/process";
 import {tween} from "../../../animation/tween";
+import type {BatteryNumberModel} from "../model/battery-number-model";
 
 /**
  * 数字を変更する

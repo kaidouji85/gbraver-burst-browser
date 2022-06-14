@@ -1,20 +1,21 @@
 // @flow
-import {TDGameObjectStub} from "./stub/td-game-object-stub";
-import ShoppingStreet from "../src/js/game-object/stage/shopping-street";
 import {Illumination} from "../src/js/game-object/illumination/illumination";
+import ShoppingStreet from "../src/js/game-object/stage/shopping-street";
 import {skyBox as createSkyBox} from "../src/js/game/td-scenes/battle/view/td/sky-box";
 import {stillImageStub} from "./stub/still-image-stub";
+import {TDGameObjectStub} from "./stub/td-game-object-stub";
 
 export default {
   title: 'shopping-street',
 };
 
 export const game = (): HTMLElement => {
-  const stub = new TDGameObjectStub(({resources, gameObjectAction, scene}) => {
+  const stub = new TDGameObjectStub(({resources, gameObjectAction}) => {
     const illumination = new Illumination(gameObjectAction);
     const shoppingStreet = new ShoppingStreet(resources);
-    scene.background = createSkyBox(resources);
-    return [...shoppingStreet.getThreeJsObjects(), ...illumination.getObject3Ds()];
+    const objects = [...shoppingStreet.getThreeJsObjects(), ...illumination.getObject3Ds()];
+    const skyBox = createSkyBox(resources);
+    return {objects, skyBox};
   });
   stub.start();
   return stub.domElement();

@@ -1,8 +1,8 @@
 // @flow
 
 import * as THREE from 'three';
-import {CanvasMesh} from "./canvas-mesh";
 import {drawImageInCenter} from "../canvas/draw/image-drawer";
+import {CanvasMesh} from "./canvas-mesh";
 
 /** コンストラクタのパラメータ */
 type Param = {

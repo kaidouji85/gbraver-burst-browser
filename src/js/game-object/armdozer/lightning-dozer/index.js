@@ -1,11 +1,11 @@
 // @flow
 
-import {LightningDozer} from "./lightning-dozer";
 import type {Resources} from "../../../resource";
-import {PlayerLightingDozerView} from "./view/player-lighting-dozer-view";
-import {EnemyLightningDozerView} from "./view/enemy-lightning-dozer-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {LightningDozer} from "./lightning-dozer";
+import {EnemyLightningDozerView} from "./view/enemy-lightning-dozer-view";
+import {PlayerLightingDozerView} from "./view/player-lighting-dozer-view";
 
 /**
  * プレイヤー側のライトニングドーザを生成する

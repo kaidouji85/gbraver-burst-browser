@@ -1,14 +1,14 @@
 // @flow
 
-import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
-import type {TDArmdozerObjects} from "./armdozer-objects";
 import type {Player, PlayerId} from "gbraver-burst-core";
-import type {Resources} from "../../../../../../resource";
-import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import * as THREE from "three";
-import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
+import {EnemyShinBraver, PlayerShinBraver} from "../../../../../../game-object/armdozer/shin-braver";
+import {ShinBraver} from "../../../../../../game-object/armdozer/shin-braver/shin-braver";
+import type {Resources} from "../../../../../../resource";
 import type {Stream} from "../../../../../../stream/stream";
+import type {TDArmdozerObjects} from "./armdozer-objects";
 
 /**
  * 3Dレイヤー シンブレイバー 3Dレイヤー フィールド

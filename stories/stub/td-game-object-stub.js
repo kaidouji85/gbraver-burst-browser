@@ -1,24 +1,24 @@
 // @flow
 import TWEEN from "@tweenjs/tween.js";
 import * as THREE from "three";
-import type {Resize} from "../../src/js/window/resize";
-import {resizeStream} from "../../src/js/window/resize";
-import {Renderer} from "../../src/js/render";
 import type {GameLoop} from "../../src/js/game-loop/game-loop";
 import {gameLoopStream} from "../../src/js/game-loop/game-loop";
-import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
-import type {Update} from "../../src/js/game-loop/update";
 import type {PreRender} from "../../src/js/game-loop/pre-render";
+import type {Update} from "../../src/js/game-loop/update";
 import type {GameObjectAction} from "../../src/js/game-object/action/game-object-action";
 import {gameObjectStream} from "../../src/js/game-object/action/game-object-action";
-import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
-import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
+import {TDCamera} from "../../src/js/game-object/camera/td";
+import {Renderer} from "../../src/js/render";
+import type {OverlapEvent} from "../../src/js/render/overlap-event/overlap-event";
 import type {Resources} from "../../src/js/resource";
 import {fullResourceLoading} from "../../src/js/resource";
-import {TDCamera} from "../../src/js/game-object/camera/td";
-import {StorybookResourceRoot} from "../storybook-resource-root";
+import type {SafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
+import {createSafeAreaInset} from "../../src/js/safe-area/safe-area-inset";
 import type {Stream, StreamSource, Unsubscriber} from "../../src/js/stream/stream";
 import {createStreamSource} from "../../src/js/stream/stream";
+import type {Resize} from "../../src/js/window/resize";
+import {resizeStream} from "../../src/js/window/resize";
+import {StorybookResourceRoot} from "../storybook-resource-root";
 
 /** Object3D生成関数パラメータ */
 type Object3DCreatorParams = {
@@ -26,10 +26,16 @@ type Object3DCreatorParams = {
   resources: Resources,
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
-  /** シーン */
-  scene: typeof THREE.Scene,
   /** カメラ */
   camera: TDCamera
+};
+
+/** スタブに追加するthree.jsオブジェクト */
+type Object3Ds = {
+  /** スタブに追加するオブジェクト */
+  objects: typeof THREE.Object3D[],
+  /** スタブのスカイボックス */
+  skyBox?: typeof THREE.CubeTexture,
 };
 
 /**
@@ -38,7 +44,7 @@ type Object3DCreatorParams = {
  * @param params パラメータ
  * @return シーンに追加するObject3D
  */
-type Object3DCreator = (params: Object3DCreatorParams) => typeof THREE.Object3D[];
+type Object3DCreator = (params: Object3DCreatorParams) => Object3Ds;
 
 /** 3Dレイヤー ゲームオブジェクト スタブ */
 export class TDGameObjectStub {
@@ -91,11 +97,12 @@ export class TDGameObjectStub {
     const resourceRoot = new StorybookResourceRoot();
     const resourceLoading = fullResourceLoading(resourceRoot);
     const resources = await resourceLoading.resources;
-    const object3Ds = this._creator({resources, gameObjectAction: this._gameObjectAction,
+    const {objects, skyBox} = this._creator({resources, gameObjectAction: this._gameObjectAction,
       scene: this._scene, camera: this._camera});
-    object3Ds.forEach(object3D => {
+    objects.forEach(object3D => {
       this._scene.add(object3D);
     });
+    this._scene.background = skyBox ?? null;
   }
 
   /**

@@ -2,9 +2,9 @@
 
 import TWEEN from '@tweenjs/tween.js';
 import {Animate} from "../../../../animation/animate";
+import {delay} from "../../../../animation/delay";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
-import {delay} from "../../../../animation/delay";
 import type {ShinBraverModel} from "../model/shin-braver-model";
 
 /**

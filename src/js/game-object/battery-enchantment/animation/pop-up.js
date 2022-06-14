@@ -1,10 +1,10 @@
 // @flow
-import type {BatteryEnchantmentModel} from "../model/battery-enchantment-model";
 import {Animate} from "../../../animation/animate";
-import {tween} from "../../../animation/tween";
 import {delay} from "../../../animation/delay";
-import {BatteryEnchantmentSounds} from "../sounds/battery-enchantment-sounds";
 import {process} from '../../../animation/process';
+import {tween} from "../../../animation/tween";
+import type {BatteryEnchantmentModel} from "../model/battery-enchantment-model";
+import {BatteryEnchantmentSounds} from "../sounds/battery-enchantment-sounds";
 
 /**
  * ポップアップ

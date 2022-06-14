@@ -1,7 +1,7 @@
 // @flow
 
-import type {Battle3DCameraModel} from "./model/model";
 import * as THREE from "three";
+import type {Battle3DCameraModel} from "./model/model";
 
 /**
  * モデルをカメラに反映させる

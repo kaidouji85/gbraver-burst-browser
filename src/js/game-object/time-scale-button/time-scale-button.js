@@ -1,22 +1,22 @@
 // @flow
 import TWEEN from '@tweenjs/tween.js';
 import * as THREE from 'three';
+import type {Animate} from "../../animation/animate";
+import type {PreRender} from "../../game-loop/pre-render";
+import type {Update} from "../../game-loop/update";
 import type {Resources} from "../../resource";
-import {close} from "./animation/close";
-import {open} from "./animation/open";
-import {toggle} from "./animation/toggle";
-import type {TimeScaleButtonModel} from "./model/time-scale-button-model";
-import {getNextTimeScale} from "./model/next-time-scale";
-import {createInitialValue} from "./model/initial-value";
-import {TimeScaleButtonView} from "./view/time-scale-button-view";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
-import type {PreRender} from "../../game-loop/pre-render";
-import type {Update} from "../../game-loop/update";
-import type {Animate} from "../../animation/animate";
+import {close} from "./animation/close";
+import {open} from "./animation/open";
+import {toggle} from "./animation/toggle";
+import {createInitialValue} from "./model/initial-value";
+import {getNextTimeScale} from "./model/next-time-scale";
+import type {TimeScaleButtonModel} from "./model/time-scale-button-model";
 import type {TimeScaleButtonSounds} from "./sounds/time-scale-sounds";
 import {createTimeScaleButtonSounds} from "./sounds/time-scale-sounds";
+import {TimeScaleButtonView} from "./view/time-scale-button-view";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {

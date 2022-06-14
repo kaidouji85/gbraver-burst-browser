@@ -1,0 +1,49 @@
+// @flow
+import {invisibleFirstView} from "../../first-view/first-view-visible";
+import {titleResourceLoading} from "../../resource";
+import {loadServiceWorker} from "../../service-worker/load-service-worker";
+import {viewPerformanceStats} from "../../stats/view-performance-stats";
+import {waitTime} from "../../wait/wait-time";
+import type {GameProps} from "../game-props";
+import {reflectSoundVolume} from "../reflect-sound-volume";
+import {startTitle} from "./start-title";
+
+/**
+ * ゲームの初期化
+ * 本関数にはpropsを変更する副作用がある
+ *
+ * @param props ゲームプロパティ
+ * @return 処理が完了したら発火するPromise
+ */
+export async function initialize(props: GameProps): Promise<void> {
+  const startTime = Date.now();
+  if (props.isPerformanceStatsVisible && document.body) {
+    viewPerformanceStats(document.body);
+  }
+
+  if (props.isServiceWorkerUsed) {
+    props.serviceWorker = await loadServiceWorker();
+  }
+
+  const [isLogin, isMailVerified] = await Promise.all([props.api.isLogin(), props.api.isMailVerified()]);
+  if (isLogin && !isMailVerified) {
+    const mailAddress = await props.api.getMail();
+    props.domScenes.startMailVerifiedIncomplete(mailAddress);
+    invisibleFirstView();
+    await props.fader.fadeIn();
+    return;
+  }
+
+  const resourceLoading = titleResourceLoading(props.resourceRoot);
+  props.resources = await resourceLoading.resources;
+  const config = await props.config.load();
+  reflectSoundVolume(props.resources, config);
+  const title = await startTitle(props);
+  props.interruptScenes.bind(props.resources);
+  const latency = Date.now() - startTime;
+  await waitTime(500 - latency);
+  await props.fader.fadeOut();
+  invisibleFirstView();
+  await props.fader.fadeIn();
+  title.playBGM();
+}

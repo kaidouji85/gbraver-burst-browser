@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../../resource";
-import {NeoLandozer} from './neo-landozer';
-import {PlayerNeoLandozerView} from "./view/player-neo-landozer-view";
-import {EnemyNeoLandozerView} from "./view/enemy-neo-landozer-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {NeoLandozer} from './neo-landozer';
+import {EnemyNeoLandozerView} from "./view/enemy-neo-landozer-view";
+import {PlayerNeoLandozerView} from "./view/player-neo-landozer-view";
 
 /**
  * プレイヤー側ネオランドーザ

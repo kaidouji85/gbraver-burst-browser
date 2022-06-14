@@ -1,13 +1,13 @@
 // @flow
-import type {DOMScene} from "../dom-scene";
-import {escapeHTML} from "../../../dom/escape-html";
-import {domUuid} from "../../../uuid/dom-uuid";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation";
+import {escapeHTML} from "../../../dom/escape-html";
 import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
+import {domUuid} from "../../../uuid/dom-uuid";
+import type {DOMScene} from "../dom-scene";
 
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'mail-verified-incomplete';
@@ -63,13 +63,13 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** メール認証未完了画面 */
 export class MailVerifiedIncomplete implements DOMScene {
-  _root: HTMLElement;
-  _gotoTitleButton: HTMLElement;
-  _reloadButton: HTMLElement;
-  _gotoTitle: StreamSource<void>;
-  _reload: StreamSource<void>;
-  _unsubscribers: Unsubscriber[];
-  _exclusive: Exclusive;
+  #root: HTMLElement;
+  #gotoTitleButton: HTMLElement;
+  #reloadButton: HTMLElement;
+  #gotoTitle: StreamSource<void>;
+  #reload: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
+  #exclusive: Exclusive;
 
   /**
    * コンストラクタ
@@ -78,38 +78,38 @@ export class MailVerifiedIncomplete implements DOMScene {
    */
   constructor(mailAddress: string): void {
     const ids = {gotoTitle: domUuid(), reload: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS;
-    this._root.innerHTML = rootInnerHTML(ids, mailAddress);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS;
+    this.#root.innerHTML = rootInnerHTML(ids, mailAddress);
 
-    const elements = extractElements(this._root, ids);
-    this._gotoTitleButton = elements.gotoTitle;
-    this._reloadButton = elements.reload;
+    const elements = extractElements(this.#root, ids);
+    this.#gotoTitleButton = elements.gotoTitle;
+    this.#reloadButton = elements.reload;
 
-    this._unsubscribers = [
-      pushDOMStream(this._gotoTitleButton).subscribe(action => {
-        this._onGotoTitleButtonPush(action);
+    this.#unsubscribers = [
+      pushDOMStream(this.#gotoTitleButton).subscribe(action => {
+        this.#onGotoTitleButtonPush(action);
       }),
-      pushDOMStream(this._reloadButton).subscribe(action => {
-        this._onReloadButtonPush(action);
+      pushDOMStream(this.#reloadButton).subscribe(action => {
+        this.#onReloadButtonPush(action);
       }),
     ];
 
-    this._gotoTitle = createStreamSource();
-    this._reload = createStreamSource();
-    this._exclusive = new Exclusive();
+    this.#gotoTitle = createStreamSource();
+    this.#reload = createStreamSource();
+    this.#exclusive = new Exclusive();
   }
 
   /** @override */
   destructor(): void {
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
 
   /** @override  */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -118,7 +118,7 @@ export class MailVerifiedIncomplete implements DOMScene {
    * @return 通知ストリーム
    */
   gotoTitleNotifier(): Stream<void> {
-    return this._gotoTitle;
+    return this.#gotoTitle;
   }
 
   /**
@@ -127,7 +127,7 @@ export class MailVerifiedIncomplete implements DOMScene {
    * @return 通知ストリーム
    */
   reloadNotifier(): Stream<void> {
-    return this._reload;
+    return this.#reload;
   }
 
   /**
@@ -135,12 +135,12 @@ export class MailVerifiedIncomplete implements DOMScene {
    *
    * @param action アクション
    */
-  _onGotoTitleButtonPush(action: PushDOM): void {
-    this._exclusive.execute(async () => {
+  #onGotoTitleButtonPush(action: PushDOM): void {
+    this.#exclusive.execute(async () => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      await pop(this._gotoTitleButton);
-      this._gotoTitle.next();
+      await pop(this.#gotoTitleButton);
+      this.#gotoTitle.next();
     });
   }
 
@@ -149,12 +149,12 @@ export class MailVerifiedIncomplete implements DOMScene {
    *
    * @param action アクション
    */
-  _onReloadButtonPush(action: PushDOM): void {
-    this._exclusive.execute(async () => {
+  #onReloadButtonPush(action: PushDOM): void {
+    this.#exclusive.execute(async () => {
       action.event.preventDefault();
       action.event.stopPropagation();
-      await pop(this._reloadButton);
-      this._reload.next();
+      await pop(this.#reloadButton);
+      this.#reload.next();
     });
   }
 }

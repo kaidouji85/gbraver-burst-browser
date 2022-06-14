@@ -1,9 +1,9 @@
 // @flow
 
 import TWEEN from "@tweenjs/tween.js";
-import type {BatterySelectorModel} from "../model";
-import {tween} from "../../../animation/tween";
 import {Animate} from "../../../animation/animate";
+import {tween} from "../../../animation/tween";
+import type {BatterySelectorModel} from "../model";
 
 const MAX_DURATION = 500;
 

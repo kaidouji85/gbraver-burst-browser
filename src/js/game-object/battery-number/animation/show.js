@@ -1,9 +1,9 @@
 // @flow
 
 import {Animate} from "../../../animation/animate";
-import type {BatteryNumberModel} from "../model/battery-number-model";
 import {process} from "../../../animation/process";
 import {tween} from "../../../animation/tween";
+import type {BatteryNumberModel} from "../model/battery-number-model";
 
 /**
  * バッテリー数字を表示する

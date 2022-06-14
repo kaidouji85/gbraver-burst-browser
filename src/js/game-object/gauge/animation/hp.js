@@ -1,8 +1,8 @@
 // @flow
 
 import {Animate} from "../../../animation/animate";
-import type {GaugeModel} from "../model/gauge-model";
 import {tween} from "../../../animation/tween";
+import type {GaugeModel} from "../model/gauge-model";
 
 /** HPを変更するアニメーション */
 export function hp(model: GaugeModel, value: number): Animate {

@@ -1,9 +1,9 @@
 // @flow
 
+import {ArmDozerIdList} from "gbraver-burst-core";
+import {NPCStageTitle} from "../src/js/game/dom-scenes/npc-stage-title/npc-stage-title";
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
-import {NPCStageTitle} from "../src/js/game/dom-scenes/npc-stage-title/npc-stage-title";
-import {ArmDozerIdList} from "gbraver-burst-core";
 
 export default {
   title: 'npc-stage-title'

@@ -1,21 +1,21 @@
 // @flow
-import {BatterySelector} from "../../../../../../game-object/battery-selector";
-import {BurstButton} from "../../../../../../game-object/burst-button/burst-button";
-import type {Resources} from "../../../../../../resource";
-import type {BattleSceneAction} from "../../../actions";
 import type {Player} from "gbraver-burst-core";
 import * as THREE from "three";
-import {Fader} from "../../../../../../game-object/fader/fader";
-import {frontmostFader, rearmostFader} from "../../../../../../game-object/fader";
-import {PilotButton} from "../../../../../../game-object/pilot-button/pilot-button";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import {BatterySelector} from "../../../../../../game-object/battery-selector";
+import {BurstButton} from "../../../../../../game-object/burst-button/burst-button";
+import {frontmostFader, rearmostFader} from "../../../../../../game-object/fader";
+import {Fader} from "../../../../../../game-object/fader/fader";
+import {PilotButton} from "../../../../../../game-object/pilot-button/pilot-button";
+import {drawIndicator} from "../../../../../../game-object/result-indicator";
+import {ResultIndicator} from "../../../../../../game-object/result-indicator/result-indicator";
+import {TimeScaleButton} from "../../../../../../game-object/time-scale-button/time-scale-button";
+import type {Resources} from "../../../../../../resource";
 import type {Stream, StreamSource, Unsubscriber} from "../../../../../../stream/stream";
 import {createStreamSource} from "../../../../../../stream/stream";
+import type {BattleSceneAction} from "../../../actions";
 import {createBurstButton} from "./burst-button";
 import {createPilotButton} from "./pilot-button";
-import {ResultIndicator} from "../../../../../../game-object/result-indicator/result-indicator";
-import {drawIndicator} from "../../../../../../game-object/result-indicator";
-import {TimeScaleButton} from "../../../../../../game-object/time-scale-button/time-scale-button";
 
 /**
  * HUDレイヤーのゲームオブジェクト
@@ -28,8 +28,8 @@ export class HUDGameObjects {
   frontmostFader: Fader;
   rearmostFader: Fader;
   drawIndicator: ResultIndicator;
-  _battleAction: StreamSource<BattleSceneAction>;
-  _unsubscribers: Unsubscriber[];
+  #battleAction: StreamSource<BattleSceneAction>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -39,20 +39,20 @@ export class HUDGameObjects {
    * @param playerInfo プレイヤー情報
    */
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, playerInfo: Player) {
-    this._battleAction = createStreamSource();
+    this.#battleAction = createStreamSource();
 
     this.batterySelector = new BatterySelector({
       gameObjectAction: gameObjectAction,
       maxBattery: playerInfo.armdozer.maxBattery,
       resources: resources,
       onBatteryChange: (battery: number) => {
-        this._battleAction.next({
+        this.#battleAction.next({
           type: 'changeBattery',
           battery: battery
         });
       },
       onOkButtonPush: () => {
-        this._battleAction.next({
+        this.#battleAction.next({
           type: 'decideBattery',
           battery: this.batterySelector.getBattery()
         });
@@ -73,15 +73,15 @@ export class HUDGameObjects {
 
     this.drawIndicator = drawIndicator(resources, gameObjectAction);
 
-    this._unsubscribers = [
+    this.#unsubscribers = [
       this.burstButton.pushButtonNotifier().subscribe(() => {
-        this._battleAction.next({type: 'doBurst'})
+        this.#battleAction.next({type: 'doBurst'})
       }),
       this.pilotButton.pushButtonNotifier().subscribe(() => {
-        this._battleAction.next({type: 'doPilotSkill'});
+        this.#battleAction.next({type: 'doPilotSkill'});
       }),
       this.timeScaleButton.toggleNotifier().subscribe(timeScale => {
-        this._battleAction.next({type: 'toggleTimeScale', timeScale});
+        this.#battleAction.next({type: 'toggleTimeScale', timeScale});
       })
     ];
   }
@@ -97,7 +97,7 @@ export class HUDGameObjects {
     this.rearmostFader.destructor();
     this.frontmostFader.destructor();
     this.drawIndicator.destructor();
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -125,6 +125,6 @@ export class HUDGameObjects {
    * @return 通知ストリーム
    */
   battleActionNotifier(): Stream<BattleSceneAction> {
-    return this._battleAction;
+    return this.#battleAction;
   }
 }

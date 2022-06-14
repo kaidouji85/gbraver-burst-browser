@@ -1,29 +1,29 @@
 // @flow
 
-import {Howl} from 'howler';
 import TWEEN from '@tweenjs/tween.js';
-import type {Resources} from "../../resource";
+import {Howl} from 'howler';
 import * as THREE from "three";
-import type {ButtonLabel} from "./model/button-label";
-import type {Update} from "../../game-loop/update";
 import {Animate} from "../../animation/animate";
-import {BatterySelectorView} from "./view";
-import type {BatterySelectorModel} from "./model";
-import {MAX_BATTERY} from "./model";
-import {initialValue} from "./model/initial-value";
-import {changeNeedle} from "./animation/change-needle";
-import {getNeedleValue} from "./model/needle-value";
-import {open} from './animation/open';
-import {close} from './animation/close';
-import {canBatteryMinus} from "./model/can-battery-minus";
-import {canBatteryPlus} from "./model/can-battery-plus";
 import type {PreRender} from "../../game-loop/pre-render";
+import type {Update} from "../../game-loop/update";
+import type {Resources} from "../../resource";
 import {SOUND_IDS} from "../../resource/sound";
-import {decide} from './animation/decide';
+import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
 import {batteryMinusPop} from "./animation/battery-minus-pop";
 import {batteryPlusPop} from "./animation/battery-plus-pop";
-import type {GameObjectAction} from "../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../stream/stream";
+import {changeNeedle} from "./animation/change-needle";
+import {close} from './animation/close';
+import {decide} from './animation/decide';
+import {open} from './animation/open';
+import type {BatterySelectorModel} from "./model";
+import {MAX_BATTERY} from "./model";
+import type {ButtonLabel} from "./model/button-label";
+import {canBatteryMinus} from "./model/can-battery-minus";
+import {canBatteryPlus} from "./model/can-battery-plus";
+import {initialValue} from "./model/initial-value";
+import {getNeedleValue} from "./model/needle-value";
+import {BatterySelectorView} from "./view";
 
 /** コンストラクタのパラメータ */
 type Param = {

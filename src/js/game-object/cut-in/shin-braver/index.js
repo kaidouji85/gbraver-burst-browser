@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../../resource";
-import {ShinBraverCutIn} from "./shin-braver-cutin";
-import {PlayerShinBraverCutInView} from "./view/player-shin-braver-cutin-view";
-import {EnemyShinBraverCutInView} from "./view/enemy-shin-braver-cutin-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {ShinBraverCutIn} from "./shin-braver-cutin";
+import {EnemyShinBraverCutInView} from "./view/enemy-shin-braver-cutin-view";
+import {PlayerShinBraverCutInView} from "./view/player-shin-braver-cutin-view";
 
 /**
  * プレイヤー側 シンブレイバー カットイン

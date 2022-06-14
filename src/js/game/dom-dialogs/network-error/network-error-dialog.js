@@ -1,16 +1,16 @@
 // @flow
-import type {PostNetworkError} from '../../post-network-error';
 import {Howl} from 'howler';
-import type {DOMDialog} from "../dialog";
-import {domUuid} from "../../../uuid/dom-uuid";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import {Exclusive} from "../../../exclusive/exclusive";
 import {pop} from "../../../dom/animation";
-import type {Resources} from "../../../resource";
-import {SOUND_IDS} from "../../../resource/sound";
 import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Resources} from "../../../resource";
+import {SOUND_IDS} from "../../../resource/sound";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
+import {domUuid} from "../../../uuid/dom-uuid";
+import type {PostNetworkError} from '../../post-network-error';
+import type {DOMDialog} from "../dialog";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'network-error';
@@ -74,13 +74,13 @@ type Elements = {
 
 /** 通信エラー ダイアログ */
 export class NetworkErrorDialog implements DOMDialog {
-  _root: HTMLElement;
-  _postNetworkErrorButton: HTMLButtonElement;
-  _postNetworkError: PostNetworkError;
-  _postNetworkErrorSource: StreamSource<PostNetworkError>;
-  _pushButton: typeof Howl;
-  _unsubscribers: Unsubscriber[];
-  _exclusive: Exclusive;
+  #root: HTMLElement;
+  #postNetworkErrorButton: HTMLButtonElement;
+  #postNetworkError: PostNetworkError;
+  #postNetworkErrorSource: StreamSource<PostNetworkError>;
+  #pushButton: typeof Howl;
+  #unsubscribers: Unsubscriber[];
+  #exclusive: Exclusive;
 
   /**
    * コンストラクタ
@@ -89,26 +89,26 @@ export class NetworkErrorDialog implements DOMDialog {
    * @param postNetworkError 通信エラーの後処理情報
    */
   constructor(resources: Resources, postNetworkError: PostNetworkError) {
-    this._postNetworkError = postNetworkError;
+    this.#postNetworkError = postNetworkError;
     
     const dataIDs = {postNetworkErrorButton: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS_NAME;
-    const label = postNetowrkErrorLabel(this._postNetworkError);
-    this._root.innerHTML = rootInnerHTML(dataIDs, label);
-    const elements = extractElements(this._root, dataIDs);
-    this._postNetworkErrorButton = elements.postNetworkErrorButton;
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS_NAME;
+    const label = postNetowrkErrorLabel(this.#postNetworkError);
+    this.#root.innerHTML = rootInnerHTML(dataIDs, label);
+    const elements = extractElements(this.#root, dataIDs);
+    this.#postNetworkErrorButton = elements.postNetworkErrorButton;
 
-    this._postNetworkErrorSource = createStreamSource();
-    this._unsubscribers = [
-      pushDOMStream(this._postNetworkErrorButton).subscribe(action => {
-        this._onPostNetworkErrorButtonPush(action);
+    this.#postNetworkErrorSource = createStreamSource();
+    this.#unsubscribers = [
+      pushDOMStream(this.#postNetworkErrorButton).subscribe(action => {
+        this.#onPostNetworkErrorButtonPush(action);
       })
     ];
 
-    this._exclusive = new Exclusive();
+    this.#exclusive = new Exclusive();
 
-    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
   }
 
@@ -116,7 +116,7 @@ export class NetworkErrorDialog implements DOMDialog {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -127,7 +127,7 @@ export class NetworkErrorDialog implements DOMDialog {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -136,7 +136,7 @@ export class NetworkErrorDialog implements DOMDialog {
    * @return 通知ストリーム
    */
   postNetworkErrorNotifier(): Stream<PostNetworkError> {
-    return this._postNetworkErrorSource;
+    return this.#postNetworkErrorSource;
   }
 
   /**
@@ -144,14 +144,14 @@ export class NetworkErrorDialog implements DOMDialog {
    * 
    * @param action アクション
    */
-  _onPostNetworkErrorButtonPush(action: PushDOM): void {
-    this._exclusive.execute(async ()=> {
+  #onPostNetworkErrorButtonPush(action: PushDOM): void {
+    this.#exclusive.execute(async ()=> {
       action.event.preventDefault();
       await Promise.all([
-        this._pushButton.play(),
-        pop(this._postNetworkErrorButton)
+        this.#pushButton.play(),
+        pop(this.#postNetworkErrorButton)
       ]);
-      this._postNetworkErrorSource.next(this._postNetworkError);
+      this.#postNetworkErrorSource.next(this.#postNetworkError);
     });    
   }
 }

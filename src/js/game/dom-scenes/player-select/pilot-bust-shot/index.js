@@ -1,9 +1,9 @@
 // @flow
 
-import type {Resources} from "../../../../resource";
 import type {PilotId} from 'gbraver-burst-core';
-import {PilotBustShot} from "./pilot-bust-shot";
+import type {Resources} from "../../../../resource";
 import {createPilotBustShot} from "./create-bust-shot";
+import {PilotBustShot} from "./pilot-bust-shot";
 
 /**
  * バストショットとパイロットIDの紐づけ
@@ -17,9 +17,9 @@ type BustShot = {
  * パイロット バストショット
  */
 export class PilotBustShotContainer {
-  _pilotId: PilotId;
-  _bustShots: BustShot[];
-  _root: HTMLElement;
+  #pilotId: PilotId;
+  #bustShots: BustShot[];
+  #root: HTMLElement;
 
   /**
    * コンストラクタ
@@ -29,18 +29,18 @@ export class PilotBustShotContainer {
    * @param initialPilotId パイロットID初期値
    */
   constructor(resources: Resources, pilotIds: PilotId[], initialPilotId: PilotId) {
-    this._pilotId = initialPilotId;
+    this.#pilotId = initialPilotId;
 
-    this._root = document.createElement('div');
-    this._bustShots = pilotIds.map(v => ({
+    this.#root = document.createElement('div');
+    this.#bustShots = pilotIds.map(v => ({
       pilotId: v,
       bustShot: createPilotBustShot(resources, v)
     }));
-    this._bustShots.forEach(v => {
-      (v.pilotId === this._pilotId)
+    this.#bustShots.forEach(v => {
+      (v.pilotId === this.#pilotId)
         ? v.bustShot.show()
         : v.bustShot.hidden();
-      this._root.appendChild(v.bustShot.getRootHTMLElement());
+      this.#root.appendChild(v.bustShot.getRootHTMLElement());
     });
   }
 
@@ -50,7 +50,7 @@ export class PilotBustShotContainer {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -59,13 +59,13 @@ export class PilotBustShotContainer {
    * @param pilotId 切り替えるパイロットID
    */
   switch(pilotId: PilotId): void {
-    const target = this._bustShots.find(v => v.pilotId === pilotId);
+    const target = this.#bustShots.find(v => v.pilotId === pilotId);
     if (!target) {
       return;
     }
 
-    this._pilotId = pilotId;
-    const others = this._bustShots.filter(v => v !== target);
+    this.#pilotId = pilotId;
+    const others = this.#bustShots.filter(v => v !== target);
     others.forEach(v => {
       v.bustShot.hidden();
     });
@@ -79,7 +79,7 @@ export class PilotBustShotContainer {
    * @return アニメーション
    */
   async exit(): Promise<void> {
-    const target = this._bustShots.find(v => v.pilotId === this._pilotId);
+    const target = this.#bustShots.find(v => v.pilotId === this.#pilotId);
     if (!target) {
       return;
     }
@@ -91,7 +91,7 @@ export class PilotBustShotContainer {
    * 非表示にする
    */
   hidden(): void {
-    this._bustShots.forEach(v => {
+    this.#bustShots.forEach(v => {
       v.bustShot.hidden();
     });
   }
@@ -103,7 +103,7 @@ export class PilotBustShotContainer {
    */
   async waitUnlillLoaded(): Promise<void> {
     await Promise.all(
-      this._bustShots.map(v => v.bustShot.waitUntilLoaded())
+      this.#bustShots.map(v => v.bustShot.waitUntilLoaded())
     );
   }
 }

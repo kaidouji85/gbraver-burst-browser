@@ -1,9 +1,9 @@
 // @flow
-import type {ArmdozerAnimation} from "./armdozer-animation";
-import type {TextureId} from "../../../resource/texture";
-import type {Resources} from "../../../resource";
 import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import type {Resources} from "../../../resource";
+import type {TextureId} from "../../../resource/texture";
+import type {ArmdozerAnimation} from "./armdozer-animation";
 
 type Param = {
   id: TextureId,
@@ -15,12 +15,12 @@ type Param = {
 
 /** アームドーザアニメーション水平方向テクスチャ版 */
 export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
-  _animation: HorizontalAnimationMesh;
+  #animation: HorizontalAnimationMesh;
 
   constructor(param: Param) {
     const textureResource = param.resources.textures.find(v => v.id === param.id);
     const texture = textureResource ? textureResource.texture : new THREE.Texture();
-    this._animation = new HorizontalAnimationMesh({
+    this.#animation = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: param.maxAnimation,
       width: param.width,
@@ -30,21 +30,21 @@ export class HorizontalArmdozerAnimation implements ArmdozerAnimation {
 
   /** デストラクタ */
   destructor(): void {
-    this._animation.destructor();
+    this.#animation.destructor();
   }
 
   /** アニメーション進捗を変更する */
   animate(animation: number): void {
-    this._animation.animate(animation);
+    this.#animation.animate(animation);
   }
 
   /** 表示、非表示を設定する */
   visible(isVisible: boolean): void {
-    this._animation.mesh.material.opacity = isVisible ? 1 : 0;
+    this.#animation.mesh.material.opacity = isVisible ? 1 : 0;
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
-    return this._animation.getObject3D();
+    return this.#animation.getObject3D();
   }
 }

@@ -1,18 +1,18 @@
 // @flow
 
 import type {ArmDozerId} from "gbraver-burst-core";
-import {domUuid} from "../../../uuid/dom-uuid";
-import type {Resources} from "../../../resource";
 import {getArmdozerIconPathId} from "../../../path/armdozer-icon-path";
+import type {Resources} from "../../../resource";
+import {domUuid} from "../../../uuid/dom-uuid";
 import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 
 /**
  * 対戦カードシーン プレゼンテーション
  */
 export class MatchCardPresentation {
-  _root: HTMLElement;
-  _isPlayerLoaded: Promise<void>;
-  _isEnemyLoaded: Promise<void>;
+  #root: HTMLElement;
+  #isPlayerLoaded: Promise<void>;
+  #isEnemyLoaded: Promise<void>;
 
   /**
    * コンストラクタ
@@ -25,9 +25,9 @@ export class MatchCardPresentation {
   constructor(resources: Resources, player: ArmDozerId, enemy: ArmDozerId, caption: string) {
     const playerId = domUuid();
     const enemyId = domUuid();
-    this._root = document.createElement('div');
-    this._root.className = 'match-card';
-    this._root.innerHTML = `
+    this.#root = document.createElement('div');
+    this.#root.className = 'match-card';
+    this.#root.innerHTML = `
       <div class="match-card__contents">
         <div class="match-card__contents__caption">
           ${caption}
@@ -40,22 +40,22 @@ export class MatchCardPresentation {
       </div>
     `;
 
-    const playerElement = this._root.querySelector(`[data-id="${playerId}"]`);
+    const playerElement = this.#root.querySelector(`[data-id="${playerId}"]`);
     const playerImage: HTMLImageElement = (playerElement instanceof HTMLImageElement)
       ? playerElement
       : new Image();
-    this._isPlayerLoaded = waitElementLoaded(playerImage)
+    this.#isPlayerLoaded = waitElementLoaded(playerImage)
     const playerIconPath = getArmdozerIconPathId(player);
     const playerIconResource = resources.paths.find(v => v.id === playerIconPath);
     playerImage.src = playerIconResource
       ? playerIconResource.path
       : '';
 
-    const enemyElement = this._root.querySelector(`[data-id="${enemyId}"]`);
+    const enemyElement = this.#root.querySelector(`[data-id="${enemyId}"]`);
     const enemyImage = (enemyElement instanceof HTMLImageElement)
       ? enemyElement
       : new Image();
-    this._isEnemyLoaded = waitElementLoaded(enemyImage);
+    this.#isEnemyLoaded = waitElementLoaded(enemyImage);
     const enemyIconPath = getArmdozerIconPathId(enemy);
     const enemyIconResource = resources.paths.find(v => v.id === enemyIconPath);
     enemyImage.src = enemyIconResource
@@ -69,7 +69,7 @@ export class MatchCardPresentation {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -79,8 +79,8 @@ export class MatchCardPresentation {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
-      this._isPlayerLoaded,
-      this._isEnemyLoaded,
+      this.#isPlayerLoaded,
+      this.#isEnemyLoaded,
     ]);
   }
 }

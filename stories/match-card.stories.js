@@ -1,9 +1,9 @@
 // @flow
 
+import {ArmDozerIdList} from "gbraver-burst-core";
+import {MatchCard} from "../src/js/game/dom-scenes/match-card";
 import type {DOMStubStory} from "./stub/dom-stub";
 import {domStub} from "./stub/dom-stub";
-import {MatchCard} from "../src/js/game/dom-scenes/match-card";
-import {ArmDozerIdList} from "gbraver-burst-core";
 
 export default {
   title: 'match-card'

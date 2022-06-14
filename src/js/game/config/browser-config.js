@@ -104,3 +104,21 @@ export function isConfigChanged(origin: GbraverBurstBrowserConfig, update: Gbrav
 export function isSoundConfigChanged(origin: GbraverBurstBrowserConfig, update: GbraverBurstBrowserConfig): boolean {
   return (origin.bgmVolume !== update.bgmVolume) || (origin.seVolume !== update.seVolume);
 }
+
+/** ブラウザ設定リポジトリ */
+export interface GbraverBurstBrowserConfigRepository {
+  /**
+   * ブラウザ設定を保存する
+   *
+   * @param config ブラウザ設定
+   * @return 保存が完了したら発火するPromise 
+   */
+  save(config: GbraverBurstBrowserConfig): Promise<void>;
+
+  /**
+   * ブラウザ設定を読み込む
+   *
+   * @return 読み込んだブラウザ設定
+   */
+  load(): Promise<GbraverBurstBrowserConfig>;
+}

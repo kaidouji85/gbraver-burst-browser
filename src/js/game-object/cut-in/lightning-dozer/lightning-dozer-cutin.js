@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from "three";
-import type {LightningDozerCutInModel} from "./model/lightning-dozer-cutin-model";
-import type {LightningDozerCutInView} from "./view/lightning-dozer-cutin-view";
-import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../../game-loop/pre-render";
 import {Animate} from "../../../animation/animate";
-import {show} from "./animation/show";
-import {hidden} from "./animation/hidden";
+import type {PreRender} from "../../../game-loop/pre-render";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {HUDTracking} from "../../../tracking/hud-tracking";
 import type {GameObjectAction} from "../../action/game-object-action";
-import type {Stream, Unsubscriber} from "../../../stream/stream";
+import {hidden} from "./animation/hidden";
+import {show} from "./animation/show";
+import {createInitialValue} from "./model/initial-value";
+import type {LightningDozerCutInModel} from "./model/lightning-dozer-cutin-model";
+import type {LightningDozerCutInView} from "./view/lightning-dozer-cutin-view";
 
 /**
  * ライトニングドーザ カットイン

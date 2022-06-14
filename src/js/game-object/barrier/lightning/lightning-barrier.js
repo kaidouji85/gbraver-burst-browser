@@ -1,21 +1,21 @@
 // @flow
 
-import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
-import type {LightningBarrierModel} from "./model/lightning-barrier-model";
-import {createInitialValue} from "./model/initial-value";
-import type {Update} from "../../../game-loop/update";
-import type {PreRender} from "../../../game-loop/pre-render";
-import {electrification} from "./animation/electrification";
-import {LightningBarrierView} from "./view/lightning-barrier-view";
-import type {Resources} from "../../../resource";
+import * as THREE from 'three';
 import {Animate} from "../../../animation/animate";
-import {show} from "./animation/show";
-import {hidden} from "./animation/hidden";
-import {LightningBarrierSounds} from "./sounds/lightning-barrier-sounds";
-import type {GameObjectAction} from "../../action/game-object-action";
+import type {PreRender} from "../../../game-loop/pre-render";
+import type {Update} from "../../../game-loop/update";
+import type {Resources} from "../../../resource";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import {firstUpdate} from "../../action/first-update";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {electrification} from "./animation/electrification";
+import {hidden} from "./animation/hidden";
+import {show} from "./animation/show";
+import {createInitialValue} from "./model/initial-value";
+import type {LightningBarrierModel} from "./model/lightning-barrier-model";
+import {LightningBarrierSounds} from "./sounds/lightning-barrier-sounds";
+import {LightningBarrierView} from "./view/lightning-barrier-view";
 
 /**
  * 電撃バリア

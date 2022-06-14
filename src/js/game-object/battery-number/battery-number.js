@@ -1,16 +1,16 @@
 // @flow
 
-import type {BatteryNumberModel} from "./model/battery-number-model";
-import type {BatteryNumberView} from "./view/battery-number-view";
 import * as THREE from 'three';
-import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {show} from "./animation/show";
-import {hidden} from "./animation/hidden";
-import type {GameObjectAction} from "../action/game-object-action";
+import type {PreRender} from "../../game-loop/pre-render";
 import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
 import {change} from "./animation/change";
+import {hidden} from "./animation/hidden";
+import {show} from "./animation/show";
+import type {BatteryNumberModel} from "./model/battery-number-model";
+import {createInitialValue} from "./model/initial-value";
+import type {BatteryNumberView} from "./view/battery-number-view";
 
 /** バッテリー数字 */
 export class BatteryNumber {

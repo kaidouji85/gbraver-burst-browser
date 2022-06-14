@@ -1,11 +1,11 @@
 // @flow
 
-import {BatteryNumber} from "./battery-number";
 import type {Resources} from "../../resource";
-import {PlayerBatteryNumberView} from "./view/player-battery-number-view";
-import {EnemyBatteryNumberView} from "./view/enemy-battery-number-view";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {BatteryNumber} from "./battery-number";
+import {EnemyBatteryNumberView} from "./view/enemy-battery-number-view";
+import {PlayerBatteryNumberView} from "./view/player-battery-number-view";
 
 /**
  * プレイヤーのバッテリービュー

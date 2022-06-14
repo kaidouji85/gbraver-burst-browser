@@ -1,19 +1,38 @@
+@import "play-in-landscape.css";
+@import "mail-verified-incomplete.css";
+@import "fader.css";
+@import "loading.css";
+@import "title.css";
+@import "player-select.css";
+@import "how-to-play.css";
+@import "match-card.css";
+@import "npc-ending.css";
+@import "login.css";
+@import "waiting.css";
+@import "network-error.css";
+@import "delete-account-consent.css";
+@import "npc-stage-title.css";
+@import "difficulty.css";
+@import "config.css";
+@import "post-battle.css";
+@import "matching.css";
+
 :root {
   /** 画面サイズ */
   --safe-area-top: env(safe-area-inset-top);
   --safe-area-right: env(safe-area-inset-right);
   --safe-area-bottom: env(safe-area-inset-bottom);
   --safe-area-left: env(safe-area-inset-left);
-  --screen-padding-top: calc(var(--safe-area-top) + 1em);
-  --screen-padding-left: calc(var(--safe-area-left) + 1em);
-  --screen-padding-right: calc(var(--safe-area-right) + 1em);
-  --screen-padding-bottom: calc(var(--safe-area-bottom) + 1em);
+  --screen-padding-top: calc(var(--safe-area-top) + 1rem);
+  --screen-padding-left: calc(var(--safe-area-left) + 1rem);
+  --screen-padding-right: calc(var(--safe-area-right) + 1rem);
+  --screen-padding-bottom: calc(var(--safe-area-bottom) + 1rem);
   --screen-width: 100vw;
   --screen-height: calc(var(--vh, 1vh) * 100);
 
   /** フォント */
   --font-color: rgb(240, 240, 240);
-  --responsive-font-size: max(3vh, 1rem);
+  --responsive-font-size: 10px;
 
   /** 背景 */
   --background-color: rgb(23, 23, 23);
@@ -38,21 +57,9 @@
   --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
 }
 
-@import "play-in-landscape.css";
-@import "mail-verified-incomplete.css";
-@import "fader.css";
-@import "loading.css";
-@import "title.css";
-@import "player-select.css";
-@import "how-to-play.css";
-@import "match-card.css";
-@import "npc-ending.css";
-@import "login.css";
-@import "waiting.css";
-@import "network-error.css";
-@import "delete-account-consent.css";
-@import "npc-stage-title.css";
-@import "difficulty.css";
-@import "config.css";
-@import "post-battle.css";
-@import "matching.css";
+/* iPhoneXランドスケープ画面高以上の場合に有効になるメディアクエリ */
+@media (min-height: 375px) {
+  :root {
+    --responsive-font-size: max(3vh, 1rem);
+  }
+}

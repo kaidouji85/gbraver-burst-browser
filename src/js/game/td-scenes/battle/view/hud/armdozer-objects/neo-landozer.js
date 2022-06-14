@@ -1,13 +1,13 @@
 // @flow
 
-import * as THREE from 'three';
 import type {Player, PlayerId} from "gbraver-burst-core";
+import * as THREE from 'three';
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import {enemyNeoLandozerCutIn, playerNeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer";
 import {NeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer/neo-landozer-cutin";
 import type {Resources} from "../../../../../../resource";
-import {enemyNeoLandozerCutIn, playerNeoLandozerCutIn} from "../../../../../../game-object/cut-in/neo-landozer";
-import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
-import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import type {Stream} from "../../../../../../stream/stream";
+import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 
 /**
  * HUDレイヤー ネオランドーザ固有オブジェクト フィールド

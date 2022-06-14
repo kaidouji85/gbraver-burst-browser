@@ -1,11 +1,11 @@
 // @flow
 
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
-import type {ShinyaModel} from "../model/shinya-model";
 import {process} from "../../../../animation/process";
 import {tween} from "../../../../animation/tween";
+import type {ShinyaModel} from "../model/shinya-model";
 import {ShinyaSounds} from "../sounds/shinya-sounds";
-import {all} from "../../../../animation/all";
 
 /**
  * カットインを表示する

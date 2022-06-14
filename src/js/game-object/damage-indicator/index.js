@@ -1,11 +1,11 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import {DamageIndicator} from "./damage-indicator";
-import {PlayerDamageIndicatorView} from "./view/player-damage-indicator-view";
-import {EnemyDamageIndicatorView} from "./view/enemy-damage-indicator-view";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {DamageIndicator} from "./damage-indicator";
+import {EnemyDamageIndicatorView} from "./view/enemy-damage-indicator-view";
+import {PlayerDamageIndicatorView} from "./view/player-damage-indicator-view";
 
 /**
  * プレイヤーのダメージインジケータ

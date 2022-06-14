@@ -1,12 +1,12 @@
 // @flow
 
 import TWEEN from "@tweenjs/tween.js";
-import type {WingDozerModel} from "../model/wing-dozer-model";
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
+import {delay} from "../../../../animation/delay";
 import {process} from '../../../../animation/process';
 import {tween} from "../../../../animation/tween";
-import {delay} from "../../../../animation/delay";
-import {all} from "../../../../animation/all";
+import type {WingDozerModel} from "../model/wing-dozer-model";
 
 /**
  * ダウン

@@ -1,8 +1,8 @@
 // @flow
 
+import {all} from "../../../../animation/all";
 import {Animate} from "../../../../animation/animate";
 import {TDCamera} from "../../../../game-object/camera/td";
-import {all} from "../../../../animation/all";
 
 /** カメラ初期位置 X */
 export const INITIAL_CAMERA_POSITION_X: number = 0;

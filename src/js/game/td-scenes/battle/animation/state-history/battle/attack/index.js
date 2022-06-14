@@ -1,11 +1,11 @@
 // @flow
 
 import {Animate} from "../../../../../../../animation/animate";
-import {castShinBraverBattle, shinBraverAttack} from "./shin-braver";
-import {castNeoLandozerBattle, neoLandozerAttack} from "./neo-landozer";
-import {emptyAttackAnimation} from "./empty-animation";
 import type {BattleAnimationParam} from "../animation-param";
+import {emptyAttackAnimation} from "./empty-animation";
 import {castLightningDozerBattle, lightningDozerAttack} from "./lightning-dozer";
+import {castNeoLandozerBattle, neoLandozerAttack} from "./neo-landozer";
+import {castShinBraverBattle, shinBraverAttack} from "./shin-braver";
 import {castWingDozerBattle, wingDozerAttack} from "./wing-dozer";
 
 /**

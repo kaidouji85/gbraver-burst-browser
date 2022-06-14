@@ -1,7 +1,7 @@
 // @flow
 
-import type {LightningBarrierModel} from "./lightning-barrier-model";
 import {ARMDOZER_EFFECT_STANDARD_Y,} from "../../../armdozer/position";
+import type {LightningBarrierModel} from "./lightning-barrier-model";
 
 /**
  * 初期値を生成する

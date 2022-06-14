@@ -1,9 +1,9 @@
 // @flow
 
-import type {FaderModel} from "../model/fader-model";
 import {Animate} from "../../../animation/animate";
 import {process} from '../../../animation/process';
 import {tween} from "../../../animation/tween";
+import type {FaderModel} from "../model/fader-model";
 
 /**
  * フェードイン

@@ -1,16 +1,16 @@
 // @flow
 
-import {LightningDozerCutIn} from "../../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
 import type {Player, PlayerId} from "gbraver-burst-core";
 import * as THREE from "three";
-import type {Resources} from "../../../../../../resource";
+import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import {
   enemyLightningiDozerCutIn,
   playerLightningDozerCutIn
 } from "../../../../../../game-object/cut-in/lightning-dozer";
-import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
-import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
+import {LightningDozerCutIn} from "../../../../../../game-object/cut-in/lightning-dozer/lightning-dozer-cutin";
+import type {Resources} from "../../../../../../resource";
 import type {Stream} from "../../../../../../stream/stream";
+import type {HUDArmdozerObjects} from "./hud-armdozer-ibjects";
 
 /**
  * HUDレイヤー ライトニングドーザ固有オブジェクト フィールド

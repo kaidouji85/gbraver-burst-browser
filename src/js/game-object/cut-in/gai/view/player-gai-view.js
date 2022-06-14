@@ -1,14 +1,14 @@
 // @flow
 
 import * as THREE from 'three';
+import type {PreRender} from "../../../../game-loop/pre-render";
+import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
+import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
+import {HUDCutInScale} from "../../../scale";
 import type {GaiModel} from "../model/gai-model";
 import type {GaiView} from "./gai-view";
-import type {PreRender} from "../../../../game-loop/pre-render";
-import {HUDCutInScale} from "../../../scale";
-import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
 
 /** メッシュの大きさ */
 export const MESH_SIZE = 550;

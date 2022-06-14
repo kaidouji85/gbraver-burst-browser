@@ -1,13 +1,13 @@
 // @flow
 
 import * as THREE from "three";
-import type {BatteryCorrectView} from "./battery-correct-view";
-import type {Resources} from "../../../resource";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
-import {TEXTURE_IDS} from "../../../resource/texture";
-import type {BatteryCorrectModel} from "../model/battery-correct-model";
-import {ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
 import type {PreRender} from "../../../game-loop/pre-render";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
+import type {Resources} from "../../../resource";
+import {TEXTURE_IDS} from "../../../resource/texture";
+import {ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
+import type {BatteryCorrectModel} from "../model/battery-correct-model";
+import type {BatteryCorrectView} from "./battery-correct-view";
 
 /** メッシュの大きさ */
 const MESH_SIZE = 50;

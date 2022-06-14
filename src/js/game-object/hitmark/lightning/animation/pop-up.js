@@ -1,10 +1,10 @@
 // @flow
 
-import type {LightningModel} from "../model/lightning-model";
-import {Animate} from "../../../../animation/animate";
-import {tween} from "../../../../animation/tween";
-import {process} from '../../../../animation/process';
 import {all} from "../../../../animation/all";
+import {Animate} from "../../../../animation/animate";
+import {process} from '../../../../animation/process';
+import {tween} from "../../../../animation/tween";
+import type {LightningModel} from "../model/lightning-model";
 import {LightningSounds} from "../sounds/lightning-sounds";
 
 /**

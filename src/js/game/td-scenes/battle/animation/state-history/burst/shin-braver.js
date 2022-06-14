@@ -1,12 +1,12 @@
 // @flow
-import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
-import {Animate} from "../../../../../../animation/animate";
-import {delay, empty} from "../../../../../../animation/delay";
 import type {Burst, RecoverBattery} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
-import {dolly, toInitial, track} from "../../td-camera";
+import {Animate} from "../../../../../../animation/animate";
+import {delay, empty} from "../../../../../../animation/delay";
 import {ShinBraverHUD} from "../../../view/hud/armdozer-objects/shin-braver";
 import {ShinBraverTD} from "../../../view/td/armdozer-objects/shin-braver";
+import {dolly, toInitial, track} from "../../td-camera";
+import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 
 /**
  * シンブレイバー バーストアニメーション パラメータ

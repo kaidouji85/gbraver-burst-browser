@@ -1,8 +1,8 @@
 // @flow
 
-import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {delay} from "../src/js/animation/delay";
 import {enemyGaiCutIn, playerGaiCutIn} from "../src/js/game-object/cut-in/gai";
+import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 
 export default {
   title: 'gai',

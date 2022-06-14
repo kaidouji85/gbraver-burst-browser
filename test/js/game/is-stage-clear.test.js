@@ -1,7 +1,7 @@
 // @flow
-import {EMPTY_PLAYER} from "../../data/player";
 import {isNPCBattleStageClear} from "../../../src/js/game/npc-battle";
 import {EMPTY_NPC_BATTLE_STATE} from "../../data/npc-battle";
+import {EMPTY_PLAYER} from "../../data/player";
 
 const player = {...EMPTY_PLAYER, playerId: 'test-player'};
 const state = {...EMPTY_NPC_BATTLE_STATE, player};

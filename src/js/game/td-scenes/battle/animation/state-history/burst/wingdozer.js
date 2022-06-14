@@ -1,12 +1,12 @@
 // @flow
 import type {Burst, ContinuousAttack} from "gbraver-burst-core";
-import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
+import {all} from "../../../../../../animation/all";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
-import {all} from "../../../../../../animation/all";
-import {dolly, toInitial, track} from "../../td-camera";
 import {WingDozerHUD} from "../../../view/hud/armdozer-objects/wing-dozer";
 import {WingDozerTD} from "../../../view/td/armdozer-objects/wing-dozer";
+import {dolly, toInitial, track} from "../../td-camera";
+import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
 
 /**
  * ウィングドーザ バーストアニメーション パラメータ

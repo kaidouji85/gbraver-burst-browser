@@ -1,13 +1,13 @@
 // @flow
 
-import * as THREE from "three";
 import * as R from 'ramda';
+import * as THREE from "three";
+import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type {BatterySelectorModel} from "../model";
-import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {TEXTURE_IDS} from "../../../resource/texture";
+import type {BatterySelectorModel} from "../model";
 
 /** バッテリーゲージの最大数字 */
 export const MAX_VALUE = 5;

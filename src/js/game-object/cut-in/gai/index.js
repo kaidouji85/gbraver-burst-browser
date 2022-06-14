@@ -1,11 +1,11 @@
 // @flow
 
-import {GaiCutIn} from "./gai";
 import type {Resources} from "../../../resource";
-import {PlayerGaiView} from "./view/player-gai-view";
-import {EnemyGaiView} from "./view/enemy-gai-view";
-import type {GameObjectAction} from "../../action/game-object-action";
 import type {Stream} from "../../../stream/stream";
+import type {GameObjectAction} from "../../action/game-object-action";
+import {GaiCutIn} from "./gai";
+import {EnemyGaiView} from "./view/enemy-gai-view";
+import {PlayerGaiView} from "./view/player-gai-view";
 
 /**
  * プレイヤー側 ガイ カットイン

@@ -1,11 +1,11 @@
 // @flow
 
 import * as THREE from 'three';
+import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
-import type {TurnIndicatorModel} from "../model/turn-indicator-model";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {ARMDOZER_EFFECT_STANDARD_Y, ARMDOZER_EFFECT_STANDARD_Z} from "../../armdozer/position";
-import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
+import type {TurnIndicatorModel} from "../model/turn-indicator-model";
 
 /** ターンインジケータービュー */
 export class TurnIndicatorView {

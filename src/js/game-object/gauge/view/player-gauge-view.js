@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from 'three';
-import type {GaugeView} from "./gauge-view";
-import type {GaugeModel} from "../model/gauge-model";
-import type {Resources} from "../../../resource";
 import type {PreRender} from "../../../game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
+import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import {PlayerHpBar} from "./player-hp-bar";
+import {HUDUIScale} from "../../scale";
+import type {GaugeModel} from "../model/gauge-model";
+import type {GaugeView} from "./gauge-view";
 import {HpNumber} from "./hp-number";
 import {PlayerBatteryGauge} from "./player-battery-gauge";
-import {HUDUIScale} from "../../scale";
+import {PlayerHpBar} from "./player-hp-bar";
 
 /** 基本拡大率 */
 export const BASE_SCALE = 0.3;

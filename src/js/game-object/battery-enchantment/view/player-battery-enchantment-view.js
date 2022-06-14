@@ -9,8 +9,8 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
-import type {BatteryEnchantmentView} from "./battery-enchantment-view";
 import type {BatteryEnchantmentModel} from "../model/battery-enchantment-model";
+import type {BatteryEnchantmentView} from "./battery-enchantment-view";
 
 export const MESH_SIZE = 300;
 

@@ -1,16 +1,16 @@
 // @flow
 import {Howl} from 'howler';
-import type {DOMDialog} from "../dialog";
-import type {Resources} from "../../../resource";
-import {PathIds} from "../../../resource/path";
-import {domUuid} from "../../../uuid/dom-uuid";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
 import {pop} from "../../../dom/animation";
-import {Exclusive} from "../../../exclusive/exclusive";
-import {SOUND_IDS} from "../../../resource/sound";
 import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Resources} from "../../../resource";
+import {PathIds} from "../../../resource/path";
+import {SOUND_IDS} from "../../../resource/sound";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
+import {domUuid} from "../../../uuid/dom-uuid";
+import type {DOMDialog} from "../dialog";
 
 /** ルート要素のcssクラス名 */
 const ROOT_CLASS_NAME = 'login';
@@ -75,16 +75,16 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 
 /** ログイン ダイアログ */
 export class LoginDialog implements DOMDialog {
-  _root: HTMLElement;
-  _closer: HTMLImageElement;
-  _loginButton: HTMLButtonElement;
-  _closeButton: HTMLButtonElement;
-  _closeDialog: StreamSource<void>;
-  _login: StreamSource<void>;
-  _unsubscribers: Unsubscriber[];
-  _changeValue: typeof Howl;
-  _pushButton: typeof Howl;
-  _exclusive: Exclusive;
+  #root: HTMLElement;
+  #closer: HTMLImageElement;
+  #loginButton: HTMLButtonElement;
+  #closeButton: HTMLButtonElement;
+  #closeDialog: StreamSource<void>;
+  #login: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
+  #changeValue: typeof Howl;
+  #pushButton: typeof Howl;
+  #exclusive: Exclusive;
 
   /** 
    * コンストラクタ
@@ -94,44 +94,44 @@ export class LoginDialog implements DOMDialog {
    */
   constructor(resources: Resources, caption: string) {
     const dataIDs = {closer: domUuid(), backGround: domUuid(), loginButton: domUuid(), closeButton: domUuid()};
-    this._root = document.createElement('div');
-    this._root.className = ROOT_CLASS_NAME;
-    this._root.innerHTML = rootInnerHTML(dataIDs, resources, caption);
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS_NAME;
+    this.#root.innerHTML = rootInnerHTML(dataIDs, resources, caption);
 
-    const elements = extractElements(this._root, dataIDs);
-    this._closer =elements.closer;
-    this._loginButton = elements.loginButton;
-    this._closeButton = elements.closeButton;
+    const elements = extractElements(this.#root, dataIDs);
+    this.#closer =elements.closer;
+    this.#loginButton = elements.loginButton;
+    this.#closeButton = elements.closeButton;
 
-    this._closeDialog = createStreamSource();
-    this._login = createStreamSource();
-    this._unsubscribers = [
-      pushDOMStream(this._loginButton).subscribe(action => {
-        this._onLoginButtonPush(action);
+    this.#closeDialog = createStreamSource();
+    this.#login = createStreamSource();
+    this.#unsubscribers = [
+      pushDOMStream(this.#loginButton).subscribe(action => {
+        this.#onLoginButtonPush(action);
       }),
-      pushDOMStream(this._closeButton).subscribe(action => {
-        this._onCloseButtonPush(action);
+      pushDOMStream(this.#closeButton).subscribe(action => {
+        this.#onCloseButtonPush(action);
       }),
-      pushDOMStream(this._closer).subscribe(action => {
-        this._onCloserPush(action);
+      pushDOMStream(this.#closer).subscribe(action => {
+        this.#onCloserPush(action);
       }),
       pushDOMStream(elements.backGround).subscribe(action => {
-        this._onPushOutsideOfDialog(action);
+        this.#onPushOutsideOfDialog(action);
       }),
     ];
 
-    this._changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
-    this._pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+    this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
-    this._exclusive = new Exclusive();
+    this.#exclusive = new Exclusive();
   }
 
   /**
    * デストラクタ相当の処理
    */
    destructor(): void {
-     this._unsubscribers.forEach(v => {
+     this.#unsubscribers.forEach(v => {
        v.unsubscribe();
      });
    }
@@ -142,7 +142,7 @@ export class LoginDialog implements DOMDialog {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -151,7 +151,7 @@ export class LoginDialog implements DOMDialog {
    * @return 通知ストリーム
    */
   closeDialogNotifier(): Stream<void> {
-    return this._closeDialog;
+    return this.#closeDialog;
   }
 
   /**
@@ -160,7 +160,7 @@ export class LoginDialog implements DOMDialog {
    * @return 通知ストリーム
    */
   loginNotifier(): Stream<void> {
-    return this._login;
+    return this.#login;
   }
 
   /**
@@ -168,14 +168,14 @@ export class LoginDialog implements DOMDialog {
    * 
    * @param action アクション
    */
-  _onLoginButtonPush(action: PushDOM): void {
-    this._exclusive.execute(async () => {
+  #onLoginButtonPush(action: PushDOM): void {
+    this.#exclusive.execute(async () => {
       action.event.preventDefault();
       await Promise.all([
-        pop(this._loginButton),
-        this._pushButton.play()
+        pop(this.#loginButton),
+        this.#pushButton.play()
       ]);
-      this._login.next();
+      this.#login.next();
     });
   }
 
@@ -184,14 +184,14 @@ export class LoginDialog implements DOMDialog {
    * 
    * @param action アクション
    */
-  _onCloseButtonPush(action: PushDOM): void {
-    this._exclusive.execute(async () => {
+  #onCloseButtonPush(action: PushDOM): void {
+    this.#exclusive.execute(async () => {
       action.event.preventDefault();
       await Promise.all([
-        pop(this._closeButton),
-        this._changeValue.play()
+        pop(this.#closeButton),
+        this.#changeValue.play()
       ]);
-      this._closeDialog.next();
+      this.#closeDialog.next();
     });
   }
 
@@ -200,14 +200,14 @@ export class LoginDialog implements DOMDialog {
    * 
    * @param action アクション
    */
-  _onCloserPush(action: PushDOM): void {
-    this._exclusive.execute(async () => {
+  #onCloserPush(action: PushDOM): void {
+    this.#exclusive.execute(async () => {
       action.event.preventDefault();
       await Promise.all([
-        pop(this._closer, 1.3),
-        this._changeValue.play()
+        pop(this.#closer, 1.3),
+        this.#changeValue.play()
       ]);
-      this._closeDialog.next();
+      this.#closeDialog.next();
     });
   }
 
@@ -216,11 +216,11 @@ export class LoginDialog implements DOMDialog {
    * 
    * @param action アクション
    */
-  _onPushOutsideOfDialog(action: PushDOM): void {
-    this._exclusive.execute(async (): Promise<void>=> {
+  #onPushOutsideOfDialog(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void>=> {
       action.event.preventDefault();
-      await this._changeValue.play();
-      this._closeDialog.next();
+      await this.#changeValue.play();
+      this.#closeDialog.next();
     });
   }
 }

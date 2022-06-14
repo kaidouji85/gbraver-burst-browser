@@ -1,6 +1,6 @@
 // @flow
-import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 import {shinBraverBurstButton, wingDozerBurstButton} from "../src/js/game-object/burst-button";
+import {HUDGameObjectStub} from "./stub/hud-game-object-stub";
 
 export default {
   title: 'burst-button',

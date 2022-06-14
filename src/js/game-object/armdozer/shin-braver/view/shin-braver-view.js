@@ -1,7 +1,7 @@
 // @flow
 
-import type {ShinBraverModel} from "../model/shin-braver-model";
 import * as THREE from "three";
+import type {ShinBraverModel} from "../model/shin-braver-model";
 
 /** シンブレイバーのビュー */
 export interface ShinBraverView {

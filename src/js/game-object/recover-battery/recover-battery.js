@@ -1,16 +1,16 @@
 // @flow
 
 import * as THREE from 'three';
-import type {RecoverBatteryModel} from "./model/recover-battery-model";
-import type {RecoverBatteryView} from "./view/recover-battery-view";
-import {createInitialValue} from "./model/initial-value";
-import type {PreRender} from "../../game-loop/pre-render";
 import {Animate} from "../../animation/animate";
-import {hidden, popUp, show} from "./animation/pop-up";
-import {RecoverBatterySounds} from "./sounds/recover-battery-sounds";
+import type {PreRender} from "../../game-loop/pre-render";
 import type {Resources} from "../../resource";
-import type {GameObjectAction} from "../action/game-object-action";
 import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {GameObjectAction} from "../action/game-object-action";
+import {hidden, popUp, show} from "./animation/pop-up";
+import {createInitialValue} from "./model/initial-value";
+import type {RecoverBatteryModel} from "./model/recover-battery-model";
+import {RecoverBatterySounds} from "./sounds/recover-battery-sounds";
+import type {RecoverBatteryView} from "./view/recover-battery-view";
 
 /**
  * コンストラクタのパラメータ

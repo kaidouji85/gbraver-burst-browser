@@ -1,85 +1,85 @@
 // @flow
 
-import type {NeoLandozerView} from './neo-landozer-view';
 import * as THREE from "three";
 import type {Resources} from "../../../../resource";
-import type {NeoLandozerModel} from "../model/neo-landozer-model";
-import type {AnimationType} from "../model/animation-type";
 import type {ArmdozerAnimation} from "../../mesh/armdozer-animation";
-import {neoLandozerStand} from "../mesh/stand";
-import {neoLandozerKnockBack} from "../mesh/knock-back";
-import {neoLandozerGuard} from "../mesh/guard";
-import {neoLandozerHMCharge} from "../mesh/hm-charge";
-import {neoLandozerHMAttack} from "../mesh/hm-attack";
-import {neoLandozerHMToStand} from "../mesh/hm-to-stand";
-import {neoLandozerDown} from "../mesh/down";
-import {neoLandozerGutsUp} from "../mesh/guts-up";
-import {neoLandozerGutsDown} from "../mesh/guts-down";
 import {neoLandozerBackStep} from "../mesh/back-step";
+import {neoLandozerDown} from "../mesh/down";
 import {neoLandozerFrontStep} from "../mesh/front-step";
+import {neoLandozerGuard} from "../mesh/guard";
+import {neoLandozerGutsDown} from "../mesh/guts-down";
+import {neoLandozerGutsUp} from "../mesh/guts-up";
+import {neoLandozerHMAttack} from "../mesh/hm-attack";
+import {neoLandozerHMCharge} from "../mesh/hm-charge";
+import {neoLandozerHMToStand} from "../mesh/hm-to-stand";
+import {neoLandozerKnockBack} from "../mesh/knock-back";
+import {neoLandozerStand} from "../mesh/stand";
+import type {AnimationType} from "../model/animation-type";
+import type {NeoLandozerModel} from "../model/neo-landozer-model";
+import type {NeoLandozerView} from './neo-landozer-view';
 
 /** プレイヤー側ネオランドーザのビュー */
 export class PlayerNeoLandozerView implements NeoLandozerView {
-  _group: typeof THREE.Group;
-  _stand: ArmdozerAnimation;
-  _knockBack: ArmdozerAnimation;
-  _guard: ArmdozerAnimation;
-  _hmCharge: ArmdozerAnimation;
-  _hmAttack: ArmdozerAnimation;
-  _hmToStand: ArmdozerAnimation;
-  _down: ArmdozerAnimation;
-  _gutsUp: ArmdozerAnimation;
-  _gutsDown: ArmdozerAnimation;
-  _backStep: ArmdozerAnimation;
-  _frontStep: ArmdozerAnimation;
+  #group: typeof THREE.Group;
+  #stand: ArmdozerAnimation;
+  #knockBack: ArmdozerAnimation;
+  #guard: ArmdozerAnimation;
+  #hmCharge: ArmdozerAnimation;
+  #hmAttack: ArmdozerAnimation;
+  #hmToStand: ArmdozerAnimation;
+  #down: ArmdozerAnimation;
+  #gutsUp: ArmdozerAnimation;
+  #gutsDown: ArmdozerAnimation;
+  #backStep: ArmdozerAnimation;
+  #frontStep: ArmdozerAnimation;
 
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
-    this._stand = neoLandozerStand(resources);
-    this._knockBack = neoLandozerKnockBack(resources);
-    this._guard = neoLandozerGuard(resources);
-    this._hmCharge = neoLandozerHMCharge(resources);
-    this._hmAttack = neoLandozerHMAttack(resources);
-    this._hmToStand = neoLandozerHMToStand(resources);
-    this._down = neoLandozerDown(resources);
-    this._gutsUp = neoLandozerGutsUp(resources);
-    this._gutsDown = neoLandozerGutsDown(resources);
-    this._backStep = neoLandozerBackStep(resources);
-    this._frontStep = neoLandozerFrontStep(resources);
+    this.#group = new THREE.Group();
+    this.#stand = neoLandozerStand(resources);
+    this.#knockBack = neoLandozerKnockBack(resources);
+    this.#guard = neoLandozerGuard(resources);
+    this.#hmCharge = neoLandozerHMCharge(resources);
+    this.#hmAttack = neoLandozerHMAttack(resources);
+    this.#hmToStand = neoLandozerHMToStand(resources);
+    this.#down = neoLandozerDown(resources);
+    this.#gutsUp = neoLandozerGutsUp(resources);
+    this.#gutsDown = neoLandozerGutsDown(resources);
+    this.#backStep = neoLandozerBackStep(resources);
+    this.#frontStep = neoLandozerFrontStep(resources);
 
-    this._getAllMeshes().forEach(v => {
-      this._group.add(v.getObject3D());
+    this.#getAllMeshes().forEach(v => {
+      this.#group.add(v.getObject3D());
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._getAllMeshes().forEach(v => {
+    this.#getAllMeshes().forEach(v => {
       v.destructor();
     });
   }
 
   /** モデルをビューに反映させる */
   engage(model: NeoLandozerModel): void {
-    const activeMesh = this._getActiveMesh(model.animation.type);
-    this._getAllMeshes()
+    const activeMesh = this.#getActiveMesh(model.animation.type);
+    this.#getAllMeshes()
       .filter(v => v !== activeMesh)
       .forEach(v => {
         v.visible(false);
       });
     activeMesh.visible(true);
     activeMesh.animate(model.animation.frame);
-    this._refreshPos(model);
+    this.#refreshPos(model);
   }
 
   /** カメラの真正面を向く */
   lookAt(camera: typeof THREE.Camera): void {
-    this._group.quaternion.copy(camera.quaternion);
+    this.#group.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -88,29 +88,29 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
    * @param object 追加するオブジェクト
    */
   addObject3D(object: typeof THREE.Object3D): void {
-    this._group.add(object);
+    this.#group.add(object);
   }
 
   /** 本クラスが保持する全メッシュを返す */
-  _getAllMeshes(): ArmdozerAnimation[] {
+  #getAllMeshes(): ArmdozerAnimation[] {
     return [
-      this._stand,
-      this._knockBack,
-      this._guard,
-      this._hmCharge,
-      this._hmAttack,
-      this._hmToStand,
-      this._down,
-      this._gutsUp,
-      this._gutsDown,
-      this._backStep,
-      this._frontStep,
+      this.#stand,
+      this.#knockBack,
+      this.#guard,
+      this.#hmCharge,
+      this.#hmAttack,
+      this.#hmToStand,
+      this.#down,
+      this.#gutsUp,
+      this.#gutsDown,
+      this.#backStep,
+      this.#frontStep,
     ];
   }
 
   /** 座標を更新する */
-  _refreshPos(model: NeoLandozerModel): void {
-    this._group.position.set(
+  #refreshPos(model: NeoLandozerModel): void {
+    this.#group.position.set(
       model.position.x,
       model.position.y,
       model.position.z
@@ -118,32 +118,32 @@ export class PlayerNeoLandozerView implements NeoLandozerView {
   }
 
   /** アニメーションタイプに応じたメッシュを返す */
-  _getActiveMesh(type: AnimationType): ArmdozerAnimation {
+  #getActiveMesh(type: AnimationType): ArmdozerAnimation {
     switch (type) {
       case 'STAND':
-        return this._stand;
+        return this.#stand;
       case 'KNOCK_BACK':
-        return this._knockBack;
+        return this.#knockBack;
       case 'GUARD':
-        return this._guard;
+        return this.#guard;
       case 'HM_CHARGE':
-        return this._hmCharge;
+        return this.#hmCharge;
       case 'HM_ATTACK':
-        return this._hmAttack;
+        return this.#hmAttack;
       case 'HM_TO_STAND':
-        return this._hmToStand;
+        return this.#hmToStand;
       case 'DOWN':
-        return this._down;
+        return this.#down;
       case "GUTS_UP":
-        return this._gutsUp;
+        return this.#gutsUp;
       case "GUTS_DOWN":
-        return this._gutsDown;
+        return this.#gutsDown;
       case 'BACK_STEP':
-        return this._backStep;
+        return this.#backStep;
       case 'FRONT_STEP':
-        return this._frontStep;
+        return this.#frontStep;
       default:
-        return this._stand;
+        return this.#stand;
     }
   }
 }

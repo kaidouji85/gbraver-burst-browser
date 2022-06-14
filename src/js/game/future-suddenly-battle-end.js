@@ -5,15 +5,15 @@ import {createStream, createStreamSource} from "../stream/stream";
 
 /** 将来生成されるバトル管理オブジェクトからバトル強制終了ストリームを取り出す */
 export class FutureSuddenlyBattleEnd {
-  _notifier: StreamSource<void>;
-  _unsubscriber: ?Unsubscriber;
+  #notifier: StreamSource<void>;
+  #unsubscriber: ?Unsubscriber;
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this._notifier = createStreamSource();
-    this._unsubscriber = null;
+    this.#notifier = createStreamSource();
+    this.#unsubscriber = null;
   }
 
   /**
@@ -23,8 +23,8 @@ export class FutureSuddenlyBattleEnd {
    */
   bind(battle: Battle): void {
     this.unbind();
-    this._unsubscriber = createStream(battle.suddenlyBattleNotifier()).subscribe(() => {
-      this._notifier.next();
+    this.#unsubscriber = createStream(battle.suddenlyBattleNotifier()).subscribe(() => {
+      this.#notifier.next();
     });
   }
 
@@ -32,12 +32,12 @@ export class FutureSuddenlyBattleEnd {
    * バトル強制終了監視を停止する
    */
   unbind(): void {
-    if (!this._unsubscriber) {
+    if (!this.#unsubscriber) {
       return;
     }
 
-    this._unsubscriber.unsubscribe();
-    this._unsubscriber = null;
+    this.#unsubscriber.unsubscribe();
+    this.#unsubscriber = null;
   }
 
   /**
@@ -46,6 +46,6 @@ export class FutureSuddenlyBattleEnd {
    * @return 通知ストリーム
    */
   stream(): Stream<void> {
-    return this._notifier;
+    return this.#notifier;
   }
 }

@@ -1,11 +1,11 @@
 // @flow
-import type {GameOverParam} from "./game-over-param";
-import {castShinBraverGameOver, shinBraverWin} from "./shin-braver";
-import {castNeoLandozerGameOver, neoLandozerWin} from "./neo-landozer";
-import {castLightningDozerGameOver, lightningDozerWin} from "./lightning-dozer";
-import {castWingDozerGameOver, wingDozerWin} from "./wing-dozer";
-import {empty} from "../../../../../../../animation/delay";
 import {Animate} from "../../../../../../../animation/animate";
+import {empty} from "../../../../../../../animation/delay";
+import type {GameOverParam} from "./game-over-param";
+import {castLightningDozerGameOver, lightningDozerWin} from "./lightning-dozer";
+import {castNeoLandozerGameOver, neoLandozerWin} from "./neo-landozer";
+import {castShinBraverGameOver, shinBraverWin} from "./shin-braver";
+import {castWingDozerGameOver, wingDozerWin} from "./wing-dozer";
 
 /**
  * ゲームオーバアニメーション

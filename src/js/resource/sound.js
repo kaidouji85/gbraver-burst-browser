@@ -1,6 +1,6 @@
 // @flow
-import type {ResourceRoot} from "./resource-root";
 import {Howl} from 'howler';
+import type {ResourceRoot} from "./resource-root";
 
 /** 音リソースのユニークID */
 export type SoundId = string;

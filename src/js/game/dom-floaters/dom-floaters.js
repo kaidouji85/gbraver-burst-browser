@@ -1,31 +1,31 @@
 // @flow
+import type {Resources} from "../../resource";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
 import type {GameAction} from "../game-actions";
 import {PostBattleFloater} from "./post-battle/post-battle";
 import type {PostBattleButtonConfig} from "./post-battle/post-battle-button-config";
-import type {Resources} from "../../resource";
 
 /** DOMフローター管理オブジェクト */
 export class DOMFloaters {
-  _root: HTMLElement;
-  _postBattle: PostBattleFloater;
-  _gameAction: StreamSource<GameAction>;
-  _unsubscribers: Unsubscriber[];
+  #root: HTMLElement;
+  #postBattle: PostBattleFloater;
+  #gameAction: StreamSource<GameAction>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
    */
   constructor() {
-    this._root = document.createElement('div');
-    this._gameAction = createStreamSource();
+    this.#root = document.createElement('div');
+    this.#gameAction = createStreamSource();
 
-    this._postBattle = new PostBattleFloater();
-    this._root.appendChild(this._postBattle.getRootHTMLElement());
+    this.#postBattle = new PostBattleFloater();
+    this.#root.appendChild(this.#postBattle.getRootHTMLElement());
 
-    this._unsubscribers = [
-      this._postBattle.selectionCompleteNotifier().subscribe(postBattle => {
-        this._gameAction.next({type: 'PostBattleAction', action: postBattle});
+    this.#unsubscribers = [
+      this.#postBattle.selectionCompleteNotifier().subscribe(postBattle => {
+        this.#gameAction.next({type: 'PostBattleAction', action: postBattle});
       })
     ];
   }
@@ -34,10 +34,10 @@ export class DOMFloaters {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._unsubscribers.forEach(v => {
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-    this._postBattle.destructor();
+    this.#postBattle.destructor();
   }
 
   /**
@@ -46,7 +46,7 @@ export class DOMFloaters {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this._root;
+    return this.#root;
   }
 
   /**
@@ -55,7 +55,7 @@ export class DOMFloaters {
    * @return 通知ストリーム
    */
   gameActionNotifier(): Stream<GameAction> {
-    return this._gameAction;
+    return this.#gameAction;
   }
 
   /**
@@ -66,13 +66,13 @@ export class DOMFloaters {
    * @return アニメが完了したら発火するPromise
    */
   async showPostBattle(resources: Resources, buttons: PostBattleButtonConfig[]): Promise<void> {
-    await this._postBattle.show(resources, buttons);
+    await this.#postBattle.show(resources, buttons);
   }
 
   /**
    * バトル終了後行動選択フローターを非表示にする
    */
   hiddenPostBattle(): void {
-    this._postBattle.hidden();
+    this.#postBattle.hidden();
   }
 }
