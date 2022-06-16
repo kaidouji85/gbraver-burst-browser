@@ -21,11 +21,11 @@ import {LightningBarrierView} from "./view/lightning-barrier-view";
  * 電撃バリア
  */
 export class LightningBarrierGameEffect {
-  _model: LightningBarrierModel;
-  _view: LightningBarrierView;
-  _sounds: LightningBarrierSounds;
-  _tweenGroup: typeof TWEEN.Group;
-  _unsubscribers: Unsubscriber[];
+  #model: LightningBarrierModel;
+  #view: LightningBarrierView;
+  #sounds: LightningBarrierSounds;
+  #tweenGroup: typeof TWEEN.Group;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -34,21 +34,21 @@ export class LightningBarrierGameEffect {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._view = new LightningBarrierView(resources);
-    this._sounds = new LightningBarrierSounds(resources);
-    this._tweenGroup = new TWEEN.Group();
-    this._unsubscribers = [
+    this.#model = createInitialValue();
+    this.#view = new LightningBarrierView(resources);
+    this.#sounds = new LightningBarrierSounds(resources);
+    this.#tweenGroup = new TWEEN.Group();
+    this.#unsubscribers = [
       gameObjectAction.subscribe(action => {
         if (action.type === 'Update') {
-          this._onUpdate(action);
+          this.#onUpdate(action);
         } else if (action.type === 'PreRender') {
-          this._onPreRender(action);
+          this.#onPreRender(action);
         }
       }),
 
       firstUpdate(gameObjectAction).subscribe(() => {
-        this._onFirstUpdate();
+        this.#onFirstUpdate();
       })
     ];
   }
@@ -57,11 +57,11 @@ export class LightningBarrierGameEffect {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscribers.forEach(v => {
+    this.#view.destructor();
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-    this._tweenGroup.removeAll();
+    this.#tweenGroup.removeAll();
   }
 
   /**
@@ -70,7 +70,7 @@ export class LightningBarrierGameEffect {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -79,7 +79,7 @@ export class LightningBarrierGameEffect {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this._model, this._sounds);
+    return show(this.#model, this.#sounds);
   }
 
   /**
@@ -88,14 +88,14 @@ export class LightningBarrierGameEffect {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this._model);
+    return hidden(this.#model);
   }
 
   /**
    * 初回のアップデート処理
    */
-  _onFirstUpdate(): void {
-    electrification(this._model, this._tweenGroup).loop();
+  #onFirstUpdate(): void {
+    electrification(this.#model, this.#tweenGroup).loop();
   }
 
   /**
@@ -103,9 +103,9 @@ export class LightningBarrierGameEffect {
    *
    * @param action アクション
    */
-  _onUpdate(action: Update): void {
-    this._tweenGroup.update(action.time);
-    this._view.engage(this._model);
+  #onUpdate(action: Update): void {
+    this.#tweenGroup.update(action.time);
+    this.#view.engage(this.#model);
   }
 
   /**
@@ -113,7 +113,7 @@ export class LightningBarrierGameEffect {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+  #onPreRender(action: PreRender): void {
+    this.#view.lookAt(action.camera);
   }
 }
