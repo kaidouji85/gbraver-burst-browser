@@ -11,6 +11,6 @@ export class EnemyBatteryNumberView extends PlayerBatteryNumberView {
 
   engage(model: BatteryNumberModel): void {
     super.engage(model);
-    this._numberMesh.getObject3D().position.x *= -1;
+    this.getObject3D().position.x *= -1;
   }
 }
