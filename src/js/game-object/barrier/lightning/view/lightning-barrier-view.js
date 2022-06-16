@@ -19,14 +19,14 @@ const MAX_ANIMATION = 8;
  * 電撃バリアビュー
  */
 export class LightningBarrierView {
-  _mesh: HorizontalAnimationMesh;
+  #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
     const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.BARRIER_LIGHTNING);
     const texture = textureResource
       ? textureResource.texture
       : new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({
+    this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: MAX_ANIMATION,
       width: WIDTH,
@@ -38,7 +38,7 @@ export class LightningBarrierView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.destructor();
+    this.#mesh.destructor();
   }
 
   /**
@@ -54,8 +54,8 @@ export class LightningBarrierView {
       model.position.z
     );
     target.scale.set(model.scale, model.scale, model.scale);
-    this._mesh.setOpacity(model.opacity);
-    this._mesh.animate(model.animation.frame);
+    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.animate(model.animation.frame);
   }
 
   /** 
@@ -73,6 +73,6 @@ export class LightningBarrierView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this.#mesh.getObject3D();
   }
 }

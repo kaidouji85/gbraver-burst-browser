@@ -12,8 +12,8 @@ import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
  * 本カメラは一切視点変更を行わないカメラである
  */
 export class PlainHUDCamera {
-  _camera: typeof THREE.OrthographicCamera;
-  _unsubscriber: Unsubscriber;
+  #camera: typeof THREE.OrthographicCamera;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -21,10 +21,10 @@ export class PlainHUDCamera {
    * @param resize リサイズストリーム
    */
   constructor(resize: Stream<Resize>) {
-    this._camera = createHUDCamera();
-    this._camera.position.z = HUD_CAMERA_ZINDEX;
-    this._unsubscriber = resize.subscribe(action => {
-      this._resize(action);
+    this.#camera = createHUDCamera();
+    this.#camera.position.z = HUD_CAMERA_ZINDEX;
+    this.#unsubscriber = resize.subscribe(action => {
+      this.#resize(action);
     });
   }
 
@@ -32,7 +32,7 @@ export class PlainHUDCamera {
    * デストラクタ
    */
   destructor(): void {
-    this._unsubscriber.unsubscribe();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -41,7 +41,7 @@ export class PlainHUDCamera {
    * @return カメラ
    */
   getCamera(): typeof THREE.Camera {
-    return this._camera;
+    return this.#camera;
   }
 
   /**
@@ -49,7 +49,7 @@ export class PlainHUDCamera {
    *
    * @param action アクション
    */
-  _resize(action: Resize): void {
-    onResizeOrthographicCamera(this._camera, action.width, action.height);
+  #resize(action: Resize): void {
+    onResizeOrthographicCamera(this.#camera, action.width, action.height);
   }
 }

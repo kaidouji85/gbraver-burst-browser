@@ -18,11 +18,11 @@ import {BurstButtonView} from "./view/burst-button-view";
 
 /** バーストボタン */
 export class BurstButton {
-  _model: BurstButtonModel;
-  _view: BurstButtonView;
-  _pushButtonSound: typeof Howl;
-  _pushButton: StreamSource<void>;
-  _unsubscriber: Unsubscriber;
+  #model: BurstButtonModel;
+  #view: BurstButtonView;
+  #pushButtonSound: typeof Howl;
+  #pushButton: StreamSource<void>;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -33,35 +33,35 @@ export class BurstButton {
    */
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>, armdozerIcon: ArmdozerIcon) {
     const pushButtonResource = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this._pushButtonSound = pushButtonResource
+    this.#pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
       : new Howl();
-    this._pushButton = createStreamSource();
+    this.#pushButton = createStreamSource();
 
-    this._model = createInitialValue();
-    this._view = new BurstButtonView({
+    this.#model = createInitialValue();
+    this.#view = new BurstButtonView({
       resources: resources,
       gameObjectAction: gameObjectAction,
       armdozerIcon: armdozerIcon,
       onPush: () => {
-        if (this._model.disabled || !this._model.canBurst) {
+        if (this.#model.disabled || !this.#model.canBurst) {
           return;
         }
 
-        this._pushButton.next();
+        this.#pushButton.next();
       }
     });
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
-        this._preRender(action);
+        this.#preRender(action);
       }
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -71,7 +71,7 @@ export class BurstButton {
    * @return アニメーション
    */
   open(canBurst: boolean): Animate {
-    return open(this._model, canBurst);
+    return open(this.#model, canBurst);
   }
 
   /**
@@ -80,8 +80,8 @@ export class BurstButton {
    * @return アニメーション
    */
   decide(): Animate {
-    this._pushButtonSound.play();
-    return decide(this._model);
+    this.#pushButtonSound.play();
+    return decide(this.#model);
   }
 
   /**
@@ -90,12 +90,12 @@ export class BurstButton {
    * @return アニメーション
    */
   close(): Animate {
-    return close(this._model);
+    return close(this.#model);
   }
 
   /** three.jsオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -104,11 +104,11 @@ export class BurstButton {
    * @return 通知ストリーム
    */
   pushButtonNotifier(): Stream<void> {
-    return this._pushButton;
+    return this.#pushButton;
   }
 
   /** プリレンダー */
-  _preRender(action: PreRender): void {
-    this._view.engage(this._model, action);
+  #preRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 }

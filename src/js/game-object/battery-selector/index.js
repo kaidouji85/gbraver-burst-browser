@@ -45,14 +45,14 @@ type Param = {
 
 /** バッテリーセレクタ */
 export class BatterySelector {
-  _model: BatterySelectorModel;
-  _view: BatterySelectorView;
-  _pushButtonSound: typeof Howl;
-  _batteryChangeSound: typeof Howl;
-  _batteryChangeTween: typeof TWEEN.Group;
-  _batteryMinusTween: typeof TWEEN.Group;
-  _batteryPlusTween: typeof TWEEN.Group;
-  _unsubscriber: Unsubscriber;
+  #model: BatterySelectorModel;
+  #view: BatterySelectorView;
+  #pushButtonSound: typeof Howl;
+  #batteryChangeSound: typeof Howl;
+  #batteryChangeTween: typeof TWEEN.Group;
+  #batteryMinusTween: typeof TWEEN.Group;
+  #batteryPlusTween: typeof TWEEN.Group;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -60,64 +60,64 @@ export class BatterySelector {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this._model = initialValue();
-    this._batteryChangeTween = new TWEEN.Group();
-    this._batteryMinusTween = new TWEEN.Group();
-    this._batteryPlusTween = new TWEEN.Group();
+    this.#model = initialValue();
+    this.#batteryChangeTween = new TWEEN.Group();
+    this.#batteryMinusTween = new TWEEN.Group();
+    this.#batteryPlusTween = new TWEEN.Group();
 
     const pushButtonResource = param.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON);
-    this._pushButtonSound = pushButtonResource
+    this.#pushButtonSound = pushButtonResource
       ? pushButtonResource.sound
       : new Howl();
 
     const batteryChangeResource = param.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE);
-    this._batteryChangeSound = batteryChangeResource
+    this.#batteryChangeSound = batteryChangeResource
       ? batteryChangeResource.sound
       : new Howl();
 
-    this._unsubscriber = param.gameObjectAction.subscribe(action => {
+    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._update(action);
+        this.#update(action);
       } else if (action.type === 'PreRender') {
-        this._preRender(action);
+        this.#preRender(action);
       }
     });
 
-    this._view = new BatterySelectorView({
+    this.#view = new BatterySelectorView({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
       onOkPush: () => {
-        if (this._model.disabled) {
+        if (this.#model.disabled) {
           return;
         }
 
         param.onOkButtonPush();
       },
       onPlusPush: () => {
-        if (this._model.disabled || !canBatteryPlus(this._model)) {
+        if (this.#model.disabled || !canBatteryPlus(this.#model)) {
           return;
         }
 
-        this._batteryPlusPop();
-        this._batteryChange(this._model.battery + 1);
-        param.onBatteryChange(this._model.battery);
+        this.#batteryPlusPop();
+        this.#batteryChange(this.#model.battery + 1);
+        param.onBatteryChange(this.#model.battery);
       },
       onMinusPush: () => {
-        if (this._model.disabled || !canBatteryMinus(this._model)) {
+        if (this.#model.disabled || !canBatteryMinus(this.#model)) {
           return;
         }
 
-        this._batteryMinusPop();
-        this._batteryChange(this._model.battery - 1);
-        param.onBatteryChange(this._model.battery);
+        this.#batteryMinusPop();
+        this.#batteryChange(this.#model.battery - 1);
+        param.onBatteryChange(this.#model.battery);
       }
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -129,11 +129,11 @@ export class BatterySelector {
    * @return アニメーション
    */
   open(initialValue: number, maxEnable: number, label: ButtonLabel): Animate {
-    this._model.battery = initialValue;
-    this._model.needle = getNeedleValue(initialValue);
-    this._model.enableMaxBattery = Math.min(maxEnable, MAX_BATTERY);
-    this._model.label = label;
-    return open(this._model);
+    this.#model.battery = initialValue;
+    this.#model.needle = getNeedleValue(initialValue);
+    this.#model.enableMaxBattery = Math.min(maxEnable, MAX_BATTERY);
+    this.#model.label = label;
+    return open(this.#model);
   }
 
   /**
@@ -142,57 +142,57 @@ export class BatterySelector {
    * @return アニメーション
    */
   decide(): Animate {
-    this._pushButtonSound.play();
-    return decide(this._model);
+    this.#pushButtonSound.play();
+    return decide(this.#model);
   }
 
   /** バッテリーセレクタを閉じる */
   close(): Animate {
-    return close(this._model);
+    return close(this.#model);
   }
 
   /** 現在のバッテリー値を取得する */
   getBattery(): number {
-    return this._model.battery;
+    return this.#model.battery;
   }
 
   /** シーンに追加するthree.jsオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /** 状態更新 */
-  _update(action: Update): void {
-    this._batteryMinusTween.update(action.time);
-    this._batteryPlusTween.update(action.time);
-    this._batteryChangeTween.update(action.time);
+  #update(action: Update): void {
+    this.#batteryMinusTween.update(action.time);
+    this.#batteryPlusTween.update(action.time);
+    this.#batteryChangeTween.update(action.time);
   }
 
   /** プリレンダー */
-  _preRender(action: PreRender): void {
-    this._view.engage(this._model, action);
+  #preRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 
   /**
    * バッテリーマイナスボタン ポップ
    */
-  _batteryMinusPop(): void {
-    this._batteryMinusTween.update();
-    this._batteryMinusTween.removeAll();
+  #batteryMinusPop(): void {
+    this.#batteryMinusTween.update();
+    this.#batteryMinusTween.removeAll();
 
-    this._batteryChangeSound.play();
-    batteryMinusPop(this._model, this._batteryMinusTween).play();
+    this.#batteryChangeSound.play();
+    batteryMinusPop(this.#model, this.#batteryMinusTween).play();
   }
 
   /**
    * バッテリープラスボタン ポップ
    */
-  _batteryPlusPop(): void {
-    this._batteryPlusTween.update();
-    this._batteryPlusTween.removeAll();
+  #batteryPlusPop(): void {
+    this.#batteryPlusTween.update();
+    this.#batteryPlusTween.removeAll();
 
-    this._batteryChangeSound.play();
-    batteryPlusPop(this._model, this._batteryPlusTween).play();
+    this.#batteryChangeSound.play();
+    batteryPlusPop(this.#model, this.#batteryPlusTween).play();
   }
 
   /**
@@ -200,12 +200,12 @@ export class BatterySelector {
    *
    * @param battery 変更するバッテリー値
    */
-  _batteryChange(battery: number): void {
-    this._batteryChangeTween.update();
-    this._batteryChangeTween.removeAll();
+  #batteryChange(battery: number): void {
+    this.#batteryChangeTween.update();
+    this.#batteryChangeTween.removeAll();
 
-    this._model.battery = battery;
+    this.#model.battery = battery;
     const needle = getNeedleValue(battery);
-    changeNeedle(this._model, this._batteryChangeTween, needle).play();
+    changeNeedle(this.#model, this.#batteryChangeTween, needle).play();
   }
 }

@@ -26,12 +26,12 @@ type Param = {
 
 /** バーストボタンのビュー */
 export class BurstButtonView {
-  _burstButton: SimpleImageMesh;
-  _armdozerIcon: ArmdozerIcon;
-  _label: SimpleImageMesh;
-  _buttonDisabled: SimpleImageMesh;
-  _overlap: ButtonOverlap;
-  _group: typeof THREE.Group;
+  #burstButton: SimpleImageMesh;
+  #armdozerIcon: ArmdozerIcon;
+  #label: SimpleImageMesh;
+  #buttonDisabled: SimpleImageMesh;
+  #overlap: ButtonOverlap;
+  #group: typeof THREE.Group;
 
   /**
    * コンストラクタ
@@ -39,28 +39,28 @@ export class BurstButtonView {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const burstButton =param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON)?.image ?? new Image();
-    this._burstButton = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: burstButton, imageWidth: 512});
-    this._group.add(this._burstButton.getObject3D());
+    this.#burstButton = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: burstButton, imageWidth: 512});
+    this.#group.add(this.#burstButton.getObject3D());
 
-    this._armdozerIcon = param.armdozerIcon;
-    this._armdozerIcon.getObject3D().position.z = this._burstButton.getObject3D().position.z + 1;
-    this._group.add(this._armdozerIcon.getObject3D());
+    this.#armdozerIcon = param.armdozerIcon;
+    this.#armdozerIcon.getObject3D().position.z = this.#burstButton.getObject3D().position.z + 1;
+    this.#group.add(this.#armdozerIcon.getObject3D());
 
     const label = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BURST_BUTTON_LABEL)?.image ?? new Image();
-    this._label = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: label, imageWidth: 264});
-    this._group.add(this._label.getObject3D());
+    this.#label = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: label, imageWidth: 264});
+    this.#group.add(this.#label.getObject3D());
 
     const buttonDisabled = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED)?.image ?? new Image();
-    this._buttonDisabled = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: buttonDisabled, imageWidth: 414});
-    this._group.add(this._buttonDisabled.getObject3D());
+    this.#buttonDisabled = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: buttonDisabled, imageWidth: 414});
+    this.#group.add(this.#buttonDisabled.getObject3D());
 
-    this._overlap = circleButtonOverlap({
+    this.#overlap = circleButtonOverlap({
       radius: 200,
       segments: 32,
       gameObjectAction: param.gameObjectAction,
@@ -68,16 +68,16 @@ export class BurstButtonView {
         param.onPush();
       }
     });
-    this._group.add(this._overlap.getObject3D());
+    this.#group.add(this.#overlap.getObject3D());
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._burstButton.destructor();
-    this._armdozerIcon.destructor();
-    this._buttonDisabled.destructor();
-    this._label.destructor();
-    this._overlap.destructor();
+    this.#burstButton.destructor();
+    this.#armdozerIcon.destructor();
+    this.#buttonDisabled.destructor();
+    this.#label.destructor();
+    this.#overlap.destructor();
   }
 
   /**
@@ -87,31 +87,31 @@ export class BurstButtonView {
    * @param preRender プリレンダー情報
    */
   engage(model: BurstButtonModel, preRender: PreRender): void {
-    this._burstButton.setOpacity(model.opacity);
+    this.#burstButton.setOpacity(model.opacity);
 
     const iconOpacity = !model.canBurst ? 0 : model.opacity;
-    this._armdozerIcon.setOpacity(iconOpacity);
+    this.#armdozerIcon.setOpacity(iconOpacity);
 
     const labelOpacity = !model.canBurst ? 0 : model.opacity;
-    this._label.setOpacity(labelOpacity);
-    this._label.getObject3D().position.y = -80;
+    this.#label.setOpacity(labelOpacity);
+    this.#label.getObject3D().position.y = -80;
 
     const disabledOpacity = model.canBurst ? 0 : model.opacity;
-    this._buttonDisabled.setOpacity(disabledOpacity);
+    this.#buttonDisabled.setOpacity(disabledOpacity);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
 
     const groupScale = devicePerScale * model.scale * 0.3;
-    this._group.scale.set(groupScale, groupScale, groupScale);
+    this.#group.scale.set(groupScale, groupScale, groupScale);
     const paddingLeft = 175;
     const marginLeft = 10;
-    this._group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
+    this.#group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
       + Math.max(marginLeft, preRender.safeAreaInset.left);
     const paddingBottom = 65;
     const marginBottom = 10;
-    this._group.position.y = -preRender.rendererDOM.clientHeight / 2 + paddingBottom * devicePerScale
+    this.#group.position.y = -preRender.rendererDOM.clientHeight / 2 + paddingBottom * devicePerScale
       + Math.max(marginBottom, preRender.safeAreaInset.bottom);
-    this._group.quaternion.copy(preRender.camera.quaternion);
+    this.#group.quaternion.copy(preRender.camera.quaternion);
   }
 
   /** 
@@ -120,6 +120,6 @@ export class BurstButtonView {
    * @return
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 }
