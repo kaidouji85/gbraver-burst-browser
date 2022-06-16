@@ -24,9 +24,9 @@ type Param = {
 
 /** ボタン押下判定オブジェクト */
 export class ButtonOverlap {
-  _mesh: typeof THREE.Mesh;
-  _onButtonPush: () => void;
-  _unsubscriber: Unsubscriber;
+  #mesh: typeof THREE.Mesh;
+  #onButtonPush: () => void;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -38,29 +38,29 @@ export class ButtonOverlap {
       color: new THREE.Color('rgb(0, 255, 0)'),
       visible: param.visible ?? false,
     });
-    this._mesh = new THREE.Mesh(param.geometry, material);
+    this.#mesh = new THREE.Mesh(param.geometry, material);
 
-    this._unsubscriber = param.gameObjectAction.subscribe(action => {
+    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
       switch (action.type) {
         case 'mouseDownRaycaster':
-          this._mouseDownRaycaster(action);
+          this.#mouseDownRaycaster(action);
           return;
         case 'touchStartRaycaster':
-          this._touchStartRaycaster(action);
+          this.#touchStartRaycaster(action);
           return;
         default:
           return;
       }
     });
 
-    this._onButtonPush = param.onButtonPush;
+    this.#onButtonPush = param.onButtonPush;
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._mesh.geometry.dispose();
-    this._mesh.material.dispose();
-    this._unsubscriber.unsubscribe();
+    this.#mesh.geometry.dispose();
+    this.#mesh.material.dispose();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -69,28 +69,28 @@ export class ButtonOverlap {
    * @param visible trueで当たり判定を表示する
    */
   setVisible(visible: boolean): void {
-    this._mesh.material.visible = visible;
+    this.#mesh.material.visible = visible;
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
-    return this._mesh;
+    return this.#mesh;
   }
 
   /** マウスダウン */
-  _mouseDownRaycaster(action: MouseDownRaycaster): void {
-    if (isMeshOverlap(action.mouse.raycaster, this._mesh)) {
-      this._onButtonPush();
+  #mouseDownRaycaster(action: MouseDownRaycaster): void {
+    if (isMeshOverlap(action.mouse.raycaster, this.#mesh)) {
+      this.#onButtonPush();
     }
   }
 
   /** タッチスタート */
-  _touchStartRaycaster(action: TouchStartRaycaster): void {
+  #touchStartRaycaster(action: TouchStartRaycaster): void {
     const overlapTouches = action.touch.targetTouches
-      .filter(v => isMeshOverlap(v.raycaster, this._mesh));
+      .filter(v => isMeshOverlap(v.raycaster, this.#mesh));
     const isTouchOverlap = 0 < overlapTouches.length;
     if (isTouchOverlap) {
-      this._onButtonPush();
+      this.#onButtonPush();
     }
   }
 }
