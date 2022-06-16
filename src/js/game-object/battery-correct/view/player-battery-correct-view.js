@@ -22,9 +22,9 @@ const MINUS_SIGN = 11 / MAX_BATTERY_ANIMATION;
 
 /** プレイヤー側 バッテリー補正ビュー */
 export class PlayerBatteryCorrectView implements BatteryCorrectView {
-  _value: HorizontalAnimationMesh;
-  _sign: HorizontalAnimationMesh;
-  _group: typeof THREE.Group;
+  #value: HorizontalAnimationMesh;
+  #sign: HorizontalAnimationMesh;
+  #group: typeof THREE.Group;
 
   /**
    * コンストラクタ
@@ -32,62 +32,62 @@ export class PlayerBatteryCorrectView implements BatteryCorrectView {
    * @param resources リソースか管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const batteryNumber = resources.textures.find(v => v.id === TEXTURE_IDS.BATTERY_NUMBER)
       ?.texture ?? new THREE.Texture();
 
-    this._value = new HorizontalAnimationMesh({
+    this.#value = new HorizontalAnimationMesh({
       texture: batteryNumber,
       maxAnimation: MAX_BATTERY_ANIMATION,
       width: MESH_SIZE,
       height: MESH_SIZE,
     });
-    this._value.getObject3D().position.x = 10;
-    this._group.add(this._value.getObject3D());
+    this.#value.getObject3D().position.x = 10;
+    this.#group.add(this.#value.getObject3D());
 
-    this._sign = new HorizontalAnimationMesh({
+    this.#sign = new HorizontalAnimationMesh({
       texture: batteryNumber,
       maxAnimation: MAX_BATTERY_ANIMATION,
       width: MESH_SIZE,
       height: MESH_SIZE,
     });
-    this._sign.getObject3D().position.x = -20;
-    this._group.add(this._sign.getObject3D());
+    this.#sign.getObject3D().position.x = -20;
+    this.#group.add(this.#sign.getObject3D());
   }
 
   /** @override */
   destructor(): void {
-    this._value.destructor();
-    this._sign.destructor();
+    this.#value.destructor();
+    this.#sign.destructor();
   }
 
   /** @override */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /** @override */
   engage(model: BatteryCorrectModel, preRender: PreRender): void {
     const absoluteValue = Math.min(Math.abs(model.correctValue), MAX_ABSOLUTE_VALUE);
     const value = absoluteValue / MAX_BATTERY_ANIMATION;
-    this._value.animate(value);
+    this.#value.animate(value);
 
     const sign = (0 <= model.correctValue) ? PLUS_SIGN : MINUS_SIGN;
-    this._sign.animate(sign);
+    this.#sign.animate(sign);
 
-    this._group.position.x = model.position.x;
-    this._group.position.y = model.position.y;
+    this.#group.position.x = model.position.x;
+    this.#group.position.y = model.position.y;
     // BatteryNumberよりも手前に表示したいので、
     // ARMDOZER_EFFECT_STANDARD_Zに+1している
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 1;
+    this.#group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 1;
 
-    this._value.setOpacity(model.opacity);
-    this._sign.setOpacity(model.opacity);
+    this.#value.setOpacity(model.opacity);
+    this.#sign.setOpacity(model.opacity);
 
-    this._group.scale.x = model.scale;
-    this._group.scale.y = model.scale;
+    this.#group.scale.x = model.scale;
+    this.#group.scale.y = model.scale;
 
-    this._group.quaternion.copy(preRender.camera.quaternion);
+    this.#group.quaternion.copy(preRender.camera.quaternion);
   }
 }

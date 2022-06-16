@@ -12,9 +12,9 @@ import type {BatteryCorrectView} from "./view/battery-correct-view";
 
 /** バッテリー補正 */
 export class BatteryCorrect {
-  _model: BatteryCorrectModel;
-  _view: BatteryCorrectView;
-  _unsubscribers: Unsubscriber[];
+  #model: BatteryCorrectModel;
+  #view: BatteryCorrectView;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -23,11 +23,11 @@ export class BatteryCorrect {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: BatteryCorrectView, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = initialValue();
-    this._view = view;
-    this._unsubscribers = [
+    this.#model = initialValue();
+    this.#view = view;
+    this.#unsubscribers = [
       gameObjectAction.subscribe(action => {
-        if (action.type === 'PreRender') { this._onPreRender(action) }
+        if (action.type === 'PreRender') { this.#onPreRender(action) }
       })
     ];
   }
@@ -36,8 +36,8 @@ export class BatteryCorrect {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscribers.forEach(v => {
+    this.#view.destructor();
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -48,7 +48,7 @@ export class BatteryCorrect {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -58,7 +58,7 @@ export class BatteryCorrect {
    * @return アニメーション
    */
   popUp(value: number): Animate {
-    return popUp(this._model, value);
+    return popUp(this.#model, value);
   }
 
   /**
@@ -66,7 +66,7 @@ export class BatteryCorrect {
    *
    * @param action プリレンダー情報
    */
-  _onPreRender(action: PreRender): void {
-    this._view.engage(this._model, action);
+  #onPreRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 }
