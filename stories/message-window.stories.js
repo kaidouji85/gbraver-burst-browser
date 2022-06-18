@@ -9,5 +9,11 @@ export default {
 
 export const display: DOMStubStory = domStub(()=> {
   const dom = new MessageWindow();
+  dom.visible(true);
+  dom.messages([
+    'hello world',
+    '一般的にゲームのメッセージウインドウは3行のことが多いですね',
+    'これでどう見えてるのか楽しみ'
+  ]);
   return dom.getRootHTMLElement();
 });
