@@ -20,6 +20,7 @@ export class TDScenes {
   #gameLoop: Stream<GameLoop>;
   #resize: Stream<Resize>;
   #renderer: Renderer;
+  #rootHTMLElement: HTMLElement;
   #scene: ?Scene;
   #unsubscriber: Unsubscriber[];
 
@@ -34,6 +35,7 @@ export class TDScenes {
     this.#gameAction = createStreamSource();
     this.#gameLoop = gameLoopStream();
     this.#scene = null;
+    this.#rootHTMLElement = document.createElement('div');
     this.#unsubscriber = [];
   }
 
@@ -72,6 +74,9 @@ export class TDScenes {
     const scene = new BattleScene({resources, bgm, playingBGM, renderer: this.#renderer, battleProgress, initialAnimationTimeScale,
       player, enemy, initialState, gameLoop: this.#gameLoop, resize: this.#resize});
     this.#scene = scene;
+    scene.getHTMLElements().forEach(element => {
+      this.#rootHTMLElement.appendChild(element);
+    });
     this.#unsubscriber = [
       scene.gameEndNotifier().subscribe(v => {
         this.#gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
@@ -88,12 +93,12 @@ export class TDScenes {
   }
 
   /**
-   * three.jsレンダラのHTML要素を取得する
+   * 本シーンで利用しているHTML要素を取得する
    *
-   * @return 取得結果
+   * @return ルートHTML要素
    */
-  getRendererDOM(): HTMLElement {
-    return this.#renderer.getRendererDOM();
+  getHTMLElements(): HTMLElement[] {
+    return [this.#rootHTMLElement, this.#renderer.getRendererDOM()];
   }
 
   /**
@@ -102,6 +107,7 @@ export class TDScenes {
   #disposeScene(): void {
     this.#scene && this.#scene.destructor();
     this.#renderer.disposeRenders();
+    this.#rootHTMLElement.innerHTML = '';
     this.#unsubscriber.forEach(v => {
       v.unsubscribe();
     });
