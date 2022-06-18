@@ -1,4 +1,6 @@
 // @flow
+/** ルートHTML要素のclass属性 */
+const ROOT_CLASS = 'message-window';
 
 /** メッセージウインドウ */
 export class MessageWindow {
@@ -9,7 +11,7 @@ export class MessageWindow {
    */
   constructor() {
     this.#root = document.createElement('div');
-    this.#root.innerText = 'message window';
+    this.#root.className = ROOT_CLASS;
   }
 
   /**

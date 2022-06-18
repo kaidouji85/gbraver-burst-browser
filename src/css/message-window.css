@@ -1,0 +1,23 @@
+/**
+ * メッセージウインドウ
+ */
+@media (orientation: landscape) {
+  .message-window {
+    position: fixed;
+    bottom: 0;
+    left: 50vw;
+    transform: translate(-50%, calc(var(--responsive-font-size) * -1));
+    display: block;
+    background-color: var(--background-color);
+    border: var(--dialog-border);
+    border-radius: var(--dialog-border-radius);
+    width: 80vw;
+    height: calc(var(--responsive-font-size) * 5);
+  }
+}
+
+@media (orientation: portrait) {
+  .message-window {
+    display: none;
+  }
+}
