@@ -81,16 +81,16 @@ export class MessageWindow {
    * @param values メッセージ
    */
   messages(values: string[]): void {
-    const createMessageElement = (message: string) => {
+    const createParagraph = (message: string) => {
       const div = document.createElement('div');
-      div.className = `${ROOT_CLASS}__messages__message`;
+      div.className = `${ROOT_CLASS}__messages__paragraph`;
       div.innerText = message;
       return div;
     };
 
     this.#messages.innerHTML = "";
     values.forEach(message => {
-      this.#root.appendChild(createMessageElement(message));
+      this.#root.appendChild(createParagraph(message));
     });
   }
 }

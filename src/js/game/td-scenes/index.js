@@ -93,9 +93,9 @@ export class TDScenes {
   }
 
   /**
-   * 本シーンで利用しているHTML要素を取得する
+   * 本クラスで利用している全HTML要素を取得する
    *
-   * @return ルートHTML要素
+   * @return 本クラスで利用している全HTML要素
    */
   getHTMLElements(): HTMLElement[] {
     return [this.#rootHTMLElement, this.#renderer.getRendererDOM()];

@@ -29,3 +29,7 @@
 .message-window__invisible {
   display: none;
 }
+
+.message-window__messages__paragraph {
+  font-size: var(--responsive-font-size);
+}
