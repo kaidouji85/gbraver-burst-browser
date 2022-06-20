@@ -3,6 +3,7 @@
  */
 @media (orientation: landscape) {
   .message-window {
+    box-sizing: border-box;
     display: block;
     position: fixed;
     bottom: 0;
@@ -10,8 +11,7 @@
     transform: translate(-50%, calc(var(--responsive-font-size) * -1));
     color: var(--font-color);
     font-size: var(--responsive-font-size);
-    background-color: #474a4d;
-    opacity: 0.8;
+    background-color: #2b2b2b;
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
     padding: calc(var(--responsive-font-size) * 1);

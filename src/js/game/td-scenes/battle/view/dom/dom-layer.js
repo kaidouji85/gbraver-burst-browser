@@ -10,6 +10,7 @@ export class DOMLayer {
    */
   constructor() {
     this.messageWindow = new MessageWindow();
+    this.messageWindow.messages(['1行目', '2行目', '3行目']); // TODO 開発が終わったら戻す
   }
 
   /**
