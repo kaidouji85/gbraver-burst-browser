@@ -14,6 +14,7 @@ import type {Stream, StreamSource} from "../../../../stream/stream";
 import {createStreamSource} from "../../../../stream/stream";
 import type {Resize} from "../../../../window/resize";
 import type {BattleSceneAction} from "../actions";
+import {DOMLayer} from "./dom/dom-layer";
 import {HudLayer} from './hud';
 import {ThreeDimensionLayer} from './td';
 import {tracking} from "./tracking";
@@ -37,6 +38,7 @@ type Param = {
 export class BattleSceneView {
   td: ThreeDimensionLayer;
   hud: HudLayer;
+  dom: DOMLayer;
   #playerId: PlayerId;
   #safeAreaInset: SafeAreaInset;
   #renderer: OwnRenderer;
@@ -74,6 +76,8 @@ export class BattleSceneView {
       update: this.#updateHUD,
       preRender: this.#preRenderHUD,
     });
+
+    this.dom = new DOMLayer();
 
     param.gameLoop.subscribe(action => {
       this.#gameLoop(action);

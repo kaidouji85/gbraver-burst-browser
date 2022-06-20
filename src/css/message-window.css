@@ -1,0 +1,35 @@
+/**
+ * メッセージウインドウ
+ */
+@media (orientation: landscape) {
+  .message-window {
+    box-sizing: border-box;
+    display: block;
+    position: fixed;
+    bottom: max(calc(var(--responsive-font-size) * 1), var(--safe-area-bottom));
+    left: 50vw;
+    transform: translate(-50%, 0);
+    color: var(--font-color);
+    font-size: var(--responsive-font-size);
+    background-color: #2b2b2b;
+    border: var(--dialog-border);
+    border-radius: var(--dialog-border-radius);
+    padding: calc(var(--responsive-font-size) * 1);
+    width: 80vw;
+    min-height: calc(var(--responsive-font-size) * 5);
+  }
+}
+
+@media (orientation: portrait) {
+  .message-window {
+    display: none;
+  }
+}
+
+.message-window__invisible {
+  display: none;
+}
+
+.message-window__messages__paragraph {
+  font-size: var(--responsive-font-size);
+}

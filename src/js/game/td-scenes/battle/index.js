@@ -131,6 +131,15 @@ export class BattleScene implements Scene {
   }
 
   /**
+   * 本シーンが利用している全てのHTML要素を返す
+   *
+   * @return 本シーンが利用している全てのHTML要素
+   */
+  getHTMLElements(): HTMLElement[] {
+    return this.#view.dom.getHTMLElements();
+  }
+
+  /**
    * バッテリー決定時の処理
    *
    * @param action アクション

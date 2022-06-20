@@ -55,7 +55,7 @@ export class Game {
       this.#props.domDialogs.getRootHTMLElement(),
       this.#props.domScenes.getRootHTMLElement(),
       this.#props.domFloaters.getRootHTMLElement(),
-      this.#props.tdScenes.getRendererDOM()];
+      ...this.#props.tdScenes.getHTMLElements()];
     elements.forEach(element => {
       body.appendChild(element);
     });
