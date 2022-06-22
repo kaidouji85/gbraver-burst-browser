@@ -16,10 +16,10 @@ import type {ContinuousAttackView} from "./view/continuous-attack-view";
  * 連続攻撃
  */
 export class ContinuousAttackIndicator {
-  _model: ContinuousAttackModel;
-  _view: ContinuousAttackView;
-  _sounds: ContinuousAttackSounds;
-  _unsubscriber: Unsubscriber;
+  #model: ContinuousAttackModel;
+  #view: ContinuousAttackView;
+  #sounds: ContinuousAttackSounds;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -29,22 +29,22 @@ export class ContinuousAttackIndicator {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: ContinuousAttackView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._view = view;
-    this._sounds = new ContinuousAttackSounds(resources);
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue();
+    this.#view = view;
+    this.#sounds = new ContinuousAttackSounds(resources);
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate();
+        this.#onUpdate();
       } else if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -53,7 +53,7 @@ export class ContinuousAttackIndicator {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this._model, this._sounds);
+    return popUp(this.#model, this.#sounds);
   }
 
   /**
@@ -62,14 +62,14 @@ export class ContinuousAttackIndicator {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
-  _onUpdate(): void {
-    this._view.engage(this._model);
+  #onUpdate(): void {
+    this.#view.engage(this.#model);
   }
 
   /**
@@ -77,7 +77,7 @@ export class ContinuousAttackIndicator {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+  #onPreRender(action: PreRender): void {
+    this.#view.lookAt(action.camera);
   }
 }
