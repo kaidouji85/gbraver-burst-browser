@@ -20,9 +20,9 @@ export const BASE_PADDING_TOP = 60;
  * プレイヤー ライトニングドーザ カットイン
  */
 export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
-  _group: typeof THREE.Group;
-  _cutInUp: HorizontalAnimationMesh;
-  _cutInDown: HorizontalAnimationMesh;
+  #group: typeof THREE.Group;
+  #cutInUp: HorizontalAnimationMesh;
+  #cutInDown: HorizontalAnimationMesh;
 
   /**
    * コンストラクタ
@@ -30,14 +30,14 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const cutInUpResource = resources.textures
       .find(v => v.id === TEXTURE_IDS.LIGHTNING_DOZER_CUTIN_UP);
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
       : new THREE.Texture();
-    this._cutInUp = new HorizontalAnimationMesh({
+    this.#cutInUp = new HorizontalAnimationMesh({
       texture: cutInUp,
       width: MESH_SIZE,
       height: MESH_SIZE,
@@ -49,15 +49,15 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
     const cutInDown = cutInDownResource
       ? cutInDownResource.texture
       : new THREE.Texture();
-    this._cutInDown = new HorizontalAnimationMesh({
+    this.#cutInDown = new HorizontalAnimationMesh({
       texture: cutInDown,
       width: MESH_SIZE,
       height: MESH_SIZE,
       maxAnimation: 4
     });
     
-    this._getMeshes().forEach(mesh => {
-      this._group.add(mesh.getObject3D());
+    this.#getMeshes().forEach(mesh => {
+      this.#group.add(mesh.getObject3D());
     });
   }
 
@@ -65,7 +65,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._getMeshes().forEach(mesh => {
+    this.#getMeshes().forEach(mesh => {
       mesh.destructor();
     });
   }
@@ -77,24 +77,24 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    * @param preRender PreRender情報
    */
   engage(model: LightningDozerCutInModel, preRender: PreRender): void {
-    const activeMesh = this._getActiveMesh(model.animation.type);
+    const activeMesh = this.#getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);
     activeMesh.setOpacity(model.opacity);
 
-    const disActiveMeshes = this._getMeshes()
+    const disActiveMeshes = this.#getMeshes()
       .filter(v => v !== activeMesh);
     disActiveMeshes.forEach(v => {
       v.setOpacity(0);
     });
 
     const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    this._group.position.x = model.tracking.x;
-    this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
-    this._group.position.z = HUD_CUT_IN_ZNIDEX;
+    this.#group.position.x = model.tracking.x;
+    this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
+    this.#group.position.z = HUD_CUT_IN_ZNIDEX;
 
-    this._group.scale.x = scale;
-    this._group.scale.y = scale;
-    this._group.scale.z = scale;
+    this.#group.scale.x = scale;
+    this.#group.scale.y = scale;
+    this.#group.scale.z = scale;
   }
 
   /**
@@ -103,7 +103,7 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -111,10 +111,10 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    *
    * @return 取得結果
    */
-  _getMeshes(): HorizontalAnimationMesh[] {
+  #getMeshes(): HorizontalAnimationMesh[] {
     return [
-      this._cutInUp,
-      this._cutInDown,
+      this.#cutInUp,
+      this.#cutInDown,
     ];
   }
 
@@ -124,14 +124,14 @@ export class PlayerLightningDozerCutInView implements LightningDozerCutInView {
    * @param type アニメーションタイプ
    * @return 対応したメッシュ
    */
-  _getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
+  #getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {
       case "CUT_IN_UP":
-        return this._cutInUp;
+        return this.#cutInUp;
       case "CUT_IN_DOWN":
-        return this._cutInDown;
+        return this.#cutInDown;
       default:
-        return this._cutInDown;
+        return this.#cutInDown;
     }
   }
 }

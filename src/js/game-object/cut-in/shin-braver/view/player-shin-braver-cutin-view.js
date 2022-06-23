@@ -20,19 +20,19 @@ export const BASE_PADDING_TOP = 100;
  * プレイヤー側 シンブレイバーカットインのビュー
  */
 export class PlayerShinBraverCutInView implements ShinBraverCutInView {
-  _group: typeof THREE.Group;
-  _cutInUp: HorizontalAnimationMesh;
-  _cutInDown: HorizontalAnimationMesh;
+  #group: typeof THREE.Group;
+  #cutInUp: HorizontalAnimationMesh;
+  #cutInDown: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const cutInUpResource = resources.textures
       .find(v => v.id === TEXTURE_IDS.SHIN_BRAVER_CUTIN_UP);
     const cutInUp = cutInUpResource
       ? cutInUpResource.texture
       : new THREE.Texture();
-    this._cutInUp = new HorizontalAnimationMesh({
+    this.#cutInUp = new HorizontalAnimationMesh({
       texture: cutInUp,
       width: MESH_SIZE,
       height: MESH_SIZE,
@@ -44,15 +44,15 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
     const cutInDown = cutInDownResource
       ? cutInDownResource.texture
       : new THREE.Texture();
-    this._cutInDown = new HorizontalAnimationMesh({
+    this.#cutInDown = new HorizontalAnimationMesh({
       texture: cutInDown,
       width: MESH_SIZE,
       height: MESH_SIZE,
       maxAnimation: 4
     });
 
-    this._getMeshes().forEach(v => {
-      this._group.add(v.getObject3D());
+    this.#getMeshes().forEach(v => {
+      this.#group.add(v.getObject3D());
     });
   }
 
@@ -60,7 +60,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._getMeshes().forEach(v => {
+    this.#getMeshes().forEach(v => {
       v.destructor();
     });
   }
@@ -73,24 +73,24 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    * @param preRender プリレンダーのアクション
    */
   engage(model: ShinBraverCutInModel, preRender: PreRender): void {
-    const activeMesh = this._getActiveMesh(model.animation.type);
+    const activeMesh = this.#getActiveMesh(model.animation.type);
     activeMesh.animate(model.animation.frame);
     activeMesh.setOpacity(model.opacity);
 
-    const disActiveMeshes = this._getMeshes()
+    const disActiveMeshes = this.#getMeshes()
       .filter(v => v !== activeMesh);
     disActiveMeshes.forEach(v => {
       v.setOpacity(0);
     });
 
     const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    this._group.position.x = model.tracking.x;
-    this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
-    this._group.position.z = HUD_CUT_IN_ZNIDEX;
+    this.#group.position.x = model.tracking.x;
+    this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
+    this.#group.position.z = HUD_CUT_IN_ZNIDEX;
 
-    this._group.scale.x = scale;
-    this._group.scale.y = scale;
-    this._group.scale.z = scale;
+    this.#group.scale.x = scale;
+    this.#group.scale.y = scale;
+    this.#group.scale.z = scale;
   }
 
   /**
@@ -99,7 +99,7 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -107,10 +107,10 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    *
    * @return 管理する全メッシュ
    */
-  _getMeshes(): HorizontalAnimationMesh[] {
+  #getMeshes(): HorizontalAnimationMesh[] {
     return [
-      this._cutInUp,
-      this._cutInDown,
+      this.#cutInUp,
+      this.#cutInDown,
     ];
   }
 
@@ -120,13 +120,13 @@ export class PlayerShinBraverCutInView implements ShinBraverCutInView {
    * @param type アニメーションタイプ
    * @return メッシュ
    */
-  _getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
+  #getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch (type) {
       case 'CUT_IN_UP':
-        return this._cutInUp;
+        return this.#cutInUp;
       case 'CUT_IN_DOWN':
       default:
-        return this._cutInDown;
+        return this.#cutInDown;
     }
   }
 }

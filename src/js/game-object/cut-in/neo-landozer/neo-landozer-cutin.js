@@ -16,9 +16,9 @@ import type {NeoLandozerCutInView} from "./view/neo-landozer-cutin-view";
  * ネオランドーザ カットイン
  */
 export class NeoLandozerCutIn implements HUDTracking {
-  _model: NeoLandozerCutInModel;
-  _view: NeoLandozerCutInView;
-  _unsubscriber: Unsubscriber;
+  #model: NeoLandozerCutInModel;
+  #view: NeoLandozerCutInView;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -27,11 +27,11 @@ export class NeoLandozerCutIn implements HUDTracking {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: NeoLandozerCutInView, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._view = view;
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue();
+    this.#view = view;
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
@@ -40,8 +40,8 @@ export class NeoLandozerCutIn implements HUDTracking {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -52,8 +52,8 @@ export class NeoLandozerCutIn implements HUDTracking {
    * @param y y座標
    */
   tracking(x: number, y: number): void {
-    this._model.tracking.x = x;
-    this._model.tracking.y = y;
+    this.#model.tracking.x = x;
+    this.#model.tracking.y = y;
   }
 
   /**
@@ -62,7 +62,7 @@ export class NeoLandozerCutIn implements HUDTracking {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this._model);
+    return show(this.#model);
   }
 
   /**
@@ -71,7 +71,7 @@ export class NeoLandozerCutIn implements HUDTracking {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this._model);
+    return hidden(this.#model);
   }
 
   /**
@@ -80,7 +80,7 @@ export class NeoLandozerCutIn implements HUDTracking {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -88,7 +88,7 @@ export class NeoLandozerCutIn implements HUDTracking {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.engage(this._model, action);
+  #onPreRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 }
