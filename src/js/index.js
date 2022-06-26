@@ -29,6 +29,7 @@ async function main(): Promise<void> {
     isPerformanceStatsVisible: GBRAVER_BURST_IS_PERFORMANCE_STATS_VISIBLE === 'true',
     isServiceWorkerUsed: GBRAVER_BURST_IS_SERVICE_WORKER_USED === 'true',
     isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE === 'true',
+    isTutorialEnable: GBRAVER_BURST_IS_TUTORIAL_ENABLE === 'true',
   });
   await game.initialize();
 }
