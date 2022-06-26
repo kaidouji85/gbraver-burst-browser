@@ -32,6 +32,10 @@ const INVISIBLE_ACCOUNT_CLASS = `${ACCOUNT_CLASS}--invisible`;
 const ACCOUNT_MENU_CLASS = `${ACCOUNT_CLASS}__menu`;
 /** アカウントメニュー 非表示 class属性 */
 const INVISIBLE_ACCOUNT_MENU_CLASS = `${ACCOUNT_MENU_CLASS}--invisible`;
+/** チュートリアルボタン class属性 */
+const TUTORIAL_CLASS = `${ROOT_CLASS}__contents__controllers__tutorial`;
+/** チュートリアルボタン 非表示 class属性 */
+const INVISIBLE_TUTORIAL_CLASS = `${TUTORIAL_CLASS}--invisible`;
 /** カジュアルマッチボタン class属性 */
 const CASUAL_MATCH_CLASS = `${ROOT_CLASS}__contents__controllers__casual-match`;
 /** カジュアルマッチボタン 非表示 class属性 */
@@ -45,27 +49,41 @@ type DataIDs = {
   deleteAccount: string,
   logout: string,
   logo: string,
+  tutorial: string,
   arcade: string,
   casualMatch: string,
   howToPlay: string,
   config: string,
 };
 
+/** data-id以外のinnerHTMLジェネレータパラメータ */
+type RootInnerHTMLParams = {
+  /** アカウント情報 */
+  account: TitleAccount,
+  /** APIサーバが利用可能か否か、trueで利用可能である */
+  isApiServerEnable: boolean,
+  /** チュートリアルが利用可能か否か、trueで利用可能である */
+  isTutorialEnable: boolean,
+  /** 利用規約ページのURL */
+  termsOfServiceURL: string,
+  /** プライバシーポリシーページのURL */
+  privacyPolicyURL: string,
+  /** 問い合わせページのURL */
+  contactURL: string
+};
+
 /**
  * ルート要素のinnerHTML
  * @param ids data-idを集めたもの
- * @param account アカウント情報
- * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
- * @param termsOfServiceURL 利用規約ページのURL
- * @param privacyPolicyURL プライバシーポリシーページのURL
- * @param contactURL 問い合わせページのURL
+ * @param params ids以外のパラメータ
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): string {
-  const loginClassName = (isApiServerEnable && account.type === 'GuestAccount') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
-  const accountName = account.type === 'LoggedInAccount' ? escapeHTML(account.name) : '';
-  const accountClassName = (isApiServerEnable && account.type === 'LoggedInAccount') ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
-  const casualMatchClassName = isApiServerEnable ? CASUAL_MATCH_CLASS: INVISIBLE_CASUAL_MATCH_CLASS;
+function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string {
+  const loginClassName = (params.isApiServerEnable && params.account.type === 'GuestAccount') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
+  const accountName = params.account.type === 'LoggedInAccount' ? escapeHTML(params.account.name) : '';
+  const accountClassName = (params.isApiServerEnable && params.account.type === 'LoggedInAccount') ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
+  const tutorialClassName = params.isTutorialEnable ? TUTORIAL_CLASS : INVISIBLE_TUTORIAL_CLASS;
+  const casualMatchClassName = params.isApiServerEnable ? CASUAL_MATCH_CLASS: INVISIBLE_CASUAL_MATCH_CLASS;
   return `
     <div class="${ROOT_CLASS}__header">
       <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
@@ -87,6 +105,7 @@ function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: b
       <div class="${ROOT_CLASS}__contents__controllers">
         <button class="${ROOT_CLASS}__contents__controllers__config" data-id="${ids.config}">設定</button>
         <button class="${ROOT_CLASS}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
+        <button class="${tutorialClassName}" data-id="${ids.tutorial}">チュートリアル</button>
         <button class="${ROOT_CLASS}__contents__controllers__arcade" data-id="${ids.arcade}">アーケード</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
       </div>
@@ -97,9 +116,9 @@ function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: b
         <span class="${ROOT_CLASS}__footer__copy-rights__year">2022</span>
         <span class="${ROOT_CLASS}__footer__copy-rights__owner">Pegass85</span>
       </small>
-      <a class="${ROOT_CLASS}__footer__terms-of-service" href="${termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
-      <a class="${ROOT_CLASS}__footer__privacy-policy" href="${privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
-      <a class="${ROOT_CLASS}__footer__contact" href="${contactURL}" target="_blank" rel="noopener">問い合わせ</a>
+      <a class="${ROOT_CLASS}__footer__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
+      <a class="${ROOT_CLASS}__footer__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a class="${ROOT_CLASS}__footer__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>
     </div>
   `;
 }
@@ -112,6 +131,7 @@ type Elements = {
   deleteAccount: HTMLElement,
   logout: HTMLElement,
   logo: HTMLImageElement,
+  tutorial: HTMLElement,
   arcade: HTMLElement,
   casualMatch: HTMLElement,
   howToPlay: HTMLElement,
@@ -134,12 +154,21 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const logout = root.querySelector(`[data-id="${ids.logout}"]`) ?? document.createElement('div');
   const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
   const logo = (logoElement instanceof HTMLImageElement) ? logoElement : new Image();
+  const tutorial = root.querySelector(`[data-id="${ids.tutorial}"]`) ?? document.createElement('div');
   const arcade = root.querySelector(`[data-id="${ids.arcade}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
   const config = root.querySelector(`[data-id="${ids.config}"]`) ?? document.createElement('div');
-  return {login, accountMenu, avatar, deleteAccount, logout, logo, arcade, casualMatch, howToPlay, config};
+  return {login, accountMenu, avatar, deleteAccount, logout, logo, tutorial, arcade, casualMatch, howToPlay, config};
 }
+
+/** タイトル画面コンストラクタパラメータ */
+export type TitleParams = RootInnerHTMLParams & {
+  /** リソース管理オブジェクト */
+  resources: Resources,
+  /** BGM管理オブジェクト */
+  bgm: BGMManager
+};
 
 /** タイトル */
 export class Title implements DOMScene {
@@ -151,6 +180,7 @@ export class Title implements DOMScene {
   #deleteAccount: HTMLElement;
   #logout: HTMLElement;
   #root: HTMLElement;
+  #tutorial: HTMLElement;
   #arcade: HTMLElement;
   #casualMatch: HTMLElement;
   #howToPlay: HTMLElement;
@@ -165,6 +195,7 @@ export class Title implements DOMScene {
   #pushLogin: StreamSource<void>;
   #pushDeleteAccount: StreamSource<void>;
   #pushLogout: StreamSource<void>;
+  #pushTutorial: StreamSource<void>;
   #pushArcade: StreamSource<void>;
   #pushCasualMatch: StreamSource<void>;
   #pushHowToPlay: StreamSource<void>;
@@ -174,21 +205,15 @@ export class Title implements DOMScene {
   /**
    * コンストラクタ
    *
-   * @param resources リソース管理オブジェクト
-   * @param bgm BGM管理オブジェクト
-   * @param account アカウント情報
-   * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
-   * @param termsOfServiceURL 利用規約ページのURL
-   * @param privacyPolicyURL プライバシーポリシーページのURL
-   * @param contactURL 問い合わせページのURL
+   * @param params パラメータ
    */
-  constructor(resources: Resources, bgm: BGMManager, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string) {
+  constructor(params: TitleParams) {
     this.#exclusive = new Exclusive();
     this.#isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
-      arcade: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
+      tutorial: domUuid(), arcade: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
     this.#root = document.createElement('div');
-    this.#root.innerHTML = rootInnerHTML(dataIDs, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
+    this.#root.innerHTML = rootInnerHTML(dataIDs, params);
     this.#root.className = ROOT_CLASS;
     const elements = extractElements(this.#root, dataIDs);
     this.#login = elements.login;
@@ -196,34 +221,36 @@ export class Title implements DOMScene {
     this.#avatar = elements.avatar;
     this.#deleteAccount = elements.deleteAccount;
     this.#logout = elements.logout;
+    this.#tutorial = elements.tutorial;
     this.#arcade = elements.arcade;
     this.#casualMatch = elements.casualMatch;
     this.#howToPlay = elements.howToPlay;
     this.#config = elements.config;
 
-    this.#isAvatarLoaded = (account.type === 'LoggedInAccount') ? waitElementLoaded(this.#avatar) : Promise.resolve();
-    this.#avatar.src = (account.type === 'LoggedInAccount') ? account.pictureURL : '';
+    this.#isAvatarLoaded = (params.account.type === 'LoggedInAccount') ? waitElementLoaded(this.#avatar) : Promise.resolve();
+    this.#avatar.src = (params.account.type === 'LoggedInAccount') ? params.account.pictureURL : '';
     
     this.#isLogoLoaded = waitElementLoaded(elements.logo);
-    elements.logo.src = resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
+    elements.logo.src = params.resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
 
     const titleBackImage = new Image();
     this.#isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
       this.#root.style.backgroundImage = `url(${titleBackImage.src})`;
     });
-    titleBackImage.src = resources.paths.find(v => v.id === PathIds.TITLE_BACK)
+    titleBackImage.src = params.resources.paths.find(v => v.id === PathIds.TITLE_BACK)
       ?.path ?? '';
 
-    this.#pushButton = this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
+    this.#pushButton = this.#changeValue = params.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
       ?.sound ?? new Howl();
-    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
+    this.#changeValue = params.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
-    this.#titleBGM = resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM) ?? createEmptySoundResource();
-    this.#bgm = bgm;
+    this.#titleBGM = params.resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM) ?? createEmptySoundResource();
+    this.#bgm = params.bgm;
 
     this.#pushLogin = createStreamSource();
     this.#pushDeleteAccount = createStreamSource();
     this.#pushLogout = createStreamSource();
+    this.#pushTutorial = createStreamSource();
     this.#pushArcade = createStreamSource();
     this.#pushHowToPlay = createStreamSource();
     this.#pushCasualMatch = createStreamSource();
@@ -243,6 +270,9 @@ export class Title implements DOMScene {
       }),
       pushDOMStream(this.#logout).subscribe(action => {
         this.#onLogoutPush(action);
+      }),
+      pushDOMStream(this.#tutorial).subscribe(action => {
+        this.#onTutorialPush(action);
       }),
       pushDOMStream(this.#arcade).subscribe(action => {
         this.#onArcadePush(action);
@@ -301,6 +331,15 @@ export class Title implements DOMScene {
    */
   pushLogoutNotifier(): Stream<void> {
     return this.#pushLogout;
+  }
+
+  /**
+   * チュートリアルボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushTutorialNotifier(): Stream<void> {
+    return this.#pushTutorial;
   }
 
   /**
@@ -423,6 +462,20 @@ export class Title implements DOMScene {
     action.event.preventDefault();
     this.#changeValue.play();
     this.#pushLogout.next();
+  }
+
+  /**
+   * チュートリアルが押された際の処理
+   *
+   * @param action アクション
+   */
+  #onTutorialPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
+      this.#pushButton.play();
+      await pop(this.#tutorial);
+      this.#pushTutorial.next();
+    });
   }
   
   /**

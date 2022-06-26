@@ -156,11 +156,13 @@
   background-color: var(--sub-button-background-color);
 }
 
+.title__contents__controllers__tutorial,
 .title__contents__controllers__arcade,
 .title__contents__controllers__casual-match {
   background-color: var(--button-background-color);
 }
 
+.title__contents__controllers__tutorial--invisible,
 .title__contents__controllers__casual-match--invisible {
   display: none;
 }

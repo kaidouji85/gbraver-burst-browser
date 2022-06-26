@@ -16,8 +16,8 @@ import {MatchCard} from "./match-card";
 import {NPCEnding} from "./npc-ending/npc-ending";
 import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
 import {PlayerSelect} from "./player-select";
+import type {TitleParams} from "./title/title";
 import {Title} from "./title/title";
-import type {TitleAccount} from "./title/title-account";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -97,19 +97,13 @@ export class DOMScenes {
   /**
    * 新しくタイトル画面を開始する
    *
-   * @param resources リソース管理オブジェクト
-   * @param bgm BGM管理オブジェクト
-   * @param account アカウント情報
-   * @param isApiServerEnable APIサーバが利用可能か否か、trueで利用可能である
-   * @param termsOfServiceURL 利用規約ページのURL
-   * @param privacyPolicyURL プライバシーポリシーページのURL
-   * @param contactURL 問い合わせページのURL
+   * @param params タイトル画面コンストラクタパラメータ
    * @return 開始されたタイトル画面
    */
-  async startTitle(resources: Resources, bgm: BGMManager, account: TitleAccount, isApiServerEnable: boolean, termsOfServiceURL: string, privacyPolicyURL: string, contactURL: string): Promise<Title> {
+  async startTitle(params: TitleParams): Promise<Title> {
     this.#removeCurrentScene();
 
-    const scene = new Title(resources, bgm, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
+    const scene = new Title(params);
     this.#unsubscribers = [
       scene.pushLoginNotifier().subscribe(() => {
         this.#gameAction.next({type: 'UniversalLogin'});
@@ -131,6 +125,9 @@ export class DOMScenes {
       }),
       scene.pushConfigNotifier().subscribe(() => {
         this.#gameAction.next({type: 'ConfigChangeStart'});
+      }),
+      scene.pushTutorialNotifier().subscribe(() => {
+        this.#gameAction.next({type: 'TutorialStart'});
       })
     ];
     this.#root.appendChild(scene.getRootHTMLElement());
