@@ -26,10 +26,13 @@
   }
 }
 
-.title__login {
+.title__header {
   position: absolute;
   top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
   right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
+}
+
+.title__header__login {
   color: var(--button-font-color);
   background-color: var(--button-background-color);
   height: calc(var(--responsive-font-size) * 2.5);
@@ -40,24 +43,21 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.title__login--invisible {
+.title__header__login--invisible {
   display: none;
 }
 
-.title__account {
-  position: absolute;
-  top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
-  right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
+.title__header__account {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
 }
 
-.title__account--invisible {
+.title__header__account--invisible {
   display: none;
 }
 
-.title__account__avatar {
+.title__header__account__avatar {
   --height: max(var(--responsive-font-size) * 3, 64px);
   height: var(--height);
   object-fit: contain;
@@ -66,7 +66,7 @@
   margin-right: calc(var(--responsive-font-size) * 0.2);
 }
 
-.title__account__menu {
+.title__header__account__menu {
   --margin-horizontal: calc(var(--responsive-font-size) * 1.5);
   --margin-vertical: calc(var(--margin-horizontal) * 0.5);
   --menu-min-width: 30vw;
@@ -83,15 +83,15 @@
   max-width: var(--menu-max-width);
 }
 
-.title__account__menu--invisible {
+.title__header__account__menu--invisible {
   display: none;
 }
 
-.title__account__menu__name {
+.title__header__account__menu__name {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
 
-.title__account__menu__name__value {
+.title__header__account__menu__name__value {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -99,24 +99,24 @@
   max-width: var(--menu-max-width);
 }
 
-.title__account__menu__separation {
+.title__header__account__menu__separation {
   height: 0;
   border-top: solid #626262 1px;
   margin: var(--margin-vertical) 0;
 }
 
-.title__account__menu__delete-account {
+.title__header__account__menu__delete-account {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
-.title__account__menu__delete-account:hover {
+.title__header__account__menu__delete-account:hover {
   background-color: var(--button-background-color);
 }
 
-.title__account__menu__logout {
+.title__header__account__menu__logout {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
 
-.title__account__menu__logout:hover {
+.title__header__account__menu__logout:hover {
   background-color: var(--button-background-color);
 }
 

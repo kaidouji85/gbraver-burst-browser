@@ -21,11 +21,11 @@ import type {TitleAccount} from "./title-account";
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
 /** ログインボタン class属性 */
-const LOGIN_CLASS = `${ROOT_CLASS}__login`;
+const LOGIN_CLASS = `${ROOT_CLASS}__header__login`;
 /** ログインボタン 非表示 class属性 */
 const INVISIBLE_LOGIN_CLASS = `${LOGIN_CLASS}--invisible`;
 /** アカウント情報 class属性 */
-const ACCOUNT_CLASS = `${ROOT_CLASS}__account`;
+const ACCOUNT_CLASS = `${ROOT_CLASS}__header__account`;
 /** アカウント情報 非表示 class属性 */
 const INVISIBLE_ACCOUNT_CLASS = `${ACCOUNT_CLASS}--invisible`;
 /** アカウントメニュー class属性 */
@@ -67,17 +67,19 @@ function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: b
   const accountClassName = (isApiServerEnable && account.type === 'LoggedInAccount') ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
   const casualMatchClassName = isApiServerEnable ? CASUAL_MATCH_CLASS: INVISIBLE_CASUAL_MATCH_CLASS;
   return `
-    <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
-    <div class="${accountClassName}">
-      <img class="${accountClassName}__avatar" data-id="${ids.avatar}" >
-      <div class="${INVISIBLE_ACCOUNT_MENU_CLASS}" data-id="${ids.accountMenu}">
-        <div class="${ACCOUNT_MENU_CLASS}__name">
-          <div class="${ACCOUNT_MENU_CLASS}__name__prefix">アカウント名</div>
-          <div class="${ACCOUNT_MENU_CLASS}__name__value">${accountName}</div>
+    <div class="${ROOT_CLASS}__header">
+      <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
+      <div class="${accountClassName}">
+        <img class="${accountClassName}__avatar" data-id="${ids.avatar}" >
+        <div class="${INVISIBLE_ACCOUNT_MENU_CLASS}" data-id="${ids.accountMenu}">
+          <div class="${ACCOUNT_MENU_CLASS}__name">
+            <div class="${ACCOUNT_MENU_CLASS}__name__prefix">アカウント名</div>
+            <div class="${ACCOUNT_MENU_CLASS}__name__value">${accountName}</div>
+          </div>
+          <div class="${ACCOUNT_MENU_CLASS}__separation"></div>
+          <div class="${ACCOUNT_MENU_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
+          <div class="${ACCOUNT_MENU_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
         </div>
-        <div class="${ACCOUNT_MENU_CLASS}__separation"></div>
-        <div class="${ACCOUNT_MENU_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
-        <div class="${ACCOUNT_MENU_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
       </div>
     </div>
     <div class="${ROOT_CLASS}__contents">
