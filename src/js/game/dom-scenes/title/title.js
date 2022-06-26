@@ -474,6 +474,7 @@ export class Title implements DOMScene {
       action.event.preventDefault();
       this.#pushButton.play();
       await pop(this.#tutorial);
+      this.#pushTutorial.next();
     });
   }
   

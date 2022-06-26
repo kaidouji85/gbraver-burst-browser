@@ -125,6 +125,9 @@ export class DOMScenes {
       }),
       scene.pushConfigNotifier().subscribe(() => {
         this.#gameAction.next({type: 'ConfigChangeStart'});
+      }),
+      scene.pushTutorialNotifier().subscribe(() => {
+        this.#gameAction.next({type: 'TutorialStart'});
       })
     ];
     this.#root.appendChild(scene.getRootHTMLElement());
