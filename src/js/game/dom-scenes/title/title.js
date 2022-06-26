@@ -45,6 +45,7 @@ type DataIDs = {
   deleteAccount: string,
   logout: string,
   logo: string,
+  tutorial: string,
   arcade: string,
   casualMatch: string,
   howToPlay: string,
@@ -87,6 +88,7 @@ function rootInnerHTML(ids: DataIDs, account: TitleAccount, isApiServerEnable: b
       <div class="${ROOT_CLASS}__contents__controllers">
         <button class="${ROOT_CLASS}__contents__controllers__config" data-id="${ids.config}">設定</button>
         <button class="${ROOT_CLASS}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
+        <button class="${ROOT_CLASS}__contents__controllers__tutorial" data-id="${ids.tutorial}">チュートリアル</button>
         <button class="${ROOT_CLASS}__contents__controllers__arcade" data-id="${ids.arcade}">アーケード</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
       </div>
@@ -112,6 +114,7 @@ type Elements = {
   deleteAccount: HTMLElement,
   logout: HTMLElement,
   logo: HTMLImageElement,
+  tutorial: HTMLElement,
   arcade: HTMLElement,
   casualMatch: HTMLElement,
   howToPlay: HTMLElement,
@@ -134,11 +137,12 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const logout = root.querySelector(`[data-id="${ids.logout}"]`) ?? document.createElement('div');
   const logoElement = root.querySelector(`[data-id="${ids.logo}"]`);
   const logo = (logoElement instanceof HTMLImageElement) ? logoElement : new Image();
+  const tutorial = root.querySelector(`[data-id="${ids.tutorial}"]`) ?? document.createElement('div');
   const arcade = root.querySelector(`[data-id="${ids.arcade}"]`) ?? document.createElement('div');
   const casualMatch = root.querySelector(`[data-id="${ids.casualMatch}"]`) ?? document.createElement('div');
   const howToPlay = root.querySelector(`[data-id="${ids.howToPlay}"]`) ?? document.createElement('div');
   const config = root.querySelector(`[data-id="${ids.config}"]`) ?? document.createElement('div');
-  return {login, accountMenu, avatar, deleteAccount, logout, logo, arcade, casualMatch, howToPlay, config};
+  return {login, accountMenu, avatar, deleteAccount, logout, logo, tutorial, arcade, casualMatch, howToPlay, config};
 }
 
 /** タイトル */
@@ -151,6 +155,7 @@ export class Title implements DOMScene {
   #deleteAccount: HTMLElement;
   #logout: HTMLElement;
   #root: HTMLElement;
+  #tutorial: HTMLElement;
   #arcade: HTMLElement;
   #casualMatch: HTMLElement;
   #howToPlay: HTMLElement;
@@ -165,6 +170,7 @@ export class Title implements DOMScene {
   #pushLogin: StreamSource<void>;
   #pushDeleteAccount: StreamSource<void>;
   #pushLogout: StreamSource<void>;
+  #pushTutorial: StreamSource<void>;
   #pushArcade: StreamSource<void>;
   #pushCasualMatch: StreamSource<void>;
   #pushHowToPlay: StreamSource<void>;
@@ -186,7 +192,7 @@ export class Title implements DOMScene {
     this.#exclusive = new Exclusive();
     this.#isAccountMenuOpen = false;
     const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
-      arcade: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
+      tutorial: domUuid(), arcade: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
     this.#root = document.createElement('div');
     this.#root.innerHTML = rootInnerHTML(dataIDs, account, isApiServerEnable, termsOfServiceURL, privacyPolicyURL, contactURL);
     this.#root.className = ROOT_CLASS;
@@ -196,6 +202,7 @@ export class Title implements DOMScene {
     this.#avatar = elements.avatar;
     this.#deleteAccount = elements.deleteAccount;
     this.#logout = elements.logout;
+    this.#tutorial = elements.tutorial;
     this.#arcade = elements.arcade;
     this.#casualMatch = elements.casualMatch;
     this.#howToPlay = elements.howToPlay;
@@ -224,6 +231,7 @@ export class Title implements DOMScene {
     this.#pushLogin = createStreamSource();
     this.#pushDeleteAccount = createStreamSource();
     this.#pushLogout = createStreamSource();
+    this.#pushTutorial = createStreamSource();
     this.#pushArcade = createStreamSource();
     this.#pushHowToPlay = createStreamSource();
     this.#pushCasualMatch = createStreamSource();
@@ -243,6 +251,9 @@ export class Title implements DOMScene {
       }),
       pushDOMStream(this.#logout).subscribe(action => {
         this.#onLogoutPush(action);
+      }),
+      pushDOMStream(this.#tutorial).subscribe(action => {
+        this.#onTutorialPush(action);
       }),
       pushDOMStream(this.#arcade).subscribe(action => {
         this.#onArcadePush(action);
@@ -301,6 +312,15 @@ export class Title implements DOMScene {
    */
   pushLogoutNotifier(): Stream<void> {
     return this.#pushLogout;
+  }
+
+  /**
+   * チュートリアルボタン押下通知
+   *
+   * @return イベント通知ストリーム
+   */
+  pushTutorialNotifier(): Stream<void> {
+    return this.#pushTutorial;
   }
 
   /**
@@ -423,6 +443,19 @@ export class Title implements DOMScene {
     action.event.preventDefault();
     this.#changeValue.play();
     this.#pushLogout.next();
+  }
+
+  /**
+   * チュートリアルが押された際の処理
+   *
+   * @param action アクション
+   */
+  #onTutorialPush(action: PushDOM): void {
+    this.#exclusive.execute(async (): Promise<void> => {
+      action.event.preventDefault();
+      this.#pushButton.play();
+      await pop(this.#tutorial);
+    });
   }
   
   /**
