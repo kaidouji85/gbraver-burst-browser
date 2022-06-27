@@ -1,7 +1,7 @@
 // @flow
 import {MessageWindow} from "../src/js/game-dom/message-window/message-window";
-import {domStub} from "./stub/dom-stub";
 import type {DOMStubStory} from "./stub/dom-stub";
+import {domStub} from "./stub/dom-stub";
 
 export default {
   title: 'message-window'
