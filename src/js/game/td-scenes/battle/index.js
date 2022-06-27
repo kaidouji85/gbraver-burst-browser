@@ -213,10 +213,10 @@ export class BattleScene implements Scene {
   }
 
   /**
-   * ゲームを進める
+   * ゲームを進めるヘルパーメソッド
    *
    * @param command プレイヤーが入力したコマンド
-   * @return ゲームの最新状態、何も更新されなかった場合はnullを返す
+   * @return 処理が完了したら発火するPromise
    */
   async #progressGame(command: Command): Promise<void> {
     const progress = async (): Promise<?GameState> => {
