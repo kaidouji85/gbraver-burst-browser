@@ -219,13 +219,13 @@ export class BattleScene implements Scene {
    * @return 処理が完了したら発火するPromise
    */
   async #progressGame(command: Command): Promise<void> {
-    const progress = async (): Promise<?GameState> => {
+    const repeatProgressWhenUnselectable = async (): Promise<?GameState> => {
       let lastCommand: Command = command;
-      let lastState: ?GameState = null;
-      for (let i=0; i<100; i++) {
+      const maxProgressCount = 100;
+      for (let i=0; i<maxProgressCount; i++) {
         const updateState = await this.#battleProgress.progress(lastCommand);
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, updateState));
-        lastState = updateState[updateState.length - 1] ?? null;
+        const lastState: ?GameState = updateState[updateState.length - 1];
         if (!(lastState && lastState.effect.name === 'InputCommand')) {
           return lastState;
         }
@@ -235,7 +235,7 @@ export class BattleScene implements Scene {
         }
         lastCommand = playerCommand.nextTurnCommand;
       }
-      return lastState
+      return null
     };
     const onGameEnd = async (gameEnd: GameEnd): Promise<void> => {
       await this.#bgm.do(fadeOut)
@@ -243,7 +243,7 @@ export class BattleScene implements Scene {
       this.#endBattle.next({gameEnd, animationTimeScale: this.#state.animationTimeScale});
     };
 
-    const lastState = await progress();
+    const lastState = await repeatProgressWhenUnselectable();
     if (lastState && lastState.effect.name === 'GameEnd') {
       await onGameEnd(lastState.effect);
     }
