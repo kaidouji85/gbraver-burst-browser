@@ -226,11 +226,11 @@ export class BattleScene implements Scene {
         const updateState = await this.#battleProgress.progress(lastCommand);
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, updateState));
         const lastState: ?GameState = updateState[updateState.length - 1];
-        if (!(lastState && lastState.effect.name === 'InputCommand')) {
+        if (!lastState || lastState.effect.name !== 'InputCommand') {
           return lastState;
         }
         const playerCommand = lastState.effect.players.find(v => v.playerId === this.#state.playerId);
-        if (!(playerCommand && playerCommand.selectable === false)) {
+        if (!playerCommand || playerCommand.selectable) {
           return lastState;
         }
         lastCommand = playerCommand.nextTurnCommand;
