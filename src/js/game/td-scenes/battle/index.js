@@ -157,10 +157,7 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this.#view.hud.gameObjects.batterySelector.close())
       );
-      const lastState = await this.#progressGame({type: 'BATTERY_COMMAND', battery: action.battery});
-      if (lastState && lastState.effect.name === 'GameEnd') {
-        await this.#endGame(lastState.effect);
-      }
+      await this.#progressGame({type: 'BATTERY_COMMAND', battery: action.battery});
     });
   }
 
@@ -181,10 +178,7 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this.#view.hud.gameObjects.burstButton.close())
       );
-      const lastState = await this.#progressGame({type: 'BURST_COMMAND'});
-      if (lastState && lastState.effect.name === 'GameEnd') {
-        await this.#endGame(lastState.effect);
-      }
+      await this.#progressGame({type: 'BURST_COMMAND'});
     });
   }
 
@@ -205,10 +199,7 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this.#view.hud.gameObjects.pilotButton.close())
       );
-      const lastState = await this.#progressGame({type: 'PILOT_SKILL_COMMAND'});
-      if (lastState && lastState.effect.name === 'GameEnd') {
-        await this.#endGame(lastState.effect);
-      }
+      await this.#progressGame({type: 'PILOT_SKILL_COMMAND'});
     });
   }
 
@@ -222,43 +213,40 @@ export class BattleScene implements Scene {
   }
 
   /**
-   * ゲームを進める
+   * ゲームを進めるヘルパーメソッド
    *
    * @param command プレイヤーが入力したコマンド
-   * @return ゲームの最新状態、何も更新されなかった場合はnullを返す
-   */
-  async #progressGame(command: Command): Promise<?GameState> {
-    let lastCommand: Command = command;
-    let lastState: ?GameState = null;
-    for (let i=0; i<100; i++) {
-      const updateState = await this.#battleProgress.progress(lastCommand);
-      await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, updateState));
-      lastState = updateState[updateState.length - 1] ?? null;
-      if (!(lastState && lastState.effect.name === 'InputCommand')) {
-        return lastState;
-      }
-
-      const playerCommand = lastState.effect.players.find(v => v.playerId === this.#state.playerId);
-      if (!(playerCommand && playerCommand.selectable === false)) {
-        return lastState;
-      }
-
-      lastCommand = playerCommand.nextTurnCommand;
-    }
-
-    return lastState
-  }
-
-  /**
-   * ゲームを終了させる
-   *
-   * @param gameEnd ゲーム終了情報
    * @return 処理が完了したら発火するPromise
    */
-  async #endGame(gameEnd: GameEnd): Promise<void> {
-    await this.#bgm.do(fadeOut)
-    await this.#bgm.do(stop);
-    this.#endBattle.next({gameEnd, animationTimeScale: this.#state.animationTimeScale});
+  async #progressGame(command: Command): Promise<void> {
+    const repeatProgressWhenUnselectable = async (): Promise<?GameState> => {
+      let lastCommand: Command = command;
+      const maxProgressCount = 100;
+      for (let i=0; i<maxProgressCount; i++) {
+        const updateState = await this.#battleProgress.progress(lastCommand);
+        await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, updateState));
+        const lastState: ?GameState = updateState[updateState.length - 1];
+        if (!(lastState && lastState.effect.name === 'InputCommand')) {
+          return lastState;
+        }
+        const playerCommand = lastState.effect.players.find(v => v.playerId === this.#state.playerId);
+        if (!(playerCommand && playerCommand.selectable === false)) {
+          return lastState;
+        }
+        lastCommand = playerCommand.nextTurnCommand;
+      }
+      return null
+    };
+    const onGameEnd = async (gameEnd: GameEnd): Promise<void> => {
+      await this.#bgm.do(fadeOut)
+      await this.#bgm.do(stop);
+      this.#endBattle.next({gameEnd, animationTimeScale: this.#state.animationTimeScale});
+    };
+
+    const lastState = await repeatProgressWhenUnselectable();
+    if (lastState && lastState.effect.name === 'GameEnd') {
+      await onGameEnd(lastState.effect);
+    }
   }
 
   /**
