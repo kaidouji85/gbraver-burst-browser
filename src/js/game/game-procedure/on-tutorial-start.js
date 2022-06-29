@@ -1,5 +1,4 @@
 // @flow
-
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import {NPCBattleRoom} from "../../npc/npc-battle-room";
@@ -7,7 +6,6 @@ import {oneBatteryNeoLandozerNPC} from "../../npc/one-battery";
 import {SOUND_IDS} from "../../resource/sound";
 import {playerUuid} from "../../uuid/player";
 import type {GameProps} from "../game-props";
-import {reflectSoundVolume} from "../reflect-sound-volume";
 import {fullResourceLoading} from "./full-resource-loading";
 
 /**
@@ -19,12 +17,10 @@ import {fullResourceLoading} from "./full-resource-loading";
 export async function onTutorialStart(props: GameProps): Promise<void> {
   if (!props.isFullResourceLoaded) {
     await fullResourceLoading(props);
-    const config = await props.config.load();
-    reflectSoundVolume(props.resources, config);
   }
 
   await props.fader.fadeOut();
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];;
+  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === PilotIds.SHINYA)  ?? Pilots[0];
   const player = {playerId: playerUuid(), armdozer, pilot};
   const npcBattle = new NPCBattleRoom(player, oneBatteryNeoLandozerNPC());
