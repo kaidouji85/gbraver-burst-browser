@@ -20,6 +20,7 @@ import type {DecideBattery} from "./actions/decide-battery";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
+import type {BattleCustomEvent} from "./custom-event/battle-custom-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
@@ -37,18 +38,31 @@ type BattleEnd = {
 };
 
 /** コンストラクタのパラメータ */
-type Param = {
+type BattleSceneParams = {
+  /** リソース管理オブジェクト */
   resources: Resources,
+  /** BGM管理オブジェクト */
   bgm: BGMManager,
+  /** 再生するBGM ID */
   playingBGM: SoundId,
+  /** レンダラ */
   renderer: OwnRenderer,
+  /** バトル進行オブジェクト */
   battleProgress: BattleProgress,
+  /** アニメーションスケールの初期値 */
   initialAnimationTimeScale: number,
+  /** 初期ゲームステート */
   initialState: GameState[],
+  /** プレイヤー情報 */
   player: Player,
+  /** 敵情報 */
   enemy: Player,
+  /** ゲームループストリーム */
   gameLoop: Stream<GameLoop>,
-  resize: Stream<Resize>
+  /** リサイズストリーム */
+  resize: Stream<Resize>,
+  /** 戦闘シーンカスタムイベント */
+  battleCustomEvent?: BattleCustomEvent,
 };
 
 /** 戦闘シーン */
@@ -57,6 +71,7 @@ export class BattleScene implements Scene {
   #initialState: GameState[];
   #endBattle: StreamSource<BattleEnd>;
   #battleProgress: BattleProgress;
+  #battleCustomEvent: ?BattleCustomEvent;
   #exclusive: Exclusive;
   #view: BattleSceneView;
   #sounds: BattleSceneSounds;
@@ -68,12 +83,13 @@ export class BattleScene implements Scene {
    *
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: BattleSceneParams) {
     this.#exclusive = new Exclusive();
     this.#initialState = param.initialState;
     this.#state = createInitialState(param.player.playerId, param.initialAnimationTimeScale);
     this.#endBattle = createStreamSource();
     this.#battleProgress = param.battleProgress;
+    this.#battleCustomEvent = param.battleCustomEvent;
     this.#view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
