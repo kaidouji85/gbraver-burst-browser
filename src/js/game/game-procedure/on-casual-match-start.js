@@ -1,6 +1,5 @@
 // @flow
 import type {GameProps} from "../game-props";
-import {reflectSoundVolume} from "../reflect-sound-volume";
 import {fullResourceLoading} from "./full-resource-loading";
 
 /**
@@ -34,15 +33,13 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
   const isLogin = await callLoginCheckAPI();
   props.domDialogs.hidden();
   if (!isLogin) {
-  showLoginDialog();
-  return;
-}
+    showLoginDialog();
+    return;
+  }
 
-if (!props.isFullResourceLoaded) {
-  await fullResourceLoading(props);
-  const config = await props.config.load();
-  reflectSoundVolume(props.resources, config);
-}
+  if (!props.isFullResourceLoaded) {
+    await fullResourceLoading(props);
+  }
 
-await gotoPlayerSelect();
+  await gotoPlayerSelect();
 }
