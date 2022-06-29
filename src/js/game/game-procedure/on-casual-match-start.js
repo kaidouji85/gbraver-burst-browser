@@ -34,15 +34,15 @@ export async function onCasualMatchStart(props: GameProps): Promise<void> {
   const isLogin = await callLoginCheckAPI();
   props.domDialogs.hidden();
   if (!isLogin) {
-  showLoginDialog();
-  return;
-}
+    showLoginDialog();
+    return;
+  }
 
-if (!props.isFullResourceLoaded) {
-  await fullResourceLoading(props);
-  const config = await props.config.load();
-  reflectSoundVolume(props.resources, config);
-}
+  if (!props.isFullResourceLoaded) {
+    await fullResourceLoading(props);
+    const config = await props.config.load();
+    reflectSoundVolume(props.resources, config);
+  }
 
-await gotoPlayerSelect();
+  await gotoPlayerSelect();
 }
