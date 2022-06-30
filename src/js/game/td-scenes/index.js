@@ -90,7 +90,8 @@ export class TDScenes {
     this.#renderer.setPixelRatio(params.pixelRatio);
     const scene = new BattleScene({resources: params.resources, bgm: params.bgm, playingBGM: params.playingBGM,
       renderer: this.#renderer, battleProgress: params.battleProgress, initialAnimationTimeScale: params.initialAnimationTimeScale,
-      player: params.player, enemy: params.enemy, initialState: params.initialState, gameLoop: this.#gameLoop, resize: this.#resize});
+      player: params.player, enemy: params.enemy, initialState: params.initialState, gameLoop: this.#gameLoop, resize: this.#resize,
+      customBattleEvent: params.customBattleEvent});
     this.#scene = scene;
     scene.getHTMLElements().forEach(element => {
       this.#rootHTMLElement.appendChild(element);

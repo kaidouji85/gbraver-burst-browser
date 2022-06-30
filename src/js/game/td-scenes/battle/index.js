@@ -61,8 +61,8 @@ type BattleSceneParams = {
   gameLoop: Stream<GameLoop>,
   /** リサイズストリーム */
   resize: Stream<Resize>,
-  /** 戦闘シーンカスタムイベント */
-  battleCustomEvent?: CustomBattleEvent,
+  /** カスタムバトルイベント */
+  customBattleEvent?: CustomBattleEvent,
 };
 
 /** 戦闘シーン */
@@ -71,7 +71,7 @@ export class BattleScene implements Scene {
   #initialState: GameState[];
   #endBattle: StreamSource<BattleEnd>;
   #battleProgress: BattleProgress;
-  #battleCustomEvent: ?CustomBattleEvent;
+  #customBattleEvent: ?CustomBattleEvent;
   #exclusive: Exclusive;
   #view: BattleSceneView;
   #sounds: BattleSceneSounds;
@@ -89,7 +89,7 @@ export class BattleScene implements Scene {
     this.#state = createInitialState(param.player.playerId, param.initialAnimationTimeScale);
     this.#endBattle = createStreamSource();
     this.#battleProgress = param.battleProgress;
-    this.#battleCustomEvent = param.battleCustomEvent;
+    this.#customBattleEvent = param.customBattleEvent;
     this.#view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
@@ -246,8 +246,8 @@ export class BattleScene implements Scene {
         const removeLastState = updateState.slice(0 , -1);
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
-        if (this.#battleCustomEvent) {
-          await this.#battleCustomEvent.willLastState({stateHistory: updateState,
+        if (this.#customBattleEvent) {
+          await this.#customBattleEvent.willLastState({stateHistory: updateState,
             sceneState: this.#state, view: this.#view, sounds: this.#sounds});
         }
         await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));

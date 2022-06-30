@@ -90,7 +90,7 @@ export class MessageWindow {
 
     this.#messages.innerHTML = "";
     values.forEach(message => {
-      this.#root.appendChild(createParagraph(message));
+      this.#messages.appendChild(createParagraph(message));
     });
   }
 }
