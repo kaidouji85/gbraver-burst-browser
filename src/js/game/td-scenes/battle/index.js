@@ -18,7 +18,7 @@ import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
 import type {DecideBattery} from "./actions/decide-battery";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
-import {stateHistoryAnimation} from "./animation/state-history";
+import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
 import type {BattleCustomEvent} from "./custom-event/battle-custom-event";
 import {BattleSceneSounds} from "./sounds/sounds";
@@ -240,9 +240,15 @@ export class BattleScene implements Scene {
       const maxProgressCount = 100;
       for (let i=0; i<maxProgressCount; i++) {
         const updateState = await this.#battleProgress.progress(lastCommand);
-        await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, updateState));
-        const lastState: ?GameState = updateState[updateState.length - 1];
-        if (!lastState || lastState.effect.name !== 'InputCommand') {
+        if (updateState.length < 1) {
+          return;
+        }
+        const removeLastState = updateState.slice(0 , -1);
+        await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
+        const lastState: GameState = updateState[updateState.length - 1];
+        // TODO カスタムイベントを呼び出す
+        await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
+        if (lastState.effect.name !== 'InputCommand') {
           return lastState;
         }
         const playerCommand = lastState.effect.players.find(v => v.playerId === this.#state.playerId);
