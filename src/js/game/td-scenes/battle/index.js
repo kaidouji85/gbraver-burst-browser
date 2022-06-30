@@ -20,7 +20,7 @@ import type {DecideBattery} from "./actions/decide-battery";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
-import type {BattleCustomEvent} from "./custom-event/battle-custom-event";
+import type {CustomBattleEvent} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
@@ -62,7 +62,7 @@ type BattleSceneParams = {
   /** リサイズストリーム */
   resize: Stream<Resize>,
   /** 戦闘シーンカスタムイベント */
-  battleCustomEvent?: BattleCustomEvent,
+  battleCustomEvent?: CustomBattleEvent,
 };
 
 /** 戦闘シーン */
@@ -71,7 +71,7 @@ export class BattleScene implements Scene {
   #initialState: GameState[];
   #endBattle: StreamSource<BattleEnd>;
   #battleProgress: BattleProgress;
-  #battleCustomEvent: ?BattleCustomEvent;
+  #battleCustomEvent: ?CustomBattleEvent;
   #exclusive: Exclusive;
   #view: BattleSceneView;
   #sounds: BattleSceneSounds;

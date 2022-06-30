@@ -1,10 +1,8 @@
 // @flow
-import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import {fadeOut, stop} from "../../bgm/bgm-operators";
+import {createTutorialEvent} from "../../custom-battle-etenvts/tutorial";
 import {NPCBattleRoom} from "../../npc/npc-battle-room";
-import {oneBatteryNeoLandozerNPC} from "../../npc/one-battery";
 import {SOUND_IDS} from "../../resource/sound";
-import {playerUuid} from "../../uuid/player";
 import type {GameProps} from "../game-props";
 import {fullResourceLoading} from "./full-resource-loading";
 
@@ -20,10 +18,8 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
   }
 
   await props.fader.fadeOut();
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === PilotIds.SHINYA)  ?? Pilots[0];
-  const player = {playerId: playerUuid(), armdozer, pilot};
-  const npcBattle = new NPCBattleRoom(player, oneBatteryNeoLandozerNPC());
+  const tutorialEvent = createTutorialEvent();
+  const npcBattle = new NPCBattleRoom(tutorialEvent.player, tutorialEvent.npc);
   const progress = v => Promise.resolve(npcBattle.progress(v));
   const config = await props.config.load();
   const battleScene = props.tdScenes.startBattle(props.resources, props.bgm, SOUND_IDS.BATTLE_BGM_01, config.webGLPixelRatio,
