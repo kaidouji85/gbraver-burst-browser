@@ -246,7 +246,10 @@ export class BattleScene implements Scene {
         const removeLastState = updateState.slice(0 , -1);
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
-        // TODO カスタムイベントを呼び出す
+        if (this.#battleCustomEvent) {
+          await this.#battleCustomEvent.willLastState({stateHistory: updateState,
+            sceneState: this.#state, view: this.#view, sounds: this.#sounds});
+        }
         await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
         if (lastState.effect.name !== 'InputCommand') {
           return lastState;
