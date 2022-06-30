@@ -142,7 +142,16 @@ export class BattleScene implements Scene {
   start(): Promise<void> {
     return this.#exclusive.execute(async (): Promise<void> => {
       this.#bgm.do(play(this.#sounds.bgm));
-      await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, this.#initialState));
+      if (this.#initialState.length < 1) {
+        return;
+      }
+      const removeLastState = this.#initialState.slice(0, -1);
+      await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
+      if (this.#customBattleEvent) {
+        await this.#customBattleEvent.willLastState({view: this.#view, sounds: this.#sounds, sceneState: this.#state, stateHistory: this.#initialState});
+      }
+      const lastState: GameState = this.#initialState[this.#initialState.length - 1];
+      await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
     });
   }
 
