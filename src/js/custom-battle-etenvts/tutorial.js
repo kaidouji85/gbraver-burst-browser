@@ -19,6 +19,7 @@ export interface TutorialEvent extends CustomBattleEvent {
 class SimpleTutorialEvent implements TutorialEvent {
   player: Player;
   npc: NPC;
+  #turnCount: number;
 
   /**
    * コンストラクタ
@@ -28,12 +29,20 @@ class SimpleTutorialEvent implements TutorialEvent {
     const pilot = Pilots.find(v => v.id === PilotIds.SHINYA)  ?? Pilots[0];
     this.player = {playerId: playerUuid(), armdozer, pilot};
     this.npc = oneBatteryNeoLandozerNPC();
+    this.#turnCount = 1;
   }
 
   /** @override */
   async willLastState(props: CustomBattleEventProps): Promise<void> {
+    this.#turnCount += props.stateHistory
+      .filter(v => v.effect.name === 'TurnChange')
+      .length;
+    const isGameEnd = props.stateHistory
+      .filter(v => v.effect.name === 'GameEnd')
+      .length >= 1;
     props.view.dom.messageWindow.visible(true);
-    props.view.dom.messageWindow.messages(['チュートリアル']);
+    const message = isGameEnd ? 'ゲーム終了' : `${this.#turnCount}ターン目`;
+    props.view.dom.messageWindow.messages([message]);
     await waitTime(1000);
     props.view.dom.messageWindow.visible(false);
   }
