@@ -20,10 +20,11 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
   await props.fader.fadeOut();
   const tutorialEvent = createTutorialEvent();
   const npcBattle = new NPCBattleRoom(tutorialEvent.player, tutorialEvent.npc);
-  const progress = v => Promise.resolve(npcBattle.progress(v));
+  const battleProgress = {progress: v => Promise.resolve(npcBattle.progress(v))};
   const config = await props.config.load();
-  const battleScene = props.tdScenes.startBattle(props.resources, props.bgm, SOUND_IDS.BATTLE_BGM_01, config.webGLPixelRatio,
-    config.battleAnimationTimeScale ,{progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
+  const battleScene = props.tdScenes.startBattle({resources: props.resources, bgm: props.bgm,
+    playingBGM: SOUND_IDS.BATTLE_BGM_01, pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale,
+    battleProgress, player: npcBattle.player, enemy: npcBattle.enemy, initialState: npcBattle.stateHistory()});
   props.domScenes.hidden();
   await props.bgm.do(fadeOut);
   await props.bgm.do(stop);

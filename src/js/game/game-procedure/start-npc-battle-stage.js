@@ -23,10 +23,11 @@ export async function startNPCBattleStage(props: $ReadOnly<GameProps>, player: P
   await props.fader.fadeIn();
 
   const startNPCStageTitleTime = Date.now();
-  const progress = v => Promise.resolve(npcBattle.progress(v));
+  const battleProgress = {progress: v => Promise.resolve(npcBattle.progress(v))}
   const config = await props.config.load();
-  const battleScene = props.tdScenes.startBattle(props.resources, props.bgm, stage.bgm, config.webGLPixelRatio,
-    config.battleAnimationTimeScale ,{progress}, npcBattle.player, npcBattle.enemy, npcBattle.stateHistory());
+  const battleScene = props.tdScenes.startBattle({resources: props.resources, bgm: props.bgm, playingBGM: stage.bgm,
+    pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale ,battleProgress,
+    player: npcBattle.player, enemy: npcBattle.enemy, initialState: npcBattle.stateHistory()});
   await waitAnimationFrame();
   const latency = Date.now() - startNPCStageTitleTime;
   await waitTime(3000- latency);

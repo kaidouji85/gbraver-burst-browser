@@ -16,7 +16,7 @@ export type CustomBattleEventProps = {
   stateHistory: GameState[]
 };
 
-/** 戦闘シーンカスタムイベント */
+/** カスタムバトルイベント */
 export interface CustomBattleEvent {
   /**
    * 最新のステート履歴が再生される直前の処理
