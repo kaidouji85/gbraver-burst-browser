@@ -131,7 +131,7 @@ export class Game {
       } else if (action.type === 'ConfigChangeComplete') {
         onConfigChangeComplete(this.#props, action);
       } else if (action.type === 'TutorialStart') {
-        onTutorialStart();
+        onTutorialStart(this.#props);
       }
     }));
   }

@@ -18,8 +18,9 @@ import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
 import type {DecideBattery} from "./actions/decide-battery";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
-import {stateHistoryAnimation} from "./animation/state-history";
+import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
+import type {CustomBattleEvent} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
@@ -37,18 +38,31 @@ type BattleEnd = {
 };
 
 /** コンストラクタのパラメータ */
-type Param = {
+type BattleSceneParams = {
+  /** リソース管理オブジェクト */
   resources: Resources,
+  /** BGM管理オブジェクト */
   bgm: BGMManager,
+  /** 再生するBGM ID */
   playingBGM: SoundId,
+  /** レンダラ */
   renderer: OwnRenderer,
+  /** バトル進行オブジェクト */
   battleProgress: BattleProgress,
+  /** アニメーションスケールの初期値 */
   initialAnimationTimeScale: number,
+  /** 初期ゲームステート */
   initialState: GameState[],
+  /** プレイヤー情報 */
   player: Player,
+  /** 敵情報 */
   enemy: Player,
+  /** ゲームループストリーム */
   gameLoop: Stream<GameLoop>,
-  resize: Stream<Resize>
+  /** リサイズストリーム */
+  resize: Stream<Resize>,
+  /** カスタムバトルイベント */
+  customBattleEvent?: CustomBattleEvent,
 };
 
 /** 戦闘シーン */
@@ -57,6 +71,7 @@ export class BattleScene implements Scene {
   #initialState: GameState[];
   #endBattle: StreamSource<BattleEnd>;
   #battleProgress: BattleProgress;
+  #customBattleEvent: ?CustomBattleEvent;
   #exclusive: Exclusive;
   #view: BattleSceneView;
   #sounds: BattleSceneSounds;
@@ -68,12 +83,13 @@ export class BattleScene implements Scene {
    *
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: BattleSceneParams) {
     this.#exclusive = new Exclusive();
     this.#initialState = param.initialState;
     this.#state = createInitialState(param.player.playerId, param.initialAnimationTimeScale);
     this.#endBattle = createStreamSource();
     this.#battleProgress = param.battleProgress;
+    this.#customBattleEvent = param.customBattleEvent;
     this.#view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
@@ -126,7 +142,16 @@ export class BattleScene implements Scene {
   start(): Promise<void> {
     return this.#exclusive.execute(async (): Promise<void> => {
       this.#bgm.do(play(this.#sounds.bgm));
-      await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, this.#initialState));
+      if (this.#initialState.length < 1) {
+        return;
+      }
+      const removeLastState = this.#initialState.slice(0, -1);
+      await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
+      if (this.#customBattleEvent) {
+        await this.#customBattleEvent.willLastState({view: this.#view, sounds: this.#sounds, sceneState: this.#state, stateHistory: this.#initialState});
+      }
+      const lastState: GameState = this.#initialState[this.#initialState.length - 1];
+      await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
     });
   }
 
@@ -224,9 +249,18 @@ export class BattleScene implements Scene {
       const maxProgressCount = 100;
       for (let i=0; i<maxProgressCount; i++) {
         const updateState = await this.#battleProgress.progress(lastCommand);
-        await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, updateState));
-        const lastState: ?GameState = updateState[updateState.length - 1];
-        if (!lastState || lastState.effect.name !== 'InputCommand') {
+        if (updateState.length < 1) {
+          return;
+        }
+        const removeLastState = updateState.slice(0 , -1);
+        await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
+        const lastState: GameState = updateState[updateState.length - 1];
+        if (this.#customBattleEvent) {
+          await this.#customBattleEvent.willLastState({stateHistory: updateState,
+            sceneState: this.#state, view: this.#view, sounds: this.#sounds});
+        }
+        await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
+        if (lastState.effect.name !== 'InputCommand') {
           return lastState;
         }
         const playerCommand = lastState.effect.players.find(v => v.playerId === this.#state.playerId);
