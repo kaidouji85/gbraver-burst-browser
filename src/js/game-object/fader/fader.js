@@ -24,9 +24,9 @@ type Param = {
 
 /** 画面フェーダー */
 export class Fader {
-  _model: FaderModel;
-  _view: FaderView;
-  _unsubscriber: Unsubscriber;
+  #model: FaderModel;
+  #view: FaderView;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -34,19 +34,19 @@ export class Fader {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this._model = createInitialValue(param.isVisible);
-    this._view = new FaderView(param.z);
-    this._unsubscriber = param.gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue(param.isVisible);
+    this.#view = new FaderView(param.z);
+    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -55,7 +55,7 @@ export class Fader {
    * @return アニメーション
    */
   fadeIn(): Animate {
-    return fadeIn(this._model);
+    return fadeIn(this.#model);
   }
 
   /**
@@ -64,7 +64,7 @@ export class Fader {
    * @return アニメーション
    */
   fadeOut(): Animate {
-    return fadeOut(this._model);
+    return fadeOut(this.#model);
   }
 
   /**
@@ -75,7 +75,7 @@ export class Fader {
    * @return アニメーション
    */
   opacity(value: number, duration: number): Animate {
-    return opacity(this._model, value, duration);
+    return opacity(this.#model, value, duration);
   }
 
   /**
@@ -84,7 +84,7 @@ export class Fader {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -92,9 +92,9 @@ export class Fader {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._model.width = action.rendererDOM.clientWidth;
-    this._model.height = action.rendererDOM.clientHeight;
-    this._view.engage(this._model);
+  #onPreRender(action: PreRender): void {
+    this.#model.width = action.rendererDOM.clientWidth;
+    this.#model.height = action.rendererDOM.clientHeight;
+    this.#view.engage(this.#model);
   }
 }
