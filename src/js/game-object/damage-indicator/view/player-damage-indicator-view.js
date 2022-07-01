@@ -16,18 +16,18 @@ export const GROUP_PADDING = 30;
 
 /** プレイヤーのダメージインジケータビュー */
 export class PlayerDamageIndicatorView implements DamageIndicatorView {
-  _group: typeof THREE.Group;
-  _numbers: HorizontalAnimationMesh[];
+  #group: typeof THREE.Group;
+  #numbers: HorizontalAnimationMesh[];
 
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const damageNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_NUMBER);
     const damageNumber = damageNumberResource
       ? damageNumberResource.texture
       : new THREE.Texture();
 
-    this._numbers = R.times(() =>
+    this.#numbers = R.times(() =>
       new HorizontalAnimationMesh({
         texture: damageNumber,
         maxAnimation: MAX_ANIMATION,
@@ -35,14 +35,14 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
         height: MESH_SIZE,
       })
     , MAX_NUMBER_SIZE);
-    this._numbers.forEach(v => {
-      this._group.add(v.getObject3D());
+    this.#numbers.forEach(v => {
+      this.#group.add(v.getObject3D());
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._numbers.forEach(v => {
+    this.#numbers.forEach(v => {
       v.destructor();
     });
   }
@@ -52,7 +52,7 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
     const values: number[] = String(model.damage)
       .split('')
       .map(v => Number(v));
-    this._numbers.forEach((mesh, meshIndex) => {
+    this.#numbers.forEach((mesh, meshIndex) => {
       mesh.setOpacity(0);
       values
         .filter((value, valueIndex) => meshIndex === valueIndex)
@@ -63,20 +63,20 @@ export class PlayerDamageIndicatorView implements DamageIndicatorView {
         });
     });
 
-    this._group.position.x = ARMDOZER_EFFECT_STANDARD_X;
-    this._group.position.y = 40;
-    this._group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 2;
+    this.#group.position.x = ARMDOZER_EFFECT_STANDARD_X;
+    this.#group.position.y = 40;
+    this.#group.position.z = ARMDOZER_EFFECT_STANDARD_Z + 2;
 
-    this._group.scale.set(model.scale, model.scale, model.scale);
+    this.#group.scale.set(model.scale, model.scale, model.scale);
   }
 
   /** カメラの方向を向く */
   lookAt(camera: typeof THREE.Camera): void {
-    this._group.quaternion.copy(camera.quaternion);
+    this.#group.quaternion.copy(camera.quaternion);
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 }
