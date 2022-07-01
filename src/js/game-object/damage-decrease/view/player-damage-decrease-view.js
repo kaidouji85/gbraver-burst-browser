@@ -18,7 +18,7 @@ export const MESH_SIZE = 300;
  * プレイヤー ダメージ減少 ビュー
  */
 export class PlayerDamageDecreaseView implements DamageDecreaseView {
-  _mesh: HorizontalAnimationMesh;
+  #mesh: HorizontalAnimationMesh;
 
   /**
    * コンストラクタ
@@ -28,7 +28,7 @@ export class PlayerDamageDecreaseView implements DamageDecreaseView {
   constructor(resources: Resources) {
     const playerTurn = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_DECREASE)
       ?.texture ?? new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({
+    this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,
       width: MESH_SIZE,
@@ -38,7 +38,7 @@ export class PlayerDamageDecreaseView implements DamageDecreaseView {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._mesh.destructor();
+    this.#mesh.destructor();
   }
 
   /**
@@ -47,7 +47,7 @@ export class PlayerDamageDecreaseView implements DamageDecreaseView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this.#mesh.getObject3D();
   }
 
   /**
@@ -56,9 +56,9 @@ export class PlayerDamageDecreaseView implements DamageDecreaseView {
    * @param model モデル
    */
   engage(model: DamageDecreaseModel): void {
-    const target = this._mesh.getObject3D();
+    const target = this.#mesh.getObject3D();
 
-    this._mesh.setOpacity(model.opacity);
+    this.#mesh.setOpacity(model.opacity);
     target.position.x = ARMDOZER_EFFECT_STANDARD_X;
     target.position.y = ARMDOZER_EFFECT_STANDARD_Y +10;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
@@ -72,6 +72,6 @@ export class PlayerDamageDecreaseView implements DamageDecreaseView {
    * @param camera カメラ
    */
   lookAt(camera: typeof THREE.Camera): void {
-    this._mesh.getObject3D().quaternion.copy(camera.quaternion);
+    this.#mesh.getObject3D().quaternion.copy(camera.quaternion);
   }
 }
