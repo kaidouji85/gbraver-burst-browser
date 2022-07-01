@@ -1,5 +1,6 @@
 // @flow
 import type {GameState} from "gbraver-burst-core";
+import type {BattleSceneStreams} from "./battle-scene-streams";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {BattleSceneView} from "./view";
@@ -10,6 +11,8 @@ export type CustomBattleEventProps = {
   view: BattleSceneView,
   /** 戦闘シーン効果音 */
   sounds: BattleSceneSounds,
+  /** 戦闘シーンストリーム */
+  streams: BattleSceneStreams,
   /** 戦闘シーンステート */
   sceneState: BattleSceneState,
   /** ゲームステート履歴 */

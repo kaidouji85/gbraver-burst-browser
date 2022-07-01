@@ -5,6 +5,7 @@ import {Animate} from "../../../animation/animate";
 import {delay} from "../../../animation/delay";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
+import {pushDOMStream} from "../../../dom/event-stream";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {GameLoop} from "../../../game-loop/game-loop";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
@@ -20,6 +21,7 @@ import type {DecideBattery} from "./actions/decide-battery";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
+import type {BattleSceneStreams} from "./battle-scene-streams";
 import type {CustomBattleEvent} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
@@ -76,6 +78,7 @@ export class BattleScene implements Scene {
   #view: BattleSceneView;
   #sounds: BattleSceneSounds;
   #bgm: BGMManager;
+  #streams: BattleSceneStreams;
   #unsubscriber: Unsubscriber[];
 
   /**
@@ -100,7 +103,9 @@ export class BattleScene implements Scene {
     });
     this.#sounds = new BattleSceneSounds(param.resources, param.playingBGM);
     this.#bgm = param.bgm;
-
+    this.#streams = {
+      pushRendererDOM: pushDOMStream(param.renderer.getRendererDOM())
+    };
     this.#unsubscriber = [
       this.#view.battleActionNotifier().subscribe(action => {
         if (action.type === 'decideBattery') {
@@ -148,7 +153,8 @@ export class BattleScene implements Scene {
       const removeLastState = this.#initialState.slice(0, -1);
       await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
       if (this.#customBattleEvent) {
-        await this.#customBattleEvent.willLastState({view: this.#view, sounds: this.#sounds, sceneState: this.#state, stateHistory: this.#initialState});
+        await this.#customBattleEvent.willLastState({view: this.#view, sounds: this.#sounds, sceneState: this.#state,
+          stateHistory: this.#initialState, streams: this.#streams});
       }
       const lastState: GameState = this.#initialState[this.#initialState.length - 1];
       await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
@@ -256,8 +262,8 @@ export class BattleScene implements Scene {
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
         if (this.#customBattleEvent) {
-          await this.#customBattleEvent.willLastState({stateHistory: updateState,
-            sceneState: this.#state, view: this.#view, sounds: this.#sounds});
+          await this.#customBattleEvent.willLastState({stateHistory: updateState, sceneState: this.#state,
+            view: this.#view, sounds: this.#sounds, streams: this.#streams});
         }
         await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
         if (lastState.effect.name !== 'InputCommand') {
