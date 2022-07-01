@@ -20,9 +20,9 @@ export const BASE_PADDING_TOP = 100;
  * プレイヤー側 ウィングドーザ カットイン ビュー
  */
 export class PlayerWingDozerCutInView implements WingDozerCutInView {
-  _burstUp: HorizontalAnimationMesh;
-  _burstDown: HorizontalAnimationMesh;
-  _group: typeof THREE.Group;
+  #burstUp: HorizontalAnimationMesh;
+  #burstDown: HorizontalAnimationMesh;
+  #group: typeof THREE.Group;
 
   /**
    * コンストラクタ
@@ -35,7 +35,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
     const burstUp = burstUpResource
       ? burstUpResource.texture
       : new THREE.Texture();
-    this._burstUp = new HorizontalAnimationMesh({
+    this.#burstUp = new HorizontalAnimationMesh({
       texture: burstUp,
       width: MESH_SIZE,
       height: MESH_SIZE,
@@ -47,16 +47,16 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
     const burstDown = burstDownResource
       ? burstDownResource.texture
       : new THREE.Texture();
-    this._burstDown = new HorizontalAnimationMesh({
+    this.#burstDown = new HorizontalAnimationMesh({
       texture: burstDown,
       width: MESH_SIZE,
       height: MESH_SIZE,
       maxAnimation: 4
     });
 
-    this._group = new THREE.Group();
-    this._getAllMeshes().forEach(mesh => {
-      this._group.add(mesh.getObject3D());
+    this.#group = new THREE.Group();
+    this.#getAllMeshes().forEach(mesh => {
+      this.#group.add(mesh.getObject3D());
     })
   }
 
@@ -64,7 +64,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._getAllMeshes().forEach(v => {
+    this.#getAllMeshes().forEach(v => {
       v.destructor();
     });
   }
@@ -75,7 +75,7 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -85,21 +85,21 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * @param preRender プリレンダー情報
    */
   engage(model: WingDozerCutInModel, preRender: PreRender): void {
-    const activeMesh = this._getActiveMesh(model.animation.type);
+    const activeMesh = this.#getActiveMesh(model.animation.type);
     activeMesh.setOpacity(model.opacity);
     activeMesh.animate(model.animation.frame);
 
-    const disactiveMeshes = this._getAllMeshes()
+    const disactiveMeshes = this.#getAllMeshes()
       .filter(v => v !== activeMesh);
     disactiveMeshes.forEach(v => {
       v.setOpacity(0);
     });
 
     const scale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset) * model.scale;
-    this._group.scale.set(scale, scale, scale);
-    this._group.position.x = model.tracking.x;
-    this._group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
-    this._group.position.z = HUD_CUT_IN_ZNIDEX;
+    this.#group.scale.set(scale, scale, scale);
+    this.#group.position.x = model.tracking.x;
+    this.#group.position.y = model.tracking.y - BASE_PADDING_TOP * scale;
+    this.#group.position.z = HUD_CUT_IN_ZNIDEX;
   }
 
   /**
@@ -107,10 +107,10 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    *
    * @return 取得結果
    */
-  _getAllMeshes(): HorizontalAnimationMesh[] {
+  #getAllMeshes(): HorizontalAnimationMesh[] {
     return [
-      this._burstUp,
-      this._burstDown,
+      this.#burstUp,
+      this.#burstDown,
     ];
   }
 
@@ -120,14 +120,14 @@ export class PlayerWingDozerCutInView implements WingDozerCutInView {
    * @param type アニメーションタイプ
    * @return アニメーションタイプに応じたメッシュ
    */
-  _getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
+  #getActiveMesh(type: AnimationType): HorizontalAnimationMesh {
     switch(type) {
       case 'BURST_UP':
-        return this._burstUp;
+        return this.#burstUp;
       case 'BURST_DOWN':
-        return this._burstDown;
+        return this.#burstDown;
       default:
-        return this._burstUp;
+        return this.#burstUp;
     }
   }
 }
