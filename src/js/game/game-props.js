@@ -21,6 +21,8 @@ import {emptyResources} from "../resource";
 import type {ResourceRoot} from "../resource/resource-root";
 import type {Stream} from "../stream/stream";
 import {CssVH} from "../view-port/vh";
+import {pushWindowsStream} from "../window/push-window";
+import type {PushWindow} from "../window/push-window";
 import type {Resize} from "../window/resize";
 import {resizeStream} from "../window/resize";
 import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
@@ -68,6 +70,8 @@ export interface GameProps {
   suddenlyBattleEnd: FutureSuddenlyBattleEnd;
   /** リサイズ */
   resize: Stream<Resize>;
+  /** window押下 */
+  pushWindow: Stream<PushWindow>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
   /** DOMフェーダ */
@@ -127,7 +131,8 @@ export type GamePropsGeneratorParam = {
  * @return 生成結果
  */
 export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
-  const resize = resizeStream()
+  const resize = resizeStream();
+  const pushWindow = pushWindowsStream();
   return {
     resourceRoot: param.resourceRoot,
     resources: emptyResources(param.resourceRoot),
@@ -142,6 +147,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     isAPIServerEnable: param.isAPIServerEnable,
     inProgress: {type: 'None'},
     resize,
+    pushWindow,
     vh: new CssVH(resize),
     api: param.api,
     config: param.config,
@@ -151,7 +157,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     domScenes: new DOMScenes(),
     domDialogs: new DOMDialogs(),
     domFloaters: new DOMFloaters(),
-    tdScenes: new TDScenes(resize),
+    tdScenes: new TDScenes(resize, pushWindow),
     serviceWorker: null,
     bgm: createBGMManager(),
   };

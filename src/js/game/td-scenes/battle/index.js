@@ -5,7 +5,6 @@ import {Animate} from "../../../animation/animate";
 import {delay} from "../../../animation/delay";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
-import {pushDOMStream} from "../../../dom/event-stream";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {GameLoop} from "../../../game-loop/game-loop";
 import type {OverlapNotifier} from "../../../render/overla-notifier";
@@ -15,13 +14,13 @@ import type {Resources} from '../../../resource';
 import type {SoundId} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
+import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
 import type {DecideBattery} from "./actions/decide-battery";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
-import type {BattleSceneStreams} from "./battle-scene-streams";
 import type {CustomBattleEvent} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
@@ -63,6 +62,8 @@ type BattleSceneParams = {
   gameLoop: Stream<GameLoop>,
   /** リサイズストリーム */
   resize: Stream<Resize>,
+  /** window押下ストリーム */
+  pushWindow: Stream<PushWindow>,
   /** カスタムバトルイベント */
   customBattleEvent?: CustomBattleEvent,
 };
@@ -76,9 +77,9 @@ export class BattleScene implements Scene {
   #customBattleEvent: ?CustomBattleEvent;
   #exclusive: Exclusive;
   #view: BattleSceneView;
+  #pushWindow: Stream<PushWindow>;
   #sounds: BattleSceneSounds;
   #bgm: BGMManager;
-  #streams: BattleSceneStreams;
   #unsubscriber: Unsubscriber[];
 
   /**
@@ -87,6 +88,7 @@ export class BattleScene implements Scene {
    * @param param パラメータ
    */
   constructor(param: BattleSceneParams) {
+    this.#pushWindow = param.pushWindow;
     this.#exclusive = new Exclusive();
     this.#initialState = param.initialState;
     this.#state = createInitialState(param.player.playerId, param.initialAnimationTimeScale);
@@ -103,9 +105,6 @@ export class BattleScene implements Scene {
     });
     this.#sounds = new BattleSceneSounds(param.resources, param.playingBGM);
     this.#bgm = param.bgm;
-    this.#streams = {
-      pushRendererDOM: pushDOMStream(param.renderer.getRendererDOM())
-    };
     this.#unsubscriber = [
       this.#view.battleActionNotifier().subscribe(action => {
         if (action.type === 'decideBattery') {
@@ -154,7 +153,7 @@ export class BattleScene implements Scene {
       await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
       if (this.#customBattleEvent) {
         await this.#customBattleEvent.willLastState({view: this.#view, sounds: this.#sounds, sceneState: this.#state,
-          stateHistory: this.#initialState, streams: this.#streams});
+          stateHistory: this.#initialState, pushWindow: this.#pushWindow});
       }
       const lastState: GameState = this.#initialState[this.#initialState.length - 1];
       await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
@@ -263,7 +262,7 @@ export class BattleScene implements Scene {
         const lastState: GameState = updateState[updateState.length - 1];
         if (this.#customBattleEvent) {
           await this.#customBattleEvent.willLastState({stateHistory: updateState, sceneState: this.#state,
-            view: this.#view, sounds: this.#sounds, streams: this.#streams});
+            view: this.#view, sounds: this.#sounds, pushWindow: this.#pushWindow});
         }
         await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
         if (lastState.effect.name !== 'InputCommand') {

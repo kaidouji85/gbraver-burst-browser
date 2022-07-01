@@ -8,9 +8,9 @@ import {first} from "../stream/operator";
  * @param props カスタムイベントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-export function waitUntilScreenPush(props: CustomBattleEventProps): Promise<void> {
+export function waitUntilWindowPush(props: CustomBattleEventProps): Promise<void> {
   return new Promise(resolve => {
-    const unsubscriber = props.streams.pushRendererDOM.chain(first()).subscribe(action => {
+    const unsubscriber = props.pushWindow.chain(first()).subscribe(action => {
       action.event.preventDefault();
       action.event.stopPropagation();
       unsubscriber.unsubscribe();
