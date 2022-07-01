@@ -1,6 +1,6 @@
 // @flow
 import {fromEvent} from "rxjs";
-import {map} from "../stream/operator";
+import {map, merge} from "../stream/operator";
 import type {Stream} from "../stream/stream";
 import {createStream} from "../stream/stream";
 
@@ -16,7 +16,9 @@ export type PushWindow = {
  * @return window押下ストリーム
  */
 export function pushWindowsStream(): Stream<PushWindow> {
-  const origin = fromEvent(window, 'click');
-  return createStream<Event>(origin)
-    .chain(map(event => ({type: 'PushWindow', event})))
+  const click = createStream<Event>(fromEvent(window, 'click'))
+    .chain(map(event => ({type: 'PushWindow', event})));
+  const touchStart = createStream<Event>(fromEvent(window, 'touchstart'))
+    .chain(map(event => ({type: 'PushWindow', event})));
+  return click.chain(merge(touchStart));
 }
