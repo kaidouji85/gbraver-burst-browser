@@ -17,10 +17,10 @@ import type {TsubasaView} from "./view/tsubasa-view";
  * ツバサ カットイン
  */
 export class TsubasaCutIn {
-  _model: TsubasaModel;
-  _view: TsubasaView;
-  _sounds: TsubasaSounds;
-  _unsubscriber: Unsubscriber;
+  #model: TsubasaModel;
+  #view: TsubasaView;
+  #sounds: TsubasaSounds;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -30,12 +30,12 @@ export class TsubasaCutIn {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: TsubasaView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._view = view;
-    this._sounds = new TsubasaSounds(resources);
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue();
+    this.#view = view;
+    this.#sounds = new TsubasaSounds(resources);
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
@@ -44,8 +44,8 @@ export class TsubasaCutIn {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -54,7 +54,7 @@ export class TsubasaCutIn {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this._model, this._sounds);
+    return show(this.#model, this.#sounds);
   }
 
   /**
@@ -63,7 +63,7 @@ export class TsubasaCutIn {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this._model);
+    return hidden(this.#model);
   }
 
   /**
@@ -72,7 +72,7 @@ export class TsubasaCutIn {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -80,7 +80,7 @@ export class TsubasaCutIn {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.engage(this._model, action);
+  #onPreRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 }
