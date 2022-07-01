@@ -8,6 +8,7 @@ import type {Resources} from "../../resource";
 import type {SoundId} from "../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
+import type {PushWindow} from "../../window/push-window";
 import type {Resize} from "../../window/resize";
 import type {GameAction} from "../game-actions";
 import {BattleScene} from "./battle";
@@ -44,6 +45,7 @@ export class TDScenes {
   #gameAction: StreamSource<GameAction>;
   #gameLoop: Stream<GameLoop>;
   #resize: Stream<Resize>;
+  #pushWindow: Stream<PushWindow>;
   #renderer: Renderer;
   #rootHTMLElement: HTMLElement;
   #scene: ?Scene;
@@ -53,9 +55,11 @@ export class TDScenes {
    * コンストラクタ
    *
    * @param resize リサイズストリーム
+   * @param pushWindow window押下ストリーム
    */
-  constructor(resize: Stream<Resize>) {
+  constructor(resize: Stream<Resize>, pushWindow: Stream<PushWindow>) {
     this.#resize = resize;
+    this.#pushWindow = pushWindow;
     this.#renderer = new Renderer(this.#resize);
     this.#gameAction = createStreamSource();
     this.#gameLoop = gameLoopStream();
@@ -91,7 +95,7 @@ export class TDScenes {
     const scene = new BattleScene({resources: params.resources, bgm: params.bgm, playingBGM: params.playingBGM,
       renderer: this.#renderer, battleProgress: params.battleProgress, initialAnimationTimeScale: params.initialAnimationTimeScale,
       player: params.player, enemy: params.enemy, initialState: params.initialState, gameLoop: this.#gameLoop, resize: this.#resize,
-      customBattleEvent: params.customBattleEvent});
+      pushWindow: this.#pushWindow, customBattleEvent: params.customBattleEvent});
     this.#scene = scene;
     scene.getHTMLElements().forEach(element => {
       this.#rootHTMLElement.appendChild(element);

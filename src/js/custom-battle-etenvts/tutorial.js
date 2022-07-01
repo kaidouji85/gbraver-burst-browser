@@ -5,7 +5,7 @@ import type {CustomBattleEvent, CustomBattleEventProps} from "../game/td-scenes/
 import type {NPC} from "../npc/npc";
 import {oneBatteryNeoLandozerNPC} from "../npc/one-battery";
 import {playerUuid} from "../uuid/player";
-import {waitTime} from "../wait/wait-time";
+import {waitUntilWindowPush} from "./wait-until-window-push";
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
@@ -43,7 +43,7 @@ class SimpleTutorialEvent implements TutorialEvent {
     props.view.dom.messageWindow.visible(true);
     const message = isGameEnd ? 'ゲーム終了' : `${this.#turnCount}ターン目`;
     props.view.dom.messageWindow.messages([message]);
-    await waitTime(1000);
+    await waitUntilWindowPush(props);
     props.view.dom.messageWindow.visible(false);
   }
 }
