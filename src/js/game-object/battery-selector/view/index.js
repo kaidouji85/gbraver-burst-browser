@@ -4,6 +4,7 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import type {Resources} from "../../../resource";
 import type {Stream} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
+import {HUD_ATTENTION_ZINDEX} from "../../hud-zindex";
 import {HUDUIScale} from "../../scale";
 import type {BatterySelectorModel} from "../model";
 import {BatteryButton} from "./battery-button";
@@ -37,7 +38,7 @@ export class BatterySelectorView {
     this.#group = new THREE.Group();
 
     this.#meter = new BatteryMeter(param.resources);
-    this.#meter.getObject3D().position.set(0, 288, -2);
+    this.#meter.getObject3D().position.set(0, 288, 0);
     this.#group.add(this.#meter.getObject3D());
 
     this.#button = new BatteryButton({
@@ -47,7 +48,7 @@ export class BatterySelectorView {
         param.onOkPush();
       }
     });
-    this.#button.getObject3D().position.set(0, 0, -1);
+    this.#button.getObject3D().position.set(0, 0, 1);
     this.#group.add(this.#button.getObject3D());
 
     this.#plus = new BatteryPlus({
@@ -57,7 +58,7 @@ export class BatterySelectorView {
         param.onPlusPush();
       }
     });
-    this.#plus.getObject3D().position.set(256, 176, 0);
+    this.#plus.getObject3D().position.set(256, 176, 2);
     this.#group.add(this.#plus.getObject3D());
 
     this.#minus = new BatteryMinus({
@@ -67,7 +68,7 @@ export class BatterySelectorView {
         param.onMinusPush();
       }
     });
-    this.#minus.getObject3D().position.set(-256, 176, 0);
+    this.#minus.getObject3D().position.set(-256, 176, 2);
     this.#group.add(this.#minus.getObject3D());
   }
 
@@ -99,6 +100,7 @@ export class BatterySelectorView {
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     const groupScale = devicePerScale * 0.3;
     this.#group.scale.set(groupScale, groupScale, groupScale);
+    this.#group.position.z = HUD_ATTENTION_ZINDEX;  // TODO モデルにz-indexを追加する
     const paddingRight = 105;
     const marginRight = 10;
     this.#group.position.x = preRender.rendererDOM.clientWidth / 2 - paddingRight * devicePerScale
