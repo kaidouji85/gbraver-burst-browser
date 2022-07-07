@@ -1,7 +1,7 @@
 // @flow
 
 import type {Stream} from "../../stream/stream";
-import {HUD_FROMTMOST_FADER_ZINDEX, HUD_REARMOST_FADER_ZINDEX} from "../../zindex/hud-zindex";
+import {HUD_FROMTMOST_FADER_ZINDEX, HUD_REARMOST_FADER_ZINDEX} from "../hud-zindex";
 import type {GameObjectAction} from "../action/game-object-action";
 import {Fader} from "./fader";
 

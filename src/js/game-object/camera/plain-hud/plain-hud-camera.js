@@ -5,7 +5,7 @@ import {createHUDCamera} from "../../../camera/create-hud-camera";
 import {onResizeOrthographicCamera} from "../../../camera/resize";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {Resize} from "../../../window/resize";
-import {HUD_CAMERA_ZINDEX} from "../../../zindex/hud-zindex";
+import {HUD_CAMERA_ZINDEX} from "../../hud-zindex";
 
 /**
  * 汎用HUDレイヤー用カメラ
