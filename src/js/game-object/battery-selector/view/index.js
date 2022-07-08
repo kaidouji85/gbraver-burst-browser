@@ -4,7 +4,6 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import type {Resources} from "../../../resource";
 import type {Stream} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {HUD_ATTENTION_ZINDEX} from "../../hud-zindex";
 import {HUDUIScale} from "../../scale";
 import type {BatterySelectorModel} from "../model";
 import {BatteryButton} from "./battery-button";
