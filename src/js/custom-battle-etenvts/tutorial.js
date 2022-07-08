@@ -5,6 +5,7 @@ import type {CustomBattleEvent, CustomBattleEventProps} from "../game/td-scenes/
 import type {NPC} from "../npc/npc";
 import {oneBatteryNeoLandozerNPC} from "../npc/one-battery";
 import {playerUuid} from "../uuid/player";
+import {attentionBatterySelector, unattentionBatterySelector} from "./attention";
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {

@@ -100,7 +100,6 @@ export class BatterySelectorView {
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     const groupScale = devicePerScale * 0.3;
     this.#group.scale.set(groupScale, groupScale, groupScale);
-    this.#group.position.z = HUD_ATTENTION_ZINDEX;  // TODO モデルにz-indexを追加する
     const paddingRight = 105;
     const marginRight = 10;
     this.#group.position.x = preRender.rendererDOM.clientWidth / 2 - paddingRight * devicePerScale
