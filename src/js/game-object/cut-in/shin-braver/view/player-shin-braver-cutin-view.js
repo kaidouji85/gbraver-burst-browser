@@ -5,7 +5,7 @@ import type {PreRender} from "../../../../game-loop/pre-render";
 import {HorizontalAnimationMesh} from "../../../../mesh/horizontal-animation";
 import type {Resources} from "../../../../resource";
 import {TEXTURE_IDS} from "../../../../resource/texture";
-import {HUD_CUT_IN_ZNIDEX} from "../../../../zindex/hud-zindex";
+import {HUD_CUT_IN_ZNIDEX} from "../../../hud-zindex";
 import {HUDCutInScale} from "../../../scale";
 import type {AnimationType, ShinBraverCutInModel} from "../model/shin-braver-cutin-model";
 import type {ShinBraverCutInView} from "./shin-braver-cutin-view";
