@@ -13,7 +13,7 @@ export const HUD_ATTENTION_ZINDEX = 9;
 export const HUD_FROMTMOST_FADER_ZINDEX = 8;
 
 /** リザルトインジケータのz-index */
-export const HUD_RESULT_INDICATOR = 7;
+export const HUD_RESULT_INDICATOR_ZINDEX = 7;
 
 /** カットインのz-index */
 export const HUD_CUT_IN_ZNIDEX = 6;
