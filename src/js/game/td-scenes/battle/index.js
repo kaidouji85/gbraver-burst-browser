@@ -21,7 +21,7 @@ import type {DecideBattery} from "./actions/decide-battery";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
-import type {CustomBattleEvent} from "./custom-battle-event";
+import type {CustomBattleEvent, CustomBattleEventProps} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
@@ -152,8 +152,7 @@ export class BattleScene implements Scene {
       const removeLastState = this.#initialState.slice(0, -1);
       await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
       if (this.#customBattleEvent) {
-        await this.#customBattleEvent.willLastState({view: this.#view, sounds: this.#sounds, sceneState: this.#state,
-          stateHistory: this.#initialState, pushWindow: this.#pushWindow});
+        await this.#customBattleEvent.willLastState({...this.#toCustomBattleEventProps(), stateHistory: this.#initialState});
       }
       const lastState: GameState = this.#initialState[this.#initialState.length - 1];
       await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
@@ -261,8 +260,7 @@ export class BattleScene implements Scene {
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
         if (this.#customBattleEvent) {
-          await this.#customBattleEvent.willLastState({stateHistory: updateState, sceneState: this.#state,
-            view: this.#view, sounds: this.#sounds, pushWindow: this.#pushWindow});
+          await this.#customBattleEvent.willLastState({...this.#toCustomBattleEventProps(), stateHistory: updateState});
         }
         await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
         if (lastState.effect.name !== 'InputCommand') {
@@ -296,5 +294,14 @@ export class BattleScene implements Scene {
    */
   async #playAnimation(animate: Animate): Promise<void> {
     await animate.timeScale(this.#state.animationTimeScale).play();
+  }
+
+  /**
+   * 本クラスのプライベート変数から、カスタムイベントプロパティを生成するヘルパーメソッド
+   *
+   * @return 生成結果
+   */
+  #toCustomBattleEventProps(): CustomBattleEventProps {
+    return {view: this.#view, pushWindow: this.#pushWindow, sounds: this.#sounds, sceneState: this.#state};
   }
 }
