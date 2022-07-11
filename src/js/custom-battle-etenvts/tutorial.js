@@ -1,7 +1,11 @@
 // @flow
 import type {Player} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
-import type {BatteryDecideEvent, CustomBattleEvent, CustomBattleEventProps} from "../game/td-scenes/battle/custom-battle-event";
+import type {
+  CustomBattleEvent,
+  DidBatteryDecideEnd,
+  WillLastStateProps
+} from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
 import {oneBatteryNeoLandozerNPC} from "../npc/one-battery";
 import {playerUuid} from "../uuid/player";
@@ -30,14 +34,14 @@ class SimpleTutorialEvent implements TutorialEvent {
   }
 
   /** @override */
-  async willLastState(props: CustomBattleEventProps): Promise<void> {
+  async willLastState(props: WillLastStateProps): Promise<void> {
     await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     props.view.dom.messageWindow.visible(true);
     props.view.dom.messageWindow.messages(['注目!!']);
   }
 
   /** @override */
-  async didBatteryDecide(): Promise<BatteryDecideEvent> {
+  async didBatteryDecide(): Promise<DidBatteryDecideEnd> {
     return {isBatteryCanceled: false};
   }
 }

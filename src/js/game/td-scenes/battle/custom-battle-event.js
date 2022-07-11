@@ -6,8 +6,8 @@ import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {BattleSceneView} from "./view";
 
-/** 戦闘シーンからカスタムイベントに常に渡されるプロパティ */
-export type RequiredBattleSceneProps = {
+/** 全カスタムイベント共通のプロパティ */
+export type CustomBattleEventProps = {
   /** 戦闘シーンビュー */
   view: BattleSceneView,
   /** window押下ストリーム */
@@ -16,16 +16,22 @@ export type RequiredBattleSceneProps = {
   sounds: BattleSceneSounds,
   /** 戦闘シーンステート */
   sceneState: BattleSceneState,
-}
+};
 
-/** カスタムイベントプロパティ */
-export type CustomBattleEventProps = RequiredBattleSceneProps & {
-  /** ゲームステート履歴 */
+/** willLastStateのカスタムイベントプロパティ */
+export type WillLastStateProps = CustomBattleEventProps & {
+  /** ステート履歴 */
   stateHistory: GameState[],
 };
 
+/** didBatteryDecideのカスタムイベントプロパティ */
+export type DidBatteryDecideProps = CustomBattleEventProps & {
+  /** プレイヤーが選択したバッテリーコマンド */
+  battery: BatteryCommand,
+};
+
 /** バッテリー決定割込イベント終了情報 */
-export type BatteryDecideEvent = {
+export type DidBatteryDecideEnd = {
   /** プレイヤーが決定したコマンドをキャンセルするか、trueでキャンセルする */
   isBatteryCanceled: boolean
 };
@@ -38,15 +44,13 @@ export interface CustomBattleEvent {
    * @param props カスタムイベントプロパティ
    * @return 処理が完了したら発火するPromise
    */
-  willLastState(props: CustomBattleEventProps): Promise<void>;
+  willLastState(props: WillLastStateProps): Promise<void>;
 
   /**
    * バッテリー決定時の割込イベント
-   * 本メソッドを定義しなかった場合、割込イベントは実行されない
    *
-   * @param props 戦闘シーンプロパティ
-   * @param battery プレイヤーが選択したバッテリーコマンド
+   * @param props カスタムイベントプロパティ
    * @return 割込イベント終了情報
    */
-  didBatteryDecide(props: RequiredBattleSceneProps, battery: BatteryCommand): Promise<BatteryDecideEvent>;
+  didBatteryDecide(props: DidBatteryDecideProps): Promise<DidBatteryDecideEnd>;
 }
