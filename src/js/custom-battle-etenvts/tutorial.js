@@ -4,11 +4,15 @@ import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
   CustomBattleEvent,
   DidBatteryDecideEnd,
+  DidBatteryDecideProps,
   WillLastStateProps
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
 import {oneBatteryNeoLandozerNPC} from "../npc/one-battery";
 import {playerUuid} from "../uuid/player";
+import {waitAnimationFrame} from "../wait/wait-animation-frame";
+import {attentionBatterySelector} from "./attention";
+import {waitUntilWindowPush} from "./wait-until-window-push";
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
@@ -37,12 +41,24 @@ class SimpleTutorialEvent implements TutorialEvent {
   async willLastState(props: WillLastStateProps): Promise<void> {
     await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     props.view.dom.messageWindow.visible(true);
-    props.view.dom.messageWindow.messages(['注目!!']);
+    props.view.dom.messageWindow.messages(['好きなバッテリーを選択してね']);
+    await waitUntilWindowPush(props);
+    props.view.dom.messageWindow.visible(false);
+    attentionBatterySelector(props.view);
   }
 
   /** @override */
-  async didBatteryDecide(): Promise<DidBatteryDecideEnd> {
-    return {isBatteryCanceled: false};
+  async didBatteryDecide(props: DidBatteryDecideProps): Promise<DidBatteryDecideEnd> {
+    if (0 < props.battery.battery) {
+      return {isBatteryCanceled: false};
+    }
+
+    await waitAnimationFrame();
+    props.view.dom.messageWindow.visible(true);
+    props.view.dom.messageWindow.messages(['ごめんね、バッテリーは0以上にしてね']);
+    await waitUntilWindowPush(props);
+    props.view.dom.messageWindow.visible(false);
+    return {isBatteryCanceled: true};
   }
 }
 
