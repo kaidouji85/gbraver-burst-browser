@@ -7,7 +7,7 @@ import {getViewPortHeight, getViewPortWidth} from "../view-port/view-port-size";
 import type {Resize} from "../window/resize";
 import type {RendererDOMEvent} from "./dom-event/dom-event";
 import {createDOMEventStream} from "./dom-event/dom-event";
-import type {OverlapNotifier} from "./overla-notifier";
+import type {OverlapNotifier} from "./overlap-notifier";
 import type {OverlapEvent} from "./overlap-event/overlap-event";
 import {toOverlapStream} from "./overlap-event/overlap-event";
 import type {RendererDomGetter} from "./renderer-dom-getter";
