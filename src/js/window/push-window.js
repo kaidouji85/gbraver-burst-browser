@@ -16,7 +16,7 @@ export type PushWindow = {
  * @return window押下ストリーム
  */
 export function pushWindowsStream(): Stream<PushWindow> {
-  const click = createStream<Event>(fromEvent(window, 'click'))
+  const click = createStream<Event>(fromEvent(window, 'mousedown'))
     .chain(map(event => ({type: 'PushWindow', event})));
   const touchStart = createStream<Event>(fromEvent(window, 'touchstart'))
     .chain(map(event => ({type: 'PushWindow', event})));

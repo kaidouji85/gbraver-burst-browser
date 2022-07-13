@@ -10,7 +10,6 @@ import type {
 import type {NPC} from "../npc/npc";
 import {oneBatteryNeoLandozerNPC} from "../npc/one-battery";
 import {playerUuid} from "../uuid/player";
-import {waitAnimationFrame} from "../wait/wait-animation-frame";
 import {attentionBatterySelector} from "./attention";
 import {waitUntilWindowPush} from "./wait-until-window-push";
 
@@ -53,7 +52,6 @@ class SimpleTutorialEvent implements TutorialEvent {
       return {isBatteryCanceled: false};
     }
 
-    await waitAnimationFrame();
     props.view.dom.messageWindow.visible(true);
     props.view.dom.messageWindow.messages(['ごめんね、バッテリーは0以上にしてね']);
     await waitUntilWindowPush(props);
