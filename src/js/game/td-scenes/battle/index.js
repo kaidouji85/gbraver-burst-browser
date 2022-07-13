@@ -7,7 +7,7 @@ import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {GameLoop} from "../../../game-loop/game-loop";
-import type {OverlapNotifier} from "../../../render/overla-notifier";
+import type {OverlapNotifier} from "../../../render/overlap-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
 import type {Resources} from '../../../resource';

@@ -7,7 +7,7 @@ import type {Update} from "../../../../../game-loop/update";
 import type {GameObjectAction} from "../../../../../game-object/action/game-object-action";
 import {gameObjectStream} from "../../../../../game-object/action/game-object-action";
 import {TDCamera} from "../../../../../game-object/camera/td";
-import type {OverlapNotifier} from "../../../../../render/overla-notifier";
+import type {OverlapNotifier} from "../../../../../render/overlap-notifier";
 import type {OverlapEvent} from "../../../../../render/overlap-event/overlap-event";
 import type {Resources} from '../../../../../resource';
 import type {Stream} from "../../../../../stream/stream";

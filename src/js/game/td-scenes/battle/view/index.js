@@ -4,7 +4,7 @@ import type {Player, PlayerId} from "gbraver-burst-core";
 import type {GameLoop} from "../../../../game-loop/game-loop";
 import type {PreRender} from "../../../../game-loop/pre-render";
 import type {Update} from "../../../../game-loop/update";
-import type {OverlapNotifier} from "../../../../render/overla-notifier";
+import type {OverlapNotifier} from "../../../../render/overlap-notifier";
 import type {RendererDomGetter} from "../../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../../render/rendering";
 import type {Resources} from '../../../../resource';
