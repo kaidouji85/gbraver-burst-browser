@@ -175,13 +175,14 @@ export class BattleScene implements Scene {
    * @return 処理が完了したら発火するPromise
    */
   async #onDecideBattery(action: DecideBattery): Promise<void> {
-    const batteryCommand = {type: 'BATTERY_COMMAND', battery: action.battery};
-    const endEvent = await this?.#customBattleEvent?.didBatteryDecide({...this.#toCustomBattleEventProps(), battery: batteryCommand});
-    if (endEvent && endEvent.isBatteryCanceled) {
-      return;
-    }
-
     this.#exclusive.execute(async (): Promise<void> => {
+      action.event.stopPropagation();
+      const batteryCommand = {type: 'BATTERY_COMMAND', battery: action.battery};
+      const endEvent = await this?.#customBattleEvent?.didBatteryDecide({...this.#toCustomBattleEventProps(), battery: batteryCommand});
+      if (endEvent && endEvent.isBatteryCanceled) {
+        return;
+      }
+
       await this.#playAnimation(
         all(
           this.#view.hud.gameObjects.batterySelector.decide(),
