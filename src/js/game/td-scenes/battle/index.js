@@ -21,7 +21,7 @@ import type {DecideBattery} from "./actions/decide-battery";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
-import type {CustomBattleEvent, CustomBattleEventProps} from "./custom-battle-event";
+import type {BattleSceneProps, CustomBattleEvent} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
@@ -152,7 +152,7 @@ export class BattleScene implements Scene {
       const removeLastState = this.#initialState.slice(0, -1);
       await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
       if (this.#customBattleEvent) {
-        await this.#customBattleEvent.willLastState({...this.#toCustomBattleEventProps(), stateHistory: this.#initialState});
+        await this.#customBattleEvent.willLastState({...this.#toBattleSceneProps(), stateHistory: this.#initialState});
       }
       const lastState: GameState = this.#initialState[this.#initialState.length - 1];
       await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
@@ -178,8 +178,8 @@ export class BattleScene implements Scene {
     this.#exclusive.execute(async (): Promise<void> => {
       action.event.stopPropagation();
       const batteryCommand = {type: 'BATTERY_COMMAND', battery: action.battery};
-      const endEvent = await this?.#customBattleEvent?.didBatteryDecide({...this.#toCustomBattleEventProps(), battery: batteryCommand});
-      if (endEvent && endEvent.isBatteryCanceled) {
+      const endEvent = await this?.#customBattleEvent?.didBatteryDecide({...this.#toBattleSceneProps(), battery: batteryCommand});
+      if (endEvent && endEvent.isCommandCanceled) {
         return;
       }
 
@@ -267,7 +267,7 @@ export class BattleScene implements Scene {
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
         if (this.#customBattleEvent) {
-          await this.#customBattleEvent.willLastState({...this.#toCustomBattleEventProps(), stateHistory: updateState});
+          await this.#customBattleEvent.willLastState({...this.#toBattleSceneProps(), stateHistory: updateState});
         }
         await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
         if (lastState.effect.name !== 'InputCommand') {
@@ -304,11 +304,11 @@ export class BattleScene implements Scene {
   }
 
   /**
-   * 本クラスのプライベート変数から、カスタムイベントプロパティを生成するヘルパーメソッド
+   * 戦闘シーンからカスタムバトルイベントに渡すプロパティを生成するヘルパーメソッド
    *
    * @return 生成結果
    */
-  #toCustomBattleEventProps(): CustomBattleEventProps {
+  #toBattleSceneProps(): BattleSceneProps {
     return {view: this.#view, pushWindow: this.#pushWindow, sounds: this.#sounds, sceneState: this.#state};
   }
 }
