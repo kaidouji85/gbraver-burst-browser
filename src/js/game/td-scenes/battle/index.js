@@ -21,7 +21,7 @@ import type {DecideBattery} from "./actions/decide-battery";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
-import type {CustomBattleEvent, BattleSceneProps} from "./custom-battle-event";
+import type {BattleSceneProps, CustomBattleEvent} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";

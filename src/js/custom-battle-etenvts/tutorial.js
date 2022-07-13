@@ -2,9 +2,9 @@
 import type {Player} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
-  CustomBattleEvent,
-  CommandCancel,
   BatteryDecideProps,
+  CommandCancel,
+  CustomBattleEvent,
   LastStateProps
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
