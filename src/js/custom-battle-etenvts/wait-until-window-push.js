@@ -5,7 +5,7 @@ import {first} from "../stream/operator";
 /**
  * 画面を押下するまで待機する
  *
- * @param props カスタムイベントプロパティ
+ * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
  * @return 処理が完了したら発火するPromise
  */
 export function waitUntilWindowPush(props: BattleSceneProps): Promise<void> {

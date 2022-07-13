@@ -6,7 +6,7 @@ import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {BattleSceneView} from "./view";
 
-/** カスタムイベントで利用する戦闘シーンのプロパティ */
+/** カスタムイベントで利用できる戦闘シーンのプロパティ */
 export type BattleSceneProps = {
   /** 戦闘シーンビュー */
   view: BattleSceneView,
