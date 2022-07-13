@@ -10,9 +10,7 @@ import {first} from "../stream/operator";
  */
 export function waitUntilWindowPush(props: CustomBattleEventProps): Promise<void> {
   return new Promise(resolve => {
-    const unsubscriber = props.pushWindow.chain(first()).subscribe(action => {
-      action.event.preventDefault();
-      action.event.stopPropagation();
+    const unsubscriber = props.pushWindow.chain(first()).subscribe(() => {
       unsubscriber.unsubscribe();
       resolve();
     })

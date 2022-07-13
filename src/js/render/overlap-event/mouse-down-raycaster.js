@@ -7,7 +7,10 @@ import type {MouseDown} from "../dom-event/mouse";
 /** マウスダウンレイキャスター*/
 export type MouseDownRaycaster = {
   type: 'mouseDownRaycaster',
-  mouse: MouseRaycaster
+  /** マウスレイキャスター */
+  mouse: MouseRaycaster,
+  /** マウスイベント */
+  event: MouseEvent,
 };
 
 /**
@@ -18,8 +21,5 @@ export type MouseDownRaycaster = {
  */
 export function toMouseDownRaycaster(origin: MouseDown, renderer: typeof THREE.WebGLRenderer, camera: typeof THREE.Camera): MouseDownRaycaster {
   const mouseRaycaster: MouseRaycaster = createMouseRaycaster(origin.event, renderer, camera);
-  return {
-    type: 'mouseDownRaycaster',
-    mouse: mouseRaycaster
-  };
+  return {type: 'mouseDownRaycaster', mouse: mouseRaycaster, event: origin.event};
 }

@@ -35,12 +35,14 @@ type Param = {
   maxBattery: number,
   /**
    * バッテリー変更時に呼ばれるのコールバック関数
-   *
    * @param battery 変更後のバッテリー値
    */
   onBatteryChange: (battery: number) => void,
-  /** 決定ボタンが押された時に呼ばれるコールバック関数 */
-  onOkButtonPush: () => void,
+  /** 
+   * 決定ボタンが押された時に呼ばれるコールバック関数
+   * @param event イベント情報
+   */
+  onOkButtonPush: (event: Event) => void,
 };
 
 /** バッテリーセレクタ */
@@ -86,12 +88,12 @@ export class BatterySelector {
     this.#view = new BatterySelectorView({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onOkPush: () => {
+      onOkPush: event => {
         if (this.#model.disabled) {
           return;
         }
 
-        param.onOkButtonPush();
+        param.onOkButtonPush(event);
       },
       onPlusPush: () => {
         if (this.#model.disabled || !canBatteryPlus(this.#model)) {

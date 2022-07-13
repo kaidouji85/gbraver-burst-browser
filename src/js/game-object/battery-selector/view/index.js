@@ -17,8 +17,11 @@ type Param = {
   resources: Resources,
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
-  /** OKボタンが押された時に呼ばれるコールバック関数 */
-  onOkPush: () => void,
+  /** 
+   * OKボタンが押された時に呼ばれるコールバック関数
+   * @param event イベント
+   */
+  onOkPush: (event: Event) => void,
   /** +ボタンが押された時に呼ばれるコールバック関数 */
   onPlusPush: () => void,
   /** -ボタンが押された時に呼ばれるコールバック関数 */
@@ -43,8 +46,8 @@ export class BatterySelectorView {
     this.#button = new BatteryButton({
       resources: param.resources,
       gameObjectAction: param.gameObjectAction,
-      onPush: () => {
-        param.onOkPush();
+      onPush: event => {
+        param.onOkPush(event);
       }
     });
     this.#button.getObject3D().position.set(0, 0, 1);

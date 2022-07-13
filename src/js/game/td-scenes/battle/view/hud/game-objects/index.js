@@ -51,10 +51,11 @@ export class HUDGameObjects {
           battery: battery
         });
       },
-      onOkButtonPush: () => {
+      onOkButtonPush: event => {
         this.#battleAction.next({
           type: 'decideBattery',
-          battery: this.batterySelector.getBattery()
+          battery: this.batterySelector.getBattery(),
+          event
         });
       }
     });

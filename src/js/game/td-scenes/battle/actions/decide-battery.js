@@ -3,5 +3,8 @@
 /** バッテリー決定 */
 export type DecideBattery = {
   type: 'decideBattery',
-  battery: number
+  /** 選択したバッテリーの値 */
+  battery: number,
+  /** イベント */
+  event: Event,
 };
