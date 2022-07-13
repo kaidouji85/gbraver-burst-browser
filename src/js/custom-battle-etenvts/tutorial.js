@@ -48,15 +48,22 @@ class SimpleTutorialEvent implements TutorialEvent {
 
   /** @override */
   async didBatteryDecide(props: DidBatteryDecideProps): Promise<DidBatteryDecideEnd> {
-    if (0 < props.battery.battery) {
+    const zeroBatteryProhibited = async (): Promise<DidBatteryDecideEnd> => {
+      props.view.dom.messageWindow.visible(true);
+      props.view.dom.messageWindow.messages(['ごめんね、バッテリーは0以上にしてね']);
+      await waitUntilWindowPush(props);
+      props.view.dom.messageWindow.visible(false);
+      return {isBatteryCanceled: true};
+    };
+    const hiddenFader = async (): Promise<DidBatteryDecideEnd> => {
+      props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
       return {isBatteryCanceled: false};
-    }
+    };
 
-    props.view.dom.messageWindow.visible(true);
-    props.view.dom.messageWindow.messages(['ごめんね、バッテリーは0以上にしてね']);
-    await waitUntilWindowPush(props);
-    props.view.dom.messageWindow.visible(false);
-    return {isBatteryCanceled: true};
+    if (props.battery.battery === 0) {
+      return await zeroBatteryProhibited();
+    }
+    return await hiddenFader();
   }
 }
 
