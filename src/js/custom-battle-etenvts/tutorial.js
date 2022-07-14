@@ -72,6 +72,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   async onBurstCommandSelected(): Promise<CommandCanceled> {
     return {isCommandCanceled: true};
   }
+
+  /** @override */
+  async onPilotSkillCommandSelected(): Promise<CommandCanceled> {
+    return {isCommandCanceled: true};
+  }
 }
 
 /**
