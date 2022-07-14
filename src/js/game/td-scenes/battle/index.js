@@ -18,6 +18,7 @@ import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
 import type {DecideBattery} from "./actions/decide-battery";
+import type {DoBurst} from "./actions/do-burst";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
@@ -110,7 +111,7 @@ export class BattleScene implements Scene {
         if (action.type === 'decideBattery') {
           this.#onDecideBattery(action);
         } else if (action.type === 'doBurst') {
-          this.#onBurst();
+          this.#onBurst(action);
         } else if (action.type === 'doPilotSkill') {
           this.#onPilotSkill();
         } else if (action.type === 'toggleTimeScale') {
@@ -201,10 +202,19 @@ export class BattleScene implements Scene {
   /**
    * バースト時の処理
    *
+   * @param アクション
    * @return 処理が完了したら発火するPromise
    */
-  async #onBurst(): Promise<void> {
+  async #onBurst(action: DoBurst): Promise<void> {
     this.#exclusive.execute(async () => {
+      action.event.stopPropagation();
+      const burstCommand = {type: 'BURST_COMMAND'};
+      const {isCommandCanceled} = this.#customBattleEvent 
+        ? await this.#customBattleEvent.onBurstCommandSelected({...this.#toBattleSceneProps(), burst: burstCommand})
+        : {isCommandCanceled: false};
+      if (isCommandCanceled) {
+        return;
+      }
       await this.#playAnimation(
         all(
           this.#view.hud.gameObjects.burstButton.decide(),
@@ -215,7 +225,7 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this.#view.hud.gameObjects.burstButton.close())
       );
-      await this.#progressGame({type: 'BURST_COMMAND'});
+      await this.#progressGame(burstCommand);
     });
   }
 
@@ -245,7 +255,7 @@ export class BattleScene implements Scene {
    * 
    * @param action アクション
    */
-   #onToggleTimeScale(action: ToggleTimeScale): void {
+  #onToggleTimeScale(action: ToggleTimeScale): void {
     this.#state.animationTimeScale = action.timeScale;
   }
 

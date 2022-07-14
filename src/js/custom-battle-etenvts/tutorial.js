@@ -5,7 +5,7 @@ import type {
   BatteryCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
-  LastState
+  LastState,
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
 import {oneBatteryNeoLandozerNPC} from "../npc/one-battery";
@@ -66,6 +66,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       return await zeroBatteryProhibited();
     }
     return await hiddenFader();
+  }
+
+  /** @override */
+  async onBurstCommandSelected(): Promise<CommandCanceled> {
+    return {isCommandCanceled: true};
   }
 }
 

@@ -21,7 +21,7 @@ export class BurstButton {
   #model: BurstButtonModel;
   #view: BurstButtonView;
   #pushButtonSound: typeof Howl;
-  #pushButton: StreamSource<void>;
+  #pushButton: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
 
   /**
@@ -43,12 +43,11 @@ export class BurstButton {
       resources: resources,
       gameObjectAction: gameObjectAction,
       armdozerIcon: armdozerIcon,
-      onPush: () => {
+      onPush: event => {
         if (this.#model.disabled || !this.#model.canBurst) {
           return;
         }
-
-        this.#pushButton.next();
+        this.#pushButton.next(event);
       }
     });
     this.#unsubscriber = gameObjectAction.subscribe(action => {
@@ -93,7 +92,11 @@ export class BurstButton {
     return close(this.#model);
   }
 
-  /** three.jsオブジェクトを取得する */
+  /** 
+   * three.jsオブジェクトを取得する
+   * 
+   * @return 取得結果
+   */
   getObject3D(): typeof THREE.Object3D {
     return this.#view.getObject3D();
   }
@@ -103,7 +106,7 @@ export class BurstButton {
    *
    * @return 通知ストリーム
    */
-  pushButtonNotifier(): Stream<void> {
+  pushButtonNotifier(): Stream<Event> {
     return this.#pushButton;
   }
 

@@ -1,6 +1,8 @@
 // @flow
 
-/** バースト */
+/** バースト発動 */
 export type DoBurst = {
   type: 'doBurst',
+  /** バーストボタン押下時のDOMイベント */
+  event: Event,
 };

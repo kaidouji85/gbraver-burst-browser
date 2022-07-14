@@ -75,8 +75,8 @@ export class HUDGameObjects {
     this.drawIndicator = drawIndicator(resources, gameObjectAction);
 
     this.#unsubscribers = [
-      this.burstButton.pushButtonNotifier().subscribe(() => {
-        this.#battleAction.next({type: 'doBurst'})
+      this.burstButton.pushButtonNotifier().subscribe(event => {
+        this.#battleAction.next({type: 'doBurst', event});
       }),
       this.pilotButton.pushButtonNotifier().subscribe(() => {
         this.#battleAction.next({type: 'doPilotSkill'});
