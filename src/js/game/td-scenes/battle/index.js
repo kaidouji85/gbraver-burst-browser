@@ -19,6 +19,7 @@ import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
 import type {DecideBattery} from "./actions/decide-battery";
 import type {DoBurst} from "./actions/do-burst";
+import type {DoPilotSkill} from "./actions/do-pilot-skill";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
@@ -113,7 +114,7 @@ export class BattleScene implements Scene {
         } else if (action.type === 'doBurst') {
           this.#onBurst(action);
         } else if (action.type === 'doPilotSkill') {
-          this.#onPilotSkill();
+          this.#onPilotSkill(action);
         } else if (action.type === 'toggleTimeScale') {
           this.#onToggleTimeScale(action);
         }
@@ -232,10 +233,19 @@ export class BattleScene implements Scene {
   /**
    * パイロットスキル発動時の処理
    *
+   * @param action アクション
    * @return 処理が完了したら発火するPromise
    */
-  async #onPilotSkill(): Promise<void> {
+  async #onPilotSkill(action: DoPilotSkill): Promise<void> {
     this.#exclusive.execute(async () => {
+      action.event.stopPropagation();
+      const pilotSkillCommand = {type: 'PILOT_SKILL_COMMAND'};
+      const {isCommandCanceled} = this.#customBattleEvent
+        ? await this.#customBattleEvent.onPilotSkillCommandSelected({...this.#toBattleSceneProps(), pilot: pilotSkillCommand})
+        : {isCommandCanceled: false};
+      if (isCommandCanceled) {
+        return;
+      }
       await this.#playAnimation(
         all(
           this.#view.hud.gameObjects.pilotButton.decide(),
@@ -246,7 +256,7 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this.#view.hud.gameObjects.pilotButton.close())
       );
-      await this.#progressGame({type: 'PILOT_SKILL_COMMAND'});
+      await this.#progressGame(pilotSkillCommand);
     });
   }
 
