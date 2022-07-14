@@ -11,6 +11,7 @@ import type {NPC} from "../npc/npc";
 import {oneBatteryNeoLandozerNPC} from "../npc/one-battery";
 import {playerUuid} from "../uuid/player";
 import {attentionBatterySelector} from "./attention";
+import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {waitUntilWindowPush} from "./wait-until-window-push";
 
 /** チュートリアルイベント */
@@ -22,7 +23,7 @@ export interface TutorialEvent extends CustomBattleEvent {
 }
 
 /** チュートリアルイベントの実装 */
-class SimpleTutorialEvent implements TutorialEvent {
+class SimpleTutorialEvent extends EmptyCustomBattleEvent {
   player: Player;
   npc: NPC;
 
@@ -30,6 +31,7 @@ class SimpleTutorialEvent implements TutorialEvent {
    * コンストラクタ
    */
   constructor() {
+    super();
     const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
     const pilot = Pilots.find(v => v.id === PilotIds.SHINYA)  ?? Pilots[0];
     this.player = {playerId: playerUuid(), armdozer, pilot};
