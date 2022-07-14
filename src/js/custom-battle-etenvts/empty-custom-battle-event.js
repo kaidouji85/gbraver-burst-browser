@@ -1,6 +1,7 @@
 // @flow
 import type {
   BatteryCommandSelected,
+  BurstCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
   LastState,
@@ -18,6 +19,11 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
 
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> { // eslint-disable-line no-unused-vars
+    return {isCommandCanceled: false};
+  }
+
+  /** @override */
+  async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> { // eslint-disable-line no-unused-vars
     return {isCommandCanceled: false};
   }
 }
