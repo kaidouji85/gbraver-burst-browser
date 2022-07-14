@@ -1,9 +1,9 @@
 // @flow
 import type {
-  BatteryDecideProps,
-  CommandCancel,
+  BatteryCommandSelected,
+  CommandCanceled,
   CustomBattleEvent,
-  LastStateProps
+  LastState,
 } from "../game/td-scenes/battle/custom-battle-event";
 
 /**
@@ -12,12 +12,12 @@ import type {
  */
 export class EmptyCustomBattleEvent implements CustomBattleEvent {
   /** @override */
-  async willLastState(props: LastStateProps): Promise<void> { // eslint-disable-line no-unused-vars
+  async beforeLastState(props: LastState): Promise<void> { // eslint-disable-line no-unused-vars
     // NOP
   }
 
   /** @override */
-  async didBatteryDecide(props: BatteryDecideProps): Promise<CommandCancel> { // eslint-disable-line no-unused-vars
+  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> { // eslint-disable-line no-unused-vars
     return {isCommandCanceled: false};
   }
 }

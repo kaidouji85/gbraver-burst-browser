@@ -152,7 +152,7 @@ export class BattleScene implements Scene {
       const removeLastState = this.#initialState.slice(0, -1);
       await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
       if (this.#customBattleEvent) {
-        await this.#customBattleEvent.willLastState({...this.#toBattleSceneProps(), stateHistory: this.#initialState});
+        await this.#customBattleEvent.beforeLastState({...this.#toBattleSceneProps(), stateHistory: this.#initialState});
       }
       const lastState: GameState = this.#initialState[this.#initialState.length - 1];
       await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
@@ -178,7 +178,7 @@ export class BattleScene implements Scene {
     this.#exclusive.execute(async (): Promise<void> => {
       action.event.stopPropagation();
       const batteryCommand = {type: 'BATTERY_COMMAND', battery: action.battery};
-      const endEvent = await this?.#customBattleEvent?.didBatteryDecide({...this.#toBattleSceneProps(), battery: batteryCommand});
+      const endEvent = await this?.#customBattleEvent?.onBatteryCommandSelected({...this.#toBattleSceneProps(), battery: batteryCommand});
       if (endEvent && endEvent.isCommandCanceled) {
         return;
       }
@@ -267,7 +267,7 @@ export class BattleScene implements Scene {
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
         if (this.#customBattleEvent) {
-          await this.#customBattleEvent.willLastState({...this.#toBattleSceneProps(), stateHistory: updateState});
+          await this.#customBattleEvent.beforeLastState({...this.#toBattleSceneProps(), stateHistory: updateState});
         }
         await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
         if (lastState.effect.name !== 'InputCommand') {

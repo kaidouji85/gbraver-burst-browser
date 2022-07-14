@@ -2,10 +2,10 @@
 import type {Player} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
-  BatteryDecideProps,
-  CommandCancel,
+  BatteryCommandSelected,
+  CommandCanceled,
   CustomBattleEvent,
-  LastStateProps
+  LastState
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
 import {oneBatteryNeoLandozerNPC} from "../npc/one-battery";
@@ -39,7 +39,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   }
 
   /** @override */
-  async willLastState(props: LastStateProps): Promise<void> {
+  async beforeLastState(props: LastState): Promise<void> {
     await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     props.view.dom.messageWindow.visible(true);
     props.view.dom.messageWindow.messages(['好きなバッテリーを選択してね']);
@@ -49,15 +49,15 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   }
 
   /** @override */
-  async didBatteryDecide(props: BatteryDecideProps): Promise<CommandCancel> {
-    const zeroBatteryProhibited = async (): Promise<CommandCancel> => {
+  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
+    const zeroBatteryProhibited = async (): Promise<CommandCanceled> => {
       props.view.dom.messageWindow.visible(true);
       props.view.dom.messageWindow.messages(['ごめんね、バッテリーは0以上にしてね']);
       await waitUntilWindowPush(props);
       props.view.dom.messageWindow.visible(false);
       return {isCommandCanceled: true};
     };
-    const hiddenFader = async (): Promise<CommandCancel> => {
+    const hiddenFader = async (): Promise<CommandCanceled> => {
       props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
       return {isCommandCanceled: false};
     };
