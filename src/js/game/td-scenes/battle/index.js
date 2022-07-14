@@ -18,6 +18,7 @@ import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
 import type {DecideBattery} from "./actions/decide-battery";
+import type {DoBurst} from "./actions/do-burst";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
@@ -26,7 +27,6 @@ import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
 import {BattleSceneView} from "./view";
-import type { DoBurst } from "./actions/do-burst";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -255,7 +255,7 @@ export class BattleScene implements Scene {
    * 
    * @param action アクション
    */
-   #onToggleTimeScale(action: ToggleTimeScale): void {
+  #onToggleTimeScale(action: ToggleTimeScale): void {
     this.#state.animationTimeScale = action.timeScale;
   }
 
