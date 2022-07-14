@@ -5,6 +5,7 @@ import type {
   CommandCanceled,
   CustomBattleEvent,
   LastState,
+  PilotSkillCommandSelected,
 } from "../game/td-scenes/battle/custom-battle-event";
 
 /**
@@ -24,6 +25,11 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
 
   /** @override */
   async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> { // eslint-disable-line no-unused-vars
+    return {isCommandCanceled: false};
+  }
+
+  /** @override */
+  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> { // eslint-disable-line no-unused-vars
     return {isCommandCanceled: false};
   }
 }
