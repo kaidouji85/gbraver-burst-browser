@@ -18,7 +18,6 @@ import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
 import type {DecideBattery} from "./actions/decide-battery";
-import type {DoBurst} from "./actions/do-burst";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
@@ -27,9 +26,10 @@ import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
 import {BattleSceneView} from "./view";
+import type { DoBurst } from "./actions/do-burst";
 
 /** 戦闘シーンで利用するレンダラ */
-interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering { }
+interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
 
 /** バトル終了情報 */
 type BattleEnd = {
@@ -179,7 +179,7 @@ export class BattleScene implements Scene {
     this.#exclusive.execute(async (): Promise<void> => {
       action.event.stopPropagation();
       const batteryCommand = {type: 'BATTERY_COMMAND', battery: action.battery};
-      const {isCommandCanceled} = this.#customBattleEvent
+      const {isCommandCanceled} = this.#customBattleEvent 
         ? await this.#customBattleEvent.onBatteryCommandSelected({...this.#toBattleSceneProps(), battery: batteryCommand})
         : {isCommandCanceled: false};
       if (isCommandCanceled) {
@@ -209,7 +209,7 @@ export class BattleScene implements Scene {
     this.#exclusive.execute(async () => {
       action.event.stopPropagation();
       const burstCommand = {type: 'BURST_COMMAND'};
-      const {isCommandCanceled} = this.#customBattleEvent
+      const {isCommandCanceled} = this.#customBattleEvent 
         ? await this.#customBattleEvent.onBurstCommandSelected({...this.#toBattleSceneProps(), burst: burstCommand})
         : {isCommandCanceled: false};
       if (isCommandCanceled) {
@@ -255,7 +255,7 @@ export class BattleScene implements Scene {
    * 
    * @param action アクション
    */
-  #onToggleTimeScale(action: ToggleTimeScale): void {
+   #onToggleTimeScale(action: ToggleTimeScale): void {
     this.#state.animationTimeScale = action.timeScale;
   }
 
@@ -269,12 +269,12 @@ export class BattleScene implements Scene {
     const repeatProgressWhenUnselectable = async (): Promise<?GameState> => {
       let lastCommand: Command = command;
       const maxProgressCount = 100;
-      for (let i = 0; i < maxProgressCount; i++) {
+      for (let i=0; i<maxProgressCount; i++) {
         const updateState = await this.#battleProgress.progress(lastCommand);
         if (updateState.length < 1) {
           return;
         }
-        const removeLastState = updateState.slice(0, -1);
+        const removeLastState = updateState.slice(0 , -1);
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
         if (this.#customBattleEvent) {
