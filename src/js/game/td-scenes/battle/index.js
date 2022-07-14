@@ -26,6 +26,7 @@ import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
 import {BattleSceneView} from "./view";
+import type { DoBurst } from "./actions/do-burst";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -110,7 +111,7 @@ export class BattleScene implements Scene {
         if (action.type === 'decideBattery') {
           this.#onDecideBattery(action);
         } else if (action.type === 'doBurst') {
-          this.#onBurst();
+          this.#onBurst(action);
         } else if (action.type === 'doPilotSkill') {
           this.#onPilotSkill();
         } else if (action.type === 'toggleTimeScale') {
@@ -201,10 +202,12 @@ export class BattleScene implements Scene {
   /**
    * バースト時の処理
    *
+   * @param アクション
    * @return 処理が完了したら発火するPromise
    */
-  async #onBurst(): Promise<void> {
+  async #onBurst(action: DoBurst): Promise<void> {
     this.#exclusive.execute(async () => {
+      action.event.stopPropagation();
       await this.#playAnimation(
         all(
           this.#view.hud.gameObjects.burstButton.decide(),

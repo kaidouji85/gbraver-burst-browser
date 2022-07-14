@@ -20,8 +20,11 @@ type Param = {
   gameObjectAction: Stream<GameObjectAction>,
   /** アームドーザアイコン */
   armdozerIcon: ArmdozerIcon,
-  /** ボタンを押した時に呼ばれるコールバック関数 */
-  onPush: () => void,
+  /** 
+   * ボタンを押した時に呼ばれるコールバック関数
+   * @param event イベント
+   */
+  onPush: (event: Event) => void,
 };
 
 /** バーストボタンのビュー */
@@ -64,8 +67,8 @@ export class BurstButtonView {
       radius: 200,
       segments: 32,
       gameObjectAction: param.gameObjectAction,
-      onButtonPush: ()=> {
-        param.onPush();
+      onButtonPush: event=> {
+        param.onPush(event);
       }
     });
     this.#group.add(this.#overlap.getObject3D());

@@ -5,6 +5,6 @@ export type DecideBattery = {
   type: 'decideBattery',
   /** 選択したバッテリーの値 */
   battery: number,
-  /** イベント */
+  /** バッテリーボタン押下時のDOMイベント */
   event: Event,
 };
