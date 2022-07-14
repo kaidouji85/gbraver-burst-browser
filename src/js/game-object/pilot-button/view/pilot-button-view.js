@@ -17,7 +17,7 @@ import type {PilotIcon} from "./pilot-icon";
  * パイロットボタン ビュー
  */
 export class PilotButtonView {
-  _pushButton: StreamSource<void>;
+  _pushButton: StreamSource<Event>;
   _group: typeof THREE.Group;
   _button: SimpleImageMesh;
   _label: SimpleImageMesh;
@@ -61,8 +61,8 @@ export class PilotButtonView {
       radius: 200,
       segments: 32,
       gameObjectAction: gameObjectAction,
-      onButtonPush: ()=> {
-        this._pushButton.next();
+      onButtonPush: event => {
+        this._pushButton.next(event);
       }
     });
     this._overlap.getObject3D().position.z = 1;
@@ -124,7 +124,7 @@ export class PilotButtonView {
    * 
    * @return 通知ストリーム
    */
-  pushButtonNotifier(): Stream<void> {
+  pushButtonNotifier(): Stream<Event> {
     return this._pushButton;
   }
 }

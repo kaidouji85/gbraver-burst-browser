@@ -1,6 +1,6 @@
 // @flow
 
-/** バッテリー決定 */
+/** バッテリーボタン押下 */
 export type DecideBattery = {
   type: 'decideBattery',
   /** 選択したバッテリーの値 */
