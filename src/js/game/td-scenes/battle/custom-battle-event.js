@@ -18,13 +18,13 @@ export type BattleSceneProps = {
   sceneState: BattleSceneState,
 };
 
-/** LastState系イベントのプロパティ */
+/** 最終ステート系イベントのプロパティ */
 export type LastState = BattleSceneProps & {
   /** ステート履歴 */
   stateHistory: GameState[],
 };
 
-/** バッテリーコマンド選択時イベントのプロパティ */
+/** バッテリーコマンド選択イベントのプロパティ */
 export type BatteryCommandSelected = BattleSceneProps & {
   /** プレイヤーが選択したバッテリーコマンド */
   battery: BatteryCommand,
@@ -39,7 +39,7 @@ export type CommandCanceled = {
 /** カスタムバトルイベント */
 export interface CustomBattleEvent {
   /**
-   * 最新のステート履歴が再生される直前の処理
+   * 最終ステート直前イベント
    *
    * @param props ベントプロパティ
    * @return 処理が完了したら発火するPromise
@@ -47,7 +47,7 @@ export interface CustomBattleEvent {
   beforeLastState(props: LastState): Promise<void>;
 
   /**
-   * バッテリーコマンド選択時イベント
+   * バッテリーコマンド選択イベント
    *
    * @param props イベントプロパティ
    * @return コマンドキャンセル情報
