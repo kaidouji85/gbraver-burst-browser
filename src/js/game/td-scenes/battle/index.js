@@ -208,6 +208,13 @@ export class BattleScene implements Scene {
   async #onBurst(action: DoBurst): Promise<void> {
     this.#exclusive.execute(async () => {
       action.event.stopPropagation();
+      const burstCommand = {type: 'BURST_COMMAND'};
+      const {isCommandCanceled} = this.#customBattleEvent 
+        ? await this.#customBattleEvent.onBurstCommandSelected({...this.#toBattleSceneProps(), burst: burstCommand})
+        : {isCommandCanceled: false};
+      if (isCommandCanceled) {
+        return;
+      }
       await this.#playAnimation(
         all(
           this.#view.hud.gameObjects.burstButton.decide(),
@@ -218,7 +225,7 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this.#view.hud.gameObjects.burstButton.close())
       );
-      await this.#progressGame({type: 'BURST_COMMAND'});
+      await this.#progressGame(burstCommand);
     });
   }
 
