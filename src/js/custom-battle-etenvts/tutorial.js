@@ -23,7 +23,7 @@ export interface TutorialEvent extends CustomBattleEvent {
 }
 
 /** チュートリアルイベントの実装 */
-class SimpleTutorialEvent extends EmptyCustomBattleEvent {
+class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEvent {
   player: Player;
   npc: NPC;
 
