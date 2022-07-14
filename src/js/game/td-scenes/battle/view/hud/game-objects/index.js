@@ -78,8 +78,8 @@ export class HUDGameObjects {
       this.burstButton.pushButtonNotifier().subscribe(event => {
         this.#battleAction.next({type: 'doBurst', event});
       }),
-      this.pilotButton.pushButtonNotifier().subscribe(() => {
-        this.#battleAction.next({type: 'doPilotSkill'});
+      this.pilotButton.pushButtonNotifier().subscribe(event => {
+        this.#battleAction.next({type: 'doPilotSkill', event});
       }),
       this.timeScaleButton.toggleNotifier().subscribe(timeScale => {
         this.#battleAction.next({type: 'toggleTimeScale', timeScale});
