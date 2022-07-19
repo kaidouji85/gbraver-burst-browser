@@ -40,12 +40,18 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     props.view.dom.messageWindow.visible(true);
-    props.view.dom.messageWindow.messages(['好きなバッテリーを選択してね']);
+    props.view.dom.messageWindow.messages(['何らかしらのルール説明']);
     await waitUntilWindowPush(props);
     props.view.dom.messageWindow.visible(false);
+  }
+
+  /** @override */
+  async onLastState(props: LastState): Promise<void> {
+    await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     attentionBatterySelector(props.view);
+    props.view.dom.messageWindow.visible(true);
+    props.view.dom.messageWindow.messages(['好きなバッテリーを選択してね']);
   }
 
   /** @override */
@@ -53,11 +59,10 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     const zeroBatteryProhibited = async (): Promise<CommandCanceled> => {
       props.view.dom.messageWindow.visible(true);
       props.view.dom.messageWindow.messages(['ごめんね、バッテリーは0以上にしてね']);
-      await waitUntilWindowPush(props);
-      props.view.dom.messageWindow.visible(false);
       return {isCommandCanceled: true};
     };
-    const hiddenFader = async (): Promise<CommandCanceled> => {
+    const progressGame = async (): Promise<CommandCanceled> => {
+      props.view.dom.messageWindow.visible(false);
       props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
       return {isCommandCanceled: false};
     };
@@ -65,7 +70,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     if (props.battery.battery === 0) {
       return await zeroBatteryProhibited();
     }
-    return await hiddenFader();
+    return await progressGame();
   }
 
   /** @override */

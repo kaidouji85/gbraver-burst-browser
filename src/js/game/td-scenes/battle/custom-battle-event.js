@@ -59,6 +59,15 @@ export interface CustomBattleEvent {
   beforeLastState(props: LastState): Promise<void>;
 
   /**
+   * 最終ステートイベント
+   * 本イベントは最終ステート再生と同時に行われる
+   *
+   * @param props イベントプロパティ
+   * @return 処理が完了したら発火するPromise
+   */
+  onLastState(props: LastState): Promise<void>;
+
+  /**
    * バッテリーコマンド選択イベント
    *
    * @param props イベントプロパティ
