@@ -153,11 +153,11 @@ export class BattleScene implements Scene {
       }
       const removeLastState = this.#initialState.slice(0, -1);
       await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
-      if (this.#customBattleEvent) {
-        await this.#customBattleEvent.beforeLastState({...this.#toBattleSceneProps(), stateHistory: this.#initialState});
-      }
+      const eventProps = {...this.#toBattleSceneProps(), stateHistory: this.#initialState};
+      this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
       const lastState: GameState = this.#initialState[this.#initialState.length - 1];
       await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
+      this.#customBattleEvent && await this.#customBattleEvent.afterLastState(eventProps);
     });
   }
 
@@ -203,7 +203,7 @@ export class BattleScene implements Scene {
   /**
    * バースト時の処理
    *
-   * @param アクション
+   * @param action アクション
    * @return 処理が完了したら発火するPromise
    */
   async #onBurst(action: DoBurst): Promise<void> {
@@ -287,10 +287,10 @@ export class BattleScene implements Scene {
         const removeLastState = updateState.slice(0 , -1);
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
-        if (this.#customBattleEvent) {
-          await this.#customBattleEvent.beforeLastState({...this.#toBattleSceneProps(), stateHistory: updateState});
-        }
+        const eventProps = {...this.#toBattleSceneProps(), stateHistory: updateState};
+        this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
         await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
+        this.#customBattleEvent && await this.#customBattleEvent.afterLastState(eventProps);
         if (lastState.effect.name !== 'InputCommand') {
           return lastState;
         }
