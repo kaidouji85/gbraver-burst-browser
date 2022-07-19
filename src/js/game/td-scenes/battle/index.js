@@ -156,8 +156,10 @@ export class BattleScene implements Scene {
       const eventProps = {...this.#toBattleSceneProps(), stateHistory: this.#initialState};
       this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
       const lastState: GameState = this.#initialState[this.#initialState.length - 1];
-      await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
-      this.#customBattleEvent && await this.#customBattleEvent.afterLastState(eventProps);
+      await Promise.all([
+        this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state)),
+        this.#customBattleEvent ? this.#customBattleEvent.onLastState(eventProps) : Promise.resolve()
+      ]);
     });
   }
 
@@ -289,8 +291,10 @@ export class BattleScene implements Scene {
         const lastState: GameState = updateState[updateState.length - 1];
         const eventProps = {...this.#toBattleSceneProps(), stateHistory: updateState};
         this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
-        await this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state));
-        this.#customBattleEvent && await this.#customBattleEvent.afterLastState(eventProps);
+        await Promise.all([
+          this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state)),
+          this.#customBattleEvent ? this.#customBattleEvent.onLastState(eventProps) : Promise.resolve(),
+        ]);
         if (lastState.effect.name !== 'InputCommand') {
           return lastState;
         }
