@@ -104,8 +104,8 @@ export class BurstButtonView {
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
 
-    const groupScale = devicePerScale * model.scale * 0.3;
-    this.#group.scale.set(groupScale, groupScale, groupScale);
+    const frontScale = devicePerScale * model.scale * 0.3;
+    this.#group.scale.set(frontScale, frontScale, 0.3);
     const paddingLeft = 175;
     const marginLeft = 10;
     this.#group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
