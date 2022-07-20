@@ -83,7 +83,7 @@ export class MessageWindow {
   messages(values: string[]): void {
     const createParagraph = (message: string) => {
       const div = document.createElement('div');
-      div.className = `${ROOT_CLASS}__messages__paragraph`;
+      div.className = `${ROOT_CLASS}__paragraph`;
       div.innerText = message;
       return div;
     };
