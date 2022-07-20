@@ -40,18 +40,32 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    props.view.dom.messageWindow.visible(true);
-    props.view.dom.messageWindow.messages(['何らかしらのルール説明']);
-    await waitUntilWindowPush(props);
-    props.view.dom.messageWindow.visible(false);
+      const ruleExpression = async () => {
+        props.view.dom.messageWindow.visible(true);
+        props.view.dom.messageWindow.messages(['何らかしらのルール説明']);
+        await waitUntilWindowPush(props);
+        props.view.dom.messageWindow.visible(false);
+      };
+
+    const lastState = props.stateHistory[props.stateHistory.length - 1];
+    if (lastState.effect.name === 'InputCommand') {
+      await ruleExpression();
+    }
   }
 
   /** @override */
   async onLastState(props: LastState): Promise<void> {
-    await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
-    attentionBatterySelector(props.view);
-    props.view.dom.messageWindow.visible(true);
-    props.view.dom.messageWindow.messages(['好きなバッテリーを選択してね']);
+    const pleaseBatterySelect = async () => {
+      attentionBatterySelector(props.view);
+      props.view.dom.messageWindow.visible(true);
+      props.view.dom.messageWindow.messages(['好きなバッテリーを選択してね']);
+      await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+    };
+
+    const lastState = props.stateHistory[props.stateHistory.length - 1];
+    if (lastState.effect.name === 'InputCommand') {
+      await pleaseBatterySelect();
+    }
   }
 
   /** @override */
