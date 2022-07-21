@@ -6,7 +6,7 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {pilotSkillTemplate} from "./status-template";
 
 /** ルート要素のクラス名 */
-const ROOT_CLASS_NAME = 'player-select__pilot-status';
+const ROOT_CLASS_NAME = 'pilot-status';
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -24,8 +24,8 @@ function rootInnerHTML(ids: DataIDs): string {
   return `
     <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
     <div class="${ROOT_CLASS_NAME}__skill">
-      <span class="${ROOT_CLASS_NAME}__skill__label">スキル</span>
-      <span class="${ROOT_CLASS_NAME}__skill__content" data-id="${ids.skill}"></span>
+      <span class="${ROOT_CLASS_NAME}__skill-label">スキル</span>
+      <span class="${ROOT_CLASS_NAME}__skill-description" data-id="${ids.skill}"></span>
     </div>
   `;
 }
