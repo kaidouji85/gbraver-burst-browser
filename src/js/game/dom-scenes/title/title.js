@@ -21,23 +21,23 @@ import type {TitleAccount} from "./title-account";
 /** ルート要素 class属性 */
 const ROOT_CLASS = 'title';
 /** ログインボタン class属性 */
-const LOGIN_CLASS = `${ROOT_CLASS}__header__login`;
+const LOGIN_CLASS = `${ROOT_CLASS}__login`;
 /** ログインボタン 非表示 class属性 */
 const INVISIBLE_LOGIN_CLASS = `${LOGIN_CLASS}--invisible`;
 /** アカウント情報 class属性 */
-const ACCOUNT_CLASS = `${ROOT_CLASS}__header__account`;
+const ACCOUNT_CLASS = `${ROOT_CLASS}__account`;
 /** アカウント情報 非表示 class属性 */
 const INVISIBLE_ACCOUNT_CLASS = `${ACCOUNT_CLASS}--invisible`;
 /** アカウントメニュー class属性 */
-const ACCOUNT_MENU_CLASS = `${ACCOUNT_CLASS}__menu`;
+const ACCOUNT_MENU_CLASS = `${ROOT_CLASS}__account-menu`;
 /** アカウントメニュー 非表示 class属性 */
 const INVISIBLE_ACCOUNT_MENU_CLASS = `${ACCOUNT_MENU_CLASS}--invisible`;
 /** チュートリアルボタン class属性 */
-const TUTORIAL_CLASS = `${ROOT_CLASS}__contents__controllers__tutorial`;
+const TUTORIAL_CLASS = `${ROOT_CLASS}__tutorial`;
 /** チュートリアルボタン 非表示 class属性 */
 const INVISIBLE_TUTORIAL_CLASS = `${TUTORIAL_CLASS}--invisible`;
 /** カジュアルマッチボタン class属性 */
-const CASUAL_MATCH_CLASS = `${ROOT_CLASS}__contents__controllers__casual-match`;
+const CASUAL_MATCH_CLASS = `${ROOT_CLASS}__casual-match`;
 /** カジュアルマッチボタン 非表示 class属性 */
 const INVISIBLE_CASUAL_MATCH_CLASS = `${CASUAL_MATCH_CLASS}--invisible`
 
@@ -88,37 +88,37 @@ function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string {
     <div class="${ROOT_CLASS}__header">
       <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>
       <div class="${accountClassName}">
-        <img class="${accountClassName}__avatar" data-id="${ids.avatar}" >
+        <img class="${ROOT_CLASS}__avatar" data-id="${ids.avatar}" >
         <div class="${INVISIBLE_ACCOUNT_MENU_CLASS}" data-id="${ids.accountMenu}">
-          <div class="${ACCOUNT_MENU_CLASS}__name">
-            <div class="${ACCOUNT_MENU_CLASS}__name__prefix">アカウント名</div>
-            <div class="${ACCOUNT_MENU_CLASS}__name__value">${accountName}</div>
+          <div class="${ROOT_CLASS}__account-name">
+            <div class="${ROOT_CLASS}__account-name-prefix">アカウント名</div>
+            <div class="${ROOT_CLASS}__account-name-value">${accountName}</div>
           </div>
-          <div class="${ACCOUNT_MENU_CLASS}__separation"></div>
-          <div class="${ACCOUNT_MENU_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
-          <div class="${ACCOUNT_MENU_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
+          <div class="${ROOT_CLASS}__account-menu-separation"></div>
+          <div class="${ROOT_CLASS}__delete-account" data-id="${ids.deleteAccount}">アカウント削除</div>
+          <div class="${ROOT_CLASS}__logout" data-id="${ids.logout}">ログアウト</div>
         </div>
       </div>
     </div>
     <div class="${ROOT_CLASS}__contents">
-      <img class="${ROOT_CLASS}__contents__logo" data-id="${ids.logo}">
-      <div class="${ROOT_CLASS}__contents__controllers">
-        <button class="${ROOT_CLASS}__contents__controllers__config" data-id="${ids.config}">設定</button>
-        <button class="${ROOT_CLASS}__contents__controllers__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
+      <img class="${ROOT_CLASS}__logo" data-id="${ids.logo}">
+      <div class="${ROOT_CLASS}__game-menu">
+        <button class="${ROOT_CLASS}__config" data-id="${ids.config}">設定</button>
+        <button class="${ROOT_CLASS}__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
         <button class="${tutorialClassName}" data-id="${ids.tutorial}">チュートリアル</button>
-        <button class="${ROOT_CLASS}__contents__controllers__arcade" data-id="${ids.arcade}">アーケード</button>
+        <button class="${ROOT_CLASS}__arcade" data-id="${ids.arcade}">アーケード</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
       </div>
     </div>
     <div class="${ROOT_CLASS}__footer">
-      <small class="${ROOT_CLASS}__footer__copy-rights">
-        <span class="${ROOT_CLASS}__footer__copy-rights__symbol">&copy;</span>
-        <span class="${ROOT_CLASS}__footer__copy-rights__year">2022</span>
-        <span class="${ROOT_CLASS}__footer__copy-rights__owner">Pegass85</span>
+      <small class="${ROOT_CLASS}__copy-rights">
+        <span class="${ROOT_CLASS}__copy-rights-symbol">&copy;</span>
+        <span class="${ROOT_CLASS}__copy-rights-year">2022</span>
+        <span class="${ROOT_CLASS}__copy-rights-owner">Pegass85</span>
       </small>
-      <a class="${ROOT_CLASS}__footer__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
-      <a class="${ROOT_CLASS}__footer__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
-      <a class="${ROOT_CLASS}__footer__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>
+      <a class="${ROOT_CLASS}__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
+      <a class="${ROOT_CLASS}__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
+      <a class="${ROOT_CLASS}__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>
     </div>
   `;
 }
