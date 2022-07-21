@@ -16,7 +16,7 @@ import {PilotIcon} from "./pilot-icon";
 import {PilotStatus} from "./pilot-status";
 
 /**ルート要素のclass名 */
-export const ROOT_CLASS_NAME = 'player-select__pilot-selector';
+export const ROOT_CLASS_NAME = 'pilot-selector';
 
 /** data-idを集めたもの*/
 type DataIDs = {
@@ -37,8 +37,8 @@ function rootInnerHTML(ids: DataIDs): string {
     <div data-id="${ids.dummyStatus}"></div>
     <div class="${ROOT_CLASS_NAME}__icons" data-id="${ids.icons}"></div>
     <div class="${ROOT_CLASS_NAME}__controllers">
-    <button class="${ROOT_CLASS_NAME}__controllers__prev-button" data-id="${ids.prevButton}">戻る</button>
-    <button class="${ROOT_CLASS_NAME}__controllers__ok-button" data-id="${ids.okButton}">これを載せる</button>
+    <button class="${ROOT_CLASS_NAME}__prev-button" data-id="${ids.prevButton}">戻る</button>
+    <button class="${ROOT_CLASS_NAME}__ok-button" data-id="${ids.okButton}">これを載せる</button>
     </div>
   `;
 }

@@ -1,3 +1,5 @@
+/** プレイヤー選択画面 アームドーザバストショット */
+
 .armdozer-bust-shot__shin-braver {
   --width: calc(var(--vh) * 200);
   position: absolute;
