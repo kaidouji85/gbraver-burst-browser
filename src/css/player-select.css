@@ -59,38 +59,6 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.player-select__armdozer-bust-shot__shin-braver {
-  --width: calc(var(--vh) * 200);
-  position: absolute;
-  top: calc(var(--vh) * -10);
-  left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
-  width: var(--width);
-}
-
-.player-select__armdozer-bust-shot__neo-landozer {
-  --width: calc(var(--vh) * 200);
-  position: absolute;
-  top: calc(var(--vh) * -25);
-  left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
-  width: var(--width);
-}
-
-.player-select__armdozer-bust-shot__lightning-dozer {
-  --width: calc(var(--vh) * 200);
-  position: absolute;
-  top: calc(var(--vh) * -25);
-  left: calc(100vw - 0.9 * var(--width) - var(--safe-area-right));
-  width: var(--width);
-}
-
-.player-select__armdozer-bust-shot__wing-dozer {
-  --width: calc(var(--vh) * 200);
-  position: absolute;
-  top: calc(var(--vh) * -40);
-  left: calc(100vw - 0.8 * var(--width) - var(--safe-area-right));
-  width: var(--width);
-}
-
 .player-select__pilot-bust-shot__shinya {
   --width:  calc(var(--vh) * 85);
   --height: var(--width);
