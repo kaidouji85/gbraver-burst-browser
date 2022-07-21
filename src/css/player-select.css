@@ -7,8 +7,6 @@
     --selector-zindex: 2;
     --control-button-width: 24vw;
     --control-button-height: calc(var(--responsive-font-size) * 3);
-    --armdozer-icon-width: 12.5vw;
-    --armdozer-icon-height: 12.5vw;
     --pilot-icon-width: 12.5vw;
     --pilot-icon-height: 12.5vw;
     --check-width: 6vw;
@@ -38,7 +36,6 @@
   flex: 1 1;
 }
 
-.armdozer-selector__ok-button,
 .player-select__pilot-selector__controllers__ok-button {
   width: var(--control-button-width);
   height: var(--control-button-height);
@@ -50,7 +47,6 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.armdozer-selector__prev-button,
 .player-select__pilot-selector__controllers__prev-button {
   width: var(--control-button-width);
   height: var(--control-button-height);
@@ -139,17 +135,6 @@
   z-index: var(--selector-zindex);
 }
 
-.armdozer-selector {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.armdozer-selector--hidden {
-  display: none;
-}
-
-.armdozer-status,
 .player-select__pilot-status {
   display: flex;
   flex-direction: column;
@@ -162,58 +147,6 @@
   border: var(--dialog-border);
   border-radius: var(--dialog-border-radius);
   margin-bottom: calc(var(--responsive-font-size) * 0.5);
-}
-
-.armdozer-status__hp-label,
-.armdozer-status__power-label,
-.armdozer-status__speed-label
-{
-  margin-right: calc(var(--responsive-font-size) * 0.2);
-}
-
-.armdozer-status__hp-value,
-.armdozer-status__power-value
-{
-  margin-right: calc(var(--responsive-font-size));
-}
-
-.armdozer-status__burst {
-  display: flex;
-  flex-direction: column;
-}
-
-.armdozer-status__burst-description {
-  padding-left: var(--responsive-font-size);
-}
-
-.armdozer-selector__icons {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  margin-bottom: calc(var(--responsive-font-size) * 0.5);
-}
-
-.armdozer-icon {
-  position: relative;
-}
-
-.armdozer-icon__image {
-  width: var( --armdozer-icon-width);
-  height: var( --armdozer-icon-height);
-}
-
-.armdozer-icon__image--selected {
-  width: var( --armdozer-icon-width);
-  height: var( --armdozer-icon-height);
-  filter: brightness(0.4);
-}
-
-.armdozer-icon__check {
-  --width: 6vw;
-  width: var(--width);
-  position: absolute;
-  top: 0;
-  left: calc(var(--armdozer-icon-width) - var(--width));
 }
 
 .player-select__pilot-selector {
