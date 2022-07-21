@@ -5,8 +5,6 @@
   .player-select {
     --working-zindex: 1;
     --selector-zindex: 2;
-    --pilot-icon-width: 12.5vw;
-    --pilot-icon-height: 12.5vw;
     --check-width: 6vw;
     display: flex;
     flex-direction: column;
@@ -99,27 +97,4 @@
 
 .player-select__pilot-status__skill__content {
   padding-left: var(--responsive-font-size);
-}
-
-.player-select__pilot-icon {
-  position: relative;
-}
-
-.player-select__pilot-icon__image {
-  width: var(--pilot-icon-width);
-  height: var(--pilot-icon-height);
-}
-
-.player-select__pilot-icon__image--selected {
-  width: var(--pilot-icon-width);
-  height: var(--pilot-icon-height);
-  filter: brightness(0.4);
-}
-
-.player-select__pilot-icon__check {
-  --width: 6vw;
-  width: var(--width);
-  position: absolute;
-  top: 0;
-  left: calc(var(--pilot-icon-width) - var(--width));
 }

@@ -1,0 +1,25 @@
+/** プレイヤー選択画面 パイロットアイコン */
+.pilot-icon {
+  --pilot-icon-width: 12.5vw;
+  --pilot-icon-height: 12.5vw;
+  position: relative;
+}
+
+.pilot-icon__image {
+  width: var(--pilot-icon-width);
+  height: var(--pilot-icon-height);
+}
+
+.pilot-icon__image--selected {
+  width: var(--pilot-icon-width);
+  height: var(--pilot-icon-height);
+  filter: brightness(0.4);
+}
+
+.pilot-icon__check {
+  --width: 6vw;
+  width: var(--width);
+  position: absolute;
+  top: 0;
+  left: calc(var(--pilot-icon-width) - var(--width));
+}
