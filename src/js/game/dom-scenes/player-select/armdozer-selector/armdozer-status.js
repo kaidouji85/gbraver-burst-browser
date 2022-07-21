@@ -6,7 +6,7 @@ import {domUuid} from "../../../../uuid/dom-uuid";
 import {burstTemplate} from "./status-template";
 
 /**ルート要素のクラス名 */
-const ROOT_CLASS_NAME = 'player-select__armdozer-status';
+const ROOT_CLASS_NAME = 'armdozer-status';
 
 /** data-idを集めたもの */
 type DataIDs = {
@@ -26,17 +26,17 @@ type DataIDs = {
 function rootInnerHTML(ids: DataIDs): string {
   return `
     <div class="${ROOT_CLASS_NAME}__name" data-id="${ids.name}"></div>
-    <div class="${ROOT_CLASS_NAME}__basic">
-      <span class="${ROOT_CLASS_NAME}__basic__hp-label">HP</span>
-      <span class="${ROOT_CLASS_NAME}__basic__hp-value" data-id="${ids.hp}"></span>
-      <span class="${ROOT_CLASS_NAME}__basic__power-label">攻撃</span>
-      <span class="${ROOT_CLASS_NAME}__basic__power-value" data-id="${ids.power}" ></span>
-      <span class="${ROOT_CLASS_NAME}__basic__power-label">機動</span>
-      <span class="${ROOT_CLASS_NAME}__basic__power-value" data-id="${ids.speed}" ></span>
+    <div class="${ROOT_CLASS_NAME}__basic-status">
+      <span class="${ROOT_CLASS_NAME}__hp-label">HP</span>
+      <span class="${ROOT_CLASS_NAME}__hp-value" data-id="${ids.hp}"></span>
+      <span class="${ROOT_CLASS_NAME}__power-label">攻撃</span>
+      <span class="${ROOT_CLASS_NAME}__power-value" data-id="${ids.power}" ></span>
+      <span class="${ROOT_CLASS_NAME}__power-label">機動</span>
+      <span class="${ROOT_CLASS_NAME}__power-value" data-id="${ids.speed}" ></span>
     </div>
     <div class="${ROOT_CLASS_NAME}__burst">
-      <span class="${ROOT_CLASS_NAME}__burst__label">バースト</span>
-      <span class="${ROOT_CLASS_NAME}__burst__content" data-id="${ids.burst}"></span>
+      <span class="${ROOT_CLASS_NAME}__burst-label">バースト</span>
+      <span class="${ROOT_CLASS_NAME}__burst-description" data-id="${ids.burst}"></span>
     </div>
   `;
 }

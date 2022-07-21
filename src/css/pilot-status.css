@@ -1,0 +1,23 @@
+/** プレイヤー選択画面 パイロットステータスウインドウ */
+.pilot-status {
+  display: flex;
+  flex-direction: column;
+  font-size: calc(var(--responsive-font-size) * 0.8);
+  width: 50vw;
+  box-sizing: border-box;
+  height: calc(var(--responsive-font-size) * 8);
+  padding: calc(var(--responsive-font-size) * 0.5);
+  background-color: rgba(10, 10, 10, 0.7);
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  margin-bottom: calc(var(--responsive-font-size) * 0.5);
+}
+
+.pilot-status__skill {
+  display: flex;
+  flex-direction: column;
+}
+
+.pilot-status__skill-description {
+  padding-left: var(--responsive-font-size);
+}

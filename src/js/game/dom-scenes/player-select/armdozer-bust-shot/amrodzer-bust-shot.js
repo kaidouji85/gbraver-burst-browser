@@ -6,7 +6,7 @@ import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 /**
  * cssクラス名のプレフィックス
  */
-export const CLASS_NAME_PREFIX = 'player-select__armdozer-bust-shot';
+export const CLASS_NAME_PREFIX = 'armdozer-bust-shot';
 
 /**
  * アームドーザバストショット

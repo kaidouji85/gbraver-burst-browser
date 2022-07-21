@@ -9,7 +9,7 @@ import {tap} from "../../../../stream/operator";
 import type {Stream} from "../../../../stream/stream";
 import {waitElementLoaded} from "../../../../wait/wait-element-loaded";
 
-const ROOT_CLASS_NAME = 'player-select__pilot-icon';
+const ROOT_CLASS_NAME = 'pilot-icon';
 const IMAGE_CLASS_NAME = `${ROOT_CLASS_NAME}__image`;
 const CHECK_CLASS_NAME = `${ROOT_CLASS_NAME}__check`;
 

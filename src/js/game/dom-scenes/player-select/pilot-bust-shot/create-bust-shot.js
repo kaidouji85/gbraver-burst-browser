@@ -9,7 +9,7 @@ import {PilotBustShot} from "./pilot-bust-shot";
 /**
  * ルート要素のクラス名
  */
-const ROOT_CLASS_NAME = 'player-select__pilot-bust-shot';
+const ROOT_CLASS_NAME = 'pilot-bust-shot';
 
 /**
  * パイロットIDに対応したバストショットを生成する
