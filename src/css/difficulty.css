@@ -24,7 +24,7 @@
   z-index: var(--zindex-background);
 }
 
-.difficulty__dialog__closer {
+.difficulty__closer {
   width: var(--closer-width);
   height: var(--closer-height);
   position: absolute;
@@ -55,20 +55,20 @@
   padding-left: var(--dialog-padding);
 }
 
-.difficulty__dialog__caption {
+.difficulty__caption {
   font-size: calc(var(--responsive-font-size) * 1.2);
   margin-bottom: calc(var(--responsive-font-size) * 1.5);
 }
 
-.difficulty__dialog__controllers {
+.difficulty__controllers {
   display: flex;
   align-items: center;
 }
 
-.difficulty__dialog__controllers__easy,
-.difficulty__dialog__controllers__normal,
-.difficulty__dialog__controllers__hard,
-.difficulty__dialog__controllers__very-hard
+.difficulty__easy,
+.difficulty__normal,
+.difficulty__hard,
+.difficulty__very-hard
 {
   display: flex;
   flex-direction: column;
@@ -76,20 +76,20 @@
   margin: calc(var(--responsive-font-size) * 0.5);
 }
 
-.difficulty__dialog__controllers__easy__icon,
-.difficulty__dialog__controllers__normal__icon,
-.difficulty__dialog__controllers__hard__icon,
-.difficulty__dialog__controllers__very-hard__icon
+.difficulty__easy-icon,
+.difficulty__normal-icon,
+.difficulty__hard-icon,
+.difficulty__very-hard-icon
 {
   width: calc(var(--responsive-font-size) * 5);
   height: calc(var(--responsive-font-size) * 5);
   margin-bottom:  calc(var(--responsive-font-size) * 0.5);
 }
 
-.difficulty__dialog__controllers__easy__button,
-.difficulty__dialog__controllers__normal__button,
-.difficulty__dialog__controllers__hard__button,
-.difficulty__dialog__controllers__very-hard__button
+.difficulty__easy-button,
+.difficulty__normal-button,
+.difficulty__hard-button,
+.difficulty__very-hard-button
 {
   width: calc(var(--responsive-font-size) * 7);
   height: calc(var(--responsive-font-size) * 3);
