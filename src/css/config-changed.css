@@ -1,0 +1,78 @@
+/** 設定変更通知ダイアログ */
+.config-changed {
+  --dialog-button-width: calc(var(--responsive-font-size) * 10);
+  --dialog-button-height: calc(var(--responsive-font-size) * 3);
+  --closer-width: 48px;
+  --closer-height: 48px;
+  position: fixed;
+}
+
+.config-changed--invisible {
+  display: none;
+}
+
+.config-changed__background {
+  position: fixed;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  background-color: #000000;
+  opacity: 0.5;
+  z-index: var(--zindex-background);
+}
+
+.config-changed__dialog {
+  --dialog-padding: var(--responsive-font-size);
+  top: calc(var(--vh, 1vh) * 50);
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  color: var(--font-color);
+  font-size: var(--responsive-font-size);
+  background-color: var(--background-color);
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: var(--dialog-border);
+  border-radius: var(--dialog-border-radius);
+  z-index: var(--zindex-dialog);
+  padding-top: var(--closer-height);
+  padding-right: var(--dialog-padding);
+  padding-bottom: var(--dialog-padding);
+  padding-left: var(--dialog-padding);
+}
+
+.config-changed__closer {
+  width: var(--closer-width);
+  height: var(--closer-height);
+  position: absolute;
+  top: calc(var(--closer-width) * -0.5);
+  left: calc(var(--closer-height) * -0.5);
+}
+
+.config-changed__caption {
+  font-size: calc(var(--responsive-font-size) * 1.2);
+  margin-bottom: calc(var(--responsive-font-size) * 1.5);
+}
+
+.config-changed__controllers {
+  display: flex;
+}
+
+.config-changed__controllers button {
+  width: var(--dialog-button-width);
+  height: var(--dialog-button-height);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+  margin: calc(var(--responsive-font-size) * 0.25);
+}
+
+.config-changed__discard {
+  background-color: var(--sub-button-background-color);
+}
+
+.config-changed__accept {
+  background-color: var(--button-background-color);
+}
