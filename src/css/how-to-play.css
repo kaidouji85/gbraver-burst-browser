@@ -65,7 +65,7 @@
   z-index: var(--zindex-close);
 }
 
-.how-to-play__dialog__movie {
+.how-to-play__movie {
   width: calc(var(--how-to-play-dialog-width) * 0.9);
   height: calc(var(--how-to-play-dialog-height) * 0.9);
 }
