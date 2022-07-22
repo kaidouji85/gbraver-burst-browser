@@ -24,7 +24,7 @@
   }
 }
 
-.match-card__contents__caption {
+.match-card__caption {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,25 +33,25 @@
   margin-bottom: var(--responsive-font-size);
 }
 
-.match-card__contents__cards {
+.match-card__cards {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-.match-card__contents__cards__vs {
+.match-card__vs {
   font-size: calc(var(--responsive-font-size) * 3);
   margin: 0 calc(var(--responsive-font-size) * 5);
 }
 
-.match-card__contents__cards__enemy {
+.match-card__enemy-card {
   object-fit: cover;
   width: 30%;
   transform: scale(-1, 1);
 }
 
-.match-card__contents__cards__player {
+.match-card__player-card {
   object-fit: cover;
   width: 30%;
 }
