@@ -42,7 +42,7 @@ export class HowToPlay implements DOMDialog {
       <div class="how-to-play__background"></div>
       <img class="how-to-play__closer" alt="閉じる" src="${closerPath}" data-id="${closerId}"></img>
       <div class="how-to-play__dialog">
-        <iframe class="how-to-play__dialog__movie" src="${movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+        <iframe class="how-to-play__movie" src="${movieURL}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
       </div>
     `;
 
