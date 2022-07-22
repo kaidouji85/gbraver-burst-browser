@@ -48,8 +48,8 @@ function rootInnerHTML(ids: DataIDs, postNetworkErrorLabel: string): string {
   return `
     <div class="${ROOT_CLASS_NAME}__background"></div>
     <div class="${ROOT_CLASS_NAME}__dialog">
-      <span class="${ROOT_CLASS_NAME}__dialog__caption">通信エラーが発生しました</span>
-      <button class="${ROOT_CLASS_NAME}__dialog__post-network-error" data-id="${ids.postNetworkErrorButton}">${postNetworkErrorLabel}</button>
+      <span class="${ROOT_CLASS_NAME}__caption">通信エラーが発生しました</span>
+      <button class="${ROOT_CLASS_NAME}__post-network-error" data-id="${ids.postNetworkErrorButton}">${postNetworkErrorLabel}</button>
     </div>
   `;
 }
