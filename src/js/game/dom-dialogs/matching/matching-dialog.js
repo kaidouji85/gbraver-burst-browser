@@ -33,9 +33,9 @@ function rootInnerHTML(ids: DataIDs, resources: Resources): string {
   return `
     <div class="${ROOT_CLASS}__background"></div>
     <div class="${ROOT_CLASS}__dialog">
-      <img class="${ROOT_CLASS}__dialog__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
-      <span class="${ROOT_CLASS}__dialog__caption">マッチング中......</span>    
-      <button class="${ROOT_CLASS}__dialog__cancel" data-id="${ids.cancel}">やめる</button>
+      <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
+      <span class="${ROOT_CLASS}__caption">マッチング中......</span>    
+      <button class="${ROOT_CLASS}__cancel" data-id="${ids.cancel}">やめる</button>
     </div>
   `;
 }
