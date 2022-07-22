@@ -70,11 +70,11 @@
   z-index: var(--zindex-dialog)
 }
 
-.login__dialog__caption {
+.login__caption {
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
-.login__dialog__controllers__close {
+.login__close {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
@@ -86,7 +86,7 @@
   margin-right: calc(var(--responsive-font-size) * 0.5);
 }
 
-.login__dialog__controllers__login {
+.login__login {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
