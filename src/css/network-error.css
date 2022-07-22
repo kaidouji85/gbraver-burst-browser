@@ -49,11 +49,11 @@
   z-index: var(--zindex-dialog)
 }
 
-.network-error__dialog__caption {
+.network-error__caption {
   margin-bottom: calc(var(--responsive-font-size) * 2);
 }
 
-.network-error__dialog__post-network-error {
+.network-error__post-network-error {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);
