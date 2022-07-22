@@ -37,28 +37,28 @@
   font-size: calc(var(--responsive-font-size) * 1.3);
 }
 
-.npc-stage-title__title__stage {
+.npc-stage-title__stage {
   display: flex;
   align-items: baseline;
 }
 
-.npc-stage-title__title__stage__prefix--capitalized {
+.npc-stage-title__stage-prefix--capitalized {
   font-size: calc(var(--responsive-font-size) * 2.5);
   font-weight: bold;
 }
 
-.npc-stage-title__title__stage__level {
+.npc-stage-title__stage-level {
   font-size: calc(var(--responsive-font-size) * 2);
   font-weight: bold;
 }
 
-.npc-stage-title__title__caption {
+.npc-stage-title__caption {
   display: flex;
   align-items: baseline;
   margin-left: calc(var(--responsive-font-size) * 2);
 }
 
-.npc-stage-title__title__caption__clause--capitalized {
+.npc-stage-title__caption-clause--capitalized {
   font-size: calc(var(--responsive-font-size) * 2.5);
   font-weight: bold;
 }
