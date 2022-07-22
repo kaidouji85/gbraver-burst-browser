@@ -2,7 +2,9 @@
  * メッセージウインドウ
  */
 @media (orientation: landscape) {
-  .message-window {
+  .message-window, 
+  .message-window--left,
+  .message-window--right {
     box-sizing: border-box;
     display: block;
     position: fixed;

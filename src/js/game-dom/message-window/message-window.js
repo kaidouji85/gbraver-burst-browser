@@ -7,6 +7,34 @@ const ROOT_CLASS = 'message-window';
 /** ルートHTML要素が非表示の際のclass属性 */
 const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
 
+/** ルート要素が右側表示されている時のclass属性 */
+const ROOT_CLASS_LEFT = `${ROOT_CLASS}--right`;
+
+/** ルート要素が左側表示されている時のclass属性 */
+const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--left`;
+
+/** メッセージウインドウ位置 */
+type Position = 'Center' | 'Right' | 'Left';
+
+/**
+ * メッセージウインドウ位置に対応したroot要素class属性を取得する
+ * 
+ * @param position メッセージウインドウ位置
+ * @return root要素のclass属性
+ */
+function toRootClass(position: Position): string {
+  switch(position) {
+    case 'Center':
+      return ROOT_CLASS;
+    case 'Left':
+      return ROOT_CLASS_LEFT;
+    case 'Right':
+      return ROOT_CLASS_RIGHT;
+    default:
+      return ROOT_CLASS_INVISIBLE;
+  }
+}
+
 /** data-idを集めたもの */
 type DataIDs = {messages: string};
 
@@ -43,6 +71,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 export class MessageWindow {
   #root: HTMLElement;
   #messages: HTMLElement;
+  #position: Position;
 
   /**
    * コンストラクタ
@@ -50,7 +79,8 @@ export class MessageWindow {
   constructor() {
     const ids = {messages: domUuid()};
     this.#root = document.createElement('div');
-    this.#root.className = ROOT_CLASS;
+    this.#position = 'Center';
+    this.#root.className = toRootClass(this.#position);
     this.#root.innerHTML = rootInnerHTML(ids);
     const {messages} = extractElements(this.#root, ids);
     this.#messages = messages;
@@ -71,7 +101,16 @@ export class MessageWindow {
    * @param isVisible trueで表示する
    */
   visible(isVisible: boolean): void {
-    this.#root.className = isVisible ? ROOT_CLASS : ROOT_CLASS_INVISIBLE;
+    this.#root.className = isVisible ? toRootClass(this.#position) : ROOT_CLASS_INVISIBLE;
+  }
+
+  /**
+   * 表示位置を設定する
+   *
+   * @param value 表示位置
+   */
+  position(value: Position): void {
+    this.#position = value;
   }
 
   /**
