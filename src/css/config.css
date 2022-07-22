@@ -35,32 +35,32 @@
   font-size: var(--font-size);
 }
 
-.config__configs__battle-animation-time-scale,
-.config__configs__webgl-pixel-ratio,
-.config__configs__bgm-volume,
-.config__configs__se-volume {
+.config__battle-animation-time-scale,
+.config__webgl-pixel-ratio,
+.config__bgm-volume,
+.config__se-volume {
   display: flex;
   align-items: center;
   min-height: calc(var(--responsive-font-size) * 3);
 }
 
-.config__configs__battle-animation-time-scale__caption,
-.config__configs__webgl-pixel-ratio__caption,
-.config__configs__bgm-volume__caption,
-.config__configs__se-volume__caption {
+.config__battle-animation-time-scale-caption,
+.config__webgl-pixel-ratio-caption,
+.config__bgm-volume-caption,
+.config__se-volume-caption {
   width: calc(var(--responsive-font-size) * 15);
 }
 
-.config__configs__battle-animation-time-scale__selector,
-.config__configs__webgl-pixel-ratio__selector {
+.config__battle-animation-time-scale-selector,
+.config__webgl-pixel-ratio-selector {
   -webkit-appearance: menulist-button;
   min-width: calc(var(--responsive-font-size) * 7);
   height: calc(var(--responsive-font-size) * 2);
   font-size: var(--font-size);
 }
 
-.config__configs__bgm-volume__selector,
-.config__configs__se-volume__selector {
+.config__bgm-volume-selector,
+.config__se-volume-selector {
   width: calc(var(--responsive-font-size) * 14);
   margin-right: calc(var(--responsive-font-size) * 2);
 }
@@ -75,11 +75,11 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.config__footer__config-change {
+.config__config-change {
   background-color: var(--button-background-color);
 }
 
-.config__footer__prev {
+.config__prev {
   background-color: var(--sub-button-background-color);
   margin-right: calc(var(--responsive-font-size) * 0.5);
 }
