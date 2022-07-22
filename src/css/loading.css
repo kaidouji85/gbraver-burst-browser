@@ -19,14 +19,14 @@
   justify-content: center;
 }
 
-.loading__progress-bar {
+.loading__outer-progress-bar {
   width: 200px;
   height: 20px;
   background: #000;
   border: 2px solid #000;
 }
 
-.loading__current-progress {
+.loading__progress-bar {
   width: 0;
   height: 20px;
   background: red;

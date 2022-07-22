@@ -21,8 +21,8 @@ export class LoadingPresentation {
     this.#root.innerHTML = `
       <div class="loading__progress">
         <div class="loading__progress-rate" data-id="${textId}"></div>
-        <div class="loading__progress-bar">
-          <div class="loading__current-progress" data-id="${barId}"></div>
+        <div class="loading__outer-progress-bar">
+          <div class="loading__progress-bar" data-id="${barId}"></div>
         </div>
       </div>
     `;
