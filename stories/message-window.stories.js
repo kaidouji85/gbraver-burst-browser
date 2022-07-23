@@ -43,3 +43,19 @@ export const zeroLine: DOMStubStory = domStub(()=> {
   dom.messages([]);
   return dom.getRootHTMLElement();
 });
+
+export const left: DOMStubStory = domStub(() => {
+  const dom = new MessageWindow();
+  dom.position('Left');
+  dom.visible(true);
+  dom.messages(['左側表示です']);
+  return dom.getRootHTMLElement();
+});
+
+export const right: DOMStubStory = domStub(() => {
+  const dom = new MessageWindow();
+  dom.position('Right');
+  dom.visible(true);
+  dom.messages(['右側表示です']);
+  return dom.getRootHTMLElement();
+});

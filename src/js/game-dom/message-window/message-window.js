@@ -7,11 +7,11 @@ const ROOT_CLASS = 'message-window';
 /** ルートHTML要素が非表示の際のclass属性 */
 const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
 
-/** ルート要素が右側表示されている時のclass属性 */
-const ROOT_CLASS_LEFT = `${ROOT_CLASS}--right`;
-
 /** ルート要素が左側表示されている時のclass属性 */
-const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--left`;
+const ROOT_CLASS_LEFT = `${ROOT_CLASS}--left`;
+
+/** ルート要素が右側表示されている時のclass属性 */
+const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--right`;
 
 /** メッセージウインドウ位置 */
 type Position = 'Center' | 'Right' | 'Left';
