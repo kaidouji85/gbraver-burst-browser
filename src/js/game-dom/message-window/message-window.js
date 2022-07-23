@@ -111,6 +111,7 @@ export class MessageWindow {
    */
   position(value: Position): void {
     this.#position = value;
+    this.#root.className = toRootClass(value);
   }
 
   /**
