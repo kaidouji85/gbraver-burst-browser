@@ -1,4 +1,6 @@
 // @flow
+import type {Resources} from "../../resource";
+import {PathIds} from "../../resource/path";
 import {domUuid} from "../../uuid/dom-uuid";
 
 /** ルートHTML要素のclass属性 */
@@ -42,10 +44,15 @@ type DataIDs = {messages: string};
  * ルートHTML要素のinnerHTML
  *
  * @param ids data-idを集めたもの
+ * @param resources リソース管理オブジェクト
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs): string {
+function rootInnerHTML(ids: DataIDs, resources: Resources): string {
+  const shinya = resources.paths.find(v => v.id === PathIds.SHINYA_ICON)?.path ?? '';
   return `
+    <div class="${ROOT_CLASS}__face-grahpic">
+      <img class="${ROOT_CLASS}__shinya" src="${shinya}">
+    </div>
     <div class="${ROOT_CLASS}__messages" data-id="${ids.messages}"></div>
   `;
 }
@@ -75,13 +82,15 @@ export class MessageWindow {
 
   /**
    * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
+  constructor(resources: Resources) {
     const ids = {messages: domUuid()};
     this.#root = document.createElement('div');
     this.#position = 'Center';
     this.#root.className = toRootClass(this.#position);
-    this.#root.innerHTML = rootInnerHTML(ids);
+    this.#root.innerHTML = rootInnerHTML(ids, resources);
     const {messages} = extractElements(this.#root, ids);
     this.#messages = messages;
   }
