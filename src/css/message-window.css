@@ -6,7 +6,7 @@
   .message-window--left,
   .message-window--right {
     box-sizing: border-box;
-    display: block;
+    display: flex;
     position: fixed;
     bottom: max(calc(var(--responsive-font-size) * 1), var(--safe-area-bottom));
     color: var(--font-color);
@@ -38,6 +38,21 @@
 
   .message-window__paragraph {
     font-size: var(--responsive-font-size);
+  }
+
+  .message-window__face-graphic {
+    width: calc(var(--responsive-font-size) * 6);
+  }
+
+  .message-window__face-graphic img {
+    position: fixed;
+  }
+
+  .message-window__shinya {
+    --icon-size: calc(var(--responsive-font-size) * 8);
+    transform: translate(-25%, -50%);
+    width: var(--icon-size);
+    height: var(--icon-size);
   }
 }
 

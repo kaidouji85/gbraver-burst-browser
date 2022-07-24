@@ -48,9 +48,9 @@ type DataIDs = {messages: string};
  * @return innerHTML
  */
 function rootInnerHTML(ids: DataIDs, resources: Resources): string {
-  const shinya = resources.paths.find(v => v.id === PathIds.SHINYA_ICON)?.path ?? '';
+  const shinya = resources.paths.find(v => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ?? '';
   return `
-    <div class="${ROOT_CLASS}__face-grahpic">
+    <div class="${ROOT_CLASS}__face-graphic">
       <img class="${ROOT_CLASS}__shinya" src="${shinya}">
     </div>
     <div class="${ROOT_CLASS}__messages" data-id="${ids.messages}"></div>
