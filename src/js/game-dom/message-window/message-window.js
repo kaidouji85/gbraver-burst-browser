@@ -18,6 +18,12 @@ const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--right`;
 /** メッセージウインドウ位置 */
 type Position = 'Center' | 'Right' | 'Left';
 
+/** 顔画像タイプ */
+export type FaceType = 'Shinya' | 'None';
+
+/** 顔画像の方向 */
+export type FaceDirection = 'Left' | 'Right';
+
 /**
  * メッセージウインドウ位置に対応したroot要素class属性を取得する
  * 
@@ -38,29 +44,23 @@ function toRootClass(position: Position): string {
 }
 
 /** data-idを集めたもの */
-type DataIDs = {messages: string};
+type DataIDs = {messages: string, faceGraphic: string};
 
 /**
  * ルートHTML要素のinnerHTML
  *
  * @param ids data-idを集めたもの
- * @param resources リソース管理オブジェクト
  * @return innerHTML
  */
-function rootInnerHTML(ids: DataIDs, resources: Resources): string {
-  const shinya = resources.paths.find(v => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ?? '';
+function rootInnerHTML(ids: DataIDs): string {
   return `
-    <div class="${ROOT_CLASS}__face-graphic">
-      <img class="${ROOT_CLASS}__shinya" src="${shinya}">
-    </div>
+    <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.faceGraphic}"></div>
     <div class="${ROOT_CLASS}__messages" data-id="${ids.messages}"></div>
   `;
 }
 
 /** ルート要素の子孫要素 */
-type Elements = {
-  messages: HTMLElement
-};
+type Elements = {messages: HTMLElement, faceGraphic: HTMLElement};
 
 /**
  * ルート要素から子孫要素を抽出する
@@ -71,13 +71,15 @@ type Elements = {
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const messages = root.querySelector(`[data-id="${ids.messages}"]`) ?? document.createElement('div');
-  return {messages};
+  const faceGraphic = root.querySelector(`[data-id="${ids.faceGraphic}"]`) ?? document.createElement('div');
+  return {messages, faceGraphic};
 }
 
 /** メッセージウインドウ */
 export class MessageWindow {
   #root: HTMLElement;
   #messages: HTMLElement;
+  #faceGraphic: HTMLElement;
   #position: Position;
 
   /**
@@ -86,13 +88,27 @@ export class MessageWindow {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const ids = {messages: domUuid()};
+    const ids = {messages: domUuid(), faceGraphic: domUuid()};
     this.#root = document.createElement('div');
     this.#position = 'Center';
     this.#root.className = toRootClass(this.#position);
-    this.#root.innerHTML = rootInnerHTML(ids, resources);
-    const {messages} = extractElements(this.#root, ids);
+    this.#root.innerHTML = rootInnerHTML(ids);
+    const {messages, faceGraphic} = extractElements(this.#root, ids);
     this.#messages = messages;
+    this.#faceGraphic = faceGraphic;
+    const faceConfigs = [{
+      className: `${ROOT_CLASS}__shinya`,
+      src: resources.paths.find(v => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ?? ''
+    }];
+    const faceImages = faceConfigs.map(config => {
+      const img = document.createElement('img');
+      img.className = config.className;
+      img.src = config.src;
+      return img;
+    });
+    faceImages.forEach(image => {
+      this.#faceGraphic.appendChild(image);
+    });
   }
 
   /**
