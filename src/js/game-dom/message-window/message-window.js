@@ -2,6 +2,7 @@
 import {replaceDOM} from "../../dom/replace-dom";
 import type {Resources} from "../../resource";
 import {domUuid} from "../../uuid/dom-uuid";
+import type {FaceType} from "./face-graphic";
 import {FaceGraphic} from "./face-graphic";
 
 /** ルートHTML要素のclass属性 */
@@ -92,8 +93,6 @@ export class MessageWindow {
     this.#messages = messages;
     this.#faceGraphic = new FaceGraphic(resources);
     replaceDOM(faceGraphic, this.#faceGraphic.getRootHTMLElement());
-    this.#faceGraphic.face('Tsubasa');
-    this.#faceGraphic.visible(true);
   }
 
   /**
@@ -142,5 +141,23 @@ export class MessageWindow {
     values.forEach(message => {
       this.#messages.appendChild(createParagraph(message));
     });
+  }
+
+  /**
+   * 顔画像を変更する
+   *
+   * @param faceType 変更する顔画像
+   */
+  face(faceType: FaceType): void {
+    this.#faceGraphic.face(faceType);
+  }
+
+  /**
+   * 顔画像の表示、非表示設定
+   *
+   * @param isVisible 顔画像表示フラグ、trueで表示する
+   */
+  faceVisible(isVisible: boolean): void {
+    this.#faceGraphic.visible(isVisible);
   }
 }
