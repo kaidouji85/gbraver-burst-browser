@@ -29,11 +29,11 @@
   }
 
   .message-window--left {
-    left: max(10vw, var(--safe-area-left));
+    left: max(3vw, var(--safe-area-left));
   }
 
   .message-window--right {
-    right: max(10vw, var(--safe-area-right));
+    right: max(3vw, var(--safe-area-right));
   }
 
   .message-window__paragraph {
