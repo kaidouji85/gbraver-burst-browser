@@ -9,7 +9,7 @@ const ROOT_CLASS = 'face-graphic';
 const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
 
 /** 顔画像タイプ */
-export type FaceType = 'Shinya' | 'Gai' | 'Tsubasa';
+export type FaceType = 'Shinya' | 'Gai' | 'Raito' | 'Tsubasa';
 
 /** 顔画像設定 */
 type Config = {
@@ -40,6 +40,12 @@ const configs: Config[] = [
     src: resources => resources.paths.find(v => v.id === PathIds.GAI_SKILL_CUTIN)?.path ?? '',
     className: `${ROOT_CLASS}__gai`,
     invisibleClassName: `${ROOT_CLASS}__gai--invisible`,
+  },
+  {
+    type: 'Raito',
+    src: resources => resources.paths.find(v => v.id === PathIds.RAITO_SKILL_CUTIN)?.path ?? '',
+    className: `${ROOT_CLASS}__raito`,
+    invisibleClassName: `${ROOT_CLASS}__raito--invisible`,
   },
   {
     type: 'Tsubasa',
