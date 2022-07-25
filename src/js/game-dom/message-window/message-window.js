@@ -1,7 +1,8 @@
 // @flow
+import {replaceDOM} from "../../dom/replace-dom";
 import type {Resources} from "../../resource";
-import {PathIds} from "../../resource/path";
 import {domUuid} from "../../uuid/dom-uuid";
+import {FaceGraphic} from "./face-graphic";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'message-window';
@@ -17,12 +18,6 @@ const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--right`;
 
 /** メッセージウインドウ位置 */
 type Position = 'Center' | 'Right' | 'Left';
-
-/** 顔画像タイプ */
-export type FaceType = 'Shinya' | 'None';
-
-/** 顔画像の方向 */
-export type FaceDirection = 'Left' | 'Right';
 
 /**
  * メッセージウインドウ位置に対応したroot要素class属性を取得する
@@ -79,7 +74,7 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 export class MessageWindow {
   #root: HTMLElement;
   #messages: HTMLElement;
-  #faceGraphic: HTMLElement;
+  #faceGraphic: FaceGraphic;
   #position: Position;
 
   /**
@@ -95,20 +90,8 @@ export class MessageWindow {
     this.#root.innerHTML = rootInnerHTML(ids);
     const {messages, faceGraphic} = extractElements(this.#root, ids);
     this.#messages = messages;
-    this.#faceGraphic = faceGraphic;
-    const faceConfigs = [{
-      className: `${ROOT_CLASS}__shinya`,
-      src: resources.paths.find(v => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ?? ''
-    }];
-    const faceImages = faceConfigs.map(config => {
-      const img = document.createElement('img');
-      img.className = config.className;
-      img.src = config.src;
-      return img;
-    });
-    faceImages.forEach(image => {
-      this.#faceGraphic.appendChild(image);
-    });
+    this.#faceGraphic = new FaceGraphic(resources);
+    replaceDOM(faceGraphic, this.#faceGraphic.getRootHTMLElement());
   }
 
   /**

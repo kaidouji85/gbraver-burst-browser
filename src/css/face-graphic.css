@@ -1,0 +1,14 @@
+.face-graphic {
+  width: calc(var(--responsive-font-size) * 6);
+}
+
+.face-graphic img {
+  position: fixed;
+}
+
+.face-graphic__shinya {
+  --icon-size: calc(var(--responsive-font-size) * 8);
+  transform: translate(-25%, -50%);
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
