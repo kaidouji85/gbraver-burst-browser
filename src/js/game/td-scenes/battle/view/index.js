@@ -77,7 +77,7 @@ export class BattleSceneView {
       preRender: this.#preRenderHUD,
     });
 
-    this.dom = new DOMLayer();
+    this.dom = new DOMLayer(param.resources);
 
     param.gameLoop.subscribe(action => {
       this.#gameLoop(action);

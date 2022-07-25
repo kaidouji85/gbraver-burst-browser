@@ -6,7 +6,7 @@
   .message-window--left,
   .message-window--right {
     box-sizing: border-box;
-    display: block;
+    display: flex;
     position: fixed;
     bottom: max(calc(var(--responsive-font-size) * 1), var(--safe-area-bottom));
     color: var(--font-color);

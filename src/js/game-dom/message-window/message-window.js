@@ -1,5 +1,9 @@
 // @flow
+import {replaceDOM} from "../../dom/replace-dom";
+import type {Resources} from "../../resource";
 import {domUuid} from "../../uuid/dom-uuid";
+import type {FaceType} from "./face-graphic";
+import {FaceGraphic} from "./face-graphic";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'message-window';
@@ -36,7 +40,7 @@ function toRootClass(position: Position): string {
 }
 
 /** data-idを集めたもの */
-type DataIDs = {messages: string};
+type DataIDs = {messages: string, faceGraphic: string};
 
 /**
  * ルートHTML要素のinnerHTML
@@ -46,14 +50,13 @@ type DataIDs = {messages: string};
  */
 function rootInnerHTML(ids: DataIDs): string {
   return `
+    <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.faceGraphic}"></div>
     <div class="${ROOT_CLASS}__messages" data-id="${ids.messages}"></div>
   `;
 }
 
 /** ルート要素の子孫要素 */
-type Elements = {
-  messages: HTMLElement
-};
+type Elements = {messages: HTMLElement, faceGraphic: HTMLElement};
 
 /**
  * ルート要素から子孫要素を抽出する
@@ -64,26 +67,32 @@ type Elements = {
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const messages = root.querySelector(`[data-id="${ids.messages}"]`) ?? document.createElement('div');
-  return {messages};
+  const faceGraphic = root.querySelector(`[data-id="${ids.faceGraphic}"]`) ?? document.createElement('div');
+  return {messages, faceGraphic};
 }
 
 /** メッセージウインドウ */
 export class MessageWindow {
   #root: HTMLElement;
   #messages: HTMLElement;
+  #faceGraphic: FaceGraphic;
   #position: Position;
 
   /**
    * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
-    const ids = {messages: domUuid()};
+  constructor(resources: Resources) {
+    const ids = {messages: domUuid(), faceGraphic: domUuid()};
     this.#root = document.createElement('div');
     this.#position = 'Center';
     this.#root.className = toRootClass(this.#position);
     this.#root.innerHTML = rootInnerHTML(ids);
-    const {messages} = extractElements(this.#root, ids);
+    const {messages, faceGraphic} = extractElements(this.#root, ids);
     this.#messages = messages;
+    this.#faceGraphic = new FaceGraphic(resources);
+    replaceDOM(faceGraphic, this.#faceGraphic.getRootHTMLElement());
   }
 
   /**
@@ -132,5 +141,23 @@ export class MessageWindow {
     values.forEach(message => {
       this.#messages.appendChild(createParagraph(message));
     });
+  }
+
+  /**
+   * 顔画像を変更する
+   *
+   * @param faceType 変更する顔画像
+   */
+  face(faceType: FaceType): void {
+    this.#faceGraphic.face(faceType);
+  }
+
+  /**
+   * 顔画像の表示、非表示設定
+   *
+   * @param isVisible 顔画像表示フラグ、trueで表示する
+   */
+  faceVisible(isVisible: boolean): void {
+    this.#faceGraphic.visible(isVisible);
   }
 }

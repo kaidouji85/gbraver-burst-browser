@@ -1,5 +1,6 @@
 // @flow
 import {MessageWindow} from "../../../../../game-dom/message-window/message-window";
+import type {Resources} from "../../../../../resource";
 
 /** HTML要素レイヤー */
 export class DOMLayer {
@@ -7,9 +8,11 @@ export class DOMLayer {
 
   /**
    * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
    */
-  constructor() {
-    this.messageWindow = new MessageWindow();
+  constructor(resources: Resources) {
+    this.messageWindow = new MessageWindow(resources);
     this.messageWindow.visible(false);
   }
 
