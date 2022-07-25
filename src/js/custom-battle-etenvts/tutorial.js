@@ -1,5 +1,5 @@
 // @flow
-import type {Player} from "gbraver-burst-core";
+import type {GameState, Player} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
@@ -12,6 +12,7 @@ import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
 import {playerUuid} from "../uuid/player";
 import {attentionBatterySelector} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
+import {turnCount} from "./turn-count";
 import {waitUntilWindowPush} from "./wait-until-window-push";
 
 /** チュートリアルイベント */
@@ -26,6 +27,7 @@ export interface TutorialEvent extends CustomBattleEvent {
 class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEvent {
   player: Player;
   npc: NPC;
+  stateHistory: GameState[];
 
   /**
    * コンストラクタ
@@ -36,21 +38,40 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     const pilot = Pilots.find(v => v.id === PilotIds.SHINYA)  ?? Pilots[0];
     this.player = {playerId: playerUuid(), armdozer, pilot};
     this.npc = oneBatteryWeakWingDozerNPC();
+    this.stateHistory = [];
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-      const ruleExpression = async () => {
-        props.view.dom.messageWindow.position('Center');
-        props.view.dom.messageWindow.visible(true);
-        props.view.dom.messageWindow.messages(['何らかしらのルール説明']);
-        await waitUntilWindowPush(props);
-        props.view.dom.messageWindow.visible(false);
-      };
+    const oneTurn = async () => {
+      props.view.dom.messageWindow.visible(true);
+      props.view.dom.messageWindow.faceVisible(true);
 
-    const lastState = props.stateHistory[props.stateHistory.length - 1];
-    if (lastState.effect.name === 'InputCommand') {
-      await ruleExpression();
+      props.view.dom.messageWindow.position('Left');
+      props.view.dom.messageWindow.face('Tsubasa');
+      props.view.dom.messageWindow.messages(['ツバサ', '「これより操縦訓練を開始する']);
+      await waitUntilWindowPush(props);
+      props.view.dom.messageWindow.messages(['ツバサ', '「姿勢を正して、礼!!」']);
+      await waitUntilWindowPush(props);
+
+      props.view.dom.messageWindow.position('Right');
+      props.view.dom.messageWindow.face('Shinya');
+      props.view.dom.messageWindow.messages(['シンヤ', '「よろしくお願いします」']);
+      await waitUntilWindowPush(props);
+
+      props.view.dom.messageWindow.position('Left');
+      props.view.dom.messageWindow.face('Tsubasa');
+      props.view.dom.messageWindow.messages(['ツバサ', '「いい返事だな、では早速はじめるぞ']);
+      await waitUntilWindowPush(props);
+
+      props.view.dom.messageWindow.visible(false);
+    };
+
+
+    this.stateHistory = [...this.stateHistory, ...props.stateHistory];
+    const turn = turnCount(this.stateHistory)
+    if (turn === 1) {
+      await oneTurn();
     }
   }
 
