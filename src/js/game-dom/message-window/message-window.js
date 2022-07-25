@@ -92,6 +92,8 @@ export class MessageWindow {
     this.#messages = messages;
     this.#faceGraphic = new FaceGraphic(resources);
     replaceDOM(faceGraphic, this.#faceGraphic.getRootHTMLElement());
+    this.#faceGraphic.face('Tsubasa');
+    this.#faceGraphic.visible(true);
   }
 
   /**

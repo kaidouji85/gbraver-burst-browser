@@ -2,33 +2,103 @@
 import type {Resources} from "../../resource";
 import {PathIds} from "../../resource/path";
 
+/** ルートHTML要素class属性 */
 const ROOT_CLASS = 'face-graphic';
 
-/** 顔画像タイプ */
-export type FaceType = 'Shinya' | 'None';
+/** 顔画像非表示時のルートHTML要素class属性 */
+const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
 
+/** 顔画像タイプ */
+export type FaceType = 'Shinya' | 'Tsubasa';
+
+/** 顔画像設定 */
+type Config = {
+  /** 顔画像タイプ */
+  type: FaceType,
+  /**
+   * 顔画像パス
+   * @param resources リソース管理オブジェクト
+   * @return 顔画像パス
+   */
+  src: (resources: Resources) => string,
+  /** class属性 */
+  className: string,
+  /** 非表示時のclass属性 */
+  invisibleClassName: string,
+};
+
+/** 顔画像設定 */
+const configs: Config[] = [
+  {
+    type: 'Shinya',
+    src: resources => resources.paths.find(v => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ?? '',
+    className: `${ROOT_CLASS}__shinya`,
+    invisibleClassName: `${ROOT_CLASS}__shinya--invisible`,
+  },
+  {
+    type: 'Tsubasa',
+    src: resources => resources.paths.find(v => v.id === PathIds.TSUBASA_SKILL_CUTIN)?.path ?? '',
+    className: `${ROOT_CLASS}__tsubasa`,
+    invisibleClassName: `${ROOT_CLASS}__tsubasa--invisible`,
+  },
+];
+
+/** 顔画像 */
 export class FaceGraphic {
   #root: HTMLElement;
-  #shinya: HTMLImageElement;
+  #images: HTMLImageElement[];
 
+  /**
+   * コンストラクタ
+   *
+   * @param resources リソース管理オブジェクト
+   */
   constructor(resources: Resources) {
     this.#root = document.createElement('div');
-    this.#root.className = ROOT_CLASS;
+    this.#root.className = ROOT_CLASS_INVISIBLE;
 
-    this.#shinya = document.createElement('img');
-    this.#shinya.src = resources.paths.find(v => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ?? '';
-    this.#shinya.className = `${ROOT_CLASS}__shinya`;
-
-    this.#getFaceGraphics().forEach(img => {
+    this.#images = configs.map(config => {
+      const img = document.createElement('img');
+      img.className = config.invisibleClassName;
+      img.src = config.src(resources);
+      img.dataset.facetype = config.type;
+      return img;
+    });
+    this.#images.forEach(img => {
       this.#root.appendChild(img);
     });
   }
 
+  /**
+   * ルートHTML要素を取得する
+   *
+   * @return 取得結果
+   */
   getRootHTMLElement(): HTMLElement {
     return this.#root;
   }
 
-  #getFaceGraphics(): HTMLImageElement[] {
-    return [this.#shinya];
+  /**
+   * 表示、非表示を設定する
+   *
+   * @param isVisible 表示フラグ、trueで表示する
+   */
+  visible(isVisible: boolean): void {
+    this.#root.className = isVisible ? ROOT_CLASS : ROOT_CLASS_INVISIBLE;
+  }
+
+  /**
+   * 顔画像を変更する
+   *
+   * @param faceType 変更する顔画像
+   */
+  face(faceType: FaceType): void {
+    this.#images.forEach(img => {
+      const config = configs.find(v => v.type === img.dataset.facetype);
+      if (!config) {
+        return;
+      }
+      img.className = faceType === img.dataset.facetype ? config.className : config.invisibleClassName;
+    })
   }
 }
