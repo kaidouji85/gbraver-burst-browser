@@ -8,7 +8,7 @@ import type {
   LastState,
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
-import {oneBatteryNeoLandozerNPC} from "../npc/one-battery";
+import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
 import {playerUuid} from "../uuid/player";
 import {attentionBatterySelector} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
@@ -35,7 +35,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
     const pilot = Pilots.find(v => v.id === PilotIds.SHINYA)  ?? Pilots[0];
     this.player = {playerId: playerUuid(), armdozer, pilot};
-    this.npc = oneBatteryNeoLandozerNPC();
+    this.npc = oneBatteryWeakWingDozerNPC();
   }
 
   /** @override */
