@@ -27,7 +27,7 @@ type Config = {
   invisibleClassName: string,
 };
 
-/** 顔画像設定 */
+/** 顔画像設定をあつめたもの */
 const configs: Config[] = [
   {
     type: 'Shinya',
