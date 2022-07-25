@@ -12,13 +12,13 @@
 
 .face-graphic__shinya {
   --icon-size: calc(var(--responsive-font-size) * 8);
-  transform: translate(-25%, -50%);
+  transform: translate(-25%, -40%);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__tsubasa {
-  --icon-size: calc(var(--responsive-font-size) * 8);
+  --icon-size: calc(var(--responsive-font-size) * 9.5);
   transform: translate(-25%, -50%);
   width: var(--icon-size);
   height: var(--icon-size);

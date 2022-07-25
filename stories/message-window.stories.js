@@ -59,3 +59,23 @@ export const right: DOMStubStory = domStub(resources => {
   dom.messages(['右側表示です']);
   return dom.getRootHTMLElement();
 });
+
+export const shinya: DOMStubStory = domStub(resources => {
+  const dom = new MessageWindow(resources);
+  dom.position('Right');
+  dom.visible(true);
+  dom.face('Shinya');
+  dom.faceVisible(true);
+  dom.messages(['シンヤ', '「力を貸してくれ、シンブンレイバー」']);
+  return dom.getRootHTMLElement();
+});
+
+export const tsubasa: DOMStubStory = domStub(resources => {
+  const dom = new MessageWindow(resources);
+  dom.position('Right');
+  dom.visible(true);
+  dom.face('Tsubasa');
+  dom.faceVisible(true);
+  dom.messages(['ツバサ', '「君の動きは、完全に見切った」']);
+  return dom.getRootHTMLElement();
+});
