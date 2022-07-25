@@ -79,3 +79,13 @@ export const tsubasa: DOMStubStory = domStub(resources => {
   dom.messages(['ツバサ', '「君の動きは、完全に見切った」']);
   return dom.getRootHTMLElement();
 });
+
+export const gai: DOMStubStory = domStub(resources => {
+  const dom = new MessageWindow(resources);
+  dom.position('Right');
+  dom.visible(true);
+  dom.face('Gai');
+  dom.faceVisible(true);
+  dom.messages(['ガイ', '「シンヤ、お前の力はその程度か」']);
+  return dom.getRootHTMLElement();
+});

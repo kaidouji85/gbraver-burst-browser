@@ -17,14 +17,22 @@
   height: var(--icon-size);
 }
 
+.face-graphic__gai {
+  --icon-size: calc(var(--responsive-font-size) * 8.5);
+  transform: translate(-25%, -40%);
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
 .face-graphic__tsubasa {
   --icon-size: calc(var(--responsive-font-size) * 9.5);
-  transform: translate(-25%, -50%);
+  transform: translate(-25%, -40%);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__shinya--invisible,
+.face-graphic__gai--invisible,
 .face-graphic__tsubasa--invisible {
   display: none;
 }
