@@ -40,7 +40,7 @@ function toRootClass(position: Position): string {
 }
 
 /** data-idを集めたもの */
-type DataIDs = {messages: string, faceGraphic: string};
+type DataIDs = {messages: string, leftFaceGraphic: string, rightFaceGraphic: string};
 
 /**
  * ルートHTML要素のinnerHTML
@@ -50,13 +50,14 @@ type DataIDs = {messages: string, faceGraphic: string};
  */
 function rootInnerHTML(ids: DataIDs): string {
   return `
-    <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.faceGraphic}"></div>
+    <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.leftFaceGraphic}"></div>
     <div class="${ROOT_CLASS}__messages" data-id="${ids.messages}"></div>
+    <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.rightFaceGraphic}"></div>
   `;
 }
 
 /** ルート要素の子孫要素 */
-type Elements = {messages: HTMLElement, faceGraphic: HTMLElement};
+type Elements = {messages: HTMLElement, leftFaceGraphic: HTMLElement, rightFaceGraphic: HTMLElement};
 
 /**
  * ルート要素から子孫要素を抽出する
@@ -67,15 +68,17 @@ type Elements = {messages: HTMLElement, faceGraphic: HTMLElement};
  */
 export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const messages = root.querySelector(`[data-id="${ids.messages}"]`) ?? document.createElement('div');
-  const faceGraphic = root.querySelector(`[data-id="${ids.faceGraphic}"]`) ?? document.createElement('div');
-  return {messages, faceGraphic};
+  const leftFaceGraphic = root.querySelector(`[data-id="${ids.leftFaceGraphic}"]`) ?? document.createElement('div');
+  const rightFaceGraphic = root.querySelector(`[data-id="${ids.rightFaceGraphic}"]`) ?? document.createElement('div');
+  return {messages, leftFaceGraphic, rightFaceGraphic};
 }
 
 /** メッセージウインドウ */
 export class MessageWindow {
   #root: HTMLElement;
   #messages: HTMLElement;
-  #faceGraphic: FaceGraphic;
+  #leftFaceGraphic: FaceGraphic;
+  #rightFaceGraphic: FaceGraphic;
   #position: Position;
 
   /**
@@ -84,15 +87,17 @@ export class MessageWindow {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const ids = {messages: domUuid(), faceGraphic: domUuid()};
+    const ids = {messages: domUuid(), leftFaceGraphic: domUuid(), rightFaceGraphic: domUuid()};
     this.#root = document.createElement('div');
     this.#position = 'Center';
     this.#root.className = toRootClass(this.#position);
     this.#root.innerHTML = rootInnerHTML(ids);
-    const {messages, faceGraphic} = extractElements(this.#root, ids);
+    const {messages, leftFaceGraphic, rightFaceGraphic} = extractElements(this.#root, ids);
     this.#messages = messages;
-    this.#faceGraphic = new FaceGraphic(resources);
-    replaceDOM(faceGraphic, this.#faceGraphic.getRootHTMLElement());
+    this.#leftFaceGraphic = new FaceGraphic(resources);
+    replaceDOM(leftFaceGraphic, this.#leftFaceGraphic.getRootHTMLElement());
+    this.#rightFaceGraphic = new FaceGraphic(resources);
+    replaceDOM(rightFaceGraphic, this.#rightFaceGraphic.getRootHTMLElement());
   }
 
   /**
@@ -150,7 +155,7 @@ export class MessageWindow {
    * @param faceOrientation 顔画像の向き
    */
   face(faceType: FaceType, faceOrientation: FaceOrientation = 'Left'): void {
-    this.#faceGraphic.face(faceType, faceOrientation);
+    this.#leftFaceGraphic.face(faceType, faceOrientation);
   }
 
   /**
@@ -159,6 +164,7 @@ export class MessageWindow {
    * @param isVisible 顔画像表示フラグ、trueで表示する
    */
   faceVisible(isVisible: boolean): void {
-    this.#faceGraphic.visible(isVisible);
+    this.#leftFaceGraphic.visible(isVisible);
+    //this.#rightFaceGraphic.visible(isVisible);
   }
 }
