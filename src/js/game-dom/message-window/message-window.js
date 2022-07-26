@@ -20,6 +20,9 @@ const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--right`;
 /** メッセージウインドウ位置 */
 type Position = 'Center' | 'Right' | 'Left';
 
+/** 顔画像表示位置 */
+type FacePosition = 'Right' | 'Left';
+
 /**
  * メッセージウインドウ位置に対応したroot要素class属性を取得する
  * 
@@ -80,6 +83,7 @@ export class MessageWindow {
   #leftFaceGraphic: FaceGraphic;
   #rightFaceGraphic: FaceGraphic;
   #position: Position;
+  #facePosition: FacePosition;
 
   /**
    * コンストラクタ
@@ -90,6 +94,7 @@ export class MessageWindow {
     const ids = {messages: domUuid(), leftFaceGraphic: domUuid(), rightFaceGraphic: domUuid()};
     this.#root = document.createElement('div');
     this.#position = 'Center';
+    this.#facePosition = 'Left';
     this.#root.className = toRootClass(this.#position);
     this.#root.innerHTML = rootInnerHTML(ids);
     const {messages, leftFaceGraphic, rightFaceGraphic} = extractElements(this.#root, ids);
@@ -153,9 +158,14 @@ export class MessageWindow {
    *
    * @param faceType 変更する顔画像
    * @param faceOrientation 顔画像の向き
+   * @param facePosition 顔画像表示位置
    */
-  face(faceType: FaceType, faceOrientation: FaceOrientation = 'Left'): void {
+  face(faceType: FaceType, faceOrientation: FaceOrientation = 'Left', facePosition: FacePosition = 'Left'): void {
+    this.#facePosition = facePosition;
     this.#leftFaceGraphic.face(faceType, faceOrientation);
+    this.#leftFaceGraphic.visible(facePosition === 'Left');
+    this.#rightFaceGraphic.face(faceType, faceOrientation);
+    this.#rightFaceGraphic.visible(facePosition === 'Right');
   }
 
   /**
@@ -164,7 +174,7 @@ export class MessageWindow {
    * @param isVisible 顔画像表示フラグ、trueで表示する
    */
   faceVisible(isVisible: boolean): void {
-    this.#leftFaceGraphic.visible(isVisible);
-    //this.#rightFaceGraphic.visible(isVisible);
+    this.#leftFaceGraphic.visible(this.#facePosition === 'Left' ? isVisible : false);
+    this.#rightFaceGraphic.visible(this.#facePosition === 'Right' ? isVisible : false);
   }
 }

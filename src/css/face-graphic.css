@@ -12,62 +12,62 @@
 
 .face-graphic__shinya, .face-graphic__shinya--right {
   --icon-size: calc(var(--responsive-font-size) * 8);
-  --translate: translate(-25%, -40%);
+  --translateY: translateY(-40%);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__shinya {
-  transform: var(--translate)
+  transform: translateX(0%) var(--translateY);
 }
 
 .face-graphic__shinya--right {
-  transform: var(--translate) scaleX(-1);
+  transform: translateX(-25%) var(--translateY) scaleX(-1);
 }
 
 .face-graphic__gai, .face-graphic__gai--right {
   --icon-size: calc(var(--responsive-font-size) * 8.5);
-  --translate: translate(-25%, -40%);
+  --translateY: translateY(-40%);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__gai {
-  transform: var(--translate);
+  transform: translateX(0%) var(--translateY);
 }
 
 .face-graphic__gai--right {
-  transform: var(--translate) scaleX(-1);
+  transform: translateX(-25%) var(--translateY) scaleX(-1);
 }
 
 .face-graphic__raito, .face-graphic__raito--right {
   --icon-size: calc(var(--responsive-font-size) * 8.5);
-  --translate: translate(-25%, -40%);
+  --translateY: translateY(-40%);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__raito {
-  transform: var(--translate)
+  transform: translateX(0%) var(--translateY)
 }
 
 .face-graphic__raito--right {
-  transform: var(--translate) scaleX(-1);
+  transform: translateX(-25%) var(--translateY) scaleX(-1);
 }
 
 .face-graphic__tsubasa, .face-graphic__tsubasa--right {
   --icon-size: calc(var(--responsive-font-size) * 9.5);
-  --translate: translate(-25%, -40%);
+  --translateY: translateY(-40%);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__tsubasa {
-  transform: var(--translate)
+  transform: translateX(0%) var(--translateY)
 }
 
 .face-graphic__tsubasa--right {
-  transform: var(--translate) scaleX(-1);
+  transform: translateX(-25%) var(--translateY) scaleX(-1);
 }
 
 .face-graphic__shinya--invisible,
