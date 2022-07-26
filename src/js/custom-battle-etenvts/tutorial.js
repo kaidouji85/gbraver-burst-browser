@@ -81,6 +81,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       attentionBatterySelector(props.view);
       props.view.dom.messageWindow.position('Left');
       props.view.dom.messageWindow.visible(true);
+      props.view.dom.messageWindow.faceVisible(false);
       props.view.dom.messageWindow.messages(['好きなバッテリーを選択してね']);
       await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     };

@@ -50,6 +50,6 @@ export function oneBatteryShinBraverNPC(): NPC {
 export function oneBatteryWeakWingDozerNPC(): NPC {
   const origin = ArmDozers.find(v => v.id === ArmDozerIdList.WING_DOZER) ?? ArmDozers[0];
   const armdozer = {...origin, power: 1800, speed: 1500};
-  const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
+  const pilot = Pilots.find(v => v.id === PilotIds.TSUBASA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
 }
