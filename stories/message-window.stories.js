@@ -70,11 +70,31 @@ export const shinya: DOMStubStory = domStub(resources => {
   return dom.getRootHTMLElement();
 });
 
+export const shinyaRight: DOMStubStory = domStub(resources => {
+  const dom = new MessageWindow(resources);
+  dom.position('Left');
+  dom.visible(true);
+  dom.face('Shinya', 'Right');
+  dom.faceVisible(true);
+  dom.messages(['シンヤ', '「力を貸してくれ、シンブンレイバー」']);
+  return dom.getRootHTMLElement();
+});
+
 export const gai: DOMStubStory = domStub(resources => {
   const dom = new MessageWindow(resources);
   dom.position('Right');
   dom.visible(true);
   dom.face('Gai');
+  dom.faceVisible(true);
+  dom.messages(['ガイ', '「シンヤ、お前の力はその程度か」']);
+  return dom.getRootHTMLElement();
+});
+
+export const gaiRight: DOMStubStory = domStub(resources => {
+  const dom = new MessageWindow(resources);
+  dom.position('Left');
+  dom.visible(true);
+  dom.face('Gai', 'Right');
   dom.faceVisible(true);
   dom.messages(['ガイ', '「シンヤ、お前の力はその程度か」']);
   return dom.getRootHTMLElement();
@@ -90,11 +110,31 @@ export const raito: DOMStubStory = domStub(resources => {
   return dom.getRootHTMLElement();
 });
 
+export const raitoRight: DOMStubStory = domStub(resources => {
+  const dom = new MessageWindow(resources);
+  dom.position('Left');
+  dom.visible(true);
+  dom.face('Raito', 'Right');
+  dom.faceVisible(true);
+  dom.messages(['ライト', '「難波の底力、見せたるでぇ」']);
+  return dom.getRootHTMLElement();
+});
+
 export const tsubasa: DOMStubStory = domStub(resources => {
   const dom = new MessageWindow(resources);
   dom.position('Right');
   dom.visible(true);
   dom.face('Tsubasa');
+  dom.faceVisible(true);
+  dom.messages(['ツバサ', '「君の動きは、完全に見切った」']);
+  return dom.getRootHTMLElement();
+});
+
+export const tsubasaRight: DOMStubStory = domStub(resources => {
+  const dom = new MessageWindow(resources);
+  dom.position('Left');
+  dom.visible(true);
+  dom.face('Tsubasa', 'Right');
   dom.faceVisible(true);
   dom.messages(['ツバサ', '「君の動きは、完全に見切った」']);
   return dom.getRootHTMLElement();

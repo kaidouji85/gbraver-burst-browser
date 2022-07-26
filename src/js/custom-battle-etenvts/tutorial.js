@@ -48,7 +48,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.messageWindow.faceVisible(true);
 
       props.view.dom.messageWindow.position('Left');
-      props.view.dom.messageWindow.face('Tsubasa');
+      props.view.dom.messageWindow.face('Tsubasa', 'Right');
       props.view.dom.messageWindow.messages(['ツバサ', '「これより操縦訓練を開始する']);
       await waitUntilWindowPush(props);
       props.view.dom.messageWindow.messages(['ツバサ', '「姿勢を正して、礼!!」']);

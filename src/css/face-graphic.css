@@ -10,32 +10,60 @@
   position: fixed;
 }
 
-.face-graphic__shinya {
+.face-graphic__shinya, .face-graphic__shinya--right {
   --icon-size: calc(var(--responsive-font-size) * 8);
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.face-graphic__shinya {
   transform: translate(-25%, -40%);
+}
+
+.face-graphic__shinya--right {
+  transform: translate(-25%, -40%) scaleX(-1);
+}
+
+.face-graphic__gai, .face-graphic__gai--right {
+  --icon-size: calc(var(--responsive-font-size) * 8.5);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__gai {
-  --icon-size: calc(var(--responsive-font-size) * 8.5);
   transform: translate(-25%, -40%);
+}
+
+.face-graphic__gai--right {
+  transform: translate(-25%, -40%) scaleX(-1);
+}
+
+.face-graphic__raito, .face-graphic__raito--right {
+  --icon-size: calc(var(--responsive-font-size) * 8.5);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__raito {
-  --icon-size: calc(var(--responsive-font-size) * 8.5);
   transform: translate(-25%, -40%);
+}
+
+.face-graphic__raito--right {
+  transform: translate(-25%, -40%) scaleX(-1);
+}
+
+.face-graphic__tsubasa, .face-graphic__tsubasa--right {
+  --icon-size: calc(var(--responsive-font-size) * 9.5);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
 .face-graphic__tsubasa {
-  --icon-size: calc(var(--responsive-font-size) * 9.5);
   transform: translate(-25%, -40%);
-  width: var(--icon-size);
-  height: var(--icon-size);
+}
+
+.face-graphic__tsubasa--right {
+  transform: translate(-25%, -40%) scaleX(-1);
 }
 
 .face-graphic__shinya--invisible,

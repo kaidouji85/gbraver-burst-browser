@@ -2,7 +2,7 @@
 import {replaceDOM} from "../../dom/replace-dom";
 import type {Resources} from "../../resource";
 import {domUuid} from "../../uuid/dom-uuid";
-import type {FaceType} from "./face-graphic";
+import type {FaceOrientation, FaceType} from "./face-graphic";
 import {FaceGraphic} from "./face-graphic";
 
 /** ルートHTML要素のclass属性 */
@@ -147,9 +147,10 @@ export class MessageWindow {
    * 顔画像を変更する
    *
    * @param faceType 変更する顔画像
+   * @param faceOrientation 顔画像の向き
    */
-  face(faceType: FaceType): void {
-    this.#faceGraphic.face(faceType);
+  face(faceType: FaceType, faceOrientation: FaceOrientation = 'Left'): void {
+    this.#faceGraphic.face(faceType, faceOrientation);
   }
 
   /**
