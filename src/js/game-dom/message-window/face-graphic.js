@@ -11,6 +11,9 @@ const ROOT_CLASS_INVISIBLE = `${ROOT_CLASS}--invisible`;
 /** 顔画像タイプ */
 export type FaceType = 'Shinya' | 'Gai' | 'Raito' | 'Tsubasa';
 
+/** 顔画像の向き */
+export type FaceOrientation = 'Left' | 'Right';
+
 /** 顔画像設定 */
 type Config = {
   /** 顔画像タイプ */
@@ -23,6 +26,8 @@ type Config = {
   src: (resources: Resources) => string,
   /** class属性 */
   className: string,
+  /** 右向き時のclass属性 */
+  rightwardClassName: string,
   /** 非表示時のclass属性 */
   invisibleClassName: string,
 };
@@ -33,24 +38,28 @@ const configs: Config[] = [
     type: 'Shinya',
     src: resources => resources.paths.find(v => v.id === PathIds.SHINYA_SKILL_CUTIN)?.path ?? '',
     className: `${ROOT_CLASS}__shinya`,
+    rightwardClassName: `${ROOT_CLASS}__shinya--right`,
     invisibleClassName: `${ROOT_CLASS}__shinya--invisible`,
   },
   {
     type: 'Gai',
     src: resources => resources.paths.find(v => v.id === PathIds.GAI_SKILL_CUTIN)?.path ?? '',
     className: `${ROOT_CLASS}__gai`,
+    rightwardClassName: `${ROOT_CLASS}__gai--right`,
     invisibleClassName: `${ROOT_CLASS}__gai--invisible`,
   },
   {
     type: 'Raito',
     src: resources => resources.paths.find(v => v.id === PathIds.RAITO_SKILL_CUTIN)?.path ?? '',
     className: `${ROOT_CLASS}__raito`,
+    rightwardClassName: `${ROOT_CLASS}__raito--right`,
     invisibleClassName: `${ROOT_CLASS}__raito--invisible`,
   },
   {
     type: 'Tsubasa',
     src: resources => resources.paths.find(v => v.id === PathIds.TSUBASA_SKILL_CUTIN)?.path ?? '',
     className: `${ROOT_CLASS}__tsubasa`,
+    rightwardClassName: `${ROOT_CLASS}__tsubasa--right`,
     invisibleClassName: `${ROOT_CLASS}__tsubasa--invisible`,
   },
 ];
@@ -103,14 +112,23 @@ export class FaceGraphic {
    * 顔画像を変更する
    *
    * @param faceType 変更する顔画像
+   * @param faceOrientation 顔画像の方向
    */
-  face(faceType: FaceType): void {
+  face(faceType: FaceType, faceOrientation: FaceOrientation): void {
     this.#images.forEach(img => {
       const config = configs.find(v => v.type === img.dataset.facetype);
       if (!config) {
         return;
       }
-      img.className = faceType === img.dataset.facetype ? config.className : config.invisibleClassName;
-    })
+      img.className = (() => {
+        if (faceType === img.dataset.facetype && faceOrientation === 'Left') {
+          return config.className;
+        } else if (faceType === img.dataset.facetype && faceOrientation === 'Right') {
+          return config.rightwardClassName;
+        } else {
+          return config.invisibleClassName;
+        }
+      })();
+    });
   }
 }

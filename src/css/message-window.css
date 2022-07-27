@@ -36,6 +36,10 @@
     right: max(3vw, var(--safe-area-right));
   }
 
+  .message-window__messages {
+    flex: 1 1;
+  }
+
   .message-window__paragraph {
     font-size: var(--responsive-font-size);
   }
