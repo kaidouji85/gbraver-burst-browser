@@ -19,7 +19,7 @@
     border-radius: var(--dialog-border-radius);
     padding: calc(var(--responsive-font-size) * 1);
     width: calc(49vw - var(--margin-x));
-    min-height: calc(var(--responsive-font-size) * 6);
+    min-height: calc(var(--responsive-font-size) * 7);
     filter: var(--brightness);
   }
 
