@@ -64,6 +64,14 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.leftMessageWindow.face('Tsubasa');
       props.view.dom.leftMessageWindow.messages(['ツバサ', '「いい返事だな、では早速はじめるぞ']);
       await waitUntilWindowPush(props);
+      props.view.dom.leftMessageWindow.messages(['ツバサ', '「試合の基本は、攻撃側、防御側でバッテリーを出し合うことだ']);
+      await waitUntilWindowPush(props);
+      props.view.dom.leftMessageWindow.messages(['ツバサ', '「大きいバッテリーを出した側の行動が成功するのだが、']);
+      await waitUntilWindowPush(props);
+      props.view.dom.leftMessageWindow.messages(['ツバサ', '「これは実際にやってみた方が早いな']);
+      await waitUntilWindowPush(props);
+      props.view.dom.leftMessageWindow.messages(['ツバサ', '「シンヤ、私が防御に回るから、好きに攻撃してみろ」']);
+      await waitUntilWindowPush(props);
     };
 
     this.stateHistory = [...this.stateHistory, ...props.stateHistory];
@@ -80,7 +88,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.visible(false);
       props.view.dom.leftMessageWindow.visible(true);
       props.view.dom.leftMessageWindow.faceVisible(false);
-      props.view.dom.leftMessageWindow.messages(['好きなバッテリーを選択してね']);
+      props.view.dom.leftMessageWindow.messages(['好きなバッテリーで攻撃してみよう', '相手よりも大きい数字を出せば攻撃が当たるぞ']);
       await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     };
 
