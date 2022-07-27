@@ -52,7 +52,8 @@
 @media (orientation: portrait) {
   .message-window,
   .message-window--left,
-  .message-window--right {
+  .message-window--right,
+  .message-window--invisible {
     display: none;
   }
 }
