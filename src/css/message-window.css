@@ -15,7 +15,7 @@
     border: var(--dialog-border);
     border-radius: var(--dialog-border-radius);
     padding: calc(var(--responsive-font-size) * 1);
-    width: 50vw;
+    width: 45vw;
     min-height: calc(var(--responsive-font-size) * 6);
   }
 
