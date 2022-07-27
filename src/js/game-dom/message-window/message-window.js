@@ -178,6 +178,16 @@ export class MessageWindow {
   }
 
   /**
+   * ウインドウを暗くするか否かを設定する
+   *
+   * @param isDarken trueでウインドウが暗くなるフラグ
+   */
+  darken(isDarken: boolean): void {
+    const value = isDarken ? 0.4 : 1;
+    this.#root.style.setProperty('--brightness', `brightness(${value})`);
+  }
+
+  /**
    * 表示位置に応じた顔画像を取得する
    *
    * @return 取得結果
