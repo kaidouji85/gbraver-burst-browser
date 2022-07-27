@@ -1,4 +1,5 @@
 .face-graphic {
+  position: relative;
   width: calc(var(--responsive-font-size) * 6);
 }
 
@@ -7,7 +8,7 @@
 }
 
 .face-graphic img {
-  position: fixed;
+  position: absolute;
   bottom: 0;
 }
 
