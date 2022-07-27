@@ -66,7 +66,6 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await waitUntilWindowPush(props);
     };
 
-
     this.stateHistory = [...this.stateHistory, ...props.stateHistory];
     const turn = turnCount(this.stateHistory)
     if (turn === 1) {
