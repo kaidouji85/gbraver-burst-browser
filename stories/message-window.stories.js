@@ -129,3 +129,24 @@ export const tsubasaRight: DOMStubStory = domStub(resources => {
   dom.messages(['ツバサ', '「君の動きは、完全に見切った」']);
   return dom.getRootHTMLElement();
 });
+
+export const doubleMessageWindows: DOMStubStory = domStub(resources => {
+  const root = document.createElement('div');
+  
+  const rightMessageWindow = new MessageWindow({resources, position: 'Right', faceOrientation: 'Left', facePosition: 'Right'});
+  rightMessageWindow.visible(true);
+  rightMessageWindow.faceVisible(true);
+  rightMessageWindow.face('Shinya');
+  rightMessageWindow.messages(['シンヤ', '「よろしくお願いします」']);
+  root.appendChild(rightMessageWindow.getRootHTMLElement());
+
+  const leftMessageWindow = new MessageWindow({resources, position: 'Left', faceOrientation: 'Right', facePosition: 'Left'});
+  leftMessageWindow.visible(true);
+  leftMessageWindow.faceVisible(true);
+  leftMessageWindow.face('Tsubasa');
+  leftMessageWindow.darken();
+  leftMessageWindow.messages(['ツバサ', '「姿勢を正して、礼!!」']);
+  root.appendChild(leftMessageWindow.getRootHTMLElement());
+
+  return root;
+})

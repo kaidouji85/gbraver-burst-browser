@@ -51,21 +51,20 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await waitUntilWindowPush(props);
       props.view.dom.leftMessageWindow.messages(['ツバサ', '「姿勢を正して、礼!!」']);
       await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.visible(false);
+      props.view.dom.leftMessageWindow.darken();
 
       props.view.dom.rightMessageWindow.visible(true);
       props.view.dom.rightMessageWindow.faceVisible(true);
       props.view.dom.rightMessageWindow.face('Shinya');
       props.view.dom.rightMessageWindow.messages(['シンヤ', '「よろしくお願いします」']);
       await waitUntilWindowPush(props);
-      props.view.dom.rightMessageWindow.visible(false);
+      props.view.dom.rightMessageWindow.darken();
 
-      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.lighten();
       props.view.dom.leftMessageWindow.face('Tsubasa');
       props.view.dom.leftMessageWindow.messages(['ツバサ', '「いい返事だな、では早速はじめるぞ']);
       await waitUntilWindowPush(props);
     };
-
 
     this.stateHistory = [...this.stateHistory, ...props.stateHistory];
     const turn = turnCount(this.stateHistory)
@@ -78,6 +77,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   async onLastState(props: LastState): Promise<void> {
     const pleaseBatterySelect = async () => {
       attentionBatterySelector(props.view);
+      props.view.dom.rightMessageWindow.visible(false);
       props.view.dom.leftMessageWindow.visible(true);
       props.view.dom.leftMessageWindow.faceVisible(false);
       props.view.dom.leftMessageWindow.messages(['好きなバッテリーを選択してね']);
