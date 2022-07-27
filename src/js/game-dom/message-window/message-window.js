@@ -76,6 +76,18 @@ export function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {messages, leftFaceGraphic, rightFaceGraphic};
 }
 
+/** コンストラクタのパラメータ */
+type Params = {
+  /** リソース管理オブジェクト */
+  resources: Resources,
+  /** ウインドウ位置 */
+  position?: Position,
+  /** 顔画像位置 */
+  facePosition?: FacePosition,
+  /** 顔画像の向き */
+  faceOrientation?: FaceOrientation,
+};
+
 /** メッセージウインドウ */
 export class MessageWindow {
   #root: HTMLElement;
@@ -83,25 +95,27 @@ export class MessageWindow {
   #leftFaceGraphic: FaceGraphic;
   #rightFaceGraphic: FaceGraphic;
   #position: Position;
+  #faceOrientation: FaceOrientation;
   #facePosition: FacePosition;
 
   /**
    * コンストラクタ
    *
-   * @param resources リソース管理オブジェクト
+   * @param params パラメータ
    */
-  constructor(resources: Resources) {
+  constructor(params: Params) {
     const ids = {messages: domUuid(), leftFaceGraphic: domUuid(), rightFaceGraphic: domUuid()};
     this.#root = document.createElement('div');
-    this.#position = 'Center';
-    this.#facePosition = 'Left';
+    this.#position = params?.position ?? 'Center';
+    this.#facePosition = params?.facePosition ?? 'Right';
+    this.#faceOrientation = params?.faceOrientation ?? 'Left';
     this.#root.className = toRootClass(this.#position);
     this.#root.innerHTML = rootInnerHTML(ids);
     const {messages, leftFaceGraphic, rightFaceGraphic} = extractElements(this.#root, ids);
     this.#messages = messages;
-    this.#leftFaceGraphic = new FaceGraphic(resources);
+    this.#leftFaceGraphic = new FaceGraphic(params.resources);
     replaceDOM(leftFaceGraphic, this.#leftFaceGraphic.getRootHTMLElement());
-    this.#rightFaceGraphic = new FaceGraphic(resources);
+    this.#rightFaceGraphic = new FaceGraphic(params.resources);
     replaceDOM(rightFaceGraphic, this.#rightFaceGraphic.getRootHTMLElement());
   }
 
@@ -121,16 +135,6 @@ export class MessageWindow {
    */
   visible(isVisible: boolean): void {
     this.#root.className = isVisible ? toRootClass(this.#position) : ROOT_CLASS_INVISIBLE;
-  }
-
-  /**
-   * 表示位置を設定する
-   *
-   * @param value 表示位置
-   */
-  position(value: Position): void {
-    this.#position = value;
-    this.#root.className = toRootClass(value);
   }
 
   /**
@@ -157,15 +161,10 @@ export class MessageWindow {
    * 顔画像を変更する
    *
    * @param faceType 変更する顔画像
-   * @param faceOrientation 顔画像の向き
-   * @param facePosition 顔画像表示位置
    */
-  face(faceType: FaceType, faceOrientation: FaceOrientation = 'Left', facePosition: FacePosition = 'Left'): void {
-    this.#facePosition = facePosition;
-    this.#leftFaceGraphic.face(faceType, faceOrientation);
-    this.#leftFaceGraphic.visible(facePosition === 'Left');
-    this.#rightFaceGraphic.face(faceType, faceOrientation);
-    this.#rightFaceGraphic.visible(facePosition === 'Right');
+  face(faceType: FaceType): void {
+    const target = this.#getTargetFaceGraphic();
+    target.face(faceType, this.#faceOrientation);
   }
 
   /**
@@ -174,7 +173,16 @@ export class MessageWindow {
    * @param isVisible 顔画像表示フラグ、trueで表示する
    */
   faceVisible(isVisible: boolean): void {
-    this.#leftFaceGraphic.visible(this.#facePosition === 'Left' ? isVisible : false);
-    this.#rightFaceGraphic.visible(this.#facePosition === 'Right' ? isVisible : false);
+    const target = this.#getTargetFaceGraphic();
+    target.visible(isVisible);
+  }
+
+  /**
+   * 表示位置に応じた顔画像を取得する
+   *
+   * @return 取得結果
+   */
+  #getTargetFaceGraphic(): FaceGraphic {
+    return this.#facePosition === 'Left' ? this.#leftFaceGraphic : this.#rightFaceGraphic;
   }
 }

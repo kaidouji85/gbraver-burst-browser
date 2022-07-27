@@ -47,19 +47,16 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.messageWindow.visible(true);
       props.view.dom.messageWindow.faceVisible(true);
 
-      props.view.dom.messageWindow.position('Left');
-      props.view.dom.messageWindow.face('Tsubasa', 'Right');
+      props.view.dom.messageWindow.face('Tsubasa');
       props.view.dom.messageWindow.messages(['ツバサ', '「これより操縦訓練を開始する']);
       await waitUntilWindowPush(props);
       props.view.dom.messageWindow.messages(['ツバサ', '「姿勢を正して、礼!!」']);
       await waitUntilWindowPush(props);
 
-      props.view.dom.messageWindow.position('Right');
       props.view.dom.messageWindow.face('Shinya');
       props.view.dom.messageWindow.messages(['シンヤ', '「よろしくお願いします」']);
       await waitUntilWindowPush(props);
 
-      props.view.dom.messageWindow.position('Left');
       props.view.dom.messageWindow.face('Tsubasa');
       props.view.dom.messageWindow.messages(['ツバサ', '「いい返事だな、では早速はじめるぞ']);
       await waitUntilWindowPush(props);
@@ -79,7 +76,6 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   async onLastState(props: LastState): Promise<void> {
     const pleaseBatterySelect = async () => {
       attentionBatterySelector(props.view);
-      props.view.dom.messageWindow.position('Left');
       props.view.dom.messageWindow.visible(true);
       props.view.dom.messageWindow.faceVisible(false);
       props.view.dom.messageWindow.messages(['好きなバッテリーを選択してね']);

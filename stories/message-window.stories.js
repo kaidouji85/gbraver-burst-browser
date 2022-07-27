@@ -8,7 +8,7 @@ export default {
 };
 
 export const threeLine: DOMStubStory = domStub(resources=> {
-  const dom = new MessageWindow(resources);
+  const dom = new MessageWindow({resources});
   dom.visible(true);
   dom.messages([
     'hello world',
@@ -19,7 +19,7 @@ export const threeLine: DOMStubStory = domStub(resources=> {
 });
 
 export const twoLine: DOMStubStory = domStub(resources=> {
-  const dom = new MessageWindow(resources);
+  const dom = new MessageWindow({resources});
   dom.visible(true);
   dom.messages([
     '2行表示します',
@@ -29,7 +29,7 @@ export const twoLine: DOMStubStory = domStub(resources=> {
 });
 
 export const oneLine: DOMStubStory = domStub(resources=> {
-  const dom = new MessageWindow(resources);
+  const dom = new MessageWindow({resources});
   dom.visible(true);
   dom.messages([
     '1行だけ表示',
@@ -38,103 +38,93 @@ export const oneLine: DOMStubStory = domStub(resources=> {
 });
 
 export const zeroLine: DOMStubStory = domStub(resources=> {
-  const dom = new MessageWindow(resources);
+  const dom = new MessageWindow({resources});
   dom.visible(true);
   dom.messages([]);
   return dom.getRootHTMLElement();
 });
 
 export const left: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Left');
+  const dom = new MessageWindow({resources, position: 'Left'});
   dom.visible(true);
   dom.messages(['左側表示です']);
   return dom.getRootHTMLElement();
 });
 
 export const right: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Right');
+  const dom = new MessageWindow({resources, position: 'Right'});
   dom.visible(true);
   dom.messages(['右側表示です']);
   return dom.getRootHTMLElement();
 });
 
 export const shinya: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Right');
+  const dom = new MessageWindow({resources, position: 'Right', faceOrientation: 'Left', facePosition: 'Right'});
   dom.visible(true);
-  dom.face('Shinya', 'Left', 'Right');
+  dom.face('Shinya');
   dom.faceVisible(true);
   dom.messages(['シンヤ', '「力を貸してくれ、シンブンレイバー」']);
   return dom.getRootHTMLElement();
 });
 
 export const shinyaRight: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Left');
+  const dom = new MessageWindow({resources, position: 'Left', faceOrientation: 'Right', facePosition: 'Left'});
   dom.visible(true);
-  dom.face('Shinya', 'Right', 'Left');
+  dom.face('Shinya');
   dom.faceVisible(true);
   dom.messages(['シンヤ', '「力を貸してくれ、シンブンレイバー」']);
   return dom.getRootHTMLElement();
 });
 
 export const gai: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Right');
+  const dom = new MessageWindow({resources, position: 'Right', faceOrientation: 'Left', facePosition: 'Right'});
   dom.visible(true);
-  dom.face('Gai', 'Left', 'Right');
+  dom.face('Gai');
   dom.faceVisible(true);
   dom.messages(['ガイ', '「シンヤ、お前の力はその程度か」']);
   return dom.getRootHTMLElement();
 });
 
 export const gaiRight: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Left');
+  const dom = new MessageWindow({resources, position: 'Left', faceOrientation: 'Right', facePosition: 'Left'});
   dom.visible(true);
-  dom.face('Gai', 'Right', 'Left');
+  dom.face('Gai');
   dom.faceVisible(true);
   dom.messages(['ガイ', '「シンヤ、お前の力はその程度か」']);
   return dom.getRootHTMLElement();
 });
 
 export const raito: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Right');
+  const dom = new MessageWindow({resources, position: 'Right', faceOrientation: 'Left', facePosition: 'Right'});
   dom.visible(true);
-  dom.face('Raito', 'Left', 'Right');
+  dom.face('Raito');
   dom.faceVisible(true);
   dom.messages(['ライト', '「難波の底力、見せたるでぇ」']);
   return dom.getRootHTMLElement();
 });
 
 export const raitoRight: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Left');
+  const dom = new MessageWindow({resources, position: 'Left', faceOrientation: 'Right', facePosition: 'Left'});
   dom.visible(true);
-  dom.face('Raito', 'Right');
+  dom.face('Raito');
   dom.faceVisible(true);
   dom.messages(['ライト', '「難波の底力、見せたるでぇ」']);
   return dom.getRootHTMLElement();
 });
 
 export const tsubasa: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Right');
+  const dom = new MessageWindow({resources, position: 'Right', faceOrientation: 'Left', facePosition: 'Right'});
   dom.visible(true);
-  dom.face('Tsubasa', 'Left', 'Right');
+  dom.face('Tsubasa');
   dom.faceVisible(true);
   dom.messages(['ツバサ', '「君の動きは、完全に見切った」']);
   return dom.getRootHTMLElement();
 });
 
 export const tsubasaRight: DOMStubStory = domStub(resources => {
-  const dom = new MessageWindow(resources);
-  dom.position('Left');
+  const dom = new MessageWindow({resources, position: 'Left', faceOrientation: 'Right', facePosition: 'Left'});
   dom.visible(true);
-  dom.face('Tsubasa', 'Right', 'Left');
+  dom.face('Tsubasa');
   dom.faceVisible(true);
   dom.messages(['ツバサ', '「君の動きは、完全に見切った」']);
   return dom.getRootHTMLElement();

@@ -12,7 +12,7 @@ export class DOMLayer {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this.messageWindow = new MessageWindow(resources);
+    this.messageWindow = new MessageWindow({resources, position: 'Right', facePosition: 'Right', faceOrientation: 'Left'});
     this.messageWindow.visible(false);
   }
 
