@@ -5,8 +5,7 @@
   .message-window, 
   .message-window--left,
   .message-window--right {
-    /** 本カスタムプロパティはJavaScriptから変更される */
-    --brightness: brightness(1);
+    --brightness: brightness(1);  /** 本カスタムプロパティはJavaScriptから変更される */
     --margin-x: max(3vw, var(--safe-area-left), var(--safe-area-right));
     box-sizing: border-box;
     display: flex;
