@@ -93,12 +93,12 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
     const zeroBatteryProhibited = async (): Promise<CommandCanceled> => {
-      props.view.dom.messageWindow.visible(true);
-      props.view.dom.messageWindow.messages(['ごめんね、バッテリーは0以上にしてね']);
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.messages(['ごめんね、バッテリーは0以上にしてね']);
       return {isCommandCanceled: true};
     };
     const progressGame = async (): Promise<CommandCanceled> => {
-      props.view.dom.messageWindow.visible(false);
+      props.view.dom.leftMessageWindow.visible(false);
       props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
       return {isCommandCanceled: false};
     };
