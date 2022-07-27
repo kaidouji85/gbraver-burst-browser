@@ -144,7 +144,7 @@ export const doubleMessageWindows: DOMStubStory = domStub(resources => {
   leftMessageWindow.visible(true);
   leftMessageWindow.faceVisible(true);
   leftMessageWindow.face('Tsubasa');
-  leftMessageWindow.darken(true);
+  leftMessageWindow.darken();
   leftMessageWindow.messages(['ツバサ', '「姿勢を正して、礼!!」']);
   root.appendChild(leftMessageWindow.getRootHTMLElement());
 

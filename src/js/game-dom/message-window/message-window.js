@@ -23,6 +23,9 @@ type Position = 'Center' | 'Right' | 'Left';
 /** 顔画像表示位置 */
 type FacePosition = 'Right' | 'Left';
 
+/** CSSカスタムプロパティ --brightness */
+const CSS_PROPS_BRIGHTNESS = '--brightness';
+
 /**
  * メッセージウインドウ位置に対応したroot要素class属性を取得する
  * 
@@ -178,13 +181,17 @@ export class MessageWindow {
   }
 
   /**
-   * ウインドウを暗くするか否かを設定する
-   *
-   * @param isDarken trueでウインドウが暗くなるフラグ
+   * ウインドウを暗くする
    */
-  darken(isDarken: boolean): void {
-    const value = isDarken ? 0.4 : 1;
-    this.#root.style.setProperty('--brightness', `brightness(${value})`);
+  darken(): void {
+    this.#root.style.setProperty(CSS_PROPS_BRIGHTNESS, `brightness(0.5)`);
+  }
+
+  /**
+   * ウインドウを標準の明るさにする
+   */
+  lighten(): void {
+    this.#root.style.setProperty(CSS_PROPS_BRIGHTNESS, `brightness(1)`);
   }
 
   /**
