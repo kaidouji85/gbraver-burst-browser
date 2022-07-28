@@ -7,10 +7,9 @@ type Paragraph = string[];
 
 export async function scrollMessages(props: BattleSceneProps, messageWindow: MessageWindow, paragraphs: Paragraph[]): Promise<void> {
   for(let i=0; i < paragraphs.length; i ++) {
+    messageWindow.scrollUp();
     messageWindow.messages(paragraphs[i]);
     await waitUntilWindowPush(props);
-    const isLastParagraph = i === paragraphs.length - 1;
-    !isLastParagraph && await messageWindow.scrollUp();
   }
 }
 

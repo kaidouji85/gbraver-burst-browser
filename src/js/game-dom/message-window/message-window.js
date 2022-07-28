@@ -170,10 +170,10 @@ export class MessageWindow {
    */
   async scrollUp(): Promise<void> {
     await waitFinishAnimation(this.#messages.animate([
-      {transform: 'translateY(0)'},
-      {transform: 'translateY(-100%)'},
+      {transform: 'translateY(2vh)'},
+      {transform: 'translateY(0%)'},
     ], {
-      duration: 200,
+      duration: 100,
     }));
   }
 
