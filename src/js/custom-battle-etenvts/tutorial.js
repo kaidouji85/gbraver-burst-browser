@@ -76,7 +76,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.lighten();
       await scrollRightMessages(props, [
         ['シンヤ', '「了解っす。'],
-        ['遠慮せずいきますよ、ツバサ先輩。'],
+        ['遠慮せずいきますよ、ツバサ先輩。」'],
       ]);
 
       props.view.dom.leftMessageWindow.visible(false);
