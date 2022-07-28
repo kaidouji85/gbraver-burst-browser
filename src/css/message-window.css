@@ -39,8 +39,9 @@
     right: var(--margin-x);
   }
 
-  .message-window__messages {
+  .message-window__messages-wrapper {
     flex: 1 1;
+    overflow: hidden;
   }
 
   .message-window__paragraph {

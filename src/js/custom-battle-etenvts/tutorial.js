@@ -47,16 +47,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.leftMessageWindow.visible(true);
       props.view.dom.leftMessageWindow.faceVisible(true);
       props.view.dom.leftMessageWindow.face('Tsubasa');
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「これより操縦訓練を開始する']);
+      props.view.dom.leftMessageWindow.messages(['ツバサ', '「これより操縦訓練を開始する。']);
       await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「姿勢を正して、礼!!」']);
+      await props.view.dom.leftMessageWindow.scrollUp();
+      props.view.dom.leftMessageWindow.messages(['姿勢を正して、礼!!」']);
       await waitUntilWindowPush(props);
       props.view.dom.leftMessageWindow.darken();
 
       props.view.dom.rightMessageWindow.visible(true);
       props.view.dom.rightMessageWindow.faceVisible(true);
       props.view.dom.rightMessageWindow.face('Shinya');
-      props.view.dom.rightMessageWindow.messages(['シンヤ', '「よろしくお願いします」']);
+      props.view.dom.rightMessageWindow.messages(['シンヤ', '「よろしくお願いします。」']);
       await waitUntilWindowPush(props);
       props.view.dom.rightMessageWindow.darken();
 
@@ -64,14 +65,21 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.leftMessageWindow.face('Tsubasa');
       props.view.dom.leftMessageWindow.messages(['ツバサ', '「いい返事だな、では早速はじめるぞ']);
       await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「試合の基本は、攻撃側、防御側でバッテリーを出し合うことだ']);
+      await props.view.dom.leftMessageWindow.scrollUp();
+      props.view.dom.leftMessageWindow.messages(['試合の基本は、攻撃側、防御側でバッテリーを出し合うことだ']);
       await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「大きいバッテリーを出した側の行動が成功するのだが、']);
+      await props.view.dom.leftMessageWindow.scrollUp();
+      props.view.dom.leftMessageWindow.messages(['大きいバッテリーを出した側の行動が成功するのだが、']);
       await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「これは実際にやってみた方が早いな']);
+      await props.view.dom.leftMessageWindow.scrollUp();
+      props.view.dom.leftMessageWindow.messages(['これは実際にやってみた方が早いな']);
       await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「シンヤ、私が防御に回るから、好きに攻撃してみろ」']);
+      await props.view.dom.leftMessageWindow.scrollUp();
+      props.view.dom.leftMessageWindow.messages(['シンヤ、私が防御に回るから、好きに攻撃してみろ」']);
       await waitUntilWindowPush(props);
+
+      props.view.dom.leftMessageWindow.visible(false);
+      props.view.dom.rightMessageWindow.visible(false);
     };
 
     this.stateHistory = [...this.stateHistory, ...props.stateHistory];
