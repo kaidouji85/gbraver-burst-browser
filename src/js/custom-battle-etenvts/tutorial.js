@@ -13,7 +13,7 @@ import {playerUuid} from "../uuid/player";
 import {attentionBatterySelector} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {turnCount} from "./turn-count";
-import {waitUntilWindowPush} from "./wait-until-window-push";
+import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
@@ -47,31 +47,39 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.leftMessageWindow.visible(true);
       props.view.dom.leftMessageWindow.faceVisible(true);
       props.view.dom.leftMessageWindow.face('Tsubasa');
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「これより操縦訓練を開始する']);
-      await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「姿勢を正して、礼!!」']);
-      await waitUntilWindowPush(props);
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「これより操縦訓練を開始する。'],
+        ['姿勢を正して、礼!!」']
+      ]);
       props.view.dom.leftMessageWindow.darken();
 
       props.view.dom.rightMessageWindow.visible(true);
       props.view.dom.rightMessageWindow.faceVisible(true);
       props.view.dom.rightMessageWindow.face('Shinya');
-      props.view.dom.rightMessageWindow.messages(['シンヤ', '「よろしくお願いします」']);
-      await waitUntilWindowPush(props);
+      await scrollRightMessages(props, [
+        ['シンヤ', '「よろしくお願いします。」']
+      ]);
       props.view.dom.rightMessageWindow.darken();
 
       props.view.dom.leftMessageWindow.lighten();
       props.view.dom.leftMessageWindow.face('Tsubasa');
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「いい返事だな、では早速はじめるぞ']);
-      await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「試合の基本は、攻撃側、防御側でバッテリーを出し合うことだ']);
-      await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「大きいバッテリーを出した側の行動が成功するのだが、']);
-      await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「これは実際にやってみた方が早いな']);
-      await waitUntilWindowPush(props);
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「シンヤ、私が防御に回るから、好きに攻撃してみろ」']);
-      await waitUntilWindowPush(props);
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「いい返事だな、では早速はじめよう。'],
+        ['試合の基本は、攻撃側、防御側でバッテリーを出し合うことだ。'],
+        ['大きいバッテリーを出した側の行動が成功するのだが、'],
+        ['これは実際にやってみた方が早いな。'],
+        ['シンヤ、私が防御に回るから、好きに攻撃してみろ。」']
+      ]);
+      props.view.dom.leftMessageWindow.darken();
+
+      props.view.dom.rightMessageWindow.lighten();
+      await scrollRightMessages(props, [
+        ['シンヤ', '「了解っす。'],
+        ['遠慮せずいきますよ、ツバサ先輩。」'],
+      ]);
+
+      props.view.dom.leftMessageWindow.visible(false);
+      props.view.dom.rightMessageWindow.visible(false);
     };
 
     this.stateHistory = [...this.stateHistory, ...props.stateHistory];
@@ -88,7 +96,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.visible(false);
       props.view.dom.leftMessageWindow.visible(true);
       props.view.dom.leftMessageWindow.faceVisible(false);
-      props.view.dom.leftMessageWindow.messages(['好きなバッテリーで攻撃してみよう', '相手よりも大きい数字を出せば攻撃が当たるぞ']);
+      props.view.dom.leftMessageWindow.lighten();
+      props.view.dom.leftMessageWindow.messages([
+        '好きなバッテリーで攻撃してみよう。', 
+        'ツバサ先輩よりも大きい数字を出せば、攻撃が当たるぞ。'
+      ]);
       await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     };
 
