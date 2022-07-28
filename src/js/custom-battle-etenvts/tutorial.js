@@ -13,7 +13,6 @@ import {playerUuid} from "../uuid/player";
 import {attentionBatterySelector} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {turnCount} from "./turn-count";
-import {waitUntilWindowPush} from "./wait-until-window-push";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 
 /** チュートリアルイベント */
