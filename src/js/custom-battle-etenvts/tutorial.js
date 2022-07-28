@@ -14,6 +14,7 @@ import {attentionBatterySelector} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {turnCount} from "./turn-count";
 import {waitUntilWindowPush} from "./wait-until-window-push";
+import { scrollLeftMessages } from "./scrool-messages";
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
@@ -47,11 +48,10 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.leftMessageWindow.visible(true);
       props.view.dom.leftMessageWindow.faceVisible(true);
       props.view.dom.leftMessageWindow.face('Tsubasa');
-      props.view.dom.leftMessageWindow.messages(['ツバサ', '「これより操縦訓練を開始する。']);
-      await waitUntilWindowPush(props);
-      await props.view.dom.leftMessageWindow.scrollUp();
-      props.view.dom.leftMessageWindow.messages(['姿勢を正して、礼!!」']);
-      await waitUntilWindowPush(props);
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「これより操縦訓練を開始する。'],
+        ['姿勢を正して、礼!!」']
+      ]);
       props.view.dom.leftMessageWindow.darken();
 
       props.view.dom.rightMessageWindow.visible(true);
