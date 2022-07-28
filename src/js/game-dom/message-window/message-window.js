@@ -4,7 +4,6 @@ import type {Resources} from "../../resource";
 import {domUuid} from "../../uuid/dom-uuid";
 import type {FaceOrientation, FaceType} from "./face-graphic";
 import {FaceGraphic} from "./face-graphic";
-import { waitFinishAnimation } from "../../dom/animation";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'message-window';
@@ -58,9 +57,7 @@ type DataIDs = {messages: string, leftFaceGraphic: string, rightFaceGraphic: str
 function rootInnerHTML(ids: DataIDs): string {
   return `
     <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.leftFaceGraphic}"></div>
-    <div class="${ROOT_CLASS}__messages-wrapper">
-      <div class="${ROOT_CLASS}__messages" data-id="${ids.messages}"></div>
-    </div>
+    <div class="${ROOT_CLASS}__messages" data-id="${ids.messages}"></div>
     <div class="${ROOT_CLASS}__face-graphic" data-id="${ids.rightFaceGraphic}"></div>
   `;
 }
@@ -161,20 +158,6 @@ export class MessageWindow {
     values.forEach(message => {
       this.#messages.appendChild(createParagraph(message));
     });
-  }
-
-  /**
-   * メッセージを上スクロールする
-   *
-   * @return アニメーションが完了したら発火するPromise
-   */
-  async scrollUp(): Promise<void> {
-    await waitFinishAnimation(this.#messages.animate([
-      {transform: 'translateY(0)'},
-      {transform: 'translateY(-100%)'},
-    ], {
-      duration: 200,
-    }));
   }
 
   /**
