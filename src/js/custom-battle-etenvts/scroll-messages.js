@@ -21,12 +21,14 @@ type Paragraph = string[];
  * @return 処理が完了したら発火するPromise
  */
 async function scrollMessages(messageWindow: MessageWindow, pushWindow: Stream<PushWindow>, sounds: BattleSceneSounds, paragraphs: Paragraph[]): Promise<void> {
+  messageWindow.nextMessageIconVisible(true);
   for(let i=0; i < paragraphs.length; i ++) {
     sounds.sendMessage.sound.play();
     messageWindow.scrollUp();
-    messageWindow.messages(paragraphs[i], true);
+    messageWindow.messages(paragraphs[i]);
     await waitUntilWindowPushWithStream(pushWindow);
   }
+  messageWindow.nextMessageIconVisible(false);
 }
 
 /**
