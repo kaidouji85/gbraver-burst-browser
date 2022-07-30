@@ -13,7 +13,8 @@ import {first} from "../stream/operator";
  */
 export function waitUntilWindowPushWithStream(pushWindow: Stream<PushWindow>): Promise<void> {
   return new Promise(resolve => {
-    const unsubscriber = pushWindow.chain(first()).subscribe(() => {
+    const unsubscriber = pushWindow.chain(first()).subscribe(action => {
+      action.event.preventDefault();
       unsubscriber.unsubscribe();
       resolve();
     })
