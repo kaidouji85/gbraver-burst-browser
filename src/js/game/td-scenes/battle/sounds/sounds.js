@@ -1,5 +1,4 @@
 // @flow
-
 import {Howl} from 'howler';
 import type {Resources} from "../../../../resource";
 import type {SoundId, SoundResource} from "../../../../resource/sound";
@@ -9,6 +8,7 @@ import {createEmptySoundResource, SOUND_IDS} from "../../../../resource/sound";
 export class BattleSceneSounds {
   batteryDeclaration: typeof Howl;
   batteryRecover: typeof Howl;
+  sendMessage: SoundResource;
   bgm: SoundResource;
 
   /**
@@ -20,6 +20,7 @@ export class BattleSceneSounds {
   constructor(resources: Resources, playingBGM: SoundId) {
     this.batteryDeclaration = resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_DECLARATION)?.sound ?? new Howl();
     this.batteryRecover = resources.sounds.find(v => v.id === SOUND_IDS.BATTERY_RECOVER)?.sound ?? new Howl();
+    this.sendMessage = resources.sounds.find(v => v.id === SOUND_IDS.SEND_MESSAGE) ?? createEmptySoundResource();
     this.bgm = resources.sounds.find(v => v.id === playingBGM) ?? createEmptySoundResource();
   }
 }
