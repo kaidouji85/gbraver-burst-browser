@@ -18,6 +18,12 @@ const ROOT_CLASS_LEFT = `${ROOT_CLASS}--left`;
 /** ルート要素が右側表示されている時のclass属性 */
 const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--right`;
 
+/** 次メッセージアイコンのclass属性 */
+const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;
+
+/** 次メッセージアイコン非表示時のclass属性 */
+const NEXT_MESSAGE_ICON_CLASS_INVISIBLE = `${NEXT_MESSAGE_ICON_CLASS}--invisible`;
+
 /** メッセージウインドウ位置 */
 type Position = 'Center' | 'Right' | 'Left';
 
@@ -98,6 +104,7 @@ type Params = {
 export class MessageWindow {
   #root: HTMLElement;
   #messages: HTMLElement;
+  #nextMessageIcon: HTMLElement;
   #leftFaceGraphic: FaceGraphic;
   #rightFaceGraphic: FaceGraphic;
   #position: Position;
@@ -119,6 +126,9 @@ export class MessageWindow {
     this.#root.innerHTML = rootInnerHTML(ids);
     const {messages, leftFaceGraphic, rightFaceGraphic} = extractElements(this.#root, ids);
     this.#messages = messages;
+    this.#nextMessageIcon = document.createElement('span');
+    this.#nextMessageIcon.className = NEXT_MESSAGE_ICON_CLASS_INVISIBLE;
+    this.#nextMessageIcon.innerText = '▼';
     this.#leftFaceGraphic = new FaceGraphic(params.resources);
     replaceDOM(leftFaceGraphic, this.#leftFaceGraphic.getRootHTMLElement());
     this.#rightFaceGraphic = new FaceGraphic(params.resources);
@@ -158,9 +168,17 @@ export class MessageWindow {
     };
 
     this.#messages.innerHTML = "";
-    values.forEach(message => {
-      this.#messages.appendChild(createParagraph(message));
-    });
+    const paragraphs = values.map(message => createParagraph(message));
+    const lastParagraph: ?HTMLElement = paragraphs[paragraphs.length - 1];
+    if (!lastParagraph) {
+      return;
+    }
+    paragraphs.filter(v => v !== lastParagraph)
+      .forEach(paragraph => {
+        this.#messages.appendChild(paragraph);
+      });
+    lastParagraph.appendChild(this.#nextMessageIcon);
+    this.#messages.appendChild(lastParagraph);
   }
 
   /**
@@ -195,6 +213,15 @@ export class MessageWindow {
   faceVisible(isVisible: boolean): void {
     const target = this.#getTargetFaceGraphic();
     target.visible(isVisible);
+  }
+
+  /**
+   * 次メッセージアイコンの表示、非表示設定
+   *
+   * @param isNextMessageIconVisible 次メッセージアイコンを表示するか、trueで表示する
+   */
+  nextMessageIconVisible(isNextMessageIconVisible: boolean): void {
+    this.#nextMessageIcon.className = isNextMessageIconVisible ? NEXT_MESSAGE_ICON_CLASS : NEXT_MESSAGE_ICON_CLASS_INVISIBLE;
   }
 
   /**

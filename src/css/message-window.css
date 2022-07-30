@@ -47,6 +47,28 @@
   .message-window__paragraph {
     font-size: var(--responsive-font-size);
   }
+
+  .message-window__next-message-icon {
+    display: inline-block;
+    margin-left: calc(var(--responsive-font-size) * 0.5);
+    animation-name: icon-up-down;
+    animation-fill-mode:backwards;
+    animation-duration: 0.5s;
+    animation-iteration-count:infinite;
+  }
+
+  .message-window__next-message-icon--invisible {
+    display :none;
+  }
+
+  @keyframes icon-up-down {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(10%);
+    }
+  }
 }
 
 @media (orientation: portrait) {
