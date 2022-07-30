@@ -1,6 +1,7 @@
 // @flow
 import type {MessageWindow} from "../game-dom/message-window/message-window";
 import type {BattleSceneProps} from "../game/td-scenes/battle/custom-battle-event";
+import {BattleSceneSounds} from "../game/td-scenes/battle/sounds/sounds";
 import type {Stream} from "../stream/stream";
 import type {PushWindow} from "../window/push-window";
 import {waitUntilWindowPushWithStream} from "./wait-until-window-push";
@@ -15,11 +16,13 @@ type Paragraph = string[];
  *
  * @param messageWindow メッセージウインドウ
  * @param pushWindow 画面押下ストリーム
+ * @param sounds 戦闘シーンで利用する音声データ
  * @param paragraphs 表示するメッセージ
  * @return 処理が完了したら発火するPromise
  */
-async function scrollMessages(messageWindow: MessageWindow, pushWindow: Stream<PushWindow>, paragraphs: Paragraph[]): Promise<void> {
+async function scrollMessages(messageWindow: MessageWindow, pushWindow: Stream<PushWindow>, sounds: BattleSceneSounds, paragraphs: Paragraph[]): Promise<void> {
   for(let i=0; i < paragraphs.length; i ++) {
+    sounds.sendMessage.sound.play();
     messageWindow.scrollUp();
     messageWindow.messages(paragraphs[i]);
     await waitUntilWindowPushWithStream(pushWindow);
@@ -34,7 +37,7 @@ async function scrollMessages(messageWindow: MessageWindow, pushWindow: Stream<P
  * @return 処理が完了したら発火するPromise
  */
 export async function scrollLeftMessages(props: BattleSceneProps, paragraphs: Paragraph[]): Promise<void> {
-  await scrollMessages(props.view.dom.leftMessageWindow, props.pushWindow, paragraphs);
+  await scrollMessages(props.view.dom.leftMessageWindow, props.pushWindow, props.sounds, paragraphs);
 }
 
 /**
@@ -45,5 +48,5 @@ export async function scrollLeftMessages(props: BattleSceneProps, paragraphs: Pa
  * @return 処理が完了したら発火するPromise
  */
 export async function scrollRightMessages(props: BattleSceneProps, paragraphs: Paragraph[]): Promise<void> {
-  await scrollMessages(props.view.dom.rightMessageWindow, props.pushWindow, paragraphs);
+  await scrollMessages(props.view.dom.rightMessageWindow, props.pushWindow, props.sounds, paragraphs);
 }

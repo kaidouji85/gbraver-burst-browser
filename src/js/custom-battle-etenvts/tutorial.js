@@ -62,7 +62,6 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.darken();
 
       props.view.dom.leftMessageWindow.lighten();
-      props.view.dom.leftMessageWindow.face('Tsubasa');
       await scrollLeftMessages(props, [
         ['ツバサ', '「いい返事だな、では早速はじめよう。'],
         ['試合の基本は、攻撃側、防御側でバッテリーを出し合うことだ。'],
@@ -75,7 +74,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.lighten();
       await scrollRightMessages(props, [
         ['シンヤ', '「了解っす。'],
-        ['遠慮せずいきますよ、ツバサ先輩。」'],
+        ['それじゃ遠慮なく、いきますよ。ツバサ先輩。」'],
       ]);
 
       props.view.dom.leftMessageWindow.visible(false);

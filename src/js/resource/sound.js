@@ -76,6 +76,7 @@ export const SOUND_IDS = {
   BATTERY_RECOVER: 'BATTERY_RECOVER',
   BATTERY_DECLARATION: 'BATTERY_DECLARATION',
   BENEFIT_EFFECT: 'BENEFIT_EFFECT',
+  SEND_MESSAGE: 'SEND_MESSAGE',
   TITLE_BGM: 'TITLE_BGM',
   BATTLE_BGM_01: 'BATTLE_BGM_01',
   BATTLE_BGM_02: 'BATTLE_BGM_02',
@@ -140,6 +141,12 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/benefit-effect.mp3`,
     volumeScale: 1
+  },
+  {
+    id: SOUND_IDS.SEND_MESSAGE,
+    type: 'SE',
+    path: resourceRoot => `${resourceRoot.get()}/sounds/send-message.mp3`,
+    volumeScale: 0.2
   },
   {
     id: SOUND_IDS.TITLE_BGM,
