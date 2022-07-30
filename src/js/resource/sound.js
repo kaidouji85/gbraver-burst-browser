@@ -146,7 +146,7 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     id: SOUND_IDS.SEND_MESSAGE,
     type: 'SE',
     path: resourceRoot => `${resourceRoot.get()}/sounds/send-message.mp3`,
-    volumeScale: 1
+    volumeScale: 0.2
   },
   {
     id: SOUND_IDS.TITLE_BGM,
