@@ -18,8 +18,10 @@ const ROOT_CLASS_LEFT = `${ROOT_CLASS}--left`;
 /** ルート要素が右側表示されている時のclass属性 */
 const ROOT_CLASS_RIGHT = `${ROOT_CLASS}--right`;
 
+/** 次メッセージアイコンのclass属性 */
 const NEXT_MESSAGE_ICON_CLASS = `${ROOT_CLASS}__next-message-icon`;
 
+/** 次メッセージアイコン非表示時のclass属性 */
 const NEXT_MESSAGE_ICON_CLASS_INVISIBLE = `${NEXT_MESSAGE_ICON_CLASS}--invisible`;
 
 /** メッセージウインドウ位置 */
