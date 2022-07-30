@@ -213,6 +213,11 @@ export class MessageWindow {
     target.visible(isVisible);
   }
 
+  /**
+   * 次メッセージアイコンの表示、非表示設定
+   *
+   * @param isNextMessageIconVisible 次メッセージアイコンを表示するか、trueで表示する
+   */
   nextMessageIconVisible(isNextMessageIconVisible: boolean): void {
     this.#nextMessageIcon.className = isNextMessageIconVisible ? NEXT_MESSAGE_ICON_CLASS : NEXT_MESSAGE_ICON_CLASS_INVISIBLE;
   }
