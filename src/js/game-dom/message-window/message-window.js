@@ -156,11 +156,26 @@ export class MessageWindow {
       div.innerText = message;
       return div;
     };
+    const createNextMessageIcon = () => {
+      const span = document.createElement('span');
+      span.className = `${ROOT_CLASS}__next-message-icon`;
+      span.innerText = '▼';
+      return span;
+    };
 
     this.#messages.innerHTML = "";
-    values.forEach(message => {
-      this.#messages.appendChild(createParagraph(message));
-    });
+    const paragraphs = values.map(message => createParagraph(message));
+    const lastParagraph: ?HTMLElement = paragraphs[paragraphs.length - 1];
+    if (!lastParagraph) {
+      return;
+    }
+    paragraphs.filter(v => v !== lastParagraph)
+      .forEach(paragraph => {
+        this.#messages.appendChild(paragraph);
+      });
+    // TODO lastParagraphにメッセージ送りアイコンを追加する
+    lastParagraph.appendChild(createNextMessageIcon());
+    this.#messages.appendChild(lastParagraph);
   }
 
   /**
