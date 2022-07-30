@@ -148,8 +148,9 @@ export class MessageWindow {
    * 配列の区切れで改行をする
    *
    * @param values メッセージ
+   * @param isNextMessageIconVisible 次のメッセージアイコンを表示するか否か、trueで表示する
    */
-  messages(values: string[]): void {
+  messages(values: string[], isNextMessageIconVisible: boolean = false): void {
     const createParagraph = (message: string) => {
       const div = document.createElement('div');
       div.className = `${ROOT_CLASS}__paragraph`;
@@ -173,8 +174,7 @@ export class MessageWindow {
       .forEach(paragraph => {
         this.#messages.appendChild(paragraph);
       });
-    // TODO lastParagraphにメッセージ送りアイコンを追加する
-    lastParagraph.appendChild(createNextMessageIcon());
+    isNextMessageIconVisible && lastParagraph.appendChild(createNextMessageIcon());
     this.#messages.appendChild(lastParagraph);
   }
 

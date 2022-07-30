@@ -24,7 +24,7 @@ async function scrollMessages(messageWindow: MessageWindow, pushWindow: Stream<P
   for(let i=0; i < paragraphs.length; i ++) {
     sounds.sendMessage.sound.play();
     messageWindow.scrollUp();
-    messageWindow.messages(paragraphs[i]);
+    messageWindow.messages(paragraphs[i], true);
     await waitUntilWindowPushWithStream(pushWindow);
   }
 }
