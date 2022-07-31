@@ -20,7 +20,7 @@ export type BattleSceneProps = {
 
 /** 最終ステート系イベントのプロパティ */
 export type LastState = BattleSceneProps & {
-  /** コマンド入力から最終ステートまでの更新履歴 */
+  /** コマンド入力から最終ステートまでのステート更新履歴 */
   update: GameState[],
 };
 
