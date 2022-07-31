@@ -78,6 +78,7 @@ export const SOUND_IDS = {
   BENEFIT_EFFECT: 'BENEFIT_EFFECT',
   SEND_MESSAGE: 'SEND_MESSAGE',
   TITLE_BGM: 'TITLE_BGM',
+  TUTORIAL_BGM: 'TUTORIAL_BGM',
   BATTLE_BGM_01: 'BATTLE_BGM_01',
   BATTLE_BGM_02: 'BATTLE_BGM_02',
   BATTLE_BGM_03: 'BATTLE_BGM_03',
@@ -153,6 +154,12 @@ export const SOUND_CONFIGS: SoundConfig[] = [
     type: 'BGM',
     path: resourceRoot => `${resourceRoot.get()}/sounds/title-bgm.mp3`,
     volumeScale: 0.2
+  },
+  {
+    id: SOUND_IDS.TUTORIAL_BGM,
+    type: 'BGM',
+    path: resourceRoot => `${resourceRoot.get()}/sounds/tutorial-bgm.mp3`,
+    volumeScale: 0.3
   },
   {
     id: SOUND_IDS.BATTLE_BGM_01,
