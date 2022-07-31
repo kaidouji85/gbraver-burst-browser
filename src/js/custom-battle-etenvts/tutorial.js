@@ -81,7 +81,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.visible(false);
     };
 
-    this.stateHistory = [...this.stateHistory, ...props.stateHistory];
+    this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory)
     if (turn === 1) {
       await oneTurn();
@@ -103,7 +103,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     };
 
-    const lastState = props.stateHistory[props.stateHistory.length - 1];
+    const lastState = props.update[props.update.length - 1];
     if (lastState.effect.name === 'InputCommand') {
       await pleaseBatterySelect();
     }
