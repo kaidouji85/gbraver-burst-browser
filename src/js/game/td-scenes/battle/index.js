@@ -153,7 +153,7 @@ export class BattleScene implements Scene {
       }
       const removeLastState = this.#initialState.slice(0, -1);
       await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
-      const eventProps = {...this.#toBattleSceneProps(), stateHistory: this.#initialState};
+      const eventProps = {...this.#toBattleSceneProps(), update: this.#initialState};
       this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
       const lastState: GameState = this.#initialState[this.#initialState.length - 1];
       await Promise.all([
@@ -289,7 +289,7 @@ export class BattleScene implements Scene {
         const removeLastState = updateState.slice(0 , -1);
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
-        const eventProps = {...this.#toBattleSceneProps(), stateHistory: updateState};
+        const eventProps = {...this.#toBattleSceneProps(), update: updateState};
         this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
         await Promise.all([
           this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state)),

@@ -20,8 +20,8 @@ export type BattleSceneProps = {
 
 /** 最終ステート系イベントのプロパティ */
 export type LastState = BattleSceneProps & {
-  /** ステート履歴 */
-  stateHistory: GameState[],
+  /** コマンド入力から最終ステートまでのステート更新履歴 */
+  update: GameState[],
 };
 
 /** バッテリーコマンド選択イベントのプロパティ */
