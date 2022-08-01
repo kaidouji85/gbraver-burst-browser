@@ -10,6 +10,7 @@ import type {
 import type {NPC} from "../npc/npc";
 import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
 import {playerUuid} from "../uuid/player";
+import {waitTime} from "../wait/wait-time";
 import {attentionBatterySelector} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {turnCount} from "./turn-count";
@@ -91,6 +92,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['シンヤ', '「手応えあり」']
       ]);
       props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「見事な攻撃だ シンヤ'],
+        ['君が私よりも大きいバッテリーを出したので'],
+        ['攻撃がヒットしたぞ」'],
+      ]);
+      props.view.dom.leftMessageWindow.darken();
     };
     const attackGuarded = async () => {
       props.view.dom.rightMessageWindow.visible(true);
@@ -101,6 +113,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['シンヤ', '「よっしゃ 攻撃ヒット」']
       ]);
       props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「甘いぞ シンヤ」'],
+        ['君は私と同じバッテリーを出したので 攻撃をガード'],
+        ['つまりは ダメージを半減させてもらった」'],
+      ]);
+      props.view.dom.leftMessageWindow.darken();
     }
     const attackMiss = async () => {
       props.view.dom.rightMessageWindow.visible(true);
@@ -111,25 +134,79 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['シンヤ', '「クソッ 避けられた」']
       ]);
       props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「まだまだ だな シンヤ」'],
+        ['私の方が君より大きいバッテリーを出したので'],
+        ['攻撃を回避させてもらった」'],
+      ]);
+      props.view.dom.leftMessageWindow.darken();
+    };
+    const batteryRuleDescription = async () => {
+      props.view.dom.leftMessageWindow.visible(false);
+      props.view.dom.rightMessageWindow.visible(false);
+      await waitTime(200);
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「……と このように 攻撃が当たるかは'],
+        ['互いに出したバッテリーの大きさだけで決まるんだ」']
+      ]);
+      props.view.dom.leftMessageWindow.darken();
+
+      props.view.dom.rightMessageWindow.visible(true);
+      props.view.dom.rightMessageWindow.faceVisible(true);
+      props.view.dom.rightMessageWindow.face('Shinya');
+      props.view.dom.rightMessageWindow.lighten();
+      await scrollRightMessages(props, [
+        ['シンヤ', '「なるほど'],
+        ['シンプルながらも奥が深いんすね」',]
+      ]);
+      props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「そうだな'],
+        ['バッテリーの攻防配分 これが基本かつ奥義だ'],
+        ['では 次は私が攻撃をしかけるので'],
+        ['同じ要領で回避してみろ」']
+      ]);
+      props.view.dom.leftMessageWindow.darken();
+
+      props.view.dom.rightMessageWindow.visible(true);
+      props.view.dom.rightMessageWindow.faceVisible(true);
+      props.view.dom.rightMessageWindow.face('Shinya');
+      props.view.dom.rightMessageWindow.lighten();
+      await scrollRightMessages(props, [
+        ['シンヤ', '「了解っす」'],
+      ]);
+      props.view.dom.rightMessageWindow.darken();
     };
 
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
+    const lastBattle = props.update.find(v => v.effect.name === 'Battle');
     if (turn === 1) {
       await introduction();
-    }
-
-    const lastBattle = props.update.find(v => v.effect.name === 'Battle');
-    if (lastBattle && lastBattle.effect.name === 'Battle') {
-      const isAttacker = lastBattle.activePlayerId === this.player.playerId;
-      if (isAttacker && !lastBattle.effect.isDeath
-        && (lastBattle.effect.result.name === 'NormalHit' || lastBattle.effect.result.name === 'CriticalHit')) {
+    } else if (turn === 2 && lastBattle && lastBattle.effect.name === 'Battle') {
+      if (lastBattle.effect.result.name === 'NormalHit' || lastBattle.effect.result.name === 'CriticalHit') {
         await attackHit();
-      } else if (isAttacker && lastBattle.effect.result.name === 'Guard') {
+      } else if (lastBattle.effect.result.name === 'Guard') {
         await attackGuarded();
-      } else if (isAttacker && (lastBattle.effect.result.name === 'Miss' || lastBattle.effect.result.name === 'Feint')) {
+      } else if (lastBattle.effect.result.name === 'Miss' || lastBattle.effect.result.name === 'Feint') {
         await attackMiss();
       }
+      await batteryRuleDescription();
     }
   }
 
