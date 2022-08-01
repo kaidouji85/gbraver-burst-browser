@@ -88,7 +88,27 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.face('Shinya');
       props.view.dom.rightMessageWindow.lighten();
       await scrollRightMessages(props, [
-        ['シンヤ', '「よっしゃ 攻撃ヒット!!」']
+        ['シンヤ', '「手応えあり」']
+      ]);
+      props.view.dom.rightMessageWindow.darken();
+    };
+    const attackGuarded = async () => {
+      props.view.dom.rightMessageWindow.visible(true);
+      props.view.dom.rightMessageWindow.faceVisible(true);
+      props.view.dom.rightMessageWindow.face('Shinya');
+      props.view.dom.rightMessageWindow.lighten();
+      await scrollRightMessages(props, [
+        ['シンヤ', '「よっしゃ 攻撃ヒット」']
+      ]);
+      props.view.dom.rightMessageWindow.darken();
+    }
+    const attackMiss = async () => {
+      props.view.dom.rightMessageWindow.visible(true);
+      props.view.dom.rightMessageWindow.faceVisible(true);
+      props.view.dom.rightMessageWindow.face('Shinya');
+      props.view.dom.rightMessageWindow.lighten();
+      await scrollRightMessages(props, [
+        ['シンヤ', '「クソッ 避けられた」']
       ]);
       props.view.dom.rightMessageWindow.darken();
     };
@@ -105,6 +125,10 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       if (isAttacker && !lastBattle.effect.isDeath
         && (lastBattle.effect.result.name === 'NormalHit' || lastBattle.effect.result.name === 'CriticalHit')) {
         await attackHit();
+      } else if (isAttacker && lastBattle.effect.result.name === 'Guard') {
+        await attackGuarded();
+      } else if (isAttacker && (lastBattle.effect.result.name === 'Miss' || lastBattle.effect.result.name === 'Feint')) {
+        await attackMiss();
       }
     }
   }
@@ -147,20 +171,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    const zeroBatteryProhibited = async (): Promise<CommandCanceled> => {
-      props.view.dom.leftMessageWindow.visible(true);
-      props.view.dom.leftMessageWindow.messages(['ごめんね、バッテリーは0以上にしてね']);
-      return {isCommandCanceled: true};
-    };
     const progressGame = async (): Promise<CommandCanceled> => {
       props.view.dom.leftMessageWindow.visible(false);
       props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
       return {isCommandCanceled: false};
     };
-
-    if (props.battery.battery === 0) {
-      return await zeroBatteryProhibited();
-    }
     return await progressGame();
   }
 
