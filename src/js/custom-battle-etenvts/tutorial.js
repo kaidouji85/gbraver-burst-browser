@@ -43,10 +43,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    const oneTurn = async () => {
+    const introduction = async () => {
       props.view.dom.leftMessageWindow.visible(true);
       props.view.dom.leftMessageWindow.faceVisible(true);
       props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
       await scrollLeftMessages(props, [
         ['ツバサ', '「これより 操縦訓練を開始する'],
         ['姿勢を正して 礼!!」']
@@ -56,6 +57,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.visible(true);
       props.view.dom.rightMessageWindow.faceVisible(true);
       props.view.dom.rightMessageWindow.face('Shinya');
+      props.view.dom.rightMessageWindow.lighten();
       await scrollRightMessages(props, [
         ['シンヤ', '「よろしくお願いします」']
       ]);
@@ -80,11 +82,30 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.leftMessageWindow.visible(false);
       props.view.dom.rightMessageWindow.visible(false);
     };
+    const attackHit = async () => {
+      props.view.dom.rightMessageWindow.visible(true);
+      props.view.dom.rightMessageWindow.faceVisible(true);
+      props.view.dom.rightMessageWindow.face('Shinya');
+      props.view.dom.rightMessageWindow.lighten();
+      await scrollRightMessages(props, [
+        ['シンヤ', '「よっしゃ 攻撃ヒット!!」']
+      ]);
+      props.view.dom.rightMessageWindow.darken();
+    };
 
     this.stateHistory = [...this.stateHistory, ...props.update];
-    const turn = turnCount(this.stateHistory)
+    const turn = turnCount(this.stateHistory);
     if (turn === 1) {
-      await oneTurn();
+      await introduction();
+    }
+
+    const lastBattle = props.update.find(v => v.effect.name === 'Battle');
+    if (lastBattle && lastBattle.effect.name === 'Battle') {
+      const isAttacker = lastBattle.activePlayerId === this.player.playerId;
+      if (isAttacker && !lastBattle.effect.isDeath
+        && (lastBattle.effect.result.name === 'NormalHit' || lastBattle.effect.result.name === 'CriticalHit')) {
+        await attackHit();
+      }
     }
   }
 
@@ -116,10 +137,10 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     };
 
     const lastState = props.update[props.update.length - 1];
-    const isAttacker = lastState.activePlayerId === this.player.playerId;
-    if (lastState.effect.name === 'InputCommand' && isAttacker) {
+    const isMyTurn = lastState.activePlayerId === this.player.playerId;
+    if (lastState.effect.name === 'InputCommand' && isMyTurn) {
       await attackBatterySelect();
-    } else if (lastState.effect.name === 'InputCommand' && !isAttacker) {
+    } else if (lastState.effect.name === 'InputCommand' && !isMyTurn) {
       await defenseBatterySelect();
     }
   }
