@@ -91,6 +91,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['シンヤ', '「手応えあり」']
       ]);
       props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「見事な攻撃だ シンヤ'],
+        ['君が私よりも大きいバッテリーを出したので'],
+        ['攻撃がヒットしたぞ」'],
+      ]);
+      props.view.dom.leftMessageWindow.darken();
     };
     const attackGuarded = async () => {
       props.view.dom.rightMessageWindow.visible(true);
@@ -101,6 +112,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['シンヤ', '「よっしゃ 攻撃ヒット」']
       ]);
       props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「甘いぞ シンヤ」'],
+        ['君は私と同じバッテリーを出したので 攻撃をガード'],
+        ['つまりは ダメージを半減させてもらった」'],
+      ]);
+      props.view.dom.leftMessageWindow.darken();
     }
     const attackMiss = async () => {
       props.view.dom.rightMessageWindow.visible(true);
@@ -111,6 +133,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['シンヤ', '「クソッ 避けられた」']
       ]);
       props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「まだまだ だな シンヤ」'],
+        ['私の方が君より大きいバッテリーを出したので'],
+        ['攻撃を回避させてもらった」'],
+      ]);
+      props.view.dom.leftMessageWindow.darken();
     };
 
     this.stateHistory = [...this.stateHistory, ...props.update];
