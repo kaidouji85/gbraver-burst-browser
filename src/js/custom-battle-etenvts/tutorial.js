@@ -48,8 +48,8 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.leftMessageWindow.faceVisible(true);
       props.view.dom.leftMessageWindow.face('Tsubasa');
       await scrollLeftMessages(props, [
-        ['ツバサ', '「これより操縦訓練を開始する。'],
-        ['姿勢を正して、礼!!」']
+        ['ツバサ', '「これより 操縦訓練を開始する'],
+        ['姿勢を正して 礼!!」']
       ]);
       props.view.dom.leftMessageWindow.darken();
 
@@ -57,24 +57,24 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.faceVisible(true);
       props.view.dom.rightMessageWindow.face('Shinya');
       await scrollRightMessages(props, [
-        ['シンヤ', '「よろしくお願いします。」']
+        ['シンヤ', '「よろしくお願いします」']
       ]);
       props.view.dom.rightMessageWindow.darken();
 
       props.view.dom.leftMessageWindow.lighten();
       await scrollLeftMessages(props, [
-        ['ツバサ', '「いい返事だな、では早速はじめよう。'],
-        ['試合の基本は、攻撃側、防御側でバッテリーを出し合うことだ。'],
-        ['大きいバッテリーを出した側の行動が成功するのだが、'],
-        ['これは実際にやってみた方が早いな。'],
-        ['シンヤ、私が防御に回るから、好きに攻撃してみろ。」']
+        ['ツバサ', '「いい返事だな では早速はじめよう'],
+        ['試合の基本は 攻撃側 防御側でバッテリーを出し合うことだ'],
+        ['大きいバッテリーを出した側の行動が成功するのだが'],
+        ['これは実際にやってみた方が早いな'],
+        ['シンヤ 私が防御に回るから 好きに攻撃してみろ」']
       ]);
       props.view.dom.leftMessageWindow.darken();
 
       props.view.dom.rightMessageWindow.lighten();
       await scrollRightMessages(props, [
-        ['シンヤ', '「了解っす。'],
-        ['それじゃ遠慮なくいきますよ、ツバサ先輩。」'],
+        ['シンヤ', '「了解っす '],
+        ['それじゃ 遠慮なく いきますよ ツバサ先輩」'],
       ]);
 
       props.view.dom.leftMessageWindow.visible(false);
@@ -90,22 +90,37 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /** @override */
   async onLastState(props: LastState): Promise<void> {
-    const pleaseBatterySelect = async () => {
+    const attackBatterySelect = async () => {
       attentionBatterySelector(props.view);
       props.view.dom.rightMessageWindow.visible(false);
       props.view.dom.leftMessageWindow.visible(true);
       props.view.dom.leftMessageWindow.faceVisible(false);
       props.view.dom.leftMessageWindow.lighten();
       props.view.dom.leftMessageWindow.messages([
-        '好きなバッテリーで攻撃してみよう。', 
-        'ツバサ先輩よりも大きい数字を出せば、攻撃が当たるぞ。'
+        '好きなバッテリーで 攻撃してみよう',
+        'ツバサ先輩よりも 大きい数字を出せば 攻撃が当たるぞ'
+      ]);
+      await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+    };
+    const defenseBatterySelect = async () => {
+      attentionBatterySelector(props.view);
+      props.view.dom.rightMessageWindow.visible(false);
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(false);
+      props.view.dom.leftMessageWindow.lighten();
+      props.view.dom.leftMessageWindow.messages([
+        '好きなバッテリーで 防御してみよう',
+        'ツバサ先輩よりも 大きい数字を出せば 完全回避できるぞ'
       ]);
       await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
     };
 
     const lastState = props.update[props.update.length - 1];
-    if (lastState.effect.name === 'InputCommand') {
-      await pleaseBatterySelect();
+    const isAttacker = lastState.activePlayerId === this.player.playerId;
+    if (lastState.effect.name === 'InputCommand' && isAttacker) {
+      await attackBatterySelect();
+    } else if (lastState.effect.name === 'InputCommand' && !isAttacker) {
+      await defenseBatterySelect();
     }
   }
 
