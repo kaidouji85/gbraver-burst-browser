@@ -1,11 +1,11 @@
 // @flow
-import type {GameState, Battle, BattleResult, Player} from "gbraver-burst-core";
+import type {Battle, BattleResult, GameState, Player} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
-  LastState,
+  LastState
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
 import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
@@ -13,8 +13,8 @@ import {playerUuid} from "../uuid/player";
 import {waitTime} from "../wait/wait-time";
 import {attentionBatterySelector} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
-import {turnCount} from "./turn-count";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
+import {turnCount} from "./turn-count";
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
