@@ -18,7 +18,6 @@ import {
 } from "./active-message-window";
 import {attentionBatterySelector} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
-import {invisibleAllMessageWindows} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 import {turnCount} from "./turn-count";
 
@@ -79,7 +78,9 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['シンヤ', '「了解っす '],
         ['それじゃ 遠慮なく いきますよ ツバサ先輩」'],
       ]);
-      props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(false);
+      props.view.dom.rightMessageWindow.visible(false);
     };
     const playerAttackHit = async () => {
       activeRightMessageWindowWithFace(props, 'Shinya');
@@ -136,7 +137,8 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       }
     };
     const batteryRuleDescription = async () => {
-      invisibleAllMessageWindows(props);
+      props.view.dom.leftMessageWindow.visible(false);
+      props.view.dom.rightMessageWindow.visible(false);
       await waitTime(200);
 
       activeLeftMessageWindowWithFace(props, 'Tsubasa');
@@ -245,7 +247,6 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   async onLastState(props: LastState): Promise<void> {
     const attackBatterySelect = async () => {
       attentionBatterySelector(props.view);
-      invisibleAllMessageWindows(props);
       activeLeftMessageWindow(props);
       props.view.dom.leftMessageWindow.messages([
         '好きなバッテリーで 攻撃してみよう',
@@ -255,7 +256,6 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     };
     const defenseBatterySelect = async () => {
       attentionBatterySelector(props.view);
-      invisibleAllMessageWindows(props);
       activeLeftMessageWindow(props);
       props.view.dom.leftMessageWindow.messages([
         '好きなバッテリーで 防御してみよう',
