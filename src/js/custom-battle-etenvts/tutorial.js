@@ -120,8 +120,8 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.leftMessageWindow.lighten();
       await scrollLeftMessages(props, [
         ['ツバサ', '「甘いぞ シンヤ」'],
-        ['君は私と同じバッテリーを出したので 攻撃をガード'],
-        ['つまりは ダメージを半減させてもらった」'],
+        ['君は私と同じバッテリーを出したので'],
+        ['攻撃をガード ダメージを半減させてもらった」'],
       ]);
       props.view.dom.leftMessageWindow.darken();
     }
@@ -211,6 +211,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['シンヤ', '「よし 回避成功」']
       ]);
       props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「素晴らしいマニューバだ シンヤ'],
+        ['私よりも君の方が大きいバッテリーを出したので'],
+        ['攻撃を完全回避したぞ']
+      ]);
+      props.view.dom.leftMessageWindow.darken();
     };
     const enemyAttackGuarded = async () => {
       props.view.dom.rightMessageWindow.visible(true);
@@ -221,6 +232,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['シンヤ', '「攻撃が当たったけど 思ったよりダメージがないぞ」']
       ]);
       props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「ほう 私の攻撃をガードするとはな'],
+        ['私と君が同じバッテリーを出したので'],
+        ['攻撃をガード ダメージが半減されたな']
+      ]);
+      props.view.dom.leftMessageWindow.darken();
     };
     const enemyAttackHit = async () => {
       props.view.dom.rightMessageWindow.visible(true);
@@ -232,6 +254,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['ツバサ先輩 少しは加減してくださいよ']
       ]);
       props.view.dom.rightMessageWindow.darken();
+
+      props.view.dom.leftMessageWindow.visible(true);
+      props.view.dom.leftMessageWindow.faceVisible(true);
+      props.view.dom.leftMessageWindow.face('Tsubasa');
+      props.view.dom.leftMessageWindow.lighten();
+      await scrollLeftMessages(props, [
+        ['ツバサ', '「すまない これでも手心を加えたつもり なんだがな'],
+        ['私の方が君よりも大きいバッテリーを出したので'],
+        ['攻撃を当てさせてもらった']
+      ]);
+      props.view.dom.leftMessageWindow.darken();
     };
     const enemyAttack = async (battleResult: BattleResult) => {
       if (battleResult.name === 'NormalHit' || battleResult.name === 'CriticalHit') {
