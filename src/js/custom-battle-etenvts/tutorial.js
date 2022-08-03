@@ -83,7 +83,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.leftMessageWindow.visible(false);
       props.view.dom.rightMessageWindow.visible(false);
     };
-    const attackHit = async () => {
+    const playerAttackHit = async () => {
       props.view.dom.rightMessageWindow.visible(true);
       props.view.dom.rightMessageWindow.faceVisible(true);
       props.view.dom.rightMessageWindow.face('Shinya');
@@ -104,7 +104,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       ]);
       props.view.dom.leftMessageWindow.darken();
     };
-    const attackGuarded = async () => {
+    const playerAttackGuarded = async () => {
       props.view.dom.rightMessageWindow.visible(true);
       props.view.dom.rightMessageWindow.faceVisible(true);
       props.view.dom.rightMessageWindow.face('Shinya');
@@ -125,7 +125,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       ]);
       props.view.dom.leftMessageWindow.darken();
     }
-    const attackMiss = async () => {
+    const playerAttackMiss = async () => {
       props.view.dom.rightMessageWindow.visible(true);
       props.view.dom.rightMessageWindow.faceVisible(true);
       props.view.dom.rightMessageWindow.face('Shinya');
@@ -145,6 +145,15 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         ['攻撃を回避させてもらった」'],
       ]);
       props.view.dom.leftMessageWindow.darken();
+    };
+    const playerAttack = async (battleResult: BattleResult) => {
+      if (battleResult.name === 'NormalHit' || battleResult.name === 'CriticalHit') {
+        await playerAttackHit();
+      } else if (battleResult.name === 'Guard') {
+        await playerAttackGuarded();
+      } else if (battleResult.name === 'Miss' || battleResult.name === 'Feint') {
+        await playerAttackMiss();
+      }
     };
     const batteryRuleDescription = async () => {
       props.view.dom.leftMessageWindow.visible(false);
@@ -240,15 +249,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     const isAttacker = (battle: Battle): boolean => battle.attacker === this.player.playerId;
     if (turn === 1) {
       await introduction();
-    } else if (turn === 2 && lastBattle && lastBattle.effect.name === 'Battle') {
-      if (lastBattle.effect.result.name === 'NormalHit' || lastBattle.effect.result.name === 'CriticalHit') {
-        await attackHit();
-      } else if (lastBattle.effect.result.name === 'Guard') {
-        await attackGuarded();
-      } else if (lastBattle.effect.result.name === 'Miss' || lastBattle.effect.result.name === 'Feint') {
-        await attackMiss();
-      }
+    } else if (turn === 2 && lastBattle && lastBattle.effect.name === 'Battle' && isAttacker(lastBattle.effect)) {
+      await playerAttack(lastBattle.effect.result);
       await batteryRuleDescription();
+    } else if (lastBattle && lastBattle.effect.name === 'Battle' && isAttacker(lastBattle.effect)) {
+      await playerAttack(lastBattle.effect.result);
     } else if (lastBattle && lastBattle.effect.name === 'Battle' && !isAttacker(lastBattle.effect)) {
       await enemyAttack(lastBattle.effect.result);
     }
