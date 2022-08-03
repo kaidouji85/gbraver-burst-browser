@@ -1,5 +1,5 @@
 // @flow
-import type {GameState, Player} from "gbraver-burst-core";
+import type {GameState, Battle, BattleResult, Player} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
@@ -188,14 +188,56 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       props.view.dom.rightMessageWindow.face('Shinya');
       props.view.dom.rightMessageWindow.lighten();
       await scrollRightMessages(props, [
-        ['シンヤ', '「了解っす」'],
+        ['シンヤ', '「了解っす'],
+        ['お手柔らかに頼みますよ ツバサ先輩'],
       ]);
       props.view.dom.rightMessageWindow.darken();
+    };
+    const enemyAttackMiss = async () => {
+      props.view.dom.rightMessageWindow.visible(true);
+      props.view.dom.rightMessageWindow.faceVisible(true);
+      props.view.dom.rightMessageWindow.face('Shinya');
+      props.view.dom.rightMessageWindow.lighten();
+      await scrollRightMessages(props, [
+        ['シンヤ', '「よし 回避成功」']
+      ]);
+      props.view.dom.rightMessageWindow.darken();
+    };
+    const enemyAttackGuarded = async () => {
+      props.view.dom.rightMessageWindow.visible(true);
+      props.view.dom.rightMessageWindow.faceVisible(true);
+      props.view.dom.rightMessageWindow.face('Shinya');
+      props.view.dom.rightMessageWindow.lighten();
+      await scrollRightMessages(props, [
+        ['シンヤ', '「攻撃が当たったけど 思ったよりダメージがないぞ」']
+      ]);
+      props.view.dom.rightMessageWindow.darken();
+    };
+    const enemyAttackHit = async () => {
+      props.view.dom.rightMessageWindow.visible(true);
+      props.view.dom.rightMessageWindow.faceVisible(true);
+      props.view.dom.rightMessageWindow.face('Shinya');
+      props.view.dom.rightMessageWindow.lighten();
+      await scrollRightMessages(props, [
+        ['シンヤ', '「すごいダメージだ'],
+        ['ツバサ先輩 少しは加減してくださいよ']
+      ]);
+      props.view.dom.rightMessageWindow.darken();
+    };
+    const enemyAttack = async (battleResult: BattleResult) => {
+      if (battleResult.name === 'NormalHit' || battleResult.name === 'CriticalHit') {
+        await enemyAttackHit();
+      } else if (battleResult.name === 'Guard') {
+        await enemyAttackGuarded();
+      } else if (battleResult.name === 'Miss' || battleResult.name === 'Feint') {
+        await enemyAttackMiss();
+      }
     };
 
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
     const lastBattle = props.update.find(v => v.effect.name === 'Battle');
+    const isAttacker = (battle: Battle): boolean => battle.attacker === this.player.playerId;
     if (turn === 1) {
       await introduction();
     } else if (turn === 2 && lastBattle && lastBattle.effect.name === 'Battle') {
@@ -207,6 +249,8 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         await attackMiss();
       }
       await batteryRuleDescription();
+    } else if (lastBattle && lastBattle.effect.name === 'Battle' && !isAttacker(lastBattle.effect)) {
+      await enemyAttack(lastBattle.effect.result);
     }
   }
 
