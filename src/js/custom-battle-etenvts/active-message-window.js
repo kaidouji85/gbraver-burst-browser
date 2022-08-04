@@ -64,7 +64,7 @@ export function activeLeftMessageWindowWithFace(props: BattleSceneProps, faceTyp
 }
 
 /**
- * 右メッセージウインドウを顔画像付表示にするヘルパー関数
+ * 右メッセージウインドウを顔画像ありアクティブ表示する
  *
  * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
  * @param faceType 顔画像タイプ 
