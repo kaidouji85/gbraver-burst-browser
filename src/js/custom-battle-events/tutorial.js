@@ -1,5 +1,5 @@
 // @flow
-import type {Battle, BattleResult, GameState, Player} from "gbraver-burst-core";
+import type {Battle, BattleResult, GameEnd, GameState, Player} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
@@ -250,7 +250,6 @@ const victory = async (props: BattleSceneProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「見事だ シンヤ'],
-    ['これで基礎は完璧だな'],
     ['次の試合には 君も出そうと思う」']
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -347,23 +346,31 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
     const lastBattle = props.update.find(v => v.effect.name === 'Battle');
-    const isAttacker = (battle: Battle): boolean => battle.attacker === this.player.playerId;
-    const isVictory = (battle: Battle): boolean => isAttacker(battle) && battle.isDeath;
-    if (lastBattle && lastBattle.effect.name === 'Battle' && isVictory(lastBattle.effect)) {
+    const lastBattleEffect = (lastBattle && lastBattle.effect.name === 'Battle') ? lastBattle.effect : null;
+    const isAttacker = (battle: Battle) => battle.attacker === this.player.playerId;
+    const gameEnd = props.update.find(v => v.effect.name === 'GameEnd');
+    const gameEndEffect = (gameEnd && gameEnd.effect.name === 'GameEnd') ? gameEnd.effect : null;
+    const isVictory = (end: GameEnd) => end.result.type === 'GameOver' && end.result.winner === this.player.playerId;
+    if (gameEndEffect && isVictory(gameEndEffect)) {
       await victory(props);
+      await refreshConversation(props);
+      await tutorialEnd(props);
+      invisibleAllMessageWindows(props);
+    } else if (gameEndEffect && !isVictory(gameEndEffect)) {
+      await lose(props);
       await refreshConversation(props);
       await tutorialEnd(props);
       invisibleAllMessageWindows(props);
     } else if (turn === 1) {
       await introduction(props);
-    } else if (turn === 2 && lastBattle && lastBattle.effect.name === 'Battle' && isAttacker(lastBattle.effect)) {
-      await playerAttack(lastBattle.effect.result);
+    } else if (turn === 2 && lastBattleEffect && isAttacker(lastBattleEffect)) {
+      await playerAttack(lastBattleEffect.result);
       await refreshConversation(props);
       await batteryRuleDescription(props);
-    } else if (lastBattle && lastBattle.effect.name === 'Battle' && isAttacker(lastBattle.effect)) {
-      await playerAttack(lastBattle.effect.result);
-    } else if (lastBattle && lastBattle.effect.name === 'Battle' && !isAttacker(lastBattle.effect)) {
-      await enemyAttack(lastBattle.effect.result);
+    } else if (lastBattleEffect && isAttacker(lastBattleEffect)) {
+      await playerAttack(lastBattleEffect.result);
+    } else if (lastBattleEffect && !isAttacker(lastBattleEffect)) {
+      await enemyAttack(lastBattleEffect.result);
     }
   }
 
