@@ -251,10 +251,51 @@ const victory = async (props: BattleSceneProps) => {
   await scrollLeftMessages(props, [
     ['ツバサ', '「見事だ シンヤ'],
     ['これで基礎は完璧だな'],
-    ['すまないが 手を貸してくれないか」']
+    ['次の試合には 君も出そうと思う」']
   ]);
   props.view.dom.leftMessageWindow.darken();
+  props.view.dom.leftMessageWindow.darken();
 }
+
+/**
+ * ストーリー プレイヤーの敗北
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const lose = async (props: BattleSceneProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「クソッ あともう少しで勝てたのに」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「はじめてにしては 悪くなかったぞ'],
+    ['これからも精進あるのみだな」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+};
+
+/**
+ * ストーリー チュートリアル終了
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const tutorialEnd = async (props: BattleSceneProps) => {
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「これにて操縦訓練を終了する'],
+    ['姿勢を正して 礼!!」」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「ありがとうございました」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+};
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
@@ -307,9 +348,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     const turn = turnCount(this.stateHistory);
     const lastBattle = props.update.find(v => v.effect.name === 'Battle');
     const isAttacker = (battle: Battle): boolean => battle.attacker === this.player.playerId;
-    const isVictory = (battle: Battle): boolean => isAttacker(battle) && battle.isDeath
+    const isVictory = (battle: Battle): boolean => isAttacker(battle) && battle.isDeath;
     if (lastBattle && lastBattle.effect.name === 'Battle' && isVictory(lastBattle.effect)) {
       await victory(props);
+      await refreshConversation(props);
+      await tutorialEnd(props);
       invisibleAllMessageWindows(props);
     } else if (turn === 1) {
       await introduction(props);
