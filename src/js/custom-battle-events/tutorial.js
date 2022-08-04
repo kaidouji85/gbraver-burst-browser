@@ -386,42 +386,53 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
-    const lastBattle = props.update.find(v => v.effect.name === 'Battle');
-    const lastBattleEffect = (lastBattle && lastBattle.effect.name === 'Battle') ? lastBattle.effect : null;
-    const isAttacker = (battle: Battle) => battle.attacker === this.player.playerId;
     const gameEnd = props.update.find(v => v.effect.name === 'GameEnd');
-    const gameEndEffect = (gameEnd && gameEnd.effect.name === 'GameEnd') ? gameEnd.effect : null;
-    const isVictory = (end: GameEnd) => end.result.type === 'GameOver' && end.result.winner === this.player.playerId;
-    if (gameEndEffect && isVictory(gameEndEffect)) {
-      await victory(props);
-      await refreshConversation(props);
-      await tutorialEnd(props);
-      invisibleAllMessageWindows(props);
-    } else if (gameEndEffect && !isVictory(gameEndEffect)) {
-      await lose(props);
-      await refreshConversation(props);
-      await tutorialEnd(props);
-      invisibleAllMessageWindows(props);
-    } else if (turn === 1) {
+    const hasGameEnd = gameEnd && gameEnd.effect.name === 'GameEnd';
+    if (hasGameEnd) {
+      return;
+    }
+    
+    const lastBattle = props.update.find(v => v.effect.name === 'Battle');
+    const {hasBattle, isAttacker, lastBattleResult} = lastBattle && lastBattle.effect.name === 'Battle'
+      ? {hasBattle: true, isAttacker: lastBattle.effect.attacker === this.player.playerId, lastBattleResult: lastBattle.effect.result}
+      : {hasBattle: false, isAttacker: false, lastBattleResult: null};
+    const lastBattleEffect = (lastBattle && lastBattle.effect.name === 'Battle') ? lastBattle.effect : null;
+    if (turn === 1) {
       await introduction(props);
-    } else if (turn === 2 && lastBattleEffect && isAttacker(lastBattleEffect)) {
-      await playerAttack(props, lastBattleEffect.result);
+    } else if (turn === 2 && hasBattle && lastBattleResult) {
+      await playerAttack(props, lastBattleResult);
       await refreshConversation(props);
       await batteryRuleDescription(props);
-    } else if (lastBattleEffect && isAttacker(lastBattleEffect)) {
-      await playerAttack(props, lastBattleEffect.result);
-    } else if (lastBattleEffect && !isAttacker(lastBattleEffect)) {
-      await enemyAttack(props, lastBattleEffect.result);
+    } else if (hasBattle && isAttacker && lastBattleResult) {
+      await playerAttack(props, lastBattleResult);
+    } else if (hasBattle && !isAttacker && lastBattleResult) {
+      await enemyAttack(props, lastBattleResult);
     }
   }
 
   /** @override */
   async onLastState(props: LastState): Promise<void> {
     const lastState = props.update[props.update.length - 1];
-    const isMyTurn = lastState.activePlayerId === this.player.playerId;
-    if (lastState.effect.name === 'InputCommand' && isMyTurn) {
+    const {hasLastState, isLastStateInputCommand, isLastStateMyTurn} = lastState
+      ? {hasLastState: true, isLastStateInputCommand: lastState.effect.name === 'InputCommand', isLastStateMyTurn: lastState.activePlayerId === this.player.playerId}
+      : {hasLastState: false, isLastStateInputCommand: false, isLastStateMyTurn: false};
+    const gameEnd = props.update.find(v => v.effect.name === 'GameEnd');
+    const {hasGameEnd, isVictory} = (gameEnd && gameEnd.effect.name === 'GameEnd')
+      ? {hasGameEnd: true, isVictory: gameEnd.effect.result.type === 'GameOver' && gameEnd.effect.result.winner === this.player.playerId}
+      : {hasGameEnd: false, isVictory: false};
+    if (hasGameEnd && isVictory) {
+      await victory(props);
+      await refreshConversation(props);
+      await tutorialEnd(props);
+      invisibleAllMessageWindows(props);
+    } else if (hasGameEnd && !isVictory) {
+      await lose(props);
+      await refreshConversation(props);
+      await tutorialEnd(props);
+      invisibleAllMessageWindows(props);
+    } else if (hasLastState && isLastStateInputCommand && isLastStateMyTurn) {
       await attackBatterySelect(props);
-    } else if (lastState.effect.name === 'InputCommand' && !isMyTurn) {
+    } else if (hasLastState && isLastStateInputCommand && !isLastStateMyTurn) {
       await defenseBatterySelect(props);
     }
   }
