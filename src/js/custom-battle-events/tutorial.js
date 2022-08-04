@@ -1,5 +1,5 @@
 // @flow
-import type {Battle, BattleResult, GameEnd, GameState, Player} from "gbraver-burst-core";
+import type {BattleResult, GameState, Player} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
@@ -396,7 +396,6 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     const {hasBattle, isAttacker, lastBattleResult} = lastBattle && lastBattle.effect.name === 'Battle'
       ? {hasBattle: true, isAttacker: lastBattle.effect.attacker === this.player.playerId, lastBattleResult: lastBattle.effect.result}
       : {hasBattle: false, isAttacker: false, lastBattleResult: null};
-    const lastBattleEffect = (lastBattle && lastBattle.effect.name === 'Battle') ? lastBattle.effect : null;
     if (turn === 1) {
       await introduction(props);
     } else if (turn === 2 && hasBattle && lastBattleResult) {
