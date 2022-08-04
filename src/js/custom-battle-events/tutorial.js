@@ -135,6 +135,21 @@ const playerAttackMiss = async (props: BattleSceneProps) => {
 };
 
 /**
+ * プレイヤー攻撃の結果に応じてストーリーを分岐する
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerAttack = async (props: BattleSceneProps, battleResult: BattleResult) => {
+  if (battleResult.name === 'NormalHit' || battleResult.name === 'CriticalHit') {
+    await playerAttackHit(props);
+  } else if (battleResult.name === 'Guard') {
+    await playerAttackGuarded(props);
+  } else if (battleResult.name === 'Miss' || battleResult.name === 'Feint') {
+    await playerAttackMiss(props);
+  }
+};
+
+/**
  * ストーリー バッテリー基本ルール説明
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
@@ -236,6 +251,21 @@ const enemyAttackHit = async (props: BattleSceneProps) => {
 };
 
 /**
+ * 敵攻撃の結果に応じてストーリーを分岐する
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const enemyAttack = async (props: BattleSceneProps, battleResult: BattleResult) => {
+  if (battleResult.name === 'NormalHit' || battleResult.name === 'CriticalHit') {
+    await enemyAttackHit(props);
+  } else if (battleResult.name === 'Guard') {
+    await enemyAttackGuarded(props);
+  } else if (battleResult.name === 'Miss' || battleResult.name === 'Feint') {
+    await enemyAttackMiss(props);
+  }
+};
+
+/**
  * ストーリー プレイヤーの勝利
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
@@ -296,6 +326,36 @@ const tutorialEnd = async (props: BattleSceneProps) => {
   props.view.dom.rightMessageWindow.darken();
 };
 
+/**
+ * 攻撃バッテリーコマンド以外は選択不可にするヘルパー関数
+ * @param props イベントプロパティ 
+ */
+const attackBatterySelect = async (props: BattleSceneProps) => {
+  attentionBatterySelector(props.view);
+  invisibleAllMessageWindows(props);
+  activeLeftMessageWindow(props);
+  props.view.dom.leftMessageWindow.messages([
+    '好きなバッテリーで 攻撃してみよう',
+    'ツバサ先輩よりも 大きい数字を出せば 攻撃が当たるぞ'
+  ]);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+};
+
+/**
+ * 防御バッテリーコマンド以外は選択不可にするヘルパー関数
+ * @param props イベントプロパティ 
+ */
+const defenseBatterySelect = async (props: BattleSceneProps) => {
+  attentionBatterySelector(props.view);
+  invisibleAllMessageWindows(props);
+  activeLeftMessageWindow(props);
+  props.view.dom.leftMessageWindow.messages([
+    '好きなバッテリーで 防御してみよう',
+    'ツバサ先輩よりも 大きい数字を出せば 完全回避できるぞ'
+  ]);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+};
+
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
   /** プレイヤー情報 */
@@ -324,25 +384,6 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    const playerAttack = async (battleResult: BattleResult) => {
-      if (battleResult.name === 'NormalHit' || battleResult.name === 'CriticalHit') {
-        await playerAttackHit(props);
-      } else if (battleResult.name === 'Guard') {
-        await playerAttackGuarded(props);
-      } else if (battleResult.name === 'Miss' || battleResult.name === 'Feint') {
-        await playerAttackMiss(props);
-      }
-    };
-    const enemyAttack = async (battleResult: BattleResult) => {
-      if (battleResult.name === 'NormalHit' || battleResult.name === 'CriticalHit') {
-        await enemyAttackHit(props);
-      } else if (battleResult.name === 'Guard') {
-        await enemyAttackGuarded(props);
-      } else if (battleResult.name === 'Miss' || battleResult.name === 'Feint') {
-        await enemyAttackMiss(props);
-      }
-    };
-
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
     const lastBattle = props.update.find(v => v.effect.name === 'Battle');
@@ -364,45 +405,24 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     } else if (turn === 1) {
       await introduction(props);
     } else if (turn === 2 && lastBattleEffect && isAttacker(lastBattleEffect)) {
-      await playerAttack(lastBattleEffect.result);
+      await playerAttack(props, lastBattleEffect.result);
       await refreshConversation(props);
       await batteryRuleDescription(props);
     } else if (lastBattleEffect && isAttacker(lastBattleEffect)) {
-      await playerAttack(lastBattleEffect.result);
+      await playerAttack(props, lastBattleEffect.result);
     } else if (lastBattleEffect && !isAttacker(lastBattleEffect)) {
-      await enemyAttack(lastBattleEffect.result);
+      await enemyAttack(props, lastBattleEffect.result);
     }
   }
 
   /** @override */
   async onLastState(props: LastState): Promise<void> {
-    const attackBatterySelect = async () => {
-      attentionBatterySelector(props.view);
-      invisibleAllMessageWindows(props);
-      activeLeftMessageWindow(props);
-      props.view.dom.leftMessageWindow.messages([
-        '好きなバッテリーで 攻撃してみよう',
-        'ツバサ先輩よりも 大きい数字を出せば 攻撃が当たるぞ'
-      ]);
-      await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
-    };
-    const defenseBatterySelect = async () => {
-      attentionBatterySelector(props.view);
-      invisibleAllMessageWindows(props);
-      activeLeftMessageWindow(props);
-      props.view.dom.leftMessageWindow.messages([
-        '好きなバッテリーで 防御してみよう',
-        'ツバサ先輩よりも 大きい数字を出せば 完全回避できるぞ'
-      ]);
-      await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
-    };
-
     const lastState = props.update[props.update.length - 1];
     const isMyTurn = lastState.activePlayerId === this.player.playerId;
     if (lastState.effect.name === 'InputCommand' && isMyTurn) {
-      await attackBatterySelect();
+      await attackBatterySelect(props);
     } else if (lastState.effect.name === 'InputCommand' && !isMyTurn) {
-      await defenseBatterySelect();
+      await defenseBatterySelect(props);
     }
   }
 
