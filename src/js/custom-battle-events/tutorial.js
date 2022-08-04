@@ -23,13 +23,16 @@ import {invisibleAllMessageWindows} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 import {turnCount} from "./turn-count";
 
-/** チュートリアルイベント */
-export interface TutorialEvent extends CustomBattleEvent {
-  /** プレイヤー情報 */
-  player: Player;
-  /** NPC */
-  npc: NPC;
-}
+/**
+ * 会話を仕切りなおす
+ * 
+ * @param props イベントプロパティ
+ * @return 仕切り直しが完了したら発火するPromise
+ */
+const refreshConversation = async (props: BattleSceneProps) => {
+  invisibleAllMessageWindows(props);
+  await waitTime(200);
+};
 
 /**
  * ストーリー 冒頭
@@ -137,9 +140,6 @@ const playerAttackMiss = async (props: BattleSceneProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const batteryRuleDescription = async (props: BattleSceneProps) => {
-  invisibleAllMessageWindows(props);
-  await waitTime(200);
-
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「……と このように 攻撃が当たるかは'],
@@ -228,12 +228,41 @@ const enemyAttackHit = async (props: BattleSceneProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
-    ['ツバサ', '「すまない これでも手心を加えたつもり なんだがな'],
+    ['ツバサ', '「すまない これでも手心を加えたつもりなのだがな'],
     ['私の方が君よりも大きいバッテリーを出したので'],
     ['攻撃を当てさせてもらった']
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
+
+/**
+ * ストーリー プレイヤーの勝利
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const victory = async (props: BattleSceneProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「俺の勝ちですよ ツバサ先輩」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「見事だ シンヤ'],
+    ['これで基礎は完璧だな'],
+    ['すまないが 手を貸してくれないか」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+}
+
+/** チュートリアルイベント */
+export interface TutorialEvent extends CustomBattleEvent {
+  /** プレイヤー情報 */
+  player: Player;
+  /** NPC */
+  npc: NPC;
+}
 
 /** チュートリアルイベントの実装 */
 class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEvent {
@@ -278,10 +307,15 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     const turn = turnCount(this.stateHistory);
     const lastBattle = props.update.find(v => v.effect.name === 'Battle');
     const isAttacker = (battle: Battle): boolean => battle.attacker === this.player.playerId;
-    if (turn === 1) {
+    const isVictory = (battle: Battle): boolean => isAttacker(battle) && battle.isDeath
+    if (lastBattle && lastBattle.effect.name === 'Battle' && isVictory(lastBattle.effect)) {
+      await victory(props);
+      invisibleAllMessageWindows(props);
+    } else if (turn === 1) {
       await introduction(props);
     } else if (turn === 2 && lastBattle && lastBattle.effect.name === 'Battle' && isAttacker(lastBattle.effect)) {
       await playerAttack(lastBattle.effect.result);
+      await refreshConversation(props);
       await batteryRuleDescription(props);
     } else if (lastBattle && lastBattle.effect.name === 'Battle' && isAttacker(lastBattle.effect)) {
       await playerAttack(lastBattle.effect.result);
