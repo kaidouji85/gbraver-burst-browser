@@ -19,9 +19,10 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
     await fullResourceLoading(props);
   }
 
-  props.inProgress = createTutorial();
+  const tutorial = createTutorial();
+  props.inProgress = tutorial;
   await props.fader.fadeOut();
-  const tutorialEvent = createTutorialEvent();
+  const tutorialEvent = createTutorialEvent(tutorial.playerId);
   const npcBattle = new NPCBattleRoom(tutorialEvent.player, tutorialEvent.npc);
   const battleProgress = {progress: v => Promise.resolve(npcBattle.progress(v))};
   const config = await props.config.load();

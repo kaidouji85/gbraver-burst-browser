@@ -1,5 +1,5 @@
 // @flow
-import type {BattleResult, GameState, Player} from "gbraver-burst-core";
+import type {BattleResult, GameState, Player, PlayerId} from "gbraver-burst-core";
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
@@ -10,7 +10,6 @@ import type {
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
 import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
-import {playerUuid} from "../uuid/player";
 import {waitTime} from "../wait/wait-time";
 import {
   activeLeftMessageWindow,
@@ -372,12 +371,14 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /**
    * コンストラクタ
+   *
+   * @param playerId プレイヤーID
    */
-  constructor() {
+  constructor(playerId: PlayerId) {
     super();
     const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
     const pilot = Pilots.find(v => v.id === PilotIds.SHINYA)  ?? Pilots[0];
-    this.player = {playerId: playerUuid(), armdozer, pilot};
+    this.player = {playerId, armdozer, pilot};
     this.npc = oneBatteryWeakWingDozerNPC();
     this.stateHistory = [];
   }
@@ -459,8 +460,9 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 /**
  * チュートリアルイベントを生成する
  *
+ * @param playerId プレイヤーID
  * @return チュートリアルイベント
  */
-export function createTutorialEvent(): TutorialEvent {
-  return new SimpleTutorialEvent();
+export function createTutorialEvent(playerId: PlayerId): TutorialEvent {
+  return new SimpleTutorialEvent(playerId);
 }
