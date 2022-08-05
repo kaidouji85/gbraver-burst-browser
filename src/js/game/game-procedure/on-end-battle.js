@@ -11,6 +11,19 @@ import type {GameProps} from "../game-props";
 import type {NPCBattleX, PlayingNPCBattle} from "../in-progress/npc-battle";
 import {isNPCBattleStageClear, updateNPCBattle} from "../npc-battle";
 
+const saveAnimationTimeScale = async (props: $ReadOnly<GameProps>, animationTimeScale: number) => {
+  const battleAnimationTimeScale = parseBattleAnimationTimeScale(animationTimeScale) ?? BattleAnimationTimeScales[0];
+  const origin = await props.config.load();
+  const update = {...origin, battleAnimationTimeScale};
+  await props.config.save(update);
+};
+
+const endCasualMatch = async (props: $ReadOnly<GameProps>) => {
+  props.suddenlyBattleEnd.unbind();
+  await props.api.disconnectWebsocket();
+  await props.domFloaters.showPostBattle(props.resources, PostNetworkBattleButtons);
+};
+
 /**
  * 戦闘終了時の処理
  * 本関数にはpropsを変更する副作用がある
@@ -20,12 +33,6 @@ import {isNPCBattleStageClear, updateNPCBattle} from "../npc-battle";
  * @return 処理が完了したら発火するPromise
  */
 export async function onEndBattle(props: GameProps, action: EndBattle): Promise<void> {
-  const saveAnimationTimeScale = async () => {
-    const battleAnimationTimeScale = parseBattleAnimationTimeScale(action.animationTimeScale) ?? BattleAnimationTimeScales[0];
-    const origin = await props.config.load();
-    const update = {...origin, battleAnimationTimeScale};
-    await props.config.save(update);
-  };
   const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
     const isStageClear = isNPCBattleStageClear(inProgress.subFlow.state, action.gameEnd.result);
     const updatedState = updateNPCBattle(inProgress.subFlow.state, isStageClear);
@@ -41,18 +48,14 @@ export async function onEndBattle(props: GameProps, action: EndBattle): Promise<
     })();
     await props.domFloaters.showPostBattle(props.resources, postBattleButtons);
   };
-  const endCasualMatch = async (): Promise<void> => {
-    props.suddenlyBattleEnd.unbind();
-    await props.api.disconnectWebsocket();
-    await props.domFloaters.showPostBattle(props.resources, PostNetworkBattleButtons);
-  };
 
-  await saveAnimationTimeScale();
+
+  await saveAnimationTimeScale(props, action.animationTimeScale);
   if (props.inProgress.type === 'NPCBattle' && props.inProgress.subFlow.type === 'PlayingNPCBattle') {
     const playingNPCBattle: PlayingNPCBattle = props.inProgress.subFlow;
     const inProgress = ((props.inProgress: any): NPCBattleX<typeof playingNPCBattle>);
     await endNPCBattleStage(inProgress);
   } else if (props.inProgress.type === 'CasualMatch') {
-    await endCasualMatch();
+    await endCasualMatch(props);
   }
 }
