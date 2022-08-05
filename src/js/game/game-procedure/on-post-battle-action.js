@@ -70,6 +70,7 @@ const createNPCBattle = (inProgress: InProgress) => {
  * @param player プレイヤー情報
  * @param stage ステージ情報
  * @param level レベル
+ * @return 処理が完了したら発火するPromise
  */
 const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, stage: NPCBattleStage, level: number) => {
   props.domFloaters.hiddenPostBattle();
