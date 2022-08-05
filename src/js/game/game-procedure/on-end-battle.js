@@ -8,8 +8,16 @@ import {
 } from "../dom-floaters/post-battle/post-battle-buttons";
 import type {EndBattle} from "../game-actions";
 import type {GameProps} from "../game-props";
-import type {NPCBattleX, PlayingNPCBattle} from "../in-progress/npc-battle";
+import type {
+  NPCBattle,
+  NPCBattleX,
+  PlayingNPCBattle,
+} from "../in-progress/npc-battle";
 import {isNPCBattleStageClear, updateNPCBattle} from "../npc-battle";
+import {stand} from "../../../../stories/wing-dozer.stories";
+import {NPCBattleCourses} from "../npc-battle-courses";
+import type {InProgress} from "../in-progress/in-progress";
+import type {PostBattleButtonConfig} from "../dom-floaters/post-battle/post-battle-button-config";
 
 const saveAnimationTimeScale = async (props: $ReadOnly<GameProps>, animationTimeScale: number) => {
   const battleAnimationTimeScale = parseBattleAnimationTimeScale(animationTimeScale) ?? BattleAnimationTimeScales[0];
@@ -24,6 +32,10 @@ const endCasualMatch = async (props: $ReadOnly<GameProps>) => {
   await props.domFloaters.showPostBattle(props.resources, PostNetworkBattleButtons);
 };
 
+const endNPCBattleStage = async (props: $ReadOnly<GameProps>, postBattleButtons: PostBattleButtonConfig[]) => {
+  await props.domFloaters.showPostBattle(props.resources, postBattleButtons);
+};
+
 /**
  * 戦闘終了時の処理
  * 本関数にはpropsを変更する副作用がある
@@ -33,10 +45,15 @@ const endCasualMatch = async (props: $ReadOnly<GameProps>) => {
  * @return 処理が完了したら発火するPromise
  */
 export async function onEndBattle(props: GameProps, action: EndBattle): Promise<void> {
-  const endNPCBattleStage = async (inProgress: NPCBattleX<PlayingNPCBattle>) => {
-    const isStageClear = isNPCBattleStageClear(inProgress.subFlow.state, action.gameEnd.result);
-    const updatedState = updateNPCBattle(inProgress.subFlow.state, isStageClear);
-    props.inProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
+  const npcBattle = ((props: $ReadOnly<GameProps>) => {
+    if (props.inProgress.type !== 'NPCBattle' || props.inProgress.subFlow.type !== 'PlayingNPCBattle') {
+      return null;
+    }
+    const inProgress = (props.inProgress: NPCBattle);
+    const subFlow = (props.inProgress.subFlow: PlayingNPCBattle);
+    const isStageClear = isNPCBattleStageClear(subFlow.state, action.gameEnd.result);
+    const updatedState = updateNPCBattle(subFlow.state, isStageClear);
+    const updatedInProgress = {...inProgress, subFlow: {...inProgress.subFlow, state: updatedState}};
     const postBattleButtons = (() => {
       if (isStageClear && updatedState.isGameClear) {
         return PostNPCBattleComplete;
@@ -46,15 +63,13 @@ export async function onEndBattle(props: GameProps, action: EndBattle): Promise<
         return PostNPCBattleLoseButtons;
       }
     })();
-    await props.domFloaters.showPostBattle(props.resources, postBattleButtons);
-  };
-
+    return {updatedInProgress, postBattleButtons};
+  })(props);
 
   await saveAnimationTimeScale(props, action.animationTimeScale);
-  if (props.inProgress.type === 'NPCBattle' && props.inProgress.subFlow.type === 'PlayingNPCBattle') {
-    const playingNPCBattle: PlayingNPCBattle = props.inProgress.subFlow;
-    const inProgress = ((props.inProgress: any): NPCBattleX<typeof playingNPCBattle>);
-    await endNPCBattleStage(inProgress);
+  if (npcBattle) {
+    props.inProgress = npcBattle.updatedInProgress;
+    await endNPCBattleStage(props, npcBattle.postBattleButtons);  
   } else if (props.inProgress.type === 'CasualMatch') {
     await endCasualMatch(props);
   }
