@@ -1,5 +1,5 @@
 // @flow
-import type {Player} from 'gbraver-burst-core';
+import type {Player, PlayerId} from 'gbraver-burst-core';
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {PostBattleAction} from "../game-actions";
 import type {GameProps} from "../game-props";
@@ -8,6 +8,8 @@ import {getCurrentStage, getStageLevel} from "../npc-battle";
 import {DefaultStage} from "../npc-battle-courses";
 import {startNPCBattleStage} from "./start-npc-battle-stage";
 import {startTitle} from "./start-title";
+import {startTutorial} from "./start-tutorial";
+import type {Tutorial} from "../in-progress/tutorial";
 
 const gotoTitle = async (props: $ReadOnly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
@@ -36,6 +38,11 @@ const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, s
   await startNPCBattleStage(props, player, stage, level);
 };
 
+const gotoTutorial = async (props: $ReadOnly<GameProps>, playerId: PlayerId) => {
+  props.domFloaters.hiddenPostBattle();
+  await startTutorial(props, playerId);
+};
+
 /**
  * 戦闘終了後アクション決定時の処理
  * 本関数にはpropsを変更する副作用がある
@@ -55,6 +62,12 @@ export async function onPostBattleAction(props: GameProps, action: PostBattleAct
     const player = state.player;
     return {player, stage, level};
   })(props);
+  const tutorial = ((props: $ReadOnly<GameProps>) => {
+    if (props.inProgress.type !== 'Tutorial') {
+      return null;
+    }
+    const inProgress = (props.inProgress: Tutorial);
+  })(props);
 
   if (action.action.type === 'GotoTitle') {
     props.inProgress = {type: 'None'};
@@ -64,5 +77,7 @@ export async function onPostBattleAction(props: GameProps, action: PostBattleAct
     await gotoEnding(props);
   } else if (npcBattle && (action.action.type === 'NextStage' || action.action.type === 'Retry')) {
     await gotoNPCBattleStage(props, npcBattle.player, npcBattle.stage, npcBattle.level);
+  } else if (tutorial && action.action.type === 'Retry') {
+    await gotoTutorial(props, tutorial.playerId);
   }
 }
