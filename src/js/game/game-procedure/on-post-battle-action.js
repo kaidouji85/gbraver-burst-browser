@@ -10,7 +10,14 @@ import {startNPCBattleStage} from "./start-npc-battle-stage";
 import {startTitle} from "./start-title";
 import {startTutorial} from "./start-tutorial";
 import type {Tutorial} from "../in-progress/tutorial";
+import type {InProgress} from "../in-progress/in-progress";
 
+/**
+ * タイトルに遷移する
+ *
+ * @param props ゲームプロパティ
+ * @return 処理が完了したら発火するPromise 
+ */
 const gotoTitle = async (props: $ReadOnly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
   const [title] = await Promise.all([(async () => {
@@ -24,6 +31,12 @@ const gotoTitle = async (props: $ReadOnly<GameProps>) => {
   title.playBGM();
 };
 
+/**
+ * エンディングに遷移する
+ *
+ * @param props ゲームプロパティ
+ * @return 処理が完了したら発火するPromise 
+ */
 const gotoEnding = async (props: $ReadOnly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
   await props.fader.fadeOut();
@@ -33,11 +46,57 @@ const gotoEnding = async (props: $ReadOnly<GameProps>) => {
   ending.playBGM();
 };
 
+/**
+ * NPCバトル進行中に利用するデータを生成する
+ *
+ * @param inProgress 進行中のフロー
+ * @return 生成結果、NPCバトル中でない場合はnullを返す
+ */
+const createNPCBattle = (inProgress: InProgress) => {
+  if (inProgress.type !== 'NPCBattle' || inProgress.subFlow.type !== 'PlayingNPCBattle') {
+    return null;
+  }
+  const state = (inProgress.subFlow.state: NPCBattleState);
+  const stage = getCurrentStage(state) ?? DefaultStage;
+  const level = getStageLevel(state);
+  const player = state.player;
+  return {player, stage, level};
+};
+
+/**
+ * NPCバトルステージに遷移する
+ *
+ * @param props ゲームプロパティ
+ * @param player プレイヤー情報
+ * @param stage ステージ情報
+ * @param level レベル
+ */
 const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, stage: NPCBattleStage, level: number) => {
   props.domFloaters.hiddenPostBattle();
   await startNPCBattleStage(props, player, stage, level);
 };
 
+/**
+ * チュートリアル進行中に利用するデータを生成する
+ *
+ * @param inProgress 進行中のフロー
+ * @return 生成結果、NPCバトル中でない場合はnullを返す
+ */
+const createTutorial = (inProgress: InProgress) => {
+  if (inProgress.type !== 'Tutorial') {
+    return null;
+  }
+  const tutorial = (inProgress: Tutorial);
+  const playerId = tutorial.playerId;
+  return {playerId};
+};
+
+/**
+ * チュートリアルに遷移する
+ *
+ * @param props ゲームプロパティ 
+ * @param playerId プレイヤーID
+ */
 const gotoTutorial = async (props: $ReadOnly<GameProps>, playerId: PlayerId) => {
   props.domFloaters.hiddenPostBattle();
   await startTutorial(props, playerId);
@@ -52,23 +111,8 @@ const gotoTutorial = async (props: $ReadOnly<GameProps>, playerId: PlayerId) => 
  * @return 処理が完了したら発火するPromise
  */
 export async function onPostBattleAction(props: GameProps, action: PostBattleAction): Promise<void> {
-  const npcBattle = ((props: $ReadOnly<GameProps>) => {
-    if (props.inProgress.type !== 'NPCBattle' || props.inProgress.subFlow.type !== 'PlayingNPCBattle') {
-      return null;
-    }
-    const state = (props.inProgress.subFlow.state: NPCBattleState);
-    const stage = getCurrentStage(state) ?? DefaultStage;
-    const level = getStageLevel(state);
-    const player = state.player;
-    return {player, stage, level};
-  })(props);
-  const tutorial = ((props: $ReadOnly<GameProps>) => {
-    if (props.inProgress.type !== 'Tutorial') {
-      return null;
-    }
-    const inProgress = (props.inProgress: Tutorial);
-  })(props);
-
+  const npcBattle = createNPCBattle(props.inProgress);
+  const tutorial = createTutorial(props.inProgress);
   if (action.action.type === 'GotoTitle') {
     props.inProgress = {type: 'None'};
     await gotoTitle(props);
