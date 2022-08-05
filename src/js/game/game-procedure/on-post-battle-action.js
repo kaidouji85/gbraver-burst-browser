@@ -97,6 +97,7 @@ const createTutorial = (inProgress: InProgress) => {
  *
  * @param props ゲームプロパティ 
  * @param playerId プレイヤーID
+ * @return 処理が完了したら発火するPromise
  */
 const gotoTutorial = async (props: $ReadOnly<GameProps>, playerId: PlayerId) => {
   props.domFloaters.hiddenPostBattle();
