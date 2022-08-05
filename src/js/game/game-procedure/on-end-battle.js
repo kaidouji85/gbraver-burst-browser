@@ -44,6 +44,22 @@ const endCasualMatch = async (props: $ReadOnly<GameProps>) => {
 };
 
 /**
+ * NPCバトル終了後に表示するアクションボタンを求める
+ * 
+ * @param isStageClear ステージクリアをしたか、trueでステージクリア
+ * @param isGameClear ゲームクリアしたか、trueでゲームクリア
+ * @return 表示するアクションボタン
+ */
+const postNPCBattleButtons = (isStageClear: boolean, isGameClear: boolean) => {
+  if (isGameClear) {
+    return PostNPCBattleComplete;
+  } else if (isStageClear) {
+    return PostNPCBattleWinButtons;
+  }
+  return PostNPCBattleLoseButtons;
+}
+
+/**
  * NPCバトル進行中に利用するデータを生成する
  *
  * @param inProgress 進行中のフロー
@@ -58,14 +74,7 @@ const createNPCBattle = (inProgress: InProgress, gameEndResult: GameEndResult) =
   const isStageClear = isNPCBattleStageClear(playingNPCBattle.state, gameEndResult);
   const updatedState = updateNPCBattle(playingNPCBattle.state, isStageClear);
   const updatedInProgress = {...npcBattle, subFlow: {...playingNPCBattle, state: updatedState}};
-  const postBattleButtons = (() => {
-    if (isStageClear && updatedState.isGameClear) {
-      return PostNPCBattleComplete;
-    } else if (isStageClear) {
-      return PostNPCBattleWinButtons;
-    }
-    return PostNPCBattleLoseButtons;
-  })();
+  const postBattleButtons = postNPCBattleButtons(isStageClear, updatedState.isGameClear);
   return {updatedInProgress, postBattleButtons};
 };
 
