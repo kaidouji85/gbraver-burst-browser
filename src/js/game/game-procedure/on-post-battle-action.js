@@ -1,8 +1,9 @@
 // @flow
+import type {Player} from 'gbraver-burst-core';
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {PostBattleAction} from "../game-actions";
 import type {GameProps} from "../game-props";
-import type {NPCBattleState} from "../npc-battle";
+import type { NPCBattleStage, NPCBattleState } from "../npc-battle";
 import {getCurrentStage, getStageLevel} from "../npc-battle";
 import {DefaultStage} from "../npc-battle-courses";
 import {startNPCBattleStage} from "./start-npc-battle-stage";
@@ -30,11 +31,9 @@ const gotoEnding = async (props: $ReadOnly<GameProps>) => {
   ending.playBGM();
 };
 
-const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, state: NPCBattleState) => {
+const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, stage: NPCBattleStage, level: number) => {
   props.domFloaters.hiddenPostBattle();
-  const stage = getCurrentStage(state) ?? DefaultStage;
-  const level = getStageLevel(state);
-  await startNPCBattleStage(props, state.player, stage, level);
+  await startNPCBattleStage(props, player, stage, level);
 };
 
 /**
@@ -46,15 +45,24 @@ const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, state: NPCBattleS
  * @return 処理が完了したら発火するPromise
  */
 export async function onPostBattleAction(props: GameProps, action: PostBattleAction): Promise<void> {
+  const npcBattle = ((props: $ReadOnly<GameProps>) => {
+    if (props.inProgress.type !== 'NPCBattle' || props.inProgress.subFlow.type !== 'PlayingNPCBattle') {
+      return null;
+    }
+    const state = (props.inProgress.subFlow.state: NPCBattleState);
+    const stage = getCurrentStage(state) ?? DefaultStage;
+    const level = getStageLevel(state);
+    const player = state.player;
+    return {player, stage, level};
+  })(props);
+
   if (action.action.type === 'GotoTitle') {
     props.inProgress = {type: 'None'};
     await gotoTitle(props);
   } else if (action.action.type === 'GotoEnding') {
     props.inProgress = {type: 'None'};
     await gotoEnding(props);
-  } else if (action.action.type === 'NextStage' && props.inProgress.type === 'NPCBattle' && props.inProgress.subFlow.type === 'PlayingNPCBattle') {
-    await gotoNPCBattleStage(props, props.inProgress.subFlow.state);
-  } else if (action.action.type === 'Retry' && props.inProgress.type === 'NPCBattle' && props.inProgress.subFlow.type === 'PlayingNPCBattle') {
-    await gotoNPCBattleStage(props, props.inProgress.subFlow.state);
+  } else if (npcBattle && (action.action.type === 'NextStage' || action.action.type === 'Retry')) {
+    await gotoNPCBattleStage(props, npcBattle.player, npcBattle.stage, npcBattle.level);
   }
 }
