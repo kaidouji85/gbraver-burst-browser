@@ -3,14 +3,14 @@ import type {Player, PlayerId} from 'gbraver-burst-core';
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {PostBattleAction} from "../game-actions";
 import type {GameProps} from "../game-props";
-import type { NPCBattleStage, NPCBattleState } from "../npc-battle";
+import type {InProgress} from "../in-progress/in-progress";
+import type {Tutorial} from "../in-progress/tutorial";
+import type {NPCBattleStage, NPCBattleState} from "../npc-battle";
 import {getCurrentStage, getStageLevel} from "../npc-battle";
 import {DefaultStage} from "../npc-battle-courses";
 import {startNPCBattleStage} from "./start-npc-battle-stage";
 import {startTitle} from "./start-title";
 import {startTutorial} from "./start-tutorial";
-import type {Tutorial} from "../in-progress/tutorial";
-import type {InProgress} from "../in-progress/in-progress";
 
 /**
  * タイトルに遷移する
@@ -80,7 +80,7 @@ const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, s
  * チュートリアル進行中に利用するデータを生成する
  *
  * @param inProgress 進行中のフロー
- * @return 生成結果、NPCバトル中でない場合はnullを返す
+ * @return 生成結果、チュートリアル中でない場合はnullを返す
  */
 const createTutorial = (inProgress: InProgress) => {
   if (inProgress.type !== 'Tutorial') {
