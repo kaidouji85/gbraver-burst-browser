@@ -56,8 +56,7 @@ const introduction = async (props: BattleSceneProps) => {
   await scrollLeftMessages(props, [
     ['ツバサ', '「いい返事だな では早速はじめよう'],
     ['試合の基本は 攻撃側 防御側でバッテリーを出し合うことだ'],
-    ['大きいバッテリーを出した側の行動が成功するのだが'],
-    ['これは実際にやってみた方が早いな'],
+    ['大きいバッテリーを出した側の行動が成功するのだが これは実際にやってみた方が早いな'],
     ['シンヤ 私が防御に回るから 好きに攻撃してみろ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -65,7 +64,7 @@ const introduction = async (props: BattleSceneProps) => {
   props.view.dom.rightMessageWindow.lighten();
   await scrollRightMessages(props, [
     ['シンヤ', '「了解っす '],
-    ['それじゃ 遠慮なく いきますよ ツバサ先輩」'],
+    ['それじゃ遠慮なくいきますよ ツバサ先輩」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
@@ -85,8 +84,7 @@ const introduction = async (props: BattleSceneProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「見事な攻撃だ シンヤ'],
-    ['君が私よりも大きいバッテリーを出したので'],
-    ['攻撃がヒットしたぞ」'],
+    ['君が私よりも大きいバッテリーを出したので 攻撃がヒットしたぞ」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
@@ -106,8 +104,7 @@ const playerAttackGuarded = async (props: BattleSceneProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「甘いぞ シンヤ」'],
-    ['君は私と同じバッテリーを出したので'],
-    ['攻撃をガード ダメージを半減させてもらった」'],
+    ['君は私と同じバッテリーを出したので 攻撃をガード ダメージを半減させてもらった」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -127,8 +124,7 @@ const playerAttackMiss = async (props: BattleSceneProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「まだまだ だな シンヤ」'],
-    ['私の方が君より大きいバッテリーを出したので'],
-    ['攻撃を回避させてもらった」'],
+    ['私の方が君より大きいバッテリーを出したので 攻撃を回避させてもらった」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
@@ -170,10 +166,8 @@ const batteryRuleDescription = async (props: BattleSceneProps) => {
 
   props.view.dom.leftMessageWindow.lighten();
   await scrollLeftMessages(props, [
-    ['ツバサ', '「そうだな'],
-    ['バッテリーの攻防配分 これが基本かつ奥義だ'],
-    ['では 次は私が攻撃をしかけるので'],
-    ['同じ要領で回避してみろ」']
+    ['ツバサ', '「そうだな バッテリーの攻防配分 これが基本かつ奥義だ'],
+    ['では 次は私が攻撃をしかけるので 同じ要領で回避してみろ」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -200,8 +194,7 @@ const enemyAttackMiss = async (props: BattleSceneProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「素晴らしいマニューバだ シンヤ'],
-    ['私よりも君の方が大きいバッテリーを出したので'],
-    ['攻撃を完全回避したぞ']
+    ['私よりも君の方が大きいバッテリーを出したので　攻撃を完全回避したぞ」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
@@ -221,8 +214,7 @@ const enemyAttackGuarded = async (props: BattleSceneProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「ほう 私の攻撃をガードするとはな'],
-    ['私と君が同じバッテリーを出したので'],
-    ['攻撃をガード ダメージが半減されたな']
+    ['私と君が同じバッテリーを出したので 攻撃をガード ダメージが半減されたな」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
@@ -243,8 +235,7 @@ const enemyAttackHit = async (props: BattleSceneProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「すまない これでも手心を加えたつもりなのだがな'],
-    ['私の方が君よりも大きいバッテリーを出したので'],
-    ['攻撃を当てさせてもらった']
+    ['私の方が君よりも大きいバッテリーを出したので 攻撃を当てさせてもらった」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
