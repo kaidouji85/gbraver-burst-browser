@@ -61,14 +61,14 @@ function soundVolumeLabel(volume: SoundVolume): string {
  */
 function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
   const battleAnimationTimeScaleOption = (value: BattleAnimationTimeScale) => `
-    <option class="${ROOT_CLASS}__configs__battle-animation-time-scale__selector__option"
+    <option class="${ROOT_CLASS}__battle-animation-time-scale-option"
       value="${value}" ${value===config.battleAnimationTimeScale ? 'selected' : ""}>
       ${Math.floor(1/value)}倍
     </option>`;
   const battleAnimationTimeScaleOptions = BattleAnimationTimeScales.map(v => battleAnimationTimeScaleOption(v))
     .reduce((a, b) => a + b);
   const webGLPixelRatioOption  = (value: WebGLPixelRatio) => `
-    <option class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector__option" 
+    <option class="${ROOT_CLASS}__webgl-pixel-ratio-selector-option" 
       value="${value}" ${value===config.webGLPixelRatio ? 'selected' : ""}>
       ${Number(value).toFixed(2)}
     </option>`;
@@ -77,32 +77,32 @@ function rootInnerHTML(ids: DataIDs, config: GbraverBurstBrowserConfig) {
   return `
     <div class="${ROOT_CLASS}__title">設定</div>
     <div class="${ROOT_CLASS}__configs">
-      <div class="${ROOT_CLASS}__configs__battle-animation-time-scale">
-        <div class="${ROOT_CLASS}__configs__battle-animation-time-scale__caption">戦闘アニメ再生速度</div>
-        <select class="${ROOT_CLASS}__configs__battle-animation-time-scale__selector" data-id="${ids.battleAnimationTimeScaleSelector}">
+      <div class="${ROOT_CLASS}__battle-animation-time-scale">
+        <div class="${ROOT_CLASS}__battle-animation-time-scale-caption">戦闘アニメ再生速度</div>
+        <select class="${ROOT_CLASS}__battle-animation-time-scale-selector" data-id="${ids.battleAnimationTimeScaleSelector}">
           ${battleAnimationTimeScaleOptions}
         </select>
       </div>
-      <div class="${ROOT_CLASS}__configs__webgl-pixel-ratio">
-        <div class="${ROOT_CLASS}__configs__webgl-pixel-ratio__caption">戦闘画面のピクセルレート</div>
-        <select class="${ROOT_CLASS}__configs__webgl-pixel-ratio__selector" data-id="${ids.webGLPixelRatioSelector}">
+      <div class="${ROOT_CLASS}__webgl-pixel-ratio">
+        <div class="${ROOT_CLASS}__webgl-pixel-ratio-caption">戦闘画面のピクセルレート</div>
+        <select class="${ROOT_CLASS}__webgl-pixel-ratio-selector" data-id="${ids.webGLPixelRatioSelector}">
           ${webGLPixelRatioOptions}
         </select>
       </div>
-      <div class="${ROOT_CLASS}__configs__bgm-volume">
-        <div class="${ROOT_CLASS}__configs__bgm-volume__caption">BGM音量</div>
-        <input class="${ROOT_CLASS}__configs__bgm-volume__selector" type="range" min="0" max="1" step="0.1" value="${config.bgmVolume}" data-id="${ids.bgmVolumeSelector}">
-        <div class="${ROOT_CLASS}__configs__bgm-volume__value" data-id="${ids.bgmVolumeValue}">${soundVolumeLabel(config.bgmVolume)}</div>
+      <div class="${ROOT_CLASS}__bgm-volume">
+        <div class="${ROOT_CLASS}__bgm-volume-caption">BGM音量</div>
+        <input class="${ROOT_CLASS}__bgm-volume-selector" type="range" min="0" max="1" step="0.1" value="${config.bgmVolume}" data-id="${ids.bgmVolumeSelector}">
+        <div class="${ROOT_CLASS}__bgm-volume-value" data-id="${ids.bgmVolumeValue}">${soundVolumeLabel(config.bgmVolume)}</div>
       </div>
-      <div class="${ROOT_CLASS}__configs__se-volume">
-        <div class="${ROOT_CLASS}__configs__se-volume__caption">SE音量</div>
-        <input class="${ROOT_CLASS}__configs__se-volume__selector" type="range" min="0" max="1" step="0.1" value="${config.seVolume}" data-id="${ids.seVolumeSelector}">
-        <div class="${ROOT_CLASS}__configs__se-volume__value" data-id="${ids.seVolumeValue}">${soundVolumeLabel(config.seVolume)}</div>
+      <div class="${ROOT_CLASS}__se-volume">
+        <div class="${ROOT_CLASS}__se-volume-caption">SE音量</div>
+        <input class="${ROOT_CLASS}__se-volume-selector" type="range" min="0" max="1" step="0.1" value="${config.seVolume}" data-id="${ids.seVolumeSelector}">
+        <div class="${ROOT_CLASS}__se-volume-value" data-id="${ids.seVolumeValue}">${soundVolumeLabel(config.seVolume)}</div>
       </div>
     </div>
     <div class="${ROOT_CLASS}__footer">
-      <button class="${ROOT_CLASS}__footer__prev" data-id="${ids.prev}">戻る</button>
-      <button class="${ROOT_CLASS}__footer__config-change" data-id="${ids.configChange}">この設定にする</button>
+      <button class="${ROOT_CLASS}__prev" data-id="${ids.prev}">戻る</button>
+      <button class="${ROOT_CLASS}__config-change" data-id="${ids.configChange}">この設定にする</button>
     </div>
   `;
 }

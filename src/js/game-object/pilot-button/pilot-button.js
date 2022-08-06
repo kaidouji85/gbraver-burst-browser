@@ -16,14 +16,12 @@ import {PilotButtonSounds} from "./sounds/pilot-button-sounds";
 import {PilotButtonView} from "./view/pilot-button-view";
 import type {PilotIcon} from "./view/pilot-icon";
 
-/**
- * パイロットボタン
- */
+/** パイロットボタン */
 export class PilotButton {
   _model: PilotButtonModel;
   _sounds: PilotButtonSounds;
   _view: PilotButtonView;
-  _pushButton: Stream<void>;
+  _pushButton: Stream<Event>;
   _unsubscriber: Unsubscriber;
 
   /**
@@ -94,9 +92,10 @@ export class PilotButton {
 
   /**
    * ボタン押下通知
+   *
    * @return 通知ストリーム
    */
-  pushButtonNotifier(): Stream<void> {
+  pushButtonNotifier(): Stream<Event> {
     return this._pushButton;
   }
 

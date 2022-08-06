@@ -7,19 +7,23 @@ import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {GameLoop} from "../../../game-loop/game-loop";
-import type {OverlapNotifier} from "../../../render/overla-notifier";
+import type {OverlapNotifier} from "../../../render/overlap-notifier";
 import type {RendererDomGetter} from "../../../render/renderer-dom-getter";
 import type {Rendering} from "../../../render/rendering";
 import type {Resources} from '../../../resource';
 import type {SoundId} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
+import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
 import type {DecideBattery} from "./actions/decide-battery";
+import type {DoBurst} from "./actions/do-burst";
+import type {DoPilotSkill} from "./actions/do-pilot-skill";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
-import {stateHistoryAnimation} from "./animation/state-history";
+import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
+import type {BattleSceneProps, CustomBattleEvent} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
@@ -37,18 +41,33 @@ type BattleEnd = {
 };
 
 /** コンストラクタのパラメータ */
-type Param = {
+type BattleSceneParams = {
+  /** リソース管理オブジェクト */
   resources: Resources,
+  /** BGM管理オブジェクト */
   bgm: BGMManager,
+  /** 再生するBGM ID */
   playingBGM: SoundId,
+  /** レンダラ */
   renderer: OwnRenderer,
+  /** バトル進行オブジェクト */
   battleProgress: BattleProgress,
+  /** アニメーションスケールの初期値 */
   initialAnimationTimeScale: number,
+  /** 初期ゲームステート */
   initialState: GameState[],
+  /** プレイヤー情報 */
   player: Player,
+  /** 敵情報 */
   enemy: Player,
+  /** ゲームループストリーム */
   gameLoop: Stream<GameLoop>,
-  resize: Stream<Resize>
+  /** リサイズストリーム */
+  resize: Stream<Resize>,
+  /** window押下ストリーム */
+  pushWindow: Stream<PushWindow>,
+  /** カスタムバトルイベント */
+  customBattleEvent?: CustomBattleEvent,
 };
 
 /** 戦闘シーン */
@@ -57,8 +76,10 @@ export class BattleScene implements Scene {
   #initialState: GameState[];
   #endBattle: StreamSource<BattleEnd>;
   #battleProgress: BattleProgress;
+  #customBattleEvent: ?CustomBattleEvent;
   #exclusive: Exclusive;
   #view: BattleSceneView;
+  #pushWindow: Stream<PushWindow>;
   #sounds: BattleSceneSounds;
   #bgm: BGMManager;
   #unsubscriber: Unsubscriber[];
@@ -68,12 +89,14 @@ export class BattleScene implements Scene {
    *
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: BattleSceneParams) {
+    this.#pushWindow = param.pushWindow;
     this.#exclusive = new Exclusive();
     this.#initialState = param.initialState;
     this.#state = createInitialState(param.player.playerId, param.initialAnimationTimeScale);
     this.#endBattle = createStreamSource();
     this.#battleProgress = param.battleProgress;
+    this.#customBattleEvent = param.customBattleEvent;
     this.#view = new BattleSceneView({
       resources: param.resources,
       renderer: param.renderer,
@@ -84,15 +107,14 @@ export class BattleScene implements Scene {
     });
     this.#sounds = new BattleSceneSounds(param.resources, param.playingBGM);
     this.#bgm = param.bgm;
-
     this.#unsubscriber = [
       this.#view.battleActionNotifier().subscribe(action => {
         if (action.type === 'decideBattery') {
           this.#onDecideBattery(action);
         } else if (action.type === 'doBurst') {
-          this.#onBurst();
+          this.#onBurst(action);
         } else if (action.type === 'doPilotSkill') {
-          this.#onPilotSkill();
+          this.#onPilotSkill(action);
         } else if (action.type === 'toggleTimeScale') {
           this.#onToggleTimeScale(action);
         }
@@ -126,8 +148,29 @@ export class BattleScene implements Scene {
   start(): Promise<void> {
     return this.#exclusive.execute(async (): Promise<void> => {
       this.#bgm.do(play(this.#sounds.bgm));
-      await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, this.#initialState));
+      if (this.#initialState.length < 1) {
+        return;
+      }
+      const removeLastState = this.#initialState.slice(0, -1);
+      await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
+      const eventProps = {...this.#toBattleSceneProps(), update: this.#initialState};
+      this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
+      const lastState: GameState = this.#initialState[this.#initialState.length - 1];
+      await Promise.all([
+        this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state)),
+        this.#customBattleEvent ? this.#customBattleEvent.onLastState(eventProps) : Promise.resolve()
+      ]);
+      this.#customBattleEvent && await this.#customBattleEvent.afterLastState(eventProps);
     });
+  }
+
+  /**
+   * 本シーンが利用している全てのHTML要素を返す
+   *
+   * @return 本シーンが利用している全てのHTML要素
+   */
+  getHTMLElements(): HTMLElement[] {
+    return this.#view.dom.getHTMLElements();
   }
 
   /**
@@ -138,6 +181,14 @@ export class BattleScene implements Scene {
    */
   async #onDecideBattery(action: DecideBattery): Promise<void> {
     this.#exclusive.execute(async (): Promise<void> => {
+      action.event.stopPropagation();
+      const batteryCommand = {type: 'BATTERY_COMMAND', battery: action.battery};
+      const {isCommandCanceled} = this.#customBattleEvent 
+        ? await this.#customBattleEvent.onBatteryCommandSelected({...this.#toBattleSceneProps(), battery: batteryCommand})
+        : {isCommandCanceled: false};
+      if (isCommandCanceled) {
+        return;
+      }
       await this.#playAnimation(
         all(
           this.#view.hud.gameObjects.batterySelector.decide(),
@@ -148,20 +199,26 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this.#view.hud.gameObjects.batterySelector.close())
       );
-      const lastState = await this.#progressGame({type: 'BATTERY_COMMAND', battery: action.battery});
-      if (lastState && lastState.effect.name === 'GameEnd') {
-        await this.#endGame(lastState.effect);
-      }
+      await this.#progressGame(batteryCommand);
     });
   }
 
   /**
    * バースト時の処理
    *
+   * @param action アクション
    * @return 処理が完了したら発火するPromise
    */
-  async #onBurst(): Promise<void> {
+  async #onBurst(action: DoBurst): Promise<void> {
     this.#exclusive.execute(async () => {
+      action.event.stopPropagation();
+      const burstCommand = {type: 'BURST_COMMAND'};
+      const {isCommandCanceled} = this.#customBattleEvent 
+        ? await this.#customBattleEvent.onBurstCommandSelected({...this.#toBattleSceneProps(), burst: burstCommand})
+        : {isCommandCanceled: false};
+      if (isCommandCanceled) {
+        return;
+      }
       await this.#playAnimation(
         all(
           this.#view.hud.gameObjects.burstButton.decide(),
@@ -172,20 +229,26 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this.#view.hud.gameObjects.burstButton.close())
       );
-      const lastState = await this.#progressGame({type: 'BURST_COMMAND'});
-      if (lastState && lastState.effect.name === 'GameEnd') {
-        await this.#endGame(lastState.effect);
-      }
+      await this.#progressGame(burstCommand);
     });
   }
 
   /**
    * パイロットスキル発動時の処理
    *
+   * @param action アクション
    * @return 処理が完了したら発火するPromise
    */
-  async #onPilotSkill(): Promise<void> {
+  async #onPilotSkill(action: DoPilotSkill): Promise<void> {
     this.#exclusive.execute(async () => {
+      action.event.stopPropagation();
+      const pilotSkillCommand = {type: 'PILOT_SKILL_COMMAND'};
+      const {isCommandCanceled} = this.#customBattleEvent
+        ? await this.#customBattleEvent.onPilotSkillCommandSelected({...this.#toBattleSceneProps(), pilot: pilotSkillCommand})
+        : {isCommandCanceled: false};
+      if (isCommandCanceled) {
+        return;
+      }
       await this.#playAnimation(
         all(
           this.#view.hud.gameObjects.pilotButton.decide(),
@@ -196,10 +259,7 @@ export class BattleScene implements Scene {
           .chain(delay(500))
           .chain(this.#view.hud.gameObjects.pilotButton.close())
       );
-      const lastState = await this.#progressGame({type: 'PILOT_SKILL_COMMAND'});
-      if (lastState && lastState.effect.name === 'GameEnd') {
-        await this.#endGame(lastState.effect);
-      }
+      await this.#progressGame(pilotSkillCommand);
     });
   }
 
@@ -208,48 +268,56 @@ export class BattleScene implements Scene {
    * 
    * @param action アクション
    */
-   #onToggleTimeScale(action: ToggleTimeScale): void {
+  #onToggleTimeScale(action: ToggleTimeScale): void {
     this.#state.animationTimeScale = action.timeScale;
   }
 
   /**
-   * ゲームを進める
+   * ゲームを進めるヘルパーメソッド
    *
    * @param command プレイヤーが入力したコマンド
-   * @return ゲームの最新状態、何も更新されなかった場合はnullを返す
-   */
-  async #progressGame(command: Command): Promise<?GameState> {
-    let lastCommand: Command = command;
-    let lastState: ?GameState = null;
-    for (let i=0; i<100; i++) {
-      const updateState = await this.#battleProgress.progress(lastCommand);
-      await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, updateState));
-      lastState = updateState[updateState.length - 1] ?? null;
-      if (!(lastState && lastState.effect.name === 'InputCommand')) {
-        return lastState;
-      }
-
-      const playerCommand = lastState.effect.players.find(v => v.playerId === this.#state.playerId);
-      if (!(playerCommand && playerCommand.selectable === false)) {
-        return lastState;
-      }
-
-      lastCommand = playerCommand.nextTurnCommand;
-    }
-
-    return lastState
-  }
-
-  /**
-   * ゲームを終了させる
-   *
-   * @param gameEnd ゲーム終了情報
    * @return 処理が完了したら発火するPromise
    */
-  async #endGame(gameEnd: GameEnd): Promise<void> {
-    await this.#bgm.do(fadeOut)
-    await this.#bgm.do(stop);
-    this.#endBattle.next({gameEnd, animationTimeScale: this.#state.animationTimeScale});
+  async #progressGame(command: Command): Promise<void> {
+    const repeatProgressWhenUnselectable = async (): Promise<?GameState> => {
+      let lastCommand: Command = command;
+      const maxProgressCount = 100;
+      for (let i=0; i<maxProgressCount; i++) {
+        const updateState = await this.#battleProgress.progress(lastCommand);
+        if (updateState.length < 1) {
+          return;
+        }
+        const removeLastState = updateState.slice(0 , -1);
+        await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
+        const lastState: GameState = updateState[updateState.length - 1];
+        const eventProps = {...this.#toBattleSceneProps(), update: updateState};
+        this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
+        await Promise.all([
+          this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state)),
+          this.#customBattleEvent ? this.#customBattleEvent.onLastState(eventProps) : Promise.resolve(),
+        ]);
+        this.#customBattleEvent && await this.#customBattleEvent.afterLastState(eventProps);
+        if (lastState.effect.name !== 'InputCommand') {
+          return lastState;
+        }
+        const playerCommand = lastState.effect.players.find(v => v.playerId === this.#state.playerId);
+        if (!playerCommand || playerCommand.selectable) {
+          return lastState;
+        }
+        lastCommand = playerCommand.nextTurnCommand;
+      }
+      return null
+    };
+    const onGameEnd = async (gameEnd: GameEnd): Promise<void> => {
+      await this.#bgm.do(fadeOut)
+      await this.#bgm.do(stop);
+      this.#endBattle.next({gameEnd, animationTimeScale: this.#state.animationTimeScale});
+    };
+
+    const lastState = await repeatProgressWhenUnselectable();
+    if (lastState && lastState.effect.name === 'GameEnd') {
+      await onGameEnd(lastState.effect);
+    }
   }
 
   /**
@@ -260,5 +328,14 @@ export class BattleScene implements Scene {
    */
   async #playAnimation(animate: Animate): Promise<void> {
     await animate.timeScale(this.#state.animationTimeScale).play();
+  }
+
+  /**
+   * 戦闘シーンからカスタムバトルイベントに渡すプロパティを生成するヘルパーメソッド
+   *
+   * @return 生成結果
+   */
+  #toBattleSceneProps(): BattleSceneProps {
+    return {view: this.#view, pushWindow: this.#pushWindow, sounds: this.#sounds, sceneState: this.#state};
   }
 }

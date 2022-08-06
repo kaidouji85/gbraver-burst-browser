@@ -15,7 +15,7 @@ function rootInnerHTML(caption: string): string {
   return `
     <div class="${ROOT_CLASS_NAME}__background"></div>
     <div class="${ROOT_CLASS_NAME}__dialog">
-      <span>${caption}</span>    
+      <span class="${ROOT_CLASS_NAME}__caption">${caption}</span>    
     </div>
   `;
 }

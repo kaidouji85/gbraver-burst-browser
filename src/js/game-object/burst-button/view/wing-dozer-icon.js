@@ -10,8 +10,8 @@ import type {ArmdozerIcon} from "./armdozer-icon";
  * ウィングドーザアイコン
  */
 export class WingDozerIcon implements ArmdozerIcon {
-  _mesh: HorizontalAnimationMesh;
-  _group: typeof THREE.Group;
+  #mesh: HorizontalAnimationMesh;
+  #group: typeof THREE.Group;
 
   /**
    * コンストラクタ
@@ -19,27 +19,27 @@ export class WingDozerIcon implements ArmdozerIcon {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const neoLandozer = resources.textures.find(v => v.id === TEXTURE_IDS.WING_DOZER_BURST_BUTTON_ICON)
       ?.texture ?? new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({
+    this.#mesh = new HorizontalAnimationMesh({
       texture: neoLandozer,
       maxAnimation: 1,
       width: 280,
       height: 280,
     });
-    this._mesh.animate(1);
-    this._mesh.getObject3D().position.x = -20;
-    this._mesh.getObject3D().position.y = 120;
-    this._group.add(this._mesh.getObject3D());
+    this.#mesh.animate(1);
+    this.#mesh.getObject3D().position.x = -20;
+    this.#mesh.getObject3D().position.y = 120;
+    this.#group.add(this.#mesh.getObject3D());
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.destructor();
+    this.#mesh.destructor();
   }
 
   /**
@@ -48,7 +48,7 @@ export class WingDozerIcon implements ArmdozerIcon {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -57,6 +57,6 @@ export class WingDozerIcon implements ArmdozerIcon {
    * @param opacity 透明度
    */
   setOpacity(opacity: number): void {
-    this._mesh.setOpacity(opacity);
+    this.#mesh.setOpacity(opacity);
   }
 }

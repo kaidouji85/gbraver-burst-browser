@@ -17,9 +17,9 @@ import type {Position} from './position';
 // TODO カメラ位置、カメラ視点をコンストラクタから渡す
 /** 戦闘シーン3Dレイヤー用カメラ */
 export class TDCamera {
-  _model: Battle3DCameraModel;
-  _camera: typeof THREE.PerspectiveCamera;
-  _unsubscriber: Unsubscriber[];
+  #model: Battle3DCameraModel;
+  #camera: typeof THREE.PerspectiveCamera;
+  #unsubscriber: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -28,15 +28,15 @@ export class TDCamera {
    * @param resize リサイズストリーム
    */
   constructor(update: Stream<Update>, resize: Stream<Resize>) {
-    this._model = createInitialValue();
+    this.#model = createInitialValue();
     const aspect = getViewPortWidth() / getViewPortHeight();
-    this._camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
-    this._unsubscriber = [
+    this.#camera = new THREE.PerspectiveCamera(75, aspect, 1, 10000);
+    this.#unsubscriber = [
       update.subscribe(() => {
-        this._update();
+        this.#update();
       }),
       resize.subscribe(action => {
-        this._resize(action);
+        this.#resize(action);
       })
     ];
   }
@@ -45,7 +45,7 @@ export class TDCamera {
    * デストラクタ
    */
   destructor(): void {
-    this._unsubscriber.forEach(v => {
+    this.#unsubscriber.forEach(v => {
       v.unsubscribe();
     })
   }
@@ -58,7 +58,7 @@ export class TDCamera {
    * @return アニメーション
    */
   lookAt(position: Position, duration: number): Animate {
-    return lookAt(this._model, position, duration);
+    return lookAt(this.#model, position, duration);
   }
 
   /**
@@ -69,7 +69,7 @@ export class TDCamera {
    * @return アニメーション
    */
   move(position: Position, duration: number): Animate {
-    return move(this._model, position, duration);
+    return move(this.#model, position, duration);
   }
 
   /**
@@ -78,7 +78,7 @@ export class TDCamera {
    * @return カメラ
    */
   getCamera(): typeof THREE.Camera {
-    return this._camera;
+    return this.#camera;
   }
 
   /**
@@ -86,14 +86,14 @@ export class TDCamera {
    *
    * @param action アクション
    */
-  _resize(action: Resize): void {
-    onResizePerspectiveCamera(this._camera, action.width, action.height);
+  #resize(action: Resize): void {
+    onResizePerspectiveCamera(this.#camera, action.width, action.height);
   }
 
   /**
    * 状態更新
    */
-  _update(): void {
-    engage(this._model, this._camera);
+  #update(): void {
+    engage(this.#model, this.#camera);
   }
 }

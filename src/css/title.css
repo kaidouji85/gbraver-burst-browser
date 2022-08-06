@@ -26,10 +26,13 @@
   }
 }
 
-.title__login {
+.title__header {
   position: absolute;
   top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
   right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
+}
+
+.title__login {
   color: var(--button-font-color);
   background-color: var(--button-background-color);
   height: calc(var(--responsive-font-size) * 2.5);
@@ -45,9 +48,6 @@
 }
 
 .title__account {
-  position: absolute;
-  top: max(var(--safe-area-top), var(--responsive-font-size) * 1);
-  right: max(var(--safe-area-right), var(--responsive-font-size) * 1);
   display: flex;
   align-items: flex-end;
   flex-direction: column;
@@ -57,7 +57,7 @@
   display: none;
 }
 
-.title__account__avatar {
+.title__avatar {
   --height: max(var(--responsive-font-size) * 3, 64px);
   height: var(--height);
   object-fit: contain;
@@ -66,7 +66,7 @@
   margin-right: calc(var(--responsive-font-size) * 0.2);
 }
 
-.title__account__menu {
+.title__account-menu {
   --margin-horizontal: calc(var(--responsive-font-size) * 1.5);
   --margin-vertical: calc(var(--margin-horizontal) * 0.5);
   --menu-min-width: 30vw;
@@ -83,15 +83,15 @@
   max-width: var(--menu-max-width);
 }
 
-.title__account__menu--invisible {
+.title__account-menu--invisible {
   display: none;
 }
 
-.title__account__menu__name {
+.title__account-name {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
 
-.title__account__menu__name__value {
+.title__account-name-value {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -99,24 +99,24 @@
   max-width: var(--menu-max-width);
 }
 
-.title__account__menu__separation {
+.title__account-menu-separation {
   height: 0;
   border-top: solid #626262 1px;
   margin: var(--margin-vertical) 0;
 }
 
-.title__account__menu__delete-account {
+.title__delete-account {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
-.title__account__menu__delete-account:hover {
+.title__delete-account:hover {
   background-color: var(--button-background-color);
 }
 
-.title__account__menu__logout {
+.title__logout {
   margin: var(--margin-vertical) var(--margin-horizontal);
 }
 
-.title__account__menu__logout:hover {
+.title__logout:hover {
   background-color: var(--button-background-color);
 }
 
@@ -127,12 +127,12 @@
   justify-content: flex-end;
 }
 
-.title__contents__logo {
+.title__logo {
   height: 35vh;
   object-fit: contain;
 }
 
-.title__contents__controllers {
+.title__game-menu {
   width: 100vw;
   display: flex;
   flex-direction: row;
@@ -140,7 +140,7 @@
   padding-top: calc(var(--responsive-font-size) * 2);
 }
 
-.title__contents__controllers button {
+.title__game-menu button {
   width: calc(var(--responsive-font-size) * 10);
   height: calc(var(--responsive-font-size) * 3);
   margin: 0 calc(var(--responsive-font-size) * 0.5);
@@ -151,17 +151,19 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.title__contents__controllers__how-to-play,
-.title__contents__controllers__config {
+.title__how-to-play,
+.title__config {
   background-color: var(--sub-button-background-color);
 }
 
-.title__contents__controllers__arcade,
-.title__contents__controllers__casual-match {
+.title__tutorial,
+.title__arcade,
+.title__casual-match {
   background-color: var(--button-background-color);
 }
 
-.title__contents__controllers__casual-match--invisible {
+.title__tutorial--invisible,
+.title__casual-match--invisible {
   display: none;
 }
 
@@ -182,24 +184,24 @@
   padding-left: max(var(--responsive-font-size), var(--safe-area-left));
 }
 
-.title__footer__copy-rights {
+.title__copy-rights {
   font-size: calc(var(--responsive-font-size) * 0.8);
   margin-right: calc(var(--responsive-font-size) * 2);
 }
 
-.title__footer__terms-of-service {
+.title__terms-of-service {
   text-decoration: none;
   color: var(--button-font-color);
   margin-right: calc(var(--responsive-font-size) * 2);
 }
 
-.title__footer__privacy-policy {
+.title__privacy-policy {
   text-decoration: none;
   color: var(--button-font-color);
   margin-right: calc(var(--responsive-font-size) * 2);
 }
 
-.title__footer__contact {
+.title__contact {
   text-decoration: none;
   color: var(--button-font-color);
 }

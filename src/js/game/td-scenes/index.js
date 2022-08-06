@@ -8,18 +8,46 @@ import type {Resources} from "../../resource";
 import type {SoundId} from "../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
+import type {PushWindow} from "../../window/push-window";
 import type {Resize} from "../../window/resize";
 import type {GameAction} from "../game-actions";
 import {BattleScene} from "./battle";
 import type {BattleProgress} from "./battle/battle-progress";
+import type {CustomBattleEvent} from "./battle/custom-battle-event";
 import type {Scene} from "./scene";
+
+/** 戦闘シーン開始パラメータ */
+type StartBattleParams = {
+  /** リソース管理オブジェクト */
+  resources: Resources,
+  /** BGM管理オブジェクト */
+  bgm: BGMManager,
+  /** 再生するBGM */
+  playingBGM: SoundId,
+  /** ピクセルレート */
+  pixelRatio: number,
+  /** アニメーションタイムスケール初期値 */
+  initialAnimationTimeScale: number,
+  /** バトル進行オブジェクト */
+  battleProgress: BattleProgress,
+  /** プレイヤー情報 */
+  player: Player,
+  /** 敵情報 */
+  enemy: Player,
+  /** 初期ゲームステート */
+  initialState: GameState[],
+  /** カスタムバトルイベント */
+  customBattleEvent?: CustomBattleEvent,
+};
 
 /** three.js系シーンを集めたもの */
 export class TDScenes {
   #gameAction: StreamSource<GameAction>;
   #gameLoop: Stream<GameLoop>;
   #resize: Stream<Resize>;
+  #pushWindow: Stream<PushWindow>;
   #renderer: Renderer;
+  #rootHTMLElement: HTMLElement;
   #scene: ?Scene;
   #unsubscriber: Unsubscriber[];
 
@@ -27,13 +55,16 @@ export class TDScenes {
    * コンストラクタ
    *
    * @param resize リサイズストリーム
+   * @param pushWindow window押下ストリーム
    */
-  constructor(resize: Stream<Resize>) {
+  constructor(resize: Stream<Resize>, pushWindow: Stream<PushWindow>) {
     this.#resize = resize;
+    this.#pushWindow = pushWindow;
     this.#renderer = new Renderer(this.#resize);
     this.#gameAction = createStreamSource();
     this.#gameLoop = gameLoopStream();
     this.#scene = null;
+    this.#rootHTMLElement = document.createElement('div');
     this.#unsubscriber = [];
   }
 
@@ -54,24 +85,21 @@ export class TDScenes {
   /**
    * 戦闘シーンを開始する
    *
-   * @param resources リソース管理オブジェクト
-   * @param bgm BGM管理オブジェクト
-   * @param playingBGM 再生するBGMのID
-   * @param pixelRatio ピクセルレート
-   * @param initialAnimationTimeScale 戦闘アニメタイムスケールの初期値
-   * @param battleProgress 戦闘を進める
-   * @param player プレイヤー情報
-   * @param enemy 敵情報
-   * @param initialState ゲームの初期状態
+   * @param params 戦闘シーン開始パラメータ
    * @return 生成した戦闘シーン
    */
-  startBattle(resources: Resources, bgm: BGMManager, playingBGM: SoundId, pixelRatio: number, initialAnimationTimeScale: number, battleProgress: BattleProgress, player: Player, enemy: Player, initialState: GameState[]): BattleScene {
+  startBattle(params: StartBattleParams): BattleScene {
     this.#disposeScene();
 
-    this.#renderer.setPixelRatio(pixelRatio);
-    const scene = new BattleScene({resources, bgm, playingBGM, renderer: this.#renderer, battleProgress, initialAnimationTimeScale,
-      player, enemy, initialState, gameLoop: this.#gameLoop, resize: this.#resize});
+    this.#renderer.setPixelRatio(params.pixelRatio);
+    const scene = new BattleScene({resources: params.resources, bgm: params.bgm, playingBGM: params.playingBGM,
+      renderer: this.#renderer, battleProgress: params.battleProgress, initialAnimationTimeScale: params.initialAnimationTimeScale,
+      player: params.player, enemy: params.enemy, initialState: params.initialState, gameLoop: this.#gameLoop, resize: this.#resize,
+      pushWindow: this.#pushWindow, customBattleEvent: params.customBattleEvent});
     this.#scene = scene;
+    scene.getHTMLElements().forEach(element => {
+      this.#rootHTMLElement.appendChild(element);
+    });
     this.#unsubscriber = [
       scene.gameEndNotifier().subscribe(v => {
         this.#gameAction.next({type: 'EndBattle', gameEnd: v.gameEnd, animationTimeScale: v.animationTimeScale});
@@ -88,12 +116,12 @@ export class TDScenes {
   }
 
   /**
-   * three.jsレンダラのHTML要素を取得する
+   * 本クラスで利用している全HTML要素を取得する
    *
-   * @return 取得結果
+   * @return 本クラスで利用している全HTML要素
    */
-  getRendererDOM(): HTMLElement {
-    return this.#renderer.getRendererDOM();
+  getHTMLElements(): HTMLElement[] {
+    return [this.#rootHTMLElement, this.#renderer.getRendererDOM()];
   }
 
   /**
@@ -102,6 +130,7 @@ export class TDScenes {
   #disposeScene(): void {
     this.#scene && this.#scene.destructor();
     this.#renderer.disposeRenders();
+    this.#rootHTMLElement.innerHTML = '';
     this.#unsubscriber.forEach(v => {
       v.unsubscribe();
     });

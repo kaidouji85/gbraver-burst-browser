@@ -12,9 +12,9 @@ import type {DamageIndicatorView} from "./view/damage-indicator-view";
 
 /** ダメージインジケータ */
 export class DamageIndicator {
-  _model: DamageIndicatorModel;
-  _view: DamageIndicatorView;
-  _unsubscriber: Unsubscriber;
+  #model: DamageIndicatorModel;
+  #view: DamageIndicatorView;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -23,40 +23,40 @@ export class DamageIndicator {
    * @param gameObjectAction Stream<GameObjectAction>
    */
   constructor(view: DamageIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
-    this._view = view;
-    this._model = createInitialValue();
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#view = view;
+    this.#model = createInitialValue();
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._update();
+        this.#update();
       } else if (action.type === 'PreRender') {
-        this._preRender(action);
+        this.#preRender(action);
       }
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /** ダメージ数字を表示する */
   popUp(damage: number): Animate {
-    return popUp(this._model, damage);
+    return popUp(this.#model, damage);
   }
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /** 状態更新 */
-  _update() {
-    this._view.engage(this._model);
+  #update() {
+    this.#view.engage(this.#model);
   }
 
   /** プリレンダー */
-  _preRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+  #preRender(action: PreRender): void {
+    this.#view.lookAt(action.camera);
   }
 }

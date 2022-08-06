@@ -21,3 +21,14 @@ export const PostNPCBattleComplete: PostBattleButtonConfig[] = [
 export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
   {style: 'MainButton', action: {type: 'GotoTitle'}, label: 'タイトルへ'},
 ];
+
+/** チュートリアル勝利後のアクションボタン */
+export const PostTutorialWinButtons: PostBattleButtonConfig[] = [
+  {style: 'MainButton', action: {type: 'GotoTitle'}, label: 'タイトルへ'},
+];
+
+/** チュートリアル敗北後のアクションボタン */
+export const PostTutorialLoseButtons: PostBattleButtonConfig[] = [
+  {style: 'SubButton', action: {type: 'GotoTitle'}, label: 'タイトルへ'},
+  {style: 'MainButton', action: {type: 'Retry'}, label: 'リトライ'},
+];

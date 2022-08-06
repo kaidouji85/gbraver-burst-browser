@@ -12,21 +12,21 @@
   align-items: center;
 }
 
-.loading__completed-rate {
+.loading__progress {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.loading__completed-rate__bar {
+.loading__outer-progress-bar {
   width: 200px;
   height: 20px;
   background: #000;
   border: 2px solid #000;
 }
 
-.loading__completed-rate__bar__completed {
+.loading__progress-bar {
   width: 0;
   height: 20px;
   background: red;

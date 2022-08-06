@@ -47,7 +47,7 @@
   box-sizing: border-box;
 }
 
-.matching__dialog__closer {
+.matching__closer {
   position: absolute;
   top: calc(var(--closer-height) * -0.5);
   left: calc(var(--closer-width) * -0.5);
@@ -56,14 +56,14 @@
   z-index: var(--zindex-close);
 }
 
-.matching__dialog__caption {
+.matching__caption {
   display: flex;
   justify-content: center;
   font-size: calc(var(--responsive-font-size) * 1.2);
   margin-bottom: calc(var(--responsive-font-size) * 1.5);
 }
 
-.matching__dialog__cancel {
+.matching__cancel {
   width: var(--control-button-width);
   height: var(--control-button-height);
   font-size: var(--responsive-font-size);

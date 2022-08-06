@@ -27,6 +27,7 @@ import {onSelectionCancel} from "./game-procedure/on-selection-cancel";
 import {onSelectionComplete} from "./game-procedure/on-selection-complete";
 import {onShowHowToPlay} from "./game-procedure/on-show-how-to-play";
 import {onSuddenlyEndBattle} from "./game-procedure/on-suddenly-battle-end";
+import {onTutorialStart} from "./game-procedure/on-tutorial-start";
 import {onUniversalLogin} from "./game-procedure/on-universal-login";
 import {onWebSocketAPIUnintentionalClose} from "./game-procedure/on-web-socket-api-unintentional-close";
 import {onWebSocketAPIError} from "./game-procedure/on-websocker-api-error";
@@ -55,7 +56,7 @@ export class Game {
       this.#props.domDialogs.getRootHTMLElement(),
       this.#props.domScenes.getRootHTMLElement(),
       this.#props.domFloaters.getRootHTMLElement(),
-      this.#props.tdScenes.getRendererDOM()];
+      ...this.#props.tdScenes.getHTMLElements()];
     elements.forEach(element => {
       body.appendChild(element);
     });
@@ -129,6 +130,8 @@ export class Game {
         onConfigChangeCancel(this.#props);
       } else if (action.type === 'ConfigChangeComplete') {
         onConfigChangeComplete(this.#props, action);
+      } else if (action.type === 'TutorialStart') {
+        onTutorialStart(this.#props);
       }
     }));
   }

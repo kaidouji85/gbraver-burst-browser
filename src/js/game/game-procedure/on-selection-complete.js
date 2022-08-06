@@ -55,10 +55,11 @@ export async function onSelectionComplete(props: GameProps,  action: SelectionCo
     await props.domScenes.startMatchCard(props.resources, battle.player.armdozer.id, battle.enemy.armdozer.id, 'CASUAL MATCH');
     await props.fader.fadeIn();
 
-    const progress = createBattleProgress(battle);
+    const battleProgress = createBattleProgress(battle);
     const config = await props.config.load();
-    const battleScene = props.tdScenes.startBattle(props.resources, props.bgm, SOUND_IDS.BATTLE_BGM_01,
-      config.webGLPixelRatio, config.battleAnimationTimeScale, progress, battle.player, battle.enemy, battle.initialState);
+    const battleScene = props.tdScenes.startBattle({resources: props.resources, bgm: props.bgm,
+      playingBGM: SOUND_IDS.BATTLE_BGM_01, pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale,
+      battleProgress, player: battle.player, enemy: battle.enemy, initialState: battle.initialState});
     await waitAnimationFrame();
     await Promise.all([(async () => {
       await props.fader.fadeOut();

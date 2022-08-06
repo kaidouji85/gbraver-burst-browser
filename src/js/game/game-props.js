@@ -21,6 +21,8 @@ import {emptyResources} from "../resource";
 import type {ResourceRoot} from "../resource/resource-root";
 import type {Stream} from "../stream/stream";
 import {CssVH} from "../view-port/vh";
+import type {PushWindow} from "../window/push-window";
+import {pushWindowsStream} from "../window/push-window";
 import type {Resize} from "../window/resize";
 import {resizeStream} from "../window/resize";
 import type {GbraverBurstBrowserConfigRepository} from "./config/browser-config";
@@ -46,6 +48,8 @@ export interface GameProps {
   isPerformanceStatsVisible: boolean;
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
+  /** チュートリアルが利用可能か否か、trueで利用可能 */
+  isTutorialEnable: boolean,
   /** 遊び方動画のURL */
   howToPlayMovieURL: string;
   /** 利用規約ページのURL */
@@ -66,6 +70,8 @@ export interface GameProps {
   suddenlyBattleEnd: FutureSuddenlyBattleEnd;
   /** リサイズ */
   resize: Stream<Resize>;
+  /** window押下 */
+  pushWindow: Stream<PushWindow>;
   /** cssカスタムプロパティ --vh */
   vh: CssVH;
   /** DOMフェーダ */
@@ -110,6 +116,8 @@ export type GamePropsGeneratorParam = {
   isServiceWorkerUsed: boolean,
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
   isAPIServerEnable: boolean,
+  /** チュートリアルが利用可能か否か、trueで利用可能 */
+  isTutorialEnable: boolean,
   /** APIサーバのSDK */
   api: GameAPI,
   /** ブラウザ設定リポジトリ */
@@ -123,13 +131,15 @@ export type GamePropsGeneratorParam = {
  * @return 生成結果
  */
 export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
-  const resize = resizeStream()
+  const resize = resizeStream();
+  const pushWindow = pushWindowsStream();
   return {
     resourceRoot: param.resourceRoot,
     resources: emptyResources(param.resourceRoot),
     isFullResourceLoaded: false,
     isServiceWorkerUsed: param.isServiceWorkerUsed,
     isPerformanceStatsVisible: param.isPerformanceStatsVisible,
+    isTutorialEnable: param.isTutorialEnable,
     howToPlayMovieURL: param.howToPlayMovieURL,
     termsOfServiceURL: param.termsOfServiceURL,
     privacyPolicyURL: param.privacyPolicyURL,
@@ -137,6 +147,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     isAPIServerEnable: param.isAPIServerEnable,
     inProgress: {type: 'None'},
     resize,
+    pushWindow,
     vh: new CssVH(resize),
     api: param.api,
     config: param.config,
@@ -146,7 +157,7 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     domScenes: new DOMScenes(),
     domDialogs: new DOMDialogs(),
     domFloaters: new DOMFloaters(),
-    tdScenes: new TDScenes(resize),
+    tdScenes: new TDScenes(resize, pushWindow),
     serviceWorker: null,
     bgm: createBGMManager(),
   };

@@ -14,9 +14,9 @@ import type {BatteryNumberView} from "./view/battery-number-view";
 
 /** バッテリー数字 */
 export class BatteryNumber {
-  _model: BatteryNumberModel;
-  _view: BatteryNumberView;
-  _unsubscriber: Unsubscriber;
+  #model: BatteryNumberModel;
+  #view: BatteryNumberView;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -25,21 +25,21 @@ export class BatteryNumber {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: BatteryNumberView, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._view = view;
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue();
+    this.#view = view;
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._update();
+        this.#update();
       } else if (action.type === 'PreRender') {
-        this._preRender(action);
+        this.#preRender(action);
       }
     });
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -49,7 +49,7 @@ export class BatteryNumber {
    * @return アニメーション
    */
   show(battery: number): Animate {
-    return show(this._model, battery);
+    return show(this.#model, battery);
   }
 
   /**
@@ -59,7 +59,7 @@ export class BatteryNumber {
    * @return アニメーション
    */
   change(battery: number): Animate {
-    return change(this._model, battery);
+    return change(this.#model, battery);
   }
 
   /**
@@ -68,21 +68,21 @@ export class BatteryNumber {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this._model);
+    return hidden(this.#model);
   }
 
   /** シーンに追加するオブジェクトを返す */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /** 状態更新 */
-  _update(): void {
-    this._view.engage(this._model);
+  #update(): void {
+    this.#view.engage(this.#model);
   }
 
   /** プリレンダー */
-  _preRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+  #preRender(action: PreRender): void {
+    this.#view.lookAt(action.camera);
   }
 }

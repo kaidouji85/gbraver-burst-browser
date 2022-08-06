@@ -26,12 +26,12 @@ type DataIDs = {
 function rootInnerHTML(ids: DataIDs, level: number): string {
   return `
     <div class="${ROOT_CLASS}__title">
-      <div class="${ROOT_CLASS}__title__stage">
-        <div class="${ROOT_CLASS}__title__stage__prefix--capitalized">S</div>      
-        <div class="${ROOT_CLASS}__title__stage__prefix">TAGE</div>
-        <div class="${ROOT_CLASS}__title__stage__level">${level}</div>
+      <div class="${ROOT_CLASS}__stage">
+        <div class="${ROOT_CLASS}__stage-prefix--capitalized">S</div>      
+        <div class="${ROOT_CLASS}__stage-prefix">TAGE</div>
+        <div class="${ROOT_CLASS}__stage-level">${level}</div>
       </div>
-      <div class="${ROOT_CLASS}__title__caption" data-id="${ids.caption}"></div>
+      <div class="${ROOT_CLASS}__caption" data-id="${ids.caption}"></div>
     </div>
     <img class="${ROOT_CLASS}__armdozer-icon" data-id="${ids.armDozerIcon}">
   `;
@@ -84,8 +84,8 @@ export class NPCStageTitle implements DOMScene {
 
     elements.caption.innerHTML = caption
       .map(v => `
-        <div class="${ROOT_CLASS}__title__caption__clause--capitalized">${v.slice(0,1)}</div>
-        <div class="${ROOT_CLASS}__title__caption__clause">${v.slice(1)}</div>
+        <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(0,1)}</div>
+        <div class="${ROOT_CLASS}__caption-clause">${v.slice(1)}</div>
       `).reduce((a, b) => a + b);
   }
 

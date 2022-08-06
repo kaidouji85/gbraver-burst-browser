@@ -1,0 +1,48 @@
+/** root要素 */
+
+:root {
+  /** 画面サイズ */
+  --safe-area-top: env(safe-area-inset-top);
+  --safe-area-right: env(safe-area-inset-right);
+  --safe-area-bottom: env(safe-area-inset-bottom);
+  --safe-area-left: env(safe-area-inset-left);
+  --screen-padding-top: calc(var(--safe-area-top) + 1rem);
+  --screen-padding-left: calc(var(--safe-area-left) + 1rem);
+  --screen-padding-right: calc(var(--safe-area-right) + 1rem);
+  --screen-padding-bottom: calc(var(--safe-area-bottom) + 1rem);
+  --screen-width: 100vw;
+  --screen-height: calc(var(--vh, 1vh) * 100);
+
+  /** フォント */
+  --font-color: rgb(240, 240, 240);
+  --responsive-font-size: 10px;
+
+  /** 背景 */
+  --background-color: rgb(23, 23, 23);
+
+  /** z-index */
+  --zindex-background: 8;
+  --zindex-dialog: 9;
+  --zindex-close: 10;
+  --zindex-fader: 11;
+  --zindex-play-in-landscape: 12;
+
+  /** ボタン */
+  --button-background-color: #007bbb;
+  --sub-button-background-color: #595857;
+  --button-font-color: rgb(240, 240, 240);
+  --button-border-radius: calc(var(--responsive-font-size) * 0.5);
+  --button-border: none;
+  --button-box-shadow: 0 0 0.5em rgb(25 25 25);
+
+  /** ダイアログ */
+  --dialog-border: solid #a9a9a9 1px;
+  --dialog-border-radius: calc(var(--responsive-font-size) * 0.5);
+}
+
+/* iPhoneXランドスケープ画面高以上の場合に有効になるメディアクエリ */
+@media (min-height: 375px) {
+  :root {
+    --responsive-font-size: max(3vh, 1rem);
+  }
+}

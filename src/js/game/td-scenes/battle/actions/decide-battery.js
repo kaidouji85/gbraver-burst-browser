@@ -1,7 +1,10 @@
 // @flow
 
-/** バッテリー決定 */
+/** バッテリーボタン押下 */
 export type DecideBattery = {
   type: 'decideBattery',
-  battery: number
+  /** 選択したバッテリーの値 */
+  battery: number,
+  /** バッテリーボタン押下時のDOMイベント */
+  event: Event,
 };

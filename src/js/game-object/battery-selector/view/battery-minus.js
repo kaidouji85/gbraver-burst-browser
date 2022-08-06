@@ -23,10 +23,10 @@ type Param = {
 
 /** バッテリーマイナスボタン */
 export class BatteryMinus {
-  _group: typeof THREE.Group;
-  _activeButton: SimpleImageMesh;
-  _buttonDisabled: SimpleImageMesh;
-  _overlap: ButtonOverlap;
+  #group: typeof THREE.Group;
+  #activeButton: SimpleImageMesh;
+  #buttonDisabled: SimpleImageMesh;
+  #overlap: ButtonOverlap;
 
   /**
    * コンストラクタ
@@ -36,13 +36,13 @@ export class BatteryMinus {
   constructor(param: Param) {
     const active = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_MINUS)?.image ?? new Image();
-    this._activeButton = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: active, imageWidth: 172});
+    this.#activeButton = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: active, imageWidth: 172});
 
     const buttonDisabled = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED)?.image ?? new Image();
-    this._buttonDisabled = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: buttonDisabled, imageWidth: 176});
+    this.#buttonDisabled = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: buttonDisabled, imageWidth: 176});
 
-    this._overlap = circleButtonOverlap({
+    this.#overlap = circleButtonOverlap({
       radius: 80,
       segments: 32,
       gameObjectAction: param.gameObjectAction,
@@ -51,23 +51,23 @@ export class BatteryMinus {
       }
     });
 
-    this._group = new THREE.Group();
-    this._group.add(this._activeButton.getObject3D());
-    this._group.add(this._buttonDisabled.getObject3D());
-    this._group.add(this._overlap.getObject3D());
+    this.#group = new THREE.Group();
+    this.#group.add(this.#activeButton.getObject3D());
+    this.#group.add(this.#buttonDisabled.getObject3D());
+    this.#group.add(this.#overlap.getObject3D());
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._activeButton.destructor();
-    this._buttonDisabled.destructor();
-    this._overlap.destructor();
+    this.#activeButton.destructor();
+    this.#buttonDisabled.destructor();
+    this.#overlap.destructor();
   }
 
   /** モデルをビューに反映させる */
   update(model: BatterySelectorModel): void {
-    this._activeButton.setOpacity(model.opacity);
-    this._activeButton.getObject3D().scale.set(
+    this.#activeButton.setOpacity(model.opacity);
+    this.#activeButton.getObject3D().scale.set(
       model.minusButtonScale,
       model.minusButtonScale,
       model.minusButtonScale
@@ -75,8 +75,8 @@ export class BatteryMinus {
 
     const isDisabledVisible = !canBatteryMinus(model);
     const disabledOpacity = isDisabledVisible ? model.opacity : 0;
-    this._buttonDisabled.setOpacity(disabledOpacity);
-    this._buttonDisabled.getObject3D().scale.set(
+    this.#buttonDisabled.setOpacity(disabledOpacity);
+    this.#buttonDisabled.getObject3D().scale.set(
       model.minusButtonScale,
       model.minusButtonScale,
       model.minusButtonScale
@@ -85,6 +85,6 @@ export class BatteryMinus {
 
   /** シーンに追加するオブジェクトを取得する */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 }

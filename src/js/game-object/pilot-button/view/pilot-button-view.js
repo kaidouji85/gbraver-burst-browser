@@ -17,7 +17,7 @@ import type {PilotIcon} from "./pilot-icon";
  * パイロットボタン ビュー
  */
 export class PilotButtonView {
-  _pushButton: StreamSource<void>;
+  _pushButton: StreamSource<Event>;
   _group: typeof THREE.Group;
   _button: SimpleImageMesh;
   _label: SimpleImageMesh;
@@ -61,8 +61,8 @@ export class PilotButtonView {
       radius: 200,
       segments: 32,
       gameObjectAction: gameObjectAction,
-      onButtonPush: ()=> {
-        this._pushButton.next();
+      onButtonPush: event => {
+        this._pushButton.next(event);
       }
     });
     this._overlap.getObject3D().position.z = 1;
@@ -97,8 +97,8 @@ export class PilotButtonView {
     this._buttonDisabled.setOpacity(disabledOpacity);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
-    const groupScale = 0.3 * devicePerScale * model.scale
-    this._group.scale.set(groupScale, groupScale, groupScale);
+    const frontScale = 0.3 * devicePerScale * model.scale
+    this._group.scale.set(frontScale, frontScale, 0.3);
     const paddingLeft = 65;
     const marginLeft = 10;
     this._group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
@@ -124,7 +124,7 @@ export class PilotButtonView {
    * 
    * @return 通知ストリーム
    */
-  pushButtonNotifier(): Stream<void> {
+  pushButtonNotifier(): Stream<Event> {
     return this._pushButton;
   }
 }

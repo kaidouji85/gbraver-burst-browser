@@ -170,6 +170,11 @@ export type ConfigChangeCancel = {
   type: 'ConfigChangeCancel'
 };
 
+/** チュートリアルスタート */
+export type TutorialStart = {
+  type: 'TutorialStart'
+};
+
 /**
  * ゲーム全体で利用するアクション
  */
@@ -199,4 +204,5 @@ export type GameAction = ReloadRequest
  | EndNetworkError
  | ConfigChangeStart
  | ConfigChangeComplete
- | ConfigChangeCancel;
+ | ConfigChangeCancel
+ | TutorialStart;

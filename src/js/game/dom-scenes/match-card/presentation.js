@@ -29,13 +29,13 @@ export class MatchCardPresentation {
     this.#root.className = 'match-card';
     this.#root.innerHTML = `
       <div class="match-card__contents">
-        <div class="match-card__contents__caption">
+        <div class="match-card__caption">
           ${caption}
         </div>
-        <div class="match-card__contents__cards">
-          <img class="match-card__contents__cards__enemy" data-id="${enemyId}">
-          <div class="match-card__contents__cards__vs">vs</div>
-          <img class="match-card__contents__cards__player"  data-id="${playerId}"">
+        <div class="match-card__cards">
+          <img class="match-card__enemy-card" data-id="${enemyId}">
+          <div class="match-card__vs">vs</div>
+          <img class="match-card__player-card"  data-id="${playerId}"">
         </div>
       </div>
     `;
