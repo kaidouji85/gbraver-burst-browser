@@ -3,24 +3,29 @@ import type {BattleResult, GameState, Player, PlayerId} from "gbraver-burst-core
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
-  BattleSceneProps, BurstCommandSelected,
+  BattleSceneProps,
+  BurstCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
-  LastState, PilotSkillCommandSelected,
+  LastState,
+  PilotSkillCommandSelected,
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
 import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
 import {waitTime} from "../wait/wait-time";
 import {
   activeLeftMessageWindow,
-  activeLeftMessageWindowWithFace, activeRightMessageWindow,
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindow,
   activeRightMessageWindowWithFace
 } from "./active-message-window";
 import {
   attentionBatterySelector,
-  attentionBurstButton, attentionPilotButton,
+  attentionBurstButton,
+  attentionPilotButton,
   unattentionBatterySelector,
-  unattentionBurstButton, unattentionPilotButton
+  unattentionBurstButton,
+  unattentionPilotButton
 } from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {invisibleAllMessageWindows} from "./invisible-all-message-windows";
