@@ -48,7 +48,7 @@ const introduction = async (props: BattleSceneProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「よろしくお願いします」']
+    ['シンヤ', '「よろしくお願いしますッス」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -63,7 +63,7 @@ const introduction = async (props: BattleSceneProps) => {
 
   props.view.dom.rightMessageWindow.lighten();
   await scrollRightMessages(props, [
-    ['シンヤ', '「了解っす'],
+    ['シンヤ', '「了解ッス'],
     ['それじゃ遠慮なくいきますよ ツバサ先輩」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
@@ -160,7 +160,7 @@ const batteryRuleDescription = async (props: BattleSceneProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「なるほど シンプルながらも奥が深いんすね」']
+    ['シンヤ', '「なるほど シンプルながらも奥が深いッスね」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -173,8 +173,8 @@ const batteryRuleDescription = async (props: BattleSceneProps) => {
 
   props.view.dom.rightMessageWindow.lighten();
   await scrollRightMessages(props, [
-    ['シンヤ', '「了解っす'],
-    ['お手柔らかに頼みますよ ツバサ先輩'],
+    ['シンヤ', '「了解ッス'],
+    ['お手柔らかに頼むッスよ ツバサ先輩'],
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
@@ -228,7 +228,7 @@ const enemyAttackHit = async (props: BattleSceneProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「すごいダメージだ'],
-    ['ツバサ先輩 少しは加減してくださいよ']
+    ['ツバサ先輩 少しは加減してくださいッスよ']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -272,8 +272,8 @@ const completeAttackAndDefense = async (props: BattleSceneProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「了解っす'],
-    ['勝負はこれからですよ ツバサ先輩」']
+    ['シンヤ', '「了解ッス'],
+    ['勝負はこれからッスよ ツバサ先輩」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
@@ -283,18 +283,47 @@ const completeAttackAndDefense = async (props: BattleSceneProps) => {
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const noZeroDefense = async (props: BattleSceneProps) => {
+const noZeroBatteryDefense = async (props: BattleSceneProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「待て シンヤ!! 0防御はまずい」'],
     ['たとえHPが満タンでも即死級のダメージを受けるぞ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
+};
+
+const cancelZeroBatteryDefense = async (props: BattleSceneProps) => {
+  await noZeroBatteryDefense(props);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「えっ それはマズイっすね'],
-    ['今のは無かったことにして欲しいっす」']
+    ['シンヤ', '「えっ それはマズイッスね'],
+    ['今のは無かったことにして欲しいッス」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+};
+
+const doBurstBecauseZeroBattery = async (props: BattleSceneProps) => {
+  await noZeroBatteryDefense(props);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「でもツバサ先輩 俺のバッテリーはもう0ッスよ'],
+    ['俺はこのまま即死ッスか」']
+
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「心配するな シンヤ こういう時はバーストだ'],
+    ['バーストは1試合に1回しか使えないが 発動すればバッテリーを大幅に回復できるんだ」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「了解ッス バーストで立て直せばいいんすね」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
@@ -307,14 +336,14 @@ const noZeroDefense = async (props: BattleSceneProps) => {
 const victory = async (props: BattleSceneProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「俺の勝ちですよ ツバサ先輩」']
+    ['シンヤ', '「俺の勝ちッスよ ツバサ先輩」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「見事だ シンヤ'],
-    ['次の試合には 君も出そうと思う」']
+    ['この調子で精進を積んでくれ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
@@ -354,7 +383,7 @@ const tutorialEnd = async (props: BattleSceneProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「ありがとうございました」']
+    ['シンヤ', '「ありがとうございましたッス」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
@@ -513,7 +542,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       : null;
     const isZeroBatteryCommand = props.battery.battery === 0;
     if (lastState && lastState.isEnemyTurn && isZeroBatteryCommand) {
-      await noZeroDefense(props);
+      await cancelZeroBatteryDefense(props);
       refreshConversation(props);
       (this.selectableCommands === 'BatteryOnly') && focusInAttackBatterySelector(props);
       return {isCommandCanceled: true};
