@@ -415,9 +415,13 @@ export interface TutorialEvent extends CustomBattleEvent {
 
 /** チュートリアルイベントの実装 */
 class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEvent {
+  /** @override */
   player: Player;
+  /** @override */
   npc: NPC;
+  /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
+  /** 選択可能なコマンド、beforeLastStateで更新して、onLastStateで設定内容に応じてコマンド入力制限を行う */
   selectableCommands: SelectableCommands;
 
   /**
@@ -450,11 +454,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       : null;
     if (turn === 1) {
       await introduction(props);
-    } else if (turn === 2 && lastBattle && lastBattle.isAttacker) {
+    } else if (turn === 2 && lastBattle) {
       await playerAttack(props, lastBattle.result);
       await refreshConversation(props);
       await batteryRuleDescription(props);
-    } else if (turn === 3 && lastBattle && !lastBattle.isAttacker) {
+    } else if (turn === 3 && lastBattle) {
       this.selectableCommands = 'All';
       await enemyAttack(props, lastBattle.result);
       await refreshConversation(props);
