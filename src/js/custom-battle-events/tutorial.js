@@ -428,6 +428,15 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     const lastState = foundLastState
       ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === this.player.playerId}
       : null;
+    if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && lastState.isMyTurn) {
+      await focusInAttackBatterySelector(props);
+    } else if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
+      await focusInDefenseBatterySelector(props);
+    }
+  }
+
+  /** @override */
+  async afterLastState(props: LastState): Promise<void> {
     const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
     const gameEnd = (foundGameEnd && foundGameEnd.effect.name === 'GameEnd')
       ? {isVictory: foundGameEnd.effect.result.type === 'GameOver' && foundGameEnd.effect.result.winner === this.player.playerId}
@@ -442,10 +451,6 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await refreshConversation(props);
       await tutorialEnd(props);
       invisibleAllMessageWindows(props);
-    } else if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && lastState.isMyTurn) {
-      await focusInAttackBatterySelector(props);
-    } else if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
-      await focusInDefenseBatterySelector(props);
     }
   }
 
