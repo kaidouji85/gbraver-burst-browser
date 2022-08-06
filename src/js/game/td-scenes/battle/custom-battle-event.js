@@ -68,6 +68,14 @@ export interface CustomBattleEvent {
   onLastState(props: LastState): Promise<void>;
 
   /**
+   * 最終ステート完了後イベント
+   *
+   * @param props イベントプロパティ
+   * @return 処理が完了したら発火するPromise
+   */
+  afterLastState(props: LastState): Promise<void>;
+
+  /**
    * バッテリーコマンド選択イベント
    *
    * @param props イベントプロパティ
