@@ -279,6 +279,27 @@ const completeAttackAndDefense = async (props: BattleSceneProps) => {
 };
 
 /**
+ * ストーリー 0防御
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const noZeroDefense = async (props: BattleSceneProps) => {
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「待て シンヤ!! 0防御はまずい」'],
+    ['たとえHPが満タンでも即死級のダメージを受けるぞ」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「えっ それはマズイっすね'],
+    ['今のは無かったことにして欲しいっす」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+};
+
+/**
  * ストーリー プレイヤーの勝利
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
@@ -441,8 +462,10 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       invisibleAllMessageWindows(props);
     } else if (lastBattle && lastBattle.isAttacker) {
       await playerAttack(props, lastBattle.result);
+      refreshConversation(props);
     } else if (lastBattle && !lastBattle.isAttacker) {
       await enemyAttack(props, lastBattle.result);
+      refreshConversation(props);
     }
   }
 
@@ -480,7 +503,17 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    if (this.selectableCommands === 'All') {
+    const foundLastState = this.stateHistory[this.stateHistory.length - 1];
+    const lastState = foundLastState
+      ? {isEnemyTurn: foundLastState.activePlayerId !== this.player.playerId}
+      : null;
+    const isZeroBatteryCommand = props.battery.battery === 0;
+    if (lastState && lastState.isEnemyTurn && isZeroBatteryCommand) {
+      await noZeroDefense(props);
+      refreshConversation(props);
+      (this.selectableCommands === 'BatteryOnly') && focusInAttackBatterySelector(props);
+      return {isCommandCanceled: true};
+    } if (this.selectableCommands === 'All') {
       return {isCommandCanceled: false};
     } else if (this.selectableCommands === 'BatteryOnly') {
       focusOutBatterySelector(props);
