@@ -317,11 +317,11 @@ const tutorialEnd = async (props: BattleSceneProps) => {
 };
 
 /**
- * 攻撃バッテリーコマンド以外は選択不可にするヘルパー関数
+ * プレイヤー攻撃時にバッテリーセレクタにフォーカスインする
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-const attackBatteryOnly = async (props: BattleSceneProps) => {
+const focusInAttackBatterySelector = async (props: BattleSceneProps) => {
   attentionBatterySelector(props);
   invisibleAllMessageWindows(props);
   activeLeftMessageWindow(props);
@@ -333,11 +333,11 @@ const attackBatteryOnly = async (props: BattleSceneProps) => {
 };
 
 /**
- * 防御バッテリーコマンド以外は選択不可にするヘルパー関数
+ * プレイヤー防御時にバッテリーセレクタにフォーカスインする
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-const defenseBatteryOnly = async (props: BattleSceneProps) => {
+const focusInDefenseBatterySelector = async (props: BattleSceneProps) => {
   attentionBatterySelector(props);
   invisibleAllMessageWindows(props);
   activeLeftMessageWindow(props);
@@ -349,11 +349,11 @@ const defenseBatteryOnly = async (props: BattleSceneProps) => {
 };
 
 /**
- * バッテリー選択強制からゲームを進めるヘルパー関数
+ * バッテリーセレクタからフォーカスアウトする
  * @param props イベントプロパティ
  * @return 処理が完了したら発火するPromise
  */
-const progressGameFromBatteryOnly = async (props: BattleSceneProps) => {
+const focusOutBatterySelector = async (props: BattleSceneProps) => {
   props.view.dom.leftMessageWindow.visible(false);
   await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
   unattentionBatterySelector(props);
@@ -443,9 +443,9 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await tutorialEnd(props);
       invisibleAllMessageWindows(props);
     } else if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && lastState.isMyTurn) {
-      await attackBatteryOnly(props);
+      await focusInAttackBatterySelector(props);
     } else if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
-      await defenseBatteryOnly(props);
+      await focusInDefenseBatterySelector(props);
     }
   }
 
@@ -454,7 +454,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     if (this.selectableCommands === 'All') {
       return {isCommandCanceled: false};
     } else if (this.selectableCommands === 'BatteryOnly') {
-      progressGameFromBatteryOnly(props);
+      focusOutBatterySelector(props);
       return {isCommandCanceled: false};
     }
     return {isCommandCanceled: true};
