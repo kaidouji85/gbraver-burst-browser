@@ -57,13 +57,13 @@ const introduction = async (props: BattleSceneProps) => {
     ['ツバサ', '「いい返事だな では早速はじめよう'],
     ['試合の基本は 攻撃側 防御側でバッテリーを出し合うことだ'],
     ['大きいバッテリーを出した側の行動が成功するのだが これは実際にやってみた方が早いな'],
-    ['シンヤ 私が防御に回るから 好きに攻撃してみろ」']
+    ['シンヤ 私が防御に回るから 好きなように攻撃してくれ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
 
   props.view.dom.rightMessageWindow.lighten();
   await scrollRightMessages(props, [
-    ['シンヤ', '「了解っす '],
+    ['シンヤ', '「了解っす'],
     ['それじゃ遠慮なくいきますよ ツバサ先輩」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
@@ -83,7 +83,7 @@ const introduction = async (props: BattleSceneProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
-    ['ツバサ', '「見事な攻撃だ シンヤ'],
+    ['ツバサ', '「見事な攻撃だな シンヤ'],
     ['君が私よりも大きいバッテリーを出したので 攻撃がヒットしたぞ」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -103,7 +103,7 @@ const playerAttackGuarded = async (props: BattleSceneProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
-    ['ツバサ', '「甘いぞ シンヤ」'],
+    ['ツバサ', '「甘いぞ シンヤ'],
     ['君は私と同じバッテリーを出したので 攻撃をガード ダメージを半減させてもらった」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -123,7 +123,7 @@ const playerAttackMiss = async (props: BattleSceneProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
-    ['ツバサ', '「まだまだ だな シンヤ」'],
+    ['ツバサ', '「まだまだ だな シンヤ'],
     ['私の方が君より大きいバッテリーを出したので 攻撃を回避させてもらった」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -132,6 +132,7 @@ const playerAttackMiss = async (props: BattleSceneProps) => {
 /**
  * プレイヤー攻撃の結果に応じてストーリーを分岐する
  * @param props イベントプロパティ
+ * @param battleResult 戦闘結果
  * @return ストーリーが完了したら発火するPromise
  */
 const playerAttack = async (props: BattleSceneProps, battleResult: BattleResult) => {
@@ -159,15 +160,14 @@ const batteryRuleDescription = async (props: BattleSceneProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「なるほど'],
-    ['シンプルながらも奥が深いんすね」',]
+    ['シンヤ', '「なるほど シンプルながらも奥が深いんすね」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   props.view.dom.leftMessageWindow.lighten();
   await scrollLeftMessages(props, [
-    ['ツバサ', '「そうだな バッテリーの攻防配分 これが基本かつ奥義だ'],
-    ['では 次は私が攻撃をしかけるので 同じ要領で回避してみろ」'],
+    ['ツバサ', '「バッテリーの攻防配分 これが基本かつ奥義だ'],
+    ['では 次は私が攻撃を仕掛けるので 同じ要領で回避してくれ」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -243,6 +243,7 @@ const enemyAttackHit = async (props: BattleSceneProps) => {
 /**
  * 敵攻撃の結果に応じてストーリーを分岐する
  * @param props イベントプロパティ
+ * @param battleResult 戦闘結果
  * @return ストーリーが完了したら発火するPromise
  */
 const enemyAttack = async (props: BattleSceneProps, battleResult: BattleResult) => {
@@ -253,6 +254,28 @@ const enemyAttack = async (props: BattleSceneProps, battleResult: BattleResult) 
   } else if (battleResult.name === 'Miss' || battleResult.name === 'Feint') {
     await enemyAttackMiss(props);
   }
+};
+
+/**
+ * ストーリー 攻撃、防御を一通り体験した
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const completeAttackAndDefense = async (props: BattleSceneProps) => {
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「これで攻撃 防御を一通り体験したな'],
+    ['以降はどちらかのHPが0になるまで これを繰り返し行うんだ'],
+    ['以上で基本ルールは完了だ', 'ここから先は君の好きに戦ってくれ」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「了解っす'],
+    ['勝負はこれからですよ ツバサ先輩」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
 };
 
 /**
@@ -272,7 +295,6 @@ const victory = async (props: BattleSceneProps) => {
     ['ツバサ', '「見事だ シンヤ'],
     ['次の試合には 君も出そうと思う」']
   ]);
-  props.view.dom.leftMessageWindow.darken();
   props.view.dom.leftMessageWindow.darken();
 }
 
@@ -412,8 +434,10 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await refreshConversation(props);
       await batteryRuleDescription(props);
     } else if (turn === 3 && lastBattle && !lastBattle.isAttacker) {
-      await enemyAttack(props, lastBattle.result);
       this.selectableCommands = 'All';
+      await enemyAttack(props, lastBattle.result);
+      await refreshConversation(props);
+      await completeAttackAndDefense(props);
       invisibleAllMessageWindows(props);
     } else if (lastBattle && lastBattle.isAttacker) {
       await playerAttack(props, lastBattle.result);
