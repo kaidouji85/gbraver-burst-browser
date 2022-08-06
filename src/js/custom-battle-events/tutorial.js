@@ -344,6 +344,50 @@ const doBurstBecauseZeroBattery = async (props: BattleSceneProps) => {
 };
 
 /**
+ * ストーリー 0防御0バッテリーなのでパイロットスキルを使う
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const doPilotSkillBecauseZeroBattery = async (props: BattleSceneProps) => {
+  await noZeroBatteryDefense(props);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「でもツバサ先輩 俺のバッテリーはもう0ッスよ'],
+    ['俺はこのまま即死ッスか」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「こういう時はバーストでバッテリーを回復するんだ'],
+    ['……と言いたいところが もうバーストは使ってしまったか'],
+    ['ならば 最後の手段だ シンヤ 君に秘めれた力を発動するんだ」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「俺に秘められた力?」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「パイロットスキルを発動するんだ'],
+    ['君のパイロットスキルはバッテリーを少しだけ回復することができる'],
+    ['これで急場を凌ぐんだ」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「了解ッス、俺の底力を見せてやる!!」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+}
+
+/**
  * ストーリー プレイヤーの勝利
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
@@ -517,7 +561,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     if (hasGameEnd) {
       return;
     }
-
+    
     const turn = turnCount(this.stateHistory);
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
