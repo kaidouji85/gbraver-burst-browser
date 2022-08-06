@@ -24,7 +24,7 @@ import {turnCount} from "./turn-count";
 
 /**
  * 会話を仕切りなおす
- * 
+ *
  * @param props イベントプロパティ
  * @return 仕切り直しが完了したら発火するPromise
  */
@@ -74,7 +74,7 @@ const introduction = async (props: BattleSceneProps) => {
  * @param props イベントプロパティ
  * @return  ストーリーが完了したら発火するPromise
  */
- const playerAttackHit = async (props: BattleSceneProps) => {
+const playerAttackHit = async (props: BattleSceneProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「手応えあり」']
@@ -292,6 +292,11 @@ const noZeroBatteryDefense = async (props: BattleSceneProps) => {
   props.view.dom.leftMessageWindow.darken();
 };
 
+/**
+ * ストーリー 0防御なのでコマンドキャンセル
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
 const cancelZeroBatteryDefense = async (props: BattleSceneProps) => {
   await noZeroBatteryDefense(props);
 
@@ -303,6 +308,11 @@ const cancelZeroBatteryDefense = async (props: BattleSceneProps) => {
   props.view.dom.rightMessageWindow.darken();
 };
 
+/**
+ * ストーリー 0防御0バッテリーなのでバーストする
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
 const doBurstBecauseZeroBattery = async (props: BattleSceneProps) => {
   await noZeroBatteryDefense(props);
 
@@ -432,7 +442,7 @@ const focusOutBatterySelector = async (props: BattleSceneProps) => {
 };
 
 /** 選択可能なコマンド */
-type SelectableCommands = 'BatteryOnly' | 'All';
+type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'All';
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
@@ -450,7 +460,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   npc: NPC;
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
-  /** 選択可能なコマンド、beforeLastStateで更新して、onLastStateで設定内容に応じてコマンド入力制限を行う */
+  /** 選択可能なコマンド、onLastStateで本プロパティの設定内容に応じてコマンド入力制限を行う */
   selectableCommands: SelectableCommands;
 
   /**
@@ -536,39 +546,56 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
+    const enableBatteryCommand: SelectableCommands[] = ['BatteryOnly', 'All'];
+    if (!enableBatteryCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
     const foundLastState = this.stateHistory[this.stateHistory.length - 1];
     const lastState = foundLastState
-      ? {isEnemyTurn: foundLastState.activePlayerId !== this.player.playerId}
+      ? {isEnemyTurn: foundLastState.activePlayerId !== this.player.playerId,
+        player: foundLastState.players.find(v => v.playerId === this.player.playerId)}
       : null;
+    const lastPlayer = (lastState && lastState.player)
+      ? {isZeroBattery: lastState.player.armdozer.battery === 0,
+        enableBurst: lastState.player.armdozer.enableBurst, enablePilotSkill: lastState.player.pilot.enableSkill}
+      : null
     const isZeroBatteryCommand = props.battery.battery === 0;
-    if (lastState && lastState.isEnemyTurn && isZeroBatteryCommand) {
+    if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
+      await doBurstBecauseZeroBattery(props);
+      refreshConversation(props);
+      this.selectableCommands = 'BurstOnly';
+      // TODO バーストボタンフォーカスインを呼び出す
+      return {isCommandCanceled: true};
+    } else if (lastState && isZeroBatteryCommand && lastState.isEnemyTurn) {
       await cancelZeroBatteryDefense(props);
       refreshConversation(props);
-      (this.selectableCommands === 'BatteryOnly') && focusInAttackBatterySelector(props);
+      (this.selectableCommands === 'BatteryOnly') && await focusInDefenseBatterySelector(props);
       return {isCommandCanceled: true};
-    } if (this.selectableCommands === 'All') {
-      return {isCommandCanceled: false};
-    } else if (this.selectableCommands === 'BatteryOnly') {
-      focusOutBatterySelector(props);
-      return {isCommandCanceled: false};
     }
-    return {isCommandCanceled: true};
+
+    (this.selectableCommands === 'BatteryOnly') && await focusOutBatterySelector(props);
+    return {isCommandCanceled: false};
   }
 
   /** @override */
   async onBurstCommandSelected(): Promise<CommandCanceled> {
-    if (this.selectableCommands === 'All') {
-      return {isCommandCanceled: false};
+    const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
+    if (!enableBurstCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
     }
-    return {isCommandCanceled: true};
+
+    return {isCommandCanceled: false};
   }
 
   /** @override */
   async onPilotSkillCommandSelected(): Promise<CommandCanceled> {
-    if (this.selectableCommands === 'All') {
-      return {isCommandCanceled: false};
+    const enablePilotSkillCommand: SelectableCommands[] = ['All'];
+    if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
     }
-    return {isCommandCanceled: true};
+
+    return {isCommandCanceled: false};
   }
 }
 
