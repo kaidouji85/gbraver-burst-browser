@@ -60,7 +60,7 @@ const introduction = async (props: BattleSceneProps) => {
   props.view.dom.leftMessageWindow.lighten();
   await scrollLeftMessages(props, [
     ['ツバサ', '「いい返事だな では早速はじめよう'],
-    ['試合の基本は 攻撃側 防御側でバッテリーを出し合うことだ'],
+    ['攻撃側 防御側でのバッテリーの出し合いが試合の基本だ'],
     ['大きいバッテリーを出した側の行動が成功するのだが これは実際にやってみた方が早いな'],
     ['シンヤ 私が防御に回るから 好きなように攻撃してくれ」']
   ]);
@@ -102,7 +102,7 @@ const playerAttackHit = async (props: BattleSceneProps) => {
 const playerAttackGuarded = async (props: BattleSceneProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「よっしゃ 攻撃ヒット」']
+    ['シンヤ', '「よし 攻撃ヒット」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -122,7 +122,7 @@ const playerAttackGuarded = async (props: BattleSceneProps) => {
 const playerAttackMiss = async (props: BattleSceneProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「クソッ 避けられた」']
+    ['シンヤ', '「クッ 避けられた」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -270,8 +270,8 @@ const completeAttackAndDefense = async (props: BattleSceneProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「これで攻撃 防御を一通り体験したな'],
-    ['以降はどちらかのHPが0になるまで これを繰り返し行うんだ'],
-    ['以上で基本ルールは完了だ', 'ここから先は君の好きに戦ってくれ」']
+    ['以降はどちらかのHPが0になるまで これを繰り返すんだ'],
+    ['以上で基本ルールは完了だ', 'ここから先は好きなように戦ってくれ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -382,10 +382,48 @@ const doPilotSkillBecauseZeroBattery = async (props: BattleSceneProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「了解ッス、俺の底力を見せてやる!!」'],
+    ['シンヤ', '「了解ッス 俺の底力 見せてやる!!」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
-}
+};
+
+/**
+ * ストーリー バースト、パイロットスキルが使えず0バッテリーなので負け確定
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: BattleSceneProps) => {
+  await noZeroBatteryDefense(props);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「でもツバサ先輩 俺のバッテリーはもう0ッスよ'],
+    ['俺はこのまま即死ッスか」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「こういう時はバーストでバッテリーを回復するんだ'],
+    ['……と言いたいところが もうバーストは使ってしまったか'],
+    ['ならば 最後のパイロットスキル'],
+    ['……も既に使い果たしたか'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「センパーイ」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  await scrollLeftMessages(props, [
+    ['ツバサ', '「残念ながら万策尽きたな'],
+    ['初めての訓練では良くあることだから あまり気にするな'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+};
 
 /**
  * ストーリー プレイヤーの勝利
@@ -405,7 +443,7 @@ const victory = async (props: BattleSceneProps) => {
     ['この調子で精進を積んでくれ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
-}
+};
 
 /**
  * ストーリー プレイヤーの敗北
@@ -457,8 +495,8 @@ const focusInAttackBatterySelector = async (props: BattleSceneProps) => {
   invisibleAllMessageWindows(props);
   activeLeftMessageWindow(props);
   props.view.dom.leftMessageWindow.messages([
-    '好きなバッテリーで 攻撃してみよう',
-    'ツバサ先輩よりも 大きい数字を出せば 攻撃が当たるぞ'
+    '好きなバッテリーで攻撃してみよう',
+    'ツバサ先輩よりも大きい数字を出せば攻撃が当たるぞ'
   ]);
   await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 };
@@ -473,8 +511,8 @@ const focusInDefenseBatterySelector = async (props: BattleSceneProps) => {
   invisibleAllMessageWindows(props);
   activeLeftMessageWindow(props);
   props.view.dom.leftMessageWindow.messages([
-    '好きなバッテリーで 防御してみよう',
-    'ツバサ先輩よりも 大きい数字を出せば 完全回避できるぞ'
+    '好きなバッテリーで防御してみよう',
+    'ツバサ先輩よりも大きい数字を出せば攻撃を回避できるぞ'
   ]);
   await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 };
@@ -664,7 +702,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         enableBurst: lastState.player.armdozer.enableBurst, enablePilotSkill: lastState.player.pilot.enableSkill}
       : null
     const isZeroBatteryCommand = props.battery.battery === 0;
-    if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && lastPlayer.enablePilotSkill) {
+    if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && !lastPlayer.enablePilotSkill) {
+      await zeroBatteryDefenseBecauseNoBatteryRecover(props);
+      refreshConversation(props);
+      return {isCommandCanceled: false};
+    } else if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && lastPlayer.enablePilotSkill) {
       await doPilotSkillBecauseZeroBattery(props);
       refreshConversation(props);
       this.selectableCommands = 'PilotSkillOnly';
