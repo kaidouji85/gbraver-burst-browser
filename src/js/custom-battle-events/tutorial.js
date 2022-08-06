@@ -16,7 +16,7 @@ import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace
 } from "./active-message-window";
-import {attentionBatterySelector} from "./attention";
+import {attentionBatterySelector, unattentionBatterySelector} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {invisibleAllMessageWindows} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
@@ -327,9 +327,10 @@ const tutorialEnd = async (props: BattleSceneProps) => {
 
 /**
  * 攻撃バッテリーコマンド以外は選択不可にするヘルパー関数
- * @param props イベントプロパティ 
+ * @param props イベントプロパティ
+ * @return 処理が完了したら発火するPromise
  */
-const attackBatterySelect = async (props: BattleSceneProps) => {
+const attackBatteryOnly = async (props: BattleSceneProps) => {
   attentionBatterySelector(props.view);
   invisibleAllMessageWindows(props);
   activeLeftMessageWindow(props);
@@ -342,9 +343,10 @@ const attackBatterySelect = async (props: BattleSceneProps) => {
 
 /**
  * 防御バッテリーコマンド以外は選択不可にするヘルパー関数
- * @param props イベントプロパティ 
+ * @param props イベントプロパティ
+ * @return 処理が完了したら発火するPromise
  */
-const defenseBatterySelect = async (props: BattleSceneProps) => {
+const defenseBatteryOnly = async (props: BattleSceneProps) => {
   attentionBatterySelector(props.view);
   invisibleAllMessageWindows(props);
   activeLeftMessageWindow(props);
@@ -354,6 +356,20 @@ const defenseBatterySelect = async (props: BattleSceneProps) => {
   ]);
   await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
 };
+
+/**
+ * バッテリー選択強制からゲームを進めるヘルパー関数
+ * @param props イベントプロパティ
+ * @return 処理が完了したら発火するPromise
+ */
+const progressGameFromBatteryOnly = async (props: BattleSceneProps) => {
+  props.view.dom.leftMessageWindow.visible(false);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
+  unattentionBatterySelector(props.view);
+};
+
+/** 選択可能なコマンド */
+type SelectableCommands = 'BatteryOnly' | 'All';
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
@@ -368,6 +384,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   player: Player;
   npc: NPC;
   stateHistory: GameState[];
+  selectableCommands: SelectableCommands;
 
   /**
    * コンストラクタ
@@ -381,6 +398,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     this.player = {playerId, armdozer, pilot};
     this.npc = oneBatteryWeakWingDozerNPC();
     this.stateHistory = [];
+    this.selectableCommands = 'BatteryOnly';
   }
 
   /** @override */
@@ -402,6 +420,10 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await playerAttack(props, lastBattle.result);
       await refreshConversation(props);
       await batteryRuleDescription(props);
+    } else if (turn === 3 && lastBattle && !lastBattle.isAttacker) {
+      await enemyAttack(props, lastBattle.result);
+      this.selectableCommands = 'All';
+      invisibleAllMessageWindows(props);
     } else if (lastBattle && lastBattle.isAttacker) {
       await playerAttack(props, lastBattle.result);
     } else if (lastBattle && !lastBattle.isAttacker) {
@@ -429,30 +451,37 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await refreshConversation(props);
       await tutorialEnd(props);
       invisibleAllMessageWindows(props);
-    } else if (lastState && lastState.isInputCommand && lastState.isMyTurn) {
-      await attackBatterySelect(props);
-    } else if (lastState && lastState.isInputCommand && !lastState.isMyTurn) {
-      await defenseBatterySelect(props);
+    } else if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && lastState.isMyTurn) {
+      await attackBatteryOnly(props);
+    } else if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
+      await defenseBatteryOnly(props);
     }
   }
 
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    const progressGame = async (): Promise<CommandCanceled> => {
-      props.view.dom.leftMessageWindow.visible(false);
-      props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
+    if (this.selectableCommands === 'All') {
       return {isCommandCanceled: false};
-    };
-    return await progressGame();
+    } else if (this.selectableCommands === 'BatteryOnly') {
+      progressGameFromBatteryOnly(props);
+      return {isCommandCanceled: false};
+    }
+    return {isCommandCanceled: true};
   }
 
   /** @override */
   async onBurstCommandSelected(): Promise<CommandCanceled> {
+    if (this.selectableCommands === 'All') {
+      return {isCommandCanceled: false};
+    }
     return {isCommandCanceled: true};
   }
 
   /** @override */
   async onPilotSkillCommandSelected(): Promise<CommandCanceled> {
+    if (this.selectableCommands === 'All') {
+      return {isCommandCanceled: false};
+    }
     return {isCommandCanceled: true};
   }
 }
