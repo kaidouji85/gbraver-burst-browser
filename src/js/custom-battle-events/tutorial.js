@@ -518,7 +518,7 @@ const focusOutBurstButton = async (props: BattleSceneProps) => {
 }
 
 /** 選択可能なコマンド */
-type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'All';
+type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All';
 
 /** チュートリアルイベント */
 export interface TutorialEvent extends CustomBattleEvent {
@@ -637,7 +637,13 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         enableBurst: lastState.player.armdozer.enableBurst, enablePilotSkill: lastState.player.pilot.enableSkill}
       : null
     const isZeroBatteryCommand = props.battery.battery === 0;
-    if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
+    if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && lastPlayer.enablePilotSkill) {
+      await doPilotSkillBecauseZeroBattery(props);
+      refreshConversation(props);
+      this.selectableCommands = 'PilotSkillOnly';
+      // TODO パイロットスキルフォーカスインを呼ぶ
+      return {isCommandCanceled: true};
+    } else if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
       await doBurstBecauseZeroBattery(props);
       refreshConversation(props);
       this.selectableCommands = 'BurstOnly';
@@ -672,9 +678,14 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
   /** @override */
   async onPilotSkillCommandSelected(): Promise<CommandCanceled> {
-    const enablePilotSkillCommand: SelectableCommands[] = ['All'];
+    const enablePilotSkillCommand: SelectableCommands[] = ['All', 'PilotSkillOnly'];
     if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
       return {isCommandCanceled: true};
+    }
+
+    if (this.selectableCommands === 'PilotSkillOnly') {
+      this.selectableCommands = 'All';
+      // TODO パイロットスキルボタンフォーカスアウトを呼ぶ
     }
 
     return {isCommandCanceled: false};
