@@ -331,7 +331,7 @@ const tutorialEnd = async (props: BattleSceneProps) => {
  * @return 処理が完了したら発火するPromise
  */
 const attackBatteryOnly = async (props: BattleSceneProps) => {
-  attentionBatterySelector(props.view);
+  attentionBatterySelector(props);
   invisibleAllMessageWindows(props);
   activeLeftMessageWindow(props);
   props.view.dom.leftMessageWindow.messages([
@@ -347,7 +347,7 @@ const attackBatteryOnly = async (props: BattleSceneProps) => {
  * @return 処理が完了したら発火するPromise
  */
 const defenseBatteryOnly = async (props: BattleSceneProps) => {
-  attentionBatterySelector(props.view);
+  attentionBatterySelector(props);
   invisibleAllMessageWindows(props);
   activeLeftMessageWindow(props);
   props.view.dom.leftMessageWindow.messages([
@@ -365,7 +365,7 @@ const defenseBatteryOnly = async (props: BattleSceneProps) => {
 const progressGameFromBatteryOnly = async (props: BattleSceneProps) => {
   props.view.dom.leftMessageWindow.visible(false);
   await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
-  unattentionBatterySelector(props.view);
+  unattentionBatterySelector(props);
 };
 
 /** 選択可能なコマンド */

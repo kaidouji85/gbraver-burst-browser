@@ -1,57 +1,57 @@
 // @flow
 import {HUD_ATTENTION_ZINDEX} from "../game-object/hud-zindex";
-import {BattleSceneView} from "../game/td-scenes/battle/view";
+import type {BattleSceneProps} from "../game/td-scenes/battle/custom-battle-event";
 
 /**
  * バッテリーセレクタに注目する
  *
- * @param view 戦闘シーンビュー
+ * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
  */
-export function attentionBatterySelector(view: BattleSceneView): void {
-  view.hud.gameObjects.batterySelector.getObject3D().position.z = HUD_ATTENTION_ZINDEX;
+export function attentionBatterySelector(props: BattleSceneProps): void {
+  props.view.hud.gameObjects.batterySelector.getObject3D().position.z = HUD_ATTENTION_ZINDEX;
 }
 
 /**
  * バッテリーセレクタの注目を解除する
  *
- * @param view 戦闘シーンビュー
+ * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
  */
-export function unattentionBatterySelector(view: BattleSceneView): void {
-  view.hud.gameObjects.batterySelector.getObject3D().position.z = 0;
+export function unattentionBatterySelector(props: BattleSceneProps): void {
+  props.view.hud.gameObjects.batterySelector.getObject3D().position.z = 0;
 }
 
 /**
  * バーストボタンに注目する
  *
- * @param view 戦闘シーンビュー
+ * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
  */
-export function attentionBurstButton(view: BattleSceneView): void {
-  view.hud.gameObjects.burstButton.getObject3D().position.z = HUD_ATTENTION_ZINDEX;
+export function attentionBurstButton(props: BattleSceneProps): void {
+  props.view.hud.gameObjects.burstButton.getObject3D().position.z = HUD_ATTENTION_ZINDEX;
 }
 
 /**
  * バーストボタンの注目を解除する
  *
- * @param view 戦闘シーンビュー
+ * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
  */
-export function unattentionBurstButton(view: BattleSceneView): void {
-  view.hud.gameObjects.burstButton.getObject3D().position.z = 0;
+export function unattentionBurstButton(props: BattleSceneProps): void {
+  props.view.hud.gameObjects.burstButton.getObject3D().position.z = 0;
 }
 
 /**
  * パイロットボタンに注目する
  *
- * @param view 戦闘シーンビュー
+ * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
  */
-export function attentionPilotButton(view: BattleSceneView): void {
-  view.hud.gameObjects.pilotButton.getObject3D().position.z = HUD_ATTENTION_ZINDEX;
+export function attentionPilotButton(props: BattleSceneProps): void {
+  props.view.hud.gameObjects.pilotButton.getObject3D().position.z = HUD_ATTENTION_ZINDEX;
 }
 
 /**
  * パイロットボタンの注目を解除する
  *
- * @param view 戦闘シーンビュー
+ * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
  */
-export function unattentionPilotButton(view: BattleSceneView): void {
-  view.hud.gameObjects.pilotButton.getObject3D().position.z = 0;
+export function unattentionPilotButton(props: BattleSceneProps): void {
+  props.view.hud.gameObjects.pilotButton.getObject3D().position.z = 0;
 }
