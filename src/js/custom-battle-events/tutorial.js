@@ -279,7 +279,7 @@ const completeAttackAndDefense = async (props: BattleSceneProps) => {
 };
 
 /**
- * ストーリー 0防御
+ * ストーリー 0防御は即死
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
