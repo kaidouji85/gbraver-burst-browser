@@ -6,7 +6,7 @@ import type {
   BattleSceneProps, BurstCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
-  LastState,
+  LastState, PilotSkillCommandSelected,
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {NPC} from "../npc/npc";
 import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
@@ -18,9 +18,9 @@ import {
 } from "./active-message-window";
 import {
   attentionBatterySelector,
-  attentionBurstButton,
+  attentionBurstButton, attentionPilotButton,
   unattentionBatterySelector,
-  unattentionBurstButton
+  unattentionBurstButton, unattentionPilotButton
 } from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {invisibleAllMessageWindows} from "./invisible-all-message-windows";
@@ -517,6 +517,33 @@ const focusOutBurstButton = async (props: BattleSceneProps) => {
   unattentionBurstButton(props);
 }
 
+/**
+ * パイロットボタンにフォーカスインする
+ * @param props イベントプロパティ
+ * @return 処理が完了したら発火するPromise
+ */
+const focusInPilotButton = async (props: BattleSceneProps) => {
+  attentionPilotButton(props);
+  invisibleAllMessageWindows(props);
+  activeRightMessageWindow(props);
+  props.view.dom.rightMessageWindow.messages([
+    'このまま0防御すると負け確定だ',
+    'シンヤのパイロットスキルを発動して バッテリーを回復させよう'
+  ]);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+}
+
+/**
+ * パイロットボタンからフォーカスアウトする
+ * @param props イベントプロパティ
+ * @return 処理が完了したら発火するPromise
+ */
+const focusOutPilotButton = async (props: BattleSceneProps) => {
+  props.view.dom.rightMessageWindow.visible(false);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
+  unattentionPilotButton(props);
+}
+
 /** 選択可能なコマンド */
 type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All';
 
@@ -536,7 +563,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   npc: NPC;
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
-  /** 選択可能なコマンド、onLastStateで本プロパティの設定内容に応じてコマンド入力制限を行う */
+  /** 選択可能なコマンド */
   selectableCommands: SelectableCommands;
 
   /**
@@ -641,7 +668,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await doPilotSkillBecauseZeroBattery(props);
       refreshConversation(props);
       this.selectableCommands = 'PilotSkillOnly';
-      // TODO パイロットスキルフォーカスインを呼ぶ
+      await focusInPilotButton(props);
       return {isCommandCanceled: true};
     } else if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
       await doBurstBecauseZeroBattery(props);
@@ -677,7 +704,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   }
 
   /** @override */
-  async onPilotSkillCommandSelected(): Promise<CommandCanceled> {
+  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
     const enablePilotSkillCommand: SelectableCommands[] = ['All', 'PilotSkillOnly'];
     if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
       return {isCommandCanceled: true};
@@ -685,7 +712,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
     if (this.selectableCommands === 'PilotSkillOnly') {
       this.selectableCommands = 'All';
-      // TODO パイロットスキルボタンフォーカスアウトを呼ぶ
+      focusOutPilotButton(props);
     }
 
     return {isCommandCanceled: false};
