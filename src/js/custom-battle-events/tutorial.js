@@ -707,24 +707,24 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
         enableBurst: lastState.player.armdozer.enableBurst, enablePilotSkill: lastState.player.pilot.enableSkill}
       : null
     const isZeroBatteryCommand = props.battery.battery === 0;
-    if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && !lastPlayer.enablePilotSkill) {
+    if (isZeroBatteryCommand && lastState  && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && !lastPlayer.enablePilotSkill) {
       await zeroBatteryDefenseBecauseNoBatteryRecover(props);
       refreshConversation(props);
       return {isCommandCanceled: false};
-    } else if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && lastPlayer.enablePilotSkill) {
+    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && lastPlayer.enablePilotSkill) {
       await doPilotSkillBecauseZeroBattery(props);
       refreshConversation(props);
       this.selectableCommands = 'PilotSkillOnly';
       await focusInPilotButton(props);
       return {isCommandCanceled: true};
-    } else if (lastState && lastPlayer && isZeroBatteryCommand && lastState.isEnemyTurn && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
+    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
       await doBurstBecauseZeroBattery(props);
       refreshConversation(props);
       this.selectableCommands = 'BurstOnly';
       unattentionBurstButton(props);
       await focusInBurstButton(props);
       return {isCommandCanceled: true};
-    } else if (lastState && isZeroBatteryCommand && lastState.isEnemyTurn) {
+    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn) {
       await cancelZeroBatteryDefense(props);
       refreshConversation(props);
       (this.selectableCommands === 'BatteryOnly') && await focusInDefenseBatterySelector(props);
