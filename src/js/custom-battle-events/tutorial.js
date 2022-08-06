@@ -3,7 +3,7 @@ import type {BattleResult, GameState, Player, PlayerId} from "gbraver-burst-core
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
-  BattleSceneProps,
+  BattleSceneProps, BurstCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
   LastState,
@@ -13,10 +13,15 @@ import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
 import {waitTime} from "../wait/wait-time";
 import {
   activeLeftMessageWindow,
-  activeLeftMessageWindowWithFace,
+  activeLeftMessageWindowWithFace, activeRightMessageWindow,
   activeRightMessageWindowWithFace
 } from "./active-message-window";
-import {attentionBatterySelector, unattentionBatterySelector} from "./attention";
+import {
+  attentionBatterySelector,
+  attentionBurstButton,
+  unattentionBatterySelector,
+  unattentionBurstButton
+} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {invisibleAllMessageWindows} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
@@ -441,6 +446,33 @@ const focusOutBatterySelector = async (props: BattleSceneProps) => {
   unattentionBatterySelector(props);
 };
 
+/**
+ * バーストボタンにフォーカスインする
+ * @param props イベントプロパティ
+ * @return 処理が完了したら発火するPromise
+ */
+const focusInBurstButton = async (props: BattleSceneProps) => {
+  attentionBurstButton(props);
+  invisibleAllMessageWindows(props);
+  activeRightMessageWindow(props);
+  props.view.dom.rightMessageWindow.messages([
+    'このまま0防御すると負け確定だ',
+    'バーストでバッテリーを回復させよう'
+  ]);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
+}
+
+/**
+ * バーストボタンからフォーカスアウトする
+ * @param props イベントプロパティ
+ * @return 処理が完了したら発火するPromise
+ */
+const focusOutBurstButton = async (props: BattleSceneProps) => {
+  props.view.dom.rightMessageWindow.visible(false);
+  await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
+  unattentionBurstButton(props);
+}
+
 /** 選択可能なコマンド */
 type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'All';
 
@@ -565,7 +597,8 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       await doBurstBecauseZeroBattery(props);
       refreshConversation(props);
       this.selectableCommands = 'BurstOnly';
-      // TODO バーストボタンフォーカスインを呼び出す
+      unattentionBurstButton(props);
+      await focusInBurstButton(props);
       return {isCommandCanceled: true};
     } else if (lastState && isZeroBatteryCommand && lastState.isEnemyTurn) {
       await cancelZeroBatteryDefense(props);
@@ -574,15 +607,20 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
       return {isCommandCanceled: true};
     }
 
-    (this.selectableCommands === 'BatteryOnly') && await focusOutBatterySelector(props);
+    (this.selectableCommands === 'BatteryOnly') && focusOutBatterySelector(props);
     return {isCommandCanceled: false};
   }
 
   /** @override */
-  async onBurstCommandSelected(): Promise<CommandCanceled> {
+  async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
     const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
     if (!enableBurstCommand.includes(this.selectableCommands)) {
       return {isCommandCanceled: true};
+    }
+
+    if (this.selectableCommands === 'BurstOnly') {
+      this.selectableCommands = 'All';
+      focusOutBurstButton(props);
     }
 
     return {isCommandCanceled: false};
