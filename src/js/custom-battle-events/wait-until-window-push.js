@@ -1,8 +1,8 @@
 // @flow
 import type {BattleSceneProps} from "../game/td-scenes/battle/custom-battle-event";
+import {first} from "../stream/operator";
 import type {Stream} from "../stream/stream";
 import type {PushWindow} from "../window/push-window";
-import {first} from "../stream/operator";
 
 /**
  * 画面を押下するまで待機する

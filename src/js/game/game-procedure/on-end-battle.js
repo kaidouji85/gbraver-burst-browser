@@ -7,15 +7,15 @@ import {
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
-  PostTutorialWinButtons,
   PostTutorialLoseButtons,
+  PostTutorialWinButtons,
 } from "../dom-floaters/post-battle/post-battle-buttons";
 import type {EndBattle} from "../game-actions";
 import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
 import type {NPCBattle, PlayingNPCBattle} from "../in-progress/npc-battle";
-import {isTutorialWin} from "../in-progress/tutorial";
 import type {Tutorial} from "../in-progress/tutorial";
+import {isTutorialWin} from "../in-progress/tutorial";
 import {isNPCBattleStageClear, updateNPCBattle} from "../npc-battle";
 
 /**
