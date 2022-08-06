@@ -561,7 +561,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     if (hasGameEnd) {
       return;
     }
-    
+
     const turn = turnCount(this.stateHistory);
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
