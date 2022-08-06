@@ -24,6 +24,11 @@ export class EmptyCustomBattleEvent implements CustomBattleEvent {
   }
 
   /** @override */
+  async afterLastState(props: LastState): Promise<void> { // eslint-disable-line no-unused-vars
+    // NOP
+  }
+
+  /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> { // eslint-disable-line no-unused-vars
     return {isCommandCanceled: false};
   }

@@ -160,6 +160,7 @@ export class BattleScene implements Scene {
         this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state)),
         this.#customBattleEvent ? this.#customBattleEvent.onLastState(eventProps) : Promise.resolve()
       ]);
+      this.#customBattleEvent && await this.#customBattleEvent.afterLastState(eventProps);
     });
   }
 
@@ -295,6 +296,7 @@ export class BattleScene implements Scene {
           this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state)),
           this.#customBattleEvent ? this.#customBattleEvent.onLastState(eventProps) : Promise.resolve(),
         ]);
+        this.#customBattleEvent && await this.#customBattleEvent.afterLastState(eventProps);
         if (lastState.effect.name !== 'InputCommand') {
           return lastState;
         }
