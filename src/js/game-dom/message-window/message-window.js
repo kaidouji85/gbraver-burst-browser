@@ -1,10 +1,10 @@
 // @flow
+import {waitFinishAnimation} from "../../dom/animation";
 import {replaceDOM} from "../../dom/replace-dom";
 import type {Resources} from "../../resource";
 import {domUuid} from "../../uuid/dom-uuid";
 import type {FaceOrientation, FaceType} from "./face-graphic";
 import {FaceGraphic} from "./face-graphic";
-import {waitFinishAnimation} from "../../dom/animation";
 
 /** ルートHTML要素のclass属性 */
 const ROOT_CLASS = 'message-window';
