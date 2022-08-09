@@ -151,7 +151,6 @@
   box-shadow: var(--button-box-shadow);
 }
 
-.title__how-to-play,
 .title__config {
   background-color: var(--sub-button-background-color);
 }
@@ -186,22 +185,13 @@
 
 .title__copy-rights {
   font-size: calc(var(--responsive-font-size) * 0.8);
-  margin-right: calc(var(--responsive-font-size) * 2);
 }
 
-.title__terms-of-service {
-  text-decoration: none;
-  color: var(--button-font-color);
-  margin-right: calc(var(--responsive-font-size) * 2);
-}
-
-.title__privacy-policy {
-  text-decoration: none;
-  color: var(--button-font-color);
-  margin-right: calc(var(--responsive-font-size) * 2);
-}
-
+.title__how-to-play,
+.title__terms-of-service,
+.title__privacy-policy,
 .title__contact {
   text-decoration: none;
   color: var(--button-font-color);
+  margin-left: calc(var(--responsive-font-size) * 2);
 }
