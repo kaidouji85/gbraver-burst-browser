@@ -104,7 +104,6 @@ function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string {
       <img class="${ROOT_CLASS}__logo" data-id="${ids.logo}">
       <div class="${ROOT_CLASS}__game-menu">
         <button class="${ROOT_CLASS}__config" data-id="${ids.config}">設定</button>
-        <button class="${ROOT_CLASS}__how-to-play" data-id="${ids.howToPlay}">遊び方</button>
         <button class="${tutorialClassName}" data-id="${ids.tutorial}">チュートリアル</button>
         <button class="${ROOT_CLASS}__arcade" data-id="${ids.arcade}">アーケード</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
@@ -116,6 +115,7 @@ function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string {
         <span class="${ROOT_CLASS}__copy-rights-year">2022</span>
         <span class="${ROOT_CLASS}__copy-rights-owner">Pegass85</span>
       </small>
+      <a class="${ROOT_CLASS}__how-to-play" data-id="${ids.howToPlay}">遊び方</a>
       <a class="${ROOT_CLASS}__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
       <a class="${ROOT_CLASS}__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
       <a class="${ROOT_CLASS}__contact" href="${params.contactURL}" target="_blank" rel="noopener">問い合わせ</a>
@@ -514,8 +514,6 @@ export class Title implements DOMScene {
   #onHowToPlayPush(action: PushDOM): void {
     this.#exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this.#changeValue.play();
-      await pop(this.#howToPlay);
       this.#pushHowToPlay.next();
     });
   }
