@@ -13,9 +13,9 @@ import type {ResultIndicatorView} from "./view/result-indicator-view";
 
 /** リザルトインジケータ */
 export class ResultIndicator {
-  _model: ResultIndicatorModel;
-  _view: ResultIndicatorView;
-  _unsubscriber: Unsubscriber;
+  #model: ResultIndicatorModel;
+  #view: ResultIndicatorView;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -24,11 +24,11 @@ export class ResultIndicator {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: ResultIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
-    this._view = view;
-    this._model = createInitialValue();
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#view = view;
+    this.#model = createInitialValue();
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
@@ -37,8 +37,8 @@ export class ResultIndicator {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._unsubscriber.unsubscribe();
-    this._view.destructor();
+    this.#unsubscriber.unsubscribe();
+    this.#view.destructor();
   }
 
   /**
@@ -47,7 +47,7 @@ export class ResultIndicator {
    * @return 取得結果
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -56,7 +56,7 @@ export class ResultIndicator {
    * @return アニメーション
    */
   slideIn(): Animate {
-    return slideIn(this._model);
+    return slideIn(this.#model);
   }
 
   /**
@@ -65,7 +65,7 @@ export class ResultIndicator {
    * @return アニメーション
    */
   moveToEdge(): Animate {
-    return moveToEdge(this._model);
+    return moveToEdge(this.#model);
   }
 
   /**
@@ -74,7 +74,7 @@ export class ResultIndicator {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this._model);
+    return hidden(this.#model);
   }
 
   /**
@@ -82,7 +82,7 @@ export class ResultIndicator {
    *
    * @param action PreRender情報
    */
-  _onPreRender(action: PreRender): void {
-    this._view.engage(this._model, action);
+  #onPreRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 }

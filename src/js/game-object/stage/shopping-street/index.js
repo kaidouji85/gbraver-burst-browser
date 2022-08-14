@@ -7,16 +7,16 @@ import {City} from './city';
 
 /** 商店街 */
 export default class ShoppingStreet implements Stage {
-  _city: City;
+  #city: City;
 
   constructor(resources: Resources) {
-    this._city = new City(resources);
-    this._city.getObject3D().position.z = -50;
+    this.#city = new City(resources);
+    this.#city.getObject3D().position.z = -50;
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._city.destructor();
+    this.#city.destructor();
   }
 
   /**
@@ -26,7 +26,7 @@ export default class ShoppingStreet implements Stage {
    */
   getThreeJsObjects(): typeof THREE.Object3D[] {
     return [
-      this._city.getObject3D(),
+      this.#city.getObject3D(),
     ];
   }
 }

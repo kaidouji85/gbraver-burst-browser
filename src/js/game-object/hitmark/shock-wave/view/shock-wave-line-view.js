@@ -16,11 +16,11 @@ export const HEIGHT = 100;
  * プレイヤーの衝撃波ビュー
  */
 export class ShockWaveLineView {
-  _mesh: typeof THREE.Mesh;
-  _group: typeof THREE.Group;
+  #mesh: typeof THREE.Mesh;
+  #group: typeof THREE.Group;
 
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_LINE);
     const texture = textureResource
@@ -33,18 +33,18 @@ export class ShockWaveLineView {
       map: texture,
     });
     const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, 1, 1);
-    this._mesh = new THREE.Mesh(geometry, material);
-    this._mesh.renderOrder = SPRITE_RENDER_ORDER;
-    this._mesh.position.x = WIDTH / 2;
-    this._group.add(this._mesh);
+    this.#mesh = new THREE.Mesh(geometry, material);
+    this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
+    this.#mesh.position.x = WIDTH / 2;
+    this.#group.add(this.#mesh);
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.material.dispose();
-    this._mesh.geometry.dispose();
+    this.#mesh.material.dispose();
+    this.#mesh.geometry.dispose();
   }
 
   /**
@@ -53,15 +53,15 @@ export class ShockWaveLineView {
    * @param model モデル
    */
   engage(model: ShockWaveLineModel): void {
-    this._mesh.material.opacity = model.opacity;
+    this.#mesh.material.opacity = model.opacity;
 
-    this._group.position.set(
+    this.#group.position.set(
       model.distance * Math.cos(model.rotate),
       model.distance * Math.sin(model.rotate),
       LINE_Z_INDEX
     );
-    this._group.rotation.z = model.rotate;
-    this._group.scale.set(
+    this.#group.rotation.z = model.rotate;
+    this.#group.scale.set(
       model.scale,
       1,
       1
@@ -73,6 +73,6 @@ export class ShockWaveLineView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 }

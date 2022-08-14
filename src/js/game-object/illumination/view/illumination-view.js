@@ -7,26 +7,26 @@ import type {IlluminationModel} from "../model/illumination-model";
  * ステージ全体の照明のビュー
  */
 export class IlluminationView {
-  _directionalLight1: typeof THREE.DirectionalLight;
-  _directionalLight2: typeof THREE.DirectionalLight;
-  _directionalLight3: typeof THREE.DirectionalLight;
-  _directionalLight4: typeof THREE.DirectionalLight;
-  _ambientLight: typeof THREE.AmbientLight;
+  #directionalLight1: typeof THREE.DirectionalLight;
+  #directionalLight2: typeof THREE.DirectionalLight;
+  #directionalLight3: typeof THREE.DirectionalLight;
+  #directionalLight4: typeof THREE.DirectionalLight;
+  #ambientLight: typeof THREE.AmbientLight;
 
   constructor() {
-    this._directionalLight1 = new THREE.DirectionalLight(0xAAAAAA);
-    this._directionalLight1.position.set(1, 1, 1);
+    this.#directionalLight1 = new THREE.DirectionalLight(0xAAAAAA);
+    this.#directionalLight1.position.set(1, 1, 1);
 
-    this._directionalLight2 = new THREE.DirectionalLight(0xAAAAAA);
-    this._directionalLight2.position.set(-1, 1, 1);
+    this.#directionalLight2 = new THREE.DirectionalLight(0xAAAAAA);
+    this.#directionalLight2.position.set(-1, 1, 1);
 
-    this._directionalLight3 = new THREE.DirectionalLight(0xAAAAAA);
-    this._directionalLight3.position.set(1, -1, 1);
+    this.#directionalLight3 = new THREE.DirectionalLight(0xAAAAAA);
+    this.#directionalLight3.position.set(1, -1, 1);
 
-    this._directionalLight4 = new THREE.DirectionalLight(0xAAAAAA);
-    this._directionalLight4.position.set(-1, -1, 1);
+    this.#directionalLight4 = new THREE.DirectionalLight(0xAAAAAA);
+    this.#directionalLight4.position.set(-1, -1, 1);
 
-    this._ambientLight = new THREE.AmbientLight(0xAAAAAA);
+    this.#ambientLight = new THREE.AmbientLight(0xAAAAAA);
   }
 
   /**
@@ -36,11 +36,11 @@ export class IlluminationView {
    */
   getObject3Ds(): typeof THREE.Object3D[] {
     return [
-      this._directionalLight1,
-      this._directionalLight2,
-      this._directionalLight3,
-      this._directionalLight4,
-      this._ambientLight,
+      this.#directionalLight1,
+      this.#directionalLight2,
+      this.#directionalLight3,
+      this.#directionalLight4,
+      this.#ambientLight,
     ];
   }
 
@@ -50,7 +50,7 @@ export class IlluminationView {
    * @param model モデル
    */
   engage(model: IlluminationModel): void {
-    this._updateIntensity(model);
+    this.#updateIntensity(model);
   }
 
   /**
@@ -58,11 +58,11 @@ export class IlluminationView {
    *
    * @param model モデル
    */
-  _updateIntensity(model: IlluminationModel): void {
-    this._directionalLight1.intensity = model.intensity * 0.8;
-    this._directionalLight2.intensity = model.intensity * 0.8;
-    this._directionalLight3.intensity = model.intensity * 0.6;
-    this._directionalLight4.intensity = model.intensity * 0.6;
-    this._ambientLight.intensity = model.intensity * 0.8;
+  #updateIntensity(model: IlluminationModel): void {
+    this.#directionalLight1.intensity = model.intensity * 0.8;
+    this.#directionalLight2.intensity = model.intensity * 0.8;
+    this.#directionalLight3.intensity = model.intensity * 0.6;
+    this.#directionalLight4.intensity = model.intensity * 0.6;
+    this.#ambientLight.intensity = model.intensity * 0.8;
   }
 }

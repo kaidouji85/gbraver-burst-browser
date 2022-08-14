@@ -14,17 +14,17 @@ export const MIN_HP = 0;
 
 /** HP数字 */
 export class HpNumber {
-  _group: typeof THREE.Group;
-  _meshList: HorizontalAnimationMesh[];
+  #group: typeof THREE.Group;
+  #meshList: HorizontalAnimationMesh[];
 
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const hpNumberResource = resources.textures.find(v => v.id === TEXTURE_IDS.HP_NUMBER);
     const hpNumber = hpNumberResource
       ? hpNumberResource.texture
       : new THREE.Texture();
-    this._meshList = R.times(v => {
+    this.#meshList = R.times(v => {
       const mesh = new HorizontalAnimationMesh({
         texture: hpNumber,
         maxAnimation: MAX_ANIMATION,
@@ -34,14 +34,14 @@ export class HpNumber {
       mesh.getObject3D().position.x = -v * 32;
       return mesh;
     },NUMBER_OF_DIGITS);
-    this._meshList.forEach(v => {
-      this._group.add(v.getObject3D());
+    this.#meshList.forEach(v => {
+      this.#group.add(v.getObject3D());
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._meshList.forEach(v => {
+    this.#meshList.forEach(v => {
       v.destructor();
     });
   }
@@ -52,16 +52,16 @@ export class HpNumber {
    * @param value 設定する値
    */
   setValue(value: number): void {
-    this._meshList.forEach(v => {
+    this.#meshList.forEach(v => {
       v.setOpacity(0);
     });
 
-    const correctValue = this._correctValue(value);
+    const correctValue = this.#correctValue(value);
     const values = String(correctValue)
       .split('')
       .reverse()
       .map(v => Number(v));
-    R.zip(this._meshList, values)
+    R.zip(this.#meshList, values)
       .map(v => ({mesh: v[0], value: v[1]}))
       .forEach((v: {mesh: HorizontalAnimationMesh, value: number}) => {
         v.mesh.animate(v.value / MAX_ANIMATION);
@@ -75,7 +75,7 @@ export class HpNumber {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -84,7 +84,7 @@ export class HpNumber {
    * @param value 補正前
    * @return 補正結果
    */
-  _correctValue(value: number): number {
+  #correctValue(value: number): number {
     if (value < MIN_HP) {
       return MIN_HP;
     } else if (MAX_HP < value) {

@@ -18,14 +18,14 @@ export const MESH_SIZE = 300;
  * プレイヤー ダメージ反射 ビュー
  */
 export class PlayerReflectIndicatorView implements ReflectIndicatorView {
-  _mesh: HorizontalAnimationMesh;
+  #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
     const playerTurnResource = resources.textures.find(v => v.id === TEXTURE_IDS.REFLECT);
     const playerTurn = playerTurnResource
       ? playerTurnResource.texture
       : new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({
+    this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
       maxAnimation: 1,
       width: MESH_SIZE,
@@ -35,7 +35,7 @@ export class PlayerReflectIndicatorView implements ReflectIndicatorView {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._mesh.destructor();
+    this.#mesh.destructor();
   }
 
   /**
@@ -44,7 +44,7 @@ export class PlayerReflectIndicatorView implements ReflectIndicatorView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this.#mesh.getObject3D();
   }
 
   /**
@@ -53,9 +53,9 @@ export class PlayerReflectIndicatorView implements ReflectIndicatorView {
    * @param model モデル
    */
   engage(model: ReflectIndocatorModel): void {
-    const target = this._mesh.getObject3D();
+    const target = this.#mesh.getObject3D();
 
-    this._mesh.setOpacity(model.opacity);
+    this.#mesh.setOpacity(model.opacity);
     target.position.x = ARMDOZER_EFFECT_STANDARD_X;
     target.position.y = ARMDOZER_EFFECT_STANDARD_Y +10;
     target.position.z = ARMDOZER_EFFECT_STANDARD_Z + 40;
@@ -69,6 +69,6 @@ export class PlayerReflectIndicatorView implements ReflectIndicatorView {
    * @param camera カメラ
    */
   lookAt(camera: typeof THREE.Camera): void {
-    this._mesh.getObject3D().quaternion.copy(camera.quaternion);
+    this.#mesh.getObject3D().quaternion.copy(camera.quaternion);
   }
 }

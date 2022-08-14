@@ -12,8 +12,8 @@ export const MAX_BATTERY = 5;
 
 /** プレイヤーバッテリー */
 export class PlayerBatteryGauge {
-  _group: typeof THREE.Group;
-  _gaugeList: BatteryGaugeUnit[];
+  #group: typeof THREE.Group;
+  #gaugeList: BatteryGaugeUnit[];
 
   /**
    * コンストラクタ
@@ -21,19 +21,19 @@ export class PlayerBatteryGauge {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
-    this._gaugeList = R.times(v => v + 1, MAX_BATTERY)
+    this.#gaugeList = R.times(v => v + 1, MAX_BATTERY)
       .map(v => new BatteryGaugeUnit(resources, v));
-    this._gaugeList.forEach((gauge, index) => {
+    this.#gaugeList.forEach((gauge, index) => {
       gauge.getObject3D().position.x = index * 95;
-      this._group.add(gauge.getObject3D());
+      this.#group.add(gauge.getObject3D());
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._gaugeList.forEach(v => {
+    this.#gaugeList.forEach(v => {
       v.destructor();
     });
   }
@@ -45,7 +45,7 @@ export class PlayerBatteryGauge {
    */
   engage(batteryList: Battery[]): void {
     batteryList.forEach(v => {
-      const gauge = this._gaugeList.find(gauge => gauge.getValue() === v.value);
+      const gauge = this.#gaugeList.find(gauge => gauge.getValue() === v.value);
       if (!gauge) {
         return;
       }
@@ -59,16 +59,16 @@ export class PlayerBatteryGauge {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 }
 
 /** バッテリーゲージ1マス分 */
 class BatteryGaugeUnit {
-  _group: typeof THREE.Group;
-  _gauge: SimpleImageMesh;
-  _back: SimpleImageMesh;
-  _value: number;
+  #group: typeof THREE.Group;
+  #gauge: SimpleImageMesh;
+  #back: SimpleImageMesh;
+  #value: number;
 
   /**
    * コンストラクタ
@@ -77,26 +77,26 @@ class BatteryGaugeUnit {
    * @param value バッテリー値
    */
   constructor(resources: Resources, value: number) {
-    this._group = new THREE.Group();
-    this._value = value;
+    this.#group = new THREE.Group();
+    this.#value = value;
 
     const gaugeImage = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE)?.image ?? new Image();
-    this._gauge = new SimpleImageMesh({image: gaugeImage, imageWidth:88, meshSize: 128, canvasSize: 128});
-    this._gauge.getObject3D().position.z = 1;
-    this._group.add(this._gauge.getObject3D());
+    this.#gauge = new SimpleImageMesh({image: gaugeImage, imageWidth:88, meshSize: 128, canvasSize: 128});
+    this.#gauge.getObject3D().position.z = 1;
+    this.#group.add(this.#gauge.getObject3D());
 
     const backImage = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_GAUGE_BACK)?.image ?? new Image();
-    this._back = new SimpleImageMesh({image: backImage, imageWidth: 88, meshSize: 128, canvasSize: 128});
-    this._back.getObject3D().position.z = 0;
-    this._group.add(this._back.getObject3D());
+    this.#back = new SimpleImageMesh({image: backImage, imageWidth: 88, meshSize: 128, canvasSize: 128});
+    this.#back.getObject3D().position.z = 0;
+    this.#group.add(this.#back.getObject3D());
   }
 
   /** デストラクタ相当の処理 */
   destructor() {
-    this._gauge.destructor();
-    this._back.destructor();
+    this.#gauge.destructor();
+    this.#back.destructor();
   }
 
   /**
@@ -105,7 +105,7 @@ class BatteryGaugeUnit {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -114,7 +114,7 @@ class BatteryGaugeUnit {
    * @return バッテリー値
    */
   getValue(): number {
-    return this._value;
+    return this.#value;
   }
 
   /**
@@ -123,6 +123,6 @@ class BatteryGaugeUnit {
    * @param opacity 0〜1で指定する透明度、0で完全透明
    */
   setOpacity(opacity: number): void {
-    this._gauge.setOpacity(opacity);
+    this.#gauge.setOpacity(opacity);
   }
 }

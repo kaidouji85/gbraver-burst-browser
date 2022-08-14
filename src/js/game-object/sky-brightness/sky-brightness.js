@@ -11,9 +11,9 @@ import {SkyBrightnessView} from "./view/sky-brightness-view";
 
 /** 空の明るさ */
 export class SkyBrightness {
-  _model: SkyBrightnessModel;
-  _view: SkyBrightnessView;
-  _unsubscriber: Unsubscriber;
+  #model: SkyBrightnessModel;
+  #view: SkyBrightnessView;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -21,22 +21,22 @@ export class SkyBrightness {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
+    this.#model = createInitialValue();
 
-    this._view = new SkyBrightnessView();
-    this._view.engage(this._model);
+    this.#view = new SkyBrightnessView();
+    this.#view.engage(this.#model);
 
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate();
+        this.#onUpdate();
       }
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -47,7 +47,7 @@ export class SkyBrightness {
    * @return アニメーション
    */
   brightness(value: number, duration: number): Animate {
-    return brightness(this._model, value, duration);
+    return brightness(this.#model, value, duration);
   }
 
   /**
@@ -56,13 +56,13 @@ export class SkyBrightness {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
-  _onUpdate(): void {
-    this._view.engage(this._model);
+  #onUpdate(): void {
+    this.#view.engage(this.#model);
   }
 }

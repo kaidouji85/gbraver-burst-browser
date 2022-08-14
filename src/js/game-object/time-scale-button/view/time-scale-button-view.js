@@ -20,13 +20,13 @@ const MESH_SIZE = 70;
 
 /** アニメーションタイムスケールボタンビュー */
 export class TimeScaleButtonView {
-  _group: typeof THREE.Group;
-  _button: SimpleImageMesh;
-  _timeScale100: SimpleImageMesh;
-  _timeScale050: SimpleImageMesh;
-  _timeScale025: SimpleImageMesh;
-  _overlap: ButtonOverlap;
-  _pushButton: StreamSource<void>;
+  #group: typeof THREE.Group;
+  #button: SimpleImageMesh;
+  #timeScale100: SimpleImageMesh;
+  #timeScale050: SimpleImageMesh;
+  #timeScale025: SimpleImageMesh;
+  #overlap: ButtonOverlap;
+  #pushButton: StreamSource<void>;
 
   /**
    * コンストラクタ
@@ -35,46 +35,46 @@ export class TimeScaleButtonView {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
-    this._group = new THREE.Group();
-    this._pushButton = createStreamSource();
+    this.#group = new THREE.Group();
+    this.#pushButton = createStreamSource();
 
     const buttonImage = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_BUTTON)?.image ?? new Image();
-    this._button = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: buttonImage, imageWidth: 256});
-    this._group.add(this._button.getObject3D());
+    this.#button = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: buttonImage, imageWidth: 256});
+    this.#group.add(this.#button.getObject3D());
 
     const timeScale100 = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_100)?.image ?? new Image();
-    this._timeScale100 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale100, imageWidth: 256});
-    this._group.add(this._timeScale100.getObject3D());
+    this.#timeScale100 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale100, imageWidth: 256});
+    this.#group.add(this.#timeScale100.getObject3D());
 
     const timeScale050 = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_050)?.image ?? new Image();
-    this._timeScale050 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale050, imageWidth: 256});
-    this._group.add(this._timeScale050.getObject3D());
+    this.#timeScale050 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale050, imageWidth: 256});
+    this.#group.add(this.#timeScale050.getObject3D());
 
     const timeScale025 = resources.canvasImages.find(v => v.id === CANVAS_IMAGE_IDS.TIME_SCALE_025)?.image ?? new Image();
-    this._timeScale025 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale025, imageWidth: 256});
-    this._group.add(this._timeScale025.getObject3D());
+    this.#timeScale025 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale025, imageWidth: 256});
+    this.#group.add(this.#timeScale025.getObject3D());
 
-    this._overlap = circleButtonOverlap({
+    this.#overlap = circleButtonOverlap({
       radius: 30, 
       segments:32, 
       gameObjectAction, 
       onButtonPush: () => {
-        this._pushButton.next();
+        this.#pushButton.next();
       },
       visible: false
     });
-    this._group.add(this._overlap.getObject3D());
+    this.#group.add(this.#overlap.getObject3D());
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._button.destructor();
-    this._timeScale100.destructor();
-    this._timeScale050.destructor();
-    this._timeScale025.destructor();
-    this._overlap.destructor();
+    this.#button.destructor();
+    this.#timeScale100.destructor();
+    this.#timeScale050.destructor();
+    this.#timeScale025.destructor();
+    this.#overlap.destructor();
   }
 
   /**
@@ -83,7 +83,7 @@ export class TimeScaleButtonView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -92,7 +92,7 @@ export class TimeScaleButtonView {
    * @return 通知ストリーム
    */
   pushButtonNotifier(): Stream<void> {
-    return this._pushButton;
+    return this.#pushButton;
   }
 
   /**
@@ -103,28 +103,28 @@ export class TimeScaleButtonView {
    */
   engage(model: TimeScaleButtonModel, preRender: PreRender): void {
     const activeTimeScales: {timeScale: number, sprite: SimpleImageMesh}[] = [
-      {timeScale: 1, sprite: this._timeScale100},
-      {timeScale: 0.5, sprite: this._timeScale050},
-      {timeScale: 0.25, sprite: this._timeScale025},
+      {timeScale: 1, sprite: this.#timeScale100},
+      {timeScale: 0.5, sprite: this.#timeScale050},
+      {timeScale: 0.25, sprite: this.#timeScale025},
     ];
-    const activeTimeScale = activeTimeScales.find(v => v.timeScale === model.timeScale)?.sprite ?? this._timeScale100;
-    const timeScales = [this._timeScale100, this._timeScale050, this._timeScale025];
+    const activeTimeScale = activeTimeScales.find(v => v.timeScale === model.timeScale)?.sprite ?? this.#timeScale100;
+    const timeScales = [this.#timeScale100, this.#timeScale050, this.#timeScale025];
     timeScales.forEach(timeScale => {
       const opacity = timeScale === activeTimeScale ? model.opacity : 0;
       timeScale.setOpacity(opacity);
     });
-    this._button.setOpacity(model.opacity);
+    this.#button.setOpacity(model.opacity);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     const groupScale = model.scale * devicePerScale;
-    this._group.scale.set(groupScale, groupScale, groupScale);
+    this.#group.scale.set(groupScale, groupScale, groupScale);
     const paddingLeft = 25;
     const marginLeft = 5;
-    this._group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
+    this.#group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
       + Math.max(marginLeft, preRender.safeAreaInset.left);
     const paddingTop = 25;
     const marginTop = 5;
-    this._group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop * devicePerScale
+    this.#group.position.y = preRender.rendererDOM.clientHeight / 2 - paddingTop * devicePerScale
       - Math.max(marginTop, preRender.safeAreaInset.top);
   }
 }

@@ -16,7 +16,7 @@ export const HEIGHT = 300;
  * 衝撃波リングのビュー
  */
 export class ShockWaveRingView {
-  _mesh: typeof THREE.Mesh;
+  #mesh: typeof THREE.Mesh;
 
   constructor(resources: Resources) {
     const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_SHOCK_WAVE_RING);
@@ -31,16 +31,16 @@ export class ShockWaveRingView {
     });
     const geometry = new THREE.PlaneGeometry(WIDTH, HEIGHT, 1, 1);
 
-    this._mesh = new THREE.Mesh(geometry, material);
-    this._mesh.renderOrder = SPRITE_RENDER_ORDER;
+    this.#mesh = new THREE.Mesh(geometry, material);
+    this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.geometry.dispose();
-    this._mesh.material.dispose();
+    this.#mesh.geometry.dispose();
+    this.#mesh.material.dispose();
   }
 
   /**
@@ -49,13 +49,13 @@ export class ShockWaveRingView {
    * @param model モデル
    */
   engage(model: ShockWaveRingModel): void {
-    this._mesh.scale.set(
+    this.#mesh.scale.set(
       model.scale,
       model.scale,
       model.scale
     );
-    this._mesh.material.opacity = model.opacity;
-    this._mesh.position.z = RING_Z_INDEX;
+    this.#mesh.material.opacity = model.opacity;
+    this.#mesh.position.z = RING_Z_INDEX;
   }
 
   /**
@@ -64,6 +64,6 @@ export class ShockWaveRingView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._mesh;
+    return this.#mesh;
   }
 }

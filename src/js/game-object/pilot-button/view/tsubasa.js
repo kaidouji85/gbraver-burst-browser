@@ -10,8 +10,8 @@ import type {PilotIcon} from "./pilot-icon";
  * ツバサ パイロットアイコン
  */
 export class TsubasaIcon implements PilotIcon {
-  _group: typeof THREE.Group;
-  _mesh: HorizontalAnimationMesh;
+  #group: typeof THREE.Group;
+  #mesh: HorizontalAnimationMesh;
 
   /**
    * コンストラクタ
@@ -19,27 +19,27 @@ export class TsubasaIcon implements PilotIcon {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const texture = resources.textures
       .find(v => v.id === TEXTURE_IDS.TSUBASA_CUTIN)
       ?.texture ?? new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({
+    this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: 1,
       width: 400,
       height: 400,
     });
-    this._mesh.getObject3D().position.x = 10;
-    this._mesh.getObject3D().position.y = 120;
-    this._group.add(this._mesh.getObject3D());
+    this.#mesh.getObject3D().position.x = 10;
+    this.#mesh.getObject3D().position.y = 120;
+    this.#group.add(this.#mesh.getObject3D());
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.destructor();
+    this.#mesh.destructor();
   }
 
   /**
@@ -48,7 +48,7 @@ export class TsubasaIcon implements PilotIcon {
    * @return 取得結果
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -57,6 +57,6 @@ export class TsubasaIcon implements PilotIcon {
    * @param opacity 透明度
    */
   setOpacity(opacity: number): void {
-    this._mesh.setOpacity(opacity);
+    this.#mesh.setOpacity(opacity);
   }
 }

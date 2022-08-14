@@ -15,10 +15,10 @@ import type {LightningView} from "./view/lightning-view";
  * 電撃ヒットマーク
  */
 export class Lightning {
- _model: LightningModel;
- _view: LightningView;
- _sounds: LightningSounds;
- _unsubscriber: Unsubscriber;
+ #model: LightningModel;
+ #view: LightningView;
+ #sounds: LightningSounds;
+ #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -28,12 +28,12 @@ export class Lightning {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: LightningView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._view = view;
-    this._sounds = new LightningSounds(resources);
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue();
+    this.#view = view;
+    this.#sounds = new LightningSounds(resources);
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate();
+        this.#onUpdate();
       }
     });
   }
@@ -42,8 +42,8 @@ export class Lightning {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -52,7 +52,7 @@ export class Lightning {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this._model, this._sounds);
+    return popUp(this.#model, this.#sounds);
   }
 
   /**
@@ -61,13 +61,13 @@ export class Lightning {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
-  _onUpdate(): void {
-    this._view.engage(this._model);
+  #onUpdate(): void {
+    this.#view.engage(this.#model);
   }
 }
