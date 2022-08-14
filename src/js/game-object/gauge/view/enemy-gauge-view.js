@@ -22,7 +22,7 @@ export const MIN_PADDING_TOP = 50;
 export class EnemyGaugeView implements GaugeView {
   #group: typeof THREE.Group;
   #base: SimpleImageMesh;
-  hpBar: EnemyHpBar;
+  #hpBar: EnemyHpBar;
   #hpNumber: HpNumber;
   #maxHpNumber: HpNumber;
   #batteryGauge: EnemyBatteryGauge;
@@ -36,9 +36,9 @@ export class EnemyGaugeView implements GaugeView {
     this.#base = new SimpleImageMesh({canvasSize: 1024, meshSize: 1024, image: gaugeBase, imageWidth: 549});
     this.#group.add(this.#base.getObject3D());
 
-    this.hpBar = new EnemyHpBar(resources);
-    this.hpBar.getObject3D().position.set(213 ,30.5, 1);
-    this.#group.add(this.hpBar.getObject3D());
+    this.#hpBar = new EnemyHpBar(resources);
+    this.#hpBar.getObject3D().position.set(213 ,30.5, 1);
+    this.#group.add(this.#hpBar.getObject3D());
 
     this.#hpNumber = new HpNumber(resources);
     this.#hpNumber.getObject3D().position.set(10, 52, 1);
@@ -56,7 +56,7 @@ export class EnemyGaugeView implements GaugeView {
   /** デストラクタ */
   destructor(): void {
     this.#base.destructor();
-    this.hpBar.destructor();
+    this.#hpBar.destructor();
     this.#hpNumber.destructor();
     this.#maxHpNumber.destructor();
     this.#batteryGauge.destructor();
@@ -71,7 +71,7 @@ export class EnemyGaugeView implements GaugeView {
   engage(model: GaugeModel, preRender: PreRender): void {
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
 
-    this.hpBar.setValue(model.hp / model.maxHp);
+    this.#hpBar.setValue(model.hp / model.maxHp);
     this.#hpNumber.setValue(model.hp);
     this.#maxHpNumber.setValue(model.maxHp);
     this.#batteryGauge.engage(model.batteryList);
