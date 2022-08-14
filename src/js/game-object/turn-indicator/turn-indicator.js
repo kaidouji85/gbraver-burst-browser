@@ -26,10 +26,10 @@ type Param = {
 
 /** ターンインジケーター */
 export class TurnIndicator {
-  _tweenGroup: typeof TWEEN.Group;
-  _model: TurnIndicatorModel;
-  _view: TurnIndicatorView;
-  _unsubscribers: Unsubscriber[];
+  #tweenGroup: typeof TWEEN.Group;
+  #model: TurnIndicatorModel;
+  #view: TurnIndicatorView;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -37,32 +37,32 @@ export class TurnIndicator {
    * @param param パラメータ
    */
   constructor(param: Param) {
-    this._tweenGroup = new TWEEN.Group();
-    this._model = createInitialValue();
-    this._view = new TurnIndicatorView(param.resources);
+    this.#tweenGroup = new TWEEN.Group();
+    this.#model = createInitialValue();
+    this.#view = new TurnIndicatorView(param.resources);
 
-    this._unsubscribers = [
+    this.#unsubscribers = [
       param.gameObjectAction.subscribe(action => {
         if (action.type === 'Update') {
-          this._onUpdate(action);
+          this.#onUpdate(action);
         } else if (action.type === 'PreRender') {
-          this._onPreRender(action);
+          this.#onPreRender(action);
         }
       }),
 
       firstUpdate(param.gameObjectAction).subscribe(() => {
-        this._onFirstUpdate();
+        this.#onFirstUpdate();
       })
     ];
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscribers.forEach(v => {
+    this.#view.destructor();
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-    this._tweenGroup.removeAll();
+    this.#tweenGroup.removeAll();
   }
 
   /**
@@ -72,7 +72,7 @@ export class TurnIndicator {
    * @return アニメーション
    */
   turnChange(isPlayerTurn: boolean): Animate {
-    return turnChange(isPlayerTurn, this._model);
+    return turnChange(isPlayerTurn, this.#model);
   }
 
   /**
@@ -81,19 +81,19 @@ export class TurnIndicator {
    * @return アニメーション
    */
   invisible(): Animate {
-    return invisible(this._model);
+    return invisible(this.#model);
   }
 
   /** ターンインジケーターで使うthree.jsオブジェクトを返す */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
    * 初回のアップデート時にのみ実行される処理
    */
-  _onFirstUpdate(): void {
-    waiting(this._model, this._tweenGroup).loop();
+  #onFirstUpdate(): void {
+    waiting(this.#model, this.#tweenGroup).loop();
   }
 
   /**
@@ -101,9 +101,9 @@ export class TurnIndicator {
    *
    * @param action アクション
    */
-  _onUpdate(action: Update): void {
-    this._tweenGroup.update(action.time);
-    this._view.engage(this._model);
+  #onUpdate(action: Update): void {
+    this.#tweenGroup.update(action.time);
+    this.#view.engage(this.#model);
   }
 
   /**
@@ -111,7 +111,7 @@ export class TurnIndicator {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+  #onPreRender(action: PreRender): void {
+    this.#view.lookAt(action.camera);
   }
 }
