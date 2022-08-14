@@ -28,10 +28,10 @@ type Param = {
  * バッテリー回復
  */
 export class RecoverBattery {
-  _model: RecoverBatteryModel;
-  _view: RecoverBatteryView;
-  _sounds: RecoverBatterySounds;
-  _unsubscriber: Unsubscriber;
+  #model: RecoverBatteryModel;
+  #view: RecoverBatteryView;
+  #sounds: RecoverBatterySounds;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -39,22 +39,22 @@ export class RecoverBattery {
    * @param param パラメータ
    */
   constructor(param: Param): void {
-    this._model = createInitialValue();
-    this._view = param.view;
-    this._sounds = new RecoverBatterySounds(param.resources);
-    this._unsubscriber = param.gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue();
+    this.#view = param.view;
+    this.#sounds = new RecoverBatterySounds(param.resources);
+    this.#unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._update();
+        this.#update();
       } else if (action.type === 'PreRender') {
-        this._preRender(action);
+        this.#preRender(action);
       }
     })
   }
 
   /** デストラクタ */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -64,7 +64,7 @@ export class RecoverBattery {
    * @return アニメーション
    */
   popUp(value: number): Animate {
-    return popUp(this._model, this._sounds, value);
+    return popUp(this.#model, this.#sounds, value);
   }
 
   /**
@@ -74,7 +74,7 @@ export class RecoverBattery {
    * @return アニメーション
    */
   show(value: number): Animate {
-    return show(this._model, this._sounds, value);
+    return show(this.#model, this.#sounds, value);
   }
 
   /**
@@ -83,7 +83,7 @@ export class RecoverBattery {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this._model);
+    return hidden(this.#model);
   }
 
   /**
@@ -92,14 +92,14 @@ export class RecoverBattery {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
    * ゲームオブジェクト状態更新
    */
-  _update(): void {
-    this._view.engage(this._model);
+  #update(): void {
+    this.#view.engage(this.#model);
   }
 
   /**
@@ -107,7 +107,7 @@ export class RecoverBattery {
    *
    * @param action アクション
    */
-  _preRender(action: PreRender): void {
-    this._view.lookAt(action.camera)
+  #preRender(action: PreRender): void {
+    this.#view.lookAt(action.camera)
   }
 }
