@@ -16,9 +16,9 @@ import type {TurnStartView} from "./view/turn-start-view";
  * ターンスタート
  */
 export class TurnStart {
-  _model: TurnStartModel;
-  _view: TurnStartView;
-  _unsubscriber: Unsubscriber;
+  #model: TurnStartModel;
+  #view: TurnStartView;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -28,19 +28,19 @@ export class TurnStart {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: TurnStartView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._view = view;
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue();
+    this.#view = view;
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -49,7 +49,7 @@ export class TurnStart {
    * @return アニメーション
    */
   show(): Animate {
-    return show(this._model);
+    return show(this.#model);
   }
 
   /**
@@ -58,7 +58,7 @@ export class TurnStart {
    * @return アニメーション
    */
   hidden(): Animate {
-    return hidden(this._model);
+    return hidden(this.#model);
   }
 
   /**
@@ -67,7 +67,7 @@ export class TurnStart {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -75,7 +75,7 @@ export class TurnStart {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.engage(this._model, action);
+  #onPreRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 }
