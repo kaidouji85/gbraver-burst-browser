@@ -13,9 +13,9 @@ import {IlluminationView} from "./view/illumination-view";
  * ステージ全体の照明
  */
 export class Illumination {
-  _model: IlluminationModel;
-  _view: IlluminationView;
-  _unsubscriber: Unsubscriber;
+  #model: IlluminationModel;
+  #view: IlluminationView;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -23,21 +23,21 @@ export class Illumination {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
+    this.#model = createInitialValue();
 
-    this._view = new IlluminationView();
-    this._view.engage(this._model);
+    this.#view = new IlluminationView();
+    this.#view.engage(this.#model);
 
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate();
+        this.#onUpdate();
       }
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._unsubscriber.unsubscribe();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -46,7 +46,7 @@ export class Illumination {
    * @return シーンに追加するオブジェクト
    */
   getObject3Ds(): typeof THREE.Object3D[] {
-    return this._view.getObject3Ds();
+    return this.#view.getObject3Ds();
   }
 
   /**
@@ -57,13 +57,13 @@ export class Illumination {
    * @return アニメーション
    */
   intensity(value: number, duration: number): Animate {
-    return intensity(this._model, value, duration);
+    return intensity(this.#model, value, duration);
   }
 
   /**
    * アップデート時の処理
    */
-  _onUpdate(): void {
-    this._view.engage(this._model);
+  #onUpdate(): void {
+    this.#view.engage(this.#model);
   }
 }
