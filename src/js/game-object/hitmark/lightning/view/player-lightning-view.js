@@ -18,14 +18,14 @@ const MAX_ANIMATION = 8;
  * プレイヤー側 電撃ヒットマーク ビュー
  */
 export class PlayerLightningView implements LightningView {
-  _mesh: HorizontalAnimationMesh;
+  #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
     const textureResource = resources.textures.find(v => v.id === TEXTURE_IDS.HITMARK_LIGHTNING_RING);
     const texture = textureResource
       ? textureResource.texture
       : new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({
+    this.#mesh = new HorizontalAnimationMesh({
       texture: texture,
       maxAnimation: MAX_ANIMATION,
       width: WIDTH,
@@ -37,7 +37,7 @@ export class PlayerLightningView implements LightningView {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.destructor();
+    this.#mesh.destructor();
   }
 
   /**
@@ -46,15 +46,15 @@ export class PlayerLightningView implements LightningView {
    * @param model モデル
    */
   engage(model: LightningModel): void {
-    const object3D = this._mesh.getObject3D();
+    const object3D = this.#mesh.getObject3D();
     object3D.position.set(
       model.position.x,
       model.position.y,
       model.position.z,
     );
     object3D.scale.set(1, 1, 1);
-    this._mesh.setOpacity(model.opacity);
-    this._mesh.animate(model.animation.frame);
+    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.animate(model.animation.frame);
   }
 
   /**
@@ -63,6 +63,6 @@ export class PlayerLightningView implements LightningView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this.#mesh.getObject3D();
   }
 }
