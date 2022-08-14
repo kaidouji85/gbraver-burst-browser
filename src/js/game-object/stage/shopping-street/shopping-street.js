@@ -18,7 +18,7 @@ export default class ShoppingStreet implements Stage {
     const resource = resources.gltfs.find(v => v.id === GLTF_IDS.SHOPPING_STREET);
     this.#gltf = resource ? resource : {id: "", object: new THREE.Scene()};
     this.#gltf.object.scale.set(100, 100, 100);
-    this.#gltf.object.z = -50;
+    this.#gltf.object.position.z = -50;
   }
 
   /** デストラクタ */
