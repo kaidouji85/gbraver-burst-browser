@@ -17,10 +17,10 @@ import type {ShockWaveView} from "./view/shock-wave-view";
  * 衝撃波
  */
 export class ShockWave {
-  _model: ShockWaveModel;
-  _view: ShockWaveView;
-  _hitSound: typeof Howl;
-  _unsubscriber: Unsubscriber;
+  #model: ShockWaveModel;
+  #view: ShockWaveView;
+  #hitSound: typeof Howl;
+  #unsubscriber: Unsubscriber;
 
   /**
    * リソース管理オブジェクト
@@ -31,19 +31,19 @@ export class ShockWave {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: ShockWaveView, initialModel: ShockWaveModel, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = initialModel;
-    this._view = view;
+    this.#model = initialModel;
+    this.#view = view;
 
     const hitResource = resources.sounds.find(v => v.id === SOUND_IDS.MECHA_IMPACT);
-    this._hitSound = hitResource
+    this.#hitSound = hitResource
       ? hitResource.sound
       : new Howl();
 
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate();
+        this.#onUpdate();
       } else if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
@@ -52,8 +52,8 @@ export class ShockWave {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -63,9 +63,9 @@ export class ShockWave {
    */
   popUp(): Animate {
     return process(() => {
-      this._hitSound.play();
+      this.#hitSound.play();
     })
-      .chain(popUp(this._model));
+      .chain(popUp(this.#model));
   }
 
   /**
@@ -74,14 +74,14 @@ export class ShockWave {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
-  _onUpdate(): void {
-    this._view.engage(this._model);
+  #onUpdate(): void {
+    this.#view.engage(this.#model);
   }
 
   /**
@@ -89,7 +89,7 @@ export class ShockWave {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+  #onPreRender(action: PreRender): void {
+    this.#view.lookAt(action.camera);
   }
 }
