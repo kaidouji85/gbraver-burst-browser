@@ -20,48 +20,48 @@ export const MIN_PADDING_TOP = 50;
 
 /** プレイヤーゲージのビュー */
 export class PlayerGaugeView implements GaugeView {
-  _group: typeof THREE.Group;
-  _base: SimpleImageMesh;
-  _hpBar: PlayerHpBar;
-  _hpNumber: HpNumber;
-  _maxHpNumber: HpNumber;
-  _batteryGauge: PlayerBatteryGauge;
+  #group: typeof THREE.Group;
+  #base: SimpleImageMesh;
+  #hpBar: PlayerHpBar;
+  #hpNumber: HpNumber;
+  #maxHpNumber: HpNumber;
+  #batteryGauge: PlayerBatteryGauge;
 
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
-    this._group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
+    this.#group = new THREE.Group();
+    this.#group.scale.set(BASE_SCALE, BASE_SCALE, BASE_SCALE);
 
     const gaugeBase = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.PLAYER_GAUGE_BASE)?.image ?? new Image();
-    this._base = new SimpleImageMesh({canvasSize: 1024, meshSize: 1024, image: gaugeBase, imageWidth: 548});
-    this._group.add(this._base.getObject3D());
+    this.#base = new SimpleImageMesh({canvasSize: 1024, meshSize: 1024, image: gaugeBase, imageWidth: 548});
+    this.#group.add(this.#base.getObject3D());
 
-    this._hpBar = new PlayerHpBar(resources);
-    this._hpBar.getObject3D().position.set(-212 ,31.5, 1);
-    this._group.add(this._hpBar.getObject3D());
+    this.#hpBar = new PlayerHpBar(resources);
+    this.#hpBar.getObject3D().position.set(-212 ,31.5, 1);
+    this.#group.add(this.#hpBar.getObject3D());
 
-    this._hpNumber = new HpNumber(resources);
-    this._hpNumber.getObject3D().position.set(80, 52, 1);
-    this._group.add(this._hpNumber.getObject3D());
+    this.#hpNumber = new HpNumber(resources);
+    this.#hpNumber.getObject3D().position.set(80, 52, 1);
+    this.#group.add(this.#hpNumber.getObject3D());
 
-    this._maxHpNumber = new HpNumber(resources);
-    this._maxHpNumber.getObject3D().position.set(240, 52, 1);
-    this._group.add(this._maxHpNumber.getObject3D());
+    this.#maxHpNumber = new HpNumber(resources);
+    this.#maxHpNumber.getObject3D().position.set(240, 52, 1);
+    this.#group.add(this.#maxHpNumber.getObject3D());
 
-    this._batteryGauge = new PlayerBatteryGauge(resources);
-    this._batteryGauge.getObject3D().position.set(-169.5, -55.5, 1);
-    this._group.add(this._batteryGauge.getObject3D());
+    this.#batteryGauge = new PlayerBatteryGauge(resources);
+    this.#batteryGauge.getObject3D().position.set(-169.5, -55.5, 1);
+    this.#group.add(this.#batteryGauge.getObject3D());
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._base.destructor();
-    this._hpBar.destructor();
-    this._hpNumber.destructor();
-    this._maxHpNumber.destructor();
-    this._batteryGauge.destructor();
+    this.#base.destructor();
+    this.#hpBar.destructor();
+    this.#hpNumber.destructor();
+    this.#maxHpNumber.destructor();
+    this.#batteryGauge.destructor();
   }
 
   /**
@@ -73,12 +73,12 @@ export class PlayerGaugeView implements GaugeView {
   engage(model: GaugeModel, preRender: PreRender): void {
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
 
-    this._hpBar.setValue(model.hp / model.maxHp);
-    this._hpNumber.setValue(model.hp);
-    this._maxHpNumber.setValue(model.maxHp);
-    this._batteryGauge.engage(model.batteryList);
+    this.#hpBar.setValue(model.hp / model.maxHp);
+    this.#hpNumber.setValue(model.hp);
+    this.#maxHpNumber.setValue(model.maxHp);
+    this.#batteryGauge.engage(model.batteryList);
 
-    this._group.scale.set(
+    this.#group.scale.set(
       BASE_SCALE * devicePerScale,
       BASE_SCALE * devicePerScale,
       BASE_SCALE * devicePerScale
@@ -88,11 +88,11 @@ export class PlayerGaugeView implements GaugeView {
       - MIN_PADDING_TOP * devicePerScale;
     const safeAreaY = preRender.rendererDOM.clientHeight / 2
       - preRender.safeAreaInset.top * devicePerScale;
-    this._group.position.x = model.tracking.x;
-    this._group.position.y = Math.min(minY, safeAreaY, model.tracking.y);
-    this._group.position.z = 0;
+    this.#group.position.x = model.tracking.x;
+    this.#group.position.y = Math.min(minY, safeAreaY, model.tracking.y);
+    this.#group.position.z = 0;
 
-    this._group.quaternion.copy(preRender.camera.quaternion);
+    this.#group.quaternion.copy(preRender.camera.quaternion);
   }
 
   /**
@@ -101,6 +101,6 @@ export class PlayerGaugeView implements GaugeView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 }

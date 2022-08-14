@@ -20,10 +20,10 @@ export const BAR_WIDTH = 472;
 
 /** プレイヤーのHPバー */
 export class PlayerHpBar {
-  _texture: typeof THREE.CanvasTexture;
-  _mesh: typeof THREE.Mesh;
-  _back: CanvasMesh;
-  _group: typeof THREE.Group;
+  #texture: typeof THREE.CanvasTexture;
+  #mesh: typeof THREE.Mesh;
+  #back: CanvasMesh;
+  #group: typeof THREE.Group;
 
   /**
    * コンストラクタ
@@ -31,7 +31,7 @@ export class PlayerHpBar {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
     const canvas = document.createElement('canvas');
     canvas.width = BAR_CANVAS_WIDTH;
@@ -41,42 +41,42 @@ export class PlayerHpBar {
       .find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR)?.image ?? new Image();
     const barHeight = bar.height * BAR_WIDTH / bar.width;
     context.drawImage(bar, 0, context.canvas.height / 2, BAR_WIDTH, barHeight);
-    this._texture = new THREE.CanvasTexture(canvas);
-    animatedTexture(this._texture, 2, 1);
-    this._texture.needsUpdate = true;
+    this.#texture = new THREE.CanvasTexture(canvas);
+    animatedTexture(this.#texture, 2, 1);
+    this.#texture.needsUpdate = true;
 
     const geometry = new THREE.PlaneGeometry(BAR_MESH_WIDTH, BAR_MESH_HEIGHT,1, 1);
     const material = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       transparent: true,
-      map: this._texture
+      map: this.#texture
     });
-    this._mesh = new THREE.Mesh(geometry, material);
-    this._mesh.position.set(BAR_MESH_HEIGHT / 2, 0, 1);
-    this._mesh.renderOrder = SPRITE_RENDER_ORDER;
-    this._group.add(this._mesh);
+    this.#mesh = new THREE.Mesh(geometry, material);
+    this.#mesh.position.set(BAR_MESH_HEIGHT / 2, 0, 1);
+    this.#mesh.renderOrder = SPRITE_RENDER_ORDER;
+    this.#group.add(this.#mesh);
 
     const back = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.HP_BAR_BACK)?.image ?? new Image();
-    this._back = new CanvasMesh({canvasWidth: 512, canvasHeight: 512, meshWidth: 512, meshHeight: 512});
-    this._back.draw(context => {
+    this.#back = new CanvasMesh({canvasWidth: 512, canvasHeight: 512, meshWidth: 512, meshHeight: 512});
+    this.#back.draw(context => {
       const backWidth = 472;
       const backHeight = back.height * backWidth / back.width;
       context.drawImage(back, 0, context.canvas.height / 2, backWidth, backHeight);
     });
-    this._back.getObject3D().position.set(BAR_MESH_HEIGHT / 2, 0, 0);
-    this._group.add(this._back.getObject3D());
+    this.#back.getObject3D().position.set(BAR_MESH_HEIGHT / 2, 0, 0);
+    this.#group.add(this.#back.getObject3D());
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._mesh.material.dispose();
-    this._mesh.geometry.dispose();
-    this._texture.image = null;
-    this._texture.dispose();
-    this._back.destructor();
+    this.#mesh.material.dispose();
+    this.#mesh.geometry.dispose();
+    this.#texture.image = null;
+    this.#texture.dispose();
+    this.#back.destructor();
   }
 
   /**
@@ -85,8 +85,8 @@ export class PlayerHpBar {
    * @param value 0〜1で指定するHPバーの値、1で100%
    */
   setValue(value: number): void {
-    const baseOffsetX = 1 - this._correctValue(value);
-    this._texture.offset.x = baseOffsetX * BAR_WIDTH / BAR_CANVAS_WIDTH;
+    const baseOffsetX = 1 - this.#correctValue(value);
+    this.#texture.offset.x = baseOffsetX * BAR_WIDTH / BAR_CANVAS_WIDTH;
   }
 
   /**
@@ -95,7 +95,7 @@ export class PlayerHpBar {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -104,7 +104,7 @@ export class PlayerHpBar {
    * @param value オリジナルの値
    * @return 補正結果
    */
-  _correctValue(value: number): number {
+  #correctValue(value: number): number {
     if (1 < value) {
       return 1;
     } else if (value < 0) {
