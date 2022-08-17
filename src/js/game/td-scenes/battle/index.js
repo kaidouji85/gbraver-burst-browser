@@ -1,7 +1,5 @@
 // @flow
 import type {GameState, Player} from "gbraver-burst-core";
-import {all} from "../../../animation/all";
-import {delay} from "../../../animation/delay";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {GameLoop} from "../../../game-loop/game-loop";
@@ -15,20 +13,17 @@ import {createStreamSource} from "../../../stream/stream";
 import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
-import type {DoPilotSkill} from "./actions/do-pilot-skill";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import type {BattleProgress} from "./battle-progress";
-import {onBurst} from "./battle-scene-procedure/on-burst";
-import {onDecideBattery} from "./battle-scene-procedure/on-decide-battery";
-import {progressGame} from "./battle-scene-procedure/progress-game";
-import {start} from "./battle-scene-procedure/start";
 import type {BattleEnd, BattleSceneProps} from './battle-scene-props';
 import type {CustomBattleEvent} from "./custom-battle-event";
-import {playAnimation} from "./play-animation";
+import {onBurst} from "./procedure/on-burst";
+import {onDecideBattery} from "./procedure/on-decide-battery";
+import {onPilotSkill} from "./procedure/on-pilot-skill";
+import {start} from "./procedure/start";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
-import {toCustomBattleEventProps} from "./to-custom-battle-event-props";
 import {BattleSceneView} from "./view";
 
 /** 戦闘シーンで利用するレンダラ */
@@ -108,7 +103,7 @@ export class BattleScene implements Scene, BattleSceneProps {
         } else if (action.type === 'doBurst') {
           onBurst(this, action);
         } else if (action.type === 'doPilotSkill') {
-          this.#onPilotSkill(action);
+          onPilotSkill(this, action);
         } else if (action.type === 'toggleTimeScale') {
           this.#onToggleTimeScale(action);
         }
@@ -150,36 +145,6 @@ export class BattleScene implements Scene, BattleSceneProps {
    */
   getHTMLElements(): HTMLElement[] {
     return this.view.dom.getHTMLElements();
-  }
-
-  /**
-   * パイロットスキル発動時の処理
-   *
-   * @param action アクション
-   * @return 処理が完了したら発火するPromise
-   */
-  async #onPilotSkill(action: DoPilotSkill): Promise<void> {
-    this.exclusive.execute(async () => {
-      action.event.stopPropagation();
-      const pilotSkillCommand = {type: 'PILOT_SKILL_COMMAND'};
-      const {isCommandCanceled} = this.customBattleEvent
-        ? await this.customBattleEvent.onPilotSkillCommandSelected({...toCustomBattleEventProps(this), pilot: pilotSkillCommand})
-        : {isCommandCanceled: false};
-      if (isCommandCanceled) {
-        return;
-      }
-      await playAnimation(
-        all(
-          this.view.hud.gameObjects.pilotButton.decide(),
-          this.view.hud.gameObjects.burstButton.close(),
-          this.view.hud.gameObjects.batterySelector.close(),
-          this.view.hud.gameObjects.timeScaleButton.close(),
-        )
-          .chain(delay(500))
-          .chain(this.view.hud.gameObjects.pilotButton.close())
-      , this);
-      await progressGame(this, pilotSkillCommand);
-    });
   }
 
   /**
