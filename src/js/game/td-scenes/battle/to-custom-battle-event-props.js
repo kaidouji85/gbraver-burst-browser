@@ -1,6 +1,6 @@
 // @flow
-import type {BattleSceneProps} from "../battle-scene-props";
-import type {CustomBattleEventProps} from "../custom-battle-event";
+import type {BattleSceneProps} from "./battle-scene-props";
+import type {CustomBattleEventProps} from "./custom-battle-event";
 
 /**
  * 戦闘シーンプロパティをカスタムバトルプロパティに変換するヘルパー関数

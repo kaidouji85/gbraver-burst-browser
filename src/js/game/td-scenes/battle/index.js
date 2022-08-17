@@ -1,7 +1,6 @@
 // @flow
 import type {Command, GameEnd, GameState, Player} from "gbraver-burst-core";
 import {all} from "../../../animation/all";
-import {Animate} from "../../../animation/animate";
 import {delay} from "../../../animation/delay";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
@@ -23,12 +22,13 @@ import type {DoPilotSkill} from "./actions/do-pilot-skill";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
-import {toCustomBattleEventProps} from "./battle-scene-procedure/to-custom-battle-event-props";
 import type {BattleEnd, BattleSceneProps} from './battle-scene-props';
 import type {CustomBattleEvent} from "./custom-battle-event";
+import {playAnimation} from "./play-animation";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
+import {toCustomBattleEventProps} from "./to-custom-battle-event-props";
 import {BattleSceneView} from "./view";
 
 /** 戦闘シーンで利用するレンダラ */
@@ -146,12 +146,12 @@ export class BattleScene implements Scene, BattleSceneProps {
         return;
       }
       const removeLastState = this.initialState.slice(0, -1);
-      await this.#playAnimation(stateHistoryAnimation(this.view, this.sounds, this.state, removeLastState));
+      await playAnimation(stateHistoryAnimation(this.view, this.sounds, this.state, removeLastState), this);
       const eventProps = {...toCustomBattleEventProps(this), update: this.initialState};
       this.customBattleEvent && await this.customBattleEvent.beforeLastState(eventProps);
       const lastState: GameState = this.initialState[this.initialState.length - 1];
       await Promise.all([
-        this.#playAnimation(stateAnimation(lastState, this.view, this.sounds, this.state)),
+        playAnimation(stateAnimation(lastState, this.view, this.sounds, this.state), this),
         this.customBattleEvent ? this.customBattleEvent.onLastState(eventProps) : Promise.resolve()
       ]);
       this.customBattleEvent && await this.customBattleEvent.afterLastState(eventProps);
@@ -183,7 +183,7 @@ export class BattleScene implements Scene, BattleSceneProps {
       if (isCommandCanceled) {
         return;
       }
-      await this.#playAnimation(
+      await playAnimation(
         all(
           this.view.hud.gameObjects.batterySelector.decide(),
           this.view.hud.gameObjects.burstButton.close(),
@@ -192,7 +192,7 @@ export class BattleScene implements Scene, BattleSceneProps {
         )
           .chain(delay(500))
           .chain(this.view.hud.gameObjects.batterySelector.close())
-      );
+      , this);
       await this.#progressGame(batteryCommand);
     });
   }
@@ -213,7 +213,7 @@ export class BattleScene implements Scene, BattleSceneProps {
       if (isCommandCanceled) {
         return;
       }
-      await this.#playAnimation(
+      await playAnimation(
         all(
           this.view.hud.gameObjects.burstButton.decide(),
           this.view.hud.gameObjects.batterySelector.close(),
@@ -222,7 +222,7 @@ export class BattleScene implements Scene, BattleSceneProps {
         )
           .chain(delay(500))
           .chain(this.view.hud.gameObjects.burstButton.close())
-      );
+      , this);
       await this.#progressGame(burstCommand);
     });
   }
@@ -243,7 +243,7 @@ export class BattleScene implements Scene, BattleSceneProps {
       if (isCommandCanceled) {
         return;
       }
-      await this.#playAnimation(
+      await playAnimation(
         all(
           this.view.hud.gameObjects.pilotButton.decide(),
           this.view.hud.gameObjects.burstButton.close(),
@@ -252,7 +252,7 @@ export class BattleScene implements Scene, BattleSceneProps {
         )
           .chain(delay(500))
           .chain(this.view.hud.gameObjects.pilotButton.close())
-      );
+      , this);
       await this.#progressGame(pilotSkillCommand);
     });
   }
@@ -282,12 +282,12 @@ export class BattleScene implements Scene, BattleSceneProps {
           return;
         }
         const removeLastState = updateState.slice(0 , -1);
-        await this.#playAnimation(stateHistoryAnimation(this.view, this.sounds, this.state, removeLastState));
+        await playAnimation(stateHistoryAnimation(this.view, this.sounds, this.state, removeLastState), this);
         const lastState: GameState = updateState[updateState.length - 1];
         const eventProps = {...toCustomBattleEventProps(this), update: updateState};
         this.customBattleEvent && await this.customBattleEvent.beforeLastState(eventProps);
         await Promise.all([
-          this.#playAnimation(stateAnimation(lastState, this.view, this.sounds, this.state)),
+          playAnimation(stateAnimation(lastState, this.view, this.sounds, this.state), this),
           this.customBattleEvent ? this.customBattleEvent.onLastState(eventProps) : Promise.resolve(),
         ]);
         this.customBattleEvent && await this.customBattleEvent.afterLastState(eventProps);
@@ -312,15 +312,5 @@ export class BattleScene implements Scene, BattleSceneProps {
     if (lastState && lastState.effect.name === 'GameEnd') {
       await onGameEnd(lastState.effect);
     }
-  }
-
-  /**
-   * タイムスケールに常に同じ値をセットして、アニメーションを再生するヘルパーメソッド
-   *
-   * @param animate 再生するアニメーション
-   * @return アニメーションが完了したら発火するPromise
-   */
-  async #playAnimation(animate: Animate): Promise<void> {
-    await animate.timeScale(this.state.animationTimeScale).play();
   }
 }
