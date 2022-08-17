@@ -3,7 +3,6 @@ import type {GameState, Player} from "gbraver-burst-core";
 import {all} from "../../../animation/all";
 import {delay} from "../../../animation/delay";
 import type {BGMManager} from "../../../bgm/bgm-manager";
-import {play} from "../../../bgm/bgm-operators";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {GameLoop} from "../../../game-loop/game-loop";
 import type {OverlapNotifier} from "../../../render/overlap-notifier";
@@ -20,9 +19,9 @@ import type {DecideBattery} from "./actions/decide-battery";
 import type {DoBurst} from "./actions/do-burst";
 import type {DoPilotSkill} from "./actions/do-pilot-skill";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
-import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
 import {progressGame} from "./battle-scene-procedure/progress-game";
+import {start} from "./battle-scene-procedure/start";
 import type {BattleEnd, BattleSceneProps} from './battle-scene-props';
 import type {CustomBattleEvent} from "./custom-battle-event";
 import {playAnimation} from "./play-animation";
@@ -135,28 +134,13 @@ export class BattleScene implements Scene, BattleSceneProps {
   }
 
   /**
-   * 戦闘を開始する
+   * 戦闘シーンを開始する
    * 画面遷移などが完了したら、本メソッドを呼ぶ想定
    *
    * @return 処理が完了したら発火するPromise
    */
-  start(): Promise<void> {
-    return this.exclusive.execute(async (): Promise<void> => {
-      this.bgm.do(play(this.sounds.bgm));
-      if (this.initialState.length < 1) {
-        return;
-      }
-      const removeLastState = this.initialState.slice(0, -1);
-      await playAnimation(stateHistoryAnimation(this.view, this.sounds, this.state, removeLastState), this);
-      const eventProps = {...toCustomBattleEventProps(this), update: this.initialState};
-      this.customBattleEvent && await this.customBattleEvent.beforeLastState(eventProps);
-      const lastState: GameState = this.initialState[this.initialState.length - 1];
-      await Promise.all([
-        playAnimation(stateAnimation(lastState, this.view, this.sounds, this.state), this),
-        this.customBattleEvent ? this.customBattleEvent.onLastState(eventProps) : Promise.resolve()
-      ]);
-      this.customBattleEvent && await this.customBattleEvent.afterLastState(eventProps);
-    });
+  async start(): Promise<void> {
+    await start(this);
   }
 
   /**
