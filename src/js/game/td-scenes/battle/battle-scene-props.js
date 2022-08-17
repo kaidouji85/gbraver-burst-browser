@@ -91,9 +91,6 @@ export type BattleScenePropsCreatorParams = {
  * @return 生成結果
  */
 export function createBattleSceneProps(params: BattleScenePropsCreatorParams): BattleSceneProps {
-  const view = new BattleSceneView({resources: params.resources, renderer: params.renderer,
-    player: params.player, enemy: params.enemy, gameLoop: params.gameLoop, resize: params.resize});
-  const sounds = new BattleSceneSounds(params.resources, params.playingBGM);
   return {
     pushWindow: params.pushWindow, 
     exclusive: new Exclusive(), 
@@ -102,8 +99,9 @@ export function createBattleSceneProps(params: BattleScenePropsCreatorParams): B
     endBattle: createStreamSource(),
     battleProgress: params.battleProgress,
     customBattleEvent: params.customBattleEvent,
-    view,
-    sounds,
+    view: new BattleSceneView({resources: params.resources, renderer: params.renderer,
+      player: params.player, enemy: params.enemy, gameLoop: params.gameLoop, resize: params.resize}),
+    sounds: new BattleSceneSounds(params.resources, params.playingBGM),
     bgm: params.bgm,
   };
 }
