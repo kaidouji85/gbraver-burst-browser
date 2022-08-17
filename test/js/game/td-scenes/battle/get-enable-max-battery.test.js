@@ -12,7 +12,16 @@ test('一番大きいバッテリー値を返す', () => {
   expect(result).toBe(3);
 });
 
-test('コマンドリストが空の場合、0を返す', () => {
+
+test('バッテリーコマンドが含まれない場合は0を返す', () => {
+  const result = getEnableMaxBattery([
+    {type: 'BURST_COMMAND'},
+    {type: 'PILOT_SKILL_COMMAND'}
+  ]);
+  expect(result).toBe(0);
+});
+
+test('コマンドリストが空の場合は0を返す', () => {
   const result = getEnableMaxBattery([]);
   expect(result).toBe(0);
 });
