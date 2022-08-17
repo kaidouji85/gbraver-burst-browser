@@ -1,6 +1,6 @@
 // @flow
 import type {MessageWindow} from "../game-dom/message-window/message-window";
-import type {BattleSceneProps} from "../game/td-scenes/battle/custom-battle-event";
+import type {CustomBattleEventProps} from "../game/td-scenes/battle/custom-battle-event";
 import {BattleSceneSounds} from "../game/td-scenes/battle/sounds/sounds";
 import type {Stream} from "../stream/stream";
 import type {PushWindow} from "../window/push-window";
@@ -34,21 +34,21 @@ async function scrollMessages(messageWindow: MessageWindow, pushWindow: Stream<P
 /**
  * 左側メッセージウインドウで複数メッセージスクロール表示をする
  *
- * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
+ * @param props イベントプロパティ
  * @param paragraphs 表示するメッセージ
  * @return 処理が完了したら発火するPromise
  */
-export async function scrollLeftMessages(props: BattleSceneProps, paragraphs: Paragraph[]): Promise<void> {
+export async function scrollLeftMessages(props: CustomBattleEventProps, paragraphs: Paragraph[]): Promise<void> {
   await scrollMessages(props.view.dom.leftMessageWindow, props.pushWindow, props.sounds, paragraphs);
 }
 
 /**
  * 右側メッセージウインドウで複数メッセージスクロール表示をする
  *
- * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
+ * @param props イベントプロパティ
  * @param paragraphs 表示するメッセージ
  * @return 処理が完了したら発火するPromise
  */
-export async function scrollRightMessages(props: BattleSceneProps, paragraphs: Paragraph[]): Promise<void> {
+export async function scrollRightMessages(props: CustomBattleEventProps, paragraphs: Paragraph[]): Promise<void> {
   await scrollMessages(props.view.dom.rightMessageWindow, props.pushWindow, props.sounds, paragraphs);
 }

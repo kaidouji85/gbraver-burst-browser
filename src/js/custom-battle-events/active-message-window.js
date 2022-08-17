@@ -1,7 +1,7 @@
 // @flow
 import type {FaceType} from "../game-dom/message-window/face-graphic";
 import type {MessageWindow} from "../game-dom/message-window/message-window";
-import type {BattleSceneProps} from "../game/td-scenes/battle/custom-battle-event";
+import type {CustomBattleEventProps,} from "../game/td-scenes/battle/custom-battle-event";
 
 /**
  * メッセージウインドウをアクティブ表示する
@@ -38,37 +38,37 @@ function activeMessageWindowWithFace(messageWindow: MessageWindow, faceType: Fac
 /**
  * 左メッセージウインドウをアクティブ表示する
  *
- * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
+ * @param props イベントプロパティ
  */
-export function activeLeftMessageWindow(props: BattleSceneProps): void {
+export function activeLeftMessageWindow(props: CustomBattleEventProps): void {
   activeMessageWindow(props.view.dom.leftMessageWindow);
 }
 
 /**
  * 右メッセージウインドウをアクティブ表示する
  *
- * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
+ * @param props イベントプロパティ
  */
-export function activeRightMessageWindow(props: BattleSceneProps): void {
+export function activeRightMessageWindow(props: CustomBattleEventProps): void {
   activeMessageWindow(props.view.dom.rightMessageWindow);
 }
 
 /**
  * 左メッセージウインドウを顔画像ありアクティブ表示する
  *
- * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
+ * @param props イベントプロパティ
  * @param faceType 顔画像タイプ 
  */
-export function activeLeftMessageWindowWithFace(props: BattleSceneProps, faceType: FaceType): void {
+export function activeLeftMessageWindowWithFace(props: CustomBattleEventProps, faceType: FaceType): void {
   activeMessageWindowWithFace(props.view.dom.leftMessageWindow, faceType);
 }
 
 /**
  * 右メッセージウインドウを顔画像ありアクティブ表示する
  *
- * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
+ * @param props イベントプロパティ
  * @param faceType 顔画像タイプ 
  */
-export function activeRightMessageWindowWithFace(props: BattleSceneProps, faceType: FaceType): void {
+export function activeRightMessageWindowWithFace(props: CustomBattleEventProps, faceType: FaceType): void {
   activeMessageWindowWithFace(props.view.dom.rightMessageWindow, faceType);
 }
