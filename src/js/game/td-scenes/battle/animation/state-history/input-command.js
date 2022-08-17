@@ -5,10 +5,10 @@ import {all} from "../../../../../animation/all";
 import {Animate} from "../../../../../animation/animate";
 import {empty} from "../../../../../animation/delay";
 import {canBurstButtonPush} from "../../can-burst-button-push";
+import {canPilotButtonPush} from "../../can-pilot-button-push";
 import {getEnableMaxBattery} from "../../get-enable-max-battery";
 import {getInitialBattery} from "../../get-initial-battery";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import {canPilotButtonPush} from "../../ui-logic";
 import {BattleSceneView} from "../../view";
 
 /**
