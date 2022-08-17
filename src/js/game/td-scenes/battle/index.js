@@ -15,7 +15,6 @@ import {createStreamSource} from "../../../stream/stream";
 import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
-import type {DecideBattery} from "./actions/decide-battery";
 import type {DoBurst} from "./actions/do-burst";
 import type {DoPilotSkill} from "./actions/do-pilot-skill";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
@@ -30,6 +29,7 @@ import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
 import {toCustomBattleEventProps} from "./to-custom-battle-event-props";
 import {BattleSceneView} from "./view";
+import { onDecideBattery } from "./battle-scene-procedure/on-decide-battery";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -104,7 +104,7 @@ export class BattleScene implements Scene, BattleSceneProps {
     this.#unsubscriber = [
       this.view.battleActionNotifier().subscribe(action => {
         if (action.type === 'decideBattery') {
-          this.#onDecideBattery(action);
+          onDecideBattery(this, action);
         } else if (action.type === 'doBurst') {
           this.#onBurst(action);
         } else if (action.type === 'doPilotSkill') {
@@ -150,36 +150,6 @@ export class BattleScene implements Scene, BattleSceneProps {
    */
   getHTMLElements(): HTMLElement[] {
     return this.view.dom.getHTMLElements();
-  }
-
-  /**
-   * バッテリー決定時の処理
-   *
-   * @param action アクション
-   * @return 処理が完了したら発火するPromise
-   */
-  async #onDecideBattery(action: DecideBattery): Promise<void> {
-    this.exclusive.execute(async (): Promise<void> => {
-      action.event.stopPropagation();
-      const batteryCommand = {type: 'BATTERY_COMMAND', battery: action.battery};
-      const {isCommandCanceled} = this.customBattleEvent 
-        ? await this.customBattleEvent.onBatteryCommandSelected({...toCustomBattleEventProps(this), battery: batteryCommand})
-        : {isCommandCanceled: false};
-      if (isCommandCanceled) {
-        return;
-      }
-      await playAnimation(
-        all(
-          this.view.hud.gameObjects.batterySelector.decide(),
-          this.view.hud.gameObjects.burstButton.close(),
-          this.view.hud.gameObjects.pilotButton.close(),
-          this.view.hud.gameObjects.timeScaleButton.close(),
-        )
-          .chain(delay(500))
-          .chain(this.view.hud.gameObjects.batterySelector.close())
-      , this);
-      await progressGame(this, batteryCommand);
-    });
   }
 
   /**
