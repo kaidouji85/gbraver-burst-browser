@@ -15,10 +15,11 @@ import {createStreamSource} from "../../../stream/stream";
 import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
-import type {DoBurst} from "./actions/do-burst";
 import type {DoPilotSkill} from "./actions/do-pilot-skill";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import type {BattleProgress} from "./battle-progress";
+import {onBurst} from "./battle-scene-procedure/on-burst";
+import {onDecideBattery} from "./battle-scene-procedure/on-decide-battery";
 import {progressGame} from "./battle-scene-procedure/progress-game";
 import {start} from "./battle-scene-procedure/start";
 import type {BattleEnd, BattleSceneProps} from './battle-scene-props';
@@ -29,7 +30,6 @@ import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
 import {toCustomBattleEventProps} from "./to-custom-battle-event-props";
 import {BattleSceneView} from "./view";
-import { onDecideBattery } from "./battle-scene-procedure/on-decide-battery";
 
 /** 戦闘シーンで利用するレンダラ */
 interface OwnRenderer extends OverlapNotifier, RendererDomGetter, Rendering {}
@@ -106,7 +106,7 @@ export class BattleScene implements Scene, BattleSceneProps {
         if (action.type === 'decideBattery') {
           onDecideBattery(this, action);
         } else if (action.type === 'doBurst') {
-          this.#onBurst(action);
+          onBurst(this, action);
         } else if (action.type === 'doPilotSkill') {
           this.#onPilotSkill(action);
         } else if (action.type === 'toggleTimeScale') {
@@ -150,36 +150,6 @@ export class BattleScene implements Scene, BattleSceneProps {
    */
   getHTMLElements(): HTMLElement[] {
     return this.view.dom.getHTMLElements();
-  }
-
-  /**
-   * バースト時の処理
-   *
-   * @param action アクション
-   * @return 処理が完了したら発火するPromise
-   */
-  async #onBurst(action: DoBurst): Promise<void> {
-    this.exclusive.execute(async () => {
-      action.event.stopPropagation();
-      const burstCommand = {type: 'BURST_COMMAND'};
-      const {isCommandCanceled} = this.customBattleEvent 
-        ? await this.customBattleEvent.onBurstCommandSelected({...toCustomBattleEventProps(this), burst: burstCommand})
-        : {isCommandCanceled: false};
-      if (isCommandCanceled) {
-        return;
-      }
-      await playAnimation(
-        all(
-          this.view.hud.gameObjects.burstButton.decide(),
-          this.view.hud.gameObjects.batterySelector.close(),
-          this.view.hud.gameObjects.pilotButton.close(),
-          this.view.hud.gameObjects.timeScaleButton.close(),
-        )
-          .chain(delay(500))
-          .chain(this.view.hud.gameObjects.burstButton.close())
-      , this);
-      await progressGame(this, burstCommand);
-    });
   }
 
   /**
