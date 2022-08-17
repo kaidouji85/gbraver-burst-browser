@@ -14,7 +14,7 @@ import {progressGame} from "./progress-game";
  * @param action パイロットスキル発動アクション
  * @return 処理が完了したら発火するPromise
  */
-export async function onPilotSkill(props: BattleSceneProps, action: DoPilotSkill): Promise<void> {
+export async function onPilotSkill(props: $ReadOnly<BattleSceneProps>, action: DoPilotSkill): Promise<void> {
   await props.exclusive.execute(async () => {
     action.event.stopPropagation();
     const pilotSkillCommand = {type: 'PILOT_SKILL_COMMAND'};

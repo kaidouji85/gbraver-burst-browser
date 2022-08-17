@@ -13,13 +13,13 @@ import {createStreamSource} from "../../../stream/stream";
 import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {Scene} from "../scene";
-import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import type {BattleProgress} from "./battle-progress";
 import type {BattleEnd, BattleSceneProps} from './battle-scene-props';
 import type {CustomBattleEvent} from "./custom-battle-event";
 import {onBurst} from "./procedure/on-burst";
 import {onDecideBattery} from "./procedure/on-decide-battery";
 import {onPilotSkill} from "./procedure/on-pilot-skill";
+import {onToggleTimeScale} from "./procedure/on-toggle-time-scale";
 import {start} from "./procedure/start";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
@@ -105,7 +105,7 @@ export class BattleScene implements Scene, BattleSceneProps {
         } else if (action.type === 'doPilotSkill') {
           onPilotSkill(this, action);
         } else if (action.type === 'toggleTimeScale') {
-          this.#onToggleTimeScale(action);
+          onToggleTimeScale(this, action);
         }
       })
     ];
@@ -145,14 +145,5 @@ export class BattleScene implements Scene, BattleSceneProps {
    */
   getHTMLElements(): HTMLElement[] {
     return this.view.dom.getHTMLElements();
-  }
-
-  /**
-   * タイムスケール変更時の処理
-   * 
-   * @param action アクション
-   */
-  #onToggleTimeScale(action: ToggleTimeScale): void {
-    this.state.animationTimeScale = action.timeScale;
   }
 }
