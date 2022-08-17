@@ -4,8 +4,9 @@ import type {GameStateX, InputCommand} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 import {Animate} from "../../../../../animation/animate";
 import {empty} from "../../../../../animation/delay";
+import {getInitialBattery} from "../../get-initial-battery";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import {canBurstButtonPush, canPilotButtonPush, getEnableMax, getInitialBattery} from "../../ui-logic";
+import {canBurstButtonPush, canPilotButtonPush, getEnableMax} from "../../ui-logic";
 import {BattleSceneView} from "../../view";
 
 /**
