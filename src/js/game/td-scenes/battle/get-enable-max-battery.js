@@ -7,7 +7,7 @@ import type {Command} from "gbraver-burst-core";
  * @param commands プレイヤーが入力可能なコマンド
  * @return 設定可能バッテリーの上限値
  */
- export function getEnableMaxBattery(commands: Command[]): number {
+export function getEnableMaxBattery(commands: Command[]): number {
   return commands.map(command => command.type === 'BATTERY_COMMAND' ? command.battery : 0)  
     .reduce((a, b) => Math.max(a, b), 0);
 }
