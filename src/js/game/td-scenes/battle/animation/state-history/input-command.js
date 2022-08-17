@@ -4,8 +4,11 @@ import type {GameStateX, InputCommand} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 import {Animate} from "../../../../../animation/animate";
 import {empty} from "../../../../../animation/delay";
+import {canBurstButtonPush} from "../../can-burst-button-push";
+import {canPilotButtonPush} from "../../can-pilot-button-push";
+import {getEnableMaxBattery} from "../../get-enable-max-battery";
+import {getInitialBattery} from "../../get-initial-battery";
 import type {BattleSceneState} from "../../state/battle-scene-state";
-import {canBurstButtonPush, canPilotButtonPush, getEnableMax, getInitialBattery} from "../../ui-logic";
 import {BattleSceneView} from "../../view";
 
 /**
@@ -31,7 +34,7 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
   }
 
   const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
-  const enableMax = getEnableMax(playerCommand.command);
+  const enableMax = getEnableMaxBattery(playerCommand.command);
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   const canBurst = canBurstButtonPush(playerCommand.command);

@@ -1,6 +1,5 @@
 // @flow
-
-import {canBurstButtonPush} from "../../../../../src/js/game/td-scenes/battle/ui-logic";
+import {canBurstButtonPush} from "../../../../../src/js/game/td-scenes/battle/can-burst-button-push";
 
 test('バーストコマンドが選択可能な場合、バーストボタンは操作可能である', () => {
   const result = canBurstButtonPush([
@@ -18,5 +17,10 @@ test('バーストコマンドが選択できない場合、バーストボタ�
     {type: 'BATTERY_COMMAND', battery: 1},
     {type: 'BATTERY_COMMAND', battery: 2},
   ]);
+  expect(result).toBe( false);
+});
+
+test('コマンドリストが空の場合、バーストボタンは操作不可能とみなす', () => {
+  const result = canBurstButtonPush([]);
   expect(result).toBe( false);
 });
