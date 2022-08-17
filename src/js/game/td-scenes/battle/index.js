@@ -23,7 +23,10 @@ import type {DoPilotSkill} from "./actions/do-pilot-skill";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
-import type {BattleSceneProps, CustomBattleEvent} from "./custom-battle-event";
+import type {
+  CustomBattleEvent,
+  CustomBattleEventProps,
+} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {createInitialState} from "./state/initial-state";
@@ -153,7 +156,7 @@ export class BattleScene implements Scene {
       }
       const removeLastState = this.#initialState.slice(0, -1);
       await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
-      const eventProps = {...this.#toBattleSceneProps(), update: this.#initialState};
+      const eventProps = {...this.#toCustomBattleEventProps(), update: this.#initialState};
       this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
       const lastState: GameState = this.#initialState[this.#initialState.length - 1];
       await Promise.all([
@@ -184,7 +187,7 @@ export class BattleScene implements Scene {
       action.event.stopPropagation();
       const batteryCommand = {type: 'BATTERY_COMMAND', battery: action.battery};
       const {isCommandCanceled} = this.#customBattleEvent 
-        ? await this.#customBattleEvent.onBatteryCommandSelected({...this.#toBattleSceneProps(), battery: batteryCommand})
+        ? await this.#customBattleEvent.onBatteryCommandSelected({...this.#toCustomBattleEventProps(), battery: batteryCommand})
         : {isCommandCanceled: false};
       if (isCommandCanceled) {
         return;
@@ -214,7 +217,7 @@ export class BattleScene implements Scene {
       action.event.stopPropagation();
       const burstCommand = {type: 'BURST_COMMAND'};
       const {isCommandCanceled} = this.#customBattleEvent 
-        ? await this.#customBattleEvent.onBurstCommandSelected({...this.#toBattleSceneProps(), burst: burstCommand})
+        ? await this.#customBattleEvent.onBurstCommandSelected({...this.#toCustomBattleEventProps(), burst: burstCommand})
         : {isCommandCanceled: false};
       if (isCommandCanceled) {
         return;
@@ -244,7 +247,7 @@ export class BattleScene implements Scene {
       action.event.stopPropagation();
       const pilotSkillCommand = {type: 'PILOT_SKILL_COMMAND'};
       const {isCommandCanceled} = this.#customBattleEvent
-        ? await this.#customBattleEvent.onPilotSkillCommandSelected({...this.#toBattleSceneProps(), pilot: pilotSkillCommand})
+        ? await this.#customBattleEvent.onPilotSkillCommandSelected({...this.#toCustomBattleEventProps(), pilot: pilotSkillCommand})
         : {isCommandCanceled: false};
       if (isCommandCanceled) {
         return;
@@ -290,7 +293,7 @@ export class BattleScene implements Scene {
         const removeLastState = updateState.slice(0 , -1);
         await this.#playAnimation(stateHistoryAnimation(this.#view, this.#sounds, this.#state, removeLastState));
         const lastState: GameState = updateState[updateState.length - 1];
-        const eventProps = {...this.#toBattleSceneProps(), update: updateState};
+        const eventProps = {...this.#toCustomBattleEventProps(), update: updateState};
         this.#customBattleEvent && await this.#customBattleEvent.beforeLastState(eventProps);
         await Promise.all([
           this.#playAnimation(stateAnimation(lastState, this.#view, this.#sounds, this.#state)),
@@ -331,11 +334,11 @@ export class BattleScene implements Scene {
   }
 
   /**
-   * 戦闘シーンからカスタムバトルイベントに渡すプロパティを生成するヘルパーメソッド
+   * 本クラスのプロパティからカスタムバトルイベントプロパティを生成するヘルパーメソッド
    *
    * @return 生成結果
    */
-  #toBattleSceneProps(): BattleSceneProps {
+  #toCustomBattleEventProps(): CustomBattleEventProps {
     return {view: this.#view, pushWindow: this.#pushWindow, sounds: this.#sounds, sceneState: this.#state};
   }
 }

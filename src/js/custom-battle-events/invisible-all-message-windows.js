@@ -1,12 +1,12 @@
 // @flow
-import type {BattleSceneProps} from "../game/td-scenes/battle/custom-battle-event";
+import type {CustomBattleEventProps} from "../game/td-scenes/battle/custom-battle-event";
 
 /**
  * 全メッセージウインドウを非表示にする
  *
- * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
+ * @param props イベントプロパティ
  */
-export function invisibleAllMessageWindows(props: BattleSceneProps): void {
+export function invisibleAllMessageWindows(props: CustomBattleEventProps): void {
   props.view.dom.leftMessageWindow.visible(false);
   props.view.dom.rightMessageWindow.visible(false);
 }

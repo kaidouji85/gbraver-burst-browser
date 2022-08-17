@@ -6,8 +6,8 @@ import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
 import {BattleSceneView} from "./view";
 
-/** カスタムイベントで利用できる戦闘シーンのプロパティ */
-export type BattleSceneProps = {
+/** 全カスタムイベントで利用できるプロパティ */
+export type CustomBattleEventProps = {
   /** 戦闘シーンビュー */
   view: BattleSceneView,
   /** window押下ストリーム */
@@ -19,25 +19,25 @@ export type BattleSceneProps = {
 };
 
 /** 最終ステート系イベントのプロパティ */
-export type LastState = BattleSceneProps & {
+export type LastState = CustomBattleEventProps & {
   /** コマンド入力から最終ステートまでのステート更新履歴 */
   update: GameState[],
 };
 
 /** バッテリーコマンド選択イベントのプロパティ */
-export type BatteryCommandSelected = BattleSceneProps & {
+export type BatteryCommandSelected = CustomBattleEventProps & {
   /** プレイヤーが選択したバッテリーコマンド */
   battery: BatteryCommand,
 };
 
 /** バーストコマンド選択イベントのプロパティ */
-export type BurstCommandSelected = BattleSceneProps & {
+export type BurstCommandSelected = CustomBattleEventProps & {
   /** プレイヤーが選択したバーストコマンド */
   burst: BurstCommand,
 }
 
 /** パイロットスキル選択イベントのプロパティ */
-export type PilotSkillCommandSelected = BattleSceneProps & {
+export type PilotSkillCommandSelected = CustomBattleEventProps & {
   /** プレイヤーが選択したパイロットスキルコマンド */
   pilot: PilotSkillCommand,
 }
