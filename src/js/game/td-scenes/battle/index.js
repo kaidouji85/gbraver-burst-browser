@@ -1,9 +1,9 @@
 // @flow
-import type {Command, GameEnd, GameState, Player} from "gbraver-burst-core";
+import type {GameState, Player} from "gbraver-burst-core";
 import {all} from "../../../animation/all";
 import {delay} from "../../../animation/delay";
 import type {BGMManager} from "../../../bgm/bgm-manager";
-import {fadeOut, play, stop} from "../../../bgm/bgm-operators";
+import {play} from "../../../bgm/bgm-operators";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {GameLoop} from "../../../game-loop/game-loop";
 import type {OverlapNotifier} from "../../../render/overlap-notifier";
@@ -22,6 +22,7 @@ import type {DoPilotSkill} from "./actions/do-pilot-skill";
 import type {ToggleTimeScale} from "./actions/toggle-time-scale";
 import {stateAnimation, stateHistoryAnimation} from "./animation/state-history";
 import type {BattleProgress} from "./battle-progress";
+import {progressGame} from "./battle-scene-procedure/progress-game";
 import type {BattleEnd, BattleSceneProps} from './battle-scene-props';
 import type {CustomBattleEvent} from "./custom-battle-event";
 import {playAnimation} from "./play-animation";
@@ -193,7 +194,7 @@ export class BattleScene implements Scene, BattleSceneProps {
           .chain(delay(500))
           .chain(this.view.hud.gameObjects.batterySelector.close())
       , this);
-      await this.#progressGame(batteryCommand);
+      await progressGame(this, batteryCommand);
     });
   }
 
@@ -223,7 +224,7 @@ export class BattleScene implements Scene, BattleSceneProps {
           .chain(delay(500))
           .chain(this.view.hud.gameObjects.burstButton.close())
       , this);
-      await this.#progressGame(burstCommand);
+      await progressGame(this, burstCommand);
     });
   }
 
@@ -253,7 +254,7 @@ export class BattleScene implements Scene, BattleSceneProps {
           .chain(delay(500))
           .chain(this.view.hud.gameObjects.pilotButton.close())
       , this);
-      await this.#progressGame(pilotSkillCommand);
+      await progressGame(this, pilotSkillCommand);
     });
   }
 
@@ -264,53 +265,5 @@ export class BattleScene implements Scene, BattleSceneProps {
    */
   #onToggleTimeScale(action: ToggleTimeScale): void {
     this.state.animationTimeScale = action.timeScale;
-  }
-
-  /**
-   * ゲームを進めるヘルパーメソッド
-   *
-   * @param command プレイヤーが入力したコマンド
-   * @return 処理が完了したら発火するPromise
-   */
-  async #progressGame(command: Command): Promise<void> {
-    const repeatProgressWhenUnselectable = async (): Promise<?GameState> => {
-      let lastCommand: Command = command;
-      const maxProgressCount = 100;
-      for (let i=0; i<maxProgressCount; i++) {
-        const updateState = await this.battleProgress.progress(lastCommand);
-        if (updateState.length < 1) {
-          return;
-        }
-        const removeLastState = updateState.slice(0 , -1);
-        await playAnimation(stateHistoryAnimation(this.view, this.sounds, this.state, removeLastState), this);
-        const lastState: GameState = updateState[updateState.length - 1];
-        const eventProps = {...toCustomBattleEventProps(this), update: updateState};
-        this.customBattleEvent && await this.customBattleEvent.beforeLastState(eventProps);
-        await Promise.all([
-          playAnimation(stateAnimation(lastState, this.view, this.sounds, this.state), this),
-          this.customBattleEvent ? this.customBattleEvent.onLastState(eventProps) : Promise.resolve(),
-        ]);
-        this.customBattleEvent && await this.customBattleEvent.afterLastState(eventProps);
-        if (lastState.effect.name !== 'InputCommand') {
-          return lastState;
-        }
-        const playerCommand = lastState.effect.players.find(v => v.playerId === this.state.playerId);
-        if (!playerCommand || playerCommand.selectable) {
-          return lastState;
-        }
-        lastCommand = playerCommand.nextTurnCommand;
-      }
-      return null
-    };
-    const onGameEnd = async (gameEnd: GameEnd): Promise<void> => {
-      await this.bgm.do(fadeOut)
-      await this.bgm.do(stop);
-      this.endBattle.next({gameEnd, animationTimeScale: this.state.animationTimeScale});
-    };
-
-    const lastState = await repeatProgressWhenUnselectable();
-    if (lastState && lastState.effect.name === 'GameEnd') {
-      await onGameEnd(lastState.effect);
-    }
   }
 }
