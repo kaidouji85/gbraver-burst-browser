@@ -78,6 +78,54 @@ export function getCurrentStage(origin: NPCBattleState): ?NPCBattleStage {
   return origin.stages[origin.stageIndex] ?? null;
 }
 
+/** NPCバトル結果 */
+export type NPCBattleResult = 'StageClear' | 'StageMiss' | 'NPCBattleComplete';
+
+/**
+ * NPCバトル結果を求める
+ *
+ * @param isStageClear ステージクリアしたか否かのフラグ、trueでステージクリア
+ * @param isLastStage ラストステージか否かのフラグ、trueでラストステージ
+ * @return 判定結果
+ */
+function getNPCBattleResult(isStageClear: boolean, isLastStage: boolean): NPCBattleResult {
+  if (isStageClear && isLastStage) {
+    return 'NPCBattleComplete';
+  } else if (isStageClear && !isLastStage) {
+    return 'StageClear';
+  }
+  return 'StageMiss';
+}
+
+/** NPCバトル更新結果 */
+export type UpdatedNPCBattleState = {
+  /** 更新されたステート */
+  state: NPCBattleState,
+  /** NPCバトル結果 */
+  result: NPCBattleResult
+}
+
+/**
+ * NPCバトルステートを更新する
+ *
+ * @param origin 更新前のステート
+ * @param gameEndResult 戦闘結果
+ * @return NPCバトル更新結果
+ */
+export function updateNPCBattleState(origin: NPCBattleState, gameEndResult: GameEndResult): ?UpdatedNPCBattleState {
+  const stage = getCurrentStage(origin);
+  if (!stage) {
+    return null;
+  }
+
+  const isStageClear = gameEndResult.type === 'GameOver' && gameEndResult.winner === origin.player.playerId;
+  const isLastStage = origin.stageIndex === origin.stages.length;
+  const result = getNPCBattleResult(isStageClear, isLastStage);
+  const nextStageIndex = result === 'StageClear' ? origin.stageIndex + 1 : origin.stageIndex;
+  const updatedState = {...origin, stageIndex: nextStageIndex};
+  return {state: updatedState, result};
+}
+
 /**
  * @deprecated
  * ステージクリアしたか否かを判定する
