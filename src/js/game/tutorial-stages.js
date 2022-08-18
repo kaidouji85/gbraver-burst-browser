@@ -9,8 +9,8 @@ const shinBraver = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? A
 const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
 const playerId = playerUuid();
 
-/** チュートリアルステージをまとめたもの */
-export const TutorialStages: TutorialStage[] = [
+/** チュートリアルステージのマスタデータ */
+export const tutorialStagesMaster: TutorialStage[] = [
   {
     player: {playerId, armdozer: shinBraver, pilot: shinya},
     npc: oneBatteryWeakWingDozerNPC(),
