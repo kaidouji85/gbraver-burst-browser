@@ -29,11 +29,23 @@ export type NPCBattleState = {
    * stagesの配列indexに相当する
    */
   stageIndex: number,
-  /** ゲームクリアしたかのフラグ、trueでゲームクリア */
+  /** @deprecated ゲームクリアしたかのフラグ、trueでゲームクリア */
   isGameClear: boolean
 }
 
 /**
+ * NPCバトル開始直後のステートを生成する
+ *
+ * @param player プレイヤー
+ * @param stages 全ステージ
+ * @return NPCバトルステート
+ */
+export function createNPCBattleState(player: Player, stages: NPCBattleStage[]): NPCBattleState {
+  return {player, stages: stages, stageIndex: 0, isGameClear: false};
+}
+
+/**
+ * @deprecated
  * NPCバトル用のプレイヤーを生成する
  *
  * @param armdozerId プレイヤーが選択したアームドーザID
@@ -49,11 +61,11 @@ export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId):
 /**
  * 現在のステージレベルを取得する
  *
- * @param origin NPCバトルステート
+ * @param state NPCバトルステート
  * @return ステージレベル
  */
-export function getStageLevel(origin: NPCBattleState): number {
-  return origin.stageIndex + 1;
+export function getStageLevel(state: NPCBattleState): number {
+  return state.stageIndex + 1;
 }
 
 /**
@@ -68,6 +80,7 @@ export function getCurrentStage(origin: NPCBattleState): ?NPCBattleStage {
 }
 
 /**
+ * @deprecated
  * ステージクリアしたか否かを判定する
  *
  * @param state NPCバトルステート
@@ -79,6 +92,7 @@ export function isNPCBattleStageClear(state: NPCBattleState, gameEndResult: Game
 }
 
 /**
+ * @deprecated
  * ラストステージであるか否かを判定する
  *
  * @param state NPCバトルステート
@@ -89,17 +103,7 @@ export function isLastStage(state: NPCBattleState): boolean {
 }
 
 /**
- * NPCバトル開始直後のステートを生成する
- *
- * @param player プレイヤー
- * @param stages 全ステージ
- * @return NPCバトルステート
- */
-export function startNPCBattle(player: Player, stages: NPCBattleStage[]): NPCBattleState {
-  return {player, stages: stages, stageIndex: 0, isGameClear: false};
-}
-
-/**
+ * @deprecated
  * 戦闘結果に応じてNPCバトルステートを更新する
  *
  * @param origin 更新前のステート

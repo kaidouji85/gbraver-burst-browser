@@ -2,7 +2,7 @@
 import type {DifficultySelectionComplete} from "../game-actions";
 import type {GameProps} from "../game-props";
 import type {DifficultySelect, NPCBattle} from "../in-progress/npc-battle";
-import {createNPCBattlePlayer, getCurrentStage, getStageLevel, startNPCBattle} from "../npc-battle";
+import {createNPCBattlePlayer, getCurrentStage, getStageLevel, createNPCBattleState} from "../npc-battle";
 import {DefaultStage, DefaultStages, NPCBattleCourses} from "../npc-battle-courses";
 import {startNPCBattleStage} from "./start-npc-battle-stage";
 
@@ -25,7 +25,7 @@ export async function onDifficultySelectionComplete(props: GameProps, action: Di
   const player = createNPCBattlePlayer(armdozerId, pilotId);
   const stages = NPCBattleCourses
     .find(v => v.armdozerId === armdozerId && v.difficulty === action.difficulty)?.stages ?? DefaultStages;
-  const npcBattleState = startNPCBattle(player, stages);
+  const npcBattleState = createNPCBattleState(player, stages);
   props.inProgress = {...npcBattle, subFlow: {type: 'PlayingNPCBattle', state: npcBattleState}};
   const stage = getCurrentStage(npcBattleState) ?? DefaultStage;
   const level = getStageLevel(npcBattleState);
