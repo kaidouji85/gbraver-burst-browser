@@ -10,7 +10,7 @@ const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
 const playerId = playerUuid();
 
 /** チュートリアルステージのマスタデータ */
-export const tutorialStagesMaster: TutorialStage[] = [
+export const TutorialStagesMaster: TutorialStage[] = [
   {
     player: {playerId, armdozer: shinBraver, pilot: shinya},
     npc: oneBatteryWeakWingDozerNPC(),

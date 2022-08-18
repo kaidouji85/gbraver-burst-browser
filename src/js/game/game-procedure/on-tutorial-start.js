@@ -2,7 +2,7 @@
 import type {GameProps} from "../game-props";
 import {createTutorial} from "../in-progress/tutorial";
 import {getCurrentTutorialStage} from "../tutorial";
-import {tutorialStagesMaster} from "../tutorial-stages";
+import {TutorialStagesMaster} from "../tutorial-stages";
 import {fullResourceLoading} from "./full-resource-loading";
 import {startTutorial} from "./start-tutorial";
 
@@ -18,7 +18,7 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
     await fullResourceLoading(props);
   }
 
-  const tutorial = createTutorial(tutorialStagesMaster);
+  const tutorial = createTutorial(TutorialStagesMaster);
   const stage = getCurrentTutorialStage(tutorial.state);
   if (!stage) {
     return;

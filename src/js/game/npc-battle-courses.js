@@ -169,6 +169,7 @@ export const DefaultStages: NPCBattleStage[] = [
   {...Attack3Defense2LightningDozerStage, bgm: SOUND_IDS.BATTLE_BGM_03},
 ];
 
+/** NPCバトルコース */
 export const NPCBattleCourses: NPCBattleCourse[] = [
   {
     armdozerId: ArmDozerIdList.SHIN_BRAVER,
