@@ -9,15 +9,15 @@ import type {Rendering} from "../../../render/rendering";
 import type {Resources} from "../../../resource";
 import type {SoundId} from "../../../resource/sound";
 import type {Stream, StreamSource} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import type {PushWindow} from "../../../window/push-window";
 import type {Resize} from "../../../window/resize";
 import type {BattleProgress} from "./battle-progress";
 import type {CustomBattleEvent} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
 import type {BattleSceneState} from "./state/battle-scene-state";
-import {BattleSceneView} from "./view";
 import {createInitialState} from "./state/initial-state";
-import {createStreamSource} from "../../../stream/stream";
+import {BattleSceneView} from "./view";
 
 /** バトル終了情報 */
 export type BattleEnd = {

@@ -1,8 +1,8 @@
 // @flow
 import * as THREE from 'three';
 import type {Resources} from '../../../resource';
-import {disposeGltfModel, GLTF_IDS} from "../../../resource/gltf";
 import type {GlTFResource} from "../../../resource/gltf";
+import {disposeGltfModel, GLTF_IDS} from "../../../resource/gltf";
 import type {Stage} from "../stage";
 
 /** 商店街 */

@@ -19,7 +19,14 @@ test('ステージ失敗の処理が正しい', () => {
   const tutorialState = {stages: [stage1, stage2, stage3], stageIndex: 0};
   const battleResult = {type: 'GameOver', winner: 'not-player'};
   expect(updateTutorialState(tutorialState, battleResult))
-    .toEqual({state: {...tutorialState, stageIndex: 0}, result: 'StageMiss'});
+    .toEqual({state: tutorialState, result: 'StageMiss'});
+});
+
+test('引き分けはミスとみなす', () => {
+  const tutorialState = {stages: [stage1, stage2, stage3], stageIndex: 0};
+  const battleResult = {type: 'EvenMatch'};
+  expect(updateTutorialState(tutorialState, battleResult))
+    .toEqual({state: tutorialState, result: 'StageMiss'});
 });
 
 test('最終ステージクリアの処理が正しい', () => {
@@ -32,6 +39,13 @@ test('最終ステージクリアの処理が正しい', () => {
 test('最終ステージ失敗の処理が正しい', () => {
   const tutorialState = {stages: [stage1, stage2, stage3], stageIndex: 2};
   const battleResult = {type: 'GameOver', winner: 'not-player'};
+  expect(updateTutorialState(tutorialState, battleResult))
+    .toEqual({state: tutorialState, result: 'StageMiss'});
+});
+
+test('最終ステージでも引き分けはミスとみなす', () => {
+  const tutorialState = {stages: [stage1, stage2, stage3], stageIndex: 2};
+  const battleResult = {type: 'EvenMatch'};
   expect(updateTutorialState(tutorialState, battleResult))
     .toEqual({state: tutorialState, result: 'StageMiss'});
 });

@@ -15,7 +15,8 @@ import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
 import type {NPCBattle, PlayingNPCBattle} from "../in-progress/npc-battle";
 import type {Tutorial} from "../in-progress/tutorial";
-import {isNPCBattleStageClear, updateNPCBattle} from "../npc-battle";
+import type {NPCBattleResult} from "../npc-battle";
+import {updateNPCBattleState} from "../npc-battle";
 import {updateTutorialState} from "../tutorial";
 
 /**
@@ -45,24 +46,27 @@ const endCasualMatch = async (props: $ReadOnly<GameProps>) => {
 
 /**
  * NPCバトル終了後に表示するアクションボタンを求める
- * 
- * @param isStageClear ステージクリアをしたか、trueでステージクリア
- * @param isGameClear ゲームクリアしたか、trueでゲームクリア
+ *
+ * @param result NPCバトル結果
  * @return 表示するアクションボタン
  */
-const postNPCBattleButtons = (isStageClear: boolean, isGameClear: boolean) => {
-  if (isGameClear) {
-    return PostNPCBattleComplete;
-  } else if (isStageClear) {
-    return PostNPCBattleWinButtons;
+const postNPCBattleButtons = (result: NPCBattleResult) => {
+  switch(result) {
+    case 'NPCBattleComplete':
+      return PostNPCBattleComplete;
+    case 'StageClear':
+      return PostNPCBattleWinButtons;
+    case 'StageMiss':
+    default:
+      return PostNPCBattleLoseButtons;
   }
-  return PostNPCBattleLoseButtons;
 }
 
 /**
  * NPCバトル進行中に利用するデータを生成する
  *
  * @param inProgress 進行中のフロー
+ * @param gameEndResult 戦闘結果
  * @return 生成結果、NPCバトル中でない場合はnullを返す
  */
 const createNPCBattle = (inProgress: InProgress, gameEndResult: GameEndResult) => {
@@ -71,10 +75,13 @@ const createNPCBattle = (inProgress: InProgress, gameEndResult: GameEndResult) =
   }
   const npcBattle = (inProgress: NPCBattle);
   const playingNPCBattle = (inProgress.subFlow: PlayingNPCBattle);
-  const isStageClear = isNPCBattleStageClear(playingNPCBattle.state, gameEndResult);
-  const updatedState = updateNPCBattle(playingNPCBattle.state, isStageClear);
-  const updatedInProgress = {...npcBattle, subFlow: {...playingNPCBattle, state: updatedState}};
-  const postBattleButtons = postNPCBattleButtons(isStageClear, updatedState.isGameClear);
+  const updated = updateNPCBattleState(playingNPCBattle.state, gameEndResult);
+  if (!updated) {
+    return null;
+  }
+
+  const postBattleButtons = postNPCBattleButtons(updated.result);
+  const updatedInProgress =  {...npcBattle, subFlow: {...playingNPCBattle, state: updated.state}};
   return {updatedInProgress, postBattleButtons};
 };
 
