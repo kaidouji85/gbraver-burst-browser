@@ -34,18 +34,6 @@ export type NPCBattleState = {
 }
 
 /**
- * NPCバトル開始直後のステートを生成する
- *
- * @param player プレイヤー
- * @param stages 全ステージ
- * @return NPCバトルステート
- */
-export function createNPCBattleState(player: Player, stages: NPCBattleStage[]): NPCBattleState {
-  return {player, stages: stages, stageIndex: 0, isGameClear: false};
-}
-
-/**
- * @deprecated
  * NPCバトル用のプレイヤーを生成する
  *
  * @param armdozerId プレイヤーが選択したアームドーザID
@@ -56,6 +44,17 @@ export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId):
   const armdozer = ArmDozers.find(v => v.id === armdozerId) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === pilotId) ?? Pilots[0];
   return {playerId: playerUuid(), armdozer, pilot};
+}
+
+/**
+ * NPCバトル開始直後のステートを生成する
+ *
+ * @param player プレイヤー
+ * @param stages 全ステージ
+ * @return NPCバトルステート
+ */
+export function createNPCBattleState(player: Player, stages: NPCBattleStage[]): NPCBattleState {
+  return {player, stages: stages, stageIndex: 0, isGameClear: false};
 }
 
 /**

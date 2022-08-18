@@ -3,7 +3,7 @@ import {createNPCBattleState} from "../../../src/js/game/npc-battle";
 import {DefaultStage} from "../../../src/js/game/npc-battle-courses";
 import {EMPTY_PLAYER} from "../../data/player";
 
-test('NPCバトルステートの初期状態を正しく作ることができる', () => {
+test('NPCバトルステートを正しく作ることができる', () => {
   const player = EMPTY_PLAYER;
   const stages = [DefaultStage, DefaultStage, DefaultStage];
   expect(createNPCBattleState(player, stages))
