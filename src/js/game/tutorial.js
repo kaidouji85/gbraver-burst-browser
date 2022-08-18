@@ -15,7 +15,10 @@ export type TutorialStage = {
 
 /** チュートリのステート */
 export type TutorialState = {
-  /** チュートリアルステージ */
+  /** 
+   * チュートリアルステージ
+   * ルート分岐はなく、stages[0] -> stages[1] ... と順番に進んでいく
+   */
   stages: TutorialStage[],
   /** 現在プレイ中のステージ、stages配列のindexである */
   stageIndex: number,
