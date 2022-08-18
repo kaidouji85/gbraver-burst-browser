@@ -25,7 +25,7 @@ export type TutorialState = {
 };
 
 /**
- * 現在プレイ中のステージを取得する
+ * 現在プレイ中のステージを取得するヘルパー関数
  * 
  * @param state チュートリアルのステート 
  * @return 取得結果、データ不整合でステージが見つからない場合はnullを返す
@@ -48,13 +48,13 @@ export function createTutorialState(stages: TutorialStage[]): TutorialState {
 export type TutorialResult = 'StageClear' | 'StageMiss' | 'TutorialComplete';
 
 /**
- * チュートリアルステージリザルトを計算する
+ * チュートリアルステージリザルトを求める
  * 
  * @param isStageClear ステージをクリアしたか否かのフラグ、trueでクリアした 
  * @param isLastStage 最終ステージか否かのフラグ、falseで最終ステージ
  * @return ステージリザルト
  */
-function calcTutorialResult(isStageClear: boolean, isLastStage: boolean): TutorialResult {
+function getTutorialResult(isStageClear: boolean, isLastStage: boolean): TutorialResult {
   if (isStageClear && isLastStage) {
     return 'TutorialComplete';
   } else if (isStageClear && !isLastStage) {
@@ -76,7 +76,7 @@ export type UpdatedTutorialState = {
  * 
  * @param origin 更新前のステート
  * @param result 戦闘結果
- * @return チュートリアルステート更新結果
+ * @return チュートリアルステート更新結果、ステート不整合で更新できない場合はnullを返す
  */
 export function updateTutorialState(origin: TutorialState, result: GameEndResult): ?UpdatedTutorialState {
   const currentStage = getCurrentTutorialStage(origin);
@@ -86,7 +86,7 @@ export function updateTutorialState(origin: TutorialState, result: GameEndResult
 
   const isStageClear =  result.type === 'GameOver' && result.winner === currentStage.player.playerId;
   const isLastStage = origin.stageIndex === origin.stages.length - 1;
-  const tutorialResult = calcTutorialResult(isStageClear, isLastStage);
+  const tutorialResult = getTutorialResult(isStageClear, isLastStage);
   const updatedStageIndex = tutorialResult === 'StageClear' ? origin.stageIndex + 1 : origin.stageIndex;
   const updatedState = {...origin, stageIndex: updatedStageIndex};
   return {state: updatedState, result: tutorialResult};

@@ -9,7 +9,7 @@ import type {TutorialStage} from "../tutorial";
  * チュートリアルを開始するヘルパー関数
  *
  * @param props ゲームプロパティ
- * @param playerId プレイヤーID
+ * @param stage チュートリアルステージ
  * @return 処理が完了したら発火するPromise
  */
 export async function startTutorial(props: $ReadOnly<GameProps>, stage: TutorialStage): Promise<void> {
