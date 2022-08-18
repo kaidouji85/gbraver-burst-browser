@@ -8,12 +8,13 @@ import type {TutorialStage} from "./tutorial";
 
 const shinBraver = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
 const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
+const playerId = playerUuid();
 
 /** チュートリアルステージをまとめたもの */
 export const TutorialStages: TutorialStage[] = [
   {
-    player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
+    player: {playerId, armdozer: shinBraver, pilot: shinya},
     npc: oneBatteryWeakWingDozerNPC(),
-    event: createTutorialEvent(playerUuid())
+    event: createTutorialEvent(playerId)
   }
 ];
