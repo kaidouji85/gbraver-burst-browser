@@ -1,30 +1,20 @@
 // @flow
-import type {GameEndResult, PlayerId} from "gbraver-burst-core";
-import {playerUuid} from "../../uuid/player";
+import type {TutorialStage, TutorialState} from "../tutorial";
+import {createTutorialState} from "../tutorial";
 
 /** チュートリアル */
 export type Tutorial = {
   type: 'Tutorial',
-  /** プレイヤーID */
-  playerId: PlayerId
+  /** チュートリアルのステート */
+  state: TutorialState,
 };
 
 /**
  * チュートリアルステートを生成するヘルパー関数
  *
+ * @param stages チュートリアルステージをあつめたもの
  * @return 生成結果
  */
-export function createTutorial(): Tutorial {
-  return {type: 'Tutorial', playerId: playerUuid()};
-}
-
-/**
- * チュートリアルで勝利したかを判定する
- * 
- * @param tutorial チュートリアルのステート
- * @param gameEndResult ゲーム終了結果
- * @return 判定結果、trueでチュートリアルで勝利した
- */
-export function isTutorialWin(tutorial: Tutorial, gameEndResult: GameEndResult): boolean {
-  return gameEndResult.type === 'GameOver' && gameEndResult.winner === tutorial.playerId;
+export function createTutorial(stages: TutorialStage[]): Tutorial {
+  return {type: 'Tutorial', state: createTutorialState(stages)};
 }

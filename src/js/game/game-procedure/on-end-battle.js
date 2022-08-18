@@ -8,15 +8,15 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
   PostTutorialLoseButtons,
-  PostTutorialWinButtons,
+  PostTutorialWinButtons
 } from "../dom-floaters/post-battle/post-battle-buttons";
 import type {EndBattle} from "../game-actions";
 import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
 import type {NPCBattle, PlayingNPCBattle} from "../in-progress/npc-battle";
 import type {Tutorial} from "../in-progress/tutorial";
-import {isTutorialWin} from "../in-progress/tutorial";
 import {isNPCBattleStageClear, updateNPCBattle} from "../npc-battle";
+import {updateTutorialState} from "../tutorial";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する
@@ -100,9 +100,14 @@ const createTutorial = (inProgress: InProgress, gameEndResult: GameEndResult) =>
     return null;
   }
   const tutorial = (inProgress: Tutorial);
-  const isWin = isTutorialWin(tutorial, gameEndResult);
-  const postBattleButtons = isWin ? PostTutorialWinButtons : PostTutorialLoseButtons;
-  return {postBattleButtons};
+  const updated = updateTutorialState(tutorial.state, gameEndResult);
+  if (!updated) {
+    return null;
+  }
+
+  const postBattleButtons = updated.result === 'StageMiss' ? PostTutorialLoseButtons : PostTutorialWinButtons;
+  const updatedInProgress = {...tutorial, state: updated.state};
+  return {postBattleButtons, updatedInProgress};
 };
 
 /**
@@ -134,6 +139,7 @@ export async function onEndBattle(props: GameProps, action: EndBattle): Promise<
   } else if (props.inProgress.type === 'CasualMatch') {
     await endCasualMatch(props);
   } else if (tutorial) {
+    props.inProgress = tutorial.updatedInProgress;
     await endTutorial(props, tutorial.postBattleButtons);
   }
 }

@@ -1,6 +1,5 @@
 // @flow
-import type {BattleResult, GameState, Player, PlayerId} from "gbraver-burst-core";
-import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
+import type {BattleResult, GameState, PlayerId} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -10,8 +9,6 @@ import type {
   LastState,
   PilotSkillCommandSelected,
 } from "../game/td-scenes/battle/custom-battle-event";
-import type {NPC} from "../npc/npc";
-import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
 import {waitTime} from "../wait/wait-time";
 import {
   activeLeftMessageWindow,
@@ -590,20 +587,10 @@ const focusOutPilotButton = async (props: CustomBattleEventProps) => {
 /** 選択可能なコマンド */
 type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All';
 
-/** チュートリアルイベント */
-export interface TutorialEvent extends CustomBattleEvent {
-  /** プレイヤー情報 */
-  player: Player;
-  /** NPC */
-  npc: NPC;
-}
-
 /** チュートリアルイベントの実装 */
-class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEvent {
-  /** @override */
-  player: Player;
-  /** @override */
-  npc: NPC;
+class SimpleTutorialEvent extends EmptyCustomBattleEvent {
+  /** プレイヤーID */
+  playerId: PlayerId;
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
   /** 選択可能なコマンド */
@@ -616,10 +603,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
    */
   constructor(playerId: PlayerId) {
     super();
-    const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
-    const pilot = Pilots.find(v => v.id === PilotIds.SHINYA)  ?? Pilots[0];
-    this.player = {playerId, armdozer, pilot};
-    this.npc = oneBatteryWeakWingDozerNPC();
+    this.playerId = playerId;
     this.stateHistory = [];
     this.selectableCommands = 'BatteryOnly';
   }
@@ -635,7 +619,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
     const turn = turnCount(this.stateHistory);
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
-      ? {isAttacker: foundLastBattle.effect.attacker === this.player.playerId, result: foundLastBattle.effect.result}
+      ? {isAttacker: foundLastBattle.effect.attacker === this.playerId, result: foundLastBattle.effect.result}
       : null;
     if (turn === 1) {
       await introduction(props);
@@ -662,7 +646,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   async onLastState(props: LastState): Promise<void> {
     const foundLastState = props.update[props.update.length - 1];
     const lastState = foundLastState
-      ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === this.player.playerId}
+      ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === this.playerId}
       : null;
     if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && lastState.isMyTurn) {
       await focusInAttackBatterySelector(props);
@@ -675,7 +659,7 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
   async afterLastState(props: LastState): Promise<void> {
     const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
     const gameEnd = (foundGameEnd && foundGameEnd.effect.name === 'GameEnd')
-      ? {isVictory: foundGameEnd.effect.result.type === 'GameOver' && foundGameEnd.effect.result.winner === this.player.playerId}
+      ? {isVictory: foundGameEnd.effect.result.type === 'GameOver' && foundGameEnd.effect.result.winner === this.playerId}
       : null;
     if (gameEnd && gameEnd.isVictory) {
       await victory(props);
@@ -699,8 +683,8 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
 
     const foundLastState = this.stateHistory[this.stateHistory.length - 1];
     const lastState = foundLastState
-      ? {isEnemyTurn: foundLastState.activePlayerId !== this.player.playerId,
-        player: foundLastState.players.find(v => v.playerId === this.player.playerId)}
+      ? {isEnemyTurn: foundLastState.activePlayerId !== this.playerId,
+        player: foundLastState.players.find(v => v.playerId === this.playerId)}
       : null;
     const lastPlayer = (lastState && lastState.player)
       ? {isZeroBattery: lastState.player.armdozer.battery === 0,
@@ -772,6 +756,6 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent implements TutorialEven
  * @param playerId プレイヤーID
  * @return チュートリアルイベント
  */
-export function createTutorialEvent(playerId: PlayerId): TutorialEvent {
+export function createTutorialEvent(playerId: PlayerId): CustomBattleEvent {
   return new SimpleTutorialEvent(playerId);
 }
