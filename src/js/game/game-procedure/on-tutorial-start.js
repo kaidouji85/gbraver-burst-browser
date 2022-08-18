@@ -1,7 +1,7 @@
 // @flow
 import type {GameProps} from "../game-props";
 import {createTutorial} from "../in-progress/tutorial";
-import { getCurrentTutorialStage } from "../tutorial";
+import {getCurrentTutorialStage} from "../tutorial";
 import {tutorialStagesMaster} from "../tutorial-stages";
 import {fullResourceLoading} from "./full-resource-loading";
 import {startTutorial} from "./start-tutorial";
