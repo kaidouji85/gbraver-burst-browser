@@ -1,11 +1,7 @@
 // @flow
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {Scene} from "../scene";
-import type {
-  BattleEnd,
-  BattleSceneProps,
-  BattleScenePropsCreatorParams
-} from "./battle-scene-props";
+import type {BattleEnd, BattleSceneProps, BattleScenePropsCreatorParams} from "./battle-scene-props";
 import {createBattleSceneProps} from "./battle-scene-props";
 import {onBurst} from "./procedure/on-burst";
 import {onDecideBattery} from "./procedure/on-decide-battery";

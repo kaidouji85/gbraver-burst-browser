@@ -1,11 +1,8 @@
 // @flow
-import type {BattleSceneProps} from "../battle-scene-props";
 import type {GameState} from "gbraver-burst-core";
 import {play} from "../../../../bgm/bgm-operators";
-import {
-  stateAnimation,
-  stateHistoryAnimation,
-} from "../animation/state-history";
+import {stateAnimation, stateHistoryAnimation,} from "../animation/state-history";
+import type {BattleSceneProps} from "../battle-scene-props";
 import {playAnimation} from "../play-animation";
 import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
 
