@@ -1,9 +1,8 @@
 // @flow
-import type {ArmDozerId, GameEndResult, PilotId, Player} from "gbraver-burst-core";
+import type {ArmDozerId, GameEndResult, PilotId, Player, PlayerId} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
 import type {SoundId} from "../resource/sound";
-import {playerUuid} from "../uuid/player";
 
 /** NPCバトル ステージ */
 export type NPCBattleStage = {
@@ -32,26 +31,18 @@ export type NPCBattleState = {
 }
 
 /**
- * NPCバトル用のプレイヤーを生成する
- *
- * @param armdozerId プレイヤーが選択したアームドーザID
- * @param pilotId プレイヤーが選択したパイロットID
- * @return 生成したプレイヤー情報
- */
-export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId): Player {
-  const armdozer = ArmDozers.find(v => v.id === armdozerId) ?? ArmDozers[0];
-  const pilot = Pilots.find(v => v.id === pilotId) ?? Pilots[0];
-  return {playerId: playerUuid(), armdozer, pilot};
-}
-
-/**
  * NPCバトル開始直後のステートを生成する
  *
- * @param player プレイヤー
+ * @param playerId プレイヤーID
+ * @param armdozerId プレイヤーが選択したアームドーザID
+ * @param pilotId プレイヤーが選択したパイロットID
  * @param stages 全ステージ
  * @return NPCバトルステート
  */
-export function createNPCBattleState(player: Player, stages: NPCBattleStage[]): NPCBattleState {
+export function createNPCBattleState(playerId: PlayerId, armdozerId: ArmDozerId, pilotId: PilotId, stages: NPCBattleStage[]): NPCBattleState {
+  const armdozer = ArmDozers.find(v => v.id === armdozerId) ?? ArmDozers[0];
+  const pilot = Pilots.find(v => v.id === pilotId) ?? Pilots[0];
+  const player = {playerId, armdozer, pilot};
   return {player, stages: stages, stageIndex: 0};
 }
 
