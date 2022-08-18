@@ -1,6 +1,8 @@
 // @flow
 import type {GameProps} from "../game-props";
 import {createTutorial} from "../in-progress/tutorial";
+import { getCurrentTutorialStage } from "../tutorial";
+import {TutorialStages} from "../tutorial-stages";
 import {fullResourceLoading} from "./full-resource-loading";
 import {startTutorial} from "./start-tutorial";
 
@@ -16,7 +18,12 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
     await fullResourceLoading(props);
   }
 
-  const tutorial = createTutorial();
+  const tutorial = createTutorial(TutorialStages);
+  const stage = getCurrentTutorialStage(tutorial.state);
+  if (!stage) {
+    return;
+  }
+
   props.inProgress = tutorial;
-  startTutorial(props, tutorial.playerId);
+  await startTutorial(props, stage);
 }

@@ -1,5 +1,5 @@
 // @flow
-import type {Player, PlayerId} from 'gbraver-burst-core';
+import type {Player} from 'gbraver-burst-core';
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {PostBattleAction} from "../game-actions";
 import type {GameProps} from "../game-props";
@@ -8,6 +8,8 @@ import type {Tutorial} from "../in-progress/tutorial";
 import type {NPCBattleStage, NPCBattleState} from "../npc-battle";
 import {getCurrentStage, getStageLevel} from "../npc-battle";
 import {DefaultStage} from "../npc-battle-courses";
+import type {TutorialStage} from "../tutorial";
+import {getCurrentTutorialStage} from "../tutorial";
 import {startNPCBattleStage} from "./start-npc-battle-stage";
 import {startTitle} from "./start-title";
 import {startTutorial} from "./start-tutorial";
@@ -88,20 +90,23 @@ const createTutorial = (inProgress: InProgress) => {
     return null;
   }
   const tutorial = (inProgress: Tutorial);
-  const playerId = tutorial.playerId;
-  return {playerId};
+  const stage = getCurrentTutorialStage(tutorial.state);
+  if (!stage) {
+    return null
+  }
+  return {stage};
 };
 
 /**
  * チュートリアルに遷移する
  *
  * @param props ゲームプロパティ 
- * @param playerId プレイヤーID
+ * @param stage チュートリアルステージ
  * @return 処理が完了したら発火するPromise
  */
-const gotoTutorial = async (props: $ReadOnly<GameProps>, playerId: PlayerId) => {
+const gotoTutorial = async (props: $ReadOnly<GameProps>, stage: TutorialStage) => {
   props.domFloaters.hiddenPostBattle();
-  await startTutorial(props, playerId);
+  await startTutorial(props, stage);
 };
 
 /**
@@ -124,6 +129,6 @@ export async function onPostBattleAction(props: GameProps, action: PostBattleAct
   } else if (npcBattle && (action.action.type === 'NextStage' || action.action.type === 'Retry')) {
     await gotoNPCBattleStage(props, npcBattle.player, npcBattle.stage, npcBattle.level);
   } else if (tutorial && action.action.type === 'Retry') {
-    await gotoTutorial(props, tutorial.playerId);
+    await gotoTutorial(props, tutorial.stage);
   }
 }
