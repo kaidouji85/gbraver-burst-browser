@@ -5,8 +5,8 @@ import type {CustomBattleEvent} from './td-scenes/battle/custom-battle-event';
 
 /** チュートリアルステージ */
 export type TutorialStage = {
-  /** チュートリアル用のカスタムバトルイベント */
-  event: CustomBattleEvent,
+  /** カスタムバトルイベント生成関数、カスタムバトルイベントは状態を持つので都度生成する */
+  event: () => CustomBattleEvent,
   /** NPC */
   npc: NPC,
   /** プレイヤー */

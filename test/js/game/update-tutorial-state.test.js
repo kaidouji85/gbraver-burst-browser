@@ -4,9 +4,9 @@ import {EmptyCustomBattleEvent} from "../../../src/js/custom-battle-events/empty
 import {updateTutorialState} from "../../../src/js/game/tutorial";
 import {createEmptyNPC} from "../../data/npc";
 
-const stage1 = {player: {...EMPTY_PLAYER, playerId: 'player-stage-01'}, npc: createEmptyNPC(), event: new EmptyCustomBattleEvent()};
-const stage2 = {player: {...EMPTY_PLAYER, playerId: 'player-stage-02'}, npc: createEmptyNPC(), event: new EmptyCustomBattleEvent()};
-const stage3 = {player: {...EMPTY_PLAYER, playerId: 'player-stage-03'}, npc: createEmptyNPC(), event: new EmptyCustomBattleEvent()};
+const stage1 = {player: {...EMPTY_PLAYER, playerId: 'player-stage-01'}, npc: createEmptyNPC(), event: () => new EmptyCustomBattleEvent()};
+const stage2 = {player: {...EMPTY_PLAYER, playerId: 'player-stage-02'}, npc: createEmptyNPC(), event: () => new EmptyCustomBattleEvent()};
+const stage3 = {player: {...EMPTY_PLAYER, playerId: 'player-stage-03'}, npc: createEmptyNPC(), event: () => new EmptyCustomBattleEvent()};
 
 test('ステージクリアの処理が正しい', () => {
   const tutorialState = {stages: [stage1, stage2, stage3], stageIndex: 0};

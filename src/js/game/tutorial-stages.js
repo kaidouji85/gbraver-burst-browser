@@ -1,5 +1,4 @@
 // @flow
-
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import {createTutorialEvent} from "../custom-battle-events/tutorial";
 import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
@@ -15,6 +14,6 @@ export const TutorialStages: TutorialStage[] = [
   {
     player: {playerId, armdozer: shinBraver, pilot: shinya},
     npc: oneBatteryWeakWingDozerNPC(),
-    event: createTutorialEvent(playerId)
+    event: () => createTutorialEvent(playerId)
   }
 ];

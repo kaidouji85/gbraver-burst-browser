@@ -15,11 +15,10 @@ import type {TutorialStage} from "../tutorial";
 export async function startTutorial(props: $ReadOnly<GameProps>, stage: TutorialStage): Promise<void> {
   await props.fader.fadeOut();
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
-  const battleProgress = {progress: v => Promise.resolve(npcBattle.progress(v))};
   const config = await props.config.load();
   const battleScene = props.tdScenes.startBattle({resources: props.resources, bgm: props.bgm,
     playingBGM: SOUND_IDS.TUTORIAL_BGM, pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale,
-    battleProgress, player: npcBattle.player, enemy: npcBattle.enemy, initialState: npcBattle.stateHistory(), customBattleEvent: stage.event});
+    battleProgress: npcBattle, player: npcBattle.player, enemy: npcBattle.enemy, initialState: npcBattle.stateHistory(), customBattleEvent: stage.event()});
   props.domScenes.hidden();
   await props.bgm.do(fadeOut);
   await props.bgm.do(stop);
