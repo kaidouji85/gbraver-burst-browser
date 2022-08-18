@@ -119,7 +119,7 @@ export function updateNPCBattleState(origin: NPCBattleState, gameEndResult: Game
   }
 
   const isStageClear = gameEndResult.type === 'GameOver' && gameEndResult.winner === origin.player.playerId;
-  const isLastStage = origin.stageIndex === origin.stages.length;
+  const isLastStage = origin.stageIndex === origin.stages.length - 1;
   const result = getNPCBattleResult(isStageClear, isLastStage);
   const nextStageIndex = result === 'StageClear' ? origin.stageIndex + 1 : origin.stageIndex;
   const updatedState = {...origin, stageIndex: nextStageIndex};
