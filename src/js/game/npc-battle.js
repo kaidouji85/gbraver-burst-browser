@@ -29,8 +29,6 @@ export type NPCBattleState = {
    * stagesの配列indexに相当する
    */
   stageIndex: number,
-  /** @deprecated ゲームクリアしたかのフラグ、trueでゲームクリア */
-  isGameClear: boolean
 }
 
 /**
@@ -54,7 +52,7 @@ export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId):
  * @return NPCバトルステート
  */
 export function createNPCBattleState(player: Player, stages: NPCBattleStage[]): NPCBattleState {
-  return {player, stages: stages, stageIndex: 0, isGameClear: false};
+  return {player, stages: stages, stageIndex: 0};
 }
 
 /**
@@ -124,48 +122,4 @@ export function updateNPCBattleState(origin: NPCBattleState, gameEndResult: Game
   const nextStageIndex = result === 'StageClear' ? origin.stageIndex + 1 : origin.stageIndex;
   const updatedState = {...origin, stageIndex: nextStageIndex};
   return {state: updatedState, result};
-}
-
-/**
- * @deprecated
- * ステージクリアしたか否かを判定する
- *
- * @param state NPCバトルステート
- * @param gameEndResult ゲームエンド結果
- * @return 判定結果、trueでステージクリアである
- */
-export function isNPCBattleStageClear(state: NPCBattleState, gameEndResult: GameEndResult): boolean {
-  return gameEndResult.type === 'GameOver' && gameEndResult.winner === state.player.playerId;
-}
-
-/**
- * @deprecated
- * ラストステージであるか否かを判定する
- *
- * @param state NPCバトルステート
- * @return 判定結果、trueでラストステージ
- */
-export function isLastStage(state: NPCBattleState): boolean {
-  return state.stages.length - 1 === state.stageIndex;
-}
-
-/**
- * @deprecated
- * 戦闘結果に応じてNPCバトルステートを更新する
- *
- * @param origin 更新前のステート
- * @param isStageClear ステージクリアしたかのフラグ、trueでステージクリアした
- * @return NPCバトルステート更新結果
- */
-export function updateNPCBattle(origin: NPCBattleState, isStageClear: boolean): NPCBattleState {
-  if (!isStageClear) {
-    return origin;
-  }
-
-  if (isLastStage(origin)) {
-    return {...origin, isGameClear: true};
-  }
-
-  const nextStageIndex = origin.stageIndex + 1;
-  return {...origin, stageIndex: nextStageIndex};
 }

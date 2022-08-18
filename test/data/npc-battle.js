@@ -6,11 +6,6 @@ import {EMPTY_PLAYER} from "./player";
 /** 空のNPCバトルステート */
 export const EMPTY_NPC_BATTLE_STATE: NPCBattleState = {
   player: EMPTY_PLAYER,
-  isGameClear: false,
-  stages: [
-    DefaultStage,
-    DefaultStage,
-    DefaultStage,
-  ],
+  stages: [DefaultStage, DefaultStage, DefaultStage],
   stageIndex: 0
 };

@@ -7,5 +7,5 @@ test('NPCバトルステートを正しく作ることができる', () => {
   const player = EMPTY_PLAYER;
   const stages = [DefaultStage, DefaultStage, DefaultStage];
   expect(createNPCBattleState(player, stages))
-    .toEqual({player, stages, stageIndex: 0, isGameClear: false});
+    .toEqual({player, stages, stageIndex: 0});
 });
