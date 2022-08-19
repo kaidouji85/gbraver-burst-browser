@@ -24,7 +24,7 @@ export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
 
 /** チュートリアル勝利後のアクションボタン */
 export const PostTutorialWinButtons: PostBattleButtonConfig[] = [
-  {style: 'MainButton', action: {type: 'NextTutorial'}, label: '次へ'},
+  {style: 'MainButton', action: {type: 'NextTutorial'}, label: '次のステージ'},
 ];
 
 /** チュートリアル敗北後のアクションボタン */
