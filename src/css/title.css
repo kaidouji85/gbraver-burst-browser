@@ -161,7 +161,6 @@
   background-color: var(--button-background-color);
 }
 
-.title__tutorial--invisible,
 .title__casual-match--invisible {
   display: none;
 }

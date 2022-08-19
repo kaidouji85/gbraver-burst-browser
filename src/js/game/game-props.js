@@ -48,8 +48,6 @@ export interface GameProps {
   isPerformanceStatsVisible: boolean;
   /** サービスワーカーを利用するか否か、trueで利用する */
   isServiceWorkerUsed: boolean;
-  /** チュートリアルが利用可能か否か、trueで利用可能 */
-  isTutorialEnable: boolean,
   /** 遊び方動画のURL */
   howToPlayMovieURL: string;
   /** 利用規約ページのURL */
@@ -116,8 +114,6 @@ export type GamePropsGeneratorParam = {
   isServiceWorkerUsed: boolean,
   /** APIサーバ系機能が利用可能か否か、trueで利用可能 */
   isAPIServerEnable: boolean,
-  /** チュートリアルが利用可能か否か、trueで利用可能 */
-  isTutorialEnable: boolean,
   /** APIサーバのSDK */
   api: GameAPI,
   /** ブラウザ設定リポジトリ */
@@ -139,7 +135,6 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     isFullResourceLoaded: false,
     isServiceWorkerUsed: param.isServiceWorkerUsed,
     isPerformanceStatsVisible: param.isPerformanceStatsVisible,
-    isTutorialEnable: param.isTutorialEnable,
     howToPlayMovieURL: param.howToPlayMovieURL,
     termsOfServiceURL: param.termsOfServiceURL,
     privacyPolicyURL: param.privacyPolicyURL,
