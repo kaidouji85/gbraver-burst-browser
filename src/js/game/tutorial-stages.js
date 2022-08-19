@@ -1,7 +1,7 @@
 // @flow
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
+import {createBatterySystemTutorialEvent} from "../custom-battle-events/battery-system-tutorial";
 import {EmptyCustomBattleEvent} from "../custom-battle-events/empty-custom-battle-event";
-import {createTutorialEvent} from "../custom-battle-events/tutorial";
 import {oneBatteryWeakWingDozerNPC} from "../npc/one-battery";
 import {zeroDefenseTutorialNPC} from "../npc/zero-defense-tutorial";
 import {playerUuid} from "../uuid/player";
@@ -15,7 +15,7 @@ const playerId = playerUuid();
 const batterySystemTutorial =   {
   player: {playerId, armdozer: shinBraver, pilot: shinya},
   npc: oneBatteryWeakWingDozerNPC(),
-  event: () => createTutorialEvent(playerId)
+  event: () => createBatterySystemTutorialEvent(playerId)
 };
 
 /** 0防御チュートリアル */
