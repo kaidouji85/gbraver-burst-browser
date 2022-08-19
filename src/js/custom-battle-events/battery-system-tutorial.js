@@ -214,14 +214,15 @@ const enemyAttackMiss = async (props: CustomBattleEventProps) => {
 const enemyAttackGuarded = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「攻撃が当たったけど 思ったよりダメージがないぞ」']
+    ['シンヤ', '「クッ 避けられなかった'],
+    ['けど思った程のダメージじゃないッスね」', ],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「ほう 私の攻撃をガードするとはな'],
-    ['私と君が同じバッテリーを出したので 攻撃をガード ダメージが半減されたな」'],
+    ['私と君が同じバッテリーを出したので攻撃をガード ダメージが半減されたな」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
