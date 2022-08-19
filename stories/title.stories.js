@@ -11,15 +11,15 @@ export default {
 export const guestAccount: DOMStubStory = domStub(resources => {
   const account = {type: 'GuestAccount'};
   const bgm = createBGMManager();
-  const scene = new Title({resources, bgm, account, isApiServerEnable: true, isTutorialEnable: true,
-    termsOfServiceURL: 'terms-of-service', privacyPolicyURL: 'privacy-policy', contactURL: 'contact'});
+  const scene = new Title({resources, bgm, account, isApiServerEnable: true, termsOfServiceURL: 'terms-of-service',
+    privacyPolicyURL: 'privacy-policy', contactURL: 'contact'});
   return scene.getRootHTMLElement();
 });
 
 export const loggedInAccount: DOMStubStory = domStub(resources => {
   const account = {type: 'LoggedInAccount', name: 'test-account', pictureURL: 'test-picture'};
   const bgm = createBGMManager();
-  const scene = new Title({resources, bgm, account, isApiServerEnable: true, isTutorialEnable: true,
-    termsOfServiceURL: 'terms-of-service', privacyPolicyURL: 'privacy-policy', contactURL: 'contact'});
+  const scene = new Title({resources, bgm, account, isApiServerEnable: true, termsOfServiceURL: 'terms-of-service',
+    privacyPolicyURL: 'privacy-policy', contactURL: 'contact'});
   return scene.getRootHTMLElement();
 });

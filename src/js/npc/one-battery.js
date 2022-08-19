@@ -1,5 +1,4 @@
 // @flow
-
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {NPC} from "./npc";
 import type {SimpleRoutine} from "./simple-npc";
@@ -39,17 +38,5 @@ export function oneBatteryNeoLandozerNPC(): NPC {
 export function oneBatteryShinBraverNPC(): NPC {
   const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
-  return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
-}
-
-/**
- * バッテリー1をひたすら出す、弱体化ウィングドーザNPC
- *
- * @return NPC
- */
-export function oneBatteryWeakWingDozerNPC(): NPC {
-  const origin = ArmDozers.find(v => v.id === ArmDozerIdList.WING_DOZER) ?? ArmDozers[0];
-  const armdozer = {...origin, power: 1800, speed: 1500};
-  const pilot = Pilots.find(v => v.id === PilotIds.TSUBASA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
 }

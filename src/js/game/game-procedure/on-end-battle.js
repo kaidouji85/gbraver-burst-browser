@@ -8,7 +8,8 @@ import {
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
   PostTutorialLoseButtons,
-  PostTutorialWinButtons
+  PostTutorialWinButtons,
+  PostTutorialCompleteButtons,
 } from "../dom-floaters/post-battle/post-battle-buttons";
 import type {EndBattle} from "../game-actions";
 import type {GameProps} from "../game-props";
@@ -18,6 +19,7 @@ import type {Tutorial} from "../in-progress/tutorial";
 import type {NPCBattleResult} from "../npc-battle";
 import {updateNPCBattleState} from "../npc-battle";
 import {updateTutorialState} from "../tutorial";
+import type { TutorialResult } from "../tutorial";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する
@@ -97,6 +99,24 @@ const endNPCBattleStage = async (props: $ReadOnly<GameProps>, postBattleButtons:
 };
 
 /**
+ * チュートリアル終了後に表示するアクションボタンを求める
+ *
+ * @param result チュートリアル結果
+ * @return 表示するアクションボタン
+ */
+const postTutorialButtons = (result: TutorialResult) => {
+  switch(result) {
+    case 'TutorialComplete':
+      return PostTutorialCompleteButtons;
+    case 'StageClear':
+      return PostTutorialWinButtons;
+    case 'StageMiss':
+    default:
+      return PostTutorialLoseButtons;
+  }
+}
+
+/**
  * チュートリアル進行中に利用するデータを生成する
  *
  * @param inProgress 進行中のフロー
@@ -112,7 +132,7 @@ const createTutorial = (inProgress: InProgress, gameEndResult: GameEndResult) =>
     return null;
   }
 
-  const postBattleButtons = updated.result === 'StageMiss' ? PostTutorialLoseButtons : PostTutorialWinButtons;
+  const postBattleButtons = postTutorialButtons(updated.result);
   const updatedInProgress = {...tutorial, state: updated.state};
   return {postBattleButtons, updatedInProgress};
 };

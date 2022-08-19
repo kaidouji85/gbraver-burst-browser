@@ -32,10 +32,6 @@ const INVISIBLE_ACCOUNT_CLASS = `${ACCOUNT_CLASS}--invisible`;
 const ACCOUNT_MENU_CLASS = `${ROOT_CLASS}__account-menu`;
 /** アカウントメニュー 非表示 class属性 */
 const INVISIBLE_ACCOUNT_MENU_CLASS = `${ACCOUNT_MENU_CLASS}--invisible`;
-/** チュートリアルボタン class属性 */
-const TUTORIAL_CLASS = `${ROOT_CLASS}__tutorial`;
-/** チュートリアルボタン 非表示 class属性 */
-const INVISIBLE_TUTORIAL_CLASS = `${TUTORIAL_CLASS}--invisible`;
 /** カジュアルマッチボタン class属性 */
 const CASUAL_MATCH_CLASS = `${ROOT_CLASS}__casual-match`;
 /** カジュアルマッチボタン 非表示 class属性 */
@@ -62,8 +58,6 @@ type RootInnerHTMLParams = {
   account: TitleAccount,
   /** APIサーバが利用可能か否か、trueで利用可能である */
   isApiServerEnable: boolean,
-  /** チュートリアルが利用可能か否か、trueで利用可能である */
-  isTutorialEnable: boolean,
   /** 利用規約ページのURL */
   termsOfServiceURL: string,
   /** プライバシーポリシーページのURL */
@@ -82,7 +76,6 @@ function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string {
   const loginClassName = (params.isApiServerEnable && params.account.type === 'GuestAccount') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
   const accountName = params.account.type === 'LoggedInAccount' ? escapeHTML(params.account.name) : '';
   const accountClassName = (params.isApiServerEnable && params.account.type === 'LoggedInAccount') ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
-  const tutorialClassName = params.isTutorialEnable ? TUTORIAL_CLASS : INVISIBLE_TUTORIAL_CLASS;
   const casualMatchClassName = params.isApiServerEnable ? CASUAL_MATCH_CLASS: INVISIBLE_CASUAL_MATCH_CLASS;
   return `
     <div class="${ROOT_CLASS}__header">
@@ -104,7 +97,7 @@ function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string {
       <img class="${ROOT_CLASS}__logo" data-id="${ids.logo}">
       <div class="${ROOT_CLASS}__game-menu">
         <button class="${ROOT_CLASS}__config" data-id="${ids.config}">設定</button>
-        <button class="${tutorialClassName}" data-id="${ids.tutorial}">チュートリアル</button>
+        <button class="${ROOT_CLASS}__tutorial" data-id="${ids.tutorial}">チュートリアル</button>
         <button class="${ROOT_CLASS}__arcade" data-id="${ids.arcade}">アーケード</button>
         <button class="${casualMatchClassName}" data-id="${ids.casualMatch}">ネット対戦</button>
       </div>

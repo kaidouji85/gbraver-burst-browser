@@ -587,8 +587,8 @@ const focusOutPilotButton = async (props: CustomBattleEventProps) => {
 /** 選択可能なコマンド */
 type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All';
 
-/** チュートリアルイベントの実装 */
-class SimpleTutorialEvent extends EmptyCustomBattleEvent {
+/** バッテリーシステムチュートリアル用のカスタムバトルイベント */
+class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   /** プレイヤーID */
   playerId: PlayerId;
   /** ステートヒストリー、 beforeLastState開始時に更新される */
@@ -751,11 +751,11 @@ class SimpleTutorialEvent extends EmptyCustomBattleEvent {
 }
 
 /**
- * チュートリアルイベントを生成する
+ * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
  *
  * @param playerId プレイヤーID
- * @return チュートリアルイベント
+ * @return 生成したカスタムバトルイベント
  */
-export function createTutorialEvent(playerId: PlayerId): CustomBattleEvent {
-  return new SimpleTutorialEvent(playerId);
+export function createBatterySystemTutorialEvent(playerId: PlayerId): CustomBattleEvent {
+  return new BatterySystemTutorialEvent(playerId);
 }
