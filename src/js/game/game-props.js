@@ -94,6 +94,8 @@ export interface GameProps {
   serviceWorker: ?ServiceWorkerRegistration;
   /** BGM管理オブジェクト */
   bgm: BGMManager;
+  /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
+  canPlayTutorialInDevelopment: boolean;
 }
 
 /** GamePropsジェネレータパラメータ */
@@ -155,5 +157,6 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     tdScenes: new TDScenes(resize, pushWindow),
     serviceWorker: null,
     bgm: createBGMManager(),
+    canPlayTutorialInDevelopment: false  // TODO 環境変数から値をセットする
   };
 }

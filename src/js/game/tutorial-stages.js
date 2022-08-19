@@ -11,17 +11,22 @@ const shinBraver = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? A
 const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
 const playerId = playerUuid();
 
-/** チュートリアルステージのマスタデータ */
-export const TutorialStagesMaster: TutorialStage[] = [
-  // TODO 開発が終わったら0防御チュートリアルを消す
-  {
-    player: {playerId, armdozer: shinBraver, pilot: shinya},
-    npc: zeroDefenseTutorialNPC(),
-    event: () => new EmptyCustomBattleEvent()
-  },
-  {
-    player: {playerId, armdozer: shinBraver, pilot: shinya},
-    npc: oneBatteryWeakWingDozerNPC(),
-    event: () => createTutorialEvent(playerId)
-  },
-];
+/** バッテリーシステムチュートリアル */
+const batterySystemTutorial =   {
+  player: {playerId, armdozer: shinBraver, pilot: shinya},
+  npc: oneBatteryWeakWingDozerNPC(),
+  event: () => createTutorialEvent(playerId)
+};
+
+/** 0防御チュートリアル */
+const zeroDefenseTutorial =   {
+  player: {playerId, armdozer: shinBraver, pilot: shinya},
+  npc: zeroDefenseTutorialNPC(),
+  event: () => new EmptyCustomBattleEvent()
+}
+
+/** チュートリアルステージ集合 */
+export const TutorialStages: TutorialStage[] = [batterySystemTutorial];
+
+/** 開発中のチュートリアルステージ集合 */
+export const TutorialStagesInDevelopment: TutorialStage[] = [zeroDefenseTutorial, batterySystemTutorial];
