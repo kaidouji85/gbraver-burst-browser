@@ -119,7 +119,9 @@ export type GamePropsGeneratorParam = {
   /** APIサーバのSDK */
   api: GameAPI,
   /** ブラウザ設定リポジトリ */
-  config: GbraverBurstBrowserConfigRepository
+  config: GbraverBurstBrowserConfigRepository,
+  /** 開発中のチュートリアルをプレイできるか否かのフラグ、trueでプレイできる */
+  canPlayTutorialInDevelopment: boolean;
 };
 
 /**
@@ -157,6 +159,6 @@ export function generateGameProps(param: GamePropsGeneratorParam): GameProps {
     tdScenes: new TDScenes(resize, pushWindow),
     serviceWorker: null,
     bgm: createBGMManager(),
-    canPlayTutorialInDevelopment: false  // TODO 環境変数から値をセットする
+    canPlayTutorialInDevelopment: param.canPlayTutorialInDevelopment
   };
 }
