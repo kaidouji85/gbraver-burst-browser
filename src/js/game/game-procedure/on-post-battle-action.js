@@ -128,7 +128,7 @@ export async function onPostBattleAction(props: GameProps, action: PostBattleAct
     await gotoEnding(props);
   } else if (npcBattle && (action.action.type === 'NextStage' || action.action.type === 'Retry')) {
     await gotoNPCBattleStage(props, npcBattle.player, npcBattle.stage, npcBattle.level);
-  } else if (tutorial && action.action.type === 'Retry') {
+  } else if (tutorial && (action.action.type === 'Retry' || action.action.type === 'NextTutorial')) {
     await gotoTutorial(props, tutorial.stage);
   }
 }
