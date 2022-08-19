@@ -21,6 +21,7 @@ env:
     AUTH0_DOMAIN: /GbraverBurst/prod/auth0Domain
     AUTH0_CLIENT_ID: /GbraverBurst/prod/auth0ClientId
     AUTH0_AUDIENCE: /GbraverBurst/prod/auth0Audience
+    CAN_PLAY_TUTORIAL_IN_DEVELOPMENT: /GbraverBurst/prod/canPlayTutorialInDevelopment
 phases:
   install:
     runtime-versions:

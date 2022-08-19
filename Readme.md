@@ -85,6 +85,7 @@ docker build ./
     | /GbraverBurst/dev/contactURL | String | 問い合わせページのURL |
     | /GbraverBurst/dev/isPerformanceStatsVisible | String | FPSを表示するか否かのフラグ、```true```でFPSを表示 |
     | /GbraverBurst/dev/isAPIServerEnable | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
+    | /GbraverBurst/dev/canPlayTutorialInDevelopment | String |  開発中のチュートリアルをプレイできるか否かのフラグ、```true```でプレイ可能 |
     | /GbraverBurst/dev/auth0ClientId | SecureString | auth0 application client ID |
     
 * CodeBuildを以下設定で構築する
@@ -107,6 +108,7 @@ docker build ./
     | /GbraverBurst/prod/contactURL | String | 問い合わせページのURL |
     | /GbraverBurst/prod/isPerformanceStatsVisible | String | FPSを表示するか否かのフラグ、```true```でFPSを表示 |
     | /GbraverBurst/prod/isAPIServerEnable | String | APIサーバが利用できるか否かのフラグ、```true```で利用可能 |
+    | /GbraverBurst/prod/canPlayTutorialInDevelopment | String |  開発中のチュートリアルをプレイできるか否かのフラグ、```true```でプレイ可能 |
     | /GbraverBurst/prod/auth0ClientId | SecureString | auth0 application client ID |
 
 * CodeBuildを以下設定で構築する
