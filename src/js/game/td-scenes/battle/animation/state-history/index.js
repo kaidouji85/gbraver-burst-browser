@@ -109,7 +109,7 @@ export function stateAnimation(props: ReferableBattleSceneProps, gameState: Game
   if (gameState.effect.name === 'UpdateRemainingTurn') {
     const effect: UpdateRemainingTurn = gameState.effect;
     const state = ((gameState: any): GameStateX<typeof effect>);
-    return updateRemainingTurnAnimation(props.view, props.state, state);
+    return updateRemainingTurnAnimation(props, state);
   }
 
   if (gameState.effect.name === 'GameEnd') {
