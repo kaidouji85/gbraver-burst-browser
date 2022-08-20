@@ -73,7 +73,7 @@ export function stateAnimation(props: ReferableBattleSceneProps, gameState: Game
   if (gameState.effect.name === 'InputCommand') {
     const effect: InputCommand = gameState.effect;
     const state = ((gameState: any): GameStateX<typeof effect>);
-    return inputCommandAnimation(props.view, props.state, state);
+    return inputCommandAnimation(props, state);
   }
 
   if (gameState.effect.name === 'BatteryDeclaration') {
