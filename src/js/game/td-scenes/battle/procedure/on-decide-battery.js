@@ -32,7 +32,8 @@ export async function onDecideBattery(props: $ReadOnly<BattleSceneProps>, action
         props.view.hud.gameObjects.timeScaleButton.close(),
       )
         .chain(delay(500))
-        .chain(props.view.hud.gameObjects.batterySelector.close()));
+        .chain(props.view.hud.gameObjects.batterySelector.close())
+    );
     await progressGame(props, batteryCommand);
   });
 }

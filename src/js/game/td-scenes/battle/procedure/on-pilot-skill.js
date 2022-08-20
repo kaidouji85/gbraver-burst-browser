@@ -32,7 +32,8 @@ export async function onPilotSkill(props: $ReadOnly<BattleSceneProps>, action: D
         props.view.hud.gameObjects.timeScaleButton.close(),
       )
         .chain(delay(500))
-        .chain(props.view.hud.gameObjects.pilotButton.close()));
+        .chain(props.view.hud.gameObjects.pilotButton.close())
+    );
     await progressGame(props, pilotSkillCommand);
   });
 }
