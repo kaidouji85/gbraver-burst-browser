@@ -120,7 +120,7 @@ export function stateAnimation(props: ReferableBattleSceneProps, gameState: Game
   if (gameState.effect.name === 'RightItself') {
     const effect: RightItself = gameState.effect;
     const state = ((gameState: any): GameStateX<typeof effect>);
-    return rightItselfAnimation(props.view, props.state, state);
+    return rightItselfAnimation(props, state);
   }
 
   if (gameState.effect.name === 'PilotSkillEffect') {
