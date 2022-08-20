@@ -3,7 +3,6 @@ import type {Command, GameState} from "gbraver-burst-core";
 import type {GameEnd} from "gbraver-burst-core/lib/effect/game-end/game-end";
 import {fadeOut, stop} from "../../../../bgm/bgm-operators";
 import {stateAnimation, stateHistoryAnimation} from "../animation/state-history";
-import {toReferableBattleSceneProps} from "../animation/state-history/referable-battle-scene-props";
 import type {BattleSceneProps} from "../battle-scene-props";
 import {playAnimation} from "../play-animation";
 import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
@@ -23,14 +22,13 @@ const repeatProgressWhenUnselectable = async (props: $ReadOnly<BattleSceneProps>
     if (updateState.length < 1) {
       return;
     }
-    const referableProps = toReferableBattleSceneProps(props);
     const removeLastState = updateState.slice(0 , -1);
-    await playAnimation(stateHistoryAnimation(referableProps, removeLastState), props);
+    await playAnimation(stateHistoryAnimation(props, removeLastState), props);
     const lastState: GameState = updateState[updateState.length - 1];
     const eventProps = {...toCustomBattleEventProps(props), update: updateState};
     props.customBattleEvent && await props.customBattleEvent.beforeLastState(eventProps);
     await Promise.all([
-      playAnimation(stateAnimation(referableProps, lastState), props),
+      playAnimation(stateAnimation(props, lastState), props),
       props.customBattleEvent ? props.customBattleEvent.onLastState(eventProps) : Promise.resolve(),
     ]);
     props.customBattleEvent && await props.customBattleEvent.afterLastState(eventProps);
