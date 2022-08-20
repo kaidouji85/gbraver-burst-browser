@@ -1,9 +1,8 @@
 // @flow
-
 import type {GameEndX, GameOver, GameStateX} from "gbraver-burst-core";
 import {TDCamera} from "../../../../../../../game-object/camera/td";
-import {BattleSceneView} from "../../../../view";
 import type {TDArmdozerObjects} from "../../../../view/td/armdozer-objects/armdozer-objects";
+import type {ReferableBattleSceneProps} from "../../referable-battle-scene-props";
 
 /**
  * ゲームオーバー アニメーションパラメータ
@@ -24,12 +23,12 @@ export type GameOverParam = GameOverParamX<TDArmdozerObjects>;
  * ゲームオーバー アニメーションパラメータに変換する
  * 変換できない場合はnullを返す
  *
- * @param view ビュー
+ * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
  * @return 変換結果
  */
-export function toGameOverParam(view: BattleSceneView, gameState: GameStateX<GameEndX<GameOver>>): ?GameOverParam {
-  const winnerArmdozer = view.td.armdozerObjects.find(v => v.playerId === gameState.effect.result.winner);
+export function toGameOverParam(props: ReferableBattleSceneProps, gameState: GameStateX<GameEndX<GameOver>>): ?GameOverParam {
+  const winnerArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === gameState.effect.result.winner);
   if (!winnerArmdozer) {
     return null;
   }
@@ -37,6 +36,6 @@ export function toGameOverParam(view: BattleSceneView, gameState: GameStateX<Gam
   const tdArmdozer: TDArmdozerObjects = winnerArmdozer;
   return {
     winnerTdArmdozer: tdArmdozer,
-    tdCamera: view.td.camera,
+    tdCamera: props.view.td.camera,
   };
 }

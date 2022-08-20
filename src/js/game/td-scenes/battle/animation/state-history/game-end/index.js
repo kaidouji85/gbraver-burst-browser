@@ -2,8 +2,7 @@
 import type {EvenMatch, GameEnd, GameEndX, GameOver, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
-import {BattleSceneView} from "../../../view";
+import type {ReferableBattleSceneProps} from "../referable-battle-scene-props";
 import {evenMatchAnimation} from "./even-match/even-match";
 import {gameOverAnimation} from "./game-over/game-over";
 import {toGameOverParam} from "./game-over/game-over-param";
@@ -11,20 +10,19 @@ import {toGameOverParam} from "./game-over/game-over-param";
 /**
  * ゲーム終了アニメーション
  *
- * @param view ビュー
- * @param sceneState シーンの状態
+ * @param props 戦闘シーンプロパティ
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function gameEndAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<GameEnd>): Animate {
+export function gameEndAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<GameEnd>): Animate {
   const evenMatch = castEvenMatch(gameState);
   if (evenMatch) {
-    return evenMatchAnimation(view);
+    return evenMatchAnimation(props);
   }
 
   const gameOver = castGameOver(gameState);
   if (gameOver) {
-    const param = toGameOverParam(view, gameOver);
+    const param = toGameOverParam(props, gameOver);
     return param ? gameOverAnimation(param) : empty();
   }
   

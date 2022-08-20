@@ -1,27 +1,24 @@
 // @flow
-
 import type {BattleResult, GameStateX, RightItself} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
-import type {BattleSceneState} from "../../state/battle-scene-state";
-import {BattleSceneView} from "../../view";
+import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
 
 /**
  * 防御側 体勢整え
  *
- * @param view ビュー
- * @param sceneState シーンの状態
+ * @param props 戦闘シーンプロパティ
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function rightItselfAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<RightItself>): Animate {
+export function rightItselfAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<RightItself>): Animate {
   if (gameState.effect.name !== 'RightItself') {
     return empty();
   }
 
   const effect: RightItself = gameState.effect;
-  const defenderArmdozer = view.td.armdozerObjects.find(v => v.playerId === effect.defender);
+  const defenderArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === effect.defender);
   if (!defenderArmdozer) {
     return empty();
   }
