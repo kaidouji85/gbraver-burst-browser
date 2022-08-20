@@ -23,7 +23,7 @@ const repeatProgressWhenUnselectable = async (props: $ReadOnly<BattleSceneProps>
       return;
     }
     const removeLastState = updateState.slice(0 , -1);
-    await playAnimation(stateHistoryAnimation(props.view, props.sounds, props.state, removeLastState), props);
+    await playAnimation(stateHistoryAnimation(props, removeLastState), props);
     const lastState: GameState = updateState[updateState.length - 1];
     const eventProps = {...toCustomBattleEventProps(props), update: updateState};
     props.customBattleEvent && await props.customBattleEvent.beforeLastState(eventProps);

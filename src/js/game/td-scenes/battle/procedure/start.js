@@ -19,7 +19,7 @@ export async function start(props: $ReadOnly<BattleSceneProps>): Promise<void> {
       return;
     }
     const removeLastState = props.initialState.slice(0, -1);
-    await playAnimation(stateHistoryAnimation(props.view, props.sounds, props.state, removeLastState), props);
+    await playAnimation(stateHistoryAnimation(props, removeLastState), props);
     const eventProps = {...toCustomBattleEventProps(props), update: props.initialState};
     props.customBattleEvent && await props.customBattleEvent.beforeLastState(eventProps);
     const lastState: GameState = props.initialState[props.initialState.length - 1];

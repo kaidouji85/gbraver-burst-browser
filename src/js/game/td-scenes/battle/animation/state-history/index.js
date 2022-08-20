@@ -17,6 +17,7 @@ import type {
 } from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {empty} from "../../../../../animation/delay";
+import type {BattleSceneProps} from "../../battle-scene-props";
 import {BattleSceneSounds} from "../../sounds/sounds";
 import type {BattleSceneState} from "../../state/battle-scene-state";
 import {BattleSceneView} from "../../view";
@@ -41,19 +42,17 @@ const parallelPlayEffects = ['TurnChange', 'RightItself', 'UpdateRemainingTurn',
 /**
  * 状態に応じた戦闘シーンのアニメーションを再生する
  *
- * @param view 戦闘シーンビュー
- * @param sounds 戦闘シーン効果音
- * @param sceneState 戦闘シーンの状態
- * @param gameStateList 再生するゲームの状態
+ * @param props 戦闘シーンプロパティ
+ * @param gameStateHistory 再生するゲームの状態
  * @return アニメーション
  */
-export function stateHistoryAnimation(view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState, gameStateList: GameState[]): Animate {
-  return gameStateList
-    .map((state, index) => {
-      const next = gameStateList[index + 1];
+export function stateHistoryAnimation(props: $ReadOnly<BattleSceneProps>, gameStateHistory: GameState[]): Animate {
+  return gameStateHistory
+    .map((gameState, index) => {
+      const next = gameStateHistory[index + 1];
       const isParallel = next && parallelPlayEffects.includes(next.effect.name)
-        && parallelPlayEffects.includes(state.effect.name);
-      const anime = stateAnimation(state, view, sounds, sceneState);
+        && parallelPlayEffects.includes(gameState.effect.name);
+      const anime = stateAnimation(gameState, props.view, props.sounds, props.state);
       return {anime, isParallel};
     })
     .reduce((previous, current) =>
