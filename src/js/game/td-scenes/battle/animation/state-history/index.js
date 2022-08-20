@@ -103,7 +103,7 @@ export function stateAnimation(props: ReferableBattleSceneProps, gameState: Game
   if (gameState.effect.name === 'Reflect') {
     const effect: Reflect = gameState.effect;
     const state = ((gameState: any): GameStateX<typeof effect>);
-    return reflectAnimation(props.view, props.state, state);
+    return reflectAnimation(props, state);
   }
 
   if (gameState.effect.name === 'UpdateRemainingTurn') {
