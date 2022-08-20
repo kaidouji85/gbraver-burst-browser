@@ -3,7 +3,7 @@ import type {GameState} from "gbraver-burst-core";
 import {play} from "../../../../bgm/bgm-operators";
 import {stateAnimation, stateHistoryAnimation,} from "../animation/state-history";
 import type {BattleSceneProps} from "../battle-scene-props";
-import {animationPlayer} from "../play-animation";
+import {animationPlayer} from "../animation-player";
 import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
 
 /**

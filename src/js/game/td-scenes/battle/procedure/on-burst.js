@@ -3,7 +3,7 @@ import {all} from "../../../../animation/all";
 import {delay} from "../../../../animation/delay";
 import type {DoBurst} from "../actions/do-burst";
 import type {BattleSceneProps} from "../battle-scene-props";
-import {animationPlayer} from "../play-animation";
+import {animationPlayer} from "../animation-player";
 import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
 import {progressGame} from "./progress-game";
 
