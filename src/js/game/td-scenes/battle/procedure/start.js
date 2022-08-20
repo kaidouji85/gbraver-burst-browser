@@ -4,7 +4,6 @@ import {play} from "../../../../bgm/bgm-operators";
 import {stateAnimation, stateHistoryAnimation,} from "../animation/state-history";
 import type {BattleSceneProps} from "../battle-scene-props";
 import {animationPlayer} from "../animation-player";
-import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
 
 /**
  * 戦闘シーンを開始する
@@ -20,7 +19,7 @@ export async function start(props: $ReadOnly<BattleSceneProps>): Promise<void> {
     }
     const removeLastState = props.initialState.slice(0, -1);
     await animationPlayer(props).play(stateHistoryAnimation(props, removeLastState));
-    const eventProps = {...toCustomBattleEventProps(props), update: props.initialState};
+    const eventProps = {...props, update: props.initialState};
     props.customBattleEvent && await props.customBattleEvent.beforeLastState(eventProps);
     const lastState: GameState = props.initialState[props.initialState.length - 1];
     await Promise.all([

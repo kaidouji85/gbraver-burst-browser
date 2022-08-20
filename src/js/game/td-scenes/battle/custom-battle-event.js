@@ -5,7 +5,10 @@ import type {PushWindow} from "../../../window/push-window";
 import {BattleSceneSounds} from "./sounds/sounds";
 import {BattleSceneView} from "./view";
 
-/** 全カスタムイベントで利用できるプロパティ */
+/**
+ * 全カスタムイベントで利用できるプロパティ
+ * BattleScenePropsからカスタムバトルイベントで利用可能なプロパティを抜粋した
+ */
 export type CustomBattleEventProps = {
   /** 戦闘シーンビュー */
   view: BattleSceneView,
