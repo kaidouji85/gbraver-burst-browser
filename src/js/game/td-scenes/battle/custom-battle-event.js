@@ -3,7 +3,6 @@ import type {BatteryCommand, BurstCommand, GameState, PilotSkillCommand} from "g
 import type {Stream} from "../../../stream/stream";
 import type {PushWindow} from "../../../window/push-window";
 import {BattleSceneSounds} from "./sounds/sounds";
-import type {BattleSceneState} from "./state/battle-scene-state";
 import {BattleSceneView} from "./view";
 
 /** 全カスタムイベントで利用できるプロパティ */
@@ -14,8 +13,6 @@ export type CustomBattleEventProps = {
   pushWindow: Stream<PushWindow>,
   /** 戦闘シーン効果音 */
   sounds: BattleSceneSounds,
-  /** 戦闘シーンステート */
-  sceneState: BattleSceneState,
 };
 
 /** 最終ステート系イベントのプロパティ */

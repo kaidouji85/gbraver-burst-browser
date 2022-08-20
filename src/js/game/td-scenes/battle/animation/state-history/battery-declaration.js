@@ -92,7 +92,7 @@ export function batteryDeclarationAnimation(props: ReferableBattleSceneProps, ga
     return empty();
   }
 
-  const isAttacker = gameState.effect.attacker === props.state.playerId;
+  const isAttacker = gameState.effect.attacker === props.playerId;
   const {attackerBattery, originalBatteryOfAttacker, defenderBattery, originalBatteryOfDefender} = gameState.effect;
   const attackerCorrect = attackerBattery - originalBatteryOfAttacker;
   const attackerDeclaration = attackerCorrect !== 0
