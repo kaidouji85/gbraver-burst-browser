@@ -5,7 +5,6 @@ import {fadeOut, stop} from "../../../../bgm/bgm-operators";
 import {stateAnimation, stateHistoryAnimation} from "../animation/state-history";
 import type {BattleSceneProps} from "../battle-scene-props";
 import {animationPlayer} from "../animation-player";
-import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
 
 /**
  * コマンド選択可能になるまでゲームを進める
@@ -25,7 +24,7 @@ const repeatProgressWhenUnselectable = async (props: $ReadOnly<BattleSceneProps>
     const removeLastState = updateState.slice(0 , -1);
     await animationPlayer(props).play(stateHistoryAnimation(props, removeLastState));
     const lastState: GameState = updateState[updateState.length - 1];
-    const eventProps = {...toCustomBattleEventProps(props), update: updateState};
+    const eventProps = {...props, update: updateState};
     props.customBattleEvent && await props.customBattleEvent.beforeLastState(eventProps);
     await Promise.all([
       animationPlayer(props).play(stateAnimation(props, lastState)),

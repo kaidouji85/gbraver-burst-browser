@@ -7,7 +7,7 @@ import {delay, empty} from "../../../../../animation/delay";
 import {process} from '../../../../../animation/process';
 import {BattleSceneSounds} from "../../sounds/sounds";
 import type {TDPlayer} from "../../view/td/player";
-import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
+import type {StateAnimationProps} from "./state-animation-props";
 
 /**
  * バッテリー宣言アニメーション
@@ -77,7 +77,7 @@ function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function batteryDeclarationAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<BatteryDeclaration>): Animate {
+export function batteryDeclarationAnimation(props: StateAnimationProps, gameState: GameStateX<BatteryDeclaration>): Animate {
   const attacker = gameState.players.find(v => v.playerId === gameState.activePlayerId);
   const defender = gameState.players.find(v => v.playerId !== gameState.activePlayerId);
   if (!attacker || !defender) {

@@ -3,7 +3,7 @@ import type {GameStateX, TurnChange} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import {process} from '../../../../../animation/process';
-import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
+import type {StateAnimationProps} from "./state-animation-props";
 
 /**
  * ターン変更のアニメーション
@@ -12,7 +12,7 @@ import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function turnChangeAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<TurnChange>): Animate {
+export function turnChangeAnimation(props: StateAnimationProps, gameState: GameStateX<TurnChange>): Animate {
   const turnChange: TurnChange = gameState.effect;
   const activeTDPlayer = props.view.td.players.find(v => v.playerId === gameState.activePlayerId);
   const activeHUDPlayer = props.view.hud.players.find(v => v.playerId === gameState.activePlayerId);

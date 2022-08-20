@@ -8,7 +8,7 @@ import {canBurstButtonPush} from "../../can-burst-button-push";
 import {canPilotButtonPush} from "../../can-pilot-button-push";
 import {getEnableMaxBattery} from "../../get-enable-max-battery";
 import {getInitialBattery} from "../../get-initial-battery";
-import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
+import type {StateAnimationProps} from "./state-animation-props";
 
 /**
  * コマンド入力フェイズのアニメーション
@@ -17,7 +17,7 @@ import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function inputCommandAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<InputCommand>): Animate {
+export function inputCommandAnimation(props: StateAnimationProps, gameState: GameStateX<InputCommand>): Animate {
   const player = gameState.players.find(v => v.playerId === props.playerId);
   const playerCommand = gameState.effect.players.find(v => v.playerId === props.playerId);
   const playerHUD = props.view.hud.players.find(v => v.playerId === props.playerId);

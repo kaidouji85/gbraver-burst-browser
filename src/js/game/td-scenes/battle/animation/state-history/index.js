@@ -22,7 +22,7 @@ import {burstAnimation} from "./burst";
 import {gameEndAnimation} from "./game-end";
 import {inputCommandAnimation} from "./input-command";
 import {pilotSkillAnimation} from "./pilot-skill";
-import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
+import type {StateAnimationProps} from "./state-animation-props";
 import {reflectAnimation} from "./reflect";
 import {rightItselfAnimation} from "./right-itself";
 import {startGameAnimation} from "./start-game";
@@ -42,7 +42,7 @@ const parallelPlayEffects = ['TurnChange', 'RightItself', 'UpdateRemainingTurn',
  * @param gameStateHistory 変換対象のゲームステートヒストリー
  * @return アニメーション
  */
-export function stateHistoryAnimation(props: ReferableBattleSceneProps, gameStateHistory: GameState[]): Animate {
+export function stateHistoryAnimation(props: StateAnimationProps, gameStateHistory: GameState[]): Animate {
   return gameStateHistory
     .map((gameState, index) => {
       const next = gameStateHistory[index + 1];
@@ -62,7 +62,7 @@ export function stateHistoryAnimation(props: ReferableBattleSceneProps, gameStat
  * @param gameState 変換対象のゲームステート
  * @return アニメーション
  */
-export function stateAnimation(props: ReferableBattleSceneProps, gameState: GameState): Animate {
+export function stateAnimation(props: StateAnimationProps, gameState: GameState): Animate {
   if (gameState.effect.name === 'StartGame') {
     const effect: StartGame = gameState.effect;
     const state = ((gameState: any): GameStateX<typeof effect>);

@@ -7,7 +7,7 @@ import type {HUDPilotObjects} from "../../../view/hud/pilot-objects/hud-pilot-ob
 import {HUDPlayer} from "../../../view/hud/player";
 import {TDGameObjects} from "../../../view/td/game-objects";
 import type {TDPlayer} from "../../../view/td/player";
-import type {ReferableBattleSceneProps} from "../referable-battle-scene-props";
+import type {StateAnimationProps} from "../state-animation-props";
 
 /**
  * パイロットスキル アニメーション パラメータ
@@ -39,7 +39,7 @@ export type PilotSkillAnimationParam = PilotSkillAnimationParamX<PilotSkill, HUD
  * @param gameState ゲームステート
  * @return キャスト結果
  */
-export function castPilotSkillAnimationParam(props: ReferableBattleSceneProps, gameState: GameStateX<PilotSkillEffect>): ?PilotSkillAnimationParam {
+export function castPilotSkillAnimationParam(props: StateAnimationProps, gameState: GameStateX<PilotSkillEffect>): ?PilotSkillAnimationParam {
   const effect: PilotSkillEffect = gameState.effect;
   const invokerState = gameState.players.find(v => v.playerId === effect.invokerId);
   const invokerArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === effect.invokerId);

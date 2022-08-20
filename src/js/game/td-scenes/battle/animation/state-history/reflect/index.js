@@ -2,7 +2,7 @@
 import type {GameStateX, Reflect} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
-import type {ReferableBattleSceneProps} from "../referable-battle-scene-props";
+import type {StateAnimationProps} from "../state-animation-props";
 import type {ReflectAnimationParam} from "./animation-param";
 import {deathLightning, lightning} from "./lightning";
 
@@ -13,7 +13,7 @@ import {deathLightning, lightning} from "./lightning";
  * @param gameState ゲームステート
  * @return アニメーション
  */
-export function reflectAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<Reflect>): Animate {
+export function reflectAnimation(props: StateAnimationProps, gameState: GameStateX<Reflect>): Animate {
   const effect: Reflect = gameState.effect;
   const stateOfDamaged = gameState.players.find(v => v.playerId === effect.damagedPlayer);
   const tdArmdozerOfDamaged = props.view.td.armdozerObjects.find(v => v.playerId === effect.damagedPlayer);

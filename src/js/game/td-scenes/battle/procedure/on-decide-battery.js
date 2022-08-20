@@ -4,7 +4,6 @@ import {delay} from "../../../../animation/delay";
 import type {DecideBattery} from "../actions/decide-battery";
 import type {BattleSceneProps} from "../battle-scene-props";
 import {animationPlayer} from "../animation-player";
-import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
 import {progressGame} from "./progress-game";
 
 /**
@@ -19,7 +18,7 @@ export async function onDecideBattery(props: $ReadOnly<BattleSceneProps>, action
     action.event.stopPropagation();
     const batteryCommand = {type: 'BATTERY_COMMAND', battery: action.battery};
     const {isCommandCanceled} = props.customBattleEvent 
-      ? await props.customBattleEvent.onBatteryCommandSelected({...toCustomBattleEventProps(props), battery: batteryCommand})
+      ? await props.customBattleEvent.onBatteryCommandSelected({...props, battery: batteryCommand})
       : {isCommandCanceled: false};
     if (isCommandCanceled) {
       return;

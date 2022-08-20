@@ -3,7 +3,7 @@ import type {GameStateX, StartGame} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import {process} from '../../../../../animation/process'
-import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
+import type {StateAnimationProps} from "./state-animation-props";
 
 /**
  * ゲーム開始時のアニメーション
@@ -12,7 +12,7 @@ import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function startGameAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<StartGame>): Animate {
+export function startGameAnimation(props: StateAnimationProps, gameState: GameStateX<StartGame>): Animate {
   const activeHUDPlayer = props.view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   if (!activeHUDPlayer) {
     return empty();
