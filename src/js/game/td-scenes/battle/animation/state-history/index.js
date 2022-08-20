@@ -85,7 +85,7 @@ export function stateAnimation(props: ReferableBattleSceneProps, gameState: Game
   if (gameState.effect.name === 'Battle') {
     const effect: Battle = gameState.effect;
     const state = ((gameState: any): GameStateX<typeof effect>);
-    return battleAnimation(props.view, props.state, state);
+    return battleAnimation(props, state);
   }
 
   if (gameState.effect.name === 'TurnChange') {
