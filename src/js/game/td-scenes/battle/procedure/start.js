@@ -2,7 +2,6 @@
 import type {GameState} from "gbraver-burst-core";
 import {play} from "../../../../bgm/bgm-operators";
 import {stateAnimation, stateHistoryAnimation,} from "../animation/state-history";
-import {toReferableBattleSceneProps} from "../animation/state-history/referable-battle-scene-props";
 import type {BattleSceneProps} from "../battle-scene-props";
 import {playAnimation} from "../play-animation";
 import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
@@ -19,14 +18,13 @@ export async function start(props: $ReadOnly<BattleSceneProps>): Promise<void> {
     if (props.initialState.length < 1) {
       return;
     }
-    const referableProps = toReferableBattleSceneProps(props);
     const removeLastState = props.initialState.slice(0, -1);
-    await playAnimation(stateHistoryAnimation(referableProps, removeLastState), props);
+    await playAnimation(stateHistoryAnimation(props, removeLastState), props);
     const eventProps = {...toCustomBattleEventProps(props), update: props.initialState};
     props.customBattleEvent && await props.customBattleEvent.beforeLastState(eventProps);
     const lastState: GameState = props.initialState[props.initialState.length - 1];
     await Promise.all([
-      playAnimation(stateAnimation(referableProps, lastState), props),
+      playAnimation(stateAnimation(props, lastState), props),
       props.customBattleEvent ? props.customBattleEvent.onLastState(eventProps) : Promise.resolve()
     ]);
     props.customBattleEvent && await props.customBattleEvent.afterLastState(eventProps);

@@ -28,27 +28,27 @@ export type BattleEnd = {
 };
 
 /** 戦闘シーンプロパティ */
-export interface BattleSceneProps {
+export type BattleSceneProps = {
   /** 戦闘シーンステート */
-  state: BattleSceneState;
+  state: BattleSceneState,
   /** ゲームの初期ステートヒストリー */
-  initialState: GameState[];
+  initialState: GameState[],
   /** バトル終了ストリーム */
-  endBattle: StreamSource<BattleEnd>;
+  endBattle: StreamSource<BattleEnd>,
   /** バトル進行オブジェクト */
-  battleProgress: BattleProgress;
+  battleProgress: BattleProgress,
   /** カスタムバトルイベント */
-  customBattleEvent: ?CustomBattleEvent;
+  customBattleEvent: ?CustomBattleEvent,
   /** 排他制御オブジェクト */
-  exclusive: Exclusive;
+  exclusive: Exclusive,
   /** 戦闘シーンビュー */
-  view: BattleSceneView;
+  view: BattleSceneView,
   /** ウインドウ押下ストリーム */
-  pushWindow: Stream<PushWindow>;
+  pushWindow: Stream<PushWindow>,
   /** 戦闘シーン効果音 */
-  sounds: BattleSceneSounds;
+  sounds: BattleSceneSounds,
   /** BGM管理オブジェクト */
-  bgm: BGMManager;
+  bgm: BGMManager,
 }
 
 /** 戦闘シーンで利用するレンダラ */
