@@ -1,10 +1,8 @@
 // @flow
-
 import type {BurstEffect, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
-import {BattleSceneView} from "../../../view";
+import type {ReferableBattleSceneProps} from "../referable-battle-scene-props";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {castLightningDozerBurst, lightningDozerBurst} from "./lightning-dozer";
@@ -15,13 +13,12 @@ import {castWingDozerBurst, wingDozerBurst} from "./wingdozer";
 /**
  * バーストアニメーション
  *
- * @param view ビュー
- * @param sceneState シーン情報
+ * @param props 戦闘シーンプロパティ
  * @param gameState ゲーム状態
  * @return バーストアニメーション
  */
-export function burstAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<BurstEffect>): Animate {
-  const param = toBurstAnimationParam(view, sceneState, gameState);
+export function burstAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<BurstEffect>): Animate {
+  const param = toBurstAnimationParam(props, gameState);
   if (!param) {
     return empty();
   }
