@@ -79,7 +79,7 @@ export function stateAnimation(props: ReferableBattleSceneProps, gameState: Game
   if (gameState.effect.name === 'BatteryDeclaration') {
     const effect: BatteryDeclaration = gameState.effect;
     const state = ((gameState: any): GameStateX<typeof effect>);
-    return batteryDeclarationAnimation(props.view, props.sounds, props.state, state);
+    return batteryDeclarationAnimation(props, state);
   }
 
   if (gameState.effect.name === 'Battle') {
