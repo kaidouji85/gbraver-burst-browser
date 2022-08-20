@@ -11,11 +11,11 @@ import {BattleSceneView} from "./view";
  */
 export type CustomBattleEventProps = {
   /** 戦闘シーンビュー */
-  view: BattleSceneView,
+  +view: BattleSceneView,
   /** window押下ストリーム */
-  pushWindow: Stream<PushWindow>,
+  +pushWindow: Stream<PushWindow>,
   /** 戦闘シーン効果音 */
-  sounds: BattleSceneSounds,
+  +sounds: BattleSceneSounds,
 };
 
 /** 最終ステート系イベントのプロパティ */
