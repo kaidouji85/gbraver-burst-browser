@@ -1,5 +1,4 @@
 // @flow
-
 import type {
   BatteryDeclaration,
   Battle,
@@ -115,7 +114,7 @@ export function stateAnimation(props: ReferableBattleSceneProps, gameState: Game
   if (gameState.effect.name === 'GameEnd') {
     const effect: GameEnd = gameState.effect;
     const state = ((gameState: any): GameStateX<typeof effect>);
-    return gameEndAnimation(props.view, props.state, state);
+    return gameEndAnimation(props, state);
   }
 
   if (gameState.effect.name === 'RightItself') {

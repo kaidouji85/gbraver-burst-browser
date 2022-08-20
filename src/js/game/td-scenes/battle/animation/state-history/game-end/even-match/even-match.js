@@ -2,19 +2,20 @@
 import {all} from "../../../../../../../animation/all";
 import {Animate} from "../../../../../../../animation/animate";
 import {delay} from "../../../../../../../animation/delay";
-import {BattleSceneView} from "../../../../view";
+import type {ReferableBattleSceneProps} from "../../referable-battle-scene-props";
 
 /**
  * 引き分けアニメーション
  *
+ * @param props 戦闘シーンプロパティ
  * @return アニメーション
  */
-export function evenMatchAnimation(view: BattleSceneView): Animate {
+export function evenMatchAnimation(props: ReferableBattleSceneProps): Animate {
   return all(
-    view.hud.gameObjects.drawIndicator.slideIn()
+    props.view.hud.gameObjects.drawIndicator.slideIn()
       .chain(delay(500))
-      .chain(view.hud.gameObjects.drawIndicator.moveToEdge()),
+      .chain(props.view.hud.gameObjects.drawIndicator.moveToEdge()),
     delay(700)
-      .chain(...view.hud.players.map(v => v.resultIndicator.hidden()))
+      .chain(...props.view.hud.players.map(v => v.resultIndicator.hidden()))
   );
 }
