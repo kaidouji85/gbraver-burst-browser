@@ -28,7 +28,7 @@ const repeatProgressWhenUnselectable = async (props: $ReadOnly<BattleSceneProps>
     const eventProps = {...toCustomBattleEventProps(props), update: updateState};
     props.customBattleEvent && await props.customBattleEvent.beforeLastState(eventProps);
     await Promise.all([
-      playAnimation(stateAnimation(lastState, props.view, props.sounds, props.state), props),
+      playAnimation(stateAnimation(props, lastState), props),
       props.customBattleEvent ? props.customBattleEvent.onLastState(eventProps) : Promise.resolve(),
     ]);
     props.customBattleEvent && await props.customBattleEvent.afterLastState(eventProps);

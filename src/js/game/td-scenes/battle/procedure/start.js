@@ -24,7 +24,7 @@ export async function start(props: $ReadOnly<BattleSceneProps>): Promise<void> {
     props.customBattleEvent && await props.customBattleEvent.beforeLastState(eventProps);
     const lastState: GameState = props.initialState[props.initialState.length - 1];
     await Promise.all([
-      playAnimation(stateAnimation(lastState, props.view, props.sounds, props.state), props),
+      playAnimation(stateAnimation(props, lastState), props),
       props.customBattleEvent ? props.customBattleEvent.onLastState(eventProps) : Promise.resolve()
     ]);
     props.customBattleEvent && await props.customBattleEvent.afterLastState(eventProps);
