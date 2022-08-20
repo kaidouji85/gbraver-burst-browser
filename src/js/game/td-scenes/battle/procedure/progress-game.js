@@ -35,7 +35,7 @@ const repeatProgressWhenUnselectable = async (props: $ReadOnly<BattleSceneProps>
     if (lastState.effect.name !== 'InputCommand') {
       return lastState;
     }
-    const playerCommand = lastState.effect.players.find(v => v.playerId === props.state.playerId);
+    const playerCommand = lastState.effect.players.find(v => v.playerId === props.playerId);
     if (!playerCommand || playerCommand.selectable) {
       return lastState;
     }
@@ -54,7 +54,7 @@ const repeatProgressWhenUnselectable = async (props: $ReadOnly<BattleSceneProps>
 const onGameEnd = async (props: $ReadOnly<BattleSceneProps>, gameEnd: GameEnd): Promise<void> => {
   await props.bgm.do(fadeOut)
   await props.bgm.do(stop);
-  props.endBattle.next({gameEnd, animationTimeScale: props.state.animationTimeScale});
+  props.endBattle.next({gameEnd, animationTimeScale: props.animationTimeScale});
 };
 
 /**

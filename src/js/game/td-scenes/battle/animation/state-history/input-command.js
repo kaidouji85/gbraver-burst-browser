@@ -18,11 +18,11 @@ import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
  * @return アニメーション
  */
 export function inputCommandAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<InputCommand>): Animate {
-  const player = gameState.players.find(v => v.playerId === props.state.playerId);
-  const playerCommand = gameState.effect.players.find(v => v.playerId === props.state.playerId);
-  const playerHUD = props.view.hud.players.find(v => v.playerId === props.state.playerId);
-  const enemy = gameState.players.find(v => v.playerId !== props.state.playerId);
-  const enemyHUD = props.view.hud.players.find(v => v.playerId !== props.state.playerId);
+  const player = gameState.players.find(v => v.playerId === props.playerId);
+  const playerCommand = gameState.effect.players.find(v => v.playerId === props.playerId);
+  const playerHUD = props.view.hud.players.find(v => v.playerId === props.playerId);
+  const enemy = gameState.players.find(v => v.playerId !== props.playerId);
+  const enemyHUD = props.view.hud.players.find(v => v.playerId !== props.playerId);
   if (!player || !playerCommand || !playerHUD || !enemy || !enemyHUD) {
     return empty();
   }
@@ -31,7 +31,7 @@ export function inputCommandAnimation(props: ReferableBattleSceneProps, gameStat
     return empty();
   }
 
-  const isPlayerTurn = props.state.playerId === gameState.activePlayerId;
+  const isPlayerTurn = props.playerId === gameState.activePlayerId;
   const enableMax = getEnableMaxBattery(playerCommand.command);
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
@@ -46,6 +46,6 @@ export function inputCommandAnimation(props: ReferableBattleSceneProps, gameStat
     props.view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
     props.view.hud.gameObjects.burstButton.open(canBurst),
     props.view.hud.gameObjects.pilotButton.open(canPilotSkill),
-    props.view.hud.gameObjects.timeScaleButton.open(props.state.animationTimeScale),
+    props.view.hud.gameObjects.timeScaleButton.open(props.animationTimeScale),
   );
 }

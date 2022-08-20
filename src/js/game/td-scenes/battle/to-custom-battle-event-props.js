@@ -9,5 +9,5 @@ import type {CustomBattleEventProps} from "./custom-battle-event";
  * @return カスタムバトルイベントプロパティ
  */
 export function toCustomBattleEventProps(origin: $ReadOnly<BattleSceneProps>): CustomBattleEventProps {
-  return {view: origin.view, pushWindow: origin.pushWindow, sounds: origin.sounds, sceneState: origin.state};
+  return {view: origin.view, pushWindow: origin.pushWindow, sounds: origin.sounds};
 }

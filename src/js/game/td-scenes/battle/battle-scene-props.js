@@ -1,5 +1,5 @@
 // @flow
-import type {GameEnd, GameState, Player} from "gbraver-burst-core";
+import type {GameEnd, GameState, Player, PlayerId} from "gbraver-burst-core";
 import type {BGMManager} from "../../../bgm/bgm-manager";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {GameLoop} from "../../../game-loop/game-loop";
@@ -15,8 +15,6 @@ import type {Resize} from "../../../window/resize";
 import type {BattleProgress} from "./battle-progress";
 import type {CustomBattleEvent} from "./custom-battle-event";
 import {BattleSceneSounds} from "./sounds/sounds";
-import type {BattleSceneState} from "./state/battle-scene-state";
-import {createInitialState} from "./state/initial-state";
 import {BattleSceneView} from "./view";
 
 /** バトル終了情報 */
@@ -29,8 +27,10 @@ export type BattleEnd = {
 
 /** 戦闘シーンプロパティ */
 export type BattleSceneProps = {
-  /** 戦闘シーンステート */
-  state: BattleSceneState,
+  /** 画面を開いているプレイヤーのID */
+  playerId: PlayerId,
+  /** アニメーションタイムスケール */
+  animationTimeScale: number,
   /** ゲームの初期ステートヒストリー */
   initialState: GameState[],
   /** バトル終了ストリーム */
@@ -92,10 +92,11 @@ export type BattleScenePropsCreatorParams = {
  */
 export function createBattleSceneProps(params: BattleScenePropsCreatorParams): BattleSceneProps {
   return {
+    playerId: params.player.playerId,
+    animationTimeScale: params.initialAnimationTimeScale,
     pushWindow: params.pushWindow, 
     exclusive: new Exclusive(), 
     initialState: params.initialState,
-    state: createInitialState(params.player.playerId, params.initialAnimationTimeScale),
     endBattle: createStreamSource(),
     battleProgress: params.battleProgress,
     customBattleEvent: params.customBattleEvent,
