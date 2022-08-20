@@ -126,7 +126,7 @@ export function stateAnimation(props: ReferableBattleSceneProps, gameState: Game
   if (gameState.effect.name === 'PilotSkillEffect') {
     const effect: PilotSkillEffect = gameState.effect;
     const state = ((gameState: any): GameStateX<typeof effect>);
-    return pilotSkillAnimation(props.view, props.state, state);
+    return pilotSkillAnimation(props, state);
   }
 
   return empty();
