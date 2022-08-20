@@ -7,9 +7,9 @@ import {
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
+  PostTutorialCompleteButtons,
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
-  PostTutorialCompleteButtons,
 } from "../dom-floaters/post-battle/post-battle-buttons";
 import type {EndBattle} from "../game-actions";
 import type {GameProps} from "../game-props";
@@ -18,8 +18,8 @@ import type {NPCBattle, PlayingNPCBattle} from "../in-progress/npc-battle";
 import type {Tutorial} from "../in-progress/tutorial";
 import type {NPCBattleResult} from "../npc-battle";
 import {updateNPCBattleState} from "../npc-battle";
+import type {TutorialResult} from "../tutorial";
 import {updateTutorialState} from "../tutorial";
-import type { TutorialResult } from "../tutorial";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する

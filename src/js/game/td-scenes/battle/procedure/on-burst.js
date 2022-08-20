@@ -3,7 +3,7 @@ import {all} from "../../../../animation/all";
 import {delay} from "../../../../animation/delay";
 import type {DoBurst} from "../actions/do-burst";
 import type {BattleSceneProps} from "../battle-scene-props";
-import {playAnimation} from "../play-animation";
+import {animationPlayer} from "../play-animation";
 import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
 import {progressGame} from "./progress-game";
 
@@ -24,7 +24,7 @@ export async function onBurst(props: $ReadOnly<BattleSceneProps>, action: DoBurs
     if (isCommandCanceled) {
       return;
     }
-    await playAnimation(
+    await animationPlayer(props).play(
       all(
         props.view.hud.gameObjects.burstButton.decide(),
         props.view.hud.gameObjects.batterySelector.close(),
@@ -33,7 +33,7 @@ export async function onBurst(props: $ReadOnly<BattleSceneProps>, action: DoBurs
       )
         .chain(delay(500))
         .chain(props.view.hud.gameObjects.burstButton.close())
-    , props);
+    );
     await progressGame(props, burstCommand);
   });
 }
