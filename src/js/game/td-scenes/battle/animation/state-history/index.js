@@ -36,10 +36,10 @@ import {updateRemainingTurnAnimation} from "./update-remaining-turn";
 const parallelPlayEffects = ['TurnChange', 'RightItself', 'UpdateRemainingTurn',];
 
 /**
- * 状態に応じた戦闘シーンのアニメーションを再生する
+ * ゲームステート履歴を戦闘アニメーションに変換する
  *
  * @param props 戦闘シーンプロパティ
- * @param gameStateHistory 再生するゲームの状態
+ * @param gameStateHistory 変換対象のゲームステートヒストリー
  * @return アニメーション
  */
 export function stateHistoryAnimation(props: ReferableBattleSceneProps, gameStateHistory: GameState[]): Animate {
@@ -56,7 +56,7 @@ export function stateHistoryAnimation(props: ReferableBattleSceneProps, gameStat
 }
 
 /**
- * ゲームステートに応じたアニメーションに変換する
+ * ゲームステートを戦闘アニメーションに変換する
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState 変換対象のゲームステート

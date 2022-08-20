@@ -18,12 +18,12 @@ import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
 const repeatProgressWhenUnselectable = async (props: $ReadOnly<BattleSceneProps>, command: Command): Promise<?GameState> => {
   let lastCommand: Command = command;
   const maxProgressCount = 100;
-  const referableProps = toReferableBattleSceneProps(props);
   for (let i=0; i<maxProgressCount; i++) {
     const updateState = await props.battleProgress.progress(lastCommand);
     if (updateState.length < 1) {
       return;
     }
+    const referableProps = toReferableBattleSceneProps(props);
     const removeLastState = updateState.slice(0 , -1);
     await playAnimation(stateHistoryAnimation(referableProps, removeLastState), props);
     const lastState: GameState = updateState[updateState.length - 1];

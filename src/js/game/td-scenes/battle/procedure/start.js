@@ -14,12 +14,12 @@ import {toCustomBattleEventProps} from "../to-custom-battle-event-props";
  * @return 処理が完了したら発火するPromise
  */
 export async function start(props: $ReadOnly<BattleSceneProps>): Promise<void> {
-  const referableProps = toReferableBattleSceneProps(props);
   return props.exclusive.execute(async (): Promise<void> => {
     props.bgm.do(play(props.sounds.bgm));
     if (props.initialState.length < 1) {
       return;
     }
+    const referableProps = toReferableBattleSceneProps(props);
     const removeLastState = props.initialState.slice(0, -1);
     await playAnimation(stateHistoryAnimation(referableProps, removeLastState), props);
     const eventProps = {...toCustomBattleEventProps(props), update: props.initialState};
