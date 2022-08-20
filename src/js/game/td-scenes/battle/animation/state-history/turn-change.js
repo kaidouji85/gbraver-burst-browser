@@ -1,26 +1,21 @@
 // @flow
-
 import type {GameStateX, TurnChange} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import {process} from '../../../../../animation/process';
-import {BattleSceneSounds} from "../../sounds/sounds";
-import type {BattleSceneState} from "../../state/battle-scene-state";
-import {BattleSceneView} from "../../view";
+import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
 
 /**
  * ターン変更のアニメーション
  *
- * @param view ビュー
- * @param sceneState シーン状態
- * @param sounds 戦闘シーン効果音
+ * @param props 戦闘シーンプロパティ
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSceneState, sounds: BattleSceneSounds, gameState: GameStateX<TurnChange>): Animate {
+export function turnChangeAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<TurnChange>): Animate {
   const turnChange: TurnChange = gameState.effect;
-  const activeTDPlayer = view.td.players.find(v => v.playerId === gameState.activePlayerId);
-  const activeHUDPlayer = view.hud.players.find(v => v.playerId === gameState.activePlayerId);
+  const activeTDPlayer = props.view.td.players.find(v => v.playerId === gameState.activePlayerId);
+  const activeHUDPlayer = props.view.hud.players.find(v => v.playerId === gameState.activePlayerId);
   const activeStatus = gameState.players.find(v => v.playerId === gameState.activePlayerId);
   if (!activeTDPlayer || !activeHUDPlayer || !activeStatus) {
     return empty();
@@ -42,7 +37,7 @@ export function turnChangeAnimation(view: BattleSceneView, sceneState: BattleSce
     delay(800),
     turnStart,
     process(() => {
-      sounds.batteryRecover.play();
+      props.sounds.batteryRecover.play();
     })
   );
   return isTurnChange ? forTurnChange : forContinuousAttack;
