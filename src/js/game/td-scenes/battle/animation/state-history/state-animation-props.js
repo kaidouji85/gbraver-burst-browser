@@ -8,7 +8,7 @@ import {BattleSceneView} from "../../view";
  * ステートアニメーションで利用する戦闘シーンプロパティ
  * 本データ型はステートアニメーション内でのみ利用する想定である
  */
-export type ReferableBattleSceneProps = {
+export type StateAnimationProps = {
   /** 画面を開いているプレイヤーのID */
   +playerId: PlayerId,
   /** アニメーションタイムスケール */

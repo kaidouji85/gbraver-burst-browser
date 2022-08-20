@@ -7,7 +7,7 @@ import type {HUDGameObjects} from "../../../view/hud/game-objects";
 import {HUDPlayer} from "../../../view/hud/player";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import type {TDPlayer} from "../../../view/td/player";
-import type {ReferableBattleSceneProps} from "../referable-battle-scene-props";
+import type {StateAnimationProps} from "../state-animation-props";
 
 /**
  * 戦闘アニメーション共通で使うパラメータ
@@ -43,7 +43,7 @@ export type BattleAnimationParam = BattleAnimationParamX<ArmDozerSprite, BattleR
  * @param gameState ゲームステート
  * @return 戦闘アニメパラメータ
  */
-export function toBattleAnimationParam(props: ReferableBattleSceneProps, gameState: GameStateX<Battle>): ?BattleAnimationParam {
+export function toBattleAnimationParam(props: StateAnimationProps, gameState: GameStateX<Battle>): ?BattleAnimationParam {
   const battle: Battle = gameState.effect;
   const attackerState = gameState.players.find(v => v.playerId === battle.attacker);
   const attackerTD = props.view.td.players.find(v => v.playerId === battle.attacker);

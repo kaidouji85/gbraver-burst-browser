@@ -8,7 +8,7 @@ import {HUDPlayer} from "../../../view/hud/player";
 import type {TDArmdozerObjects} from "../../../view/td/armdozer-objects/armdozer-objects";
 import type {TDGameObjects} from "../../../view/td/game-objects";
 import type {TDPlayer} from "../../../view/td/player";
-import type {ReferableBattleSceneProps} from "../referable-battle-scene-props";
+import type {StateAnimationProps} from "../state-animation-props";
 
 /**
  * バーストアニメーションのパラメータ
@@ -41,7 +41,7 @@ export type BurstAnimationParam = BurstAnimationParamX<TDArmdozerObjects, HUDArm
  * @param gameState ゲームステート
  * @return バーストアニメーションパラメータ
  */
-export function toBurstAnimationParam(props: ReferableBattleSceneProps, gameState: GameStateX<BurstEffect>): ?BurstAnimationParam {
+export function toBurstAnimationParam(props: StateAnimationProps, gameState: GameStateX<BurstEffect>): ?BurstAnimationParam {
   const effect: BurstEffect = gameState.effect;
   const burstPlayerState = gameState.players.find(v => v.playerId === effect.burstPlayer);
   const burstPlayerTD = props.view.td.players.find(v => v.playerId === effect.burstPlayer);

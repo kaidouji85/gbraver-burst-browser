@@ -2,7 +2,7 @@
 import type {GameStateX, PilotSkillEffect} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
-import type {ReferableBattleSceneProps} from "../referable-battle-scene-props";
+import type {StateAnimationProps} from "../state-animation-props";
 import type {PilotSkillAnimationParam} from "./animation-param";
 import {castPilotSkillAnimationParam} from "./animation-param";
 import {castGaiAnimationParam, gaiAnimation} from "./gai";
@@ -17,7 +17,7 @@ import {castTsubasaAnimationParam, tsubasaAnimation} from "./tsubasa";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function pilotSkillAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<PilotSkillEffect>): Animate {
+export function pilotSkillAnimation(props: StateAnimationProps, gameState: GameStateX<PilotSkillEffect>): Animate {
   const param = castPilotSkillAnimationParam(props, gameState);
   if (!param) {
     return empty();

@@ -2,7 +2,7 @@
 import {all} from "../../../../../../../animation/all";
 import {Animate} from "../../../../../../../animation/animate";
 import {delay} from "../../../../../../../animation/delay";
-import type {ReferableBattleSceneProps} from "../../referable-battle-scene-props";
+import type {StateAnimationProps} from "../../state-animation-props";
 
 /**
  * 引き分けアニメーション
@@ -10,7 +10,7 @@ import type {ReferableBattleSceneProps} from "../../referable-battle-scene-props
  * @param props 戦闘シーンプロパティ
  * @return アニメーション
  */
-export function evenMatchAnimation(props: ReferableBattleSceneProps): Animate {
+export function evenMatchAnimation(props: StateAnimationProps): Animate {
   return all(
     props.view.hud.gameObjects.drawIndicator.slideIn()
       .chain(delay(500))

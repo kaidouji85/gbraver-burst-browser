@@ -3,7 +3,7 @@ import type {BattleResult, GameStateX, RightItself} from "gbraver-burst-core";
 import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import type {ArmDozerSprite} from "../../../../../game-object/armdozer/armdozer-sprite";
-import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
+import type {StateAnimationProps} from "./state-animation-props";
 
 /**
  * 防御側 体勢整え
@@ -12,7 +12,7 @@ import type {ReferableBattleSceneProps} from "./referable-battle-scene-props";
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function rightItselfAnimation(props: ReferableBattleSceneProps, gameState: GameStateX<RightItself>): Animate {
+export function rightItselfAnimation(props: StateAnimationProps, gameState: GameStateX<RightItself>): Animate {
   if (gameState.effect.name !== 'RightItself') {
     return empty();
   }
