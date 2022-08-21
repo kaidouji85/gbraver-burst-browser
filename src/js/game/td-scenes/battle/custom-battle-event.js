@@ -1,5 +1,5 @@
 // @flow
-import type {BatteryCommand, BurstCommand, GameState, PilotSkillCommand} from "gbraver-burst-core";
+import type {BatteryCommand, BurstCommand, GameState, PilotSkillCommand, PlayerId} from "gbraver-burst-core";
 import type {Stream} from "../../../stream/stream";
 import type {PushWindow} from "../../../window/push-window";
 import {BattleSceneSounds} from "./sounds/sounds";
@@ -10,6 +10,8 @@ import {BattleSceneView} from "./view";
  * BattleScenePropsからカスタムバトルイベントで利用可能なプロパティを抜粋した
  */
 export type CustomBattleEventProps = {
+  /** 戦闘画面を開いているプレイヤーのID */
+  +playerId: PlayerId,
   /** 戦闘シーンビュー */
   +view: BattleSceneView,
   /** window押下ストリーム */

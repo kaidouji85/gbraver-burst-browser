@@ -1,5 +1,5 @@
 // @flow
-import type {BattleResult, GameState, PlayerId} from "gbraver-burst-core";
+import type {BattleResult, GameState} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -590,8 +590,6 @@ type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All'
 
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
-  /** プレイヤーID */
-  playerId: PlayerId;
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
   /** 選択可能なコマンド */
@@ -599,12 +597,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /**
    * コンストラクタ
-   *
-   * @param playerId プレイヤーID
    */
-  constructor(playerId: PlayerId) {
+  constructor() {
     super();
-    this.playerId = playerId;
     this.stateHistory = [];
     this.selectableCommands = 'BatteryOnly';
   }
@@ -620,7 +615,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     const turn = turnCount(this.stateHistory);
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
-      ? {isAttacker: foundLastBattle.effect.attacker === this.playerId, result: foundLastBattle.effect.result}
+      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId, result: foundLastBattle.effect.result}
       : null;
     if (turn === 1) {
       await introduction(props);
@@ -647,7 +642,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   async onLastState(props: LastState): Promise<void> {
     const foundLastState = props.update[props.update.length - 1];
     const lastState = foundLastState
-      ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === this.playerId}
+      ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === props.playerId}
       : null;
     if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && lastState.isMyTurn) {
       await focusInAttackBatterySelector(props);
@@ -660,7 +655,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   async afterLastState(props: LastState): Promise<void> {
     const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
     const gameEnd = (foundGameEnd && foundGameEnd.effect.name === 'GameEnd')
-      ? {isVictory: foundGameEnd.effect.result.type === 'GameOver' && foundGameEnd.effect.result.winner === this.playerId}
+      ? {isVictory: foundGameEnd.effect.result.type === 'GameOver' && foundGameEnd.effect.result.winner === props.playerId}
       : null;
     if (gameEnd && gameEnd.isVictory) {
       await victory(props);
@@ -684,8 +679,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
     const foundLastState = this.stateHistory[this.stateHistory.length - 1];
     const lastState = foundLastState
-      ? {isEnemyTurn: foundLastState.activePlayerId !== this.playerId,
-        player: foundLastState.players.find(v => v.playerId === this.playerId)}
+      ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
+        player: foundLastState.players.find(v => v.playerId === props.playerId)}
       : null;
     const lastPlayer = (lastState && lastState.player)
       ? {isZeroBattery: lastState.player.armdozer.battery === 0,
@@ -754,9 +749,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 /**
  * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
  *
- * @param playerId プレイヤーID
  * @return 生成したカスタムバトルイベント
  */
-export function createBatterySystemTutorialEvent(playerId: PlayerId): CustomBattleEvent {
-  return new BatterySystemTutorialEvent(playerId);
+export function createBatterySystemTutorialEvent(): CustomBattleEvent {
+  return new BatterySystemTutorialEvent();
 }

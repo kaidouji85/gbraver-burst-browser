@@ -22,10 +22,10 @@ import {burstAnimation} from "./burst";
 import {gameEndAnimation} from "./game-end";
 import {inputCommandAnimation} from "./input-command";
 import {pilotSkillAnimation} from "./pilot-skill";
-import type {StateAnimationProps} from "./state-animation-props";
 import {reflectAnimation} from "./reflect";
 import {rightItselfAnimation} from "./right-itself";
 import {startGameAnimation} from "./start-game";
+import type {StateAnimationProps} from "./state-animation-props";
 import {turnChangeAnimation} from "./turn-change";
 import {updateRemainingTurnAnimation} from "./update-remaining-turn";
 

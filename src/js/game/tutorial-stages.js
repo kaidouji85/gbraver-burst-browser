@@ -15,7 +15,7 @@ const playerId = playerUuid();
 const batterySystemTutorial =   {
   player: {playerId, armdozer: shinBraver, pilot: shinya},
   npc: batterySystemTutorialNPC(),
-  event: () => createBatterySystemTutorialEvent(playerId)
+  event: () => createBatterySystemTutorialEvent()
 };
 
 /** 0防御チュートリアル */
