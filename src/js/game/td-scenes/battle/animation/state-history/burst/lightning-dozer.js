@@ -11,7 +11,7 @@ import type {BurstAnimationParamX} from "./animation-param";
 /**
  * ライトニングドーザ バーストアニメーションパラメータ
  *
- * @template BURST バーストÏ
+ * @template BURST バースト
  */
 export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozerTD, LightningDozerHUD, BURST>;
 
