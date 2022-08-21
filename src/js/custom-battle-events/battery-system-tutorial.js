@@ -71,7 +71,7 @@ const introduction = async (props: CustomBattleEventProps) => {
   props.view.dom.rightMessageWindow.lighten();
   await scrollRightMessages(props, [
     ['シンヤ', '「了解ッス'],
-    ['それじゃ遠慮なくいきますよ ツバサ先輩」'],
+    ['それじゃ遠慮なく行くッスよ ツバサ先輩」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
@@ -84,7 +84,7 @@ const introduction = async (props: CustomBattleEventProps) => {
 const playerAttackHit = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「手応えあり」']
+    ['シンヤ', '「手応えありッス」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -124,7 +124,7 @@ const playerAttackGuarded = async (props: CustomBattleEventProps) => {
 const playerAttackMiss = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「クッ 避けられた」']
+    ['シンヤ', '「クッ 避けられたッス」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -194,7 +194,7 @@ const batteryRuleDescription = async (props: CustomBattleEventProps) => {
 const enemyAttackMiss = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「よし 回避成功」']
+    ['シンヤ', '「よし 回避成功ッス」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -221,7 +221,7 @@ const enemyAttackGuarded = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
-    ['ツバサ', '「ほう 私の攻撃をガードするとはな'],
+    ['ツバサ', '「私の攻撃をガードするとはな'],
     ['私と君が同じバッテリーを出したので攻撃をガード ダメージが半減されたな」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -235,7 +235,7 @@ const enemyAttackGuarded = async (props: CustomBattleEventProps) => {
 const enemyAttackHit = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「すごいダメージだ'],
+    ['シンヤ', '「すごいダメージ ッス'],
     ['ツバサ先輩 少しは加減してくださいッスよ']
   ]);
   props.view.dom.rightMessageWindow.darken();
@@ -456,7 +456,7 @@ const victory = async (props: CustomBattleEventProps) => {
 const lose = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「クソッ あともう少しで勝てたのに」']
+    ['シンヤ', '「あともう少しで勝てたのに」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
