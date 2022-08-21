@@ -1,11 +1,15 @@
 // @flow
 import {Animate} from "../../../../../../../animation/animate";
 import {empty} from "../../../../../../../animation/delay";
+import {LightningDozerTD} from "../../../../view/td/armdozer-objects/lightning-dozer";
+import {NeoLandozerTD} from "../../../../view/td/armdozer-objects/neo-landozer";
+import {ShinBraverTD} from "../../../../view/td/armdozer-objects/shin-braver";
+import {WingDozerTD} from "../../../../view/td/armdozer-objects/wing-dozer";
 import type {GameOverParam} from "./game-over-param";
-import {castLightningDozerGameOver, lightningDozerWin} from "./lightning-dozer";
-import {castNeoLandozerGameOver, neoLandozerWin} from "./neo-landozer";
-import {castShinBraverGameOver, shinBraverWin} from "./shin-braver";
-import {castWingDozerGameOver, wingDozerWin} from "./wing-dozer";
+import {lightningDozerWin} from "./lightning-dozer";
+import {neoLandozerWin} from "./neo-landozer";
+import {shinBraverWin} from "./shin-braver";
+import {wingDozerWin} from "./wing-dozer";
 
 /**
  * ゲームオーバアニメーション
@@ -14,24 +18,24 @@ import {castWingDozerGameOver, wingDozerWin} from "./wing-dozer";
  * @return アニメーション
  */
 export function gameOverAnimation(param: GameOverParam): Animate {
-  const shinBraver = castShinBraverGameOver(param);
-  if (shinBraver) {
-    return shinBraverWin(shinBraver);
+  if (param.winnerTdArmdozer instanceof ShinBraverTD) {
+    const winnerTdArmdozer: ShinBraverTD = param.winnerTdArmdozer;
+    return shinBraverWin({...param, winnerTdArmdozer});
   }
 
-  const neoLandozer = castNeoLandozerGameOver(param);
-  if (neoLandozer) {
-    return neoLandozerWin(neoLandozer);
+  if (param.winnerTdArmdozer instanceof NeoLandozerTD) {
+    const winnerTdArmdozer: NeoLandozerTD = param.winnerTdArmdozer;
+    return neoLandozerWin({...param, winnerTdArmdozer});
   }
 
-  const lightningDozer = castLightningDozerGameOver(param);
-  if (lightningDozer) {
-    return lightningDozerWin(lightningDozer);
+  if (param.winnerTdArmdozer instanceof LightningDozerTD) {
+    const winnerTdArmdozer: LightningDozerTD = param.winnerTdArmdozer;
+    return lightningDozerWin({...param, winnerTdArmdozer});
   }
 
-  const wingDozer = castWingDozerGameOver(param);
-  if (wingDozer) {
-    return wingDozerWin(wingDozer);
+  if (param.winnerTdArmdozer instanceof WingDozerTD) {
+    const winnerTdArmdozer: WingDozerTD = param.winnerTdArmdozer;
+    return wingDozerWin({...param, winnerTdArmdozer});
   }
 
   return empty();
