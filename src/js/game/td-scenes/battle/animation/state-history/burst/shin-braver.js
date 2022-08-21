@@ -6,30 +6,13 @@ import {delay, empty} from "../../../../../../animation/delay";
 import {ShinBraverHUD} from "../../../view/hud/armdozer-objects/shin-braver";
 import {ShinBraverTD} from "../../../view/td/armdozer-objects/shin-braver";
 import {dolly, toInitial, track} from "../../td-camera";
-import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
+import type {BurstAnimationParamX} from "./animation-param";
 
 /**
  * シンブレイバー バーストアニメーション パラメータ
  * @template BURST バースト種別
  */
 export type ShinBraverBurst<BURST> = BurstAnimationParamX<ShinBraverTD, ShinBraverHUD, BURST>;
-
-/**
- * シンブレイバーバーストアニメーションパラメータにキャストする
- * キャストできない場合はnullを返す
- *
- * @param param キャスト元
- * @return キャスト結果
- */
-export function castShinBraverBurst(param: BurstAnimationParam): ?ShinBraverBurst<Burst> {
-  if ((param.burstArmdozerTD instanceof ShinBraverTD) && (param.burstArmdozerHUD instanceof ShinBraverHUD)) {
-    const tdArmdozer: ShinBraverTD = param.burstArmdozerTD;
-    const hudArmdozer: ShinBraverHUD = param.burstArmdozerHUD;
-    return ((param: any): BurstAnimationParamX<typeof tdArmdozer, typeof hudArmdozer, typeof param.burst>);
-  }
-
-  return null;
-}
 
 /**
  * シンブレイバーのバーストアニメーション
@@ -39,9 +22,8 @@ export function castShinBraverBurst(param: BurstAnimationParam): ?ShinBraverBurs
  */
 export function shinBraverBurst(param: ShinBraverBurst<Burst>): Animate {
   if (param.burst.type === 'RecoverBattery') {
-    const castBurst: RecoverBattery = param.burst;
-    const castParam = ((param: any): ShinBraverBurst<typeof castBurst>);
-    return recoverBattery(castParam);
+    const burst: RecoverBattery = param.burst;
+    return recoverBattery({...param, burst});
   }
 
   return empty();
