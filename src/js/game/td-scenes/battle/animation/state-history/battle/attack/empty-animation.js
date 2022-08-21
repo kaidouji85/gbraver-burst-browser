@@ -15,21 +15,18 @@ import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-par
  */
 export function emptyAttackAnimation(param: BattleAnimationParam): Animate {
   if (param.result.name === 'NormalHit') {
-    const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): BattleAnimationParamX<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
-    return viewDamage(castParam);
+    const result = (param.result: NormalHit);
+    return viewDamage({...param, result});
   }
 
   if (param.result.name === 'CriticalHit') {
-    const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): BattleAnimationParamX<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
-    return viewDamage(castParam);
+    const result = (param.result: CriticalHit);
+    return viewDamage({...param, result});
   }
 
   if (param.result.name === 'Guard') {
-    const castResult = (param.result: Guard);
-    const castParam = ((param: any): BattleAnimationParamX<ArmDozerSprite, ViewDamageResult | (typeof castResult)>);
-    return viewDamage(castParam);
+    const result = (param.result: Guard);
+    return viewDamage({...param, result});
   }
 
   return empty();

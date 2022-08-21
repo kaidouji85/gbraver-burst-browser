@@ -33,9 +33,8 @@ export function shinBraverAttack(param: ShinBraverBattle<BattleResult>): Animate
   }
 
   if (param.isDeath && param.result.name === 'CriticalHit') {
-    const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): ShinBraverBattle<DownResult | typeof castResult>);
-    return down(castParam);
+    const result = (param.result: CriticalHit);
+    return down({...param, result});
   }
 
   if (param.result.name === 'CriticalHit') {
