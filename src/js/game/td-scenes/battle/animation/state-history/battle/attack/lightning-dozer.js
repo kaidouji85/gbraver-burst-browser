@@ -6,7 +6,7 @@ import {delay, empty} from "../../../../../../../animation/delay";
 import {LightningDozer} from "../../../../../../../game-object/armdozer/lightning-dozer/lightning-dozer";
 import {TDCamera} from "../../../../../../../game-object/camera/td";
 import {dolly, toInitial, track} from "../../../td-camera";
-import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
+import type {BattleAnimationParamX} from "../animation-param";
 
 /**
  * ライトニングドーザ 戦闘アニメーション パラメータ
@@ -16,22 +16,6 @@ import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-par
 export type LightningDozerBattle<RESULT> = BattleAnimationParamX<LightningDozer, RESULT>
 
 /**
- * ライトニングドーザ戦闘アニメーションパラメータにキャストする
- * キャストできない場合はnullを返す
- *
- * @param param キャスト元
- * @return キャスト結果
- */
-export function castLightningDozerBattle(param: BattleAnimationParam): ?LightningDozerBattle<BattleResult> {
-  if (param.attackerSprite instanceof LightningDozer) {
-    const sprite: LightningDozer = param.attackerSprite;
-    return ((param: any): BattleAnimationParamX<typeof sprite, typeof param.result>);
-  }
-
-  return null;
-}
-
-/**
  * ライトニングドーザ 戦闘アニメーション
  *
  * @param param パラメーター
@@ -39,51 +23,43 @@ export function castLightningDozerBattle(param: BattleAnimationParam): ?Lightnin
  */
 export function lightningDozerAttack(param: LightningDozerBattle<BattleResult>): Animate {
   if (param.isDeath && param.result.name === 'NormalHit') {
-    const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): LightningDozerBattle<DownResult | typeof castResult>);
-    return down(castParam);
+    const result = (param.result: NormalHit);
+    return down({...param, result});
   }
 
   if (param.isDeath && param.result.name === 'CriticalHit') {
-    const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): LightningDozerBattle<DownResult | typeof castResult>);
-    return down(castParam);
+    const result = (param.result: CriticalHit);
+    return down({...param, result});
   }
 
   if (param.isDeath && param.result.name === 'Guard') {
-    const castResult = (param.result: Guard);
-    const castParam = ((param: any): LightningDozerBattle<DownResult | typeof castResult>);
-    return down(castParam);
+    const result = (param.result: Guard);
+    return down({...param, result});
   }
 
   if (param.result.name === 'NormalHit') {
-    const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): LightningDozerBattle<AttackResult | typeof castResult>);
-    return attack(castParam);
+    const result = (param.result: NormalHit);
+    return attack({...param, result});
   }
 
   if (param.result.name === 'CriticalHit') {
-    const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): LightningDozerBattle<AttackResult | typeof castResult>);
-    return attack(castParam);
+    const result = (param.result: CriticalHit);
+    return attack({...param, result});
   }
 
   if (param.result.name === 'Guard') {
-    const castResult = (param.result: Guard);
-    const castParam = ((param: any): LightningDozerBattle<Guard | typeof castResult>);
-    return guard(castParam);
+    const result = (param.result: Guard);
+    return guard({...param, result});
   }
 
   if (param.result.name === 'Miss') {
-    const castResult = (param.result: Miss);
-    const castParam = ((param: any): LightningDozerBattle<Miss | typeof castResult>);
-    return miss(castParam);
+    const result = (param.result: Miss);
+    return miss({...param, result});
   }
 
   if (param.result.name === 'Feint') {
-    const castResult = (param.result: Feint);
-    const castParam = ((param: any): LightningDozerBattle<Feint | typeof castResult>);
-    return feint(castParam);
+    const result = (param.result: Feint);
+    return feint({...param, result});
   }
 
   return empty();
