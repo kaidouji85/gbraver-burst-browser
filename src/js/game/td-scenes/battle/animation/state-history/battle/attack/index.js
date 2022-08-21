@@ -1,10 +1,11 @@
 // @flow
 import {Animate} from "../../../../../../../animation/animate";
+import {NeoLandozer} from "../../../../../../../game-object/armdozer/neo-landozer/neo-landozer";
 import {ShinBraver} from "../../../../../../../game-object/armdozer/shin-braver/shin-braver";
 import type {BattleAnimationParam} from "../animation-param";
 import {emptyAttackAnimation} from "./empty-animation";
 import {castLightningDozerBattle, lightningDozerAttack} from "./lightning-dozer";
-import {castNeoLandozerBattle, neoLandozerAttack} from "./neo-landozer";
+import {neoLandozerAttack} from "./neo-landozer";
 import {shinBraverAttack} from "./shin-braver";
 import {castWingDozerBattle, wingDozerAttack} from "./wing-dozer";
 
@@ -20,9 +21,9 @@ export function attackAnimation(param: BattleAnimationParam): Animate {
     return shinBraverAttack({...param, attackerSprite});
   }
 
-  const neoLandozer = castNeoLandozerBattle(param);
-  if (neoLandozer) {
-    return neoLandozerAttack(neoLandozer);
+  if (param.attackerSprite instanceof NeoLandozer) {
+    const attackerSprite: NeoLandozer = param.attackerSprite;
+    return neoLandozerAttack({...param, attackerSprite});
   }
 
   const lightningDozer = castLightningDozerBattle(param);
