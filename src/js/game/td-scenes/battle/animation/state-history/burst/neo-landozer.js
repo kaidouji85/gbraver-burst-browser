@@ -6,7 +6,7 @@ import {delay, empty} from "../../../../../../animation/delay";
 import {NeoLandozerHUD} from "../../../view/hud/armdozer-objects/neo-landozer";
 import {NeoLandozerTD} from "../../../view/td/armdozer-objects/neo-landozer";
 import {dolly, toInitial, track} from "../../td-camera";
-import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
+import type {BurstAnimationParamX} from "./animation-param";
 
 /**
  * ネオランドーザ バーストアニメーション パラメータ
@@ -16,23 +16,6 @@ import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param"
 type NeoLandozerBurst<BURST> = BurstAnimationParamX<NeoLandozerTD, NeoLandozerHUD, BURST>;
 
 /**
- * ネオランドーザ バーストアニメーション パラメータにキャストする
- * キャストできない場合はnullを返す
- *
- * @param param キャスト元
- * @return キャスト結果
- */
-export function castNeoLandozerBurst(param: BurstAnimationParam): ?NeoLandozerBurst<Burst> {
-  if ((param.burstArmdozerTD instanceof NeoLandozerTD) && (param.burstArmdozerHUD instanceof NeoLandozerHUD)) {
-    const armdozerTD = (param.burstArmdozerTD: NeoLandozerTD);
-    const armdozerHUD = (param.burstArmdozerHUD: NeoLandozerHUD);
-    return ((param: any): BurstAnimationParamX<typeof armdozerTD, typeof armdozerHUD, typeof param.burst>);
-  }
-
-  return null;
-}
-
-/**
  * ネオランドーザ バースト アニメーション
  *
  * @param param パラメータ
@@ -40,9 +23,8 @@ export function castNeoLandozerBurst(param: BurstAnimationParam): ?NeoLandozerBu
  */
 export function neoLandozerBurst(param: NeoLandozerBurst<Burst>): Animate {
   if (param.burst.type === 'BuffPower') {
-    const buffPower = (param.burst: BuffPower);
-    const castParam = ((param: any): NeoLandozerBurst<typeof buffPower>);
-    return neoLandozerBuffPower(castParam);
+    const burst: BuffPower = param.burst;
+    return neoLandozerBuffPower({...param, burst});
   }
   return empty();
 }
