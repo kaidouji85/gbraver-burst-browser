@@ -1,5 +1,5 @@
 // @flow
-import type {EvenMatch, GameEnd, GameEndX, GameOver, GameStateX} from "gbraver-burst-core";
+import type {GameEnd, GameEndX, GameOver, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
 import type {StateAnimationProps} from "../state-animation-props";
@@ -15,8 +15,7 @@ import {toGameOverParam} from "./game-over/game-over-param";
  * @return アニメーション
  */
 export function gameEndAnimation(props: StateAnimationProps, gameState: GameStateX<GameEnd>): Animate {
-  const evenMatch = castEvenMatch(gameState);
-  if (evenMatch) {
+  if (gameState.effect.result.type !== 'EvenMatch') {
     return evenMatchAnimation(props);
   }
 
@@ -27,22 +26,6 @@ export function gameEndAnimation(props: StateAnimationProps, gameState: GameStat
   }
   
   return empty();
-}
-
-/**
- * EvenMatchにキャストするヘルパー関数
- * キャストできない場合はnullを返す
- *
- * @param origin キャスト元
- * @return キャスト結果
- */
-function castEvenMatch(origin: GameStateX<GameEnd>): ?GameStateX<GameEndX<EvenMatch>> {
-  if (origin.effect.result.type !== 'EvenMatch') {
-    return null;
-  }
-
-  const evenMatch: EvenMatch = origin.effect.result;
-  return ((origin: any): GameStateX<GameEndX<typeof evenMatch>>);
 }
 
 /**
