@@ -1,11 +1,9 @@
 // @flow
 
 import type {Resources} from "../../resource";
-import {PlayInLandscape} from "./play-in-landscape";
+import {PlayInLandscape} from "./play-in-landscape/play-in-landscape";
 
-/**
- * 割り込みで表示されるシーンをあつめたもの
- */
+/** 割り込みで表示されるシーンをあつめたもの */
 export class InterruptScenes {
   #root: HTMLElement;
 
@@ -14,13 +12,6 @@ export class InterruptScenes {
    */
   constructor() {
     this.#root = document.createElement('div');
-  }
-
-  /**
-   * デストラクタ相当の処理
-   */
-  destructor() {
-    // NOP
   }
 
   /**
