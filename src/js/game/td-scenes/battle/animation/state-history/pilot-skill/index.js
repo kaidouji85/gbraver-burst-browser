@@ -5,13 +5,14 @@ import {empty} from "../../../../../../animation/delay";
 import {GaiHUD} from "../../../view/hud/pilot-objects/gai";
 import {RaitoHUD} from "../../../view/hud/pilot-objects/raito";
 import {ShinyaHUD} from "../../../view/hud/pilot-objects/shinya";
+import {TsubasaHUD} from "../../../view/hud/pilot-objects/tsubasa";
 import type {StateAnimationProps} from "../state-animation-props";
 import type {PilotSkillAnimationParam} from "./animation-param";
 import {castPilotSkillAnimationParam} from "./animation-param";
 import {gaiAnimation} from "./gai";
 import {raitoAnimation} from "./raito";
 import {shinyaAnimation} from "./shinya";
-import {castTsubasaAnimationParam, tsubasaAnimation} from "./tsubasa";
+import {tsubasaAnimation} from "./tsubasa";
 
 /**
  * パイロット効果 アニメーション
@@ -51,9 +52,9 @@ function cutIn(param: PilotSkillAnimationParam): Animate {
     return raitoAnimation({...param, pilot});
   }
 
-  const tsubasa = castTsubasaAnimationParam(param);
-  if (tsubasa) {
-    return tsubasaAnimation(tsubasa);
+  if (param.pilot instanceof TsubasaHUD) {
+    const pilot: TsubasaHUD = param.pilot;
+    return tsubasaAnimation({...param, pilot});
   }
 
   return empty();

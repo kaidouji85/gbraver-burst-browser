@@ -5,7 +5,7 @@ import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {TsubasaHUD} from "../../../view/hud/pilot-objects/tsubasa";
 import {dolly, toInitial, track} from "../../td-camera";
-import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
+import type {PilotSkillAnimationParamX} from "./animation-param";
 
 /**
  * パイロットスキル ツバサ アニメーションパラメータ
@@ -19,31 +19,14 @@ export type TsubasaAnimationParamX<SKILL: PilotSkill> = PilotSkillAnimationParam
 export type TsubasaAnimationParam = TsubasaAnimationParamX<PilotSkill>;
 
 /**
- * ツバサアニメーションパラメータにキャストする
- * キャストできない場合はnullを返す
- *
- * @param origin キャスト元
- * @return キャスト結果
- */
-export function castTsubasaAnimationParam(origin: PilotSkillAnimationParam): ?TsubasaAnimationParam {
-  if (origin.pilot instanceof TsubasaHUD) {
-    const tsubasa: TsubasaHUD = origin.pilot;
-    return ((origin: any): PilotSkillAnimationParamX<typeof origin.skill, typeof tsubasa>);
-  }
-
-  return null;
-}
-
-/**
  * ツバサ パイロットスキルアニメーション
  * @param param パラメータ
  * @return アニメーション
  */
 export function tsubasaAnimation(param: TsubasaAnimationParam): Animate {
   if (param.skill.type === 'BatteryEnchantmentSkill') {
-    const recoverBatterySKill: BatteryEnchantmentSkill = param.skill;
-    const castParam = ((param: any): TsubasaAnimationParamX<typeof recoverBatterySKill>);
-    return tsubasaBatteryEnchantment(castParam);
+    const skill: BatteryEnchantmentSkill = param.skill;
+    return tsubasaBatteryEnchantment({...param, skill});
   }
 
   return empty();
