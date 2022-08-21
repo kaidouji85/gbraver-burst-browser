@@ -11,7 +11,7 @@ import type {BurstAnimationParamX} from "./animation-param";
 /**
  * ライトニングドーザ バーストアニメーションパラメータ
  *
- * @template BURST バースト
+ * @template BURST バーストÏ
  */
 export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozerTD, LightningDozerHUD, BURST>;
 
@@ -23,9 +23,8 @@ export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozerTD, 
  */
 export function lightningDozerBurst(param: LightningDozerBurst<Burst>): Animate {
   if (param.burst.type === 'LightningBarrier') {
-    const castBurst: LightningBarrier = param.burst;
-    const castParam= ((param: any): LightningDozerBurst<typeof castBurst>);
-    return lightningBarrier(castParam);
+    const burst: LightningBarrier = param.burst;
+    return lightningBarrier({...param, burst});
   }
 
   return empty();
