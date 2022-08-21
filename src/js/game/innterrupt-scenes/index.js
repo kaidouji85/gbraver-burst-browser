@@ -1,5 +1,4 @@
 // @flow
-
 import type {Resources} from "../../resource";
 import {PlayInLandscape} from "./play-in-landscape/play-in-landscape";
 

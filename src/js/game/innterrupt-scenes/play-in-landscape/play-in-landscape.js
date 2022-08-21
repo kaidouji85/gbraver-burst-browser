@@ -19,9 +19,7 @@ function rootInnerHTML(resources: Resources) {
   `;
 }
 
-/**
- * ランドスケープ警告
- */
+/** ランドスケープ警告 */
 export class PlayInLandscape {
   #root: HTMLElement;
 
