@@ -1,6 +1,6 @@
 // @flow
 import {Illumination} from "../src/js/game-object/illumination/illumination";
-import ShoppingStreet from "../src/js/game-object/stage/shopping-street";
+import ShoppingStreet from "../src/js/game-object/stage/shopping-street/shopping-street";
 import {skyBox as createSkyBox} from "../src/js/game/td-scenes/battle/view/td/sky-box";
 import {stillImageStub} from "./stub/still-image-stub";
 import {TDGameObjectStub} from "./stub/td-game-object-stub";

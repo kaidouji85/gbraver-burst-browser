@@ -1,5 +1,5 @@
 // @flow
-import type {BattleSceneProps} from "../game/td-scenes/battle/custom-battle-event";
+import type {CustomBattleEventProps} from "../game/td-scenes/battle/custom-battle-event";
 import {first} from "../stream/operator";
 import type {Stream} from "../stream/stream";
 import type {PushWindow} from "../window/push-window";
@@ -25,9 +25,9 @@ export function waitUntilWindowPushWithStream(pushWindow: Stream<PushWindow>): P
  * 画面を押下するまで待機する
  * 本関数はカスタムバトルイベントで利用することを想定している
  *
- * @param props カスタムイベントで利用可能な戦闘シーンプロパティ
+ * @param props イベントプロパティ
  * @return 画面押下したら発火するPromise
  */
-export async function waitUntilWindowPush(props: BattleSceneProps): Promise<void> {
+export async function waitUntilWindowPush(props: CustomBattleEventProps): Promise<void> {
   await waitUntilWindowPushWithStream(props.pushWindow);
 }

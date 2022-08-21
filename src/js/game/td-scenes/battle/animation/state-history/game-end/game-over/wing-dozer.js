@@ -1,31 +1,9 @@
 // @flow
-
 import {all} from "../../../../../../../animation/all";
 import {Animate} from "../../../../../../../animation/animate";
 import {WingDozerTD} from "../../../../view/td/armdozer-objects/wing-dozer";
 import {dolly, track} from "../../../td-camera";
-import type {GameOverParam, GameOverParamX} from "./game-over-param";
-
-/**
- * ウィングドーザ ゲームオーバ
- */
-export type WingDozerGameOver = GameOverParamX<WingDozerTD>;
-
-/**
- * ウィングドーザ ゲームオーバにキャストする
- * キャストできない場合はnullを返す
- *
- * @param origin キャスト元
- * @return キャスト結果
- */
-export function castWingDozerGameOver(origin: GameOverParam): ?WingDozerGameOver {
-  if (origin.winnerTdArmdozer instanceof WingDozerTD) {
-    const td: WingDozerTD = origin.winnerTdArmdozer;
-    return ((origin: any): GameOverParamX<typeof td>);
-  }
-
-  return null;
-}
+import type {GameOverParamX} from "./game-over-param";
 
 /**
  * ウィングドーザ 勝利
@@ -33,7 +11,7 @@ export function castWingDozerGameOver(origin: GameOverParam): ?WingDozerGameOver
  * @param param パラメータ
  * @return アニメーション
  */
-export function wingDozerWin(param: WingDozerGameOver): Animate {
+export function wingDozerWin(param: GameOverParamX<WingDozerTD>): Animate {
   return all(
     param.winnerTdArmdozer.wingDozer.dash(),
     track(param.tdCamera, param.winnerTdArmdozer.wingDozer.getObject3D().position.x, 800),

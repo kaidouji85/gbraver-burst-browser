@@ -1,9 +1,8 @@
 // @flow
-import type {ArmDozerId, GameEndResult, PilotId, Player} from "gbraver-burst-core";
+import type {ArmDozerId, GameEndResult, PilotId, Player, PlayerId} from "gbraver-burst-core";
 import {ArmDozers, Pilots} from "gbraver-burst-core";
 import type {NPC} from "../npc/npc";
 import type {SoundId} from "../resource/sound";
-import {playerUuid} from "../uuid/player";
 
 /** NPCバトル ステージ */
 export type NPCBattleStage = {
@@ -29,31 +28,32 @@ export type NPCBattleState = {
    * stagesの配列indexに相当する
    */
   stageIndex: number,
-  /** ゲームクリアしたかのフラグ、trueでゲームクリア */
-  isGameClear: boolean
 }
 
 /**
- * NPCバトル用のプレイヤーを生成する
+ * NPCバトル開始直後のステートを生成する
  *
+ * @param playerId プレイヤーID
  * @param armdozerId プレイヤーが選択したアームドーザID
  * @param pilotId プレイヤーが選択したパイロットID
- * @return 生成したプレイヤー情報
+ * @param stages 全ステージ
+ * @return NPCバトルステート
  */
-export function createNPCBattlePlayer(armdozerId: ArmDozerId, pilotId: PilotId): Player {
+export function createNPCBattleState(playerId: PlayerId, armdozerId: ArmDozerId, pilotId: PilotId, stages: NPCBattleStage[]): NPCBattleState {
   const armdozer = ArmDozers.find(v => v.id === armdozerId) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === pilotId) ?? Pilots[0];
-  return {playerId: playerUuid(), armdozer, pilot};
+  const player = {playerId, armdozer, pilot};
+  return {player, stages: stages, stageIndex: 0};
 }
 
 /**
  * 現在のステージレベルを取得する
  *
- * @param origin NPCバトルステート
+ * @param state NPCバトルステート
  * @return ステージレベル
  */
-export function getStageLevel(origin: NPCBattleState): number {
-  return origin.stageIndex + 1;
+export function getStageLevel(state: NPCBattleState): number {
+  return state.stageIndex + 1;
 }
 
 /**
@@ -67,54 +67,50 @@ export function getCurrentStage(origin: NPCBattleState): ?NPCBattleStage {
   return origin.stages[origin.stageIndex] ?? null;
 }
 
+/** NPCバトル結果 */
+export type NPCBattleResult = 'StageClear' | 'StageMiss' | 'NPCBattleComplete';
+
 /**
- * ステージクリアしたか否かを判定する
+ * NPCバトル結果を求める
  *
- * @param state NPCバトルステート
- * @param gameEndResult ゲームエンド結果
- * @return 判定結果、trueでステージクリアである
+ * @param isStageClear ステージクリアしたか否かのフラグ、trueでステージクリア
+ * @param isLastStage ラストステージか否かのフラグ、trueでラストステージ
+ * @return 判定結果
  */
-export function isNPCBattleStageClear(state: NPCBattleState, gameEndResult: GameEndResult): boolean {
-  return gameEndResult.type === 'GameOver' && gameEndResult.winner === state.player.playerId;
+function getNPCBattleResult(isStageClear: boolean, isLastStage: boolean): NPCBattleResult {
+  if (isStageClear && isLastStage) {
+    return 'NPCBattleComplete';
+  } else if (isStageClear && !isLastStage) {
+    return 'StageClear';
+  }
+  return 'StageMiss';
+}
+
+/** NPCバトル更新結果 */
+export type UpdatedNPCBattleState = {
+  /** 更新されたステート */
+  state: NPCBattleState,
+  /** NPCバトル結果 */
+  result: NPCBattleResult
 }
 
 /**
- * ラストステージであるか否かを判定する
- *
- * @param state NPCバトルステート
- * @return 判定結果、trueでラストステージ
- */
-export function isLastStage(state: NPCBattleState): boolean {
-  return state.stages.length - 1 === state.stageIndex;
-}
-
-/**
- * NPCバトル開始直後のステートを生成する
- *
- * @param player プレイヤー
- * @param stages 全ステージ
- * @return NPCバトルステート
- */
-export function startNPCBattle(player: Player, stages: NPCBattleStage[]): NPCBattleState {
-  return {player, stages: stages, stageIndex: 0, isGameClear: false};
-}
-
-/**
- * 戦闘結果に応じてNPCバトルステートを更新する
+ * NPCバトルステートを更新する
  *
  * @param origin 更新前のステート
- * @param isStageClear ステージクリアしたかのフラグ、trueでステージクリアした
- * @return NPCバトルステート更新結果
+ * @param gameEndResult 戦闘結果
+ * @return NPCバトル更新結果
  */
-export function updateNPCBattle(origin: NPCBattleState, isStageClear: boolean): NPCBattleState {
-  if (!isStageClear) {
-    return origin;
+export function updateNPCBattleState(origin: NPCBattleState, gameEndResult: GameEndResult): ?UpdatedNPCBattleState {
+  const stage = getCurrentStage(origin);
+  if (!stage) {
+    return null;
   }
 
-  if (isLastStage(origin)) {
-    return {...origin, isGameClear: true};
-  }
-
-  const nextStageIndex = origin.stageIndex + 1;
-  return {...origin, stageIndex: nextStageIndex};
+  const isStageClear = gameEndResult.type === 'GameOver' && gameEndResult.winner === origin.player.playerId;
+  const isLastStage = origin.stageIndex === origin.stages.length - 1;
+  const result = getNPCBattleResult(isStageClear, isLastStage);
+  const nextStageIndex = result === 'StageClear' ? origin.stageIndex + 1 : origin.stageIndex;
+  const updatedState = {...origin, stageIndex: nextStageIndex};
+  return {state: updatedState, result};
 }

@@ -22,6 +22,6 @@ export async function startTitle(props: $ReadOnly<GameProps>): Promise<Title> {
   const isLogin = await props.api.isLogin();
   const account = isLogin ? await createLoggedInAccount() : {type: 'GuestAccount'};
   return props.domScenes.startTitle({resources: props.resources, bgm: props.bgm, account,
-    isApiServerEnable: props.isAPIServerEnable, isTutorialEnable: props.isTutorialEnable,
-    termsOfServiceURL: props.termsOfServiceURL, privacyPolicyURL: props.privacyPolicyURL, contactURL: props.contactURL});
+    isApiServerEnable: props.isAPIServerEnable, termsOfServiceURL: props.termsOfServiceURL,
+    privacyPolicyURL: props.privacyPolicyURL, contactURL: props.contactURL});
 }

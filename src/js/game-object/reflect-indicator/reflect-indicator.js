@@ -14,9 +14,9 @@ import type {ReflectIndicatorView} from "./view/reflect-indicator-view";
  * ダメージ反射
  */
 export class ReflectIndicator {
-  _model: ReflectIndocatorModel;
-  _view: ReflectIndicatorView;
-  _unsubscriber: Unsubscriber;
+  #model: ReflectIndocatorModel;
+  #view: ReflectIndicatorView;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -25,21 +25,21 @@ export class ReflectIndicator {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(view: ReflectIndicatorView, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._view = view;
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#model = createInitialValue();
+    this.#view = view;
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
-        this._onUpdate();
+        this.#onUpdate();
       } else if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -48,7 +48,7 @@ export class ReflectIndicator {
    * @return アニメーション
    */
   popUp(): Animate {
-    return popUp(this._model);
+    return popUp(this.#model);
   }
 
   /**
@@ -57,14 +57,14 @@ export class ReflectIndicator {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
    * アップデート時の処理
    */
-  _onUpdate(): void {
-    this._view.engage(this._model);
+  #onUpdate(): void {
+    this.#view.engage(this.#model);
   }
 
   /**
@@ -72,7 +72,7 @@ export class ReflectIndicator {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.lookAt(action.camera);
+  #onPreRender(action: PreRender): void {
+    this.#view.lookAt(action.camera);
   }
 }

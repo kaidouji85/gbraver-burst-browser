@@ -5,7 +5,7 @@ import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {GaiHUD} from "../../../view/hud/pilot-objects/gai";
 import {dolly, toInitial, track} from "../../td-camera";
-import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
+import type {PilotSkillAnimationParamX} from "./animation-param";
 
 /**
  * パイロットスキル ガイ アニメーションパラメータ
@@ -19,31 +19,14 @@ export type GaiAnimationParamX<SKILL: PilotSkill> = PilotSkillAnimationParamX<SK
 export type GaiAnimationParam = GaiAnimationParamX<PilotSkill>;
 
 /**
- * パイロットスキル ガイ アニメーションパラメータにキャストする
- * キャストできない場合はnullを返す
- *
- * @param origin キャスト元
- * @return キャスト結果
- */
-export function castGaiAnimationParam(origin: PilotSkillAnimationParam): ?GaiAnimationParam {
-  if (origin.pilot instanceof GaiHUD) {
-    const gai: GaiHUD = origin.pilot;
-    return ((origin: any): PilotSkillAnimationParamX<typeof origin.skill, typeof gai>);
-  }
-
-  return null;
-}
-
-/**
  * ガイ パイロットスキルアニメーション
  * @param param パラメータ
  * @return アニメーション
  */
 export function gaiAnimation(param: GaiAnimationParam): Animate {
   if (param.skill.type === 'BuffPowerSkill') {
-    const castedSkill: BuffPowerSkill = param.skill;
-    const castedParam = ((param: any): GaiAnimationParamX<typeof castedSkill>);
-    return gaiBuffPower(castedParam);
+    const skill: BuffPowerSkill = param.skill;
+    return gaiBuffPower({...param, skill});
   }
 
   return empty();

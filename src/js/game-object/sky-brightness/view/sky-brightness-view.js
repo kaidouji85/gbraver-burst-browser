@@ -8,7 +8,7 @@ export const SIZE = 5000;
 
 /** 空の明るさビュー */
 export class SkyBrightnessView {
-  _mesh: typeof THREE.Mesh;
+  #mesh: typeof THREE.Mesh;
 
   constructor() {
     const geometry = new THREE.BoxGeometry(SIZE, SIZE, SIZE);
@@ -17,13 +17,13 @@ export class SkyBrightnessView {
       side: THREE.BackSide,
       transparent: true,
     });
-    this._mesh = new THREE.Mesh(geometry, material);
+    this.#mesh = new THREE.Mesh(geometry, material);
   }
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._mesh.material.dispose();
-    this._mesh.geometry.dispose();
+    this.#mesh.material.dispose();
+    this.#mesh.geometry.dispose();
   }
 
   /**
@@ -32,7 +32,7 @@ export class SkyBrightnessView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._mesh;
+    return this.#mesh;
   }
 
   /**
@@ -42,6 +42,6 @@ export class SkyBrightnessView {
    */
   engage(model: SkyBrightnessModel): void {
     const opacity = 1 - model.brightness;
-    this._mesh.material.opacity = opacity;
+    this.#mesh.material.opacity = opacity;
   }
 }

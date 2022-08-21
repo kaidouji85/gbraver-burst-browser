@@ -1,31 +1,9 @@
 // @flow
-
 import {all} from "../../../../../../../animation/all";
 import {Animate} from "../../../../../../../animation/animate";
 import {NeoLandozerTD} from "../../../../view/td/armdozer-objects/neo-landozer";
 import {dolly, track} from "../../../td-camera";
-import type {GameOverParam, GameOverParamX} from "./game-over-param";
-
-/**
- * ネオランドーザ ゲームオーバ
- */
-export type NeoLandozerGameOver = GameOverParamX<NeoLandozerTD>;
-
-/**
- * ネオランドーザゲームオーバにキャストする
- * キャストできない場合はnullを返す
- *
- * @param origin キャスト元
- * @return キャスト結果
- */
-export function castNeoLandozerGameOver(origin: GameOverParam): ?NeoLandozerGameOver {
-  if (origin.winnerTdArmdozer instanceof NeoLandozerTD) {
-    const td: NeoLandozerTD = origin.winnerTdArmdozer;
-    return ((origin: any): GameOverParamX<typeof td>);
-  }
-
-  return null;
-}
+import type {GameOverParamX} from "./game-over-param";
 
 /**
  * ネオランドーザ 勝利
@@ -33,7 +11,7 @@ export function castNeoLandozerGameOver(origin: GameOverParam): ?NeoLandozerGame
  * @param param パラメータ
  * @return アニメーション
  */
-export function neoLandozerWin(param: NeoLandozerGameOver): Animate {
+export function neoLandozerWin(param: GameOverParamX<NeoLandozerTD>): Animate {
   return all(
     param.winnerTdArmdozer.neoLandozer.guts(),
     track(param.tdCamera, param.winnerTdArmdozer.neoLandozer.getObject3D().position.x, 800),

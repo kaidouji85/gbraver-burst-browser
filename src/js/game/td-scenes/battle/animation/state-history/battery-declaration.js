@@ -6,9 +6,8 @@ import {Animate} from "../../../../../animation/animate";
 import {delay, empty} from "../../../../../animation/delay";
 import {process} from '../../../../../animation/process';
 import {BattleSceneSounds} from "../../sounds/sounds";
-import type {BattleSceneState} from "../../state/battle-scene-state";
-import {BattleSceneView} from "../../view";
 import type {TDPlayer} from "../../view/td/player";
+import type {StateAnimationProps} from "./state-animation-props";
 
 /**
  * バッテリー宣言アニメーション
@@ -74,28 +73,26 @@ function declarationSoundWithCorrect(sounds: BattleSceneSounds): Animate {
 /**
  * バッテリー宣言アニメーション
  *
- * @param view ビュー
- * @param sounds 戦闘シーン効果音
- * @param sceneState シーンの状態
+ * @param props 戦闘シーンプロパティ
  * @param gameState ゲームの状態
  * @return アニメーション
  */
-export function batteryDeclarationAnimation(view: BattleSceneView, sounds: BattleSceneSounds, sceneState: BattleSceneState, gameState: GameStateX<BatteryDeclaration>): Animate {
+export function batteryDeclarationAnimation(props: StateAnimationProps, gameState: GameStateX<BatteryDeclaration>): Animate {
   const attacker = gameState.players.find(v => v.playerId === gameState.activePlayerId);
   const defender = gameState.players.find(v => v.playerId !== gameState.activePlayerId);
   if (!attacker || !defender) {
     return empty();
   }
 
-  const attackerTD = view.td.players.find(v => v.playerId === attacker.playerId);
-  const attackerHUD = view.hud.players.find(v => v.playerId === attacker.playerId);
-  const defenderTD = view.td.players.find(v => v.playerId === defender.playerId);
-  const defenderHUD = view.hud.players.find(v => v.playerId === defender.playerId);
+  const attackerTD = props.view.td.players.find(v => v.playerId === attacker.playerId);
+  const attackerHUD = props.view.hud.players.find(v => v.playerId === attacker.playerId);
+  const defenderTD = props.view.td.players.find(v => v.playerId === defender.playerId);
+  const defenderHUD = props.view.hud.players.find(v => v.playerId === defender.playerId);
   if (!attackerTD || !attackerHUD || !defenderTD || !defenderHUD) {
     return empty();
   }
 
-  const isAttacker = gameState.effect.attacker === sceneState.playerId;
+  const isAttacker = gameState.effect.attacker === props.playerId;
   const {attackerBattery, originalBatteryOfAttacker, defenderBattery, originalBatteryOfDefender} = gameState.effect;
   const attackerCorrect = attackerBattery - originalBatteryOfAttacker;
   const attackerDeclaration = attackerCorrect !== 0
@@ -106,12 +103,12 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
     ? declarationWithCorrect(defenderTD, originalBatteryOfDefender, defenderCorrect, defenderBattery)
     : declaration(defenderTD, defenderBattery);
   const sound = (attackerCorrect !== 0) || (defenderCorrect !== 0)
-    ? declarationSoundWithCorrect(sounds)
-    : declarationSound(sounds);
+    ? declarationSoundWithCorrect(props.sounds)
+    : declarationSound(props.sounds);
 
   return all(
     sound,
-    view.td.gameObjects.turnIndicator.turnChange(isAttacker),
+    props.view.td.gameObjects.turnIndicator.turnChange(isAttacker),
     attackerHUD.gauge.battery(attacker.armdozer.battery),
     attackerDeclaration,
     defenderHUD.gauge.battery(defender.armdozer.battery),
@@ -120,6 +117,6 @@ export function batteryDeclarationAnimation(view: BattleSceneView, sounds: Battl
     delay(0),
     attackerTD.batteryNumber.hidden(),
     defenderTD.batteryNumber.hidden(),
-    view.td.gameObjects.turnIndicator.invisible()
+    props.view.td.gameObjects.turnIndicator.invisible()
   );
 }

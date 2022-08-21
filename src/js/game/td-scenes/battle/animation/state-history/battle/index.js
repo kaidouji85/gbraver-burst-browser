@@ -1,23 +1,20 @@
 // @flow
-
 import type {Battle, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
-import {BattleSceneView} from "../../../view";
+import type {StateAnimationProps} from "../state-animation-props";
 import {toBattleAnimationParam} from "./animation-param";
 import {attackAnimation} from "./attack";
 
 /**
  * 戦闘アニメーション
  *
- * @param view ビュー
- * @param sceneState シーンステート
+ * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
  * @return アニメーション
  */
-export function battleAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<Battle>): Animate {
-  const param = toBattleAnimationParam(view, sceneState, gameState);
+export function battleAnimation(props: StateAnimationProps , gameState: GameStateX<Battle>): Animate {
+  const param = toBattleAnimationParam(props, gameState);
   if (!param) {
     return empty();
   }

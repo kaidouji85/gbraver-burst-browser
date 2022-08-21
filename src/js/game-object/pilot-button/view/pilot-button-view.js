@@ -17,13 +17,13 @@ import type {PilotIcon} from "./pilot-icon";
  * パイロットボタン ビュー
  */
 export class PilotButtonView {
-  _pushButton: StreamSource<Event>;
-  _group: typeof THREE.Group;
-  _button: SimpleImageMesh;
-  _label: SimpleImageMesh;
-  _pilotIcon: PilotIcon;
-  _buttonDisabled: SimpleImageMesh;
-  _overlap: ButtonOverlap;
+  #pushButton: StreamSource<Event>;
+  #group: typeof THREE.Group;
+  #button: SimpleImageMesh;
+  #label: SimpleImageMesh;
+  #pilotIcon: PilotIcon;
+  #buttonDisabled: SimpleImageMesh;
+  #overlap: ButtonOverlap;
 
   /**
    * コンストラクタ
@@ -33,51 +33,51 @@ export class PilotButtonView {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(resources: Resources, pilotIcon: PilotIcon, gameObjectAction: Stream<GameObjectAction>) {
-    this._pushButton = createStreamSource();
-    this._group = new THREE.Group();
+    this.#pushButton = createStreamSource();
+    this.#group = new THREE.Group();
 
     const buttonDisabled = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BIG_BUTTON_DISABLED)?.image ?? new Image();
-    this._buttonDisabled = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: buttonDisabled, imageWidth: 414});
-    this._buttonDisabled.getObject3D().position.z = 2;
-    this._group.add(this._buttonDisabled.getObject3D());
+    this.#buttonDisabled = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: buttonDisabled, imageWidth: 414});
+    this.#buttonDisabled.getObject3D().position.z = 2;
+    this.#group.add(this.#buttonDisabled.getObject3D());
 
     const pilotButton = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON)?.image ?? new Image();
-    this._button = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: pilotButton, imageWidth: 414});
-    this._group.add(this._button.getObject3D());
+    this.#button = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: pilotButton, imageWidth: 414});
+    this.#group.add(this.#button.getObject3D());
 
     const label = resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.PILOT_BUTTON_LABEL)?.image ?? new Image();
-    this._label = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: label, imageWidth: 328});
-    this._label.getObject3D().position.y = -100;
-    this._group.add(this._label.getObject3D());
+    this.#label = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: label, imageWidth: 328});
+    this.#label.getObject3D().position.y = -100;
+    this.#group.add(this.#label.getObject3D());
 
-    this._pilotIcon =pilotIcon;
-    this._pilotIcon.getObject3D().position.z = 1;
-    this._group.add(this._pilotIcon.getObject3D());
+    this.#pilotIcon =pilotIcon;
+    this.#pilotIcon.getObject3D().position.z = 1;
+    this.#group.add(this.#pilotIcon.getObject3D());
 
-    this._overlap = circleButtonOverlap({
+    this.#overlap = circleButtonOverlap({
       radius: 200,
       segments: 32,
       gameObjectAction: gameObjectAction,
       onButtonPush: event => {
-        this._pushButton.next(event);
+        this.#pushButton.next(event);
       }
     });
-    this._overlap.getObject3D().position.z = 1;
-    this._group.add(this._overlap.getObject3D());
+    this.#overlap.getObject3D().position.z = 1;
+    this.#group.add(this.#overlap.getObject3D());
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._button.destructor();
-    this._pilotIcon.destructor();
-    this._buttonDisabled.destructor();
-    this._label.destructor();
-    this._overlap.destructor();
+    this.#button.destructor();
+    this.#pilotIcon.destructor();
+    this.#buttonDisabled.destructor();
+    this.#label.destructor();
+    this.#overlap.destructor();
   }
 
   /**
@@ -87,27 +87,27 @@ export class PilotButtonView {
    * @param preRender プリレンダー情報
    */
   engage(model: PilotButtonModel, preRender: PreRender): void {
-    this._button.setOpacity(model.opacity);
+    this.#button.setOpacity(model.opacity);
 
     const labelOpacity = model.canPilot ? model.opacity : 0;
-    this._label.setOpacity(labelOpacity);
-    this._pilotIcon.setOpacity(labelOpacity);
+    this.#label.setOpacity(labelOpacity);
+    this.#pilotIcon.setOpacity(labelOpacity);
 
     const disabledOpacity = model.canPilot ? 0 : model.opacity;
-    this._buttonDisabled.setOpacity(disabledOpacity);
+    this.#buttonDisabled.setOpacity(disabledOpacity);
 
     const devicePerScale = HUDUIScale(preRender.rendererDOM, preRender.safeAreaInset);
     const frontScale = 0.3 * devicePerScale * model.scale
-    this._group.scale.set(frontScale, frontScale, 0.3);
+    this.#group.scale.set(frontScale, frontScale, 0.3);
     const paddingLeft = 65;
     const marginLeft = 10;
-    this._group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
+    this.#group.position.x = -preRender.rendererDOM.clientWidth / 2 + paddingLeft * devicePerScale
       + Math.max(marginLeft, preRender.safeAreaInset.left);
     const paddingBottom = 145;
     const marginBottom = 10;
-    this._group.position.y = -preRender.rendererDOM.clientHeight / 2 + paddingBottom * devicePerScale
+    this.#group.position.y = -preRender.rendererDOM.clientHeight / 2 + paddingBottom * devicePerScale
       + Math.max(marginBottom, preRender.safeAreaInset.bottom);
-    this._group.quaternion.copy(preRender.camera.quaternion);
+    this.#group.quaternion.copy(preRender.camera.quaternion);
   }
 
   /**
@@ -116,7 +116,7 @@ export class PilotButtonView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 
   /**
@@ -125,6 +125,6 @@ export class PilotButtonView {
    * @return 通知ストリーム
    */
   pushButtonNotifier(): Stream<Event> {
-    return this._pushButton;
+    return this.#pushButton;
   }
 }

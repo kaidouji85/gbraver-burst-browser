@@ -13,14 +13,14 @@ export const MESH_SIZE = 400;
 
 /** 敵ターンスタートビュー */
 export class EnemyTurnStartView implements TurnStartView {
-  _mesh: HorizontalAnimationMesh;
+  #mesh: HorizontalAnimationMesh;
 
   constructor(resources: Resources) {
     const enemyTurnResource = resources.textures.find(v => v.id === TEXTURE_IDS.ENEMY_TURN);
     const enemyTurn = enemyTurnResource
       ? enemyTurnResource.texture
       : new THREE.Texture();
-    this._mesh = new HorizontalAnimationMesh({
+    this.#mesh = new HorizontalAnimationMesh({
       texture: enemyTurn,
       maxAnimation: 1,
       width: MESH_SIZE,
@@ -30,7 +30,7 @@ export class EnemyTurnStartView implements TurnStartView {
 
   /** デストラクタ相当の処理 */
   destructor(): void {
-    this._mesh.destructor();
+    this.#mesh.destructor();
   }
 
   /**
@@ -39,7 +39,7 @@ export class EnemyTurnStartView implements TurnStartView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._mesh.getObject3D();
+    return this.#mesh.getObject3D();
   }
 
   /**
@@ -49,7 +49,7 @@ export class EnemyTurnStartView implements TurnStartView {
    * @param preRender プリレンダー
    */
   engage(model: TurnStartModel, preRender: PreRender): void {
-    const target = this._mesh.getObject3D();
+    const target = this.#mesh.getObject3D();
     const devicePerScale = HUDCutInScale(preRender.rendererDOM, preRender.safeAreaInset);
 
     target.position.x = -preRender.rendererDOM.clientWidth / 2
@@ -63,7 +63,7 @@ export class EnemyTurnStartView implements TurnStartView {
     target.scale.x = model.scale * devicePerScale;
     target.scale.y = model.scale * devicePerScale;
 
-    this._mesh.setOpacity(model.opacity);
-    this._mesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
+    this.#mesh.setOpacity(model.opacity);
+    this.#mesh.getObject3D().quaternion.copy(preRender.camera.quaternion);
   }
 }

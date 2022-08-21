@@ -6,7 +6,7 @@ import {delay, empty} from "../../../../../../animation/delay";
 import {LightningDozerHUD} from "../../../view/hud/armdozer-objects/lightning-dozer";
 import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
 import {dolly, toInitial, track} from "../../td-camera";
-import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
+import type {BurstAnimationParamX} from "./animation-param";
 
 /**
  * ライトニングドーザ バーストアニメーションパラメータ
@@ -16,23 +16,6 @@ import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param"
 export type LightningDozerBurst<BURST> = BurstAnimationParamX<LightningDozerTD, LightningDozerHUD, BURST>;
 
 /**
- * ライトニングドーザ バーストアニメーションパラメータにキャストする
- * キャストできない場合はnullを返す
- *
- * @param param キャスト元
- * @return キャスト結果
- */
-export function castLightningDozerBurst(param: BurstAnimationParam): ?LightningDozerBurst<Burst> {
-  if ((param.burstArmdozerTD instanceof LightningDozerTD) && (param.burstArmdozerHUD instanceof LightningDozerHUD)) {
-    const armdozerHUD: LightningDozerHUD = param.burstArmdozerHUD;
-    const armdozerTD: LightningDozerTD = param.burstArmdozerTD;
-    return ((param: any): BurstAnimationParamX<typeof armdozerTD, typeof armdozerHUD, typeof param.burst>);
-  }
-
-  return null;
-}
-
-/**
  * ライトニングドーザ バーストアニメーション
  *
  * @param param パラメータ
@@ -40,9 +23,8 @@ export function castLightningDozerBurst(param: BurstAnimationParam): ?LightningD
  */
 export function lightningDozerBurst(param: LightningDozerBurst<Burst>): Animate {
   if (param.burst.type === 'LightningBarrier') {
-    const castBurst: LightningBarrier = param.burst;
-    const castParam= ((param: any): LightningDozerBurst<typeof castBurst>);
-    return lightningBarrier(castParam);
+    const burst: LightningBarrier = param.burst;
+    return lightningBarrier({...param, burst});
   }
 
   return empty();

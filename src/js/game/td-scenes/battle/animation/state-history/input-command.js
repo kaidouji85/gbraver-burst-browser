@@ -4,24 +4,25 @@ import type {GameStateX, InputCommand} from "gbraver-burst-core";
 import {all} from "../../../../../animation/all";
 import {Animate} from "../../../../../animation/animate";
 import {empty} from "../../../../../animation/delay";
-import type {BattleSceneState} from "../../state/battle-scene-state";
-import {canBurstButtonPush, canPilotButtonPush, getEnableMax, getInitialBattery} from "../../ui-logic";
-import {BattleSceneView} from "../../view";
+import {canBurstButtonPush} from "../../can-burst-button-push";
+import {canPilotButtonPush} from "../../can-pilot-button-push";
+import {getEnableMaxBattery} from "../../get-enable-max-battery";
+import {getInitialBattery} from "../../get-initial-battery";
+import type {StateAnimationProps} from "./state-animation-props";
 
 /**
  * コマンド入力フェイズのアニメーション
  *
- * @param view 戦闘画面ビュー
- * @param sceneState 戦闘画面状態
+ * @param props 戦闘シーンビュー
  * @param gameState ゲーム状態
  * @return アニメーション
  */
-export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<InputCommand>): Animate {
-  const player = gameState.players.find(v => v.playerId === sceneState.playerId);
-  const playerCommand = gameState.effect.players.find(v => v.playerId === sceneState.playerId);
-  const playerHUD = view.hud.players.find(v => v.playerId === sceneState.playerId);
-  const enemy = gameState.players.find(v => v.playerId !== sceneState.playerId);
-  const enemyHUD = view.hud.players.find(v => v.playerId !== sceneState.playerId);
+export function inputCommandAnimation(props: StateAnimationProps, gameState: GameStateX<InputCommand>): Animate {
+  const player = gameState.players.find(v => v.playerId === props.playerId);
+  const playerCommand = gameState.effect.players.find(v => v.playerId === props.playerId);
+  const playerHUD = props.view.hud.players.find(v => v.playerId === props.playerId);
+  const enemy = gameState.players.find(v => v.playerId !== props.playerId);
+  const enemyHUD = props.view.hud.players.find(v => v.playerId !== props.playerId);
   if (!player || !playerCommand || !playerHUD || !enemy || !enemyHUD) {
     return empty();
   }
@@ -30,8 +31,8 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     return empty();
   }
 
-  const isPlayerTurn = sceneState.playerId === gameState.activePlayerId;
-  const enableMax = getEnableMax(playerCommand.command);
+  const isPlayerTurn = props.playerId === gameState.activePlayerId;
+  const enableMax = getEnableMaxBattery(playerCommand.command);
   const initialValue = getInitialBattery(enableMax);
   const okButtonLabel = isPlayerTurn ? 'Attack' : 'Defense';
   const canBurst = canBurstButtonPush(playerCommand.command);
@@ -41,10 +42,10 @@ export function inputCommandAnimation(view: BattleSceneView, sceneState: BattleS
     playerHUD.gauge.battery(player.armdozer.battery),
     enemyHUD.gauge.hp(enemy.armdozer.hp),
     enemyHUD.gauge.battery(enemy.armdozer.battery),
-    view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
-    view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
-    view.hud.gameObjects.burstButton.open(canBurst),
-    view.hud.gameObjects.pilotButton.open(canPilotSkill),
-    view.hud.gameObjects.timeScaleButton.open(sceneState.animationTimeScale),
+    props.view.td.gameObjects.turnIndicator.turnChange(isPlayerTurn),
+    props.view.hud.gameObjects.batterySelector.open(initialValue, enableMax, okButtonLabel),
+    props.view.hud.gameObjects.burstButton.open(canBurst),
+    props.view.hud.gameObjects.pilotButton.open(canPilotSkill),
+    props.view.hud.gameObjects.timeScaleButton.open(props.animationTimeScale),
   );
 }

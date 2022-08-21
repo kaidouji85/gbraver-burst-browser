@@ -18,11 +18,11 @@ import type {PilotIcon} from "./view/pilot-icon";
 
 /** パイロットボタン */
 export class PilotButton {
-  _model: PilotButtonModel;
-  _sounds: PilotButtonSounds;
-  _view: PilotButtonView;
-  _pushButton: Stream<Event>;
-  _unsubscriber: Unsubscriber;
+  #model: PilotButtonModel;
+  #sounds: PilotButtonSounds;
+  #view: PilotButtonView;
+  #pushButton: Stream<Event>;
+  #unsubscriber: Unsubscriber;
 
   /**
    * コンストラクタ
@@ -32,15 +32,15 @@ export class PilotButton {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(resources: Resources, pilotIcon: PilotIcon, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._sounds = new PilotButtonSounds(resources);
-    this._view = new PilotButtonView(resources, pilotIcon, gameObjectAction);
+    this.#model = createInitialValue();
+    this.#sounds = new PilotButtonSounds(resources);
+    this.#view = new PilotButtonView(resources, pilotIcon, gameObjectAction);
 
-    this._pushButton = this._view.pushButtonNotifier()
-      .chain(filter(() => !this._model.disabled && this._model.canPilot));
-    this._unsubscriber = gameObjectAction.subscribe(action => {
+    this.#pushButton = this.#view.pushButtonNotifier()
+      .chain(filter(() => !this.#model.disabled && this.#model.canPilot));
+    this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'PreRender') {
-        this._onPreRender(action);
+        this.#onPreRender(action);
       }
     });
   }
@@ -49,8 +49,8 @@ export class PilotButton {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscriber.unsubscribe();
+    this.#view.destructor();
+    this.#unsubscriber.unsubscribe();
   }
 
   /**
@@ -59,7 +59,7 @@ export class PilotButton {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -69,7 +69,7 @@ export class PilotButton {
    * @return アニメーション
    */
   open(canPilot: boolean): Animate {
-    return open(this._model, canPilot);
+    return open(this.#model, canPilot);
   }
 
   /**
@@ -78,7 +78,7 @@ export class PilotButton {
    * @return アニメーション
    */
   decide(): Animate {
-    return decide(this._model, this._sounds);
+    return decide(this.#model, this.#sounds);
   }
 
   /**
@@ -87,7 +87,7 @@ export class PilotButton {
    * @return アニメーション
    */
   close(): Animate {
-    return close(this._model);
+    return close(this.#model);
   }
 
   /**
@@ -96,7 +96,7 @@ export class PilotButton {
    * @return 通知ストリーム
    */
   pushButtonNotifier(): Stream<Event> {
-    return this._pushButton;
+    return this.#pushButton;
   }
 
   /**
@@ -104,7 +104,7 @@ export class PilotButton {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.engage(this._model, action);
+  #onPreRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 }

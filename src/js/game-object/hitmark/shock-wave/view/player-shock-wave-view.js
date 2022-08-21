@@ -12,31 +12,31 @@ import type {ShockWaveView} from "./shock-wave-view";
  * プレイヤーの衝撃波ビュー
  */
 export class PlayerShockWaveView implements ShockWaveView {
-  _group: typeof THREE.Group;
-  _lines: ShockWaveLineView[];
-  _ring: ShockWaveRingView;
+  #group: typeof THREE.Group;
+  #lines: ShockWaveLineView[];
+  #ring: ShockWaveRingView;
 
   constructor(resources: Resources, initialModel: ShockWaveModel) {
     const maxLines = initialModel.lines.length;
-    this._group = new THREE.Group();
+    this.#group = new THREE.Group();
 
-    this._lines = R.times(() => new ShockWaveLineView(resources), maxLines);
-    this._lines.forEach(v => {
-      this._group.add(v.getObject3D());
+    this.#lines = R.times(() => new ShockWaveLineView(resources), maxLines);
+    this.#lines.forEach(v => {
+      this.#group.add(v.getObject3D());
     });
 
-    this._ring = new ShockWaveRingView(resources);
-    this._group.add(this._ring.getObject3D());
+    this.#ring = new ShockWaveRingView(resources);
+    this.#group.add(this.#ring.getObject3D());
   }
 
   /**
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._lines.forEach(v => {
+    this.#lines.forEach(v => {
       v.destructor();
     });
-    this._ring.destructor();
+    this.#ring.destructor();
   }
 
   /**
@@ -45,20 +45,20 @@ export class PlayerShockWaveView implements ShockWaveView {
    * @param model モデル
    */
   engage(model: ShockWaveModel): void {
-    this._group.position.set(
+    this.#group.position.set(
       model.position.x,
       model.position.y,
       model.position.z
     );
-    this._group.scale.set(1,1,1);
+    this.#group.scale.set(1,1,1);
 
-    this._ring.engage(model.ring);
+    this.#ring.engage(model.ring);
 
-    if (model.lines.length !== this._lines.length) {
+    if (model.lines.length !== this.#lines.length) {
       return;
     }
     model.lines.forEach((lineModel: ShockWaveLineModel, i: number) => {
-      const lineView: ShockWaveLineView = this._lines[i];
+      const lineView: ShockWaveLineView = this.#lines[i];
       lineView.engage(lineModel);
     });
   }
@@ -69,7 +69,7 @@ export class PlayerShockWaveView implements ShockWaveView {
    * @param camera カメラ
    */
   lookAt(camera: typeof THREE.Camera): void {
-    this._group.quaternion.copy(camera.quaternion);
+    this.#group.quaternion.copy(camera.quaternion);
   }
 
   /**
@@ -78,6 +78,6 @@ export class PlayerShockWaveView implements ShockWaveView {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._group;
+    return this.#group;
   }
 }

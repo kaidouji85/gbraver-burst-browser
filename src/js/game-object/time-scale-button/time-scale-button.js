@@ -20,12 +20,12 @@ import {TimeScaleButtonView} from "./view/time-scale-button-view";
 
 /** アニメーションタイムスケールボタン */
 export class TimeScaleButton {
-  _model: TimeScaleButtonModel;
-  _view: TimeScaleButtonView;
-  _sounds: TimeScaleButtonSounds;
-  _toggleTween: typeof TWEEN.Group;
-  _toggle: StreamSource<number>;
-  _unsubscribers: Unsubscriber[];
+  #model: TimeScaleButtonModel;
+  #view: TimeScaleButtonView;
+  #sounds: TimeScaleButtonSounds;
+  #toggleTween: typeof TWEEN.Group;
+  #toggle: StreamSource<number>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -34,21 +34,21 @@ export class TimeScaleButton {
    * @param gameObjectAction ゲームオブジェクトアクション
    */
   constructor(resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
-    this._model = createInitialValue();
-    this._view = new TimeScaleButtonView(resources, gameObjectAction);
-    this._sounds = createTimeScaleButtonSounds(resources);
-    this._toggleTween = new TWEEN.Group();
-    this._toggle = createStreamSource();
-    this._unsubscribers = [
+    this.#model = createInitialValue();
+    this.#view = new TimeScaleButtonView(resources, gameObjectAction);
+    this.#sounds = createTimeScaleButtonSounds(resources);
+    this.#toggleTween = new TWEEN.Group();
+    this.#toggle = createStreamSource();
+    this.#unsubscribers = [
       gameObjectAction.subscribe(action => {
         if (action.type === 'Update') {
-          this._onUpdate(action);
+          this.#onUpdate(action);
         } else if (action.type === 'PreRender') {
-          this._onPreRender(action);
+          this.#onPreRender(action);
         }
       }),
-      this._view.pushButtonNotifier().subscribe(() => {
-        this._onButtonPush();
+      this.#view.pushButtonNotifier().subscribe(() => {
+        this.#onButtonPush();
       })
     ];
   }
@@ -57,8 +57,8 @@ export class TimeScaleButton {
    * デストラクタ相当の処理
    */
   destructor(): void {
-    this._view.destructor();
-    this._unsubscribers.forEach(v => {
+    this.#view.destructor();
+    this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
   }
@@ -69,7 +69,7 @@ export class TimeScaleButton {
    * @return シーンに追加するオブジェクト
    */
   getObject3D(): typeof THREE.Object3D {
-    return this._view.getObject3D();
+    return this.#view.getObject3D();
   }
 
   /**
@@ -78,7 +78,7 @@ export class TimeScaleButton {
    * @return 通知ストリーム
    */
   toggleNotifier(): Stream<number> {
-    return this._toggle;
+    return this.#toggle;
   }
 
   /**
@@ -88,7 +88,7 @@ export class TimeScaleButton {
    * @return アニメーション
    */
   open(timeScale: number): Animate {
-    return open(this._model, timeScale);
+    return open(this.#model, timeScale);
   }
 
   /**
@@ -97,7 +97,7 @@ export class TimeScaleButton {
    * @return アニメーション
    */
   close(): Animate {
-    return close(this._model);
+    return close(this.#model);
   }
 
   /**
@@ -105,8 +105,8 @@ export class TimeScaleButton {
    * 
    * @param action アクション 
    */
-  _onUpdate(action: Update): void {
-    this._toggleTween.update(action.time);
+  #onUpdate(action: Update): void {
+    this.#toggleTween.update(action.time);
   }
 
   /**
@@ -114,22 +114,22 @@ export class TimeScaleButton {
    *
    * @param action アクション
    */
-  _onPreRender(action: PreRender): void {
-    this._view.engage(this._model, action);
+  #onPreRender(action: PreRender): void {
+    this.#view.engage(this.#model, action);
   }
 
   /**
    * ボタン押下時の処理
    */
-  _onButtonPush(): void {
-    if (this._model.disabled) {
+  #onButtonPush(): void {
+    if (this.#model.disabled) {
       return;
     }
 
-    this._toggleTween.update();
-    this._toggleTween.removeAll();
-    const nextTimeScale = getNextTimeScale(this._model.timeScale);
-    toggle(this._model, this._sounds, this._toggleTween, nextTimeScale).play();
-    this._toggle.next(nextTimeScale);
+    this.#toggleTween.update();
+    this.#toggleTween.removeAll();
+    const nextTimeScale = getNextTimeScale(this.#model.timeScale);
+    toggle(this.#model, this.#sounds, this.#toggleTween, nextTimeScale).play();
+    this.#toggle.next(nextTimeScale);
   }
 }

@@ -6,7 +6,7 @@ import {delay, empty} from "../../../../../../animation/delay";
 import {WingDozerHUD} from "../../../view/hud/armdozer-objects/wing-dozer";
 import {WingDozerTD} from "../../../view/td/armdozer-objects/wing-dozer";
 import {dolly, toInitial, track} from "../../td-camera";
-import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param";
+import type {BurstAnimationParamX} from "./animation-param";
 
 /**
  * ウィングドーザ バーストアニメーション パラメータ
@@ -16,23 +16,6 @@ import type {BurstAnimationParam, BurstAnimationParamX} from "./animation-param"
 export type WingDozerBurst<BURST> = BurstAnimationParamX<WingDozerTD, WingDozerHUD, BURST>;
 
 /**
- * ウィングドーザバーストアニメーションパラメータにキャストする
- * キャストできない場合はnullを返す
- *
- * @param origin キャスト元
- * @return キャスト結果
- */
-export function castWingDozerBurst(origin: BurstAnimationParam): ?WingDozerBurst<Burst> {
-  if (!(origin.burstArmdozerTD instanceof WingDozerTD) || !(origin.burstArmdozerHUD instanceof WingDozerHUD)) {
-    return null;
-  }
-
-  const tdArmdozer: WingDozerTD = origin.burstArmdozerTD;
-  const hudArmdozer: WingDozerHUD = origin.burstArmdozerHUD;
-  return ((origin: any): BurstAnimationParamX<typeof tdArmdozer, typeof hudArmdozer, Burst>);
-}
-
-/**
  * ウィングドーザのバーストアニメーション
  * 
  * @param param パラメータ
@@ -40,9 +23,8 @@ export function castWingDozerBurst(origin: BurstAnimationParam): ?WingDozerBurst
  */
 export function wingDozerBurst(param: WingDozerBurst<Burst>): Animate {
   if (param.burst.type === 'ContinuousAttack') {
-    const continuousAttack: ContinuousAttack = param.burst;
-    const castParam = ((param: any): WingDozerBurst<typeof continuousAttack>);
-    return wingDozerContinuousAttack(castParam);
+    const burst: ContinuousAttack = param.burst;
+    return wingDozerContinuousAttack({...param, burst});
   }
   return empty();
 }

@@ -7,6 +7,7 @@ import {
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
+  PostTutorialCompleteButtons,
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../dom-floaters/post-battle/post-battle-buttons";
@@ -15,8 +16,10 @@ import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
 import type {NPCBattle, PlayingNPCBattle} from "../in-progress/npc-battle";
 import type {Tutorial} from "../in-progress/tutorial";
-import {isTutorialWin} from "../in-progress/tutorial";
-import {isNPCBattleStageClear, updateNPCBattle} from "../npc-battle";
+import type {NPCBattleResult} from "../npc-battle";
+import {updateNPCBattleState} from "../npc-battle";
+import type {TutorialResult} from "../tutorial";
+import {updateTutorialState} from "../tutorial";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する
@@ -45,24 +48,27 @@ const endCasualMatch = async (props: $ReadOnly<GameProps>) => {
 
 /**
  * NPCバトル終了後に表示するアクションボタンを求める
- * 
- * @param isStageClear ステージクリアをしたか、trueでステージクリア
- * @param isGameClear ゲームクリアしたか、trueでゲームクリア
+ *
+ * @param result NPCバトル結果
  * @return 表示するアクションボタン
  */
-const postNPCBattleButtons = (isStageClear: boolean, isGameClear: boolean) => {
-  if (isGameClear) {
-    return PostNPCBattleComplete;
-  } else if (isStageClear) {
-    return PostNPCBattleWinButtons;
+const postNPCBattleButtons = (result: NPCBattleResult) => {
+  switch(result) {
+    case 'NPCBattleComplete':
+      return PostNPCBattleComplete;
+    case 'StageClear':
+      return PostNPCBattleWinButtons;
+    case 'StageMiss':
+    default:
+      return PostNPCBattleLoseButtons;
   }
-  return PostNPCBattleLoseButtons;
 }
 
 /**
  * NPCバトル進行中に利用するデータを生成する
  *
  * @param inProgress 進行中のフロー
+ * @param gameEndResult 戦闘結果
  * @return 生成結果、NPCバトル中でない場合はnullを返す
  */
 const createNPCBattle = (inProgress: InProgress, gameEndResult: GameEndResult) => {
@@ -71,10 +77,13 @@ const createNPCBattle = (inProgress: InProgress, gameEndResult: GameEndResult) =
   }
   const npcBattle = (inProgress: NPCBattle);
   const playingNPCBattle = (inProgress.subFlow: PlayingNPCBattle);
-  const isStageClear = isNPCBattleStageClear(playingNPCBattle.state, gameEndResult);
-  const updatedState = updateNPCBattle(playingNPCBattle.state, isStageClear);
-  const updatedInProgress = {...npcBattle, subFlow: {...playingNPCBattle, state: updatedState}};
-  const postBattleButtons = postNPCBattleButtons(isStageClear, updatedState.isGameClear);
+  const updated = updateNPCBattleState(playingNPCBattle.state, gameEndResult);
+  if (!updated) {
+    return null;
+  }
+
+  const postBattleButtons = postNPCBattleButtons(updated.result);
+  const updatedInProgress =  {...npcBattle, subFlow: {...playingNPCBattle, state: updated.state}};
   return {updatedInProgress, postBattleButtons};
 };
 
@@ -90,6 +99,24 @@ const endNPCBattleStage = async (props: $ReadOnly<GameProps>, postBattleButtons:
 };
 
 /**
+ * チュートリアル終了後に表示するアクションボタンを求める
+ *
+ * @param result チュートリアル結果
+ * @return 表示するアクションボタン
+ */
+const postTutorialButtons = (result: TutorialResult) => {
+  switch(result) {
+    case 'TutorialComplete':
+      return PostTutorialCompleteButtons;
+    case 'StageClear':
+      return PostTutorialWinButtons;
+    case 'StageMiss':
+    default:
+      return PostTutorialLoseButtons;
+  }
+}
+
+/**
  * チュートリアル進行中に利用するデータを生成する
  *
  * @param inProgress 進行中のフロー
@@ -100,9 +127,14 @@ const createTutorial = (inProgress: InProgress, gameEndResult: GameEndResult) =>
     return null;
   }
   const tutorial = (inProgress: Tutorial);
-  const isWin = isTutorialWin(tutorial, gameEndResult);
-  const postBattleButtons = isWin ? PostTutorialWinButtons : PostTutorialLoseButtons;
-  return {postBattleButtons};
+  const updated = updateTutorialState(tutorial.state, gameEndResult);
+  if (!updated) {
+    return null;
+  }
+
+  const postBattleButtons = postTutorialButtons(updated.result);
+  const updatedInProgress = {...tutorial, state: updated.state};
+  return {postBattleButtons, updatedInProgress};
 };
 
 /**
@@ -134,6 +166,7 @@ export async function onEndBattle(props: GameProps, action: EndBattle): Promise<
   } else if (props.inProgress.type === 'CasualMatch') {
     await endCasualMatch(props);
   } else if (tutorial) {
+    props.inProgress = tutorial.updatedInProgress;
     await endTutorial(props, tutorial.postBattleButtons);
   }
 }

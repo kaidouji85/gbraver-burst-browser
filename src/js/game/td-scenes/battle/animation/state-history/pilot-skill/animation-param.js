@@ -1,15 +1,13 @@
 // @flow
-
 import type {GameStateX, PilotSkill, PilotSkillEffect, PlayerState} from "gbraver-burst-core";
 import type {ArmDozerSprite} from "../../../../../../game-object/armdozer/armdozer-sprite";
 import {TDCamera} from "../../../../../../game-object/camera/td";
-import type {BattleSceneState} from "../../../state/battle-scene-state";
-import {BattleSceneView} from "../../../view";
 import {HUDGameObjects} from "../../../view/hud/game-objects";
 import type {HUDPilotObjects} from "../../../view/hud/pilot-objects/hud-pilot-objects";
 import {HUDPlayer} from "../../../view/hud/player";
 import {TDGameObjects} from "../../../view/td/game-objects";
 import type {TDPlayer} from "../../../view/td/player";
+import type {StateAnimationProps} from "../state-animation-props";
 
 /**
  * パイロットスキル アニメーション パラメータ
@@ -34,21 +32,20 @@ export type PilotSkillAnimationParamX<SKILL: PilotSkill, PILOT: HUDPilotObjects>
 export type PilotSkillAnimationParam = PilotSkillAnimationParamX<PilotSkill, HUDPilotObjects>;
 
 /**
- * パイロットスキル アニメーション パラメータにキャストする
- * キャストできない場合はnullを返す
+ * パイロットスキル アニメーション パラメータに変換する
+ * 変換できない場合はnullを返す
  *
- * @param view ビュー
- * @param sceneState シーンステート
+ * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
- * @return キャスト結果
+ * @return 変換結果
  */
-export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: BattleSceneState, gameState: GameStateX<PilotSkillEffect>): ?PilotSkillAnimationParam {
+export function toPilotSkillAnimationParam(props: StateAnimationProps, gameState: GameStateX<PilotSkillEffect>): ?PilotSkillAnimationParam {
   const effect: PilotSkillEffect = gameState.effect;
   const invokerState = gameState.players.find(v => v.playerId === effect.invokerId);
-  const invokerArmdozer = view.td.armdozerObjects.find(v => v.playerId === effect.invokerId);
-  const pilot = view.hud.pilots.find(v => v.playerId === effect.invokerId);
-  const invokerTD = view.td.players.find(v => v.playerId === effect.invokerId);
-  const invokerHUD =view.hud.players.find(v => v.playerId === effect.invokerId);
+  const invokerArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === effect.invokerId);
+  const pilot = props.view.hud.pilots.find(v => v.playerId === effect.invokerId);
+  const invokerTD = props.view.td.players.find(v => v.playerId === effect.invokerId);
+  const invokerHUD =props.view.hud.players.find(v => v.playerId === effect.invokerId);
   if (!invokerState || !pilot || !invokerArmdozer || !invokerTD || !invokerHUD) {
     return null;
   }
@@ -60,8 +57,8 @@ export function castPilotSkillAnimationParam(view: BattleSceneView, sceneState: 
     invokerSprite: invokerArmdozer.sprite(),
     invokerTD: invokerTD,
     invokerHUD: invokerHUD,
-    tdObjects: view.td.gameObjects,
-    hudObjects: view.hud.gameObjects,
-    tdCamera: view.td.camera,
+    tdObjects: props.view.td.gameObjects,
+    hudObjects: props.view.hud.gameObjects,
+    tdCamera: props.view.td.camera,
   };
 }

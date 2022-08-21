@@ -6,7 +6,7 @@ import {delay, empty} from "../../../../../../../animation/delay";
 import {WingDozer} from "../../../../../../../game-object/armdozer/wing-dozer/wing-dozer";
 import {TDCamera} from "../../../../../../../game-object/camera/td";
 import {dolly, toInitial, track} from "../../../td-camera";
-import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-param";
+import type {BattleAnimationParamX} from "../animation-param";
 
 /**
  * ウィングドーザ 戦闘アニメーション パラメータ
@@ -16,21 +16,6 @@ import type {BattleAnimationParam, BattleAnimationParamX} from "../animation-par
 export type WingDozerBattle<Result> = BattleAnimationParamX<WingDozer, Result>;
 
 /**
- * ウィングドーザ 戦闘アニメーション パラメータに変換する
- * 変換できない場合はnullを返す
- *
- * @param origin 変換前
- * @return 変換結果
- */
-export function castWingDozerBattle(origin: BattleAnimationParam): ?WingDozerBattle<BattleResult> {
-  if (origin.attackerSprite instanceof WingDozer) {
-    const sprite: WingDozer = origin.attackerSprite;
-    return ((origin: any): BattleAnimationParamX<typeof sprite, typeof origin.result>);
-  }
-  return null;
-}
-
-/**
  * ウィングドーザ 戦闘アニメーション
  *
  * @param param パラメータ
@@ -38,51 +23,43 @@ export function castWingDozerBattle(origin: BattleAnimationParam): ?WingDozerBat
  */
 export function wingDozerAttack(param: WingDozerBattle<BattleResult>): Animate {
   if (param.result.name === 'NormalHit' && param.isDeath) {
-    const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): WingDozerBattle<DownResult | typeof castResult>);
-    return down(castParam);
+    const result = (param.result: NormalHit);
+    return down({...param, result});
   }
 
   if (param.result.name === 'NormalHit') {
-    const castResult = (param.result: NormalHit);
-    const castParam = ((param: any): WingDozerBattle<AttackResult | typeof castResult>);
-    return attack(castParam);
+    const result = (param.result: NormalHit);
+    return attack({...param, result});
   }
 
   if (param.result.name === 'CriticalHit' && param.isDeath) {
-    const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): WingDozerBattle<DownResult | typeof castResult>);
-    return down(castParam);
+    const result = (param.result: CriticalHit);
+    return down({...param, result});
   }
 
   if (param.result.name === 'CriticalHit') {
-    const castResult = (param.result: CriticalHit);
-    const castParam = ((param: any): WingDozerBattle<AttackResult | typeof castResult>);
-    return attack(castParam);
+    const result = (param.result: CriticalHit);
+    return attack({...param, result});
   }
 
   if (param.result.name === 'Guard' && param.isDeath) {
-    const castResult = (param.result: Guard);
-    const castParam = ((param: any): WingDozerBattle<DownResult | typeof castResult>);
-    return down(castParam);
+    const result = (param.result: Guard);
+    return down({...param, result});
   }
 
   if (param.result.name === 'Guard') {
-    const castResult = (param.result: Guard);
-    const castParam = ((param: any): WingDozerBattle<typeof castResult>);
-    return guard(castParam);
+    const result = (param.result: Guard);
+    return guard({...param, result});
   }
 
   if (param.result.name === 'Miss') {
-    const castResult = (param.result: Miss);
-    const castParam = ((param: any): WingDozerBattle<typeof castResult>);
-    return miss(castParam);
+    const result = (param.result: Miss);
+    return miss({...param, result});
   }
 
   if (param.result.name === 'Feint') {
-    const castResult = (param.result: Feint);
-    const castParam = ((param: any): WingDozerBattle<typeof castResult>);
-    return feint(castParam);
+    const result = (param.result: Feint);
+    return feint({...param, result});
   }
 
   return empty();
