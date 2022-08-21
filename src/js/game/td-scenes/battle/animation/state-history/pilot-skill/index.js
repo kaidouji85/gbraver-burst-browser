@@ -8,7 +8,7 @@ import {ShinyaHUD} from "../../../view/hud/pilot-objects/shinya";
 import {TsubasaHUD} from "../../../view/hud/pilot-objects/tsubasa";
 import type {StateAnimationProps} from "../state-animation-props";
 import type {PilotSkillAnimationParam} from "./animation-param";
-import {castPilotSkillAnimationParam} from "./animation-param";
+import {toPilotSkillAnimationParam} from "./animation-param";
 import {gaiAnimation} from "./gai";
 import {raitoAnimation} from "./raito";
 import {shinyaAnimation} from "./shinya";
@@ -22,7 +22,7 @@ import {tsubasaAnimation} from "./tsubasa";
  * @return アニメーション
  */
 export function pilotSkillAnimation(props: StateAnimationProps, gameState: GameStateX<PilotSkillEffect>): Animate {
-  const param = castPilotSkillAnimationParam(props, gameState);
+  const param = toPilotSkillAnimationParam(props, gameState);
   if (!param) {
     return empty();
   }

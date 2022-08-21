@@ -25,9 +25,8 @@ export type GaiAnimationParam = GaiAnimationParamX<PilotSkill>;
  */
 export function gaiAnimation(param: GaiAnimationParam): Animate {
   if (param.skill.type === 'BuffPowerSkill') {
-    const castedSkill: BuffPowerSkill = param.skill;
-    const castedParam = ((param: any): GaiAnimationParamX<typeof castedSkill>);
-    return gaiBuffPower(castedParam);
+    const skill: BuffPowerSkill = param.skill;
+    return gaiBuffPower({...param, skill});
   }
 
   return empty();
