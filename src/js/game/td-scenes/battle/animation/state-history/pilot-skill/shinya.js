@@ -5,7 +5,7 @@ import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
 import {ShinyaHUD} from "../../../view/hud/pilot-objects/shinya";
 import {dolly, toInitial, track} from "../../td-camera";
-import type {PilotSkillAnimationParam, PilotSkillAnimationParamX} from "./animation-param";
+import type {PilotSkillAnimationParamX} from "./animation-param";
 
 /**
  * パイロットスキル シンヤ アニメーションパラメータ
@@ -19,31 +19,14 @@ export type ShinyaAnimationParamX<SKILL: PilotSkill> = PilotSkillAnimationParamX
 export type ShinyaAnimationParam = ShinyaAnimationParamX<PilotSkill>;
 
 /**
- * パイロットスキル シンヤ アニメーションパラメータにキャストする
- * キャストできない場合はnullを返す
- *
- * @param origin キャスト元
- * @return キャスト結果
- */
-export function castShinyaAnimationParam(origin: PilotSkillAnimationParam): ?ShinyaAnimationParam {
-  if (origin.pilot instanceof ShinyaHUD) {
-    const shinya: ShinyaHUD = origin.pilot;
-    return ((origin: any): PilotSkillAnimationParamX<typeof origin.skill, typeof shinya>);
-  }
-
-  return null;
-}
-
-/**
  * シンヤ パイロットスキルアニメーション
  * @param param パラメータ
  * @return アニメーション
  */
 export function shinyaAnimation(param: ShinyaAnimationParam): Animate {
   if (param.skill.type === 'RecoverBatterySkill') {
-    const recoverBatterySKill: RecoverBatterySkill = param.skill;
-    const castParam = ((param: any): ShinyaAnimationParamX<typeof recoverBatterySKill>);
-    return shinyaRecoverBattery(castParam);
+    const skill: RecoverBatterySkill = param.skill;
+    return shinyaRecoverBattery({...param, skill});
   }
 
   return empty();
