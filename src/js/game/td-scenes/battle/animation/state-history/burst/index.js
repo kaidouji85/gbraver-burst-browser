@@ -5,16 +5,18 @@ import {empty} from "../../../../../../animation/delay";
 import {LightningDozerHUD} from "../../../view/hud/armdozer-objects/lightning-dozer";
 import {NeoLandozerHUD} from "../../../view/hud/armdozer-objects/neo-landozer";
 import {ShinBraverHUD} from "../../../view/hud/armdozer-objects/shin-braver";
+import {WingDozerHUD} from "../../../view/hud/armdozer-objects/wing-dozer";
 import {LightningDozerTD} from "../../../view/td/armdozer-objects/lightning-dozer";
 import {NeoLandozerTD} from "../../../view/td/armdozer-objects/neo-landozer";
 import {ShinBraverTD} from "../../../view/td/armdozer-objects/shin-braver";
+import {WingDozerTD} from "../../../view/td/armdozer-objects/wing-dozer";
 import type {StateAnimationProps} from "../state-animation-props";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {lightningDozerBurst} from "./lightning-dozer";
 import {neoLandozerBurst} from "./neo-landozer";
 import {shinBraverBurst} from "./shin-braver";
-import {castWingDozerBurst, wingDozerBurst} from "./wingdozer";
+import {wingDozerBurst} from "./wingdozer";
 
 /**
  * バーストアニメーション
@@ -57,9 +59,10 @@ function armdozerAnimation(param: BurstAnimationParam): Animate {
     return lightningDozerBurst({...param, burstArmdozerTD, burstArmdozerHUD});
   }
 
-  const wingDozer = castWingDozerBurst(param);
-  if (wingDozer) {
-    return wingDozerBurst(wingDozer);
+  if ((param.burstArmdozerTD instanceof WingDozerTD) && (param.burstArmdozerHUD instanceof WingDozerHUD)) {
+    const burstArmdozerTD: WingDozerTD = param.burstArmdozerTD;
+    const burstArmdozerHUD: WingDozerHUD = param.burstArmdozerHUD;
+    return wingDozerBurst({...param, burstArmdozerTD, burstArmdozerHUD});
   }
 
   return empty();
