@@ -3,12 +3,13 @@ import type {GameStateX, PilotSkillEffect} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
 import {GaiHUD} from "../../../view/hud/pilot-objects/gai";
+import {RaitoHUD} from "../../../view/hud/pilot-objects/raito";
 import {ShinyaHUD} from "../../../view/hud/pilot-objects/shinya";
 import type {StateAnimationProps} from "../state-animation-props";
 import type {PilotSkillAnimationParam} from "./animation-param";
 import {castPilotSkillAnimationParam} from "./animation-param";
 import {gaiAnimation} from "./gai";
-import {castRaitoAnimationParam, raitoAnimation} from "./raito";
+import {raitoAnimation} from "./raito";
 import {shinyaAnimation} from "./shinya";
 import {castTsubasaAnimationParam, tsubasaAnimation} from "./tsubasa";
 
@@ -45,9 +46,9 @@ function cutIn(param: PilotSkillAnimationParam): Animate {
     return gaiAnimation({...param, pilot});
   }
 
-  const raito = castRaitoAnimationParam(param);
-  if (raito) {
-    return raitoAnimation(raito);
+  if (param.pilot instanceof RaitoHUD) {
+    const pilot: RaitoHUD = param.pilot;
+    return raitoAnimation({...param, pilot});
   }
 
   const tsubasa = castTsubasaAnimationParam(param);
