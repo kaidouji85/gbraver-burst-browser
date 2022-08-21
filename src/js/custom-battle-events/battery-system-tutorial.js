@@ -1,5 +1,5 @@
 // @flow
-import type {BattleResult, GameState, PlayerId} from "gbraver-burst-core";
+import type {BattleResult, GameState} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -71,7 +71,7 @@ const introduction = async (props: CustomBattleEventProps) => {
   props.view.dom.rightMessageWindow.lighten();
   await scrollRightMessages(props, [
     ['シンヤ', '「了解ッス'],
-    ['それじゃ遠慮なくいきますよ ツバサ先輩」'],
+    ['それじゃ遠慮なく行くッスよ ツバサ先輩」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
@@ -84,7 +84,7 @@ const introduction = async (props: CustomBattleEventProps) => {
 const playerAttackHit = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「手応えあり」']
+    ['シンヤ', '「手応えありッス」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -124,7 +124,7 @@ const playerAttackGuarded = async (props: CustomBattleEventProps) => {
 const playerAttackMiss = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「クッ 避けられた」']
+    ['シンヤ', '「クッ 避けられたッス」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -194,7 +194,7 @@ const batteryRuleDescription = async (props: CustomBattleEventProps) => {
 const enemyAttackMiss = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「よし 回避成功」']
+    ['シンヤ', '「よし 回避成功ッス」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -221,7 +221,7 @@ const enemyAttackGuarded = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
-    ['ツバサ', '「ほう 私の攻撃をガードするとはな'],
+    ['ツバサ', '「私の攻撃をガードするとはな'],
     ['私と君が同じバッテリーを出したので攻撃をガード ダメージが半減されたな」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -235,7 +235,7 @@ const enemyAttackGuarded = async (props: CustomBattleEventProps) => {
 const enemyAttackHit = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「すごいダメージだ'],
+    ['シンヤ', '「すごいダメージ ッス'],
     ['ツバサ先輩 少しは加減してくださいッスよ']
   ]);
   props.view.dom.rightMessageWindow.darken();
@@ -456,7 +456,7 @@ const victory = async (props: CustomBattleEventProps) => {
 const lose = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「クソッ あともう少しで勝てたのに」']
+    ['シンヤ', '「あともう少しで勝てたのに」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -590,8 +590,6 @@ type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All'
 
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
-  /** プレイヤーID */
-  playerId: PlayerId;
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
   /** 選択可能なコマンド */
@@ -599,12 +597,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /**
    * コンストラクタ
-   *
-   * @param playerId プレイヤーID
    */
-  constructor(playerId: PlayerId) {
+  constructor() {
     super();
-    this.playerId = playerId;
     this.stateHistory = [];
     this.selectableCommands = 'BatteryOnly';
   }
@@ -620,7 +615,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     const turn = turnCount(this.stateHistory);
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
-      ? {isAttacker: foundLastBattle.effect.attacker === this.playerId, result: foundLastBattle.effect.result}
+      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId, result: foundLastBattle.effect.result}
       : null;
     if (turn === 1) {
       await introduction(props);
@@ -647,7 +642,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   async onLastState(props: LastState): Promise<void> {
     const foundLastState = props.update[props.update.length - 1];
     const lastState = foundLastState
-      ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === this.playerId}
+      ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === props.playerId}
       : null;
     if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && lastState.isMyTurn) {
       await focusInAttackBatterySelector(props);
@@ -660,7 +655,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   async afterLastState(props: LastState): Promise<void> {
     const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
     const gameEnd = (foundGameEnd && foundGameEnd.effect.name === 'GameEnd')
-      ? {isVictory: foundGameEnd.effect.result.type === 'GameOver' && foundGameEnd.effect.result.winner === this.playerId}
+      ? {isVictory: foundGameEnd.effect.result.type === 'GameOver' && foundGameEnd.effect.result.winner === props.playerId}
       : null;
     if (gameEnd && gameEnd.isVictory) {
       await victory(props);
@@ -684,8 +679,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
     const foundLastState = this.stateHistory[this.stateHistory.length - 1];
     const lastState = foundLastState
-      ? {isEnemyTurn: foundLastState.activePlayerId !== this.playerId,
-        player: foundLastState.players.find(v => v.playerId === this.playerId)}
+      ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
+        player: foundLastState.players.find(v => v.playerId === props.playerId)}
       : null;
     const lastPlayer = (lastState && lastState.player)
       ? {isZeroBattery: lastState.player.armdozer.battery === 0,
@@ -754,9 +749,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 /**
  * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
  *
- * @param playerId プレイヤーID
  * @return 生成したカスタムバトルイベント
  */
-export function createBatterySystemTutorialEvent(playerId: PlayerId): CustomBattleEvent {
-  return new BatterySystemTutorialEvent(playerId);
+export function createBatterySystemTutorialEvent(): CustomBattleEvent {
+  return new BatterySystemTutorialEvent();
 }

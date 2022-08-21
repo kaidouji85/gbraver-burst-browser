@@ -1,9 +1,9 @@
 // @flow
 import type {GameState} from "gbraver-burst-core";
 import {play} from "../../../../bgm/bgm-operators";
+import {animationPlayer} from "../animation-player";
 import {stateAnimation, stateHistoryAnimation,} from "../animation/state-history";
 import type {BattleSceneProps} from "../battle-scene-props";
-import {animationPlayer} from "../animation-player";
 
 /**
  * 戦闘シーンを開始する
