@@ -2,13 +2,15 @@
 import type {BurstEffect, GameStateX} from "gbraver-burst-core";
 import {Animate} from "../../../../../../animation/animate";
 import {empty} from "../../../../../../animation/delay";
+import {NeoLandozerHUD} from "../../../view/hud/armdozer-objects/neo-landozer";
 import {ShinBraverHUD} from "../../../view/hud/armdozer-objects/shin-braver";
+import {NeoLandozerTD} from "../../../view/td/armdozer-objects/neo-landozer";
 import {ShinBraverTD} from "../../../view/td/armdozer-objects/shin-braver";
 import type {StateAnimationProps} from "../state-animation-props";
 import type {BurstAnimationParam} from "./animation-param";
 import {toBurstAnimationParam} from "./animation-param";
 import {castLightningDozerBurst, lightningDozerBurst} from "./lightning-dozer";
-import {castNeoLandozerBurst, neoLandozerBurst} from "./neo-landozer";
+import {neoLandozerBurst} from "./neo-landozer";
 import {shinBraverBurst} from "./shin-braver";
 import {castWingDozerBurst, wingDozerBurst} from "./wingdozer";
 
@@ -41,9 +43,10 @@ function armdozerAnimation(param: BurstAnimationParam): Animate {
     return shinBraverBurst({...param, burstArmdozerTD, burstArmdozerHUD});
   }
 
-  const neoLandozer = castNeoLandozerBurst(param);
-  if (neoLandozer) {
-    return neoLandozerBurst(neoLandozer);
+  if ((param.burstArmdozerTD instanceof NeoLandozerTD) && (param.burstArmdozerHUD instanceof NeoLandozerHUD)) {
+    const burstArmdozerTD: NeoLandozerTD = param.burstArmdozerTD;
+    const burstArmdozerHUD: NeoLandozerHUD = param.burstArmdozerHUD;
+    return neoLandozerBurst({...param, burstArmdozerTD, burstArmdozerHUD});
   }
 
   const lightningDozer = castLightningDozerBurst(param);
