@@ -32,14 +32,14 @@ export type PilotSkillAnimationParamX<SKILL: PilotSkill, PILOT: HUDPilotObjects>
 export type PilotSkillAnimationParam = PilotSkillAnimationParamX<PilotSkill, HUDPilotObjects>;
 
 /**
- * パイロットスキル アニメーション パラメータにキャストする
- * キャストできない場合はnullを返す
+ * パイロットスキル アニメーション パラメータに変換する
+ * 変換できない場合はnullを返す
  *
  * @param props 戦闘シーンプロパティ
  * @param gameState ゲームステート
- * @return キャスト結果
+ * @return 変換結果
  */
-export function castPilotSkillAnimationParam(props: StateAnimationProps, gameState: GameStateX<PilotSkillEffect>): ?PilotSkillAnimationParam {
+export function toPilotSkillAnimationParam(props: StateAnimationProps, gameState: GameStateX<PilotSkillEffect>): ?PilotSkillAnimationParam {
   const effect: PilotSkillEffect = gameState.effect;
   const invokerState = gameState.players.find(v => v.playerId === effect.invokerId);
   const invokerArmdozer = props.view.td.armdozerObjects.find(v => v.playerId === effect.invokerId);
