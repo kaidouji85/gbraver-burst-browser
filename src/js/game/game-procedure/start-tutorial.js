@@ -17,7 +17,7 @@ export async function startTutorial(props: $ReadOnly<GameProps>, stage: Tutorial
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
   const config = await props.config.load();
   const battleScene = props.tdScenes.startBattle({resources: props.resources, bgm: props.bgm,
-    playingBGM: SOUND_IDS.TUTORIAL_BGM, pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale,
+    playingBGM: stage.bgm, pixelRatio: config.webGLPixelRatio, initialAnimationTimeScale: config.battleAnimationTimeScale,
     battleProgress: npcBattle, player: npcBattle.player, enemy: npcBattle.enemy, initialState: npcBattle.stateHistory(), customBattleEvent: stage.event()});
   props.domScenes.hidden();
   await props.bgm.do(fadeOut);
