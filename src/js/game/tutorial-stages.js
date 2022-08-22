@@ -4,6 +4,7 @@ import {createBatterySystemTutorialEvent} from "../custom-battle-events/battery-
 import {createZeroDefenseTutorialEvent} from "../custom-battle-events/zero-defense-tutorial";
 import {batterySystemTutorialNPC} from "../npc/battery-system-tutorial";
 import {zeroDefenseTutorialNPC} from "../npc/zero-defense-tutorial";
+import {SOUND_IDS} from "../resource/sound";
 import {playerUuid} from "../uuid/player";
 import type {TutorialStage} from "./tutorial";
 
@@ -14,14 +15,16 @@ const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
 const batterySystemTutorial =   {
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: batterySystemTutorialNPC(),
-  event: () => createBatterySystemTutorialEvent()
+  event: () => createBatterySystemTutorialEvent(),
+  bgm: SOUND_IDS.TUTORIAL_BGM,
 };
 
 /** 0防御チュートリアル */
 const zeroDefenseTutorial =   {
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: zeroDefenseTutorialNPC(),
-  event: () => createZeroDefenseTutorialEvent()
+  event: () => createZeroDefenseTutorialEvent(),
+  bgm: SOUND_IDS.BATTLE_BGM_01,
 }
 
 /** チュートリアルステージ集合 */
