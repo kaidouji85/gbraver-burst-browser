@@ -1,7 +1,6 @@
 // @flow
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import {NPCBattleRoom} from "../../npc/npc-battle-room";
-import {SOUND_IDS} from "../../resource/sound";
 import type {GameProps} from "../game-props";
 import type {TutorialStage} from "../tutorial";
 
