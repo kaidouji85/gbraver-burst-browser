@@ -9,7 +9,6 @@ import type {
   LastState,
   PilotSkillCommandSelected,
 } from "../game/td-scenes/battle/custom-battle-event";
-import {waitTime} from "../wait/wait-time";
 import {
   activeLeftMessageWindow,
   activeLeftMessageWindowWithFace,
@@ -25,20 +24,9 @@ import {
   unattentionPilotButton
 } from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
-import {invisibleAllMessageWindows} from "./invisible-all-message-windows";
+import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 import {turnCount} from "./turn-count";
-
-/**
- * 会話を仕切りなおす
- *
- * @param props イベントプロパティ
- * @return 仕切り直しが完了したら発火するPromise
- */
-const refreshConversation = async (props: CustomBattleEventProps) => {
-  invisibleAllMessageWindows(props);
-  await waitTime(200);
-};
 
 /**
  * ストーリー 冒頭
