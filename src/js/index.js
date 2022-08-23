@@ -31,7 +31,7 @@ async function main(): Promise<void> {
     isAPIServerEnable: GBRAVER_BURST_IS_API_SERVER_ENABLE === 'true',
     canPlayTutorialInDevelopment: GBRAVER_BURST_CAN_PLAY_TUTORIAL_IN_DEVELOPMENT === 'true'
   });
-  //await game.initialize();
+  await game.initialize();
 }
 
 window.addEventListener('load', () => {
