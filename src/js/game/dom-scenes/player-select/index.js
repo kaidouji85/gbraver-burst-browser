@@ -79,15 +79,15 @@ export class PlayerSelect implements DOMScene {
   constructor(resources: Resources) {
     const armDozerIds = [
       ArmDozerIdList.SHIN_BRAVER,
+      ArmDozerIdList.WING_DOZER,
       ArmDozerIdList.NEO_LANDOZER,
       ArmDozerIdList.LIGHTNING_DOZER,
-      ArmDozerIdList.WING_DOZER,
     ];
     const pilotIds = [
       PilotIds.SHINYA,
+      PilotIds.TSUBASA,
       PilotIds.GAI,
       PilotIds.RAITO,
-      PilotIds.TSUBASA,
     ];
     this.#armdozerId = ArmDozerIdList.SHIN_BRAVER
     this.#pilotId = PilotIds.SHINYA;
