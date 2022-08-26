@@ -62,6 +62,12 @@
       display: none;
     }
 
+    .first-view__pegass85 {
+      --icon-with: min(100vw, 18em);
+      width: var(--icon-with);
+      height: calc(var(--icon-with) * 9 / 16);
+    }
+
     .first-view__initialize-is-slow {
       width: 100vw;
       height: 100vh;
@@ -84,7 +90,7 @@
 <body>
 <div id="first-view" class="first-view">
   <div id="first-view__initializing" class="first-view__initializing">
-    Pegass85
+    <img class="first-view__pegass85" src="/pegass85.webp" alt="pegass85">
   </div>
   <div id="first-view__initialize-is-slow" class="first-view__initialize-is-slow--invisible">
     <div class="first-view__initialize-is-slow__title">

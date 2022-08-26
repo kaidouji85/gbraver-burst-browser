@@ -80,6 +80,10 @@ module.exports = {
           from: path.resolve(__dirname, "src/ogp-thumbnail.png"),
           to: path.resolve(__dirname, BUILD_ROOT)
         },
+        {
+          from: path.resolve(__dirname, "src/pegass85.webp"),
+          to: path.resolve(__dirname, BUILD_ROOT)
+        },
       ]
     }),
     new webpack.DefinePlugin({
