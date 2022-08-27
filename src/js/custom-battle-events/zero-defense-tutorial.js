@@ -271,7 +271,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     const lastState = foundLastState && foundEnemyState
       ? {isPlayerTurn: foundLastState.activePlayerId === props.playerId, enemyState: foundEnemyState}
       : null;
-    if (lastState && lastState.isPlayerTurn && lastState.enemyState.armdozer.battery === 0) {
+    if (lastState && lastState.isPlayerTurn && lastState.enemyState.armdozer.battery === 0 && 0 < lastState.enemyState.armdozer.hp) {
       await refreshConversation(props);
       await zeroBatteryChance(props);
     }
