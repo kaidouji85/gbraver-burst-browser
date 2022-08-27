@@ -1,10 +1,7 @@
 // @flow
 import type {BattleResult, GameState} from "gbraver-burst-core";
 import type {CustomBattleEvent, CustomBattleEventProps, LastState} from "../game/td-scenes/battle/custom-battle-event";
-import {
-  activeLeftMessageWindowWithFace,
-  activeRightMessageWindowWithFace
-} from "./active-message-window";
+import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
@@ -123,6 +120,64 @@ const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleR
   }
 };
 
+/**
+ * ストーリー 敵攻撃ヒット
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const enemyAttackHit = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「ヒットしたッス」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー 敵攻撃ガード
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const enemyAttackGuard = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「ガードしたッス」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー 敵攻撃ミス
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const enemyAttackMiss = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「回避したッス」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * 敵攻撃の結果に応じてストーリーを分岐する
+ * @param props イベントプロパティ
+ * @param battleResult 戦闘結果
+ * @return ストーリーが完了したら発火するPromise
+ */
+const enemyAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
+  if (battleResult.name === 'NormalHit') {
+    await enemyAttackHit(props);
+  } else if (battleResult.name === 'Guard') {
+    await enemyAttackGuard(props);
+  } else if (battleResult.name === 'Miss') {
+    await enemyAttackMiss(props);
+  }
+}
+
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
@@ -148,6 +203,8 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       await introduction(props);
     } else if (lastBattle && lastBattle.isAttacker) {
       await playerAttack(props, lastBattle.result);
+    } else if (lastBattle && !lastBattle.isAttacker) {
+      await enemyAttack(props, lastBattle.result);
     }
   }
 }
