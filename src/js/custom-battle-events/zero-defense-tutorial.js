@@ -3,12 +3,11 @@ import type {BattleResult, GameState} from "gbraver-burst-core";
 import type {CustomBattleEvent, CustomBattleEventProps, LastState} from "../game/td-scenes/battle/custom-battle-event";
 import {
   activeLeftMessageWindowWithFace,
-  activeRightMessageWindow,
   activeRightMessageWindowWithFace
 } from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
-import {scrollRightMessages} from "./scroll-messages";
+import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 import {turnCount} from "./turn-count";
 
 /**
@@ -54,10 +53,17 @@ const introduction = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const playerAttackHit = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindow(props);
+  activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['プレイヤー攻撃ヒット']
+    ['シンヤ', '「よし 手応えあり」'],
   ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「やるな大田高校 想定以上のダメージだ」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
 };
 
@@ -67,10 +73,17 @@ const playerAttackHit = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const playerAttackGuard = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindow(props);
+  activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['プレイヤー攻撃ガード']
+    ['シンヤ', '「どうだ 攻撃ヒット」'],
   ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「甘いぞ大田高校 ガードでダメージ半減だ」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
 };
 
@@ -80,10 +93,17 @@ const playerAttackGuard = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const playerAttackMiss = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindow(props);
+  activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['プレイヤー攻撃ミス']
+    ['シンヤ', '「避けられた」'],
   ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「どうした大田高校 お前たちの実力はそんなものか」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
 };
 
