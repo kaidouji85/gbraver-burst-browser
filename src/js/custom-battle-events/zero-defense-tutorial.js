@@ -128,9 +128,16 @@ const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleR
 const enemyAttackHit = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「ヒットしたッス」'],
+    ['シンヤ', '「なんてダメージだ」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「5攻撃は絶対に当たる'],
+    ['このまま勝負を決めさせてもらうぞ」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
 };
 
@@ -142,9 +149,15 @@ const enemyAttackHit = async (props: CustomBattleEventProps) => {
 const enemyAttackGuard = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「ガードしたッス」'],
+    ['シンヤ', '「ガードが間に合った」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「この攻撃をガードするとは さすが大田高校だ」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
 };
 
@@ -156,9 +169,15 @@ const enemyAttackGuard = async (props: CustomBattleEventProps) => {
 const enemyAttackMiss = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「回避したッス」'],
+    ['シンヤ', '「回避成功」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「俺の動きが読まれただと」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
 };
 
