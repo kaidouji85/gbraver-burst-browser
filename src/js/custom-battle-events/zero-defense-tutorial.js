@@ -205,9 +205,31 @@ const enemyAttack = async (props: CustomBattleEventProps, battleResult: BattleRe
 const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「0バッテリーチャンス」'],
+    ['ツバサ', '「台東高校のバッテリーが0になったぞ'],
+    ['シンヤ 今こそ攻撃のチャンスだ」'],
   ]);
-  props.view.dom.rightMessageWindow.darken();
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「ツバサ先輩 素朴な疑問なんすけど'],
+    ['どうして相手のバッテリーが0だと 攻撃のチャンスなんすか」']
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「いい質問だな シンヤ'],
+    ['0防御したらHPが満タンでも即死級のダメージを受ける'],
+    ['台東高校のバッテリーは0 すなわち0防御しか出来ずに即死する'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「だから攻撃のチャンスなんすね'],
+    ['完全に理解したッス'],
+  ]);
   invisibleAllMessageWindows(props);
 };
 
