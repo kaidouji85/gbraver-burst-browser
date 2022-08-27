@@ -197,6 +197,20 @@ const enemyAttack = async (props: CustomBattleEventProps, battleResult: BattleRe
   }
 }
 
+/**
+ * ストーリー 0バッテリーチャンス
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const zeroBatteryChance = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「0バッテリーチャンス」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+  invisibleAllMessageWindows(props);
+};
+
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
@@ -214,16 +228,30 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
+    if (turn === 1) {
+      await introduction(props);
+    }
+
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
       ? {isAttacker: foundLastBattle.effect.attacker === props.playerId, result: foundLastBattle.effect.result}
       : null;
-    if (turn === 1) {
-      await introduction(props);
-    } else if (lastBattle && lastBattle.isAttacker) {
+    if (lastBattle && lastBattle.isAttacker) {
       await playerAttack(props, lastBattle.result);
     } else if (lastBattle && !lastBattle.isAttacker) {
       await enemyAttack(props, lastBattle.result);
+    }
+
+    const foundLastState = props.update[props.update.length - 1];
+    const foundEnemyState = foundLastState
+      ? foundLastState.players.find(v => v.playerId !== props.playerId)
+      : null;
+    const lastState = foundLastState && foundEnemyState
+      ? {isPlayerTurn: foundLastState.activePlayerId === props.playerId, enemyState: foundEnemyState}
+      : null;
+    if (lastState && lastState.isPlayerTurn && lastState.enemyState.armdozer.battery === 0) {
+      await refreshConversation(props);
+      await zeroBatteryChance(props);
     }
   }
 }
