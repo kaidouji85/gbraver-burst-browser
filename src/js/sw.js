@@ -1,5 +1,4 @@
 // @flow
-
 import {ExpirationPlugin} from 'workbox-expiration';
 import * as PreCaching from 'workbox-precaching';
 import * as Routing from 'workbox-routing';
@@ -14,6 +13,7 @@ PreCaching.precacheAndRoute([
   {url: "./app-icon-180x180.png", revision: GBRAVER_BURST_SW_BUILD_HASH},
   {url: "./app-icon-192x192.png", revision: GBRAVER_BURST_SW_BUILD_HASH},
   {url: "./app-icon-512x512.png", revision: GBRAVER_BURST_SW_BUILD_HASH},
+  {url: "./pegass85.webp", revision: GBRAVER_BURST_SW_BUILD_HASH},
 ]);
 
 Routing.registerRoute(
