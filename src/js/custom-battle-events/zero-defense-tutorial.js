@@ -1,7 +1,11 @@
 // @flow
-import type {GameState} from "gbraver-burst-core";
+import type {BattleResult, GameState} from "gbraver-burst-core";
 import type {CustomBattleEvent, CustomBattleEventProps, LastState} from "../game/td-scenes/battle/custom-battle-event";
-import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
+import {
+  activeLeftMessageWindowWithFace,
+  activeRightMessageWindow,
+  activeRightMessageWindowWithFace
+} from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollRightMessages} from "./scroll-messages";
@@ -44,6 +48,61 @@ const introduction = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー プレイヤー攻撃ヒット
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerAttackHit = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindow(props);
+  await scrollRightMessages(props, [
+    ['プレイヤー攻撃ヒット']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー プレイヤー攻撃ガード
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerAttackGuard = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindow(props);
+  await scrollRightMessages(props, [
+    ['プレイヤー攻撃ガード']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー プレイヤー攻撃ミス
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerAttackMiss = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindow(props);
+  await scrollRightMessages(props, [
+    ['プレイヤー攻撃ミス']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * プレイヤー攻撃の結果に応じてストーリーを分岐する
+ * @param props イベントプロパティ
+ * @param battleResult 戦闘結果
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
+  if (battleResult.name === 'NormalHit') {
+    await playerAttackHit(props);
+  } else if (battleResult.name === 'Guard') {
+    await playerAttackGuard(props);
+  } else if (battleResult.name === 'Miss') {
+    await playerAttackMiss(props);
+  }
+};
+
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
@@ -61,8 +120,14 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
+    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
+    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
+      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId, result: foundLastBattle.effect.result}
+      : null;
     if (turn === 1) {
       await introduction(props);
+    } else if (lastBattle && lastBattle.isAttacker) {
+      await playerAttack(props, lastBattle.result);
     }
   }
 }
