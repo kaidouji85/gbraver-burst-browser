@@ -15,7 +15,7 @@ import {turnCount} from "./turn-count";
 const introduction = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「これより台東高校、大田高校の合同練習試合を始める'],
+    ['ツバサ', '「これより台東高校 大田高校の合同練習試合を始める'],
     ['一同 姿勢を正して 礼!!」']
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -79,7 +79,8 @@ const playerAttackGuard = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「甘いぞ大田高校 ガードでダメージ半減だ」'],
+    ['ガイ', '「甘いぞ 大田高校'],
+    ['ガードでダメージ半減だ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -99,7 +100,8 @@ const playerAttackMiss = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「どうした大田高校 お前たちの実力はそんなものか」'],
+    ['ガイ', '「どうした大田高校'],
+    ['お前たちの力はその程度か」']
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -136,7 +138,7 @@ const enemyAttackHit = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「5攻撃は絶対に当たる'],
-    ['このまま勝負を決めさせてもらうぞ」'],
+    ['次で終わりだ 大田高校」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -156,7 +158,8 @@ const enemyAttackGuard = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「この攻撃をガードするとは さすが大田高校だ」'],
+    ['ガイ', '「さすがだ 大田高校」'],
+    ['この攻撃をガードするとはな」']
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -176,7 +179,8 @@ const enemyAttackMiss = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「俺の動きが読まれただと」'],
+    ['ガイ', '「やるな 大田高校'],
+    ['俺の動きを読むとはな」']
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -206,30 +210,27 @@ const enemyAttack = async (props: CustomBattleEventProps, battleResult: BattleRe
 const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「台東高校のバッテリーが0になったぞ'],
+    ['ツバサ', '「台東高校のバッテリーが0になった'],
     ['シンヤ 今こそ攻撃のチャンスだ」'],
   ]);
   await refreshConversation(props, 100);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「ツバサ先輩 素朴な疑問なんすけど'],
-    ['どうして相手のバッテリーが0だと 攻撃のチャンスなんすか」']
+    ['シンヤ', '「……どうして相手のバッテリーが0だとチャンスなんすか」'],
   ]);
   await refreshConversation(props, 100);
 
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「いい質問だな シンヤ'],
-    ['0防御したらHPが満タンでも即死級のダメージを受ける'],
-    ['台東高校のバッテリーは0 すなわち0防御しか出来ずに即死する'],
+    ['ツバサ', '「0防御すると HPが満タンでも即死級のダメージを受けるからだ」'],
   ]);
   await refreshConversation(props, 100);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「だから攻撃のチャンスなんすね'],
-    ['完全に理解したッス'],
+    ['シンヤ', '「なるほど だから今が攻め時なんすね'],
+    ['それじゃあ このまま一気に決めるッス」']
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -243,14 +244,14 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「そこまで!!'],
-    ['台東高校 戦闘続行不可能'],
-    ['よって勝者 大田高校」']
+    ['台東高校 機能停止'],
+    ['勝者 大田高校」']
   ]);
   await refreshConversation(props);
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「バカな 何てダメージだ」'],
+    ['ガイ', '「バカな 途中までは俺の方が有利だったのに」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -263,7 +264,7 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「これにて台東高校 大田高校の合同練習試合を終了する'],
-    ['一同 礼!!'],
+    ['一同 姿勢を正して 礼!!」'],
   ]);
   await refreshConversation(props, 100);
 
@@ -274,6 +275,7 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
   await scrollRightMessages(props, [
     ['シンヤ', '「ありがとうございましたッス」']
   ]);
+  invisibleAllMessageWindows(props);
 };
 
 /** ゼロ防御チュートリアル */
@@ -291,7 +293,6 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    await zeroDefenseWin(props);  // TODO 開発が終わったら消す
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
     if (turn === 1) {
@@ -318,6 +319,24 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     if (lastState && lastState.isPlayerTurn && lastState.enemyState.armdozer.battery === 0 && 0 < lastState.enemyState.armdozer.hp) {
       await refreshConversation(props);
       await zeroBatteryChance(props);
+    }
+  }
+
+  /** @override */
+  async afterLastState(props: LastState): Promise<void> {
+    const foundBatteryDeclaration = props.update.find(v => v.effect.name === 'BatteryDeclaration');
+    const batteryDeclaration = foundBatteryDeclaration && foundBatteryDeclaration.effect.name === 'BatteryDeclaration'
+      ? {defenderBattery: foundBatteryDeclaration.effect.defenderBattery,
+        isPlayerAttack: foundBatteryDeclaration.effect.attacker === props.playerId}
+      : null;
+    const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
+    const gameOver = foundGameEnd && foundGameEnd.effect.name === 'GameEnd' && foundGameEnd.effect.result.type === 'GameOver'
+      ? {isPlayerWin: foundGameEnd.effect.result.winner === props.playerId}
+      : null;
+    if (batteryDeclaration && batteryDeclaration.defenderBattery === 0 && batteryDeclaration.isPlayerAttack
+      && gameOver && gameOver.isPlayerWin)
+    {
+      await zeroDefenseWin(props);
     }
   }
 }
