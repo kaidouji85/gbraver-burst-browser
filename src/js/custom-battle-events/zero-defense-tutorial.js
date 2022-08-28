@@ -261,8 +261,41 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
   await scrollRightMessages(props, [
     ['シンヤ', '「……これが0防御の破壊力」'],
   ]);props.view.dom.rightMessageWindow.darken();
+};
 
+/**
+ * ストーリー プレイヤー敗北
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerLose = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「そこまで!!'],
+    ['大田高校 機能停止'],
+    ['勝者 台東高校」']
+  ]);
   await refreshConversation(props);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「クッ もう少しで勝てたのに」'],
+  ]);props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「見たか 大田高校'],
+    ['これが台東高校の実力だ」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+};
+
+/**
+ * ストーリー 試合終了の礼
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const gameEndThanks = async (props) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「これにて台東高校 大田高校の合同練習試合を終了する'],
@@ -297,20 +330,11 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
-    if (turn === 1) {
-      await introduction(props);
-    }
-
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
       ? {isAttacker: foundLastBattle.effect.attacker === props.playerId, result: foundLastBattle.effect.result}
       : null;
-    if (lastBattle && lastBattle.isAttacker) {
-      await playerAttack(props, lastBattle.result);
-    } else if (lastBattle && !lastBattle.isAttacker) {
-      await enemyAttack(props, lastBattle.result);
-    }
-
+    const isGameEnd = props.update.filter(v => v.effect.name === 'GameEnd').length > 0;
     const foundLastState = props.update[props.update.length - 1];
     const foundEnemyState = foundLastState
       ? foundLastState.players.find(v => v.playerId !== props.playerId)
@@ -318,9 +342,18 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     const lastState = foundLastState && foundEnemyState
       ? {isPlayerTurn: foundLastState.activePlayerId === props.playerId, enemyState: foundEnemyState}
       : null;
-    if (lastState && lastState.isPlayerTurn && lastState.enemyState.armdozer.battery === 0 && 0 < lastState.enemyState.armdozer.hp) {
-      await refreshConversation(props);
-      await zeroBatteryChance(props);
+    const isZeroBatteryChance = lastState && lastState.isPlayerTurn && lastState.enemyState.armdozer.battery === 0
+      && 0 < lastState.enemyState.armdozer.hp;
+    if (turn === 1) {
+      await introduction(props);
+    } else if (lastBattle && lastBattle.isAttacker && !isGameEnd) {
+      await playerAttack(props, lastBattle.result);
+    } else if (lastBattle && !lastBattle.isAttacker  && !isGameEnd) {
+      await enemyAttack(props, lastBattle.result);
+      if (isZeroBatteryChance) {
+        await refreshConversation(props);
+        await zeroBatteryChance(props);
+      }
     }
   }
 
@@ -339,7 +372,14 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       && gameOver && gameOver.isPlayerWin)
     {
       await zeroDefenseWin(props);
+      await refreshConversation(props);
+      await gameEndThanks(props);
+    } else if (gameOver && !gameOver.isPlayerWin) {
+      await playerLose(props);
+      await refreshConversation(props);
+      await gameEndThanks(props);
     }
+
   }
 }
 
