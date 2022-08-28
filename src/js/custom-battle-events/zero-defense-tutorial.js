@@ -374,7 +374,12 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       await zeroDefenseWin(props);
       await refreshConversation(props);
       await gameEndThanks(props);
+    } else if (gameOver && !gameOver.isPlayerWin) {
+      await playerLose(props);
+      await refreshConversation(props);
+      await gameEndThanks(props);
     }
+
   }
 }
 
