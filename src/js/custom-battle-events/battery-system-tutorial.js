@@ -262,7 +262,7 @@ const completeAttackAndDefense = async (props: CustomBattleEventProps) => {
   await scrollLeftMessages(props, [
     ['ツバサ', '「これで攻撃 防御を一通り体験したな'],
     ['以降はどちらかのHPが0になるまで これを繰り返すんだ'],
-    ['以上で基本ルールは完了だ', 'ここから先は好きなように戦ってくれ」']
+    ['以上で基本ルールは完了だ ここから先は好きなように戦ってくれ」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
