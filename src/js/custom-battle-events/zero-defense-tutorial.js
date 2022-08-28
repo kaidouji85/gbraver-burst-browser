@@ -261,8 +261,41 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
   await scrollRightMessages(props, [
     ['シンヤ', '「……これが0防御の破壊力」'],
   ]);props.view.dom.rightMessageWindow.darken();
+};
 
+/**
+ * ストーリー プレイヤー敗北
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerLose = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「そこまで!!'],
+    ['大田高校 機能停止'],
+    ['勝者 台東高校」']
+  ]);
   await refreshConversation(props);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「クッ もう少しで勝てたのに」'],
+  ]);props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「見たか 大田高校'],
+    ['これが台東高校の実力だ」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+};
+
+/**
+ * ストーリー 試合終了の礼
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const gameEndThanks = async (props) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「これにて台東高校 大田高校の合同練習試合を終了する'],
@@ -339,6 +372,8 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       && gameOver && gameOver.isPlayerWin)
     {
       await zeroDefenseWin(props);
+      await refreshConversation(props);
+      await gameEndThanks(props);
     }
   }
 }
