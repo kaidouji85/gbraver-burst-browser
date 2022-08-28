@@ -23,6 +23,7 @@ const introduction = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   props.view.dom.leftMessageWindow.messages(['ガイ', '「よろしくお願いします」']);
+  props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「よろしくお願いしますッス」']
@@ -233,6 +234,48 @@ const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー 0防御勝利
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const zeroDefenseWin = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「そこまで!!'],
+    ['台東高校 戦闘続行不可能'],
+    ['よって勝者 大田高校」']
+  ]);
+  await refreshConversation(props);
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「バカな 何てダメージだ」'],
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「……これが0防御の破壊力」'],
+  ]);props.view.dom.rightMessageWindow.darken();
+
+  await refreshConversation(props);
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「これにて台東高校 大田高校の合同練習試合を終了する'],
+    ['一同 礼!!'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  props.view.dom.leftMessageWindow.messages(['ガイ', '「ありがとうございました」']);
+  props.view.dom.leftMessageWindow.scrollUp();
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「ありがとうございましたッス」']
+  ]);
+};
+
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
@@ -248,6 +291,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
+    await zeroDefenseWin(props);  // TODO 開発が終わったら消す
     this.stateHistory = [...this.stateHistory, ...props.update];
     const turn = turnCount(this.stateHistory);
     if (turn === 1) {
