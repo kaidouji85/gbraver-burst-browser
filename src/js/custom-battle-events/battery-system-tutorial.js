@@ -43,7 +43,7 @@ const introduction = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「よろしくお願いしますッス」']
+    ['シンヤ', '「よろしくお願いします」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -471,7 +471,7 @@ const tutorialEnd = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「ありがとうございましたッス」']
+    ['シンヤ', '「ありがとうございました」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
