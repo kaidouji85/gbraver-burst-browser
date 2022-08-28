@@ -26,7 +26,7 @@ const introduction = async (props: CustomBattleEventProps) => {
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「よろしくお願いしますッス」']
+    ['シンヤ', '「よろしくお願いします」']
   ]);
   await refreshConversation(props, 100);
 
@@ -355,7 +355,7 @@ const gameEndThanks = async (props) => {
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「ありがとうございましたッス」']
+    ['シンヤ', '「ありがとうございました」']
   ]);
   invisibleAllMessageWindows(props);
 };
