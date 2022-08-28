@@ -101,8 +101,49 @@ const playerAttackMiss = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「どうした大田高校'],
+    ['ガイ', '「どうした 大田高校'],
     ['お前たちの力はその程度か」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー プレイヤーフェイントミス
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerFeintMiss = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「フェイントだ」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「舐めるなよ 大田高校'],
+    ['そんな小細工 俺には通用しないぞ」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー プレイヤーフェイント成功
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerFeintSucces = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「フェイントだ」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「しまった バッテリーが無駄になった」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
