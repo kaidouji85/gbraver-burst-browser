@@ -59,7 +59,8 @@ const playerAttackHit = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「やるな大田高校 想定以上のダメージだ」'],
+    ['ガイ', '「やるな 大田高校'],
+    [' 想定以上のダメージだ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -158,7 +159,7 @@ const enemyAttackGuard = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「さすがだ 大田高校」'],
+    ['ガイ', '「さすがだ 大田高校'],
     ['この攻撃をガードするとはな」']
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -251,7 +252,8 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「バカな 途中までは俺の方が有利だったのに」'],
+    ['ガイ', '「バカな'],
+    ['途中までは俺の方が有利だったのに」']
   ]);
   props.view.dom.leftMessageWindow.darken();
 
