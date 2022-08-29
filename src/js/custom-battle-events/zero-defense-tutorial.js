@@ -1,6 +1,11 @@
 // @flow
 import type {BattleResult, GameState} from "gbraver-burst-core";
-import type {CustomBattleEvent, CustomBattleEventProps, LastState} from "../game/td-scenes/battle/custom-battle-event";
+import type {
+  BatteryCommandSelected, CommandCanceled,
+  CustomBattleEvent,
+  CustomBattleEventProps,
+  LastState
+} from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
@@ -342,7 +347,7 @@ const playerLose = async (props: CustomBattleEventProps) => {
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const gameEndThanks = async (props) => {
+const gameEndThanks = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「これにて台東高校 大田高校の合同練習試合を終了する'],
@@ -356,6 +361,27 @@ const gameEndThanks = async (props) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「ありがとうございました」']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー 0防御なのでコマンドキャンセル
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const cancelZeroBatteryDefense = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「待てシンヤ 0防御はまずい'],
+    ['HPが満タンでも 即死するダメージを受けるんだ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「りょ 了解ッス'],
+    ['このまま瞬殺されるところだったッス」']
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -426,7 +452,25 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       await refreshConversation(props);
       await gameEndThanks(props);
     }
+  }
 
+  /** @override */
+  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
+    const foundLastState = this.stateHistory[this.stateHistory.length - 1];
+    const lastState = foundLastState
+      ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
+        player: foundLastState.players.find(v => v.playerId === props.playerId)}
+      : null;
+    const lastPlayer = (lastState && lastState.player)
+      ? {isZeroBattery: lastState.player.armdozer.battery === 0,
+        enableBurst: lastState.player.armdozer.enableBurst, enablePilotSkill: lastState.player.pilot.enableSkill}
+      : null
+    const isZeroBatteryCommand = props.battery.battery === 0;
+    if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && !lastPlayer.isZeroBattery) {
+      await cancelZeroBatteryDefense(props);
+      return {isCommandCanceled: true};
+    }
+    return {isCommandCanceled: false};
   }
 }
 
