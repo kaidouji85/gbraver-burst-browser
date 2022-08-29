@@ -271,14 +271,15 @@ const zeroBatteryChance = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「0防御すると HPが満タンでも即死級のダメージを受けるからだ」'],
+    ['ツバサ', '「いい質問だな シンヤ'],
+    ['0防御すると HPが満タンでも一撃で死ぬダメージを受けるんだ」']
   ]);
   await refreshConversation(props, 100);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「なるほど だから今が攻め時なんすね'],
-    ['それじゃあ このまま一気に決めるッス」']
+    ['シンヤ', '「なるほど 0防御は即死ってことッスね'],
+    ['じゃあ このまま一気に決めるッス」']
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -299,8 +300,7 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「バカな'],
-    ['途中までは俺の方が有利だったのに」']
+    ['ガイ', '「バカな 途中まで俺が有利だったのに」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
