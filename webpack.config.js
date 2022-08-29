@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const uuid = require('uuid');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const {appDescription} = require('./app-description');
 
 const BUILD_ROOT = 'build/production';
 const RESOURCE_HASH = uuid.v4();
@@ -55,6 +56,7 @@ module.exports = {
         TWITTER_SITE: process.env.TWITTER_SITE,
         IS_SEARCH_ENGINE_NO_INDEX: process.env.IS_SEARCH_ENGINE_NO_INDEX === 'true',
         GOOGLE_MEASUREMENT_ID:  process.env.GOOGLE_MEASUREMENT_ID,
+        APP_DESCRIPTION: appDescription,
       },
       inject: false
     }),
