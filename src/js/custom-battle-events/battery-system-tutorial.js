@@ -9,21 +9,17 @@ import type {
   LastState,
   PilotSkillCommandSelected,
 } from "../game/td-scenes/battle/custom-battle-event";
-import {
-  activeLeftMessageWindow,
-  activeLeftMessageWindowWithFace,
-  activeRightMessageWindow,
-  activeRightMessageWindowWithFace
-} from "./active-message-window";
-import {
-  attentionBatterySelector,
-  attentionBurstButton,
-  attentionPilotButton,
-  unattentionBatterySelector,
-  unattentionBurstButton,
-  unattentionPilotButton
-} from "./attention";
+import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
+import {unattentionBurstButton} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
+import {
+  focusInBatterySelector,
+  focusInBurstButton,
+  focusInPilotButton,
+  focusOutBatterySelector,
+  focusOutBurstButton,
+  focusOutPilotButton
+} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 import {turnCount} from "./turn-count";
@@ -112,7 +108,7 @@ const playerAttackGuarded = async (props: CustomBattleEventProps) => {
 const playerAttackMiss = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「クッ 避けられたッス」']
+    ['シンヤ', '「しまった 避けられた」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -476,102 +472,29 @@ const tutorialEnd = async (props: CustomBattleEventProps) => {
   props.view.dom.rightMessageWindow.darken();
 };
 
-/**
- * プレイヤー攻撃時にバッテリーセレクタにフォーカスインする
- * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const focusInAttackBatterySelector = async (props: CustomBattleEventProps) => {
-  attentionBatterySelector(props);
-  invisibleAllMessageWindows(props);
-  activeLeftMessageWindow(props);
-  props.view.dom.leftMessageWindow.messages([
-    '好きなバッテリーで攻撃してみよう',
-    'ツバサ先輩よりも大きい数字を出せば攻撃が当たるぞ'
-  ]);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
-};
+/** 攻撃バッテリー注釈 */
+const attackBatteryCaption = [
+  '好きなバッテリーで攻撃してみよう',
+  'ツバサ先輩よりも大きい数字を出せば攻撃が当たるぞ'
+];
 
-/**
- * プレイヤー防御時にバッテリーセレクタにフォーカスインする
- * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const focusInDefenseBatterySelector = async (props: CustomBattleEventProps) => {
-  attentionBatterySelector(props);
-  invisibleAllMessageWindows(props);
-  activeLeftMessageWindow(props);
-  props.view.dom.leftMessageWindow.messages([
-    '好きなバッテリーで防御してみよう',
-    'ツバサ先輩よりも大きい数字を出せば攻撃を回避できるぞ'
-  ]);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
-};
+/** 防御バッテリー注釈 */
+const defenseBatteryCaption = [
+  '好きなバッテリーで防御してみよう',
+  'ツバサ先輩よりも大きい数字を出せば攻撃を回避できるぞ'
+];
 
-/**
- * バッテリーセレクタからフォーカスアウトする
- * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const focusOutBatterySelector = async (props: CustomBattleEventProps) => {
-  props.view.dom.leftMessageWindow.visible(false);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
-  unattentionBatterySelector(props);
-};
+/** バースト注釈 */
+const burstCaption = [
+  'このまま0防御すると負け確定だ',
+  'バーストでバッテリーを回復させよう'
+];
 
-/**
- * バーストボタンにフォーカスインする
- * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const focusInBurstButton = async (props: CustomBattleEventProps) => {
-  attentionBurstButton(props);
-  invisibleAllMessageWindows(props);
-  activeRightMessageWindow(props);
-  props.view.dom.rightMessageWindow.messages([
-    'このまま0防御すると負け確定だ',
-    'バーストでバッテリーを回復させよう'
-  ]);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
-}
-
-/**
- * バーストボタンからフォーカスアウトする
- * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const focusOutBurstButton = async (props: CustomBattleEventProps) => {
-  props.view.dom.rightMessageWindow.visible(false);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
-  unattentionBurstButton(props);
-}
-
-/**
- * パイロットボタンにフォーカスインする
- * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const focusInPilotButton = async (props: CustomBattleEventProps) => {
-  attentionPilotButton(props);
-  invisibleAllMessageWindows(props);
-  activeRightMessageWindow(props);
-  props.view.dom.rightMessageWindow.messages([
-    'このまま0防御すると負け確定だ',
-    'シンヤのパイロットスキルを発動して バッテリーを回復させよう'
-  ]);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0.7, 200).play();
-}
-
-/**
- * パイロットボタンからフォーカスアウトする
- * @param props イベントプロパティ
- * @return 処理が完了したら発火するPromise
- */
-const focusOutPilotButton = async (props: CustomBattleEventProps) => {
-  props.view.dom.rightMessageWindow.visible(false);
-  await props.view.hud.gameObjects.frontmostFader.opacity(0, 200).play();
-  unattentionPilotButton(props);
-}
+/** パイロットスキル注釈 */
+const pilotSkillCaption = [
+  'このまま0防御すると負け確定だ',
+  'シンヤのパイロットスキルを発動して バッテリーを回復させよう'
+];
 
 /** 選択可能なコマンド */
 type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All';
@@ -582,6 +505,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   stateHistory: GameState[];
   /** 選択可能なコマンド */
   selectableCommands: SelectableCommands;
+  /** バッテリーシステムの解説が完了しているか、trueで完了している */
+  isBatterySystemDescriptionComplete: boolean;
 
   /**
    * コンストラクタ
@@ -590,6 +515,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     super();
     this.stateHistory = [];
     this.selectableCommands = 'BatteryOnly';
+    this.isBatterySystemDescriptionComplete = false;
   }
 
   /** @override */
@@ -613,6 +539,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
       await batteryRuleDescription(props);
     } else if (turn === 3 && lastBattle) {
       this.selectableCommands = 'All';
+      this.isBatterySystemDescriptionComplete = true;
       await enemyAttack(props, lastBattle.result);
       await refreshConversation(props);
       await completeAttackAndDefense(props);
@@ -632,10 +559,10 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     const lastState = foundLastState
       ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === props.playerId}
       : null;
-    if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && lastState.isMyTurn) {
-      await focusInAttackBatterySelector(props);
-    } else if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
-      await focusInDefenseBatterySelector(props);
+    if (!this.isBatterySystemDescriptionComplete && lastState && lastState.isInputCommand && lastState.isMyTurn) {
+      await focusInBatterySelector(props, attackBatteryCaption);
+    } else if (!this.isBatterySystemDescriptionComplete && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
+      await focusInBatterySelector(props, defenseBatteryCaption);
     }
   }
 
@@ -683,19 +610,19 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
       await doPilotSkillBecauseZeroBattery(props);
       refreshConversation(props);
       this.selectableCommands = 'PilotSkillOnly';
-      await focusInPilotButton(props);
+      await focusInPilotButton(props, pilotSkillCaption);
       return {isCommandCanceled: true};
     } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
       await doBurstBecauseZeroBattery(props);
       refreshConversation(props);
       this.selectableCommands = 'BurstOnly';
       unattentionBurstButton(props);
-      await focusInBurstButton(props);
+      await focusInBurstButton(props, burstCaption);
       return {isCommandCanceled: true};
     } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn) {
       await cancelZeroBatteryDefense(props);
       refreshConversation(props);
-      (this.selectableCommands === 'BatteryOnly') && await focusInDefenseBatterySelector(props);
+      (this.selectableCommands === 'BatteryOnly') && await focusInBatterySelector(props, defenseBatteryCaption);
       return {isCommandCanceled: true};
     }
 
@@ -711,8 +638,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     }
 
     if (this.selectableCommands === 'BurstOnly') {
-      this.selectableCommands = 'All';
+      this.selectableCommands = this.isBatterySystemDescriptionComplete  ? 'All' : 'BatteryOnly';
       focusOutBurstButton(props);
+      return {isCommandCanceled: false};
     }
 
     return {isCommandCanceled: false};
