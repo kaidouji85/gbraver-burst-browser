@@ -633,8 +633,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
       return {isCommandCanceled: true};
     }
 
+    const turn = turnCount(this.stateHistory);
     if (this.selectableCommands === 'BurstOnly') {
-      this.selectableCommands = 'All';
+      this.selectableCommands = turn <= 2 ? 'BatteryOnly' : 'All';
       focusOutBurstButton(props);
     }
 
