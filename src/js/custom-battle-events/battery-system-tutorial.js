@@ -108,7 +108,7 @@ const playerAttackGuarded = async (props: CustomBattleEventProps) => {
 const playerAttackMiss = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「クッ 避けられたッス」']
+    ['シンヤ', '「しまった 避けられた」']
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -505,6 +505,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   stateHistory: GameState[];
   /** 選択可能なコマンド */
   selectableCommands: SelectableCommands;
+  /** バッテリーシステムの解説が完了しているか、trueで完了している */
+  isBatterySystemDescriptionComplete: boolean;
 
   /**
    * コンストラクタ
@@ -513,6 +515,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     super();
     this.stateHistory = [];
     this.selectableCommands = 'BatteryOnly';
+    this.isBatterySystemDescriptionComplete = false;
   }
 
   /** @override */
@@ -536,6 +539,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
       await batteryRuleDescription(props);
     } else if (turn === 3 && lastBattle) {
       this.selectableCommands = 'All';
+      this.isBatterySystemDescriptionComplete = true;
       await enemyAttack(props, lastBattle.result);
       await refreshConversation(props);
       await completeAttackAndDefense(props);
@@ -555,9 +559,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     const lastState = foundLastState
       ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === props.playerId}
       : null;
-    if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && lastState.isMyTurn) {
+    if (!this.isBatterySystemDescriptionComplete && lastState && lastState.isInputCommand && lastState.isMyTurn) {
       await focusInBatterySelector(props, attackBatteryCaption);
-    } else if (this.selectableCommands === 'BatteryOnly' && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
+    } else if (!this.isBatterySystemDescriptionComplete && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
       await focusInBatterySelector(props, defenseBatteryCaption);
     }
   }
@@ -633,10 +637,10 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
       return {isCommandCanceled: true};
     }
 
-    const turn = turnCount(this.stateHistory);
     if (this.selectableCommands === 'BurstOnly') {
-      this.selectableCommands = turn <= 2 ? 'BatteryOnly' : 'All';
+      this.selectableCommands = this.isBatterySystemDescriptionComplete  ? 'All' : 'BatteryOnly';
       focusOutBurstButton(props);
+      return {isCommandCanceled: false};
     }
 
     return {isCommandCanceled: false};
