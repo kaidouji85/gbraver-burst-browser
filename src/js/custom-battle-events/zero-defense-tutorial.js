@@ -270,7 +270,7 @@ const zeroBatteryChance = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「……どうして相手のバッテリーが0だとチャンスなんすか」'],
+    ['シンヤ', '「……どうして相手のバッテリーが0だとチャンスなんスか」'],
   ]);
   await refreshConversation(props, 100);
 
@@ -366,22 +366,60 @@ const gameEndThanks = async (props: CustomBattleEventProps) => {
 };
 
 /**
- * ストーリー 0防御なのでコマンドキャンセル
+ * ストーリー 0防御禁止
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const cancelZeroBatteryDefense = async (props: CustomBattleEventProps) => {
+const noZeroBattery = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「待てシンヤ 0防御はまずい'],
     ['HPが満タンでも 即死するダメージを受けるんだ」'],
   ]);
+};
+
+/**
+ * ストーリー 0防御なのでコマンドキャンセル
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const cancelZeroBatteryDefense = async (props: CustomBattleEventProps) => {
+  await noZeroBattery(props);
   await refreshConversation(props, 100);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「りょ 了解ッス'],
     ['このまま瞬殺されるところだったッス」']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー 0防御0バッテリーなのでバーストする
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) => {
+  await noZeroBattery(props);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「でもツバサ先輩 俺のバッテリーはもう0ッスよ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「こういう時はバーストで一気にバッテリーを回復させるんだ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「了解ッス'],
+    ['バーストすればいいんスね」']
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -468,6 +506,9 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     const isZeroBatteryCommand = props.battery.battery === 0;
     if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && !lastPlayer.isZeroBattery) {
       await cancelZeroBatteryDefense(props);
+      return {isCommandCanceled: true};
+    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
+      await doBurstBecauseZeroBattery(props);
       return {isCommandCanceled: true};
     }
     return {isCommandCanceled: false};
