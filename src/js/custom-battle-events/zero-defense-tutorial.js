@@ -424,10 +424,15 @@ const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/** 選択可能なコマンド */
+type SelectableCommands = 'BurstOnly' | 'All';
+
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
+  /** 選択可能なコマンド */
+  selectableCommands: SelectableCommands;
 
   /**
    * コンストラクタ
@@ -435,6 +440,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   constructor() {
     super();
     this.stateHistory = [];
+    this.selectableCommands = 'All';
   }
 
   /** @override */
@@ -494,6 +500,11 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
+    const enableBatteryCommand: SelectableCommands[] = ['All'];
+    if (!enableBatteryCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
     const foundLastState = this.stateHistory[this.stateHistory.length - 1];
     const lastState = foundLastState
       ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
