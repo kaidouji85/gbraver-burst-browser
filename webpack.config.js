@@ -75,8 +75,10 @@ module.exports = {
           to: path.resolve(__dirname, BUILD_ROOT)
         },
         {
-          from: path.resolve(__dirname, "src/app-icon-512x512.png"),
-          to: path.resolve(__dirname, BUILD_ROOT)
+          from: process.env.IS_APP_ICON_DEV_ENABLE === 'true'
+            ? path.resolve(__dirname, "src/app-icon-dev-512x512.png")
+            : path.resolve(__dirname, "src/app-icon-512x512.png"),
+          to: path.resolve(__dirname, `${BUILD_ROOT}/app-icon-512x512.png`)
         },
         {
           from: path.resolve(__dirname, "src/ogp-thumbnail.png"),
