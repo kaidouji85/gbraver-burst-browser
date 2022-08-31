@@ -434,9 +434,40 @@ const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => {
+  await noZeroBattery(props);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「でもツバサ先輩 俺のバッテリーはもう0ッスよ」'],
+  ]);
+  await refreshConversation(props, 100);
+
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「パイロットスキル発動せよ」'],
+    ['ツバサ', '「こういう時はバーストで一気にバッテリーを回復させるんだ'],
+    ['……と言いたい所だが、バーストは使用済みか'],
+    ['ならば君の秘められた力 パイロットスキルを発動するんだ」']
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「俺に秘められた力ッスか」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「君のパイロットスキルではバッテリーを少しだけ回復できる'],
+    ['それで急場を凌ぐんだ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「了解ッス'],
+    ['俺の根性 見せてやる」']
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -445,6 +476,12 @@ const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => 
 const shouldBurst = [
   'このままだと台東高校にワンパンで負けてしまう',
   'バーストでバッテリーを回復しよう'
+];
+
+/** パイロットスキル注釈 */
+const shouldPilotSkill = [
+  'このままだとガイにワンパンで負けてしまう',
+  'パイロットスキルを発動してバッテリーを回復しよう'
 ];
 
 /** 選択可能なコマンド */
@@ -489,15 +526,15 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     if (!this.isIntroductionComplete) {
       await introduction(props);
       this.isIntroductionComplete = true;
+    } else if (lastBattle && !lastBattle.isAttacker  && !isGameEnd && isZeroBatteryChance) {
+      await enemyAttack(props, lastBattle.result);
+      await refreshConversation(props);
+      await zeroBatteryChance(props);
     } else if (lastBattle && lastBattle.isAttacker && !isGameEnd) {
       await playerAttack(props, lastBattle.result);
     } else if (lastBattle && !lastBattle.isAttacker  && !isGameEnd) {
       await enemyAttack(props, lastBattle.result);
-      if (isZeroBatteryChance) {
-        await refreshConversation(props);
-        await zeroBatteryChance(props);
-      }
-    }
+    } 
   }
 
   /** @override */
@@ -556,7 +593,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       this.selectableCommands = 'PilotSkillOnly';
       await doPilotSkillBecauseZeroBattery(props);
       unattentionPilotButton(props);
-      await focusInPilotButton(props, ['後で書く']);
+      await focusInPilotButton(props, shouldPilotSkill);
       return {isCommandCanceled: true};
     }
     return {isCommandCanceled: false};
