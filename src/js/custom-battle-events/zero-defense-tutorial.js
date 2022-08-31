@@ -1,13 +1,17 @@
 // @flow
 import type {BattleResult, GameState} from "gbraver-burst-core";
 import type {
-  BatteryCommandSelected, CommandCanceled,
+  BatteryCommandSelected,
+  BurstCommandSelected,
+  CommandCanceled,
   CustomBattleEvent,
   CustomBattleEventProps,
   LastState
 } from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
+import {unattentionBurstButton} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
+import {focusInBurstButton, focusOutBurstButton} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 import {turnCount} from "./turn-count";
@@ -424,6 +428,12 @@ const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/** バースト注釈 */
+const shouldBurst = [
+  'このままだと台東高校にワンパンで負けてしまう',
+  'バーストでバッテリーを回復しよう'
+];
+
 /** 選択可能なコマンド */
 type SelectableCommands = 'BurstOnly' | 'All';
 
@@ -519,9 +529,28 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       await cancelZeroBatteryDefense(props);
       return {isCommandCanceled: true};
     } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
+      this.selectableCommands = 'BurstOnly';
       await doBurstBecauseZeroBattery(props);
+      unattentionBurstButton(props);
+      await focusInBurstButton(props, shouldBurst);
       return {isCommandCanceled: true};
     }
+    return {isCommandCanceled: false};
+  }
+
+  /** @override */
+  async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
+    const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
+    if (!enableBurstCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
+    if (this.selectableCommands === 'BurstOnly') {
+      this.selectableCommands = 'All';
+      focusOutBurstButton(props);
+      return {isCommandCanceled: false};  
+    }
+
     return {isCommandCanceled: false};
   }
 }
