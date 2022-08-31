@@ -28,7 +28,7 @@ const zeroDefenseTutorial =   {
 }
 
 /** チュートリアルステージ集合 */
-export const TutorialStages: TutorialStage[] = [batterySystemTutorial];
+export const TutorialStages: TutorialStage[] = [batterySystemTutorial, zeroDefenseTutorial];
 
 /** 開発中のチュートリアルステージ集合 */
-export const TutorialStagesInDevelopment: TutorialStage[] = [zeroDefenseTutorial, batterySystemTutorial];
+export const TutorialStagesInDevelopment: TutorialStage[] = TutorialStages;
