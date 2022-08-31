@@ -2,12 +2,12 @@
 import type {BattleResult, GameState} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
-  BurstCommandSelected,
-  PilotSkillCommandSelected,
+  BurstCommandSelected, 
   CommandCanceled,
   CustomBattleEvent,
   CustomBattleEventProps,
-  LastState
+  LastState,
+  PilotSkillCommandSelected
 } from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
 import {unattentionBurstButton, unattentionPilotButton} from "./attention";
