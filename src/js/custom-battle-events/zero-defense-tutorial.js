@@ -15,7 +15,6 @@ import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
-import {turnCount} from "./turn-count";
 
 /**
  * ストーリー 冒頭
@@ -457,6 +456,8 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   stateHistory: GameState[];
   /** 選択可能なコマンド */
   selectableCommands: SelectableCommands;
+  /** イントロダクションを再生したか、trueで再生した */
+  isIntroductionComplete: boolean;
 
   /**
    * コンストラクタ
@@ -465,12 +466,12 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     super();
     this.stateHistory = [];
     this.selectableCommands = 'All';
+    this.isIntroductionComplete = false;
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
-    const turn = turnCount(this.stateHistory);
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
       ? {isAttacker: foundLastBattle.effect.attacker === props.playerId, result: foundLastBattle.effect.result}
@@ -485,8 +486,9 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       : null;
     const isZeroBatteryChance = lastState && lastState.isPlayerTurn && lastState.enemyState.armdozer.battery === 0
       && 0 < lastState.enemyState.armdozer.hp;
-    if (turn === 1) {
+    if (!this.isIntroductionComplete) {
       await introduction(props);
+      this.isIntroductionComplete = true;
     } else if (lastBattle && lastBattle.isAttacker && !isGameEnd) {
       await playerAttack(props, lastBattle.result);
     } else if (lastBattle && !lastBattle.isAttacker  && !isGameEnd) {
