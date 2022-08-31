@@ -3,15 +3,16 @@ import type {BattleResult, GameState} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
+  PilotSkillCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
   CustomBattleEventProps,
   LastState
 } from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
-import {unattentionBurstButton} from "./attention";
+import {unattentionBurstButton, unattentionPilotButton} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
-import {focusInBurstButton, focusOutBurstButton} from "./focus";
+import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 import {turnCount} from "./turn-count";
@@ -428,6 +429,19 @@ const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー 0防御0バッテリーなのでパイロットスキルを使う
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「パイロットスキル発動せよ」'],
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
 /** バースト注釈 */
 const shouldBurst = [
   'このままだと台東高校にワンパンで負けてしまう',
@@ -435,7 +449,7 @@ const shouldBurst = [
 ];
 
 /** 選択可能なコマンド */
-type SelectableCommands = 'BurstOnly' | 'All';
+type SelectableCommands = 'BurstOnly' | 'PilotSkillOnly' | 'All';
 
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
@@ -534,6 +548,14 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       unattentionBurstButton(props);
       await focusInBurstButton(props, shouldBurst);
       return {isCommandCanceled: true};
+    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery 
+      && !lastPlayer.enableBurst && lastPlayer.enablePilotSkill)
+    {
+      this.selectableCommands = 'PilotSkillOnly';
+      await doPilotSkillBecauseZeroBattery(props);
+      unattentionPilotButton(props);
+      await focusInPilotButton(props, ['後で書く']);
+      return {isCommandCanceled: true};
     }
     return {isCommandCanceled: false};
   }
@@ -551,6 +573,22 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       return {isCommandCanceled: false};  
     }
 
+    return {isCommandCanceled: false};
+  }
+
+  /** @override */
+  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
+    const enablePilotSkillCommand: SelectableCommands[] = ['All', 'PilotSkillOnly'];
+    if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+  
+    if (this.selectableCommands === 'PilotSkillOnly') {
+      this.selectableCommands = 'All';
+      focusOutPilotButton(props);
+      return {isCommandCanceled: false}; 
+    }
+  
     return {isCommandCanceled: false};
   }
 }
