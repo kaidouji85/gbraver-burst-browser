@@ -188,7 +188,7 @@ const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleR
 const enemyAttackHit = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「なんてダメージだ」'],
+    ['シンヤ', '「すごいダメージだ」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -453,7 +453,7 @@ const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => 
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「俺に秘められた力ッスか」'],
+    ['シンヤ', '「俺に秘められた力?」'],
   ]);
   await refreshConversation(props, 100);
 
