@@ -472,15 +472,28 @@ const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => 
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー バースト、パイロットスキルが使えず0バッテリーなので負け確定
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「負け確定」'],
+  ]);
+  await refreshConversation(props, 100);
+};
+
 /** バースト注釈 */
 const shouldBurst = [
-  'このままだと台東高校にワンパンで負けてしまう',
+  'このまま0防御すると負け確定だ',
   'バーストでバッテリーを回復しよう'
 ];
 
 /** パイロットスキル注釈 */
 const shouldPilotSkill = [
-  'このままだとガイにワンパンで負けてしまう',
+  'このまま0防御すると負け確定だ',
   'パイロットスキルを発動してバッテリーを回復しよう'
 ];
 
@@ -595,6 +608,12 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       unattentionPilotButton(props);
       await focusInPilotButton(props, shouldPilotSkill);
       return {isCommandCanceled: true};
+    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery 
+      && !lastPlayer.enableBurst && !lastPlayer.enablePilotSkill)
+    {
+      await zeroBatteryDefenseBecauseNoBatteryRecover(props);
+      refreshConversation(props);
+      return {isCommandCanceled: false};
     }
     return {isCommandCanceled: false};
   }
