@@ -63,6 +63,46 @@ const introduction = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー ダメージ反射成功
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const successReflectDamage = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「しまった カウンターか」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Raito');
+  await scrollLeftMessages(props, [
+    ['ライト', '「かかったな大田高校'],
+    ['これぞ奥義 バーストや」']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー ダメージ反射失敗
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const failReflectDamage = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「攻撃してたら ヤバかった」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Raito');
+  await scrollLeftMessages(props, [
+    ['ライト', '「さすが大田高校'],
+    ['この程度の小細工は通用せぇへんか」']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
