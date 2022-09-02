@@ -63,6 +63,46 @@ const introduction = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー ダメージ反射成功
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const successReflectDamage = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「しまった カウンターか」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Raito');
+  await scrollLeftMessages(props, [
+    ['ライト', '「かかったな大田高校'],
+    ['これぞ奥義 バーストや」']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー ダメージ反射失敗
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const failReflectDamage = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「攻撃してたら ヤバかった」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Raito');
+  await scrollLeftMessages(props, [
+    ['ライト', '「さすが大田高校はん'],
+    ['この程度の小細工は通用せぇへんか」']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
@@ -81,9 +121,26 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
+    const foundLastState = props.update[props.update.length - 1];
+    const foundLastEnemyState = foundLastState 
+      ? foundLastState.players.find(v => v.playerId !== props.playerId)
+      : null;
+    const enemyState = foundLastEnemyState
+      ? {hasTryReflect: foundLastEnemyState.armdozer.effects.filter(v => v.type === 'TryReflect').length > 0}
+      : null;
+    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
+    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
+      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId}
+      : null;
+    const successReflect = props.update
+      .filter(v => v.effect.name === 'Reflect' && v.effect.damagedPlayer === props.playerId).length > 0;
     if (!this.isIntroductionComplete) {
       await introduction(props);
       this.isIntroductionComplete = true;
+    } else if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && successReflect) {
+      await successReflectDamage(props);
+    } else if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && !successReflect) {
+      await failReflectDamage(props);
     }
   }
 }
