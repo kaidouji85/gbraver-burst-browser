@@ -5,6 +5,7 @@ import type {
   LastState,
 } from "../game/td-scenes/battle/custom-battle-event";
 import type {GameState} from "gbraver-burst-core/lib/state/game-state";
+import { waitTime } from "../wait/wait-time";
 import {
   activeLeftMessageWindowWithFace,
   activeRightMessageWindowWithFace,
@@ -61,7 +62,9 @@ const introduction = async (props: CustomBattleEventProps) => {
   await refreshConversation(props, 100);
 
   activeLeftMessageWindowWithFace(props, 'Raito');
-  props.view.dom.leftMessageWindow.messages(['ライト', '「よろしくお願いします」']);
+  props.view.dom.leftMessageWindow.messages(
+    ['ライト', '「よろしくお願いします」']
+  );
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
