@@ -15,7 +15,7 @@ const introduction = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Raito');
   await scrollLeftMessages(props, [
     ['ライト', '「さすがは大田高校はん 一瞬で勝負がついてしもたな'],
-    ['どや まだ道路の占有時間も残っとるし ワイともう一戦やりまへんか']
+    ['どや まだ道路の占有時間も残っとるし ワイともう一戦やりまへんか」']
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -28,13 +28,13 @@ const introduction = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「監督からもGoサインが出た'],
-    ['シンヤ 悪いがもう一戦だけ頑張ってくれ']
+    ['シンヤ 悪いがもう一戦だけ頑張ってくれ」']
   ]);
   await refreshConversation(props, 100);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「了解ッス'],
+    ['シンヤ', '「了解ッス」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
