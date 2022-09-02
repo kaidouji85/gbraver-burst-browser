@@ -103,30 +103,6 @@ const failReflectDamage = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
-/**
- * ストーリー 5防御しないと負け
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const loseIfNoDefense5 = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Tsubasa');
-  await scrollRightMessages(props, [
-    ['ツバサ', '「5防御しないと負け」'],
-  ]);
-};
-
-/**
- * ストーリー バーストでバッテリー回復
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Tsubasa');
-  await scrollRightMessages(props, [
-    ['ツバサ', '「バーストでバッテリー回復」'],
-  ]);
-};
-
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
