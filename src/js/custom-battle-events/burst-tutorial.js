@@ -121,9 +121,26 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
+    const foundLastState = props.update[props.update.length - 1];
+    const foundLastEnemyState = foundLastState 
+      ? foundLastState.players.find(v => v.playerId !== props.playerId)
+      : null;
+    const enemyState = foundLastEnemyState
+      ? {hasTryReflect: foundLastEnemyState.armdozer.effects.filter(v => v.type === 'TryReflect').length > 0}
+      : null;
+    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
+    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
+      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId}
+      : null;
+    const successReflect = props.update
+      .filter(v => v.effect.name === 'Reflect' && v.effect.damagedPlayer === props.playerId).length > 0;
     if (!this.isIntroductionComplete) {
       await introduction(props);
       this.isIntroductionComplete = true;
+    } else if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && successReflect) {
+      await successReflectDamage(props);
+    } else if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && !successReflect) {
+      await failReflectDamage(props);
     }
   }
 }
