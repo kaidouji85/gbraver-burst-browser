@@ -152,19 +152,35 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     const enemyState = foundLastEnemyState
       ? {hasTryReflect: foundLastEnemyState.armdozer.effects.filter(v => v.type === 'TryReflect').length > 0}
       : null;
+    const foundPlayerState = foundLastState
+      ? foundLastState.players.find(v => v.playerId === props.playerId)
+      : null;
+    const playerState = foundPlayerState
+      ? {isAttack5Death: foundPlayerState.armdozer.hp <= 1900, enableBurst: foundPlayerState.armdozer.enableBurst}
+      : null;
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
       ? {isAttacker: foundLastBattle.effect.attacker === props.playerId}
       : null;
     const successReflect = props.update
       .filter(v => v.effect.name === 'Reflect' && v.effect.damagedPlayer === props.playerId).length > 0;
+
     if (!this.isIntroductionComplete) {
       await introduction(props);
       this.isIntroductionComplete = true;
-    } else if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && successReflect) {
+    }
+
+    if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && successReflect) {
       await successReflectDamage(props);
     } else if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && !successReflect) {
       await failReflectDamage(props);
+    }
+
+    if (lastBattle && lastBattle.isAttacker && playerState && playerState.isAttack5Death) {
+      await loseIfNoDefense5(props);
+      if (playerState.enableBurst) {
+        await doBurstToRecoverBattery(props);
+      }
     }
   }
 }
