@@ -31,7 +31,9 @@ const introduction = async (props: CustomBattleEventProps) => {
   await refreshConversation(props, 100);
 
   activeLeftMessageWindowWithFace(props, 'Gai');
-  props.view.dom.leftMessageWindow.messages(['ガイ', '「よろしくお願いします」']);
+  props.view.dom.leftMessageWindow.messages(
+    ['ガイ', '「よろしくお願いします」']
+  );
   props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
