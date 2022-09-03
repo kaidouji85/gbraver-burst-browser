@@ -7,10 +7,11 @@ import type {
   CustomBattleEvent,
   CustomBattleEventProps,
   LastState,
+  PilotSkillCommandSelected,
 } from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
-import {focusInBurstButton, focusOutBurstButton} from "./focus";
+import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 
@@ -29,7 +30,7 @@ const introduction = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「相談するから 少し待ってくれ」'],
+    ['ツバサ', '「少し待ってくれ」'],
   ]);
   await refreshConversation(props);
 
@@ -79,7 +80,7 @@ const successReflectDamage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Raito');
   await scrollLeftMessages(props, [
     ['ライト', '「かかったな大田高校'],
-    ['これぞ奥義 バーストや」']
+    ['これぞ奥義 電撃バリアや」']
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -103,10 +104,11 @@ const failReflectDamage = async (props: CustomBattleEventProps) => {
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const loseIfNoDefense5 = async (props: CustomBattleEventProps) => {
+const shouldDefense5 = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「シンヤ あと一撃でも食らえば 君のHPは0だぞ」'],
+    ['ツバサ', '「待て シンヤ'],
+    ['あと一撃でも食らえば 君のHPは0だぞ」']
   ]);
   await refreshConversation(props, 100);
 
@@ -119,9 +121,9 @@ const loseIfNoDefense5 = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「落ち着け シンヤ'],
+    ['ツバサ', '「落ち着くんだ シンヤ'],
     ['攻撃 防御で同じバッテリーを出した場合 ガードでダメージが半減される'],
-    ['5防御のダメージ半減で この場を凌ぐんだ」']
+    ['5防御で この場を凌ぐんだ」']
   ]);
   await refreshConversation(props, 100);
 };
@@ -143,13 +145,62 @@ const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
     ['ツバサ', '「ならばバーストを発動させよう'],
     ['バーストは1試合に1回しか使えないが 一気にバッテリーが回復できるんだ」'],
   ]);
-  await refreshConversation(props, 100);
+  invisibleAllMessageWindows(props);
+};
 
+/**
+ * ストーリー パイロットスキルでバッテリー回復
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const doPilotSkillToRecoverBattery = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「了解ッス」'],
+    ['シンヤ', '「でもツバサ先輩 俺のバッテリーは5もないッスよ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「ならばバーストを発動させよう'],
+    ['……と言いたいところだが 既にバーストは発動させたか'],
+    ['それなら 君のパイロットスキルで バッテリーを回復するんだ」']
   ]);
   invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー バースト、パイロットスキルが使えないのでバッテリー変更なし
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const noChangeCommandBecauseNoBatteryRecover = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「でもツバサ先輩 俺のバッテリーは5もないッスよ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「ならばバースト ……は発動済か'],
+    ['それならばパイロットスキル ……も使い切ったか'],
+    ['シンヤ 残念だが これ以上打つ手なしだ」']
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー 5防御しないと負け（2回目以降）
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const shouldDefense5Again = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「シンヤ さっきも説明したが 今は5防御しないとまずい」']
+  ]);
+  await refreshConversation(props, 100);
 };
 
 /**
@@ -158,12 +209,6 @@ const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Tsubasa');
-  await scrollRightMessages(props, [
-    ['ツバサ', '「シンヤ さっきも説明したが 今は5防御しないとまずい」']
-  ]);
-  await refreshConversation(props, 100);
-
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「すみませんッス うっかりしてたッス」'],
@@ -177,8 +222,14 @@ const shouldBurst = [
   'まずはバーストでバッテリーを回復させよう'
 ];
 
+/** パイロットスキル注釈 */
+const shouldPilotSkill = [
+  '5防御しないと敗色濃厚だ',
+  'まずはパイロットスキルでバッテリーを回復させよう'
+];
+
 /** 選択可能なコマンド */
-type SelectableCommands = 'BurstOnly' | 'All';
+type SelectableCommands = 'BurstOnly' | 'PilotSkillOnly' | 'All';
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
@@ -242,23 +293,41 @@ class BurstTutorial extends EmptyCustomBattleEvent {
         isPlayerFullBattery: latestPlayer.armdozer.battery === 5,
         isEnemyFullBattery: latestEnemy.armdozer.battery === 5,
         isHpLessThanEnemyPower: latestPlayer.armdozer.hp <= latestEnemy.armdozer.power,
-        enableBurst: latestPlayer.armdozer.enableBurst}
+        enableBurst: latestPlayer.armdozer.enableBurst,
+        enablePilotSkill: latestPlayer.pilot.enableSkill}
       : null;
     const notBattery5 = props.battery.battery !== 5;
+    const defense5 = async (props: CustomBattleEventProps) => {
+      this.isLoseIfNoDefense5Complete ? await shouldDefense5Again(props) : await shouldDefense5(props);
+      this.isLoseIfNoDefense5Complete = true;
+    };
     if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && !lastState.isPlayerFullBattery && lastState.enableBurst)
     {
-      this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
-      this.isLoseIfNoDefense5Complete = true;
+      await defense5(props);
       await doBurstToRecoverBattery(props);
       await focusInBurstButton(props, shouldBurst);
       this.selectableCommands = 'BurstOnly';
       return {isCommandCanceled: true};
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
+      && !lastState.isPlayerFullBattery && !lastState.enableBurst && lastState.enablePilotSkill)
+    {
+      await defense5(props);
+      await doPilotSkillToRecoverBattery(props);
+      await focusInPilotButton(props, shouldPilotSkill);
+      this.selectableCommands = 'PilotSkillOnly';
+      return {isCommandCanceled: true};
+    } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
+      && !lastState.isPlayerFullBattery && !lastState.enableBurst && !lastState.enablePilotSkill)
+    {
+      await defense5(props);
+      await noChangeCommandBecauseNoBatteryRecover(props);
+      return {isCommandCanceled: false};
+    } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && lastState.isPlayerFullBattery)
     {
-      this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
-      this.isLoseIfNoDefense5Complete = true;
+      await defense5(props);
+      await notDefense5Carelessly(props);
       return {isCommandCanceled: true};
     }
 
@@ -282,10 +351,16 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async onPilotSkillCommandSelected(): Promise<CommandCanceled> {
-    const enablePilotSkillCommand: SelectableCommands[] = ['All'];
+  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
+    const enablePilotSkillCommand: SelectableCommands[] = ['PilotSkillOnly', 'All'];
     if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
       return {isCommandCanceled: true};
+    }
+
+    if (this.selectableCommands === 'PilotSkillOnly') {
+      this.selectableCommands = 'All';
+      focusOutPilotButton(props);
+      return {isCommandCanceled: false};
     }
 
     return {isCommandCanceled: false};
