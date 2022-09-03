@@ -1,8 +1,16 @@
 // @flow
 import type {GameState} from "gbraver-burst-core/lib/state/game-state";
-import type {CustomBattleEvent, CustomBattleEventProps, LastState} from "../game/td-scenes/battle/custom-battle-event";
+import type {
+  BatteryCommandSelected,
+  BurstCommandSelected,
+  CommandCanceled,
+  CustomBattleEvent,
+  CustomBattleEventProps,
+  LastState,
+} from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
+import {focusInBurstButton, focusOutBurstButton} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 
@@ -59,7 +67,6 @@ const introduction = async (props: CustomBattleEventProps) => {
   await scrollRightMessages(props, [
     ['シンヤ', '「よろしくお願いします」']
   ]);
-
   invisibleAllMessageWindows(props);
 };
 
@@ -69,12 +76,6 @@ const introduction = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const successReflectDamage = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「しまった カウンターか」'],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-
   activeLeftMessageWindowWithFace(props, 'Raito');
   await scrollLeftMessages(props, [
     ['ライト', '「かかったな大田高校'],
@@ -89,12 +90,6 @@ const successReflectDamage = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const failReflectDamage = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「攻撃してたら ヤバかった」'],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-
   activeLeftMessageWindowWithFace(props, 'Raito');
   await scrollLeftMessages(props, [
     ['ライト', '「さすが大田高校はん'],
@@ -103,12 +98,99 @@ const failReflectDamage = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー 5防御しないと負け
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const loseIfNoDefense5 = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「シンヤ あと一撃でも食らえば 君のHPは0だぞ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「しかも よく見ると台東高校のバッテリーは5じゃないスか'],
+    ['絶対ヒットの5攻撃をされたら終わりッス」']
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「落ち着け シンヤ'],
+    ['攻撃 防御で同じバッテリーを出した場合 ガードでダメージが半減される'],
+    ['5防御のダメージ半減で この場を凌ぐんだ」']
+  ]);
+  await refreshConversation(props, 100);
+};
+
+/**
+ * ストーリー バーストでバッテリー回復
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「でもツバサ先輩 俺のバッテリーは5もないッスよ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「ならばバーストを発動させよう'],
+    ['バーストは1試合に1回しか使えないが 一気にバッテリーが回復できるんだ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「了解ッス」'],
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー うっかり5防御以外を選択
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「シンヤ さっきも説明したが 今は5防御しないとまずい」']
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「すみませんッス うっかりしてたッス」'],
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
+/** バースト注釈 */
+const shouldBurst = [
+  '5防御しないと敗色濃厚だ',
+  'まずはバーストでバッテリーを回復させよう'
+];
+
+/** 選択可能なコマンド */
+type SelectableCommands = 'BurstOnly' | 'All';
+
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
   /** イントロダクションを再生したか、trueで再生した */
   isIntroductionComplete: boolean;
+  /** 5防御しないと負けを再生したか、trueで再生した */
+  isLoseIfNoDefense5Complete: boolean;
+  /** 選択可能なコマンド */
+  selectableCommands: SelectableCommands;
+
   /**
    * コンストラクタ
    */
@@ -116,32 +198,97 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     super();
     this.stateHistory = [];
     this.isIntroductionComplete = false;
+    this.isLoseIfNoDefense5Complete = false;
+    this.selectableCommands = 'All';
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
-    const foundLastState = props.update[props.update.length - 1];
-    const foundLastEnemyState = foundLastState 
-      ? foundLastState.players.find(v => v.playerId !== props.playerId)
-      : null;
-    const enemyState = foundLastEnemyState
-      ? {hasTryReflect: foundLastEnemyState.armdozer.effects.filter(v => v.type === 'TryReflect').length > 0}
-      : null;
-    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
-    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
-      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId}
-      : null;
-    const successReflect = props.update
-      .filter(v => v.effect.name === 'Reflect' && v.effect.damagedPlayer === props.playerId).length > 0;
     if (!this.isIntroductionComplete) {
       await introduction(props);
       this.isIntroductionComplete = true;
-    } else if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && successReflect) {
+    }
+
+    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
+    const lastBattlePlayer = (foundLastBattle?.players ?? []).find(v => v.playerId === props.playerId);
+    const lastBattleEnemy = (foundLastBattle?.players ?? []).find(v => v.playerId !== props.playerId);
+    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle' && lastBattlePlayer && lastBattleEnemy
+      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
+        hasEnemyTryReflect: 0 < lastBattleEnemy.armdozer.effects.filter(v => v.type === 'TryReflect').length}
+      : null;
+    const successReflect = props.update
+      .filter(v => v.effect.name === 'Reflect' && v.effect.damagedPlayer === props.playerId)
+      .length > 0;
+    if (lastBattle && lastBattle.isAttacker && lastBattle.hasEnemyTryReflect && successReflect) {
       await successReflectDamage(props);
-    } else if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && !successReflect) {
+    } else if (lastBattle && lastBattle.isAttacker && lastBattle.hasEnemyTryReflect && !successReflect) {
       await failReflectDamage(props);
     }
+  }
+
+  /** @override */
+  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
+    const enableBurstCommand: SelectableCommands[] = ['All'];
+    if (!enableBurstCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
+    const foundLastState = this.stateHistory[this.stateHistory.length - 1];
+    const latestPlayer = (foundLastState?.players ?? []).find(v => v.playerId === props.playerId);
+    const latestEnemy = (foundLastState?.players ?? []).find(v => v.playerId !== props.playerId);
+    const lastState = foundLastState && latestPlayer && latestEnemy
+      ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
+        isPlayerFullBattery: latestPlayer.armdozer.battery === 5,
+        isEnemyFullBattery: latestEnemy.armdozer.battery === 5,
+        isHpLessThanEnemyPower: latestPlayer.armdozer.hp <= latestEnemy.armdozer.power,
+        enableBurst: latestPlayer.armdozer.enableBurst}
+      : null;
+    const notBattery5 = props.battery.battery !== 5;
+    if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
+      && !lastState.isPlayerFullBattery && lastState.enableBurst)
+    {
+      this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
+      this.isLoseIfNoDefense5Complete = true;
+      await doBurstToRecoverBattery(props);
+      await focusInBurstButton(props, shouldBurst);
+      this.selectableCommands = 'BurstOnly';
+      return {isCommandCanceled: true};
+    } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
+      && lastState.isPlayerFullBattery)
+    {
+      this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
+      this.isLoseIfNoDefense5Complete = true;
+      return {isCommandCanceled: true};
+    }
+
+    return {isCommandCanceled: false};
+  }
+
+  /** @override */
+  async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
+    const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
+    if (!enableBurstCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
+    if (this.selectableCommands === 'BurstOnly') {
+      this.selectableCommands = 'All';
+      focusOutBurstButton(props);
+      return {isCommandCanceled: false};
+    }
+
+    return {isCommandCanceled: false};
+  }
+
+  /** @override */
+  async onPilotSkillCommandSelected(): Promise<CommandCanceled> {
+    const enablePilotSkillCommand: SelectableCommands[] = ['All'];
+    if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
+    return {isCommandCanceled: false};
   }
 }
 
