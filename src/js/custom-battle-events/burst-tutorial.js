@@ -260,6 +260,19 @@ const playerWin = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー プレイヤーの敗北
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerLose = async (props: CustomBattleEventProps) => {
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「やめ!!'],
+    ['この勝負 台東高校の勝ち!!']
+  ]);
+};
+
 /** バースト注釈 */
 const shouldBurst = [
   '5防御しないと敗色濃厚だ',
@@ -386,6 +399,8 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       : null;
     if (gameOver && gameOver.isPlayerWin) {
       await playerWin(props);
+    } else if (gameOver && !gameOver.isPlayerWin) {
+      await playerLose(props);
     }
   }
 
