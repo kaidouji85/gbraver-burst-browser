@@ -10,7 +10,11 @@ const ZERO_BATTERY = {type: 'BATTERY_COMMAND', battery: 0};
 /** @override 攻撃ルーチン */
 const attackRoutine: SimpleRoutine = data => {
   const battery5 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 5);
-  return battery5 ?? ZERO_BATTERY;
+  const battery4 = data.commands.find(v => v.type === 'BATTERY_COMMAND' && v.battery === 4);
+  if (battery5 && data.player.armdozer.hp <= data.enemy.armdozer.power) {
+    return battery5;
+  }
+  return battery4 ?? ZERO_BATTERY;
 };
 
 /** @override 防御ルーチン*/
