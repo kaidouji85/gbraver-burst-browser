@@ -69,12 +69,6 @@ const introduction = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const successReflectDamage = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「しまった カウンターか」'],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-
   activeLeftMessageWindowWithFace(props, 'Raito');
   await scrollLeftMessages(props, [
     ['ライト', '「かかったな大田高校'],
@@ -89,12 +83,6 @@ const successReflectDamage = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const failReflectDamage = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「攻撃してたら ヤバかった」'],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-
   activeLeftMessageWindowWithFace(props, 'Raito');
   await scrollLeftMessages(props, [
     ['ライト', '「さすが大田高校はん'],
@@ -145,40 +133,38 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
-    const foundLastState = props.update[props.update.length - 1];
-    const foundLastEnemyState = foundLastState 
-      ? foundLastState.players.find(v => v.playerId !== props.playerId)
-      : null;
-    const enemyState = foundLastEnemyState
-      ? {hasTryReflect: foundLastEnemyState.armdozer.effects.filter(v => v.type === 'TryReflect').length > 0}
-      : null;
-    const foundPlayerState = foundLastState
-      ? foundLastState.players.find(v => v.playerId === props.playerId)
-      : null;
-    const playerState = foundPlayerState
-      ? {isAttack5Death: foundPlayerState.armdozer.hp <= 1900, enableBurst: foundPlayerState.armdozer.enableBurst}
-      : null;
-    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
-    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
-      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId}
-      : null;
-    const successReflect = props.update
-      .filter(v => v.effect.name === 'Reflect' && v.effect.damagedPlayer === props.playerId).length > 0;
-
     if (!this.isIntroductionComplete) {
       await introduction(props);
       this.isIntroductionComplete = true;
     }
 
-    if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && successReflect) {
+    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
+    const lastBattlePlayer = (foundLastBattle?.players ?? []).find(v => v.playerId === props.playerId);
+    const lastBattleEnemy = (foundLastBattle?.players ?? []).find(v => v.playerId !== props.playerId);
+    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle' && lastBattlePlayer && lastBattleEnemy
+      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
+        hasEnemyTryReflect: 0 < lastBattleEnemy.armdozer.effects.filter(v => v.type === 'TryReflect').length}
+      : null;
+    const successReflect = props.update
+      .filter(v => v.effect.name === 'Reflect' && v.effect.damagedPlayer === props.playerId)
+      .length > 0;
+    if (lastBattle && lastBattle.isAttacker && lastBattle.hasEnemyTryReflect && successReflect) {
       await successReflectDamage(props);
-    } else if (lastBattle && lastBattle.isAttacker && enemyState && enemyState.hasTryReflect && !successReflect) {
+    } else if (lastBattle && lastBattle.isAttacker && lastBattle.hasEnemyTryReflect && !successReflect) {
       await failReflectDamage(props);
     }
 
-    if (lastBattle && lastBattle.isAttacker && playerState && playerState.isAttack5Death) {
+    const foundLastState = props.update[props.update.length - 1];
+    const latestPlayer = (foundLastState?.players ?? []).find(v => v.playerId === props.playerId);
+    const latestEnemy = (foundLastState?.players ?? []).find(v => v.playerId !== props.playerId);
+    const lastState = foundLastState && latestPlayer && latestEnemy
+      ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
+        isHpLessThanEnemyPower: latestPlayer.armdozer.hp <= latestEnemy.armdozer.power,
+        enableBurst: latestPlayer.armdozer.enableBurst}
+      : null;
+    if (lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower) {
       await loseIfNoDefense5(props);
-      if (playerState.enableBurst) {
+      if (lastState.enableBurst) {
         await doBurstToRecoverBattery(props);
       }
     }
