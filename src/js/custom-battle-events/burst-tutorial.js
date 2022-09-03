@@ -356,12 +356,12 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     const notBattery5 = props.battery.battery !== 5;
     const defense5 = async (props: CustomBattleEventProps) => {
       this.isLoseIfNoDefense5Complete ? await shouldDefense5Again(props) : await shouldDefense5(props);
-      this.isLoseIfNoDefense5Complete = true;
     };
     if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && !lastState.isPlayerFullBattery && lastState.enableBurst)
     {
       await defense5(props);
+      this.isLoseIfNoDefense5Complete = true;
       await doBurstToRecoverBattery(props);
       await focusInBurstButton(props, shouldBurst);
       this.selectableCommands = 'BurstOnly';
@@ -370,6 +370,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       && !lastState.isPlayerFullBattery && !lastState.enableBurst && lastState.enablePilotSkill)
     {
       await defense5(props);
+      this.isLoseIfNoDefense5Complete = true;
       await doPilotSkillToRecoverBattery(props);
       await focusInPilotButton(props, shouldPilotSkill);
       this.selectableCommands = 'PilotSkillOnly';
@@ -378,13 +379,15 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       && !lastState.isPlayerFullBattery && !lastState.enableBurst && !lastState.enablePilotSkill)
     {
       await defense5(props);
+      this.isLoseIfNoDefense5Complete = true;
       await canNotChangeBattery(props);
       return {isCommandCanceled: false};
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && lastState.isPlayerFullBattery)
     {
       await defense5(props);
-      await notDefense5Carelessly(props);
+      this.isLoseIfNoDefense5Complete && await notDefense5Carelessly(props);
+      this.isLoseIfNoDefense5Complete = true;
       return {isCommandCanceled: true};
     }
 
