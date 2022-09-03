@@ -6,7 +6,8 @@ import type {
   CommandCanceled,
   CustomBattleEvent,
   CustomBattleEventProps,
-  LastState, PilotSkillCommandSelected,
+  LastState,
+  PilotSkillCommandSelected,
 } from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
