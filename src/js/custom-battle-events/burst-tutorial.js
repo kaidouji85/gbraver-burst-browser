@@ -105,8 +105,7 @@ const failReflectDamage = async (props: CustomBattleEventProps) => {
 const loseIfNoDefense5 = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「シンヤ この状況はまずい'],
-    ['あと一撃でも食らえば 君のHPは0だぞ']
+    ['ツバサ', '「シンヤ あと一撃でも食らえば 君のHPは0だぞ」'],
   ]);
   await refreshConversation(props, 100);
 
@@ -152,6 +151,25 @@ const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー うっかり5防御以外を選択
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「シンヤ さっきも説明したが 今は5防御しないとまずい」']
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「すみませんッス うっかりしてたッス」'],
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
 /** バースト注釈 */
 const shouldBurst = [
   '5防御しないと敗色濃厚だ',
@@ -167,6 +185,8 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   stateHistory: GameState[];
   /** イントロダクションを再生したか、trueで再生した */
   isIntroductionComplete: boolean;
+  /** 5防御しないと負けを再生したか、trueで再生した */
+  isLoseIfNoDefense5Complete: boolean;
   /** 選択可能なコマンド */
   selectableCommands: SelectableCommands;
 
@@ -177,6 +197,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     super();
     this.stateHistory = [];
     this.isIntroductionComplete = false;
+    this.isLoseIfNoDefense5Complete = false;
     this.selectableCommands = 'All';
   }
 
@@ -217,14 +238,21 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     const latestEnemy = (foundLastState?.players ?? []).find(v => v.playerId !== props.playerId);
     const lastState = foundLastState && latestPlayer && latestEnemy
       ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
+        isFullBattery: latestPlayer.armdozer.battery === 5,
         isHpLessThanEnemyPower: latestPlayer.armdozer.hp <= latestEnemy.armdozer.power,
         enableBurst: latestPlayer.armdozer.enableBurst}
       : null;
-    if (props.battery.battery < 5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.enableBurst) {
-      this.selectableCommands = 'BurstOnly';
-      await loseIfNoDefense5(props);
+    const notBattery5 = props.battery.battery !== 5;
+    if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && !lastState.isFullBattery && lastState.enableBurst) {
+      this.isLoseIfNoDefense5Complete ?  await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
+      this.isLoseIfNoDefense5Complete = true;
       await doBurstToRecoverBattery(props);
       await focusInBurstButton(props, shouldBurst);
+      this.selectableCommands = 'BurstOnly';
+      return {isCommandCanceled: true};
+    } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isFullBattery) {
+      this.isLoseIfNoDefense5Complete ?  await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
+      this.isLoseIfNoDefense5Complete = true;
       return {isCommandCanceled: true};
     }
 
