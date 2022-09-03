@@ -1,6 +1,7 @@
 // @flow
 import type {GameState} from "gbraver-burst-core/lib/state/game-state";
 import type {CustomBattleEvent, CustomBattleEventProps, LastState} from "../game/td-scenes/battle/custom-battle-event";
+import {waitTime} from "../wait/wait-time";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
@@ -59,7 +60,6 @@ const introduction = async (props: CustomBattleEventProps) => {
   await scrollRightMessages(props, [
     ['シンヤ', '「よろしくお願いします」']
   ]);
-
   invisibleAllMessageWindows(props);
 };
 
@@ -99,8 +99,25 @@ const failReflectDamage = async (props: CustomBattleEventProps) => {
 const loseIfNoDefense5 = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「5防御しないと負け」'],
+    ['ツバサ', '「シンヤ この状況はまずい'],
+    ['あと一撃でも食らえば 君のHPは0だぞ']
   ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「しかも よく見ると台東高校のバッテリーは5じゃないスか'],
+    ['絶対ヒットの5攻撃をされたら終わりッス」']
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「落ち着け シンヤ'],
+    ['攻撃 防御で同じバッテリーを出した場合 ガードでダメージが半減される'],
+    ['5防御のダメージ半減で この場を凌ぐんだ」']
+  ]);
+  await refreshConversation(props, 100);
 };
 
 /**
@@ -109,10 +126,26 @@ const loseIfNoDefense5 = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「でもツバサ先輩 俺のバッテリーは5もないッスよ」'],
+  ]);
+  await refreshConversation(props, 100);
+
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「バーストでバッテリー回復」'],
+    ['ツバサ', '「ならばバーストを発動させよう'],
+    ['バーストは1試合に1回しか使えないが 一気にバッテリーが回復できるんだ」'],
   ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「了解ッス'],
+    ['バーストでバッテリー回復すればいいんスね']
+  ]);
+  invisibleAllMessageWindows(props);
+  await waitTime(200);
 };
 
 /** バーストチュートリアル用のカスタムバトルイベント */
