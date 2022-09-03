@@ -6,11 +6,11 @@ import type {
   CommandCanceled,
   CustomBattleEvent,
   CustomBattleEventProps,
-  LastState,
+  LastState, PilotSkillCommandSelected,
 } from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
-import {focusInBurstButton, focusOutBurstButton} from "./focus";
+import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 
@@ -191,7 +191,7 @@ const shouldPilotSkill = [
 ];
 
 /** 選択可能なコマンド */
-type SelectableCommands = 'BurstOnly' | 'All';
+type SelectableCommands = 'BurstOnly' | 'PilotSkillOnly' | 'All';
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
@@ -274,6 +274,8 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
       this.isLoseIfNoDefense5Complete = true;
       await doPilotSkillToRecoverBattery(props);
+      await focusInPilotButton(props, shouldPilotSkill);
+      this.selectableCommands = 'PilotSkillOnly';
       return {isCommandCanceled: true};
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && lastState.isPlayerFullBattery)
@@ -303,10 +305,16 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   }
 
   /** @override */
-  async onPilotSkillCommandSelected(): Promise<CommandCanceled> {
-    const enablePilotSkillCommand: SelectableCommands[] = ['All'];
+  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
+    const enablePilotSkillCommand: SelectableCommands[] = ['PilotSkillOnly', 'All'];
     if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
       return {isCommandCanceled: true};
+    }
+
+    if (this.selectableCommands === 'PilotSkillOnly') {
+      this.selectableCommands = 'All';
+      focusOutPilotButton(props);
+      return {isCommandCanceled: false};
     }
 
     return {isCommandCanceled: false};
