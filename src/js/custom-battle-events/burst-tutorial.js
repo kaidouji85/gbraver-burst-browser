@@ -79,7 +79,7 @@ const successReflectDamage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Raito');
   await scrollLeftMessages(props, [
     ['ライト', '「かかったな大田高校'],
-    ['これぞ奥義 バーストや」']
+    ['これぞ奥義 電撃バリアや」']
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -103,7 +103,7 @@ const failReflectDamage = async (props: CustomBattleEventProps) => {
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const loseIfNoDefense5 = async (props: CustomBattleEventProps) => {
+const shouldDefense5 = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「シンヤ あと一撃でも食らえば 君のHPは0だぞ」'],
@@ -168,17 +168,24 @@ const doPilotSkillToRecoverBattery = async (props: CustomBattleEventProps) => {
 }
 
 /**
- * ストーリー うっかり5防御以外を選択
+ * ストーリー 5防御しないと負け（2回目以降）
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
+const shouldDefense5Again = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「シンヤ さっきも説明したが 今は5防御しないとまずい」']
   ]);
   await refreshConversation(props, 100);
+};
 
+/**
+ * ストーリー うっかり5防御以外を選択
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「すみませんッス うっかりしてたッス」'],
@@ -267,11 +274,14 @@ class BurstTutorial extends EmptyCustomBattleEvent {
         enablePilotSkill: latestPlayer.pilot.enableSkill}
       : null;
     const notBattery5 = props.battery.battery !== 5;
+    const defense5 = async (props: CustomBattleEventProps) => {
+      this.isLoseIfNoDefense5Complete ? await shouldDefense5Again(props) : await shouldDefense5(props);
+      this.isLoseIfNoDefense5Complete = true;
+    };
     if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && !lastState.isPlayerFullBattery && lastState.enableBurst)
     {
-      this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
-      this.isLoseIfNoDefense5Complete = true;
+      await defense5(props);
       await doBurstToRecoverBattery(props);
       await focusInBurstButton(props, shouldBurst);
       this.selectableCommands = 'BurstOnly';
@@ -279,8 +289,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && !lastState.isPlayerFullBattery && !lastState.enableBurst && lastState.enablePilotSkill)
     {
-      this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
-      this.isLoseIfNoDefense5Complete = true;
+      await defense5(props);
       await doPilotSkillToRecoverBattery(props);
       await focusInPilotButton(props, shouldPilotSkill);
       this.selectableCommands = 'PilotSkillOnly';
@@ -288,8 +297,8 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && lastState.isPlayerFullBattery)
     {
-      this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
-      this.isLoseIfNoDefense5Complete = true;
+      await defense5(props);
+      await notDefense5Carelessly(props);
       return {isCommandCanceled: true};
     }
 
