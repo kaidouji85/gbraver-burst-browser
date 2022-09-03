@@ -216,6 +216,19 @@ const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
   invisibleAllMessageWindows(props);
 };
 
+/**
+ * ストーリー プレイヤーの勝利
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerWin = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「勝利」'],
+  ]);
+  invisibleAllMessageWindows(props);
+};
+
 /** バースト注釈 */
 const shouldBurst = [
   '5防御しないと敗色濃厚だ',
@@ -332,6 +345,17 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     }
 
     return {isCommandCanceled: false};
+  }
+
+  /** @override */
+  async afterLastState(props: LastState): Promise<void> {
+    const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
+    const gameOver = foundGameEnd && foundGameEnd.effect.name === 'GameEnd' && foundGameEnd.effect.result.type === 'GameOver'
+      ? {isPlayerWin: foundGameEnd.effect.result.winner === props.playerId}
+      : null;
+    if (gameOver && gameOver.isPlayerWin) {
+      await playerWin(props);
+    }
   }
 
   /** @override */
