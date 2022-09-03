@@ -106,7 +106,8 @@ const failReflectDamage = async (props: CustomBattleEventProps) => {
 const shouldDefense5 = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「シンヤ あと一撃でも食らえば 君のHPは0だぞ」'],
+    ['ツバサ', '「待て シンヤ'],
+    ['あと一撃でも食らえば 君のHPは0だぞ」']
   ]);
   await refreshConversation(props, 100);
 
@@ -119,9 +120,9 @@ const shouldDefense5 = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「落ち着け シンヤ'],
+    ['ツバサ', '「落ち着くんだ シンヤ'],
     ['攻撃 防御で同じバッテリーを出した場合 ガードでダメージが半減される'],
-    ['5防御のダメージ半減で この場を凌ぐんだ」']
+    ['5防御で この場を凌ぐんだ」']
   ]);
   await refreshConversation(props, 100);
 };
@@ -162,10 +163,23 @@ const doPilotSkillToRecoverBattery = async (props: CustomBattleEventProps) => {
   await scrollRightMessages(props, [
     ['ツバサ', '「ならばバーストを発動させよう'],
     ['……と言いたいところだが 既にバーストは発動させたか'],
-    ['なら君のパイロットスキルで少しでもバッテリーを回復させよう']
+    ['それなら 君のパイロットスキルで 少しでもバッテリーを回復させよう']
   ]);
   await refreshConversation(props);
-}
+};
+
+/**
+ * ストーリー バースト、パイロットスキルが使えないのでバッテリー変更なし
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const noChangeCommandBecauseNoBatteryRecover = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「打つ手なし」'],
+  ]);
+  await refreshConversation(props);
+};
 
 /**
  * ストーリー 5防御しないと負け（2回目以降）
@@ -294,6 +308,12 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       await focusInPilotButton(props, shouldPilotSkill);
       this.selectableCommands = 'PilotSkillOnly';
       return {isCommandCanceled: true};
+    } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
+      && !lastState.isPlayerFullBattery && !lastState.enableBurst && !lastState.enablePilotSkill)
+    {
+      await defense5(props);
+      await noChangeCommandBecauseNoBatteryRecover(props);
+      return {isCommandCanceled: false};
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && lastState.isPlayerFullBattery)
     {
