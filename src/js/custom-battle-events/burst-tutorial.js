@@ -1,9 +1,13 @@
 // @flow
 import type {GameState} from "gbraver-burst-core/lib/state/game-state";
-import type {CustomBattleEvent, CustomBattleEventProps, LastState} from "../game/td-scenes/battle/custom-battle-event";
-import {waitTime} from "../wait/wait-time";
+import type {
+  BatteryCommandSelected,
+  BurstCommandSelected, CommandCanceled,
+  CustomBattleEvent,
+  CustomBattleEventProps,
+  LastState, PilotSkillCommandSelected
+} from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
-import {attentionBurstButton} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
 import {focusInBurstButton} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
@@ -154,12 +158,18 @@ const shouldBurst = [
   'まずはバーストでバッテリーを回復させよう'
 ];
 
+/** 選択可能なコマンド */
+type SelectableCommands = 'BurstOnly' | 'All';
+
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
   /** ステートヒストリー、 beforeLastState開始時に更新される */
   stateHistory: GameState[];
   /** イントロダクションを再生したか、trueで再生した */
   isIntroductionComplete: boolean;
+  /** 選択可能なコマンド */
+  selectableCommands: SelectableCommands;
+
   /**
    * コンストラクタ
    */
@@ -167,6 +177,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     super();
     this.stateHistory = [];
     this.isIntroductionComplete = false;
+    this.selectableCommands = 'All';
   }
 
   /** @override */
@@ -204,10 +215,41 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     if (lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower) {
       await loseIfNoDefense5(props);
       if (lastState.enableBurst) {
+        this.selectableCommands = 'BurstOnly';
         await doBurstToRecoverBattery(props);
         await focusInBurstButton(props, shouldBurst);
       }
     }
+  }
+
+  /** @override */
+  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
+    const enableBurstCommand: SelectableCommands[] = ['All'];
+    if (!enableBurstCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
+    return {isCommandCanceled: false};
+  }
+
+  /** @override */
+  async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
+    const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
+    if (!enableBurstCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
+    return {isCommandCanceled: false};
+  }
+
+  /** @override */
+  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
+    const enablePilotSkillCommand: SelectableCommands[] = ['All'];
+    if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
+    return {isCommandCanceled: false};
   }
 }
 
