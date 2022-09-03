@@ -143,14 +143,21 @@ const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
     ['ツバサ', '「ならばバーストを発動させよう'],
     ['バーストは1試合に1回しか使えないが 一気にバッテリーが回復できるんだ」'],
   ]);
-  await refreshConversation(props, 100);
-
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「了解ッス」'],
-  ]);
   invisibleAllMessageWindows(props);
 };
+
+/**
+ * ストーリー パイロットスキルでバッテリー回復
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const doPilotSkillToRecoverBattery = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「パイロットスキルでバッテリー回復」'],
+  ]);
+  await refreshConversation(props);
+}
 
 /**
  * ストーリー うっかり5防御以外を選択
@@ -175,6 +182,12 @@ const notDefense5Carelessly = async (props: CustomBattleEventProps) => {
 const shouldBurst = [
   '5防御しないと敗色濃厚だ',
   'まずはバーストでバッテリーを回復させよう'
+];
+
+/** パイロットスキル注釈 */
+const shouldPilotSkill = [
+  '5防御しないと敗色濃厚だ',
+  'まずはパイロットスキルでバッテリーを回復させよう'
 ];
 
 /** 選択可能なコマンド */
@@ -242,7 +255,8 @@ class BurstTutorial extends EmptyCustomBattleEvent {
         isPlayerFullBattery: latestPlayer.armdozer.battery === 5,
         isEnemyFullBattery: latestEnemy.armdozer.battery === 5,
         isHpLessThanEnemyPower: latestPlayer.armdozer.hp <= latestEnemy.armdozer.power,
-        enableBurst: latestPlayer.armdozer.enableBurst}
+        enableBurst: latestPlayer.armdozer.enableBurst,
+        enablePilotSkill: latestPlayer.pilot.enableSkill}
       : null;
     const notBattery5 = props.battery.battery !== 5;
     if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
@@ -253,6 +267,13 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       await doBurstToRecoverBattery(props);
       await focusInBurstButton(props, shouldBurst);
       this.selectableCommands = 'BurstOnly';
+      return {isCommandCanceled: true};
+    } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
+      && !lastState.isPlayerFullBattery && !lastState.enableBurst && lastState.enablePilotSkill)
+    {
+      this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await loseIfNoDefense5(props);
+      this.isLoseIfNoDefense5Complete = true;
+      await doPilotSkillToRecoverBattery(props);
       return {isCommandCanceled: true};
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && lastState.isPlayerFullBattery)
