@@ -30,7 +30,7 @@ const introduction = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「相談するから 少し待ってくれ」'],
+    ['ツバサ', '「少し待ってくれ」'],
   ]);
   await refreshConversation(props);
 
@@ -164,7 +164,7 @@ const doPilotSkillToRecoverBattery = async (props: CustomBattleEventProps) => {
   await scrollRightMessages(props, [
     ['ツバサ', '「ならばバーストを発動させよう'],
     ['……と言いたいところだが 既にバーストは発動させたか'],
-    ['それなら 君のパイロットスキルで 少しでもバッテリーを回復させよう']
+    ['それなら 君のパイロットスキルで バッテリーを回復するんだ」']
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -183,10 +183,9 @@ const noChangeCommandBecauseNoBatteryRecover = async (props: CustomBattleEventPr
 
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「ならばバーストを発動させよう'],
-    ['……と言いたいところだが 既にバーストは発動させたか'],
-    ['それならパイロットスキル ……も使用済みか'],
-    ['残念だが これ以上は打つ手なしだな']
+    ['ツバサ', '「ならばバースト ……は発動済か'],
+    ['それならばパイロットスキル ……も使い切ったか'],
+    ['シンヤ 残念だが これ以上打つ手なしだ」']
   ]);
   invisibleAllMessageWindows(props);
 };
