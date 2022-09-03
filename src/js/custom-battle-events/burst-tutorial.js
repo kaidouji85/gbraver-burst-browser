@@ -3,7 +3,9 @@ import type {GameState} from "gbraver-burst-core/lib/state/game-state";
 import type {CustomBattleEvent, CustomBattleEventProps, LastState} from "../game/td-scenes/battle/custom-battle-event";
 import {waitTime} from "../wait/wait-time";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
+import {attentionBurstButton} from "./attention";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
+import {focusInBurstButton} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 
@@ -74,7 +76,7 @@ const successReflectDamage = async (props: CustomBattleEventProps) => {
     ['ライト', '「かかったな大田高校'],
     ['これぞ奥義 バーストや」']
   ]);
-  invisibleAllMessageWindows(props);
+  await refreshConversation(props);
 };
 
 /**
@@ -141,12 +143,16 @@ const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「了解ッス'],
-    ['バーストでバッテリー回復すればいいんスね']
+    ['シンヤ', '「了解ッス」'],
   ]);
   invisibleAllMessageWindows(props);
-  await waitTime(200);
 };
+
+/** バースト注釈 */
+const shouldBurst = [
+  '5防御しないと敗色濃厚だ',
+  'まずはバーストでバッテリーを回復させよう'
+];
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
@@ -199,6 +205,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       await loseIfNoDefense5(props);
       if (lastState.enableBurst) {
         await doBurstToRecoverBattery(props);
+        await focusInBurstButton(props, shouldBurst);
       }
     }
   }
