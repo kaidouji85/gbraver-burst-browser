@@ -9,7 +9,7 @@ import type {
 } from "../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
 import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
-import {focusInBurstButton} from "./focus";
+import {focusInBurstButton, focusOutBurstButton} from "./focus";
 import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
 
@@ -80,7 +80,7 @@ const successReflectDamage = async (props: CustomBattleEventProps) => {
     ['ライト', '「かかったな大田高校'],
     ['これぞ奥義 バーストや」']
   ]);
-  await refreshConversation(props);
+  invisibleAllMessageWindows(props);
 };
 
 /**
@@ -203,8 +203,16 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     } else if (lastBattle && lastBattle.isAttacker && lastBattle.hasEnemyTryReflect && !successReflect) {
       await failReflectDamage(props);
     }
+  }
 
-    const foundLastState = props.update[props.update.length - 1];
+  /** @override */
+  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
+    const enableBurstCommand: SelectableCommands[] = ['All'];
+    if (!enableBurstCommand.includes(this.selectableCommands)) {
+      return {isCommandCanceled: true};
+    }
+
+    const foundLastState = this.stateHistory[this.stateHistory.length - 1];
     const latestPlayer = (foundLastState?.players ?? []).find(v => v.playerId === props.playerId);
     const latestEnemy = (foundLastState?.players ?? []).find(v => v.playerId !== props.playerId);
     const lastState = foundLastState && latestPlayer && latestEnemy
@@ -212,20 +220,11 @@ class BurstTutorial extends EmptyCustomBattleEvent {
         isHpLessThanEnemyPower: latestPlayer.armdozer.hp <= latestEnemy.armdozer.power,
         enableBurst: latestPlayer.armdozer.enableBurst}
       : null;
-    if (lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower) {
+    if (props.battery.battery < 5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.enableBurst) {
+      this.selectableCommands = 'BurstOnly';
       await loseIfNoDefense5(props);
-      if (lastState.enableBurst) {
-        this.selectableCommands = 'BurstOnly';
-        await doBurstToRecoverBattery(props);
-        await focusInBurstButton(props, shouldBurst);
-      }
-    }
-  }
-
-  /** @override */
-  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    const enableBurstCommand: SelectableCommands[] = ['All'];
-    if (!enableBurstCommand.includes(this.selectableCommands)) {
+      await doBurstToRecoverBattery(props);
+      await focusInBurstButton(props, shouldBurst);
       return {isCommandCanceled: true};
     }
 
@@ -237,6 +236,12 @@ class BurstTutorial extends EmptyCustomBattleEvent {
     const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
     if (!enableBurstCommand.includes(this.selectableCommands)) {
       return {isCommandCanceled: true};
+    }
+
+    if (this.selectableCommands === 'BurstOnly') {
+      this.selectableCommands = 'All';
+      focusOutBurstButton(props);
+      return {isCommandCanceled: false};
     }
 
     return {isCommandCanceled: false};
