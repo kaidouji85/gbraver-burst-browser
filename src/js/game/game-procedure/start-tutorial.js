@@ -10,13 +10,14 @@ import type {TutorialStage} from "../tutorial";
  * チュートリアルを開始するヘルパー関数
  *
  * @param props ゲームプロパティ
+ * @param level チュートリアルステージレベル
  * @param stage チュートリアルステージ
  * @return 処理が完了したら発火するPromise
  */
-export async function startTutorial(props: $ReadOnly<GameProps>, stage: TutorialStage): Promise<void> {
+export async function startTutorial(props: $ReadOnly<GameProps>, level: number, stage: TutorialStage): Promise<void> {
   const npcBattle = new NPCBattleRoom(stage.player, stage.npc);
   await props.fader.fadeOut();
-  await props.domScenes.startStageTitle(props.resources, 1, stage.title, npcBattle.enemy.armdozer.id);
+  await props.domScenes.startStageTitle(props.resources, level, stage.title, npcBattle.enemy.armdozer.id);
   await props.fader.fadeIn();
 
   const startTutorialStageTime = Date.now();

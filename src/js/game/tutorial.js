@@ -40,6 +40,16 @@ export function getCurrentTutorialStage(state: TutorialState): ?TutorialStage {
 }
 
 /**
+ * 現在のチュートリアルステージレベルを取得する
+ *
+ * @param state NPCバトルステート
+ * @return ステージレベル
+ */
+export function getTutorialStageLevel(state: TutorialState): number {
+  return state.stageIndex + 1;
+}
+
+/**
  * チュートリアルステートを生成する
  * 
  * @param stages チュートリアルステージ
