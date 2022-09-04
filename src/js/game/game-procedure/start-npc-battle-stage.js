@@ -19,7 +19,7 @@ export async function startNPCBattleStage(props: $ReadOnly<GameProps>, player: P
   const npcBattle = new NPCBattleRoom(player, stage.npc);
   await props.fader.fadeOut();
   props.domDialogs.hidden();
-  await props.domScenes.startStageTitle(props.resources, level, stage.caption, npcBattle.enemy.armdozer.id);
+  await props.domScenes.startStageTitle({resources: props.resources, level, caption: stage.caption, armDozerId: npcBattle.enemy.armdozer.id});
   await props.fader.fadeIn();
 
   const startNPCStageTitleTime = Date.now();

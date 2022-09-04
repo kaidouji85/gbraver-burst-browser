@@ -57,6 +57,18 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {caption, armDozerIcon};
 }
 
+/** ステージタイトルのパラメータ */
+export type StageTitleParam = {
+  /** リソース管理オブジェクト */
+  resources: Resources,
+  /** ステージレベル */
+  level: number,
+  /** ステージ名 */
+  caption: string[],
+  /** 対戦するアームドーザのID */
+  armDozerId: ArmDozerId
+};
+
 /** ステージタイトル */
 export class StageTitle implements DOMScene {
   #root: HTMLElement;
@@ -65,24 +77,21 @@ export class StageTitle implements DOMScene {
   /**
    * コンストラクタ
    *
-   * @param resources リソース管理オブジェクト
-   * @param level ステージレベル
-   * @param caption ステージ名
-   * @param armDozerId 対戦するアームドーザのID
+   * @param param パラメータ
    */
-  constructor(resources: Resources, level: number, caption: string[], armDozerId: ArmDozerId) {
+  constructor(param: StageTitleParam) {
     const ids = {caption: domUuid(), armDozerIcon: domUuid()};
     this.#root = document.createElement('div');
     this.#root.className = ROOT_CLASS;
-    this.#root.innerHTML = rootInnerHTML(ids, level);
+    this.#root.innerHTML = rootInnerHTML(ids, param.level);
 
     const elements = extractElements(this.#root, ids);
 
     this.#isArmDozerIconLoaded = waitElementLoaded(elements.armDozerIcon);
-    const armDozerIconPathID = getArmdozerIconPathId(armDozerId);
-    elements.armDozerIcon.src = resources.paths.find(v => v.id === armDozerIconPathID)?.path ?? '';
+    const armDozerIconPathID = getArmdozerIconPathId(param.armDozerId);
+    elements.armDozerIcon.src = param.resources.paths.find(v => v.id === armDozerIconPathID)?.path ?? '';
 
-    elements.caption.innerHTML = caption
+    elements.caption.innerHTML = param.caption
       .map(v => `
         <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(0,1)}</div>
         <div class="${ROOT_CLASS}__caption-clause">${v.slice(1)}</div>

@@ -10,6 +10,6 @@ export default {
 };
 
 export const Scene: DOMStubStory = domStub(resources => {
-  const scene = new StageTitle(resources, 10, ['敵より大きい', 'バッテリーを出せ'], ArmDozerIdList.NEO_LANDOZER);
+  const scene = new StageTitle({resources, level: 10, caption: ['敵より大きい', 'バッテリーを出せ'], armDozerId: ArmDozerIdList.NEO_LANDOZER});
   return scene.getRootHTMLElement();
 });
