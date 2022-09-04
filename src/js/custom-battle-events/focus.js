@@ -3,9 +3,11 @@ import type {CustomBattleEventProps} from "../game/td-scenes/battle/custom-battl
 import {activeLeftMessageWindow, activeRightMessageWindow} from "./active-message-window";
 import {
   attentionBatterySelector,
-  attentionBurstButton, attentionPilotButton,
+  attentionBurstButton,
+  attentionPilotButton,
   unattentionBatterySelector,
-  unattentionBurstButton, unattentionPilotButton
+  unattentionBurstButton,
+  unattentionPilotButton
 } from "./attention";
 import {invisibleAllMessageWindows} from "./invisible-all-message-windows";
 
