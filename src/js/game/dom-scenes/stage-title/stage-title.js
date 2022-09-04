@@ -8,7 +8,7 @@ import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import type {DOMScene} from "../dom-scene";
 
 /** ルート要素 class属性 */
-const ROOT_CLASS = 'npc-stage-title';
+const ROOT_CLASS = 'stage-title';
 
 /** data-idをまとめたもの */
 type DataIDs = {
@@ -23,12 +23,15 @@ type DataIDs = {
  * @param level ステージレベル
  * @return ルート要素のinnerHTML
  */
-function rootInnerHTML(ids: DataIDs, level: number): string {
+function rootInnerHTML(ids: DataIDs, stagePrefix: StagePrefixType, level: number): string {
+  const npcStagePrefix = ['S', 'TAGE'];
+  const tutorialStagePrefix = ['T', 'UTORIAL'];
+  const prefix = stagePrefix === 'NPCBattle' ? npcStagePrefix : tutorialStagePrefix;
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__stage">
-        <div class="${ROOT_CLASS}__stage-prefix--capitalized">S</div>      
-        <div class="${ROOT_CLASS}__stage-prefix">TAGE</div>
+        <div class="${ROOT_CLASS}__stage-prefix--capitalized">${prefix[0]}</div>      
+        <div class="${ROOT_CLASS}__stage-prefix">${prefix[1]}</div>
         <div class="${ROOT_CLASS}__stage-level">${level}</div>
       </div>
       <div class="${ROOT_CLASS}__caption" data-id="${ids.caption}"></div>
@@ -57,32 +60,46 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {caption, armDozerIcon};
 }
 
-/** NPCステージタイトル */
-export class NPCStageTitle implements DOMScene {
+/** ステージプレフィックスタイプ */
+type StagePrefixType = 'NPCBattle' | 'Tutorial';
+
+/** ステージタイトルのパラメータ */
+export type StageTitleParam = {
+  /** リソース管理オブジェクト */
+  resources: Resources,
+  /** ステージプレフィックスタイプ */
+  stagePrefix: StagePrefixType,
+  /** ステージレベル */
+  level: number,
+  /** ステージ名 */
+  caption: string[],
+  /** 対戦するアームドーザのID */
+  armDozerId: ArmDozerId
+};
+
+/** ステージタイトル */
+export class StageTitle implements DOMScene {
   #root: HTMLElement;
   #isArmDozerIconLoaded: Promise<void>;
 
   /**
    * コンストラクタ
    *
-   * @param resources リソース管理オブジェクト
-   * @param level ステージレベル
-   * @param caption ステージ名
-   * @param armDozerId 対戦するアームドーザのID
+   * @param param パラメータ
    */
-  constructor(resources: Resources, level: number, caption: string[], armDozerId: ArmDozerId) {
+  constructor(param: StageTitleParam) {
     const ids = {caption: domUuid(), armDozerIcon: domUuid()};
     this.#root = document.createElement('div');
     this.#root.className = ROOT_CLASS;
-    this.#root.innerHTML = rootInnerHTML(ids, level);
+    this.#root.innerHTML = rootInnerHTML(ids, param.stagePrefix, param.level);
 
     const elements = extractElements(this.#root, ids);
 
     this.#isArmDozerIconLoaded = waitElementLoaded(elements.armDozerIcon);
-    const armDozerIconPathID = getArmdozerIconPathId(armDozerId);
-    elements.armDozerIcon.src = resources.paths.find(v => v.id === armDozerIconPathID)?.path ?? '';
+    const armDozerIconPathID = getArmdozerIconPathId(param.armDozerId);
+    elements.armDozerIcon.src = param.resources.paths.find(v => v.id === armDozerIconPathID)?.path ?? '';
 
-    elements.caption.innerHTML = caption
+    elements.caption.innerHTML = param.caption
       .map(v => `
         <div class="${ROOT_CLASS}__caption-clause--capitalized">${v.slice(0,1)}</div>
         <div class="${ROOT_CLASS}__caption-clause">${v.slice(1)}</div>
