@@ -2,7 +2,7 @@
 import type {BattleResult, GameState} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
-  BurstCommandSelected, 
+  BurstCommandSelected,
   CommandCanceled,
   CustomBattleEvent,
   CustomBattleEventProps,

@@ -14,9 +14,9 @@ import {Loading} from "./loading";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {MatchCard} from "./match-card";
 import {NPCEnding} from "./npc-ending/npc-ending";
+import {PlayerSelect} from "./player-select";
 import type {StageTitleParam} from "./stage-title/stage-title";
 import {StageTitle} from "./stage-title/stage-title";
-import {PlayerSelect} from "./player-select";
 import type {TitleParams} from "./title/title";
 import {Title} from "./title/title";
 
