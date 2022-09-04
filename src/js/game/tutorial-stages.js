@@ -15,7 +15,7 @@ const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
 
 /** バッテリーシステムチュートリアル */
 const batterySystemTutorial =   {
-  title: 'バッテリーシステムの基本',
+  title: ['バッテリーシステムの基本'],
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: batterySystemTutorialNPC(),
   event: createBatterySystemTutorialEvent,
@@ -24,7 +24,7 @@ const batterySystemTutorial =   {
 
 /** 0防御チュートリアル */
 const zeroDefenseTutorial =   {
-  title: '0防御は即死',
+  title: ['0防御は即死'],
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: zeroDefenseTutorialNPC(),
   event: createZeroDefenseTutorialEvent,
@@ -33,7 +33,7 @@ const zeroDefenseTutorial =   {
 
 /** バーストチュートリアル */
 const burstTutorial = {
-  title: 'バーストで一発逆転',
+  title: ['バーストで一発逆転'],
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: burstTutorialNPC(),
   event: createBurstTutorialEvent,
