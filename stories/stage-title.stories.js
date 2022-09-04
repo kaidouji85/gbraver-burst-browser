@@ -10,11 +10,13 @@ export default {
 };
 
 export const npcBattle: DOMStubStory = domStub(resources => {
-  const scene = new StageTitle({resources, stagePrefix: 'NPCBattle', level: 10, caption: ['敵より大きい', 'バッテリーを出せ'], armDozerId: ArmDozerIdList.NEO_LANDOZER});
+  const scene = new StageTitle({resources, stagePrefix: 'NPCBattle', level: 10, caption: ['敵より大きい', 'バッテリーを出せ'],
+    armDozerId: ArmDozerIdList.NEO_LANDOZER});
   return scene.getRootHTMLElement();
 });
 
 export const tutorial: DOMStubStory = domStub(resources => {
-  const scene = new StageTitle({resources, stagePrefix: 'Tutorial', level: 2, caption: ['バッテリーシステムの', '基本'], armDozerId: ArmDozerIdList.NEO_LANDOZER});
+  const scene = new StageTitle({resources, stagePrefix: 'Tutorial', level: 2, caption: ['バッテリーシステムの', '基本'],
+    armDozerId: ArmDozerIdList.WING_DOZER});
   return scene.getRootHTMLElement();
 });
