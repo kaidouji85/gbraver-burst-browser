@@ -24,7 +24,7 @@ const batterySystemTutorial =   {
 
 /** 0防御チュートリアル */
 const zeroDefenseTutorial =   {
-  title: ['0防御は即死'],
+  title: ['ゼロ防御だと即', '死する'],
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: zeroDefenseTutorialNPC(),
   event: createZeroDefenseTutorialEvent,
@@ -33,7 +33,7 @@ const zeroDefenseTutorial =   {
 
 /** バーストチュートリアル */
 const burstTutorial = {
-  title: ['バーストで一発逆転'],
+  title: ['バーストで', 'バッテリー回復'],
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: burstTutorialNPC(),
   event: createBurstTutorialEvent,

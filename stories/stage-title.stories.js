@@ -16,7 +16,7 @@ export const npcBattle: DOMStubStory = domStub(resources => {
 });
 
 export const tutorial: DOMStubStory = domStub(resources => {
-  const scene = new StageTitle({resources, stagePrefix: 'Tutorial', level: 2, caption: ['バッテリーシステムの', '基本'],
-    armDozerId: ArmDozerIdList.WING_DOZER});
+  const scene = new StageTitle({resources, stagePrefix: 'Tutorial', level: 3, caption: ['バーストで', 'バッテリー回復'],
+    armDozerId: ArmDozerIdList.LIGHTNING_DOZER});
   return scene.getRootHTMLElement();
 });
