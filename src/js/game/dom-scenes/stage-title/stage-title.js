@@ -23,12 +23,15 @@ type DataIDs = {
  * @param level ステージレベル
  * @return ルート要素のinnerHTML
  */
-function rootInnerHTML(ids: DataIDs, level: number): string {
+function rootInnerHTML(ids: DataIDs, stagePrefix: StagePrefixType, level: number): string {
+  const npcStagePrefix = ['S', 'TAGE'];
+  const tutorialStagePrefix = ['T', 'UTORIAL'];
+  const prefix = stagePrefix === 'NPCBattle' ? npcStagePrefix : tutorialStagePrefix;
   return `
     <div class="${ROOT_CLASS}__title">
       <div class="${ROOT_CLASS}__stage">
-        <div class="${ROOT_CLASS}__stage-prefix--capitalized">S</div>      
-        <div class="${ROOT_CLASS}__stage-prefix">TAGE</div>
+        <div class="${ROOT_CLASS}__stage-prefix--capitalized">${prefix[0]}</div>      
+        <div class="${ROOT_CLASS}__stage-prefix">${prefix[1]}</div>
         <div class="${ROOT_CLASS}__stage-level">${level}</div>
       </div>
       <div class="${ROOT_CLASS}__caption" data-id="${ids.caption}"></div>
@@ -57,10 +60,15 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {caption, armDozerIcon};
 }
 
+/** ステージプレフィックスタイプ */
+type StagePrefixType = 'NPCBattle' | 'Tutorial';
+
 /** ステージタイトルのパラメータ */
 export type StageTitleParam = {
   /** リソース管理オブジェクト */
   resources: Resources,
+  /** ステージプレフィックスタイプ */
+  stagePrefix: StagePrefixType,
   /** ステージレベル */
   level: number,
   /** ステージ名 */
@@ -83,7 +91,7 @@ export class StageTitle implements DOMScene {
     const ids = {caption: domUuid(), armDozerIcon: domUuid()};
     this.#root = document.createElement('div');
     this.#root.className = ROOT_CLASS;
-    this.#root.innerHTML = rootInnerHTML(ids, param.level);
+    this.#root.innerHTML = rootInnerHTML(ids, param.stagePrefix, param.level);
 
     const elements = extractElements(this.#root, ids);
 
