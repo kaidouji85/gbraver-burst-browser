@@ -8,7 +8,7 @@ import {waitElementLoaded} from "../../../wait/wait-element-loaded";
 import type {DOMScene} from "../dom-scene";
 
 /** ルート要素 class属性 */
-const ROOT_CLASS = 'npc-stage-title';
+const ROOT_CLASS = 'stage-title';
 
 /** data-idをまとめたもの */
 type DataIDs = {
@@ -57,8 +57,8 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {caption, armDozerIcon};
 }
 
-/** NPCステージタイトル */
-export class NPCStageTitle implements DOMScene {
+/** ステージタイトル */
+export class StageTitle implements DOMScene {
   #root: HTMLElement;
   #isArmDozerIconLoaded: Promise<void>;
 

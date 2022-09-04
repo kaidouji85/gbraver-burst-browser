@@ -14,7 +14,7 @@ import {Loading} from "./loading";
 import {MailVerifiedIncomplete} from "./mail-verified-incomplete/mail-verified-incomplete";
 import {MatchCard} from "./match-card";
 import {NPCEnding} from "./npc-ending/npc-ending";
-import {NPCStageTitle} from "./npc-stage-title/npc-stage-title";
+import {StageTitle} from "./stage-title/stage-title";
 import {PlayerSelect} from "./player-select";
 import type {TitleParams} from "./title/title";
 import {Title} from "./title/title";
@@ -201,7 +201,7 @@ export class DOMScenes {
   }
 
   /**
-   * NPCステージタイトル画面を開始する
+   * ステージタイトル画面を開始する
    *
    * @param resources リソース管理オブジェクト
    * @param level ステージレベル
@@ -209,10 +209,10 @@ export class DOMScenes {
    * @param armDozerId アームドーザアイコンのID
    * @returns 開始されたNPCステージタイトル画面
    */
-  async startNPCStageTitle(resources: Resources, level: number, caption: string[], armDozerId: ArmDozerId): Promise<NPCStageTitle> {
+  async startStageTitle(resources: Resources, level: number, caption: string[], armDozerId: ArmDozerId): Promise<StageTitle> {
     this.#removeCurrentScene();
 
-    const scene = new NPCStageTitle(resources, level, caption, armDozerId);
+    const scene = new StageTitle(resources, level, caption, armDozerId);
     this.#root.appendChild(scene.getRootHTMLElement());
     await Promise.race([
       scene.waitUntilLoaded(),
