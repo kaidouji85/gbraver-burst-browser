@@ -15,7 +15,7 @@ const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
 
 /** バッテリーシステムチュートリアル */
 const batterySystemTutorial =   {
-  title: 'Tutorial1 バッテリーシステムの基本',
+  title: 'バッテリーシステムの基本',
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: batterySystemTutorialNPC(),
   event: createBatterySystemTutorialEvent,
@@ -24,7 +24,7 @@ const batterySystemTutorial =   {
 
 /** 0防御チュートリアル */
 const zeroDefenseTutorial =   {
-  title: 'Tutorial2 0防御は即死',
+  title: '0防御は即死',
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: zeroDefenseTutorialNPC(),
   event: createZeroDefenseTutorialEvent,
@@ -33,7 +33,7 @@ const zeroDefenseTutorial =   {
 
 /** バーストチュートリアル */
 const burstTutorial = {
-  title: 'Tutorial3 バーストで一発逆転',
+  title: 'バーストで一発逆転',
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: burstTutorialNPC(),
   event: createBurstTutorialEvent,
@@ -41,7 +41,7 @@ const burstTutorial = {
 };
 
 /** チュートリアルのステージ */
-export const TutorialStages: TutorialStage[] = [batterySystemTutorial, zeroDefenseTutorial];
+export const TutorialStages: TutorialStage[] = [batterySystemTutorial, zeroDefenseTutorial, burstTutorial];
 
 /** 開発中のチュートリアルのステージ */
-export const TutorialStagesInDevelopment: TutorialStage[] = [burstTutorial, ...TutorialStages];
+export const TutorialStagesInDevelopment: TutorialStage[] = TutorialStages;
