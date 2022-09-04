@@ -30,16 +30,6 @@ export type TutorialState = {
 };
 
 /**
- * 現在プレイ中のステージを取得するヘルパー関数
- * 
- * @param state チュートリアルのステート 
- * @return 取得結果、データ不整合でステージが見つからない場合はnullを返す
- */
-export function getCurrentTutorialStage(state: TutorialState): ?TutorialStage {
-  return state.stages[state.stageIndex] ?? null;
-}
-
-/**
  * 現在のチュートリアルステージレベルを取得する
  *
  * @param state NPCバトルステート
@@ -47,6 +37,16 @@ export function getCurrentTutorialStage(state: TutorialState): ?TutorialStage {
  */
 export function getTutorialStageLevel(state: TutorialState): number {
   return state.stageIndex + 1;
+}
+
+/**
+ * 現在プレイ中のステージを取得するヘルパー関数
+ * 
+ * @param state チュートリアルのステート 
+ * @return 取得結果、データ不整合でステージが見つからない場合はnullを返す
+ */
+export function getCurrentTutorialStage(state: TutorialState): ?TutorialStage {
+  return state.stages[state.stageIndex] ?? null;
 }
 
 /**

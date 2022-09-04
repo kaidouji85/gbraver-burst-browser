@@ -6,7 +6,7 @@ import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
 import type {Tutorial} from "../in-progress/tutorial";
 import type {NPCBattleStage, NPCBattleState} from "../npc-battle";
-import {getCurrentStage, getStageLevel} from "../npc-battle";
+import {getCurrentNPCStage, getNPCStageLevel} from "../npc-battle";
 import {DefaultStage} from "../npc-battle-courses";
 import type {TutorialStage} from "../tutorial";
 import {getCurrentTutorialStage, getTutorialStageLevel} from "../tutorial";
@@ -59,8 +59,8 @@ const createNPCBattle = (inProgress: InProgress) => {
     return null;
   }
   const state = (inProgress.subFlow.state: NPCBattleState);
-  const stage = getCurrentStage(state) ?? DefaultStage;
-  const level = getStageLevel(state);
+  const stage = getCurrentNPCStage(state) ?? DefaultStage;
+  const level = getNPCStageLevel(state);
   const player = state.player;
   return {player, stage, level};
 };

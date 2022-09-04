@@ -47,23 +47,23 @@ export function createNPCBattleState(playerId: PlayerId, armdozerId: ArmDozerId,
 }
 
 /**
- * 現在のステージレベルを取得する
+ * 現在のNPCステージレベルを取得する
  *
  * @param state NPCバトルステート
  * @return ステージレベル
  */
-export function getStageLevel(state: NPCBattleState): number {
+export function getNPCStageLevel(state: NPCBattleState): number {
   return state.stageIndex + 1;
 }
 
 /**
- * 現在のステージを取得する
+ * 現在のNPCステージを取得する
  * ステージが取得できない場合はnullを返す
  *
  * @param origin NPCバトルステート
  * @return ステージ
  */
-export function getCurrentStage(origin: NPCBattleState): ?NPCBattleStage {
+export function getCurrentNPCStage(origin: NPCBattleState): ?NPCBattleStage {
   return origin.stages[origin.stageIndex] ?? null;
 }
 
@@ -102,7 +102,7 @@ export type UpdatedNPCBattleState = {
  * @return NPCバトル更新結果
  */
 export function updateNPCBattleState(origin: NPCBattleState, gameEndResult: GameEndResult): ?UpdatedNPCBattleState {
-  const stage = getCurrentStage(origin);
+  const stage = getCurrentNPCStage(origin);
   if (!stage) {
     return null;
   }
