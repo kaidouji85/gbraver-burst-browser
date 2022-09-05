@@ -108,6 +108,7 @@ function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string {
         <span class="${ROOT_CLASS}__copy-rights-year">2022</span>
         <span class="${ROOT_CLASS}__copy-rights-owner">Pegass85</span>
       </small>
+      <small class="${ROOT_CLASS}__music">音楽 魔王魂</small>
       <a class="${ROOT_CLASS}__how-to-play" data-id="${ids.howToPlay}">遊び方</a>
       <a class="${ROOT_CLASS}__terms-of-service" href="${params.termsOfServiceURL}" target="_blank" rel="noopener">利用規約</a>
       <a class="${ROOT_CLASS}__privacy-policy" href="${params.privacyPolicyURL}" target="_blank" rel="noopener">プライバシーポリシー</a>
