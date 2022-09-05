@@ -167,6 +167,7 @@
 
 .title__footer {
   position: absolute;
+  left: 0;
   bottom: 0;
   box-sizing: border-box;
   width: 100vw;
