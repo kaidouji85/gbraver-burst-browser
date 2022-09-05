@@ -167,6 +167,7 @@
 
 .title__footer {
   position: absolute;
+  left: 0;
   bottom: 0;
   box-sizing: border-box;
   width: 100vw;
@@ -186,11 +187,13 @@
   font-size: calc(var(--responsive-font-size) * 0.8);
 }
 
+.title__music,
 .title__how-to-play,
 .title__terms-of-service,
 .title__privacy-policy,
 .title__contact {
+  font-size: calc(var(--responsive-font-size) * 0.8);
   text-decoration: none;
   color: var(--button-font-color);
-  margin-left: calc(var(--responsive-font-size) * 2);
+  margin-left: calc(var(--responsive-font-size) * 1.6);
 }

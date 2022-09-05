@@ -6,10 +6,10 @@ import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
 import type {Tutorial} from "../in-progress/tutorial";
 import type {NPCBattleStage, NPCBattleState} from "../npc-battle";
-import {getCurrentStage, getStageLevel} from "../npc-battle";
+import {getCurrentNPCStage, getNPCStageLevel} from "../npc-battle";
 import {DefaultStage} from "../npc-battle-courses";
 import type {TutorialStage} from "../tutorial";
-import {getCurrentTutorialStage} from "../tutorial";
+import {getCurrentTutorialStage, getTutorialStageLevel} from "../tutorial";
 import {startNPCBattleStage} from "./start-npc-battle-stage";
 import {startTitle} from "./start-title";
 import {startTutorial} from "./start-tutorial";
@@ -59,8 +59,8 @@ const createNPCBattle = (inProgress: InProgress) => {
     return null;
   }
   const state = (inProgress.subFlow.state: NPCBattleState);
-  const stage = getCurrentStage(state) ?? DefaultStage;
-  const level = getStageLevel(state);
+  const stage = getCurrentNPCStage(state) ?? DefaultStage;
+  const level = getNPCStageLevel(state);
   const player = state.player;
   return {player, stage, level};
 };
@@ -94,19 +94,20 @@ const createTutorial = (inProgress: InProgress) => {
   if (!stage) {
     return null
   }
-  return {stage};
+  return {level: getTutorialStageLevel(tutorial.state), stage};
 };
 
 /**
  * チュートリアルに遷移する
  *
- * @param props ゲームプロパティ 
+ * @param props ゲームプロパティ
+ * @param level チュートリアルステージレベル
  * @param stage チュートリアルステージ
  * @return 処理が完了したら発火するPromise
  */
-const gotoTutorial = async (props: $ReadOnly<GameProps>, stage: TutorialStage) => {
+const gotoTutorial = async (props: $ReadOnly<GameProps>, level: number, stage: TutorialStage) => {
   props.domFloaters.hiddenPostBattle();
-  await startTutorial(props, stage);
+  await startTutorial(props, level, stage);
 };
 
 /**
@@ -129,6 +130,6 @@ export async function onPostBattleAction(props: GameProps, action: PostBattleAct
   } else if (npcBattle && (action.action.type === 'NextStage' || action.action.type === 'Retry')) {
     await gotoNPCBattleStage(props, npcBattle.player, npcBattle.stage, npcBattle.level);
   } else if (tutorial && (action.action.type === 'Retry' || action.action.type === 'NextTutorial')) {
-    await gotoTutorial(props, tutorial.stage);
+    await gotoTutorial(props, tutorial.level, tutorial.stage);
   }
 }

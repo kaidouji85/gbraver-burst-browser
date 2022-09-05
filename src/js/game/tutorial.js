@@ -6,6 +6,8 @@ import type {CustomBattleEvent} from './td-scenes/battle/custom-battle-event';
 
 /** チュートリアルステージ */
 export type TutorialStage = {
+  /** チュートリアルタイトル */
+  title: string[],
   /** カスタムバトルイベント生成関数、カスタムバトルイベントは状態を持つので都度生成する */
   event: () => CustomBattleEvent,
   /** NPC */
@@ -26,6 +28,16 @@ export type TutorialState = {
   /** 現在プレイ中のステージ、stages配列のindexである */
   stageIndex: number,
 };
+
+/**
+ * 現在のチュートリアルステージレベルを取得する
+ *
+ * @param state NPCバトルステート
+ * @return ステージレベル
+ */
+export function getTutorialStageLevel(state: TutorialState): number {
+  return state.stageIndex + 1;
+}
 
 /**
  * 現在プレイ中のステージを取得するヘルパー関数

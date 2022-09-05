@@ -1,7 +1,7 @@
 // @flow
 import type {GameProps} from "../game-props";
 import {createTutorial} from "../in-progress/tutorial";
-import {getCurrentTutorialStage} from "../tutorial";
+import {getCurrentTutorialStage, getTutorialStageLevel} from "../tutorial";
 import {TutorialStages, TutorialStagesInDevelopment} from "../tutorial-stages";
 import {fullResourceLoading} from "./full-resource-loading";
 import {startTutorial} from "./start-tutorial";
@@ -20,11 +20,12 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
 
   const stages = props.canPlayTutorialInDevelopment ? TutorialStagesInDevelopment : TutorialStages;
   const tutorial = createTutorial(stages);
+  const level = getTutorialStageLevel(tutorial.state)
   const stage = getCurrentTutorialStage(tutorial.state);
   if (!stage) {
     return;
   }
 
   props.inProgress = tutorial;
-  await startTutorial(props, stage);
+  await startTutorial(props, level, stage);
 }

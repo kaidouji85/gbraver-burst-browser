@@ -1,8 +1,10 @@
 // @flow
 import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import {createBatterySystemTutorialEvent} from "../custom-battle-events/battery-system-tutorial";
+import {createBurstTutorialEvent} from "../custom-battle-events/burst-tutorial";
 import {createZeroDefenseTutorialEvent} from "../custom-battle-events/zero-defense-tutorial";
 import {batterySystemTutorialNPC} from "../npc/battery-system-tutorial";
+import {burstTutorialNPC} from "../npc/burst-tutorial";
 import {zeroDefenseTutorialNPC} from "../npc/zero-defense-tutorial";
 import {SOUND_IDS} from "../resource/sound";
 import {playerUuid} from "../uuid/player";
@@ -13,22 +15,33 @@ const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
 
 /** バッテリーシステムチュートリアル */
 const batterySystemTutorial =   {
+  title: ['バッテリーシステムの基本'],
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: batterySystemTutorialNPC(),
-  event: () => createBatterySystemTutorialEvent(),
+  event: createBatterySystemTutorialEvent,
   bgm: SOUND_IDS.TUTORIAL_BGM,
 };
 
 /** 0防御チュートリアル */
 const zeroDefenseTutorial =   {
+  title: ['ゼロ防御だと即', '死する'],
   player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
   npc: zeroDefenseTutorialNPC(),
-  event: () => createZeroDefenseTutorialEvent(),
+  event: createZeroDefenseTutorialEvent,
   bgm: SOUND_IDS.BATTLE_BGM_01,
-}
+};
 
-/** チュートリアルステージ集合 */
-export const TutorialStages: TutorialStage[] = [batterySystemTutorial];
+/** バーストチュートリアル */
+const burstTutorial = {
+  title: ['バーストで', 'バッテリー回復'],
+  player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
+  npc: burstTutorialNPC(),
+  event: createBurstTutorialEvent,
+  bgm: SOUND_IDS.BATTLE_BGM_03,
+};
 
-/** 開発中のチュートリアルステージ集合 */
-export const TutorialStagesInDevelopment: TutorialStage[] = [zeroDefenseTutorial, batterySystemTutorial];
+/** チュートリアルのステージ */
+export const TutorialStages: TutorialStage[] = [batterySystemTutorial, zeroDefenseTutorial, burstTutorial];
+
+/** 開発中のチュートリアルのステージ */
+export const TutorialStagesInDevelopment: TutorialStage[] = TutorialStages;
