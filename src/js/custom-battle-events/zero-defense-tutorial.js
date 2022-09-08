@@ -107,31 +107,18 @@ const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleR
 };
 
 /**
- * ストーリー 敵攻撃ヒット
+ * ストーリー ダメージレース不利
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const enemyAttackHit = async (props: CustomBattleEventProps) => {
+const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「5攻撃は絶対に当たる'],
-    ['次で終わりだ 大田高校」'],
+    ['ガイ', '「ダメージレース不利」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
 };
-
-/**
- * 敵攻撃の結果に応じてストーリーを分岐する
- * @param props イベントプロパティ
- * @param battleResult 戦闘結果
- * @return ストーリーが完了したら発火するPromise
- */
-const enemyAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
-  if (battleResult.name === 'NormalHit') {
-    await enemyAttackHit(props);
-  }
-}
 
 /**
  * ストーリー 0バッテリーチャンス
@@ -440,20 +427,22 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
     const isGameEnd = props.update.filter(v => v.effect.name === 'GameEnd').length > 0;
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
-    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
+    const battlePlayer = (foundLastBattle?.players ?? []).find(v => v.playerId === props.playerId);
+    const battleEnemy = (foundLastBattle?.players ?? []).find(v => v.playerId !== props.playerId);
+    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle' && battlePlayer && battleEnemy
       ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
-        result: foundLastBattle.effect.result}
+        result: foundLastBattle.effect.result,
+        isDamageRaceDisadvantage: battlePlayer.armdozer.hp < battleEnemy.armdozer.hp}
       : null;
     if (lastBattle && lastBattle.isAttacker  && !isGameEnd) {
       await playerAttack(props, lastBattle.result);
-    } else if (lastBattle && !lastBattle.isAttacker  && !isGameEnd) {
-      await enemyAttack(props, lastBattle.result);
+    } else if (lastBattle && !lastBattle.isAttacker && lastBattle.isDamageRaceDisadvantage && !isGameEnd) {
+      await damageRaceDisadvantage(props);
     }
 
     const foundLastState = props.update[props.update.length - 1];
     const latestEnemy = (foundLastState?.players?? []).find(v => v.playerId !== props.playerId);
-    const latestPlayer = (foundLastState?.players ?? []).find(v => v.playerId === props.playerId)
-    const lastState = foundLastState && latestEnemy && latestPlayer
+    const lastState = foundLastState && latestEnemy
       ? {isPlayerTurn: foundLastState.activePlayerId === props.playerId,
         isZeroBatteryChange: latestEnemy.armdozer.battery === 0 && 0 < latestEnemy.armdozer.hp,
         enemyState: latestEnemy}
