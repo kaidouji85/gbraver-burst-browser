@@ -57,45 +57,21 @@ const introduction = async (props: CustomBattleEventProps) => {
 };
 
 /**
- * ストーリー プレイヤー攻撃ヒット
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const playerAttackHit = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「やるな 大田高校'],
-    ['想定以上のダメージだ」']
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-  invisibleAllMessageWindows(props);
-};
-
-/**
  * ストーリー プレイヤー攻撃ガード
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
 const playerAttackGuard = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「よし 当たったッス」']
+  ]);
+  await refreshConversation(props, 100);
+
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「甘いぞ 大田高校'],
-    ['ガードでダメージ半減だ」']
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-  invisibleAllMessageWindows(props);
-};
-
-/**
- * ストーリー プレイヤー攻撃ミス
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const playerAttackMiss = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「どうした 大田高校'],
-    ['お前たちの力はその程度か」']
+    ['攻撃 防御が同じバッテリーの場合 ガードでダメージ半減だ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -117,36 +93,16 @@ const playerFeintSuccess = async (props: CustomBattleEventProps) => {
 };
 
 /**
- * ストーリー プレイヤーフェイントミス
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const playerFeintMiss = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「その程度フェイント 俺には通用せんわ」'],
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-  invisibleAllMessageWindows(props);
-};
-
-/**
  * プレイヤー攻撃の結果に応じてストーリーを分岐する
  * @param props イベントプロパティ
  * @param battleResult 戦闘結果
  * @return ストーリーが完了したら発火するPromise
  */
 const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
-  if (battleResult.name === 'NormalHit') {
-    await playerAttackHit(props);
-  } else if (battleResult.name === 'Guard') {
+  if (battleResult.name === 'Guard') {
     await playerAttackGuard(props);
-  } else if (battleResult.name === 'Miss') {
-    await playerAttackMiss(props);
   } else if (battleResult.name === 'Feint' && battleResult.isDefenderMoved) {
     await playerFeintSuccess(props);
-  } else if (battleResult.name === 'Feint' && !battleResult.isDefenderMoved) {
-    await playerFeintMiss(props);
   }
 };
 
