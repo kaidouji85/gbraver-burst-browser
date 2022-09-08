@@ -477,32 +477,34 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
-    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
-    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
-      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId, result: foundLastBattle.effect.result}
-      : null;
-    const isGameEnd = props.update.filter(v => v.effect.name === 'GameEnd').length > 0;
-    const foundLastState = props.update[props.update.length - 1];
-    const foundEnemyState = foundLastState
-      ? foundLastState.players.find(v => v.playerId !== props.playerId)
-      : null;
-    const lastState = foundLastState && foundEnemyState
-      ? {isPlayerTurn: foundLastState.activePlayerId === props.playerId, enemyState: foundEnemyState}
-      : null;
-    const isZeroBatteryChance = lastState && lastState.isPlayerTurn && lastState.enemyState.armdozer.battery === 0
-      && 0 < lastState.enemyState.armdozer.hp;
     if (!this.isIntroductionComplete) {
       await introduction(props);
       this.isIntroductionComplete = true;
-    } else if (lastBattle && !lastBattle.isAttacker  && !isGameEnd && isZeroBatteryChance) {
-      await enemyAttack(props, lastBattle.result);
-      await refreshConversation(props);
-      await zeroBatteryChance(props);
-    } else if (lastBattle && lastBattle.isAttacker && !isGameEnd) {
+    }
+
+    const isGameEnd = props.update.filter(v => v.effect.name === 'GameEnd').length > 0;
+    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
+    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
+      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
+        result: foundLastBattle.effect.result}
+      : null;
+    if (lastBattle && lastBattle.isAttacker  && !isGameEnd) {
       await playerAttack(props, lastBattle.result);
     } else if (lastBattle && !lastBattle.isAttacker  && !isGameEnd) {
       await enemyAttack(props, lastBattle.result);
-    } 
+    }
+
+    const foundLastState = props.update[props.update.length - 1];
+    const latestEnemy = (foundLastState?.players?? []).find(v => v.playerId !== props.playerId);
+    const latestPlayer = (foundLastState?.players ?? []).find(v => v.playerId === props.playerId)
+    const lastState = foundLastState && latestEnemy && latestPlayer
+      ? {isPlayerTurn: foundLastState.activePlayerId === props.playerId,
+        isZeroBatteryChange: latestEnemy.armdozer.battery === 0 && 0 < latestEnemy.armdozer.hp,
+        enemyState: latestEnemy}
+      : null;
+    if (lastState && lastState.isPlayerTurn && lastState.isZeroBatteryChange && !isGameEnd) {
+      await zeroBatteryChance(props);
+    }
   }
 
   /** @override */
