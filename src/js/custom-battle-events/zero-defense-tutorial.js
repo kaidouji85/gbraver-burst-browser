@@ -70,8 +70,8 @@ const playerAttackGuard = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「甘いぞ 大田高校'],
-    ['攻撃 防御が同じバッテリーの場合 ガードでダメージ半減だ」']
+    ['ガイ', '「甘いぞ シンヤ'],
+    ['攻撃 防御が同じバッテリーだから ガードでダメージ半減だ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -107,17 +107,18 @@ const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleR
 };
 
 /**
- * ストーリー ダメージレース不利
+ * ストーリー 圧倒的なダメージレース不利
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
+const overwhelmingDisadvantage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「ダメージレース不利」'],
+    ['ガイ', '「見ろシンヤ お前のHPは風前の灯'],
+    ['それに引き替え こちらのHPは満タン'],
+    ['この勝負 俺の勝ちだ」'],
   ]);
-  props.view.dom.leftMessageWindow.darken();
-  invisibleAllMessageWindows(props);
+  await refreshConversation(props);
 };
 
 /**
@@ -163,7 +164,6 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「そこまで!!'],
-    ['台東高校 機能停止'],
     ['勝者 大田高校」']
   ]);
   await refreshConversation(props);
@@ -189,7 +189,6 @@ const playerLose = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「そこまで!!'],
-    ['大田高校 機能停止'],
     ['勝者 台東高校」']
   ]);
   await refreshConversation(props);
@@ -432,12 +431,12 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle' && battlePlayer && battleEnemy
       ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
         result: foundLastBattle.effect.result,
-        isDamageRaceDisadvantage: battlePlayer.armdozer.hp < battleEnemy.armdozer.hp}
+        isOverwhelmingDisadvantage: battlePlayer.armdozer.hp <= 1500 && battleEnemy.armdozer.hp === battleEnemy.armdozer.maxHp}
       : null;
     if (lastBattle && lastBattle.isAttacker  && !isGameEnd) {
       await playerAttack(props, lastBattle.result);
-    } else if (lastBattle && !lastBattle.isAttacker && lastBattle.isDamageRaceDisadvantage && !isGameEnd) {
-      await damageRaceDisadvantage(props);
+    } else if (lastBattle && !lastBattle.isAttacker && lastBattle.isOverwhelmingDisadvantage && !isGameEnd) {
+      await overwhelmingDisadvantage(props);
     }
 
     const foundLastState = props.update[props.update.length - 1];
