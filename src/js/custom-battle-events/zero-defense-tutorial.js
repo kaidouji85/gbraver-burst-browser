@@ -32,7 +32,8 @@ const introduction = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「都立台東高校のガイだ'],
-    ['強豪校だと期待してたが こんな締まりのない奴が出てくるとはな」'],
+    ['強豪校だと期待していたが'],
+    ['こんな締まりのない奴が出てくるとはな」']
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -85,7 +86,7 @@ const playerAttackGuard = async (props: CustomBattleEventProps) => {
 const playerFeintSuccess = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「何 フェイントだと'],
+    ['ガイ', '「何？ フェイントだと'],
     ['少しはできるなシンヤ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
@@ -107,18 +108,80 @@ const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleR
 };
 
 /**
- * ストーリー 圧倒的なダメージレース不利
+ * ストーリー 攻撃、防御が一巡
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const overwhelmingDisadvantage = async (props: CustomBattleEventProps) => {
+const roundComplete = async (props: CustomBattleEventProps) => {
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「お互いに攻撃 防御が一巡したッスね」']
+  ]);
+  props.view.dom.rightMessageWindow.darken();
+};
+
+
+/**
+ * ストーリー ダメージレースイーブン
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const damageRaceEven = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「見ろシンヤ お前のHPは風前の灯'],
-    ['それに引き替え こちらのHPは満タン'],
-    ['この勝負 俺の勝ちだ」'],
+    ['ガイ', '「ダメージレースはイーブンか'],
+    ['面白い'],
+    ['そうこなくてはな」'],
   ]);
   await refreshConversation(props);
+};
+
+/**
+ * ストーリー ダメージレース有利
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const damageRaceAdvantage = async (props: CustomBattleEventProps) => {
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「何？ 俺がダメージレースで負けているだと'],
+    ['少しは本気を出さんとな」'],
+  ]);
+  await refreshConversation(props);
+};
+
+/**
+ * ストーリー ダメージレース不利
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「フハハハハ 見ろシンヤ！！'],
+    ['ダメージレースは俺が有利'],
+    ['このまま勝利はいただくぞ」'],
+  ]);
+  await refreshConversation(props);
+};
+
+/**
+ * ストーリー ダメージレース
+ * @param props イベントプロパティ
+ * @param playerHP プレイヤーHP
+ * @param enemyHP 敵HP
+ * @return ストーリーが完了したら発火するPromise
+ */
+const damageRace = async (props: CustomBattleEventProps, playerHP: number, enemyHP: number) => {
+  const hpDiff = playerHP - enemyHP;
+  const isHpNearlyEqual = Math.abs(hpDiff) <= 500;
+  if (isHpNearlyEqual) {
+    await damageRaceEven(props);
+  } else if (0 < hpDiff) {
+    await damageRaceAdvantage(props);
+  } else if (hpDiff < 0) {
+    await damageRaceDisadvantage(props);
+  }
 };
 
 /**
@@ -432,12 +495,15 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle' && battlePlayer && battleEnemy
       ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
         result: foundLastBattle.effect.result,
+        playerHP: battlePlayer.armdozer.hp,
+        enemyHP: battleEnemy.armdozer.hp,
         isOverwhelmingDisadvantage: battlePlayer.armdozer.hp <= 1500 && battleEnemy.armdozer.hp === battleEnemy.armdozer.maxHp}
       : null;
     if (lastBattle && lastBattle.isAttacker  && !isGameEnd) {
       await playerAttack(props, lastBattle.result);
-    } else if (lastBattle && !lastBattle.isAttacker && lastBattle.isOverwhelmingDisadvantage && !isGameEnd) {
-      await overwhelmingDisadvantage(props);
+    } else if (lastBattle && !lastBattle.isAttacker && !isGameEnd) {
+      await roundComplete(props);
+      await damageRace(props, lastBattle.playerHP, lastBattle.enemyHP);
     }
 
     const foundLastState = props.update[props.update.length - 1];
