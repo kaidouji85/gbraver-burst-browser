@@ -32,7 +32,7 @@ const introduction = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「都立台東高校のガイだ'],
-    ['強豪校だと期待していたが こんな締まりのない奴が出てくるとはな」'],
+    ['強豪校だと期待してたが こんな締まりのない奴が出てくるとはな」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -86,7 +86,7 @@ const playerFeintSuccess = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「何 フェイントだと'],
-    ['少しはできるな大田高校」']
+    ['少しはできるなシンヤ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -129,7 +129,7 @@ const overwhelmingDisadvantage = async (props: CustomBattleEventProps) => {
 const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「台東高校のバッテリーが0になった'],
+    ['ツバサ', '「ガイ君のバッテリーが0になった'],
     ['シンヤ 今こそ攻撃のチャンスだ」'],
   ]);
   await refreshConversation(props, 100);
@@ -164,20 +164,21 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「そこまで!!'],
-    ['勝者 大田高校」']
+    ['勝者 シンヤ」']
   ]);
   await refreshConversation(props);
 
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「バカな 途中まで俺が有利だったのに」'],
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「……これが0防御の破壊力」'],
+    ['シンヤ', '「やった デビュー戦で勝てたッス」'],
   ]);props.view.dom.rightMessageWindow.darken();
+
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「バカな こんな奴に'],
+    ['一体 俺には何が足りなかったと言うんだ」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
 };
 
 /**
@@ -189,21 +190,21 @@ const playerLose = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「そこまで!!'],
-    ['勝者 台東高校」']
+    ['勝者 ガイ」']
   ]);
   await refreshConversation(props);
 
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「クッ もう少しで勝てたのに」'],
-  ]);props.view.dom.rightMessageWindow.darken();
-
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「見たか 大田高校'],
-    ['これが台東高校の実力だ」']
+    ['ガイ', '「強豪校といっても 所詮はこの程度か」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「……手も足も出なかったッス」'],
+  ]);
+  props.view.dom.rightMessageWindow.darken();
 };
 
 /**
