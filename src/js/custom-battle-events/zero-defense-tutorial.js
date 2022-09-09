@@ -469,6 +469,8 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   selectableCommands: SelectableCommands;
   /** イントロダクションを再生したか、trueで再生した */
   isIntroductionComplete: boolean;
+  /** ダメージレースストーリーを再生したか、trueで再生した */
+  isDamageRaceComplete: boolean;
 
   /**
    * コンストラクタ
@@ -478,6 +480,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     this.stateHistory = [];
     this.selectableCommands = 'All';
     this.isIntroductionComplete = false;
+    this.isDamageRaceComplete = false;
   }
 
   /** @override */
@@ -496,12 +499,12 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
         result: foundLastBattle.effect.result,
         playerHP: battlePlayer.armdozer.hp,
-        enemyHP: battleEnemy.armdozer.hp,
-        isOverwhelmingDisadvantage: battlePlayer.armdozer.hp <= 1500 && battleEnemy.armdozer.hp === battleEnemy.armdozer.maxHp}
+        enemyHP: battleEnemy.armdozer.hp}
       : null;
     if (lastBattle && lastBattle.isAttacker  && !isGameEnd) {
       await playerAttack(props, lastBattle.result);
-    } else if (lastBattle && !lastBattle.isAttacker && !isGameEnd) {
+    } else if (lastBattle && !lastBattle.isAttacker && !isGameEnd && this.isDamageRaceComplete) {
+      this.isDamageRaceComplete = true;
       await roundComplete(props);
       await damageRace(props, lastBattle.playerHP, lastBattle.enemyHP);
     }
