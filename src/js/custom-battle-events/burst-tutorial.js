@@ -206,14 +206,14 @@ const doPilotSkillToRecoverBattery = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「俺に秘められた力？」'],
+    ['シンヤ', '「俺に秘められた力？ ッスか」'],
   ]);
   await refreshConversation(props, 100);
 
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「君のパイロットスキルは 1試合に1回しか使えないが'],
-    ['少しだけバッテリーを回復することができるんだ」'],
+    ['少しだけバッテリーを回復できるんだ」'],
   ]);
   await refreshConversation(props, 100);
 
@@ -362,13 +362,13 @@ const playerLose = async (props: CustomBattleEventProps) => {
 /** バースト注釈 */
 const shouldBurst = [
   'ライトさんは5攻撃をしかけてくる',
-  'バーストでバッテリー回復して 5防御に持ち込もう'
+  'バーストでバッテリー回復して5防御しよう'
 ];
 
 /** パイロットスキル注釈 */
 const shouldPilotSkill = [
   'ライトさんは5攻撃をしかけてくる',
-  'パイロットスキルでバッテリー回復して 5防御に持ち込もう'
+  'パイロットスキルでバッテリー回復して5防御しよう'
 ];
 
 /** 選択可能なコマンド */
