@@ -35,24 +35,29 @@ const introduction = async (props: CustomBattleEventProps) => {
     ['ツバサ', '「これより 操縦訓練を開始する'],
     ['姿勢を正して 礼!!」']
   ]);
-  props.view.dom.leftMessageWindow.darken();
+  await refreshConversation(props);
 
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
+  props.view.dom.leftMessageWindow.messages(
+    ['ツバサ', '「よろしくお願いします」']
+  );
+  props.view.dom.leftMessageWindow.scrollUp();
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「よろしくお願いします」']
   ]);
-  props.view.dom.rightMessageWindow.darken();
+  await refreshConversation(props);
 
-  props.view.dom.leftMessageWindow.lighten();
+  activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
-    ['ツバサ', '「いい返事だな では早速はじめよう'],
+    ['ツバサ', '「では早速はじめよう'],
     ['攻撃側 防御側でのバッテリーの出し合いが試合の基本だ'],
     ['大きいバッテリーを出した側の行動が成功するのだが これは実際にやってみた方が早いな'],
     ['シンヤ 私が防御に回るから 好きなように攻撃してくれ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
 
-  props.view.dom.rightMessageWindow.lighten();
+  activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「了解ッス'],
     ['それじゃ遠慮なく行くッスよ ツバサ先輩」'],
