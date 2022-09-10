@@ -114,7 +114,7 @@ const shouldDefense5 = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「今の台東高校のバッテリーは5だから'],
+    ['シンヤ', '「ライトさんのバッテリーは5だから'],
     ['6防御すればいいんスね」'],
   ]);
   await refreshConversation(props, 100);
@@ -129,7 +129,7 @@ const shouldDefense5 = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「そんなあ もう負け確ッスか」'],
+    ['シンヤ', '「そんな もう負け確ッスか」'],
   ]);
   await refreshConversation(props, 100);
 
@@ -174,6 +174,13 @@ const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
     ['バーストは1試合に1回しか使えないが'],
     ['一気にバッテリーを回復できるんだ」']
   ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「了解ッス'],
+    ['バーストでバッテリー回復ッスね」']
+  ]);
   invisibleAllMessageWindows(props);
 };
 
@@ -192,8 +199,28 @@ const doPilotSkillToRecoverBattery = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「ならばバーストを発動させよう'],
-    ['……と言いたいところだが 既に発動済か'],
-    ['こうなれば最後の手段 君のパイロットスキルを使おう」']
+    ['……と言いたいところだが バーストは使用済みか'],
+    ['こうなれば最後の手段 君に秘められし力 パイロットスキルを使おう」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「俺に秘められた力？ ッスか」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Tsubasa');
+  await scrollRightMessages(props, [
+    ['ツバサ', '「君のパイロットスキルは 1試合に1回しか使えないが'],
+    ['少しだけバッテリーを回復できるんだ」'],
+  ]);
+  await refreshConversation(props, 100);
+
+  activeRightMessageWindowWithFace(props, 'Shinya');
+  await scrollRightMessages(props, [
+    ['シンヤ', '「了解ッス'],
+    ['パイロットスキルでバッテリー回復ッスね」']
   ]);
   invisibleAllMessageWindows(props);
 };
@@ -213,9 +240,8 @@ const canNotChangeBattery = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「ならばバーストを発動させよう'],
-    ['……と言いたいところだが 既に発動済か'],
-    ['こうなれば最後の手段 君のパイロットスキル'],
-    ['……も使い切ったか'],
+    ['……と言いたいところだが バーストは使用済みか'],
+    ['こうなれば最後の手段 君のパイロットスキル ……も使い切ったか'],
     ['すまんシンヤ これ以上打つ手なしだ」']
   ]);
   invisibleAllMessageWindows(props);
@@ -256,7 +282,7 @@ const playerWin = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「やめ!!'],
-    ['この勝負 ……大田高校の勝ち']
+    ['この試合 ……シンヤの勝ち']
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -300,12 +326,12 @@ const playerLose = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「やめ!!'],
-    ['この勝負 台東高校の勝ち!!']
+    ['この試合 ライト先輩の勝ち!!']
   ]);
 
   activeLeftMessageWindowWithFace(props, 'Raito');
   await scrollLeftMessages(props, [
-    ['ライト', '「どうや大田高校 これが台東高校の実力や」'],
+    ['ライト', '「どや大田高校 これが台東高校の実力や」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -335,14 +361,14 @@ const playerLose = async (props: CustomBattleEventProps) => {
 
 /** バースト注釈 */
 const shouldBurst = [
-  '5防御しないと敗色濃厚だ',
-  'まずはバーストでバッテリーを回復させよう'
+  'ライトさんは5攻撃をしかけてくる',
+  'バーストでバッテリー回復して5防御しよう'
 ];
 
 /** パイロットスキル注釈 */
 const shouldPilotSkill = [
-  '5防御しないと敗色濃厚だ',
-  'まずはパイロットスキルでバッテリーを回復させよう'
+  'ライトさんは5攻撃をしかけてくる',
+  'パイロットスキルでバッテリー回復して5防御しよう'
 ];
 
 /** 選択可能なコマンド */
