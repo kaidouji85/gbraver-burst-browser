@@ -386,7 +386,7 @@ const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => 
   await scrollRightMessages(props, [
     ['ツバサ', '「こういう時はバーストで一気にバッテリーを回復させるんだ'],
     ['……と言いたい所だが、バーストは使用済みか'],
-    ['ならば君の秘められた力 パイロットスキルを発動するんだ」']
+    ['ならば君に秘められた力 パイロットスキルを発動するんだ」']
   ]);
   await refreshConversation(props, 100);
 
@@ -430,7 +430,7 @@ const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBattleEven
   await scrollRightMessages(props, [
     ['ツバサ', '「こういう時はバーストで一気にバッテリーを回復させるんだ'],
     ['……と言いたい所だが、バーストは使用済みか'],
-    ['ならば君の秘められた力 パイロットスキル'],
+    ['ならば君に秘められた力 パイロットスキル'],
     ['……も発動済みか']
   ]);
   await refreshConversation(props, 100);
@@ -449,7 +449,7 @@ const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBattleEven
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「そんなあ」'],
+    ['シンヤ', '「そんな」'],
   ]);
   await refreshConversation(props, 100);
 
