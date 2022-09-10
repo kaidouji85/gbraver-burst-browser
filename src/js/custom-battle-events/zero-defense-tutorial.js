@@ -35,7 +35,7 @@ const introduction = async (props: CustomBattleEventProps) => {
     ['強豪校だと期待していたが'],
     ['こんな締まりのない奴が出てくるとはな」']
   ]);
-  props.view.dom.leftMessageWindow.darken();
+  await refreshConversation(props);
 
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
@@ -58,6 +58,20 @@ const introduction = async (props: CustomBattleEventProps) => {
 };
 
 /**
+ * ストーリー プレイヤー攻撃ヒット
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerAttackHit = async (props: CustomBattleEventProps) => {
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「この俺に当てるとは ……やるな シンヤ」']
+  ]);
+  props.view.dom.leftMessageWindow.darken();
+  invisibleAllMessageWindows(props);
+};
+
+/**
  * ストーリー プレイヤー攻撃ガード
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
@@ -74,7 +88,19 @@ const playerAttackGuard = async (props: CustomBattleEventProps) => {
     ['ガイ', '「甘いぞ シンヤ'],
     ['攻撃 防御が同じバッテリーだから ガードでダメージ半減だ」']
   ]);
-  props.view.dom.leftMessageWindow.darken();
+  invisibleAllMessageWindows(props);
+};
+
+/**
+ * ストーリー プレイヤー攻撃ミス
+ * @param props イベントプロパティ
+ * @return ストーリーが完了したら発火するPromise
+ */
+const playerAttackMiss = async (props: CustomBattleEventProps) => {
+  activeLeftMessageWindowWithFace(props, 'Gai');
+  await scrollLeftMessages(props, [
+    ['ガイ', '「どうした シンヤ 踏み込みが足らんぞ」'],
+  ]);
   invisibleAllMessageWindows(props);
 };
 
@@ -87,7 +113,7 @@ const playerFeintSuccess = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「何？ フェイントだと'],
-    ['少しはできるなシンヤ」']
+    ['少しはできるな シンヤ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
   invisibleAllMessageWindows(props);
@@ -100,26 +126,16 @@ const playerFeintSuccess = async (props: CustomBattleEventProps) => {
  * @return ストーリーが完了したら発火するPromise
  */
 const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
-  if (battleResult.name === 'Guard') {
+  if (battleResult.name === 'NormalHit') {
+    await playerAttackHit(props);
+  } else if (battleResult.name === 'Guard') {
     await playerAttackGuard(props);
+  } else if (battleResult.name === 'Miss') {
+    await playerAttackMiss(props);
   } else if (battleResult.name === 'Feint' && battleResult.isDefenderMoved) {
     await playerFeintSuccess(props);
   }
 };
-
-/**
- * ストーリー 攻撃、防御が一巡
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const roundComplete = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「お互いに攻撃 防御が一巡したッスね」']
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-};
-
 
 /**
  * ストーリー ダメージレースイーブン
@@ -130,8 +146,7 @@ const damageRaceEven = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「ダメージレースはイーブンか'],
-    ['面白い'],
-    ['そうこなくてはな」'],
+    ['面白い そうこなくてはな」'],
   ]);
   await refreshConversation(props);
 };
@@ -159,8 +174,8 @@ const damageRaceDisadvantage = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「フハハハハ 見ろシンヤ！！'],
-    ['ダメージレースは俺が有利'],
-    ['このまま勝利はいただくぞ」'],
+    ['ダメージレースは俺の優勢'],
+    ['このまま勝利をいただくぞ」'],
   ]);
   await refreshConversation(props);
 };
@@ -192,7 +207,7 @@ const damageRace = async (props: CustomBattleEventProps, playerHP: number, enemy
 const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「ガイ君のバッテリーが0になった'],
+    ['ツバサ', '「ガイのバッテリーが0になった'],
     ['シンヤ 今こそ攻撃のチャンスだ」'],
   ]);
   await refreshConversation(props, 100);
@@ -238,8 +253,8 @@ const zeroDefenseWin = async (props: CustomBattleEventProps) => {
 
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
-    ['ガイ', '「バカな こんな奴に'],
-    ['一体 俺には何が足りなかったと言うんだ」']
+    ['ガイ', '「バカな この俺が負けるなんて'],
+    ['……シンヤ 貴様の名前 覚えたからな」']
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
@@ -503,9 +518,8 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       : null;
     if (lastBattle && lastBattle.isAttacker  && !isGameEnd) {
       await playerAttack(props, lastBattle.result);
-    } else if (lastBattle && !lastBattle.isAttacker && !isGameEnd && this.isDamageRaceComplete) {
+    } else if (lastBattle && !lastBattle.isAttacker && !isGameEnd && !this.isDamageRaceComplete) {
       this.isDamageRaceComplete = true;
-      await roundComplete(props);
       await damageRace(props, lastBattle.playerHP, lastBattle.enemyHP);
     }
 
