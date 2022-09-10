@@ -114,7 +114,7 @@ const shouldDefense5 = async (props: CustomBattleEventProps) => {
 
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「今の台東高校のバッテリーは5だから'],
+    ['シンヤ', '「ライトさんのバッテリーは5だから'],
     ['6防御すればいいんスね」'],
   ]);
   await refreshConversation(props, 100);
@@ -256,7 +256,7 @@ const playerWin = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「やめ!!'],
-    ['この勝負 ……大田高校の勝ち']
+    ['この試合 ……シンヤの勝ち']
   ]);
   props.view.dom.leftMessageWindow.darken();
 
@@ -300,12 +300,12 @@ const playerLose = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Gai');
   await scrollLeftMessages(props, [
     ['ガイ', '「やめ!!'],
-    ['この勝負 台東高校の勝ち!!']
+    ['この試合 ライト先輩の勝ち!!']
   ]);
 
   activeLeftMessageWindowWithFace(props, 'Raito');
   await scrollLeftMessages(props, [
-    ['ライト', '「どうや大田高校 これが台東高校の実力や」'],
+    ['ライト', '「どや大田高校 これが台東高校の実力や」'],
   ]);
   props.view.dom.leftMessageWindow.darken();
 

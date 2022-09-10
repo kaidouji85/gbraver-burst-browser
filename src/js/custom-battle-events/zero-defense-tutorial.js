@@ -207,7 +207,7 @@ const damageRace = async (props: CustomBattleEventProps, playerHP: number, enemy
 const zeroBatteryChance = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
-    ['ツバサ', '「ガイのバッテリーが0になった'],
+    ['ツバサ', '「ガイ君のバッテリーが0になった'],
     ['シンヤ 今こそ攻撃のチャンスだ」'],
   ]);
   await refreshConversation(props, 100);
