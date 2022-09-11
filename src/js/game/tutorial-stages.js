@@ -10,38 +10,45 @@ import {SOUND_IDS} from "../resource/sound";
 import {playerUuid} from "../uuid/player";
 import type {TutorialStage} from "./tutorial";
 
+/** シンブレイバー */
 const shinBraver = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
+/** シンヤ */
 const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
 
-/** バッテリーシステムチュートリアル */
-const batterySystemTutorial =   {
-  title: ['バッテリーシステムの基本'],
-  player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
-  npc: batterySystemTutorialNPC(),
-  event: createBatterySystemTutorialEvent,
-  bgm: SOUND_IDS.TUTORIAL_BGM,
-};
-
-/** 0防御チュートリアル */
-const zeroDefenseTutorial =   {
-  title: ['ゼロ防御だと即', '死する'],
-  player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
-  npc: zeroDefenseTutorialNPC(),
-  event: createZeroDefenseTutorialEvent,
-  bgm: SOUND_IDS.BATTLE_BGM_01,
-};
-
-/** バーストチュートリアル */
-const burstTutorial = {
-  title: ['バーストで', 'バッテリー回復'],
-  player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
-  npc: burstTutorialNPC(),
-  event: createBurstTutorialEvent,
-  bgm: SOUND_IDS.BATTLE_BGM_03,
+/** チュートリアルIDを集めたもの */
+export const TutorialStageIDs = {
+  BATTERY_SYSTEM: 'BATTERY_SYSTEM',
+  ZERO_DEFENSE: 'ZERO_DEFENSE',
+  BURST: 'BURST'
 };
 
 /** チュートリアルのステージ */
-export const TutorialStages: TutorialStage[] = [batterySystemTutorial, zeroDefenseTutorial, burstTutorial];
+export const TutorialStages: TutorialStage[] = [
+  {
+    id: TutorialStageIDs.BATTERY_SYSTEM,
+    title: ['バッテリーシステムの基本'],
+    player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
+    npc: batterySystemTutorialNPC(),
+    event: createBatterySystemTutorialEvent,
+    bgm: SOUND_IDS.TUTORIAL_BGM,
+  },
+  {
+    id: TutorialStageIDs.ZERO_DEFENSE,
+    title: ['ゼロ防御だと即', '死する'],
+    player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
+    npc: zeroDefenseTutorialNPC(),
+    event: createZeroDefenseTutorialEvent,
+    bgm: SOUND_IDS.BATTLE_BGM_01,
+  },
+  {
+    id: TutorialStageIDs.BURST,
+    title: ['バースト基礎'],
+    player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
+    npc: burstTutorialNPC(),
+    event: createBurstTutorialEvent,
+    bgm: SOUND_IDS.BATTLE_BGM_03,
+  }
+];
 
 /** 開発中のチュートリアルのステージ */
 export const TutorialStagesInDevelopment: TutorialStage[] = TutorialStages;
