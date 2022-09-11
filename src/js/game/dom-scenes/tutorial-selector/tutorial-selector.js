@@ -25,7 +25,7 @@ export function rootInnerHTML(): string {
         <button class="${ROOT_CLASS}__stage-select">選択</button>
       </li>
     </ol>
-    <button class="${ROOT_CLASS}__prev">戻る</button>
+    <button class="${ROOT_CLASS}__prev">戻る</button> 
   `;
 }
 

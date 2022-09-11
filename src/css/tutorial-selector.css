@@ -32,10 +32,11 @@
 
 .tutorial-selector__stages {
   margin: 0;
+  flex-grow: 1;
 }
 
 .tutorial-selector__stage {
-  font-size: calc(var(--responsive-font-size) * 1);
+  font-size: var(--responsive-font-size);
   margin:calc(var(--responsive-font-size) * 0.5) 0;
 }
 
@@ -46,16 +47,17 @@
 
 .tutorial-selector__stage-select {
   width: calc(var(--responsive-font-size) * 5);
-  height: calc(var(--responsive-font-size) * 2.5);
+  height: calc(var(--responsive-font-size) * 3);
   background-color: var(--button-background-color);
   color: var(--button-font-color);
+  font-size: var(--responsive-font-size);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
   border-radius: var(--button-border-radius);
 }
 
 .tutorial-selector__prev {
-  width: calc(var(--responsive-font-size) * 14.5);
+  width: calc(var(--responsive-font-size) * 10);
   height: calc(var(--responsive-font-size) * 3);
   font-size: var(--responsive-font-size);
   border-radius: var(--button-border-radius);
@@ -63,5 +65,4 @@
   color: var(--button-font-color);
   border: var(--button-border);
   box-shadow: var(--button-box-shadow);
-  margin: calc(var(--responsive-font-size) * 0.5);
 }
