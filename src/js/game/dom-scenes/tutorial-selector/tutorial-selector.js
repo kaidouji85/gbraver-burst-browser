@@ -1,4 +1,8 @@
 // @flow
+import type {PushDOM} from "../../../dom/event-stream";
+import {pushDOMStream} from "../../../dom/event-stream";
+import {createStreamSource} from "../../../stream/stream";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {TutorialStageID} from "../../tutorial";
 import type {DOMScene} from "../dom-scene";
@@ -7,7 +11,7 @@ import type {DOMScene} from "../dom-scene";
 const ROOT_CLASS = 'tutorial-selector';
 
 /** data-idをあつめたもの */
-type DataIDs = {stages: string};
+type DataIDs = {stages: string, prevButton: string};
 
 /**
  * ルート要素のinnerHTML
@@ -18,16 +22,17 @@ export function rootInnerHTML(ids: DataIDs): string {
     <div class="${ROOT_CLASS}__title">チュートリアル</div>
     <ol class="${ROOT_CLASS}__stages" data-id="${ids.stages}">
     </ol>
-    <button class="${ROOT_CLASS}__prev">戻る</button> 
+    <button class="${ROOT_CLASS}__prev" data-id="${ids.prevButton}">戻る</button> 
   `;
 }
 
 /** ルート要素の子孫要素 */
-type Elements = {stages: HTMLElement};
+type Elements = {stages: HTMLElement, prevButton: HTMLElement};
 
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const stages = root.querySelector(`[data-id="${ids.stages}"]`) ?? document.createElement('div');
-  return {stages};
+  const prevButton = root.querySelector(`[data-id="${ids.prevButton}"]`) ?? document.createElement('div');
+  return {stages, prevButton};
 }
 
 /** チュートリアルステージ情報 */
@@ -40,8 +45,11 @@ type TutorialStage = {
 
 /** チュートリアルステージセレクト画面 */
 export class TutorialSelector implements DOMScene {
-  root: HTMLElement;
-  stages: HTMLElement;
+  #root: HTMLElement;
+  #stages: HTMLElement;
+  #prevButton: HTMLElement;
+  #prev: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -49,12 +57,12 @@ export class TutorialSelector implements DOMScene {
    * @param stages チュートリアルステージ情報
    */
   constructor(stages: TutorialStage[]) {
-    const ids = {stages: domUuid()};
-    this.root = document.createElement('div');
-    this.root.className = ROOT_CLASS;
-    this.root.innerHTML = rootInnerHTML(ids);
-    const elements = extractElements(this.root, ids);
-    this.stages = elements.stages;
+    const ids = {stages: domUuid(), prevButton: domUuid()};
+    this.#root = document.createElement('div');
+    this.#root.className = ROOT_CLASS;
+    this.#root.innerHTML = rootInnerHTML(ids);
+    const elements = extractElements(this.#root, ids);
+    this.#stages = elements.stages;
     stages.map(stage => {
       const li = document.createElement('li');
       li.className = `${ROOT_CLASS}__stage`;
@@ -64,8 +72,15 @@ export class TutorialSelector implements DOMScene {
       `;
       return li;
     }).forEach(li => {
-      this.stages.appendChild(li);
+      this.#stages.appendChild(li);
     });
+    this.#prevButton = elements.prevButton;
+    this.#prev = createStreamSource();
+    this.#unsubscribers = [
+      pushDOMStream(this.#prevButton).subscribe(action => {
+        this.#onPrevPush(action);
+      })
+    ];
   }
 
   /** @override */
@@ -75,6 +90,26 @@ export class TutorialSelector implements DOMScene {
 
   /** @override */
   getRootHTMLElement(): HTMLElement {
-    return this.root;
+    return this.#root;
+  }
+
+  /**
+   * 戻る通知
+   *
+   * @return 通知ストリーム
+   */
+  prevNotifier(): Stream<void> {
+    return this.#prev;
+  }
+
+  /**
+   * 戻るボタンを押した時の処理
+   *
+   * @param action アクション
+   */
+  #onPrevPush(action: PushDOM): void {
+    action.event.stopPropagation();
+    action.event.preventDefault();
+    this.#prev.next();
   }
 }
