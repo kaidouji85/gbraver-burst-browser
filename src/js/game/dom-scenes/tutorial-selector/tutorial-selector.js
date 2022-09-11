@@ -63,6 +63,29 @@ type TutorialStageSelect = {
   level: number,
 };
 
+/**
+ * チュートリアルステージ HTML要素
+ *
+ * @param stage チュートリアルステージ情報
+ * @param level ステージレベル
+ * @return チュートリアルステージ
+ */
+const tutorialStageElement = (stage: TutorialStage, level: number) => {
+  const li = document.createElement('li');
+  li.className = `${ROOT_CLASS}__stage`;
+  li.innerHTML = `
+    <span class="${ROOT_CLASS}__stage-title">${stage.title}</span>
+    <button class="${ROOT_CLASS}__stage-select">選択</button>
+  `;
+  const button = li.querySelector('button') ?? document.createElement('button');
+  const selectNotifier = pushDOMStream(button).chain(map(action => {
+    action.event.stopPropagation();
+    action.event.preventDefault();
+    return {id: stage.id, level};
+  }));
+  return {li, button, selectNotifier};
+};
+
 /** チュートリアルステージセレクト画面 */
 export class TutorialSelector implements DOMScene {
   #root: HTMLElement;
@@ -96,21 +119,7 @@ export class TutorialSelector implements DOMScene {
     this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource();
     this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON) ?? createEmptySoundResource();
 
-    const stageElements = stages.map((stage, index) => {
-      const li = document.createElement('li');
-      li.className = `${ROOT_CLASS}__stage`;
-      li.innerHTML = `
-        <span class="${ROOT_CLASS}__stage-title">${stage.title}</span>
-        <button class="${ROOT_CLASS}__stage-select">選択</button>
-      `;
-      const button = li.querySelector('button') ?? document.createElement('button');
-      const selectNotifier = pushDOMStream(button).chain(map(action => {
-        action.event.stopPropagation();
-        action.event.preventDefault();
-        return {id: stage.id, level: index + 1};
-      }));
-      return {li, button, selectNotifier};
-    });
+    const stageElements = stages.map((stage, index) => tutorialStageElement(stage, index + 1));
     stageElements.forEach(({li}) => {
       this.#stages.appendChild(li);
     });
@@ -128,7 +137,9 @@ export class TutorialSelector implements DOMScene {
 
   /** @override */
   destructor(): void {
-    // NOP
+    this.#unsubscribers.forEach(unsubscriber => {
+      unsubscriber.unsubscribe();
+    });
   }
 
   /** @override */
@@ -137,12 +148,21 @@ export class TutorialSelector implements DOMScene {
   }
 
   /**
-   * 戻る通知
+   * 戻るボタン押下通知
    *
    * @return 通知ストリーム
    */
   prevNotifier(): Stream<void> {
     return this.#prev;
+  }
+
+  /**
+   * チュートリアルステージ選択通知
+   *
+   * @return 通知ストリーム
+   */
+  stageSelectNotifier(): Stream<TutorialStageSelect> {
+    return this.#stageSelect;
   }
 
   /**
@@ -160,10 +180,17 @@ export class TutorialSelector implements DOMScene {
     });
   }
 
+  /**
+   * チュートリアルステージ選択
+   *
+   * @param button 選択ボタン HTML要素
+   * @param stageSelect チュートリアルステージ選択情報
+   */
   #onTutorialStageSelect(button: HTMLElement, stageSelect: TutorialStageSelect): void {
     this.#exclusive.execute(async () => {
       this.#pushButton.sound.play();
       await pop(button);
+      this.#stageSelect.next(stageSelect);
     });
   }
 }

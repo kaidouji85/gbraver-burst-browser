@@ -6,6 +6,7 @@ import type {DOMStubStory} from "./stub/dom-stub";
 export default {
   title: 'tutorial-selector',
 };
+
 export const scene: DOMStubStory = domStub(resources => {
   const scene = new TutorialSelector(resources, [
     {id: '01', title: 'バッテリーシステム基礎'},
@@ -14,6 +15,9 @@ export const scene: DOMStubStory = domStub(resources => {
   ]);
   scene.prevNotifier().subscribe(() => {
     console.log('prev');
-  })
+  });
+  scene.stageSelectNotifier().subscribe(stageSelect => {
+    console.log('stage-select', stageSelect);
+  });
   return scene.getRootHTMLElement();
 });
