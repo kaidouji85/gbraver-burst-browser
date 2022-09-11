@@ -11,11 +11,20 @@ const ROOT_CLASS = 'tutorial-selector';
 export function rootInnerHTML(): string {
   return `
     <div class="${ROOT_CLASS}__title">チュートリアル</div>
-    <div class="${ROOT_CLASS}__stages">
-      <button class="${ROOT_CLASS}__stage-button">1</button>
-      <button class="${ROOT_CLASS}__stage-button">2</button>
-      <button class="${ROOT_CLASS}__stage-button">3</button>
-    </div>
+    <ol class="${ROOT_CLASS}__stages">
+      <li class="${ROOT_CLASS}__stage">
+        <span class="${ROOT_CLASS}__stage-title">バッテリーシステム基本</span>
+        <button class="${ROOT_CLASS}__stage-select">選択</button>
+      </li>
+      <li class="${ROOT_CLASS}__stage">
+        <span class="${ROOT_CLASS}__stage-title">0防御は即死</span>
+        <button class="${ROOT_CLASS}__stage-select">選択</button>
+      </li>
+      <li class="${ROOT_CLASS}__stage">
+        <span class="${ROOT_CLASS}__stage-title">バースト基礎</span>
+        <button class="${ROOT_CLASS}__stage-select">選択</button>
+      </li>
+    </ol>
     <button class="${ROOT_CLASS}__prev">戻る</button>
   `;
 }
