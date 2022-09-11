@@ -26,8 +26,8 @@
 }
 
 .tutorial-selector__title {
-  font-size: var(--responsive-font-size);
-  margin-bottom: var(--responsive-font-size);
+  font-size: calc(var(--responsive-font-size) * 2);
+  margin-bottom: calc(var(--responsive-font-size) * 1.5);
 }
 
 .tutorial-selector__stages {
@@ -41,7 +41,7 @@
 }
 
 .tutorial-selector__stage-title {
-  min-width: calc(var(--responsive-font-size) * 15);
+  min-width: calc(var(--responsive-font-size) * 14);
   display: inline-block;
 }
 
