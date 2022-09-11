@@ -1,6 +1,11 @@
 // @flow
+import {pop} from "../../../dom/animation";
 import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
+import {Exclusive} from "../../../exclusive/exclusive";
+import type {Resources} from "../../../resource";
+import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
+import type {SoundResource} from "../../../resource/sound";
 import {createStreamSource} from "../../../stream/stream";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
@@ -48,21 +53,30 @@ export class TutorialSelector implements DOMScene {
   #root: HTMLElement;
   #stages: HTMLElement;
   #prevButton: HTMLElement;
+  #exclusive: Exclusive;
   #prev: StreamSource<void>;
+  #changeValue: SoundResource;
   #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
    *
+   * @param resources リソース管理オブジェクト
    * @param stages チュートリアルステージ情報
    */
-  constructor(stages: TutorialStage[]) {
+  constructor(resources: Resources, stages: TutorialStage[]) {
     const ids = {stages: domUuid(), prevButton: domUuid()};
     this.#root = document.createElement('div');
     this.#root.className = ROOT_CLASS;
     this.#root.innerHTML = rootInnerHTML(ids);
+    this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource();
+
     const elements = extractElements(this.#root, ids);
     this.#stages = elements.stages;
+    this.#prevButton = elements.prevButton;
+    this.#exclusive = new Exclusive();
+    this.#prev = createStreamSource();
+
     stages.map(stage => {
       const li = document.createElement('li');
       li.className = `${ROOT_CLASS}__stage`;
@@ -74,8 +88,6 @@ export class TutorialSelector implements DOMScene {
     }).forEach(li => {
       this.#stages.appendChild(li);
     });
-    this.#prevButton = elements.prevButton;
-    this.#prev = createStreamSource();
     this.#unsubscribers = [
       pushDOMStream(this.#prevButton).subscribe(action => {
         this.#onPrevPush(action);
@@ -110,6 +122,10 @@ export class TutorialSelector implements DOMScene {
   #onPrevPush(action: PushDOM): void {
     action.event.stopPropagation();
     action.event.preventDefault();
-    this.#prev.next();
+    this.#exclusive.execute(async () => {
+      this.#changeValue.sound.play();
+      await pop(this.#prevButton);
+      this.#prev.next();
+    });
   }
 }
