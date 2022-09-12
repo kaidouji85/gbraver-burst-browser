@@ -134,7 +134,7 @@ export class Game {
       } else if (action.type === 'TutorialStart') {
         onTutorialStart(this.#props);
       } else if (action.type === 'CancelTutorialSelect') {
-        onCancelTutorialSelect();
+        onCancelTutorialSelect(this.#props);
       }
     }));
   }

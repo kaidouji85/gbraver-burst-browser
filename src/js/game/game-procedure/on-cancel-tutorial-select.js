@@ -1,10 +1,14 @@
 // @flow
+import type {GameProps} from "../game-props";
+import {startTitle} from "./start-title";
 
 /**
  * チュートリアル選択キャンセル
  *
  * @return 処理が完了したら発火するPromise
  */
-export async function onCancelTutorialSelect(): Promise<void> {
-  console.log('onCancelTutorialSelect');
+export async function onCancelTutorialSelect(props: $ReadOnly<GameProps>): Promise<void> {
+  await props.fader.fadeOut();
+  await startTitle(props);
+  await props.fader.fadeIn();
 }

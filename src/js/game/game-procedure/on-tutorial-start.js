@@ -16,6 +16,7 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
     await fullResourceLoading(props);
   }
 
+  await props.fader.fadeOut();
   const tutorialStages = props.canPlayTutorialInDevelopment ? TutorialStagesInDevelopment : TutorialStages;
   const stages = tutorialStages.map(stage => ({id: stage.id, title: stage.title.join('')}));
   props.domScenes.startTutorialSelector(props.resources, stages);
