@@ -288,6 +288,9 @@ export class DOMScenes {
     this.#unsubscribers = [
       scene.prevNotifier().subscribe(() => {
         this.#gameAction.next({type: 'CancelTutorialSelect'});
+      }),
+      scene.stageSelectNotifier().subscribe(stageSelect => {
+        this.#gameAction.next({...stageSelect, type: 'SelectTutorialStage'});
       })
     ];
     this.#scene = scene;

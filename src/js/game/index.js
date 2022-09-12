@@ -24,6 +24,7 @@ import {onLogout} from "./game-procedure/on-logout";
 import {onMatchingCanceled} from "./game-procedure/on-matching-cancel";
 import {onPostBattleAction} from "./game-procedure/on-post-battle-action";
 import {onReloadRequest} from "./game-procedure/on-reload-request";
+import {onSelectTutorialStage} from "./game-procedure/on-select-tutorial-stage";
 import {onSelectionCancel} from "./game-procedure/on-selection-cancel";
 import {onSelectionComplete} from "./game-procedure/on-selection-complete";
 import {onShowHowToPlay} from "./game-procedure/on-show-how-to-play";
@@ -135,6 +136,8 @@ export class Game {
         onTutorialStart(this.#props);
       } else if (action.type === 'CancelTutorialSelect') {
         onCancelTutorialSelect(this.#props);
+      } else if (action.type === 'SelectTutorialStage') {
+        onSelectTutorialStage();
       }
     }));
   }
