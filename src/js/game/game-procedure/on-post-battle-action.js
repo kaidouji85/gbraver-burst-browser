@@ -4,7 +4,7 @@ import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {PostBattleAction} from "../game-actions";
 import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
-import type {Tutorial} from "../in-progress/tutorial";
+import type {PlayingTutorialStage, Tutorial} from "../in-progress/tutorial";
 import type {NPCBattleStage, NPCBattleState} from "../npc-battle";
 import {getCurrentNPCStage, getNPCStageLevel} from "../npc-battle";
 import {DefaultStage} from "../npc-battle-courses";
@@ -80,24 +80,6 @@ const gotoNPCBattleStage = async (props: $ReadOnly<GameProps>, player: Player, s
 };
 
 /**
- * チュートリアル進行中に利用するデータを生成する
- *
- * @param inProgress 進行中のフロー
- * @return 生成結果、チュートリアル中でない場合はnullを返す
- */
-const createTutorial = (inProgress: InProgress) => {
-  if (inProgress.type !== 'Tutorial') {
-    return null;
-  }
-  const tutorial = (inProgress: Tutorial);
-  const stage = getCurrentTutorialStage(tutorial.state);
-  if (!stage) {
-    return null
-  }
-  return {level: getTutorialStageLevel(tutorial.state), stage};
-};
-
-/**
  * チュートリアルに遷移する
  *
  * @param props ゲームプロパティ
@@ -120,7 +102,6 @@ const gotoTutorial = async (props: $ReadOnly<GameProps>, level: number, stage: T
  */
 export async function onPostBattleAction(props: GameProps, action: PostBattleAction): Promise<void> {
   const npcBattle = createNPCBattle(props.inProgress);
-  const tutorial = createTutorial(props.inProgress);
   if (action.action.type === 'GotoTitle') {
     props.inProgress = {type: 'None'};
     await gotoTitle(props);
@@ -129,7 +110,8 @@ export async function onPostBattleAction(props: GameProps, action: PostBattleAct
     await gotoEnding(props);
   } else if (npcBattle && (action.action.type === 'NextStage' || action.action.type === 'Retry')) {
     await gotoNPCBattleStage(props, npcBattle.player, npcBattle.stage, npcBattle.level);
-  } else if (tutorial && (action.action.type === 'Retry' || action.action.type === 'NextTutorial')) {
-    await gotoTutorial(props, tutorial.level, tutorial.stage);
+  } else if (action.action.type === 'Retry' && props.inProgress.type === 'Tutorial' && props.inProgress.subFlow.type === 'PlayingTutorialStage') {
+    const playingTutorial = (props.inProgress.subFlow: PlayingTutorialStage);
+    await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
   }
 }

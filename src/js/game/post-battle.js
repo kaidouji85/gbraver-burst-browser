@@ -1,7 +1,7 @@
 // @flow
 
 /** 戦闘終了後の挙動の一覧 */
-export type PostBattle = GotoTitle | NextStage | NextTutorial | Retry | GotoEnding;
+export type PostBattle = GotoTitle | NextStage | NextTutorial | GotoTutorialSelect | Retry | GotoEnding;
 
 /** タイトルへ */
 export type GotoTitle = {
@@ -13,9 +13,14 @@ export type NextStage = {
   type: 'NextStage'
 };
 
-/** 次のチュートリアル */
+/** @deprecated 次のチュートリアル */
 export type NextTutorial = {
   type: 'NextTutorial'
+};
+
+/** チュートリアル選択画面へ */
+export type GotoTutorialSelect = {
+  type: 'GotoTutorialSelect'
 };
 
 /** リトライ */
