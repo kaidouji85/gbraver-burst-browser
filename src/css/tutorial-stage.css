@@ -1,0 +1,29 @@
+/** チュートリアルステージ情報 */
+@media (orientation: landscape) {
+  .tutorial-stage {
+    font-size: var(--responsive-font-size);
+    margin: calc(var(--responsive-font-size) * 0.5) 0;
+  }
+}
+
+@media (orientation: portrait) {
+  .tutorial-stage {
+    display: none;
+  }
+}
+
+.tutorial-stage__title {
+  min-width: calc(var(--responsive-font-size) * 14);
+  display: inline-block;
+}
+
+.tutorial-stage__select {
+  width: calc(var(--responsive-font-size) * 5);
+  height: calc(var(--responsive-font-size) * 3);
+  background-color: var(--button-background-color);
+  color: var(--button-font-color);
+  font-size: var(--responsive-font-size);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+  border-radius: var(--button-border-radius);
+}

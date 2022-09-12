@@ -1,6 +1,7 @@
 // @flow
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {GameProps} from "../game-props";
+import {playTitleBGM} from "./play-title-bgm";
 import {startTitle} from "./start-title";
 
 /**
@@ -10,7 +11,7 @@ import {startTitle} from "./start-title";
  * @return 処理が完了したら発火するPromise
  */
 export async function onEndNPCEnding(props: $ReadOnly<GameProps>): Promise<void> {
-  const [title] = await Promise.all([(async () => {
+  await Promise.all([(async () => {
     await props.fader.fadeOut();
     return await startTitle(props);
   })(), (async () => {
@@ -18,5 +19,5 @@ export async function onEndNPCEnding(props: $ReadOnly<GameProps>): Promise<void>
     await props.bgm.do(stop);
   })()]);
   await props.fader.fadeIn();
-  title.playBGM();
+  playTitleBGM(props);
 }

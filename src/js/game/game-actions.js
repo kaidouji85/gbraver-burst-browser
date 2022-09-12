@@ -4,6 +4,7 @@ import type {GbraverBurstBrowserConfig} from "./config/browser-config";
 import type {NPCBattleCourseDifficulty} from "./npc-battle-courses";
 import type {PostBattle} from "./post-battle";
 import type {PostNetworkError} from './post-network-error';
+import type {TutorialStageID} from "./tutorial-stages";
 
 /** 画面リロード依頼 */
 export type ReloadRequest = {
@@ -175,34 +176,50 @@ export type TutorialStart = {
   type: 'TutorialStart'
 };
 
+/** チュートリアル選択キャンセル */
+export type CancelTutorialSelect = {
+  type: 'CancelTutorialSelect'
+};
+
+/** チュートリアルステージ選択完了 */
+export type SelectTutorialStage = {
+  type: 'SelectTutorialStage',
+  /** ステージID */
+  id: TutorialStageID,
+  /** ステージレベル */
+  level: number,
+};
+
 /**
  * ゲーム全体で利用するアクション
  */
 export type GameAction = ReloadRequest
- | ExitMailVerifiedIncomplete
- | ArcadeStart
- | CasualMatchStart
- | MatchingCanceled
- | ShowHowToPlay
- | EndHowToPlay
- | SelectionComplete
- | SelectionCancel
- | DifficultySelectionComplete
- | DifficultySelectionCancel
- | EndBattle
- | SuddenlyBattleEnd
- | PostBattleAction
- | EndNPCEnding
- | UniversalLogin
- | LoginCancel
- | Logout
- | AccountDeleteConsent
- | DeleteAccount
- | CancelAccountDeletion
- | WebSocketAPIError
- | WebSocketAPIUnintentionalClose
- | EndNetworkError
- | ConfigChangeStart
- | ConfigChangeComplete
- | ConfigChangeCancel
- | TutorialStart;
+  | ExitMailVerifiedIncomplete
+  | ArcadeStart
+  | CasualMatchStart
+  | MatchingCanceled
+  | ShowHowToPlay
+  | EndHowToPlay
+  | SelectionComplete
+  | SelectionCancel
+  | DifficultySelectionComplete
+  | DifficultySelectionCancel
+  | EndBattle
+  | SuddenlyBattleEnd
+  | PostBattleAction
+  | EndNPCEnding
+  | UniversalLogin
+  | LoginCancel
+  | Logout
+  | AccountDeleteConsent
+  | DeleteAccount
+  | CancelAccountDeletion
+  | WebSocketAPIError
+  | WebSocketAPIUnintentionalClose
+  | EndNetworkError
+  | ConfigChangeStart
+  | ConfigChangeComplete
+  | ConfigChangeCancel
+  | TutorialStart
+  | CancelTutorialSelect
+  | SelectTutorialStage;

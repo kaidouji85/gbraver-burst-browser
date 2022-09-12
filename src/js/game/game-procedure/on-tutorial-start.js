@@ -1,10 +1,7 @@
 // @flow
 import type {GameProps} from "../game-props";
-import {createTutorial} from "../in-progress/tutorial";
-import {getCurrentTutorialStage, getTutorialStageLevel} from "../tutorial";
-import {TutorialStages, TutorialStagesInDevelopment} from "../tutorial-stages";
 import {fullResourceLoading} from "./full-resource-loading";
-import {startTutorial} from "./start-tutorial";
+import {startTutorialSelector} from "./start-tutorial-selector";
 
 /**
  * チュートリアル開始時の処理
@@ -18,14 +15,6 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
     await fullResourceLoading(props);
   }
 
-  const stages = props.canPlayTutorialInDevelopment ? TutorialStagesInDevelopment : TutorialStages;
-  const tutorial = createTutorial(stages);
-  const level = getTutorialStageLevel(tutorial.state)
-  const stage = getCurrentTutorialStage(tutorial.state);
-  if (!stage) {
-    return;
-  }
-
-  props.inProgress = tutorial;
-  await startTutorial(props, level, stage);
+  await startTutorialSelector(props);
+  props.inProgress = {type: 'Tutorial', subFlow: {type: 'TutorialStageSelect'}};
 }

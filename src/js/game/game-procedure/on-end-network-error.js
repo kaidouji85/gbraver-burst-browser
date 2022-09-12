@@ -2,6 +2,7 @@
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {EndNetworkError} from "../game-actions";
 import type {GameProps} from "../game-props";
+import {playTitleBGM} from "./play-title-bgm";
 import {startTitle} from "./start-title";
 
 /**
@@ -20,7 +21,7 @@ export async function onEndNetworkError(props: GameProps, action: EndNetworkErro
   const gotoTitle = async () => {
     props.inProgress = {type: 'None'};
     props.domDialogs.hidden();
-    const [title] = await Promise.all([(async () => {
+    await Promise.all([(async () => {
       await props.fader.fadeOut();
       return await startTitle(props);
     })(), (async () => {
@@ -28,7 +29,7 @@ export async function onEndNetworkError(props: GameProps, action: EndNetworkErro
       await props.bgm.do(stop);
     })()]);
     await props.fader.fadeIn();
-    title.playBGM();
+    playTitleBGM(props);
   };
 
   if (action.postNetworkError.type === 'Close') {

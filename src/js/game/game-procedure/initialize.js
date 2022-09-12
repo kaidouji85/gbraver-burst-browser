@@ -6,6 +6,7 @@ import {viewPerformanceStats} from "../../stats/view-performance-stats";
 import {waitTime} from "../../wait/wait-time";
 import type {GameProps} from "../game-props";
 import {reflectSoundVolume} from "../reflect-sound-volume";
+import {playTitleBGM} from "./play-title-bgm";
 import {startTitle} from "./start-title";
 
 /**
@@ -38,12 +39,12 @@ export async function initialize(props: GameProps): Promise<void> {
   props.resources = await resourceLoading.resources;
   const config = await props.config.load();
   reflectSoundVolume(props.resources, config);
-  const title = await startTitle(props);
+  await startTitle(props);
   props.interruptScenes.bind(props.resources);
   const latency = Date.now() - startTime;
   await waitTime(500 - latency);
   await props.fader.fadeOut();
   invisibleFirstView();
   await props.fader.fadeIn();
-  title.playBGM();
+  playTitleBGM(props);
 }

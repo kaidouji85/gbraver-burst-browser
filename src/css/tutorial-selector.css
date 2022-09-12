@@ -1,0 +1,47 @@
+/** チュートリアルステージセレクト画面 */
+@media (orientation: landscape) {
+  .tutorial-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: var(--screen-width);
+    height: var(--screen-height);
+    background-color: var(--background-color);
+    color: var(--font-color);
+    box-sizing: border-box;
+    padding-top: var(--screen-padding-top);
+    padding-left: var(--screen-padding-left);
+    padding-right: var(--screen-padding-right);
+    padding-bottom: var(--screen-padding-bottom);
+    background-size: cover;
+    background-position: 50% 0;
+  }
+}
+
+@media (orientation: portrait) {
+  .tutorial-selector {
+    display: none;
+  }
+}
+
+.tutorial-selector__title {
+  font-size: calc(var(--responsive-font-size) * 2);
+  margin-bottom: calc(var(--responsive-font-size) * 1.5);
+}
+
+.tutorial-selector__stages {
+  margin: 0;
+  flex-grow: 1;
+}
+
+.tutorial-selector__prev {
+  width: calc(var(--responsive-font-size) * 10);
+  height: calc(var(--responsive-font-size) * 3);
+  font-size: var(--responsive-font-size);
+  border-radius: var(--button-border-radius);
+  background-color: var(--sub-button-background-color);
+  color: var(--button-font-color);
+  border: var(--button-border);
+  box-shadow: var(--button-box-shadow);
+}
