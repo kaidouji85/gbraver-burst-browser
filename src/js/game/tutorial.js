@@ -23,7 +23,7 @@ export type TutorialStage = {
   bgm: SoundId
 };
 
-/** チュートリのステート */
+/** @deprecated チュートリのステート */
 export type TutorialState = {
   /** 
    * チュートリアルステージ
@@ -35,7 +35,7 @@ export type TutorialState = {
 };
 
 /**
- * 現在のチュートリアルステージレベルを取得する
+ * @deprecated 現在のチュートリアルステージレベルを取得する
  *
  * @param state NPCバトルステート
  * @return ステージレベル
@@ -45,7 +45,7 @@ export function getTutorialStageLevel(state: TutorialState): number {
 }
 
 /**
- * 現在プレイ中のステージを取得するヘルパー関数
+ * @deprecated 現在プレイ中のステージを取得するヘルパー関数
  * 
  * @param state チュートリアルのステート 
  * @return 取得結果、データ不整合でステージが見つからない場合はnullを返す
@@ -55,7 +55,7 @@ export function getCurrentTutorialStage(state: TutorialState): ?TutorialStage {
 }
 
 /**
- * チュートリアルステートを生成する
+ * @deprecated チュートリアルステートを生成する
  * 
  * @param stages チュートリアルステージ
  * @return チュートリアルステート
@@ -64,11 +64,11 @@ export function createTutorialState(stages: TutorialStage[]): TutorialState {
   return {stages, stageIndex: 0};
 }
 
-/** チュートリアルステージリザルト */
+/** @deprecated チュートリアルステージリザルト */
 export type TutorialResult = 'StageClear' | 'StageMiss' | 'TutorialComplete';
 
 /**
- * チュートリアルステージリザルトを求める
+ * @deprecated チュートリアルステージリザルトを求める
  * 
  * @param isStageClear ステージをクリアしたか否かのフラグ、trueでクリアした 
  * @param isLastStage 最終ステージか否かのフラグ、falseで最終ステージ
@@ -83,7 +83,7 @@ function getTutorialResult(isStageClear: boolean, isLastStage: boolean): Tutoria
   return 'StageMiss';
 }
 
-/** チュートリアルステート更新結果 */
+/** @deprecated チュートリアルステート更新結果 */
 export type UpdatedTutorialState = {
   /** 更新後のステート */
   state: TutorialState,
@@ -92,7 +92,7 @@ export type UpdatedTutorialState = {
 };
 
 /**
- * チュートリアルステートを更新する
+ * @deprecated チュートリアルステートを更新する
  * 
  * @param origin 更新前のステート
  * @param result 戦闘結果
