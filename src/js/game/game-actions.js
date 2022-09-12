@@ -4,7 +4,7 @@ import type {GbraverBurstBrowserConfig} from "./config/browser-config";
 import type {NPCBattleCourseDifficulty} from "./npc-battle-courses";
 import type {PostBattle} from "./post-battle";
 import type {PostNetworkError} from './post-network-error';
-import type {TutorialStageID} from "./tutorial";
+import type {TutorialStageID} from "./tutorial-stages";
 
 /** 画面リロード依頼 */
 export type ReloadRequest = {

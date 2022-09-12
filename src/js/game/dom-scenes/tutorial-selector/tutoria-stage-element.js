@@ -7,7 +7,7 @@ import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import {map} from "../../../stream/operator";
 import type {Stream} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
-import type {TutorialStageID} from "../../tutorial";
+import type {TutorialStageID} from "../../tutorial-stages";
 
 /** ルートHTML class属性 */
 const ROOT_CLASS = 'tutorial-stage';

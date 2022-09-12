@@ -2,7 +2,7 @@
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {EndNetworkError} from "../game-actions";
 import type {GameProps} from "../game-props";
-import {playTitleBgm} from "./play-title-bgm";
+import {playTitleBGM} from "./play-title-bgm";
 import {startTitle} from "./start-title";
 
 /**
@@ -29,7 +29,7 @@ export async function onEndNetworkError(props: GameProps, action: EndNetworkErro
       await props.bgm.do(stop);
     })()]);
     await props.fader.fadeIn();
-    playTitleBgm(props);
+    playTitleBGM(props);
   };
 
   if (action.postNetworkError.type === 'Close') {

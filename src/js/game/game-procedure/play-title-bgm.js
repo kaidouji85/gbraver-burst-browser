@@ -9,7 +9,7 @@ import type {GameProps} from "../game-props";
  * @param props ゲームプロパティ
  * @return 再生完了したら発火するPromise
  */
-export async function playTitleBgm(props: $ReadOnly<GameProps>) {
+export async function playTitleBGM(props: $ReadOnly<GameProps>) {
   const titleBGM = props.resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM) ?? createEmptySoundResource();
   await props.bgm.do(play(titleBGM));
   await props.bgm.do(fadeIn);

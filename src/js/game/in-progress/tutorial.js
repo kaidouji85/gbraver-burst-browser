@@ -1,5 +1,5 @@
 // @flow
-import type {TutorialStage} from "../tutorial";
+import type {TutorialStage} from "../tutorial-stages";
 
 /** チュートリアル */
 export type Tutorial = {
