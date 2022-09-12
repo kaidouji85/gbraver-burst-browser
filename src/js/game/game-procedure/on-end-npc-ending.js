@@ -11,7 +11,7 @@ import {startTitle} from "./start-title";
  * @return 処理が完了したら発火するPromise
  */
 export async function onEndNPCEnding(props: $ReadOnly<GameProps>): Promise<void> {
-  const [title] = await Promise.all([(async () => {
+  await Promise.all([(async () => {
     await props.fader.fadeOut();
     return await startTitle(props);
   })(), (async () => {

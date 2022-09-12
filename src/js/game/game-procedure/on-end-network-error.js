@@ -21,7 +21,7 @@ export async function onEndNetworkError(props: GameProps, action: EndNetworkErro
   const gotoTitle = async () => {
     props.inProgress = {type: 'None'};
     props.domDialogs.hidden();
-    const [title] = await Promise.all([(async () => {
+    await Promise.all([(async () => {
       await props.fader.fadeOut();
       return await startTitle(props);
     })(), (async () => {

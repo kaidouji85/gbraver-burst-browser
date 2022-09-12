@@ -23,7 +23,7 @@ import {startTutorialSelector} from "./start-tutorial-selector";
  */
 const gotoTitle = async (props: $ReadOnly<GameProps>) => {
   props.domFloaters.hiddenPostBattle();
-  const [title] = await Promise.all([(async () => {
+  await Promise.all([(async () => {
     await props.fader.fadeOut();
     return await startTitle(props);
   })(), (async () => {
