@@ -13,11 +13,6 @@ import {SOUND_IDS} from "../resource/sound";
 import {playerUuid} from "../uuid/player";
 import type {CustomBattleEvent} from "./td-scenes/battle/custom-battle-event";
 
-/** シンブレイバー */
-const shinBraver = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
-/** シンヤ */
-const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
-
 /** チュートリアルステージID */
 export type TutorialStageID = string;
 
@@ -43,7 +38,13 @@ export type TutorialStage = {
   /** 再生するBGMのID */
   bgm: SoundId
 };
-/** チュートリアルのステージ */
+
+/** シンブレイバー */
+const shinBraver = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
+/** シンヤ */
+const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
+
+/** チュートリアルステージを集めたもの */
 export const TutorialStages: TutorialStage[] = [
   {
     id: TutorialStageIDs.BATTERY_SYSTEM,
@@ -71,5 +72,5 @@ export const TutorialStages: TutorialStage[] = [
   }
 ];
 
-/** 開発中のチュートリアルのステージ */
+/** 開発中のチュートリアルのステージをあつめたもの */
 export const TutorialStagesInDevelopment: TutorialStage[] = TutorialStages;
