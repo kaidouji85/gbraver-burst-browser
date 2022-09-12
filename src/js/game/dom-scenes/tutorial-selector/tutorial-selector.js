@@ -4,14 +4,14 @@ import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {Resources} from "../../../resource";
-import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import type {SoundResource} from "../../../resource/sound";
-import {map, tap} from "../../../stream/operator";
-import {createStreamSource} from "../../../stream/stream";
+import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
+import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
-import type {TutorialStageID} from "../../tutorial";
 import type {DOMScene} from "../dom-scene";
+import type {TutorialStage, TutorialStageElement, TutorialStageSelect} from "./tutoria-stage-element";
+import {createTutorialStageElement} from "./tutoria-stage-element";
 
 /** ROOT要素class属性*/
 const ROOT_CLASS = 'tutorial-selector';
@@ -47,62 +47,6 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   return {stages, prevButton};
 }
 
-/** チュートリアルステージ情報 */
-type TutorialStage = {
-  /** チュートリアルステージID */
-  id: TutorialStageID,
-  /** チュートリアルステージタイトル */
-  title: string
-};
-
-/** チュートリアルステージ選択情報 */
-type TutorialStageSelect = {
-  /** チュートリアルステージID */
-  id: TutorialStageID,
-  /** ステージレベル */
-  level: number,
-};
-
-/** チュートリアルステージ HTML要素 */
-interface TutorialStageElement {
-  +id: TutorialStageID;
-  +level: number;
-  +root: HTMLElement;
-  selectNotifier: Stream<void>;
-  selected(): Promise<void>;
-}
-
-/**
- * チュートリアルステージ HTML要素
- *
- * @param resources リソース管理オブジェクト
- * @param stage チュートリアルステージ情報
- * @param level ステージレベル
- * @return チュートリアルステージ
- */
-const createTutorialStageElement = (resources: Resources, stage: TutorialStage, level: number): TutorialStageElement => {
-  const li = document.createElement('li');
-  li.className = `${ROOT_CLASS}__stage`;
-  li.innerHTML = `
-    <span class="${ROOT_CLASS}__stage-title">${stage.title}</span>
-    <button class="${ROOT_CLASS}__stage-select">選択</button>
-  `;
-  const button = li.querySelector('button') ?? document.createElement('button');
-  const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON) ?? createEmptySoundResource();
-
-  const selectNotifier = pushDOMStream(button).chain(tap(action => {
-    action.event.stopPropagation();
-    action.event.preventDefault();
-  })).chain(map(() => {}));
-
-  const selected = async () => {
-    pushButton.sound.play();
-    await pop(button);
-  };
-
-  return {root: li, id: stage.id, level, selectNotifier, selected};
-};
-
 /** チュートリアルステージセレクト画面 */
 export class TutorialSelector implements DOMScene {
   #root: HTMLElement;
@@ -134,7 +78,7 @@ export class TutorialSelector implements DOMScene {
     this.#stageSelect = createStreamSource();
     this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource();
 
-    const stageElements = stages.map((stage, index) => createTutorialStageElement(resources, stage, index + 1));
+    const stageElements = stages.map((stage, index) => createTutorialStageElement(resources, ROOT_CLASS, stage, index + 1));
     stageElements.forEach(({root}) => {
       this.#stages.appendChild(root);
     });
