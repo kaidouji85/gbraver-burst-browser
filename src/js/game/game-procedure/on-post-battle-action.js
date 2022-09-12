@@ -13,6 +13,7 @@ import {getCurrentTutorialStage, getTutorialStageLevel} from "../tutorial";
 import {startNPCBattleStage} from "./start-npc-battle-stage";
 import {startTitle} from "./start-title";
 import {startTutorial} from "./start-tutorial";
+import {startTutorialSelector} from "./start-tutorial-selector";
 
 /**
  * タイトルに遷移する
@@ -113,5 +114,8 @@ export async function onPostBattleAction(props: GameProps, action: PostBattleAct
   } else if (action.action.type === 'Retry' && props.inProgress.type === 'Tutorial' && props.inProgress.subFlow.type === 'PlayingTutorialStage') {
     const playingTutorial = (props.inProgress.subFlow: PlayingTutorialStage);
     await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
+  } else if (action.action.type === 'GotoTutorialSelect') {
+    props.domFloaters.hiddenPostBattle();
+    await startTutorialSelector(props);
   }
 }

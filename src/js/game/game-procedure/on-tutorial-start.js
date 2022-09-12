@@ -3,6 +3,7 @@ import type {GameProps} from "../game-props";
 import {createTutorial} from "../in-progress/tutorial";
 import {TutorialStages, TutorialStagesInDevelopment} from "../tutorial-stages";
 import {fullResourceLoading} from "./full-resource-loading";
+import {startTutorialSelector} from "./start-tutorial-selector";
 
 /**
  * チュートリアル開始時の処理
@@ -16,10 +17,7 @@ export async function onTutorialStart(props: GameProps): Promise<void> {
     await fullResourceLoading(props);
   }
 
-  await props.fader.fadeOut();
+  await startTutorialSelector(props);
   const tutorialStages = props.canPlayTutorialInDevelopment ? TutorialStagesInDevelopment : TutorialStages;
-  const stages = tutorialStages.map(stage => ({id: stage.id, title: stage.title.join('')}));
-  props.domScenes.startTutorialSelector(props.resources, stages);
-  await props.fader.fadeIn();
   props.inProgress = createTutorial(tutorialStages);
 }
