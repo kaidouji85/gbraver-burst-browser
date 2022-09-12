@@ -31,7 +31,7 @@ const gotoTitle = async (props: $ReadOnly<GameProps>) => {
     await props.bgm.do(stop);
   })()]);
   await props.fader.fadeIn();
-  title.playBGM();
+  playTitleBgm(props);
 };
 
 /**

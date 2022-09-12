@@ -6,6 +6,7 @@ import {viewPerformanceStats} from "../../stats/view-performance-stats";
 import {waitTime} from "../../wait/wait-time";
 import type {GameProps} from "../game-props";
 import {reflectSoundVolume} from "../reflect-sound-volume";
+import {playTitleBgm} from "./play-title-bgm";
 import {startTitle} from "./start-title";
 
 /**
@@ -45,5 +46,5 @@ export async function initialize(props: GameProps): Promise<void> {
   await props.fader.fadeOut();
   invisibleFirstView();
   await props.fader.fadeIn();
-  title.playBGM();
+  playTitleBgm(props);
 }

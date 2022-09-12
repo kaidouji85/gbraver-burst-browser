@@ -1,6 +1,7 @@
 // @flow
 import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {GameProps} from "../game-props";
+import {playTitleBgm} from "./play-title-bgm";
 import {startTitle} from "./start-title";
 
 /**
@@ -18,5 +19,5 @@ export async function onEndNPCEnding(props: $ReadOnly<GameProps>): Promise<void>
     await props.bgm.do(stop);
   })()]);
   await props.fader.fadeIn();
-  title.playBGM();
+  playTitleBgm(props);
 }

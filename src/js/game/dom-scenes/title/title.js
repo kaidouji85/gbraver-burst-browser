@@ -1,7 +1,5 @@
 // @flow
 import {Howl} from "howler";
-import type {BGMManager} from '../../../bgm/bgm-manager';
-import {fadeIn, play} from "../../../bgm/bgm-operators";
 import {pop} from "../../../dom/animation";
 import {escapeHTML} from '../../../dom/escape-html';
 import type {PushDOM} from "../../../dom/event-stream";
@@ -9,8 +7,7 @@ import {pushDOMStream} from "../../../dom/event-stream";
 import {Exclusive} from "../../../exclusive/exclusive";
 import type {Resources} from "../../../resource";
 import {PathIds} from "../../../resource/path";
-import type {SoundResource} from "../../../resource/sound";
-import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
+import {SOUND_IDS} from "../../../resource/sound";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
@@ -159,9 +156,7 @@ function extractElements(root: HTMLElement, ids: DataIDs): Elements {
 /** タイトル画面コンストラクタパラメータ */
 export type TitleParams = RootInnerHTMLParams & {
   /** リソース管理オブジェクト */
-  resources: Resources,
-  /** BGM管理オブジェクト */
-  bgm: BGMManager
+  resources: Resources
 };
 
 /** タイトル */
@@ -184,8 +179,6 @@ export class Title implements DOMScene {
   #isLogoLoaded: Promise<void>;
   #changeValue: typeof Howl;
   #pushButton: typeof Howl;
-  #titleBGM: SoundResource;
-  #bgm: BGMManager;
   #pushLogin: StreamSource<void>;
   #pushDeleteAccount: StreamSource<void>;
   #pushLogout: StreamSource<void>;
@@ -238,8 +231,6 @@ export class Title implements DOMScene {
       ?.sound ?? new Howl();
     this.#changeValue = params.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
       ?.sound ?? new Howl();
-    this.#titleBGM = params.resources.sounds.find(v => v.id === SOUND_IDS.TITLE_BGM) ?? createEmptySoundResource();
-    this.#bgm = params.bgm;
 
     this.#pushLogin = createStreamSource();
     this.#pushDeleteAccount = createStreamSource();
@@ -288,17 +279,6 @@ export class Title implements DOMScene {
     this.#unsubscribers.forEach(v => {
       v.unsubscribe();
     });
-  }
-
-  /**
-   * @deprecated
-   * BGMを再生開始する
-   *
-   * @return BGM再生が完了したら発火するPromise
-   */
-  async playBGM(): Promise<void> {
-    await this.#bgm.do(play(this.#titleBGM));
-    await this.#bgm.do(fadeIn);
   }
 
   /**
