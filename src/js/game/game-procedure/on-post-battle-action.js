@@ -4,12 +4,11 @@ import {fadeOut, stop} from "../../bgm/bgm-operators";
 import type {PostBattleAction} from "../game-actions";
 import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
-import type {PlayingTutorialStage, Tutorial} from "../in-progress/tutorial";
+import type {PlayingTutorialStage} from "../in-progress/tutorial";
 import type {NPCBattleStage, NPCBattleState} from "../npc-battle";
 import {getCurrentNPCStage, getNPCStageLevel} from "../npc-battle";
 import {DefaultStage} from "../npc-battle-courses";
 import type {TutorialStage} from "../tutorial";
-import {getCurrentTutorialStage, getTutorialStageLevel} from "../tutorial";
 import {startNPCBattleStage} from "./start-npc-battle-stage";
 import {startTitle} from "./start-title";
 import {startTutorial} from "./start-tutorial";
@@ -94,6 +93,17 @@ const gotoTutorial = async (props: $ReadOnly<GameProps>, level: number, stage: T
 };
 
 /**
+ * チュートリアル選択画面に遷移する
+ *
+ * @param props ゲームプロパティ
+ * @return 処理が完了したら発火するPromise
+ */
+const gotoTutorialSelector = async (props: $ReadOnly<GameProps>) => {
+  props.domFloaters.hiddenPostBattle();
+  await startTutorialSelector(props);
+};
+
+/**
  * 戦闘終了後アクション決定時の処理
  * 本関数にはpropsを変更する副作用がある
  *
@@ -115,7 +125,7 @@ export async function onPostBattleAction(props: GameProps, action: PostBattleAct
     const playingTutorial = (props.inProgress.subFlow: PlayingTutorialStage);
     await gotoTutorial(props, playingTutorial.level, playingTutorial.stage);
   } else if (action.action.type === 'GotoTutorialSelect') {
-    props.domFloaters.hiddenPostBattle();
-    await startTutorialSelector(props);
+    props.inProgress = {type: 'Tutorial', subFlow: {type: 'TutorialStageSelect'}};
+    await gotoTutorialSelector(props);
   }
 }

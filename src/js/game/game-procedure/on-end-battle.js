@@ -14,7 +14,7 @@ import type {EndBattle} from "../game-actions";
 import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
 import type {NPCBattle, PlayingNPCBattle} from "../in-progress/npc-battle";
-import type {PlayingTutorialStage, Tutorial} from "../in-progress/tutorial";
+import type {PlayingTutorialStage} from "../in-progress/tutorial";
 import type {NPCBattleResult} from "../npc-battle";
 import {updateNPCBattleState} from "../npc-battle";
 
