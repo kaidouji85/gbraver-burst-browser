@@ -291,6 +291,7 @@ export class Title implements DOMScene {
   }
 
   /**
+   * @deprecated
    * BGMを再生開始する
    *
    * @return BGM再生が完了したら発火するPromise
