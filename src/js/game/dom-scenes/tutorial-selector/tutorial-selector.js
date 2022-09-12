@@ -15,11 +15,12 @@ import {TutorialStageElement} from "./tutoria-stage-element";
 
 /** ROOT要素class属性*/
 const ROOT_CLASS = 'tutorial-selector';
-/** data-idをあつめたもの */
+/** data-idを集めたもの */
 type DataIDs = {stages: string, prevButton: string};
 
 /**
  * ルート要素のinnerHTML
+ * @param ids data-idを集めたもの
  * @return innerHTML
  */
 export function rootInnerHTML(ids: DataIDs): string {
@@ -78,7 +79,7 @@ export class TutorialSelector implements DOMScene {
     this.#stageSelect = createStreamSource();
     this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource();
 
-    const stageElements = stages.map((stage, index) => new TutorialStageElement(resources, ROOT_CLASS, stage, index + 1));
+    const stageElements = stages.map((stage, index) => new TutorialStageElement(resources, stage, index + 1));
     stageElements.forEach((stage => {
       this.#stages.appendChild(stage.getRootHTMLElement());
     }));
@@ -87,7 +88,7 @@ export class TutorialSelector implements DOMScene {
         this.#onPrevPush(action);
       }),
       ...stageElements.map(stage =>
-        stage.selectNotifier().subscribe(() => {
+        stage.stageSelectNotifier().subscribe(() => {
           this.#onTutorialStageSelect(stage);
         })
       )
