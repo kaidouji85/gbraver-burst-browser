@@ -5,8 +5,27 @@ import {createTutorialState} from "../tutorial";
 /** チュートリアル */
 export type Tutorial = {
   type: 'Tutorial',
-  /** チュートリアルのステート */
+  /** サブフロー */
+  subFlow: SubFLow,
+  /** @deprecated チュートリアルのステート */
   state: TutorialState,
+};
+
+/** サブフロー */
+type SubFLow = TutorialStageSelect | PlayingTutorialStage;
+
+/** チュートリアルステージ選択 */
+type TutorialStageSelect = {
+  type: 'TutorialStageSelect'
+};
+
+/** チュートリアルステージプレイ中 */
+type PlayingTutorialStage = {
+  type: 'PlayingTutorialStage',
+  /** プレイ中のチュートリアルステージID */
+  stage: TutorialStage,
+  /** プレイ中のチュートリアルステージレベル */
+  level: number,
 };
 
 /**
@@ -16,5 +35,5 @@ export type Tutorial = {
  * @return 生成結果
  */
 export function createTutorial(stages: TutorialStage[]): Tutorial {
-  return {type: 'Tutorial', state: createTutorialState(stages)};
+  return {type: 'Tutorial', subFlow: {type: 'TutorialStageSelect'}, state: createTutorialState(stages)};
 }
