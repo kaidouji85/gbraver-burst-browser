@@ -6,7 +6,7 @@ import {Exclusive} from "../../../exclusive/exclusive";
 import type {Resources} from "../../../resource";
 import {createEmptySoundResource, SOUND_IDS} from "../../../resource/sound";
 import type {SoundResource} from "../../../resource/sound";
-import {map} from "../../../stream/operator";
+import {map, tap} from "../../../stream/operator";
 import {createStreamSource} from "../../../stream/stream";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
@@ -63,13 +63,13 @@ type TutorialStageSelect = {
   level: number,
 };
 
-/** チュートリアルステージ選択アクション */
-type TutorialStageSelectAction = TutorialStageSelect & {
-  /**
-   * ステージ選択アニメーション
-   * @return アニメーションが完了したら発火するPromise
-   */
-  animation: () => Promise<void>;
+/** チュートリアルステージ HTML要素 */
+interface TutorialStageElement {
+  +id: TutorialStageID;
+  +level: number;
+  +root: HTMLElement;
+  selectNotifier: Stream<void>;
+  selected(): Promise<void>;
 }
 
 /**
@@ -80,7 +80,7 @@ type TutorialStageSelectAction = TutorialStageSelect & {
  * @param level ステージレベル
  * @return チュートリアルステージ
  */
-const tutorialStageElement = (resources: Resources, stage: TutorialStage, level: number) => {
+const createTutorialStageElement = (resources: Resources, stage: TutorialStage, level: number): TutorialStageElement => {
   const li = document.createElement('li');
   li.className = `${ROOT_CLASS}__stage`;
   li.innerHTML = `
@@ -89,16 +89,18 @@ const tutorialStageElement = (resources: Resources, stage: TutorialStage, level:
   `;
   const button = li.querySelector('button') ?? document.createElement('button');
   const pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON) ?? createEmptySoundResource();
-  const selectNotifier: Stream<TutorialStageSelectAction> = pushDOMStream(button).chain(map(action => {
+
+  const selectNotifier = pushDOMStream(button).chain(tap(action => {
     action.event.stopPropagation();
     action.event.preventDefault();
-    const animation = async () => {
-      pushButton.sound.play();
-      await pop(button);
-    };
-    return {id: stage.id, level, animation};
-  }));
-  return {li, selectNotifier};
+  })).chain(map(() => {}));
+
+  const selected = async () => {
+    pushButton.sound.play();
+    await pop(button);
+  };
+
+  return {root: li, id: stage.id, level, selectNotifier, selected};
 };
 
 /** チュートリアルステージセレクト画面 */
@@ -132,17 +134,17 @@ export class TutorialSelector implements DOMScene {
     this.#stageSelect = createStreamSource();
     this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource();
 
-    const stageElements = stages.map((stage, index) => tutorialStageElement(resources, stage, index + 1));
-    stageElements.forEach(({li}) => {
-      this.#stages.appendChild(li);
+    const stageElements = stages.map((stage, index) => createTutorialStageElement(resources, stage, index + 1));
+    stageElements.forEach(({root}) => {
+      this.#stages.appendChild(root);
     });
     this.#unsubscribers = [
       pushDOMStream(this.#prevButton).subscribe(action => {
         this.#onPrevPush(action);
       }),
-      ...stageElements.map(({selectNotifier}) =>
-        selectNotifier.subscribe(action => {
-          this.#onTutorialStageSelect(action);
+      ...stageElements.map(stage =>
+        stage.selectNotifier.subscribe(() => {
+          this.#onTutorialStageSelect(stage);
         })
       )
     ];
@@ -196,12 +198,12 @@ export class TutorialSelector implements DOMScene {
   /**
    * チュートリアルステージ選択
    *
-   * @param action アクション
+   * @param stage チュートリアルステージ HTML要素
    */
-  #onTutorialStageSelect(action: TutorialStageSelectAction): void {
+  #onTutorialStageSelect(stage: TutorialStageElement): void {
     this.#exclusive.execute(async () => {
-      await action.animation();
-      this.#stageSelect.next(action);
+      await stage.selected();
+      this.#stageSelect.next({id: stage.id, level: stage.level});
     });
   }
 }
