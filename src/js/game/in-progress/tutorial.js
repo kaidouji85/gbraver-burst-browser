@@ -15,12 +15,12 @@ export type Tutorial = {
 type SubFLow = TutorialStageSelect | PlayingTutorialStage;
 
 /** チュートリアルステージ選択 */
-type TutorialStageSelect = {
+export type TutorialStageSelect = {
   type: 'TutorialStageSelect'
 };
 
 /** チュートリアルステージプレイ中 */
-type PlayingTutorialStage = {
+export type PlayingTutorialStage = {
   type: 'PlayingTutorialStage',
   /** プレイ中のチュートリアルステージID */
   stage: TutorialStage,
