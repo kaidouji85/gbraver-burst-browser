@@ -10,8 +10,8 @@ import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import {domUuid} from "../../../uuid/dom-uuid";
 import type {DOMScene} from "../dom-scene";
-import type {TutorialStage, TutorialStageElement, TutorialStageSelect} from "./tutoria-stage-element";
-import {createTutorialStageElement} from "./tutoria-stage-element";
+import type {TutorialStage, TutorialStageSelect} from "./tutoria-stage-element";
+import {TutorialStageElement} from "./tutoria-stage-element";
 
 /** ROOT要素class属性*/
 const ROOT_CLASS = 'tutorial-selector';
@@ -78,16 +78,16 @@ export class TutorialSelector implements DOMScene {
     this.#stageSelect = createStreamSource();
     this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE) ?? createEmptySoundResource();
 
-    const stageElements = stages.map((stage, index) => createTutorialStageElement(resources, ROOT_CLASS, stage, index + 1));
-    stageElements.forEach(({root}) => {
-      this.#stages.appendChild(root);
-    });
+    const stageElements = stages.map((stage, index) => new TutorialStageElement(resources, ROOT_CLASS, stage, index + 1));
+    stageElements.forEach((stage => {
+      this.#stages.appendChild(stage.getRootHTMLElement());
+    }));
     this.#unsubscribers = [
       pushDOMStream(this.#prevButton).subscribe(action => {
         this.#onPrevPush(action);
       }),
       ...stageElements.map(stage =>
-        stage.selectNotifier.subscribe(() => {
+        stage.selectNotifier().subscribe(() => {
           this.#onTutorialStageSelect(stage);
         })
       )
