@@ -175,6 +175,11 @@ export type TutorialStart = {
   type: 'TutorialStart'
 };
 
+/** チュートリアル選択キャンセル */
+export type CancelTutorialSelect = {
+  type: 'CancelTutorialSelect'
+};
+
 /**
  * ゲーム全体で利用するアクション
  */
@@ -205,4 +210,5 @@ export type GameAction = ReloadRequest
  | ConfigChangeStart
  | ConfigChangeComplete
  | ConfigChangeCancel
- | TutorialStart;
+ | TutorialStart
+ | CancelTutorialSelect;

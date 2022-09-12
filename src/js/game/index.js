@@ -6,6 +6,7 @@ import {initialize} from "./game-procedure/initialize";
 import {onAccountDeleteConsent} from "./game-procedure/on-account-delete-consent";
 import {onArcadeStart} from "./game-procedure/on-arcade-start";
 import {onCancelAccountDeletion} from "./game-procedure/on-cancel-account-deletion";
+import {onCancelTutorialSelect} from "./game-procedure/on-cancel-tutorial-select";
 import {onCasualMatchStart} from "./game-procedure/on-casual-match-start";
 import {onConfigChangeCancel} from "./game-procedure/on-config-change-cancel";
 import {onConfigChangeComplete} from "./game-procedure/on-config-change-complete";
@@ -132,6 +133,8 @@ export class Game {
         onConfigChangeComplete(this.#props, action);
       } else if (action.type === 'TutorialStart') {
         onTutorialStart(this.#props);
+      } else if (action.type === 'CancelTutorialSelect') {
+        onCancelTutorialSelect();
       }
     }));
   }

@@ -285,6 +285,11 @@ export class DOMScenes {
 
     const scene = new TutorialSelector(resources, stages);
     this.#root.appendChild(scene.getRootHTMLElement());
+    this.#unsubscribers = [
+      scene.prevNotifier().subscribe(() => {
+        this.#gameAction.next({type: 'CancelTutorialSelect'});
+      })
+    ];
     this.#scene = scene;
     return scene;
   }
