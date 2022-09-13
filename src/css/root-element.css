@@ -32,7 +32,7 @@
   --sub-button-background-color: #595857;
   --button-font-color: rgb(240, 240, 240);
   --button-border-radius: calc(var(--responsive-font-size) * 0.5);
-  --button-border: 1px solid #adadad;
+  --button-border: none;
   --button-box-shadow: 0 0 0.5em rgb(25 25 25);
 
   /** ダイアログ */
