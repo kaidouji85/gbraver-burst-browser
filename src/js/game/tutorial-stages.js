@@ -64,7 +64,7 @@ export const TutorialStages: TutorialStage[] = [
   },
   {
     id: TutorialStageIDs.BURST,
-    title: ['バーストで', '一発逆転'],
+    title: ['バーストで一発', '逆転'],
     player: {playerId: playerUuid(), armdozer: shinBraver, pilot: shinya},
     npc: burstTutorialNPC(),
     event: createBurstTutorialEvent,

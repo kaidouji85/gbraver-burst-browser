@@ -143,8 +143,7 @@ const doBurstToRecoverBattery = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Tsubasa');
   await scrollRightMessages(props, [
     ['ツバサ', '「ならばバーストを発動させよう'],
-    ['バーストは1試合に1回しか使えないが'],
-    ['一気にバッテリーを回復できるんだ」']
+    ['バーストは1試合に1回しか使えないが 一気にバッテリーを回復できるんだ」'],
   ]);
   invisibleAllMessageWindows(props);
 };
