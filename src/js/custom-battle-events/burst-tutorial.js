@@ -122,8 +122,7 @@ const shouldDefense5 = async (props: CustomBattleEventProps) => {
 const redoBatterySelect = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
-    ['シンヤ', '「了解ッス'],
-    ['5防御で回避すればいいんスね」']
+    ['シンヤ', '「了解ッス」'],
   ]);
   await refreshConversation(props, 100);
 };
