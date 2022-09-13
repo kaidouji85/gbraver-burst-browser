@@ -1,5 +1,5 @@
 // @flow
-import type {BattleResult, GameState} from "gbraver-burst-core";
+import type {GameState} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -55,86 +55,6 @@ const introduction = async (props: CustomBattleEventProps) => {
     ['シンヤ', '「よろしくお願いします」']
   ]);
   invisibleAllMessageWindows(props);
-};
-
-/**
- * ストーリー プレイヤー攻撃ヒット
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const playerAttackHit = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「この俺に当てるとは ……やるな シンヤ」']
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-  invisibleAllMessageWindows(props);
-};
-
-/**
- * ストーリー プレイヤー攻撃ガード
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const playerAttackGuard = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「よし 当たったッス」']
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「甘いぞ シンヤ'],
-    ['攻撃 防御が同じバッテリーだから ガードでダメージ半減だ」']
-  ]);
-  invisibleAllMessageWindows(props);
-};
-
-/**
- * ストーリー プレイヤー攻撃ミス
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const playerAttackMiss = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「どうした シンヤ 踏み込みが足らんぞ」'],
-  ]);
-  invisibleAllMessageWindows(props);
-};
-
-/**
- * ストーリー プレイヤーフェイント成功
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const playerFeintSuccess = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「何？ フェイントだと'],
-    ['少しはできるな シンヤ」']
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-  invisibleAllMessageWindows(props);
-};
-
-/**
- * プレイヤー攻撃の結果に応じてストーリーを分岐する
- * @param props イベントプロパティ
- * @param battleResult 戦闘結果
- * @return ストーリーが完了したら発火するPromise
- */
-const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
-  if (battleResult.name === 'NormalHit') {
-    await playerAttackHit(props);
-  } else if (battleResult.name === 'Guard') {
-    await playerAttackGuard(props);
-  } else if (battleResult.name === 'Miss') {
-    await playerAttackMiss(props);
-  } else if (battleResult.name === 'Feint' && battleResult.isDefenderMoved) {
-    await playerFeintSuccess(props);
-  }
 };
 
 /**
@@ -512,13 +432,10 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     const battleEnemy = (foundLastBattle?.players ?? []).find(v => v.playerId !== props.playerId);
     const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle' && battlePlayer && battleEnemy
       ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
-        result: foundLastBattle.effect.result,
         playerHP: battlePlayer.armdozer.hp,
         enemyHP: battleEnemy.armdozer.hp}
       : null;
-    if (lastBattle && lastBattle.isAttacker  && !isGameEnd) {
-      await playerAttack(props, lastBattle.result);
-    } else if (lastBattle && !lastBattle.isAttacker && !isGameEnd && !this.isDamageRaceComplete) {
+    if (lastBattle && !lastBattle.isAttacker && !isGameEnd && !this.isDamageRaceComplete) {
       this.isDamageRaceComplete = true;
       await damageRace(props, lastBattle.playerHP, lastBattle.enemyHP);
     }
