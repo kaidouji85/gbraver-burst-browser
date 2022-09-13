@@ -1,5 +1,5 @@
 // @flow
-import type {GameEndResult} from "gbraver-burst-core";
+import type {GameEndResult, GameOver} from "gbraver-burst-core";
 import {BattleAnimationTimeScales, parseBattleAnimationTimeScale} from "../config/browser-config";
 import type {PostBattleButtonConfig} from "../dom-floaters/post-battle/post-battle-button-config";
 import {
@@ -7,7 +7,6 @@ import {
   PostNPCBattleComplete,
   PostNPCBattleLoseButtons,
   PostNPCBattleWinButtons,
-  PostTutorialCompleteButtons,
   PostTutorialLoseButtons,
   PostTutorialWinButtons,
 } from "../dom-floaters/post-battle/post-battle-buttons";
@@ -15,11 +14,9 @@ import type {EndBattle} from "../game-actions";
 import type {GameProps} from "../game-props";
 import type {InProgress} from "../in-progress/in-progress";
 import type {NPCBattle, PlayingNPCBattle} from "../in-progress/npc-battle";
-import type {Tutorial} from "../in-progress/tutorial";
+import type {PlayingTutorialStage} from "../in-progress/tutorial";
 import type {NPCBattleResult} from "../npc-battle";
 import {updateNPCBattleState} from "../npc-battle";
-import type {TutorialResult} from "../tutorial";
-import {updateTutorialState} from "../tutorial";
 
 /**
  * 戦闘画面のアニメーションタイムスケールを設定に反映する
@@ -99,42 +96,22 @@ const endNPCBattleStage = async (props: $ReadOnly<GameProps>, postBattleButtons:
 };
 
 /**
- * チュートリアル終了後に表示するアクションボタンを求める
- *
- * @param result チュートリアル結果
- * @return 表示するアクションボタン
- */
-const postTutorialButtons = (result: TutorialResult) => {
-  switch(result) {
-    case 'TutorialComplete':
-      return PostTutorialCompleteButtons;
-    case 'StageClear':
-      return PostTutorialWinButtons;
-    case 'StageMiss':
-    default:
-      return PostTutorialLoseButtons;
-  }
-}
-
-/**
  * チュートリアル進行中に利用するデータを生成する
  *
  * @param inProgress 進行中のフロー
+ * @param gameEndResult 戦闘結果
  * @return 生成結果、チュートリアル中でない場合はnullを返す
  */
 const createTutorial = (inProgress: InProgress, gameEndResult: GameEndResult) => {
-  if (inProgress.type !== 'Tutorial') {
-    return null;
-  }
-  const tutorial = (inProgress: Tutorial);
-  const updated = updateTutorialState(tutorial.state, gameEndResult);
-  if (!updated) {
-    return null;
+  if (inProgress.type === 'Tutorial' && inProgress.subFlow.type === 'PlayingTutorialStage' && gameEndResult.type === 'GameOver') {
+    const gameOver = (gameEndResult: GameOver);
+    const playingTutorialStage = (inProgress.subFlow: PlayingTutorialStage);
+    const isPlayerWin = gameOver.winner === playingTutorialStage.stage.player.playerId;
+    const postBattleButtons = isPlayerWin ? PostTutorialWinButtons : PostTutorialLoseButtons;
+    return {postBattleButtons};
   }
 
-  const postBattleButtons = postTutorialButtons(updated.result);
-  const updatedInProgress = {...tutorial, state: updated.state};
-  return {postBattleButtons, updatedInProgress};
+  return null;
 };
 
 /**
@@ -166,7 +143,6 @@ export async function onEndBattle(props: GameProps, action: EndBattle): Promise<
   } else if (props.inProgress.type === 'CasualMatch') {
     await endCasualMatch(props);
   } else if (tutorial) {
-    props.inProgress = tutorial.updatedInProgress;
     await endTutorial(props, tutorial.postBattleButtons);
   }
 }

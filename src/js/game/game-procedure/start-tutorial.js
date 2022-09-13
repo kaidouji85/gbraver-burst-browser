@@ -4,7 +4,7 @@ import {NPCBattleRoom} from "../../npc/npc-battle-room";
 import {waitAnimationFrame} from "../../wait/wait-animation-frame";
 import {waitTime} from "../../wait/wait-time";
 import type {GameProps} from "../game-props";
-import type {TutorialStage} from "../tutorial";
+import type {TutorialStage} from "../tutorial-stages";
 
 /**
  * チュートリアルを開始するヘルパー関数

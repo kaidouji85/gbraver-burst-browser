@@ -14,6 +14,7 @@
     padding-bottom: var(--screen-padding-bottom);
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -24,7 +25,7 @@
 }
 
 .config__title {
-  font-size: var(--responsive-font-size);
+  font-size: calc(var(--responsive-font-size) * 2);
 }
 
 .config__configs {

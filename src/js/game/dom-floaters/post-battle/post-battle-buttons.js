@@ -24,16 +24,11 @@ export const PostNetworkBattleButtons: PostBattleButtonConfig[] = [
 
 /** チュートリアル勝利後のアクションボタン */
 export const PostTutorialWinButtons: PostBattleButtonConfig[] = [
-  {style: 'MainButton', action: {type: 'NextTutorial'}, label: '次のステージ'},
+  {style: 'MainButton', action: {type: 'GotoTutorialSelect'}, label: 'ステージ選択へ'},
 ];
 
 /** チュートリアル敗北後のアクションボタン */
 export const PostTutorialLoseButtons: PostBattleButtonConfig[] = [
-  {style: 'SubButton', action: {type: 'GotoTitle'}, label: 'タイトルへ'},
+  {style: 'SubButton', action: {type: 'GotoTutorialSelect'}, label: 'ステージ選択へ'},
   {style: 'MainButton', action: {type: 'Retry'}, label: 'リトライ'},
-];
-
-/** チュートリアル完全クリア後のアクションボタン */
-export const PostTutorialCompleteButtons: PostBattleButtonConfig[] = [
-  {style: 'MainButton', action: {type: 'GotoTitle'}, label: 'タイトルへ'},
 ];

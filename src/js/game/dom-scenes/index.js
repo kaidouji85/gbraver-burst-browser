@@ -19,6 +19,8 @@ import type {StageTitleParam} from "./stage-title/stage-title";
 import {StageTitle} from "./stage-title/stage-title";
 import type {TitleParams} from "./title/title";
 import {Title} from "./title/title";
+import type {TutorialStage} from "./tutorial-selector/tutoria-stage-element";
+import {TutorialSelector} from "./tutorial-selector/tutorial-selector";
 
 /**
  * 最大読み込み待機時間(ミリ秒)
@@ -265,6 +267,30 @@ export class DOMScenes {
       }),
       scene.configChangeNotifier().subscribe(config => {
         this.#gameAction.next({type: 'ConfigChangeComplete', config});
+      })
+    ];
+    this.#scene = scene;
+    return scene;
+  }
+
+  /**
+   * チュートリアル選択画面を開始する
+   *
+   * @param resources リソース管理オブジェクト
+   * @param stages ステージ情報
+   * @return 開始された設定画面
+   */
+  startTutorialSelector(resources: Resources, stages: TutorialStage[]): TutorialSelector {
+    this.#removeCurrentScene();
+
+    const scene = new TutorialSelector(resources, stages);
+    this.#root.appendChild(scene.getRootHTMLElement());
+    this.#unsubscribers = [
+      scene.prevNotifier().subscribe(() => {
+        this.#gameAction.next({type: 'CancelTutorialSelect'});
+      }),
+      scene.stageSelectNotifier().subscribe(stageSelect => {
+        this.#gameAction.next({...stageSelect, type: 'SelectTutorialStage'});
       })
     ];
     this.#scene = scene;
