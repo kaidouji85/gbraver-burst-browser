@@ -60,16 +60,4 @@
   display: flex;
   justify-content: center;
   font-size: calc(var(--responsive-font-size) * 1.2);
-  margin-bottom: calc(var(--responsive-font-size) * 1.5);
-}
-
-.matching__cancel {
-  width: var(--control-button-width);
-  height: var(--control-button-height);
-  font-size: var(--responsive-font-size);
-  border-radius: var(--button-border-radius);
-  background-color: var(--button-background-color);
-  color: var(--button-font-color);
-  border: var(--button-border);
-  box-shadow: var(--button-box-shadow);
 }
