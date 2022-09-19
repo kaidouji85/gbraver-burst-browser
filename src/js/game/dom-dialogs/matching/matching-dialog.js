@@ -16,10 +16,7 @@ import type {DOMDialog} from "../dialog";
 const ROOT_CLASS = 'matching';
 
 /** data-idを集めたもの */
-type DataIDs = {
-  closer: string,
-  cancel: string
-};
+type DataIDs = {closer: string};
 
 /**
  * ルート要素のinnerHTML
@@ -35,16 +32,12 @@ function rootInnerHTML(ids: DataIDs, resources: Resources): string {
     <div class="${ROOT_CLASS}__dialog">
       <img class="${ROOT_CLASS}__closer" alt="閉じる" src="${closerPath}" data-id="${ids.closer}">
       <span class="${ROOT_CLASS}__caption">マッチング中......</span>    
-      <button class="${ROOT_CLASS}__cancel" data-id="${ids.cancel}">やめる</button>
     </div>
   `;
 }
 
 /** ルート要素の子孫要素 */
-type Elements = {
-  closer: HTMLImageElement,
-  cancel: HTMLElement,
-};
+type Elements = {closer: HTMLImageElement,};
 
 /**
  * ルート要素から子孫要素を抽出する
@@ -56,15 +49,13 @@ type Elements = {
 function extractElements(root: HTMLElement, ids: DataIDs): Elements {
   const closerElement = root.querySelector(`[data-id="${ids.closer}"]`);
   const closer = (closerElement instanceof HTMLImageElement) ? closerElement : document.createElement('img');
-  const cancel = root.querySelector(`[data-id="${ids.cancel}"]`) ?? document.createElement('button');
-  return {closer, cancel};
+  return {closer};
 }
 
 /** マッチング ダイアログ */
 export class MatchingDialog implements DOMDialog {
   #root: HTMLElement;
   #closer: HTMLImageElement;
-  #cancel: HTMLElement;
   #changeValue: typeof Howl;
   #pushButton: typeof Howl;
   #exclusive: Exclusive;
@@ -83,7 +74,6 @@ export class MatchingDialog implements DOMDialog {
     this.#root.innerHTML = rootInnerHTML(ids, resources);
     const elements = extractElements(this.#root, ids);
     this.#closer = elements.closer;
-    this.#cancel = elements.cancel;
     this.#changeValue = resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)?.sound ?? new Howl();
     this.#pushButton = resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)?.sound ?? new Howl();
     this.#exclusive = new Exclusive();
@@ -92,9 +82,6 @@ export class MatchingDialog implements DOMDialog {
       pushDOMStream(this.#closer).subscribe(action => {
         this.#onCloserPush(action);
       }),
-      pushDOMStream(this.#cancel).subscribe(action => {
-        this.#onCancelPush(action);
-      })
     ];
   }
 
@@ -136,21 +123,6 @@ export class MatchingDialog implements DOMDialog {
     this.#exclusive.execute(async () => {
       this.#changeValue.play();
       await pop(this.#closer, 1.3);
-      this.#matchingCanceled.next();
-    });
-  }
-
-  /**
-   * やめるが押された際の処理
-   *
-   * @param action アクション
-   */
-  #onCancelPush(action: PushDOM): void {
-    action.event.preventDefault();
-    action.event.stopPropagation();
-    this.#exclusive.execute(async () => {
-      this.#pushButton.play();
-      await pop(this.#cancel);
       this.#matchingCanceled.next();
     });
   }
