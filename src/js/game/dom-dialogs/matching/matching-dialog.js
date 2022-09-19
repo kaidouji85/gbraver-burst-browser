@@ -37,7 +37,7 @@ function rootInnerHTML(ids: DataIDs, resources: Resources): string {
 }
 
 /** ルート要素の子孫要素 */
-type Elements = {closer: HTMLImageElement,};
+type Elements = {closer: HTMLImageElement};
 
 /**
  * ルート要素から子孫要素を抽出する
