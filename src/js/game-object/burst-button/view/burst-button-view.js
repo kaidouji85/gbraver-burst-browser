@@ -4,7 +4,7 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type {Stream} from "../../../stream/stream";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
@@ -35,6 +35,7 @@ export class BurstButtonView {
   #buttonDisabled: SimpleImageMesh;
   #overlap: ButtonOverlap;
   #group: typeof THREE.Group;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -63,15 +64,12 @@ export class BurstButtonView {
     this.#buttonDisabled = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: buttonDisabled, imageWidth: 414});
     this.#group.add(this.#buttonDisabled.getObject3D());
 
-    this.#overlap = circleButtonOverlap({
-      radius: 200,
-      segments: 32,
-      gameObjectAction: param.gameObjectAction,
-      onButtonPush: event=> {
-        param.onPush(event);
-      }
-    });
+    this.#overlap = circleButtonOverlap({radius: 200, segments: 32, gameObjectAction: param.gameObjectAction});
     this.#group.add(this.#overlap.getObject3D());
+
+    this.#unsubscribers = [
+      this.#overlap.pushStartNotifier().subscribe(param.onPush)
+    ];
   }
 
   /** デストラクタ */
@@ -81,6 +79,9 @@ export class BurstButtonView {
     this.#buttonDisabled.destructor();
     this.#label.destructor();
     this.#overlap.destructor();
+    this.#unsubscribers.forEach(unsubscriber => {
+      unsubscriber.unsubscribe();
+    });
   }
 
   /**

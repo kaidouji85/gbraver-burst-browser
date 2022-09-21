@@ -1,10 +1,9 @@
 // @flow
-
 import * as THREE from "three";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type {Stream} from "../../../stream/stream";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
@@ -27,6 +26,7 @@ export class BatteryMinus {
   #activeButton: SimpleImageMesh;
   #buttonDisabled: SimpleImageMesh;
   #overlap: ButtonOverlap;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -42,19 +42,16 @@ export class BatteryMinus {
       .find(v => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED)?.image ?? new Image();
     this.#buttonDisabled = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: buttonDisabled, imageWidth: 176});
 
-    this.#overlap = circleButtonOverlap({
-      radius: 80,
-      segments: 32,
-      gameObjectAction: param.gameObjectAction,
-      onButtonPush: () => {
-        param.onPush();
-      }
-    });
+    this.#overlap = circleButtonOverlap({radius: 80, segments: 32, gameObjectAction: param.gameObjectAction});
 
     this.#group = new THREE.Group();
     this.#group.add(this.#activeButton.getObject3D());
     this.#group.add(this.#buttonDisabled.getObject3D());
     this.#group.add(this.#overlap.getObject3D());
+
+    this.#unsubscribers = [
+      this.#overlap.pushStartNotifier().subscribe(param.onPush)
+    ];
   }
 
   /** デストラクタ */
@@ -62,6 +59,9 @@ export class BatteryMinus {
     this.#activeButton.destructor();
     this.#buttonDisabled.destructor();
     this.#overlap.destructor();
+    this.#unsubscribers.forEach(unsubscriber => {
+      unsubscriber.unsubscribe();
+    });
   }
 
   /** モデルをビューに反映させる */

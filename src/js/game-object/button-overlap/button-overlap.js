@@ -1,10 +1,10 @@
 // @flow
-
 import * as THREE from 'three';
 import {isMeshOverlap} from "../../overlap/mesh-overlap";
 import type {MouseDownRaycaster} from "../../render/overlap-event/mouse-down-raycaster";
 import type {TouchStartRaycaster} from "../../render/overlap-event/touch-start-raycaster";
-import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 
 /** パラメータ */
@@ -13,11 +13,6 @@ type Param = {
   geometry: typeof THREE.Geometry,
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
-  /** 
-   * ボタンを押した時に呼ばれるコールバック関数
-   * @param event イベント情報
-   */
-  onButtonPush: (event: Event) => void,
   /** 
    * デバッグ用途で当たり判定を表示・非表示するフラグ
    * trueで当たり判定を表示する
@@ -28,7 +23,7 @@ type Param = {
 /** ボタン押下判定オブジェクト */
 export class ButtonOverlap {
   #mesh: typeof THREE.Mesh;
-  #onButtonPush: (event: Event) => void;
+  #pushStart: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
 
   /**
@@ -43,23 +38,19 @@ export class ButtonOverlap {
     });
     this.#mesh = new THREE.Mesh(param.geometry, material);
 
+    this.#pushStart = createStreamSource();
     this.#unsubscriber = param.gameObjectAction.subscribe(action => {
-      switch (action.type) {
-        case 'mouseDownRaycaster':
-          this.#mouseDownRaycaster(action);
-          return;
-        case 'touchStartRaycaster':
-          this.#touchStartRaycaster(action);
-          return;
-        default:
-          return;
+      if (action.type === 'mouseDownRaycaster') {
+        this.#mouseDownRaycaster(action);
+      } else if (action.type === 'touchStartRaycaster') {
+        this.#touchStartRaycaster(action);
       }
     });
-
-    this.#onButtonPush = param.onButtonPush;
   }
 
-  /** デストラクタ */
+  /** 
+   * デストラクタ
+   */
   destructor(): void {
     this.#mesh.geometry.dispose();
     this.#mesh.material.dispose();
@@ -75,24 +66,37 @@ export class ButtonOverlap {
     this.#mesh.material.visible = visible;
   }
 
-  /** シーンに追加するオブジェクトを取得する */
+  /** 
+   * シーンに追加するオブジェクトを取得する
+   * 
+   * @return 取得結果
+   */
   getObject3D(): typeof THREE.Object3D {
     return this.#mesh;
   }
 
+  /**
+   * ボタン押下開始の通知
+   * 
+   * @return 通知ストリーム
+   */
+  pushStartNotifier(): Stream<Event> {
+    return this.#pushStart;
+  }
+
   /** 
-   * マウスダウン
+   * マウスダウン時の処理
    * 
    * @param action アクション
    */
   #mouseDownRaycaster(action: MouseDownRaycaster): void {
     if (isMeshOverlap(action.mouse.raycaster, this.#mesh)) {
-      this.#onButtonPush(action.event);
+      this.#pushStart.next(action.event);
     }
   }
 
   /** 
-   * タッチスタート
+   * タッチスタート時の処理
    * 
    * @param action アクション
    */
@@ -101,7 +105,7 @@ export class ButtonOverlap {
       .filter(v => isMeshOverlap(v.raycaster, this.#mesh));
     const isTouchOverlap = 0 < overlapTouches.length;
     if (isTouchOverlap) {
-      this.#onButtonPush(action.event);
+      this.#pushStart.next(action.event);
     }
   }
 }

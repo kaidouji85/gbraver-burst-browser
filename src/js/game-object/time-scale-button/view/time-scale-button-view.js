@@ -4,7 +4,7 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type {Stream, StreamSource} from "../../../stream/stream";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
@@ -27,6 +27,7 @@ export class TimeScaleButtonView {
   #timeScale025: SimpleImageMesh;
   #overlap: ButtonOverlap;
   #pushButton: StreamSource<void>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -54,16 +55,14 @@ export class TimeScaleButtonView {
     this.#timeScale025 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale025, imageWidth: 256});
     this.#group.add(this.#timeScale025.getObject3D());
 
-    this.#overlap = circleButtonOverlap({
-      radius: 30, 
-      segments:32, 
-      gameObjectAction, 
-      onButtonPush: () => {
-        this.#pushButton.next();
-      },
-      visible: false
-    });
+    this.#overlap = circleButtonOverlap({radius: 30, segments:32, gameObjectAction, visible: false});
     this.#group.add(this.#overlap.getObject3D());
+
+    this.#unsubscribers = [
+      this.#overlap.pushStartNotifier().subscribe(() => {
+        this.#pushButton.next();
+      })
+    ];
   }
 
   /**
@@ -75,6 +74,9 @@ export class TimeScaleButtonView {
     this.#timeScale050.destructor();
     this.#timeScale025.destructor();
     this.#overlap.destructor();
+    this.#unsubscribers.forEach(unsubscriber => {
+      unsubscriber.unsubscribe();
+    });
   }
 
   /**
