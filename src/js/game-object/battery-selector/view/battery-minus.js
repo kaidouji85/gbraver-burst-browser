@@ -3,7 +3,7 @@ import * as THREE from "three";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
