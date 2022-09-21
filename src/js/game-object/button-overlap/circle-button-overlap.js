@@ -13,7 +13,8 @@ type Param = {
   segments: number,
   /** ゲームオブジェクトアクション */
   gameObjectAction: Stream<GameObjectAction>,
-  /** 
+  /**
+   * @deprecated 
    * ボタン押下時のコールバック関数
    * @param event イベント情報
    */
@@ -40,5 +41,5 @@ export function circleButtonOverlap(param: Param): ButtonOverlap {
       param.onButtonPush(event);
     },
     visible: param.visible
-  })
+  });
 }
