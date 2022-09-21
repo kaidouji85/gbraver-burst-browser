@@ -8,7 +8,10 @@ export default {
 
 export const circle = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({gameObjectAction}) => {
-    const overlap = circleOverlap({radius: 200, segments: 32, gameObjectAction, visible: true});
+    const overlap = circleOverlap({radius: 32, segments: 32, gameObjectAction, visible: true});
+    overlap.pushStartNotifier().subscribe(event => {
+      console.log('push start', event);
+    });
     return [overlap.getObject3D()];
   });
   stub.start();
