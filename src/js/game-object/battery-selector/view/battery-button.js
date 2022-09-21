@@ -7,8 +7,8 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {ButtonOverlap} from "../../button-overlap/button-overlap";
-import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
+import {circleOverlap} from "../../overlap-object/circle-button-overlap";
+import type {OverlapObject} from "../../overlap-object/overlap-object";
 import type {BatterySelectorModel} from "../model";
 
 /** バッテリー現在値 最大フレーム数 */
@@ -31,7 +31,7 @@ type Param = {
 export class BatteryButton {
   #group: typeof THREE.Group;
   #button: SimpleImageMesh;
-  #overlap: ButtonOverlap;
+  #overlap: OverlapObject;
   #attackLabel: SimpleImageMesh;
   #defenseLabel: SimpleImageMesh;
   #batteryValue: HorizontalAnimationMesh;
@@ -51,7 +51,7 @@ export class BatteryButton {
     this.#button.getObject3D().position.set(0, 0, -1);
     this.#group.add(this.#button.getObject3D());
 
-    this.#overlap = circleButtonOverlap({radius: 200, segments: 32, gameObjectAction: param.gameObjectAction});
+    this.#overlap = circleOverlap({radius: 200, segments: 32, gameObjectAction: param.gameObjectAction});
     this.#group.add(this.#overlap.getObject3D());
 
     const attackLabel = param.resources.canvasImages
