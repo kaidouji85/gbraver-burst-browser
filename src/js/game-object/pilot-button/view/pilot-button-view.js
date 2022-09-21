@@ -7,8 +7,8 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {ButtonOverlap} from "../../button-overlap/button-overlap";
-import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
+import {circleOverlap} from "../../overlap-object/circle-overlap";
+import type {OverlapObject} from "../../overlap-object/overlap-object";
 import {HUDUIScale} from "../../scale";
 import type {PilotButtonModel} from "../model/pilot-button-model";
 import type {PilotIcon} from "./pilot-icon";
@@ -22,7 +22,7 @@ export class PilotButtonView {
   #label: SimpleImageMesh;
   #pilotIcon: PilotIcon;
   #buttonDisabled: SimpleImageMesh;
-  #overlap: ButtonOverlap;
+  #overlap: OverlapObject;
   #pushButton: StreamSource<Event>;
   #unsubscribers: Unsubscriber[];
 
@@ -58,7 +58,7 @@ export class PilotButtonView {
     this.#pilotIcon.getObject3D().position.z = 1;
     this.#group.add(this.#pilotIcon.getObject3D());
 
-    this.#overlap = circleButtonOverlap({radius: 200, segments: 32, gameObjectAction: gameObjectAction});
+    this.#overlap = circleOverlap({radius: 200, segments: 32, gameObjectAction: gameObjectAction});
     this.#overlap.getObject3D().position.z = 1;
     this.#group.add(this.#overlap.getObject3D());
 

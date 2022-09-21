@@ -1,9 +1,8 @@
 // @flow
-
 import * as THREE from 'three';
 import type {Stream} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
-import {ButtonOverlap} from "./button-overlap";
+import {OverlapObject} from "./overlap-object";
 
 /** パラメータ */
 type Param = {
@@ -21,14 +20,14 @@ type Param = {
 };
 
 /**
- * 円形ボタンの当たり判定
+ * 円形の当たり判定
  *
  * @param param パラメータ
  * @return 当たり判定
  */
-export function circleButtonOverlap(param: Param): ButtonOverlap {
+export function circleOverlap(param: Param): OverlapObject {
   const geometry = new THREE.CircleGeometry(param.radius, param.segments);
-  return new ButtonOverlap({
+  return new OverlapObject({
     geometry: geometry,
     gameObjectAction: param.gameObjectAction,
     visible: param.visible

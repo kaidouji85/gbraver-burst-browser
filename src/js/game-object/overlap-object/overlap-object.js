@@ -20,8 +20,8 @@ type Param = {
   visible?: boolean,
 };
 
-/** ボタン押下判定オブジェクト */
-export class ButtonOverlap {
+/** 押下判定オブジェクト */
+export class OverlapObject {
   #mesh: typeof THREE.Mesh;
   #pushStart: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
@@ -76,7 +76,7 @@ export class ButtonOverlap {
   }
 
   /**
-   * ボタン押下開始の通知
+   * 押下開始通知
    * 
    * @return 通知ストリーム
    */
