@@ -8,6 +8,8 @@ import type {MouseDownRaycaster} from "./mouse-down-raycaster";
 import {toMouseDownRaycaster} from "./mouse-down-raycaster";
 import type {MouseMoveRaycaster} from "./mouse-move-raycaster";
 import {toMouseMoveRaycaster} from "./mouse-move-raycaster";
+import type {TouchEndRaycaster} from "./touch-end-raycaster";
+import {toTouchEndRaycaster} from "./touch-end-raycaster";
 import type {TouchMoveRaycaster} from "./touch-move-raycaster";
 import {toTouchMoveRaycaster} from "./touch-move-raycaster";
 import type {TouchStartRaycaster} from "./touch-start-raycaster";
@@ -20,7 +22,8 @@ export type OverlapEvent =
   MouseDownRaycaster |
   MouseMoveRaycaster |
   TouchStartRaycaster |
-  TouchMoveRaycaster;
+  TouchMoveRaycaster |
+  TouchEndRaycaster;
 
 /**
  * DOMイベントストリームを当たり判定ストリームに変換する
@@ -41,6 +44,8 @@ export function toOverlapStream(origin: Stream<RendererDOMEvent>, rendererDOM: H
         return toTouchStartRaycaster(v, rendererDOM, camera);
       case 'touchMove':
         return toTouchMoveRaycaster(v, rendererDOM, camera);
+      case 'touchEnd':
+        return toTouchEndRaycaster(v, rendererDOM, camera); 
       default:
         return null;
     }
