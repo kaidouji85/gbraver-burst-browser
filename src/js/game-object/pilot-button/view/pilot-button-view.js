@@ -4,7 +4,7 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type {Stream, StreamSource} from "../../../stream/stream";
+import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
@@ -17,13 +17,14 @@ import type {PilotIcon} from "./pilot-icon";
  * パイロットボタン ビュー
  */
 export class PilotButtonView {
-  #pushButton: StreamSource<Event>;
   #group: typeof THREE.Group;
   #button: SimpleImageMesh;
   #label: SimpleImageMesh;
   #pilotIcon: PilotIcon;
   #buttonDisabled: SimpleImageMesh;
   #overlap: ButtonOverlap;
+  #pushButton: StreamSource<Event>;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -57,16 +58,15 @@ export class PilotButtonView {
     this.#pilotIcon.getObject3D().position.z = 1;
     this.#group.add(this.#pilotIcon.getObject3D());
 
-    this.#overlap = circleButtonOverlap({
-      radius: 200,
-      segments: 32,
-      gameObjectAction: gameObjectAction,
-      onButtonPush: event => {
-        this.#pushButton.next(event);
-      }
-    });
+    this.#overlap = circleButtonOverlap({radius: 200, segments: 32, gameObjectAction: gameObjectAction});
     this.#overlap.getObject3D().position.z = 1;
     this.#group.add(this.#overlap.getObject3D());
+
+    this.#unsubscribers = [
+      this.#overlap.pushNotifier().subscribe(event => {
+        this.#pushButton.next(event);
+      })
+    ];
   }
 
   /**

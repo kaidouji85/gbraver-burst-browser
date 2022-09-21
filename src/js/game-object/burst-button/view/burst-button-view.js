@@ -4,7 +4,7 @@ import type {PreRender} from "../../../game-loop/pre-render";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
-import type { Stream, Unsubscriber } from "../../../stream/stream";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
 import {ButtonOverlap} from "../../button-overlap/button-overlap";
 import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
@@ -68,7 +68,9 @@ export class BurstButtonView {
     this.#group.add(this.#overlap.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushNotifier().subscribe(param.onPush)
+      this.#overlap.pushNotifier().subscribe(event => {
+        this
+      })
     ];
   }
 
