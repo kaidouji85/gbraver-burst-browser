@@ -73,7 +73,7 @@ export class BatteryButton {
     this.#group.add(this.#batteryValue.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushNotifier().subscribe(param.onPush)
+      this.#overlap.pushStartNotifier().subscribe(param.onPush)
     ];
   }
 

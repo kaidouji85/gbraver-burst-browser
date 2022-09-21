@@ -59,7 +59,7 @@ export class TimeScaleButtonView {
     this.#group.add(this.#overlap.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushNotifier().subscribe(() => {
+      this.#overlap.pushStartNotifier().subscribe(() => {
         this.#pushButton.next();
       })
     ];

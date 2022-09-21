@@ -63,7 +63,7 @@ export class PilotButtonView {
     this.#group.add(this.#overlap.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushNotifier().subscribe(event => {
+      this.#overlap.pushStartNotifier().subscribe(event => {
         this.#pushButton.next(event);
       })
     ];

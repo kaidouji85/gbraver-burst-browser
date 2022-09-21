@@ -23,7 +23,7 @@ type Param = {
 /** ボタン押下判定オブジェクト */
 export class ButtonOverlap {
   #mesh: typeof THREE.Mesh;
-  #push: StreamSource<Event>;
+  #pushStart: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
 
   /**
@@ -38,7 +38,7 @@ export class ButtonOverlap {
     });
     this.#mesh = new THREE.Mesh(param.geometry, material);
 
-    this.#push = createStreamSource();
+    this.#pushStart = createStreamSource();
     this.#unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'mouseDownRaycaster') {
         this.#mouseDownRaycaster(action);
@@ -76,12 +76,12 @@ export class ButtonOverlap {
   }
 
   /**
-   * ボタン押下通知
+   * ボタン押下開始の通知
    * 
    * @return 通知ストリーム
    */
-  pushNotifier(): Stream<Event> {
-    return this.#push;
+  pushStartNotifier(): Stream<Event> {
+    return this.#pushStart;
   }
 
   /** 
@@ -91,7 +91,7 @@ export class ButtonOverlap {
    */
   #mouseDownRaycaster(action: MouseDownRaycaster): void {
     if (isMeshOverlap(action.mouse.raycaster, this.#mesh)) {
-      this.#push.next(action.event);
+      this.#pushStart.next(action.event);
     }
   }
 
@@ -105,7 +105,7 @@ export class ButtonOverlap {
       .filter(v => isMeshOverlap(v.raycaster, this.#mesh));
     const isTouchOverlap = 0 < overlapTouches.length;
     if (isTouchOverlap) {
-      this.#push.next(action.event);
+      this.#pushStart.next(action.event);
     }
   }
 }

@@ -50,7 +50,7 @@ export class BatteryMinus {
     this.#group.add(this.#overlap.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushNotifier().subscribe(param.onPush)
+      this.#overlap.pushStartNotifier().subscribe(param.onPush)
     ];
   }
 
