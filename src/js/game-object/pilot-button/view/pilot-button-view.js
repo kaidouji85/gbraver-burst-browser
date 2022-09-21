@@ -78,6 +78,9 @@ export class PilotButtonView {
     this.#buttonDisabled.destructor();
     this.#label.destructor();
     this.#overlap.destructor();
+    this.#unsubscribers.forEach(unsubscriber => {
+      unsubscriber.unsubscribe();
+    });
   }
 
   /**

@@ -68,9 +68,7 @@ export class BurstButtonView {
     this.#group.add(this.#overlap.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushNotifier().subscribe(event => {
-        this
-      })
+      this.#overlap.pushNotifier().subscribe(param.onPush)
     ];
   }
 
