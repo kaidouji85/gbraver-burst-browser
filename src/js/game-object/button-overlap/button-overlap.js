@@ -3,7 +3,8 @@ import * as THREE from 'three';
 import {isMeshOverlap} from "../../overlap/mesh-overlap";
 import type {MouseDownRaycaster} from "../../render/overlap-event/mouse-down-raycaster";
 import type {TouchStartRaycaster} from "../../render/overlap-event/touch-start-raycaster";
-import type {Stream, Unsubscriber} from "../../stream/stream";
+import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
+import {createStreamSource} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 
 /** パラメータ */
@@ -28,7 +29,9 @@ type Param = {
 /** ボタン押下判定オブジェクト */
 export class ButtonOverlap {
   #mesh: typeof THREE.Mesh;
+  /** @deprecated */
   #onButtonPush: (event: Event) => void;
+  #push: StreamSource<void>;
   #unsubscriber: Unsubscriber;
 
   /**
@@ -50,8 +53,8 @@ export class ButtonOverlap {
         this.#touchStartRaycaster(action);
       }
     });
-
     this.#onButtonPush = param.onButtonPush;
+    this.#push = createStreamSource();
   }
 
   /** 
@@ -79,6 +82,15 @@ export class ButtonOverlap {
    */
   getObject3D(): typeof THREE.Object3D {
     return this.#mesh;
+  }
+
+  /**
+   * ボタン押下通知
+   * 
+   * @return 通知ストリーム
+   */
+  pushNotifier(): Stream<void> {
+    return this.#push;
   }
 
   /** 
