@@ -24,9 +24,6 @@ type Param = {
 export class OverlapObject {
   #mesh: typeof THREE.Mesh;
   #pushStart: StreamSource<Event>;
-  #pushCancel: StreamSource<Event>;
-  #pushEnd: StreamSource<Event>;
-  #longPush: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
 
   /**
@@ -42,9 +39,6 @@ export class OverlapObject {
     this.#mesh = new THREE.Mesh(param.geometry, material);
 
     this.#pushStart = createStreamSource();
-    this.#pushCancel = createStreamSource();
-    this.#pushEnd = createStreamSource();
-    this.#longPush = createStreamSource();
     this.#unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'mouseDownRaycaster') {
         this.#mouseDownRaycaster(action);
@@ -88,33 +82,6 @@ export class OverlapObject {
    */
   pushStartNotifier(): Stream<Event> {
     return this.#pushStart;
-  }
-
-  /**
-   * 押下キャンセル通知
-   * 
-   * @return 通知ストリーム
-   */
-  pushCancelNotifier(): Stream<Event> {
-    return this.#pushCancel;
-  }
-
-  /**
-   * 押下終了通知
-   * 
-   * @return 通知ストリーム
-   */
-  pushEndNotifier(): Stream<Event> {
-    return this.#pushEnd;
-  }
-
-  /**
-   * ロング押下通知
-   * 
-   * @return 通知ストリーム
-   */
-  longPushNotifier(): Stream<Event> {
-    return this.#longPush;
   }
 
   /** 

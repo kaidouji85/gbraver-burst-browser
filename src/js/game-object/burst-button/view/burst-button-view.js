@@ -6,11 +6,11 @@ import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
+import {circleOverlap} from "../../overlap-object/circle-overlap";
+import type {OverlapObject} from "../../overlap-object/overlap-object";
 import {HUDUIScale} from "../../scale";
 import type {BurstButtonModel} from "../model/burst-button-model";
 import type {ArmdozerIcon} from "./armdozer-icon";
-import type {OverlapObject} from "../../overlap-object/overlap-object";
-import {circleOverlap} from "../../overlap-object/circle-button-overlap";
 
 /** コンストラクタのパラメータ */
 type Param = {

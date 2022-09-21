@@ -7,7 +7,7 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {circleOverlap} from "../../overlap-object/circle-button-overlap";
+import {circleOverlap} from "../../overlap-object/circle-overlap";
 import type {OverlapObject} from "../../overlap-object/overlap-object";
 import {HUDUIScale} from "../../scale";
 import type {PilotButtonModel} from "../model/pilot-button-model";
