@@ -7,8 +7,8 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {circleOverlap} from "../../overlap-object/circle-overlap";
-import type {OverlapObject} from "../../overlap-object/overlap-object";
+import type {PushDetector} from "../../push-detector/push-detector";
+import {circlePushDetector} from "../../push-detector/push-detector";
 import {HUDUIScale} from "../../scale";
 import type {PilotButtonModel} from "../model/pilot-button-model";
 import type {PilotIcon} from "./pilot-icon";
@@ -22,7 +22,7 @@ export class PilotButtonView {
   #label: SimpleImageMesh;
   #pilotIcon: PilotIcon;
   #buttonDisabled: SimpleImageMesh;
-  #overlap: OverlapObject;
+  #pushDetector: PushDetector;
   #pushButton: StreamSource<Event>;
   #unsubscribers: Unsubscriber[];
 
@@ -58,12 +58,12 @@ export class PilotButtonView {
     this.#pilotIcon.getObject3D().position.z = 1;
     this.#group.add(this.#pilotIcon.getObject3D());
 
-    this.#overlap = circleOverlap({radius: 200, segments: 32, gameObjectAction: gameObjectAction});
-    this.#overlap.getObject3D().position.z = 1;
-    this.#group.add(this.#overlap.getObject3D());
+    this.#pushDetector = circlePushDetector({radius: 200, segments: 32, gameObjectAction: gameObjectAction});
+    this.#pushDetector.getObject3D().position.z = 1;
+    this.#group.add(this.#pushDetector.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushStartNotifier().subscribe(event => {
+      this.#pushDetector.pushNotifier().subscribe(event => {
         this.#pushButton.next(event);
       })
     ];
@@ -77,7 +77,7 @@ export class PilotButtonView {
     this.#pilotIcon.destructor();
     this.#buttonDisabled.destructor();
     this.#label.destructor();
-    this.#overlap.destructor();
+    this.#pushDetector.destructor();
     this.#unsubscribers.forEach(unsubscriber => {
       unsubscriber.unsubscribe();
     });

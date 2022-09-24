@@ -6,8 +6,8 @@ import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {circleOverlap} from "../../overlap-object/circle-overlap";
-import type {OverlapObject} from "../../overlap-object/overlap-object";
+import type {PushDetector} from "../../push-detector/push-detector";
+import {circlePushDetector} from "../../push-detector/push-detector";
 import {HUDUIScale} from "../../scale";
 import type {BurstButtonModel} from "../model/burst-button-model";
 import type {ArmdozerIcon} from "./armdozer-icon";
@@ -33,7 +33,7 @@ export class BurstButtonView {
   #armdozerIcon: ArmdozerIcon;
   #label: SimpleImageMesh;
   #buttonDisabled: SimpleImageMesh;
-  #overlap: OverlapObject;
+  #pushDetector: PushDetector;
   #group: typeof THREE.Group;
   #unsubscribers: Unsubscriber[];
 
@@ -64,11 +64,11 @@ export class BurstButtonView {
     this.#buttonDisabled = new SimpleImageMesh({canvasSize: 512, meshSize: 512, image: buttonDisabled, imageWidth: 414});
     this.#group.add(this.#buttonDisabled.getObject3D());
 
-    this.#overlap = circleOverlap({radius: 200, segments: 32, gameObjectAction: param.gameObjectAction});
-    this.#group.add(this.#overlap.getObject3D());
+    this.#pushDetector = circlePushDetector({radius: 200, segments: 32, gameObjectAction: param.gameObjectAction});
+    this.#group.add(this.#pushDetector.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushStartNotifier().subscribe(param.onPush)
+      this.#pushDetector.pushNotifier().subscribe(param.onPush)
     ];
   }
 
@@ -78,7 +78,7 @@ export class BurstButtonView {
     this.#armdozerIcon.destructor();
     this.#buttonDisabled.destructor();
     this.#label.destructor();
-    this.#overlap.destructor();
+    this.#pushDetector.destructor();
     this.#unsubscribers.forEach(unsubscriber => {
       unsubscriber.unsubscribe();
     });

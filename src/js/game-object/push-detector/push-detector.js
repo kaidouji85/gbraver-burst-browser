@@ -1,5 +1,5 @@
 // @flow
-import * as THREE from 'three';
+import * as THREE from "three";
 import {isMeshOverlap} from "../../overlap/mesh-overlap";
 import type {MouseDownRaycaster} from "../../render/overlap-event/mouse-down-raycaster";
 import type {TouchStartRaycaster} from "../../render/overlap-event/touch-start-raycaster";
@@ -7,8 +7,37 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 
-/** パラメータ */
-type Param = {
+/** プッシュ検出 */
+export interface PushDetector {
+  /**
+   * デストラクタ
+   */
+  destructor(): void;
+
+  /**
+   * デバッグ用に当たり判定を表示する
+   *
+   * @param visible trueで当たり判定を表示する
+   */
+  setVisible(visible: boolean): void;
+
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return 取得結果
+   */
+  getObject3D(): typeof THREE.Object3D;
+
+  /**
+   * プッシュ通知
+   *
+   * @return 通知ストリーム
+   */
+  pushNotifier(): Stream<Event>;
+}
+
+/** SimplePushDetectorコンストラクタのパラメータ */
+type SimplePushDetectorParam = {
   /** 当たり判定のジオメトリー */
   geometry: typeof THREE.Geometry,
   /** ゲームオブジェクトアクション */
@@ -20,10 +49,10 @@ type Param = {
   visible?: boolean,
 };
 
-/** 押下判定オブジェクト */
-export class OverlapObject {
+/** プッシュ検出のシンプルな実装 */
+class SimplePushDetector implements PushDetector {
   #mesh: typeof THREE.Mesh;
-  #pushStart: StreamSource<Event>;
+  #push: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
 
   /**
@@ -31,14 +60,14 @@ export class OverlapObject {
    *
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: SimplePushDetectorParam) {
     const material = new THREE.MeshBasicMaterial({
       color: new THREE.Color('rgb(0, 255, 0)'),
       visible: param.visible ?? false,
     });
     this.#mesh = new THREE.Mesh(param.geometry, material);
 
-    this.#pushStart = createStreamSource();
+    this.#push = createStreamSource();
     this.#unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'mouseDownRaycaster') {
         this.#mouseDownRaycaster(action);
@@ -48,40 +77,26 @@ export class OverlapObject {
     });
   }
 
-  /** 
-   * デストラクタ
-   */
+  /** @override */
   destructor(): void {
     this.#mesh.geometry.dispose();
     this.#mesh.material.dispose();
     this.#unsubscriber.unsubscribe();
   }
 
-  /**
-   * デバッグ用に当たり判定を表示する
-   *
-   * @param visible trueで当たり判定を表示する
-   */
+  /** @override */
   setVisible(visible: boolean): void {
     this.#mesh.material.visible = visible;
   }
 
-  /** 
-   * シーンに追加するオブジェクトを取得する
-   * 
-   * @return 取得結果
-   */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#mesh;
   }
 
-  /**
-   * 押下開始通知
-   * 
-   * @return 通知ストリーム
-   */
-  pushStartNotifier(): Stream<Event> {
-    return this.#pushStart;
+  /** @override */
+  pushNotifier(): Stream<Event> {
+    return this.#push;
   }
 
   /** 
@@ -91,7 +106,7 @@ export class OverlapObject {
    */
   #mouseDownRaycaster(action: MouseDownRaycaster): void {
     if (isMeshOverlap(action.mouse.raycaster, this.#mesh)) {
-      this.#pushStart.next(action.event);
+      this.#push.next(action.event);
     }
   }
 
@@ -105,7 +120,37 @@ export class OverlapObject {
       .filter(v => isMeshOverlap(v.raycaster, this.#mesh));
     const isTouchOverlap = 0 < overlapTouches.length;
     if (isTouchOverlap) {
-      this.#pushStart.next(action.event);
+      this.#push.next(action.event);
     }
   }
+}
+
+/** 円形プッシュ検出生成のパラメータ */
+type CirclePushDetectorParam = {
+  /** 円半径 */
+  radius: number,
+  /** 円分割数 */
+  segments: number,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /**
+   * デバッグ用途で当たり判定を表示・非表示するフラグ
+   * trueで当たり判定を表示する
+   */
+  visible?: boolean,
+};
+
+/**
+ * 円形プッシュ検出を生成する
+ *
+ * @param param パラメータ
+ * @return プッシュ検出
+ */
+export function circlePushDetector(param: CirclePushDetectorParam): PushDetector {
+  const geometry = new THREE.CircleGeometry(param.radius, param.segments);
+  return new SimplePushDetector({
+    geometry: geometry,
+    gameObjectAction: param.gameObjectAction,
+    visible: param.visible
+  });
 }

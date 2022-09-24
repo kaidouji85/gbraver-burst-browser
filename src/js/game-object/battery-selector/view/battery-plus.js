@@ -5,8 +5,8 @@ import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {circleOverlap} from "../../overlap-object/circle-overlap";
-import type {OverlapObject} from "../../overlap-object/overlap-object";
+import type {PushDetector} from "../../push-detector/push-detector";
+import {circlePushDetector} from "../../push-detector/push-detector";
 import type {BatterySelectorModel} from "../model";
 import {canBatteryPlus} from "../model/can-battery-plus";
 
@@ -25,7 +25,7 @@ export class BatteryPlus {
   #group: typeof THREE.Group;
   #activeButton: SimpleImageMesh;
   #buttonDisabled: SimpleImageMesh;
-  #overlap: OverlapObject;
+  #pushDetector: PushDetector;
   #unsubscribers: Unsubscriber[];
 
   /**
@@ -42,15 +42,15 @@ export class BatteryPlus {
       .find(v => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED)?.image ?? new Image();
     this.#buttonDisabled = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: buttonDisabled, imageWidth: 176});
 
-    this.#overlap = circleOverlap({radius: 80, segments: 32, gameObjectAction: param.gameObjectAction});
+    this.#pushDetector = circlePushDetector({radius: 80, segments: 32, gameObjectAction: param.gameObjectAction});
 
     this.#group = new THREE.Group();
     this.#group.add(this.#activeButton.getObject3D());
     this.#group.add(this.#buttonDisabled.getObject3D());
-    this.#group.add(this.#overlap.getObject3D());
+    this.#group.add(this.#pushDetector.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushStartNotifier().subscribe(param.onPush)
+      this.#pushDetector.pushNotifier().subscribe(param.onPush)
     ];
   }
 
@@ -58,7 +58,7 @@ export class BatteryPlus {
   destructor(): void {
     this.#activeButton.destructor();
     this.#buttonDisabled.destructor();
-    this.#overlap.destructor();
+    this.#pushDetector.destructor();
     this.#unsubscribers.forEach(unsubscriber => {
       unsubscriber.unsubscribe();
     });
