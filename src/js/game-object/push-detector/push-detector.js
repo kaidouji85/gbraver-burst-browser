@@ -50,7 +50,7 @@ type SimplePushDetectorParam = {
 };
 
 /** 押下検出のシンプルな実装 */
-export class SimplePushDetector implements PushDetector {
+class SimplePushDetector implements PushDetector {
   #mesh: typeof THREE.Mesh;
   #pushStart: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
