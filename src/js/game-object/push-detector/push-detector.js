@@ -7,8 +7,37 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 
-/** パラメータ */
-type Param = {
+/** 押下検出 */
+export interface PushDetector {
+  /**
+   * デストラクタ
+   */
+  destructor(): void;
+
+  /**
+   * デバッグ用に当たり判定を表示する
+   *
+   * @param visible trueで当たり判定を表示する
+   */
+  setVisible(visible: boolean): void;
+
+  /**
+   * シーンに追加するオブジェクトを取得する
+   *
+   * @return 取得結果
+   */
+  getObject3D(): typeof THREE.Object3D;
+
+  /**
+   * 押下開始通知
+   *
+   * @return 通知ストリーム
+   */
+  pushStartNotifier(): Stream<Event>;
+}
+
+/** SimplePushDetectorコンストラクタのパラメータ */
+type SimplePushDetectorParam = {
   /** 当たり判定のジオメトリー */
   geometry: typeof THREE.Geometry,
   /** ゲームオブジェクトアクション */
@@ -20,8 +49,8 @@ type Param = {
   visible?: boolean,
 };
 
-/** 押下検出 */
-export class PushDetector {
+/** 押下検出のシンプルな実装 */
+export class SimplePushDetector implements PushDetector {
   #mesh: typeof THREE.Mesh;
   #pushStart: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
@@ -31,7 +60,7 @@ export class PushDetector {
    *
    * @param param パラメータ
    */
-  constructor(param: Param) {
+  constructor(param: SimplePushDetectorParam) {
     const material = new THREE.MeshBasicMaterial({
       color: new THREE.Color('rgb(0, 255, 0)'),
       visible: param.visible ?? false,
@@ -48,38 +77,24 @@ export class PushDetector {
     });
   }
 
-  /** 
-   * デストラクタ
-   */
+  /** @override */
   destructor(): void {
     this.#mesh.geometry.dispose();
     this.#mesh.material.dispose();
     this.#unsubscriber.unsubscribe();
   }
 
-  /**
-   * デバッグ用に当たり判定を表示する
-   *
-   * @param visible trueで当たり判定を表示する
-   */
+  /** @override */
   setVisible(visible: boolean): void {
     this.#mesh.material.visible = visible;
   }
 
-  /** 
-   * シーンに追加するオブジェクトを取得する
-   * 
-   * @return 取得結果
-   */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#mesh;
   }
 
-  /**
-   * 押下開始通知
-   * 
-   * @return 通知ストリーム
-   */
+  /** @override */
   pushStartNotifier(): Stream<Event> {
     return this.#pushStart;
   }
@@ -133,7 +148,7 @@ type CirclePushDetectorParam = {
  */
 export function circlePushDetector(param: CirclePushDetectorParam): PushDetector {
   const geometry = new THREE.CircleGeometry(param.radius, param.segments);
-  return new PushDetector({
+  return new SimplePushDetector({
     geometry: geometry,
     gameObjectAction: param.gameObjectAction,
     visible: param.visible

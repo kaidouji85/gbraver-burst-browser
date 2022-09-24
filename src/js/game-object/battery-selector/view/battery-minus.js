@@ -5,8 +5,8 @@ import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {circlePushDetector} from "../../push-detector/push-detector";
 import type {PushDetector} from "../../push-detector/push-detector";
+import {circlePushDetector} from "../../push-detector/push-detector";
 import type {BatterySelectorModel} from "../model";
 import {canBatteryMinus} from "../model/can-battery-minus";
 

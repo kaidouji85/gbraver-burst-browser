@@ -7,8 +7,8 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {TEXTURE_IDS} from "../../../resource/texture";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {circlePushDetector} from "../../push-detector/push-detector";
 import type {PushDetector} from "../../push-detector/push-detector";
+import {circlePushDetector} from "../../push-detector/push-detector";
 import type {BatterySelectorModel} from "../model";
 
 /** バッテリー現在値 最大フレーム数 */
