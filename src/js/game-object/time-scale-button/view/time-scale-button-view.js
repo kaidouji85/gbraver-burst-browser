@@ -7,8 +7,8 @@ import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {circleOverlap} from "../../overlap-object/circle-overlap";
-import type {OverlapObject} from "../../overlap-object/overlap-object";
+import {circlePushDetector} from "../../push-detector/push-detector";
+import type {PushDetector} from "../../push-detector/push-detector";
 import {HUDUIScale} from "../../scale";
 import type {TimeScaleButtonModel} from "../model/time-scale-button-model";
 
@@ -25,7 +25,7 @@ export class TimeScaleButtonView {
   #timeScale100: SimpleImageMesh;
   #timeScale050: SimpleImageMesh;
   #timeScale025: SimpleImageMesh;
-  #overlap: OverlapObject;
+  #overlap: PushDetector;
   #pushButton: StreamSource<void>;
   #unsubscribers: Unsubscriber[];
 
@@ -55,7 +55,7 @@ export class TimeScaleButtonView {
     this.#timeScale025 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale025, imageWidth: 256});
     this.#group.add(this.#timeScale025.getObject3D());
 
-    this.#overlap = circleOverlap({radius: 30, segments:32, gameObjectAction, visible: false});
+    this.#overlap = circlePushDetector({radius: 30, segments:32, gameObjectAction, visible: false});
     this.#group.add(this.#overlap.getObject3D());
 
     this.#unsubscribers = [

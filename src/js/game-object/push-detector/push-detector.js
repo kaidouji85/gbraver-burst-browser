@@ -1,5 +1,5 @@
 // @flow
-import * as THREE from 'three';
+import * as THREE from "three";
 import {isMeshOverlap} from "../../overlap/mesh-overlap";
 import type {MouseDownRaycaster} from "../../render/overlap-event/mouse-down-raycaster";
 import type {TouchStartRaycaster} from "../../render/overlap-event/touch-start-raycaster";
@@ -20,8 +20,8 @@ type Param = {
   visible?: boolean,
 };
 
-/** 押下判定オブジェクト */
-export class OverlapObject {
+/** 押下検出 */
+export class PushDetector {
   #mesh: typeof THREE.Mesh;
   #pushStart: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
@@ -108,4 +108,34 @@ export class OverlapObject {
       this.#pushStart.next(action.event);
     }
   }
+}
+
+/** 円形押下検出生成のパラメータ */
+type CirclePushDetectorParam = {
+  /** 円半径 */
+  radius: number,
+  /** 円分割数 */
+  segments: number,
+  /** ゲームオブジェクトアクション */
+  gameObjectAction: Stream<GameObjectAction>,
+  /**
+   * デバッグ用途で当たり判定を表示・非表示するフラグ
+   * trueで当たり判定を表示する
+   */
+  visible?: boolean,
+};
+
+/**
+ * 円形押下検出を生成する
+ *
+ * @param param パラメータ
+ * @return 押下検出
+ */
+export function circlePushDetector(param: CirclePushDetectorParam): PushDetector {
+  const geometry = new THREE.CircleGeometry(param.radius, param.segments);
+  return new PushDetector({
+    geometry: geometry,
+    gameObjectAction: param.gameObjectAction,
+    visible: param.visible
+  });
 }

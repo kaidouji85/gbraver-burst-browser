@@ -5,8 +5,8 @@ import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {circleOverlap} from "../../overlap-object/circle-overlap";
-import type {OverlapObject} from "../../overlap-object/overlap-object";
+import {circlePushDetector} from "../../push-detector/push-detector";
+import type {PushDetector} from "../../push-detector/push-detector";
 import type {BatterySelectorModel} from "../model";
 import {canBatteryPlus} from "../model/can-battery-plus";
 
@@ -25,7 +25,7 @@ export class BatteryPlus {
   #group: typeof THREE.Group;
   #activeButton: SimpleImageMesh;
   #buttonDisabled: SimpleImageMesh;
-  #overlap: OverlapObject;
+  #overlap: PushDetector;
   #unsubscribers: Unsubscriber[];
 
   /**
@@ -42,7 +42,7 @@ export class BatteryPlus {
       .find(v => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED)?.image ?? new Image();
     this.#buttonDisabled = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: buttonDisabled, imageWidth: 176});
 
-    this.#overlap = circleOverlap({radius: 80, segments: 32, gameObjectAction: param.gameObjectAction});
+    this.#overlap = circlePushDetector({radius: 80, segments: 32, gameObjectAction: param.gameObjectAction});
 
     this.#group = new THREE.Group();
     this.#group.add(this.#activeButton.getObject3D());
