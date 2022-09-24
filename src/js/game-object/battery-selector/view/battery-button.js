@@ -1,15 +1,14 @@
 // @flow
-
 import * as THREE from 'three';
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import {SimpleImageMesh} from "../../../mesh/simple-image-mesh";
 import type {Resources} from "../../../resource";
 import {CANVAS_IMAGE_IDS} from "../../../resource/canvas-image";
 import {TEXTURE_IDS} from "../../../resource/texture";
-import type {Stream} from "../../../stream/stream";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {GameObjectAction} from "../../action/game-object-action";
-import {ButtonOverlap} from "../../button-overlap/button-overlap";
-import {circleButtonOverlap} from "../../button-overlap/circle-button-overlap";
+import type {PushDetector} from "../../push-detector/push-detector";
+import {circlePushDetector} from "../../push-detector/push-detector";
 import type {BatterySelectorModel} from "../model";
 
 /** バッテリー現在値 最大フレーム数 */
@@ -32,10 +31,11 @@ type Param = {
 export class BatteryButton {
   #group: typeof THREE.Group;
   #button: SimpleImageMesh;
-  #overlap: ButtonOverlap;
+  #pushDetector: PushDetector;
   #attackLabel: SimpleImageMesh;
   #defenseLabel: SimpleImageMesh;
   #batteryValue: HorizontalAnimationMesh;
+  #unsubscribers: Unsubscriber[];
 
   /**
    * コンストラクタ
@@ -51,15 +51,8 @@ export class BatteryButton {
     this.#button.getObject3D().position.set(0, 0, -1);
     this.#group.add(this.#button.getObject3D());
 
-    this.#overlap = circleButtonOverlap({
-      radius: 200,
-      segments: 32,
-      gameObjectAction: param.gameObjectAction,
-      onButtonPush: event=> {
-        param.onPush(event);
-      }
-    });
-    this.#group.add(this.#overlap.getObject3D());
+    this.#pushDetector = circlePushDetector({radius: 200, segments: 32, gameObjectAction: param.gameObjectAction});
+    this.#group.add(this.#pushDetector.getObject3D());
 
     const attackLabel = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK)?.image ?? new Image();
@@ -78,15 +71,22 @@ export class BatteryButton {
     this.#batteryValue = new HorizontalAnimationMesh({texture: currentBattery, maxAnimation: BATTERY_VALUE_MAX_ANIMATION, width: 80, height: 80});
     this.#batteryValue.getObject3D().position.set(-130, -82, 0);
     this.#group.add(this.#batteryValue.getObject3D());
+
+    this.#unsubscribers = [
+      this.#pushDetector.pushNotifier().subscribe(param.onPush)
+    ];
   }
 
   /** デストラクタ */
   destructor(): void {
     this.#button.destructor();
-    this.#overlap.destructor();
+    this.#pushDetector.destructor();
     this.#attackLabel.destructor();
     this.#defenseLabel.destructor();
     this.#batteryValue.destructor();
+    this.#unsubscribers.forEach(unsubscriber => {
+      unsubscriber.unsubscribe();
+    });
   }
 
   /** モデルをビューに反映させる */
