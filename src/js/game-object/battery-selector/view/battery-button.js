@@ -31,7 +31,7 @@ type Param = {
 export class BatteryButton {
   #group: typeof THREE.Group;
   #button: SimpleImageMesh;
-  #overlap: PushDetector;
+  #pushDetector: PushDetector;
   #attackLabel: SimpleImageMesh;
   #defenseLabel: SimpleImageMesh;
   #batteryValue: HorizontalAnimationMesh;
@@ -51,8 +51,8 @@ export class BatteryButton {
     this.#button.getObject3D().position.set(0, 0, -1);
     this.#group.add(this.#button.getObject3D());
 
-    this.#overlap = circlePushDetector({radius: 200, segments: 32, gameObjectAction: param.gameObjectAction});
-    this.#group.add(this.#overlap.getObject3D());
+    this.#pushDetector = circlePushDetector({radius: 200, segments: 32, gameObjectAction: param.gameObjectAction});
+    this.#group.add(this.#pushDetector.getObject3D());
 
     const attackLabel = param.resources.canvasImages
       .find(v => v.id === CANVAS_IMAGE_IDS.BATTERY_LABEL_ATTACK)?.image ?? new Image();
@@ -73,14 +73,14 @@ export class BatteryButton {
     this.#group.add(this.#batteryValue.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushStartNotifier().subscribe(param.onPush)
+      this.#pushDetector.pushNotifier().subscribe(param.onPush)
     ];
   }
 
   /** デストラクタ */
   destructor(): void {
     this.#button.destructor();
-    this.#overlap.destructor();
+    this.#pushDetector.destructor();
     this.#attackLabel.destructor();
     this.#defenseLabel.destructor();
     this.#batteryValue.destructor();

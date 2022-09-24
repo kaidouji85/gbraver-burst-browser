@@ -7,7 +7,7 @@ import type {Stream, StreamSource, Unsubscriber} from "../../stream/stream";
 import {createStreamSource} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 
-/** 押下検出 */
+/** プッシュ検出 */
 export interface PushDetector {
   /**
    * デストラクタ
@@ -29,11 +29,11 @@ export interface PushDetector {
   getObject3D(): typeof THREE.Object3D;
 
   /**
-   * 押下開始通知
+   * プッシュ通知
    *
    * @return 通知ストリーム
    */
-  pushStartNotifier(): Stream<Event>;
+  pushNotifier(): Stream<Event>;
 }
 
 /** SimplePushDetectorコンストラクタのパラメータ */
@@ -49,10 +49,10 @@ type SimplePushDetectorParam = {
   visible?: boolean,
 };
 
-/** 押下検出のシンプルな実装 */
+/** プッシュ検出のシンプルな実装 */
 class SimplePushDetector implements PushDetector {
   #mesh: typeof THREE.Mesh;
-  #pushStart: StreamSource<Event>;
+  #push: StreamSource<Event>;
   #unsubscriber: Unsubscriber;
 
   /**
@@ -67,7 +67,7 @@ class SimplePushDetector implements PushDetector {
     });
     this.#mesh = new THREE.Mesh(param.geometry, material);
 
-    this.#pushStart = createStreamSource();
+    this.#push = createStreamSource();
     this.#unsubscriber = param.gameObjectAction.subscribe(action => {
       if (action.type === 'mouseDownRaycaster') {
         this.#mouseDownRaycaster(action);
@@ -95,8 +95,8 @@ class SimplePushDetector implements PushDetector {
   }
 
   /** @override */
-  pushStartNotifier(): Stream<Event> {
-    return this.#pushStart;
+  pushNotifier(): Stream<Event> {
+    return this.#push;
   }
 
   /** 
@@ -106,7 +106,7 @@ class SimplePushDetector implements PushDetector {
    */
   #mouseDownRaycaster(action: MouseDownRaycaster): void {
     if (isMeshOverlap(action.mouse.raycaster, this.#mesh)) {
-      this.#pushStart.next(action.event);
+      this.#push.next(action.event);
     }
   }
 
@@ -120,12 +120,12 @@ class SimplePushDetector implements PushDetector {
       .filter(v => isMeshOverlap(v.raycaster, this.#mesh));
     const isTouchOverlap = 0 < overlapTouches.length;
     if (isTouchOverlap) {
-      this.#pushStart.next(action.event);
+      this.#push.next(action.event);
     }
   }
 }
 
-/** 円形押下検出生成のパラメータ */
+/** 円形プッシュ検出生成のパラメータ */
 type CirclePushDetectorParam = {
   /** 円半径 */
   radius: number,
@@ -141,10 +141,10 @@ type CirclePushDetectorParam = {
 };
 
 /**
- * 円形押下検出を生成する
+ * 円形プッシュ検出を生成する
  *
  * @param param パラメータ
- * @return 押下検出
+ * @return プッシュ検出
  */
 export function circlePushDetector(param: CirclePushDetectorParam): PushDetector {
   const geometry = new THREE.CircleGeometry(param.radius, param.segments);

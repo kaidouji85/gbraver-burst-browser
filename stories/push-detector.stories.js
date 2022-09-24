@@ -8,11 +8,11 @@ export default {
 
 export const circle = (): HTMLElement => {
   const stub = new HUDGameObjectStub(({gameObjectAction}) => {
-    const overlap = circlePushDetector({radius: 32, segments: 32, gameObjectAction, visible: true});
-    overlap.pushStartNotifier().subscribe(event => {
+    const pushDetector = circlePushDetector({radius: 32, segments: 32, gameObjectAction, visible: true});
+    pushDetector.pushNotifier().subscribe(event => {
       console.log('push start', event);
     });
-    return [overlap.getObject3D()];
+    return [pushDetector.getObject3D()];
   });
   stub.start();
   return stub.domElement();

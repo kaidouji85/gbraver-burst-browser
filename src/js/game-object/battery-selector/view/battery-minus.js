@@ -25,7 +25,7 @@ export class BatteryMinus {
   #group: typeof THREE.Group;
   #activeButton: SimpleImageMesh;
   #buttonDisabled: SimpleImageMesh;
-  #overlap: PushDetector;
+  #pushDetector: PushDetector;
   #unsubscribers: Unsubscriber[];
 
   /**
@@ -42,15 +42,15 @@ export class BatteryMinus {
       .find(v => v.id === CANVAS_IMAGE_IDS.SMALL_BUTTON_DISABLED)?.image ?? new Image();
     this.#buttonDisabled = new SimpleImageMesh({canvasSize: 256, meshSize: 256, image: buttonDisabled, imageWidth: 176});
 
-    this.#overlap = circlePushDetector({radius: 80, segments: 32, gameObjectAction: param.gameObjectAction});
+    this.#pushDetector = circlePushDetector({radius: 80, segments: 32, gameObjectAction: param.gameObjectAction});
 
     this.#group = new THREE.Group();
     this.#group.add(this.#activeButton.getObject3D());
     this.#group.add(this.#buttonDisabled.getObject3D());
-    this.#group.add(this.#overlap.getObject3D());
+    this.#group.add(this.#pushDetector.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushStartNotifier().subscribe(param.onPush)
+      this.#pushDetector.pushNotifier().subscribe(param.onPush)
     ];
   }
 
@@ -58,7 +58,7 @@ export class BatteryMinus {
   destructor(): void {
     this.#activeButton.destructor();
     this.#buttonDisabled.destructor();
-    this.#overlap.destructor();
+    this.#pushDetector.destructor();
     this.#unsubscribers.forEach(unsubscriber => {
       unsubscriber.unsubscribe();
     });

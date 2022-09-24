@@ -25,7 +25,7 @@ export class TimeScaleButtonView {
   #timeScale100: SimpleImageMesh;
   #timeScale050: SimpleImageMesh;
   #timeScale025: SimpleImageMesh;
-  #overlap: PushDetector;
+  #pushDetector: PushDetector;
   #pushButton: StreamSource<void>;
   #unsubscribers: Unsubscriber[];
 
@@ -55,11 +55,11 @@ export class TimeScaleButtonView {
     this.#timeScale025 = new SimpleImageMesh({canvasSize: CANVAS_SIZE, meshSize: MESH_SIZE, image: timeScale025, imageWidth: 256});
     this.#group.add(this.#timeScale025.getObject3D());
 
-    this.#overlap = circlePushDetector({radius: 30, segments:32, gameObjectAction, visible: false});
-    this.#group.add(this.#overlap.getObject3D());
+    this.#pushDetector = circlePushDetector({radius: 30, segments:32, gameObjectAction, visible: false});
+    this.#group.add(this.#pushDetector.getObject3D());
 
     this.#unsubscribers = [
-      this.#overlap.pushStartNotifier().subscribe(() => {
+      this.#pushDetector.pushNotifier().subscribe(() => {
         this.#pushButton.next();
       })
     ];
@@ -73,7 +73,7 @@ export class TimeScaleButtonView {
     this.#timeScale100.destructor();
     this.#timeScale050.destructor();
     this.#timeScale025.destructor();
-    this.#overlap.destructor();
+    this.#pushDetector.destructor();
     this.#unsubscribers.forEach(unsubscriber => {
       unsubscriber.unsubscribe();
     });
