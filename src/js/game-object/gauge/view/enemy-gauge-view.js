@@ -41,11 +41,11 @@ export class EnemyGaugeView implements GaugeView {
     this.#group.add(this.#hpBar.getObject3D());
 
     this.#hpNumber = new HpNumber(resources);
-    this.#hpNumber.getObject3D().position.set(10, 52, 1);
+    this.#hpNumber.getObject3D().position.set(-145, 52, 1);
     this.#group.add(this.#hpNumber.getObject3D());
 
     this.#maxHpNumber = new HpNumber(resources);
-    this.#maxHpNumber.getObject3D().position.set(-145, 52, 1);
+    this.#maxHpNumber.getObject3D().position.set(10, 52, 1);
     this.#group.add(this.#maxHpNumber.getObject3D());
     
     this.#batteryGauge = new EnemyBatteryGauge(resources);
