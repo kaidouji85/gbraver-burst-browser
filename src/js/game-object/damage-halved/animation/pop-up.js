@@ -3,8 +3,8 @@ import {Animate} from "../../../animation/animate";
 import {delay} from "../../../animation/delay";
 import {process} from '../../../animation/process';
 import {tween} from "../../../animation/tween";
-import type {DamageDecreaseModel} from "../model/damage-decrease-model";
-import {DamageDecreaseSounds} from "../sounds/damage-decrease-sounds";
+import type {DamageHalvedModel} from "../model/damage-halved-model";
+import {DamageHalvedSounds} from "../sounds/damage-halved-sounds";
 
 /**
  * ポップアップ
@@ -13,7 +13,7 @@ import {DamageDecreaseSounds} from "../sounds/damage-decrease-sounds";
  * @param sounds 効果音
  * @return アニメーション
  */
-export function popUp(model: DamageDecreaseModel, sounds: DamageDecreaseSounds): Animate {
+export function popUp(model: DamageHalvedModel, sounds: DamageHalvedSounds): Animate {
   return process(() => {
     model.opacity = 0;
     model.scale = 1.2;
