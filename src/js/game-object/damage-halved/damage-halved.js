@@ -1,5 +1,4 @@
 // @flow
-
 import * as THREE from 'three';
 import {Animate} from "../../animation/animate";
 import type {PreRender} from "../../game-loop/pre-render";
@@ -7,18 +6,16 @@ import type {Resources} from "../../resource";
 import type {Stream, Unsubscriber} from "../../stream/stream";
 import type {GameObjectAction} from "../action/game-object-action";
 import {popUp} from "./animation/pop-up";
-import type {DamageDecreaseModel} from "./model/damage-decrease-model";
+import type {DamageHalvedModel} from "./model/damage-halved-model";
 import {createInitialValue} from "./model/initial-value";
-import {DamageDecreaseSounds} from "./sounds/damage-decrease-sounds";
-import type {DamageDecreaseView} from "./view/damage-decrease-view";
+import {DamageHalvedSounds} from "./sounds/damage-halved-sounds";
+import type {DamageHalvedView} from "./view/damage-halved-view";
 
-/**
- * ダメージ減少
- */
-export class DamageDecrease {
-  #model: DamageDecreaseModel;
-  #view: DamageDecreaseView;
-  #sounds: DamageDecreaseSounds;
+/** ダメージ半減 */
+export class DamageHalved {
+  #model: DamageHalvedModel;
+  #view: DamageHalvedView;
+  #sounds: DamageHalvedSounds;
   #unsubscriber: Unsubscriber;
 
   /**
@@ -28,10 +25,10 @@ export class DamageDecrease {
    * @param resources リソース管理オブジェクト
    * @param gameObjectAction ゲームオブジェクトアクション
    */
-  constructor(view: DamageDecreaseView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
+  constructor(view: DamageHalvedView, resources: Resources, gameObjectAction: Stream<GameObjectAction>) {
     this.#model = createInitialValue();
     this.#view = view;
-    this.#sounds = new DamageDecreaseSounds(resources);
+    this.#sounds = new DamageHalvedSounds(resources);
     this.#unsubscriber = gameObjectAction.subscribe(action => {
       if (action.type === 'Update') {
         this.#onUpdate();
@@ -41,7 +38,9 @@ export class DamageDecrease {
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void {
     this.#view.destructor();
     this.#unsubscriber.unsubscribe();

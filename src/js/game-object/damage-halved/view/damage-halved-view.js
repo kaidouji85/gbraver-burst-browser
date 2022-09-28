@@ -1,22 +1,26 @@
 // @flow
 
 import * as THREE from 'three';
-import type {DamageDecreaseModel} from "../model/damage-decrease-model";
+import type {DamageHalvedModel} from "../model/damage-halved-model";
 
-/**
- * ポップアップ ビュー
- */
-export interface DamageDecreaseView {
-  /** デストラクタ相当の処理 */
+/** ダメージ半減ビュー */
+export interface DamageHalvedView {
+  /**
+   * デストラクタ相当の処理
+   */
   destructor(): void;
 
   /**
    * モデルをビューに反映させる
+   *
+   * @param model モデル
    */
-  engage(model: DamageDecreaseModel): void;
+  engage(model: DamageHalvedModel): void;
 
   /**
    * カメラの真正面を向く
+   *
+   * @param camera カメラ
    */
   lookAt(camera: typeof THREE.Camera): void;
 

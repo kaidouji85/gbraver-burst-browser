@@ -11,8 +11,8 @@ import {enemyBatteryNumber, playerBatteryNumber} from "../../../../../game-objec
 import {BatteryNumber} from "../../../../../game-object/battery-number/battery-number";
 import {enemyContinuousAttack, playerContinuousAttack} from "../../../../../game-object/continuous-attack";
 import {ContinuousAttackIndicator} from "../../../../../game-object/continuous-attack/continuous-attack-indicator";
-import {enemyDamageDecrease, playerDamageDecrease} from "../../../../../game-object/damage-decrease";
-import {DamageDecrease} from "../../../../../game-object/damage-decrease/damage-decrease";
+import {enemyDamageHalved, playerDamageHalved} from "../../../../../game-object/damage-halved";
+import {DamageHalved} from "../../../../../game-object/damage-halved/damage-halved";
 import {enemyDamageIndicator, playerDamageIndicator} from "../../../../../game-object/damage-indicator";
 import {DamageIndicator} from "../../../../../game-object/damage-indicator/damage-indicator";
 import {enemyLightning, playerLightning} from "../../../../../game-object/hitmark/lightning";
@@ -41,7 +41,7 @@ export interface TDPlayerField {
     powerUp: PowerUp,
     reflect: ReflectIndicator,
     continuousAttack: ContinuousAttackIndicator,
-    damageDecrease: DamageDecrease,
+    damageHalved: DamageHalved,
     batteryEnchantment: BatteryEnchantment,
   };
   batteryNumber: BatteryNumber;
@@ -80,7 +80,7 @@ export class TDPlayerImpl implements TDPlayer {
     powerUp: PowerUp,
     reflect: ReflectIndicator,
     continuousAttack: ContinuousAttackIndicator,
-    damageDecrease: DamageDecrease,
+    damageHalved: DamageHalved,
     batteryEnchantment: BatteryEnchantment,
   };
   batteryNumber: BatteryNumber;
@@ -110,7 +110,7 @@ export class TDPlayerImpl implements TDPlayer {
     this.armdozerEffects.powerUp.destructor();
     this.armdozerEffects.reflect.destructor();
     this.armdozerEffects.continuousAttack.destructor();
-    this.armdozerEffects.damageDecrease.destructor();
+    this.armdozerEffects.damageHalved.destructor();
     this.armdozerEffects.batteryEnchantment.destructor();
     this.recoverBattery.destructor();
   }
@@ -127,7 +127,7 @@ export class TDPlayerImpl implements TDPlayer {
       this.armdozerEffects.powerUp.getObject3D(),
       this.armdozerEffects.reflect.getObject3D(),
       this.armdozerEffects.continuousAttack.getObject3D(),
-      this.armdozerEffects.damageDecrease.getObject3D(),
+      this.armdozerEffects.damageHalved.getObject3D(),
       this.armdozerEffects.batteryEnchantment.getObject3D(),
       this.batteryNumber.getObject3D(),
       this.batteryCorrect.getObject3D(),
@@ -156,7 +156,7 @@ export function playerTDObjects(resources: Resources, state: Player, gameObjectA
       powerUp: playerPowerUp(resources, gameObjectAction),
       reflect: playerReflectIndicator(resources, gameObjectAction),
       continuousAttack: playerContinuousAttack(resources, gameObjectAction),
-      damageDecrease: playerDamageDecrease(resources, gameObjectAction),
+      damageHalved: playerDamageHalved(resources, gameObjectAction),
       batteryEnchantment: playerBatteryEnchantment(resources, gameObjectAction),
     },
     batteryNumber: playerBatteryNumber(resources, gameObjectAction),
@@ -185,7 +185,7 @@ export function enemyTDObject(resources: Resources, state: Player, gameObjectAct
       powerUp: enemyPowerUp(resources, gameObjectAction),
       reflect: enemyReflectIndicator(resources, gameObjectAction),
       continuousAttack: enemyContinuousAttack(resources, gameObjectAction),
-      damageDecrease: enemyDamageDecrease(resources, gameObjectAction),
+      damageHalved: enemyDamageHalved(resources, gameObjectAction),
       batteryEnchantment: enemyBatteryEnchantment(resources, gameObjectAction),
     },
     batteryNumber: enemyBatteryNumber(resources, gameObjectAction),

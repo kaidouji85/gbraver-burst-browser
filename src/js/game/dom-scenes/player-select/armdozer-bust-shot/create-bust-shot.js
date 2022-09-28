@@ -1,7 +1,7 @@
 // @flow
 
 import type {ArmDozerId} from "gbraver-burst-core";
-import {ArmDozerIdList} from "gbraver-burst-core";
+import {ArmDozerIds} from "gbraver-burst-core";
 import type {Resources} from "../../../../resource";
 import {PathIds} from "../../../../resource/path";
 import {ArmdozerBustShot, CLASS_NAME_PREFIX} from "./amrodzer-bust-shot";
@@ -15,13 +15,13 @@ import {ArmdozerBustShot, CLASS_NAME_PREFIX} from "./amrodzer-bust-shot";
  */
 export function createBustShot(armdozerId: ArmDozerId, resources: Resources): ArmdozerBustShot {
   switch (armdozerId) {
-    case ArmDozerIdList.SHIN_BRAVER:
+    case ArmDozerIds.SHIN_BRAVER:
       return shinBraverBustShot(resources);
-    case ArmDozerIdList.NEO_LANDOZER:
+    case ArmDozerIds.NEO_LANDOZER:
       return neoLandozerBustShot(resources);
-    case ArmDozerIdList.LIGHTNING_DOZER:
+    case ArmDozerIds.LIGHTNING_DOZER:
       return lightningDozerBustShot(resources);
-    case ArmDozerIdList.WING_DOZER:
+    case ArmDozerIds.WING_DOZER:
       return wingDozerBustShot(resources);
     default:
       return shinBraverBustShot(resources);

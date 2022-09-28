@@ -1,7 +1,7 @@
 // @flow
 
 import type {Player} from "gbraver-burst-core";
-import {ArmDozerIdList} from "gbraver-burst-core";
+import {ArmDozerIds} from "gbraver-burst-core";
 import type {GameObjectAction} from "../../../../../../game-object/action/game-object-action";
 import type {Resources} from "../../../../../../resource";
 import type {Stream} from "../../../../../../stream/stream";
@@ -22,13 +22,13 @@ import {enemyWingDozerHUD, playerWingDozerHUD} from "./wing-dozer";
  */
 export function playerArmdozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
   switch (state.armdozer.id) {
-    case ArmDozerIdList.SHIN_BRAVER:
+    case ArmDozerIds.SHIN_BRAVER:
       return playerShinBraverHUD(resources, gameObjectAction, state);
-    case ArmDozerIdList.NEO_LANDOZER:
+    case ArmDozerIds.NEO_LANDOZER:
       return playerNeoLandozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIdList.LIGHTNING_DOZER:
+    case ArmDozerIds.LIGHTNING_DOZER:
       return playerLightningDozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIdList.WING_DOZER:
+    case ArmDozerIds.WING_DOZER:
       return playerWingDozerHUD(resources, gameObjectAction, state);
     default:
       return new EmptyHUDArmdozer(state);
@@ -45,13 +45,13 @@ export function playerArmdozerHUD(resources: Resources, gameObjectAction: Stream
  */
 export function enemyArmdozerHUD(resources: Resources, gameObjectAction: Stream<GameObjectAction>, state: Player): HUDArmdozerObjects {
   switch (state.armdozer.id) {
-    case ArmDozerIdList.SHIN_BRAVER:
+    case ArmDozerIds.SHIN_BRAVER:
       return enemyShinBraverHUD(resources, gameObjectAction, state);
-    case ArmDozerIdList.NEO_LANDOZER:
+    case ArmDozerIds.NEO_LANDOZER:
       return enemyNeoLandozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIdList.LIGHTNING_DOZER:
+    case ArmDozerIds.LIGHTNING_DOZER:
       return enemyLightningDozerHUD(resources, gameObjectAction, state);
-    case ArmDozerIdList.WING_DOZER:
+    case ArmDozerIds.WING_DOZER:
       return enemyWingDozerHUD(resources, gameObjectAction, state);
     default:
       return new EmptyHUDArmdozer(state);
