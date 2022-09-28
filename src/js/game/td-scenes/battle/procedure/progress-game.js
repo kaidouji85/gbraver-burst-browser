@@ -1,6 +1,5 @@
 // @flow
-import type {Command, GameState} from "gbraver-burst-core";
-import type {GameEnd} from "gbraver-burst-core/lib/effect/game-end/game-end";
+import type {Command, GameEnd, GameState} from "gbraver-burst-core";
 import {fadeOut, stop} from "../../../../bgm/bgm-operators";
 import {animationPlayer} from "../animation-player";
 import {stateAnimation, stateHistoryAnimation} from "../animation/state-history";

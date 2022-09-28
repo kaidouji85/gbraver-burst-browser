@@ -1,6 +1,5 @@
 // @flow
-import type {PilotSkill} from "gbraver-burst-core";
-import type {DamageHalvedSkill} from "gbraver-burst-core/lib/player/pilot"; // TODO gbraver-burst-coreのrootでexportする
+import type {DamageHalvedSkill, PilotSkill} from "gbraver-burst-core";
 import {all} from "../../../../../../animation/all";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
