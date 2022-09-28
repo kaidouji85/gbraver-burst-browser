@@ -98,7 +98,7 @@ export const TEXTURE_IDS = {
   POWER_UP: 'POWER_UP',
   REFLECT: 'REFLECT',
   CONTINUOUS_ATTACK: 'CONTINUOUS_ATTACK',
-  DAMAGE_DECREASE: 'DAMAGE_DECREASE',
+  DAMAGE_HALVED: 'DAMAGE_HALVED',
   BATTERY_ENCHANTMENT: 'BATTERY_ENCHANTMENT',
   WIN: 'WIN',
   LOSE: 'LOSE',
@@ -442,8 +442,8 @@ export const TEXTURE_CONFIGS: TextureConfig[] = [
     path: 'effect-label/continuous-attack.webp',
   },
   {
-    id: TEXTURE_IDS.DAMAGE_DECREASE,
-    path: 'effect-label/damage-decrease.webp',
+    id: TEXTURE_IDS.DAMAGE_HALVED,
+    path: 'effect-label/damage-halved.webp',
   },
   {
     id: TEXTURE_IDS.BATTERY_ENCHANTMENT,

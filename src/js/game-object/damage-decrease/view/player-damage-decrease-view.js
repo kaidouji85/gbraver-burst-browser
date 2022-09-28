@@ -26,7 +26,7 @@ export class PlayerDamageDecreaseView implements DamageDecreaseView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const playerTurn = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_DECREASE)
+    const playerTurn = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_HALVED)
       ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
