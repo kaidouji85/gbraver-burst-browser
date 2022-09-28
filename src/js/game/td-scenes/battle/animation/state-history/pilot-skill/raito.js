@@ -52,7 +52,7 @@ function raitoDamageHalved(param: RaitoAnimationParamX<DamageHalvedSkill>): Anim
     .chain(delay(800))
     .chain(param.pilot.cutIn.hidden())
     .chain(delay(200))
-    .chain(param.invokerTD.armdozerEffects.damageDecrease.popUp())
+    .chain(param.invokerTD.armdozerEffects.damageHalved.popUp())
     .chain(all(
       toInitial(param.tdCamera, 500),
       param.tdObjects.skyBrightness.brightness(1, 500),
