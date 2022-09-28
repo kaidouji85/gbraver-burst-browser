@@ -1,12 +1,11 @@
 // @flow
 import type {
   BatteryEnchantmentSkill,
-  BuffPowerSkill,
-  DamageDecreaseSkill,
+  BuffPowerSkill, 
   PilotSkill,
   RecoverBatterySkill
 } from 'gbraver-burst-core';
-import type { DamageHalvedSkill } from "gbraver-burst-core/lib/player/pilot";
+import type {DamageHalvedSkill} from "gbraver-burst-core/lib/player/pilot";
 
 /**
  * パイロットスキルのテンプレート

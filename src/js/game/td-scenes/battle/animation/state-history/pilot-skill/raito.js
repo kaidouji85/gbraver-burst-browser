@@ -1,5 +1,6 @@
 // @flow
-import type {DamageDecreaseSkill, PilotSkill} from "gbraver-burst-core";
+import type {PilotSkill} from "gbraver-burst-core";
+import type {DamageHalvedSkill} from "gbraver-burst-core/lib/player/pilot"; // TODO gbraver-burst-coreのrootでexportする
 import {all} from "../../../../../../animation/all";
 import {Animate} from "../../../../../../animation/animate";
 import {delay, empty} from "../../../../../../animation/delay";
@@ -25,21 +26,22 @@ export type RaitoAnimationParam = RaitoAnimationParamX<PilotSkill>;
  * @return アニメーション
  */
 export function raitoAnimation(param: RaitoAnimationParam): Animate {
-  if (param.skill.type === 'DamageDecreaseSkill') {
-    const skill: DamageDecreaseSkill = param.skill;
-    return raitoDamageDecrease({...param, skill});
+  if (param.skill.type === 'DamageHalvedSkill') {
+    const skill: DamageHalvedSkill = param.skill;
+    return raitoDamageHalved({...param, skill});
   }
 
   return empty();
 }
 
+// TODO ダメージ半減画像を追加する
 /**
- * ライト ダメージ減少 アニメーション
+ * ライト ダメージ半減 アニメーション
  *
  * @param param パラメータ
  * @return アニメーション
  */
-function raitoDamageDecrease(param: RaitoAnimationParamX<DamageDecreaseSkill>): Animate {
+function raitoDamageHalved(param: RaitoAnimationParamX<DamageHalvedSkill>): Animate {
   return  all(
     param.pilot.cutIn.show(),
     track(param.tdCamera, param.invokerSprite.getObject3D().position.x, 500),
