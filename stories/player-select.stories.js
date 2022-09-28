@@ -1,6 +1,6 @@
 // @flow
 
-import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
+import {ArmDozerIds, PilotIds} from "gbraver-burst-core";
 import {PlayerSelect} from "../src/js/game/dom-scenes/player-select";
 import {ArmdozerSelector} from "../src/js/game/dom-scenes/player-select/armdozer-selector";
 import {PilotSelector} from "../src/js/game/dom-scenes/player-select/pilot-selector";
@@ -27,12 +27,12 @@ export const pilotIcon: DOMStubStory = domStub(resources => {
 
 export const armdozerSelector: DOMStubStory = domStub(resources => {
   const armdozerIds = [
-    ArmDozerIdList.NEO_LANDOZER,
-    ArmDozerIdList.SHIN_BRAVER,
-    ArmDozerIdList.WING_DOZER,
-    ArmDozerIdList.LIGHTNING_DOZER,
+    ArmDozerIds.NEO_LANDOZER,
+    ArmDozerIds.SHIN_BRAVER,
+    ArmDozerIds.WING_DOZER,
+    ArmDozerIds.LIGHTNING_DOZER,
   ];
-  const component = new ArmdozerSelector(resources, armdozerIds, ArmDozerIdList.SHIN_BRAVER);
+  const component = new ArmdozerSelector(resources, armdozerIds, ArmDozerIds.SHIN_BRAVER);
   return component.getRootHTMLElement();
 });
 
