@@ -1,7 +1,7 @@
 // @flow
 
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
-import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
+import {ArmDozerIds, PilotIds} from "gbraver-burst-core";
 
 /**
  * アームドーザの専用パイロットを取得する
@@ -11,13 +11,13 @@ import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
  */
 export function getDedicatedPilot(armdozerId: ArmDozerId): PilotId {
   switch(armdozerId) {
-    case ArmDozerIdList.SHIN_BRAVER:
+    case ArmDozerIds.SHIN_BRAVER:
       return PilotIds.SHINYA;
-    case ArmDozerIdList.NEO_LANDOZER:
+    case ArmDozerIds.NEO_LANDOZER:
       return PilotIds.GAI;
-    case ArmDozerIdList.LIGHTNING_DOZER:
+    case ArmDozerIds.LIGHTNING_DOZER:
       return PilotIds.RAITO;
-    case ArmDozerIdList.WING_DOZER:
+    case ArmDozerIds.WING_DOZER:
       return PilotIds.TSUBASA;
     default:
       return PilotIds.SHINYA;

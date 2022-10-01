@@ -1,6 +1,6 @@
 // @flow
 
-import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
+import {ArmDozerIds, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import {canBeatDown} from "./can-beat-down";
 import type {NPC} from "./npc";
 import type {SimpleRoutine} from "./simple-npc";
@@ -93,7 +93,7 @@ const defenseRoutine: SimpleRoutine = data => {
  * @return NPC
  */
 export function veryHardWingDozerNPC(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.WING_DOZER) ?? ArmDozers[0];
+  const armdozer = ArmDozers.find(v => v.id === ArmDozerIds.WING_DOZER) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, attackRoutine, defenseRoutine);
 }

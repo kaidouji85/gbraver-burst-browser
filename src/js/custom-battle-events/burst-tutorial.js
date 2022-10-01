@@ -1,5 +1,5 @@
 // @flow
-import type {GameState} from "gbraver-burst-core/lib/state/game-state";
+import type {GameState} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,

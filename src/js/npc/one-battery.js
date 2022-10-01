@@ -1,5 +1,5 @@
 // @flow
-import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
+import {ArmDozerIds, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import type {NPC} from "./npc";
 import type {SimpleRoutine} from "./simple-npc";
 import {SimpleNPC} from "./simple-npc";
@@ -25,7 +25,7 @@ const oneBatteryRoutine: SimpleRoutine = data => {
  * @return NPC
  */
 export function oneBatteryNeoLandozerNPC(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.NEO_LANDOZER) ?? ArmDozers[0];
+  const armdozer = ArmDozers.find(v => v.id === ArmDozerIds.NEO_LANDOZER) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === PilotIds.GAI) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
 }
@@ -36,7 +36,7 @@ export function oneBatteryNeoLandozerNPC(): NPC {
  * @return NPC
  */
 export function oneBatteryShinBraverNPC(): NPC {
-  const armdozer = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
+  const armdozer = ArmDozers.find(v => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
   const pilot = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
   return new SimpleNPC(armdozer, pilot, oneBatteryRoutine, oneBatteryRoutine);
 }

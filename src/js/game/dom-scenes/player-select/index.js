@@ -1,6 +1,6 @@
 // @flow
 import type {ArmDozerId, PilotId} from "gbraver-burst-core";
-import {ArmDozerIdList, PilotIds} from "gbraver-burst-core";
+import {ArmDozerIds, PilotIds} from "gbraver-burst-core";
 import type {Resources} from "../../../resource";
 import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
 import {createStreamSource} from "../../../stream/stream";
@@ -78,10 +78,10 @@ export class PlayerSelect implements DOMScene {
    */
   constructor(resources: Resources) {
     const armDozerIds = [
-      ArmDozerIdList.SHIN_BRAVER,
-      ArmDozerIdList.WING_DOZER,
-      ArmDozerIdList.NEO_LANDOZER,
-      ArmDozerIdList.LIGHTNING_DOZER,
+      ArmDozerIds.SHIN_BRAVER,
+      ArmDozerIds.WING_DOZER,
+      ArmDozerIds.NEO_LANDOZER,
+      ArmDozerIds.LIGHTNING_DOZER,
     ];
     const pilotIds = [
       PilotIds.SHINYA,
@@ -89,7 +89,7 @@ export class PlayerSelect implements DOMScene {
       PilotIds.GAI,
       PilotIds.RAITO,
     ];
-    this.#armdozerId = ArmDozerIdList.SHIN_BRAVER
+    this.#armdozerId = ArmDozerIds.SHIN_BRAVER
     this.#pilotId = PilotIds.SHINYA;
 
     this.#playerDecide = createStreamSource();

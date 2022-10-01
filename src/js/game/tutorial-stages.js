@@ -1,6 +1,6 @@
 // @flow
 import type {Player} from "gbraver-burst-core";
-import {ArmDozerIdList, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
+import {ArmDozerIds, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import {createBatterySystemTutorialEvent} from "../custom-battle-events/battery-system-tutorial";
 import {createBurstTutorialEvent} from "../custom-battle-events/burst-tutorial";
 import {createZeroDefenseTutorialEvent} from "../custom-battle-events/zero-defense-tutorial";
@@ -40,7 +40,7 @@ export type TutorialStage = {
 };
 
 /** シンブレイバー */
-const shinBraver = ArmDozers.find(v => v.id === ArmDozerIdList.SHIN_BRAVER) ?? ArmDozers[0];
+const shinBraver = ArmDozers.find(v => v.id === ArmDozerIds.SHIN_BRAVER) ?? ArmDozers[0];
 /** シンヤ */
 const shinya = Pilots.find(v => v.id === PilotIds.SHINYA) ?? Pilots[0];
 

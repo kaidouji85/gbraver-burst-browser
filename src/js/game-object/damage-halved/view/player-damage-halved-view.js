@@ -1,5 +1,4 @@
 // @flow
-
 import * as THREE from "three";
 import {HorizontalAnimationMesh} from "../../../mesh/horizontal-animation";
 import type {Resources} from "../../../resource";
@@ -9,15 +8,13 @@ import {
   ARMDOZER_EFFECT_STANDARD_Y,
   ARMDOZER_EFFECT_STANDARD_Z
 } from "../../armdozer/position";
-import type {DamageDecreaseModel} from "../model/damage-decrease-model";
-import type {DamageDecreaseView} from "./damage-decrease-view";
+import type {DamageHalvedModel} from "../model/damage-halved-model";
+import type {DamageHalvedView} from "./damage-halved-view";
 
 export const MESH_SIZE = 300;
 
-/**
- * プレイヤー ダメージ減少 ビュー
- */
-export class PlayerDamageDecreaseView implements DamageDecreaseView {
+/**プレイヤー ダメージ半減 ビュー*/
+export class PlayerDamageHalvedView implements DamageHalvedView {
   #mesh: HorizontalAnimationMesh;
 
   /**
@@ -26,7 +23,7 @@ export class PlayerDamageDecreaseView implements DamageDecreaseView {
    * @param resources リソース管理オブジェクト
    */
   constructor(resources: Resources) {
-    const playerTurn = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_DECREASE)
+    const playerTurn = resources.textures.find(v => v.id === TEXTURE_IDS.DAMAGE_HALVED)
       ?.texture ?? new THREE.Texture();
     this.#mesh = new HorizontalAnimationMesh({
       texture: playerTurn,
@@ -36,26 +33,18 @@ export class PlayerDamageDecreaseView implements DamageDecreaseView {
     });
   }
 
-  /** デストラクタ相当の処理 */
+  /** @override */
   destructor(): void {
     this.#mesh.destructor();
   }
 
-  /**
-   * シーンに追加するオブジェクトを取得する
-   *
-   * @return シーンに追加するオブジェクト
-   */
+  /** @override */
   getObject3D(): typeof THREE.Object3D {
     return this.#mesh.getObject3D();
   }
 
-  /**
-   * モデルをビューに反映させる
-   *
-   * @param model モデル
-   */
-  engage(model: DamageDecreaseModel): void {
+  /** @override */
+  engage(model: DamageHalvedModel): void {
     const target = this.#mesh.getObject3D();
 
     this.#mesh.setOpacity(model.opacity);
@@ -66,11 +55,7 @@ export class PlayerDamageDecreaseView implements DamageDecreaseView {
     target.scale.y = model.scale;
   }
 
-  /**
-   * カメラの真正面を向く
-   *
-   * @param camera カメラ
-   */
+  /** @override */
   lookAt(camera: typeof THREE.Camera): void {
     this.#mesh.getObject3D().quaternion.copy(camera.quaternion);
   }
