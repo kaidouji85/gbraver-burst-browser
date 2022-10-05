@@ -127,7 +127,6 @@ npm run start:storybook
 以下ツールはpackage.jsonには含まれていないので、何らかの方法で作業端末にインストールしてください。
 
 * [madge](https://github.com/pahen/madge)
-* [plato](https://github.com/es-analysis/plato)
 
 ### madge
 ```shell
@@ -135,14 +134,6 @@ npm run start:storybook
 madge -c src
 madge -c test
 madge -c stories
-```
-
-### plato
-```shell
-# コードメトリクス
-plato -e .eslintrc -r -d plato-src src
-plato -e .eslintrc -r -d plato-test test
-plato -e .eslintrc -r -d plato-stories stories
 ```
 
 ## スペシャルサンクス

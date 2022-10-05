@@ -28,6 +28,7 @@
     "lint": "eslint src/js",
     "lint:test": "eslint test",
     "lint:storybook": "eslint stories",
+    "code-analysis": "codehawk src/js",
     "scale-down-mobile-images": "node scale-down-mobile-images.js",
     "generate-icons": "node generate-icons.js"
   },
@@ -61,6 +62,7 @@
     "@storybook/html": "^6.5.12",
     "autoprefixer": "^10.4.12",
     "babel-loader": "^8.2.5",
+    "codehawk-cli": "^10.0.1",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
     "dotenv": "^16.0.3",

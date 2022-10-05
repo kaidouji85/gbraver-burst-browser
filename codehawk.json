@@ -1,0 +1,4 @@
+{
+  "skipDirectories": ["/node_modules", "coverage", "build"],
+  "enableFlow": true
+}
