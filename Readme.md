@@ -122,6 +122,29 @@ npm run start:storybook
 # ブラウザからlocalhost:6006を開く
 ```
 
+## その他コード解析
+本プロジェクトは、以下ツールでコード解析が可能です。
+以下ツールはpackage.jsonには含まれていないので、何らかの方法で作業端末にインストールしてください。
+
+* [madge](https://github.com/pahen/madge)
+* [plato](https://github.com/es-analysis/plato)
+
+### madge
+```shell
+# コードの循環参照がないかを確認する
+madge -c src
+madge -c test
+madge -c stories
+```
+
+### plato
+```shell
+# コードメトリクス
+plato -e .eslintrc -r -d plato-src src
+plato -e .eslintrc -r -d plato-test test
+plato -e .eslintrc -r -d plato-stories stories
+```
+
 ## スペシャルサンクス
 ### メカザイン
 本ゲームのキャラクターは [DOGAL3](http://doga.jp/2010/programs/dogal/dogal3/index.html) で作成しました。
