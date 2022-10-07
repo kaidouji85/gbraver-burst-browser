@@ -18,6 +18,7 @@ import {
   focusOutBurstButton,
   focusOutPilotButton
 } from "../focus";
+import {extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {turnCount} from "../turn-count";
 import {
@@ -84,8 +85,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
     this.stateHistory = [...this.stateHistory, ...props.update];
-    const hasGameEnd = props.update.find(v => v.effect.name === 'GameEnd') !== undefined;
-    if (hasGameEnd) {
+    const extractedGameEnd = extractGameEnd(props.update);
+    if (extractedGameEnd) {
       return;
     }
 
