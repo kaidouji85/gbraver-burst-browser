@@ -1,3 +1,4 @@
+// @flow
 import type {CustomBattleEventProps} from "../../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../active-message-window";
 import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";

@@ -1,7 +1,6 @@
 // @flow
 import type {CustomBattleEventProps} from "../../game/td-scenes/battle/custom-battle-event";
 import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../active-message-window";
-import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
 
 /**
@@ -141,65 +140,4 @@ export const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBat
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-/**
- * ストーリー プレイヤーの勝利
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-export const victory = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「俺の勝ちッスよ ツバサ先輩」']
-  ]);
-  props.view.dom.rightMessageWindow.darken();
 
-  activeLeftMessageWindowWithFace(props, 'Tsubasa');
-  await scrollLeftMessages(props, [
-    ['ツバサ', '「見事だ シンヤ'],
-    ['この調子で精進を積んでくれ」']
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-};
-/**
- * ストーリー プレイヤーの敗北
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-export const lose = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「あともう少しで勝てたのに」']
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-
-  activeLeftMessageWindowWithFace(props, 'Tsubasa');
-  await scrollLeftMessages(props, [
-    ['ツバサ', '「はじめてにしては 悪くなかったぞ'],
-    ['これからも精進あるのみだな」']
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-};
-/**
- * ストーリー チュートリアル終了
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-export const tutorialEnd = async (props: CustomBattleEventProps) => {
-  activeLeftMessageWindowWithFace(props, 'Tsubasa');
-  await scrollLeftMessages(props, [
-    ['ツバサ', '「これにて操縦訓練を終了する'],
-    ['姿勢を正して 礼!!」」']
-  ]);
-  await refreshConversation(props);
-
-  activeLeftMessageWindowWithFace(props, 'Tsubasa');
-  props.view.dom.leftMessageWindow.messages(
-    ['ツバサ', '「ありがとうございました」']
-  );
-  props.view.dom.leftMessageWindow.scrollUp();
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「ありがとうございました」']
-  ]);
-  invisibleAllMessageWindows(props);
-};

@@ -1,5 +1,5 @@
 // @flow
-import type {GameState, InputCommand} from "gbraver-burst-core";
+import type {GameEnd, GameState, GameStateX} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -19,23 +19,23 @@ import {
   focusOutBurstButton,
   focusOutPilotButton
 } from "../focus";
-import {castInputCommand, extractBattle, extractGameEnd} from "../game-state-extractor";
+import {extractBattle, extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {turnCount} from "../turn-count";
 import {batteryRuleDescription} from "./battery-rule-description";
 import {completeAttackAndDefense} from "./complete-attack-and-defense";
 import {enemyAttack} from "./enemy-attack";
 import {introduction} from "./introduction";
+import {lose} from "./lose";
 import {playerAttack} from "./player-attack";
 import {
   cancelZeroBatteryDefense,
   doBurstBecauseZeroBattery,
   doPilotSkillBecauseZeroBattery,
-  lose,
-  tutorialEnd,
-  victory,
   zeroBatteryDefenseBecauseNoBatteryRecover
 } from "./stories";
+import {tutorialEnd} from "./tutorial-end";
+import {victory} from "./victory";
 
 /** 攻撃バッテリー注釈 */
 const attackBatteryCaption = [
@@ -139,21 +139,18 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
-    const gameEnd = (foundGameEnd && foundGameEnd.effect.name === 'GameEnd')
-      ? {isVictory: foundGameEnd.effect.result.type === 'GameOver' && foundGameEnd.effect.result.winner === props.playerId}
-      : null;
-    if (gameEnd && gameEnd.isVictory) {
-      await victory(props);
-      await refreshConversation(props);
-      await tutorialEnd(props);
-      invisibleAllMessageWindows(props);
-    } else if (gameEnd && !gameEnd.isVictory) {
-      await lose(props);
-      await refreshConversation(props);
-      await tutorialEnd(props);
-      invisibleAllMessageWindows(props);
+    const extractedGameEnd = extractGameEnd(props.update);
+    if (!extractedGameEnd) {
+      return;
     }
+
+    const gameEnd: GameStateX<GameEnd> = extractedGameEnd;
+    const result = gameEnd.effect.result;
+    const isVictory = result.type === 'GameOver' && result.winner === props.playerId;
+    isVictory ? await victory(props) : await lose(props);
+    await refreshConversation(props);
+    await tutorialEnd(props);
+    invisibleAllMessageWindows(props);
   }
 
   /** @override */
