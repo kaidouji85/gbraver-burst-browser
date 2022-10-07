@@ -33,7 +33,7 @@ import {
   doBurstBecauseZeroBattery,
   doPilotSkillBecauseZeroBattery,
   zeroBatteryDefenseBecauseNoBatteryRecover
-} from "./stories";
+} from "./zero-battery";
 import {tutorialEnd} from "./tutorial-end";
 import {victory} from "./victory";
 

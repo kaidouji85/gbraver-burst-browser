@@ -5,23 +5,26 @@ import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
 
 /**
  * ストーリー 0防御は即死
+ *
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export const noZeroBatteryDefense = async (props: CustomBattleEventProps) => {
+export async function noZeroBatteryDefense(props: CustomBattleEventProps) {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「待て シンヤ!! 0防御はまずい」'],
     ['たとえHPが満タンでも即死級のダメージを受けるぞ」']
   ]);
   props.view.dom.leftMessageWindow.darken();
-};
+}
+
 /**
  * ストーリー 0防御なのでコマンドキャンセル
+ *
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export const cancelZeroBatteryDefense = async (props: CustomBattleEventProps) => {
+export async function cancelZeroBatteryDefense(props: CustomBattleEventProps) {
   await noZeroBatteryDefense(props);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
@@ -30,13 +33,15 @@ export const cancelZeroBatteryDefense = async (props: CustomBattleEventProps) =>
     ['今のは無かったことにして欲しいッス」']
   ]);
   props.view.dom.rightMessageWindow.darken();
-};
+}
+
 /**
  * ストーリー 0防御0バッテリーなのでバーストする
+ *
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) => {
+export async function doBurstBecauseZeroBattery(props: CustomBattleEventProps) {
   await noZeroBatteryDefense(props);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
@@ -59,13 +64,15 @@ export const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) =
     ['シンヤ', '「了解ッス バーストで立て直せばいいんすね」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
-};
+}
+
 /**
  * ストーリー 0防御0バッテリーなのでパイロットスキルを使う
+ *
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => {
+export async function doPilotSkillBecauseZeroBattery(props: CustomBattleEventProps) {
   await noZeroBatteryDefense(props);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
@@ -102,13 +109,14 @@ export const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventPro
     ['シンヤ', '「了解ッス 俺の底力 見せてやる!!」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
-};
+}
+
 /**
  * ストーリー バースト、パイロットスキルが使えず0バッテリーなので負け確定
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-export const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBattleEventProps) => {
+export async function zeroBatteryDefenseBecauseNoBatteryRecover(props: CustomBattleEventProps) {
   await noZeroBatteryDefense(props);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
@@ -139,5 +147,4 @@ export const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBat
     ['初めての訓練では良くあることだから あまり気にするな'],
   ]);
   props.view.dom.leftMessageWindow.darken();
-};
-
+}
