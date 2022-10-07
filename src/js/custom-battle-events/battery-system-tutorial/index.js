@@ -1,5 +1,5 @@
 // @flow
-import type {GameState} from "gbraver-burst-core";
+import type {GameState, InputCommand} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -19,7 +19,7 @@ import {
   focusOutBurstButton,
   focusOutPilotButton
 } from "../focus";
-import {extractBattle, extractGameEnd} from "../game-state-extractor";
+import {castInputCommand, extractBattle, extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {turnCount} from "../turn-count";
 import {batteryRuleDescription} from "./battery-rule-description";
@@ -125,11 +125,14 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     }
 
     const lastState: GameState = foundLastState;
-    const isInputCommand = lastState.effect.name === 'InputCommand';
+    if (lastState.effect.name !== 'InputCommand') {
+      return;
+    }
+
     const isMyTurn = lastState.activePlayerId === props.playerId;
-    if (!this.isBatterySystemDescriptionComplete && isInputCommand && isMyTurn) {
+    if (!this.isBatterySystemDescriptionComplete  && isMyTurn) {
       await focusInBatterySelector(props, attackBatteryCaption);
-    } else if (!this.isBatterySystemDescriptionComplete && isInputCommand && !isMyTurn) {
+    } else if (!this.isBatterySystemDescriptionComplete && !isMyTurn) {
       await focusInBatterySelector(props, defenseBatteryCaption);
     }
   }
