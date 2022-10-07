@@ -22,16 +22,16 @@ import {
 import {extractBattle, extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {turnCount} from "../turn-count";
+import {batteryRuleDescription} from "./battery-rule-description";
+import {completeAttackAndDefense} from "./complete-attack-and-defense";
+import {enemyAttack} from "./enemy-attack";
+import {introduction} from "./introduction";
+import {playerAttack} from "./player-attack";
 import {
-  batteryRuleDescription,
   cancelZeroBatteryDefense,
-  completeAttackAndDefense,
   doBurstBecauseZeroBattery,
   doPilotSkillBecauseZeroBattery,
-  enemyAttack,
-  introduction,
   lose,
-  playerAttack,
   tutorialEnd,
   victory,
   zeroBatteryDefenseBecauseNoBatteryRecover
@@ -94,6 +94,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     const turn = turnCount(this.stateHistory);
     if (turn === 1) {
       await introduction(props);
+      return;
     }
 
     const extractedBattle = extractBattle(props.update);
