@@ -120,12 +120,16 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   /** @override */
   async onLastState(props: LastState): Promise<void> {
     const foundLastState = props.update[props.update.length - 1];
-    const lastState = foundLastState
-      ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === props.playerId}
-      : null;
-    if (!this.isBatterySystemDescriptionComplete && lastState && lastState.isInputCommand && lastState.isMyTurn) {
+    if (!foundLastState) {
+      return;
+    }
+
+    const lastState: GameState = foundLastState;
+    const isInputCommand = lastState.effect.name === 'InputCommand';
+    const isMyTurn = lastState.activePlayerId === props.playerId;
+    if (!this.isBatterySystemDescriptionComplete && isInputCommand && isMyTurn) {
       await focusInBatterySelector(props, attackBatteryCaption);
-    } else if (!this.isBatterySystemDescriptionComplete && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
+    } else if (!this.isBatterySystemDescriptionComplete && isInputCommand && !isMyTurn) {
       await focusInBatterySelector(props, defenseBatteryCaption);
     }
   }
