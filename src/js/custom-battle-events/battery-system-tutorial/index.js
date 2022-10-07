@@ -18,7 +18,7 @@ import {
   focusOutBurstButton,
   focusOutPilotButton
 } from "../focus";
-import {extractGameEnd} from "../game-state-extractor";
+import {extractBattle, extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {turnCount} from "../turn-count";
 import {
@@ -91,9 +91,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     }
 
     const turn = turnCount(this.stateHistory);
-    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
-    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
-      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId, result: foundLastBattle.effect.result}
+    const extractedBattle = extractBattle(props.update);
+    const lastBattle = extractedBattle && extractedBattle.effect.name === 'Battle'
+      ? {isAttacker: extractedBattle.effect.attacker === props.playerId, result: extractedBattle.effect.result}
       : null;
     if (turn === 1) {
       await introduction(props);
