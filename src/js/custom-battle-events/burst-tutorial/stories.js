@@ -1,35 +1,16 @@
 // @flow
-import type {BattleResult, GameState} from "gbraver-burst-core";
-import type {
-  BatteryCommandSelected,
-  BurstCommandSelected,
-  CommandCanceled,
-  CustomBattleEvent,
-  CustomBattleEventProps,
-  LastState,
-  PilotSkillCommandSelected,
-} from "../game/td-scenes/battle/custom-battle-event";
-import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
-import {unattentionBurstButton} from "./attention";
-import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
-import {
-  focusInBatterySelector,
-  focusInBurstButton,
-  focusInPilotButton,
-  focusOutBatterySelector,
-  focusOutBurstButton,
-  focusOutPilotButton
-} from "./focus";
-import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
-import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
-import {turnCount} from "./turn-count";
+import type {BattleResult} from "gbraver-burst-core";
+import type {CustomBattleEventProps} from "../../game/td-scenes/battle/custom-battle-event";
+import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../active-message-window";
+import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
+import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
 
 /**
  * ストーリー 冒頭
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const introduction = async (props: CustomBattleEventProps) => {
+export const introduction = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「これより 操縦訓練を開始する'],
@@ -64,13 +45,12 @@ const introduction = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
-
 /**
  * ストーリー プレイヤー攻撃ヒット
  * @param props イベントプロパティ
  * @return  ストーリーが完了したら発火するPromise
  */
-const playerAttackHit = async (props: CustomBattleEventProps) => {
+export const playerAttackHit = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「手応えありッス」']
@@ -84,13 +64,12 @@ const playerAttackHit = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-
 /**
  * ストーリー プレイヤー攻撃ガード
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const playerAttackGuarded = async (props: CustomBattleEventProps) => {
+export const playerAttackGuarded = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「よし 攻撃ヒット」']
@@ -104,13 +83,12 @@ const playerAttackGuarded = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.darken();
 }
-
 /**
  * ストーリー プレイヤー攻撃ミス
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const playerAttackMiss = async (props: CustomBattleEventProps) => {
+export const playerAttackMiss = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「しまった 避けられた」']
@@ -124,14 +102,13 @@ const playerAttackMiss = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-
 /**
  * プレイヤー攻撃の結果に応じてストーリーを分岐する
  * @param props イベントプロパティ
  * @param battleResult 戦闘結果
  * @return ストーリーが完了したら発火するPromise
  */
-const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
+export const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
   if (battleResult.name === 'NormalHit' || battleResult.name === 'CriticalHit') {
     await playerAttackHit(props);
   } else if (battleResult.name === 'Guard') {
@@ -140,13 +117,12 @@ const playerAttack = async (props: CustomBattleEventProps, battleResult: BattleR
     await playerAttackMiss(props);
   }
 };
-
 /**
  * ストーリー バッテリー基本ルール説明
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const batteryRuleDescription = async (props: CustomBattleEventProps) => {
+export const batteryRuleDescription = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「……と このように 攻撃が当たるかは'],
@@ -174,13 +150,12 @@ const batteryRuleDescription = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
-
 /**
  * ストーリー 敵攻撃回避
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const enemyAttackMiss = async (props: CustomBattleEventProps) => {
+export const enemyAttackMiss = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「よし 回避成功ッス」']
@@ -194,17 +169,16 @@ const enemyAttackMiss = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-
 /**
  * ストーリー 敵攻撃ガード
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const enemyAttackGuarded = async (props: CustomBattleEventProps) => {
+export const enemyAttackGuarded = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「クッ 避けられなかった'],
-    ['けど思った程のダメージじゃないッスね」', ],
+    ['けど思った程のダメージじゃないッスね」',],
   ]);
   props.view.dom.rightMessageWindow.darken();
 
@@ -215,13 +189,12 @@ const enemyAttackGuarded = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-
 /**
  * ストーリー 敵攻撃ヒット
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const enemyAttackHit = async (props: CustomBattleEventProps) => {
+export const enemyAttackHit = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「すごいダメージ ッス'],
@@ -236,14 +209,13 @@ const enemyAttackHit = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-
 /**
  * 敵攻撃の結果に応じてストーリーを分岐する
  * @param props イベントプロパティ
  * @param battleResult 戦闘結果
  * @return ストーリーが完了したら発火するPromise
  */
-const enemyAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
+export const enemyAttack = async (props: CustomBattleEventProps, battleResult: BattleResult) => {
   if (battleResult.name === 'NormalHit' || battleResult.name === 'CriticalHit') {
     await enemyAttackHit(props);
   } else if (battleResult.name === 'Guard') {
@@ -252,13 +224,12 @@ const enemyAttack = async (props: CustomBattleEventProps, battleResult: BattleRe
     await enemyAttackMiss(props);
   }
 };
-
 /**
  * ストーリー 攻撃、防御を一通り体験した
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const completeAttackAndDefense = async (props: CustomBattleEventProps) => {
+export const completeAttackAndDefense = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「これで攻撃 防御を一通り体験したな'],
@@ -274,13 +245,12 @@ const completeAttackAndDefense = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
-
 /**
  * ストーリー 0防御は即死
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const noZeroBatteryDefense = async (props: CustomBattleEventProps) => {
+export const noZeroBatteryDefense = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「待て シンヤ!! 0防御はまずい」'],
@@ -288,13 +258,12 @@ const noZeroBatteryDefense = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-
 /**
  * ストーリー 0防御なのでコマンドキャンセル
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const cancelZeroBatteryDefense = async (props: CustomBattleEventProps) => {
+export const cancelZeroBatteryDefense = async (props: CustomBattleEventProps) => {
   await noZeroBatteryDefense(props);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
@@ -304,13 +273,12 @@ const cancelZeroBatteryDefense = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
-
 /**
  * ストーリー 0防御0バッテリーなのでバーストする
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) => {
+export const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) => {
   await noZeroBatteryDefense(props);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
@@ -334,13 +302,12 @@ const doBurstBecauseZeroBattery = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
-
 /**
  * ストーリー 0防御0バッテリーなのでパイロットスキルを使う
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => {
+export const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => {
   await noZeroBatteryDefense(props);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
@@ -378,13 +345,12 @@ const doPilotSkillBecauseZeroBattery = async (props: CustomBattleEventProps) => 
   ]);
   props.view.dom.rightMessageWindow.darken();
 };
-
 /**
  * ストーリー バースト、パイロットスキルが使えず0バッテリーなので負け確定
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBattleEventProps) => {
+export const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBattleEventProps) => {
   await noZeroBatteryDefense(props);
 
   activeRightMessageWindowWithFace(props, 'Shinya');
@@ -416,13 +382,12 @@ const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBattleEven
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-
 /**
  * ストーリー プレイヤーの勝利
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const victory = async (props: CustomBattleEventProps) => {
+export const victory = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「俺の勝ちッスよ ツバサ先輩」']
@@ -436,13 +401,12 @@ const victory = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-
 /**
  * ストーリー プレイヤーの敗北
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const lose = async (props: CustomBattleEventProps) => {
+export const lose = async (props: CustomBattleEventProps) => {
   activeRightMessageWindowWithFace(props, 'Shinya');
   await scrollRightMessages(props, [
     ['シンヤ', '「あともう少しで勝てたのに」']
@@ -456,13 +420,12 @@ const lose = async (props: CustomBattleEventProps) => {
   ]);
   props.view.dom.leftMessageWindow.darken();
 };
-
 /**
  * ストーリー チュートリアル終了
  * @param props イベントプロパティ
  * @return ストーリーが完了したら発火するPromise
  */
-const tutorialEnd = async (props: CustomBattleEventProps) => {
+export const tutorialEnd = async (props: CustomBattleEventProps) => {
   activeLeftMessageWindowWithFace(props, 'Tsubasa');
   await scrollLeftMessages(props, [
     ['ツバサ', '「これにて操縦訓練を終了する'],
@@ -481,202 +444,3 @@ const tutorialEnd = async (props: CustomBattleEventProps) => {
   ]);
   invisibleAllMessageWindows(props);
 };
-
-/** 攻撃バッテリー注釈 */
-const attackBatteryCaption = [
-  '好きなバッテリーで攻撃してみよう',
-  'ツバサ先輩よりも大きい数字を出せば攻撃が当たるぞ'
-];
-
-/** 防御バッテリー注釈 */
-const defenseBatteryCaption = [
-  '好きなバッテリーで防御してみよう',
-  'ツバサ先輩よりも大きい数字を出せば攻撃を回避できるぞ'
-];
-
-/** バースト注釈 */
-const burstCaption = [
-  'このまま0防御すると負け確定だ',
-  'バーストでバッテリーを回復させよう'
-];
-
-/** パイロットスキル注釈 */
-const pilotSkillCaption = [
-  'このまま0防御すると負け確定だ',
-  'シンヤのパイロットスキルを発動して バッテリーを回復させよう'
-];
-
-/** 選択可能なコマンド */
-type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All';
-
-/** バッテリーシステムチュートリアル用のカスタムバトルイベント */
-class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
-  /** ステートヒストリー、 beforeLastState開始時に更新される */
-  stateHistory: GameState[];
-  /** 選択可能なコマンド */
-  selectableCommands: SelectableCommands;
-  /** バッテリーシステムの解説が完了しているか、trueで完了している */
-  isBatterySystemDescriptionComplete: boolean;
-
-  /**
-   * コンストラクタ
-   */
-  constructor() {
-    super();
-    this.stateHistory = [];
-    this.selectableCommands = 'BatteryOnly';
-    this.isBatterySystemDescriptionComplete = false;
-  }
-
-  /** @override */
-  async beforeLastState(props: LastState): Promise<void> {
-    this.stateHistory = [...this.stateHistory, ...props.update];
-    const hasGameEnd = props.update.find(v => v.effect.name === 'GameEnd') !== undefined;
-    if (hasGameEnd) {
-      return;
-    }
-
-    const turn = turnCount(this.stateHistory);
-    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
-    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle'
-      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId, result: foundLastBattle.effect.result}
-      : null;
-    if (turn === 1) {
-      await introduction(props);
-    } else if (turn === 2 && lastBattle) {
-      await playerAttack(props, lastBattle.result);
-      await refreshConversation(props);
-      await batteryRuleDescription(props);
-    } else if (turn === 3 && lastBattle) {
-      this.selectableCommands = 'All';
-      this.isBatterySystemDescriptionComplete = true;
-      await enemyAttack(props, lastBattle.result);
-      await refreshConversation(props);
-      await completeAttackAndDefense(props);
-      invisibleAllMessageWindows(props);
-    } else if (lastBattle && lastBattle.isAttacker) {
-      await playerAttack(props, lastBattle.result);
-      refreshConversation(props);
-    } else if (lastBattle && !lastBattle.isAttacker) {
-      await enemyAttack(props, lastBattle.result);
-      refreshConversation(props);
-    }
-  }
-
-  /** @override */
-  async onLastState(props: LastState): Promise<void> {
-    const foundLastState = props.update[props.update.length - 1];
-    const lastState = foundLastState
-      ? {isInputCommand: foundLastState.effect.name === 'InputCommand', isMyTurn: foundLastState.activePlayerId === props.playerId}
-      : null;
-    if (!this.isBatterySystemDescriptionComplete && lastState && lastState.isInputCommand && lastState.isMyTurn) {
-      await focusInBatterySelector(props, attackBatteryCaption);
-    } else if (!this.isBatterySystemDescriptionComplete && lastState && lastState.isInputCommand && !lastState.isMyTurn) {
-      await focusInBatterySelector(props, defenseBatteryCaption);
-    }
-  }
-
-  /** @override */
-  async afterLastState(props: LastState): Promise<void> {
-    const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
-    const gameEnd = (foundGameEnd && foundGameEnd.effect.name === 'GameEnd')
-      ? {isVictory: foundGameEnd.effect.result.type === 'GameOver' && foundGameEnd.effect.result.winner === props.playerId}
-      : null;
-    if (gameEnd && gameEnd.isVictory) {
-      await victory(props);
-      await refreshConversation(props);
-      await tutorialEnd(props);
-      invisibleAllMessageWindows(props);
-    } else if (gameEnd && !gameEnd.isVictory) {
-      await lose(props);
-      await refreshConversation(props);
-      await tutorialEnd(props);
-      invisibleAllMessageWindows(props);
-    }
-  }
-
-  /** @override */
-  async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    const enableBatteryCommand: SelectableCommands[] = ['BatteryOnly', 'All'];
-    if (!enableBatteryCommand.includes(this.selectableCommands)) {
-      return {isCommandCanceled: true};
-    }
-
-    const foundLastState = this.stateHistory[this.stateHistory.length - 1];
-    const lastState = foundLastState
-      ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
-        player: foundLastState.players.find(v => v.playerId === props.playerId)}
-      : null;
-    const lastPlayer = (lastState && lastState.player)
-      ? {isZeroBattery: lastState.player.armdozer.battery === 0,
-        enableBurst: lastState.player.armdozer.enableBurst, enablePilotSkill: lastState.player.pilot.enableSkill}
-      : null
-    const isZeroBatteryCommand = props.battery.battery === 0;
-    if (isZeroBatteryCommand && lastState  && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && !lastPlayer.enablePilotSkill) {
-      await zeroBatteryDefenseBecauseNoBatteryRecover(props);
-      refreshConversation(props);
-      return {isCommandCanceled: false};
-    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && !lastPlayer.enableBurst && lastPlayer.enablePilotSkill) {
-      await doPilotSkillBecauseZeroBattery(props);
-      refreshConversation(props);
-      this.selectableCommands = 'PilotSkillOnly';
-      await focusInPilotButton(props, pilotSkillCaption);
-      return {isCommandCanceled: true};
-    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
-      await doBurstBecauseZeroBattery(props);
-      refreshConversation(props);
-      this.selectableCommands = 'BurstOnly';
-      unattentionBurstButton(props);
-      await focusInBurstButton(props, burstCaption);
-      return {isCommandCanceled: true};
-    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn) {
-      await cancelZeroBatteryDefense(props);
-      refreshConversation(props);
-      (this.selectableCommands === 'BatteryOnly') && await focusInBatterySelector(props, defenseBatteryCaption);
-      return {isCommandCanceled: true};
-    }
-
-    (this.selectableCommands === 'BatteryOnly') && focusOutBatterySelector(props);
-    return {isCommandCanceled: false};
-  }
-
-  /** @override */
-  async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
-    const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
-    if (!enableBurstCommand.includes(this.selectableCommands)) {
-      return {isCommandCanceled: true};
-    }
-
-    if (this.selectableCommands === 'BurstOnly') {
-      this.selectableCommands = this.isBatterySystemDescriptionComplete  ? 'All' : 'BatteryOnly';
-      focusOutBurstButton(props);
-      return {isCommandCanceled: false};
-    }
-
-    return {isCommandCanceled: false};
-  }
-
-  /** @override */
-  async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
-    const enablePilotSkillCommand: SelectableCommands[] = ['All', 'PilotSkillOnly'];
-    if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
-      return {isCommandCanceled: true};
-    }
-
-    if (this.selectableCommands === 'PilotSkillOnly') {
-      this.selectableCommands = 'All';
-      focusOutPilotButton(props);
-    }
-
-    return {isCommandCanceled: false};
-  }
-}
-
-/**
- * バッテリーシステムチュートリアル用のカスタバトルイベントを生成する
- *
- * @return 生成したカスタムバトルイベント
- */
-export function createBatterySystemTutorialEvent(): CustomBattleEvent {
-  return new BatterySystemTutorialEvent();
-}
