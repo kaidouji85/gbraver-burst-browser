@@ -8,6 +8,7 @@ import type {
   LastState,
   PilotSkillCommandSelected,
 } from "../../game/td-scenes/battle/custom-battle-event";
+import {waitTime} from "../../wait/wait-time";
 import {unattentionBurstButton} from "../attention";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {
@@ -91,29 +92,27 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     }
 
     const turn = turnCount(this.stateHistory);
-    const extractedBattle = extractBattle(props.update);
-    const lastBattle = extractedBattle && extractedBattle.effect.name === 'Battle'
-      ? {isAttacker: extractedBattle.effect.attacker === props.playerId, result: extractedBattle.effect.result}
-      : null;
     if (turn === 1) {
       await introduction(props);
-    } else if (turn === 2 && lastBattle) {
-      await playerAttack(props, lastBattle.result);
-      await refreshConversation(props);
-      await batteryRuleDescription(props);
-    } else if (turn === 3 && lastBattle) {
+    }
+
+    const extractedBattle = extractBattle(props.update);
+    if (extractedBattle) {
+      const battle = extractedBattle.effect;
+      const isPlayerAttack = battle.attacker === props.playerId;
+      isPlayerAttack ? await playerAttack(props, battle.result) : await enemyAttack(props, battle.result);
+      invisibleAllMessageWindows(props);
+    }
+
+    if (turn === 2) {
+      await waitTime(200);
+      await batteryRuleDescription(props)
+    } else if (turn === 3) {
+      await waitTime(200);
       this.selectableCommands = 'All';
       this.isBatterySystemDescriptionComplete = true;
-      await enemyAttack(props, lastBattle.result);
-      await refreshConversation(props);
       await completeAttackAndDefense(props);
       invisibleAllMessageWindows(props);
-    } else if (lastBattle && lastBattle.isAttacker) {
-      await playerAttack(props, lastBattle.result);
-      refreshConversation(props);
-    } else if (lastBattle && !lastBattle.isAttacker) {
-      await enemyAttack(props, lastBattle.result);
-      refreshConversation(props);
     }
   }
 
