@@ -101,19 +101,24 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     if (extractedBattle) {
       const battle = extractedBattle.effect;
       const isPlayerAttack = battle.attacker === props.playerId;
-      isPlayerAttack ? await playerAttack(props, battle.result) : await enemyAttack(props, battle.result);
-      invisibleAllMessageWindows(props);
-    }
-
-    if (turn === 2) {
-      await waitTime(200);
-      await batteryRuleDescription(props)
-    } else if (turn === 3) {
-      await waitTime(200);
-      this.selectableCommands = 'All';
-      this.isBatterySystemDescriptionComplete = true;
-      await completeAttackAndDefense(props);
-      invisibleAllMessageWindows(props);
+      if (isPlayerAttack) {
+        await playerAttack(props, battle.result);
+        invisibleAllMessageWindows(props);
+        if (turn === 2) {
+          await waitTime(200);
+          await batteryRuleDescription(props);
+        }
+      } else {
+        await enemyAttack(props, battle.result);
+        invisibleAllMessageWindows(props);
+        if (turn === 3) {
+          await waitTime(200);
+          await completeAttackAndDefense(props);
+          invisibleAllMessageWindows(props);
+          this.selectableCommands = 'All';
+          this.isBatterySystemDescriptionComplete = true;
+        }
+      }
     }
   }
 
