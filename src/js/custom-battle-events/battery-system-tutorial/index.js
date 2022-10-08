@@ -22,20 +22,21 @@ import {
 import {extractBattle, extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {turnCount} from "../turn-count";
+import type {BatterySystemTutorialState, SelectableCommands} from "./state";
 import {batteryRuleDescription} from "./stories/battery-rule-description";
 import {completeAttackAndDefense} from "./stories/complete-attack-and-defense";
 import {enemyAttack} from "./stories/enemy-attack";
 import {introduction} from "./stories/introduction";
 import {lose} from "./stories/lose";
 import {playerAttack} from "./stories/player-attack";
+import {tutorialEnd} from "./stories/tutorial-end";
+import {victory} from "./stories/victory";
 import {
   cancelZeroBatteryDefense,
   doBurstBecauseZeroBattery,
   doPilotSkillBecauseZeroBattery,
   zeroBatteryDefenseBecauseNoBatteryRecover
 } from "./stories/zero-battery";
-import {tutorialEnd} from "./stories/tutorial-end";
-import {victory} from "./stories/victory";
 
 /** 攻撃バッテリー注釈 */
 const attackBatteryCaption = [
@@ -61,37 +62,28 @@ const pilotSkillCaption = [
   'シンヤのパイロットスキルを発動して バッテリーを回復させよう'
 ];
 
-/** 選択可能なコマンド */
-type SelectableCommands = 'BatteryOnly' | 'BurstOnly' | 'PilotSkillOnly' | 'All';
-
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
-  /** ステートヒストリー、 beforeLastState開始時に更新される */
-  stateHistory: GameState[];
-  /** 選択可能なコマンド */
-  selectableCommands: SelectableCommands;
-  /** バッテリーシステムの解説が完了しているか、trueで完了している */
-  isBatterySystemDescriptionComplete: boolean;
+  /** チュートリアルのステート */
+  state: BatterySystemTutorialState;
 
   /**
    * コンストラクタ
    */
   constructor() {
     super();
-    this.stateHistory = [];
-    this.selectableCommands = 'BatteryOnly';
-    this.isBatterySystemDescriptionComplete = false;
+    this.state = {stateHistory: [], selectableCommands: 'BatteryOnly', isBatterySystemDescriptionComplete: false,};
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.stateHistory = [...this.stateHistory, ...props.update];
+    this.state.stateHistory = [...this.state.stateHistory, ...props.update];
     const extractedGameEnd = extractGameEnd(props.update);
     if (extractedGameEnd) {
       return;
     }
 
-    const turn = turnCount(this.stateHistory);
+    const turn = turnCount(this.state.stateHistory);
     if (turn === 1) {
       await introduction(props);
       return;
@@ -115,8 +107,8 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
           await waitTime(200);
           await completeAttackAndDefense(props);
           invisibleAllMessageWindows(props);
-          this.selectableCommands = 'All';
-          this.isBatterySystemDescriptionComplete = true;
+          this.state.selectableCommands = 'All';
+          this.state.isBatterySystemDescriptionComplete = true;
         }
       }
     }
@@ -135,9 +127,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
     }
 
     const isMyTurn = lastState.activePlayerId === props.playerId;
-    if (!this.isBatterySystemDescriptionComplete  && isMyTurn) {
+    if (!this.state.isBatterySystemDescriptionComplete  && isMyTurn) {
       await focusInBatterySelector(props, attackBatteryCaption);
-    } else if (!this.isBatterySystemDescriptionComplete && !isMyTurn) {
+    } else if (!this.state.isBatterySystemDescriptionComplete && !isMyTurn) {
       await focusInBatterySelector(props, defenseBatteryCaption);
     }
   }
@@ -161,11 +153,11 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
     const enableBatteryCommand: SelectableCommands[] = ['BatteryOnly', 'All'];
-    if (!enableBatteryCommand.includes(this.selectableCommands)) {
+    if (!enableBatteryCommand.includes(this.state.selectableCommands)) {
       return {isCommandCanceled: true};
     }
 
-    const foundLastState = this.stateHistory[this.stateHistory.length - 1];
+    const foundLastState = this.state.stateHistory[this.state.stateHistory.length - 1];
     const foundPlayer = (foundLastState?.players ?? []).find(v => v.playerId === props.playerId);
     const isZeroBatteryCommand = props.battery.battery === 0;
     if (isZeroBatteryCommand && foundLastState && foundPlayer) {
@@ -183,36 +175,36 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
         await doPilotSkillBecauseZeroBattery(props);
         refreshConversation(props);
         await focusInPilotButton(props, pilotSkillCaption);
-        this.selectableCommands = 'PilotSkillOnly';
+        this.state.selectableCommands = 'PilotSkillOnly';
         return {isCommandCanceled: true};
       } else if (isEnemyTurn && isZeroBattery && enableBurst) {
         await doBurstBecauseZeroBattery(props);
         refreshConversation(props);
         unattentionBurstButton(props);
         await focusInBurstButton(props, burstCaption);
-        this.selectableCommands = 'BurstOnly';
+        this.state.selectableCommands = 'BurstOnly';
         return {isCommandCanceled: true};
       } else if (isEnemyTurn) {
         await cancelZeroBatteryDefense(props);
         refreshConversation(props);
-        (this.selectableCommands === 'BatteryOnly') && await focusInBatterySelector(props, defenseBatteryCaption);
+        (this.state.selectableCommands === 'BatteryOnly') && await focusInBatterySelector(props, defenseBatteryCaption);
         return {isCommandCanceled: true};
       }
     }
 
-    (this.selectableCommands === 'BatteryOnly') && focusOutBatterySelector(props);
+    (this.state.selectableCommands === 'BatteryOnly') && focusOutBatterySelector(props);
     return {isCommandCanceled: false};
   }
 
   /** @override */
   async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
     const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
-    if (!enableBurstCommand.includes(this.selectableCommands)) {
+    if (!enableBurstCommand.includes(this.state.selectableCommands)) {
       return {isCommandCanceled: true};
     }
 
-    if (this.selectableCommands === 'BurstOnly') {
-      this.selectableCommands = this.isBatterySystemDescriptionComplete  ? 'All' : 'BatteryOnly';
+    if (this.state.selectableCommands === 'BurstOnly') {
+      this.state.selectableCommands = this.state.isBatterySystemDescriptionComplete  ? 'All' : 'BatteryOnly';
       focusOutBurstButton(props);
       return {isCommandCanceled: false};
     }
@@ -223,12 +215,12 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
   /** @override */
   async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
     const enablePilotSkillCommand: SelectableCommands[] = ['All', 'PilotSkillOnly'];
-    if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
+    if (!enablePilotSkillCommand.includes(this.state.selectableCommands)) {
       return {isCommandCanceled: true};
     }
 
-    if (this.selectableCommands === 'PilotSkillOnly') {
-      this.selectableCommands = 'All';
+    if (this.state.selectableCommands === 'PilotSkillOnly') {
+      this.state.selectableCommands = 'All';
       focusOutPilotButton(props);
     }
 
