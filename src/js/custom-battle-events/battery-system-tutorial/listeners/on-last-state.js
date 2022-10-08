@@ -12,7 +12,7 @@ import type {BatterySystemTutorialState} from "../state";
  * @param state ステート
  * @return ステート更新結果
  */
-export async function onLastState(props: LastState, state: BatterySystemTutorialState): Promise<BatterySystemTutorialState> {
+export async function onLastState(props: $ReadOnly<LastState>, state: BatterySystemTutorialState): Promise<BatterySystemTutorialState> {
   const foundLastState = props.update[props.update.length - 1];
   if (!foundLastState) {
     return state;
