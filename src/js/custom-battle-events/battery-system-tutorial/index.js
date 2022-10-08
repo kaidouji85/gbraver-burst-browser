@@ -1,5 +1,4 @@
 // @flow
-import type {GameEnd, GameStateX} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -10,15 +9,11 @@ import type {
 } from "../../game/td-scenes/battle/custom-battle-event";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {focusOutBurstButton, focusOutPilotButton} from "../focus";
-import {extractGameEnd} from "../game-state-extractor";
-import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
+import {afterLastState} from "./listeners/after-last-state";
 import {beforeLastState} from "./listeners/before-last-state";
 import {onBatteryCommandSelected} from "./listeners/on-battery-command-selected";
 import {onLastState} from "./listeners/on-last-state";
 import type {BatterySystemTutorialState, SelectableCommands} from "./state";
-import {lose} from "./stories/lose";
-import {tutorialEnd} from "./stories/tutorial-end";
-import {victory} from "./stories/victory";
 
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
@@ -45,18 +40,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    const extractedGameEnd = extractGameEnd(props.update);
-    if (!extractedGameEnd) {
-      return;
-    }
-
-    const gameEnd: GameStateX<GameEnd> = extractedGameEnd;
-    const result = gameEnd.effect.result;
-    const isVictory = result.type === 'GameOver' && result.winner === props.playerId;
-    isVictory ? await victory(props) : await lose(props);
-    await refreshConversation(props);
-    await tutorialEnd(props);
-    invisibleAllMessageWindows(props);
+    this.state = await afterLastState(props, this.state);
   }
 
   /** @override */
