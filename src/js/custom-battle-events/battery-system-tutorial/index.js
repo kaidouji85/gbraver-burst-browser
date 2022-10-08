@@ -8,10 +8,11 @@ import type {
   PilotSkillCommandSelected,
 } from "../../game/td-scenes/battle/custom-battle-event";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
-import {focusOutBurstButton, focusOutPilotButton} from "../focus";
+import {focusOutPilotButton} from "../focus";
 import {afterLastState} from "./listeners/after-last-state";
 import {beforeLastState} from "./listeners/before-last-state";
 import {onBatteryCommandSelected} from "./listeners/on-battery-command-selected";
+import {onBurstCommandSelected} from "./listeners/on-burst-command-selected";
 import {onLastState} from "./listeners/on-last-state";
 import type {BatterySystemTutorialState, SelectableCommands} from "./state";
 
@@ -52,18 +53,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
-    const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
-    if (!enableBurstCommand.includes(this.state.selectableCommands)) {
-      return {isCommandCanceled: true};
-    }
-
-    if (this.state.selectableCommands === 'BurstOnly') {
-      this.state.selectableCommands = this.state.isBatterySystemDescriptionComplete  ? 'All' : 'BatteryOnly';
-      focusOutBurstButton(props);
-      return {isCommandCanceled: false};
-    }
-
-    return {isCommandCanceled: false};
+    const {state, cancel} = await onBurstCommandSelected(props, this.state);
+    this.state = state;
+    return cancel;
   }
 
   /** @override */
