@@ -1,7 +1,7 @@
 // @flow
-import type {CustomBattleEventProps} from "../../game/td-scenes/battle/custom-battle-event";
-import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../active-message-window";
-import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
+import type {CustomBattleEventProps} from "../../../game/td-scenes/battle/custom-battle-event";
+import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../../active-message-window";
+import {scrollLeftMessages, scrollRightMessages} from "../../scroll-messages";
 
 /**
  * ストーリー 攻撃、防御を一通り体験した
