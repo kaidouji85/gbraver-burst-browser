@@ -1,5 +1,5 @@
 // @flow
-import type {GameEnd, GameState, GameStateX, PlayerState} from "gbraver-burst-core";
+import type {GameEnd, GameState, GameStateX} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -8,30 +8,17 @@ import type {
   LastState,
   PilotSkillCommandSelected,
 } from "../../game/td-scenes/battle/custom-battle-event";
-import {unattentionBurstButton} from "../attention";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
-import {
-  focusInBatterySelector,
-  focusInBurstButton,
-  focusInPilotButton,
-  focusOutBatterySelector,
-  focusOutBurstButton,
-  focusOutPilotButton
-} from "../focus";
+import {focusInBatterySelector, focusOutBurstButton, focusOutPilotButton} from "../focus";
 import {extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
-import {attackBatteryCaption, burstCaption, defenseBatteryCaption, pilotSkillCaption} from "./captions";
+import {attackBatteryCaption, defenseBatteryCaption} from "./captions";
 import {beforeLastState} from "./listeners/before-last-state";
+import {onBatteryCommandSelected} from "./listeners/on-battery-command-selected";
 import type {BatterySystemTutorialState, SelectableCommands} from "./state";
 import {lose} from "./stories/lose";
 import {tutorialEnd} from "./stories/tutorial-end";
 import {victory} from "./stories/victory";
-import {
-  cancelZeroBatteryDefense,
-  doBurstBecauseZeroBattery,
-  doPilotSkillBecauseZeroBattery,
-  zeroBatteryDefenseBecauseNoBatteryRecover
-} from "./stories/zero-battery";
 
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
@@ -89,48 +76,9 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    const enableBatteryCommand: SelectableCommands[] = ['BatteryOnly', 'All'];
-    if (!enableBatteryCommand.includes(this.state.selectableCommands)) {
-      return {isCommandCanceled: true};
-    }
-
-    const foundLastState = this.state.stateHistory[this.state.stateHistory.length - 1];
-    const foundPlayer = (foundLastState?.players ?? []).find(v => v.playerId === props.playerId);
-    const isZeroBatteryCommand = props.battery.battery === 0;
-    if (isZeroBatteryCommand && foundLastState && foundPlayer) {
-      const lastState: GameState = foundLastState;
-      const player: PlayerState = foundPlayer;
-      const isEnemyTurn = lastState.activePlayerId !== props.playerId;
-      const isZeroBattery = player.armdozer.battery === 0;
-      const enableBurst = player.armdozer.enableBurst;
-      const enablePilotSkill = player.pilot.enableSkill;
-      if (isEnemyTurn && isZeroBattery && !enableBurst && !enablePilotSkill) {
-        await zeroBatteryDefenseBecauseNoBatteryRecover(props);
-        refreshConversation(props);
-        return {isCommandCanceled: false};
-      } else if (isEnemyTurn && isZeroBattery && !enableBurst && enablePilotSkill) {
-        await doPilotSkillBecauseZeroBattery(props);
-        refreshConversation(props);
-        await focusInPilotButton(props, pilotSkillCaption);
-        this.state.selectableCommands = 'PilotSkillOnly';
-        return {isCommandCanceled: true};
-      } else if (isEnemyTurn && isZeroBattery && enableBurst) {
-        await doBurstBecauseZeroBattery(props);
-        refreshConversation(props);
-        unattentionBurstButton(props);
-        await focusInBurstButton(props, burstCaption);
-        this.state.selectableCommands = 'BurstOnly';
-        return {isCommandCanceled: true};
-      } else if (isEnemyTurn) {
-        await cancelZeroBatteryDefense(props);
-        refreshConversation(props);
-        (this.state.selectableCommands === 'BatteryOnly') && await focusInBatterySelector(props, defenseBatteryCaption);
-        return {isCommandCanceled: true};
-      }
-    }
-
-    (this.state.selectableCommands === 'BatteryOnly') && focusOutBatterySelector(props);
-    return {isCommandCanceled: false};
+    const {state, cancel} = await onBatteryCommandSelected(props, this.state);
+    this.state = state;
+    return cancel;
   }
 
   /** @override */
