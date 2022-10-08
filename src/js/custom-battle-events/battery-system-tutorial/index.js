@@ -22,6 +22,7 @@ import {
 import {extractBattle, extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {turnCount} from "../turn-count";
+import {attackBatteryCaption, burstCaption, defenseBatteryCaption, pilotSkillCaption} from "./captions";
 import type {BatterySystemTutorialState, SelectableCommands} from "./state";
 import {batteryRuleDescription} from "./stories/battery-rule-description";
 import {completeAttackAndDefense} from "./stories/complete-attack-and-defense";
@@ -37,30 +38,6 @@ import {
   doPilotSkillBecauseZeroBattery,
   zeroBatteryDefenseBecauseNoBatteryRecover
 } from "./stories/zero-battery";
-
-/** 攻撃バッテリー注釈 */
-const attackBatteryCaption = [
-  '好きなバッテリーで攻撃してみよう',
-  'ツバサ先輩よりも大きい数字を出せば攻撃が当たるぞ'
-];
-
-/** 防御バッテリー注釈 */
-const defenseBatteryCaption = [
-  '好きなバッテリーで防御してみよう',
-  'ツバサ先輩よりも大きい数字を出せば攻撃を回避できるぞ'
-];
-
-/** バースト注釈 */
-const burstCaption = [
-  'このまま0防御すると負け確定だ',
-  'バーストでバッテリーを回復させよう'
-];
-
-/** パイロットスキル注釈 */
-const pilotSkillCaption = [
-  'このまま0防御すると負け確定だ',
-  'シンヤのパイロットスキルを発動して バッテリーを回復させよう'
-];
 
 /** バッテリーシステムチュートリアル用のカスタムバトルイベント */
 class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
