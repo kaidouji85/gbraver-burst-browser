@@ -8,7 +8,6 @@ import type {
   LastState,
   PilotSkillCommandSelected,
 } from "../../game/td-scenes/battle/custom-battle-event";
-import {waitTime} from "../../wait/wait-time";
 import {unattentionBurstButton} from "../attention";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {
@@ -19,17 +18,12 @@ import {
   focusOutBurstButton,
   focusOutPilotButton
 } from "../focus";
-import {extractBattle, extractGameEnd} from "../game-state-extractor";
+import {extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
-import {turnCount} from "../turn-count";
 import {attackBatteryCaption, burstCaption, defenseBatteryCaption, pilotSkillCaption} from "./captions";
+import {beforeLastState} from "./listeners/before-last-state";
 import type {BatterySystemTutorialState, SelectableCommands} from "./state";
-import {batteryRuleDescription} from "./stories/battery-rule-description";
-import {completeAttackAndDefense} from "./stories/complete-attack-and-defense";
-import {enemyAttack} from "./stories/enemy-attack";
-import {introduction} from "./stories/introduction";
 import {lose} from "./stories/lose";
-import {playerAttack} from "./stories/player-attack";
 import {tutorialEnd} from "./stories/tutorial-end";
 import {victory} from "./stories/victory";
 import {
@@ -54,41 +48,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.state.stateHistory = [...this.state.stateHistory, ...props.update];
-    const extractedGameEnd = extractGameEnd(props.update);
-    if (extractedGameEnd) {
-      return;
-    }
-
-    const turn = turnCount(this.state.stateHistory);
-    if (turn === 1) {
-      await introduction(props);
-      return;
-    }
-
-    const extractedBattle = extractBattle(props.update);
-    if (extractedBattle) {
-      const battle = extractedBattle.effect;
-      const isPlayerAttack = battle.attacker === props.playerId;
-      if (isPlayerAttack) {
-        await playerAttack(props, battle.result);
-        invisibleAllMessageWindows(props);
-        if (turn === 2) {
-          await waitTime(200);
-          await batteryRuleDescription(props);
-        }
-      } else {
-        await enemyAttack(props, battle.result);
-        invisibleAllMessageWindows(props);
-        if (turn === 3) {
-          await waitTime(200);
-          await completeAttackAndDefense(props);
-          invisibleAllMessageWindows(props);
-          this.state.selectableCommands = 'All';
-          this.state.isBatterySystemDescriptionComplete = true;
-        }
-      }
-    }
+    this.state = await beforeLastState(props, this.state);
   }
 
   /** @override */
