@@ -23,11 +23,11 @@ export async function onLastState(props: LastState, state: BatterySystemTutorial
     return state;
   }
 
-  const isMyTurn = lastState.activePlayerId === props.playerId;
-  if (!state.isBatterySystemDescriptionComplete  && isMyTurn) {
-    await focusInBatterySelector(props, attackBatteryCaption);
-  } else if (!state.isBatterySystemDescriptionComplete && !isMyTurn) {
-    await focusInBatterySelector(props, defenseBatteryCaption);
+  if (!state.isBatterySystemDescriptionComplete) {
+    const isMyTurn = lastState.activePlayerId === props.playerId;
+    const caption = isMyTurn ? attackBatteryCaption : defenseBatteryCaption;
+    await focusInBatterySelector(props, caption);
   }
+
   return state;
 }
