@@ -1,8 +1,8 @@
 // @flow
-import type {CustomBattleEventProps} from "../../game/td-scenes/battle/custom-battle-event";
-import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../active-message-window";
-import {refreshConversation} from "../invisible-all-message-windows";
-import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
+import type {CustomBattleEventProps} from "../../../game/td-scenes/battle/custom-battle-event";
+import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../../active-message-window";
+import {refreshConversation} from "../../invisible-all-message-windows";
+import {scrollLeftMessages, scrollRightMessages} from "../../scroll-messages";
 
 /**
  * ストーリー 冒頭

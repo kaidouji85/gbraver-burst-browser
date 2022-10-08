@@ -22,20 +22,20 @@ import {
 import {extractBattle, extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {turnCount} from "../turn-count";
-import {batteryRuleDescription} from "./battery-rule-description";
-import {completeAttackAndDefense} from "./complete-attack-and-defense";
-import {enemyAttack} from "./enemy-attack";
-import {introduction} from "./introduction";
-import {lose} from "./lose";
-import {playerAttack} from "./player-attack";
+import {batteryRuleDescription} from "./stories/battery-rule-description";
+import {completeAttackAndDefense} from "./stories/complete-attack-and-defense";
+import {enemyAttack} from "./stories/enemy-attack";
+import {introduction} from "./stories/introduction";
+import {lose} from "./stories/lose";
+import {playerAttack} from "./stories/player-attack";
 import {
   cancelZeroBatteryDefense,
   doBurstBecauseZeroBattery,
   doPilotSkillBecauseZeroBattery,
   zeroBatteryDefenseBecauseNoBatteryRecover
-} from "./zero-battery";
-import {tutorialEnd} from "./tutorial-end";
-import {victory} from "./victory";
+} from "./stories/zero-battery";
+import {tutorialEnd} from "./stories/tutorial-end";
+import {victory} from "./stories/victory";
 
 /** 攻撃バッテリー注釈 */
 const attackBatteryCaption = [
