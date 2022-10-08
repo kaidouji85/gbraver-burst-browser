@@ -5,7 +5,9 @@ import type {BatterySystemTutorialState, SelectableCommands} from "../state";
 
 /** イベント終了情報 */
 type Ret = {
+  /** ステート更新結果 */
   state: BatterySystemTutorialState,
+  /** コマンドキャンセル情報 */
   cancel: CommandCanceled
 };
 
