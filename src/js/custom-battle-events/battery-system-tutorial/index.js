@@ -1,5 +1,5 @@
 // @flow
-import type {GameEnd, GameState, GameStateX} from "gbraver-burst-core";
+import type {GameEnd, GameStateX} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -9,12 +9,12 @@ import type {
   PilotSkillCommandSelected,
 } from "../../game/td-scenes/battle/custom-battle-event";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
-import {focusInBatterySelector, focusOutBurstButton, focusOutPilotButton} from "../focus";
+import {focusOutBurstButton, focusOutPilotButton} from "../focus";
 import {extractGameEnd} from "../game-state-extractor";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
-import {attackBatteryCaption, defenseBatteryCaption} from "./captions";
 import {beforeLastState} from "./listeners/before-last-state";
 import {onBatteryCommandSelected} from "./listeners/on-battery-command-selected";
+import {onLastState} from "./listeners/on-last-state";
 import type {BatterySystemTutorialState, SelectableCommands} from "./state";
 import {lose} from "./stories/lose";
 import {tutorialEnd} from "./stories/tutorial-end";
@@ -40,22 +40,7 @@ class BatterySystemTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async onLastState(props: LastState): Promise<void> {
-    const foundLastState = props.update[props.update.length - 1];
-    if (!foundLastState) {
-      return;
-    }
-
-    const lastState: GameState = foundLastState;
-    if (lastState.effect.name !== 'InputCommand') {
-      return;
-    }
-
-    const isMyTurn = lastState.activePlayerId === props.playerId;
-    if (!this.state.isBatterySystemDescriptionComplete  && isMyTurn) {
-      await focusInBatterySelector(props, attackBatteryCaption);
-    } else if (!this.state.isBatterySystemDescriptionComplete && !isMyTurn) {
-      await focusInBatterySelector(props, defenseBatteryCaption);
-    }
+    this.state = await onLastState(props, this.state);
   }
 
   /** @override */

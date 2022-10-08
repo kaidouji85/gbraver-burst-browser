@@ -28,7 +28,7 @@ type Ret = {
  * @param state ステート
  * @return 終了情報
  */
-export async function onBatteryCommandSelected(props: $ReadOnly<BatteryCommandSelected>, state: $ReadOnly<BatterySystemTutorialState>): Promise<Ret> {
+export async function onBatteryCommandSelected(props: $ReadOnly<BatteryCommandSelected>, state: BatterySystemTutorialState): Promise<Ret> {
   const enableBatteryCommand: SelectableCommands[] = ['BatteryOnly', 'All'];
   if (!enableBatteryCommand.includes(state.selectableCommands)) {
     return {state, cancel:{isCommandCanceled: true}};
