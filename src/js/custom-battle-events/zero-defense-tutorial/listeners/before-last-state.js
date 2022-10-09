@@ -8,48 +8,52 @@ import {introduction} from "../stories/introduction";
 import {zeroBatteryChance} from "../stories/zero-battery-chance";
 
 /**
- * ダメージレースストーリーに必要となる情報を抽出する
- * 抽出できない場合、nullを返す
+ * 条件を満たした場合、ダメージレースストーリーを再生する
  *
  * @param props イベントプロパティ
- * @return 抽出結果
+ * @param state ステート
+ * @return ステート更新結果
  */
-function extractDamageRace(props: $ReadOnly<LastState>) {
+async function doDamageRaceOrNothing(props: $ReadOnly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
   const extractedBattle = extractBattle(props.update);
   if (!extractedBattle) {
-    return null;
+    return state;
   }
 
   const battle: GameStateX<Battle> = extractedBattle;
   const player = battle.players.find(v => v.playerId === props.playerId);
   const enemy = battle.players.find(v => v.playerId !== props.playerId);
-  if (!player || !enemy) {
-    return null;
+  const isEnemyAttack = battle.effect.attacker !== props.playerId;
+  if (player && enemy && isEnemyAttack && !state.isDamageRaceComplete) {
+    await damageRace(props, player.armdozer.hp, enemy.armdozer.hp);
+    return {...state, isIntroductionComplete: true};
   }
 
-  return battle.effect.attacker !== props.playerId ? {player, enemy} : null;
+  return state;
 }
 
 /**
- * 0バッテリーチャンスストーリーを再生するべきかを判定する
+ * 条件を満たした場合、0バッテリーチャンスを再生する
  *
  * @param props イベントプロパティ
- * @return 判定結果、trueで再生するべき
+ * @return 処理が完了したら発火するプロパティ
  */
-function isZeroBatteryChance(props: $ReadOnly<LastState>): boolean {
+async function doZeroBatteryChangeOrNothing(props: $ReadOnly<LastState>): Promise<void> {
   const foundLastState = props.update[props.update.length - 1];
   if (!foundLastState) {
-    return false;
+    return;
   }
 
   const lastState: GameState = foundLastState;
   const enemy = lastState.players.find(v => v.playerId !== props.playerId);
   if (!enemy) {
-    return false;
+    return;
   }
 
   const isPlayerTurn = lastState.activePlayerId === props.playerId;
-  return isPlayerTurn && (enemy.armdozer.battery === 0) && (0 < enemy.armdozer.hp);
+  if (isPlayerTurn && (enemy.armdozer.battery === 0) && (0 < enemy.armdozer.hp)) {
+    await zeroBatteryChance(props);
+  }
 }
 
 /**
@@ -66,20 +70,11 @@ export async function beforeLastState(props: $ReadOnly<LastState>, state: ZeroDe
     return {...updatedStateHistory, isIntroductionComplete: true};
   }
 
-  const extractedGameEnd = extractGameEnd(props.update);
-  if (extractedGameEnd) {
+  if (extractGameEnd(props.update)) {
     return updatedStateHistory;
   }
 
-  const extractedDamageRace = extractDamageRace(props);
-  if (extractedDamageRace && !state.isDamageRaceComplete) {
-    const {player, enemy} = extractedDamageRace
-    await damageRace(props, player.armdozer.hp, enemy.armdozer.hp);
-  }
-
-  if (isZeroBatteryChance(props)) {
-    await zeroBatteryChance(props);
-  }
-
-  return {...updatedStateHistory, isDamageRaceComplete: !!extractedDamageRace}
+  const updatedByDamageRace = await doDamageRaceOrNothing(props, updatedStateHistory);
+  await doZeroBatteryChangeOrNothing(props);
+  return updatedByDamageRace;
 }
