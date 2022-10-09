@@ -8,13 +8,13 @@ import type {
   CustomBattleEventProps,
   LastState,
   PilotSkillCommandSelected
-} from "../game/td-scenes/battle/custom-battle-event";
-import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "./active-message-window";
-import {unattentionBurstButton, unattentionPilotButton} from "./attention";
-import {EmptyCustomBattleEvent} from "./empty-custom-battle-event";
-import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "./focus";
-import {invisibleAllMessageWindows, refreshConversation} from "./invisible-all-message-windows";
-import {scrollLeftMessages, scrollRightMessages} from "./scroll-messages";
+} from "../../game/td-scenes/battle/custom-battle-event";
+import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../active-message-window";
+import {unattentionBurstButton, unattentionPilotButton} from "../attention";
+import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
+import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "../focus";
+import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
+import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
 
 /**
  * ストーリー 冒頭
