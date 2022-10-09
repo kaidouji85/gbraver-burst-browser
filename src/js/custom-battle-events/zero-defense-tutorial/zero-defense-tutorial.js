@@ -15,11 +15,9 @@ import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPil
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {scrollRightMessages} from "../scroll-messages";
 import {shouldBurst, shouldPilotSkill} from "./captions";
+import {afterLastState} from "./listeners/after-last-state";
 import {beforeLastState} from "./listeners/before-last-state";
-import {playerLose} from "./stories/player-lose";
 import type {SelectableCommands, ZeroDefenseTutorialState} from "./state";
-import {gameEndThanks} from "./stories/game-end-thanks";
-import {zeroDefenseWin} from "./stories/zero-defense-win";
 
 /**
  * ストーリー 0防御禁止
@@ -199,26 +197,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async afterLastState(props: LastState): Promise<void> {
-    const foundBatteryDeclaration = props.update.find(v => v.effect.name === 'BatteryDeclaration');
-    const batteryDeclaration = foundBatteryDeclaration && foundBatteryDeclaration.effect.name === 'BatteryDeclaration'
-      ? {defenderBattery: foundBatteryDeclaration.effect.defenderBattery,
-        isPlayerAttack: foundBatteryDeclaration.effect.attacker === props.playerId}
-      : null;
-    const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
-    const gameOver = foundGameEnd && foundGameEnd.effect.name === 'GameEnd' && foundGameEnd.effect.result.type === 'GameOver'
-      ? {isPlayerWin: foundGameEnd.effect.result.winner === props.playerId}
-      : null;
-    if (batteryDeclaration && batteryDeclaration.defenderBattery === 0 && batteryDeclaration.isPlayerAttack
-      && gameOver && gameOver.isPlayerWin)
-    {
-      await zeroDefenseWin(props);
-      await refreshConversation(props);
-      await gameEndThanks(props);
-    } else if (gameOver && !gameOver.isPlayerWin) {
-      await playerLose(props);
-      await refreshConversation(props);
-      await gameEndThanks(props);
-    }
+    this.state = await afterLastState(props, this.state);
   }
 
   /** @override */
