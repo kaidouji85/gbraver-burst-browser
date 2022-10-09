@@ -7,20 +7,12 @@ import type {
   LastState,
   PilotSkillCommandSelected
 } from "../../game/td-scenes/battle/custom-battle-event";
-import {unattentionBurstButton, unattentionPilotButton} from "../attention";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
-import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "../focus";
-import {refreshConversation} from "../invisible-all-message-windows";
-import {shouldBurst, shouldPilotSkill} from "./captions";
+import {focusOutBurstButton, focusOutPilotButton} from "../focus";
 import {afterLastState} from "./listeners/after-last-state";
 import {beforeLastState} from "./listeners/before-last-state";
+import {onBatteryCommandSelected} from "./listeners/on-battery-command-selected";
 import type {SelectableCommands, ZeroDefenseTutorialState} from "./state";
-import {
-  cancelZeroBatteryDefense,
-  doBurstBecauseZeroBattery,
-  doPilotSkillBecauseZeroBattery,
-  zeroBatteryDefenseBecauseNoBatteryRecover
-} from "./stories/no-zero-battery";
 
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
@@ -52,46 +44,9 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
 
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
-    const enableBatteryCommand: SelectableCommands[] = ['All'];
-    if (!enableBatteryCommand.includes(this.state.selectableCommands)) {
-      return {isCommandCanceled: true};
-    }
-
-    const foundLastState = this.state.stateHistory[this.state.stateHistory.length - 1];
-    const lastState = foundLastState
-      ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
-        player: foundLastState.players.find(v => v.playerId === props.playerId)}
-      : null;
-    const lastPlayer = (lastState && lastState.player)
-      ? {isZeroBattery: lastState.player.armdozer.battery === 0,
-        enableBurst: lastState.player.armdozer.enableBurst, enablePilotSkill: lastState.player.pilot.enableSkill}
-      : null
-    const isZeroBatteryCommand = props.battery.battery === 0;
-    if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && !lastPlayer.isZeroBattery) {
-      await cancelZeroBatteryDefense(props);
-      return {isCommandCanceled: true};
-    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
-      this.state.selectableCommands = 'BurstOnly';
-      await doBurstBecauseZeroBattery(props);
-      unattentionBurstButton(props);
-      await focusInBurstButton(props, shouldBurst);
-      return {isCommandCanceled: true};
-    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery
-      && !lastPlayer.enableBurst && lastPlayer.enablePilotSkill)
-    {
-      this.state.selectableCommands = 'PilotSkillOnly';
-      await doPilotSkillBecauseZeroBattery(props);
-      unattentionPilotButton(props);
-      await focusInPilotButton(props, shouldPilotSkill);
-      return {isCommandCanceled: true};
-    } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery
-      && !lastPlayer.enableBurst && !lastPlayer.enablePilotSkill)
-    {
-      await zeroBatteryDefenseBecauseNoBatteryRecover(props);
-      refreshConversation(props);
-      return {isCommandCanceled: false};
-    }
-    return {isCommandCanceled: false};
+    const {state, cancel} = await onBatteryCommandSelected(props, this.state);
+    this.state = state;
+    return cancel;
   }
 
   /** @override */
