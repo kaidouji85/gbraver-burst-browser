@@ -15,34 +15,10 @@ import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPil
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
 import {shouldBurst, shouldPilotSkill} from "./captions";
+import {gameEndThanks} from "./stories/game-end-thanks";
 import {beforeLastState} from "./listeners/before-last-state";
 import type {SelectableCommands, ZeroDefenseTutorialState} from "./state";
-
-/**
- * ストーリー 0防御勝利
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const zeroDefenseWin = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Tsubasa');
-  await scrollRightMessages(props, [
-    ['ツバサ', '「そこまで!!'],
-    ['勝者 シンヤ」']
-  ]);
-  await refreshConversation(props);
-
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「やった デビュー戦で勝てたッス」'],
-  ]);props.view.dom.rightMessageWindow.darken();
-
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「バカな この俺が負けるなんて'],
-    ['……シンヤ 貴様の名前 覚えたからな」']
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-};
+import {zeroDefenseWin} from "./stories/zero-defense-win";
 
 /**
  * ストーリー プレイヤー敗北
@@ -68,29 +44,6 @@ const playerLose = async (props: CustomBattleEventProps) => {
     ['シンヤ', '「……手も足も出なかったッス」'],
   ]);
   props.view.dom.rightMessageWindow.darken();
-};
-
-/**
- * ストーリー 試合終了の礼
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const gameEndThanks = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Tsubasa');
-  await scrollRightMessages(props, [
-    ['ツバサ', '「これにて台東高校 大田高校の合同練習試合を終了する'],
-    ['一同 姿勢を正して 礼!!」'],
-  ]);
-  await refreshConversation(props, 100);
-
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  props.view.dom.leftMessageWindow.messages(['ガイ', '「ありがとうございました」']);
-  props.view.dom.leftMessageWindow.scrollUp();
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「ありがとうございました」']
-  ]);
-  invisibleAllMessageWindows(props);
 };
 
 /**
