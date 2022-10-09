@@ -3,9 +3,9 @@ import type {BatteryDeclaration, GameEnd, GameOver, GameStateX} from "gbraver-bu
 import type {LastState} from "../../../game/td-scenes/battle/custom-battle-event";
 import {extractBatteryDeclaration, extractGameEnd} from "../../game-state-extractor";
 import {refreshConversation} from "../../invisible-all-message-windows";
-import {playerLose} from "../stories/player-lose";
 import type {ZeroDefenseTutorialState} from "../state";
 import {gameEndThanks} from "../stories/game-end-thanks";
+import {playerLose} from "../stories/player-lose";
 import {zeroDefenseWin} from "../stories/zero-defense-win";
 
 /**
