@@ -1,5 +1,4 @@
 // @flow
-import type {GameState} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -15,6 +14,7 @@ import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "../focus";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
+import type {SelectableCommands, ZeroDefenseTutorialState} from "./state";
 
 /**
  * ストーリー 冒頭
@@ -393,37 +393,30 @@ const shouldPilotSkill = [
   'パイロットスキルを発動してバッテリーを回復しよう'
 ];
 
-/** 選択可能なコマンド */
-type SelectableCommands = 'BurstOnly' | 'PilotSkillOnly' | 'All';
-
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
-  /** ステートヒストリー、 beforeLastState開始時に更新される */
-  stateHistory: GameState[];
-  /** 選択可能なコマンド */
-  selectableCommands: SelectableCommands;
-  /** イントロダクションを再生したか、trueで再生した */
-  isIntroductionComplete: boolean;
-  /** ダメージレースストーリーを再生したか、trueで再生した */
-  isDamageRaceComplete: boolean;
+  /** ステート */
+  state: ZeroDefenseTutorialState;
 
   /**
    * コンストラクタ
    */
   constructor() {
     super();
-    this.stateHistory = [];
-    this.selectableCommands = 'All';
-    this.isIntroductionComplete = false;
-    this.isDamageRaceComplete = false;
+    this.state = {
+      stateHistory: [],
+      selectableCommands: 'All',
+      isIntroductionComplete: false,
+      isDamageRaceComplete: false,
+    };
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.stateHistory = [...this.stateHistory, ...props.update];
-    if (!this.isIntroductionComplete) {
+    this.state.stateHistory = [...this.state.stateHistory, ...props.update];
+    if (!this.state.isIntroductionComplete) {
       await introduction(props);
-      this.isIntroductionComplete = true;
+      this.state.isIntroductionComplete = true;
     }
 
     const isGameEnd = props.update.filter(v => v.effect.name === 'GameEnd').length > 0;
@@ -435,8 +428,8 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
         playerHP: battlePlayer.armdozer.hp,
         enemyHP: battleEnemy.armdozer.hp}
       : null;
-    if (lastBattle && !lastBattle.isAttacker && !isGameEnd && !this.isDamageRaceComplete) {
-      this.isDamageRaceComplete = true;
+    if (lastBattle && !lastBattle.isAttacker && !isGameEnd && !this.state.isDamageRaceComplete) {
+      this.state.isDamageRaceComplete = true;
       await damageRace(props, lastBattle.playerHP, lastBattle.enemyHP);
     }
 
@@ -479,11 +472,11 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
     const enableBatteryCommand: SelectableCommands[] = ['All'];
-    if (!enableBatteryCommand.includes(this.selectableCommands)) {
+    if (!enableBatteryCommand.includes(this.state.selectableCommands)) {
       return {isCommandCanceled: true};
     }
 
-    const foundLastState = this.stateHistory[this.stateHistory.length - 1];
+    const foundLastState = this.state.stateHistory[this.state.stateHistory.length - 1];
     const lastState = foundLastState
       ? {isEnemyTurn: foundLastState.activePlayerId !== props.playerId,
         player: foundLastState.players.find(v => v.playerId === props.playerId)}
@@ -497,7 +490,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
       await cancelZeroBatteryDefense(props);
       return {isCommandCanceled: true};
     } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery && lastPlayer.enableBurst) {
-      this.selectableCommands = 'BurstOnly';
+      this.state.selectableCommands = 'BurstOnly';
       await doBurstBecauseZeroBattery(props);
       unattentionBurstButton(props);
       await focusInBurstButton(props, shouldBurst);
@@ -505,7 +498,7 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
     } else if (isZeroBatteryCommand && lastState && lastState.isEnemyTurn && lastPlayer && lastPlayer.isZeroBattery 
       && !lastPlayer.enableBurst && lastPlayer.enablePilotSkill)
     {
-      this.selectableCommands = 'PilotSkillOnly';
+      this.state.selectableCommands = 'PilotSkillOnly';
       await doPilotSkillBecauseZeroBattery(props);
       unattentionPilotButton(props);
       await focusInPilotButton(props, shouldPilotSkill);
@@ -523,12 +516,12 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** @override */
   async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
     const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
-    if (!enableBurstCommand.includes(this.selectableCommands)) {
+    if (!enableBurstCommand.includes(this.state.selectableCommands)) {
       return {isCommandCanceled: true};
     }
 
-    if (this.selectableCommands === 'BurstOnly') {
-      this.selectableCommands = 'All';
+    if (this.state.selectableCommands === 'BurstOnly') {
+      this.state.selectableCommands = 'All';
       focusOutBurstButton(props);
       return {isCommandCanceled: false};  
     }
@@ -539,12 +532,12 @@ class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
   /** @override */
   async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
     const enablePilotSkillCommand: SelectableCommands[] = ['All', 'PilotSkillOnly'];
-    if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
+    if (!enablePilotSkillCommand.includes(this.state.selectableCommands)) {
       return {isCommandCanceled: true};
     }
   
-    if (this.selectableCommands === 'PilotSkillOnly') {
-      this.selectableCommands = 'All';
+    if (this.state.selectableCommands === 'PilotSkillOnly') {
+      this.state.selectableCommands = 'All';
       focusOutPilotButton(props);
       return {isCommandCanceled: false}; 
     }
