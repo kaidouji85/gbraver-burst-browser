@@ -1,5 +1,5 @@
 // @flow
-import type {Battle, GameEnd, GameState, GameStateX, InputCommand} from "gbraver-burst-core";
+import type {Battle,BatteryDeclaration, GameEnd, GameState, GameStateX, InputCommand} from "gbraver-burst-core";
 
 /**
  * GameStateX<Battle>にキャストする
@@ -29,7 +29,7 @@ export function extractBattle(stateHistory: GameState[]): ?GameStateX<Battle> {
 }
 
 /**
- * GameStateX<Battle>にキャストする
+ * GameStateX<InputCommand>にキャストする
  * キャストできない場合はnullを返す
  *
  * @param state キャスト元
@@ -53,6 +53,33 @@ export function castInputCommand(state: GameState): ?GameStateX<InputCommand> {
 export function extractInputCommand(stateHistory: GameState[]): ?GameStateX<InputCommand> {
   const foundState = stateHistory.find(v => v.effect.name === 'InputCommand');
   return foundState ? castInputCommand(foundState) : null;
+}
+
+/**
+ * GameStateX<BatteryDeclaration>にキャストする
+ * キャストできない場合はnullを返す
+ *
+ * @param state キャスト元
+ * @return キャスト結果
+ */
+export function castBatteryDeclaration(state: GameState): ?GameStateX<BatteryDeclaration> {
+  if (state.effect.name === 'BatteryDeclaration') {
+    const effect: BatteryDeclaration = state.effect;
+    return {...state, effect};
+  }
+  return null;
+}
+
+/**
+ * ステートヒストリーからGameStateX<BatteryDeclaration>を抽出する
+ * 抽出できない場合はnullを返す
+ *
+ * @param stateHistory ステートヒストリー
+ * @return 抽出結果
+ */
+export function extractBatteryDeclaration(stateHistory: GameState[]): ?GameStateX<BatteryDeclaration> {
+  const foundState = stateHistory.find(v => v.effect.name === 'BatteryDeclaration');
+  return foundState ? castBatteryDeclaration(foundState) : null;
 }
 
 /**
