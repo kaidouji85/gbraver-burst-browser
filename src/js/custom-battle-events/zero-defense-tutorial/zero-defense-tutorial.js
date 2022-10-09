@@ -14,6 +14,7 @@ import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "../focus";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
+import {shouldBurst, shouldPilotSkill} from "./captions";
 import type {SelectableCommands, ZeroDefenseTutorialState} from "./state";
 
 /**
@@ -380,18 +381,6 @@ const zeroBatteryDefenseBecauseNoBatteryRecover = async (props: CustomBattleEven
   ]);
   invisibleAllMessageWindows(props);
 };
-
-/** バースト注釈 */
-const shouldBurst = [
-  'このまま0防御すると負け確定だ',
-  'バーストでバッテリーを回復しよう'
-];
-
-/** パイロットスキル注釈 */
-const shouldPilotSkill = [
-  'このまま0防御すると負け確定だ',
-  'パイロットスキルを発動してバッテリーを回復しよう'
-];
 
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
