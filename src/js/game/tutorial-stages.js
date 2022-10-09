@@ -3,7 +3,7 @@ import type {Player} from "gbraver-burst-core";
 import {ArmDozerIds, ArmDozers, PilotIds, Pilots} from "gbraver-burst-core";
 import {createBatterySystemTutorialEvent} from "../custom-battle-events/battery-system-tutorial";
 import {createBurstTutorialEvent} from "../custom-battle-events/burst-tutorial";
-import {createZeroDefenseTutorialEvent} from "../custom-battle-events/zero-defense-tutorial/zero-defense-tutorial";
+import {createZeroDefenseTutorialEvent} from "../custom-battle-events/zero-defense-tutorial";
 import {batterySystemTutorialNPC} from "../npc/battery-system-tutorial";
 import {burstTutorialNPC} from "../npc/burst-tutorial";
 import type {NPC} from "../npc/npc";
