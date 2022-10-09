@@ -13,7 +13,7 @@ import {afterLastState} from "./listeners/after-last-state";
 import {beforeLastState} from "./listeners/before-last-state";
 import {onBatteryCommandSelected} from "./listeners/on-battery-command-selected";
 import type {SelectableCommands, ZeroDefenseTutorialState} from "./state";
-import {onBurstCommandSelected} from "./stories/on-burst-command-selected";
+import {onBurstCommandSelected} from "./listeners/on-burst-command-selected";
 
 /** ゼロ防御チュートリアル */
 class ZeroDefenseTutorialEvent extends EmptyCustomBattleEvent {
