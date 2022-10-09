@@ -1,4 +1,5 @@
 {
   "skipDirectories": ["/node_modules", "coverage", "build"],
-  "enableFlow": true
+  "enableFlow": true,
+  "cliOutputLimit": 100
 }
