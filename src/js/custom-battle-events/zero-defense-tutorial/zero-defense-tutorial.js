@@ -8,43 +8,18 @@ import type {
   LastState,
   PilotSkillCommandSelected
 } from "../../game/td-scenes/battle/custom-battle-event";
-import {activeLeftMessageWindowWithFace, activeRightMessageWindowWithFace} from "../active-message-window";
+import {activeRightMessageWindowWithFace} from "../active-message-window";
 import {unattentionBurstButton, unattentionPilotButton} from "../attention";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "../focus";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
-import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
+import {scrollRightMessages} from "../scroll-messages";
 import {shouldBurst, shouldPilotSkill} from "./captions";
-import {gameEndThanks} from "./stories/game-end-thanks";
 import {beforeLastState} from "./listeners/before-last-state";
+import {playerLose} from "./stories/player-lose";
 import type {SelectableCommands, ZeroDefenseTutorialState} from "./state";
+import {gameEndThanks} from "./stories/game-end-thanks";
 import {zeroDefenseWin} from "./stories/zero-defense-win";
-
-/**
- * ストーリー プレイヤー敗北
- * @param props イベントプロパティ
- * @return ストーリーが完了したら発火するPromise
- */
-const playerLose = async (props: CustomBattleEventProps) => {
-  activeRightMessageWindowWithFace(props, 'Tsubasa');
-  await scrollRightMessages(props, [
-    ['ツバサ', '「そこまで!!'],
-    ['勝者 ガイ」']
-  ]);
-  await refreshConversation(props);
-
-  activeLeftMessageWindowWithFace(props, 'Gai');
-  await scrollLeftMessages(props, [
-    ['ガイ', '「強豪校といっても 所詮はこの程度か」'],
-  ]);
-  props.view.dom.leftMessageWindow.darken();
-
-  activeRightMessageWindowWithFace(props, 'Shinya');
-  await scrollRightMessages(props, [
-    ['シンヤ', '「……手も足も出なかったッス」'],
-  ]);
-  props.view.dom.rightMessageWindow.darken();
-};
 
 /**
  * ストーリー 0防御禁止
