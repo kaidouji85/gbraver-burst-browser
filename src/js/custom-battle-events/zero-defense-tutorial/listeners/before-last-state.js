@@ -1,5 +1,7 @@
 // @flow
+import type {Battle, GameState, GameStateX} from "gbraver-burst-core";
 import type {LastState} from "../../../game/td-scenes/battle/custom-battle-event";
+import {extractBattle, extractGameEnd} from "../../game-state-extractor";
 import type {ZeroDefenseTutorialState} from "../state";
 import {damageRace} from "../stories/damage-race";
 import {introduction} from "../stories/introduction";
@@ -13,36 +15,36 @@ import {zeroBatteryChance} from "../stories/zero-battery-chance";
  * @return ステート更新結果
  */
 export async function beforeLastState(props: $ReadOnly<LastState>, state: ZeroDefenseTutorialState): Promise<ZeroDefenseTutorialState> {
-  state.stateHistory = [...state.stateHistory, ...props.update];
+  const updatedStateHistory = {...state, stateHistory: [...state.stateHistory, ...props.update]};
   if (!state.isIntroductionComplete) {
     await introduction(props);
-    return {...state, isIntroductionComplete: true};
+    return {...updatedStateHistory, isIntroductionComplete: true};
   }
 
-  const isGameEnd = props.update.filter(v => v.effect.name === 'GameEnd').length > 0;
-  const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
-  const battlePlayer = (foundLastBattle?.players ?? []).find(v => v.playerId === props.playerId);
-  const battleEnemy = (foundLastBattle?.players ?? []).find(v => v.playerId !== props.playerId);
-  const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle' && battlePlayer && battleEnemy
-    ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
-      playerHP: battlePlayer.armdozer.hp,
-      enemyHP: battleEnemy.armdozer.hp}
-    : null;
-  if (lastBattle && !lastBattle.isAttacker && !isGameEnd && !state.isDamageRaceComplete) {
-    state.isDamageRaceComplete = true;
-    await damageRace(props, lastBattle.playerHP, lastBattle.enemyHP);
+  const extractedGameEnd = extractGameEnd(props.update);
+  const extractedBattle = extractBattle(props.update);
+  if (extractedBattle && !extractedGameEnd) {
+    const battle: GameStateX<Battle> = extractedBattle;
+    const player = battle.players.find(v => v.playerId === props.playerId);
+    const enemy = battle.players.find(v => v.playerId !== props.playerId);
+    if (player && enemy) {
+      const isEnemyAttack = battle.effect.attacker !== props.playerId;
+      if (isEnemyAttack) {
+        await damageRace(props, player.armdozer.hp, enemy.armdozer.hp);
+        return {...updatedStateHistory, isDamageRaceComplete: true};
+      }
+    }
   }
 
   const foundLastState = props.update[props.update.length - 1];
-  const latestEnemy = (foundLastState?.players?? []).find(v => v.playerId !== props.playerId);
-  const lastState = foundLastState && latestEnemy
-    ? {isPlayerTurn: foundLastState.activePlayerId === props.playerId,
-      isZeroBatteryChange: latestEnemy.armdozer.battery === 0 && 0 < latestEnemy.armdozer.hp,
-      enemyState: latestEnemy}
-    : null;
-  if (lastState && lastState.isPlayerTurn && lastState.isZeroBatteryChange && !isGameEnd) {
-    await zeroBatteryChance(props);
+  if (foundLastState) {
+    const lastState: GameState = foundLastState;
+    const isPlayerTurn = lastState.activePlayerId === props.playerId;
+    const enemy = lastState.players.find(v => v.playerId !== props.playerId);
+    if (enemy && isPlayerTurn && (enemy.armdozer.battery === 0) && (0 < enemy.armdozer.hp)) {
+      await zeroBatteryChance(props);
+    }
   }
 
-  return state;
+  return updatedStateHistory;
 }
