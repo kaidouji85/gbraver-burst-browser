@@ -11,19 +11,17 @@ import type {
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "../focus";
 import {shouldBurst, shouldPilotSkill} from "./captions";
-import {playerLose} from "./stories/player-lose";
+import {beforeLastState} from "./listeners/before-last-state";
 import type {BurstTutorialState, SelectableCommands} from "./state";
 import {canNotChangeBattery} from "./stories/can-not-change-battery";
 import {doBurstToRecoverBattery} from "./stories/do-burst-to-recover-battery";
 import {doPilotSkillToRecoverBattery} from "./stories/do-pilot-skill-to-recover-battery";
-import {failReflectDamage} from "./stories/fail-reflect-damage";
-import {introduction} from "./stories/introduction";
 import {notDefense5Carelessly} from "./stories/not-defense5-carelessly";
+import {playerLose} from "./stories/player-lose";
 import {playerWin} from "./stories/player-win";
 import {redoBatterySelect} from "./stories/redo-battery-select";
 import {shouldDefense5} from "./stories/should-defense5";
 import {shouldDefense5Again} from "./stories/should-defense5-again";
-import {successReflectDamage} from "./stories/success-reflect-damage";
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
@@ -45,27 +43,7 @@ class BurstTutorial extends EmptyCustomBattleEvent {
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.state.stateHistory = [...this.state.stateHistory, ...props.update];
-    if (!this.state.isIntroductionComplete) {
-      await introduction(props);
-      this.state.isIntroductionComplete = true;
-    }
-
-    const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
-    const lastBattlePlayer = (foundLastBattle?.players ?? []).find(v => v.playerId === props.playerId);
-    const lastBattleEnemy = (foundLastBattle?.players ?? []).find(v => v.playerId !== props.playerId);
-    const lastBattle = foundLastBattle && foundLastBattle.effect.name === 'Battle' && lastBattlePlayer && lastBattleEnemy
-      ? {isAttacker: foundLastBattle.effect.attacker === props.playerId,
-        hasEnemyTryReflect: 0 < lastBattleEnemy.armdozer.effects.filter(v => v.type === 'TryReflect').length}
-      : null;
-    const successReflect = props.update
-      .filter(v => v.effect.name === 'Reflect' && v.effect.damagedPlayer === props.playerId)
-      .length > 0;
-    if (lastBattle && lastBattle.isAttacker && lastBattle.hasEnemyTryReflect && successReflect) {
-      await successReflectDamage(props);
-    } else if (lastBattle && lastBattle.isAttacker && lastBattle.hasEnemyTryReflect && !successReflect) {
-      await failReflectDamage(props);
-    }
+    this.state = await beforeLastState(props, this.state);
   }
 
   /** @override */
