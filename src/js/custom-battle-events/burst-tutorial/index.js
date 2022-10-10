@@ -14,6 +14,7 @@ import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "../focus";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
+import type {BurstTutorialState, SelectableCommands} from "./state";
 
 /**
  * ストーリー 冒頭
@@ -311,37 +312,30 @@ const shouldPilotSkill = [
   'パイロットスキルでバッテリー回復して5防御しよう'
 ];
 
-/** 選択可能なコマンド */
-type SelectableCommands = 'BurstOnly' | 'PilotSkillOnly' | 'All';
-
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
-  /** ステートヒストリー、 beforeLastState開始時に更新される */
-  stateHistory: GameState[];
-  /** イントロダクションを再生したか、trueで再生した */
-  isIntroductionComplete: boolean;
-  /** 5防御しないと負けを再生したか、trueで再生した */
-  isLoseIfNoDefense5Complete: boolean;
-  /** 選択可能なコマンド */
-  selectableCommands: SelectableCommands;
+  /** ステート */
+  state: BurstTutorialState;
 
   /**
    * コンストラクタ
    */
   constructor() {
     super();
-    this.stateHistory = [];
-    this.isIntroductionComplete = false;
-    this.isLoseIfNoDefense5Complete = false;
-    this.selectableCommands = 'All';
+    this.state = {
+      stateHistory: [],
+      isIntroductionComplete: false,
+      isLoseIfNoDefense5Complete: false,
+      selectableCommands: 'All',
+    };
   }
 
   /** @override */
   async beforeLastState(props: LastState): Promise<void> {
-    this.stateHistory = [...this.stateHistory, ...props.update];
-    if (!this.isIntroductionComplete) {
+    this.state.stateHistory = [...this.state.stateHistory, ...props.update];
+    if (!this.state.isIntroductionComplete) {
       await introduction(props);
-      this.isIntroductionComplete = true;
+      this.state.isIntroductionComplete = true;
     }
 
     const foundLastBattle = props.update.find(v => v.effect.name === 'Battle');
@@ -364,11 +358,11 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
     const enableBurstCommand: SelectableCommands[] = ['All'];
-    if (!enableBurstCommand.includes(this.selectableCommands)) {
+    if (!enableBurstCommand.includes(this.state.selectableCommands)) {
       return {isCommandCanceled: true};
     }
 
-    const foundLastState = this.stateHistory[this.stateHistory.length - 1];
+    const foundLastState = this.state.stateHistory[this.state.stateHistory.length - 1];
     const latestPlayer = (foundLastState?.players ?? []).find(v => v.playerId === props.playerId);
     const latestEnemy = (foundLastState?.players ?? []).find(v => v.playerId !== props.playerId);
     const lastState = foundLastState && latestPlayer && latestEnemy
@@ -381,39 +375,39 @@ class BurstTutorial extends EmptyCustomBattleEvent {
       : null;
     const notBattery5 = props.battery.battery !== 5;
     const defense5 = async (props: CustomBattleEventProps) => {
-      this.isLoseIfNoDefense5Complete ? await shouldDefense5Again(props) : await shouldDefense5(props);
+      this.state.isLoseIfNoDefense5Complete ? await shouldDefense5Again(props) : await shouldDefense5(props);
     };
     if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && !lastState.isPlayerFullBattery && lastState.enableBurst)
     {
       await defense5(props);
-      this.isLoseIfNoDefense5Complete = true;
+      this.state.isLoseIfNoDefense5Complete = true;
       await doBurstToRecoverBattery(props);
       await focusInBurstButton(props, shouldBurst);
-      this.selectableCommands = 'BurstOnly';
+      this.state.selectableCommands = 'BurstOnly';
       return {isCommandCanceled: true};
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && !lastState.isPlayerFullBattery && !lastState.enableBurst && lastState.enablePilotSkill)
     {
       await defense5(props);
-      this.isLoseIfNoDefense5Complete = true;
+      this.state.isLoseIfNoDefense5Complete = true;
       await doPilotSkillToRecoverBattery(props);
       await focusInPilotButton(props, shouldPilotSkill);
-      this.selectableCommands = 'PilotSkillOnly';
+      this.state.selectableCommands = 'PilotSkillOnly';
       return {isCommandCanceled: true};
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && !lastState.isPlayerFullBattery && !lastState.enableBurst && !lastState.enablePilotSkill)
     {
       await defense5(props);
-      this.isLoseIfNoDefense5Complete = true;
+      this.state.isLoseIfNoDefense5Complete = true;
       await canNotChangeBattery(props);
       return {isCommandCanceled: false};
     } else if (notBattery5 && lastState && lastState.isEnemyTurn && lastState.isHpLessThanEnemyPower && lastState.isEnemyFullBattery
       && lastState.isPlayerFullBattery)
     {
       await defense5(props);
-      this.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await redoBatterySelect(props);
-      this.isLoseIfNoDefense5Complete = true;
+      this.state.isLoseIfNoDefense5Complete ? await notDefense5Carelessly(props) : await redoBatterySelect(props);
+      this.state.isLoseIfNoDefense5Complete = true;
       return {isCommandCanceled: true};
     }
 
@@ -436,12 +430,12 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   /** @override */
   async onBurstCommandSelected(props: BurstCommandSelected): Promise<CommandCanceled> {
     const enableBurstCommand: SelectableCommands[] = ['BurstOnly', 'All'];
-    if (!enableBurstCommand.includes(this.selectableCommands)) {
+    if (!enableBurstCommand.includes(this.state.selectableCommands)) {
       return {isCommandCanceled: true};
     }
 
-    if (this.selectableCommands === 'BurstOnly') {
-      this.selectableCommands = 'All';
+    if (this.state.selectableCommands === 'BurstOnly') {
+      this.state.selectableCommands = 'All';
       focusOutBurstButton(props);
       return {isCommandCanceled: false};
     }
@@ -452,12 +446,12 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   /** @override */
   async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
     const enablePilotSkillCommand: SelectableCommands[] = ['PilotSkillOnly', 'All'];
-    if (!enablePilotSkillCommand.includes(this.selectableCommands)) {
+    if (!enablePilotSkillCommand.includes(this.state.selectableCommands)) {
       return {isCommandCanceled: true};
     }
 
-    if (this.selectableCommands === 'PilotSkillOnly') {
-      this.selectableCommands = 'All';
+    if (this.state.selectableCommands === 'PilotSkillOnly') {
+      this.state.selectableCommands = 'All';
       focusOutPilotButton(props);
       return {isCommandCanceled: false};
     }
