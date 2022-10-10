@@ -1,5 +1,4 @@
 // @flow
-import type {GameState} from "gbraver-burst-core";
 import type {
   BatteryCommandSelected,
   BurstCommandSelected,
@@ -14,6 +13,7 @@ import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
 import {focusInBurstButton, focusInPilotButton, focusOutBurstButton, focusOutPilotButton} from "../focus";
 import {invisibleAllMessageWindows, refreshConversation} from "../invisible-all-message-windows";
 import {scrollLeftMessages, scrollRightMessages} from "../scroll-messages";
+import {shouldBurst, shouldPilotSkill} from "./captions";
 import type {BurstTutorialState, SelectableCommands} from "./state";
 
 /**
@@ -299,18 +299,6 @@ const playerLose = async (props: CustomBattleEventProps) => {
   ]);
   invisibleAllMessageWindows(props);
 };
-
-/** バースト注釈 */
-const shouldBurst = [
-  'ライトさん4攻撃をしかけてくる',
-  'バーストでバッテリー回復して5防御しよう'
-];
-
-/** パイロットスキル注釈 */
-const shouldPilotSkill = [
-  'ライトさんは4攻撃をしかけてくる',
-  'パイロットスキルでバッテリー回復して5防御しよう'
-];
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
