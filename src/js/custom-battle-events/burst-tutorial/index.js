@@ -8,11 +8,11 @@ import type {
   PilotSkillCommandSelected,
 } from "../../game/td-scenes/battle/custom-battle-event";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
-import {focusOutPilotButton} from "../focus";
 import {beforeLastState} from "./listeners/before-last-state";
 import {onBatteryCommandSelected} from "./listeners/on-battery-command-selected";
 import {onBurstCommandSelected} from "./listeners/on-burst-command-selected";
-import type {BurstTutorialState, SelectableCommands} from "./state";
+import {onPilotSkillCommandSelected} from "./listeners/on-pilot-skill-command-selected";
+import type {BurstTutorialState} from "./state";
 import {playerLose} from "./stories/player-lose";
 import {playerWin} from "./stories/player-win";
 
@@ -68,18 +68,9 @@ class BurstTutorial extends EmptyCustomBattleEvent {
 
   /** @override */
   async onPilotSkillCommandSelected(props: PilotSkillCommandSelected): Promise<CommandCanceled> {
-    const enablePilotSkillCommand: SelectableCommands[] = ['PilotSkillOnly', 'All'];
-    if (!enablePilotSkillCommand.includes(this.state.selectableCommands)) {
-      return {isCommandCanceled: true};
-    }
-
-    if (this.state.selectableCommands === 'PilotSkillOnly') {
-      this.state.selectableCommands = 'All';
-      focusOutPilotButton(props);
-      return {isCommandCanceled: false};
-    }
-
-    return {isCommandCanceled: false};
+    const {state, cancel} = await onPilotSkillCommandSelected(props, this.state);
+    this.state = state;
+    return cancel;
   }
 }
 
