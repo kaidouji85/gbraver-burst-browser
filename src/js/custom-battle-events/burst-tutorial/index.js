@@ -8,13 +8,12 @@ import type {
   PilotSkillCommandSelected,
 } from "../../game/td-scenes/battle/custom-battle-event";
 import {EmptyCustomBattleEvent} from "../empty-custom-battle-event";
+import {afterLastState} from "./listeners/after-last-state";
 import {beforeLastState} from "./listeners/before-last-state";
 import {onBatteryCommandSelected} from "./listeners/on-battery-command-selected";
 import {onBurstCommandSelected} from "./listeners/on-burst-command-selected";
 import {onPilotSkillCommandSelected} from "./listeners/on-pilot-skill-command-selected";
 import type {BurstTutorialState} from "./state";
-import {playerLose} from "./stories/player-lose";
-import {playerWin} from "./stories/player-win";
 
 /** バーストチュートリアル用のカスタムバトルイベント */
 class BurstTutorial extends EmptyCustomBattleEvent {
@@ -40,23 +39,15 @@ class BurstTutorial extends EmptyCustomBattleEvent {
   }
 
   /** @override */
+  async afterLastState(props: LastState): Promise<void> {
+    this.state = await afterLastState(props, this.state);
+  }
+
+  /** @override */
   async onBatteryCommandSelected(props: BatteryCommandSelected): Promise<CommandCanceled> {
     const {state, cancel} = await onBatteryCommandSelected(props, this.state);
     this.state = state;
     return cancel;
-  }
-
-  /** @override */
-  async afterLastState(props: LastState): Promise<void> {
-    const foundGameEnd = props.update.find(v => v.effect.name === 'GameEnd');
-    const gameOver = foundGameEnd && foundGameEnd.effect.name === 'GameEnd' && foundGameEnd.effect.result.type === 'GameOver'
-      ? {isPlayerWin: foundGameEnd.effect.result.winner === props.playerId}
-      : null;
-    if (gameOver && gameOver.isPlayerWin) {
-      await playerWin(props);
-    } else if (gameOver && !gameOver.isPlayerWin) {
-      await playerLose(props);
-    }
   }
 
   /** @override */
