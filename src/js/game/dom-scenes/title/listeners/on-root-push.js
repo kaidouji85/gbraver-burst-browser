@@ -10,7 +10,7 @@ import {closeAccountMenu} from "./close-account-menu";
  * @param action アクション
  */
 
-export function onRootPush(props: TitleProps, action: PushDOM): void {
+export function onRootPush(props: TitleProps, action: $ReadOnly<PushDOM>): void {
   action.event.stopPropagation();
   if (props.isAccountMenuOpen) {
     closeAccountMenu(props);

@@ -5,6 +5,7 @@ import {pushDOMStream} from "../../../dom/event-stream";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {DOMScene} from "../dom-scene";
 import {ACCOUNT_MENU_CLASS} from "./doms";
+import {onLoginPush} from "./listeners/on-login-push";
 import {onRootPush} from "./listeners/on-root-push";
 import type {CreateTitlePropsParams, TitleProps} from "./props";
 import {createTitleProps} from "./props";
@@ -29,7 +30,7 @@ export class Title implements DOMScene {
         onRootPush(this.#props, action);
       }),
       pushDOMStream(this.#props.login).subscribe(action => {
-        this.#onLoginPush(action);
+        onLoginPush(this.#props, action);
       }),
       pushDOMStream(this.#props.avatar).subscribe(action => {
         this.#onAvatarPush(action);
@@ -157,20 +158,6 @@ export class Title implements DOMScene {
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
     ]);
-  }
-
-  /**
-   * ログインが押された際の処理
-   * 
-   * @param action アクション
-   */
-  #onLoginPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.pushButton.play();
-      await pop(this.#props.login);
-      this.#props.pushLogin.next();
-    });
   }
 
   /**
