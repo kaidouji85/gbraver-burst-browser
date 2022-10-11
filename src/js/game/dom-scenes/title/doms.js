@@ -57,10 +57,10 @@ export type RootInnerHTMLParams = {
  * @return innerHTML
  */
 export function rootInnerHTML(ids: DataIDs, params: RootInnerHTMLParams): string {
-  const loginClassName = (params.isApiServerEnable && params.account.type === 'GuestAccount') ?  LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
+  const loginClassName = (params.isApiServerEnable && params.account.type === 'GuestAccount') ? LOGIN_CLASS : INVISIBLE_LOGIN_CLASS;
   const accountName = params.account.type === 'LoggedInAccount' ? escapeHTML(params.account.name) : '';
   const accountClassName = (params.isApiServerEnable && params.account.type === 'LoggedInAccount') ? ACCOUNT_CLASS : INVISIBLE_ACCOUNT_CLASS;
-  const casualMatchClassName = params.isApiServerEnable ? CASUAL_MATCH_CLASS: INVISIBLE_CASUAL_MATCH_CLASS;
+  const casualMatchClassName = params.isApiServerEnable ? CASUAL_MATCH_CLASS : INVISIBLE_CASUAL_MATCH_CLASS;
   return `
     <div class="${ROOT_CLASS}__header">
       <button data-id="${ids.login}" class="${loginClassName}">ログイン</button>

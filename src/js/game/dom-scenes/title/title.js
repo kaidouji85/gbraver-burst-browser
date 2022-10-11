@@ -4,7 +4,8 @@ import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {DOMScene} from "../dom-scene";
-import {ACCOUNT_MENU_CLASS, INVISIBLE_ACCOUNT_MENU_CLASS} from "./doms";
+import {ACCOUNT_MENU_CLASS} from "./doms";
+import {onRootPush} from "./listeners/on-root-push";
 import type {CreateTitlePropsParams, TitleProps} from "./props";
 import {createTitleProps} from "./props";
 
@@ -25,7 +26,7 @@ export class Title implements DOMScene {
     this.#props = createTitleProps(params);
     this.#unsubscribers = [
       pushDOMStream(this.#props.root).subscribe(action => {
-        this.#onRootPush(action);
+        onRootPush(this.#props, action);
       }),
       pushDOMStream(this.#props.login).subscribe(action => {
         this.#onLoginPush(action);
@@ -159,19 +160,6 @@ export class Title implements DOMScene {
   }
 
   /**
-   * ルート要素が押された時の処理
-   * 本画面でウインドウ外が押された時に呼び出される想定
-   * 
-   * @param action アクション
-   */
-  #onRootPush(action: PushDOM): void {
-    action.event.stopPropagation();
-    if (this.#props.isAccountMenuOpen) {
-      this.#closeAccountMenu();
-    }
-  }
-
-  /**
    * ログインが押された際の処理
    * 
    * @param action アクション
@@ -235,7 +223,7 @@ export class Title implements DOMScene {
       this.#props.pushTutorial.next();
     });
   }
-  
+
   /**
    * アーケードが押された際の処理
    * 
@@ -296,13 +284,5 @@ export class Title implements DOMScene {
   #openAccountMenu(): void {
     this.#props.isAccountMenuOpen = true;
     this.#props.accountMenu.className = ACCOUNT_MENU_CLASS;
-  }
-
-  /**
-   * アカウントメニューを閉じる
-   */
-  #closeAccountMenu(): void {
-    this.#props.isAccountMenuOpen = false;
-    this.#props.accountMenu.className = INVISIBLE_ACCOUNT_MENU_CLASS;
   }
 }
