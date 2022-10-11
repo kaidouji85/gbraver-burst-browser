@@ -9,7 +9,7 @@ import {openAccountMenu} from "./open-account-menu";
  * 
  * @param action アクション
  */
-export function onAvatarPush(props: TitleProps, action: PushDOM): void {
+export function onAvatarPush(props: TitleProps, action: $ReadOnly<PushDOM>): void {
   action.event.preventDefault();
   if (!props.isAccountMenuOpen) {
     action.event.stopPropagation();
