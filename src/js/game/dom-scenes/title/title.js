@@ -1,60 +1,19 @@
 // @flow
-import {Howl} from "howler";
 import {pop} from "../../../dom/animation";
 import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
-import {Exclusive} from "../../../exclusive/exclusive";
-import type {Resources} from "../../../resource";
-import {PathIds} from "../../../resource/path";
-import {SOUND_IDS} from "../../../resource/sound";
-import type {Stream, StreamSource, Unsubscriber} from "../../../stream/stream";
-import {createStreamSource} from "../../../stream/stream";
-import {domUuid} from "../../../uuid/dom-uuid";
-import {waitElementLoaded} from "../../../wait/wait-element-loaded";
+import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {DOMScene} from "../dom-scene";
-import type {RootInnerHTMLParams} from "./doms";
-import {
-  ACCOUNT_MENU_CLASS, 
-  extractElements, 
-  INVISIBLE_ACCOUNT_MENU_CLASS, 
-  rootInnerHTML,
-  ROOT_CLASS
-} from "./doms";
+import {ACCOUNT_MENU_CLASS, INVISIBLE_ACCOUNT_MENU_CLASS} from "./doms";
+import type {CreateTitlePropsParams, TitleProps} from "./props";
+import {createTitleProps} from "./props";
 
 /** タイトル画面コンストラクタパラメータ */
-export type TitleParams = RootInnerHTMLParams & {
-  /** リソース管理オブジェクト */
-  resources: Resources
-};
+export type TitleParams = CreateTitlePropsParams;
 
 /** タイトル */
 export class Title implements DOMScene {
-  #exclusive: Exclusive;
-  #isAccountMenuOpen: boolean;
-  #login: HTMLElement;
-  #accountMenu: HTMLElement;
-  #avatar: HTMLImageElement;
-  #deleteAccount: HTMLElement;
-  #logout: HTMLElement;
-  #root: HTMLElement;
-  #tutorial: HTMLElement;
-  #arcade: HTMLElement;
-  #casualMatch: HTMLElement;
-  #howToPlay: HTMLElement;
-  #config: HTMLElement;
-  #isTitleBackLoaded: Promise<void>;
-  #isAvatarLoaded: Promise<void>;
-  #isLogoLoaded: Promise<void>;
-  #changeValue: typeof Howl;
-  #pushButton: typeof Howl;
-  #pushLogin: StreamSource<void>;
-  #pushDeleteAccount: StreamSource<void>;
-  #pushLogout: StreamSource<void>;
-  #pushTutorial: StreamSource<void>;
-  #pushArcade: StreamSource<void>;
-  #pushCasualMatch: StreamSource<void>;
-  #pushHowToPlay: StreamSource<void>;
-  #pushConfig: StreamSource<void>;
+  #props: TitleProps;
   #unsubscribers: Unsubscriber[];
 
   /**
@@ -63,80 +22,36 @@ export class Title implements DOMScene {
    * @param params パラメータ
    */
   constructor(params: TitleParams) {
-    this.#exclusive = new Exclusive();
-    this.#isAccountMenuOpen = false;
-    const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
-      tutorial: domUuid(), arcade: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
-    this.#root = document.createElement('div');
-    this.#root.innerHTML = rootInnerHTML(dataIDs, params);
-    this.#root.className = ROOT_CLASS;
-    const elements = extractElements(this.#root, dataIDs);
-    this.#login = elements.login;
-    this.#accountMenu = elements.accountMenu;
-    this.#avatar = elements.avatar;
-    this.#deleteAccount = elements.deleteAccount;
-    this.#logout = elements.logout;
-    this.#tutorial = elements.tutorial;
-    this.#arcade = elements.arcade;
-    this.#casualMatch = elements.casualMatch;
-    this.#howToPlay = elements.howToPlay;
-    this.#config = elements.config;
-
-    this.#isAvatarLoaded = (params.account.type === 'LoggedInAccount') ? waitElementLoaded(this.#avatar) : Promise.resolve();
-    this.#avatar.src = (params.account.type === 'LoggedInAccount') ? params.account.pictureURL : '';
-    
-    this.#isLogoLoaded = waitElementLoaded(elements.logo);
-    elements.logo.src = params.resources.paths.find(v => v.id === PathIds.LOGO)?.path ?? '';
-
-    const titleBackImage = new Image();
-    this.#isTitleBackLoaded = waitElementLoaded(titleBackImage).then(() => {
-      this.#root.style.backgroundImage = `url(${titleBackImage.src})`;
-    });
-    titleBackImage.src = params.resources.paths.find(v => v.id === PathIds.TITLE_BACK)
-      ?.path ?? '';
-
-    this.#pushButton = this.#changeValue = params.resources.sounds.find(v => v.id === SOUND_IDS.PUSH_BUTTON)
-      ?.sound ?? new Howl();
-    this.#changeValue = params.resources.sounds.find(v => v.id === SOUND_IDS.CHANGE_VALUE)
-      ?.sound ?? new Howl();
-
-    this.#pushLogin = createStreamSource();
-    this.#pushDeleteAccount = createStreamSource();
-    this.#pushLogout = createStreamSource();
-    this.#pushTutorial = createStreamSource();
-    this.#pushArcade = createStreamSource();
-    this.#pushHowToPlay = createStreamSource();
-    this.#pushCasualMatch = createStreamSource();
-    this.#pushConfig = createStreamSource();
+    this.#props = createTitleProps(params);
     this.#unsubscribers = [
-      pushDOMStream(this.#root).subscribe(action => {
+      pushDOMStream(this.#props.root).subscribe(action => {
         this.#onRootPush(action);
       }),
-      pushDOMStream(this.#login).subscribe(action => {
+      pushDOMStream(this.#props.login).subscribe(action => {
         this.#onLoginPush(action);
       }),
-      pushDOMStream(this.#avatar).subscribe(action => {
+      pushDOMStream(this.#props.avatar).subscribe(action => {
         this.#onAvatarPush(action);
       }),
-      pushDOMStream(this.#deleteAccount).subscribe(action => {
+      pushDOMStream(this.#props.deleteAccount).subscribe(action => {
         this.#onPushDeleteAccount(action);
       }),
-      pushDOMStream(this.#logout).subscribe(action => {
+      pushDOMStream(this.#props.logout).subscribe(action => {
         this.#onLogoutPush(action);
       }),
-      pushDOMStream(this.#tutorial).subscribe(action => {
+      pushDOMStream(this.#props.tutorial).subscribe(action => {
         this.#onTutorialPush(action);
       }),
-      pushDOMStream(this.#arcade).subscribe(action => {
+      pushDOMStream(this.#props.arcade).subscribe(action => {
         this.#onArcadePush(action);
       }),
-      pushDOMStream(this.#casualMatch).subscribe(action => {
+      pushDOMStream(this.#props.casualMatch).subscribe(action => {
         this.#onCasualMatchPush(action);
       }),
-      pushDOMStream(this.#howToPlay).subscribe(action => {
+      pushDOMStream(this.#props.howToPlay).subscribe(action => {
         this.#onHowToPlayPush(action);
       }),
-      pushDOMStream(this.#config).subscribe(action => {
+      pushDOMStream(this.#props.config).subscribe(action => {
         this.#onConfigPush(action);
       })
     ];
@@ -155,7 +70,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushLoginNotifier(): Stream<void> {
-    return this.#pushLogin;
+    return this.#props.pushLogin;
   }
 
   /**
@@ -164,7 +79,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushDeleteAccountNotifier(): Stream<void> {
-    return this.#pushDeleteAccount;
+    return this.#props.pushDeleteAccount;
   }
 
   /**
@@ -173,7 +88,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushLogoutNotifier(): Stream<void> {
-    return this.#pushLogout;
+    return this.#props.pushLogout;
   }
 
   /**
@@ -182,7 +97,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushTutorialNotifier(): Stream<void> {
-    return this.#pushTutorial;
+    return this.#props.pushTutorial;
   }
 
   /**
@@ -191,7 +106,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushArcadeNotifier(): Stream<void> {
-    return this.#pushArcade;
+    return this.#props.pushArcade;
   }
 
   /**
@@ -200,7 +115,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushCasualMatchNotifier(): Stream<void> {
-    return this.#pushCasualMatch;
+    return this.#props.pushCasualMatch;
   }
 
   /**
@@ -209,7 +124,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushHowToPlayNotifier(): Stream<void> {
-    return this.#pushHowToPlay;
+    return this.#props.pushHowToPlay;
   }
 
   /**
@@ -218,7 +133,7 @@ export class Title implements DOMScene {
    * @return イベント通知ストリーム
    */
   pushConfigNotifier(): Stream<void> {
-    return this.#pushConfig;
+    return this.#props.pushConfig;
   }
 
   /**
@@ -227,7 +142,7 @@ export class Title implements DOMScene {
    * @return 取得結果
    */
   getRootHTMLElement(): HTMLElement {
-    return this.#root;
+    return this.#props.root;
   }
 
   /**
@@ -237,9 +152,9 @@ export class Title implements DOMScene {
    */
   async waitUntilLoaded(): Promise<void> {
     await Promise.all([
-      this.#isTitleBackLoaded,
-      this.#isAvatarLoaded,
-      this.#isLogoLoaded,
+      this.#props.isTitleBackLoaded,
+      this.#props.isAvatarLoaded,
+      this.#props.isLogoLoaded,
     ]);
   }
 
@@ -251,7 +166,7 @@ export class Title implements DOMScene {
    */
   #onRootPush(action: PushDOM): void {
     action.event.stopPropagation();
-    if (this.#isAccountMenuOpen) {
+    if (this.#props.isAccountMenuOpen) {
       this.#closeAccountMenu();
     }
   }
@@ -262,11 +177,11 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   #onLoginPush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
+    this.#props.exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this.#pushButton.play();
-      await pop(this.#login);
-      this.#pushLogin.next();
+      this.#props.pushButton.play();
+      await pop(this.#props.login);
+      this.#props.pushLogin.next();
     });
   }
 
@@ -277,10 +192,10 @@ export class Title implements DOMScene {
    */
   #onAvatarPush(action: PushDOM): void {
     action.event.preventDefault();
-    if (!this.#isAccountMenuOpen) {
+    if (!this.#props.isAccountMenuOpen) {
       action.event.stopPropagation();
-      this.#changeValue.play();
-      pop(this.#avatar, 1.2);
+      this.#props.changeValue.play();
+      pop(this.#props.avatar, 1.2);
       this.#openAccountMenu();
     }
   }
@@ -292,8 +207,8 @@ export class Title implements DOMScene {
    */
   #onPushDeleteAccount(action: PushDOM): void {
     action.event.preventDefault();
-    this.#changeValue.play();
-    this.#pushDeleteAccount.next();
+    this.#props.changeValue.play();
+    this.#props.pushDeleteAccount.next();
   }
 
   /**
@@ -303,8 +218,8 @@ export class Title implements DOMScene {
    */
   #onLogoutPush(action: PushDOM): void {
     action.event.preventDefault();
-    this.#changeValue.play();
-    this.#pushLogout.next();
+    this.#props.changeValue.play();
+    this.#props.pushLogout.next();
   }
 
   /**
@@ -313,11 +228,11 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   #onTutorialPush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
+    this.#props.exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this.#pushButton.play();
-      await pop(this.#tutorial);
-      this.#pushTutorial.next();
+      this.#props.pushButton.play();
+      await pop(this.#props.tutorial);
+      this.#props.pushTutorial.next();
     });
   }
   
@@ -327,11 +242,11 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   #onArcadePush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
+    this.#props.exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this.#pushButton.play();
-      await pop(this.#arcade);
-      this.#pushArcade.next();
+      this.#props.pushButton.play();
+      await pop(this.#props.arcade);
+      this.#props.pushArcade.next();
     });
   }
 
@@ -341,11 +256,11 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   #onCasualMatchPush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
+    this.#props.exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this.#pushButton.play();
-      await pop(this.#casualMatch);
-      this.#pushCasualMatch.next();
+      this.#props.pushButton.play();
+      await pop(this.#props.casualMatch);
+      this.#props.pushCasualMatch.next();
     });
   }
 
@@ -355,9 +270,9 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   #onHowToPlayPush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
+    this.#props.exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this.#pushHowToPlay.next();
+      this.#props.pushHowToPlay.next();
     });
   }
 
@@ -367,11 +282,11 @@ export class Title implements DOMScene {
    * @param action アクション
    */
   #onConfigPush(action: PushDOM): void {
-    this.#exclusive.execute(async (): Promise<void> => {
+    this.#props.exclusive.execute(async (): Promise<void> => {
       action.event.preventDefault();
-      this.#changeValue.play();
-      await pop(this.#config);
-      this.#pushConfig.next();
+      this.#props.changeValue.play();
+      await pop(this.#props.config);
+      this.#props.pushConfig.next();
     });
   }
 
@@ -379,15 +294,15 @@ export class Title implements DOMScene {
    * アカウントメニューを開く
    */
   #openAccountMenu(): void {
-    this.#isAccountMenuOpen = true;
-    this.#accountMenu.className = ACCOUNT_MENU_CLASS;
+    this.#props.isAccountMenuOpen = true;
+    this.#props.accountMenu.className = ACCOUNT_MENU_CLASS;
   }
 
   /**
    * アカウントメニューを閉じる
    */
   #closeAccountMenu(): void {
-    this.#isAccountMenuOpen = false;
-    this.#accountMenu.className = INVISIBLE_ACCOUNT_MENU_CLASS;
+    this.#props.isAccountMenuOpen = false;
+    this.#props.accountMenu.className = INVISIBLE_ACCOUNT_MENU_CLASS;
   }
 }

@@ -42,7 +42,7 @@ export type TitleProps = {
 };
 
 /** タイトル画面プロパティ生成パラメータ */
-export type TitlePropsParams = RootInnerHTMLParams & {
+export type CreateTitlePropsParams = RootInnerHTMLParams & {
   /** リソース管理オブジェクト */
   resources: Resources
 };
@@ -53,7 +53,7 @@ export type TitlePropsParams = RootInnerHTMLParams & {
  * @param param 生成パラメータ 
  * @return 生成結果
  */
-export function createTitleProps(params: TitlePropsParams): TitleProps {
+export function createTitleProps(params: CreateTitlePropsParams): TitleProps {
   const dataIDs = {login: domUuid(), accountMenu: domUuid(), avatar: domUuid(), deleteAccount: domUuid(), logout: domUuid(), logo: domUuid(),
     tutorial: domUuid(), arcade: domUuid(), casualMatch: domUuid(), howToPlay: domUuid(), config: domUuid()};
   const root = document.createElement('div');
