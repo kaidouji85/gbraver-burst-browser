@@ -1,7 +1,6 @@
 // @flow
+import {INVISIBLE_ACCOUNT_MENU_CLASS} from "../doms";
 import type {TitleProps} from "../props";
-
-import { INVISIBLE_ACCOUNT_MENU_CLASS } from "../doms";
 
 /**
  * アカウントメニューを閉じるヘルパー関数
