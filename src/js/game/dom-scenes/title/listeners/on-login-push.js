@@ -6,6 +6,7 @@ import type {TitleProps} from "../props";
 /**
  * ログインが押された際の処理
  * 
+ * @param props 画面プロパティ
  * @param action アクション
  */
 export function onLoginPush(props: TitleProps, action: $ReadOnly<PushDOM>): void {

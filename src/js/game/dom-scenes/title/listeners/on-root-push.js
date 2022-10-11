@@ -7,6 +7,7 @@ import {closeAccountMenu} from "./close-account-menu";
  * ルート要素が押された時の処理
  * 本画面でウインドウ外が押された時に呼び出される想定
  * 
+ * @param props 画面プロパティ
  * @param action アクション
  */
 

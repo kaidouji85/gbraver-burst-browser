@@ -4,7 +4,7 @@ import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {DOMScene} from "../dom-scene";
-import {ACCOUNT_MENU_CLASS} from "./doms";
+import {onAvatarPush} from "./listeners/on-avator-push";
 import {onLoginPush} from "./listeners/on-login-push";
 import {onRootPush} from "./listeners/on-root-push";
 import type {CreateTitlePropsParams, TitleProps} from "./props";
@@ -33,7 +33,7 @@ export class Title implements DOMScene {
         onLoginPush(this.#props, action);
       }),
       pushDOMStream(this.#props.avatar).subscribe(action => {
-        this.#onAvatarPush(action);
+        onAvatarPush(this.#props, action);
       }),
       pushDOMStream(this.#props.deleteAccount).subscribe(action => {
         this.#onPushDeleteAccount(action);
@@ -161,21 +161,6 @@ export class Title implements DOMScene {
   }
 
   /**
-   * アバターが押された時の処理
-   * 
-   * @param action アクション
-   */
-  #onAvatarPush(action: PushDOM): void {
-    action.event.preventDefault();
-    if (!this.#props.isAccountMenuOpen) {
-      action.event.stopPropagation();
-      this.#props.changeValue.play();
-      pop(this.#props.avatar, 1.2);
-      this.#openAccountMenu();
-    }
-  }
-
-  /**
    * アカウント削除を押した時の処理
    * 
    * @param action アクション
@@ -263,13 +248,5 @@ export class Title implements DOMScene {
       await pop(this.#props.config);
       this.#props.pushConfig.next();
     });
-  }
-
-  /**
-   * アカウントメニューを開く
-   */
-  #openAccountMenu(): void {
-    this.#props.isAccountMenuOpen = true;
-    this.#props.accountMenu.className = ACCOUNT_MENU_CLASS;
   }
 }
