@@ -4,6 +4,7 @@ import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {DOMScene} from "../dom-scene";
+import {onArcadePush} from "./listeners/on-arcade-push";
 import {onAvatarPush} from "./listeners/on-avator-push";
 import {onLoginPush} from "./listeners/on-login-push";
 import {onLogoutPush} from "./listeners/on-logout-push";
@@ -48,7 +49,7 @@ export class Title implements DOMScene {
         onTutorialPush(this.#props, action);
       }),
       pushDOMStream(this.#props.arcade).subscribe(action => {
-        this.#onArcadePush(action);
+        onArcadePush(this.#props, action);
       }),
       pushDOMStream(this.#props.casualMatch).subscribe(action => {
         this.#onCasualMatchPush(action);
@@ -161,20 +162,6 @@ export class Title implements DOMScene {
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
     ]);
-  }
-
-  /**
-   * アーケードが押された際の処理
-   * 
-   * @param action アクション
-   */
-  #onArcadePush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.pushButton.play();
-      await pop(this.#props.arcade);
-      this.#props.pushArcade.next();
-    });
   }
 
   /**
