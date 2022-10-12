@@ -9,6 +9,7 @@ import {onLoginPush} from "./listeners/on-login-push";
 import {onLogoutPush} from "./listeners/on-logout-push";
 import {onPushDeleteAccount} from "./listeners/on-push-delete-account";
 import {onRootPush} from "./listeners/on-root-push";
+import {onTutorialPush} from "./listeners/on-tutorial-push";
 import type {CreateTitlePropsParams, TitleProps} from "./props";
 import {createTitleProps} from "./props";
 
@@ -44,7 +45,7 @@ export class Title implements DOMScene {
         onLogoutPush(this.#props, action);
       }),
       pushDOMStream(this.#props.tutorial).subscribe(action => {
-        this.#onTutorialPush(action);
+        onTutorialPush(this.#props, action);
       }),
       pushDOMStream(this.#props.arcade).subscribe(action => {
         this.#onArcadePush(action);
@@ -160,20 +161,6 @@ export class Title implements DOMScene {
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
     ]);
-  }
-
-  /**
-   * チュートリアルが押された際の処理
-   *
-   * @param action アクション
-   */
-  #onTutorialPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.pushButton.play();
-      await pop(this.#props.tutorial);
-      this.#props.pushTutorial.next();
-    });
   }
 
   /**
