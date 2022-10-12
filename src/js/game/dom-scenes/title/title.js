@@ -1,12 +1,11 @@
 // @flow
-import {pop} from "../../../dom/animation";
-import type {PushDOM} from "../../../dom/event-stream";
 import {pushDOMStream} from "../../../dom/event-stream";
 import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {DOMScene} from "../dom-scene";
 import {onArcadePush} from "./listeners/on-arcade-push";
 import {onAvatarPush} from "./listeners/on-avator-push";
 import {onCasualMatchPush} from "./listeners/on-casual-match-push";
+import {onConfigPush} from "./listeners/on-config-push";
 import {onHowToPlayPush} from "./listeners/on-how-to-play-push";
 import {onLoginPush} from "./listeners/on-login-push";
 import {onLogoutPush} from "./listeners/on-logout-push";
@@ -60,7 +59,7 @@ export class Title implements DOMScene {
         onHowToPlayPush(this.#props, action);
       }),
       pushDOMStream(this.#props.config).subscribe(action => {
-        this.#onConfigPush(action);
+        onConfigPush(this.#props, action);
       })
     ];
   }
@@ -164,19 +163,5 @@ export class Title implements DOMScene {
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
     ]);
-  }
-
-  /**
-   * 設定が押された時の処理
-   *
-   * @param action アクション
-   */
-  #onConfigPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.changeValue.play();
-      await pop(this.#props.config);
-      this.#props.pushConfig.next();
-    });
   }
 }
