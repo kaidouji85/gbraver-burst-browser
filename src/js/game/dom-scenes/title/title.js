@@ -6,6 +6,7 @@ import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {DOMScene} from "../dom-scene";
 import {onArcadePush} from "./listeners/on-arcade-push";
 import {onAvatarPush} from "./listeners/on-avator-push";
+import {onCasualMatchPush} from "./listeners/on-casual-match-push";
 import {onLoginPush} from "./listeners/on-login-push";
 import {onLogoutPush} from "./listeners/on-logout-push";
 import {onPushDeleteAccount} from "./listeners/on-push-delete-account";
@@ -52,7 +53,7 @@ export class Title implements DOMScene {
         onArcadePush(this.#props, action);
       }),
       pushDOMStream(this.#props.casualMatch).subscribe(action => {
-        this.#onCasualMatchPush(action);
+        onCasualMatchPush(this.#props, action);
       }),
       pushDOMStream(this.#props.howToPlay).subscribe(action => {
         this.#onHowToPlayPush(action);
@@ -162,20 +163,6 @@ export class Title implements DOMScene {
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
     ]);
-  }
-
-  /**
-   * カジュアルマッチが押された時の処理
-   *
-   * @param action アクション
-   */
-  #onCasualMatchPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.pushButton.play();
-      await pop(this.#props.casualMatch);
-      this.#props.pushCasualMatch.next();
-    });
   }
 
   /**
