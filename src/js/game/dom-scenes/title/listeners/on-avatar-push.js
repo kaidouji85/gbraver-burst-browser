@@ -7,6 +7,7 @@ import {openAccountMenu} from "./open-account-menu";
 /**
  * アバターが押された時の処理
  * 
+ * @param props 画面プロパティ
  * @param action アクション
  */
 export function onAvatarPush(props: TitleProps, action: $ReadOnly<PushDOM>): void {
