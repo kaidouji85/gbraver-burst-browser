@@ -7,6 +7,7 @@ import type {DOMScene} from "../dom-scene";
 import {onArcadePush} from "./listeners/on-arcade-push";
 import {onAvatarPush} from "./listeners/on-avator-push";
 import {onCasualMatchPush} from "./listeners/on-casual-match-push";
+import {onHowToPlayPush} from "./listeners/on-how-to-play-push";
 import {onLoginPush} from "./listeners/on-login-push";
 import {onLogoutPush} from "./listeners/on-logout-push";
 import {onPushDeleteAccount} from "./listeners/on-push-delete-account";
@@ -56,7 +57,7 @@ export class Title implements DOMScene {
         onCasualMatchPush(this.#props, action);
       }),
       pushDOMStream(this.#props.howToPlay).subscribe(action => {
-        this.#onHowToPlayPush(action);
+        onHowToPlayPush(this.#props, action);
       }),
       pushDOMStream(this.#props.config).subscribe(action => {
         this.#onConfigPush(action);
@@ -163,18 +164,6 @@ export class Title implements DOMScene {
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
     ]);
-  }
-
-  /**
-   * 遊び方が押された際の処理
-   * 
-   * @param action アクション
-   */
-  #onHowToPlayPush(action: PushDOM): void {
-    this.#props.exclusive.execute(async (): Promise<void> => {
-      action.event.preventDefault();
-      this.#props.pushHowToPlay.next();
-    });
   }
 
   /**
