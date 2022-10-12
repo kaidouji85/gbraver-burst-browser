@@ -6,6 +6,7 @@ import type {Stream, Unsubscriber} from "../../../stream/stream";
 import type {DOMScene} from "../dom-scene";
 import {onAvatarPush} from "./listeners/on-avator-push";
 import {onLoginPush} from "./listeners/on-login-push";
+import {onLogoutPush} from "./listeners/on-logout-push";
 import {onPushDeleteAccount} from "./listeners/on-push-delete-account";
 import {onRootPush} from "./listeners/on-root-push";
 import type {CreateTitlePropsParams, TitleProps} from "./props";
@@ -40,7 +41,7 @@ export class Title implements DOMScene {
         onPushDeleteAccount(this.#props, action);
       }),
       pushDOMStream(this.#props.logout).subscribe(action => {
-        this.#onLogoutPush(action);
+        onLogoutPush(this.#props, action);
       }),
       pushDOMStream(this.#props.tutorial).subscribe(action => {
         this.#onTutorialPush(action);
@@ -159,17 +160,6 @@ export class Title implements DOMScene {
       this.#props.isAvatarLoaded,
       this.#props.isLogoLoaded,
     ]);
-  }
-
-  /**
-   * ログアウトが押された際の処理
-   * 
-   * @param action アクション
-   */
-  #onLogoutPush(action: PushDOM): void {
-    action.event.preventDefault();
-    this.#props.changeValue.play();
-    this.#props.pushLogout.next();
   }
 
   /**
